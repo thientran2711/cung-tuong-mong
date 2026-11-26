@@ -1,0 +1,7848 @@
+{
+ "job": {
+  "id": "ES2-R2-random-5",
+  "origin": "thd",
+  "road": "thd_tro",
+  "bot": "rand",
+  "seed": 371034781,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "d2e03d80",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 287,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 851,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Đông sở · Ở đây có 4 người."
+   },
+   {
+    "at": 1031,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Đông sở · Ở đây có 4 người."
+   },
+   {
+    "at": 1845,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người."
+   },
+   {
+    "at": 2024,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người."
+   },
+   {
+    "at": 2894,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3027,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3200,
+    "lvl": 3,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3221,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3232,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3243,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3254,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3266,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3277,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3288,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3300,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3311,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3322,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3333,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3344,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3355,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3367,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3378,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3389,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3401,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3412,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3423,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3434,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   },
+   {
+    "at": 3446,
+    "lvl": 1,
+    "layer": "page",
+    "title": "Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người."
+   }
+  ],
+  "slice": null,
+  "build": {
+   "s": "f009e1a6+",
+   "b": "dd1ce3d0ffa1",
+   "t": "2026-11-26T02:21Z"
+  },
+  "areaTaps": 66,
+  "dlgScroll": 9,
+  "scrolls": 12,
+  "dlgClose": 4,
+  "infoTaps": 123,
+  "loops": 7,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-26T07:56:54.661Z",
+    "buoi": 1,
+    "from": "2026-11-26T07:51:12.037Z"
+   }
+  ],
+  "taps": 12
+ },
+ "life": {
+  "id": "Ban hoa",
+  "type": "end",
+  "fate": "Bị ban hoa, xuất cung",
+  "death": false,
+  "age": 19,
+  "year": 1,
+  "rank": 0,
+  "text": "Ngươi về quê, mở một lớp dạy chữ cho con gái trong vùng. Cung cấm chỉ còn là một giấc mộng xa.",
+  "card": [
+   "",
+   "",
+   "",
+   ""
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   "AREA 181,407",
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»",
+   ".dlg «Thái hậu» «Con thích bữa cơm như ở nhà, mẫu thân nấu gì con ă»",
+   ".dlg «Hoàng thượng» «Dâng Kỳ»",
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+   "#kg82 «Gợi ý»",
+   "#kg82 «Gợi ý»",
+   "#kg82 «Gợi ý»",
+   "#kg82 «Gợi ý»",
+   "#kg82 «Quay lại»",
+   "MOVED Lịch tháng",
+   ".dlg «Thái hậu» «Thần thiếp xin Thái hậu cho phép, vì công chúa còn»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "n": 2,
+   "at": 851,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-1.png",
+   "dump": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8",
+    "Bạc56Sức80/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Trung (Con cái)",
+    "Tâm trạngBình thản0",
+    "Tin báo",
+    "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải vóc 0Thuốc men 0Hương liệu 0Lễ vật 0Thư ",
+    "Túi đồ"
+   ],
+   "trace": [
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Chưa điểm trang»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tư trang»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Mệnh truyện»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Chưa điểm trang»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tư trang»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Mệnh truyện»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Giao tình»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hậu cung»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tâm trạngBình thản0»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tin báo»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tâm trạngBình thản0»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Hậu cung»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «sương sớm»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Giao tình»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Dư đồ»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Tư trang»",
+    "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» «Bạc56Sức80/100»"
+   ],
+   "next": {
+    "dis": true,
+    "q": 3,
+    "mg": false,
+    "qt": [
+     "Tâm trạng · Ngươi",
+     "Tin báo",
+     "Dưỡng Tú viện"
+    ],
+    "t": "Sang buổi"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Dưỡng Tú viện)",
+   "type": "game",
+   "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Dưỡng Tú viện)",
+   "n": 1,
+   "at": 851,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-1.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Đông sở)",
+   "type": "game",
+   "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Đông sở)",
+   "n": 1,
+   "at": 1031,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-2.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "n": 2,
+   "at": 1845,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-3.png",
+   "dump": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-3-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8",
+    "Bạc16Sức100/100",
+    "Buổi sáng, còn 4 khắc",
+    "Y phục hợp phẩm · mặt mộc",
+    "sương sớm",
+    "Quẻ Trung (Con cái)",
+    "Tâm trạngBình thản0",
+    "Tin báo",
+    "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã qua 0Triều cục Tâm nguyện ⓘ Luật chươngDa",
+    "Mệnh truyện"
+   ],
+   "trace": [
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Trung (Con cái)»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hành sự»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Y phục hợp phẩm · mặt mộc»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tài nghệ»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tâm trạngBình thản0»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tài nghệ»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Quẻ Trung (Con cái)»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Buổi sáng, còn 4 khắc»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «sương sớm»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Dư đồ»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Tư trang»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Hậu cung»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Bạc16Sức100/100»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Mệnh truyện»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+   ],
+   "next": {
+    "dis": true,
+    "q": 3,
+    "mg": false,
+    "qt": [
+     "Tâm trạng · Ngươi",
+     "Tin báo",
+     "Sân chờ"
+    ],
+    "t": "Sang buổi"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Sân chờ)",
+   "type": "game",
+   "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Sân chờ)",
+   "n": 1,
+   "at": 1845,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-3.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Điện tuyển)",
+   "type": "game",
+   "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=3: Tâm trạng · Ngươi / Tin báo / Điện tuyển)",
+   "n": 1,
+   "at": 2024,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-4.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "n": 3,
+   "at": 2894,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-5.png",
+   "dump": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-5-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   },
+   "buttons": [
+    "Ô lưu",
+    "Xem bản thân",
+    "Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8",
+    "Bạc16Sức100/100",
+    "Buổi sáng, còn 4 khắc",
+    "Y phục hợp phẩm · mặt mộc",
+    "sương sớm",
+    "Quẻ Trung (Con cái)",
+    "Tâm trạngBình thản0",
+    "Chọn chính mình",
+    "3Chí tôn",
+    "Tai mắt0"
+   ],
+   "trace": [
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»",
+    "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+   ],
+   "next": {
+    "dis": true,
+    "q": 1,
+    "mg": false,
+    "qt": [
+     "Điện tuyển"
+    ],
+    "t": "Sang buổi"
+   }
+  },
+  {
+   "k": "game|softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=1: Điện tuyển)",
+   "type": "game",
+   "msg": "softlock: «Sang buổi» disabled with no dialog on screen (dialog queue Q=1: Điện tuyển)",
+   "n": 3,
+   "at": 2894,
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-5.png",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  }
+ ],
+ "dead": [
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Người lạ???",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676103674.png",
+   "dev": "fold",
+   "at": 84,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Chọn chính mình",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676111593.png",
+   "dev": "fold",
+   "at": 93,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Về Dư đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676120410.png",
+   "dev": "fold",
+   "at": 101,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Lịch tháng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676127855.png",
+   "dev": "fold",
+   "at": 109,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Mục tiêu chương (có mới)",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676136721.png",
+   "dev": "fold",
+   "at": 118,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Thỉnh tranh nhân vật",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676144417.png",
+   "dev": "fold",
+   "at": 125,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "3Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676151254.png",
+   "dev": "fold",
+   "at": 132,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tai mắt0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676158439.png",
+   "dev": "fold",
+   "at": 139,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Có thaiRất thấp",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676165716.png",
+   "dev": "fold",
+   "at": 146,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Lật thẻKhông có",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676173016.png",
+   "dev": "fold",
+   "at": 154,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Ân tình (đêm)0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676180103.png",
+   "dev": "fold",
+   "at": 161,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Số lần ân thưởng0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676187168.png",
+   "dev": "fold",
+   "at": 168,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Bổng lộcsau 3 tuần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676194305.png",
+   "dev": "fold",
+   "at": 175,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Nguy hiểm chung: 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676201408.png",
+   "dev": "fold",
+   "at": 182,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Xét phẩm: thiếu 4",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676208493.png",
+   "dev": "fold",
+   "at": 190,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "?",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676216585.png",
+   "dev": "fold",
+   "at": 197,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676225659.png",
+   "dev": "fold",
+   "at": 206,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Ân oán",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676232157.png",
+   "dev": "fold",
+   "at": 213,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Phe phái",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676238584.png",
+   "dev": "fold",
+   "at": 219,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Xem quan hệ của Ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676245197.png",
+   "dev": "fold",
+   "at": 226,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Đổi chỗ hai người",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676251541.png",
+   "dev": "fold",
+   "at": 232,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "với Hoàng thượng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676257912.png",
+   "dev": "fold",
+   "at": 238,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mườ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676266634.png",
+   "dev": "fold",
+   "at": 248,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Đông sở3 bóng người",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676274128.png",
+   "dev": "fold",
+   "at": 255,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tây sở3 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676281203.png",
+   "dev": "fold",
+   "at": 262,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Bắc sở3 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676288243.png",
+   "dev": "fold",
+   "at": 269,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tiền sảnh3 bóng ngườitốn: một khắc",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676295301.png",
+   "dev": "fold",
+   "at": 276,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Cung nhân · chạm để mở danh sách",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676302111.png",
+   "dev": "fold",
+   "at": 283,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Chí tôn · chạm để mở danh sách",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676309133.png",
+   "dev": "fold",
+   "at": 290,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676316935.png",
+   "dev": "fold",
+   "at": 297,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Việc nhờ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676329763.png",
+   "dev": "fold",
+   "at": 310,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Sổ ghi",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676336172.png",
+   "dev": "fold",
+   "at": 317,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Chương này",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676342830.png",
+   "dev": "fold",
+   "at": 323,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Sắc phong",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676349257.png",
+   "dev": "fold",
+   "at": 330,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Đã qua 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676355643.png",
+   "dev": "fold",
+   "at": 336,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Triều cục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676362002.png",
+   "dev": "fold",
+   "at": 342,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tâm nguyện",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676368392.png",
+   "dev": "fold",
+   "at": 349,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Mục lục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676374809.png",
+   "dev": "fold",
+   "at": 355,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Đi làm: Hành sự",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676381195.png",
+   "dev": "fold",
+   "at": 362,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676388461.png",
+   "dev": "fold",
+   "at": 369,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tứ đức 9/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676397333.png",
+   "dev": "fold",
+   "at": 378,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tứ đức 9/9",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676403750.png",
+   "dev": "fold",
+   "at": 384,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Cầm kỳ thi họa 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676410401.png",
+   "dev": "fold",
+   "at": 391,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676416818.png",
+   "dev": "fold",
+   "at": 397,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tác phẩm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676423209.png",
+   "dev": "fold",
+   "at": 404,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "ⓘ luật Đức",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676429688.png",
+   "dev": "fold",
+   "at": 410,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Xem luật Công · Nữ công",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676436046.png",
+   "dev": "fold",
+   "at": 416,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676454017.png",
+   "dev": "fold",
+   "at": 434,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676460386.png",
+   "dev": "fold",
+   "at": 441,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách ",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676466832.png",
+   "dev": "fold",
+   "at": 447,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676476380.png",
+   "dev": "fold",
+   "at": 457,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676483842.png",
+   "dev": "fold",
+   "at": 465,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Phi tần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676491740.png",
+   "dev": "fold",
+   "at": 473,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Nam nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676499259.png",
+   "dev": "fold",
+   "at": 480,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Cung nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676507084.png",
+   "dev": "fold",
+   "at": 488,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Hoàng thượng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676515005.png",
+   "dev": "fold",
+   "at": 496,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Thái hậu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676523709.png",
+   "dev": "fold",
+   "at": 505,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Xem thêm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676531337.png",
+   "dev": "fold",
+   "at": 512,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Gặp ngài ban ngày 2/5",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676539632.png",
+   "dev": "fold",
+   "at": 521,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Việc hôm nay 1/2",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676547235.png",
+   "dev": "fold",
+   "at": 528,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Điều ngài thích",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676555070.png",
+   "dev": "fold",
+   "at": 536,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676563687.png",
+   "dev": "fold",
+   "at": 544,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676596606.png",
+   "dev": "fold",
+   "at": 577,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Túi đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676603105.png",
+   "dev": "fold",
+   "at": 584,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Thú cưng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676609578.png",
+   "dev": "fold",
+   "at": 590,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Việc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676616025.png",
+   "dev": "fold",
+   "at": 596,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Trang sức 1",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676628872.png",
+   "dev": "fold",
+   "at": 609,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Y phục 2",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676635542.png",
+   "dev": "fold",
+   "at": 616,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Vải vóc 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676641938.png",
+   "dev": "fold",
+   "at": 622,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Thuốc men 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676648598.png",
+   "dev": "fold",
+   "at": 629,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Hương liệu 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676655013.png",
+   "dev": "fold",
+   "at": 635,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Lễ vật 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676661393.png",
+   "dev": "fold",
+   "at": 642,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Thư từ 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676667853.png",
+   "dev": "fold",
+   "at": 648,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tác phẩm 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676674705.png",
+   "dev": "fold",
+   "at": 655,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Cài tóc: Trâm hoa lụa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676681129.png",
+   "dev": "fold",
+   "at": 662,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Y phục: Áo lụa thêu hoa nhỏ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676687542.png",
+   "dev": "fold",
+   "at": 668,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Trâm hoa lụa · Trâm cài",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676693995.png",
+   "dev": "fold",
+   "at": 674,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Áo lụa thêu hoa nhỏ · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676700435.png",
+   "dev": "fold",
+   "at": 681,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Váy sa xanh ngọc · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676706918.png",
+   "dev": "fold",
+   "at": 687,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Nước bào hoa · Dầu chải tóc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676713339.png",
+   "dev": "fold",
+   "at": 694,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Nến mỡ dê ×3 · Nến",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676719793.png",
+   "dev": "fold",
+   "at": 700,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Than liễu ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676726239.png",
+   "dev": "fold",
+   "at": 707,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Son sáp ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676732652.png",
+   "dev": "fold",
+   "at": 713,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Yên chi giấy ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676739186.png",
+   "dev": "fold",
+   "at": 720,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Phấn gạo ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676745599.png",
+   "dev": "fold",
+   "at": 726,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Dấu ấn Đáp ứng · đang dùng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676752077.png",
+   "dev": "fold",
+   "at": 733,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676766187.png",
+   "dev": "fold",
+   "at": 747,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Con của ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676772602.png",
+   "dev": "fold",
+   "at": 753,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Kế vị",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676779028.png",
+   "dev": "fold",
+   "at": 759,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Hoàng tự trong cung",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676785471.png",
+   "dev": "fold",
+   "at": 766,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Hôn sự",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676792119.png",
+   "dev": "fold",
+   "at": 773,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Quý tộc kén rể · kén dâu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676798548.png",
+   "dev": "fold",
+   "at": 779,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Đường Tĩnh Thù",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676925926.png",
+   "dev": "fold",
+   "at": 906,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn bốn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676937145.png",
+   "dev": "fold",
+   "at": 918,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Bắc sở4 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676943567.png",
+   "dev": "fold",
+   "at": 924,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tiền sảnh2 bóng ngườitốn: một khắc",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676949960.png",
+   "dev": "fold",
+   "at": 930,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tứ đức 8/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676961673.png",
+   "dev": "fold",
+   "at": 942,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Tứ đức 8/9",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676968095.png",
+   "dev": "fold",
+   "at": 949,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.»",
+   "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795676974479.png",
+   "dev": "fold",
+   "at": 955,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Chọn chính mình",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677110083.png",
+   "dev": "fold",
+   "at": 1091,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Về Dư đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677118221.png",
+   "dev": "fold",
+   "at": 1099,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Lịch tháng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677126471.png",
+   "dev": "fold",
+   "at": 1107,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Mục tiêu chương (có mới)",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677134329.png",
+   "dev": "fold",
+   "at": 1116,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "3Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677142535.png",
+   "dev": "fold",
+   "at": 1124,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tai mắt0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677150520.png",
+   "dev": "fold",
+   "at": 1131,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Có thaiRất thấp",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677157820.png",
+   "dev": "fold",
+   "at": 1139,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Lật thẻKhông có",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677167178.png",
+   "dev": "fold",
+   "at": 1148,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Ân tình (đêm)0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677175720.png",
+   "dev": "fold",
+   "at": 1157,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Số lần ân thưởng0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677184130.png",
+   "dev": "fold",
+   "at": 1166,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Bổng lộcsau 3 tuần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677193031.png",
+   "dev": "fold",
+   "at": 1174,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Nguy hiểm chung: 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677201392.png",
+   "dev": "fold",
+   "at": 1183,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Xét phẩm: thiếu 4",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677209699.png",
+   "dev": "fold",
+   "at": 1190,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "?",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677217560.png",
+   "dev": "fold",
+   "at": 1198,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "‹ Dư đồDưỡng Tú viện · ta đang ở · còn mười khắc Đ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677228927.png",
+   "dev": "fold",
+   "at": 1210,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Đông sở2 bóng ngườitốn: một khắc",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677236314.png",
+   "dev": "fold",
+   "at": 1217,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tây sở3 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677243712.png",
+   "dev": "fold",
+   "at": 1224,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Bắc sở3 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677251033.png",
+   "dev": "fold",
+   "at": 1232,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tiền sảnh3 bóng ngườitốn: một khắc",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677258885.png",
+   "dev": "fold",
+   "at": 1240,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Cung nhân · chạm để mở danh sách",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677266423.png",
+   "dev": "fold",
+   "at": 1247,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Chí tôn · chạm để mở danh sách",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677273992.png",
+   "dev": "fold",
+   "at": 1255,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677287894.png",
+   "dev": "fold",
+   "at": 1268,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Mệnh truyện",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677294667.png",
+   "dev": "fold",
+   "at": 1275,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Việc nhờ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677301161.png",
+   "dev": "fold",
+   "at": 1282,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Sổ ghi",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677307644.png",
+   "dev": "fold",
+   "at": 1288,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Chương này",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677314080.png",
+   "dev": "fold",
+   "at": 1295,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Sắc phong",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677320514.png",
+   "dev": "fold",
+   "at": 1301,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Đã qua 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677326973.png",
+   "dev": "fold",
+   "at": 1307,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Triều cục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677333425.png",
+   "dev": "fold",
+   "at": 1314,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tâm nguyện",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677339802.png",
+   "dev": "fold",
+   "at": 1320,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Mục lục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677346283.png",
+   "dev": "fold",
+   "at": 1327,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Đi làm: Hành sự",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677352746.png",
+   "dev": "fold",
+   "at": 1333,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tứ đức 8/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677360674.png",
+   "dev": "fold",
+   "at": 1341,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tứ đức 8/9",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677367113.png",
+   "dev": "fold",
+   "at": 1348,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Cầm kỳ thi họa 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677373531.png",
+   "dev": "fold",
+   "at": 1354,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677380049.png",
+   "dev": "fold",
+   "at": 1360,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tác phẩm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677386625.png",
+   "dev": "fold",
+   "at": 1367,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "ⓘ luật Đức",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677393015.png",
+   "dev": "fold",
+   "at": 1373,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Xem luật Công · Nữ công",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677399491.png",
+   "dev": "fold",
+   "at": 1380,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677405977.png",
+   "dev": "fold",
+   "at": 1386,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677412406.png",
+   "dev": "fold",
+   "at": 1393,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách ",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677418866.png",
+   "dev": "fold",
+   "at": 1399,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677426032.png",
+   "dev": "fold",
+   "at": 1407,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677434011.png",
+   "dev": "fold",
+   "at": 1414,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677440429.png",
+   "dev": "fold",
+   "at": 1421,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Phi tần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677446958.png",
+   "dev": "fold",
+   "at": 1427,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Nam nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677453525.png",
+   "dev": "fold",
+   "at": 1434,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Cung nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677459998.png",
+   "dev": "fold",
+   "at": 1441,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Hoàng thượng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677466587.png",
+   "dev": "fold",
+   "at": 1447,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Thái hậu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677473268.png",
+   "dev": "fold",
+   "at": 1454,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Xem thêm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677479758.png",
+   "dev": "fold",
+   "at": 1460,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Gặp ngài ban ngày 2/5",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677486296.png",
+   "dev": "fold",
+   "at": 1467,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Việc hôm nay 1/2",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677492693.png",
+   "dev": "fold",
+   "at": 1473,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Điều ngài thích",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677499182.png",
+   "dev": "fold",
+   "at": 1480,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677505928.png",
+   "dev": "fold",
+   "at": 1486,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677514607.png",
+   "dev": "fold",
+   "at": 1495,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Ân oán",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677521032.png",
+   "dev": "fold",
+   "at": 1501,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Phe phái",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677527522.png",
+   "dev": "fold",
+   "at": 1508,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Xem quan hệ của Ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677534043.png",
+   "dev": "fold",
+   "at": 1514,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Đổi chỗ hai người",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677540533.png",
+   "dev": "fold",
+   "at": 1521,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "với Hoàng thượng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677547067.png",
+   "dev": "fold",
+   "at": 1528,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677558298.png",
+   "dev": "fold",
+   "at": 1539,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Con của ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677565145.png",
+   "dev": "fold",
+   "at": 1546,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Kế vị",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677571669.png",
+   "dev": "fold",
+   "at": 1552,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Hoàng tự trong cung",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677578185.png",
+   "dev": "fold",
+   "at": 1559,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Hôn sự",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677585301.png",
+   "dev": "fold",
+   "at": 1566,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Quý tộc kén rể · kén dâu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677591750.png",
+   "dev": "fold",
+   "at": 1572,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677599153.png",
+   "dev": "fold",
+   "at": 1580,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Túi đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677605556.png",
+   "dev": "fold",
+   "at": 1586,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Thú cưng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677612068.png",
+   "dev": "fold",
+   "at": 1593,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Việc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677618619.png",
+   "dev": "fold",
+   "at": 1599,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tất cả 16",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677625106.png",
+   "dev": "fold",
+   "at": 1606,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Trang sức 1",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677631657.png",
+   "dev": "fold",
+   "at": 1612,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Y phục 2",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677638180.png",
+   "dev": "fold",
+   "at": 1619,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Vải vóc 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677644825.png",
+   "dev": "fold",
+   "at": 1625,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Thuốc men 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677651451.png",
+   "dev": "fold",
+   "at": 1632,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Hương liệu 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677658213.png",
+   "dev": "fold",
+   "at": 1639,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Lễ vật 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677664728.png",
+   "dev": "fold",
+   "at": 1645,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Thư từ 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677671135.png",
+   "dev": "fold",
+   "at": 1652,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tác phẩm 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677677594.png",
+   "dev": "fold",
+   "at": 1658,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Cài tóc: Trâm hoa lụa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677684050.png",
+   "dev": "fold",
+   "at": 1665,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Y phục: Áo lụa thêu hoa nhỏ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677690427.png",
+   "dev": "fold",
+   "at": 1671,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Trâm hoa lụa · Trâm cài",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677696885.png",
+   "dev": "fold",
+   "at": 1677,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Áo lụa thêu hoa nhỏ · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677703299.png",
+   "dev": "fold",
+   "at": 1684,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Váy sa xanh ngọc · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677709757.png",
+   "dev": "fold",
+   "at": 1690,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Nước bào hoa · Dầu chải tóc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677716230.png",
+   "dev": "fold",
+   "at": 1697,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Nến mỡ dê ×3 · Nến",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677722916.png",
+   "dev": "fold",
+   "at": 1703,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Than liễu ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677729382.png",
+   "dev": "fold",
+   "at": 1710,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Son sáp ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677735852.png",
+   "dev": "fold",
+   "at": 1716,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Yên chi giấy ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677742297.png",
+   "dev": "fold",
+   "at": 1723,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Phấn gạo ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677748821.png",
+   "dev": "fold",
+   "at": 1729,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Dấu ấn Đáp ứng · đang dùng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677755272.png",
+   "dev": "fold",
+   "at": 1736,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "‹ Dư đồDưỡng Tú viện · ta đang ở · còn bảy khắc Đô",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677938889.png",
+   "dev": "fold",
+   "at": 1920,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Bắc sở4 bóng ngườitốn: một khắc",
+   "cover": "div.kdv-line",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677947128.png",
+   "dev": "fold",
+   "at": 1928,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.»",
+   "label": "Tiền sảnh2 bóng ngườitốn: một khắc",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795677955575.png",
+   "dev": "fold",
+   "at": 1936,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Tâm trạngBình thản0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678062535.png",
+   "dev": "fold",
+   "at": 2045,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Chọn chính mình",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678073354.png",
+   "dev": "fold",
+   "at": 2055,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Về Dư đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678083819.png",
+   "dev": "fold",
+   "at": 2065,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Lịch tháng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678093417.png",
+   "dev": "fold",
+   "at": 2075,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Mục tiêu chương (có mới)",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678103405.png",
+   "dev": "fold",
+   "at": 2085,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "3Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678112264.png",
+   "dev": "fold",
+   "at": 2093,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Tai mắt0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678120346.png",
+   "dev": "fold",
+   "at": 2102,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Có thaiRất thấp",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678129080.png",
+   "dev": "fold",
+   "at": 2110,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Lật thẻKhông có",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678137313.png",
+   "dev": "fold",
+   "at": 2119,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Ân tình (đêm)0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678147516.png",
+   "dev": "fold",
+   "at": 2129,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Số lần ân thưởng0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678158068.png",
+   "dev": "fold",
+   "at": 2139,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Bổng lộcsau 3 tuần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678167571.png",
+   "dev": "fold",
+   "at": 2149,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Nguy hiểm chung: 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678175756.png",
+   "dev": "fold",
+   "at": 2158,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Xét phẩm: thiếu 4",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678188305.png",
+   "dev": "fold",
+   "at": 2170,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "?",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678196970.png",
+   "dev": "fold",
+   "at": 2179,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678211407.png",
+   "dev": "fold",
+   "at": 2192,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Ân oán",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678217967.png",
+   "dev": "fold",
+   "at": 2198,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Phe phái",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678224397.png",
+   "dev": "fold",
+   "at": 2205,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Xem quan hệ của Ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678230953.png",
+   "dev": "fold",
+   "at": 2212,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Đổi chỗ hai người",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678237557.png",
+   "dev": "fold",
+   "at": 2218,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "với Hoàng thượng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678244156.png",
+   "dev": "fold",
+   "at": 2225,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678251604.png",
+   "dev": "fold",
+   "at": 2232,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Con của ta",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678258016.png",
+   "dev": "fold",
+   "at": 2238,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Kế vị",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678264537.png",
+   "dev": "fold",
+   "at": 2245,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Hoàng tự trong cung",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678271057.png",
+   "dev": "fold",
+   "at": 2252,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Hôn sự",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678277732.png",
+   "dev": "fold",
+   "at": 2258,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Quý tộc kén rể · kén dâu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678284409.png",
+   "dev": "fold",
+   "at": 2265,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Tứ đức 8/9Cầm kỳ thi họa 8/12Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678292522.png",
+   "dev": "fold",
+   "at": 2273,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Tứ đức 8/9",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678298972.png",
+   "dev": "fold",
+   "at": 2280,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Cầm kỳ thi họa 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678305715.png",
+   "dev": "fold",
+   "at": 2286,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Vũ · Y · Nữ công 8/12",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678312183.png",
+   "dev": "fold",
+   "at": 2293,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Tác phẩm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678319016.png",
+   "dev": "fold",
+   "at": 2300,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "ⓘ luật Đức",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678325653.png",
+   "dev": "fold",
+   "at": 2306,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Xem luật Công · Nữ công",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678332237.png",
+   "dev": "fold",
+   "at": 2313,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Túi đồThú cưngViệcTất cả 16Trang sức 1Y phục 2Vải ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678348605.png",
+   "dev": "fold",
+   "at": 2329,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Túi đồ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678355191.png",
+   "dev": "fold",
+   "at": 2336,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Thú cưng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678361734.png",
+   "dev": "fold",
+   "at": 2342,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Việc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678368386.png",
+   "dev": "fold",
+   "at": 2349,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Tất cả 16",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678374846.png",
+   "dev": "fold",
+   "at": 2355,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Trang sức 1",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678381647.png",
+   "dev": "fold",
+   "at": 2362,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Y phục 2",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678388340.png",
+   "dev": "fold",
+   "at": 2369,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Vải vóc 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678394758.png",
+   "dev": "fold",
+   "at": 2375,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Thuốc men 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678401725.png",
+   "dev": "fold",
+   "at": 2382,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Hương liệu 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678408508.png",
+   "dev": "fold",
+   "at": 2389,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Lễ vật 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678415227.png",
+   "dev": "fold",
+   "at": 2396,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Thư từ 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678421733.png",
+   "dev": "fold",
+   "at": 2402,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Tác phẩm 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678428251.png",
+   "dev": "fold",
+   "at": 2409,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Cài tóc: Trâm hoa lụa",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678434785.png",
+   "dev": "fold",
+   "at": 2415,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Y phục: Áo lụa thêu hoa nhỏ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678441566.png",
+   "dev": "fold",
+   "at": 2422,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Trâm hoa lụa · Trâm cài",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678448140.png",
+   "dev": "fold",
+   "at": 2429,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Áo lụa thêu hoa nhỏ · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678454683.png",
+   "dev": "fold",
+   "at": 2435,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Váy sa xanh ngọc · Y phục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678461241.png",
+   "dev": "fold",
+   "at": 2442,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Nước bào hoa · Dầu chải tóc",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678467685.png",
+   "dev": "fold",
+   "at": 2448,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Nến mỡ dê ×3 · Nến",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678474200.png",
+   "dev": "fold",
+   "at": 2455,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Than liễu ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678480757.png",
+   "dev": "fold",
+   "at": 2461,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Son sáp ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678487178.png",
+   "dev": "fold",
+   "at": 2468,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Yên chi giấy ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678493613.png",
+   "dev": "fold",
+   "at": 2474,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Phấn gạo ×2 · Son phấn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678500061.png",
+   "dev": "fold",
+   "at": 2481,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Dấu ấn Đáp ứng · đang dùng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678506654.png",
+   "dev": "fold",
+   "at": 2487,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678516731.png",
+   "dev": "fold",
+   "at": 2497,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Mệnh truyện",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678523310.png",
+   "dev": "fold",
+   "at": 2504,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Việc nhờ",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678529767.png",
+   "dev": "fold",
+   "at": 2510,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Sổ ghi",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678536339.png",
+   "dev": "fold",
+   "at": 2517,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Chương này",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678542797.png",
+   "dev": "fold",
+   "at": 2523,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Sắc phong",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678549291.png",
+   "dev": "fold",
+   "at": 2530,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Đã qua 0",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678555896.png",
+   "dev": "fold",
+   "at": 2536,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Triều cục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678562584.png",
+   "dev": "fold",
+   "at": 2543,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Tâm nguyện",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678569178.png",
+   "dev": "fold",
+   "at": 2550,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Mục lục",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678575713.png",
+   "dev": "fold",
+   "at": 2556,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Đi làm: Hành sự",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678582229.png",
+   "dev": "fold",
+   "at": 2563,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Dưỡng Tú việnBa ngày tuyển tú, mọi việc theo lời m",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678592809.png",
+   "dev": "fold",
+   "at": 2573,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Giao thiệpGiao thiệpTự họcⓘTốn2 khắc·Sức -15Đượcti",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678601835.png",
+   "dev": "fold",
+   "at": 2582,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678608318.png",
+   "dev": "fold",
+   "at": 2589,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách ",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678614936.png",
+   "dev": "fold",
+   "at": 2595,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "‹ Dư đồDưỡng Tú viện · ta đang ở · còn bảy khắc Đô",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678628591.png",
+   "dev": "fold",
+   "at": 2610,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Đông sở2 bóng ngườitốn: một khắc",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678638013.png",
+   "dev": "fold",
+   "at": 2619,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Tây sở3 bóng ngườitốn: một khắc",
+   "cover": "span.kdw.on",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678646702.png",
+   "dev": "fold",
+   "at": 2628,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Bắc sở4 bóng ngườitốn: một khắc",
+   "cover": "div.kdv-line",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678655391.png",
+   "dev": "fold",
+   "at": 2637,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Tiền sảnh2 bóng ngườitốn: một khắc",
+   "cover": "div.kscn-col",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678663942.png",
+   "dev": "fold",
+   "at": 2645,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Cung nhân · chạm để mở danh sách",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678672144.png",
+   "dev": "fold",
+   "at": 2653,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Chí tôn · chạm để mở danh sách",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678680677.png",
+   "dev": "fold",
+   "at": 2662,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Chí tôn",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678694253.png",
+   "dev": "fold",
+   "at": 2675,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Phi tần",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678701024.png",
+   "dev": "fold",
+   "at": 2682,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Nam nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678707653.png",
+   "dev": "fold",
+   "at": 2688,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Cung nhân",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678714126.png",
+   "dev": "fold",
+   "at": 2695,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Hoàng thượng",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678724098.png",
+   "dev": "fold",
+   "at": 2705,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Gặp ngài ban ngày 2/5",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678733643.png",
+   "dev": "fold",
+   "at": 2714,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Việc hôm nay 1/2",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678740052.png",
+   "dev": "fold",
+   "at": 2721,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Điều ngài thích",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678746526.png",
+   "dev": "fold",
+   "at": 2727,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Chí tônPhi tầnNam nhânCung nhân‹Hoàng thượngThái h",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678755657.png",
+   "dev": "fold",
+   "at": 2736,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Thái hậu",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678762100.png",
+   "dev": "fold",
+   "at": 2743,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Xem thêm",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678768650.png",
+   "dev": "fold",
+   "at": 2749,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  },
+  {
+   "k": "DEAD BUTTON",
+   "screen": "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.»",
+   "label": "Giao thiệpGiao thiệpXin yết kiến ở Cần Chính điệnM",
+   "cover": "div.kscn-veil",
+   "shot": "/home/user/wt/out-ES2/shots-ES2-R2-random-5/dead-fold-1795678775088.png",
+   "dev": "fold",
+   "at": 2756,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 19,
+    "rank": 0,
+    "name": "Trình Dung Âm"
+   }
+  }
+ ],
+ "saves": [],
+ "buoi": 2,
+ "steps": 1919,
+ "status": [],
+ "_loopAt": 1795679978680,
+ "_snapAt": 1795679949848,
+ "trace": [
+  [
+   2822,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   2824,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   2825,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2826,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2826,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2826,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2827,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2828,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2829,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2829,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2833,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2836,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2837,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2838,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2840,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2840,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   2841,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2842,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2843,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   2846,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2846,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2848,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2849,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   2851,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   2852,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2852,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2852,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2854,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2854,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2855,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2856,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2857,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2858,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   2858,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2859,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2859,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2860,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2863,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2863,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2864,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2865,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2868,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2869,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2870,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2871,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   2872,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   2874,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2875,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2876,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   2878,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2879,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   2879,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2880,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2881,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   2881,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2882,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2883,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   2887,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2887,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   2888,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2888,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2891,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2892,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2894,
+   "page «unstick Giao tình»"
+  ],
+  [
+   2899,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   2900,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   2903,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2904,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2905,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2907,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2908,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2909,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   2912,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2913,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2914,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2915,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2917,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2917,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2918,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2918,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2919,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2919,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2920,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2921,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2926,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2927,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2928,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2928,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2929,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2930,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2931,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   2933,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2934,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   2935,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2935,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   2936,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2937,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2937,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2939,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   2940,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   2940,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2940,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2941,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2941,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2942,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2942,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2942,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   2945,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   2945,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2946,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2946,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2947,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2947,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2950,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2950,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2951,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   2952,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2952,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2953,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2953,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2954,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2954,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2955,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2955,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2955,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2956,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2956,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   2957,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   2957,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2958,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   2958,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2958,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2959,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2959,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2959,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2961,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2965,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2966,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   2966,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   2968,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2969,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2970,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2970,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2971,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   2971,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2972,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2974,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2976,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2976,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   2977,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2977,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   2978,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2978,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   2979,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2979,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2979,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2980,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   2981,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2981,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   2985,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   2986,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2986,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   2988,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2989,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   2990,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2991,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   2993,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   2993,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   2994,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   2995,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2996,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   2999,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   2999,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   2999,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3000,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   3000,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3000,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   3001,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3001,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3002,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3002,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   3002,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3003,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3004,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3004,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3005,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3006,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3006,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3007,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3007,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   3008,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   3008,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3009,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3009,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3012,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3012,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   3012,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3014,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   3015,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3016,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3017,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3018,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3018,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3019,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3019,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3020,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   3020,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3020,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   3021,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   3021,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   3022,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   3023,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3023,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3024,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3024,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3026,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   3027,
+   "page «unstick Quẻ Trung (Con cái)»"
+  ],
+  [
+   3030,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   3032,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   3035,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3036,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   3038,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3040,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   3041,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3041,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3042,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3043,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   3043,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3044,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   3044,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3044,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3045,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3047,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3050,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   3050,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3050,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   3051,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3051,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3053,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3054,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3054,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3057,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3057,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3060,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3061,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   3062,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3063,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3066,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3067,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   3067,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3068,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3068,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   3069,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   3070,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3070,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3070,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3071,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3072,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   3074,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3075,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3076,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3077,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   3077,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3078,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3079,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3079,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3083,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3085,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3086,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3087,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3087,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   3088,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3089,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3091,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   3092,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3093,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   3094,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   3095,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3095,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3095,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3096,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3096,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3098,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3098,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3099,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   3099,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3099,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   3100,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3100,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   3101,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3102,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3106,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3107,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3110,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3111,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3113,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3113,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3116,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   3116,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   3117,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3118,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3121,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   3122,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3122,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3123,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3124,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3124,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3124,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3125,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3128,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   3130,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   3133,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3135,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tư trang»"
+  ],
+  [
+   3137,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   3139,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   3139,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3141,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   3141,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3142,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hậu cung»"
+  ],
+  [
+   3143,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3144,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3145,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3146,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3147,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3148,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3148,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3151,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3152,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   3153,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3155,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3156,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   3157,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   3158,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   3158,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Mệnh truyện»"
+  ],
+  [
+   3161,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tài nghệ»"
+  ],
+  [
+   3161,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   3161,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3162,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   3162,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Bạc16Sức100/100»"
+  ],
+  [
+   3162,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3163,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3163,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3166,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Quẻ Trung (Con cái)»"
+  ],
+  [
+   3166,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3167,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3170,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3171,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3171,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3174,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3176,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3177,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3177,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3178,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3179,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Sắc92Tài67Tâm cơ10Đức40Danh8Sủng8»"
+  ],
+  [
+   3180,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3181,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3181,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3182,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3182,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3184,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3187,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Buổi sáng, còn 4 khắc»"
+  ],
+  [
+   3187,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3190,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   3190,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3190,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hoàng tự»"
+  ],
+  [
+   3191,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «sương sớm»"
+  ],
+  [
+   3193,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Dư đồ»"
+  ],
+  [
+   3194,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3197,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Y phục hợp phẩm · mặt mộc»"
+  ],
+  [
+   3200,
+   "page «unstick sương sớm»"
+  ],
+  [
+   3203,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   3205,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   3208,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Hành sự»"
+  ],
+  [
+   3209,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Giao tình»"
+  ],
+  [
+   13,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhTiếp tục: Đáp ứng Trình Dung Âm · Thá»"
+  ],
+  [
+   14,
+   "#modal «Chọn sổ» «Tiếp tục kiếp này»"
+  ],
+  [
+   27,
+   "AREA 170,365"
+  ],
+  [
+   31,
+   "AREA 606,691"
+  ],
+  [
+   35,
+   "AREA 517,306"
+  ],
+  [
+   37,
+   "AREA 447,652"
+  ],
+  [
+   41,
+   "AREA 515,324"
+  ],
+  [
+   45,
+   "AREA 384,523"
+  ],
+  [
+   46,
+   "AREA 262,484"
+  ],
+  [
+   49,
+   "AREA 439,704"
+  ],
+  [
+   52,
+   "AREA 341,692"
+  ],
+  [
+   55,
+   "AREA 163,525"
+  ],
+  [
+   58,
+   "AREA 561,282"
+  ],
+  [
+   60,
+   "AREA 215,759"
+  ],
+  [
+   64,
+   "AREA 181,407"
+  ],
+  [
+   69,
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»"
+  ],
+  [
+   78,
+   ".dlg «Thái hậu» «Con thích bữa cơm như ở nhà, mẫu thân nấu gì con ă»"
+  ],
+  [
+   85,
+   ".dlg «Hoàng thượng» «Dâng Kỳ»"
+  ],
+  [
+   90,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   92,
+   "#kg82 «Gợi ý»"
+  ],
+  [
+   95,
+   "#kg82 «Gợi ý»"
+  ],
+  [
+   97,
+   "#kg82 «Gợi ý»"
+  ],
+  [
+   99,
+   "#kg82 «Gợi ý»"
+  ],
+  [
+   150,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   161,
+   "MOVED Lịch tháng"
+  ],
+  [
+   164,
+   ".dlg «Thái hậu» «Thần thiếp xin Thái hậu cho phép, vì công chúa còn»"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795679830391,
+ "_ckB": 2,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1291,
+   "rendererMB": 569,
+   "heapMB": 111,
+   "dom": 3134,
+   "q": 4,
+   "lsK": 4
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1557,
+   "rendererMB": 747,
+   "heapMB": 111,
+   "dom": 849,
+   "q": 2,
+   "lsK": 112
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1447,
+   "rendererMB": 633,
+   "heapMB": 111,
+   "dom": 1372,
+   "q": 3,
+   "lsK": 112
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1424,
+   "rendererMB": 602,
+   "heapMB": 111,
+   "dom": 831,
+   "q": 3,
+   "lsK": 112
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1241,
+   "rendererMB": 603,
+   "heapMB": 111,
+   "dom": 755,
+   "q": 2,
+   "lsK": 115
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1330,
+   "rendererMB": 670,
+   "heapMB": 111,
+   "dom": 788,
+   "q": 2,
+   "lsK": 122
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1299,
+   "rendererMB": 628,
+   "heapMB": 82,
+   "dom": 829,
+   "q": 3,
+   "lsK": 122
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1277,
+   "rendererMB": 604,
+   "heapMB": 82,
+   "dom": 1369,
+   "q": 3,
+   "lsK": 122
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1307,
+   "rendererMB": 631,
+   "heapMB": 82,
+   "dom": 824,
+   "q": 3,
+   "lsK": 123
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1271,
+   "rendererMB": 607,
+   "heapMB": 82,
+   "dom": 789,
+   "q": 1,
+   "lsK": 123
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1256,
+   "rendererMB": 581,
+   "heapMB": 82,
+   "dom": 1322,
+   "q": 1,
+   "lsK": 123
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1260,
+   "rendererMB": 584,
+   "heapMB": 78,
+   "dom": 1246,
+   "q": 1,
+   "lsK": 123
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1363,
+   "rendererMB": 702,
+   "heapMB": 78,
+   "dom": 849,
+   "q": 1,
+   "lsK": 123
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1418,
+   "rendererMB": 741,
+   "heapMB": 78,
+   "dom": 845,
+   "q": 1,
+   "lsK": 123
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1187,
+   "rendererMB": 614,
+   "heapMB": 78,
+   "dom": 811,
+   "q": 1,
+   "lsK": 123
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1221,
+   "rendererMB": 648,
+   "heapMB": 78,
+   "dom": 811,
+   "q": 1,
+   "lsK": 123
+  },
+  {
+   "buoi": 2,
+   "y": 1,
+   "totalMB": 1285,
+   "rendererMB": 648,
+   "heapMB": 150,
+   "dom": 804,
+   "q": 1,
+   "lsK": 124
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/",
+  "#modal|Tiền truyện · Con gái thầy đồ nghèo · #/",
+  ".dlg|Ngày thứ nhất — Nhập cung",
+  ".kmov|",
+  "#modal|Tâm trạng · Ta",
+  ".dlg|Tâm trạng · Ta",
+  "page|Dưỡng Tú viện · Đông sở · Ở đây có # ngư",
+  ".dlg|Dưỡng Tú viện",
+  ".dlg|Đông sở",
+  ".dlg|Dò hỏi ma ma",
+  "#modal|Đông sở",
+  "#modal|Dò hỏi ma ma",
+  ".dlg|Đêm",
+  "#modal|Ngày thứ hai — Điện tuyển",
+  ".dlg|Ngày thứ hai — Điện tuyển",
+  "#kxcatch|",
+  "#kg82|",
+  ".dlg|Sân chờ",
+  "page|Dưỡng Tú viện · Tiền sảnh · Ở đây có # n",
+  ".kscn|",
+  ".dlg|Điện tuyển",
+  "#modal|Thái hậu",
+  ".dlg|Thái hậu",
+  "#modal|Hoàng thượng",
+  ".dlg|Hoàng thượng"
+ ],
+ "_momRank": 0,
+ "_unsFail": {
+  "#klife|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Con gái thầy đồ nghèo · #/#": {},
+  ".dlg|Ngày thứ nhất — Nhập cung": {},
+  "page|Dưỡng Tú viện · Đông sở · Ở đây có # người.": {},
+  ".dlg|Dưỡng Tú viện": {},
+  ".dlg|Đông sở": {},
+  ".dlg|Dò hỏi ma ma": {},
+  ".dlg|Đêm": {},
+  ".dlg|Ngày thứ hai — Điện tuyển": {},
+  ".kmov|": {},
+  ".dlg|Sân chờ": {},
+  "page|Dưỡng Tú viện · Tiền sảnh · Ở đây có # người.": {},
+  ".dlg|Điện tuyển": {},
+  ".dlg|Thái hậu": {},
+  ".dlg|Hoàng thượng": {}
+ },
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|511,470": {
+   "left": 321,
+   "n": 1
+  },
+  ".dlg|Đông sở|378,534": {
+   "left": 738,
+   "n": 3
+  },
+  ".dlg|Đông sở|378,521": {
+   "left": 738,
+   "n": 1
+  }
+ },
+ "dumps": [
+  "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-1-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-2-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-3-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-4-dump.json",
+  "/home/user/wt/out-ES2/shots-ES2-R2-random-5/loop-5-dump.json"
+ ],
+ "t": {
+  "total": 171742
+ }
+}
