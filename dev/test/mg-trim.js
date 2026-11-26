@@ -9,21 +9,25 @@
    6 an NPC slaps her: «Né đòn» shows its odds word; one tap = one roll, no game frame; the result card follows
    7 kept cơ-may games still open their boards (a scheme act game sgPlay exists, Dư đồ class A acts keep their engine)
    8 no page errors
+   9 pet care + plant watering: boards kept by default (BAL.trim.care 0, FOREMAN D ruling 26/11), one tap only behind the switch
    usage: node dev/test/mg-trim.js <dev dir or url> [755x1000@2,1180x820@2] */
 const {chromium}=require('playwright');const fs=require('fs'),http=require('http'),path=require('path');let [,,URL,SIZES]=process.argv;URL=URL||'dev';
 function serve(root){const T={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.css':'text/css'};return new Promise(res=>{const s=http.createServer((q,r)=>{let f=path.join(root,decodeURIComponent(new (require('url').URL)(q.url,'http://x').pathname).replace(/^\/+/,'')||'index.html');
  if(!f.startsWith(root)||!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end('nf')}r.setHeader('Content-Type',T[path.extname(f)]||'application/octet-stream');fs.createReadStream(f).pipe(r)});s.listen(0,'127.0.0.1',()=>res({url:'http://127.0.0.1:'+s.address().port+'/index.html',close:()=>s.close()}))})}
 const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!c)bad++;console.log(`${c?'PASS':'FAIL'} ${n}${x!==undefined?' '+JSON.stringify(x).slice(0,500):''}`)};
 const VID=process.env.VID||'';
+const fs9={};for(const f of ['jpetcare.js','jshelf.js'])fs9[f]=fs.readFileSync(path.join(__dirname,'../build',f),'utf8');
 (async()=>{let SV=null;if(!/^https?:/.test(URL)){SV=await serve(path.resolve(URL));URL=SV.url}const b=await chromium.launch();
  for(const sz of (SIZES||"755x1000@2,1180x820@2").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const errs=[];console.log('== '+sz);
   const ctx=await b.newContext(Object.assign({viewport:{width:W,height:H},deviceScaleFactor:+dpr,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'},VID?{recordVideo:{dir:VID,size:{width:W,height:H}}}:{}));
   const p=await ctx.newPage();p.setDefaultTimeout(120000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
-  for(let i=0;i<20;i++){await p.evaluate(()=>{window.S0=typeof S!=='undefined'?S:null;SLOT=3;window.__forceOrigin='cn';document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start()});
-   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S!==window.S0&&S.origin,null,{timeout:120000});if(await p.evaluate(()=>!isSrv()&&!S.out))break}
-  try{await require('./lib/roulette').dismissRoulette(p)}catch(e){}await sleep(1200);
-  for(let i=0;i<8;i++){const go=await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal:not([hidden]) button')].find(x=>/^Vào cung ngay/.test(x.innerText.trim()));if(b){b.click();return 1}return 0});if(!go)break;await sleep(1500)}
+  /* boot = the delegate-nomg pattern (pre-palace roads skipped with __nlInner; the «Sửa soạn nhập cung» loader tapped through) */
+  await p.evaluate(()=>{localStorage.clear();document.getElementById('title').hidden=true;window.__nlInner=1;window.__forceOrigin='cn';for(let k=0;k<400;k++){start();if(!(typeof isSrv==="function"&&isSrv())&&!S.out)break}});
+  await p.waitForFunction(()=>typeof S==='object'&&S&&S.origin,null,{timeout:60000});await sleep(1500);
+  try{await require('./lib/roulette').dismissRoulette(p)}catch(e){}
+  for(let k=0;k<30;k++){const gone=await p.evaluate(()=>{const r=document.getElementById('kmrew');if(r)r.remove();const bt=[...document.querySelectorAll('button')].find(x=>/Vào cung ngay/.test(x.textContent||'')&&x.offsetParent);if(bt)bt.click();return !/Sửa soạn nhập cung/.test(document.body.innerText||'')});if(gone&&k>2)break;await sleep(1500)}
+  for(let k=0;k<12;k++){const n=await p.evaluate(()=>{const m=document.getElementById('modal');if(!m||m.hidden)return 0;const bt=[...m.querySelectorAll('button')].find(x=>/^(Đã hiểu|Tiếp|Vào cung ngay)/.test(x.innerText.trim()));if(bt){bt.click();return 1}return 0});if(!n)break;await sleep(900)}
   await p.waitForFunction(()=>typeof rivals!=='undefined'&&rivals.some(v=>v.alive&&!v.out),null,{timeout:60000}).catch(()=>{});
   await p.evaluate(()=>{new MutationObserver(()=>document.querySelectorAll('.ktrv-ov').forEach(e=>e.remove())).observe(document.body,{childList:true,subtree:true});Q.length=0;document.getElementById('modal').hidden=true;S.suc=90;S.bac=Math.max(S.bac||0,500);render()});await sleep(800);
   const tap=async sel=>{const e=await p.waitForSelector(sel,{state:'visible',timeout:30000});await e.scrollIntoViewIfNeeded();await e.tap();await sleep(500)};
@@ -54,12 +58,12 @@ const VID=process.env.VID||'';
    const sk=.4;o.r0=toilNpcPlay(sk,"t:1",{},"","fit",[],0,null).score;o.r7=toilNpcPlay(sk,"t:1",{},"","fit",[],7,null).score;o.dem=BAL.toil.rkDemand;return o});
   ok('4 Dung raises her one-tap odds; an NPC hand rises with her own Dung (law 1); higher rank = the same draw scores lower (law 5)',r4.d5.vua>=r4.d0.vua&&r4.d5.dep>r4.d0.dep&&r4.n5>r4.n0&&r4.r0-r4.r7===Math.min(r4.r0,7*r4.dem),r4);
   /* 5 */
-  const r5=await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;const i=rivals.findIndex(v=>v.alive&&!v.out&&ACT.tat&&ACT.tat.ok(S,v));if(i<0)return{none:1};let spy=0;const t0=slapNpcTier;slapNpcTier=a=>{spy+=a===S?1:0;return t0(a)};S.khac=Math.max(S.khac||0,8);
+  const r5=await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;/* a lower-rank rival standing where she stands (the test sets the scene; ACT.tat.ok = together + rank above + no fresh slap) */{const v=rivals.find(x=>x.alive&&!x.out&&!x.queen);if(v){v.rank=0;S.place=whereOf(v);if(v.slap)v.slap.until=0}}const i=rivals.findIndex(v=>v.alive&&!v.out&&ACT.tat&&ACT.tat.ok(S,v));if(i<0)return{none:1};let spy=0;const t0=slapNpcTier;slapNpcTier=a=>{spy+=a===S?1:0;return t0(a)};S.khac=Math.max(S.khac||0,8);
    let open=false;try{doAct(i,"tat")}finally{slapNpcTier=t0}const k=document.getElementById('kg82');open=!!(k&&!k.hidden&&k.querySelector('canvas'));return{spy,open,logs:(S.logs||[]).slice(0,1).map(x=>String(x).replace(/<[^>]+>/g,"").slice(0,90))}});
   ok('5 her Tát: no game frame, the tier = slapNpcTier(S)',!r5.none&&r5.spy>=1&&!r5.open,r5);
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});await sleep(500);
   /* 6 */
-  await p.evaluate(()=>{const v=liveRivals(true).find(x=>x!==S&&x.alive&&!x.out);v.rank=Math.max(v.rank||0,(S.rank||0)+1);window.__v=v;runAct(v,S,"tat");showModal()});await sleep(1200);
+  await p.evaluate(()=>{const v=liveRivals(true).find(x=>x!==S&&x.alive&&!x.out);v.rank=Math.max(v.rank||0,(S.rank||0)+1);window.__v=v;Q.length=0;document.getElementById('modal').hidden=true;/* scene set-up only (not under test): she stands with the slapper, the slapper knows her, the motive gate (j95) is off for this one act */S.place=whereOf(v);try{npcLearn(v,S)}catch(e){}window.__j95off=1;try{runAct(v,S,"tat")}finally{window.__j95off=0}showModal()});await sleep(1200);
   const card=await p.evaluate(()=>{const m=document.getElementById('modal');const bs=[...m.querySelectorAll('button')].map(b=>b.innerText.replace(/\s+/g,' '));return{t:m.innerText.slice(0,80).replace(/\s+/g,' '),bs}});
   const dodge=card.bs.find(x=>/^Né đòn/.test(x))||"";ok('6 NPC slap card: «Né đòn» shows an odds word and no «ván ngắn» game line',/(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững)/.test(dodge)&&!/ván ngắn/.test(dodge),card);
   const nb=await p.evaluateHandle(()=>[...document.querySelectorAll('#modal button')].find(b=>/^Né đòn/.test(b.innerText.trim())));if(nb&&nb.asElement()){await nb.asElement().tap();await sleep(1500)}
@@ -68,6 +72,9 @@ const VID=process.env.VID||'';
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});
   /* 7 */
   const r7=await p.evaluate(()=>({sg:typeof sgPlay==="function",dfA:Object.keys(DFG.ENG).length,rt:typeof rtNgSleight==="function",dfOn:BAL.df.on}));ok('7 kept cơ-may games: scheme boards, Dư đồ engines, nghiệm thân still there',r7.sg&&r7.dfA===7&&r7.rt&&r7.dfOn===1,r7);
+  /* 9 FOREMAN D ruling 26/11: pet care + plant watering are not in sếp's words → behind ONE switch BAL.trim.care, default 0 = the boards play (laws 16/17) */
+  const r9=await p.evaluate(()=>({care:BAL.trim&&BAL.trim.care}));const src9=['jpetcare.js','jshelf.js'].map(f=>fs9[f]);
+  ok('9 care switch BAL.trim.care = 0 (boards kept); one tap only behind the switch',r9.care===0&&/if\(BAL\.trim\.care&&\(k==="feed"\|\|k==="bath"\|\|k==="play"\)\)[^\n]*return\}\s*if\(k==="feed"\)petcFeed\(\)/.test(src9[0])&&/if\(k==="water"&&BAL\.trim\.care\)[^\n]*return\}\s*if\(k==="water"\)\{/.test(src9[1]),r9);
   ok('8 no page errors',!errs.length,errs.slice(0,3));
   await ctx.close();if(VID){const f=fs.readdirSync(VID).filter(x=>/\.webm$/.test(x)).map(x=>[x,fs.statSync(path.join(VID,x)).mtimeMs]).sort((a,c)=>c[1]-a[1])[0];if(f)fs.renameSync(path.join(VID,f[0]),path.join(VID,`mg-trim-${W}x${H}.webm`))}}
  await b.close();if(SV)SV.close();console.log(bad?`FAIL ${bad}`:'ALL PASS');process.exit(bad?1:0)})();

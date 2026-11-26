@@ -1791,6 +1791,9 @@ Object.assign(BAL.ag.why,{
 /* cap = the highest play mark ANY quick / skip / "Để tài nghệ quyết định" / not-played round may count as (m-fix-1, owner OD 18/11 ~05:55Z
    "a quick result never beats a good own play"; robot M4 25/11: an exam skip gave 10/10 Xuất sắc while a skilled own play gave 5/10): the middle
    word Khá (BAL.mgTier.word[1]), like makeup's middle tier — a good own play (Giỏi, word[2], and up) always beats it. Read through kitSkipCap (j79). */
+/* mg-trim care switch (FOREMAN D ruling 26/11: pet care + plant watering are NOT in sếp's words «bớt … được thì bớt» list she picked — she cut only tát/né;
+   laws 16/17 → KEEP the boards until she says): care 0 = the care boards play as before (default); 1 = ONE tap, the care of a «vừa tay» hand (BAL.skip.raw of 10) */
+Object.assign(BAL,{trim:{care:0}});
 Object.assign(BAL,{skip:{od:50/* mg-trim: owner OD 26/11 ~05:10Z «học nhanh cho lên tùy duyên» — the ONE quick roll, was 40 Khó lường */,raw:5,care:.5,cap:5}});
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */

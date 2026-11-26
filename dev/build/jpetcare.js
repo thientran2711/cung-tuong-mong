@@ -175,7 +175,9 @@ function petcPlay(){petcRules("play","Chơi",petcHow("thu_choi"),"tap",petcTutPl
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-petc]");if(!b||b.disabled)return;e.stopPropagation();const k=b.dataset.petc;
  if(k==="close"){petcClose();return}const P=tsbPets(S)[PETC.i];if(!P)return;if(PETC.game)return;
  if(k==="maid"){petcMaid(PETC.i);return}
- if(!can(BAL.pet.khac))return;/* mg-trim (owner OD 26/11 ~05:10Z «bớt những cái mini game nào nên bớt được thì bớt»; care is not learning, a contest or a chance): ONE tap = the care of a «vừa tay» hand (BAL.skip.raw of 10), no game; the boards stay in Thử tay */if(k==="feed"||k==="bath"||k==="play"){spend(BAL.pet.khac);petcGain(k,BAL.skip.raw/10)}},true);
+ if(!can(BAL.pet.khac))return;/* KIT §13.7 (mg-ui-rest): the tap opens the RULES screen; the khắc are spent only on «Sẵn sàng» (petcRules). mg-trim switch BAL.trim.care (default 0 = boards, FOREMAN D ruling 26/11, laws 16/17): 1 = ONE tap = the care of a «vừa tay» hand (BAL.skip.raw of 10), no game */
+ if(BAL.trim.care&&(k==="feed"||k==="bath"||k==="play")){spend(BAL.pet.khac);petcGain(k,BAL.skip.raw/10);return}
+ if(k==="feed")petcFeed();else if(k==="bath")petcBath();else if(k==="play")petcPlay()},true);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kpcquick");if(!b)return;e.stopPropagation();e.preventDefault();const kind=PETC.kind;if(!kind||!PETC.game)return;
  if(!PETC.rdy){if(!can(BAL.pet.khac))return;spend(BAL.pet.khac)}/* «Để trời định» from the rules screen is a play-through too: same khắc */
  kgTutDrop();PETC.game=null;PETC.rdy=0;try{if(PETC.stop)PETC.stop()}catch(x){}PETC.stop=null;/* MG11: the shared engines return their own stop */
