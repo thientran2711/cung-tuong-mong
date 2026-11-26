@@ -150,3 +150,34 @@ LAW 16 note: behaviour changes only where a host / busy flag holds the queue wit
 ### HANDOVER → successor (D opens it): gates ALONE on review/dayq-qsoftlock 5b35ef89 (build in 7f2cab7c is current; rebuild only if you change code)
 1. sangbuoi-held full (A–K) Fold+iPad, then CASES=A REPEAT=12 vs LIVE with the SAME test file (LIVE serves its own index.html; run the branch's dev/test/sangbuoi-held.js against both URLs). 2. CASES=JK on LIVE iPad (complete the table). 3. dayq-ghost, dayq-hold (UTF-8 server), dayq-order, dayq-hold-coop, dayq-break, coop-e2e ×2, quickcheck (--runs 5 if perf bimodal). 4. FULL videos Fold + iPad of J and K (recordVideo, real taps) → CDN img/_review/dayq-qsoftlock/. 5. SSK to D → ONE BIG reviewer for the whole jdayq branch.
 Recipe: UTF-8 server = python http.server with `.html/.js/.json` → `; charset=utf-8` (see previous handover). sangbuoi-held needs ≥ 1500 s per device pair for J/K on LIVE (they wait out their limits); write output to a file, never through `| tail` in a timed foreground call. Do not run gates in parallel (load 9 on 4 cores made case A flaky).
+
+## Q-SOFTLOCK owner #3 (session_01D3E3NZQpRGvf6D1rFaJRgM) — fix (c) added, LIVE moved twice, GATES OWED on fac74a68 (07:05Z 26/11)
+PRIORITY #1 CHECK: OD 0 | ledger 0 | main LIVE 02f564ae | review/* review/dayq-qsoftlock fac74a68 (FF from 02f564ae) | claims D row (Q-SOFTLOCK).
+Depth 2 · START_CTX ~4 % · context at handover 25 % (roll line 29 %).
+
+### Branch review/dayq-qsoftlock fac74a68
+= 5b35ef89 + 9246cfdd (fix (c), code+test+scan+build) + 82128893 (merge LIVE f009e1a6, built files rebuilt) + c7525e14 (test only: tapAny skips the new «Luân hồi» #kroul roulette) + fac74a68 (merge LIVE 02f564ae, built files rebuilt). Build in fac74a68 is current. Main's CHANGE line kept (no new player text).
+
+### Gates done on 5b35ef89 (before the (c) fix and before LIVE moved)
+| gate | result |
+|---|---|
+| sangbuoi-held full A–K Fold + iPad | **ALL PASS** (J flip 11.2 s both) |
+| CASES=A REPEAT=12 on LIVE 5e013076 (branch test file) | 24/24 PASS (Fold+iPad) — branch half stopped on purpose (code changed) |
+
+### New F cases (D 04:17Z / 05:15Z)
+- **s9e softlock Q=0** (dev/handover/robot/flight2-s9e-softlock/, harness qs block): noturn-2 = Q 0, DQ.want held, screen free, next «Sang ngày mới» enabled, **DQ.stat.actKm +4/s**; loop-1 28 s earlier = Q 4 («Mục lục / Tin báo / Danh hiệu / Quẻ») held, «Có tin đang chờ» greyed. ROOT: the jdayq kmFree wrapper's activity gate (c) `(ov&&!dqHidden(ov))||(window.DF&&DF.play)` trusted an un-hidden #ov / a left-over DF.play handle with nothing on screen → the queued scene never starts → KMQ holds the turn (dqOldPending), and the jnf night gate held the cards behind that unstarted scene. SAME family B (scene-queue holders), NOT covered by 5b35ef89.
+- FIX 9246cfdd (jdayq.js only, solo dqUi, BAL.dayq.wake, same on-screen rule as K): gate (c) holds only for #ov dqShown / a .kfoc on screen; a ghost lasting BAL.dayq.wake ms is released (DQ.ka, stat kmGhost). Co-op seat keeps the old answer.
+- TEST case **L** (sangbuoi-held): L1 ghost #ov, L2 left-over DF.play + 2 cards + queued scene, khắc spent, 3 taps on «Sang ngày mới». LIVE 5e013076: **L2 FAIL Fold + iPad** with the exact s9e state (Q 0, want held, next enabled, actKm 168); L1 passes on LIVE (the game re-hides a stray #ov). Branch 9246cfdd: **L PASS Fold + iPad** (L1 4.1/4.5 s, L2 2.5/2.8 s).
+- SCAN dev/test/scan-q-hold.py family B now 7 rows (4 j93 kmFree hosts + kmBusy + jdayq gate (c) #ov + DF.play; tap gate / newsHold listed as bounded): **LIVE 7 of 7 uncovered → branch 0 of 7**.
+- s9e tintrong «Lui» ×3 (no qs block, ckpt after the event): not reproduced; likely the same scene-wait loop (news card re-shown while the night scene waits) — covered by reasoning only.
+- s2e noturn ×49 (25/11 18:16, older build, no qs/DQ block): count only, not diagnosable.
+
+### Open: one Fold K FAIL on 9246cfdd (gate chain g2, before merges)
+«the queued scene never played» with KMQ 0, want null, dropped 1: the buổi turned another way while held, and the test loop breaks on a turn before it sees #tstkm. K does not touch #ov / DF.play, so likely timing, but NOT measured yet: run CASES=K REPEAT=6 on the branch (the chain below has it). If it repeats, trace who turned the buổi (dqWait dropped = bkey changed while held).
+
+### Why the gate chain is not done — the test needs one more adaptation to LIVE ≥ f009e1a6
+LIVE now starts a life with the «Luân hồi» roulette (#kroul) + daily selection scenes (tuyển tú) in buổi 0. (1) Fixed in c7525e14: tapAny skips #kroul. (2) STILL OPEN: each case that ends at buổi ≥ 2 calls newLife(), which now runs the whole heavy selection flow (GPU ~95 % / renderer ~80 % CPU in headless); on fac74a68 the chain did only A PASS then **B FAIL «setup: turn not held ({scene:true, want:null, bk:"0.0"})»** in 30 min — newLife returned while still in buổi 0 with a scene. Next owner: make newLife() wait until a normal day (S.buoi===1, turn after the selection, nothing on screen; loop longer than 8 × 900 ms, tapping like the robot), or start cases without a new life when buoi ≥ 2 is not needed. Run the SAME test file on LIVE 02f564ae first to prove it before comparing.
+
+### HANDOVER → successor (D opens it): gates ALONE on review/dayq-qsoftlock fac74a68 (or later if LIVE moves: merge main first, take main's built files, `python3 dev/build/assemble.py` + `CTM_CHANGE="$(cat dev/site/CHANGE.txt)" bash dev/site/build_site.sh`, commit)
+1. Fix sangbuoi-held newLife for the new life start (above), test only, push. 2. Chain ALONE (my runner script, rewrite it from this list; run it with `setsid nohup` so a 2 h tool limit does not kill it): sangbuoi-held full A–L Fold+iPad · CASES=A REPEAT=12 branch AND LIVE (same test file; land only if branch fails ≤ LIVE) · CASES=JKL on LIVE (before column) · CASES=K REPEAT=6 branch · dayq-ghost · dayq-hold (UTF-8 server, dev/index.html) · dayq-order · dayq-hold-coop · dayq-break · coop-e2e ×2 (out dir arg) · quickcheck `node dev/tools/quickcheck.js <wt> <live wt>/index.html --out <dir> --runs 5`. 3. FULL videos Fold 755x1000 + iPad 1180x820 of J, K, L (a preload that adds recordVideo to every newContext works: `node -r <preload.js> dev/test/sangbuoi-held.js …` with CASES=JKL, VIDDIR) → CDN img/_review/dayq-qsoftlock/ (python3 dev/site/cdn_sync.py img/_review/dayq-qsoftlock). 4. SSK here + to Foreman D (session_01D3E3NaVk7n7f8KTo2enJna) → ONE opus BIG reviewer (brief «ROLLOVER RV-CRS» above + the SSK). 5. On PASS: «LAND READY review/dayq-qsoftlock <sha> (FF from LIVE)» + video URLs → D.
+Recipe: UTF-8 server (python SimpleHTTPRequestHandler, `.html/.js/.json` → `; charset=utf-8`), one for the branch worktree and one for a LIVE worktree (detached origin/main, run assemble.py there too for dev/index.html). Never run two gates at once. Worktrees /home/user/wt/qs (branch) and /home/user/wt/live are mine; delete when done.
