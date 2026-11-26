@@ -60,7 +60,7 @@ Object.assign(BAL,{eff:{
  j99succ:{},
  jact:{hpTop:30,sungGo:-1},
  jagent:{evGo:1},
- jaudit:{run:-3,f:-10,f_2:-10,f_3:-5,evN:1,evRun:1,evF:-2},
+ jaudit:{f:-10,f_2:-10,f_3:-5,evN:1,evF:-2},
  jcmaid:{evD:1,evD_2:1,loyalTop:1,loyalTop_2:1,loyalTop_3:1},
  jcoopworld:{briber:-5,evBriber:1},
  jcycle:{evG:2,evG_2:1,evG_3:1,evTop:1},

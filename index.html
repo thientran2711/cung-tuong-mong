@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt.","b":"5ab5b80e406e","h":[{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"},{"s":"4da55ce8+","t":"2026-11-25T04:14Z","c":"flight-modal-deadlock review: dead-card.js parts 2/3 open the card as a player tap (DQ.user) — after merging main 49f17d4d the jdayq day-qu…"}]};
+window.CTM_BI={"s":"aa37de21+","t":"2026-11-26T10:49Z","c":"STACK LAND home-way-nits 0e71fdbc onto freeze slot 1dcb373e (built files only; rebuilt); CHANGE line LC20 (MAIN 154 OK)","b":"11abab7b6777","h":[{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1546,7 +1546,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    {n:"Thỉnh an, chép kinh",lock:(S.buoi||0)!==0,t:"chỉ buổi sáng",c:{suc:-5},o:od(BAL.odb.j2.odO_6),w:{th:8,danh:2,duc:1},l:{th:-2}},
    {n:"Xin Thái hậu đỡ lời",o:od(BAL.ag.cx.thHelp.o+S.th/BAL.ag.cx.thHelp.div),lock:S.th<BAL.ag.cx.thHelp.min,t:`cần Thái hậu ${BAL.ag.cx.thHelp.min}`,w:{...BAL.ag.cx.thHelp.w},x:"Hoàng hậu nể mặt",l:{...BAL.ag.cx.thHelp.l}},
    P3C.tell(S,t)]}
- if(p.kind==="hh"){return topicOpts(v).filter(a=>["Hỏi han sức khỏe","Tạ lỗi","Nhún nhường","Chia sẻ bí mật"].includes(a.n)).concat([
+ if(p.kind==="hh"){return topicOpts(v).filter(a=>["Hỏi han sức khỏe","Tạ lỗi","Nhún nhường","Chia sẻ bí mật","Nhờ giúp đỡ"].includes(a.n)).concat([
    {n:"Thỉnh an",lock:(S.buoi||0)!==0,t:"chỉ buổi sáng",c:{suc:-5},o:od(BAL.odb.j2.odO_19),w:{hh:4,danh:2,duc:1},l:{hh:-3},go:()=>{v.ghen=cl(v.ghen-5,0,100)}},
    {n:"Xin Hoàng hậu che chở",lock:S.hh<BAL.ag.cx.hhShield.min,t:`cần Hoàng hậu ${BAL.ag.cx.hhShield.min}`,o:od(BAL.ag.cx.hhShield.o+S.hh/BAL.ag.cx.hhShield.div),w:{...BAL.ag.cx.hhShield.w},x:`${BAL.ag.cx.hhShield.sh} tháng phi tần khó hại ngươi`,l:{...BAL.ag.cx.hhShield.l},go:()=>S.shield=BAL.ag.cx.hhShield.sh},
    {n:"Khiêu khích",o:100,w:{danh:2,hh:-15},x:`Hoàng hậu ghen +15, oán ngươi ${balSg(BAL.eff.j2.go)}`,go:()=>{ghenUp(v,15,"bị ngươi khiêu khích",S);oanAdd(v,S,BAL.eff.j2.go)}}])}
@@ -3999,7 +3999,7 @@ function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=li
  if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:`thành: oán ${balSg(BAL.eff.j9.run_8)}`,run:()=>{chatMark(v);if(!netForgive(v,S))return netRefused(S,v,"hạ mình tạ lỗi với")+".";oanAdd(v,S,BAL.eff.j9.run_8);return `Ngươi hạ mình tạ lỗi. ${v.name} oán ${balSg(BAL.eff.j9.run_8)}.`}});
   A.push({n:"Nhún nhường",o:100,c:{...BAL.ag.cx.humble.c},x:`thành: oán -${BAL.ag.cx.humble.oanDown} · nàng quý ngươi +${BAL.ag.cx.humble.aff}`,run:()=>{if(!netForgive(v,S)){chatMark(v);return netRefused(S,v,"nhún nhường trước")+"."}oanAdd(v,S,-BAL.ag.cx.humble.oanDown);affAdd(v,S,BAL.ag.cx.humble.aff);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán -${BAL.ag.cx.humble.oanDown}, nàng quý ngươi +${BAL.ag.cx.humble.aff}.`}})}
  A.push({n:"Giúp đỡ nàng",c:{bac:-20},o:100,x:`nàng quý ngươi ${balSg(BAL.eff.j9.run_11)} · oán ${balSg(BAL.eff.j9.run_12)}`,run:()=>{relAdd(S,v,BAL.eff.j9.run_11);oanAdd(v,S,BAL.eff.j9.run_12);chatMark(v);return `Ngươi giúp ${v.name} việc khó. Nàng quý ngươi ${balSg(BAL.eff.j9.run_11)}.`}});
- if(same)return A.filter(a=>["Hỏi han sức khỏe","Bàn tán về "+(third?third.name:""),"Tạ lỗi","Nhún nhường"].includes(a.n)).concat([{n:"Cùng cung",o:100,fix:1,lock:true,t:"không thể lấy lòng hay ra tay",x:""}]);
+ if(same)return A.filter(a=>["Hỏi han sức khỏe","Bàn tán về "+(third?third.name:""),"Tạ lỗi","Nhún nhường","Nhờ giúp đỡ"].includes(a.n)).concat([{n:"Cùng cung",o:100,fix:1,lock:true,t:"không thể lấy lòng hay ra tay",x:""}]);
  return A}
 /* harms that need the place: food served, the lotus pond, her palace while she is away, overhearing */
 const FOOD=["kn","tn","home","dtd"];
@@ -5560,7 +5560,7 @@ const HARMK={"Dò la":"spy","Tung tin đồn":"rumor","Bỏ độc vào trà nà
 AOUT.trip=["nàng vấp ngã: Danh nàng -3 (có thai: có thể động thai)","bị thấy: nàng oán ngươi"];AOUT.pushp=["nàng rơi xuống hồ sen, Sức nàng giảm mạnh","bị lộ: bị phạt, nàng oán"];
 const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|phật ý|bị khám|tội|ban chết|sẽ)/;
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);const v=p&&p.ref;return A.map(a=>{a=Object.assign({},a);if(HARMK[a.n])a.k=HARMK[a.n];
-  if(a.n==="Nhờ giúp đỡ"&&v&&aff(v,S)<netTh(v,"than")){a.lock=true;a.t=`cần nàng quý ngươi 30 (đang ${aff(v,S)})`}
+  if(a.n==="Nhờ giúp đỡ"&&v&&aff(v,S)<netTh(v,"than")){a.lock=true;a.t=`cần nàng quý ngươi ${netTh(v,"than")} (${knows(v)?"đang "+aff(v,S):(typeof KIT_REL==="object"&&KIT_REL.unknown)||"chưa rõ"})`}
   if(a.n==="Cảnh báo nàng"&&/không có căn cứ/.test(a.x||"")){a.lock=true;a.t="chưa biết ai đang hại nàng"}
   if(a.open&&!S.inv.some(e=>!e.h)){a.lock=true;a.t="rương trống"}
   if(/^Bàn tán về/.test(a.n)&&/mách lại/.test(a.x||"")){a.x="";a.x=`nàng quý ngươi ${balSg(-BAL.talk.gossip.miss)}`;a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} oán ngươi ${balSg(BAL.talk.gossip.tellOan)}: ${chanceW(BAL.talk.gossip.tell)}`}
@@ -6725,7 +6725,6 @@ Object.assign(BAL,{
  mortx:{youngAge:6},    /* a child younger than this dies of pox / fever / plague in the death line, older of "lâm bệnh" (jmort) */
  ly:{npcAge:{tgk:36,ttp:36}},        /* fixed ages of the Tân Giả khố steward and the Thượng thư phòng tutor (jly NPCFIX) */
  cmaidx:{age:16,ageR:7},             /* close-maid candidates offered to pick: age = age + R(ageR) */
- audit:{loan:30},       /* bạc a friendly consort lends on "Nhờ giúp đỡ" (jaudit; j9's base option types the same 30) */
  m90:{kidAge:14},       /* an unknown person younger than this shows the child silhouette (j90) */
  m72:{bdOk:{danh:3}}    /* quest fam_bd (Bắc Địch father: open a horse market): Danh on success */
 });
@@ -7022,7 +7021,7 @@ Object.assign(BAL,{eff:{
  j99succ:{},
  jact:{hpTop:30,sungGo:-1},
  jagent:{evGo:1},
- jaudit:{run:-3,f:-10,f_2:-10,f_3:-5,evN:1,evRun:1,evF:-2},
+ jaudit:{f:-10,f_2:-10,f_3:-5,evN:1,evF:-2},
  jcmaid:{evD:1,evD_2:1,loyalTop:1,loyalTop_2:1,loyalTop_3:1},
  jcoopworld:{briber:-5,evBriber:1},
  jcycle:{evG:2,evG_2:1,evG_3:1,evTop:1},
@@ -55663,14 +55662,14 @@ function sentPenNow(a,t,k){return WHY_NOSEND.includes(k)?0:actCtx(a,t,k).pen}/* 
 
 /* 2. NO SILENT RANDOM TARGET for her acts (owner 08:45Z). The person an act lands on is named on the card ("về: …"):
    - Phế phi "Hỏi chuyện cũ": she tells of the consort with the most real deeds (j78deeds), else the one most hostile to her (was: pick()).
-   - "Nhờ giúp đỡ": the consort she would tell about is the one she likes least (was: the first in the list, unnamed). */
+   (- "Nhờ giúp đỡ": moved to the one rule helpAsk, jrcv — help-housemate.) */
 function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v=>typeof j78deeds==="function"?j78deeds(v).length:0;
  return L.slice().sort((x,y)=>(d(y)-d(x))||(danger(y,S)-danger(x,S))||(x.id-y.id))[0]}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{
  if(p&&p.kind==="fallen"){const i=A.findIndex(a=>a.n==="Hỏi chuyện cũ");const x=aaFallenT();if(i>=0&&x){const nm=(x.queen?"Hoàng hậu ":RANKS[x.rank].n+" ")+x.name;
   A[i]=Object.assign({},A[i],{x:`về: ${nm} · biết 1 điều thật về nàng · chứng cứ ${balSg(BAL.eff.jaudit.evN)} nếu nàng từng làm điều sai`,go:()=>{let f="";try{f=typeof intelLearn==="function"?intelLearn(x,1,{by:"Phế phi",how:"Hỏi chuyện cũ"}):""}catch(e){}const n=evA(S,x,BAL.eff.jaudit.evN);try{evdSync()}catch(e){}log(`Phế phi kể chuyện của ${nm}: ${f||"một chuyện cũ"}${n?` Chứng cứ ${balSg(BAL.eff.jaudit.evN)}.`:" Không có gì làm chứng cứ."}`)}})}}
- if(p&&(p.kind==="rival"||p.kind==="hh")&&p.ref){const v=p.ref;const i=A.findIndex(a=>a.n==="Nhờ giúp đỡ");if(i>=0){const x=liveRivals(true).filter(y=>y!==v).sort((a,b)=>aff(v,a)-aff(v,b))[0];
-  if(x)A[i]=Object.assign({},A[i],A[i].lock&&/cần thiện cảm 30/.test(A[i].t||"")&&!knows(v)?{t:`cần thiện cảm 30 (${KIT_REL.unknown})`}:{},{x:`nàng cho mượn Bạc +${BAL.audit.loan} hoặc kể chuyện về ${x.name} (chứng cứ ${balSg(BAL.eff.jaudit.evRun)} nếu ${x.name} từng làm điều sai)`,run:()=>{chatMark(v);if(aff(v,S)>=netTh(v,"than")){if(roll(50)&&v.bac>=BAL.audit.loan){ap(v,{bac:-BAL.audit.loan});apply({bac:BAL.audit.loan});return `${v.name} cho ngươi mượn ${BAL.audit.loan} lượng.`}return evA(S,x,BAL.eff.jaudit.evRun)?`${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ ${balSg(BAL.eff.jaudit.evRun)}.`:`${v.name} kể chuyện về ${x.name}: không có gì sai trái, chỉ biết ${harmTxt(x)}.`}affAdd(v,S,BAL.eff.jaudit.run);return `${v.name} khéo từ chối. Thiện cảm ${balSg(BAL.eff.jaudit.run)}.`}})}}}catch(e){console.error(e)}return A}})();
+ /* «Nhờ giúp đỡ» is NOT rewritten here any more (help-housemate, law 1): her talk card runs the ONE rule helpAsk (j9 topicOpts → jrcv), the same 4 receiver answers as an NPC cx2:help; the old loan/tell copy (BAL.audit.loan, a 50/50 roll) is gone */
+}catch(e){console.error(e)}return A}})();
 
 /* 3. HIDDEN RISK of sending a servant (act audit): when she is not with the target, a consort act is done by her best servant
    (runAct → bestSent). For harm acts he may be caught (confessRisk): he confesses (the target holds 1 more chứng cứ against her)
@@ -86478,7 +86477,7 @@ agReg("consort","cx2",(v,N,need)=>{const O=[];const X=BAL.ag.cx2;if(v===S||v.out
  if(!need||need==="spite"){const L=T.filter(t=>(t.pg||0)>=X.vent.pg&&sp(t)>0&&(v.ghen||0)>0);if(L.length&&agcCan(v,X.vent.c)){const t=mindPickBy(L,x=>sp(x),v);const u=agcU(v,N,100,X.vent.g,X.vent.c,"punish");if(t&&u>0)O.push({k:"cx2:vent",t,u,tag:"punish",act:"trút giận",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}
  if(!need||need==="spite"||need==="safe"){const L=T.filter(t=>sp(t)>0);if(L.length){const t=mindPickBy(L,x=>sp(x),v);const o=odA(v,cx2O(v,"chest"));const u=agcU(v,N,o,X.chest.g,{},"scheme",{"danh":2});
   if(t&&u>0)O.push({k:"cx2:chest",t,u,tag:"scheme",act:"lén lục rương tìm chứng cứ",at:(kh,vv,tt)=>palaceOf(tt)})}}
- if(!need||need==="bac"||need==="safe"){const L=T.filter(t=>t!==S&&aff(t,v)>=netTh(t,"than"));if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+aff(x,v),v);const u=agcU(v,N,100,X.help.g,{},"social");
+ if(!need||need==="bac"||need==="safe"){const L=T.filter(t=>aff(t,v)>=netTh(t,"than")&&!(t===S&&rcvHelpWait(v)));/* law 1 (help-housemate): she can be asked too (helpAsk → her «Lời nhờ» card), never twice by one asker while her answer waits */if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+aff(x,v),v);const u=agcU(v,N,100,X.help.g,{},"social");
   if(t&&u>0)O.push({k:"cx2:help",t,u,tag:"social",act:"sang nhờ giúp đỡ",at:(kh,vv,tt)=>agAt(tt,kh)})}}
  /* her confidant maid (Tâm sự / Sai đi dò la, j2 maid card) and the servants of other palaces (Mua chuộc / Cài người, j10 Người hầu tab) */
  const m=v.maid;if(m&&m.loyal!=null){if((!need||need==="safe")&&m.loyal<X.maidTalk.below){const u=agcU(v,N,100,X.maidTalk.g,{},"help");if(u>0)O.push({k:"cx2:maidTalk",t:null,u,tag:"help",act:"tâm sự với cung nữ thân tín",at:()=>palaceOf(v)})}
@@ -86487,6 +86486,8 @@ agReg("consort","cx2",(v,N,need)=>{const O=[];const X=BAL.ag.cx2;if(v===S||v.out
   if(L.length){const t=mindPickBy(L,x=>sp(x),v);const s=t&&ag2BribeS(v,t);if(s){const c=(typeof nv==="function"?nv(s,"bribeCost"):30)||30;if((v.bac||0)>=c){const u=agcU(v,N,odA(v,35-(s.loyal||0)/3+(v.tamco||0)/X.bribeSrv.tcDiv),X.bribeSrv.g,{"bac":-c},"scheme");if(u>0)O.push({k:"cx2:bribeSrv",t,u,tag:"scheme",act:"mua chuộc kẻ hầu cung khác",at:()=>palaceOf(v)})}}
    if(t&&(v.bac||0)>=X.plantSrv.cost&&typeof bestSent==="function"&&bestSent(v)&&(!need||need==="spite")){const u=agcU(v,N,odA(v,40+(v.tamco||0)/X.plantSrv.tcDiv),X.plantSrv.g,{"bac":-X.plantSrv.cost},"scheme");if(u>0)O.push({k:"cx2:plantSrv",t,u,tag:"scheme",act:"cài người vào cung khác",at:()=>palaceOf(v)})}}}
  return O});
+/* a «Lời nhờ» card of asker v still waiting for HER answer (the kit notice list S.rcvPend or the parallel-time order list) */
+function rcvHelpWait(v){const w=x=>x&&x.pid==="rcvHelp"&&x.pp&&x.pp.a===v.id;return (S.rcvPend||[]).some(w)||(typeof ptOrdQ==="function"&&(ptOrdQ()||[]).some(w))||(typeof Q!=="undefined"&&Q.some(d=>d&&d.pid==="rcvHelp"&&d.pp&&d.pp.a===v.id))}
 function ag2BribeS(v,t){const L=(t.staff||[]).filter(s=>s&&s.spyFor!==key(v));return L.length?mindPickBy(L,s=>Math.max(1,100-(s.loyal||0)),v):null}
 agRunReg("cx2:maidTalk",v=>{const m=v.maid;if(!m)return"";m.loyal=cl((m.loyal||0)+BAL.ag.cx2.maidTalk.w.maid,0,100);return ag2Res(v,"maidTalk",1,`${v.name} tâm sự với ${m.name}`)});
 /* cx2:maidSpy runner: jagacts3 (spyRoll, one rule with jwhy "Sai đi dò la"); the old flat-odds copy is gone (review ag-all-2 r2 A1) */
@@ -100499,7 +100500,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5ab5b80e406e";window.CTM_BUILD=BUILD;
+const BUILD="11abab7b6777";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
