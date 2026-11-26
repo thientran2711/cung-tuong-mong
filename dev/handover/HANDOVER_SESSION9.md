@@ -419,3 +419,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 23:08Z 164 relays: sếp ~23:00Z monthly palace-mean adjust → ~23:05Z FINAL by %: per rank group monthly, if top > T (= rank ceiling × 0.85) scale everyone by T/top (ratios kept) → PACE-SPEED (replaces its 25 % drift build 2e59a19e). Sếp ~23:02Z «Sắc phong 5/32 tuần» = 5 weeks PASSED / 32 total → HUD-SACPHONG told by 164.
 - 23:08Z KK49 KIT OK K-LIST-PAGE 1466caa7 (also 303611f2/8f1fd91c) written in FOREMAN_D_STATUS → D BIG rv. KK49 next: R6 kit review.
 - ~23:08Z OWNER: rescale covers all 6 HUD stats (Sắc Tài Tâm cơ Đức Danh Sủng) → OD fixed; PACE-SPEED told.
+- 23:11Z HUD-SACPHONG 51ddb3c7 (on d-stack-lr3; jhudsp.js reads pbNextKy/BAL.promoR.ky only; X passed/Y gap). D asked for pbDlNext() peek. MAIN rec applied: retire stage chip «Kỳ thăng: n tháng» (kitPromoChip) when the HUD slot lands — same fact, one place. Slot placement → KK49.
