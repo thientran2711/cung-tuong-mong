@@ -21,10 +21,10 @@ function kipItem(e){const a=typeof giftArt==="function"?giftArt(e):{src:"",grade
  const use=e&&e.wk?(typeof WTIER!=="undefined"?WTIER[e.wk.ti]:""):String(it.d||"").replace(/\s*·\s*(Thường|Tinh phẩm|Trân phẩm|Tuyệt phẩm|Ngự tứ)\s*$/,"");/* reviewer r1: IT.d ends with the grade word, already on the tile's grade line (was shown twice) */
  return{src:a.src||(typeof kitItemSrc==="function"?kitItemSrc(e.k):""),grade:g,gname:a.gradeName||G.n||"",col:G.c||"",name,kind,use,silk:it.kd==="Vải vóc"||/lụa|gấm|vải|sa\b/i.test(name)}}
 function kipLocked(c){return !!(c&&(c.lock||(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)))}
-function kipTile(c,i,on){const e=S.inv[c.ik],I=kipItem(e),lock=kipLocked(c);
+function kipTile(c,i,on,q){const e=S.inv[c.ik],I=kipItem(e),lock=kipLocked(c);
  const mark=e&&e.t?["đã tẩm","r"]:null;
  return `<div class="kshc kshpick kipc${lock?" kshno":""}${on?" on":""}" role="radio" aria-checked="${on?"true":"false"}" data-kip="${i}">`+
-  `<button type="button" class="kshpic" data-kip="${i}" aria-label="${kipE(I.name)}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot",tip:I.name,mark})}</button>`+
+  `<button type="button" class="kshpic" data-kip="${i}" aria-label="${kipE(I.name)}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot",tip:I.name,mark,qty:q>1?q:undefined})}</button>`+
   `<span class="kshn"${I.col?` style="color:${I.col}"`:""} title="${kipE(I.name)}">${kipE(I.name)}</span>`+
   `<span class="kshe" title="${kipE(I.use)}">${kipE(I.use)}</span></div>`}
 /* the detail: the option's own decorated kit card (a display copy: name, odds, Tốn / Được / Mất / Kèm or the reason) + the confirm button.
@@ -45,7 +45,11 @@ function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=
    kit pager of §23 (‹ › + «trang N/M», kitPicker's .kpkwrap/.kpkpg/.kpkpn look; no count). Doable first, then the dialog's order (unchanged). */
 /* the cards the base dialog draws (j3 showModal): never saved with the queue (not enumerable) */
 function kipOnlySet(m,v){Object.defineProperty(m,"kipOnly",{value:v,writable:true,configurable:true,enumerable:false});return v}
-function kipList(m){const L=m.opts.map((c,i)=>[c,i]).filter(([c])=>c&&c.ik!=null&&S.inv[c.ik]);L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));return L}
+function kipList(m){const L=m.opts.map((c,i)=>[c,i]).filter(([c])=>c&&c.ik!=null&&S.inv[c.ik]);L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));
+ /* inv-stack (jstack, review/inv-stack-rv, Foreman B — its rule, kept as written; a no-op until jstack lands): pieces of one kind-and-source with
+    the same offer = ONE tile with the kit stack badge ×N (kitItem qty) — the real pieces in the chest + the ones in her stack; the tile picks the first real piece */
+ const D=new Map(),SEEN=new Set(),L2=[];for(const x of L){const e=S.inv[x[0].ik];const s=typeof invCan==="function"&&invCan(e)?[invSig(e),kipLocked(x[0]),x[0].n||"",x[0].x||""].join("#"):null;
+  if(s&&D.has(s)){D.get(s)[2]++;continue}const o=[x[0],x[1],1+(s&&typeof invMoreOnce==="function"?invMoreOnce(S,e,SEEN):0)];if(s)D.set(s,o);L2.push(o)}return L2}
 function kipSel0(m,L){let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}return sel}
 function kipCard(M,m,i){const ops=M.querySelector(".opts");if(!ops||ops.querySelector(`:scope>.opt[data-m="${i}"]`))return;const c=m.opts[i];if(!c)return;
  kipOnlySet(m,(m.kipOnly instanceof Set?m.kipOnly:new Set())).add(i);ops.insertAdjacentHTML("beforeend",optBtnHTML(c,i));try{kitFix(M)}catch(e){console.error("kipCard",e)}}
@@ -53,7 +57,7 @@ function kipSelect(M,m,i){KIP_SEL.set(m,i);kipCard(M,m,i);M.querySelectorAll(".k
  M.querySelector(".kipw").classList.add("has");kipDetail(M,m,i)}
 function kipPage(M,m,pg){const w=M.querySelector(".kipw");if(!w)return;const L=w.__kipL||kipList(m),per=Math.max(1,BAL.kip.page|0),pages=Math.max(1,Math.ceil(L.length/per));
  pg=Math.min(Math.max(0,pg|0),pages-1);w.dataset.pg=pg;const sel=KIP_SEL.get(m);
- w.querySelector(".kipg").innerHTML=L.slice(pg*per,(pg+1)*per).map(([c,i])=>kipTile(c,i,i===sel)).join("");
+ w.querySelector(".kipg").innerHTML=L.slice(pg*per,(pg+1)*per).map(([c,i,q])=>kipTile(c,i,i===sel,q)).join("");
  const B=w.querySelectorAll(".kpkpg");B.forEach(b=>{b.hidden=pages<2;b.disabled=b.dataset.kippg<0?pg<=0:pg>=pages-1});
  const n=w.querySelector(".kpkpn");if(n)n.textContent=pages>1?`trang ${pg+1}/${pages}`:""}
 function kipBuild(){const m=Q[0],M=$("modal");if(!M||M.hidden||!kipOn(m))return;const ops=M.querySelector(".opts");if(!ops||M.querySelector(".kipw"))return;
