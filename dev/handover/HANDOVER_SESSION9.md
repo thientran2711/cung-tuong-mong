@@ -3794,3 +3794,4 @@ LOAD: main running 0 own workers (owner bugs/UI/go-live only) | B seats 9/12 (sa
 - ~04:16Z LC19 HANDOVER DONE e71daca4 → archived. LC20 = session_01V1ZZH13F8jspwmPUsgb4Gg (152 child, opus): re-stack OB-KIEP 87bc8942 + prepare a9 «A» (hold) on f009e1a6; pushes need a human OK (her words in LC20 chat or main pushes itself under standing permission).
 - ~04:28Z SẾP bug: top-bar «Về phòng» = «Về <place>» (jk3 #k3room), no home icon, overstay cấm túc 2 months too heavy, no fault ⇒ no punishment, pets no time → OD row; HOME-WAY = session_01V1ZZH3KBeUcSLSUiQfAU1w (152 child, opus, review/home-way); pets → E-d report add.
 - ~04:30Z SẾP STANDING PERMISSION «cho phép đưa lên live, từ nay bản nào qua kiểm thì cứ đưa lên» → OD row; MAIN pushes main itself from lander-staged shas. Told LC20.
+- ~04:32Z SẾP «Q5 A» → OD:L353 overwritten in place; LC20 builds a9 A (c0f41387 + 346da1ae on f009e1a6) → MAIN pushes.

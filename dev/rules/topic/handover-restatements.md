@@ -151,7 +151,7 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [HO/OWNER_LEDGER.md:L26] | High-res previews, one face per file; screenshots only on the approved current layout; Fold + iPad shots together | OD:L67, L98, L146 |
 [HO/OWNER_LEDGER.md:L27] | Supported screens 755x1000, 1000x755, 1180x820, 1366x1024, 844x390 (+390x844 rotate prompt); one layout per orientation, scaled | OD:L339, L345, L346 |
 [HO/OWNER_LEDGER.md:L28] | No review queue: whichever passes first goes live; one reviewer per branch, many in parallel | OD:L347, L389 |
-[HO/OWNER_LEDGER.md:L29] | Pace stays 16 khắc/week (~188 weeks to HH) | OD:L353 |
+[HO/OWNER_LEDGER.md:L29] | Pace = BALANCE-PACE option A (owner «Q5 A» 26/11) | OD:L353 |
 [HO/OWNER_LEDGER.md:L30] | Relation colours: others→me purple #7a4fa0, me→others blue #2f6f9f (kitRel) | OD:L354 |
 [HO/OWNER_LEDGER.md:L31] | Everything two-way, NPCs same rules, real causes (no bare luck), true info only | HO:L46, AM:L38 |
 [HO/OWNER_LEDGER.md:L32] | Every feature must work in 2-player co-op, no "later" | OD:L594 |
