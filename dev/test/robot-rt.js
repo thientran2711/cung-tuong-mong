@@ -42,6 +42,10 @@ const LEAVE_RE = /màn đầu|bỏ phòng|rời phòng|thoát phòng|rời khỏ
 const NAV_RE = /^(ô lưu|lưu sổ|chọn sổ|đổi sổ|thiết lập|sổ luân hồi|bảng vàng|cùng hảo hữu|hảo hữu|☰|giữ sổ|nối sổ|ám hiệu|xóa|xoá|âm thanh|nhạc)(?![\p{L}])/iu;
 const isNav = x => !x.card && !x.inOpts && NAV_RE.test(x.t); const isLow = x => !x.card && !x.inOpts && LOW_RE.test(x.t);
 const ODDS = { 'mong manh': 0, 'hiểm': 1, 'khó lường': 2, 'tùy duyên': 3, 'có cơ': 4, 'vững': 5, 'rất vững': 6, 'liều': 0, 'khó': 1, 'năm ăn năm thua': 3, 'khá chắc': 4, 'chắc': 5, 'rất chắc': 6, 'nắm chắc': 6 };
+/* ODDS OF AN OPTION (FIXER #10, family of FOREMAN E 12:12Z): the kit card's own odds word (.kodds, field od) when it has one — exact ladder word; else the best
+   ladder word in the label (old cards / plain buttons). Before: any ladder word anywhere in the label counted, so the HINT text moved persona weights
+   («hòa ước vững» = Vững, «khó xử» = Khó, «liều mình» = Liều). */
+const oddsOf = x => { const od = String(x.od || '').toLowerCase().replace(/\s+/g, ' ').trim(); if (od && ODDS[od] != null) return ODDS[od]; const src = (od || String(x.t || '')).toLowerCase(); const m = Object.keys(ODDS).filter(k => src.includes(k)).map(k => ODDS[k]); return m.length ? Math.max(...m) : 3 };
 
 function Seat(C) {
 let URL0 = C.url; const URL_GIVEN = C.url; const DEV = C.dev || 'fold', BOT = C.bot || 'sens', SEED = +C.seed || 1, LIFE = C.life || ['rt', C.origin || 'any', BOT, DEV, SEED].join('-');
@@ -134,7 +138,7 @@ const SCAN = () => {
   window.__rtBtns = btns.map(x => x.e);
   let S0 = null; try { S0 = typeof S !== 'undefined' && S ? { dead: !!S.dead, y: S.year, t: S.turn, w: S.tuan, b: S.buoi || 0, age: S.age, rank: ((typeof isSrv === 'function' && isSrv() && S.srv) ? 'maid ' + S.srv.rk : S.rank), name: S.name } : null } catch (e) {}
   return { layer: lay === document.body ? 'page' : (lay.id ? '#' + lay.id : '.' + String(lay.className).split(' ')[0]), title: ((lay.querySelector && lay.querySelector('h2,h3,.kh,.ttl')) || {}).textContent ? lay.querySelector('h2,h3,.kh,.ttl').textContent.trim().slice(0, 50) : '',
-    b: btns.map((x, i) => ({ i, cl: !x.p.hit && !!x.p.clipped, inOpts: !!(x.e.closest && x.e.closest('.opts,.kpopts')), det: !!(x.e.closest && x.e.closest('.kshdet')), t: txt(x.e).slice(0, 90), id: x.e.id || '', c: String(x.e.className || '').slice(0, 40), d: Object.keys(x.e.dataset).join(','), inp: x.e.tagName === 'INPUT', hole: gate && !tut.contains(x.e), card: x.e.matches(CARD_SEL), hit: x.p.hit, px: x.p.hit ? Math.round(x.p.x) : null, py: x.p.hit ? Math.round(x.p.y) : null, deadSuspect: !x.p.hit && x.p.full && x.p.foreign ? x.p.cover : null, x: /kit-x|kclose/.test(x.e.className) || /^(✕|×)$/.test(txt(x.e)) || x.e.hasAttribute('data-km-close') /* F #11 12:45Z (b): the reward stage #kmrew «Nhận» (j93 data-km-close) IS its close — no «no close» false positive */ })),
+    b: btns.map((x, i) => ({ i, cl: !x.p.hit && !!x.p.clipped, inOpts: !!(x.e.closest && x.e.closest('.opts,.kpopts')), det: !!(x.e.closest && x.e.closest('.kshdet')), t: txt(x.e).slice(0, 90), od: (() => { const o = x.e.querySelector && x.e.querySelector('.kodds'); return o ? txt(o).slice(0, 20) : '' })() /* the card's own odds word (kit .kodds) — persona weights read it, not words in the hint (FIXER #10) */, id: x.e.id || '', c: String(x.e.className || '').slice(0, 40), d: Object.keys(x.e.dataset).join(','), inp: x.e.tagName === 'INPUT', hole: gate && !tut.contains(x.e), card: x.e.matches(CARD_SEL), hit: x.p.hit, px: x.p.hit ? Math.round(x.p.x) : null, py: x.p.hit ? Math.round(x.p.y) : null, deadSuspect: !x.p.hit && x.p.full && x.p.foreign ? x.p.cover : null, x: /kit-x|kclose/.test(x.e.className) || /^(✕|×)$/.test(txt(x.e)) || x.e.hasAttribute('data-km-close') /* F #11 12:45Z (b): the reward stage #kmrew «Nhận» (j93 data-km-close) IS its close — no «no close» false positive */ })),
     lr: (() => { const r = (lay === document.body ? document.documentElement : lay).getBoundingClientRect(); return { x: Math.max(0, r.left), y: Math.max(0, r.top), w: Math.min(W, r.right) - Math.max(0, r.left), h: Math.min(H, r.bottom) - Math.max(0, r.top) } })(),
     code: !(S0 && S0.name && !S0.dead) ? ((document.body.innerText || '').match(/Ám hiệu\s*:?\s*([A-Z0-9]{4})(?![A-Za-z0-9])/) || [])[1] || null : null,
     scr: lay === document.body ? null : (() => { /* the scroller with the MOST left to scroll (E (J) E-S5 «Tin báo · Đã xem hết»: the first scroller found was already at its end while the long list below was not → no scroll, 15 min stuck); its visible middle is where the wheel goes */ let best = null; for (const el of [lay, ...lay.querySelectorAll('*')]) { if (el.scrollHeight > el.clientHeight + 8 && /(auto|scroll)/.test(getComputedStyle(el).overflowY)) { const c = clip(el); /* the VISIBLE part through every clipping ancestor (BIG REVIEWER #5: «Tin báo» .opts scrolls inside itself but .k3right clips it out — the wheel went to the list above, which does not scroll, forever) */ const top = c.y0, bot = c.y1; if (bot - top < 40 || c.x1 - c.x0 < 40) continue; const o = { x: (c.x0 + c.x1) / 2, y: (top + bot) / 2, left: Math.round(el.scrollHeight - el.clientHeight - el.scrollTop) }; if (!best || o.left > best.left) best = o } } return best })(),
@@ -558,8 +562,8 @@ async function play(p) {
       /* CHOICE POINTS (FIXER #10, family scan of FOREMAN E 12:12Z «Hòa ước»): every dialog choice with ≥ 2 eligible options is logged once per (screen, options) with
          how often each was taken; dev/test/rt-choice-scan.js recomputes each persona's weights from the labels and lists options a persona can never reach */
       const r = BOT === 'rand' || list.length === 1 ? pick(list) : null;
-      const out = r || (() => { const sc = list.map(x => { const m = Object.keys(ODDS).filter(k => x.t.toLowerCase().includes(k)).map(k => ODDS[k]); const o = m.length ? Math.max(...m) : 3; const w = BOT === 'bold' ? 7 - o : BOT === 'cautious' ? o * 2 : o; return { x, w: w + rnd() * 3 } }); sc.sort((a, b) => b.w - a.w); return sc[0].x })();
-      if (scr && started && list.length > 1) { const labs = list.map(x => x.t.slice(0, 80)); const k = scr.layer + '|' + scr.title + '|' + labs.slice().sort().join('/'); const CP2 = (R.choicePts = R.choicePts || []); let e = CP2.find(z => z.k === k); if (!e && CP2.length < 400) { e = { k, screen: (scr.layer + ' «' + scr.title + '»').slice(0, 70), opts: labs, took: {}, n: 0 }; CP2.push(e) } if (e) { e.n++; const t = out.t.slice(0, 80); e.took[t] = (e.took[t] || 0) + 1 } }
+      const out = r || (() => { const sc = list.map(x => { const o = oddsOf(x); const w = BOT === 'bold' ? 7 - o : BOT === 'cautious' ? o * 2 : o; return { x, w: w + rnd() * 3 } }); sc.sort((a, b) => b.w - a.w); return sc[0].x })();
+      if (scr && started && list.length > 1) { const labs = list.map(x => x.t.slice(0, 80)), ods = list.map(x => x.od || ''); const k = scr.layer + '|' + scr.title + '|' + labs.slice().sort().join('/'); const CP2 = (R.choicePts = R.choicePts || []); let e = CP2.find(z => z.k === k); if (!e && CP2.length < 400) { e = { k, screen: (scr.layer + ' «' + scr.title + '»').slice(0, 70), opts: labs, ods, took: {}, n: 0 }; CP2.push(e) } if (e) { e.n++; const t = out.t.slice(0, 80); e.took[t] = (e.took[t] || 0) + 1 } }
       return out;
     }
   }
@@ -659,7 +663,7 @@ function save() { const f = path.join(OUT, LIFE + '.json'); try { R.promo = OFFE
 return { R, play, save, SCAN, get life() { return LIFE } };
 }
 
-module.exports = { Seat, EXIT_RE, ENTRY_TAP, ENTRY_LABEL_RE, ENTRY_SCREEN_RE, ODDS };
+module.exports = { Seat, EXIT_RE, ENTRY_TAP, ENTRY_LABEL_RE, ENTRY_SCREEN_RE, ODDS, oddsOf };
 
 if (require.main === module) {
 const [, , URL0, OUT0, ...KV] = process.argv;

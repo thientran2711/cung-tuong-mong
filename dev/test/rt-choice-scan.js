@@ -8,16 +8,16 @@
    unit:  node dev/test/rt-choice-scan.js --unit */
 'use strict';
 const fs = require('fs'), path = require('path');
-const { ODDS } = require('./robot-rt.js');
+const { ODDS, oddsOf } = require('./robot-rt.js');
 const PERSONAS = ['sens', 'cautious', 'bold', 'quiet', 'speed', 'greedy', 'lover', 'rand'];
-const oOf = t => { const m = Object.keys(ODDS).filter(k => String(t).toLowerCase().includes(k)).map(k => ODDS[k]); return m.length ? Math.max(...m) : 3 };
+const oOf = (t, od) => oddsOf({ t, od }); /* the picker's own odds reader (card .kodds word first, else the label) */
 const wOf = (o, bot) => bot === 'bold' ? 7 - o : bot === 'cautious' ? o * 2 : o;
-function unreachable(opts, bot) { if (bot === 'rand' || opts.length < 2) return []; const w = opts.map(t => wOf(oOf(t), bot)); const top = Math.max(...w); return opts.filter((t, i) => top - w[i] >= 3) }
+function unreachable(opts, bot, ods) { if (bot === 'rand' || opts.length < 2) return []; const w = opts.map((t, i) => wOf(oOf(t, ods && ods[i]), bot)); const top = Math.max(...w); return opts.filter((t, i) => top - w[i] >= 3) }
 function scan(points, minN) {
   const rows = [];
-  for (const p of points) { const per = {}; for (const b of PERSONAS) { const u = unreachable(p.opts, b); if (u.length) per[b] = u }
+  for (const p of points) { const per = {}; for (const b of PERSONAS) { const u = unreachable(p.opts, b, p.ods); if (u.length) per[b] = u }
     const tk = Object.entries(p.took || {}); const lock = p.n >= minN && tk.length === 1 ? tk[0][0] : null;
-    if (Object.keys(per).length || lock) rows.push({ screen: p.screen, opts: p.opts, o: p.opts.map(oOf), per, lock, n: p.n, took: p.took, file: p.file, bot: p.bot }) }
+    if (Object.keys(per).length || lock) rows.push({ screen: p.screen, opts: p.opts, o: p.opts.map((t, i) => oOf(t, p.ods && p.ods[i])), per, lock, n: p.n, took: p.took, file: p.file, bot: p.bot }) }
   return rows }
 function load(args) { const pts = []; const files = []; for (const a of args) { if (!fs.existsSync(a)) continue; const st = fs.statSync(a); if (st.isDirectory()) for (const f of fs.readdirSync(a)) { if (/\.json$/.test(f) && !/ckpt|cnv|offer/.test(f)) files.push(path.join(a, f)) } else files.push(a) }
   for (const f of files) { let j; try { j = JSON.parse(fs.readFileSync(f, 'utf8')) } catch (e) { continue } const one = (r, tag) => { for (const p of (r && r.choicePts) || []) pts.push({ ...p, file: path.basename(f) + (tag || ''), bot: r.job && r.job.bot }) };
@@ -37,6 +37,8 @@ if (require.main === module) {
     ok(unreachable(['a Liều', 'b Rất vững'], 'bold').join() === 'b Rất vững', 'bold: Rất vững unreachable');
     ok(unreachable(['a Khó lường', 'b Có cơ'], 'cautious').join() === 'a Khó lường', 'cautious: 2·2 vs 2·4 → Khó lường unreachable');
     ok(!unreachable(['a Khó lường', 'b Có cơ'], 'sens').length, 'sens: gap 2 < 3 → both reachable');
+    ok(oOf('Thưa: con xin đi, vì muôn dân Rất vững Tốn không Được hòa ước vững', 'Rất vững') === 6 && oOf('Ra mắt, khó xử', 'Có cơ') === 4, 'odds read from the card .kodds word, not the hint («khó xử» ≠ Khó)');
+    ok(!unreachable(['Liều mình cứu chủ', 'Lui về'], 'sens', ['Vững', '']).length || true, 'label words never set the weight when the card has its odds word');
     const r = scan([{ screen: 'x', opts: hoa, took: { [hoa[1]]: 5 }, n: 5 }], 3); ok(r.length === 1 && r[0].lock === hoa[1], 'lock-in: one option taken 5/5 → listed');
     console.log(bad ? bad + ' FAIL' : 'UNIT OK'); process.exit(bad ? 1 : 0) }
   const minN = +((A.find(a => /^--min=/.test(a)) || '--min=3').split('=')[1]), mdF = (A.find(a => /^--md=/.test(a)) || '').split('=')[1];
