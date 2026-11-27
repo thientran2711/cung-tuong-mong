@@ -38,7 +38,8 @@ const M={
  s_phan:{mode:"keep"},
  s_gh:{mode:"tier",t:[["nhẹ",/^Trò chuyện$/],["vừa",/^Biếu quà nhỏ$/]]},
  /* deck doors (DOOR.D k) */
- "hs-nghi":{mode:"tier",t:[["nhẹ",/^Nghỉ ngơi một lát$/],["vừa",/^Nghỉ ngơi dưỡng sức$/]]},
+ /* owner 27/11 ~06:30Z (via MAIN 172): «Nghỉ ngơi» is ONE matter — nhẹ nghỉ một lát (free, Sức) · vừa dưỡng sức (thuốc bổ, more Sức) · nặng dưỡng nhan (dearer, Sắc) */
+ "hs-nghi":{mode:"tier",t:[["nhẹ",/^Nghỉ ngơi một lát$/],["vừa",/^Nghỉ ngơi dưỡng sức$/],["nặng",/^Dưỡng nhan$/]]},
  "hs-thaiy":{mode:"tier",t:[["nhẹ",/^(Tĩnh dưỡng|Tự bốc thuốc)$/],["vừa",/^Sang Thái y viện/],["nặng",/^(Mời thái y bắt mạch|Truyền thái y)$/]]},
  "hs-soksp":{mode:"tier",t:[["nhẹ",/^Xem lén sổ nguyệt sự$/],["vừa",/^Xem sổ nguyệt sự$/]]},
  "hs-docsach":{mode:"tier",t:[["nhẹ",/^Đọc sách giải khuây$/],["vừa",/^Đọc binh thư/]]},
@@ -63,7 +64,7 @@ function fix(){
  /* deck rows (Hành sự): cut the members that are another matter */
  for(const r of DOOR.D||[]){if(r.oneFx)continue;
   if(r.k==="hs-caobenh"||r.k==="hs-thinhan"||r.k==="hs-anthai"){r.roads=[];r.oneFx=1}
-  else if(r.k==="hs-nghi"){r.re=/^(Nghỉ ngơi một lát|Nghỉ ngơi dưỡng sức)$/;r.oneFx=1}
+  else if(r.k==="hs-nghi"){r.re=/^(Nghỉ ngơi một lát|Nghỉ ngơi dưỡng sức|Dưỡng nhan)$/;r.oneFx=1}
   else if(r.k==="hs-tainghe"){r.re=/^(Múa trong yến tiệc|Kinh hồng vũ|Đánh cờ với Hoàng thượng|Đàn khúc Phượng cầu hoàng)$/;r.oneFx=1}
   else if(r.k==="hs-roicung"){r.re=/^(Nghĩ cách trốn khỏi cung|Dâng biểu xin xuất gia|Xin ban hôn cho |Xin về quê phụng dưỡng cha mẹ)/;r.oneFx=1}}
  DOOR.names=new Set(DOOR.T.map(r=>r.n))}
@@ -175,7 +176,11 @@ function deckRow(b){const I=b.dataset.ddi.split(",").map(Number);const a=deck[I[
  return (DOOR.D||[]).find(r=>r.roads.includes(road)&&(r.re?r.re.test(txt(a&&a.n)):(()=>{try{return r.key(a,deck)===b.dataset.ddoor}catch(e){return false}})()))||null}
 function deckM(b){const I=b.dataset.ddi.split(",").map(Number),X=b.dataset.ddx.split(",").map(Number);
  return I.map((i,j)=>{const a=deck[i];if(!a)return null;let w="";if(!X[j]){try{w=txt(cardWhy(a))}catch(e){}w=w||txt(a.lock&&a.t)||"chưa làm được lúc này"}
-  let c=1;try{c=cardCost(a)}catch(e){}return{id:"d:"+txt(a.n),n:a.n,a,x:a.x||"",off:!X[j],why:w,cost:c,go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("jone deck way",e)}},0)}}}).filter(Boolean)}
+  let c=1;try{c=cardCost(a)}catch(e){}
+  /* the way's own line, like the deck door card (jdoor lineOf): odds · tốn · thành */let x=a.x||"";try{const ton=[`${c} khắc`];const fc=fmt(a.c||{});if(fc)ton.push(fc);
+   const gain=[fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]].filter(Boolean).join(" · ");const o=oddsOf(a);
+   x=[o<100?wordOf(o):"","tốn: "+ton.join(" · "),gain?"thành: "+gain:""].filter(Boolean).join(" · ")}catch(e){}
+  return{id:"d:"+txt(a.n),n:a.n,a,x,off:!X[j],why:w,cost:c,go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("jone deck way",e)}},0)}}}).filter(Boolean)}
 ONE.deckM=deckM;ONE.deckRow=deckRow;
 function deckRowR(b){const r=deckRow(b);return r?Object.assign({},r,{n:b.dataset.ddoor}):{k:"?",n:b.dataset.ddoor}}
 function deckTap(b){if(!S||S.dead||Q.length)return true;const r=deckRowR(b);const L=deckM(b);const md=ONE.mode(r.k);
@@ -184,6 +189,11 @@ function deckTap(b){if(!S||S.dead||Q.length)return true;const r=deckRowR(b);cons
    let wh=null;try{wh=typeof pMe==="function"?pMe():null}catch(e){}DOOR.card(b.dataset.ddoor,"Chọn mức.",rows,wh);return true}}
  const m=pick(r,L,seedOf(r,"me"));if(!m)return false;runM(r,m,L);return true}
 ONE.deckTap=deckTap;
+/* for the kit info card (KIT-STAGE-R10): the ≤ 3 tier choices of a deck door button, to draw INSIDE the card (no second scene).
+   [{t:"nhẹ"|"vừa"|"nặng", n:"<real way> · <mức>", x:"<its kit line>", off:{why}|null, go()}] — go runs the way picked for that tier, as the tier card does.
+   null = the door is ONE (tap = act) or KEEP. */
+ONE.deckTiers=function(b){try{const r=deckRowR(b);if(ONE.mode(r.k)!=="tier")return null;const L=deckM(b);const R=tierRows(r,L,"me");if(R.length<2)return null;
+ return R.map(x=>({t:x.t,n:x.n,x:x.x,off:x.off||null,go:()=>{const m=pick(r,x.T,seedOf(r,"me",x.t));if(m)runM(r,m,x.T,x.t)}}))}catch(e){console.error("jone deckTiers",e);return null}};
 window.addEventListener("click",e=>{if(!ONE.on)return;const b=e.target.closest&&e.target.closest("#panel button[data-ddoor]");if(!b)return;try{const r=deckRow(b);if(r&&ONE.mode(r.k)==="keep")return}catch(x){}e.stopImmediatePropagation();e.preventDefault();if(b.disabled)return;
  try{deckTap(b)}catch(x){console.error("jone deck tap",x)}},true);
 /* the deck door's small line: the pick (ONE) or the 3 tier words (TIER) */
