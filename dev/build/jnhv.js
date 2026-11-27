@@ -126,7 +126,7 @@ function still(){try{return matchMedia("(prefers-reduced-motion: reduce)").match
 function st(){return document.getElementById("stage")}
 function geo(){const s=st(),r=s.getBoundingClientRect(),B=AB();const q=x=>{const e=s.querySelector(x)||document.querySelector(x);if(!e||getComputedStyle(e).display==="none"||!e.getBoundingClientRect().width)return null;const b=e.getBoundingClientRect();if(b.bottom<r.top||b.top>r.bottom)return null;return{l:b.left-r.left,r:b.right-r.left}};
  const rl=q("#krail"),cl=kv()==="kv1"?null:q(".kshR");const rlR=rl&&rl.l>r.width/2;
- return{W:r.width,H:r.height,x0:(rl&&!rlR?Math.min(rl.r,r.width*.2):6)+6,x1:Math.min(cl&&cl.l>r.width/2?cl.l:r.width-6,rlR?rl.l:r.width-6)-6,feet:r.height*(B.feet||.9),fh:r.height*(B.figH||.62)}}
+ return{W:r.width,H:r.height,x0:(rl&&!rlR?Math.min(rl.r,r.width*.2):6)+6,x1:Math.min(cl&&cl.l>r.width/2?cl.l:r.width-6,rlR?rl.l:r.width-6)-6,xr:(rlR?rl.l:r.width-6)-6,/* xr = right limit while the thẻ gỗ is up: the right stat panel (.kshR, iPad) hides then and the plaque band sits at the stage's right edge (LRM5) */feet:r.height*(B.feet||.9),fh:r.height*(B.figH||.62)}}
 /* every person on the scene = a PAINTED figure (owner, via MAIN 151 26/11 ~03:57Z: never a flat grey stand-in): consorts / Emperor / Thái hậu their own (figFor);
    servants on the place list with no record object (npc «Cung nữ … của X», «Tiểu … Tử», «Thị vệ …») get the painted figure of their role (maid / eunuch / man) chosen by
    figFor's own stable hash on their name; a person she has not met keeps her painted figure, only softened (blur + less colour, class nhv-unk). */
@@ -219,9 +219,14 @@ async function stepOut(m){if(!liveM(m))return;const g=m.g;if(SEL!==g)pickGroup(g
  /* her followers stand BEHIND-beside her on the left, in one row with a gap (never on her shoulder, never on each other — MAIN 127 FAIL 3); a smaller scale = further back.
     She keeps the right side free for the thẻ gỗ band (BAL.area.band, two plaque columns on the phone) */
  const fo=g.P.filter(p=>p.m!==m).map(p=>p.m),band=(B.band||{})[kv()]||150,W=m.w*k;
- const tcx=D.x0+(D.x1-D.x0)*((B.spot||{})[kv()]||.24),maxX=D.x1-band-W;
+ const tcx=D.x0+(D.x1-D.x0)*((B.spot||{})[kv()]||.24),maxX=(D.xr||D.x1)-band-W;
  const fw=fo.reduce((s,q)=>s+q.w,0);let tx=Math.min(maxX,Math.max(tcx-W/2,D.x0+4+(fo.length?Math.min(fw+gp*fo.length,(maxX-D.x0)*.62):0)));
- const room=tx-D.x0-4-gp*fo.length,sF=fo.length&&fw>room?Math.max(B.folMin||.55,room/fw):1;
+ let room=tx-D.x0-4-gp*fo.length,sF=fo.length&&fw>room?Math.max(B.folMin||.55,room/fw):1;
+ /* LRM5: the row of followers never leaves the stage. iPad (half-width stage, band 300): at folMin the row did not fit left of her and group-mates stood at −104 px.
+    At sF the row (Σw·sF + gap per follower) must fit between the left rail and her: if not, she moves right (never into the plaque band: maxX, measured from the stage's right edge — the right stat panel hides while the thẻ gỗ is up), then the row may use the floor under the rail, and only then it shrinks below folMin */
+ if(fo.length&&fw*sF+gp*fo.length>tx-D.x0-4){tx=Math.max(tx,Math.min(maxX,D.x0+4+fw*sF+gp*fo.length));
+  /* still short: the floor row may pass under the left icon rail (it hangs high on the wall) to the stage edge; only then it shrinks */
+  const L=fw*sF+gp*fo.length>tx-D.x0-4?6:D.x0;room=tx-L-4-gp*fo.length;if(fw*sF>room)sF=Math.max(.2,room/fw)}
  const ty=Math.min(D.H-m.h*k-40,m.y+(B.stepY||.045)*D.H);
  const to=`translate(${tx+(m.w*(k-1))/2}px,${ty+m.h*(k-1)}px) scale(${k})`;m.el.style.zIndex="30";m.fx={x:tx,y:ty,w:W,h:m.h*k};
  CUR.G.forEach(x=>{if(x.capEl)x.capEl.style.visibility="hidden"});
