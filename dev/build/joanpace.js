@@ -33,7 +33,7 @@ function opStep(x,y,n,st,P){if(!opOn()||!(n>0)||!x||typeof x!=="object")return n
  for(const q in z)if(!Array.isArray(z[q])||z[q][0]<w)delete z[q];
  const e=z[k]||[w,0,b,0];if(e[2]!==b){e[2]=b;e[3]=0}
  const s=P.band?opBand(n,P.band):n;let add=Math.max(0,OP_OWN?s:s-e[3]);add=Math.min(add,Math.max(0,P.day-e[1]));
- e[3]=Math.round((e[3]+add)*100)/100;e[1]=Math.round((e[1]+add)*100)/100;z[k]=e;return add}catch(err){return n}}
+ if(!OP_OWN)e[3]=Math.round((e[3]+add)*100)/100;/* an own cause never raises the incident fold (e[3]): a later ordinary cause of the same buổi is not folded under it (RV-163K/L) */e[1]=Math.round((e[1]+add)*100)/100;z[k]=e;return add}catch(err){return n}}
 /* (f) the grudge heat of a toward t (danger without the trait shift) */
 function opHeat(a,t){const H=BAL.net.heat;return Math.max(oan(a,t),t===S?(+a.ghen||0)*H.ghenK:0,Math.max(0,-aff(a,t))*H.affK)}
 function opHeatOK(a,t){try{return !opOn()||a===S||opHeat(a,t)>=BAL.oanPace.act||opEx(a,t)}catch(e){return true}}

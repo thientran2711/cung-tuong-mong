@@ -62,7 +62,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   {TK.day(S);const s=TK.ensureMine();s.spyFor=key(w);S.tmSold=null;const b0=TK.rel(S,w);const bb=spyFound(s);o.found={who:bb===w,sold:knSoldK(s),d:d(b0,TK.rel(S,w))};s.spyFor=null}
   /* d. plant refused at the gate */
   {TK.day(w);const b0=TK.rel(w,S);spyLearn(w,S);o.direct=d(b0,TK.rel(w,S));
-   /* oan-pace: each learning is its own cause (lands in the same buổi), the daily cap still holds */const b1=TK.rel(w,S);spyLearn(w,S);spyLearn(w,S);spyLearn(w,S);o.cap={add:TK.rel(w,S).oan-b1.oan,first:o.direct.oan,day:BAL.oanPace&&BAL.oanPace.day}}
+   /* oan-pace: each learning is its own cause (lands in the same buổi), the daily cap still holds */const b1=TK.rel(w,S);spyLearn(w,S);spyLearn(w,S);spyLearn(w,S);o.cap={add:TK.rel(w,S).oan-b1.oan,first:o.direct.oan,day:BAL.oanPace&&BAL.oanPace.day};
+   /* an ordinary cause after an own cause in the same buổi is NOT folded under the own cause (e[3] stays the ordinary fold) */TK.day(w);spyLearn(w,S);const b2=TK.rel(w,S);const n0=BAL.ag.know.tm.learn.oan;oanAdd(w,S,n0);o.after={add:TK.rel(w,S).oan-b2.oan,n:n0}}
   /* e. Mua chuộc refused and told (servant's own «Từ chối, bẩm chủ») */
   {TK.day(v);const s=TK.free(v);const b0=TK.rel(v,S);cnvBribeOpts(s,S,v,BAL.coopBribe.pay).find(x=>x.id==="tell").go();o.cnvTell=d(b0,TK.rel(v,S))}
   o.K=K;o.aff=BAL.ag.know.tm.oan;return o});
@@ -71,6 +72,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r2.found.who&&r2.found.sold&&r2.found.d.oan>0,'her two-faced servant found (spyFound): recorded, she learns who bought him, oán toward him',r2.found);
  ok(r2.direct.oan>0&&r2.direct.aff===-r2.aff,'spyLearn: oán + BAL learn.oan, thiện cảm − BAL tm.oan',Object.assign({},r2.direct,{K:r2.K}));
  ok(r2.cap&&r2.cap.add>0&&(r2.cap.day==null||r2.cap.first+r2.cap.add<=r2.cap.day),'oan-pace × spy learning: a second learning in the same buổi still lands (own cause), the daily cap holds',r2.cap);
+ ok(r2.after&&r2.after.add>0,'oan-pace × spy learning: an ordinary cause later in the same buổi still lands (an own cause does not raise the incident fold)',r2.after);
  ok(r2.cnvTell.oan>0,'Mua chuộc refused and told: the master resents the briber',r2.cnvTell);
  /* 3 HER OWN turned servant */
  const r3=await p.evaluate(()=>{const o={};const L=TK.R();const v=L[0];const s=TK.ensureMine();s.spyFor=null;S.tmSold=null;
