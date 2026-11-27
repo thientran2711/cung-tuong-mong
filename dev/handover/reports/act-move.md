@@ -142,3 +142,36 @@ Then new Fold+iPad sheets → MAIN LOOK → RV-163E. Keep the art gap (kid silho
 - quickcheck.sh times out here (ctm-rank host blocked); run coregates by hand: `bash dev/tools/coregates.sh $PWD 17f23656 <outdir>`; button-crawl «Ô lưu · Lui» fault is on LIVE too.
 - Always test on dev/index.html after `python3 dev/build/assemble.py`; rebuild the site (`bash dev/site/build_site.sh`) before pushing.
 ~85 % this task / ~0 % in game.
+
+# ACT-MOVE-6 (27/11 ~06:40Z) — MAIN 172 LOOK FAIL 05:27Z fix: law 3 gain-and-loss on moved cards (law 11 whole family, law 4 one core)
+PRIORITY #1 CHECK ('act-move'): OD 9 | ledger 0 | claims 8 | main 0 | review/* 1 (review/act-move) | archive 0 — continued review/act-move from 83390931, nothing rebuilt.
+## What changed (source)
+- j15.js lãnh cung «Ân xá» (was an empty body): `tốn: BAL.ag.hh.kh khắc · thành: nàng rời lãnh cung về cung · pvRel(BAL.ag.hh.pardonRel) · Đức balSg(BAL.ag.hh.pardonDuc)`, gate whyTime(BAL.ag.hh.kh).
+- j15.js Quyền Hoàng hậu group (Xử tội / Tịch thu / Ân xá / Khất bổng lộc): khắc from BAL.ag.hh.kh (was whyTime(2)), a Tốn row on every card; Xử tội gets a Thành («nàng bị xử theo chứng cứ ngươi nắm»); Khất bổng thiện cảm reads BAL.ag.hh.cutRel (was typed 15).
+- Item 4 (ACT-MOVE-5 finding «j15:43 prints pardonRel but the rule applies BAL.eff.j8.empAct_2»): **checked — not a mismatch**. The live rule for her Ân xá is the jagacts.js:97–99 empAct wrapper → hhAct (jagacts.js:71) which reads BAL.ag.hh.pardonRel / pardonDuc and spends BAL.ag.hh.kh; j8 empAct (empAct_2) only runs when the wrapper declines (k not in AGHH or khắc short → it returns too). So both Ân xá cards print the keys the rule reads (pardonRel/pardonDuc/kh); j8 untouched. one-core-bind PASS (1621 prints, 0 mismatches).
+- j15.js maid card «Thêm cung nữ» / «Thêm thái giám»: `tốn: Bạc -hireBac · thành: thêm 1 cung nữ / thái giám hầu ngươi` (green). jtc.js «Chọn làm cung nữ thân cận»: `tốn: Bạc … · thành: nàng thành cung nữ thân cận của ngươi` + the old thiện cảm lines.
+- j15.js «Mua chuộc» (other palace servant + elder, same builder): `odds · tốn: BAL.servK khắc · thành: X thành tai mắt của ngươi (green), Bạc -bribeCost · hỏng: X có thể mách chủ` — bạc is paid on success only (bribeServ / jsgame serv pay), so it sits in Thành, red. A LOCKED card (person unknown) now shows the gain instead of «Thành: Không được gì thêm».
+- jmline.js «Vu tội»: Thành = what mlHitDo frame gives, explicit green: X bị phạt quỳ · lòng X với chủ −frameLoy · X bị đuổi khỏi cung chủ: chanceW(frameOut). Locked card keeps the gain too.
+- Same family found by the scan (law 11): «Cài người vào cung khác» (odds + Thành tai mắt + Bạc on success, as its pick j10 PEND.plantsv), «Chưởng sự tra xét cung nữ» (what j14 searchMaids gives), «Đổi người chạy việc» (jamove: chip without small line → Thành «người chạy việc mới do ngươi chọn»), own servant «Xem người» (servLearn), «Tiến cử» (servMerit BAL.ag.par3.house.merit; jhouse.js twin's typed «+5» → the same key), «Dọa tố đối thực» (threatServ odds + tai mắt; kèm oán).
+## Scan robot (new) dev/test/act-move-law3-scan.js — every bridged option of every person on stage, cao/con/hh × buổi 0–2 × every place, rendered by optLine; flags NOGAIN (no green Được/Thành), NONE / NONE-LOCKED («Không được gì thêm», also via kaBody dis), NOCOST (bạc taken, no row names it)
+| family | before (83390931 build) | after |
+|---|---|---|
+| fallen · Ân xá | 1/1 NOGAIN | 0 |
+| maid · Thêm cung nữ / Thêm thái giám | 6/6 NOGAIN | 0 |
+| maid · Cài người vào cung khác | 3/3 NOGAIN | 0 |
+| maid · Chưởng sự tra xét cung nữ | 1/1 NOGAIN | 0 |
+| maid · Đổi người chạy việc | 2/2 NOGAIN | 0 |
+| npc + elder · Mua chuộc | 5/5 NOGAIN, NONE-LOCKED | 0 |
+| npc + elder · Vu tội | 5/5 NOGAIN, NONE-LOCKED | 0 |
+| elder · Tiến cử (seen in one run) | 1/1 NOGAIN | 0 |
+| TOTAL | 23/96 (+1) | 0/93–99 PASS |
+- Wider look (NATIVE=1, not gated, NOT this branch's family — for MAIN): native pop-up options flagged NOGAIN 65/305 are almost all tier/group openers («Dò la», «Ra uy», «Mặc cả chứng cứ», «Hiến nghệ», «Dâng lễ vật» … «chọn mức và cách») whose rows live in the picker; two look like real gaps worth a ticket: emp «Chặn ngự giá» (only Tốn 1 khắc) and rival «Đẩy con nàng xuống hồ» (empty line), plus chest «Lấy trộm son phấn» whose x nests «thành:» inside a Thành row through native optLine.
+## Robots (after)
+- act-move-law3-scan PASS 0/93 · act-move-rows-scan PASS 0/94 · act-move-reach2 PASS (A 241 cards, D 263/263, G 8 families fired) · act-move-reach PASS (C 2493/2493, D 2788/2788, F 12) · 0 page errors.
+- coregates (17f23656 base): G1 guard / text / textrule / bind PASS (bind after fix: 0 mismatches) · G2 rules bad [] · G3 floats none · G4 odds-cap, coop-one-world, mk-layer, manifest-guard, npc-purpose, dialog-fixed, dead-card, look-dedupe, press-keep, q-softlock PASS · button-crawl 1 fault «Ô lưu · Lui» = the known LIVE fault (not this branch).
+## Sheets (looked 3×)
+- Fold 755x1000: https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/act-move6-fold-sheet.jpg
+- iPad 1180x820: https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/act-move6-ipad-sheet.jpg (12 shots: the stage mini-card shows one line by kit design; shots 2b / 3b / 7b tap its «!» to show the full kit card: Thêm cung nữ, Mua chuộc locked, Ân xá)
+- dev/test/act-move-video2.js: iPad TAP step added (taps the «!», shoots, then a real tap outside closes it).
+- Art gaps (not mine, noted): unknown servant / thái giám silhouette is a female figure; kid silhouette gap as before. iPad mini-card odds line = KK56.
+~100 % this task / ~0 % in game (until LAND).
