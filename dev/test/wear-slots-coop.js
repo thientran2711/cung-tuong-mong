@@ -38,7 +38,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await G.p.goto(BASE+'?room='+code);await G.p.waitForTimeout(3000);await tapText(G,/^(Vào phòng|Tiếp tục)/,4000);
  ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
  const inW=async()=>{const t0=Date.now();while(Date.now()-t0<150000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)return true;await sleep(500)}return false};
- await inW();
+ await inW();await require('./lib/coop-real.js').lives(H,G,clear,ok);/* coop-reg9-route: no row on a life still being made (selection days / ban hoa rebirth) */
  for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
  const put=async o=>{const out={};for(const k of ["hoatai","giayhoa"]){for(let i=0;i<8&&await o.p.evaluate(()=>Q.length>0);i++){await clear(o);await sleep(300)}
    const r=await o.p.evaluate(k=>{S.inv.push({k,from:k==="hoatai"?"emp":"buy"});const ix=S.inv.length-1;try{itemAct("wear",ix)}catch(e){return String(e)}return Q.length},k);out[k]=r}
