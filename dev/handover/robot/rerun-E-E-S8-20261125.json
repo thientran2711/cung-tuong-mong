@@ -328,6 +328,26 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed1-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed1-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-skilled5",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 3459260862,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "f65d019b"
+   },
+   "ending": "Xuất cung — Xuất cung về quê (time-driven: emperor died year 2, amnesty)",
+   "age": 20,
+   "buoi": 233,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-skilled5-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-skilled5-moments.md"
   }
  ],
  "parked": [
