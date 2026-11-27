@@ -1,1 +1,1 @@
-Bấm ☰ giữa kiếp khi chưa lưu sổ: bấm ✕ (hoặc chạm ra ngoài) là quay lại kiếp đang chơi.
+Chọn việc bằng thẻ lụa treo: chạm một thẻ để nâng lên, bấm nút «Chọn» nhỏ ở góc thẻ để làm; hơn bảy việc thì thêm cột, không cắt bớt.
