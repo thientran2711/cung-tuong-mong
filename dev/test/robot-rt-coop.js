@@ -60,7 +60,7 @@ async function seatLoop(ctx, who, dev, other) {
   for (;;) {
     k++; const extra = k > KIEP;
     const s = Seat({ pin: A.pin, url: URL0, out: OUT, dev, bot: A.bot, seed: (+A.seed || 1) * 10 + (who === 'host' ? 1 : 2) + k * 100, life: 'coop-rt-' + TAG + '-' + who + '-k' + k,
-      origin: A[who + 'Origin'], road: A[who + 'Road'], stuckMin: A.stuckMin, slice: A.slice, resume: RESUME && k === 1, noBoot: k > 1, coop: true, roomCode: () => code, coopLink: { me: LINK[who], other: LINK[who === 'host' ? 'guest' : 'host'] }, pre: (k === 1 && !RESUME) ? (who === 'host' ? hostPre(st) : guestPre(st)) : (k === 1 && RESUME ? resumePre : null) });
+      origin: A[who + 'Origin'], road: A[who + 'Road'], stuckMin: A.stuckMin, slice: A.slice, resume: RESUME && k === 1, noBoot: k > 1, coop: true, roomCode: () => code, coopLink: { me: LINK[who], other: LINK[who === 'host' ? 'guest' : 'host'] }, pre: (k === 1 && !RESUME) ? (who === 'host' ? hostPre(st) : guestPre(st)) : resumePre /* A-COOP #3 (coop1j room b): a NEXT kiếp of a seat stays in the SAME room («Cùng hảo hữu → Trở lại phòng»); before (pre null) host k2 took «Chơi một mình → Một mình» and played solo while the guest sat at «Đợi hảo hữu trở lại · hảo hữu đang vắng» */ });
     try { await s.play(p) } catch (e) { s.R.bugs.push({ type: 'harness', msg: 'runner error: ' + String(e.message).split('\n')[0], n: 1 }); s.R.life = s.R.life || { id: 'HARNESS', type: 'harness' }; s.save() }
     pair.lives.push({ seat: who, dev, kiep: k, extra, room: code, life: s.R.life, harness: s.R.harness, exitPick: s.R.exitPick, bugs: s.R.bugs, dead: s.R.dead, buoi: s.R.buoi, saves: s.R.saves });
     flush(); console.log('SEAT LIFE DONE', who, 'k' + k, s.R.life && s.R.life.id);
