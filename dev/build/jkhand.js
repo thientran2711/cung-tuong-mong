@@ -78,7 +78,7 @@ function kitHandLongOff(g){try{g.__khLong=kitHandSig(g);g.__khSig="";g.classList
      A locked card has no «Chọn». Tap another card = switch; tap anywhere else = it shrinks back into its slot. Tapping the enlarged card does nothing.
    - ONE part for every hand (frame hand, stage Bàn bài via jkstage kstgPlate → kitHandBigPlace, kitHand.mount panes). «Cảnh động» off / reduced motion = no motion.
    The element keeps the class .khplate (the stage and the tests key on it). Geometry knobs: KIT_HAND.big. */
-KIT_HAND.big={w:[360,340]/* enlarged card width [Fold, iPad] (god-research 360x504 / 340x476) */,asp:1.4/* 5:7 */,minH:220,under:.8,tall:380/* room (px) above the hand under which the card takes the wide tier */,ww:[420,520]/* the wide tier: card width [Fold, iPad] (picture left, info right) */,minHw:170,gapHand:8,tick:[3,2]/* the green ✓ sits 3 px in from the right, 2 px down from the top of the card (the same as the thẻ gỗ ✓, kitPick) — its size = BAL.kpkgo */,ms:200,backMs:150,fs:[22,21,20,19,18,17,16,15,14,13]/* info type scale px: the largest that fits wins */};
+KIT_HAND.big={w:[360,340]/* enlarged card width [Fold, iPad] (god-research 360x504 / 340x476) */,asp:1.4/* 5:7 */,minH:220,under:.8,tall:380/* room (px) above the hand under which the card takes the wide tier */,ww:[420,520]/* the wide tier: card width [Fold, iPad] (picture left, info right) */,minHw:170,gapHand:8,shrinkMin:.4/* a hand that fills its pane shrinks to this share at most while a card is enlarged */,tick:[3,2]/* the green ✓ sits 3 px in from the right, 2 px down from the top of the card (the same as the thẻ gỗ ✓, kitPick) — its size = BAL.kpkgo */,ms:200,backMs:150,fs:[22,21,20,19,18,17,16,15,14,13]/* info type scale px: the largest that fits wins */};
 function kitHandBigBuild(b,z){const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang").forEach(e=>e.remove());/* the Gợi ý row repeats Được / Mất in prose: shown only when the card has neither row */if(c.querySelector(".kr-duoc,[class*=kr-mat]"))c.querySelectorAll(".kr-hint").forEach(e=>e.remove());
  /* a hint clause the kit pass appended twice («…; hên xui; hên xui», a re-run of kitOptFinal on the hand card) reads once */c.querySelectorAll(".kb .ef").forEach(e=>{if(e.children.length)return;const p=e.textContent.split("; "),q=p.filter((x,i)=>i===0||x!==p[i-1]);if(q.length<p.length)e.textContent=q.join("; ")});c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *")&&!(r.querySelector(".krv")||{}).textContent)r.remove()});
@@ -96,8 +96,13 @@ function kitHandBigPlace(b,z,dl,top0,L,R){try{const K=KIT_HAND.big,ip=kitHandWid
  const foot=0;/* the green ✓ stands INSIDE the card (top-right corner), no block under it */
  /* OD 27/11 ~04:36Z: the enlarged card NEVER covers the hand — it opens ABOVE the row (between the story and the row); the row stays in place, all cards visible, the picked one lifted in its slot.
     Not enough room above → the smaller WIDE tier (picture left, info right), never over the row. */
- try{const g=b.parentElement,gr=g.getBoundingClientRect(),lf=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0;bot=Math.min(bot,Math.round(gr.top-lf-K.gapHand))}catch(e){}
- const pm=dl.querySelector(".kpmain");if(pm&&pm.getClientRects().length){const pb=pm.getBoundingClientRect().bottom+8;if(pb>top)top=pb}
+ let below=false;try{const g=b.parentElement,gr=g.getBoundingClientRect(),lf=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0;const bot0=bot,top0b=top;
+  const pm0=dl.querySelector(".kpmain");if(pm0&&pm0.getClientRects().length){const pb=pm0.getBoundingClientRect().bottom+8;if(pb>top)top=pb}
+  const above=Math.round(gr.top-lf-K.gapHand-top),under=Math.round(bot0-(gr.bottom+K.gapHand));
+  /* a hand that stands at the very top of its pane (outside #modal: no story above it) has no room above: the card goes UNDER the row instead, still never over it */
+  if(above<K.tall&&under>above){below=true;top=Math.round(gr.bottom+K.gapHand)}else bot=Math.min(bot,Math.round(gr.top-lf-K.gapHand));
+  /* a hand that fills its whole pane (iPad side panel, 4 × 3 cards): neither side has room → the WHOLE hand shrinks toward its top (every card still visible, in its slot) to free the room for the card under it, never under the card */
+  g.style.transform="";g.style.transformOrigin="";if(Math.max(above,under)<K.minHw+60&&g.offsetHeight>0){const H0=g.offsetHeight,need=K.minHw+60,k=Math.max(K.shrinkMin,Math.min(1,(bot0-gr.top-K.gapHand-need)/H0));if(k<1){g.style.transformOrigin="50% 0";g.style.transform=`scale(${k.toFixed(3)})`;below=true;bot=bot0;top=Math.round(gr.top+H0*k+K.gapHand)}}}catch(e){}
  const room=Math.max(80,Math.round(bot-top-4));let w=Math.round(Math.min(K.w[ip],R-L)),h=Math.round(w*K.asp);const wide=room<K.tall;
  if(wide){w=Math.round(Math.min(K.ww[ip],R-L));h=Math.min(room,Math.max(K.minHw,Math.round(w*.62)))}else if(h>room){h=room;w=Math.round(h/K.asp)}
  z.classList.toggle("khwide",wide);
@@ -126,7 +131,7 @@ function kitHandConfOff(g){const dl=g&&g.closest&&g.closest(".dlg,.khost"),c=dl&
 function kitHandStill(){try{return typeof kfStill==="function"?kfStill():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
 function kitHandVeilOff(dl){const v=dl&&dl.querySelector(":scope>.khveil");if(v)v.hidden=true}
 /* drop: the enlarged card shrinks back into its hand slot (anim = false when another card is lifted at once) */
-function kitHandDrop(g,anim){if(!g)return;const dl=g.closest(".dlg,.khost"),z=dl&&dl.querySelector(":scope>.khplate");const L=g.querySelector(":scope>button.klift");
+function kitHandDrop(g,anim){if(!g)return;g.style.transform="";g.style.transformOrigin="";const dl=g.closest(".dlg,.khost"),z=dl&&dl.querySelector(":scope>.khplate");const L=g.querySelector(":scope>button.klift");
  g.querySelectorAll(":scope>button.klift").forEach(x=>{x.classList.remove("klift");x.removeAttribute("aria-pressed")});kitHandConfOff(g);
  if(!z||z.hidden){g.querySelectorAll(":scope>button.khout").forEach(x=>x.classList.remove("khout"));kitHandVeilOff(dl);return}
  const end=()=>{if(z.__khFor===L||!L){z.hidden=true;z.getAnimations&&z.getAnimations().forEach(a=>a.cancel());z.__khFor=null;kitHandVeilOff(dl)}if(L&&!L.classList.contains("klift"))L.classList.remove("khout")};
@@ -134,7 +139,7 @@ function kitHandDrop(g,anim){if(!g)return;const dl=g.closest(".dlg,.khost"),z=dl
 function kitHandLift(b){const g=b.parentElement;if(!g||g.__khBusy)return;if(b.classList.contains("klift"))return;kitHandDrop(g,false);b.classList.add("klift");b.setAttribute("aria-pressed","true");kitHandPlate(b);if(g.__khLift)try{g.__khLift(b)}catch(e){}}
 /* choose: the ENLARGED card flies up a little and fades, the rest sink; then the frame's own choose path (a synthetic click = detail 0, passes the tap gate) */
 function kitHandChoose(b){const g=b.parentElement;if(!g||g.__khBusy)return;g.__khBusy=1;window.__khFlyT=performance.now();const dl=g.closest(".dlg,.khost"),z=dl&&dl.querySelector(":scope>.khplate:not([hidden])");
- const go=()=>{g.__khBusy=0;if(z){z.hidden=true;z.__khFor=null}kitHandVeilOff(dl);b.classList.remove("khout");if(g.__khPick){g.__khPick(b);return}if(b.isConnected)b.click()};kitHandConfOff(g);
+ const go=()=>{g.__khBusy=0;g.style.transform="";g.style.transformOrigin="";if(z){z.hidden=true;z.__khFor=null}kitHandVeilOff(dl);b.classList.remove("khout");if(g.__khPick){g.__khPick(b);return}if(b.isConnected)b.click()};kitHandConfOff(g);
  if(kitHandStill()||!b.animate){go();return}
  const lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0,ms=KIT_HAND.flyMs;
  if(z)z.animate([{transform:"none",opacity:1},{transform:"translateY(-46px) scale(1.06)",opacity:0}],{duration:ms,easing:"cubic-bezier(.3,.6,.4,1)",fill:"forwards"});
