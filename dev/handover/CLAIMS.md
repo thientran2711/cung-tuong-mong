@@ -659,3 +659,4 @@ FLIGHT2-S19B life (seat s19 if ctx ≤ 30 %; sonnet; iPad 1180x820 greedy, seed 
 HARNESS FIXER #20 (opus) job 2c G2 + M1–M3 + clean branch review/robot-realtap-live from LIVE 0562e15f (no a2902d43) + job 3/4 | review/robot-realtap-lc27 → review/robot-realtap-live | session_01UV1SzjeJWfurie37jgy9Tr | RUNNING | 27/11 09:54Z (Foreman F ROOT #4)
 PROMO-STACK-LR4 remerge successor | review/promo-stack-lr4 | FOREMAN D session_01D3E3NagaVYs8K14c2bMUy1 / session_01D3E3NbMdjyPsvcEGgZBrQ1 | RUNNING | 27/11 10:18Z
 BIG REVIEWER #20 (opus) review/robot-realtap-live 532c6af5 (job 2c + clean base 0562e15f) | dev/handover/reports/robot-realtap-review.md «— BIG #20» | session_01UV1SziMKHgJ7NCptC7LPM3 | RUNNING | 27/11 10:40Z (Foreman F ROOT #4)
+| E-GAIN3c-RV BIG review of review/e-gain3c 8b6eadb9 (opus; briefs/E-GAIN3c-RV.md) | review/e-gain3c 8b6eadb9 | FOREMAN E child3 | session_01DgYSWnDjkvAFhkxHR1FwW2 | RUNNING | 27/11 10:52Z |
