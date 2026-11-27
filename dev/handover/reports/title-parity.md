@@ -26,3 +26,13 @@ Player-only titles: before 4 (a_thinh, a_doc, a_nhan, c_th) → after 0 (outside
 - dev/test/title-sys.js: fails = the SAME list on base 61bdd97d without this change («no dialog», «place/festival style name», gSung / gDanh / gTren / gHau / NPC gSung (the stat-pace merge from LIVE 4cfcda61 now paces those gains), «thai») — pre-existing, not from this branch.
 
 RV READY → RV-163C + MAIN 166.
+
+## TITLE-SYS-FIX (MAIN 168: the 3 remaining title-sys failures, not stat-pace) — same branch
+
+| failure | cause | fix (family) |
+|---|---|---|
+| «no dialog» | the test's visitor card never reached the screen: (1) jdfv / jgreet wait ≤ 4 s for the visitor's face picture, then re-show the card outside her act; (2) jdayq parks a card shown outside her act at day start; (3) j68 evGate drops a same-kind card shown recently (event spacing). The worn title itself is fine (line 1 of the figure caption, now `.k3ev>.kt3.kdhcap`, KIT §82.2 kitDhCap). | test only (dev/test/title-sys.js): the test card skips the face waits (`__dfWait/__fcW = 2`), is opened as her act (`DQ.user`), the spacing gate is off for the test page (`__e68off`), and the caption selector includes the kit's caption plate. Game unchanged. |
+| «place/festival style name» | the Khuê các rare-ending title kc_R3 «Hội thơ ngộ vương» breaks the owner title-name rule (13:25Z D: no festival / place-style names; test /·|Tết|Hội /). | renamed **«Thơ ngộ vương gia»** (jkcg.js KCT; key kc_R3 kept, so a title already earned in an older life keeps showing, with the new name). Scan: no other title name in DH_CAT matches. |
+| «thai a,b» | the «Dễ có thai» bonus (+v points) was added INSIDE later wrappers: jcycle (phase ×F, rounded) and jledger (float ×BAL.nt.concF) swallowed it, so wearing the title changed nothing. | jdh: the conception hook is installed OUTERMOST after every module loaded (setTimeout 0), +v points on the final chance; in ledger mode +v × BAL.nt.concF (the same unit); never when the chance is 0. Test checks the exact delta. |
+
+Checks (Fold 755x1000@2 + iPad 1180x820@2): title-sys — «no dialog», place-name and thai now pass, dp = «Trăng soi rèm ngọc / Phi / …» on both; the remaining gSung / gDanh / gTren / gHau / NPC gSung are the stat-pace family (base 4cfcda61, PACE-SPEED-2). title-bal PASS, title-parity PASS.

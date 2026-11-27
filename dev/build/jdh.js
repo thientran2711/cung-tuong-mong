@@ -135,7 +135,10 @@ let NOLUCK=0;(window.THIN_REG=window.THIN_REG||[]).push(["NOLUCK",()=>NOLUCK,v=>
 (function(){if(typeof lotB!=="function")return;const l0=lotB;lotB=function(p,dom){const r=l0.apply(this,arguments);try{if(!NOLUCK&&dom!=="Con cái")return r+dhB(p,"phuc")}catch(e){}return r};
  if(typeof lotTag==="function"){const t0=lotTag;lotTag=function(){NOLUCK++;try{return t0.apply(this,arguments)}finally{NOLUCK--}}}})();
 /* conception: conceiveCh (the final chance, after every multiplier) +v points, only when a chance exists */
-(function(){if(typeof conceiveCh!=="function")return;const c0=conceiveCh;conceiveCh=function(p){const r=c0.apply(this,arguments);try{if(r>0)return r+dhB(p||S,"thai")}catch(e){}return r}})();
+/* conception (title-sys-fix): the «Dễ có thai» bonus is +v points on the FINAL chance, so it is installed OUTERMOST after every module loaded (the
+   cycle phase ×F with rounding (jcycle) and the ledger float ×BAL.nt.concF (jledger) used to swallow an inner +1). In ledger mode the final chance is
+   the float c × concF, so +v points are +v × concF there; only when a chance exists (r > 0: never on a barren / ở cữ / no-chance night). */
+setTimeout(function dhThaiHook(){try{if(typeof conceiveCh!=="function"||conceiveCh.__dh)return;const c0=conceiveCh;const f=function(p){const r=c0.apply(this,arguments);try{if(r>0){const v=dhB(p||S,"thai");if(v){const k=(typeof ldOn==="function"&&(ldOn()||window.__ldNt))&&BAL.nt&&BAL.nt.concF!=null?BAL.nt.concF:1;return r+v*k}}}catch(e){}return r};f.__dh=1;conceiveCh=f;window.conceiveCh=f}catch(e){console.error("dh thai",e)}},0);
 /* self-study: addArt (her) / addArtP (NPC) — a chance of +1 progress */
 (function(){if(typeof addArt==="function"){const a0=addArt;addArt=function(k,g){try{if(g>0&&S&&roll(dhB(S,"nghe")))g+=1}catch(e){}return a0.call(this,k,g)}}
  if(typeof addArtP==="function"){const a1=addArtP;addArtP=function(p,k,g){try{if(p&&p!==S&&g>0&&roll(dhB(p,"nghe")))g+=1}catch(e){}return a1.call(this,p,k,g)}}})();
