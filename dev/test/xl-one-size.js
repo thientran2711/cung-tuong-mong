@@ -7,7 +7,7 @@ const URL=process.argv[2]||'file://'+path.resolve(__dirname,'../../index.html');
 const SIZES=(process.argv[3]||'755x1000@1,1180x820@1').split(',').map(s=>{const m=s.match(/(\d+)x(\d+)@(\d+)/);return{w:+m[1],h:+m[2],d:+m[3]}});
 const figEq=(a,R)=>{const b=R.fig;if(a==='-'||b==='-')return true;const [w1,h1]=a.split('x').map(Number),[w2,h2]=b.split('x').map(Number);return Math.abs(w1-w2)<=2&&Math.abs(h1-h2)<=2};let bad=0;const chk=(n,c,x)=>{if(c)console.log('ok  ',n);else{bad++;console.log('FAIL',n,JSON.stringify(x).slice(0,400))}};
 const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;const d=[...M.querySelectorAll('.dlg')].find(x=>x.offsetHeight>0);if(!d)return null;const r=d.getBoundingClientRect();const f=d.querySelector('.kszfig .kszfs');const fr=f&&f.getBoundingClientRect();
- return{ksz:d.dataset.ksz||'',stage:d.classList.contains('kstage'),kes:M.classList.contains('kes'),top:Math.round(r.top),bot:Math.round(r.bottom),h:Math.round(r.height),fig:fr?Math.round(fr.width)+'x'+Math.round(fr.height):'-',ih:innerHeight}})()`;
+ return{ksz:d.dataset.ksz||'',stage:d.classList.contains('kstage'),kes:M.classList.contains('kes'),top:Math.round(r.top),bot:Math.round(r.bottom),h:d.offsetHeight/* layout size: a running pop-in scale (kesRise) never changes it */,fig:f?f.offsetWidth+'x'+f.offsetHeight:'-',ih:innerHeight}})()`;
 (async()=>{const b=await chromium.launch();
  for(const z of SIZES){const tag=`${z.w}x${z.h}`;const ctx=await b.newContext({viewport:{width:z.w,height:z.h},deviceScaleFactor:z.d,serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
   const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));const rows=[];
