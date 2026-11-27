@@ -1,0 +1,15 @@
+# E-F4FAC review — review/e-f4fac @ 4fd3bf42 — PASS (with lander note)
+
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims E-F4FAC | main hits j10 facAct, j14 coldFacActs, jrcv rcvAsk, j3:185/186, j55:124/125/137, npc-roads-fix-scan F4 | review/*: this branch only.
+Laws touched: 1 (two-way: NPC fac* acts unchanged, her side logs symmetric), 4 (odds via word(o) = KIT_ODDS/BAL.odds.cut), 6c (log per answer), 7 (ladder), 9 (no UI part), 11 (tables in report), 16 (105 chanceW/chanceLo untouched: correct, owner question Q1/Q2 stays open).
+
+## Checks
+1. Diff 17f23656..4fd3bf42 = 8 files (j3, j10, j14, j55, jrcv, 3 tests); head == 4fd3bf42. LIVE origin/main was 0b43ee55 when reviewed (D landed dayq-qsoftlock b16b4b93 + mg-trim 0b43ee55 after the branch base 17f23656) → NOT a pure FF. `git merge origin/main` into the branch = clean, no conflicts (sources disjoint; branch carries no built files). Lander: merge onto current main, rebuild index.html/sw.js/assets.json (branch index.html is stale: 5 «khả năng: », rebuilt 0).
+2. F4: rebuilt branch npc-roads-fix-scan F4 = 0 bad / 88 cards, page errors 0. Claim 1 confirmed in code (old class [a-zà-ỹđ] spans U+00E0–U+1EF9 and holds capital Đ/Ế → «Đáp ứng» hits); claim 2 confirmed (jnroadm Thị vệ «nô tài», VANPHONG §2). Mutant (quote + « xong. rồi nữa» injected): F4 bad 88/88 → scan still catches a real lowercase-after-stop. No game text changed (no wording fault).
+3. facAct family: facact-log-scan exit 0, silent spends 0 (rows lập/mời/xin/rời/bán/ly/hợp/gạch, "empty answer", "no pair left" = refund + «Việc này nay không còn làm được, khắc chưa mất.», cold letters). Mutant (rcvLine returns "" AND j10 guard removed): silent spends 2, exit 1. (Removing only rcvLine's fallback stays covered by the j10 guard = two layers.) Single stop («…phe Khổng gia.»), cổ trang; no new UI part; NPC jagacts3 fac* unchanged.
+4. Odds: j3:185/186, j55:124/125/137 now «(cơ may: ${word(o)})»; no typed number/word. odds-offladder-scan exit 0 (templates 0; played purge text «cơ may: Khó lường»; 105 side-chance calls left, Q1). Mutant (typed «khả năng: rất thấp» in j3): exit 1. Note: two global `function word` exist (j1:96 word(o); jcooptimer:415 word() co-op); runtime plays the ladder word (scan), pre-existing, not this branch.
+5. Rebuilt (assemble.py + build_site.sh): cold-faction ALL PASS 20; odds-unknown-scan unchanged (exempt 18; «Khó lường» in code 1 jdf.js:113 = LIVE). fac-parity-play 4 FAIL (1 her→NPC «Lập phe cùng» shows for a consort who likes her; 3 NPC→her cx3:facFound AGRUN sends her the ask; 4 NPC→NPC cx3:facJoin asks the leader; 5 NPC→her cx3:facJoin for HER faction) and role-parity-drift2-play 1 FAIL (A her: Hoàng hậu sees «Lập phe cùng») = IDENTICAL on LIVE 17f23656 rebuilt → pre-existing, not caused.
+6. Law 11 before/after tables present in dev/handover/reports/e-f4fac.md (F4 cards, facAct acts×answers, odds sites).
+
+## Verdict: PASS 4fd3bf42. Lander: merge current origin/main (clean) + rebuild built files. Open (not blockers): Q1 chanceW/chanceLo 105 calls (owner), Q2 canon ladder in CLAUDE.md/VANPHONG §1 (law 14).
+Reviewer handover: none needed (finished; no screenshots, no UI change).
