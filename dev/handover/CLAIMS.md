@@ -650,3 +650,4 @@ D-RANKPACE-RV (BIG rv of review/rank-pace 548ef991) | review/rank-pace(-rv) | FO
 HARNESS FIXER #19 (opus) finish job 3 (per-kind board BEFORE/AFTER table, seed 3683447523) + job 4 (two-tap picker in robot-rt, ring-build slice + 3 LIVE slices) | review/robot-realtap-lc27 (from ab6355af) | session_01UV1SziWJHf53TUMtvyFeek | RUNNING | 2026-11-27T07:53Z (F ROOT #3; FIXER #18 rolled at ctx 33 %, archived)
 E-GAIN3c (law-3 Phạt vô cớ + servant door family, law-4 typed act deltas, disabled reason fallback) | review/e-gain3c (on e-gain3b 78c8608a) | session_01DgYSWo8fBsPXh742eESkZB | RUNNING | 27/11 07:56Z (Foreman E child2)
 KIT-STAGE-R13 enlarged-card cut + badge | review/kit-stage-r13 | session_01Rc5AsJLuNggGdxUYXoWf71 | RUNNING | 2026-11-27T08:22Z (MAIN 175)
+PICKER-DOM r4 successor | review/picker-dom | FOREMAN D session_01D3E3NagaVYs8K14c2bMUy1 / worker session_01D3E3Nb4VrF8iWzxUGrQpNW | RUNNING | 27/11 08:22Z
