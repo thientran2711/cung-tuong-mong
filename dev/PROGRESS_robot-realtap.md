@@ -1050,3 +1050,37 @@ robot-rt slices on plain LIVE (Fold; jsClicks 0, DEAD 0, stuck 0 in all):
 - F2 has no natural-plaque proof yet. In 6 robot-rt runs the bot met ≤ 1 person-ring plaque, because the road is random: «pick» took «Viện mẫu thân» / «Mẫu thân» but never a ring plaque. In every run liftOnly = 0 and there was no «another one is lifted» bug. The key matches the game DOM: jkit lift() reads `.kpk-n[data-id=…]`, and the lifted node is that `.kpk-n`. Proof still to bring: a save replay at a home buổi with the mẫu thân ring, or BIG #21's es1 when its road comes up again → plaque ≥ 3, liftOnly 0, chosen counts them.
 - Not done: the optional Fold s21 NO-EXIT repro (.kscn after Điện tuyển «Nhận»). No FOR MAIN line, because there is no proof.
 - Scratch (not in git): tree /home/user/wt/f22 (index-m1..m8.html untracked), logs /home/user/wt/f22-out/<run>/, recipe /home/user/wt/f22-out/run.sh <name> <game.html> [crawler args]; robot-rt: `RT_PIN=0 RT_NOSHOT=1 node dev/test/robot-rt.js http://127.0.0.1:8920/<html> <out> life=<n> dev=fold origin=pf road=pt_su bot=sens seed=43 slice=3`.
+
+## HARNESS FIXER #23 (11/27/2026, session_01UV1Szk6BFtQK3Q2WQZrzDy, for F ROOT #6 session_01UV1SzhyWsBExe78xC7zMYR; worker, START_CTX ~5 %)
+PRIORITY #1 CHECK: BIG #21 RE-CHECK FAIL 0191f987 (reports/robot-realtap-review.md «— BIG #21 RE-CHECK»: F3 blocking, N5, N6) | PROGRESS «HARNESS FIXER #22» | LIVE origin/main 772bee4f | claims HARNESS FIXER #23 (CLAIMS 493e5c40). KIT CHECK: n/a (harness only).
+Stacked on 0191f987 + merge of LIVE 772bee4f (clean; main touched only dev/test/lib/coop-clear.js). Files changed: dev/test/robot-rt.js, dev/test/button-crawl.js, dev/test/realtap.js (+ this file). 0 game files. node --check OK · robot-lint LINT OK 0 (default set + button-crawl.js) · rt-bare-unit 20/20 · added lines with `.click(` / dispatchEvent / `.focus(` / keyboard.: 0.
+### Changes (F3 family, law 11: every place that reads «lift → Chọn chip»)
+- robot-rt SCAN: every button carries `off` = the part (or its .kpk-n) has `.kitoff` / `.kfoc-off` (jkit btnHTML: act.off → `kfoc-b kfoc-off kitoff`; kitPick conf(): `a.off` → chip hidden, by design).
+- robot-rt picker (choose): once the life started, locked parts are dropped from the choice set while anything else is left (counted `harness.offSkip`, labels in `harness.offSkipLog` ≤ 40). DIALOG STALL `live` set skips them too. Proof knob `offskip=0` (Seat config) turns the skip off, for a mutant proof only.
+- robot-rt two-tap: a tapped locked part = an «off» tap: `twoTap.offTap++`, the lifted plaque's text (its reason) in `harness.offTapLog`, an OFFTAP trace row; no chip tap, no [game] bug (no liftOnly / noLift / «no Chọn chip» row). A chip that does show on a locked part is counted `twoTap.offChip`.
+- crawler press(): a locked part returns two:'locked' — PASS «locked: lifts, shows its reason, no Chọn»; FAIL when a «Chọn» chip shows on it («a.off must hide it»), when another plaque takes the lift, or when nothing lifts. Read in the selx/talk walk verdict and in the BFS rows. The walk taps locked parts first, so the one fully chosen (lift + chip) is an OPEN part.
+- realtap.choose() (talk plaque path): a locked plaque logs `{k:'locked'}`, not `no ✓`.
+- N6: the NO-EXIT record (harness.noExit + its [harness] bug) keeps the last 20 trace rows, the top layer's outerHTML head (2500 / 1200 chars in the bug) and the element chain at the screen middle.
+### Proof (LIVE 772bee4f served by rt-serve-build.sh :8923, 137 paths 200; mutants rebuilt on its index.html; Fold --fast unless said)
+| run | old crawler 0191f987 | tip |
+|---|---|---|
+| M10 (new): first act of every plaque set locked (talk) | GATE FAIL 1 «1st tap: lifted, but no «Chọn» chip came» (the F3 false row) | GATE PASS: locked PASS «locked: lifts, shows its reason, no Chọn» + lift-only PASS + lift+chip PASS |
+| M11 (new): M10 + conf() shows «Chọn» on a locked plaque | — | GATE FAIL 1 «locked part shows its «Chọn» chip» |
+| plain LIVE --start selx / talk | — | GATE PASS / GATE PASS |
+| plain LIVE two devices --fast fold,ipad | — | GATE PASS, 235 taps, 0 sure; two-tap rows 4 lift-only + 2 lift+chip per device (G1 Chi Nhi focus not met this run: random) |
+| M1 / M2 / M3 / M4 / M5 / M6 / M7 / M8 / M9 | — | GATE FAIL 7 / 13 / 1 (home floor) / 6 / 2 / 2 / 2 / 2 / 6 |
+robot-rt (Fold unless said; jsClicks 0 · DEAD 0 · stuck 0 · NO-EXIT 0 in EVERY run below):
+| run | road | twoTap | offSkip / offTap | false «no Chọn chip» / liftOnly |
+|---|---|---|---|---|
+| E-S1 recipe ×5 on plain LIVE (es1-1,2,3,5,6; without RT_NOSHOT) | home 30 b ×3, palace 30 b, Ban hoa b1 | hand 43/11/66/55/10, plaque 2/1/0/0/0 | offSkip 10 / 13 / 6 / 0 / 0 | 0 / 0 |
+| iPad 1180x820 sens s61 slice 12 | 12 b | hand 2 chosen 2 | — | 0 / 0 |
+| M10 E-S1 recipe, skip on (m10e-22) | 30 b | plaque 1, chosen 49 | offSkip 14: «Thêm cung nữ · Tốn Bạc 20», «Chọn làm cung nữ thân cận · Tốn Bạc 30», «Cài người vào cung khác …» (.kfoc) | 0 / 0 |
+| M10 E-S1 recipe, offskip=0 (m10f-33) | 30 b, 693 taps | plaque 12 | offTap 3 «Thêm thái giám · Tốn Bạc 20 · lifts · … !» | 0 / 0 |
+| control: robot-rt 0191f987 vs tip on M10 seed 77 pick «mẫu thân» | 10 b | the road met no plaque (both) | — | — |
+- F3 = fixed: the e2 shape (tapping spent plaques) now gives liftOnly 0 and 0 false [game] rows; with the skip on, the picker does not tap them at all; with it off, each is an offTap with its reason.
+- N6: 5 E-S1 runs WITHOUT RT_NOSHOT (2 palace, 3 home): the s21 NO-EXIT shape did NOT come back (noExit 0 in all; also 0 in 8 M10 runs). So no new evidence «game wait vs harness»; the next one is recorded with its lead-in (20 trace rows + top layer HTML), so the reviewer / game owner can tell from the JSON alone.
+### OPEN (honest)
+- N5 (crawler M7 ✓ row text «lift+chip: next») not touched (note, not asked).
+- m10f-33 (mutant, offskip=0) wrote 6 [game] «two-tap plaque «Trò chuyện với cung nữ / Giao việc phòng bị / Dò la tin tức · Tốn 1 khắc»: «Chọn» tapped, the lift stays»: closeNoFxLog shows the lift went, S hash unchanged for 4 s, screen `.kscn «»` both before and after (the plaques sit on a .kscn layer, the choice opens a scene on the same layer + empty title, so «moved» never turns true). Not seen in 7 plain-LIVE runs; may be the mutant or a real slow scene; same `.kscn «»` shape as N6. For the reviewer: check whether «moved» should also accept a new .kscn root (crawler N1 does: div.kscn root).
+- m10e-24: one hand row «Nghỉ một lát: the tapped part did not take the lift (another one is lifted)» — hand, not F3.
+- Scratch (not in git): tree /home/user/wt/f23, LIVE build /home/user/wt/build-772bee4f (index-m1..m11.html untracked), logs /home/user/wt/f23-out/<run>(.log), crawler recipe /home/user/wt/f23-out/run.sh <name> <html> [args]; robot-rt: `RT_PIN=0 [RT_NOSHOT=1] node dev/test/robot-rt.js http://127.0.0.1:8923/<html> <out> life=<n> dev=fold origin=thd road=thd_tho bot=rand seed=3683447523 slice=30 [offskip=0]`. M10 = after `P.G=G;` in kitPick build(): lock acts[0] when none is off; M11 = M10 + conf() `if(!a)` instead of `if(!a||a.off)`.
