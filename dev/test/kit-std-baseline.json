@@ -1,0 +1,10 @@
+{
+ "note": "RV-171 re-freeze on LIVE 0562e15f (door-onetap) + kk56-live c5746a2a + kit-std-audit + mucluc/evframe (review/rv171-land-0562); gate mode SUBS=0, Fold 755x1000 + iPad 1180x820. X02 20 = Bàn bài hand cards (KK R12/R13); X06 4 = court tab bare «Mong manh» on button.kbtn.kppb + its small line, Fold+iPad, came with LIVE 0562e15f (door-onetap); X08 4 = pre-existing on LIVE (court «Trong cung: Chương 1…» one-line value cut ×2, iPad kitPick kfoc-off card ×2). The .kwaitl waiting line is no longer counted (timing flake). LIVE 0562e15f with the same scan = 59. Counts may only shrink.",
+ "sha": "0562e15f",
+ "total": 28,
+ "cnt": {
+  "X02": 20,
+  "X06": 4,
+  "X08": 4
+ }
+}

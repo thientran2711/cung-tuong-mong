@@ -4,7 +4,7 @@ const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,UR
 const SIZES=process.env.ONE?[[755,1000,2]]:[[755,1000,2],[1000,755,1],[1180,820,2],[1366,1024,2],[844,390,1],[390,844,1]];
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  for(const [W,H,D] of SIZES){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:D,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
-  await ctx.addInitScript(()=>{window.__bot=1});const p=await ctx.newPage();  /* reviewer r7: __bot = no jload first-run download screen over the book */const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,120)));
+  await ctx.addInitScript(()=>{window.__bot=1});const p=await ctx.newPage();await require('./lib/veil').guard(p);  /* reviewer r7: __bot = no jload first-run download screen over the book */const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,120)));
   await p.goto(URL+'index.html',{waitUntil:'domcontentloaded',timeout:120000});
   await p.waitForFunction(()=>typeof start==='function'&&typeof KIT_ACTS!=='undefined'&&KIT_ACTS.log&&KIT_ACTS.log.length>100,null,{timeout:120000});
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
