@@ -708,3 +708,4 @@ FLIGHT2-S21F life (seat s21d session_01UV1SzjdUAD8Wsw9vKeewnt, sonnet; iPad 1180
 FLIGHT2-S16C RESUME (seat s16 #2, sonnet, child of F ROOT 7 c1; resume from FINAL ckpt review/flight2-s16 2550b171, build 540358c4 b 26414b85697a, harness f65d019b, seed 2026112545 iPad bold) | dev/handover/robot/flight2-s16c.* | seat s16 #2 (opening) | RUNNING | 2026-11-27T22:35Z (FOREMAN F ROOT 7 c1 session_01UV1Szk61M2hTnNkbv9xqAz)
 FLIGHT2-S16C RESUME seat s16 #2 = session_01UV1SzkrqrqWTsUfa9zCzKG | RUNNING | 2026-11-27T22:36Z (id for the 22:35Z row)
 tmk-warn | review/tmk-warn | session_01Rc5AsJe5ywoWUwdcbVh8ZN | RUNNING | 2026-11-27T22:50Z (MAIN 181, F find s21e)
+kit-stage-r16 | review/kit-stage-r16 | session_01Rc5AsMH9EMwkQZMHfyL2VU | RUNNING | 2026-11-27T22:57Z (MAIN 181)
