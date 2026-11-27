@@ -34,6 +34,14 @@ const expSrc=(()=>{let t='';for(const d of ['dev/build','dev/site'])for(const f 
 const exported=id=>new RegExp('(?:window|globalThis|self)\\.'+esc(id)+'\\s*=[^=]|(?:window|globalThis|self)\\[[\'"]'+esc(id)+'[\'"]\\]\\s*=').test(expSrc);
 for(const h of hits)if(h.cls==='A'&&exported(h.id))h.cls='B';
 const A=hits.filter(h=>h.cls==='A'),B=hits.filter(h=>h.cls==='B');
+if(process.argv.includes('--classb')){console.log(JSON.stringify(B.map(h=>({file:h.file,line:h.line,id:h.id,ctx:h.ctx}))));process.exit(0)}
+// --strict (law 11, class B): every class-B name must have a static provider (window.X= export, or a top-level declaration in another
+// module/script) or a reasoned entry in dev/measure/scope-classb.json; a NEW unexplained name fails. Table: dev/measure/SCOPE_CLASSB.md
+if(process.argv.includes('--strict')){const wl=JSON.parse(fs.readFileSync(path.join(__dirname,'scope-classb.json'),'utf8'));
+ const topDecl=id=>new RegExp('^(?:const|let|var|function|class)\\s+'+esc(id)+'\\b','m').test(expSrc);
+ const bad=[...new Set(B.map(h=>h.id))].filter(id=>!exported(id)&&!topDecl(id)&&!wl[id]);
+ for(const id of bad){const h=B.find(x=>x.id===id);console.log(`CLASS B UNEXPLAINED  ${id}  (${h.file}:${h.line})  …${h.ctx.replace(/\s+/g,' ')}…`)}
+ console.log(`scope-scan --strict: ${new Set(B.map(h=>h.id)).size} class-B names, ${bad.length} unexplained`);process.exit(bad.length?1:0)}
 if(process.argv.includes('--json'))console.log(JSON.stringify(A,null,1));
 else{const seen=new Set();for(const h of A){const k=h.file+':'+h.line+':'+h.id;if(seen.has(k))continue;seen.add(k);console.log(`${h.file}:${h.line}  ${h.id}   …${h.ctx.replace(/\s+/g,' ')}…`)}
 console.log(`scope-scan: class A (declared in module, read out of scope) = ${seen.size} site(s) FAIL; class B (cross-module globals, info) = ${new Set(B.map(h=>h.id)).size} name(s)`)}
