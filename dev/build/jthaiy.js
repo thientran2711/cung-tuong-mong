@@ -42,11 +42,11 @@ function trusted(p){p=p||S;if(p.doctor)return true;if(p!==S)return false;const c
 function bribedBy(p){p=p||S;if(trusted(p))return null;return bribers(p)[0]||null}
 window.thyBribedBy=bribedBy;window.thyTrusted=trusted;
 /* ---------- what the pulse can read ---------- */
-function tainted(p){return (p.inv||[]).filter(e=>e&&e.t&&e.by!==key(p)&&TAINT[e.t]&&["xa","chi","meo","bua"].includes(e.t))}
+function tainted(p){return (p.inv||[]).filter(e=>e&&e.t&&e.by!==key(p)&&TAINT[e.t]&&["xa","chi","meo","bua","doc"].includes(e.t))}
 function plotsOnHer(){try{const z=S.j70;if(!z||!z.pl)return[];return z.pl.filter(p=>!p.end&&p.t==="me"&&!p.kn&&p.pg>=1&&(p.m==="poison2"||(p.m==="musk"&&S.preg)))}catch(e){return[]}}
-const TW={xa:"dấu xạ hương",chi:"dấu chì ngấm dần",meo:"khí suyễn do lông thú",bua:"khí huyết bị hao mà không rõ vì sao"};
-const TWHERE={xa:"túi thơm, hương trầm",chi:"son phấn",meo:"đệm gấm",bua:"túi thơm, đệm gấm"};
-const PW={tra:"dấu độc ngấm chậm, như từ trà uống hằng ngày",son:"dấu chì, chu sa, như từ son phấn",huong:"dấu hương độc, như từ lò trầm trong phòng",ty:"dấu thuốc lạ trong thang an thai",hh:"dấu hồng hoa trong canh bổ",tsv:"dấu thuốc lạ trong thang an thai",xh:"dấu xạ hương"};
+const TW={xa:"dấu xạ hương",chi:"dấu chì ngấm dần",meo:"khí suyễn do lông thú",bua:"khí huyết bị hao mà không rõ vì sao",doc:"dấu hương độc ngấm qua hơi thở"};/* doc: jscent «tẩm hương độc» (review scent r1) */
+const TWHERE={xa:"túi thơm, hương trầm",chi:"son phấn",meo:"đệm gấm",bua:"túi thơm, đệm gấm",doc:"hộp hương xông"};
+const PW={tra:"dấu độc ngấm chậm, như từ trà uống hằng ngày",son:"dấu chì, chu sa, như từ son phấn",huong:"dấu hương độc, như từ lò trầm trong phòng",lohuong:"dấu hương độc, như từ hộp hương xông trong phòng",ty:"dấu thuốc lạ trong thang an thai",hh:"dấu hồng hoa trong canh bổ",tsv:"dấu thuốc lạ trong thang an thai",xh:"dấu xạ hương"};
 function sucWord(s){return s>=BAL.sucLv.word[2]?"khí huyết dồi dào":s>=BAL.sucLv.word[1]?"khí huyết điều hòa":s>=BAL.sucLv.word[0]?"khí huyết hơi hư nhược":"khí huyết rất suy nhược"}
 /* Sức khỏe (jkh, spec 4.6): ≥ thyLo Khỏe mạnh · thyBad..thyLo Hơi yếu · < thyBad or ill Có bệnh; a bribed physician softens one step */
 function verdict(lie){const i=illOf(S);const s=S.suc||0;const K=typeof khB==="function"?khB():null,kh=K?khOf(S):100;const bad=i||(K&&kh<K.thyBad);if(bad&&!lie)return["Có bệnh","r"];if(s<40||(bad&&lie)||(K&&kh<K.thyLo))return["Hơi yếu","n"];return["Khỏe mạnh","g"]}
