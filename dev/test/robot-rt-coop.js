@@ -53,6 +53,25 @@ function guestPre(st) { return (sc, b) => {
   if (process.env.RTV && sc.title !== st.lastT) { st.lastT = sc.title; console.log('GUEST WAIT', sc.layer, '«' + sc.title + '»', b.map(x => x.t.slice(0, 30)).join(' | ')) }
   return 'wait' } }
 
+/* A-COOP #3 (coop1j room c 3T7K, 19:48Z): after a seat's life ENDED, a person takes the next kiếp IN THE ROOM on the end card: «Tiếp theo»
+   (death cinematic) then «Chuyển kiếp» (j32 over() card, onClose start → jcoopworld nlRun/nlAccept = in-room new life, CW.inLife). Before, the
+   next Seat began from the title («Cùng hảo hữu → Trở lại phòng»): the room's canon still held her ALIVE start-of-week state (a dead seat never
+   sends its week end), so each rejoin revived her before the death, she died again (host k3…k21 «Hồng nhan bạc mệnh», header «Kiếp thứ 21»),
+   and the friend waited «Đợi hảo hữu xong tuần» for ever. Real taps only (hit-checked centre). The life is already stamped ENDED here, so this
+   is not a voluntary exit road. Falls back to the title path (resumePre) when no end card is up. */
+async function rebirthInRoom(p, dev, who) {
+  const t0 = Date.now(); let took = false;
+  while (Date.now() - t0 < 90e3) {
+    const hit = await p.evaluate(() => { const W = innerWidth, H = innerHeight;
+      for (const b of [...document.querySelectorAll('button,[role=button]')]) { const tx = (b.innerText || '').replace(/\s+/g, ' ').trim(); if (!/^(chuyển kiếp|tiếp theo)$/i.test(tx) || b.disabled) continue;
+        const r = b.getBoundingClientRect(); if (r.width < 4 || r.height < 4) continue; const x = r.left + r.width / 2, y = r.top + r.height / 2; if (x < 0 || y < 0 || x > W || y > H) continue;
+        const t = document.elementFromPoint(x, y); if (t && (t === b || b.contains(t))) return { x, y, tx } } return null }).catch(() => null);
+    if (hit) { if (dev === 'ipad') await p.mouse.click(hit.x, hit.y); else await p.touchscreen.tap(hit.x, hit.y); console.log('REBIRTH ' + who + ' tap «' + hit.tx + '»'); if (/chuyển kiếp/i.test(hit.tx)) { took = true; await p.waitForTimeout(2500); break } await p.waitForTimeout(1500); continue }
+    await p.waitForTimeout(1500) }
+  if (!took) console.log('REBIRTH ' + who + ': no «Chuyển kiếp» on screen in 90 s — next kiếp goes by the title (resumePre)');
+  pair.bugs.push({ type: 'coop', msg: 'rebirth ' + who + ': ' + (took ? 'in-room «Chuyển kiếp» tapped' : 'no end card, title path'), at: new Date().toISOString() });
+  return took }
+
 /* both seats rejoin together: a seat that reloads (unstick lvl 3) sets the friend's want → the friend reloads + «Trở lại phòng» too */
 const LINK = { host: { want: 0 }, guest: { want: 0 } };
 async function seatLoop(ctx, who, dev, other) {
@@ -68,6 +87,7 @@ async function seatLoop(ctx, who, dev, other) {
     if (k >= KIEP && other.done) break;
     if (k >= KIEP && !extra && other.done) break;
     if (k >= KIEP + 20) break; /* safety net: 20 extra lives while the friend is still in the same life = runaway */
+    await rebirthInRoom(p, dev, who);
   }
   return p;
 }
