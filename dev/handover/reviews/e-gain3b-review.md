@@ -108,3 +108,35 @@ KIT CHECK: fix reuses kitHint / kitHintSign (jk2b, read-only), optLine kit HTML 
 3. With 1 + 2 done, re-run on the merged unit: gain-empty Fold + iPad (6 states) and say for each of the 5 merged-only empties (Thỉnh an › Đeo ngay / Để sau ×2, Trò chuyện) whether LIVE alone shows it in the same state (pre-existing) or the unit causes it.
 
 Shots: none (rows read from test json). Scratch: /home/user/wt/eg3rv2-out (not in git).
+
+---
+
+# RE-REVIEW 2 (27/11 ~15:30Z) — review/e-gain3-live 4db15919 (code + build 26308d3f; e-gain3c + e-gain3b + land fixes, merged with LIVE d9ca7892)
+
+PRIORITY #1 CHECK: report dev/handover/reports/e-gain3-live.md §A/§D | LIVE d9ca7892 at the review start (ancestor of 4db15919); main moved to 772bee4f during the review | review/* review/e-gain3-live 4db15919 | claims E-GAIN3-LIVE-2 session_01DgYSWnf2mstVedSHmT1NNq. Scope (Foreman E): LAND items 1–3 of «RE-REVIEW» + e-gain3b scope + regression; e-gain3c content = E-GAIN3c-RV.
+KIT CHECK: `git diff d9ca7892 4db15919 -- j63 j19 jk2b jopic jkring` = empty (kit internals untouched); fixes reuse kaRows/kcls, kitHint, DOOR.rowHint, the writer class `g`.
+
+**VERDICT: PASS 4db15919** (on LIVE d9ca7892). Landing note: main is now 772bee4f — `git merge 772bee4f` into 4db15919 is source-clean; only the generated `index.html` + `sw.js` conflict → rebuild (assemble + build_site), then re-run door-row-hint + gain-empty Fold on that merge before the fast-forward.
+
+## LAND items
+1. **«nàng quý ta −−» as Được — CLOSED.** One reading `DOOR.REG` (jdoor.js:20: quý/tin/thương/nể/mến/kính + ngươi/ta/bổn cung/nàng, thiện cảm, quý nhau) used by the doorGain filter + TG, DOOR.TGT, DOOR.hintGain. Root fix: her «Bàn tán về <X>» is offered only when `aff(listener, X) < 0` (j9 topicOpts) = the NPC speaker's own gate (jagacts3.js:150 `if(aff(t,th)<0)add("talkGossip",…)`) → law 1 parity, and the cost-only case is gone (law 3). It is a small rule-level change (her option hidden when the listener likes X); justified by laws 1 + 3, Foreman E should name it to MAIN. My gain-empty: cards with «quý ta / quý ngươi / tin ta −» in Được = **0 / 0** (Fold / iPad); gain-regard-scan: regard loss as the only gain **0 runs** both devices.
+2. **door-row-hint on the merge — CLOSED.** Mine: **Fold 8145 rows, iPad 8415 rows, 0 bad, 0 page errors, exit 0.** «Mượn son phấn» (gh): x now leads with `<g>được chia nửa hộp <part></g> (hoặc chút ít cho có)` = the lender's «Chia» answers (jrcv RCVK.rougeBorrow) → hint «được chia nửa hộp còn thiếu (hoặc chút ít cho có), Sẵn lòng / Không ưa». The 4 rows of FAIL 1 stay right (Hặc ăn mặc sai phẩm, Tố xa xỉ, Hạ độc · nặng, Hạ nhục · nặng); Khoe quà ngự ban · nhẹ «Danh +; …». Mutants: MUTANT=1 (dau,cao) **exit 1** (14 distinct), MUTANT=hg (dau) **exit 1** (7) — the hintGain branch is now covered (my earlier note closed).
+3. **merged-only empties — CLOSED.** gain-empty 6 states: **Fold 1698 cards, iPad 1729 cards, 0 page errors**; the only empty = «Lập phe cùng ai · 1 ›» (Fold hh:fac / iPad con:fac) = the jkring §104.2 ring opener, LIVE-own kit part, filed as KIT REQUEST #11 (dev/kit/KIT_REQUESTS.md:438; also empty on LIVE alone in my 0562e15f run). Thỉnh an › Đeo ngay / Để sau, Trò chuyện, Mặc kệ, Đổi người chạy việc, Nghỉ ngơi một lát: not empty in any of my runs.
+
+## e-gain3b scope (unchanged since PASS-ready): Khoe quà ngự ban Danh +BAL.tw.g.flauntDanh both sides, §5.1 green Thành wording, §5.5 BAL keys, KIT REQUESTs #1–#5 — present on 4db15919 (grep), no new typed number in the e-gain3b files.
+
+## Regression (4db15919 rebuilt with assemble.py = the committed dev build; page as file://)
+| test | result |
+|---|---|
+| door-loss Fold | 736 ways, 0 bad, exit 0 |
+| act-audit cao 755x1000 | done errs=0, exit 0 |
+| old save LIVE d9ca7892 → 4db15919 (oldsave-r1) | **16/16**, 0 page errors (755x1000 / 1180x820 / 1366x1024) |
+| charge-smoke · odds-one-row | exit 0 · 755/1180/390 PASS |
+| fac-parity-play · role-parity-drift2-play | ALL PASS · ALL PASS (0 FAIL) |
+| q-softlock (root index.html, same machine), 4 alternating runs | LIVE d9ca7892: FAIL(4), FAIL(5), FAIL(4)… then PASS · branch: FAIL(4), PASS, FAIL(4) → **flaky on LIVE too, pre-existing** (the 4 checks: view holds card / ✕ shows it / parked view / stale view; device flips) — not this unit; worth its own ticket |
+
+## Notes (not blocking; pre-existing on LIVE / kit keeper)
+- Some door-dialog hints still glue kit heads where the row comes from LIVE's jone card mode: «Hạ nhục · nặng: Danh nàng −−Bạichỉ uổng công·không mất gì khác …»; «Hặc ăn mặc sai phẩm / Tố xa xỉ: không, Danh ++ …» (a leading «không» piece). Same text as base (test «changed» excludes them) — ugly, not false; for the kit keeper / jone owner.
+- KIT REQUEST #4 family still open: «Hạ độc · nặng: Đức +, Bạc +» (servant runner lines read as hers), «Tát · nhẹ: Sắc +», «Phạt quỳ · vừa: Đức +».
+- gain-regard-scan info: «Thỉnh an Hoàng hậu: Hoàng hậu → ta: thiện cảm −» and «Dâng tài nghệ: thiện cảm −−» sit beside a real gain in Được (Fold / iPad) — check whether those are the hỏng half.
+Shots: none (rows read from test json). Scratch /home/user/wt/eg3rv3-out (not in git).
