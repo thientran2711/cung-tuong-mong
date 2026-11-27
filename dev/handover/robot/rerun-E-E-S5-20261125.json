@@ -10,7 +10,7 @@
  ],
  "note": "flagged lives left #kg82 mini-game boards unplayed per audit (mg quit); verdict INVALID under Foreman E rule 26/11 until F posts the board-play PASS; audit script verdict stays VALID",
  "game": "LIVE github.io",
- "finished": 32,
+ "finished": 33,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -23760,6 +23760,739 @@
    "exitPick": null,
    "mgDragSkip": null,
    "mgReady": 38
+  },
+  {
+   "life": "E-S5-R5-scholar-5",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 1826410615,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "death": true,
+   "age": 23,
+   "buoi": 520,
+   "harness": {
+    "kind": "realtap",
+    "sha": "f65d019b",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [],
+    "slice": null,
+    "mgBackN": 31,
+    "mgBackQuitN": 0,
+    "builds": [
+     {
+      "s": "4cd3f974+",
+      "b": "9ab008eb74f9",
+      "where": "start"
+     }
+    ],
+    "build0": {
+     "s": "4cd3f974+",
+     "b": "9ab008eb74f9",
+     "t": "2026-11-27T03:34Z",
+     "at": "2026-11-27T07:22:33.763Z"
+    },
+    "build": {
+     "s": "4cd3f974+",
+     "b": "9ab008eb74f9",
+     "t": "2026-11-27T03:34Z"
+    },
+    "areaTaps": 3072,
+    "consoleErrN": 33,
+    "ident": {
+     "name": "Viên Mặc Lan",
+     "org": "Công chúa Phù Tang hòa thân",
+     "born": -19,
+     "at": 1
+    },
+    "dlgScroll": 70,
+    "scrolls": 108,
+    "skipLayerTaps": 153,
+    "infoTaps": 576,
+    "mgQuickSkipped": 83,
+    "mgReady": 31,
+    "mgMiss": 755,
+    "boards": [
+     {
+      "at": 133,
+      "buoi": 4,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 175,
+      "area": 0,
+      "s": 22,
+      "res": "0/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 209,
+      "buoi": 8,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 26,
+      "res": "8/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 292,
+      "buoi": 12,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 434,
+      "buoi": 20,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 166,
+      "area": 0,
+      "s": 22,
+      "res": "2/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 509,
+      "buoi": 24,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 601,
+      "buoi": 28,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 195,
+      "area": 0,
+      "s": 22,
+      "res": "3/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 668,
+      "buoi": 32,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 200,
+      "area": 0,
+      "s": 22,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 733,
+      "buoi": 36,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 180,
+      "area": 0,
+      "s": 22,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 930,
+      "buoi": 48,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1072,
+      "buoi": 56,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 29,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1202,
+      "buoi": 68,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 175,
+      "area": 0,
+      "s": 22,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1281,
+      "buoi": 72,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 203,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1523,
+      "buoi": 88,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1631,
+      "buoi": 92,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1781,
+      "buoi": 100,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 26,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1859,
+      "buoi": 104,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1935,
+      "buoi": 108,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 2108,
+      "buoi": 116,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 25,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 2189,
+      "buoi": 120,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 4685,
+      "buoi": 280,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 156,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4765,
+      "buoi": 284,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 28,
+      "res": "6/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 4829,
+      "buoi": 288,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 194,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4979,
+      "buoi": 296,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 183,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 5055,
+      "buoi": 300,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 157,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 5195,
+      "buoi": 308,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 170,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 5389,
+      "buoi": 320,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 28,
+      "res": "6/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 5465,
+      "buoi": 324,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 1,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 5628,
+      "buoi": 332,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 5717,
+      "buoi": 336,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 28,
+      "area": 1,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 5902,
+      "buoi": 344,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 1,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 6145,
+      "buoi": 360,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 159,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     }
+    ],
+    "boardN": 31,
+    "mgPeekTaps": 2819,
+    "boardTaps": 2819,
+    "mgBackWhy": [
+     {
+      "at": 133,
+      "buoi": 4,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 209,
+      "buoi": 8,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 293,
+      "buoi": 12,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 434,
+      "buoi": 20,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 510,
+      "buoi": 24,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 601,
+      "buoi": 28,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 668,
+      "buoi": 32,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 733,
+      "buoi": 36,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 930,
+      "buoi": 48,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1072,
+      "buoi": 56,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1202,
+      "buoi": 68,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1281,
+      "buoi": 72,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1524,
+      "buoi": 88,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1631,
+      "buoi": 92,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1781,
+      "buoi": 100,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1859,
+      "buoi": 104,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1935,
+      "buoi": 108,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2108,
+      "buoi": 116,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2189,
+      "buoi": 120,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4685,
+      "buoi": 280,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4765,
+      "buoi": 284,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4829,
+      "buoi": 288,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4979,
+      "buoi": 296,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5055,
+      "buoi": 300,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5195,
+      "buoi": 308,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5389,
+      "buoi": 320,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5465,
+      "buoi": 324,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5628,
+      "buoi": 332,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5717,
+      "buoi": 336,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5902,
+      "buoi": 344,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 6145,
+      "buoi": 360,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     }
+    ],
+    "dlgClose": 130,
+    "dressPut": 20,
+    "bareCovered": 16,
+    "bareCoveredBy": {
+     "not on the layer scanned": 15,
+     "div.kbk-cv over section#panel.panel.kpane": 1
+    },
+    "closeOwnLayer": 1,
+    "kfocVisits": 1,
+    "nextNoTurn": 1,
+    "skipCoverTaps": 2,
+    "taps": 3604
+   },
+   "bugs": [],
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": 31
   },
   {
    "life": "E-S5-R5-skilled-2",
