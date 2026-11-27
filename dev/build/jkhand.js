@@ -100,12 +100,17 @@ function kitHand(M){try{M=M||document.getElementById("modal");if(!M||M.hidden)re
   if(!g.__khMO&&typeof MutationObserver==="function"){g.__khMO=new MutationObserver(()=>{try{g.__khMO.disconnect();kitHandCards(g).forEach(kitHandShort)}finally{g.__khMO.observe(g,{subtree:true,childList:true,characterData:true})}});g.__khMO.observe(g,{subtree:true,childList:true,characterData:true})}
   if(!g.__khRO&&typeof ResizeObserver==="function"){g.__khRO=new ResizeObserver(()=>{if(!g.isConnected||g.__khBusy)return;cancelAnimationFrame(g.__khRaf);g.__khRaf=requestAnimationFrame(()=>kitHandLay(g))});g.__khRO.observe(g)}});
  /* KK35: a REUSED dialog whose new card is no hand (a notice after a hand frame) keeps no hand / stage classes, figures or scene (the next frame decides again) */
- M.querySelectorAll(".dlg.khdlg,.dlg.kstage").forEach(dl=>{if(dl.querySelector(".opts.khand"))return;dl.classList.remove("khdlg");if(dl.classList.contains("kstage")&&typeof kstgOff==="function")kstgOff(dl)})}catch(e){console.error("kitHand",e)}}
+ M.querySelectorAll(".dlg.khdlg,.dlg.kstage").forEach(dl=>{if(dl.querySelector(".opts.khand"))return;dl.classList.remove("khdlg");if(dl.classList.contains("kstage")&&typeof kstgOff==="function")kstgOff(dl)});
+ /* DLG-DEAD-BTN (law 11, Foreman F «Tin báo» «Để sau» / «Chọn lá này» dead on LIVE): the lift plate + ✓/✕ pair live on the REUSED .dlg; a card lifted on one
+    queue card, then that card replaced by the next one (news / timer / one-copy panel), left them up on the new card with NO lifted card — ✓ and ✕ did nothing
+    and the plate covered the hand (and hid the stage text). A frame drawn with no lifted card shows no plate and no pair. */
+ kitHandStale(M)}catch(e){console.error("kitHand",e)}}
+function kitHandStale(M){try{(M||document).querySelectorAll("#modal .dlg").forEach(dl=>{if(dl.querySelector(".opts.khand>button.klift"))return;dl.querySelectorAll(":scope>.khplate:not([hidden]),:scope>.khconf:not([hidden])").forEach(x=>x.hidden=true)})}catch(e){console.error("kitHandStale",e)}}
 window.kitHand=kitHand;window.kitHandWants=kitHandWants;window.kitHandLay=kitHandLay;window.KIT_HAND=KIT_HAND;
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=document.getElementById("modal");if(M&&!M.hidden){kitHand(M);requestAnimationFrame(()=>kitHand(M))}}catch(e){console.error("kitHand",e)}return r}})();
 /* the two-tap gate (capture, before #modal onclick): a REAL tap (detail ≥ 1) on a resting card lifts it; on the lifted card it chooses (with the fly); a tap elsewhere in the frame drops the lifted card */
 document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;
- const cf=t.closest("#modal .dlg>.khconf>button");/* the hand's own ✓/✕ (a kitPick .kpk-conf inside the stage is its own part) */if(cf){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const dl=cf.closest(".dlg"),L=dl&&dl.querySelector(".opts.khand>button.klift");if(!L)return;
+ const cf=t.closest("#modal .dlg>.khconf>button");/* the hand's own ✓/✕ (a kitPick .kpk-conf inside the stage is its own part) */if(cf){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const dl=cf.closest(".dlg"),L=dl&&dl.querySelector(".opts.khand>button.klift");if(!L){kitHandStale(dl&&dl.parentElement);return}/* a pair with no lifted card under it: it goes, never a dead ✓ */
   if(cf.classList.contains("khok"))kitHandChoose(L);else kitHandDrop(L.parentElement);return}
  const b=t.closest("#modal .opts.khand > button.kopt");
  if(!b){const g=t.closest("#modal .opts.khand");if(g){/* a tap that landed on the list box: a locked card under the finger (browsers that swallow events on disabled buttons) */const hit=kitHandCards(g).find(x=>{const r=x.getBoundingClientRect();return x.disabled&&e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom});if(hit){e.stopPropagation();kitHandLift(hit);return}}

@@ -48,7 +48,7 @@ function punRows(o){const a=punWho(o.by),R=[];const w=punPlain(o.why);/* the edi
 function punNote(o){if(!S||S.dead)return;if(window.__punQuiet)return;/* review/place-close: the caller says the punishment in its own kit notice (chip + «Tin báo»), no panel (owner: no dialog for overstay) */
  const R=punRows(o);const a=punWho(o.by);
  if(typeof kitPanel!=="function"){Q.push({t:PUNK[o.kind]||"Bị phạt",h:`<p>${R.map(r=>`${r[0]}: ${r[1]}`).join("<br>")}</p>`,btn:"Đã rõ"});return}
- kitPanel({kind:"notice",title:o.kind==="giang"?"Bị giáng phẩm":PUNK[o.kind]||"Bị phạt",sub:typeof when==="function"?when():"",subject:a||null,sections:[{h:"",rows:R}],btn:"Đã rõ"})}
+ kitPanel({kind:"notice",rk:o.kind==="giang"?1:0/* rank screen (j93 kmRankWait) */,title:o.kind==="giang"?"Bị giáng phẩm":PUNK[o.kind]||"Bị phạt",sub:typeof when==="function"?when():"",subject:a||null,sections:[{h:"",rows:R}],btn:"Đã rõ"})}
 /* LÃNH CUNG STAY: p may leave only after BAL.pun.coldMinDays days inside (an NPC sent there by any road is stamped lazily) */
 function coldStamp(p){if(!p)return;const inn=p===S?!!S.out:!!p.out;if(inn){if(p.coldWk==null)p.coldWk=punNow();if(p!==S&&p.coldR==null)p.coldR=coldRankIn(p)}else{if(p.coldWk!=null)p.coldWk=null;if(p!==S&&p.coldR!=null)p.coldR=null}}
 /* the rank an NPC held when she went in (Hoàng hậu = 7; a demotion earlier the same day is folded in, like her S.coldRank) — reviewer r1, law 1 */
