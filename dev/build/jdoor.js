@@ -45,8 +45,9 @@ function doorFold(p,A){if(!p||!Array.isArray(A)||!A.length)return A;
     open:()=>doorOpen(p,r.k)};Object.defineProperty(d,"m",{value:M,enumerable:false});/* its members (tests, DOOR.flat) */
    const XM=r.acts&&typeof DOOR.more==="function"?DOOR.more(p,r):[];/* J2 ext (c) */
    if(!free.length&&!XM.some(x=>!x.off)){d.lock=true;d.t=M[0].t||(XM[0]&&XM[0].why)||"chưa làm được"}
+   {const dg=doorGain(free.concat(M.filter(x=>x.lock)).map(x=>x.x).concat(XM.filter(x=>!x.off).concat(XM.filter(x=>x.off)).map(x=>x.x)));if(dg)d.x+=" · "+dg}/* LAW 3 (E-GAIN3): the door's Được = its ways' main gains */
    made[r.k]=d;out.push(d)}});
- /* J2 ext (c): a door made only of her in-person acts (no talk member), at the end */for(const r of DOOR.T)if(r.acts&&!made[r.k]&&!cnt[r.k]&&(!r.kinds||r.kinds.includes(p.kind))&&xn(r)>=2){const XM=DOOR.more(p,r);const d={n:r.n,door:r.k,o:100,fix:1,x:"chọn mức và cách",open:()=>doorOpen(p,r.k)};if(!XM.some(x=>!x.off)){d.lock=true;d.t=(XM[0]&&XM[0].why)||"chưa làm được"}made[r.k]=d;out.push(d)}
+ /* J2 ext (c): a door made only of her in-person acts (no talk member), at the end */for(const r of DOOR.T)if(r.acts&&!made[r.k]&&!cnt[r.k]&&(!r.kinds||r.kinds.includes(p.kind))&&xn(r)>=2){const XM=DOOR.more(p,r);const d={n:r.n,door:r.k,o:100,fix:1,x:"chọn mức và cách",open:()=>doorOpen(p,r.k)};{const dg=doorGain(XM.filter(x=>!x.off).concat(XM.filter(x=>x.off)).map(x=>x.x));if(dg)d.x+=" · "+dg}/* LAW 3 (E-GAIN3) */if(!XM.some(x=>!x.off)){d.lock=true;d.t=(XM[0]&&XM[0].why)||"chưa làm được"}made[r.k]=d;out.push(d)}
  A.forEach((a,j)=>{out[-1-j]=a});return out}
 window.doorFold=doorFold;
 /* (1) the outermost talkOpts wrapper */
@@ -225,3 +226,14 @@ DOOR.rowsJ2=function(r,M,v){const out=[];const seen=new Set();const seed=[S.turn
   if(typeof DOOR.more==="function")M=M.concat(DOOR.more(p,r));nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";
   const w=doorWho(p);try{who=w&&typeof WHO==="function"?WHO(w):null}catch(e){}}
  const o=DOOR.rowsJ2(r,M,v);if(!o.length)return null;o.push({n:"Thôi"});return{t:`${r.h}${nm?` <b>${nm}</b>`:""}`,o,who}}})();
+/* LAW 3 «Được» of a DOOR card (E-GAIN3, MAIN 171 / KK54 census): a door card (the ways sit inside its dialog) shows what opening it gets her = the
+   MAIN gain of each way, read from that way's OWN line (the same kit parse its option card uses, so every number is the way's BAL number, law 4).
+   lines = the ways' lines, usable ways first; returns «được: <g>a</g>; <g>b</g>» (at most `max` gains, one per way, deduplicated) or "".
+   A one-word piece of a split list («Văn» of «Văn, Đức, Võ tăng …») is not a gain by itself; a band mark keeps no decimal tail («++,5» → «++»). Each way gives its FIRST gain (a way whose first gain is already listed adds nothing). Skipped: a risk («có thể …», «khả năng …», KA_RISK), a line that says nothing (KA_NOTHING), the shared runner side gain «Chủ tin với …», a paid «Chứng cứ n», «… không đổi». */
+function doorGain(lines,max){max=max||3;const seen=new Set(),G=[];const E=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+ for(const x of lines||[]){if(!x||G.length>=max)continue;let h="";try{h=kitParse(String(x))}catch(e){continue}const d=document.createElement("div");d.innerHTML=h;
+  const c=[...d.querySelectorAll(".kr-duoc .ef, .kr-thanh .ef")].map(e=>e.textContent.replace(/\s+/g," ").trim().split(/\s+—\s+|\s*\(/)[0].replace(/([+−-]+),\d+/g,"$1").replace(/[\s,;:·]+$/,""))
+   .filter(t=>t&&/\S\s+\S/.test(t)&&!(typeof KA_NOTHING!=="undefined"&&KA_NOTHING.test(t))&&!/^không( |$)/i.test(t)&&!/^Chủ tin với /.test(t)&&!/^Chứng cứ \d/.test(t)&&!/không đổi/.test(t)&&!/(^|\s)(có thể|khả năng)(\s|$)/.test(t)&&!(typeof KA_RISK!=="undefined"&&KA_RISK.test(t)));
+  const t=c[0];if(t&&!seen.has(t)){seen.add(t);G.push(t)}}
+ return G.length?"được: "+G.map(t=>`<span class="g">${E(t)}</span>`).join("; "):""}
+window.doorGain=doorGain;
