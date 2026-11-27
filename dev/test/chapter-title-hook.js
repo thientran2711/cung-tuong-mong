@@ -13,6 +13,13 @@
    H10 story complete (ch.all) → «Chương N — Mệnh truyện trọn vẹn» = goal panel (one rule: line 2 follows the goal panel). Exit 1 on any failure. */
 const {chromium}=require('playwright');const [,,URL]=process.argv;
 const sleep=t=>new Promise(r=>setTimeout(r,t));
+/* E-T2FLAKE: no fixed sleeps — every wait is on the real condition, bounded, with a clear TIMEOUT message. stable(p) = the #modal (hidden flag + text) and the day-title card stay unchanged for 3 polls (150 ms): the panel finished opening/closing/re-rendering. */
+const until=(p,fn,what,ms=20000)=>p.waitForFunction(fn,null,{timeout:ms,polling:50}).catch(e=>{throw new Error('TIMEOUT waiting for '+what+' ('+ms+' ms): '+String(e.message).split('\n')[0])});
+const settle=p=>p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
+const SIG=()=>{const m=document.getElementById('modal');return (m?(m.hidden?'H':'V')+m.innerText:'')+'|'+!!document.getElementById('kdaytc')};
+const sigOf=p=>p.evaluate(SIG);
+/* stable(p,prev): with prev (the sigOf() taken BEFORE the action) first wait until the modal really CHANGED from it (a click handler may act a tick later), then until it stays unchanged for 3 polls */
+const stable=(p,prev,ms=8000)=>p.evaluate(([prev,ms,src])=>new Promise((res,rej)=>{const sig=eval('('+src+')');const t0=Date.now();let last=null,n=0,moved=prev==null;const tick=()=>{const s=sig();if(!moved&&s!==prev)moved=true;if(moved){if(s===last)n++;else{n=0;last=s}if(n>=3)return res(1)}if(Date.now()-t0>ms)return rej(new Error('TIMEOUT waiting for the modal to '+(moved?'settle':'change after the action')+' ('+ms+' ms)'));setTimeout(tick,50)};requestAnimationFrame(tick)}),[prev==null?null:prev,ms,SIG.toString()]);
 (async()=>{const b=await chromium.launch();const R={errs:[],fail:[],ok:[]};
  const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:1,serviceWorkers:'block',reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{window.__gp=function(){let c;try{c=window.kitChapterTitle()}catch(e){return{ok:false,why:'hook threw'}}let G=null;try{G=window.kitGoalNow()}catch(e){G='throw'}
@@ -21,12 +28,12 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const g=`${G.kicker} — ${strip(G.title)}`;const ok=!!c&&`Chương ${c.n}`===G.kicker&&!!c.name&&!/[{}<>]/.test(c.name)&&(/[{]/.test(G.title)||c.name===strip(G.title));
   return{ok,c:ct,g,home:!!G.C.home,kind:G.C.kind,n:G.C.n}}});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>R.errs.push(e.message.slice(0,200)));
- await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(1500);
+ await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function'&&document.readyState==='complete');await settle(p);
  const fresh=(o,home)=>p.evaluate(([o,home])=>{const kl=document.getElementById('kload');if(kl)kl.remove();window.__forceOrigin=o;SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;
   let kc=false;if(home){S.kcPick='nha';try{if(!S.kc)kcInit()}catch(e){}kc=typeof isKc==='function'&&isKc()}Q.length=0;
   try{const c=document.getElementById('kdaytc');if(c)c.remove()}catch(e){}const m=document.getElementById('modal');if(m)m.hidden=true;return {k:(S.origin&&S.origin.k)||S.origin,kc}},[o,!!home])
   /* card-aware (kit-daytitle): the start card #kdaytc comes at +600 ms; wait it out and close it so nothing is held */
-  .then(r=>p.evaluate(()=>typeof kitDayTitleShow==='function').then(k=>k?sleep(800).then(()=>p.evaluate(()=>{const c=document.getElementById('kdaytc');if(c)c.remove();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true})).then(()=>r):r));
+  .then(r=>p.evaluate(()=>typeof kitDayTitleShow==='function').then(k=>k?p.waitForFunction(()=>document.getElementById('kdaytc'),null,{timeout:3000,polling:25}).catch(()=>null).then(()=>p.evaluate(()=>{const c=document.getElementById('kdaytc');if(c)c.remove();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true})).then(()=>r):r));
  const ck=(c,m)=>{(c?R.ok:R.fail).push(m)};
  /* H1 */
  const h1=await p.evaluate(()=>({f:typeof window.kitChapterTitle,e:window.kitChapterTitle&&window.kitChapterTitle.e92===1,ci:typeof window.chapterInfo,gc:typeof window.kitGoalChapter}));
@@ -34,7 +41,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  /* H2 every origin in the palace, H5 rebirth */
  const origins=await p.evaluate(()=>ORIGINS.map(o=>o.k).concat(typeof ORIGIN_BR==='object'?Object.keys(ORIGIN_BR):[]).filter((k,i,a)=>a.indexOf(k)===i));
  const rows=[];
- for(const o of origins){try{await fresh(o)}catch(e){R.fail.push('H2 start '+o+' threw '+String(e).slice(0,120));continue}await sleep(150);
+ for(const o of origins){try{await fresh(o)}catch(e){R.fail.push('H2 start '+o+' threw '+String(e).slice(0,120));continue}await settle(p);
   const r=await p.evaluate(()=>{const before=JSON.stringify(S.st);const g=__gp();const t=chapterTitle(S);return {g,t,same:JSON.stringify(S.st)===before}});
   rows.push(`palace ${o}: card ${r.g.c} | goal ${r.g.g}`);
   ck(r.g.ok&&r.g.c&&r.t===r.g.c&&r.same,`H2 new life ${o}: card «${r.g.c}» = goal «${r.g.g}»`)}
@@ -42,7 +49,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   ck(a.ok&&b2.ok&&(oa!=='cnv'||a.c!==b2.c),`H5 rebirth ${oa}→${ob} follows the new S (${a.c} → ${b2.c})`)}
  /* H8 every home road before the tuyển tú */
  const homes=await p.evaluate(()=>(typeof KC==='object'?KC.ok:[]).concat(typeof KC2K==='object'?Object.keys(KC2K):[]).filter((k,i,a)=>a.indexOf(k)===i));
- let nh=0;for(const o of homes){let f;try{f=await fresh(o,1)}catch(e){R.fail.push('H8 start '+o+' threw '+String(e).slice(0,120));continue}await sleep(150);
+ let nh=0;for(const o of homes){let f;try{f=await fresh(o,1)}catch(e){R.fail.push('H8 start '+o+' threw '+String(e).slice(0,120));continue}await settle(p);
   if(!f.kc){R.fail.push(`H8 ${o}: kcInit did not open the home road`);continue}nh++;
   const r=await p.evaluate(()=>{const before=JSON.stringify(S.kc)+JSON.stringify(S.st);const g=__gp();let l2=null;
    if(typeof kitDayTitle==='function'){const d=document.createElement('div');d.innerHTML=kitDayTitle({n:3});const e=d.querySelector('.kdt2');l2=e?e.textContent:''}
