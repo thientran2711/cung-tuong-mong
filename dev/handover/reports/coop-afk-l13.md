@@ -93,3 +93,64 @@ State: review/coop-afk-l13-r2 a1ce5d62 = DONE for the original brief (above; SSK
 1. SCOPE ADD (brief end, MAIN 159 ruling, NO replay = the old «OPEN 2», not an owner question): CW.restore (jcoopworld ~L996 «if(CW.sent!==wk()) … snapLoad(C) … CW.restore(o)») keeps the host's OWN pending week end across a reload (still refuses FOREIGN pending copies). Evidence of the replay: wk6 R1 08:28 / R2 09:23 (host 6.0 1/5/1 → 6.0 1/5/0). New test: host reload while his week end waits (L13: gHold on her open cards, e.g. coop-afk-l13.js setup with NAFMS large, then reload the host + «Trở lại phòng») → same week end after the reload, no replay (same date, his week end ran once); base FAIL / fix PASS + MUTATE; SWAP 0 / SWAP 1.
 2. Child 4 16:42Z: merge LIVE b881686f (ACT-MERGE: action names renamed, assemble.py module list changed) into the branch (assemble.py = union), rebuild (assemble + build_site), re-run the co-op gates.
 How to resume: sparse worktree from origin/review/coop-afk-l13-r2 (fetch --depth=30 under flock); local Worker = coop/worker `wrangler@4 dev --port 8797 --ip 127.0.0.1` (npm i wrangler@4 in a side dir, symlink node_modules); ONE co-op test at a time (I once ran two series at once by mistake: `pgrep -fa dev/test/` before starting). Gate commands = the table above (coop-afk-l13.js THIN=13|0 AFK=g|h COOP_SWAP=1; coop-night THIN 13/0; coop-e2e ±COOP_SWAP; coop-week-wait ±COOP_SWAP; dayq-hold-coop on the LIVE Worker; keymove; sangbuoi-held file://…/index.html; CTM_LIVE_REF=<live> bash dev/tools/quickcheck.sh). Real run: robot-rt-coop.js copy with recordVideo + THIN + an AFK/reload trigger (mine was not committed; trigger described in «Real 2-seat room R1»), Fold host + iPad guest, videos to img/_review/coop-afk-l13/ via dev/site/cdn_sync.py. A force-push is refused here: push a NEW branch name (e.g. review/coop-afk-l13-r3).
+
+## OPEN 2 FIX (27/11, B FIXER session_01N1tNP5BSs2j6LN9LonrKMG, opus, depth 5, START_CTX ~3 % of 1M) — host reload while his week end waits: NO replay (MAIN 159)
+PRIORITY #1 CHECK ('host reload replay week pending CW.restore'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 (brief) → ruling MAIN 159 (FOREMAN_B_STATUS 11:55Z); reused: CW.restore (the ONE restore path, no second one), snapLoad / snapOk / pickSnap, CW.gBlob (his toCanon's form of her store), TH.seatDrop / seatOf, the existing re-ready after a host reload (jcoopthine E.boot), syncRoom's re-end rule.
+BRANCH: review/coop-afk-l13-r3 = review/coop-afk-l13-r2 a1ce5d62 + 443b866d / 3d6ba3ce / 87a68bdc / 5435a49c (code + test) + 8b7baec5 (site rebuilt) = HEAD. LIVE b881686f NOT merged (no gate needed it).
+Root (base a1ce5d62, new test THIN 13 AFK=g RELOAD=h): host pend 1/3/1/0 «Chờ hảo hữu…» → reload → 1/3/0/0 buổi sáng «Sẵn sàng» = his week replays (CW.restore refused every pend copy; at level 13 her week end, run on his page, lived only in its memory).
+
+### The fix
+| where | before | after |
+|---|---|---|
+| jcoopworld CW.restore | every copy with pend or sent = this week refused; date / buổi checks on every copy | OWN pending copy (this device + this room, same seat / week, room not ended) KEPT: its date is ahead by design, so the date / buổi checks apply to mid-week copies only; a restored pend keeps its night commit (ngoW, host ngo: the ONE AFK bound reads it) and looks at its end at once (soonEnd). FOREIGN pending copy (another device's server copy, the «room» wake path) still refused |
+| jcoopworld CW.restore, level 13 host | — | the pend copy needs HER week end back (CW.gBack): without it refused (old path), never a pend host whose part G cannot finish. Level = room level or the copy's own thl (the level message may not be back yet after a reload — first run failed exactly so) |
+| jcoopthing CW.snap wrapper + CW.gBack | her store after her week end ran on the host = page memory only | written beside his copy at the same snapSave moment, this device only, never in the seat copy (localStorage ctm-coop-gwk = {room, week, b: CW.gBlob()}); CW.gBack(week) puts it back (base.P[her seat] = blob, seatDrop, G.done[week]) — for ANY own copy of that week, so a reload after her week end and before his night no longer runs her week end a second time |
+| jcoopworld CW.restore, guest level 13 (law 11 twin) | her copy past the go (sent) or ahead of the room's date (her week end's patches from the host) refused → the room's week start on her screen until the host's next view | kept (her phone runs no week end at 13: such a copy IS her week end as the host ran it) |
+| jcoopworld CW.restore, lost end (law 11) | my end sent but not on the server (room says not ended) → refused → replay | kept as pend, sent again (as syncRoom's re-end); only when the room's ended list is known |
+| jcoopworld syncRoom buổi catch-up | could step a restored pend seat (buổi 0 of the new week < the room's tối) | skipped for a pend seat / a seat whose date is past the room's |
+No number, no word, no UI (laws 4 / 7 / 9 / 10). Tried and reverted (law 16): night commit + her ready inside every copy → coop-night 11 / 12 red (the existing E.boot re-ready already covers a mid-week host reload).
+
+### LAW 11 — every pending co-op step a reload can replay
+| step | before | after |
+|---|---|---|
+| host's own pend end, level 0 / 5 (his dialogs) | NO: week replays | kept (pk) — RELOAD=h THIN 0 |
+| host pend at level 13 (her cards) | NO: week replays | kept + her week end (gBack) — RELOAD=h THIN 13, SWAP 0/1 |
+| host at 13 after her week end, his night not yet (G.done, not pend) | her week end ran AGAIN on the week-start store (cards / patches twice, law 6c) | gBack on every own copy → not re-run |
+| guest's own pend end, level 0 / 5 | NO: week replays | kept (pk, same rule both seats) — RELOAD=g THIN 0 |
+| guest at 13 past the go | NO: week-start screen (race with the host's next view) | kept (gk) — RELOAD=g THIN 13, SWAP 0/1 |
+| own end sent but lost (socket down, then reload) | NO: replay | sent again (code; no dedicated test: needs a drop between send and the server) |
+| end out (room ended[seat]) | begin: sent = week, waits for the merge | unchanged |
+| night ready (nrdy) | in the copy | unchanged |
+| host commit / her ready mid-week (ngo / nfr) | re-ready by jcoopthine E.boot | unchanged |
+| dayq hold | solo only; co-op Q rides the copy | unchanged |
+| selection days (selxHold) | origin/main only, not on the co-op chain | — |
+LAW 6c: the kept end is the ONE run's state (same snapSave moment for his copy and her store); after every reload his / her own week end ran 0 times (new row); her carried test card answered once (S.afkT = 1); part-D patch numbers continue from the saved D.N.
+
+### Gates (final code 5435a49c = 8b7baec5; local wrangler dev Worker :8797; ONE test at a time)
+| gate | fix | base a1ce5d62 | MUTATE |
+|---|---|---|---|
+| NEW coop-afk-l13 RELOAD=h THIN 13 AFK=g SWAP 0 (host reloads while his end waits on her cards) | 25/25 ×4 (incl. the real run) | FAIL «same week end»: 1/3/1/0 pend → 1/3/0/0 sáng | pk=false: FAIL ×2 (1/3/0/0) |
+| NEW same, SWAP 1 | 25/25 ×2; once 24/25 on 87a68bdc («room steps»: ngoW lost → bound never armed) → fixed 5435a49c | — | — |
+| NEW RELOAD=g THIN 13 (guest twin) SWAP 0 / SWAP 1 | 25/25 ×3 / 25/25 ×2 | FAIL 1 of 2 (1/3/0/0; the other run healed by the host's view inside 2.5 s = the race) | gk=false: FAIL (1/3/0/0) |
+| NEW RELOAD=h THIN 0 AFK=h (host own pend, law 1) | 25/25 ×2 | — | — |
+| NEW RELOAD=g THIN 0 AFK=g (guest own pend) | 25/25 ×2 | — | — |
+| (harness notes) | F-h0 19/23 = the test's own tap answered its test card (fixed: one tap per look, never the test card); F-g0 21/23 = wait 120 s too short for that life (→ 240 s) | | |
+| coop-afk-l13 THIN 13 AFK=g / SWAP 1 / AFK=h / THIN 0 | 21/21 ×2 / 21/21 / 21/21 / 21/21 ×2 | | |
+| coop-night THIN 13 / THIN 0 | 126/126 ×2 / 127/127 ×2 (first THIN 13 on 3d6ba3ce: 124/126 rows 11/12 → the reverted copy fields) | | |
+| coop-e2e SWAP 0 / SWAP 1 | 143/143 ×2 / 143/143 ×2 | | |
+| coop-week-wait SWAP 0 / SWAP 1 | 34/34, 33/34, 32/34 / 34/34 ×2, 32/34 — red rows only «host night ran, his week end is out (he read his night cards)» / A2 her queue (no reload in this test) | SWAP 0 33/34 (same row family), SWAP 1 34/34 = PRE-EXISTING flake | |
+| dayq-hold-coop (LIVE Worker) | 23/23 | | |
+| coop-cal-rebirth (local Worker) | 79/79 | | |
+| coop-keymove-unit | 12/12 | | |
+| sangbuoi-held (built index.html) | ALL PASS (32 rows) | | |
+| quickcheck ALONE vs LIVE b881686f | 8b7baec5: build PASS (built = fresh build), open 2033 ms, perf new render 215 / tab 601 / buổi 3952 / tasks>200 27 (5435a49c run: buổi 1632 — noise; no solo path touched); old save FAIL (timeout 30 s), live build not measurable (timeout), G4 crawl «fold · Ô lưu · Lui» | SAME on a1ce5d62 alone: old save FAIL (timeout), live not measurable, G4 crawl «fold · Ô lưu · Lui» = PRE-EXISTING / environment (open 1858, buổi 1620) | |
+| coop/worker | unchanged | | |
+
+### Real 2-seat room (Fold 755x1000 host + iPad 1180x820 guest; local Worker; level 13; coop-afk-l13 harness taps, VIDEO=; production bound 30 s after the reload): 25/25
+Guest presses Sẵn sàng and goes AFK on her week-end card («Việc khó xử»); the host's week end runs (his night card «Đêm không được triệu»), pend «Chờ hảo hữu…»; the HOST RELOADS («Cùng hảo hữu» › «Trở lại phòng») → back on the SAME week end (Tháng ba · trung tuần, «Chờ hảo hữu…», trace «restore: own pend 0»); the bound carries her card → the room steps ONCE (both trung tuần, host «Sẵn sàng»); she answers it on her return, once. 0 page errors.
+Frames looked 3× (both devices side by side). CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/coop-afk-l13/ open2-both-1-before.jpg · open2-both-2-after.jpg · open2-both-3-stepped.jpg · open2-fold-host-755x1000-1-before-reload.mp4 (52 s) · open2-fold-host-755x1000-2-after-reload.mp4 (69 s: reload → step) · open2-ipad-guest-1180x820.mp4 (113 s) — the recorder kept partial clips only (webm cut at the harness close).
+Seen, not touched: shot 3 host header shows the kit co-op friend chip «Hảo hữu của ta» (jcooptimer kitCoopFriend).
+
+### Laws touched
+1 two-way: host and guest reload, levels 0 and 13, SWAP 0/1 ✓ · 4: no number ✓ · 6c: one run, nothing given twice or lost (rows above) ✓ · 7/9/10: no word, no UI ✓ · 11: table above ✓ · 12: Fold host + iPad guest real run, looked 3× ✓ · 13: PRIORITY line ✓ · 14: CW.restore stays the ONE restore path ✓ · 16: mid-week restore rules unchanged; the tried copy fields reverted ✓.
+Leftovers outside git: worktrees /home/user/wt/afk3 / afkbase / afkmut and the local Worker (deleted at the end).
