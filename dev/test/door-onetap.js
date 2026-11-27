@@ -40,13 +40,13 @@ const RUN=String.raw`(()=>{window.__bot=1;const R={fail:[],warn:[],n:{door:0,one
   /* the Emperor where he stands (day) */if(bu<3){S.where.emp="vuon";if(go("vuon")){const i=curPeople().findIndex(x=>x.kind==="emp");if(i>=0)check(curPeople()[i],i)}}}
  /* E: real taps (one ONE + one tier row per door key) */
  const tapped={};for(const sc of ["cao","dau","hh"])for(const k of places()){AA.scen(sc);if(!go(k))continue;const P=curPeople();
-  for(let i=0;i<P.length;i++){const p=P[i];let A=[];try{A=talkOpts(p)}catch(e){continue}
+  PL:for(let i=0;i<P.length;i++){const p=curPeople()[i];if(!p)break;let A=[];try{A=talkOpts(p)}catch(e){continue}
    for(let j=0;j<A.length;j++){const d=A[j];if(!d||!d.door||d.lock||tapped[d.door])continue;tapped[d.door]=1;popIdx=i;Q.splice(0);ONE.last=null;const L0=(S.log||[]).length;
     try{talk(j)}catch(e){F("tap "+d.door+": "+e.message);continue}R.n.taps++;
     if(ONE.mode(d.door)==="keep"){if(!Q.length)F("KEEP door opened no card: "+d.door)}else if(d.one==="one"&&!ONE.last)F("ONE tap ran nothing: "+d.door);
     if(d.one==="tier"){const c=Q[0];if(!c||!c.opts||c.opts.filter(o=>o.go).length>3)F("tier tap no card / >3 rows: "+d.door);else{const o=c.opts.find(x=>x.go&&!x.off);Q.splice(0);if(o){o.go();if(!ONE.last)F("tier row ran nothing: "+d.door)}}}
     if(ONE.last){const hd=d.door;const lg=JSON.stringify((S.logs||[]).slice(0,8));if(!lg.includes(T(ONE.last.n)))R.warn.push("log lacks member "+hd+": "+ONE.last.n)}
-    Q.splice(0);popIdx=null;AA.scen(sc);go(k);break}}}
+    Q.splice(0);popIdx=null;break PL/* one tap per place: the visit changed (talked), the next tap needs a fresh place */}}}
  R.tapped=Object.keys(tapped);
  /* deck doors (Hành sự) */
  const DS=[()=>{},()=>{for(const a in S.arts)S.arts[a]=20},()=>{S.ill={k:Object.keys(ILL)[0],st:2,at:wk()};S.arts.y=5},()=>{S.preg=0;S.tamco=80},()=>{S.buoi=3},()=>{for(const k of S.kids||[]){k.age=Math.max(k.age,4);k.hp=10}}];

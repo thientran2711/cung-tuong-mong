@@ -189,11 +189,6 @@ function deckTap(b){if(!S||S.dead||Q.length)return true;const r=deckRowR(b);cons
    let wh=null;try{wh=typeof pMe==="function"?pMe():null}catch(e){}DOOR.card(b.dataset.ddoor,"Chọn mức.",rows,wh);return true}}
  const m=pick(r,L,seedOf(r,"me"));if(!m)return false;runM(r,m,L);return true}
 ONE.deckTap=deckTap;
-/* for the kit info card (KIT-STAGE-R10): the ≤ 3 tier choices of a deck door button, to draw INSIDE the card (no second scene).
-   [{t:"nhẹ"|"vừa"|"nặng", n:"<real way> · <mức>", x:"<its kit line>", off:{why}|null, go()}] — go runs the way picked for that tier, as the tier card does.
-   null = the door is ONE (tap = act) or KEEP. */
-ONE.deckTiers=function(b){try{const r=deckRowR(b);if(ONE.mode(r.k)!=="tier")return null;const L=deckM(b);const R=tierRows(r,L,"me");if(R.length<2)return null;
- return R.map(x=>({t:x.t,n:x.n,x:x.x,off:x.off||null,go:()=>{const m=pick(r,x.T,seedOf(r,"me",x.t));if(m)runM(r,m,x.T,x.t)}}))}catch(e){console.error("jone deckTiers",e);return null}};
 window.addEventListener("click",e=>{if(!ONE.on)return;const b=e.target.closest&&e.target.closest("#panel button[data-ddoor]");if(!b)return;try{const r=deckRow(b);if(r&&ONE.mode(r.k)==="keep")return}catch(x){}e.stopImmediatePropagation();e.preventDefault();if(b.disabled)return;
  try{deckTap(b)}catch(x){console.error("jone deck tap",x)}},true);
 /* the deck door's small line: the pick (ONE) or the 3 tier words (TIER) */
