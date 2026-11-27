@@ -3,7 +3,7 @@
    a proven «Mua chuộc người hầu» charge on the BUYER dismisses every servant who took the buyer's bạc, her too) with NO warning in between, and the take
    card named only the j42 srvWatch road. The charge rule itself is NOT changed (law 16); this module makes it visible and answerable:
    (a) every TAKE card (j42 cnvBribeOpts take / cnvBlackOpts obey, jcoopworld P2H.bribe / PEND.thBribe) prints the jcharge road in odds words
-       (cnvSpyX(m,noPay,v) → mcwTakeX: the charge's pieces chNeed and one search's odds chFind, BAL.charge, word() = BAL.odds.cut);
+       (cnvSpyX(m,noPay,v) → mcwTakeX: the charge's pieces chNeed and one search's odds chFind as a side-event chance chanceW «khả năng …», VANPHONG.md l.67; the ladder word() only for an option's own roll);
        every BUY card (j7 volunteer, jtsb defect, j24 svDefect) prints the same road from the buyer's side (mcwBuyX).
    (b) a REAL warning beat: the moment someone writes a piece of the mc charge on her buyer (evA hook, jcharge CHLASTC) — and on the monthly
        servant tick for old saves / co-op — she gets the card «Gió lọt» once per new piece, with three tiers (law 2, cost and result rise together):
