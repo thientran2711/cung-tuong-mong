@@ -17,7 +17,7 @@ function giftPeople(e){const L=[];L.push(["ct","emp","emp","Hoàng thượng"]);
  if(e&&e.wk&&S.maid)L.push(["cn","maid","maid",`${S.maid.name} (cung nữ thân tín)`]);return L}
 function giftPlain(h){return String(h||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()}
 /* what giving THIS item to THIS person does: {ok, why, x (kit line), v (value, for sorting)} */
-function giftEval(e,t){const pre="tốn: "+BAL.btn.give.k+" khắc";
+function giftEval(e,t){const pre=`tốn: ${BAL.time.cost.give} khắc`;
  if(e.wk){const ev=wkEval(S,e.wk,t);if(!ev.ok)return{ok:false,why:ev.why||"không nhận đồ này",v:-1};const g=typeof wkGainTxt==="function"?wkGainTxt(ev,t):"";return{ok:true,x:`${pre}${g?" · thành: "+g:""}`,v:ev.v||0}}
  const it=IT[e.k];if(!it)return{ok:false,why:"",v:-1};
  if((t==="emp"||t==="th")&&e.t)return{ok:false,why:"không thể dâng đồ đã tẩm",v:-1};
@@ -46,7 +46,7 @@ const GIFT_TABS=[["ct","Chí tôn"],["pt","Phi tần"],["nn","Nam nhân"],["cn",
 function giftDialog(ix){const e=S.inv[ix];if(!e||e.h)return null;const P=giftPeople(e).map(([g,id,t,lab])=>Object.assign({g,id,t,lab},giftEval(e,t)));
  P.sort((a,b)=>(b.ok-a.ok)||(b.v-a.v));const bestP=P.find(p=>p.ok);const best=bestP?`${bestP.lab}`:"";
  const O=P.map(p=>({n:p.lab,kgt:p.t,fx:{},kgift:p.ok?p.x:"",kgwhy:p.ok?"":(p.why||"không nhận đồ này"),kgg:p.g,lock:!p.ok,
-  go:()=>{if(!p.ok)return;spend(BAL.btn.give.k);const t=p.t;const i=S.inv.indexOf(e);window.__kitLastEvArt={src:giftArt(e).src,lab:giftName(e)};log(giveTo(S,t,i))}}));
+  go:()=>{if(!p.ok)return;spend(BAL.time.cost.give);const t=p.t;const i=S.inv.indexOf(e);window.__kitLastEvArt={src:giftArt(e).src,lab:giftName(e)};log(giveTo(S,t,i))}}));
  O.push({n:"Thôi",fx:{},kgx:1});
  return{t:giftInfo(e,best),o:O}}
 (function(){const g0=PEND.giftpick;PEND.giftpick=function(p){if(p&&p.ix!=null&&p.v==null&&S.inv[p.ix]){const d=giftDialog(p.ix);if(d)return d}return g0.apply(this,arguments)}})();
@@ -90,7 +90,7 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
  const M=$("modal");M.querySelectorAll("[data-kgtab]").forEach(b=>{const on=b.dataset.kgtab===GIFT_TAB;b.classList.toggle("on",on);b.setAttribute("aria-selected",on)});giftFilter(M)},true);
 (function(){const s0=showModal;showModal=function(){try{if(giftIxOf(Q[0])!=null||(Q[0]&&Q[0].pid==="giftto"))Q[0].showOut=true}catch(e){}const r=s0.apply(this,arguments);try{giftDecorate()}catch(e){console.error("gift",e)}return r}})();
 /* the chest's "Tặng" and the works' "Dâng, tặng": same dialog, titled for what it is */
-(function(){const i0=itemAct;itemAct=function(a,ix){if(a==="gift"&&S.inv[ix]&&!S.dead&&!Q.length){if(!can(BAL.btn.give.k))return;GIFT_TAB=null;pushDil(mkP("giftpick",{ix}),"Tặng quà");render();return}return i0.apply(this,arguments)}})();
+(function(){const i0=itemAct;itemAct=function(a,ix){if(a==="gift"&&S.inv[ix]&&!S.dead&&!Q.length){if(!can(BAL.time.cost.give))return;GIFT_TAB=null;pushDil(mkP("giftpick",{ix}),"Tặng quà");render();return}return i0.apply(this,arguments)}})();
 /* ---------- no "Triều chính" fallback: an id without its own picture uses its title's act category, and is listed for the audit ---------- */
 window.KIT_PICFALL=window.KIT_PICFALL||{};
 (function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){if(giftIxOf(m)!=null)return null;const r=k0.apply(this,arguments);try{
@@ -150,10 +150,10 @@ html body #mb .kesov>.kpsn[data-row="1"]{bottom:calc(12px + 2.6em)!important}
    Hầu cờ / đánh đàn / dạo ngự hoa viên: KM_EMPACT below (one meeting a day, shared with Xin yết kiến). */
 function giftBagFor(t){return S.inv.map((e,i)=>[e,i]).filter(([e])=>e&&!e.h&&(e.wk||IT[e.k])).map(([e,i])=>Object.assign({e,i},giftEval(e,t)))}
 PEND.giftto=p=>{const t=p.t;const L=giftBagFor(t);if(!L.length)return{t:"<p>Rương trống: chưa có món nào để dâng.</p>",o:[{n:"Thôi",fx:{},kgx:1}]};
- L.sort((a,b)=>(b.ok-a.ok)||(b.v-a.v));const who=t==="emp"?"Hoàng thượng":"Thái hậu";
+ L.sort((a,b)=>(b.ok-a.ok)||(b.v-a.v));const who=t==="emp"?"Hoàng thượng":"Thái hậu";const best=L.find(x=>x.ok);/* ACT-MOVE-5 (MAIN 168 keep-the-pick): the item he/she values most opens preselected (jgpick kgbest) */
  return{t:`<p>Dâng món gì lên ${who}? Mỗi món ghi đúng điều được, theo tâm trạng và sở thích của ${t==="emp"?"ngài":"người"}.</p>`,
-  o:L.map(x=>({n:`${giftName(x.e)}${x.e.wk?" ("+WTIER[x.e.wk.ti]+")":""}`,ik:x.i,fx:{},kgift:x.ok?x.x:"",kgwhy:x.ok?"":x.why,lock:!x.ok,kgg:x.e.wk?"wk":"it",
-   go:()=>{if(!x.ok)return;spend(BAL.btn.give.k);const i=S.inv.indexOf(x.e);window.__kitLastEvArt={src:giftArt(x.e).src,lab:giftName(x.e)};log(giveTo(S,t,i))}})).concat([{n:"Thôi",fx:{},kgx:1}])}};
+  o:L.map(x=>({n:`${giftName(x.e)}${x.e.wk?" ("+WTIER[x.e.wk.ti]+")":""}`,ik:x.i,fx:{},kgift:x.ok?x.x:"",kgwhy:x.ok?"":x.why,lock:!x.ok,kgg:x.e.wk?"wk":"it",kgbest:x===best?1:0,
+   go:()=>{if(!x.ok)return;spend(BAL.time.cost.give);const i=S.inv.indexOf(x.e);window.__kitLastEvArt={src:giftArt(x.e).src,lab:giftName(x.e)};log(giveTo(S,t,i))}})).concat([{n:"Thôi",fx:{},kgx:1}])}};
 /* the buổi she arrives in when the walk spills (j9 walkSpill) */
 function kgmArr(k){try{return String(BUOI[walkSpill(k).b]).toLowerCase()}catch(e){return"buổi sau"}}
 function courtMeet(t){const B=[];try{
@@ -166,12 +166,12 @@ function courtMeet(t){const B=[];try{
   else if(S.place===k)B.push(`<p class="kr3note">Ngài đang ở đây: chạm vào ngài trên sân khấu để trò chuyện.</p>`)}
  if(t==="th"&&!S.thDead){const k="tn";if(S.place!==k){const st=accState(k);const sp=accSpillOk(k,st);B.push(pbtn(`data-kgmgo="${k}"`,"Sang Đức Thọ cung thỉnh an",`tốn: ${st.tc||0} khắc · thành: đến Đức Thọ cung${sp?` vào ${kgmArr(k)}`:""}, thỉnh an Thái hậu tại đó`,sp?"":st.why||(!can(st.tc||0)?"hết khắc":"")))}}
  const n=S.inv.filter(e=>e&&!e.h&&(e.wk||IT[e.k])).length;
- B.push(pbtn(`data-kgmgive="${t}"`,t==="emp"?"Dâng quà lên Hoàng thượng":"Dâng quà lên Thái hậu",`tốn: ${BAL.btn.give.k} khắc · thành: chọn món trong rương (${n} món), mỗi món ghi đúng điều được`,!n?"rương trống":!can(BAL.btn.give.k)?"hết khắc":""))}catch(e){console.error("courtMeet",e)}
+ B.push(pbtn(`data-kgmgive="${t}"`,t==="emp"?"Dâng quà lên Hoàng thượng":"Dâng quà lên Thái hậu",`tốn: ${BAL.time.cost.give} khắc · thành: chọn món trong rương (${n} món), mỗi món ghi đúng điều được`,!n?"rương trống":!can(BAL.time.cost.give)?"hết khắc":""))}catch(e){console.error("courtMeet",e)}
  return B}
 document.addEventListener("click",ev=>{const g=ev.target.closest&&ev.target.closest("[data-kgmgo],[data-kgmgive]");if(!g||g.disabled)return;ev.stopPropagation();ev.preventDefault();
  try{closeModal()}catch(e){}
  if(g.dataset.kgmgo){const k=g.dataset.kgmgo;if(typeof walkGo==="function")walkGo(k);else if(typeof goTo==="function")goTo(k);return} /* walkGo = goTo, or the spill walk (arrives next buổi) */
- const t=g.dataset.kgmgive;if(!can(BAL.btn.give.k)||Q.length)return;pushDil(mkP("giftto",{t}),t==="emp"?"Dâng quà lên Hoàng thượng":"Dâng quà lên Thái hậu");render()},true);
+ const t=g.dataset.kgmgive;if(!can(BAL.time.cost.give)||Q.length)return;pushDil(mkP("giftto",{t}),t==="emp"?"Dâng quà lên Hoàng thượng":"Dâng quà lên Thái hậu");render()},true);
 (function(){const P0=typeof pcard==="function"?pcard:null;if(!P0)return;pcard=function(o){try{const gi=o&&o.groups?o.groups.findIndex(g=>g&&g[0]==="Việc hôm nay"):-1;if(gi>=0){
    const t=o.rank==="Hoàng thượng"?"emp":/^Thái hậu/.test(o.rank||"")?"th":null;if(t){const B=courtMeet(t);if(B.length){o.groups=o.groups.slice();o.groups.splice(gi,0,["Gặp "+(t==="emp"?"ngài":"Thái hậu")+" ban ngày",B])}}}}catch(e){}return P0.apply(this,arguments)}})();
 /* the giftto picker: same decoration as the gift dialog (✕, locked rows), no tabs */
@@ -216,14 +216,17 @@ function kmEmpAct(a,kind){const why=kmEmpWhy(a,kind);if(why)return null;a.kmEmpD
 (function(){const n0=nightCh;nightCh=function(p){const r=n0.apply(this,arguments);try{const q=p||S;if(q&&q.kmWalk===wk()&&r>0)return cl(r+BAL.empDay.walkNight,0,70)}catch(e){}return r}})();
 /* her: buttons in the Emperor card, result + the choice inside it */
 function kmEmpBtns(){return Object.keys(KM_EMPACT).map(k=>pbtn(`data-kmemp="${k}"`,KM_EMPACT[k][0],kmEmpLine(k),kmEmpWhy(S,k)))}
-document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-kmemp]");if(!b||b.disabled)return;ev.stopPropagation();ev.preventDefault();const kind=b.dataset.kmemp;
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-kmemp]");if(!b||b.disabled)return;ev.stopPropagation();ev.preventDefault();kmEmpRun(b.dataset.kmemp)},true);
+/* ACT-MOVE: the button path as ONE function, so the Emperor's pop-up door «Hiến nghệ» / «Hầu chuyện» runs the very same act (jamove) */
+function kmEmpRun(kind){
  try{closeModal()}catch(e){}const r=kmEmpAct(S,kind);if(!r){render();return}log(r.txt);
  if(r.ok&&kind!=="walk"){const tc=S.tamco||0;const oW=odA(S,30+tc/2),oL=odA(S,40+tc/2);
   Q.push({ev:1,t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="g">${r.txt}</p><p>${kind==="ky"?"Ván cờ đến hồi gay cấn.":"Khúc đàn sắp hết."} Ngươi định thế nào?</p>`,
    opts:[{n:kind==="ky"?"Thắng khéo, để ngài thua mà vẫn vui":"Kết khúc thật hay, khoe tài",fx:{},x:`${word(oW)} · thành: Danh ${balSg(BAL.eff.jgift.danhGo)}, Sủng ${balSg(BAL.eff.jgift.sungGo)} · hỏng: ngài phật ý, Sủng ${balSg(BAL.eff.jgift.sungGo_2)}`,go:()=>{if(roll(oW)){ap(S,{danh:BAL.eff.jgift.danhGo,sung:BAL.eff.jgift.sungGo});log(`Ngài khen ngươi khéo léo. Danh ${balSg(BAL.eff.jgift.danhGo)} · ${sgStat(BAL.eff.jgift.sungGo)}.`)}else{ap(S,{sung:BAL.eff.jgift.sungGo_2});log(`Ngài thoáng phật ý. ${sgStat(BAL.eff.jgift.sungGo_2)}.`)}}},
     {n:kind==="ky"?"Cố ý thua một nước":"Cố ý đàn chậm lại, để ngài chỉ bảo",fx:{},x:`${word(oL)} · thành: Ân tình ${balSg(BAL.eff.jgift.anGo)} · hỏng: ngài nhận ra, Sủng ${balSg(BAL.eff.jgift.sungGo_3)}`,go:()=>{if(roll(oL)){ap(S,{an:BAL.eff.jgift.anGo});log(`Ngài đắc ý, càng thương ngươi. Ân tình ${balSg(BAL.eff.jgift.anGo)}.`)}else{ap(S,{sung:BAL.eff.jgift.sungGo_3});log(`Ngài nhận ra ngươi cố ý nhường. ${sgStat(BAL.eff.jgift.sungGo_3)}.`)}}}]})}
  else Q.push({t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="${r.ok?"g":"r"}">${r.txt}</p>`});
- showModal();render()},true);
+ showModal();render()}
+window.kmEmpRun=kmEmpRun;
 (function(){const c0=courtMeet;courtMeet=function(t){const B=c0.apply(this,arguments);if(t==="emp")try{B.splice(Math.max(0,B.length-1),0,...kmEmpBtns())}catch(e){}return B}})();
 /* Xin yết kiến shares the one-a-day meeting with the three acts (coordinator 13:35Z): accState gives askWhy (the one reason every
    yết kiến button / card shows), accAsk marks the day. */

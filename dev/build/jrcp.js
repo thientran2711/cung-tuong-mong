@@ -213,7 +213,7 @@ function rcpBookRows(k){const b=rcpBk(k),a=itemArt(k),gr=KIT_GRADE[a?a.grade|0:0
 (function(){if(typeof kitShopEff!=="function")return;const e0=kitShopEff;kitShopEff=function(k){const b=rcpBk(k);if(b)return `đọc: học lối này${rcpKnows(S,b.kind,b.sid)?" (đã học)":""}`;return e0.apply(this,arguments)}})();
 (function(){if(typeof kinvOpen!=="function")return;const o0=kinvOpen;kinvOpen=function(x){const g=x&&x.g;const b=g&&!g.wk&&rcpBk(g.k);if(!b)return o0.apply(this,arguments);const it=itm(g.k),i=g.i;
  const kn=rcpKnows(S,b.kind,b.sid);const B=[pbtn(`data-rcpread="${i}"`,"Đọc, học lối này",`tốn: ${BAL.btn.rcpRead.k} khắc · thành: học ${rcpStN(b.kind,b.sid)}`,kn?"đã học lối này":whyTime(BAL.btn.rcpRead.k)),
-  pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng",`tốn: ${BAL.btn.give.k} khắc · thành: chọn người nhận`,whyTime(BAL.btn.give.k)),pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,"")];
+  pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng",`tốn: ${BAL.time.cost.give} khắc · thành: chọn người nhận`,whyTime(BAL.time.cost.give)),pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor((it.pr||0)/2)}`,"")];
  const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);const fr=kinvFrom(g.from);if(fr)F.push(fr+".");
  kitModal({kind:"info",title:it.n,sub:it.kd,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${rcpBookRows(g.k)}</div>${F.length?kitFacts(F):""}<div class="rbtn kinvacts">${B.join("")}</div>`})}})();

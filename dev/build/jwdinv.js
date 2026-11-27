@@ -86,7 +86,7 @@ function wdActBtns(e,g){const w=wdItem(e);if(!w)return[];const B=[];const ag=wdA
  if(g.wdPawn!=null){const P=S.wdPawn[g.wdPawn];B.push(pbtn(`data-wd="redeem" data-i="${g.wdPawn}"`,"Chuộc lại",`tốn: ${BAL.btn.wdTrade.k} khắc, Bạc -${P.back} · thành: món đồ về lại rương`,S.bac<P.back?`thiếu bạc (cần ${P.back})`:whyTime(BAL.btn.wdTrade.k)));return B}
  if(g.wdSlot){if(sl==="tram")B.push(pbtn(`data-wd="off" data-sl="tram"`,"Tháo trâm","thành: cất vào rương, để tóc trơn",""));return B}
  const ix=g.i;if(sl!=="hd")B.push(pbtn(`data-wd="wear" data-ix="${ix}"`,wdSlN(sl,1),`tốn: ${BAL.btn.wear.k} khắc · thành: vào ô ${wdSlN(sl,2)}, ${plainFx(w.w)||"giản dị"}`,whyTime(BAL.btn.wear.k)));
- B.push(pbtn(`data-kinvact="gift" data-ix="${ix}"`,"Tặng",`tốn: ${BAL.btn.give.k} khắc · thành: chọn người nhận`,w.nt?"đồ ngự tứ: không được đem tặng":whyTime(BAL.btn.give.k)));
+ B.push(pbtn(`data-kinvact="gift" data-ix="${ix}"`,"Tặng",`tốn: ${BAL.time.cost.give} khắc · thành: chọn người nhận`,w.nt?"đồ ngự tứ: không được đem tặng":whyTime(BAL.time.cost.give)));
  const ntWhy=w.nt?"đồ ngự tứ: bán, cầm là bất kính":"",agWhy=ag?"":"chưa có ma ma hay thái giám tin cẩn";const pr=w.pr||0;
  const lo=Math.round(pr*WD.sellLo/100),hi=Math.round(pr*WD.sellHi/100),pct=ag?wdSellPct(S,ag):0;
  B.push(pbtn(`data-wd="sell" data-ix="${ix}"`,"Bán lén",`${word(100-wdLeak(S,ag))} · tốn: ${BAL.btn.wdTrade.k} khắc · thành: Bạc +${ag?Math.round(pr*pct/100):lo+"–"+hi} · kèm: lộ ra thì mang tiếng túng thiếu, Danh -${WD.sellDanh}`,ntWhy||agWhy||whyTime(BAL.btn.wdTrade.k)));
@@ -99,7 +99,7 @@ function wdOpen(x){const g=x.g,e=wdEntryOf(g),w=wdItem(e);if(!w)return;const B=w
   html:`<div class="kinvrows">${wdItemRowsE(e,{pawn})}</div>${F.length?kitFacts(F):""}${B.length?`<div class="rbtn kinvacts">${B.join("")}</div>`:""}`,btn:"Lui"})}
 function wdFabOpen(x){const g=x.g,it=itm(g.k),gk=wdFabOf(g.k),w=WD_ITEMS[gk];const B=[];const i=g.i;
  B.push(pbtn(`data-kinvact="use" data-ix="${i}"`,"May áo",`thành: ${w.n} vào ô Y phục, ${plainFx(w.w)||"giản dị"} · kèm: áo đang mặc cất vào rương`,""));
- B.push(pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng",`tốn: ${BAL.btn.give.k} khắc · thành: chọn người nhận`,whyTime(BAL.btn.give.k)));
+ B.push(pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng",`tốn: ${BAL.time.cost.give} khắc · thành: chọn người nhận`,whyTime(BAL.time.cost.give)));
  if(it.pr)B.push(pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor(it.pr/2)}`,""));
  const gr=KIT_GRADE[x.grade|0];const rows=kitItemRows(g.k,{e:S.inv[i]});const fr="";/* origin: the Lai lịch row (KIT §70) */
  kitModal({kind:"info",title:it.n,sub:it.kd,itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n}).replace('<span class="kitn"></span>',''),
