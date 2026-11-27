@@ -191,3 +191,4 @@ FOR MAIN 165 (Foreman C ROOT 3-1-1-1-1, ~23:25Z 26/11): evidence-card «Ban ch�
 - (27/11 ~07:30Z) MAIN 173: LOOK PASS lãnh cung .85/1.03/.97 review/owner-ui-a f3d25b5a (real-game d-side stills) → sent sếp. DRESS-FIX n1 4d9a171e → RV-163G.
 - (27/11 ~07:00Z) MAIN 173: OWNER APPROVED lãnh cung look («Lãnh cung ok», OD row) → OWNER-UI-C f3d25b5a → RV-167 → next UI bundle.
 - (27/11 ~07:05Z) MAIN 173: OD row — owner-approved look-only CSS changes skip reviewer → LC28 gates + bundle. owner-ui-a → LC28 directly (if branch also carries JS/markup, only that part goes to RV-167).
+- (27/11 ~07:12Z) MAIN 173: LOOK PASS R11 Tài nghệ cells + môn frame review/kit-stage-r11 2d27b197 (Tứ đức 4 môn 2×2; ways as own cards) → stills to sếp. Fix: badge leaks into #modal (Phát bạc card) → KK56 scope = event hand only; «Tứ đức 5/5» chip check.
