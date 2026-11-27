@@ -43,6 +43,7 @@ function kitHandLay(g,quiet){try{if(kitHandIsLong(g))return;const bs=kitHandCard
  const cap=g.__khCap?g.__khCap():Math.round(kitHandH()*(n>(ip?5:6)?.46:(ip?.36:.40)));/* kitHand.mount: the host may set its own cap (o.maxH) */const need=()=>lift+6+rows*ch+(rows-1)*gap+8;
  while(need()>cap&&cw>mnW*.78){cw-=4;ch=face(cw)}
  g.style.setProperty("--khtl",kitHandTonL(bs,cw,fs)||1);
+ /* KIT_CHECKLIST C6 (OD:L317): an enabled card is never after a dimmed one — locked cards go last (order otherwise kept) */try{bs.filter(x=>x.disabled).forEach(x=>g.appendChild(x))}catch(e){}
  g.classList.add("khand");g.dataset.khand=n;g.dataset.khrows=rows;g.style.setProperty("--khw",Math.floor(cw)+"px");g.style.setProperty("--khh",ch+"px");g.style.setProperty("--khfs",fs+"px");g.style.setProperty("--khlift",lift+"px");
  let maxY=0;bs.forEach((b,i)=>{const r=Math.floor(i/per),k=i%per,inRow=r<rows-1?per:n-per*(rows-1),rowW=inRow*cw+(inRow-1)*gap,x=(W-rowW)/2+k*(cw+gap),mid=(inRow-1)/2,d=k-mid;
   const rot=rows===1?d*Math.min(2.4,8/Math.max(1,mid)):d*1.1,arc=d*d*(rows===1?Math.min(2.2,10/Math.max(1,mid*mid)):.6),y=lift+6+r*(ch+gap)+arc;maxY=Math.max(maxY,y+ch);
@@ -96,16 +97,18 @@ function kitHandBigPlace(b,z,dl,top0,L,R){try{const K=KIT_HAND.big,ip=kitHandWid
  const foot=0;/* the green ✓ stands INSIDE the card (top-right corner), no block under it */
  /* OD 27/11 ~04:36Z: the enlarged card NEVER covers the hand — it opens ABOVE the row (between the story and the row); the row stays in place, all cards visible, the picked one lifted in its slot.
     Not enough room above → the smaller WIDE tier (picture left, info right), never over the row. */
- let below=false;try{const g=b.parentElement,gr=g.getBoundingClientRect(),lf=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0;const bot0=bot,top0b=top;
+ let below=false;try{const g=b.parentElement;g.style.transform="";g.style.transformOrigin="";const gr=g.getBoundingClientRect(),lf=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0;/* the card stays inside the VISIBLE part of the pane that scrolls (a hand in a scrolling panel: never clipped at its edge) */
+  {let e=g.parentElement;while(e&&e!==document.body){const o=getComputedStyle(e).overflowY;if(/auto|scroll|hidden/.test(o)&&e.scrollHeight>=e.clientHeight&&e!==dl){const r=e.getBoundingClientRect();top=Math.max(top,Math.round(r.top+4));bot=Math.min(bot,Math.round(r.bottom-4));/* a sticky strip at the pane's top (the tab chips) is not free room */[...e.children].forEach(c=>{const cs=getComputedStyle(c);if(/sticky|fixed/.test(cs.position)){const q=c.getBoundingClientRect();if(q.height>0&&q.top<=r.top+80)top=Math.max(top,Math.round(q.bottom+4))}});break}e=e.parentElement}}
+  const bot0=bot,top0b=top;
   const pm0=dl.querySelector(".kpmain");if(pm0&&pm0.getClientRects().length){const pb=pm0.getBoundingClientRect().bottom+8;if(pb>top)top=pb}
   const above=Math.round(gr.top-lf-K.gapHand-top),under=Math.round(bot0-(gr.bottom+K.gapHand));
   /* a hand that stands at the very top of its pane (outside #modal: no story above it) has no room above: the card goes UNDER the row instead, still never over it */
   if(above<K.tall&&under>above){below=true;top=Math.round(gr.bottom+K.gapHand)}else bot=Math.min(bot,Math.round(gr.top-lf-K.gapHand));
   /* a hand that fills its whole pane (iPad side panel, 4 × 3 cards): neither side has room → the WHOLE hand shrinks toward its top (every card still visible, in its slot) to free the room for the card under it, never under the card */
-  g.style.transform="";g.style.transformOrigin="";if(Math.max(above,under)<K.minHw+60&&g.offsetHeight>0){const H0=g.offsetHeight,need=K.minHw+60,k=Math.max(K.shrinkMin,Math.min(1,(bot0-gr.top-K.gapHand-need)/H0));if(k<1){g.style.transformOrigin="50% 0";g.style.transform=`scale(${k.toFixed(3)})`;below=true;bot=bot0;top=Math.round(gr.top+H0*k+K.gapHand)}}}catch(e){}
+  g.style.transform="";g.style.transformOrigin="";if(Math.max(above,under)<K.minHw+20&&g.offsetHeight>0){const H0=g.offsetHeight,need=K.minHw+60,k=Math.max(K.shrinkMin,Math.min(1,(bot0-gr.top-K.gapHand-need)/H0));if(k<1){g.style.transformOrigin="50% 0";g.style.transform=`scale(${k.toFixed(3)})`;below=true;bot=bot0;top=Math.round(gr.top+H0*k+K.gapHand)}}}catch(e){}
  const room=Math.max(80,Math.round(bot-top-4));let w=Math.round(Math.min(K.w[ip],R-L)),h=Math.round(w*K.asp);const wide=room<K.tall;
  if(wide){w=Math.round(Math.min(K.ww[ip],R-L));h=Math.min(room,Math.max(K.minHw,Math.round(w*.62)))}else if(h>room){h=room;w=Math.round(h/K.asp)}
- z.classList.toggle("khwide",wide);
+ z.classList.toggle("khwide",wide);window.__khdbg={top,bot,room,wide,below,w,h};
  const x=Math.round((L+R)/2-w/2),y=Math.round(Math.max(top,top+(bot-top-(h+foot))/2));
  z.style.width=w+"px";z.style.height=h+"px";z.style.left=(x-D.left)+"px";z.style.top=(y-D.top)+"px";z.style.bottom="auto";z.__khRect={l:x-D.left,t:y-D.top,w,h};z.classList.toggle("khgo",!b.disabled);z.style.setProperty("--kpgw",BAL.kpkgo.w+"px");kitHandBigFit(z);
  const v=dl.querySelector(":scope>.khveil");if(v){const P=dl.__khPane?dl.__khPane():null,Q=P?P.getBoundingClientRect():D;v.style.left=(Q.left-D.left)+"px";v.style.top=(Q.top-D.top)+"px";v.style.width=Q.width+"px";v.style.height=Q.height+"px"}
@@ -223,17 +226,17 @@ html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!importan
 html body #modal#modal#modal#modal .opts.khand>button.kopt.khout{opacity:0!important}
 #modal .dlg>.khplate .khbi>button.kopinfo .kabody{display:flex!important;flex-direction:column!important;gap:6px!important;width:100%!important;padding:0!important;transform:none!important}
 #modal .dlg>.khplate .khbi>button.kopinfo .kat:empty{display:none!important}
-#modal .dlg>.khplate .khbi>button.kopinfo .kb{display:flex!important;flex-direction:column!important;gap:.4em!important;font-size:1em!important;line-height:1.3!important;color:var(--ink,#2a1a12)!important;opacity:1!important}
-#modal .dlg>.khplate .khbi>button.kopinfo .kb>.kr{display:block!important;margin:0!important;padding:0!important}
-#modal .dlg>.khplate .khbi>button.kopinfo .kb .kdup,#modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .ef{display:inline!important;color:inherit!important;font-weight:inherit!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb{display:grid!important;grid-template-columns:max-content minmax(0,1fr)!important;column-gap:.5em!important;row-gap:.4em!important;font-size:1em!important;line-height:1.3!important;color:var(--ink,#2a1a12)!important;opacity:1!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb>.kr{display:contents!important}/* the kit .kb grid: one label column, every value at ONE x (KIT_CHECKLIST A10) */
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .kdup,#modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .ef{display:inline!important}/* the value chips keep the kit colours: gain green (.ef.g), loss red (.ef.r) — kaRows / kcls, j63 button.ka .krv .ef.g and .ef.r (OD 27/11 ~04:33Z) */
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .krl{opacity:1!important}
-#modal .dlg>.khplate .khbi>button.kopinfo .kb .krl{display:inline!important;font-size:.82em!important;margin-right:.35em!important;text-transform:none!important}
-#modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-ton{display:flex!important;align-items:center!important;gap:.4em!important;flex-wrap:wrap!important}
-#modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-ton>.kodds{margin-left:auto!important}/* the odds word at the right end of the Tốn row (spec) */
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .krl{display:block!important;font-size:.82em!important;margin:0!important;text-transform:none!important}
+
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-ton>.kodds{grid-column:2!important}/* the odds word at the right end of the Tốn row (spec) */
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .krl{color:#8a5a1c!important;opacity:1!important;font-weight:700!important}
-#modal .dlg>.khplate .khbi>button.kopinfo .kb .krv,#modal .dlg>.khplate .khbi>button.kopinfo .kb .krv *{color:var(--ink,#2a1a12)!important;opacity:1!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .krv,#modal .dlg>.khplate .khbi>button.kopinfo .kb .krv *{opacity:1!important}#modal .dlg>.khplate .khbi>button.kopinfo .kb .krv .ef:not(.g):not(.r):not(.t){color:var(--ink,#2a1a12)!important}/* only an unclassed chip is ink; gain .ef.g green and loss .ef.r red stay the kit colours */
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-duoc .krl{color:#2f7a3a!important}
-#modal .dlg>.khplate .khbi>button.kopinfo .kb [class*=kr-mat] .krl{color:#a8321e!important}/* Được green mark · Mất red mark (law 3) */
+#modal .dlg>.khplate .khbi>button.kopinfo .kb [class*=kr-mat] .krl,#modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-ton .krl,#modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-kem .krl,#modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-bai .krl{color:#a8321e!important}/* Được green mark · Mất red mark (law 3) */
 #modal .dlg>.khplate .khbi>button.kopinfo .kwhy{display:block!important;color:#7a2a1c!important;font-weight:700!important;opacity:1!important}
 #modal .dlg>.khconf.khgo{display:block;gap:0}/* the ONE small green ✓ INSIDE the enlarged card, top-right (OD 27/11 ~04:00Z): look = the shared rule in jkpick.js, size = BAL.kpkgo */
 #modal .dlg>.khplate.khgo .khbn{padding-left:calc(var(--kpgw,24px) + 6px);padding-right:calc(var(--kpgw,24px) + 6px)}/* the title never runs under the ✓ (kept centred) */`;document.head.appendChild(st)})();
