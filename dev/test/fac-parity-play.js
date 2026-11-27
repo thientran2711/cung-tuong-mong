@@ -16,6 +16,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r=await p.evaluate(()=>{const o={},K4=["full","half","no","sab"];
   /* helpers: a fresh world per act (no factions, she is Hoàng hậu with time), the receiver's answer counted by jrcv's own __rcvN */
  /* stat-pace (LIVE): the liking SETUP writes are exact (pace off for this test, as ag-moodknow / cold-faction; the paced rise has its own test dev/test/stat-pace.js) */window.SP_OFF=(window.SP_OFF||0)+1;
+ /* review/oan-pace (merged onto LC28): the oán / ghét / ghen SETUP writes are exact too (as cold-faction / receiver-choice switch BAL.oanPace.on off for setup); the paced rise has its own test dev/test/oan-pace.js */if(BAL.oanPace)BAL.oanPace.on=0;
   const reset=s=>{__seed(s);S.facs=[];S.rank=7;S.queen=true;for(const x of rivals)if(x!==S)x.queen=false;S.kh=0;try{used=0}catch(e){}Q.length=0;
    for(const x of liveRivals(true))if(x!==S)x.p3FacM=-1};
   /* the receiver's answer: jrcv rcvPick wrapped (her own global), only the picks of THIS receiver to THIS asker are kept */

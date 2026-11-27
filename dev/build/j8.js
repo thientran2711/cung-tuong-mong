@@ -457,16 +457,19 @@ function birthP(p,fake){const me=p===S;
   else{ev+=me?`Ngươi sinh hạ ${k.name}. `:`${p.name} sinh hạ ${k.name}. `;if(me)ghenAll(BAL.ghen.girl,"ngươi sinh công chúa");if(!up&&rkOf(p)<6&&typeof promoReward==="function"&&!(n===2&&i===0)){up=true;ev+=promoReward(p,"dau")}ap(p,{sung:5,danh:4});p.bonusPay=(p.bonusPay||0)+10;if(roll(50))bestow(p,"dau")}}
  return ev}
 /* months between decrees grow with rank: 3 up to Tần, then 5, 7, 9 */
-function promoGap(r){return r<3?3:3+(r-2)*2}
+/* months between decrees by rank: BAL.promo.gap[rank] (law 4; was the typed formula r<3?3:3+(r-2)*2; key name as review/bal-ranks-law4) */
+function promoGap(r){const G=BAL.promo.gap;return G[Math.max(0,Math.min(G.length-1,r|0))]}
 function promoReqP(p){if(rkOf(p)>=7)return[];const r=rkOf(p),nx=RANKS[r+1],L=[];const me=p===S,qq=queenP();
  if(p.out)return[[false,"Đang ở lãnh cung"]];L.push([p.sung>=nx.s,`Sủng ${p.sung} (cần ${nx.s})`],[p.danh>=nx.d,`Danh ${p.danh} (cần ${nx.d})`],[S.turn-p.lastPromo>=promoGap(r),`Cách lần sắc phong trước ${S.turn-p.lastPromo} tháng (cần ${promoGap(r)})`]);
  const qBlock=qq&&qq!==p;
- if(qBlock&&r+1>=2&&r+1<7)L.push([p.hh>BAL.qBlockHh||p.th>=BAL.qBlockTh,`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên ${BAL.qBlockHh}; hoặc Thái hậu ${BAL.qBlockTh})`]);
+ if(qBlock&&r+1>=2&&r+1<7){const qb=qBlockAt(p);L.push([p.hh>qb||p.th>=BAL.qBlockTh,`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên ${qb}; hoặc Thái hậu ${BAL.qBlockTh})`])}
  if(has("hieuthao"))L.push([p.th>=0,`Hoàng thượng hiếu thảo: Thái hậu không được ghét ${me?"ngươi":"nàng"} (Thái hậu quý ${me?"ngươi":"nàng"} ${p.th}, cần từ 0)`]);
  if(r+1===7){const N=hhNeed(p),tn=N.th,nd=N.duc,sn=N.sons;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[p.th>=tn,sn?`Có hoàng tử: Thái hậu quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`:`Chưa có hoàng tử: Thái hậu phải hết lòng, quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`],[p.duc>=nd,`Đức ${p.duc} (cần ${nd}${N.heir?", mẹ Thái tử":""})`])}
  else if(r+1>=5)L.push([p.hh>BAL.hiOppHh||p.th>=BAL.hiOppTh||!qBlock||(facOf(p)&&facStr(facOf(p))>=BAL.hiOppFac),`Hoàng hậu không phản đối, hoặc Thái hậu ${BAL.hiOppTh}, hoặc phe mạnh (thế lực ${BAL.hiOppFac})`]);
  if(p.confined)L.push([false,`Đang cấm túc (${p.confined} tháng)`]);return L}
 function promoReq(){return promoReqP(S)}
+/* the Hoàng hậu block bar of p now: BAL.qBlockHh, eased by BAL.qBlock.ease per month waited past BAL.qBlock.after since her last decree (same for everyone) */
+function qBlockAt(p){const B=BAL.qBlock,w=S.turn-((p&&p.lastPromo)||0);return BAL.qBlockHh-(B?B.ease*Math.max(0,w-B.after):0)}
 /* the vacant seat is contested: every eligible consort (Quý phi and above) weighs in by favour, Thái hậu, sons and name */
 /* the seat weighs sons, the clan behind her, Thái hậu, name, rank (same for everyone) */
 function seatW(p){const dad=p.dad||40;return 30+Math.min(3,sonsOf(p).length)*15+Math.max(0,p.th||0)/5+(p.danh||0)/6+dad/2+(rkOf(p)>=6?10:0)}
@@ -524,7 +527,7 @@ function npcMonthly(v){let ev="";const cost=k=>artFee(v.arts[k]);const agd=windo
 function rivalsTurn(){const live=liveRivals(true);let ev="";
  for(const v of live){if(!v.alive||v.out)continue;spAdd(v,"sung",R(3)-1);if(v.block)v.block--;
   if(S.sung>v.sung-10&&!v.queen&&roll(33))v.rel-=1;if(v.queen&&S.rank>=4&&roll(50))v.rel-=1;
-  if(S.sac>75)ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S);v.ghen=cl(v.ghen-ghenCool(v),0,100);v.pg=Math.max(0,v.pg-1);
+  if(S.sac>75){window.opGStand=1;try{ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S)}finally{window.opGStand=0}}/* review/oan-pace-ghen: a STANDING cause (her looks, every day) is not a new cause: it does not restart the «left alone» count */v.ghen=cl(v.ghen-ghenCool(v),0,100);v.pg=Math.max(0,v.pg-(typeof pgCool==="function"?pgCool(v):1))/* review/oan-pace-ghen: her jealousy fades by the same rule (law 1) */;
   if(v.queen&&!v.coop/* E44j (c) T9 family: her entry as Hoàng hậu never judges by an NPC roll (a target stays a target: law 1) */&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>chOK(v,p)&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
   const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;

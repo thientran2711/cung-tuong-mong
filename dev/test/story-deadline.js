@@ -3,7 +3,7 @@
    truyện tab, paying later from the chip resolves the beat, and an unpaid pledge lapses only after its deadline.
    usage: NODE_PATH=$(npm root -g) node dev/test/story-deadline.js <url> [WxH] [shot.png] */
 const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const [W,H]=(VP||'755x1000').split('x').map(Number);
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block'});const p=await ctx.newPage();
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block'});const p=await ctx.newPage();await p.addInitScript(require('./lib/qdrain').init);/* headless loop: __bot + answer the night choice (lib/qdrain.js, NPCROADS-RED) */
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='td';document.getElementById('title').hidden=true;start()});
@@ -33,7 +33,7 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
  /* lapse */
  const r4=await p.evaluate(()=>{Q.length=0;const A=newThread67('td_an','m');A.chap=2;A.i=1;A.nb='c1';A.due=0;A.dl=S.turn+6;S.st.M=A;S.bac=10;fireBeat67(A);
   const i=Q[0].opts.findIndex(o=>o.pl67);chooseM(i);Q.length=0;const due=S.pl67.due;let early=null,n=0;
-  while(S.pl67&&n<60){if(absB67()===due-1)early=!!S.pl67&&A.cur==='c1';Q.length=0;used=0;nextBuoi();n++}
+  while(S.pl67&&n<60){if(absB67()===due-1)early=!!S.pl67&&A.cur==='c1';__qDrain();used=0;nextBuoi();n++}
   return{early,lapsed:!S.pl67,cur:A.cur,steps:n,log:S.logs.slice(0,3).map(x=>String(x).replace(/<[^>]+>/g,''))}});
  out.lapse=r4;chk('no failure before the deadline',r4.early!==false);chk('lapses at the deadline',r4.lapsed&&r4.cur==null);
  out.checks=ok;out.errs=errs;console.log(JSON.stringify(out,null,1));await b.close();process.exit(ok.every(x=>x[1])&&!errs.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});

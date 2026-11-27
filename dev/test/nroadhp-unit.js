@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof nhHp==='function',null,{timeout:120000});await p.waitForTimeout(1500);
  const r=await p.evaluate(()=>{const out=[],fail=[];const ok=(c,m)=>{out.push((c?'ok  ':'FAIL ')+m);if(!c)fail.push(m)};try{
   try{document.getElementById('title').hidden=true}catch(e){}
-  quiet=true;window.__forceOrigin='muoi';start();quiet=false;Q.length=0;const B0=JSON.parse(JSON.stringify(BAL.nroad));const K0=JSON.parse(JSON.stringify(BAL.ag.know));
+  window.__sqoff=1;/* sideq-trim: content test of the help quests, any asker (the rank gate has its own test, sideq-optscan) */quiet=true;window.__forceOrigin='muoi';start();quiet=false;Q.length=0;const B0=JSON.parse(JSON.stringify(BAL.nroad));const K0=JSON.parse(JSON.stringify(BAL.ag.know));
   const reset=()=>{Object.assign(BAL.nroad,JSON.parse(JSON.stringify(B0)));Object.assign(BAL.ag.know,JSON.parse(JSON.stringify(K0)))};
   const roll0=roll;const L=liveRivals(false).filter(v=>!v.queen);let v=L[0],w=L[1];if(!v||!w)return{out,fail:['no rivals']};
   const logs=()=>S.logs.map(x=>String(x).replace(/<[^>]+>/g,''));
@@ -42,7 +42,7 @@ const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.
   const exp=Math.min(100,Math.round(o1+13*persF(v,'slight',1)));ok(sb.k===1&&sb.by==='eye'&&Math.abs(oan(v,S)-exp)<=1,`Tai mắt → known, oán +BAL.nroad.sb.oan × her nết (persF slight) (${o1}→${oan(v,S)}, expected ${exp})`);ok(hostility(v,S)>h1,'hostility toward her rises (her agent deeds aim at her, jagent agSpite)');
   ok(logs().some(l=>/ghi hận ngươi/.test(l)&&/mách cho/.test(l)),'strike-back line names the rival and the grudge');reset();
   /* the rival lets it slip (she dislikes the player); Tai mắt off */
-  x=help('nr_thu',2);sb=v.nr.sb;BAL.ag.know.eye=0;v.staff=[];v.maid=null;(S.staff||[]).forEach(s=>s.spyFor=null);affAdd(w,S,-200);const mp0=mindPick;mindPick=O=>O[0][0];S.turn++;nhSbMonth();mindPick=mp0;
+  x=help('nr_thu',2);sb=v.nr.sb;BAL.ag.know.eye=0;v.staff=[];v.maid=null;(S.staff||[]).forEach(s=>s.spyFor=null);{/* setup: a rival who dislikes her at once (review/oan-pace bypassed for the setup, as cold-faction / fac-parity-play; the paced fall has its own test dev/test/oan-pace.js) */const P0=BAL.oanPace&&BAL.oanPace.on;if(P0)BAL.oanPace.on=0;try{affAdd(w,S,-200)}finally{if(P0)BAL.oanPace.on=P0}}const mp0=mindPick;mindPick=O=>O[0][0];S.turn++;nhSbMonth();mindPick=mp0;
   ok(sb.k===1&&sb.by==='riv','rival who dislikes her lets it slip → known by "riv"');reset();
   /* (c) finale */
   const fin=(oi,win)=>{x=help('nr_thu',oi);const M=v.nr;const last=nhChsLast(M.r);M.n=last;M.h=0;M.hs=2;M.hp=[[last,oi===0?1:-1,S.turn]];M.t=S.turn;
