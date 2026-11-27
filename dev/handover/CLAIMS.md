@@ -633,3 +633,6 @@ E-GAIN3 | review/e-gain3 | session_01DgYSWnjWesPpZdFrpLFxAq | READY 23b44074 →
 E-GAIN3b (successor: Khiêu khích law-3 gain/merge, rolled-card Thành wording, jointScheme tamco → BAL; kit items → KIT_REQUESTS) | review/e-gain3b (on e-gain3 23b44074) | session_01DgYSWoLuNzXKnrryMfczWF | RUNNING | 27/11 06:14Z (Foreman E child2)
 lãnh cung iPad card + videos | review/owner-ui-a | session_01Rc5AsLoQNjZmHi3rWPc992 | RUNNING | 2026-11-27T06:12Z (OWNER-UI-C, MAIN 172)
 SIL-EUNUCH (stranger eunuch shows female silhouette → male/eunuch silhouette by role; kid iPad stage silhouette plan) | review/sil-eunuch | session_01PEhRbvVPQepjduga2PqdYq | RUNNING | 27/11 06:22Z Foreman C
+BIG review lane 2 | reports/rv-163g.md | session_01Rc5AsMcYJY8kqqh2mcbKi9 | RUNNING | 2026-11-27T06:17Z (MAIN 172)
+UI review lane 2 | reports/rv-167.md | session_01Rc5AsJitDXapnYo42uDY6S | RUNNING | 2026-11-27T06:17Z (MAIN 172)
+BIG reviewer | reports/rv-163f.md | session_01Rc5AsMvEuneMZA87bEtG2n | RUNNING | 2026-11-27T06:13Z (MAIN 172)
