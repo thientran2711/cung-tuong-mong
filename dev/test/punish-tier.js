@@ -73,11 +73,15 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   reset();up(C);C.rank=3;C.preg=5;deedAdd(C,"poison",B,2,"bỏ độc");evA(S,C,chNeed(C,"mh")+chWitNeed(C,"mh"),"mh");win(()=>ACT.accuse.f(S,C));const def=!!C.punDefer&&!C.out&&C.rank===3;
   C.preg=0;try{const pd=C.punDefer;C.punDefer=null;if(pd)punTier(C,pd.x,pd.why,null,true)}catch(e){}ok(def&&C.out&&C.rank===2,`pregnant ${C.name}: nặng deferred (still Tần, free), applied after the birth → Quý nhân + lãnh cung`);
   /* 13. PHẢN TỌA: her failed Tố giác of a vừa charge → she bears giáng; an NPC's failed nhẹ charge on her → the NPC is fined */
+  /* split-merge B1: ONE «Tố giác» — with a Hoàng hậu above the accused it goes to her (Trình Hoàng hậu road); the phản tọa checks below run on the Hoàng thượng road (no Hoàng hậu) */
+  const q0=rivals[0].queen;try{rivals[0].queen=1;if(qOn()&&rivals[0]!==A&&rivals[0]!==B)ok(chTo(S,A)==="trinhhh"&&chTo(B,S)==="trinhhh",`B1 one Tố giác: a Hoàng hậu above the accused hears it (chTo → trinhhh)`)}finally{rivals[0].queen=q0}
+  rivals[0].queen=0;
   reset();S.rank=3;tan(C);A.rank=2;up(A);give(S,A,"hd","huydung");const ft=chFailPun(A);Q.length=0;lose(()=>ACT.accuse.f(S,A));const bq=Q.find(x=>x&&/giáng/i.test(x.t||""));
   ok(S.rank===2&&!S.out&&/phản tọa tội vừa/.test(ft)&&/không đứng vững/.test(sec(bq))&&!/không có chứng cứ/.test(sec(bq)),`HER phản tọa: failed Tố giác hại dung nhan → giáng to ${RANKS[S.rank].n}; card «${ft}»`);
   window.__backQ=bq||null;
   reset();S.rank=2;up(B);B.rank=2;const b0=B.bac=200;deedAdd(S,"vp",null,1,"vượt phẩm");evA(B,S,1,"vp");lose(()=>ACT.accuse.f(B,S));
   ok(B.bac===b0-BAL.charge.fine&&!B.out&&S.rank===2,`NPC phản tọa (nhẹ): ${B.name} fined ${b0-B.bac} lượng, she is untouched`);
+  rivals[0].queen=q0;
   /* 14. the family: Tố tội thật and Bóc chuyện tư tình */
   reset();S.rank=2;up(C);C.rank=3;deedAdd(C,"vp",null,1,"vượt phẩm");evA(S,C,chNeed(C,"vp")+chWitNeed(C,"vp"),"vp");const cC=chTocao(S,C);Q.length=0;lose(()=>ACT.tocao.f(S,C));
   ok(cC==="vp"&&!S.out&&S.rank===2&&Q.some(x=>x&&/Phạt/i.test(x.t||"")),`Tố tội thật lost (vượt phẩm, nhẹ): she is fined by phản tọa, rank kept`);
