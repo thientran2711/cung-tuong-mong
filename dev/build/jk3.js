@@ -50,7 +50,7 @@ const K3_ICO={sac:"sac",tai:"tai",tamco:"tam-co",duc:"duc"};
 function k3hc(k){const h=$$("hud2");return h&&h.querySelector(`.hc[data-hx="${k}"]`)}
 function k3val(b){const x=b&&b.querySelector("b");return x?T(x.textContent):""}
 function k3lab(b){if(!b)return"";const c=b.cloneNode(true);c.querySelectorAll("b,i,img,.kodm").forEach(e=>e.remove());return T(c.textContent)}
-function k3row(k,lab,val,cls,ico){return `<button type="button" class="k3r ${cls||""}" data-k3="${k}" title="${lab}${val!==""&&val!=null?" "+val:""}">${ico||""}<span class="k3l">${lab}</span>${val!==""&&val!=null?`<b>${val}</b>`:""}</button>`}
+function k3row(k,lab,val,cls,ico){/* KK56 (RV-167 FAIL, A10/A11): a chip written as ONE «label: value» sentence («Nguy hiểm chung: 0», «Xét phẩm: thiếu 3») is split into label | value, so every column row has the same look */if((val===""||val==null)&&typeof lab==="string"){const m=lab.match(/^(.{2,40}?):\s+(\S.*)$/);if(m){lab=m[1];val=m[2]}}return `<button type="button" class="k3r ${cls||""}" data-k3="${k}" title="${lab}${val!==""&&val!=null?" "+val:""}">${ico||""}<span class="k3l">${lab}</span>${val!==""&&val!=null?`<b>${val}</b>`:""}</button>`}
 function k3court(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRows():[]}catch(e){}
  return R.map(r=>{const m=r.mood;const moodTxt=m&&!/chưa rõ/.test(m[0])?`<span class="ef ${m[1]==="g"?"g":m[1]==="r"?"r":"n"}">${esc(m[0])}</span>`:"";
   let att="";if(r.k==="th"||r.k==="hh"){const n=r.k==="th"?(S.th|0):(S.hh|0);const known=typeof window.kitCourtKnown!=="function"||window.kitCourtKnown(r.k)!==false;
