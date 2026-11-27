@@ -8,6 +8,7 @@
    4. Người chạy việc (was "Sai đi: …"): one line on the maid card, tap = what it means, "Đổi ›" lets her choose.
    5. Men: unique given names; the Nam nhân sub-tab lists only men she has met. */
 (function(){
+/* RING-BUILD-5: Ân oán ring (jkring relRing) reaches the pop-up, the candidate list and the «Quan hệ với» pick from outside this closure (hoisted declarations) */window.relCands=relCands;window.relPopOpen=relPopOpen;window.relSetY=k=>{relYk=k};
 const T=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* ---------- 3. relation words ---------- */
 window.quyW=function(v){return ["Ghét","Không ưa","Bình thường","Có cảm tình","Quý mến","Thân thiết"][quyIx(v)]};/* cuts: BAL.quyLv (VANPHONG:69) */
@@ -130,7 +131,7 @@ function relPopBody(w){const C=relCands();const L=w==="x"?C.all:C.Ys;const cur=w
 function relPopOpen(w){delete PG["relpop"+w];delete KTSUB["relpop"+w];const m=kitModal({kind:"notice",title:w==="x"?"Xem quan hệ của":"Quan hệ với",sections:[{h:"",html:`<div class="krpop kpick" data-w="${w}">${relPopBody(w)}</div>`}],btn:"Thôi"});
  setTimeout(()=>{try{kitStripFit()}catch(e){}},60);return m}
 document.addEventListener("click",e=>{const T=e.target;if(!T||!T.closest)return;
- const sl=T.closest("#panel [data-relslot]");if(sl){e.preventDefault();e.stopPropagation();relPopOpen(sl.dataset.relslot);return}
+ const sl=T.closest("#panel [data-relslot]");if(sl){e.preventDefault();e.stopPropagation();(window.relPopOpen||relPopOpen)(sl.dataset.relslot);return}
  const sw=T.closest("#panel [data-relswap]");if(sw){e.preventDefault();e.stopPropagation();const C=relCands();relYk=C.X.k;relSel=C.Y.k;renderPanel();return}
  const pop=T.closest("#modal .krpop");if(!pop)return;const w=pop.dataset.w,key="relpop"+w;const re=()=>{pop.innerHTML=relPopBody(w);try{kitStripFit()}catch(x){}};
  const tb=T.closest("[data-ktsv]");if(tb){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();KTSUB[key]=tb.dataset.ktsv;PG[key]=0;re();return}

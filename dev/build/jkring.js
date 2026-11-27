@@ -15,7 +15,7 @@
 (function(){try{
 const KIT_RING=window.KIT_RING=window.KIT_RING||{min:5,wire:true,
  fh:{kv1:.60,kv2:.70}/* front figure height / layer height */,fhF:{kv1:.90,kv2:.95}/* focus figure height */,fx:{kv1:.30,kv2:.27}/* focus centre x / width */,
- rx:{kv1:.36,kv2:.33},ry:{kv1:.10,kv2:.11},floor:.955,back:.48/* scale of the farthest slot */,dimK:1.25,
+ rx:{kv1:.36,kv2:.33},ry:{kv1:.10,kv2:.11},floor:.955,/* slot sizes + dim = the 3 tiers KRING_MATH.tier (BAL.kring) */
  grpFh:1/* group lead = the stage size too (owner 20:27Z); members beside her ×.9 depth */,stdR:{kv1:.747,kv2:.725}/* LIVE stage figure image px / stage px (fallback) */,grpGap:.22/* member spacing / member height (members overlap: one cluster) */,grpW:{kv1:.56,kv2:.50}/* focused group max width / layer width */,
  focusMs:560,arrow:{kv1:42,kv2:46}};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
@@ -26,10 +26,11 @@ const E="cubic-bezier(.2,.75,.25,1)";
 /* §104.1 KRING_MATH — the ONE ring maths of the whole ring kit (vòng người · vòng nhóm · vòng bảo vật): same semantics as MOTION-BUILD's KRI_MATH (jkring-item.js reads
    window.KRING_MATH when present). N > seats: one seat spacing (2π/seats), only the seats around the front show (a scrolling ring of many). */
 const KB=()=>BAL.kring||{};
-const KRING_MATH=window.KRING_MATH=window.KRING_MATH||{get seats(){return KB().seats||12},get decay(){return KB().decay||.93},get stop(){return KB().stop||.0012},get snapMs(){return KB().snapMs||200},get stepMs(){return KB().stepMs||280},get frontK(){return KB().front||1},
- /* front boost: 1 at the front, 1/front at |a| ≥ 1 (the front keeps its size, its neighbours shrink) */
- boost(a){const f=this.frontK;return 1/f+(1-1/f)*Math.max(0,1-Math.abs(a))},
+const KRING_MATH=window.KRING_MATH=window.KRING_MATH||{get seats(){return KB().seats||12},get decay(){return KB().decay||.93},get stop(){return KB().stop||.0012},get snapMs(){return KB().snapMs||200},get stepMs(){return KB().stepMs||280},
  slot(i,rot,N){let a=((i-rot)%N+N)%N;if(a>N/2)a-=N;const n=Math.max(3,Math.min(N,this.seats)),th=a*2*Math.PI/n,c=Math.cos(th),s=Math.sin(th),k=(1+c)/2;return{a,c,s,k,hide:Math.abs(a)>n/2-.5}},
+ /* §104.1 the 3 SIZE TIERS (owner 21:45Z; BAL.kring szL/szM/szS · dimL/dimM/dimS · near): seat distance |a| → {sc, dim, t} (t 0 = L, 1 = M, 2 = S); at rest every slot is exactly one tier */
+ tier(a){const B=KB(),d=Math.abs(a),nr=Math.max(1,B.near||1),L=B.szL||1,M=B.szM||.66,S=B.szS||.46,dL=B.dimL||0,dM=B.dimM!=null?B.dimM:.45,dS=B.dimS!=null?B.dimS:1;
+  const t=d<=1?d:d<=nr?1:d<=nr+1?1+(d-nr):2,mix=(x,y,z)=>t<=1?x+(y-x)*t:y+(z-y)*(t-1);return{t,sc:mix(L,M,S),dim:mix(dL,dM,dS)}},
  front(rot,N){return((Math.round(rot)%N)+N)%N},
  short(i,rot,N){let d=((i-rot)%N+N)%N;if(d>N/2)d-=N;return d},
 };
@@ -80,7 +81,7 @@ async function loadFig(p){let src="";try{const q=p&&p.ref||p;src=typeof kitFigOf
  const ob=typeof kscnOpaque==="function"?kscnOpaque(im):{l:0,r:1,t:0,b:1};return {src,ob,ar:im.naturalWidth/Math.max(1,im.naturalHeight)}}
 function memberEl(x,fh){const d=document.createElement("div");d.className="kring-m";const fw=fh*x.f.ar;d.style.cssText=`width:${fw}px;height:${fh}px`;
  const s=esc(x.f.src);d.innerHTML=`<img src="${s}" alt=""><img class="kring-dim" src="${s}" alt="" style="filter:brightness(${(BAL.kring||BAL.kdim).dimB||BAL.kdim.b}) saturate(${(BAL.kring||BAL.kdim).dimS||BAL.kdim.s})">`;x.el=d;x.dim=d.querySelector(".kring-dim");x.fw=fw;x.fh=fh;return d}
-function tagEl(p,cls){const t=document.createElement("div");t.className=cls;try{t.innerHTML=kitNameTagBox(p.ref||p,{})}catch(e){t.innerHTML=`<span class="kscn-tag">${esc(p.name)}</span>`}return t}
+function tagEl(p,cls,fix){const t=document.createElement("div");t.className=cls;try{t.innerHTML=kitNameTagBox(p.ref||p,fix?{fix:1}:{})}catch(e){t.innerHTML=`<span class="kscn-tag">${esc(p.name)}</span>`}return t}
 /* ---------- build a slot ---------- */
 /* OWNER 26/11 ~20:27Z «kích thước lúc trong vòng quay không to như ban đầu»: the FRONT figure = the LIVE stage figure size, px for px. Read from the place stage under the ring
    (a visible woman figure: its image px, absolute); no stage → layer px × KIT_RING.stdR (measured LIVE: Fold 541/724, iPad 436/601). Per person × KIT_FIG.fac (men ×1.07, children by age). */
@@ -90,7 +91,7 @@ function figH(R,x){let f=1;try{const q=x.p&&x.p.ref||x.p;f=KIT_FIG.fac(x.f.src,q
 function buildSlot(R,g,fh0){const s=document.createElement("div");s.className="kring-s";const M=g.members;fh0=figH(R,M[0]);
  if(M.length===1){const x=M[0];const d=memberEl(x,fh0);d.style.left="0px";s.appendChild(d);const W=x.fw;s.style.width=W+"px";s.style.height=fh0+"px";
   s.__cx=(x.f.ob.l+x.f.ob.r)/2*W;s.__feet=x.f.ob.b*fh0;s.__top=x.f.ob.t*fh0;x.dx=0;
-  const t=tagEl(x.p,"kring-tg");t.style.top=(s.__feet+2)+"px";t.style.left=s.__cx+"px";s.appendChild(t)}
+  const t=tagEl(x.p,"kring-tg",1);t.style.top=(s.__feet+2)+"px";t.style.left=s.__cx+"px";s.appendChild(t)}
  else{/* the lead in front, the others beside / behind her by turns (smaller, a little higher = depth on the floor) */
   const fh=fh0*KIT_RING.grpFh;const els=[];let minL=0,maxR=0;M.forEach((x,k)=>{const side=k===0?0:(k%2?-1:1)*Math.ceil(k/2),dep=k===0?1:.9;const h=(k===0?fh:figH(R,x)*KIT_RING.grpFh)*dep;const d=memberEl(x,h);
    const pc=(x.f.ob.l+x.f.ob.r)/2*x.fw;const cx=side*fh*KIT_RING.grpGap;x.cx=cx;x.left=cx-pc;x.lift=k===0?0:fh*.03;d.style.zIndex=k===0?"3":"2";
@@ -99,15 +100,19 @@ function buildSlot(R,g,fh0){const s=document.createElement("div");s.className="k
   const lead=M[0];s.style.width=W+"px";s.style.height=fh0+"px";M.forEach(x=>{x.el.style.top=(fh0-x.fh)+"px";x.el.style.bottom="auto"});
   s.__cx=W/2;s.__feet=fh0-fh*(1-lead.f.ob.b);s.__top=Math.min(...M.map(x=>fh0-x.fh+x.f.ob.t*x.fh-(x.lift||0)));
   const a=document.createElement("div");a.className="kring-act";a.innerHTML=`<span class="kscn-tag">${esc(g.line)}</span>`;a.style.left=(W/2)+"px";a.style.top=Math.max(-30,s.__top-30)+"px";s.appendChild(a);
-  const t=document.createElement("div");t.className="kring-tg";t.innerHTML=`<span class="kscn-tag">${g.gi!=null&&R.o.groups&&R.o.groups[g.gi].name?esc(R.o.groups[g.gi].name):M.map(x=>esc(typeof kitUnkName==="function"?kitUnkName(x.p.ref||x.p):x.p.name)).join(" · ")}</span>`;t.style.top=(s.__feet+2)+"px";t.style.left=(W/2)+"px";s.appendChild(t)}
+  /* OWNER 26/11 ~21:45Z (WIDER): the joined names label ran on under the figures → a named group (picker: its name) keeps ONE label; otherwise ONE FIXED-SIZE kit name plate
+     (kitNameTagBox fix, KIT §93.5a) under EACH member's feet */
+  if(g.gi!=null&&R.o.groups&&R.o.groups[g.gi].name){const t=document.createElement("div");t.className="kring-tg";t.innerHTML=`<span class="kscn-tag">${esc(R.o.groups[g.gi].name)}</span>`;t.style.top=(s.__feet+2)+"px";t.style.left=(W/2)+"px";s.appendChild(t)}
+  else M.forEach(x=>{const t=tagEl(x.p,"kring-tg",1);t.style.left=(x.left+(x.f.ob.l+x.f.ob.r)/2*x.fw)+"px";t.style.top=(fh0-x.fh+x.f.ob.b*x.fh-(x.lift||0)+2)+"px";s.appendChild(t)})}
  /* the warm light behind the slot in front (static gradient, opacity only) */const h=document.createElement("div");h.className="kring-halo";const W0=parseFloat(s.style.width);h.style.cssText=`left:${-W0*.25}px;top:${s.__top-fh0*.04}px;width:${W0*1.5}px;height:${(s.__feet-s.__top)*1.08}px`;s.insertBefore(h,s.firstChild);s.__halo=h;
  s.__g=g;return s}
 /* ---------- ring maths (the vòng bảo vật maths: angle per slot, depth scale, dim, z) ---------- */
 function geo(R){const m=kv(),K=KIT_RING,L=R.L,w=L.g.w,H=L.g.H;return {w,H,cx:w/2,floor:H*K.floor,Rx:w*K.rx[m],Ry:H*K.ry[m]}}
 function place(R){const N=R.slots.length,g=geo(R);R.slots.forEach((s,i)=>{const q=KRING_MATH.slot(i,R.rot,N),a=q.a,c=q.c,sn=q.s,k=q.k;s.style.visibility=q.hide?"hidden":"";
-  const sc=(KIT_RING.back+(1-KIT_RING.back)*Math.pow(k,1.4))*(N>1?KRING_MATH.boost(a):1),x=g.cx+g.Rx*sn,y=g.floor-g.Ry*(1-c);
+  const T=N>1?KRING_MATH.tier(a):{sc:1,dim:0,t:0},sc=T.sc,y=g.floor-g.Ry*(1-c);let x=g.cx+g.Rx*sn;
+  /* RING-BUILD-6: a wide slot (a group cluster at M / L size) stays between the ‹ › arrows (overlap gate: no figure over a tap target) */if(N>1&&!q.hide){const P=s.__px||(s.__px=paintX(s)),aw=(KIT_RING.arrow[kv()]||44)+12,l=x+(P.l-s.__cx)*sc,r=x+(P.r-s.__cx)*sc;if(r-l<g.w-2*aw){if(l<aw)x+=aw-l;else if(r>g.w-aw)x-=r-(g.w-aw)}}
   s.style.transform=`translate(${(x-s.__cx).toFixed(1)}px,${(y-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;s.style.zIndex=String(Math.round(100+c*50));
-  const st=N>1?Math.abs(a):0,d=Math.min(1,st*KIT_RING.dimK);s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tg=s.__tg||(s.__tg=s.querySelector(":scope>.kring-tg"));if(tg){const over=y+44-g.H;tg.style.transform=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)"}s.__x=x;s.__y=y;s.__sc=sc})}
+  const st=N>1?Math.abs(a):0,d=T.dim;s.__halo&&(s.__halo.style.opacity=Math.max(0,1-st*1.6).toFixed(3));s.__g.members.forEach(x=>{x.dim.style.opacity=d.toFixed(3)});s.classList.toggle("kring-front",Math.abs(a)<.5);/* the name tag under the feet never leaves the layer: near the bottom edge it rides up over the lower legs */const tgs=s.__tg||(s.__tg=[...s.querySelectorAll(":scope>.kring-tg")]);if(tgs.length){const over=y+(tgs.length>1?50:44)-g.H;const tf=over>0?`translate(-50%,${(-over/sc).toFixed(1)}px)`:"translateX(-50%)";tgs.forEach(tg=>{tg.style.transform=tf})}s.__x=x;s.__y=y;s.__sc=sc})}
 let raf=0;function loop(fn){cancelAnimationFrame(raf);let lt=performance.now();const f=now=>{const dt=Math.min(48,now-lt);lt=now;if(fn(dt)!==false)raf=requestAnimationFrame(f);else raf=0};raf=requestAnimationFrame(f)}
 function stepPx(R){const g=geo(R);return Math.max(60,g.Rx*2*Math.PI/Math.max(3,R.slots.length)*.7)}
 function tween(R,to,ms){const from=R.rot,t0=performance.now();if(calm())ms=1;return new Promise(res=>loop(()=>{const k=Math.min(1,(performance.now()-t0)/ms),e=1-Math.pow(1-k,3);R.rot=from+(to-from)*e;place(R);if(k>=1){yieldCard(R);res();return false}}))}
@@ -141,7 +146,7 @@ async function open(o){o=o||{};close(true);css();const m=kv();
  return R}
 async function build(R){R.slots.forEach(s=>s.remove());R.slots=[];const m=kv(),g0=R.L.g;if(R.stdPx==null)R.stdPx=stdImgR()||g0.H*KIT_RING.stdR[m];R.stdR=R.stdPx/g0.H;const fh0=Math.round(R.stdPx);
  const groups=R.o.groups?R.o.groups.map((G,gi)=>({gi,members:R.list.filter(x=>x.gi===gi),line:G.line||G.name||""})).filter(g=>g.members.length):R.mode==="group"?groupsOf(R.list):R.list.map(x=>({members:[x],line:""}));
- R.groups=groups;R.slots=groups.map(g=>{const s=buildSlot(R,g,fh0);R.W.appendChild(s);return s});R.rot=0;
+ R.groups=groups;R.slots=groups.map(g=>{const s=buildSlot(R,g,fh0);R.W.appendChild(s);/* KIT §93.5a: one plate height per row (KK49), measured once the slot is in the page */try{kitNameTagFit(s)}catch(e){}return s});R.rot=0;
  if(R.o.at!=null){const k=R.o.groups?groups.findIndex(g=>g.gi===R.o.at):R.list.findIndex(x=>x.i===R.o.at);if(k>=0)R.rot=k}place(R);
  if(!R.o.acts)R.tabs.querySelectorAll(".pct").forEach(b=>b.classList.toggle("on",b.dataset.kr===R.mode));
  arrows(R);yieldCard(R)}
@@ -160,7 +165,7 @@ async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R)
  R.slots.forEach((o,k)=>{if(k===i)return;o.animate([{opacity:1},{opacity:0}],{duration:calm()?1:260,fill:"both"})});
  [R.arL,R.arR,R.tabs].forEach(b=>b.animate([{opacity:1},{opacity:0}],{duration:calm()?1:200,fill:"both"}));
  s.__g.members.forEach(x=>{x.dim.style.opacity="0"});s.classList.remove("kring-front");
- const grp=s.__g.members.length>1,FG=focusGeo(R,s),sc=FG.sc,cx=FG.cx,feet=FG.feet;
+ const grp=s.__g.members.length>1;R.nPk=pkCount(R,s);const FG=focusGeo(R,s),sc=FG.sc,cx=FG.cx,feet=FG.feet;
  R.fT=`translate(${(cx-s.__cx).toFixed(1)}px,${(feet-s.__feet).toFixed(1)}px) scale(${sc.toFixed(3)})`;R.fSc=sc;R.fCx=cx;R.fFeet=feet;s.style.zIndex="200";
  await anim(s,R.fT,K.focusMs);yieldCard(R);
  if(R.o.groups)return groupChoose(R,s);if(grp)return groupPick(R);return personPick(R,s.__g.members[0])}finally{R.busy=0}}
@@ -168,8 +173,16 @@ async function focus(R){if(R.busy||R.sel>=0)return;R.busy=1;try{const i=front(R)
    the big figure keeps KIT_RING.fhF; the plaque band (KIT_PLAQUE one plaque width + post) must fit on its RIGHT inside the layer → slide the figure LEFT first (never past the
    layer edge), shrink ONLY when sliding is not enough; the head is never above the layer top. Group = the whole cluster (every member). */
 function paintX(s){let l=1e9,r=-1e9;s.__g.members.forEach(x=>{const L0=x.left||0;l=Math.min(l,L0+x.f.ob.l*x.fw);r=Math.max(r,L0+x.f.ob.r*x.fw)});return{l,r}}
-/* KK47 §98.1 wiring: the band now hangs from the ONE fixed post (kitPick.postBox) — the figure keeps clear of the widest board (7 plaques = 2 columns) + the ✓/✕ room on its left */
-function plaqueNeed(m,R){try{if(R&&R.L&&kitPick.postBox){const B=kitPick.postBox(R.L,7),cf=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6;return Math.round(B.W-B.x0+cf+10)}}catch(e){}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
+/* KK47 §98.1 wiring: the band hangs from the ONE fixed post (kitPick.postBox). RING-BUILD-7 (MAIN LOOK: the Fold group cluster was tiny beside a 1-column board): the figure
+   yields to the board THIS focus really opens — R.nPk plaques (pkCount): a person = her acts (the largest tab);
+   a group = «Đứng nghe» + one «Nói với …» per member; a group-picker slot = its choices. A member who steps out re-yields to her own board (reyield, awaited); a later bigger board (talk answers) re-yields as it opens (pickOpen, grow only). Owner 22:43Z: > 7 is
+   allowed (no paging) → postBox lays the extra columns leftward; the yield follows whatever box it returns. */
+function plaqueNeed(m,R,n){try{if(R&&R.L&&kitPick.postBox){const B=kitPick.postBox(R.L,n||R.nPk||7);/* KK51 §98.1: ✓/✕ stand ON the lifted plaque → x0 is the board's real left edge, no extra room */return Math.round(B.W-B.x0+10)}}catch(e){}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
+function maxActs(G){return Math.max(0,...(G||[]).map(g=>g&&g.acts?g.acts.length:1))}
+function personN(R,x){let n=0;try{if(R.o.acts){const A=R.o.acts(x)||[];n=A.length&&A[0].acts?maxActs(A):A.length}else n=maxActs(acts(R,x))}catch(e){}return Math.max(1,n)}
+function pkCount(R,s){const M=s.__g.members;try{if(R.o.groups){const A=R.o.gacts?R.o.gacts(s.__g.gi)||[]:[];return Math.max(1,A.length&&A[0].acts?maxActs(A):A.length)}}catch(e){return 7}return M.length>1?1+M.length:personN(R,M[0])}
+async function reyield(R,n){const s=R.slots[R.sel];if(!s||n===R.nPk)return;const B0=plaqueNeed(kv(),R,R.nPk),B1=plaqueNeed(kv(),R,n);R.nPk=n;if(Math.abs(B0-B1)<2)return;
+ const FG=focusGeo(R,s);R.fSc=FG.sc;R.fCx=FG.cx;R.fFeet=FG.feet;R.fT=`translate(${(FG.cx-s.__cx).toFixed(1)}px,${(FG.feet-s.__feet).toFixed(1)}px) scale(${FG.sc.toFixed(3)})`;await anim(s,R.fT,360)}
 function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length>1,fwS=s.offsetWidth,edge=8,need=plaqueNeed(m,R),P=paintX(s),hh=s.__feet-s.__top;
  let sc=(g.H*K.fhF[m])/hh;if(grp)sc=Math.min(sc,g.w*K.grpW[m]/fwS);let cx=g.w*(grp?K.fx[m]+.03:K.fx[m]);const feet=g.H*.995;
  const right=()=>cx+(P.r-s.__cx)*sc,left=()=>cx+(P.l-s.__cx)*sc;let over=right()+need-g.w;
@@ -177,7 +190,7 @@ function focusGeo(R,s){const m=kv(),g=geo(R),K=KIT_RING,grp=s.__g.members.length
  if(over>0){sc=Math.max(.3,(g.w-need-edge)/Math.max(1,P.r-P.l));cx=edge+(s.__cx-P.l)*sc}
  /* a group member who steps out grows ×1.06 from her feet: the head line keeps that room */const up=grp?1.08:1;if(feet-hh*sc*up<4)sc=(feet-4)/(hh*up);return{sc,cx,feet}}
 /* every ring picker opens through here: with TWO plaque columns the left column's ✓ / ✕ sits on its outer (left) side = toward the figure → the band moves right by that room */
-function pickOpen(R,o){let P=kitPick.open(o);try{const G=P&&P.G,A=o.anchor;if(G&&A&&G.cols===2&&G.side==="r"){const cw=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+12,fr=A.x+A.w;if(G.x0-cw<fr){P.destroy();P=kitPick.open(Object.assign({},o,{anchor:Object.assign({},A,{w:A.w+(fr-(G.x0-cw))})}))}}}catch(e){console.error("kitRing pick",e)}return P}
+function pickOpen(R,o){try{const n=o.groups?maxActs(o.groups):(o.acts||[]).length;if(R.sel>=0&&n&&plaqueNeed(kv(),R,n)>plaqueNeed(kv(),R,R.nPk)+2)reyield(R,n)}catch(e){console.error("kitRing reyield",e)}let P=kitPick.open(o);try{const G=P&&P.G,A=o.anchor;if(G&&!G.fixed&&A&&G.cols===2&&G.side==="r"){const cw=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6+12,fr=A.x+A.w;if(G.x0-cw<fr){P.destroy();P=kitPick.open(Object.assign({},o,{anchor:Object.assign({},A,{w:A.w+(fr-(G.x0-cw))})}))}}}catch(e){console.error("kitRing pick",e)}return P}
 /* the union box of every member of the focused slot (layer px): the plaques and the bubble go to the right of the WHOLE cluster, never over a member */
 function unionBox(R){const M=R.slots[R.sel].__g.members.map(y=>boxOf(R,y));const x0=Math.min(...M.map(b=>b.x)),y0=Math.min(...M.map(b=>b.y));return{x:x0,y:y0,w:Math.max(...M.map(b=>b.x+b.w))-x0,h:Math.max(...M.map(b=>b.y+b.h))-y0}}
 /* §104.3 group PICKER mode (open({groups:[{name,line,people}], gacts(gi)→acts|groups, onGroupPick(gi,id)})): the focused group's plaques = the caller's choices for that group */
@@ -192,8 +205,8 @@ function unyield(R,px,py){const L=R.L.getBoundingClientRect();let x=px-L.left,y=
 function boxOf0(R,x){const s=R.slots[R.sel],sc=R.fSc,ox=R.fCx-s.__cx*sc,oy=R.fFeet-s.__feet*sc;const left=(x.left||0),top=x.el.offsetTop-(x.lift||0);
  return {x:ox+(left+x.f.ob.l*x.fw)*sc,y:oy+(top+x.f.ob.t*x.fh)*sc,w:(x.f.ob.r-x.f.ob.l)*x.fw*sc,h:(x.f.ob.b-x.f.ob.t)*x.fh*sc}}
 function closePk(R){if(R.pk){try{R.pk.destroy()}catch(e){}R.pk=null}if(R.ftg){R.ftg.remove();R.ftg=null}}
-function focusTag(R,x){if(R.ftg)R.ftg.remove();const b=boxOf(R,x);const t=tagEl(x.p,"kring-ftg");t.style.left=(b.x+b.w/2)+"px";t.style.top=Math.min(R.L.g.H-30,b.y+b.h+2)+"px";
- /* the big figure's feet reach the floor: the tag sits over the lower legs, never over a face */if(b.y+b.h+30>R.L.g.H)t.style.top=(b.y+b.h*.86)+"px";R.W.appendChild(t);R.ftg=t;if(!calm())t.animate([{opacity:0},{opacity:1}],{duration:220,fill:"both"})}
+function focusTag(R,x){if(R.ftg)R.ftg.remove();const b=boxOf(R,x);const t=tagEl(x.p,"kring-ftg",1);t.style.left=(b.x+b.w/2)+"px";t.style.top=Math.min(R.L.g.H-30,b.y+b.h+2)+"px";
+ /* the big figure's feet reach the floor: the tag sits over the lower legs, never over a face */if(b.y+b.h+30>R.L.g.H)t.style.top=(b.y+b.h*.86)+"px";R.W.appendChild(t);try{kitNameTagFit(t)}catch(e){}R.ftg=t;if(!calm())t.animate([{opacity:0},{opacity:1}],{duration:220,fill:"both"})}
 function acts(R,x){let G=[];try{G=dfData(x.i)||[]}catch(e){}return G.filter(g=>g.acts&&g.acts.length).map(g=>({k:g.k,n:g.n,acts:g.acts}))}
 /* the person she talks to = the game's OWN focus-view flow (jdfv: DF.p / DF.F, dfTap → dfRun → dfAfter; an event frame about this person (Q, e.g. «Trò chuyện» topics)
    plays in the same focus: its lines in the kit speech bubble, its answers as thẻ gỗ on the right). The ring is that view's FIGURE + PICKER (adapter F below);
@@ -227,7 +240,7 @@ function adapter(R,x){const F={get el(){return R.L},get figEl(){return x.el&&x.e
  open(){},close(){if(CUR===R&&R.sel>=0)back(R)},destroy(){closePk(R)}};return F}
 function dfLeave(R){try{if(typeof DF==="object"&&DF&&R.F&&DF.F===R.F){const tk=R.tk;R.F=null;R.tk=null;if(typeof dfClosed==="function")dfClosed(tk)}}catch(e){}if(R.say){R.say.remove();R.say=null}R.saying=0}
 /* group focus: «Đứng nghe» + «Nói với …» per member */
-function groupPick(R){closePk(R);dfLeave(R);R.who=null;const s=R.slots[R.sel],M=s.__g.members;const face=p=>{try{const f=kitFace(p.ref||p);return f&&f.src||""}catch(e){return""}};
+function groupPick(R){closePk(R);dfLeave(R);R.who=null;const s=R.slots[R.sel],M=s.__g.members;if(R.nPk!==1+M.length){reyield(R,1+M.length).then(()=>{if(CUR===R&&R.sel>=0&&!R.who)groupPick(R)});return}const face=p=>{try{const f=kitFace(p.ref||p);return f&&f.src||""}catch(e){return""}};
  const nm=p=>{const q=p.ref||p;try{return typeof kitIsKnown==="function"&&!kitIsKnown(q)&&typeof kitUnkName==="function"?kitUnkName(q):(q.name||p.name)}catch(e){return p.name}};
  const list=[{id:"listen",n:"Đứng nghe",pic:typeof kitActArt==="function"&&(kitActArt("Nghe ngóng")||{}).src||"",word:"",ton:""},...M.map((x,k)=>({id:"m"+k,n:"Nói với "+nm(x.p),pic:face(x.p),word:"",ton:""}))];
  const a=M.map(x=>boxOf(R,x));const all={x:Math.min(...a.map(b=>b.x)),y:Math.min(...a.map(b=>b.y)),w:0,h:0};all.w=Math.max(...a.map(b=>b.x+b.w))-all.x;all.h=Math.max(...a.map(b=>b.y+b.h))-all.y;
@@ -237,7 +250,7 @@ function listen(R){const s=R.slots[R.sel],M=s.__g.members;const nm=p=>{const q=p
 /* a member STEPS OUT of the group toward her: she comes forward, the others dim and draw back */
 async function stepOut(R,x){if(R.busy)return;R.busy=1;try{closePk(R);const s=R.slots[R.sel],M=s.__g.members;
  const ps=[];M.forEach(y=>{if(y===x)return;const t=(y.lift?`translateY(${-y.lift}px) `:"")+`translateX(${(y.cx<x.cx?-1:1)*y.fw*.12}px) scale(.94)`;ps.push(anim(y.el,t,420));if(!calm())y.dim.animate([{opacity:0},{opacity:1}],{duration:420,fill:"forwards"}).onfinish=()=>{y.dim.style.opacity="1"};else y.dim.style.opacity="1"});
- x.el.style.zIndex="9";ps.push(anim(x.el,`scale(1.06)`,460));/* the plaques are placed on the cluster as it ENDS (every member's move done) */await Promise.all(ps);
+ x.el.style.zIndex="9";ps.push(anim(x.el,`scale(1.06)`,460));/* the plaques are placed on the cluster as it ENDS (every member's move done) */await Promise.all(ps);await reyield(R,personN(R,x));
  /* boxOf reads the member box unscaled: correct for the step-out scale */personPickScaled(R,x,1.06);R.repick=()=>personPickScaled(R,x,1.06)}finally{R.busy=0}}
 function personPickScaled(R,x,k){const fw=x.fw,fh=x.fh,l=x.left,lf=x.lift||0;x.left=l-(fw*(k-1))/2;x.lift=lf+fh*(k-1);x.fw=fw*k;x.fh=fh*k;try{personPick(R,x)}finally{x.left=l;x.fw=fw;x.fh=fh;x.lift=lf}}
 /* RING-BUILD-4 WATCH (one 250 ms check while the ring is open):
@@ -339,7 +352,7 @@ const relP=q=>q.k==="me"?S:q.k==="emp"?S.emp:q.k==="th"?{kind:"th"}:q.p;
 function relRing(w,g){const C=relCands();const L=w==="x"?C.all:C.Ys;const cur=w==="x"?C.X:C.Y;const GR=["Ta","Chí tôn","Phi tần","Nam nhân","Cung nhân"].filter(n=>L.some(x=>x.g===n));
  g=g||cur.g;const items=L.filter(x=>x.g===g);const at=Math.max(0,items.findIndex(x=>String(x.k)===String(cur.k)));
  return open({people:items.map(x=>relP(x.q)),title:w==="x"?"Xem quan hệ của":"Quan hệ với",at,tabs:GR.length>1?GR.map(n=>({label:n,on:n===g,fn:()=>relRing(w,n)})):null,
-  acts:x=>[{id:"go",n:"Chọn",word:"",ton:""}],onPick:i=>{const q=items[i];if(!q)return;if(w==="x")relSel=q.k;else relYk=q.k;try{renderPanel()}catch(e){console.error(e)}}})}
+  acts:x=>[{id:"go",n:"Chọn",word:"",ton:""}],onPick:i=>{const q=items[i];if(!q)return;if(w==="x")relSel=q.k;else window.relSetY(q.k);try{renderPanel()}catch(e){console.error(e)}}})}
 if(typeof relPopOpen==="function"){const rp0=relPopOpen;relPopOpen=window.relPopOpen=function(w){try{if(KIT_RING.wire&&!window.__bot&&!window.__kringOff&&typeof relCands==="function"){relRing(w);return null}}catch(e){console.error("kitRing rel",e)}return rp0.apply(this,arguments)}}
 kitRing.relRing=relRing;
 /* ---------- §104.2 wiring F: the map / stage group buttons «Cung nhân» (Đồng liêu) · «Chí tôn» (kitGroupBtns, rail kgf-*, the #kgfdrop list, #kshR court rows) → vòng người of

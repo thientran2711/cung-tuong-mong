@@ -17,7 +17,7 @@ const SH=process.argv[2]||path.join(__dirname,'../../../dnm-shots');try{fs.mkdir
  for(const [f,s] of src)for(const x of s.matchAll(/ptSend\(\{[^}]*?kind:"([a-z]+)"/g))kinds.add(x[1]);
  const miss=[...kinds].filter(k=>!K.has(k));ok(K.size>5&&!miss.length,'scan: every ptSend kind is a BAL.ptime send kind',{kinds:[...kinds].sort(),miss});
  const jdf=src.find(x=>x[0]==='jdf.js')[1];ok(/function dfCls\(a\)\{[^\n]*if\(dfDlg\(a\)\)return"E"/.test(jdf),'scan: jdf dfCls returns E for a delegated act');
- const jdfv=src.find(x=>x[0]==='jdfv.js')[1];ok(/if\(a\.cls==="D"\|\|a\.cls==="E"\)\{run\(\);return\}/.test(jdfv),'scan: jdfv dfTap runs E (delegated) with no game');
+ const jdfv=src.find(x=>x[0]==='jdfv.js')[1];ok(/if\(a\.cls==="D"\|\|a\.cls==="E"(\|\|a\.cls==="B")?\)\{run\(\);return\}/.test(jdfv),/* mg-trim: B (the slap-bar family) also runs with no game */'scan: jdfv dfTap runs E (delegated) with no game');
  const nm=[];for(const [f,s] of src)for(const x of s.matchAll(/spyNews\(/g))nm.push(f);ok(nm.every(f=>f==='jwhy.js'),'scan: «Nghe ngóng chung» runs only through spyListen (the doer roll), never spyNews directly',nm)}
 (async()=>{const b=await chromium.launch();
  for(const dev of [['fold',755,1000],['ipad',1180,820]]){

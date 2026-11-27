@@ -156,3 +156,85 @@ https://ctm-img.victoria-tntt.workers.dev/img/_review/ring-build/ring-a-r4-755x1
 - Wire fixture: seed staff / q72 jobs / a faction / relCands in kit-ring-boot.js so kit-ring-wire.js is a clean PASS table (still random per run).
 - Group rows 4/9: j55 court houses (tdAct), rgJoinOpts sides (needs the side's people — design), palCeremony (empty palaces → list, KK44), Dư đồ map spots / jmapz (owner ruling).
 - Core split with KK45 / MOTION-BUILD-2 per BAL.kring (no answer recorded yet).
+
+# RING-BUILD-5 (successor, MAIN CHÍNH 164) — 26/11
+PRIORITY #1 CHECK: OD 26/11 20:27Z+20:30Z+20:45Z rows | main none (ring not live) | review/ring-build cf696678 (RING-BUILD-4) + review/motion-bao-vat 48514870 (MOTION-BUILD-2) | review/kit-stage-r4 a78ac6d5 (jkstage kstgWants unchanged there) | claims RING-BUILD-4 → RING-BUILD-5.
+## Done (commits a55c139d → HEAD)
+1. MERGE review/motion-bao-vat 48514870 — clean except index.html / sw.js (rebuilt). CORE SPLIT settled (KIT §104.1 canon overwrite): jkring.js = the ONE core (KRING_MATH + fling/snap, numbers in BAL.kring) + vòng người / nhóm; jkring-item.js (after it) = vòng bảo vật only, reads KRING_MATH + BAL.kring, keeps only geometry knobs KIT_RINGI. ring-overlap.js code untouched by the merge (jkring.js changed only in relRing's Y pick) — successor re-runs it for the land gate.
+2. FACE (new-game card) — root cause: kit stage (jkstage §102) turned the new-game card into a stage; its speech box lay over the «Dung mạo» picker (the cover MOTION-BUILD-2 saw). Fix: kstgWants — a dialog holding a kit picker (kitPicker; only caller = the new-game card) stays a card. kit-ring-item.js face Fold + iPad: ring opens, Chọn changes the face, overlap 0, 0 errors. kit-ring-oldleft.js Fold before fix = 1 (face) → re-run expected 0 (face scene now passes). NOTE for KK46 / KIT-STAGE: one-line change in jkstage.js kstgWants (kit part) — tell them.
+3. TITLES iPad too small — ring tiles that are text plates: one law-10 size (KIT_RINGI.plateRem 1.6 rem both devices), depth shrink ×.4, ring narrows by the widest plate (Fold side plate was cut at the edge). Looked at Fold + iPad sheets; overlap 0.
+4. ÂN OÁN ring was NEVER live: relCands / relPopOpen live inside the jhc.js closure, so `typeof relPopOpen` in jkring was false and the wrap never installed (RB-3 «wired» was untrue). Exported at the closure top (window.relCands / relPopOpen / relSetY); ring now opens (probe + wire test).
+5. WIRE FIXTURE: kit-ring-boot.js `seedWire(p)` (2 servants mkServ maid/eunuch, 2 Việc nhờ jobs q72Make + accept, a faction found(), 2 close consorts rel 99); kit-ring-wire.js clears stray frames (Nội vụ phủ…) per case, prints `why` on a failed open.
+## Wire table now (Fold / iPad): stage ✔/✔ · rv strip ✔/✔ · modal picker ✔/✔ · q72 ✔/✔ · rel ✔/✔ · facP ✔/✔ · facG ✔/✔ · court ✗/✔ · crew ✗/✔ · staff ✗/✗ · kid/court/men strips n/a in fixture.
+## Open (successor, in order)
+a. staff: a direct probe (seed, clear frame, touch tap on [data-kring-pg="staff"]) OPENS the ring (27 slots?! check what list the «staff» pager key carries — maybe the Thái hậu household / all servants share key "staff"); inside kit-ring-wire.js after the earlier cases it does not open with the button on top and no modal → look for a stuck CUR / `kring-held` from the modal case, or PGI.staff overwritten by a second pager("staff") render.
+b. Fold court / crew: the selector hits an element under `BUTTON.pct.on` (the tab bar) — check whether #kshR / kgf buttons sit behind the bottom bar on Fold (real layout bug → fix) or the test picks a hidden duplicate.
+c. Re-run land measures: `node dev/measure/ring-overlap.js <url>` (expect 0 / 0 / 0) and `node dev/test/kit-ring-oldleft.js file://$PWD/index.html <out> 755x1000` + 1180x820 (expect 0), kit-stage.js + kit-hand.js PASS after the kstgWants change.
+d. Group rows left (OPEN for MAIN, no new mechanics): j55 court houses (tdAct) — could ride the GROUP PICKER (houses = groups of officers) if MAIN wants; palCeremony stays a list (empty palaces, no people); rgJoinOpts sides need the side's people (design) and Dư đồ map spots / jmapz need an owner ruling.
+e. kitScene.refit KIT REQUEST is with KK46 (KIT_REQUESTS.md) — keep the ring's local refit until KK46 ships it.
+f. LAND GATE videos: Fold 755x1000 + iPad 1180x820 mp4 → CDN img/_review/ring-build/ (ring a/b only if changed — person/group ring code unchanged here; titles, face, bảo vật gift NEW), tile sheet looked at first, then «LOOK READY» to MAIN 164, then RV READY to RV-163.
+Tools: /home/user/wt/rb5-tools/{faceprobe,wprobe,sprobe}.js (local probes, not in git).
+
+# RING-BUILD-6 (successor, MAIN CHÍNH 164, opus) — 26/11 ~22:10Z–
+PRIORITY #1 CHECK: OD 26/11 21:41Z + 21:45Z rows (verbatim read) | main none (ring not live) | review/ring-build 34c24a38 (RB-5) | claims RING-BUILD-5 → RING-BUILD-6.
+## Done (commits bf290579 → afa26154, pushed)
+1. OWNER 21:45Z 3 SIZES: `KRING_MATH.tier(a)` in the ring core (jkring.js) + BAL.kring {szL 1, szM .66, szS .46, near 1, dimL 0, dimM .45, dimS 1}: L = front, M = |seat| ≤ near, S = far; dim copy opacity follows the same tiers; between seats size/dim slide. Used by vòng người / nhóm (place) AND jkring-item (bảo vật / titles / face: sc = tier.sc, opacity from tier.dim; text plates keep plateDepth). Removed (canon overwrite): KIT_RING.back / dimK, KRING_MATH.boost / frontK, BAL.kring.front, KIT_RINGI.frontPow. KIT §104.1 + the item-ring line rewritten.
+2. OWNER 21:41Z ONE PLAQUE POST (kitPick post mode, jkpick.js — DRAFT for KK47 to own; API proposal sent 22:1xZ, no answer yet): KIT_PLAQUE.postAt {kv1 r10 top .24, kv2 r14 top .22} of the STAGE (kscnGeo); ≤4 = 1 column, 5–7 = 2 columns growing left; post never moves; anchor/side/avoid ignored (o.post:false = old free mode); paging OFF (max 7, >7 = console.warn + first 7); named group tabs right-aligned to the post; ✓/✕ and the lifted plaque's widening open LEFT; `kitPick.band(n,host,ng)` → board box incl. that left room. KIT §98 «NEVER OFF THE STAGE» paragraph overwritten as §98.20. kit-pick.js test updated to post-mode checks (post never moves, 3→1 col, 6→2 col; «beside her / face line / stage parts» checks only in free mode). Ring focus: figure/cluster yields left of band(7) (the widest board) → ONE figure place for every board of a focus. Ring slots clamped between ‹ › (Fold group ring arrow overlap).
+3. OWNER 21:45Z WIDER name plate: `kitNameTagBox(p,{fix:1})` → `.kscn-tag.kscn-fix` (jkitsel, KIT §93.5a, DRAFT for KK47): fixed width/2-line height; ring group slot = one plate under each member's feet (named picker groups keep one label).
+4. RB-5 «NOT DONE»: staff ✗ = a kit result card (#kxcatch) left open eats the first tap (kit §7) — test fix (close it like a player). Fold court/crew ✗ = NOT a layout bug: on Fold the Chí tôn / Cung nhân buttons live on the place page; the phone shell leaves it on any tab change (jk3 tab watch) → test goes back with k3Home(). tapEl picks the first VISIBLE match.
+## Gate results (index.html of afa26154 minus nothing; Fold 755x1000 / iPad 1180x820)
+- ring-overlap: 35/35 states overlap 0, headCut 0, layerOverNav 0, 0 errors (run on e88ef929; name-plate commit afterwards → re-run once).
+- oldleft: Fold 0 (afa26154), iPad 0 (e88ef929). One Fold run showed gift=1 (ring did not open) then 0 on re-run = flaky boot.
+- wire table: stage ✔/✔ · modal ✔/✔ · staff ✔/✔ · q72 ✔/✔ · rel ✔/✔ · court ✔/✔ · crew ✔/✔ · facP ✔/✔ · facG ✔/✔ · rv strip ✔/✔ (kid/court/men strips n/a in fixture).
+- kit-pick ALL PASS ×2 · kit-stage PASS · kit-hand PASS. ring-overlap / boot sometimes times out at boot (random place) → just re-run.
+## Open (successor, in order)
+a. KK47 answer on (A) post API + (C) name plate: if KK47 builds its own, merge theirs and drop the drafts; if they accept, they own jkpick §98.20 + jkitsel §93.5a. Also told KK47 about RB-5's jkstage kstgWants line (KIT §102 ownership).
+b. LOOK: Fold group focus — with the band(7) yield the 2-member cluster is small (~45 % height) beside a 1-column board. Option: groups yield to band(1+members) and re-yield on step-out (needs a refit tween) — decide after MAIN looks.
+c. kit stage answers still page («≤ 3 per page», KIT_STAGE.sayPer, «Đáp · 1/2») — owner 21:45Z «no paging, max 7» → KIT-STAGE / KK47 (not ring code). Group slots with > 6 members give > 7 plaques (Đứng nghe + Nói với ×7) → cap at source (list in Open for MAIN).
+d. LAND GATE videos (not done): `node dev/test/kit-ring-record.js file://$PWD/index.html <out> a|b 755x1000 / 1180x820` + titles / face / bảo vật (kit-ring-item.js scenes) → mp4 → CDN img/_review/ring-build/ (python3 dev/site/cdn_sync.py), tiled sheet looked at → «LOOK READY» + URLs to MAIN 164, then RV READY to RV-163.
+e. Group rows (list only, no new mechanics): j55 houses (tdAct), palCeremony, rgJoinOpts sides, Dư đồ spots / jmapz — unchanged from RB-5 (d).
+Tools (not in git): /home/user/wt/rb6/{shot.js (rest+focus PNG), probe*.js, p3/p4.js}.
+
+# RING-BUILD-7 (successor, MAIN CHÍNH 165, opus) — 26/11 ~22:55Z–
+PRIORITY #1 CHECK: OD 26/11 ~21:41Z, ~21:45Z, ~22:43Z rows (verbatim read) | main none (ring not live) | review/ring-build c2922fbd (RB-6) + review/kit-plaque-post 9c936022 (KK47 = THE kit post) | claims RB-6 → RB-7.
+## Done
+1. DUPLICATE RESOLVED (0ddda103): merged review/kit-plaque-post 9c936022 unchanged. RB-6's parallel post (jkpick post mode / postGeo / kitPick.band, KIT §98.20, its kit-pick.js checks) DROPPED: jkpick.js + dev/test/kit-pick.js = KK47's byte for byte. KIT §98.1/§98.1b/§98.1c = KK47's text. Ring keeps only its yield.
+2. LOOK (3) Fold group focus too small → the ring yields to `kitPick.postBox(layer, n)` with n = the board THIS focus opens (`R.nPk`, `pkCount`): person = her largest act tab; group = 1 + members; picker slot = its choices. Step-out = `reyield` (tween 360 ms, awaited) to her own board; `pickOpen` re-yields (grow only) if a later board (talk answers) needs more room. Fold group-focus figure 335 → ~540 px; iPad unchanged. KIT §104 FOCUS line: YIELD sentence (canon overwrite of «yield to the widest board»).
+3. «Thôi» plaque: none in jkring / jkring-item (grep).
+## Waiting
+- KK48 (session_01Rc5AsKCV8Zc8zV3nMq8Y8v) INACTIVE (send failed 26/11 ~23:10Z) → MAIN 165 told. (A) owner 22:43Z no 7-cap: proposal for §98.1 jkpick = drop KIT_PLAQUE.max + warn + slice; cols ≤4→1, 5–7→2, 8–12→3, new columns LEFT, post fixed (ring follows postBox already). (B) name plate draft afa26154 (jkitsel kitNameTagBox {fix:1}, KIT §93.5a) for the kit keeper to adopt / replace. RB-7 does not edit jkpick / jkitsel until MAIN / kit keeper answers.
+- 26/11 ~23:00Z MAIN 165: kit keeper = KK49 session_01Rc5AsJHZTVo6v5Ks4SpWbw (KK48 rolled); MAIN forwarded (A) + (B) to KK49 → wait for KIT READY, do not touch jkpick. Reviewer = RV-164 session_01Rc5AsK6n6JQHacgiCCd7ks (not RV-163), only after MAIN PASS.
+## Land gate (0ddda103) — LOOK READY sent to MAIN 165 ~23:25Z
+- ring-overlap 36 states F+I: overlap 0 / headCut 0 / layerOverNav 0 / errs 0 · oldleft F 0 + I 0 (13 places) · kit-pick ALL PASS · kit-plaque-post PASS · title / face / bag checks OK.
+- Videos + tiled sheets on CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/ring-build/ring-build7-{a,b,title,face,bag}-{755x1000,1180x820}.mp4, ring-build7-sheet-{755x1000,1180x820}.jpg.
+## Next (successor)
+a. MAIN LOOK verdict → PASS: RV READY to RV-164. FAIL: fix.
+b. KK49 KIT READY (A) >7 columns / (B) name plate → merge their branch, switch the ring group plate to theirs if different, re-run the gate (record: `node dev/test/kit-ring-record.js <url> <out> a|b WxH`, `node dev/test/kit-ring-item.js <url> <out> title|face|bag WxH`; marks are under .marks.start).
+## Round 2 (26/11 ~23:25–23:55Z)
+- MAIN 166 (session_01Rc5AsNFmfoR6xWx1tx5wVP; 165 rolled) LOOK PASS on 0ddda103. Kit keeper chain KK48 → KK49 → KK50 (session_01Rc5AsMUwtXE6eVHGdk8jfo).
+- Merged KK49 review/kit-plaque-post 6ac21696 (>7 = 3rd column, no cut, no paging) then 03061ce6 (§93.5a fixed name plate ADOPTED into the kit + kitNameTagFit). Ring: fixed plate on every tag (person slot, group members, focus plate) + kitNameTagFit after each is in the page (a detached root measures 0 → told MAIN for KK50: guard). Code 4b321012.
+- Gate on 4b321012: ring-overlap 35 states 0/0/0, oldleft F0 I0 (gift flake re-run), kit-pick ALL PASS, kit-plaque-post PASS. CDN ring-build7b-* (videos, sheets, plaques9/12 stills). LOOK READY sent to MAIN 166 ~23:55Z.
+- OPEN (MAIN decides): Fold 3-column board → focus figure ~320 px (band + ✓/✕ room ~500 of 755 px). Options: ✓/✕ over the lifted plaque (kit, KK50) or accept.
+- Next: MAIN PASS → RV READY to RV-164 session_01Rc5AsK6n6JQHacgiCCd7ks.
+## Round 3 (27/11 ~00:00–00:45Z)
+- MAIN 167 LOOK on 4b321012: not PASS on Fold (3-column board → figure ~320 px); empty icon boxes = my test data (pic:""), real acts have art. NO FLIP ruling: ring has none (grep).
+- Merged KK51 review/kit-plaque-confirm 4ac9892e (✓/✕ ON the lifted plaque, postBox.x0 = real left edge); ring plaqueNeed drops its ✓/✕ room → Fold figure ~590 px. Code cc4515dc.
+- Gate cc4515dc: ring-overlap 36 states 0/0/0, oldleft 0/0, kit-pick ALL PASS, kit-plaque-confirm PASS. Stills CDN ring-build7c-plaques{9,12}-{755x1000,1180x820}.jpg. LOOK READY sent to MAIN 168 (session_01Rc5AsMYn5V43iERgwDRQrj).
+- Next: MAIN PASS → RV READY to RV-164. Kit keeper = KK51 session_01Rc5AsJN1bdRYgV8aBNXsdX.
+- 27/11 ~00:33Z MAIN 168 LOOK PASS cc4515dc → RV READY sent to RV-165 session_01Rc5AsLoAzF54ipTvF4Hhdn (RV-164 archived). FYI owner 00:32Z: person acts only via Dư đồ meet + Hành sự (ACT-MOVE session_01Rc5AsLFs4oXTwHRN1Mv54e); the ring is that surface — answer ACT-MOVE if asked.
+## ROLLOVER HANDOVER (RB-7 → RB-8, 27/11 ~00:50Z)
+State: review/ring-build = cc4515dc code (+ report commits). MAIN 168 LOOK PASS cc4515dc. RV-165 (session_01Rc5AsLoAzF54ipTvF4Hhdn) HOLD: kit-plaque-confirm 4ac9892e does not merge onto main (6 conflicts + odds-word clash). KK52 (session_01Rc5AsLkegccVVVEbeF4bLF) remerges kit-plaque-confirm onto LIVE fa722503 and sends the sha.
+RB-8 TODO: (1) on KK52's sha: fetch (flock, --depth=30), merge/rebase review/ring-build onto it (index.html / sw.js: take theirs then `sh dev/site/build_site.sh`; jkpick/jkitsel/kit tests = kit's, ring code jkring*.js = ours); (2) gate: `SIZES=755x1000,1180x820 node dev/measure/ring-overlap.js file://$PWD/index.html out.json` (36 states 0/0/0; boot timeout → re-run), `node dev/test/kit-ring-oldleft.js <url> <out> WxH` (gift flake → re-run), kit-pick / kit-plaque-confirm; (3) send new sha to RV-165 (RV READY text: see RV message pattern above), report MAIN 168 (session_01Rc5AsMYn5V43iERgwDRQrj).
+Ring facts: plaqueNeed(m,R,n) = postBox(layer,n).W − x0 + 12 (no ✓/✕ room); R.nPk via pkCount; reyield on step-out; kitNameTagFit after append (slot + focus tag). Scratch tools (not in git): /tmp/claude-0/rb7/{gate.sh, big.js (9/12 plaque stills), shot.js (group focus), plate.js}.
+
+# RING-BUILD-8 (successor, MAIN CHÍNH 170, 27/11)
+PRIORITY #1 CHECK: OD 26/11 ring rows + RB-7 handover (read) | main 17f23656 none of this | review/ring-build e37adcd7 + review/kit-plaque-confirm-rv165 bed400c6 (RV-165 PASS of daabd1f1) | claims RB-7 → RB-8.
+## Done
+1. MERGED (not rebased: e37adcd7 is already published/looked) origin/review/kit-plaque-confirm-rv165 bed400c6 into review/ring-build. Conflicts: assemble.py module list = kit's line + `jkring-item.js` after `jkring.js`; index.html / sw.js = theirs then `sh dev/site/build_site.sh`. jkpick/jkitsel/kit tests = kit's. KK53 «thẻ lụa» sha not landed yet (CSS only; merge it when it does, do not restyle).
+2. jkring plaqueNeed: `B.W-B.x0+12` (RB-7 had already dropped `+cf`) → `B.W-B.x0+10`.
+3. Synthetic-frame tests: `S.evc=null;EVCW.length=0` after every `Q.length=0` in dev/measure/ring-overlap.js (+ in M() per state) and dev/test/kit-ring-{boot,item,record,oldleft}.js.
+## Gates (file:// build of the merge)
+- ring-overlap F+I 36 states: overlap 0 / headCut 0 / layerOverNav 0 / errs 0 (one flaky Fold `group-ring` 264 px² against the lingering KẾT QUẢ card; re-run ×2 → 0, figs count varies = test timing, not code).
+- kit-ring-oldleft F 0 (gift flake, re-run) + I 0 · kit-pick ALL PASS · kit-plaque-confirm PASS · kit-plaque-post PASS.
+## RB-8 round 2: merged KK53 review/kk53 9771ffb9 (thẻ lụa + one «Chọn»); index.html/sw.js theirs + rebuild. Gates: ring-overlap F+I 0/0/0 errs 0, oldleft 0/0, kit-pick / confirm / post see message.
+## RB-8 round 3: merged KK53 a7ee4459 (chip inside plaque; supersedes 9771ffb9/4e333222). Gates: ring-overlap F+I 0/0/0 errs 0, oldleft 0/0 (I flake re-run), kit-pick ALL PASS, confirm PASS, post PASS. e021408e = pre-kk53 fallback.
