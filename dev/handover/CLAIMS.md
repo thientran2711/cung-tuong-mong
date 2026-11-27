@@ -723,4 +723,4 @@ F14ROLE-ROWS (session id for the 23:45Z claim) | review/f14role-rows | session_0
 ILLNESS-CURE (session id for the 23:45Z claim) | review/illness-cure | session_01PEhRbvzcp527pLLt31A9W4 | RUNNING | 27/11 23:41Z (Foreman C ROOT 4-1)
 SAVE-FAIL-WARN (opus fixer; failed save write → kit notice, every writer; MAIN 182 order 23:14Z; reuse saveBlocked j6:115) | review/save-fail-warn | session_01N1tNP6Pj5FGKjGNBJE8zTs (Foreman B ROOT 3) | RUNNING | 27/11 23:42Z
 C4-RINGART | review/c4-ring-art | session_01PEhRbtWZ3sD3nbQtNSs3sP | DONE (LIVE 5fb13d60; CDN ACTS.json = main, _review wiped; archived) | 27/11 23:45Z (Foreman C ROOT 4-1)
-COOP-REBIRTH-RESYNC r2 (successor fixer, gates + SSK; rollover of 4AAwyivs) | review/coop-rebirth-resync 07c5d9c5 | (opening, Foreman B ROOT 3 child 1) | RUNNING | 28/11 00:00Z
+COOP-REBIRTH-RESYNC r2 (successor fixer, gates + SSK; rollover of 4AAwyivs) | review/coop-rebirth-resync 07c5d9c5 | session_01N1tNP2Y1YMPHDUwpnNDb8J (Foreman B ROOT 3 child 1) | RUNNING | 28/11 00:00Z
