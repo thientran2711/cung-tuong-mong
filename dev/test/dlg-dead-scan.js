@@ -224,12 +224,13 @@ async function runHand(p, dev, name, rows) {
 const NOFX = {
   nofx_hold: { pick: 'Ngắm hoa một lát', wantHold: false },
   fx_hold_control: { pick: 'Dạo quanh vườn', wantHold: true },
+  tgt_hold: { pick: 'Tặng hộp nhạc Tây dương', wantHold: true, row: 'tgt' }, /* MAIN 179 19:21Z: a «Người ấy» row (the other person changed) is a shown change → the result holds */
 };
 async function runNoFx(p, dev, name, rows) {
   const rt = RT.make(p, { dev, touch: true, shots: OUT }); const N = NOFX[name];
   await clean(p);
   await p.evaluate(() => { try { if (window.DQ) DQ.user = (DQ.user || 0) + 1;
-    Q.push({ t: 'Chiều trong vườn', h: '<p>Gió chiều lay rèm, hoa trong vườn vừa nở.</p>', opts: [{ n: 'Ngắm hoa một lát', fx: {}, x: '', go: () => { } }, { n: 'Dạo quanh vườn', fx: { danh: 1 }, x: 'thành: Danh +1' }] });
+    Q.push({ t: 'Chiều trong vườn', h: '<p>Gió chiều lay rèm, hoa trong vườn vừa nở.</p>', opts: [{ n: 'Ngắm hoa một lát', fx: {}, x: '', go: () => { } }, { n: 'Dạo quanh vườn', fx: { danh: 1 }, x: 'thành: Danh +1' }, { n: 'Tặng hộp nhạc Tây dương', fx: {}, x: '', go: () => { const v = liveRivals(true)[0]; kaAim(v, {}); v.loyal = (v.loyal || 0) + 6 } }] });
     Q.push({ t: 'Cung nữ bẩm báo', h: '<p>Có người ngoài cửa xin vào.</p>', opts: [{ n: 'Cho vào', fx: { danh: 1 }, x: 'thành: Danh +1' }, { n: 'Bảo đợi', fx: { duc: 1 }, x: 'thành: Đức +1' }] });
     showModal() } finally { if (window.DQ) DQ.user-- } });
   let st = null; for (let k = 0; k < 10; k++) { await p.waitForTimeout(400); await p.evaluate(() => document.querySelectorAll('.kfgain').forEach(e => e.remove())); st = await p.evaluate(READ); if (st.up) break }
@@ -240,7 +241,7 @@ async function runNoFx(p, dev, name, rows) {
   const r = await p.evaluate(() => { const M = document.getElementById('modal'); const t = document.getElementById('rtoast'); return { q0: Q[0] && Q[0].t || '', modalUp: !M.hidden && getComputedStyle(M).visibility !== 'hidden', held: !!(window.RF && RF.held), next: !!(t && t.querySelector('.kres-next')), res: window.kaLastResult ? window.kaLastResult.rows.map(x => x.k + ':' + x.items.join('/')).join(' | ').slice(0, 120) : '' } });
   await p.screenshot({ path: path.join(OUT, `${dev}-${name}-after.jpg`), type: 'jpeg', quality: 60 });
   const showsB = r.q0 !== 'Chiều trong vườn' && r.modalUp && !r.held && /không được gì/.test(r.res);/* the next card (B, or a game event that came first) is up, nothing held */
-  const ok = N.wantHold ? (r.held && /duoc:/.test(r.res)) : showsB;
+  const ok = N.wantHold ? (r.held && new RegExp((N.row || 'duoc') + ':').test(r.res)) : showsB;
   if (!ok) await p.screenshot({ path: path.join(OUT, `${dev}-${name}-fail.jpg`), type: 'jpeg', quality: 55 });
   rows.push({ dev, name, verdict: ok ? 'ok' : 'FAIL', why: ok ? '' : (N.wantHold ? 'control: a result with a gain did not hold' : 'a no-effect result held the next card behind «Tiếp ▸»'), r });
 }

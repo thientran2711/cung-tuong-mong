@@ -183,7 +183,7 @@ const NAV=/^(Thôi|Đi|Đóng|Lui|Để sau|Đã rõ|Biết rồi|Để ta xem|X
 /* NO-EFFECT-HOLD (MAIN 178 ruling 27/11 ~13:00Z/~13:42Z, DLG-DEAD-BTN): a result card that says only «ta không được gì, cũng không mất gì»
    (j63 resultShow: no Được, no Mất, no Kèm — the «Ghi chú» note row alone) changed nothing she must read before the next card: it never holds
    the next card behind «Tiếp ▸» (same release as a NAV option); the card still shows and fades by itself. Read from kaLastResult only. */
-function noFx(r){try{if(!r||!Array.isArray(r.rows)||(r.fold&&r.fold.length))return false;return r.rows.every(x=>x&&(x.k==="note"||x.k==="tgt"||x.k==="by"))&&r.rows.some(x=>x.k==="note"&&/không được gì, cũng không mất gì/.test((x.items||[]).join(" ")))&&!(document.querySelector("#rtoast .kb .kr-kem"))}catch(e){return false}}
+function noFx(r){try{if(!r||!Array.isArray(r.rows)||(r.fold&&r.fold.length))return false;return r.rows.every(x=>x&&(x.k==="note"||x.k==="by"/* MAIN 179 19:21Z: a «Người ấy» row (tgt: thiện cảm / ghen / oán of the other person) is a shown change — that result holds */))&&r.rows.some(x=>x.k==="note"&&/không được gì, cũng không mất gì/.test((x.items||[]).join(" ")))&&!(document.querySelector("#rtoast .kb .kr-kem"))}catch(e){return false}}
 function isNav(nm,a){try{if(nm!=="chooseM")return false;const m=Q[0],c=m&&m.opts&&m.opts[a[0]];if(!m||!c)return false;if(m.kit&&m.kit.view)return true;
  const fx=c.fx||{};const none=!Object.keys(fx).some(k=>fx[k]);return none&&(c.back||NAV.test(kaPlain(String(c.n||"")).trim()))}catch(e){return false}}
 function wrap(nm){const f=window[nm];if(typeof f!=="function")return;window[nm]=function(){const top=RF.depth===0;let was=null;if(top){RF.mine=0;RF.nav=isNav(nm,arguments);was=window.kaLastResult}RF.depth++;let r;
