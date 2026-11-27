@@ -51,7 +51,7 @@ agReg("consort","cx2",(v,N,need)=>{const O=[];const X=BAL.ag.cx2;if(v===S||v.out
  if(!need||need==="spite"){const L=T.filter(t=>(t.pg||0)>=X.vent.pg&&sp(t)>0&&(v.ghen||0)>0);if(L.length&&agcCan(v,X.vent.c)){const t=mindPickBy(L,x=>sp(x),v);const u=agcU(v,N,100,X.vent.g,X.vent.c,"punish");if(t&&u>0)O.push({k:"cx2:vent",t,u,tag:"punish",act:"trút giận",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}
  if(!need||need==="spite"||need==="safe"){const L=T.filter(t=>sp(t)>0);if(L.length){const t=mindPickBy(L,x=>sp(x),v);const o=odA(v,cx2O(v,"chest"));const u=agcU(v,N,o,X.chest.g,{},"scheme",{"danh":2});
   if(t&&u>0)O.push({k:"cx2:chest",t,u,tag:"scheme",act:"lén lục rương tìm chứng cứ",at:(kh,vv,tt)=>palaceOf(tt)})}}
- if(!need||need==="bac"||need==="safe"){const L=T.filter(t=>t!==S&&aff(t,v)>=netTh(t,"than"));if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+aff(x,v),v);const u=agcU(v,N,100,X.help.g,{},"social");
+ if(!need||need==="bac"||need==="safe"){const L=T.filter(t=>aff(t,v)>=netTh(t,"than")&&!(t===S&&rcvHelpWait(v)));/* law 1 (help-housemate): she can be asked too (helpAsk → her «Lời nhờ» card), never twice by one asker while her answer waits */if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+aff(x,v),v);const u=agcU(v,N,100,X.help.g,{},"social");
   if(t&&u>0)O.push({k:"cx2:help",t,u,tag:"social",act:"sang nhờ giúp đỡ",at:(kh,vv,tt)=>agAt(tt,kh)})}}
  /* her confidant maid (Tâm sự / Sai đi dò la, j2 maid card) and the servants of other palaces (Mua chuộc / Cài người, j10 Người hầu tab) */
  const m=v.maid;if(m&&m.loyal!=null){if((!need||need==="safe")&&m.loyal<X.maidTalk.below){const u=agcU(v,N,100,X.maidTalk.g,{},"help");if(u>0)O.push({k:"cx2:maidTalk",t:null,u,tag:"help",act:"tâm sự với cung nữ thân tín",at:()=>palaceOf(v)})}
@@ -60,6 +60,8 @@ agReg("consort","cx2",(v,N,need)=>{const O=[];const X=BAL.ag.cx2;if(v===S||v.out
   if(L.length){const t=mindPickBy(L,x=>sp(x),v);const s=t&&ag2BribeS(v,t);if(s){const c=(typeof nv==="function"?nv(s,"bribeCost"):30)||30;if((v.bac||0)>=c){const u=agcU(v,N,odA(v,35-(s.loyal||0)/3+(v.tamco||0)/X.bribeSrv.tcDiv),X.bribeSrv.g,{"bac":-c},"scheme");if(u>0)O.push({k:"cx2:bribeSrv",t,u,tag:"scheme",act:"mua chuộc kẻ hầu cung khác",at:()=>palaceOf(v)})}}
    if(t&&(v.bac||0)>=X.plantSrv.cost&&typeof bestSent==="function"&&bestSent(v)&&(!need||need==="spite")){const u=agcU(v,N,odA(v,40+(v.tamco||0)/X.plantSrv.tcDiv),X.plantSrv.g,{"bac":-X.plantSrv.cost},"scheme");if(u>0)O.push({k:"cx2:plantSrv",t,u,tag:"scheme",act:"cài người vào cung khác",at:()=>palaceOf(v)})}}}
  return O});
+/* a «Lời nhờ» card of asker v still waiting for HER answer (the kit notice list S.rcvPend or the parallel-time order list) */
+function rcvHelpWait(v){const w=x=>x&&x.pid==="rcvHelp"&&x.pp&&x.pp.a===v.id;return (S.rcvPend||[]).some(w)||(typeof ptOrdQ==="function"&&(ptOrdQ()||[]).some(w))||(typeof Q!=="undefined"&&Q.some(d=>d&&d.pid==="rcvHelp"&&d.pp&&d.pp.a===v.id))}
 function ag2BribeS(v,t){const L=(t.staff||[]).filter(s=>s&&s.spyFor!==key(v));return L.length?mindPickBy(L,s=>Math.max(1,100-(s.loyal||0)),v):null}
 agRunReg("cx2:maidTalk",v=>{const m=v.maid;if(!m)return"";m.loyal=cl((m.loyal||0)+BAL.ag.cx2.maidTalk.w.maid,0,100);return ag2Res(v,"maidTalk",1,`${v.name} tâm sự với ${m.name}`)});
 /* cx2:maidSpy runner: jagacts3 (spyRoll, one rule with jwhy "Sai đi dò la"); the old flat-odds copy is gone (review ag-all-2 r2 A1) */
