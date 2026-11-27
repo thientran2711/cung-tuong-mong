@@ -2392,3 +2392,16 @@ BAL.charge={C:{
  actW:{poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
   rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
  w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1}};
+/* PLAYER-NOISE BUDGET + TEXT HYGIENE (owner OD 26/11 ~06:50Z (A)+(D); review/qc-noise-hygiene; gate dev/tools/quickcheck.d/96-noise-hygiene.sh).
+   Read ONLY by the QC tools (dev/measure/noise-day.js, dev/test/text-hygiene.js); the game itself never reads it.
+   day = one game day (wk(), tuần) of a real-tap robot life; a channel above its budget on ANY measured day FAILS the build.
+     tinbao  new rows in the Tin báo box per day · chip  toast chips per day · seal  cards with an emotion seal per day
+     dlgB    dialogs / cards per buổi (story pages she pages through on purpose are apart) · dlg  dialogs / cards per day
+     resRows rows (Được / Mất / Ghi chú items) on ONE result card
+     big / visit: NOT here — the ONE daily big-event cap is FOREMAN D's BAL.evc (D2 stat-pace, jbalsp.js): big ≤ BAL.evc.cap, visit ≤ BAL.evc.q.visit;
+       a build without BAL.evc measures them and reports «no D2 cap in this build» (no second set of caps, owner order MAIN 154).
+   text: lineMax[surface] = longest one-line text (letters) · dotMax = most «·» in one line · noDup = words that are a fault when said twice in a row (Vietnamese doubles many words on purpose: nương nương, rưng rưng) ·
+     leakOk = Latin words allowed in player text (proper names of the setting) */
+BAL.noise={tinbao:10,chip:6,seal:2,dlgB:4,dlg:10,resRows:8,
+ text:{lineMax:{chip:90,tinbao:110,resrow:70},dotMax:3,
+  noDup:["ta","ngươi","nàng","hắn","và","với","là","được","mất","thì","đã","đang","khắc","bạc","danh","đức","sủng","oán","ghen","thiện"],leakOk:[]}};/*NOISE-END*/

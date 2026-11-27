@@ -41,6 +41,9 @@ run phone-bars      20 node dev/test/phone-bars.js "$LOGS/phone-bars" 755x1000@2
 run save-slots      20 node dev/test/save-slots.js 755x1000 1180x820
 run update-notes    15 node dev/test/update-notes.js 755x1000 1180x820
 run cloud-save      20 node dev/test/cloud-save.js
+run sampler-pure     2 node dev/test/noise-sampler-pure.js http://localhost:8971/
+run noise-day       75 node dev/measure/noise-day.js run http://localhost:8971/ "$LOGS/noise-day" lives=fold:sens:11,fold:cautious:12,ipad:sens:21,ipad:cautious:22 slice=60 --build dev/build
+run text-hygiene     5 node dev/test/text-hygiene.js --static --runtime "$LOGS/noise-day" --build dev/build
 if [ -z "$QUICK" ]; then
 run coop-e2e        40 node dev/test/coop-e2e.js "$LOGS/coop-e2e"
 run perf            90 node dev/test/perf.js --devices fold,ipadAir --out "$LOGS/perf.json"
