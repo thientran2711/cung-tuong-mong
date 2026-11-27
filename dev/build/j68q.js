@@ -31,7 +31,7 @@ function q6two(){const L=liveRivals(true).filter(v=>!v.confined);if(L.length<2)r
 /* real proof for the queen's accuser: a biased ruling (the consort ruled against) or skimmed lục cung accounts */
 function q6accuser(){const q=q6st();for(const id of q.bias){const v=RV(id);if(v&&v.alive&&!v.out)return{a0:id,why:"b"}}
  if(q.skim>0){const v=rv6(v=>!v.queen);if(v!=null)return{a0:v,why:"s"}}return null}
-function q6evAdd(){const E=BAL.eff.j68q;S.coldEv=(S.coldEv||0)+E.ev;if(S.coldEv>=BAL.coldEvNeed){restore(true,"Án được lật, ngươi được minh oan");return " Chứng cứ đã đủ."}return ` Chứng cứ: ${S.coldEv}/${BAL.coldEvNeed}.`}
+function q6evAdd(){const E=BAL.eff.j68q;S.coldEv=(S.coldEv||0)+E.ev;if(S.coldEv>=BAL.coldEvNeed){restore(true,"Án được lật, ngươi được minh oan");return " Chứng cứ đã đủ."}return ` Chứng cứ: ${kitNeed(S.coldEv,BAL.coldEvNeed)}.`}
 const Q6=()=>BAL.eff.j68q;
 /* the court office holders are real named people (S.court); no name → the card does not come */
 function q6tq(){return S.court&&S.court.tq&&S.court.tq.name?0:null}
