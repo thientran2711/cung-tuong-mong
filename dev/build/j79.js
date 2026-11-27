@@ -1379,7 +1379,7 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
  const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;
  const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
  const next=o.next!=null?o.next:((o.levels||[])[l]||"");
- const bar=o.bar===false||!max?"":l<max?(need?kitBar("Tiến bộ",cur,need):""):`<span class="kchip g">${artNm(5)}</span>`;
+ const bar=o.bar===false||!max?"":l<max?(need?kitBar(o.barLabel||"Tiến bộ",cur,need):""):`<span class="kchip g">${artNm(5)}</span>`;
  const acts=(o.acts||[]).filter(Boolean);
  /* chapter-card (owner 21/11 marks #26/#27): o.big = the BIG card of the Mệnh truyện sub-tabs: the picture at the big Hành sự act-card size (3:4, --kbw),
    title/steps/o.body (kit rows) in the column right of it. No big picture = the small one, as before. */
@@ -1391,10 +1391,10 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
    (kicker word + kitSteps dots «Bậc l/5»); NOTHING else on the tab (no Học / Các lối rows, no bar, no desc). o = a kitSkillCard object; key = data-tnmon.
    The cells sit in a `.kskills.ktn-grid` (law 10: 2 columns on every device; one cell side for the whole Tài nghệ tab = --ktnc, set by the caller from the room
    the tab has so the tallest sub-tab (3 rows) fits without scrolling). Tap → the caller opens ONE kit frame for that môn (kitSkillCard with its acts). */
-function kitSkillCell(o,key){o=o||{};const l=o.level||0,max=o.max!=null?o.max:5;const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
+function kitSkillCell(o,key){o=o||{};const l=o.level||0,max=o.max!=null?o.max:5;const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
  return `<button type="button" class="ktn-cell${o.can===false?" kdone":""}" data-tnmon="${key}" aria-label="${String(o.name||"").replace(/"/g,"&quot;")}">`+
   `${kitSceneArt(img,o.name||"",{shape:"wide",cap:false,cls:"ktnc-art"})}<span class="ktnc-t"><b class="ktnc-n">${o.name||""}</b>`+
-  `${o.kicker?`<small class="ktnc-k">${o.kicker}</small>`:""}${max?kitSteps(l,max,"",o.word):""}</span></button>`}
+  `${max?kitSteps(l,max,"",o.word):""}${max&&l<max&&need?kitBar("Tiến độ",cur,need):""}</span></button>`}/* owner 27/11 ~07:10Z: no rank word (it repeats the bậc); «Bậc n/5» dots + the «Tiến độ» bar with its points */
 window.kitSkillCell=kitSkillCell;
 /* kitEmpty(title,lines,o) = THE empty state (owner 21/11 "Nhìn cái trang cho nó đỡ trống"; the form of «Ta chưa có con»): the topic's painted picture LEFT
    (o.art = an img path, else kitInfoArt(o.topic||title), else the kit's neutral tile), the title «Ta chưa có …» / «Chưa có …», 2–3 short hint bullets
@@ -1436,7 +1436,7 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .ktn-cell:focus-visible{outline:3px solid var(--gold,#b8862b);outline-offset:2px}.ktn-cell:active{filter:brightness(.97)}
 .ktn-cell>.ksart.ktnc-art{flex:1 1 auto;min-height:0;width:100%;height:auto;margin:0;border-radius:0;aspect-ratio:auto}.ktn-cell>.ksart.ktnc-art img{width:100%;height:100%;object-fit:cover}
 .ktn-cell>.ktnc-t{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 6px 8px;text-align:center;min-width:0}
-.ktnc-n{font-size:1rem;line-height:1.2;color:var(--ink,#3a2614);overflow-wrap:anywhere}.ktnc-k{font-size:.8rem;color:var(--dim)}.ktn-cell .ksteps{justify-content:center}
+.ktnc-n{font-size:1rem;line-height:1.2;color:var(--ink,#3a2614);overflow-wrap:anywhere}.ktnc-k{font-size:.8rem;color:var(--dim)}.ktn-cell .ksteps{justify-content:center}.ktn-cell .kskp{width:100%;box-sizing:border-box;font-size:.8rem;margin:0}
 .ktn-cell.kdone{opacity:.85}
 .ktn-pop .kskk{display:none}
 .dlg:has(.ktn-pop) .k3body>.k3main,.dlg:has(.ktn-pop) .k3body>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpsubj{display:none!important}.dlg:has(.ktn-pop) .k3right{flex:1 1 100%;width:100%}.dlg .kpb.kphas:has(.ktn-pop){grid-template-columns:minmax(0,1fr)!important}
