@@ -246,3 +246,36 @@ Env: worktrees /home/user/wt/rp2 (review/real-proof-2), /home/user/wt/rpbase (ba
 1. MAIN 168 (00:54Z): RV-163D PASSed real-proof → land branch review/real-proof-r163d a2902d43 (merged on LIVE). REBASE / merge review/real-proof-2 482e1635 onto a2902d43 (only index.html / sw.js should conflict → rebuild), rerun cover + punish-wit both devices, re-send RV READY to RV-163D.
 2. Same message, law 6a/6c (RV-163D §1, dev/handover/reports/rv-163d.md): the pieces of ONE deed print as identical rows («hủy dung Quý nhân ??? · tang vật» ×3 — visible in the wit-evidence stills) → each piece names what it really is, or the pieces of one deed fold into ONE row (e.g. «… · tang vật (3 món)»); no counter-like duplicates. Family: the evidence panel list (j79 kitEvidencePanel «Chứng cứ đang giữ», S.evd j78) AND her notice line (jcharge punEvTxt cycles DL[i%len] · PK[i%len]) — fix both, scan + before/after table.
 3. MAIN is now MAIN 169 session_01Rc5AsLs58Sh2uCgF1R9EHu (ROOT MAIN 170 to follow) — report there.
+
+## PUNISH-TIER-6 (MAIN CHÍNH 170, session_01Rc5AsKSV1EG8TGLZ2T7KX9) — DO FIRST on review/real-proof-2
+START_CTX ≈ 8 %. PRIORITY #1 CHECK: OD 27/11 ~00:10Z (real proof) + RV-163D §1 OPEN (identical piece rows) + MAIN_STATUS 01:30Z (PT Qs: (a) keep the choice, (b) her own maid CAN be a witness, (c) caught Danh by tier = already built) | main LIVE 17f23656 (no pieceFold / no «mu:» maid witness) | review/real-proof-r163d a2902d43 (base merged), review/real-proof-2 482e1635 | git grep main + review/*: no fold of evidence rows anywhere, no maid witness id | claims PUNISH-TIER-5 (rolled) → PUNISH-TIER-6.
+Branch review/real-proof-2: 59cabe39 (merge of a2902d43 into 482e1635; only index.html/sw.js conflicted → rebuilt, assets.json = LIVE) · 020b21b4 (§1 fold) · 10d562ce (maid witness).
+### 1. RV-163D §1 — identical piece rows (law 6a/6c), whole family (law 11)
+Cause: one deed with more pieces than its charge has kinds (hd pk = [«tang vật»]; mh = 2 kinds) printed «deed · kind» again and again (j78proof fallback D.list[0]; punEvTxt DL[i%len] · PK[i%len]).
+Fix: pieceFold / pieceN (j78): identical rows fold into ONE «… (N món)» — evidence panel «Chứng cứ đang giữ» (evidenceOf items), her verdict notice «Chứng cứ» row (jcharge punEvTxt; fold first, then BAL.pun.evShow), the «Ngươi có thêm chứng cứ» find line (j78gainTxt, count before «(nguồn: …)»). Distinct pieces stay one row each.
+FAMILY SCAN dev/test/dup-piece-scan.js (duplicate rows; Fold 755x1000 + iPad 1180x820 same):
+| place · case | 59cabe39 | 020b21b4 |
+|---|---|---|
+| P1 panel · hủy dung 1 deed 3 pieces | 3 rows, 1 dup | «… · tang vật (3 món)» |
+| P1 panel · bỏ độc 1 deed (2 kinds) | 1 dup | «tang vật (2 món)» + «dấu vết nơi ra tay» |
+| P1 panel · 2 deeds 4 pieces | 1 dup | 0 |
+| P2 notice · hủy dung | 1 dup | «hủy dung X · tang vật (3 món)» |
+| P2 notice · bỏ độc | 2 dup | «tang vật (2 món); dấu vết nơi ra tay (2 món); 1 nhân chứng: …» |
+| P3 find line · 3 at once | 1 dup | «… · tang vật (3 món) (nguồn: tai mắt của ngươi)» |
+| total | 6 | 0 |
+### 2. MAIN 169 answer (b): her own maid (and every consort's maid) CAN be a witness (law 6b/1)
+The day record's maid row «mm:<owner>» is a ROLE (the next maid gets the same key), so a maid at the place is stored as HERSELF «mu:<owner>:<uid>» (jcharge chMaidId; uid on the maid object, S.maidSeq; saved with her). A replaced / dead maid never resolves (never her successor). Kind = «lời khai người hầu». Witness door: covWitId turns her maid's «mm:me» into «mu:». Thủ tiêu a maid witness (jcover covKill): she really dies (death ledger g «maid», c «plot»), her mistress gets a new maid from Nội vụ phủ (maidMk). NOTE for RV: a doer's own maid who follows her now sees her deeds (realistic, law 6b) → more nặng deeds have a findable witness.
+### Tests (10d562ce, file:// index.html, Fold 755x1000 + iPad 1180x820)
+| test | Fold | iPad |
+|---|---|---|
+| dup-piece-scan (NEW) | ALL PASS 0 dup | ALL PASS 0 dup |
+| punish-wit (+3 MAID checks) · cover · punish-tier · punish-reason · charge-followups · seize-ledger · charge-trinh-punish | ALL PASS | ALL PASS |
+| charge-smoke · charge-taps | 0 FAIL, 0 page errors | 0 FAIL, 0 page errors |
+| cold-faction | ALL PASS 20 | — |
+### Gates on the branch (quickcheck 10d562ce → fixes ae2e0a07)
+- quickcheck 10d562ce: QUICKCHECK PASS (open 2655 ms · old LIVE save loads + plays a buổi · perf median new/live render 264/247, tab 718/810, buổi 1719/1636 ms, tasks>200ms 41/32). Core gates: G1 one-core-guard FAIL = «jcover.js evA(h,a,1» (PT-5 code) → FIXED ae2e0a07 (BAL.charge.cover.wit.nang.ev), guard PASS. Still failing, the known pre-existing ones (files untouched): npc-purpose-scan 1, button-crawl «Ô lưu · Lui» fold.
+- coop-e2e 10d562ce: 142/143, FAIL «same world after week 2: R#3.evR A=undefined B=1». t.evR = rumours HELD BY the viewing player (jtruth rumA; jcover's NPC wipe → evTruthSweep makes them more often) → a viewer row like ev → FIXED ae2e0a07 (jcoophl VIEW + the coop-e2e / coop-host-lag-scan strip lists). coop-e2e ae2e0a07: 143/143.
+- cover Fold + iPad ALL PASS on ae2e0a07.
+RV READY: review/real-proof-2 ae2e0a07 (base a2902d43 = real-proof on LIVE a22cf45d; the lander restacks onto LIVE 17f23656, only built files should conflict).
+### ROLLOVER → PUNISH-TIER-7: JOB 2 review/split-merge-fix NOT STARTED
+Build list and rules unchanged: «PUNISH-TIER-4 … JOB 2» + «PUNISH-TIER-5 … JOB 2» above (A1–A6, B1–B3, P1–P4, P6, P7, j0.js:4; merges only; OD 27/11 ~00:46Z / ~01:00Z / ~01:12Z). Build ON TOP of review/real-proof-2 ae2e0a07. Env: worktrees /home/user/wt/rp6 (review/real-proof-2), /home/user/wt/ho6 (handover, local pt6-ho) — delete when done. MAIN now = MAIN 171 session_01Rc5AsLtirkQB1N5Nb16Wct.
