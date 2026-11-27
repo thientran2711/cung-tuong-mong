@@ -1254,7 +1254,7 @@ const isSrvMe=()=>typeof isSrv==="function"&&isSrv();
  if(host()&&a&&a.id!=null&&a.alive&&(a.bac||0)>=B.pay){if(dOn())CW.thin.D.kind(fs(),"nbribe",{r:a.id});else p2say("nbribe",{r:a.id})}return ""}})();
 P2H.bribe=m=>{if(S.dead||!isSrvMe())return p2say("briber",{rid:m.rid,no:1});const mis=srvM(),B=BAL.coopBribe,nm=esc(m.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
  pushModal({act:1,t:"Bạc lạ",h:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,opts:[
-  {n:"Nhận bạc, làm tai mắt",fx:{bac:+m.pay||B.pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();p2say("briber",{rid:m.rid,ok:1})}},
+  {n:"Nhận bạc, làm tai mắt",fx:{bac:+m.pay||B.pay},x:cnvSpyX(mis,0,nm),go:()=>{S.srv.spyFor=fp();p2say("briber",{rid:m.rid,ok:1})}},
   {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},/* previews: briber (P2H.briber, told) */x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm} · kèm: ${nm} ghi hận ngươi, thiện cảm ${balSg(spSee("rel",-B.grudge))}`,go:()=>p2say("briber",{rid:m.rid,told:1})},
   {n:"Từ chối, im lặng",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${nm}, thiện cảm ${balSg(spSee("rel",B.grudge))}`,go:()=>p2say("briber",{rid:m.rid})}]});showModal();render()};
 P2H.briber=m=>briberRes(m);
@@ -1518,7 +1518,7 @@ function invHer(pp,ok,lv){if(!S||S.dead)return;const v=friendEntry();
 PEND.thBribe=pp=>{if(!pp||!isSrvMe())return null;const mis=srvM(),B=BAL.coopBribe,pay=+pp.pay||B.pay,nm=esc(pp.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
  const ans=r=>{const m=Object.assign({rid:pp.rid,o:pp.o},r);otherSide(()=>briberRes(m),"briber",m,pp.lf)};
  return {t:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,o:[
-  {n:"Nhận bạc, làm tai mắt",fx:{bac:pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();ans({ok:1})}},
+  {n:"Nhận bạc, làm tai mắt",fx:{bac:pay},x:cnvSpyX(mis,0,nm),go:()=>{S.srv.spyFor=fp();ans({ok:1})}},
   {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm} · kèm: ${nm} ghi hận ngươi, thiện cảm ${balSg(spSee("rel",-B.grudge))}`,go:()=>ans({told:1})},
   {n:"Từ chối, im lặng",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${nm}, thiện cảm ${balSg(spSee("rel",B.grudge))}`,go:()=>ans({})}]}};
 CW.dInit=function(T){
