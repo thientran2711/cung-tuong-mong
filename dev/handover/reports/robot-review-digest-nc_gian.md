@@ -4,7 +4,7 @@ Evidence limit (honest): lives ran 4-14 h of wall time with resumes; reviews com
 
 Lives (all VALID, real taps, no cap):
 greedy-1 illness 20, 441 buổi · random-1 Lãnh cung/madness 22, 566 · lover-1 Lãnh cung/madness 23, 643 · lover-2 illness 25, 760 · lazy-1 illness 25, 781 · lazy-1n illness 25, 1010 · speed-2 dysentery 24, 726 · speed-1 Lãnh cung/madness 31, 1780 · lazy-2 illness 32, 2173 · scholar-1 Lãnh cung «Tuổi xuân qua đi» 40, 2871 · greedy-2 chronic poison 39, 2881 · cautious-1 Lãnh cung «Tuổi xuân qua đi» 40, 3490 · lazy-1g Lãnh cung «Tuổi xuân qua đi» 40, 3519.
-Endings: illness/poison death 7 · Lãnh cung (madness or xuân qua đi) 6 · every life ended at rank 0-1 except none above Thường tại.
+Endings: illness/poison death 7 · Lãnh cung (madness or xuân qua đi) 6 · all 13 ended at rank 0-1.
 
 ### Average score per area (1-10; n = lives that scored it)
 a first 15 min 5.8 (n=5) · b loop/pacing 3.0 (n=12) · c buttons/UI 4.4 (n=13) · d story/drama 5.0 (n=7) · e characters 5.5 (n=4) · f choices/fairness 3.4 (n=13) · g rewards/feedback 4.2 (n=5) · h mini-games n/a (no run took a mini-game after the opening) · i visuals/sound 7.4 (n=5) · j co-op n/a.
