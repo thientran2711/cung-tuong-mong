@@ -23,7 +23,7 @@ async function cache(ctx){const CD=process.env.CACHE;if(!CD)return;fs.mkdirSync(
 const NEW=`window.__sb2new=(o,f)=>{window.__forceOrigin=o;SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;
  const m=document.getElementById('modal');if(m)m.hidden=true;if(f)f();Q.length=0;if(m)m.hidden=true;deal();render()};`;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,hasTouch:true,isMobile:W<1000});await cache(ctx);
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(240000);const OUT={vp:VP,checks:{},info:{}};const C=(k,L)=>{OUT.checks[k]=(OUT.checks[k]||[]).concat(L)};
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(240000);const OUT={vp:VP,checks:{},info:{}};const C=(k,L)=>{OUT.checks[k]=(OUT.checks[k]||[]).concat(L)};
  const shot=async n=>{if(SHOTS){fs.mkdirSync(SHOTS,{recursive:true});await p.screenshot({path:`${SHOTS}/sb2-${W}x${H}-${n}.jpg`,type:'jpeg',quality:60})}};
  if(OLD){await boot(p,OLD);await p.evaluate(()=>{window.__forceOrigin='cnv';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;S.month=4;save()});await sleep(800)}
  await boot(p,URL);await p.evaluate(NEW);

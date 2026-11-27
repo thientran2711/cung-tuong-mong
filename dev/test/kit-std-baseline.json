@@ -1,0 +1,9 @@
+{
+ "note": "RV-171 freeze: LIVE 611fca61 + review/kk56-live c5746a2a (scan-36 fix) + kit-std-audit-rv168 61a8bf41 + X21 anchor fix (measured against the lifted card); gate mode SUBS=0, Fold 755x1000 + iPad 1180x820; two runs identical (25). X02 20 = Bàn bài hand cards (KK R12/R13 rebuild); X08 5 = pre-existing on LIVE (court «Trong cung: Chương 1…» one-line value cut, kitPick kfoc-off card on iPad, «Đang thỉnh tranh…» stand-in). LIVE 611fca61 with the same scan = 57. Counts may only shrink.",
+ "sha": "c5746a2a",
+ "total": 25,
+ "cnt": {
+  "X02": 20,
+  "X08": 5
+ }
+}
