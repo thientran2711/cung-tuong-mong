@@ -94,9 +94,11 @@ function scrvDest(a,b){const f=(s,c)=>{const m=(s||"").match(new RegExp("\\|"+c+
  if((a||"").split("|")[0]!==(b||"").split("|")[0])return "book";if(f(a,"p")!==f(b,"p")){const p=f(b,"p");return p==="home"?"home":p}
  if((f(b,"g")&&f(a,"g")!==f(b,"g"))||(f(b,"v")&&f(a,"v")!==f(b,"v")))return "board";if(f(b,"q")&&f(a,"q")!==f(b,"q"))return "event";return "scene"}
 let SCRV_KEY="";function scrvKeyNow(){SCRV_KEY=scrvKey()}
-function scrvCheck(){if(SCRV_HOLD)return;const k=scrvKey();if(k===SCRV_KEY)return;const old=SCRV_KEY;SCRV_KEY=k;if(scrvBlocked()||!old)return;kitScreenVeilUntil(document.body,scrvDest(old,k))}
+function scrvCheck(){if(SCRV_HOLD)return;const k=scrvKey();if(k===SCRV_KEY)return;const old=SCRV_KEY;SCRV_KEY=k;if(scrvBlocked()||!old)return;const dest=scrvDest(old,k);
+ kitScreenVeilUntil(document.body,dest).then(v=>{if(v)return;/* nothing pending now: pictures that a module sets a few frames later (RV-171 FAIL-2, warm tab «act») are caught by two rescans */
+  for(const ms of [50,160,360])setTimeout(()=>{if(SCRV_RUN||SCRV_KEY!==k||scrvBlocked())return;if(scrvPend(document.body).length)kitScreenVeilUntil(document.body,dest)},ms)})}
 (function(){try{const st=document.createElement("style");st.id="kit-scrv";st.textContent=
-`.kscrv{position:fixed;inset:0;z-index:9550;display:flex;align-items:center;justify-content:center;background:var(--k-card,#fffaf0);opacity:1;transition:opacity ${KIT_SCRV.fade}ms ease;pointer-events:auto;touch-action:none}
+`.kscrv{position:fixed;inset:0;z-index:9790;/* above the kit chips + toasts (.ktbt 9760): RV-171 FAIL-3 */display:flex;align-items:center;justify-content:center;background:var(--k-card,#fffaf0);opacity:1;transition:opacity ${KIT_SCRV.fade}ms ease;pointer-events:auto;touch-action:none}
 .kscrv[hidden]{display:none}.kscrv.out{opacity:0;pointer-events:none}
 .kscrv-l{font-family:var(--display,serif);font-size:1.05rem;letter-spacing:.04em;color:var(--k-lab,#8a7350);opacity:0;animation:kscrvW .3s ease var(--kscrv-word,220ms) forwards}
 @keyframes kscrvW{to{opacity:1}}
