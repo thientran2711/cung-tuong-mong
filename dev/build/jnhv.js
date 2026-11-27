@@ -68,7 +68,7 @@ function areaByK(k){return plan().areas.find(a=>a.k===k)||null}
 
 /* ---------- 2. who in curPeople is which record entry ---------- */
 function entryOfP(p,E){if(!p)return null;E=E||entries();if(p.lid){const e=E.find(x=>x.id===p.lid);if(e)return e}
- if(p.kind==="emp")return E.find(x=>x.id==="emp")||null;if(p.kind==="th")return E.find(x=>x.id==="th")||null;
+ if(nhvKind(p)==="emp")return E.find(x=>x.id==="emp")||null;if(p.kind==="th")return E.find(x=>x.id==="th")||null;
  if(p.ref&&typeof rivals!=="undefined"&&rivals.includes(p.ref)){const e=E.find(x=>x.id==="v"+p.ref.id);if(e)return e}
  if(p.ref&&p.ref.sid!=null){const e=E.find(x=>x.id==="s"+p.ref.sid);if(e)return e}
  return E.find(x=>x.name&&x.name===p.name)||null}
@@ -133,11 +133,13 @@ function geo(){const s=st(),r=s.getBoundingClientRect(),B=AB();const q=x=>{const
 function figRoleOf(p){const t=((p.info||"")+" "+(p.role||"")+" "+(p.name||"")).toLowerCase();if(/thị vệ|thi ve|thống lĩnh/.test(t))return{kind:"man"};
  if(/thái giám|công công|tổng quản|(^|\s)tiểu .+ tử\b|(^|\s)lão .+ tử\b|\stử$/.test(t)||/ Tử$/.test(p.name||""))return{kind:"maid",ref:{role:"eunuch",name:p.name,id:"n:"+p.name}};
  return{kind:"maid",ref:{role:"maid",name:p.name,id:"n:"+p.name}}}
-function figSrc(p){let src="";try{const who=p.kind==="emp"||p.kind==="th"?p:p.ref;if(who)src=figFor(p.kind==="emp"||p.kind==="th"?p:who)}catch(e){}
+/* LRM4: the servant-path place list (j95) carries the Emperor as {kind:"srv",sk:"emp"} and the Thái y as {kind:"srv",sk:"ty"} with no ref → read sk, never the maid fallback */
+function nhvKind(p){return p&&p.kind==="srv"&&(p.sk==="emp"||p.sk==="ty")?p.sk:p&&p.kind}
+function figSrc(p){let src="";const ek=nhvKind(p);try{const own=ek==="emp"||ek==="th"||ek==="ty";const who=own?(p.kind===ek?p:{kind:ek,name:p.name,id:ek}):p.ref;if(who)src=figFor(who)}catch(e){}
  if(!src){try{src=figFor(Object.assign({name:p.name},figRoleOf(p)))}catch(e){}}
  let kn=true;try{kn=j59known(p)!==false}catch(e){}
  if(src)return{src,sil:0,unk:!kn};
- let g="f";try{if(/^(ksp|peddler|ty|man|min|emp|guard)$/.test(p.kind))g="m"}catch(e){}return{src:"img/kit/unknown-fig-"+g+".webp",sil:1}}
+ let g="f";try{if(/^(ksp|peddler|ty|man|min|emp|guard)$/.test(nhvKind(p)))g="m"}catch(e){}return{src:"img/kit/unknown-fig-"+g+".webp",sil:1}}
 /* the scene's people: the area's groups, each person bound to her index on the place list (the act flow reads that list) */
 function sceneGroups(a){const ppl=curPeople(),E=entries(),used=new Set();const pOf=e=>{const i=ppl.findIndex((p,j)=>{if(used.has(j)||p===S)return false;const x=entryOfP(p,E);return !!x&&x.id===e.id});if(i<0)return null;used.add(i);return{p:ppl[i],i}};
  const out=a.g.map(g=>({cap:g.cap,emp:g.emp,ms:g.ms.map(pOf).filter(Boolean),fol:g.fol.map(pOf).filter(Boolean)})).filter(g=>g.ms.length||g.fol.length);
