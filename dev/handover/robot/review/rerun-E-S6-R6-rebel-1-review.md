@@ -1,0 +1,11 @@
+# R6-rebel-1 (ipad, bot=sens, seed 1996422549, pf/pt_tang) — end-of-life notes — COUNTED, flags «mixed build» + «save quota» + «save rewind»
+Death **Hồng nhan bạc mệnh — «Năm 22, Hoàng thượng niên hiệu Hưng Long băng hà, thọ 44 tuổi…»** (the emperor dies), age 39, year 22, **buổi 4509**, 6696 real taps since the last resume, 0 JS clicks, 16 bug rows, 9 dead-button rows, 1 stuck. robot-audit VALID (natural, game-imposed). Longest of my lives. Written from the result JSON + moment log, not played by eye; 800 offers seen / 306 picked (38 %).
+## Builds / harness / flags
+≈ 39 h; start build 0281bf7bcef6 (11-26), a pinned local-serve for a long stretch, 10 resumes (2 OOM page crashes at b3618 / b4015), ckpt build0/mixedBuild edited several times: flag «mixed build». **Flag «save quota»**: from ≈ b2957 the 5.24M-char save no longer fit localStorage (QuotaExceededError, «SAVE STALE»), parked ≈ 10 h for the packed-save fix; resumed 20:25Z on LIVE 24beb1a4: the game repacked the save 5.24M → 0.44M after one failed write and no quota error followed. **Flag «save rewind»**: the resume restored the stale stored save (clock 19.218) so the life continued from year 19: the ≈ 459 buổi / ≈ 3 years played between b2957 and the crash are lost (the harness counter ran on, the game clock did not).
+## Findings
+1. GAME (fixed on LIVE 24beb1a4, verified): QuotaExceeded at 5.24M chars — packed save repacks to 0.44M.
+2. GAME: «no way out» — .dlg «Cung nữ bị ức hiếp»: the buttons «Sang hỏi tội Đáp ứng…» are clipped / below the screen, nothing scrolls (the harness NO-EXIT recorded it too).
+3. GAME: KG82.phase stays «play» after the round ended on boards «theu» and «dan» (the result / next button «Xem kết quả» / «Môn kế tiếp» shows but the game never set phase «result») — the same family as the harness «BOARD … round never ended» rows (greedy-4 thêu stall).
+4. GAME: late button — «Vào cung ngay» appears only 14 s after #klife opens (nothing to tap before it).
+5. GAME: SAVE STALE / SAVE REWIND: see the flags; since the packed-save build the harness's stale check reads the packed format as «clock unreadable» → false positive rows, ignore.
+6. HARNESS: picker stalls on a .kmov dialog (80 steps) cleared by the «Ta biết rồi» tap; one 15-min no-progress on #kg82.
