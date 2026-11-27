@@ -36,8 +36,13 @@ const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=WT+'.ahcache/
  for(const st of ['confined','out']){
   const b=await p.evaluate(st=>{Q.length=0;if(st==='confined')S.confined=1;else{S.confined=0;S.out=1;S.place='lc'}tab='go';window.__mapList=0;render();
    const spots=[...document.querySelectorAll('#panel .mspot')];const tag=st==='confined'?/cấm túc/:/lãnh cung/;
-   const lab=spots.filter(e=>tag.test(e.querySelector('.mmeta')?.innerText||''));
-   const shut=spots.filter(e=>e.dataset.go!==S.place&&!(e.tagName==='DIV'||e.disabled)).map(e=>e.dataset.go||e.dataset.ak);
+   /* LRM3 (LIVE 772bee4f): her own state is said ONCE on the whole Dư đồ — on LIVE that one place is the KIT §103 map banner (kitMapBanner, jplrule strips it
+      from every spot); on a build without the banner it is her own spot. Zone tags (.mzone, KIT §85.10 zoom only, no travel) and her own home spot (.here) are not
+      travel targets, so «still shut» is asked of every other place spot */
+   const lab0=spots.filter(e=>tag.test((e.querySelector('.mmeta')?.innerText||'')+' '+[...e.querySelectorAll('.mchip')].map(c=>c.innerText).join(' ')));
+   const ban=typeof kitMapBanner==='object'&&kitMapBanner.now?kitMapBanner.now():null;const banOn=!!(ban&&tag.test(ban.line));
+   const lab=lab0.concat(banOn?[{dataset:{go:'banner'}}]:[]);
+   const shut=spots.filter(e=>!e.classList.contains('mzone')&&!e.classList.contains('here')&&e.dataset.go!==S.place&&!(e.tagName==='DIV'||e.disabled)).map(e=>e.dataset.go||e.dataset.ak);
    window.__mapList=1;render();const tiles=[...document.querySelectorAll('#panel .mtile')].filter(e=>tag.test(e.querySelector('.mband')?.innerText||''));window.__peek=tiles.slice(0,2).map(e=>e.outerHTML.slice(0,700));window.__mapList=0;render();
    return {peek:window.__peek,n:spots.length,lab:lab.length,where:lab.map(e=>e.dataset.go||e.dataset.ak),shut,tiles:tiles.length}},st);
   ok(b.n>3&&b.lab===1,`(b) ${st}: her state on ${b.lab} of ${b.n} spots (${b.where})`);ok(b.shut.length===0,`(b) ${st}: every other spot still shut (${b.shut})`);if(b.tiles>1)console.log(b.peek.join('\n'));ok(b.tiles<=1,`(b) ${st}: list view tiles with it = ${b.tiles}`);

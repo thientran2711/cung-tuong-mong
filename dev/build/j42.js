@@ -26,7 +26,7 @@ function srvRkN(){return S.srv.lau>0?"Cung nữ Tân Giả khố":S.srv.mama?"Ma
 (function(){const r0=rkName;rkName=function(p){if(p===S&&isSrv())return srvRkN();return r0.apply(this,arguments)}})();
 (function(){const r0=rkOfFace;rkOfFace=function(kind,o){const g=r0.apply(this,arguments);if(o===S&&kind==="consort"&&isSrv()&&g)return[g[0],srvRkN()];return g}})();
 function srvW(f){if(!isSrv())return f();const o=S.out;S.out=1;try{return f()}catch(e){console.error(e);return""}finally{S.out=o}}
-function srvMerit(n){/* s3e-display-fix: công lao never banks past the rung's need (srvMonth already clamps it; mid-month orders printed «Công lao 11/10») */S.srv.mp=Math.min(srvMpNeed(S.srv.rk),(S.srv.mp||0)+n)}
+function srvMerit(n){if(!S||!S.srv)return;/* srvmerit-guard: no cung nữ record, no Công lao (a stale act; jsrvguard is the gate) */S.srv.mp=(S.srv.mp||0)+n;/* s3e-display-fix (after the guard): công lao never banks past the rung's need (srvMonth already clamps it; mid-month orders printed «Công lao 11/10») */S.srv.mp=Math.min(srvMpNeed(S.srv.rk),S.srv.mp)}
 /* công lao of an order done for the master (srvDoOrder; shown on every order card: ordRow, jptime receiver row) — ONE reader of the BAL key */
 function srvOrdMerit(){return BAL.eff.j42.srvDoOrder_2}
 function srvOnce(k,sc){const v=S.srv.once[k];return !!v&&(sc==="b"?v.b===bid():v.w===wk())}
