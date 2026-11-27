@@ -15,7 +15,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
 (async()=>{const b=await chromium.launch();
  for(const [W,H,tag] of [[755,1000,'fold'],[1180,820,'ipad']]){
   const p=await (await b.newContext({viewport:{width:W,height:H}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
-  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof kg82Open==='function'&&typeof playArt==='function'&&typeof start==='function'&&typeof kitMgSkinAdd==='function');await p.waitForTimeout(2500);
+  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof kg82Open==='function'&&typeof playArt==='function'&&typeof start==='function'&&typeof kitMgSkinAdd==='function');await p.waitForTimeout(2500);/* the kit slot is tested on a CLEAN registry: the painted skins of the game (jmgskin.js, tested by mgskin-wire.js) are taken out so «default» stays today's art and the fixtures below own their kinds */await p.evaluate(()=>{for(const k of Object.keys(KG82_SKINS))delete KG82_SKINS[k]});
   await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=100;S.bac=999;S.ap=9;try{render()}catch(e){}
    /* the opening reward overlay (#kmrew, «Rương đồ khuê các») would cover the frame in the shots */setInterval(()=>{const k=document.getElementById('kmrew');if(k)k.remove()},100);
    /* colour helpers in page: resolve a CSS colour expression inside #kg82 to [r,g,b] */
