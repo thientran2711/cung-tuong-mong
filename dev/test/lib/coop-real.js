@@ -26,7 +26,31 @@ async function bothReal(A,B,ms){const a=await waitReal(A,ms),b=await waitReal(B,
 /* opts.low: the driver keeps a guest BELOW PAL_HEAD on purpose (rank 1 …): the check is then «each seat sees the other's real rank» (friend entry rank = her own S.rank, built from the merged week) instead of REAL's rank ≥ PAL_HEAD */
 const RK=()=>{const f=COOPW.friend();return f?{fr:f.rank|0,me:S.rank|0}:null};
 async function bothLow(A,B,ms){const t0=Date.now();while(Date.now()-t0<ms){const a=await A.p.evaluate(RK).catch(()=>null),b=await B.p.evaluate(RK).catch(()=>null);if(a&&b&&a.fr===b.me&&b.fr===a.me)return true;await _sl(300)}return false}
-async function realize(A,B,weekFn,ok,opts){const chk=ms=>opts&&opts.low?bothLow(A,B,ms):bothReal(A,B,ms);let r=await chk(4000);if(!r&&weekFn){await weekFn();r=await chk(15000)}
+/* review/coop-reg9-route (FOREMAN D 26/11 07:40Z «level-9 host routing does not route: G1 shelfPlantQuick runs LOCAL, sent 0»; LAW 11 family):
+   ROOT (proved with a dead-setter stack on LIVE 6b5d3d05 and review/mg-trim c961211e): not the routing. Since SELSCENE (jselxday) every
+   origin plays 3 selection days; the co-op drivers' world wait (inW: «world + a coop entry») ends while both seats are STILL in those days.
+   The driver's clear() then answers her selection-day cards between its rows; a contest she loses (selxContestRun → selxBanHoa → over)
+   ends her life ON HER PHONE (the designed co-op dying road: Luân hồi, new life); every intent tapped after it finds S.dead / COOPW.inLife
+   (thin F gOn) and takes the local road: sent 0 for EVERY registration (all reg9 rows on mg-trim, G1 alone on LIVE with ROWS=G, P2/P3 on
+   a full LIVE run). review/coop-thin-g-land ec88b0e2 has no selection days (its base 5e013076 predates jselxday), hence 19/19 there.
+   ONE rule: no driver row runs on a life that is still being made. lives(A,B,clear,ok) = coop-clear MAKING (the SELSCENE-17 lifeWait rule:
+   selection days, a kit selection scene, S.dead, COOPW.inLife) waited away on BOTH seats, a player's taps only; every driver calls it
+   right after its world wait (before its screen set-up, which a rebirth would wipe), and realize() calls it again as the family's guard
+   (a driver that never called it: the guard waits the same way and FAILs loudly if a life was reborn under the driver's set-up).
+   NOLIVES=1 = the old road (mutation / BEFORE column). */
+let CLR=null;
+function clrE2E(){if(CLR)return CLR;const fs=require('fs'),path=require('path');const t=fs.readFileSync(path.join(__dirname,'..','coop-e2e.js'),'utf8');
+ const i=t.indexOf('async function clear(');const j=t.indexOf("return'many'}",i)+13;const sleep=_sl;void sleep;
+ CLR=eval('('+t.slice(i,j).split("require('./lib/coop-clear.js')").join("require('./coop-clear.js')")+')');return CLR}
+const LIFEMS=+process.env.LIFEMS||480000;
+const NM=()=>{try{return typeof S!=='undefined'&&S?String(S.name||'')+(S.dead?'†':''):null}catch(e){return null}};
+async function lives(A,B,clear,ok,o){o=o||{};if(process.env.NOLIVES)return true;const MK=require('./coop-clear.js').MAKING,SCR=require('./coop-clear.js').SCR;if(typeof MK!=='function')return true/* a base without the SELSCENE-17 MAKING rule has no selection days either */;clear=clear||clrE2E();
+ const nm=x=>x.p.evaluate(NM).catch(()=>null);const n0=[await nm(A),await nm(B)];const t0=Date.now();let mk=[true,true];
+ while(Date.now()-t0<LIFEMS){mk=[await A.p.evaluate(MK).catch(()=>true),await B.p.evaluate(MK).catch(()=>true)];if(!mk[0]&&!mk[1])break;await clear(A);await clear(B);await _sl(200)}
+ const n1=[await nm(A),await nm(B)];const re=[n0[0]!==n1[0],n0[1]!==n1[1]];const r=!mk[0]&&!mk[1]&&!(o.guard&&(re[0]||re[1]));
+ const why=o.guard?'set-up guard (realize): no seat is still making her life, none reborn under the driver\'s set-up':'both lives made before the rows (selection days / a ban hoa rebirth done: a row on a life still being made takes the old local road)';
+ if(ok&&(!o.guard||!r))ok(r,why,r?{ms:Date.now()-t0,reborn:re}:{making:mk,reborn:re,names:[n0,n1],scr:[await A.p.evaluate(SCR).catch(e=>String(e)),await B.p.evaluate(SCR).catch(e=>String(e))]});return r}
+async function realize(A,B,weekFn,ok,opts){await lives(A,B,opts&&opts.clear,ok,{guard:true});const chk=ms=>opts&&opts.low?bothLow(A,B,ms):bothReal(A,B,ms);let r=await chk(4000);if(!r&&weekFn){await weekFn();r=await chk(15000)}
   ok(r,'set-up is real on both seats ('+(opts&&opts.low?'each sees the other\'s real rank':'consort entry, own palace')+')',r?undefined:[await A.p.evaluate(DBGF).catch(e=>'dbg err '+e.message),await B.p.evaluate(DBGF).catch(e=>'dbg err '+e.message)]);return r}
 /* one merged week for a driver that has none of its own: press the next-buoi button on both seats (the driver's clear/press1) until both seats' week counters advance */
 async function weekGeneric(A,B,clear,press1,ms=120000){const w=o=>o.p.evaluate(()=>COOP.state.week||0);const w0=await w(A);const t0=Date.now();
@@ -56,4 +80,4 @@ async function nightRec(A,B,d,ms=20000){let a=null,c=null;const t0=Date.now();wh
    #next stayed enabled and the bot never pressed again → the room waited for ever). A player presses again: a seat still on the old buổi,
    #next enabled, no dialog, no buổi / week end out → one more tap (counted in window.__rePress). */
 async function repress(o){try{await o.p.evaluate(()=>{const n=document.getElementById('next');if(n&&!n.disabled&&n.offsetParent!==null&&!(typeof Q!=='undefined'&&Q.length)&&!(window.COOPW&&(COOPW.bend||COOPW.pend))&&!(window.__co&&__co().waiting)){window.__rePress=(window.__rePress||0)+1;n.click()}})}catch(e){}}
-module.exports={repress,origin,REAL,DBGF,DEF,syncFr,PETK,waitReal,bothReal,bothLow,realize,weekGeneric,nfBoth,NREC,nightRec};
+module.exports={lives,MAKING:require('./coop-clear.js').MAKING||(()=>false),repress,origin,REAL,DBGF,DEF,syncFr,PETK,waitReal,bothReal,bothLow,realize,weekGeneric,nfBoth,NREC,nightRec};
