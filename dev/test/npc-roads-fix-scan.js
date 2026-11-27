@@ -10,13 +10,13 @@
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
 const [,,URL,LABEL]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];
- const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
+ const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);await p.addInitScript(require('./lib/qdrain').init);/* headless month loop: __bot + answer the night choice (lib/qdrain.js) */
  p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
  await p.waitForFunction(()=>typeof start==='function'&&typeof nrMaidL==='function'&&typeof nrMenL==='function',null,{timeout:0});await p.waitForTimeout(1500);
  const R=await p.evaluate(()=>{document.getElementById('title').hidden=true;
   const boot=k=>{for(let t=0;t<3;t++){quiet=true;window.__forceOrigin=k;start();quiet=false;Q.length=0;if(S&&S.origin)return true}return false};
-  const month=n=>{for(let m=0;m<n;m++){if(S.dead){S.dead=false;S.suc=60}const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){break}}Q.length=0}};
+  const month=n=>{for(let m=0;m<n;m++){if(S.dead){S.dead=false;S.suc=60}const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){break}}Q.length=0}};
   const chs=()=>{let n=0;for(const s of nrMaidL().concat(nrServL('eunuch')))if(s.nr)n+=s.nr.l.length;for(const e of nrMenL())if(e.p.nr)n+=e.p.nr.l.length;let c=0;for(const v of rivals)if(v.nr)c+=v.nr.l.length;return[n,c]};
   const out={};
   /* F1: a kẻ-hầu life */
