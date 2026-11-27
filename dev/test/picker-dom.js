@@ -91,6 +91,18 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    ok(r.gave===1||r.gave==='no doable'||/không thành|chưa dịu|trả lại|uổng công/.test(r.log||''),`${vw}x${vh} ${r.name}: confirm gives exactly one piece (or she refuses it / the roll fails: nothing lost)`,{gave:r.gave,log:r.log})}
   for(const r of R)if(r.frame)ok(r.A===r.B&&(r.A2==null||r.A2===r.B),`${vw}x${vh} ${r.name} (chest ${r.N}, ${r.ent} entries): dialog frame = LIVE's (all cards drawn)${r.A2!=null?' on page 1 and page 2':''} — ${r.B}`,r.A===r.B&&(r.A2==null||r.A2===r.B)?undefined:{paged:r.A,page2:r.A2,live:r.B});
   for(const r of R)if(r.nodes!=null)ok(r.nodes<MAX,`${vw}x${vh} ${r.name}: ${r.nodes} nodes in the dialog (page ${r.page}); tiles ${r.tiles}, hidden cards ${r.hid??'-'}, entries ${r.ent??'-'}, can choose ${r.can??'-'}${r.ms!=null?', '+r.ms+' ms':''}`);
+  /* rv R4 FAIL 2 (short frame): on a chest cut to N the dialog's box can be shorter than BAL.kip.rows rows; the page = the whole rows that fit (≥ 1)
+     and the §23 pager stays in view (sticky at the bottom of the box that scrolls the page) */
+  for(const N of [5,30]){const sf=await p.evaluate(async N=>{const w=ms=>new Promise(r=>setTimeout(r,ms));const inv0=window.__pdInv||(window.__pdInv=S.inv.slice());S.inv=inv0.slice(0,N);const out=[];
+    for(const [n,pid,pp] of [['giftto','giftto',{t:'emp'}],['giftpick','giftpick',null],['tsgiftpick-it','tsgiftpick','it']]){const v=liveRivals(true).filter(x=>x.alive!==false&&!x.out)[0];const q=pp&&typeof pp==='object'?pp:pp==='it'?{v:v.id,k:'it'}:{v:v.id};
+     while(Q.length)Q.shift();try{closeModal()}catch(e){}const it=mkP(pid,q);if(!it)continue;pushDil(it,n);const j=Q.indexOf(it);if(j>0){Q.splice(j,1);Q.unshift(it)}showModal();await w(1600);
+     let a0=null,b0='',g=0;while(a0!==b0&&g++<15){await w(300);a0=b0;const d=document.querySelector('#modal .dlg');b0=(d?d.className:'')+document.querySelectorAll('#modal .kipc').length}
+     const M=document.getElementById('modal'),pg=M.querySelector('.kipw>.kippg'),t=[...M.querySelectorAll('.kipc')];if(!pg||!t.length){out.push({n,none:1});continue}
+     let sc=pg.parentElement;while(sc&&sc!==M&&!(/(auto|scroll)/.test(getComputedStyle(sc).overflowY)&&sc.scrollHeight>sc.clientHeight+2))sc=sc.parentElement;
+     const b=sc&&sc!==M?sc.getBoundingClientRect():M.querySelector('.dlg').getBoundingClientRect(),bot=Math.min(b.bottom,innerHeight),r=pg.getBoundingClientRect(),tr=t[0].getBoundingClientRect();
+     out.push({n,rows:new Set(t.map(x=>Math.round(x.getBoundingClientRect().top))).size,cap:BAL.kip.rows,pager:r.top>=b.top-1&&r.bottom<=bot+1,row1:tr.top>=b.top-1&&tr.top<bot-20})}
+    S.inv=inv0;return out},N);
+   for(const r of sf)if(!r.none)ok(r.pager&&r.row1&&r.rows>=1&&r.rows<=r.cap,`${vw}x${vh} ${r.n} (chest ${N}): the page = ${r.rows} whole row(s) (≤ BAL.kip.rows ${r.cap}), its first row and the §23 pager in view`,r)}
   ok(!errs.length,`${vw}x${vh} no page errors`,errs.slice(0,3));await ctx.close()}
  await b.close();fs.writeFileSync(arg('--json','/dev/null'),JSON.stringify(rows,null,1));
  const fail=res.filter(x=>!x).length;{const by={};for(const r of rows)if(r.deep&&r.paged)(by[r.name]=by[r.name]||[]).push(`${r.vp}: ${r.cols} cols (box ${r.gw} px, tile ${r.tile} px)`);for(const k in by)console.log('cols  '+k+' — '+by[k].join(' · '))}

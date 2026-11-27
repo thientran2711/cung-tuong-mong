@@ -1628,7 +1628,9 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   Confirm clicks the real option button, so chooseM and every wrapper (cost, j25 visit ticket, §64 item-event hooks) run unchanged.
   Above the card: the KIT §70 item detail strip (`kitItemDetail({e},{cls:"kidet-strip",noLux:true})`, jitd). Close = the kit ✕ (32.10), no Thôi row.
 - PAGES (K-LIST-PAGE, picker-dom 26/11, MAIN 164 play-stopper: a year-18 chest drew 36k–63k nodes, iPad tab crash): the grid shows ONE
-  PAGE = `BAL.kip.rows` (2) whole rows × the columns the grid shows in that dialog at that width — no inner scroll, no half row (§23). The
+  PAGE = the whole rows that fit the box the dialog gives the grid (≥ 1, `BAL.kip.rows` (2) the cap; measured per dialog, only ever lowered so pages never
+  flip) × the columns the grid shows in that dialog at that width — no inner scroll, no half row (§23). The §23 pager row stays in view: sticky at the
+  bottom of the box that scrolls the page (a box shorter than one row + pager: it sits over the row's last line). The
   columns are read once the grid's size has stayed still `BAL.kip.settle` ms (resolved px tracks only; a mid-fit size never counts), kept per
   dialog kind and width; a different count draws the page again (first tile in view kept in view). The grid keeps the FULL width of the
   option box: the §23 kit pager buttons sit in ONE row under it (`.kippg`: ‹ `.kpkpg` · `.kpkpn` «trang N/M» · › `.kpkpg`; no count; no row

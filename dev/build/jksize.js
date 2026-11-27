@@ -669,7 +669,7 @@ const kszGrace3=300;let kszStale3=null,kszRemap3=null;
 /* K-LIST-PAGE (picker-dom): the number of option buttons a dialog has, for every fit pass that picks a frame by it. A paged item pick grid
    (jgpick, m.kipOnly) draws only one page of cards, so it counts ALL its options except «Thôi» (j3 draws that as the kit ✕, never as a
    button) = exactly the buttons LIVE draws; every other dialog counts its drawn buttons. */
-function kszOptN3(o,m){if(m&&m.kipOnly instanceof Set&&m.opts)return m.opts.filter((c,i)=>c&&i!==kitCancelIx(m)).length;return o.querySelectorAll(":scope > button").length}
+function kszOptN3(o,m){if(m&&m.kipOnly instanceof Set&&m.opts){/* the cards LIVE keeps: one per item TILE (kipList: stack twins = ONE tile, as LIVE removes the twin cards) + every non-item option except «Thôi» */const cx=kitCancelIx(m);let n=typeof kipList==="function"?kipList(m).length:0;m.opts.forEach((c,i)=>{if(c&&i!==cx&&!(c.ik!=null&&S.inv[c.ik]))n++});return n}return o.querySelectorAll(":scope > button").length}
 function kszStaleSnap3(dlg){try{const L=[...dlg.querySelectorAll(".opts>button,.k3btns>button,#mr>button,.kpopts button")].filter(b=>b.getClientRects().length).map(b=>{const r=b.getBoundingClientRect();return[b,r.left,r.top,r.right,r.bottom]});return L}catch(e){return[]}}
 /* every other late re-fit of a dialog (picture load -> kitFrameApplyLive3 / kitFrameApply3 / kitPersonDlgFit) goes through the same snapshot + grace */
 function kszKeep3(root,fn){const SN=kszStaleSnap3(root);try{return fn()}finally{kszStaleMark3(root,SN)}}
