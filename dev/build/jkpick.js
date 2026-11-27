@@ -11,7 +11,7 @@
    PURE DISPLAY: no game logic, no numbers of its own.   Test: dev/test/kit-pick.js (Fold 755x1000 + iPad 1180x820). */
 (function(){try{
 const KIT_PLAQUE=window.KIT_PLAQUE=window.KIT_PLAQUE||{
- dropMs:700,stagger:80,swayS:[3.4,4.6],swayDeg:1.3,liftMs:200,liftDy:-8,liftScale:1.05,closeMs:170,
+ dropMs:700,stagger:80,swayS:[3.4,4.6],swayDeg:1.3,liftMs:200,liftDy:-8,liftScale:1.05,liftGap:3,closeMs:170,
  w:{kv1:152,kv2:200},h:{kv1:62,kv2:56},pic:{kv1:40,kv2:48},cord:{rail:18,gap:10,gapS:6},hS:50,gx:8,max:10,two:5,three:8,postIn:{kv1:10,kv2:16},postTop:{kv1:176,kv2:120},railAt:.40,railMin:.18,railLap:.34,slimW:140,minW:128,post:8,tabH:34,railPad:52,rows0:1,pen2:1500,penS:4000,obst:'#kshR,#kshL,.kshR,.kshL,.krail,.krailb,#kpname,.kchip,.tok .tag,.kscn-tag,#tomap',
  motion:null /* test hook: true = ignore reduced motion */};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
@@ -104,9 +104,13 @@ function conf(P){try{let c=P.el.querySelector(":scope>.khconf");const n=P.up;if(
  const over=n.__y+K.liftDy+(hh+kc)*k-kc-(G.H-4);if(over>0)n.style.top=Math.round(n.__y-over)+"px";const y0=n.offsetTop;
  /* the LIFTED box (translateY liftDy + scale liftScale about its cord top), whatever moment of the lift animation this runs in */
  const oy=y0-kc,L={l:x0+wd/2-wd*k/2,t:oy+kc*k+K.liftDy,w:wd*k,h:hh*k};
+ /* KK54 (MAIN nit «lifted plaque bottom edge touches the next row by a few px»; law 11 = every lift): the plaques BELOW the lifted one (same column span) make way: they slide down by the excess so the lifted bottom stays K.liftGap clear above the nearest one (clamped at the stage floor); drop() puts them back */
+ try{unmake(P);const bl=[];let nt=1e9,fl=0;P.el.querySelectorAll(".kpk-n").forEach(o=>{if(o===n)return;const ox=o.offsetLeft,ow=o.offsetWidth,ot=o.offsetTop;if(ot<=y0+hh*.5||ox+ow<=L.l+1||ox>=L.l+L.w-1)return;bl.push(o);nt=Math.min(nt,ot);fl=Math.max(fl,ot+o.offsetHeight)});
+  const ex=Math.ceil(L.t+L.h-(nt-K.liftGap)),room=Math.max(0,G.H-4-fl),dn=Math.min(ex,room);if(bl.length&&dn>0){bl.forEach(o=>{o.__mv=parseFloat(o.style.top)||o.offsetTop;o.style.top=(o.__mv+dn)+"px"});P.moved=bl}}catch(e){}
  const x=Math.round(L.l+L.w-bw*k-6*k),y=Math.round(L.t+L.h-bh*k-5*k);
  c.hidden=false;c.style.left=x+"px";c.style.top=Math.max(2,y)+"px";c.style.setProperty("--kpgw",bw+"px");c.style.setProperty("--kpgh",bh+"px");c.style.transform=`scale(${k})`;c.style.transformOrigin="0 0"}catch(e){console.error("kitPick conf",e)}}
-function drop(P){const K=KIT_PLAQUE,u=P.up;if(!u)return;P.up=null;u.classList.remove("kpk-up","kpk-wrap","kpk-sm","kpk-cf");u.style.width=P.G.cw+"px";u.style.left=u.__x+"px";if(u.__y!=null)u.style.top=u.__y+"px";u.querySelector(".kpk-b").setAttribute("aria-pressed","false");
+function unmake(P){(P.moved||[]).forEach(o=>{if(o.__mv!=null){o.style.top=o.__mv+"px";o.__mv=null}});P.moved=null}
+function drop(P){unmake(P);const K=KIT_PLAQUE,u=P.up;if(!u)return;P.up=null;u.classList.remove("kpk-up","kpk-wrap","kpk-sm","kpk-cf");u.style.width=P.G.cw+"px";u.style.left=u.__x+"px";if(u.__y!=null)u.style.top=u.__y+"px";u.querySelector(".kpk-b").setAttribute("aria-pressed","false");
  if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"});else u.style.transform="";P.anims.forEach(x=>{try{if(x.effect&&x.effect.target===u)x.cancel()}catch(e){}});conf(P)}
 /* RING-DESIGN-5: a lifted plaque grows with its small line: «Vững · Tốn 1 khắc» stays on ONE line, so the plaque widens (towards the outer side, inside the stage) instead of growing a 4th text line */
 function widen(P,n){const G=P.G,sm=n.querySelector(".kfoc-t small"),t=n.querySelector(".kfoc-t");n.classList.remove("kpk-wrap","kpk-sm");n.style.width=G.cw+"px";n.style.left=n.__x+"px";if(!sm||!t)return;let need=Math.ceil(sm.scrollWidth-t.clientWidth);if(need<=0)return;
