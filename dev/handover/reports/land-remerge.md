@@ -19,6 +19,11 @@ Branch naming: `review/<name>-lrm` (the `-lr` names were already taken by 25/11 
 | D9 | qc-noise-hygiene-r10b | bdb0f65d (F LAND READY) | REMERGED | 481e4d63 review/qc-noise-lrm | LIVE | jbal2 union; jwhy spy run = LIVE chSearch; spy row: LIVE chFindWord + rank-dup fix only when known (spyKnown) | pending | RV-163F |
 | D10 | kit-name-stranger | e25dfd52 (SMALL PASS D) | REMERGED | 6870bb0a review/kit-name-stranger-lrm | LIVE | none | pending | RV-168 |
 | D22 | c3-seals | 29462da0 (C LAND READY) | REMERGED | cb33ec76 review/c3-seals-lrm | LIVE | none | pending | RV-168 |
+| D15 | kit-screenveil-r1 | 16a2521d (VEIL-1; owner picked option 2 24/11; **no PASS line found**) | REMERGED — needs a full SMALL review | adb7ea3f review/kit-screenveil-lrm | LIVE | assemble +jscrv (after jend); KIT.md + §97 (number free on LIVE) | pending | RV-168 |
+| D16 | mgskin-wire-r2 | b2a0d0c2 (Foreman B 24/11; **no PASS line found**) | REMERGED — needs a full SMALL review | 244c4089 review/mgskin-wire-lrm | LIVE | assemble +jmgskin (after j82) | pending | RV-168 |
+| D17 | flight-mucluc-kit | 09e7b6e6 (kit rv DONE 24/11) | REMERGED (LIVE has no ktChapToc: only «Còn N chương nữa») | 03cd1632 review/flight-mucluc-kit-lrm | LIVE | KIT.md + §99 (free on LIVE) | pending | RV-168 |
+| D14 | kit-evframe-r3 | 3e27d76f (kit-evframe-r2 ALL PASS, kit-veil-harness) | REMERGED — reviewer to judge vs KIT-STAGE (OD 27/11 ~06:42Z: event pop-ups become the lá-bài hand → may be SUPERSEDED) | dfb749c4 review/kit-evframe-lrm | LIVE | none | pending | RV-168 |
+| D19 | kit-person-panel-rv165 | 34d41e13 (RV-165 PASS) | SKIP — rides act-move (ACT-MOVE-5 merges jkpp; LC26: lands with/after act-move) | | | | | |
 | D6 | Tài nghệ | — | SKIP (KIT-STAGE-R11 owns) | | | | | |
 | D21 | e-gain3 | — | SKIP (Foreman E owns) | | | | | |
 | D20 | goal-links-r2d-rv165 | 9448be40 | SKIP (pulled from B1 → RV-168 remerge owns) | | | | | |
@@ -26,3 +31,10 @@ Branch naming: `review/<name>-lrm` (the `-lr` names were already taken by 25/11 
 ## Notes for the lander
 - Groups: rules/logic = D1, D4, D5, D2, D7, D9 (RV-163F / RV-163G); UI/kit = D8 (after B1), D11, D10, D22 (RV-168). D18/D3/D12 = Foreman D bundle 2.
 - Pre-existing LIVE failures seen while testing (not from these merges): dialog-fixed 4 FAIL on LIVE 98c77517 («Đại kết cục» seal + XL figure); ka-know 4/6, temper-perception, servant-trust, palace-distance 2/27 on promo-stack-lr4 itself.
+
+## D7 titles-daycard — the 44 LIVE roads without a titles2 chapter-title pair (DH3N.cp; 8 pairs «good/bad» each, chapters .4–.11)
+tt_ruong tt_gia tt_tho tt_thu · dtq_ngua dtq_hang dtq_thuong dtq_ky · thd_dich thd_dien thd_uoc thd_giay · muoi_gia muoi_tien muoi_thi muoi_hoi · cn_chuoi cn_tiec cn_chuviet cn_theo · cnv_kho cnv_thu cnv_hach cnv_tieu · td_daixa td_tichbien td_monsinh td_honuoc · ch_tuyentu ch_lenhbai ch_diensan ch_honngoai · nc_men nc_kinh nc_nu nc_the · bd_luuly bd_lua bd_bac bd_su · pf_co pf_guong pf_tra pf_lich
+(source: ARC67 roads with o:"rd" on review/titles-daycard-lrm 97552f62, missing from DH3N.cp; check: node dev/test/titles2-unit.js <url> → F1.)
+
+## LIVE moved: B1 r4 landed (main 611fca61, 27/11 ~08:00Z)
+All -lrm branches above are on 98c77517 (nhv-areas on 448622df). Re-merge onto 611fca61 in progress (merge-tree: built files only for law1-land, qc-noise, ob-ngoaicung, nhv-areas, endcard-top, kit-name-stranger, c3-seals, kit-evframe; assemble.py / KIT.md / jdh.js for e-pack-a, e-pack-c, titles-daycard, kit-screenveil, mgskin-wire, flight-mucluc-kit).
