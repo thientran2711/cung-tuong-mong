@@ -54,7 +54,7 @@ function kipList(m){const L=m.opts.map((c,i)=>[c,i]).filter(([c])=>c&&c.ik!=null
     the same offer = ONE tile with the kit stack badge ×N (kitItem qty) — the real pieces in the chest + the ones in her stack; the tile picks the first real piece */
  const D=new Map(),SEEN=new Set(),L2=[];for(const x of L){const e=S.inv[x[0].ik];const s=typeof invCan==="function"&&invCan(e)?[invSig(e),kipLocked(x[0]),x[0].n||"",x[0].x||""].join("#"):null;
   if(s&&D.has(s)){D.get(s)[2]++;continue}const o=[x[0],x[1],1+(s&&typeof invMoreOnce==="function"?invMoreOnce(S,e,SEEN):0)];if(s)D.set(s,o);L2.push(o)}return L2}
-function kipSel0(m,L){let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}return sel}
+function kipSel0(m,L){let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>x[0].kgbest&&!kipLocked(x[0]))||L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}return sel}/* kgbest (LIVE ACT-MOVE-5): the dialog's preselected item (giftto: the one he values most) */
 /* tiles per page = the grid's columns (measured for this dialog kind at this screen width, 4 until first measured) × BAL.kip.rows (ONE CORE: jbal2) */
 function kipPer(m){const c=KIP_COLS.get(kipColKey(m))||4;return Math.max(1,c*Math.max(1,BAL.kip.rows|0))}
 function kipPg(m,L,sel){const per=kipPer(m),pages=Math.max(1,Math.ceil(L.length/per));let pg=KIP_PG.get(m);
