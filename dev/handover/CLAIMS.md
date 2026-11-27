@@ -709,3 +709,4 @@ FLIGHT2-S16C RESUME (seat s16 #2, sonnet, child of F ROOT 7 c1; resume from FINA
 FLIGHT2-S16C RESUME seat s16 #2 = session_01UV1SzkrqrqWTsUfa9zCzKG | RUNNING | 2026-11-27T22:36Z (id for the 22:35Z row)
 tmk-warn | review/tmk-warn | session_01Rc5AsJe5ywoWUwdcbVh8ZN | RUNNING | 2026-11-27T22:50Z (MAIN 181, F find s21e)
 kit-stage-r16 | review/kit-stage-r16 | session_01Rc5AsMH9EMwkQZMHfyL2VU | RUNNING | 2026-11-27T22:57Z (MAIN 181)
+HARNESS FIXER #25 F5 selx skip (+N8) | review/robot-realtap-live (from 01b30018) | (opening, opus, child of F ROOT 7 c1) | RUNNING | 2026-11-27T22:48Z (FOREMAN F ROOT 7 c1 session_01UV1Szk61M2hTnNkbv9xqAz)
