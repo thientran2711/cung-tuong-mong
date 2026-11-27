@@ -35,9 +35,9 @@ ARC67.bd_hoa=arcFx("bd_hoa",{o:"bd",t:"Hòa ước mười năm",w:"emp",sj:"hò
  B:{
  s1:{h:"Sứ đoàn hộ tống về",w:"emp",t:"Sứ đoàn Bắc Địch chờ ngoài cổng thành, hỏi: công chúa có được đối đãi đúng lễ hòa ước không.",o:[
   {n:"Mời sứ đoàn vào yết kiến Hoàng thượng",c:BAL.orig.hoa.s1a.c,w:BAL.orig.hoa.s1a.w,wx:"sứ đoàn yên lòng",f:"open",rt:"Hoàng thượng ban yến, sứ đoàn nâng chén."},
-  {n:"Nhờ sứ đoàn nhắn: ta vẫn bình an",w:BAL.orig.hoa.s1b.w,f:"quiet",wx:"phụ hãn bớt nghi",l:BAL.orig.hoa.s1b.l,lx:"triều thần ngờ ngươi thông tin",rt:"Lời nhắn đi và về trong ba tuần.",rf:"Người của Lễ bộ chặn lời nhắn, hỏi ngươi nói gì."}]},
+  {n:"Nhờ sứ đoàn nhắn: ta vẫn bình an",w:BAL.orig.hoa.s1b.w,f:"quiet",wx:"phụ hãn: nghi −",l:BAL.orig.hoa.s1b.l,lx:"triều thần ngờ ngươi thông tin",rt:"Lời nhắn đi và về trong ba tuần.",rf:"Người của Lễ bộ chặn lời nhắn, hỏi ngươi nói gì."}]},
  s2:{h:"Đêm tân hôn lạnh",w:"me",t:"Đêm đầu trong cung, cung nữ nhìn ngươi như nhìn một con thú lạ giữa lồng.",o:[
-  {n:"Tự tay nấu trà sữa ngựa quê nhà mời các cung nữ",c:BAL.orig.hoa.s2a.c,w:BAL.orig.hoa.s2a.w,wx:"cung nữ bớt sợ",rt:"Cung nữ nếm thử, khẽ cười.",rf:"Cung nữ nhăn mặt, không dám nói."},
+  {n:"Tự tay nấu trà sữa ngựa quê nhà mời các cung nữ",c:BAL.orig.hoa.s2a.c,w:BAL.orig.hoa.s2a.w,wx:"cung nữ: oán −",rt:"Cung nữ nếm thử, khẽ cười.",rf:"Cung nữ nhăn mặt, không dám nói."},
   {n:"Giữ phép tắc Đại Hy, không nhắc quê nhà",w:BAL.orig.hoa.s2b.w,f:"bend",wx:"yên chuyện",lx:"nhớ thảo nguyên",rt:"Ngươi ngồi thẳng đến sáng."}]},
  c1:{h:"Quân Bắc Địch vượt ải",w:"emp",t:"Tin cấp báo: một toán quân Bắc Địch đánh cướp hai thôn gần ải. Triều thần nhìn ngươi.",o:[
   {n:"Viết thư xin phụ hãn trừng trị toán cướp",c:BAL.orig.hoa.c1a.c,w:BAL.orig.hoa.c1a.w,f:"keep",wx:"biên ải yên",l:BAL.orig.hoa.c1a.l,lx:"bị nghi thông đồng",rt:"Phụ hãn gửi đầu mục toán cướp đến cửa ải.",rf:"Thư đến muộn, ba thôn nữa cháy."},
@@ -71,7 +71,7 @@ ARC67.bd_ngua=arcFx("bd_ngua",{o:"bd",t:"Ngựa chiến phương Bắc",w:"emp",
   {n:"Ngồi kiệu xem, khen ngợi người thắng",w:BAL.orig.ngua.c1b.w,f:"bend",wx:"giữ đúng lễ Đại Hy",lx:"nhớ gió thảo nguyên",rt:"Thái hậu gật gù từ xa."}]},
  c2:{h:"Quản mã tham ô cỏ",w:"emp",t:"Ngươi phát hiện quản mã bán bớt cỏ khô của ngựa ngự để bỏ túi.",o:[
   {n:"Tâu thẳng lên Hoàng thượng",w:BAL.orig.ngua.c2a.w,wx:"được ghi công",l:BAL.orig.ngua.c2a.l,lx:"quản mã ghi hận",rt:"Quản mã bị cách chức.",rf:"Quản mã khóc lóc, ngươi hóa thành kẻ hại người."},
-  {n:"Âm thầm bắt hắn trả lại cỏ",c:BAL.orig.ngua.c2b.c,w:BAL.orig.ngua.c2b.w,f:"bend",wx:"có thêm tai mắt nơi chuồng ngựa",rt:"Quản mã từ đó nghe lời ngươi."}]},
+  {n:"Âm thầm bắt hắn trả lại cỏ",c:BAL.orig.ngua.c2b.c,w:BAL.orig.ngua.c2b.w,f:"bend",wx:"Tai mắt + nơi chuồng ngựa",rt:"Quản mã từ đó nghe lời ngươi."}]},
  t1:{h:"Tin giặc từ phía bắc",w:"emp",t:"Biên ải cần chiến mã gấp. Cả triều biết trong cung có đàn ngựa Bắc Địch của ngươi.",o:[
   {n:"Dâng cả đàn ngựa còn lại",c:BAL.orig.ngua.t1a.c,wx:"được ghi công",l:BAL.orig.ngua.t1a.l,rt:"Đàn ngựa lên đường ra biên ải.",rf:"Ngựa quá thuần cho trận mạc, bị trả về."},
   {n:"Dâng một nửa, giữ nửa phòng thân",c:BAL.orig.ngua.t1b.c,w:BAL.orig.ngua.t1b.w,f:"bend",wx:"được coi là biết điều",rt:"Hoàng thượng chấp nhận."}]},
@@ -122,7 +122,7 @@ ARC67.bd_hoang=arcFx("bd_hoang",{o:"bd",t:"Ngai Khả hãn",w:"emp",sj:"cuộc t
   {n:"Đưa cả hai thư cho Hoàng thượng đọc",w:BAL.orig.hoang.s2b.w,f:"open",wx:"Hoàng thượng tin ngươi",l:BAL.orig.hoang.s2b.l,lx:"hai huynh trưởng đều oán",rt:"Hoàng thượng nói: “Ngươi thành thật hơn các huynh ngươi.”",rf:"Hoàng thượng hỏi: “Ngươi giữ bản sao nào?”"}]},
  c1:{h:"Sứ của huynh trưởng",w:"emp",t:"Sứ của trưởng huynh dâng ngọc quý, xin ngươi nói tốt với Hoàng thượng.",o:[
   {n:"Từ chối ngọc, nói thẳng điều đúng",w:BAL.orig.hoang.c1a.w,f:"keep",wx:"giữ được sạch sẽ",l:BAL.orig.hoang.c1a.l,rt:"Sứ ngạc nhiên rồi cúi chào.",rf:"Sứ mang ngọc đi, kể xấu ngươi khắp triều."},
-  {n:"Nhận ngọc, hứa suông",c:BAL.orig.hoang.c1b.c,w:BAL.orig.hoang.c1b.w,f:"bend",wx:"có thêm bạc",lx:"mang nợ với trưởng huynh",rt:"Ngươi cất ngọc vào hòm."}]},
+  {n:"Nhận ngọc, hứa suông",c:BAL.orig.hoang.c1b.c,w:BAL.orig.hoang.c1b.w,f:"bend",wx:"Bạc +",lx:"mang nợ với trưởng huynh",rt:"Ngươi cất ngọc vào hòm."}]},
  c2:{h:"Thúc phụ gửi mật thư",w:"emp",t:"Thúc phụ của ngươi gửi mật thư: nếu ngươi giúp, người sẽ cho ngươi quyền cai quản một bộ lạc.",o:[
   {n:"Nộp thư cho Hoàng thượng",w:BAL.orig.hoang.c2a.w,wx:"được ghi công",l:BAL.orig.hoang.c2a.l,rt:"Hoàng thượng đọc thư, mỉm cười lạnh.",rf:"Hoàng thượng hỏi: “Sao đến giờ ngươi mới nộp?”"},
   {n:"Viết thư từ chối, giữ kín",c:BAL.orig.hoang.c2b.c,w:BAL.orig.hoang.c2b.w,f:"quiet",wx:"giữ được đường lui",rt:"Thư từ chối đi lúc nửa đêm."}]},
