@@ -30,3 +30,29 @@ PRIORITY #1 CHECK: OD 3 ('Biếu quà làm lành' / inv-stack) | main 4cfcda61 j
 - G4 80-dialog-fixed and the button crawl «Ô lưu · Lui» fail on LIVE 4cfcda61 as well.
 
 CDN folder img/_review/picker-dom/ left as is (the worker re-shoots after the fix). Shots: reviewer scratch only, none in git.
+
+---
+# ROUND 2 — re-review of 08d1aad3 (code b63705f6; FF of LIVE 17f23656: yes) — verdict: FAIL (2 items)
+Reviewer session_01D3E3NX3JZAycKJ8cs4P7qd, for Foreman D session_01D3E3NYwRePZXPzMMwNfkEq.
+
+## Round-1 items
+- FAIL 1 (on-demand card ≠ drawn card): **FIXED.** Hand-built cards are gone. A page turn, or a card not drawn yet, re-runs the one real `showModal` (kipRedraw), so jgift:179, jk2b:347 and jemoact:677 decorate every card. My own probe, separate from the worker's test: s7, giftto / tsgiftpick / giftpick / plantpick, Fold + iPad. A tile on page 4, reached by paging, gives a real `.opt` whose outerHTML is identical to the same option drawn fresh with it preselected, for locked and open tiles. The only difference I saw was the image cold-load state (`data-kwr` retry / `ksart-ld`) on the first run; the second run was identical.
+- FAIL 2 (§23 whole rows / no inner scroll): **FIXED, but the column pin causes a new problem (see FAIL B).** picker-dom.js: every page is whole rows with no inner scroll (halfRows [] / scroll [] on all four pickers, Fold + iPad). My shots agree: grid scrollHeight == clientHeight.
+
+## Gates on 08d1aad3
+scan PASS 5/5 · picker-dom.js 56/56 (Fold + iPad) · coop-e2e 143/143 (local wrangler) · quickcheck --runs 5: old save from LIVE loads and plays a buổi with 0 errors; perf new/live render 152/185, tab 503/460, buổi 1061/1192, tasks>200 21/17. CORE GATES FAIL only on G4 button-crawl «Ô lưu · Lui» (same fault on LIVE in round 1; FIX-6 FAIL 1 is that same row). Videos (fold 37.8 s, ipad 37.8 s, HTTP 200): I looked at the iPad contact sheet. The Dâng quà frame shrinks to a small box with only part of row 2 showing above «Kéo xuống». With a 12-item chest, LIVE 17f23656 and this branch give the same frame (470x455 in both), so this is existing kit fit behaviour, not this branch. Noted for KK/MAIN (law 10: big scene picture while content needs a scroll).
+
+## FAIL list
+A. **KIT.md 28.13i: the selection / detail / confirm bullet was deleted (law 9 registry, law 14 overwrite only the rule that changed).** The diff removes the 5 lines «Tap a tile → selected (31.13 glow …, first doable tile preselected) · `.kipd` = the option's own kit card (display copy) + ONE confirm `.kipgo` (verb per dialog, greyed when locked) · Confirm clicks the real option button, so chooseM and every wrapper run unchanged · §70 item detail strip above the card · Close = kit ✕ (32.10), no Thôi row». The new PAGES bullet does not cover them, and they are nowhere else in KIT.md. Put them back in place; change only what paging really changed.
+B. **The FLIP-LAYOUT PIN takes the SMALLEST column count it saw, so on the iPad (a priority device) three pickers drop to 2 stretched columns = 4 tiles per page.** Measured on s7 (picker-dom.js output + my shots):
+
+| picker | Fold 755x1000 | iPad 1180x820 |
+|---|---|---|
+| Tặng quà | 3 cols, 6/page | **2 cols, 4/page (360 pages)** |
+| Cài đồ | 3 cols, 6/page | **2 cols, 4/page (360 pages)** |
+| Biếu quà làm lành · đồ | 3 cols, 6/page (239 pages) | **2 cols, 4/page (359 pages)** |
+| Dâng quà | 5 cols, 10/page (144 pages) | 4 cols, 8/page (180 pages) |
+
+The wider screen gets FEWER columns than the Fold, and the same iPad frame holds 4 columns in Dâng quà. My iPad Biếu quà shot shows 2 tiles per row, each spread over half the grid. The minimum is taken from a layout that flips with tile count (a short trial draw), not from what a full page needs. Fix: measure or compute the columns for a FULL page (e.g. the grid width ÷ the kit tile size, or a measurement made while `cols × BAL.kip.rows` tiles are drawn), so the count does not depend on the trial draw. Expect iPad ≥ Fold. Then update the KIT.md PAGES text and the jbal2 comment («iPad 1180 = 4–5») to what really happens. Note: with B's inv-stack (rv15, not LIVE yet) the s7 chest drops to 117 entries, but 4 per page is still too few on the iPad.
+
+Everything else passed: laws 4 / 6c / 7, scan, card equality, whole rows, coop, quickcheck, old save. KK47's «KIT OK K-LIST-PAGE» is still needed to land. CDN img/_review/picker-dom/ was left in place for the re-shoot. Shots are in reviewer scratch only.
