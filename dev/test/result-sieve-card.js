@@ -1,0 +1,36 @@
+/* result-sieve-card.js (KIT-STAGE-R7; replaces kit-res-fold.js, whose kitResFold was dropped for the ONE fold = jnsieve, KK48/KK49).
+   Ports the kit-res-fold checks that dev/test/one-sieve.test.js does not cover, on the REAL result card (resultShow → jnsieve):
+   a choice that touches 13 consorts (affAdd / oanAdd, the real game functions) + her own Đức row:
+   - her own rows kept (Đức) · the Kèm block is folded (≤ BAL.news.card.kemMax people + «… và N người khác») with the «Xem … trong Sổ ghi» link
+   - the card fits the screen without scroll AND has no empty band at its bottom (owner OD 26/11 ~22:07Z (1): height = its content)
+   - a REAL tap on the link opens the Sổ ghi tab · 0 page errors.
+   (Row cap, nothing-lost-in-Sổ-ghi, search: one-sieve.test.js.)  usage: node dev/test/result-sieve-card.js <index.html> [WxH,...]  exit 1 on FAIL */
+const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');
+(async()=>{const b=await chromium.launch();let fails=0;const chk=(n,ok,v)=>{console.log((ok?'ok  ':'FAIL')+' '+n+' '+JSON.stringify(v===undefined?'':v).slice(0,300));if(!ok)fails++};
+ for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const p=await b.newPage({viewport:{width:W,height:H}});const errs=[];p.on('pageerror',e=>{if(!/Unexpected token '<'/.test(e.message))errs.push(e.message.slice(0,140))});await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
+  await p.goto('file://'+SRC,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof resultShow==='function',null,{timeout:240000});await p.waitForTimeout(1200);
+  const r=await p.evaluate(async()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;await new Promise(r=>setTimeout(r,2500));Q.length=0;document.getElementById('modal').hidden=true;document.body.classList.remove('kdlg-on');
+   for(const id of ['kdaytc','kmrew','klife']){const o=document.getElementById(id);if(o)o.remove()}
+   const R=rivals.filter(v=>v&&v.name&&!v.dead).slice(0,13);if(R.length<8)return {err:'rivals '+R.length};R.forEach(v=>{try{if(typeof k61Meet==='function')k61Meet(v)}catch(e){}v.__k61=1});const tgt=R[0];
+   const b0=rsnap();R.forEach((v,i)=>{affAdd(v,S,i%3?3:-2);if(i<9)oanAdd(v,S,1)});S.duc+=2;log('Yến tiệc ở Ngự hoa viên: '+tgt.name+' được ngồi cạnh ngươi.');
+   window.__bot=0;resultShow('Mời '+tgt.name+' ngồi cạnh',b0,null);await new Promise(r=>setTimeout(r,2200))/* entry motion over */;
+   const t=document.getElementById('rtoast');if(!t||!t.getClientRects().length)return {err:'no result card'};
+   const vis=[...t.querySelectorAll('.kb .kitem')].filter(e=>!e.hidden&&e.getClientRects().length&&!e.closest('[hidden]')).map(e=>e.textContent.replace(/\s+/g,' ').trim());
+   const T=t.getBoundingClientRect();let cb=T.top;const tw=document.createTreeWalker(t,NodeFilter.SHOW_TEXT);for(let n=tw.nextNode();n;n=tw.nextNode()){if(!n.textContent.trim()||!n.parentElement.getClientRects().length||n.parentElement.closest('[hidden]'))continue;const rg=document.createRange();rg.selectNodeContents(n);const q=rg.getBoundingClientRect();if(q.height>0&&q.bottom>cb)cb=q.bottom}for(const e of t.querySelectorAll('button,img')){if(!e.getClientRects().length)continue;const q=e.getBoundingClientRect();if(q.bottom>cb)cb=q.bottom}
+   const pad=parseFloat(getComputedStyle(t).paddingBottom)||0;const a=t.querySelector('.kalog');const vis2=sel=>[...t.querySelectorAll(sel)].filter(e=>!e.hidden&&e.getClientRects().length&&!e.closest('[hidden]')).map(e=>e.textContent.replace(/\s+/g,' ').trim());const kem=vis2('.kr-kem .kitem'),why=[...t.querySelectorAll('.kr')].filter(k=>/Vì sao/i.test((k.querySelector('.krl')||{}).textContent||'')).flatMap(k=>[...k.querySelectorAll('.kitem')].filter(e=>e.getClientRects().length).map(e=>e.textContent.trim()));
+   return {vis,fit:T.top>=0&&T.bottom<=innerHeight+1&&t.scrollHeight<=t.clientHeight+1,band:Math.round(T.bottom-pad-cb),h:Math.round(T.height),link:a&&a.textContent.trim(),kem,why,rowMax:BAL.news&&BAL.news.card&&BAL.news.card.rowMax,kemMax:BAL.news&&BAL.news.card&&BAL.news.card.kemMax}});
+  if(r.err){chk(wh+' setup',false,r);await p.close();fails++;continue}
+  if(process.env.V)console.log(JSON.stringify(r.vis,null,1));if(process.env.SHOT)await p.screenshot({path:process.env.SHOT+"-"+wh+".png"});
+  chk(`${wh} her own row kept (Đức)`,r.vis.some(x=>/^Đức \+/.test(x)),r.vis.slice(0,4));
+  const more=r.kem.find(x=>/và \d+ người khác/.test(x));const kp=r.kem.filter(x=>x!==more);
+  chk(`${wh} Kèm folded: ≤ kemMax people + «… và N người khác»`,!!more&&(r.kemMax==null||kp.length<=r.kemMax),{kem:r.kem,kemMax:r.kemMax});
+  if(r.rowMax!=null&&r.why.length>r.rowMax)console.log(`WARN ${wh} «Vì sao» lists ${r.why.length} reason lines of other people (> rowMax ${r.rowMax}) — not folded by the sieve (jnsieve owner)`);
+  chk(`${wh} «… trong Sổ ghi» link`,/Sổ ghi/.test(r.link||''),r.link);
+  chk(`${wh} card fits without scroll`,r.fit,{h:r.h});
+  chk(`${wh} no empty band at the bottom (≤ one row, owner 26/11 ~22:07Z (1))`,r.band<=40,{band:r.band,h:r.h});
+  const pt=await p.evaluate(()=>{const a=document.querySelector('#rtoast .kalog');if(!a)return null;const q=a.getBoundingClientRect();const x=q.x+q.width/2,y=q.y+q.height/2;const e=document.elementFromPoint(x,y);return {x,y,hit:!!(e&&e.closest('.kalog'))}});
+  if(pt){await p.mouse.click(pt.x,pt.y);await p.waitForTimeout(600)}
+  const tabOn=await p.evaluate(()=>{const b=document.querySelector('[data-tab="log"]');return {sel:!!(b&&(b.getAttribute('aria-selected')==='true'||b.classList.contains('on'))),tab:typeof tab!=='undefined'?tab:null}});
+  chk(`${wh} real tap on the link opens Sổ ghi`,!!(pt&&pt.hit)&&(tabOn.sel||tabOn.tab==='log'),{pt,tabOn});
+  chk(`${wh} no page errors`,!errs.length,errs.slice(0,3));await p.close()}
+ await b.close();console.log(fails?`RESULT-SIEVE-CARD FAIL ${fails}`:'RESULT-SIEVE-CARD PASS');process.exit(fails?1:0)})();
