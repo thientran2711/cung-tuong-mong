@@ -183,7 +183,7 @@ body.kpk-open #kshR,body.kpk-open .kshR,body.kpk-open #kpname,body.kpk-open .j59
 .kpk .kfoc-b.kpk-b.kfoc-off{filter:grayscale(.6);opacity:1}
 .kpk .kfoc-b.kpk-b:focus-visible{outline:2px solid #c9a24a;outline-offset:2px}
 .kpk>.khconf.kpk-go{position:absolute;z-index:6;display:block;gap:0;pointer-events:auto}.kpk>.khconf.kpk-go[hidden]{display:none!important}
-.kpk>.khconf.kpk-go>button.kpk-gob{width:var(--kpgw,68px)!important;height:var(--kpgh,32px)!important;min-height:0!important;min-width:0!important;border-radius:8px!important;font-size:.8rem!important;font-weight:800!important;letter-spacing:.2px;display:grid;place-items:center;padding:0 6px!important;margin:0!important;background:#fff6e4!important;color:#9a2c1c!important;border:1px solid #b0402c!important;box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(70,40,12,.25)!important}/* the small «Chọn» chip INSIDE the lifted plaque (kit small button, dark red on silk) */
+.kpk>.khconf.kpk-go>button.kpk-gob,#modal .dlg>.khconf.khgo>button.khok,.khost>.khconf.khgo>button.khok{width:var(--kpgw,68px)!important;height:var(--kpgh,32px)!important;min-height:0!important;min-width:0!important;border-radius:8px!important;font-size:.8rem!important;font-weight:800!important;letter-spacing:.2px;display:grid;place-items:center;padding:0 6px!important;margin:0!important;background:#fff6e4!important;color:#9a2c1c!important;border:1px solid #b0402c!important;box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(70,40,12,.25)!important}/* the small «Chọn» chip INSIDE the lifted plaque (kit small button, dark red on silk) */
 .kpk-n.kpk-up.kpk-cf .kfoc-b.kpk-b{padding-bottom:calc(var(--kpgh,32px) + 8px)}
 .kdim-d{filter:brightness(var(--kdb,.7)) saturate(var(--kds,.75))!important}
 .kdim-c{transform-origin:50% 100%}

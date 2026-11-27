@@ -376,7 +376,7 @@ cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) 
   Open word question for MAIN: the brief says «Hỏng»; the kit seal word stays BẠI (one place to flip: kitResultSeal).
 
 ## 27/11 MAIN 167/168 → KK51/KK52: «NO-FLIP Game-of-Dice kitHand» (owner OD 26/11 ~23:58Z «Ok bỏ lật, làm theo Game of Dice»; spec god-research.md) — ✅ DONE → KIT §101.10 (KK52, review/kit-hand-mount)
-Info on the card FRONT (hand face: picture · name · Tốn; enlarged: plaque name · picture · Tốn + odds word · Được · Mất / locked why); tap = enlarge in the centre + ONE «Chọn» 280x64 12 px under it; tap another = switch, elsewhere = back. Flip code + CSS removed (kit_dupes guards it). Family-wide apply (incl. the 8 rows outside #modal via kitHand.mount) = KIT-STAGE successor.
+Info on the card FRONT (hand face: picture · name · Tốn; enlarged: plaque name · picture · Tốn + odds word · Được · Mất / locked why); tap = enlarge in the centre + ONE «Chọn» (since 27/11 ~03:17Z: the small chip BAL.kpkgo INSIDE the card, KIT-STAGE-R9); tap another = switch, elsewhere = back. Flip code + CSS removed (kit_dupes guards it). Family-wide apply (incl. the 8 rows outside #modal via kitHand.mount) = KIT-STAGE successor.
 ## 27/11 KK53 — kitPick plaque: ONE «Chọn» + silk card face (MAIN 169 ruling 01:27Z; owner OD 27/11 ~01:35Z / ~01:40Z)
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|

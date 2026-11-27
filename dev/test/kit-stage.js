@@ -39,8 +39,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
   for(let k=0;k<12&&!(await st()).plaques;k++)await tapXY(mid);await p.waitForTimeout(1200);let s2=await st();await shot('talk-plaques');
   chk('answers = thẻ gỗ after the last line, all at once (no pages)',s2.plaques>0&&s2.plaques<=7,JSON.stringify(s2));
   const pl=await p.evaluate(()=>{const r=document.querySelector('.kpk .kpk-n .kpk-b').getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]});await tapXY(pl);
-  const ok=await p.evaluate(()=>{const e=document.querySelector('.kpk .khconf:not([hidden])>.khok'),x=document.querySelector('.kpk .khconf:not([hidden])>.khx');if(!e||!x)return null;const r=e.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]});await shot('talk-lift');
-  chk('plaque tap = lift + ✓ / ✕',!!ok);await tapXY(pl);chk('lifted plaque body tap chooses nothing',(await st()).q0==='c2a');
-  if(ok){await tapXY(ok);await p.waitForTimeout(500);chk('✓ chooses the frame card',(await st()).q0!=='c2a')}
+  const ok=await p.evaluate(()=>{const e=document.querySelector('.kpk .khconf:not([hidden])>.khok'),x=document.querySelector('.kpk .khconf:not([hidden])>.khx');if(!e||x)return null;/* KK53: ONE «Chọn», no ✕ */const r=e.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]});await shot('talk-lift');
+  chk('plaque tap = lift + ONE «Chọn»',!!ok);await tapXY(pl);await p.waitForTimeout(500);chk('lifted plaque body tap again chooses the frame card (two-tap)',(await st()).q0!=='c2a');
   chk('no page errors',!errs.length,errs.slice(0,3).join(' | '));await ctx.close()}
  await b.close();log(fails?`KIT-STAGE FAIL ${fails}`:'KIT-STAGE PASS');process.exit(fails?1:0)})();
