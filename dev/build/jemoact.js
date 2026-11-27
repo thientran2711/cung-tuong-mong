@@ -394,7 +394,7 @@ function eaOptFx(p,r){const P=eaPx(p,r),o={};for(const x of P.G)if(EA_OWN[x[0]]&
  if(o.bac&&o.bac<0)o.bac=-Math.min(-o.bac,Math.max(0,S.bac||0));return o}
 function eaOptX(p,r){const P=eaPx(p,r),vv=BAL.ea.pick.vent;const up=!(eaMV()>0);/* ONE source (law 3 / law 11): the bar she sees (moodBar via kitMoodVal), never the raw S.mood.v that lags the causes */
  const gs=(up?["giải tỏa tâm trạng"]:[]).concat(P.G.filter(x=>!EA_OWN[x[0]]).map(x=>/−$/.test(x[0])?`${x[0]}${x[1]}`:`${x[0]} +${x[1]}`));
- const ls=(up?[]:["lòng vui lắng xuống"]).concat(P.L.filter(x=>(x[1]||x[6])&&!EA_OWN[x[0]]).map(x=>x[6]||`${x[0]} ${x[5]?"+":"−"}${x[1]}`));const pm=P.L.find(x=>x[0]==="cấm túc");if(pm)ls.push(`có thể bị cấm túc (${word(pm[4])})`);
+ const ls=(up?[]:["lòng vui lắng xuống"]).concat(P.L.filter(x=>(x[1]||x[6])&&!EA_OWN[x[0]]).map(x=>x[6]||`${x[0]} ${x[5]?"+":"−"}${x[1]}`));const pm=P.L.find(x=>x[0]==="cấm túc");if(pm)ls.push(`có thể bị cấm túc (${chanceW(pm[4])})`);
  return[gs.length?`thành: ${gs.join(", ")}`:"",ls.length?`kèm: ${ls.join(", ")}`:""].filter(Boolean).join(" · ")}
 window.eaOpts=eaOpts;window.eaPx=eaPx;window.eaOptX=eaOptX;window.eaOptFx=eaOptFx;window.eaCapAdd=eaCapAdd;
 function eaPick(p,g){const T=eaTemper(p),kd=eaKind(p);/* TEMPER-OUTBURST law 1: a consort picks from the SAME option list as hers (temper weight, near-best) */if(kd==="c"){const O=eaOpts(p,null,g);if(!O.length)return null;const i=npwPick(O.map((r,j)=>j),j=>O[j].w0,{all:1});return i==null?null:{r:O[i],T}}

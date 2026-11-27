@@ -206,3 +206,16 @@ PRIORITY #1 CHECK ('act-move'): OD 9 | ledger 0 | claims 8 | main 0 | review/* 1
 - jone.js: the one-tap door wrote «<member>: <x>»; a labelled member x became «tên: thành: …» (nested, unparsed → Mất). Now a labelled x stays label-first and the member name goes to Ghi chú «(Rỉ tai chuyện trong cung)».
 - Note for MAIN (design, not changed): «Lạnh nhạt» (drop) has no mechanical gain beyond cutting her own thiện cảm toward a fallen friend; the card now names that as the gain. A real gain (e.g. no guilt-by-tie) would be a design ticket.
 - Robots: NATIVE=1 ×4 runs 0/307 · 0/318 · 0/309 · 0/309 (openers 10 apart) · bridged 0/93 · rows-scan PASS · door-onetap PASS · one-core bind / guard / text / text-rule PASS · site rebuilt.
+## ACT-MOVE-6 MAIN 174 add-on (08:01Z): side chance on the ladder (KIT §11 «never label: ${word(n)} in a gain/risk/kèm string») + one more law-3 root
+- jecon blCard «khất bổng (bớt 3 phần 10): ${word(20)}» → `${chanceW(20)}` (j20's original wording).
+- Family scan (sidew.py: every `${word(…)}` printed after a label / «khả năng» / «(» inside a template, 18 hits) — classified:
+| file:line | text | kind | action |
+|---|---|---|---|
+| jecon.js:80 | khất bổng …: word(20) | side chance (help text) | → chanceW |
+| jaudit.js:107 | nàng có thể kể bệnh của mình: word | side chance in a gain | → chanceW |
+| jthaiy.js:96 | thấy mưu hại ngầm (nếu có): word | side chance in Thành | → chanceW |
+| jemoact.js:397 | có thể bị cấm túc (word) | side chance in a risk | → chanceW |
+| jts.js:513 | (hợp ý hay không) tùy thiện cảm: word(loyal) | side chance | → chanceW |
+| j41:124 · j70:256/305 · j99succ:84–87 · jcharge:62/69/180/182 · jts:126/130 · jveil:138 | «được cho vào / lúc ra tay / Tìm chứng / Bỏ qua: cơ may / Xin … ban» | the act's OWN odds (ladder is right) | kept |
+- Root found by the NATIVE scan while testing: jtoil put her look reaction («nàng ta chuộng giản dị: quý ta +N», «… ghen +N») into every rival option's `risk` → optLine printed it as the deed's Bại → a two-block card «Thành: Không được gì thêm ‖ Kèm: <the real gain> ‖ Bại: <green>» («Nhờ giúp đỡ»). The reaction happens either way: jtoil now writes `kem`, j25 optLine appends «kèm: …» on all three paths (a green reaction lands in Được, a jealousy in Kèm). toil-react / toil-tease / toil-harsh PASS.
+- Robots: NATIVE ×3 0/313 · 0/323 · 0/306 · bridged 0/98 · rows-scan PASS · door-onetap PASS (one earlier run FAIL «never picked hs-tainghe|Kinh hồng vũ» = dice, not touched here; next run PASS) · one-core ×4 PASS · odds-unknown-scan unchanged vs before (7 / 18 exempt, same lines) · site rebuilt.
