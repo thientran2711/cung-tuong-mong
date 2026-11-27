@@ -34,7 +34,7 @@ function amAlias(){try{if(!S)return;const srv=!!(S.srv&&!S.srv.risen);const d=Ob
 /* ---------- the maid's own data ---------- */
 function amSt(m){if(m===S)return{sac:S.sac||0,tai:S.tai||0};if(m.sac==null){const T=amD().st;const ri=a=>a[0]+R(a[1]-a[0]+1);m.sac=ri(T.sac);m.tai=ri(T.tai)}return{sac:m.sac,tai:m.tai}}
 function amSung(m){return (m===S?S.sung:m.sung)||0}
-function amAdd(m,d){if(m===S)S.sung=cl((S.sung||0)+d,0,100);else m.sung=cl((m.sung||0)+d,0,100)}
+function amAdd(m,d){if(m===S)spAdd(S,"sung",d);else spAdd(m,"sung",d)}
 /* ONE rule for the deed's odds (the player's card and the NPC maid): Quỳ dâng trà where he passes, or Hầu trà khi ngự giá (night=1) */
 function amTeaO(m,night){const T=amD().tea,st=amSt(m);return T.b+st.sac/T.sac+st.tai/T.tai+(night?amSung(m)/T.nt:mm())}
 function amTeaG(m,g){return (g==null?amD().tea.g:g)+Math.round(amSt(m).sac/amD().tea.gs)}

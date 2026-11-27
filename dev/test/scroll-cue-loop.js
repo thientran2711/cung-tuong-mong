@@ -4,7 +4,7 @@
    Root: a scroller's own cue was found with ":scope > .kscue", which ALSO matches the «Kéo xuống» SIBLING strip (.kscue.sib) a SHORT child
    scroller puts right after itself. Outer scroller P (short, with its observer from an earlier tall pass) removed the child's strip as «its
    own cue» → the child re-created it → P's observer ran the pass again → removed it … for ever (only where both scrollers are < 260 px:
-   the Fold viewport on a few dialogs). ONE RULE (jksize kscOwn / kscSoon): a scroller only ever touches ITS OWN cue (never another
+   the Fold viewport on a few dialogs). ONE RULE (jksize kscueOwn / kitScrollCuesSoon, merged with F10 26/11): a scroller only ever touches ITS OWN cue (never another
    scroller's strip), and an observer callback never re-runs the pass inside the same task (one coalesced pass per frame).
    This test builds that nesting inside the real #modal frame and runs the real kitScrollCues; bounded: every wait has a timeout, a hang = FAIL.
    usage: node dev/test/scroll-cue-loop.js [index.html] [WxH]   exit 1 on FAIL */

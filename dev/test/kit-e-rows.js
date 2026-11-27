@@ -25,8 +25,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   ok(r.n===5&&r.names.join()==="Đỏ,Hồng,Đỏ,Hồng,khongco",`${tag} kitColDot(s): five dots, names shown (unknown key → its key as name)`,r.names);
   ok(r.sizes[0]===12&&r.sizes[1]===16,`${tag} sizes sm 12 / md 16`,r.sizes);ok(r.roles.join()==="chính,phụ",`${tag} roles chính / phụ`,r.roles);ok(r.btn===0,`${tag} read-only: no button / link`,r.btn);
   ok(/vàng/i.test(r.tbl)&&/d4a017/i.test(r.tbl)&&/Vàng/.test(r.tbl),`${tag} colour read from the BAL.dc.fam table`);ok(r.sep===1,`${tag} kitColDots: one separator between two dots`,r.sep);ok(r.fit,`${tag} fits the row / screen`);
-  ok(r.h.up.every(t=>/vững|sút/.test(t)),`${tag} word mode: «thế lực nhà» named at every level`,r.h.up);ok(r.h.dn.slice(1).every(t=>/thế lực|sút/.test(t)),`${tag} word mode: a fail «thế lực nhà −8» is named (levels 1–2; level 0 never says «hỏng thì», by design)`,r.h.dn);
+  ok(r.h.up.every(t=>/Thế lực nhà \+/.test(t)),`${tag} word mode: «thế lực nhà» named at every level`,r.h.up);ok(r.h.dn.slice(1).every(t=>/Thế lực nhà −/.test(t)),`${tag} word mode: a fail «thế lực nhà −8» is named (levels 1–2; level 0 never says «hỏng thì», by design)`,r.h.dn);
   ok(r.neg.every(t=>!/nhà ngươi|thế lực nhà ngươi|vững|sút/.test(t)&&/quyền thần/.test(t)),`${tag} negative: another house («nhà Hộ bộ / nàng / Lễ bộ / Đại tướng quân thế lực ±n») never reads as HER house (neutral «thế các nhà quyền thần đổi thay»)`,r.neg);
-  ok(/thế lực nhà ngươi/.test(r.own),`${tag} positive: E28 wording «thế lực nhà −10» still reads as hers`,r.own);
+  ok(/Thế lực nhà −/.test(r.own),`${tag} positive: E28 wording «thế lực nhà −10» still reads as hers`,r.own);
   ok(r.rows.duoc.join()==="thế lực nhà +4"&&r.rows.mat.join()==="thế lực nhà -6",`${tag} rows keep it (Được / Mất)`,r.rows);ok(errs.length===0,`${tag} no page errors`,errs.slice(0,2))}
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`FAIL ${f}/${res.length}`:`PASS ${res.length}`);process.exit(f?1:0)})();

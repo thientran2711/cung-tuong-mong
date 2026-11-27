@@ -13,6 +13,10 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
  tchMin:1,
  /* event-choice hints (KIT 28.6): Tâm cơ below hintMid → a vague hint; from hintMid → plain; from hintSharp (or Tai mắt ≥ hintMat) → names who reacts */
  hintMid:25,hintSharp:45,hintMat:3,
+ /* WORDING-GAIN (owner OD 26/11 ~18:50Z (7)): a gain / loss said without its number is the stat NAME + marks «+ / ++ / +++» (loss «− / −− / −−−»); ONE source for the bands (law 4):
+    an amount ≤ max(1, ⌊big × lo⌋) = ONE mark, ≥ big × hi = THREE marks, between = TWO. big = the usual size of one change of that stat (group keys of KIT_HINT_MAG, jk2b).
+    word = the marks of a size word in a static kit line when it carries no amount: nhẹ (chút / hơn / thêm / bớt) · vừa (khá / nhiều) · nặng (rất / hẳn / lắm). */
+ mk:{lo:.25,hi:1.5,big:{hon:10,hoi:40,rel:10,uu:3,sung:5,dan:4,bac:40,suc:10,cc:2},word:{nhe:1,vua:2,nang:3}},
  /* TRUNG Y (jty, sếp 15/11 09:15Z): the Y phục slot is empty → she is in her inner robe. ONE source for every number of that rule */
  ty:{out:2,crowd:3,crowdN:3,royal:6,royalDuc:1,meet:1,reissueWk:2,   /* Danh lost: out of her palace / extra with ≥crowdN people / extra (tai tiếng) before the Emperor or Thái hậu (+ Đức); a visitor at home */
   robNight:12,robLonely:8,robPlot:45,robThug:3,robDanh:3,robWalk:2,omenWk:2,plotCh:12, /* robbery: % parts, Danh lost, omen lasts N weeks, weekly % an enemy plans it, relation that makes an enemy */
@@ -217,12 +221,12 @@ Object.assign(BAL,{
 Object.assign(BAL,{
  actK:2,          /* khắc a scheme act on a person takes (j8 doAct / j6 act cards; jsgame Tự ra tay and place acts, jslap Giáng tay read it) */
  servK:2,         /* khắc a servant act takes (j10 Mua chuộc / Dọa; jsgame Mặc cả reads it) */
- m95:{dtdSung:50,       /* Sủng below which the Emperor is not shown / met in Dưỡng tâm điện (j2's door uses the same 50) */
+ m95:{accPer:15/* caught-in-act accusation: + accPer × the pieces of the matching charge (was typed pr*15 on the total) */,dtdSung:50,       /* Sủng below which the Emperor is not shown / met in Dưỡng tâm điện (j2's door uses the same 50) */
       k:1,              /* khắc to accuse a consort (Hoàng hậu / Hoàng thượng / luật cung) or to keep silent for a favour */
       accWin:{danh:4}}, /* an accusation that holds: her Danh (a failed one: BAL.tw.g.accFail) */
  m95b:{k:1,             /* khắc to clear a rumour face to face, or to trace who spread it */
       trace:{bac:-10}}, /* silver to have the rumour traced */
- kitpage:{demo:{age:19,k:1,grey:{need:40,have:3,k:2,suc:10},/* §84 greyed-option sample (jgrey) */mapK:2,/* §85 Dư đồ sample khắc (jmapc) */tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1},study:{k:2,suc:15,bac:15},/* jksize sheet study cards */ask:{danh:5,sung:10,an:2},/* jkitpage night-ask sample */ev:{need:1,have:0}/* jgrey §84 need[] sample */},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
+ kitpage:{demo:{age:19,k:1,grey:{need:40,have:3,k:2,suc:10},/* §84 greyed-option sample (jgrey) */mapK:2,/* §85 Dư đồ sample khắc (jmapc) */tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1},study:{k:2,suc:15,bac:15},/* jksize sheet study cards */ask:{danh:5,sung:10,an:2},/* jkitpage night-ask sample */ev:{need:1,have:0}/* jgrey §84 need[] sample */,aim:{sung0:34,sung:-10,loyal:-5},kem:{g:8,o:-3,tc1:6,tc2:2,sung:3,tc3:-4,suc:-10}/* §53 kitKemRow + night-card person rows sample (jkitpage kitPgKem) *//* KIT 7.3 «Người ấy» sample (jkitpage kitPgWhy) */},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
       wk:2,         /* kit sample page: the demo "· 2 tuần trước" age of a mood cause */
       listen:{duc:1},  /* kit sample page: the demo option "Nghe hết rồi mới định" gain */
       clock:{left:22000,len:30000}},  /* kit sample page: the timed-choice demo chip (§69 + §32.5c): 22 s left of 30 s */
@@ -376,11 +380,26 @@ function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3
              at the door for a secret meeting (jtin watcher, printed by jroute / j22 «… canh cửa (lòng …+, Chủ tin …+)»; review/one-core-dup3).
    rareLv  = rarity word of an origin / event weight (j69 ow69Rare, jk2b kitRare): ≤ [0] Rất hiếm, ≤ [1] Hiếm.
    sucLv   = Sức words: word = jthaiy sucWord (30/50/70), ask = Hỏi han result line (jaudit, 30/60) — two live ladders, kept, listed.
-   oanFade = oán that fades each month (j28 oanMonth: NPC × persF forgive, the player's own oán toward others flat).
+   oanMend = the two COSTLY roads down from a DEEP grudge (j jmend; owner 26/11 ~08:25Z «làm cách nào để giảm bớt oán», MAIN 155 add-on): when the
+     wronged one's oán ≥ her «nguoi» level (BAL.net.th, netForgive) words (Tạ lỗi / Nhún nhường) are not offered and cost nothing; instead
+     «Hậu lễ tạ tội» (bạc gift.bac + gift.r × the giver's rank, Danh gift.danh) or «Nhờ người đứng giữa» (a person the wronged one likes ≥ than
+     who likes the doer ≥ quen; that person's liking for the doer −go.fav, Danh go.danh). Odds o + kf × (the wronged one's forgive nết − 1)
+     − deep × (oán − her nguoi level) (+ go.stand × (her liking for the go-between − than)); thành: oán − the width of its BAL.oanLv band (one band
+     down, like one quiet season); hỏng: the gift is sent back / the go-between is turned away, nothing is paid; the accepted gift's bạc goes to the receiver (law 6c).
+     ag = an NPC's «safe» weight for these roads = ag × Nhún nhường's (BAL.ag.cx.humble.g). Same roads for every NPC (two-way).
+   oanFade = the OLD flat monthly oán fade (j28 oanMonth), used only when BAL.oanCool.on = 0 (rollback switch); the live fade is BAL.oanCool below.
+   oanCool = OÁN / GHEN COOL-DOWN (review/pace-all, owner OD 26/11 ~08:25Z «làm cách nào để giảm bớt oán»; j28 oanCool, each tuần in rivalsTurn):
+             a grudge nothing new fed for quiet tuần fades by (width of its BAL.oanLv band) ÷ season × the holder's nết (persF forgive:
+             Thù dai ×.3, Rộng lượng ×1.8; me = HER own grudges, she has no nết) → a feud left alone one season drops one band (law 3: time is the cost).
+             floor = band kept while the cause stands (law 6a): mem = a bad deed still remembered (jmem, weight ≥ BAL.mem.faint) → band 1 «Chút oán»;
+             keep = a deed carved for life → band 2 «Oán». ghen = the weekly jealousy fade (j8 rivalsTurn, was typed 3 / 1): than = when she is
+             liked (rel ≥ BAL.net.th.than), base otherwise, + pct × the jealousy itself (a quiet season takes about a third off), × the same nết; her own jealousy (v.pg) keeps its −1 a tuần. npc = share of a jealousy
+             caused by ANOTHER consort that becomes a grudge toward that consort (j1 ghenUp; it no longer raises the score toward her). dm = a jealousy RISE
+             toward her × max(min, 1 − (ghen/100)^pow) (j1 ghenUp: slows near the top, like BAL.stp.dm for the other stats; carry v.gUc).
    tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
    (the youngest adult = BAL.ageMin, with the age bands above) */
 Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60,send:40},rareLv:[6,9],
- sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
+ sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,oanCool:{on:1,quiet:2,season:9,me:1,floor:{mem:1,keep:2},ghen:{base:1,than:3,pct:.03,npc:.5,dm:{pow:3,min:.15}}},oanMend:{o:50,kf:40,deep:.4,gift:{bac:60,r:30,danh:-1},go:{fav:10,danh:-1,stand:.3},ag:2},anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
 /* part 3 (review/one-core-dup2): single-copy cut ladders that were typed in their module, now named here (values unchanged):
    rhythm = rhythm game hits for grade 2 / 3 (j5) · facRel = faction standing ±: thân / thù (j10) · tuanDays = day of month → tuần
    (j31) · clanRel = clan relation ±: Đồng minh / Đối đầu (j55) · form = sports form words (j71) · virCong = công virtue level for
