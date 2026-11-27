@@ -123,3 +123,60 @@ PRIORITY #1 CHECK ('amCardBtns|BAL.time.cost|kgbest'): OD 0 | ledger 0 | claims 
 - Robots after: reach PASS · reach2 PASS · rows-scan PASS · one-core PASS · 0 page errors. A locked card (e.g. Mua chuộc «Chưa biết người này là ai») shows «Thành: Không được gì thêm» + no Bại = the kit's own disabled-card rule (kaBody dis), same as native locked options.
 - New sheets/videos (looked 3×): https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/b3-fold.mp4 · b3-ipad.mp4 · b3-sheet-fold.jpg · b3-sheet-ipad.jpg
 - KIT_CHECKLIST.md (KIT-STD-AUDIT) not published yet at this commit — to check against when it lands.
+
+---
+# ACT-MOVE-5 HANDOVER → ACT-MOVE-6 (rolled at ctx ceiling, 27/11 ~05:35Z)
+State: review/act-move 90488b6c = built, robots PASS. MAIN 172 (session_01Rc5AsMU9mSE7tW95QoYfC8) LOOK 05:27Z: FLOW PASS; FAIL on kit std / law 3 (gain-and-loss) in moved cards. Its order, verbatim:
+«1) Lãnh cung «Ân xá» card has an EMPTY body (only Ghi chú «đưa nàng về cung»; j15.js:49). Needs Tốn (2 khắc via whyTime/BAL) + Được green: nàng về cung, thiện cảm + (pvRel BAL.ag.hh.pardonRel), Đức + (BAL.ag.hh.pardonDuc) — same numbers as the confined «Ân xá» on j15.js:43.
+2) «Thêm cung nữ» / «Thêm thái giám» / «Chọn làm cung nữ thân cận»: Tốn only, no Được row → add the gain (thêm 1 cung nữ/thái giám …) in green.
+3) Servant «Mua chuộc» / «Vu tội»: Thành shows «Không được gì thêm» (j63.js:129 kr-none) = a road with no gain (law 3). When the person is unknown, still print what success gives (tai mắt / nàng bị phạt …) from the act's own effect; Mua chuộc also lacks a Tốn row (print its bạc cost, or «Tốn: không» per OD 26/11 ~17:55Z — never omit). Scan every caller of the j63 kr-none «Không được gì thêm» path across the game, not only these two.
+4) NOT yours: iPad stage mini-cards odds word with no bar → kit keeper.
+Then new Fold+iPad sheets → MAIN LOOK → RV-163E. Keep the art gap (kid silhouette) noted in the report.»
+## Source map (traced, nothing changed yet)
+- (1) j15.js:49 lãnh cung card: `pbtn(data-e pardon,"Ân xá","đưa nàng về cung",whyTime(2)||…)`. REAL effect = j8.js:546 empAct pardon: coldFree(v) (back to court), `relAdd(S,v,BAL.eff.j8.empAct_2)` (=30) + `apply({duc:BAL.ag.hh.pardonDuc})`; cost = empAct's inline can(2)/spend(2) (j8.js:542–547, frozen baseline). NOTE: j15:43 (confined Ân xá) PRINTS BAL.ag.hh.pardonRel but the rule applies BAL.eff.j8.empAct_2 → print the key the rule reads (one-core-bind), and tell MAIN about the j15:43 mismatch (same family: fix it too). Plan: add `BAL.time.cost.hh:2` (Quyền Hoàng hậu e-acts) beside give/ask in jbal.js, wire empAct can/spend (lines 542–547 only) + j15:43/49 whyTime(2) to it; Ân xá sm = `tốn: ${BAL.time.cost.hh} khắc · thành: nàng về cung, ${pvRel(v,BAL.eff.j8.empAct_2)}, Đức ${balSg(BAL.ag.hh.pardonDuc)}`.
+- (2) maid card buttons come from staffTabHTML (j15.js:74 maid card); «Thêm cung nữ/thái giám» = data-hire (raw x was «Nội vụ phủ · Bạc -20»: no thành), «Chọn làm cung nữ thân cận» = jtc.js:50 (`Bạc ${balSg(-B.pic…)}` …). Add «thành: thêm 1 cung nữ/thái giám vào cung ngươi» etc. (NPC twin: jagacts3.js:171 hire uses BAL.house.hireBac).
+- (3) other palace servant buttons: «Mua chuộc» = data-sv (j15.js:80 «Mưu kế» group; game handler jsgame.js:283 → Mặc cả, cost sgServCost(s), BAL.servK khắc) — raw x was «thành: Bạc -30 · Mong manh» (cost wrongly under thành → disabled card filters losses → kr-none). «Vu tội» / «Bắt quỳ, vả miệng» = jmline.js:115–116 (thành has a loss only: «thiện cảm với chủ −−−»). kr-none writer: j63.js:129 kaBody (dis filters red from Thành). Game-wide scan idea: run every option/act card builder through kaBody and list cards whose THÀNH block is kr-none (both enabled and disabled), per family; fix strings so a real gain is printed (law 3).
+- Scan robot to extend: dev/test/act-move-rows-scan.js (add: amb option rendered with kr-none Thành = FAIL; Tốn row missing when the act costs bạc/khắc = FAIL).
+- Video: dev/test/act-move-video2.js (both devices, `OUT=… node dev/test/act-move-video2.js 755 1000 fold` / `1180 820 ipad`), sheets via PIL 3×3, upload `python3 dev/site/cdn_sync.py img/_review/act-move/<file>` (img/ is git-ignored), then LOOK READY → MAIN 172.
+- Pending: check against dev/kit/KIT_CHECKLIST.md when KIT-STD-AUDIT (session_01Rc5AsLjdujq3CBnAckhFyp) publishes it (MAIN 171 said yes).
+- quickcheck.sh times out here (ctm-rank host blocked); run coregates by hand: `bash dev/tools/coregates.sh $PWD 17f23656 <outdir>`; button-crawl «Ô lưu · Lui» fault is on LIVE too.
+- Always test on dev/index.html after `python3 dev/build/assemble.py`; rebuild the site (`bash dev/site/build_site.sh`) before pushing.
+~85 % this task / ~0 % in game.
+
+# ACT-MOVE-6 (27/11 ~06:40Z) — MAIN 172 LOOK FAIL 05:27Z fix: law 3 gain-and-loss on moved cards (law 11 whole family, law 4 one core)
+PRIORITY #1 CHECK ('act-move'): OD 9 | ledger 0 | claims 8 | main 0 | review/* 1 (review/act-move) | archive 0 — continued review/act-move from 83390931, nothing rebuilt.
+## What changed (source)
+- j15.js lãnh cung «Ân xá» (was an empty body): `tốn: BAL.ag.hh.kh khắc · thành: nàng rời lãnh cung về cung · pvRel(BAL.ag.hh.pardonRel) · Đức balSg(BAL.ag.hh.pardonDuc)`, gate whyTime(BAL.ag.hh.kh).
+- j15.js Quyền Hoàng hậu group (Xử tội / Tịch thu / Ân xá / Khất bổng lộc): khắc from BAL.ag.hh.kh (was whyTime(2)), a Tốn row on every card; Xử tội gets a Thành («nàng bị xử theo chứng cứ ngươi nắm»); Khất bổng thiện cảm reads BAL.ag.hh.cutRel (was typed 15).
+- Item 4 (ACT-MOVE-5 finding «j15:43 prints pardonRel but the rule applies BAL.eff.j8.empAct_2»): **checked — not a mismatch**. The live rule for her Ân xá is the jagacts.js:97–99 empAct wrapper → hhAct (jagacts.js:71) which reads BAL.ag.hh.pardonRel / pardonDuc and spends BAL.ag.hh.kh; j8 empAct (empAct_2) only runs when the wrapper declines (k not in AGHH or khắc short → it returns too). So both Ân xá cards print the keys the rule reads (pardonRel/pardonDuc/kh); j8 untouched. one-core-bind PASS (1621 prints, 0 mismatches).
+- j15.js maid card «Thêm cung nữ» / «Thêm thái giám»: `tốn: Bạc -hireBac · thành: thêm 1 cung nữ / thái giám hầu ngươi` (green). jtc.js «Chọn làm cung nữ thân cận»: `tốn: Bạc … · thành: nàng thành cung nữ thân cận của ngươi` + the old thiện cảm lines.
+- j15.js «Mua chuộc» (other palace servant + elder, same builder): `odds · tốn: BAL.servK khắc · thành: X thành tai mắt của ngươi (green), Bạc -bribeCost · hỏng: X có thể mách chủ` — bạc is paid on success only (bribeServ / jsgame serv pay), so it sits in Thành, red. A LOCKED card (person unknown) now shows the gain instead of «Thành: Không được gì thêm».
+- jmline.js «Vu tội»: Thành = what mlHitDo frame gives, explicit green: X bị phạt quỳ · lòng X với chủ −frameLoy · X bị đuổi khỏi cung chủ: chanceW(frameOut). Locked card keeps the gain too.
+- Same family found by the scan (law 11): «Cài người vào cung khác» (odds + Thành tai mắt + Bạc on success, as its pick j10 PEND.plantsv), «Chưởng sự tra xét cung nữ» (what j14 searchMaids gives), «Đổi người chạy việc» (jamove: chip without small line → Thành «người chạy việc mới do ngươi chọn»), own servant «Xem người» (servLearn), «Tiến cử» (servMerit BAL.ag.par3.house.merit; jhouse.js twin's typed «+5» → the same key), «Dọa tố đối thực» (threatServ odds + tai mắt; kèm oán).
+## Scan robot (new) dev/test/act-move-law3-scan.js — every bridged option of every person on stage, cao/con/hh × buổi 0–2 × every place, rendered by optLine; flags NOGAIN (no green Được/Thành), NONE / NONE-LOCKED («Không được gì thêm», also via kaBody dis), NOCOST (bạc taken, no row names it)
+| family | before (83390931 build) | after |
+|---|---|---|
+| fallen · Ân xá | 1/1 NOGAIN | 0 |
+| maid · Thêm cung nữ / Thêm thái giám | 6/6 NOGAIN | 0 |
+| maid · Cài người vào cung khác | 3/3 NOGAIN | 0 |
+| maid · Chưởng sự tra xét cung nữ | 1/1 NOGAIN | 0 |
+| maid · Đổi người chạy việc | 2/2 NOGAIN | 0 |
+| npc + elder · Mua chuộc | 5/5 NOGAIN, NONE-LOCKED | 0 |
+| npc + elder · Vu tội | 5/5 NOGAIN, NONE-LOCKED | 0 |
+| elder · Tiến cử (seen in one run) | 1/1 NOGAIN | 0 |
+| TOTAL | 23/96 (+1) | 0/93–99 PASS |
+- Wider look (NATIVE=1, not gated, NOT this branch's family — for MAIN): native pop-up options flagged NOGAIN 65/305 are almost all tier/group openers («Dò la», «Ra uy», «Mặc cả chứng cứ», «Hiến nghệ», «Dâng lễ vật» … «chọn mức và cách») whose rows live in the picker; two look like real gaps worth a ticket: emp «Chặn ngự giá» (only Tốn 1 khắc) and rival «Đẩy con nàng xuống hồ» (empty line), plus chest «Lấy trộm son phấn» whose x nests «thành:» inside a Thành row through native optLine.
+## Robots (after)
+- act-move-law3-scan PASS 0/93 · act-move-rows-scan PASS 0/94 · act-move-reach2 PASS (A 241 cards, D 263/263, G 8 families fired) · act-move-reach PASS (C 2493/2493, D 2788/2788, F 12) · 0 page errors.
+- coregates (17f23656 base): G1 guard / text / textrule / bind PASS (bind after fix: 0 mismatches) · G2 rules bad [] · G3 floats none · G4 odds-cap, coop-one-world, mk-layer, manifest-guard, npc-purpose, dialog-fixed, dead-card, look-dedupe, press-keep, q-softlock PASS · button-crawl 1 fault «Ô lưu · Lui» = the known LIVE fault (not this branch).
+## Sheets (looked 3×)
+- Fold 755x1000: https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/act-move6-fold-sheet.jpg
+- iPad 1180x820: https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/act-move6-ipad-sheet.jpg (12 shots: the stage mini-card shows one line by kit design; shots 2b / 3b / 7b tap its «!» to show the full kit card: Thêm cung nữ, Mua chuộc locked, Ân xá)
+- dev/test/act-move-video2.js: iPad TAP step added (taps the «!», shoots, then a real tap outside closes it).
+- Art gaps (not mine, noted): unknown servant / thái giám silhouette is a female figure; kid silhouette gap as before. iPad mini-card odds line = KK56.
+~100 % this task / ~0 % in game (until LAND).
+## ACT-MOVE-6 follow-up (MAIN 172 05:45Z/05:51Z): on top of door-onetap e408ab1d
+- Branch **review/act-move-law3** = e408ab1d + merge of review/act-move 66afd77e (conflicts only in generated index.html / sw.js → rebuilt with assemble + build_site; assets.json kept = e408ab1d).
+- «Tốn: Bạc -20» minus (MAIN 05:45Z): the source now writes `tốn: Bạc -N`, and the kit row renders it WITHOUT a minus («Tốn Bạc 20», red) — checked on both sheets (Fold maid card, iPad mini-card + «!» card). Same for Chọn làm thân cận («Tốn Bạc 30»).
+- Robots on the merged build: law3-scan PASS 0/98 · rows-scan PASS · reach2 PASS · door-onetap PASS (members 90, 0 page errors) · one-core bind / guard / text PASS.
+- Sheets (looked 3×): https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/act-move6b-fold-sheet.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/act-move6b-ipad-sheet.jpg

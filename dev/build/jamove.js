@@ -150,7 +150,7 @@ function amBtnsOf(h){const d=document.createElement("div");d.innerHTML=h||"";con
  for(const b of d.querySelectorAll("button")){if(b.classList.contains("pct"))continue;const at=[...b.attributes].filter(a=>/^data-/.test(a.name)&&a.name!=="data-amx").map(a=>[a.name,a.value]);
   if(!at.length||at.some(a=>AM_NAV.test(a[0])))continue;const n=b.dataset.runner?"Đổi người chạy việc":txt(b.childNodes[0]&&b.childNodes[0].nodeType===3?b.childNodes[0].textContent:(b.firstChild&&b.firstChild.textContent)||b.textContent);if(!n)continue;
   const sm=b.querySelector("small");const why=b.disabled?txt((b.querySelector(".kwhy")||{}).textContent||""):"";let x="";try{x=AMV.noRaw?(sm?txt(sm.innerHTML).replace(why,"").replace(/\s*·\s*$/,""):"")/* scan «before» column only (act-move-rows-scan) */:b.hasAttribute("data-amx")?decodeURIComponent(b.getAttribute("data-amx")):sm?amRawOf(sm,why):""}catch(e){x=sm?txt(sm.textContent):""}
-  R.push({n,at,x,off:!!b.disabled,why})}
+  if(!x&&b.dataset.runner)x=`thành: <span class="g">người chạy việc mới do ngươi chọn</span>`;/* ACT-MOVE-6 law 3: the «Đổi ›» chip has no small line; its pick (jhc PEND.runner) is free */R.push({n,at,x,off:!!b.disabled,why})}
  return R}
 /* every Cung nhân card of the tab, by name (one paint) — the builder runs whole (pager → every row) with pcard recording its html */
 function amCapStaff(){return memo("cap:staff|"+stamp(),()=>{const M=new Map();if(typeof staffTabHTML!=="function")return M;const c0=AMV.cap;AMV.cap=M;try{staffTabHTML()}catch(e){console.error("amove cap",e)}finally{AMV.cap=c0}return M})}
