@@ -13,7 +13,9 @@ const H=eval(fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8').match(
   await open();
   const a=await p.evaluate(async()=>{__sbr.newLife();await __sbr.settle();for(let i=0;i<30&&!S.dead;i++){Q.length=0;const k=__sbr.key();used=BAL.time.khac;const n=document.getElementById('next');if(n){n.disabled=false;n.click()}await __sbr.after(k)}
    Q.length=0;let m=null;for(const s of knAllSrv().filter(y=>y&&y.name)){let N=[];try{N=knSellNews(S,s)}catch(e){}for(const x of N){m=knSellCard(s,x);if(m&&m.opts&&m.rk)break;m=null}if(m)break}
-   if(!m)return{err:'no knSell card in this life'};Q.length=0;EVCW=[];S.evc=null;EVHOLD=[];Q.push(m);showModal();render();save();
+   if(!m)return{err:'no knSell card in this life'};Q.length=0;EVCW=[];S.evc=null;EVHOLD=[];Q.push(m);showModal();render();
+   /* rv6 (TEST SETUP): on LIVE a held result card (jverdict RF.held, «kres-next») defers the paint → tap it as a player, wait until the card is painted (counted), then save */
+   for(let i=0;i<100&&!(S.evc&&S.evc.n&&S.evc.n.visit&&!document.getElementById('modal').hidden);i++){const nx=document.querySelector('.kres-next');if(nx)nx.click();await new Promise(r=>setTimeout(r,100))}save();
    return{t:m.t,q0:Q[0]&&Q[0].t,on:Q[0]===m,n:JSON.stringify(S.evc&&S.evc.n),cap:typeof BAL.evc==='object'&&BAL.evc.on}});
   n++;if(a.err||!a.on||!a.cap){console.log(`FAIL ${dev} setup ${JSON.stringify(a)}`);bad++;await ctx.close();continue}
   await p.reload({waitUntil:'domcontentloaded'});await open();await p.waitForFunction(()=>document.querySelector('#slots button[data-load="1"]'));
