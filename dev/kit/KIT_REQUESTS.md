@@ -246,3 +246,22 @@ K-FOCUS-1b SPEC (append to kitFocus; pure display, no numbers of its own, knobs 
 - Status: OPEN.
 
 - MG-SKIN (MAIN 113 22:39Z; owner OD 23/11 ~23:05Z real): «skin» slot on the kg82 frame {bg picture, board/piece art keys, button palette}, ≥4 palettes from the kit palette, Fold + iPad readable → DONE by KIT KEEPER #14 on review/kit-mgskin (KIT.md §MG-SKIN, test dev/test/kit-mgskin.js). Art: Foreman C paints img/mg/<kind>-<id>.webp (+ img/mg/<sprite>-<id>.webp); wiring: THIN P1 (kitMgSkinAdd + KG82.preSkin).
+
+## 27/11 OWNER-UI-C (for MAIN 172 → KK56 session_01Rc5AsJ6UhcqbDDXVR7k7Bq) — KIT REQUEST «person-card relation rows visible without scroll on iPad 1180x820» (law 10, whole person-card family)
+KIT CHECK: reuses pcard `.pc.kpwide`, `.kpkey` (kitPcKey / pcfKey kitRelTable compact), `--kpcw`, `data-kpcw0`, `kitPcKeyFit` call site jk2b.js:1001 — no new part, one lever changed.
+- Fault: iPad 1180x820, every person card (Phi tần living / lãnh cung / dead, Cung nhân; Nam nhân + Hoàng tự use the same `.pc.kpwide`): card box 564x410, portrait 209x394 fills the column (KIT §6.3e, owner 21/11), the key block (acquaintance chip + «Nàng → ta» / «Ta → nàng» rows, 119 px) starts at y≈704 and ends at y≈822 while the card ends at y=750 → the rows are under the card's «more below» fade, one scroll away. MAIN 172: «YES compact, rows visible without scroll, law 10». Fold 755x1000 is fine (key bottom 844–866 ≤ card bottom 898) and must stay as is.
+- Root cause: jk4.js §6.3e REPLACED jk2b's `kitPcKeyFit` with «always --kpcw = natural width». The jk2b original was the shrink-to-fit lever, but it over-shrinks (needs 83 px, shrank to the 112 px floor: its `over` counts the portrait's negative bottom margin twice).
+- ⚠ OWNER-RULE CONFLICT FOR KK56/MAIN (law 14/16): §6.3e (owner 21/11 ~02:12Z/~02:30Z) said the figure ALWAYS fills the column because a 100 px portrait left empty bands. This patch brings back a shrink, but only when the card is too short, MEASURED (not estimated) and with a floor of 65 % of the natural width (iPad: 209 → 137–164 px, never the 100 px of 21/11). If the owner's 21/11 line stands as «never shrink», the alternative is to let the key block sit BESIDE the portrait on iPad (needs a layout change, not this patch) — MAIN decides.
+- Patch (jk4.js, the §6.3e override `kitPcKeyFit=function…` line, replace its body; jk2b's old function can then be deleted, it is dead code):
+```js
+(function(){if(typeof kitPcKeyFit==="function")kitPcKeyFit=function(pc){try{const nat=+pc.dataset.kpcw0||0;if(!nat||!pc.classList.contains("kpwide"))return;
+ const L=pc.querySelector(":scope > .pcl"),key=L&&L.querySelector(":scope > .kpkey"),pcp=L&&L.querySelector(":scope > .pcp");
+ pc.style.setProperty("--kpcw",nat+"px");if(!key||!pcp)return;
+ const floor=Math.ceil(nat*.65);let cw=nat;
+ for(let i=0;i<4;i++){const over=key.getBoundingClientRect().bottom-(pc.getBoundingClientRect().bottom-26);/* 26 = the card's bottom fade */
+  if(over<=0||cw<=floor)break;cw=Math.max(floor,Math.floor(cw-over/((pcp.offsetHeight||1)/cw)));pc.style.setProperty("--kpcw",cw+"px")}}catch(e){}};window.kitPcKeyFit=kitPcKeyFit;
+```
+  (the rest of that IIFE — the `kit-pc-fill` style — unchanged.) Needs `.kwear` NOT counted (it sits below the rows and is 280 px tall; counting it forced the floor).
+- Verified by runtime injection of exactly this body (dev/test/pckey-fit.inject.js) + `node dev/test/pckey-scan.js all [inject.js]` (table per card: portrait width · key bottom · card bottom · visible): iPad before 17 cards NO → after all yes (portrait 137 Phi tần / 139–174 Cung nhân); Fold before and after all yes (one Cung nhân card 240 → 229 px).
+- Also re-run on resize/orientation + font load: kitPcKeyFit is already called from jk2b.js:1001 after `--kpcmax`; no new call site.
+- Status: OPEN — KK56 signs/applies (OD L1103); OWNER-UI-C did not touch the kit parts.
