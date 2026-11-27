@@ -160,7 +160,7 @@ Object.assign(ACTDOM,{trinhth:"Danh",trinhhh:"Danh",uyhiep:"Mưu kế",banphe:"M
 /* the act card lines read the target being shown (true numbers per target) */
 function j78out(k,a,t){const n=evG(a,t);const q=queenP();const m=punishMonths();const W=t?j78who(t):"nàng";
  if(k==="trinhth")return[`${W} ${sgOf(t,BAL.eff.j78.sungF)} · Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth)}`,`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth_2)}`];
- if(k==="trinhhh"){const c=t&&chReady(a,t);return[c?`${W} ${chPunTxt(t,c)}`:`${W} chịu phạt theo tội`,`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`]}
+ if(k==="trinhhh"){const c=t&&chReady(a,t);return[`<span class="g">${c?`${W} ${chPunTxt(t,c)}`:`${W} chịu phạt theo tội`}</span>`/* E-GAIN3b law 3: the punishment is her gain (explicit green, kit KP12) */,`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`]}
  if(k==="uyhiep")return[`Bạc +${t?j78pay(t):0} · kèm: ${W} oán ngươi ${balSg(BAL.eff.j78.f_4)}`,`Danh ${balSg(BAL.eff.j78.danhUyhiep)} · ${W} oán ngươi ${balSg(BAL.eff.j78.f_5)}`];
  if(k==="banphe"){const b=t&&j78buyer(a,t);return[`Bạc +${15*n} · ${b?j78who(b):"người mua"} thiện cảm ${balSg(BAL.eff.j78.f_6)} · ${b?j78who(b):"người mua"} nắm ${n>0?n+" ":""}chứng cứ về ${W} · kèm: ${W} oán ngươi ${balSg(BAL.eff.j78.f_7)}`,""]}
  if(k==="tieuhuy")return[`${W} quý ngươi +${j78thAff(n)} · ${W} oán ngươi -${j78thOan(n)} · Đức ${balSg(BAL.eff.j78.ducTieuhuy)}`,""];

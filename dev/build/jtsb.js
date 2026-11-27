@@ -51,7 +51,7 @@ function tsbThuO(a,t){return oddsCl(Math.min(Math.round(odA(a,44+(a.tamco||0)/5+
 function tsbFireO(a,t){return oddsCl(Math.min(Math.round(odA(a,46+(a.tamco||0)/5)-tsbGuard(t)),90))}
 
 /* ---------------- 1. Thả thú dữ (Hại nặng) ---------------- */
-A("thathu","Thả thú dữ làm hại dung nhan",{c:{bac:-BAL.actBac.thathu,duc:-6},ok:(a,t)=>(a.bac||0)>=BAL.actBac.thathu&&!t.scar&&!t.out,o:(a,t)=>tsbThuO(a,t),x:"Sắc nàng giảm mạnh tới khi lành, Sủng và Danh giảm",
+A("thathu","Thả thú dữ làm hại dung nhan",{c:{bac:-BAL.actBac.thathu,duc:-6},ok:(a,t)=>(a.bac||0)>=BAL.actBac.thathu&&!t.scar&&!t.out,o:(a,t)=>tsbThuO(a,t),x:'thành: <span class="g">Sắc nàng giảm mạnh tới khi lành, Sủng và Danh giảm</span>'/* E-GAIN3b law 3 (same family as huydung): her gain (explicit green, kit KP12) */,
  f:(a,t)=>{ap(a,{duc:-6});/* review ag-all-2 r2 A5: the keeper's bạc only when the beast is loosed (econPayWin below) */a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"mua chuộc người giữ thú thả thú dữ vào cung "+NM(t));if(c)return c;
   if(!aRoll(tsbThuO(a,t),a)){const e=roll(50);if(e)/*evok: thathu act*/evA(t,a,BAL.eff.jtsb.evF);return `Con thú dữ lọt vào cung ${NM(t)} bị người canh chặn kịp, đuổi đi trước khi kịp gây chuyện${e?`; kẻ thả thú bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF)})`:""}. `}
   econPayWin(a,"thathu",t,BAL.actBac.thathu);const sev=tsbSev();const L=tsbScar(t,sev,a);if(t===S){try{feedback("hit")}catch(e){}}

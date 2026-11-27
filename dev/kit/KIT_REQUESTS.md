@@ -359,3 +359,21 @@ cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) 
   seal value `kitResultSeal("soft")` → «BỎ DỞ» (grey `.sure`); rows «Người ấy» (`kr-tgt`) and «Ai làm» (`kr-by`); `kaAim` / `kaAimVerdict` / `kaAimUse`;
   the night card (jne `kitNightEnd`) uses the same parts («Kết cục» row with a `kitChip(seal)`). KK39: please confirm or restyle in place.
   Open word question for MAIN: the brief says «Hỏng»; the kit seal word stays BẠI (one place to flip: kitResultSeal).
+
+## 27/11 E-GAIN3b — two KIT internals found by the law-3 «Được» census (KK54 / E-GAIN3 §5.2, §5.3) — NOT changed by E-GAIN3b (law 9), for the kit keeper
+1. **A paid «Chứng cứ n» in «tốn:» lands in the green «Được» row.** dev/build/j63.js:80 (kaRows): `if(l==="tốn"&&!cont){if(neu)add("ton",h,"n");else if(c==="g")add("duoc",h,"g","t");…`.
+   A tốn piece «Chứng cứ 1 (tội …)» is classed «g» by kcls (j19 KGOOD «chứng cứ»), so what she SPENDS shows as a green gain. Seen on: Trình Thái hậu, Trình Hoàng hậu,
+   Uy hiếp đòi bạc, Tố tội thật (evidence cards, jcharge chUseTxt «Chứng cứ −n (tội …)»).
+   Before: «Được: Chứng cứ 1 …». Wanted: a piece written under «tốn:» is always a cost → «Tốn: … · Chứng cứ 1 (tội …)» (red/neutral cost chip), never «Được»
+   (e.g. in the tốn branch drop the `c==="g"→duoc` case, or limit it to a piece with an explicit writer class `g`). Whole family: every tốn piece the kit reads as g.
+2. **«+1,1» prints «+,1» after the marks pass.** dev/build/jk2b.js:248 `const MARK_NUM=/([+\-−])\s?(\d+)(?:(?: đến |\.\.)[+\-−]?\s?(\d+))?(?![\d.]|\s?%)/g;` (used by markTxt jk2b.js:250, called from j63 kaBody:122).
+   The lookahead stops «.5» but not a Vietnamese decimal comma, so «Văn <con> +1,1» (J4 Dạy chữ) becomes «Văn <con> +,1».
+   Wanted: the decimal comma is part of the number: lookahead `(?![\d.]|,\d|\s?%)` and the band read from the whole value («+1,1» → «+»), so the line prints «Văn <con> +».
+   (doorGain in jdoor.js already drops a decimal tail after a band mark for the door cards; the kit row needs the same.)
+3. **«nàng quý ngươi −−» is coloured as a green gain.** dev/build/j19.js:27 (kcls): `if(/(\bnàng\b|con nàng|của nàng)/i.test(s)&&(/-\s?\d|…/i.test(s)))return"g";` — the «harm to her (the rival)» rule also catches
+   HER regard for the player dropping. Seen on: «Bàn tán về <X>» (x «nàng quý ngươi -3») → option card «Được: nàng quý ngươi −−» (a loss shown as a gain, law 3).
+   Wanted: a piece «… quý ngươi −» / «thiện cảm −» / «tin ngươi −» is a loss for her (red, Mất/Kèm) even with «nàng» in it. (E-GAIN3b keeps such a piece out of the door cards' Được in jdoor doorGain; the option card itself waits for this kit fix.)
+4. **The hint line says «chẳng được gì; nhưng Danh −» for a harm to ANOTHER consort.** dev/build/jk2b.js:231 (kitHintSign) + :314 (kitHint parts): a piece «một phi tần khác Danh -1»
+   («Rỉ tai chuyện trong cung», jtwoway add("gossip"), the talk hits the consort she resents) gets sign −1, so the door dialog row says she gains nothing and loses Danh.
+   Wanted: a stat drop of a named / other person («một phi tần khác …», «<tên> Danh −», «Danh nàng −») is a gain for her (sign +1), the same as kcls's «harm to her (the rival)» rule.
+   Note for the kit keeper: dev/test/gain-empty.js counts the hint word «chẳng được gì» as a gain (its empty test is only «không / — / -»); once #4 lands, add KA_NOTHING + «chẳng được gì» to its empty test.

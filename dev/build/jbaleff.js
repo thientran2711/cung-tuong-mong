@@ -8,7 +8,7 @@
    <stat><Site> (sung / danh / duc / bac / suc / th / tamco / mat / an / tai / sac / tin) = an amount a text ALSO typed (review/one-core-jkc-2, dev/measure/one-core-fx-both-move.js). */
 Object.assign(BAL,{eff:{
  j1:{},
- j10:{evPlantServ:1,evServMonth_2:1,evServAct:1,evServAct_2:1,evSellOut:2,loyalServCaught:10,loyalServMonth:1,loyalServAct:12,loyalServAct_2:15,loyalServAct_3:20,meCourtAct:10,meCourtAct_2:1,danhServAct:-2},
+ j10:{evPlantServ:1,evServMonth_2:1,evServAct:1,evServAct_2:1,evSellOut:2,loyalServCaught:10,loyalServMonth:1,loyalServAct:12,loyalServAct_2:15,loyalServAct_3:20,meCourtAct:10,meCourtAct_2:1,danhServAct:-2,tamcoJoint:1/* E-GAIN3b law 4: «Hợp mưu hạ» success — every member's Tâm cơ (j10 jointScheme; was typed {tamco:1}) */},
  j13:{hpEpidemic:40},
  j14:{coldMonth:40,evSearchMaids:2,loyalServRanks:5,sucColdMonth:-20},
  j2:{start:35,go:9,go_3:-20,run:-15,fondGo:8,hpGo:30,hpGo_2:25},
