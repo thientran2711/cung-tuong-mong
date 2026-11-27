@@ -14,3 +14,9 @@ STATE at start: LIVE 4cfcda61 · ROLLBACK 504d2e6a. Next = review/lc25-wf 814bd7
 - → «READY TO PUSH a22cf45d» to MAIN 167.
 ### Queue after wf (MAIN 166/167 + RVs)
 title-bal 61bdd97d (RV-163C) → wording-marks c580f2cd (RV-164, supersedes 42cfbac8; Tốn no-minus inside) → [D promo when LAND READY, slot priority] → punish-tier+wit 85d1c0ec (RV-163C, one sha; wipe CDN img/_review/punish-tier/ + punish-tier-wit/ after land) → dress-fix-kit 8cc9a284 → dialog-order-r4 4594ec2b → sideq-trim a6ecd04e + sideq-race 16242897 (rides with it) → rest per land-chain-25. oan-pace-ghen FAIL (out); kit-resfold 5fd36e51 superseded by r2 (out). Each later item is FF of 4cfcda61 → restack onto new LIVE.
+
+## ~00:10Z — a22cf45d LIVE (MAIN 167 FF; rollback 4cfcda61). MAIN rolled 167 → 168 (session_01Rc5AsMYn5V43iERgwDRQrj, verified child). UI reviewer RV-165 session_01Rc5AsLoAzF54ipTvF4Hhdn; BIG RV-163D session_01Rc5AsMQU1ehAQ8bwbw6pWo.
+- title-bal 61bdd97d → review/lc26-tb fa722503 on a22cf45d: patch-identical, CHANGE line written by me (branch had none). title-bal PASS; title-sys 8 / title-sys2 2 fails identical on stage and RV'd sha (pre-existing). coregates vs a22cf45d: only G4 90 baseline. QC alone PASS (render 176/195, tab 524/507, buổi 1016/920, tasks 22/23). → READY fa722503 to MAIN 168.
+- wording-marks c580f2cd → review/lc26-wm 540358c4 on fa722503: patch-identical; CHANGE line mine. kit-ton-row 14/14, marks-choice-scan 0 errs, wording-gain-scan 0, one-core, kit-e-rows, cost-rows-home, odds-word PASS. coregates running.
+- ob-verdict-3 452b7cb5 (RV-164 PASS, evc test setup already inside) → review/lc26-ov fda3f280 on 540358c4: patch-identical; CHANGE line mine. ob-verdict-3 35/35.
+- New PASSes in queue: result-sieve-r2 5ac24fef (RV-165), map-r9 073d48b3 (RV-165) — slots asked of MAIN 168. kit-resfold-r2 8740785b = FAIL (do not land).
