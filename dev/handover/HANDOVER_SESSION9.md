@@ -494,3 +494,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 00:50Z KIT-STAGE-R7 rolled (handover kit-stage-r7.md on review/kit-stage-r4 5bff07d7) → archived; open KIT-STAGE-R8 on KK52 no-flip KIT READY (it also wires the 8 outside-#modal rows).
 - 00:51Z RING-BUILD-7 rolled (handover ring-build.md on review/ring-build e37adcd7) → archived; open RB-8 when KK52 sends the remerged kit-plaque-confirm sha (then rebase → gates → RV-165).
 - 00:53Z EVENING REPORT sent to sếp (PDF Bao-cao-loi-25-26-11.pdf, LIVE fa722503).
+- 00:56Z owner 01:07Z (167 chat): doors → one-tap → DOOR-ONETAP (opus, plan first, coordinate with ACT-MOVE-2). real-proof PASS RV-163D a2902d43 → LC26 (with punish-wit); dup-row issue → PT-5. sếp approved recs 01:05Z.
