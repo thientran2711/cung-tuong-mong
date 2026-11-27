@@ -1,0 +1,5 @@
+# flight2-s18c checkpoint (roll of LIFE RUNNER s18, 11:03Z)
+Life flight2-s18c · Fold 755x1000 · persona cautious · seed 2026112550 · build 128ec6b7d5fa (CTM_BI.s cb090860+, main 0562e15f) · harness review/robot-realtap f65d019b · ckpt at buoi 276 (year ~3), 2026-11-27T11:02:03Z.
+RESUME: (1) worktree of f65d019b at /home/user/wt/s18-h2 (git worktree add --detach <dir> f65d019b); (2) serve the build: bash <harness>/dev/test/rt-serve-build.sh --b 128ec6b7d5fa 8938 (self-check must say OK, pixi 200); (3) out dir /home/user/wt/s18c-out: copy flight2-s18c.ckpt.json there (the ckpt holds R + the game localStorage save + rng state); (4) run ./run.sh (same args; first launch with resume=1 because the ckpt exists) with run_in_background, timeout 7200000. The harness restores the save on its own pinned server; check «RESUME: hclh-save-v2-1 content identical» and no SAVE REWIND.
+Same life = same ckpt; do not start a fresh profile. Do not stop at buoi N: life = until her death / game ending.
+Open game bugs in this life so far: «Tin báo» «Để sau» tapped 3×, dialog stays; no-clock loops on .mapsc / «Tin báo».
