@@ -519,7 +519,7 @@ function kitHowPanel(how){try{how=how||{};const p=how.who&&typeof how.who==="obj
  const ico=wk&&typeof kitPlaceIcon==="function"?kitPlaceIcon(wk,16):"";
  const rows=[["Ai",nm?(typeof kitName==="function"&&p?kitName(p):nm):""],["Ở đâu",pl?`<span class="kglwhere">${ico}${pl}</span>`:""],["Giờ mở",how.hours||""],["Tốn",how.cost||""],["Ghi chú",how.note||""]];
  const html=(typeof kitRows==="function"?kitRows(rows):rows.filter(r=>r[1]).map(r=>`<p><b>${r[0]}:</b> ${r[1]}</p>`).join(""));
- const opts=[];if(typeof how.go==="function")opts.push({n:"Đi tới",fx:{},x:how.goK!=null?`tốn: ${how.goK} khắc`:"",go:()=>{try{how.go()}catch(e){console.error("kitHowPanel go",e)}}});if(typeof how.map==="function")opts.push({n:"Xem Dư đồ",fx:{},go:()=>{try{how.map()}catch(e){console.error("kitHowPanel map",e)}}});
+ const opts=[];if(typeof how.go==="function")opts.push({n:"Đi tới",fx:{},x:(how.goK!=null?`tốn: ${how.goK} khắc`:"tốn: không")+` · được: tới ${pl||"nơi ấy"}${nm?", gặp "+nm:""}`,go:()=>{try{how.go()}catch(e){console.error("kitHowPanel go",e)}}});if(typeof how.map==="function")opts.push({n:"Xem Dư đồ",fx:{},x:`tốn: không · được: xem ${pl||"nơi ấy"} trên Dư đồ`,go:()=>{try{how.map()}catch(e){console.error("kitHowPanel map",e)}}});
  return typeof kitModal==="function"?kitModal({kind:"info",title:"Cách làm",subject:p||undefined,html,opts:opts.length?opts:undefined,cls:"kgoalhow"}):null}catch(e){console.error("kitHowPanel",e);return null}}
 window.kitGoalLink=kitGoalLink;window.kitHowPanel=kitHowPanel;
 /* window capture: runs before the document-level frame / tap-catcher handlers that take a tap inside an info frame */
