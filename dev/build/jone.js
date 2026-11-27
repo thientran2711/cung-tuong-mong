@@ -139,7 +139,10 @@ function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>t
   const free=T.filter(x=>!x.off);const harm=(M[r.k]||{}).harm;
   let x="",n=`${r.n} · ${t}`;if(m){const ln=String(m.x||"");/* the member's own kit line (optLine HTML: odds · tốn · được · hỏng), unchanged */
    if(harm&&free.length>1)x=`${ln} · ra một trong: ${free.map(y=>txt(y.n)).join(", ")}`;else{x=ln;n=`${txt(m.n)} · ${t}`}}
-  const why0=(T[0]&&T[0].why)||"chưa làm được";rows.push({t,m,T,n,x:x||(m?"chọn rồi xem kết quả ở bước sau":`chưa làm được: ${txt(why0)}`),off:m?null:{why:why0}})}return rows}
+  const why0=(T[0]&&T[0].why)||"chưa làm được";
+  if(!m&&T[0]){/* nothing of this tier can run now: the real way stays visible, greyed with its own reason (as LIVE's greyed row) */n=`${txt(T[0].n)} · ${t}`;x=String(T[0].x||"")}
+  const row={t,m,T,n,x:x||"chọn rồi xem kết quả ở bước sau",off:m?null:{why:why0}};
+  if(m&&m.p!=null)row.p=m.p;rows.push(row)}return rows}
 ONE.tierRows=tierRows;
 /* perf: one paint asks the same person + door many times (render → dfActs → card); the members list is kept for that paint only (state stamp) */
 const MC={c:new Map(),t:0};
@@ -177,23 +180,25 @@ function memo(k,f){k=k+"#"+stamp();if(MC.c.has(k))return MC.c.get(k);const r=f()
  const {p,L}=members(pp,r);if(!p||!L.length)return P0(pp);const R=tierRows(r,L,who(p));if(R.length<2)return P0(pp);
  const o=R.map(x=>{const row={n:x.n,x:x.x,go:()=>{const q=Object.assign({},pp);if(!goOne(q,r,x.t))return}};if(x.off)row.off=x.off;return row});o.push({n:"Thôi"});
  const nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";let wh=null;try{const w=doorWho(p);wh=w&&typeof WHO==="function"?WHO(w):null}catch(e){}
- return{t:`${r.h.replace(/^Chọn (mức và )?(cách|chuyện|lời|sổ|môn)[^.]*\./,"Chọn mức.")}${nm?` <b>${nm}</b>`:""}`,o,who:wh}}})();
+ return{t:`${r.h}${nm?` <b>${nm}</b>`:""}`,o,who:wh}/* the door's own line, as LIVE */}})();
 /* ---------- (3) DECK doors (Hành sự / cung nữ / lãnh cung / khuê các): tap = one way, or the tier card ---------- */
 function deckRow(b){const I=b.dataset.ddi.split(",").map(Number);const a=deck[I[0]];const road=DOOR.road();
  return (DOOR.D||[]).find(r=>r.roads.includes(road)&&(r.re?r.re.test(txt(a&&a.n)):(()=>{try{return r.key(a,deck)===b.dataset.ddoor}catch(e){return false}})()))||null}
 function deckM(b){const I=b.dataset.ddi.split(",").map(Number),X=b.dataset.ddx.split(",").map(Number);
  return I.map((i,j)=>{const a=deck[i];if(!a)return null;let w="";if(!X[j]){try{w=txt(cardWhy(a))}catch(e){}w=w||txt(a.lock&&a.t)||"chưa làm được lúc này"}
   let c=1;try{c=cardCost(a)}catch(e){}
-  /* the way's own line, like the deck door card (jdoor lineOf): odds · tốn · thành */let x=a.x||"";try{const ton=[`${c} khắc`];const fc=fmt(a.c||{});if(fc)ton.push(fc);
-   const gain=[fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]].filter(Boolean).join(" · ");const o=oddsOf(a);
-   x=[o<100?wordOf(o):"","tốn: "+ton.join(" · "),gain?"thành: "+gain:""].filter(Boolean).join(" · ")}catch(e){}
-  return{id:"d:"+txt(a.n),n:a.n,a,x,off:!X[j],why:w,cost:c,go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("jone deck way",e)}},0)}}}).filter(Boolean)}
+  /* the way's own row = the LIVE deck door card's row (jdoor lineOf: tốn · thành · kèm · hỏng, odds chip p = optOdds) */let x="",pc=null;
+  try{const sp=String(a.x||"").split(/ · kèm: /);const ton=[`${c} khắc`];const fc=fmt(a.c||{});if(fc)ton.push(fc);
+   const gain=[fmt(a.w||{}),sp[0]].filter(Boolean).join(" · ");const P=["tốn: "+ton.join(" · "),"thành: "+(gain||txt(a.t)||"")];if(sp[1])P.push("kèm: "+sp[1]);
+   const rolled=a.o!=null&&a.o<100&&!a.lock;if(rolled){let f="";try{f=[fmt(a.l||{}),typeof a.lx==="string"?a.lx:""].filter(Boolean).join(" · ")}catch(e){}P.push("hỏng: "+(f||"không mất gì"));try{pc=optOdds(a)}catch(e){}}
+   x=P.join(" · ")}catch(e){x=a.x||""}
+  return{id:"d:"+txt(a.n),n:a.n,a,x,p:pc,off:!X[j],why:w,cost:c,go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("jone deck way",e)}},0)}}}).filter(Boolean)}
 ONE.deckM=deckM;ONE.deckRow=deckRow;
 function deckRowR(b){const r=deckRow(b);return r?Object.assign({},r,{n:b.dataset.ddoor}):{k:"?",n:b.dataset.ddoor}}
 function deckTap(b){if(!S||S.dead||Q.length)return true;const r=deckRowR(b);const L=deckM(b);const md=ONE.mode(r.k);
  if(md==="tier"){const tiers=TI.filter(t=>L.some(m=>tierOf(r,m)===t));if(tiers.length>=2){const R=tierRows(r,L,"me");
-   const rows=R.map(x=>{const o={n:x.n,x:x.x,ddoor:1,go:()=>{const m=pick(r,x.T,seedOf(r,"me",x.t));if(m)runM(r,m,x.T,x.t)}};if(x.off)o.off=x.off;return o});
-   let wh=null;try{wh=typeof pMe==="function"?pMe():null}catch(e){}DOOR.card(b.dataset.ddoor,"Chọn mức.",rows,wh);return true}}
+   const rows=R.map(x=>{const o={n:x.n,x:x.x,ddoor:1,p:x.p,go:()=>{const m=pick(r,x.T,seedOf(r,"me",x.t));if(m)runM(r,m,x.T,x.t)}};if(x.off)o.off=x.off;return o});
+   let wh=null;try{wh=typeof pMe==="function"?pMe():null}catch(e){}DOOR.card(b.dataset.ddoor,b.dataset.ddh||"",rows,wh);return true}}
  const m=pick(r,L,seedOf(r,"me"));if(!m)return false;runM(r,m,L);return true}
 ONE.deckTap=deckTap;
 window.addEventListener("click",e=>{if(!ONE.on)return;const b=e.target.closest&&e.target.closest("#panel button[data-ddoor]");if(!b)return;try{const r=deckRow(b);if(r&&ONE.mode(r.k)==="keep")return}catch(x){}e.stopImmediatePropagation();e.preventDefault();if(b.disabled)return;
