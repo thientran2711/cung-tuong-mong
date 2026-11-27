@@ -24,7 +24,12 @@ function mcwTakeX(v,m){const vo=v&&typeof v==="object"?v:null;let need=2;try{nee
  return `nếu ${mcwNm(v)} bị tố tội mua chuộc người hầu (cần ${need} chứng; mỗi lần ${m&&m.name?m.name:"có người"} dò, tìm ra một chứng: ${word(mcwFindO(vo,m))}) thì ngươi bị đuổi khỏi cung; có người nắm chứng thì ngươi nghe phong thanh trước`}
 /* (a) the BUY card tail (her as the buyer): the same charge from her side */
 function mcwBuyX(s){let need=2;try{need=chNeed(S,"mc")}catch(e){}return `kèm: nếu ngươi bị tố tội mua chuộc người hầu (cần ${need} chứng) thì bị phạt bổng ${BAL.charge.fine} lượng, ${s&&s.name?s.name:"kẻ ấy"} bị đuổi khỏi cung`}
-(function(){if(typeof cnvSpyX!=="function")return;const x0=cnvSpyX;cnvSpyX=function(m,noPay,v){const r=x0.apply(this,arguments);return v?`${r}; ${mcwTakeX(v,m)}`:r}})();
+/* the one tai mắt terms text (was j42 cnvSpyX: «mỗi tháng Bạc +8 · kèm: …» — a «kèm» note sits behind «!» on the kit card, so the take card showed only
+   «Được Bạc»; stills 27/11). Both dangers now stand in the card's own «Mất» row: the master's watch (srvWatch) and the jcharge road (v given).
+   noPay (cnvBlackOpts obey): the danger text alone, the caller prints «mất: » before it. */
+(function(){if(typeof cnvSpyX!=="function")return;cnvSpyX=function(m,noPay,v){const P=BAL.ag.why.srv.pun;
+ const watch=`mỗi tháng chủ phát hiện: ${chanceW(nv(m,"spyFind"))}, khi ấy bị đánh chết: ${chanceW(npwShare(["kill","lau"],k=>srvPunW(m,k),"kill"))}, không thì Tân Giả khố ${P.lauWk} tuần`;
+ const d=v?`${watch}; ${mcwTakeX(v,m)}`:watch;return noPay?d:`mỗi tháng Bạc +${P.spyPay} · mất: ${d}`}})();
 /* is the servant player the tai mắt of t */
 function mcwMine(t){return !!(t&&S&&!S.dead&&typeof isSrv==="function"&&isSrv()&&S.srv&&S.srv.spyFor!=null&&String(S.srv.spyFor)===String(t.id))}
 /* (b) the warning beat, once per new piece held on her buyer */
