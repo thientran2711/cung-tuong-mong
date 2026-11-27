@@ -24,7 +24,12 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  let pi=info.pi;for(let k=0;k<4&&!(pi>=0&&await p.locator(`#tokens button.tok[data-p="${pi}"]`).count());k++){pi=await p.evaluate(()=>{const m=srvM();let i=S.visit.people.findIndex(x=>x.sk==="mis");if(i<0){S.visit.people.unshift({kind:"srv",sk:"mis",ref:m,name:m.name,ini:m.name.split(" ").pop()[0],col:RCOL[rkOf(m)],info:"chủ nhân của ngươi"});i=0;render()}return i});await sleep(800)}
  let tapped=false;for(let k=0;k<5&&!tapped;k++){tapped=await tapAt(p.locator('#tokens button.tok',{hasText:info.m}).first());if(!tapped){await p.evaluate(()=>{const m=srvM();S.where[m.id]=palaceOf(m);S.place='home';S.visit=srvVisitOf('home');Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;render()});await sleep(1200)}}
  await sleep(1500);await p.screenshot({path:path.join(OUT,`${LBL}-${SZ}-2-talk.png`)});
- const opt=p.getByText('Xin chủ cho đi hầu',{exact:false}).last();const seen=await opt.count();let locked=null,res=null;
+ /* LIVE act-merge (jdoor5 s_xin): the ask sits in the «Xin chủ» door on the «Ban thưởng» tab of the person view → tap the tab, the door, then its row
+    (review/door-onetap shows the members as buttons at once; LIVE 17f23656 holds a door card opened inside the person view: jdayq dqPull bug, fixed there) */
+ {const vis=()=>p.evaluate(()=>[...document.querySelectorAll('button')].some(b=>b.offsetParent&&/Xin chủ cho đi hầu/.test((b.getAttribute('aria-label')||'')+' '+b.textContent)));
+  if(!(await vis())){const tb=p.locator('.kfoc-tabs > *',{hasText:/Ban thưởng/}).first();if(await tb.count()){await tapAt(tb);await sleep(900)}}
+  if(!(await vis())){const d=p.locator('.kfoc-b:visible',{hasText:/^\s*Xin chủ\s*$/}).first();const d2=p.locator('.kfoc-b[aria-label^="Xin chủ ·"]:visible').first();if(await d2.count()){await tapAt(d2);await sleep(1800)}else if(await d.count()){await tapAt(d);await sleep(1800)}}}
+ const opt=p.locator('button:visible',{hasText:/Xin chủ cho đi hầu/}).last();const seen=await opt.count();let locked=null,res=null;
  if(seen){await opt.scrollIntoViewIfNeeded().catch(()=>{});await sleep(600);
   locked=await opt.evaluate(e=>{let x=e;for(let i=0;i<6&&x;i++){const f=getComputedStyle(x).filter||'';if(/grayscale|saturate\(0/.test(f)||x.matches('[disabled],.off,.lock,.locked,.kdim,[aria-disabled=true]'))return true;x=x.parentElement}return false}).catch(()=>null);const _old=()=>opt.evaluate(e=>{let x=e;for(let i=0;i<6&&x;i++){if(x.disabled||x.classList.contains('off')||x.classList.contains('lock')||x.getAttribute('aria-disabled')==='true')return true;x=x.parentElement}return false});
   await p.screenshot({path:path.join(OUT,`${LBL}-${SZ}-3-option.png`)});
