@@ -24,7 +24,7 @@ function giftEval(e,t){const pre=`tốn: ${BAL.time.cost.give} khắc`;
  const g=giftVal(Object.assign({k:e.k},it),t);
  if(t==="emp")return{ok:true,x:`${pre} · thành: ${sgStat(Math.max(1,Math.round(g/2)))}`,v:g};
  if(t==="th")return{ok:true,x:`${pre} · thành: Thái hậu quý ngươi +${g}`,v:g};
- let x=`${pre} · thành: nàng quý ngươi +${g+3}${t.queen?` · Hoàng hậu với ngươi +${g}`:""}`;
+ let x=`${pre} · thành: nàng quý ngươi +${g+BAL.eff.j8.giftRelPlus}${t.queen?` · Hoàng hậu với ngươi +${g}`:""}`;
  if(e.t){/* previews: giveTo */const sp=typeof oSee==="function"?oSee(t,true):30;x+=` · kèm: nàng phát hiện đồ có vấn đề, nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ, quý ngươi ${balSg(BAL.eff.j8.giveTo)}: ${chanceW(sp)}`/* a side chance (the roll giveTo uses): chanceW, never a ladder word */}
  if(it.sl&&it.rk>rkOf(t))x+=" · kèm: vượt phẩm của nàng";return{ok:true,x,v:g}}
 /* the right-hand item panel */

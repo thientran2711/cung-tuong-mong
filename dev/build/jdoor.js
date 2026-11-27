@@ -74,7 +74,7 @@ window.doorOpen=doorOpen;
    The kit hint (kitHint, read-only) of the way itself; when that says «chẳng được gì / không được mất gì», the hint of its full line; when that too says
    nothing gained but the way's OWN line shows a real gain (doorGain: the card's green «Được»), that gain leads the hint and the kit's «nhưng …» part stays.
    Before: the talk-door rows had no hint → the kit read their marks line → «chẳng được gì» for Nương theo, Rỉ tai, Nghe ngóng chung, Phạt vô cớ, Đổi người. */
-function doorHint(a,x){if(a&&a.hint)return a.hint;return lv=>{const NO=/^(chẳng được gì|không được mất gì)/;
+function doorHint(a,x){/* E-GAIN3-LIVE (E-GAIN3c-RV 6): no `a.hint` short-circuit — a way's own hint goes through the gate below (DOOR.rowHint → DOOR.hintGain) like every row */return lv=>{const NO=/^(chẳng được gì|không được mất gì)/;
   /* 1. the E-GAIN3b-FIX gate (DOOR.rowHint: the row's own line first; the way's own hint only when it names a REAL gain — never a need text, a tip, a stat she pays) */
   let h0="";try{h0=typeof DOOR==="object"&&DOOR.rowHint?DOOR.rowHint(a,x,lv):kitHint({x,o:a.o,c:a.c},null,lv).hint}catch(e){}if(h0&&!NO.test(h0))return h0;
   /* 2. nothing gained by the kit's reading, but the way's OWN line shows a green gain (doorGain = the card's «Được»): that gain leads */

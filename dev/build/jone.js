@@ -134,7 +134,7 @@ function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>t
   const why0=(T[0]&&T[0].why)||"chưa làm được";
   /* E-GAIN3-LIVE law 3: a row that IS one member carries that member's price + «Gợi ý» (jdoor doorHint, the J2 / talk door rows' own rule): the dialog
      kit reads its Được from the hint; with the line alone a deck row («Nghỉ ngơi một lát · nhẹ») read «chẳng được gì; nhưng Sức −» */
-  let c,hint;if(m&&x===String(m.x||"")&&x){c=m.a?m.a.c:m.c;hint=m.hint||(m.a&&typeof doorHint==="function"?doorHint(m.a,x):undefined)}
+  let c,hint;if(m&&x===String(m.x||"")&&x){c=m.a?m.a.c:m.c;hint=typeof doorHint==="function"?doorHint(m.a||{n:m.n,x:m.x,c:m.c,o:m.o},x):undefined/* every row through the gate (E-GAIN3c-RV 6) */}
   rows.push({t,m,T,n,x:x||(m?"chọn rồi xem kết quả ở bước sau":`chưa làm được: ${txt(why0)}`),c,hint,off:m?null:{why:why0}})}return rows}
 ONE.tierRows=tierRows;
 /* perf: one paint asks the same person + door many times (render → dfActs → card); the members list is kept for that paint only (state stamp) */
