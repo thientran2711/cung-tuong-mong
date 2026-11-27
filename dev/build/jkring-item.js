@@ -42,6 +42,8 @@ function kriIp(){return document.documentElement.classList.contains("kv2")}
 .kri-gr{display:inline-block;padding:0 6px;border-radius:6px;background:#fffaf0;color:var(--gc);font-weight:700;text-shadow:none;margin-right:4px}
 .kri-name small{font-size:.78rem;color:#fff3dc;text-shadow:0 1px 2px #000a}
 .kri-hint{position:absolute;z-index:46;left:50%;transform:translateX(-50%);font-size:.8rem;color:#fff3dc;text-shadow:0 1px 2px #000a;pointer-events:none;white-space:nowrap}
+/* K-RING-SUBLINE (KK62): the hint is the LAST child of the name block — it follows the real text height by layout, never by a measured top (a JS top missed late height changes: Fold cover Dâng quà front 11, 11 px over). min-height = the old +58 px floor + the hint line */
+.kri-name{min-height:76px}.kri-name>.kri-hint{position:static;transform:none;margin-top:auto;padding-top:4px}
 .kri-big{position:absolute;z-index:50;left:0;top:0;transform-origin:50% 50%;will-change:transform,opacity;pointer-events:none}
 .kri-glow{position:absolute;z-index:49;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(255,226,150,.9),rgba(255,226,150,.35) 45%,rgba(255,226,150,0) 70%);will-change:opacity,transform;opacity:0}
 .kri-pane{position:absolute;z-index:55;display:flex;flex-direction:column;gap:8px;min-height:0;will-change:transform,opacity}
@@ -91,7 +93,7 @@ function kriBuild(R,bloom){const g=R.geo();R.items=kriItems(R);if(R.ring)R.ring.
  const ab=R.ip?46:42,ay=g.cy-ab/2;R.arL=mk("‹",`left:${Math.max(6,g.cx-g.Rx-g.tw*.55-ab)}px;top:${ay}px;width:${ab}px;height:${ab}px;min-height:${ab}px`,()=>kriTurnBy(R,-1),"Quay trái");
  R.arR=mk("›",`left:${Math.min(R.w-ab-6,g.cx+g.Rx+g.tw*.55)}px;top:${ay}px;width:${ab}px;height:${ab}px;min-height:${ab}px`,()=>kriTurnBy(R,1),"Quay phải");
  const nm=document.createElement("div");nm.className="kri-name";nm.style.top=(g.cy+g.tw*.95)+"px";R.L.appendChild(nm);R.nameEl=nm;
- const hi=document.createElement("div");hi.className="kri-hint";hi.style.top=(g.cy+g.tw*.95+58)+"px";hi.textContent="Vuốt để xoay · chạm món sáng để xem";R.L.appendChild(hi);R.hint=hi;
+ const hi=document.createElement("div");hi.className="kri-hint";hi.textContent="Vuốt để xoay · chạm món sáng để xem";nm.appendChild(hi);R.hint=hi;
  kriPlace(R);
  if(bloom&&!kriCalm()){const N=R.tiles.length;R.tiles.forEach((t,i)=>{const fin=t.style.transform,op=t.style.opacity;t.animate([{transform:`translate(${-g.tw/2}px,${-g.tw*.6}px) scale(.1)`,opacity:0},{transform:fin,opacity:op}],{duration:KIT_RINGI.openMs,delay:i*KIT_RINGI.stagger,easing:"cubic-bezier(.2,1.25,.4,1)"})});
   [R.arL,R.arR,nm,hi].forEach(b=>b.animate([{opacity:0},{opacity:1}],{duration:260,delay:280,fill:"backwards"}))}}
@@ -102,7 +104,9 @@ function kriPlace(R){const N=R.tiles.length;if(!N)return;const g=R.geo();let fi=
  if(R.nameEl&&R.__nf!==fi){R.__nf=fi;const it=R.items[fi];const G=typeof KIT_GRADE!=="undefined"?KIT_GRADE[Math.max(0,Math.min(4,it.grade|0))]:null;
   R.nameEl.innerHTML=`<b>${kriE(it.name)}</b><small>${G&&G.n?`<span class="kri-gr" style="--gc:${G.c||"#888"}">${kriE(G.n)}</span> `:""}${kriE(it.sub||"")}</small>`;
   /* K-RING-SUBLINE (KK61): the hint goes under the name block's REAL height (a sub line that wraps to 2–3 lines on Fold overlapped the fixed +58 px hint) */
-  if(R.hint){const t0=parseFloat(R.nameEl.style.top)||0;R.hint.style.top=Math.max(t0+58,t0+R.nameEl.offsetHeight+6)+"px"}}}
+  kriHintAt(R)}}
+/* K-RING-SUBLINE (KK61 → KK62): the name block is refilled on every front change; the hint goes back in as its last child (layout keeps it under the text) */
+function kriHintAt(R){try{if(R.hint&&R.nameEl&&R.hint.parentNode!==R.nameEl||R.hint&&R.nameEl&&R.nameEl.lastChild!==R.hint)R.nameEl.appendChild(R.hint)}catch(e){}}
 /* ---------- spin: swipe with inertia, ‹ ›, tap a side item, tap the bright item ---------- */
 function kriBand(R){const L=R.L;let x0=0,y0=0,last=0,lt=0,drag=0,moved=0;
  const step=()=>{const g=R.geo(),N=Math.max(3,Math.min(KRING_MATH.seats,R.tiles.length));return g.Rx*2*Math.PI/N*.75};
@@ -204,9 +208,9 @@ function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kip
  if(KRI_DLG===m){M.classList.add("kri-hide");return}KRI_DLG=m;
  /* the ring lists EVERY piece of the chest (kipList: all options, doable first), not only the cards of the drawn page (law 6c: no item vanishes) */
  const ops=()=>M.querySelector(".opts")||M;const bt=i=>ops().querySelector(`:scope>.opt[data-m="${i}"]`);
- const L=kipList(m).map(x=>[x[0],x[1]]);M.classList.add("kri-hide");
+ const L=kipList(m).map(x=>[x[0],x[1],x[2]]);M.classList.add("kri-hide");
  const verb=(typeof KIP_VERB!=="undefined"&&KIP_VERB[m.pid])||"Chọn";let V=m.pp&&m.pp.v;try{if(V!=null&&typeof V!=="object")V=(typeof byKey==="function"&&byKey(V))||liveRivals(true).find(x=>x.id===V)||null}catch(e){V=null}
- const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?V.name:""):m.pid==="giftto"?((M.querySelector(".kptitle")||{}).textContent||""):"";
+ const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?V.name:""):m.pid==="giftto"?(m.pp&&m.pp.t==="emp"?"Hoàng thượng":m.pp&&m.pp.t==="th"?"Thái hậu":""):"";/* KK62 (RV-176 §7 c): Dâng quà names the receiver from its own pp.t (jgift «Dâng quà lên Hoàng thượng / Thái hậu»), never the dialog title («Dâng cho Dâng quà») */
  const why=(c,i)=>{const b=bt(i);if(c.kgwhy)return c.kgwhy;if(b)return b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):kipLocked(c)?"Thiếu bạc":"";
   /* a card not drawn (another page): the same reason j3 gives it when drawn (c.off from kitOff / kitOffBac) */
   const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;if(poor&&!c.off&&typeof kitOffBac==="function")kitOffBac(c,-c.fx.bac);
@@ -215,8 +219,9 @@ function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kip
   /* the same words the drawn card shows: its unmet Cần row first (j63 kr-why), then bạc / lock = «Thiếu bạc» (as the drawn path above) */
   const n=Array.isArray(c.need)&&c.need.find(n=>n&&!n.ok);if(n&&n.t)return n.t;if(k==="bac"||k==="lock")return c.off&&c.off.why||"Thiếu bạc";
   return /^(off|time|none|need)$/.test(k)?"Chưa được":k};
- kitRingItem.open({key:"gift:"+m.pid,title:(M.querySelector(".kptitle")||{}).textContent||verb,sub:who?`${verb} cho ${kriE(who)}`:"",bg:kriBg(),
-  items:()=>L.filter(([c])=>S.inv[c.ik]).map(([c,i])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);return{id:i,src:I.src,name:I.name,grade:I.grade,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}}),
+ kitRingItem.open({key:"gift:"+m.pid,title:(M.querySelector(".kptitle")||{}).textContent||verb,sub:who?`${verb} ${m.pid==="plantpick"?"của":"cho"} ${kriE(who)}`:""/* KK62: «Cài vào rương của <người>» (planting goes INTO her chest), every other verb «… cho <người>»; no name known = no line (never the dialog title) */,bg:kriBg(),
+  /* K-RING-QTY (KK61/KK62, law 6c): a stacked tile shows its ×N — the count kipList gives that tile (jgpick inv-stack: real pieces + her stack, the same count the grid tile shows) */
+  items:()=>L.filter(([c])=>S.inv[c.ik]).map(([c,i,q])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);return{id:i,src:I.src,name:I.name,grade:I.grade,qty:q||1,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}}),
   /* info = the item's kit detail + the option's own kit card (odds · Tốn · Được · Mất · Kèm) — the same display copy as the old grid detail (kipDetail) */
   info:it=>{try{kipSelect(M,m,it.i);const d=M.querySelector(".kipd");if(d){const c=d.cloneNode(true);c.querySelectorAll(".kipgo").forEach(x=>x.remove());c.classList.remove("kipd");return c.innerHTML}}catch(e){}return""},
   acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{let b=bt(it.i);if(!b){kipSelect(M,m,it.i);b=bt(it.i)}/* not on the drawn page → draw it (the real dialog path), then click the real option */if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark();window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
