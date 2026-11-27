@@ -61,7 +61,7 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Việc cung nữ làm hộ (chọn đồ ra mắt, review/small-bugs-4) | gọi tên cung nữ, nói rõ cái gì quyết định: "<tên> chọn giúp (có hợp ý hay không tùy thiện cảm của <tên> với ngươi: Chắc)"; bất kỳ "thiện cảm" nào cũng phải nói của ai với ai | "theo lòng nàng" (nàng là ai?), "Lòng" |
 | Món đang mang, mọi câu (review/small-bugs-4) | **Đang mặc** / "Ngươi đang mặc." cho trâm, áo, vòng, mọi món | Đang cài, Đang đeo, Đang dùng, "Ngươi đang cài" (cả trong câu) |
 | Tên kẻ hầu | không trùng trong cả cung, không có số ("Thúy 2") | tên kèm số |
-| Số đo (Sắc, Tài, Sủng…) | gọi đúng tên; khi chung chung: "không đổi gì" | chỉ số, stat, điểm |
+| Số đo (Sắc, Tài, Sủng…) và lời tăng / giảm (owner OD 26/11 ~18:50Z (7); WORDING-GAIN) | gọi đúng tên; khi chung chung: "không đổi gì". Một chỉ số đổi mà màn không hiện số → TÊN + dấu: «Sủng +», «Danh −−», «Đức +++», «<Tên>: oán +», «Chủ tin −», «Lòng −», «Sức −−», «Bạc −»; một dấu = chút, hai = vừa, ba = nhiều (mất: − −− −−−); màn đã hiện số thì giữ số («Danh −2»). Ngưỡng dấu theo BAL.mk (jbal.js: số ≤ ⌊lớn×lo⌋ một dấu, ≥ lớn×hi ba dấu, giữa hai dấu; `lớn` = cỡ một lần đổi của chỉ số ấy). Hàng «không …» giữ nguyên («không thêm thù»). Dòng «Gợi ý» (kitHint) cũng chỉ ghi tên + dấu. Quét toàn game: `node dev/test/wording-gain-scan.js` = 0 dòng mơ hồ còn lại (luật ở dev/test/wording-gain-rules.js) | chỉ số, stat, điểm; «thêm thể diện», «để mắt hơn / thêm», «được tiếng hiền đức», «có lợi cho con», «tiếng sút / tiếng tăm sứt mẻ», «bớt tin», «hao sức», «bạc vơi», «thêm oán», «tăng chút», «thêm phần», «tốt hơn» (khi nói một chỉ số) |
 | Điểm thi (tuyển tú, thi tài) | phần: "nàng mất 2 phần" | điểm |
 | Bậc may rủi (CHỈ cơ may thành/hỏng của chính việc làm: một chữ ở góc thẻ / cạnh lựa chọn) | Mong manh / Hiểm / Khó lường / Tùy duyên / Có cơ / Vững / Rất vững. TRẦN (sếp 17/11): không việc may rủi nào chắc chắn — cao nhất là Rất vững (BAL.odds.hi); việc xưa nay "chắc ăn" nay ghi Rất vững và hỏng thì hỏng nhẹ ("hỏng: chỉ uổng công, không mất gì khác", j63 kitSoftW). Việc không phải may rủi (đi lại, mua theo giá, mở bảng, quyết định trong sự kiện) không ghi chữ | %, Chắc chắn, random |
 | Khả năng của một điều kèm theo (có thai, được ban thưởng, lật thẻ, bị lộ, bị phạt, chết… trong Được / Mất / Kèm, thẻ kết quả, Sổ ghi, lời dặn, ô trạng thái) | Rất thấp / Thấp / Vừa / Cao / Rất cao (không có thì "Không có"); trong dòng: "có thai: khả năng thấp · được ban thưởng: khả năng vừa"; ô: "Có thai: Thấp"; sổ ghi: "(khả năng: vừa)". Hàm `chanceW` / `chanceLvl` (j1) | "có thai: Mong manh", "được ban thưởng: Hiểm", "cơ may: …" cho điều kèm theo |
@@ -183,6 +183,10 @@ Giữ rõ luật (mục 4): con số, bậc may rủi, Tốn/Thành/Bại/Kèm k
 | (cung nữ, chủ là Thường tại) “Nương nương nghỉ sớm đi.” | “Tiểu chủ nghỉ sớm đi.” · lúc lo lắng: “Chủ tử, người phải giữ sức.” |
 | (Hoàng thượng, Sủng thấp) “Quý nhân hôm nay khác hẳn mọi ngày, trẫm suýt không nhận ra.” | “Nàng hôm nay khác hẳn.” (Sủng cao: “Ái phi hôm nay khác hẳn.”) |
 | (phi tần Thường tại nói với Phi) “Ta không dám.” | “Tần thiếp không dám, Phi nương nương.” |
+
+### 2.7 Lựa chọn không có cơ hội nhưng đổi kết cục (sếp 26/11 ~18:25Z)
+- Chữ cơ hội (Mong manh … Rất vững) chỉ hiện trên lựa chọn thật sự có tung cơ hội, và luôn là chữ đúng; không bao giờ đổi chữ để cảnh báo.
+- Lựa chọn không tung cơ hội mà đổi kết cục / đời nàng (xuất giá, đi tu / xuất gia, tự vẫn, rời cung, chuyển kiếp, «Cúi đầu chờ xét» …): KHÔNG có chữ cơ hội; trên danh sách lựa chọn có MỘT dòng nhỏ: «Cẩn thận khi lựa chọn» (kit §6.2k, `KIT_WARN_LINE`). Các dòng Tốn / Được / Mất vẫn hiện đủ.
 
 ## 3. Không có trên màn hình
 
