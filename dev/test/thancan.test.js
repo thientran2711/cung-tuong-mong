@@ -15,7 +15,7 @@
 const {chromium}=require('playwright');const path=require('path');
 const [,,F,L0]=process.argv;const LIVES=+L0||2;
 (async()=>{const b=await chromium.launch();const fails=[];const notes=[];
-for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(u=>/^https?:/.test(u.href),r=>r.abort());
  await p.addInitScript(s=>{let x=s;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648}},seed);
  await p.goto('file://'+path.resolve(F),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

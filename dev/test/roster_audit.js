@@ -116,7 +116,7 @@ const HOOK2=`(function(){const A=window.__aud;const bad=(k,m)=>{A.err[k]++;if(A.
  /* (i) every misunderstanding is written with its rumour and source */
  {const o=j95bSeed;j95bSeed=function(){const r=o.apply(this,arguments);try{if(r){A.rumChk++;const L=(S.roster&&S.roster.acts)||[];const e=L.slice().reverse().find(x=>x.k==="misbelief"&&x.id==="v"+r.y);if(S.roster&&(!e||!/tin đồn:/.test(e.why)||!/nguồn:/.test(e.why)))bad("i","hiểu lầm không ghi tin đồn/nguồn: "+r.y)}}catch(e){}return r}}
 })();`;
-(async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const ctx=await b.newContext({viewport:{width:390,height:844}});const page=await ctx.newPage();
+(async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const ctx=await b.newContext({viewport:{width:390,height:844}});const page=await ctx.newPage();await require('./lib/veil').guard(page);
  await page.route(u=>!/^file:/.test(String(u)),r=>r.abort());await page.route(/\.(webp|png|jpg|mp3|ogg)$/,r=>r.abort());
  const errs=[];page.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await page.goto('file://'+GAME,{waitUntil:'domcontentloaded'});await page.waitForTimeout(500);

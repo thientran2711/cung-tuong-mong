@@ -1,6 +1,6 @@
 /* j82 x j71: the festival contest path (mgRun7 -> startContest -> onDone -> j71 standings). usage: node dev/test/minigames-j71.js <baseURL> <outdir> */
 const {chromium}=require('./lib/pw-roulette');const [,,BASE,OUT]=process.argv;
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:904,height:2316},hasTouch:true,isMobile:true});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:904,height:2316},hasTouch:true,isMobile:true});const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();setTimeout(()=>{Q.length=0;document.getElementById('modal').hidden=true},50)});await p.waitForTimeout(800);
  await require('./lib/roulette').dismissRoulette(p);
