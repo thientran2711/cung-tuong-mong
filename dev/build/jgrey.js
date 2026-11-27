@@ -22,7 +22,7 @@ function kitTam(standin){return standin?`<span class="ktam" role="note" title="T
       black-and-white is reserved for the DEAD (.kst-dead: the WHOLE portrait incl. its frame, owner ~05:59Z; lãnh cung = image only, frame keeps its colours, owner ~05:53Z). Set by jdead.js from f.st ('lc' | 'dead') on the two portrait renderers (mdH → .md, pcPort → .pcp) AND by kstPaint on every full-body figure (stage tokens, #mefig, img.kesimg, .kszfs>img: the --kst var sits in each figure's filter chain next to --klf),
       so every place a person is drawn (Hậu cung strip + card, men, relation rows, panels) shows the same state. Values are the look, not game numbers. */
 (function(){const st=document.createElement("style");st.textContent=`
-.kst-lc{--kst:saturate(.6) contrast(.92) brightness(1.06)}
+.kst-lc{--kst:saturate(.85) contrast(.97) brightness(1.03)}
 .kst-dead{--kst:grayscale(1) brightness(.92)}
 /* status band of a kit portrait (Ở lãnh cung / Đã khuất) sits INSIDE the picture, above the tassel: it covered the relation rows under the portrait (MAIN LOOK 172) */
 .pcp.kit>.pcs{bottom:31%;left:14%;right:14%;border-radius:4px}
