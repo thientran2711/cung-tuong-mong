@@ -1,0 +1,50 @@
+FREEZE STACK buổi 691 renderer 1073 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (366 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1067 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1106 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1061 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (366 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1091 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1038 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1049 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1059 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1065 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1059 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+STATUS R2-skilled-2 · buổi 691 · year 5 · rank 0 · bugs 5 · stuck 0 · dead buttons 0
+FREEZE STACK buổi 691 renderer 1100 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1087 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (366 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1093 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1097 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1073 MB: queueCard @:68709:26
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1088 MB: queueCard @:68709:26
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1067 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1070 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1083 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1048 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+STATUS R2-skilled-2 · buổi 691 · year 5 · rank 0 · bugs 5 · stuck 0 · dead buttons 0
+FREEZE STACK buổi 691 renderer 1052 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1108 MB: (anon) @:46529:75
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1137 MB: (anon) @:46529:75
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 691 renderer 1092 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (366 s, area 0, sens)
