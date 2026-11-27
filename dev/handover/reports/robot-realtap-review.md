@@ -495,3 +495,42 @@ realtap true, exitPick none, build 3c8aded052bf in all; 0 «Chuyển kiếp» ta
 ## HANDOVER — BIG REVIEWER #17, 27/11 ~05:45Z
 - Verdict: PASS robot-realtap-lc27 605c596a (one verdict 38cf2208..605c596a). Ready for the coordinator (test files only, ancestor 38cf2208 = lc27-em).
 - Recipe reuse: /home/user/wt/rr17-out/{run1.sh,run2.sh (P=),sum.py} (lines «name|wt|env|args|tmo»), lc27 build /home/user/wt/rr17-live :8917.
+
+## REVIEW robot-realtap-lc27 605c596a..7561ffe6 — BIG #18 (for F ROOT #3 session_01UV1SzkcxS44fsNiWVm2QoE), 27/11
+PRIORITY #1 CHECK: OD robot real-tap rules 25/11 (dev/handover/briefs/F-robot-2511.md) | review/robot-realtap-lc27 605c596a PASS (BIG #17, above) | rv-165 Info 2 + MAIN 171 order 03:52Z (crawler drives 1/80 on ring UI) | FIXER #17 READY 7561ffe6 (PROGRESS «JOB 2») | review/ring-build-rv165 02b19b2a (KK35 crawler line, jkhand / jkpick / jselxsc) | claims: BIG REVIEWER #18 = this job.
+KIT CHECK: n/a (harness only, no UI part touched).
+### VERDICT: FAIL review/robot-realtap-lc27 7561ffe6 (3 blocking items F1–F3; the ROOT and the ring walk itself are right)
+Tip vs 605c596a: 3 files (dev/test/button-crawl.js, dev/tools/quickcheck.d/README.md, PROGRESS). Ring test copy = tip crawler 3-way merged with ring-build's crawler (git merge-file, base lc27-em 38cf2208): clean, KK35 line kept; control = 605c596a crawler merged the same way. Game = /home/user/wt/r18-rb (02b19b2a index.html); lc27 regression = /home/user/wt/r18-lc (38cf2208). Logs /home/user/wt/r18-out/<run>/log.txt + crawl-all.json (not in git). 2 browsers at a time.
+### (1) STATIC
+- Added lines: 0 `.click(` / dispatchEvent / `.focus(` / keyboard / mouse.click / touchscreen.tap (the one «.click()» hit is a comment). press() = two calls of realtap tap() (elementFromPoint hit-check, then pointer tap) — card, then its ✓ / «Chọn» chip.
+- Game calls are SETUP ONLY, never an answer: nlAccept wrapper (BAL.selx.days=1 only while window.__bcNoSelx is set during START home setup), startState.talk rgFire('c2a') + talk:1 + showModal / start() = OPENS the talk frame; every line, plaque and «Chọn» after that is a real tap. 25/11 real-tap rule kept.
+- node --check clean · robot-lint «LINT OK 0» (default set) and «LINT OK 0 finding(s) in button-crawl.js» · rt-bare-unit «RT-BARE-UNIT OK 20/20».
+### (2) OWN RUNS (--fast, ring-build-rv165 02b19b2a)
+| run | taps | home | selx | talk | gate | time |
+|---|---|---|---|---|---|---|
+| control 605c596a Fold | 0 | 0 (SKIP 32 «gone») | — | — | GATE PASS (vacuous) | 20 s |
+| control 605c596a iPad | 3 | 3 | — | — | GATE PASS (vacuous) | 45 s |
+| tip Fold | 118 | 80 PASS | 27 PASS · 1 FAIL soft · 3 SKIP | 10 PASS | GATE PASS | 365 s |
+| tip iPad run 1 | 37 | **0 (SKIP 34 «button gone before its tap»)** | 26 PASS · 1 FAIL soft · 3 SKIP | 10 PASS | **GATE PASS (home vacuous)** | 121 s |
+| tip iPad run 2 (home only) | 80 | 80 PASS (21 SKIP, 11 hard restores) | — | — | GATE PASS | 338 s |
+| tip Fold run 2 (home only) | 80 | 80 PASS | — | — | GATE PASS | 348 s |
+Before→after confirmed on Fold (0 → 118). selx: card «Ngày thứ nhất», 19–20 kitScene talk lines, Dưỡng Tú viện, Tiền sảnh hand 3 cards (2 lift + 1 lift+✓), Đông sở hand; talk: 6 stage lines + 3 thẻ gỗ plaques (2 lift + 1 lift+«Chọn»). Every tap went through realtap's elementFromPoint check (DEAD 0).
+Regression lc27-em tree (tip crawler alone): Fold 81 taps, home 80 PASS, selx 1 SKIP «no selection-day screen», talk 1 card PASS, GATE PASS, 287 s · iPad same, 80 PASS, 284 s.
+### (3) RISK SIDE — blocking
+- **F1 FALSE PASS on «choose» (brief question: yes).** Mutation (scratch copy only, /home/user/wt/r18-mut: kitHandChoose = no-op, so the hand ✓ does nothing), Fold --start selx: «Tập qua loa…» lift+✓ «PASS · lift+chip: next» THREE times on the same Tiền sảnh hand, 29 PASS · 0 FAIL, GATE PASS. Cause: the row compares post with the sig taken BEFORE the lift; sig holds [aria-pressed=true] + page text, so the lift alone (klift, aria-pressed, khplate text) counts as «next». Same code in the BFS row (pre before press()). Fix: take a sig right after the lift (just before the chip tap); PASS only if post ≠ that mid sig AND the lift is gone (no .klift / .kpk-up) or the frame changed; else FAIL «✓/«Chọn» does nothing». The selx loop guard also missed the 3 identical rounds (key holds card labels that change) — after the fix they FAIL anyway.
+- **F2 «the next card moves the lift» is not checked.** __bc.lifted(null,k) / chip(k) look for ANY lifted card / ANY chip on the page, not the card just tapped; a card whose tap does nothing while an earlier card stays lifted gives «lifts, its chip shows» PASS. Seen live: the «Ra Dư đồ» row reads «lifted true» while that tap opened the map (the lift seen is the old «Làm quen» card). Fix: re-find the tapped card (key/label) after the tap and require IT to carry .klift / .kpk-up (and no other card).
+- **F3 vacuous PASS still possible (RV-165 lesson).** iPad tip run 1: home 0 taps, 34 SKIP «button gone before its tap», GATE PASS (run 2: 80). Fix: the gate FAILs (or reruns START home once) when home taps < a floor (e.g. 40) or «gone» SKIPs > half the home list; print the reason. Needed on Fold too (the gate is Fold-only and RV-165's 1/80 was Fold).
+- kit-ring-oldleft: not run here (no crawler change touches it); the README «run alone» note is fine.
+### (4) GATE BUDGET (for MAIN)
+--fast now ≈ 6 min Fold on ring-build (365 s; home alone 348 s with 2 browsers) and ≈ 4.8 min on lc27 (287 s; BIG #17 measured 160 s for the same home crawl) — the 700 ms re-check after every restore + the late-popup waits cost ~2 min even without ring UI. quickcheck.sh says «budget 5–10 min» for the whole check and 90-button-crawl.sh's header still says «~3.5 min»: the crawler alone now eats most of it. MAIN: allow ~7 min for 90-button-crawl, or ask the fixer to skip the 700 ms re-check when no late frame was ever seen.
+### (5) GAME FINDING — CONFIRMED (cause found), one part REJECTED
+- CONFIRMED, Fold + iPad: Đông sở hand, «Làm quen với một vị tú nữ» lifted, one real tap on resting card «Ra Dư đồ» → frame closes, Dư đồ opens at once (no lift, no ✓). Shots (scratch, not in git): /home/user/wt/r18-out/tipF/shots/fold-selx-107.jpg, /home/user/wt/r18-out/tipI/shots/ipad-selx-59.jpg.
+- ROOT: ring-build dev/build/jselxsc.js:177 document CAPTURE click listener on «#modal button[data-m]» whose opt has selxMap → preventDefault + stopImmediatePropagation + selxMapOpen() on ANY tap; jselxsc is assembled before jkhand (assemble.py order), so it runs before the two-tap gate jkhand.js:107 → «Ra Dư đồ» is a one-tap card dressed as a hand card. Fix (ring-build owner, whole family law 11): either the selxMap opt renders as a plain .kbare/.kcard row (not a hand card) or that listener acts only on the ✓ / detail 0 path like every hand card; scan every opt with its own capture listener inside a hand.
+- REJECTED: «the second card's tap chose the wrong option». The result card «Học quy củ — Ta ngồi nghỉ ở góc sảnh, Sức +5 / Mất: Giáo tập ma ma không vừa ý» is the EARLIER Tiền sảnh deed «Tập qua loa, để sức cho ngày mai» (jselxday.js:85 SELX_LES), shown late over the map — not a deed from Đông sở.
+### NOTES (not blocking)
+- N1: robot-rt still has no kitHand / kitPick press (FIXER #17 «NOT DONE») — a ring-build life meets the same two-tap cards; port press() (with F1/F2 fixed) when ring-build lands.
+- N2: control iPad: ring-build's own crawler drives 3 taps → RV-165's blind spot is on both devices.
+
+## HANDOVER — BIG REVIEWER #18, 27/11
+- Verdict: FAIL robot-realtap-lc27 7561ffe6 (F1 false PASS on choose, F2 lift not per card, F3 vacuous home still possible). Game finding confirmed with root (jselxsc.js:177 before jkhand gate); «wrong option» part rejected.
+- Recipe reuse: /home/user/wt/r18-out/{run.sh (name wt dev [args]; env GAME=, BC=), sum.py}, ring game /home/user/wt/r18-rb, lc27 /home/user/wt/r18-lc, mutation copy /home/user/wt/r18-mut.
