@@ -25,8 +25,15 @@ const tapAt=async(p,loc)=>{const bx=await loc.boundingBox({timeout:8000}).catch(
   await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;tab="act";render()});await sleep(800)}
  await p.screenshot({path:OUT+'/1b-stage.png'});
  
- await tapTxt(p,'#tokens .tok.fig',hm.m);await sleep(1200);if(!(await p.evaluate(()=>[...document.querySelectorAll('button')].some(b=>b.offsetParent&&/Nhờ giúp đỡ/.test(((b.getAttribute('aria-label')||'')+b.textContent).normalize('NFC'))))))await tapTxt(p,'#tokens .tok.fig',hm.m);await sleep(1500);await p.screenshot({path:OUT+'/2-talk.png'});
- const opt=p.locator('button.kfoc-b[aria-label^="Nhờ giúp đỡ"]:visible').first();await opt.scrollIntoViewIfNeeded().catch(()=>{});await sleep(600);await p.screenshot({path:OUT+'/3-card.png'});
+ await tapTxt(p,'#tokens .tok.fig',hm.m);await sleep(1200);if(!(await p.evaluate(()=>[...document.querySelectorAll('button')].some(b=>b.offsetParent&&/Nhờ giúp đỡ|Giao hảo/.test(((b.getAttribute('aria-label')||'')+b.textContent).normalize('NFC'))))))await tapTxt(p,'#tokens .tok.fig',hm.m);await sleep(1500);await p.screenshot({path:OUT+'/2-talk.png'});
+ /* LIVE act-merge (jdoor): «Nhờ giúp đỡ» sits in the «Giao hảo» door → tap the door, then its row on the door card */
+ const hasBtn=()=>p.evaluate(()=>[...document.querySelectorAll('button')].some(b=>b.offsetParent&&/^\s*Nhờ giúp đỡ/.test(((b.getAttribute('aria-label')||'')+' '+b.textContent).normalize('NFC').trim())));
+ if(!(await hasBtn())){const d=await tapTxt(p,'button','^\\s*Giao hảo');await sleep(1800);
+  /* LIVE 17f23656 bug (not this branch): jdayq dqPull takes back a door card opened inside the person view (Q keeps it, #modal hidden, never repainted);
+     review/door-onetap e84dfbc1 fixes it («focus steps back, card painted»). Until it lands, the held card is painted here the way that fix does */
+  const held=await p.evaluate(()=>{const M=document.getElementById('modal');const h=Q.length&&Q[0].pid==='door'&&M.hidden;if(h){DQ.user=(DQ.user||0)+1;try{showModal()}finally{DQ.user--}}return h});
+  console.log(JSON.stringify({door:d,heldByLiveBug:held}));await sleep(1500);await p.screenshot({path:OUT+'/2b-door.png'})}
+ const opt=p.locator('button:visible',{hasText:/Nhờ giúp đỡ/}).first();await opt.scrollIntoViewIfNeeded().catch(()=>{});await sleep(600);await p.screenshot({path:OUT+'/3-card.png'});
  const ok1=await tapTxt(p,'button','Nhờ giúp đỡ');await sleep(2500);console.log(JSON.stringify({tapped:ok1,bac:await p.evaluate(()=>S.bac)}));await p.screenshot({path:OUT+'/4-result.png'});
  await tapTxt(p,'button','✕');await sleep(1000);/* close the talk with a tap */
  for(let i=0;i<6&&await tapTxt(p,'button','^\\s*Tiếp');i++)await sleep(900);/* a chat line that follows (jchat) is tapped through */
