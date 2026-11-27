@@ -593,3 +593,42 @@ Family scan (tests whose life setup skips the accept and then reads Q / modal / 
 LIVE moved again to 98c77517 (ob-verdict-3: jverdict/jkitpage): merge-tree = index.html + sw.js only (built) → lander restacks; no source conflict.
 ### Gain vs risk
 GAIN: save stack lands on today's LIVE with mg-trim and kptitle-close kept; every core gate PASS. RISKS: (1) hand merge of jlooks/jslap lost a side — hiếm, vừa; both sides checked in the built page by the merge check + mg-trim.js + probe (generator remade clean) → an independent hunk check is planned by Foreman B. (2) the harness accept hides a ☰ path only seen while the identity card is open — hiếm, nhỏ; that path resumes the card, the right screen. (3) LIVE moved (98c77517) — built-only, lander rebuilds. → **Được lớn hơn**.
+
+## MERGE rv24 (merger opus, session_01N1tNP5uYBZmKPzMdYHkuQN, for Foreman B ROOT 2 child 5; brief b-save-stack-rv24-merge.md)
+PRIORITY #1 CHECK ('save-fix-stack'): OD 0 | ledger 0 | claims B save stack (B) | main 611fca61 | review/* rv7–rv23 | reused every test of the stack + the LIVE tests of the branches whose files conflicted (dialog-order-r4, kk54, ring-build, KK35); no new game code.
+**review/save-fix-stack-rv24 = merge of LIVE 611fca61 (BUNDLE 1 r4) into rv23 15bd0e29** (merge 06043184 + build line ab1e4205 + scan rows 06062f15).
+### Source hunks (all conflicts, both sides kept)
+| file | stack side (rv23) | LIVE side (611fca61) | resolution |
+|---|---|---|---|
+| dev/build/assemble.py module list | + jstack.js after jplrule.js | + jkpick.js (after jfocus), jkhand/jkstage/jkmapban (after jplrule), jkring/jkring-item (before jverdict) | UNION by script, LIVE order kept, jstack keeps its neighbour: … jdayq, jplrule, **jstack**, jkhand, jkstage, jkmapban, jbalsp … jcharge, jkring, jkring-item, jverdict (no duplicate; set = both lists) |
+| dev/build/j3.js pushModal | `function pushModal(m){Q.push(m);return m}` (save-unseen-lists r4: a registered generator returns the card) | `function pushModal(m){Q.push(m);}` + DIALOG-ORDER r2 window-capture tap hook (dqTap, registered before every other module) | stack's pushModal (returns m; callers ignoring the value unchanged) + LIVE's dqTap hook block verbatim below it |
+| dev/test/button-crawl.js home start | accept «Thân phận kiếp này» as a player (`nlAccept(false)`) + end a tú nữ life's selection days (`S.selx2.days=0;done=1`) | KK35: `nlAccept(true);save();` + «Điều mới trong cung» marked seen (`ctm-notes-seen`) | rv23 accept-as-player + selx end kept, then LIVE's `save()` + notes-seen mark; one comment explains both |
+| index.html / sw.js | built | built | rebuilt (dev/site/build_site.sh); assets.json = LIVE |
+Auto-merged files touched by both sides (checked: no overlapping hunks): j42, jdh, jkc3, jkcg, jnotice, jrcv, jveil, KIT_REQUESTS.md, look-dedupe.js.
+### Scan rows for LIVE code (LAW 11: the save scans must know every new save wrapper / code card)
+- time-advance-save-scan: NEW gate row «jdayq parked cards» (jdayq.js:188, LIVE DIALOG-ORDER r2: while her tap has cards set aside the save writes them too; always calls the save below it, Q restored in finally). Mutation (wrapper returns without the inner save) → scan FAIL ✔.
+- unseen-lists-scan census: KIT row jkitpage kitPgHand («Mẫu kit · Bàn bài / Đối thoại», dev kit sample page) → UNCLASSIFIED 1 → 0.
+### Gates on rv24 06062f15 (merge of LIVE 611fca61) — paste
+| gate | command | result |
+|---|---|---|
+| inv-stack-scan | `python3 dev/test/inv-stack-scan.py` | RAW sites 0 · listed 8 |
+| census | `node dev/measure/unseen-lists-scan.js` | UNCLASSIFIED 0 · UNSEEN-LISTS SCAN PASS (33 lists) |
+| time-advance | `node dev/measure/time-advance-save-scan.js` | PASS (10 paths, 12 gates); mutant jdayq wrapper → FAIL ✔ |
+| SUL | `SUL_FCS=1 node dev/test/save-unseen-lists.js index.html fold,ipadAir 1` | SAVE-UNSEEN PASS 24/24 |
+| look-dedupe ×2 | `node dev/test/look-dedupe.js index.html` (Fold + iPad) | LOOK-DEDUPE PASS ×2 |
+| probe | `node dev/test/save-residue-probe.js index.html fold 1 40` / `… ipadAir 1 40` | SAVE-RESIDUE PASS ×2 (families 0, page errors 0; 21 / 26 generator cards remade clean) |
+| death | `node dev/test/save-death-rebirth.js index.html fold,ipadAir` | PASS |
+| notice | `node dev/test/notice-late-save.js index.html` | PASS Fold + iPad |
+| knsell + mutLazy | `node dev/test/knsell-remake.js index.html mutLazy.html` (mutLazy = index.html without the knSellLive S-store cleanup) | PASS 16 cards, S touched 0 · mutLazy **FAIL** ✔ (S touched 25) |
+| kit tests of LIVE KK54 / ring-build (assemble.py hunk) | kit-pick, kit-plaque-confirm, kit-plaque-post, kit-evres, kit-goal-link, kit-chip-mood (755x1000,1180x820), kit-ring-wire, kit-ring-probe, kit-ring-scan | all PASS / no FAIL line; ring-scan OLD 7 = LIVE (stack touches no pager call) |
+| LIVE dialog-order-r4 tests (j3.js hunk) | dayq-order · dayq-ghost · own-flow-hold-scan 755/1180 | PASS · PASS all · PASS 5 rows (2 not opened, Tư trang gift locator) both devices |
+| dayq-hold | `node dev/test/dayq-hold.js <base> index.html <out>` | FAIL 2 (N2 next-tap, Fold + iPad) = **identical on LIVE 611fca61 same run** (pre-existing) |
+| dialog-order-held-probe / next-probe | `<base> index.html W H <out>` | TimeoutError: #kdaytc day-title cover intercepts the token tap = **identical on LIVE 611fca61** (stale probe, pre-existing). NB: these probes need the BUILT index.html (dev/index.html raw has no charset wrapper → boot timeout) |
+| button-crawl | `node dev/test/button-crawl.js --fast --game index.html` | FAIL 1 ×2: «Tin báo: 1 tin mới · Để sau» close did not close = LIVE KK54 two-step pick (first tap lifts the card, ✓ confirms); deterministic check (same notice with a go, one tap «Để sau») gives **the same state on LIVE 611fca61 and rv24** {dlg 1, lifted 1}. Only lives that hold a notice with an action hit it (LIVE page + rv24 test crawl without a notice: PASS 80/80). Follow-up for the crawler owner: tap the ✓ of a lifted kitPick card |
+| coop-e2e SWAP0 (local Worker) | `node dev/test/coop-e2e.js <out> http://127.0.0.1:8799` | hangs after 28 ok at the first buổiBoth (timeout 1500 s) = **identical on LIVE 611fca61** (own tree, same run) → pre-existing on BUNDLE 1 |
+| quickcheck ALONE | — | NOT RUN to the end: stopped when LIVE moved to 5cee92bb (rv24 no longer on the newest LIVE) |
+### HANDOVER (rolled at ctx ≈ 24 % with START ≈ 4 %; a 2nd LIVE merge + full gates do not fit)
+- PUSHED: review/save-fix-stack-rv24 **06062f1557de3e84fbe174456858c9bccbdbf059** (= rv23 + LIVE 611fca61, gated above). NOT SSK: LIVE is now **5cee92bb** (lc29-ui f28d28b9 + lc30-kg82).
+- NEXT (successor): merge origin/main 5cee92bb into rv24 06062f15 → review/save-fix-stack-rv25. `git merge-tree` = SOURCE conflicts **dev/build/assemble.py, j6.js, jgift.js, jgpick.js, dev/kit/KIT_REQUESTS.md** (+ index.html/sw.js). Keep both sides, list hunks in «## MERGE rv25»; re-run the scans first (new LIVE save wrappers / code cards need rows), then the gate table above + quickcheck ALONE; run LIVE's own tests of the branches behind j6/jgift/jgpick (lc29-ui: door-onetap/act-move jgift, ob-m3ui-sololh j6, …).
+- Then Foreman B's extra job: review/save-pid-cards-rv6 = merge rv25 into review/save-pid-cards-rv5 4e27a588 (on rv23: merge-tree with rv24 = index.html/sw.js only), rebuild, save-pid-cards Fold then iPad (ONE device per process), save-evc-onscreen, SUL, look-dedupe, quickcheck ALONE; report both SSK lines.
+- Tips: serve the repo root (`python3 -m http.server`) for dialog-order / dayq probes and pass index.html; coop-e2e needs `npm install` in coop/worker + `npx wrangler dev --local --port 8799`; a LIVE A/B tree needs `python3 dev/build/assemble.py` first (dev/index.html is not in git). Worktrees: /home/user/wt/rv24, /home/user/wt/live611 (remove when done).
