@@ -163,8 +163,8 @@ PEND.re=pp=>{try{if(!reOn())return null;const k=pp.k,c=pp.c;const R=reS();
   :`<p>${mine?"Thư nhà mang về một tin dữ: phụ thân ngươi":`Người của ngươi báo về: ${nm}`} đang ngầm điều binh, thế lực đã lấn cả ngai vàng${pr?`; họ định tôn ${prN}`:""}.</p><p>Nếu không ai ngăn, chỉ vài tháng nữa cửa cung sẽ mở trong đêm.</p>`;
  const o=[opt("Giữ mình, không nói vào",0,"triều cục tự định"),
   opt(k==="phe"?"Mật tấu với Hoàng thượng":"Mật báo cấm quân",-1,`${k==="phe"?"sớ phế lập":"binh biến"} khó thành · <span class="r">${mine?"phụ thân giận":`${nm} thành kẻ thù`}</span>`),
-  opt(k==="phe"?`Ngầm tiếp tay ${nm} bằng bạc`:`Ngầm mở đường cho ${nm} bằng bạc`,1,`${k==="phe"?"sớ phế lập":"binh biến"} dễ thành, ${mine?"phụ thân":nm} đứng sau ngươi · <span class="r">nếu hỏng: ${fmt({sung:-P.lose,danh:-P.lose})}</span>`),
-  opt(k==="phe"?`Đứng ra làm chứng cho ${nm}`:`Đích thân đưa tin cho ${nm}`,2,`${k==="phe"?"sớ phế lập":"binh biến"} dễ thành, ${mine?"phụ thân":nm} đứng sau ngươi · <span class="r">nếu hỏng: ${fmt({sung:-P.lose,danh:-P.lose})}</span>`)];
+  /* Nặng help = ONE road (law 2, owner OD 27/11 ~00:46Z: same-result options merged): paid in Bạc t3.bac when she has it, else in Sủng t3.stat (the matching road) */
+  opt(k==="phe"?`Ngầm tiếp tay ${nm}`:`Ngầm mở đường cho ${nm}`,(S.bac||0)>=P.t3.bac?1:2,`${k==="phe"?"sớ phế lập":"binh biến"} dễ thành, ${mine?"phụ thân":nm} đứng sau ngươi · <span class="r">nếu hỏng: ${fmt({sung:-P.lose,danh:-P.lose})}</span>`)];
  let who=null;try{who=pMin(h)}catch(e){}return{t,o,who:who||pEmp()}}catch(e){console.error(e);return null}};
 function card(k,c){const d=mkP("re",{k,c});if(!d)return false;Q.push({t:k==="abd"?"Triều cục · Sớ xin nhường ngôi":k==="phe"?"Triều cục · Sớ phế lập":"Triều cục · Mưu biến",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,headArt:REART[k]});try{evBusyMark()}catch(e){}return true}
 window.reDbg={reMonth,abdGain,amb,prince,heir,reY,grip,F,card,end,fall,road,roadFx,npcPick,npcRoads};
