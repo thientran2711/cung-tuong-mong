@@ -3,7 +3,7 @@
        claims she knows; (b) the help chapter's end logs a «Phụ tuyến» line «nhờ ngươi …» / «vì ngươi bán đứng …» and the news carries it;
    (c) finale reward BAL.nroad.fin (rank tier; the test changes BAL and sees the change) on a won closing chapter after help; nothing on a loss,
        nothing after a betrayal; (d) strike-back: no carrier → never known and stops after sb.mo months; her Tai mắt / the rival's slip →
-       oán + BAL.nroad.sb.oan exactly (hostility toward her rises); (e) Mệnh truyện «Phụ tuyến» sub-tab = kit skill cards (kskill) + kit rows;
+       oán + BAL.nroad.sb.oan exactly (hostility toward her rises); (e) Mệnh truyện «Phụ tuyến» sub-tab = kit chapter slides (kitSlide, kslide) + kit rows;
    (f) old save (nr without hp, no S.nrpt) loads and plays a month; __nrhpoff / co-op guest → no record; no page errors.
    usage: node dev/test/nroadhp-unit.js <url> */
 const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.0.1:8731/index.html';
@@ -38,7 +38,7 @@ const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.
   roll=()=>false;for(let m=0;m<BAL.nroad.sb.mo+3;m++){S.turn++;nhSbMonth()}roll=roll0;
   ok(sb.k===0&&sb.m===BAL.nroad.sb.mo&&oan(v,S)===o0,`no carrier → never known, checks stop at sb.mo=${BAL.nroad.sb.mo} (m=${sb.m}), oán unchanged`);
   /* her Tai mắt carries it; ONE CORE: sb.oan from BAL */
-  x=help('nr_thu',2);sb=v.nr.sb;BAL.nroad.sb.oan=13;const o1=oan(v,S),h1=hostility(v,S);roll=()=>true;S.turn++;S.logs.length=0;nhSbMonth();roll=roll0;
+  x=help('nr_thu',2);sb=v.nr.sb;BAL.nroad.sb.oan=13;const o1=oan(v,S),h1=hostility(v,S);roll=()=>true;S.turn++;S.logs.length=0;/* exact pre-pace number: stat pace off for this check only (as night-multi / cold-faction; stat-pace.js covers the pace) */const sp0=typeof BAL.stp==='object'?BAL.stp.on:null;if(sp0!=null)BAL.stp.on=0;try{nhSbMonth()}finally{if(sp0!=null)BAL.stp.on=sp0}roll=roll0;
   const exp=Math.min(100,Math.round(o1+13*persF(v,'slight',1)));ok(sb.k===1&&sb.by==='eye'&&Math.abs(oan(v,S)-exp)<=1,`Tai mắt → known, oán +BAL.nroad.sb.oan × her nết (persF slight) (${o1}→${oan(v,S)}, expected ${exp})`);ok(hostility(v,S)>h1,'hostility toward her rises (her agent deeds aim at her, jagent agSpite)');
   ok(logs().some(l=>/ghi hận ngươi/.test(l)&&/mách cho/.test(l)),'strike-back line names the rival and the grudge');reset();
   /* the rival lets it slip (she dislikes the player); Tai mắt off */
@@ -52,7 +52,7 @@ const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.
   S.danh=30;S.rank=4;F=fin(0,true);ok(F.d.includes(9),`rank tier read from fin.rk (rank 4 → ${F.d})`);
   S.danh=30;F=fin(0,false);ok(F.x&&!F.f&&!F.d.includes(9)&&F.db===0,'lost finale → nothing');S.danh=30;F=fin(2,true);ok(!F.f&&!F.d.includes(9)&&F.db===0,'won finale after betrayal → nothing');reset();
   /* (e) Mệnh truyện */
-  KTSUB.story='pt';const H=ktStoryHTML();ok(/data-ktsv="pt"/.test(H)&&/kskill/.test(H)&&H.includes(v.name)&&/Phụ tuyến · «/.test(H),'Mệnh truyện «Phụ tuyến» tab = kit skill cards with the person');
+  KTSUB.story='pt';const H=ktStoryHTML();ok(/data-ktsv="pt"/.test(H)&&/class="kslide/.test(H)&&H.includes(v.name)&&/Phụ tuyến · «/.test(H),'Mệnh truyện «Phụ tuyến» tab = kit chapter slides (kitSlide §21c, owner #29: every chapter place) with the person');
   ok(!/%/.test(H.replace(/<[^>]+>/g,'')),'no % in the list');ok(/krow|kr |pcrow|krl/.test(H),'kit rows under the card');
   KTSUB.story='now';const H2=ktStoryHTML();ok(/data-ktsv="pt"/.test(H2)&&!/Phụ tuyến · «/.test(H2),'other sub-tab shows the tab, not the list');
   /* (a2) round 2 — TWO-WAY / EQUAL VALUE: a betrayal is help to the rival told (w): record sign 2 on w's road, w's next chapter + BAL.nroad.help,
