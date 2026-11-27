@@ -5,6 +5,7 @@
    prints one line per finding:  FAIL <dev> <scene> <Xnn> <what>   and a table «rule | count» + «KIT-STD-SCAN FAIL n / PASS».  Exit 1 on any FAIL unless REPORT_ONLY.
    A finding is per element (selector + text excerpt) so KK54 / RV-166 can fix the part, not the screen. Shots (outdir) never go in git. */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
 const SRC=path.resolve(process.argv[2]||'index.html'),OUT=process.argv[3]||'';
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 const ONLY=(process.env.ONLY||'tabs,pick,ring,result,notice,nav,person,hand').split(',');
@@ -101,7 +102,7 @@ const SCAN=function(rootSel){
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);
  if(OUT)fs.mkdirSync(OUT,{recursive:true});const all=[];const per={};const log=(dev,scene,f)=>{if(RULES&&!RULES.has(f.id))return;const k=dev+'|'+scene+'|'+f.id+'|'+f.sel+'|'+f.msg;if(per[k])return;per[k]=1;all.push({dev,scene,...f});console.log(`FAIL ${dev} ${scene} ${f.id} ${f.sel} — ${f.msg}`)};
  const probes=[];
- for(const [W,H] of SZ){const dev=W<H?'fold':'ipad';const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});
+ for(const [W,H] of SZ){const dev=W<H?'fold':'ipad';const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await keepNotesSeen(ctx);
   await ctx.addInitScript(()=>{window.__bot=1;let s=777;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
   const p=await ctx.newPage();p.setDefaultTimeout(180000);const errs=[];p.on('pageerror',e=>{if(!/Unexpected token '<'/.test(String(e)))errs.push(String(e).slice(0,160))});
