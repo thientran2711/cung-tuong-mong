@@ -114,7 +114,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
   const sl=past.map(x=>{let im=art;try{if(x.a&&typeof stArtOf==="function")im=stArtOf(x.a,null,null)||art}catch(e){}return{kicker:`Chương ${x.n}`,title:msName67(x),sub:x.tag,img:im,body:rows67([["Kết cục",`<b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]]),toc:["done",`Chương ${x.n} · ${msName67(x)}`,x.tag]}});
   if(cur){cur.toc=["now",`Chương ${cur.kicker.replace(/^Chương /,"")} · ${cur.title}`,"đang làm"];sl.push(cur)}
   h+=`<div class="ktop"><span class="kchip n" data-chap="1">${ktEsc(Q0.t)}</span>${F?` <span class="kchip n" data-chap="1">Chương ${F.n}/${F.max} · ${ktEsc(F.part)}</span>`:""}${(()=>{const T=ktChapToc(),k=T?T.filter(x=>x[0]==="next").length:nx;return k?` <span class="kchip n" data-chap="1">còn ${F||T?"":"khoảng "}${k} chương</span>`:""})()}</div>`+
-   (sl.length?kitSlide("story-now",sl,{cur:sl.length-1,tocAll:ktChapToc(),tocMore:nx?[["next",`Còn ${F?"":"khoảng "}${nx} chương nữa`,"chưa tới"]]:[]}):card)}
+   (sl.length?kitSlide("story-now",sl,{cur:sl.length-1,tocTitle:"Mục lục chương",tocAll:ktChapToc(),tocMore:nx?[["next",`Còn ${F?"":"khoảng "}${nx} chương nữa`,"chưa tới"]]:[]}):card)}
  else if(sub.cur==="rank"){
   if(S.rank>=7)h+=kitEmpty("Ta là Hoàng hậu, không còn bậc để lên",["Đưa con mình lên ngôi để thành Hoàng thái hậu."],{topic:"Sắc phong"});
   else if(S.out)h+=kitEmpty("Ta đang ở lãnh cung, chưa bàn chuyện sắc phong",[`Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).`],{topic:"Sắc phong"});
@@ -125,7 +125,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
  else{const R=[];
   past.forEach(x=>{let im=art;try{if(x.a&&typeof stArtOf==="function")im=stArtOf(x.a,null,null)||art}catch(e){}R.push({kicker:`Chương ${x.n}`,title:msName67(x),sub:x.tag,img:im,body:rows67([["Kết cục",`<b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]]),toc:["done",`Chương ${x.n} · ${msName67(x)}`,x.tag]})});
   rare.forEach(x=>{const tt=ARC67[x.a]?ARC67[x.a].t:x.a;R.push({kicker:"Kết cục hiếm",title:tt,sub:x.tag,img:art,body:rows67([["Kết cục",x.ti&&x.ti!==x.tag?`${x.tag} · danh hiệu «${x.ti}»`:x.tag]]),toc:["done",`✦ ${tt}`,x.tag]})});
-  h+=R.length?kitSlide("story-past",R,{cur:R.length-1,tocAll:ktChapToc()}):kitEmpty("Ta chưa qua chương nào",["Mỗi chương khép lại sẽ ghi vào đây."],{topic:"Mệnh truyện"})}
+  h+=R.length?kitSlide("story-past",R,{cur:R.length-1,tocTitle:"Mục lục chương",tocAll:ktChapToc()}):kitEmpty("Ta chưa qua chương nào",["Mỗi chương khép lại sẽ ghi vào đây."],{topic:"Mệnh truyện"})}
  return h}
 KIT_GLOSS["Ngôi Hoàng hậu"]="";
 (function(){const t=()=>{try{KIT_GLOSS["Ngôi Hoàng hậu"]=`Ngôi Hoàng hậu cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và Đức ${hhNeed(S).duc} (mẹ Thái tử: ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh). Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ mới được chọn. ${typeof promoRuleTxt==="function"?promoRuleTxt():""}`}catch(e){}};
