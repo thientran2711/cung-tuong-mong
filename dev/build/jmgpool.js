@@ -75,6 +75,10 @@ function mgpOne(kind,used,filt){let L=mgpItems(kind);if(!L.length)return null;if
 /* skins (mgskin:<kind>:<skin>): the painted skins per kind arrive from Foreman C («FOR MAIN 113 MGSKIN <kind> keys») as plain ids in MGP_SKIN; no skin = "" = today's art */
 const MGP_SKIN={};
 /* ORDER THIN P1b (skin lane, kit part MG-SKIN review/kit-mgskin): the choice = today's art ("default") + every skin registered for the kind (kitMgSkinAdd) + ids listed in MGP_SKIN; fresh-first through the memory; "" = today's art */
-function mgpSkin(kind){const reg=typeof kitMgSkinList==="function"?kitMgSkinList(kind).map(s=>s.id).filter(Boolean):[],L=(MGP_SKIN[kind]||[]).concat(reg.filter(x=>(MGP_SKIN[kind]||[]).indexOf(x)<0));if(!L.length)return"";
- try{const A=["default"].concat(L),p=typeof nrDraw==="function"?nrDraw("mgskin:"+kind,typeof nrFresh==="function"?nrFresh("mgskin:"+kind,A):A):A[0];return p&&p!=="default"?p:""}catch(e){return""}}
-Object.assign(window,{mgpItems,mgpOne,mgpRng,mgpSkin,MGP_SKIN});
+/* a SEASONAL skin (xuan · ha · thu · dong) is eligible only in ITS season: the board shows the month she is in (RV-171 FAIL, law 6: snow board in Tháng ba); a non-seasonal skin id stays eligible always */
+const MGP_SEA={"Xuân":"xuan","Hạ":"ha","Thu":"thu","Đông":"dong"};
+function mgpSeaId(){try{return MGP_SEA[SEASON[S.month-1]]||""}catch(e){return""}}
+function mgpSkin(kind){const sea=Object.values(MGP_SEA),cur=mgpSeaId(),reg=(typeof kitMgSkinList==="function"?kitMgSkinList(kind).map(s=>s.id).filter(Boolean):[]).filter(x=>sea.indexOf(x)<0||x===cur),L=(MGP_SKIN[kind]||[]).concat(reg.filter(x=>(MGP_SKIN[kind]||[]).indexOf(x)<0));if(!L.length)return"";
+ try{const A=["default"].concat(L),F0=typeof nrFresh==="function"?nrFresh("mgskin:"+kind,A):A,F1=typeof nrNow==="function"?F0.filter(x=>!nrNow("mgskin:"+kind,x)):F0,F=F1.length?F1:F0,/* same two-step fresh-first as mgpOne: not seen by a past life, and not yet shown this life; the weights of nrDraw take over when none is left */
+  p=typeof nrDraw==="function"?nrDraw("mgskin:"+kind,F):F[0];return p&&p!=="default"?p:""}catch(e){return""}}
+Object.assign(window,{mgpItems,mgpOne,mgpRng,mgpSkin,mgpSeaId,MGP_SKIN});
