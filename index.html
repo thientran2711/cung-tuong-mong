@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"cbb72843","t":"2026-11-27T17:58Z","c":"Oán ghen lên chậm và có chừng; sáu tài có trần mềm; Hoàng thượng có thể nhường ngôi, bị phế hay bị lật đổ; thư nhà, quà nhà vào sổ đồ; việc…","b":"5432f052f875","h":[{"s":"b16b4b93+","t":"2026-11-27T03:24Z","c":"Bớt minigame: điểm trang một lần bấm theo Dung (còn nút «Tự tay điểm trang»); tát và né thành một lần gieo; «Học nhanh» lên Tùy duyên; chăm…"},{"s":"540358c4+","t":"2026-11-27T00:21Z","c":"Thẻ kết kiếp ghi đúng phẩm cao nhất nàng từng giữ: tú nữ bị ban hoa ghi «Tú nữ», cung nữ chưa được nâng ghi chức cung nữ cao nhất, tiểu thư…"},{"s":"539603bf+","t":"2026-11-26T21:29Z","c":"Thẻ đầu đời: lựa chọn có may rủi ghi rõ khả năng bằng lời; lựa chọn đổi cả đời ghi «Cẩn thận khi lựa chọn»."},{"s":"8d5e3382+","t":"2026-11-26T18:38Z","c":"Sửa lỗi game đứng hình ở các khung lựa chọn dài (thẻ lựa chọn và chữ «Kéo xuống»)."},{"s":"f573dc94+","t":"2026-11-26T17:33Z","c":"Nguy hiểm chung: mỗi người kèm lý do và cách giảm oán (làm lành, nhờ bề trên che chở, phòng bị)."},{"s":"03e9c9d2","t":"2026-11-26T14:23Z","c":"Gộp nút trùng: cả game còn 85 nút thay 157; bấm một nút mở khung chọn cách làm, giá, khắc và kết quả giữ nguyên."},{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."}]};
+window.CTM_BI={"s":"5db35c03+","t":"2026-11-27T22:47Z","c":"Oán ghen lên chậm và có chừng; sáu tài có trần mềm; Hoàng thượng có thể nhường ngôi, bị phế hay bị lật đổ; thư nhà, quà nhà vào sổ đồ; việc…","b":"58a21c12c784","h":[]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2112,8 +2112,8 @@ ev("pact",()=>qOn()&&liveRivals(false).length,()=>{const X=rvWhy("meAlly");retur
    reach BAL.ag.know.tm.vol.min) — he chose to come; she decides. No nameless "Tai mắt ${balSg(BAL.eff.j7.matGo)}". */
 ev("eunuch",()=>typeof tmVol==="function"&&!!tmVol(),()=>{const s=tmVol();return{sid:s.sid,o:od(BAL.odb.j7.odO_4+S.tamco/3)}},p=>{const s=servById(p.sid),o=s&&ownerOf(s);if(!s||!o||o===S||s.spyFor!=null)return null;const B=BAL.ag.know.tm.vol.bac;return{
  t:`${s.name}, ${s.role==="eunuch"?"thái giám":"cung nữ"} hầu cung ${o.name}, quỳ ngoài thềm: “${s.role==="eunuch"?"Nô tài":"Nô tỳ"} nguyện làm tai mắt cho `+kSay({srv:s.role==="eunuch"?"m":"f"},S,"{goi}")+".”",o:[
- {n:"Nhận làm tai mắt",fx:{bac:-B},x:`thành: ${s.name} làm tai mắt cho ngươi trong cung ${o.name}`,go:()=>{tmTake(S,s)}},
- {n:"Thử lòng trước",fx:{},x:`${word(agOdd(p.o))} · thành: ${s.name} làm tai mắt cho ngươi · bại: kẻ hai lòng, mang chuyện cung ngươi đi bán, Danh ${balSg(-BAL.ag.know.tm.vol.danh)}, ${o.name} biết chuyện, oán ngươi ${balSg(BAL.ag.know.tm.learn.oan)}`,go:()=>{if(roll(agOdd(p.o)))tmTake(S,s);else{apply({danh:-BAL.ag.know.tm.vol.danh});/* TAI-MAT-KNOW: he tells his master = that master LEARNS she tried */typeof spyLearn==="function"&&spyLearn(o,S);log(`<span class="r">${s.name} mang chuyện cung ngươi đi bán.</span>`)}}},
+ {n:"Nhận làm tai mắt",fx:{bac:-B},x:`thành: ${s.name} làm tai mắt cho ngươi trong cung ${o.name}${typeof mcwBuyX==="function"?" · "+mcwBuyX(s):""}`,go:()=>{tmTake(S,s)}},
+ {n:"Thử lòng trước",fx:{},x:`${word(agOdd(p.o))} · thành: ${s.name} làm tai mắt cho ngươi · bại: kẻ hai lòng, mang chuyện cung ngươi đi bán, Danh ${balSg(-BAL.ag.know.tm.vol.danh)}, ${o.name} biết chuyện, oán ngươi ${balSg(BAL.ag.know.tm.learn.oan)}${typeof mcwBuyX==="function"?" · "+mcwBuyX(s):""}`,go:()=>{if(roll(agOdd(p.o)))tmTake(S,s);else{apply({danh:-BAL.ag.know.tm.vol.danh});/* TAI-MAT-KNOW: he tells his master = that master LEARNS she tried */typeof spyLearn==="function"&&spyLearn(o,S);log(`<span class="r">${s.name} mang chuyện cung ngươi đi bán.</span>`)}}},
  {n:"Đuổi đi",fx:{duc:1}}]}});
 /* the Emperor */
 ev("empnight",()=>!S.preg&&S.sung>=BAL.visit.minSung,()=>({o:od(BAL.visit.show.o+bestArt().w*BAL.visit.show.w+mm())}),p=>({who:pEmp(),
@@ -4999,7 +4999,7 @@ function staffTabHTML(){const [cm,ce]=capOf(S),[nm,ne]=hhHas(S);
   if(e.t==="thh"){const s=e.s;return pcard({f:e.f,name:s.name,rank:`${srkName(s)} · Thái hậu`,lines:sinfo(s),chips:schip(s),groups:typeof elderGroups==="function"?elderGroups(s):[]})}
   const s=e.s,v=e.v;const known=s.lover&&(S.knowDT||[]).includes(s.sid);
   return pcard({f:e.f,name:s.name,rank:`${s.role==="maid"?"Cung nữ":"Thái giám"} · cung ${v.name}`,lines:sinfo(s),chips:schip(s),note:s.spyFor==="me"?"Người này đã là tai mắt của ngươi.":"",
-   groups:(s.eid&&typeof elderGroups==="function"?elderGroups(s):[]).concat(s.spyFor==="me"?[]:[["Mưu kế",[pbtn(`data-sv="mua" data-sid="${s.sid}"`,"Mua chuộc",`${word(bribeOdds(S,s))} · tốn: ${BAL.servK} khắc · thành: <span class="g">${s.name} thành tai mắt của ngươi</span>, Bạc -${nv(s,"bribeCost")} · hỏng: ${s.name} có thể mách chủ`/* ACT-MOVE-6 law 3: what success gives (bribeServ: spyFor = her); bạc paid on success only (jsgame sgPick serv) */,t2||(S.bac<nv(s,"bribeCost")?`cần ${nv(s,"bribeCost")} bạc`:"")),known?pbtn(`data-sv="doa" data-sid="${s.sid}"`,"Dọa tố đối thực",`${typeof tmOdds==="function"?word(tmOdds(S,s)+BAL.ag.know.tm.threat)+" · ":""}tốn: 2 khắc · thành: <span class="g">${s.name} sợ, thành tai mắt của ngươi</span> · kèm: ${s.name} oán ngươi · hỏng: ${s.name} không chịu, có thể bẩm lại với chủ`/* ACT-MOVE-6 law 3: what j10 threatServ gives (same odds) */,t2):""].concat(typeof mlHitBtns==="function"?mlHitBtns(s,v,t2):[])]])})};
+   groups:(s.eid&&typeof elderGroups==="function"?elderGroups(s):[]).concat(s.spyFor==="me"?[]:[["Mưu kế",[pbtn(`data-sv="mua" data-sid="${s.sid}"`,"Mua chuộc",`${word(bribeOdds(S,s))} · tốn: ${BAL.servK} khắc · thành: <span class="g">${s.name} thành tai mắt của ngươi</span>, Bạc -${nv(s,"bribeCost")} · hỏng: ${s.name} có thể mách chủ${typeof mcwBuyX==="function"?" · "+mcwBuyX(s):""}`/* ACT-MOVE-6 law 3: what success gives (bribeServ: spyFor = her); bạc paid on success only (jsgame sgPick serv) */,t2||(S.bac<nv(s,"bribeCost")?`cần ${nv(s,"bribeCost")} bạc`:"")),known?pbtn(`data-sv="doa" data-sid="${s.sid}"`,"Dọa tố đối thực",`${typeof tmOdds==="function"?word(tmOdds(S,s)+BAL.ag.know.tm.threat)+" · ":""}tốn: 2 khắc · thành: <span class="g">${s.name} sợ, thành tai mắt của ngươi</span> · kèm: ${s.name} oán ngươi · hỏng: ${s.name} không chịu, có thể bẩm lại với chủ`/* ACT-MOVE-6 law 3: what j10 threatServ gives (same odds) */,t2):""].concat(typeof mlHitBtns==="function"?mlHitBtns(s,v,t2):[])]])})};
  return `<div class="pgwrap">`+pager("staff",L,mk)+`</div>`}
 
 /* ---- people met in a place (stage pop) ---- */
@@ -5627,7 +5627,7 @@ const AP_MK={
  svAsk:o=>{const sv=o.who;return{ev:1,t:"Kẻ hầu xin",who:pServ(sv),h:`<p>${sv.name} quỳ xin: mẹ ở quê ốm nặng, xin chút bạc thuốc thang.</p>`,opts:[{n:`Cho ${BAL.cv.servAsk} lượng`,fx:{bac:-BAL.cv.servAsk},x:`thiện cảm ${balSg(spSee("rel",BAL.eff.j24.loyalGo))}`,go:()=>{sv.loyal=cl(sv.loyal+BAL.eff.j24.loyalGo,0,100)}},{n:"Từ chối",fx:{},x:`thành: giữ lại ${BAL.cv.servAsk} lượng bạc · thiện cảm -${balAb(BAL.eff.j24.loyalGo_2)}`,go:()=>{sv.loyal=cl(sv.loyal-BAL.eff.j24.loyalGo_2,0,100)}}]}},
  maidWarn:o=>{const v=o.tgt;kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`${S.maid.name} báo: nàng có ý hại ngươi (mức ${BANDS[bandVT(v,S)][1]})`,1);return{ev:1,t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} thì thầm: “Người bên cung ${v.name} dò hỏi giờ giấc của ${kSay({srv:"f"},S,"{goi}")}. E là có ý không lành.”</p><p>${kitParse(`thành: biết ${v.name} có ý hại ngươi, mức ${BANDS[bandVT(v,S)][1]}`)}</p>`}},
  manPoem:o=>{const m=o.who;return{ev:1,t:"Một ánh mắt",who:pMan(m),h:`<p>${m.name} đem lòng thương ngươi, lén gửi qua cung nữ một bài thơ chép tay.</p>`,opts:[{n:"Giữ bài thơ, đáp lại",fx:{},x:`hắn tình ý ${balSg(BAL.cv.glance.warm)} · bài thơ là tang vật nếu bị lục`,go:()=>{m.tinh+=BAL.cv.glance.warm;m.letters++}},{n:"Đốt đi, làm ngơ",fx:{duc:BAL.cv.duc},x:`không để lại tang vật · hắn tình ý ${balSg(BAL.cv.glance.cold)}`,go:()=>{m.tinh=Math.max(0,m.tinh+BAL.cv.glance.cold)}}]}},
- svDefect:o=>{const s=o.who,v=o.tgt;return{ev:1,t:"Có người đến",who:pServ(s),h:`<p>${s.name}, cung nữ bên cung ${v.name}, bất mãn với chủ, lén tìm đến xin theo ngươi.</p>`,opts:[{n:"Thu làm tai mắt",fx:{bac:-BAL.ag.know.tm.def.bac},x:"có tai mắt trong cung nàng",go:()=>{s.spyFor="me"}},{n:"Đuổi về",fx:{},x:"không dính líu"}]}}};
+ svDefect:o=>{const s=o.who,v=o.tgt;return{ev:1,t:"Có người đến",who:pServ(s),h:`<p>${s.name}, cung nữ bên cung ${v.name}, bất mãn với chủ, lén tìm đến xin theo ngươi.</p>`,opts:[{n:"Thu làm tai mắt",fx:{bac:-BAL.ag.know.tm.def.bac},x:`có tai mắt trong cung nàng${typeof mcwBuyX==="function"?" · "+mcwBuyX(s):""}`,go:()=>{s.spyFor="me"}},{n:"Đuổi về",fx:{},x:"không dính líu"}]}}};
 /* night-ledger-coop r4: every visitor card is carried as data (j3 rcpReg: kind + o with people as ids) and made again in the world it lands in */
 /* every visitor card: she is known by sight + name, and her arrival is a stage line by rank, then the visit as her act (owner 24/11 ~22:02Z/~22:08Z: never a flat «X sang thăm ta») */
 for(const k of AP_K){const f=AP_MK[k];AP_MK[k]=o=>{const m=f(o);try{const v=o&&o.who;if(m&&v&&typeof visitSeen==="function"&&(rivals||[]).includes(v)){visitSeen(v);if(m.t==="Có người đến"&&typeof m.h==="string"&&m.h.startsWith("<p>"+v.name+" "))m.h="<p>"+visitArrive(v)+"</p><p>"+k61Cap(grPron(v))+" "+m.h.slice(3+v.name.length+1)}}catch(e){}return m}}
@@ -8269,7 +8269,7 @@ function srvMonth(){let ev="";S.turn++;const rk=S.srv.rk;apply({bac:CNV_WAGE[rk]
   if(!amOn()&&S.srv.rk>=BAL.srvRk.dai&&S.age>=BAL.ageMin&&roll(BAL.odb.j42.rbSrvMonth+S.nt/25))/* AG3: no monthly dice while the loop is on (jagmaid) */pushDil(mkP("cnvName",{src:"month"}),"Hoàng thượng để mắt");
   else if(S.srv.rk>=BAL.srvRk.dai){const ob=npcWhy("srvBuy",{m},()=>roll(BAL.odb.j42.rlSrvBuy));const big=ob?ob.who:null;/* npc-purpose G2a: a higher consort who wants a skilled maid (or hates her mistress) buys her */if(big){ap(big,{bac:-40});srvReassign(`${big.name} ${ob.why}, bỏ bạc mua ngươi về cung mình.`,big)}}
   const mm2=srvM();const d=(mm2.schemes||0)-(S.srv.msch||0);S.srv.msch=mm2.schemes||0;if(d>0&&roll(BAL.odb.j42.rlSrvMonth)){S.srv.sec++;log(`Ngươi để ý thấy ${mm2.name} đang bày mưu hại người. (Biết chuyện của chủ: ${S.srv.sec})`)}
-  const wt=(S.srv.spyFor!=null||S.srv.betray)&&npcWhy("srvWatch",{m:mm2});/* npc-purpose G2a: she only finds out when she distrusts her maid and watches (low Chủ tin, a close nết); roll = does she find it */if(S.srv.spyFor!=null){const v=RV(S.srv.spyFor);if(!v||!v.alive||v.out)S.srv.spyFor=null;else{apply({bac:BAL.ag.why.srv.pun.spyPay});if(d>0)evA(v,mm2,BAL.eff.j42.evSrvMonth);
+  const wt=(S.srv.spyFor!=null||S.srv.betray)&&npcWhy("srvWatch",{m:mm2});/* npc-purpose G2a: she only finds out when she distrusts her maid and watches (low Chủ tin, a close nết); roll = does she find it */if(S.srv.spyFor!=null){const v=RV(S.srv.spyFor);if(!v||!v.alive||v.out)S.srv.spyFor=null;else{apply({bac:BAL.ag.why.srv.pun.spyPay});typeof mcwMonth==="function"&&mcwMonth(v)/* TMK-WARN: the warning beat (old saves, co-op) */;if(d>0)evA(v,mm2,BAL.eff.j42.evSrvMonth);
    if(wt&&roll(nv(mm2,"spyFind"))){S.srv.spyFor=null;/* TAI-MAT-KNOW: the master caught her maid = she LEARNS who bought her */typeof spyLearn==="function"&&spyLearn(mm2,v);if(npwPick(["kill","lau"],k=>srvPunW(mm2,k))==="kill"){die(`Bị ${mm2.name} phát hiện làm tai mắt cho ${v.name}, sai đánh chết`);return ev}srvLaundry(`${mm2.name} phát hiện ngươi làm tai mắt cho ${v.name}.`,BAL.ag.why.srv.pun.lauWk);S.tin=BAL.ag.why.srv.pun.tin}}}
   if(isSrv()&&S.srv.betray&&wt&&roll(nv(mm2,"betrayFind"))){S.srv.betray=null;if(npwPick(["kill","lau"],k=>srvPunW(mm2,k))==="kill"){die(`${mm2.name} biết ngươi phản chủ, sai người dìm ngươi xuống giếng sau Ngự hoa viên`);return ev}srvLaundry(`${mm2.name} biết ngươi mật báo chuyện của nàng.`,BAL.ag.why.srv.pun.betrayWk);S.tin=BAL.ag.why.srv.pun.tin}
   if(isSrv()&&!S.srv.lau&&S.srv.rk>=BAL.srvRk.dai&&S.age>=BAL.ageMin&&S.danh>=BAL.danhG.srvWed&&npcWhy("srvWed",{m:mm2},()=>roll(BAL.odb.j42.rbSrvMonth_2+S.danh/15)))/* npc-purpose G2a: a mistress who trusts her marries her off */pushDil(mkP("cnvWed",{w:R(WEDW.length)}),"Ban gả")}
@@ -8351,7 +8351,7 @@ function cnvSpyX(m,noPay){return `${noPay?"":`mỗi tháng Bạc +${BAL.ag.why.s
 PEND.cnvBribe=pp=>{const m=srvM(),v=RV(pp.r);if(!isSrv()||!m||!v||!v.alive)return null;
  return{t:`<p>Một thái giám của ${v.name} chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${m.name}.”</p>`,who:pv(v),o:cnvPend(S,cnvBribeOpts(S,v,m,BAL.coopBribe.pay))}};
 function cnvBribeOpts(a,v,m,pay){return [
-  {id:"take",n:"Nhận bạc, làm tai mắt",tag:"bribe",fx:{bac:pay},x:a===S?cnvSpyX(m):"",go:()=>{if(a===S){ap(v,{bac:-pay});deedAdd(v,"sbribe",null,deedW("sbribe"),`mua chuộc người hầu của ${m.name}`);S.srv.spyFor=v.id}else a.spyFor=key(v);affAdd(a,v,BAL.relMS.bribe);return""}},
+  {id:"take",n:"Nhận bạc, làm tai mắt",tag:"bribe",fx:{bac:pay},x:a===S?cnvSpyX(m,0,v):"",go:()=>{if(a===S){ap(v,{bac:-pay});deedAdd(v,"sbribe",null,deedW("sbribe"),`mua chuộc người hầu của ${m.name}`);S.srv.spyFor=v.id}else a.spyFor=key(v);affAdd(a,v,BAL.relMS.bribe);return""}},
   {id:"tell",n:"Từ chối, bẩm chủ",tag:"help",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm ${balAb(BAL.ag.ev.one)} chứng cứ của ${v.name} · kèm: ${v.name} ghi hận ngươi, thiện cảm ${balSg(spSee("rel",-BAL.coopBribe.grudge))}`,go:()=>{cnvBribeAff(v,a,-1);if(a===S)deedAdd(v,"sbribe",null,deedW("sbribe"),`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,BAL.ag.ev.one);/* TAI-MAT-KNOW: told = the master LEARNS it */typeof spyLearn==="function"&&spyLearn(m,v,BAL.ag.ev.rel);return""}},
   {id:"quiet",n:"Từ chối, im lặng",tag:"work",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${v.name}, thiện cảm ${balSg(spSee("rel",BAL.coopBribe.grudge))}`,go:()=>{cnvBribeAff(v,a,1);return""}}]}
 /* law 2 «Bạc lạ» (D #7 19/11): the briber's thiện cảm for the servant who refused — ONE constant BAL.coopBribe.grudge, sign by the answer (an NPC servant without an id: no regard row) */
@@ -8387,7 +8387,7 @@ function cnvFestOpts(a,m){const X=BAL.ag.par3.cnv.fest;const o=odA(a,X.pour.o+(a
   {id:"stand",n:"Đứng sau hầu chủ",tag:"work",fx:{tin:X.stand.tin},x:""}]}
 /* bị nắm thóp (her affair seen, S.srv.leak; an NPC servant whose đối thực is known: j10 threatServ) — v = the one who threatens, m = her master */
 function cnvBlackOpts(a,v,m){const X=BAL.ag.par3.cnv.black;const o=cnvOd(X.ignore.o);const bac=a===S?S.bac:(a.bac||0);
- return [{id:"obey",n:"Nghe lời, làm tai mắt",tag:"work",fx:{},x:a===S?`thành tai mắt của ${v.name} (không bạc) · kèm: ${cnvSpyX(m||{},1)}`:"",
+ return [{id:"obey",n:"Nghe lời, làm tai mắt",tag:"work",fx:{},x:a===S?`thành tai mắt của ${v.name} (không bạc) · mất: ${cnvSpyX(m||{},1,v)}`:"",
    go:()=>{oanAdd(a,v,BAL.relMS.threat);if(a===S){S.srv.spyFor=v.id;S.srv.leak=null;return""}a.spyFor=key(v);return `${a.name} sợ hãi, thành tai mắt của ${NM(v)}`}},
   {id:"pay",n:"Đút bạc bịt miệng",tag:"bribe",fx:{bac:-X.pay},lock:a!==S&&bac<X.pay,x:"lần này thôi; tin đồn bớt",
    go:()=>{if(v===S)apply({bac:X.pay});else ap(v,{bac:X.pay});if(a===S){S.srv.leak=null;S.srv.rumor=0;return""}return `${a.name} đút ${X.pay} lạng bạc bịt miệng ${NM(v)}`}},
@@ -8461,7 +8461,7 @@ function srvRows(){const m=srvM();const need=srvMpNeed(S.srv.rk),mx=srvMax();con
   row("Hoàng thượng để ý",amOn()?`${S.nt}/100 · ngài nhớ việc ngươi làm gần ngài trong ${BAL.ag.emp.met.keep} tuần; càng để ý, càng dễ được ngài cho gọi đến hầu`:`${S.nt}/100 · từ ${BAL.ntRise.at}, mỗi lần để ý ngươi ngài hỏi tên, phong ${RANKS[0].n}: ${chanceW(ntRiseOdds())}`),row("Ban gả",S.srv.rk>=BAL.srvRk.dai?`Danh ${S.danh}/20 · đủ thì có người xin cưới`:`cần ${SRK.maid[BAL.srvRk.dai]}, Danh 20`),
   row("Xuất cung",S.srv.mama?"ma ma: ở đến "+(BAL.srvAge.mama)+" tuổi":`${S.age}/${BAL.srvAge.ask} tuổi · từ ${SRK.maid[BAL.srvRk.cs]} trở lên, đỗ khảo hạch, được ở lại làm ma ma`),
   row("Đường xuống",`Chủ tin ${S.tin}: dưới ${BAL.srvx.tinOut} dễ bị đày Tân Giả khố`),row("Biết chuyện của chủ",`${S.srv.sec}${S.srv.betray?" · đã mật báo, chủ biết thì nguy":""}`),
-  row("Bạn trong cung",`${srvFriendList().length} người (quý ngươi từ ${BAL.srvx.friendAf})`)].concat(S.srv.spyFor!=null&&RV(S.srv.spyFor)?[row("Tai mắt cho",RV(S.srv.spyFor).name)]:[])}
+  row("Bạn trong cung",`${srvFriendList().length} người (quý ngươi từ ${BAL.srvx.friendAf})`)].concat(S.srv.spyFor!=null&&RV(S.srv.spyFor)?[row("Tai mắt cho",RV(S.srv.spyFor).name+(typeof mcwHeld==="function"?(H=>H.n?` · có người nắm ${H.n}/${H.need} chứng tội mua chuộc của người này`:"")(mcwHeld(RV(S.srv.spyFor))):""))]:[])}
 /* maid-ladder-6 (owner OD 19/11 ~01:26Z + L1935, expert hist-mama-ladder): the whole servant ladder on the kit ladder part (kitTiers, j79):
    six rungs, then «Ma ma» = the stay-on standing (age BAL.srvAge.ask + rung ≥ BAL.srvRk.cs + Nội vụ phủ exam), never a hidden side road */
 function srvLadderHTML(){const K=BAL.srvRk,r=S.srv.lau>0?-1:S.srv.mama?K.mama:(S.srv.rk|0),mx=srvMax();
@@ -37894,7 +37894,11 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
 Object.assign(BAL,{coopEmpY:12});
 /* co-op part 2 (review/coop-b1b5-p2): a player buys the friend who serves as a cung nữ (the same pay as an NPC's bribe card, j42 cnvBribe);
    tin = her Chủ tin gain when she refuses and tells her mistress */
-Object.assign(BAL,{coopBribe:{pay:20,tin:5,grudge:5}});/* grudge: the briber's thiện cảm for the servant, −grudge when she tells her mistress, +grudge when she refuses quietly (law 2 «Bạc lạ», j42 + jcoopworld twins) */
+Object.assign(BAL,{coopBribe:{pay:20,tin:5,grudge:5}});
+/* TMK-WARN (owner-facing play-stopper, F seat s21e; laws 6a / 2 / 1): the tai mắt who took bạc hears it first when someone holds a piece of the «Mua chuộc người hầu» charge on her buyer (jmcwarn).
+   npcCut = odds an NPC bought servant quietly cuts ties on such news (two-way: the same road as her «nhẹ»); conf = her «nặng» road «Bẩm chủ, khai kẻ mua chuộc»:
+   odds base + (Chủ tin − tinMid) / tinD, holds → Chủ tin +tin and her master gets ev pieces of the mc charge on the buyer (spyLearn: she learns who); fails → Tân Giả khố (BAL.ag.why.srv.pun.lauWk). */
+Object.assign(BAL,{mcw:{npcCut:50,conf:{base:50,tinMid:50,tinD:2,tin:10,ev:1}}});/* grudge: the briber's thiện cảm for the servant, −grudge when she tells her mistress, +grudge when she refuses quietly (law 2 «Bạc lạ», j42 + jcoopworld twins) */
 /* review/emperor-visit (owner OD:L603): the Emperor comes to HER palace and stays the night (event "empnight", j7 + jvisit).
    visit: a daily roll after the tablet flip, % = base + slope × (Sủng − minSung) + anK × Ân tình, × the Emperor's nature (datinh / lanhlung),
    capped; none within gap days of the last visit, none while she is pregnant, in lãnh cung, or he is gravely ill. On top of the night
@@ -53184,7 +53188,7 @@ const isSrvMe=()=>typeof isSrv==="function"&&isSrv();
  if(host()&&a&&a.id!=null&&a.alive&&(a.bac||0)>=B.pay){if(dOn())CW.thin.D.kind(fs(),"nbribe",{r:a.id});else p2say("nbribe",{r:a.id})}return ""}})();
 P2H.bribe=m=>{if(S.dead||!isSrvMe())return p2say("briber",{rid:m.rid,no:1});const mis=srvM(),B=BAL.coopBribe,nm=esc(m.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
  pushModal({act:1,t:"Bạc lạ",h:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,opts:[
-  {n:"Nhận bạc, làm tai mắt",fx:{bac:+m.pay||B.pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();p2say("briber",{rid:m.rid,ok:1})}},
+  {n:"Nhận bạc, làm tai mắt",fx:{bac:+m.pay||B.pay},x:cnvSpyX(mis,0,nm),go:()=>{S.srv.spyFor=fp();p2say("briber",{rid:m.rid,ok:1})}},
   {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},/* previews: briber (P2H.briber, told) */x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm} · kèm: ${nm} ghi hận ngươi, thiện cảm ${balSg(spSee("rel",-B.grudge))}`,go:()=>p2say("briber",{rid:m.rid,told:1})},
   {n:"Từ chối, im lặng",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${nm}, thiện cảm ${balSg(spSee("rel",B.grudge))}`,go:()=>p2say("briber",{rid:m.rid})}]});showModal();render()};
 P2H.briber=m=>briberRes(m);
@@ -53448,7 +53452,7 @@ function invHer(pp,ok,lv){if(!S||S.dead)return;const v=friendEntry();
 PEND.thBribe=pp=>{if(!pp||!isSrvMe())return null;const mis=srvM(),B=BAL.coopBribe,pay=+pp.pay||B.pay,nm=esc(pp.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
  const ans=r=>{const m=Object.assign({rid:pp.rid,o:pp.o},r);otherSide(()=>briberRes(m),"briber",m,pp.lf)};
  return {t:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,o:[
-  {n:"Nhận bạc, làm tai mắt",fx:{bac:pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();ans({ok:1})}},
+  {n:"Nhận bạc, làm tai mắt",fx:{bac:pay},x:cnvSpyX(mis,0,nm),go:()=>{S.srv.spyFor=fp();ans({ok:1})}},
   {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm} · kèm: ${nm} ghi hận ngươi, thiện cảm ${balSg(spSee("rel",-B.grudge))}`,go:()=>ans({told:1})},
   {n:"Từ chối, im lặng",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${nm}, thiện cảm ${balSg(spSee("rel",B.grudge))}`,go:()=>ans({})}]}};
 CW.dInit=function(T){
@@ -55174,7 +55178,7 @@ function tsbMockOpts(v){const hi=rkOf(v)>rkOf(S);const o=tsbMockO(v);
   }catch(e){console.error("tsb approach",e)}return m}})();
 (function(){if(typeof approachOne!=="function")return;const a0=approachOne;approachOne=function(){const m=a0.apply(this,arguments);try{if(m&&m.opts&&m.t==="Thái hậu triệu"){m.opts=[{n:"Đến ngay",fx:{},x:`tốn: 2 khắc · Sức ${balSg(BAL.eff.jtsb.sucGo_3)} · thành: Thái hậu với ngươi ${balSg(BAL.eff.jtsb.thCall)}`,go:()=>{apply({th:BAL.eff.jtsb.thCall,suc:BAL.eff.jtsb.sucGo_3});tsbKh(2)}},{n:"Cáo bệnh",fx:{},x:`thành: giữ trọn khắc và Sức buổi này · Mất: Thái hậu với ngươi ${balSg(BAL.eff.jtsb.thCall_2)}`,go:()=>apply({th:BAL.eff.jtsb.thCall_2})}];m.optLayout="rows"}
   else if(m&&m.opts&&/xin theo ngươi/.test(String(m.h||""))){const H=String(m.h);const vic=liveRivals(true).find(v=>(v.staff||[]).some(s=>s.name&&H.includes(s.name)&&H.includes(v.name)));const s=vic&&(vic.staff||[]).find(x=>x.name&&H.includes(x.name));if(s&&vic){
-   m.opts=[{n:"Thu làm tai mắt",fx:{bac:-BAL.ag.know.tm.def.bac},x:`tốn: Bạc ${balSg(-BAL.ag.know.tm.def.bac)} · thành: có tai mắt trong cung ${vic.name} · kèm: kẻ đã phản chủ cũ cũng bán tin ngươi, ${vic.name} biết chuyện: nắm ${balAb(BAL.eff.jtsb.evGo_4)} chứng cứ của ngươi, oán ngươi ${balSg(BAL.ag.know.tm.learn.oan)}: ${chanceW(BAL.odb.jtsb.leakO)}`,go:()=>{deedAdd(S,"sbribe",null,deedW("sbribe"),`mua chuộc người hầu của ${vic.name}`);s.spyFor="me";if(roll(BAL.odb.jtsb.leakO)){/*evok: servant bribe deed*/evA(vic,S,BAL.eff.jtsb.evGo_4);/* TAI-MAT-KNOW: the two-faced one tells her master = that master LEARNS it */typeof spyLearn==="function"&&spyLearn(vic,S)}}},{n:"Đuổi về",fx:{},x:`thành: không dính líu, không lộ gì`}];m.optLayout="rows"}}}catch(e){console.error("tsb approach2",e)}return m}})();
+   m.opts=[{n:"Thu làm tai mắt",fx:{bac:-BAL.ag.know.tm.def.bac},x:`tốn: Bạc ${balSg(-BAL.ag.know.tm.def.bac)} · thành: có tai mắt trong cung ${vic.name} · kèm: kẻ đã phản chủ cũ cũng bán tin ngươi, ${vic.name} biết chuyện: nắm ${balAb(BAL.eff.jtsb.evGo_4)} chứng cứ của ngươi, oán ngươi ${balSg(BAL.ag.know.tm.learn.oan)}: ${chanceW(BAL.odb.jtsb.leakO)}${typeof mcwBuyX==="function"?"; "+mcwBuyX(s).replace(/^kèm: /,""):""}`,go:()=>{deedAdd(S,"sbribe",null,deedW("sbribe"),`mua chuộc người hầu của ${vic.name}`);s.spyFor="me";if(roll(BAL.odb.jtsb.leakO)){/*evok: servant bribe deed*/evA(vic,S,BAL.eff.jtsb.evGo_4);/* TAI-MAT-KNOW: the two-faced one tells her master = that master LEARNS it */typeof spyLearn==="function"&&spyLearn(vic,S)}}},{n:"Đuổi về",fx:{},x:`thành: không dính líu, không lộ gì`}];m.optLayout="rows"}}}catch(e){console.error("tsb approach2",e)}return m}})();
 /* the cold-palace letter: helping a deposed consort is kind, but the court notices who sides with her (Hoàng hậu) */
 (function(){const p0=PEND.coldletter;if(!p0)return;PEND.coldletter=p=>{const d=p0(p);try{if(d&&d.o&&d.o[0]&&queenP()&&queenP()!==S){const g=d.o[0];g.fx=Object.assign({},g.fx,{hh:-3});g.x=(g.x?g.x+" · ":"")+"Hoàng hậu không vui vì ngươi dính dáng người lãnh cung"}}catch(e){}return d}})();
 /* the mocker's flag: an easy target draws more bullying from her (same rule for everyone through mindMenu) */
@@ -103511,6 +103515,67 @@ function chUseTxt(k,a,t){const u=chUse(k,a,t);return u?`Chứng cứ ${balSg(-u.
 function chWinTxt(k,a,t,W){const u=chUse(k,a,t);return u&&k!=="expose"/* tư thông: its own road (ban chết / lãnh cung) */?`${W||NM(t)} ${chPunTxt(t,u.c)}`:null}
 (function(){if(typeof AOUT!=="object")return;for(const k of ["accuse","tocao"]){const d=Object.getOwnPropertyDescriptor(AOUT,k);const base=()=>d?(d.get?d.get.call(AOUT):d.value):null;
  try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const b=base()||["",""];const t=typeof J78==="object"&&J78.cardV;const w=t?chWinTxt(k,S,t,j78who(t)):null;return w?[w+(k==="accuse"?`; Danh ${balSg(BAL.eff.j8.accuseDanh)}`:""),b[1]]:b}})}catch(e){}}})();
+/* ================= TMK-WARN (owner-facing play-stopper, F seat s21e on LIVE 8330e8b8; MAIN 181 order; laws 11 / 6a / 2 / 3 / 1 / 4 / 7) =================
+   Seen: year 3 «Bạc lạ» → «Nhận bạc, làm tai mắt»; five years later the end «Bị đuổi khỏi cung vì nhận bạc mua chuộc» (jcharge chMcFire → chSrvEnd:
+   a proven «Mua chuộc người hầu» charge on the BUYER dismisses every servant who took the buyer's bạc, her too) with NO warning in between, and the take
+   card named only the j42 srvWatch road. The charge rule itself is NOT changed (law 16); this module makes it visible and answerable:
+   (a) every TAKE card (j42 cnvBribeOpts take / cnvBlackOpts obey, jcoopworld P2H.bribe / PEND.thBribe) prints the jcharge road in odds words
+       (cnvSpyX(m,noPay,v) → mcwTakeX: the charge's pieces chNeed and one search's odds chFind, BAL.charge, word() = BAL.odds.cut);
+       every BUY card (j7 volunteer, jtsb defect, j24 svDefect) prints the same road from the buyer's side (mcwBuyX).
+   (b) a REAL warning beat: the moment someone writes a piece of the mc charge on her buyer (evA hook, jcharge CHLASTC) — and on the monthly
+       servant tick for old saves / co-op — she gets the card «Gió lọt» once per new piece, with three tiers (law 2, cost and result rise together):
+       NHẸ «Lặng lẽ thôi làm tai mắt» (loses the monthly bạc, the buyer resents her) · VỪA «Trả lại bạc, xin thôi» (bạc back, no grudge) ·
+       NẶNG «Bẩm chủ, khai kẻ mua chuộc» (odds; holds: Chủ tin up, her master holds pieces of the buyer's mc charge; fails: Tân Giả khố),
+       and «Cứ làm tai mắt» (keep the bạc, keep the risk). Her servant panel row says how many pieces are held at any time (discoverable).
+   (c) TWO-WAY (law 1): an NPC servant bought by anyone hears the same news and cuts ties at BAL.mcw.npcCut; when the buyer is HER, she is told
+       (her bought servant quits) and her Tai mắt report the pieces held on her.
+   ============================================================================================================================ */
+/* the most pieces of the mc charge anyone (but the buyer; the servant player is on the buyer's side) holds on t */
+function mcwHeld(t){const r={h:null,n:0,need:0};if(!t||typeof chHave!=="function")return r;try{r.need=chNeed(t,"mc")}catch(e){}
+ const L=[S].concat(typeof liveRivals==="function"?liveRivals(true):(rivals||[]));for(const h of L){if(!h||h===t)continue;if(h===S&&typeof isSrv==="function"&&isSrv())continue;let n=0;try{n=chHave(h,t,"mc")}catch(e){}if(n>r.n){r.n=n;r.h=h}}return r}
+/* one search's odds for one piece of the mc charge on v (who searches: her master m; else a plain searcher) */
+function mcwFindO(v,m){try{return chFind(m&&m.name?m:{tamco:0,mat:0,staff:[]},v,"mc").o}catch(e){try{return chBandO(BAL.charge.C.mc.band)}catch(x){return BAL.odds.lo}}}
+function mcwNm(v){return v&&typeof v==="object"?v.name:(v||"người mua")}
+/* (a) the TAKE card tail: the jcharge road in odds words */
+function mcwTakeX(v,m){const vo=v&&typeof v==="object"?v:null;let need=2;try{need=chNeed(vo,"mc")}catch(e){}
+ return `nếu ${mcwNm(v)} bị tố tội mua chuộc người hầu (cần ${need} chứng; mỗi lần ${m&&m.name?m.name:"có người"} dò, tìm ra một chứng: ${word(mcwFindO(vo,m))}) thì ngươi bị đuổi khỏi cung; có người nắm chứng thì ngươi nghe phong thanh trước`}
+/* (a) the BUY card tail (her as the buyer): the same charge from her side */
+function mcwBuyX(s){let need=2;try{need=chNeed(S,"mc")}catch(e){}return `kèm: nếu ngươi bị tố tội mua chuộc người hầu (cần ${need} chứng) thì bị phạt bổng ${BAL.charge.fine} lượng, ${s&&s.name?s.name:"kẻ ấy"} bị đuổi khỏi cung`}
+/* the one tai mắt terms text (was j42 cnvSpyX: «mỗi tháng Bạc +8 · kèm: …» — a «kèm» note sits behind «!» on the kit card, so the take card showed only
+   «Được Bạc»; stills 27/11). Both dangers now stand in the card's own «Mất» row: the master's watch (srvWatch) and the jcharge road (v given).
+   noPay (cnvBlackOpts obey): the danger text alone, the caller prints «mất: » before it. */
+(function(){if(typeof cnvSpyX!=="function")return;cnvSpyX=function(m,noPay,v){const P=BAL.ag.why.srv.pun;
+ const watch=`mỗi tháng chủ phát hiện: ${chanceW(nv(m,"spyFind"))}, khi ấy bị đánh chết: ${chanceW(npwShare(["kill","lau"],k=>srvPunW(m,k),"kill"))}, không thì Tân Giả khố ${P.lauWk} tuần`;
+ const d=v?`${watch}; ${mcwTakeX(v,m)}`:watch;return noPay?d:`mỗi tháng Bạc +${P.spyPay} · mất: ${d}`}})();
+/* is the servant player the tai mắt of t */
+function mcwMine(t){return !!(t&&S&&!S.dead&&typeof isSrv==="function"&&isSrv()&&S.srv&&S.srv.spyFor!=null&&String(S.srv.spyFor)===String(t.id))}
+/* (b) the warning beat, once per new piece held on her buyer */
+function mcwWarnMe(t){if(!mcwMine(t))return false;const H=mcwHeld(t);if(!H.n)return false;S.srv.mcw=S.srv.mcw||{};const k=String(t.id);if((S.srv.mcw[k]||0)>=H.n)return false;S.srv.mcw[k]=H.n;
+ try{log(`<span class="r">Nghe phong thanh: có người đã nắm ${H.n}/${H.need} chứng tội mua chuộc người hầu của ${t.name}.</span>`)}catch(e){}
+ try{pushDil(mkP("mcWarn",{v:t.id}),"Gió lọt")}catch(e){console.error("mcWarn",e)}return true}
+/* (c) two-way: NPC servants bought by t hear it too; her as the buyer is told */
+function mcwNpc(h,t){const k=key(t);const H=mcwHeld(t);
+ for(const o of [S].concat(rivals||[])){if(!o||o===t||(o!==S&&(o.alive===false||o.out)))continue;for(const s of (o.staff||[])){if(!s||s.coop||s.spyFor==null||String(s.spyFor)!==String(k))continue;
+  if(!roll(BAL.mcw.npcCut))continue;s.spyFor=null;if(t===S)try{log(`<span class="r">${s.name} (người hầu cung ${o===S?"ngươi":o.name}) nghe phong thanh tội mua chuộc của ngươi sắp lộ, lặng lẽ thôi làm tai mắt.</span>`)}catch(e){}}}
+ if(t===S&&h&&h!==S){const mine=(h.staff||[]).some(s=>s&&s.spyFor==="me");if((+S.mat||0)>=BAL.charge.warnMat||mine){S.mcwMe=S.mcwMe||{};const hk=String(key(h));if((S.mcwMe[hk]||0)<H.n){S.mcwMe[hk]=H.n;
+  try{log(`Tai mắt báo: ${typeof NM==="function"?NM(h):h.name} đã nắm ${chHave(h,S,"mc")}/${H.need} chứng tội mua chuộc người hầu của ngươi; bị tố thì phạt bổng ${BAL.charge.fine} lượng, người hầu ngươi mua bị đuổi khỏi cung.`)}catch(e){}}}}}
+function mcwHit(h,t){if(!t||h===t)return;try{mcwWarnMe(t)}catch(e){console.error("mcwWarnMe",e)}try{mcwNpc(h,t)}catch(e){console.error("mcwNpc",e)}}
+(function(){if(typeof evA!=="function")return;const e0=evA;evA=function(h,t,n,c){const r=e0.apply(this,arguments);try{if(n>0&&r>0&&t&&h&&h!==t&&CHLASTC&&CHLASTC.t===t&&CHLASTC.c==="mc")mcwHit(h,t)}catch(e){console.error("mcw",e)}return r}})();
+/* the monthly servant tick (j42 srv month): old saves, co-op seats */
+function mcwMonth(v){try{mcwWarnMe(v)}catch(e){}}
+/* the warning card: three tiers + keep going */
+PEND.mcWarn=pp=>{const m=typeof srvM==="function"?srvM():null,v=RV(pp.v);if(!m||!v||!mcwMine(v))return null;const H=mcwHeld(v),P=BAL.ag.why.srv.pun,C=BAL.mcw.conf,pay=BAL.coopBribe.pay;
+ const o=oddsCl(Math.round(C.base+((S.tin||0)-C.tinMid)/C.tinD));const end=`${v.name} bị tố tội mua chuộc thì ngươi bị đuổi khỏi cung`;
+ const cut=()=>{S.srv.spyFor=null};
+ return{t:`<p>Trong hành lang, mấy cung nữ thì thào: có người đang gom chứng tội mua chuộc người hầu của ${v.name}.</p><p class="past">Đã có người nắm ${H.n}/${H.need} chứng. ${end}.</p>`,who:pv(v),o:[
+  {n:"Cứ làm tai mắt",fx:{},x:`mỗi tháng Bạc +${P.spyPay} · kèm: ${end}; mỗi lần dò, tìm ra một chứng: ${word(mcwFindO(v,m))}`,go:()=>{}},
+  {n:"Lặng lẽ thôi làm tai mắt · nhẹ",fx:{},x:`tốn: thôi Bạc +${P.spyPay} mỗi tháng · được: tội ${v.name} có lộ, ngươi không bị đuổi · mất: ${v.name} ghi hận ngươi, thiện cảm ${balSg(spSee("rel",-BAL.coopBribe.grudge))}`,
+   go:()=>{cut();cnvBribeAff(v,S,-1);log(`Ngươi lặng lẽ thôi làm tai mắt cho ${v.name}.`)}},
+  {n:"Trả lại bạc, xin thôi · vừa",fx:{bac:-pay},x:`tốn: Bạc ${balSg(-pay)} · được: thôi làm tai mắt, tội ${v.name} có lộ ngươi không bị đuổi, ${v.name} không ghi hận`,
+   go:()=>{cut();if(v.id!=null)ap(v,{bac:pay});log(`Ngươi trả lại ${pay} lượng bạc cho người của ${v.name}, xin thôi làm tai mắt.`)}},
+  {n:"Bẩm chủ, khai kẻ mua chuộc · nặng",fx:{},p:o,x:`${word(o)} · thành: thôi làm tai mắt, Chủ tin +${C.tin}, ${m.name} nắm ${evSg(C.ev)} tội mua chuộc của ${v.name} · hỏng: ${m.name} giận, đày Tân Giả khố ${P.lauWk} tuần · kèm: ${v.name} ghi hận ngươi`,
+   go:()=>{const ok=roll(o)/* law 4: the odds shown (p) are the odds rolled */;cut();cnvBribeAff(v,S,-1);if(ok){S.tin=cl((S.tin||0)+C.tin,0,100);try{evA(m,v,C.ev,"mc")}catch(e){}try{typeof spyLearn==="function"&&spyLearn(m,v)}catch(e){}log(`Ngươi quỳ bẩm ${m.name} chuyện ${v.name} mua chuộc ngươi; chủ tha, ghi nhớ kẻ mua chuộc.`)}
+    else srvLaundry(`${m.name} nghe ngươi khai từng nhận bạc của ${v.name}, nổi giận.`,P.lauWk)}}]}};
 /* ================= jkring: kitRing «VÒNG NGƯỜI · VÒNG NHÓM» — the people / group RING of a place (KIT §104; RING-BUILD under KK44; owner OD 26/11 ~18:55Z + ~19:00Z)
    OWNER (26/11 ~18:55Z, verbatim excerpt): «… cái vòng người, đúng nghĩa là cái vòng người giống như là cái vòng [bảo vật] … xoay vòng tới ai thì người đó sáng, người đó là cái trung tâm …
    những người còn lại là tối … bấm chọn vô người đó thì người đó phải to hơn … phóng to nguyên thân … dịch qua một bên trái … vẫn là to … bên phải là sẽ thả xuống mấy cái nút giao tiếp …
@@ -107088,7 +107153,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5432f052f875";window.CTM_BUILD=BUILD;
+const BUILD="58a21c12c784";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
