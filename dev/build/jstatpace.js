@@ -27,6 +27,7 @@ function spTop(k,rk){if(spAbs(k)||spSoft(k))return 100;const b=spBar(k);if(b)ret
 const SP_SIGN=Object.fromEntries(["th","hh","rel"].map(k=>[k,true]));/* thiện cảm runs −100..100: dislike growing (below 0) is paced the same way as liking; a fall back toward 0 is not */
 function spG(k,h,now,n,rk,ck,peek){const B=typeof BAL==="object"&&BAL.stp;if(!B||!B.on||SP_OFF||!n||!SP_K[k])return n;
  if(n<0){if(!SP_SIGN[k])return n;const c=+now||0,z=Math.min(-n,Math.max(0,c)),rest=-n-z;return -(z+(rest>0?spG(k,h,Math.max(0,-Math.min(0,c)),rest,rk,(ck||k)+"-",peek):0))}
+ const ab0=spAbs(k);if(ab0&&ab0.k)n*=ab0.k;/* abs[k].k = the share of a raw rise that counts (Tâm cơ: card options feed it ~2–3 times a month, robot tally 27/11) */
  const bd=B.band[k];if(bd&&n>bd[1])n=Math.min(bd[2],bd[1]+(n-bd[1])*B.over);
  const ce=spCeil(rk,k),top=spTop(k,rk),c0=Math.max(0,+now||0);if(c0>=top)return 0;
  const ab=spAbs(k),pw=ab?ab.pow:B.dm.pow,mn=ab?ab.min:B.dm.min;let g=n*Math.max(mn,1-Math.pow(c0/ce,pw));

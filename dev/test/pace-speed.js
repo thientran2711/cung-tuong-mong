@@ -18,7 +18,7 @@ const {chromium}=require('playwright');const path=require('path');
   /* Sắc · Tài · Tâm cơ through the stat-pace slowdown (sếp FINAL 26/11 ~23:24Z) */
   {const A=BAL.stp.abs;for(const k of ["sac","tai","tamco"]){ok(A[k]&&SP_K[k],`${k} is paced (pow ${A[k]&&A[k].pow}, min ${A[k]&&A[k].min})`);
     ok(spG(k,{},50,30,0)<=BAL.stp.band[k][2],`${k}: one change never passes the big band (+30 → ${spG(k,{},50,30,0)})`);
-    const lo=spG(k,{},20,5,0),hi=spG(k,{},85,5,0);ok(hi<lo&&hi>=1,`${k}: +5 at 20 → ${lo}, at 85 → ${hi} (slower near 100, never 0 forever)`);
+    const lo=spG(k,{},20,5,0),hq={};let hi=0;for(let i=0;i<4;i++)hi+=spG(k,hq,85,5,0);hi=hi/4;/* 4 rises with the carry (Tâm cơ abs.k .5: one +5 at 85 adds a fraction) */ok(hi<lo&&hi>0,`${k}: +5 at 20 → ${lo}, at 85 → ${hi} a rise on average (slower near 100, never 0 forever)`);
     ok(spG(k,{},60,-7,0)===-7,`${k}: a fall untouched`);ok(spTop(k,0)===100&&spTop(k,7)===100,`${k}: no rank ceiling`)}
    const v=liveRivals(false)[0];v.tai=50;v.spc={};ap(v,{tai:30});ok(v.tai<=50+BAL.stp.band.tai[2],`same rule for an NPC (Tài 50 +30 → ${v.tai})`)}
   /* owner 26/11 ~23:55Z (confirmed): the promotion adjustment is GONE; ONE soft ceiling for the six; Sủng neglect fade + Sắc age fade */

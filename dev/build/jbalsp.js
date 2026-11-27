@@ -29,7 +29,10 @@ BAL.stp={on:1,
 /* abs = Sắc · Tài · Tâm cơ through the same slowdown (sếp FINAL 26/11 ~23:24Z via MAIN 164; replaces the monthly rescale): a rise × max(min, 1 − (now/100)^pow),
    band cap per change BAL.stp.band[k]; no rank ceiling, no hard stop below 100, never taken away; same rule for every NPC. Target: a focused year ≈ +20–25 from 50,
    80 → 90 ≈ 3 years (robot table in dev/handover/reports/pace-speed.md). */
-BAL.stp.abs={sac:{pow:2,min:.15},tai:{pow:2,min:.15},tamco:{pow:2,min:.15}};
+BAL.stp.abs={sac:{pow:2,min:.15},tai:{pow:2,min:.15},tamco:{pow:2,min:.15,k:.4}};
+/* tamco (PACE-SPEED-2 robot 27/11, MAIN 167 flag «Tâm cơ 80 → 90 far too fast»): card options give Tâm cơ ~110 times in 40 months (raw ≈ +5 a month, source tally
+   dev/measure/pacespeed.js ps.tsrc «runOpt»), so 90 came in 19–34 months (LIVE 12–15). k = the share of a raw rise that counts (.4; robot: k .5 + pow 1 was too slow in the middle, +7–15 a year), pow 2 as Sắc · Tài;
+   the slow share min .15 (the soft-ceiling rule) is kept. Robot (k .4, pow 2, 2 lives × 60 mo): Tâm cơ +14–19 a year in the middle (37 → 56 → 70), 70 first at m36 / m58 (before: 90 at m19–34, LIVE m12–15). */
 /* soft = ONE SOFT CEILING for the six palace stats (owner OD 26/11 ~23:55Z, confirmed «Ok làm chỉ số như khuyến nghị»; replaces the hard stop and the
    dropped promotion adjustment): near / above its ceiling a stat still rises at dm.min (abs: abs[k].min), never a hard stop below 100 (jstatpace spSoft / spTop).
    Example (approved): Sủng ceiling 58, a +8 event → +7 at 30, +4 at 45, +1 at 55+; Sắc +6 at 50, +3 at 80, +1.5 at 90, +1 at 95+. */
