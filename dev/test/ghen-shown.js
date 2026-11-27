@@ -18,7 +18,7 @@ const {chromium}=require('playwright');const fs=require('fs'),path=require('path
   const quiet=()=>{Q.length=0;try{$("modal").hidden=true}catch(e){}};
   SLOT=3;start();quiet();S.preg=0;S.out=0;
   const setDT=on=>{const T=S.emp.traits.filter(t=>t!=="datinh"&&!(on&&t==="lanhlung")&&!(on&&t==="chamchinh"));if(on)T.push("datinh");S.emp.traits=T};
-  const GCAP=x=>{const P=BAL.oanPace;return P&&P.on&&P.ghen?Math.round(opBand(x,P.ghen.band)):x};/* review/oan-pace-2: one cause follows the band BAL.oanPace.ghen.band (j1 ghenN) */
+  const GCAP=x=>{const P=BAL.oanPace;return P&&P.on&&P.ghen?Math.round(opBand(x,BAL.stp.band.ghen)):x};/* review/oan-pace-2: one cause follows the band BAL.oanPace.ghen.band (j1 ghenN) */
   const base=()=>{const L=liveRivals(true);S.bqN=(S.bqN||0)+1;L.forEach(v=>{v.ghen=20;v.sung=S.sung;v.opg={};v.gUc=0});return L};/* review/oan-pace-ghen: a fresh incident, same favour as hers (relative factor 1), no day total yet — the case the shown number describes */
   const delta=(L)=>{const d=[...new Set(L.map(v=>v.ghen-20))];return d.length===1?d[0]:"mixed "+d.join("/")};
   const GRP=/(?:phi tần|hậu cung|ai cũng|Lục cung)[^·]*?ghen \+(\d+)/;

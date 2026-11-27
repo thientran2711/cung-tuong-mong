@@ -53,14 +53,14 @@ const PAGE=process.argv[2]||'index.html';
    S.rl[c.id]=-30;S.agw={};S.agc={};ghetCool();ok('G5 two-way: HER dislike of a consort eases the same way',S.rl[c.id]>-30&&S.rl[c.id]<=0,S.rl[c.id])}
   /* GHEN pace (review/oan-pace-ghen) */
   {const G=P.ghen;const gz=x=>{x.opg={};x.gUc=0;x.ghen=0};const nn=newRival(1);ok('H1 a newcomer starts near 0 jealousy (< BAL.ghenNew '+BAL.ghenNew+')',(nn.ghen||0)<BAL.ghenNew,nn.ghen);
-   S.sung=50;a.sung=50;gz(a);S.bqN++;ghenUp(a,30,'t',S);const g1=a.ghen;ok('H2 one cause adds at most the band BAL.oanPace.ghen.band[2] ('+G.band[2]+')',g1>0&&g1<=G.band[2],g1);
+   S.sung=50;a.sung=50;gz(a);S.bqN++;ghenUp(a,30,'t',S);const g1=a.ghen;ok('H2 one cause adds at most the band BAL.stp.band.ghen[2] ('+BAL.stp.band.ghen[2]+')',g1>0&&g1<=BAL.stp.band.ghen[2],g1);
    ghenUp(a,5,'t',S);ok('H3 same incident (same buổi): a smaller second cause adds nothing',a.ghen===g1,[g1,a.ghen]);
-   S.bqN++;ghenUp(a,G.band[1],'t',S);S.bqN++;ghenUp(a,G.band[1],'t',S);ok('H4 one day: one consort\'s jealousy rises at most BAL.oanPace.ghen.day ('+G.day+')',a.ghen<=G.day+1,a.ghen);
-   gz(c);gz(d);c.sung=S.sung+G.rel.span;d.sung=S.sung-10;S.bqN++;ghenUp(c,G.band[1],'t',S);ghenUp(d,G.band[1],'t',S);
-   ok('H5 relative favour: a consort more favoured than her grows far less jealous than one below her',c.ghen<d.ghen&&c.ghen<=Math.ceil(G.band[1]*G.rel.min),[c.ghen,d.ghen]);
+   S.bqN++;ghenUp(a,BAL.stp.band.ghen[1],'t',S);S.bqN++;ghenUp(a,BAL.stp.band.ghen[1],'t',S);ok('H4 one day: one consort\'s jealousy rises at most BAL.oanPace.ghen.day ('+G.day+')',a.ghen<=G.day+1,a.ghen);
+   gz(c);gz(d);c.sung=S.sung+G.rel.span;d.sung=S.sung-10;S.bqN++;ghenUp(c,BAL.stp.band.ghen[1],'t',S);ghenUp(d,BAL.stp.band.ghen[1],'t',S);
+   ok('H5 relative favour: a consort more favoured than her grows far less jealous than one below her',c.ghen<d.ghen&&c.ghen<=Math.ceil(BAL.stp.band.ghen[1]*G.rel.min),[c.ghen,d.ghen]);
    const w=wk();ok('H6 fade: closed gap faster, deep slower, left alone faster',opGfK(30,-G.rel.span,w)>opGfK(30,0,w)&&opGfK(G.deep,0,w)<opGfK(30,0,w)&&opGfK(30,0,w-10)>opGfK(30,0,w),[opGfK(30,-G.rel.span,w),opGfK(30,0,w),opGfK(G.deep,0,w),opGfK(30,0,w-10)]);
    a.ghen=50;opVent(a,S);ok('H7 acting against her spends her jealousy (vent.share '+G.vent.share+')',a.ghen===50-Math.max(G.vent.min,Math.round(50*G.vent.share)),a.ghen);
-   c.pg=0;c.pUc=0;S.opg={};S.bqN++;pgUp(c,30,'t');const p1=c.pg;c.pg=40;opVent(S,c);ok('H8 two-way: her jealousy of a consort — one band per cause, spent when she acts',p1>0&&p1<=G.band[2]&&c.pg===40-Math.max(G.vent.min,Math.round(40*G.vent.share)),[p1,c.pg]);
+   c.pg=0;c.pUc=0;S.opg={};S.bqN++;pgUp(c,30,'t');const p1=c.pg;c.pg=40;opVent(S,c);ok('H8 two-way: her jealousy of a consort — one band per cause, spent when she acts',p1>0&&p1<=BAL.stp.band.ghen[2]&&c.pg===40-Math.max(G.vent.min,Math.round(40*G.vent.share)),[p1,c.pg]);
    gz(e);ghenUp(e,10,'t',a);ok('H9 a jealousy caused by another consort still does not raise the score toward her',e.ghen===0,e.ghen)}
   /* rollback */
   P.on=0;setO(a,S,0);S.bqN++;oanAdd(a,S,40);ok('R1 BAL.oanPace.on = 0 → the old raw rise (× the holder\'s nết only)',raw(a,S)===Math.round(40*persF(a,'slight',1)),raw(a,S));P.on=1;S.tuan=keep;

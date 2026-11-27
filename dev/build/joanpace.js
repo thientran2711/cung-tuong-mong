@@ -68,8 +68,8 @@ function opGvent(a,t){const V=(BAL.oanPace.ghen||{}).vent;if(!V)return 0;const s
 function opBand(n,b){if(!(n>b[1]))return n;const o=BAL.stp&&BAL.stp.over!=null?BAL.stp.over:.3;return Math.min(b[2],b[1]+(n-b[1])*o)}
 function opRelF(gap){const R=BAL.oanPace.ghen.rel;return Math.max(R.min,Math.min(R.max,1+gap/R.span))}
 function opGhenIn(v,n,by){try{const G=BAL.oanPace.ghen;if(!opOn()||!G||!(n>0))return n;const me=by&&typeof by==="object"&&by.coop?by:S;
- n=opStep(v,me,(window.opGBanded?n:opBand(n,G.band))*opRelF((+me.sung||0)-(+v.sung||0)),"opg",{day:G.day});if(!window.opGStand)v.gLw=opNow()[0];return n}catch(e){return n}}
-function opPgIn(v,n){try{const G=BAL.oanPace.ghen;if(!opOn()||!G||!(n>0))return n;n=opStep(S,v,opBand(n,G.band)*opRelF((+v.sung||0)-(+S.sung||0)),"opg",{day:G.day});v.pLw=opNow()[0];return n}catch(e){return n}}
+ n=opStep(v,me,(window.opGBanded?n:opBand(n,BAL.stp.band.ghen))*opRelF((+me.sung||0)-(+v.sung||0)),"opg",{day:G.day});if(!window.opGStand)v.gLw=opNow()[0];return n}catch(e){return n}}
+function opPgIn(v,n){try{const G=BAL.oanPace.ghen;if(!opOn()||!G||!(n>0))return n;n=opStep(S,v,opBand(n,BAL.stp.band.ghen)*opRelF((+v.sung||0)-(+S.sung||0)),"opg",{day:G.day});v.pLw=opNow()[0];return n}catch(e){return n}}
 function opGfK(lv,gap,lw){try{const G=BAL.oanPace.ghen,C=BAL.oanCool;if(!opOn()||!G)return 1;let k=1;const q=opNow()[0]-(+lw||0)-C.quiet;
  if(q>0)k*=1+C.alone.k*Math.min(q,C.alone.max);if(lv>=G.deep)k*=C.deep.k;const R=G.rel;return k*Math.max(R.fmin,Math.min(R.fmax,1-gap/R.span))}catch(e){return 1}}
 /* her own jealousy's daily fade (j8 rivalsTurn; was a flat −1): fractions carry (v.pcc) */
