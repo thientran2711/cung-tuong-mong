@@ -116,3 +116,15 @@ phế / lật đổ cards now have FOUR roads: Nhẹ «Giữ mình» · Vừa «
 «Đứng ra làm chứng / Đích thân đưa tin» (Sủng 8 = BAL.re.her.t3.stat) — the two Nặng roads give the SAME result (Danh 8 + the house backs her,
 odds +15, the price of a failed case). npcRoads: an NPC without the Bạc takes the stat road. Test adds: the stat road is tier 3, no Bạc, same gain
 as the Bạc road; an NPC with 0 Bạc helps through it. PASS 755x1000 + 1180x820; one-core-guard PASS. Abdication card unchanged (no Bạc road).
+
+## Bảng cho sếp — khi triều đại kết thúc (PASS 85791268, review/reign-end-rv163e)
+
+| Biến cố | Khi nào xảy ra | Nàng làm được gì | Hoàng thượng ra sao | Đời nàng tiếp theo |
+|---|---|---|---|---|
+| Nhường ngôi | Thái tử đã lớn, Hoàng thượng già hay bệnh, Thái hậu và triều thần dâng sớ ép | Giữ mình · Dâng sớ xin giữ ngôi · Cùng triều thần xin lập tân quân | Lui về làm Thái thượng hoàng | Con nàng lên ngôi → Hoàng thái hậu (hoặc buông rèm, tự làm Nữ đế); không thì Thái phi, theo con ra phủ, xuất gia… |
+| Phế lập | Một nhà quyền thần đủ thế lực, có phi tần được sủng, gom đủ tội của Hoàng thượng | Giữ mình · Mật tấu với Hoàng thượng · Ngầm tiếp tay (bạc, hết bạc thì bằng Sủng) | Bị phế, giam lỏng ở Tây uyển | Hoàng tử của nhà ấy lên ngôi; nếu nàng tiếp tay mà hỏng thì bị nghi kỵ |
+| Lật đổ | Thế lực một nhà lấn cả ngai vàng, ngầm điều binh | Giữ mình · Mật báo cấm quân · Ngầm mở đường | Bị dấy binh lật đổ, rời ngai vàng | Hoàng tử của nhà ấy (hoặc Thái tử, hoặc thân vương) lên ngôi; binh biến hỏng thì nhà ấy bị dẹp |
+| Băng hà | Hiếm: tuổi trời (đường cong rộng), ám sát, đầu độc, tai nạn | (như cũ) | Băng hà | Như cũ: kế vị, Thái phi, xuất gia… |
+| Nhà của cha nàng | Nhà cha cũng có thể là nhà mưu phế lập / lật đổ | Có thể giúp để đưa con lên ngôi, hoặc chặn | — | Phi tần khác (mẹ các hoàng tử) cũng chọn đúng 3 đường như nàng |
+
+Đã bỏ kết cục «Tuổi xuân qua đi» năm 40 tuổi; bệnh, độc, ám sát giữ nguyên. Triều thường kéo dài 8–20 năm, không cố định.
