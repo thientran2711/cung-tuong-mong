@@ -99,7 +99,7 @@ function signBad(t,c,r){if(r==='why'||r==='ton'&&c!=='g')return[];const s=t.repl
 function kemGain(t,r){const s=t.replace(/\s+/g,' ');if(/(^|\s)(kèm|tốn|thành|hỏng)\s*:/i.test(s)&&r!=='why')return['kemgain'];
  if(r==='kem'&&/\+\s?\d/.test(s)&&!/[-−]\s?\d/.test(s)&&!/(ghen|oán|thù|nghi)( ngươi| ta)? \+|chứng cứ|nắm|phát giác/i.test(s))return['kemgain'];return[]}
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:W<1100,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});
- const p=await ctx.newPage();p.setDefaultTimeout(0);const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(0);const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
  for(let i=0;i<400;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return typeof start==='function'&&typeof deser==='function'&&!document.getElementById('kload')?'ok':''});if(s)break;await p.waitForTimeout(500)}
  await p.waitForTimeout(800);await p.evaluate(LIB);lg('lib');

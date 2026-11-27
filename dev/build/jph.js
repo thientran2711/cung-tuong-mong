@@ -100,14 +100,14 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
    Marks: img[data-kwait="1"|"s"], slot [data-kwaitp="Đang thỉnh tranh…"]. Test: dev/test/life-preload.js (no empty box), kit sample §59.1. ===== */
 (function(){const st=document.createElement("style");st.id="kit-ph-wait";st.textContent=`
 img[data-kwait]{background:radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%);animation:kphBreath calc(1.6s*var(--pace,1)) ease-in-out infinite}
-img[data-kwait="s"],img[data-kwait="fs"],img[data-kwait="ms"],img[data-kwait="pfs"],img[data-kwait="pms"]{animation:none}
-img[data-kwait^="f"],img[data-kwait^="m"]{background:url("img/kit/unknown-fig-f.webp") center bottom/contain no-repeat;opacity:.55}
-img[data-kwait^="m"]{background-image:url("img/kit/unknown-fig-m.webp")}
-img[data-kwait^="f"]{aspect-ratio:730/1350}img[data-kwait^="m"]{aspect-ratio:616/1350}
+img[data-kwait="s"],img[data-kwait="fs"],img[data-kwait="ms"],img[data-kwait="es"],img[data-kwait="pfs"],img[data-kwait="pms"]{animation:none}
+img[data-kwait^="f"],img[data-kwait^="m"],img[data-kwait^="e"]{background:url("img/kit/unknown-fig-f.webp") center bottom/contain no-repeat;opacity:.55}
+img[data-kwait^="m"]{background-image:url("img/kit/unknown-fig-m.webp")}img[data-kwait^="e"]{background-image:url("img/kit/unknown-fig-e.webp")}
+img[data-kwait^="f"]{aspect-ratio:730/1350}img[data-kwait^="m"]{aspect-ratio:616/1350}img[data-kwait^="e"]{aspect-ratio:549/1350}
 /* entry-blank-r3 (review item 6): a PORTRAIT on its way (por-*) waits as the kit soft portrait silhouette (img/kit/unknown-f|m.webp, the stranger / empty-seat portrait), never as bare paper — small slots carry no line, so paper alone read as an empty frame */
 img[data-kwait^="p"]{background:url("img/kit/unknown-f.webp") center top/cover no-repeat,radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%)}img[data-kwait^="pm"]{background-image:url("img/kit/unknown-m.webp"),radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%)}
 @keyframes kphBreathF{50%{opacity:.3}}
-img[data-kwait="f"],img[data-kwait="m"]{animation-name:kphBreathF}
+img[data-kwait="f"],img[data-kwait="m"],img[data-kwait="e"]{animation-name:kphBreathF}
 @keyframes kphBreath{50%{opacity:.62}}
 [data-kwaitp]::after{content:attr(data-kwaitp);position:absolute;left:4px;right:4px;top:50%;transform:translateY(-50%);text-align:center;font:600 .72rem/1.25 var(--display,serif);color:#8a6a40;letter-spacing:.02em;pointer-events:none;z-index:2;text-shadow:0 1px 0 #fff8}
 /* entry-blank-r3: a slot whose box already draws its own ::after (act-card art frames: corners / pins) gets the line as one small child instead (same look), so the frame keeps its own decoration */
@@ -118,7 +118,7 @@ function kitPhWaitClear(im){try{if(!im.hasAttribute("data-kwait"))return;im.remo
  if(p&&p.hasAttribute("data-kwaitq")&&!p.querySelector(":scope>img[data-kwait]")){p.removeAttribute("data-kwaitq");p.querySelectorAll(":scope>.kwaitl").forEach(x=>x.remove())}}catch(e){}}
 let KPHW_Q=[],KPHW_T=0;
 /* the kit silhouette for a full-body cut-out that is still loading: "m" (men: Emperor, eunuch, official, physician…) | "f" | "" (not a figure). ONE rule: the picture slot (here) and the stage layout (j59 wait) read it. */
-function kitPhFigG(s){return/\/fig-/.test(s)?(/\/fig-(emp|eun|off|man|men|ty|phys|ksp|prince|vuong|guard|thaigiam|king)/.test(s)?"m":"f"):""}
+function kitPhFigG(s){return/\/fig-/.test(s)?(/\/fig-(eun|ksp|thaigiam)/.test(s)?"e":/\/fig-(emp|off|man|men|ty|phys|prince|vuong|guard|king)/.test(s)?"m":"f"):""}
 window.kitPhFigG=kitPhFigG;
 /* entry-blank-r3: the kit portrait silhouette for a portrait still loading: "m" (men, boys) | "f" | "" (not a portrait) */
 function kitPhPorG(s){return/\/por-/.test(s)?(/\/por-(emperor|eunuch|man|men|official|physician|steward|tutor|kid-m)/.test(s)?"m":"f"):""}

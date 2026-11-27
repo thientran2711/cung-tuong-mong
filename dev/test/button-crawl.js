@@ -232,7 +232,10 @@ async function crawlDev(b,URL,dev){
  startState.home=async()=>{await p.evaluate(()=>{if(typeof kitRoulette==='function'&&!window.__tRoul0){window.__tRoul0=kitRoulette;kitRoulette=function(o){try{o&&o.done&&o.done()}catch(e){}}}/* TEST SETUP ONLY (lc15 QC, #kroul race): the new-life roulette waits for its pictures (≤8 s) before it builds #kroul, so under CPU load it landed AFTER this setup removed the veils and covered the home screen (false «dead button under div#kroul»); a JS-started life skips it */try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
   /* the first-life LỜI DẶN tour is crawled on its own (START tour); here it counts as already seen */
   try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}
-  for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}try{S.tutTour=1;coachOff&&coachOff()}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;
+  for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}try{S.tutTour=1;coachOff&&coachOff()}catch(e){}
+  /* KK35 (G4 «Ô lưu · Lui», also on LIVE 5e013076): the new-life card was only hidden, never accepted → NLP stayed set → save() skipped → ☰ found no sổ and its ✕ fell back to the home menu.
+     Accept the life the way her «Nhập cung» does (j52 nlAccept), so ☰ → ✕ resumes a real saved life */try{if(typeof nlAccept==='function')nlAccept(true);save();if(window.CTM_NOTES&&CTM_NOTES.length)localStorage.setItem('ctm-notes-seen',CTM_NOTES[0].id)/* «Điều mới trong cung» seen (it pops once a sổ exists; second visit) */}catch(e){}
+  Q.length=0;document.getElementById('modal').hidden=true;
   document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render()});
   /* the life-start veils (roulette, «Sửa soạn nhập cung») can come a moment later: wait for them, take them down, then snapshot */
   await p.waitForTimeout(2500);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render();__bc.snap()})};

@@ -62,7 +62,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
    :`<div class="kbk-pname">${kitName(p.who,{cap:true,named:p.who===S})}${p.sub?`<small class="kbk-ts">${p.sub}</small>`:""}</div>${p.rel&&p.rel.length&&PW>=440?kitRelTable(p.rel,{paper:true}):""}`;
  const personBody=(p,cont)=>{const fw=p.kind==="person"?p.who:p.fig;let fig=typeof kitStageFig==="function"&&fw&&kitStageFig(fw,{cap:false})||"";
   /* owner 17:45Z: every page has its subject's full-length figure; no painting (yet) or the figure list still loading → the kit silhouette */
-  if(!fig&&fw&&typeof kitStageFig==="function"){let sx="f";try{const r=personRoleRank(fw);sx=r.kid?"k":r.sex==="m"?"m":"f"}catch(e){}fig=kitStageFig(fw,{cap:false,src:(typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+`unknown-fig-${sx}.webp`})||""}const kfr=(/--kfr:([\d.]+)/.exec(fig)||[])[1]||"1";
+  if(!fig&&fw&&typeof kitStageFig==="function"){const sx=kitSilG(fw);fig=kitStageFig(fw,{cap:false,src:(typeof KIT_DIR==="string"?KIT_DIR:"img/kit/")+`unknown-fig-${sx}.webp`})||""}const kfr=(/--kfr:([\d.]+)/.exec(fig)||[])[1]||"1";
   return `<div class="kbk-person${fig?" kbk-full":""}" style="--kfr:${kfr}${typeof kitBookFigCol==="function"?kitBookFigCol(fig,PW,PH):""}"><div class="kbk-por">${fig||(fw?pframe(kitFace(fw)):"")}</div><div class="kbk-phead">${personTop(p,!!cont)}</div><div class="kbk-flow"></div></div>`};
 
  /* ---- pagination: fill each page until it overflows, continue on the next ---- */
@@ -414,11 +414,15 @@ function kbkArt(facts,ctx){if(typeof evArtOf!=="function")return facts;let w=0;t
    a choice whose effect the game writes as its own sentence logs only that sentence; a short choice gets its context:
    "Nhịn lời mỉa của <tên>", "Cho <tên> mượn bạc", else "<option> (<first sentence of the question>)". c.lg (option) overrides. */
 const KBK_OPT_DROP=/^(Thôi|Đi|Đợi buổi sau \(Qua buổi\)|Đợi sáng mai \(Qua đêm\))$/;
-const KBK_OPT_NAMES=[[/^(Nhịn|Nhẫn nhịn)$/,/mỉa/,n=>`Nhịn lời mỉa của ${n}`],[/^Đáp trả sắc sảo$/,/mỉa/,n=>`Đáp trả lời mỉa của ${n}`],
+const KBK_OPT_NAMES=[[/^(Nhịn|Nhẫn nhịn)$/,/khiêu khích/,n=>`Nhịn lời khiêu khích của ${n}`],[/^Đáp trả sắc sảo$/,/khiêu khích/,n=>`Đáp trả lời khiêu khích của ${n}`],
+ [/^(Nhịn|Nhẫn nhịn)$/,/mỉa/,n=>`Nhịn lời mỉa của ${n}`],[/^Đáp trả sắc sảo$/,/mỉa/,n=>`Đáp trả lời mỉa của ${n}`],
  [/^Cho mượn$/,/mượn/,n=>`Cho ${n} mượn bạc`],[/^Từ chối$/,/mượn/,n=>`Từ chối cho ${n} mượn bạc`],
  [/^Nhận lời xin lỗi$/,/xin lỗi/,n=>`Nhận lời xin lỗi của ${n}`],[/^Lạnh lùng$/,/xin lỗi/,n=>`Lạnh lùng trước lời xin lỗi của ${n}`]];
 function kbkOptWho(m){try{const w=m&&m.who&&m.who.w;if(w&&w[0]==="r"){const v=RV(+w[1]);if(v&&v.name)return v.name}}catch(e){}return""}
-function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;const ctx=kpPlain(m.h||"").replace(/\s+/g," ").trim();const who=kbkOptWho(m);
+/* OB-VERDICT-3 (title of the result card = this name): the visitor's ARRIVAL stage line («Ngoài điện có tiếng xướng: “… giá đáo!”», «… xin cầu kiến»,
+   owner 24/11 ~22:08Z) is not the question — the context starts after it (before: «Nhịn (Ngoài điện có tiếng xướng: “Hoàng hậu … giá đáo)») */
+const KBK_ARRIVE=/^[^“"]*[“"][^”"]*(giá đáo|xin cầu kiến|xin ra mắt)[^”"]*[”"]\s*/;
+function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;let ctx=kpPlain(m.h||"").replace(/\s+/g," ").trim();for(let k=0;k<2&&KBK_ARRIVE.test(ctx);k++)ctx=ctx.replace(KBK_ARRIVE,"").trim();const who=kbkOptWho(m);
  for(const [a,b,f] of KBK_OPT_NAMES)if(who&&a.test(n)&&b.test(ctx))return f(who);
  if(n.split(/\s+/).length>3||(who&&n.includes(who)))return n;
  let s=(ctx.match(/^[^.!?]*/)||[""])[0].trim();if(!s||s.length>90)s=kpPlain(m.t||"").trim();

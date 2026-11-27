@@ -9,21 +9,22 @@ const {chromium}=require('playwright');
 const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log((c?'ok   ':'FAIL ')+n);if(!c)console.error('  ',JSON.stringify(x).slice(0,900))};
  let ctx=null,p=null;
- const open=async()=>{if(ctx)await ctx.close();ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});p=await ctx.newPage();p.setDefaultTimeout(0);
+ const open=async()=>{if(ctx)await ctx.close();ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});p=await ctx.newPage();p.setDefaultTimeout(0);await p.addInitScript(require('./lib/qdrain').init);/* headless month loop: __bot + answer the night choice (lib/qdrain.js) */
   p.on('pageerror',e=>errs.push(e.message.slice(0,300)));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text().slice(0,300))});
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
   await p.waitForFunction(()=>typeof start==='function'&&typeof nrMaidL==='function',null,{timeout:0});await p.waitForTimeout(1500);
   await p.evaluate(()=>{document.getElementById('title').hidden=true;
    window.__boot=k=>{for(let t=0;t<3;t++){quiet=true;window.__forceOrigin=k;start();quiet=false;Q.length=0;if(S&&S.origin)return true}return false};
    window.__life=(k,mons)=>{if(!__boot(k))return{err:'boot'};const seen=new Map(),bad=[];let err=null,mon=0;
-    for(;mon<mons;mon++){if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}
-     const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
+    let eun0=new Set();/* eunuchs already on the staff at the previous month's end: a eunuch who joins this month gets his road at the next month tick (jnroad nrMMonth) */
+    for(;mon<mons;mon++){if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}if(mon===mons-1)eun0=new Set(nrServL('eunuch'));
+     const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
      for(const s of nrMaidL()){if(!s.nr)continue;const z=seen.get(s)||{l:0,mis:nrMis(s)};seen.set(s,z);if(s.nr.l.length>z.l){z.l=s.nr.l.length;
        /* r2: a maid can change house between chapters (transfer, mistress gone); the rival is checked as the next chapter reads it (nrMRival recasts a stale one) */if(s.nr.c!=null&&!s.nr.x){const r=nrMRival(s);if(r&&nrMis(r)===nrMis(s))bad.push([s.name,'rival same house'])}}}}
     const M=[...seen.keys()].map(s=>({name:s.name,o:s.nr.o,r:s.nr.r,l:s.nr.l,x:s.nr.x,own:nrMis(s)===S,valid:!!ARC67[s.nr.r]&&ARC67[s.nr.r].o==='cnv',chs:[4,5,6,7,8,9,10,11].filter(n=>nrCh(s.nr.r,n))}));
     const raised=rivals.filter(v=>v.nr&&v.nr.pr).map(v=>({name:v.name,o:v.nr.o,r:v.nr.r,pr:v.nr.pr,l:v.nr.l,ok:ARC67[v.nr.r]&&ARC67[v.nr.r].o==='cn'}));
     const logs=S.logs.filter(l=>/Tin trong cung · [^·]*người hầu/.test(l)).length;
-    const eun=nrServL('eunuch').map(s=>({n:s.name,r:s.nr&&s.nr.r,l:s.nr?s.nr.l.length:-1,ok:!!(s.nr&&NRM[s.nr.r]&&NRM[s.nr.r].k==='eun')}));
+    const eun=nrServL('eunuch').map(s=>({n:s.name,r:s.nr&&s.nr.r,l:s.nr?s.nr.l.length:-1,ok:!!(s.nr&&NRM[s.nr.r]&&NRM[s.nr.r].k==='eun')||(!s.nr&&!eun0.has(s)),fresh:!eun0.has(s)||undefined}));
     return{k,M,raised,bad,err,mon,logs,eun,maids:nrMaidL().length,bytes:JSON.stringify(nrMaidL().map(s=>s.nr||null)).length}}})};
  for(let L=0;L<NLIV;L++){await open();const k=['muoi','thd','tt'][L%3];const R=await p.evaluate(([k,m])=>window.__life(k,m),[k,MON]);
   if(!R.M){chk(`life ${L+1}: ran`,false,R);continue}

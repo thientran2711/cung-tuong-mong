@@ -15,7 +15,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const p=await (await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:SHOT?2:1})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof toilOpen==='function'&&typeof start==='function');await p.waitForTimeout(2500);
   await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.bac=500;S.ap=9;
-   /* a second jewel so the Trang sức tab has a piece in the chest */try{const k=Object.keys(IT).find(k=>IT[k]&&itm(k).sl==="ear"&&!(S.inv||[]).some(e=>e&&e.k===k));if(k)S.inv.push({k})}catch(e){}save();try{render()}catch(e){}});await p.waitForTimeout(1200);
+   /* a second jewel so the Trang sức tab has a piece in the chest */try{const k=Object.keys(IT).find(k=>IT[k]&&itm(k).sl==="ear"&&!(S.inv||[]).some(e=>e&&e.k===k));if(k)S.inv.push({k})}catch(e){}
+   /* r4: a second hairpin too (a new life sometimes owns only the one she wears → the Trâm cài tab had nothing to tap: flaky on LIVE as well) */try{const k=Object.keys(WD_ITEMS).find(k=>WD_ITEMS[k]&&WD_ITEMS[k].sl==="tram"&&k!==((wdOf(S).tram||{}).k)&&!(S.inv||[]).some(e=>e&&e.k===k));if(k)S.inv.push({k})}catch(e){}save();try{render()}catch(e){}});await p.waitForTimeout(1200);
   const open=async()=>{await p.evaluate(()=>{try{kmReset()}catch(e){}document.querySelectorAll('.kmov,#kmrew,#kroul').forEach(e=>e.remove());try{kg82Close()}catch(e){}toilOpen();document.getElementById('toilrdy').click()});await p.waitForTimeout(1800)};
   await open();
   const worn=()=>p.evaluate(()=>({y:(wdOf(S).y||{}).k||null,tram:(wdOf(S).tram||{}).k||null,jw:(S.inv||[]).filter(e=>e&&e.w&&IT[e.k]).map(e=>e.k).sort().join(','),

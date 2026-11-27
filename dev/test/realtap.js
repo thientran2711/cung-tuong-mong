@@ -7,7 +7,8 @@
    NO .click() / dispatchEvent / game-function calls anywhere here: page.evaluate is used ONLY to READ (rects, hit-test).
    opt.ignoreCover = RegExp of transient hint popups (e.g. /kpop/) that a tap simply dismisses: not a dead button.
    Usage: const RT=require('./realtap.js'); const rt=RT.make(page,{dev:'fold',shots:'/dir',log:fn}); await rt.tap(sel,{screen,label});
-          rt.stats() → {taps, dead, deadList[], jsClicks:0}. */
+          rt.stats() → {taps, dead, deadList[], jsClicks:0}.
+   rt.choose(target,{screen,label}) = choose an option card the way a person does (hand: lift → ✓; dialogue: lines → thẻ gỗ → ✓), see below. */
 'use strict';
 const path = require('path');
 
@@ -105,6 +106,36 @@ function make(page, opt = {}) {
     const d = { k: 'DEAD BUTTON', screen: info.screen || '?', label: info.label || (p && p.lab) || '?', cover: p && (p.gone ? 'element gone' : p.zero ? 'zero size' : p.cover) || '?', shot, dev: opt.dev };
     st.deadList.push(d); log(d); return false;
   }
-  return { tap, stats: () => ({ ...st, deadList: st.deadList.slice(-200) }), touch, PROBE };
+  /* CHOOSE an option card like a person (owner 25/11 ~21:55Z, KIT §101 / §102.2; law 11: ONE helper for every robot / gate):
+     a plain button = one real tap. A HAND card (.opts.khand) = real tap (the card lifts) → real tap on the green ✓ of the lifted card
+     (#modal .dlg>.khconf>.khok); a tap on the lifted body chooses nothing. A DIALOGUE stage (.dlg.kstalk) = real taps on the stage through
+     its lines until the thẻ gỗ drop → real tap on the plaque of that card (data-id = its hand index; pager «›» if it is on another page) → its ✓.
+     Returns true when the last tap (the ✓, or the plain tap) landed. Read-only evaluates only. */
+  const OKSEL = '#modal .dlg>.khconf:not([hidden])>.khok', PKOK = '.kpk .khconf:not([hidden])>.khok';
+  async function choose(target, info = {}) {
+    const h = await handleOf(target); if (!h) return dead(info, { lab: info.label || String(target), cover: 'not in page' });
+    const k = await h.evaluate(e => { if (!e || !e.isConnected) return { k: 'gone' }; const g = e.closest('.opts.khand'); if (!g) return { k: 'plain' }; const dl = e.closest('.dlg');
+      return { k: dl && dl.classList.contains('kstalk') ? 'talk' : 'hand', i: [...g.children].filter(b => b.matches('button.ka.kopt')).indexOf(e) } }).catch(() => ({ k: 'gone' }));
+    const lab = info.label || 'card';
+    if (k.k === 'plain' || k.k === 'gone') return tap(h, info);
+    if (k.k === 'hand') {
+      if (!(await tap(h, { ...info, label: lab + ' (lift)' }))) return false;
+      for (let i = 0; i < 8 && !(await page.$(OKSEL)); i++) await page.waitForTimeout(150);
+      if (!(await page.$(OKSEL))) { log({ k: 'no ✓', screen: info.screen, label: lab }); return false }
+      return tap(OKSEL, { ...info, label: '✓ ' + lab });
+    }
+    /* talk: lines → plaques */
+    if (info.keep !== true && typeof h.dispose === 'function') await h.dispose().catch(() => {});
+    const stagePt = () => page.evaluate(() => { const d = document.querySelector('#modal:not([hidden]) .dlg.kstalk'); if (!d) return null; const r = d.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height * .4 } });
+    for (let i = 0; i < 16 && !(await page.$('.kpk .kpk-n')); i++) { const q = await stagePt(); if (!q) break; if (touch) await page.touchscreen.tap(q.x, q.y); else await page.mouse.click(q.x, q.y); st.taps++; await page.waitForTimeout(260) }
+    await page.waitForTimeout(700);
+    const PL = `.kpk .kpk-b[data-id="${k.i}"]`;
+    for (let i = 0; i < 4; i++) { const vis = await page.evaluate(s => { const e = document.querySelector(s); return !!(e && e.getClientRects().length && e.getBoundingClientRect().width > 3) }, PL); if (vis) break; if (!(await tap('.kpk .kpkpg[data-pkpg="1"]', { screen: info.screen, label: 'thẻ gỗ ›' }))) break; await page.waitForTimeout(400) }
+    if (!(await tap(PL, { ...info, label: lab + ' (thẻ gỗ)' }))) return false;
+    for (let i = 0; i < 8 && !(await page.$(PKOK)); i++) await page.waitForTimeout(150);
+    if (!(await page.$(PKOK))) { log({ k: 'no ✓', screen: info.screen, label: lab + ' (thẻ gỗ)' }); return false }
+    return tap(PKOK, { ...info, label: '✓ ' + lab });
+  }
+  return { tap, choose, stats: () => ({ ...st, deadList: st.deadList.slice(-200) }), touch, PROBE };
 }
 module.exports = { make, PROBE };
