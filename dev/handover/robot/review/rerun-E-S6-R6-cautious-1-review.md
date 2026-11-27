@@ -1,4 +1,8 @@
-# R6-cautious-1 (Fold 755x1000, bot=sens, seed 764262748, pf/pt_tang) — end-of-life notes — COUNTED PROVISIONALLY (19 taps)
-Ending **«Bị ban hoa, xuất cung»**, age 19, year 1, **buổi 1**, rank 2, **19 real taps**, 0 JS clicks, 0 bugs. robot-audit VALID (game-imposed; exitPick none). github.io LIVE, GAME BUILD 0281bf7bcef6, harness d2e03d80, no resume. From the result JSON (last taps) and the moment log; I did not open its shots: no score table.
-## Caveat — needs a ruling (Foreman E / F)
-The last taps are «Gợi ý» ×4 then the board's «Quay lại» (#kg82) with NO «AREA x,y» board taps: the robot did not play the Lễ ra mắt mini-game, it asked for hints and left. The owner rule is that mini-games are played by the player himself; the audit only flags «Bỏ cuộc» picks as mg-quit, so this was not flagged. R6-speed-4 has the identical tap shape (Sẵn sàng → Gợi ý ×4 → Quay lại); R6-random-5 and R6-speed-2 DID tap the board («AREA») before «Quay lại». If leaving the board without playing is a bot-chosen exit, the 2 lives (cautious-1, speed-4) become INVALID and must be rerun; if the game imposes «Ban hoa» for an unplayed trial, they stand. I keep them as COUNTED PROVISIONALLY until told.
+# R6-cautious-1 (fold, bot=sens, seed 764262748, pf/pt_tang) — end-of-life notes — COUNTED, flag «mixed build»
+Ending **Xuất gia — «Xuất gia làm ni cô»**, age 33, year 14, **buổi 1975**, 8181 real taps, 0 JS clicks, 4 bug rows, 0 dead buttons. robot-audit VALID: game-imposed (the last bot tap was the non-exit option «Sang ngày mới»). Written from the result JSON + moment log, not played by eye. Fresh rerun on LIVE github.io (the first R6-cautious-1 run was INVALID under the owner's robot rules), harness f65d019b.
+## Builds
+Start 9ab008eb74f9; two OOM page crashes (b333, b1239), each resumed from ckpt with build0 synced to LIVE: flag «mixed build». No save-quota error.
+## Findings
+1. GAME: item pick grid — the confirm «kipgo» stays off-screen after 8 real scrolls (same as random-5 / speed-4).
+2. DESIGN: Xuất gia at 33 after a quiet decline — again no warning beat (same shape as lover-5, which ended Xuất gia at 31); 196 offers seen / 135 picked (69 %), the cautious persona picks more than the random ones.
+3. HARNESS: one area tap blocked because a button appeared under the point («Thường Trà…»), by design; two crashes were RAM (15 GB cgroup), not the game.
