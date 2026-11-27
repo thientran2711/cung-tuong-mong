@@ -25,6 +25,10 @@ const lc=s=>String(s).charAt(0).toLowerCase()+String(s).slice(1);
 function X(cap){/* ONE address core (jvoice kAddr, VANPHONG §2): the narrator calls a maid "ngươi"; a consort is called as her own servant calls her (tiểu chủ / nương nương / Hoàng hậu nương nương) */let w;try{w=srvNow()?kAddr(null,{srv:"f"},{name:"ngươi"}).goi:kAddr({srv:"f"},S,{m:"cool"}).goi}catch(e){w=srvNow()?"ngươi":"tiểu chủ"}return cap?w.charAt(0).toUpperCase()+w.slice(1):w}
 function ME(){/* the narrator's self word: the ma ma says "ta" to a maid (kAddr, no speaker); a consort's maid says "nô tỳ" */try{return srvNow()?kAddr(null,{srv:"f"},{name:"ngươi"}).xung:kAddr({srv:"f"},S,{m:"cool"}).xung}catch(e){return srvNow()?"ta":"nô tỳ"}}
 function say(s){return String(s).replace(/\{X\}/g,X(true)).replace(/\{x\}/g,X(false)).replace(/\{m\}/g,ME())}
+/* goal-links (owner OD 26/11 ~18:05Z, law 6b real people): a quest that names the Nội vụ phủ eunuch names HIM (S.court.ped, the real person who stands at Nội vụ phủ, j95 c:ped) */
+function pedN(){/* r2: he is named from the first day (j61 k61SeedChiTon seeds S.court.ped; owner asked to NAME him) → always "thái giám <name>" */try{const c=S&&S.court&&S.court.ped;if(c&&c.name)return `thái giám ${c.name}`}catch(e){}return "thái giám lo mua đồ"}
+function T(s){return String(s==null?"":s).replace(/\{ped\}/g,pedN())}
+window.tq14Ped=pedN;
 /* ---------- the quests: [variant][chapter] → list; need = how many times (BAL.st14.q.need[id] or 1) ---------- */
 const A=re=>d=>!!(d&&re.test(String(d.n||"")));
 const TQ={
@@ -41,7 +45,7 @@ const TQ={
     why:"Muốn được để mắt phải có bạc lo quà cáp, lễ lạt. Rương mang theo từ nhà, món nào không dùng thì đổi lấy bạc.",ok:"“Bạc trong tay rồi, việc gì cũng dễ lo hơn.”"},
    {id:"diem",ev:"act",m:A(/^(Điểm trang|Dưỡng nhan)/),t:"Điểm trang hoặc Dưỡng nhan",tab:"act",act:/Điểm trang|Dưỡng nhan/,card:"Điểm trang, Dưỡng nhan",
     why:"Dung nhan là thứ Hoàng thượng thấy trước tiên.",ok:"“Dung nhan như thế, gặp ngự giá ắt được ngoái nhìn.”"},
-   {id:"mua",ev:"buy",t:"Nhờ thái giám Nội vụ phủ mua một món",tab:"go",tl:"Dư đồ › Nội vụ phủ",
+   {id:"mua",ev:"buy",t:"Đến Nội vụ phủ, nhờ {ped} mua một món",tab:"go",tl:"Dư đồ › Nội vụ phủ",place:"nvp",who:"ped",
     why:"Biết chỗ sắm sửa, khi cần lễ vật dâng lên khỏi lúng túng.",ok:"“Đã biết đường mua sắm. Đồ tốt phải để dành lúc cần.”"}],
   tap14:[
    {id:"giao",ev:"rel",t:"Làm một việc với một phi tần trong Hậu cung",tab:"court",tl:"Hậu cung › Phi tần",
@@ -142,17 +146,17 @@ function narr(){try{const id=(QB().narr||{})[variant()]||"gt";if(typeof elderBy=
 function lapse(m){/* raised while maid quests are open: they cannot be done any more */try{if(m.q14.v==="s"&&!srvNow())for(const q of m.q14.L)if(!q.ok)q.x=1}catch(e){}}
 /* steps shown for a quest chapter: [label, done, "q"] (a lapsed quest counts as done for the chapter, says so, pays nothing) */
 function qSteps(m){if(!m||!m.q14)return[];lapse(m);return m.q14.L.map(q=>{const d=defOf(m.q14.v,m.id,q.id);if(!d)return null;const N=need(q.id);
- return[`${d.t}${N>1?` (${Math.min(q.n,N)}/${N})`:""}${q.x?" · không còn hợp thân phận mới":""}`,!!(q.ok||q.x),"q"]}).filter(Boolean)}
+ return[`${T(d.t)}${N>1?` (${Math.min(q.n,N)}/${N})`:""}${q.x?" · không còn hợp thân phận mới":""}`,!!(q.ok||q.x),"q"]}).filter(Boolean)}
 window.tq14Steps=qSteps;
 /* the quest list in the two cards: kit §46 kitChecks (✓/✗ chip + text, the same part as the chapter detail's steps) */
 function qChecks(m){const L=qSteps(m).map(x=>[x[1],esc(x[0])]);return typeof kitChecks==="function"?kitChecks(L.filter(x=>!x[0]).concat(L.filter(x=>x[0]))):""}
 /* "Việc nên làm" with "Đi làm" (jgoal nextSteps reads C.todo) */
 function todo(m){if(!m||!m.q14)return null;const L=[];for(const q of m.q14.L){if(q.ok||q.x)continue;const d=defOf(m.q14.v,m.id,q.id);if(!d)continue;
-  L.push({t:d.t,why:say(d.why)+hint(q.id),tab:d.tab,act:d.act,card:d.card,tl:d.tl})}return L.length?L:null}
+  L.push({t:T(d.t),why:say(d.why)+hint(q.id),tab:d.tab,act:d.act,card:d.card,tl:d.tl,place:d.place,who:d.who})}return L.length?L:null}
 /* nothing in the chest for this quest: say where to get one (the Nội vụ phủ shop button is in Tư trang) */
 function hint(id){try{const inv=S.inv||[];
- if(id==="trang"&&!inv.some(e=>e&&!e.h&&((typeof wdItem==="function"&&wdItem(e))||(IT[e.k]&&itm(e.k).sl))))return " Rương chưa có món nào để thay: nhờ thái giám mua một món rồi mặc vào.";
- if(id==="ban"&&typeof econSellable==="function"&&!econSellable(S).some(x=>x&&!x.no))return " Rương chưa còn món nào bán được: nhờ thái giám mua một món, hoặc chờ đồ được ban thưởng.";
+ if(id==="trang"&&!inv.some(e=>e&&!e.h&&((typeof wdItem==="function"&&wdItem(e))||(IT[e.k]&&itm(e.k).sl))))return ` Rương chưa có món nào để thay: đến Nội vụ phủ nhờ ${pedN()} mua một món rồi mặc vào.`;
+ if(id==="ban"&&typeof econSellable==="function"&&!econSellable(S).some(x=>x&&!x.no))return ` Rương chưa còn món nào bán được: đến Nội vụ phủ nhờ ${pedN()} mua một món, hoặc chờ đồ được ban thưởng.`;
 }catch(e){}return ""}
 window.tq14Todo=todo;
 /* ---------- the chapter: steps, goal text, done rule ---------- */
@@ -179,11 +183,11 @@ function introCard(m){if(quiet||window.__bot||typeof kitPanel!=="function")retur
 function doneCard(m,d,b){if(quiet||window.__bot||typeof kitPanel!=="function")return;const n=narr(),c=S.st.ch,ch=MS67[m.id];
  const left=m.q14.L.filter(q=>!q.ok&&!q.x).length;
  const rows=[["Lời dặn",`${esc(n.name)}: ${say(d.ok)}`],["Phần thưởng",`Bạc +${b}`,"g"]].concat(left?[]:[["Còn lại","Đủ việc ma ma dặn. Đạt mục tiêu của chương thì chương xong, có thưởng."]]);
- kitPanel({kind:"result",title:`Xong việc: ${d.t}`,sub:`Chương ${c.n} · ${ch.t()}`,sections:[{h:"",rows:rows.map(r=>[r[0],r[1],r[2]||""])},{h:"Việc ma ma dặn",html:qChecks(m)}],subject:n.face||null,btn:"Đã hiểu"})}
+ kitPanel({kind:"result",title:`Xong việc: ${T(d.t)}`,sub:`Chương ${c.n} · ${ch.t()}`,sections:[{h:"",rows:rows.map(r=>[r[0],r[1],r[2]||""])},{h:"Việc ma ma dặn",html:qChecks(m)}],subject:n.face||null,btn:"Đã hiểu"})}
 function note(ev,det){const m=active();if(!m)return;lapse(m);let hit=0;
  for(const q of m.q14.L){if(q.ok||q.x)continue;const d=defOf(m.q14.v,m.id,q.id);if(!d||d.ev!==ev||(d.m&&!d.m(det)))continue;
   q.n++;hit=1;if(q.n>=need(q.id)){q.ok=1;const b=QB().bac[m.q14.v]||0;try{apply({bac:b})}catch(e){S.bac=(S.bac||0)+b}
-   log(`<b class="g">Xong việc «${d.t}».</b> ${esc(narr().name)} dặn thêm: ${say(d.ok)} Bạc +${b}.`);doneCard(m,d,b)}}
+   log(`<b class="g">Xong việc «${T(d.t)}».</b> ${esc(narr().name)} dặn thêm: ${say(d.ok)} Bạc +${b}.`);doneCard(m,d,b)}}
  if(hit)try{if(typeof syncMain67==="function")syncMain67()}catch(e){}}
 window.tq14Note=note;
 /* ---------- hooks on the game's own functions (every path of each kind, LUẬT SỬA CẢ NHÓM) ---------- */
