@@ -1659,9 +1659,9 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   (never only the drawn page's cards, law 6c); an item whose card is not drawn takes its lock from the kit rule (`kitLockWhy`: kitOff · bạc · lock ·
   khắc · unmet Cần · lk) in the drawn card's words (its unmet Cần row first, bạc / lock = «Thiếu bạc»); its act draws that card through the real
   `showModal` path (`kipSelect`) and clicks the real option; a redraw keeps `#modal` hidden behind the ring (`kri-hide` put back). Ring test:
-  `node dev/test/picker-dom-ring.js <root>` (ring = kipList up to `KIT_RINGI.maxN`, lock = `kitTakeable`, same reason as drawn, act on an
-  undrawn item gives one piece, the next dialog in Q survives the ring close). OPEN: the ring itself shows at most `KIT_RINGI.maxN` (24) items
-  (`kriItems` slice) — KIT REQUEST K-RING-ALL.
+  `node dev/test/picker-dom-ring.js <root>` (ring = the whole kipList — no item cap since K-RING-ALL (KK59, §104.4 RING) —, lock = `kitTakeable`,
+  same reason as drawn, act on an undrawn item gives one piece (counted with `invCount`: a stacked piece comes from her stack), the next dialog
+  in Q survives the ring close).
 - Phone landscape (height ≤ 500): grid and detail side by side.
 - Users: giftpick (Hậu cung act "Tặng quà", now with the gift card's own line `giftEval`: odds · tốn · thành · kèm), giftto (Dâng quà
   Hoàng thượng / Thái hậu), plantpick (Cài đồ vào rương). Scan: `node dev/test/gift-pick-scan.js` (every option list built from S.inv).
