@@ -6,15 +6,21 @@
    still add up the same way for everyone. A fall of Danh / Đức / Sủng / oán is returned unchanged; thiện cảm (th, hh, rel: −100..100) is paced on BOTH sides of 0 (dislike growing below 0 the same way as liking above it; a fall back toward 0 is not). No player-visible text, no random draw (co-op safe). */
 const SP_K=Object.fromEntries(["sung","danh","duc","th","hh","rel","oan"].map(k=>[k,true]));/* the five paced stats (flags, not numbers) */
 function spRk(p){try{return p===S?(S.rank|0):(p&&p.queen?RANKS.length-1:(p&&p.rank|0)||0)}catch(e){return 0}}
-function spCeil(rk){const C=BAL.stp.ceil;return C[Math.max(0,Math.min(C.length-1,rk|0))]}
+/* PACE-SPEED (owner OD 26/11 ~19:10Z (A) «điểm của mình ở ngay đó thôi … không vút lên cao quá nhiều so với điểm chuẩn»): a stat tied to the rank
+   bars (BAL.stp.bar: Sủng → RANKS.s, Danh → RANKS.d) has its OWN ceiling = the NEXT rank's bar + BAL.stp.bar[k].m (a small margin); at the top
+   rank BAL.stp.bar[k].top. Every other stat keeps the shared rank list BAL.stp.ceil. */
+function spBar(k){const T=BAL.stp.bar;return T&&k&&T[k]||null}
+function spCeil(rk,k){rk=Math.max(0,rk|0);const b=spBar(k);if(b&&typeof RANKS==="object"){const n=Math.min(RANKS.length-1,rk+1);return rk>=RANKS.length-1?b.top:Math.min(b.top,RANKS[n][b.f]+b.m)}
+ const C=BAL.stp.ceil;return C[Math.min(C.length-1,rk)]}
 /* the hard stop of a rise = the rank ceiling, but never below BAL.stp.floor[k] (the highest stat gate the game asks at any rank, BIG review 1:
    above the rank ceiling a rise still counts at the slow share dm.min, so every gate stays reachable at every rank; law 16) */
-function spTop(k,rk){const f=BAL.stp.floor;return Math.max(spCeil(rk),f&&f[k]||0)}
+/* a bar-tied stat (BAL.stp.bar) stops at its ceiling + bar[k].x (above the ceiling only the slow share dm.min counts; owner (A): no overshoot far above it) */
+function spTop(k,rk){const b=spBar(k);if(b)return Math.min(b.top,spCeil(rk,k)+(b.x||0));const f=BAL.stp.floor;return Math.max(spCeil(rk,k),f&&f[k]||0)}
 const SP_SIGN=Object.fromEntries(["th","hh","rel"].map(k=>[k,true]));/* thiện cảm runs −100..100: dislike growing (below 0) is paced the same way as liking; a fall back toward 0 is not */
 function spG(k,h,now,n,rk,ck,peek){const B=typeof BAL==="object"&&BAL.stp;if(!B||!B.on||SP_OFF||!n||!SP_K[k])return n;
  if(n<0){if(!SP_SIGN[k])return n;const c=+now||0,z=Math.min(-n,Math.max(0,c)),rest=-n-z;return -(z+(rest>0?spG(k,h,Math.max(0,-Math.min(0,c)),rest,rk,(ck||k)+"-",peek):0))}
  const bd=B.band[k];if(bd&&n>bd[1])n=Math.min(bd[2],bd[1]+(n-bd[1])*B.over);
- const ce=spCeil(rk),top=spTop(k,rk),c0=Math.max(0,+now||0);if(c0>=top)return 0;
+ const ce=spCeil(rk,k),top=spTop(k,rk),c0=Math.max(0,+now||0);if(c0>=top)return 0;
  let g=n*Math.max(B.dm.min,1-Math.pow(c0/ce,B.dm.pow));
  const cc=h&&typeof h==="object"?(h.spc||(h.spc={})):null,key=ck||k;
  if(cc){g+=+cc[key]||0;const gi=Math.round(g);if(!peek)cc[key]=Math.round((g-gi)*1000)/1000;g=gi}else g=Math.round(g);

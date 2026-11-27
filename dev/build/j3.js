@@ -165,7 +165,7 @@ function monthTick(){let ev="";
   if(S.month>12){S.month=1;S.year++;S.age++;S.emp.age++;if(typeof ageYear==="function")ageYear();allKids().forEach(([k])=>{if(k.alive)k.age++});
     if(S.heir&&!S.heir.v&&S.heir.k.alive){apply({danh:BAL.eff.j3.danhMonthTick});ev+=`Ngươi là mẹ Thái tử, danh vọng thêm cao. Danh ${balSg(BAL.eff.j3.danhMonthTick)}. `}
     if(S.age>BAL.age.sacFrom){S.sac=Math.max(BAL.age.sacMin,S.sac-BAL.age.sacLoss);ev+=`Năm mới, ngươi ${S.age} tuổi; nhan sắc phai dần (Sắc ${S.sac}). `}}
-  if(S.age>=40&&S.rank<7&&!mySons().length){over("Lãnh cung","Tuổi xuân qua đi, sống cô quạnh nơi thâm cung.","Tuổi xuân qua đi",true);return ev}
+  /* owner OD 26/11 ~21:30Z «Đời tôi chỉ kết thúc khi hoàng thượng đưa ra quyết định, hoặc đời ổng kết thế nào hoặc tôi quyết định thôi» + ~21:40Z «Giữ bệnh, độc, ám sát»: the age-40 «Tuổi xuân qua đi» end is removed (no age-based end for her; old saves: no forced end). Illness / poison / assassination stay. */
   if(typeof mortEmpDue==="function"?mortEmpDue():S.year>12&&roll((S.year-12)*1.5+Math.max(0,S.emp.age-50)*.5)){emperorDies(ev);return ev}
   ev+=moodMonth();
   if(S.month===1)ev+=festival("Yến tiệc đầu xuân","sac","Sắc và điệu múa");

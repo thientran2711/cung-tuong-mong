@@ -27,7 +27,14 @@ const [,,PAGE,DAYS]=process.argv;const ND=+DAYS||45;
    const G=[["duc",BAL.route.anDuc,"Ẩn dật route.anDuc"],["duc",BAL.route.tuDuc,"xuất gia route.tuDuc"],["duc",BAL.route.guiltDuc,"route.guiltDuc"],["duc",BAL.ducLv.up,"Đức → Thái hậu ducLv.up"],["duc",BAL.ducLv.word[3],"hiền đức"],
     ["danh",BAL.danhG.kcVihanh,"Khách lạ ở chùa danhG.kcVihanh"],["danh",BAL.succN.rareCDanh,"succN.rareCDanh"],["sung",BAL.sinhThanSung,"sinh thần"],["sung",BAL.sungLv.emp[2],"sungLv.emp"],
     ["th",BAL.hhTh,"hhTh"],["th",BAL.road.ch_co.trust,"road ch_co trust"],["hh",BAL.ag.hh.rewardHh,"ag.hh.rewardHh"],["rel",tc,"net thClamp top"],["oan",tc,"net thClamp top"]];
-   for(const [k,g,n] of G){const bad=[];for(let r=0;r<8;r++)if(spTop(k,r)<g)bad.push(r);ok(g>0&&!bad.length,`gate ${n} ${k} ≥ ${g}: reachable at every rank${bad.length?" — shut at "+bad:""}`)}}
+   /* PACE-SPEED (owner OD 26/11 ~19:10Z (A)): a bar-tied stat (BAL.stp.bar: Sủng, Danh) stays near the NEXT rank's bar, so its high gates open
+      as she climbs (law 5): such a gate must open at the top rank and, once open at a rank, stay open at every higher rank (never shut for good) */
+   for(const [k,g,n] of G){const bad=[];for(let r=0;r<8;r++)if(spTop(k,r)<g)bad.push(r);
+    if(B.bar&&B.bar[k]){const pre=bad.every((r,i)=>r===i);ok(g>0&&!bad.includes(7)&&pre,`gate ${n} ${k} ≥ ${g}: bar-tied, opens from rank ${bad.length}${pre?"":" — NOT a prefix: "+bad}`)}
+    else ok(g>0&&!bad.length,`gate ${n} ${k} ≥ ${g}: reachable at every rank${bad.length?" — shut at "+bad:""}`)}}
+  /* PACE-SPEED (A): bar-tied ceilings = the next rank's bar + margin; a long run of rises at a rank never passes ceiling + x */
+  if(B.bar)for(const k in B.bar){const b=B.bar[k];for(let r=0;r<7;r++){const nx=RANKS[r+1][b.f],c=spCeil(r,k);ok(c===Math.min(b.top,nx+b.m)&&c>nx,`${k} rank ${r}: ceiling ${c} = next bar ${nx} + ${b.m}`);
+    const q={};let v=0;for(let i=0;i<300;i++)v+=spG(k,q,v,8,r);ok(v<=c+(b.x||0)&&v>=nx,`${k} rank ${r}: 300 × +8 from 0 → ${v} (bar ${nx} ≤ v ≤ ceiling ${c} + x ${b.x||0})`)}}
   for(let r=1;r<8;r++)ok(B.ceil[r]>=B.ceil[r-1],`ceiling rises with rank (${B.ceil[r-1]} → ${B.ceil[r]})`);
   /* (3) diminishing returns: the same rise adds less near the top */
   const lo=spG("danh",{},5,5,2),hi=spG("danh",{},55,5,2);ok(hi<lo,`Danh +5 at 5 → ${lo}, at 55 → ${hi}`);
