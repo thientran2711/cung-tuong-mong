@@ -38,3 +38,17 @@ tt_ruong tt_gia tt_tho tt_thu · dtq_ngua dtq_hang dtq_thuong dtq_ky · thd_dich
 
 ## LIVE moved: B1 r4 landed (main 611fca61, 27/11 ~08:00Z)
 All -lrm branches above are on 98c77517 (nhv-areas on 448622df). Re-merge onto 611fca61 in progress (merge-tree: built files only for law1-land, qc-noise, ob-ngoaicung, nhv-areas, endcard-top, kit-name-stranger, c3-seals, kit-evframe; assemble.py / KIT.md / jdh.js for e-pack-a, e-pack-c, titles-daycard, kit-screenveil, mgskin-wire, flight-mucluc-kit).
+
+## Re-merged onto LIVE 611fca61 (B1 r4) — current shas for review / LC29
+e-pack-a-lrm c567d0a0 · law1-land-lrm adb11f02 · qc-noise-lrm 1318464e · ob-ngoaicung-lrm 9eb4e849 · e-pack-c-lrm de33f732 · titles-daycard-lrm 16e8b575 · endcard-top-lrm 123d5b2c · kit-name-stranger-lrm 865ed91a · c3-seals-lrm 5097d773. (nhv-areas / screenveil / mgskin-wire / mucluc / evframe: re-merge after their tests.)
+Second merge = built files only, except titles-daycard (jdh: LIVE title-parity removed the «me» skip → kept) and assemble unions. Re-tests on 611fca61: leave-palace 135/135, law1-audit 13/13, moment + scent PASS, chapter-title-hook 41/41, one-core PASS all.
+LIVE 611fca61 itself: time-spill-guard FAIL 20 (runtime ask/sneak offered) and dialog-fixed FAIL (OWNER-UI-C) — pre-existing.
+
+## qc-noise-lrm 1318464e — MAIN 174 ruling: code-name leak family (law 11)
+Scan = dev/test/text-hygiene.js --static, leak rule, text with a «(identifier)» (j-module, kit*, BAL.*, a.b):
+| place | text | player-visible? | before | after |
+|---|---|---|---|---|
+| j8.js:141 accuse x | «cần đủ chứng cứ của một tội (jcharge)» | YES | leak | «cần đủ chứng cứ của một tội» |
+| jkitpage.js:31/43/48/209/214, jksize.js:175/189, jgrey.js:38, jtoil.js:1155 | kit sample page titles / notes | no (KIT_SAMPLES / kit page) | already frozen | unchanged |
+| jkitpage.js:80/83-88/90, jnotice.js:239, jkpick.js:141, jkring-item.js:353 | kit sample page lines new on LIVE | no | NEW (gate FAIL 11) | frozen in text-hygiene-known.json with note «dev-only kit sample, MAIN 174 27/11» (MAIN authorised 6; after B1 the same family is 11 — MAIN 175 please confirm or trim) |
+Result: TEXT-HYGIENE PASS; 0 player-visible code names left in that family.
