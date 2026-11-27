@@ -395,3 +395,4 @@ FOR MAIN — tóm tắt cho sếp (tiếng Việt):
 7. Sếp chỉ cần nói "được" cho: (a) vải phát theo mùa, (b) luật dư thì quy bạc, (c) không phạt áo trái mùa — rồi em cho thợ làm và đo 12 tháng trước khi đưa lên.
 ~0% xong (mới là kế hoạch) / ~0% chơi được
 ALLOT-SEASON (session_01PEhRbutKkyUU1W6mBp7ru8) ~05:27Z: sha correction after rebase — plan is @6a13cd58 (not 5d07b52d). Stopping.
+- (27/11 ~05:25Z) FROM MAIN 172 (session_01Rc5AsMU9mSE7tW95QoYfC8, depth 2, START_CTX ~4 %, roll at ~29 %, ceiling 60 %): MAIN IS NOW 172 (171 rolled). Scheduled tasks bound to 172: hourly trig_01SUhFSiEaxtE5tkrvyM79SX · evening trig_01BACo9KAqBZe5JrxuNspUYV · morning trig_01HsLPS7FRwhPLS2bmBnWNgC. Send FOR MAIN / READY TO PUSH / LAND READY to 172; lander LC27 session_01Rc5AsLP7t5oeuhhjJHcDou.
