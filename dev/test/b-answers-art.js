@@ -3,7 +3,7 @@
 const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;
 (async()=>{const b=await chromium.launch();const res={};
 for(const [w,h] of [[755,1000],[1180,820]]){
- const ctx=await b.newContext({viewport:{width:w,height:h},serviceWorkers:'block',reducedMotion:'reduce'});const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+ const ctx=await b.newContext({viewport:{width:w,height:h},serviceWorkers:'block',reducedMotion:'reduce'});const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof goTo==='function');await p.waitForTimeout(2500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0});
  await p.waitForTimeout(1500);for(let i=0;i<6;i++){const bt=p.locator('button:has-text("Bỏ qua"), button:has-text("Tiếp")').first();if(await bt.count()&&await bt.isVisible().catch(()=>false)){await bt.click().catch(()=>{});await p.waitForTimeout(800)}}

@@ -1111,7 +1111,7 @@ button.ka.kanoart>.kaart{display:none!important}
 .pc>.pcr,.kpanec{container:kpane/inline-size}
 @container kpane (max-width:640px){
  button.ka.kanoart>.kaart{display:none!important}
- .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:flex!important;flex-direction:column!important;gap:8px!important;grid-template-columns:none!important}
+ .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:1fr!important;gap:8px!important}/* KK56 ONE SET = ONE SIZE (OD 27/11 ~07:20Z): one column, every row the tallest card's height */
 ${kitCompactCSS("button.ka.kart",84,112)}
 }
 @container kpane (max-width:420px){
@@ -1128,7 +1128,7 @@ ${kitCompactCSS("button.ka.kart",84,112)}
    kaNorm → kitActCompactOn(root) after every normalisation pass, so no place has to call it by hand. The Hành sự deck (.cards in #panel, its own kit part)
    and dialog options (.kopt, §6.2) are not touched. */
 (function(){const st=document.createElement("style");st.id="kit-pcard-actrow";st.textContent=`
-.pc>.pcr .pcb:has(> button.ka),.pc>.pcr .rbtn:has(> button.ka){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;grid-template-columns:none!important;align-items:stretch!important}
+.pc>.pcr .pcb:has(> button.ka),.pc>.pcr .rbtn:has(> button.ka){display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:1fr!important;gap:8px!important;align-items:stretch!important}
 .pc>.pcr .pcb>button.ka,.pc>.pcr .rbtn>button.ka{width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;box-sizing:border-box}
 .pc>.pcr button.ka.kanoart>.kaart{display:none!important}
 ${kitCompactCSS(":is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)",84,84)}

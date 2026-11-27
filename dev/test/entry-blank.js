@@ -45,7 +45,7 @@ const SAMPLE=()=>{const process_dbg=1;const vis=e=>{const r=e.getBoundingClientR
   waitWhich:wl,hasWaitLine:document.querySelectorAll('[data-kwaitp],[data-kwaitq]').length}};
 (async()=>{const srv=await serve();const b=await chromium.launch();const R={};
  for(const dev of DEVS.split(','))for(const pth of PATHS.split(',')){BUMP=0;line.on=false;ROOT=OLD||NEW;
-  const ctx=await D.newDeviceContext(b,dev,{serviceWorkers:'allow'});await line(ctx,MBPS);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+  const ctx=await D.newDeviceContext(b,dev,{serviceWorkers:'allow'});await line(ctx,MBPS);const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   const tag=dev+'-'+pth;let g=await D.openHost(p,srv.url);
   const ready=async()=>{for(let k=0;k<60;k++){const ph=await g.evaluate(()=>window.KLOAD&&KLOAD.phase).catch(()=>null);if(ph==='ask'){await g.evaluate(()=>{const x=document.querySelector('[data-kl="web"]');if(x)x.click()});break}if(ph&&ph!=='check')break;await sleep(500)}
    await g.waitForFunction(()=>typeof start==='function'&&window.KLOAD&&['done','all','skipped'].includes(KLOAD.phase)&&!document.getElementById('kload'),null,{timeout:900000})};
