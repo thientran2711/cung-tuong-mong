@@ -244,6 +244,15 @@ the portrait, `.kmf` frame on top (`--kfr`). Widths: xs 22 px, sm 32 px, default
 
 Stage strangers: full-body grey silhouettes `img/kit/unknown-fig-f|m|k.webp` (900 px tall, transparent, child padded to adult height).
 
+**4.3a Her portrait before the palace (OB-NGOAICUNG pre-palace, MAIN 156 queue, KK40).** At home (`isKc()`: Tiểu thư / Thôn nữ, the home road
+before tuyển tú / phân cung) she holds NO consort rank, so her portrait carries no rank sign: no rank gem (`kitDecor` badge null) and no rank
+crest (`kitNoCrest(f)` — jk2b pcPort crest step skips her; jhcpor gives no crest headroom when no crest is drawn). One rule for every place her
+frame shows (header, identity card, small mdH avatars, cards, dialog plates — all go through kitDecor / pcPort). Her frame at home comes from ONE
+table `KIT_HOME_FRAME[kc2D()]` (`kitHomeFrame()`): a foreign princess at her own court (nc / bd / pf) → the existing `frame-princess` + `bg-princess`
+(MAIN 156); tiểu thư ("") → `frame-home` (red lacquer) and thôn nữ (dan) → `frame-dan` (plain wood) — Foreman C art, K-FRAME-HOME wired by KK41 (MAIN 157 GO 26/11); KIT_FRW home [47,183,954] / dan [48,183,945] (frame_wide.py); no bg painted for them (`KIT_HOME_BG` only princess) → the plain consort-0 background. The origin medallion stays (it is her family, not
+a rank). In the palace (`S.kc.inPal`) crest + gem come back. Helpers `kitPrePal()`, `kitNoCrest(f)` (j60). Test `node dev/test/kit-home-frame.js <index.html>`
+(LIVE 4 FAIL → 0). Kit page sample «§4.3a».
+
 ### 4.4 API (j60)
 - `personRoleRank(p)` → `{role, rank, origin, sex, kid}` for any person object (S, consorts, kids, S.emp, S.thO, S.maid, servants, S.court members, S.men, clan officials, công tử, place records `{kind,ref}`).
 - `kitDecor(faceOrPerson)` → frame/bg/badge/emblem URLs, colours, `known`, `label`.
@@ -347,7 +356,7 @@ Rules
 - ONE shared kit part = EVERY person panel (`.pc[data-k2].kpwide`): Hậu cung › Chí tôn / Phi tần / Nam nhân / Cung nhân (`court rv staff kvo kin`), Hoàng tự (`qt`), Việc nhờ › Đang làm (`q72`), Giao tình, the maid/person pop-ups on the same card. Nothing per screen.
 - The card is a FIXED frame: height = `--kpcmax` (the room under the panel's fixed top block, `kitPcSize`), `overflow:hidden`; the card itself NEVER scrolls.
 - LEFT column: name + rank + portrait frame stay still (the face is always seen); everything under the portrait (`.kpkey` Biết tên / `.kpgrid` / `.kpfacts` / `.kwear`) is moved into ONE wrapper `.kplscr` (`flex:1`, `overflow-y:auto`) and ONLY that scrolls. RIGHT column: the info block `.kpstick` (Sở trường · Tính nết · Đã biết · Dạo này + the act-group tabs) stays still; `.pcr` is the scroller, so only the act / step cards under it move. The two columns scroll independently (`overscroll-behavior:contain`).
-- Portrait size: natural kit width (`--kpcw`); `kitPcFitPortrait` shrinks it (floor 120 px) ONLY when the card is so short that fewer than ~80 px of text would stay visible under the WHOLE frame; the text area starts BELOW the frame's pendant + tassel (`kitPcClearTassel`: no overlap with the «<Tên> → ta» label, KK23b nit) — Fold card ≈ 490 px: portrait ≈ 190 px wide; iPad 590-page: ≈ 120–140 px.
+- Portrait size: natural kit width (`--kpcw`); `kitPcFitPortrait` shrinks it (floor 120 px) ONLY when the card is so short that fewer than ~80 px of text would stay visible under the WHOLE frame; the text area starts BELOW the frame's pendant + tassel (`kitPcClearTassel`: no overlap with the «<Tên> → ta» label, KK23b nit) — Fold card ≈ 490 px: portrait ≈ 190 px wide; iPad 590-page: ≈ 120–140 px. ONE clear-tassel rule `KIT_PFO.clear` + `KIT_PFO.side` (jk2b; KK42, MAIN 158 LOOK 26/11, laws 10/11), run from `KIT_PFO.fit` in EVERY person card with a scrolling text area (`.kplscr`), fixed height or not: (1) SIDE — when the right column (`.pcr`) has room under its own content for the whole item grid (`.kwear`), the grid moves there (`.kpside`, 5 tiles a row, the wear status «Xa xỉ N» at the end of the last row), so it shows whole at scroll 0 (her identity card, home + palace, Fold + iPad); (2) what stays under the frame never READS over the tassel: a tile grid first → the tassel tip hides behind the first tile row's picture; text rows first → the text starts 4 px under the tip (`KIT_FRW` opaque bottom). Test `dev/test/kit-tassel-clear.js` (≥2 tile rows at scroll 0 on every tab, no label over the tassel).
 - Not touched: the narrow `.kpnar` card (dialogs < 440 px) keeps its old one-column flow.
 - Tests: `node dev/test/viecnho-fix.test.js <outdir>` (portrait, name, info block and card rects unchanged after scrolling each column; the other column does not move; the card never scrolls; Fold 755x1000 + iPad 1180x820) and the family scan `node dev/test/viecnho-scan.js <outdir>` (every tab/sub-tab × both devices: every person card is `kpwide` ⇒ `.kplscr` + fixed height + no own scroll).
 
