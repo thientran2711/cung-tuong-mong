@@ -14,3 +14,14 @@ kit-hand PASS 116/0 · kit-stage PASS 31/0 · thoi-live-scan 171 probed / 0 clos
 ## (3) LOOK media: CDN img/_review/kit-stage-r7/ {fold,ipad}-banbai.mp4, {fold,ipad}-result.mp4, {fold,ipad}-banbai-{01 deal,02 enlarge,03 flip,06 2nd card back}.png
 ## HANDOVER
 Open: MAIN look → KK49 KIT OK → RV-164. Test: node dev/test/kit-hand.js index.html <out>; kit-stage.js; thoi-live-scan.js; ONLY=banbai,result node dev/test/kit-stage-r5-video.js index.html <out>.
+
+## UPDATE 00:50Z 27/11 — ROLLOVER HANDOVER (kit-stage-r4 head 0e62389f; successor opened by MAIN 168)
+Done since the first report:
+- review/result-sieve-r2 575917ae = RV-165 PASS, on main a22cf45d: result card empty band (jk2b kevres 9-row span), «Vì sao» sieve (jwhyn whySieve), j84 «thiện cảm thiện cảm» rule. Tests result-sieve-card.js, why-words.js live on main.
+- kit-stage-r4: ed63dd29 close-only cards; 0e62389f RV-164 note (a): dead kitResFold helpers / KIT §7.4a / kit-page sample → the ONE sieve (kit_dupes OK, kit-hand PASS). KK50 KIT OK on 41594be5.
+- j75 vs jwhyn whyRows: NOT a bug (j75's is IIFE-local) — no change.
+OPEN (in order):
+1. Owner ruling «Ok bỏ lật, làm theo Game of Dice» → NO FLIP anywhere (dev/handover/reports/god-research.md on the handover branch: front info; tap = enlarge + ONE «Chọn» 280x64; tap outside / ✕ = back). kit-stage-r4 still carries tap-2 flip → must NOT go to review until flip-free (MAIN 167).
+2. Waiting for KK51 (session_01Rc5AsJN1bdRYgV8aBNXsdX) KIT READY of the NO-FLIP kitHand. Its review/kit-hand-mount 682e7433 (§101.13 kitHand.mount, ff on ed63dd29) still flips — told KK51 + MAIN 168. When the no-flip kit lands: merge main (a22cf45d+) + the kit branch into kit-stage-r4, remove flip family-wide (KIT §101.10 text, kit-hand flip asserts, kit-stage-r5-video .khflip taps, KIT_HAND.flip), rerun kit-hand / kit-stage / thoi-live-scan / kit_dupes / result-sieve-card, record mp4 Fold 755x1000 + iPad 1180x820 (deal → tap → enlarge → Chọn → result) on CDN img/_review/kit-stage-r7/ (old flip videos there are obsolete) → LOOK READY to MAIN 168 (sếp asked for the Bàn bài video) → KIT OK (KK) → RV-165 (session_01Rc5AsLoAzF54ipTvF4Hhdn).
+3. Asked MAIN 168: who wires KK51's 8 outside-#modal rows (SELSCENE, kpsc pair, Hành sự deck, Khuê các decks, Tài nghệ, empty-tab act, jactj4 doors, jflip row) and who owns kitScene.refit (I never filed it).
+Merge caution (root cause of the R6 regression): when merging LIVE, assemble.py must keep the union of module lists (jkpick, jkpcard, jkhand, jkstage, jkmapban + LIVE's) — check `grep -c "const KIT_HAND=" index.html` = 1 after every rebuild. LIVE jevc daily cap: tests firing c2a twice need S.evc=null; EVCW.length=0 (already in 11 tests).
