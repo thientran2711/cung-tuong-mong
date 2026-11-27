@@ -81,3 +81,40 @@ Notes: tests need http (python3 -m http.server) for monthly-ration / q-softlock;
 ## Owner ruling followed by each edited test (Foreman C ROOT 4-1 ask; tests changed to the NEWER ruling, never weakened)
 - monthly-allotment «evening» (pace-funnel rewrite) follows OD L2689 (26/11 ~23:24Z, MAIN CHÍNH 164, owner-approved curve, CANON OVERWRITE of the ~23:00Z monthly rescale), quoted: «ONE GROWTH CURVE, no jumps. (1) Sắc · Tài · Tâm cơ get the same slowdown rule as the stat-pace system (BAL.stp dm): every RISE × max(min, 1 − (now/100)^pow), plus the band cap on one change … no hard ceiling, nothing is taken away. … (3) Same rule for every NPC (law 1)». The old assert «Tài ≥ t1 + 2 + light.add» encodes the pre-curve raw gain. The new check is STRICTER on the candle itself: it must burn exactly one AND give a strictly larger rise than the same card without it, from the same Tài and carry (g0 2 → g1 3).
 - monthly-allotment presetsHidden → presetsGreyed follows OD L2522–2523 (25/11 ~23:20Z, MAIN CHÍNH 147, OWNER BUG verbatim «Ủa tôi nhớ lúc trước cái chỗ trang điểm này là nó có chọn bao nhiêu, như là 3 màu tông lạnh, 3 màu tông ấm … Mình chọn vô là nó sẽ ra một cái cụm đủ 4 màu luôn»), ruling quoted: «show every preset set as one block (owned ones pickable; a set needing an item she lacks shows why / where to get it, per allot rules)». jallot already greys Kiểu cầu kỳ sets with why; the test now asserts every such set item is off AND carries a «thiếu …» why.
+
+## ALLOT-PACE-2 (session_01PEhRbuTZEnWvksGsZQg5dP, depth 2, START_CTX ~6 %) — successor, 27/11 ~20:30Z →
+PRIORITY #1 CHECK: OD L2638 PACE-SPEED + L2523 makeup-set; oan-pace OD 26/11 ~18:40Z + nết thresholds OD L2308 | main LIVE 8330e8b8 | review/allot-pace 12a8cf67 → c35ab5ce, review/lc31-b3b 07f7cd16 (no LC32 restack of 3b yet: land-chain-32.md last line 20:30Z) | claims ALLOT-PACE → this session.
+
+### Task 1 (restack) — WAITING (Foreman C ruling «B», 20:34Z)
+Trial merge allot-pace × LIVE 8330e8b8 (base 772bee4f): 16 source files / 18 hunks conflict (assemble.py j2 j24 j25 j27 j92 j95 jallot jbancung jecon jemoact×2 jne jration jstip jts×2 jtsb) + built files = rv26 save stack × ui2l/3a/3b. Not resolved by hand (LC32 restacks ui2l → 3a → 3b anyway). When LC32 posts the restacked 3b sha: cherry-pick cce32a0e 44f3b311 3fcab9fa aeeff8d6 12a8cf67 694836de c35ab5ce (skip build 70feb63d), rebuild, rerun monthly-allotment / allot-season / pace-speed / reignend / balance-core / role-parity / kit-std-scan / quickcheck + npc-harm-heat / door-onetap.
+
+### Task 2 — RV-163L finding «NPC grouped harm 15/15 LIVE vs 7/15 lc31-b3b»: ANSWER = oan-pace intent hit by an out-of-date TEST SETUP; NOT a law-1 loss
+Probe = door-onetap.js section F (12-scene NPC loop), fresh page per run (scratch script, same code as the test).
+| point on 3b first-parent chain | runs with a grouped choice | NPC harm options / run |
+|---|---|---|
+| 3a 05804755 (no oan-pace) | 13/15 | ~8 |
+| 3b-pre 0941389 (+ oan-pace-ghen fa35bacd, pace-speed …) | 9/15 | ~3 |
+| 3b tip 07f7cd16 (+ act-move-law3-r2 d8f4d213) | 3/15 (RV-163L 7/15) | ~1 |
+| 3a, oán set to the top (v.oan = BAL.linkRange.ro[1]) | 10/10 | ~79 (≈31 grouped) |
+| 3b tip, oán set to the top | 10/10 | ~79 (≈31 grouped) |
+Root cause: the test sets the grudge with `oanAdd(v,S,100)`. That lands ONE paced step (stat-pace band cap, already on LIVE: oán ≈12 on 3a and 3b alike). review/oan-pace (f) (joanpace motiveOK wrapper, owner OD 26/11 ~18:40Z «điểm oán nó tăng quá nhanh», nết thresholds OD L2308) lets an NPC plan harm only at grudge heat ≥ BAL.oanPace.act (25) or an outside reason (opEx). Heat 12 < 25 → most probe NPCs had no harm road, so no group. With a REAL grudge the 3b NPC has exactly the 3a deed set (law 1 holds: haOpts0 = the player's ACT table, same tier grouping). act-move-law3-r2 changes no NPC harm rule (its 3b-tip dip is noise around the same low-heat state: 3/15 vs 8/15 with pace off at setup).
+Law-1 note for RV: the heat gate binds NPC choices only (opHeatOK: a===S passes) — that is the approved oan-pace motive rule (NPC acts from a real grudge, law 6b), not a capability gap; changing it would need the owner (law 16).
+Fix + test (no assertion weakened):
+- door-onetap.js F: exact setup write `v.oan = BAL.linkRange.ro[1]` (PUNISH-TIER-8 precedent). Branch runs: NPC harm options 71/81/84/76, grouped 28/33/34/32 (4/4 F ok). Runs 1–2 ALL PASS; run 3 FAIL 2 and run 4 FAIL 1 (law 6c «Cảnh báo nàng» never picked) = random seeded coverage / tap items (RV-163L saw the same random P13r/P9 tap fails on LIVE), not section F.
+- NEW dev/test/npc-harm-heat.js: H1 grudge one point under the bar → no NPC harm on her (60 NPC cases, 0 harm); H2 full grudge → harm toward her (59–60/60), grouped (236–247), one per door+tier+target, no tier mix; H3 pace off → harm reopens (3). ALL PASS on branch. Mutation MUT=1 (gate off) → FAIL H1 (Nam Cung Tương Quân, Tào Uyển Hề plan P7/P8 harm at heat 24).
+
+### Law 11 family scan — tests that set oán with oanAdd (big values) and never switch the pace off (22 files; setup-only ones run on branch vs 3a)
+| test | branch (allot-pace) | 3a 05804755 | verdict |
+|---|---|---|---|
+| door-onetap | F was 3/15 → fixed (4/4) | 13/15 | FIXED (694836de) |
+| two-way-acts | 3 FAIL → 1 after fix | 2 FAIL | FIXED (c35ab5ce): «Hạ nhục oán +» + «31 accusation» spent the pair's one-day bound (opz) earlier in the run; SOC.ally pre-existing |
+| charge-trinh-punish | ALL PASS | — | ok |
+| ag-all-c | FAIL 2 (options n 0, Dò la land) | same FAIL 2 | pre-existing |
+| cycle | FAIL (book/pop-up/Tổng quản) | same | pre-existing |
+| feelings18 | 33/34 (hờn bỏ về Sủng) | same | pre-existing |
+| thaiy | FAIL 6 | FAIL 8 (overlapping, random set) | pre-existing/broken on both; branch-only «hostile rival bribes the physician» uses hostility()+npcWhy, not the heat gate — not this family |
+| d19-gift | FAIL 2 («item road») | LIVE same (LC32 19:45Z) | pre-existing |
+Others (road-*-same, typed-stat, kit-relrows-ms, result-sieve-card, viecnho-fix, pace-all, stat-pace, rel-men-servants, coop-relms-both, ts-a) use oanAdd as a stub, a display value or the paced rise itself — not setup of a hostile choice; not run.
+
+### State
+review/allot-pace @ c35ab5ce (on lc31-b3b 07f7cd16; built index.html is the 70feb63d build — test-only commits after it). Task 2 DONE. Idle until LC32 posts the restacked 3b.
