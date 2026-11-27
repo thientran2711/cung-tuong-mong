@@ -9,6 +9,8 @@ const {chromium}=require('playwright');const D=require('./lib/device');
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(srv.url+'/index.html?khost=0',{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof window.phanCungEdict==='function',null,{timeout:90000});await p.waitForTimeout(1200);
  const R=await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;const tt=document.getElementById('title');if(tt)tt.hidden=true;
+  /* promo-stack-lr4: LIVE stat-pace (jstatpace) paces every raw stat write; this probe tests the promotion rules on EXACT set-ups (S.hh = the cut, x.sung = 99 …),
+     so pace is off for the whole probe, as dev/test/ag-moodknow.test.js does for its set-up writes */window.SP_OFF=(window.SP_OFF||0)+1;
   const out=[];const ck=(k,fn)=>{let bad="",got;try{const r=fn();got=r&&r.got;bad=r&&r.bad||""}catch(e){bad="throw "+e.message}out.push({k,got,bad})};
   const fresh=()=>{for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;window.__exAuto=1};
   const K=BAL.promoR.ky,SP=BAL.promoR.sp;
