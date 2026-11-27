@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"5db35c03+","t":"2026-11-27T22:47Z","c":"Oán ghen lên chậm và có chừng; sáu tài có trần mềm; Hoàng thượng có thể nhường ngôi, bị phế hay bị lật đổ; thư nhà, quà nhà vào sổ đồ; việc…","b":"58a21c12c784","h":[]};
+window.CTM_BI={"s":"8e5dc16b+","t":"2026-11-27T22:58Z","c":"Oán ghen lên chậm và có chừng; sáu tài có trần mềm; Hoàng thượng có thể nhường ngôi, bị phế hay bị lật đổ; thư nhà, quà nhà vào sổ đồ; việc…","b":"573fd6f735b6","h":[{"s":"ca4a1689","t":"2026-11-27T21:07Z","c":"Thẻ kết quả nằm gọn trong khung, hình bay và cánh hoa không còn đè lên hộp thoại; bàn cờ trò chơi nhỏ đổi áo theo mùa."},{"s":"24beb1a4","t":"2026-11-27T19:22Z","c":"RV live-bugs-2711: rebuild index.html/sw.js on LIVE 772bee4f; assets.json = LIVE"},{"s":"6529ee43+","t":"2026-11-27T15:42Z","c":"rv26 merge: save stack (sổ compact, unseen lists, generators, inv-stack) + save-rewind test on LIVE 772bee4f (lc31-goal); source hunks asse…"},{"s":"d9ca7892+","t":"2026-11-27T12:32Z","c":"Dòng mục tiêu chạm được: xem cách làm rồi «Đi tới» tận nơi; đến một nơi hay một điện trên Dư đồ, nàng ở lại đúng chỗ, không còn bị đưa ngượ…"},{"s":"520c85b0","t":"2026-11-27T12:31Z","c":"Nhờ giúp nay nhờ được cả người cùng cung lẫn Hoàng hậu; người hầu đủ công lao được xin sang hầu cung cao hơn; tuyển tú bị loại hay được ban…"},{"s":"28d8bd1e","t":"2026-11-27T11:45Z","c":"Hội thi tài nghệ: hết ván là hiện kết quả và dừng hẳn, không còn kẹt giữa chừng."},{"s":"cf61b8e4","t":"2026-11-27T10:29Z","c":"Bản đồ chia rõ từng khu; người chưa quen hiện bóng theo vai; màn mờ đổi theo buổi; lựa chọn thuở khuê các có rủi ro nay đều ghi khả năng; M…"},{"s":"48ab87e6","t":"2026-11-27T09:35Z","c":"Thuở khuê các: các cảnh thuế đinh, đêm hội, cha bệnh, mối mai nay chọn là ra, không còn treo giữa chừng."},{"s":"cb090860+","t":"2026-11-27T08:01Z","c":"Thẻ người: tranh lớn, hai thẻ Thông tin · Giao tình; việc với người ấy hiện trên sân khấu, chạm cửa một người là ra ngay các việc theo ba b…"},{"s":"4cd3f974+","t":"2026-11-27T03:34Z","c":"Mỗi lựa chọn hiện thẻ kết quả trước, rồi mới sang màn sau; câu kết quả không lặp lại tên thẻ."}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -103538,7 +103538,10 @@ function mcwFindO(v,m){try{return chFind(m&&m.name?m:{tamco:0,mat:0,staff:[]},v,
 function mcwNm(v){return v&&typeof v==="object"?v.name:(v||"người mua")}
 /* (a) the TAKE card tail: the jcharge road in odds words */
 function mcwTakeX(v,m){const vo=v&&typeof v==="object"?v:null;let need=2;try{need=chNeed(vo,"mc")}catch(e){}
- return `nếu ${mcwNm(v)} bị tố tội mua chuộc người hầu (cần ${need} chứng; mỗi lần ${m&&m.name?m.name:"có người"} dò, tìm ra một chứng: ${word(mcwFindO(vo,m))}) thì ngươi bị đuổi khỏi cung; có người nắm chứng thì ngươi nghe phong thanh trước`}
+ /* worded as ONE loss with its odds inside (TMK-WARN-2, stills 27/11): the kit row parser (kitParse → kaRows) puts a loss with no number and no
+    «khả năng …» clause in Kèm (folded behind «!»), so «nếu … thì ngươi bị đuổi khỏi cung» never stood in the card's Mất row; «bị đuổi khỏi cung khi …
+    (mỗi lần … ra một chứng: khả năng …)» does. The odds are one search's, chanceW like the master's-watch clause beside it (law 7, no %). */
+ return `bị đuổi khỏi cung khi ${mcwNm(v)} bị nắm đủ ${need} chứng tội mua chuộc người hầu (mỗi lần ${m&&m.name?m.name:"có người"} dò, ra một chứng: ${chanceW(mcwFindO(vo,m))}); có người nắm chứng thì ngươi nghe phong thanh trước`}
 /* (a) the BUY card tail (her as the buyer): the same charge from her side */
 function mcwBuyX(s){let need=2;try{need=chNeed(S,"mc")}catch(e){}return `kèm: nếu ngươi bị tố tội mua chuộc người hầu (cần ${need} chứng) thì bị phạt bổng ${BAL.charge.fine} lượng, ${s&&s.name?s.name:"kẻ ấy"} bị đuổi khỏi cung`}
 /* the one tai mắt terms text (was j42 cnvSpyX: «mỗi tháng Bạc +8 · kèm: …» — a «kèm» note sits behind «!» on the kit card, so the take card showed only
@@ -103546,7 +103549,7 @@ function mcwBuyX(s){let need=2;try{need=chNeed(S,"mc")}catch(e){}return `kèm: n
    noPay (cnvBlackOpts obey): the danger text alone, the caller prints «mất: » before it. */
 (function(){if(typeof cnvSpyX!=="function")return;cnvSpyX=function(m,noPay,v){const P=BAL.ag.why.srv.pun;
  const watch=`mỗi tháng chủ phát hiện: ${chanceW(nv(m,"spyFind"))}, khi ấy bị đánh chết: ${chanceW(npwShare(["kill","lau"],k=>srvPunW(m,k),"kill"))}, không thì Tân Giả khố ${P.lauWk} tuần`;
- const d=v?`${watch}; ${mcwTakeX(v,m)}`:watch;return noPay?d:`mỗi tháng Bạc +${P.spyPay} · mất: ${d}`}})();
+ const d=v?`${watch}, ${mcwTakeX(v,m)}`:watch;/* «, » not «; »: the kit parser keeps the charge in the same Mất row */return noPay?d:`mỗi tháng Bạc +${P.spyPay} · mất: ${d}`}})();
 /* is the servant player the tai mắt of t */
 function mcwMine(t){return !!(t&&S&&!S.dead&&typeof isSrv==="function"&&isSrv()&&S.srv&&S.srv.spyFor!=null&&String(S.srv.spyFor)===String(t.id))}
 /* (b) the warning beat, once per new piece held on her buyer */
@@ -103568,7 +103571,7 @@ PEND.mcWarn=pp=>{const m=typeof srvM==="function"?srvM():null,v=RV(pp.v);if(!m||
  const o=oddsCl(Math.round(C.base+((S.tin||0)-C.tinMid)/C.tinD));const end=`${v.name} bị tố tội mua chuộc thì ngươi bị đuổi khỏi cung`;
  const cut=()=>{S.srv.spyFor=null};
  return{t:`<p>Trong hành lang, mấy cung nữ thì thào: có người đang gom chứng tội mua chuộc người hầu của ${v.name}.</p><p class="past">Đã có người nắm ${H.n}/${H.need} chứng. ${end}.</p>`,who:pv(v),o:[
-  {n:"Cứ làm tai mắt",fx:{},x:`mỗi tháng Bạc +${P.spyPay} · kèm: ${end}; mỗi lần dò, tìm ra một chứng: ${word(mcwFindO(v,m))}`,go:()=>{}},
+  {n:"Cứ làm tai mắt",fx:{},x:`mỗi tháng Bạc +${P.spyPay} · mất: ${mcwTakeX(v,m)}`/* the danger in the Mất row (was «kèm:», folded behind «!») */,go:()=>{}},
   {n:"Lặng lẽ thôi làm tai mắt · nhẹ",fx:{},x:`tốn: thôi Bạc +${P.spyPay} mỗi tháng · được: tội ${v.name} có lộ, ngươi không bị đuổi · mất: ${v.name} ghi hận ngươi, thiện cảm ${balSg(spSee("rel",-BAL.coopBribe.grudge))}`,
    go:()=>{cut();cnvBribeAff(v,S,-1);log(`Ngươi lặng lẽ thôi làm tai mắt cho ${v.name}.`)}},
   {n:"Trả lại bạc, xin thôi · vừa",fx:{bac:-pay},x:`tốn: Bạc ${balSg(-pay)} · được: thôi làm tai mắt, tội ${v.name} có lộ ngươi không bị đuổi, ${v.name} không ghi hận`,
@@ -107153,7 +107156,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="58a21c12c784";window.CTM_BUILD=BUILD;
+const BUILD="573fd6f735b6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -13,8 +13,9 @@ const A=process.argv[2]||require('path').join(__dirname,'..','index.html');const
   const clean=x=>{x.wrongs=[];x.dw=0;x.evc={};x.evq={};x.ev=0};[v,h,u,m].forEach(clean);S.evc={};
   /* (a) the take card names the jcharge road in odds words */
   const card=PEND.cnvBribe({r:v.id});const take=card&&card.o.find(o=>/Nhận bạc/.test(o.n));const need=chNeed(v,"mc");
-  ok(take&&new RegExp(`bị tố tội mua chuộc người hầu \\(cần ${need} chứng`).test(take.x)&&/bị đuổi khỏi cung/.test(take.x),`take card: ${take&&take.x}`);
-  ok(take&&KIT_ODDS.some(w=>take.x.includes("tìm ra một chứng: "+w)),"take card: one search's odds in a law-7 word (BAL.odds.cut)");
+  ok(take&&new RegExp(`bị đuổi khỏi cung khi .+ bị nắm đủ ${need} chứng tội mua chuộc người hầu`).test(take.x),`take card: ${take&&take.x}`);
+  ok(take&&/ra một chứng: (không có khả năng|khả năng (rất thấp|thấp|vừa|cao|rất cao))\)/.test(take.x),"take card: one search's odds in a law-7 word (chanceW)");
+  {const R=kitParse(take.x).replace(/<[^>]+>/g,"|");const mi=R.indexOf("|Mất|"),ki=R.search(/\|(Kèm|Ghi chú)\|/);const seg=R.slice(mi,ki<0?undefined:ki);ok(mi>=0&&/bị đuổi khỏi cung/.test(seg),`take card: the charge stands in the kit Mất row, not Kèm (${R.slice(0,400)})`)}
   ok(!/%/.test(take&&take.x||"%"),"no % on the card");
   /* she takes it */
   Q.length=0;take.go();ok(String(S.srv.spyFor)===String(v.id),"she is v's tai mắt");
