@@ -39,3 +39,6 @@ LAND READY review/dayq-qsoftlock 8acabdd1 (FF from LIVE 03a8c17c)
 
 ## ADDENDUM (26/11 ~23:55Z): LIVE moved to 4cfcda61 → reviewer merge 25828054 (built files only; jdayq.js byte-identical to 8acabdd1; scan A/B identical). Gates ALONE on 25828054: held A–L Fold+iPad ALL PASS · coop-e2e 143/143 · quickcheck --runs 5 PASS (old save ok); core gates only pre-existing G4.
 LAND READY review/dayq-qsoftlock 25828054 (FF from LIVE 4cfcda61)
+
+## ADDENDUM 2 (27/11 ~03:20Z): LIVE → a22cf45d → 540358c4 → 17f23656; reviewer re-merges 36497db1 → efda2628 → dccf4f83 (built files only; jdayq.js byte-identical; scan A/B identical). efda2628 full gates: held A–L ALL PASS · coop-e2e 143/143 · quickcheck part 2 PASS. dccf4f83: held J/K/L PASS (1 Fold K test-timing flake: the test scene was ON screen and correctly held the cards; K×8 rerun PASS). quickcheck core: only G4 90-button-crawl «Ô lưu · Lui» = identical FAIL on LIVE 540358c4 (×2) → pre-existing.
+LAND READY review/dayq-qsoftlock dccf4f83 (FF from LIVE 17f23656)
