@@ -621,3 +621,4 @@ D-RANKPACE (MAIN 171 ORDER ~04:40Z (1): rank 0–1 for years — root-cause tabl
 BIG REVIEWER #17 (opus) review/robot-realtap-lc27 38cf2208..605c596a (FIXER #17 job 1 remerge f65d019b onto lc27-em) | review/robot-realtap-lc27 | (session id next line in FOREMAN_F_STATUS) | RUNNING | 2026-11-27T05:00Z (F ROOT #3)
 E-ODDS2 (MAIN 171 order ~04:40Z: raw odds words outside the 7-word ladder, whole family; chanceW status cells left for the owner question) | review/e-odds2 (from review/e-f4fac 4fd3bf42) | session_01DgYSWn4eZYMkLbVVmYfEz2 | RUNNING | 27/11 05:00Z (Foreman E child2)
 E-GAIN3 (MAIN 171 order ~04:53Z: KK54 census 59 act cards with empty «Được», law 3, per producer) | review/e-gain3 (from main 4cd3f974) | session_01DgYSWnjWesPpZdFrpLFxAq | RUNNING | 27/11 05:00Z (Foreman E child2)
+E-ODDS2 | review/e-odds2 | session_01DgYSWn4eZYMkLbVVmYfEz2 | LAND READY fb2a9141 (rv PASS, stacked on e-f4fac) | 27/11 05:27Z (Foreman E child2)
