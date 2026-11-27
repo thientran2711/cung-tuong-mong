@@ -78,7 +78,7 @@ function aaSay(lab,r){const s=n=>(n>0?"+":"")+n;return r.a===r.b?`${lab} ${s(r.a
    yours → her "Ta → nàng: thiện cảm"; the grudge stays "oán". Cards: "thiện cảm +10", "oán ta +8". */
 const KIT_REL={aff:"thiện cảm",affThem:"Nàng → ta: thiện cảm",affMe:"Ta → nàng: thiện cảm",oan:"oán ta",unknown:"chưa rõ nàng nghĩ gì"};window.KIT_REL=KIT_REL;
 function pvQuy(t,n){return aaSay(KIT_REL.aff,aaNum(n,t,"trust"))}
-function pvOan(t,n){if(n<0)return `bớt oán ta ${Math.round(-n)}`;const r=aaNum(n,t,"slight");r.a=Math.max(1,Math.round(r.a));r.b=Math.max(r.a,Math.round(r.b));return aaSay(KIT_REL.oan,r)}
+function pvOan(t,n){if(n<0)return `bớt oán ta ${spSee("oan",Math.round(-n))}`;const r=aaNum(n,t,"slight");r.a=Math.max(1,Math.round(r.a));r.b=Math.max(r.a,Math.round(r.b));return aaSay(KIT_REL.oan,r)}
 function pvRel(t,n){return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*.6)}`:`${pvQuy(t,n)}, ${pvOan(t,-n*.3)}`}
 /* caught by the target's people (j8 caught): evA 2 + relAdd(−10) */
 (function(){if(typeof kaCaughtTxt!=="function")return;const k0=kaCaughtTxt;kaCaughtTxt=function(v,k){const r=k0.apply(this,arguments);try{return r?`${r}, ${pvRel(v,-10)}`:r}catch(e){return r}}})();
@@ -255,7 +255,7 @@ odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
    const oz=aOdd(o,a);if(typeof rcvJudge==="function")return rcvJudge("trinhhh",a,t,oz);if(roll(oz)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.jaudit.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.jaudit.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}}})();
 
 /* 19. an oán preview when the target is not chosen yet (j55 "Dò la nhà ngoại": relAdd −8 + oán +8 → oán ≈ 12.8 × her nết) */
-function pvOanAny(n){try{const vs=Object.values(PERS).map(P=>P.slight!=null?P.slight:1);const lo=Math.max(1,Math.round(n*Math.min(...vs))),hi=Math.round(n*Math.max(...vs)*Math.max(1,Math.max(...vs)));return lo===hi?`oán ta +${lo}`:`oán ta +${lo} đến +${hi}`}catch(e){return `oán ta +${Math.round(n)}`}}
+function pvOanAny(n){try{const vs=Object.values(PERS).map(P=>P.slight!=null?P.slight:1);const lo=Math.max(1,Math.round(n*Math.min(...vs))),hi=Math.round(n*Math.max(...vs)*Math.max(1,Math.max(...vs)));return lo===hi?`oán ta +${spSee("oan",lo)}`:`oán ta +${spSee("oan",lo)} đến +${spSee("oan",hi)}`}catch(e){return `oán ta +${spSee("oan",Math.round(n))}`}}
 
 /* 20. "bị phạt" on cards = what punish() (j8) does, by weight (BAL.punW, review/home-way): nhẹ (sev 0) khất bổng / cảnh cáo; vừa (sev 1)
    cấm túc BAL.punW.mid.m; nặng (sev 2) cấm túc BAL.punW.heavy.m or one rank lost (chance BAL.punW.heavy.demo) */

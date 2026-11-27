@@ -236,9 +236,9 @@ window.shelfLook=shelfLook;window.shelfSeen=shelfSeen;window.shelfNow=shelfNow;
 function shelfReact(obs,t){if(!obs||!t||obs===t||obs===S)return"";const B=BAL.shelf.see;obs.shR=obs.shR||{};const k=wdKey(t);if(obs.shR[k]!=null&&wk()-obs.shR[k]<B.cdW)return"";obs.shR[k]=wk();
  const x=shelfLux(t);if(!x.n)return"";const pl=shelfLvFor(obs,t),ta=shelfTaste(obs);const sup=obs.queen||rkOf(obs)>rkOf(t);let m=1;try{m=tv(LUX_TR,obs)||1}catch(e){}
  /* by HER OWN eye (taste): too lavish → a superior frowns, a peer envies; to her liking → admired, a lover of show admires more */
- if(pl>=2){if(sup)affAdd(obs,t,B.supAff[pl]);else{const n=Math.round(B.ghen[pl]*m);if(t===S)obs.ghen=cl((obs.ghen||0)+n,0,100);else oanAdd(obs,t,n*B.npcOanK)}}
+ if(pl>=2){if(sup)affAdd(obs,t,B.supAff[pl]);else{const n=Math.round(B.ghen[pl]*m);if(t===S)ghenUp(obs,n,"thấy đồ của ngươi xa hoa",S)/* review/oan-pace-ghen: the one jealousy door */;else oanAdd(obs,t,n*B.npcOanK)}}
  else if(pl===1)affAdd(obs,t,B.fitAff+Math.round(Math.max(0,ta)*BAL.shelf.taste.likeAff*(x.lv>=2?1:.5)));
- if(!sup&&shelfList(t).some(e=>e.from==="emp"||e.from==="th")){if(t===S)obs.ghen=cl((obs.ghen||0)+B.nguGhen,0,100);else oanAdd(obs,t,B.nguGhen*B.npcOanK)}
+ if(!sup&&shelfList(t).some(e=>e.from==="emp"||e.from==="th")){if(t===S)ghenUp(obs,B.nguGhen,"thấy ngươi có đồ ngự ban",S);else oanAdd(obs,t,B.nguGhen*B.npcOanK)}
  if(x.wither)affAdd(obs,t,B.witherAff);return SHELF_LV[pl]}
 window.shelfReact=shelfReact;
 function shelfSee(obs,t,by){const r=shelfLook(obs,t,by,true);if(r)shelfReact(obs,t);return r}

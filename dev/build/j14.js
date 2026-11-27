@@ -31,12 +31,12 @@ function coldActsOf(p){const me=p===S,A=[],X=BAL.ag.par3.cold,odP=b=>odA(p,b),fr
 function coldFacActs(p){const me=p===S,L=BAL.ag.par3.cold.lt,F=BAL.ag.par3.fac,odP=b=>odA(p,b),f=facOf(p),A=[],say=r=>{if(me&&r)log(r);return r||""};
  let mds=[];try{mds=(me?(S.staff||[]).concat(S.maid&&!(S.staff||[]).includes(S.maid)?[S.maid]:[]):(p.staff||[])).filter(m=>m&&m.role!=="eunuch"&&(m===S.maid||m.role==="maid")).filter(m=>m&&m.alive!==false&&!m.coop&&(m.loyal||0)>=BAL.loy.trust).sort((a,b)=>(b.loyal||0)-(a.loyal||0))}catch(e){}
  const m=mds[0],R=[{w:"thái giám đưa cơm",c:{bac:-L.bac},o:odP(L.euO)}];
- if(m)R.push({w:m.name,c:{},o:odP(L.maidO+(m.loyal||0)/L.loyD),fail:()=>{m.loyal=cl((m.loyal||0)-L.maidLoy,0,100);return say(`${m.name} bị lính gác bắt được thư, bị tra hỏi một trận. Thiện cảm ${balSg(-L.maidLoy)}.`)},fx:` · bị bắt: ${m.name} thiện cảm ${balSg(-L.maidLoy)}`});
+ if(m)R.push({w:m.name,c:{},o:odP(L.maidO+(m.loyal||0)/L.loyD),fail:()=>{m.loyal=cl((m.loyal||0)-L.maidLoy,0,100);return say(`${m.name} bị lính gác bắt được thư, bị tra hỏi một trận. Thiện cảm ${balSg(-L.maidLoy)}.`)},fx:` · bị bắt: ${m.name} thiện cảm ${balSg(spSee("rel",-L.maidLoy))}`});
  const card=(n,t,x,ag,go)=>R.map(r=>({n:`${n} (nhờ ${r.w})`,t,c:{...r.c},o:r.o,k:2,w:{},l:{},ag,x:x+(r.fx||""),go:()=>say(go()),fail:r.fail}));
  if(f){A.push(...card(`Gửi thư xin rời ${f.name}`,"Viết thư báo với phe rằng ngươi không muốn liên lụy ai nữa.",`rời phe, không dính bè phái: Danh ${balSg(BAL.rcv.prop.danh)} · đồng đảng quý ${me?"ngươi":p.name} ${balSg(-F.leave.rel)}`,F.gLeave,
    ()=>leaveFacSelf(p)));
   if(facRoll(f).some(x=>x!==p)){const q=queenP()&&queenP()!==p?queenP():null;
-   A.push(...card(`Gửi thư tố ${f.name}`,`Kể hết chuyện của phe trong thư, nhờ người dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}.`,`Danh ${balSg(F.sell.danh)}, ${sgOf(p,F.sell.sung)} · cả phe oán ${balSg(F.sell.oan)}`,F.gSell,()=>sellOut(p)))}}
+   A.push(...card(`Gửi thư tố ${f.name}`,`Kể hết chuyện của phe trong thư, nhờ người dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}.`,`Danh ${balSg(F.sell.danh)}, ${sgOf(p,F.sell.sung)} · cả phe oán +${spSee("oan",F.sell.oan)}`,F.gSell,()=>sellOut(p)))}}
  else{const G=(S.facs||[]).map(g=>({g,l:facLeader(g)})).filter(o=>o.l&&o.l!==p&&facIn(o.l)&&aff(o.l,p)>=netTh(o.l,"quen")).sort((a,b)=>aff(b.l,p)-aff(a.l,p));const o=G[0];
   if(o)A.push(...card(`Gửi thư xin vào ${o.g.name}`,`Xin ${o.l===S?"ngươi":o.l.name} cho đứng cùng phe, để có người bên ngoài nói giúp.`,`${o.l===S?"ngươi":o.l.name} tự quyết (${rcvWord(o.l,p)}) · vào phe thì nhờ phe vận động được`,F.gJoin,()=>rcvAsk("facJoin",p,o.l,o.g.id)))}
  return A}
@@ -48,7 +48,7 @@ function coldMonth(){let ev="";
   if(S.suc<=0){die("Chết rét, chết đói trong lãnh cung");return ev}}
  for(const v of rivals){if(!v.alive||!v.out)continue;ap(v,{suc:-4});if(v.suc<=0){v.alive=false;continue}
   if(typeof p3On==="function"&&p3On()){ev+=p3Cold(v);continue}/* AG-ALL-2e: she chooses among her own lãnh cung cards (coldActsOf), not a flat roll */
-  if((roll(3)||(v.th>=50&&roll(5)))&&roomFor("consort")&&coldStayOk(v)/* punish-reason stay */&&twCanPay(v,"cold")&&(twPay(v,"cold"),roll(odA(v,35+eyes(v)*6+(v.tamco||0)/5)))){/* two-way law: her release petition costs Sức (BAL.tw.cold) and rolls her odds; the NPC pays and rolls the same */coldFree(v);v.lastPromo=S.turn;spAdd(v,"oan",20);ev+=`${v.name} được tha khỏi lãnh cung, phục vị ${RANKS[v.rank].n}. `;if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,BAL.eff.j14.coldMonth)}}}
+  if((roll(3)||(v.th>=50&&roll(5)))&&roomFor("consort")&&coldStayOk(v)/* punish-reason stay */&&twCanPay(v,"cold")&&(twPay(v,"cold"),roll(odA(v,35+eyes(v)*6+(v.tamco||0)/5)))){/* two-way law: her release petition costs Sức (BAL.tw.cold) and rolls her odds; the NPC pays and rolls the same */coldFree(v);v.lastPromo=S.turn;oanAdd(v,S,BAL.ag.par3.cold.oanFree)/* review/oan-pace: through the one oán door (bounded step, BAL.oanPace) and the one number (was a typed 20 = BAL.ag.par3.cold.oanFree) */;ev+=`${v.name} được tha khỏi lãnh cung, phục vị ${RANKS[v.rank].n}. `;if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,BAL.eff.j14.coldMonth)}}}
  return ev}
 
 /* ================= SERVANT RANKS ================= */
