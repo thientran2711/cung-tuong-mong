@@ -116,7 +116,9 @@ function drop(P){unmake(P);const K=KIT_PLAQUE,u=P.up;if(!u)return;P.up=null;u.cl
 function widen(P,n){const G=P.G,sm=n.querySelector(".kfoc-t small"),t=n.querySelector(".kfoc-t");n.classList.remove("kpk-wrap","kpk-sm");n.style.width=G.cw+"px";n.style.left=n.__x+"px";if(!sm||!t)return;let need=Math.ceil(sm.scrollWidth-t.clientWidth);if(need<=0)return;
  /* KK51: the lifted plaque widens INSIDE the band box only (over its neighbour column — it is in front while up): never left of postBox().x0, never over the post;
     a small line still too long for the band steps down once, then (last resort) wraps */
- const lr=Math.max(0,n.__x-G.x0),rr=Math.max(0,G.x0+G.bandW-(n.__x+G.cw)),addL=Math.min(need,lr),addR=Math.min(need-addL,rr),add=addL+addR;
+ /* KK54 (MAIN 171 «anchor the lift inside its own column, never covers the other column's text»): the lifted plaque widens ONLY over free band space — never over a plaque of its own row (the neighbour column); with a neighbour on that side it keeps its own column and the small line wraps */
+ const nb=[...P.el.querySelectorAll(".kpk-n")].filter(o=>o!==n&&Math.abs((o.__y!=null?o.__y:o.offsetTop)-(n.__y!=null?n.__y:n.offsetTop))<G.h*.6),hasL=nb.some(o=>o.__x<n.__x),hasR=nb.some(o=>o.__x>n.__x);
+ const lr=hasL?0:Math.max(0,n.__x-G.x0),rr=hasR?0:Math.max(0,G.x0+G.bandW-(n.__x+G.cw)),addL=Math.min(need,lr),addR=Math.min(need-addL,rr),add=addL+addR;
  if(add>0){n.style.width=(G.cw+add)+"px";n.style.left=(n.__x-addL)+"px"}if(need>add){n.classList.add("kpk-sm");need=Math.ceil(sm.scrollWidth-(t.clientWidth+add));if(need>0)n.classList.add("kpk-wrap")}}
 function lift(P,id){const K=KIT_PLAQUE,n=P.el.querySelector(`.kpk-n[data-id="${CSS.escape(String(id))}"]`);if(!n)return;
  if(P.up&&P.up!==n)drop(P);
