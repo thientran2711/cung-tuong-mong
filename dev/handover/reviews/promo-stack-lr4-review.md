@@ -58,3 +58,19 @@ Videos / shots: https://ctm-img.victoria-tntt.workers.dev/img/_review/promo-stac
 
 Gates on e2c5d5ae: promo-build 48/48 · kit-promo-hook 8/8 · fac-parity-play / fac-roads-play / ag-par3 ALL PASS (run on 2883892b; j10 unchanged since) · coop-e2e 143/143 · CORE GATES PASS (button-crawl now green) · QUICKCHECK PASS, old save ok, perf new/live render 256/189, tab 472/427, buổi 1228/966 ms, tasks 28/21 (within the gate; earlier runs of this stack were ≈ live: 210/224, 227/204, 231/208 → run noise).
 Co-op note: one coop-e2e run on 2883892b was 139/143 (S.fidUsed maid face picked on the guest, j39 figPick); the same-time run on LIVE 4cd3f974 was 139/143 with another face mismatch (Thái hậu face). Both are intermittent LIVE co-op face faults, not promo code; with the evc one (jcharge.js:30) → MAIN follow-up «co-op face / read-path writes on the guest».
+
+## REMERGE round 3 (LIVE 98c77517 → 611fca61 → 0562e15f) and ROLLOVER HANDOVER (reviewer session_01D3E3NacPigdjGR1RRt4q3j, 27/11 ~09:30Z)
+State: review/promo-stack-lr4 = **d79c08b5** (FF from LIVE 0562e15f) — **NOT LAND READY** (open item 1 below). bcab53ba (FF from 611fca61, all promo gates green) is superseded.
+Hand resolutions (each followed by a token check over every file both sides changed: no loss except the intended key swap):
+- 98c77517 (ob-verdict-3): j63 kaResultCard = LIVE kaSenDeTitle/sen0 line + D kaKnowSince gain push.
+- 611fca61 (BUNDLE 1): jstagehere = D act wrapper (actKn/kaWalkKn) + LIVE place-close pcTurn/pcCheck/stayPen (asserted each side only touched its own part); j72 = LIVE q72Pp portraits + D BAL.btn.q72.k; assemble.py union.
+- 0562e15f (door-onetap + act-move): j61 / jgift = LIVE lines (+ D wkGainTxt(ev,t)). **LAW 4 one home**: both sides had made the same «khắc of a gift / ask» key — D BAL.btn.give.k / BAL.btn.k61Ask.k (2 / 1) vs LIVE BAL.time.cost.give / .ask (2 / 1). LIVE's key kept; D entries removed from BAL.btn; every D reader (j8, jinv, jrcp, jveil, jwdinv) rewired. assemble.py union (+ jamove/jone/jkpp).
+- assets.json = LIVE each time (Foreman D order).
+Gates:
+- bcab53ba: promo-build 48/48, kit-promo-hook 8/8, place-close ok, actwalk-scan ok, QUICKCHECK PASS (old save ok, perf ≈ live). Core G4 q-softlock 1 FAIL = LIVE 611fca61 also fails it (4 then 1 FAIL); branch re-run PASS.
+- d79c08b5: promo-build 48/48, kit-promo-hook 8/8, act-move-reach PASS, act-move-rows-scan PASS, door-onetap PASS. NOT yet run: quickcheck, coop-e2e.
+OPEN for the successor:
+1. **act-move-reach2 on d79c08b5: FAIL 2 of 3 runs** («hh pop-up miss «Giao việc phòng bị» [data-j70o] on elder Diệp Thanh Hòa @ksp / @tyv»); LIVE 0562e15f: PASS 2 of 2. The scenario is «hh» (she is Quyền Hoàng hậu). The test baselines old card buttons BY NAME (staff tab, j70 pcard wrapper adds «Giao việc phòng bị» to a card whose name is in S.staff and rank Cung nữ/Thái giám) and checks the pop-up of whoever with that name stands on stage. Probe at scenario start: no elder shares an object or a name with S.staff on either build. Next step: during the walk (places × buổi) find whether an elder (elderTabRows, kind "elder") becomes / matches one of her S.staff (a D servant / promotion / srv-rank path at rank 7 — jsvt, jpdist?), i.e. one person in two places (law 6b) or a name clash; or prove it is a test flake (run LIVE 5×).
+2. **coop-e2e cannot pass on LIVE since BUNDLE 1 (611fca61)**: LIVE alone and the branch both stop after 28 ok («05-world»), then «Target page, context or browser has been closed» at coop-e2e.js:114 buoiBoth / :68 press, and hang to timeout. Reported to Foreman D for MAIN / LC28.
+3. Then quickcheck + coop-e2e on the final sha, push, «LAND READY».
+Worktrees left: /home/user/wt/rv-plr4 (branch d79c08b5), /home/user/wt/rv-live (LIVE 0562e15f, built), probe /home/user/wt/rv-tools/probe/elder.js (args: <worktree root>).
