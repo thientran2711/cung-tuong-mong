@@ -335,7 +335,7 @@ kitRing.modalPeople=modalPeople;kitRing.ringable=ringable;
 const PGI=window.__kringPG={};
 if(typeof pager==="function"){const pg0=pager;pager=window.pager=function(key,items,mk){try{if(KIT_RING.wire&&KIT_RING.strip!==false&&!window.__bot&&items&&items.length>1&&items.every(t=>t&&t.p&&typeof t.p==="object")){
   const n=items.length;let i=PG[key];if(i==null||i<0||i>=n)i=0;PG[key]=i;PGI[key]={items,mk};const nm=String(items[i].name||"").replace(/<[^>]*>/g,"");
-  return `<div class="kring-pg"><button type="button" class="kbtn" data-kring-pg="${esc(key)}">‹ ${esc(nm)} · ${i+1}/${n} ›</button></div>`+mk(i)}}catch(e){console.error("kitRing pager",e)}return pg0.apply(this,arguments)};
+  return `<div class="kring-pg"><button type="button" class="kbtn" data-knav="ring" data-kring-pg="${esc(key)}">‹ ${esc(nm)} · ${i+1}/${n} ›</button></div>`+mk(i)}}catch(e){console.error("kitRing pager",e)}return pg0.apply(this,arguments)};
  document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kring-pg]");if(!b)return;e.preventDefault();e.stopPropagation();stripRing(b.dataset.kringPg)},true)}
 function cardBtns(host){const out=[];for(let n=host&&host.nextElementSibling;n;n=n.nextElementSibling)out.push(...n.querySelectorAll(".pcg button"));return out}
 const actNm=b=>{const e=b.querySelector(".kan")||b.querySelector("b,strong")||b.firstElementChild||b;let t=txt(e);try{if(typeof kpActName==="function"&&b.querySelector(".kan"))t=kpActName(b.querySelector(".kan"))}catch(_){}return t.slice(0,40)};
@@ -381,13 +381,15 @@ document.addEventListener("click",e=>{try{if(!KIT_RING.wire||window.__bot||windo
 kitRing.grpBtnRing=grpBtnRing;
 /* ---------- §104.2 wiring G: Phe phái «Lập phe cùng …» / «Mời …» face buttons (facHTML) → ONE kit button «… · N ›» + vòng người of those consorts; the plaque = the old button
    (its words, its cost line, locked = its why); pick = the old button's own click (kept in the panel, hidden). ---------- */
+/* KIT §104.2d (KIT REQUEST #11, KK59): a ring OPENER («Lập phe cùng ai · N ›», «Các phe · N ›», the strip «‹ tên · i/n ›») is a door to a list, not an act: it carries data-knav="ring";
+   law 3 (Được–Mất) is checked on the plaques the ring drops (each the old button's own Tốn / Được / Mất rows), never on the opener — act scans (gain-empty …) skip [data-knav]. */
 const FA_KINDS=["lap","moi","gach","hop"],FA_LAB={lap:["Lập phe cùng ai","Lập phe"],moi:["Mời người vào phe","Mời vào phe"],gach:["Gạch tên ai","Gạch tên"],hop:["Hợp mưu hạ ai","Hợp mưu"]};
 if(typeof facHTML==="function"){const fh0=facHTML;facHTML=window.facHTML=function(){let h=fh0.apply(this,arguments);try{if(!KIT_RING.wire||window.__bot||window.__kringOff)return h;
  FA_KINDS.forEach(kind=>{const re=new RegExp(`<button data-fa="${kind}" data-fv="([^"]+)"[^>]*>[\\s\\S]*?<\\/button>`,"g");const n=(h.match(re)||[]).length;if(!n)return;let first=true;
-  h=h.replace(re,(m)=>{const hid=m.replace("<button ","<button hidden data-kring-fh ");if(first){first=false;return `<button type="button" class="kbtn" data-kring-fa="${kind}">${FA_LAB[kind][0]} · ${n} ›</button>`+hid}return hid})});
+  h=h.replace(re,(m)=>{const hid=m.replace("<button ","<button hidden data-kring-fh ");if(first){first=false;return `<button type="button" class="kbtn" data-knav="ring" data-kring-fa="${kind}">${FA_LAB[kind][0]} · ${n} ›</button>`+hid}return hid})});
  /* §104.3 the faction rows' own acts (Xin vào phe · Ly gián) → ONE kit button «Các phe · N ›» = vòng nhóm of the factions (a slot = the faction's people, her own figure never) */
  const fre=/<button data-fa="(xin|ly)" data-ff="([^"]+)"[^>]*>[\s\S]*?<\/button>/g;const ff=new Set([...h.matchAll(fre)].map(m=>m[2]));
- if(ff.size){h=h.replace(fre,m=>m.replace("<button ","<button hidden data-kring-fh "));h=h.replace(/(<\/div>)/,`$1<div class="rbtn"><button type="button" class="kbtn" data-kring-fac="1">Các phe · ${ff.size} ›</button></div>`)}
+ if(ff.size){h=h.replace(fre,m=>m.replace("<button ","<button hidden data-kring-fh "));h=h.replace(/(<\/div>)/,`$1<div class="rbtn"><button type="button" class="kbtn" data-knav="ring" data-kring-fac="1">Các phe · ${ff.size} ›</button></div>`)}
  }catch(e){console.error("kitRing fac",e)}return h};
  document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kring-fa]");if(!b)return;e.preventDefault();e.stopPropagation();const kind=b.dataset.kringFa;
   const B=[...document.querySelectorAll(`button[data-kring-fh][data-fa="${kind}"]`)];const P=B.map(x=>{const id=x.dataset.fv;return(rivals||[]).find(v=>String(v.id)===String(id))});
