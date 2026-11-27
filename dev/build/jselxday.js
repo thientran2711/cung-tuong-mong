@@ -25,7 +25,7 @@ function selxNumW(n){n=Math.max(0,n|0);const U=["không","một","hai","ba","b�
  return (c===1?"mười":U[c]+" mươi")+(u===0?"":u===5?" lăm":u===1&&c>1?" mốt":" "+U[u])}
 function selxCap(t){return t?t[0].toUpperCase()+t.slice(1):t}
 function selxDaysOn(){return !!(S&&!S.dead&&S.selx2&&S.selx2.days)}
-function selxDaysFit(){const k=S&&S.origin&&S.origin.k;return !!k&&k!=="cnv"&&k!=="cn"&&!selxHoaThan(k)}
+function selxDaysFit(){const k=S&&S.origin&&S.origin.k;return !!k&&k!=="cnv"&&!selxHoaThan(k)}/* FIRSTCARD-2 (MAIN 156 (a)): cn meets the 3 selection days like every tú nữ origin (the one-card contest ended ~¾ of cn lives at once) */
 function selxZ(){return S.selx2}
 /* who is who: ids in the save, objects in S.selx2.girls (until the contest) or rivals (the kept, after it) */
 function selxBy(id){if(id==="me")return S;const Z=S.selx2;return (Z.girls||[]).find(v=>v.id===id)||(Z.keptV||[]).find(v=>v.id===id)||(rivals||[]).find(v=>v.id===id)||null}

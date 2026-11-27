@@ -332,7 +332,7 @@ document.addEventListener("click",e=>{const p=document.getElementById("kpop");le
 /* ---------- the PANEL ---------- */
 /* kitPanel({kind, title, sub, subject:person|face, sections:[{h, html}|{h, facts}|{h, rows}], facts, rows, opts, btn, cls, onClose}) -> pushed to the modal queue.
    kind: rule | info | news | notice | choice | result | night | end | intel | threat | evidence | reward.  Returns the queue item. */
-function kitPanel(spec,front){const m={t:spec.title||"",h:"",kit:spec,opts:spec.opts,btn:spec.btn,cls:spec.cls,who:spec.subject&&(spec.subject.src!==undefined?spec.subject:kitFace(spec.subject))||null,onClose:spec.onClose};
+function kitPanel(spec,front){const m={t:spec.title||"",h:"",kit:spec,warn:spec.warn?1:0/* KIT §6.2k */,opts:spec.opts,btn:spec.btn,cls:spec.cls,who:spec.subject&&(spec.subject.src!==undefined?spec.subject:kitFace(spec.subject))||null,onClose:spec.onClose};
  /* button-crawl-fix-2 (whole family: every look-up panel, spec.look): ONE panel per title in the queue. Opening the same look-up again
     replaces the waiting copy with the fresh one (no pile of «Tâm trạng · X» to close N times; a co-op save held 1998 copies) */
  /* button-crawl-fix-5 (robots s6d/s7/s9: 3× «Tin chờ người sai đi», 4×/7× «Tin báo» waiting in Q): a VIEW panel (spec.view: a status panel built from
@@ -687,7 +687,10 @@ KP_SEAL.game="TÀI NGHỆ";
 function kitQuickSub(o){o=o||{};if(o.sub!=null)return o.sub;const w=o.sure?"":word(od(BAL.skip.od));return [w,o.win?`thành: ${o.win}`:"",!o.sure&&o.lose?`hỏng: ${o.lose}`:""].filter(Boolean).join(" · ")}
 /* owner 24/11 (MAIN 128): ONE skip wording in every mini-game: «Bỏ qua» + what happens in plain words (numbers-as-text "5/10" become the mark word, jmgt mgWord) */
 function kitQuickWords(t){return String(t||"").replace(/(?:tính\s+)?(\d+)\/10(\s+phần)?(?:\s*\(\+\d+\))?/g,(m,n)=>{try{return typeof mgWord==="function"?"kết quả "+String(mgWord(+n)).toLowerCase():"kết quả thường"}catch(e){return"kết quả thường"}})}
-function kitQuick(o){o=o||{};const sb=kitQuickWords(kitQuickSub(o))||"kết quả thường";return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>Bỏ qua<small>${sb}</small></button>`}
+/* mg-trim (owner OD 26/11 ~05:10Z, newer than the 24/11 «Bỏ qua» wording): a LEARNING game (lessons, tứ đức, works-as-lesson) names its quick «Học nhanh» — the
+   name she asked for; every other game keeps «Bỏ qua». ONE list: KIT_QUICK_NAMES */
+const KIT_QUICK_NAMES=["Học nhanh","Chăm nhanh"];/* «Chăm nhanh»: pet care + plant care (owner OD 26/11 ~05:45Z «option chăm nhanh như học nhanh») */
+function kitQuick(o){o=o||{};const sb=kitQuickWords(kitQuickSub(o))||"kết quả thường";const nm=KIT_QUICK_NAMES.includes(o.n)?o.n:"Bỏ qua";return `<button type="button" class="${typeof kg82Btn==="function"?kg82Btn(true):"kbtn alt"} kquick" id="${o.id||"kg82skip"}"${o.data?" "+o.data:""}>${nm}<small>${sb}</small></button>`}
 function kitQuickRoll(){return roll(od(BAL.skip.od))}
 /* m-fix-1: THE cap of every quick / skip / not-played mark (BAL.skip.cap): a quick result never beats a good own play (owner OD 18/11 ~05:55Z) */
 function kitSkipCap(raw){const c=BAL.skip&&BAL.skip.cap!=null?BAL.skip.cap:5;raw=+raw;return isFinite(raw)?Math.max(0,Math.min(Math.round(raw),c)):c}
