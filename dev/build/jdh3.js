@@ -90,7 +90,7 @@ const RULE={
  vinhnhu:(p,t)=>{const w=((p.dh||{}).w_tho||{}).n||((p.dh||{}).w_doi||{}).n||0;return [(p.tai||0)>=t.tai&&w>0,(p.tai||0)>=t.off]},
  trithu:(p,t)=>[(p.tai||0)>=t.tai&&(p.duc||0)>=t.duc&&ago(p,"phat")>=t.clean,(p.duc||0)>=t.offDuc&&ago(p,"phat")>0],
  khoan:(p,t)=>[maidL(p)>=t.loy&&(p.duc||0)>=t.duc,maidL(p)>=t.offLoy&&(p.duc||0)>=t.offDuc],
- cankiem:(p,t)=>[(p.bac||0)>=t.bac&&(p.duc||0)>=t.duc,(p.bac||0)>=t.offBac&&(p.duc||0)>=t.duc-10],
+ cankiem:(p,t)=>[(p.bac||0)>=t.bac&&grown(p)>=t.grow&&(p.duc||0)>=t.duc,(p.bac||0)>=t.offBac&&(p.duc||0)>=t.duc-10],
  phuctinh:(p,t)=>[kidsLive(p)>=t.kids&&ago(p,"con")>=t.clean,kidsLive(p)>=t.kids&&ago(p,"con")>0],
  maubang:(p,t)=>[isHeirMom(p),isHeirMom(p)],
  nhannhuc:(p,t)=>[ago(p,"esc")<t.win&&!p.confined&&!p.out&&ago(p,"lo")>ago(p,"esc"),ago(p,"esc")<t.keep&&ago(p,"phat")>ago(p,"esc")&&!p.confined&&!p.out],
@@ -106,7 +106,7 @@ const RULE={
  chuyensung:(p,t)=>{const n=nightsIn(p);return [n>=t.nights,n>t.off]},
  homi:(p,t)=>[(p.sung||0)>=t.sung&&rk(p)<=t.rank,(p.sung||0)>=t.offSung&&rk(p)<t.offRank],
  thatduc:(p,t)=>[(p.duc||0)<t.duc&&Math.min(ago(p,"phat"),ago(p,"toi"))<t.win,(p.duc||0)<t.offDuc],
- tham:(p,t)=>[(p.bac||0)>=t.bac&&(p.duc||0)<t.duc,(p.bac||0)>=t.offBac&&(p.duc||0)<t.offDuc],
+ tham:(p,t)=>[(p.bac||0)>=t.bac&&grown(p)>=t.grow&&(p.duc||0)<t.duc,(p.bac||0)>=t.offBac&&(p.duc||0)<t.offDuc],
  truongthiet:(p,t)=>[nIn(p,"don",t.win)>=t.n,ago(p,"don")<t.quiet],
  dophu:(p,t)=>[(p.ghen||0)>=t.ghen&&ago(p,"mu")<t.win,(p.ghen||0)>=t.off],
  tuhoa:(p,t)=>[(p.sac||0)>=t.sac&&(p.tai||0)<t.tai&&(p.duc||0)<t.duc&&(p.tamco||0)<t.tamco,(p.sac||0)>=t.offSac&&(p.tai||0)<t.offTai&&(p.duc||0)<t.offDuc&&(p.tamco||0)<t.offTam],
@@ -130,7 +130,9 @@ const RPOF={};for(const f in RPF)RPF[f].forEach((id,j)=>RPOF[id]=[f,j]);
 const TIERW=["thấp","giữa","cao"];/* the rung words NHẸ · VỪA · NẶNG as the player reads them on a title */
 /* people give her a name only after they have watched her in the palace for BAL.dh.rp.seen months (her clock starts on her first month in the palace,
    never in the khuê các; an NPC consort at court is already known). Earning only — a title held stays by its own keep rule. */
-function seenOK(p){const r=rep(p);if(r.t0==null){if(p===S){if(typeof isKc==="function"&&isKc())return false;r.t0=mi()}else r.t0=mi()-RB().seen}return mi()-r.t0>=RB().seen}
+function seenOK(p){const r=rep(p);if(r.t0==null){if(p===S){if(typeof isKc==="function"&&isKc())return false;r.t0=mi();r.b0=p.bac||0}else{r.t0=mi()-RB().seen;r.b0=0}}return mi()-r.t0>=RB().seen}
+/* the bạc she gathered since the palace began to watch her (a merchant's daughter's dowry is not «bạc chất đầy» of her own doing) */
+const grown=p=>(p.bac||0)-((p.rep||{}).b0||0);
 function rpSync(p,quiet){if(!canRun(p))return [];snap(p);const D=p.dh||(p.dh={}),got=[],lost=[],up=[];const W={},sOK=seenOK(p);
  for(const id in RP){const f=RULE[id];if(!f)continue;let r;try{r=f(p,rT(id))}catch(e){W[id]=held(p,id);continue}W[id]=held(p,id)?!!r[1]:!!r[0]&&sOK}
  for(const f in RPF){const L=RPF[f];let top=-1;L.forEach((id,j)=>{if(W[id])top=j});L.forEach((id,j)=>{if(j!==top)W[id]=false})}
