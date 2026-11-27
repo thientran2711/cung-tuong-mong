@@ -221,3 +221,4 @@ b. KK49 KIT READY (A) >7 columns / (B) name plate → merge their branch, switch
 - Merged KK51 review/kit-plaque-confirm 4ac9892e (✓/✕ ON the lifted plaque, postBox.x0 = real left edge); ring plaqueNeed drops its ✓/✕ room → Fold figure ~590 px. Code cc4515dc.
 - Gate cc4515dc: ring-overlap 36 states 0/0/0, oldleft 0/0, kit-pick ALL PASS, kit-plaque-confirm PASS. Stills CDN ring-build7c-plaques{9,12}-{755x1000,1180x820}.jpg. LOOK READY sent to MAIN 168 (session_01Rc5AsMYn5V43iERgwDRQrj).
 - Next: MAIN PASS → RV READY to RV-164. Kit keeper = KK51 session_01Rc5AsJN1bdRYgV8aBNXsdX.
+- 27/11 ~00:33Z MAIN 168 LOOK PASS cc4515dc → RV READY sent to RV-165 session_01Rc5AsLoAzF54ipTvF4Hhdn (RV-164 archived). FYI owner 00:32Z: person acts only via Dư đồ meet + Hành sự (ACT-MOVE session_01Rc5AsLFs4oXTwHRN1Mv54e); the ring is that surface — answer ACT-MOVE if asked.
