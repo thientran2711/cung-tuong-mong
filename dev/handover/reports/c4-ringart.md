@@ -38,3 +38,8 @@ Commits df13c233 (mapping + live sync) and 53195071 («Gạch tên»).
 - Build + quickcheck (`bash dev/tools/quickcheck.sh` @53195071, 1444 s): build OK (fresh build = committed index.html, no NOT BUILT), open 2105 ms, old save loads + plays a buổi, 0 page errors. Verdict FAIL on two points that cannot come from this branch (it changes no file the build reads — the game loads img/ACTS.json from the CDN): (1) core gate G4 94-q-softlock «view parked by a tab change → card shows on court» (iPad), UI logic of main bd47c753; (2) perf longTaskMaxMs 3501 vs live 2131 (limit 3410) on an identical build = machine noise (other medians: render 307/263, tab 497/477, buổi 2048/1707). Flag for the reviewer / main: q-softlock fails on main as it stands.
 
 ## Credits: 80 cr total (1 gen).
+
+## DONE 27/11 ~23:45Z (RV-176 PASS, LIVE 5fb13d60 = lc32-ui3 incl. c4-ring-art 53195071)
+- CDN img/ACTS.json: checked, byte-identical to main dev/art/manifests/ACTS.json (already pushed at the go-live) → no re-push needed. It holds «Lập phe»→ket-minh-h, «Mời vào phe»→nhan-loi-vao-phe-h, «Gạch tên»→gach-ten-h, «Hợp mưu»→hop-muu, `xem`→xem-nguoi-h + log rule `^[Mm]ời (.+ )?vào phe`. `manifest_guard.py --live-check` PASS.
+- img/_review/c4-ringart wiped (6 objects; sheet → 404). img/act-gach-ten-h.webp stays live (200).
+- Plaque wiring = KK63 (not this worker). Work complete.
