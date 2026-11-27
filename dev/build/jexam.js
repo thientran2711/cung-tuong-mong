@@ -208,7 +208,7 @@ function exAsk(ex,last){try{if(!S||S.dead||(typeof quiet!=="undefined"&&quiet)||
   {n:"Để sau",x:last?"được: giữ sức hôm nay · mất: hết tuần này không thi là lỡ hạn":`được: giữ sức hôm nay · thẻ «${a.n}» ở Hành sự đến hết hạn`,go:()=>{if(ex===2)exSrvAdd();else exAdd()}}]});
  try{showModal()}catch(x){}}catch(x){console.error("exAsk",x)}}
 /* the fail wait the card prints (same source as the Hành sự card: cdN / exCd, shown in tuần by pbWkIn) */
-function exAskCdW(ex,e){const n=ex===2?exSrvCdN(e.to):exCd(e.to);try{if(typeof pbWkIn==="function")return pbWkIn(n)}catch(x){}return n*3}
+function exAskCdW(ex,e){const n=ex===2?exSrvCdN(e.to):exCd(e.to);return pbWkIn(n)/* rv-rank-pace (law 4): no typed «n*3» fallback — the one tuần reader, as the Hành sự card (cardH) */}
 /* a window never sat waits BAL.ex.cdLapse months (a fail keeps exCd); under the kỳ rule it waits to the next kỳ like a fail (pbCdKy), so the date it prints is true */
 function exCdLapse(to){const n=BAL.ex.cdLapse;if(n==null)return exCd(to);let k=0;try{if(typeof pbCdKy==="function")k=pbCdKy()||0}catch(e){}return Math.max(n,k)/* the kỳ rule: never a date before the next kỳ */}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(exOn()&&!S.out&&!exSrv(S)&&S.ex&&S.ex.w1!=null&&!S.ex.pass)exAdd()}catch(e){}return r}})();
