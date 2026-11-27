@@ -42,7 +42,8 @@ async function home(p) {
   await p.waitForTimeout(2500);
   await clean(p);
 }
-const VEILS = '.kfgain,#kload,#kroul,#kroulw,#klife,.kroul,#dawn,#kdaytc,.kmov,#rtoast,#kprevov';
+const VEILS = '.kfgain,#kload,#kroul,#kroulw,#klife,.kroul,#dawn,#kdaytc,.kmov,#rtoast,#kprevov,.kne';/* .kne = timed world-event beat scene (RV-176 §7 a: «kne kne-beat OUT» over the scan) */
+const unveil = p => p.evaluate(v => document.querySelectorAll(v).forEach(e => e.remove()), VEILS).catch(() => { });/* KK62: a timed world beat / new day that comes up DURING a case is cleared before each measure + tap (harness setup, not a game press) */
 async function clean(p) {
   for (let k = 0; k < 2; k++) {
     await p.evaluate(v => { try { if (window.kitRingItem && kitRingItem.cur) kitRingItem.cur.close() } catch (e) { } document.querySelectorAll('.kri').forEach(e => e.remove()); document.querySelectorAll(v).forEach(e => e.remove()); Q.length = 0; try { closeModal() } catch (e) { } Q.length = 0; document.getElementById('modal').hidden = true; try { if (window.DQ) { DQ.want = null; DQ.park = null } } catch (e) { } render() }, VEILS);
@@ -143,6 +144,7 @@ async function runPicker(p, dev, name, rows) {
   let st = null; for (let k = 0; k < 12; k++) { await p.waitForTimeout(500); await p.evaluate(() => document.querySelectorAll('.kfgain').forEach(e => e.remove())); st = await p.evaluate(READ); if (st.up && await p.$('#modal .kipc')) break }
   const n = await p.$$eval('#modal .kipc', L => L.length);
   /* K-PICK-FOLD-BAND (KK61): (a) no empty band between the dialog picture and its text, (b) the prompt line is on screen (not under the options) */
+  await unveil(p);
   const band = await p.evaluate(() => { const kb = document.querySelector('#modal #mb>.kpb'); if (!kb) return { none: 1 }; const sj = kb.querySelector(':scope>.kpsubj'), tx = kb.querySelector(':scope>.kpmain'), o = document.querySelector('#modal #mb>.opts'); if (!tx) return { none: 1 };
     const B = kb.getBoundingClientRect(), T = tx.getBoundingClientRect(), S = sj && sj.offsetParent ? sj.getBoundingClientRect() : null; const stacked = S && T.top >= S.bottom - 2;
     const gap = stacked ? Math.max(0, Math.round(T.top - S.bottom)) : 0; const f = tx.querySelector('.kfact,p') || tx; const F = f.getBoundingClientRect();
@@ -160,19 +162,31 @@ async function runPicker(p, dev, name, rows) {
   const goBelow = await p.evaluate(() => { const g = document.querySelector('#modal .kipgo'); if (!g) return null; const r = g.getBoundingClientRect(); let b = innerHeight; for (let e = g.parentElement; e && e !== document.body; e = e.parentElement) { const cs = getComputedStyle(e); if (/(auto|scroll|hidden|clip)/.test(cs.overflowY)) b = Math.min(b, e.getBoundingClientRect().bottom) } const ch=[];for (let e = g.parentElement; e && e !== document.body; e = e.parentElement) { const cs = getComputedStyle(e); ch.push((e.id?'#'+e.id:'')+'.'+String(e.className).split(' ').slice(0,2).join('.')+' oy='+cs.overflowY+' pos='+cs.position+' disp='+cs.display+' h='+Math.round(e.getBoundingClientRect().height)+' sh='+e.scrollHeight) } window.__CH=ch; return Math.max(0, Math.round(r.bottom - b)) });
   await p.screenshot({ path: path.join(OUT, `${dev}-${name}-picked.jpg`), type: 'jpeg', quality: 70 }); if (process.env.PROBE) console.log(JSON.stringify(await p.evaluate(()=>window.__CH),null,1));
   for (const id of ids.slice(0, lim)) {
+    await unveil(p);
     const sel = `#modal .kipc[data-kip="${id}"] .kshpic`;
     const ok = await rt.tap(sel, { screen: name, label: 'tile ' + id });
     const on = ok && await p.$eval(`#modal .kipc[data-kip="${id}"]`, t => t.classList.contains('on')).catch(() => false);
     if (!on) dead.push(id + (ok ? ':no-select' : ':unreachable'));
   }
+  /* K-LIST-PAGE × K-PICK-GO-REACH (KK62): a paged grid (picker-dom §23 pager .kippg) — the pager must not sit under the sticky confirm: hit-test ‹ › and
+     REAL-tap › once (page label must change), then ‹ back */
+  let pager = 'none';
+  if (await p.$('#modal .kippg')) {
+    const ov = await p.evaluate(() => { const a = document.querySelector('#modal .kippg'), g = document.querySelector('#modal .kipgo'); if (!a || !g) return 0; const r = a.getBoundingClientRect(), q = g.getBoundingClientRect(); return Math.max(0, Math.round(Math.min(r.bottom, q.bottom) - Math.max(r.top, q.top))) });
+    const lab0 = await p.$eval('#modal .kippg .kpkpn', e => e.textContent).catch(() => '');
+    const nx = await p.$('#modal .kippg [data-kippg="1"]:not([disabled])');
+    let turned = null; if (nx) { const r = await rt.tap('#modal .kippg [data-kippg="1"]', { screen: name, label: 'pager ›' }); await p.waitForTimeout(900); const lab1 = await p.$eval('#modal .kippg .kpkpn', e => e.textContent).catch(() => ''); turned = !!r && lab1 !== lab0; if (turned) { await rt.tap('#modal .kippg [data-kippg="-1"]', { screen: name, label: 'pager ‹' }); await p.waitForTimeout(900) } }
+    pager = { overGo: ov, lab0, turned }; if (ov > 0 || turned === false) dead.push('pager:' + (ov > 0 ? 'under confirm ' + ov + ' px' : 'turn dead'));
+  }
   /* the confirm of the last chosen tile: reachable + it moves the dialog on */
+  await unveil(p);
   const sig0 = (await p.evaluate(READ)).sig;
   const go = await p.$('#modal .kipgo:not([disabled])');
   let goOk = null, goWhy = '';
   if (go) { const r = await rt.tap('#modal .kipgo', { screen: name, label: 'kipgo' }); await p.waitForTimeout(2500); const s2 = await p.evaluate(READ); goOk = r && (!s2.up || s2.sig !== sig0); if (!goOk) goWhy = r ? 'confirm tapped, dialog stays' : 'confirm not reachable (' + ((rt.stats().deadList.slice(-1)[0] || {}).cover || '') + ')' }
   else goWhy = 'no enabled confirm';
   if (dead.length || goOk === false) await p.screenshot({ path: path.join(OUT, `${dev}-${name}-dead.jpg`), type: 'jpeg', quality: 55 });
-  rows.push({ dev, name, tiles: n, tested: Math.min(n, lim), goBelow, band, dead: dead.length, deadList: dead.slice(0, 8), confirm: goOk === null ? 'none' : goOk ? 'ok' : 'DEAD', verdict: dead.length || goOk === false || goBelow > 0 || bandBad ? 'FAIL' : 'ok', why: [dead.length ? dead.length + ' tile(s) dead' : '', goBelow > 0 ? 'confirm ' + goBelow + ' px below the box' : '', bandBad ? (band.gap > 24 ? 'empty band ' + band.gap + ' px' : '') + (band.shown ? '' : ' prompt hidden') : '', goWhy].filter(Boolean).join('; ') });
+  rows.push({ dev, name, tiles: n, tested: Math.min(n, lim), goBelow, pager, band, dead: dead.length, deadList: dead.slice(0, 8), confirm: goOk === null ? 'none' : goOk ? 'ok' : 'DEAD', verdict: dead.length || goOk === false || goBelow > 0 || bandBad ? 'FAIL' : 'ok', why: [dead.length ? dead.length + ' tile(s) dead' : '', goBelow > 0 ? 'confirm ' + goBelow + ' px below the box' : '', bandBad ? (band.gap > 24 ? 'empty band ' + band.gap + ' px' : '') + (band.shown ? '' : ' prompt hidden') : '', goWhy].filter(Boolean).join('; ') });
 }
 
 /* RING face of the item pickers (kitRingItem, jkring-item kriGiftOpen: what a player sees on LIVE; the grid above is the robots' / ring-off face).
@@ -201,12 +215,16 @@ async function runRing(p, dev, name, rows) {
     const R = kitRingItem.cur; const qsum = R && R.items ? R.items.reduce((t, it) => t + (it.qty || 1), 0) : null; return { qsum, sameKindDrawn, stackAware, offered: O.length, drawn: drawn.length, distinctIk: new Set(O.map(([c]) => c.ik)).size, dupSameIk, notDrawn: notDrawn.length, notDrawnDupOfRing: dupIk, notDrawnNew: notDrawn.length - dupIk, pastN, past: past.slice(0, 160) } });
   if (!n) { rows.push({ dev, name, verdict: 'SKIP', why: 'ring did not open', offered }); return }
   await p.waitForTimeout(900);
+  const head = await p.evaluate(() => ((document.querySelector('.kri .kri-tt') || {}).innerText || '').replace(/\s+/g, ' ').trim()).catch(() => '');/* KK62 ring header family (RV-176 §7 c) */
   await p.screenshot({ path: path.join(OUT, `${dev}-${name}-open.jpg`), type: 'jpeg', quality: 50 });
+  if (process.env.DUMPHINT) await p.evaluate(() => { window.__hlog = []; const f = () => { const R = window.kitRingItem && kitRingItem.cur; if (!R) return; const n = R.nameEl, h = R.hint; if (n && h) { const L = window.__hlog, e = [R.__nf, n.offsetHeight, n.offsetWidth, h.style.top, Math.round(performance.now())]; const q = L[L.length - 1]; if (!q || q[0] !== e[0] || q[1] !== e[1] || q[2] !== e[2] || q[3] !== e[3]) L.push(e) } requestAnimationFrame(f) }; requestAnimationFrame(f) });
   const dead = []; const seen = new Set(); const subl = []; let maxLines = 0;
   for (let k = 0; k < n; k++) {
     const fi = await p.evaluate(() => { const f = document.querySelector('.kri .kri-t.kri-front'); return f ? f.__i : null });
     /* K-RING-SUBLINE (KK61): the front item's name block (name + sub line) never overlaps the hint, and the hint stays inside the ring layer */
-    const ov = await p.evaluate(() => { const n = document.querySelector('.kri .kri-name'), h = document.querySelector('.kri .kri-hint'); if (!n || !h) return null; const a = n.getBoundingClientRect(), b = h.getBoundingClientRect(), L = (n.offsetParent || document.body).getBoundingClientRect(); return { over: Math.max(0, Math.round(a.bottom - b.top)), out: Math.max(0, Math.round(b.bottom - L.bottom)), lines: Math.round((n.querySelector('small') || n).getBoundingClientRect().height / 14) } });
+    await unveil(p);
+    const ov = await p.evaluate(() => { const n = document.querySelector('.kri .kri-name'), h = document.querySelector('.kri .kri-hint'); if (!n || !h) return null; const a = { bottom: Math.max(...[...n.children].filter(c => c !== h).map(c => c.getBoundingClientRect().bottom)) }/* the name text (plate + sub line); KK62: the hint may sit inside the name block */, b = h.getBoundingClientRect(), L = (n.offsetParent || document.body).getBoundingClientRect(); return { over: Math.max(0, Math.round(a.bottom - b.top)), out: Math.max(0, Math.round(b.bottom - L.bottom)), lines: Math.round((n.querySelector('small') || n).getBoundingClientRect().height / 14) } });
+    if (ov && ov.over > 0 && process.env.DUMPHINT) console.log('HINTDUMP', dev, name, fi, JSON.stringify(await p.evaluate(() => { const n = document.querySelector('.kri .kri-name'), h = document.querySelector('.kri .kri-hint'); const R = window.kitRingItem && kitRingItem.cur; return { nTop: n.style.top, oh: n.offsetHeight, rh: Math.round(n.getBoundingClientRect().height * 10) / 10, hTop: h.style.top, kro: !!n.__kro, same: !!(R && R.nameEl === n), nf: R && R.__nf, txt: n.textContent.slice(0, 120), w: n.offsetWidth, fonts: document.fonts && document.fonts.status, log: (window.__hlog || []).filter(e => e[0] >= (R.__nf - 1) && e[0] <= R.__nf), rehint: (() => { try { kriHintAt(R); return h.style.top } catch (e) { return 'ERR ' + e.message } })() } })));
     if (ov && (ov.over > 0 || ov.out > 0)) subl.push(fi + ':over ' + ov.over + (ov.out ? ' out ' + ov.out : '')); if (ov) maxLines = Math.max(maxLines, ov.lines); if (process.env.SHOTFRONT && String(fi) === process.env.SHOTFRONT) await p.screenshot({ path: path.join(OUT, `${dev}-${name}-front${fi}.jpg`), type: 'jpeg', quality: 70 });
     if (fi != null) { seen.add(fi); const pr = await p.$eval('.kri .kri-t.kri-front', RT.PROBE).catch(() => ({ gone: true })); if (!pr || !pr.ok) dead.push(fi + ':' + (pr && (pr.cover || (pr.zero ? 'zero' : pr.gone ? 'gone' : 'covered')) || '?')) }
     const ok = await rt.tap('.kri .kri-ar[aria-label]:last-of-type', { screen: name, label: '›' }).catch(() => false);
@@ -222,7 +240,7 @@ async function runRing(p, dev, name, rows) {
   else if (main) { const before = await p.evaluate(() => (document.querySelector('.kri .kri-pane') || {}).textContent || ''); const r = await rt.tap('.kri .kri-acts .kbtn.kri-main', { screen: name, label: 'act' }); await p.waitForTimeout(2200); const after = await p.evaluate(() => ({ t: (document.querySelector('.kri .kri-pane') || {}).textContent || '', ring: !!document.querySelector('.kri') })); act = r && (!after.ring || after.t !== before) ? 'ok' : 'DEAD'; if (act === 'DEAD') actWhy = r ? 'act tapped, nothing changed' : 'act button not reachable' }
   else act = 'locked';
   if (dead.length || act === 'DEAD') await p.screenshot({ path: path.join(OUT, `${dev}-${name}-dead.jpg`), type: 'jpeg', quality: 55 });
-  if (process.env.DUMP34) console.log(name, dev, JSON.stringify(await p.evaluate(() => window.__D34), null, 1)); const unexpl = Math.max(0, acct.notDrawnNew - acct.pastN - acct.sameKindDrawn) + Math.max(0, acct.drawn - n) + (acct.qsum != null && acct.qsum < acct.offered ? acct.offered - acct.qsum : 0);/* twins folded into a ×N tile are explained only when the ring's ×N counts add up to every offered piece */ rows.push({ dev, name, offered, acct, unexpl, ring: n, cut: Math.max(0, offered - n), fronts: seen.size, dead: dead.length, deadList: dead.slice(0, 8), act, subline: subl.length, sublineList: subl.slice(0, 6), maxLines, verdict: dead.length || act === 'DEAD' || subl.length || unexpl ? 'FAIL' : 'ok', why: [dead.length ? dead.length + ' ring tile(s) / arrows dead' : '', subl.length ? subl.length + ' front item(s): sub line over the hint' : '', actWhy].filter(Boolean).join('; ') });
+  if (process.env.DUMP34) console.log(name, dev, JSON.stringify(await p.evaluate(() => window.__D34), null, 1)); const unexpl = Math.max(0, acct.notDrawnNew - acct.pastN - acct.sameKindDrawn) + Math.max(0, acct.drawn - n) + (acct.qsum != null && acct.qsum < acct.offered ? acct.offered - acct.qsum : 0);/* twins folded into a ×N tile are explained only when the ring's ×N counts add up to every offered piece */ rows.push({ dev, name, head, offered, acct, unexpl, ring: n, cut: Math.max(0, offered - n), fronts: seen.size, dead: dead.length, deadList: dead.slice(0, 8), act, subline: subl.length, sublineList: subl.slice(0, 6), maxLines, verdict: dead.length || act === 'DEAD' || subl.length || unexpl ? 'FAIL' : 'ok', why: [dead.length ? dead.length + ' ring tile(s) / arrows dead' : '', subl.length ? subl.length + ' front item(s): sub line over the hint' : '', actWhy].filter(Boolean).join('; ') });
 }
 
 /* STALE HAND LIFT (law 11, F «Tin báo» «Để sau» → «Đặt lại» / «Chọn lá này» dead): she lifts a card of queue card A, then A is REPLACED by the next card
