@@ -24,6 +24,7 @@ const WG_STAT={"Danh":"danh","Sủng":"sung","Đức":"duc","Sức":"suc","Bạc
 function wgDrop(t,...fx){t=String(t||"");if(!t||!/[+−]/.test(t))return t;const has=k=>fx.some(o=>o&&typeof o==="object"&&o[k]);
  return t.split(/(?<=[,;]) /).filter(i=>{const m=i.replace(/[,;]\s*$/,"").match(/^(?:[^:,;]+: )?(Danh|Sủng|Đức|Sức|Bạc|Tâm cơ|Tai mắt|Tài|Sắc) [+−]{1,3}$/);return !(m&&has(WG_STAT[m[1]]))}).join(" ").replace(/[,;]\s*$/,"")}
 function kcls(t){const s=kMk(t.replace(/<[^>]+>/g,"").trim());if(!s)return"n";if(/bớt (ghen|thù|oán)|hết (ghen|thù)/i.test(s))return"g";if(KNEU.test(s))return"n";if(KHOST.test(s))return"r";
+ if(/(quý|thiện cảm|tin|mến|nể|kính) ngươi\s*[-−]\s?\d|thiện cảm\s*[-−]\s?\d/i.test(s))return"r";/* KK56 (E-GAIN3b #3): HER regard for the player dropping is a loss for the player, never a green gain, even with «nàng» in it */
  if(/(\bnàng\b|con nàng|của nàng)/i.test(s)&&(/-\s?\d|sảy|chết|mất|phế|bị phạt|tịch thu|sa sút|không được lật thẻ|rơi/i.test(s)))return"g";
  if(KRED.test(s))return"r";if(KGOOD.test(s))return"g";if(/-\s?\d/.test(s))return"r";return"n"}
 /* one effect token -> coloured span; fmt() spans keep their colour */
