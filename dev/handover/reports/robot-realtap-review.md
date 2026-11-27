@@ -571,3 +571,45 @@ Gate shape (Fold alone, --fast home+selx+talk) on ring-build = **362 s** (≈6 m
 ## HANDOVER — BIG REVIEWER #19, 27/11
 - Verdict: FAIL robot-realtap-lc27 4a430cc2 (F1 + F2 fixed and mutation-proven; G1 selx/talk walk budget still global → Fold drove 0 ring cards in a two-device run; G2 first home pass still vacuous on both devices, root not the budget). N1 one load-only false DEAD under #kload.kpscene (iPad).
 - Recipe reuse: /home/user/wt/r19-out/run.sh (name crawler game [args]; env WT=), ring tree /home/user/wt/r19-rb (merged crawler + index-m1/2/3.html), lc27 /home/user/wt/r19-tip.
+
+## REVIEW robot-realtap-live 532c6af5 — BIG #20 (for F ROOT #4 session_01UV1SziA1Pf3LLhALYg4fDU), 27/11
+PRIORITY #1 CHECK: «— BIG #19» FAIL 4a430cc2 (G1, G2, N1, above) | FIXER #19 (lc27 48fec922) + FIXER #20 (PROGRESS «HARNESS FIXER #20») | LIVE 0562e15f (origin/main now 00dca386 = 0562e15f + the sx unit, no harness file touched) | claims: BIG REVIEWER #20 (F ROOT #4, 10:40Z).
+KIT CHECK: n/a (harness only, no UI part touched).
+### VERDICT: FAIL review/robot-realtap-live 532c6af5 (1 blocking item H1; clean base, G1, G2 root, N1 and the real-tap contract are right)
+Tree = sparse worktree /home/user/wt/r20 at 532c6af5 (its root index.html == LIVE 0562e15f); crawler serves it itself. Mutations = scratch copies index-m1..m6.html there (untracked, not in git). Logs /home/user/wt/r20-out/<run>/{log.txt,crawl-all.json,crawl-load.json}. ≤ 2 browsers.
+### (1) CLEAN BASE — OK
+- 532c6af5 = ONE commit on 0562e15f; `git merge-base --is-ancestor a2902d43 532c6af5` → FALSE. diff 0562e15f..532c6af5 = 18 files, 11 A / 7 M, 0 D, all under dev/test, dev/tools/quickcheck.d + dev/PROGRESS_robot-realtap.md: no game file, no LIVE file deleted.
+- Harness vs lc27 48fec922 (every file of `git diff 38cf2208..48fec922`): 15 files byte-identical (robot-rt.js, robot-rt-coop.js, robot-lint.js, rt-*.js/sh, quickcheck.d/*). realtap.js = exactly `git merge-file` (ours lc27, base 98c77517 == 38cf2208, theirs LIVE): 0 conflicts, 0 lines off. button-crawl.js = the same clean 3-way merge + only the FIXER #20 job 2c delta (BLOCK, waitLoad/WL/RB, room → next beat, ring floor, BCPROBE, crawl-load.json). Nothing lost from BIG #17 PASS 605c596a. LIVE's own changes to the other harness files since 38cf2208: none.
+### (2) STATIC — OK
+- node --check button-crawl / realtap / robot-rt clean · robot-lint «LINT OK 0» (default set) + «LINT OK 0 finding(s) in button-crawl.js» · rt-bare-unit «RT-BARE-UNIT OK 20/20».
+- Real-tap contract: the added play-path lines use only realtap tap()/press() or page.mouse.click / touchscreen.tap at a hit-checked point and CDP touch for drag/hold (all reviewed in BIG #11–#17, unchanged since). Job 2c delta: 0 `.click(` / dispatchEvent / focus / keyboard; the new «room → next beat» tap goes through press() (realtap); game reads only (selxDaysOn() = pure read, typeof kitHandLift / kitPick, KLOAD fields). The one DOM write is the veil removal in waitLoad (setup) — see H1.
+### (3) BIG #19 FINDINGS
+- G1 FIXED: walkSelx counts its own `wt` per device (no `taps-T0` left; MAXTAPS checks use per-device used()); «(budget) walk cut» FAIL row present. Two-device runs below: Fold 26–27 selx + 10–11 talk rows and 4 lift-only + 2 lift+chip two-tap rows on EACH device.
+- G2 ROOT FIXED and proven: the crawler's own route aborted every .mp3 → jload 'core' (97 mp3 of 2065 files) never completed → #kload re-made on every page / reload. Now only mp4/webm are blocked (none in core). Both two-device runs: first load «≈ 40 s → done 435/435 MB · life gate 0 s» on Fold AND iPad, FIRST home pass Fold 79–80 / iPad 80 taps, no re-crawl row, no veil row. Every reload in crawl-load.json: core done, 0 «STILL UP».
+- N1 OK: no load-only false DEAD in 3 two-device-shaped runs (veil retry present).
+- (ring floor) widened: now also fires when the build has kitHand / kitPick and 0 two-tap rows on every device — confirmed by the M1 «before» FIXER #20 measured.
+### (4) MUTATIONS (re-run by me, LIVE 0562e15f, Fold, --fast)
+| mutation | start | result |
+|---|---|---|
+| M1 kitHandChoose = return | selx | «Tập qua loa…» «✓ does nothing» ×6 → GATE FAIL (6 sure) ✓ |
+| M2 kitHandLift lifts another card | selx | GATE FAIL (12 sure) ✓ |
+| M3 every body button visibility:hidden | home | «home vacuous (5 taps) → re-crawl» → «(home floor) vacuous home: 5 home taps (floor 40)» → GATE FAIL ✓ |
+| M4 kitPick pick() = return | talk | GATE FAIL (6 sure) ✓ |
+| M5 kitPick lift() lifts another plaque | talk | «the tapped plaque did not take the lift» + «the tapped card did not lift» → GATE FAIL (2 sure) ✓ |
+| **M6 (mine) jload runCore pool = never resolves (first-load screen hangs at «core 0/435 MB» for ever)** | home | «first-load screen (open): 300 s → STILL UP (KLOAD core), taken down (setup)» + the same after EVERY reload (×6, 91 s each) → home 80 PASS → **GATE PASS** ✗ (1132 s) |
+### (5) TWO-DEVICE RING RUNS on LIVE (--fast --dev fold,ipad = home, selx, talk)
+| run | first load F / I | home 1st pass F / I | selx F / I | talk F / I | two-tap rows F / I | gate | wall |
+|---|---|---|---|---|---|---|---|
+| ring | 40 s done / 41 s done | 79 PASS + 1 FAIL / 80 | 26 / 27 | 10 / 11 | 6 / 6 | GATE FAIL (1 sure, see N2) | 600 s |
+| ring2 | 38 s done / 39 s done | 80 / 80 | 27 / 27 | 11 / 11 | 6 / 6 | GATE PASS | 475 s |
+| Fold alone, home | done | 80 | — | — | — | GATE PASS | 313 s |
+Home pass really taps on both devices (no re-crawl, no veil, DEAD 0).
+### (6) FINDINGS
+- **H1 (BLOCKING — the brief's own question «the fix must not hide a real game load problem»: it does).** waitLoad waits as a player would (≤ 300 s on open, 90 s per reload, life gate 30 s) — right — but when #kload (or #klife) is STILL UP after that it only logs and e.remove()s the veil, writes rm:'core' to crawl-load.json, and the gate never reads it. M6 = a player stuck for ever on «Lần đầu nhập cung», 0/435 MB → GATE PASS. Since the mp3 block is gone, a still-up veil on this harness is no longer a harness artefact: it is what a real player meets. Fix: a first-load / life-gate veil still up after the player wait = a sure FAIL row («first-load screen stuck: KLOAD <phase> <have>/<total> MB after N s» / «life gate stuck N s»), counted by the gate (one row per device is enough; if the screen offers its own way in (.kpopts button), REAL-tap it instead of removing it and write a WARN row). Keep the removal only so the rest of the crawl can still run. Whole family (law 11): robot-rt's own first-load / life-gate waits must do the same (check it holds no silent veil removal either).
+- N2 (unconfirmed, not blocking — for the next fixer / game owner): run «ring», Fold home: ring person scene «Giáo tập ma ma Tống ma ma» (div.kscn.kring) — real tap on its ✕ «Lui» → «close button did not close its layer (something else changed)»; scene still up after the tap (shot /home/user/wt/r20-out/ring/shots/fold-0134.jpg, scratch). Not reached in ring2 / Fold alone (different crawl order), so not reproduced. The ring opens async (await loadFig) — a restore that re-opens the ring while one is still coming could stack two kscn layers (game double-open) or the tap landed during its fade-in. Probe: real-tap ✕ on that ring right after it opens, then again after 1 s, and count .kscn.kring layers.
+- N3 (coverage, not blocking): iPad home: 22–23 SKIP «button gone before its tap (live body, div#kpop …, busy false)» in BOTH two-device runs (FIXER #20 saw 24) — a room popover left up after a soft restore hides about a quarter of the iPad home list each run; the 40-tap floor does not see it. Close the #kpop popover in the restore (as the hard restore does) so those buttons are really tapped.
+- N4 (info): LIVE moved to 00dca386 (sx unit) after the cut; it touches no harness file — a rebase is a clean fast path, no re-review needed for it.
+
+## HANDOVER — BIG REVIEWER #20, 27/11
+- Verdict: FAIL robot-realtap-live 532c6af5 — H1 only (still-up first-load / life-gate veil is removed silently: M6 «load hangs for ever» = GATE PASS). Clean base, G1, G2 root (mp3 abort), N1, M1–M5 and real-tap contract all OK. N2 one unreproduced ✕ FAIL on the Giáo tập ma ma ring (Fold), N3 iPad #kpop SKIPs.
+- Recipe reuse: /home/user/wt/r20-out/run.sh (name game.html [crawler args]), tree /home/user/wt/r20 (index-m1..m6.html; m6 = runCore pool never resolves).
