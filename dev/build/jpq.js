@@ -99,19 +99,19 @@ function pqEmpEnd(D,ev){const a=pqDoer(D);if(!a)return undefined;const Q=BAL.pq;
  const heir=S.heir&&S.heir.k&&S.heir.k.alive&&!S.heir.v;const vg=D.road==="vg"&&(S.men||[]).find(m=>m.alive&&m.role==="Vương gia");
  const o=pqInqO(a,D.k,a===S&&(heir||!!vg));pqCount("inq_emp");
  if(roll(o)){pqCount("exp_emp");if(ev)log(ev);
-  if(a===S)return pqDoom(S,"emp",`${pre}Tông nhân phủ tra xét Ngự thiện phòng, lần ra món ăn từ cung ngươi (khả năng ${chanceLo(o)}).`);
+  if(a===S)return pqDoom(S,"emp",`${pre}Tông nhân phủ tra xét Ngự thiện phòng, lần ra món ăn từ cung ngươi (cơ may: ${word(o)}).`);
   D._ev=`${ev||""} ${pqDoom(a,"emp",`Tông nhân phủ tra ra món ăn có độc từ cung ${a.name}.`)}`;return undefined}
  if(a!==S||!vg||heir)return undefined;
  const pw=(()=>{try{const c=tdHouse(S);return c?tdPow(c):Q.vg.pw0}catch(e){return Q.vg.pw0}})();
  const o2=cl(Math.round(Q.vg.base+((vg.tinh||0)-BAL.tinhLv.ally)/Q.vg.tinh+(pw-Q.vg.pw0)/Q.vg.pow),Q.vg.lo,Q.vg.hi);pqCount("vg_try");if(ev)log(ev);
- if(roll(o2)){pqCount("vg_win");return over("Tân đế đăng cơ",`${pre}Triều đình rối ren mấy ngày, rồi ${pqMN(vg)} đem quân vào kinh, được tôn lên ngôi (khả năng ${chanceLo(o2)}). Tân đế đón ngươi vào hậu cung mới, phong Quý phi; chuyện cũ chôn theo tiên đế.`,"Vương gia đăng cơ, phong Quý phi",true)}
- pqCount("vg_lose");return pqDoom(S,"emp",`${pre}Triều thần lập thân vương khác; ${pqMN(vg)} mưu đoạt ngôi không thành (khả năng ${chanceLo(o2)}), bị giam vào Tông nhân phủ, khai ra ngươi.`)}
+ if(roll(o2)){pqCount("vg_win");return over("Tân đế đăng cơ",`${pre}Triều đình rối ren mấy ngày, rồi ${pqMN(vg)} đem quân vào kinh, được tôn lên ngôi (cơ may: ${word(o2)}). Tân đế đón ngươi vào hậu cung mới, phong Quý phi; chuyện cũ chôn theo tiên đế.`,"Vương gia đăng cơ, phong Quý phi",true)}
+ pqCount("vg_lose");return pqDoom(S,"emp",`${pre}Triều thần lập thân vương khác; ${pqMN(vg)} mưu đoạt ngôi không thành (cơ may: ${word(o2)}), bị giam vào Tông nhân phủ, khai ra ngươi.`)}
 /* monthly (host only): the kitchens calm down, the Thái hậu inquest runs its window, a slow poison that reached its end opens the inquest */
 function pqMonth(){const Z=pqS();let ev="";if(Z.alert>0)Z.alert--;if(Z.cd>0)Z.cd--;
  if(Z.slow&&Z.slow.who==="th"&&S.thDead&&!Z.inq){Z.inq=Object.assign(Z.slow,{mo:BAL.pq.inq.mo,o:pqInqO(pqDoer(Z.slow)||S,"docngam",false)});Z.slow=null}
  const I=Z.inq;if(I){const a=pqDoer(I);if(!a){Z.inq=null;return ev}
   if(I.mo===BAL.pq.inq.mo)pqCount("inq_th");
-  if(roll(100*(1-Math.pow(1-I.o/100,1/BAL.pq.inq.mo)))){/* the window's rolls add up to exactly the shown chance I.o */Z.inq=null;pqCount("exp_th");ev+=a===S?pqDoom(S,"th",`Hoàng thượng sai Tông nhân phủ tra xét cái chết của Thái hậu, lần ra món ăn từ cung ngươi (khả năng ${chanceLo(I.o)}).`):pqDoom(a,"th",`Tông nhân phủ tra ra cái chết của Thái hậu do món ăn từ cung ${a.name}.`);return ev}
+  if(roll(100*(1-Math.pow(1-I.o/100,1/BAL.pq.inq.mo)))){/* the window's rolls add up to exactly the shown chance I.o */Z.inq=null;pqCount("exp_th");ev+=a===S?pqDoom(S,"th",`Hoàng thượng sai Tông nhân phủ tra xét cái chết của Thái hậu, lần ra món ăn từ cung ngươi (cơ may: ${word(I.o)}).`):pqDoom(a,"th",`Tông nhân phủ tra ra cái chết của Thái hậu do món ăn từ cung ${a.name}.`);return ev}
   if(--I.mo<=0){Z.inq=null;ev+="Vụ Thái hậu băng hà khép lại, Tông nhân phủ không tra ra điều gì. "}}
  return ev}
 (function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(S&&!S.dead&&pqHost())ev=(ev||"")+pqMonth()}catch(x){console.error("pq month",x)}return ev}})();
