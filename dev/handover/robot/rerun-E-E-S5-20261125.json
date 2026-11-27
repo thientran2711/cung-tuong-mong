@@ -10,7 +10,7 @@
  ],
  "note": "flagged lives left #kg82 mini-game boards unplayed per audit (mg quit); verdict INVALID under Foreman E rule 26/11 until F posts the board-play PASS; audit script verdict stays VALID",
  "game": "LIVE github.io",
- "finished": 27,
+ "finished": 28,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -3673,7 +3673,7 @@
    "type": "harness",
    "death": null,
    "age": null,
-   "buoi": 469,
+   "buoi": 683,
    "harness": {
     "kind": "realtap",
     "sha": "8ea10d7e",
@@ -3739,7 +3739,7 @@
      }
     ],
     "slice": null,
-    "mgBackN": 9,
+    "mgBackN": 13,
     "mgBackQuitN": 0,
     "builds": [
      {
@@ -3751,6 +3751,11 @@
       "s": "540358c4+",
       "b": "5a7a9c4004c1",
       "where": "start"
+     },
+     {
+      "s": "066d9af0+",
+      "b": "ef5d32d4ff1e",
+      "where": "reload"
      }
     ],
     "build": {
@@ -3758,7 +3763,7 @@
      "b": "d3f360028603",
      "t": "2026-11-26T18:02Z"
     },
-    "areaTaps": 754,
+    "areaTaps": 1146,
     "kloadEnter": 6,
     "pick": {
      "re": "Dâng Cầm|Dâng Kỳ",
@@ -3766,18 +3771,18 @@
      "exitRefused": 0,
      "log": []
     },
-    "dlgScroll": 67,
-    "scrolls": 115,
+    "dlgScroll": 144,
+    "scrolls": 206,
     "noHitScroll": 22,
-    "dlgClose": 159,
-    "infoTaps": 276,
+    "dlgClose": 226,
+    "infoTaps": 546,
     "noHitReload": 2,
     "nextNoTurn": 1,
-    "mgQuickSkipped": 48,
-    "mgReady": 11,
-    "mgMiss": 106,
-    "mgPeekTaps": 404,
-    "boardTaps": 404,
+    "mgQuickSkipped": 121,
+    "mgReady": 15,
+    "mgMiss": 162,
+    "mgPeekTaps": 616,
+    "boardTaps": 616,
     "mgBackWhy": [
      {
       "at": 4759,
@@ -3868,6 +3873,55 @@
       "btns": [
        "Quay lại"
       ]
+     },
+     {
+      "at": 338,
+      "buoi": 475,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 525,
+      "buoi": 485,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕",
+       "✕"
+      ]
+     },
+     {
+      "at": 1159,
+      "buoi": 570,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕",
+       "✕"
+      ]
+     },
+     {
+      "at": 2190,
+      "buoi": 630,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕",
+       "✕"
+      ]
      }
     ],
     "skipTaps": 95,
@@ -3893,9 +3947,9 @@
       ]
      }
     ],
-    "noExitFast": 102,
-    "mgDragSkip": 1,
-    "mgDragSkipExam": 1,
+    "noExitFast": 108,
+    "mgDragSkip": 2,
+    "mgDragSkipExam": 2,
     "taps0": 0,
     "resumed": [
      {
@@ -3912,9 +3966,19 @@
       "at": "2026-11-27T01:58:41.868Z",
       "buoi": 466,
       "from": "2026-11-27T01:56:16.267Z"
+     },
+     {
+      "at": "2026-11-27T04:54:59.587Z",
+      "buoi": 469,
+      "from": "2026-11-27T02:25:23.529Z"
+     },
+     {
+      "at": "2026-11-27T05:09:01.154Z",
+      "buoi": 505,
+      "from": "2026-11-27T05:08:24.829Z"
      }
     ],
-    "consoleErrN": 1949,
+    "consoleErrN": 1986,
     "resumeRestore": [
      {
       "at": "2026-11-27T00:54:54.177Z",
@@ -3939,6 +4003,22 @@
       "want": 1344083,
       "got": 1344083,
       "keys": 17
+     },
+     {
+      "at": "2026-11-27T04:56:28.140Z",
+      "origin": "http://127.0.0.1:8841",
+      "from": "https://thientran2711.github.io",
+      "want": 1344505,
+      "got": 1344505,
+      "keys": 17
+     },
+     {
+      "at": "2026-11-27T05:09:10.678Z",
+      "origin": "http://127.0.0.1:8841",
+      "from": "http://127.0.0.1:8841",
+      "want": 1432600,
+      "got": 1432600,
+      "keys": 18
      }
     ],
     "resumeHash": [
@@ -3965,22 +4045,38 @@
       "same": true,
       "ckClk": "4.37.2.3",
       "pageClk": "4.37.2.3"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "46e2b30f",
+      "page": "46e2b30f",
+      "same": true,
+      "ckClk": "4.37.2.3",
+      "pageClk": "4.37.2.3"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "709cba43",
+      "page": "709cba43",
+      "same": true,
+      "ckClk": "4.40.2.2",
+      "pageClk": "4.40.2.2"
      }
     ],
-    "skipLayerTaps": 49,
-    "bareCovered": 31,
+    "skipLayerTaps": 109,
+    "bareCovered": 37,
     "bareCoveredBy": {
-     "img.kfr over button.card.kcard.ka": 2,
+     "img.kfr over button.card.kcard.ka": 3,
      "moving img.kemo.kemo-ghen.kemo-live": 1,
      "moving img.kemo.kemo-gian.kemo-live": 1,
-     "not on the layer scanned": 19,
+     "not on the layer scanned": 24,
      "b.kdt1 over section#panel.panel.kpane": 2,
      "div#kdaytc over button.tok.fig.j59silt": 2,
      "div#kdaytc over button.card.kcard.ka": 1,
      "div#kdaytc over img#mefig.j59sz": 2,
      "div.kdayt over button.k3r.kasr": 1
     },
-    "closeOwnLayer": 1,
+    "closeOwnLayer": 2,
     "boards": [
      {
       "at": 587,
@@ -4093,17 +4189,51 @@
       "raw": 5.799999999999998
      },
      {
-      "at": 1906,
-      "buoi": 469,
-      "kind": "#kg82",
+      "at": 337,
+      "buoi": 475,
+      "kind": "dan",
       "layer": "#kg82",
-      "moves": 0,
+      "moves": 18,
       "area": 0,
-      "s": 305,
-      "res": "?"
+      "s": 21,
+      "res": "over (phase still «play», way on #kg82ok Môn kế tiếp) 4/10 raw 5.60",
+      "raw": 5.599999999999998
+     },
+     {
+      "at": 512,
+      "buoi": 485,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 1,
+      "s": 28,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1148,
+      "buoi": 570,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 0,
+      "s": 28,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 2179,
+      "buoi": 630,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 146,
+      "area": 0,
+      "s": 22,
+      "res": "4/10 raw 0.00",
+      "raw": 0
      }
     ],
-    "boardN": 11,
+    "boardN": 14,
     "saveRewind": [
      {
       "at": 47,
@@ -4122,9 +4252,18 @@
       "to": 464,
       "toClk": "4.37.2.3",
       "lost": 2
+     },
+     {
+      "at": 146,
+      "buoi": 470,
+      "from": 466,
+      "fromClk": "4.38.0.1",
+      "to": 464,
+      "toClk": "4.37.2.3",
+      "lost": 2
      }
     ],
-    "skipCoverTaps": 2,
+    "skipCoverTaps": 3,
     "freezeStackAt": 1795745957078,
     "freezeStack": [
      {
@@ -4217,7 +4356,27 @@
      "b": "5a7a9c4004c1",
      "t": "2026-11-27T00:21Z",
      "at": "2026-11-27T01:58:44.020Z"
-    }
+    },
+    "pinUrl": "http://127.0.0.1:8841/",
+    "autoServe": [
+     {
+      "at": "2026-11-27T04:56:20.533Z",
+      "where": "reload",
+      "from": "ef5d32d4ff1e",
+      "to": "http://127.0.0.1:8841/",
+      "carried": 17
+     }
+    ],
+    "ident": {
+     "name": "Tiêu Yên La",
+     "org": "Công chúa Phù Tang hòa thân",
+     "born": -17,
+     "at": 469
+    },
+    "boardOver": 1,
+    "crashes": 1,
+    "dressPut": 6,
+    "kfocVisits": 1
    },
    "bugs": [
     {
@@ -4252,7 +4411,7 @@
     },
     {
      "type": "game",
-     "n": 1,
+     "n": 2,
      "msg": "SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)"
     },
     {
@@ -4261,14 +4420,24 @@
      "msg": "BOARD dan still in play after 6 min (18 moves) — the round never ended"
     },
     {
+     "type": "game",
+     "n": 1,
+     "msg": "KG82.phase stays «play» after the round ended: board dan shows its result / next («#kg82ok Môn kế tiếp», #kg82box hidden) — the game never set phase «result»"
+    },
+    {
+     "type": "crash",
+     "n": 1,
+     "msg": "tab crashed (Page crashed) at buổi 507"
+    },
+    {
      "type": "harness",
      "n": 1,
      "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed"
     }
    ],
    "exitPick": null,
-   "mgDragSkip": 1,
-   "mgReady": 11
+   "mgDragSkip": 2,
+   "mgReady": 15
   },
   {
    "life": "E-S5-R5-greedy-1",
@@ -18686,6 +18855,1443 @@
    "exitPick": null,
    "mgDragSkip": null,
    "mgReady": null
+  },
+  {
+   "life": "E-S5-R5-scholar-1",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 136898467,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Xuất gia",
+   "type": "end",
+   "death": false,
+   "age": 30,
+   "buoi": 1849,
+   "harness": {
+    "kind": "realtap",
+    "sha": "8ea10d7e",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [
+     {
+      "at": 27,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 260,
+      "lvl": 3,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 291,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 3409,
+      "lvl": 3,
+      "layer": "#kdaytc",
+      "title": ""
+     },
+     {
+      "at": 3441,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 29,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 23,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 31,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     }
+    ],
+    "slice": null,
+    "mgBackN": 88,
+    "mgBackQuitN": 0,
+    "builds": [
+     {
+      "s": "d811a46d+",
+      "b": "d3f360028603",
+      "where": "start"
+     },
+     {
+      "s": "540358c4+",
+      "b": "5a7a9c4004c1",
+      "where": "start"
+     },
+     {
+      "s": "066d9af0+",
+      "b": "ef5d32d4ff1e",
+      "where": "reload"
+     }
+    ],
+    "build": {
+     "s": "d811a46d+",
+     "b": "d3f360028603",
+     "t": "2026-11-26T18:02Z"
+    },
+    "areaTaps": 4292,
+    "kloadEnter": 6,
+    "dlgScroll": 1010,
+    "scrolls": 1148,
+    "mgQuickSkipped": 1156,
+    "mgReady": 86,
+    "mgMiss": 785,
+    "mgPeekTaps": 3189,
+    "boardTaps": 3189,
+    "mgBackWhy": [
+     {
+      "at": 2095,
+      "buoi": 448,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2206,
+      "buoi": 453,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2225,
+      "buoi": 454,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2271,
+      "buoi": 454,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2326,
+      "buoi": 456,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2455,
+      "buoi": 462,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2570,
+      "buoi": 469,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2638,
+      "buoi": 474,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2699,
+      "buoi": 478,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2755,
+      "buoi": 481,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2793,
+      "buoi": 483,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2817,
+      "buoi": 486,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 97,
+      "buoi": 493,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 117,
+      "buoi": 495,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 171,
+      "buoi": 499,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 207,
+      "buoi": 503,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 230,
+      "buoi": 504,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 264,
+      "buoi": 507,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 309,
+      "buoi": 511,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 361,
+      "buoi": 516,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 507,
+      "buoi": 529,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 540,
+      "buoi": 532,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 548,
+      "buoi": 532,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 590,
+      "buoi": 537,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 604,
+      "buoi": 539,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 659,
+      "buoi": 544,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 678,
+      "buoi": 547,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 697,
+      "buoi": 548,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 753,
+      "buoi": 553,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 817,
+      "buoi": 560,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 830,
+      "buoi": 561,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 887,
+      "buoi": 567,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 960,
+      "buoi": 574,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 999,
+      "buoi": 578,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1009,
+      "buoi": 579,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1037,
+      "buoi": 581,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1042,
+      "buoi": 582,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1065,
+      "buoi": 584,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1159,
+      "buoi": 591,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1293,
+      "buoi": 599,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     }
+    ],
+    "infoTaps": 1918,
+    "dlgClose": 454,
+    "skipTaps": 97,
+    "stallForce": 1,
+    "noExit": [
+     {
+      "k": "nx|.kmov|",
+      "at": 259,
+      "buoi": 8,
+      "screen": ".kmov «»",
+      "selector": "div.kmov.kcf.km-full",
+      "why": "picker stalled 97 steps, no close / next",
+      "shot": "/home/user/wt/es5-out/shots-E-S5-R5-scholar-1/noexit-1795735184694.png",
+      "buttons": [
+       "✕",
+       "Chuẩn bị thị tẩm"
+      ]
+     }
+    ],
+    "noExitFast": 493,
+    "kfocVisits": 2,
+    "noHitScroll": 12,
+    "noHitReload": 1,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-27T00:53:39.527Z",
+      "buoi": 330,
+      "from": "2026-11-27T00:51:31.749Z"
+     },
+     {
+      "at": "2026-11-27T00:54:56.731Z",
+      "buoi": 331,
+      "from": "2026-11-27T00:54:32.509Z"
+     },
+     {
+      "at": "2026-11-27T01:09:20.204Z",
+      "buoi": 361,
+      "from": "2026-11-27T01:07:13.799Z"
+     },
+     {
+      "at": "2026-11-27T01:58:50.096Z",
+      "buoi": 491,
+      "from": "2026-11-27T01:57:24.197Z"
+     },
+     {
+      "at": "2026-11-27T02:46:06.189Z",
+      "buoi": 707,
+      "from": "2026-11-27T02:45:18.729Z"
+     },
+     {
+      "at": "2026-11-27T04:54:43.258Z",
+      "buoi": 1324,
+      "from": "2026-11-27T04:53:20.888Z"
+     },
+     {
+      "at": "2026-11-27T05:31:15.026Z",
+      "buoi": 1475,
+      "from": "2026-11-27T05:30:49.550Z"
+     }
+    ],
+    "resumeRestore": [
+     {
+      "at": "2026-11-27T00:53:45.266Z",
+      "origin": "http://127.0.0.1:8746",
+      "from": "http://127.0.0.1:8746",
+      "want": 1433001,
+      "got": 1433001,
+      "keys": 15
+     },
+     {
+      "at": "2026-11-27T00:55:02.310Z",
+      "origin": "http://127.0.0.1:8746",
+      "from": "http://127.0.0.1:8746",
+      "want": 1434604,
+      "got": 1434604,
+      "keys": 15
+     },
+     {
+      "at": "2026-11-27T01:09:30.830Z",
+      "origin": "http://127.0.0.1:8746",
+      "from": "http://127.0.0.1:8746",
+      "want": 1461386,
+      "got": 1461386,
+      "keys": 16
+     },
+     {
+      "at": "2026-11-27T01:58:57.532Z",
+      "origin": "https://thientran2711.github.io",
+      "from": "http://127.0.0.1:8746",
+      "want": 1773766,
+      "got": 1773766,
+      "keys": 17
+     },
+     {
+      "at": "2026-11-27T02:46:13.052Z",
+      "origin": "https://thientran2711.github.io",
+      "from": "https://thientran2711.github.io",
+      "want": 2214259,
+      "got": 2214259,
+      "keys": 18
+     },
+     {
+      "at": "2026-11-27T04:56:35.305Z",
+      "origin": "http://127.0.0.1:8841",
+      "from": "https://thientran2711.github.io",
+      "want": 3252963,
+      "got": 3252963,
+      "keys": 18
+     },
+     {
+      "at": "2026-11-27T05:31:23.880Z",
+      "origin": "http://127.0.0.1:8841",
+      "from": "http://127.0.0.1:8841",
+      "want": 3472022,
+      "got": 3472022,
+      "keys": 19
+     }
+    ],
+    "consoleErrN": 2442,
+    "resumeHash": [
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "e63811be",
+      "page": "e63811be",
+      "same": true,
+      "ckClk": "3.28.1.3",
+      "pageClk": "3.28.1.3"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "bf79617",
+      "page": "bf79617",
+      "same": true,
+      "ckClk": "3.30.2.3",
+      "pageClk": "3.30.2.3"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "1cc07f8",
+      "page": "1cc07f8",
+      "same": true,
+      "ckClk": "4.43.0.0",
+      "pageClk": "4.43.0.0"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "f2e18ec5",
+      "page": "f2e18ec5",
+      "same": true,
+      "ckClk": "5.61.1.3",
+      "pageClk": "5.61.1.3"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "b53bf4b0",
+      "page": "b53bf4b0",
+      "same": true,
+      "ckClk": "10.114.2.3",
+      "pageClk": "10.114.2.3"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "7d191cdf",
+      "page": "7d191cdf",
+      "same": true,
+      "ckClk": "11.127.1.2",
+      "pageClk": "11.127.1.2"
+     }
+    ],
+    "boards": [
+     {
+      "at": 62,
+      "buoi": 332,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 117,
+      "area": 0,
+      "s": 21,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 158,
+      "buoi": 336,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 31,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 274,
+      "buoi": 340,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 118,
+      "area": 0,
+      "s": 21,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 460,
+      "buoi": 348,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 568,
+      "buoi": 352,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 120,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 730,
+      "buoi": 360,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 182,
+      "buoi": 366,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 29,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 338,
+      "buoi": 374,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 28,
+      "res": "6/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 648,
+      "buoi": 390,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 28,
+      "area": 1,
+      "s": 31,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 750,
+      "buoi": 394,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 1,
+      "s": 29,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1040,
+      "buoi": 402,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 118,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1420,
+      "buoi": 418,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 30,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1571,
+      "buoi": 426,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 109,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1689,
+      "buoi": 430,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 33,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1760,
+      "buoi": 434,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 28,
+      "area": 1,
+      "s": 29,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1861,
+      "buoi": 438,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 139,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1957,
+      "buoi": 442,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 117,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2021,
+      "buoi": 446,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "3/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2063,
+      "buoi": 446,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 29,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 2095,
+      "buoi": 448,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2206,
+      "buoi": 453,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2225,
+      "buoi": 454,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2270,
+      "buoi": 454,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 2326,
+      "buoi": 456,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2455,
+      "buoi": 462,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 119,
+      "area": 0,
+      "s": 21,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2570,
+      "buoi": 469,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2638,
+      "buoi": 474,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "10/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 2699,
+      "buoi": 478,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "3/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2755,
+      "buoi": 481,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2793,
+      "buoi": 483,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2817,
+      "buoi": 486,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 95,
+      "buoi": 493,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 2,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 117,
+      "buoi": 495,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 171,
+      "buoi": 499,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 207,
+      "buoi": 503,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 230,
+      "buoi": 504,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 264,
+      "buoi": 507,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 309,
+      "buoi": 511,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 361,
+      "buoi": 516,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 507,
+      "buoi": 529,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 540,
+      "buoi": 532,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 548,
+      "buoi": 532,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 590,
+      "buoi": 537,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 604,
+      "buoi": 539,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 659,
+      "buoi": 544,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 678,
+      "buoi": 547,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 697,
+      "buoi": 548,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 753,
+      "buoi": 553,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 817,
+      "buoi": 560,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 830,
+      "buoi": 561,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 2,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 887,
+      "buoi": 567,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 960,
+      "buoi": 574,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 999,
+      "buoi": 578,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1009,
+      "buoi": 579,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1037,
+      "buoi": 581,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1042,
+      "buoi": 582,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1065,
+      "buoi": 584,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1159,
+      "buoi": 591,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 243,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1293,
+      "buoi": 599,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     }
+    ],
+    "boardN": 59,
+    "skipLayerTaps": 447,
+    "bareCovered": 67,
+    "bareCoveredBy": {
+     "moving img.kemo.kemo-gian.kemo-live": 1,
+     "not on the layer scanned": 35,
+     "b.kdt1 over section#panel.panel.kpane": 1,
+     "moving img.kemo.kemo-ghen.kemo-live": 2,
+     "div#kdaytc over button.tok.fig.bob": 1,
+     "div#kdaytc over img#mefig.kfxon.j59sz": 1,
+     "div#kdaytc over div#rtoast.rtoast.karesult.sure": 5,
+     "div#kdaytc over button.card.kcard.ka": 3,
+     "div.kmdark over button.card.kcard.ka": 5,
+     "i.ktrv-plate over button.card.kcard.ka": 1,
+     "i.ktrv-plate over button.k3r": 1,
+     "div#kdaytc over button.pct": 1,
+     "img.kfr over button.krailb.krailt.kgfbtn": 1,
+     "img.kfr over button.tok.fig.bob": 1,
+     "div.kmdark over section#panel.panel.kpane": 1,
+     "moving img.kemo.kemo-buon.kemo-live": 2,
+     "img.kfr over button.card.kcard.ka": 2,
+     "div#kdaytc over section#panel.panel.kpane": 1,
+     "div.kne.kne-beat over div.kmrow": 1,
+     "div.kne.kne-beat over section#panel.panel.kpane": 1
+    },
+    "saveRewind": [
+     {
+      "at": 43,
+      "buoi": 362,
+      "from": 361,
+      "fromClk": "3.31.0.0",
+      "to": 360,
+      "toClk": "3.30.2.3",
+      "lost": 1
+     },
+     {
+      "at": 174,
+      "buoi": 1325,
+      "from": 1324,
+      "fromClk": "10.115.0.0",
+      "to": 1323,
+      "toClk": "10.114.2.3",
+      "lost": 1
+     }
+    ],
+    "skipCoverTaps": 4,
+    "dressPut": 74,
+    "pinMoves": [
+     {
+      "from_pinUrl": "http://127.0.0.1:8746/",
+      "from_build0": {
+       "s": "d811a46d+",
+       "b": "d3f360028603",
+       "t": "2026-11-26T18:02Z",
+       "at": "2026-11-26T23:15:32.094Z"
+      },
+      "note": "mixed build (pin-server resume): pin server lacked /dev/vendor/pixi + img/kit (Foreman E ruling 01:08Z 27/11); moved to LIVE github.io with pin=0"
+     }
+    ],
+    "build0": {
+     "s": "540358c4+",
+     "b": "5a7a9c4004c1",
+     "t": "2026-11-27T00:21Z",
+     "at": "2026-11-27T01:58:52.978Z"
+    },
+    "pinUrl": "http://127.0.0.1:8841/",
+    "autoServe": [
+     {
+      "at": "2026-11-27T04:56:26.074Z",
+      "where": "reload",
+      "from": "ef5d32d4ff1e",
+      "to": "http://127.0.0.1:8841/",
+      "carried": 18
+     }
+    ],
+    "ident": {
+     "name": "Lư Doanh Nguyệt",
+     "org": "Công chúa Phù Tang hòa thân",
+     "born": -17,
+     "at": 1324
+    },
+    "crashes": 1,
+    "taps": 2343
+   },
+   "bugs": [
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): picker stalled 97 steps, no close / next → later visits unstuck at once by taps"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "picker stalled 97 steps / 61 s on .kmov «» without a real tap (area 98; last refused tap: gone «Chuẩn bị thị tẩm») → tapped «Chuẩn bị thị tẩm»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): #kdaytc «» — lost: Ô lưu / Xem bản thân / Sắc100Tài36Tâm cơ29Đức47 / Bạc67Sức99/99"
+    },
+    {
+     "type": "crash",
+     "n": 1,
+     "msg": "tab crashed (Page crashed) at buổi 1476"
+    }
+   ],
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": 86
   }
  ],
  "parked_stuck_gamebug": [
