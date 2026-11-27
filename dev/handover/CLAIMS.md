@@ -695,3 +695,4 @@ SIL-EUNUCH | review/sil-eunuch-rv168 b664f80e | session_01PEhRbvVPQepjduga2PqdYq
 C3-SEALS | review/c3-seals-lrm 7082b569 | session_01PEhRbuThfqRgsb1V4EPoSx | DONE (LIVE in 772bee4f via UI bundle 6a493881) | 27/11 18:28Z (Foreman C ROOT 4)
 3B-GREEN (monthly-allotment «evening» pace-speed + role-parity FAIL 2; MAIN 179 19:05Z) | review/allot-pace (b3b family) | session_01PEhRbvHx5Tdoz3k3iZ7VTk | RUNNING | 27/11 19:30Z (Foreman C ROOT 4)
 C4-RINGART (faction ring act pictures Lập phe/Mời vào phe/Gạch tên/Xem + ACTS.json fallback fix; MAIN 179 18:46Z) | review/c4-ring-art | session_01PEhRbtWZ3sD3nbQtNSs3sP | RUNNING | 27/11 19:30Z (Foreman C ROOT 4)
+HARNESS FIXER #24 (opus) review/robot-realtap-live from 3ed71335 — fix BIG #21 RE-CHECK 2 FAIL F4 (noLift false [game] on toggle hand cards) + queue (vii) wipe profile-<life> on fresh start | review/robot-realtap-live | (session id next line in FOREMAN_F_STATUS) | RUNNING | 27/11 19:34Z (FOREMAN F ROOT 7)
