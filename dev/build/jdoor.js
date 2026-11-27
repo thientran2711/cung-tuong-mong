@@ -194,9 +194,9 @@ DOOR.road=function(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeo
   chT:["t:Đẩy con nàng xuống hồ"]},
  {k:"P10",n:"Lấy của",cat:"hai-nguoi",kinds:["card"],rep:"Sai người lấy trộm đồ",h:"Chọn mức và cách lấy của nàng.",re:/^$/,
   acts:{a:["batnat","laydo","laydol","petsteal","thaopet","phonghoa"]},chT:[]},
- {k:"P11",n:"Tố cáo",cat:"muu-ke",kinds:["rival","hh","card"],rep:"Tố giác",h:"Chọn tội để tố, và tâu với ai.",re:/^(Tố xa xỉ|Hặc ăn mặc sai phẩm)$/,
-  acts:{a:["accuse","tocao","expose","xx","vp","trinhhh","trinhth"]}},
- {k:"P12",n:"Mặc cả chứng cứ",cat:"muu-ke",kinds:["card"],rep:"Uy hiếp đòi bạc",h:"Chọn cách dùng chứng cứ đang nắm.",re:/^$/,acts:{a:["uyhiep","banphe","tieuhuy"]}},
+ {k:"P11",n:"Tố cáo",cat:"muu-ke",kinds:["rival","hh","card"],rep:"Tố giác",h:"Chọn tội để tố.",re:/^(Tố xa xỉ|Hặc ăn mặc sai phẩm)$/,
+  acts:{a:["accuse","xx","vp"]}},/* split-merge B1: ONE «Tố giác» (accuse; listener by chTo) + the two visible-fault reports */
+ {k:"P12",n:"Mặc cả chứng cứ",cat:"muu-ke",kinds:["card"],rep:"Uy hiếp đòi bạc",h:"Chọn cách dùng chứng cứ đang nắm.",re:/^$/,acts:{a:["uyhiep","banphe"]}},/* split-merge B2: «Trả chứng cứ lấy lòng» folded away */
  {k:"P13",n:"Quyền Hoàng hậu",cat:"trung-phat",kinds:["card"],rep:"Xử tội",h:"Chọn việc xử phân với nàng.",re:/^$/,acts:{e:["judge","conf","reward","pardon","cutpay"],a:["takeaway"]}},
  {k:"P14",n:"Ra uy",cat:"trung-phat",kinds:["rival","hh","card"],rep:"Phạt quỳ",h:"Chọn cách ra uy với nàng.",re:/^$/,acts:{a:["tat","phatquy"]},tiers:{"a:tat":"nhẹ","a:phatquy":"vừa"}}
 ].forEach(DOOR.add);
