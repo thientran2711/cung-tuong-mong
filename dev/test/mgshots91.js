@@ -7,7 +7,7 @@ const T={dan:3200,hat:4500,co:1300,dauho:2600,ban:2600,tho:1500,doi:1500,doden:2
 const SHOWN={theu:1100,mua:750};
 const KINDS=(KL&&KL!=='all'?KL:Object.keys(T).join(',')).split(',');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.clock.install();await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
   setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50);Object.assign(S.arts,{cam:3,ky:2,thi:4,hoa:1,vu:3,y:2});render()});

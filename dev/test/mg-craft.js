@@ -30,7 +30,7 @@ const KIND_CASES={/* td_cong (owner 21/11 ~01:05Z): the stitch levers live in BA
 const KG82_CRAFT_E={td_cong:"stitch",kim:"papercut",ve:"inkwash",hoa:"ikebana"};/* owner 21/11 ~01:05Z: Thêu keeps the j82 pattern game; the stitch board = Công «Thêu theo nét» */
 /* the plain play of a kind: playArt (Cắm hoa has no plain art key — the plain "hoa" is Họa/Vẽ — so it opens by startContest) */
 const SRC0=k=>k==='td_cong'?`(TDS.busy=false,tdPlay("cong","self"))`:k==='hoa'?`startContest({art:"hoa",title:"Hội thi",onDone:()=>{}})`:`playArt({art:${JSON.stringify(k)},onDone:()=>{}})`;
-(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:VW,height:VH}});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.addInitScript(()=>{window.__ct=null;/* owner OD 21/11 ~00:50Z «guiding words stay» (canon overwrite of «no text in play»): the stitch board (Công) keeps its ONE kit guiding line (kg82Guide) + the «Mẫu» tag; any other word still fails */const GUIDE=/^(Mẫu|Chạm cuộn chỉ cùng sắc dải sáng|Chạm khung ngay!|Chạm khung khi kim chúc xuống)$/;const okT=t=>/^[^\p{L}]*$/u.test(t)||GUIDE.test(t);
   for(const f of['fillText','strokeText']){const o=CanvasRenderingContext2D.prototype[f];CanvasRenderingContext2D.prototype[f]=function(t){if(window.__ct&&!okT(String(t).trim()))window.__ct.add(String(t).trim());return o.apply(this,arguments)}}});
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
