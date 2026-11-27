@@ -79,7 +79,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  td_tha_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{duc:10,danh:10,sung:4},bar:45,g:[50]},
  ch_co_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6,tamco:2},bar:40},
  ch_benh_11:{p:.12,np:2,sc:2,c:{suc:-5},fx:{danh:12,sung:5,mat:2}},
- ch_ho_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:12,danh:10,duc:3},bar:30,g:[40]},
+ ch_ho_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:12,danh:10,duc:3},g:[40]},
  ch_bi_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:15,danh:10,duc:6},bar:40,th:40},
  tt_co_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:40,g:[4]}, /* x: duc ≥ bar */
  tt_oan_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:4},bar:45,g:[8]}, /* x: duc ≥ bar */
@@ -101,7 +101,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  cnv_ban_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,duc:4},bar:35,bar2:2,g:[10,12,8]}, /* x: duc ≥ bar or mat ≥ bar2 */
  cnv_chu_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:4},bar:40,g:[30,12,20]}, /* x: duc ≥ bar */
  cnv_ma_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,mat:2,duc:3},bar:35}, /* x: duc ≥ bar and the wooden box */
- cnv_mat_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,duc:4},bar:20,g:[20]}, /* x: old mistress rel ≥ bar */
+ cnv_mat_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:10,duc:4},g:[20]}, /* x: old mistress thân with her (netTh «than», rv r2) */
  thd_hoc_11:{p:.1,np:3,sc:2,c:{suc:-4},fx:{danh:12,sung:4},bar:45,g:[15]}, /* x: duc ≥ bar */
  thd_sach_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,sung:5,duc:4},bar:50}, /* x: danh ≥ bar */
  thd_tho_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,sung:6,tai:2},bar:45}, /* x: tai ≥ bar */
@@ -390,3 +390,16 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  noi14:[{danh:6,sung:3},{danh:6,th:6}],
  ke14:[{danh:5},{th:5,danh:3},{danh:5},{th:4,danh:3},{danh:8},{danh:6,th:4}]
 }}});
+/* ORDER THIN P8 (jroadc.js, composed origin roads 4 → 8 per origin; API P8 in dev/handover/reports/thin.md). Seeds count STEPS; the numbers live here (law 4).
+   st = steps per option (Σgain == Σloss == st, laws 2/3); fx[key] = one option step (sc = Lợi thế points, rel = thiện cảm of a cast consort; tin = her
+   mistress's trust, cnv only); Est = ending steps (win gain-only, lose loss-only, mid 1 + 1); Efx[key] = one ending step;
+   xo[risk][band] = climax base odds (band a = chapters .5–.7, b = .8–.10, f = .11 → lower each band: law 5 harder as she climbs; lo = win or MIDDLE,
+   hi = win or LOSE, so lo starts lower: law 2); xs[stat] = the rdOdds term of the stat that carries the roll (["d",div] = S[stat]/div, ["m",k] = S[stat]×k);
+   own = weight of a part tagged rd to this road; seen = weight of a part a past life met (× per life, P0 fresh-first first); band = chapter → band. */
+BAL.road.c={st:2,
+ fx:{sung:3,danh:2,bac:30,suc:3,mat:1,th:3,hh:3,duc:2,tamco:1,tin:5,sc:1,rel:6},
+ Est:{win:3,lose:3,mid:1},
+ Efx:{sung:3,danh:3,bac:40,suc:4,mat:1,th:3,hh:3,duc:3,tamco:1,tin:6,rel:10},
+ xo:{hi:{a:50,b:45,f:40},lo:{a:35,b:30,f:25}},
+ xs:{danh:["d",5],sung:["d",6],tamco:["d",3],duc:["d",5],mat:["m",5],th:["d",5],hh:["d",5]},
+ own:3,seen:.5,band:{5:"a",6:"a",7:"a",8:"b",9:"b",10:"b",11:"f"}};

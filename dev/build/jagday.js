@@ -310,7 +310,7 @@ function agSeeNpc(p,doer){if(!agKhOn()||!BAL.ag.kh2.see.on)return;const R=agRec(
   if(dv&&motiveOK(w,dv,"spy").ok)O.push(["hear",A.w.hear*(Math.max(0,hostility(w,dv))/B.hoD+(hostile?1:0))*agMW(w,"spy")]);
   if(D&&!hostile&&agOwn(p.k)&&(!D.req||D.req(w,t))&&twCanPay(w,p.k)){const AS=AGSELF[p.k];const gl=AS?AS.g(w):(()=>{const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===p.k);return s?{g:AGSOC[s][3](BAL.tw.g),l:{}}:{g:{},l:{}}})();
    O.push(["join",A.w.join*agU(w,N,D.o?D.o(w,t):100,gl,twCost(p.k),AS?AS.tag:"social")])}
-  if(hostile&&t&&t!==S&&typeof t==="object"&&TW.mediate&&aff(w,t)>=BAL.ag.goal.friend&&(!TW.mediate.req||TW.mediate.req(w,t))&&twCanPay(w,"mediate"))O.push(["mediate",A.w.mediate*agMW(w,"help")]);
+  if(hostile&&t&&t!==S&&typeof t==="object"&&TW.mediate&&aff(w,t)>=netTh(w,"than")&&(!TW.mediate.req||TW.mediate.req(w,t))&&twCanPay(w,"mediate"))O.push(["mediate",A.w.mediate*agMW(w,"help")]);
   AGD.stat.seeN=(AGD.stat.seeN||0)+1;const c=mindPick(O.filter(x=>x[1]>0),w);if(!c||c==="ignore")continue;
   /* review ag-all-2 r2 B2: present ones see it in khắc kh and react the NEXT khắc (owner ~15:45Z), as a deed through the ledger (one day gate) */
   const tid=c==="hear"?(dv?ledgerId(dv):null):(t&&t!==S&&typeof t==="object"?ledgerId(t):t===S?"me":null);

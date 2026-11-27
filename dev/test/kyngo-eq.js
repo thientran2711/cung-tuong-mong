@@ -4,7 +4,7 @@
    FAIL: (a) max/min option value of one encounter > eqTol; (b) an option of a choice with no gain or no real cost (MAIN 19/11 09:00Z (d):
    a loss of only "no X" is not a cost); (c) a «plain» encounter carrying a cost. */
 const fs=require('fs'),path=require('path');const BAL={};
-new Function('BAL',fs.readFileSync(path.join(__dirname,'../build/jbalky.js'),'utf8'))(BAL);const B=BAL.kyngo;
+new Function('BAL',fs.readFileSync(path.join(__dirname,'../build/jbalky.js'),'utf8'))(BAL);/* ORDER THIN P5: the composed encounters' rows (jbalkyc.js) are checked by the same rule */{const f=path.join(__dirname,'../build/jbalkyc.js');if(fs.existsSync(f))new Function('BAL',fs.readFileSync(f,'utf8'))(BAL)}const B=BAL.kyngo;
 function val(O,b){let v=0;for(const k in O.g||{})v+=O.g[k]*(k==='sucR'?B.sucRest:1)*(B.vw[k]||0);if(O.s)v+=B.sv[O.s]||0;for(const k in O.c||{})v-=O.c[k]*(B.vw[k]||0);return +(v*(B.V[b]||1)).toFixed(1)}
 const cost=O=>Object.keys(O.c||{}).some(k=>O.c[k]>0&&(B.vw[k]||0)>0);
 const gain=O=>Object.keys(O.g||{}).some(k=>O.g[k]>0)||(O.s&&(B.sv[O.s]||0)>0)||O.buy;

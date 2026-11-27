@@ -26,14 +26,14 @@ function h54Hide(fn){return function(){const L=[];try{allKids().forEach(([k])=>{
 (function(){const w0=seatW;seatW=function(p){return w0.apply(this,arguments)+((p&&p.hon)||0)/2}})();
 (function(){const f0=facStr;facStr=function(f){let s=f0.apply(this,arguments);try{s+=Math.round(facMembers(f).reduce((a,p)=>a+(p.hon||0)/2,0))}catch(e){}return s}})();
 (function(){if(typeof backers!=="function")return;const b0=backers;backers=function(p){const L=b0.apply(this,arguments);try{if(Array.isArray(L)&&(p.hon||0)>=8)L.push("nhà thông gia")}catch(e){}return L}})();
-/* ---- young men of the ministers' houses (phò mã candidates): name, house, father's office, age 18+, looks, talent ---- */
+/* ---- young men of the ministers' houses (phò mã candidates): name, house, father's office, age BAL.ageMin+, looks, talent ---- */
 function h54Pool(){S.hPool=S.hPool||[];return S.hPool}
 function h54Son(id){return h54Pool().find(s=>s.id===id)||null}
 function h54Q(s){return (3-s.tier)*20+s.sac/5+s.tai/5}
 function h54NewSon(){const P=h54Pool();const used=namesInUse().concat(P.map(s=>s.name),allKids().map(([k])=>k.hW&&k.hW.s?k.hW.s.name:"")).filter(Boolean);
  const house=pick(CLANS);const surU=P.filter(s=>!s.taken).map(s=>s.name.split(" ").slice(0,-2).join(" "));const head=P.some(s=>!s.taken&&s.house===house&&s.tier===0);let tier=R(100)<20&&!head?0:R(100)<45?1:2;
  const name=nmNew("m",{avoidSur:new Set(surU)});
- S.hSid=(S.hSid||0)+1;const s={id:S.hSid,name,house,tier,off:H54OFF[house][tier],age:18+R(6),sac:40+R(56),tai:30+R(66),taken:null};P.push(s);return s}
+ S.hSid=(S.hSid||0)+1;const s={id:S.hSid,name,house,tier,off:H54OFF[house][tier],age:BAL.ageMin+R(6),sac:40+R(56),tai:30+R(66),taken:null};P.push(s);return s}
 function h54PoolUp(){const P=h54Pool();for(let i=P.length-1;i>=0;i--){const s=P[i];if(!s.taken&&s.age>27){h54FreeFace(s);P.splice(i,1)}}let n=P.filter(s=>!s.taken).length;while(n<8){h54NewSon();n++}}
 function h54FreeFace(s){try{if(s.fid){const U=figUsed();const i=U.indexOf(s.fid);if(i>=0)U.splice(i,1)}}catch(e){}}
 function h54Face(s){let src="";try{if(typeof FIGIX!=="undefined"&&FIGIX.man){if(!s.fid){const U=figUsed();const fr=Object.keys(FIGIX.man).filter(x=>!U.includes(x));if(fr.length){s.fid=fr[0];U.push(s.fid)}}
@@ -50,7 +50,7 @@ function h54Rivals(p,k){return h54Daus().filter(([d,m])=>m!==p&&d!==k&&h54Home(d
 function h54Betroth(k,p,s,kind,paid){const me=p===S;const love=s.id===k.hMet;let b=0,txt="";
  if(kind==="nha"){b=h54Back(k,s);if(!paid)ap(p,{danh:2+(k.hT||0),bac:-Math.min(h54Dow(k,s),p.bac||0)});if(!love)k.hM=cl(k.hM-6,0,100);else k.hM=cl(k.hM+10,0,100);
   consorts().filter(c=>c!==p&&clanOf(c)===s.house).forEach(c=>relAdd(p,c,H54.clanRel));if(s.tier<=1)h54Rivals(p,k).forEach(m=>relAdd(p,m,H54.envy))}
- else if(kind==="tinh"){b=H54.love;ap(p,{duc:3,danh:2});k.hM=cl(k.hM+15,0,100)}
+ else if(kind==="tinh"){b=H54.love;ap(p,{duc:BAL.eff.j54.tinh.duc,danh:BAL.eff.j54.tinh.danh});k.hM=cl(k.hM+BAL.eff.j54.tinh.hM,0,100)}
  p.hon=(p.hon||0)+b;h54Court(p,s.house,kind==="nha"?15:8);s.taken=k.name;k.hB={kind:love?"tinh":kind,s:s.id,b,joy:love||kind==="tinh"?90:H54.joy[0]+R(H54.joy[1])};
  txt=`${h54Name(k)}${me?", con ngươi,":` (con ${p.name})`} được hứa gả cho ${s.name}, con trai ${s.off}${b?`; nhà ấy chống lưng ${me?"ngươi":p.name} (+${b})`:""}.`;
  if(k.age>=BAL.age.wed)txt+=" "+h54Wed(k,p);else txt+=` Cưới khi con tròn ${BAL.age.wed} tuổi.`;return txt}
@@ -152,7 +152,7 @@ PEND.h54ban=pp=>{const k=S.kids.find(x=>x.name===pp.k&&h54Home(x));if(!k||k.hB)r
  const rows=C.map(s=>`<div class="h54c">${mdH(h54Face(s),"sm")}<span>${h54SonLine(s)}${s===love?' · <b class="g">người con thương</b>':""}</span></div>`).join("");
  for(const s of C){const d=h54Dow(k,s),b=h54Back(k,s),isL=s===love;
   O.push({n:`Hứa gả cho ${s.name}${S.bac<d?` (thiếu bạc: cần ${d})`:""}`,fx:{danh:2+(k.hT||0),bac:-d},x:[`nhà ${s.off} chống lưng ngươi +${b} (cộng vào thế lực phe và tranh ghế)`,`các phi tần phe ${s.house} thiện cảm +${H54.clanRel}`,isL?"con lấy người con thương: Mẫu tử +10, con sống vui":"",isL?"":`kèm: con không chọn người này: Mẫu tử -6 · con không vui với nhà chồng: ${chanceW(Math.round(100*cl(H54.sad-H54.joy[0],0,H54.joy[1])/H54.joy[1]))} (khi ấy con về khóc, ít về thăm)`,s.tier<=1&&R2.length?`kèm: ${R2.length} phi tần có con gái cùng tuổi ghen (thiện cảm ${H54.envy})`:""].filter(Boolean).join(" · "),go:()=>{log(h54Betroth(k,S,s,"nha",1))}})}
- if(love&&!C.includes(love)){const o=od(h54LoveO(S,k));O.push({n:`Xin Hoàng thượng cho con lấy người con thương (${love.name})`,fx:{sung:-5},x:`${word(o)} · thành: con được hứa gả cho ${love.name}: Mẫu tử +15, Đức +3, Danh +2, nhà chàng biết ơn chống lưng ngươi +${H54.love}, con sống vui, không sinh chuyện về sau · hỏng: ngài không chuẩn (con biết ngươi đã xin: Mẫu tử +5)`,go:()=>{if(roll(o))log(h54Betroth(k,S,love,"tinh")+" Mẫu tử +15.");else{k.hM=cl(k.hM+5,0,100);log(`Hoàng thượng không chuẩn cho ${h54Name(k)} lấy ${love.name}. Con biết ngươi đã xin: Mẫu tử +5.`)}}})}
+ if(love&&!C.includes(love)){const o=od(h54LoveO(S,k));O.push({n:`Xin Hoàng thượng cho con lấy người con thương (${love.name})`,fx:{sung:-5},x:`${word(o)} · thành: con được hứa gả cho ${love.name}: Mẫu tử ${balSg(BAL.eff.j54.tinh.hM)}, Đức ${balSg(BAL.eff.j54.tinh.duc)}, Danh ${balSg(BAL.eff.j54.tinh.danh)}, nhà chàng biết ơn chống lưng ngươi +${H54.love}, con sống vui, không sinh chuyện về sau · hỏng: ngài không chuẩn (con biết ngươi đã xin: Mẫu tử ${balSg(BAL.eff.j54.tinh.askM)})`,go:()=>{if(roll(o))log(h54Betroth(k,S,love,"tinh")+` Mẫu tử ${balSg(BAL.eff.j54.tinh.hM)}.`);else{k.hM=cl(k.hM+BAL.eff.j54.tinh.askM,0,100);log(`Hoàng thượng không chuẩn cho ${h54Name(k)} lấy ${love.name}. Con biết ngươi đã xin: Mẫu tử ${balSg(BAL.eff.j54.tinh.askM)}.`)}}})}
  if(S.hEnv&&k.age>=BAL.age.wed)O.push({n:"Dâng con đi hòa thân Bắc Địch",fx:Object.assign({},H54.hoa),x:`Hoàng thượng cảm kích, ban thưởng · kèm: con sang Bắc Địch, không về thăm và không nói giúp được nữa`,go:()=>log(h54Hoa(k,S,1))});
  O.push({n:"Chưa bàn vội",fx:{},x:`con được ở cạnh ngươi thêm: Mẫu tử +3 · kèm: mỗi tháng phi tần khác hỏi trước một mối: ${chanceW(H54.ask)}`,go:()=>{k.hM=cl(k.hM+3,0,100);log(`Ngươi chưa vội bàn hôn sự cho ${h54Name(k)}. Mẫu tử +3.`)}});
  return{who:kidFace(k),t:`Bàn hôn sự cho ${h54Name(k)}, ${k.age} tuổi${k.age<BAL.age.wed?" (hứa hôn trước, cưới khi tròn "+(BAL.age.wed)+")":""}. Các mối hỏi được (tùy tước hiệu con, phẩm vị ngươi, lòng thương của Hoàng thượng, tài nghệ và Đức của con):<div class="h54cl">${rows||'<p class="past">Chưa có mối nào.</p>'}</div>${love&&!C.includes(love)?`<div class="h54c">${mdH(h54Face(love),"sm")}<span>${h54SonLine(love)} · <b class="g">người con thương</b> (nhà chàng thấp hơn các mối trên: phải xin Hoàng thượng)</span></div>`:""}`,o:O}};
@@ -237,7 +237,7 @@ function h54Lines(k){const L=[`Tước hiệu: <b>${H54T[k.hT||0]}</b>`];if(k.ag
 function h54BoxHTML(){const D=h54Daus().filter(([k])=>k.age>=12||k.hW||k.hB);const P=h54Pool().filter(s=>!s.taken).sort((a,b)=>h54Q(b)-h54Q(a));
  const rows=D.map(([k,p])=>`<div class="h54r"><span>${mdH(kidFace(k),"xs")} ${h54Name(k)} · ${k.age} tuổi · con ${p===S?'<b class="g">ngươi</b>':p.name}</span><b>${h54State(k)}</b></div>`).join("");
  const sons=P.map(s=>`<div class="h54r"><span>${mdH(h54Face(s),"xs")} ${s.name} · ${s.age} tuổi · con trai ${s.off}</span><b>phe ${s.house} · Sắc ${s.sac} · Tài ${s.tai}</b></div>`).join("");
- return `<div class="h54box"><h5>Hôn sự</h5>${S.hEnv?`<p class="r">Sứ thần Bắc Địch đang chờ cầu hôn một công chúa từ 18 tuổi${S.hEnv.until<S.turn+90?` (còn ${Math.max(0,S.hEnv.until-S.turn)} tháng)`:""}.</p>`:""}<div class="h54list">${rows||'<p class="past">Chưa có công chúa nào đến tuổi bàn hôn sự.</p>'}</div>
+ return `<div class="h54box"><h5>Hôn sự</h5>${S.hEnv?`<p class="r">Sứ thần Bắc Địch đang chờ cầu hôn một công chúa từ ${BAL.age.wed} tuổi${S.hEnv.until<S.turn+90?` (còn ${Math.max(0,S.hEnv.until-S.turn)} tháng)`:""}.</p>`:""}<div class="h54list">${rows||'<p class="past">Chưa có công chúa nào đến tuổi bàn hôn sự.</p>'}</div>
  <p class="past">Nhà chồng các con chống lưng ngươi: <b>${S.hon||0}</b> (cộng vào thế lực phe và tranh ghế; phi tần nào cũng vậy).</p><h5>Công tử các nhà quyền thần (chưa hứa hôn)</h5><div class="h54list">${sons}</div>
  <p class="past">Con gái từ ${BAL.age.betroth} tuổi được bàn hôn sự, cưới khi tròn ${BAL.age.wed}. Tước hiệu, phẩm vị mẹ, lòng thương của Hoàng thượng, tài nghệ và Đức của con quyết định hỏi được nhà nào; phi tần khác cũng tranh các mối này.</p></div>`}
 (function(){const k0=kidTabHTML;kidTabHTML=function(){let h=k0.apply(this,arguments);try{h54PoolUp();const i=h.lastIndexOf("</div>");if(i>=0)h=h.slice(0,i)+h54BoxHTML()+h.slice(i)}catch(e){}return h}})();

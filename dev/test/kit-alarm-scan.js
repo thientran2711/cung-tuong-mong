@@ -1,0 +1,21 @@
+/* kit-alarm-scan.js — KK29 item 4 (SELSCENE-18): the red whole-screen wash (kitAlarm) / heartbeat mean DANGER. kitNoDanger(card) (j11) is the ONE rule. This scan (a) lists EVERY pid the game pushes
+   (static: pushDil(...,"pid") + mkP("pid")) with its class: ROUTINE / ACT-PICKER / SELECTION / DANGER, and (b) really shows a card of each kind and counts the wash (.kmalarm) and the heartbeat.
+   FAIL: a danger card with no wash, or a not-danger card (act picker, selx*, kc2Sel, nodanger:1) with a wash.
+   usage: node dev/test/kit-alarm-scan.js <index.html> <all.js>   Exit 1 on a FAIL. */
+const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,ALL]=process.argv;
+(async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);
+ const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1});
+ await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+ const p=await ctx.newPage();await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
+ await p.waitForFunction(()=>typeof start==='function'&&typeof kitNoDanger==='function'||typeof start==='function'&&typeof showModal==='function',null,{timeout:120000});
+ await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;document.getElementById('modal').hidden=true});await p.waitForTimeout(2500);
+ await p.addStyleTag({content:'#dawn,.kroul,.kmbox,.kne,[class*=kmrew],#kxcatch{display:none!important}'});
+ const src=fs.readFileSync(ALL,'utf8');const ids=new Set();for(const m of src.matchAll(/pushDil\(([^;]{1,400}?),\s*"([A-Za-z0-9_]+)"\)/g))ids.add(m[2]);for(const m of src.matchAll(/mkP\("([A-Za-z0-9_]+)"/g))ids.add(m[1]);for(const x of ['entpick','kc2Sel','selxD1','nfch','nfsum'])ids.add(x);
+ const rows=await p.evaluate(L=>L.map(k=>{const m={pid:k};const nd=typeof kitNoDanger==='function'?kitNoDanger(m):null;const act=typeof KIT_ACT_PIDS!=='undefined'&&KIT_ACT_PIDS.has(k);const routine=typeof KIT_NODANGER_PIDS!=='undefined'&&KIT_NODANGER_PIDS.includes(k);const sel=/^(selx|kc2Sel)/.test(k);
+  return {pid:k,cls:routine?'ROUTINE':sel?'SELECTION':act?'ACT-PICKER':'DANGER',wash:nd===null?'?':nd?'no':'yes'}}),[...ids].sort());
+ console.table(rows);
+ const cases=[['story j67 (not danger)','j67',{}],['kyngo','kyngo',{}],['nfch','nfch',{}],['nfsum','nfsum',{}],['j71i','j71i',{}],['danger tt1','tt1',{}],['danger ch2','ch2',{}],['routine ksp','ksp',{}],['act picker wkgive','wkgive',{}],['act picker entpick','entpick',{}],['selection selxD1','selxD1',{}],['selection kc2Sel','kc2Sel',{}],['flag nodanger on a danger pid','tt2',{nodanger:1}]];
+ const R=[];for(const [nm,pid,ex] of cases){const r=await p.evaluate(async([pid,ex])=>{try{while(Q.length){const n=Q.length;closeModal();if(Q.length>=n)break}}catch(e){}Q.length=0;document.querySelectorAll('.kmalarm').forEach(e=>e.remove());let hb=0;kmOn=()=>true;const f0=window.feedback;window.feedback=function(k){if(k==='heart')hb++;return f0&&f0.apply(this,arguments)};
+   Q.push(Object.assign({t:'Thử',pid,h:'<p>x</p>',opts:[{n:'A',fx:{},x:'',go:()=>{}}]},ex));showModal();await new Promise(r=>setTimeout(r,500));const w=document.querySelectorAll('.kmalarm').length;window.feedback=f0;return {wash:w,heart:hb,on:(typeof kmOn==='function'?kmOn():null),red:(typeof kmReduced==='function'?kmReduced():null)}},[pid,ex]);
+  const isDanger=/^danger/.test(nm);R.push({case:nm,wash:r.wash,heart:r.heart,kmOn:r.on,reduced:r.red,FAIL:isDanger?(r.wash===0&&r.on&&!r.red):(r.wash>0||r.heart>0)})}
+ console.table(R);const bad=R.filter(r=>r.FAIL);console.log('pids',rows.length,'danger-class',rows.filter(r=>r.cls==='DANGER').length,'not-danger',rows.filter(r=>r.cls!=='DANGER').length,'| cases',R.length,'FAIL',bad.length);await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});

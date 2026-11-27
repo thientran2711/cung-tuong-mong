@@ -35,7 +35,7 @@ function masterName(m){if(!m)return"";if(m===S.thO)return"Thái hậu";if(m===S)
 function elderName(post,i){const nm=post.names[i%post.names.length];let T=null;try{T=nmTaken()}catch(e){}
  if(i<post.names.length&&(!T||!T.full.has(nm[0])&&!nmVars(nm[0]).some(v=>T.vars.has(v)))&&!nmBad(nm[0])){try{const R=nmReg();if(R&&nmOwner())R[nm[0]]="f"}catch(e){}return nm}
  const nb=nmNew("f");return[nb,nmSurOf(nb)+" "+nm[1].split(" ").slice(-2).join(" ")]}
-function mk(post,i,age){const nm=elderName(post,i);if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>s.sid||0),0);
+function mk(post,i,age){const nm=elderName(post,i);if(typeof sidN!=="undefined")sidN=Math.max(sidN,sidTop());
  return{sid:typeof sidN!=="undefined"?++sidN:Date.now(),eid:post.id,n:i,name:nm[0],call:nm[1],role:"maid",rk:post.rk,age,retire:rint(...(B().retire||[63,68])),
   tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},hue:0,face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
 const elderCallOf=m=>{const st=(m.staff||[]).find(s=>s.eid);return st?st.call:"ma ma"};
@@ -53,12 +53,12 @@ function giveFace(st){if(!S||!st||isGuest())return;
  if(st.fid||typeof FIGS==="undefined"||!FIGS.length)return;
  const U=new Set(figUsed());const keys=r=>Object.keys((typeof FIGIX!=="undefined"&&FIGIX[r])||{}).sort();
  let k=keys("mama").find(x=>!U.has(x));
- if(!k){const fm=keys("maid").filter(x=>!U.has(x)&&((FIGIX.maid||{})[x]||[]).some(f=>(f.tier==null||f.tier==="")&&f.ageBand==="a51"&&f.por));if(fm.length)k=fm[Math.floor(Math.random()*fm.length)]}
+ if(!k){const fm=keys("maid").filter(x=>!U.has(x)&&((FIGIX.maid||{})[x]||[]).some(f=>(f.tier==null||f.tier==="")&&f.ageBand===BAL.ageArt[3]&&f.por));if(fm.length)k=fm[Math.floor(Math.random()*fm.length)]}
  if(k){st.fid=k;figUsed().push(k)}}
 function elderInit(){if(!S||isGuest())return;thH();
  for(const post of B().posts){let st=elderBy(post.id);if(!st)st=mk(post,0,rint(post.age[0],post.age[1]));place(st);giveFace(st)}
  for(const st of elders()){st.elder=1;try{const K=typeof k61S==="function"?k61S():S.known;if(K&&typeof kOf61==="function"){const k=kOf61(st);if((+K[k]||0)<2)K[k]=2}}catch(e){}}}
-/* the identity's picture: her elder art = the a51 band or older (a65 at 65+ when painted, art-wiring-1119: BAL.ageBand), nearest age of her identity */
+/* the identity's picture: her elder art = band 3 (BAL.ageArt[3]) or older (band 4 from BAL.ageBand[3] when painted), nearest age of her identity */
 function figRec(st){try{if(!st||!st.fid||typeof FIGIX==="undefined")return null;const r=st.fid.split(":")[0];const L=(FIGIX[r]||{})[st.fid]||[];if(!L.length)return null;
  const ag=Math.max(BAL.ageBand[2],st.age||55);
  if(r==="maid"){const N=L.filter(f=>f.tier==null||f.tier==="");return N.length?figBest(N,null,ag):null}

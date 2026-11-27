@@ -108,7 +108,7 @@ function kpmEnter(slot,part){const k=kpmMine(slot)===part?"home":kpmKeyOf(slot);
 (function(){const m0=mapHTML;mapHTML=function(){const o=window.__kpm;if(!o||!S)return m0.apply(this,arguments);
  const k=kpmKeyOf(o.slot);if(!k&&!o.empty){window.__kpm=null;return m0.apply(this,arguments)}o.k=k;
  try{return kitPalaceMap({slot:o.slot,k})}catch(e){console.error(e);window.__kpm=null;return m0.apply(this,arguments)}}})();
-window.addEventListener("click",e=>{try{const b=e.target.closest("#panel [data-kpmback]");if(b){e.preventDefault();e.stopImmediatePropagation();window.__kpm=null;render();return}
+window.addEventListener("click",e=>{try{const b=e.target.closest("#panel [data-kpmback]");if(b){e.preventDefault();e.stopImmediatePropagation();/* a place that owns its own map (selx 3 days: back = her card) answers first */if(typeof window.kpmBackHook==="function"&&window.kpmBackHook())return;window.__kpm=null;render();return}
  const r=e.target.closest("#panel [data-kpmpart]");if(r){e.preventDefault();e.stopImmediatePropagation();kpmTapPart(r.dataset.kpmpart)}}catch(err){console.error(err)}},true);
 /* leaving the Dư đồ tab by the tab bar closes the detail map (the room's "‹ <cung>" button keeps it) */
 document.addEventListener("click",e=>{const t=e.target.closest("#tabs [data-tab]");if(t)window.__kpm=null},true);

@@ -87,9 +87,14 @@ function preload(src,ms){if(!src)return Promise.resolve();const w=ms||NE.wait;if
 function moodRow(m0,m1,tier){const W=MOODS;const a=W[m0]?W[m0][0]:"",b=W[m1]?W[m1][0]:"";
  return [`${a}${m1!==m0?` → ${b}`:""} · ${TIER[tier].liked}`,m1<m0?"g":m1>m0?"r":"n"]}
 /* kitNightEnd({tier, m0, m1, before, items:[inv entries], line}) — before = the night's rsnap (j75 __nsnap) */
-function kitNightEnd(o){o=o||{};const T0=TIER[o.tier]||TIER.normal;const T=Object.assign({},T0,o.pic?{pic:o.pic}:{});let G=[],B=[],K=[];try{[G,B,K]=kaResultRows(o.before)}catch(e){}
+function kitNightEnd(o){o=o||{};const T0=TIER[o.tier]||TIER.normal;const T=Object.assign({},T0,o.pic?{pic:o.pic}:{});let G=[],B=[],K=[];try{[G,B,K]=kaResultRows(o.before,"",kaAimVerdict(o.before).ok)/* KAWHY-VERDICT: reasons follow the night verdict (read only; closed by kaAimUse below) */}catch(e){}
  const [mv,mc]=moodRow(o.m0,o.m1,o.tier);
- const rows=[["Hoàng thượng",mv,mc]];if(G.length)rows.push(["Được",G,"g"]);if(B.length)rows.push(["Mất",B,"r"]);
+ const rows=[["Hoàng thượng",mv,mc]];
+ /* KIT 7.3 (OB-VERDICT, owner OD 26/11 ~08:30Z): her pillow talk's verdict + sentence, the target's real change, an NPC's deed on her */
+ try{const AV=kaAimVerdict(o.before);if(AV.n&&AV.ok!==null){const SL=kitResultSeal(AV.ok);rows.push(["Kết cục",[`${AV.sen||esc(AV.n)} ${kitChip(SL.t,AV.ok===true?"ok":AV.ok===false?"no":"n")}`],""])}
+  if(K&&K.tgt&&K.tgt.length)rows.push(["Người ấy",K.tgt,""]);if(K&&K.by&&K.by.length)rows.push(["Ai làm",K.by,""]);kaAimUse(AV.AIM);
+  window.kneLast=Object.assign(window.kneLast||{},{verdict:AV.ok,sen:AV.sen,tgt:(K&&K.tgt||[]).map(kaPlain),by:(K&&K.by||[]).map(kaPlain)})}catch(e){console.error(e)}
+ if(G.length)rows.push(["Được",G,"g"]);if(B.length)rows.push(["Mất",B,"r"]);
  let tb=kitRows(rows);try{const kem=kitKemRow(K);if(kem)tb=tb.replace(/<\/span>$/,kem+"</span>")}catch(e){}
  const items=(o.items||[]).map(e=>{let I={};try{I=kitItemInfo(e)}catch(x){}return `<div class="kmrow kne-it">${typeof kitItem==="function"?kitItem({src:I.src,name:"",grade:I.grade||0,size:"sm",gname:I.gname,tip:I.name}).replace('<span class="kitn"></span>',""):""}<b>${esc(I.name||"")}</b><small>Hoàng thượng ban</small></div>`}).join("");
  const html=`<div class="kne kne-${o.tier}">${picHTML(DIR+T.pic+".webp",o.tier)}<div class="kne-side"><div class="kne-cap"><b>${T.t}</b>${o.line?`<small>${esc(o.line)}</small>`:""}</div>
@@ -194,7 +199,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§62",title:"kitNi
    S.neMorn = {d: the night's day (wk), tier} is set by the night card for a mặn nồng (warm) or lạnh nhạt (cold) night. When the day has
    moved on (endTurn: the next tuần = the next day of play), ONE morning beat:
    warm → Kính sự phòng's chief eunuch records the night in the book, the maids gossip: Danh +BAL.nightEnd.after.warmDanh.
-   cold → the other consorts already know: one of them mocks her (a consort she knows is named, else "một vị phi tần ngươi chưa quen",
+   cold → the other consorts already know: one of them mocks her (a consort she knows is named, else "một vị phi tần",
    stranger rule), Danh BAL.nightEnd.after.coldDanh; she answers with the reaction buttons of the toilette reactions (jtoil):
    Nhẫn nhịn (Đức +1, Danh −1: seen as weak) · Cười trừ (nothing) · Đáp lại (Sức −2; BAL.toil.replyWin % Danh +BAL.toil.replyDanh, else she is resented more).
    Bots / no UI: the Danh change only (sims = game). Old saves: no field → nothing. */
@@ -212,7 +217,7 @@ function morningAfter(){const M=S&&S.neMorn;if(!M||S.dead)return;if(M.d===wk())r
   Q.push({t:"Lời ra tiếng vào",who,art:"img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua ${v?kSay(v,S,"{goi}",{m:"cool"}):"muội muội"} hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
    opts:[{n:"Nhẫn nhịn",fx:{duc:A.bearDuc,danh:A.bearDanh},hideOut:true,hint:"giữ tiếng hiền đức, nhưng người ta cho là ngươi yếu thế",risk:"an toàn",go:()=>{log("Ta nhẫn nhịn, không đáp một lời.")}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
-    {n:"Đáp lại",fx:{suc:A.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:"đáp khéo thì thêm danh tiếng, hên xui, hỏng thì nàng ta càng ghét",risk:"có rủi ro",
+    {n:"Đáp lại",fx:{suc:A.replySuc},p:BAL.toil.replyWin,hideOut:true,hint:lv=>`đáp khéo thì Danh +, ${KIT_ODDS[oddsLv(BAL.toil.replyWin)]}, hỏng thì nàng ta: oán +`,risk:"có rủi ro",
      go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{if(v){try{relAdd(S,v,BAL.eff.jne.go)}catch(e){}ghenUp(v,2,"bị ngươi đáp lời không nể",S)}log("Ta đáp lại, không khí càng gượng.")}}}]})}}
 {const et1=endTurn;endTurn=function(){const r=et1.apply(this,arguments);try{morningAfter()}catch(e){console.error(e)}return r}}
 window.kneMorningAfter=morningAfter;

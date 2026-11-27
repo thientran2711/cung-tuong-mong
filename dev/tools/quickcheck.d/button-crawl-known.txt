@@ -1,0 +1,2 @@
+# known, already-filed button faults: «regex<TAB>owner / request». A row here is printed as KNOWN by the gate, not failed. Remove the line when the fix lands.
+Mục tiêu chương.*(Mục tiêu|Danh hiệu|Thiên mệnh).*dead button	K-KDTX-BAND (dev/kit/KIT_REQUESTS.md 25/11) — kit keeper

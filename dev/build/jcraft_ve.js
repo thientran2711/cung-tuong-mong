@@ -25,7 +25,8 @@ function k91VePath(g,t,x,y,s){/* stand-in silhouettes in a ±1 box round (x, y),
  else if(t==="thuyen"){m(-.55,.3);l(.55,.3);l(.38,.52);l(-.38,.52);g.closePath();m(0,-.7);l(0,.24);l(.46,.14);g.closePath();m(-.9,.74);g.quadraticCurveTo(x-.45*s,y+.64*s,x,y+.74*s);g.quadraticCurveTo(x+.45*s,y+.84*s,x+.9*s,y+.74*s);m(-.7,.92);g.quadraticCurveTo(x-.3*s,y+.84*s,x+.1*s,y+.92*s);g.quadraticCurveTo(x+.4*s,y+1*s,x+.7*s,y+.92*s)}
  else if(t==="tung"){m(-.07,.1);l(.07,.1);l(.09,.9);l(-.09,.9);g.closePath();e(0,-.55,.5,.17);e(0,-.28,.66,.2);e(0,.0,.82,.22)}
  else{e(-.34,.1,.3,.13);e(.42,.34,.24,.1);m(-.1,.02);g.quadraticCurveTo(x+.06*s,y-.3*s,x+.1*s,y-.62*s);m(.5,.26);g.quadraticCurveTo(x+.52*s,y,x+.58*s,y-.14*s);m(-.62,.1);l(-.95,.2)}}
-function k91VeDraw(g,t,x,y,s,col,a,line){if(crArt(g,"ve-motif-"+t,x,y,s*2,s*2,{alpha:a},null))return;g.save();g.globalAlpha*=a;k91VePath(g,t,x,y,s);if(line){g.strokeStyle=col;g.lineWidth=1.8;g.setLineDash([3,4]);g.lineJoin="round";g.stroke()}else{g.fillStyle=col;g.fill();g.strokeStyle=col;g.lineWidth=Math.max(1.4,s*.045);g.lineJoin="round";g.lineCap="round";g.stroke()}g.restore()}
+/* review/mg-color: the painted motif in the INK TONE of that layer (the tone is what she matches against the sample); a layer still to paint (line) = a faint ghost */
+function k91VeDraw(g,t,x,y,s,col,a,line){if(crArtTint(g,"ve-motif-"+t,x,y,s*2,s*2,{alpha:line?a*.45:a},col,null))return;g.save();g.globalAlpha*=a;k91VePath(g,t,x,y,s);if(line){g.strokeStyle=col;g.lineWidth=1.8;g.setLineDash([3,4]);g.lineJoin="round";g.stroke()}else{g.fillStyle=col;g.fill();g.strokeStyle=col;g.lineWidth=Math.max(1.4,s*.045);g.lineJoin="round";g.lineCap="round";g.stroke()}g.restore()}
 const k91VeInk=f=>{const [a,b]=K91VE_SZ.tone;return`rgb(${a.map((v,i)=>Math.round(v+(b[i]-v)*f)).join(",")})`};
 function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
  const Lv=n=>crLev(env,"ve",n),Z=K91VE_SZ;
@@ -35,13 +36,13 @@ function k91Ve(box,env){const C=kg82Canvas(box,1.12,520),{g,W,H}=C;const NR=3;
  const TW=W*.38,TH=TW*SH/SW,TX=W*.04,TY=H*.03;/* the master's sample pinned top-left, same shape as the scroll */
  const ST={x:W*.57,y:H*.04,w:W*.38,h:H*.15};/* the inkstone */
  const OFF=UN*.9;/* a dragged stamp rides above the finger */
- let r=-1,pts=0,P=null,phase="",t0=0,LIM=0,drag=null,done=false,peekAt=0,fl=null,act=null;/* act = the one finger (pointer id) being followed */const pops=[];
+ let r=-1,pts=0,P=null,phase="",t0=0,LIM=0,drag=null,done=false,peekAt=0,fl=null,act=null;const VU=[];/* act = the one finger (pointer id) being followed */const pops=[];
  const btn=k91Btns(box,[["k91vdone","✓","","Bố cục xong: bắt đầu tô mực"]]);const bd=btn.querySelector("#k91vdone");
  const sc=cy=>Z.far+(1-Z.far)*cl((cy-SY)/SH,0,1),pa=cy=>Z.pale+(1-Z.pale)*cl((cy-SY)/SH,0,1);
  const toneF=v=>cl((v-Z.near[0])/(Z.near[1]-Z.near[0]),0,1),toneOf=v=>Math.round(toneF(v)*(T-1));
  const tgPt=t=>[SX+t.u*SW,SY+t.v*SH];
  function next(){r++;if(r>=NR){done=true;bd.disabled=true;return crLater(()=>env.end(Math.min(10,pts)),300)}
-  const n=Math.min(K91VE_PAINT[r].length,K91VE_BASE[r]+mgMore(env));const M=K91VE_PAINT[r].slice(0,n).map(([type,u,v])=>({type,u,v,tone:toneOf(v)}));
+  const VI=typeof mgpOne==="function"?mgpOne("ve",VU):null,PT=VI?VI.m:K91VE_PAINT[r];/* ORDER THIN P1: one composed painting (layout × motif set), drawn through the no-repeat memory */const n=Math.min(PT.length,K91VE_BASE[r]+mgMore(env));const M=PT.slice(0,n).map(([type,u,v])=>({type,u,v,tone:toneOf(v)}));
   const S=kg82Shuf(M.map((m,i)=>({ti:i,type:m.type,placed:false,x:0,y:0})));const tw=(W-12)/n;S.forEach((s,i)=>{s.hx=6+tw*(i+.5);s.hy=H*.915});
   P={M,S,tw,order:null,tp:[],ts:[],blots:[],bl:0};LIM=n*Lv("lim")+Lv("limBase");phase="place";t0=crNow();peekAt=t0;drag=null;fl=null;bd.disabled=true}
  /* the best way to name which stamp stands for which motif (same type only; ≤ 6! tries) */

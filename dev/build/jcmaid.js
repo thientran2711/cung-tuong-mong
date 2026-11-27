@@ -105,7 +105,7 @@ function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.or
    is not her choice: it stays the old witness roll. Loop off → the old rolls. */
 function cmCh(m,w){if(!(window.agSelf&&agSelf(m&&S&&m===S.maid?S:null)&&typeof ag2Ch==="function"))return null;/* coop-guest-agent: her own chief maid on a co-op guest's seat = the same agent odds as solo */return !!ag2Ch(m,cl(w,0,100))}/* a weighted draw of her inclination (j8 ag2Ch), no jmind slip: a slip would bend a rare monthly rate (3 %) several times over */
 function cmSpyCh(m){const B=cmB(),K=BAL.ag.stf2.cm;const c=cmCh(m,B.talSpy*K.spy*(m.loyal||0)/B.talLoy);return c==null?(!!npcWhy("cmSpy",{p:m},()=>roll(B.talSpy))):c}/* npc-purpose G2a: she listens for her mistress out of loyalty */
-function cmLeakCh(m,s){const B=cmB(),K=BAL.ag.stf2.cm;if(!s||s.k==="lover")return !!npwPick(liveRivals(true).filter(v=>v!==S&&eyes(v)>0),v=>hostility(v,S)-BAL.ag.why.tell.host)&&roll(B.secOut);/* npc-purpose G2a: Cung Chính ti hears of it only from a rival with tai mắt and a grudge against her mistress */const c=cmCh(m,B.secOut*K.leak*(100-(m.loyal||0))/Math.max(1,100-B.secTrust));return c==null?(!!npcWhy("cmLeak",{p:m,s},()=>roll(B.secOut))):c}
+function cmLeakCh(m,s){const B=cmB(),K=BAL.ag.stf2.cm;if(!s||s.k==="lover")return !!npwPick(liveRivals(true).filter(v=>v!==S&&eyes(v)>0),v=>hostility(v,S)-netTh(v,"tell"))&&roll(B.secOut);/* npc-purpose G2a: Cung Chính ti hears of it only from a rival with tai mắt and a grudge against her mistress */const c=cmCh(m,B.secOut*K.leak*(100-(m.loyal||0))/Math.max(1,100-B.secTrust));return c==null?(!!npcWhy("cmLeak",{p:m,s},()=>roll(B.secOut))):c}
 /* ---------- the month ---------- */
 function cmFact(m,who){const x=evGuilty(S,liveRivals(true).filter(v=>v!==S));if(!x)return"";const d=evA(S,x,BAL.eff.jcmaid.evD);if(!d)return"";cmC("fact");return `${m.name} ${who}: chứng cứ về ${x.name} +${d}. `}
 function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
@@ -129,7 +129,7 @@ function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
  if(m.src==="home"&&k==="dtq"&&cdOk){const ob=npcWhy("cmBrawl",{p:m},()=>roll(B.dtqBrawl));const v=ob?ob.tgt:null;if(v){dil("cmBrawl",{v:v.id});return ev}}
  if(((m.src==="home"&&k==="muoi")||(m.src==="pick"&&k==="cnv"))&&cdOk){const os=npcWhy("cmScorn",{},()=>roll(B.scorn));const v=os?os.who:null;if(v){dil("cmScorn",{v:v.id,w:k});return ev}}
  if(m.src==="land"){const ol=cdOk&&npcWhy("cmLand",{},()=>roll(B.landAsk));if(ol){dil("cmLand",{by:ol.who.id});return ev}if(roll(B.landGift)){apply({bac:B.landBac});cmC("landBac",B.landBac);ev+=`Thư và quà cố quốc đến qua tay ${m.name}: Bạc +${B.landBac}. `}}
- if(m.src==="th"&&!S.thDead&&m.loyal>=B.talLoy&&npcWhy("cmTh",{p:m},()=>roll(B.chTh))){S.th=cl((S.th||0)+B.chThUp,-100,100);cmC("chTh",B.chThUp)}
+ if(m.src==="th"&&!S.thDead&&m.loyal>=B.talLoy&&npcWhy("cmTh",{p:m},()=>roll(B.chTh))){spAdd(S,"th",B.chThUp);cmC("chTh",B.chThUp)}
  if(m.src==="pick"&&k==="thd"&&cmTalOn(m))for(const x of (S.staff||[]))if(x.role==="maid"&&typeof servMerit==="function"){servMerit(x,B.thdMerit);cmC("thdMerit",B.thdMerit)}
  if((m.src==="room"&&roll(B.cnSpy))||(m.src==="pick"&&k==="cnv"&&cmTalOn(m)&&roll(B.cnvNet)))ev+=cmFact(m,m.src==="room"?"thuộc từng ngóc ngách, dò ra":"nghe đám cung nữ đồn");
  if(k==="td"&&!S.cmaid.tdOld&&!S.cmaid.tdNo&&cdOk&&roll(B.tdMeet)){S.cmaid.tdNo=1;dil("cmTd");return ev}

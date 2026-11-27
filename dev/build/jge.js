@@ -83,14 +83,14 @@ function geAsk(){if(!geReady()||geQd())return;const s=geS();geLive(s);pushDil(mk
 window.geAsk=geAsk;
 /* «người ấy»: the strongest real bond of her life */
 function geBond(){let best=null,bv=-1;try{for(const m of (S.men||[]))if(m&&m.alive!==false&&(m.tinh||0)>=GB().bond.men&&(m.tinh||0)>bv){best=m.name;bv=m.tinh}
- for(const v of (typeof liveRivals==="function"?liveRivals(true):[]))if(v&&aff(S,v)>=GB().bond.sis&&aff(S,v)>bv){best=v.name;bv=aff(S,v)}}catch(e){}return best}
+ for(const v of (typeof liveRivals==="function"?liveRivals(true):[]))if(v&&aff(S,v)>=netTh(S,"than")&&aff(S,v)>bv){best=v.name;bv=aff(S,v)}}catch(e){}return best}
 PEND.ge1=()=>{const s=geS();if(!s||s.done)return null;const who=geBond();
  const o=R1N.map((n,i)=>{const c={n,fx:{},x:i===3?(who?`người ấy: ${who}`:""):"",risk:"có rủi ro",hint:"nẻo này dẫn tới đâu, thành hay hỏng, đến câu cuối mới rõ",go:()=>{const s2=geS();if(!s2||s2.done)return;s2.r1=i;pushDil(mkP("ge2",{}),"Hồi kết nhánh")}};
   if(i===3&&!who&&typeof kitOff==="function")kitOff(c,"chưa có ai","khi có một người ngươi thật lòng gắn bó");return c});
  return {who:pMe(),mustChoose:1,t:`<b>Hồi kết nhánh · Ngã rẽ 1 · Đi hay ở</b><br>Cuối con đường «${esc(C(s).n)}». Ngoảnh lại một đời trong cung, ngươi đứng trước hai ngã rẽ cuối cùng. Ngã thứ nhất: ở lại hay ra đi?`,o}};
 PEND.ge2=()=>{const s=geS();if(!s||s.done||s.r1==null)return null;
  const o=R2N.map((n,i)=>{let x="";if(GB().showOdds){const j=C(s).e.findIndex(e=>e[3]===s.r1&&e[4]===i);if(j>=0&&s.st[j]==="o"&&typeof oddsLv==="function"&&typeof KIT_ODDS!=="undefined")x=KIT_ODDS[Math.max(0,oddsLv(geOdds(s,j)))]}
-  return {n,fx:{},x,risk:"có rủi ro",hint:"hên xui; hỏng thì có thể mất danh tiếng, phẩm vị",go:()=>geResolve(i)}});
+  return {n,fx:{},x,risk:"có rủi ro",hint:(x?x+"; ":"")+"hỏng thì có thể mất danh tiếng, phẩm vị",go:()=>geResolve(i)/* WORDING-GAIN: the chance is the ladder word when the odds are shown, else none */}});
  return {who:pMe(),mustChoose:1,t:`<b>Hồi kết nhánh · Ngã rẽ 2 · Đối đãi thế nào</b><br>Ngươi đã chọn: «${R1N[s.r1]}». Còn lại một câu: với thiên hạ, với những người quanh mình, ngươi đối đãi thế nào?`,o}};
 /* ---------- resolve ---------- */
 function geResolve(r2,force){const s=geS();if(!s||s.done)return null;if(r2!=null)s.r2=r2;geLive(s);const E=C(s).e,Bd=D(s);
@@ -109,7 +109,9 @@ function geResolve(r2,force){const s=geS();if(!s||s.done)return null;if(r2!=null
 window.geResolve=geResolve;
 /* the whole answer in one call (bots, tests): r1, r2 indexes; force = true/false skips the roll */
 window.geAnswer=(r1,r2,force)=>{const s=geS();if(!s||s.done)return null;s.r1=r1;return geResolve(r2,force)};
-function geLifeNo(){try{return (typeof lifeLog==="function"?lifeLog().length:0)+1}catch(e){return 1}}
+/* the number of the life she is living / has just lived (the one source of the «Kiếp thứ …» chip, KCT, GE results). A life is written to lifeLog the moment it ends (j32 over → record),
+   so once S.dead the log ALREADY holds this life: count it, do not add one more (robot M1 #9: the first life showed «Kiếp thứ hai» on its ending screen). */
+function geLifeNo(){try{const n=typeof lifeLog==="function"?lifeLog().length:0;return n+(typeof S!=="undefined"&&S&&S.dead&&n>0?0:1)}catch(e){return 1}}
 /* ---------- reward / loss ---------- */
 const STATK=["danh","sung","bac","mat","duc","tai","tamco","sac","th","hh","maid","suc"];
 function geRank(n){if(!n||(typeof isSrv67==="function"&&isSrv67()))return"";const top=RANKS.length-2;const r0=S.rank;

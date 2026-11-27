@@ -1,7 +1,7 @@
 /* j65: each fact once per view (owner 11/14: "the same information is repeated over and over").
    Builds on j62 (kid age once). Only wraps renderers / rewrites their output; no new styles.
    Kept place -> removed repeat:
-   - age: "Tuổi N" everywhere; the 4-band "(18–25)" is derived from the age, dropped on every card
+   - age: "Tuổi N" everywhere; the band label (BAND4N) is derived from the age, dropped on every card
    - date + buổi: top bar (me-d) -> status panel date chip hidden, buổi chip shows only "còn N khắc"; map header drops the buổi
    - her own stats: HUD + status panel -> Quan hệ "Ngươi" drops the Hoàng thượng / Thái hậu rows; Rương đồ drops "Bạc N"
    - servant loyalty: her card in Kẻ hầu -> panel chip "Lòng X" hidden while X's card is open
@@ -223,7 +223,7 @@ try{const wk0=wkSummary;wkSummary=function(){const s=S.wkSnap;const r=wk0.apply(
   window.__nrWk=r}}catch(e){console.error(e)}return r}}catch(e){}
 /* week card markup: j79 dawn() draws wkSummary() (groups above) through kitFacts; no markup here */
 /* Nhật ký: no lone choice labels */
-const rp0=renderPanel;renderPanel=function(){const r=rp0.apply(this,arguments);try{const P=document.getElementById("panel");if(P&&P.dataset.tab==="log")P.querySelectorAll(".logs > div:not([data-nrh])").forEach(d=>{if(LONE.test(T(d.textContent))){d.remove();return}if(d.dataset.nrk)return;d.dataset.nrk=1;const h=d.innerHTML,t=kitNames(h);if(t!==h)d.innerHTML=t})}catch(e){}return r};
+const rp0=renderPanel;renderPanel=function(){const r=rp0.apply(this,arguments);try{const P=document.getElementById("panel");if(P&&P.dataset.tab==="log")P.querySelectorAll(".logs > div:not([data-nrh])").forEach(d=>{if(LONE.test(T(d.textContent))){d.remove();return}if(d.dataset.nrk)return;d.dataset.nrk=1;let h=d.innerHTML;/* r9 review fix: a Sổ ghi line stored with the raw name (world-gen, before she knew anyone) is scrubbed here too — an unmet person who is the SUBJECT of the sentence reads «Một vị <phẩm> tâu xin …», never the «Quý phi ???» chip (owner 24/11 ~21:58Z) */try{if(S&&S.known&&typeof k61Scrub==="function"){const h1=k61Scrub(h,true,"",d.textContent,false);if(h1)h=h1}}catch(e){}const t=kitNames(h);if(t!==h)d.innerHTML=t;/* sentence start: the line opens on «một vị <phẩm> …» after the leading chip / date */const w=document.createTreeWalker(d,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(!n.nodeValue.trim()||n.parentNode.closest(".krv,.ld"))continue;if(/^\s*một vị /.test(n.nodeValue))n.nodeValue=n.nodeValue.replace("một vị ","Một vị ");break}})}catch(e){}return r};
 })();
 /* ===== j65c: one place per job — Việc list drops acts that live in their own tab (owner 11/14) =====
    Luyện cầm kỳ thi họa -> Tài nghệ tab · Dạy hoàng tử/công chúa học chữ, Đưa con đến thỉnh an -> Con cái tab · Thưởng cung nữ -> Kẻ hầu tab */

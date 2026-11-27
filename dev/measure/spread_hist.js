@@ -5,7 +5,7 @@
      act = cards opened by her own act (results, visits on arrival, minigame results).
    Also checks the D13 rules: no card lost (every card that entered Q, or the spread queue, is shown or still waiting when the life ends;
    anti-repeat drops of OPTIONAL j68 cards are counted apart), no card waits more than BAL.spread.maxWait buổi, no card shown before its buổi.
-   usage: node dev/measure/spread_hist.js <sens|rand> <lives> <out.json> [shard] [weeksPerLife=36]   (GAME=path to dev/index.html)
+   usage: node dev/measure/spread_hist.js <sens|rand> <lives> <out.json> [shard] [weeksPerLife=36]   (GAME=path to dev/index.html, VP=755x1000 viewport)
    OFF=1 sets window.__spreadOff=1 (the "before" histogram on the same build). */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const mode=process.argv[2]||'sens',LIVES=+process.argv[3]||5,OUT=process.argv[4]||'/dev/stdout',SH=+process.argv[5]||0,WEEKS=+process.argv[6]||36;
@@ -55,7 +55,7 @@ const HOOK=`(function(){
  const ov0=over;over=function(){try{if(H.cur)H.cur.k1=Math.max(H.cur.k1,bk())}catch(e){}flush();return ov0.apply(this,arguments)};
  window.__H13end=function(){/* life cap: close at WEEKS tuần */if(S&&!S.dead&&H.cur&&wk()-Math.floor(H.cur.k0/B4N)>=${WEEKS}){H.cur.k1=bk()-1;flush();Q=[];try{if(typeof SP13!=="undefined")SP13.reset()}catch(e){}start()}};
 })();`;
-(async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const ctx=await b.newContext({viewport:{width:390,height:844}});const page=await ctx.newPage();
+(async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const VPX=(process.env.VP||'390x844').split('x').map(Number);const ctx=await b.newContext({viewport:{width:VPX[0],height:VPX[1]}});const page=await ctx.newPage();
  await page.route(u=>!/^file:/.test(String(u)),r=>r.abort());await page.route(/\.(webp|png|jpg|mp3|ogg)$/,r=>r.abort());
  const errs=[];page.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await page.goto('file://'+GAME,{waitUntil:'domcontentloaded'});await page.waitForTimeout(500);

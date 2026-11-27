@@ -44,7 +44,7 @@ async function newLife(p){await ev(p,()=>{SLOT=1;document.getElementById('title'
 async function settle(p){for(let i=0;i<20;i++){const st=await ev(p,()=>{document.querySelectorAll('.kmov').forEach(e=>e.click());
   const bk=[...document.querySelectorAll('.kbk-bar button')].find(x=>x.offsetParent!==null&&/^Lui$/.test(x.textContent.trim()));if(bk){bk.click();return'x'}
   const m=document.getElementById('modal');if(typeof S!=='undefined'&&S&&S.mg){S.mg=null;document.getElementById('ov').hidden=true;render();return'x'}
-  if(!m||m.hidden)return'';const b=m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'});if(st!=='x')return st;await sleep(250)}}
+  if(!m||m.hidden)return'';const b=m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||m.querySelector('.opts button:not([disabled])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'});if(st!=='x')return st;await sleep(250)}}
 const flip=(p,s)=>ev(p,s=>{Object.defineProperty(document,'visibilityState',{configurable:true,get:()=>s});Object.defineProperty(document,'hidden',{configurable:true,get:()=>s==='hidden'});document.dispatchEvent(new Event('visibilitychange'))},s);
 async function bgShort(p){await flip(p,'hidden');await sleep(300);await flip(p,'visible')}
 /* every sổ written right before the page left (beforeunload) is kept in sessionStorage to compare after the reload */
@@ -144,7 +144,7 @@ const co=p=>ev(p,()=>{const c=window.COOP,s=c&&c.state||{},W=window.COOPW||{};co
  return{room:s.room,you:s.you,status:s.status,peer:!!s.peerOnline,on:!!W.on,week:s.week||0,hold:!!W.hold,name:typeof S!=='undefined'&&S&&S.name,k:typeof S!=='undefined'&&S?[S.year,S.month,S.tuan,S.buoi||0].join(':'):'',used:typeof used!=='undefined'?used:0,deck:typeof deck!=='undefined'&&deck?deck.length:0,friend:f&&f.name,mark:window.__CTM_MARK||'A',build:window.CTM_BUILD}});
 async function clearC(p){return ev(p,()=>{const W=window.COOPW||{};if(!W.on||typeof S==='undefined'||!S)return'';const fz=document.getElementById('coopfz');if(fz&&!fz.hidden)return'coop';
  document.querySelectorAll('.kmov').forEach(e=>e.click());if(S.mg){S.mg=null;document.getElementById('ov').hidden=true;render();return'x'}
- const m=document.getElementById('modal');if(!m||m.hidden)return'';const b=m.querySelector('#mr button:not([disabled])')||m.querySelector('.opts button:not([disabled])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'})}
+ const m=document.getElementById('modal');if(!m||m.hidden)return'';const b=m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||m.querySelector('.opts button:not([disabled])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'})}
 /* press Qua buổi once it is enabled (dialogs read first) */
 async function press(p){for(let t=0;t<80;t++){for(let i=0;i<4;i++)if(await clearC(p)!=='x')break;if(await ev(p,()=>{const n=document.getElementById('next');if(!n||n.disabled)return false;n.click();return true}))return true;await sleep(250)}return false}
 const clearAll=async(...L)=>{for(const p of L)for(let i=0;i<6;i++)if(await clearC(p)!=='x')break};

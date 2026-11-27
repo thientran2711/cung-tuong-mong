@@ -33,5 +33,12 @@
   "longTasks200": 40,
   "longTaskMaxMs": 5000
  },
- "tabs": 4
+ "tabs": 4,
+ "dayLife": {
+  "_doc": "MAIN 130 ruling (25/11 ~00:56Z, selection-scene report «MAIN 130 RULING»): a tú nữ life that plays her 3 selection DAYS (game flag S.selx2, set only when the days start — review/selection-scene; LIVE main has S.selx without the days) has its own long-task basis: no regression vs the day baseline (68–72 tasks > 200 ms at 4x CPU) → ceiling 72; NON-day lives keep the ceilings above (40). A run is judged by its own class: each day run vs these ceilings, the median of the NON-day runs vs the normal ceilings and vs the live median. LC20 qc-daylife (26/11): LIVE has day lives too since SELSCENE landed — the live compare is like with like (non-day vs non-day; else day vs day incl. longTasks200; else mixed with the day-only keys skipped), see quickcheck.js. Other metrics unchanged.",
+  "flag": "S.selx2",
+  "ceilings": {
+   "longTasks200": 72
+  }
+ }
 }

@@ -37,7 +37,7 @@ let TFS_CV=null;
    A call with an argument (fonts ready, resize) always measures. */
 let TFS_SIG="";
 function tabsFit(force){try{const T=$("tabs");if(!T)return;{const gm=document.querySelector(".game");
-  const sg=innerWidth+"x"+innerHeight+"|"+kitView().pages+"|"+T.className+"|"+(gm?gm.className:"")+"|"+document.documentElement.className+"|"+[...T.children].map(b=>b.style.cssText+"/"+b.hidden+"/"+b.className+"/"+(b.dataset?b.dataset.s||"":"")+"/"+b.textContent).join(";");
+  const sg=innerWidth+"x"+innerHeight+"|"+kitView().pages+"|"+T.className+"|"+(gm?gm.className:"")+"|"+document.documentElement.className+"|"+[...T.children].map(b=>b.style.cssText+"/"+b.hidden+"/"+(typeof kfCls==="function"?kfCls(b):b.className)+"/"+(b.dataset?b.dataset.s||"":"")+"/"+b.textContent).join(";");
   if(!force&&sg===TFS_SIG)return;TFS_SIG="";tabsFit.sg=sg}const short=true;const one=kitView().pages===1,base=one?.86:.8;
  T.style.setProperty("--tfs",base+"rem");const B=[...T.querySelectorAll("button")].filter(b=>b.offsetParent);if(!B.length)return;TFS_SIG=tabsFit.sg;
  const n=B.length,cols=one?Math.ceil(n/2):n;/* KIT §0: the spread = ONE row of tabs; the one page = TWO rows of ceil(n/2) big buttons (8 tabs → 4+4; phone-bars) */T.style.setProperty("grid-template-columns",`repeat(${cols},minmax(0,1fr))`,"important");

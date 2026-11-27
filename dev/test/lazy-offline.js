@@ -8,12 +8,12 @@
         from the cache), (b) continue the saved life from the title and walk the same places it visited; count broken pictures again,
         split into "seen online" vs "never seen" (never-seen lazy art cannot work offline by design).
    --save-data: navigator.connection.saveData=true (no background set: the strictest path, like cellular / Data-saver).
-   usage: node dev/test/lazy-offline.js [--devices fold,iphone14] [--lives 2] [--weeks 2] [--root <built dir>] [--save-data] [--offline]
+   usage: node dev/test/lazy-offline.js [--devices fold,iphone14] [--lives 2] [--weeks 2] [--root <built dir>] [--save-data] [--offline] [--ios-app]
    exit 1 when step 1 has a broken picture that is not also missing on the CDN (404), or step 2(a) has a file not served offline. */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const D=require('./lib/device');
 const A=process.argv.slice(2);const opt=(k,d)=>{const i=A.indexOf('--'+k);return i<0?d:(A[i+1]===undefined||A[i+1].startsWith('--')?true:A[i+1])};
 const DEVS=String(opt('devices','fold,iphone14')).split(','),LIVES=+opt('lives',2),WEEKS=+opt('weeks',2);
-const ROOT=path.resolve(opt('root',path.join(__dirname,'../..')));const SAVE=A.includes('--save-data'),OFF=A.includes('--offline');
+const ROOT=path.resolve(opt('root',path.join(__dirname,'../..')));const SAVE=A.includes('--save-data'),OFF=A.includes('--offline');const IOSAPP=A.includes('--ios-app');/* iPad/iPhone opened as the Home-Screen app (how she plays): no Safari «chọn nơi chơi» notice */
 const MAN=JSON.parse(fs.readFileSync(path.join(ROOT,'assets.json'),'utf8'));const GRP=new Map(MAN.files.map(f=>[f[0],f]));
 const keyOf=u=>{const m=/\/((?:img|audio)\/[^?#]+)/.exec(u);return m?decodeURIComponent(m[1]):null};
 const sleep=t=>new Promise(r=>setTimeout(r,t));
@@ -40,7 +40,7 @@ async function revisit(game,places){return game.evaluate(async places=>{const ou
   for(const k of [...new Set(places)]){try{goTo(k);await sl(500);scan();for(let j=0;j<6&&Q.length;j++){try{closeModal()}catch(e){Q.shift()}await sl(80)}goTo('home');await sl(150)}catch(e){}}
  }catch(e){out.err=String(e).slice(0,200)}return out},places)}
 async function runDevice(b,srv,dev){const R={device:dev,pageErrors:[]};
- const ctx=await D.newDeviceContext(b,dev,{serviceWorkers:'allow'});
+ const ctx=await D.newDeviceContext(b,dev,Object.assign({serviceWorkers:'allow'},IOSAPP?{standalone:true}:{}));
  if(SAVE)await ctx.addInitScript(()=>{try{const c=navigator.connection;if(c)Object.defineProperty(Object.getPrototypeOf(c),'saveData',{get:()=>true,configurable:true})}catch(e){}});
  const st={asked:new Map(),netSW:new Map(),fail:new Map()};let phase='online';
  ctx.on('requestfinished',async r=>{const k=keyOf(r.url());if(!k||/\.json$/.test(k))return;let s=0;try{const x=await r.response();s=x?x.status():0}catch(e){}

@@ -36,7 +36,7 @@ function cost(){return T().cost[rk()]}
 function docName(){const c=doc();if(c&&c.name){try{if(typeof k61Named==="function"&&!k61Named(c))return"Thái y"}catch(e){}return c.name}return"Thái y"}/* j61 name rule: a physician she has not learnt the name of is his title alone, never "thái y ???" (the "Mạnh thái y ???" side flag) */
 function rv(v){return v&&v!==S&&v.alive!==false&&!v.out&&!v.coop}
 /* ---------- trust and bribes (one rule: her, NPCs, treat()) ---------- */
-function bribers(p){const c=doc();if(!c||!c.af)return[];return liveRivals(true).filter(v=>rv(v)&&v!==p&&(c.af[v.id]||0)>=T().bribeAf&&(()=>{try{return hostility(v,p)>=T().bribeHost}catch(e){return false}})()).sort((a,b)=>(c.af[b.id]||0)-(c.af[a.id]||0))}
+function bribers(p){const c=doc();if(!c||!c.af)return[];return liveRivals(true).filter(v=>rv(v)&&v!==p&&(c.af[v.id]||0)>=T().bribeAf&&(()=>{try{return hostility(v,p)>=netTh(v,"host")}catch(e){return false}})()).sort((a,b)=>(c.af[b.id]||0)-(c.af[a.id]||0))}
 function trusted(p){p=p||S;if(p.doctor)return true;if(p!==S)return false;const c=doc();if(!c||!c.af)return false;const me=c.af.me||0;
  const top=Math.max(0,...liveRivals(true).filter(rv).map(v=>c.af[v.id]||0));return me>=T().trustAf&&me>top}
 function bribedBy(p){p=p||S;if(trusted(p))return null;return bribers(p)[0]||null}
@@ -160,7 +160,7 @@ function npcMonth(){let ev="";const c=doc();if(!c)return ev;c.af=c.af||{};
  for(const id of Object.keys(c.af))if(id!=="me"&&c.af[id]>0)c.af[id]=Math.max(0,c.af[id]-T().npcDecay);
  for(const v of liveRivals(true)){if(!rv(v)||v.confined)continue;
   /* a hostile rival buys the physician (aims: her, or a rival who carries a child / holds the favour) */
-  if((v.bac||0)>=T().npcBribeBac*2){const tg=[S].concat(liveRivals(true).filter(x=>rv(x)&&x!==v)).filter(t=>{try{return hostility(v,t)>=T().bribeHost&&(t.preg||(t===S?S.sung:t.sung||0)>=40)}catch(e){return false}});
+  if((v.bac||0)>=T().npcBribeBac*2){const tg=[S].concat(liveRivals(true).filter(x=>rv(x)&&x!==v)).filter(t=>{try{return hostility(v,t)>=netTh(v,"host")&&(t.preg||(t===S?S.sung:t.sung||0)>=40)}catch(e){return false}});
    const ev2=nv(v,"thyEv");if(tg.length&&npcWhy("thyBribe",{p:v,tg},()=>roll(T().npcBribe+ev2))){/* npc-purpose G2c: she buys him for the one she hates most */ap(v,{bac:-T().npcBribeBac});c.af[v.id]=(c.af[v.id]||0)+T().npcBribeAf;try{newsAdd(v,"ty",`Có người thấy ${v.name} cho mời thái y sang cung trò chuyện rất lâu`)}catch(e){}}}
   /* her monthly visit finds a hidden harm in her */
   const tl=tainted(v);const bad=bribedBy(v);if(tl.length&&!bad&&roll(T().npcFind+(v.doctor?T().npcFindDoc:0))){const e=pick(tl);v.inv.splice(v.inv.indexOf(e),1);const by=byKey(e.by);

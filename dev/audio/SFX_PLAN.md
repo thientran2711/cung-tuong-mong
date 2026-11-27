@@ -10,8 +10,9 @@ dấu son, qua buổi/tuần, bệnh, cấm túc, trò nhỏ, thú nuôi, thời
   `SFXL` (tầng ui/sự kiện + chỉnh âm lượng từng tệp). `kitSfx(khoảnh khắc, {rate, g, at})`. `sfx()` cũ được thay bằng bộ trộn chung:
   - tôn trọng công tắc **Tiếng** (OPT.snd / OPT.mute) và thanh **Tiếng động** (OPT.sfx); tab ẩn thì im; bot / `quiet` thì im;
   - âm UI (chạm, tab, mở/đóng bảng, nút khóa, thao tác trò nhỏ) = ×0,5 thanh trượt; âm sự kiện ×1;
-  - **tối đa 3 âm cùng lúc** (tính cả giọng j36): âm UI thứ 4 bị bỏ; âm sự kiện thứ 4 đẩy âm UI cũ nhất ra, không có thì bỏ;
-  - cùng một tệp trong 90 ms chỉ kêu một lần (hai móc gặp nhau không kêu đôi); nhạc nền chỉ nén xuống dưới âm sự kiện.
+  - **at most 3 sounds at once** (j36 voices count): a 4th event sound pushes out the oldest UI sound, else it is dropped; a TAP (UI) sound is NEVER dropped (owner 24/11 ~18:05Z: every tap sounds at once) — it stops the oldest UI voice, or plays over the cap when only events play (review/sfx-instant);
+  - the same file within 90 ms (UI: 35 ms) plays once (two hooks meeting never double it; two quick taps both sound); music ducks only under event sounds.
+  - INSTANT TAPS (review/sfx-instant): every UI + mini-game file is decoded into a WebAudio buffer at the first gesture; one shared AudioContext (window.__bellCtx = AU.ctx); a tap asked before the first unlock plays right after it (≤ 350 ms). Measure: dev/measure/sfx-tap-latency.js; scan: dev/test/sfx-instant-scan.js.
 - Tệp ở `audio/` trong git (dev/art/CDN.md: audio vẫn ở git, không lên Cloudflare → không cần cdn_sync). `audio/MANIFEST.json` có link Magnific.
 - Chuẩn hóa: `dev/audio/norm.py` — cắt im lặng đầu/cuối, fade 3 ms / 80 ms, lọc >14 kHz (âm chuông/bạc sáng: thêm hạ treble −6 dB),
   cùng độ to **max momentary −16 LUFS** (BS.1770, cửa sổ 400 ms; khớp ffmpeg ebur128 ±0,2 dB), đỉnh ≤ −1,5 dBFS (limiter tối đa 12 dB

@@ -1,6 +1,6 @@
 /* fig-wiring.js — review/art-wiring-1119 PICKER GATE: every identity of the women's pool (c01–c32 + m01–m52 + ma ma k01–k08) × every role/rank
-   (NPC consort cold,t1..t8 · her t1..t8 · palace maid / ma ma servant · Thái hậu NPC · her as Thái hậu) × ages 18/30/40/55/64/66/75 → the REAL
-   selector (figFor, fig + por). Must be 0 blanks. Also checks: a65 file shown at 65+ wherever it is painted (and never below 65), the
+   (NPC consort cold,t1..t8 · her t1..t8 · palace maid / ma ma servant · Thái hậu NPC · her as Thái hậu) × ages 18…75 incl. every band edge of BAL.ageBand → the REAL
+   selector (figFor, fig + por). Must be 0 blanks. Also checks: top-band (a65) file shown from BAL.ageBand[3] wherever it is painted (and never below), the
    Thái hậu wears her own face's "th" robe when painted (never a shared fig-thaihau-*), colour variant v1/v2 only when her colour asks for it,
    and no Thái hậu robe on anyone who is not Thái hậu. Prints the a65 / Thái hậu files still missing (FOR C).
    usage: node dev/test/fig-wiring.js [out.json]   (serves the BUILT repo root; manifests from env FIGDIR or the CDN). Exit 1 on any FAIL. */
@@ -25,7 +25,7 @@ const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'ap
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title')&&(document.getElementById('title').hidden=true);window.__nlInner=1;start();window.__nlInner=0;Q.length=0});
  await p.waitForFunction(()=>typeof FIGS!=='undefined'&&FIGS.length>0&&f88Keys('maid').length>0&&Object.keys(FIGXT).length>0,null,{timeout:90000}).catch(async e=>{console.log('LOAD STATE',await p.evaluate(()=>({F:typeof FIGS!=='undefined'&&FIGS.length,X:typeof FIGXT!=='undefined'&&Object.keys(FIGXT).length,ok:typeof figxLoad!=='undefined'&&[figxLoad.ok,figxLoad.fail]})),errs);throw e});
  const res=await p.evaluate(()=>{
-  const AGES=[18,30,40,55,64,66,75];const out={n:0,blank:[],bad:[],miss65:{},missTh:[],cnt:{}};const inc=k=>out.cnt[k]=(out.cnt[k]||0)+1;
+  const AGES=[18,27,28,30,38,39,40,50,51,55,63,64,66,75];const TOP=BAL.ageBand[BAL.ageBand.length-1],A65='-'+BAL.ageArt[BAL.ageArt.length-1];/* review/ageband: band edges from BAL */const out={n:0,blank:[],bad:[],miss65:{},missTh:[],cnt:{}};const inc=k=>out.cnt[k]=(out.cnt[k]||0)+1;
   const base=s=>String(s||'').replace(/^.*\//,'');
   const pool=figxPool();const has=(k,re)=>{const L=(FIGIX[k.split(':')[0]]||{})[k]||[];return L.some(f=>re.test(f.file))};
   const thHas=k=>!!(FIGXT[k]&&FIGXT[k].th.length);
@@ -33,14 +33,14 @@ const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'ap
   const thO0=S.thO,U0=S.fidUsed.slice(),riv0=rivals.slice();
   const look=(lbl,k,a,src,ex)=>{out.n++;const f=base(src);if(!src){out.blank.push(lbl+' '+k+' a'+a);return}
    const id=k.split(':')[1];if(!f.includes('-'+id+'-')){out.bad.push(lbl+' '+k+' a'+a+' OTHERFACE '+f);return}
-   if(/-a65/.test(f)&&a<65)out.bad.push(lbl+' '+k+' a'+a+' a65 below 65 '+f);
+   if(f.includes(A65)&&a<TOP)out.bad.push(lbl+' '+k+' a'+a+' top-band art below '+TOP+' '+f);
    if(/-th-/.test(f)&&!ex.th)out.bad.push(lbl+' '+k+' a'+a+' TH ROBE ON NON-TH '+f);
    if(/fig-thaihau|por-thaihau/.test(f))out.bad.push(lbl+' '+k+' SHARED THAIHAU '+f);
    if(ex.th&&thHas(k)&&!/-th-/.test(f))out.bad.push(lbl+' '+k+' a'+a+' TH PAINTED BUT NOT SHOWN '+f);
    if(/-v[12]\./.test(f)&&!ex.v)out.bad.push(lbl+' '+k+' a'+a+' VARIANT WITHOUT ASK '+f);
-   if(a>=65&&ex.t&&has(k,new RegExp('-t'+ex.t+'-a65\\.webp$'))&&!/-a65/.test(f)&&!ex.th)out.bad.push(lbl+' '+k+' a'+a+' a65 PAINTED BUT NOT SHOWN '+f);
-   if(a>=65&&ex.th&&thHas(k)&&!/-th-a65/.test(f))out.bad.push(lbl+' '+k+' a'+a+' TH a65 NOT SHOWN '+f);
-   inc(lbl+(/-a65/.test(f)?':a65':'')+(/-th-/.test(f)?':th':'')+(/-v[12]\./.test(f)?':v':''))};
+   if(a>=TOP&&ex.t&&has(k,new RegExp('-t'+ex.t+A65+'\\.webp$'))&&!f.includes(A65)&&!ex.th)out.bad.push(lbl+' '+k+' a'+a+' a65 PAINTED BUT NOT SHOWN '+f);
+   if(a>=TOP&&ex.th&&thHas(k)&&!f.includes('-th'+A65))out.bad.push(lbl+' '+k+' a'+a+' TH a65 NOT SHOWN '+f);
+   inc(lbl+(f.includes(A65)?':a65':'')+(/-th-/.test(f)?':th':'')+(/-v[12]\./.test(f)?':v':''))};
   try{for(const k of pool){
    /* missing lists (FOR C) */
    const mm=[];for(const t of [1,2,3,4,5,6,7,8])if(!has(k,new RegExp('-t'+t+'-a65\\.webp$')))mm.push('t'+t);if(!/^mama/.test(k)&&!has(k,/-cold-a65\.webp$|-tcold-a65\.webp$/))mm.push('cold');
@@ -52,7 +52,7 @@ const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'ap
      if(t>=7){w.figV=1;const f=base(figFor({ref:w},'fig'));const vh=has2(k,t,a);if(vh&&!/-v1\./.test(f))out.bad.push('npc v1 asked not shown '+k+' t'+t+' a'+a+' '+f);if(vh)inc('npc:v1ok');w.figV=0}
      rivals.pop()}
     /* servant (palace maid young, ma ma old) */
-    if(/^(maid|mama)/.test(k)){const s={role:'maid',name:'AUDIT',age:a,fid:k,old:a>=36,rk:1};for(const kind of ['fig','por'])look('srv'+(kind==='por'?'P':''),k,a,figFor({ref:s},kind),{});}
+    if(/^(maid|mama)/.test(k)){const s={role:'maid',name:'AUDIT',age:a,fid:k,old:a>=BAL.ageBand[1],rk:1};for(const kind of ['fig','por'])look('srv'+(kind==='por'?'P':''),k,a,figFor({ref:s},kind),{});}
     /* the Thái hậu NPC wearing this face */
     {S.thO={fid:k,age:a};S.thAge=a;for(const kind of ['fig','por'])look('th'+(kind==='por'?'P':''),k,a,figFor({kind:'th'},kind),{th:1})}
     /* her: consort road t1..t8 + as Thái hậu after the succession */
@@ -61,7 +61,7 @@ const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'ap
      S.figV=1;{const f=base(figFor(S,'fig'));if(has2(k,8,a)&&!/-v1\./.test(f))out.bad.push('her v1 asked not shown '+k+' a'+a+' '+f);else if(has2(k,8,a))inc('her:v1ok')}delete S.figV;
      S.succ={p:'a',on:1};look('herTH',k,a,figFor(S,'fig'),{th:1});look('herTHP',k,a,figFor(S,'por'),{th:1});S.succ=null}
    }}}catch(e){out.err=String(e&&e.stack||e)}
-  function has2(k,t,a){const X=FIGXT[k];if(!X)return false;const B=['a18','a26','a36','a51','a65'][ageBandIx(a)];return X.v.some(f=>f.v===1&&+f.tier===t&&f.ageBand===B)}
+  function has2(k,t,a){const X=FIGXT[k];if(!X)return false;const B=BAL.ageArt[ageBandIx(a)];return X.v.some(f=>f.v===1&&+f.tier===t&&f.ageBand===B)}
   Object.assign(S,saveS);S.thO=thO0;S.fidUsed=U0;rivals.length=0;riv0.forEach(x=>rivals.push(x));
   /* THÁI HẬU DRAW: a fresh game draws a pool face for her (retired h1..h3 never), an old save's "thaihau:hN" is replaced */
   S.thO={fid:'thaihau:h2',age:60};S.fidUsed.push('thaihau:h2');const src=figFor({kind:'th'},'fig');out.draw={fid:S.thO.fid,src:base(src),stillUsed:S.fidUsed.includes('thaihau:h2')};

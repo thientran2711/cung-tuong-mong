@@ -129,7 +129,7 @@ function loOwnerMove(c){const o=loP(c.own),h=loP(c.at);if(!o||o===S||!h||c.hear|
  if(loHigh(h,o)&&loEmpEv(c,o,h)<BAL.il.empEv){c.asked=0;c.reT=wk()+LO.hearCd;return}loRaise(c,o)}
 /* a higher-rank holder (owner 16/11 13:30Z (3)): no search without the Emperor's decree; asking him needs REAL evidence = this case's evidence + evidence on the holder */
 function loHigh(h,a){return !!h&&!!a&&h!==a&&rkOf(h)>rkOf(a)}
-function loEmpEv(c,a,h){return (lostEv(c.id)|0)+((typeof evG==="function"?evG(a,h):0)|0)}
+function loEmpEv(c,a,h){return (lostEv(c.id)|0)+((typeof chHave==="function"?chHave(a,h,"uh"):0)|0)/* charge-evidence: only the ức hiếp / trộm pieces prove a theft */}
 function loRaise(c,o){c.hear=wk()+LO.hearW[0]+R(LO.hearW[1]-LO.hearW[0]+1);c.acc=key(o);const h=loP(c.at);
  if(h===S){Q.push({t:"Đồ thất lạc",who:pv(o),h:`<p>${wdNmC(o)} báo Cung Chính ti: ${loNm(c.k)} của nàng thất lạc, nay thấy ở cung ngươi. Cung Chính ti sẽ xét trong ${c.hear-wk()} tuần.</p><p class="past">${c.keep&&c.at==="me"?"Lén trả lại trước khi xét thì êm chuyện: Tư trang › Việc › Đồ thất lạc.":"Tra xét trước để minh oan: Tư trang › Việc › Đồ thất lạc."}</p>`,btn:"Đã hiểu"});log(`${wdNmC(o)} báo Cung Chính ti: ${loNm(c.k)} thấy ở cung ngươi.`)}}
 function loAskOdds(h,o,c){return oddsCl(Math.round(40+aff(h,o)/2+(loHonest(h)?20:-10)-(c&&c.keep&&c.by===key(h)?20:0)))}
@@ -225,7 +225,7 @@ function loActs(c){const B=[];const me=c.own==="me",h=c.at?loP(c.at):null,atMe=c
   if(c.hear)tra();
   else{B.push(loBtn(c,"book","Đối chiếu sổ Nội vụ phủ",`${word(loOdds("book",S))} · ${loCostTxt("book")} · thành: biết món đồ của ai, thêm ${balAb(BAL.eff.jlost.evLoEvAdd)} chứng cứ · hỏng: sổ sách không rõ`,loWhy("book")));
    B.push(loBtn(c,"giveback","Trả về chủ",`tốn: 1 khắc · thành: món đồ về tay chủ, thân ${balSg(BAL.eff.jlost.loUI_2)}`,ownK?whyTime(1):"chưa biết của ai: đối chiếu sổ trước"));
-   B.push(loBtn(c,"handin","Nộp Nội vụ phủ",`tốn: 1 khắc · thành: Nội vụ phủ trả về chủ, Danh +1`,whyTime(1)))}
+   B.push(loBtn(c,"handin","Nộp Nội vụ phủ",`tốn: 1 khắc · thành: Nội vụ phủ trả về chủ, Danh ${balSg(BAL.eff.jlost.danhLoUI)}`,whyTime(1)))}
   return B}
  if(!me&&c.kn.me&&!atMe&&!c.told&&c.at){B.push(loBtn(c,"tell",`Báo cho ${loP(c.own)?loP(c.own).name:"chủ món đồ"}`,`tốn: 1 khắc · thành: nàng biết đồ của mình ở đâu, thân với nàng ${balSg(BAL.eff.jlost.loUI_3)} · kèm: ${h?h.name:"người giữ đồ"} thù ${balSg(BAL.eff.jlost.loUI_4)}`,whyTime(1)))}
  return B}
@@ -266,7 +266,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
    Success: the item leaves the target's chest as a case (the target only sees "thất lạc"); her own theft stays in her chest
    (wear it and it may be recognised; plant it with "Cài đồ vào rương" to frame someone; "Lén trả lại" ends it quietly).
    An NPC thief keeps it or plants it on someone she dislikes (the hidden rival cause). Caught: the target holds 2 true evidence (j8 caught). */
-function loKeepPick(v,t){const B=BAL.ag.why.loTry;let fr=0;try{for(const x of consorts())if(x!==v&&x!==t&&loAlive(x))fr=Math.max(fr,danger(v,x))}catch(e){}const pl=fr>0&&bandOf(fr)>=BAL.ag.why.loTake.band?B.plant:0;return npwPick(["keep","plant"],k=>k==="keep"?B.keep:pl,{all:true})||"keep"}/* npc-purpose: plant it only on someone she really wants harmed (danger band ≥ loTake.band); both wants real → weighted keep vs plant *//* npc-purpose G2: plant it on someone only if she wants that one harmed */
+function loKeepPick(v,t){const B=BAL.ag.why.loTry;let fr=0;try{for(const x of consorts())if(x!==v&&x!==t&&loAlive(x))fr=Math.max(fr,danger(v,x))}catch(e){}const pl=fr>0&&bandCut(v,fr)>=BAL.ag.why.loTake.band?B.plant:0;return npwPick(["keep","plant"],k=>k==="keep"?B.keep:pl,{all:true})||"keep"}/* npc-purpose: plant it only on someone she really wants harmed (danger band ≥ loTake.band); both wants real → weighted keep vs plant *//* npc-purpose G2: plant it on someone only if she wants that one harmed */
 function loStealOk(a,t){return !!t&&a!==t&&!t.out&&loAlive(t)&&(t.inv||[]).some(loOk)&&!loL().some(c=>c.own===key(t)&&c.st!=="done")}
 function loStealO(a,t,self){return oddsCl(Math.round(odA(a,38+(a.tamco||0)/4+eyes(a)*3-((t.maid&&t.maid.loyal)||50)/5))-(self?(BAL.selfMinus):0))}
 function loSteal(a,t,self){a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,LO.act.duc,"sai người lấy trộm đồ");else ap(a,{duc:LO.act.duc});

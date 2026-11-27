@@ -68,6 +68,9 @@ function herGame(mode,o,cb){const B=M();const kind=B.art&&B.art[mode];const nm=m
  /* jaudit's playArt hook marks a paid game (window.__aaL); this game is free: keep its mark as it was */
  const L=window.__aaL;try{pa()}catch(e){console.error(e);BUSY=0;try{cb(0,null,true)}catch(e2){}}finally{window.__aaL=L}}
 window.stealMgPlay=herGame;
+/* is her steal game really running? (jnf heal, review/fix-evening-softlock): BUSY with no game layer on screen (#kg82 closed without its onDone,
+   or a reload: BUSY is not saved) is no game — BUSY drops so the next try can play */
+window.stealMgBusy=function(){if(BUSY&&typeof window.__smgFake!=="function"&&!document.getElementById("kg82"))BUSY=0;return !!(BUSY||PEND)/* PEND: her pick is being recorded inside chooseM, the game opens right after */};
 
 /* her Hành sự deck cards (j2 deal; j75 marks them __steal where its buổi check matches): the game first, then the card as before with that try's odds */
 const isStealCard=a=>!!(a&&a.o!=null&&(a.__steal||((a.n==="Tranh sủng"||a.n==="Chặn ngự giá")&&a.b===(typeof B4L==="number"?B4L:2))));

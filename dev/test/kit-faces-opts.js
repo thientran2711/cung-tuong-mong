@@ -1,0 +1,37 @@
+/* kit-faces-opts.js — KK29 HARD SOFTLOCK (MAIN 141, KIT REQUEST M-FIX-1, F ROLE B #5, iPad LIVE): a frame with a faction row of 3 portraits (m.faces) + 7 text lines + 4 options
+   («Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1», jreign RGBT.c2a) put its option column at y 858 on iPad 1180x820 (frame ends ~695), the text column does not scroll, only .opts scrolls and it was off screen.
+   RULE (law 10): the options are ALWAYS reachable on both devices, whatever the header / faces / text height. Per case: frame inside the screen, every option card in view OR the option list scrolls inside the frame and its first card is in view,
+   a REAL tap on the LAST option fires it (after scrolling the list with a finger drag when needed). Family: faces 0/3 × text 2/7/14 lines × options 2/4/6, Fold 755x1000 + iPad 1180x820.
+   usage: node dev/test/kit-faces-opts.js <index.html> [outdir]   Exit 1 on a FAIL. */
+const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+(async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const R=[];
+ for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1});
+  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+  const p=await ctx.newPage();await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
+  await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof pEmp==='function',null,{timeout:120000});
+  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}document.getElementById('modal').hidden=true});
+  await p.waitForFunction(()=>!/Sửa soạn nhập cung/.test(document.body.innerText),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(2500);
+  await p.addStyleTag({content:'#dawn,.kroul,.kmbox,.kne,[class*=kmrew],#kxcatch{display:none!important}'});
+  for(const faces of (process.env.FACES?JSON.parse(process.env.FACES):[1,0]))for(const lines of (process.env.LINES?JSON.parse(process.env.LINES):[2,7,14]))for(const no of (process.env.NO?JSON.parse(process.env.NO):[2,4,6])){
+   const name=`faces${faces} lines${lines} opts${no}`;
+   await p.evaluate(()=>{try{while(Q.length){const k=Q.length;closeModal();if(Q.length>=k)break}}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;window.__fired=-1});await p.waitForTimeout(250);
+   await p.evaluate(([faces,lines,no])=>{const h=Array.from({length:lines},(_,i)=>`<p>Dòng ${i+1}: Tân quân lên ngôi, triều đình chia ba ngả, mỗi phe đều muốn kéo ngươi về phía mình, lời hứa nhiều mà chỗ dựa chẳng bao nhiêu.</p>`).join('');
+    const names=['Theo Hoàng thượng','Theo Thái hậu','Theo Tể tướng','Đứng ngoài','Chờ xem thêm','Về cung'];
+    const o=Array.from({length:no},(_,i)=>({n:names[i],fx:{},j67:'tốn: Danh -2 · được: phe này tin ngươi hơn một chút, kèm: phe kia nghi ngờ',go:()=>{window.__fired=i}}));
+    const m={t:'Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1',h,opts:o,who:pEmp(),pid:'rg'};if(faces)m.faces=[[pEmp(),'Hoàng thượng'],[pTH(),'Thái hậu'],[pMe(),'Tể tướng']];Q.push(m);showModal()},[faces,lines,no]);
+   await p.waitForTimeout(1700);
+   const s=await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');if(!d)return {none:1};const dr=d.getBoundingClientRect();const o=d.querySelector('.opts');const bt=o?[...o.querySelectorAll(':scope>button')].filter(e=>e.getClientRects().length):[];const vis=e=>{const r=e.getBoundingClientRect();return r.top>=0&&r.bottom<=innerHeight+1&&r.left>=0&&r.right<=innerWidth+1};
+    const orc=o&&o.getBoundingClientRect();return {frameIn:dr.top>=-1&&dr.bottom<=innerHeight+1,n:bt.length,allIn:bt.every(vis),firstIn:bt[0]&&vis(bt[0]),oTop:o?Math.round(orc.top):null,oH:o?Math.round(orc.height):null,oScroll:o?o.scrollHeight>o.clientHeight+4:false,dBottom:Math.round(dr.bottom),ksz:d.dataset.ksz||''}});
+   if(s.none){R.push({dev:W+'x'+H,case:name,res:'no panel',FAIL:true});continue}
+   /* reach the LAST option with a real finger: if its card is not in view, drag the list (finger) up to 6 times */
+   let tapped=false,reach='in view';
+   for(let at=0;at<7&&!tapped;at++){const t=await p.evaluate(()=>{const o=document.querySelector('#modal:not([hidden]) .dlg .opts');const bt=[...o.querySelectorAll(':scope>button')].filter(e=>e.getClientRects().length);const e=bt[bt.length-1];if(!e)return null;const r=e.getBoundingClientRect();const od=o.getBoundingClientRect();const cy=r.top+r.height/2;const ok=cy>=Math.max(0,od.top)+6&&cy<=Math.min(innerHeight,od.bottom)-6;return {x:r.left+r.width/2,y:r.top+r.height/2,ok,ox:od.left+od.width/2,oy:od.top+od.height/2,oh:od.height,oin:od.top>=0&&od.top+60<innerHeight}});
+    if(process.env.DBG)console.log('iter',at,JSON.stringify(t));if(!t){break}
+    if(t.ok){await p.touchscreen.tap(t.x,t.y);tapped=true;break}
+    if(!t.oin||t.oh<60){reach='OPTION LIST OFF SCREEN';break}
+    reach='dragged';const cdp=await ctx.newCDPSession(p);const y0=Math.min(H-12,t.oy+t.oh/2-20),y1=Math.max(8,y0-160);await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[{x:t.ox,y:y0}]});for(let k=1;k<=10;k++){await cdp.send('Input.dispatchTouchEvent',{type:'touchMove',touchPoints:[{x:t.ox,y:y0-(y0-y1)*k/10}]});await p.waitForTimeout(16)}await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForTimeout(700);await cdp.detach().catch(()=>{})}
+   await p.waitForTimeout(500);const fired=await p.evaluate(()=>window.__fired);
+   if(OUT&&faces&&lines===7&&no===4){fs.mkdirSync(OUT,{recursive:true});await p.screenshot({path:`${OUT}/${W}-faces-opts.png`})}
+   R.push({dev:W+'x'+H,case:name,ksz:s.ksz,'frame in screen':s.frameIn,opts:s.n,'all in view':s.allIn,'list top':s.oTop,'list h':s.oH,reach,'last option fired':fired===no-1,FAIL:!(s.frameIn&&s.n===no&&fired===no-1)})}
+  await ctx.close()}
+ await b.close();console.table(R);const bad=R.filter(r=>r.FAIL);console.log('cases',R.length,'FAIL',bad.length);process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});

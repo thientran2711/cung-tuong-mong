@@ -12,7 +12,7 @@ npwReg("svLeave",{grp:"G2a",who:c=>c.s?[c.s]:[],why:s=>{const B=npwB().sv;const 
 npwReg("svTalk",{grp:"G2a",who:c=>c.s?[c.s]:[],why:s=>{const B=npwB().sv,q=netQ(s,"talk");if(q<BAL.net.qOn)return null;return {s:q*B.talk,r:"lắm lời, thích kể chuyện"}}});
 /* ---- j42: the cung nữ road (the player serves m = srvM()) ---- */
 npwReg("srvCard",{grp:"G2a",cdOf:p=>{const B=npwB().srvWk;return p===srvM()?B.cdM:rivals.includes(p)?B.cdR:B.cdC},who:c=>{const m=c.m;if(!m)return[];const B=BAL.srvx;let L=[m];
-  try{const W=BAL.ag.why.srvWk;L=L.concat(liveRivals(true).filter(v=>v!==m&&hostility(v,m)>=W.host&&(v.bac||0)>=W.bac))}catch(e){}
+  try{const W=BAL.ag.why.srvWk;L=L.concat(liveRivals(true).filter(v=>v!==m&&hostility(v,m)>=netThK(v,"host","hostLo")&&(v.bac||0)>=W.bac))}catch(e){}
   try{L=L.concat(srvColleagues().filter(s=>{const a=S.srv.af[s.sid]||0;return a<0||a>=B.friendAf}))}catch(e){}return L},
  why:(p,c)=>{const B=npwB().srvWk,m=c.m;
   if(p===m){const mo=srvCardW(m,"mood"),or=srvCardW(m,"order");return mo>=or?{s:mo,t:S,r:(S.tin||0)>=B.mid?"vui lòng với ngươi":"chán ghét ngươi"}:{s:or,r:"lòng dạ hiểm, muốn hại người"}}

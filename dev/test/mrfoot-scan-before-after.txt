@@ -1,0 +1,64 @@
+# mrfoot scan — before (bare LIVE 178cac37) / after (review/test-mrfoot). Tool: node dev/test/mrfoot-scan.js
+| file | «#mr button» selectors | before: covering .k3foot | after |
+|---|---|---|---|
+| dev/test/cn-force.js | 1 | 0 | 1 |
+| dev/test/coop-ask-srvprobe.js | 1 | 0 | 1 |
+| dev/test/coop-b1.js | 1 | 0 | 1 |
+| dev/test/coop-b2b5.js | 1 | 0 | 1 |
+| dev/test/coop-ban-cung.js | 1 | 0 | 1 |
+| dev/test/coop-bot-x.js | 2 | 0 | 2 |
+| dev/test/coop-bot.js | 1 | 0 | 1 |
+| dev/test/coop-chat.js | 1 | 0 | 1 |
+| dev/test/coop-cold-faction.js | 1 | 0 | 1 |
+| dev/test/coop-cyc.js | 1 | 0 | 1 |
+| dev/test/coop-cyhold.js | 1 | 0 | 1 |
+| dev/test/coop-dbg-hostdeath.js | 1 | 0 | 1 |
+| dev/test/coop-dresscode-scan.js | 1 | 0 | 1 |
+| dev/test/coop-dresscode.js | 1 | 0 | 1 |
+| dev/test/coop-e2e-tr.js | 1 | 0 | 1 |
+| dev/test/coop-e2e.js | 1 | 0 | 1 |
+| dev/test/coop-emo-seat.js | 1 | 0 | 1 |
+| dev/test/coop-ending-screens.js | 1 | 0 | 1 |
+| dev/test/coop-errand.js | 1 | 0 | 1 |
+| dev/test/coop-guest-maid.js | 1 | 0 | 1 |
+| dev/test/coop-guest-men.js | 1 | 0 | 1 |
+| dev/test/coop-guest-names.js | 1 | 0 | 1 |
+| dev/test/coop-haohuu.js | 1 | 0 | 1 |
+| dev/test/coop-hauthay.js | 1 | 0 | 1 |
+| dev/test/coop-ledger.js | 1 | 0 | 1 |
+| dev/test/coop-looks-act.js | 1 | 0 | 1 |
+| dev/test/coop-looks.js | 1 | 0 | 1 |
+| dev/test/coop-lost-scan-traced.js | 1 | 0 | 1 |
+| dev/test/coop-lost-scan.js | 1 | 0 | 1 |
+| dev/test/coop-night.js | 1 | 0 | 1 |
+| dev/test/coop-one-world-play.js | 1 | 0 | 1 |
+| dev/test/coop-p2.js | 1 | 0 | 1 |
+| dev/test/coop-pets.js | 1 | 0 | 1 |
+| dev/test/coop-play.js | 1 | 0 | 1 |
+| dev/test/coop-pool-face.js | 1 | 0 | 1 |
+| dev/test/coop-r2.js | 1 | 0 | 1 |
+| dev/test/coop-rejoin-stats.js | 1 | 0 | 1 |
+| dev/test/coop-rev2.js | 1 | 0 | 1 |
+| dev/test/coop-room-faces.js | 1 | 0 | 1 |
+| dev/test/coop-sleep.js | 1 | 0 | 1 |
+| dev/test/coop-steal.js | 1 | 0 | 1 |
+| dev/test/coop-timer-lag.js | 1 | 0 | 1 |
+| dev/test/coop-timer.js | 1 | 0 | 1 |
+| dev/test/coop-toil-look.js | 1 | 0 | 1 |
+| dev/test/coop-ton-row.js | 1 | 0 | 1 |
+| dev/test/fig-retry.js | 1 | 0 | 1 |
+| dev/test/home-chapters/coop-seats.js | 1 | 0 | 1 |
+| dev/test/kc-roads/coop-together.js | 1 | 0 | 1 |
+| dev/test/ksz-late-tap.js | 1 | 0 | 1 |
+| dev/test/mg-back.js | 1 | 0 | 1 |
+| dev/test/oldroom-r1.js | 1 | 0 | 1 |
+| dev/test/or20-j68q-coop.js | 1 | 0 | 1 |
+| dev/test/outside/coop-home.js | 1 | 0 | 1 |
+| dev/test/outside/coop-kcco-ui.js | 1 | 0 | 1 |
+| dev/test/outside/coop-kcco.js | 1 | 0 | 1 |
+| dev/test/panel-size.js | 1 | 0 | 1 |
+| dev/test/show-why-coop.js | 1 | 0 | 1 |
+| dev/test/sw-update.js | 2 | 0 | 2 |
+| dev/test/ts-a.js | 1 | 0 | 1 |
+
+Totals: before 59 drivers stale (0 covering) · after 59 covering, 0 stale.

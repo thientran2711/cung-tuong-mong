@@ -22,6 +22,7 @@ Object.assign(BAL,{allot:{on:true,
    [["vaibong",1],["aldau1",1],["tragoi",1]],[["luahang",1],["aldau1",1],["trahop",1]]],/* by bậc (SRK.maid: thô sử … nữ quan): seasonal cloth, hair oil, tea from nhất đẳng */
    cloth:[1,4,7,10],coal:1,keep:4,lau:[["vaitho",1]]}}});
 const AL_N={dau:["Nước bào hoa","Dầu hoa quế","Dầu hoa lan ngự chế"],nen:["Nến mỡ dê","Nến sáp vàng","Nến sáp trắng"]};
+const AL_OILW="dầu chải tóc";/* the word for the hair-oil family on the mirror */
 const AL_ART={dau:"huongtram",nen:"thanbac"};/* stand-in pictures until Foreman C paints img/item-al<kind><t>.webp (listed in CTM_MISSING_PICS) */
 function alOn(){return !!(BAL.allot&&BAL.allot.on)}
 function alKey(kind,t){return "al"+kind+t}
@@ -70,7 +71,9 @@ function alInitAll(){try{if(!S||S.dead||!alOn())return;if(typeof isSrv==="functi
 (function(){if(typeof lxSpend!=="function")return;const s0=lxSpend;lxSpend=function(p,rec,col){const wantB=!!(col&&col.want==="diem");const R=s0.apply(this,arguments);
   try{if(alOn()&&wantB&&rec&&rec.makeup&&p){const L=alOil(p);if(L.length){const e=L.slice().sort((a,b)=>a.u-b.u)[0];e.u-=Math.min(e.u,BAL.allot.oil.use);R.oil=e;if(e.u<=0){p.inv.splice(p.inv.indexOf(e),1);(R.gone=R.gone||[]).push(e)}}}}catch(e){console.error("al oil",e)}return R};window.lxSpend=lxSpend})();
 /* her mirror: without oil the Kiểu cầu kỳ presets are not offered, the pick falls back, the note says why */
-(function(){if(typeof lxColRows!=="function")return;const r0=lxColRows;lxColRows=function(rows){const R=r0.apply(this,arguments);try{if(alOn()&&!alHasOil(S))return R.filter(r=>!(r&&/^pre-/.test(r.k)&&(r.items||[]).every(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);return x&&x[2]==="diem"})))}catch(e){}return R};window.lxColRows=lxColRows})();
+(function(){if(typeof lxColRows!=="function")return;const r0=lxColRows;lxColRows=function(rows){const R=r0.apply(this,arguments);/* makeup-set (owner OD 25/11 ~23:20Z, LUẬT SỬA CẢ NHÓM): without hair oil the Kiểu cầu kỳ sets stay on the mirror GREYED with why (never hidden) */
+ try{if(alOn()&&!alHasOil(S))return R.map(r=>{if(!(r&&/^pre-/.test(r.k)&&(r.items||[]).every(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);return x&&x[2]==="diem"})))return r;
+  return Object.assign({},r,{items:r.items.map(i=>Object.assign({},i,{off:true,why:i.off&&i.why?`thiếu ${AL_OILW}; ${i.why}`:`thiếu ${AL_OILW} để vấn tóc cao. Đường kiếm: ${LX_ROADS}`})),note:LX_SETNOTE})})}catch(e){}return R};window.lxColRows=lxColRows})();
 (function(){if(typeof lxColPick!=="function")return;const p0=lxColPick;lxColPick=function(col){const c=p0.apply(this,arguments);try{if(alOn()&&c&&c.want==="diem"&&!alHasOil(S))delete c.want}catch(e){}return c};window.lxColPick=lxColPick})();
 (function(){if(typeof lxMirrorNote!=="function")return;const n0=lxMirrorNote;lxMirrorNote=function(){const h=n0.apply(this,arguments);try{if(!alOn())return h;const L=alOil(S);const u=L.reduce((a,e)=>a+e.u,0);
   const row=L.length?["Dầu chải tóc",`${L.map(e=>IT[e.k].n).filter((x,i,a)=>a.indexOf(x)===i).join(", ")}, còn ${u} lần dùng`,"n"]:["Dầu chải tóc","hết: không vấn được Kiểu cầu kỳ · mua ở hàng rong, Nội vụ phủ phát đầu tháng","r"];
@@ -112,7 +115,7 @@ function alStaffGive(p,skim){if(!p||!Array.isArray(p.staff)||p.out)return;const 
 (function(){try{if(typeof HX==="object"){const w0=HX.wage;Object.defineProperty(HX,"wage",{get(){try{return alOn()&&S&&S.srv?`${w0} Kèm lệ tháng của bậc ngươi: ${alSrvTxt(S.srv.rk)}. Chủ nhân bị Nội vụ phủ cắt xén thì lệ kẻ hầu cũng bị bớt.`:w0}catch(e){return w0}},configurable:true,enumerable:true})}}catch(e){}})();
 /* ---------- item detail: lượt left of a bottle (kit detail rows' own note line) ---------- */
 (function(){if(typeof kitItemDetailRows!=="function")return;const d0=kitItemDetailRows;kitItemDetailRows=function(ref,o){try{const k=ref&&(typeof ref==="string"?ref:ref.k||(ref.e&&ref.e.k));const r=alOf(k);
-  if(r&&r.kind==="dau"){alFix(S);const E=(S.inv||[]).filter(e=>e&&e.k===k);if(E.length){o=Object.assign({},o||{});o.note=[].concat(o.note||[],E.map(e=>`còn ${e.u} lần dùng`))}}}catch(e){}return d0.call(this,ref,o)};window.kitItemDetailRows=kitItemDetailRows})();
+  if(r&&r.kind==="dau"){alFix(S);const E=(S.inv||[]).filter(e=>e&&e.k===k);if(E.length){o=Object.assign({},o||{});o.note=[].concat(o.note||[],typeof kitUseNote==="function"?kitUseNote(E,{unit:"lọ"}):[`còn ${E.reduce((a,e)=>a+(e.u|0),0)} lần dùng`])}}}catch(e){}return d0.call(this,ref,o)};window.kitItemDetailRows=kitItemDetailRows})();
 /* ---------- first sight on load / new life ---------- */
 (function(){const g=window.render;if(typeof g!=="function")return;window.render=function(){try{if(S&&!S.alInit)alInitAll()}catch(e){}return g.apply(this,arguments)}})();
 window.alOf=alOf;window.alLight=alLight;window.alLightNote=alLightNote;window.alSrvMonth=alSrvMonth;window.alStaffGive=alStaffGive;window.alInitAll=alInitAll;window.alHasOil=alHasOil;window.alPrice=alPrice;

@@ -4,8 +4,11 @@
    kitSfx(moment, {rate, g, at}) plays a moment; every older call (sfx(file), feedback(kind)) still works and goes through the same mixer:
      - the "Tiếng" switch (OPT.snd / OPT.mute) and the "Tiếng động" slider (OPT.sfx) — nothing plays while sound is off or the tab is hidden;
      - UI sounds at ×0.5 of the slider, events at ×1 (files are normalised to the same loudness: max momentary −16 LUFS, peak −1.5 dBFS);
-     - at most 3 sounds at once (voices of j36 count): a 4th UI sound is dropped, a 4th event sound stops the oldest UI sound, else the oldest event sound that has played > 0.5 s (the new moment wins), else it is dropped;
-     - the same file twice within 90 ms plays once (wrappers that meet on one moment never double it);
+     - at most 3 sounds at once (voices of j36 count): a 4th event sound stops the oldest UI sound, else the oldest event sound that has played > 0.5 s (the new moment wins), else it is dropped;
+       a TAP sound (UI layer) is NEVER dropped (owner 24/11 ~18:05Z: every tap sounds at once): it stops the oldest UI voice, or plays over the cap when only events play;
+     - the same file twice within 90 ms (UI layer: 35 ms) plays once (wrappers that meet on one moment never double it; two quick taps both sound);
+     - INSTANT TAPS (review/sfx-instant): every UI + mini-game file is decoded into a WebAudio buffer on the first gesture (AU_PRELOAD), the buffer path also runs
+       while the context is still resuming (the source starts the moment it runs), and a tap sound asked before the very first unlock waits for it (≤ 350 ms);
      - bots (window.__bot) and quiet code paths: silent. Music ducks only under event sounds.
    Wiring (all by wrapping shared functions; no caller changes): motion pieces (j93 kmStage / kitXamPlay / kitResultFx / kitCalendar /
    kitDayShift / kitFlyItem / kitFlipNote / kitAlarm), the reward box steps (shake, lid, items, coins, Nhận), shop (buy, sellItem, wkSell,
@@ -64,18 +67,26 @@ for(const k of Object.keys(SFXN))if(/^sfx-pet-/.test(SFXN[k]))SFXL[SFXN[k]]={g:.
 /* ---- the mixer (replaces j11 sfx; same name, every caller keeps working) ---- */
 function ksfxBusy(){const now=performance.now();KSFX.live=KSFX.live.filter(v=>!v.a.ended&&!v.a.paused&&now<v.until);let n=KSFX.live.length;
  try{if(typeof VO!=="undefined"&&VO.cur&&!VO.cur.paused&&!VO.cur.ended)n++}catch(e){}return n}
-sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);if(!auOk())return ksfxDrop(n,"off");if(ksfxMgOnce()&&!o.m&&(n==="sfx-learn-good"||n==="sfx-learn-bad"))return ksfxDrop(n,"result-once");if(screenOff())return ksfxDrop(n,"quiet");
- const L=SFXL[n]||{},ui=!!L.ui,now=performance.now();if(now-(KSFX.last[n]||-1e9)<90)return ksfxDrop(n,"twice");
- if(ksfxBusy()>=3){if(ui)return ksfxDrop(n,"full");const v=KSFX.live.find(x=>x.ui)||KSFX.live.find(x=>now-x.t0>500);if(!v)return ksfxDrop(n,"full");try{v.a.pause()}catch(e){}KSFX.live.splice(KSFX.live.indexOf(v),1)}
+/* review/sfx-instant: decode every tap / mini-game sound on the first gesture (j11 auUnlock runs AU_PRELOAD), not on its first play */
+(()=>{const add=f=>{if(f&&!AU_PRELOAD.includes(f))AU_PRELOAD.push(f)};Object.keys(SFXL).forEach(f=>{if(SFXL[f].ui)add(f)});
+ Object.keys(SFXN).forEach(k=>{if(/^mg/.test(k))add(SFXN[k])});["sfx-item-pop","sfx-open","sfx-close","sfx-lock","sfx-page"].forEach(add)})();
+/* a tap sound asked before the very first unlock (the finger-down comes before the touchend that unlocks): play it right after the unlock */
+AU.onUnlock=function(){try{const q=AU.pend||[];AU.pend=[];const now=performance.now();q.forEach(x=>{if(now-x.t<350)sfx(x.n,x.o)})}catch(e){}};
+sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);
+ if(!auOk()){if(!AU.unlocked&&OPT.snd&&!OPT.mute&&!document.hidden&&(SFXL[n]||{}).ui&&!window.__bot){const q=AU.pend||(AU.pend=[]);if(q.length<4)q.push({n,o,t:performance.now()});return ksfxDrop(n,"wait")}return ksfxDrop(n,"off")}if(ksfxMgOnce()&&!o.m&&(n==="sfx-learn-good"||n==="sfx-learn-bad"))return ksfxDrop(n,"result-once");if(screenOff())return ksfxDrop(n,"quiet");
+ const L=SFXL[n]||{},ui=!!L.ui,now=performance.now();if(now-(KSFX.last[n]||-1e9)<(ui?35:90))return ksfxDrop(n,"twice");
+ if(ksfxBusy()>=3){const v=KSFX.live.find(x=>x.ui)||(ui?null:KSFX.live.find(x=>now-x.t0>500));if(v){try{v.a.pause()}catch(e){}KSFX.live.splice(KSFX.live.indexOf(v),1)}else if(!ui)return ksfxDrop(n,"full")}
  try{const vol=Math.max(0,Math.min(1,OPT.sfx*(ui?.5:1)*(L.g||1)*(o.g||1)));let b=null,dur=0,web=0;
   /* WebAudio first (iPhone ignores element.volume): a decoded buffer through a GainNode; until it is decoded the HTMLAudio clone plays */
-  const cx=AU.ctx,buf=cx&&cx.state==="running"?auBuf(n):null;
+  /* a context that ran before and is only suspended / interrupted (phone paused it): wake it and start the buffer now — it sounds the moment the context runs */
+  const cx=AU.ctx;if(cx&&cx.state==="running")AU.ran=1;const wake=cx&&AU.ran&&cx.state!=="running"&&cx.state!=="closed";if(wake){try{const p=cx.resume();if(p&&p.catch)p.catch(()=>{})}catch(e){}}
+  const buf=cx&&(cx.state==="running"||wake)?auBuf(n):null;
   if(buf){try{const src=cx.createBufferSource(),g=cx.createGain();src.buffer=buf;g.gain.value=vol;if(o.rate&&o.rate!==1)src.playbackRate.value=o.rate;src.connect(g);g.connect(cx.destination);
    b={ended:false,paused:false,pause(){this.paused=true;try{src.stop()}catch(e){}}};src.onended=()=>{b.ended=true};src.start();web=1;dur=buf.duration*1000/(o.rate||1)+80}catch(e){b=null}}
   if(!b){let a=AU.cache[n];if(a&&a.dead&&now-(a.deadT||(a.deadT=now))>4000){a=null}if(!a){a=AU.cache[n]=mkAudio(n,false)}if(!a||a.dead)return ksfxDrop(n,"dead");b=a.cloneNode();
    b.volume=vol;
    if(o.rate&&o.rate!==1){try{b.preservesPitch=false;b.mozPreservesPitch=false;b.webkitPreservesPitch=false}catch(e){}b.playbackRate=o.rate}
-   dur=(a.duration&&isFinite(a.duration)?a.duration*1000/(o.rate||1):2200)+80}
+   dur=(a.duration&&isFinite(a.duration)?a.duration*1000/(o.rate||1):(ui?600:2200))+80}
   KSFX.last[n]=now;KSFX.live.push({a:b,ui,t0:now,until:now+dur});
   KSFX.log.push({n,m:o.m||"",ui:ui?1:0,t:Math.round(now),w:web});if(KSFX.log.length>400)KSFX.log.splice(0,100);
   if(!web){const p=b.play();if(p&&p.catch)p.catch(()=>{})}

@@ -27,7 +27,7 @@ function asC(s,k){const G=ASN[asGrp(s)];G[k]=(G[k]||0)+1;ASN.n++}
 function asSt(s){if(s.duc==null){const T=asB().st;const ri=a=>a[0]+R(a[1]-a[0]+1);try{amSt(s)}catch(e){s.sac=s.sac||30;s.tai=s.tai||10}
   s.duc=ri(T.duc);s.tamco=ri(T.tamco);s.danh=ri(T.danh);s.suc=ri(T.suc);s.bac=ri(T.bac)}if(s.mp==null)s.mp=0;if(s.loyal==null)s.loyal=BAL.srvLoyal.base;return s}
 function asAp(s,fx){for(const k in fx||{}){const v=fx[k];if(!v)continue;if(k==="tin")s.loyal=cl((s.loyal||0)+v,0,100);else if(k==="bac")s.bac=Math.max(0,(s.bac||0)+v);
-  else if(k==="sung")s.sung=cl((s.sung||0)+v,0,100);else s[k]=cl((s[k]||0)+v,0,100)}}
+  else if(k==="sung")spAdd(s,"sung",v);else s[k]=cl((s[k]||0)+v,0,100)}}
 function asTxt(o,s,t){return t}
 /* ---------- 3 her needs ---------- */
 function asGap(g,x){return g>0?cl((g-(x||0))/g,0,1):0}
@@ -39,7 +39,7 @@ function asNeeds(s){asSt(s);const G=asB().goal,W=asB().nw,m=ownerOf(s);const N={
  N.self=(asGap(G.sac,s.sac)+asGap(G.tai,s.tai)+asGap(G.duc,s.duc))/3*W.self;
  N.ally=asGap(G.friend,asFriends(s))*W.ally;
  N.sung=s.role==="maid"&&mlAgeOk(s)?amNeed(s)*W.sung:0;
- N.love=(s.role==="maid"||s.role==="eunuch")&&(s.age||20)>=18&&!s.wed?W.love:0;
+ N.love=(s.role==="maid"||s.role==="eunuch")&&(s.age||20)>=BAL.ageMin&&!s.wed?W.love:0;
  let sp=0;for(const k in s.af||{})if(s.af[k]<0)sp=Math.max(sp,-s.af[k]/100);N.spite=sp*W.spite;
  return N}
 /* the value of an effect vector for her: Chủ tin, Sức, Bạc, công lao, self (Sắc/Tài/Đức/Danh), ally (thiện cảm), love (tình ý), his regard */
@@ -70,7 +70,7 @@ function asOpts(s,N){asSt(s);const m=ownerOf(s);if(!m)return[];N=N||asNeeds(s);c
  try{const W=S.where||{};if(maid&&mlAgeOk(s)&&W.emp&&W.emp!=="dtd"&&W.emp!=="home")X({k:"maid:empTea",sk:"empTea",g:"maid",p:odA(s,amTeaO(s,0)),c:{},w:{sung:amTeaG(s)*qv(BAL.mline.seekTr,s,1)},l:{tin:-BAL.ag.maid.tea.fail},at:()=>W.emp,pl:W.emp,tag:"staff",run:p=>asEmpTea(p||s)})}catch(e){}
  /* consorts (srvTalk "rv" / "hh") */
  const hh=typeof queenP==="function"?queenP():null;
- if((s.sec||0)>0){const foe=liveRivals(true).find(v=>v!==m&&(v===hh||hostility(v,m)>=20));if(foe)X(asOpt(s,"betray",100,{t:foe,at:palaceOf(foe)}));
+ if((s.sec||0)>0){const foe=liveRivals(true).find(v=>v!==m&&(v===hh||hostility(v,m)>=netThK(v,"host","hostLo")));if(foe)X(asOpt(s,"betray",100,{t:foe,at:palaceOf(foe)}));
   if(hh&&hh!==m&&hh!==S&&(s.sec||0)>=SRVA.accuse.sec)X(asOpt(s,"accuse",SRVA.accuse.o(s,m),{t:hh,at:"kn"}))}
  {const v=asBig(m);if(v)X(asOpt(s,"greet",100,{t:v,at:palaceOf(v)}))}
  /* Đồng liêu (srvStaffAct) */
@@ -114,7 +114,7 @@ function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(
 const AS_DO={
  nvp(s){/* NPC-PURPOSE G3: a bully is a servant there who bears her a grudge (her own af < 0), the worst first; none → no bullying. A friend = the one she already likes best */
   const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));const by=npwPick(L,x=>-(((x.af||{})[s.sid])||0));if(by&&roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);s.bullyBy=by.sid;oanAdd(s,by,BAL.relMS.bully);return""}if(L.length){const x=npwPick(L,y=>1+Math.max(0,((s.af||{})[y.sid])||0));s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+BAL.ag.staff.nvpAf,-100,100)}return""},
- spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/evA(v,m,SRVA.spy.ev);return v===S?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${SRVA.spy.ev}. `:""}
+ spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/const n=chSearch(v,s,()=>evA(v,m,SRVA.spy.ev));return v===S?(n?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${n}. `:`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: ${chMissed()?chMissTxt(m):"chưa thấy điều gì sai trái"} `):""}
   if(roll(SRVA.spy.out)){asOut(s,"tgk");return asSee(m,v)?`${m===S?"Ngươi":m.name} bắt gặp ${s.name} lén lút với người của ${NM(v)}, đày xuống Tân Giả khố. `:""}return""},
  tellMis(s,m){const iv=(s.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];s.intel=(s.intel||[]).slice(1);if(iv){/*evok: servant intel, capped*/evA(m,iv,SRVA.tellMis.ev);if(m===S)return `${s.name} bẩm tin dò được về ${iv.name}: chứng cứ +${SRVA.tellMis.ev}. `}return""},
  askRec(s,m,o,ok){if(ok)servMerit(s,SRVA.askRec.mpOk);return""},
@@ -177,7 +177,7 @@ function asMonth0(mine){let ev="";const B=asB();
    if(sch&&roll(B.secSee))s.sec=(s.sec||0)+1;/* she sees her master's schemes at home (the player maid's "Biết chuyện của chủ") */
    if(s.betray&&roll(agCap(nv(p,"betrayFind")))){s.betray=null;if(npwPick(["kill","lau"],k=>srvPunW(p,k))==="kill"){/* law 1 (r1): the same kill-vs-Tân Giả khố pick as the player maid (j42 srvMonth) */asOut(s,"dead");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo chuyện trong cung, sai đánh chết. `}else{asOut(s,"tgk");if(asSee(p))ev+=`${p===S?"Ngươi":p.name} biết ${s.name} mật báo, đày xuống Tân Giả khố. `}continue}
    /* Ban gả (j42 cnvGrant: the same trigger as the player maid's), then her own choice: Tạ ơn, xuất giá / Xin ở lại */
-   if(s.role==="maid"&&(s.age||20)>=18&&(s.loyal>=BAL.srvGrant.tin)&&srk(s)>=1&&roll(BAL.srvGrant.base+(s.vow?BAL.srvGrant.bond:0))){const N=asNeeds(s);const c=mindPick([["stay",BAL.ag.routine/BAL.ag.unit],["wed",(N.love+(s.vow?B.vowW:0))*BAL.ag.needW]],s);asC(s,c==="wed"?"grantWed":"grantStay");
+   if(s.role==="maid"&&(s.age||20)>=BAL.ageMin&&(s.loyal>=BAL.srvGrant.tin)&&srk(s)>=1&&roll(BAL.srvGrant.base+(s.vow?BAL.srvGrant.bond:0))){const N=asNeeds(s);const c=mindPick([["stay",BAL.ag.routine/BAL.ag.unit],["wed",(N.love+(s.vow?B.vowW:0))*BAL.ag.needW]],s);asC(s,c==="wed"?"grantWed":"grantStay");
     if(c==="wed"){s.wed=1;asOut(s,"wed");const man=s.vow&&manById(s.vow);if(asSee(p))ev+=`${s.name}, cung nữ của ${NM(p)}, được chủ ban gả${man?" cho "+man.name:""}. `;continue}else s.loyal=cl(s.loyal-BAL.srvGrant.stayLoy,0,100)}
    /* Tuổi (j42 cnvAge, BAL.srvAge): Xuất cung / Ở lại làm ma ma (chưởng sự) / Xin chủ giữ lại */
    if(s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.ageDone){s.ageDone=1;const N=asNeeds(s);const O=[["out",(N.love+(s.vow?B.vowW:0)+B.outW)*BAL.ag.needW],["keep",s.loyal/100*BAL.ag.routine/BAL.ag.unit]];if(srk(s)>=BAL.srvRk.cs)O.push(["mama",(N.mp+N.bac+B.outW)*BAL.ag.needW]);

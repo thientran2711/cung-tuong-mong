@@ -114,14 +114,20 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
   lastKey=key;
   book.innerHTML=sheets.map((s,i)=>`<div class="kbk-sheet" data-i="${i}"><div class="kbk-face kbk-front">${shell(s.front.cls+" r",s.front.html,s.front.folio?String(s.front.no||""):"")}<i class="kbk-sh"></i></div><div class="kbk-face kbk-back">${shell(s.back.cls+" l",s.back.html,s.back.folio?String(s.back.no||""):"")}<i class="kbk-sh"></i></div></div>`).join("")+`<i class="kbk-cast"></i><i class="kbk-gutter"></i>`;
   book.querySelectorAll(".kbk-go").forEach(b=>b.onclick=e=>{e.stopPropagation();close()});
-  /* no flash on turning (owner 15:45Z): every picture of the book decoded once, painted decoded from then on (kitImgSync, jbook) */
-  try{if(typeof kitImgSync==="function")kitImgSync(book)}catch(e){}
+  /* no flash on turning (owner 15:45Z): every picture of the book is marked decoding="sync" + eager (kitImgMark, jbook: a hidden page that
+     comes into view paints decoded, never one empty frame); only the sheets in view and the ones a turn can reveal next are decoded
+     ahead (kitImgSync in paint()). F10 renderer-mem: decoding EVERY picture of every page at open (364 pictures in a year-1 Tuần lục)
+     spiked the renderer past 2.6 GB and froze/crashed the page on phones. */
+  try{if(typeof kitImgMark==="function")kitImgMark(book);else if(typeof kitImgSync==="function")kitImgSync(book)}catch(e){}
   restore();
+  try{if(typeof kitNoUnkDom==="function")kitNoUnkDom(root)}catch(e){}
   paint()}
  const sheetEls=()=>book.querySelectorAll(".kbk-sheet");
  function paint(){const els=sheetEls();const n=els.length;els.forEach(el=>{if(el.__curl){el.__curl.destroy();el.__curl=null}});
   els.forEach((el,i)=>{const fl=i<cur;el.style.transform=fl?"rotateY(-180deg)":"";el.style.zIndex=fl?String(i+1):String(n*2-i);
    const near=mode==="spread"?(i>=cur-2&&i<=cur+1):(i>=cur-1&&i<=cur+1);el.style.visibility=near&&!(mode==="single"&&fl)?"visible":"hidden";
+   /* decode ahead: the sheets in view + one more each way (what the next / previous turn shows), once per sheet */
+   if(!el.__kis&&(mode==="spread"?(i>=cur-3&&i<=cur+2):(i>=cur-2&&i<=cur+2))){el.__kis=1;try{if(typeof kitImgSync==="function")kitImgSync(el)}catch(e){}}
    el.classList.remove("turn");el.querySelectorAll(".kbk-sh").forEach(s=>s.style.opacity="")});
   const cast=book.querySelector(".kbk-cast");if(cast){cast.style.opacity="0"}
   book.classList.toggle("closed",mode==="spread"&&cur===0);book.classList.toggle("atend",mode==="spread"&&cur>=sheets.length);
@@ -139,7 +145,7 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  function slideMode(){return mode==="single"&&typeof kitIsPortrait==="function"&&kitIsPortrait()}
  function turnMs(){return slideMode()?KIT_SLIDE_MS:KIT_TURN_MS}
  function setTurn(el,p){const c=el&&el.__curl;if(c)c.set(p)}
- function beginTurn(i,dir){const els=sheetEls();const el=els[i];if(!el)return null;
+ function beginTurn(i,dir){const els=sheetEls();const el=els[i];if(!el)return null;try{document.querySelectorAll("img.kemo.kemo-lean").forEach(e=>kesLeanEnd(e))}catch(e){}/* a running seal lean ends when a page starts to turn: its big clone never rides over the other person's page (owner 24/11 flight) */
   for(let k=i-2;k<=i+2;k++)if(els[k])els[k].style.visibility="visible";if(mode==="single"&&els[i+1]&&i===cur)els[i+1].style.visibility="visible";
   if(mode==="spread")book.classList.remove("closed","atend");
   if(el.__curl){el.style.visibility="hidden";return el}el.__dir=dir||1;
@@ -214,7 +220,8 @@ function kitBook(spec){spec=spec||{};const rm=()=>{try{return reducedMotion()}ca
  {let nF=typeof FIGS!=="undefined"?FIGS.length:0;const iv=setInterval(()=>{if(closed){clearInterval(iv);return}const n=typeof FIGS!=="undefined"?FIGS.length:0;if(n!==nF){nF=n;if(!busy){clearInterval(iv);
   /* load the paintings first, then swap them in (never a figure that is still on its way) */
   const L=(spec.pages||[]).map(p=>p.kind==="person"?p.who:p.fig).filter(Boolean).map(w=>{try{return kitFigOf(w)}catch(e){return""}}).filter(Boolean);
-  Promise.race([Promise.all([...new Set(L)].map(u=>new Promise(r=>{const im=new Image();im.onload=im.onerror=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(r)};im.src=u}))),new Promise(r=>setTimeout(r,4000))]).then(()=>{if(!closed&&!busy)layout(logical,logicalB)})}}},500);setTimeout(()=>clearInterval(iv),60000)}
+  /* F10: bytes only (the sheets in view are decoded by paint(), the rest when they show — kitImgMark) */
+  Promise.race([Promise.all([...new Set(L)].map(u=>new Promise(r=>{const im=new Image();im.onload=im.onerror=()=>r();im.src=u}))),new Promise(r=>setTimeout(r,4000))]).then(()=>{if(!closed&&!busy)layout(logical,logicalB)})}}},500);setTimeout(()=>clearInterval(iv),60000)}
  return {root,next,prev,go,close,get cur(){return cur},get max(){return maxCur},get mode(){return mode},relayout:()=>layout(logical)}}
 
 /* ---------- week data → pages ---------- */
@@ -407,11 +414,15 @@ function kbkArt(facts,ctx){if(typeof evArtOf!=="function")return facts;let w=0;t
    a choice whose effect the game writes as its own sentence logs only that sentence; a short choice gets its context:
    "Nhịn lời mỉa của <tên>", "Cho <tên> mượn bạc", else "<option> (<first sentence of the question>)". c.lg (option) overrides. */
 const KBK_OPT_DROP=/^(Thôi|Đi|Đợi buổi sau \(Qua buổi\)|Đợi sáng mai \(Qua đêm\))$/;
-const KBK_OPT_NAMES=[[/^(Nhịn|Nhẫn nhịn)$/,/mỉa/,n=>`Nhịn lời mỉa của ${n}`],[/^Đáp trả sắc sảo$/,/mỉa/,n=>`Đáp trả lời mỉa của ${n}`],
+const KBK_OPT_NAMES=[[/^(Nhịn|Nhẫn nhịn)$/,/khiêu khích/,n=>`Nhịn lời khiêu khích của ${n}`],[/^Đáp trả sắc sảo$/,/khiêu khích/,n=>`Đáp trả lời khiêu khích của ${n}`],
+ [/^(Nhịn|Nhẫn nhịn)$/,/mỉa/,n=>`Nhịn lời mỉa của ${n}`],[/^Đáp trả sắc sảo$/,/mỉa/,n=>`Đáp trả lời mỉa của ${n}`],
  [/^Cho mượn$/,/mượn/,n=>`Cho ${n} mượn bạc`],[/^Từ chối$/,/mượn/,n=>`Từ chối cho ${n} mượn bạc`],
  [/^Nhận lời xin lỗi$/,/xin lỗi/,n=>`Nhận lời xin lỗi của ${n}`],[/^Lạnh lùng$/,/xin lỗi/,n=>`Lạnh lùng trước lời xin lỗi của ${n}`]];
 function kbkOptWho(m){try{const w=m&&m.who&&m.who.w;if(w&&w[0]==="r"){const v=RV(+w[1]);if(v&&v.name)return v.name}}catch(e){}return""}
-function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;const ctx=kpPlain(m.h||"").replace(/\s+/g," ").trim();const who=kbkOptWho(m);
+/* OB-VERDICT-3 (title of the result card = this name): the visitor's ARRIVAL stage line («Ngoài điện có tiếng xướng: “… giá đáo!”», «… xin cầu kiến»,
+   owner 24/11 ~22:08Z) is not the question — the context starts after it (before: «Nhịn (Ngoài điện có tiếng xướng: “Hoàng hậu … giá đáo)») */
+const KBK_ARRIVE=/^[^“"]*[“"][^”"]*(giá đáo|xin cầu kiến|xin ra mắt)[^”"]*[”"]\s*/;
+function kbkOptName(m,c){const n=String(c.n||"");if(c.lg)return c.lg;let ctx=kpPlain(m.h||"").replace(/\s+/g," ").trim();for(let k=0;k<2&&KBK_ARRIVE.test(ctx);k++)ctx=ctx.replace(KBK_ARRIVE,"").trim();const who=kbkOptWho(m);
  for(const [a,b,f] of KBK_OPT_NAMES)if(who&&a.test(n)&&b.test(ctx))return f(who);
  if(n.split(/\s+/).length>3||(who&&n.includes(who)))return n;
  let s=(ctx.match(/^[^.!?]*/)||[""])[0].trim();if(!s||s.length>90)s=kpPlain(m.t||"").trim();
@@ -466,13 +477,15 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 (function(){if(typeof dawn!=="function")return;const old=dawn;
  dawn=function(){let built;try{built=wkBookPages()}catch(e){console.error(e);return old.apply(this,arguments)}
   S.wkSnap=wkSnap();try{const rt=$("rtoast");if(rt){rt.classList.remove("on");clearTimeout(window.__rtT)}document.body.classList.add("kbk-open")}catch(e){}let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
-  w.classList.add("kbkdawn");w.onclick=null;w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div>`;
+  w.classList.add("kbkdawn");w.onclick=null;w.innerHTML=`<div class="dsky"><i class="lan l1"></i><i class="lan l2"></i><i class="lan l3"></i><i class="sun"></i></div>`;w.classList.remove("kbkskyd");{const sk=w.querySelector(".dsky"),fz=()=>w.classList.add("kbkskyd");if(sk)sk.addEventListener("animationend",fz,{once:true});setTimeout(fz,3600)}
   w.hidden=false;w.classList.toggle("rm",reducedMotion());void w.offsetWidth;w.classList.add("on");
-  const tok=w.__kbkTok={};const bk=kitBook({pages:built.pages,head:built.head,host:w,label:"Tuần lục",onClose:()=>{if(w.__kbkTok!==tok)return;document.body.classList.remove("kbk-open");w.classList.remove("on");setTimeout(()=>{if(w.__kbkTok!==tok)return;w.hidden=true;w.innerHTML=""},reducedMotion()?0:350)}});
+  const tok=w.__kbkTok={};const bk=kitBook({pages:built.pages,head:built.head,host:w,label:"Tuần lục",onClose:()=>{if(window.__kbk===bk)window.__kbk=null;/* F10: a closed book holds nothing (its sheets, pictures and page HTML were kept alive through window.__kbk until the next week) */if(w.__kbkTok!==tok)return;document.body.classList.remove("kbk-open");w.classList.remove("on");setTimeout(()=>{if(w.__kbkTok!==tok)return;w.hidden=true;w.innerHTML=""},reducedMotion()?0:350)}});
   window.__kbk=bk;setTimeout(bell,reducedMotion()?0:1400);try{w.querySelector(".kbk-next").focus({preventScroll:true})}catch(e){}}})();
 
 (function(){const st=document.createElement("style");st.id="kbk-css";st.textContent=`
 .dawn.kbkdawn{padding:0;overflow:hidden;align-items:stretch;justify-content:stretch}
+/* owner 24/11 flight: the sky behind the book is STATIC once the book is open (its sunrise keyframe animation could restart on a page turn = a dark navy flash); same final colours as the end of @keyframes dsky */
+.dawn.kbkdawn.kbkskyd .dsky{animation:none!important;background:linear-gradient(#f7e2c0,#f3c98f 55%,#e9a96a)!important;filter:none!important}
 .kbk{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:10px 10px max(8px,env(safe-area-inset-bottom));box-sizing:border-box;
  --paper:#f3e5c4;--paper2:#ead6ac;--rule:var(--k-seal,#9a2c1c);--cloth:#27324d;--cloth2:#1c2439;font-size:var(--fs,15px);animation:kbkin .9s ease both .5s}
 @keyframes kbkin{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}

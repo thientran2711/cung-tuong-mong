@@ -83,7 +83,7 @@ window.emoBox=emoBox;window.emoCauseArt=emoCauseArt;
 /* owner 21/11 (mark #68): an event that comes FROM a feeling (her outburst «Khóc suốt đêm», «Trốn trong phòng», an NPC's outburst, extreme mood) carries m.emoSeal={k:feeling key,who:person key}: its picture wears that feeling's seal in the TOP-RIGHT corner (kitSceneArt o.mark → live img.kemo) */
 function emoEvMark(m){try{const e=m&&m.emoSeal;if(!e||!e.k)return null;const p=(e.who!=null&&emoByKey(e.who))||S;const set=typeof emoArtSet==="function"?emoArtSet(p):"";let art=typeof feelArt==="function"?feelArt(e.k,set):e.k;
  /* a feeling whose still is not painted yet (khoc) walks to its nearest painted one, so the corner is never an empty disc */
- try{const have=typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.size?KIT_CDNHAVE:null;const FB={khoc:"buon"};for(let i=0;i<4&&have&&!have.has(`img/kit/emo-${set}${art}.webp`);i++){const nk=(typeof feelFb==="function"&&feelFb(art))||FB[art];if(!nk)break;art=nk}}catch(x){}
+ try{const have=typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.size?KIT_CDNHAVE:(typeof kitAssetHas==="function"&&kitAssetHas("img/kit/emo-binh.webp")!==null?{has:x=>kitAssetHas(x)!==false}:null);/* offline-fast: before the CDN index is read, the offline set (assets.json) decides */const FB={khoc:"buon"};for(let i=0;i<4&&have&&!have.has(`img/kit/emo-${set}${art}.webp`);i++){const nk=(typeof feelFb==="function"&&feelFb(art))||FB[art];if(!nk)break;art=nk}}catch(x){}
  let nm="";try{nm=typeof feelName==="function"?feelName(e.k,1):""}catch(x){}nm=nm||EMO[e.k]||"";return{mark:`img/kit/emo-${set}${art}.webp`,markAlt:`Tâm trạng: ${nm}`}}catch(x){return null}}
 window.emoEvMark=emoEvMark;
 (function(){if(typeof kitEvArt!=="function")return;const k0=kitEvArt;kitEvArt=function(m){const r=k0.apply(this,arguments);try{if(r&&r.src&&!r.mark&&m&&m.emoSeal){const x=emoEvMark(m);if(x)return Object.assign({},r,x)}}catch(e){}return r};window.kitEvArt=kitEvArt})();
@@ -164,7 +164,7 @@ function evbDedup(m){try{if(!m||!m.opts||m.opts.length<2||typeof kitHint!=="func
 window.evbDedup=evbDedup;
 /* the option's chance in words, from its own ladder word (what it shows elsewhere in the game) — never a number */
 function evbChance(o){const s=String((o&&(o.x||o.j67))||"")+" "+String((o&&o.n)||"");const w=(s.replace(/<[^>]+>/g,"").match(new RegExp("("+KIT_ODDS_ALT+")(?=\\s|·|$)"))||[])[1]||(o&&o.p!=null?word(o.p):"");
- const lv=w?kitOddsIdx(w):-1;return lv<0?"":lv<=2?"dễ hỏng":lv===3?"hên xui":lv===6?"rất vững, ít khi hỏng":"thường ổn"}
+ const lv=w?kitOddsIdx(w):-1;return lv<0?"":KIT_ODDS[lv]/* WORDING-GAIN: the odds ladder word (BAL.odds.cut), no private chance words */}
 /* how big the option's gain is: the sum of the positive numbers in its success part (fx + thành:) */
 function evbGain(o){let s=0;try{const f=Object.assign({},o.w||{});for(const v of Object.values(f))if(v>0)s+=v;const x=String(o.x||o.j67||"").replace(/<[^>]+>/g,"");const m=x.split(/hỏng:|kèm:/)[0];
  (m.match(/\+\s?\d+/g)||[]).forEach(n=>s+=+n.replace(/\D/g,""))}catch(e){}return s}

@@ -16,7 +16,14 @@ function kStepW(a,b){const w=n=>NUMW[n]||String(n);return b==null||a===b?`${w(a)
 function kRangeW(t){return String(t==null?"":t).replace(/(tiến bộ(?: [^\s+<]+(?: [^\s+<]+)?)?) \+(\d+)(?:\.\.(\d+))?(?![\d.])/g,(m,p,a,b)=>`${p} ${kStepW(+a,b==null?null:+b)}`)
  .replace(/([+\-−])(\d+)\.\.(\d+)/g,"$1$2 đến $1$3")}
 const KNEU=/^(không|không tốn|không mất gì|không được mất gì|chỉ |—|\d+ (khắc|việc)|2 khắc|tốn 2 khắc|chọn )/i;
-function kcls(t){const s=t.replace(/<[^>]+>/g,"").trim();if(!s)return"n";if(/bớt (ghen|thù|oán)|hết (ghen|thù)/i.test(s))return"g";if(KNEU.test(s))return"n";if(KHOST.test(s))return"r";
+/* WORDING-GAIN (owner OD 26/11 ~18:50Z (7)): a stat said in marks «Danh −−» / «Sủng ++» is read like «Danh −2» / «Sủng +2» by every colour / row rule (bands BAL.mark.cut, ONE CORE); display is untouched */
+const kMk=s=>String(s).replace(/(^|[\s:(])([+−])(\2{0,2})(?=$|[\s,;.)·:])/g,(m,a,g,r)=>a+g+(1+r.length));
+/* WORDING-GAIN (RV-161 fail 4, law 4): a static mark line «Danh −−» is the ONLY source of that stat's size when the option carries no typed amount; when the option's own
+   fx (w / l / c) already names the stat, the number printed from BAL wins and the typed mark is dropped here (never two sources). */
+const WG_STAT={"Danh":"danh","Sủng":"sung","Đức":"duc","Sức":"suc","Bạc":"bac","Tâm cơ":"tamco","Tai mắt":"mat","Tài":"tai","Sắc":"sac"};
+function wgDrop(t,...fx){t=String(t||"");if(!t||!/[+−]/.test(t))return t;const has=k=>fx.some(o=>o&&typeof o==="object"&&o[k]);
+ return t.split(/(?<=[,;]) /).filter(i=>{const m=i.replace(/[,;]\s*$/,"").match(/^(?:[^:,;]+: )?(Danh|Sủng|Đức|Sức|Bạc|Tâm cơ|Tai mắt|Tài|Sắc) [+−]{1,3}$/);return !(m&&has(WG_STAT[m[1]]))}).join(" ").replace(/[,;]\s*$/,"")}
+function kcls(t){const s=kMk(t.replace(/<[^>]+>/g,"").trim());if(!s)return"n";if(/bớt (ghen|thù|oán)|hết (ghen|thù)/i.test(s))return"g";if(KNEU.test(s))return"n";if(KHOST.test(s))return"r";
  if(/(\bnàng\b|con nàng|của nàng)/i.test(s)&&(/-\s?\d|sảy|chết|mất|phế|bị phạt|tịch thu|sa sút|không được lật thẻ|rơi/i.test(s)))return"g";
  if(KRED.test(s))return"r";if(KGOOD.test(s))return"g";if(/-\s?\d/.test(s))return"r";return"n"}
 /* one effect token -> coloured span; fmt() spans keep their colour */
@@ -26,7 +33,7 @@ function effList(x,def){const parts=[].concat(x).filter(Boolean).join(" · ");if
 function oddsChip(w){if(!w)return"";w=kitOddsNorm(w);/* no odds word = no roll (ODDS CAP: the ladder has no "sure" word) */const m=String(w).match(ODDW);const k=m?m[1]:w;const lv=KIT_ODDS.indexOf(kitOddsCanon(k))<0?undefined:KIT_ODDS.indexOf(kitOddsCanon(k));const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");
  return `<span class="oc oc${lv==null?2:lv}">${k}</span>${rest?`<span class="ef ${/khó hơn/.test(rest)?"r":/dễ hơn/.test(rest)?"g":"n"}">${rest}</span>`:""}`}
 /* parse a 'word · tốn: … · thành: … · hỏng: … · note' line into kit HTML */
-function kitParse(str){str=String(str||"").trim();if(!str)return"";const segs=str.split(/ · (?![^<]*>)/);let odds="",out=[];let cur=null;
+function kitParse(str){str=String(str||"").trim();if(typeof kitNoUnk==="function")str=kitNoUnk(str);if(!str)return"";const segs=str.split(/ · (?![^<]*>)/);let odds="",out=[];let cur=null;
  for(let s of segs){const plain=s.replace(/<[^>]+>/g,"").trim();const mo=plain.match(new RegExp("^("+KIT_ODDS_ALT+")(?=$|\\s|·)"));
   if(!odds&&mo&&plain.length<=mo[1].length+2){odds=mo[1];continue}
   if(/^Quẻ: /.test(plain)&&odds){odds+=" · "+plain;continue}
@@ -58,7 +65,7 @@ function resultShow(title,before,okHint){if(!S||!before||S.dead)return;const d=R
  t.className="rtoast "+(ok?"ok":"bad");t.innerHTML=`<b class="seal">${ok?"THÀNH":"BẠI"}</b><div class="rt"><b>${title}</b><div class="rd">${d.map(([k,v])=>{const key=(RKEYS.find(x=>x[1]===k)||[])[0];const now=key?(S[key]||0):null;return `<span class="ef ${v>0?"g":"r"}">${k} ${now!=null?`${now-v} → ${now}`:(v>0?"+":"")+v}</span>`}).join('<span class="ksep">·</span>')||'<span class="ef n">không đổi chỉ số</span>'}</div>${why?`<small>${why.length>140?why.slice(0,138)+"…":why}</small>`:""}</div>`;
  void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),3200)}
 function wrapR(name,titleOf,okOf){const f=window[name];if(typeof f!=="function")return;window[name]=function(){const b=rsnap(),ttl=titleOf?titleOf.apply(null,arguments):"";let r;r=f.apply(this,arguments);try{if(b&&(S.logSeq||0)!==b.seq||(b&&RKEYS.some(([k])=>(S[k]||0)!==b[k])))resultShow(ttl,b,okOf?okOf(r,arguments):null)}catch(e){}return r}}
-wrapR("act",i=>deck[i]?deck[i].n:"",()=>window.__lastOk==null?null:!!window.__lastOk);
+wrapR("act",i=>deck[i]?deck[i].n:"",()=>window.__lastOk==null?null:window.__lastOk==="sure"?"sure"/* review/m-fix-3: a sure / inner act seals XONG, never a THÀNH its inner roll did not earn */:!!window.__lastOk);
 wrapR("doAct",(i,k)=>ACT[k]?ACT[k].n:"");
 wrapR("talk",oi=>{try{return talkOpts(curPeople()[popIdx])[oi].n}catch(e){return""}});
 wrapR("servAct",a=>({thuong:"Thưởng",phat:"Phạt",hoi:"Hỏi chuyện",doi:"Đổi người",che:"Che chở",mua:"Mua chuộc",doa:"Dọa tố"})[a]||"");
@@ -91,5 +98,6 @@ function renderHud2(){const el=$("hud2");if(!el||!S)return;const prev=window.__h
 /* keep the Pixi scene the size of the stage whenever the layout changes (not only on window resize) */
 (function(){let ro=null;setInterval(()=>{try{if(PX&&PX.app&&!ro&&window.ResizeObserver){const st=$("stage");ro=new ResizeObserver(()=>{try{PX.app.resize()}catch(e){}try{if(typeof kitStagePause==="function")kitStagePause()}catch(e){}});ro.observe(st)}}catch(e){}},1000)})();
 /* every disabled button says why */
-function guessWhy(b){const t=b.textContent;if(S&&S.dead)return"";const m=t.match(/Bạc -(\d+)/);if(m&&S.bac<+m[1])return `thiếu bạc (cần ${m[1]})`;if(/việc|khắc/.test(t)&&!can(2))return used>=BAL.time.khac?"hết khắc buổi này":"Sức dưới "+(BAL.time.sucMin)+"";if(S.confined)return"đang cấm túc";return"chưa đủ điều kiện"}
+/* review/home-way-nits (law 11): a reason the code KNOWS (data-why, the kit reason attribute: j75 lk, jplrule homeWay, jfx kfWhy) wins over any guess */
+function guessWhy(b){const t=b.textContent;if(S&&S.dead)return"";if(b.dataset&&b.dataset.why)return b.dataset.why;const m=t.match(/Bạc -(\d+)/);if(m&&S.bac<+m[1])return `thiếu bạc (cần ${m[1]})`;if(/việc|khắc/.test(t)&&!can(2))return used>=BAL.time.khac?"hết khắc buổi này":"Sức dưới "+(BAL.time.sucMin)+"";if(S.confined)return"đang cấm túc";return"chưa đủ điều kiện"}
 (function(){const kf=kitFix;kitFix=function(root){kf(root);(root||document).querySelectorAll(".rbtn button:disabled,.btn:disabled,.pcb button:disabled").forEach(b=>{if(b.querySelector(".kwhy"))return;const sm=b.querySelector("small");const w=guessWhy(b);if(!w)return;if(sm)sm.insertAdjacentHTML("afterbegin",`<span class="kwhy">${w}</span> `);else b.insertAdjacentHTML("beforeend",`<small><span class="kwhy">${w}</span></small>`)})}})();

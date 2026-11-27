@@ -4,7 +4,7 @@
    c01..c32) for her as part of the stored roll in localStorage "ctm-nextlife" (d.pid): a reload shows the same one,
    "Đổi thân phận" rolls another. The identity is reserved for the whole game (S.pid sits in S.fidUsed), so no NPC
    consort, tuyển tú intake included, ever gets it or any of its tiers / ages. Her art then follows the consort picker:
-   dress tier = rank (Đáp ứng t1 ... Hoàng hậu t8), age band = her age (BAL.ageBand: 18–25, 26–35, 36–50, 51–64, 65+), same identity for life.
+   dress tier = rank (Đáp ứng t1 ... Hoàng hậu t8), age band = her age (BAL.ageMin + BAL.ageBand), same identity for life.
    While she is a palace maid (cnv) she wears the identity's tier 1. In lãnh cung she (and any NPC consort there) asks for
    the identity's tier "cold" (fig-consort-cNN-tcold-aAA.webp); while that art is missing the nearest file is tier 1. If a file is missing the nearest
    tier/age of the identity is used; with no art at all she keeps the old face. Old saves (no S.pid) are left as they are,
@@ -20,7 +20,7 @@ function pidRoll(d){let K=pidKeys();try{const T=pidTakenNow();if(T){const F=K.fi
 (function(){const r0=nlReroll;nlReroll=function(){PID_AVOID=S&&S.pid||null;try{return r0.apply(this,arguments)}finally{PID_AVOID=null}}})();
 function pidOn(){return !!(S&&S.pid)}
 /* 8 ranks = 8 dress tiers; 4 age bands as the standing rule draws them */
-function pidBand(a){return a==null?null:ageBandIx(a)}/* every band of BAL.ageBand (a65 since art-wiring-1119) */
+function pidBand(a){return a==null?null:ageBandIx(a)}/* every band of BAL.ageBand; an art tag reaches here as figAge = the first age of its band */
 (function(){const t0=figTierOf;figTierOf=function(who){try{
   if(who===S&&S){if(S.pid)return (typeof isSrv==="function"&&isSrv())?1:S.out?-1:Math.min(7,S.rank||0)+1;return t0.apply(this,arguments)}
   if((rivals||[]).includes(who))return who.out?-1:who.queen?8:Math.min(7,who.rank||0)+1}catch(e){}return t0.apply(this,arguments)}})();

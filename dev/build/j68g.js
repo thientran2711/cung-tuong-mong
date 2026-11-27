@@ -29,7 +29,7 @@ EV6("borrowDress","visit",{a:["rv"],pp:()=>{const a=rv6(v=>v.rank<=S.rank+1);ret
  o:X=>[c6("Cho mượn vui vẻ",{r:[[X.A,10]],k:[R6("có khi nàng nổi hơn ngươi ở yến"),R6("đồ có thể bị trả muộn")]}),
   c6("Cho mượn, đòi đáp lễ",{w:{bac:15},r:[[X.A,3]],k:[R6("nàng thấy ngươi tính toán")]}),
   c6("Từ chối khéo",{w:{sac:1},r:[[X.A,-6]]})]});
-EV6("doubtVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Kín đáo")||oan(v,S)>=15);return a==null?null:{a0:a}},w:C=>1,
+EV6("doubtVisit","visit",{a:["rv"],pp:()=>{const a=rv6(v=>T6(v,"Kín đáo")||oan(v,S)>=netTh(v,"oan"));return a==null?null:{a0:a}},w:C=>1,
  v:["{A} sầm sập kéo đến, buộc tội ngươi cài người vào cung nàng.","{A} chặn ngươi giữa đường, hỏi sao cung nữ của ngươi lảng vảng gần cung nàng.","{A} sai người trả lại quà ngươi tặng, nhắn 'không dám nhận'.","{A} khóc với Hoàng hậu rằng ngươi xui Hoàng thượng lạnh nhạt với nàng."],
  o:X=>[c6("Thề thốt minh oan",{c:{suc:-3},p:od(BAL.odb.j68g.odP_3+S.duc/3+S.danh/4),r:[[X.A,8]],w:{danh:1},lr:[[X.A,-6]],lt:[R6("nàng càng nghi")]}),
   c6("Mời nàng tự đến khám xét",{p:od(BAL.odb.j68g.odP_4+S.duc/4),r:[[X.A,12]],w:{duc:1},l:{danh:-2},lt:[R6("nàng bới ra chuyện khác để nói")]}),
@@ -75,7 +75,7 @@ EV6("rumorFavor","rumor",{a:["emp"],pp:()=>({a0:0}),w:C=>1,
  v:["Lời đồn khắp lục cung: Hoàng thượng đã chán ngươi.","Người ta xì xào: ngươi sắp được tấn phong.","Cung nữ các cung đồn ngài hay hỏi đến ngươi khi uống rượu.","Có kẻ bảo thẻ bài của ngươi bị Kính sự phòng giấu xuống dưới."],
  o:X=>[c6("Mua tin Kính sự phòng",{pw:1,c:{bac:-20},p:od(BAL.odb.j68g.odP_9+eyes(S)*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("hắn ậm ừ")],l:{bac:-5},ok:()=>`Thái giám Kính sự phòng nói thật: Sủng của ngươi đang ${S.sung>=BAL.sungLv.kinh[2]?"rất cao":S.sung>=BAL.sungLv.kinh[1]?"khá":S.sung>=BAL.sungLv.kinh[0]?"thấp":"rất thấp"}${S.block?"; có người chặn thẻ của ngươi":""}.`}),
   c6("Làm như không nghe",{w:{duc:1},k:[R6("không biết thật hư")]}),
-  c6("Tìm kẻ tung tin",{c:{suc:-5},p:od(BAL.odb.j68g.odP_10+eyes(S)*6),w:{danh:1},wt:[G6("biết ai đứng sau")],l:{suc:-2},lt:[R6("không ra ai")],ok:()=>{const L=liveRivals(true).filter(v=>{try{return bandOf(danger(v,S))>=1}catch(e){return false}});const v=L.length?pick(L):null;if(v){evStory(v,BAL.eff.j68g.evOk,"tung tin đồn về ngươi");return `Lời đồn bắt nguồn từ người của ${v.name}. Chứng cứ ${balSg(BAL.eff.j68g.evOk)}.`}return "Chỉ là lời đồn vô hại của đám cung nhân rảnh việc."}})]});
+  c6("Tìm kẻ tung tin",{c:{suc:-5},p:od(BAL.odb.j68g.odP_10+eyes(S)*6),w:{danh:1},wt:[G6("biết ai đứng sau")],l:{suc:-2},lt:[R6("không ra ai")],ok:()=>{const L=liveRivals(true).filter(v=>{try{return bandVT(v,S)>=1}catch(e){return false}});const v=L.length?pick(L):null;if(v){evStory(v,BAL.eff.j68g.evOk,"tung tin đồn về ngươi");return `Lời đồn bắt nguồn từ người của ${v.name}. Chứng cứ ${balSg(BAL.eff.j68g.evOk)}.`}return "Chỉ là lời đồn vô hại của đám cung nhân rảnh việc."}})]});
 EV6("lotusSeason","sea",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{a0:a}},w:C=>C.sea==="Hạ"&&C.wx.f!==3?1.6:0,
  v:["Sen Thái Dịch trì nở trắng hồ; {A} rủ ngươi chèo thuyền hái sen.","Sương sớm đọng trên lá sen, {A} bày trò hứng sương pha trà dâng Hoàng thượng.","{A} muốn cùng ngươi làm bánh hạt sen mời Thái hậu.","Đêm hè, {A} thả đèn hoa sen trên hồ, cầu duyên con cái."],
  o:X=>[c6("Đi cùng nàng",{c:{suc:-5},r:[[X.A,7]],w:{sac:1}}),

@@ -1,0 +1,4 @@
+{"_note":"LIVE game measured with Playwright 755x1000 DSF2 (live_phone755.js 'xy:401,529;130,865;495,750' = Dư đồ > Cảnh Phúc > chính điện card > Đi một mình), 22/11. Game code untouched. Stage is NEARLY SQUARE; room = PIXI cover, x anchor 70 %, y anchor 50 %.",
+ "screen":{"w":755,"h":1000},"stage":{"x":4,"y":162.73,"w":747,"h":749.27},"picture":{"x":5,"y":163.73,"w":745,"h":747.27,"anchor_x":0.70,"anchor_y":0.5,"mode":"cover"},
+ "fig":{"visible_h":566,"feet_y_screen":831,"centre_x_screen":641.5,"gap_to_stage_bottom":81,"note":"only ONE large figure is shown at the right edge (c20 file 232x566 box at x525.3); other people are a '+N' chip"},
+ "tag":{"top_y_screen":834,"line_h":15}}

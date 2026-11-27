@@ -206,7 +206,7 @@ let WT=null;
 let FLIPQ=new WeakSet();
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
-function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
+function step(){try{if(!S||S.dead||!nfOn()){sleep();return}heal();const x=X();if(guest()&&S.nfW===day()&&S.nfFin!==day())finLate();if(!x||x.st==="done"){if(!(guest()&&S.nfW===day()&&S.nfFin!==day()))sleep();return}
  if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&(m.pid==="nfsum"||FLIPQ.has(m))))return;
   /* co-op host: the draw is held for the friend's Kỳ nguyệt answer (jcoopworld CW.cyHold; cyFree turns the card when it comes): the choice
      waits for that card, at most BAL.coop.cyWaitMs (she never answers: the night goes on without a card, as the live night did) */
@@ -264,11 +264,13 @@ const TM={t0:0,id:null,stop(){if(this.id){clearInterval(this.id);this.id=null}th
   this.id=setInterval(()=>{try{const x=X();if(!x||x.me!==undefined){this.stop();return}const left=E-(Date.now()-this.t0);
    const el=document.querySelector("#mb .kchips.kctm");if(el&&typeof kitCoopClock==="function")el.outerHTML=kitCoopClock({left:Math.max(0,left),len:E});   /* the kit text pass drops the wrapper id: find the chip row itself */
    if(left<=0){this.stop();const i=Q.findIndex(m=>m&&m.pid==="nfch");
-    if(i===0&&!$("modal").hidden){const j=Q[0].opts.findIndex(c=>c.n==="Thôi");chooseM(j)}else{if(i>=0)Q.splice(i,1);mine(null);try{showModal();render()}catch(e){}}}}catch(e){console.error(e)}},250)}};
+    const j=i===0&&!$("modal").hidden?Q[0].opts.findIndex(c=>c&&c.n==="Thôi"):-1;/* flight-choose-guard: never chooseM(−1) */if(j>=0)chooseM(j);else{if(i>=0)Q.splice(i,1);mine(null);try{showModal();render()}catch(e){}}}}catch(e){console.error(e)}},250)}};
 if(typeof showModal==="function"){const sm0=showModal;showModal=function(){
+ /* (review/sangbuoi-held-fix) except the «Tin trong cung» card jdayq holds the queued, unstarted flip for (window.dqNewsPass): it paints first,
+    then the flip plays — else the two waited on each other ~80 s (Robot M4) */
  /* the scene just closed and the choice is due: it goes up first (showChoice puts it at the front), never a card queued meanwhile
     (a reward, a person met) in the ≤250 ms before step's next tick (owner OD 16/11 22:45Z: the choice right after the scene) */
- try{const x=S&&nfOn()?X():null;if(x&&x.st==="open"&&x.me===undefined&&!x.dlg){if(scene()){if(!window.__bot)return}else showChoice()}}catch(e){console.error(e)}
+ try{const x=S&&nfOn()?X():null;if(x&&x.st==="open"&&x.me===undefined&&!x.dlg&&!(typeof window.dqNewsPass==="function"&&window.dqNewsPass())){if(scene()){if(!window.__bot)return}else showChoice()}}catch(e){console.error(e)}
  /* the choice is due but the flip scene still plays: no other dialog opens under / over it (a card queued before the flip, a reward, a rumour);
     step() puts the choice up the moment the scene closes and the rest follow it (night-final #7) */
  const r=sm0.apply(this,arguments);try{if(Q[0]&&Q[0].pid==="nfch"&&!$("modal").hidden)TM.start()}catch(e){}return r}}
@@ -319,8 +321,17 @@ const rd0=render;render=function(){try{nfActs()}catch(e){}const r=rd0.apply(this
 function hold(){S.buoi=B4();RR=day();try{if(used>=4)used=3}catch(e){}/* no j6 auto "Sang ngày mới" while the choice / a dialog is open */try{render()}catch(e){}showSoon()}
 function herNight(){S.buoi=B4();if(CO())RR=day();try{if(used>=4)used=3}catch(e){}/* no auto "Sang ngày mới" (j6 used>=4) between her night dialogs; jnight spends the day after nightFx */try{if(S.ntk&&S.ntk.w===day()&&S.ntk.who==="me")S.ntk=null}catch(e){}
  IN=1;try{nightScene()}finally{IN=0}try{render()}catch(e){}showSoon()}
+/* SOFT-LOCK GUARD (review/fix-evening-softlock, ROBOT-10 bug A): S.nfX is SAVED but what releases it is not — the choice card (Q pid "nfch",
+   no PEND builder: deserQ drops it on reload) and her steal game (jsmg BUSY, the j82 #kg82 layer). After a reload (or a game layer closed without
+   its onDone) S.nfX stayed {st:"open",dlg:1} or {st:"mg"} for ever: every «Sang ngày mới» went to hold() and the day never turned (Q 0, no modal).
+   heal(): a choice whose card is gone is shown again (dlg cleared → step → showChoice, her 10 s clock anew); a steal game that is no longer on
+   screen counts as over without a rung (st back to "open"; her pick x.me is kept, the one resolve runs). Runs at each press and each step tick. */
+function heal(){try{const x=X();if(!x)return;
+ if(x.st==="mg"&&!(typeof window.stealMgBusy==="function"&&window.stealMgBusy()))x.st="open";
+ if(x.st==="open"&&x.me===undefined&&x.dlg&&!Q.some(m=>m&&m.pid==="nfch"))x.dlg=0}catch(e){console.error(e)}}
+window.nfHeal=heal;
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
- const d=day();
+ const d=day();heal();
  if(S.nfC!==d){S.nfC=d;
   if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait",at:Date.now()};FLIPQ=new WeakSet();if(S.nfN!==d&&!flippedToday()){const q0=new Set(Q);realFlip();FLIPQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"&&!q0.has(m)))}}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}

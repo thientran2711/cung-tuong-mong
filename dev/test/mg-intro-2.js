@@ -10,11 +10,11 @@ const [VW,VH]=(process.argv[3]||'755x1000').split('x').map(Number);let bad=0;con
   const st=document.createElement('style');st.textContent='.kmov{display:none!important}';document.head.appendChild(st);try{if(window.KMQ)KMQ.length=0}catch(e){}});
  await p.waitForTimeout(800);
  const kinds=await p.evaluate(()=>Object.keys(KG82_KIND).filter(k=>KG82_KIND[k].n));
- const scan=()=>p.evaluate(()=>{const bx=kg82Box();if(!bx)return null;const img=bx.querySelector('.kgr-ev img');return{ev:!!img,evh:img?Math.round(img.getBoundingClientRect().height):0,demo:!!bx.querySelector('.kgr-demo'),bang:bx.querySelectorAll('.kpst .kfx').length,kb:!!bx.querySelector('.kgr .kb'),go:!!bx.querySelector('.kgr-go'),tut:!!bx.querySelector('#kgrtut'),
+ const scan=()=>p.evaluate(()=>{const bx=kg82Box();if(!bx)return null;const img=bx.querySelector('.kgr-ev img');return{ev:!!img,evh:img?Math.round(img.getBoundingClientRect().height):0,demo:!!bx.querySelector('.kgr-demo'),bang:bx.querySelectorAll('.kpst .kfx').length,kb:!!bx.querySelector('.kgr .kb'),labs:[...bx.querySelectorAll('.kgr .krl')].map(x=>x.textContent.trim().toLowerCase()).join('|'),go:!!bx.querySelector('.kgr-go'),tut:!!bx.querySelector('#kgrtut'),
    chua:/màn thi chưa rõ/.test(bx.innerText)}});
  const rows=[];
  for(const k of kinds){await p.evaluate(k=>{try{kg82Close()}catch(e){}Q.length=0;S.mg=null;playArt({art:k,title:'t',onDone(){}})},k);await p.waitForTimeout(450);const r=await scan();rows.push([k,r]);
-  ok(r&&r.ev&&!r.demo&&r.bang>=1&&!r.kb&&r.go,`playArt ${k}: event picture, no demo picture, rules behind «!»`,r)}
+  ok(r&&r.ev&&!r.demo&&r.bang>=1&&r.labs==='chạm|được'&&r.go,`playArt ${k}: event picture, no demo picture, rules behind «!», only «Chạm» + «Được» open`,r)}
  await p.evaluate(()=>{try{kg82Close()}catch(e){}Q.length=0;startContest({art:'tho',title:'Tết Thất tịch',fk:'thattich',luck:30,prep:8,onDone(){}})});await p.waitForTimeout(900);
  const c=await scan();const evsrc=await p.evaluate(()=>(document.querySelector('.kgr-ev img')||{}).src||'');
  ok(c&&c.ev&&/ev-fest-thattich/.test(evsrc)&&!c.demo&&c.bang===3&&!c.chua&&c.go&&c.tut,'startContest (Thất tịch): festival picture, 3 «!» (luật / phần của ngươi / đối thủ), no long rows in view',Object.assign({evsrc},c));

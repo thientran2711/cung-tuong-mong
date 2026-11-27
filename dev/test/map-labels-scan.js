@@ -23,7 +23,7 @@ for(const sz of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=sz.split('x
     let st={};try{st=k==='(empty)'?{why:'cung trống',empty:1}:accState(k)}catch(e){}
     const grey=s.classList.contains('mgrey');const unreach=!!(st.empty||(st.why&&!st.here));
     const meta=s.querySelector('.mmeta');
-    return{ch,ld,k,title:s.title||'',name:l?l.textContent.trim().slice(0,22):'',vis:!!ub,u:ub,A,lead:!!s.querySelector('.mlead'),mv:s.style.translate||'',grey,unreach,kind:st.kind||'',empty:!!st.empty,metaTxt:meta?meta.textContent.trim():'',hide:s.classList.contains('kmhide'),
+    return{ch,ld,k,title:s.title||'',name:l?l.textContent.trim().slice(0,22):'',vis:!!ub,u:ub,A,lead:!!s.querySelector('.mlead'),mv:(s.style.getPropertyValue('--kmx')||'')+' '+(s.style.getPropertyValue('--kmy')||''),grey,unreach,kind:st.kind||'',empty:!!st.empty,metaTxt:meta?meta.textContent.trim():'',hide:s.classList.contains('kmhide'),
      dist:ub?Math.round(Math.hypot((ub[0]+ub[2])/2-A[0],(ub[1]+ub[3])/2-A[1])):0,inMap:!!ub&&ub[0]>=mapr.left-1&&ub[2]<=mapr.right+1&&ub[1]>=mapr.top-1&&ub[3]<=mapr.bottom+1,
      fs:l?parseFloat(getComputedStyle(l).fontSize)*(parseFloat(getComputedStyle(l).zoom)||1):0}});
    const ov=(a,b)=>Math.min(a[2],b[2])-Math.max(a[0],b[0])>1&&Math.min(a[3],b[3])-Math.max(a[1],b[1])>1,inR=(r,p,pad)=>p[0]>=r[0]-pad&&p[0]<=r[2]+pad&&p[1]>=r[1]-pad&&p[1]<=r[3]+pad;

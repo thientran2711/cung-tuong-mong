@@ -30,7 +30,7 @@ function succSup(){const r={houses:[],pow:0,mil:false,milArmy:false,milGuard:fal
   const vg=(S.men||[]).find(m=>m.alive&&m.role==="Vương gia");if(vg){r.vg=vg;r.vgAlly=(vg.tinh||0)>=60||S.vgAlly===vg.id}}catch(e){}
  r.mil=r.milArmy||r.milGuard;
  try{const set=new Set();const f=typeof facOf==="function"?facOf(S):null;if(f&&typeof facMembers==="function")facMembers(f).forEach(x=>{if(x!==S&&x.alive&&!x.out)set.add(x)});
-  liveRivals(true).forEach(v=>{if((v.rel||0)>=40)set.add(v)});r.allies=set.size}catch(e){}
+  liveRivals(true).forEach(v=>{if(aff(v,S)>=netTh(v,"than"))set.add(v)});r.allies=set.size}catch(e){}
  r.thOK=!!S.thDead||(S.th||0)>=BAL.succN.cTh;r.thB=!!S.thDead||(S.th||0)>=BAL.succN.thB;r.thOpp=!S.thDead&&(S.th||0)<BAL.succN.thOpp;return r}
 function succOdds(p,son,U){U=U||succSup();if(p==="b"){let o=35+U.pow/5+((S.danh||0)-BAL.succN.bDanh)/2+((S.tamco||0)-BAL.succN.bTam)/3+U.allies*3+(U.thB?8:U.thOpp?-10:0)+(U.vgAlly?5:U.vg?-8:0);return Math.round(cl(o,SUCC.b.min,SUCC.b.max))}
  let o=20+U.pow/6+((S.danh||0)-BAL.succN.cDanh)/2+((S.tamco||0)-BAL.succN.cTam)/2+U.allies*2+(U.milArmy&&U.milGuard?8:0)+(U.vgAlly?8:U.vg?-12:0)-((son&&son.age>=BAL.succN.bAge)?10:0);return Math.round(cl(o,SUCC.c.min,SUCC.c.max))}
@@ -76,14 +76,14 @@ PEND.succ0=function(){const E=S.succ,son=succSon();if(!E||!son)return null;const
 <p>${S.thDead?"Thái hậu đã băng hà.":`Thái hậu (sắp thành Thái hoàng thái hậu) với ngươi: ${S.th||0}.`} ${U.vg?(U.vgAlly?`${succMN(U.vg)} đứng về phía ngươi.`:`${succMN(U.vg)} đang dòm ngó ngôi báu.`):""}</p>`;
  const o=[
   {n:`Để ${sn} lên ngôi, làm ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}`,fx:{},x:`thành: ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}, an hưởng ở Từ Ninh cung`,need:[],go:()=>succBegin("a")},
-  {n:"Buông rèm nhiếp chính",fx:{},x:`${word(pb)} · tốn: ${fmt({bac:-100,suc:-10})} · thành: buông rèm nghe chính đến khi tân đế ${BAL.age.reign} tuổi, Danh +8 · hỏng: đại thần không phục, Danh -10, chỉ làm Hoàng thái hậu · kèm: tân đế lớn lên sinh oán vì ngươi giữ quyền`,need:nb,go:()=>succTry("b")},
-  {n:"Tự lên ngôi Nữ đế",fx:{},x:`${word(pc)} · tốn: ${fmt({bac:-300,suc:-20})} · thành: lên ngôi Nữ đế, đổi niên hiệu · hỏng: binh biến bại lộ, bị phế, ban chết · kèm: vương gia, đại thần dễ khởi binh, thích khách rình rập`,need:nc,go:()=>succTry("c")}];
+  {n:"Buông rèm nhiếp chính",fx:{},x:`${word(pb)} · tốn: ${fmt(BAL.eff.j99succ.costB)} · thành: buông rèm nghe chính đến khi tân đế ${BAL.age.reign} tuổi, Danh ${balSg(BAL.eff.j99succ.danhB)} · hỏng: đại thần không phục, Danh ${balSg(BAL.eff.j99succ.danhBFail)}, chỉ làm Hoàng thái hậu · kèm: tân đế lớn lên sinh oán vì ngươi giữ quyền`,need:nb,go:()=>succTry("b")},
+  {n:"Tự lên ngôi Nữ đế",fx:{},x:`${word(pc)} · tốn: ${fmt(BAL.eff.j99succ.costC)} · thành: lên ngôi Nữ đế, đổi niên hiệu · hỏng: binh biến bại lộ, bị phế, ban chết · kèm: vương gia, đại thần dễ khởi binh, thích khách rình rập`,need:nc,go:()=>succTry("c")}];
  return{t,o,who:Object.assign(pMe(),{rw:E.dm?"Hoàng hậu · đích mẫu":RANKS[S.rank].n}),cls:"succ"}};
 function succCanPick(p){const son=succSon();return !succNeeds(p,son,succSup()).some(n=>!n.ok)}
 function succTry(p){if(!succCanPick(p))return succResume();
- const son=succSon(),o=succOdds(p,son);if(p==="b"){apply({bac:-100,suc:-10});if(roll(o)){apply({danh:8});log(`<b class="g">Ngươi buông rèm nhiếp chính cho tân đế ${succSN(son)} (${word(o)}): thành.</b>`);return succBegin("b")}
-  apply({danh:-10});log(`<span class="r">Ngươi xin buông rèm nhiếp chính (${word(o)}): đại thần không phục, quỳ ngoài điện ba ngày. Ngươi đành lui về làm Hoàng thái hậu.</span>`);return succBegin("a",1)}
- apply({bac:-300,suc:-20});if(roll(o)){log(`<b class="g">Ngươi tự lên ngôi Nữ đế (${word(o)}): thành.</b>`);return succBegin("c")}
+ const son=succSon(),o=succOdds(p,son);if(p==="b"){apply(Object.assign({},BAL.eff.j99succ.costB));if(roll(o)){apply({danh:BAL.eff.j99succ.danhB});log(`<b class="g">Ngươi buông rèm nhiếp chính cho tân đế ${succSN(son)} (${word(o)}): thành.</b>`);return succBegin("b")}
+  apply({danh:BAL.eff.j99succ.danhBFail});log(`<span class="r">Ngươi xin buông rèm nhiếp chính (${word(o)}): đại thần không phục, quỳ ngoài điện ba ngày. Ngươi đành lui về làm Hoàng thái hậu.</span>`);return succBegin("a",1)}
+ apply(Object.assign({},BAL.eff.j99succ.costC));if(roll(o)){log(`<b class="g">Ngươi tự lên ngôi Nữ đế (${word(o)}): thành.</b>`);return succBegin("c")}
  log(`<span class="r">Ngươi mưu lên ngôi (${word(o)}): binh biến bại lộ.</span>`);succEnd("c_fail")}
 /* ---------- the epilogue: 3 chapters per path ---------- */
 function succEnemy(){try{const L=liveRivals(false).filter(v=>v.alive&&!v.out&&!v.queen&&(typeof kitKnownName!=="function"||kitKnownName(v)));if(!L.length)return null;return L.slice().sort((a,b)=>(a.rel||0)-(b.rel||0))[0]}catch(e){return null}}

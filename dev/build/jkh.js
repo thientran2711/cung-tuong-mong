@@ -51,7 +51,7 @@ function khPgRisk(p){const G=BAL.pgRisk;if(!G||!p)return[0,""];const why=[];let 
 function khStat(k){try{(window.__khN=window.__khN||{})[k]=(window.__khN[k]||0)+1}catch(e){}if(typeof rtStat==="function"&&/^ng_/.test(k))rtStat(k)}
 /* is this NPC driven to use a 'lệch sổ' birth against the mother? (self-interest: her own son vs a son, a rival for the same rank, deep dislike) */
 function khMotive(v,m,k){if(!v||!m||v===m)return false;const M=BAL.preT.mot;const vs=(v===S?S.kids:v.kids||[]).some(x=>x.alive&&x.sex==="m");
- return (vs&&k.sex==="m")||(Math.abs(rkOf(v)-rkOf(m))<=M.rkGap&&aff(v,m)<M.aff)||aff(v,m)<=M.hate||(v.oan||0)>=M.oan&&m===S}
+ return (vs&&k.sex==="m")||(Math.abs(rkOf(v)-rkOf(m))<=M.rkGap&&aff(v,m)<0)||aff(v,m)<=netTh(v,"ghet")||(v.oan||0)>=netTh(v,"thu")&&m===S}
 /* a birth that does not fit the book becomes a public fact */
 function khLech(m,k,pre){k.dateOff=pre?"pre":"od";khStat("lech");const P=BAL.preT,w=pre?"sinh non":"sinh quá ngày";
  if(m!==S){k.dateKnown=1;try{noteAdd(m.id,`${k.name} ${w}, ngày sinh lệch với đêm thị tẩm ghi trong sổ Kính sự phòng`)}catch(e){}if(!S.dead&&!S.out)evA(S,m,P.evi)}
@@ -132,7 +132,7 @@ window.khWorld=function(){let ev="";if(!S||S.dead||khGuest())return ev;
  const moms=[S].concat(liveRivals(true));
  for(const m of moms){if(m!==S&&(!m.alive||m.out))continue;if(m===S&&S.out)continue;for(const k of (m===S?S.kids:m.kids)||[]){if(!k.alive||!k.dateOff||k.tfOk||(k.age||0)>P.ageMax)continue;
   if(m===S&&S.rt&&S.rt.ng)break;
-  const Lc=liveRivals(true).filter(v=>v!==m&&v.alive&&!v.out&&khMotive(v,m,k)&&evG(v,m)>=P.accEv&&(typeof rtGateT!=="function"||rtGateT(v,m,"accuse").ok));
+  const Lc=liveRivals(true).filter(v=>v!==m&&v.alive&&!v.out&&khMotive(v,m,k)&&chOK(v,m,"tt")&&(typeof rtGateT!=="function"||rtGateT(v,m,"accuse").ok));
   const o=Lc.length?npcWhy("khAcc",{m,L:Lc},()=>roll(P.accP)):null;const acc=o&&o.who;/* npc-purpose G2: the accuser = the schemer whose grudge pushes her most; accP = the success */
   if(!o)continue;
   if(m===S){khStat("lech_set");if(typeof rtNgSet==="function"){rtNgSet(k,acc.id);ev+=`${acc.name} vốn ${o.why}, cầm chuyện ${k.name} lệch ngày trong sổ Kính sự phòng, tâu xin trích huyết nghiệm thân. `}}
@@ -143,8 +143,8 @@ window.monthTick=monthTick;
 const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||S.dead||!S.preg||S.fake||S.khInd)return;const o=khRecOff(S);if(o<1||S.preg<9-o||S.preg>8)return;deck.unshift(P3C.drug(S))}catch(e){console.error(e)}};/* AG-ALL-2e2: ONE builder P3C.drug(p) — her card and an NPC's cx3:drug */
 if(typeof rtCards==="function"){const r0=rtCards;rtCards=function(){let A=r0.apply(this,arguments);try{if(!rtRoad()||S.out||(window.__bot&&!window.__rtGo))return A;
  for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&x.dateOff&&x.dateKnown&&!x.tfOk&&(x.age||0)<=P.ageMax);if(!k)continue;if(A.some(c=>c.rtId==="ngn_"+v.id))continue;
-  const ev=typeof evG==="function"?evG(S,v):0;
-  A.push(rtCard({id:"ngl_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`${k.name} của ${v.name} ${k.dateOff==="pre"?"sinh non":"sinh quá ngày"}, lệch ngày trong sổ Kính sự phòng.`,art:RT_ART.con,k:BAL.route.k.ngn_,need:[[`chứng cứ về ${v.name} (có ${ev}/${P.accEv})`,ev>=P.accEv]],
+  const ev=typeof chHave==="function"?chHave(S,v,"tt"):0,evN=typeof chNeed==="function"?chNeed(v,"tt"):P.accEv;
+  A.push(rtCard({id:"ngl_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`${k.name} của ${v.name} ${k.dateOff==="pre"?"sinh non":"sinh quá ngày"}, lệch ngày trong sổ Kính sự phòng.`,art:RT_ART.con,k:BAL.route.k.ngn_,need:[[`chứng cứ tội tư thông về ${v.name} (có ${ev}/${evN})`,ev>=evN]],
    x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>{khStat("lech_me");rtPush("rtNgNpc",{v:v.id,k:k.name})}}));break}}catch(e){console.error(e)}return A}}
 /* ---- shown (spec 4.6, review r1 F2): the HUD Sức cell reads "N/M" (every writer of the cell goes through hudFmt); the Sức help panel lists
    Sức · Sức tối đa · Sức khỏe in kit rows (HXNOW); the person card's age line (her card, consorts' cards) carries the body in words ---- */
@@ -162,5 +162,5 @@ if(typeof rvCard==="function"){const r0=rvCard;rvCard=function(v){let h=r0.apply
 const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S){khInit(S);(rivals||[]).forEach(khInit)}}catch(e){}return r};
 const z0=deser;deser=function(){const r=z0.apply(this,arguments);try{if(S){khInit(S);(rivals||[]).forEach(v=>{khInit(v);khFit(v)});khFit(S)}}catch(e){}return r};
 /* F5: the 'lệch sổ' fact in every ledger sync (her and NPCs) */
-if(typeof deedSync==="function"){const ds0=deedSync;deedSync=function(p){ds0.apply(this,arguments);try{khDeed(p)}catch(e){}}}
+if(typeof deedSync==="function"){const ds0=deedSync;deedSync=function(p){ds0.apply(this,arguments);try{if(!(typeof deedSyncGuest==="function"&&deedSyncGuest(p)))khDeed(p)}catch(e){}}/* co-op: host-only, as jtruth deedSync */}
 })();

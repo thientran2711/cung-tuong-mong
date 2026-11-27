@@ -15,7 +15,7 @@ function sceneImg(base){try{if(!base||!S)return base;const se=SCN_SEAS[SEASON[(S
 /* SCN_FALL: a place whose own picture is not live yet shows the stand-in's picture (base -> stand-in base, its own seasons/floor); scnLive(pic) probes the file
    once and registers it in SCN_HAVE the moment it exists, so the real picture takes over with no code change (review/places-wire-nvp-tn) */
 const SCN_FALL={};
-function scnLive(pic){try{const im=new Image();im.onload=()=>{try{SCN_HAVE[pic]=1;if(typeof scnSync==="function")scnSync();if(typeof PX==="object")PX.key=""}catch(e){}};im.src="img/"+pic+".webp"}catch(e){}}
+function scnLive(pic,n){try{/* offline-fast: only probe a picture the offline set lists; manifest not read yet → ask again in 2 s (max ~1 min) */const hv=typeof kitAssetHas==="function"?kitAssetHas("img/"+pic+".webp"):true;if(hv===false)return;if(hv===null){if((n||0)<30)setTimeout(()=>scnLive(pic,(n||0)+1),2000);return}const im=new Image();im.onload=()=>{try{SCN_HAVE[pic]=1;if(typeof scnSync==="function")scnSync();if(typeof PX==="object")PX.key=""}catch(e){}};im.src="img/"+pic+".webp"}catch(e){}}
 /* review/place-art (coordinator 15/11): own paintings for the two places that borrowed another place's picture.
    Tân Giả khố (j42 placeOf sc "tgk", was the lãnh cung painting "lc") = tan-gia-kho-<mùa>-<buổi>; the maid's room (j42 placeOf "home"
    while isSrv(), sc "maid", was her consort room tam-cung-dem) = phong-cung-nu-<mùa>-<buổi>. Floor line + open-floor anchor read from

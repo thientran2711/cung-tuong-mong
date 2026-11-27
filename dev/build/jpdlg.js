@@ -11,6 +11,13 @@
    popup-fullbody-r1 #3, OD:L963). kitPersonDlgFit(root) lays the figure (feet on the column floor, head under the chip). */
 function kitPersonDlg(o){o=o||{};try{
  const kind=o.kind||"guide";const q=o.p||{};
+ /* owner 25/11 ~06:55Z (OD, whole family, law 11): a PERSON (figure + name + «X dặn») only when that person really announces her own business;
+    every other frame (mechanics tips, feature intros, system notices, coach hints) passes noPerson:true = the SAME frame (--kpw x --kph), the SAME two columns,
+    the left column holds the subject / event picture instead of a figure, no name chip, no «ma ma dặn». One kit part, no per-screen variant. */
+ if(o.noPerson){const pic0=o.pic&&o.pic.src?kitSceneArt(o.pic.src,o.pic.lab||"",{shape:"wide",cap:!!o.pic.lab}):"";
+  const btns0=(o.btns||[]).map(b=>`<button type="button" class="kbtn${b.alt?" alt":""}" data-ktut="${b.k}">${b.t}</button>`).join("");
+  return `<div class="dlg kpanel kesdlg kpdlg kpdnp${o.cls?" "+o.cls:""}" data-kind="${kind}" data-kpd="nop">${kpHeader(kind,o.title||"",o.sub||"")}`+
+   `<div class="kpdb"><div class="kpdr">${pic0?`<div class="kdlgart kdpban">${pic0}</div>`:""}<div class="kpdt">${o.html||""}</div></div></div>${btns0?`<div class="kpopts kpdo">${btns0}</div>`:""}</div>`}
  const fig=kitStageFig(q,{src:o.fig,cap:false});
  let nm="";try{nm=o.name||(typeof kitName==="function"&&(q.__kp||q.name!==undefined||q.rank!==undefined)?kitName(q.__kp||q,{cap:true}):"")||""}catch(e){}
  if(!nm&&q.rw)nm=`<b class="kname" style="--rc:${q.col||"#8a7350"}">${q.rw}</b>`;
@@ -65,7 +72,10 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg .kpdt .ktut-do{color:var(--gold);font-weight:600}
 /* KIT 56.15: the buttons sit at the bottom of the RIGHT column only (over its free corner), so the figure column runs from the name tag to the frame's bottom edge; the right column keeps --kpbh free under its text */
 .kpdlg{position:relative}.kpdlg>.kpdb{padding-bottom:12px}.kpdlg .kpdr{padding-bottom:var(--kpbh,0px)}
-.kpdlg>.kpopts{position:absolute;right:14px;bottom:12px;left:auto;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:0;margin:0;min-height:0;max-width:calc(100% - var(--kpdcw,38%) - 40px)}
+.kpdlg>.kpopts{position:absolute;z-index:2;right:14px;bottom:12px;left:auto;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:0;margin:0;min-height:0;max-width:calc(100% - var(--kpdcw,38%) - 40px)}
 .kpdlg>.kpopts .kbtn{min-height:40px;padding:6px 16px;font-size:.86rem}
+/* no-person variant = KIT §8.1 compact: same width, frame height = its content (picture + text + button, no void), capped at --kph (law 10) */
+html body .dlg.kpanel.kpdlg.kpdnp{height:auto;min-height:0;max-height:var(--kph)}
+.kpdlg.kpdnp>.kpdb{flex:0 1 auto;grid-template-columns:minmax(0,1fr);padding-bottom:4px}.kpdlg.kpdnp>.kpopts{position:static;max-width:none;padding:0 14px 12px;justify-content:flex-end}.kpdlg.kpdnp .kpdr{padding-bottom:0}.kpdlg.kpdnp .kdpban>.ksart{height:clamp(120px,calc(24*var(--kvh,1dvh)),230px)}
 /* kv3:.kv1 */:where(.kv1) .kpdlg>.kpdb{grid-template-columns:var(--kpdcw,clamp(84px,32%,140px)) minmax(0,1fr);gap:9px;padding:8px 10px 2px}:where(.kv1) .kpdlg .kpdt{font-size:.84rem}:where(.kv1) .kpdlg>.kpopts{right:10px;bottom:10px}
 `;document.head.appendChild(st)})();

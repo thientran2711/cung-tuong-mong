@@ -53,6 +53,13 @@ if IMG_BASE:
         if any(x.startswith(('.', '_')) for x in parts[1:]) or any(x.startswith('old') for x in parts[1:-1]): continue
         g = 'fx' if k.startswith('img/fx/') else 'fig' if re.match(r'img/(fig|por|ev|st|map-fest)-', k) else 'core'
         files.append([k, hv, sz, g])
+    # review/audio-ipad (owner 25/11 ~23:30Z, on the plane): the event / festival music (KIT §96, bgm-<key> not in git) lives only on the CDN;
+    # it was missing from assets.json, so «Tải hết để chơi offline» never fetched it and sw.js never kept it → offline it fell back to the six old
+    # tracks or stayed silent. Listed here with a 5th field "c" (= keyed on IMG_BASE by sw.js baseOf and jload keyOf); same-named files in git win.
+    LOCAL_AUDIO = set(os.listdir(os.path.join(R, 'audio'))) if os.path.isdir(os.path.join(R, 'audio')) else set()
+    for k, hv, sz in IDX['files']:
+        if k.startswith('audio/') and k.count('/') == 1 and k.lower().endswith(EXT) and not os.path.basename(k).startswith(('.', '_')) and os.path.basename(k) not in LOCAL_AUDIO:
+            files.append([k, hv, sz, 'core', 'c'])
 for top in (('audio', 'icons') if IMG_BASE else ('img', 'audio', 'icons')):
     for root, ds, fs in os.walk(os.path.join(R, top)):
         ds[:] = sorted(d for d in ds if not d.startswith(('.', '_', 'old')))
@@ -76,7 +83,9 @@ BG_MB = float(os.environ.get('CTM_BG_MB', '120'))
 # + every small UI picture of the kit (icons, menu / rail / status icons, emotion marks, crests, frames, item slots, tokens…; owner OD 18/11 ~01:35Z:
 #   letters "L"/"M" and missing top-bar / stat icons on a fresh Fold): img/kit/ except the scene art of mini games, night-end, podium, card flip (~5 MB more)
 # person-set seal clips (img/kit/emo-anim/th-*, ACTWIRE: 63 clips ≈ 32 MB) are NOT always-core: fetched on use (jemoseal kesPre probes them before a lean)
-ALWAYS = re.compile(r'(img/title-key|img/frame|icons/|audio/sfx-|audio/bgm-day|img/kit/(?!mg-|ne-|podium|cf-|emo-anim/th-))')
+# offline-fast (owner flight 25/11): EVERY face (img/face-*: ~150 small files) is always core — j17 probes every pool face at each start (FPOOL probe)
+# and a face that is not on the device is dropped from the draw / shows blank offline; faces added after first-hour.txt was recorded had fallen to lazy.
+ALWAYS = re.compile(r'(img/title-key|img/face-|img/frame|icons/|audio/sfx-|audio/bgm-day\.|img/kit/(?!mg-|ne-|podium|cf-|emo-anim/th-))')
 try: FIRST = {l.strip() for l in open(os.path.join(R, 'dev', 'site', 'first-hour.txt'), encoding='utf-8') if l.strip() and not l.startswith('#')}
 except Exception: FIRST = None   # no list yet: old behaviour (everything non-figure is core)
 def first_ok(k):

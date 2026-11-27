@@ -90,8 +90,8 @@ function nChoose(v,g,A,ch){try{const nat=nNat(v);const P=Array.isArray(A.p)?A.p:
  for(const stage of P){const L=[];for(const bid of [].concat(stage)){const b=A.B&&A.B[bid];if(!b||!Array.isArray(b.o))continue;for(const o of b.o){const n=RAWN(o);if(n&&!L.some(x=>x[0]===n))L.push([n,nOptW(v,g,n,nat)])}}
   if(!L.length)continue;const n=typeof mindPick==="function"?mindPick(L,v):wpick(L);if(n)nNote(g,n,ch)}}catch(e){console.error("ge npc",e)}}
 /* ---------- the Hồi kết nhánh of an NPC ---------- */
-function nBond(v){try{const s=GB().bond.sis;for(const x of (typeof liveRivals==="function"?liveRivals(true):[]))if(x&&x!==v&&!x.coop&&aff(v,x)>=s)return x.name;
- if(aff(v,S)>=s&&!S.dead)return S.name}catch(e){}return null}
+function nBond(v){try{for(const x of (typeof liveRivals==="function"?liveRivals(true):[]))if(x&&x!==v&&!x.coop&&aff(v,x)>=netTh(v,"than"))return x.name;
+ if(aff(v,S)>=netTh(v,"than")&&!S.dead)return S.name}catch(e){}return null}
 function nPair(v,g){const nat=nNat(v),E=C(g).e,pw=NB().pw;const bond=nBond(v);const L=[];
  for(let a=0;a<4;a++)for(let b=0;b<3;b++){let w=(nat.r1[a]||0)*(nat.r2[b]||0);if(a===3)w=bond?w*NB().bondMul:0;if(w<=0)continue;
   const j=E.findIndex(e=>e[3]===a&&e[4]===b);if(j>=0&&g.st[j]==="o")w*=1+g.pull[j]*pw;L.push([[a,b],w])}

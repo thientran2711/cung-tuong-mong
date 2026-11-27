@@ -6,7 +6,7 @@
        event result through jevb evbMood …): BAL.mood.emo[k] × strength;
      · her own acts with a real roll (runOpt deck cards + talk options, runAct consort acts): thành +ok, hỏng fail;
      · rest cards (jrest): +rest (only up to BAL.mood.restCap);
-     · each tuần: needs (Sức low / high, sick, short of bạc, cấm túc, lãnh cung), people (friends with thiện cảm ≥ fr.aff, foes with
+     · each tuần: needs (Sức low / high, sick, short of bạc, cấm túc, lãnh cung), people (friends with thiện cảm ≥ netTh(v,"than"), foes with
        oán ≥ foe.oan, her maid's thiện cảm), weather (pleasant / harsh / wet); then decay toward 0.
    OUT (one rule; bands BAL.mood.band; flavour of a low mood = her current feeling: giận → Bực dọc / Phẫn uất, ghen → Hờn tủi / Hờn ghen,
        sợ / lo âu → Bất an / Hoảng hốt, else Phiền muộn / U uất):
@@ -23,7 +23,7 @@
 const B=()=>BAL.mood;
 window.MOOD_N={wk:0,hist:{},ext:0,hi:0,lo:0,odN:0,odSum:0,odMax:0,comfort:0,lock:0,aff:0,ghen:0,acts:0,pushes:{}};
 function mbOn(){return !!(typeof S!=="undefined"&&S&&!S.dead&&!window.__moodOff)}
-function mbS(){if(!S)return null;if(!S.mood||typeof S.mood!=="object"||typeof S.mood.v!=="number")S.mood={v:0,log:[]};if(!Array.isArray(S.mood.log))S.mood.log=[];return S.mood}
+function mbS(){if(!S)return null;if(!S.mood||typeof S.mood!=="object"||typeof S.mood.v!=="number")S.mood={v:0,log:[]};if(!Array.isArray(S.mood.log))S.mood.log=[];/* ONE source (temper-outburst-fix): with the causes model on, read the bar the same way moodBar does (sync the live causes first), so every band / panel / rest / push reads the shown bar, never a stale S.mood.v */if(!mbS.__in&&typeof mkOn==="function"&&typeof mkSync==="function"&&mkOn()){mbS.__in=1;try{mkSync(S)}catch(e){}finally{mbS.__in=0}}return S.mood}
 function mbW(){try{return wk()}catch(e){return 0}}
 const cl2=(x,a,b)=>Math.max(a,Math.min(b,x));
 /* push the bar; merge pushes of the same cause kind in the same tuần ("Việc thành ×3: Đánh đàn, Làm thơ") */
@@ -51,7 +51,7 @@ window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;wi
 (function(){if(typeof odA!=="function")return;const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(a===S&&mbOn()){const m=mbOdPts();if(m){MOOD_N.odN++;MOOD_N.odSum+=m;MOOD_N.odMax=Math.max(MOOD_N.odMax,Math.abs(m));return oddsCl(r+m)}}}catch(e){}return r}})();
 /* "Vì sao <bậc>?": the real formula re-run with her mood at calm (whyDiff), and the deck cards (static odds) name it too */
 (function(){if(typeof whyDiff!=="function")return;const w0=whyDiff;whyDiff=function(fn,subj){const L=w0.apply(this,arguments);try{if(!mbOn()||!(subj||[]).some(x=>x&&x[0]===S))return L;const M=mbS(),v=M.v;if(!mbOdPts(v))return L;
-  let o0,o1;try{o0=fn();M.v=0;o1=fn()}finally{M.v=v}if(o0!=null&&o1!=null&&o0!==o1)L.push([`Tâm trạng ngươi: ${mbBand(v).name.toLowerCase()}`,o0-o1])}catch(e){}return L}})();
+  let o0,o1;try{o0=fn();mbS.__in=1;M.v=0;o1=fn()}finally{M.v=v;mbS.__in=0}if(o0!=null&&o1!=null&&o0!==o1)L.push([`Tâm trạng ngươi: ${mbBand(v).name.toLowerCase()}`,o0-o1])}catch(e){}return L}})();
 (function(){if(typeof kitWhyHtml!=="function")return;const k0=kitWhyHtml;kitWhyHtml=function(b,lv){let h=k0.apply(this,arguments);try{if(!h||!mbOn()||!b||!b.dataset||b.dataset.i==null)return h;const m=mbOdPts();if(!m||/Tâm trạng ngươi/.test(h))return h;
   const row=`<div class="kpopx"><span class="ef ${m>0?"g":"r"}">Tâm trạng ngươi: ${mbBand().name.toLowerCase()}: ${whyStep(m)}</span></div>`;
   h=h.replace(/<div class="kpopx"><span class="ef n">Cơ may của việc này không đổi theo tư chất[^<]*<\/span><\/div>/,"");const i=h.indexOf("</div>");return i<0?h+row:h.slice(0,i+6)+row+h.slice(i+6)}catch(e){}return h}})();
@@ -100,7 +100,7 @@ function mbWeek(){if(!mbOn())return;const M=mbS(),b=B(),W=mbW();if(M.wk===W)retu
  if(S.confined>0)mbAdd(N.conf,"bị cấm túc","w:conf");
  if(S.out)mbAdd(N.out,"ở lãnh cung","w:out");
  /* people */
- try{let fr=0,fo=0;for(const v of (typeof liveRivals==="function"?liveRivals(true):[])){if(v.coop)continue;if(aff(v,S)>=b.fr.aff)fr++;if(oan(v,S)>=b.foe.oan)fo++}
+ try{let fr=0,fo=0;for(const v of (typeof liveRivals==="function"?liveRivals(true):[])){if(v.coop)continue;if(aff(v,S)>=netTh(v,"than"))fr++;if(oan(v,S)>=netTh(v,"thu"))fo++}
   if(fr)mbAdd(Math.min(b.fr.cap,fr*b.fr.d),`${fr} người trong cung quý ngươi`,"w:fr");
   if(fo)mbAdd(-Math.min(b.foe.cap,fo*b.foe.d),`${fo} người oán ngươi`,"w:foe");
   if(S.maid&&(S.maid.loyal||0)>=b.maidHi)mbAdd(b.maidD,`${S.maid.name||"cung nữ"} hết lòng với ngươi`,"w:maid")}catch(e){}
@@ -112,7 +112,7 @@ function mbWeek(){if(!mbOn())return;const M=mbS(),b=B(),W=mbW();if(M.wk===W)retu
 /* someone who loves her comes to comfort a sad / frightened her (not an angry one: people keep away from anger) */
 function mbComfort(){const M=mbS(),C=B().comfort,W=mbW();const bi=mbBand().i;if(bi>-1)return;const sk=k=>{MOOD_N.cskip=MOOD_N.cskip||{};MOOD_N.cskip[k]=(MOOD_N.cskip[k]||0)+1};
  if(mbFlav()==="gian")return sk("angry");if(M.cw!=null&&W-M.cw<C.cd)return sk("cooldown");if(!roll(bi<=-2?C.ch:C.chLow))return sk("roll");
- let v=null;try{v=liveRivals(true).filter(x=>!x.coop&&!x.queen&&aff(x,S)>=C.aff&&(typeof kitIsKnown!=="function"||kitIsKnown(x))).sort((a,b)=>aff(b,S)-aff(a,S))[0]||null}catch(e){}
+ let v=null;try{v=liveRivals(true).filter(x=>!x.coop&&!x.queen&&aff(x,S)>=netTh(x,"than")&&(typeof kitIsKnown!=="function"||kitIsKnown(x))).sort((a,b)=>aff(b,S)-aff(a,S))[0]||null}catch(e){}
  const maid=!v&&S.maid&&(S.maid.loyal||0)>=C.maid?S.maid:null;if(!v&&!maid)return sk("nobody");M.cw=W;MOOD_N.comfort++;
  const nm=v?v.name:maid.name,who=v?pv(v):pMaid(),them=v?"nàng ta":"nàng";const band=mbBand().name.toLowerCase();
  const big=C.big,small=C.small;

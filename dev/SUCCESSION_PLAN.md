@@ -65,7 +65,7 @@ she keeps the title Mẫu hậu Hoàng thái hậu but only "hư vị". If the N
 ## 7. Art list (NOT generated yet — coordinator approves; gpt-2-6, folder ba4aecfe, STYLE_ANCHOR rules, portrait + landscape)
 Code reads `SUCC_ART[key]` (empty now) → `item.art` in the kit art frame; without it the panel shows her portrait.
 1. `succ-card` — DRAWN (pilot): img/ev-tien-de-bang-ha.webp, 16:9, edit of duong-tam-dien-thu-chieu; shown as a wide band via kitSceneArt. Linh cữu tiên đế, ngọc tỷ trên án, ba con đường (card art; night, candles).
-2. `succ-a1` — Lễ tôn phong Hoàng thái hậu ở Từ Ninh cung (her 36–50/51+, Thái hậu robe, kim sách).
+2. `succ-a1` — Lễ tôn phong Hoàng thái hậu ở Từ Ninh cung (her 39–50/51+, Thái hậu robe, kim sách).
 3. `succ-a2` — Họ ngoại vào triều bái kiến (officials, calm).
 4. `succ-a3` — Chuyện cũ hậu cung: phi tần tiên đế quỳ trước điện (calm).
 5. `succ-a-end` / `succ-a-rare` — Từ Ninh cung an hưởng · bế cháu đích tôn ngày cháu đăng cơ.

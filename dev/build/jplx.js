@@ -26,7 +26,7 @@ const PLX={
  pd:{n:"Phật đường",fn:"nơi lễ Phật, tụng kinh",d:"Điện có tượng Phật mạ vàng, khói hương không dứt.",img:"tu-ninh-cung",box:{x:.77,y:.235,w:.065,h:.155},anchor:{x:.80,y:.29},pos:[0,4],stand:1}};
 const PLX_NEW=["cnh","ttp","acs","dc"]; /* places with their own picture file; tgk keeps j94's */
 const PLX_STAND=["nth","pd"]; /* places on a STAND-IN picture (tạm) until Foreman C paints their own: SCIMG only, the stand-in's own seasons/floor come from j94 / jk2b */
-const PLX_AGE=6,PLX_ADULT=18;
+const PLX_AGE=6,PLX_ADULT=BAL.ageMin;
 (function(){
  /* names and map hotspots */
  for(const k in PLX){PLNAME[k]=[PLX[k].n,PLX[k].fn];if(MAPH&&MAPH.places&&!MAPH.places[k])MAPH.places[k]={box:PLX[k].box,anchor:PLX[k].anchor}}

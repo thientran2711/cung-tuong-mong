@@ -227,7 +227,7 @@ function j95bClearOdds(r){const y=RV(r.y),x=r.x!=null?RV(r.x):null;if(!y)return 
 function j95bClear(u,how,face){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)return"";const y=RV(r.y);if(!y||!y.alive)return"";if(!face&&typeof can==="function"&&can(BAL.m95b.k))spend(BAL.m95b.k);
  J95B.stat.clear++;const o=j95bClearOdds(r);const x=r.x!=null?RV(r.x):null;let msg;
  if(j95dice(o)){r.cleared=1;J95B.stat.clearOk++;if(y.j95rum)delete y.j95rum[key(S)];
-  if(r.truth){oanAdd(y,S,-Math.round(r.oa/2));msg=`${y.name} nghe ngươi nhận lỗi, nguôi đi phần nào; chuyện ấy có thật nên nàng vẫn còn để bụng.`}
+  if(r.truth){/* rv r2 (law 1): owning up is an apology — the same netForgive rule as every other road */if(!netForgive(y,S))msg=netRefused(S,y,"nhận lỗi với")+".";else{oanAdd(y,S,-Math.round(r.oa/2));msg=`${y.name} nghe ngươi nhận lỗi, nguôi đi phần nào; chuyện ấy có thật nên nàng vẫn còn để bụng.`}}
   else{oanAdd(y,S,-r.oa);affAdd(y,S,r.af+4);if(x&&x.alive){oanAdd(y,x,BAL.eff.j95b.j95bClear);affAdd(y,x,BAL.eff.j95b.j95bClear_2)}msg=`${y.name} tin lời ngươi: hiểu lầm đã gỡ.${x&&r.traced?` Nàng quay sang giận ${x.name}.`:""}`}
   j95bAct("v"+y.id,"cleared","me",{ok:true,why:`hết hiểu lầm: ngươi đã giải bày (${how})`},"rumor:clear")}
  else{oanAdd(y,S,BAL.eff.j95b.j95bClear_3);msg=r.truth?`${y.name} không nghe: chuyện ấy có thật.`:`${y.name} chưa tin lời ngươi.`}
@@ -238,7 +238,7 @@ function j95bTrace(u){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)retur
  else msg=x?"Lần theo mãi vẫn không ra kẻ tung tin.":"Lời đồn không rõ từ đâu ra, không lần được.";
  log(msg);Q.push({t:"Tra tin đồn",h:`<p>${msg}</p>`});return msg}
 /* who someone can whisper to: a consort the spreader is not on bad terms with and who does not already hate her */
-function j95bListener(x){const L=liveRivals(true).filter(y=>y!==x&&!sameHouse(y,S)&&aff(y,S)>-30&&(!x||aff(x,y)>=-5));return npwPick(L,y=>1+Math.max(0,x?aff(x,y):0)+Math.max(0,-aff(y,S)))}
+function j95bListener(x){const L=liveRivals(true).filter(y=>y!==x&&!sameHouse(y,S)&&aff(y,S)>netTh(y,"ghet")&&(!x||aff(x,y)>netTh(x,"ky")));return npwPick(L,y=>1+Math.max(0,x?aff(x,y):0)+Math.max(0,-aff(y,S)))}
 function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))return;const z=j95bZ();if(z.wk===wk())return;z.wk=wk();
  /* the record of her harm fades */for(const id in z.harm)if(wk()-z.harm[id].w>12)delete z.harm[id];
  for(const x of liveRivals(true)){if(x.confined)continue;

@@ -24,9 +24,9 @@ npwReg("wkUse",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{let b=0;for(const o of
 /* (illSeek removed: an NPC consort seeks đồ cấm only as a day-plan choice now — role-parity part 2, jagacts4 cx4:ill<route> + IROUTE / illBuy) */
 /* ---- jrcp: allergy accusation, maid's gossip, a friend's pattern, Thái hậu's sutra ---- */
 npwReg("rcpAcc",{grp:"G2c",cd:"rcpAcc",who:c=>c.p?[c.p]:[],why:(q,c)=>{const B=BAL.ag.why.g2rcp;if(q===c.v)return {s:B.acc+Math.max(0,hostility(q,c.a)),t:c.a,r:"phát bệnh vì đồ "+npwNm(c.a)+" dâng"};
- if(q.queen)return {s:B.acc,t:c.a,r:"giữ phép lục cung"};const h=hostility(q,c.a);return h>=B.accHost?{s:h,t:c.a,r:"oán "+npwNm(c.a)+", nhân cớ tố cáo"}:null}});
+ if(q.queen)return {s:B.acc,t:c.a,r:"giữ phép lục cung"};const h=hostility(q,c.a);return h>=netThK(q,"host","hostLo")?{s:h,t:c.a,r:"oán "+npwNm(c.a)+", nhân cớ tố cáo"}:null}});
 npwReg("rcpGos",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(m,c)=>{const B=BAL.ag.why.g2rcp,l=(m.loyal||0)-BAL.loy.mid;return l>0?{s:B.gos+l,r:"lo cho chủ, dò hỏi khẩu vị người trên"}:null}});
-npwReg("rcpGift",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const r=rel(v,S)||0;return r>=BAL.rcp.giftRel?{s:BAL.ag.why.g2rcp.gift+r,t:S,r:"thân với ngươi, chép mẫu gửi tặng"}:null}});
+npwReg("rcpGift",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const r=rel(v,S)||0;return r>=netTh(v,"than")?{s:BAL.ag.why.g2rcp.gift+r,t:S,r:"thân với ngươi, chép mẫu gửi tặng"}:null}});
 npwReg("rcpTh",{grp:"G2c",who:c=>S.thDead?[]:[S.thO||(S.thO={})],why:(p,c)=>{const B=BAL.ag.why.g2rcp,v=(S.th||0)-B.thHi;return v>=0?{s:B.thBase+v,t:S,r:"thương ngươi hiếu thuận"}:null}});
 /* ---- jpet: Hoàng hậu's and a man's pet gifts ---- */
 npwReg("petHh",{grp:"G2c",who:c=>{const q=queenP();return q?[q]:[]},why:(q,c)=>{const B=BAL.ag.why.g2pet,v=(c.p.hh||0)-B.hhMin;return v>=0?{s:B.base+v,t:c.p,r:"ưng ý "+npwNm(c.p)+", ban thú nuôi"}:null}});

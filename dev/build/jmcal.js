@@ -185,7 +185,7 @@ function mcPopHTML(k,o){const mm=mcMY(o).m;const f=mcFests(mm).find(x=>x.k===k);
  return `<div class="kpopt">${mcEsc(f.name)}</div><div class="kpopx kmc-px"><div class="kmc-pw">${mcDaysName(f.days)} ${mcMonName(mm)} · ${T} · <b>${mcLeftText(o,f)}</b></div>`+
   `<div>${MCAL.line[k]||""}</div>`+(A.C.length?`<div><b>Có thể thi:</b> ${A.C.join(", ")}</div>`:"")+(A.O.length?`<div><b>Còn có:</b> ${A.O.join(", ")}</div>`:"")+
   (A.C.length&&pz?`<div><b>Thắng thi:</b> ${pz}</div>`:"")+(P.length?`<div><b>Sửa soạn:</b> ${ok}/${P.length} đã sẵn</div>`:"")+`</div>`}
-function kitMonthCalOpen(){try{if(typeof kitModal!=="function")return;kitModal({kind:"cal",title:"Lịch tháng",sub:`Nay là ${typeof k3Date==="function"?k3Date():""}. Lịch ghi lễ hội hằng năm và những ngày ngươi đã biết.`,html:kitMonthCal({o:0}),cls:"kmc-modal"})}catch(e){console.error(e)}}
+function kitMonthCalOpen(){try{if(typeof kitModal!=="function")return;kitModal({kind:"cal",view:1/* button-crawl-fix-5: one «Lịch tháng» in Q, never saved */,title:"Lịch tháng",sub:`Nay là ${typeof k3Date==="function"?k3Date():""}. Lịch ghi lễ hội hằng năm và những ngày ngươi đã biết.`,html:kitMonthCal({o:0}),cls:"kmc-modal"})}catch(e){console.error(e)}}
 try{KP_SEAL.cal="LỊCH"}catch(e){}
 window.kitMonthCal=kitMonthCal;window.kitMonthCalOpen=kitMonthCalOpen;
 /* re-draw the calendar in place (month tab, tapped day, a note saved), keeping the tab row's scroll */

@@ -12,7 +12,7 @@ const [VW,VH]=(pos[1]||'755x1000').split('x').map(Number);
  await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.suc=100;S.bac=999;S.ap=9;try{render()}catch(e){}
   window.__words=root=>{const out=[];if(document.getElementById('kg82ok'))return out;/* a finished round shows the RESULT screen (words allowed there, KIT §13.x: never the result): not play */const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);let n;
    while(n=w.nextNode()){const t=n.nodeValue.replace(/\s+/g,' ').trim();if(!t||/^[^\p{L}]*$/u.test(t))continue;const el=n.parentElement;if(!el)continue;
-    if(el.closest('.kgr,.kgt-bar,script,style')||(el.closest('.kph,.kpht')&&!el.closest('.kgclk')))continue;const cs=getComputedStyle(el);if(cs.display==='none'||cs.visibility==='hidden')continue;const r=el.getBoundingClientRect();if(!r.width&&!r.height)continue;
+    if(el.closest('.kgr,.kgt-bar,script,style')||(el.closest('.kph,.kpht')&&!el.closest('.kgclk')))continue;if(el.closest('[data-kgsign="✓"]')&&/^✓ \S+( \S+)?$/.test(t))continue;/* makeup-set: the done sign keeps ≤2 words (BAL.mgDoneWords, OD 25/11) */const cs=getComputedStyle(el);if(cs.display==='none'||cs.visibility==='hidden')continue;const r=el.getBoundingClientRect();if(!r.width&&!r.height)continue;
     let h=el;while(h&&h!==root){if(h.hidden||getComputedStyle(h).display==='none'){el=null;break}h=h.parentElement}if(!el)continue;
     out.push(t+'  «'+(el.className||el.tagName)+'»')}return out};
   window.__nk=async(src)=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const r={};try{kg82Close()}catch(e){}Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;
@@ -28,12 +28,12 @@ const [VW,VH]=(pos[1]||'755x1000').split('x').map(Number);
   console.log(k.padEnd(9),(r.play||[]).length?'WORDS '+JSON.stringify(r.play):'0 words'+(r.err||r.nobox||r.nogo?' '+JSON.stringify(r):''))}
  /* review/kit-signs-odds: the odds WORD and the quick / skip button are the player's choice information — kg82Signs never turns them into a sign nor hides their small line (synthetic, every ladder word + every quick-button shape) */
  const od=await p.evaluate(()=>{const ph=KG82.phase,rd=KG82.ready,tt=KG82.tut;const h=document.createElement('div');h.className='kg82';h.style.cssText='position:fixed;left:0;top:0;opacity:0;pointer-events:none';
-  h.innerHTML='<div id="kg82box"></div><div class="kg82act"><button class="kbtn alt kquick" id="kg82skip">Để trời định<small>Liều · thành: x</small></button><button class="kbtn" id="toilquick">Nhanh<small>Khá chắc</small></button>'+KIT_ODDS.map((w,i)=>'<button class="kbtn" id="oz'+i+'">'+w+'</button>').join('')+'<button class="kbtn" id="gi">Gợi ý</button><button class="kbtn" id="kh">Khóa</button></div>';
+  h.innerHTML='<div id="kg82box"></div><div class="kg82act"><button class="kbtn alt kquick" id="kg82skip">Bỏ qua<small>Liều · thành: x</small></button><button class="kbtn" id="toilquick">Nhanh<small>Khá chắc</small></button>'+KIT_ODDS.map((w,i)=>'<button class="kbtn" id="oz'+i+'">'+w+'</button>').join('')+'<button class="kbtn" id="gi">Gợi ý</button><button class="kbtn" id="kh">Khóa</button></div>';
   document.body.appendChild(h);KG82.phase='play';KG82.ready=0;KG82.tut=0;kg82Signs();
   const o={};o.quick=h.querySelector('#kg82skip').textContent;o.smallHidden=h.querySelector('#kg82skip small').hidden;o.tq=h.querySelector('#toilquick').textContent;o.words=KIT_ODDS.map((w,i)=>h.querySelector('#oz'+i).textContent===w&&!h.querySelector('#oz'+i).dataset.kgsign);o.hint=h.querySelector('#gi').textContent;o.khoa=h.querySelector('#kh').dataset.kgsign||'';
   h.remove();KG82.phase=ph;KG82.ready=rd;KG82.tut=tt;return o});
  console.log('odds probe',JSON.stringify(od));
- const oddsOK=/Để trời định/.test(od.quick)&&!od.smallHidden&&/Nhanh/.test(od.tq)&&od.words.every(Boolean)&&od.hint==='?'&&od.khoa==='●';
+ const oddsOK=/Bỏ qua/.test(od.quick)&&!od.smallHidden&&/Nhanh/.test(od.tq)&&od.words.every(Boolean)&&od.hint==='?'&&od.khoa==='●';
  console.log(oddsOK?'PASS odds words / quick buttons stay words':'FAIL odds words / quick buttons were turned into signs');
  const oddsBad=rows.filter(([k,r])=>r.quickBad&&r.quickBad.length);if(oddsBad.length)console.log('FAIL quick button turned into a sign in',oddsBad.map(x=>x[0]).join());
  console.log('errors',errs.slice(0,3));

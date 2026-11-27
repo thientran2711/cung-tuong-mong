@@ -25,7 +25,7 @@
        eyes × wit.eye + (o.vs ? hostility(p, o.vs) × wit.host : 0); o.not = people to leave out.
    - npcTell(about, o) → {who, to, why} | null: who carries a fact about `about` to `o.to` (default: the player) — a witness at o.place/o.kh, or
        o.from (people who REALLY know it: a witness, the holder of the proof, npwIn(p) = those who see inside p's house), choosing to tell by grudge
-       against `about` (tell.host) or regard for the one told (tell.friend; liking, or for Hoàng thượng her Sủng, for Thái hậu her Thái hậu regard).
+       against `about` (her netTh "tell") or regard for the one told (her netTh "than"; liking, or for Hoàng thượng her Sủng, for Thái hậu her Thái hậu regard).
        o.cd = a kind name: the teller's cooldown (BAL.ag.why.cd.<kind>), stamped on the one who tells. The player is never a teller (her own choice).
    - npwIn(p) → consorts who see inside p's house (same palace, or one of their tai mắt serves p) · npwMat(x, p) → x's tai mắt serving p (or null).
    - def.on(o, ctx): optional, run once after a real fire (e.g. the story clock restarts).
@@ -71,9 +71,9 @@ function npcWit(place,kh,o){o=o||{};const B=npwB().wit;const not=new Set(o.not||
  return L.map(p=>({p,s:(typeof eyes==="function"?eyes(p):0)*B.eye+(o.vs&&p!==o.vs&&typeof hostility==="function"?Math.max(0,hostility(p,o.vs))*B.host:0)})).sort((a,b)=>b.s-a.s)}
 function npwHigh(to){try{return !!to&&((S.emp&&to===S.emp)||(S.thO&&to===S.thO))}catch(e){return false}}
 function npwRegard(w,to){try{if(S.emp&&to===S.emp)return +w.sung||0;if(S.thO&&to===S.thO)return +w.th||0}catch(e){}return typeof aff==="function"&&to&&(to===S||to.rl||w.rl)?(+aff(w,to)||0):0}
-function npcTell(about,o){o=o||{};const B=npwB().tell;const to=o.to||S;const from=o.from||(o.place?npcWit(o.place,o.kh,{not:[about,to]}).map(x=>x.p):[]);
+function npcTell(about,o){o=o||{};/* net-build: a witness carries the fact when her hostility to its subject ≥ her «tell» level or her regard for the one told ≥ her «than» level (BAL.net.th; was BAL.ag.why.tell host 40 / friend 30) */const to=o.to||S;const from=o.from||(o.place?npcWit(o.place,o.kh,{not:[about,to]}).map(x=>x.p):[]);
  const O=[];for(const w of from){if(!w||w===about||w===to||w===S)continue;if(o.cd&&!npwCdOk(o.cd,w))continue;const g=about&&typeof hostility==="function"?hostility(w,about):0;const f=npwRegard(w,to);
-  if(g>=B.host)O.push({who:w,to,s:g,why:"oán "+npwNm(about)});else if(f>=B.friend)O.push({who:w,to,s:f,why:(npwHigh(to)?"muốn lấy lòng ":"thân với ")+npwNm(to)})}
+  if(g>=netTh(w,"tell"))O.push({who:w,to,s:g,why:"oán "+npwNm(about)});else if(f>=netTh(w,"than"))O.push({who:w,to,s:f,why:(npwHigh(to)?"muốn lấy lòng ":"thân với ")+npwNm(to)})}
  const x=npwPick(O,y=>y.s);if(x&&o.cd)npwStamp(o.cd,x.who);return x?{who:x.who,to:x.to,why:x.why}:null}
 function npwIn(p){if(!p)return[];const L=liveRivals(true).filter(x=>x&&x!==p&&x.alive!==false&&!x.out);return L.filter(x=>{try{if(typeof sameHouse==="function"&&sameHouse(x,p))return true;
  return typeof taiMatRaw==="function"&&taiMatRaw(x).some(s=>ownerOf(s)===p)}catch(e){return false}})}

@@ -97,7 +97,11 @@ html body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room}
 /* kv3:.kv1 */
  html:where(.kv1) body .game#game.k3ph header.hud:has(#k3room:not([hidden])){grid-template-areas:"menu me . tc" "room me . tc" "stats stats stats stats"!important;grid-template-rows:auto minmax(0,1fr) auto!important}
  html:where(.kv1) body .game#game.k3ph header.hud>#k3room:not([hidden]){grid-area:room!important;justify-self:center!important;align-self:start!important;padding:0!important;min-height:0!important;margin-top:2px}
- html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb:has(.kbi) .kbl{display:none}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb:not(.hwaway):has(.kbi) .kbl{display:none}
+/* review/home-way (owner OD 26/11 ~04:25Z): away from home the one-page button shows its label under the icon:
+   «Về phòng · N khắc» + her palace's name, small, centred in the menu column */
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway{flex-direction:column;gap:1px;max-width:none;padding:0 2px 2px!important}
+ html:where(.kv1) body .game#game.k3ph header.hud>#k3room.kbackb.hwaway .kbl{display:inline-grid;justify-items:center;font-size:.62rem;line-height:1.12;text-align:center;white-space:pre;overflow:visible}
 /* KIT §0 one page (design-scale p2): the time column is ~40 % narrower than on the spread, so its two lines wrapped and the block grew taller
    than her name block (top bar 132 vs 129 px, +12 px with a state chip such as "Có thai"). On the one page the time block flows as ONE
    wrapping row of whole items (time, toilette, weather, quẻ, every K3_STATE chip; an item is never split, the next drops to a new 18 px line),
@@ -116,6 +120,9 @@ html:where(.kv1) body header.hud.khd3s #kstrow .kstl{font-size:0!important;line-
 html:where(.kv1) body header.hud.khd3s #kstrow .kstl .ic{font-size:0}
 html body .game#game header.hud.khd2{grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;
  grid-template-rows:auto auto auto!important;row-gap:0!important}
+/* review/home-way-nits (spread only): away from home the one-row «menu me room tc stats» rule (.k3ph :has(#k3room)) out-ranked the two-row bar, so on iPad
+   1180 the time block was squeezed to ~40 px and drew over «Sắc»; the two-row bar (.khd2, kitHdFit) wins, the same as at home */
+html:where(.kv2) body .game#game.k3ph header.hud.khd2:has(#k3room:not([hidden])){grid-template-columns:auto max-content minmax(0,1fr) minmax(0,max-content)!important;grid-template-areas:"menu me . tc" "menu me . room" "stats stats stats stats"!important;grid-template-rows:auto auto auto!important;row-gap:0!important}
 /* owner 16/11 (Q6): the room button also shows on wide / landscape: two-row bar (.khd2) = under the time block (area room); one-row bar = between the menu button and her name */
 html body header.hud>#k3room:not([hidden]){grid-area:room}
 /* kv (review/mg-train, KIT §0 design scale): was @media (min-width:1000px) = the spread */
@@ -842,7 +849,10 @@ function kitModalCloser(){const M=document.getElementById("modal");if(!M||M.hidd
  const m=typeof Q!=="undefined"?Q[0]:null;const onQ=m&&!M.classList.contains("kptitle");
  if(onQ&&m.opts){const i=kitCancelIx(m);if(i>=0)return()=>chooseM(i)}
  return null}
-function kitModalClose(){const M=document.getElementById("modal");if(!M||M.hidden)return false;const f=M.__kx||kitModalCloser();if(!f)return false;f();return true}
+function kitModalClose(){const M=document.getElementById("modal");if(!M||M.hidden)return false;
+ /* E95: a guided round «Hướng dẫn» running inside a dialog (Chăm thú, Chăm cây …): the dialog ✕ / Esc / tap outside first puts its rules screen back (never closes or ends the game) */
+ try{const t=typeof KG82!=="undefined"&&KG82.tut;if(t&&typeof t.back==="function"&&t.el&&M.contains(t.el)){t.back();return true}}catch(e){console.error(e)}
+const f=M.__kx||kitModalCloser();if(!f)return false;f();return true}
 function kitCloseSync(){try{const M=document.getElementById("modal");if(!M)return;const dlg=M.querySelector(".dlg");if(!dlg)return;
  const f=M.hidden?null:kitModalCloser();M.__kx=f;const kx=f?"1":"0";if(M.dataset.kx!==kx)M.dataset.kx=kx;
  const old=dlg.querySelectorAll(".kit-x[data-kitx=panel]");
@@ -887,7 +897,7 @@ function kitCloseOthers(){let n=0;
  return n}
 function kitDialogStack(){try{const m=typeof Q!=="undefined"?Q[0]:null;if(!m)return 0;return kitDialogWins(m)?kitCloseOthers():0}catch(e){console.error("kitDialogStack",e);return 0}}
 window.kitDialogStack=kitDialogStack;window.kitCloseOthers=kitCloseOthers;window.kitDialogWins=kitDialogWins;
-(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body:not(.kg82cf) #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
+(function(){const st=document.createElement("style");st.id="kit-dialog-stack";st.textContent=`html body #modal:not(.kptitle){z-index:42}`;document.head.appendChild(st);
  setTimeout(()=>{const s1=showModal;showModal=function(){const r=s1.apply(this,arguments);kitDialogStack();return r}},0)})();
 /* game / lesson results in #ov (kg82 "Đã hiểu", j92 Chải chuốt, the old j5 "Xong"): the result card closes with ✕ / tap outside / Esc,
    which press that button (its own handler applies the result as before); while the game runs there is no ✕ */
@@ -902,7 +912,11 @@ function kitOvBtn(){const ov=document.getElementById("ov");if(!ov||ov.hidden)ret
  new MutationObserver(()=>{try{if(ov.hidden)return;if(!live()){ov.hidden=true}}catch(e){}}).observe(ov,{childList:true,attributes:true,attributeFilter:["hidden"],subtree:false});
  if(typeof resumeMG==="function"){const r0=resumeMG;resumeMG=function(){let r;try{r=r0.apply(this,arguments)}catch(e){console.error("resumeMG",e)}try{if(S&&S.mg&&ov.hidden){console.warn("lesson game did not open; S.mg cleared",S.mg);S.mg=null}}catch(e){}return r};window.resumeMG=resumeMG}
  if(typeof kg82Close==="function"){const c0=kg82Close;kg82Close=function(){const r=c0.apply(this,arguments);try{if(!ov.hidden&&!live())ov.hidden=true}catch(e){}return r};window.kg82Close=kg82Close}})();
-function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(!b.hidden)b.hidden=true;const row=b.parentElement;if(row&&row!==b.closest(".kpanel,.mg")&&![...row.children].some(c=>!c.hidden)&&!row.hidden)row.hidden=true;
+/* m-fix-2 (LUẬT SỬA CẢ NHÓM, robot F M-FIX-2 item 1): only a PLAIN close word («Đã hiểu», «Xong») is hidden — owner OD:L1352 «không cần cái chữ
+   đã hiểu» (info frames close with ✕ / tap outside). A result button that says what comes next («Môn kế tiếp», «Xem kết quả», «Thử môn khác»,
+   «Dừng ở đây») is a step, not a close word: it stays on screen (it was hidden too and the only way on was a ✕ «Quay lại» that went forward). */
+function kitOvPlain(b){return /^(Đã hiểu|Xong)$/.test(String(b&&b.textContent||"").replace(/\s+/g," ").trim())}
+function kitOvSync(){try{const b=kitOvBtn();if(!b)return;if(kitOvPlain(b)){if(!b.hidden)b.hidden=true;const row=b.parentElement;if(row&&row!==b.closest(".kpanel,.mg")&&![...row.children].some(c=>!c.hidden)&&!row.hidden)row.hidden=true}
  const pan=b.closest("#kg82, .mg")||b.closest(".kpanel");if(!pan||pan.querySelector(".kit-x[data-kitx=ov],.kit-x[data-kitx=kgback]"))return;/* §13.9: the game frame already has its kit ✕ «Quay lại» (it presses this button on a result screen) */const h=pan.querySelector(".kph");
  const html=kitXHTML('data-kitx="ov"');if(h){if(getComputedStyle(h).position==="static")h.style.position="relative";h.insertAdjacentHTML("beforeend",html)}else{pan.style.position=pan.style.position||"relative";pan.insertAdjacentHTML("afterbegin",html);pan.firstElementChild.classList.add("kxabs")}
  const x=pan.querySelector(".kit-x[data-kitx=ov]");x.addEventListener("click",e=>{e.stopPropagation();e.preventDefault();const c=kitOvBtn();if(c)c.click()})}catch(e){console.error("kitOvSync",e)}}
@@ -1056,7 +1070,7 @@ let KIT_OPT_DPQ=0;/* a card that changed height inside a person dialog → the d
 function kitOptFitDone(b,h0){try{if(Math.abs(b.offsetHeight-h0)>1&&b.closest("#modal .dlg.kdper")&&!KIT_OPT_DPQ){KIT_OPT_DPQ=requestAnimationFrame(()=>{KIT_OPT_DPQ=0;try{kitDpFit()}catch(e){}})}}catch(e){}}
 function kitOptFit(b){const h0=b&&b.offsetHeight||0;kitOptFit0(b);if(b)kitOptFitDone(b,h0)}
 function kitOptGroup(b){const r=b.closest("#modal .dlg")||b.parentElement||document;return [...r.querySelectorAll(KIT_OPT_FIT_SEL)].filter(x=>x.querySelector(":scope > .kaart")&&x.querySelector(":scope > .kabody"))}
-function kitOptSet(x,s,h){const art=x.querySelector(":scope > .kaart");if(!art)return;h=h||s;if(s){x.style.setProperty("--kaw",s+"px","important");x.style.setProperty("--kah",h+"px","important");art.style.setProperty("flex-basis",s+"px","important");art.style.setProperty("width",s+"px","important");art.style.setProperty("height",h+"px","important");x.classList.toggle("kasq",s===h)}
+function kitOptSet(x,s,h){const art=x.querySelector(":scope > .kaart");if(!art)return;if(s&&x.matches("button.ka.kopt")&&!x.closest(".pc"))return;/* KIT §6.2c: a dialog option card's picture size = its tier (kitOptTier, jopic): the legacy fitters never set a width of their own */h=h||s;if(s){x.style.setProperty("--kaw",s+"px","important");x.style.setProperty("--kah",h+"px","important");art.style.setProperty("flex-basis",s+"px","important");art.style.setProperty("width",s+"px","important");art.style.setProperty("height",h+"px","important");x.classList.toggle("kasq",s===h)}
  else{x.style.removeProperty("--kah");x.style.removeProperty("--kaw");["flex-basis","width","height"].forEach(k=>art.style.removeProperty(k));x.classList.remove("kasq")}}
 /* PERSON / SUBJECT DIALOGS (owner 17/11 ~05:00Z, final rule): the group is a person card's act rows or a dialog with a figure column (.kpsubj / kdper):
    every card is ONE size (the tallest text sets it) and its picture is a TALL 3:4 RECTANGLE filling the card height (width = 3/4 of that height, 54..112 px;
@@ -1072,8 +1086,10 @@ function kitOptFill(E,done){const pad=x=>{const cs=getComputedStyle(x);return (p
    The size is the one the SHORTEST card text allows (no empty space under any text-shortest card); all tall when every text fills the tall picture. */
 /* KIT §6.2 FINAL (owner 18/11 07:25Z): every DIALOG option card (button.ka.kopt outside a person card) has the ONE picture box 66x88 (3:4, css in jopic) and the cards of one dialog are ONE height
    = the tallest card of that dialog (Tốn + Được rows only, so the tallest is rarely above the 106 px floor). No per-card picture size, no text-driven strip any more. */
-function kitOptEqual(b){/* KIT §6.2d: the cards of one option list = ONE tier size (kitOptTier, jopic); no tallest-card height any more */const r=b.closest("#modal .dlg")||b.parentElement||document;const gs=new Set();r.querySelectorAll("button.ka.kopt").forEach(x=>{if(x.isConnected&&!x.closest(".pc")&&x.offsetParent&&x.parentElement)gs.add(x.parentElement)});gs.forEach(g=>kitOptTier(g))}
-function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches(":is(.pc>.pcr,.kpanec) button.ka:not(.kopt)")){kitOptSet(b,0);b.style.removeProperty("min-height");b.dataset.kapic="sq";return}/* §6.3: person-card act rows keep the ONE square picture, never fitted to the text */if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
+const KIT_OPT_EQ=new Set(),KIT_OPT_GQ=new Set(),KIT_OPT_GL=new Map();
+function kitOptEqual(b){/* KIT §6.2d: the cards of one option list = ONE tier size (kitOptTier, jopic); no tallest-card height any more */const r=b.closest("#modal .dlg")||b.parentElement||document;if(KIT_OPT_EQ.has(r))return;if(!KIT_OPT_EQ.size)queueMicrotask(()=>KIT_OPT_EQ.clear());KIT_OPT_EQ.add(r);const gs=new Set();r.querySelectorAll("button.ka.kopt").forEach(x=>{if(x.isConnected&&!x.closest(".pc")&&x.offsetParent&&x.parentElement)gs.add(x.parentElement)});gs.forEach(g=>kitOptTier(g))}
+/* F10 member 4 (26/11, R1 cnv_ban y16–17 / E-S1 1351 cards): kitOptFitAll calls kitOptFit → kitOptEqual for EVERY card and each one re-tiered the whole list (n × n layout reads, 1.5–4 s a pass). A dialog's option lists are tiered once per synchronous pass (all its cards give the same answer); the set empties at the next microtask. */
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches(":is(.pc>.pcr,.kpanec) button.ka:not(.kopt)")){kitOptSet(b,0);b.style.removeProperty("min-height");b.dataset.kapic="sq";return}/* §6.3: person-card act rows keep the ONE square picture, never fitted to the text */if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}{/* F10 member 5b: the legacy (non-kopt) fitter measured + rewrote the WHOLE dialog group for every card (n × n reads/writes); one run per group per synchronous pass, a later card of the same pass re-runs it once at the next microtask */const r=b.closest("#modal .dlg")||b.parentElement||document;if(KIT_OPT_GQ.has(r)){if(!KIT_OPT_GL.size)queueMicrotask(()=>{const L=[...KIT_OPT_GL.values()];KIT_OPT_GL.clear();L.forEach(x=>kitOptFit0(x))});KIT_OPT_GL.set(r,b);return}if(!KIT_OPT_GQ.size)queueMicrotask(()=>KIT_OPT_GQ.clear());KIT_OPT_GQ.add(r)}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
  const E=[];let w=0,h=0;G.forEach(x=>{const art=x.querySelector(":scope > .kaart");x.dataset.kapic="";if(!x.isConnected||getComputedStyle(art).display==="none"||getComputedStyle(x).flexDirection!=="row")return;
   const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15)return;E.push(x);w=Math.max(w,a.width);h=Math.max(h,a.height)});
  if(!E.length)return;E.forEach(x=>x.style.removeProperty("min-height"));const lo=Math.round(w*KIT_OPT_SQ.min),bhs=()=>E.map(x=>x.querySelector(":scope > .kabody").getBoundingClientRect().height);
@@ -1083,10 +1099,10 @@ function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches(":is(.pc>.p
  let s=Math.round(Math.max(lo,Math.min(w,m)));E.forEach(x=>kitOptSet(x,s));
  for(let i=0;i<3;i++){m=Math.min(...bhs());const s2=Math.round(Math.max(lo,Math.min(w,m)));if(s2===s)break;s=s2;E.forEach(x=>kitOptSet(x,s))}
  done("sq")}catch(e){console.error("kitOptFit",e)}}
-let KIT_OPT_RO=null;
+let KIT_OPT_RO=null,KIT_OPT_ROT=0;const KIT_OPT_ROQ=new Set();
 function kitOptFitAll(root){try{root=root&&root.querySelectorAll?root:document;const B=[...root.querySelectorAll(KIT_OPT_FIT_SEL)].filter(b=>b.querySelector(":scope > .kaart")&&b.querySelector(":scope > .kabody"));
  if(!KIT_OPT_RO&&typeof ResizeObserver==="function")KIT_OPT_RO=new ResizeObserver(E=>{const seen=new Set();E.forEach(e=>{const b=e.target.closest(KIT_OPT_FIT_SEL);if(!b||seen.has(b))return;seen.add(b);
-  const body=b.querySelector(":scope > .kabody");const key=b.clientWidth+"x"+Math.round(body?body.getBoundingClientRect().height:0);if(b.__kof!==key)requestAnimationFrame(()=>kitOptFit(b))})});
+  const body=b.querySelector(":scope > .kabody");const key=b.clientWidth+"x"+Math.round(body?body.getBoundingClientRect().height:0);if(b.__kof!==key){KIT_OPT_ROQ.add(b);if(!KIT_OPT_ROT)KIT_OPT_ROT=requestAnimationFrame(()=>{KIT_OPT_ROT=0;const L=[...KIT_OPT_ROQ];KIT_OPT_ROQ.clear();L.forEach(x=>kitOptFit(x))})}})});/* F10 member 4: the cards that changed size this frame are fitted in ONE frame callback (was one callback per card: 1351 callbacks, each re-tiering the whole list) */
  B.forEach(b=>{kitOptFit(b);if(KIT_OPT_RO&&!b.__kofro){b.__kofro=1;KIT_OPT_RO.observe(b);const body=b.querySelector(":scope > .kabody");if(body)KIT_OPT_RO.observe(body)}})}catch(e){}}
 window.kitOptFit=kitOptFit;window.kitOptFitAll=kitOptFitAll;window.KIT_OPT_SQ=KIT_OPT_SQ;
 (function(){const st=document.createElement("style");st.id="kit-act-compact";st.textContent=`
@@ -1229,6 +1245,31 @@ html body .pc>.pcr>.pcb>:not(button.ka){grid-column:1/-1!important;min-width:0}
 html body .pc.kpwide[data-k2]{scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent}
 /* explicit «more below» cue (scrollbars are not reliable on phones): a card that scrolls and is not at its end gets a bottom fade (class kpmore, set by kitPcMore) */
 html body .pc.kpwide[data-k2].kpmore::after{content:"";display:block;grid-column:1/-1;position:sticky;bottom:0;height:26px;margin-top:-26px;pointer-events:none;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 85%);z-index:5}
+`;document.head.appendChild(st)})();
+/* KIT §6.4 PERSON PANEL SCROLL (owner 24/11 ~21:50Z real, Fold shots v2–v4; restates OD 21/11 #86 + 23/11 ~20:20Z; one shared kit part = every person panel: Hậu cung/Phi tần/Nam nhân/Cung nhân, Giao tình, Việc nhờ, Mệnh truyện…).
+   The card is a FIXED frame (height = --kpcmax, no scrolling of its own): the portrait column keeps name + rank + portrait still (the face is always seen) and ONLY the text under the portrait (.kplscr: Biết tên / thiện cảm / Oán / tiles / wear) scrolls;
+   the right column keeps the info block (.kpstick: Sở trường / Tính nết / Đã biết / Dạo này + the act-group tabs) still and ONLY the act/step area under it scrolls, each column on its own.
+   The portrait keeps its natural width and only shrinks (kitPcFitPortrait) when the card is too short to leave ~80 px of text under the whole frame (tassel included, kitPcClearTassel). */
+function kitPcScroll(pc){try{if(!pc||!pc.classList.contains("kpwide"))return;const L=pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp");if(!pcp)return;
+ let w=L.querySelector(":scope > .kplscr");const tail=[...L.children].filter(c=>c!==w&&c!==pcp&&(pcp.compareDocumentPosition(c)&Node.DOCUMENT_POSITION_FOLLOWING));
+ if(!tail.length&&w)return;if(!w){w=document.createElement("div");w.className="kplscr";pcp.after(w)}tail.forEach(c=>w.appendChild(c))}catch(e){console.error("kitPcScroll",e)}}
+window.kitPcScroll=kitPcScroll;
+function kitPcFitPortrait(pc){try{const max=parseFloat(pc.style.getPropertyValue("--kpcmax"))||0;if(!max||!pc.classList.contains("kpwide"))return;let nat=+pc.dataset.kpcw0||0;if(!nat){nat=Math.round(Math.max(150,Math.min(240,((pc.closest("#panel,#stage,#modal .dlg")||pc).clientWidth||0)*.36)));pc.dataset.kpcw0=nat}
+ /* the portrait keeps its natural kit width (OD 18/11 «never shrink to fit») and is shrunk ONLY when the card is so short that no text row would be left under it: the rows sit up over the frame's pendant (visible share of the frame = vis, measured from its own negative margin), at least KPC_MINTXT px of text must stay under it */
+ const nm=pc.querySelector(":scope > .pcl > .pcname"),pcp=pc.querySelector(":scope > .pcl > .pcp"),head=(nm?nm.offsetHeight:44)+8,mb=pcp?parseFloat(pcp.style.marginBottom)||0:0,vis=1;void mb;/* the text starts BELOW the frame's pendant + tassel (kitPcClearTassel), so the whole frame counts */
+ const w=Math.max(120,Math.min(nat,Math.floor((max-head-80)/vis*550/1037)));pc.style.setProperty("--kpcw",w+"px");kitPcClearTassel(pc);requestAnimationFrame(()=>{kitPcClearTassel(pc);requestAnimationFrame(()=>kitPcClearTassel(pc))})}catch(e){}}
+/* the rows under the frame used to start OVER the pendant + tassel (negative margin of the frame): inside the scrolling text area that overlapped the label («Hoàng thượng → ta», owner-visible, KK23b nit): the text area now starts under the tassel */
+function kitPcClearTassel(pc){try{const pcp=pc.querySelector(":scope > .pcl > .pcp"),sc=pc.querySelector(":scope > .pcl > .kplscr");if(!pcp||!sc)return;const mb=parseFloat(pcp.style.marginBottom)||0;sc.style.marginTop=(mb<0?-mb:0)+"px"}catch(e){}}
+window.kitPcClearTassel=kitPcClearTassel;
+window.kitPcFitPortrait=kitPcFitPortrait;
+(function(){const k0=window.kitPcKeyFit;kitPcKeyFit=function(pc){try{k0&&k0.apply(this,arguments)}catch(e){}try{kitPcScroll(pc);kitPcFitPortrait(pc)}catch(e){}};window.kitPcKeyFit=kitPcKeyFit;
+ const st=document.createElement("style");st.id="kit-pc-scroll";st.textContent=`
+html body .pc.kpwide[data-k2][style*="--kpcmax"]{height:var(--kpcmax)!important;min-height:0!important;max-height:var(--kpcmax)!important;overflow:hidden!important;grid-template-rows:minmax(0,1fr)!important;align-items:stretch!important;padding-bottom:0!important}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcl{display:flex!important;flex-direction:column;height:100%;min-height:0!important;overflow:hidden!important}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcl>.kplscr{flex:1 1 0;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;position:relative;z-index:2;scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent;padding-bottom:6px}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcr{height:100%;min-height:0!important;margin-top:0!important;padding-top:0!important;overflow-y:auto!important;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent;padding-bottom:8px}
+html body .pc.kpwide[data-k2][style*="--kpcmax"]>.pcr>*{flex-shrink:0}
+html body .pc.kpwide[data-k2][style*="--kpcmax"] .kpstick{top:0;margin:0 0 6px;padding:7px 0 6px;box-shadow:0 4px 6px -4px #5a3a2033}
 `;document.head.appendChild(st)})();
 /* the frame class is set by JS (no :has() on #panel: it cost +30 % tab time in quickcheck): after every render and every panel mutation */
 function kitPcFrameMark(){try{const P=document.getElementById("panel");if(!P)return;const on=!!P.querySelector(":scope > .pgwrap > .pc, :scope > .pgwrap.krelpg");if(P.classList.contains("kpfr")!==on)P.classList.toggle("kpfr",on)}catch(e){}}

@@ -71,7 +71,10 @@ function kpodRain(root,place,ms){const fx=root.querySelector(".kpod-fx");const c
   const R=root.getBoundingClientRect(),r=c.getBoundingClientRect();const s=document.createElement("i");s.className="kpc kpc-pet";s.style.background=P.pet[Math.floor(Math.random()*P.pet.length)];const sz=8+Math.random()*6;s.style.width=s.style.height=sz+"px";
   s.style.left=(r.left-R.left+Math.random()*r.width)+"px";s.style.top="-12px";fx.appendChild(s);const an=s.animate([{transform:"translate(0,0) rotate(0deg)",opacity:.95},{transform:`translate(${(Math.random()-.5)*60}px,${r.bottom-R.top+20}px) rotate(${(Math.random()-.5)*540}deg)`,opacity:.15}],{duration:4200+Math.random()*2000,easing:"linear",fill:"forwards"});an.onfinish=()=>s.remove()},420)}
 function kitPodiumShow(list,o){o=o||{};const L=kpodNorm(list);if(L.length<2)return null;kitPodiumClose(true);
- try{if(typeof cuMeet==="function")cuMeet(L.map(x=>x.who))}catch(e){}/* everyone on the dais is known (owner 15/11): face + name, never a silhouette */
+ /* KIT 26.4 (owner 24/11 ~05:35Z «Người lạ» until greeted; MAIN 117 KIT REQUEST #2): o.unknown(p) (or the global window.kitPodiumUnknown) → true for a person she has NOT met: she stands as the standard grey silhouette with her NAME (names are called aloud at a selection) and is NOT marked known (no cuMeet). Every podium / ranking / result list takes the same option (kitPodiumShow, kitPodiumTag o, the j82 contest wrapper). */
+ const U=typeof o.unknown==="function"?o.unknown:(typeof window.kitPodiumUnknown==="function"?window.kitPodiumUnknown:null);const isU=x=>{try{return !!(U&&x&&x.who&&x.who!==S&&U(x.who))}catch(e){return false}};
+ L.forEach(x=>{if(isU(x)){x.unk=1;if(!x.nameH&&x.who.name)x.nameH=`<b class="kname" data-k61skip="1" style="--rc:#7a7e84">${String(x.who.name).replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]))}</b>`}});
+ try{if(typeof cuMeet==="function")cuMeet(L.filter(x=>!x.unk).map(x=>x.who))}catch(e){}/* everyone on the dais is known (owner 15/11) except an entrant the option marks unknown: face + name, never a silhouette */
  const ov=document.createElement("div");ov.id="kpodov";ov.innerHTML=kitPodium(L,o);document.body.appendChild(ov);const root=ov.firstElementChild;
  const red=kpodReduced();if(red)root.classList.add("kpod-skip","kpod-red");const fit=()=>kpodFit(root);fit();
  [...root.querySelectorAll("img")].forEach(im=>{if(!im.complete)im.addEventListener("load",fit,{once:true})});try{document.fonts.ready.then(fit)}catch(e){}setTimeout(fit,400);
@@ -168,7 +171,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-skip .kpod-beam,.kpod-skip .kpod-pool{animation:none!important}.kpod-skip .kpod-motes i{animation-delay:0s}
 .kpod-red .kpod-motes{display:none}
 @keyframes kpodMote{0%{opacity:0;transform:translateY(10px) scale(.6)}30%{opacity:1}70%{opacity:.8}100%{opacity:0;transform:translateY(-26px) scale(1)}}
-.kpod-ft{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 12px 14px;background:none}/* owner 17/11: the scene backdrop runs edge to edge and the button sits ON it (no cream band under the dais) */
+.kpod-ft{position:relative;z-index:6;display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 12px 14px;background:none}/* owner 17/11: the scene backdrop runs edge to edge and the button sits ON it (no cream band under the dais) */
 .kpod-next{min-width:180px;font-size:1rem;cursor:pointer}
 .kpod-mine{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--ink);background:#fffaf0e8;border:1px solid var(--k-hair);border-radius:var(--k-rad);padding:3px 10px}
 .kpod-fx{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5}

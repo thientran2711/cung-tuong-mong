@@ -63,7 +63,7 @@
    b.disabled=true;
    if(b.getAttribute("data-kb")==="re"){try{return window.top.location.reload()}catch(x){return location.reload()}}
    /* the stale-shell risk: drop the app-shell caches and the service worker; pictures (ctm-assets, content-keyed) and saves stay */
-   var jobs=[];try{if(window.caches)jobs.push(caches.keys().then(function(K){return Promise.all(K.filter(function(k){return k!=="ctm-assets"&&!/^ctm-\d+$/.test(k)}).map(function(k){return caches.delete(k)}))}))}catch(x){}
+   var jobs=[];try{if(window.caches)jobs.push(caches.keys().then(function(K){return Promise.all(K.filter(function(k){return k!=="ctm-assets"&&k!=="ctm-offmeta"&&!/^ctm-\d+$/.test(k)}).map(function(k){return caches.delete(k)}))}))}catch(x){}
    try{if(navigator.serviceWorker)jobs.push(navigator.serviceWorker.getRegistrations().then(function(R){return Promise.all(R.map(function(r){return r.unregister()}))}))}catch(x){}
    Promise.all(jobs).then(null,function(){}).then(function(){
     /* the whole page (host too, it may be the stale copy), query kept (?room= joins), new kfresh before the #hash (a hash-only change does not reload) */

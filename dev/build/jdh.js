@@ -31,11 +31,14 @@ DH.meta={n:"Tài hoa vô song",g:"thi",u:"môn",how:n=>`Đứng đầu hội thi
 DH.podium={n:"Bảng vàng đề tên",g:"thi",how:n=>`Đứng trong ba hạng đầu một hội thi ${nTimes(n)}`};
 DH.nights={n:"Trăng soi rèm ngọc",g:"an",how:n=>`Được thị tẩm ${nTimes(n)}`};
 DH.kids={n:"Phúc ấm đầy nhà",g:"an",u:"hoàng tự",how:n=>`Sinh hạ ${n} hoàng tự`};
-DH.a_thinh={n:"Sớm viếng chiều thăm",g:"ngay",me:1,how:n=>`Thỉnh an ${nTimes(n)}`};
+DH.a_thinh={n:"Sớm viếng chiều thăm",g:"ngay",me:1,u:"ngày liền",how:n=>`Thỉnh an ${n} ngày liền, không bỏ ngày nào`};/* TITLE-BAL: a streak (condition), not a count */
 DH.a_doc={n:"Thư hương",g:"ngay",me:1,how:n=>`Đọc sách ${nTimes(n)}`};
 DH.a_nhan={n:"Dung nhan như ngọc",g:"ngay",me:1,how:n=>`Điểm trang, dưỡng nhan ${nTimes(n)}`};
 for(const k in MAST)DH["l_"+k]={n:MAST[k],g:"nghe",u:"bậc",how:n=>`${artN(k)} lên bậc ${n}`};
-for(const k in WORK)DH["m_"+k]={n:WORK[k][0],g:"nghe",how:n=>`${WORK[k][1]} ${nTimes(n)}`};
+for(const k in WORK)DH["m_"+k]={n:WORK[k][0],g:"nghe",u:"tác phẩm",how:n=>`${WORK[k][1]}: ${n} tác phẩm từ hạng ${WTIER[BAL.dh.q.wk]} trở lên`};/* TITLE-BAL: quality, not tries (BAL.dh.q.wk) */
+/* TITLE-BAL condition titles (owner OD 26/11 ~18:20Z rec (3), approved ~18:50Z (8)): a feat under hardship, a person's lasting favour */
+DH.c_han={n:"Sen nở trong bùn",g:"thi",how:()=>`Đứng đầu một hội thi khi còn ở phẩm ${RANKS[BAL.dh.cond.han.rank].n} trở xuống, hay đang bị cấm túc, đày lãnh cung`};
+DH.c_th={n:"Thái hậu ưu ái",g:"an",me:1,u:"tháng liền",how:n=>`Được Thái hậu quý mến (từ ${BAL.dh.cond.th.v} trở lên) ${n} tháng liền`};
 const GROUPS=[["tm","Thiên mệnh"],["kc","Khuê các"],["thi","Hội thi"],["nghe","Tài nghệ"],["ngay","Ngày thường"],["an","Ân sủng"]];/* "kc" = jkcg «Khuê các» (OUTSIDE_PLAN §11): like tm, listed only once earned */
 /* «Thiên mệnh» (jge.js, grand endings): one title per grand-ending shading, earned only by reaching it — never listed as "still to earn", never counted in the totals until earned */
 const dhTot=()=>Object.keys(DH).filter(k=>(DH[k].g!=="tm"&&DH[k].g!=="kc")||((S&&S.dh||{})[k]&&S.dh[k].i>=0)).length;
@@ -87,10 +90,12 @@ function seedOld(p){/* old saves: her past contest places from the Sổ ân thư
  if(p!==S||!Array.isArray(S.honors)||!S.honors.length)return;const D=bag(p);const rev={};try{for(const k in CU_KHOI)rev[CU_KHOI[k]]=k}catch(e){}
  for(const h of S.honors){(D.podium=D.podium||{n:0}).n++;if(h.p===1){const k=rev[String(h.t||"").split(" · ")[0]];if(k&&DH["w_"+k])(D["w_"+k]=D["w_"+k]||{n:0}).n++}}}
 function dhSync(p,quiet){if(!p||typeof p!=="object")return [];const first=!p.dh;if(first){bag(p);seedOld(p);quiet=true}const D=bag(p),got=[];
+ if(p.dhV!==2){/* TITLE-BAL old saves: «Sớm viếng chiều thăm» counted tries and the works counted every try; their counts restart under the new rule
+   (streak / quality). A step already earned stays hers (steps only go up). */if(!first)for(const k of ["a_thinh"].concat(Object.keys(WORK).map(x=>"m_"+x)))if(D[k]){if(k!=="a_thinh"&&D[k].raw==null)D[k].raw=D[k].n||0;D[k].n=0}p.dhV=2}
  for(const key in DH){if(DH[key].me&&p!==S)continue;const c=count(p,key),i=stepOf(key,c);if(i<0&&!D[key])continue;const e=D[key]||(D[key]={n:0});
   if(!key.startsWith("l_")&&key!=="meta"&&key!=="nights"&&key!=="kids")e.n=Math.max(e.n||0,c);
   if(i>(e.i==null?-1:e.i)){e.at=e.at||[];for(let j=(e.i==null?0:e.i+1);j<=i;j++)e.at[j]=when();e.i=i;got.push(key)}}
- if(got.length){if(p===S){if(!quiet)got.forEach(k=>dhNotice(k))}else if(!p.coop)dhAutoWear(p)}
+ if(got.length){if(p===S){if(!quiet)got.forEach(k=>dhNoteGate(k))}else if(!p.coop)dhAutoWear(p)}
  dhApplyFx(p);return got}
 function dhInc(p,key,d){if(!p||!DH[key]||(DH[key].me&&p!==S))return;const D=bag(p);const e=D[key]||(D[key]={n:0});e.n=(e.n||0)+(d||1);return dhSync(p)}
 window.dhSync=dhSync;window.dhInc=dhInc;
@@ -148,11 +153,22 @@ let RUMT=null;
  kitTitleDef=function(id){try{if(typeof id==="string"&&/^dh-/.test(id)){const [k,pid]=id.slice(3).split("@");return dhObj(byPid(pid||"me"),k)}}catch(e){}return d0.apply(this,arguments)}})();
 /* ---------- counting hooks ---------- */
 (function(){if(typeof cFin7!=="function")return;const f0=cFin7;cFin7=function(k,kind,L){const r=f0.apply(this,arguments);
- try{(L||[]).slice(0,3).forEach((x,i)=>{const p=x&&x.p;if(!p||p.coop||(p!==S&&!npcOK()))return;const D=bag(p);(D.podium=D.podium||{n:0}).n++;if(i===0&&DH["w_"+kind])(D["w_"+kind]=D["w_"+kind]||{n:0}).n++;dhSync(p)})}catch(e){console.error("dh",e)}return r}})();
-(function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const r=r0.apply(this,arguments);try{if(r===true&&a&&a.n&&S&&!S.dead){const m=ACTK.find(([re])=>re.test(a.n));if(m)dhInc(S,m[1])}}catch(e){console.error("dh",e)}return r}})();
-(function(){if(typeof wkMake!=="function")return;const m0=wkMake;wkMake=function(p,kind){const r=m0.apply(this,arguments);try{if(r&&p&&WORK[kind]&&!p.coop&&(p===S||npcOK()))dhInc(p,"m_"+kind)}catch(e){console.error("dh",e)}return r}})();
+ try{(L||[]).slice(0,3).forEach((x,i)=>{const p=x&&x.p;if(!p||p.coop||(p!==S&&!npcOK()))return;const D=bag(p);(D.podium=D.podium||{n:0}).n++;if(i===0&&DH["w_"+kind])(D["w_"+kind]=D["w_"+kind]||{n:0}).n++;if(i===0&&(p.rank<=BAL.dh.cond.han.rank||p.out||p.confined))(D.c_han=D.c_han||{n:0}).n++;dhSync(p)})}catch(e){console.error("dh",e)}return r}})();
+(function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const r=r0.apply(this,arguments);try{if(r===true&&a&&a.n&&S&&!S.dead){const m=ACTK.find(([re])=>re.test(a.n));if(m&&m[1]==="a_thinh")dhStreak();else if(m)dhInc(S,m[1])}}catch(e){console.error("dh",e)}return r}})();
+(function(){if(typeof wkMake!=="function")return;const m0=wkMake;wkMake=function(p,kind){const r=m0.apply(this,arguments);try{if(r&&p&&WORK[kind]&&!p.coop&&(p===S||npcOK())){const D=bag(p),e=D["m_"+kind]||(D["m_"+kind]={n:0});e.raw=(e.raw||0)+1;/* every work made (jdh2 kinhN: the atonement copies count all) */if(r.wk&&r.wk.ti>=BAL.dh.q.wk)dhInc(p,"m_"+kind)}}catch(e){console.error("dh",e)}return r}})();
 (function(){if(typeof rivalsMonth!=="function")return;const f0=rivalsMonth;rivalsMonth=function(){const r=f0.apply(this,arguments);try{if(npcOK())for(const v of rivals)if(v&&v.alive&&!v.coop)dhSync(v)}catch(e){console.error("dh",e)}return r}})();
-(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)dhSync(S)}catch(e){console.error("dh",e)}return r}})();
+(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const t0=S&&S.turn;const r=e0.apply(this,arguments);try{if(S&&!S.dead){if(S.turn!==t0)dhThMonth();dhSync(S)}}catch(e){console.error("dh",e)}return r}})();
+/* TITLE-BAL streaks: «Sớm viếng chiều thăm» = days in a row with a Thỉnh an that went well (one per day counts); «Thái hậu ưu ái» = months in a row
+   with Thái hậu's liking ≥ BAL.dh.cond.th.v. e.cur = the streak now, e.n = her best streak (the count the steps read). */
+function dhStreak(){const D=bag(S),e=D.a_thinh||(D.a_thinh={n:0});const d=typeof wk==="function"?wk():0;if(e.last===d)return;e.cur=e.last===d-1?(e.cur||0)+1:1;e.last=d;if(e.cur>(e.n||0))e.n=e.cur;dhSync(S)}
+function dhThMonth(){const D=bag(S),e=D.c_th||(D.c_th={n:0});e.cur=(S.th||0)>=BAL.dh.cond.th.v&&!S.thDead?(e.cur||0)+1:0;if(e.cur>(e.n||0))e.n=e.cur}
+window.dhStreak=dhStreak;window.dhThMonth=dhThMonth;
+/* TITLE-BAL pacing (rec (5) «never several titles popping in the same buổi»): at most BAL.dh.note.per new-title panels a buổi; the rest wait
+   in S.dhPend and come one by one on the next buổi (the title itself is already hers; only the panel waits). */
+const bKey=()=>`${S.turn||0}.${S.tuan||0}.${S.buoi||0}`;
+function dhNoteGate(key){if(S.dhNB&&S.dhNB.k===bKey()&&S.dhNB.n>=BAL.dh.note.per){S.dhPend=S.dhPend||[];if(!S.dhPend.includes(key))S.dhPend.push(key);return}
+ if(!S.dhNB||S.dhNB.k!==bKey())S.dhNB={k:bKey(),n:0};S.dhNB.n++;dhNotice(key)}
+(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&S.dhPend&&S.dhPend.length&&(!S.dhNB||S.dhNB.k!==bKey())){const k=S.dhPend.shift();if(!S.dhPend.length)delete S.dhPend;dhNoteGate(k);if(Q.length&&typeof showModal==="function"&&$("modal").hidden&&!window.__bot)showModal()}}catch(e){console.error("dh pend",e)}return r}})();
 /* ---------- her new title: a kit reward panel, wear it now or later ---------- */
 function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")return;const up=(S.dh[key].i||0)>0;
  if(typeof log==="function")log(up?`Danh hiệu «${o.name}» lên bậc ${KIT_TIER_NAME[Math.min(7,o.tier)]}.`:`Ngươi được danh hiệu «${o.name}».`);
@@ -162,16 +178,20 @@ function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")
   opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Để sau",fx:{},x:"",go:()=>{}}]})}
 /* OD 21/11 ~04:14Z (#54): the new-title plate sits ON the event picture (caption at its bottom centre, like the chapter slide title), not as its own band under it.
    Applies to every title dialog (Danh hiệu mới / lên bậc / đeo): the .kt3 plate of the info column moves into the picture (.k3ev). The drawn title art is parked. */
-function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic"),src=d.querySelector(".k3right .kt3:not(.kdhcap)");if(!ev||!src||!src.querySelector(".kdh,.kdh-cap,.j59t"))return;
- if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none"}catch(e){}}
-window.kitDhCap=kitDhCap;
-(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 16px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}`;document.head.appendChild(st);
+function kitDhCap(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d)return;const ev=d.querySelector(".k3right>.k3ev,.k3body>.k3mpic,.k3ev,.k3mpic"),src=[...d.querySelectorAll(".kt3:not(.kdhcap)")].find(e=>!e.closest(".k3ev,.k3mpic")&&e.querySelector(".kdh,.kdh-cap,.j59t"));if(!ev||!src)return;/* kit-titleplate (MAIN 124 G4 #54): the dialog is laid out in TWO shapes depending on timing / device load: picture in .k3right>.k3ev (plate in .k3right) or picture .k3body>.k3mpic (plate in a .kpsec section, no .k3right column). The old selector only knew the first, so on a busy device the plate stayed a band under the picture. Now any plate of the dialog that is not already in the picture moves into the picture. */
+ if(!ev.querySelector(":scope>.kdhcap")){const c=src.cloneNode(true);c.classList.add("kdhcap");c.style.display="";ev.appendChild(c)}src.style.display="none";kdhCapFit(ev.querySelector(":scope>.kdhcap"))}catch(e){}}
+/* K-DH-CAPFIT (KIT §82.2): the caption plate on the picture never cuts its name. The plate wraps between words (jtitle .kdh rule); here, on the narrow event
+   picture (Fold / iPad 120 px column), it keeps to TWO lines: font steps .74 → .66 → .6 rem until the name takes ≤ 2 lines (KDH_CAP_FS); never smaller, never cut. */
+const KDH_CAP_FS=["",".66rem",".6rem"];
+function kdhCapFit(c){try{const k=c&&c.querySelector(".kdh"),b=k&&k.querySelector("b");if(!b)return;for(const f of KDH_CAP_FS){k.style.fontSize=f;const lh=parseFloat(getComputedStyle(b).lineHeight)||12;if(b.getBoundingClientRect().height<=lh*2.4)break}}catch(e){}}
+window.kitDhCap=kitDhCap;window.kdhCapFit=kdhCapFit;
+(function(){const st=document.createElement("style");st.id="kdh-cap-css";st.textContent=`.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);z-index:3;margin:0!important;width:max-content;max-width:calc(100% - 8px);text-align:center;filter:drop-shadow(0 2px 4px #2a1a1288)}.ksz3 :is(.k3ev,.k3mpic)>.kt3.kdhcap .kdh{padding-left:8px;padding-right:8px}`;document.head.appendChild(st);
  if(typeof showModal==="function"){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{requestAnimationFrame(kitDhCap);setTimeout(kitDhCap,300);setTimeout(kitDhCap,900)}catch(e){}return r}}})();
 /* K-G4-PLATE (LIVE G4 80-dialog-fixed #54 flaky on a busy device): the fixed 300 / 900 ms calls miss a dialog that is (re)built later (kit sizing / life
    loader / a modal opened without showModal), and the plate then stays a band under the picture. ONE observer on #modal re-runs the idempotent kitDhCap
    on the next frame after any change, for EVERY title dialog (new / up / wear: any .k3ev picture with a .kt3 plate). */
 (function(){let q=0;const run=()=>{q=0;kitDhCap()};const go=()=>{const m=document.getElementById("modal");if(!m)return setTimeout(go,500);
- try{new MutationObserver(()=>{if(q||m.hidden)return;if(!m.querySelector(".k3ev"))return;q=requestAnimationFrame(run)}).observe(m,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}};go()})();
+ try{new MutationObserver(()=>{if(q||m.hidden)return;if(!m.querySelector(".k3ev,.k3mpic"))return;q=requestAnimationFrame(run)}).observe(m,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}};go()})();
 /* ---------- the bonus picker: wear a title and choose its ONE bonus (kit info panel + option cards) ---------- */
 function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=choices(key,e.i);
  if(L.length<2){if(L.length)e.pick=L[0];dhWear(S,key);if(back)dhPanel();return}
@@ -181,7 +201,7 @@ function dhPick(key,back){const o=dhObj(S,key);if(!o)return;const e=S.dh[key],L=
  opts.push({n:back?"Quay lại":"Để sau",fx:{},x:"",go:()=>{if(back)dhPanel()}});
  kitPanel({kind:"info",title:`Đeo «${o.name}»`,sub:"Mỗi lần chỉ đeo một danh hiệu, lấy một phần thưởng",dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo","chọn một phần thưởng bên dưới; tháo ra thì mất"]]}],opts},true);showModal()}
-window.dhPick=dhPick;
+window.dhPick=dhPick;window.dhNotice=dhNotice;window.DHKEYS=()=>Object.keys(DH);/* test hooks (dev/test/kit-titleplate.js) */
 /* ---------- NHIỆM VỤ › Danh hiệu ---------- */
 let DHTAB="goal";
 function tabsHTML(cur){const n=earned(S).length;const L=[];if(typeof kitGoalNow==="function"&&kitGoalNow())L.push({k:"goal",label:"Mục tiêu"});

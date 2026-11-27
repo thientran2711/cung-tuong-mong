@@ -89,7 +89,7 @@ const QUICK=/quý (ngươi|ta)|thân [+\-−]|với ngươi|[Nn]àng|[Ll]òng|Đ
 function lowRank(){/* one address core (jvoice kAddr, VANPHONG §2): what her own servant calls her */try{return !!(S&&!(typeof isSrv==="function"&&isSrv())&&kAddr({srv:"f"},S,{m:"cool"}).goi==="tiểu chủ")}catch(e){return false}}
 function addr(s){/* servants/eunuchs speaking to the player: tiểu chủ below Tần */
   if(!/[Nn]ương nương/.test(s)||!lowRank())return s;
-  s=s.replace(/“[^”]*”/g,q=>/Nương nương (sang|đi vắng)/.test(q)?q:q.replace(/Hoàng hậu nương nương/g,"\u0000").replace(/Nương nương/g,"Tiểu chủ").replace(/nương nương/g,"tiểu chủ").replace(/\u0000/g,"Hoàng hậu nương nương"));
+  s=s.replace(/“[^”]*”/g,q=>{if(/Nương nương (sang|đi vắng)/.test(q))return q;const keep=[];/* a rank title + nương nương names ANOTHER person (Hoàng hậu / Quý phi nương nương, a visitor greeting up: jgreet grSay) — only the bare form addresses HER */q=q.replace(/(Hoàng quý phi|Hoàng hậu|Quý phi|Thái hậu|Phi|Tần) nương nương/g,m=>{keep.push(m);return"\u0000"+(keep.length-1)+"\u0000"});q=q.replace(/Nương nương/g,"Tiểu chủ").replace(/nương nương/g,"tiểu chủ");return q.replace(/\u0000(\d+)\u0000/g,(m,i)=>keep[+i])});
   return s.replace(/quỳ xin nương nương/g,"quỳ xin tiểu chủ")}
 function fix(s,el){if(s==null)return s;s=String(s);if(!QUICK.test(s))return s;
   const t=s.trim();if(t){const lead=s.slice(0,s.indexOf(t)),tail=s.slice(s.indexOf(t)+t.length);

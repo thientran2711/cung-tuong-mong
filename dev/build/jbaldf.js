@@ -4,6 +4,8 @@
    Difficulty (law 5) = jmgt mgTier(kind,{occ:"df"}): stake = BAL.mgTier.occ.df [base, perRank] by HER rank (the attacker's rank for a dodge), ease per kind = BAL.mgTier.kAdj.
    Source of each block: plan dev/handover/reports/duodo-focus.md §PLAN 2 (act table) — first values, calibrated with dev/measure/df-bots.js. */
 Object.assign(BAL,{df:{
+  /* KK29 (law 4): how long the encounter scene waits for the visitor's real face before it opens anyway (was a typed 4000 in jdfv) */
+  faceWaitMs:4000,
  on:1,                 /* 0 = the stage tap opens the old person pop-up (rollback / tests) */
  npc:1,                /* 0 = NPC-initiated cards keep the centre card (row 15 off) */
  inPerson:["tat","phatquy","nuoc","tea","ink"],/* Hậu cung acts that need her THERE, offered in the focus view too (ONE act, same lock: doAct) */

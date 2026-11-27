@@ -41,9 +41,10 @@ function rtEvLine(e,nm){if(e.c==="h")return e.d>0?`${nm} vừa ra tay với ngư
 window.rtKind=rtKind;window.rtEvent=rtEvent;
 /* every reason one person has right now; the strongest is kept (s ≥ BAL.ag.why.min fires) */
 function rtWhyAll(v){const T=RTB(),m=npwB().min;const R=[];const nm=npwNm(v);
- try{const h=hostility(v,S);if(h>=T.gr)R.push({s:m*h/T.gr,k:"grudge",r:`${nm} ${npw1Gr(v,S)}`})}catch(e){}
- try{const o=oan(S,v);if(o>=T.gr)R.push({s:m*o/T.gr,k:"grudge",r:`ngươi còn mối oán với ${nm}`})}catch(e){}
- const d=rtDebt(v);if(d)R.push({s:m*(1+Math.abs(d)*T.debtK),k:"debt",r:d<0?`${nm} tìm đến đòi ngươi trả ân`:`${nm} muốn trả ân cho ngươi`});
+ try{const h=hostility(v,S),L=netThK(v,"host","hostMid");if(h>=L)R.push({s:m*h/L,k:"grudge",r:`${nm} ${npw1Gr(v,S)}`})}catch(e){}
+ try{const o=oan(S,v),L=netTh(S,"act");if(o>=L)R.push({s:m*o/L,k:"grudge",r:`ngươi còn mối oán với ${nm}`})}catch(e){}
+ const d=rtDebt(v);/* a debtor comes to repay unasked only once the debt reaches her own «repay» level (nết: Thù dai / Trọng nghĩa at once, Kiêu ngạo / Thực dụng… later); collecting is unchanged */
+ if(d<0||d>0&&d>=netTh(v,"repay"))R.push({s:m*(1+Math.abs(d)*T.debtK),k:"debt",r:d<0?`${nm} tìm đến đòi ngươi trả ân`:`${nm} muốn trả ân cho ngươi`});
  try{if(typeof rgSideOf==="function"&&typeof rgSideNow==="function"&&S.reign){const a=rgSideOf(v),b=rgSideNow();if(a&&b)R.push(a!==b?{s:m*T.fac,k:"faction",r:`${nm} thuộc phe ${rgSideN(a)}, đối nghịch với ngươi`}:{s:m*T.facAlly,k:"faction",r:`${nm} cùng phe ${rgSideN(a)} với ngươi`})/* r2 N1: worded as the standing state it is, not as a move */}}catch(e){}
  try{if(v.nr&&!v.nr.x&&v.nr.c==="me")R.push({s:m*T.goal,k:"goal",r:`đường riêng của ${nm} vướng phải ngươi`})}catch(e){}
  const e=rtEvent(v);if(e)R.push({s:m*(e.c==="h"?T.evK:T.evF),k:"event",r:rtEvLine(e,nm)});

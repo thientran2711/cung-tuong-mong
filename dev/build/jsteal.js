@@ -23,7 +23,7 @@ const ST=window.__stealSt=window.__stealSt||[];   /* measuring only (bot); never
 function stEligible(v,t){return !!(v&&v!==S&&v!==t&&v.alive&&!v.out&&!v.coop&&!v.confined&&nightCh(v)>0&&(typeof ntCan!=="function"||ntCan(v)))}
 function stNeed(v){const N=B().need;const fav=cl(1-(v.sung||0)/100,0,1),rank=rkOf(v)>=7?0:(7-rkOf(v))/7;
  const heir=kidsOf(v).some(k=>k.sex==="m")?B().heirHas:1;return (N.fav*fav+N.rank*rank+N.heir*heir)/(N.fav+N.rank+N.heir)}
-function stRel(v,t){const b=B();const a=aff(v,t);let r=a>0?Math.max(b.friendMin,1-a/b.friend):1;return r*(1+b.oanW*Math.min(100,Math.max(0,oan(v,t)))/100)}
+function stRel(v,t){const b=B();const a=aff(v,t);let r=a>0?Math.max(b.friendMin,1-a/netTh(v,"than2")):1;return r*(1+b.oanW*Math.min(100,Math.max(0,oan(v,t)))/100)}
 function stFear(v,t){const b=B();let f=rkOf(t)-rkOf(v)>=b.fear.gap?b.fear.f:1;const d=S.nightWhy;if(d&&d.cause==="custom"&&t&&rkOf(t)>=7)f*=b.custom;return f}
 /* OD03 two-way: she weighs each mode by the odds she SEES (stealShown: the month art only once she knows it, as the player's flip card); the roll stays the true oSteal (stealNight) */
 function stSeen(v,m){return typeof stealShown==="function"?stealShown(v,m):oSteal(v,m)}

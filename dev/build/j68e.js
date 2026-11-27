@@ -1,7 +1,7 @@
 /* ================= j68e: common event content, part 1 (đời thường, khách đến, Hoàng thượng) =================
    Every option: a real gain and a real cost or risk; odds by the ladder; outcomes and reports are true (NPCs may believe wrong things, the game never lies). */
 const T6=(v,t)=>tr6(v).includes(t);
-const fr6=v=>aff(v,S)>=10,fo6=v=>{try{return bandOf(danger(v,S))>=1}catch(e){return aff(v,S)<-10}};
+const fr6=v=>aff(v,S)>=netTh(v,"quen"),fo6=v=>{try{return bandVT(v,S)>=1}catch(e){return aff(v,S)<netTh(v,"ky")}};
 const sea6=s=>SEASON[S.month-1]===s;
 const hasStaff6=n=>(S.staff||[]).length>=(n||1);
 
@@ -11,7 +11,7 @@ EV6("gossipTea","day",{a:["rv"],pp:()=>{const a=rv6(fr6,v=>5+aff(v,S)/5);return 
  o:X=>[c6("Nghe và giữ kín",{c:{suc:-3},r:[[X.A,6]],k:[R6("mất nửa buổi chiều")]}),
   c6("Gợi chuyện để dò tin",{p:od(BAL.odb.j68e.odP+S.tamco/3),w:{mat:BAL.eff.j68e.matW},r:[[X.A,2]],lr:[[X.A,-6]],lt:[R6("nàng thấy ngươi tò mò quá")],ok:()=>`${X.A.n} buột miệng kể vài chuyện có ích. ${statTxt("mat",BAL.eff.j68e.matW)}.`}),
   c6("Khéo cáo mệt",{w:{suc:4},r:[[X.A,-3]]})]});
-EV6("giftArrive","day",{a:["rv"],pp:()=>{const a=rv6(v=>aff(v,S)>-20);return a==null?null:{a0:a}},w:C=>1.6,
+EV6("giftArrive","day",{a:["rv"],pp:()=>{const a=rv6(v=>aff(v,S)>netTh(v,"ky"));return a==null?null:{a0:a}},w:C=>1.6,
  v:["Cung nữ của {A} mang sang một hộp gỗ đàn hương, trong có hai lọ hương liệu, nói là quà đáp lễ.","{A} sai người gửi tặng một xấp lụa Hàng Châu, kèm lời nhắn 'chút lòng thành'.","Một hộp điểm tâm hoa quế đề tên {A} được đưa tới, còn ấm.","{A} gửi sang một chậu lan quý, nói hoa nở đúng lúc nhớ đến ngươi."],
  o:X=>[c6("Nhận, đáp lễ hậu hĩnh",{c:{bac:-20},r:[[X.A,8]],w:{danh:1}}),
   c6("Nhận, cho người thử trước",{c:{suc:-2},w:{tamco:1},r:[[X.A,2]],k:[R6(`nếu ${X.A.n} biết, có thể phật ý`)],ok:()=>`Đồ của ${X.A.n} sạch sẽ, không có gì lạ.`}),
@@ -148,7 +148,7 @@ EV6("empChess","emp",{a:["emp"],pp:()=>S.sung>=25?{a0:0}:null,w:C=>1,
   c6("Cáo mệt xin hôm khác",{w:{suc:3},k:[R6(`Sủng ${balSg(BAL.eff.j68e.sungOk)}`)],ok:()=>{apply({sung:BAL.eff.j68e.sungOk});return "Ngài cho lui, hơi tiếc."}})]});
 EV6("empAsksAbout","emp",{a:["emp","rv"],pp:()=>{const b=rv6();return b==null||S.sung<25?null:{a0:0,a1:b}},w:C=>1,
  v:["Hoàng thượng hỏi bâng quơ: 'Nàng thấy {B} là người thế nào?'","Ngài hỏi ngươi có biết vì sao {B} dạo này hay cáo bệnh.","Ngài muốn ban thưởng cho {B}, hỏi ngươi nên ban gì.","Ngài nhắc {B} múa đẹp, rồi nhìn ngươi chờ xem phản ứng."],
- o:X=>[c6(`Nói tốt cho ${X.B.n}`,{w:{duc:2},r:[[X.B,8]],k:[R6(`ngài để ý ${X.B.n} hơn`)],ok:()=>{X.B.o.sung=cl((X.B.o.sung||30)+2,0,100);return `Ngài gật gù, nhớ đến ${X.B.n}.`}}),
+ o:X=>[c6(`Nói tốt cho ${X.B.n}`,{w:{duc:2},r:[[X.B,8]],k:[R6(`ngài để ý ${X.B.n} hơn`)],ok:()=>{spAdd(X.B.o,"sung",2);return `Ngài gật gù, nhớ đến ${X.B.n}.`}}),
   c6("Nói thật, không thêm bớt",{w:{danh:1,duc:1},wt:[G6("ngài tin lời ngươi hơn")],k:[R6("lời thật có khi mất lòng")]}),
   c6("Khéo nói xấu một câu",{p:od(BAL.odb.j68e.odP_27+S.tamco/2+S.sung/5),w:{sung:2},wt:[G6(`ngài lạnh với ${X.B.n}`)],l:{sung:-3,duc:-2},lt:[R6("ngài ghét kẻ gièm pha")],ok:()=>{X.B.o.sung=cl((X.B.o.sung||30)-3,0,100);return `Ngài nhíu mày khi nhắc đến ${X.B.n}.`}})]});
 EV6("empGiftOdd","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.9,

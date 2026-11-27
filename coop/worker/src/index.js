@@ -8,7 +8,7 @@ const V = "coop-2";
 const CHAT_MAX = 50, CHAT_LEN = 300, CHAT_NAME = 24, CHAT_FRAME = 2400, CHAT_GAP = 350;   // chat: last 50 per room, 300 chars, 2.4 KB frame, 350 ms between two sends of one seat
 const ALPH = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 const CHUNK = 40000;            // chars per storage value (<128 KiB even in 3-byte UTF-8)
-const BIG = 200000;             // send gzip binary above this many chars
+const BIG = 8000;               // send gzip binary above this many chars (robot-coop-fix-1: was 200000, so the week / room state (≈130–170 KB) went plain = coopSyncKBMax over the 100 KB ceiling; 8000 = the client's own GZ in jcoop.js; the client gunzips any binary frame, in order (rxQ))
 const STALE = 45000;            // ms of silence before a socket counts as gone
 const IDLE_DAYS = 30;
 const SEATMAX = 3000000;        // chars of one seat's week copy

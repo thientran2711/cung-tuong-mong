@@ -52,14 +52,14 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
    BAL.kcg.fest. Bots (window.__bot) and a missing mini-game get the same quick score as the Phúc tuyển seam. */
 const KCFEST={"Hội thơ":"tho","Ngắm hoa":"dan","Thượng nguyên":"doden","Thất tịch":"kim"};
 function kcgFestRes(t,raw,extra,b){const F=BAL.kcg.fest;let txt;
- if(raw>=F.top){S.danh+=F.danh[0];S.kap+=BAL.eff.jkc.kapKcFest;txt=`${t}: ngươi đứng đầu, cả kinh thành nhắc tên.`;S.kc.fTop=(S.kc.fTop||0)+1;
+ if(raw>=F.top){statSet(S,"danh",(S.danh||0)+F.danh[0]);S.kap+=BAL.eff.jkc.kapKcFest;txt=`${t}: ngươi đứng đầu, cả kinh thành nhắc tên.`;S.kc.fTop=(S.kc.fTop||0)+1;
   if(!S.kc.ev.vp&&S.danh>=BAL.danhG.kcVihanh&&S.sac>=BAL.kcg.vpSac&&kcRare("kcR3",BAL.kcg.vpRare)){S.kc.ev.vp=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
- else if(raw>=F.ok){S.danh+=F.danh[1];txt=`${t}: ngươi được khen.`}else{S.danh=Math.max(0,S.danh-F.danh[2]);txt=`${t}: ngươi không nổi bật.`}
- const mu=kcR("muoi");if(mu&&roll(F.sisP))mu.danh+=raw<F.ok?F.sis[0]:F.sis[1];const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
+ else if(raw>=F.ok){statSet(S,"danh",(S.danh||0)+F.danh[1]);txt=`${t}: ngươi được khen.`}else{S.danh=Math.max(0,S.danh-F.danh[2]);txt=`${t}: ngươi không nổi bật.`}
+ const mu=kcR("muoi");if(mu&&roll(F.sisP))statSet(mu,"danh",(mu.danh||0)+(raw<F.ok?F.sis[0]:F.sis[1]));const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
 kcFest=function(t,art,extra){const b=rsnap();const kind=KCFEST[t]||art;
  if(window.__bot||typeof playArt!=="function"||!isKc()){kcgFestRes(t,cl(BAL.kcg.fest.bot[0]+R(BAL.kcg.fest.bot[1]),0,10),extra,b);return}
  let done=0;const fin=raw=>{if(done)return;done=1;kcgFestRes(t,raw,extra,b);try{showModal()}catch(e){}};
- try{playArt({art:kind,occ:"hoi",title:t,note:"Thứ hạng ở hội tính theo màn chơi",quick:{n:"Để tài nghệ quyết định",sub:`tính ${BAL.kcg.fest.skip}/10, như người cùng bậc`},onDone:(raw,o)=>fin(o&&o.skipped?BAL.kcg.fest.skip:raw)})}catch(e){console.error(e);fin(BAL.kcg.fest.skip)}};
+ try{playArt({art:kind,occ:"hoi",title:t,note:"Thứ hạng ở hội tính theo màn chơi",quick:{n:"Để tài nghệ quyết định",sub:`tính ${kitSkipCap(BAL.kcg.fest.skip)}/10, tự thi giỏi thì hơn`},onDone:(raw,o)=>fin(o&&o.skipped?kitSkipCap(BAL.kcg.fest.skip):raw)})}catch(e){console.error(e);fin(kitSkipCap(BAL.kcg.fest.skip))}};
 
 /* ---------- OR08 carry-over at palace entry (OUTSIDE_PLAN §9 table + "Thư nhà" line) ----------
    (1) Sắc/Tài/Tâm cơ/Đức/Sức: each at most BAL.kcg.carry.cap over its value at the start of the home road (S.kc.st0, written at kcInit;
@@ -125,16 +125,18 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* ---------- OR14 «Khuê các» title set (OUTSIDE_PLAN §11): first selection, Quý nhân on entry, each rare ending ----------
    jdh catalogue group "kc" (shown only once earned, like «Thiên mệnh»); cosmetic, one step, tier BAL.kcg.title.*; kept across lives in
    localStorage "ctm-kct" (the Sổ luân hồi lists them) and worn again in a later life like the Thiên mệnh titles (jge geCarry). */
-const KCT={kc_tuyen:["Trâm hoa ngự ban","Qua kỳ tuyển tú, được giữ thẻ bài vào cung"],kc_quy:["Khuê tú danh môn","Từ khuê các vào cung, phong ngay Quý nhân"],
+const KCT={kc_tuyen:["Trâm hoa ngự ban",`Qua kỳ tuyển tú với tiếng thơm khắp kinh thành (Danh từ ${BAL.kcg.title.tuyenDanh} trở lên), được giữ thẻ bài vào cung`],kc_quy:["Khuê tú danh môn","Từ khuê các vào cung, phong ngay Quý nhân"],
  kc_R1:["Thuyền xuôi phương Nam","Kết cục hiếm ngoài cung: bỏ trốn cùng người thương"],kc_R2:["Thanh mai kết tóc","Kết cục hiếm ngoài cung: thanh mai thành phu quân"],
  kc_R3:["Hội thơ ngộ vương","Kết cục hiếm ngoài cung: làm Vương phi"],kc_R4:["Cân quắc Nhạn Môn","Kết cục hiếm ngoài cung: nữ tướng Nhạn Môn"],
  kc_R5:["Sứ hoa hòa thân","Kết cục hiếm ngoài cung: hòa thân thay công chúa"],kc_R6:["Muối trắng Giang Nam","Kết cục hiếm ngoài cung: nữ thương Giang Nam"]};
 function kctStore(){const g=store.get("ctm-kct");return g&&typeof g==="object"&&g.t?g:{t:{}}}
 (function(){try{if(typeof DH_CAT!=="object")return;BAL.dh.T=BAL.dh.T||{};for(const k in KCT){const d=KCT[k];DH_CAT[k]={n:d[0],g:"kc",how:()=>{const r=kctStore().t[k];return `${d[1]}${r&&r.first?` · kiếp ${r.first.life}`:""}`}};
   BAL.dh.T[k]={n:[1],b:/^kc_R/.test(k)?BAL.kcg.title.rare:BAL.kcg.title.tier,ch:[]}}}catch(e){console.error("kct",e)}})();
-function kctGive(k){try{if(!KCT[k]||!S)return;const g=kctStore();const life=(typeof geLifeNo==="function"?geLifeNo():typeof lifeLog==="function"?lifeLog().length+1:1);/* geLifeNo lives inside jge's closure: same count here */const e=g.t[k]||(g.t[k]={lives:[],first:{life,who:S.name}});if(!e.lives.includes(life))e.lives.push(life);store.set("ctm-kct",g);
+function kctGive(k){try{if(!KCT[k]||!S)return;const g=kctStore();const life=(window.geK&&typeof geK.lifeNo==="function"?geK.lifeNo():typeof lifeLog==="function"?lifeLog().length+1:1);/* geK.lifeNo = jge geLifeNo (it lives in jge's closure): the one count */const e=g.t[k]||(g.t[k]={lives:[],first:{life,who:S.name}});if(!e.lives.includes(life))e.lives.push(life);store.set("ctm-kct",g);
   S.dh=S.dh||{};if(!S.dh[k]||S.dh[k].i==null||S.dh[k].i<0){if(typeof dhInc==="function")dhInc(S,k,1);else S.dh[k]={n:1,i:0,at:[""]}}log(`<b class="g">Danh hiệu mới: «${KCT[k][0]}».</b>`)}catch(e){console.error("kct",e)}}
-(function(){const e0=kcEnter;kcEnter=function(rank){const r=e0.apply(this,arguments);try{if(S.kc&&S.kc.inPal){kctGive("kc_tuyen");if(S.rank>=BAL.kcg.title.quyRank)kctGive("kc_quy")}}catch(e){}return r}})();
+(function(){const e0=kcEnter;kcEnter=function(rank){const r=e0.apply(this,arguments);try{if(S.kc&&S.kc.inPal){/* TITLE-BAL (owner OD 26/11 ~18:20Z (3)(5)): ONE entry title, never two at once, and never just for walking in:
+   Quý nhân or higher → «Khuê tú danh môn»; else «Trâm hoa ngự ban» only with her home Danh ≥ BAL.kcg.title.tuyenDanh (a lady the capital speaks of) */
+   if(S.rank>=BAL.kcg.title.quyRank)kctGive("kc_quy");else if((S.danh||0)>=BAL.kcg.title.tuyenDanh)kctGive("kc_tuyen")}}catch(e){}return r}})();
 (function(){const e0=kcEnd;kcEnd=function(id){try{const m=/^kcR(\d)$/.exec(id||"");if(m)kctGive("kc_R"+m[1])}catch(e){}return e0.apply(this,arguments)}})();
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);try{const g=kctStore();if(S&&BAL.kcg.title.carry){S.dh=S.dh||{};for(const k in g.t)if(DH_CAT[k]&&!S.dh[k])S.dh[k]={n:1,i:0,at:[""],carry:1}}}catch(e){}return r}})();
 if(typeof pastHTML==="function")(function(){const p0=pastHTML;pastHTML=function(){const h=p0.apply(this,arguments);try{const g=kctStore();const n=Object.keys(g.t).filter(k=>KCT[k]).length;if(!n)return h;
