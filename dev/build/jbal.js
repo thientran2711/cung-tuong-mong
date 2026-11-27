@@ -241,7 +241,6 @@ Object.assign(BAL,{
  mortx:{youngAge:6},    /* a child younger than this dies of pox / fever / plague in the death line, older of "lâm bệnh" (jmort) */
  ly:{npcAge:{tgk:36,ttp:36}},        /* fixed ages of the Tân Giả khố steward and the Thượng thư phòng tutor (jly NPCFIX) */
  cmaidx:{age:16,ageR:7},             /* close-maid candidates offered to pick: age = age + R(ageR) */
- audit:{loan:30},       /* bạc a friendly consort lends on "Nhờ giúp đỡ" (jaudit; j9's base option types the same 30) */
  m90:{kidAge:14},       /* an unknown person younger than this shows the child silhouette (j90) */
  m72:{bdOk:{danh:3}}    /* quest fam_bd (Bắc Địch father: open a horse market): Danh on success */
 });
