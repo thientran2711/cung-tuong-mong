@@ -24,7 +24,7 @@ const ROOT = path.resolve(arg('root', path.resolve(__dirname, '..', '..')));
 const DEVS = String(arg('dev', 'fold,ipad')).split(',');
 const ONLY = arg('only', '') ? String(arg('only')).split(',') : null;
 const OUT = path.resolve(arg('out', '/tmp/dlg-dead-scan')); fs.mkdirSync(OUT, { recursive: true });
-const VP = { fold: { width: 755, height: 1000 }, ipad: { width: 1180, height: 820 } };
+const VP = { fold: { width: 755, height: 1000 }, ipad: { width: 1180, height: 820 }, cover: { width: 412, height: 1058 } };/* cover = Fold cover screen (WORKER_BRIEF 412x1058) */
 
 /* ---------- harness: a mid-life save at home (the F/handover fixture y05-ncBtuc-035; loaded like j6's data-load handler — setup only) ----------
    --save <file> (default: dev/handover/fixtures/save-growth/y05-ncBtuc-035.json from the handover branch:
@@ -142,6 +142,15 @@ async function runPicker(p, dev, name, rows) {
   await p.evaluate(`(()=>{const f=${PICKERS[name].toString()};try{if(window.DQ)DQ.user=(DQ.user||0)+1;f();showModal()}finally{if(window.DQ)DQ.user--}})()`);
   let st = null; for (let k = 0; k < 12; k++) { await p.waitForTimeout(500); await p.evaluate(() => document.querySelectorAll('.kfgain').forEach(e => e.remove())); st = await p.evaluate(READ); if (st.up && await p.$('#modal .kipc')) break }
   const n = await p.$$eval('#modal .kipc', L => L.length);
+  /* K-PICK-FOLD-BAND (KK61): (a) no empty band between the dialog picture and its text, (b) the prompt line is on screen (not under the options) */
+  const band = await p.evaluate(() => { const kb = document.querySelector('#modal #mb>.kpb'); if (!kb) return { none: 1 }; const sj = kb.querySelector(':scope>.kpsubj'), tx = kb.querySelector(':scope>.kpmain'), o = document.querySelector('#modal #mb>.opts'); if (!tx) return { none: 1 };
+    const B = kb.getBoundingClientRect(), T = tx.getBoundingClientRect(), S = sj && sj.offsetParent ? sj.getBoundingClientRect() : null; const stacked = S && T.top >= S.bottom - 2;
+    const gap = stacked ? Math.max(0, Math.round(T.top - S.bottom)) : 0; const f = tx.querySelector('.kfact,p') || tx; const F = f.getBoundingClientRect();
+    const y = F.top + Math.min(10, F.height / 2), x = F.left + Math.min(40, F.width / 2); const e = document.elementFromPoint(x, y); const oT = o ? o.getBoundingClientRect().top : Infinity, lim = Math.min(B.height > 0 ? B.bottom + 1 : Infinity, oT); const outside = !!e && !e.closest('#modal'); const shown = F.height > 4 && y < lim && !!e && (tx.contains(e) || outside);/* a layer OUTSIDE the dialog (gift fx catcher, #dawn left by an earlier case in the run) is reported as hit «OUT», not a layout fault *//* a zero-size .kpb (display:contents layouts) gives no bottom: the options' top is the limit */
+    return { gap, prompt: (f.innerText || '').slice(0, 40), shown, hit: e ? (e.tagName + '.' + String(e.className).slice(0, 40) + (e.closest('#modal') ? '' : ' OUT')) : '-', fy: Math.round(F.top), fh: Math.round(F.height), fx: Math.round(x), txTop: Math.round(T.top), kbBottom: Math.round(B.bottom), optTop: o ? Math.round(o.getBoundingClientRect().top) : null } });
+  const bandBad = !band.none && (band.gap > 24 || !band.shown);
+  if (process.env.DUMPKPB) console.log(name, dev, JSON.stringify(await p.evaluate(() => { const k = document.querySelector('#modal #mb>.kpb'); if (!k) return null; const cs = getComputedStyle(k); const ch = [...k.children].map(c => { const z = getComputedStyle(c); return c.className + ' row=' + z.gridRow + ' col=' + z.gridColumn + ' area=' + z.gridArea }); return { cls: k.className, style: k.getAttribute('style'), gtr: cs.gridTemplateRows, gtc: cs.gridTemplateColumns, gta: cs.gridTemplateAreas, h: cs.height, minh: cs.minHeight, dlg: document.querySelector('#modal .dlg').className, mb: document.querySelector('#modal #mb').className + ' ' + getComputedStyle(document.querySelector('#modal #mb')).gridTemplateRows, ch } })));
+  if (process.env.DUMPTREE) console.log(name, dev, JSON.stringify(await p.evaluate(() => { const mb = document.querySelector('#modal #mb'); const out = []; const walk = (e, d) => { for (const c of e.children) { const r = c.getBoundingClientRect(); const cs = getComputedStyle(c); out.push('  '.repeat(d) + c.tagName.toLowerCase() + (c.id ? '#' + c.id : '') + '.' + String(c.className).split(' ').slice(0, 3).join('.') + ' y=' + Math.round(r.top) + ' h=' + Math.round(r.height) + ' disp=' + cs.display + ' vis=' + cs.visibility + ' op=' + cs.opacity + ' txt=' + (c.innerText || '').slice(0, 40).replace(/\n/g, ' ')); if (d < 3 && !c.classList.contains('kipw')) walk(c, d + 1) } }; walk(mb, 0); return out }), null, 1));
   if (!st.up || !n) { rows.push({ dev, name, verdict: 'SKIP', why: 'picker did not open / no tile', st }); return }
   await p.screenshot({ path: path.join(OUT, `${dev}-${name}-open.jpg`), type: 'jpeg', quality: 50 });
   const lim = +arg('tiles', 400); const dead = [];
@@ -163,7 +172,7 @@ async function runPicker(p, dev, name, rows) {
   if (go) { const r = await rt.tap('#modal .kipgo', { screen: name, label: 'kipgo' }); await p.waitForTimeout(2500); const s2 = await p.evaluate(READ); goOk = r && (!s2.up || s2.sig !== sig0); if (!goOk) goWhy = r ? 'confirm tapped, dialog stays' : 'confirm not reachable (' + ((rt.stats().deadList.slice(-1)[0] || {}).cover || '') + ')' }
   else goWhy = 'no enabled confirm';
   if (dead.length || goOk === false) await p.screenshot({ path: path.join(OUT, `${dev}-${name}-dead.jpg`), type: 'jpeg', quality: 55 });
-  rows.push({ dev, name, tiles: n, tested: Math.min(n, lim), goBelow, dead: dead.length, deadList: dead.slice(0, 8), confirm: goOk === null ? 'none' : goOk ? 'ok' : 'DEAD', verdict: dead.length || goOk === false || goBelow > 0 ? 'FAIL' : 'ok', why: [dead.length ? dead.length + ' tile(s) dead' : '', goBelow > 0 ? 'confirm ' + goBelow + ' px below the box' : '', goWhy].filter(Boolean).join('; ') });
+  rows.push({ dev, name, tiles: n, tested: Math.min(n, lim), goBelow, band, dead: dead.length, deadList: dead.slice(0, 8), confirm: goOk === null ? 'none' : goOk ? 'ok' : 'DEAD', verdict: dead.length || goOk === false || goBelow > 0 || bandBad ? 'FAIL' : 'ok', why: [dead.length ? dead.length + ' tile(s) dead' : '', goBelow > 0 ? 'confirm ' + goBelow + ' px below the box' : '', bandBad ? (band.gap > 24 ? 'empty band ' + band.gap + ' px' : '') + (band.shown ? '' : ' prompt hidden') : '', goWhy].filter(Boolean).join('; ') });
 }
 
 /* RING face of the item pickers (kitRingItem, jkring-item kriGiftOpen: what a player sees on LIVE; the grid above is the robots' / ring-off face).
@@ -181,6 +190,13 @@ async function runRing(p, dev, name, rows) {
   await p.evaluate(`(()=>{const f=${RINGS[name].toString()};try{if(window.DQ)DQ.user=(DQ.user||0)+1;f();showModal()}finally{if(window.DQ)DQ.user--}})()`);
   let n = 0; for (let k = 0; k < 16; k++) { await p.waitForTimeout(500); await p.evaluate(() => document.querySelectorAll('.kfgain').forEach(e => e.remove())); n = await p.$$eval('.kri .kri-t', L => L.length).catch(() => 0); if (n) break }
   const offered = await p.evaluate(() => { const m = Q[0]; return m && m.opts ? m.opts.filter(o => o && o.ik != null && S.inv[o.ik]).length : 0 });
+  /* RV-176 nit (law 6c): every offered piece not on the ring must be EXPLAINED — a duplicate option of a piece already on the ring (same S.inv entry), or a piece the
+     dialog itself does not draw (K-PICK-LIVE refused: counted in the dialog's «Còn N món khác trong rương …» line). Unexplained = dropped = FAIL. */
+  const acct = await p.evaluate(() => { const m = Q[0], M = document.getElementById('modal'); const ops = M.querySelector('.opts'); const O = (m.opts || []).map((c, i) => [c, i]).filter(([c]) => c && c.ik != null && S.inv[c.ik]);
+    const drawn = O.filter(([c, i]) => ops && ops.querySelector('.opt[data-m="' + i + '"]')); const ringIk = new Set(drawn.map(([c]) => c.ik)); const notDrawn = O.filter(x => !drawn.includes(x));
+    const dupIk = notDrawn.filter(([c]) => ringIk.has(c.ik)).length; const dupSameIk = O.length - new Set(O.map(([c]) => c.ik)).size;
+    const past = [...M.querySelectorAll('#mb p.past, #mb .past')].map(e => e.innerText).join(' | '); const pastN = +((past.match(/Còn (\d+) món/) || [])[1] || 0);
+    return { offered: O.length, drawn: drawn.length, distinctIk: new Set(O.map(([c]) => c.ik)).size, dupSameIk, notDrawn: notDrawn.length, notDrawnDupOfRing: dupIk, notDrawnNew: notDrawn.length - dupIk, pastN, past: past.slice(0, 160) } });
   if (!n) { rows.push({ dev, name, verdict: 'SKIP', why: 'ring did not open', offered }); return }
   await p.waitForTimeout(900);
   await p.screenshot({ path: path.join(OUT, `${dev}-${name}-open.jpg`), type: 'jpeg', quality: 50 });
@@ -204,7 +220,7 @@ async function runRing(p, dev, name, rows) {
   else if (main) { const before = await p.evaluate(() => (document.querySelector('.kri .kri-pane') || {}).textContent || ''); const r = await rt.tap('.kri .kri-acts .kbtn.kri-main', { screen: name, label: 'act' }); await p.waitForTimeout(2200); const after = await p.evaluate(() => ({ t: (document.querySelector('.kri .kri-pane') || {}).textContent || '', ring: !!document.querySelector('.kri') })); act = r && (!after.ring || after.t !== before) ? 'ok' : 'DEAD'; if (act === 'DEAD') actWhy = r ? 'act tapped, nothing changed' : 'act button not reachable' }
   else act = 'locked';
   if (dead.length || act === 'DEAD') await p.screenshot({ path: path.join(OUT, `${dev}-${name}-dead.jpg`), type: 'jpeg', quality: 55 });
-  rows.push({ dev, name, offered, ring: n, cut: Math.max(0, offered - n), fronts: seen.size, dead: dead.length, deadList: dead.slice(0, 8), act, subline: subl.length, sublineList: subl.slice(0, 6), maxLines, verdict: dead.length || act === 'DEAD' || subl.length ? 'FAIL' : 'ok', why: [dead.length ? dead.length + ' ring tile(s) / arrows dead' : '', subl.length ? subl.length + ' front item(s): sub line over the hint' : '', actWhy].filter(Boolean).join('; ') });
+  const unexpl = Math.max(0, acct.notDrawnNew - acct.pastN) + Math.max(0, acct.drawn - n); rows.push({ dev, name, offered, acct, unexpl, ring: n, cut: Math.max(0, offered - n), fronts: seen.size, dead: dead.length, deadList: dead.slice(0, 8), act, subline: subl.length, sublineList: subl.slice(0, 6), maxLines, verdict: dead.length || act === 'DEAD' || subl.length || unexpl ? 'FAIL' : 'ok', why: [dead.length ? dead.length + ' ring tile(s) / arrows dead' : '', subl.length ? subl.length + ' front item(s): sub line over the hint' : '', actWhy].filter(Boolean).join('; ') });
 }
 
 /* STALE HAND LIFT (law 11, F «Tin báo» «Để sau» → «Đặt lại» / «Chọn lá này» dead): she lifts a card of queue card A, then A is REPLACED by the next card
