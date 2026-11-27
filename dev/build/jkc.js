@@ -461,7 +461,7 @@ function kcFestP(art){return kcSpanP(kcFestBase(art),BAL.kc2.fest.ok,BAL.kc2.fes
 function kcFest(t,art,extra){const b=rsnap();const F=BAL.kc2.fest;const sc=kcFestBase(art)+R(F.span);let txt;
  if(sc>=F.top){spAdd(S,"danh",4);S.kap+=BAL.eff.jkc.kapKcFest;txt=`${t}: ngươi đứng đầu, cả kinh thành nhắc tên.`;if(!S.kc.ev.vp&&S.danh>=BAL.danhG.kcVihanh&&S.sac>=80&&kcRare("kcR3",.4)){S.kc.ev.vp=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
  else if(sc>=F.ok){spAdd(S,"danh",2);txt=`${t}: ngươi được khen.`}else{S.danh=Math.max(0,S.danh-1);txt=`${t}: ngươi không nổi bật.`}
- const mu=kcR("muoi");if(mu&&roll(BAL.odb.jkc.rlKcFest))statSet(mu,"danh",(mu.danh||0)+(sc<40?3:1));const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
+ const mu=kcR("muoi");if(mu&&roll(BAL.odb.jkc.rlKcFest))statSet(mu,"danh",(mu.danh||0)+(sc<F.ok?3:1));const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
 /* FIRSTCARD (law 4/7): the fever numbers live in BAL.kc2.ill; kcIllLive(p, cost) = the chance (0..100) she lives through the dịch card (the same rolls) */
 /* FIRSTCARD: the plea's chance (one place: the roll and the card's odds word) */
 function kcQuyP(c){return BAL.kc2.kcCard.quyXinChaCho_rb+(c?c.af/2:0)+(S.kc.want?BAL.kc2.kcCard.quyXinChaWant:0)}
