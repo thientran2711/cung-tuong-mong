@@ -198,7 +198,7 @@ function kidTab(){const dd=k=>typeof dthIs==="function"&&dthIs(k),K=S.kids.filte
   "Có thai thì giữ gìn Sức, nhờ thái y an thai; kẻ ghen có thể hại thai.",
   "Con sinh ra hiện ở đây: dạy dỗ, chăm con, bàn hôn sự; con trai được xét vào hàng kế vị."]);
  const hl=S.heir&&S.heir.k?(S.heir.v?`Thái tử: ${S.heir.k.name}, con của ${S.heir.v.name}.`:`<span class="g">Con ngươi, ${S.heir.k.name}, là Thái tử.</span>`):"Chưa lập Thái tử.";
- return `<div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+pager("kid",K.map((k,i)=>({f:kidFace(k),name:sname(k),dim:!k.alive,sep:nD&&i===n0?"Đã khuất":""})),i=>kidCard(K[i])).replace(/(<span class="pcount">[^<]*)/,nD?`$1 · Đã khuất: ${nD}`:"$1")}
+ return `<div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+pager("kid",K.map((k,i)=>({p:k,f:kidFace(k),name:sname(k),dim:!k.alive,sep:nD&&i===n0?"Đã khuất":""})),i=>kidCard(K[i])).replace(/(<span class="pcount">[^<]*)/,nD?`$1 · Đã khuất: ${nD}`:"$1")}
 /* 2. Kế vị */
 function kvReasons(x,i,o){const L=[];const k=x.k;
  if(k.heir)L.push("Đã được lập làm Thái tử: đứng đầu hàng kế vị.");
@@ -215,7 +215,7 @@ function kvCard(x,i,o){const k=x.k,v=x.v||S,mine=!x.v;const chips=[k.heir?chip("
   groups:[["Vì sao đứng thứ "+(i+1),kvReasons(x,i,o).map(t=>`<p class="kr3note khtwhy">${t}</p>`)],["",acts]],empty:""})}
 function kvTab(){const o=kvOrder();const rule=`<div class="ph khtrule"><span>${gl("Lập đích, lập trưởng, lập hiền","Lập đích · lập trưởng · lập hiền")} <small class="past">(chạm để xem đủ luật)</small></span><span>${o.length} hoàng tử</span></div>`;
  if(!o.length)return rule+htEmpty("img/act-phong-tuoc.webp","Trong cung chưa có hoàng tử",["Hoàng tử nào ra đời (con ngươi hay con phi tần khác) sẽ đứng vào hàng kế vị ở đây, theo lệ lập đích, lập trưởng, lập hiền.","Hoàng tử từ 6 tuổi mới được xét lập Thái tử."]);
- return rule+pager("kvo",o.map((x,i)=>({f:kidFace(x.k),name:`${i+1}. ${sname(x.k)}`})),i=>kvCard(o[i],i,o))}
+ return rule+pager("kvo",o.map((x,i)=>({p:x.k,f:kidFace(x.k),name:`${i+1}. ${sname(x.k)}`})),i=>kvCard(o[i],i,o))}
 /* 3. Hoàng tự trong cung (other mothers, grouped by mother) */
 function kinList(){const L=[];for(const v of (rivals||[])){const ks=(v.kids||[]).filter(k=>k.alive);if(ks.length)ks.sort((a,b)=>b.age-a.age).forEach((k,j)=>L.push({k,v,sep:j===0?momLab(v)+momNote(v):""}))}return L}
 /* birth order among all the Emperor's children of the same sex (dead ones counted: the palace remembers) */
@@ -239,7 +239,7 @@ function kinCard(x){const k=x.k,v=x.v;const o=k.sex==="m"?kvOrder():[];const i=o
  const chips=[i>=0?chip(`Kế vị thứ ${i+1}`,""):"",k.heir?chip("Thái tử","ok"):"",k.hW?chip(k.hW.kind==="hoa"?"Hòa thân Bắc Địch":"Đã xuất giá","ok"):"",met?"":chip("Chưa gặp mặt",""),k.hp<35?chip("Đang ốm","hot"):""];
  return pcard({tabKey:"kin",f:kidFace(k),name:k.sex==="f"&&typeof h54Name==="function"?(h54Init(k),h54Name(k)):k.name,rank:`${ic("con",16)}${title} · ${k.age} tuổi`,lines:L,chips,groups:[["Cả cung đều biết",pub]],empty:""})}
 function kinTab(){const L=kinList();if(!L.length)return htEmpty("img/act-cat-cham-con.webp","Phi tần khác chưa có con",["Hoàng tử, công chúa của các phi tần khác hiện ở đây, xếp theo người mẹ.","Con ngươi ở mục Con của ngươi."]);
- return `<div class="ph"><span>Con của các phi tần khác, xếp theo người mẹ.</span><span>${L.length} hoàng tự</span></div>`+pager("kin",L.map(x=>({f:kidFace(x.k),name:sname(x.k),sep:x.sep})),i=>kinCard(L[i]))}
+ return `<div class="ph"><span>Con của các phi tần khác, xếp theo người mẹ.</span><span>${L.length} hoàng tự</span></div>`+pager("kin",L.map(x=>({p:x.k,f:kidFace(x.k),name:sname(x.k),sep:x.sep})),i=>kinCard(L[i]))}
 /* 4. Hôn sự (princesses and princes of age, every mother) */
 function honList(){const L=[];const D=h54Daus().filter(([k])=>k.age>=BAL.age.matchShow||k.hW||k.hB),M=pkSons().filter(([k])=>k.age>=BAL.age.matchShow||k.pB||k.pW);
  const mineFirst=(a,b)=>((a[1]===S)?0:1)-((b[1]===S)?0:1)||b[0].age-a[0].age;
@@ -260,7 +260,7 @@ function honCard(x){const k=x.k,p=x.p,me=p===S;const L=[`Mẹ: <b>${momLab(p)}</
 function honTab(){h54PoolUp();qnPoolUp();const L=honList();
  const head=`<div class="ph"><span>Con từ ${BAL.age.betroth} tuổi được bàn hôn sự, cưới khi tròn ${BAL.age.wed}. Nhà thông gia chống lưng ngươi: <b>${S.hon||0}</b>.</span>${S.hEnv?`<span class="r">Sứ thần Bắc Địch chờ cầu hôn một công chúa từ ${BAL.age.wed} tuổi.</span>`:""}</div>`;
  if(!L.length)return head+htEmpty("img/act-hon-su.webp","Chưa có hoàng tự nào đến tuổi bàn hôn sự",["Công chúa, hoàng tử từ "+(BAL.age.matchShow)+" tuổi hiện ở đây; từ "+(BAL.age.betroth)+" tuổi mẹ được bàn hôn sự, cưới khi tròn "+(BAL.age.wed)+".","Công chúa gả vào nhà quyền thần: nhà chồng chống lưng người mẹ. Hoàng tử cưới quý nữ: nhà vợ chống lưng người mẹ và cả hoàng tử trong hàng kế vị.","Các mối (công tử, quý nữ) ở mục Quý tộc kén rể · kén dâu."]);
- return head+pager("hon",L.map(x=>({f:kidFace(x.k),name:sname(x.k),sep:x.sep})),i=>honCard(L[i]))}
+ return head+pager("hon",L.map(x=>({p:x.k,f:kidFace(x.k),name:sname(x.k),sep:x.sep})),i=>honCard(L[i]))}
 /* 5. Quý tộc kén rể · kén dâu */
 function qtList(){h54PoolUp();qnPoolUp();const C=h54Pool().filter(s=>!s.taken).sort((a,b)=>h54Q(b)-h54Q(a)),Qn=qnPool().filter(q=>!q.taken).sort((a,b)=>qnQ(b)-qnQ(a));
  return C.map((s,j)=>({x:s,kind:"s",sep:j===0?"Công tử (kén rể)":""})).concat(Qn.map((q,j)=>({x:q,kind:"q",sep:j===0?"Quý nữ (kén dâu)":""})))}
@@ -273,7 +273,7 @@ function qtCard(it){const x=it.x,isQ=it.kind==="q",kn=htKn(x);const f=isQ?qnFace
   groups:[["Việc",ask?[ask]:[`<p class="kr3note">Đã biết gia thế. Muốn kết thông gia: vào Hôn sự, chọn con đã đủ ${BAL.age.betroth} tuổi, chạm Bàn hôn sự.</p>`]]],empty:""})}
 function qtTab(){const L=qtList();const head=`<div class="ph"><span>Con các nhà quyền thần chưa hứa hôn: công tử cho công chúa, quý nữ cho hoàng tử. Chưa quen thì là Người lạ: dò hỏi gia thế để biết.</span></div>`;
  if(!L.length)return head+htEmpty("img/act-cat-trieu-chinh.webp","Chưa có mối nào",["Mỗi tháng các nhà quyền thần đưa con đến tuổi vào danh sách kén rể, kén dâu."]);
- return head+pager("qt",L.map(it=>({f:it.kind==="q"?qnFace(it.x):h54Face(it.x),name:htKn(it.x)?shortN(it.x.name):"Người lạ",sep:it.sep})),i=>qtCard(L[i]))}
+ return head+pager("qt",L.map(it=>({p:it.x,f:it.kind==="q"?qnFace(it.x):h54Face(it.x),name:htKn(it.x)?shortN(it.x.name):"Người lạ",sep:it.sep})),i=>qtCard(L[i]))}
 window.htTabHTML=function(t){return `<div class="pgwrap kht">`+({kid:kidTab,kvo:kvTab,kin:kinTab,hon:honTab,qt:qtTab}[t]||kidTab)()+`</div>`};
 if(typeof renderPanel0==="function"){const p0=renderPanel0;renderPanel0=function(){if(!HTK.includes(tab)||!S||S.dead)return p0.apply(this,arguments);/* the cung nữ road too (maid-8tabs) */
   const el=$("panel");faceInit();const gm=document.querySelector(".game");if(gm)gm.classList.add("cardtab");const h=htTabHTML(tab);

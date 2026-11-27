@@ -8,6 +8,7 @@
    4. Người chạy việc (was "Sai đi: …"): one line on the maid card, tap = what it means, "Đổi ›" lets her choose.
    5. Men: unique given names; the Nam nhân sub-tab lists only men she has met. */
 (function(){
+/* RING-BUILD-5: Ân oán ring (jkring relRing) reaches the pop-up, the candidate list and the «Quan hệ với» pick from outside this closure (hoisted declarations) */window.relCands=relCands;window.relPopOpen=relPopOpen;window.relSetY=k=>{relYk=k};
 const T=s=>String(s==null?"":s).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* ---------- 3. relation words ---------- */
 window.quyW=function(v){return ["Ghét","Không ưa","Bình thường","Có cảm tình","Quý mến","Thân thiết"][quyIx(v)]};/* cuts: BAL.quyLv (VANPHONG:69) */
@@ -130,7 +131,7 @@ function relPopBody(w){const C=relCands();const L=w==="x"?C.all:C.Ys;const cur=w
 function relPopOpen(w){delete PG["relpop"+w];delete KTSUB["relpop"+w];const m=kitModal({kind:"notice",title:w==="x"?"Xem quan hệ của":"Quan hệ với",sections:[{h:"",html:`<div class="krpop kpick" data-w="${w}">${relPopBody(w)}</div>`}],btn:"Thôi"});
  setTimeout(()=>{try{kitStripFit()}catch(e){}},60);return m}
 document.addEventListener("click",e=>{const T=e.target;if(!T||!T.closest)return;
- const sl=T.closest("#panel [data-relslot]");if(sl){e.preventDefault();e.stopPropagation();relPopOpen(sl.dataset.relslot);return}
+ const sl=T.closest("#panel [data-relslot]");if(sl){e.preventDefault();e.stopPropagation();(window.relPopOpen||relPopOpen)(sl.dataset.relslot);return}
  const sw=T.closest("#panel [data-relswap]");if(sw){e.preventDefault();e.stopPropagation();const C=relCands();relYk=C.X.k;relSel=C.Y.k;renderPanel();return}
  const pop=T.closest("#modal .krpop");if(!pop)return;const w=pop.dataset.w,key="relpop"+w;const re=()=>{pop.innerHTML=relPopBody(w);try{kitStripFit()}catch(x){}};
  const tb=T.closest("[data-ktsv]");if(tb){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();KTSUB[key]=tb.dataset.ktsv;PG[key]=0;re();return}
@@ -191,8 +192,8 @@ function empCard(){const E=S.emp;const acts=deckFor(/Hoàng thượng|ngự giá
  return pcard({f:pEmp(),col:"#f0d070",name:empNm(),rank:"Hoàng thượng",rows:[["Niên hiệu",empEra(),"t"]],lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
   note:E.traits.map(t=>`<b>${ETRAITS[t][0]}</b>: ${ETRAITS[t][1]}`).join("<br>"),
   groups:[["Việc hôm nay",acts.length?acts:[`<p class="kr3note">Hôm nay Hành sự không có việc nào về Hoàng thượng (việc đổi theo buổi và theo quẻ). Gặp ngài: Dư đồ → nơi ngài ngự buổi này; tối: chờ lật thẻ.</p>`]],["Điều ngài thích",likes.concat([`<p class="kr3note">Nói thật lòng với ngài, hoặc hỏi Kính sự phòng, để biết ngài thích gì.</p>`])]],empty:""})}
-window.courtTabHTML=function(){const L=[{f:pEmp(),name:"Hoàng thượng",mk:empCard}];if(!S.thDead)L.push({f:pTH(),name:"Thái hậu",mk:thCard});
- return `<div class="pgwrap">`+pager("court",L.map(x=>({f:x.f,name:x.name})),i=>L[i].mk())+`</div>`};
+window.courtTabHTML=function(){const L=[{p:{kind:"emp",name:"Hoàng thượng"},f:pEmp(),name:"Hoàng thượng",mk:empCard}];if(!S.thDead)L.push({p:{kind:"th",name:"Thái hậu"},f:pTH(),name:"Thái hậu",mk:thCard});
+ return `<div class="pgwrap">`+pager("court",L.map(x=>({p:x.p,f:x.f,name:x.name})),i=>L[i].mk())+`</div>`};
 
 /* ---------- 5. men: unique names, only the ones she has met ---------- */
 /* (MALEN "Lục Trường", "Tiêu Viễn" carry a surname: "Lục Lục Trường" is renamed too) */
@@ -208,7 +209,7 @@ function menMet(m){try{if(S.known&&typeof k61St==="function")return k61St(m)>=1;
 window.menTabHTML=function(){try{menInit()}catch(e){}menUnique();const M=(S.men||[]).filter(m=>m.alive&&menMet(m));
  if(!M.length&&!(S.men||[]).some(m=>typeof dthIs==="function"&&dthIs(m)&&menMet(m)))return `<div class="pgwrap">`+kitEmpty("Ta chưa gặp nam nhân nào ngoài Hoàng thượng",["Nam nhân (thị vệ, thái y, vương gia, nhạc sư…) chỉ hiện ở đây sau khi ta gặp mặt họ.","Đến nơi họ hay lui tới (Dư đồ) để gặp."],{art:"img/act-hen-gap.webp"})+`</div>`;
  const D=(S.men||[]).filter(m=>typeof dthIs==="function"&&dthIs(m)&&menMet(m));/* the dead stay in the list, own group after the living (owner 27/11 ~05:10Z) */const MD=M.concat(D);
- return `<div class="pgwrap">`+pager("men",MD.map((m,i)=>({f:pMan(m),name:m.name.split(" ").slice(-2).join(" "),sep:D.length&&i===M.length?"Đã khuất":""})),i=>manCard(MD[i])).replace(/(<span class="pcount">[^<]*)/,D.length?`$1 · Đã khuất: ${D.length}`:"$1")+`</div>`};
+ return `<div class="pgwrap">`+pager("men",MD.map((m,i)=>({p:m,f:pMan(m),name:m.name.split(" ").slice(-2).join(" "),sep:D.length&&i===M.length?"Đã khuất":""})),i=>manCard(MD[i])).replace(/(<span class="pcount">[^<]*)/,D.length?`$1 · Đã khuất: ${D.length}`:"$1")+`</div>`};
 /* the men leave the Phi tần strip (j22 appended them) */
 /* (j22 no longer appends them: source edit) */
 /* a man's card with no act says why (j22 manCard "empty" text, source edit) */
