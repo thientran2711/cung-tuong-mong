@@ -91,7 +91,7 @@ function j78gainTxt(v,E){const A=evidenceActs(v);const tw=whyTime(2);const ok=A.
  /* owner 11/15 16:55Z: the line says where the evidence came from (who found what, by which road), one source per piece, never another
     event's text and never the card's help ("Dùng được ở thẻ nàng …"); no double full stop */
  const cut=s=>String(s||"").replace(/<[^>]+>/g,"").replace(/[\s.。!?;,]+$/,"");const lc=s=>{s=cut(s);return s?s.charAt(0).toLowerCase()+s.slice(1):""};
- return `<b>Ngươi có thêm chứng cứ về ${j78who(v)}</b>: `+E.map(e=>`${cut(e.proves)}${e.how?` (nguồn: ${lc(e.how)})`:""}`).join("; ")+"."}
+ return `<b>Ngươi có thêm chứng cứ về ${j78who(v)}</b>: `+pieceFold(E,e=>cut(e.proves)+"|"+lc(e.how)).map(([e,n])=>`${pieceN(cut(e.proves),n)}${e.how?` (nguồn: ${lc(e.how)})`:""}`).join("; ")+"."/* RV-163D §1 fold */}
 /* every gain of evidence gets its context */
 (function(){const e0=evA;evA=function(h,t,n){if(h===S&&t&&t!==S&&n>0&&!J78.ctx){const c=J78.cur;let ctx=null;
   if(c&&c.a===t&&c.t===S)ctx={how:`Người của ngươi bắt quả tang ${j78who(t)}`,proves:`${j78Who(t)} định ${j78act(c.k,S)}`,aim:"me"};
@@ -207,7 +207,10 @@ function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=riva
  for(const a of R0)a.line=[a.odds,a.cost.length?"tốn: "+a.cost.join(", "):"",a.gain.length?"thành: "+a.gain.join(" · "):"",a.odds&&a.fail&&a.fail.length?"hỏng: "+a.fail.join(" · "):"",a.risk&&a.risk.length?"kèm: "+a.risk.join(" · "):""].filter(Boolean).join(" · ");
  return R0}
 function evidenceOf(p){if(!S||!p||p===S)return null;evdSync();const L=((S.evd||{})[p.id]||[]).slice().reverse();
- return {who:j78Ref(p),count:evG(S,p),items:L.map(e=>({proves:e.proves,how:e.how,when:e.when||"trước khi có sổ",week:e.w,aim:e.aim?j78Ref(byKey(e.aim)):null})),acts:evidenceActs(p)}}
+ return {who:j78Ref(p),count:evG(S,p),items:pieceFold(L,e=>e.proves).map(([e,n])=>({proves:pieceN(e.proves,n),how:e.how,when:e.when||"trước khi có sổ",week:e.w,aim:e.aim?j78Ref(byKey(e.aim)):null})),acts:evidenceActs(p)}}
+/* law 6a/6c (RV-163D §1): the pieces of ONE deed that read the same fold into ONE row «… (N món)» — never a counter of identical lines; same fold in her notice (jcharge punEvTxt) */
+function pieceFold(L,f){const M=new Map();for(const e of L||[]){const k=f?f(e):e;if(M.has(k))M.get(k)[1]++;else M.set(k,[e,1])}return [...M.values()]}
+function pieceN(t,n){return n>1?`${t} (${n} món)`:t}
 /* run an evidence act from the evidence card (closes that card first) */
 function evidenceDo(id,k){const v=RV(id);if(!v||!S||S.dead)return;if(Q.length&&Q[0]&&Q[0].evd){Q.shift();showModal()}if(Q.length)return;const i=rivals.indexOf(v);
  if(k==="kt"){S.ktPick=v.id;if(S.place==="tn"){render();return}goTo("tn");return}

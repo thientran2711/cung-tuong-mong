@@ -230,7 +230,8 @@ function chTrinhO(a,t,q){const B=chB().trinh,c=chReady(a,t);return B.base+aff(q,
 /* WHICH EVIDENCE in her notice: the charge and each piece behind it (jpun punEvTxt) */
 (function(){if(typeof punEvTxt!=="function")return;const p0=punEvTxt;punEvTxt=function(a,t){t=t||S;if(!a||!CHX||CHX.a!==a||CHX.t!==t)return p0.apply(this,arguments);
  const D=chDeedMap(t)[CHX.c];const DL=((D&&D.list)||[]).filter(d=>d&&d.x);const PK=(chC(CHX.c)||{}).pk||[];const L=[];/* rv: one line per piece, «deed · kind» (table A rule 4) */
- for(let i=0;i<Math.min(CHX.n,BAL.pun.evShow)&&DL.length;i++)L.push(`${DL[i%DL.length].x}${PK.length?" · "+PK[i%PK.length]:""}`)
+ for(let i=0;i<CHX.n&&DL.length;i++)L.push(`${DL[i%DL.length].x}${PK.length?" · "+PK[i%PK.length]:""}`)
+ L.splice(0,L.length,...pieceFold(L).slice(0,BAL.pun.evShow).map(([x,n])=>pieceN(x,n)));/* RV-163D §1: identical pieces of one deed fold into one «… (N món)» */
  const ws=CHWS&&CHWS.h===a&&CHWS.t===t&&CHWS.c===CHX.c?CHWS:null;const WS=ws?ws.w:0;const WL=ws?chWitNames(t,CHX.c,ws.ids||[]):[];/* REAL-PROOF: each witness by name */
  return `tội ${chName(CHX.c).toLowerCase()} (${chTierN(t,CHX.c)}), ${CHX.n} món chứng${L.length?": "+L.join("; "):""}${WS?`; ${WS} nhân chứng${WL.length?": "+WL.join("; "):""}`:""}`}})();
 if(typeof PUNK==="object")PUNK.phat="Phạt bổng";
