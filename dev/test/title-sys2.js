@@ -44,7 +44,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   /* ---- confiscation through every route (weekly state check) ---- */
   dhWeek();/* snapshots */
   /* her: cold palace → hiệu + items + worn title taken */
-  S.dh=S.dh||{};S.dh.w_kim={n:1};dhSync(S,true);dhWear(S,'w_kim');const h0=S.hieu,dn=S.danh,sg=S.sung;Q.length=0;
+  S.dh=S.dh||{};S.dh.w_kim={n:(BAL.dh.T.w_kim.n||BAL.dh.n0)[0]};dhSync(S,true);dhWear(S,'w_kim');const h0=S.hieu,dn=S.danh,sg=S.sung;Q.length=0;
   cold('Ngươi phạm tội khi quân');dhWeek();o.confHer=S.dhConf;
   if(S.hieu)F.push('hiệu kept in lãnh cung');if(!S.dhConf||S.dhConf.hieu!==h0)F.push('dhConf.hieu');if(S.titleWorn)F.push('title still worn');if(!(S.dh.w_kim||{}).conf)F.push('title not flagged conf');
   if(has(S,'sacphong')||has(S,'ngocan'))F.push('items still in chest');const st=(S.il&&S.il.box||[]).filter(x=>x.e&&x.e.dhid&&x.e.own==='me'&&x.why==='conf');if(st.length!==2)F.push('items not in Nội vụ phủ store '+st.length);
@@ -66,7 +66,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   {const P1=JSON.stringify(B.conf.p);B.conf.p.giang=[100,0];dhWeek();if(v.hieu){v.danh=B.conf.top-2;demote(v,'phạm cung quy');dhWeek();B.conf.p=JSON.parse(P1);v.out=false;v.confined=0;S.turn+=B.conf.wait;dhMonth();if(v.dhConf&&v.dhConf.open){v.danh=B.conf.top;dhMonth()}if(v.dhConf)F.push('road B stuck near the Danh ceiling')}else B.conf.p=JSON.parse(P1)}
   /* inline rank drop (a route with no punisher function) + cấm túc (punish sev 1) — odds forced */
   dhWeek();B.conf.p.giang=[100,0];const hw=w.hieu;w.rank=Math.max(0,w.rank-1);dhWeek();if(w.hieu||!w.dhConf)F.push('inline rank drop not caught');B.conf.p=JSON.parse(P0);
-  dhWeek();S.dh.w_kim={n:1,i:0};dhSync(S,true);dhWear(S,'w_kim');B.conf.p.cam=[0,100];punish(S,'vô lễ',1);dhWeek();B.conf.p=JSON.parse(P0);
+  dhWeek();S.dh.w_kim={n:(BAL.dh.T.w_kim.n||BAL.dh.n0)[0],i:0};dhSync(S,true);dhWear(S,'w_kim');B.conf.p.cam=[0,100];punish(S,'vô lễ',1);dhWeek();B.conf.p=JSON.parse(P0);
   if(S.titleWorn||!S.dhConf||!(S.dhConf.titles||[]).includes('w_kim'))F.push('cấm túc did not take the worn title');if(!S.hieu)F.push('cấm túc took the hiệu (odds 0)');
   delete S.dhConf;delete S.dh.w_kim.conf;S.confined=0;
   /* ---- loss / theft: a jlost case for THAT piece; jlost random loss never picks it ---- */
@@ -95,7 +95,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
  await fresh();await sleep(600);await clean();
  const ui=async(n,fn)=>{await clean();await p.evaluate(fn);await p.evaluate(()=>{showModal()});const r=await shot(n);R[n]=r;if(!r)R.fail.push(n+': no panel');else if(r.over)R.fail.push(n+': overflow')};
  await ui('ts2-grant',()=>{S.rank=4;S.hieu='';delete S.dhConf;S.lastPromo=-9;const N=dhHieuNeed(S);S.sung=N.sung;S.danh=N.danh;Q.length=0;dhHieuGrant(S,'son')});
- await ui('ts2-conf',()=>{dhWeek();S.dh=S.dh||{};S.dh.w_kim={n:1};dhSync(S,true);dhWear(S,'w_kim');Q.length=0;cold('Ngươi phạm tội khi quân');dhWeek();Q.splice(0,Q.length-1)});
+ await ui('ts2-conf',()=>{dhWeek();S.dh=S.dh||{};S.dh.w_kim={n:(BAL.dh.T.w_kim.n||BAL.dh.n0)[0]};dhSync(S,true);dhWear(S,'w_kim');Q.length=0;cold('Ngươi phạm tội khi quân');dhWeek();Q.splice(0,Q.length-1)});
  await ui('ts2-panel',()=>{S.out=0;S.rank=3;dhWeek();S.turn+=BAL.dh.conf.wait;Q.length=0;dhMonth();Q.length=0;S.dh.m_kinh={n:(S.dh.m_kinh||{n:0}).n+1};dhPanel();Q.splice(0,Q.length-1)});
  R.panelTxt=await p.evaluate(()=>{const m=document.querySelector('#modal .dlg');return m?m.innerText.replace(/\s+/g,' ').slice(0,900):''});
  if(!/Bị thu · đường sám hối/i.test(R.panelTxt)&&!/BỊ THU · ĐƯỜNG SÁM HỐI/.test(R.panelTxt))R.fail.push('panel: no atonement section');

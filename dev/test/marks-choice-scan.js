@@ -1,0 +1,26 @@
+/* MARKS scan (owner OD 26/11 ~21:55Z, law 11): plays the game (endTurn × N + every PEND builder) and renders every dialog with choices for real; every CHOICE surface text
+   (#modal buttons, plaques, option rows) is read back: any text markTxt (the ONE choice formatter, jk2b) would still change = an exact stat number left on a choice = FAIL.
+   Bạc / Sức / khắc / counts stay exact. The result card (.rtoast / .karesult) is skipped here: it must keep its numbers.
+   usage: node dev/test/marks-choice-scan.js <page url> [N turns] [WxH@dpr] */
+const {chromium}=require('playwright');
+const [PAGE,N0,SZ]=process.argv.slice(2);const N=+N0||60;const sleep=t=>new Promise(r=>setTimeout(r,t));
+(async()=>{const [wh,dpr]=(SZ||"1180x820@1").split("@");const [W,H]=wh.split("x").map(Number);const b=await chromium.launch();
+ const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(dpr||1),hasTouch:true,serviceWorkers:'block',reducedMotion:'reduce'});const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ await p.goto(PAGE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof markTxt==='function');await sleep(2500);
+ await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById("title").hidden=true;start()});
+ for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>isSrv())))break;await p.evaluate(()=>{S=null;try{nlNew()}catch(e){}start()})}
+ await sleep(1500);await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,#klife,.klife').forEach(e=>e.remove());Q.length=0;const md=document.getElementById('modal');md.hidden=true;md.className='modal';try{NLP=null}catch(e){}S.bac=300;S.suc=80;S.th=Math.max(S.th||0,40);render()});
+ const R=await p.evaluate(async(N)=>{const W=t=>new Promise(r=>setTimeout(r,t));const bad=[],seen=new Set();let dialogs=0,cards=0,els=0,signed=0,exact=0;
+  const T=s=>String(s||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();
+  const scan=(where)=>{const M=document.getElementById('modal');if(M.hidden)return;M.querySelectorAll('button, .kb, .kr, .krv, .ef, .kat, .kinfo').forEach(e=>{if(e.closest('.kr-ton'))return;if(e.closest('.rtoast,.karesult'))return;if(e.children.length>0&&e.tagName!=='BUTTON'&&!e.matches('.ef,.krv'))return;
+   const t=T(e.textContent);if(!t||t.length>400)return;els++;if(/[+−-]\s?\d/.test(t)){signed++;if(markTxt(t)===t)exact++}const m=markTxt(t);if(m!==t){const k=where+"|"+t;if(!seen.has(k)){seen.add(k);bad.push([where,t.slice(0,140)])}}});cards+=M.querySelectorAll('#mb .opt').length};
+  const model=(m,where)=>{/* pure: the kit rows every option card gets (kitParse → kaBody), read as texts */for(const o of m.opts){const x=typeof o.x==="function"?"":o.x;if(!x)continue;let h="";try{h=kitParse(String(x))}catch(e){continue}const t=document.createElement("template");t.innerHTML=h;t.content.querySelectorAll(".kr-ton .ef").forEach(e=>{const tx=T(e.textContent);if(/[-−]\s?\d/.test(tx)){const k=where+"|ton|"+tx;if(!seen.has(k)){seen.add(k);bad.push([where+" · TỐN minus",tx.slice(0,100)])}}});/* Tốn = what she pays: no minus sign */
+   t.content.querySelectorAll(".ef,.kwhy").forEach(e=>{if(e.closest(".kr-ton"))return;const tx=T(e.textContent);if(!tx)return;els++;if(/[+−-]\s?\d/.test(tx)){signed++;if(markTxt(tx,"duoc")===tx)exact++}if(markTxt(tx,"duoc")!==tx){const k=where+"|"+tx;if(!seen.has(k)){seen.add(k);bad.push([where+" · "+T(o.n).slice(0,30),tx.slice(0,140)])}}})}};
+  const show=async(m,where)=>{if(!m||!m.opts||!m.opts.length)return;dialogs++;try{model(m,where)}catch(e){}Q.length=0;Q.push(m);try{showModal()}catch(e){bad.push([where,"showModal ERR "+e.message.slice(0,80)]);return}await W(40);scan(where+" · "+T(m.t).slice(0,40));Q.length=0;const md=document.getElementById('modal');md.hidden=true};
+  const sm0=showModal;showModal=function(){};try{for(let i=0;i<N;i++){if(!S||S.dead){start();await W(60)}Q.length=0;try{endTurn()}catch(e){if(i<2)bad.push(["endTurn ERR",String(e.message).slice(0,100)])}
+   const L=Q.slice();window.__tq=(window.__tq||0)+L.length;for(const m of L)await show(m,"turn"+i);Q.length=0;document.getElementById('modal').hidden=true;if(i%10===9)await W(20)}}finally{showModal=sm0}
+  let pe=0;for(const id of Object.keys(PEND)){if(KIT_ACT_PIDS.has(id))continue;try{Q.length=0;const d=mkP(id,{o:40,s:5,q:3,vp:0,o1:40,o2:50});if(d&&d.o&&d.o.length){pushDil(d,id);const m=Q[0];await show(m,"PEND "+id);pe++}}catch(e){}}
+  for(const id of KIT_ACT_PIDS){try{Q.length=0;const d=mkP(id,{});if(d&&d.o&&d.o.length){pushDil(d,id);await show(Q[0],"ACT "+id);pe++}}catch(e){}}
+  return {tq:window.__tq,bad,dialogs,cards,pe,els,signed,exact}},N);
+ console.log(JSON.stringify({sz:SZ,dialogs:R.dialogs,cards:R.cards,pend:R.pe,turnDialogs:R.tq,textsScanned:R.els,withSignedNumber:R.signed,keptExact:R.exact,numbersLeftOnChoices:R.bad.length,errs:errs.slice(0,3)},null,1));R.bad.slice(0,+(process.env.SHOW||60)).forEach(x=>console.log('  LEFT',x.join(' :: ')));
+ await b.close();process.exit(R.bad.length||errs.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});
