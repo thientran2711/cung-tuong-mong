@@ -21,7 +21,10 @@ function mcwFindO(v,m){try{return chFind(m&&m.name?m:{tamco:0,mat:0,staff:[]},v,
 function mcwNm(v){return v&&typeof v==="object"?v.name:(v||"người mua")}
 /* (a) the TAKE card tail: the jcharge road in odds words */
 function mcwTakeX(v,m){const vo=v&&typeof v==="object"?v:null;let need=2;try{need=chNeed(vo,"mc")}catch(e){}
- return `nếu ${mcwNm(v)} bị tố tội mua chuộc người hầu (cần ${need} chứng; mỗi lần ${m&&m.name?m.name:"có người"} dò, tìm ra một chứng: ${word(mcwFindO(vo,m))}) thì ngươi bị đuổi khỏi cung; có người nắm chứng thì ngươi nghe phong thanh trước`}
+ /* worded as ONE loss with its odds inside (TMK-WARN-2, stills 27/11): the kit row parser (kitParse → kaRows) puts a loss with no number and no
+    «khả năng …» clause in Kèm (folded behind «!»), so «nếu … thì ngươi bị đuổi khỏi cung» never stood in the card's Mất row; «bị đuổi khỏi cung khi …
+    (mỗi lần … ra một chứng: khả năng …)» does. The odds are one search's, chanceW like the master's-watch clause beside it (law 7, no %). */
+ return `bị đuổi khỏi cung khi ${mcwNm(v)} bị nắm đủ ${need} chứng tội mua chuộc người hầu (mỗi lần ${m&&m.name?m.name:"có người"} dò, ra một chứng: ${chanceW(mcwFindO(vo,m))}); có người nắm chứng thì ngươi nghe phong thanh trước`}
 /* (a) the BUY card tail (her as the buyer): the same charge from her side */
 function mcwBuyX(s){let need=2;try{need=chNeed(S,"mc")}catch(e){}return `kèm: nếu ngươi bị tố tội mua chuộc người hầu (cần ${need} chứng) thì bị phạt bổng ${BAL.charge.fine} lượng, ${s&&s.name?s.name:"kẻ ấy"} bị đuổi khỏi cung`}
 /* the one tai mắt terms text (was j42 cnvSpyX: «mỗi tháng Bạc +8 · kèm: …» — a «kèm» note sits behind «!» on the kit card, so the take card showed only
@@ -29,7 +32,7 @@ function mcwBuyX(s){let need=2;try{need=chNeed(S,"mc")}catch(e){}return `kèm: n
    noPay (cnvBlackOpts obey): the danger text alone, the caller prints «mất: » before it. */
 (function(){if(typeof cnvSpyX!=="function")return;cnvSpyX=function(m,noPay,v){const P=BAL.ag.why.srv.pun;
  const watch=`mỗi tháng chủ phát hiện: ${chanceW(nv(m,"spyFind"))}, khi ấy bị đánh chết: ${chanceW(npwShare(["kill","lau"],k=>srvPunW(m,k),"kill"))}, không thì Tân Giả khố ${P.lauWk} tuần`;
- const d=v?`${watch}; ${mcwTakeX(v,m)}`:watch;return noPay?d:`mỗi tháng Bạc +${P.spyPay} · mất: ${d}`}})();
+ const d=v?`${watch}, ${mcwTakeX(v,m)}`:watch;/* «, » not «; »: the kit parser keeps the charge in the same Mất row */return noPay?d:`mỗi tháng Bạc +${P.spyPay} · mất: ${d}`}})();
 /* is the servant player the tai mắt of t */
 function mcwMine(t){return !!(t&&S&&!S.dead&&typeof isSrv==="function"&&isSrv()&&S.srv&&S.srv.spyFor!=null&&String(S.srv.spyFor)===String(t.id))}
 /* (b) the warning beat, once per new piece held on her buyer */
@@ -51,7 +54,7 @@ PEND.mcWarn=pp=>{const m=typeof srvM==="function"?srvM():null,v=RV(pp.v);if(!m||
  const o=oddsCl(Math.round(C.base+((S.tin||0)-C.tinMid)/C.tinD));const end=`${v.name} bị tố tội mua chuộc thì ngươi bị đuổi khỏi cung`;
  const cut=()=>{S.srv.spyFor=null};
  return{t:`<p>Trong hành lang, mấy cung nữ thì thào: có người đang gom chứng tội mua chuộc người hầu của ${v.name}.</p><p class="past">Đã có người nắm ${H.n}/${H.need} chứng. ${end}.</p>`,who:pv(v),o:[
-  {n:"Cứ làm tai mắt",fx:{},x:`mỗi tháng Bạc +${P.spyPay} · kèm: ${end}; mỗi lần dò, tìm ra một chứng: ${word(mcwFindO(v,m))}`,go:()=>{}},
+  {n:"Cứ làm tai mắt",fx:{},x:`mỗi tháng Bạc +${P.spyPay} · mất: ${mcwTakeX(v,m)}`/* the danger in the Mất row (was «kèm:», folded behind «!») */,go:()=>{}},
   {n:"Lặng lẽ thôi làm tai mắt · nhẹ",fx:{},x:`tốn: thôi Bạc +${P.spyPay} mỗi tháng · được: tội ${v.name} có lộ, ngươi không bị đuổi · mất: ${v.name} ghi hận ngươi, thiện cảm ${balSg(spSee("rel",-BAL.coopBribe.grudge))}`,
    go:()=>{cut();cnvBribeAff(v,S,-1);log(`Ngươi lặng lẽ thôi làm tai mắt cho ${v.name}.`)}},
   {n:"Trả lại bạc, xin thôi · vừa",fx:{bac:-pay},x:`tốn: Bạc ${balSg(-pay)} · được: thôi làm tai mắt, tội ${v.name} có lộ ngươi không bị đuổi, ${v.name} không ghi hận`,
