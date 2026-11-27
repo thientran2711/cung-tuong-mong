@@ -8,7 +8,6 @@
      resume=1 (continue the SAME life from <out>/<life>.ckpt.json after a crash / container restart; written every cp buổi and 10 min)
      pick=<label regex> (env RT_PICK): whenever an eligible (non-exit) option whose label matches is on screen, the robot takes it by a real tap
        (forced coverage of one branch, FOREMAN E 12:12Z «Hòa ước»); logged in job.pick + harness.pick; never chooses an exit road
-     rngpin=1 (test only: seed the page's Math.random / crypto from seed= so a slice road repeats; FIXER #22 job 3)
      slice=<buổi> (self-test only: stop after n buổi; a sliced life is NOT a life)   cp=50 (buổi between save-size checkpoints; SAVE STALE is
        judged at a CP, so with cp=50 it speaks at buổi 50 at the earliest — SAVE REWIND is judged at every clock change)
    Every action is a tap through dev/test/realtap.js. page.evaluate is used only to READ the screen / state, plus the
@@ -62,7 +61,7 @@ const OUT = path.resolve(C.out), SHOTS = path.join(OUT, 'shots-' + LIFE); fs.mkd
 let rs = SEED >>> 0 || 1; const rnd = () => { rs ^= rs << 13; rs >>>= 0; rs ^= rs >>> 17; rs ^= rs << 5; rs >>>= 0; return rs / 4294967296 };
 const pick = a => a[Math.floor(rnd() * a.length)];
 const T0 = Date.now(), sec = () => Math.round((Date.now() - T0) / 1e3);
-const R = { job: { id: LIFE, origin: A.origin || null, road: A.road || null, pick: PICK_SRC || null, bot: BOT, seed: SEED, dev: DEV, url: URL0, rngpin: !!C.rngpin },
+const R = { job: { id: LIFE, origin: A.origin || null, road: A.road || null, pick: PICK_SRC || null, bot: BOT, seed: SEED, dev: DEV, url: URL0 },
   harness: { kind: 'realtap', sha: SHA, realtap: true, jsClicks: 0, deadButtons: 0, cap: null, stuck: 0, unstick: [], slice: SLICE || null, mgBackN: 0, mgBackQuitN: 0 },
   life: null, exitPick: null, bugs: [], dead: [], saves: [], buoi: 0, steps: 0, status: [] };
 /* TEST HOOKS STAMP (BIG #8 F1 on fd9218fe): every RT_TEST_* self-test and the RT_COLD probe setup (renderer-mem-lib coldHook sends the life to lãnh cung
@@ -231,10 +230,6 @@ async function play(p) {
      (j6 try/catch), so a passive observer wraps Storage.setItem — it records the failure, prints a console.error and RE-THROWS (the game's flow is unchanged). */
   const SAVE_OBS = () => { try { if (window.__rtSO) return; window.__rtSO = 1; const o = Storage.prototype.setItem; Storage.prototype.setItem = function (k, v) { try { return o.call(this, k, v) } catch (e) { if (/^__rtfill/.test(String(k))) throw e; /* the RT_TEST_QUOTA filler itself */ const w = window.__rtSaveErr || { n: 0 }; window.__rtSaveErr = { n: w.n + 1, name: e && e.name, msg: String(e && e.message || e).slice(0, 160), key: String(k), len: String(v).length, t: Date.now() }; try { console.error('[rt] localStorage.setItem failed: ' + (e && e.name) + ' key ' + k + ' (' + String(v).length + ' chars): ' + (e && e.message)) } catch (e2) {} throw e } } } catch (e) {} };
   await p.addInitScript(SAVE_OBS).catch(() => {}); await p.evaluate(SAVE_OBS).catch(() => {});
-  /* FIXER #22 job 3 (BIG #21 N2: seed + bot rand did not pin the road — the GAME's own Math.random / crypto are unseeded): rngpin=1 seeds the page's
-     Math.random and crypto.getRandomValues from seed= at every page open (a reload starts the same stream again). Opt-in, test only: no tap, no game call,
-     the game code is untouched; timing (setTimeout order) can still split a road, so a pinned road is checked by two runs giving the same path. */
-  if (C.rngpin) await p.addInitScript(sd => { let r = (sd >>> 0) || 1; const nx = () => { r ^= r << 13; r >>>= 0; r ^= r >>> 17; r ^= r << 5; r >>>= 0; return r }; Math.random = () => nx() / 4294967296; try { const g = crypto.getRandomValues.bind(crypto); crypto.getRandomValues = a => { if (a && a.length != null && a.BYTES_PER_ELEMENT) { const m = 2 ** (8 * a.BYTES_PER_ELEMENT); for (let i = 0; i < a.length; i++) a[i] = nx() % m; return a } return g(a) } } catch (e) {} }, (SEED * 2654435761) >>> 0).catch(() => {});
   { const seen = new Map(); p.on('console', m => { if (m.type() !== 'error') return; let t = String(m.text() || '').replace(/\s+/g, ' ').slice(0, 220); if (/^Failed to load resource/.test(t)) { try { const u = String(m.location().url || ''); if (u) t += ' — ' + u.replace(/^https?:\/\/[^/]+/, '').slice(0, 90) } catch (e) {} } /* a resource error names its file */ const k = t.slice(0, 80).replace(/\d+/g, '#'); const n = (seen.get(k) || 0) + 1; seen.set(k, n); R.harness.consoleErrN = (R.harness.consoleErrN || 0) + 1;
     if (n <= 3 || n % 100 === 0) console.log('PAGE CONSOLE error' + (n > 1 ? ' ×' + n : '') + ': ' + t); if (n === 1) { (R.consoleErr = R.consoleErr || []).push({ at: sec(), buoi: R.buoi, t }); if (R.consoleErr.length > 60) R.consoleErr.shift() }
     if (/QuotaExceeded|exceeded the quota|quota/i.test(t)) { const b = bug('game', 'QuotaExceededError: the game save no longer fits localStorage (j6 save() swallows it: every later save is lost)'); if (b && !b.first) b.first = t.slice(0, 200) } }) }
@@ -1078,7 +1073,7 @@ const DEV = A.dev || 'fold', VP = DEV === 'ipad' ? { width: 1180, height: 820 } 
 const BOT = A.bot || 'sens', SEED = +A.seed || 1, LIFE = A.life || ['rt', A.origin || 'any', BOT, DEV, SEED].join('-');
 const STUCK_MS = (+A.stuckMin || 15) * 60e3, SLICE = +A.slice || 0, CP = +A.cp || 50;
 const OUT = path.resolve(OUT0), SHOTS = path.join(OUT, 'shots-' + LIFE); fs.mkdirSync(SHOTS, { recursive: true });
-const seat = Seat({ pick: A.pick, pin: A.pin, url: URL0, out: OUT0, dev: DEV, bot: A.bot, seed: A.seed, life: A.life, origin: A.origin, road: A.road, stuckMin: A.stuckMin, slice: A.slice, cp: A.cp, rngpin: A.rngpin === '1', resume: A.resume === "1" });
+const seat = Seat({ pick: A.pick, pin: A.pin, url: URL0, out: OUT0, dev: DEV, bot: A.bot, seed: A.seed, life: A.life, origin: A.origin, road: A.road, stuckMin: A.stuckMin, slice: A.slice, cp: A.cp, resume: A.resume === "1" });
 /* never replay or overwrite an ENDED life: ended ckpt stamp, or a results json whose life has a real end (override: force=1) */
 { const ckf = path.join(OUT, LIFE + '.ckpt.json'), rf = path.join(OUT, LIFE + '.json'); let why = null;
   try { if (fs.existsSync(ckf) && JSON.parse(fs.readFileSync(ckf, 'utf8')).ended) why = 'checkpoint stamped ENDED' } catch (e) {}
