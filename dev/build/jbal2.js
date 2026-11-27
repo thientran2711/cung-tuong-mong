@@ -1,5 +1,16 @@
 /* ================= jbal2: late balance knobs for the merged logic modules (review/balance). Same rule for every consort; numbers only. ================= */
 Object.assign(BAL,{illAdd:1,illDie:2});
+/* ONE DIM for the people who are NOT chosen (KIT §98 kitDim; owner 24/11 ~09:05Z / ~15:30Z): brightness + saturation on the FIGURE only, opaque, never the background; ms = cross-fade */
+BAL.kdim={b:.7,s:.75,ms:220};
+/* RING-BUILD (KIT §104 kitRing, owner OD 26/11 ~18:55Z «những người còn lại là tối»): the ring dims every slot that is not in front harder than kitDim (static filter on a copy, opacity cross-fade) */
+BAL.kring={dimB:.48,dimS:.6,
+ /* §104.1 the ONE ring table read by every ring (vòng người · vòng nhóm · vòng bảo vật; MOTION-BUILD-2 ask 26/11 ~20:12Z): seats = visible seats (N > seats scrolls), decay = fling
+    velocity kept per 60 Hz frame, stop = fling speed (slots/ms) that snaps, snapMs = snap tween, stepMs = one ‹ › step */
+ seats:12,decay:.93,stop:.0012,snapMs:200,stepMs:280,
+ /* OWNER 26/11 ~21:45Z «3 size … small là những người ở xa, medium là những người ở gần hơn, large là những người mà tôi đang chọn»: EXACTLY 3 figure sizes in every ring
+    (người · nhóm · bảo vật · danh hiệu · dung mạo): L = the front (the one she is choosing; ×1 = the LIVE stage size), M = the nearer ones (|seat| ≤ near), S = the far ones;
+    dim follows the same tiers (dimL none, dimM light, dimS most = the full dim copy); between seats (while turning) the size/dim slide from one tier to the next */
+ szL:1,szM:.66,szS:.46,near:1,dimL:0,dimM:.45,dimS:1};
 /* ACT SPLIT (jact wave 1, jact2 waves 2-3; owner-approved split 16/11). "!" happenings on Dư đồ: hapP = chance of a random happening in a buổi,
    hap2 = chance of a second one (never more than 2 per buổi); strollP = chance the Emperor's garden stroll takes the FIRST slot when he is in
    Ngự hoa viên (flag 2 of the wave-1 report: it was 9 in 300 buổi); rareMinGrade = Nội vụ phủ weekly rare item grade.
@@ -554,11 +565,12 @@ Object.assign(BAL,{led:{court:2,cnt:"now"}});
 Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 /* FLIGHT-DAYQ (owner 24/11 ~18:05Z (5): "Mới sáng sớm là có sự kiện tới tìm liền ngay lập tức"): the FIRST buổi of a day (right after the title card + Tuần lục + Tin trong cung)
    brings no event that has no fitting morning slot: dawnSlot = the buổi an unslotted world card moves to (1 = trưa); dawnOpt = odds (0..100) that an optional
-   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn; wake = ms a card may wait in Q with nothing on screen before the safety net shows it (button-crawl-fix-5 dqWake; SANGBUOI-HELD r3 folded its r2 net into it: one net); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
-Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000}});
+   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; mineLook = ms after her tap inside a person view during which a NEW queued card is hers and painted on top (E96 dialog-order); stale = ms a busy motion queue with no scene on screen may hold the turn; wake = ms a card may wait in Q with nothing on screen before the safety net shows it (button-crawl-fix-5 dqWake; SANGBUOI-HELD r3 folded its r2 net into it: one net); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
+Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000,mineLook:400}});
 /* F10 renderer-mem (26/11), BAL.kobs = the kit's DOM observers. The «Kéo xuống» scroll cue (jksize kitScrollCues). short = a scroller under this many px gets the slim strip below it
    (was a typed 260); hyst = a scroller keeps its short/tall look until its own height moves by more than this (its own cue never flips it). */
-Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* kaPass: card-normaliser passes per wake (j63 kaRun) */
+Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* KK53 v2 (OD 27/11 ~03:17Z): the SMALL «Chọn» chip inside a lifted kitPick plaque's bottom-right corner (jkpick conf): w × h px */
+Object.assign(BAL,{kpkgo:{w:24,h:24}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
@@ -683,7 +695,11 @@ Object.assign(BAL.mgTier.occ,{tuyen:[1,0]});
    lodge = the tú nữ lodging (OD 24/11 ~08:20Z FINAL: «Dưỡng Tú viện», a viện not a cung — selection-time lodging ONLY, not in PAL / seats, PAL_GONE untouched;
    x/y = its Dư đồ spot; so = its 3 sở (level 2), one room each of room.perRoom girls on beds of room.perBed; sanh = the shared Tiền sảnh where the ma ma teaches). */
 Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},coop:{npcKept:3},room:{perRoom:4,perBed:2},
- w:{sac:.15,duc:.15,tai:.1,mini:1.5,dd:.75,hx:.75,imp:.45,base:20},noise:3,placeStep:[1,0,0,-1],cap:3,npcRank:[[0,60],[1,40]],npcAge:[BAL.ageMin,3],npcMini:{base:3,lv:1.4,r:1},hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
+ /* D-SELX-FAIR (26/11, measured dev/measure/selx-tune.js + selx-fair.js; law 1): w.duc .15 → .05 (her fresh Đức is 30 at every start while the girls are
+    drawn on the consort scale, ≈ 48: at .15 that gap alone put an average player under the base rate of yard.kept / yard.n), w.tai .1 → .15 (talent counts like
+    Sắc), w.mini 1.5 → 2 and w.dd / w.hx .75 → 1 (the three tests decide more than the luck, keeping the accepted ratio mini ½ · đối đáp ¼ · hành xử ¼, OD 23/11 ~23:47Z (c)); the same formula for every girl. Kept-rate «Cúi đầu» .18 → .45 · board «Giỏi» .42 → .83
+    · «Giỏi» + the valued answers .78 → .99, rising with Tài. */
+ w:{sac:.15,duc:.05,tai:.15,mini:2,dd:1,hx:1,imp:.45,base:20},noise:3,placeStep:[1,0,0,-1],cap:3,npcRank:[[0,60],[1,40]],npcAge:[BAL.ageMin,3],npcMini:{base:3,lv:1.4,r:1},hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
  fav:{plus:3,minus:-3,mini:[[8,4],[5,2],[0,-2]]},days:3,lodge:{n:"Dưỡng Tú viện",x:.303,y:.338,so:[["dong","Đông sở"],["tay","Tây sở"],["bac","Bắc sở"]],sanh:["sanh","Tiền sảnh"]},npcMatch:{hit:8,miss:3,none:5},
  /* THE 3 DAYS (SELSCENE-4, jselxday; OD 24/11 ~07:05Z / ~08:20Z): beat = khắc of each fixed beat (gate + roll-call, rooms, dress, the yard buổi, each test, day-3 teaching;
     yardDrama = yard khắc spent before the yard drama); lesson = the Tiền sảnh drill (k = khắc of effort kỹ / vừa / qua loa; mark 0..10 = base + duc·Đức + eff·effort ± r,
@@ -920,7 +936,7 @@ BAL.srvRisk={vuon:28,thu:34,tyv:20,tn:40,home:18,def:26,fr:4,tc:10,min:6,max:92}
 BAL.caught={fac:4};/* j8 caughtOdds (clamped by the ONE odds cap, oddsCl) */
 BAL.srvGrant={tin:55,get base(){return BAL.odb.j42.rbTop_2},bond:3,stayLoy:5};BAL.srvMpN=[6,8,10,12,14,16,18];/* review/pace-all: Công lao a servant needs at each rank (srvMpNeed; her and every NPC servant, law 1), rising (law 5); with the whole-number merits
    (BAL.eff.j42 merit* 1 / 2, errand / order 3; BAL.ag … listen / watch 1, scout 2) one ordinary chore moves 1/6 … 1/16 of a rank step (was 0.25–0.5 of (rank+1)×5: 1/20 … 1/100,
-   and the shown «Công lao n/need» did not move for 2–4 chores). Canon overwrite of the old BAL.srvMp = 5 (need = (rank+1) × 5). */BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
+   and the shown «Công lao n/need» did not move for 2–4 chores). Canon overwrite of the old BAL.srvMp = 5 (need = (rank+1) × 5). *//* review/srv-rank (Foreman F s11b: srv.rk flat at 4 ~400 buổi): srvCap = a servant (her or any NPC) at her master's cap (srkMax) with full Công lao and a higher palace with room has OUTGROWN the house: open = she may ask «Xin chủ cho đi hầu cung khác» whatever her trust; u = an NPC servant's weight for that ask; letW / demW = the master's answer weights (× BAL.ag.stf2.lvW) when the servant who asks is trusted (Chủ tin / loyalty >= BAL.sp.leaveLoyal) */BAL.srvCap={open:1,u:.2,letW:2,demW:.5};BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
 BAL.ag.staff={st:{duc:[10,40],tamco:[10,40],danh:[0,10],suc:[60,90],bac:[0,20]},goal:{tin:70,suc:60,bac:40,sac:60,tai:40,duc:40,friend:2},
  nw:{tin:1.2,mp:1,suc:1.2,bac:.6,self:.4,ally:.5,sung:1,love:.3,spite:.4},greed:2,mpS:4,sc:{af:.3,tinh:.3,spite:.3,sung:.25},
  riskD:3,caughtTin:20,caughtSuc:20,vowTinh:20,dt:40,expel:30,exile:35,vowW:.5,outW:.3,monthSuc:10,secSee:30,hit:1,uMul:3,peerGap:40,nvpAf:5,askAf:2};
@@ -1094,6 +1110,12 @@ Object.assign(BAL.kc2,{kcCard:{"vietNhatKyGiau_od":78,"chaiChuotThuY_od":70,"thi
    dienSel = the tiểu thư Điện tuyển keep chance (kcDienSel): base + (score − KC.cut[0])·k, floor lo (cap BAL.kcSelMax), 0 below cut[0] − gap; noise = ± of the score;
    kcCard.quyXinChaWant = the plea bonus when she wants the tuyển tú (kcQuyP). */
 Object.assign(BAL.kc2,{ill:{suc:35,low:20,dieLo:40,dieHi:8},dienSel:{base:45,k:1.2,lo:20,gap:15,noise:4}});BAL.kc2.kcCard.quyXinChaWant=15;
+/* D-SELX-FAIR (law 4): soNeed = how many of the five Sơ tuyển points (dung mạo, khí sắc, tiếng tăm, gia thế, lễ vật; KC.so) pass her (was the typed «sc>=3» in jkc kcSoOk) */
+BAL.kc2.soNeed=3;
+/* KC-ODDS-CHIP (27/11, law 4/7): the numbers of the two hand-rolled contests, moved from literals to BAL (values unchanged) so the roll and the odds word read ONE place.
+   fest = kcFest (khuê các festivals: score = art·BAL.art.score + Tài/3 + Sắc/6 + R(span); score ≥ top first, ≥ ok praised, below = loses 1 Danh);
+   hoi = jkc2 n_hoi (dance / polo / water rite: raw = Vũ·vu + Sắc/sac + (bd: Sức/suc) + R(span); raw ≥ ok = the envoy remembers her). */
+BAL.kc2.fest={top:60,ok:40,span:30,tai:3,sac:6};BAL.kc2.hoi={ok:55,span:30,vu:12,sac:3,suc:4};
 
 /* ONE CORE (owner OD:L1267; review/show-why, from review-trait-pool-r1 follow-up): every number chosen by a nết test lives here.
    BAL.net.k: quality-keyed sizes for nq(p,quality,n) / netIs (servant + agent qualities). BAL.net.n: nết-keyed tables read by
@@ -2045,7 +2067,7 @@ BAL.dc={on:1,
    title = «Khuê các» titles: tier, rare tier, quyRank (Quý nhân), carry (worn again in later lives); TITLE-BAL: ONE entry title only — Quý nhân+ → «Khuê tú danh môn»,
    else «Trâm hoa ngự ban» only with home Danh ≥ tuyenDanh (never just for walking in). */
 BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac:80,vpRare:.4,
- carry:{cap:0,ldOld:40,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
+ carry:{cap:0,ldOld:40,rel:{af:.5,me:.5,oan:1}/* ob-phu: sister / khuê hữu who pass tuyển tú → consort: share of af (them→her), me (her→them), Oán carried (af .5 = the old typed /2) */,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
  home:{p:8,mid:50,khac:1,pk:.2,giftShare:30,writeO:70,giftO:60,k:.3,writeBac:15,writeAf:4,lostDanh:1,askAf:1,know:2,keep:12,gifts:["tuithom","luahang","huongtram","khantay"]},
  ld:{p:6,own:{danh:4,duc:2},witBac:10,witO:55,witFoe:4,witOan:6,witLose:6,wait:{danh:2,tamco:1}},
  title:{tier:4,rare:6,quyRank:2,carry:1,tuyenDanh:30}};

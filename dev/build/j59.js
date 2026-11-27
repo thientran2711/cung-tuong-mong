@@ -48,7 +48,7 @@ function j59tagHTML(p,name){let t=j59title(p);const kn=j59known(p),c=j59col(p);c
  if(t&&t===name)return T(t).replace('class="j59t"','class="j59t j59only"');return(typeof kitTitlePlate==="function"?kitTitlePlate(kitTitleWorn(p),{id:false}):"")+(t?T(t):"")+`<span class="j59n${p===S?" kmy":""}" style="--tc:${c}">${j59esc(name)}</span>`}
 /* strangers: grey full-body silhouette from the kit when the asset exists, else a grey blur of their own figure */
 const J59U={};function j59unkSrc(g){const u=`img/kit/unknown-fig-${g}.webp`;if(J59U[g]===undefined){J59U[g]=null;const im=new Image();im.onload=()=>{J59U[g]=u;j59sched()};im.onerror=()=>{J59U[g]=false};im.src=u}return J59U[g]}
-function j59unk(b,p,im){const s0=im.getAttribute("src")||"";const m=/fig-(emperor|eunuch|official|physician|man)-|unknown-fig-m\./.test(s0)||p.kind==="emp";const u=j59unkSrc(/unknown-fig-k\./.test(s0)?"k":m?"m":"f");
+function j59unk(b,p,im){const s0=im.getAttribute("src")||"";const g0=kitSilG(p),g1=kitPhFigG(s0),g=/unknown-fig-k\./.test(s0)?"k":g0==="e"||g1==="e"||/unknown-fig-e\./.test(s0)?"e":g0==="m"||g1==="m"||/unknown-fig-m\./.test(s0)?"m":"f";const u=j59unkSrc(g);
  if(u){b.classList.remove("j59unk");if(im.getAttribute("src")!==u)im.src=u}else b.classList.add("j59unk")}
 /* fig-label: the kit's ONE shrink rule for a stage title line — it is one line, never wraps to a 3rd line; a long merged title ("Cung nữ thân tín tam đẳng") steps its font down until it fits the tag width (floor 9 px) */
 function kitFitTitle(L){try{L.forEach(g=>{const t=g.querySelector(".j59t");if(!t||!t.offsetParent)return;t.style.removeProperty("font-size");let fs=parseFloat(getComputedStyle(t).fontSize);const f0=fs;while(t.scrollWidth>t.clientWidth+1&&fs>9){fs-=.5;t.style.setProperty("font-size",fs+"px","important")}})}catch(e){}}
@@ -131,8 +131,7 @@ function j59go(st,dir,from){const pg=st.__j59p||0,pages=+((st.dataset.j59pg||"")
    (unknown-fig-f / -m / -k by role, same KIT_FIG scale, men ×1.07) in a slot, with the real name chip (or "Người lạ" while unknown) */
 function j59fill(tk){if(!tk)return;const ppl=typeof curPeople==="function"?curPeople():[];
  tk.querySelectorAll(".tok:not(.fig)").forEach(b=>{const p=ppl[+b.dataset.p];if(!j59person(p)||b.querySelector(".figimg"))return;
-  let g="f";try{if(/^(ksp|peddler|ty|man|min|emp|guard)$/.test(p.kind))g="m";else if(p.kind==="srv"&&(p.sk==="man"||p.sk==="emp"||p.sk==="ty"))g="m";else{const r=typeof personRoleRank==="function"?personRoleRank(p.kind==="srv"&&p.ref?p.ref:{kind:p.kind,ref:p.ref}):null;
-   if(r&&(r.kid||r.sex==="k"))g="k";else if(r&&r.sex==="m")g="m"}}catch(e){}
+  const g=kitSilG(p);
   const im=document.createElement("img");im.className="figimg j59sil";im.alt="";im.src=`img/kit/unknown-fig-${g}.webp`;
   im.onerror=()=>{im.remove();b.classList.remove("fig","j59silt");const md=b.querySelector(".md");if(md)md.style.display=""};
   const md=b.querySelector(".md");if(md)md.style.display="none";b.insertBefore(im,b.firstChild);b.classList.add("fig","j59silt")})}
@@ -359,7 +358,7 @@ html body #stage.j59ph #kshR .k3c .k3ct{flex-direction:row;align-items:baseline;
 html body #stage.j59ph #kshR .k3p{width:auto}
 html body #stage.j59slot #mefig.j59off,html body #stage.j59slot #j59metag.j59off{display:none!important}
 html body #stage.j59slot .j59more{transform:none;z-index:4}
-.stage.j59 .tok.fig .figimg.j59sil{filter:url(#kfa) brightness(1.04) contrast(.8) drop-shadow(0 6px 6px #0003);opacity:.92}
+.stage.j59 .tok.fig .figimg.j59sil,.ksil{filter:url(#kfa) brightness(1.04) contrast(.8) drop-shadow(0 6px 6px #0003);opacity:1}/* KIT §59.1 stand-in = OPAQUE (owner OD 24/11 ~15:30Z); .ksil = the same look as a kit class for any figure (ring #kar, servants) */
 /* her idle sway breathes from the feet: no vertical lift, so her feet stay on the slot floor line with everyone else */
 @keyframes meidle{0%,100%{transform:translateX(-50%) scale(1,1)}50%{transform:translateX(-50%) scale(1,1.012)}}`;document.head.appendChild(css);
 /* the person card (#popw) docks in the lower panel area (a side sheet beside the stage on wide screens), so the stage

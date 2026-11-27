@@ -6,6 +6,7 @@
    4) the real poisoned save shape (BGMQ: 1998× empty Tâm trạng + Kỳ ngộ + empty «Xong việc») loads as Kỳ ngộ only; repeats dropped
    usage: node dev/test/look-dedupe.js [index.html | http URL] */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');
+const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
 const RT=require('./realtap.js');
 const GAME=process.argv[2]||path.join(__dirname,'../../index.html');const DEVS={fold:[755,1000],ipad:[1180,820]};
 function serve(file){const root=path.dirname(path.resolve(file)),idx=path.basename(file);const T={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.css':'text/css'};
@@ -14,7 +15,7 @@ const POISON=[];for(let i=0;i<1998;i++)POISON.push({t:'Tâm trạng · Cung nữ
 POISON.splice(7,0,{t:'Kỳ ngộ',h:'<p>Danh +2; Tố Nguyệt thiện cảm +34</p>'},{t:'Xong việc: Đi một nơi trong cung',h:'',btn:'Đã hiểu'},{t:'Kỳ ngộ',h:'<p>Danh +2; Tố Nguyệt thiện cảm +34</p>'});
 let fails=0;const ok=(c,msg)=>{console.log((c?'PASS ':'FAIL ')+msg);if(!c)fails++};
 (async()=>{const URL=/^https?:/.test(GAME)?GAME:await serve(GAME);const b=await chromium.launch();
- for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',serviceWorkers:'block'});
+ for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',serviceWorkers:'block'});await keepNotesSeen(ctx);
   const p=await ctx.newPage();await p.route(/\.(mp3|ogg|m4a|mp4|webm|wav)(\?|$)/,r=>r.abort());const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof start==='function'&&typeof showTitle==='function',null,{timeout:180000});await p.waitForTimeout(1500);
   /* harness setup only (not a press): a fresh solo life on its home screen */
@@ -23,8 +24,16 @@ let fails=0;const ok=(c,msg)=>{console.log((c?'PASS ':'FAIL ')+msg);if(!c)fails+
       look-ups below would meet «Ngày thứ nhất — Nhập cung» instead of the home screen (LC26 hold: FAIL 6 on rv21 AND on LIVE with this harness). Harness setup: this life is past its selection. */
    try{if(typeof nlAccept==='function')nlAccept(false)}catch(e){}try{if(S.selx2&&S.selx2.days){S.selx2.days=0;S.selx2.done=1}}catch(e){}try{S.tutTour=1;coachOff&&coachOff()}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render()});
   for(let i=0;i<8;i++){await p.waitForTimeout(800);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());if(Q.length||!document.getElementById('modal').hidden){Q.length=0;document.getElementById('modal').hidden=true;render()}})}
-  const seal=await p.evaluateHandle(()=>[...document.querySelectorAll('img.kemo[data-emo="me"],[data-emo-open="me"]')].find(e=>{const r=e.getBoundingClientRect();return r.width>3&&!e.closest('[hidden]')})||null);
-  const rt=RT.make(p,{dev,log:x=>{if(x.k!=='tap')console.log('  realtap',JSON.stringify(x))}});const hit=await rt.tap(seal,{label:'mood seal',screen:'home'});await p.waitForTimeout(800);
+  /* KK36 (look-dedupe flake, kit-stage 1/4): portrait preloads (PORK / kidPre onload → kitRenderSoon 250 → render) can land after the setup and
+     rebuild the home row, so a seal handle taken earlier is detached («gone»). Harness setup only: wait until the page is quiet (no render for
+     1.5 s, no portrait preload pending, at most 12 s), then take the seal. */
+  await p.evaluate(()=>{window.__ldR=performance.now();const r0=render;render=function(){window.__ldR=performance.now();return r0.apply(this,arguments)}});
+  await p.waitForFunction(()=>{const busy=o=>{try{return o&&Object.values(o).some(v=>v===2)}catch(e){return false}};const pend=(typeof PORK!=='undefined'&&busy(PORK))||(typeof KPORK!=='undefined'&&busy(KPORK));
+   return !pend&&performance.now()-window.__ldR>1500},null,{timeout:12000,polling:250}).catch(()=>{});
+  const findSeal=()=>p.evaluateHandle(()=>[...document.querySelectorAll('img.kemo[data-emo="me"],[data-emo-open="me"]')].find(e=>{const r=e.getBoundingClientRect();return r.width>3&&!e.closest('[hidden]')})||null);
+  const rt=RT.make(p,{dev,log:x=>{if(x.k!=='tap')console.log('  realtap',JSON.stringify(x))}});let hit=false;
+  /* a late render may still rebuild the row between taking the handle and the tap: the SAME seal (re-found, a real finger hits the new node) is tapped again, at most 3 times; a seal that is not there at all still fails */
+  for(let k=0;k<3&&!hit;k++){const live=await p.evaluate(()=>Q.length===0&&document.getElementById('modal').hidden);if(!live)break;hit=await rt.tap(await findSeal(),{label:'mood seal',screen:'home'});if(!hit)await p.waitForTimeout(600)}await p.waitForTimeout(800);
   let st=await p.evaluate(()=>({q:Q.length,t:Q[0]&&Q[0].t,body:(document.querySelector('#modal .dlg')||{}).innerText||''}));
   ok(hit&&st.q===1&&/^Tâm trạng · /.test(st.t||'')&&st.body.replace(/\s+/g,'').length>40,`${dev}: real tap on the mood seal opens «${st.t}» with a body (${st.body.length} chars)`);
   st=await p.evaluate(()=>{for(let i=0;i<20;i++)emoBox('me');const v=rivals.find(x=>x.alive);let k=0;if(v&&typeof kitIntelPanel==='function'){try{kitIntelPanel(v);kitIntelPanel(v);k=1}catch(e){}}

@@ -28,7 +28,21 @@ function kmEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;"
 const KMQ=[];let kmBusy=false;
 function kmFree(){const d=document.getElementById("dawn");if(d&&!d.hidden&&d.classList.contains("on"))return false;
  if(document.getElementById("kpodov")||document.querySelector('[id^="kroul"],.kroul-ov'))return false;if(document.getElementById("kmrew"))return false;return true}
-function kmPush(fn){KMQ.push(fn);kmPump()}
+function kmPush(fn){if(kmLifeOver()&&!(fn&&fn.kend))return;KMQ.push(fn);kmPump()}
+/* E98 END CARD ON TOP (FIX-THE-WHOLE-GROUP, robots E-S2 8/8 + E-S3 4 lives: «Bổng lộc tháng …» chest over the life end card): once a life has ENDED
+   (S.dead, over()), no kit scene of that life plays any more — a dead life gets no pay, no chest, no edict, no bloom. ONE rule: kmLifeOver().
+   kmPush drops new scenes, kmPump drops queued ones, and kitEndClear() (called by the over() hook below at the moment of death) voids the scene
+   already on screen (a chest paid out a tick before the death, e.g. a death on the month roll). Only the ending's own entrance (kitInk, job.kend) plays. */
+function kmLifeOver(){try{return typeof S!=="undefined"&&!!S&&!!S.dead&&!(typeof CW!=="undefined"&&CW&&CW.ctx)}catch(e){return false}}
+function kitEndClear(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
+ KMR.forEach(f=>{try{f()}catch(e){console.error(e)}});
+ try{if(typeof kitPodiumClose==="function")kitPodiumClose(true)}catch(e){}
+ try{if(typeof btrKill==="function")btrKill()}catch(e){}
+ try{if(typeof cfDrop==="function")cfDrop()}catch(e){}/* jflip: a night card-flip job already running (waiting on its pictures) builds its scene after the death otherwise */
+ try{document.querySelectorAll(".kmov,#kmrew,.kmfly:not(.kmerr-lay),.kmalarm").forEach(e=>e.remove())}catch(e){}
+ try{const d=document.getElementById("dawn");if(d&&!d.hidden){d.hidden=true;d.classList.remove("on")}}catch(e){}
+ try{if(typeof kitEndToasts==="function")kitEndToasts()}catch(e){}}
+window.kmLifeOver=kmLifeOver;window.kitEndClear=kitEndClear;
 /* kmReset (FIX-THE-WHOLE-GROUP, review/flip-newlife): everything that belongs to ONE life must not outlive it. A new life / a loaded slot / the title
    screen calls this: the queue is emptied, the running job's finish is voided (kmGen), every .kmov scene (card-flip, ink, reward, reveal…) and the
    podium / reward / buổi-transition overlays are removed, and modules that keep their own timers register a hook with kmOnReset(fn). */
@@ -39,7 +53,7 @@ function kmReset(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
  try{if(typeof kitPodiumClose==="function")kitPodiumClose(true)}catch(e){}
  try{if(typeof btrKill==="function")btrKill()}catch(e){}
  try{document.querySelectorAll(".kmov,#kmrew,.kmfly,.kmalarm").forEach(e=>e.remove())}catch(e){}}
-function kmPump(){if(kmBusy||!KMQ.length)return;if(!kmFree()){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,250);return}
+function kmPump(){if(kmLifeOver())for(let i=KMQ.length-1;i>=0;i--)if(!(KMQ[i]&&KMQ[i].kend))KMQ.splice(i,1);if(kmBusy||!KMQ.length)return;if(!kmFree()){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,250);return}
  kmBusy=true;const fn=KMQ.shift();let done=false;const g=kmGen;const fin=()=>{if(done||g!==kmGen)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,600000);
  try{fn(fin)}catch(e){console.error(e);fin()}}
 
@@ -215,7 +229,7 @@ function kitBloom(o){o=o||{};const pet=Array.from({length:12},(_,i)=>`<img class
  kmPush(done=>kmStage("km-bloom",html,{dur:1800,hold:1600,onEnd:done}))}
 function kitInk(o){o=o||{};const html=`<div class="kmink"><img class="kmblot b1" src="${KM_DIR}mo-ink.webp" alt="" draggable="false"><img class="kmblot b2" src="${KM_DIR}mo-ink.webp" alt="" draggable="false"><div class="kmicap"><b>${kmEsc(o.title||"Hồng nhan bạc mệnh")}</b><small>Mở Sổ luân hồi</small></div></div>`;
  /* death jumps the queue: nothing else matters now */
- KMQ.length=0;kmPush(done=>kmStage("km-inkov",html,{dur:2000,hold:900,onEnd:done}))}
+ KMQ.length=0;const job=done=>kmStage("km-inkov",html,{dur:2000,hold:900,onEnd:done});job.kend=1;kmPush(job)}
 
 /* ================= 7 BAN THƯỞNG / QUÀ ================= */
 /* grades = KIT_GRADE (jk2b) everywhere: the tier of a reward item is its REAL grade (kitItemInfo, the same as the Tư trang bag), never a price guess */
@@ -229,6 +243,8 @@ const KM_BOX={tray:["mo-tray","mo-tray-open","Mâm thưởng"],chest:["mo-chest"
 /* KK29 (MAIN 141, E-S5 «reward popup over the ending screen»): while the ENDING card (#modal.end / .kes) is on screen, nothing opens over it: a reward box is not shown (the item is already in her chest, the log keeps the line). ONE rule: kitEndUp(). */
 function kitEndUp(){try{const M=document.getElementById("modal");return !!(M&&!M.hidden&&(M.classList.contains("end")||M.classList.contains("kes")))}catch(e){return false}}
 window.kitEndUp=kitEndUp;
+/* KK31 56.31c (MAIN 144, D F8 «Bổng lộc tháng chín» box over the «Kiếp này» card): a reward box ALREADY open when the ending card comes up is closed at once (its items are in her chest already, the log keeps the line); one watcher on #modal for every reward box. */
+(function(){const go=()=>{const M=document.getElementById("modal");if(!M){setTimeout(go,500);return}new MutationObserver(()=>{if(!kitEndUp())return;const r=document.getElementById("kmrew");if(r&&r.__kmClose)try{r.__kmClose()}catch(e){r.remove()}}).observe(M,{attributes:true,attributeFilter:["class","hidden"]})};go()})();
 function kitReward(o){if(kitEndUp())return null;o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
  const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];const gOf=t=>Math.max(0,Math.min(4,t|0));
  const items=(o.items||[]).map(x=>Object.assign({tier:0},x)).sort((a,b)=>a.tier-b.tier);const coins=o.bac||0;
@@ -241,7 +257,7 @@ function kitReward(o){if(kitEndUp())return null;o=o||{};const kind=KM_BOX[o.kind
  const html=`<div class="kmrew kmrew-${kind}${seq.length>6?" km-long":""}"><div class="kmrew-h"><b>${kmEsc(o.title||B[2])}</b>${o.from?`<small>${kmEsc(o.from)}</small>`:""}</div>
   <div class="kmbox"><i class="kmlight km-loop"></i><img class="kmbox-c km-loop" src="${KM_DIR}${B[0]}.webp" alt="" draggable="false"><img class="kmbox-o" src="${KM_DIR}${B[1]}.webp" alt="" draggable="false"><i class="kmlight kmlight-f km-loop"></i><div class="kmcoins">${coins?Array.from({length:Math.min(9,3+Math.round(coins/10))},(_,i)=>`<img src="${KM_DIR}mo-coin-silver.webp" alt="" style="--i:${i}">`).join(""):""}</div><div class="kmspot" style="--kshelf:${RV.shelf||380}ms"></div></div>
   <div class="kmshelf"></div><div class="kmtap km-loop">Chạm để mở</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
- kmPush(done=>{const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";let step=0;
+ kmPush(done=>{if(kitEndUp()){done();return}/* KK31 56.31c: a reward queued before the ending card is dropped when its turn comes after it */const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";st.ov.__kmClose=st.close;let step=0;
   const spot=root.querySelector(".kmspot"),shelf=root.querySelector(".kmshelf");const T=[];const later=(ms,f)=>T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms));
   /* kit-rows-b KP15: the shelf shows at most KMCAP icons + one «+N» chip (22 items = 3 rows of icons covered the list and the Nhận button); the full list below holds every item */const KMCAP=8,more=n=>`<span class="kmsh kmsh-more" style="--i:${KMCAP}">+${n}</span>`;const shelfAll=()=>seq.slice(0,seq.length>KMCAP+1?KMCAP:seq.length).map(tile).join("")+(seq.length>KMCAP+1?more(seq.length-KMCAP):"");
   const shelfAdd=(x,i)=>{if(seq.length<=KMCAP+1)return shelf.insertAdjacentHTML("beforeend",tile(x,i));if(i<KMCAP)shelf.insertAdjacentHTML("beforeend",tile(x,i));else{const m=shelf.querySelector(".kmsh-more");if(m)m.textContent="+"+(seq.length-KMCAP);else shelf.insertAdjacentHTML("beforeend",more(i+1-KMCAP))}};
@@ -322,7 +338,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  W("resultShow",o=>function(){const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");if(t&&t.classList.contains("on")&&kmOn())kitResultFx(t)}catch(e){console.error(e)}return r});
  /* buổi change: the incense curtain was replaced by the painted time-of-day transition (jbuoi.js, KIT §71); kitDayShift stays for old callers */
  /* death: ink spreads, then the Kiếp này / Sổ luân hồi panel underneath */
- W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{/* KIT §91: the ink + white silk of death only on a MOURNING ending; a festive ending (Đại kết cục, rời cung bình an, lên ngôi, kỳ ngộ) has the ending screen's own entrance */const KE=window.KIT_END,T=KE&&S&&S.kesT&&KE.types[S.kesT];if(S&&S.dead&&!was&&!window.__bot&&!(T&&T.tone==="fest"))kitInk({title:(S&&S.kend)||h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
+ W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{/* KIT §91: the ink + white silk of death only on a MOURNING ending; a festive ending (Đại kết cục, rời cung bình an, lên ngôi, kỳ ngộ) has the ending screen's own entrance */if(S&&S.dead&&!was&&kmLifeOver())kitEndClear();const KE=window.KIT_END,T=KE&&S&&S.kesT&&KE.types[S.kesT];if(S&&S.dead&&!was&&!window.__bot&&!(T&&T.tone==="fest"))kitInk({title:(S&&S.kend)||h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
  /* the lot shown again (Gieo lại, Phật đường, the HUD chip): play the tube in the panel */
  W("showModal",o=>function(){const r=o.apply(this,arguments);try{const m=document.querySelector("#modal .xam");if(m&&S&&S.lot&&!m.dataset.km){m.dataset.km=1;const x=document.createElement("div");m.replaceWith(x);x.outerHTML=kitXamHTML(S.lot)}
    const q=typeof Q!=="undefined"&&Q[0];if(q&&q.pid&&kmOn()&&!kitNoDanger(q)&&!q.__kmA){try{Object.defineProperty(q,"__kmA",{value:1,enumerable:false})}catch(e){}kitAlarm()}}catch(e){console.error(e)}return r});

@@ -10,6 +10,7 @@
    5) an old save (flight2 s8, year 2, LIVE format) loads and plays: no card left hidden in Q, «Sang buổi/ngày mới» enabled after closing
    usage: [QSL_SAVE=dump.json] node dev/test/q-softlock.js [index.html | URL] */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');
+const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
 const RT=require('./realtap.js');
 const GAME=process.argv[2]||path.join(__dirname,'../../index.html');const DEVS={fold:[755,1000],ipad:[1180,820]};
 function serve(file){const root=path.dirname(path.resolve(file)),idx=path.basename(file);const T={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.css':'text/css'};
@@ -20,7 +21,7 @@ const FRESH=()=>{if(typeof kitRoulette==='function'&&!window.__tRoul0){window.__
 const CLEAN=()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());if(Q.length){Q.length=0;document.getElementById('modal').hidden=true;render()}};
 const POST=t=>setTimeout(()=>{kitPanel({kind:'news',title:t,facts:['Một tin trong cung.'],btn:'Đã rõ'});showModal();render()},0);
 (async()=>{const URL=/^https?:/.test(GAME)?GAME:await serve(GAME);const b=await chromium.launch();
- for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',serviceWorkers:'block'});
+ for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',serviceWorkers:'block'});await keepNotesSeen(ctx);
   const p=await ctx.newPage();await p.route(/\.(mp3|ogg|m4a|mp4|webm|wav)(\?|$)/,r=>r.abort());const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof start==='function'&&typeof showTitle==='function',null,{timeout:180000});await p.waitForTimeout(1500);
   const rt=RT.make(p,{dev,log:x=>{if(x.k!=='tap')console.log('  realtap',JSON.stringify(x).slice(0,240))}});
@@ -30,7 +31,7 @@ const POST=t=>setTimeout(()=>{kitPanel({kind:'news',title:t,facts:['Một tin tr
   const person=(k=0)=>p.evaluateHandle(k=>{const L=[...document.querySelectorAll('#tokens .tok')].filter(e=>{const r=e.getBoundingClientRect();return r.width>10&&!e.classList.contains('me')&&getComputedStyle(e).visibility!=='hidden'});return L[k%Math.max(1,L.length)]||null},k);
   /* open a person view with a real tap on a stage figure (a figure redrawn under the finger is tried again, ≤4 times) */
   const openView=async()=>{for(let i=0;i<8;i++){await p.waitForTimeout(500);if(await rt.tap(i%2?await person(i):'#tokens .tok.fig:not(.me)',{label:'person',screen:'Hành sự'})){await p.waitForTimeout(1400);if(await p.evaluate(()=>!!(window.DF&&DF.F)))return true}}return false};
-  const closeCard=async()=>{const x=await p.evaluateHandle(()=>{const B=[...document.querySelectorAll('#modal button')].filter(b=>b.getBoundingClientRect().width>3);return B.find(b=>/kit-x|mclose/.test(b.className+' '+b.id))||B.find(b=>/^(Đã rõ|Lui|Đóng|Để sau)$/.test(b.textContent.trim()))||B.find(b=>b.classList.contains('kback'))/* an option row «Để sau» (its text carries the Tốn/Được rows) */||null});return rt.tap(x,{label:'close',screen:'card'})};
+  const closeCard=async()=>{const x=await p.evaluateHandle(()=>{const B=[...document.querySelectorAll('#modal button')].filter(b=>b.getBoundingClientRect().width>3);return B.find(b=>/kit-x|mclose/.test(b.className+' '+b.id))||B.find(b=>/^(Đã rõ|Lui|Đóng|Để sau)$/.test(b.textContent.trim()))||B.find(b=>/^(Đã rõ|Lui|Đóng|Để sau)$/.test(((b.querySelector('.kan')||{}).textContent||'').trim()))||B.find(b=>b.classList.contains('kback'))/* an option row «Để sau» (its text carries the Tốn/Được rows) */||null});return rt.choose(x,{label:'close',screen:'card'})/* KIT §101: «Để sau» on a hand = lift + ✓ (realtap choose); a plain close = one tap */};
   /* 1 */
   await fresh();let t1=await openView();
   await p.evaluate(POST,'Thử tin 1');await p.waitForTimeout(1600);let s=await st();

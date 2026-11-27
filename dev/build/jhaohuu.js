@@ -72,7 +72,7 @@ function spec(){const e=ent(),P=blob();const rows=typeof kitRows==="function"?ki
  if(!known)sec.push({h:"Chưa quen biết",html:`<p class="kpnote">Ngươi chưa gặp nàng. Gặp mặt rồi mới biết thêm về nàng.</p>`});
  return Object.assign({kind:"info",title,sub:"Hảo hữu cùng chơi",sections:sec},who(e,known,title))}
 function open(){try{if(!on()||typeof kitPanel!=="function")return;const sp=spec();let o=null;try{o=CW.frInfo()}catch(x){}
- sp.opts=(o&&o.canHold&&typeof CW.frHold==="function"?[{n:"Tạm dừng",x:"Hậu cung dừng lại cho cả hai đến khi ngươi trở lại",fx:{},go:()=>CW.frHold(true)}]:[]).concat([{n:"Đóng",fx:{},go:()=>{}}]);/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
+ sp.opts=(o&&o.canHold&&typeof CW.frHold==="function"?[{n:"Tạm dừng",x:"Hậu cung dừng lại cho cả hai đến khi ngươi trở lại",fx:{},go:()=>CW.frHold(true)}]:[]).concat([{n:"Đóng",fx:{},nav:1,go:()=>{}}]);/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
  window.__hhOpen=1;kitPanel(sp,true);if(typeof showModal==="function")showModal()}catch(e){console.error("haohuu",e)}}
 window.kitHaoHuuOpen=open;window.kitHaoHuuSpec=spec;
 }catch(e){console.error(e)}})();

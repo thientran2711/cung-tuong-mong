@@ -48,7 +48,7 @@ function kipBuild(){const m=Q[0],M=$("modal");if(!M||M.hidden||!kipOn(m))return;
     the real pieces in the chest + the ones in her stack; the tile picks the first real piece */
  {const D=new Map(),SEEN=new Set(),L2=[];for(const x of L){const e=S.inv[x[0].ik];const s=typeof invCan==="function"&&invCan(e)?[invSig(e),kipLocked(x[0]),x[0].n||"",x[0].x||""].join("#"):null;
    if(s&&D.has(s)){D.get(s)[2]++;const dup=ops.querySelector(`.opt[data-m="${x[1]}"]`);if(dup)dup.remove();/* the hidden twin card goes (its tile is the first one) */continue}const o=[x[0],x[1],1+(s&&typeof invMoreOnce==="function"?invMoreOnce(S,e,SEEN):0)];if(s)D.set(s,o);L2.push(o)}L.length=0;L.push(...L2)}
- let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}
+ let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>x[0].kgbest&&!kipLocked(x[0]))||L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}/* kgbest: the dialog's preselected item (giftto: the one he values most) */
  const w=document.createElement("div");w.className="kipw kshop";
  w.innerHTML=`<div class="kshg kipg" role="radiogroup" aria-label="Chọn món">${L.map(([c,i,q])=>kipTile(c,i,i===sel,q)).join("")}</div><div class="kipd" aria-live="polite"></div>`;
  ops.prepend(w);w.style.setProperty("grid-column","1 / -1","important");ops.classList.add("kiphas");  /* inside the option box: the grid takes the options' own place in every dialog layout (person dialog 32.7 too) */M.querySelector(".dlg").classList.add("kipdlg");

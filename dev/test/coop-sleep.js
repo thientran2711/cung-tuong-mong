@@ -3,7 +3,7 @@
    usage: python3 dev/build/assemble.py && node dev/test/coop-sleep.js [outdir] [workerURL]
    1 her `bend` is lost in the dead socket → on return she reconnects at once (not after 45–70 s) and the buổi steps for both.
    2 the room steps while she is away and she comes back with a dialog open → the step waits for the dialog, then runs (was: stuck for good).
-   3 the friend's chip on the host shows "đang vắng" / the lock word "Hảo hữu đang vắng" when she is gone; "Chờ hảo hữu…" while she waits. */
+   3 the friend's chip on the host shows "đang vắng" / the lock word CTM_WAIT.coopAbsent ("Hảo hữu vắng") when she is gone; "Chờ hảo hữu…" while she waits. */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
 const {serve,BASE}=require('./coop-serve.js');
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../../.tmp/coop-sleep'));fs.mkdirSync(OUT,{recursive:true});

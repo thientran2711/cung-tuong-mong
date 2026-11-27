@@ -234,9 +234,13 @@ async function crawlDev(b,URL,dev){
   try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}
   for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
   /* save-fix-stack rv23: «Nhận thân phận» as a player (as look-dedupe / save-boundary-reload): with the save stack the sổ is written while the identity card
-     is open (unseen card kept), so ☰ → ✕ rightly resumed THAT card (G4 90 «Ô lưu · Lui» FAIL); a tú nữ life's 3 selection days are ended for the harness */
+     is open (unseen card kept), so ☰ → ✕ rightly resumed THAT card (G4 90 «Ô lưu · Lui» FAIL); a tú nữ life's 3 selection days are ended for the harness.
+     rv24 merge with LIVE KK35: the life is accepted (NLP cleared → save() writes the sổ, ☰ → ✕ resumes a real saved life), then saved after the selx end,
+     and «Điều mới trong cung» is marked seen (it pops once a sổ exists; second visit) */
   try{if(typeof nlAccept==='function'&&typeof NLP!=='undefined'&&NLP)nlAccept(false)}catch(e){}try{if(S.selx2&&S.selx2.days){S.selx2.days=0;S.selx2.done=1}}catch(e){}
-  try{S.tutTour=1;coachOff&&coachOff()}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;
+  try{S.tutTour=1;coachOff&&coachOff()}catch(e){}
+  try{save();/* rv27: CTM_NOTES is a top-level const (not on window) → the old window.CTM_NOTES check never marked; CTM_NOTES_UI is the window handle */if(window.CTM_NOTES_UI&&CTM_NOTES_UI.list.length)localStorage.setItem('ctm-notes-seen',CTM_NOTES_UI.list[0].id)}catch(e){}
+  Q.length=0;document.getElementById('modal').hidden=true;
   document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render()});
   /* the life-start veils (roulette, «Sửa soạn nhập cung») can come a moment later: wait for them, take them down, then snapshot */
   await p.waitForTimeout(2500);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render();__bc.snap()})};

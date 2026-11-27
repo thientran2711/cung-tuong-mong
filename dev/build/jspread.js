@@ -73,7 +73,7 @@ function sp13Release(){if(SP13.off()||!SP13.L.length)return 0;const now=SP13.now
 /* plan the world cards that just entered Q (called inside a buổi change) */
 function sp13Plan(){if(SP13.off())return;const now=SP13.now(),cs=S.buoi||0,cap=sp13Cap(),z=sp13Load();
  /* the card on screen (if any) stays; new world cards: keep the unmovable, then the movable ones due now while there is room */
- const shown=!$("modal").hidden&&Q[0]&&Q[0].__sp13?Q[0]:null;const out=[];
+ const shown=!$("modal").hidden&&Q[0]?Q[0]:null;/* empty-modal (MAIN 167): the card on screen is never pulled out from under her (it was protected only once planned; a fresh one left the dialog over an empty queue) */const out=[];
  for(let i=0;i<Q.length;i++){const m=Q[i];if(!m||typeof m!=="object"||m.__sp13||m===shown)continue;m.__sp13={b0:now};SP13.stat.plan++;
   if(!sp13Movable(m)){sp13Count(m);SP13.stat.keep++;continue}
   const ps=sp13Slot(m);const due=ps!=null&&ps>cs?now+(ps-cs):now;
