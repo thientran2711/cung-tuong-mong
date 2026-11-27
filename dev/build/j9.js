@@ -128,7 +128,7 @@ function talkPraiseO(p){const T=BAL.talk.praise;return od(T.o+((p&&p.tai)||0)/T.
 function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=liveRivals(true).filter(x=>x!==v).sort((a,b)=>aff(v,a)-aff(v,b))[0];const A=[];
  const same=sameHouse(S,v);
  /* AG-ALL-2e: the four talk topics are built ONCE by P3T.<k>(speaker, listener) (jagacts3) — her talk and an NPC↔NPC talk run the same card */
- const TK=BAL.talk;A.push(P3T.health(S,v));A.push(P3T.praise(S,v));if(third)A.push(P3T.gossip(S,v,third));A.push(P3T.secret(S,v));
+ const TK=BAL.talk;A.push(P3T.health(S,v));A.push(P3T.praise(S,v));if(third&&aff(v,third)<0)A.push(P3T.gossip(S,v,third));/* E-GAIN3-LIVE law 3 + law 1: offered only when the listener dislikes the one talked of (the NPC speaker's gate, jagacts3 cx3 talkGossip); else it was cost-only («nàng quý ngươi −», may be told on) and the one-tap «Trò chuyện» door showed that loss as Được */A.push(P3T.secret(S,v));
  A.push({n:"Nhờ giúp đỡ",o:100,inner:1,x:typeof rcvWord==="function"?`${rcvWord(v,S)} · nàng có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách`:"",run:()=>{chatMark(v);return helpAsk(S,v).r}});
  const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=netTh(x,"act"))[0];
  A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng: nàng quý ngươi +${g(TK.warn.hit)}`:`không có căn cứ: nàng quý ngươi -${TK.warn.miss}`,run:()=>{chatMark(v);if(foe){affAdd(v,S,g(TK.warn.hit));oanAdd(v,foe,TK.warn.oan);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Nàng quý ngươi +${g(TK.warn.hit)}.`}affAdd(v,S,-TK.warn.miss);return `${v.name} nghi ngươi gây chia rẽ. Nàng quý ngươi -${TK.warn.miss}.`}});

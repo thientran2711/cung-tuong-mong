@@ -131,7 +131,11 @@ function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>t
   const free=T.filter(x=>!x.off);const harm=(M[r.k]||{}).harm;
   let x="",n=`${r.n} · ${t}`;if(m){const ln=String(m.x||"");/* the member's own kit line (optLine HTML: odds · tốn · được · hỏng), unchanged */
    if(harm&&free.length>1)x=`${ln} · ra một trong: ${free.map(y=>txt(y.n)).join(", ")}`;else{x=ln;n=`${txt(m.n)} · ${t}`}}
-  const why0=(T[0]&&T[0].why)||"chưa làm được";rows.push({t,m,T,n,x:x||(m?"chọn rồi xem kết quả ở bước sau":`chưa làm được: ${txt(why0)}`),off:m?null:{why:why0}})}return rows}
+  const why0=(T[0]&&T[0].why)||"chưa làm được";
+  /* E-GAIN3-LIVE law 3: a row that IS one member carries that member's price + «Gợi ý» (jdoor doorHint, the J2 / talk door rows' own rule): the dialog
+     kit reads its Được from the hint; with the line alone a deck row («Nghỉ ngơi một lát · nhẹ») read «chẳng được gì; nhưng Sức −» */
+  let c,hint;if(m&&x===String(m.x||"")&&x){c=m.a?m.a.c:m.c;hint=m.hint||(m.a&&typeof doorHint==="function"?doorHint(m.a,x):undefined)}
+  rows.push({t,m,T,n,x:x||(m?"chọn rồi xem kết quả ở bước sau":`chưa làm được: ${txt(why0)}`),c,hint,off:m?null:{why:why0}})}return rows}
 ONE.tierRows=tierRows;
 /* perf: one paint asks the same person + door many times (render → dfActs → card); the members list is kept for that paint only (state stamp) */
 const MC={c:new Map(),t:0};
@@ -167,7 +171,7 @@ function memo(k,f){k=k+"#"+stamp();if(MC.c.has(k))return MC.c.get(k);const r=f()
 /* ---------- (2) the TIER card (PEND «door»: saveable) — ≤ 3 rows nhẹ · vừa · nặng ---------- */
 (function(){const P0=PEND.door;PEND.door=pp=>{try{fix()}catch(e){}const r=DOOR.byK(pp&&pp.k);if(!ONE.on||!r||pp.r!=null||ONE.mode(r.k)!=="tier")return P0(pp);
  const {p,L}=members(pp,r);if(!p||!L.length)return P0(pp);const R=tierRows(r,L,who(p));if(R.length<2)return P0(pp);
- const o=R.map(x=>{const row={n:x.n,x:x.x,go:()=>{const q=Object.assign({},pp);if(!goOne(q,r,x.t))return}};if(x.off)row.off=x.off;return row});o.push({n:"Thôi"});
+ const o=R.map(x=>{const row={n:x.n,x:x.x,c:x.c,hint:x.hint,go:()=>{const q=Object.assign({},pp);if(!goOne(q,r,x.t))return}};if(x.off)row.off=x.off;return row});o.push({n:"Thôi"});
  const nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";let wh=null;try{const w=doorWho(p);wh=w&&typeof WHO==="function"?WHO(w):null}catch(e){}
  return{t:`${r.h.replace(/^Chọn (mức và )?(cách|chuyện|lời|sổ|môn)[^.]*\./,"Chọn mức.")}${nm?` <b>${nm}</b>`:""}`,o,who:wh}}})();
 /* ---------- (3) DECK doors (Hành sự / cung nữ / lãnh cung / khuê các): tap = one way, or the tier card ---------- */
@@ -175,12 +179,13 @@ function deckRow(b){const I=b.dataset.ddi.split(",").map(Number);const a=deck[I[
  return (DOOR.D||[]).find(r=>r.roads.includes(road)&&(r.re?r.re.test(txt(a&&a.n)):(()=>{try{return r.key(a,deck)===b.dataset.ddoor}catch(e){return false}})()))||null}
 function deckM(b){const I=b.dataset.ddi.split(",").map(Number),X=b.dataset.ddx.split(",").map(Number);
  return I.map((i,j)=>{const a=deck[i];if(!a)return null;let w="";if(!X[j]){try{w=txt(cardWhy(a))}catch(e){}w=w||txt(a.lock&&a.t)||"chưa làm được lúc này"}
-  let c=1;try{c=cardCost(a)}catch(e){}return{id:"d:"+txt(a.n),n:a.n,a,x:a.x||"",off:!X[j],why:w,cost:c,go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("jone deck way",e)}},0)}}}).filter(Boolean)}
+  let c=1;try{c=cardCost(a)}catch(e){}let ln="";try{ln=optLine(a)}catch(e){}/* E-GAIN3-LIVE law 3: the member's own kit line (as the people doors' members, tierRows) — a.x alone dropped its w gains («Nghỉ ngơi một lát · nhẹ» showed no Sức +) */
+  return{id:"d:"+txt(a.n),n:a.n,a,x:ln||a.x||"",off:!X[j],why:w,cost:c,go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("jone deck way",e)}},0)}}}).filter(Boolean)}
 ONE.deckM=deckM;ONE.deckRow=deckRow;
 function deckRowR(b){const r=deckRow(b);return r?Object.assign({},r,{n:b.dataset.ddoor}):{k:"?",n:b.dataset.ddoor}}
 function deckTap(b){if(!S||S.dead||Q.length)return true;const r=deckRowR(b);const L=deckM(b);const md=ONE.mode(r.k);
  if(md==="tier"){const tiers=TI.filter(t=>L.some(m=>tierOf(r,m)===t));if(tiers.length>=2){const R=tierRows(r,L,"me");
-   const rows=R.map(x=>{const o={n:x.n,x:x.x,ddoor:1,go:()=>{const m=pick(r,x.T,seedOf(r,"me",x.t));if(m)runM(r,m,x.T,x.t)}};if(x.off)o.off=x.off;return o});
+   const rows=R.map(x=>{const o={n:x.n,x:x.x,c:x.c,hint:x.hint,ddoor:1,go:()=>{const m=pick(r,x.T,seedOf(r,"me",x.t));if(m)runM(r,m,x.T,x.t)}};if(x.off)o.off=x.off;return o});
    let wh=null;try{wh=typeof pMe==="function"?pMe():null}catch(e){}DOOR.card(b.dataset.ddoor,"Chọn mức.",rows,wh);return true}}
  const m=pick(r,L,seedOf(r,"me"));if(!m)return false;runM(r,m,L);return true}
 ONE.deckTap=deckTap;
