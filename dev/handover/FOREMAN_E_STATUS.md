@@ -412,3 +412,4 @@ FOR FOREMAN E: rerun E-S8 handed 3 rows (bd_tuyet random4/random5/greedy4) to E-
 
 FOR FOREMAN E: E-T2FLAKE-L5 BLOCKED — the 4 tests + TITLES2/rpSync code are not on LIVE 5fb13d60 at all; nothing to port. See reports/titles2-unit-harden-l5.md. Decide: land titles2/3 line first, or close as moot.
 - (27/11 22:57Z) FOR FOREMAN E: ES7-R8-speed-5-h (E-S7 column, run by E-S1) finished: bd_hen Lãnh cung «Phát điên trong lãnh cung» age 26 b939 VALID (flags mg-unplayed debut ve+kim 0/10, mixed build LIVE update mid-life); end card clean on s=24beb1a4. E-S1 own 24/27; greedy 1522350896 resumed on LIVE ca4a1689 (ui3) running; held 2305435383 + 3683447523 (F).
+- (27/11 22:57Z) FOR FOREMAN E: rerun E-S7 lives finished 32/35: 30 mine (valid 30; 2 flagged mixed build) + ES7-R8-speed-4-h and ES7-R8-speed-5-h run by E-S1 (both VALID with flags mg-unplayed + mixed build; speed-5-h seed 1191047549 Lãnh cung age 26 buổi 939). Only skilled-3, skilled-4, speed-3 (mine) still running.
