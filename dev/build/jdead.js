@@ -40,4 +40,12 @@ try{const r0=rvCard;rvCard=function(v){let h=r0.apply(this,arguments);try{
  else if(v&&v.alive===false)h=h.replace(">Đã chết<",v.nun?">Đã xuất gia<":">Đã rời cung<")}catch(e){}return h}}catch(e){}
 try{const m0=manCard;manCard=function(m){if(!dthIs(m))return m0.apply(this,arguments);const f=pMan(m);
  return pcard({f,col:"#6a8aa0",name:m.name,rank:m.role,status:"Đã khuất",out:true,lines:[tuoi(m.age)].filter(Boolean),chips:[],note:"",groups:[],empty:`<p>${m.name} đã khuất. Chỉ còn lại những gì người ta còn nhớ về hắn.</p>`}).replace('<div class="pcr">','<div class="pcr">'+dthRows(m))}}catch(e){}
+/* ---- the whole record as it was (owner 27/11 ~05:10Z, MAIN LOOK): what she was in life from existing data; no live lines about a dead person ---- */
+function dthDrop(h,labels){try{const t=document.createElement("template");t.innerHTML=h;t.content.querySelectorAll(".kr").forEach(r=>{const l=(r.querySelector(".krl")||{}).textContent||"";const v=(r.querySelector(".krv")||{}).textContent||"";if(labels.includes(l.trim())||(/^Đã biết$/.test(l.trim())&&/chưa biết gì thêm/.test(v)))r.remove()});return t.innerHTML}catch(e){return h}}
+function dthLife(v){const R=[];try{const pn=palName(palaceOf(v));if(pn&&!pn.includes(v.name))R.push(["Cung ở",pn])}catch(e){}
+ const K=v.kids||[];if(K.length)R.push(["Con cái",K.map(k=>`${k.name}${k.alive?"":" (đã mất)"}`).join(", ")]);
+ if(v.out)R.push(["Lúc mất","đang ở lãnh cung"]);return R}
+try{const r1=rvCard;rvCard=function(v){let h=r1.apply(this,arguments);try{if(dthIs(v)){h=dthDrop(h,["Dạo này"]);const life=kitRows(dthLife(v));if(life)h=h.replace('<div class="pcr">','<div class="pcr">'+life)}}catch(e){}return h}}catch(e){}
+try{const kf=kidFace;kidFace=function(k){const f=kf.apply(this,arguments);try{const s=stOf(k);if(s&&f&&typeof f==="object")f.st=s}catch(e){}return f}}catch(e){}
+try{const kc=kidCard;kidCard=function(k){let h=kc.apply(this,arguments);try{if(dthIs(k)){h=h.replace(">Đã mất<",">Đã khuất<");let mom="";try{const m=allKids().find(([x])=>x===k);mom=m&&m[1]?m[1].name:S.name}catch(e){}const rows=dthRows(k)+kitRows(mom?[["Mẹ",mom]]:[]);h=h.replace('<div class="pcr">','<div class="pcr">'+rows).replace("Con đã mất.","")}}catch(e){}return h}}catch(e){}
 })();
