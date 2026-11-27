@@ -103,8 +103,8 @@ function p3Res(k,txt){AG3.stat.land++;AG3.stat.by[k]=(AG3.stat.by[k]||0)+1;retur
  }catch(e){agdErr("par3:asOpts",e)}return L}})();
 if(typeof AS_DO==="object"&&!AS_DO.cut)AS_DO.cut=(s)=>{s.manLove=null;return""};
 /* ---------------- lãnh cung: an NPC inside chooses among HER cards (j14 coldActsOf), once a month (coldMonth; was a flat roll 3 % / 5 %) ---------------- */
-function p3Free(v,why){const X=BAL.ag.par3.cold;v.out=false;v.rank=0;v.lastPromo=S.turn;v.coldEv=0;v.oan=cl((v.oan||0)+X.oanFree,0,100);if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,BAL.eff.j14.coldMonth)}
- v.p3Freed=why;return `${v.name} được tha khỏi lãnh cung (${why}), phục vị ${RANKS[0].n}`}
+function p3Free(v,why){const X=BAL.ag.par3.cold;if(!coldStayOk(v))return `${v.name} còn ${coldDaysLeft(v)} ngày nữa mới được xét tha`;coldFree(v);v.lastPromo=S.turn;v.coldEv=0;spAdd(v,"oan",X.oanFree);if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,BAL.eff.j14.coldMonth)}
+ v.p3Freed=why;return `${v.name} được tha khỏi lãnh cung (${why}), phục vị ${RANKS[v.rank].n}`}
 function p3Nun(v){v.alive=false;v.nun=1;return `${v.name} cạo tóc xuất gia, rời lãnh cung`}
 function p3Cold(v){const X=BAL.ag.par3.cold;let N;try{N=agNeeds(v)}catch(e){N={}}const L=coldActsOf(v).filter(C=>!C.lock&&agcCan(v,C.c));const best=Math.max(0,...L.filter(C=>/được tha|phục vị|nhớ chuyện cũ/.test(C.x||"")).map(C=>C.o||0));
  const W=[];for(const C of L){const free=(/được tha|phục vị|nhớ chuyện cũ/.test(C.x||"")||String(C.x||"").includes(evSg(BAL.ag.ev.one)))/* the evidence words come from the one helper (evSg), never a typed "+1" */;let u;
@@ -274,7 +274,7 @@ function p3ToilAns(w,x,c){if(c==="grudge"){toilRxGrudge(w,x,x.name);return"grudg
 try{Object.assign(TL2_ANS,{grudge:"nàng mím môi ghi hận",tellOk:"nàng đem chuyện mách Hoàng hậu, kẻ chê bị răn vài câu",tellFail:"nàng mách Hoàng hậu, bị chê hay chấp vặt",give:"nàng gửi chút bạc đáp lễ",thank:"nàng cảm tạ",askOk:"nàng hỏi bí quyết điểm trang, được chỉ cho",askNo:"nàng hỏi bí quyết điểm trang, bị cười nhạt"})}catch(e){}
 function p3ToilPick(w,B){const T=traitsOf(w)||[];return mindPick(Object.keys(B).map(c=>{let n=B[c].b;for(const t of T)n+=B[c].tr[t]||0;return[c,n]}),w)}
 (function(){if(typeof tl2See!=="function")return;const s0=tl2See;tl2See=function(x,w,L){if(!p3On()||!x||!w||x===S||w===S)return s0.apply(this,arguments);let e=null,ask=false;
-  try{if(!toilSeen(x,w)){e=toilSeeRule(x,L);const R=toilRx();const nx=toilNpc(x),nw=toilNpc(w);ask=!x.queen&&!toilTipOn(w)&&nx&&nx.makeup&&nw&&(nx.score|0)>=(nw.score|0)+R.askGap}}catch(er){e=null}
+  try{if(!toilSeen(x,w)){e=toilSeeRule(x,L,w);const R=toilRx();const nx=toilNpc(x),nw=toilNpc(w);ask=!x.queen&&mockOK(x,w)/* rank respect: her «cười nhạt» answer */&&!toilTipOn(w)&&nx&&nx.makeup&&nw&&(nx.score|0)>=(nw.score|0)+R.askGap}}catch(er){e=null}
   const r=s0.apply(this,arguments);if(r||!e&&!ask)return r;const out=[];
   try{const X=BAL.ag.par3.toil;TL2.stat.ans=TL2.stat.ans||{};
    if(e&&e.k==="praise"&&e.aff>0){let c=p3ToilPick(w,X.praise);const cost=toilGiveCost(w);if(c==="give"&&(w.bac||0)<cost)c="thank";
@@ -327,7 +327,7 @@ agRunReg("cx2:maidTalk",v=>{const r=maidTalkDo(v);return r?ag2Res(v,"maidTalk",1
 function maidSpyT(v){const L=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&!t.out&&!sameHouse(v,t));return L.length?mindPickBy(L,t=>BAL.mind.pick.ag.base+Math.max(0,agSpite(v,t))+Math.max(0,danger(t,v))/10,v):null}
 agRunReg("cx2:maidSpy",(v,t)=>{const m=v.maid;t=t||maidSpyT(v);if(!m||!t)return"";const so=spyRoll(v,t,m);if(!agTry(so)){if(agSoft(so))return ag2Res(v,"maidSpy",0,agSoftTxt(v));m.loyal=cl((m.loyal||0)-BAL.eff.jwhy.loyalSpyMaidRun,0,100);oanAdd(t,v,BAL.eff.j78.j78maidFail);
   return ag2Res(v,"maidSpy",0,`${m.name} nấp nghe ngoài cửa sổ cung ${agcNm(t)} thì bị bắt gặp; ${agcNm(t)} đoán ra ${v.name}`)}
- const ok=!!evA(v,t,BAL.eff.j78.evN);return ag2Res(v,"maidSpy",ok,ok?`${m.name} nghe lén được chuyện của ${agcNm(t)} cho ${v.name}`:`${m.name} dò la ${agcNm(t)} cho ${v.name}, chẳng thấy điều gì sai trái`)});
+ const ok=!!chSearch(v,m,()=>evA(v,t,BAL.eff.j78.evN));return ag2Res(v,"maidSpy",ok,ok?`${m.name} nghe lén được chuyện của ${agcNm(t)} cho ${v.name}`:chMissed()?`${m.name} dò la ${agcNm(t)} cho ${v.name}, chưa tìm ra chứng`:`${m.name} dò la ${agcNm(t)} cho ${v.name}, chẳng thấy điều gì sai trái`)});
 /* jgreet: an NPC who comes to her runs her own talk / TW buttons with herself as the speaker */
 (function(){if(typeof gmOpts!=="function")return;const g0=gmOpts;const SAY={health:["Health","hỏi han sức khỏe ngươi"],praise:["Praise","khen tài nghệ của ngươi"],secret:["Secret","kéo ngươi ra một góc, kể chuyện riêng"],gossip:["Gossip","ghé tai bàn tán về {x}"],
   warn:["Warn","nhắc ngươi coi chừng {x}"],provoke:["Provoke","buông lời khiêu khích ngươi trước mặt mọi người"]};

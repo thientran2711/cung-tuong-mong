@@ -148,7 +148,7 @@ EV6("empChess","emp",{a:["emp"],pp:()=>S.sung>=25?{a0:0}:null,w:C=>1,
   c6("Cáo mệt xin hôm khác",{w:{suc:3},k:[R6(`Sủng ${balSg(BAL.eff.j68e.sungOk)}`)],ok:()=>{apply({sung:BAL.eff.j68e.sungOk});return "Ngài cho lui, hơi tiếc."}})]});
 EV6("empAsksAbout","emp",{a:["emp","rv"],pp:()=>{const b=rv6();return b==null||S.sung<25?null:{a0:0,a1:b}},w:C=>1,
  v:["Hoàng thượng hỏi bâng quơ: 'Nàng thấy {B} là người thế nào?'","Ngài hỏi ngươi có biết vì sao {B} dạo này hay cáo bệnh.","Ngài muốn ban thưởng cho {B}, hỏi ngươi nên ban gì.","Ngài nhắc {B} múa đẹp, rồi nhìn ngươi chờ xem phản ứng."],
- o:X=>[c6(`Nói tốt cho ${X.B.n}`,{w:{duc:2},r:[[X.B,8]],k:[R6(`ngài để ý ${X.B.n} hơn`)],ok:()=>{X.B.o.sung=cl((X.B.o.sung||30)+2,0,100);return `Ngài gật gù, nhớ đến ${X.B.n}.`}}),
+ o:X=>[c6(`Nói tốt cho ${X.B.n}`,{w:{duc:2},r:[[X.B,8]],k:[R6(`ngài để ý ${X.B.n} hơn`)],ok:()=>{spAdd(X.B.o,"sung",2);return `Ngài gật gù, nhớ đến ${X.B.n}.`}}),
   c6("Nói thật, không thêm bớt",{w:{danh:1,duc:1},wt:[G6("ngài tin lời ngươi hơn")],k:[R6("lời thật có khi mất lòng")]}),
   c6("Khéo nói xấu một câu",{p:od(BAL.odb.j68e.odP_27+S.tamco/2+S.sung/5),w:{sung:2},wt:[G6(`ngài lạnh với ${X.B.n}`)],l:{sung:-3,duc:-2},lt:[R6("ngài ghét kẻ gièm pha")],ok:()=>{X.B.o.sung=cl((X.B.o.sung||30)-3,0,100);return `Ngài nhíu mày khi nhắc đến ${X.B.n}.`}})]});
 EV6("empGiftOdd","emp",{a:["emp"],pp:()=>S.sung>=30?{a0:0}:null,w:C=>.9,
