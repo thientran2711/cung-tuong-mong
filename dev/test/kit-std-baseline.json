@@ -1,0 +1,12 @@
+{
+ "note": "LIVE main 066d9af0, gate mode SUBS=0, Fold 755x1000 + iPad 1180x820; counts may only shrink (coordinator lowers it after KK fixes)",
+ "sha": "066d9af0",
+ "total": 20,
+ "cnt": {
+  "X08": 2,
+  "X12": 3,
+  "X02": 6,
+  "X09": 7,
+  "X18": 2
+ }
+}
