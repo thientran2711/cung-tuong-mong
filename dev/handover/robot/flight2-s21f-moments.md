@@ -1,0 +1,91 @@
+# flight2-s21f moment log (bot speed, ipad, seed 2026112564, real-tap harness f65d019b)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-flight2-s21f/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Lui | Vào cung ngayTốnkhôngĐượcvào | Ở nhà chờ tuyển túTốnkhôngĐư | Trang trước | Dung mạo 15 | Dung mạo 16 | Dung mạo 17 | Dung mạo 18 · shots-flight2-s21f/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kmrew «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Con gái nhà buôn muối · 1/3» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-flight2-s21f/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Khuê các» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s21f/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Khuê phòng · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài47Tâm cơ24Đức30Danh8 | Bạc85Sức80/100 | Buổi sáng, còn 4 khắc | Tuyển túcòn 23 tháng | sương sớm | Tâm trạngBình thản0 · shots-flight2-s21f/m-new-1-7.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài47Tâm cơ24Đức30Danh8 | Bạc85Sức80/100 | Buổi trưa, còn 4 khắc | Tuyển túcòn 23 tháng | hoa đào bay | Tâm trạngBình thản0 · shots-flight2-s21f/m-new-1-8.png
+- year 1 · turn 0 · tuần 0 · buổi 2 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1: Lĩnh bổng lộc · Nội | mồng 2 | mồng 3 | mồng 4 | mồng 5: Tiết Thanh minh · shots-flight2-s21f/m-new-3-9.png
+- year 1 · turn 0 · tuần 0 · buổi 2 · rank 0 · .kscn «» · NEW SCREEN · first time on this screen; buttons: Từng người | Từng nhóm | Lui · shots-flight2-s21f/m-new-3-10.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-flight2-s21f/m-new-4-11.png
+- year 1 · turn 1 · tuần 0 · buổi 0 · rank 0 · #kdaytc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc67Tài53Tâm cơ25Đức34Danh9 | Bạc94Sức94/100 | Buổi sáng, còn 4 khắc | Tuyển túcòn 22 tháng | ve kêu râm ran | Tâm trạngBình thản+2 · shots-flight2-s21f/m-new-12-12.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Cúng dường hậu hĩnhTốnBạc 40 | Chép kinh cầu phúcTốnSức 8Đư | Lễ Phật rồi vềTốnkhôngĐượckh · shots-flight2-s21f/m-new-17-13.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · #modal «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-17-14.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-20.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Mượn y phục» · NEW SCREEN · first time on this screen; buttons: Cho mượnTốnkhôngĐượcthứ muội | Từ chốiTốnkhôngĐượcthứ muội | Cho mượn bộ khác, giữ bộ đẹp · shots-flight2-s21f/m-new-25-15.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · #modal «Sổ muối» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-26-16.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Sổ muối» · NEW SCREEN · first time on this screen; buttons: Ủng hộ chaTốnSức 5ĐượcGia th | Khuyên cha giữ bạcTốnSức 5Đư | Xin cha dâng một phần, giữ m · shots-flight2-s21f/m-new-26-17.png
+- year 1 · turn 2 · tuần 0 · buổi 2 · rank 0 · #modal «Danh hiệu mới» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-27-18.png
+- year 1 · turn 2 · tuần 0 · buổi 2 · rank 0 · .dlg «Danh hiệu mới» · NEW SCREEN · first time on this screen; buttons: Đeo ngayTốnkhôngĐượckhôngGhi | Để sau · shots-flight2-s21f/m-new-27-19.png
+- year 1 · turn 2 · tuần 0 · buổi 2 · rank 0 · #modal «Đeo «Thư hương»» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-27-20.png
+- year 1 · turn 2 · tuần 0 · buổi 2 · rank 0 · .dlg «Đeo «Thư hương»» · NEW SCREEN · first time on this screen; buttons: Thêm TàiTốnkhôngĐượcTài + | Học mau tiếnTốnkhôngĐượcTự h | Để sau · shots-flight2-s21f/m-new-27-21.png
+- year 1 · turn 2 · tuần 1 · buổi 1 · rank 0 · #modal «Cha say rượu» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-29-22.png
+- year 1 · turn 2 · tuần 1 · buổi 1 · rank 0 · .dlg «Cha say rượu» · NEW SCREEN · first time on this screen; buttons: Thưa: con muốn vào cung, làm | Thưa: con chỉ muốn ở gần cha | Lắng nghe, hỏi chuyện các nh · shots-flight2-s21f/m-new-30-23.png
+- year 1 · turn 2 · tuần 2 · buổi 1 · rank 0 · #modal «Có người bán tin» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-33-24.png
+- year 1 · turn 2 · tuần 2 · buổi 1 · rank 0 · .dlg «Có người bán tin» · NEW SCREEN · first time on this screen; buttons: Mua tinTốnBạc 35·1 khắcĐượcn | Không muaTốnkhôngĐượckhôngGh · shots-flight2-s21f/m-new-34-25.png
+- year 1 · turn 3 · tuần 0 · buổi 1 · rank 0 · .dlg «Tin mua được» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s21f/m-new-38-26.png
+- year 1 · turn 3 · tuần 0 · buổi 3 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-40.png
+- year 1 · turn 4 · tuần 0 · buổi 1 · rank 0 · - · ODD · [game] SAVE STALE: the stored save stopped following the live game (no setItem error seen) · -
+- year 1 · turn 4 · tuần 1 · buổi 3 · rank 0 · #modal «Đêm Thất tịch» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-55-27.png
+- year 1 · turn 4 · tuần 1 · buổi 3 · rank 0 · .dlg «Đêm Thất tịch» · NEW SCREEN · first time on this screen; buttons: Thi xâu kimRất vữngTốnSức 10 | Ngồi xemTốnkhôngĐượckhông đư · shots-flight2-s21f/m-new-56-28.png
+- year 1 · turn 4 · tuần 1 · buổi 3 · rank 0 · #kg82 «» · NEW SCREEN · first time on this screen; buttons: Quay lại | Sẵn sàngtừ lúc này mới tính | Hướng dẫnchơi thử một hồi dễ | Bỏ quakết quả khá, tự thi gi · shots-flight2-s21f/m-new-56-29.png
+- year 1 · turn 4 · tuần 2 · buổi 1 · rank 0 · .dlg «Huynh trưởng thua bạc» · NEW SCREEN · first time on this screen; buttons: Đưa bạcTốnBạc 50Đượchuynh tr | Mách chaTốnkhôngĐượchuynh tr | Từ chối, giữ kínCó cơTốnkhôn | Xin tổ mẫu đứng ra trả nợTốn · shots-flight2-s21f/m-new-57-30.png
+- year 1 · turn 4 · tuần 2 · buổi 3 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-60.png
+- year 1 · turn 6 · tuần 0 · buổi 0 · rank 0 · .dlg «Danh hiệu lên bậc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s21f/m-new-73-31.png
+- year 1 · turn 6 · tuần 0 · buổi 2 · rank 0 · .dlg «Hạn hán, mất mùa» · NEW SCREEN · first time on this screen; buttons: Quyên bạc cứu đóiTốnBạc 30Đư | Bớt chi dùng trong cungTốnkh | Làm như không biếtTốnkhôngĐư · shots-flight2-s21f/m-new-74-32.png
+- year 1 · turn 6 · tuần 0 · buổi 2 · rank 0 · #modal «Ôn dịch» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-75-33.png
+- year 1 · turn 6 · tuần 0 · buổi 2 · rank 0 · .dlg «Ôn dịch» · NEW SCREEN · first time on this screen; buttons: Đóng cửa cung, xông ngảiTốnB | Vẫn đi lại như thườngTốnkhôn · shots-flight2-s21f/m-new-75-34.png
+- year 1 · turn 6 · tuần 1 · buổi 3 · rank 0 · page «Khuê phòng · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-80.png
+- year 1 · turn 7 · tuần 0 · buổi 2 · rank 0 · .dlg «Đại xá thiên hạ» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s21f/m-new-87-35.png
+- year 1 · turn 7 · tuần 0 · buổi 3 · rank 0 · #modal «Đại xá thiên hạ» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-87-36.png
+- year 1 · turn 8 · tuần 0 · buổi 1 · rank 0 · #modal «Mượn y phục» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-97-37.png
+- year 1 · turn 8 · tuần 0 · buổi 1 · rank 0 · #modal «Kế mẫu» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-98-38.png
+- year 1 · turn 8 · tuần 0 · buổi 1 · rank 0 · .dlg «Kế mẫu» · NEW SCREEN · first time on this screen; buttons: Cúi đầu nhận lỗi trước mọi n | Đáp khéo: hôm ấy chính Kế mẫ | Mang trà sâm sang biếu, lấy  · shots-flight2-s21f/m-new-98-39.png
+- year 1 · turn 8 · tuần 0 · buổi 3 · rank 0 · page «Khuê phòng · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-100.png
+- year 1 · turn 9 · tuần 0 · buổi 1 · rank 0 · #modal «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-109-40.png
+- year 1 · turn 9 · tuần 0 · buổi 1 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Đứng xem rồi vềTốnkhôngĐượck · shots-flight2-s21f/m-new-110-41.png
+- year 1 · turn 9 · tuần 1 · buổi 2 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Bỏ bạc mua thêm thanTốnBạc 2 | Chịu rét cho quaTốnSức 8Được · shots-flight2-s21f/m-new-114-42.png
+- year 1 · turn 9 · tuần 1 · buổi 2 · rank 0 · #modal «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-115-43.png
+- year 1 · turn 9 · tuần 2 · buổi 3 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-120.png
+- year 2 · turn 10 · tuần 2 · buổi 0 · rank 0 · .dlg «Tin trong cung buổi này» · NEW SCREEN · first time on this screen; buttons: Lui · shots-flight2-s21f/m-new-129-44.png
+- year 2 · turn 10 · tuần 2 · buổi 1 · rank 0 · #modal «Tỉnh thân» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-129-45.png
+- year 2 · turn 10 · tuần 2 · buổi 1 · rank 0 · .dlg «Tỉnh thân» · NEW SCREEN · first time on this screen; buttons: Nhận quà nhà gửi vàoTốnkhông | Nhờ cha nói giúp trước triều · shots-flight2-s21f/m-new-130-46.png
+- year 2 · turn 11 · tuần 1 · buổi 3 · rank 0 · page «Khuê phòng · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-140.png
+- year 2 · turn 12 · tuần 0 · buổi 1 · rank 0 · #modal «Bà mối đến nhà» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-145-47.png
+- year 2 · turn 12 · tuần 0 · buổi 1 · rank 0 · .dlg «Bà mối đến nhà» · NEW SCREEN · first time on this screen; buttons: Xin cha cho xem mặt trướcTốn | Thưa: con đợi kỳ tuyển túCó  · shots-flight2-s21f/m-new-146-48.png
+- year 2 · turn 12 · tuần 0 · buổi 1 · rank 0 · #modal «Nhà trai thử dung mạo» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-146-49.png
+- year 2 · turn 12 · tuần 0 · buổi 1 · rank 0 · .dlg «Nhà trai thử dung mạo» · NEW SCREEN · first time on this screen; buttons: Điểm trang rực rỡ, ra mắt đư | Ăn vận giản dị, nói năng chừ | Để thứ muội ra tiếp trà thay · shots-flight2-s21f/m-new-146-50.png
+- year 2 · turn 12 · tuần 0 · buổi 1 · rank 0 · .dlg «Yến đầy tháng công chúa» · NEW SCREEN · first time on this screen; buttons: Dâng quà quýTốnBạc 40ĐượcUyể | Quà vừa phảiTốnBạc 15ĐượcUyể | Cáo bệnh không tớiTốnkhôngĐư · shots-flight2-s21f/m-new-146-51.png
+- year 2 · turn 12 · tuần 1 · buổi 1 · rank 0 · #modal «Yến đầy tháng công chúa» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-149-52.png
+- year 2 · turn 13 · tuần 0 · buổi 3 · rank 0 · page «Khuê phòng · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-160.png
+- year 2 · turn 13 · tuần 1 · buổi 1 · rank 0 · .dlg «Thứ muội giành mối» · NEW SCREEN · first time on this screen; buttons: Mặc nàng taTốnkhôngĐượcmất m | Nói lại với chaCó cơTốnSức 5 · shots-flight2-s21f/m-new-161-53.png
+- year 2 · turn 14 · tuần 2 · buổi 3 · rank 0 · page «Khuê phòng · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-180.png
+- year 2 · turn 15 · tuần 0 · buổi 1 · rank 0 · .dlg «Thuở thanh mai» · NEW SCREEN · first time on this screen; buttons: Nhận tín vậtTốnkhôngĐượclời | Trả lại, giữ lễTốnkhôngĐượcĐ | Hẹn chàng ngày rằm ở hậu việ · shots-flight2-s21f/m-new-181-54.png
+- year 2 · turn 16 · tuần 0 · buổi 1 · rank 0 · #modal «Thứ muội giành mối» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-193-55.png
+- year 2 · turn 16 · tuần 0 · buổi 1 · rank 0 · #modal «Thuở thanh mai» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-194-56.png
+- year 2 · turn 16 · tuần 1 · buổi 3 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-200.png
+- year 2 · turn 18 · tuần 0 · buổi 1 · rank 0 · #modal «Chiếu tuyển tú» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-217-57.png
+- year 2 · turn 18 · tuần 0 · buổi 1 · rank 0 · .dlg «Chiếu tuyển tú» · NEW SCREEN · first time on this screen; buttons: Ghi tênTốnkhôngĐượcnhà thôi | Xin cha lo cho được miễn tuy | Xin tổ mẫu nói với cha cho m · shots-flight2-s21f/m-new-218-58.png
+- year 2 · turn 18 · tuần 0 · buổi 3 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-220.png
+- year 2 · turn 19 · tuần 0 · buổi 1 · rank 0 · #modal «Phiên vương nhập triều» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-229-59.png
+- year 2 · turn 19 · tuần 0 · buổi 1 · rank 0 · .dlg «Phiên vương nhập triều» · NEW SCREEN · first time on this screen; buttons: Ra mắt Vương gia ??? ở Đức T | Tránh mặt cho phải lễTốnkhôn · shots-flight2-s21f/m-new-230-60.png
+- year 2 · turn 19 · tuần 1 · buổi 2 · rank 0 · .dlg «Đại thọ» · NEW SCREEN · first time on this screen; buttons: Dâng lễ vật quýTốnBạc 60Được | Dâng lễ vật vừa phảiTốnBạc 2 | Tự tay làm lễ vậtRất vữngTốn · shots-flight2-s21f/m-new-234-61.png
+- year 2 · turn 19 · tuần 2 · buổi 1 · rank 0 · #modal «Dịch trong kinh thành» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-237-62.png
+- year 2 · turn 19 · tuần 2 · buổi 1 · rank 0 · .dlg «Dịch trong kinh thành» · NEW SCREEN · first time on this screen; buttons: Đóng cửa khuê phòng, uống th | Vẫn đi lại như thườngRất vữn | Đi chùa phát thuốc cho dânRấ | Ở yên trong khuê phòng, xông | Đi chùa giúp sắc thuốc cho d · shots-flight2-s21f/m-new-238-63.png
+- year 2 · turn 19 · tuần 2 · buổi 3 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-240.png
+- year 2 · turn 20 · tuần 0 · buổi 1 · rank 0 · .dlg «Nhật thực, sao chổi» · NEW SCREEN · first time on this screen; buttons: Thắp hương cùng cầu bình anT | Dâng thêm một đĩa hoa quảTốn | Khuyên Quý phi Hứa Thái Vi đ | Lặng lẽ lui, giữ lòng thanh  · shots-flight2-s21f/m-new-242-64.png
+- year 2 · turn 20 · tuần 0 · buổi 3 · rank 0 · #modal «Thiên tượng» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-243-65.png
+- year 2 · turn 20 · tuần 0 · buổi 3 · rank 0 · .dlg «Thiên tượng» · NEW SCREEN · first time on this screen; buttons: Đứng ra nói đỡTốnkhôngĐượcĐứ | Đổ thêm dầu vào lửaTốnkhôngĐ | Im lặngTốnkhôngĐượckhôngGợi  · shots-flight2-s21f/m-new-244-66.png
+- year 2 · turn 20 · tuần 1 · buổi 1 · rank 0 · #modal «Nhật thực, sao chổi» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-245-67.png
+- year 2 · turn 21 · tuần 0 · buổi 1 · rank 0 · .dlg «Lũ lớn, mất mùa» · NEW SCREEN · first time on this screen; buttons: Quyên bạc cứu đóiTốnBạc 30Đư | Bớt chi dùng trong cungTốnkh | Làm như không biếtTốnkhôngĐư · shots-flight2-s21f/m-new-254-68.png
+- year 2 · turn 21 · tuần 1 · buổi 1 · rank 0 · #modal «Đại trai đàn cầu phúc» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-257-69.png
+- year 2 · turn 21 · tuần 1 · buổi 1 · rank 0 · .dlg «Đại trai đàn cầu phúc» · NEW SCREEN · first time on this screen; buttons: Cúng dường hậu hĩnhTốnBạc 40 | Chép kinh cầu phúcTốnSức 8Đư | Lễ Phật rồi vềTốnkhôngĐượckh · shots-flight2-s21f/m-new-258-70.png
+- year 2 · turn 21 · tuần 1 · buổi 3 · rank 0 · page «Khuê phòng · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-flight2-s21f/m-look-260.png
+- year 3 · turn 22 · tuần 0 · buổi 1 · rank 0 · #modal «Cha định hôn» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s21f/m-new-265-71.png
+- year 3 · turn 22 · tuần 0 · buổi 1 · rank 0 · .dlg «Cha định hôn» · NEW SCREEN · first time on this screen; buttons: Vâng lời chaTốnkhôngĐượcxuất | Quỳ xin cha cho đi tuyển túV · shots-flight2-s21f/m-new-266-72.png
+- year 3 · turn 22 · tuần 0 · buổi 1 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-flight2-s21f/m-new-266-73.png
+- year 3 · turn 22 · tuần 0 · buổi 1 · rank 0 · ending · EVENT · life over: Vợ quan thanh liêm — Vợ quan thanh liêm · age 20 · buổi 266 · bugs 1 · stuck 0 · dead buttons 0 · shots-flight2-s21f/end.png
