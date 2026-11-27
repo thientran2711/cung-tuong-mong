@@ -610,3 +610,4 @@ HARNESS FIXER #16 (opus) board-loop family: (a) BOARD PLAY loop resets the no-cl
 lr5 trio BIG rv | review/help-housemate-lr5 75eb6e45 + srv-rank-lr5 a5fec6d6 + selx-fair-lr5 c72de843 | session_01D3E3NYEAw2ySeXbRy1naHN | RUNNING | 27/11 03:16Z (Foreman D)
 BIG REVIEWER #16 (opus) review/robot-realtap 39c6e505..f65d019b (FIXER #16 board-loop family) | dev/handover/reports/robot-realtap-review.md | (session id in FOREMAN_F_STATUS) | CLAIMED | 2026-11-27T03:40Z (FOREMAN F ROOT #2 session_01UV1SzjiyJzqC1pGgm8zVFQ)
 save stack look-dedupe FIXER (LC26 hold) | review/save-fix-stack-rv22 | <opening> | RUNNING | 27/11 03:50Z (Foreman B child 5)
+E-F4FAC (MAIN 170 order ~03:10Z: RV-165 fix-scan F4 «lowercase after stop» help cards + facAct «Lập phe cùng» no/hẹn log line, whole facAct family, + «khả năng: rất thấp» odds words) | review/e-f4fac | <opening> | RUNNING | 27/11 03:58Z (Foreman E child1 session_01DgYSWkqCetXV9ySBJuskfz)
