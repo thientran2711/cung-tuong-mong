@@ -22,13 +22,14 @@ Scan `dev/test/door-loss.js` (every person at home + every place, every DOOR row
 
 | producer | way (door) | before (hint) | after (hint) | kind |
 |---|---|---|---|---|
-| j24 judgeServ + jhouse hsvActs + j24 servJudgeBtns | Phạt vô cớ (Thưởng phạt) | chẳng được gì; nhưng thiện cảm −, Đức − | răn đe: tám tuần kẻ hầu sợ chủ, cung khác khó mua chuộc người của ngươi; nhưng thiện cảm −, Đức − | **RULE (BIG)** + worded |
+| j24 judgeServ + jhouse hsvActs + j24 servJudgeBtns | Phạt vô cớ (Thưởng phạt) | chẳng được gì; nhưng thiện cảm −, Đức − | răn đe: tám tuần kẻ hầu sợ chủ nên cung khác khó mua chuộc người của ngươi; nhưng thiện cảm −−−, Đức −− | **RULE (BIG)** + worded |
 | jdoor doorHint (talk path) | Đổi người (Thưởng phạt) | chẳng được gì; nhưng Danh − | trả <tên> về, người thay ngẫu nhiên, nết chưa rõ | hint fix |
 | same | Nương theo (Trò chuyện) | chẳng được gì; nhưng thiện cảm − | thiện cảm + (real: relAdd BAL.tw.g.follow) | hint fix |
 | same | Nghe ngóng chung (Dò la tin tức, maid + servants) | chẳng được gì; nhưng Tai mắt − | chờ hai khắc, <tên> đi nghe ngóng: biết một điều thật trong cung … (KIT REQUEST #8 for «chờ») | hint fix |
 | jtwoway TWD gossip + topicOpts | Rỉ tai chuyện trong cung (Trò chuyện) | chẳng được gì; nhưng Danh − ; with no foe it truly gained nothing | offered only when she (or the NPC teller) resents someone above BAL.ag.why.min (one req, law 1); line «<g>kẻ ngươi ghét bị bàn tán: Danh nàng ta −1</g>»; hint «kẻ ngươi ghét bị bàn tán: Danh nàng ta −» | worded + hide-when-gainless (law 3) |
 | jdoor doorHint (J2 path, same helper) | Khoe quà ngự ban · nhẹ (Khiêu khích) | (E-GAIN3b: fixed inline) | unchanged result, now through the shared helper (MUTANT=1 shows it) | refactor |
 | jhouse hsvActs | Tiến cử (stage card) | x «công lao lên bậc +5» (typed 5) | «<tên> công lao +BAL.ag.par3.house.merit (đủ công thì được thăng bậc)» = the j15 tab line | law 4 + worded |
+| j2.js:174 talkOpts (found after the E-GAIN3b-FIX merge, door-loss) | Tặng quà (Giao hảo) | «Thành: Không được gì thêm», hint «không được mất gì»; an empty chest opened nothing (cost-free no-op) | «chọn món trong rương · nàng quý ngươi +N (món quý nhất)», N = giftVal of her best chest item for that rival (the same number the pick rows show, j25); hint «chọn món trong rương, thiện cảm +»; empty chest → locked «rương trống» | worded (hub says what opening gets her) |
 
 ## B. Law 4 — typed gain / loss deltas inside ACT definitions
 Scan `node dev/measure/act-literal-scan.js` (every j8 `A("key","Name",{…})` def body: `{stat:±N}` and `ducAdd(x,±N)`): before **15** hits → after **0**. Values unchanged (parity below).
@@ -68,8 +69,21 @@ rvGroups (j15:39) falls back to `a.x` when LACK (j25) has no text. In-page scan 
 - `node dev/measure/act-literal-scan.js`: 15 → **0**, exit 0. (C) LACK scan: 6 → **0**.
 - Răn đe run (toi): bribe odds 23 → 8 → 23 (8 weeks); NPC servDo phat sets the NPC's dread; save→load keeps `dreadW`.
 
-## OPEN — waits for E-GAIN3b-FIX (Foreman E 27/11 ~08:36Z)
-The base 78c8608a got a BIG review FAIL (dev/handover/reviews/e-gain3b-review.md #1: the J2 door-row hint takes kitHint(raw way) first → NEED text / tips / «Danh +» shown as her gain). doorHint here keeps that h1-first order for both door paths. When the fixer's sha lands: merge it, move ITS gate into doorHint (one helper, both paths), re-run door-loss + gain-empty + the reviewer's base↔head door-row diff. Not READY before that.
+### Final run after the E-GAIN3b-FIX merge (this sha; dev/index.html via assemble.py, file://)
+| test | Fold 755x1000 | iPad 1180x820 |
+|---|---|---|
+| gain-empty, 6 states | **1401 cards, 0 empty, 0 page errors** | **1441 cards, 0 empty, 0 page errors** |
+| door-row-hint (fixer's base↔head row diff) | **6789 rows, 78 changed, 0 bad**; MUTANT=1 exit 1 (168 bad) | **6663 rows, 66 changed, 0 bad** |
+| door-loss (new) | **0 bad**; MUTANT=1 exit 1, MUTANT=2 exit 1 | **628 ways, 0 bad** |
+| act-audit cao | done errs=0 | — |
+| parity vs origin/main 611fca61 | 64 same, 0 different | — |
+| act-literal-scan | 0 typed deltas | — |
+| old save oldsave-r1 | 16 / 16 (755x1000, 1180x820, 1366x1024) | |
+(The run before the merge: Fold 1627 / iPad 1685 cards, 0 empty — card counts follow the random states.)
+
+## Merge of E-GAIN3b-FIX (review/e-gain3b 76821d10, code 5e26fc81)
+Merged into this branch; one conflict (jdoor.js J2 PEND.door member line): kept the fixer's `c:a.c` and its gate, through the shared helper. `doorHint(a,x)` (both door paths) now = (1) `DOOR.rowHint(a,x,lv)` — the fixer's gate: the row's own line first, the way's own hint only when it names a REAL gain (DOOR.hintGain: never a need text, a tip, a stat she pays); (2) only when that still says nothing gained and the way's OWN line shows a green gain (doorGain = the card's «Được»): that gain leads, «nhưng …» = the kit hint of the line without its green pieces. The talk-door path (no `acts`: Trò chuyện / Thưởng phạt / Dò la …) gets the same gate.
+Base↔head door-row diff (the reviewer's ask) = `dev/test/door-row-hint.js` (compares every row's hint with its base hint): see Tests.
 
 ## Found, not fixed (separate families)
 1. Module-local number tables typed in code (law 4, a wider family than ACT defs): e.g. jface.js:80 `FXF={…tat:3,tatDuc:-2,tatRel:-20,phatDuc:-1,…}`, j9 trip `roll(25)` / `suc:-15` (miscarry), j8/j9 odds formulas `odA(a,38+…)`, j24 svDefect `fx:{bac:-20}`. Needs its own scan + move.

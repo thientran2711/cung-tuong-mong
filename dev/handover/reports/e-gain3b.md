@@ -60,3 +60,85 @@ All on the final build (96eb9ee2 sources, dev/index.html via assemble.py; shots 
 ## 4. Result
 SMALL/BIG: **BIG** — one rule change (Khoe quà ngự ban gains Danh +BAL.tw.g.flauntDanh for every doer, new BAL key) + one new BAL key (BAL.eff.j10.tamcoJoint, value unchanged) + wording in jdoor.js, j30.js, jcharge.js, j78.js, jpoison.js, j70.js, jtsb.js, jface.js, jaudit.js, j10.js; KIT_REQUESTS.md (5 requests). No kit internals, no index.html / sw.js / assets.json.
 Found, not fixed (separate): a disabled act card whose reason falls back to its `x` (rvGroups `why=a.x` when no LACK text) shows the line text as the reason (pre-existing, e.g. «Tố tội thật» needing evidence); «Phạt vô cớ» (servant, jhouse.js:46) shows only losses (law 3 candidate, needs a rule call); j70 huydung `duc:-8` typed (law 4).
+
+## FIX (E-GAIN3b-FIX)
+PRIORITY #1 CHECK: OD 0 new | main 17835565 (no DOOR.rowHint / flauntDanh) | review/* review/e-gain3b 78c8608a (base of this fix) + review/e-gain3 23b44074 (rv PASS) + review/e-gain3c (built on 78c8608a) | claims E-GAIN3b (FAIL) → E-GAIN3b-FIX.
+KIT CHECK: reuses kitHint / kitHintSign / kaSent (jk2b / j63, called read-only with caller data), the kit row HTML of optLine (read, not changed), doorGain's target reading. No kit internal touched (j63, j19, jk2b, jopic unchanged); no CSS / part added (kit-std-scan not run).
+START_CTX ~6 %.
+
+### FAIL 1 — door-dialog row hint (jdoor.js, whole family = every pop-up door row, law 11)
+Cause: 8c3ce425 / 96eb9ee2 made every pop-up door row take `kitHint(raw way)` whenever it was not «chẳng được gì», so the raw way's `x` (a NEED text, a tip, a stat she pays) won over the row's right hint.
+Fix (`DOOR.rowHint`, jdoor.js): (1) FIRST the row's own line = the base hint (kitHint of {n, x = optLine}); (2) only when that says nothing gained («chẳng được gì» / «không được mất gì» / empty) the way's own hint, then the hint of its full data, and ONLY if `DOOR.hintGain` says it names a REAL gain: a stat with + marks she does not pay for (`a.c`), or a harm to the target («Danh nàng −−», «nàng bị quở …»); a need text («cần …») / tip («có … thì khỏi …») never; otherwise the base hint stays. (3) Same family, found by the new scan: a row whose optLine is already kit HTML (Hạ nhục, Nghe lén câu chuyện, Khiêu khích in some states) glued the row heads into the hint on base too («Danh nàng −−Bạichỉ uổng công·không mất gì khác», «Tốnmột khắcThànhbiết …») — `DOOR.lineOf` reads that HTML as a labelled line (Tốn left out; a price inside a rolled Thành stays «nhưng …»; a «Bại» with no odds word left out; a target-harm piece of Mất/Bại/Kèm is the gain, as doorGain reads it). Card-mode rows (DOOR.cardM) carry no hint and are untouched.
+
+Row table, every pop-up door-dialog row (lv 1, most common hint; Fold 755x1000 full 6-state runs of dev/test/door-row-hint.js on each build; «—» = row not met in that run's random states; hỏng-part cut for width):
+| door › row (pop-up) | base 23b44074 | head 78c8608a | fix |
+|---|---|---|---|
+| P11 › Hặc ăn mặc sai phẩm | «Bị phạt −, Danh ++; nhưng Bị phạt +» | «cần nguyên cớ: đã nghe người nhận xét, hoặc tai mắt báo nàng mặc sai phẩm, hoặc phòng nàng» | «Bị phạt −, Danh ++; Có cơ» |
+| P11 › Tố xa xỉ | «Bị phạt −−, tháo món xa xỉ nhất; nhưng Danh −−» | «cần đã thấy (cùng chỗ, hoặc dò la): nàng ăn mặc quá mức của phẩm mình, hoặc phòng nàng bày» | «Bị phạt −−, tháo món xa xỉ nhất; Có cơ» |
+| P14 › Phạt quỳ · vừa | «Đức +; Rất vững; nhưng oán +» | «Đức +; Rất vững; nhưng oán +» | «Đức +; Rất vững; nhưng oán +» |
+| P14 › Tát · nhẹ | «Sắc +; Rất vững; nhưng oán +» | «Sắc +; Rất vững; nhưng oán +» | «Sắc +; Rất vững; nhưng oán +» |
+| P5 › Dò la | «Chứng cứ +, Tâm cơ ++» | «Chứng cứ +, Tâm cơ ++; Có cơ» | «Chứng cứ +, Tâm cơ ++» |
+| P5 › Nghe lén câu chuyện | — | «biết một điều thật về nàng, Chứng cứ +» | — |
+| P6 › Hạ nhục · nặng | «Danh nàng −−Bạinàng ta chuộng giản dị: quý ta +; nhưng oán +» | «Danh ++; nhưng oán ++» | «Danh nàng −−; Rất vững; nhưng oán +» |
+| P6 › Khiêu khích · vừa | «Danh +; nhưng thiện cảm −−−, oán ta ++, oán +» | «Danh +; nhưng thiện cảm −−−, oán ta ++, oán +» | «Danh +; Rất vững; nhưng thiện cảm −−−, oán ta ++» |
+| P6 › Khoe quà ngự ban · nhẹ | «chẳng được gì; nhưng Phi tần ghen +» | «Danh +; nhưng Phi tần ghen +» | «Danh +; Rất vững; nhưng mọi phi tần ghen +» |
+| P7 › Hạ độc · nặng | «nàng trúng độc, nàng không chết (có thuốc giải); nhưng Đức −−−, Chứng cứ −» | «có Hạc đỉnh hồng thì khỏi mua thạch tín; nhưng lộ: tội chết — năm đầu được tha một lần: gi» | «nàng trúng độc, nàng không chết (có thuốc giải); nhưng Đức −−−, Chứng cứ −» |
+| P7 › Hắt trà · nhẹ | «Đức +, áo nàng loang vết trà, phấn son lem; Rất vững» | «Đức +, áo nàng loang vết trà, phấn son lem; Rất vững; nhưng Đức −−» | — |
+| P7 › Ngáng chân · nhẹ | «Danh ++; nhưng Đức −−» | — | «Danh ++; nhưng Đức −−» |
+| P7 › Quạt mực · nhẹ | — | «Đức +, mặt nàng lem mực; Rất vững» | «Đức +, mặt nàng lem mực; Rất vững; nhưng Đức −−» |
+| P8 › Tung tin đồn · nhẹ | «Danh +++; nhưng Chứng cứ −, thiện cảm −−» | «Danh +++» | «Danh +++; nhưng Chứng cứ −, thiện cảm −−» |
+| P8 › Vu oan · nặng | «Sủng +++, Danh ++; nhưng bị người của nàng phát giác, Chứng cứ −» | «Sủng +++, Danh ++; Khó lường; nhưng bị người của nàng phát giác, Chứng cứ −» | «Sủng +++, Danh ++; nhưng bị người của nàng phát giác, Chứng cứ −» |
+Card-mode rows (51 distinct): hint sets base = head = fix up to state noise (servant names in «Chủ tin với …», odds bands); the only real text changes there are E-GAIN3b's own card wordings (Tố tội thật «chẳng được gì» → «Danh ++», Tặng quà ăn có độc → «nàng trúng độc nếu ăn»).
+Nghe lén câu chuyện (rare state; unit check on the final build with its kit HTML line): base «Tốnmột khắcThànhbiết một điều thật về nàng, Chứng cứ +» → fix «biết một điều thật về nàng, Chứng cứ +; Rất vững».
+
+New check `dev/test/door-row-hint.js` (every row of every door dialog, pop-up + card mode, 3 clarity levels, 6 states): a row passes when its hint = the base hint, or names a real gain, or is the base gain cleaned (same pieces, heads no longer glued).
+| build | Fold 755x1000 | iPad 1180x820 |
+|---|---|---|
+| base 23b44074 | 6777 rows, 0 bad, 0 page errors | — |
+| head 78c8608a | 6633 rows, **134 bad (15 distinct: Hặc ăn mặc sai phẩm / Tố xa xỉ need text, Hạ độc · nặng tip, Hạ nhục «Danh ++», …)**, exit 1 | — |
+| fix (final) | 6987 rows, 96 changed, **0 bad**, 0 page errors, exit 0 | 6780 rows, 60 changed, **0 bad**, 0 page errors, exit 0 |
+| fix + MUTANT=1 (DOOR.rowHint = the 78c8608a rule) | **exit 1** (14 distinct, dau+cao) | — |
+
+### FAIL 2 — Danh balance run (BAL.tw.g.flauntDanh 0 vs 1)
+Bot: dev/measure/run_par.js `sens` (life-long sensible bot) + mkinp.sh (inpage6 + inx + inpz + inty + inpromo + inbirth) + MORE=indanh + EXTRA infl.js (scratch, not committed: sets BAL.tw.g.flauntDanh per arm, counts every TW flaunt run by doer, NPC Danh mean / max / count at 100 at the indanh DT checkpoints), cap 144 tuần, HH-STOP, seeds 501 / 777 / 901, same seeds both arms, final build.
+| | flauntDanh 0 | flauntDanh 1 |
+|---|---|---|
+| lives with ≥12 tuần | 10 | 11 |
+| flaunts per life her / NPC | 0.0 / 5.5 | 0.0 / 2.5 |
+| her Danh @ tuần 12 | 39.2 (n=10) | 43.5 (n=11) |
+| her Danh @ tuần 24 | 46.5 (n=10) | 56.1 (n=11) |
+| her Danh @ tuần 48 | 42.8 (n=9) | 54.8 (n=10) |
+| her Danh @ tuần 72 | 52.9 (n=9) | 62.1 (n=9) |
+| her Danh @ tuần 96 | 64.8 (n=9) | 62.9 (n=9) |
+| her Danh @ tuần 120 | 68.2 (n=8) | 67.7 (n=9) |
+| her Danh @ tuần 144 | 71.8 (n=8) | 74.9 (n=7) |
+| NPC Danh mean / max / at 100 @ tuần 12 | 41.5 / 91 / 0 | 41.1 / 89 / 0 |
+| NPC Danh mean / max / at 100 @ tuần 24 | 45.3 / 97 / 0 | 44.1 / 90 / 0 |
+| NPC Danh mean / max / at 100 @ tuần 48 | 44.8 / 87 / 0 | 44.9 / 85 / 0 |
+| NPC Danh mean / max / at 100 @ tuần 72 | 40.8 / 89 / 0 | 41.2 / 89 / 0 |
+| NPC Danh mean / max / at 100 @ tuần 96 | 39.5 / 89 / 0 | 35.8 / 83 / 0 |
+| NPC Danh mean / max / at 100 @ tuần 120 | 37.4 / 75 / 0 | 34.5 / 88 / 0 |
+| NPC Danh mean / max / at 100 @ tuần 144 | 35.6 / 74 / 0 | 31.5 / 64 / 0 |
+| her Danh at end | 72.1 (n=9) | 68.4 (n=9) |
+| reached Hoàng hậu | 1/10 | 2/11 |
+
+Lives = lives that reached tuần 12 (the rest end in the selection, both arms alike), seeds 501 + 777 + 901 pooled (the 777 / 901 runs were stopped part-way: 21 lives in all). Judgment: **no runaway.** NPC Danh mean stays 31–45 at every checkpoint in both arms (arm 1 is not higher: 41.1 vs 41.5 at tuần 12, 31.5 vs 35.6 at tuần 144), max ≤ 97 / ≤ 90, **0 NPCs at 100** in either arm; an NPC flaunts 2.5–5.5 times per life (TW flaunt run counts), so the rule adds at most ≈ +3–5 Danh per flaunting NPC per life, inside the drift of every other Danh source. Her side: the sensible bot never chooses «Khoe quà ngự ban» (0 runs both arms), so her Danh gaps (e.g. tuần 24: 46.5 vs 56.1) are seed-chain drift (the two arms diverge as soon as an NPC flaunt changes state), not this rule; by hand her gain is +1 Danh per flaunt for 1 khắc, gated by Sủng ≥ 40 — the smallest unit, below Khiêu khích (+1 and a rival stung) and far below a Hành sự Danh card. **No BAL change** (flauntDanh stays 1). Note kept from the review: the NPC agent's utility for flaunt still values only spite (jagent.js:108), so NPCs do not flaunt more often because of this rule.
+
+### Tests (final build, assemble.py → dev/index.html; index.html / sw.js / assets.json not committed)
+| test | result |
+|---|---|
+| gain-empty FULL 6 states Fold 755x1000 | **1531 cards, 0 empty, 0 page errors, exit 0** |
+| gain-empty FULL 6 states iPad 1180x820 | **1509 cards, 0 empty, 0 page errors, exit 0** |
+| (before, same run) base 23b44074 Fold / iPad | 34 / 14 runs empty, 4 distinct (Dò la, Hạ uy thế, Khiêu khích, Ra uy), exit 1 |
+| (before) head 78c8608a Fold / iPad | 0 / 0 empty (1497 / 1391 cards) |
+| door-row-hint (new) Fold + iPad, mutant | see table above (0 bad; mutant exit 1) |
+| act-audit 755x1000 cao | 740 runs, done errs=0, exit 0 |
+| old save (origin/main 17835565 build → fix) oldsave-r1 | **16 / 16**, 0 page errors (755x1000, 1180x820, 1366x1024) |
+| charge-smoke | 0 page errors, exit 0 |
+| odds-one-row | 755x1000 / 1180x820 / 390x844 PASS, exit 0 |
+| fac-parity-play | 17 ok, ALL PASS |
+| role-parity-drift2-play | 11 ok, ALL PASS |
+
+### Found, not fixed (report-only)
+- Kit hint readings that are wrong on base too (KIT REQUEST 27/11 E-GAIN3b #4 family, kit internals, law 9): card-mode rows «Hạ độc / Hủy dung / Hắt trà … · Đức +, Bạc +» (the kit reads the servant runner's side lines as her gain), «Trình Hoàng hậu · chẳng được gì» (the green «<tên> chịu phạt theo tội» is read as a loss), pop-up «Tung tin đồn · Danh +++» / «Vu oan · Sủng +++, Danh ++» (the kit drops the subject «nàng»: it is the rival's Danh / Sủng that falls). The new test takes these as the base reference; they need the kit keeper.
+- The pop-up «Hạ nhục» row card itself shows «Danh nàng −−» in its red Mất row (kit kaRows colouring; the hint now names it as the gain).
