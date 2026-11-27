@@ -8,8 +8,9 @@
    Screens are explored breadth-first from each START (title screen, a fresh life's home): every button that opens a NEW screen
    (new layer or tab) is followed, up to DEPTH taps deep. Between taps the harness puts the game back (deser(snapshot) + replaying the
    path with real taps) — harness setup only, never a button press.
-   usage: node dev/test/button-crawl.js [--dev fold,ipad] [--depth 3] [--start title,home,tour,save] [--save robot-dump.json] [--fast] [--out dir] [--game index.html|URL] [--max N]
+   usage: node dev/test/button-crawl.js [--dev fold,ipad] [--depth 3] [--start title,home,tour,selx,talk,save] [--selx-max N] [--talk-max N] [--save robot-dump.json] [--fast] [--out dir] [--game index.html|URL] [--max N]
      --fast  = gate mode for dev/tools/quickcheck.sh: depth 1 from home + title, Fold only; exit 1 on any FAIL
+     (FIXER #17) --fast starts = home,selx,talk: the ring UI (selection days, kitScene talk, Bàn bài hand cards, thẻ gỗ plaques) is walked with two real taps per card (lift → ✓ / «Chọn» chip)
    output: <out>/crawl-<dev>.json (every tap) + <out>/shots/*.jpg (every FAIL; shots never go in git) ; summary line last.
    Report table: node dev/test/button-crawl.js --report <out> > dev/handover/reports/button-crawl.md */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
@@ -23,6 +24,13 @@ async function tap(p,target,o={}){let rt=RTS.get(p);if(!rt){rt={cur:null};rt.rt=
   if(o.shot)await p.screenshot({path:o.shot,type:'jpeg',quality:55}).catch(()=>{});
   (o.log||(m=>console.log(m)))('DEAD BUTTON '+JSON.stringify({screen:o.screen||'',label:o.label||'',why,cover:got&&got.cover||''}))}
  return ok}
+/* FIXER #17 (RV-165: --fast drove 1/80 taps on the ring UI): press = what her finger does on a two-tap kit part — a REAL tap on the card / plaque (it lifts),
+   then a REAL tap on the chip that appears (hand ✓ «khok» / plaque «Chọn» .kpk-gob). Plain buttons: one tap, as before. Returns {ok, two, why}:
+   two = 'lift+chip' (chosen), 'lift' (lifted, no chip came = fault), '' (not a two-tap part, or it acted at once). Never .click()/dispatch. */
+async function press(p,el,o={}){const k=await el.evaluate(e=>window.__bc?__bc.kind2(e):'').catch(()=>'');const ok=await tap(p,el,o);if(!ok||!k)return{ok,two:'',k};
+ let up=false,ch=null;for(let i=0;i<14;i++){await p.waitForTimeout(150);up=await p.evaluate(k=>__bc.lifted(null,k),k).catch(()=>false);const h=await p.evaluateHandle(k=>__bc.chip(k),k).catch(()=>null);ch=h&&h.asElement();if(ch)break;if(!up&&i>=4)break}
+ if(!ch)return{ok,k,two:up?'lift':'',why:up?'lifted, but no '+(k==='hand'?'✓':'«Chọn»')+' chip came':''};
+ const ok2=await tap(p,ch,Object.assign({},o,{label:(o.label||'')+' › '+(k==='hand'?'✓':'Chọn')}));return{ok:ok2,k,two:ok2?'lift+chip':'lift',why:ok2?'':'chip not tappable'}}
 const A=process.argv.slice(2);const opt=(k,d)=>{const i=A.indexOf('--'+k);return i<0?d:(A[i+1]&&!A[i+1].startsWith('--')?A[i+1]:true)};
 const REPO=path.join(__dirname,'..','..');
 const FAST=!!opt('fast',false);
@@ -30,7 +38,10 @@ const OUT=path.resolve(opt('out','/home/user/wt/bc-out/run'));
 const DEVS={fold:[755,1000],ipad:[1180,820]};
 const DEV=String(opt('dev',FAST?'fold':'fold,ipad')).split(',').filter(d=>DEVS[d]);
 const DEPTH=+opt('depth',FAST?1:3),MAXTAPS=+opt('max',FAST?80:100000);
-const STARTS=String(opt('start',FAST?'home':'title,home,tour')).split(',');
+const STARTS=String(opt('start',FAST?'home,selx,talk':'title,home,tour,selx,talk')).split(',');
+/* FIXER #17 (RV-165 ring blind spot): the first-life SELECTION DAYS (jselxday: «Ngày thứ nhất — Nhập cung» … kitScene talk, Bàn bài hand cards, thẻ lụa plaques)
+   are walked as their own start «selx» with their own tap budget (fast 30), so they never eat the home budget and home never sits under them */
+const SELXMAX=+opt('selx-max',FAST?30:400),TALKMAX=+opt('talk-max',FAST?12:60);
 const GAME=opt('game',path.join(REPO,'index.html'));
 /* pictures load as she sees them (layout depends on them; --noimg blocks them for speed); sound/video are blocked */
 const BLOCK=opt('noimg',false)?/\.(webp|png|jpe?g|gif|mp3|ogg|m4a|mp4|webm)(\?|$)/i:/\.(mp3|ogg|m4a|mp4|webm)(\?|$)/i;
@@ -46,13 +57,16 @@ function serve(file){const http=require('http');const root=path.dirname(path.res
 /* ---------- in-page helpers (read-only: they look, they never press) ---------- */
 const INPAGE=()=>{
  const W=window;
+ /* FIXER #17: TEST SETUP ONLY — while window.__bcNoSelx is set (START home), accepting the life does not start the multi-day selection (jselxday nlAccept hook reads BAL.selx.days):
+    home = the room, as LIVE's crawl sees it; the selection days are walked by START selx */
+ try{if(typeof nlAccept==='function'&&!W.__bcSelxW){const a0=nlAccept;W.__bcSelxW=1;nlAccept=function(){if(!W.__bcNoSelx||!W.BAL||!BAL.selx)return a0.apply(this,arguments);const d=BAL.selx.days;BAL.selx.days=1;try{return a0.apply(this,arguments)}finally{BAL.selx.days=d}}}}catch(e){}
  W.__bc={
   isFixedRoot(e){const cs=getComputedStyle(e);return cs.position==='fixed'||e.id==='modal'||e.id==='title'||e.tagName==='DIALOG'},
   root(e){let x=e;while(x&&x!==document.body){if(this.isFixedRoot(x))return x;x=x.parentElement}return document.body},
   vis(e){if(!e.isConnected||e.closest('[hidden]'))return false;const cs=getComputedStyle(e);if(cs.visibility==='hidden'||cs.display==='none'||+cs.opacity===0)return false;
    const r=e.getBoundingClientRect();return r.width>=4&&r.height>=4},
   desc(e){return e?(e.tagName.toLowerCase()+(e.id?'#'+e.id:'')+(typeof e.className==='string'&&e.className.trim()?'.'+e.className.trim().split(/\s+/).slice(0,2).join('.'):'')):'none'},
-  label(e){let t=(e.getAttribute('aria-label')||'').trim();if(!t)t=(e.innerText||e.textContent||'').replace(/\s+/g,' ').trim();if(!t)t=e.title||'';
+  label(e){if(e.__bcTalk)return '(Chạm để tiếp) talk';if(e.matches('.kdv-box'))return '(Chạm để tiếp) '+((e.querySelector('.kptitle')||{}).textContent||'').trim().slice(0,24);let t=(e.getAttribute('aria-label')||'').trim();if(!t)t=(e.innerText||e.textContent||'').replace(/\s+/g,' ').trim();if(!t)t=e.title||'';
    if(!t){const im=e.querySelector('img[alt]');if(im)t=im.alt}return t.slice(0,48)},
   /* a layer is LIVE when the player can see/touch it: most of its on-screen sample points hit the layer itself */
   live(root){const r=root===document.body?{left:0,top:0,right:innerWidth,bottom:innerHeight}:root.getBoundingClientRect();
@@ -71,8 +85,18 @@ const INPAGE=()=>{
     /* a pointer child of a real button is that button (a big clickable container such as #panel is not a button: its buttons count one by one) */
     const up=e.parentElement&&e.parentElement.closest('button,[role=button],a[href],summary');if(up&&up!==e&&this.vis(up))continue;
     {const r=e.getBoundingClientRect();if(!e.matches('button,[role=button],a[href],input,select,summary')&&r.width*r.height>innerWidth*innerHeight*.35)continue}
+    if(e.matches('.kpk-gob,.khconf button,.kpk-conf button'))continue;/* FIXER #17: the «Chọn» chip of a lifted plaque / the ✓ of a lifted hand card = the SECOND tap of press(), never a button of its own */
     if(seen.has(e))continue;seen.add(e);out.push(e)}
+   /* FIXER #17: a kitScene talk line (kitDialogue «Chạm để tiếp ▸») is tapped like a player taps the box: one target per open line */
+   /* a kitStage TALK frame (KIT §98 stage talk: one line at a time, a tap on the stage = the next line, then thẻ gỗ plaques): the bubble is the target until the answers hang */
+   for(const dl of document.querySelectorAll('#modal .dlg.kstalk')){const T=dl.__kstT;if(T&&T.asked)continue;const bb=dl.querySelector('.ksay')||dl.querySelector('.kstg-sp')||dl;if(this.vis(bb)&&!seen.has(bb)){seen.add(bb);bb.__bcTalk=1;out.push(bb)}}
+   for(const bx of document.querySelectorAll('.kscn .kdv-box')){const nx=bx.querySelector('.kdv-next');/* the hint may blink / wait for the typing: its presence is enough */if(nx&&this.vis(bx)&&!seen.has(bx)){seen.add(bx);out.push(bx)}}
    return out},
+  /* FIXER #17 two-tap kit parts: «hand» = a Bàn bài card (KIT kitHand: 1st real tap lifts, its ✓ chooses), «plaque» = a thẻ lụa plaque (KIT §98.1 kitPick: 1st tap lifts, the in-plaque «Chọn» chip chooses) */
+  kind2(e){return e.matches('#modal .opts.khand>button.kopt:not(.kcard):not(.kbare)')?'hand':e.closest('.kpk-n')?'plaque':''},/* = jkhand kitHandCards (a .kcard / .kbare row in the hand box is a plain button) */
+  /* the card / plaque may be re-laid (a new node) by the lift: read the lift on the part, not on the old handle */
+  lifted(e,k){return k==='hand'?!!document.querySelector('#modal .opts>button.kopt.klift'):k==='plaque'?!!document.querySelector('.kpk-n.kpk-up'):false},
+  chip(k){const C=k==='hand'?[...document.querySelectorAll('#modal .dlg>.khconf>button.khok')]:[...document.querySelectorAll('.kpk-conf>button.kpk-gob,.kpk-go>button')];return C.find(x=>this.vis(x)&&!x.disabled)||null},
   liveRoots(){const roots=new Set(this.cands().map(e=>this.root(e)));for(const f of this.fixed)if(this.root(f)===f)roots.add(f);return [...roots].filter(r=>this.live(r))},
   /* the buttons on screen now: in a live layer (a button behind an open dialog is not on screen) */
   list(){document.querySelectorAll('[data-bc]').forEach(e=>e.removeAttribute('data-bc'));const lr=new Set(this.liveRoots());const L=[];const cnt={};
@@ -145,6 +169,36 @@ function verdict(b,pre,post,errs,closedOwn,par){
 /* START tour: a brand-new player's first life — the 12-step LỜI DẶN tour. Every «Tiếp»/«Đã hiểu» must turn the page; a step with no
    «Tiếp» waits for her to tap the lit spot: the robot taps the centre of the hole (the lit button must be reachable there). Then a second
    fresh life checks «Bỏ qua lời dặn» closes the tour. */
+/* START selx (FIXER #17): a fresh Tú nữ life whose selection days start (accepted the way her «Nhập cung» does), walked screen by screen like a player:
+   a talk line → tap the box (Chạm để tiếp); a screen with Bàn bài cards / thẻ lụa plaques → every card but the last is LIFTED by a real tap (its ✓ / «Chọn» chip must show;
+   a tap on the next card moves the lift), the last is pressed (lift + chip = chosen); any other frame → its first option / main button. Every tap is a row. Ends at the room. */
+async function walkSelx(p,dev,ER,setup,NM='selx',MAXW=SELXMAX){const T0=taps;const SELXMAX=MAXW;
+ /* the life is drawn at random: only some origins / ranks go through the selection days (jselxday selxDaysFit) → draw again (≤ 6 lives, setup only) */
+ for(let n=0;n<(NM==='talk'?1:4);n++){await setup();let up=false;for(let i=0;i<30&&!up;i++){if(NM!=='talk'&&i>=3&&!(await p.evaluate(()=>!!(window.S&&S.selx2&&S.selx2.days)).catch(()=>false)))break;/* the selection days start inside nlAccept (sync): not started = draw again at once */up=await p.evaluate(nm=>{const M=document.getElementById('modal');return nm==='talk'?!M.hidden&&!!M.querySelector('.dlg.kstalk'):(!M.hidden||!!document.querySelector('.kscn'))&&!!(window.S&&S.selx2&&S.selx2.days)},NM);if(!up)await p.waitForTimeout(400)}if(up)break}
+ if(!(await p.evaluate(()=>{const M=document.getElementById('modal');return !M.hidden||!!document.querySelector('.kscn')}))){rows.push({dev,start:NM,screen:NM,label:'(start)',verdict:'SKIP',why:NM==='talk'?'no talk frame came (this build has no kitStage talk)':'no selection-day screen came (this build has no multi-day selection for this life)'});return}
+ let same=0,last='',noT=0;
+ while(taps-T0<SELXMAX){await settle(p,6000);await p.waitForTimeout(500);
+  const S0=await p.evaluate(()=>{const L=__bc.list();const sg=__bc.sig();const top=L.filter(b=>b.layer!=='body');const M=document.getElementById('modal');
+   const home=M.hidden&&!document.querySelector('.kscn')&&!!document.getElementById('next')&&__bc.vis(document.getElementById('next'));
+   const two=top.filter(b=>{const e=document.querySelector('[data-bc="'+CSS.escape(b.key)+'"]');return e&&__bc.kind2(e)});return{L:top,two:two.map(b=>b.key),home,scr:(sg.roots[sg.roots.length-1]||'').slice(0,60)}});
+  if(S0.home){rows.push({dev,start:NM,screen:NM,label:'(end)',verdict:'PASS',why:'back to the room after '+(taps-T0)+' taps'});break}
+  if(!S0.L.length&&++noT<10)continue;/* between two talk lines / two scenes the box is rebuilt: look again (≤ ~10 s) before calling it a fault */
+  if(S0.L.length)noT=0;else{rows.push({dev,start:NM,screen:S0.scr,label:'(no target)',verdict:'FAIL',why:'a selection-day screen with nothing to tap (no button, no talk box)'});await p.screenshot({path:path.join(OUT,'shots',dev+'-selx-none.jpg'),type:'jpeg',quality:50});break}
+  const sk=S0.scr+'|'+S0.L.map(b=>b.label).join('|').slice(0,400);/* a talk line / a new card set on the same frame is a new step */
+  if(sk===last){if(++same>=6){rows.push({dev,start:NM,screen:S0.scr,label:'(loop)',verdict:'FAIL',why:'the same screen after 6 taps'});break}}else{same=0;last=sk}
+  const screen=NM+' · '+S0.scr;const doTap=async(key,lbl,full)=>{const h=await p.evaluateHandle(k=>__bc.find(k),key);const el=h.asElement();if(!el){rows.push({dev,start:NM,screen,label:lbl,verdict:'SKIP',why:'button gone before its tap'});return null}
+   const pre=await p.evaluate(()=>__bc.sig());ER.clr();let dm='';const shot=path.join(OUT,'shots',`${dev}-${NM}-${rows.length}.jpg`);let r;
+   if(full)r=await press(p,el,{screen,label:lbl,shot,log:m=>dm=m});else{const k=await el.evaluate(e=>__bc.kind2(e));const ok=await tap(p,el,{screen,label:lbl,shot,log:m=>dm=m});let up=false,ch=false;
+    for(let w=0;w<10&&ok;w++){await p.waitForTimeout(150);up=await p.evaluate(k=>__bc.lifted(null,k),k).catch(e=>{if(process.env.BCDBG)console.log('LIFTERR',e.message);return false});ch=await p.evaluate(k=>!!__bc.chip(k),k);if(up&&ch)break}r={ok,k,two:'lift-only',up,ch};if(process.env.BCDBG&&!(up&&ch))console.log('LIFTDBG',await p.evaluate(()=>JSON.stringify({cards:[...document.querySelectorAll('#modal .opts>button')].map(b=>b.className),pk:[...document.querySelectorAll('.kpk-n')].map(n=>n.className+'|'+n.parentElement.className),conf:[...document.querySelectorAll('.khconf')].map(c=>c.className+'|'+c.parentElement.className+'|'+c.hidden)})))}
+   taps+=r.two==='lift+chip'?2:1;await p.waitForTimeout(500);await settle(p,6000);const post=await p.evaluate(()=>__bc.sig());const er=ER.get();const ch=JSON.stringify(pre)!==JSON.stringify(post);
+   const v=!r.ok?'FAIL':er.length?'FAIL':r.two==='lift-only'?(r.up&&r.ch?'PASS':'FAIL'):r.two==='lift'?'FAIL':ch?'PASS':'FAIL';
+   const why=!r.ok?(dm||r.why||'not tappable'):er.length?'JS error: '+er[0]:r.two==='lift-only'?(r.up&&r.ch?'lifts, its chip shows':'1st tap: lifted '+r.up+', chip '+r.ch):r.two==='lift'?r.why:(r.two?r.two+': ':'')+(ch?'next':'no effect');
+   if(v==='FAIL')await p.screenshot({path:shot,type:'jpeg',quality:55}).catch(()=>{});rows.push({dev,start:NM,screen,label:lbl,el:'',hit:r.ok?'ok':'DEAD',two:r.two||undefined,kind:r.k||undefined,verdict:v,why,shot:v==='FAIL'?shot:''});return r};
+  const box=S0.L.find(b=>/^\(Chạm để tiếp\)/.test(b.label));
+  if(box){await doTap(box.key,box.label,true);continue}
+  if(S0.two.length){const T=S0.L.filter(b=>S0.two.includes(b.key));for(const b of T.slice(0,-1)){await doTap(b.key,b.label,false);if(taps-T0>=SELXMAX)break}const z=T[T.length-1];await doTap(z.key,z.label,true);continue}
+  const PRIM=/^(Tiếp|Đi|Vào|Được|Nhận|Xong|Đã hiểu|Ngủ|Theo|Cất|Ra)/;const b=S0.L.find(b=>b.el.startsWith('button')&&!b.x&&PRIM.test(b.label))||S0.L.find(b=>/kopt|opt/.test(b.el))||S0.L.find(b=>!b.x)||S0.L[0];await doTap(b.key,b.label,true)}
+ console.log(`[${dev}] ${NM} · ${taps-T0} taps`)}
 async function crawlTour(p,dev,ER){
  /* a brand-new player: title → «Chơi một mình» → every first-life screen, by real taps on the main button of each screen; every tap logged */
  const fresh=async(log)=>{await p.evaluate(()=>{try{localStorage.clear();localStorage.setItem('hclh-tut-test','1')/* jtut autoOk(): a webdriver page gets the tour only with the test flag (a real phone has no webdriver) */}catch(e){}try{REC.tour='';REC.asked=0}catch(e){}document.querySelectorAll('#kload,#klife').forEach(e=>e.remove());
@@ -175,7 +229,7 @@ async function crawlTour(p,dev,ER){
    if(roots.join()===last&&pick.label==='Sang buổi'){break}
    const h=await p.evaluateHandle(k=>__bc.find(k),pick.key);const screen='first life · '+(roots[roots.length-1]||'').slice(0,50);
    const pre=await p.evaluate(()=>__bc.sig());ER.clr();let dm='';const shot=path.join(OUT,'shots',`${dev}-new-${k}.jpg`);
-   const ok=await tap(p,h.asElement(),{screen,label:pick.label,shot,log:m=>dm=m});taps++;await p.waitForTimeout(600);await settle(p,6000);
+   const ok=(await press(p,h.asElement(),{screen,label:pick.label,shot,log:m=>dm=m})).ok;taps++;await p.waitForTimeout(600);await settle(p,6000);
    const post=await p.evaluate(()=>__bc.sig());const ch=JSON.stringify(pre)!==JSON.stringify(post);const er=ER.get();
    if(log)rows.push({dev,start:'newlife',screen,label:pick.label,hit:ok?'ok':'DEAD',verdict:!ok||er.length||!ch?'FAIL':'PASS',why:!ok?dm:er.length?'JS error: '+er[0]:ch?'next screen':'no effect',shot:ok&&ch&&!er.length?'':shot});
    if((!ok||!ch)&&log)await p.screenshot({path:shot,type:'jpeg',quality:55});
@@ -236,19 +290,26 @@ async function crawlDev(b,URL,dev){
   document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render()});
   /* the life-start veils (roulette, «Sửa soạn nhập cung») can come a moment later: wait for them, take them down, then snapshot */
   await p.waitForTimeout(2500);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render();__bc.snap()})};
+ {const h0=startState.home;startState.home=async()=>{await p.evaluate(()=>{window.__bcNoSelx=1}).catch(()=>{});try{await h0()}finally{await p.evaluate(()=>{window.__bcNoSelx=0}).catch(()=>{})}
+   /* a frame that pops a moment after the snapshot («Điều mới trong cung», ring build Fold) would cover every home button («gone»): wait, put it away, snapshot again (setup only) */
+   for(let i=0;i<3;i++){await p.waitForTimeout(1500);const late=await p.evaluate(()=>{const M=document.getElementById('modal');return !M.hidden||__bc.liveRoots().some(r=>r!==document.body&&!__bc.homeLive.has(r))}).catch(()=>false);if(!late)break;
+    await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render();__bc.snap()}).catch(()=>{})}}; /* FIXER #17: home = the room (selection days off, setup only) */
+  /* START talk (FIXER #17): the room, then ONE real game event shown as a kitStage talk (the way dev/test/kit-stage.js fires it: rgFire('c2a') + talk:1), so the thẻ gỗ plaques (kitPick) are pressed */
+  startState.talk=async()=>{await startState.home();await p.evaluate(async()=>{for(let k=0;k<6;k++){try{S.evc=null;EVCW.length=0}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;try{if(typeof rgFire==='function'&&rgFire('c2a')){Q.length=1;Q[0].__ks='c2a';Q[0].talk=1;showModal();return}}catch(e){}window.__nlInner=1;try{start()}catch(e){}window.__nlInner=0;Q.length=0;await new Promise(r=>setTimeout(r,1500))}}).catch(()=>{})};
+  startState.selx=async()=>{await p.evaluate(()=>{window.__bcNoSelx=0;try{if(window.CTM_NOTES&&CTM_NOTES.length)localStorage.setItem('ctm-notes-seen',CTM_NOTES[0].id)}catch(e){}}).catch(()=>{});await h0()}}
  /* START save (--save <robot dump with .ls>): a mid-life robot save (later ranks, more tabs) loaded through the game's own slot loader */
  const SAVE=opt('save',false);const SAVELS=SAVE?JSON.parse(fs.readFileSync(path.resolve(SAVE),'utf8')).ls:null;
  startState.save=SAVELS&&(async()=>{await p.evaluate(ls=>{try{localStorage.clear();for(const k in ls)localStorage.setItem(k,ls[k])}catch(e){}try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}
   const n=+(ls['hclh-slot']||1)||1;const d=loadSlot(n);SLOT=n;try{kmReset&&kmReset()}catch(e){}quiet=true;d.tab='act';deser(d);quiet=false;document.getElementById('title').hidden=true;deal();render();if(S.mg)S.mg=null;/* = j6 data-load handler (setup only) */try{S.tutTour=1;coachOff&&coachOff()}catch(e){}},SAVELS);
   await p.waitForTimeout(3000);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn,.kmov').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render();try{k3Home()}catch(e){}__bc.snap()})});
- for(const st of STARTS){if(st==='tour'){await crawlTour(p,dev,errsRef);continue}if(!startState[st])continue;
+ for(const st of STARTS){if(st==='tour'){await crawlTour(p,dev,errsRef);continue}if(st==='talk'){await walkSelx(p,dev,errsRef,startState.talk,'talk',TALKMAX);continue}if(st==='selx'){/* a fresh page per drawn life: after a long home crawl the in-memory game state no longer starts the selection days */await walkSelx(p,dev,errsRef,async()=>{await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof deser==='function',null,{timeout:180000});await p.waitForTimeout(1200);await p.evaluate(INPAGE);await startState.selx()});continue}if(!startState[st])continue;
   await startState[st]();await p.waitForTimeout(600);
   const withTitle=st==='title';
   const goto=async(pathK)=>{ /* restore + replay a path of real taps */
    if(p.isClosed()||!(await p.evaluate(()=>!!window.__bc).catch(()=>false))){await open();await startState[st]()}
    if(withTitle){await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof showTitle==='function',null,{timeout:180000});await p.waitForTimeout(1200);await p.evaluate(INPAGE);await startState.title()}
    else{await p.evaluate(t=>__bc.restore(t),withTitle);await p.waitForTimeout(150);await settle(p);
-    if(!(await p.evaluate(()=>__bc.isHome()))){ /* soft restore left a frame up: reload the page and load the same snapshot (harness) */
+    if(!(await p.evaluate(()=>__bc.isHome()))||(await p.waitForTimeout(700),!(await p.evaluate(()=>__bc.isHome())))){ /* FIXER #17: also a frame that comes BACK just after the restore (ring build iPad: the ☰ «Lui» frame re-opened → 36 home buttons «gone») */ /* soft restore left a frame up: reload the page and load the same snapshot (harness) */
      const sv=await p.evaluate(()=>__bc.sv);hard++;
      await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof deser==='function',null,{timeout:180000});await p.waitForTimeout(1200);await p.evaluate(INPAGE);
      await p.evaluate(sv=>{try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}document.getElementById('title').hidden=true;document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());
@@ -260,7 +321,7 @@ async function crawlDev(b,URL,dev){
    for(const k of pathK){await p.evaluate(()=>__bc.list());const h=await p.evaluateHandle(k=>__bc.find(k),k);const el=h.asElement();
     const fsh=path.join(OUT,'shots',`${dev}-replay-${rows.length}.jpg`);
     if(!el){await p.screenshot({path:fsh,type:'jpeg',quality:50}).catch(()=>{});const vis=await p.evaluate(()=>__bc.list().map(x=>x.label).slice(0,12).join(' ; '));return 'path button gone: '+k+' · on screen: '+vis+' · '+fsh}
-    let dm='';const ok=await tap(p,el,{screen:dev,label:k,shot:fsh,log:m=>{dm=m}});if(!ok)return 'path button not tappable: '+k+' '+dm;await p.waitForTimeout(700);await settle(p)}
+    let dm='';const ok=(await press(p,el,{screen:dev,label:k,shot:fsh,log:m=>{dm=m}})).ok;if(!ok)return 'path button not tappable: '+k+' '+dm;await p.waitForTimeout(700);await settle(p)}
    return ''};
   const seen=new Set();const queue=[[]];const parentOf=new Map();
   while(queue.length&&taps<MAXTAPS){const pathK=queue.shift();const par=parentOf.get(pathK.join('>'))||null;
@@ -289,7 +350,9 @@ async function crawlDev(b,URL,dev){
     const rootH=await el.evaluateHandle(e=>__bc.root(e));const selfSt=e=>e.isConnected?e.className+'|'+(e.getAttribute('aria-pressed')||'')+'|'+(e.getAttribute('aria-expanded')||'')+'|'+(e.innerText||'').slice(0,40):'gone';
     const self0=await el.evaluate(e=>e.isConnected?e.className+'|'+(e.getAttribute('aria-pressed')||'')+'|'+(e.getAttribute('aria-expanded')||'')+'|'+(e.innerText||'').slice(0,40):'gone').catch(()=>'');
     const shot=path.join(OUT,'shots',`${dev}-${String(rows.length).padStart(4,'0')}.jpg`);
-    let dead=null;const ok=await tap(p,el,{screen,label:bt.label,shot,log:m=>{dead=m}});taps++;
+    let dead=null;const pr=await press(p,el,{screen,label:bt.label,shot,log:m=>{dead=m}});const ok=pr.ok;taps+=pr.two==='lift+chip'?2:1;
+    if(pr.two==='lift'){rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',two:'lift',verdict:'FAIL',why:'two-tap part: '+pr.why,shot});await p.screenshot({path:shot,type:'jpeg',quality:55}).catch(()=>{});dirty=true;continue}
+    if(!ok&&!dead)dead='DEAD BUTTON '+JSON.stringify({why:'chip not tappable'});
     if(!ok){const d=JSON.parse(dead.replace(/^DEAD BUTTON /,''));if(/^(disabled|gone|popup)$/.test(d.why)){rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:d.why,verdict:'WARN',why:d.why==='disabled'?'greyed out (not tappable now)':d.why==='gone'?'left the page before the tap':'under a hint popup '+d.cover});continue}rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'DEAD',verdict:'FAIL',why:'dead button: '+d.why+(d.cover?' under '+d.cover+(d.coverText?' «'+d.coverText+'»':''):''),shot});continue}
     await p.waitForTimeout(450);await settle(p,4000);
     let post,closedOwn=false;
@@ -302,7 +365,7 @@ async function crawlDev(b,URL,dev){
     if(self1!==self0)post.self=1;
     const [v,why]=verdict(bt,strip(pre),strip(post),errs,closedOwn,par);
     if(v==='FAIL')await p.screenshot({path:shot,type:'jpeg',quality:55}).catch(()=>{});
-    rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',verdict:v,why,shot:v==='FAIL'?shot:''});
+    rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',two:pr.two||undefined,verdict:v,why:(pr.two?pr.two+': ':'')+why,shot:v==='FAIL'?shot:''});
     const changed=JSON.stringify(pre)!==JSON.stringify(post);if(changed)dirty=true;
     const newScreen=JSON.stringify(pre.roots)!==JSON.stringify(post.roots)||pre.tab!==post.tab||pre.panel!==post.panel||pre.title!==post.title;
     if(newScreen&&pathK.length<DEPTH){const tl=post.roots.filter(r=>!r.startsWith('body'));const nk=tl.length?JSON.stringify(tl):JSON.stringify([post.roots.map(r=>r.startsWith('body')?'body':r),post.tab,post.panel,post.title]);if(!seen.has(nk)){const np=pathK.concat([bt.key]);parentOf.set(np.join('>'),pre);queue.push(np)}}
