@@ -138,7 +138,7 @@ function dsDan(p,why){let w=String(why).replace(/^Bị (ban rượu độc|ban c
 /* a proven crime (accusation with evidence) */
 /* punish-reason (D1): ONE punishment = lãnh cung OR one rank down (never two ranks, never two punishments the same day: punTwice → cấm túc);
    her notice names who accused, why and which evidence (jpun punNote) */
-function fall(p,why,by){const a=punWho(by);if(p===S){if(S.out||S.dead)return;if(a)S.framedBy=key(a);if(punTwice(S)&&!(S.rank>=5)){punLight(S,why,a);return}if(S.rank>=5||R(2)){cold(`Ngươi ${why}`,a);return}const r0=S.rank;S.rank=punDown(S);punMark(S,r0);apply({sung:-BAL.pun.fallSung});log(`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`);punNote({kind:"giang",why,by:a,from:r0,to:S.rank});return}
+function fall(p,why,by){const a=punWho(by);if(p===S){if(S.out||S.dead)return;if(a)S.framedBy=key(a);if(punTwice(S)&&!(S.rank>=5)){punLight(S,why,a);return}if(S.rank>=5||R(2)){cold(`Ngươi ${why}`,a);return}const r0=S.rank;S.rank=punDown(S);punMark(S,r0);apply({sung:-BAL.pun.fallSung});log(`<span class="r">Ngươi ${why}, bị giáng xuống ${meRankN()}.</span>`);punNote({kind:"giang",why,by:a,from:r0,to:S.rank});return}
  if(p.out||p.alive===false)return;if(a&&a!==p)p.coldBy=key(a);if(punTwice(p)&&!(p.queen||p.rank>=5)){punLight(p,why,a);return}
  if(p.queen||p.rank>=5){p.coldR=coldRankIn(p);if(p.queen){p.queen=false;p.rank=6}p.out=true;p.coldWk=punNow();log(`<span class="g">${p.name} ${why}, bị phế vào lãnh cung.</span>`)}
  else if(R(2)){p.coldR=coldRankIn(p);p.out=true;p.coldWk=punNow();log(`<span class="g">${p.name} ${why}, bị đày vào lãnh cung.</span>`)}
@@ -474,7 +474,7 @@ function seatRivals(p){const L=liveRivals(false).filter(v=>v!==p&&v.rank>=5&&!v.
 function promoteP(p){if(rkOf(p)>=7||!promoReqP(p).every(x=>x[0]))return"";const me=p===S;p.lastPromo=S.turn;
  if(rkOf(p)===6)return"";
  if(false){const R2=seatRivals(p);if(R2.length){const tot=R2.reduce((s,v)=>s+seatW(v),seatW(p));if(!roll(100*seatW(p)/tot)){const w=R2.sort((a,b)=>seatW(b)-seatW(a))[0];if(S.rank>=7)return"";if(w===S){S.rank=7;S.justCrowned=1;S.lastPromo=S.turn;ghenAll(BAL.ghen.rankUp,"ngươi được tấn phong");if(qOn())rivals[0].queen=false;return `<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}w.rank=6;w.queen=true;rivals.splice(rivals.indexOf(w),1);rivals.unshift(w);return `<b>Thánh chỉ: lập ${w.name} làm Hoàng hậu</b>${me?"; ngươi lỡ ngôi trung cung":""}. `}}}
- if(me){S.rank++;ghenAll(BAL.ghen.rankUp,"ngươi được tấn phong");fx("gold");if(empGive(S,35,"promo"))bestow(S,"promo");if(S.rank===7){if(qOn())rivals[0].queen=false;return `<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}return `<b class="g">Thánh chỉ: tấn phong ${S.name} làm ${RANKS[S.rank].n}.</b> `}
+ if(me){S.rank++;ghenAll(BAL.ghen.rankUp,"ngươi được tấn phong");fx("gold");if(empGive(S,35,"promo"))bestow(S,"promo");if(S.rank===7){if(qOn())rivals[0].queen=false;return `<b class="g">Thánh chỉ: lập ${S.name} làm Hoàng hậu, chủ trì lục cung.</b> `}return `<b class="g">Thánh chỉ: tấn phong ${S.name} làm ${meRankN()}.</b> `}
  if(p.rank+1>=7){if(S.rank>=7)return"";p.rank=6;p.queen=true;const i=rivals.indexOf(p);rivals.splice(i,1);rivals.unshift(p);return `<b>Thánh chỉ: lập ${p.name} làm Hoàng hậu.</b> `}
  p.rank++;if(empGive(p,35,"promo"))bestow(p,"promo");return `${p.name} được tấn phong ${RANKS[p.rank].n}. `}
 function promote(){return promoteP(S)}

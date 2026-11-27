@@ -10,7 +10,7 @@ function seatTxt(r){return SEATCAP[r]==null?"":`${RANKS[r].n} ${holders(r).lengt
 function seatPickW(p){const q=queenP();return seatW(p)+p.sung/2+(q&&q!==p?aff(q,p)/5:0)}
 /* DEMOTION REVIEW: Sủng under the rank's floor for two months, or a conviction, drops one rank (and frees the seat) */
 function sungFloor(r){return Math.max(0,RANKS[r].s-20)}
-function demote(p,why){if(p===S){if(S.rank<=0||S.out)return"";if(punTwice(S))return punLight(S,why);const r0=S.rank;S.rank=punDown(S);punMark(S,r0);S.lastPromo=S.turn;const t=`<span class="r">Ngươi ${why}, bị giáng xuống ${RANKS[S.rank].n}.</span>`;log(t);punNote({kind:"giang",why,from:r0,to:S.rank});return t}
+function demote(p,why){if(p===S){if(S.rank<=0||S.out)return"";if(punTwice(S))return punLight(S,why);const r0=S.rank;S.rank=punDown(S);punMark(S,r0);S.lastPromo=S.turn;const t=`<span class="r">Ngươi ${why}, bị giáng xuống ${meRankN()}.</span>`;log(t);punNote({kind:"giang",why,from:r0,to:S.rank});return t}
  if(p.queen){fall(p,why);return""}if(p.rank<=0||p.out)return"";if(punTwice(p))return punLight(p,why);const r0=p.rank;p.rank=punDown(p);punMark(p,r0);p.lastPromo=S.turn;const t=`${p.name} ${why}, bị giáng xuống ${RANKS[p.rank].n}.`;log(t);newsAdd(p,"demote",t,true);return t}
 function demoteReview(){let ev="";for(const p of consorts()){const r=rkOf(p);if(r<=0||r>=7||p.out)continue;if(p.sung<sungFloor(r))p.lowS=(p.lowS||0)+1;else p.lowS=0;
   if(p.lowS>=2){p.lowS=0;ev+=demote(p,`lâu không được sủng (Sủng ${p.sung} dưới mức ${sungFloor(r)} của ${RANKS[r].n} hai tháng)`)}
