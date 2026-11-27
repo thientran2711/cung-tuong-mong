@@ -15,6 +15,9 @@ html .game .kleather>.maptools .mz{min-height:28px;padding:0 9px;font-size:.72re
 .kleather:not(.kpmv)>.mapsc{flex:1;height:auto!important}
 .kleather>.mapsc{border-radius:0!important;box-shadow:none!important;outline:1px solid #b79a5bcc;outline-offset:-1px}
 .kleather:not(.kpmv)>.mapsc{-webkit-mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);-webkit-mask-composite:source-in;mask-image:linear-gradient(#0000,#000 14px,#000 calc(100% - 14px),#0000),linear-gradient(90deg,#0000,#000 14px,#000 calc(100% - 14px),#0000);mask-composite:intersect}
+/* §85.6b SUB-TAB MAPS (ob-phu, owner 25/11 ~22:52Z «dư đồ phải là full cái screen»): a full-screen map that carries a kit sub-tab row (kitPane .kpbar: home «Trong phủ / Kinh thành», any future map with levels) = the row on top, the map takes ALL the rest of the page area (never pushed under the tab bar) */
+html body .game.maptab #panel:has(>.kpbar+.mapv){display:flex!important;flex-direction:column}
+html body .game.maptab #panel>.kpbar+.mapv{flex:1 1 0;min-height:0;height:auto!important}
 /* §85.6 FULL SCREEN (owner 17/11 03:52Z, OD:L133/L1410/L1433): the map fills the whole page area edge to edge; the tools row, the left rail and the right column are OVERLAYS on it (same columns as her room stage), nothing shrinks the map */
 html body .mapv.kside>:not(#kshR):not(#krail):not(.kl-tone){margin-left:0!important;margin-right:0!important}
 html body .mapv.kside>#kshR{top:6px;right:6px}html body .mapv.kside>#krail{left:6px!important;top:6px!important}
@@ -47,7 +50,8 @@ html body .mapw .mspot.here .mlab,html body .mapw .mspot.here .mmeta,html body .
 /* §85.8 PORTRAIT DƯ ĐỒ (owner 17/11 ~13:12Z, review/map-portrait; html.kv1 = every portrait size, iPad landscape html.kv2 is NOT touched): the right card column is ONE ROW of the 4 people cards ABOVE the map
    (.k3cs: Hoàng thượng / Thái hậu / Hoàng hậu / Cung nữ thân tín, same size) and ONE ROW BELOW it (Ân sủng + Nguy hiểm chung, same height); the same kit cards, compact form (avatar only when the row is wide, Ân sủng rows in 2 columns).
    The map takes the full width between the rows, ZOOMED to the free HEIGHT (mapFit, j38; pan sideways, centred on her place + "!" places); every screen area that is not map shows the SKY of the day's weather (data-sky on .mapv, set below, one gradient per weather kind = KIT_SKY; a painted sky is an ART REQUEST to Foreman C). The weather particles keep covering the whole page area (kfStageRect). #kshR is ONE grid over the leather (pointer-events none, the cards take the clicks) - no new DOM, same k3Stage content. */
-html.kv1 body .game .mapv.kside.kleather:not(.kpmv){--kmv-fl:0px;--kmv-fr:0px;--kmv-ft:112px;--kmv-fb:92px}
+/* the left rail (56px) stays over the map in portrait too: the pan range is padded by it, so the map's left edge (and every tag on it, at every zoom) lands flush right of the rail, never under it (owner bug 25/11 Fold «…di nương» cut) */
+html.kv1 body .game .mapv.kside.kleather:not(.kpmv){--kmv-fl:56px;--kmv-fr:0px;--kmv-ft:112px;--kmv-fb:92px}
 html.kv1 body .game .mapv.kside.kleather:not(.kpmv)>.maptools{right:6px!important}
 html.kv1 body .game .mapv.kside.kleather:not(.kpmv)>.maptools:not(:has(.kpm-back))::before{width:76px;font-size:13px;letter-spacing:.1em}html.kv1 body .game .mapv.kside.kleather:not(.kpmv)>.maptools .mz{padding:0 7px}
 html.kv1 body .game .mapv.kside.kleather:not(.kpmv)>#kshR{position:absolute;inset:0;top:0;right:0;width:auto;max-height:none;overflow:visible;display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);grid-template-rows:auto minmax(0,1fr) auto;gap:0 6px;padding:48px 6px 6px;z-index:3;container:kr/inline-size}

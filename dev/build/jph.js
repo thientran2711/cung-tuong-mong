@@ -100,10 +100,10 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
    Marks: img[data-kwait="1"|"s"], slot [data-kwaitp="Đang thỉnh tranh…"]. Test: dev/test/life-preload.js (no empty box), kit sample §59.1. ===== */
 (function(){const st=document.createElement("style");st.id="kit-ph-wait";st.textContent=`
 img[data-kwait]{background:radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%);animation:kphBreath calc(1.6s*var(--pace,1)) ease-in-out infinite}
-img[data-kwait="s"],img[data-kwait="fs"],img[data-kwait="ms"],img[data-kwait="pfs"],img[data-kwait="pms"]{animation:none}
+img[data-kwait="s"],img[data-kwait="fs"],img[data-kwait="ms"],img[data-kwait="es"],img[data-kwait="pfs"],img[data-kwait="pms"]{animation:none}
 /* KK45 (MAIN 162 20:30Z SIDEQ-TRIM: a KNOWN person showed the STRANGER silhouette 0.6–0.9 s while her figure loaded): a figure on its way waits as a NEUTRAL soft parchment glow in the body box — never the unknown-fig silhouette (that picture means «Người lạ»; real strangers keep it as their own src) — and the real figure fades in (kphIn) */
-img[data-kwait^="f"],img[data-kwait^="m"]{background:radial-gradient(ellipse 40% 48% at 50% 56%,#f3e7cf 0,rgba(234,219,189,.75) 55%,rgba(234,219,189,0) 100%);opacity:.55}
-img[data-kwait^="f"]{aspect-ratio:730/1350}img[data-kwait^="m"]{aspect-ratio:616/1350}
+img[data-kwait^="f"],img[data-kwait^="m"],img[data-kwait^="e"]{background:radial-gradient(ellipse 40% 48% at 50% 56%,#f3e7cf 0,rgba(234,219,189,.75) 55%,rgba(234,219,189,0) 100%);opacity:.55}
+img[data-kwait^="f"]{aspect-ratio:730/1350}img[data-kwait^="m"]{aspect-ratio:616/1350}img[data-kwait^="e"]{aspect-ratio:549/1350}
 /* a PORTRAIT on its way (por-*) waits on the same parchment ground, BREATHING even in small slots (so it reads «loading», not an empty frame — entry-blank-r3 item 6) — never the stranger portrait unknown-f|m (KK45, same order as the figures above) */
 img[data-kwait^="p"]{background:radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%);animation:kphBreath calc(1.6s*var(--pace,1)) ease-in-out infinite!important}
 /* a stand-in that must keep a silhouette's box for layout (j79 kpIdFig while FIGURES.json loads) hides its picture and shows the same neutral ground */
@@ -111,7 +111,7 @@ img.kphsil{object-position:-99999px 0;background:radial-gradient(ellipse 40% 48%
 @keyframes kphIn{from{opacity:0}}img.kphin{animation:kphIn calc(.28s*var(--pace,1)) ease-out}
 @media (prefers-reduced-motion:reduce){img.kphin,img[data-kwait^="p"]{animation:none!important}}
 @keyframes kphBreathF{50%{opacity:.3}}
-img[data-kwait="f"],img[data-kwait="m"]{animation-name:kphBreathF}
+img[data-kwait="f"],img[data-kwait="m"],img[data-kwait="e"]{animation-name:kphBreathF}
 @keyframes kphBreath{50%{opacity:.62}}
 [data-kwaitp]::after{content:attr(data-kwaitp);position:absolute;left:4px;right:4px;top:50%;transform:translateY(-50%);text-align:center;font:600 .72rem/1.25 var(--display,serif);color:#8a6a40;letter-spacing:.02em;pointer-events:none;z-index:2;text-shadow:0 1px 0 #fff8}
 /* entry-blank-r3: a slot whose box already draws its own ::after (act-card art frames: corners / pins) gets the line as one small child instead (same look), so the frame keeps its own decoration */
@@ -122,7 +122,7 @@ function kitPhWaitClear(im){try{if(!im.hasAttribute("data-kwait"))return;const f
  if(p&&p.hasAttribute("data-kwaitq")&&!p.querySelector(":scope>img[data-kwait]")){p.removeAttribute("data-kwaitq");p.querySelectorAll(":scope>.kwaitl").forEach(x=>x.remove())}}catch(e){}}
 let KPHW_Q=[],KPHW_T=0;
 /* the kit silhouette for a full-body cut-out that is still loading: "m" (men: Emperor, eunuch, official, physician…) | "f" | "" (not a figure). ONE rule: the picture slot (here) and the stage layout (j59 wait) read it. */
-function kitPhFigG(s){return/\/fig-/.test(s)?(/\/fig-(emp|eun|off|man|men|ty|phys|ksp|prince|vuong|guard|thaigiam|king)/.test(s)?"m":"f"):""}
+function kitPhFigG(s){return/\/fig-/.test(s)?(/\/fig-(eun|ksp|thaigiam)/.test(s)?"e":/\/fig-(emp|off|man|men|ty|phys|prince|vuong|guard|king)/.test(s)?"m":"f"):""}
 window.kitPhFigG=kitPhFigG;
 /* entry-blank-r3: the kit portrait silhouette for a portrait still loading: "m" (men, boys) | "f" | "" (not a portrait) */
 function kitPhPorG(s){return/\/por-/.test(s)?(/\/por-(emperor|eunuch|man|men|official|physician|steward|tutor|kid-m)/.test(s)?"m":"f"):""}

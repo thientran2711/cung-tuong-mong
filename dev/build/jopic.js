@@ -245,12 +245,16 @@ try{if(typeof kaNorm==="function"&&document.getElementById("modal"))kaNorm(docum
 /* ---- kitPicZoom(src): the picture enlarged over everything; tap anywhere closes (KIT §6.2) ---- */
 function kitPicZoom(src){try{if(!src)return;let z=document.getElementById("kpzoom");if(!z){z=document.createElement("div");z.id="kpzoom";z.setAttribute("role","dialog");
   z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
- z.innerHTML=`<div class="kpzf">${kitSceneArt(src,"",{shape:"tall"})}</div>`;z.hidden=false}catch(e){}}
+ z.innerHTML=`<div class="kpzf">${kitSceneArt(src,"",{shape:"tall"})}</div>`+kitOvX("kpzoom");z.hidden=false}catch(e){}}
+/* OB-M3UI (robot M3 26/11, fault 2 «lightbox with no exit», whole family: #kpzoom picture, #kpinfo «!» card): every full-screen viewer shows the ONE kit ✕ in its top-right corner;
+   a tap anywhere (✕ included) closes it, and Esc / the device Back close it too (jk4 kitTopClose). */
+function kitOvX(k){return typeof kitXHTML==="function"?kitXHTML(`data-kitx="${k}"`,"Đóng").replace('class="kit-x"','class="kit-x kxov"'):""}
+window.kitOvX=kitOvX;
 window.kitPicZoom=kitPicZoom;
 /* KK29 (MAIN 136 25/11, robot M3, KIT BUG #6): a tap ANYWHERE on an option card chooses it, its picture included (iPad 1180x820: the picture tap opened this lightbox and the option was never chosen). The picture is no zoom trigger any more; kitPicZoom(src) stays for a SEPARATE control (nothing in the option card calls it). */
 (function(){const st=document.createElement("style");st.id="kit-opt-pic";st.textContent=`
 button.ka .kr.kwinrow>.krv>.ef.r:not(.kdup)::after{content:" khi thành";font-weight:400;white-space:nowrap}
-#kpzoom{position:fixed;inset:0;z-index:100000;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
+#kpzoom{position:fixed;inset:0;z-index:100000;background:var(--kveil,#1a0f08cc);display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpzoom[hidden]{display:none!important}
 #kpzoom .kpzf{width:min(78vw,calc(calc(82*var(--kvh,1vh)) * 3 / 4),506px)}
 html body #modal button.ka.kopt.kopav>.kaart.kaav,html body button.ka.kopt.kopav>.kaart.kaav{overflow:visible!important;background:none!important;box-shadow:none!important;border-radius:0!important;display:flex!important;align-items:center;justify-content:center}
@@ -417,7 +421,7 @@ window.kitOptTier=kitOptTier;window.kitOptCards=kitOptCards;
 function kitOptInfo(b){try{let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
  const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *"))r.remove()});
- c.classList.remove("kopt","kart");c.classList.add("kopinfo");c.disabled=true;c.style.removeProperty("min-height");c.type="button";z.innerHTML="";z.appendChild(c);z.hidden=false}catch(e){console.error(e)}}
+ c.classList.remove("kopt","kart");c.classList.add("kopinfo");c.disabled=true;c.style.removeProperty("min-height");c.type="button";z.innerHTML="";z.appendChild(c);z.insertAdjacentHTML("beforeend",kitOvX("kpinfo"));z.hidden=false}catch(e){console.error(e)}}
 window.kitOptInfo=kitOptInfo;
 document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kobang");if(!m)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitOptInfo(m.parentElement)}catch(x){}},true);
 
@@ -427,7 +431,7 @@ function kitNumBox(h){return `<span class="knbang" role="button" tabindex="0" ar
 window.kitNumBox=kitNumBox;
 document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.target.closest(".knbang");if(!m)return;const n=(m.parentElement||document).querySelector(":scope > .knum");if(!n)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
  let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",ev=>{ev.stopPropagation();z.hidden=true});document.body.appendChild(z)}
- z.innerHTML=`<div class="kopinfo knumpop">${n.innerHTML}</div>`;z.hidden=false}catch(x){}},true);
+ z.innerHTML=`<div class="kopinfo knumpop">${n.innerHTML}</div>`+kitOvX("kpinfo");z.hidden=false}catch(x){}},true);
 (function(){const st=document.createElement("style");st.id="kit-num-bang";st.textContent=`
 #modal .knum{display:none!important}
 #modal .kpmain:has(>.knbang),#modal .kpmain:has(.knbang){position:relative}
@@ -458,6 +462,10 @@ ${O}>.kobang::after{content:"";position:absolute;inset:-9px}`;
 ${KIT_OPT_CSS}
 #kpinfo{position:fixed;inset:0;z-index:100001;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
 #kpinfo[hidden]{display:none!important}
+/* OB-M3UI: the kit ✕ of a full-screen viewer (#kpzoom, #kpinfo) and of the word pop-up (#kpop): the same kit-x, only placed in the corner */
+html body .kit-x.kxov{position:fixed!important;top:calc(12px + env(safe-area-inset-top,0px));right:12px;z-index:2}
+html body .kpop>.kit-x.kxpop{position:absolute!important;top:4px;right:4px;width:28px;height:28px;min-width:28px;min-height:28px;font-size:14px;padding:0}
+html body .kpop:has(>.kit-x.kxpop){padding-right:36px}
 #kpinfo>button.kopinfo{width:min(560px,92vw);max-height:calc(86*var(--kvh,1vh));overflow:auto;text-align:left;cursor:zoom-out;opacity:1!important;pointer-events:none;background:var(--k-card,#fffaf0)!important;color:var(--ink,#2a1a12)!important;filter:none!important}`;document.head.appendChild(st)})();
 /* §6.2e A SHORT PHRASE NEVER BREAKS (KK35; MAIN 149 «Tin báo» Fold: «Để / ta / xem» one word per line beside the big thumbnail; law 11 = every LIST option card,
    hand cards §101 have their own face): a card name of ≤ 4 words that wraps, or any name broken one word per line, first gets the SMALL thumbnail (.kofit1),

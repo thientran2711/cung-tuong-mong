@@ -24,6 +24,20 @@ const KIT_ORIGINS=["tt","dtq","muoi","cn","nc","td","ch","thd"];
 /* the hook another worker implements; keep the name; override by assigning window.kitKnown */
 if(typeof window.kitKnown!=="function")window.kitKnown=function(p){return true};
 function kitIsKnown(p){try{return p==null||p===S||window.kitKnown(p)!==false}catch(e){return true}}
+/* sil-eunuch (owner order main 172, ACT-MOVE-6): ONE rule for the letter of the grey stranger silhouette (img/kit/unknown-fig-<g>, unknown-<g>): k = child, e = eunuch /
+   Thái giám / Tổng quản (soft cap, belted robe, no official hat), m = the other men's ROLES (Emperor, official, physician, guard, prince, man), f = women. It reads the ROLE, never the picture name and never a per-place
+   guess. Stage description records ({kind:"ksp"|"peddler"|"npc"|"elder"|"serv", ini, info, sid, lid}) carry no .role, so a stranger eunuch used to fall to «other» = f and
+   stood as a lady. Every place that picks a stranger silhouette (j59 stage + slot fill, j60 stone frame, j87 week book, j90 dialog figure, jreveal, kitSilFig) calls this. */
+function kitSilG(p){try{if(!p||typeof p!=="object")return"f";let r=null;try{if(p.ref&&typeof p.ref==="object")r=personRoleRank(p.ref);if(!r||r.role==="other")r=personRoleRank(p)}catch(e){}
+ if(r&&r.role!=="other")return r.kid||r.sex==="k"?"k":r.role==="eunuch"?"e":r.sex==="m"?"m":"f";
+ const k=p.kind,ini=p.ini,info=String(p.info||p.rw||""),rk=String(p.rk||"");
+ if(/^(ksp|peddler)$/.test(k))return"e";if(/^(emp|ty|man|min|guard|royal)$/.test(k)||p.sk==="man"||p.sk==="emp"||p.sk==="ty")return"m";
+ if(ini==="Hoạn"||/^eu\d$/.test(rk))return"e";if(ini==="Y"||ini==="Quan"||ini==="帝"||/^(off|emp)$/.test(rk))return"m";
+ if(typeof p.lid==="string"&&/^c:/.test(p.lid))return"e";/* a ledger court person (c:*) is a Thái giám (j95 default name) */
+ if(p.sid!=null&&typeof j95sv==="function"){const s=j95sv("s"+p.sid);if(s&&(s.role==="eunuch"||s.role==="eun"))return"e"}
+ if(/Thái giám|Tổng quản|Kính sự phòng/i.test(info))return"e";if(/thị vệ|Thái y|Vương gia/i.test(info))return"m";
+ const sx=p.sex||(p.ref&&p.ref.sex);if(typeof p.age==="number"&&BAL.m90&&p.age<BAL.m90.kidAge)return"k";return sx==="m"?"m":"f"}catch(e){return"f"}}
+window.kitSilG=kitSilG;
 /* any person object -> role + rank (+ origin for the player) */
 function personRoleRank(p,hint){const out=(role,rank,extra)=>Object.assign({role,rank:rank==null?null:rank,origin:null,sex:(KIT_ROLES[role]||KIT_ROLES.other).sex,kid:false},extra||{});
  try{if(!p)return out(hint||"other");
@@ -54,11 +68,21 @@ function kitRoleOfFace(f){const rk=String(f.rk||""),rw=String(f.rw||"");let m;
  if(/^kid/.test(rk))return{role:/Công chúa/.test(rw)?"princess":"prince"};
  if(rk==="off")return{role:/Thái y/i.test(rw)?"physician":/thị vệ/i.test(rw)?"guard":/vương gia/i.test(rw)?"royal":/Công tử|nhạc|họa|sứ/i.test(rw)?"man":"official"};
  if(f.ini==="Hoạn")return{role:"eunuch",rank:1};if(f.ini==="Quan")return{role:"official"};if(f.ini==="Y")return{role:"physician"};return{role:"other"}}
+/* KIT §4.3a: she is not yet a palace woman (home road, isKc) — her portrait shows no consort rank sign (gem, crest); the frame stays the plain
+   consort-0 frame until a painted home frame exists (ART REQUEST K-FRAME-HOME). kitNoCrest(f): true when f (face object or person) is HER before the palace. */
+function kitPrePal(){try{return typeof isKc==="function"&&!!isKc()}catch(e){return false}}
+function kitNoCrest(f){try{if(!f||!kitPrePal())return false;if(typeof S!=="undefined"&&(f===S||f.__kp===S))return true;const rk=String(f.rk||"");return !!(f.w&&f.w[0]==="me"&&/(?:^|\s)c\d/.test(rk))}catch(e){return false}}
+/* her frame at home by home kind (kc2D: "" tiểu thư · dan thôn nữ · nc foreign princess at her own court, bd/pf too): a kit frame family name or null
+   (= plain frame-consort-0). MAIN 156: the princess uses the existing frame-princess; K-FRAME-HOME (KK41, MAIN 157 GO 26/11): Foreman C's frame-home (red lacquer, tiểu thư)
+   and frame-dan (plain wood, thôn nữ) are wired. KIT_HOME_BG: the card background of that family where one is painted (bg-princess); none for home / dan → the plain consort-0 background. */
+const KIT_HOME_FRAME={"":"home",dan:"dan",nc:"princess"},KIT_HOME_BG={princess:"princess"};
+function kitHomeFrame(){try{if(!kitPrePal())return null;const d=typeof kc2D==="function"?kc2D():"";return KIT_HOME_FRAME[d]||null}catch(e){return null}}
+window.KIT_HOME_FRAME=KIT_HOME_FRAME;window.kitHomeFrame=kitHomeFrame;window.kitPrePal=kitPrePal;window.kitNoCrest=kitNoCrest;
 /* face object (or person) -> everything the renderer needs */
 function kitDecor(f){f=f||{};let r=f.__kr||(f.__kp?personRoleRank(f.__kp):null);if(!r){const x=kitRoleOfFace(f);r=Object.assign({origin:null,sex:(KIT_ROLES[x.role]||KIT_ROLES.other).sex,kid:false},x)}
  const known=f.__kp?kitIsKnown(f.__kp):true;const role=known?r.role:"unknown";let frame,bg,badge=null,emb=null,col,tint=null;
  const rank=r.rank;
- if(role==="player"||role==="consort"){frame=`frame-consort-${rank}`;/* her frame = the consort frame of her rank (owner 11/14); the stage marks her */bg=`bg-consort-${rank}`;badge=`gem-${rank}`;col=kitRankCol(rank);if(role==="player"&&r.origin)emb=`origin-${r.origin}`}
+ if(role==="player"||role==="consort"){frame=`frame-consort-${rank}`;/* her frame = the consort frame of her rank (owner 11/14); the stage marks her */bg=`bg-consort-${rank}`;badge=`gem-${rank}`;col=kitRankCol(rank);if(role==="player"&&r.origin)emb=`origin-${r.origin}`;/* KIT §4.3a (pre-palace, OB-NGOAICUNG): before the palace (isKc: Tiểu thư / Thôn nữ / Công chúa at home) she holds no consort rank → no rank gem, no rank crest (kitNoCrest); her frame by home kind (KIT_HOME_FRAME) */if(role==="player"&&kitPrePal()){badge=null;const hf=kitHomeFrame();if(hf){frame=`frame-${hf}`;if(KIT_HOME_BG[hf])bg=`bg-${KIT_HOME_BG[hf]}`}}}
  else if(role==="eunuch"){const r=cl(rank||0,0,3);frame=`frame-eunuch-${r}`;bg=r>=3?"bg-eunuch-3":"bg-eunuch";badge=`tok-e${r}`;col=tint=kitServCol("eunuch",r)}
  else if(role==="maid"||role==="mama"){/* rank = the maid RUNG; art / frame / badge by its tier (BAL.srvRk.tier, maid-ladder-6) */const r=cl(typeof srkTier==="function"?srkTier(rank||0):rank||0,0,4);frame=`frame-${role}-${r}`;bg=`bg-${role}`;badge=`tok-m${r}`;col=tint=kitServCol("maid",rank||0)}
  else if(role==="cold"){frame="frame-cold";bg="bg-cold";col=KIT_COLD_COL}
@@ -101,7 +125,7 @@ function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.siz
 /* person card: unknown people are named "Người lạ" */
 (function(){const c0=pcard;pcard=function(o){try{if(o&&o.f&&o.f.__kp&&!kitIsKnown(o.f.__kp))o=Object.assign({},o,{name:"Người lạ",rank:""})}catch(e){}return c0.call(this,o)}})();
 /* scene: name tags and full-body figures follow the same hook (strangers stand as grey silhouettes img/kit/unknown-fig-f|m|k.webp) */
-(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];if(!p)return;const who=p.ref||(p.kind==="emp"?S.emp:p.kind==="th"?S.thO:p.kind==="maid"?S.maid:null);if(who&&!kitIsKnown(who)){const t=b.querySelector(".tag");if(t)t.textContent="Người lạ";const r=personRoleRank(who);const fi=b.querySelector("img.figimg");if(fi)fi.src=KIT_DIR+`unknown-fig-${r.kid?"k":r.sex==="m"?"m":"f"}.webp`}})}catch(e){}return r}})();
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];if(!p)return;const who=p.ref||(p.kind==="emp"?S.emp:p.kind==="th"?S.thO:p.kind==="maid"?S.maid:null);if(who&&!kitIsKnown(who)){const t=b.querySelector(".tag");if(t)t.textContent="Người lạ";const r=personRoleRank(who);const fi=b.querySelector("img.figimg");if(fi)fi.src=KIT_DIR+`unknown-fig-${kitSilG(who)}.webp`}})}catch(e){}return r}})();
 /* kit CSS: portrait pieces only; nothing else changes */
 (function(){const st=document.createElement("style");st.id="kit60";st.textContent=`
 .pcp.kit{border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;overflow:visible!important;container-type:size;aspect-ratio:480/1037!important}

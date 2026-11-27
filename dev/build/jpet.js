@@ -266,7 +266,7 @@ function petShopItems(){const sfx=typeof petcStageSrc==="function"?"-non":"";
    eff:`${PET_SN[T.st]} +${BAL.rl.jpet.followN+(T.sacX||0)}`/* shop-panel-r2: ONE short gain row; odds + use are on the item card */,rows,stock:1,have:()=>0,why:t1?"Hết khắc":(tsbPets(S).some(P=>P.t===k)?"Đã có":""),
    onBuy:(x,q)=>{for(let i=0;i<q;i++)if(!petBuyOne(k))break}}})}
 function petShop(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";try{if(nm&&typeof k61Named==="function"&&!k61Named(c))nm="???"}catch(e){}/* same seller + naming as kitShopNvp */
- return kitShop({key:"pet",title:"Nhờ thái giám tìm thú nuôi",carry:Math.max(0,petMax(S)-tsbPets(S).length),
+ return kitShop({key:"pet",title:nm&&nm!=="???"?`Nhờ thái giám ${nm} tìm thú nuôi`:"Nhờ thái giám tìm thú nuôi"/* goal-links r2: the same seller, named */,carry:Math.max(0,petMax(S)-tsbPets(S).length),
   info:`<p>Thái giám Nội vụ phủ khom lưng: “Thú nhỏ ngoài cung, nô tài tìm được mấy loài này, xin ${kSay({srv:"m"},S,"{goi}")} chọn.” Còn ${petMax(S)-tsbPets(S).length} ô; con quý hiếm không mua được: Hoàng thượng, Thái hậu, Hoàng hậu ban, Thu săn tháng chín, cống phẩm tháng giêng.</p>`,
   stage:[kitSeller(c,{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"})],items:petShopItems(),money:()=>S.bac})}
 function petBuyO(k,p){const T=PET[k];return oddsCl(Math.round([78,62,38][T.tr]+eyes(p||S)*[3,4,5][T.tr]))}

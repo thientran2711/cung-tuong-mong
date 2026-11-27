@@ -16,12 +16,20 @@ const KIT_SQOPT={pic:64,narrow:56};/* KIT §6.2c: the ONE square option picture 
    kitEdict({fromWord}) (j93) prints the given «from» word on the old-rank chip (a tú nữ: «Tú nữ»). */
 const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16,48,.45)",night:"brightness(.62) saturate(.85)",intro:1300,toBlur:700,
  fold:{fh:.80,mfh:.94,hfh:.62,msgrX:.22,meX:.82,cX:.02,cW:.60,cTop:.42,nmX:.2,nbW:.42,boxX:.43,boxW:.555,soloFh:.97,soloX:.22},ipad:{fh:.86,mfh:.98,hfh:.64,msgrX:.17,meX:.84,cX:.02,cW:.64,cTop:.40,nmX:.15,nbW:.40,boxX:.41,boxW:.575,soloFh:.97,soloX:.20},gap:8,tail:13};
+/* KIT §24b BUỔI VEIL (owner 26/11 ~18:45Z «màn hình mờ theo buổi: sáng mờ sáng, trưa mờ trưa, chiều mờ chiều, tối như cũ»): ONE token family. Every dimmed backdrop of the game (#modal = dialogs, visitor «giá đáo» scene,
+   loading veil, event cards over the stage; .kscn-veil; .kidfl; #kpodov; #krkov; #kpzoom; .ktut-dim) paints `background:var(--kveil, <its own dark colour>)`. --kveil is set on body[data-buoi] (j12 sets it on every stage render);
+   all 4 buổi (incl. tối) set it, ONE alpha per buổi for every layer (owner 26/11 20:05Z: lighter, .34 / .30 / .34 / .32); the var(--kveil,<dark>) fallback only shows before body[data-buoi] exists. The ceremonial day curtain #kdaytc keeps its dark ground (its words sit directly on it). */
+window.KIT_BVEIL={0:"rgba(255,228,200,.34)",/* sáng: pale warm-gold / rose morning mist */1:"rgba(255,251,236,.30)",/* trưa: bright clear warm-white haze */2:"rgba(226,132,52,.34)",/* chiều: amber / orange sunset haze */3:"rgba(42,26,18,.32)"/* tối: the old dark brown, one step lighter (owner 26/11 20:05Z «đang đục quá»); was .33–.80 per layer, so .32 is lighter on every layer */};
+(function(){try{const st=document.createElement("style");st.id="kveil-css";st.textContent=Object.keys(KIT_BVEIL).map(b=>`body[data-buoi="${b}"]{--kveil:${KIT_BVEIL[b]}}`).join("");document.head.appendChild(st)}catch(e){}})();
+/* the buổi mark also on the title / loading screen and any screen before the stage renders: follow S.buoi on every render */
+(function(){try{const r0=window.render||(typeof render==="function"?render:null);if(!r0||r0.__kveil)return;const w=function(){const r=r0.apply(this,arguments);try{if(typeof S!=="undefined"&&S&&typeof S.buoi==="number"&&document.body.dataset.buoi!==String(S.buoi))document.body.dataset.buoi=S.buoi}catch(e){}return r};w.__kveil=1;render=w}catch(e){}})();
+
 (function(){try{const st=document.createElement("style");st.id="kscn-css";st.textContent=`
 .kscn{position:fixed;z-index:${KIT_SCN.z};overflow:hidden;border-radius:var(--k-rad,12px);background:#2a1a12}
 .kscn-bg{position:absolute;inset:-14px;background-size:cover;background-position:center;filter:blur(${KIT_SCN.blur}px)}
-.kscn-veil{position:absolute;inset:0;background:${KIT_SCN.veil}}
+.kscn-veil{position:absolute;inset:0;background:var(--kveil,${KIT_SCN.veil})}
 .kscn.kscn-night .kscn-bg{filter:blur(${KIT_SCN.blur}px) ${KIT_SCN.night}}
-.kscn.kscn-night .kscn-veil{background:${KIT_SCN.veilNight}}
+.kscn.kscn-night .kscn-veil{background:var(--kveil,${KIT_SCN.veilNight})}
 .kscn.kscn-clear .kscn-bg{filter:none}.kscn.kscn-clear .kscn-veil{opacity:0}
 .kscn-fig{position:absolute;display:block;max-width:none;max-height:none;pointer-events:none}
 .kscn .dlg.kscn-box{position:absolute;z-index:4;max-width:none;max-height:none;margin:0;display:flex;flex-direction:column;overflow:visible;text-align:left;animation:none;box-shadow:0 6px 22px rgba(0,0,0,.38)}

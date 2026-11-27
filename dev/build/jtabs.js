@@ -194,7 +194,7 @@ if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 /* owner 24/11 (OD L1867): the info chips under a sub-tab bar stay FIXED with the bar (only the content below scrolls); top = bar height, set by ktPinTop */
 .ksub+.ktop,.kpbar+.ktop{position:sticky;top:var(--ktt,40px);z-index:4;background:var(--panel,#f6ead6);padding:4px 0 6px;margin:0 0 6px}
 /* the tab bar's trailing info slot: pinned to the RIGHT END of the bar (stays visible while the tabs scroll) */
-.pctabs>.pctinfo{flex:0 0 auto;margin-left:auto;align-self:center;position:sticky;right:0;padding:0 2px 0 10px;background:var(--panel);white-space:nowrap}
+.pctabs>.pctinfo{flex:0 0 auto;margin-left:auto;align-self:stretch;display:flex;align-items:center;/* tainghe-info r4: spans the bar height so its «ⓘ» hit area can grow over the bar (kitHitGrow) */position:sticky;right:0;padding:0 2px 0 10px;background:var(--panel);white-space:nowrap}
 .pctabs>.pctinfo .kgl{font-size:.82rem}
 /* KIT RULE (review/kit-subtabs-overflow, K-Q2-1, laws 10+11): a kitSubTabs bar NEVER scrolls sideways and the ⓘ never covers a tab: when the tabs do not fit
    one line they WRAP to a 2nd row at the SAME fixed tab size (one size per tier; no shrinking, no clipping); ⓘ keeps the right end of the last row.

@@ -230,7 +230,7 @@ function dhPanel(){if(!S)return;dhSync(S,true);DHTAB="dh";const wk=wornKey(S),E=
  const opts=E.filter(k=>k!==wk).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier).map(o=>({n:`Đeo «${o.name}»`,fx:{},x:chTxt(o.key,S.dh[o.key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(o.key,1)}));
  if(wk&&wo&&choices(wk,S.dh[wk].i).length>1)opts.unshift({n:`Đổi phần thưởng «${wo.name}»`,fx:{},x:chTxt(wk,S.dh[wk].i),go:()=>dhPick(wk,1)});
  if(wk)opts.push({n:"Tháo danh hiệu",fx:{},x:wo&&wo.fx?"mất: "+wo.fx.replace(/ \(khi đeo\)$/,""):"bỏ tấm danh hiệu trên đầu",go:()=>{dhWear(S,null);dhPanel()}});
- opts.push({n:"Đóng",fx:{},go:()=>{}});
+ opts.push({n:"Đóng",fx:{},nav:1,go:()=>{}});
  kitPanel({kind:"info",title:"Danh hiệu",sub:`Đã có ${E.length} trên ${dhTot()} · bấm một tấm để xem`,sections:sec,opts,dh:1},true);showModal()}
 window.dhPanel=dhPanel;
 /* the goal panel gets the same tab row on top */
