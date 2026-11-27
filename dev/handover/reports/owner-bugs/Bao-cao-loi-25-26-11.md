@@ -1,10 +1,10 @@
 # Báo cáo lỗi sếp báo 25–26/11
 
-Bản kiểm: 27/11 ~09:50Z · MAIN CHÍNH 161 · bản live **0562e15f** (lùi về 611fca61 nếu cần).
+Bản kiểm: 27/11 ~10:40Z · MAIN CHÍNH 161 · bản live **00dca386** (lùi về 0562e15f nếu cần).
 Nguồn: mọi dòng OWNER trong sổ quyết định từ 25/11 ~23:30Z (trên máy bay, iPad không tiếng) đến cuối.
 Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main, hàng đợi lander, nhánh review và CLAIMS — không viết từ trí nhớ.
 
-**Tóm tắt.** 77 dòng sếp báo hoặc ra lệnh (57 của 25–26/11 + 20 của 27/11): **41 đã lên live · 7 nửa live, nửa còn lại chờ hoặc đang làm · 24 chưa lên live (3 chờ lên live, 21 đang làm hoặc chưa làm) · 5 là luật ghi nhận, không có bản dựng riêng.** Bàn bài / thẻ gỗ / vòng bị giữ lại, chờ sếp xem video.
+**Tóm tắt.** 77 dòng sếp báo hoặc ra lệnh (57 của 25–26/11 + 20 của 27/11): **42 đã lên live · 7 nửa live, nửa còn lại chờ hoặc đang làm · 23 chưa lên live (3 chờ lên live, 20 đang làm hoặc chưa làm) · 5 là luật ghi nhận, không có bản dựng riêng.** Bàn bài / thẻ gỗ / vòng bị giữ lại, chờ sếp xem video.
 
 **Cách đọc cột «Trạng thái»:** LIVE <sha> = đã chạy trên game thật · chờ lên live = đã qua kiểm, đang xếp hàng lander · đang duyệt = người kiểm đang xem · đang làm (tên thợ) · chưa làm.
 
@@ -87,11 +87,11 @@ Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main,
 |---|---|---|
 | **Tiếng «tèo» khi bấm nút.** Thay âm thanh nghe như thất bại. | **LIVE 310bad2e** (25/11 04:57Z: `audio/sfx-tap.mp3` thay tại chỗ). Rủi ro: máy đã nhớ tiếng cũ (gói offline, iOS) vẫn có thể nghe tiếng cũ → **đang làm (SOUND-CACHE)**: đổi tên file. | Tiếng bấm nhẹ, không «tèo». |
 | **Thứ tự ngày mới / cửa sổ chồng nhau (từ 24/11).** | **LIVE 611fca61** (Bundle 1: dialog-order-r4 4594ec2b, `jdayq.js` DIALOG-ORDER r2/r4, test `dayq-hold`). | Hộp thoại không chen lên màn của mình. |
-| **Hàng chờ lên live (lander LC24).** | **Mới nhất 0562e15f** (door-onetap 371067c9 + act-move 90488b6c: mọi cửa hành sự thành một chạm, việc người chuyển ra Dư đồ; lệnh sếp 27/11 ~00:32–01:14Z, ngoài khoảng 25–26/11 nên không có dòng riêng). **Bundle 1 = 611fca61** (ring-build, kk54 place-close, boot-skel-flash, dialog-order-r4, e-odds2, npcroads-red, title-parity, result-sieve; kit-std-audit rút lại, goal-links + map-r9 ra ngoài vì xung đột mã). Đã lên live từ lần trước: lc23-oan 53319e6f (số 37), renderer-mem 03a8c17c (sửa nghẽn bộ nhớ, không thuộc dòng nào của sếp), os stack 504d2e6a (số 19, 20, 38), pace-all + stat-pace 4cfcda61 (số 15, 55), wording-gain 539603bf (số 53), firstcard-3 814bd77d (số 43), title-bal fa722503 (số 46, 54), wording-marks 540358c4 (số 53), mg-trim 0b43ee55 (số 14, 21, 27), ob-verdict-3 98c77517 (số 42). Cũng đã lên live: end-maxrank 17f23656, dayq-qsoftlock b16b4b93 (sửa kẹt ngày), parity-facfix 066d9af0, kptitle-close 4cd3f974 (không thuộc dòng riêng của sếp). Còn xếp hàng/giữ: map-zones-r7, mg-trim-r6, kit-bac-progress, contest-thitam, kit-stage-r2 (chờ sếp xem video).
+| **Hàng chờ lên live (lander LC24).** | **Mới nhất 00dca386** (sx-scope-fix + scope-classb + kc-nc-palace). Trước đó 0562e15f (door-onetap 371067c9 + act-move 90488b6c: mọi cửa hành sự thành một chạm, việc người chuyển ra Dư đồ; lệnh sếp 27/11 ~00:32–01:14Z, ngoài khoảng 25–26/11 nên không có dòng riêng). **Bundle 1 = 611fca61** (ring-build, kk54 place-close, boot-skel-flash, dialog-order-r4, e-odds2, npcroads-red, title-parity, result-sieve; kit-std-audit rút lại, goal-links + map-r9 ra ngoài vì xung đột mã). Đã lên live từ lần trước: lc23-oan 53319e6f (số 37), renderer-mem 03a8c17c (sửa nghẽn bộ nhớ, không thuộc dòng nào của sếp), os stack 504d2e6a (số 19, 20, 38), pace-all + stat-pace 4cfcda61 (số 15, 55), wording-gain 539603bf (số 53), firstcard-3 814bd77d (số 43), title-bal fa722503 (số 46, 54), wording-marks 540358c4 (số 53), mg-trim 0b43ee55 (số 14, 21, 27), ob-verdict-3 98c77517 (số 42). Cũng đã lên live: end-maxrank 17f23656, dayq-qsoftlock b16b4b93 (sửa kẹt ngày), parity-facfix 066d9af0, kptitle-close 4cd3f974 (không thuộc dòng riêng của sếp). Còn xếp hàng/giữ: map-zones-r7, mg-trim-r6, kit-bac-progress, contest-thitam, kit-stage-r2 (chờ sếp xem video).
 
 ## 6. Sếp báo 27/11 (00:05Z → 07:20Z)
 
-Bản kiểm trên main **0562e15f**. Nhánh liệt kê lấy từ `git ls-remote` và so với lịch sử main; «chưa lên live» = chưa thấy mã trên main.
+Bản kiểm trên main **00dca386**. Nhánh liệt kê lấy từ `git ls-remote` và so với lịch sử main; «chưa lên live» = chưa thấy mã trên main.
 
 | Việc sếp báo · quyết định | Trạng thái + bằng chứng | Sếp sẽ thấy |
 |---|---|---|
@@ -114,11 +114,11 @@ Bản kiểm trên main **0562e15f**. Nhánh liệt kê lấy từ `git ls-remot
 | **74. Tài nghệ: mỗi môn một ô vuông; bỏ «chưa thạo» chỉ để bậc 0/5; khung môn gọn, không tỷ lệ trên ảnh nhỏ.** Sếp nói nhiều lần (06:33Z, 06:48Z, 07:10Z, 07:12Z, 07:20Z); đang đưa ra duyệt. | **Chưa lên live.** Nhánh `review/kit-stage-r11` 11f11695 (và r12 đến r14) chưa vào main. | Tài nghệ là các ô vuông đều nhau. |
 | **75. Rà hết việc sếp hỏi mấy ngày qua, ai đang làm.** «Không thể một việc cứ làm tới làm lui.» | **Luật ghi nhận.** Chính là báo cáo này. | Một bảng cho sếp xem. |
 | **76. Lên live theo nhóm; mọi thay đổi vẫn qua người kiểm.** Nhóm theo khu vực; rút lại lệnh bỏ qua kiểm cho việc đổi màu (07:15Z). | **LIVE 611fca61** (Bundle 1) + 0562e15f (đợt kế). | Mỗi đợt lên live gồm nhiều việc cùng khu. |
-| **77. Lỗi `sx` ReferenceError (MAIN 177).** Sửa gấp. | **Chưa lên live.** Nhánh `review/sx-scope-fix` 79c5a62d xếp hàng, chưa vào main. | Hết văng lỗi. |
+| **77. Lỗi `sx` ReferenceError (MAIN 177).** Sửa gấp. | **LIVE 00dca386** (sx-scope-fix 79c5a62d: sửa «sx is not defined» trong `jkc`/`jkc2`, kèm scope-classb và kc-nc-palace). | Hết văng lỗi. |
 
 ## 5. Hết
 
-~62% xong · ~62% chơi được (đếm theo bảng: 41 live + 7 nửa live trên 72 việc có bản dựng; việc đã live đều chơi được)
+~63% xong · ~63% chơi được (đếm theo bảng: 42 live + 7 nửa live trên 72 việc có bản dựng; việc đã live đều chơi được)
 
 ---
 Cập nhật: sửa file .md này rồi chạy `python3 dev/handover/reports/owner-bugs/build_pdf.py` (cần Playwright).
