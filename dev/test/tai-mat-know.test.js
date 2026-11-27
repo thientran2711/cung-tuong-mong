@@ -21,6 +21,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   rel:(m,b)=>({aff:aff(m,b),oan:oan(m,b)}),
   hi:()=>{Math.random=()=>0.999},lo:()=>{Math.random=()=>0.0001},back:()=>{Math.random=window.__R0},
   logsSince:n=>S.logs.slice(0,Math.max(0,S.logs.length-n)),
+  day:x=>{if(x){delete x.opz;delete x.opa}},/* a fresh day of the oán pace for that holder (joanpace opz / opa) */
   ensureMine:()=>{if(!(S.staff||[]).some(x=>x.sid!=null))S.staff=(S.staff||[]).concat([mkServ("maid")]);return (S.staff||[]).find(x=>x.sid!=null)}}});
  /* 1 RECRUIT roads */
  const r1=await p.evaluate(()=>{const o={};const L=TK.R();const v=L[0],w=L[1]||L[0];const T=BAL.ag.know.tm;
@@ -53,21 +54,23 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 2 LEARN roads */
  const r2=await p.evaluate(()=>{const o={};const L=TK.R();const v=L[0],w=L[1]||L[0];const K=BAL.ag.know.tm.learn.oan;const d=(a,b)=>({aff:b.aff-a.aff,oan:b.oan-a.oan});
   /* a. a refusal reported (tmRefuse with the tell roll forced) */
-  {const s=TK.free(v);const b0=TK.rel(v,S);const nw=npcWhy;window.npcWhy=()=>true;let t="";try{t=tmRefuse(S,s)}finally{window.npcWhy=nw}o.tell={t,d:d(b0,TK.rel(v,S))}}
+  {TK.day(v);const s=TK.free(v);const b0=TK.rel(v,S);const nw=npcWhy;window.npcWhy=()=>true;let t="";try{t=tmRefuse(S,s)}finally{window.npcWhy=nw}o.tell={t,d:d(b0,TK.rel(v,S))}}
   /* b. Tra xét by an NPC master finds her spy */
   {const s=TK.free(v);s.spyFor="me";const head=(v.staff||[]).find(x=>x.role==="maid"&&srk(x)>=BAL.srvRk.cs);let made=null;if(!head){made=mkServ("maid");made.rk=BAL.srvRk.cs;v.staff.push(made)}
    const b0=TK.rel(v,S);const r=searchMaids(v);o.npcSearch={r:String(r).slice(0,80),gone:!(v.staff||[]).includes(s),d:d(b0,TK.rel(v,S)),hadHead:!!head||(made&&srk(made)>=BAL.srvRk.cs)}}
   /* c. her own servant bought by w: Hỏi thẳng / Theo dõi (spyFound) */
-  {const s=TK.ensureMine();s.spyFor=key(w);S.tmSold=null;const b0=TK.rel(S,w);const bb=spyFound(s);o.found={who:bb===w,sold:knSoldK(s),d:d(b0,TK.rel(S,w))};s.spyFor=null}
+  {TK.day(S);const s=TK.ensureMine();s.spyFor=key(w);S.tmSold=null;const b0=TK.rel(S,w);const bb=spyFound(s);o.found={who:bb===w,sold:knSoldK(s),d:d(b0,TK.rel(S,w))};s.spyFor=null}
   /* d. plant refused at the gate */
-  {const b0=TK.rel(w,S);spyLearn(w,S);o.direct=d(b0,TK.rel(w,S))}
+  {TK.day(w);const b0=TK.rel(w,S);spyLearn(w,S);o.direct=d(b0,TK.rel(w,S));
+   /* oan-pace: each learning is its own cause (lands in the same buổi), the daily cap still holds */const b1=TK.rel(w,S);spyLearn(w,S);spyLearn(w,S);spyLearn(w,S);o.cap={add:TK.rel(w,S).oan-b1.oan,first:o.direct.oan,day:BAL.oanPace&&BAL.oanPace.day}}
   /* e. Mua chuộc refused and told (servant's own «Từ chối, bẩm chủ») */
-  {const s=TK.free(v);const b0=TK.rel(v,S);cnvBribeOpts(s,S,v,BAL.coopBribe.pay).find(x=>x.id==="tell").go();o.cnvTell=d(b0,TK.rel(v,S))}
+  {TK.day(v);const s=TK.free(v);const b0=TK.rel(v,S);cnvBribeOpts(s,S,v,BAL.coopBribe.pay).find(x=>x.id==="tell").go();o.cnvTell=d(b0,TK.rel(v,S))}
   o.K=K;o.aff=BAL.ag.know.tm.oan;return o});
  ok(r2.tell.t==="tell"&&r2.tell.d.oan>0&&r2.tell.d.aff<0,'refusal reported: the master LEARNS → oán up, thiện cảm down',r2.tell);
  ok(r2.npcSearch.gone&&r2.npcSearch.d.oan>0,'an NPC\'s Tra xét finds her spy → that master resents her',r2.npcSearch);
  ok(r2.found.who&&r2.found.sold&&r2.found.d.oan>0,'her two-faced servant found (spyFound): recorded, she learns who bought him, oán toward him',r2.found);
  ok(r2.direct.oan>0&&r2.direct.aff===-r2.aff,'spyLearn: oán + BAL learn.oan, thiện cảm − BAL tm.oan',Object.assign({},r2.direct,{K:r2.K}));
+ ok(r2.cap&&r2.cap.add>0&&(r2.cap.day==null||r2.cap.first+r2.cap.add<=r2.cap.day),'oan-pace × spy learning: a second learning in the same buổi still lands (own cause), the daily cap holds',r2.cap);
  ok(r2.cnvTell.oan>0,'Mua chuộc refused and told: the master resents the briber',r2.cnvTell);
  /* 3 HER OWN turned servant */
  const r3=await p.evaluate(()=>{const o={};const L=TK.R();const v=L[0];const s=TK.ensureMine();s.spyFor=null;S.tmSold=null;
@@ -80,7 +83,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* c. an unfound spy punished (RV-163F law 1: the same confession roll as an NPC master's servDo phat): keeps silent → plain punishment, nothing told;
      confesses → she learns who (found + oán), like an NPC master */
   const R0=roll;let r;try{roll=()=>false;r=servDo(S,"phat",s)}finally{roll=R0}o.phat={r,still:(S.staff||[]).includes(s),tell:/tai mắt|không khai/.test(r)};
-  const b1=TK.rel(S,v);let r2;try{roll=()=>true;r2=servDo(S,"phat",s)}finally{roll=R0}o.conf={r:r2,gone:!(S.staff||[]).includes(s),named:r2.includes(v.name),d:TK.rel(S,v).oan-b1.oan};
+  TK.day(S);const b1=TK.rel(S,v);let r2;try{roll=()=>true;r2=servDo(S,"phat",s)}finally{roll=R0}o.conf={r:r2,gone:!(S.staff||[]).includes(s),named:r2.includes(v.name),d:TK.rel(S,v).oan-b1.oan};
   if(o.conf.gone)(S.staff=S.staff||[]).push(s);
   /* d. the leak sign: once a week */
   S.leakW=null;const a=spyLeak(S,1),bb=spyLeak(S,1);o.leak={a,b:bb};

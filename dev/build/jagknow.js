@@ -352,7 +352,7 @@ function knTmN(e){if(!e||e.sid==null||!S)return;S.tmN=S.tmN||{};S.tmN[e.sid]=(S.
    spyLearn(m, b, aff): m learns b ran a spy on m → oán +BAL.ag.know.tm.learn.oan, thiện cảm −aff (default BAL.ag.know.tm.oan); remembered in
    m.spyKn[key(b)] = week (lazy, old saves load). No notice of its own: the road that found it says what was found. */
 function spyLearn(m,b,aff){try{if(!m||!b||m===b||!S)return 0;if(m!==S&&(!m.alive||m.out))return 0;const T=BAL.ag.know.tm;const a=aff==null?T.oan:aff;
- if(a)affAdd(m,b,-Math.abs(a));oanAdd(m,b,T.learn.oan);m.spyKn=m.spyKn||{};m.spyKn[key(b)]=wk();KN.stat.spyLearn=(KN.stat.spyLearn||0)+1;return T.learn.oan}catch(e){return 0}}
+ const go=()=>{if(a)affAdd(m,b,-Math.abs(a));oanAdd(m,b,T.learn.oan)};/* its own cause: never folded into another cause of the same buổi, only the daily cap (joanpace opOwn, MAIN 179) */typeof opOwn==="function"?opOwn(go):go();m.spyKn=m.spyKn||{};m.spyKn[key(b)]=wk();KN.stat.spyLearn=(KN.stat.spyLearn||0)+1;return T.learn.oan}catch(e){return 0}}
 /* her own two-faced servant found (Theo dõi / Hỏi thẳng / Thử tin giả, Dò xét kẻ hầu …): the discovery is recorded (knSoldFound) and she LEARNS who
    bought him → spyLearn; returns the buyer (or null) so the road can name him */
 function spyFound(s){try{if(!s||s.spyFor==null||s.spyFor==="me")return null;const m=s===S.maid?S:ownerOf(s);const b=byKey(s.spyFor);if(m===S)knSoldFound(s);if(m&&b&&b!==m)spyLearn(m,b);return b&&b!==m?b:null}catch(e){return null}}

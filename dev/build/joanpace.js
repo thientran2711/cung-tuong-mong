@@ -25,11 +25,14 @@ function opNow(){try{return[wk(),bq()]}catch(e){return[0,0]}}
 function opUp(x,y,n){return opStep(x,y,n,"opz",BAL.oanPace)}
 /* the same pace for «ghét»: a fall of liking (thiện cảm, j9 affAdd n < 0) — one bounded step per cause / incident, capped per day (BAL.oanPace.ghet) */
 function opDn(x,y,n){try{if(opOn()&&n>0&&x&&typeof x==="object"){const k=opKey(y);if(k!=null){x.agw=x.agw&&typeof x.agw==="object"?x.agw:{};x.agw[k]=opNow()[0]}}}catch(e){}return opStep(x,y,n,"opa",BAL.oanPace.ghet)}/* + stamps the day of the last fall (x.agw) for the ghét fade below */
+/* OWN CAUSE (MAIN 179 ruling on TAI-MAT-KNOW × oan-pace): the bound is per CAUSE. A road that is its own cause (a spy found, a refused bribe
+   told — jagknow spyLearn) runs inside opOwn: it is NOT folded into another cause of the same incident (buổi); only the daily cap holds it. */
+let OP_OWN=0;function opOwn(f){OP_OWN++;try{return f()}finally{OP_OWN--}}
 function opStep(x,y,n,st,P){if(!opOn()||!(n>0)||!x||typeof x!=="object")return n;try{const k=opKey(y);if(k==null)return n;
  const [w,b]=opNow();const z=x[st]=x[st]&&typeof x[st]==="object"?x[st]:{};
  for(const q in z)if(!Array.isArray(z[q])||z[q][0]<w)delete z[q];
  const e=z[k]||[w,0,b,0];if(e[2]!==b){e[2]=b;e[3]=0}
- const s=P.band?opBand(n,P.band):n;let add=Math.max(0,s-e[3]);add=Math.min(add,Math.max(0,P.day-e[1]));
+ const s=P.band?opBand(n,P.band):n;let add=Math.max(0,OP_OWN?s:s-e[3]);add=Math.min(add,Math.max(0,P.day-e[1]));
  e[3]=Math.round((e[3]+add)*100)/100;e[1]=Math.round((e[1]+add)*100)/100;z[k]=e;return add}catch(err){return n}}
 /* (f) the grudge heat of a toward t (danger without the trait shift) */
 function opHeat(a,t){const H=BAL.net.heat;return Math.max(oan(a,t),t===S?(+a.ghen||0)*H.ghenK:0,Math.max(0,-aff(a,t))*H.affK)}
