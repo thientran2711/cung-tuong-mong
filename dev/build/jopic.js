@@ -343,7 +343,7 @@ function kitOddsBadge(b){try{if(!b||!b.querySelector)return null;const art=b.que
  if(!k){return art.querySelector(":scope > .kodb")}const m=k.querySelector(".kodm");if(!m){k.remove();return null}let bd=art.querySelector(":scope > .kodb");if(!bd){bd=document.createElement("span");bd.className="kodb";art.appendChild(bd)}bd.innerHTML="";bd.appendChild(m);k.remove();return bd}catch(e){console.error("kitOddsBadge",e);return null}}
 window.kitOddsBadge=kitOddsBadge;window.kitOddsBadgeOn=kitOddsBadgeOn;window.kitOddsBadgeHTML=kitOddsBadgeHTML;
 /* every kit card with a picture and a meter, wherever it is built (act cards, event hands, option cards, …): ONE pass per frame after DOM changes moves the meter onto the picture */
-function kitOddsBadgeAll(){try{document.querySelectorAll("button.ka .kat .kodds, button.ka > .kodds").forEach(k=>{const c=k.closest("button.ka");if(c&&c.querySelector(":scope > .kaart"))kitOddsBadge(c)})}catch(e){}}
+function kitOddsBadgeAll(){try{if(typeof kitOffLast==="function")kitOffLast(document)}catch(e){}try{document.querySelectorAll("button.ka .kat .kodds, button.ka > .kodds").forEach(k=>{const c=k.closest("button.ka");if(c&&c.querySelector(":scope > .kaart"))kitOddsBadge(c)})}catch(e){}}
 (function(){let raf=0;const go=()=>{raf=0;kitOddsBadgeAll()};try{new MutationObserver(()=>{if(!raf)raf=requestAnimationFrame(go)}).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}})();
 window.kitOddsBadgeAll=kitOddsBadgeAll;
 (function(){const st=document.createElement("style");st.id="kit-oddsbadge";st.textContent=`
