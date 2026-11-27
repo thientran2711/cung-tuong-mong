@@ -600,3 +600,4 @@ FLIGHT2-S16B life (seat s16 session_01UV1Szhqp1P7gBX2vN1HGfg, ctx ~15 %; iPad 11
 EMP-DAY | reports/emperor-favour-plan.md @f868ff7b | session_01PEhRbuMDVjApgDKJapJENo | DONE (PLAN READY, worker archived) | 2026-11-27T01:25Z
 E-PHUCDUYEN-PLAN | (report only) dev/handover/reports/phucduyen-plan.md | session_01DgYSWmrvcBipCfWarncs3U | RUNNING | 2026-11-27T02:20Z (FOREMAN E ROOT, ordered by MAIN 168/169)
 E-TIER-AUDIT v2 (MERGE vs KEEP-CHOICE column, MAIN 169 order) | dev/handover/reports/tier-audit.md | session_01DgYSWoFVCrpS7YmQGBGr58 | RUNNING | 2026-11-27T02:22Z (FOREMAN E ROOT)
+promo-stack-lr4 BIG rv | review/promo-stack-lr4 d713f162 | session_01D3E3NacPigdjGR1RRt4q3j | RUNNING | 27/11 01:55Z (Foreman D)
