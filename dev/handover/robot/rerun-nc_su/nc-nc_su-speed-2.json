@@ -1,0 +1,3960 @@
+{
+ "job": {
+  "id": "nc-nc_su-speed-2",
+  "origin": "nc",
+  "road": "nc_su",
+  "bot": "rand",
+  "seed": 559343663,
+  "dev": "fold",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "bfa73a6e",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "areaTaps": 720,
+  "dlgScroll": 82,
+  "scrolls": 137,
+  "dlgClose": 232,
+  "infoTaps": 529,
+  "nextNoTurn": 17,
+  "kfocVisits": 37,
+  "taps0": 0,
+  "resumed": [
+   {
+    "at": "2026-11-26T01:27:29.441Z",
+    "buoi": 276,
+    "from": "2026-11-26T01:26:33.187Z"
+   },
+   {
+    "at": "2026-11-26T02:15:08.908Z",
+    "buoi": 296,
+    "from": "2026-11-26T01:33:16.068Z"
+   }
+  ],
+  "mgDragSkip": 2,
+  "freezes": 1,
+  "taps": 2126
+ },
+ "life": {
+  "id": "Hồng nhan bạc mệnh",
+  "type": "death",
+  "fate": "Khó sinh, băng huyết mà chết",
+  "death": true,
+  "age": 21,
+  "year": 4,
+  "rank": 2,
+  "text": "Khó sinh, băng huyết mà chết.",
+  "card": [
+   "✕"
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»",
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»",
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»",
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Khúc nhạc tri âm»TốnkhôngĐượckhôn»",
+   ".dlg «Đeo «Khúc nhạc tri âm»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»",
+   ".dlg «Danh hiệu» «Lui»",
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người» «Xét phẩm: thiếu 3»",
+   ".dlg «Xét phẩm cuối tháng · Tần» «Lui»",
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người» «Sang ngày mới»",
+   ".dlg «Tin trong cung buổi này» «Lui»",
+   ".kmov «Ta biết rồi»",
+   "GONE Ta biết rồi"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "type": "freeze",
+   "msg": "page froze: no harness step for 10 min (page.evaluate hung) at buổi 297",
+   "n": 1,
+   "at": "2026-11-26T01:44:00.255Z",
+   "rss": {
+    "totalMB": 5837,
+    "rendererMB": 5165
+   }
+  }
+ ],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 306687,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 407262,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 150,
+   "year": 2,
+   "chars": 438895,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 200,
+   "year": 2,
+   "chars": 519465,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 250,
+   "year": 2,
+   "chars": 570049,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 276,
+   "year": null,
+   "chars": 619870,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 296,
+   "year": null,
+   "chars": 736665,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 346,
+   "year": 3,
+   "chars": 942456,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 396,
+   "year": 3,
+   "chars": 1094854,
+   "key": "hclh-save-v2-1"
+  },
+  {
+   "buoi": 446,
+   "year": 4,
+   "chars": 1200917,
+   "key": "hclh-save-v2-1"
+  }
+ ],
+ "buoi": 485,
+ "steps": 5881,
+ "status": [],
+ "_loopAt": 1795662465398,
+ "_snapAt": 1795662422699,
+ "trace": [
+  [
+   2655,
+   ".dlg «Phụ tuyến · Tân quân lập uy · Chương 6 · Hồi 1/2» «Thức cùng ngài, khuyên giữ bình tĩnhRất vữngTốnkhô»"
+  ],
+  [
+   2655,
+   ".dlg «Giải bày» «Lui»"
+  ],
+  [
+   2659,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Số lần ân thưởng2»"
+  ],
+  [
+   2659,
+   ".dlg «Ân thưởng» «Lui»"
+  ],
+  [
+   2661,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «2Cung nhân»"
+  ],
+  [
+   2661,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «NhiThiện cảm 66»"
+  ],
+  [
+   2662,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Sang ngày mới»"
+  ],
+  [
+   2664,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2666,
+   "GONE Ta biết rồi"
+  ],
+  [
+   2667,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2670,
+   "AREA 446,255"
+  ],
+  [
+   2671,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2672,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2672,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2672,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2673,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2673,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2674,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2676,
+   ".dlg «Lời nhận xét» «Lui»"
+  ],
+  [
+   2680,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Cung nữ tam đẳngPhẩm Nhi»"
+  ],
+  [
+   2681,
+   ".kfoc «Tiến cử · Tốn 1 khắc · 30 bạc»"
+  ],
+  [
+   2683,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Có thai:tháng bảy»"
+  ],
+  [
+   2684,
+   ".dlg «Có thai: tháng bảy» «Lui»"
+  ],
+  [
+   2686,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Sang buổi»"
+  ],
+  [
+   2688,
+   ".dlg «Chuyện trong cung» «Gọi Cung nữ thân tín tam đẳng Xuân Đào dọn, mời nà»"
+  ],
+  [
+   2689,
+   ".dlg «Hội phối đồ · Phú quý» «Cáo bệnh, không dựTốnDanh -1ĐượcSức +3»"
+  ],
+  [
+   2691,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Mệnh truyện»"
+  ],
+  [
+   2692,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Tâm trạngBình thản-1»"
+  ],
+  [
+   2692,
+   ".dlg «Tâm trạng · Ta» «Lui»"
+  ],
+  [
+   2694,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Tin báo: 20 tin mới»"
+  ],
+  [
+   2694,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   2697,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Sang buổi»"
+  ],
+  [
+   2699,
+   ".dlg «Kẻ hầu xin» «Cho 10 lượngRất vữngTốnBạc -10Đượcngười ấy có thiệ»"
+  ],
+  [
+   2699,
+   ".dlg «Lễ Phật đản» «Lễ Phật rồi vềTốnkhôngĐượckhông»"
+  ],
+  [
+   2702,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Hiểm sinh nởThấp»"
+  ],
+  [
+   2702,
+   ".dlg «Hiểm sinh nở Thấp» «Lui»"
+  ],
+  [
+   2704,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Giao tình»"
+  ],
+  [
+   2704,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Hành sự»"
+  ],
+  [
+   2704,
+   ".kfoc «Tiến cử · Tốn 1 khắc · 30 bạc»"
+  ],
+  [
+   2707,
+   ".kfoc «Giao thiệp 5/6»"
+  ],
+  [
+   2707,
+   ".kfoc «Giao việc phòng bị · Tốn 1 khắc»"
+  ],
+  [
+   2708,
+   ".kfoc «Lui»"
+  ],
+  [
+   2711,
+   ".dlg «Phòng bị» «Theo dõi một ngườiRất vữngTốnkhôngĐượcbám theo một»"
+  ],
+  [
+   2713,
+   ".dlg «Phòng bị» «Theo dõi Tần Tôn Trầm BíchRất vữngTốnkhôngĐượcthấy»"
+  ],
+  [
+   2716,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Sang buổi»"
+  ],
+  [
+   2719,
+   ".dlg «Phụ tuyến · Thư muội muội: xin cây trâm cài · Lời » «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   2722,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Hôm nay mặt mộc»"
+  ],
+  [
+   2724,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «2Cung nhân»"
+  ],
+  [
+   2724,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Tư trang»"
+  ],
+  [
+   2725,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Sang ngày mới»"
+  ],
+  [
+   2727,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2728,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2732,
+   "GONE Ta biết rồi"
+  ],
+  [
+   2734,
+   "AREA 633,521"
+  ],
+  [
+   2735,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2736,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2736,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2736,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2737,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2737,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2738,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2742,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 4 ngườ» «Lịch tháng»"
+  ],
+  [
+   2742,
+   ".dlg «Lịch tháng» «ngày 24»"
+  ],
+  [
+   2743,
+   ".dlg «Lịch tháng» «ngày 27»"
+  ],
+  [
+   2743,
+   ".dlg «Lịch tháng» «ngày 30»"
+  ],
+  [
+   2743,
+   ".dlg «Lịch tháng» «ngày 23»"
+  ],
+  [
+   2744,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   2746,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 4 ngườ» «Hành sự»"
+  ],
+  [
+   2746,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 4 ngườ» «Lễ nghi 2/3»"
+  ],
+  [
+   2747,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 4 ngườ» «Sang buổi»"
+  ],
+  [
+   2749,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   2749,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   2750,
+   ".kfoc «Đáp trả sắc sảo»"
+  ],
+  [
+   2752,
+   ".dlg «Tết Đoan ngọ · Lời mời: Thi thơ viếng Khuất Nguyên» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»"
+  ],
+  [
+   2752,
+   ".kfoc «Lui»"
+  ],
+  [
+   2756,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 4 ngườ» «Chọn chính mình»"
+  ],
+  [
+   2757,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 4 ngườ» «Sang buổi»"
+  ],
+  [
+   2759,
+   ".dlg «Lập công · Vạch mưu» «Giữ chứng cứ, chờ thờiRất vữngTốnkhôngĐượcchứng cứ»"
+  ],
+  [
+   2759,
+   ".dlg «Lễ Phật đản» «Lui»"
+  ],
+  [
+   2763,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Tai mắt1»"
+  ],
+  [
+   2763,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   2766,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Sang buổi»"
+  ],
+  [
+   2768,
+   ".dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»"
+  ],
+  [
+   2770,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Hành sự»"
+  ],
+  [
+   2771,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Dư đồ»"
+  ],
+  [
+   2772,
+   ".mapsc «Ra vào cung cấm»"
+  ],
+  [
+   2773,
+   ".dlg «Ra vào cung cấm» «Lui»"
+  ],
+  [
+   2774,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2776,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2778,
+   "GONE Ta biết rồi"
+  ],
+  [
+   2781,
+   "AREA 627,545"
+  ],
+  [
+   2782,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2784,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2785,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2786,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2786,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2786,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2787,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2788,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2792,
+   ".mapsc «Lật thẻKhông có»"
+  ],
+  [
+   2792,
+   ".dlg «Lật thẻ: Không có» «Lui»"
+  ],
+  [
+   2794,
+   ".mapsc «Lịch tháng»"
+  ],
+  [
+   2794,
+   ".dlg «Lịch tháng» «ngày 26»"
+  ],
+  [
+   2795,
+   ".dlg «Lịch tháng» «ngày 20: Hết hạn khảo hạch tấn phong»"
+  ],
+  [
+   2795,
+   ".dlg «Lịch tháng» «Dâng quà Thái hậu»"
+  ],
+  [
+   2795,
+   ".dlg «Lịch tháng» «ngày 26»"
+  ],
+  [
+   2795,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   2797,
+   ".mapsc «ve kêu râm ran»"
+  ],
+  [
+   2800,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   2802,
+   ".dlg «Có người đến» «Đáp trả sắc sảoCó cơTốnkhôngĐượcthêm thể diện tron»"
+  ],
+  [
+   2804,
+   ".dlg «Bổng lộc tháng tư» «Bớt lễ nghĩaRất vữngTốnkhôngĐượccó thêm bạcMấtmất »"
+  ],
+  [
+   2807,
+   ".mapsc «Vĩnh Hòa4 bóng · 2 khắc»"
+  ],
+  [
+   2807,
+   ".mapsc «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   2808,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   2810,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   2812,
+   ".dlg «Lễ tấn phong Quý nhân Quách Vân Khanh» «Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta »"
+  ],
+  [
+   2813,
+   ".dlg «Y phục dự Tết Đoan ngọ» «Sai người mua trâm đồng mai hoa (Vàng) ở Nội vụ ph»"
+  ],
+  [
+   2814,
+   ".dlg «Yến đầy tháng công chúa» «Cáo bệnh không tớiTốnkhôngĐượcSức +3·giữ sứcKèmTri»"
+  ],
+  [
+   2817,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   2819,
+   ".dlg «Việc khó xử» «Khóc kể với Hoàng thượngRất vữngTốnkhôngĐượcHoàng »"
+  ],
+  [
+   2819,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   2821,
+   ".dlg «Tết Đoan ngọ · Thi thơ viếng Khuất Nguyên» «Lui»"
+  ],
+  [
+   2823,
+   ".dlg «Có người tìm đến» «Không tiếpTốnkhôngĐượcQuý nhân Trình Ngân Linh ra »"
+  ],
+  [
+   2825,
+   ".mapsc «Hoài Nhu điệnChính điện · 11 bóng ngườiNgười ở: Ph»"
+  ],
+  [
+   2826,
+   ".dlg «Chọn người theo hầu» «Cung nữ thân tín tam đẳngXuân ĐàoTốnkhôngĐượckhông»"
+  ],
+  [
+   2827,
+   ".dlg «Chọn người theo hầu» «Đi một mìnhTốnkhôngĐượcviệc ta làm bên ngoài được »"
+  ],
+  [
+   2827,
+   ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -5Đượckhông»"
+  ],
+  [
+   2828,
+   ".dlg «Vĩnh Hòa cung» «Bái kiến Phi rồi vàoTốn3 khắcĐượcChi: thiện cảm +1»"
+  ],
+  [
+   2831,
+   ".dlg «Kỳ ngộ» «Giữ nàng ta làm tai mắtRất vữngTốn1 khắcĐượcthêm m»"
+  ],
+  [
+   2831,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   2835,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2838,
+   "GONE Ta biết rồi"
+  ],
+  [
+   2838,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2842,
+   "AREA 582,375"
+  ],
+  [
+   2843,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2844,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2844,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2844,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2845,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2845,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2846,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2850,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Hậu cung»"
+  ],
+  [
+   2851,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Nhi»"
+  ],
+  [
+   2851,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Hậu cung»"
+  ],
+  [
+   2852,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Sang buổi»"
+  ],
+  [
+   2854,
+   ".dlg «Phụ tuyến · Hòa giải Quý nhân Trình Ngân Linh với » «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   2854,
+   ".dlg «Yến đầy tháng công chúa» «Lui»"
+  ],
+  [
+   2859,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Sang buổi»"
+  ],
+  [
+   2861,
+   ".dlg «Hoàng thượng» «Xin ngài đừng quở thêm, chuyện nhỏ thôiRất vữngTốn»"
+  ],
+  [
+   2862,
+   ".dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»"
+  ],
+  [
+   2864,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Hoàng tự»"
+  ],
+  [
+   2865,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Quý tộc kén rể · kén dâu»"
+  ],
+  [
+   2865,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Bạc77Sức100/100»"
+  ],
+  [
+   2865,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   2867,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Sang buổi»"
+  ],
+  [
+   2869,
+   ".dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»"
+  ],
+  [
+   2872,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Bạc77Sức100/100»"
+  ],
+  [
+   2872,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   2874,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 1 ngườ» «Sang ngày mới»"
+  ],
+  [
+   2876,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2877,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2877,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2880,
+   "AREA 136,371"
+  ],
+  [
+   2881,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2882,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2882,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2883,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2883,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2883,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2885,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2888,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Giao tình»"
+  ],
+  [
+   2889,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Bạc77Sức100/100»"
+  ],
+  [
+   2889,
+   ".dlg «Bạc» «Lui»"
+  ],
+  [
+   2891,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Quẻ Thượng (Con cái)»"
+  ],
+  [
+   2891,
+   ".dlg «Quẻ Thượng · Con cái» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   2891,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   2893,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 2 ngườ» «Sang buổi»"
+  ],
+  [
+   2895,
+   ".dlg «Có người đến» «Thu làm tai mắtRất vữngTốnBạc -20Đượccó tai mắt tr»"
+  ],
+  [
+   2896,
+   ".dlg «Có người bán tin» «Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy»"
+  ],
+  [
+   2896,
+   ".dlg «Có người tìm đến» «Không tiếpTốnkhôngĐượcQuý nhân Khổng Mặc Nhi ra về»"
+  ],
+  [
+   2899,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 7 ngườ» «Sang buổi»"
+  ],
+  [
+   2902,
+   ".dlg «Hội Phượng · Lời mời: Thi nướng bánh mang theo cho» «Không dựRất vữngTốnkhôngĐượckhôngGợi ýkhông được m»"
+  ],
+  [
+   2904,
+   "page «Cảnh Phúc cung · Thanh Thu trai · Ở đây còn 4 ngườ» «Dư đồ»"
+  ],
+  [
+   2905,
+   ".mapsc «Hạ · còn 4 khắc · đi gần 1 khắc, xa 2 · bóng: ngườ»"
+  ],
+  [
+   2906,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   2908,
+   ".dlg «Có người đến» «Lui»"
+  ],
+  [
+   2912,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   2914,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   2916,
+   "GONE Ta biết rồi"
+  ],
+  [
+   2919,
+   "AREA 476,382"
+  ],
+  [
+   2920,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   2922,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2923,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2923,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   2924,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2924,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   2924,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   2926,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   2928,
+   "#kmrew «Nhận»"
+  ],
+  [
+   2932,
+   ".mapsc «Thái y viện6 bóng · 2 khắc»"
+  ],
+  [
+   2933,
+   ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -5Đượckhông»"
+  ],
+  [
+   2936,
+   ".dlg «Kỳ ngộ» «Sửa lời cho nàng ta, dạy ngắt câuRất vữngTốn1 khắc»"
+  ],
+  [
+   2937,
+   "#klearnov «Tiếp theo»"
+  ],
+  [
+   2938,
+   ".dlg «Kỳ ngộ» «Lui»"
+  ],
+  [
+   2940,
+   ".kfoc «Tiếp ▸»"
+  ],
+  [
+   2940,
+   ".kfoc «Mặc kệ»"
+  ],
+  [
+   2941,
+   ".kfoc «Mưu kế 3/3»"
+  ],
+  [
+   2941,
+   ".kfoc «Lui»"
+  ],
+  [
+   2945,
+   "page «Thái y viện · Ở đây còn 6 người.» «Tài nghệ»"
+  ],
+  [
+   2946,
+   "page «Thái y viện · Ở đây còn 6 người.» «Sang buổi»"
+  ],
+  [
+   2948,
+   ".dlg «Bổng lộc tháng năm» «Chu toàn lễ nghĩaRất vữngTốnBạc -10Đượcthêm thể di»"
+  ],
+  [
+   2949,
+   ".dlg «Lễ tấn phong Tần Trình Ngân Linh» «Đến chúc mừngTốnSức -5Đượcthiện cảm +5·nàng ta nhớ»"
+  ],
+  [
+   2952,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người» «Về Dư đồ»"
+  ],
+  [
+   2953,
+   ".mapsc «Ngự thiện phòng1 bóng · 2 khắc»"
+  ],
+  [
+   2953,
+   ".dlg «Chọn người theo hầu» «Cung nữ thân tín tam đẳngXuân ĐàoTốnkhôngĐượckhông»"
+  ],
+  [
+   2954,
+   ".dlg «Chọn người theo hầu» «Đi một mìnhTốnkhôngĐượcviệc ta làm bên ngoài được »"
+  ],
+  [
+   2955,
+   ".dlg «Ra ngoài khi mặc trung y?» «Ở lạiTốnkhôngĐượckhôngGhi chú(thay y phục trong Tư»"
+  ],
+  [
+   2957,
+   ".mapsc «Ra vào cung cấm»"
+  ],
+  [
+   2958,
+   ".dlg «Ra vào cung cấm» «Lui»"
+  ],
+  [
+   2960,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   2962,
+   ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -5Đượckhông»"
+  ],
+  [
+   2962,
+   ".dlg «Thỉnh bình an mạch» «Lui»"
+  ],
+  [
+   2966,
+   ".mapsc «Nguy hiểm chung: 89»"
+  ],
+  [
+   2967,
+   ".dlg «Nguy hiểm chung» «Đóng cửa giữ mìnhTốnSủng -3Được2 tuần: mưu hại nhắ»"
+  ],
+  [
+   2970,
+   ".mapsc «Ngự hoa viên!11 bóng · 2 khắc»"
+  ],
+  [
+   2970,
+   ".dlg «Ra ngoài khi mặc trung y?» «Ở lạiTốnkhôngĐượckhôngGhi chú(thay y phục trong Tư»"
+  ],
+  [
+   2973,
+   ".mapsc «Nội vụ phủ2 bóng · 2 khắc»"
+  ],
+  [
+   2974,
+   ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -2Đượckhông»"
+  ],
+  [
+   2978,
+   "page «Nội vụ phủ · Ở đây còn 2 người.» «Sang buổi»"
+  ],
+  [
+   2980,
+   ".dlg «Phụ tuyến · Tân quân lập uy · Chương 6 · Hồi 2/2» «Ở bên an ủi bệ hạRất vữngTốnkhôngĐượcHoàng thượng »"
+  ],
+  [
+   2981,
+   ".dlg «Thi tài ngày Thất tịch · Lời mời» «Ghi tên dâng thơ (theo Tài, Thi)Mong manhTốnkhôngĐ»"
+  ],
+  [
+   2982,
+   ".dlg «Hội Phượng · Thi nướng bánh mang theo cho tướng sĩ» «Lui»"
+  ],
+  [
+   2986,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người» «Mục tiêu chương»"
+  ],
+  [
+   2987,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   2987,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   2989,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Khúc nhạc tri âm»TốnkhôngĐượckhôn»"
+  ],
+  [
+   2990,
+   ".dlg «Đeo «Khúc nhạc tri âm»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   2992,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Khúc nhạc tri âm»TốnkhôngĐượckhôn»"
+  ],
+  [
+   2992,
+   ".dlg «Đeo «Khúc nhạc tri âm»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   2993,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Khúc nhạc tri âm»TốnkhôngĐượckhôn»"
+  ],
+  [
+   2994,
+   ".dlg «Đeo «Khúc nhạc tri âm»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   2995,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   2999,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người» «Lịch tháng»"
+  ],
+  [
+   2999,
+   ".dlg «Lịch tháng» «ngày 22»"
+  ],
+  [
+   3000,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   3000,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   3000,
+   ".dlg «Lịch tháng» «ngày 11: Hội Phượng»"
+  ],
+  [
+   3003,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   3004,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người» «Chọn chính mình»"
+  ],
+  [
+   3005,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người» «Sang ngày mới»"
+  ],
+  [
+   3006,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3009,
+   "GONE Ta biết rồi"
+  ],
+  [
+   3009,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3013,
+   "AREA 569,830"
+  ],
+  [
+   3014,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   3016,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3017,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3017,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3017,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3018,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3020,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3023,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người» «Tài nghệ»"
+  ],
+  [
+   3024,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người» «Học tập · Tài nghệHọc tập · Tài nghệHọc với thầyⓘT»"
+  ],
+  [
+   3025,
+   ".dlg «Học Cầm: ai dạy?» «Nhạc sư Giáo phườngTốn2 khắc·Sức -10·Bạc -6Đượctiế»"
+  ],
+  [
+   3025,
+   ".dlg «Học Cầm: làm gì?» «Làm»"
+  ],
+  [
+   3026,
+   ".dlg «Khúc «Nguyệt hạ»: dùng vật liệu gì?» «Khúc «Nguyệt hạ» · giấy thườngTốnkhôngĐượckhôngGhi»"
+  ],
+  [
+   3026,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   3026,
+   "AREA 496,631"
+  ],
+  [
+   3027,
+   "AREA 225,575"
+  ],
+  [
+   3027,
+   "AREA 212,422"
+  ],
+  [
+   3028,
+   "AREA 226,447"
+  ],
+  [
+   3029,
+   "AREA 522,592"
+  ],
+  [
+   3029,
+   "AREA 565,658"
+  ],
+  [
+   3029,
+   "AREA 478,344"
+  ],
+  [
+   3030,
+   "AREA 500,423"
+  ],
+  [
+   3030,
+   "AREA 203,461"
+  ],
+  [
+   3030,
+   "AREA 338,462"
+  ],
+  [
+   3031,
+   "AREA 406,664"
+  ],
+  [
+   3031,
+   "AREA 382,336"
+  ],
+  [
+   3031,
+   "AREA 369,528"
+  ],
+  [
+   3032,
+   "AREA 598,391"
+  ],
+  [
+   3032,
+   "AREA 323,386"
+  ],
+  [
+   3032,
+   "AREA 516,480"
+  ],
+  [
+   3033,
+   "AREA 485,549"
+  ],
+  [
+   3033,
+   "AREA 542,341"
+  ],
+  [
+   3034,
+   "AREA 300,397"
+  ],
+  [
+   3034,
+   "AREA 595,431"
+  ],
+  [
+   3034,
+   "AREA 443,644"
+  ],
+  [
+   3035,
+   "AREA 419,336"
+  ],
+  [
+   3035,
+   "AREA 301,624"
+  ],
+  [
+   3035,
+   "AREA 597,667"
+  ],
+  [
+   3036,
+   "AREA 493,393"
+  ],
+  [
+   3036,
+   "AREA 529,517"
+  ],
+  [
+   3036,
+   "AREA 336,372"
+  ],
+  [
+   3037,
+   "AREA 298,651"
+  ],
+  [
+   3037,
+   "AREA 282,411"
+  ],
+  [
+   3037,
+   "AREA 486,533"
+  ],
+  [
+   3038,
+   "AREA 289,622"
+  ],
+  [
+   3038,
+   "AREA 368,505"
+  ],
+  [
+   3038,
+   "AREA 424,511"
+  ],
+  [
+   3039,
+   "AREA 458,685"
+  ],
+  [
+   3039,
+   "AREA 408,427"
+  ],
+  [
+   3040,
+   "AREA 420,513"
+  ],
+  [
+   3040,
+   "AREA 275,542"
+  ],
+  [
+   3040,
+   "AREA 557,615"
+  ],
+  [
+   3041,
+   "AREA 425,529"
+  ],
+  [
+   3041,
+   "AREA 239,390"
+  ],
+  [
+   3042,
+   "AREA 232,552"
+  ],
+  [
+   3042,
+   "AREA 188,460"
+  ],
+  [
+   3042,
+   "AREA 225,495"
+  ],
+  [
+   3043,
+   "AREA 141,407"
+  ],
+  [
+   3043,
+   "AREA 195,651"
+  ],
+  [
+   3043,
+   "AREA 529,343"
+  ],
+  [
+   3044,
+   "AREA 414,488"
+  ],
+  [
+   3044,
+   "AREA 322,381"
+  ],
+  [
+   3044,
+   "AREA 203,686"
+  ],
+  [
+   3045,
+   "AREA 449,376"
+  ],
+  [
+   3045,
+   "AREA 207,668"
+  ],
+  [
+   3045,
+   "AREA 312,384"
+  ],
+  [
+   3046,
+   "AREA 132,626"
+  ],
+  [
+   3046,
+   "AREA 534,641"
+  ],
+  [
+   3046,
+   "AREA 603,503"
+  ],
+  [
+   3047,
+   "AREA 397,424"
+  ],
+  [
+   3047,
+   "AREA 176,442"
+  ],
+  [
+   3048,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   3049,
+   ".kmov «Nhận»"
+  ],
+  [
+   3051,
+   "GONE Nhận"
+  ],
+  [
+   3054,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người» «Quẻ Hạ hạ (Mưu kế)»"
+  ],
+  [
+   3054,
+   ".dlg «Quẻ Hạ hạ · Mưu kế» «Gieo lạiTốnBạc -10·1 khắcĐượckhông»"
+  ],
+  [
+   3055,
+   ".dlg «Gieo lại quẻ» «Lui»"
+  ],
+  [
+   3057,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người» «Sang buổi»"
+  ],
+  [
+   3059,
+   ".dlg «Ra ngoài khi mặc trung y?» «Ở lạiTốnkhôngĐượckhôngGhi chú(thay y phục trong Tư»"
+  ],
+  [
+   3060,
+   ".dlg «Phụ tuyến · Chép lại sổ công đức bị nhòe · Lời nhờ» «Khéo từ chốiRất vữngTốnkhôngĐượcdưỡng sức, giữ sức»"
+  ],
+  [
+   3062,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người» «Dư đồ»"
+  ],
+  [
+   3063,
+   ".mapsc «Sang buổi»"
+  ],
+  [
+   3065,
+   ".dlg «Sắp tới: Thi tài ngày Thất tịch» «Lui»"
+  ],
+  [
+   3067,
+   ".mapsc «Diên Huy6 bóng · 2 khắc»"
+  ],
+  [
+   3067,
+   ".mapsc «Nguy hiểm chung: 88»"
+  ],
+  [
+   3068,
+   ".dlg «Nguy hiểm chung» «Biếu quà làm lànhTốnkhôngĐượcHuệ hoàng quý phi Yến»"
+  ],
+  [
+   3069,
+   ".dlg «Biếu quà làm lành» «Lễ bạcTốnBạc -48ĐượcHuệ hoàng quý phi Yến Uyển Nin»"
+  ],
+  [
+   3071,
+   ".mapsc «Hành sự»"
+  ],
+  [
+   3073,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 2 người» «Sang buổi»"
+  ],
+  [
+   3075,
+   ".dlg «Chuyện trong cung» «Can Thái hậu chớ tinKhó lườngTốnkhôngĐượcđược tiến»"
+  ],
+  [
+   3078,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người» «Mục tiêu chương»"
+  ],
+  [
+   3079,
+   ".dlg «Danh hiệu» «Danh hiệu 4/35»"
+  ],
+  [
+   3079,
+   ".dlg «Danh hiệu» «Danh hiệu 4/35»"
+  ],
+  [
+   3079,
+   ".dlg «Danh hiệu» «Danh hiệu 4/35»"
+  ],
+  [
+   3080,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Khúc nhạc tri âm»TốnkhôngĐượckhôn»"
+  ],
+  [
+   3081,
+   ".dlg «Đeo «Khúc nhạc tri âm»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   3082,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   3086,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người» «Tin báo: 20 tin mới»"
+  ],
+  [
+   3086,
+   ".dlg «Tin báo» «Để ta xemTốnkhôngĐượckhông»"
+  ],
+  [
+   3090,
+   ".mapsc «Ân tình (đêm)0»"
+  ],
+  [
+   3090,
+   ".dlg «Ân tình (đêm)» «Lui»"
+  ],
+  [
+   3092,
+   ".mapsc «Sang ngày mới»"
+  ],
+  [
+   3094,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3096,
+   "GONE Ta biết rồi"
+  ],
+  [
+   3097,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3101,
+   "AREA 373,582"
+  ],
+  [
+   3102,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   3103,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3103,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3103,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3104,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3104,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3106,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3109,
+   ".mapsc «Ra vào cung cấm»"
+  ],
+  [
+   3110,
+   ".dlg «Ra vào cung cấm» «Lui»"
+  ],
+  [
+   3111,
+   ".mapsc «nắng sớm oi ả»"
+  ],
+  [
+   3114,
+   ".mapsc «Kính sự phòng4 bóng · 2 khắc»"
+  ],
+  [
+   3115,
+   ".dlg «Ra ngoài khi mặc trung y?» «Vẫn điTốnDanh -5Đượckhông»"
+  ],
+  [
+   3120,
+   "page «Kính sự phòng · Ở đây còn 4 người.» «Sang buổi»"
+  ],
+  [
+   3122,
+   ".dlg «Tết Thất tịch · Lời mời: Thi hát khúc Thất tịch» «Ghi tên dự thi hátRất vữngTốnkhôngĐượcđoạt giải, H»"
+  ],
+  [
+   3123,
+   ".dlg «Ra ngoài khi mặc trung y?» «Ở lạiTốnkhôngĐượckhôngGhi chú(thay y phục trong Tư»"
+  ],
+  [
+   3126,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 4 người» «Tài nghệ»"
+  ],
+  [
+   3127,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 4 người» «Tư trang»"
+  ],
+  [
+   3127,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 4 người» «Sang buổi»"
+  ],
+  [
+   3132,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 3 người» «Sang buổi»"
+  ],
+  [
+   3134,
+   ".dlg «Việc khó xử» «Đứng về phía Phế phi Tôn Trầm BíchRất vữngTốnkhông»"
+  ],
+  [
+   3136,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người» «Lịch tháng»"
+  ],
+  [
+   3137,
+   ".dlg «Lịch tháng» «ngày 20»"
+  ],
+  [
+   3137,
+   ".dlg «Lịch tháng» «ngày 26»"
+  ],
+  [
+   3137,
+   ".dlg «Lịch tháng» «ngày 28»"
+  ],
+  [
+   3138,
+   ".dlg «Lịch tháng» «ngày 29»"
+  ],
+  [
+   3138,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   3140,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người» «Mục tiêu chương»"
+  ],
+  [
+   3140,
+   ".dlg «Danh hiệu» «Danh hiệu 4/35»"
+  ],
+  [
+   3141,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   3141,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   3142,
+   ".dlg «Danh hiệu» «Đeo «Trăng soi rèm ngọc»TốnkhôngĐượckhôngGhi chúch»"
+  ],
+  [
+   3143,
+   ".dlg «Đeo «Trăng soi rèm ngọc»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   3144,
+   ".dlg «Danh hiệu» «Đổi phần thưởng «Khúc nhạc tri âm»TốnkhôngĐượckhôn»"
+  ],
+  [
+   3144,
+   ".dlg «Đeo «Khúc nhạc tri âm»» «Quay lạiTốnkhôngĐượckhôngGhi chúchọn rồi xem kết q»"
+  ],
+  [
+   3145,
+   ".dlg «Danh hiệu» «Lui»"
+  ],
+  [
+   3149,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người» «Xét phẩm: thiếu 3»"
+  ],
+  [
+   3149,
+   ".dlg «Xét phẩm cuối tháng · Tần» «Lui»"
+  ],
+  [
+   3151,
+   "page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người» «Sang ngày mới»"
+  ],
+  [
+   3152,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   3154,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   3156,
+   "GONE Ta biết rồi"
+  ]
+ ],
+ "_started": true,
+ "_ckAt": 1795662407789,
+ "_ckB": 482,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1212,
+   "rendererMB": 560,
+   "heapMB": 125,
+   "dom": 3210,
+   "q": 3,
+   "lsK": 4
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 1919,
+   "rendererMB": 1090,
+   "heapMB": 125,
+   "dom": 926,
+   "q": 0,
+   "lsK": 161
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 1952,
+   "rendererMB": 1087,
+   "heapMB": 125,
+   "dom": 895,
+   "q": 0,
+   "lsK": 203
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 2085,
+   "rendererMB": 1178,
+   "heapMB": 125,
+   "dom": 1117,
+   "q": 0,
+   "lsK": 266
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 2244,
+   "rendererMB": 1308,
+   "heapMB": 125,
+   "dom": 1069,
+   "q": 1,
+   "lsK": 296
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "totalMB": 2271,
+   "rendererMB": 1349,
+   "heapMB": 125,
+   "dom": 923,
+   "q": 0,
+   "lsK": 294
+  },
+  {
+   "buoi": 31,
+   "y": 1,
+   "totalMB": 2240,
+   "rendererMB": 1331,
+   "heapMB": 125,
+   "dom": 911,
+   "q": 0,
+   "lsK": 304
+  },
+  {
+   "buoi": 36,
+   "y": 1,
+   "totalMB": 2298,
+   "rendererMB": 1391,
+   "heapMB": 125,
+   "dom": 929,
+   "q": 0,
+   "lsK": 315
+  },
+  {
+   "buoi": 41,
+   "y": 1,
+   "totalMB": 2348,
+   "rendererMB": 1411,
+   "heapMB": 125,
+   "dom": 1183,
+   "q": 0,
+   "lsK": 349
+  },
+  {
+   "buoi": 46,
+   "y": 1,
+   "totalMB": 2350,
+   "rendererMB": 1420,
+   "heapMB": 125,
+   "dom": 891,
+   "q": 0,
+   "lsK": 330
+  },
+  {
+   "buoi": 51,
+   "y": 1,
+   "totalMB": 2311,
+   "rendererMB": 1413,
+   "heapMB": 125,
+   "dom": 835,
+   "q": 0,
+   "lsK": 368
+  },
+  {
+   "buoi": 56,
+   "y": 1,
+   "totalMB": 2347,
+   "rendererMB": 1446,
+   "heapMB": 125,
+   "dom": 835,
+   "q": 0,
+   "lsK": 385
+  },
+  {
+   "buoi": 61,
+   "y": 1,
+   "totalMB": 2166,
+   "rendererMB": 1237,
+   "heapMB": 125,
+   "dom": 1152,
+   "q": 0,
+   "lsK": 405
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "totalMB": 2237,
+   "rendererMB": 1331,
+   "heapMB": 125,
+   "dom": 868,
+   "q": 0,
+   "lsK": 390
+  },
+  {
+   "buoi": 71,
+   "y": 1,
+   "totalMB": 2314,
+   "rendererMB": 1435,
+   "heapMB": 125,
+   "dom": 968,
+   "q": 0,
+   "lsK": 409
+  },
+  {
+   "buoi": 76,
+   "y": 1,
+   "totalMB": 2272,
+   "rendererMB": 1393,
+   "heapMB": 125,
+   "dom": 845,
+   "q": 0,
+   "lsK": 433
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "totalMB": 2334,
+   "rendererMB": 1420,
+   "heapMB": 125,
+   "dom": 1140,
+   "q": 0,
+   "lsK": 429
+  },
+  {
+   "buoi": 86,
+   "y": 1,
+   "totalMB": 2235,
+   "rendererMB": 1344,
+   "heapMB": 125,
+   "dom": 967,
+   "q": 0,
+   "lsK": 428
+  },
+  {
+   "buoi": 91,
+   "y": 1,
+   "totalMB": 2241,
+   "rendererMB": 1345,
+   "heapMB": 125,
+   "dom": 839,
+   "q": 0,
+   "lsK": 439
+  },
+  {
+   "buoi": 96,
+   "y": 1,
+   "totalMB": 2241,
+   "rendererMB": 1354,
+   "heapMB": 125,
+   "dom": 953,
+   "q": 0,
+   "lsK": 447
+  },
+  {
+   "buoi": 101,
+   "y": 1,
+   "totalMB": 2040,
+   "rendererMB": 1105,
+   "heapMB": 125,
+   "dom": 1302,
+   "q": 0,
+   "lsK": 467
+  },
+  {
+   "buoi": 106,
+   "y": 1,
+   "totalMB": 2090,
+   "rendererMB": 1190,
+   "heapMB": 125,
+   "dom": 904,
+   "q": 0,
+   "lsK": 447
+  },
+  {
+   "buoi": 111,
+   "y": 1,
+   "totalMB": 2140,
+   "rendererMB": 1233,
+   "heapMB": 125,
+   "dom": 867,
+   "q": 0,
+   "lsK": 471
+  },
+  {
+   "buoi": 116,
+   "y": 1,
+   "totalMB": 2093,
+   "rendererMB": 1186,
+   "heapMB": 125,
+   "dom": 907,
+   "q": 0,
+   "lsK": 483
+  },
+  {
+   "buoi": 121,
+   "y": 2,
+   "totalMB": 2331,
+   "rendererMB": 1394,
+   "heapMB": 125,
+   "dom": 1259,
+   "q": 0,
+   "lsK": 502
+  },
+  {
+   "buoi": 126,
+   "y": 2,
+   "totalMB": 2310,
+   "rendererMB": 1398,
+   "heapMB": 125,
+   "dom": 913,
+   "q": 0,
+   "lsK": 494
+  },
+  {
+   "buoi": 131,
+   "y": 2,
+   "totalMB": 2332,
+   "rendererMB": 1410,
+   "heapMB": 125,
+   "dom": 991,
+   "q": 0,
+   "lsK": 511
+  },
+  {
+   "buoi": 136,
+   "y": 2,
+   "totalMB": 2338,
+   "rendererMB": 1423,
+   "heapMB": 125,
+   "dom": 961,
+   "q": 0,
+   "lsK": 529
+  },
+  {
+   "buoi": 141,
+   "y": 2,
+   "totalMB": 2414,
+   "rendererMB": 1484,
+   "heapMB": 125,
+   "dom": 1116,
+   "q": 0,
+   "lsK": 531
+  },
+  {
+   "buoi": 146,
+   "y": 2,
+   "totalMB": 2387,
+   "rendererMB": 1481,
+   "heapMB": 125,
+   "dom": 907,
+   "q": 0,
+   "lsK": 518
+  },
+  {
+   "buoi": 151,
+   "y": 2,
+   "totalMB": 2400,
+   "rendererMB": 1489,
+   "heapMB": 125,
+   "dom": 954,
+   "q": 0,
+   "lsK": 522
+  },
+  {
+   "buoi": 156,
+   "y": 2,
+   "totalMB": 2395,
+   "rendererMB": 1478,
+   "heapMB": 125,
+   "dom": 911,
+   "q": 0,
+   "lsK": 530
+  },
+  {
+   "buoi": 161,
+   "y": 2,
+   "totalMB": 2474,
+   "rendererMB": 1526,
+   "heapMB": 125,
+   "dom": 1632,
+   "q": 2,
+   "lsK": 541
+  },
+  {
+   "buoi": 166,
+   "y": 2,
+   "totalMB": 2422,
+   "rendererMB": 1509,
+   "heapMB": 125,
+   "dom": 896,
+   "q": 0,
+   "lsK": 536
+  },
+  {
+   "buoi": 171,
+   "y": 2,
+   "totalMB": 2470,
+   "rendererMB": 1556,
+   "heapMB": 125,
+   "dom": 903,
+   "q": 0,
+   "lsK": 569
+  },
+  {
+   "buoi": 176,
+   "y": 2,
+   "totalMB": 2438,
+   "rendererMB": 1538,
+   "heapMB": 133,
+   "dom": 913,
+   "q": 0,
+   "lsK": 581
+  },
+  {
+   "buoi": 181,
+   "y": 2,
+   "totalMB": 2501,
+   "rendererMB": 1556,
+   "heapMB": 133,
+   "dom": 1386,
+   "q": 0,
+   "lsK": 579
+  },
+  {
+   "buoi": 186,
+   "y": 2,
+   "totalMB": 2447,
+   "rendererMB": 1527,
+   "heapMB": 133,
+   "dom": 997,
+   "q": 2,
+   "lsK": 572
+  },
+  {
+   "buoi": 191,
+   "y": 2,
+   "totalMB": 2423,
+   "rendererMB": 1515,
+   "heapMB": 133,
+   "dom": 907,
+   "q": 0,
+   "lsK": 583
+  },
+  {
+   "buoi": 196,
+   "y": 2,
+   "totalMB": 2440,
+   "rendererMB": 1529,
+   "heapMB": 133,
+   "dom": 1048,
+   "q": 0,
+   "lsK": 609
+  },
+  {
+   "buoi": 201,
+   "y": 2,
+   "totalMB": 2479,
+   "rendererMB": 1545,
+   "heapMB": 133,
+   "dom": 1154,
+   "q": 0,
+   "lsK": 613
+  },
+  {
+   "buoi": 206,
+   "y": 2,
+   "totalMB": 2467,
+   "rendererMB": 1525,
+   "heapMB": 133,
+   "dom": 1019,
+   "q": 2,
+   "lsK": 618
+  },
+  {
+   "buoi": 211,
+   "y": 2,
+   "totalMB": 2479,
+   "rendererMB": 1571,
+   "heapMB": 133,
+   "dom": 940,
+   "q": 0,
+   "lsK": 623
+  },
+  {
+   "buoi": 216,
+   "y": 2,
+   "totalMB": 2493,
+   "rendererMB": 1588,
+   "heapMB": 133,
+   "dom": 878,
+   "q": 0,
+   "lsK": 637
+  },
+  {
+   "buoi": 221,
+   "y": 2,
+   "totalMB": 2558,
+   "rendererMB": 1616,
+   "heapMB": 133,
+   "dom": 1402,
+   "q": 0,
+   "lsK": 648
+  },
+  {
+   "buoi": 226,
+   "y": 2,
+   "totalMB": 2525,
+   "rendererMB": 1611,
+   "heapMB": 133,
+   "dom": 954,
+   "q": 2,
+   "lsK": 660
+  },
+  {
+   "buoi": 231,
+   "y": 2,
+   "totalMB": 2571,
+   "rendererMB": 1662,
+   "heapMB": 133,
+   "dom": 994,
+   "q": 2,
+   "lsK": 663
+  },
+  {
+   "buoi": 236,
+   "y": 2,
+   "totalMB": 2569,
+   "rendererMB": 1662,
+   "heapMB": 133,
+   "dom": 921,
+   "q": 0,
+   "lsK": 674
+  },
+  {
+   "buoi": 241,
+   "y": 2,
+   "totalMB": 2619,
+   "rendererMB": 1680,
+   "heapMB": 133,
+   "dom": 1315,
+   "q": 0,
+   "lsK": 674
+  },
+  {
+   "buoi": 246,
+   "y": 2,
+   "totalMB": 2588,
+   "rendererMB": 1683,
+   "heapMB": 133,
+   "dom": 974,
+   "q": 0,
+   "lsK": 670
+  },
+  {
+   "buoi": 251,
+   "y": 2,
+   "totalMB": 2598,
+   "rendererMB": 1683,
+   "heapMB": 133,
+   "dom": 851,
+   "q": 0,
+   "lsK": 684
+  },
+  {
+   "buoi": 256,
+   "y": 2,
+   "totalMB": 2620,
+   "rendererMB": 1707,
+   "heapMB": 133,
+   "dom": 911,
+   "q": 0,
+   "lsK": 715
+  },
+  {
+   "buoi": 261,
+   "y": 2,
+   "totalMB": 2678,
+   "rendererMB": 1726,
+   "heapMB": 133,
+   "dom": 1353,
+   "q": 0,
+   "lsK": 705
+  },
+  {
+   "buoi": 266,
+   "y": 3,
+   "totalMB": 2595,
+   "rendererMB": 1680,
+   "heapMB": 133,
+   "dom": 993,
+   "q": 2,
+   "lsK": 708
+  },
+  {
+   "buoi": 271,
+   "y": 3,
+   "totalMB": 2757,
+   "rendererMB": 1836,
+   "heapMB": 133,
+   "dom": 1383,
+   "q": 2,
+   "lsK": 719
+  },
+  {
+   "buoi": 276,
+   "y": 3,
+   "totalMB": 2767,
+   "rendererMB": 1840,
+   "heapMB": 133,
+   "dom": 2293,
+   "q": 1,
+   "lsK": 732
+  },
+  {
+   "buoi": 281,
+   "y": 3,
+   "totalMB": 2126,
+   "rendererMB": 1343,
+   "heapMB": 159,
+   "dom": 3893,
+   "q": 3,
+   "lsK": 732
+  },
+  {
+   "buoi": 286,
+   "y": 3,
+   "totalMB": 2239,
+   "rendererMB": 1534,
+   "heapMB": 159,
+   "dom": 1450,
+   "q": 2,
+   "lsK": 799
+  },
+  {
+   "buoi": 291,
+   "y": 3,
+   "totalMB": 2337,
+   "rendererMB": 1622,
+   "heapMB": 159,
+   "dom": 1400,
+   "q": 0,
+   "lsK": 807
+  },
+  {
+   "buoi": 296,
+   "y": 3,
+   "totalMB": 2348,
+   "rendererMB": 1629,
+   "heapMB": 159,
+   "dom": 2378,
+   "q": 3,
+   "lsK": 869
+  },
+  {
+   "buoi": 297,
+   "y": 3,
+   "totalMB": 1426,
+   "rendererMB": 790,
+   "heapMB": 159,
+   "dom": 2302,
+   "q": 1,
+   "lsK": 870
+  },
+  {
+   "buoi": 302,
+   "y": 3,
+   "totalMB": 2193,
+   "rendererMB": 1522,
+   "heapMB": 159,
+   "dom": 2541,
+   "q": 3,
+   "lsK": 875
+  },
+  {
+   "buoi": 307,
+   "y": 3,
+   "totalMB": 2295,
+   "rendererMB": 1616,
+   "heapMB": 159,
+   "dom": 1561,
+   "q": 2,
+   "lsK": 901
+  },
+  {
+   "buoi": 312,
+   "y": 3,
+   "totalMB": 2342,
+   "rendererMB": 1663,
+   "heapMB": 159,
+   "dom": 2355,
+   "q": 2,
+   "lsK": 939
+  },
+  {
+   "buoi": 317,
+   "y": 3,
+   "totalMB": 2412,
+   "rendererMB": 1725,
+   "heapMB": 159,
+   "dom": 2407,
+   "q": 2,
+   "lsK": 961
+  },
+  {
+   "buoi": 322,
+   "y": 3,
+   "totalMB": 2496,
+   "rendererMB": 1804,
+   "heapMB": 159,
+   "dom": 1415,
+   "q": 8,
+   "lsK": 1036
+  },
+  {
+   "buoi": 327,
+   "y": 3,
+   "totalMB": 2548,
+   "rendererMB": 1867,
+   "heapMB": 159,
+   "dom": 1370,
+   "q": 2,
+   "lsK": 1043
+  },
+  {
+   "buoi": 332,
+   "y": 3,
+   "totalMB": 2679,
+   "rendererMB": 1990,
+   "heapMB": 159,
+   "dom": 1393,
+   "q": 2,
+   "lsK": 1072
+  },
+  {
+   "buoi": 337,
+   "y": 3,
+   "totalMB": 2605,
+   "rendererMB": 1910,
+   "heapMB": 159,
+   "dom": 1358,
+   "q": 2,
+   "lsK": 1076
+  },
+  {
+   "buoi": 342,
+   "y": 3,
+   "totalMB": 2761,
+   "rendererMB": 2062,
+   "heapMB": 159,
+   "dom": 1625,
+   "q": 3,
+   "lsK": 1090
+  },
+  {
+   "buoi": 347,
+   "y": 3,
+   "totalMB": 2575,
+   "rendererMB": 1881,
+   "heapMB": 159,
+   "dom": 1720,
+   "q": 2,
+   "lsK": 1110
+  },
+  {
+   "buoi": 352,
+   "y": 3,
+   "totalMB": 2568,
+   "rendererMB": 1879,
+   "heapMB": 159,
+   "dom": 1028,
+   "q": 1,
+   "lsK": 1123
+  },
+  {
+   "buoi": 357,
+   "y": 3,
+   "totalMB": 2608,
+   "rendererMB": 1903,
+   "heapMB": 159,
+   "dom": 1008,
+   "q": 2,
+   "lsK": 1130
+  },
+  {
+   "buoi": 362,
+   "y": 3,
+   "totalMB": 2696,
+   "rendererMB": 1995,
+   "heapMB": 159,
+   "dom": 2652,
+   "q": 3,
+   "lsK": 1166
+  },
+  {
+   "buoi": 367,
+   "y": 3,
+   "totalMB": 2630,
+   "rendererMB": 1935,
+   "heapMB": 179,
+   "dom": 1029,
+   "q": 1,
+   "lsK": 1192
+  },
+  {
+   "buoi": 372,
+   "y": 3,
+   "totalMB": 2622,
+   "rendererMB": 1962,
+   "heapMB": 179,
+   "dom": 2329,
+   "q": 2,
+   "lsK": 1215
+  },
+  {
+   "buoi": 377,
+   "y": 3,
+   "totalMB": 2800,
+   "rendererMB": 2119,
+   "heapMB": 179,
+   "dom": 1653,
+   "q": 2,
+   "lsK": 1235
+  },
+  {
+   "buoi": 382,
+   "y": 3,
+   "totalMB": 2880,
+   "rendererMB": 2132,
+   "heapMB": 179,
+   "dom": 2739,
+   "q": 4,
+   "lsK": 1248
+  },
+  {
+   "buoi": 387,
+   "y": 3,
+   "totalMB": 2752,
+   "rendererMB": 2055,
+   "heapMB": 179,
+   "dom": 906,
+   "q": 2,
+   "lsK": 1248
+  },
+  {
+   "buoi": 392,
+   "y": 3,
+   "totalMB": 2759,
+   "rendererMB": 2077,
+   "heapMB": 179,
+   "dom": 1188,
+   "q": 8,
+   "lsK": 1271
+  },
+  {
+   "buoi": 397,
+   "y": 3,
+   "totalMB": 2760,
+   "rendererMB": 2071,
+   "heapMB": 179,
+   "dom": 2528,
+   "q": 2,
+   "lsK": 1305
+  },
+  {
+   "buoi": 402,
+   "y": 3,
+   "totalMB": 2883,
+   "rendererMB": 2171,
+   "heapMB": 179,
+   "dom": 1515,
+   "q": 4,
+   "lsK": 1325
+  },
+  {
+   "buoi": 407,
+   "y": 3,
+   "totalMB": 2807,
+   "rendererMB": 2106,
+   "heapMB": 179,
+   "dom": 1010,
+   "q": 2,
+   "lsK": 1300
+  },
+  {
+   "buoi": 412,
+   "y": 3,
+   "totalMB": 2748,
+   "rendererMB": 2052,
+   "heapMB": 179,
+   "dom": 1502,
+   "q": 2,
+   "lsK": 1313
+  },
+  {
+   "buoi": 417,
+   "y": 4,
+   "totalMB": 2894,
+   "rendererMB": 2191,
+   "heapMB": 179,
+   "dom": 1062,
+   "q": 3,
+   "lsK": 1375
+  },
+  {
+   "buoi": 422,
+   "y": 4,
+   "totalMB": 2925,
+   "rendererMB": 2222,
+   "heapMB": 179,
+   "dom": 1253,
+   "q": 3,
+   "lsK": 1354
+  },
+  {
+   "buoi": 427,
+   "y": 4,
+   "totalMB": 2907,
+   "rendererMB": 2194,
+   "heapMB": 179,
+   "dom": 1639,
+   "q": 2,
+   "lsK": 1356
+  },
+  {
+   "buoi": 432,
+   "y": 4,
+   "totalMB": 2895,
+   "rendererMB": 2188,
+   "heapMB": 179,
+   "dom": 2642,
+   "q": 2,
+   "lsK": 1407
+  },
+  {
+   "buoi": 437,
+   "y": 4,
+   "totalMB": 2937,
+   "rendererMB": 2219,
+   "heapMB": 179,
+   "dom": 1134,
+   "q": 1,
+   "lsK": 1415
+  },
+  {
+   "buoi": 442,
+   "y": 4,
+   "totalMB": 2948,
+   "rendererMB": 2239,
+   "heapMB": 202,
+   "dom": 2768,
+   "q": 7,
+   "lsK": 1425
+  },
+  {
+   "buoi": 447,
+   "y": 4,
+   "totalMB": 2925,
+   "rendererMB": 2223,
+   "heapMB": 202,
+   "dom": 2424,
+   "q": 1,
+   "lsK": 1419
+  },
+  {
+   "buoi": 452,
+   "y": 4,
+   "totalMB": 2949,
+   "rendererMB": 2244,
+   "heapMB": 202,
+   "dom": 1127,
+   "q": 2,
+   "lsK": 1432
+  },
+  {
+   "buoi": 457,
+   "y": 4,
+   "totalMB": 2918,
+   "rendererMB": 2207,
+   "heapMB": 202,
+   "dom": 2536,
+   "q": 1,
+   "lsK": 1471
+  },
+  {
+   "buoi": 462,
+   "y": 4,
+   "totalMB": 3019,
+   "rendererMB": 2291,
+   "heapMB": 202,
+   "dom": 1119,
+   "q": 3,
+   "lsK": 1446
+  },
+  {
+   "buoi": 467,
+   "y": 4,
+   "totalMB": 2978,
+   "rendererMB": 2259,
+   "heapMB": 202,
+   "dom": 1894,
+   "q": 2,
+   "lsK": 1487
+  },
+  {
+   "buoi": 472,
+   "y": 4,
+   "totalMB": 2998,
+   "rendererMB": 2275,
+   "heapMB": 202,
+   "dom": 994,
+   "q": 1,
+   "lsK": 1471
+  },
+  {
+   "buoi": 477,
+   "y": 4,
+   "totalMB": 2991,
+   "rendererMB": 2280,
+   "heapMB": 202,
+   "dom": 2534,
+   "q": 3,
+   "lsK": 1508
+  },
+  {
+   "buoi": 482,
+   "y": 4,
+   "totalMB": 3039,
+   "rendererMB": 2304,
+   "heapMB": 202,
+   "dom": 994,
+   "q": 3,
+   "lsK": 1501
+  }
+ ],
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  "#modal|Thân phận kiếp này",
+  ".dlg|Tiền truyện · Công chúa nước Cao Ly hòa ",
+  ".dlg|Công chúa Cao Ly",
+  "page|Tẩm điện của ta · Ở đây có # người.",
+  "page|Tẩm điện của ta · Không gặp ai.",
+  ".kbk|Tổng lược",
+  ".dlg|Thỉnh tranh nhân vật",
+  "#modal|chiều · còn",
+  ".dlg|chiều · còn",
+  "#modal|Bạc",
+  ".dlg|Bạc",
+  "#modal|Chương # · Chờ ngày hòa thân",
+  ".dlg|Chương # · Chờ ngày hòa thân",
+  ".dlg|Danh hiệu",
+  "#modal|Tâm trạng · Ta",
+  ".dlg|Tâm trạng · Ta",
+  "#modal|Tin báo",
+  ".dlg|Tin báo",
+  "#modal|Có khách đến chơi",
+  ".dlg|Có khách đến chơi",
+  ".dlg|Lễ Phật đản",
+  ".dlg|Vương thúc mời yến",
+  "#modal|Sắc",
+  ".dlg|Sắc",
+  ".dlg|Phụ vương ngã bệnh",
+  ".dlg|Hỏa hoạn lớn",
+  "#modal|Hỏa hoạn lớn",
+  ".dlg|trưa · còn",
+  ".dlg|Có người bán tin",
+  ".dlg|Hòa ước",
+  ".dlg|sáng · còn",
+  ".dlg|Điều khoản hòa ước",
+  ".dlg|tối · còn",
+  ".dlg|Vương muội tranh phần",
+  ".kfoc|",
+  ".dlg|Công · Nữ công: các lối",
+  "#modal|Học Công: làm gì?",
+  ".dlg|Học Công: làm gì?",
+  "#modal|Hà bao thêu hoa mai: dùng vật liệu gì?",
+  ".dlg|Hà bao thêu hoa mai: dùng vật liệu gì?",
+  "#kg82|",
+  ".kmov|",
+  "#modal|Lịch tháng",
+  ".dlg|Lịch tháng",
+  ".dlg|Thích khách",
+  ".dlg|Tin trong cung buổi này",
+  ".dlg|Mục lục chương",
+  ".dlg|Yến đầy tháng hoàng tử",
+  "#modal|Yến đầy tháng hoàng tử",
+  ".dlg|Công · Nữ công",
+  ".dlg|Đại hàn, tuyết lớn",
+  "#modal|Đại hàn, tuyết lớn",
+  ".dlg|Tỉnh thân",
+  "#modal|Tỉnh thân",
+  ".dlg|Tin mua được",
+  ".dlg|Danh hiệu mới",
+  "#modal|Đeo «Thư hương»",
+  ".dlg|Đeo «Thư hương»",
+  ".dlg|Kỳ ngộ",
+  ".dlg|Nhiên Đăng hội",
+  "#modal|Kỳ ngộ",
+  ".dlg|Yến đầy tháng công chúa",
+  ".dlg|Phe chủ chiến ra tay",
+  ".dlg|Thu săn",
+  "#modal|Phiên vương nhập triều",
+  ".dlg|Phiên vương nhập triều",
+  ".dlg|Đại thọ",
+  "#modal|Đại thọ",
+  ".dlg|Túi thơm thêu sen: dùng vật liệu gì?",
+  ".dlg|Sứ đoàn vào triều",
+  ".dlg|Hòa ước ký xong",
+  ".dlg|Lễ ra mắt",
+  "#kmrew|",
+  ".dlg|Nhập cung",
+  "#kprevov|",
+  ".dlg|Nội vụ phủ điều người",
+  ".dlg|Hành trang những năm ở nhà",
+  ".dlg|Bộ sưu tập",
+  "page|Chung Tú cung · Du Thanh trai · Không gặ",
+  "page|Chung Tú cung · Du Thanh trai · Ở đây cò",
+  ".dlg|Kính sự phòng",
+  "#kxcatch|",
+  ".kne|",
+  "#dawn|",
+  ".dlg|Y phục dự Tết Nguyên tiêu",
+  "#modal|Tết Nguyên tiêu · Chuyện bên lề hội",
+  ".dlg|Tết Nguyên tiêu · Chuyện bên lề hội",
+  ".dlg|Ân thưởng",
+  ".dlg|Việc khó xử",
+  "#modal|Lời cảnh báo",
+  ".dlg|Lời cảnh báo",
+  "#modal|Phòng bị",
+  ".dlg|Phòng bị",
+  ".dlg|Có người đến",
+  ".dlg|Tết Nguyên tiêu · Đặt cược",
+  ".dlg|Kính sự phòng báo tin",
+  "#modal|Quẻ Trung · Con cái",
+  ".dlg|Quẻ Trung · Con cái",
+  ".dlg|Gieo lại quẻ",
+  ".dlg|Đeo «Trăng soi rèm ngọc»",
+  ".dlg|Bị châm chọc",
+  "#modal|Tai mắt",
+  ".dlg|Tai mắt",
+  ".dlg|Kỳ nguyệt sự",
+  "#modal|Chuẩn bị thị tẩm",
+  ".dlg|Chuẩn bị thị tẩm",
+  "#modal|Đêm thị tẩm",
+  ".dlg|Đêm thị tẩm",
+  ".dlg|Bổng lộc tháng giêng",
+  "#modal|Lời ra tiếng vào",
+  ".dlg|Lời ra tiếng vào",
+  ".dlg|Kẻ hầu xin",
+  ".dlg|Nguy hiểm chung",
+  ".mapsc|",
+  ".dlg|Chương # khép lại",
+  ".dlg|Chương #: Sơ thừa ân sủng",
+  "#modal|Phụ tuyến · Tân quân lập uy · Chương # ·",
+  ".dlg|Phụ tuyến · Tân quân lập uy · Chương # ·",
+  ".dlg|Tuyển tú",
+  ".dlg|Lời nhận xét",
+  ".dlg|Chuyện trong cung",
+  ".dlg|Phụ tuyến · Thay Thái hậu tiếp mệnh phụ ",
+  "#modal|Có thai: Rất thấp",
+  ".dlg|Có thai: Rất thấp",
+  "#modal|Lật thẻ: Không có",
+  ".dlg|Lật thẻ: Không có",
+  ".dlg|Xong việc: Điểm trang hoặc Dưỡng nhan",
+  ".dlg|Tin triều đình",
+  ".dlg|Bổng lộc tháng hai",
+  ".dlg|Xét phẩm cuối tháng · Tần",
+  ".dlg|Lễ tấn phong Thường tại Hách Ngọc Huyền",
+  ".dlg|Tiết Thanh minh · Chuyện bên lề hội",
+  ".dlg|Lập công · Cứu tế",
+  ".dlg|Tin chờ người sai đi",
+  ".dlg|Tâm trạng · Tần Tôn Trầm Bích",
+  ".dlg|Tâm trạng · Quý nhân Trưởng Tôn Thanh Nh",
+  ".dlg|Tâm trạng · Ý phi Vương Uyển Đình",
+  ".dlg|Cung nữ thân tín",
+  ".dlg|Tiết Thanh minh · Dâng lễ",
+  ".dlg|Hội phối đồ: báo đề",
+  "page|Phật đường · Ở đây còn # người.",
+  ".dlg|Lòng không giữ được",
+  "page|Phật đường · Sang buổi chiều · ta vẫn ở ",
+  ".dlg|Mưu hại",
+  "page|Phật đường · Sang buổi tối · ta vẫn ở Ph",
+  ".dlg|Chọn người theo hầu",
+  "#modal|Cảnh Phúc cung",
+  ".dlg|Cảnh Phúc cung",
+  "page|Cảnh Phúc cung · Dưỡng Xuân hiên · Đông ",
+  ".dlg|Phụ tuyến · Đổi ơn: tin của Bích Ngân, l",
+  ".dlg|Ta bắt gặp",
+  "page|Cảnh Phúc cung · Thể Hòa điện · Sang buổ",
+  "#modal|Bổng lộc tháng ba",
+  ".dlg|Bổng lộc tháng ba",
+  ".dlg|Nghe đồn",
+  ".dlg|Lễ tấn phong Quý nhân Lưu Thuần Nguyên",
+  ".dlg|Giải bày",
+  "#klearnov|",
+  "page|Trường Môn viện · Ở đây còn # người. Có ",
+  "page|Trường Môn viện · Sang buổi tối · ta vẫn",
+  "#modal|Tin trong cung buổi này",
+  "#modal|Đồ thất lạc",
+  ".dlg|Đồ thất lạc",
+  ".dlg|Sang mùa mới",
+  ".dlg|Hội phối đồ · Cổ phong",
+  "#modal|Lễ Phật đản",
+  ".dlg|Quẻ Hạ · Danh",
+  ".dlg|Áo trái mùa",
+  "#modal|Lời thách đấu",
+  ".dlg|Lời thách đấu",
+  ".dlg|Tâm trạng · Quý nhân Tư Mã Thải Chi",
+  ".kpod|",
+  ".dlg|Thách đấu với Quý nhân Tư Mã Thải Chi",
+  "page|Tích Cần viện · Ở đây còn # người.",
+  "page|Tích Cần viện · Sang buổi tối · ta vẫn ở",
+  ".dlg|Quẻ Hạ · Sủng",
+  ".dlg|Tết Đoan ngọ · Lời mời: Thi cắm hoa lựu,",
+  ".dlg|Tâm trạng · Thái y Trương Bách Thảo",
+  "#modal|Áo trái mùa",
+  ".dlg|Có người tìm đến",
+  "#modal|Danh hiệu mới",
+  "#modal|Đeo «Diệu thủ hồi xuân»",
+  ".dlg|Đeo «Diệu thủ hồi xuân»",
+  ".dlg|Hắt nước",
+  ".dlg|Bổng lộc tháng tư",
+  ".dlg|Lễ tấn phong Quý nhân Hoa Lưu Ly",
+  ".dlg|Y phục dự Tết Đoan ngọ",
+  "#modal|Danh hiệu lên bậc",
+  ".dlg|Danh hiệu lên bậc",
+  ".dlg|Lỡ hẹn",
+  ".dlg|Ra vào cung cấm",
+  ".dlg|Cung Chính ti xét xử",
+  ".dlg|Bị soát phòng",
+  ".dlg|Thư nhà",
+  ".dlg|Việc của kẻ hầu",
+  ".dlg|Chương # · Sơ thừa ân sủng",
+  ".dlg|Cấm túc # tháng",
+  ".dlg|Quẻ Trung · Giao thiệp",
+  ".dlg|Kẻ hầu",
+  ".dlg|Quẻ Thượng · Tài nghệ",
+  ".dlg|Đại án ngoại thích",
+  ".dlg|Bổng lộc tháng năm",
+  ".dlg|Bổng lộc",
+  ".dlg|Thỉnh bình an mạch",
+  ".dlg|Hắt trà",
+  "#modal|Ân tình (đêm)",
+  ".dlg|Ân tình (đêm)",
+  ".dlg|Sắp tới: Thi tài ngày Thất tịch",
+  ".dlg|Thánh thượng ban thưởng",
+  ".dlg|Biếu quà làm lành",
+  "#modal|Biếu quà làm lành",
+  ".dlg|Một ánh mắt",
+  "#modal|Ta bắt gặp",
+  ".dlg|Nạn châu chấu",
+  "#modal|Yến đầy tháng công chúa",
+  "#modal|Nạn châu chấu",
+  "#modal|Có người bán tin",
+  ".dlg|Bổng lộc tháng sáu",
+  ".dlg|Phụ tuyến · Lo áo bông cho quân biên ải ",
+  ".dlg|Bị ép nộp của",
+  ".dlg|Quẻ Trung · Sức khỏe",
+  ".dlg|Lễ tấn phong Trinh phi Lữ Nhu Tắc",
+  ".dlg|Bổng lộc tháng bảy",
+  ".dlg|Lật thẻ: Vừa",
+  "#modal|Kẻ hầu xin đi",
+  ".dlg|Kẻ hầu xin đi",
+  "page|Dực Khôn cung · Mặc Hương trai · Tây phố",
+  ".dlg|Y phục dự Tết Trung thu",
+  ".dlg|Tết Trung thu · Chuyện bên lề hội",
+  "page|Dực Khôn cung · Hậu Đức điện · Sang buổi",
+  ".dlg|Hoàng thượng",
+  ".dlg|Tiết Vạn thọ · Lời mời: Thi đánh cờ mừng",
+  "#modal|Tết Trung thu · Yến tiệc",
+  ".dlg|Tết Trung thu · Yến tiệc",
+  ".dlg|Quẻ Hạ · Mưu kế",
+  ".dlg|Y phục dự Tiết Vạn thọ",
+  "#modal|Tiết Vạn thọ · Thi đánh cờ mừng thọ",
+  ".dlg|Tiết Vạn thọ · Thi đánh cờ mừng thọ",
+  ".dlg|Quẻ Thượng thượng · Mưu kế",
+  ".dlg|Bổng lộc tháng tám",
+  ".dlg|Lễ tấn phong Thường tại Khổng Mặc Nhi",
+  ".dlg|Y phục dự Tết Trùng cửu",
+  ".dlg|Tết Trùng cửu · Chuyện bên lề hội",
+  ".dlg|Tết Trùng cửu · Dâng lễ",
+  ".dlg|Quạt mực",
+  ".dlg|Kính sự phòng ghi sổ",
+  ".dlg|Việc nhờ",
+  "#modal|Danh hiệu",
+  "#ov|",
+  "page|Ngự hoa viên · Hoa nở rộ. Hoàng thượng k",
+  ".dlg|Bị giật y phục giữa đường",
+  "page|Ngự hoa viên · Sang buổi tối · ta vẫn ở ",
+  ".dlg|Quẻ Trung · Mưu kế",
+  ".dlg|Lật thẻ: Thấp",
+  ".dlg|Bổng lộc tháng chín",
+  ".dlg|Lễ tấn phong Quý nhân Trưởng Tôn Thanh N",
+  ".dlg|Thánh thọ Thái hậu · Lời mời: Thi điều h",
+  ".dlg|Y phục dự Thánh thọ Thái hậu",
+  "#modal|Thánh thọ Thái hậu · Chuyện bên lề hội",
+  ".dlg|Thánh thọ Thái hậu · Chuyện bên lề hội",
+  ".dlg|Hội phối đồ · Thanh nhã",
+  ".dlg|Thánh thọ Thái hậu · Thi điều hương an t",
+  ".dlg|Thánh thọ Thái hậu · Hội thi điều hương:",
+  "#modal|Hắt trà",
+  "#modal|Ra ngoài khi mặc trung y?",
+  ".dlg|Ra ngoài khi mặc trung y?",
+  ".dlg|Phụ tuyến · May áo bông cho cung nhân gi",
+  ".dlg|Bổng lộc tháng mười",
+  ".dlg|Lễ tấn phong Quý nhân Trình Ngân Linh",
+  ".dlg|Trong người khác lạ",
+  "#modal|Đại lễ tế Giao",
+  ".dlg|Đại lễ tế Giao",
+  ".dlg|Thái y bắt mạch",
+  ".dlg|Tiết Đông chí · Lời mời: Thi hát khúc đó",
+  ".dlg|Giả bệnh",
+  ".dlg|Y phục dự Tiết Đông chí",
+  ".dlg|Quẻ Trung · Sủng",
+  ".dlg|Lập công · Hòa giải",
+  ".dlg|Tiết Đông chí · Thi hát khúc đón dương s",
+  ".dlg|Lễ Lạp bát · Lời mời: Thi cắm mai, thủy ",
+  ".dlg|Có thai: tháng ba",
+  ".dlg|Bổng lộc tháng mười một",
+  ".dlg|Y phục dự Lễ Lạp bát",
+  ".dlg|Chương #: Học lễ nghi cung cấm",
+  ".dlg|Yến tiệc đầu xuân · Lời mời",
+  ".dlg|Lễ Lạp bát · Thi cắm mai, thủy tiên",
+  ".dlg|Hung tin trong cung",
+  ".dlg|Sắp tới: Yến tiệc đầu xuân",
+  ".dlg|Học Cầm: ai dạy?",
+  "#modal|Học Cầm: làm gì?",
+  ".dlg|Học Cầm: làm gì?",
+  "#modal|Khúc «Lưu thủy»: dùng vật liệu gì?",
+  ".dlg|Khúc «Lưu thủy»: dùng vật liệu gì?",
+  "#kpinfo|",
+  ".dlg|Xong việc: Học một buổi ở mục Tài nghệ",
+  "#modal|Chữa vết thương",
+  ".dlg|Chữa vết thương",
+  "#modal|Mạng che mặt",
+  ".dlg|Mạng che mặt",
+  "#modal|Nội vụ phủ",
+  ".dlg|Nội vụ phủ",
+  ".dlg|Y phục dự Đêm Giao thừa",
+  ".dlg|Bổng lộc tháng chạp",
+  ".dlg|Y phục dự Tết Nguyên đán",
+  ".dlg|Có thai: tháng tư",
+  ".dlg|Ý chỉ tiết kiệm",
+  ".dlg|Tết Nguyên tiêu · Lời mời: Thi nặn bánh ",
+  ".dlg|Tết Nguyên tiêu · Thi nặn bánh trôi",
+  ".dlg|Xong việc: Trò chuyện với cung nữ thân c",
+  "#modal|Bổng lộc tháng giêng",
+  ".dlg|Điềm báo",
+  ".dlg|Lũ lớn, mất mùa",
+  ".dlg|Ôn dịch",
+  ".dlg|Có thai: tháng năm",
+  "#modal|Chọn người theo hầu",
+  "page|Thái y viện · Ở đây còn # người.",
+  ".dlg|Tiết Thanh minh · Lời mời: Thi cắm bình ",
+  "page|Cảnh Phúc cung · Thanh Thu trai · Ở đây ",
+  "#modal|Bổng lộc tháng hai",
+  ".dlg|Bổng lộc tháng hai · Lễ nghĩa",
+  "#modal|Kẻ hầu ăn bớt",
+  ".dlg|Kẻ hầu ăn bớt",
+  ".dlg|Đại xá thiên hạ",
+  ".dlg|Khoa thi Đình",
+  ".dlg|Tiết Thanh minh · Thi cắm bình hoa lê",
+  ".dlg|Đeo «Khúc nhạc tri âm»",
+  "page|Kính sự phòng · Ở đây còn # người.",
+  "#modal|Đeo «Khúc nhạc tri âm»",
+  ".dlg|Bổng lộc tháng ba · Lễ nghĩa",
+  ".dlg|Lễ tấn phong Ý quý nhân Vương Uyển Đình",
+  ".dlg|Có thai: tháng bảy",
+  ".dlg|Hội phối đồ · Phú quý",
+  ".dlg|Hiểm sinh nở Thấp",
+  ".dlg|Phụ tuyến · Thư muội muội: xin cây trâm ",
+  ".dlg|Tết Đoan ngọ · Lời mời: Thi thơ viếng Kh",
+  ".dlg|Lập công · Vạch mưu",
+  "#modal|Bổng lộc tháng tư",
+  ".dlg|Lễ tấn phong Quý nhân Quách Vân Khanh",
+  ".dlg|Tết Đoan ngọ · Thi thơ viếng Khuất Nguyê",
+  "#modal|Vĩnh Hòa cung",
+  ".dlg|Vĩnh Hòa cung",
+  "page|Vĩnh Hòa cung · Hoài Nhu điện · Chính đi",
+  ".dlg|Phụ tuyến · Hòa giải Quý nhân Trình Ngân",
+  ".dlg|Quẻ Thượng · Con cái",
+  ".dlg|Hội Phượng · Lời mời: Thi nướng bánh man",
+  ".dlg|Lễ tấn phong Tần Trình Ngân Linh",
+  "page|Khải Tường cung · Nhã Vận hiên · Ở đây c",
+  "page|Nội vụ phủ · Ở đây còn # người.",
+  ".dlg|Thi tài ngày Thất tịch · Lời mời",
+  ".dlg|Hội Phượng · Thi nướng bánh mang theo ch",
+  ".dlg|Khúc «Nguyệt hạ»: dùng vật liệu gì?",
+  ".dlg|Quẻ Hạ hạ · Mưu kế",
+  ".dlg|Phụ tuyến · Chép lại sổ công đức bị nhòe",
+  ".dlg|Tết Thất tịch · Lời mời: Thi hát khúc Th"
+ ],
+ "_momRank": 2,
+ "_unsFail": {
+  "#klife|": {},
+  "#modal|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Công chúa nước Cao Ly hòa thân · #/#": {},
+  ".dlg|Thỉnh tranh nhân vật": {},
+  ".dlg|Chương # · Chờ ngày hòa thân": {},
+  ".dlg|Có khách đến chơi": {},
+  ".dlg|Vương thúc mời yến": {},
+  ".dlg|Phụ vương ngã bệnh": {},
+  ".dlg|Có người bán tin": {},
+  ".dlg|Hòa ước": {},
+  ".dlg|Điều khoản hòa ước": {},
+  ".dlg|Vương muội tranh phần": {},
+  ".dlg|Học Công: làm gì?": {},
+  ".dlg|Hà bao thêu hoa mai: dùng vật liệu gì?": {},
+  ".dlg|Thích khách": {},
+  ".dlg|Danh hiệu mới": {},
+  ".dlg|Đeo «Thư hương»": {},
+  ".dlg|Nhiên Đăng hội": {},
+  ".dlg|Phe chủ chiến ra tay": {},
+  ".dlg|Túi thơm thêu sen: dùng vật liệu gì?": {},
+  ".dlg|Hòa ước ký xong": {},
+  ".dlg|Lễ ra mắt": {},
+  ".dlg|Nhập cung": {},
+  "#dawn|": {},
+  ".dlg|Y phục dự Tết Nguyên tiêu": {},
+  ".dlg|Tết Nguyên tiêu · Chuyện bên lề hội": {},
+  ".dlg|Việc khó xử": {},
+  ".dlg|Lời cảnh báo": {},
+  ".dlg|Phòng bị": {},
+  ".dlg|Tết Nguyên tiêu · Đặt cược": {},
+  ".dlg|Kính sự phòng báo tin": {},
+  ".dlg|Quẻ Trung · Con cái": {},
+  ".dlg|Đeo «Trăng soi rèm ngọc»": {},
+  ".dlg|Kỳ nguyệt sự": {},
+  ".dlg|Chuẩn bị thị tẩm": {},
+  ".dlg|Đêm thị tẩm": {},
+  ".dlg|Bổng lộc tháng giêng": {},
+  ".dlg|Lời ra tiếng vào": {},
+  ".dlg|Kẻ hầu xin": {},
+  ".dlg|Nguy hiểm chung": {},
+  ".dlg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {},
+  ".dlg|Chuyện trong cung": {},
+  ".dlg|Phụ tuyến · Thay Thái hậu tiếp mệnh phụ ngoài cung": {},
+  ".dlg|Tin triều đình": {},
+  ".dlg|Bổng lộc tháng hai": {},
+  ".dlg|Lễ tấn phong Thường tại Hách Ngọc Huyền": {},
+  ".dlg|Tiết Thanh minh · Chuyện bên lề hội": {},
+  ".dlg|Lập công · Cứu tế": {},
+  ".dlg|Cung nữ thân tín": {},
+  ".dlg|Tiết Thanh minh · Dâng lễ": {},
+  ".dlg|Hội phối đồ: báo đề": {},
+  ".dlg|Tin báo": {},
+  ".dlg|Lòng không giữ được": {},
+  ".dlg|Mưu hại": {},
+  ".dlg|Bị châm chọc": {},
+  ".dlg|Chọn người theo hầu": {},
+  ".dlg|Cảnh Phúc cung": {},
+  ".dlg|Phụ tuyến · Đổi ơn: tin của Bích Ngân, lời xin cho": {},
+  ".dlg|Ta bắt gặp": {},
+  ".dlg|Bổng lộc tháng ba": {},
+  ".dlg|Nghe đồn": {},
+  ".dlg|Lễ tấn phong Quý nhân Lưu Thuần Nguyên": {},
+  ".dlg|Hội phối đồ · Cổ phong": {},
+  ".dlg|Quẻ Hạ · Danh": {},
+  ".dlg|Lời thách đấu": {},
+  ".kpod|": {},
+  ".dlg|Tết Đoan ngọ · Lời mời: Thi cắm hoa lựu, xương bồ": {},
+  ".dlg|Có người tìm đến": {},
+  ".dlg|Đeo «Diệu thủ hồi xuân»": {},
+  ".dlg|Bổng lộc tháng tư": {},
+  ".dlg|Lễ tấn phong Quý nhân Hoa Lưu Ly": {},
+  ".dlg|Y phục dự Tết Đoan ngọ": {},
+  ".dlg|Danh hiệu lên bậc": {},
+  ".dlg|Việc của kẻ hầu": {},
+  ".dlg|Chương # · Sơ thừa ân sủng": {},
+  ".dlg|Kẻ hầu": {},
+  ".dlg|Quẻ Thượng · Tài nghệ": {},
+  ".dlg|Một ánh mắt": {},
+  ".dlg|Phụ tuyến · Lo áo bông cho quân biên ải · Lời nhờ ": {},
+  ".dlg|Bị ép nộp của": {},
+  ".dlg|Quẻ Trung · Sức khỏe": {},
+  ".dlg|Lễ tấn phong Trinh phi Lữ Nhu Tắc": {},
+  ".dlg|Kẻ hầu xin đi": {},
+  ".dlg|Y phục dự Tết Trung thu": {},
+  ".dlg|Tết Trung thu · Chuyện bên lề hội": {},
+  ".dlg|Hoàng thượng": {},
+  ".dlg|Tiết Vạn thọ · Lời mời: Thi đánh cờ mừng thọ": {},
+  ".dlg|Tết Trung thu · Yến tiệc": {},
+  ".dlg|Y phục dự Tiết Vạn thọ": {},
+  ".dlg|Quẻ Thượng thượng · Mưu kế": {},
+  ".dlg|Bổng lộc tháng tám": {},
+  ".dlg|Lễ tấn phong Thường tại Khổng Mặc Nhi": {},
+  ".dlg|Y phục dự Tết Trùng cửu": {},
+  ".dlg|Tết Trùng cửu · Chuyện bên lề hội": {},
+  ".dlg|Tết Trùng cửu · Dâng lễ": {},
+  ".dlg|Kính sự phòng ghi sổ": {},
+  ".dlg|Việc nhờ": {},
+  ".dlg|Bị giật y phục giữa đường": {},
+  ".dlg|Quẻ Trung · Mưu kế": {},
+  ".dlg|Bổng lộc tháng chín": {},
+  ".dlg|Lễ tấn phong Quý nhân Trưởng Tôn Thanh Nhã": {},
+  ".dlg|Thánh thọ Thái hậu · Lời mời: Thi điều hương an th": {},
+  ".dlg|Y phục dự Thánh thọ Thái hậu": {},
+  "page|Chung Tú cung · Du Thanh trai · Ở đây còn # người.": {},
+  ".dlg|Thánh thọ Thái hậu · Chuyện bên lề hội": {},
+  ".dlg|Hội phối đồ · Thanh nhã": {},
+  ".kmov|": {},
+  ".dlg|Thánh thọ Thái hậu · Thi điều hương an thần": {},
+  ".dlg|Ra ngoài khi mặc trung y?": {},
+  ".dlg|Phụ tuyến · May áo bông cho cung nhân già · Lời nh": {},
+  ".dlg|Bổng lộc tháng mười": {},
+  ".dlg|Lễ tấn phong Quý nhân Trình Ngân Linh": {},
+  ".dlg|Trong người khác lạ": {},
+  ".dlg|Tiết Đông chí · Lời mời: Thi hát khúc đón dương si": {},
+  ".dlg|Y phục dự Tiết Đông chí": {},
+  ".dlg|Quẻ Trung · Sủng": {},
+  ".dlg|Lập công · Hòa giải": {},
+  ".dlg|Lễ Lạp bát · Lời mời: Thi cắm mai, thủy tiên": {},
+  ".dlg|Bổng lộc tháng mười một": {},
+  ".dlg|Y phục dự Lễ Lạp bát": {},
+  ".dlg|Yến tiệc đầu xuân · Lời mời": {},
+  ".dlg|Học Cầm: ai dạy?": {},
+  ".dlg|Học Cầm: làm gì?": {},
+  ".dlg|Khúc «Lưu thủy»: dùng vật liệu gì?": {},
+  ".dlg|Chữa vết thương": {},
+  ".dlg|Mạng che mặt": {},
+  ".dlg|Nội vụ phủ": {},
+  ".dlg|Y phục dự Đêm Giao thừa": {},
+  ".dlg|Bổng lộc tháng chạp": {},
+  ".dlg|Y phục dự Tết Nguyên đán": {},
+  ".dlg|Tết Nguyên tiêu · Lời mời: Thi nặn bánh trôi": {},
+  "page|Thái y viện · Ở đây còn # người.": {},
+  ".dlg|Tiết Thanh minh · Lời mời: Thi cắm bình hoa lê": {},
+  ".dlg|Bổng lộc tháng hai · Lễ nghĩa": {},
+  ".dlg|Kẻ hầu ăn bớt": {},
+  ".dlg|Đeo «Khúc nhạc tri âm»": {},
+  ".dlg|Bổng lộc tháng ba · Lễ nghĩa": {},
+  ".dlg|Lễ tấn phong Ý quý nhân Vương Uyển Đình": {},
+  ".dlg|Hội phối đồ · Phú quý": {},
+  ".dlg|Phụ tuyến · Thư muội muội: xin cây trâm cài · Lời ": {},
+  ".dlg|Tết Đoan ngọ · Lời mời: Thi thơ viếng Khuất Nguyên": {},
+  ".dlg|Lập công · Vạch mưu": {},
+  ".dlg|Lễ tấn phong Quý nhân Quách Vân Khanh": {},
+  ".dlg|Vĩnh Hòa cung": {},
+  ".dlg|Phụ tuyến · Hòa giải Quý nhân Trình Ngân Linh với ": {},
+  ".dlg|Quẻ Thượng · Con cái": {},
+  ".dlg|Hội Phượng · Lời mời: Thi nướng bánh mang theo cho": {},
+  ".dlg|Bổng lộc tháng năm": {},
+  ".dlg|Lễ tấn phong Tần Trình Ngân Linh": {},
+  ".dlg|Thi tài ngày Thất tịch · Lời mời": {},
+  ".dlg|Khúc «Nguyệt hạ»: dùng vật liệu gì?": {},
+  ".dlg|Quẻ Hạ hạ · Mưu kế": {},
+  ".dlg|Phụ tuyến · Chép lại sổ công đức bị nhòe · Lời nhờ": {},
+  ".dlg|Biếu quà làm lành": {},
+  ".dlg|Tết Thất tịch · Lời mời: Thi hát khúc Thất tịch": {}
+ },
+ "_scrW": {
+  "#modal|Thân phận kiếp này|594,435": {
+   "left": 154,
+   "n": 1
+  },
+  "#modal|Chương # · Chờ ngày hòa thân|377,667": {
+   "left": 240,
+   "n": 1
+  },
+  ".dlg|Tin báo|444,454": {
+   "left": 340,
+   "n": 1
+  },
+  "#modal|Học Công: làm gì?|378,534": {
+   "left": 445,
+   "n": 1
+  },
+  ".dlg|Tin báo|494,460": {
+   "left": 4899,
+   "n": 1
+  },
+  "#modal|Tin báo|444,454": {
+   "left": 289,
+   "n": 1
+  },
+  ".dlg|Yến đầy tháng hoàng tử|494,686": {
+   "left": 48,
+   "n": 1
+  },
+  "#modal|Yến đầy tháng hoàng tử|494,653": {
+   "left": 127,
+   "n": 3
+  },
+  ".dlg|Yến đầy tháng hoàng tử|494,653": {
+   "left": 127,
+   "n": 1
+  },
+  "#modal|Tâm trạng · Ta|460,631": {
+   "left": 16,
+   "n": 1
+  },
+  ".dlg|Tin báo|494,445": {
+   "left": 368,
+   "n": 1
+  },
+  "#modal|Tin báo|494,460": {
+   "left": 797,
+   "n": 1
+  },
+  "#modal|Tỉnh thân|494,643": {
+   "left": 109,
+   "n": 1
+  },
+  "#modal|Chuẩn bị thị tẩm|377,647": {
+   "left": 62,
+   "n": 1
+  },
+  ".dlg|Chuẩn bị thị tẩm|377,674": {
+   "left": 116,
+   "n": 2
+  },
+  "#modal|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#|494,700": {
+   "left": 232,
+   "n": 3
+  },
+  ".dlg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#|494,700": {
+   "left": 232,
+   "n": 1
+  },
+  ".dlg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#|494,646": {
+   "left": 88,
+   "n": 1
+  },
+  ".kbk|Tổng lược|511,519": {
+   "left": 95,
+   "n": 1
+  },
+  "#kg82||378,500": {
+   "left": 19,
+   "n": 1
+  },
+  ".dlg|Mưu hại|378,521": {
+   "left": 348,
+   "n": 1
+  },
+  "#modal|Phòng bị|378,646": {
+   "left": 170,
+   "n": 3
+  },
+  ".dlg|Phòng bị|378,646": {
+   "left": 170,
+   "n": 1
+  },
+  ".dlg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#|494,656": {
+   "left": 86,
+   "n": 3
+  },
+  ".dlg|Tâm trạng · Ta|468,640": {
+   "left": 177,
+   "n": 1
+  },
+  ".dlg|Đại án ngoại thích|378,677": {
+   "left": 20,
+   "n": 1
+  },
+  "#modal|Biếu quà làm lành|469,682": {
+   "left": 4962,
+   "n": 2
+  },
+  "#modal|Yến đầy tháng công chúa|494,643": {
+   "left": 109,
+   "n": 1
+  },
+  "#modal|Nạn châu chấu|494,643": {
+   "left": 109,
+   "n": 1
+  },
+  ".dlg|Danh hiệu|378,673": {
+   "left": 380,
+   "n": 1
+  },
+  "#modal|Danh hiệu|378,673": {
+   "left": 520,
+   "n": 3
+  },
+  "#modal|Biếu quà làm lành|465,682": {
+   "left": 6193,
+   "n": 1
+  },
+  ".dlg|Thánh thọ Thái hậu · Lời mời: Thi điều hương an th|494,737": {
+   "left": 239,
+   "n": 1
+  },
+  ".dlg|Biếu quà làm lành|465,682": {
+   "left": 6193,
+   "n": 1
+  },
+  "#kg82||378,466": {
+   "left": 256,
+   "n": 1
+  },
+  "#kg82||378,395": {
+   "left": 256,
+   "n": 3
+  },
+  "#modal|Tâm trạng · Ta|469,631": {
+   "left": 39,
+   "n": 1
+  },
+  ".dlg|Lời cảnh báo|378,656": {
+   "left": 189,
+   "n": 1
+  },
+  ".dlg|Tiết Đông chí · Lời mời: Thi hát khúc đón dương si|494,737": {
+   "left": 34,
+   "n": 1
+  },
+  "#modal|Học Cầm: làm gì?|377,525": {
+   "left": 445,
+   "n": 1
+  },
+  "#modal|Biếu quà làm lành|468,682": {
+   "left": 8676,
+   "n": 1
+  },
+  ".dlg|Tết Nguyên tiêu · Lời mời: Thi nặn bánh trôi|494,747": {
+   "left": 52,
+   "n": 1
+  },
+  "#modal|Bổng lộc tháng hai|378,674": {
+   "left": 116,
+   "n": 2
+  },
+  ".dlg|Bổng lộc tháng hai|378,674": {
+   "left": 116,
+   "n": 1
+  },
+  "#modal|Danh hiệu|378,666": {
+   "left": 380,
+   "n": 1
+  },
+  "#modal|Bổng lộc tháng ba|378,674": {
+   "left": 116,
+   "n": 3
+  },
+  ".dlg|Bổng lộc tháng ba|378,674": {
+   "left": 116,
+   "n": 1
+  },
+  "#modal|Phòng bị|378,636": {
+   "left": 49,
+   "n": 1
+  },
+  ".dlg|Yến đầy tháng công chúa|494,704": {
+   "left": 85,
+   "n": 2
+  },
+  ".dlg|Hội Phượng · Lời mời: Thi nướng bánh mang theo cho|494,770": {
+   "left": 94,
+   "n": 1
+  }
+ },
+ "offers": [
+  {
+   "buoi": 57,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": true
+  },
+  {
+   "buoi": 58,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 59,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 63,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Ở đây có 1 người.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 64,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 65,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 73,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": true
+  },
+  {
+   "buoi": 79,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 82,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Ở đây có 1 người.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 83,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 84,
+   "y": 1,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 114,
+   "y": 1,
+   "rank": 0,
+   "screen": ".dlg «Đại hàn, tuyết lớn»",
+   "label": "Chịu rét cho quaTốnSức -8Đượcgiữ lại 20 lượng bạcKèmnhiễm ph",
+   "picked": true
+  },
+  {
+   "buoi": 197,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 199,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Ở đây có 1 người.»",
+   "label": "lá phong rơi",
+   "picked": true
+  },
+  {
+   "buoi": 208,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Ở đây có 1 người.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 213,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 214,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": true
+  },
+  {
+   "buoi": 218,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 219,
+   "y": 2,
+   "rank": 0,
+   "screen": "page «Tẩm điện của ta · Không gặp ai.»",
+   "label": "lá phong rơi",
+   "picked": false
+  },
+  {
+   "buoi": 272,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Kính sự phòng báo tin»",
+   "label": "Tiến cử Cung nữ thân tín tam đẳng Ngân Linh hầu thayRất vững",
+   "picked": false
+  },
+  {
+   "buoi": 295,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Thường tại Hách Ngọc Huyền»",
+   "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·nàng ta nhớ ta đếnCần",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 295,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Thường tại Hách Ngọc Huyền»",
+   "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 295,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Thường tại Hách Ngọc Huyền»",
+   "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 308,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Lưu Thuần Nguyên»",
+   "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·nàng ta nhớ ta đếnCần",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 308,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Lưu Thuần Nguyên»",
+   "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 308,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Lưu Thuần Nguyên»",
+   "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 319,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Hoa Lưu Ly»",
+   "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 319,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Hoa Lưu Ly»",
+   "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 319,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Hoa Lưu Ly»",
+   "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 355,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Trinh phi Lữ Nhu Tắc»",
+   "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 355,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Trinh phi Lữ Nhu Tắc»",
+   "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 355,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Trinh phi Lữ Nhu Tắc»",
+   "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 368,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Thường tại Khổng Mặc Nhi»",
+   "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 368,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Thường tại Khổng Mặc Nhi»",
+   "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 379,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Trưởng Tôn Thanh Nhã»",
+   "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 379,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Trưởng Tôn Thanh Nhã»",
+   "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 379,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Trưởng Tôn Thanh Nhã»",
+   "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 392,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Trình Ngân Linh»",
+   "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 392,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Trình Ngân Linh»",
+   "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 392,
+   "y": 3,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Trình Ngân Linh»",
+   "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 416,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Trưởng Tôn Thanh Nhã»",
+   "label": "Đến chúc mừngRất vữngTốnSức -5Đượcngười ấy có thiện cảm hơn,",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 416,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Trưởng Tôn Thanh Nhã»",
+   "label": "Gửi lễ mừngRất vữngTốnBạc -15Đượcngười ấy có thiện cảm hơnGợ",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 416,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Trưởng Tôn Thanh Nhã»",
+   "label": "Không đếnRất vữngTốnkhôngĐượcdưỡng sứcMấtngười ấy mất thiện ",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 452,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Ý quý nhân Vương Uyển Đình»",
+   "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 452,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Ý quý nhân Vương Uyển Đình»",
+   "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 452,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Ý quý nhân Vương Uyển Đình»",
+   "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 464,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Quách Vân Khanh»",
+   "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·lì xì Bạc +6Cần✓ Sức ",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 464,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Quách Vân Khanh»",
+   "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 464,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Quý nhân Quách Vân Khanh»",
+   "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 475,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Tần Trình Ngân Linh»",
+   "label": "Đến chúc mừngTốnSức -5Đượcthiện cảm +5·nàng ta nhớ ta đếnCần",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 475,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Tần Trình Ngân Linh»",
+   "label": "Gửi lễ mừngTốnBạc -15Đượcthiện cảm +6",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 475,
+   "y": 4,
+   "rank": 2,
+   "screen": ".dlg «Lễ tấn phong Tần Trình Ngân Linh»",
+   "label": "Không đếnTốnkhôngĐượcSức +3Kèmthiện cảm -6·oán ta +3!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  }
+ ],
+ "promo": {
+  "raw": 53,
+  "real": 32,
+  "picked": 11,
+  "by": {
+   "decree": 32
+  }
+ },
+ "t": {
+  "total": 3156630
+ }
+}

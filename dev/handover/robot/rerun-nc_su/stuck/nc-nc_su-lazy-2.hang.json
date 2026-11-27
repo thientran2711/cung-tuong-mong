@@ -1,0 +1,90 @@
+[
+ {
+  "at": "2026-11-26T11:29:43.150Z",
+  "buoi": 3076,
+  "rss": 1000,
+  "anon": 601,
+  "stacks": [
+   [
+    "ilSlots @79344:46",
+    "ilSlots @92496:92",
+    "ilHas @79347:27",
+    "g @79396:65",
+    "window.<computed> @93784:154",
+    "giveTo @99973:284",
+    "window.<computed> @99804:32",
+    "tsGiftPiece @65631:119",
+    "tsNpcGift @65660:22",
+    "tsNpcDanger @65666:94",
+    "(anon) @84771:71",
+    "endTurn @65895:84",
+    "endTurn @66387:115",
+    "endTurn @67584:59"
+   ],
+   [
+    "lxFix @61512:110",
+    "lxBoxes @61515:25",
+    "lxHas @61516:30",
+    "(anon) @61517:54",
+    "lxCount @61517:44",
+    "lxCapRec @61536:74",
+    "lxCapRec @61710:105",
+    "lxNpcCap @61557:62",
+    "toilNpc @60097:188",
+    "toilMkRec @60067:301",
+    "toilMkLux @60068:30",
+    "luxOf @60103:152",
+    "window.<computed> @88045:96",
+    "luxGift @61417:109"
+   ],
+   [
+    "lxOf @61484:60",
+    "lxFix @61512:184",
+    "lxBoxes @61515:25",
+    "lxCapRec @61538:160",
+    "lxCapRec @61710:105",
+    "lxNpcCap @61557:62",
+    "toilNpc @60097:188",
+    "toilMkRec @60067:301",
+    "toilMkLux @60068:30",
+    "luxOf @60103:152",
+    "window.<computed> @88045:96",
+    "luxGift @61417:109",
+    "tsGiftWorth @65620:127",
+    "(anon) @65623:163"
+   ],
+   [
+    "lxFix @61512:110",
+    "lxBoxes @61515:25",
+    "lxHas @61516:30",
+    "(anon) @61518:54",
+    "lxMiss @61518:43",
+    "lxCapRec @61537:140",
+    "lxCapRec @61710:105",
+    "lxNpcCap @61557:62",
+    "toilNpc @60097:188",
+    "toilMkRec @60067:301",
+    "toilMkLux @60068:30",
+    "luxOf @60103:152",
+    "window.<computed> @88045:96",
+    "luxGift @61417:109"
+   ],
+   [
+    "lxFix @61512:110",
+    "lxBoxes @61515:25",
+    "lxCapRec @61538:160",
+    "lxCapRec @61710:105",
+    "lxNpcCap @61557:62",
+    "toilNpc @60097:188",
+    "toilMkRec @60067:301",
+    "toilMkLux @60068:30",
+    "luxOf @60103:152",
+    "window.<computed> @88045:96",
+    "luxGift @61417:109",
+    "tsGiftWorth @65620:127",
+    "(anon) @65623:163",
+    "tsGiftPieces @65623:137"
+   ]
+  ]
+ }
+]

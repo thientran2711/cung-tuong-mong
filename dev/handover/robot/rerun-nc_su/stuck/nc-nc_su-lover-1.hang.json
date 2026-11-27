@@ -1,0 +1,47 @@
+[
+ {
+  "at": "2026-11-26T12:08:34.762Z",
+  "buoi": 2302,
+  "rss": 2004,
+  "anon": 1338,
+  "stacks": [
+   [
+    "(anon) @66949:228",
+    "(anon) @66949:122",
+    "renderStage @68651:95",
+    "renderStage @68716:94",
+    "renderStage @73075:67",
+    "renderStage @73128:175",
+    "renderStage @73140:56",
+    "renderStage @76643:91",
+    "renderStage @77195:112",
+    "renderStage @77832:184",
+    "renderStage @91897:109",
+    "renderStage @94071:109",
+    "renderStage @94173:55",
+    "renderStage @95618:162"
+   ],
+   [
+    "(anon) @29209:98"
+   ],
+   [
+    "(anon) @48950:420",
+    "kitOptFit0 @48950:408",
+    "kitOptFit @48931:52",
+    "(anon) @48964:15",
+    "kitOptFitAll @48964:3",
+    "(anon) @49148:81"
+   ],
+   [
+    "(anon) @56916:450",
+    "window.renderAfter @80220:123",
+    "kitPane @56915:35",
+    "(anon) @56922:110"
+   ],
+   [
+    "kitPcTagColour @49081:117",
+    "(anon) @49145:67"
+   ]
+  ]
+ }
+]
