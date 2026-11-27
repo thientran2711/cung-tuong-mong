@@ -190,9 +190,19 @@ window.dhStreak=dhStreak;window.dhThMonth=dhThMonth;
 /* TITLE-BAL pacing (rec (5) «never several titles popping in the same buổi»): at most BAL.dh.note.per new-title panels a buổi; the rest wait
    in S.dhPend and come one by one on the next buổi (the title itself is already hers; only the panel waits). */
 const bKey=()=>`${S.turn||0}.${S.tuan||0}.${S.buoi||0}`;
+/* E-TITLES3 F1 (RV-163H §2c F1, law 11 whole family): this is the ONE gate of EVERY title panel in the game. Plain keys = a jdh title (dhNotice);
+   "<kind>:<arg>" keys = another title family's panel, shown by DH_NOTE[kind] (jdh3 "rp:<id>" = a reputation title «Tiếng thơm / Tiếng xấu»,
+   jdh2 "hieu:<why>" = the Emperor's «Sắc phong ban hiệu»). A show function returns false when its title is gone by then (lost while waiting):
+   that key takes no slot and the next waiting one comes instead. */
+window.DH_NOTE=window.DH_NOTE||{};
+function dhNoteShow(key){const m=/^([a-z]+):(.*)$/.exec(String(key));if(m){const f=DH_NOTE[m[1]];return typeof f==="function"?f(m[2])!==false:false}
+ if(!S.dh||!S.dh[key]||!(S.dh[key].i>=0))return false;dhNotice(key);return true}
 function dhNoteGate(key){if(S.dhNB&&S.dhNB.k===bKey()&&S.dhNB.n>=BAL.dh.note.per){S.dhPend=S.dhPend||[];if(!S.dhPend.includes(key))S.dhPend.push(key);return}
- if(!S.dhNB||S.dhNB.k!==bKey())S.dhNB={k:bKey(),n:0};S.dhNB.n++;dhNotice(key)}
-(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&S.dhPend&&S.dhPend.length&&(!S.dhNB||S.dhNB.k!==bKey())){const k=S.dhPend.shift();if(!S.dhPend.length)delete S.dhPend;dhNoteGate(k);if(Q.length&&typeof showModal==="function"&&$("modal").hidden&&!window.__bot)showModal()}}catch(e){console.error("dh pend",e)}return r}})();
+ if(!dhNoteShow(key))return;if(!S.dhNB||S.dhNB.k!==bKey())S.dhNB={k:bKey(),n:0};S.dhNB.n++}
+window.dhNoteGate=dhNoteGate;
+(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&S.dhPend&&S.dhPend.length&&(!S.dhNB||S.dhNB.k!==bKey())){
+  while(S.dhPend&&S.dhPend.length&&(!S.dhNB||S.dhNB.k!==bKey())){const k=S.dhPend.shift();if(!S.dhPend.length)delete S.dhPend;dhNoteGate(k)}
+  if(Q.length&&typeof showModal==="function"&&$("modal").hidden&&!window.__bot)showModal()}}catch(e){console.error("dh pend",e)}return r}})();
 /* ---------- her new title: a kit reward panel, wear it now or later ---------- */
 function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")return;const up=(S.dh[key].i||0)>0;
  if(typeof log==="function")log(up?`Danh hiệu «${o.name}» lên bậc ${KIT_TIER_NAME[Math.min(7,o.tier)]}.`:`Ngươi được danh hiệu «${o.name}».`);

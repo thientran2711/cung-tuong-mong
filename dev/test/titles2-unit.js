@@ -33,7 +33,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const words=nk.map(k=>C[k].n+' '+(C[k].rep?C[k].how()+' '+C[k].fx():C[k].how(1)+' '+C[k].how(3))).join(' ');ck(!/[0-9%]/.test(words),'A1 no digits / % in player words');
   ck(nk.every(k=>C[k].sh==='t'||C[k].sh==='a'),'A1 every new title has a tone (KIT §82.1)');
   /* A2 earn + lose (state) */
-  const clr=p=>{p.dh={};p.rep={};p.sac=50;p.tai=50;p.duc=50;p.danh=50;p.sung=30;p.tamco=30;p.th=10;p.hh=10;p.bac=60;p.ghen=0;p.confined=0;p.out=0;p.schemes=0;rpSync(p,true)};
+  /* E-TITLES3: the palace has watched the test person long enough (BAL.dh.rp.seen; case G5 tests the wait itself) */const clr=p=>{p.dh={};p.rep={t0:-1e9};p.sac=50;p.tai=50;p.duc=50;p.danh=50;p.sung=30;p.tamco=30;p.th=10;p.hh=10;p.bac=60;p.ghen=0;p.confined=0;p.out=0;p.schemes=0;rpSync(p,true)};
   const has=(p,i)=>!!(p.dh&&p.dh['rp_'+i]&&p.dh['rp_'+i].i>=0);
   clr(S);S.duc=90;S.danh=85;rpSync(S,true);ck(has(S,'hien'),'A2 hien earned');S.duc=60;rpSync(S,true);ck(!has(S,'hien'),'A2 hien lost when Đức falls');
   clr(S);for(const v of rivals)v.sung=Math.min(v.sung||0,50);S.sung=95;S.th=-30;rpSync(S,true);ck(has(S,'hoathuy'),'A2 hoathuy earned (Sủng top + Thái hậu cold)');
@@ -117,6 +117,31 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const cw=window.COOPW;window.COOPW={on:true,seat:'b'};clr(S);const w=liveRivals(true).filter(x=>!x.queen)[1];w.dh={};w.rep={};w.duc=90;w.danh=85;rpSync(w,true);ck(!has(w,'hien'),'D guest seat: NPC rules do not run');
   S.duc=90;S.danh=85;rpSync(S,true);ck(has(S,'hien'),'D her own seat earns hers');window.COOPW=cw;
   const fe={coop:1,dh:{rp_hoathuy:{n:1,i:0}},sung:50};ck(dhRepG(fe,'sung',10)===0&&dhRepB(fe,'phuc')===0,'D a friend entry (p.coop) gets no effect');
+  /* G = E-TITLES3 (RV-163H §2c). G1–G3 F1: EVERY title panel through the ONE gate (jdh dhNoteGate, BAL.dh.note.per a buổi) — reputation «Tiếng thơm /
+     Tiếng xấu» (jdh3 "rp:<id>") and the Emperor's «Sắc phong ban hiệu» (jdh2 "hieu:<why>") wait in S.dhPend like a jdh title; a waiting key whose title is gone
+     takes no slot. G4–G7 F2: one matter = one ladder NHẸ · VỪA · NẶNG (jdh3 RPF), only the highest rung held; no name before BAL.dh.rp.seen months in the palace. */
+  const G0={};for(const k of ['sac','tai','duc','danh','sung','tamco','th','ghen','bac','rank','hieu','turn'])G0[k]=S[k];
+  {const kp=window.kitPanel;let n=0,T=[];window.kitPanel=kitPanel=function(sp){n++;T.push(sp&&sp.title);return kp.apply(this,arguments)};
+   try{const turn=S.turn;for(const x of rivals)if(x){x.sac=Math.min(x.sac||0,50);x.sung=Math.min(x.sung||0,50)}
+    clr(S);S.dhNB=null;delete S.dhPend;Q.length=0;S.duc=90;S.danh=85;S.bac=400;rpSync(S);
+    ck(has(S,'hien')&&has(S,'cankiem')&&n===1&&(S.dhPend||[]).length===1&&/^rp:/.test(S.dhPend[0]),`G1 two reputation titles in one buổi → ONE panel, the other waits (${n} panels, pend ${JSON.stringify(S.dhPend)})`);
+    const nh=n;S.hieu=null;S.dhConf=null;let h='';try{h=dhHieuGrant(S,'month')}catch(e){F.push('G2 dhHieuGrant threw '+e.message)}
+    ck(!!h&&n===nh&&(S.dhPend||[]).includes('hieu:month'),`G2 «Sắc phong ban hiệu» in the same buổi waits too (${n-nh} panels now)`);
+    S.turn=turn+1;Q.length=0;n=0;T=[];{const k=S.dhPend.shift();window.dhNoteGate(k)}ck(n===1&&/Tiếng thơm/.test(T[0]),`G1 next buổi: the waiting reputation panel comes (${T.join(',')})`);
+    S.turn=turn+2;Q.length=0;n=0;T=[];{const k=S.dhPend.shift();if(!S.dhPend.length)delete S.dhPend;window.dhNoteGate(k)}ck(n===1&&T[0]==='Sắc phong ban hiệu',`G2 the buổi after: the decree panel (${T.join(',')})`);
+    S.turn=turn+3;Q.length=0;n=0;delete S.dh.rp_hien;window.dhNoteGate('rp:hien');window.dhNoteGate('rp:cankiem');ck(n===1&&S.dhNB&&S.dhNB.n===1,`G3 a waiting title lost meanwhile takes no slot; the next one shows (${n})`);
+    S.turn=turn;Q.length=0;S.hieu=null;delete S.dhPend;S.dhNB=null}catch(e){F.push('G1-3 threw '+e.message)}finally{window.kitPanel=kitPanel=kp;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true}}
+  {const RF=T2.RPF;clr(S);S.sac=97;S.sung=92;S.tai=50;rpSync(S,true);ck(has(S,'khuynh')&&!has(S,'quocsac')&&!has(S,'phonghoa'),'G4 top beauty + the Emperor besotted → only «Khuynh quốc khuynh thành» (not Quốc sắc too)');
+   S.sung=40;rpSync(S,true);ck(!has(S,'khuynh')&&has(S,'quocsac'),'G4 favour fades → she falls back to the lower rung «Quốc sắc thiên hương»');
+   S.tai=90;rpSync(S,true);ck(has(S,'phonghoa')&&!has(S,'quocsac'),'G4 beauty + talent → the middle rung «Phong hoa tuyệt đại» replaces Quốc sắc');
+   S.tai=20;S.duc=30;S.tamco=20;rpSync(S,true);ck(!has(S,'tuhoa'),'G4 the pillow word is not said of the palace\'s top beauty (RPX)');
+   clr(S);S.rep={};S.duc=90;S.danh=85;rpSync(S,true);ck(!has(S,'hien'),'G5 no reputation before the palace has watched her BAL.dh.rp.seen months');S.rep.t0-=RB.seen;rpSync(S,true);ck(has(S,'hien'),'G5 … then it comes');
+   clr(S);S.sac=97;S.sung=92;S.dh.rp_quocsac={n:1,i:0,at:['']};S.dh.rp_khuynh={n:1,i:0,at:['']};rpSync(S,true);ck(has(S,'khuynh')&&!has(S,'quocsac'),'G6 an old save holding two rungs keeps only the highest');
+   let worst='';for(let i=0;i<300;i++){clr(S);for(const k of ['sac','tai','duc','danh','sung','tamco','th','ghen'])S[k]=Math.floor(Math.random()*101);S.bac=Math.floor(Math.random()*500);S.rank=Math.floor(Math.random()*8);rpSync(S,true);
+    for(const f in RF){const c=RF[f].filter(id=>has(S,id));if(c.length>1)worst=f+':'+c.join('+')}}
+   ck(!worst&&Object.values(RF).every(L=>L.length<=3),`G7 300 random states: never two rungs of one ladder at once, ≤ 3 rungs a ladder ${worst}`);
+   ck(Object.keys(RF).every(f=>RF[f].every((id,j)=>j===0||T2.rung(id).indexOf(T2.RP[RF[f][j-1]][0])>=0)),'G7 every rung names the rung below it (info card «Bậc»)')}
+  Object.assign(S,G0);clr(S);
   return {F,OK}});
  R.fail.push(...out.F);R.ok.push(...out.OK);
  /* F4 (static, j71.js): every bad way of a lập công family carries its mark cpm7("<fam>_a") (or the hush-money brb); pure declines stay title-free */

@@ -42,7 +42,7 @@ const RP={
  phonghoa:["Phong hoa tuyệt đại","t","cả nhan sắc lẫn tài học đều gần tột bậc","nhan sắc hay tài học sa sút"],
  khiem:["Khiêm cung","t","phẩm cao, được sủng, Đức tốt mà không bày mưu hại ai","bày mưu, Đức sa sút, hoặc tụt phẩm"],
  hoathuy:["Hồng nhan họa thủy","a","được sủng nhất hậu cung trong khi Thái hậu không ưa","Sủng giảm, hoặc Thái hậu nguôi lòng"],
- khuynh:["Khuynh quốc khuynh thành","a","nhan sắc tột bậc, đẹp nhất hậu cung","nhan sắc phai, hoặc có người đẹp hơn"],
+ khuynh:["Khuynh quốc khuynh thành","a","nhan sắc tột bậc, đẹp nhất hậu cung, lại khiến Hoàng thượng say mê","nhan sắc phai, có người đẹp hơn, hoặc ân sủng nhạt đi"],
  docphu:["Độc phụ","a","mưu hạ độc, hại thai bị lộ, hoặc bị kết tội","lâu ngày không thêm tội và Đức hồi lại"],
  vuco:["Vu cổ","a","mưu vu oan bằng bùa ngải bị lộ","lâu ngày không ai nhắc lại"],
  kieu:["Kiêu phi","a","phẩm cao, được sủng mà Đức kém","Đức hồi lại, tụt phẩm, hoặc mất sủng"],
@@ -86,7 +86,7 @@ const maidL=p=>(p.maid&&p.maid.loyal)||0;
 /* ---- the rules: [earn now?, keep while held?] — the same for her and every NPC (law 1) ---- */
 const RULE={
  hien:(p,t)=>[(p.duc||0)>=t.duc&&(p.danh||0)>=t.danh&&ago(p,"lo")>=t.clean&&ago(p,"toi")>=t.clean,(p.duc||0)>=t.offDuc&&(p.danh||0)>=t.offDanh&&ago(p,"lo")>0&&ago(p,"toi")>0],
- quocsac:(p,t)=>[(p.sac||0)>=t.sac&&topOf(p,"sac")&&!held(p,"khuynh"),(p.sac||0)>=t.off&&topOf(p,"sac")&&!held(p,"khuynh")],
+ quocsac:(p,t)=>[(p.sac||0)>=t.sac&&topOf(p,"sac"),(p.sac||0)>=t.off&&topOf(p,"sac")],
  vinhnhu:(p,t)=>{const w=((p.dh||{}).w_tho||{}).n||((p.dh||{}).w_doi||{}).n||0;return [(p.tai||0)>=t.tai&&w>0,(p.tai||0)>=t.off]},
  trithu:(p,t)=>[(p.tai||0)>=t.tai&&(p.duc||0)>=t.duc&&ago(p,"phat")>=t.clean,(p.duc||0)>=t.offDuc&&ago(p,"phat")>0],
  khoan:(p,t)=>[maidL(p)>=t.loy&&(p.duc||0)>=t.duc,maidL(p)>=t.offLoy&&(p.duc||0)>=t.offDuc],
@@ -99,7 +99,7 @@ const RULE={
  phonghoa:(p,t)=>[(p.sac||0)>=t.sac&&(p.tai||0)>=t.tai,(p.sac||0)>=t.off&&(p.tai||0)>=t.off],
  khiem:(p,t)=>[rk(p)>=t.rank&&(p.sung||0)>=t.sung&&(p.duc||0)>=t.duc&&ago(p,"mu")>=t.clean,rk(p)>=t.rank&&(p.duc||0)>=t.offDuc&&ago(p,"mu")>0],
  hoathuy:(p,t)=>[(p.sung||0)>=t.sung&&topOf(p,"sung")&&(p.th||0)<t.th,(p.sung||0)>=t.offSung&&(p.th||0)<t.offTh],
- khuynh:(p,t)=>[(p.sac||0)>=t.sac&&topOf(p,"sac"),(p.sac||0)>=t.off&&topOf(p,"sac")],
+ khuynh:(p,t)=>[(p.sac||0)>=t.sac&&topOf(p,"sac")&&(p.sung||0)>=t.sung,(p.sac||0)>=t.off&&topOf(p,"sac")&&(p.sung||0)>=t.offSung],
  docphu:(p,t)=>{const a=Math.min(ago(p,"loN"),ago(p,"toi"));return [a<t.win,a<t.win||(p.duc||0)<t.offDuc]},
  vuco:(p,t)=>[ago(p,"vu")<t.win,ago(p,"vu")<t.win],
  kieu:(p,t)=>[rk(p)>=t.rank&&(p.sung||0)>=t.sung&&(p.duc||0)<t.duc,rk(p)>=t.rank&&(p.sung||0)>=t.offSung&&(p.duc||0)<t.offDuc],
@@ -119,23 +119,45 @@ function when(){try{return typeof VP==="object"&&VP.date?VP.date(S.month,S.year)
 function snap(p){const r=rep(p),o=r.s||{};const t=mi();const out=!!p.out,cf=(p.confined||0)>0,nk=(p.kids||[]).length,sc=p.schemes||0;
  if(r.s){if(out&&!o.out)r.cold=1;if((o.out&&!out)||(o.cf&&!cf&&!out))deed(p,"esc");if(nk>o.nk)deed(p,"sinh");if(sc>o.sc)deed(p,"mu")}else if(out)r.cold=1;
  r.s={out,cf,nk,sc};const L=r.nm||(r.nm=[]);if(!L.length||L[L.length-1][0]!==t)L.push([t,p.nights||0]);while(L.length>RB().night+1)L.shift()}
-function rpSync(p,quiet){if(!canRun(p))return [];snap(p);const D=p.dh||(p.dh={}),got=[],lost=[];
- for(const id in RP){const f=RULE[id];if(!f)continue;let r;try{r=f(p,rT(id))}catch(e){continue}const k=RKEY(id),h=held(p,id);
-  if(!h&&r[0]){D[k]={n:1,i:0,at:[when()]};const H=rep(p).h[id]||(rep(p).h[id]={g:0});H.g++;H.at=mi();got.push(id)}
-  else if(h&&!r[1]){delete D[k];const H=rep(p).h[id]||(rep(p).h[id]={g:1});H.out=mi();lost.push(id);if((p===S?S.titleWorn:p.titleWorn)==="dh-"+k){if(p===S)S.titleWorn=null;else p.titleWorn=null}}}
- if(p===S&&!quiet){lost.forEach(id=>{try{log(`Người đời thôi gọi ngươi là «${RP[id][0]}».`)}catch(e){}});got.forEach(rpNotice)}
+/* E-TITLES3 F2 (RV-163H §2c F2; law 2 tiers + TITLE REBALANCE rec (3)(5)): titles about ONE matter are ONE ladder NHẸ · VỪA · NẶNG (low → high);
+   only the highest rung that holds is held (a higher rung replaces the lower; when it is lost she falls back to a lower rung only if that rung is earned
+   again). RPX: a title that is not given while a rung of that ladder is held (the pillow word «Tú hoa chẩm đầu» is not said of the palace's top beauty).
+   Every other title is its own matter (checked by dev/test/titles2-unit.js case F2: no two of one ladder at once). */
+const RPF={sac:["quocsac","phonghoa","khuynh"],sung:["chuyensung","homi","hoathuy"],duc:["trithu","khiem","hien"],ac:["kieu","thatduc","docphu"],
+ muu:["truongthiet","dophu","thambat"],con:["phuctinh","maubang"],nhan:["nhannhuc","niebann"]};
+const RPX={tuhoa:"sac"};
+const RPOF={};for(const f in RPF)RPF[f].forEach((id,j)=>RPOF[id]=[f,j]);
+const TIERW=["thấp","giữa","cao"];/* the rung words NHẸ · VỪA · NẶNG as the player reads them on a title */
+/* people give her a name only after they have watched her in the palace for BAL.dh.rp.seen months (her clock starts on her first month in the palace,
+   never in the khuê các; an NPC consort at court is already known). Earning only — a title held stays by its own keep rule. */
+function seenOK(p){const r=rep(p);if(r.t0==null){if(p===S){if(typeof isKc==="function"&&isKc())return false;r.t0=mi()}else r.t0=mi()-RB().seen}return mi()-r.t0>=RB().seen}
+function rpSync(p,quiet){if(!canRun(p))return [];snap(p);const D=p.dh||(p.dh={}),got=[],lost=[],up=[];const W={},sOK=seenOK(p);
+ for(const id in RP){const f=RULE[id];if(!f)continue;let r;try{r=f(p,rT(id))}catch(e){W[id]=held(p,id);continue}W[id]=held(p,id)?!!r[1]:!!r[0]&&sOK}
+ for(const f in RPF){const L=RPF[f];let top=-1;L.forEach((id,j)=>{if(W[id])top=j});L.forEach((id,j)=>{if(j!==top)W[id]=false})}
+ for(const id in RPX)if(RPF[RPX[id]].some(x=>W[x]))W[id]=false;
+ for(const id in RP){if(!(id in W))continue;const k=RKEY(id),h=held(p,id);
+  if(!h&&W[id]){D[k]={n:1,i:0,at:[when()]};const H=rep(p).h[id]||(rep(p).h[id]={g:0});H.g++;H.at=mi();got.push(id)}
+  else if(h&&!W[id]){delete D[k];const H=rep(p).h[id]||(rep(p).h[id]={g:1});H.out=mi();
+   /* replaced by a higher rung of its ladder (not a loss) */const F=RPOF[id];if(F&&RPF[F[0]].some((x,j)=>j>F[1]&&W[x]))up.push(id);else lost.push(id);
+   if((p===S?S.titleWorn:p.titleWorn)==="dh-"+k){if(p===S)S.titleWorn=null;else p.titleWorn=null}}}
+ if(p===S&&!quiet){lost.forEach(id=>{try{log(`Người đời thôi gọi ngươi là «${RP[id][0]}».`)}catch(e){}});
+  /* E-TITLES3 F1: the panel goes through the ONE title gate (jdh dhNoteGate, BAL.dh.note.per a buổi); the log line is written now */
+  got.forEach(id=>{try{const F=RPOF[id],o=F&&up.find(x=>RPOF[x][0]===F[0]);log(o?`Người đời thôi gọi ngươi là «${RP[o][0]}», nay gọi là «${RP[id][0]}».`:`Người đời bắt đầu gọi ngươi là «${RP[id][0]}».`)}catch(e){}if(typeof window.dhNoteGate==="function")window.dhNoteGate("rp:"+id);else rpNotice(id)})}
  return got}
 window.rpSync=rpSync;
+/* the rung words of a ladder title: «cao · trên «Phong hoa tuyệt đại»» (the rung + its neighbour), "" for a one-title matter */
+function rung(id){const F=RPOF[id];if(!F)return "";const L=RPF[F[0]],j=F[1];const w=TIERW[L.length===2&&j===1?2:j]||"";
+ return j>0?`${w} · trên «${RP[L[j-1]][0]}»`:`${w} · dưới «${RP[L[j+1]][0]}»`}
 /* her new reputation title: a kit panel (reward for a good name, info for a bad one) with the plate + Vì sao / Được / Mất / Mất khi */
-function rpNotice(id){try{const o=typeof dhObj==="function"&&dhObj(S,RKEY(id));if(!o||typeof kitPanel!=="function")return;const [n,sh,why,lost]=RP[id],t=rT(id);
- log(`Người đời bắt đầu gọi ngươi là «${n}».`);
+function rpNotice(id){try{if(!RP[id]||!held(S,id))return false;const o=typeof dhObj==="function"&&dhObj(S,RKEY(id));if(!o||typeof kitPanel!=="function")return false;const [n,sh,why,lost]=RP[id],t=rT(id);
  kitPanel({kind:sh==="t"?"reward":"info",title:sh==="t"?"Tiếng thơm":"Tiếng xấu",sub:o.when,dh:1,sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},
-  {h:"",rows:[["Vì sao",esc(why)],["Được",esc(fxW(t.g[0],t.g[1]))],["Mất",esc(fxW(t.l[0],t.l[1]))],["Mất khi",esc(lost)],["Xem lại","Nhiệm vụ › Danh hiệu"]]}],
-  opts:[{n:"Đã hiểu",fx:{},x:"danh tiếng do người đời gán, không đeo hay tháo được",go:()=>{}}]})}catch(e){console.error("rp",e)}}
+  {h:"",rows:[["Vì sao",esc(why)]].concat(rung(id)?[["Bậc",esc(rung(id))]]:[],[["Được",esc(fxW(t.g[0],t.g[1]))]]).concat([["Mất",esc(fxW(t.l[0],t.l[1]))],["Mất khi",esc(lost)],["Xem lại","Nhiệm vụ › Danh hiệu"]])}],
+  opts:[{n:"Đã hiểu",fx:{},x:"danh tiếng do người đời gán, không đeo hay tháo được",go:()=>{}}]});return true}catch(e){console.error("rp",e);return false}}
+window.DH_NOTE=window.DH_NOTE||{};window.DH_NOTE.rp=rpNotice;window.rpNotice=rpNotice;
 /* the info card of a reputation plate (tap a plate): the same kit info panel, with the words of a gán title (not «Khi đeo») */
 (function(){const o0=window.kitTitleOpen;if(typeof o0!=="function")return;window.kitTitleOpen=kitTitleOpen=function(t){try{const id=typeof t==="string"?t:t&&t.id;const m=/^dh-rp_([a-z]+)@?(.*)$/.exec(String(id||""));
   if(m&&RP[m[1]]&&typeof kitModal==="function"){const d=kitTitleDef(id);if(d){const [n,sh,why,lost]=RP[m[1]],x=rT(m[1]);
-   kitModal({kind:"info",title:n,sub:sh==="t"?"Danh tiếng · tiếng thơm":"Danh tiếng · tiếng xấu",sections:[{h:"",rows:[["Người đời gọi từ",d.when||"—",""],["Vì sao",why,""],["Được",fxW(x.g[0],x.g[1]),""],["Mất",fxW(x.l[0],x.l[1]),""],["Mất khi",lost,""]]}],btn:"Đã hiểu"});return}}}catch(e){console.error("rp",e)}
+   kitModal({kind:"info",title:n,sub:sh==="t"?"Danh tiếng · tiếng thơm":"Danh tiếng · tiếng xấu",sections:[{h:"",rows:[["Người đời gọi từ",d.when||"—",""],["Vì sao",why,""]].concat(rung(m[1])?[["Bậc",rung(m[1]),""]]:[],[["Được",fxW(x.g[0],x.g[1]),""],["Mất",fxW(x.l[0],x.l[1]),""],["Mất khi",lost,""]])}],btn:"Đã hiểu"});return}}}catch(e){console.error("rp",e)}
   return o0.apply(this,arguments)}})();
 /* ---- the effects while held ---- */
 function heldIds(p){if(!p||!p.dh||p.coop)return [];const L=[];for(const id in RP)if(p.dh[RKEY(id)]&&p.dh[RKEY(id)].i>=0)L.push(id);return L}
@@ -303,5 +325,5 @@ window.chapterTitle=chapterTitle;window.chapterInfo=chapterInfo;
    ARC67 road chapter incl. rdDef .t, home road before the tuyển tú; a new life / rebirth reads the new S; a co-op seat reads its own S), null = no open chapter = line 2 hidden. Installed
    whatever the load order: this module sets it over the j79 stub (j79 before), and j79 only installs its stub when none exists (j79 after). Read-only. */
 window.kitChapterTitle=function(){return chapterInfo(typeof S!=="undefined"?S:null)};window.kitChapterTitle.e92=1;
-window.TITLES2={RP,ROADT,ROADC,ARCT,VNT,VNC,MHT,MHOLD,MG70,MHG,LCT,LCWHY,LCW,LCA,fxW,heldIds,sumK,deed,snap,sideOf,cpMisc,arcKey,chName,vnName};
+window.TITLES2={RP,RPF,RPX,RPOF,rung,seenOK,ROADT,ROADC,ARCT,VNT,VNC,MHT,MHOLD,MG70,MHG,LCT,LCWHY,LCW,LCA,fxW,heldIds,sumK,deed,snap,sideOf,cpMisc,arcKey,chName,vnName};
 }catch(e){console.error("jdh3",e)}})();

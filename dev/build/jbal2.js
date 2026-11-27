@@ -808,10 +808,15 @@ BAL.dh={n0:[2,6,12],step:2,artLv:[4,5],q:{wk:2},note:{per:1},cond:{han:{rank:1},
          additive kinds (the jdh bonus hooks): phuc (luck of rolled acts), thi (contest talent), suc (Sức on waking), nghe (self-study chance), don (rumours against her: + harder, − easier);
          muu = the eyes on her (caughtOdds when she is the TARGET: + schemes against her are caught more, − land easier); kin = caughtOdds when she is the DOER (+ her own schemes caught less).
        Thresholds: stats 0..100, bạc in bạc, months on the calendar (year×12+month). mem = deeds kept per kind. tier b = plate tier (t good, a bad). top = "highest among
-       all living consorts in the palace" (her included). night = months of the nights window for chuyensung. */
-BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,deg:[4,8]/* additive effect size words: ≤ deg[0] «hơn một chút», ≤ deg[1] «hơn», else «hơn hẳn» */,
- T:{hien:{duc:80,danh:70,offDuc:70,offDanh:60,clean:12,g:["tren",10],l:["danhLoss",2]},
-  quocsac:{sac:85,off:80,g:["sung",10],l:["muu",-4]},
+       all living consorts in the palace" (her included). night = months of the nights window for chuyensung.
+       seen (E-TITLES3 F2, TITLE REBALANCE rec (5)): months the palace must watch her before ANY reputation title is given (her clock starts on her
+       first month in the palace; ≈ buổi 96, the LIVE TITLE-BAL first-title target ≈ buổi 95+). LADDERS (jdh3 RPF, law 2): one matter = one ladder
+       NHẸ · VỪA · NẶNG — sắc quocsac→phonghoa→khuynh, sủng chuyensung→homi→hoathuy, đức trithu→khiem→hien, ác kieu→thatduc→docphu,
+       mưu truongthiet→dophu→thambat, con phuctinh→maubang, nhẫn nhannhuc→niebann; only the highest rung is held; bar AND effect rise by rung
+       (share kinds: smaller d = bigger share; muu / kin: bigger |v| = bigger). */
+BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,seen:8,deg:[4,8]/* additive effect size words: ≤ deg[0] «hơn một chút», ≤ deg[1] «hơn», else «hơn hẳn» */,
+ T:{hien:{duc:80,danh:70,offDuc:70,offDanh:60,clean:12,g:["tren",6],l:["danhLoss",2]},
+  quocsac:{sac:85,off:80,g:["sung",12],l:["muu",-4]},
   vinhnhu:{tai:80,off:70,g:["thi",2],l:["suc",-1]},
   trithu:{tai:70,duc:65,offDuc:55,clean:12,g:["nghe",15],l:["sung",-10]},
   khoan:{loy:85,duc:60,offLoy:70,offDuc:50,g:["trung",8],l:["muu",-4]},
@@ -824,18 +829,18 @@ BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,deg:[4,8]/* additive effect size words: ≤
   phonghoa:{sac:85,tai:85,off:75,g:["sung",10],l:["hau",-8]},
   khiem:{rank:5,sung:70,duc:70,offDuc:60,clean:12,g:["tren",10],l:["muu",-4]},
   hoathuy:{sung:90,th:0,offSung:80,offTh:10,g:["sung",6],l:["tren",-4]},
-  khuynh:{sac:95,off:88,g:["sung",8],l:["muu",-8]},
-  docphu:{win:24,offDuc:40,g:["muu",8],l:["sung",-5]},
+  khuynh:{sac:95,off:88,sung:85,offSung:70,g:["sung",6],l:["muu",-12]},
+  docphu:{win:24,offDuc:40,g:["muu",8],l:["sung",-4]},
   vuco:{win:24,g:["muu",4],l:["tren",-5]},
   kieu:{rank:5,sung:70,duc:35,offDuc:45,offSung:60,g:["muu",4],l:["hau",-6]},
-  chuyensung:{nights:5,off:2,g:["sung",10],l:["muu",-8]},
+  chuyensung:{nights:5,off:2,g:["sung",12],l:["muu",-4]},
   homi:{sung:75,rank:2,offSung:65,offRank:4,g:["sung",10],l:["tren",-6]},
   thatduc:{duc:15,win:12,offDuc:30,g:["kin",4],l:["danh",-5]},
   tham:{bac:300,duc:40,offBac:200,offDuc:50,g:["bac",8],l:["danhLoss",2]},
-  truongthiet:{n:3,win:12,quiet:6,g:["muu",4],l:["danh",-6]},
+  truongthiet:{n:3,win:12,quiet:6,g:["muu",4],l:["danh",-8]},
   dophu:{ghen:70,win:6,off:50,g:["sung",10],l:["hau",-6]},
   tuhoa:{sac:80,tai:30,duc:40,tamco:30,offSac:70,offTai:40,offDuc:50,offTam:40,g:["muu",8],l:["danh",-6]},
-  thambat:{tamco:85,n:3,win:24,off:75,g:["muu",8],l:["sung",-8]},
+  thambat:{tamco:85,n:3,win:24,off:75,g:["muu",12],l:["sung",-5]},
   hamoan:{win:12,keep:18,g:["tren",8],l:["danh",-6]},
   bacmenh:{sac:70,win:18,g:["tren",8],l:["phuc",-2]}}};
 /* cp  CHAPTER / SIDE-LINE titles (achievement titles of jdh, worn like them; tone t = kept faith, a = won by betrayal or cruelty).

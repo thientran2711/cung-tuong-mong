@@ -75,7 +75,12 @@ function dhHieuGrant(p,why,o){o=o||{};if(!p||!alive(p)||p.hieu||(p.dhConf&&p.dhC
 window.dhHieuGrant=dhHieuGrant;
 function itTag(e){try{if(typeof kitItemTag==="function"&&typeof kitItemInfo==="function")return kitItemTag(kitItemInfo(e)).replace('class="kiev"','class="kiev kiev-own kiev-txt"')}catch(x){}return""}
 const WHYW={son:"mừng hoàng tử ra đời",promo:"nhân dịp tấn phong",contest:"vì tài nghệ hơn người",month:"vì ân sủng, thanh danh đều đủ",seat:"thay cho ghế chưa trống"};
+/* E-TITLES3 F1 (law 11): the decree panel goes through the ONE title gate (jdh dhNoteGate "hieu:<why>", BAL.dh.note.per a buổi); the log line now */
 function dhHieuNotice(h,it,why){const d=H().danhG;log(`Hoàng thượng ban hiệu ${h}: từ nay gọi là ${rkNm(S)}. Danh +${d}.`);
+ if(typeof window.dhNoteGate==="function")window.dhNoteGate("hieu:"+(why||"month"));else dhHieuPanel(h,it,why)}
+window.DH_NOTE=window.DH_NOTE||{};window.DH_NOTE.hieu=function(why){const h=S&&S.hieu;if(!h)return false;/* taken back while waiting → no panel */
+ const it=(S.inv||[]).filter(e=>e&&e.from==="emp"&&e.hieu===h&&DK.includes(e.k));dhHieuPanel(h,it,why);return true};
+function dhHieuPanel(h,it,why){const d=H().danhG;
  if(typeof kitPanel!=="function")return;kitPanel({kind:"reward",title:"Sắc phong ban hiệu",sub:typeof VP==="object"&&VP.date?VP.date(S.month,S.year):"",subject:typeof pEmp==="function"?pEmp():null,
   sections:[{h:"",html:it.map(itTag).join("")},{h:"",rows:[["Hiệu ban",`«${esc(h)}» · gọi là ${esc(rkNm(S))}`],["Vì sao",esc(WHYW[why]||WHYW.month)],["Được",`Danh +${d} · Sắc phong và Ngọc ấn cất trong rương`],
    ["Giữ gìn","không bán, không tặng; mất là bị trách, có lỗi lớn thì bị thu"]]}],btn:"Tạ ơn"})}
