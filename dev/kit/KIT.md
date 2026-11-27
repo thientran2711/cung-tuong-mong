@@ -1085,6 +1085,14 @@ ladder words from the real formulas; "có thể gặp người" → real words.
   (own act picture only). `can:false` dims a card (nothing to do); lists put doable cards first, mastered last.
 - Deleted: the old per-level list (`.ksls`), the 170 px art column, review/tabs-kit's `kitSkillHead` / `.ksk2` duplicate. Sample: trang mẫu kit (§47).
 
+### 21e. TÀI NGHỆ CELL — `kitSkillCell(o,key)` (j79; owner 27/11 ~06:33Z; KIT-STAGE-R11, idea ported from KK24 review/kit-tntile §21e which never landed)
+OWNER (verbatim, 27/11 ~06:33Z): "Tức là ở chỗ mà học tài nghệ nè, tôi nói là mỗi một môn mà phải hiện ra là từng cái ô như thế nào đó. Tức là ví dụ như là tứ đức là 5 môn là chỉ hiện ra đúng 5 ô vuông. Ví dụ như là 2 cột chẳng hạn thì là một cột là 3 môn, một cột là 2 môn chẳng hạn. Đó, cầm kỳ thi họa là sẽ là 4, vẫn là 2 cột mỗi cột là 2 môn chẳng hạn. Chọn vào môn nào đó mới ra một cái khung riêng như thế nào đó về các vấn đề học, hay là tự học, hay là học với thầy, cái gì đó, hiểu không? Không có hiện cái này nữa."
+- CELL: a square `button.ktn-cell[data-tnmon]` = the môn painting (`kitSkillArt` → `art-<k>` / `vir-<k>`, kitSceneArt) + name + bậc (kicker word + `kitSteps` «Bậc l/5»). Nothing else on the tab (no act rows, no bar, no desc).
+- GRID (law 10): `.kskills.ktn-grid`, 2 columns on every device; ONE cell side `--ktnc` for the whole Tài nghệ tab = the largest square that lets the tallest of Tứ đức / Cầm kỳ thi họa / Vũ · Y · Nữ công fit under the tab bar without scrolling (`ktTnFit`, jtabs; rows = ceil(count/2), today 4 môn each → 2×2; a 5-môn tab would be 3+2). Tác phẩm uses the same side (8 cells, scrolls). Cells keep the môn order.
+- FRAME: tap → `ktTnPop(key)` = ONE kitModal (kind info) holding the full `kitSkillCard` of that môn (picture, bậc dots, desc, Tiến bộ, «Bậc n mở …») and EVERY study way as its own kit act card with Tốn / Được (Thành/Bại) rows: Tự học · Học với thầy (ma ma) · Học với Thái hậu · Các lối, sách phổ · Phát bạc … (the jactj4 «Học» fold is NOT used inside the frame: `ktArtSkills.raw`). iPad: XL list frame, 2 act columns (`kszListWantsWide3`). A tap on an act closes the frame first, then the act runs (every lesson gates on Q.length).
+- «Bảng tài nghệ hậu cung» (jpma VIEW) = the «ⓘ Bảng tài nghệ» link in the sub-tab head, never a loose row under the cells.
+- Video/stills: `dev/test/kit-stage-r11-video.js` flow `tainghe`.
+
 ## 22. PERSON STATS (kit 2)
 Every consort card shows the player's stat set as kit tiles under the portrait (`kitPersonStats(v)`): Sủng · Đức · Danh · Sắc · Tài · Tâm cơ; unknown
 values read "chưa rõ". Reveal hook: `window.kitStatKnown(v,key) -> true|false|null` (j61/j85 Đức stages, intel); `kitStatReveal(v,key)` records a
