@@ -652,3 +652,4 @@ E-GAIN3c (law-3 Phạt vô cớ + servant door family, law-4 typed act deltas, d
 KIT-STAGE-R13 enlarged-card cut + badge | review/kit-stage-r13 | session_01Rc5AsJLuNggGdxUYXoWf71 | RUNNING | 2026-11-27T08:22Z (MAIN 175)
 PICKER-DOM r4 successor | review/picker-dom | FOREMAN D session_01D3E3NagaVYs8K14c2bMUy1 / worker session_01D3E3Nb4VrF8iWzxUGrQpNW | RUNNING | 27/11 08:22Z
 | E-TITLES3 titles2 content fix (RV-163H §2c F1 rpNotice→dhNoteGate, F2 same-matter RP tier families, 44-road DH3N names; opus; briefs/E-TITLES3.md) | review/titles-daycard-lrm2 (on 16e8b575) | FOREMAN E child3 | session_01DgYSWq92pW1ZBcYAcMrBma | RUNNING | 27/11 08:43Z |
+save stack rv24 MERGER (LIVE bundle1) | review/save-fix-stack-rv24 | <opening> | RUNNING | 27/11 08:55Z (Foreman B child 5)
