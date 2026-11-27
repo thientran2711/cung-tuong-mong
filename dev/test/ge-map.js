@@ -10,7 +10,7 @@ const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(UR
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,400):''))};
 (async()=>{const b=await chromium.launch();
  for(const [W,H,tag] of [[755,1000,'fold'],[1180,820,'ipad'],[412,1058,'cover'],[390,844,'phone']]){
-  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:OUT?2:1,serviceWorkers:'block'});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,300)));
+  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:OUT?2:1,serviceWorkers:'block'});const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,300)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof geMap==='function'&&typeof kitBranchMap==='function',null,{timeout:60000});await p.waitForTimeout(2000);
   /* seed one earned ending (tt_co #1 thiện, lives 2) + a fail + chapters seen + a kỳ ngộ, then reopen the title */
   await p.evaluate(()=>{const g={t:{},g:{},f:{}};const b='tt_co';g.t['ge_'+b+'_1t']={name:GE_CAT[b].e[0][6],b,i:0,sh:'t',lives:[2],first:{life:2,who:'Nàng'}};g.g[b+'_1']=1;g.f[b+'_2']=1;localStorage.setItem('ctm-ge',JSON.stringify(g));

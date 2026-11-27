@@ -12,7 +12,7 @@ const path=require('path');const res=[];const ok=(c,m,x)=>{res.push(!!c);console
 const HTML=process.argv[2]||'dev/index.html';const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{
  const {chromium}=require('playwright');const b=await chromium.launch();const errs=[];
- const mk=async(seat,vp)=>{const p=await b.newPage({viewport:{width:vp[0],height:vp[1]}});p.on('pageerror',e=>errs.push(seat+': '+e.message));
+ const mk=async(seat,vp)=>{const p=await b.newPage({viewport:{width:vp[0],height:vp[1]}});await require('./lib/veil').guard(p);p.on('pageerror',e=>errs.push(seat+': '+e.message));
   await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
   await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;window.kitNotice=undefined;window.ptOn=()=>false});
   return p};
