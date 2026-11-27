@@ -564,3 +564,32 @@ Old saves (d): quickcheck «old save ok»; SUL / death on LIVE-format paths PASS
 Note: LIVE moved to 066d9af0 meanwhile; rv22 = FF on 17f23656; no gate needed a merge (lander restacks built-only conflicts).
 ### Gain vs risk
 GAIN: the LC26 hold is lifted without touching game code; the gate now really tests the kit-notice round trip (mutation-proven) and the identity-card cure. RISK: (1) ending the selection days in the harness hides a look-up bug that only shows during those days — hiếm, nhỏ; selx-* tests own those days. (2) LIVE moved past 17f23656 — dễ xảy ra, nhỏ; built-only restack. → **Được lớn hơn**.
+
+## LOOK-DEDUPE FIX — rv23 (LIVE 4cd3f974 merged; Foreman B order 27/11 ~05:30Z)
+PRIORITY #1 CHECK ('jlooks jslap mg-trim kptitle-close'): LIVE branches mg-trim (69beb3e2/b8ea33be, test dev/test/mg-trim.js) and kptitle-close (a809ab25, G4 90) reused; no new game code beyond the merge.
+**review/save-fix-stack-rv23 15bd0e2989f54e6b81f7449d65d8f0484ff36d84** = rv22 + LIVE 4cd3f974 (dayq q-softlock + mg-trim + parity-facfix + kptitle-close).
+### Merge hunks (SOURCE conflicts, both sides kept)
+| file | stack side (rv22) | LIVE side (mg-trim) | resolution |
+|---|---|---|---|
+| jlooks.js NPC look act on her | card built by registered generator `lkCard = rcpReg("lkNpc")` (saved in the sổ, made again on load) | «Né» = ONE roll of the shown odds (`roll(dOd)`), no slapGame board; bot test without slapGame/kg82Open | generator kept; its «Né» option = LIVE one-roll option verbatim; wrapper bot test = LIVE's |
+| jslap.js NPC slap on her | `slapCard = rcpReg("slapNpc")` + `window.SLAP_R0=r0` | «Né đòn» = ONE roll, no game | generator kept; its «Né đòn» option = LIVE one-roll option verbatim; bot test unchanged (= LIVE) |
+| index.html / sw.js / assets.json | built | built | rebuilt (build_site.sh) |
+Merge check (scratch, both devices): slapNpc + lkNpc cards made → saved as rk → made again from the sổ once; options «Né đòn/Chịu đòn», «Né/Đứng yên»; tapping «Né» opens no game frame (slapGame calls 0); no page errors → PASS Fold + iPad. LIVE's own test mg-trim.js: ALL PASS.
+### Fault found on rv23 and FIXED (test harness, LAW 11 same family as look-dedupe)
+G4 90 button-crawl «Ô lưu · Lui» FAIL on rv23 while LIVE 4cd3f974 PASS (kptitle-close). Root: the crawler's home start makes a life and never accepts «Thân phận kiếp này»; the stack writes the sổ while that card is open (hclh-save-v2-3 14.5 K chars on rv23, none on LIVE — proven in page), so ✕ → tgFix → resumeGame rightly brought the open identity card back (shot: identity card) = what a player sees. Fix: button-crawl home start accepts the identity card as a player (+ ends a tú nữ life's selection days), same as look-dedupe/sbr. Before/after: rv23 FAIL 1 → PASS ×3 (2 alone + quickcheck); LIVE with the fixed harness PASS.
+Family scan (tests whose life setup skips the accept and then reads Q / modal / ☰): look-dedupe (fixed rv22), button-crawl (fixed rv23); the other quickcheck hooks (85 dead-card, 93 press-keep, 94 q-softlock, 95 next-dead, 80 dialog-fixed) PASS on rv23.
+### Gates on rv23 (be9c66eb merge, 15bd0e29 head)
+| gate | result |
+|---|---|
+| look-dedupe ×3 Fold+iPad | PASS ×3 (+ G4 92 PASS) |
+| save-unseen-lists (SUL_FCS=1) | 24/24 PASS |
+| probe save-residue Fold s1 / iPad s1 | 0 families PASS |
+| death / notice | PASS / PASS Fold+iPad |
+| knsell / mutLazy | PASS 8 cards / **FAIL** ✔ (S touched 12) |
+| inv-stack-scan · census · time-advance | RAW 0 · UNCLASSIFIED 0 (33 lists) · PASS 11 gates |
+| coop-e2e SWAP0 (local Worker) | 143/143 |
+| mg-trim.js (LIVE's test for jlooks/jslap) | ALL PASS |
+| quickcheck ALONE (15bd0e29) | **CORE GATES PASS** (hooks 13, incl. 90 button-crawl PASS) · QUICKCHECK PASS · old save ok · perf new/live render 213/218, tab 514/517, buổi 1331/1131 ms |
+LIVE moved again to 98c77517 (ob-verdict-3: jverdict/jkitpage): merge-tree = index.html + sw.js only (built) → lander restacks; no source conflict.
+### Gain vs risk
+GAIN: save stack lands on today's LIVE with mg-trim and kptitle-close kept; every core gate PASS. RISKS: (1) hand merge of jlooks/jslap lost a side — hiếm, vừa; both sides checked in the built page by the merge check + mg-trim.js + probe (generator remade clean) → an independent hunk check is planned by Foreman B. (2) the harness accept hides a ☰ path only seen while the identity card is open — hiếm, nhỏ; that path resumes the card, the right screen. (3) LIVE moved (98c77517) — built-only, lander rebuilds. → **Được lớn hơn**.
