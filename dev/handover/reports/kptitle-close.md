@@ -1,0 +1,11 @@
+# kptitle-close — MAP-R9 worker (27/11), MAIN 168 job: LIVE fault G4 90 «Ô lưu · Lui»
+PRIORITY #1 CHECK: OD none for this fault | main LIVE fa722503 (fault baseline since 03a8c17c, also on a22cf45d/e-pack-c reports) | review/*: button-crawl-fix-1..10 = crawler/test changes only (checked tips 7/9/10), review/*save* (cloud-save, savegrowth) no title-close change seen | claims: F ROLE B #6 line lists «Ô lưu Lui» (25/11 14:54Z, RUNNING, test side) — no fix landed.
+
+## Cause
+«Ô lưu» is the crawler's name for the ☰ button; it opens the title home menu (#modal.kptitle, «Cung Tường Mộng») over a LIVE life. The «Lui» is that menu's ✕ (aria-label «Lui»). ✕ → closeModal → the TITLE NEVER BLANK guard (j74 tgFix): title up + modal hidden ⇒ resumeGame() (loads the last saved sổ). With NO saved sổ yet (a fresh life, 0 of 3 slots saved) resumeGame is false and the guard fell through to go("home"): the home menu came straight back — ✕ / Esc / tap-outside could not leave the menu for the life she was playing.
+## Fix (one place, j74.js tgFix)
+☰ over a live life sets `window.__kmOver` (cleared when the title hides). In tgFix, after the saved-sổ resume: if `__kmOver` and the life is alive and no sổ is saved → put the menu away, hide the title, render the life (tab act). Saved-sổ path and the cold-start title (no live life) unchanged. Same path serves ✕, Esc and tap-outside (all go through closeModal → tgFix). Sub-pages' «‹ Lui» (data-tgo home / opt) are a real back-to-parent: untouched.
+## Result
+button-crawl --fast: Fold FAIL 1 → PASS 80/80 (0 faults), iPad (--dev ipad) PASS 80/80. Probe (no saved sổ): ✕ → modal + title hidden, game tab act, no reopen (4 of 6 probe runs; the other 2 showed #kroul, the harness's new-life roulette cover, which tgBlank rightly excludes).
+## quickcheck on a809ab25
+Run 1: core gates PASS (G4 90 button-crawl now PASS; before: FAIL on LIVE), perf FAIL only on one outlier `longTaskMaxMs 2688 vs live 1309 (limit 2109)` (medians render 169/184, tab 414/408, buổi 972/949, tasks>200ms 19/18). Run 2 (same sha): QUICKCHECK PASS · old save ok · render 150/177, tab 369/442, buổi 923/852, tasks>200ms 17/17. The change only touches the ☰ close path (j74 tgFix), no render/perf code: run 1 = machine noise.
