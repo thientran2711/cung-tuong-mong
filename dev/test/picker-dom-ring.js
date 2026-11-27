@@ -4,7 +4,7 @@
    an item that is NOT on the drawn page has the same lock reason as when drawn and its act gives exactly one piece; the next dialog in Q survives the ring close. */
 const path=require('path');const A=process.argv.slice(2);const ROOT=path.resolve(A[0]);const arg=(k,d)=>{const i=A.indexOf(k);return i>=0?A[i+1]:d};
 const VPS=arg('--vp','755x1000,1180x820').split(',').map(s=>s.split('x').map(Number));
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const cp=require('child_process'),zlib=require('zlib');
+const {chromium}=require('playwright');const DOM=[];const {serve,BASE}=require('./coop-serve.js');const cp=require('child_process'),zlib=require('zlib');
 const D=JSON.parse(zlib.gunzipSync(cp.execSync('git show origin/claude/cung-tuong-mong-handover-hj0h8w:dev/handover/robot/flight2-s7-stuck/ls-b2928-inv1437.json.gz',{cwd:__dirname,maxBuffer:1<<28})).toString());
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();for(const [vw,vh] of VPS){const ctx=await b.newContext({viewport:{width:vw,height:vh},reducedMotion:'reduce'});await serve(ctx,ROOT);
@@ -16,8 +16,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   for(const [n,pid,pp] of [['giftpick','giftpick',{v:v.id}],['giftto','giftto',{t:'emp'}],['plantpick','plantpick',{v:v.id}],['tsgiftpick-it','tsgiftpick',{v:v.id,k:'it'}],['tsgiftpick-wk','tsgiftpick',{v:v.id,k:'wk'}]]){
    while(Q.length)Q.shift();try{kitRingItem.cur&&kitRingItem.close(1)}catch(e){}try{closeModal()}catch(e){}
    const it=mkP(pid,pp);if(!it){out.push({n,none:1});continue}pushDil(it,n);const mm=Q.find(z=>z.pid===pid&&z.h===it.t);{const j=Q.indexOf(mm);if(j>0){Q.splice(j,1);Q.unshift(mm)}}showModal();await w(1500);
-   const M=document.getElementById('modal'),C=kitRingItem.cur;const o={n,front:Q[0]===mm,ring:!!C,kriOn:kriOn(),hid:M.hidden,kriDlg:KRI_DLG===Q[0],cur:!!kitRingItem.cur,kon:kipOn(Q[0]),q:Q.map(z=>z.pid||z.t).slice(0,4)};if(!C){out.push(o);continue}
-   const it2=Q[0];o.same=it2===it;const L=kipList(it2);o.kip=L.length;o.ringN=C.items.length;o.cap=KIT_RINGI.maxN;o.wantN=Math.min(L.length,KIT_RINGI.maxN);
+   const M=document.getElementById('modal'),C=kitRingItem.cur;const o={n,nodes:M.querySelectorAll('*').length,page:document.querySelectorAll('*').length,front:Q[0]===mm,ring:!!C,kriOn:kriOn(),hid:M.hidden,kriDlg:KRI_DLG===Q[0],cur:!!kitRingItem.cur,kon:kipOn(Q[0]),q:Q.map(z=>z.pid||z.t).slice(0,4)};if(!C){out.push(o);continue}
+   const it2=Q[0];o.same=it2===it;o.live=typeof kipList!=='function';const L=o.live?it2.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]).sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1])):kipList(it2);o.kip=L.length;o.ringN=C.items.length;o.cap=KIT_RINGI.maxN;o.wantN=Math.min(L.length,KIT_RINGI.maxN);
    const drawn=new Set([...M.querySelectorAll('.opts>.opt[data-m]')].map(x=>+x.dataset.m));o.drawn=drawn.size;
    o.ids=C.items.map(x=>x.id).join()===L.slice(0,KIT_RINGI.maxN).map(x=>x[1]).join();
    const und=C.items.filter(x=>!drawn.has(x.i));o.undrawn=und.length;
@@ -32,10 +32,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    const nx={t:'probe',h:'probe',opts:[{n:'Thôi'}]};Q.push(nx);try{kitRingItem.cur&&kitRingItem.close(1)}catch(e){}await w(800);o.nextKept=Q.includes(nx);
    out.push(o)}
   return out});
+ for(const o of R)if(!o.none)DOM.push(`${vw}x${vh} ${o.n}: #modal ${o.nodes} · page ${o.page} · ring ${o.ringN}/${o.kip}`);
  for(const o of R){if(o.none){console.log('skip',o.n);continue}const tag=`${vw}x${vh} ${o.n}`;ok(o.ring,tag+' ring opens',o);if(!o.ring)continue;
   ok(o.lockAgree!==false,tag+' ring lock = kit takeable rule');ok(o.ringN===o.wantN&&o.ids,tag+' ring lists kipList (cap maxN)',{kip:o.kip,ring:o.ringN,cap:o.cap,drawn:o.drawn});
   if(o.undrawn!=null&&o.whyRing!=null){ok(o.hideAfterRedraw,tag+' dialog stays hidden after a redraw');ok(!!o.whyRing===!!o.whyDrawn,tag+' undrawn item locked = drawn card locked',{ring:o.whyRing,drawn:o.whyDrawn});ok(o.whyPaneSame,tag+' pane reason = drawn card words',{pane:o.whyAfterInfo,drawn:o.whyDrawn})}
   if(o.actRes!=null)ok(o.dInv===1&&o.gone||o.dInv===0&&o.actRes==='bad',tag+' act on an undrawn item gives one piece',{res:o.actRes,dInv:o.dInv});
   ok(o.nextKept,tag+' next dialog kept after ring close')}
  ok(!errs.length,`${vw}x${vh} no page errors`,errs.slice(0,3));await ctx.close()}
- await b.close();const n=res.filter(Boolean).length;console.log(`RING ${n}/${res.length} ${n===res.length?'PASS':'FAIL'}`);process.exit(n===res.length?0:1)})();
+ await b.close();const n=res.filter(Boolean).length;DOM.forEach(x=>console.log('DOM '+x));console.log(`RING ${n}/${res.length} ${n===res.length?'PASS':'FAIL'}`);process.exit(n===res.length?0:1)})();
