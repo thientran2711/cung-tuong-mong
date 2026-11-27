@@ -2,7 +2,7 @@
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick | promotion roads seen / taken |
 |---|---|---|---|---|---|---|---|---|---|
-| flight2-s18e | HARNESS |  | 1045 |  | 2 | 0 | 8 | — | 104 / 75 (decree 104) |
+| flight2-s18e | HARNESS |  | 1275 |  | 2 | 0 | 8 | — | 145 / 110 (decree 139, select 6) |
 
 ## Dead buttons
 
