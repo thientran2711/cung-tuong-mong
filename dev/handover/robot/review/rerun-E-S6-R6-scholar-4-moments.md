@@ -1,0 +1,54 @@
+# R6-scholar-4 moment log (bot sens, ipad, seed 2810379132, real-tap harness 2df8f5fa)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-R6-scholar-4/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · .dlg «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Vào cung ngayTốnkhôngĐượcsan | Ở cố quốc chờ hòa ướcTốnkhôn | Trang trước | Dung mạo 15 | Dung mạo 16 | Dung mạo 17 | Dung mạo 18 | Dung mạo 19 · shots-R6-scholar-4/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Tiền truyện · Công chúa Phù Tang hòa thân · 1/3» · EVENT · rank 2 → 0 · shots-R6-scholar-4/m-rank-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Tiền truyện · Công chúa Phù Tang hòa thân · 1/3» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-rank-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Công chúa Phù Tang hòa thân · 1/3» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-R6-scholar-4/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Công chúa Phù Tang» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R6-scholar-4/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Phòng của ta · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài36Tâm cơ22Đức30Danh1 | Bạc60Sức100/100 | Buổi sáng, còn 4 khắc | Ngày lên đườngcòn 22 tháng | sương sớm | Tâm trạngBình thản0 · shots-R6-scholar-4/m-new-1-7.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · page «Phòng của ta · Ở đây có 1 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài36Tâm cơ22Đức30Danh1 | Bạc60Sức100/100 | Buổi trưa, còn 4 khắc | Ngày lên đườngcòn 22 tháng | hoa đào bay | Tâm trạngBình thản0 · shots-R6-scholar-4/m-new-1-8.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · #kdaytc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài36Tâm cơ22Đức30Danh1 | Bạc60Sức100/100 | Buổi sáng, còn 4 khắc | Ngày lên đườngcòn 22 tháng | trời quang | Tâm trạngBình thản+2 · shots-R6-scholar-4/m-new-4-9.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-R6-scholar-4/m-new-5-10.png
+- year 1 · turn 0 · tuần 1 · buổi 3 · rank 0 · #klearnov «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-R6-scholar-4/m-new-8-11.png
+- year 1 · turn 0 · tuần 2 · buổi 1 · rank 0 · #modal «Hoàng thúc mời yến» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-9-12.png
+- year 1 · turn 0 · tuần 2 · buổi 1 · rank 0 · .dlg «Hoàng thúc mời yến» · NEW SCREEN · first time on this screen; buttons: Từ chối thẳngRất vữngTốnkhôn | Nhận lời cho êm, rồi tâu phụ · shots-R6-scholar-4/m-new-10-13.png
+- year 1 · turn 1 · tuần 0 · buổi 3 · rank 0 · #modal «Danh hiệu mới» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-16-14.png
+- year 1 · turn 1 · tuần 0 · buổi 3 · rank 0 · .dlg «Danh hiệu mới» · NEW SCREEN · first time on this screen; buttons: Đeo ngayGhi chúchọn một: Thê | Để sau · shots-R6-scholar-4/m-new-16-15.png
+- year 1 · turn 1 · tuần 0 · buổi 3 · rank 0 · .dlg «Đeo «Thư hương»» · NEW SCREEN · first time on this screen; buttons: Thêm TàiTốnkhôngĐượcTài +1 | Học mau tiếnTốnkhôngĐượcTự h | Để sau · shots-R6-scholar-4/m-new-16-16.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · #modal «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-17-17.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Cúng dường hậu hĩnhTốnBạc -4 | Chép kinh cầu phúcTốnSức -8Đ | Lễ Phật rồi về · shots-R6-scholar-4/m-new-17-18.png
+- year 1 · turn 1 · tuần 1 · buổi 1 · rank 0 · #modal «Có người bán tin» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-17-19.png
+- year 1 · turn 1 · tuần 1 · buổi 1 · rank 0 · .dlg «Có người bán tin» · NEW SCREEN · first time on this screen; buttons: Mua tinTốnBạc -35·1 khắcĐược | Không muaGhi chúkhông biết t · shots-R6-scholar-4/m-new-18-20.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R6-scholar-4/m-look-20.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · #modal «Hạn hán, mất mùa» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-25-21.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Hạn hán, mất mùa» · NEW SCREEN · first time on this screen; buttons: Quyên bạc cứu đóiTốnBạc -30Đ | Bớt chi dùng trong cungTốnkh | Làm như không biếtTốnkhôngĐư · shots-R6-scholar-4/m-new-26-22.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Ôn dịch» · NEW SCREEN · first time on this screen; buttons: Đóng cửa cung, xông ngảiTốnB | Vẫn đi lại như thườngTốnkhôn · shots-R6-scholar-4/m-new-26-23.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «Đeo «Gót sen lăng ba»» · NEW SCREEN · first time on this screen; buttons: Thêm SắcTốnkhôngĐượcSắc +1 | Học mau tiếnTốnkhôngĐượcTự h | Để sau · shots-R6-scholar-4/m-new-26-24.png
+- year 1 · turn 3 · tuần 0 · buổi 1 · rank 0 · #modal «Đại xá thiên hạ» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-37-25.png
+- year 1 · turn 3 · tuần 0 · buổi 1 · rank 0 · .dlg «Đại xá thiên hạ» · NEW SCREEN · first time on this screen; buttons: Viết thư dặn người quen đón | Kể nàng ta nghe chuyện cũ rồ | Chỉ vẫy tay chào từ xaTốnkhô · shots-R6-scholar-4/m-new-38-26.png
+- year 1 · turn 3 · tuần 0 · buổi 1 · rank 0 · .dlg «Phụ hoàng ngã bệnh» · NEW SCREEN · first time on this screen; buttons: Ngày đêm hầu thuốcRất vữngTố | Xin sứ đoàn mời thầy thuốc Đ · shots-R6-scholar-4/m-new-38-27.png
+- year 1 · turn 3 · tuần 0 · buổi 2 · rank 0 · #modal «Ôn dịch» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-38-28.png
+- year 1 · turn 3 · tuần 0 · buổi 3 · rank 0 · #modal «Đại xá thiên hạ» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R6-scholar-4/m-look-40.png
+- year 1 · turn 3 · tuần 1 · buổi 2 · rank 0 · .dlg «Danh hiệu lên bậc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R6-scholar-4/m-new-43-29.png
+- year 1 · turn 4 · tuần 0 · buổi 1 · rank 0 · #modal «Hòa ước» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-49-30.png
+- year 1 · turn 4 · tuần 0 · buổi 1 · rank 0 · .dlg «Hòa ước» · NEW SCREEN · first time on this screen; buttons: Ra mắt đoan trang, đáp lời b | Ra mắt theo lễ cố quốcRất vữ · shots-R6-scholar-4/m-new-50-31.png
+- year 1 · turn 4 · tuần 2 · buổi 3 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R6-scholar-4/m-look-60.png
+- year 1 · turn 5 · tuần 2 · buổi 1 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc100Tài66Tâm cơ19Đức38Danh | Bạc25Sức38/100 | Buổi trưa, còn 4 khắc | Ngày lên đườngcòn 17 tháng | Phe chủ chiến67 | nắng vàng · shots-R6-scholar-4/m-new-69-32.png
+- year 1 · turn 6 · tuần 0 · buổi 1 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Kéo nhẹ tay áo Tần Nhâm Ngưn | Che rèm cho nàng ta khỏi bị | Thưa Hoàng hậu cho Tần Nhâm | Ngồi yên xem, không can dựTố · shots-R6-scholar-4/m-new-74-33.png
+- year 1 · turn 6 · tuần 1 · buổi 1 · rank 0 · #modal «Hoàng muội tranh phần» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-77-34.png
+- year 1 · turn 6 · tuần 1 · buổi 1 · rank 0 · .dlg «Hoàng muội tranh phần» · NEW SCREEN · first time on this screen; buttons: Mặc nàng taRất vữngTốnkhôngĐ | Nói chuyện thẳng với nàngRất | Tâu với phụ thânRất vữngTốnk · shots-R6-scholar-4/m-new-78-35.png
+- year 1 · turn 6 · tuần 1 · buổi 3 · rank 0 · page «Phòng của ta · Ở đây có 1 người.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R6-scholar-4/m-look-80.png
+- year 1 · turn 7 · tuần 2 · buổi 1 · rank 0 · #modal «Thích khách» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-93-36.png
+- year 1 · turn 7 · tuần 2 · buổi 1 · rank 0 · .dlg «Thích khách» · NEW SCREEN · first time on this screen; buttons: Kêu cứuRất vữngTốnkhôngĐượct | Tự mình chống trảRất vữngTốn · shots-R6-scholar-4/m-new-94-37.png
+- year 1 · turn 8 · tuần 0 · buổi 3 · rank 0 · #kxcatch «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R6-scholar-4/m-look-100.png
+- year 1 · turn 9 · tuần 1 · buổi 1 · rank 0 · #modal «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-113-38.png
+- year 1 · turn 9 · tuần 1 · buổi 1 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Bỏ bạc mua thêm thanTốnBạc - | Chịu rét cho quaTốnSức -8Đượ · shots-R6-scholar-4/m-new-114-39.png
+- year 1 · turn 9 · tuần 2 · buổi 3 · rank 0 · page «Phòng của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R6-scholar-4/m-look-120.png
+- year 2 · turn 10 · tuần 0 · buổi 1 · rank 0 · #modal «Yến đầy tháng công chúa» · NEW SCREEN · first time on this screen; buttons:  · shots-R6-scholar-4/m-new-121-40.png
+- year 2 · turn 10 · tuần 0 · buổi 1 · rank 0 · .dlg «Yến đầy tháng công chúa» · NEW SCREEN · first time on this screen; buttons: Quà vừa phảiTốnBạc -15ĐượcHo | Cáo bệnh không tớiTốnkhôngĐư · shots-R6-scholar-4/m-new-122-41.png
+- year 2 · turn 10 · tuần 0 · buổi 2 · rank 0 · .dlg «Phe chủ chiến ra tay» · NEW SCREEN · first time on this screen; buttons: Quỳ trước triều xin giữ hòa | Im lặng chờ phụ thân quyếtRấ · shots-R6-scholar-4/m-new-122-42.png
+- year 2 · turn 10 · tuần 0 · buổi 2 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-R6-scholar-4/m-new-123-43.png
+- year 2 · turn 10 · tuần 0 · buổi 2 · rank 0 · ending · EVENT · life over: Công chúa ở lại cố quốc — Công chúa ở lại cố quốc · age 19 · buổi 123 · bugs 0 · stuck 0 · dead buttons 0 · shots-R6-scholar-4/end.png

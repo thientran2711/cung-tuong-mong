@@ -76320,5 +76320,80 @@
   "row": "R6·speed·2:2881086999 (fresh rerun on LIVE github.io, fold)",
   "game": "github.io LIVE, ≈ 17 h (11-27 06:30Z start build 9ab008eb74f9 → 23:00Z): OOM crash at b838, resumed with ckpt build0 synced to LIVE (flag «mixed build»); at b2789 the save (5.2M chars) hit the QuotaExceeded wall on the old build (flag «save quota»), restarted from ckpt at 20:57Z on the packed-save LIVE → repacked 5.2M → 0.4M; harness f65d019b+; SAVE REWINDs on reload: 2 buổi (b1699), 54 buổi (b2835, flag «save rewind»)",
   "audit": "VALID (natural Lãnh cung «Tuổi xuân qua đi» age 40 year 23, real taps, github.io) — COUNTED with flags «mixed build (pin-server resume)», «save quota», «save rewind»"
+ },
+ {
+  "job": {
+   "id": "R6-scholar-4",
+   "origin": "pf",
+   "road": "pt_tang",
+   "bot": "sens",
+   "seed": 2810379132,
+   "dev": "ipad",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "2df8f5fa",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 0,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 0,
+   "slice": null,
+   "build": {
+    "s": "6b5d3d05+",
+    "b": "b7dcbbd06e03",
+    "t": "2026-11-26T06:59Z"
+   },
+   "areaTaps": 50,
+   "dlgScroll": 5,
+   "scrolls": 9,
+   "infoTaps": 30,
+   "dlgClose": 25,
+   "taps": 440
+  },
+  "life": {
+   "id": "Công chúa ở lại cố quốc",
+   "type": "death",
+   "fate": "Công chúa ở lại cố quốc",
+   "death": true,
+   "age": 19,
+   "year": 2,
+   "rank": 0,
+   "text": "Giang Tuyết Nhạn đi hòa thân thay nàng. Nàng ở lại cung Thiên hoàng ở Nại Lương, mười năm sau được gả cho một tộc trưởng phương tây. (Công chúa chờ hòa thân · Công chúa Phù Tang)",
+   "card": [
+    "Thưa: con xin đi, vì muôn dân Rất vững TỐN không ĐƯỢC hòa ướ",
+    "Xin để hoàng muội đi thay Rất vững TỐN Sức -5 ĐƯỢC có thể ở "
+   ],
+   "duringArea": false,
+   "lastTaps": [
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Trang sau»",
+    ".kbk «Tổng lược» «Trang trước»",
+    ".kbk «Tổng lược» «Trang trước»",
+    ".kbk «Tổng lược» «Lui»",
+    "page «Phòng của ta · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »",
+    "page «Phòng của ta · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »",
+    ".dlg «Yến đầy tháng công chúa» «Cáo bệnh không tớiTốnkhôngĐượcSức +3·giữ sứcKèmHoà»",
+    ".dlg «Yến đầy tháng công chúa» «Nhìn rồi quay điTốnĐức -3ĐượcSức +8·Bạc +40MấtTần »",
+    "page «Phòng của ta · Không gặp ai.» «Sang buổi»",
+    ".dlg «Phe chủ chiến ra tay» «Im lặng chờ phụ thân quyếtRất vữngTốnkhôngĐượchòa »",
+    ".dlg «Hòa ước» «Xin để hoàng muội đi thayRất vữngTốnSức -5Đượccó t»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [],
+  "dead": [],
+  "buoi": 123,
+  "steps": 3975,
+  "status": [],
+  "t": {
+   "total": 1818287
+  },
+  "unit": "E-S6",
+  "row": "R6·scholar·4:2810379132 (rerun on LIVE github.io, ipad)",
+  "game": "github.io LIVE, game build b7dcbbd06e03 (6b5d3d05+, 2026-11-26T06:59Z), harness 2df8f5fa, no resume, no quota/rewind",
+  "audit": "VALID («Công chúa ở lại cố quốc» story closure age 19 year 2, buổi 123, real taps, github.io) — COUNTED, no flags (same ending as R6-speed-1)"
  }
 ]
