@@ -119,3 +119,48 @@ Note: two save-pid-cards runs in parallel were OOM-killed (cgroup; one page 5 GB
 ### Verdict
 **PASS → LAND READY review/save-pid-cards-rv5 4e27a5887e75251c46a8a485c95c7b13e98b9434** (BIG; save; lands right AFTER save-fix-stack-rv23 15bd0e29; FF onto 15bd0e29; Worker deploy: no). **Reviewer wrote game code: jevc.js 3 hunks above (evn / EVCLD) → Foreman B independent check before relay.** If the save stack moves again (rv24…), re-merge = built files only (rebuild) + save-pid-cards + save-evc-onscreen + SUL + look-dedupe + quickcheck alone.
 Open (not made worse): j68 evGate / jevc evcRelease still let a held optional CHOICE card go silently when the hold is full / too old (evDropInfo logs notices only) — pacing by design, owner's pacing rules. Scratch shots: none kept; worktrees in /home/user/wt (pid*, base*, mut*, ho) are scratch.
+
+## MERGE rv6 (B MERGER opus session_01N1tNP4dSHUBcWN3Tf73BMr, depth 1, START_CTX ≈ 4 %; 11/27/2026)
+PRIORITY #1 CHECK ('save-pid-cards|pid-cards'): OD 0 | ledger 0 | claims B save lines | main 0 | review/* save-pid-cards-rv5 4e27a588 (BIG PASS) | archive 0 — reused rv5, nothing rebuilt by hand.
+**Head: review/save-pid-cards-rv6 `13d035ff08574e5a622dadac53ab00a9e43f5308`** = merge of review/save-fix-stack-rv27 081c1731 (= LIVE bd47c753 + test-only rv27, FF on LIVE) into save-pid-cards-rv5 4e27a588.
+
+### Hunk table
+| file | LIVE side | pid side | kept |
+|---|---|---|---|
+| (source) | — | — | **no source conflict**: j3.js auto-merged (LIVE hunks pushModal / showModal / chooseM / emperorDies / nightRg; pid hunks kqDec→pidX / serM — different lines); j68 / jevc / jroute / jtsb untouched by LIVE since rv23 |
+| index.html, sw.js (built) | LIVE build | rv5 build | neither: rebuilt with dev/site/build_site.sh |
+| assets.json (built) | LIVE | = LIVE | rebuilt: +1 row img/act-gach-ten-h.webp (CDN image added after LIVE's build; no code) |
+
+### Patch identity (sorted +/- lines, `git diff -U0`): pid vs rv23 15bd0e29 == rv6 vs rv27 081c1731
+| file | lines | result |
+|---|---|---|
+| dev/build/j3.js | 12 | SAME |
+| dev/build/j68.js | 13 | SAME |
+| dev/build/jevc.js | 10 | SAME |
+| dev/build/jroute.js | 2 | SAME |
+| dev/build/jtsb.js | 2 | SAME |
+| dev/test/lib/device.js | 2 | SAME |
+| dev/test/save-evc-onscreen.js | 24 | SAME |
+| dev/test/save-pid-cards.js | 82 | SAME |
+LAW 11 scan: LIVE since rv23 adds no new deserQ / deser wrapper, no EVLAST / evcN / serM use (git diff rv23..rv27 dev/build/j*.js) → the pid family table of the review still holds.
+
+### Test-only fix in rv6 (9483e103)
+save-evc-onscreen.js setup: on LIVE a held result card (jverdict RF.held, «kres-next») defers showModal, so the knSell card was saved BEFORE it was painted/counted (today null) → the test then compared null vs {"visit":1} and failed on BOTH sides of the reload while the card itself stayed on screen. Fix: tap «kres-next» as a player and wait until the card is painted (S.evc.n.visit) before save(). No game code. Proof it still bites: rv6 PASS 2/2 · plain LIVE rv27 081c1731 (CTM_ROOT) **FAIL 2/2** (Q[0] none, card moved to EVCW) — the reviewer's jevc evn fix is still needed on LIVE.
+
+### Gates (head 13d035ff build; 9483e103 = + test fix only), one browser process at a time
+| gate | result |
+|---|---|
+| save-pid-cards Fold | **281 PASS / 0 FAIL** (SKIP 476) — same as rv5 |
+| save-pid-cards iPad | **281 PASS / 0 FAIL** (SKIP 476) |
+| save-evc-onscreen (fixed setup) | rv6 PASS 2/2 · LIVE FAIL 2/2 (first run with old setup: FAIL 2/2 test timing, above) |
+| save-unseen-lists fold,ipadAir 1 | PASS 32/32 |
+| save-rewind fold,ipadAir | PASS 4/4 (first try: shallow clone lacked ckpt commit 8ae99226 → fetched, re-run) |
+| look-dedupe | PASS |
+| oldsave-r1 (.tmp/old.html = LIVE index.html) | 16/16 |
+| notice-late-save | PASS |
+| save-death-rebirth fold,ipadAir | PASS |
+| goal-links Fold 755x1000 | PASS |
+| quickcheck --runs 5 ALONE | perf PASS (median new/live: render 304/308 · tab 527/534 · buổi 1611/3295 · tasks>200 33/37; open 2002 ms; old save ok); CORE GATES FAIL only G4 94-q-softlock Fold 4 rows (view not open; iPad all PASS) = the known-flaky Fold row (rv27 report: LIVE d9ca7892 too) |
+| q-softlock re-run ALONE ×3 | rv6 3/3 PASS · plain LIVE rv27 PASS on every run done (see STATUS line) |
+Built: assets.json differs from LIVE by one CDN row only (img/act-gach-ten-h.webp, uploaded after LIVE's build) — any rebuild today gives it.
+**Verdict (merger): review/save-pid-cards-rv6 9483e1032f5e452e50be6766dd26e6f2d4a9e7e3 ready for Foreman B hunk check** (no source conflict; pid patch byte-identical; one test-only setup fix).
