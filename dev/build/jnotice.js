@@ -9,6 +9,9 @@
      pic     representative picture (img/… path); default = the kit info picture of «Tin báo» (kitInfoArt).
      sticky  the box keeps its busy light while this notice exists, even when read (closing alert: until she leaves / the place opens).
      go      optional real action of the panel (one option row, label goLabel), e.g. the Tai mắt news «Để ta xem».
+     hold    (KIT §42.2a, KK44) the chip STAYS up (no 5 s timer) until kitNoticeDrop(id) — a place about to close; another notice's chip shows for its
+             5 s and the held one comes back after it. pulse = the chip blinks (kit kntBlink; still under reduced motion). tone:"red" = the red
+             state (overstayed: «Đã quá giờ, mời tiểu chủ rời đi»).
    → (1) the «!» BOX in the fixed TOP BAR (header.hud) lights (§77 square kit button + the §78 yellow round «!» disc `.khap`, kbusy + kbadge);
      (2) ONE short kit chip line `.ktbt` with the «!» disc appears at the TOP for BAL.entryToastMs (5 s), then goes: in a free spot of the top
          bar itself, else just under it, else straddling its lower edge — never over a person, a card, a button, a name (kitToastKeepRects) and
@@ -84,7 +87,7 @@ function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object"
  {const d=NT.list.find(x=>x.id!==id&&!x.sticky&&x.text===text);if(d&&!NT.list.some(x=>x.id===id))id=d.id}
  let it=NT.list.find(x=>x.id===id);const again=!it||it.line!==line||!!spec.again;
  if(!it){it={id};NT.list.unshift(it)}else if(again){NT.list.splice(NT.list.indexOf(it),1);NT.list.unshift(it)}
- Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",t:Date.now()});
+ Object.assign(it,{items:Array.isArray(spec.items)?spec.items.map(x=>plain(x)).filter(Boolean):null,line,text,pic:spec.pic||it.pic||"",kind:spec.kind||it.kind||"",sticky:!!spec.sticky,go:spec.go||null,goLabel:spec.goLabel||"",hold:!!spec.hold,pulse:!!spec.pulse||spec.state==="pulse",tone:spec.tone||(spec.state==="late"?"red":""),chipGo:!!spec.chipGo,t:Date.now()});/* state:"pulse"|"late" = PLACE-CLOSE aliases of pulse / tone:"red" */
  if(again)it.seen=false;
  while(NT.list.length>cap()){const i=NT.list.map(x=>!!x.sticky).lastIndexOf(false);NT.list.splice(i>=0?i:NT.list.length-1,1)}
  boxPaint();if(again)chipShow(it);return it}catch(e){console.error("kitNotice",e);return null}}
@@ -125,7 +128,7 @@ function boxPaint(){try{const hud=hudEl();let b=$("kntbox");const L=NT.list,U=un
  return b}catch(e){console.error("kntbox",e);return null}}
 /* ---------- the CHIP ---------- */
 function chipEl(it){let el=$("kntchip");if(!el){el=document.createElement("div");el.id="kntchip";el.className="ktbt kntc";el.setAttribute("role","status");document.body.appendChild(el)}
- el.dataset.id=it.id;el.innerHTML=`<i class="khap" aria-hidden="true">!</i><span>${esc(it.line)}</span>`;el.classList.remove("out");return el}
+ el.dataset.id=it.id;el.innerHTML=`<i class="khap" aria-hidden="true">!</i><span>${esc(it.line)}${it.chipGo&&it.goLabel?` · <b>${esc(it.goLabel)}</b>`:""}</span>`;el.classList.remove("out");el.classList.toggle("kntpulse",!!it.pulse);el.classList.toggle("kntred",it.tone==="red");el.classList.toggle("knthold",!!it.hold);return el}
 function chipHide(el){el=el||$("kntchip");if(!el)return;el.classList.add("out");clearTimeout(NT.t);setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)}
 function chipPlace(el){try{el.style.transform="none";el.style.maxWidth="none";const c=cal(el);const w=c.w,h=c.h;const hud=hudEl();
  const keep=(typeof kitToastKeepRects==="function"?kitToastKeepRects(el):[]);const box=$("kntbox");
@@ -134,7 +137,10 @@ function chipPlace(el){try{el.style.transform="none";el.style.maxWidth="none";co
  const noHud=keep.filter(r=>!(Math.abs(r.left-H.left)<1.5&&Math.abs(r.top-H.top)<1.5&&Math.abs(r.right-H.right)<1.5));/* the whole bar box itself is not an obstacle; its parts are */
  const col=typeof kitToastCol==="function"?kitToastCol():{left:0,right:innerWidth};
  /* (a) a free spot of the top bar itself (owner: "cái phần khung ở trên ... trống nhiều quá") */
- let p=scan({left:H.left+4,right:H.right-4,top:H.top+3,bottom:H.bottom-3},w,h,HR.concat(box?[box.getBoundingClientRect()]:[]),4);let slot="bar";
+ /* §42.2a a HELD chip (place about to close) sits just UNDER the top bar, above the Dư đồ / stage (owner 26/11 ~14:00Z «ở dưới cái thanh trên … ngay cái trên cái khung dư đồ»); else the usual order */
+ const mt0=el.classList.contains("knthold")?[...document.querySelectorAll(".maptools")].filter(e=>e.getClientRects().length).map(e=>e.getBoundingClientRect()):null;
+ let p=mt0?scan({left:Math.max(col.left,0)+4,right:Math.min(col.right,innerWidth)-4,top:H.bottom+3,bottom:H.bottom+3+2*h},w,h,keep.concat(mt0),3):null;let slot=p?"under":"bar";
+ if(!p)p=scan({left:H.left+4,right:H.right-4,top:H.top+3,bottom:H.bottom-3},w,h,HR.concat(box?[box.getBoundingClientRect()]:[]),4);
  /* (a2) a quiet part of the top bar: over no word, number, picture or button of it — only its empty bar tracks (the mood slider): the phone's
     top bar has no fully empty slot, and the chip stays IN the top frame for its few seconds (owner: "phải nằm ở trên chứ không phải nằm ở dưới") */
  if(!p){slot="bar2";const Q=HR.filter(r=>r.__t);p=scan({left:H.left+4,right:H.right-4,top:H.top+2,bottom:H.bottom-1},w,h,Q.concat(box?[box.getBoundingClientRect()]:[]),1,"",true)}/* lowest first: the bar's edge nearest the screen */
@@ -146,7 +152,7 @@ function chipPlace(el){try{el.style.transform="none";el.style.maxWidth="none";co
  if(!p){el.style.visibility="hidden";el.dataset.slot="";return false}/* no free spot at the top: no chip — the box carries it (never at the bottom, never over people / cards) */
  setAt(el,c,p.x,p.y);el.style.visibility="";el.dataset.slot=slot;return true}catch(e){el.style.visibility="hidden";return false}}
 function chipShow(it){try{if(dlgOpen()){NT.pend=it;watch();return null}NT.pend=null;const el=chipEl(it);chipPlace(el);NT.chips++;NT.shown.push(it.id);
- clearTimeout(NT.t);NT.t=setTimeout(()=>chipHide(el),window.__toastKeep?60000:ms());watch();return el}catch(e){return null}}
+ clearTimeout(NT.t);if(!it.hold)NT.t=setTimeout(()=>{const h=NT.list.find(x=>x.hold&&x.id!==it.id);if(h)chipShow(h);else chipHide(el)},window.__toastKeep?60000:ms());watch();return el}catch(e){return null}}
 /* while a chip is up (or waits for a dialog to close) re-check every 300 ms: tab switches, scrolling lists, a dialog opening */
 function watch(){if(NT.w)return;NT.w=setInterval(()=>{try{const el=$("kntchip");
  if(NT.pend&&!dlgOpen()){const it=NT.pend;NT.pend=null;if(NT.list.includes(it))chipShow(it)}
@@ -174,7 +180,9 @@ function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const
 function picSwap(M,it){try{const src=picOf(it);if(!src)return;const im=M.querySelector("#mb figure.ksart img, #mb .ksart img");if(im&&im.getAttribute("src")!==src)im.setAttribute("src",src)}catch(e){}}
 try{const b0=kpBuild;kpBuild=function(M,m){const r=b0.apply(this,arguments);try{const it=m&&m.__ntc;if(it){picSwap(M,it);setTimeout(()=>picSwap(M,it),0)}}catch(e){console.error("kntpanel",e)}return r}}catch(e){}/* the kit picture slot of the panel (info art «Tin báo» by default) shows the notice's own picture */
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("#kntbox,#kntchip");if(!t)return;e.stopPropagation();e.preventDefault();
- try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}kitNoticeOpen(t.id==="kntchip"?t.dataset.id:null)},true);
+ try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}/* §42.2a chipGo: a tap on a held chip runs its go (e.g. «Về phòng · N khắc»), the panel stays for the «!» box */
+ if(t.id==="kntchip"){const it=NT.list.find(x=>x.id===t.dataset.id);if(it&&it.chipGo&&typeof it.go==="function"){try{it.seen=true;it.go()}catch(x){console.error("chipGo",x)}boxPaint();return}}
+ kitNoticeOpen(t.id==="kntchip"?t.dataset.id:null)},true);
 /* ---------- routing of the old notice calls (one entry point) ---------- */
 window.kitLine=kitLine=function(text){return kitNotice({line:text})?$("kntchip"):null};/* §42.2: was a bottom pill (#kupdline) */
 window.kitLineToast=function(text){const it=kitNotice({line:text});return it?$("kntchip"):null};/* jplst place-entry line (was #ktbtoast) */
@@ -213,7 +221,12 @@ const st=document.createElement("style");st.id="kit-notice";st.textContent=`
 @keyframes kntBlink{0%,100%{opacity:1}50%{opacity:.4}}
 #kntchip.kntc{left:0;transform:none;white-space:nowrap;max-width:none;width:max-content}
 #kntchip.kntc .khap{flex:0 0 auto;margin:0;width:16px;height:16px;line-height:16px;font-size:.72rem;vertical-align:0;animation:none}
-body.kdlg-on #kntchip,body.kbk-open #kntchip{visibility:hidden!important}`;document.head.appendChild(st);
+body.kdlg-on #kntchip,body.kbk-open #kntchip{visibility:hidden!important}
+#kntchip.kntc.kntpulse{animation:kntPulse calc(1.1s*var(--pace,1)) ease-in-out infinite}
+@keyframes kntPulse{0%,100%{box-shadow:0 0 0 0 transparent;filter:none}50%{box-shadow:0 0 0 3px var(--gold),0 0 12px 2px var(--gold);filter:brightness(1.08)}}/* MAIN 161 LOOK: the gold pulse must read in every frame — a glow ring, no fade to near-invisible */
+#kntchip.kntc.kntred{background:var(--bad);border-color:var(--bad);color:var(--panel,#fff)}
+#kntchip.kntc.kntred .khap{background:var(--panel,#fff);color:var(--bad)}
+@media (prefers-reduced-motion:reduce){#kntchip.kntc.kntpulse{animation:none;outline:2px solid currentColor;outline-offset:1px}}`;document.head.appendChild(st);
 /* ---------- KNOW-NOTICE (owner OD 23/11 ~23:08Z "Cái thông tin nào tôi biết cũng phải có cái sự thông báo rõ ràng"): kitKnow = the ONE kit entry for "she learned something" ----------
    kitKnow({key,text,pri}): a name, a face, a rank, a nature, a liking, a rumour, a note in the Sổ. Facts that arrive in the same tick (one act) are BATCHED
    into ONE kitNotice (kind "know"): one fact = its own line; several = «Ngươi biết thêm N điều» + every line in the «Tin báo» panel. Same key in one batch =
@@ -251,6 +264,10 @@ try{const sv0=save;save=function(){const n0=typeof SAVE_N!=="undefined"?SAVE_N:n
 Object.assign(window,{kitNotice,kitNoticeDrop,kitNoticeSeen,kitNoticeList,kitNoticeOpen,kitNoticeBox:boxPaint,kitKnow,kitKnowFlush,kitKnowMany});
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.3",title:"kitKnow · «Ta biết thêm N điều» (one kitNotice kind know; same chip, box and Tin báo panel as §42.2)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="ktbt" style="position:static;transform:none;white-space:nowrap"><i class="khap" style="margin:0">!</i><span>Ta biết thêm 3 điều</span></span><button type="button" class="btn" onclick="kitKnowMany([{key:'a',text:'Ngươi biết tên: đó là Lệ tần Mai thị.'},{key:'b',text:'Ngươi đã thấy mặt một phi tần áo bậc Tần; chưa biết tên.'},{key:'c',text:'Quý phi Đào Cẩm Tâm nay được tấn phong Hoàng quý phi.'}]);kitNoticeOpen()">Mở khung Tin báo</button></div>`})}catch(e){}
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.2a",title:"kitNotice hold · chip giữ lại, nhấp nháy (sắp đóng cửa) + trạng thái đỏ (quá giờ)",
+ html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="ktbt kntc kntpulse" id="kitpg-np" style="position:static;transform:none;white-space:nowrap;animation:kntPulse calc(1.1s*var(--pace,1)) ease-in-out infinite"><i class="khap" style="margin:0">!</i><span>Nơi này sắp đóng cửa, mời tiểu chủ rời đi</span></span>`+
+  `<span class="ktbt kntc kntred" style="position:static;transform:none;white-space:nowrap;background:var(--bad);border-color:var(--bad);color:var(--panel,#fff)"><i class="khap" style="margin:0;background:var(--panel,#fff);color:var(--bad)">!</i><span>Đã quá giờ, mời tiểu chủ rời đi</span></span>`+
+  `<button type="button" class="btn" onclick="kitNotice({id:'kitpg-hold',line:'Nơi này sắp đóng cửa, mời tiểu chủ rời đi',sticky:1,hold:1,pulse:1})">Giữ chip</button><button type="button" class="btn" onclick="kitNotice({id:'kitpg-hold',line:'Đã quá giờ, mời tiểu chủ rời đi',sticky:1,hold:1,pulse:1,tone:'red'})">Chip đỏ</button><button type="button" class="btn" onclick="kitNoticeDrop('kitpg-hold')">Bỏ chip</button></div>`})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.2",title:"kitNotice · ô ! trên thanh trên + chip một dòng ở trên + khung Tin báo",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><button type="button" class="krailb kglyph kntb kbusy kbadge" style="position:relative;width:32px;height:32px;min-width:0;min-height:0;padding:0;display:flex;align-items:center;justify-content:center"><i class="khap" style="margin:0">!</i></button>`+
   `<button type="button" class="krailb kglyph kntb kntcalm" style="position:relative;width:32px;height:32px;min-width:0;min-height:0;padding:0;display:flex;align-items:center;justify-content:center"><i class="khap" style="margin:0;opacity:.5">!</i></button>`+
