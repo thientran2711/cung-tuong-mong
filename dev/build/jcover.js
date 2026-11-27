@@ -92,12 +92,23 @@ function covWitDo(a,id,x,ok){const w=covPerson(id);if(!a||!w)return"";const wn=c
  if(x==="vua"){const bac=covWitBac(a,id);if(!ok){try{if(w.rel!=null||w===S)relAdd(a,w,-B.vua.aff)}catch(e){}return `${wn} từ chối bạc, không nhận lời; ${covWho(a)} không mất bạc nào.`}
   if(a!==S)ap(a,{bac:-bac});if(w===S)apply({bac:bac});else if(w.rel!=null)ap(w,{bac:bac});
   const pk=COV.ctx;COV.ctx++;try{deedAdd(a,"wbribe",w.rel!=null?w:null,null,`mua chuộc ${wn} bịt miệng`)}finally{COV.ctx=pk}covSilence(a,id);return `${wn} nhận ${bac} lượng bạc, từ nay câm lặng.`}
- const pk=COV.ctx;COV.ctx++;COV.force=!ok;let d=null;try{d=deedAdd(a,"wkill",w.rel!=null||w===S?w:null,null,`mưu thủ tiêu ${wn}`)}finally{COV.ctx=pk;COV.force=0}
- if(ok){covSilence(a,id);return covKill(a,id)||`${wn} không còn trên đời.`}
+ const o=covOwner(w,id);/* OD 27/11 ~04:08Z: the one she belongs to (a maid's / servant's mistress, a housemate) — the deed is a deed on her house, so its pieces are hers to find */
+ const pk=COV.ctx;COV.ctx++;COV.force=!ok;let d=null;try{d=deedAdd(a,"wkill",w.rel!=null||w===S?w:o,null,`mưu thủ tiêu ${wn}`)}finally{COV.ctx=pk;COV.force=0}
+ if(ok){covSilence(a,id);let sw=[];try{sw=chHere(a).filter(x=>x!==id&&x!==ledgerId(o||{}))}catch(e){}const r=covKill(a,id)||`${wn} không còn trên đời.`;covTell(o,w,a,d,sw);return r}
  /* failure = exposed at once: Danh now, the witness holds evidence of the attempt and saw it */
  try{chSawAdd(a,"mh",id)}catch(e){}covDanh(a,covTier("wkill"),`mưu thủ tiêu ${wn} bị lộ`);
  try{const h=w===S||w.rel!=null?w:ownerOf(w);if(h&&h!==a)evA(h,a,covB().wit.nang.ev,"mh")}catch(e){}
  return `<span class="r">Vụ thủ tiêu ${wn} bị lộ</span>: ${wn} thoát được và biết kẻ chủ mưu là ${covWho(a)}.`}
+/* OD 27/11 ~04:08Z (owner: «Lúc cung nữ chết có báo lý do chết không? Lỡ cung nữ của tôi chết vì bị người khác thủ tiêu thì báo gì»): when a person tied to
+   someone is killed, the one she belongs to hears it AT ONCE — who, where / how she was found (only what the world shows: the killer is never named; the
+   pieces / witnesses of the deed are real, via deedAdd, so the existing «Tố giác» works), the exposure line when a trace or a witness exists, and the new
+   maid Nội vụ phủ sends. Her: a notice card + the Sổ ghi line. An NPC mistress: the same deed on her house (her pieces to find) and her new maid (law 1). */
+const COVSIGN=["được tìm thấy chết dưới giếng sau, trên cổ có vết bầm","được tìm thấy chết trong hồ sen lúc tờ mờ sáng, móng tay còn dính máu","được phát hiện chết trong phòng chứa củi, khóe miệng thâm đen","được tìm thấy chết ở góc ngự uyển, sau gáy có vết đánh"];
+function covOwner(w,id){try{if(w===S)return null;if(w.rel!=null&&rivals.includes(w))return sameHouse(S,w)?S:null;if(/^mu:/.test(id||""))return chMaidO(String(id).split(":")[1]);return ownerOf(w)||null}catch(e){return null}}
+function covTell(o,w,a,d,sw){if(!o||o===a||!w)return;try{const sign=COVSIGN[Math.floor(Math.random()*COVSIGN.length)];const ex=(d&&d.w>0)||(sw&&sw.length)?covLine([{d,sw}]):"";const nm=o.maid&&o.maid!==w&&w.uid!=null?o.maid.name:"";
+  if(o!==S)return;const role=w.rel!=null?"người ở cùng cung":w.uid!=null?"cung nữ thân cận":"người hầu trong cung";/* no pronoun: the notice voice turns «ngươi» around */
+  const h=`<p>${covWho(w)}, ${role}, ${sign}.</p><p>Không ai biết kẻ nào ra tay.</p>${ex?`<p class="r">${ex}</p>`:""}${nm?`<p>Nội vụ phủ đưa ${nm} đến hầu thay.</p>`:""}`;
+  Q.push({t:"Tin dữ",h});log(`<span class="r">${covWho(w)} (${role}) ${sign}; chưa rõ kẻ ra tay.</span>${ex?" "+ex:""}${nm?` Nội vụ phủ đưa ${nm} đến hầu thay.`:""}`)}catch(e){console.error("covTell",e)}}
 /* her three options on a witness, one door (jdoor) */
 const COVN={nhe:"Đe dọa bịt miệng",vua:"Mua chuộc nhân chứng",nang:"Thủ tiêu nhân chứng"};
 function covWitOpts(p){const id=covWitId(p);if(!id||!covSaw(S,id).length)return[];const B=covB().wit,bac=covWitBac(S,id),wn=covWho(covPerson(id));
