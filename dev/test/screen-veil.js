@@ -57,7 +57,7 @@ const STEPS=[
  ['save load (Nạp sổ)','book',()=>{save();const d=loadSlot(SLOT);deser(d);render()}]];
 (async()=>{const b=await chromium.launch();const R=[];let fail=0;
  for(const dev of DEVS.split(',')){const vdir=path.join(OUT,'v-'+dev);fs.mkdirSync(vdir,{recursive:true});const {ctx,L}=await context(b,dev,vdir);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
-  const g=await boot(p);
+  const g=await boot(p);if(process.env.KEEP!=null)await g.evaluate(k=>{KIT_SCRV.keep=k;while(SCRV_KEEP.size>k)SCRV_KEEP.delete(SCRV_KEEP.keys().next().value)},+process.env.KEEP);/* memory measure (RV-174): KEEP=<n> overrides BAL.kscrv.keep */
   for(const mode of ['cold','warm']){L.on=mode==='cold';
    for(const [name,kind,fn] of STEPS){await g.evaluate(CLEAN).catch(()=>{});await sleep(400);await g.evaluate(()=>{try{KIT_SCRV.stat.last=null;KIT_SCRV.stat.log=[]}catch(e){}__VS.start()});
     const t0=Date.now();let ok=true;try{await g.evaluate(`(${fn.toString()})()`)}catch(e){ok=false}
@@ -66,6 +66,11 @@ const STEPS=[
     const badF=F.filter(f=>f.n>0);const veilF=F.filter(f=>f.veil);const words=[...new Set(veilF.map(f=>f.word).filter(Boolean))];
     const row={dev,mode,step:name,kind,ran:ok,frames:F.length,bad:badF.length,veilFrames:veilF.length,veilMs:st&&st.ms||0,dests:st&&st.log?st.log.join('>'):'',word:words.join(' / '),firstBad:badF[0]?badF[0].bad.join(' '):''};R.push(row);if(badF.length)fail++;
     console.log(JSON.stringify(row))}}
+  if(process.env.MEM){/* decoded-picture memory after the warm steps: renderer RSS (all renderers of this run; run this test ALONE) + JS heap + kept pictures */
+   try{const c=await ctx.newCDPSession(p);await c.send('HeapProfiler.collectGarbage')}catch(e){}await sleep(1500);
+   let rss=0;try{rss=execFileSync('sh',['-c',"for p in $(pgrep -f -- '--type=renderer'); do grep VmRSS /proc/$p/status 2>/dev/null; done | awk '{s+=$2} END {print s}'"]).toString().trim()|0}catch(e){}
+   const m=await g.evaluate(()=>({keep:KIT_SCRV.keep,kept:SCRV_KEEP.size,ok:SCRV_OK.size,heapMB:performance.memory?Math.round(performance.memory.usedJSHeapSize/1048576):-1,imgs:document.images.length}));
+   const row={dev,mem:1,keep:m.keep,kept:m.kept,decodedSeen:m.ok,rendererRssMB:Math.round(rss/1024),jsHeapMB:m.heapMB};R.push(row);console.log('MEM',JSON.stringify(row))}
   if(errs.length)console.log('pageerrors',dev,errs.slice(0,5));await ctx.close();
   for(const f of fs.readdirSync(vdir).filter(f=>f.endsWith('.webm'))){const src=path.join(vdir,f),mp4=path.join(OUT,dev+'.mp4'),x2=path.join(OUT,dev+'-x2.mp4');
    try{execFileSync('ffmpeg',['-y','-loglevel','error','-i',src,'-c:v','libx264','-pix_fmt','yuv420p','-crf','28',mp4]);execFileSync('ffmpeg',['-y','-loglevel','error','-i',mp4,'-filter:v','setpts=0.5*PTS','-an','-c:v','libx264','-crf','28',x2])}catch(e){console.log('ffmpeg',e.message.slice(0,120))}}}

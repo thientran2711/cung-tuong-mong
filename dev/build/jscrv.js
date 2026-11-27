@@ -61,9 +61,28 @@ function scrvEl(dest){let v=document.getElementById("kveil");if(!v){v=document.c
  v.classList.remove("out");v.hidden=false;return v}
 let SCRV_RUN=null;
 function scrvReveal(){const v=document.getElementById("kveil");if(!v||v.hidden||v.classList.contains("out"))return;v.classList.add("out");setTimeout(()=>{if(v.classList.contains("out")){v.hidden=true;v.classList.remove("out")}},KIT_SCRV.fade+20)}
-/* at the safety cap a picture still loading is NOT shown half-painted: it stays invisible until it loads (a hole for a moment, never a stand-in) */
-function scrvHideLate(root){let n=0;const hide=()=>{let left=0;try{for(const im of root.querySelectorAll("img")){if(im.complete||!im.getAttribute("src")||im.__scrvH)continue;im.__scrvH=1;left++;im.style.visibility="hidden";const back=()=>{im.style.visibility="";im.__scrvH=0};im.addEventListener("load",back,{once:true});im.addEventListener("error",back,{once:true})}}catch(e){}return left};
- hide();const t=setInterval(()=>{hide();if(++n>=60)clearInterval(t)},250)}
+/* at the safety cap a picture still loading is NOT shown half-painted: it stays invisible until it is loaded AND decoded (a hole for a moment, never a stand-in).
+   RV-174 FAIL-1 (LRM3): one pass + polling missed pictures attached / changed between polls → once the cap fires a LATE GUARD (MutationObserver on root:
+   new nodes, <img src>, style / class changes) hides EVERY picture not yet decoded the moment it is attached or changed: an <img> → visibility hidden until
+   load + decode; an element whose CSS background url is not decoded (not in SCRV_OK) → its background-image is lifted until scrvWaitUrl resolves (its
+   children stay visible). The guard ends at the next view change (a new veil cycle owns that view) or after BAL.kscrv.late ms. */
+let SCRV_LATE=null;
+function scrvLateStop(){const L=SCRV_LATE;if(!L)return;SCRV_LATE=null;try{L.mo.disconnect()}catch(e){}clearTimeout(L.t)}
+function scrvLateImg(im){const s=im.getAttribute("src");if(!s||s.startsWith("data:")||s.startsWith("blob:"))return;if(im.complete&&im.naturalWidth){SCRV_OK.add(scrvAbs(im.currentSrc||s));return}/* already painted-ready: never blink a picture she already sees */
+ if(im.__scrvH===s)return;im.__scrvH=s;im.style.visibility="hidden";const back=()=>{if(im.__scrvH!==s)return;im.__scrvH=0;im.style.visibility="";KIT_SCRV.stat.lateBack=(KIT_SCRV.stat.lateBack||0)+1};
+ KIT_SCRV.stat.late=(KIT_SCRV.stat.late||0)+1;
+ im.addEventListener("load",()=>{(im.decode?im.decode():Promise.resolve()).then(()=>{try{SCRV_OK.add(scrvAbs(im.currentSrc||s))}catch(e){}back()},back)},{once:true});im.addEventListener("error",back,{once:true})}
+function scrvLateBg(el){if(el.id==="kveil"||el.__scrvB)return;let bg="";try{bg=getComputedStyle(el).backgroundImage}catch(e){return}if(!bg||bg==="none"||bg.indexOf("url(")<0)return;
+ SCRV_BG.lastIndex=0;let m;const us=[];while((m=SCRV_BG.exec(bg)))if(!/^(data|blob):/.test(m[1]))us.push(scrvAbs(m[1]));const bad=us.filter(u=>!scrvReadyUrl(u));if(!bad.length)return;
+ el.__scrvB=1;el.style.setProperty("background-image","none","important");KIT_SCRV.stat.late=(KIT_SCRV.stat.late||0)+1;
+ Promise.all(bad.map(scrvWaitUrl)).then(()=>{el.__scrvB=0;el.style.removeProperty("background-image");KIT_SCRV.stat.lateBack=(KIT_SCRV.stat.lateBack||0)+1})}
+function scrvLateScan(n){if(!n||n.nodeType!==1||n.id==="kveil")return;try{if(n.tagName==="IMG")scrvLateImg(n);else scrvLateBg(n);
+  for(const im of n.querySelectorAll("img"))scrvLateImg(im);for(const el of n.querySelectorAll("*"))if(el.tagName!=="IMG")scrvLateBg(el)}catch(e){}}
+function scrvHideLate(root){scrvLateStop();root=root||document.body;scrvLateScan(root);
+ const mo=new MutationObserver(R=>{if(!SCRV_LATE)return;for(const r of R){if(r.type==="childList")r.addedNodes.forEach(scrvLateScan);
+  else if(r.target.nodeType===1){const el=r.target;if(el.tagName==="IMG"){if(r.attributeName==="src"||r.attributeName==="srcset")scrvLateImg(el)}else if(!el.__scrvB)scrvLateBg(el)}}});
+ mo.observe(root,{childList:true,subtree:true,attributes:true,attributeFilter:["src","srcset","style","class"]});
+ SCRV_LATE={mo,key:SCRV_KEY,t:setTimeout(scrvLateStop,KIT_SCRV.late||30000)}}
 /* wait (scan again after each wait: pictures set a frame later are caught) until all decoded or the cap */
 async function scrvWaitAll(root,t0,P){const raf=()=>new Promise(r=>requestAnimationFrame(()=>r()));
  for(let k=0;k<12;k++){const left=KIT_SCRV.cap-(performance.now()-t0);if(left<=0){scrvHideLate(root);return "cap"}
@@ -102,7 +121,7 @@ function scrvDest(a,b){const f=(s,c)=>{const m=(s||"").match(new RegExp("\\|"+c+
  if((a||"").split("|")[0]!==(b||"").split("|")[0])return "book";if(f(a,"p")!==f(b,"p")){const p=f(b,"p");return p==="home"?"home":p}
  if((f(b,"g")&&f(a,"g")!==f(b,"g"))||(f(b,"v")&&f(a,"v")!==f(b,"v")))return "board";if(f(b,"q")&&f(a,"q")!==f(b,"q"))return "event";return "scene"}
 let SCRV_KEY="";function scrvKeyNow(){SCRV_KEY=scrvKey()}
-function scrvCheck(){if(SCRV_HOLD)return;const k=scrvKey();if(k===SCRV_KEY)return;const old=SCRV_KEY;SCRV_KEY=k;if(scrvBlocked()||!old)return;const dest=scrvDest(old,k);
+function scrvCheck(){if(SCRV_HOLD)return;const k=scrvKey();if(k===SCRV_KEY)return;const old=SCRV_KEY;SCRV_KEY=k;if(SCRV_LATE&&SCRV_LATE.key!==k)scrvLateStop();/* the late guard belongs to the view it was raised in */if(scrvBlocked()||!old)return;const dest=scrvDest(old,k);
  kitScreenVeilUntil(document.body,dest).then(v=>{if(v)return;/* nothing pending now: pictures that a module sets a few frames later (RV-171 FAIL-2, warm tab «act») are caught by two rescans */
   for(const ms of [50,160,360])setTimeout(()=>{if(SCRV_RUN||SCRV_KEY!==k||scrvBlocked())return;if(scrvPend(document.body).length)kitScreenVeilUntil(document.body,dest)},ms)})}
 (function(){try{const st=document.createElement("style");st.id="kit-scrv";st.textContent=
