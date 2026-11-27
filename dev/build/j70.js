@@ -512,8 +512,8 @@ window.scarOf=scarOf;
 (function(){const e0=effSac;effSac=function(p){let r=e0.apply(this,arguments);try{if(p&&p.scar)r=cl(r-Math.round(p.scar.d*(p.scar.veil?2/3:1)),0,130)}catch(e){}return r}})();
 function scar70(t,sev,a,how){const L=SCAR70[sev];t.scar={sev,d:L.d,need:L.need,pg:0,veil:0,tr:0,cure:0,by:a?key(a):null,at:wk(),how:how||""};ap(t,{sung:-L.sung,danh:-L.danh});
  if(t===S){for(const v of liveRivals(true))v.ghen=cl((v.ghen||0)-Math.round(6*sev),0,100)}return L}
-A("huydung","Hủy dung",{c:{bac:-BAL.actBac.huydung,duc:-8},ok:(a,t)=>(a.bac||0)>=BAL.actBac.huydung&&!t.scar,o:a=>odA(a,38+(a.tamco||0)/5+eyes(a)*4),x:'thành: <span class="g">Sắc nàng giảm mạnh, ân sủng giảm</span>'/* E-GAIN3b law 3: her gain (explicit green, kit KP12) */,f:(a,t)=>{
- ap(a,{bac:-BAL.actBac.huydung});if(typeof ducAdd==="function")ducAdd(a,-8,"hủy dung");else ap(a,{duc:-8});a.schemes=(a.schemes||0)+1;const how=window.__j70hd||"phan";
+A("huydung","Hủy dung",{c:{bac:-BAL.actBac.huydung,get duc(){return -BAL.actDuc.huydung}},ok:(a,t)=>(a.bac||0)>=BAL.actBac.huydung&&!t.scar,o:a=>odA(a,38+(a.tamco||0)/5+eyes(a)*4),x:'thành: <span class="g">Sắc nàng giảm mạnh, ân sủng giảm</span>'/* E-GAIN3b law 3: her gain (explicit green, kit KP12) */,f:(a,t)=>{
+ ap(a,{bac:-BAL.actBac.huydung});if(typeof ducAdd==="function")ducAdd(a,-BAL.actDuc.huydung,"hủy dung");else ap(a,{duc:-BAL.actDuc.huydung});a.schemes=(a.schemes||0)+1;const how=window.__j70hd||"phan";
  const c=caught(a,t,how==="phan"||how==="son","hủy dung "+NM(t)+(how==="canh"?" bằng bát canh nóng":how==="meo"?" bằng cách dụ mèo dữ":" bằng phấn trộn độc"));if(c)return c;
  if(!aRoll(odA(a,38+(a.tamco||0)/5+eyes(a)*4),a)){if(how!=="canh"||roll(40))evA(t,a,BAL.eff.j70.evF);return `${NMc(a)} định hủy dung ${NM(t)} nhưng không thành, ${how==="canh"?"bát canh chỉ đổ ra sàn":"bị lộ dấu vết"}. `}
  const W=HDR70[how]||HDR70.phan;let x=Math.random(),sev=1;if(x>W[0])sev=2;if(x>W[0]+W[1])sev=3;const L=scar70(t,sev,a,how);if(how==="phan"&&roll(35))evA(t,a,BAL.eff.j70.evF_2);

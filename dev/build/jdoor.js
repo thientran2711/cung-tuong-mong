@@ -65,11 +65,22 @@ window.doorOpen=doorOpen;
 (function(){const t0=talk;talk=function(oi){try{if(typeof oi==="number"&&oi>=0&&popIdx!=null&&S&&S.visit&&!S.dead&&!Q.length){const p=curPeople()[popIdx];const a=p&&talkOpts(p)[oi];
   if(a&&a.door){if(a.lock||(S.visit.tk||{})[popIdx]||S.visit.talked===true)return;a.open();render();return}}}catch(e){console.error("jdoor talk",e)}return t0.apply(this,arguments)}})();
 /* the choice card: one row per member, its own line and its own reason when it cannot be done now */
+/* E-GAIN3c law 3 + law 11: the «Gợi ý» of EVERY door way row (both door paths: the talk door below and the J2 door, E-GAIN3b moved only the J2 one).
+   The kit hint (kitHint, read-only) of the way itself; when that says «chẳng được gì / không được mất gì», the hint of its full line; when that too says
+   nothing gained but the way's OWN line shows a real gain (doorGain: the card's green «Được»), that gain leads the hint and the kit's «nhưng …» part stays.
+   Before: the talk-door rows had no hint → the kit read their marks line → «chẳng được gì» for Nương theo, Rỉ tai, Nghe ngóng chung, Phạt vô cớ, Đổi người. */
+function doorHint(a,x){if(a&&a.hint)return a.hint;return lv=>{const NO=/^(chẳng được gì|không được mất gì)/;let h1="",h2="";try{h1=kitHint(a,null,lv).hint}catch(e){}if(h1&&!NO.test(h1))return h1;
+  try{h2=kitHint({x,o:a.o,c:a.c},null,lv).hint}catch(e){}if(h2&&!NO.test(h2))return h2;
+  let g="";try{const d=document.createElement("div");d.innerHTML=doorGain([a.x||"",x||""].filter(Boolean),2).replace(/^được:\s*/,"");g=d.textContent.replace(/\s+/g," ").trim()}catch(e){}
+  if(!g)return h1||h2;/* the «nhưng …» part: the kit hint of the way WITHOUT its green gain pieces (else the kit's misread of the gain itself lands there) */
+  let h3="";try{h3=kitHint({x:String(a.x||"").replace(/<span class="g">[\s\S]*?<\/span>/g,""),o:a.o,c:a.c,risk:a.risk},null,lv).hint}catch(e){}
+  const rest=String(h3||"").replace(NO,"").replace(/^;\s*/,"");return rest?`${g}; ${rest}`:g}}
+window.doorHint=doorHint;
 PEND.door=pp=>{pp.i=doorIdx(pp);const p=curPeople()[pp.i];const r=DOOR.byK(pp.k);if(!p||!r||!S.visit)return null;let A;try{A=doorRaw(p)}catch(e){return null}
  const o=[];A.forEach((a,j)=>{if(!a||a.k61||a.door||DOOR.of(a.n,p.kind)!==r)return;const tc=talkK(a);const poor=!!(a.c&&a.c.bac&&S.bac+a.c.bac<0);
   const why=a.lock?doorTxt(a.t)||"chưa làm được":poor?"không đủ bạc":!can(tc)?(doorTxt(typeof whyTime==="function"?whyTime(tc):"")||"hết khắc buổi này"):"";
   let x="";try{x=optLine(a)}catch(e){}const tw=typeof r.tier==="function"?r.tier(a):"";/* KIT §7.1 (J0): a tier sits in the option TITLE «<việc> · nặng» */
-  const row={n:tw?`${a.n} · ${tw}`:a.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,go:()=>doorPick(pp,j,a.n)};if(why)row.off={why};o.push(row)});
+  const row={n:tw?`${a.n} · ${tw}`:a.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,hint:doorHint(a,x),go:()=>doorPick(pp,j,a.n)};if(why)row.off={why};o.push(row)});
  if(!o.length)return null;o.push({n:"Thôi"});
  const nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";
  const w=doorWho(p);let who=null;try{who=w&&typeof WHO==="function"?WHO(w):null}catch(e){}
@@ -222,7 +233,7 @@ DOOR.rowsJ2=function(r,M,v){const out=[];const seen=new Set();const seed=[S.turn
  else{if(pp.kind!=null)pp.i=doorIdx(pp);const p=curPeople()[pp.i];if(!p||!S.visit)return null;v=p.ref;let A=[];try{A=doorRaw(p)}catch(e){return null}
   A.forEach((a,j)=>{if(!a||a.k61||a.door||DOOR.of(a.n,p.kind)!==r)return;const tc=talkK(a);const poor=!!(a.c&&a.c.bac&&S.bac+a.c.bac<0);
    const why=a.lock?doorTxt(a.t)||"chưa làm được":poor?"không đủ bạc":!can(tc)?(doorTxt(typeof whyTime==="function"?whyTime(tc):"")||"hết khắc buổi này"):"";
-   let x="";try{x=optLine(a)}catch(e){}M.push({id:"t:"+doorTxt(a.n),n:a.n,x,hint:a.hint||(lv=>{const NO=/^(chẳng được gì|không được mất gì)/;let h1="",h2="";try{h1=kitHint(a,null,lv).hint}catch(e){}if(h1&&!NO.test(h1))return h1;try{h2=kitHint({x,o:a.o,c:a.c},null,lv).hint}catch(e){}return h2&&!NO.test(h2)?h2:h1})/* E-GAIN3b law 3: the row hint reads the way itself (its x / BAL numbers), not its optLine whose numbers are already marks (kitHint then said «chẳng được gì») */,off:!!why,why,go:()=>doorPick(pp,j,a.n)})});
+   let x="";try{x=optLine(a)}catch(e){}M.push({id:"t:"+doorTxt(a.n),n:a.n,x,hint:doorHint(a,x)/* E-GAIN3b law 3: the row hint reads the way itself (its x / BAL numbers), not its optLine whose numbers are already marks (kitHint then said «chẳng được gì») */,off:!!why,why,go:()=>doorPick(pp,j,a.n)})});
   if(typeof DOOR.more==="function")M=M.concat(DOOR.more(p,r));nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";
   const w=doorWho(p);try{who=w&&typeof WHO==="function"?WHO(w):null}catch(e){}}
  const o=DOOR.rowsJ2(r,M,v);if(!o.length)return null;o.push({n:"Thôi"});return{t:`${r.h}${nm?` <b>${nm}</b>`:""}`,o,who}}})();

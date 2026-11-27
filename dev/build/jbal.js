@@ -186,7 +186,6 @@ Object.assign(BAL,{
  house:{ /* jhouse.js: acts on a household servant's stage card */
   k:1,              /* khắc each stage act takes (Thưởng/Phạt/Tha/Che chở/Tra khảo/Xem người/Tiến cử/Đổi người/Giao việc phòng bị) */
   thuongBac:10,     /* Thưởng: bạc paid, and bạc needed */
-  phatDuc:3,        /* Phạt vô cớ: Đức -N (card text) */
   cheDanh:2,        /* Che chở (servant accused): Danh -N */
   tra:{base:55,tcDiv:4,loyal:25},   /* Tra khảo a planted spy (a chance, owner 17:00Z): odds he names his master = base + her Tâm cơ/tcDiv − loyal when loyal by nature; hỏng: he holds his tongue, stays */
   che:{base:45,danhDiv:4,rank:4,failLoy:8}, /* Che chở before Thận Hình ti (a chance): base + her Danh/danhDiv + rank×rank; hỏng: the Danh is spent, he is grateful (lòng +failLoy) */
@@ -442,6 +441,8 @@ Object.assign(BAL,{
       NPC-side prices (the check and the charge read one key): ksp = an NPC bribes Kính sự phòng (j28) · midwife = a rival bribes the midwife (j32) ·
       backer = a court backer (j34) · npcMat = an NPC buys craft material (j75) · giu = an NPC bribes past «giữ» (j8 + j75, one rule in two modules) */
  actBac:{spy:15,ally:30,bribe:40,block:40,musk:30,catswap:50,lygian:20,slowpoison:40,xinhh:30,huydung:30,giahoa:40,thathu:40,phonghoa:30,thaopet:10},
+ actDuc:{poison:10,musk:8,trip:4,huydung:8,thathu:6,phonghoa:8},
+   /* E-GAIN3c law 4: the Đức each harm act costs its doer (ACT[k].c shows it, its f charges it: one key; values unchanged, were typed in j8 / j9 / j70 / jtsb) */
    /* base bạc of each scheme act (ACT[k].c, its ok and its f charge); jecon raises it by the target's rank / guards, and the lock words print that real price (actBac(k,a,t)) */
 });
 /* evWipe: the chứng cứ amount that clears every piece one person holds against another (evA(a,t,BAL.evWipe): a pardon, a death, a plot undone); review/one-core-dup3 */

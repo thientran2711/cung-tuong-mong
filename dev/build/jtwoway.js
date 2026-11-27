@@ -70,7 +70,9 @@ TWD("flaunt",{n:"Khoe quà ngự ban",req:a=>(a.sung||0)>=40,run:a=>{twAp(a,{dan
 TWD("test",{n:"Thử lòng",req:(a,t)=>!!t&&aff(a,t)>=0,o:()=>G().test[2],run:(a,t,ok)=>{affAdd(a,t,ok?G().test[0]:G().test[1]);return `${twNm(a)} thử lòng ${NM(t)}: ${ok?"tin thêm một chút":"càng ngờ vực"}`}});
 TWD("drop",{n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=netTh(a,"than")&&((t.sung||0)<25||!!t.confined),run:(a,t)=>{affAdd(a,t,-G().drop);return `${twNm(a)} lạnh nhạt với ${NM(t)} lúc sa cơ`}});
 TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&rkOf(t)>rkOf(a)+1,run:(a,t)=>{relAdd(a,t,G().follow);return `${twNm(a)} nép theo ${NM(t)}`}});
-TWD("gossip",{n:"Rỉ tai chuyện trong cung",req:(a,t)=>!!t,run:(a,t)=>{/* NPC-PURPOSE G3: the talk is about the one the teller resents (her foe, near-best by hostility); no foe → harmless talk */const x=npwPick(liveRivals(true).filter(y=>y!==a&&y!==t),y=>Math.max(0,hostility(a,y)-BAL.ag.why.min));if(x)ap(x,{danh:-G().gossip});return `${twNm(a)} rỉ tai ${NM(t)} chuyện trong cung${x?` về ${NM(x)}`:""}`}});
+/* E-GAIN3c law 3: «Rỉ tai» gains only by the foe it hurts — with no foe (nobody the teller resents above BAL.ag.why.min) it gave nothing: offered only when a foe exists (her and an NPC: one req, law 1) */
+function twGossipFoes(a,t){return liveRivals(true).filter(y=>y!==a&&y!==t&&hostility(a,y)>BAL.ag.why.min)}
+TWD("gossip",{n:"Rỉ tai chuyện trong cung",req:(a,t)=>!!t&&twGossipFoes(a,t).length>0,run:(a,t)=>{/* NPC-PURPOSE G3: the talk is about the one the teller resents (her foe, near-best by hostility) */const x=npwPick(twGossipFoes(a,t),y=>Math.max(0,hostility(a,y)-BAL.ag.why.min));if(x)ap(x,{danh:-G().gossip});return `${twNm(a)} rỉ tai ${NM(t)} chuyện trong cung${x?` về ${NM(x)}`:""}`}});
 TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{/* 2e4: her "Kiểm tra đồ" detection (j8 inspect: oSee odds per item, trail evidence) */const f=inspect(a);return f.length?`${twNm(a)} cho soát quà, tìm ra: ${f.join("; ")}`:`${twNm(a)} cho soát lại quà được tặng, không thấy gì lạ`}});
 TWD("admon",{n:"Khuyên Hoàng thượng mưa móc đều khắp",req:(a,t)=>{if(!t||t===a||!(a===S?S.rank>=7:a.queen))return false;const f=typeof favNow==="function"?favNow():null;return !!f&&f.p===t&&!(t.admonWk!=null&&wk()-t.admonWk<G().admonCd)},
  run:(a,t)=>{twAp(t,{sung:-G().admon});t.admonWk=wk();return `${twNm(a)} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${NM(t)}`}});
@@ -107,7 +109,7 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
   add("test",`thành: ngươi tin nàng hơn +${g.test[0]} · hỏng: ngờ vực ${g.test[1]}`);
   add("drop",`ngươi lạnh với nàng -${g.drop}`);
   add("follow",`nàng quý ngươi +${g.follow}`);
-  add("gossip",`một phi tần khác Danh -${g.gossip}`);
+  add("gossip",`<span class="g">kẻ ngươi ghét bị bàn tán: Danh nàng ta -${g.gossip}</span>`)/* E-GAIN3c: the foe's loss is her gain (explicit green, kit KP12) */;
   add("admon",`Sủng nàng -${g.admon} · hai tuần ngài để ý người khác`);
   add("flaunt",`Danh +${g.flauntDanh} · mọi phi tần ghen +${g.flaunt}`)}catch(e){console.error(e)}return A}})();
 /* her Thái hậu / Hoàng hậu greetings: the same BAL.tw cost (gains stay in her card's w/l, which read the same numbers) */

@@ -51,8 +51,8 @@ function tsbThuO(a,t){return oddsCl(Math.min(Math.round(odA(a,44+(a.tamco||0)/5+
 function tsbFireO(a,t){return oddsCl(Math.min(Math.round(odA(a,46+(a.tamco||0)/5)-tsbGuard(t)),90))}
 
 /* ---------------- 1. Thả thú dữ (Hại nặng) ---------------- */
-A("thathu","Thả thú dữ làm hại dung nhan",{c:{bac:-BAL.actBac.thathu,duc:-6},ok:(a,t)=>(a.bac||0)>=BAL.actBac.thathu&&!t.scar&&!t.out,o:(a,t)=>tsbThuO(a,t),x:'thành: <span class="g">Sắc nàng giảm mạnh tới khi lành, Sủng và Danh giảm</span>'/* E-GAIN3b law 3 (same family as huydung): her gain (explicit green, kit KP12) */,
- f:(a,t)=>{ap(a,{duc:-6});/* review ag-all-2 r2 A5: the keeper's bạc only when the beast is loosed (econPayWin below) */a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"mua chuộc người giữ thú thả thú dữ vào cung "+NM(t));if(c)return c;
+A("thathu","Thả thú dữ làm hại dung nhan",{c:{bac:-BAL.actBac.thathu,get duc(){return -BAL.actDuc.thathu}},ok:(a,t)=>(a.bac||0)>=BAL.actBac.thathu&&!t.scar&&!t.out,o:(a,t)=>tsbThuO(a,t),x:'thành: <span class="g">Sắc nàng giảm mạnh tới khi lành, Sủng và Danh giảm</span>'/* E-GAIN3b law 3 (same family as huydung): her gain (explicit green, kit KP12) */,
+ f:(a,t)=>{ap(a,{duc:-BAL.actDuc.thathu});/* review ag-all-2 r2 A5: the keeper's bạc only when the beast is loosed (econPayWin below) */a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"mua chuộc người giữ thú thả thú dữ vào cung "+NM(t));if(c)return c;
   if(!aRoll(tsbThuO(a,t),a)){const e=roll(50);if(e)/*evok: thathu act*/evA(t,a,BAL.eff.jtsb.evF);return `Con thú dữ lọt vào cung ${NM(t)} bị người canh chặn kịp, đuổi đi trước khi kịp gây chuyện${e?`; kẻ thả thú bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF)})`:""}. `}
   econPayWin(a,"thathu",t,BAL.actBac.thathu);const sev=tsbSev();const L=tsbScar(t,sev,a);if(t===S){try{feedback("hit")}catch(e){}}
   return `<span class="r">Một con thú dữ không rõ từ đâu lọt vào cung ${NM(t)}, làm tổn dung nhan ${NM(t)} (hủy dung ${L.n}): Sắc -${L.d} tới khi lành, ${sgOf(t,-L.sung)}, Danh -${L.danh}.</span> `}});
@@ -71,8 +71,8 @@ function tsbFitArt(g){try{const id="cat:"+g;const src=typeof evArtOf==="function
 function tsbPlaceArt(){try{const f=evArt();return f?{src:f,label:placeName(S.place||"home")}:undefined}catch(e){return undefined}}
 function tsbItemSrc(e){try{const a=tsbItemArt(e);if(a&&a.src)return a.src;if(e.wk)return `img/item-tp-${e.wk.kind||"theu"}-b${(e.wk.ti||0)+1}.webp`;const f=ITIMG[e.k];return kitItemSrc(e.k,f?`img/item-${f}.webp`:`img/item-${e.k}.webp`)}catch(x){return""}}
 function tsbBurn(p,n,cause){if((p.tsbSafe||0)>=tsbWk())return[];const L=tsbBurnable(p);const out=[];for(let i=0;i<n&&L.length;i++){const j=R(L.length);const [e]=L.splice(j,1);const ix=p.inv.indexOf(e);if(ix>=0){p.inv.splice(ix,1);out.push(tsbItemN(e));if(p===S)tsbLedger({what:tsbItemN(e),how:"cháy",cause})}}return out}
-A("phonghoa","Phóng hỏa kho đồ",{c:{bac:-BAL.actBac.phonghoa,duc:-8},ok:(a,t)=>(a.bac||0)>=BAL.actBac.phonghoa&&!t.out&&tsbBurnable(t).length>0,o:(a,t)=>tsbFireO(a,t),x:"đồ cháy được trong kho nàng bị thiêu (1-2 món)",
- f:(a,t)=>{ap(a,{bac:-BAL.actBac.phonghoa,duc:-8});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"sai người phóng hỏa kho đồ của "+NM(t));if(c)return c;
+A("phonghoa","Phóng hỏa kho đồ",{c:{bac:-BAL.actBac.phonghoa,get duc(){return -BAL.actDuc.phonghoa}},ok:(a,t)=>(a.bac||0)>=BAL.actBac.phonghoa&&!t.out&&tsbBurnable(t).length>0,o:(a,t)=>tsbFireO(a,t),x:"đồ cháy được trong kho nàng bị thiêu (1-2 món)",
+ f:(a,t)=>{ap(a,{bac:-BAL.actBac.phonghoa,duc:-BAL.actDuc.phonghoa});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"sai người phóng hỏa kho đồ của "+NM(t));if(c)return c;
   if(!aRoll(tsbFireO(a,t),a)){const e=roll(50);if(e)/*evok: phonghoa act*/evA(t,a,BAL.eff.jtsb.evF_2);return `Lửa vừa bén ở kho đồ của ${NM(t)} đã được chặn kịp, không mất gì${e?`; kẻ phóng hỏa bị bắt, khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jtsb.evF_2)})`:""}. `}
   const lost=tsbBurn(t,1+(roll(35)?1:0),"có kẻ phóng hỏa (chưa rõ là ai)");t.tsbFire=(t.tsbFire||0)+1;
   if(!lost.length)return `Kho đồ của ${NM(t)} bén lửa nhưng đồ quý đã được cất chỗ khác; không mất gì. `;
