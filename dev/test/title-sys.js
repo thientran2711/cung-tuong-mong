@@ -20,9 +20,9 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   await q.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;deal();render()});await sleep(3000);
   for(let t=0;t<3&&!R.dp;t++){await q.evaluate(()=>{try{kmReset()}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;
     const v=liveRivals(true).filter(x=>!x.queen)[1];v.nights=(BAL.dh.T.nights.n||BAL.dh.n0)[0];dhSync(v);S.dh={w_kim:{n:(BAL.dh.T.w_kim.n||BAL.dh.n0)[0]}};dhSync(S,true);dhWear(S,'w_kim');S.met=S.met||{};S.met[v.id]=1;
-    Q.unshift({t:"Có người đến",who:pv(v),stage:[v],headArt:{src:"img/ev-khach-den.webp"},h:`<p>${v.name} đến thăm.</p>`,opts:[{n:"Nhịn",fx:{duc:2},x:"giữ lễ",go:()=>{}}]});showModal()});
-   await q.waitForFunction(()=>{const c=[...document.querySelectorAll('.kdpcap, .kesf>.kpsn')].find(e=>e.getClientRects().length);return c&&c.innerText.trim().length>0},null,{timeout:40000}).catch(()=>{});
-   await sleep(1500);R.dp=await q.evaluate(()=>{const c=[...document.querySelectorAll('.kdpcap, .kesf>.kpsn')].find(e=>e.getClientRects().length);return c?c.innerText.replace(/\n/g,' / '):null})}
+    Q.unshift({__dfWait:2,__fcW:2,/* title-sys-fix: skip the face-preload waits (jdfv / jgreet ≤ 4 s, then a re-show outside her act); pictures need not load here */t:"Có người đến",who:pv(v),stage:[v],headArt:{src:"img/ev-khach-den.webp"},h:`<p>${v.name} đến thăm.</p>`,opts:[{n:"Nhịn",fx:{duc:2},x:"giữ lễ",go:()=>{}}]});/* title-sys-fix: opened as HER act (DQ.user, jdayq), so the day-start gate (title card / book) does not park and later drop the test card */window.__e68off=1;/* the event-spacing gate (j68 evGate) drops a same-kind card shown recently: a test card is not a game event */window.DQ&&(DQ.user=(DQ.user||0)+1);try{showModal()}finally{window.DQ&&DQ.user--}});
+   await q.waitForFunction(()=>{const c=[...document.querySelectorAll('.kdpcap, .kesf>.kpsn, .k3ev>.kt3.kdhcap, .k3mpic>.kt3.kdhcap')].find(e=>e.getClientRects().length);return c&&c.innerText.trim().length>0},null,{timeout:40000}).catch(()=>{});
+   await sleep(1500);R.dp=await q.evaluate(()=>{const c=[...document.querySelectorAll('.kdpcap, .kesf>.kpsn, .k3ev>.kt3.kdhcap, .k3mpic>.kt3.kdhcap')].find(e=>e.getClientRects().length);return c?c.innerText.replace(/\n/g,' / '):null})}
   if(!R.dp)R.fail.push('no dialog');else if(!/^(Trăng soi rèm ngọc|Chức Nữ)/.test(R.dp))R.fail.push('worn title not in pop-up figure: '+R.dp);/* the kit shows the visitor (desktop) or her (touch) on the left: either way the worn title must be line 1 */
   await q.screenshot({path:`${OUT}/dh-popup-${wh}.jpg`,type:'jpeg',quality:75});await c1.close()}
  await fresh();await sleep(800);await clean();
@@ -70,7 +70,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   two('m_mon',nn('m_mon'),'gTrung',()=>{S.maid.loyal=0;apply({maid:40});return S.maid.loyal});if(!(B.gTrung[1]>B.gTrung[0]))F.push('gTrung');
   two('w_kim',nn('w_kim'),'phuc',()=>lotB(S,'Thi'));if(B.phuc[1]-B.phuc[0]!==BAL.dh.B.phuc.v[0])F.push('phuc');
   two('w_kim',nn('w_kim'),'phuc',()=>lotB(S,'Con cái'));if(B.phuc[1]!==B.phuc[0])F.push('luck touched conception');
-  S.preg=null;S.lastBirth=null;two('kids',NN('kids')[1],'thai',()=>conceiveCh(S));if(B.thai[0]>0&&B.thai[1]-B.thai[0]!==BAL.dh.B.thai.v[1])F.push('thai '+B.thai);
+  S.preg=null;S.lastBirth=null;two('kids',NN('kids')[1],'thai',()=>conceiveCh(S));{const k=(typeof ldOn==='function'&&ldOn())&&BAL.nt&&BAL.nt.concF!=null?BAL.nt.concF:1;/* title-sys-fix: +v points on the FINAL chance (ledger: × concF) */if(B.thai[0]>0&&Math.abs(B.thai[1]-B.thai[0]-BAL.dh.B.thai.v[1]*k)>1e-9)F.push('thai '+B.thai+' k '+k)}
   if(dhObj(S,'kids')&&(BAL.dh.T.kids.ch||[]).includes('thai')&&dhB(S,'thai'))F.push('thai at step 1');
   two('a_doc',nn('a_doc'),'nghe',()=>{const k='thi';S.arts[k]=1;S.artp[k]=0;const tot=()=>S.arts[k]*1000+S.artp[k];const a=tot();Math.random=()=>0;try{addArt(k,1)}finally{Math.random=()=>0.5}return tot()-a});if(!(B.nghe[1]>B.nghe[0]))F.push('nghe');
   two('w_tho',nn('w_tho'),'thi',()=>SC7.tho.f(S));if(B.thi[1]-B.thi[0]!==BAL.dh.B.thi.v[0])F.push('thi');
