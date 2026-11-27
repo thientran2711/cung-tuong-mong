@@ -106,11 +106,24 @@ if(typeof kitShop==="function"){const ks0=kitShop;kitShop=function(o){try{const 
     onBuy:(x,q)=>{if(!S.adRare||S.adRare.sold)return;apply({bac:-x.price});S.inv.push({k});S.adRare.sold=1;x.stock=0;x.why="Đã mua; tuần sau có món khác";log(`Mua ${it.n} (hàng hiếm). Bạc -${x.price}`)}})}}catch(e){console.error("jact rare",e)}
  return ks0.apply(this,arguments)}}
 /* ---------- 6. place icons (kit icon set) + happening mark ---------- */
-const KIT_PLACE_IC={nvp:"bac",tyv:"y-thuat",vuon:"place-vuon",thu:"sung",dtd:"sung",tn:"duc",kn:"danh",
- ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc",
- nth:"suc",pd:"duc"}; /* nth/pd: STAND-IN glyphs (suc = health/food, duc = virtue, as Đức Thọ) until KIT REQUEST place-nth / place-pd is painted (dev/kit/KIT_REQUESTS.md 20/11 map-places) */
-/* every place has a glyph (D56): the consort palaces r<N> (and her own home) share the palace-roof glyph */
-function kitPlaceIcon(k,s){const n=KIT_PLACE_IC[k]||(/^r\d+$/.test(k||"")?"place-cung":"");return n&&typeof ic==="function"?ic(n,s||14).replace('class="ic"','class="ic kplic"'):""}
+/* KIT §78 PLACE GLYPHS = PAINTED PLACE PICTURES ONLY (map-r8 26/11, MAIN 163 ruling + RV-163B: a stat glyph «danh / duc / sung / suc / bac» never stands for a place — it reads as a stat):
+   every key → img/place-<key>.webp (Foreman C place glyphs v1/v2 + v3 26/11, gpt-2-6). Keys with no painted glyph yet → KIT_PLACE_STAND (the neutral palace roof, a PLACE glyph) + ART REQUEST «place glyphs r8» (dev/kit/KIT_REQUESTS.md); the painted file replaces the entry, nothing else changes. */
+const KIT_PLACE_IC={vuon:"place-vuon",ksp:"place-ksp",lc:"place-lc",home:"place-home",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc",
+ nth:"place-nth",pd:"place-pd",dtv:"place-dtv",ty:"place-ty",kinh:"place-kinh",
+ kc_khue:"place-kc_khue",kc_sanh:"place-kc_sanh",kc_thu:"place-kc_thu",kc_me:"place-kc_me",kc_di:"place-kc_di",kc_vuon:"place-kc_vuon",kc_tu:"place-kc_tu",kc_hoc:"place-kc_hoc",
+ "kpm:chinh":"place-chinh","kpm:dong":"place-dong","kpm:tay":"place-tay",
+ "kpm:ngudao":"place-ngudao","kpm:vuonhoa":"place-vuonhoa","kpm:thuyta":"place-thuyta","kpm:dinhco":"place-dinhco","kpm:nonbo":"place-nonbo",
+ cungtrong:"place-cungtrong",ngoaitrieu:"place-ngoaitrieu"}; /* cungtrong = every empty consort palace (j27 data-pk), ngoaitrieu = Ngoại triều (jmen data-pk) */
+const KIT_PLACE_STAND={thu:"place-cung",dtd:"place-cung",tn:"place-cung",kn:"place-cung",nvp:"place-cung",tyv:"place-cung"}; /* Cần Chính / Dưỡng Hòa / Đức Thọ / Càn Ninh / Nội vụ phủ / Thái y viện: ART REQUEST «place glyphs r8» */
+/* KIT §78 ONE SIZE (owner 26/11 ~18:35Z «icon nơi to bằng dấu Ta, đặt trên tên, đừng scale nhỏ như con kiến»): every place icon on a map is drawn at the SIZE OF THE «TA» MARKER (kitMeMapMark: KIT_MEMARK.mapBase × the rank scale × KIT_MEMARK.big), above the name; one function, no per-screen size */
+function kitPlaceIcPx(){try{const m=window.KIT_MEMARK||{},r=typeof kmmCur==="function"?kmmCur():null;return Math.round((m.mapBase||36)*((r!=null&&m.sc&&m.sc[r])||1)*(m.big||1))}catch(e){return Math.round(36*1.05)}}
+/* every place has a glyph (D56): the consort palaces r<N> share the palace-roof glyph; an unknown courtyard hall kpm:* too */
+function kitPlaceIcon(k,s){const n=KIT_PLACE_IC[k]||KIT_PLACE_STAND[k]||(/^(kpm:|r\d+$)/.test(k||"")?"place-cung":"");return n&&typeof ic==="function"?ic(n,s||kitPlaceIcPx()).replace('class="ic"','class="ic kplic"'):""}
+
+/* KIT §78 SWEEP: every tag of every map view carries its icon (data-go / data-ak / data-kcgo / data-kcmap / data-pk; an empty palace = data-pk "cungtrong", Ngoại triều = data-pk "ngoaitrieu"; zone tags carry their own). Runs after every render of the panel, only inserts what is missing (never loops). */
+function kitPlaceSweep(){try{const P=document.getElementById("panel");if(!P||typeof ic!=="function")return;P.querySelectorAll(".mspot").forEach(sp=>{const l=sp.querySelector(":scope>.mlab");if(!l||l.querySelector(".kplic")||sp.classList.contains("mzone"))return;
+ const k=sp.dataset.go||sp.dataset.ak||sp.dataset.kcgo||sp.dataset.kcmap||sp.dataset.pk||"";const h=kitPlaceIcon(k||"r0");if(!h)return;const m=l.querySelector(":scope>.kmmapmk");if(m)m.insertAdjacentHTML("afterend",h);else l.insertAdjacentHTML("afterbegin",h)})}catch(e){}}
+try{let q=0;const go=()=>{cancelAnimationFrame(q);q=requestAnimationFrame(kitPlaceSweep)};const mo=new MutationObserver(go);const arm=()=>{const P=document.getElementById("panel");if(P)mo.observe(P,{childList:true,subtree:true});else setTimeout(arm,300)};arm()}catch(e){}
 /* the ONE yellow round «!» markup (KIT §78.x); kitHapMark = a place with business this buổi, kitHapHtml(title) = any other «!» (a returned errand person, §90): same element, same class .khap */
 function kitHapHtml(title,role){const t=String(title||"Có chuyện buổi này").replace(/"/g,"&quot;");return `<i class="khap" role="${role||"img"}" aria-label="${t}" title="${t}">!</i>`}
 window.kitHapHtml=kitHapHtml;
