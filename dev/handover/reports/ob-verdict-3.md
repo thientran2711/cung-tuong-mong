@@ -75,3 +75,15 @@ LOOK READY to MAIN.
 - LIVE 4cfcda61 merged (CHANGE.txt lines kept, rebuilt). Test setup line (LC25) in ob-verdict-3.test.js: `BAL.evc.on=0` + comment (stat-pace daily cap).
 - Tests: `node dev/test/q-softlock.js index.html` **Q-SOFTLOCK PASS** (Fold + iPad, served); ob-verdict-3 **35/35** (new F: view panels never held,
   one tap each, Q empty; family 48/48, 0/48 title repeated); ob-verdict **ALL 84 OK**.
+
+## r4 (MAIN 169: 452b7cb5 NOT LANDABLE — LC26 button-crawl G4 90: 14 dead home buttons under .kfoc on Fold) — review/ob-verdict-3 = dacba11b (merges LIVE 17f23656)
+- ROOT: r1's `kitDialogOpen` override (to let the result card stand over the focus) made the focus layer stop counting as an open dialog:
+  body.kdlg-on was no longer set, so the other floating cards stayed un-parked and the person view no longer read as a new layer — the crawler
+  (and anything keyed on the park) treated home as unchanged under an open focus → 14 «covered under div.kfoc-*» dead buttons.
+- FIX (whole family, jverdict): the shared park rule is UNCHANGED; only the result card gets `.kres-front` (CSS: visible over body.kdlg-on) while it
+  is held or while the only open "dialog" is the focus; a deferred encounter talk-act build never leaves an empty focus (person left → dfGone(),
+  stale F skipped). KIT §32.10a text rewritten in place.
+- Tests (served tree, real taps): button-crawl --fast Fold **1 fault = LIVE 1** (same «Ô lưu · Lui» LIVE fault), iPad **1 = LIVE 1**;
+  q-softlock **PASS**; ob-verdict-3 **35/35** (family 47/47, 0 title repeat, view panels never held); ob-verdict **ALL 84 OK**.
+- NOTE for RV: iPad crawl shows SKIP 12 vs LIVE 2 — all «button gone before its tap» inside the «sương sớm» weather popup subtree, which my runs
+  reach within the 80-tap budget and the LIVE run did not (LIVE spent its taps in «Lịch tháng» 17 rows vs 3); not a fault (gate counts sure faults).
