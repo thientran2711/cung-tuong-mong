@@ -2,7 +2,7 @@
 
 PRIORITY #1 CHECK: OD MAIN 170 ORDER 03:35Z + F ROOT #2 02:55Z/03:12Z/03:40Z (FOREMAN_F_STATUS) | main: KG82.phase="result" set in j82/j92/jentry/jsgame/jslap/jtd/jts, not in jexam exRun after(), jmgcal after(), jroute done() | review/*: robot-realtap f65d019b dev/test/rt-board-phase-scan.js (copied in unchanged) | claims: D-KG82PHASE (this session).
 
-**SẴN SÀNG KIỂM: review/kg82-phase @ ec25b1e7** (base origin/main 0b43ee55 = LIVE 17f23656 + mg-trim; the fix is commit 0f61ea5f, ec25b1e7 adds the law-4 test column).
+**SẴN SÀNG KIỂM: review/kg82-phase @ 2602d629** (base origin/main 0b43ee55 = LIVE 17f23656 + mg-trim; the fix is commit 0f61ea5f; ec25b1e7 + 2602d629 only add test columns: law-4 shown = used, skip ≤ cap).
 
 ## Fix (one place, law 11)
 `dev/build/j82.js` kg82ShowRes: the shared result path now sets `KG82.phase="result"`, sets `KG82.peek=()=>null`, and stops and clears `KG82.run` before it draws any result or next-round screen. No caller can forget it any more. Callers that already set «result» themselves are unchanged (it's harmless to set it twice). The j90 podium and jsfx wrappers run around it and still see «result».
@@ -44,11 +44,16 @@ Side effect fixed: mg-back «2 Thử tay … between rounds» FAILS on main and 
 ## Item 4: «BOARD hat 170 moves 0/10» (LIVE Fold): NOT this family
 That board ended (it has a mark). The rhythm engine (j82 kg82Rhythm) has N=20 notes, and each tap that hits no note costs 0.3 credit. 170 taps for 20 notes means ~150 stray taps × 0.3 → 0/10. That is harness tap spam (it taps beyond the notes / off-window). The hit window is WIN = (220 + lv·14)·mgTol ms (≥ ±220 ms) and «Tuyệt» is ±100·mgTol. It is NOT ±90 ms. → harness item for F (peek-driven taps should only tap a live note in its window).
 
-## ADD-ON (Foreman D 04:57Z: exam «Môn 2/2 · Thêu» card «10/10 Xuất sắc» vs the real result)
-The ADD-ON text was not on the handover branch at 05:0xZ (asked D for the evidence path). I added a law-4 column to the test: the mark on the card and the header chip vs the value the rules use (exam: e.pend.raws; final: Các môn = raws; others: onDone/raw). Played paths, Fold + iPad: every caller matches. Exam «Để tài nghệ quyết định» (skip) ×3 exams: card 5/10 = chip = raw 5 = final row. The identity row (jmgid) shows «g/10 → r/10», and r is the value used. **Not reproduced; need the seat/log/shot.** Candidates if the shot shows 10/10 next to another number: (a) the identity row «g/10 → r/10» read as the result (g = graded play before the thân phận offset, by design); (b) the live HUD chip during play starts at 10/10 (mgLive) — on LIVE a finished board stayed «play», so a harness/shot taken at that moment could read the live chip and not the result row.
+## ADD-ON (Foreman D 04:57Z/05:02Z: E-S3 R2-skilled-2 iPad, exam «Môn 2/2 · Thêu» card «10/10 · Xuất sắc» while the log says «BOARD theu 0 moves still in play (367 s)»)
+Verdict: the same family as JOB 1 (stale «play»), NOT a wrong score.
+- **A 0-move board does not score 10.** On LIVE, Thêu / Kim / Đàn / Hát boards left untouched run to their own end and the card says «0/10 · Vụng» (raw 0 = card = rules), every one (iPad, idle test). The engine (j82 kg82Pattern) only scores taps: pts += 2·right/shown per round, 5 rounds.
+- **10/10 is what a perfect peek-driven play earns.** KG82.peek gives the next correct cell, so the «skilled» bot that taps every peek scores 2 × 5 = 10 → «10/10 · Xuất sắc». That is a real result. The harness's «0 moves … still in play (367 s)» counts only its loop AFTER the board had ended: on LIVE, jexam left KG82.phase at «play» on the «Xem kết quả» card, so the harness kept polling a finished board where nothing was tappable (0 moves), and the 367 s / Mt._tick 1.1 GB is that loop (as in s7b). With this fix the card has phase «result» and the harness leaves at once.
+- **Shown = used (law 4), whole family:** the test column «card mark / header chip / value the rules use» matches on every kg82ShowRes caller, Fold + iPad.
+- **Quick / skip never beats her own play (OD 18/11 ~05:55Z), whole family:** each caller's skip button → card mark ≤ BAL.skip.cap 5. Contest 5/10, playArt 5/10, jentry 5/10, jexam 5/10. jts, jsgame, jroute, jtd and j92 roll the word odds (no /10 mark). Thử tay has no skip. PASS 7/7 (iPad). MAIN's older «Bỏ qua = 10/10» (flight-M4, build 4da55ce8) was fixed by m-fix-1 BAL.skip.cap and is confirmed capped on every path.
+- Readings to tell apart in shots: the identity row «g/10 → r/10» (r is used, by design); the live chip starts at 10/10 during play (mgLive).
 
 ## Gates
-- touched/mg tests: kg82-phase.js PASS 6/6 Fold + iPad (fix); LIVE FAIL (the fault). mg-back.js: fix 11/12, main 10/12. The remaining fail «startContest rules ✕ onTop:false» is the same on main, so it predates this change (not this family).
+- touched/mg tests: kg82-phase.js PASS 6/6 Fold + iPad (fix), 7/7 iPad with the skip section; LIVE FAIL (the fault). mg-back.js: fix 11/12, main 10/12. The remaining fail «startContest rules ✕ onTop:false» is the same on main, so it predates this change (not this family).
 - coop-e2e (run alone): 143/143 passed.
 - quickcheck: «QUICKCHECK PASS · open 1893 ms · old save ok (loads + plays a buổi, 0 errors) · perf new/live render 177/161, tab 497/498, buổi 918/1071». CORE GATES FAIL G4 90-button-crawl «Ô lưu · Lui close button did not close its layer». The same row FAILS on origin/main (qc on main: identical line), so it predates this change.
 - videos (exam Môn 1 → board → «Môn kế tiếp», test label shows KG82.phase), CDN curl 206:
