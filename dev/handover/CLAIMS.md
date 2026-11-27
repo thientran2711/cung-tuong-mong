@@ -688,3 +688,6 @@ FLIGHT2-S2H life (seat s2g, sonnet; Fold 755x1000 cautious, seed 2026112560, new
 FLIGHT2-S18E life (seat s18r, sonnet; Fold 755x1000 greedy, seed 2026112561, newest LIVE origin/main via rt-serve-build.sh + pin=1 fresh profile, harness f65d019b) | dev/handover/robot/flight2-s18e.* on review/flight2-s18 | session_01UV1Szhi6Awb6aQt6ns3RJ3 | RUNNING | 27/11 17:06Z (Foreman F ROOT #6)
 HARNESS FIXER #23 (opus) review/robot-realtap-live from 0191f987 — fix BIG #21 RE-CHECK FAIL F3 (kitoff locked plaque) + N6 NO-EXIT trace keep | PROGRESS «HARNESS FIXER #23» on review/robot-realtap-live | session_01UV1Szk6BFtQK3Q2WQZrzDy | RUNNING | 27/11 17:20Z (Foreman F ROOT #6)
 ALLOT-PACE (fit allot-season 72a6e1c8 to pace-speed soft ceiling «evening» + presetsHidden; opus, BIG) | review/allot-pace from review/lc31-b3b 07f7cd16 | session_01PEhRbvHx5Tdoz3k3iZ7VTk | RUNNING | 27/11 17:27Z (Foreman C ROOT 4)
+F14ROLE-CNV (opus fixer; f14Row inherit + cnv_chu ch.7 stall; MAIN 179 order 1) | review/f14role-inherit | Foreman B ROOT 3 (opening) | RUNNING | 27/11 17:30Z
+LAO-HEALTH (opus numbers; hidden lao kills age 22 y3; MAIN 179 order 3) | review/lao-health | Foreman B ROOT 3 (opening) | RUNNING | 27/11 17:30Z
+LANHCUNG-EARLY (opus numbers; rank→0 via Lãnh cung early; MAIN 179 order 4) | review/lanhcung-early | Foreman B ROOT 3 (opening) | RUNNING | 27/11 17:30Z
