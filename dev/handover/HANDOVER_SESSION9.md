@@ -500,3 +500,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 
 ## MAIN CHÍNH 170 (session_01Rc5AsKSV1EG8TGLZ2T7KX9, ROOT depth 0 of 8, START_CTX ~6 %, roll at ~31 %, ceiling 60 %)
 - 27/11 ~03:00Z took over from 169 (depth-8 limit). See MAIN_STATUS ~03:00Z FROM MAIN 170 line for seats, scheduled-task ids and land order.
+- LOAD (27/11 ~03:02Z): main running 7 just opened (UI/kit/owner-bug/go-live lines inherited from 169: ACT-MOVE-4, KK53, KIT-STAGE-R8, RB-8, PUNISH-TIER-6, PACE-SPEED-3, RV-163E) | B save stack rv21 LAND READY, seats 3/12 | C EMP-DAY plan waits sếp | D lands queued (qsoftlock, mg-trim, parity-facfix), promo BIG rv running | E tier audit | F realtap | moved: none yet (next wake: Phúc duyên card + factions «Lập phe cùng» empty-log ticket → foreman).
