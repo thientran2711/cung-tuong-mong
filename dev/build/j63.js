@@ -405,7 +405,7 @@ function kaSenDeTitle(sen,title){try{if(!sen)return sen;const t=kaPlain(title||"
  const m=P.match(re);if(!m)return sen;/* «Lệ phi giận ngươi» under «Lệ phi»: the title runs on into the sentence — keep it */
  const rest=P.slice(m[0].length).replace(/^[\s.:;,—–-]+/,"").trim();if(!rest||/^[.!…]*$/.test(rest))return "";return rest.charAt(0).toUpperCase()+rest.slice(1)}catch(e){return sen}}
 window.kaSenDeTitle=kaSenDeTitle;
-resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
+resultShow=function(title,before,okHint){if(!S||!before||S.dead||window.__kNav)return;/* §6.2m a nav option shows no result card */
  /* KAWHY-VERDICT: the reasons follow the card's final verdict (own roll, else the carried act's kaAim); kaAimVerdict reads only — the aims are closed below by kaAimUse */
  const ok0=okHint===true?true:okHint===false?false:(()=>{try{return kaAimVerdict(before).ok}catch(e){return null}})();const [G,B,K]=kaResultRows(before,title,ok0);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}const sen0=sen;/* the card still shows when its only sentence repeated the title (OD ~17:55Z: «không» rows kept — Ghi chú «ta không được gì») */sen=kaSenDeTitle(sen,title);
  const why=S.logs.slice(0,Math.min(n,S.logs.length)).map(plain).join(" ");
