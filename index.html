@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6f12608e+","t":"2026-11-27T05:05Z","c":"Lập phe: nàng rủ được người thân thiết, người cùng họ, hoặc người cùng oán một kẻ, y như các phi tần khác.","b":"950c4c924325","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
+window.CTM_BI={"s":"203c178e+","t":"2026-11-27T05:19Z","c":"Bấm ☰ giữa kiếp khi chưa lưu sổ: bấm ✕ (hoặc chạm ra ngoài) là quay lại kiếp đang chơi.","b":"d77c028efbb0","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -10330,8 +10330,8 @@ function wrapPark(name){const f=window[name];if(typeof f!=="function")return;win
 /* showTitle: from the game (title was hidden) always opens on the home screen; a refresh while open keeps the sub-screen */
 const t0=showTitle;showTitle=function(){const was=T.hidden;park();const r=t0.apply(this,arguments);try{drawSlots()}catch(e){}try{go(was?"home":PG,was)}catch(e){console.error(e)}return r};
 window.showTitle=showTitle;
-const m=$("menu");if(m){const m0=m.onclick;m.onclick=function(){PG="home";try{window.__kpMenuS=typeof S!=="undefined"?S:null}catch(e){}/* the life the ☰ was opened over (KK42, G4 «Ô lưu · Lui») */return m0&&m0.apply(this,arguments)}}
-new MutationObserver(()=>{if(T.hidden&&(HM||SM))dropAll()}).observe(T,{attributes:true,attributeFilter:["hidden"]});
+const m=$("menu");if(m){const m0=m.onclick;m.onclick=function(){PG="home";try{window.__kpMenuS=typeof S!=="undefined"?S:null}catch(e){}/* the life the ☰ was opened over (KK42, G4 «Ô lưu · Lui») */window.__kmOver=typeof S!=="undefined"&&!!S&&!S.dead;/* kptitle-close: ☰ pressed over a live life: ✕ goes back to THAT life even when no sổ is saved yet */return m0&&m0.apply(this,arguments)}}
+new MutationObserver(()=>{if(T.hidden)window.__kmOver=false;if(T.hidden&&(HM||SM))dropAll()}).observe(T,{attributes:true,attributeFilter:["hidden"]});
 /* TITLE NEVER BLANK (robot M1 #2, soft-lock; owner law: every way to reach the title shows its buttons). The home / Chọn sổ panels ARE the title's
    buttons (#title .tbox is never shown): when the title is up and nothing is on #modal (the home ✕ / Esc / tap outside closed it, a reload landed on
    a dead life, a fresh profile, a panel closed by another module…) the title was only cover art with 0 tappable elements — only a reload recovered.
@@ -10343,6 +10343,8 @@ function tgFix(){try{if(!tgBlank())return false;
      re-loading its slot (resumeGame) replayed the save and changed the screen behind (the crawler: «close button did not close its layer») */
   if(typeof S!=="undefined"&&S&&!S.dead&&window.__kpMenuS===S){window.__kpMenuS=null;T.hidden=true;try{render()}catch(e){}return true}
   if(typeof S!=="undefined"&&S&&!S.dead&&lastSlot()&&resumeGame())return true;
+  /* kptitle-close (G4 90 «Ô lưu · Lui»): ☰ over a live life that has no saved sổ yet: ✕ / Esc / tap outside put the menu away and the life carries on (before: the home menu came straight back, the close button closed nothing) */
+  if(window.__kmOver&&typeof S!=="undefined"&&S&&!S.dead){window.__kmOver=false;PG="home";dropAll();T.hidden=true;try{tab="act";render()}catch(e){console.error(e)}return true}
   PG="home";go("home",false);return true}catch(e){console.error("title guard",e);return false}}
 let tgT=0;function tgSoon(ms){if(tgT)clearTimeout(tgT);tgT=setTimeout(()=>{tgT=0;tgFix()},ms==null?350:ms)}
 try{new MutationObserver(()=>{if(tgBlank())tgSoon(350)}).observe($("modal"),{attributes:true,attributeFilter:["hidden","class"]});
@@ -70351,7 +70353,7 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  else{gain=row("kr-duoc kfill","Được",[]);
   /* LAW 3 (no hidden gain / loss): an option whose value is worded only as a GỢI Ý («được lòng bề trên», «giữ trọn khắc và Sức buổi này; nhưng mất lòng bề trên») shows that wording in Được (the part before «nhưng») and Tốn (the part after it) instead of «không» */
   const hr=R("hint")[0],ht=hr?(hr.querySelector(".krv")||hr).textContent.split(/\s*;\s*/).map(x=>x.trim()).filter(x=>x&&!KA_ODDS.test(x)).join("; "):"";/* KK53 ROOT of the doubled odds clause («…; Tùy duyên; Tùy duyên» on a card): the hint string is «gain; ODDS WORD; nhưng loss» (jk2b kitHint, jroad ro.hint) and the odds word already stands in the card's own meter (.kodds) — a whole clause that IS an odds-ladder word never goes into the Được / Tốn copy, so no re-run can repeat it */const cp=(t,c)=>{const e=document.createElement("span");e.className="ef "+c+" kdup";e.textContent=t;return e};
-  if(ht&&!/^(không|chưa rõ|không được mất gì)\.?$/i.test(ht)){/* only the EMPTY hints; «không dính vào thù oán …; nhưng …» is a real gain + loss (review/odds-meter-back) */const parts=ht.split(/\s*;\s*nhưng\s+|\s+nhưng\s+/),g0=parts[0].trim(),l0=parts.slice(1).join("; ").trim();gain.querySelector(".krv").appendChild(cp(g0,"g"));
+  if(ht&&!/^(không|chưa rõ|không được mất gì)\.?$/i.test(ht)){/* only the EMPTY hints; «không dính vào thù oán …; nhưng …» is a real gain + loss (review/odds-meter-back) */const parts=ht.split(/\s*;\s*nhưng\s+|\s+nhưng\s+/),gl=parts[0].trim().split(/\s*;\s*(?=hỏng thì\s)/),g0=gl[0].trim(),l0=gl.slice(1).concat(parts.slice(1)).join("; ").trim();/* KK56-R10 (MAIN LOOK 27/11, KIT §224 kaRows): a loss clause («hỏng thì …») NEVER sits in Được: split by meaning, the Thành/Được part green, the «hỏng thì …» part red in its own Mất row */gain.querySelector(".krv").appendChild(cp(g0,"g"));
    if(l0)loss.push(cp(l0,"r"))}
   else{const e=document.createElement("span");e.className="ef n kdup";e.textContent="không";gain.querySelector(".krv").appendChild(e);try{(window.__kitNoGain=window.__kitNoGain||[]).push((b.querySelector(".kan,b")||b).textContent.trim().slice(0,60))}catch(x){}/* KK54 (law 3 census, MAIN 171): every card whose Được falls back to «không» is listed here (test hook, no effect) */}}
  const matRow=loss.length?row("kr-mat2 kdup","Mất",loss):null;if(matRow)kb.appendChild(matRow);const keep=new Set([ton,gain,matRow]);const dis=b.classList.contains("kdis");
@@ -95972,7 +95974,7 @@ function chipPlace(el){try{el.style.transform="none";el.style.maxWidth="none";co
  if(!p)p=scan({left:H.left+4,right:H.right-4,top:H.top+3,bottom:H.bottom-3},w,h,HR.concat(box?[box.getBoundingClientRect()]:[]),4);
  /* (a2) a quiet part of the top bar: over no word, number, picture or button of it — only its empty bar tracks (the mood slider): the phone's
     top bar has no fully empty slot, and the chip stays IN the top frame for its few seconds (owner: "phải nằm ở trên chứ không phải nằm ở dưới") */
- if(!p){slot="bar2";const Q=HR.filter(r=>r.__t);p=scan({left:H.left+4,right:H.right-4,top:H.top+2,bottom:H.bottom-1},w,h,Q.concat(box?[box.getBoundingClientRect()]:[]),1,"",true)}/* lowest first: the bar's edge nearest the screen */
+ if(!p){slot="bar2";const mood=[...hud.querySelectorAll(".ksbar *")].filter(e=>e.getClientRects().length).map(e=>e.getBoundingClientRect());/* KK54 (MAIN 171 option A, RV-166 on Fold): the mood slider's fill / marker / mid mark are information — the chip never hides them, only the empty part of the track */const Q=HR.filter(r=>r.__t).concat(mood);p=scan({left:H.left+4,right:H.right-4,top:H.top+2,bottom:H.bottom-1},w,h,Q.concat(box?[box.getBoundingClientRect()]:[]),1,"",true)}/* lowest first: the bar's edge nearest the screen */
  /* (b) just under the top bar (a band of two chip heights), over nothing kept (map title plaque .maptools::before included) */
  const mt=[...document.querySelectorAll(".maptools")].filter(e=>e.getClientRects().length).map(e=>e.getBoundingClientRect());
  if(!p){slot="under";p=scan({left:Math.max(col.left,0)+4,right:Math.min(col.right,innerWidth)-4,top:H.bottom+3,bottom:H.bottom+3+2*h},w,h,keep.concat(mt),3)}
@@ -100746,7 +100748,7 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt.khout{opacity:0!impor
 #modal .dlg>.khplate .khbi>button.kopinfo .kat:empty{display:none!important}
 #modal .dlg>.khplate .khbi>button.kopinfo .kb{display:grid!important;grid-template-columns:max-content minmax(0,1fr)!important;column-gap:.5em!important;row-gap:.4em!important;font-size:1em!important;line-height:1.3!important;color:var(--ink,#2a1a12)!important;opacity:1!important}
 #modal .dlg>.khplate .khbi>button.kopinfo .kb>.kr{display:contents!important}/* the kit .kb grid: one label column, every value at ONE x (KIT_CHECKLIST A10) */
-#modal .dlg>.khplate .khbi>button.kopinfo .kb .kdup,#modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .ef{display:inline!important}/* the value chips keep the kit colours: gain green (.ef.g), loss red (.ef.r) — kaRows / kcls, j63 button.ka .krv .ef.g and .ef.r (OD 27/11 ~04:33Z) */
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .kdup,#modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .ef{display:inline!important}#modal .dlg>.khplate .khbi>button.kopinfo .kb>.kr.kdup,#modal .dlg>.khplate .khbi>button.kopinfo .kb>.kr.kfill{display:contents!important}/* KK56-R10: the copied Mất row (kr-mat2 kdup) and the filler rows are GRID rows (display:contents), only their chips are inline — else the row broke the one-value-column grid *//* the value chips keep the kit colours: gain green (.ef.g), loss red (.ef.r) — kaRows / kcls, j63 button.ka .krv .ef.g and .ef.r (OD 27/11 ~04:33Z) */
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .krl{opacity:1!important}
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .krl{display:block!important;font-size:.82em!important;margin:0!important;text-transform:none!important}
 
@@ -104421,7 +104423,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="950c4c924325";window.CTM_BUILD=BUILD;
+const BUILD="d77c028efbb0";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

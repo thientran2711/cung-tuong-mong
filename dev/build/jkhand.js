@@ -228,7 +228,7 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt.khout{opacity:0!impor
 #modal .dlg>.khplate .khbi>button.kopinfo .kat:empty{display:none!important}
 #modal .dlg>.khplate .khbi>button.kopinfo .kb{display:grid!important;grid-template-columns:max-content minmax(0,1fr)!important;column-gap:.5em!important;row-gap:.4em!important;font-size:1em!important;line-height:1.3!important;color:var(--ink,#2a1a12)!important;opacity:1!important}
 #modal .dlg>.khplate .khbi>button.kopinfo .kb>.kr{display:contents!important}/* the kit .kb grid: one label column, every value at ONE x (KIT_CHECKLIST A10) */
-#modal .dlg>.khplate .khbi>button.kopinfo .kb .kdup,#modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .ef{display:inline!important}/* the value chips keep the kit colours: gain green (.ef.g), loss red (.ef.r) — kaRows / kcls, j63 button.ka .krv .ef.g and .ef.r (OD 27/11 ~04:33Z) */
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .kdup,#modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .ef{display:inline!important}#modal .dlg>.khplate .khbi>button.kopinfo .kb>.kr.kdup,#modal .dlg>.khplate .khbi>button.kopinfo .kb>.kr.kfill{display:contents!important}/* KK56-R10: the copied Mất row (kr-mat2 kdup) and the filler rows are GRID rows (display:contents), only their chips are inline — else the row broke the one-value-column grid *//* the value chips keep the kit colours: gain green (.ef.g), loss red (.ef.r) — kaRows / kcls, j63 button.ka .krv .ef.g and .ef.r (OD 27/11 ~04:33Z) */
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .krl{opacity:1!important}
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .krl{display:block!important;font-size:.82em!important;margin:0!important;text-transform:none!important}
 
