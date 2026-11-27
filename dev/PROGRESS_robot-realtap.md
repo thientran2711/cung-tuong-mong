@@ -101,3 +101,676 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+- (FIXER #4, last fix before rollover) s10 stuck-3 VALIDITY: a dialog/frame with no ✕ is scrolled to the END of its own scroller BEFORE any tap inside it (portraits in a story frame were tapped 1300+ times); still only portraits after 12 acts with nothing left to scroll → [game] «no close» dead-end bug once, then the loop rule unsticks. Self-test LIVE iPad 6 buổi 0 stuck. NOT done (for FIXER #5): F #11 11:52Z family «page the picker loops on without the clock advancing» (s9 Sang buổi ↔ Người được sai đi ↔ Tin chờ người sai đi ↔ Ân thưởng; s7/s4d wanders) — start from the s9 trace rows buổi 1703–1707; the s10 frame itself could not be replayed (it lives in the in-memory Q; a resume drops it).
+- (FIXER #4, s10 13:10Z) a frame already logged as a dead end is never tapped inside again: on sight it reloads the same save at once (harness.deadFrameReload); static check only (the frame lives in the in-memory Q, not replayable here).
+
+## HARNESS FIXER #5 (session_01UV1SzjoqFfBLv1aDrPvf7h, depth 7, START_CTX ~4 %) — 25/11 13:00Z batch (on 99c3114b)
+PRIORITY #1 CHECK: OD robot rules 25/11 (brief F-robot-2511) | main none (harness lives only on review/robot-realtap) | review/* robot-realtap 99c3114b (fixer #4 dead-end reload — replaced by the bounded rule below) | claims F #11/#12 seat list.
+- SANG-BUỔI-NO-TURN (F #11 11:52Z family; s9 trace 1703–1707 «Sang buổi ↔ Người được sai đi (có mới) ↔ Tin chờ người sai đi ↔ Ân thưởng», s7/s4d wanders, s9 «Thái y viện / Ngọc Thanh các · Ở đây còn N người» 150-tap loops): after a real «Sang buổi / Sang ngày mới» tap the page comes back with the clock still → counter; 3 in one buổi = [game] softlock bug (Q / S.mg / queue titles, shot, dump, trace) + lvl-3 reload of the same save. Before: rail icons / panels between the taps kept the «5 of last 10 taps» rule silent; only the 150-tap rule moved on (~1 buổi/min).
+- DEAD-END FRAME (s10 Phụ tuyến · Tân quân lập uy, F #12 13:10Z): once logged, the frame is never tapped inside again → reload same save (≤2 per frame), then tap outside (lvl 2) — bounded, no reload loop (supersedes 99c3114b's unbounded harness.deadFrameReload; counter now harness.deadEndUnstick).
+- «NO CLOSE» FALSE POSITIVES (family): #kmrew reward stage «Nhận» (data-km-close) = its close, and the robot takes it (no 8 item looks first); 1R «Thân phận kiếp này» (option cards + paging); .kmov «Chạm để bỏ qua» card-flip scenes (no button): the dead-end verdict now needs every option tried twice, then 3 bare taps on the layer, then a 2nd scan 1.5 s later (a mini-game rules card animating in had «Sẵn sàng» not yet hittable, run 194 .kfoc). Bug button lists say «(not hit)».
+- s4d #kpop «Lĩnh đồ ở Nội vụ phủ…»: grey act card (div.kcard[disabled]) is no longer a move; jact §4 swallows clicks inside the grey card for 1.5 s after its «why» popover opens → the robot reads 1.7 s before the first tap on an info layer (was 3 taps at 0.4 s → false NO EFFECT).
+- ROLE B #5 (d): realtap 0×0 target = «zero» skip, never DEAD; trace rows name gone/zero/popup (were all «DEAD …»).
+- Stuck/loop dumps now hold `top`: the top dialog's tappable elements with rect, pointer-events, disabled and elementFromPoint hit/cover (to explain a picker that cannot take visible options — run 193 «Có người tìm đến» 150-tap loop on 9f72524b, not reproduced on rerun).
+- Also: a .kmov card-flip is waited / scene-tapped up to 22 s before any verdict (ROLE B #5 a); before a «no close» verdict the queue is checked for copies of the same dialog (run 301 «Có người đến an ủi» → [game] queued copies, not a dead end); the dead-end verdict counts only REAL taps (a covered tap on «Chuẩn bị thị tẩm» under the card-flip still is not «tried»).
+- Self-test LIVE 9f72524b (local copy, real taps, 0 JS clicks): Fold sens 40 buổi 0 bugs 0 stuck · iPad sens / Fold sens / iPad rand 25 buổi each: 0 stuck, 0 loops · final code iPad rand 303 + Fold rand 304 15 buổi: 0 stuck, 0 loops, 0 «no close». Left (game / ROLE B, not harness): «Tâm trạng · Ta» «Lui» no effect (dead ✕ ×1 per run), «Tâm trạng · X» queued copies (m-fix-2 / bc-stack-r2, not on LIVE).
+- Open for the next fixer: memory A/B (FIXER #4 handover (a)), s4d #kload hang on big saves (b), co-op static-only (c).
+- (FIXER #5, 14:30Z, BIG REVIEWER #5 FAIL check 3 on 594fa1ee) OPTIONS CLIPPED family: SCAN marks a button `cl` when no part of it is visible through its clipping ancestors (`inOpts` for .opts/.kpopts); a dialog with no hittable close/option whose way out is clipped and nothing scrolls → 3 wheels over the panel → [game] «no close (options clipped below the screen, nothing scrolls) … lost: Để ta xem / Để sau» + dump + reload at once (harness.optClipReload). Scroller pick uses the VISIBLE clip area (an .opts clipped out by .k3right is not a scroller); a scroller whose «left» does not move after 3 wheels is dropped (was: wheels for 15 min). Probe (72 notices + go-notice, JS setup): on LIVE 9f72524b and afbfc06d the panel body scrolls and the options become hittable after the wheel — the reviewer's non-scrolling live-frame variant is caught by the rule above. Sanity LIVE iPad sens 401 + Fold rand 402, 15 buổi: 0 stuck; the Sang-buổi-no-turn detector caught softlock root #2 («Sang ngày mới» ×3, Q=1 «Tin trong cung buổi này») in both and the reload moved on.
+
+## HANDOVER (HARNESS FIXER #5, session_01UV1SzjoqFfBLv1aDrPvf7h, depth 7, START_CTX ~4 %, now ~28 % → rollover; coordinator FOREMAN F #12 session_01UV1SzkjNu6H8cD4bN4xqiu opens HARNESS FIXER #6)
+- State: review/robot-realtap 00f2a65f = HARNESS READY (594fa1ee batch + options-clipped fix); BIG REVIEWER #5 re-checking check 3. Side branch review/lc15-kroul-test-race 555eaa4d (tests only, on 97675a8d): #kroul = test setup race (JS-started lives meet the interactive new-life roulette, mounted ≤8 s later after its picture wait) — verdict + proof sent to F #12 for MAIN 141; no game fix.
+- Open: (a) memory A/B (FIXER #4 (a)) not measured; (b) s4d #kload hang on big saves; (c) co-op parts static-only; (d) button-crawl --fast on 97675a8d FAILs «Ô lưu · Lui close did not close its layer» + «PAGE CLOSED (fold)» with the unchanged test too (pre-existing; ROLE B #5 / reviewer); (e) run 193 «Có người tìm đến» 150-tap loop on LIVE seen once, not reproduced — next stuck dump carries `top` (hit-test of the dialog's tappables) to explain it; (f) the non-scrolling «Tin báo» live-frame (BIG REVIEWER #5, .k3right clip) was not reproduced by my JS-home probe — confirm the optClip rule fires on the reviewer's repro.
+- Gotchas: never `git pull` here (it hung on the shallow repo); fetch --depth=30 explicit refspec under flock. LIVE copy = python3 -m http.server from origin/main index.html/sw.js/assets.json. SCAN is a top-level const in robot-rt.js (not exported): a probe can eval its source (slice from «const SCAN = () => {» to «\n};\n»).
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+
+## HARNESS FIXER #6 (session_01UV1SziePhaosAZ5AEwZNTR, depth 8, START_CTX ~6 %) — 25/11 batch on 956db178
+PRIORITY #1 CHECK: OD robot rules 25/11 (brief F-robot-2511) | main none (harness only on review/robot-realtap) | review/* robot-realtap 956db178 | claims F #12 seats.
+- #kload HANG (queue item 4, s4d): ROOT = harness. A RESUMED seat's pick list (Tiếp tục kiếp này / Chơi một mình / Tiếp tục / Bỏ qua / Tiếp) had no «Vào cung ngay», so on the «Lần đầu nhập cung · thỉnh tranh vẽ» panel it waited 5 min → prestart-stuck reload → same panel, for ever. Repro LIVE 9f72524b + s7 save: the download stalls («Đường xa chập chờn», 314 requests then none for 2 min, 0 failed). Fix 2464f19e: on #kload wait ~20 s, then «Vào cung ngay» (any seat / mode; harness.kloadEnter). Seen working in every later run.
+- NO REACHABLE BUTTON (queue item 2, reviewer's non-scrolling «Tin báo» family): caught live in the memory A/B, BOTH arms: «Tin báo · 61 tin mới», only option «Xem tin» at y=3724 on Fold (hit 0) → the no-hit branch only tapped bare area (2 200–5 600 taps), the scroll / optClip rules live in choose() and never ran → 15-min stuck. Fix e7889e5e: dialog with buttons but none hittable → wheel its scroller (≤6), then the panel (3), still nothing after ≥20 s → [game] «no way out» bug + dump + same-save reload (≤2 per dialog), then the old area taps. Probe (61 notices + go-notice, hit-0 state on Fold and iPad): 2 wheels bring «Xem tin / Để sau» on screen. Self-test hook RT_TEST_TINBAO=<buổi>.
+- MEMORY A/B (queue item 5): s7 stuck-5 save, Fold, 76 buổi each, A = no handle dispose, B = dispose: renderer RSS 0.5 → 1.0–1.6 GB by buổi 5–10, then flat in both arms to buổi 76 (no trend, no A/B difference); JS heap 93–125 MB flat; DOM 0.8–3.6 k elements; even during the 15-min stuck loops RSS stayed 0.7–0.8 GB. Verdict: no leak up to buổi 76, dispose is not the factor; a periodic reload is NOT needed on this evidence. s7's 3 GB at buổi 140 is not explained — re-measure only if a ≥150-buổi run shows it again (R.rss rows are in every results JSON).
+- CO-OP REAL SELF-TEST (queue item 6): the co-op worker (ctm-coop workers.dev) is reachable from this container → robot-rt-coop.js host Fold + guest iPad, real room (code read off the screen, guest typed it), 8 buổi: 0 dead, 0 stuck, 0 bugs, 0 exit picks, jsClicks 0 (host 209 taps, guest 325). Co-op is no longer static-only.
+- Final sanity LIVE 9f72524b, rand seed 61, 12 buổi: Fold 0 bugs 0 stuck; iPad 0 stuck, 1 game bug «Nói móc đối thủ» dialog has no close (existing rule, game side → ROLE B).
+- Not done: run-193 «Có người tìm đến» loop (no repeat seen); BIG REVIEWER #5 verdict on 00f2a65f not received yet.
+- (FIXER #6, batch 2) EXIT-ROAD GAP (FOREMAN D 14:27Z/14:31Z, cnv_ma rebel-1 «Xuất cung về quê», cautious-2 «Tạ ơn, xuất giá», exitPick none, traced taps end before the card): bare-area taps were untraced and check-then-tap → a card mounting in between takes the tap on its first option. 64d62d9b: bareTap = check + guard in one evaluate; a capture listener cancels any pointer/touch/click on a button until the tap lands ([harness] bug, harness.bareBlocked); every area tap traced «AREA x,y»; realtap taps clear the guard; every ending stores R.life.card (last card's options, [off] = disabled), duringArea, lastTaps. Guard proven LIVE Fold+iPad (blocked while armed, the same tap works after).
+- two-way-oldsave «turn 0» (D GAP #3): TEST-ONLY branch review/two-way-oldsave-night 9c14b7fa (from main 9f72524b, 1 file): the loop wiped Q, the evening «Kính sự phòng» nfch choice was never answered → endTurn re-queued it for ever; now answers Q like ledger.js (nfch → «Thôi»), roulette resolves at once, loud fail if the turn does not move. LIVE 40 weeks turn 8 → 48, exit 0 ×3.
+- 80e7163c: s9 .kfoc loop — ≤3 acts per visit (dlgActs, cleared per buổi = visited-card memory) then its close; each visit = one act of the buổi (harness.kfocVisits). STATIC only (no .kfoc in 4 sanity slices). realtap horizontal rows: overflow-x row wheeled sideways (≤6) before a «clipped» verdict; LIVE Fold+iPad Tư trang «Tạp vật» reached + tapped.
+- Sanity on 80e7163c LIVE 9f72524b: Fold/iPad sens 15 buổi + s-save resume 12 buổi each: 0 stuck, 0 dead, 0 exit, jsClicks 0; game bugs seen (not harness): «Kính sự phòng báo tin» no close/next (iPad), «Sang ngày mới» ×3 no turn Q=1 «Tin trong cung buổi này» (known softlock family, ROLE B fix-8).
+
+## HANDOVER (HARNESS FIXER #6, session_01UV1SziePhaosAZ5AEwZNTR, depth 8 = limit, START_CTX ~6 %, now ~30 % → rollover; coordinator FOREMAN F #13 session_01UV1SzgtXh6c8DT6MStHuRE opens HARNESS FIXER #7)
+- State: review/robot-realtap 80e7163c = HARNESS READY (announce to F #13 + BIG REVIEWER #6 session_01UV1SzkguoWx5B15Y9JMoiT, who re-checks check 3 on 34314d23+). Test-only branch review/two-way-oldsave-night 9c14b7fa → LAND READY for D/W10.
+- Open: (a) BIG REVIEWER #6 verdict on the check-3 re-fix (no-hit dialog branch); (b) .kfoc cap is static-only — confirm on the next s9 trace (harness.kfocVisits > 0, no «.kfoc unstick Quay lại» ping-pong); (c) exit gap: the bare-tap race is the strongest suspect, not proven — the next exit ending carries R.life.card / lastTaps / duringArea: read it; (d) run-193 «Có người tìm đến» loop not seen again; (e) memory: no leak to buổi 76 (A/B) — re-measure only if a ≥150-buổi run grows again.
+- Repro tools (scratch, not in git): /home/user/wt/probe6/{tb2.js (61-notice hit-0 Tin báo + SCAN eval), guard.js (bare-tap guard), htab.js (horizontal tab row via realtap), kload.js}; /home/user/wt/memstat.js (R.rss rows from ckpts). LIVE copy: python3 -m http.server 8806 in /home/user/wt/live6 (origin/main index.html/sw.js/assets.json). The co-op worker is reachable from the container → robot-rt-coop.js runs real rooms here.
+- Rules: report to Foreman F by send_message, one line; repo files English; never .click()/dispatchEvent/keyboard in play; push only review/robot-realtap (+ test-only branches, handover branch for robot-audit.js / reports); shots never in git.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+
+## HARNESS FIXER #7 (session_01UV1Szi5ghGi8EzN935Ko5A, depth 8 = limit, START_CTX ~5 %) — 25/11 batch on 9b38f2ad
+PRIORITY #1 CHECK: brief F-robot-2511 + #6 handover read | harness exists on review/robot-realtap 9b38f2ad (80e7163c READY, 64d62d9b PASS by BIG #6 df7ba923) | main dbae89eb has no harness | reused, nothing rebuilt.
+- BUG (s2d on 64d62d9b): ReferenceError «bareTap is not defined» at unstick (robot-rt.js:367). ROOT: bareTap (64d62d9b) was declared inside play(); unstick() sits one scope up (Seat), so the name only failed at run time, on the ladder-2 tap-out branch (top layer with no safe button). FIX: landed by FIXER #6 in d417d3bb (bareTapOn(p, x, y) at Seat level, play keeps the bareTap wrapper) at the same time as my identical fix — kept theirs; this batch adds the static gate + live proof on top.
+- FAMILY SCAN (every helper used by unstick / recovery / stuck paths, every harness file): new dev/test/robot-lint.js = node --check + eslint scope analysis; any identifier resolving to no declaration outside page code (functions passed to evaluate / evaluateHandle / waitForFunction / addInitScript / $eval, inline or by name such as SCAN / PROBE / INFO) is a FAIL. On 64d62d9b and 80e7163c: 1 finding each (robot-rt.js:367 / :371 bareTap) — the lint would have stopped both; on d417d3bb+this commit across robot-rt.js, robot-rt-coop.js, realtap.js, robot-save-replay.js, robot-lint.js; after: 0. Negative test: bareTap re-inserted into a copy → «FAIL x.js:375 undeclared identifier «bareTap»».
+- STATIC GATE: robot-rt.js and robot-rt-coop.js run robot-lint at start-up; a FAIL prints «HARNESS LINT FAIL — no life started» and exits 2 (lint=0 skips). No life can start on a harness with an undeclared name again.
+- LIVE SELF-TEST of the branch (test-only hook RT_TEST_UNSTICK=<buổi>: a no-button cover layer 10 px inside the screen edge → unstick level 2 must tap bare space outside it): local copy of origin/main dbae89eb, slices 6 buổi (my tree) then 5 buổi on d417d3bb + this commit (Fold seed 83 / iPad seed 84: #rtTestLayer, 1 AREA tap, err null, 0 stuck, 0 harness bugs, jsClicks 0, 0 exit): Fold 755x1000 sens seed 81: layer #rtTestLayer, 1 AREA tap, err null, 75 taps, 0 stuck, 0 harness bugs, 0 exit, jsClicks 0, 1 dead button (game: «Có người bán tin» option «Không mua» covered by div#modal, buổi 2, before the hook → ROLE B); iPad 1180x820 rand seed 82: layer #rtTestLayer, 1 AREA tap, err null, 101 taps, 0 stuck, 0 bugs, 0 dead, 0 exit, jsClicks 0. (Earlier hook versions with a smaller / .dlg-class layer never became the top layer: SCAN falls back to the page when the layer has no hittable button, by design.)
+- Contract grep: no .click( / dispatchEvent / keyboard Escape in play paths (keyboard only types the ám hiệu into its input, as before).
+- Open items from #6 (not closed, need runner data on ≥80e7163c — runners are pinned to 64d62d9b, before the .kfoc cap): (b) .kfoc cap confirm on the next s9 trace (the only s9 trace on the handover branch is d5545202, pre-fix: 33 .kfoc rows with «unstick Quay lại» ping-pong); (c) exit gap: no exit ending with R.life.card yet (newest results E-S3 1ffae8bb = old harness); (d) run-193 loop not seen.
+- (FIXER #7, 17:10Z) EXIT-GAP fields read on the first exit-type ending since 64d62d9b: flight2-s2d (09ce98c7) «Xuất cung tuổi 30» — «Nội vụ phủ cho xuất cung theo lệ», age 30 = game-imposed ending; exitPick null, R.life.card [] (no card open), duringArea false, last 12 taps end «Công lao → Lui → Sang ngày mới»; 48 596 area taps, bareBlocked 0. Verdict: valid ending, no bare-tap race in this life; the fields work as designed. The original rebel-1 / cautious-2 «Xuất cung về quê / Tạ ơn, xuất giá» case still needs a card-type exit ending to prove or close. .kfoc (s9b on d417d3bb) and run-193: no new data pushed yet.
+- (FIXER #7, F #14 17:07Z) FAILED-CLOSE FAMILY («Thư từ» #kchatp, A-COOP #2 guest iPad on 95718760: unstick tapped «Lui» 1528× without closing, ✕ top-right untouched). ROOT: unstick and choose() both took the FIRST close in DOM order (findIndex / b.find(close)) with no memory of a close that did nothing. FIX (Seat level, solo + both co-op seats): failed-close memory per dialog (layer + title without digits): a close / safe tap that leaves the same dialog open counts one failure (unstick: re-scan after 400 ms; choose: the existing NO EFFECT check feeds the same memory); pickClose = untried closes first, kit ✕ before text closes, a close with 3 failures skipped while another remains; every close spent → [game] bug «every close of «X» was tapped 3× and the dialog stayed» once + ladder level 3 (reload the same save; co-op peer rejoins). Memory cleared when the dialog closes. Places changed: unstick level 1/2 pick, choose() 3 close picks (dialog, look-up panel, main fallback).
+- TEST hook RT_TEST_LUI=<buổi> (3 variants on a test dialog «Lui» + kit ✕): A Lui dead → closed in 1 call (✕ first); B ✕ dead → closed in 2 (failed ✕ goes behind untried Lui); C both dead → 7 calls: 6 failures, game bug, level-3 reload, same life continues. LIVE dbae89eb: Fold seed 89 + iPad seed 90 slices 6 buổi: all 3 variants pass, 0 stuck, 0 harness bugs, jsClicks 0, 0 exit; CO-OP real room host Fold + guest iPad slice 5: all 3 variants on both seats, peer rejoin after the reload, jsClicks 0, 0 exit (guest also logged one «no-clock loop 150 taps on .dlg «Lịch tháng»» before the hook — light unstick cleared it; watch in runner data). robot-lint OK.
+- (FIXER #7, F #14 17:20Z/17:28Z, one batch = next runner SWITCH) (a) A-COOP #2 co-op resume patch (handover b8900828, dev/handover/robot/flight2-coop1i.d/coop-resume-on-247c7132.patch) applied unchanged: resume=1 room=<CODE> reopens the SAME room on both seats («Cùng hảo hữu → Trở lại phòng», never «Chơi một mình»); COOP_BAN no longer hides «Cùng hảo hữu»; title-back rejoin looks in hb. (b) BIG #7 nit: robot-lint.js no longer crashes where eslint is missing — require guarded, WARN «eslint not found — undeclared-identifier check skipped, node --check only», runners print «HARNESS LINT WARN» and play (checked by forcing require('eslint') to fail: ok true + warn).
+- Self-test LIVE dbae89eb: co-op fresh room JU8X Fold host + iPad guest slice 3 (0 bugs, jsClicks 0) → resume=1 room=JU8X slice 6: both seats RESUMED into the same room, buổi 6, jsClicks 0, 0 exit; guest met a real «Thư từ» #kchatp and left it; solo Fold RT_TEST_LUI slice 4: A/B/C pass, 0 stuck. robot-lint OK.
+- NEXT family (not in this batch): «Lịch tháng» planner no-clock loop (st7e guest, st7f host: «Ghi vào sổ / Lễ Phật / Dâng quà …» ×150, only the 150-tap rule ends it): its «Lui» was not hittable at that moment, so the n ≥ 20 close rule (needs a hittable close) never fired — fix = when a dialog's close exists but is off its scroller, scroll it into view before the 20-act close.
+- (FIXER #7, 18:xxZ) BIG #7 nit on 1db0b186: a level-3 reload now resets the failed-close memory (a fresh screen tries its closes again); only the escalation count per dialog is kept, ≤2 reloads per dialog, then the other rules (NO EFFECT, 15-min stuck) take over.
+- «LỊCH THÁNG» CO-OP LOOP — ROOT was NOT a clipped close (RT_TEST_LICH probe: «Lui» hittable on Fold and iPad, solo leaves after 4 acts): in co-op, COOP_BAN removed every «Lui» on EVERY screen once the room started (meant for the lobby «‹ Lui» = COOP.leave()), so a co-op seat could never close a dialog by its «Lui»; only unstick did (same family as «Thư từ» #kchatp Lui×1528: the seat's own picker never offered the close). FIX: the plain «Lui» ban applies only on lobby / title screens (lobby title, #title, or lobby buttons on screen); «‹ Lui» stays banned everywhere. LIVE real co-op room Fold host + iPad guest, RT_TEST_LICH=2: host leaves «Lịch tháng» after 6 taps, guest after 5, both by «Lui» (before: 144 taps until the 150-tap rule); room kept, 0 bugs, jsClicks 0, 0 exit. Solo Fold RT_TEST_LUI A/B/C still pass. Test hook RT_TEST_LICH=<buổi> (opens «Lịch tháng» with a real tap, records its closes).
+
+## HANDOVER (HARNESS FIXER #7, session_01UV1Szi5ghGi8EzN935Ko5A, depth 8 = limit, START_CTX ~5 %, now ~31 % → rollover; coordinator FOREMAN F #15 session_01UV1SzibqADKhWNp5D3tDgT opens HARNESS FIXER #8)
+- State: review/robot-realtap b4b181f8 = HARNESS READY, sent to BIG REVIEWER #7 session_01UV1Szj5sdHhTR6HaL5a7Jv (PASS so far: 247c7132, 1db0b186; pending: 7ca6b369 co-op resume patch + lint WARN, b4b181f8 co-op Lui + reload reset). b4b181f8 is the runner SWITCH candidate (runners on d417d3bb until F switches).
+- Open: (a) BIG #7 verdict on 7ca6b369 / b4b181f8; (b) .kfoc cap confirm on the next s9b trace (runners on d417d3bb ⊃ 80e7163c now): harness.kfocVisits > 0, no «.kfoc unstick Quay lại» ping-pong; (c) exit gap: s2d's age-30 ending read clean (game-imposed, bareBlocked 0); a CARD-type exit ending («Xuất cung về quê / Tạ ơn, xuất giá») is still needed to close it — read R.life.card / lastTaps / duringArea; (d) run-193 «Có người tìm đến» loop not seen; (e) A-COOP #2 evidence for #kchatp at handover dev/handover/robot/ev1i-kchatp/ (10161b3f) — re-check that guest's trace on b4b181f8 shows «Thư từ» closed by its own picker, not unstick.
+- Self-test hooks (env, test-only): RT_TEST_UNSTICK (unstick level-2 tap-out), RT_TEST_LUI (failed-close memory A/B/C), RT_TEST_LICH (open «Lịch tháng»), plus the older TINBAO / CRASH / FREEZE. Static gate: node dev/test/robot-lint.js (runners run it at start; WARN-only where eslint is missing).
+- LIVE copy for tests: python3 -m http.server 8807 in /home/user/wt/live7 (origin/main dbae89eb index.html/sw.js/assets.json); scratch results /home/user/wt/st7*. The co-op worker is reachable from the container (robot-rt-coop.js real rooms; resume=1 room=<CODE> reopens a room).
+- Rules: report to Foreman F by send_message, one line; repo files English; never .click()/dispatchEvent/keyboard in play; push only review/robot-realtap; shots never in git; two fixers on one branch = duplicate work (FIXER #6 and #7 both fixed bareTap at 16:49Z) — one fixer only.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+
+## HARNESS FIXER #8 (session_01UV1SzkpxWCNw1tedMBxupX, depth 1, START_CTX ~8 % est., now ~28 % → stops after this READY; F #17 opens fixer #9)
+- PRIORITY #1 CHECK ('option-card|probe point|kopt'): OD 6 | ledger 0 | claims 8 | main 15 | review/* 0 — no harness fix existed; LIVE kit already chooses on a tap anywhere on the card (KK28/KK32 kit-one-opt-tap.js).
+- OPTION-CARD TAP POINT (FOREMAN E 20:15Z, iPad «Phụ tuyến · Đổi ơn… · Lời nhờ», robot area-tapped the empty dialog body 40+ min). ROOT: the area taps (≈254,632 / 424,650) are bareTap() area taps = the robot's SCAN probe saw NO hit point on any card (6 fraction points, each skipped when it landed on .kaart/figure.ksart/.kodds/.kchip/[class*=odds]) → «no move» → idle area taps. LIVE real-tap spot test (MODE=spots, ns_doi + plantsv, Fold touch + iPad mouse): picture, odds meter (.kodds/.kodm/.kseg/i), name (.kan/.kname/.kti), rows, edges all CHOOSE; only the corner «!» .kobang does not.
+- FIX (realtap.js PROBE + robot-rt.js SCAN probe, same rule): a card = the kit tap-guard list (button.opt, button.kopt, .opts>button, .kpopts>button, .k3btns>button, .kfoc-b, #mr>button, .kszopts>button); on a card only CARD_NOGO (.kobang, .kopinfo, legend/help, inputs) is skipped / kept NEAR-24 px away; PROBE points = title (.kan/.kat) → card centre → every descendant centre → old fractions (all inside the visible clip); SCAN adds card centre + .kan/.kname/.kabody/.krv/.kat points. Non-card buttons keep the old chip rule.
+- s8b (F #16 23:06Z) pet shop «Xem Mèo mướp / Chó nhỏ / Chim họa mi» DEAD «covered by span.kitb / b.kidn in #mb»: the cover was a child of the open kitShop detail card (by design, in ignoreCover) but only child+#mb were named → PROBE cover text now adds «under .kshdet/.kshdc/#kpop/#kxcatch/#ktut/#kpzoom»; Fold+iPad: 2nd «Xem» under the detail = popup, not DEAD. «Lui» there: a real tap closes the detail card on LIVE (Fold+iPad) → no kit bug.
+- KIT BUG (LIVE, not patched; KK32 session not found): iPad PEND:plantsv — a real tap on the card centre / rows (.kabody, .krv, .kname, .ksep) does NOT choose; title, meter, edges do. Harness taps the title first, so robots are not blocked.
+- SELF-TEST on 8dc395ba (= bfa73a6e + this), LIVE 5e013076 local copy, new dev/test/rt-optcard-spots.js (every PEND frame maid+consort opener, every j72 offer, sole-card / meter / 4-card frames; RTOLD = old harness for the before column):
+  | device | cols | cards in view | OLD SCAN sees | NEW SCAN sees | NEW point in card, off «!» | real taps via realtap → chose |
+  | 755x1000 | 1 | 353 | 353 | 353 | 353 | 338/338 |
+  | 755x1000 | 2 | 36 | 36 | 36 | 36 | 16/16 |
+  | 1180x820 | 1 | 202 | 202 | 202 | 202 | 196/196 |
+  | 1180x820 | 2 | 187 | 187 | 187 | 187 | 158/158 |
+  dead 0, jsClicks 0, FAIL 0 both devices. q72 «Lời nhờ» real-tap scan: 526 frames chose (iPad 38 two-column). Robot LIVE slices 10 buổi: Fold seed 2511803 131 taps, iPad seed 2511804 90 taps — dead 0, stuck 0, bugs 0, jsClicks 0. robot-lint OK.
+  HONEST LIMIT: E's exact scene (its save on E-S4 /home/user/wt/e-s4-probe) was unreachable (session not found) and no scripted LIVE frame reproduced «old SCAN sees no card» (before column = after); the fix removes the mechanism (all probe points on art/meter) and is proven not to regress. Re-check: the next runner meeting a 2-column «Lời nhờ» card on 8dc395ba.
+- OPEN for FIXER #9 (F #17 00:11Z): (1) PROMO-ROOT OFFER_RE false positives (robot-rt.js OFFER_RE «Phong hàn», «lá phong», «Sắc phong» chip) + prefer «Để tài nghệ quyết định» on Nội vụ phủ exam drag rounds; (2) FOREMAN E renderer memory (E-S2 Fold buổi 75, renderer 6882 MB) — measure RSS over ~50 buổi; queue from #7 (.kfoc s9b confirm, card-type exit ending, run-193, #kchatp re-check, co-op guest picker wander).
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+
+## HARNESS FIXER #9 (session_01UV1SzhZzWRS2YB2DuBXjFQ, depth 2, START_CTX ~5 %) — 26/11 batch on 8dc395ba (FIXER #8 READY)
+PRIORITY #1 CHECK ('OFFER_RE|offers|renderer|Khoa thi'): OD 0 | main none (robot-rt.js on main is older) | review/robot-realtap robot-rt.js OFFER_RE + offer counter (reused, fixed in place) | claims F-H9 (this job) + FOREMAN D F10 review/renderer-mem (game-side memory, not duplicated).
+Test-only: dev/test/* (+ dev/measure/robot-audit.js on the handover branch). No game / kit code touched. LIVE = origin/main 5e013076 served locally (python3 -m http.server 8809 in /home/user/wt/live9).
+
+### (1) PROMO-ROOT: real promotion roads only
+- dev/test/rt-offer.js (NEW, one rule; the same file is on the handover branch beside dev/measure/robot-audit.js, which requires it): an offer is REAL only when it is an exam entry card («Khảo hạch tấn phong», «Khảo hạch Nội vụ phủ», «Dự khảo hạch …») or a round of the exam frame (#kg82 art «Khảo hạch»), or an option inside a decree dialog («Thánh chỉ / Sắc phong / Tấn phong / Lễ tấn phong / Thăng bậc»), «Xét phẩm cuối tháng», «Tuyển tú / Đại tuyển tú nữ». Never: tab chips («Sắc phong», the «Mệnh truyện … Sắc phong» strip), utility dialogs (Lịch tháng, Sổ ghi, Tin báo …), the life-start identity card, other people's roads («Khoa thi Đình» = scholars, «Kính sự phòng báo tin · Tiến cử cung nữ» = her maid), status chips («Tuyển tú còn N tháng»), any word that only contains «phong».
+- robot-rt.js: the OFFER LOG uses it (kind + rule 2 on each entry); R.promo = recount at every save (old entries re-classified); the .md table gets «promotion roads seen / taken». robot-audit.js: offers = real count, the old count is kept as offRaw («old word-match count» in the COUNTS line). Pushed on the handover branch 9bca8084.
+- Re-count of every robot file under dev/handover/robot/ that holds offers (old word match → real; seen / picked). Note: the old log only kept labels that matched the old regex, so decree / review options with other labels («Đã rõ» …) were never logged → the real numbers of OLD files are a LOWER bound.
+
+| file | old seen / picked | real seen / picked | kinds |
+|---|---|---|---|
+| flight2-s9b | 593 / 54 | 0 / 0 | — |
+| flight2-s8 | 254 / 17 | 0 / 0 | — |
+| flight2-s8b | 135 / 18 | 4 / 0 | exam 4 (Hàm An cung «Lễ nghi · Khảo hạch tấn phong») |
+| rerun-E-E-S7 (4 lives) | 57/4 · 60/5 · 226/11 · 201/11 | 0/0 · 9/3 · 0/0 · 0/0 | exam 9 |
+| flight2-s7 | no results json on the handover branch (only flight2-s7-stuck dumps) | — | — |
+| flight2-1R | 184 / 9 | 0 / 0 | — |
+| flight2-s2d | 52 / 5 | 9 / 0 | exam 9 |
+| flight2-s9 | 55 / 6 | 1 / 1 | exam 1 |
+| flight2-s9c | 305 / 31 | 0 / 0 | — |
+| flight2-s9d | 4 / 2 | 3 / 2 | exam 3 |
+| rerun-E-E-S4 (4 lives) | 117/13 · 162/18 · 115/3 · 226/18 | 0/0 · 55/6 · 0/0 · 0/0 | exam 55 |
+| rerun-E-E-S6 (5 lives) | 49/2 · 266/11 · 11/0 · 153/17 · 189/20 | 0/0 · 0/0 · 0/0 · 6/3 · 6/1 | exam 12 |
+| rerun-E-E-S2 (5 lives) | 105/6 · 208/8 · 35/0 · 171/7 · 252/11 | 0 · 0 · 0 · 0 · 1/0 | exam 1 |
+| flight2-s4, s6, s2e, coop1i guest | 9/0 · 14/1 · 5/1 · 6/2 | 0 | — |
+- «Để tài nghệ quyết định» on drag rounds: ROOT = on LIVE the frame's quick option (j79 kitQuick #kg82skip) READS «Bỏ qua · kết quả …» (the n:"Để tài nghệ quyết định" argument is not printed) and LOW_RE /^bỏ qua/ put it behind «Bắt đầu thi» every time → s4d played the drag boards with taps, 10 vs bar 18 ×8. Now: a kg82 intro whose rules need a drag («Kéo … / Vuốt … / Đặt ngón tay …», not «Kéo thanh giá hoặc chạm») → #kg82skip (whole family: every drag board, exam or not; tap boards are still played). SCAN gives mgExam / mgDrag; counters R.harness.mgDragSkip / mgDragSkipExam. Self-test RT_TEST_EXAM=2 (iPad): the game's exRun with rounds «Bày lễ» + «Phân kho» → dragSkip 2 / 2, life goes on, 0 bugs.
+
+### (2) s3f «Khoa thi Đình» stuck ×4 = HARNESS bug (not the game)
+- Evidence (handover dev/handover/robot/flight2-s3f-khoathi/ 8155814e, stuck-1-dump): the dialog «Khoa thi Đình» had «Viết thư nhờ cha nâng đỡ học trò» DISABLED (kdis) and «Chỉ xem bảng vàng sau rèm» enabled, hit = true, class «opt ka kart kopt». NAV_RE (save-slot / menu buttons, never a move) matched «bảng vàng» INSIDE that option label (the «Bảng vàng» ranking button) → the dialog had no option → no close → its scroller branch → scroll / no-close loop, no real tap, 15 min stuck, reload, same dialog again ×4. The game was fine (a person taps «Chỉ xem bảng vàng sau rèm»).
+- Fix (law 11, whole family): NAV and LOW never apply to an option card (CARD_SEL / .opts / .kpopts); NAV matches from the label START only. Scan dev/test/rt-label-scan.js over LIVE 5e013076 option names (8823):
+
+| filter | option names hit BEFORE | AFTER (option card) |
+|---|---|---|
+| NAV («Giữ sổ …», «Xóa nợ …», «… nhạc hay», «Bảng vàng đề tên», «Chỉ xem bảng vàng sau rèm» …) | 37 | 0 |
+| LOW («Bỏ qua chuyện cũ …», «Bỏ qua lời đồn» … — only picked when nothing else) | 10 | 0 |
+- DIALOG STALL rule (any other way the picker spins in one dialog without a real tap: scroll that snaps back / changes length, wait, area / no-close verdicts, taps refused as gone / moved / popup): same dialog ≥ 40 picker steps and ≥ 60 s with no real tap while a hit-able non-exit button exists → tap its main option by handle, else at the point the scan saw it (re-checked under the point, same first 12 letters, enabled). Logged once per dialog: «picker stalled N steps / S s on … (scroll n, wait n …; last refused tap …) → tapped «…»». Counters stallForce / pointTaps (point taps count in taps). Self-test RT_TEST_STALL=3: a dialog re-rendering every 120 ms with a scroller of changing length → «picker stalled 132 steps / 60 s (scroll 133)» → closed in 64 s by 1 point tap.
+
+### (3) Renderer memory (FOREMAN E 23:25Z, E-S2 Fold «tree 7394 MB, renderer 6882 MB» at buổi 75) — harness side
+- Harness audit: every tap handle disposed (realtap finally); page-side state = window.__rtBtns (replaced each scan), the bare-tap guard (installed once), __rtEnd; R.trace ≤ 400, R.offers ≤ 800, R.rss ≤ 400; listeners pageerror + crash only, no console capture, no CDP session in play; screenshots go to disk. Profile = one persistent profile per life (disk cache, not RAM).
+- Measured on Fold 755x1000, LIVE 5e013076 local, seed 3936559208 (renderer MB / JS heap MB, ps + performance.memory):
+
+| buổi | A harness | A2 harness, screenshots off (RT_NOSHOT) | B no harness (dev/test/rt-membase.js) |
+|---|---|---|---|
+| 1 | 511 / 104 | 538 / 104 | 909 / 125 |
+| 11 | 1384 / 104 | 1222 / 104 | 1324 / 125 (b10) |
+| 21 | 1254 / 104 | 1272 / 104 | 1322 / 125 (b20) |
+| 31 | 1482 / 104 | 1375 / 104 | 1340 / 125 (b30) |
+| 41 | 1530 / 104 | 1436 / 104 | 1319 / 125 (b40) |
+| 51 | 1607 / 104 | 1433 / 104 | 1402 / 125 (b50) |
+| 56 | 1717 / 104 | 1440 / 104 | — |
+- Verdict: NO harness leak. All three sit at 1.3–1.7 GB by buổi 50 with a flat JS heap; the growth is native (decoded pictures / layers of the game), the same with no harness. A (621 taps, more screens) runs ~150–280 MB above A2 (255 taps) — more screens visited, not a per-tap leak. Long F lives on this harness family stay 1.2–2.2 GB for 1000+ buổi (s9b 594fa1ee b1581: 1151–1610; s8 b1929; s9c 496b6b66 b276: 1291–1648; s8b b739: 1469–2175). E-S2's 6.9 GB at buổi 75 is a one-off spike far above every curve → game side / that box (E runs PAR 4 lives in one container) → numbers sent to F #17 for FOREMAN D F10.
+- Single-process 95-buổi run (memC, same seed): renderer 1.2–1.6 GB to buổi 66, JS heap 104 MB … then at buổi 67 (right after «Tổng lược» Lui) the page main thread SPUN: CPU 78 %, renderer 7146 MB in < 10 min, watchdog «PAGE FROZE … tree 7760 MB» — the same freeze family as E-S2 b75 (6882 MB) and s9e b133 (6197 MB). The harness was only waiting on its next read (page.evaluate cannot run while page code spins); no harness code runs in the page then. Resumed from the buổi-66 save on the same harness: 66 → 95 clean (1411–1580 MB) → not deterministic. A2 (no screenshots) / B (no harness) are too few runs to show the rare spike; the steady curves match.
+- FREEZE STACK (new, on by default, fzstack=0 off): the CDP Debugger domain is enabled at start (a spinning page never answers Debugger.enable — measured), every unrequested pause is resumed at once; when no loop step for wdMin/2 the watchdog sends Debugger.pause and stores the call stack in R.harness.freezeStack + stderr «FREEZE STACK buổi N renderer M MB: fn @file:line …», then the old kill/resume path. Self-test RT_TEST_FREEZE=2 wdMin=2: stack captured at 1 min, then «PAGE FROZE … exit 3». Next freeze on any runner = the game function that spins → FOREMAN D F10.
+- E-S7 family (FOREMAN E 01:03Z, «Yến đầy tháng công chúa» 3 cards / «Đại án vu cổ» 4 cards, no ✕ by design): every no-close / dead-end verdict (4 noclose sites + deadEnd) now first returns cardWay(): an enabled, non-exit option card tapped < 3× in this dialog (hit → persona score; not hit → realtap scrolls it in). Counter R.harness.cardWay. E's (a) «Khoa thi Đình» = the NAV fix above.
+- Self-tests (this sha, LIVE 5e013076 local): Fold 755x1000 + iPad 1180x820 slices 10 buổi ×2 each: jsClicks 0, dead 0, stuck 0 (one pre-existing «.kmov card-flip no close» line on iPad); RT_TEST_STALL 61–64 s; RT_TEST_EXAM 2/2; RT_TEST_FREEZE stack; robot-lint OK (7 files).
+- Open: (a) the 6–7 GB freeze itself = game side (D F10) — the next frozen runner on this sha gives the stack; (b) .kmov «Hoàng thượng lật thẻ bài» card-flip still logs «no close» after its area taps (empty-label buttons; pre-existing, not a card); (c) the s3f Q-softlocks («Sang ngày mới» Q=1 ×19, «Có tin đang chờ» disabled Q=8) are game-side, routed by F #17 to the SANGBUOI owner.
+
+## HANDOVER (HARNESS FIXER #9) — job done, no successor needed for F-H9
+- State: review/robot-realtap <this commit> = HARNESS READY (BIG review). Handover branch 9bca8084: robot-audit.js + dev/test/rt-offer.js (same file). Runners switch at the next fresh CP line.
+- New env/args: RT_TEST_STALL, RT_TEST_EXAM, RT_NOSHOT (memory A/B), fzstack=0; tools dev/test/rt-offer.js, rt-label-scan.js <live dir>, rt-membase.js <url> <out> (no-harness memory baseline).
+
+## HARNESS FIXER #9 follow-up (F #17 02:23Z GO, on top of 54fa0112 under BIG review)
+- TAP-TO-SKIP / BACKDROP (FOREMAN E 02:08Z): SCAN tapSkip (layer says «Chạm để bỏ qua / để tiếp / để xem tiếp / vào màn hình»), tapOut («chạm ra ngoài / bên ngoài / chỗ trống»), bd = a bare backdrop point just outside the dialog box. Before every no-close / dead-end verdict: cardWay() || skipWay() (tapOut → 3 backdrop taps; tapSkip → taps on the scene for up to 60 s; else 3 backdrop taps) — verdict only if still there. A dialog with NO button at all now gets a backdrop tap every 3rd idle round (the inside-only area taps stuck 15 min). Counters backdropTaps / skipTaps; trace «BACKDROP …».
+- Self-test RT_TEST_SKIP=3 (Fold + iPad, LIVE 5e013076 local): the game's own card flip (kitCardFlip, «Chạm để bỏ qua») gone in 10 s; «Sổ nguyệt sự» (cyBook kit intel modal) closed in 4 s; a button-less «MẬT BÁO · Sổ nguyệt sự» box that closes on its backdrop closed in 8 s by 1–2 backdrop taps; no-close verdicts 0, stuck 0, jsClicks 0, dead 0. (Before this fix the same box: «stuck no progress 15 min» on both devices.)
+- Q-SOFTLOCK EVIDENCE (FOREMAN D via F #17): every dump (stuck / no-turn / 150-tap / no-hit / optclip) carries qs = {Q titles, DQ (safe copy), used, S.buoi, S.mg, #modal hidden, #next {disabled, text}, dqActEl(), dqDawn(), dqFreeScreen(), build}; each read guarded, read-only (the jdayq checks only read the DOM). Self-test RT_TEST_DUMP=2 shows every field.
+- BUILD STAMP: the page DOES expose its build (window.CTM_BI {s, b, t}, window.CTM_BUILD; LIVE 5e013076 = b fa8da73cecdc, s 3762da08+) → R.harness.build + «GAME BUILD …» line at start, so runners can tell which LIVE they play.
+
+## HARNESS FIXER #9 — BIG #7 FAIL 54fa0112 (exam result idle) fixed
+- ROOT: the jexam result screen hides #kg82ok «Đã hiểu» and leaves only the ✕ «Quay lại», which the kit routes to the result button (jk4 kitOvSync → kitOvBtn); KG82.phase stays '' → the harness read «one back button, not the result» → mgOnlyBack → idled MG_GIVEUP 6 min every exam (RT_TEST_EXAM done:false 4/4 in BIG #7's runs).
+- FIX (law 11, one place feeds every user): SCAN mgPh = 'result' whenever the game's own kitOvBtn() (read-only lookup of #kg82ok / #kg92ok / #mgok in a shown #ov panel) returns a button; + mgRes flag. Every harness rule keyed on mgPh === / !== 'result' now sees it.
+
+| kitOvBtn caller / harness user | before | after |
+|---|---|---|
+| game j82:481 result ✕ press → kitOvBtn().click() | ✕ = «back» to the harness (mgOnlyBack, never tapped) | ✕ = the way on, tapped |
+| game jk4 kitOvSync (hides plain «Đã hiểu», routes the panel ✕) | phase '' → idle 6 min | result → ✕ tapped |
+| game jk4 kitCloseLayer(ov, kitOvBtn) | same | same fix |
+| harness mgOnlyBack (idle on back-only boards) | true on every exam result | false on results |
+| harness sameScr unstick guard / choose MG back filter / drag-skip guard | treated the result as play | result → back allowed / no skip |
+- Proof (LIVE 5e013076 local, RT_TEST_EXAM=2): Fold seed 31 and iPad seed 12 → done:true, raws [5,5], dragSkipExam 2, mgGiveUp 0, jsClicks 0, dead 0, stuck 0.
+
+## HARNESS FIXER #9 — .kmov scenes + E-S4 «Lời nhờ» (F #17 03:21Z / 04:16Z)
+- s11 (Fold rand, 4d7a22c6) «dialog scrolled to the end has no close / next button: .kmov «»» ×2 near b~1450: that .kmov had no «Chạm để bỏ qua» line, so skipWay did not treat it as a tap-to-skip scene. Now every .kmov / .kne scene layer is tapSkip (scene taps ≤ 60 s before any verdict). RT_TEST_SKIP Fold s77 regression: flip 10 s, intel 4 s, backdrop box 8 s, 0 verdicts.
+- E-S4 iPad «Phụ tuyến · Đổi ơn: ngón đàn của nhạc sư… · Lời nhờ» (taps on the portrait column, 27 min on 8dc395ba): the markers (224,377)/(90,567) and the 25/11 ones (254,632)/(424,650) are AREA bare taps (random points in the layer rect = SCAN saw NO hit card), not card tap points. New self-test RT_TEST_Q72=<buổi>:<j72 id> opens the game's own offer (q72Test(id, force)) and logs what SCAN sees. On this stack, iPad 1180x820, seed 3966232191: q72Test('ns_doi') → the robot took «Khéo từ chối» by a real tap, frame gone in 3 s; both option cards hit at their own rect (e.g. (677,474)/(677,584) on the «Có người đến» card pair). Card tap points come from the card's own rect (realtap PROBE: card centre / title / descendants inside the visible card box; SCAN px/py = the probed hit point). The exact stuck save (stuck-6) was NOT available here (E-S4 session not reachable from this account; asked via F #17 03:27Z) → re-run that save with RT_TEST-free resume on this sha when it arrives; if SCAN still sees no hit card there, its dump «top» block (rect / hit / cover per card) names the cover.
+- (F #18) pet shop «Xem <pet>» nested item card (FOREMAN E 04:35Z, E-S2 Fold): the kit item card #kidfl (jitd kitItemCard, appended to <body>, aria-modal, own ✕) did not cover the screen middle, so the layer vote kept the shop dialog and the robot probed the next «Xem» under it (false dead + «Lui ×3»). SCAN now takes a visible aria-modal dialog of ANOTHER tree whose own centre is on top as the layer (same tree / nested → unchanged). Self-test RT_TEST_KID=2 (kit modal + the game's kitItemCard over it): Fold s21 closed 4 s, iPad s22 2 s, 0 dead. Honest note: with the card centred over the modal the old harness also closed it (7 s, 0 dead) — the synthetic layout covers the middle; the E-S2 shop layout (card off the middle) is the case the rule changes; not replayed here (no save).
+
+### FIXER #9 — E-S1 «Chạm để tiếp ▸» story scene stuck (F #18 job, 11/26/2026)
+- Verdict: HARNESS GAP, not a game bug. Repro: dev/handover/robot/stuck/E-S1-speed-buoi1-sangbuoi-disabled ckpt, resumed on LIVE 02f564ae, Fold.
+- Root: jkitsel kitScene opens `div.kscn` (fixed, body child) BETWEEN the top bar and the tab bar; both bars stay live (note 93.1). Its `.kscn-veil` covers the page;
+  a tap anywhere on the scene (not on `.kmend`/button) moves the dialogue on. The robot: (1) LAYER lacked `.kscn` → voted «page»; (2) after adding it, the scene has
+  no button of its own, so the «no hit button → layer of the last hit button» fallback jumped to the live tab bar = page again → every page button probed DEAD
+  («cover div.kscn-veil / kscn-col»), no-clock loop, «stuck no progress 5 min».
+- Fix (dev/test/robot-rt.js only): `.kscn` added to LAYER; `.kscn` layer is tapSkip; the no-hit fallback never leaves a `.kscn` layer.
+- Proof: same ckpt, before = stuck 5 min, 50 DEAD lines; after = 0 DEAD, scene read through, night, Điện tuyển played to the life's own end (Ban hoa, age 19, buổi 2,
+  no new bug). RT_TEST_SKIP=3 regression Fold flip 10 s / book 4 s / backdrop 8 s, iPad flip 6 s / book 4 s / backdrop 8 s, 0 no-close verdicts. Lint OK.
+- README «fresh browser with the ckpt injected did not advance the title menu»: with the harness resume=1 the title advances (Chơi một mình → Vào cung ngay →
+  Chọn sổ «Tiếp tục kiếp này») within seconds; nothing to fix there.
+- BIG #8 F1 (non-blocking, on fd9218fe): every RT_TEST_* self-test and RT_COLD (renderer-mem-lib coldHook → game cold()) in use is stamped into
+  R.harness.testHooks {NAME: value} (merged across resume; RT_COLD=0 / empty = off). dev/measure/robot-audit.js (handover branch) marks such a life INVALID
+  «test hooks used (…)». Check: RT_TEST_SKIP=3 life → testHooks {RT_TEST_SKIP:'3'} → audit INVALID; the E-S1 resume life (no hooks) stays VALID.
+
+### FIXER #9 — s9f «Nghỉ ngơi» DEAD under #rtoast (F #19, 11/26/2026)
+- Verdict: HARNESS GAP. #rtoast is the KẾT QUẢ result card (j19/j25/j42/j63): by design a tap on it closes it (t.onclick removes «on»), and it hides on its own
+  timer unless KÈM is open. A button under it is not dead. The harness's dead test treated «span.kitem in #rtoast» as a foreign cover.
+- Fix (robot-rt.js only): `rtoast` added to realtap ignoreCover (a tap there is logged as a popup dismissal, not a DEAD); the INFO closer now also counts option
+  cards / focus buttons (.kfoc-b/.kopt/.opt) as things the toast can block, and taps the bare THÀNH/BẠI seal first when the rows are all item chips.
+- Regression: Fold rand fresh life on LIVE 02f564ae, lint OK.
+- Seen in that regression, NOT from this change (open, to classify): 2 DEAD «#kg82 «?» / «Áo lụa thêu hoa nhỏ» cover div.kscn-veil» at Điện tuyển
+  (dress-up exam while a «Sân chờ» kit scene is up, z 57 over #kg82). Did not repeat on a rerun; no shot (RT_NOSHOT). Watch runners for the same line.
+
+### FIXER #9 — F #19 job (Foreman E 07:14Z / 07:18Z / 07:24Z / 07:30Z / 07:32Z), 11/26/2026
+- (1) DECIDER «Dưỡng Tú viện gate» (E-S1 ×5, E-S3 ×2, E-S2 ×1 stuck at buổi 1–2, «DEAD … cover div.kscn-veil»): A/B on today's LIVE 6b5d3d05 (build 0281bf7bcef6),
+  Fold 755x1000, NEW life, same seed 31337 speed: harness 496b6b66 → «DEAD BUTTON page «Dưỡng Tú viện …» «Người lạ???» / «Chọn chính mình» cover div.kscn-veil» (same
+  signature as E); harness 89f5b956 (≥ fd9218fe) → the «Chạm để tiếp ▸» kit scene advances on the real tap, life past buổi 3, 0 DEAD. Verdict: NOT a game play-stopper;
+  the selection-scene-r19 kit scene (.kscn between the live bars) needs harness ≥ fd9218fe. Every older harness (8dc395ba, 496b6b66, d2e03d80) voted «page» under the veil.
+- kscn-veil family, same fix: a .kscn that owns the screen middle now wins the layer over the dialog / aria-modal overrides too (the #kg82 «Áo lụa thêu hoa nhỏ» /
+  «?» DEAD at Điện tuyển was a #kg82 board under a «Sân chờ» scene). A dialog inside the scene (.kscn-box options) stays the layer.
+- (2) Mini-game board: «Sẵn sàng» is tapped first on every board that offers it (repeat-capped), then the board is played; «Quay lại» / ✕ is never a move unless
+  it is the only button and the round is over (a VISIBLE kitOvBtn) or given up. mgRes / mgPh «result» now need the kitOvBtn on screen (a stale result panel of
+  an earlier round no longer opens the back). Drag boards keep the quick option «Bỏ qua · kết quả» (taps cannot play them).
+- (3) robot-audit.js (handover branch): an exit ending with NO exitPick on a real-tap harness is game-imposed → VALID (e.g. «Xuất gia làm ni cô» by old custom after
+  the emperor dies, E-S4 R5-speed-4 / R5-greedy-1); a bot-chosen exit with options stays INVALID. mgQuit also counts «#kg… «Quay lại»» taps (07:14Z).
+- Proof (today's LIVE 6b5d3d05, NEW lives, this commit): Fold rand s77 → buổi 71, 0 DEAD, 0 bugs; iPad bold s4242 → buổi 51, 0 DEAD, mgReady 1; Fold cautious s909 →
+  buổi 86, 0 DEAD, mgReady 1; DEC 89f5b956 Fold speed s31337 → buổi 86, 0 DEAD. Control 496b6b66 same seed: 94 DEAD «cover div.kscn-veil», «no progress 6 min» at buổi 2.
+- BIG #8 FAIL 074abe46 (1 item): «result» needed a VISIBLE kitOvBtn, but the jexam result hides #kg82ok on purpose (only ✕, kitOvSync → kitOvBtn) = the BIG #7
+  54fa0112 case again. Now: result = kitOvBtn() (the game's own panel test) AND no rules board on screen (no visible «Sẵn sàng» in #ov) — a stale kitOvBtn while a
+  rules board is up is not a result, so the back stays off there. Proof LIVE 6b5d3d05: RT_TEST_EXAM=1 Fold s31 / s7 and iPad s12 / s8 → done:true raws [5,5] ×4;
+  regression Fold cautious s909 → buổi 71, iPad bold s4242 → buổi 51 (mgReady 1), 0 DEAD, 0 bugs, no give-up.
+
+### FIXER #9 — BOARD PLAY (F #19 08:28Z «Lễ ra mắt» priority + F #20 08:51Z «Bỏ qua» family), 11/26/2026
+- Root: after «Sẵn sàng» the robot had NO way to play a canvas board: random AREA taps on «Múa» (Simon steps) / «Đàn» (timed notes) scored 0 → ban hoa; and on
+  several boards it took the frame's quick option «Bỏ qua · kết quả …» (drag-skip rule fired on non-exam boards) → «Quay lại».
+- Fix (robot-rt.js only, real taps):
+  BOARD PLAY: on #kg82 with KG82.phase «play» the robot waits inside the page (frame by frame) for the game's own test hook KG82.peek() (j82 «KG82.peek for tests»)
+  and makes a REAL touch (iPad: mouse) at that point, checked bare in the same page call. Persona skill (cautious .9, bold/greedy/lover .8, speed .75, rand .55):
+  a miss lets that move pass (no wrong tap). Boards without a peek fall back to the old area taps.
+  NO QUICK OPTION: on a board, #kg82skip / .kquick / «Bỏ qua · kết quả|giữ nguyên», «Để tài nghệ quyết định», «Để trời định», «Học nhanh», «Kết nhanh»,
+  «Thôi, không chơi», «Giao cho người làm» are never a move unless the only one. The drag quick option is kept ONLY for jexam DRAG exam rounds (PROMO-ROOT C1).
+  UNSTICK never taps ✕/«Quay lại» on a board that is not on its result (only a reload may leave it). Every back on a board is logged in R.harness.mgBackWhy.
+  RT_TEST_BOARD=<art> self-test: the game's own playArt opens a «Sẵn sàng | Bỏ qua · kết quả khá | Hướng dẫn | Quay lại» board; testBoard {raw, skipped, ready, peekTaps, …}.
+- Proof LIVE 6b5d3d05: RT_TEST_BOARD=vu (Múa, the «Lễ ra mắt» nc board) Fold raw 9 / 10 / 7, iPad raw 10 / 10 / 9 — never skipped, «Sẵn sàng» tapped, back only on
+  the result. RT_TEST_BOARD=cam (Đàn, timed) iPad raw 4 / Fold raw 0 (see limits). Full lives: every board back in mgBackWhy is on ph «result» (iPad bold s4242
+  buổi 11, iPad cautious s99 buổi 14, peek taps 69 / 458, 0 DEAD, 0 bugs).
+- Limits (open): Đàn timed notes on Fold still score ~0 (touch latency vs the ±90 ms peek window); «Dâng hương» mixing board has no peek → its «chấm độ khớp» button
+  is tapped without mixing (low score). 3 of 6 fresh nc/any lives were ban hoa at buổi 1 after the BOT chose «Cúi đầu chờ xét — không thi» (persona pick, game rule,
+  not a harness fault).
+
+### FIXER #9 — kscn-veil family, part 3 (F #20 09:33Z / 09:50Z, QC-NOISE-HYGIENE iPad cautious s21 on 08a4ff8b), 11/26/2026
+- Root: the «scene on top wins» rule (074abe46) tested only the SCREEN MIDDLE; on iPad 1180x820 the scene does not always cover it, so the layer stayed «page» and every
+  page button + Túi đồ item row was probed DEAD under div.kscn-veil for 25 min (same family as E-S1 / #kg82 / page).
+- Fix (robot-rt.js): any visible .kscn that is on top at its OWN centre and covers ≥ 20 % of the screen is the layer (any device geometry); the scene card cue
+  «Chạm để tiếp ▸» (.kdv-next) is tapped on the card ~40 px above it (reused from Foreman D's proven local patch review/temper-g4 bb86d9ac, LAW 13), else the scene area.
+- Proof LIVE 6b5d3d05, NEW lives: iPad cautious s21 → buổi 26, iPad rand s22 → buổi 31, iPad bold s31 → buổi 31, Fold cautious s15 → buổi 17 — 0 DEAD each;
+  E-S1 ckpt resume (Fold) → buổi 9, 0 DEAD, no new bug. Ban hoa lives seen by QC (f2/f5/i2) = «Cúi đầu chờ xét — không thi» persona pick, the pre-5c62c2b9 «Bỏ qua
+  kết quả khá» quick option (fixed in 5c62c2b9), and a board «Quay lại» on 08a4ff8b (fixed in 5c62c2b9: unstick / picker never back out of a running board).
+  #kroul «Bỏ qua» = skip of the identity roulette animation before the life, not a mini-game result; left as is.
+- BIG REVIEWER #9 PASS 5c62c2b9 + non-blocking notes, done here: N1 the board-play bare check uses GUARD_SEL (same set as bareTapOn) and arms the capture guard
+  (window.__rtBare) in the same page call; before the guard exists, bareTapOn takes the tap. N2 the quick option is removed only when another NON-back move is there
+  (a board with only quick + ✕ takes the quick, never the 6-min give-up). N3 board moves count in areaTaps + boardTaps. Proof LIVE 6b5d3d05: RT_TEST_BOARD=vu Fold 9 /
+  iPad 7 (no skip), RT_TEST_EXAM=1 Fold s31 + iPad s12 [5,5], iPad bold s4242 → buổi 14, 0 DEAD, 0 bugs.
+
+### FIXER #9 — BUILD PIN on resume (F #20 10:47Z, s7 flight2 mixed build 3762da08 → 6b5d3d05), 11/26/2026
+- Root: every resume / unstick reload / crash restart reloads the URL given on the command line; when that URL serves LIVE and LIVE moved, the life silently goes on
+  on another build (s7: recorded {"s":"3762da08+","b":"fa8da73cecdc"}, page {"s":"6b5d3d05+","b":"b7dcbbd06e03"} from 07:42Z).
+- Fix (robot-rt.js): buildGate() after EVERY page load (boot: start / resume / crash-restart resume=1; unstick reload). First load records window.CTM_BI {s,b,t} in
+  R.harness.build0 (kept in the ckpt); every load's build goes into R.harness.builds; a different b = HARD STOP «BUILD MISMATCH …» (bug [harness], results saved with
+  harness.buildMismatch, the ckpt is NOT touched, exit 3). New dev/test/rt-serve-build.sh <sha> <port> | --b <CTM_BI.b> <port>: serves the built site of that main
+  commit (sparse worktree, fetch under the shared lock) so the life resumes on its own build. robot-rt-coop seats use the same Seat boot → same gate; robot-save-replay
+  replays one save, no life (not gated). robot-audit.js (handover 782c9fac): harness.builds with > 1 b or buildMismatch → INVALID «mixed build».
+- Proof (local): life BP started on LIVE 6b5d3d05 (b 0281bf7bcef6) to buổi 11 → resume against 02f564ae (b dd1ce3d0ffa1) = «BUILD MISMATCH at resume», exit 3, ckpt
+  kept at buổi 11 → `rt-serve-build.sh --b 0281bf7bcef6 8811` serves the same b → resume goes on to buổi 27, no mismatch. Audit fixture: 2 builds → INVALID «mixed
+  build (3762da08+/fa8da73cecdc → 6b5d3d05+/b7dcbbd06e03)».
+- BUILD PIN part 2 (F #20 10:48Z / F #21: s2f, s3f, A-COOP #2 also mixed; reuse s9f #2's local-worktree pattern, LAW 13): pin=1 (default; pin=0 / RT_PIN=0 off) —
+  the life is PLAYED on a local copy of its own build: after the first load records CTM_BI {s,b,t}, the harness serves that exact build (rt-serve-build.sh --b <b> --t <t>:
+  newest main commit whose index.html carries this b AND this t; same b can sit on several commits with another t) on port 8700 + hash(b,t) mod 250 (detached, kept,
+  reused by the next resume and by the co-op friend seat) and moves there before the life starts; every resume / restart / unstick reload goes to that port (re-served
+  after a container restart). The gate compares b AND t. Co-op: both seats boot through the same Seat → same pin port; the room server is absolute (ctm-coop workers.dev),
+  so a local page plays co-op. Proof: PIN1 on 8809 → pinned to :8907, buổi 51; resume given the OLD url :8810 (dd1ce3d0ffa1) → still :8907, buổi 66, builds = 1.
+- RANK METRIC (F #21; MAIN 157 + PROMO-ROOT3 10:01Z/10:40Z): every page snapshot that read S.rank (gate/status/moments/end/dumps) now reads the ROAD's rank:
+  isSrv() ? 'maid ' + S.srv.rk : S.rank, so a cung-nữ life reports «maid N» in report lines, STATUS, moments and the json.
+- ITEM PICK GRID (F #21, Foreman E 10:03Z E-S4 15 min idle / 10:23Z E-S8 ~30 tile taps then «Lui»): jgpick «Tặng quà / Biếu quà làm lành / Dâng quà / Cài vào rương»
+  = tiles [data-kip] that only SELECT + ONE confirm button.kipgo under the grid (often below the fold on Fold). Now: confirm enabled → real wheel scroll until it is on
+  screen, real tap; confirm disabled → set that item aside and tap the next non-greyed tile; every item tried and no usable confirm → [game] «item pick grid dead-end»
+  with the card text, then the ✕. RT_TEST_KIP=<buổi> self-test (the game's own pushDil(mkP('giftpick'))). Proof: Fold s41 → 3 real scrolls, kipgo tapped, gift given
+  (#rtoast) in 6 s; iPad s42 / Fold s41 later day → every confirm disabled («TỐN 2 khắc», no time left) → dead-end logged + ✕ in 18–24 s (was 15 min / 30 taps).
+- BIG #9 N4: the off-middle .kscn rule skips a scene at opacity < .1 or .kscn-out (fading).
+- Regression (LIVE 6b5d3d05, pinned :8907): RT_TEST_BOARD=vu Fold raw 10; RT_TEST_EXAM=1 iPad [5,5]; Fold speed → buổi 46, iPad cnv → buổi 26, 0 DEAD.
+- BIG #9 FAIL cbeb334b (rt-serve-build --b missed merge-built STACK LAND builds: a path log skips merges): the search now walks FIRST-PARENT main (rev-list
+  --first-parent -n 60) by index.html CONTENT (b, and t when given); help fixed — use --b; CTM_BI.s is the PARENT the build was made on, never the sha to serve.
+  Re-proof on merge-built LIVE 3af7896e (b7dcbbd06e03): new life MB pinned → build-3af7896e… served :8745, buổi 16; pin server killed (container restart) + resume given
+  the OLD url :8810 (dd1ce3d0ffa1) → re-served, buổi 17, builds = 1, no mismatch. A load without window.CTM_BI is now a [harness] note (buildUnknown), not silent.
+  robot-audit (handover): builds > 1 / buildMismatch = its OWN verdict «MIXED-BUILD», counted apart (COUNTS … · MIXED-BUILD n), not plain INVALID (F #21, F ops 10:55Z).
+- BIG #9 FAIL 8366c261: (1) pinUrl listens to the server script's exit: a build not on main (exit 2) or no git checkout → «BUILD PIN: rt-serve-build.sh exited N … no
+  pin, the given url is used, the gate still stops a mismatch» at once (was a 10-min wait + PAGE FROZE); the loop clock is kept alive while a slow first fetch runs
+  (≤ 6 min). (2) pin=0 on the CLI reaches the Seat (robot-rt main + robot-rt-coop seats); a wrong «already a pin port» regex that skipped every 127.0.0.1:87xx–89xx
+  url is gone. (3) RT_TEST_KIP judges only after the picker was SEEN (pushDil queues it; «never shown» after 30 s). Note: «no item can be given now» (every confirm
+  disabled, e.g. khắc cost) is a [note], not a [game] fault. Proof: fake build deadbeef0000 on :8820 → exit 2 logged, life plays on; pin=0 → no pin, buổi 41;
+  Fold s43 pinned :8745, RT_TEST_KIP shown:true, closed after 19 s (all confirms disabled → note + ✕).
+
+## HANDOVER — HARNESS FIXER #9 → next fixer (11/26/2026 ~12:30Z, F #21 asked; ctx ~52 %)
+State: review/robot-realtap tip 0e0ebe29 (READY to BIG #9; BIG #9 PASSed up to 2df8f5fa; FAILs on cbeb334b + 8366c261 are answered by 7767c6fc + 0e0ebe29).
+Audit side (handover branch, dev/measure/robot-audit.js): 41f6e99c testHooks INVALID · 7cbc260e no-exitPick exit = game-imposed VALID, mgQuit counts board backs ·
+782c9fac mixed build · 851bc8c0 own verdict MIXED-BUILD · 359716b8 a board back is a quit only before the result.
+What 9 built today (all in robot-rt.js unless said; proofs in the sections above):
+- kscn story scene = a layer (tapSkip), on top wins on any device geometry (own-centre test, opacity/fade aware), «Chạm để tiếp ▸» card tap (from temper-g4 bb86d9ac).
+- #rtoast is a by-design cover; testHooks stamp; mini-game: «Sẵn sàng» first, back only on a result (kitOvBtn + no rules board + KG82.phase not play/intro/tut),
+  BOARD PLAY by real taps at KG82.peek (persona skill), no quick option on boards (except jexam drag exam rounds), unstick never backs out of a board, mgBackWhy log.
+- BUILD PIN: build0 = CTM_BI {s,b,t} at first load; the life is played on a local copy of its own build (rt-serve-build.sh --b <b> --t <t>, first-parent main by
+  index.html content, port 8700 + hash, detached + reused); gate on every load (b+t), HARD STOP «BUILD MISMATCH» exit 3, ckpt kept; pin=0 / RT_PIN=0 off; a failing
+  server script → no pin, given url, gate still on.
+- road rank (maid srv.rk) in every report; jgpick item grid (gift picker): tile → scroll to button.kipgo → real tap; all disabled → [note] + ✕.
+Self-tests (env, all stamped in testHooks → INVALID for play counts): RT_TEST_BOARD=<art> (vu/cam) · RT_TEST_EXAM=<buổi> · RT_TEST_KIP=<buổi> · RT_TEST_SKIP=<buổi> ·
+RT_TEST_STALL / DUMP / Q72 / KID (older). Re-run pattern: serve LIVE (cd <main worktree> && python3 -m http.server 8809), then
+`RT_TEST_BOARD=vu RT_NOSHOT=1 node dev/test/robot-rt.js http://127.0.0.1:8809/ <out> dev=fold bot=speed seed=21 life=x` (expect raw > 0, skipped false);
+`RT_TEST_EXAM=1 … seed=31` (expect raws [5,5]); `RT_TEST_KIP=4 … seed=41` (expect shown:true, kipGo 1 or the note + ✕); BUILD PIN: start a life, resume with
+resume=1 and another url → still on the pinned port; fake b → «exited 2», life goes on. Lint: node dev/test/robot-lint.js.
+OPEN (not fixed, honest):
+- Đàn (timed notes) on Fold scores ~0 by peek taps (touch latency vs ±90 ms); iPad ~4. Dâng hương mixing board has no peek → low score.
+- jgpick: the confirm-unreachable-after-8-scrolls path never seen live; co-op room with BUILD PIN not run live (same Seat boot; room server is absolute).
+- The server on port 8809 / pin ports die between turns in this container; restart them in the same command as the run.
+- Selection lives often end Ban hoa after the persona's own «Cúi đầu chờ xét — không thi» (F #20 agreed: valid persona choice).
+
+## HARNESS FIXER #10 (11/26/2026, session_01UV1SzhD1StB7MbhXXgUALS; START_CTX ~6 %, worker)
+PRIORITY #1 CHECK: OD 25/11 robot rules | main none (no pick= in dev/test) | review/robot-realtap 0e0ebe29 PASS tip (BIG #9 80df191d) | claims F HARNESS FIXER #10 (F #22 12:47Z).
+Jobs (FOREMAN E 12:12Z via F #22 + BIG #9 non-blocking notes); harness/audit only, no game change; 0 .click()/dispatchEvent in play paths (git grep: only the realtap.js comment).
+1. pick=<label regex> (CLI, value may hold '='; env RT_PICK): in choose(), after the tutorial hole, an eligible option whose label matches is taken by a real tap —
+   never an exit road (logged exitRefused), nav / leave / disabled; ONCE per screen and buổi (a 2nd tap undid the «Ở cố quốc chờ hòa ước» toggle on «Thân phận kiếp này»).
+   job.pick + harness.pick {re, n, exitRefused, log[≤60]}. Not a test hook (a forced persona choice, real taps) → the life stays VALID.
+   UNIFORM RAND: score() was already pick() for rand; the order leak was cardWay's not-hit fallback c[0] → now score(c). Measured at «Hòa ước» (RT_TEST_KC=n_c1, rand, LIVE b a1d2c8d4):
+   «Thưa: con xin đi» 6 / «Xin để … đi thay» 5 over 11 runs (Fold 7, iPad 4) → no lock; the E-S5 5/5 was chance + persona order of play, not a hidden filter.
+   PERSONA WEIGHTS read the card's own odds word (kit .kodds → field od; oddsOf): before, ANY ladder word in the label counted, so hint text moved weights
+   («hòa ước vững» = Vững, «khó xử» = Khó, difficulty button «Khó»).
+   FAMILY SCAN: every dialog choice with ≥ 2 options is logged once (R.choicePts: screen, opts, ods, took); dev/test/rt-choice-scan.js re-scores each persona
+   (w = bold 7-o · cautious 2o · else o, + rnd·3 → gap ≥ 3 = never reached) and lists lock-ins (one option every visit). On the self-test lives:
+   «Chuẩn bị thị tẩm»: cautious never «Tập trước giọng hát» (Có cơ vs Rất vững) · «Đêm thị tẩm» A: every persona but rand/bold never «Bàn chuyện thiên hạ» (Tùy duyên),
+   cautious never «Bàn thơ văn» (Có cơ), bold never «Rót rượu» (Rất vững) · «Đêm thị tẩm» B: cautious never «Xin ân cho gia đình» / «Đáp ứng …» (Có cơ). «Hòa ước»: reachable for all.
+   By design (persona = preference); coverage of such branches = bot=rand or pick=. Run it over any results dir: node dev/test/rt-choice-scan.js <dir> [--md=out.md].
+   Order-decided rules left in choose() (not option choices): «Sẵn sàng» first, tutorial hole, calm «Để sau/Đã hiểu…», first close, pre-life pref list, «Sang buổi».
+2. ENTRY TAP: exitPick used R._started (restored from the ckpt on resume before the seat re-enters its sổ) → the «Bắt đầu kiếp mới» tap on «Chọn sổ» was logged.
+   Now the local in-life flag + ENTRY_TAP (screen #title/#kload/#dawn/«Chọn sổ»/«Sổ luân hồi», or label Chơi một mình/Cùng hảo hữu/Nhận thân phận/Tiếp tục kiếp/Vào cung ngay);
+   a «Bắt đầu kiếp mới» on an in-life page stays an exit. exitPick now carries .screen. robot-audit.js isEntryPick (same test; old records by the trace tap at exitPick.at).
+3a. RT_TEST_KIP: while the picker is still IN Q (queued behind another dialog) it waits (≤ 12 min); never shown = neither open nor queued for 30 s. RT_TEST_KIP_AHEAD=<PEND id>
+   queues the game's own dialog first (repro). Fold kq-f: queuedFirst, aheadMax 1, shown, kipGo 1 · iPad kq-i: queuedFirst, shown, all confirms disabled → note + ✕ (deadEnd 1).
+3b. harness.mgBackN (every board back) + mgBackQuitN (before the result, not long = audit quit) full counters; mgBackWhy keeps the last 40. robot-audit uses mgBackQuitN when present.
+Self-tests (LIVE main 1dcb373e served on 8809, BUILD PIN on → 2673733e/a1d2c8d4): pick 4/4 «Thưa: con xin đi» (Fold 61/63, iPad 61/63, pick.n 2) · rand 6/5 above ·
+RT_TEST_BOARD=vu Fold raw 10 / iPad raw 9, mgBackN 2/1, mgBackQuitN 0 (backs on result) · KIP above · lint OK · rt-choice-scan --unit OK · robot-audit-unit.js 9/9 (old audit 4 FAIL).
+Re-run: RT_TEST_KC=n_c1@2 RT_NOSHOT=1 node dev/test/robot-rt.js http://127.0.0.1:8809/ <out> dev=fold origin=pf road=pt_su bot=sens seed=61 slice=4 'pick=^(Ở cố quốc chờ hòa ước|Thưa: con xin đi)'
+(expect RT_TEST_KC took «Thưa: con xin đi», pick.n 2). Without the identity pick a sens life takes «Vào cung ngay» → no Hòa ước card (mkP null).
+4. JOB 4 (F #22 13:00Z, s14 / s9f #2): RESUME on another origin. Root: a life started on a harness without build0 (pre-pin) is restored on LIVE github.io, then the
+   reload's boot() pins it → 127.0.0.1:<port> → the save sits on the old origin → Chọn sổ only «Bắt đầu kiếp mới», «life not (re)opened within 5 min».
+   Fix: restore → reload → boot → if location.origin moved, restore again there → reload; then the save key must hold the ckpt's save (log «RESUME: save restored on
+   <origin> (got of want chars, N keys, ckpt from <origin>)», else a harness bug). ckpt keeps EVERY localStorage key (ctm-arcs / ctm-succ-book / ctm-routes … were lost
+   off-origin) + its origin. Proof (LIVE github.io): pre-pin ckpt (build0 stripped) → pinned 127.0.0.1:8729: Fold 151868/151868, iPad 149339/149339, buổi 6 → 10;
+   same ckpt on the old tip b57ba63b: «stuck life not (re)opened within 5 min on #modal «Chọn sổ»» (the s14 bug). Unpinned-with-build0 → pinned and pinned → pinned: below.
+5. JOB 5 (F #22 13:17Z, s7b iPad ×17): NO-EXIT DIALOG. A dialog judged no-exit (no close / next after scrolling to its end, the picker-stall force with no close, or a
+   layer with NO hit button for 30 s / 10 rounds) is logged once (harness.noExit: screen, selector, why, shot, buttons; bug «NO-EXIT DIALOG …»). Every later visit (layer +
+   title without digits) is unstuck at once by taps, by time on the visit: ≤ 8 s an option (hit, non-exit) or bare taps on the scene · ≤ 12 s backdrop · ≤ 16 s unstick lvl 2
+   (tap outside / safe button) · then lvl 3 reload (same save). No keyboard (Escape soft-locked co-op, owner taps-only rule). Self-test RT_TEST_NOEXIT=<buổi>: a .kmov layer
+   with no button that taps never close, shown 3×.
+   JOB 4/5 proofs (LIVE github.io 1dcb373e+, pin → 127.0.0.1:8729, b 5ab5b80e406e): pinned → pinned Fold Bp-f 162140/162140 buổi 6 → 10 · iPad Pi-103 148158/148158 buổi 6 → 10
+   (iPad seeds 94/96/101/102 ended Ban hoa at buổi 1 = real selection endings, not resume runs). Earlier: unpinned-with-build0 → pinned Fold rs-f / gh-f buổi 6 → 10.
+   RT_TEST_NOEXIT Fold / iPad: visit 1 64 s / 80 s (was 920 s = the 15-min stuck), «NO-EXIT DIALOG» logged once (bugs 1), visits 2–3 42–48 s incl. the reload (≈ 16 s on the
+   dialog, then lvl 3). Tip after JOB 4+5: c10a2a9d (+ this note).
+6. JOB 6 (BIG #10 early 1): Chọn sổ is reachable MID-LIFE (j6 ☰ → save(); showTitle()), so a screen name never excuses a tap. exitPick now carries live (the game had a
+   running life at tap time: last scan S.name && !S.dead); an entry tap is excused only when live is false. robot-audit isEntryPick: live:true → never an entry (old records:
+   the trace rule). RT_TEST_MENU=<buổi> (☰ → «Chơi một mình» → «Bắt đầu kiếp mới» by real taps): Fold mn-f + iPad mn-i93 / mn-i95 → exitPick {live:true} recorded; audit on
+   that record + an exit ending → INVALID «bot-chosen exit road». Fresh start pk-f61 / pk-i61 exitPick null; resume Bp-f (pinned, buổi 6 → 13) exitPick null.
+   robot-audit-unit.js 11/11 (+2 cases live:true / live:false).
+7. JOB 7 (BIG #10 early 2): after a pick, the picked option's SIBLINGS (same control kind: class + card / opts row; not confirm «Nhận …» / paging / nav / close) are
+   blocked for that screen + buổi (harness.pickSiblingBlocked). Fold + iPad × 3 seeds (61/64/65), RT_TEST_KC n_c1 'pick=^(Ở cố quốc chờ hòa ước|Thưa: con xin đi)':
+   took «Thưa: con xin đi» 6/6, pick.n 2 each.
+10. JOB 10 (answer): the CP / STATUS «rank» reads S.rank (maid lives: S.srv.rk) = the field the UI shows (RANKS[S.rank], rk(S) = S.rank). s3f save (flight2-s3f-khoathi
+   stuck-4, year 7): S.rank 0, S.maxRank 0 → the game itself holds rank 0: harness field is right → «promotions taken» are offer taps that did not promote (game / offer
+   classification) → MAIN.
+
+## HANDOVER — HARNESS FIXER #10 → next fixer (11/26/2026 ~14:30Z; ctx near START+25 %, F #23 opens the successor)
+State: review/robot-realtap tip = this commit (jobs 1–7 + 10 done, proofs above); audit on the handover branch (robot-audit.js + robot-audit-unit.js 11/11).
+OPEN (not started):
+- JOB 8 (F #22 13:35Z, FOREMAN E 13:16Z/13:23Z): BOARD loop leaves a board after 6 s idle — robot-rt.js «if (started && MG_RE.test(sc.layer) && sc.mgPh === 'play')» loop:
+  `while (Date.now() - t0b < 90e3 && idleMs < 6000)`. Need: stay until the round ends (KG82.phase result / not play, or the board's timer end), never leave on idle, for
+  every persona and all 39 mg kinds (whole family); always log «BOARD <layer> N moves» (+ result raw) even for 0 moves. Proof: E-S1 iPad speed seed 2305435383 FRESH +
+  one Fold seed, speed persona, board played to result. Self-test: RT_TEST_BOARD=<art> (existing).
+- JOB 9 (F #23 13:45Z, s3f b~3010 save 5,213,477 chars hit the localStorage quota, «save N chars» froze 200 buổi): (a) capture console 'error' messages (p.on('console'))
+  next to the existing p.on('pageerror') bug line so QuotaExceededError shows (the game's save() swallows it in try/catch → only a console.error / none: if none, detect by
+  a setItem probe at CP: write+remove a 1-char key, catch the quota error in page and log it); (b) at each CP (the «save N chars» block, R.saves) parse S.buoi/S.year
+  (and turn) from the stored hclh-save-v2-<slot>; if it lags R.buoi by > 20 buổi → bug «SAVE STALE stored b<x> live b<y> chars <n>» once per 100 buổi.
+Re-run patterns: see items 1–7 above (LIVE https://thientran2711.github.io/cung-tuong-mong/ works from this container; pin on by default).
+
+## HARNESS FIXER #11 (11/26/2026, session_01UV1SziEmdhraQi2ni7YZ4B; worker of F #23; START_CTX ~5 %)
+PRIORITY #1 CHECK: OD robot rules 25/11 (F-robot-2511.md) | main dev/measure/robot-audit.js | review/robot-realtap 8ea10d7e (BIG #10 PASS) | claims HARNESS FIXER #11 (F #23 14:30Z).
+Harness only, no game change; 0 .click()/dispatchEvent in play paths (git grep: only the realtap.js comment); lint OK; rt-bare-unit 16/16; robot-audit-unit 12/12.
+8. JOB 8 BOARD LOOP: the board loop left after 6 s with no peek (a «xem bước» / «nhìn kỹ» show phase, a slow note) and then area-tapped blind. Now it stays while
+   KG82.phase is «play» (the board's end, its timer, or the game guard ≤ 97.5 s), every persona and kind; a board that never gives a peek gets bare area taps on its
+   canvas; > 6 min still in play = harness bug. Every board logs «BOARD <kind> N moves <result>» (0 moves too) in the run log, the trace and harness.boards (+ boardN).
+   Proof (LIVE 1dcb373e+ pinned 5ab5b80e406e): RT_TEST_BOARD Fold mua 11 moves 2/10 (48 s), dan 11 moves 0/10, iPad theu 32 moves 10/10, mua 24 moves 10/10 (cautious),
+   dan 16 moves 4/10 (bold), hoa→ve 2 moves + 18 canvas taps, round to the guard (97 s); natural boards: Fold speed seed 2305435383 «ban 6 moves 4/10» (then Ban hoa b1 =
+   real ending), Fold sens/cautious seed 72 «mua 24 moves 10/10», «hat 87 moves 2/10», «dan 18 moves 7/10». (The E-S1 iPad seed gave no board within 8 buổi.)
+   Note for MAIN (not harness): Đàn / Hát timed boards score low even with every peek hit (dan 11 moves 0/10, hat 87 moves 2/10) — the ±90 ms window vs real-tap latency.
+9. JOB 9 SAVE QUOTA: (a) page console «error» → run log «PAGE CONSOLE error: …» (each distinct text 3×, then every 100th; resource errors name their file);
+   the game's save() swallows its setItem error (j6 try/catch), so a passive Storage.setItem observer (addInitScript) records the failure, console.errors
+   «[rt] localStorage.setItem failed: QuotaExceededError key … (N chars)» and RE-THROWS (game flow unchanged) → bug game «QuotaExceededError …» + CP «CP SAVE ERROR».
+   (b) live clock → buổi map (R._clk); at each CP the stored hclh-save-v2-<slot> clock is parsed; lag > 20 buổi → «BUG SAVE STALE stored b<x> live b<y> chars <n>»
+   once per 100 buổi (+ harness.saveStale, bug game «SAVE STALE …»). Self-test RT_TEST_QUOTA=<buổi> fills the origin to its quota (__rtfill* keys).
+   Proof: iPad q-i seed 72 «BUG SAVE STALE stored b2 live b25 chars 104305 (stored clock 1.0.0.1, live 1.2.0.0, QuotaExceededError)» · Fold q-f2 seed 72
+   «BUG SAVE STALE stored b2 live b25 chars 117293 (… QuotaExceededError)»; both with the QuotaExceededError console line from b2.
+11. JOB 11 «area tap blocked» (s15b Fold ×3 at b66; s15b data from its ckpt: 2× the LIVE emotion seal img.kemo[role=button] «kemo-binh kemo-live kemo-m-nod» /
+   «kemo-vui … sway», 1× an option card «… Rất vững» mounting on the first day). Root: the bare check looked at the TOP element once; a moving button (jemoseal
+   idle sway / lean) or a mounting card reached the point before the touch; the guard cancelled the tap (no wrong tap happened, the harness logged it). Not a game
+   layer covering a button → no DEAD BUTTON / GAME BUG. Fix (whole family: every bare tap = area / backdrop / NO-EXIT / unstick / board miss goes through ONE
+   check, moved to realtap.BARE_CHECK): bare only if no button on top; no button under a see-through or LEAVING layer (transition / finite animation; a looping pan
+   such as the kmeg scene backdrop and a steady backdrop are fine); no animated button within 0.35 × its size (≥ 40 px); the same 120 ms later. Else 'covered: <why>'
+   → the caller tries another point (harness.bareCovered + bareCoveredBy). Every block that still happens logs «AREA BLOCKED {screen, x, y, ev, hit, tgt, dt, top0}».
+   Live check (Fold cautious 72 / iPad cautious 62, 6 buổi): bareBlocked 0, bareCovered 86 / 86 (moving bobbing figure button.tok.fig.bob, kbtn, kscn-veil leaving).
+   Unit dev/test/rt-bare-unit.js 16/16 (Fold touch + iPad mouse: bare, button, leaving layer, steady backdrop, old check = blocked, live seal, looping pan, mount).
+12. JOB 12 (BIG #10 N1): RESUME with no / empty save in the ckpt = «RESUME: NO SAVE IN CKPT …» + harness bug; content compare per hclh-save key (FNV-1a hash + parsed
+   clock; a different clock = harness bug). Proof: iPad rs-i «content identical (hash 61d6d1de · 61d6d1de, clock 1.0.1.1 · 1.0.1.1)»; Fold rs-f (a real buổi-1 ckpt
+   with no save) and iPad ns-i (save stripped) «RESUME: NO SAVE IN CKPT».
+13. JOB 13 (BIG #10 N2, handover branch dev/measure/robot-audit.js): «with undefined options» → «(option count not recorded)»; robot-audit-unit 12/12.
+14. JOB 14: no CP before the game clock is up (sc.S.y defined) → rs-i first CP after RESUME «CP buổi 7 year 1».
+15. JOB 15 (KK43 / MAIN 160): a close counts toward NO EFFECT only when its OWN layer stays open (the tapped close, or the same close at its spot, still on screen);
+   the shop card «Lui» (button.kit-x[data-kshdetx] in .kshdet) closing only the card = harness.closeOwnLayer, not a dead ✕.
+16. LATE BUTTON (F #23 15:11Z, s10g b351 Fold «div.kmov.kcf.km-full» NO-EXIT, stalled 61 s, then «Ta biết rồi» was there): the visit's way out (a close / next / any
+   live non-exit button) is re-scanned every round; one that shows up ≥ 10 s after the dialog opened without one = bug game «late button: «label» shows up only N s
+   after …» + «LATE BUTTON … after N ms» (harness.lateButtons, once per dialog + label), and a NO-EXIT mark on that dialog is withdrawn (harness.noExitCleared).
+   (< 10 s is by design: the reward card #kmrew «Nhận» fades in at ~3 s.) The s10g area-tap block on a kemo flicker = JOB 11 (moving button → another point).
+   Self-test RT_TEST_NOEXIT=2 RT_TEST_LATE=40000: Fold lt3-f72 + iPad lt2-i «NO-EXIT DIALOG» at 30 s → «LATE BUTTON … «Ta biết rồi» after 34996 / 34204 ms» →
+   «NO-EXIT withdrawn», layer closed by a real tap at 42 s.
+17. JOB 17 (F #24, s14 iPad b535 #kdaytc «Đêm không được triệu» «Chạm để bỏ qua», no buttons, «no way out» + ~4 min frozen; .kmov 61 s): the tap-to-skip test was
+   «.kmov/.kne/.kscn or the layer's innerText says chạm …» — a host (#dawn) holding a night beat, the day card #kdaytc, or a hint drawn without innerText did not count,
+   so the NO BUTTON REACHABLE rule (wheel ×9, 20 s → GAME «no way out» + reload) ran first. Now ONE skipLay() (SCAN layer pick + tapSkip): .kmov .kne .kscn #kdaytc,
+   any layer holding .kmhint / .kne / .kne-beat / .kmov, or tap-anywhere text. Such a layer with no hit (and no clipped) button gets a real tap on its centre (a
+   point that hits the layer itself, never a button; if another non-button layer is on top, that one — a person taps what is on top), every round, ≤ 20 taps / 90 s
+   per visit, before any «no way out» / NO-EXIT verdict (harness.skipLayerTaps, trace «SKIP TAP»). A layer with neither a button nor a skip hint keeps the GAME verdicts.
+   Family fix in realtap.BARE_CHECK: a moving button hidden under another layer no longer blocks a point (it cannot reach it).
+   Self-test RT_TEST_SKIPLAYER=<buổi> [RT_TEST_SKIPLAYER_MODE=cover|css]: Fold f72 css closed by skip taps at 7.7 s · iPad closed at 7.8 / 7.6 s (plain / cover with the
+   game's own kitDayTitleShow held) · noWayOut 0, NO-EXIT 0. (The old harness also closed these synthetic layers; the exact s14 screen of build a1d2c8d4 is not
+   on the pinned LIVE build, so the proof is the rule order + layer test, not a replay.) s15b #kdaytc «no reachable button» ~b200 = the same rule on the same layer.
+   Seen once: Fold «late button «Vào cung ngay» 13.5 s after #klife» (pre-life screen) — for MAIN to judge (slow pre-life load or real).
+18. BIG #11 FAIL 947aeec9 (report b2b95712) fixed on bb89b055:
+   B1 JOB 15 was a no-op (rt.tap disposed h → the ownOpen evaluate threw → .catch → always «open»). Now the close is tapped with keep:true, the handle check runs
+   in its own try (a throw / gone handle → the cr0 point check, never «open»), h is disposed after. Self-test RT_TEST_OWNCLOSE=<buổi> RT_TEST_OWNCLOSE_MODE=own|dead (a
+   shop-like dialog, card «Lui» button.kit-x[data-kshdetx] in .kshdet): own → Fold pf/pt_su sens 43 {closeOwnLayer 1, noEffect 0, closed by «Đóng» 9 s}, iPad
+   pf/pt_su sens 61 {closeOwnLayer 1, noEffect 0, «Đóng» 74 s}; dead → Fold {noEffect 1, «close button has no effect … «Lui»»}, iPad {noEffect 3}.
+   B2 SAVE STALE after a reload: the clock map keeps the FIRST buổi a clock was seen; a live clock going back (reload / «Tiếp tục kiếp này» / resume) = bug game
+   «SAVE REWIND: reload went back from b<x> (clock) to the stored b<y> (clock) (N buổi lost)», once per rewind (≥ 2 buổi = bug; 1 buổi = the game saves at the
+   buổi start, logged only). RT_TEST_RELOAD=<buổi> = one harness reload (unstick lvl 3). RT_TEST_QUOTA=2 RT_TEST_RELOAD=8 cp=5 slice=30: Fold speed 21 «SAVE REWIND
+   … from b8 … to the stored b2 (6 buổi lost)» + later «(20 buổi lost)» + «BUG SAVE STALE stored b2 live b25 chars 118590 (… QuotaExceededError)» · iPad speed
+   2305435383 «(6 buổi lost)», «(19 buổi lost)», «BUG SAVE STALE stored b2 live b25 chars 121024».
+   N1 the unstick ladder tapping the late way out calls the same late check (R._lateFn) · N2 a button clipped below the fold at the start is not «late» · the
+   visit clock also runs during JOB 17 skip taps → RT_TEST_NOEXIT=2 RT_TEST_LATE=40000: iPad pf/pt_su sens 61 (the N1 seed) «LATE BUTTON … after 33478 ms» + NO-EXIT
+   withdrawn · Fold speed 21 «after 30787 ms». N3 help line says SAVE STALE speaks at a CP. N4 no «save restored … of 0 chars» line before NO SAVE IN CKPT.
+   Found on the way (JOB 17 family): the night beat .kne-beat over animated page buttons got «no free point» (BARE_CHECK refused every point) → NO-EXIT → reload.
+   The skip tap now asks BARE_CHECK for a point ON the layer (its own top element, never a button; what lies under it cannot take the tap): natural Fold speed 21 /
+   iPad pf 61 8 buổi: NO-EXIT 0, «SKIP TAP #kdaytc tap», bareBlocked 0. rt-bare-unit 20/20 (+ I/J), lint OK, 0 JS clicks.
+19. JOB 19 BUILD PIN on every reload (F #24, FOREMAN E 17:02Z/17:23Z: E-S5 lover-4 iPad b1202 / greedy-5 Fold b2222 «BUILD MISMATCH at unstick reload»).
+   Root (two parts): (a) the unstick (and pre-life stuck) reload reloaded whatever URL the tab held; (b) two lives of one build started together raced on
+   rt-serve-build.sh «git worktree add» → one exited 1 → that life ran unpinned on LIVE github.io, and a LIVE update later hard-stopped it (reproduced here: Fold
+   «rt-serve-build.sh exited 1 for 4eb0cbfc91b0 — no pin»). Fix (law 11, every page.goto / reload scanned: boot goto = pinned URL0 · resume reload → boot → pinned ·
+   crash → resume · unstick + pre-life reload → reloadPinned): reloadPinned() re-checks / re-serves the life's build and, when the tab is elsewhere, goes back to it
+   carrying localStorage (the save lives per origin); rt-serve-build.sh makes the checkout under a per-directory flock; pinUrl() waits ≤ 60 s for a twin's server
+   when the script exits ≠ 2. Self-test RT_TEST_RELOAD=3 RT_TEST_DRIFT=<other build url> (tab sent to build 5ab5b80e406e on :8999 before the reload): new Fold
+   pf/pt_su sens 43 + iPad pf 61 «BUILD PIN: unstick reload — the tab was on :8999, back to the pinned :8767 (carrying … keys)», life goes on; old aece1ff5 iPad
+   «BUILD MISMATCH at unstick reload … page is 1dcb373e+ (5ab5b80e406e)» hard stop.
+20. JOB 18 dress board «Phối đồ» (E-S4 iPad «Đề: Cổ phong» 15 min). RT_TEST_DRESS=<buổi> opens the game's own tsDressGame with a few fitting pieces.
+   GAME/KIT BUG (for MAIN): the big red primary IS «Ra mắt» (#tsdgo, jts.js tsDressGame) — the KIT §13.x NO-TEXT pass (j82 kg82Signs) turns it into a bare «●»
+   because the dress screen is a pre-play screen that does not set KG82.setup=1 (j82: «KG82.setup=1 marks a screen that is NOT the running board (dress / pre-play …):
+   its buttons keep their words»); the item tiles keep their words only by luck of markup. Shot: iPad dress-open (red button, «●», «Bỏ qua» right). The tap itself
+   works (presents). HARNESS part: the board was played blind — Fold presented with 0 pieces placed (tiles tapped, «Đặt vào …» never). Now a pick-then-apply rule:
+   an «Đặt vào …» on screen is taken first; «Ra mắt» waits until 4 pieces went in or 16 were looked at. Fold pf 43 / iPad pf 61: placed 4/4, presented, 30 / 37 s.
+
+## HANDOVER — HARNESS FIXER #11 → next fixer (11/26/2026 ~18:10Z; ctx ~30 % est. = START ~5 % + 25 %, rollover line; F #24 is at depth 8 → MAIN / owner opens a ROOT fixer)
+State: review/robot-realtap tip 6677dd13 (jobs 8, 9, 11–19 + BIG #11 fixes). BIG #12 FAILED 6677dd13 (report bf5e865a, handover branch
+dev/handover/reports/robot-realtap-review.md «## REVIEW … — BIG #12» + its handover: read both in full). Audit 74d434fb PASS. Everything else passed. Game for tests = origin/main b881686f (build 4eb0cbfc91b0), main moved since.
+OPEN — two BLOCKING regressions from JOB 17 (bb89b055), both in dev/test/robot-rt.js:
+1. NIGHT CARD STALL. SCAN, line ~139: `if (!btns.some(x => x.p.hit) && !skipLay(lay)) { …fallback to the last hit button's layer… }` — for a skip layer the fallback is skipped.
+   kitNewDay puts .kne.kne-beat inside #dawn; after the first tap button.kmend «Tiếp theo» is added to #dawn OUTSIDE .kne → the robot never sees it → 20–25 skip taps →
+   NO-EXIT → reload (also in real lives: Fold s43 under RT_TEST_QUOTA, 5 reloads on «NOEXIT UNSTICK 3 .kne» = every lonely night). Fix: a real hit button anywhere in the
+   skip layer's host tree (its ancestors' subtree, e.g. #dawn) or any newly visible hit button always beats skip taps: keep the fallback when a hit button exists and
+   its layer contains lay (or lay is inside it); recheck every round. Repro (BIG #12): the game's own window.kitNewDay({host: document.getElementById('dawn'), night: { k: 'lonely' }, …})
+   at b2 → make it RT_TEST_KNE=<buổi>. Expect «#dawn «Tiếp theo»» tapped in ~9 s (947aeec9 did; aece1ff5/6677dd13 63–64 s → NO-EXIT + reload).
+2. SKIP TAPS HIDE A COVERED BUTTON. Main loop line ~422: `if (started && sc.tapSkip && … && !sc.b.some(x => x.hit || x.cl))` — a skip layer whose only button is COVERED
+   by another layer gets skip taps → NO-EXIT → reload, and DEAD BUTTON never fires (BIG #12 cov-steady / leave / anim, 0/4; 947aeec9 «DEAD BUTTON Tiếp cover div#rtR12c»).
+   Fix: skip taps only when the layer has NO button at all (sc.b.length === 0, after the fix-1 fallback); a layer with a covered button goes the normal way (rt.tap → DEAD BUTTON).
+   Make the reviewer's fixtures RT_TEST_SKIPCOV=<buổi> RT_TEST_SKIPCOV_MODE=steady|leave|anim (a skip layer whose «Tiếp» button is covered by a steady / leaving /
+   animated div) → expect DEAD BUTTON.
+NOTES: N1 RT_TEST_OWNCLOSE fixture (line ~ «RT_TEST_OWNCLOSE && started»): make it a full-screen [role=dialog] (the .dlg is capped at 470 px). N2 the skip tap passes the
+   layer SELECTOR (bareTapOn(p, x, y, sc.layer) → realtap BARE_CHECK own = document.querySelector(own)): wrong copy / no id-class → use the element: SCAN can keep
+   window.__rtLay = lay and BARE_CHECK takes own === true → window.__rtLay. Optional N3 (dress board read slot count / «hợp đề»), N4 (tho board 0 moves).
+Proof needed: Fold 755x1000 + iPad 1180x820 (seeds that live past b1: Fold origin=pf road=pt_su bot=sens seed=43, iPad origin=pf road=pt_su bot=sens seed=61, Fold bot=speed
+seed=21), lint OK, rt-bare-unit, 0 .click()/dispatchEvent; rerun RT_TEST_SKIPLAYER (plain/cover/css), RT_TEST_NOEXIT+RT_TEST_LATE, RT_TEST_OWNCLOSE own/dead once (no regressions).
+
+## HARNESS FIXER #12 (11/26/2026, worker of F #24; START_CTX ~5 %) — BIG #12 FAIL 6677dd13 (report bf5e865a) fixed on top of a64d799b
+PRIORITY #1 CHECK: OD robot real-tap rules 25/11 (dev/handover/briefs/F-robot-2511.md) | main dev/test/robot-rt* (old copy) | review/robot-realtap 8ea10d7e PASS → 6677dd13 FAIL by BIG #12 (report bf5e865a) → a64d799b handover of FIXER #11 | claims: FIXER #11 rolled, this job is its successor.
+Tests: LIVE origin/main f573dc94 (fetched fresh; build cc68dcfd2b1b) by git archive, served 127.0.0.1:8851, RT_PIN=0 RT_NOSHOT=1 (RELOAD+DRIFT with the pin on), harness from a git worktree of this tip.
+21. BLOCKING 1 — NIGHT CARD STALL (SCAN «no hit button → other layer» fallback). For a skip layer the fallback was skipped, so the game's kitNewDay night card
+   (.kne.kne-beat in host #dawn) never let the robot see button.kmend «Tiếp theo» (kitSceneEnd appends it to #dawn OUTSIDE .kne) → 20–25 skip taps → NO-EXIT → reload.
+   Rule now (rechecked every SCAN): a real hit button beats skip taps when it is (a) in the skip layer's HOST tree (its layer encloses the skip layer: #dawn around
+   .kne) or (b) NEW since this skip layer came up (window.__rtSkipBase = the hit buttons at its first scan, keyed by label + spot so a page re-render is not «new»).
+   Old page buttons beside a .kscn scene (tab bar) still do not pull the scan off the scene. Self-test RT_TEST_KNE=<buổi> (the game's own window.kitNewDay({host:#dawn,
+   night:{k:'lonely'}, …})): Fold pf/pt_su sens 43 → {closedAfterS 7.3, by «#dawn «Tiếp theo»», skipTaps 1, noExit 0, unstick 0} · iPad pf/pt_su sens 61 → {1.5 s, «#dawn
+   «Tiếp theo»», skipTaps 1, noExit 0, unstick 0} · Fold speed 21 → {11.8 s, same}. (6677dd13: 63–64 s, NO-EXIT + reload — BIG #12.)
+22. BLOCKING 2 — SKIP TAPS HID A COVERED BUTTON. ONE rule in SCAN, sc.skipFree: skip taps are the way only when the skip layer has NO button a person could tap:
+   none hit, none clipped below the fold, none of ITS OWN buttons covered by an element outside the button's layer (probe cvOut). A button under the layer's OWN
+   surface (veil of a #kdaytc-like card) is not a button a person sees (keeps RT_TEST_SKIPLAYER). A covered button → the DEAD BUTTON check (now one function
+   deadCheck(): as before for layers with hit buttons, and for a layer with NO hit button whose own buttons are covered from outside) + the normal «no way out» path.
+   The NO-EXIT reason says «no reachable button (N there, none can be tapped: «Tiếp» under div#…)» when the layer has buttons, «no button at all» only when it has none.
+   Self-test RT_TEST_SKIPCOV=<buổi> RT_TEST_SKIPCOV_MODE=steady|leave|anim|mix-steady|mix-leave|mix-anim (role=dialog «Chạm để bỏ qua» layer, «Tiếp» under a separate
+   fixed div#rtTestSc; mix-* adds a live «Xem thêm»):
+   steady Fold 43 / Fold 21 / iPad 61 (×2) · leave Fold 43 / Fold 21 / iPad 61 · anim Fold 43 / Fold 21 / iPad 61 → every one «DEAD BUTTON «Tiếp» cover div#rtTestSc»,
+   skipTaps 0, noExit 0. mix-steady Fold 21, mix-anim Fold 43, mix-leave iPad 61 → DEAD BUTTON «Tiếp» cover div#rtTestSc, then «Xem thêm» taken (closedBy more).
+23. N1 RT_TEST_OWNCLOSE fixture is a full-screen [role=dialog] (no .dlg, which the game caps at 470 px): own → Fold 43 {closeOwnLayer 1, noEffect 0, «Đóng» 8 s},
+   Fold 21 {1, 0, 12 s}, iPad 61 {1, 0, 9 s}; dead → Fold 21 {noEffect 1}, iPad 61 {noEffect 1}.
+   N2 the skip tap passes own=true → realtap BARE_CHECK takes window.__rtLay (the element SCAN chose), not document.querySelector(name); a selector string still works.
+24. FAMILY SCAN (law 11) — every place that decides «skip layer vs button»:
+   | place | before | after |
+   | SCAN fallback (no hit button → layer of another hit button) | skipped for every skip layer | host-tree / new hit button beats skip (21) |
+   | SCAN tapSkip | layer kind only | + skipFree / skipWin (the one rule) |
+   | main loop skip-tap block | no hit and no clipped button (covered = «none») | sc.skipFree |
+   | NO-EXIT exemption while skip taps run | any tapSkip layer | only while sc.skipFree |
+   | NO-EXIT reason text | «no button at all» always | «no reachable button (…)» when the layer has buttons |
+   | no-hit backdrop rule | !tapSkip | !skipFree |
+   | DEAD BUTTON check | only when some button was hit | deadCheck() also for no-hit layers with own covered buttons |
+   | choose() skipWay (3 sites) / areaFirst | — | unchanged: reached only after cardWay (any live non-exit option first) and on a round whose dead check already ran |
+   | realtap BARE_CHECK own | querySelector(name) | the scanned element (N2) |
+   | robot-rt-coop.js | uses Seat() of robot-rt.js | same code, nothing separate |
+   Found on the way: the first cut of skipFree counted PAGE buttons covered by a full-screen non-LAYER card (the big-panel rule adds them) → RT_TEST_SKIPLAYER took
+   150–235 s with 23–56 false DEAD BUTTONs; fixed (only the layer's own buttons count; deadCheck(sc, ownOnly)) → plain Fold 21 7.9 s / iPad 61 8.4 s, cover iPad 61
+   8.3 s, css Fold 43 7.7 s / Fold 21 8.9 + 9.9 s, noWayOut 0, NO-EXIT 0, dead 0.
+REGRESSION (old RT_TEST_* modes, this tip): B1 OWNCLOSE above ✓ · B2 RT_TEST_QUOTA=2 RT_TEST_RELOAD=8 cp=5 slice=30: Fold speed 21 + iPad pf 61 «SAVE REWIND … from b8 to
+   the stored b2 (6 buổi lost)» + «SAVE STALE stored b2 live b25 … QuotaExceededError» ✓ · LATE (RT_TEST_NOEXIT=2 RT_TEST_LATE=40000): Fold 21 33071 ms, iPad 61 32478 ms
+   «LATE BUTTON … «Ta biết rồi»» ✓ · SKIPLAYER above ✓ · DRESS: Fold 43 placed 4 / 83 s; iPad 61 placed 0, 4, 3 (3 runs; control a64d799b iPad 4, 4) — the iPad 0 is the
+   known N3 (tiles picked at random, «Ra mắt» after 16 looks), not this change · RELOAD+DRIFT (pin on, RT_TEST_RELOAD=3 RT_TEST_DRIFT=:8851): Fold 43 + iPad 61 «BUILD PIN:
+   unstick reload — the tab was on :8851, back to the pinned :8914 (carrying 5 localStorage keys …)», pinReturn 1 ✓. robot-lint OK · rt-bare-unit 20/20 · 0 new
+   .click( / dispatchEvent (fixture listeners are their own test layers, tapped for real).
+LIVE slices (no test hooks, game = origin/main f573dc94, slice 12, two copies each): Fold speed 21 a/b 12/12 buổi · Fold pf/pt_su sens 43 a/b 12/12 · iPad pf/pt_su sens 61
+   a/b 12/12 · iPad cautious 72 a 12, b «Ban hoa» at buổi 1 → jsClicks 0, dead 0, NO-EXIT 0, stuck 0 in all 8; skip taps 1–7 per slice (.kscn / .kmov / #kdaytc), one
+   game «late button «Ta biết rồi» 11.8 s after .kmov» (Fold 43a, real late button, for MAIN).
+Note: on the local serve a «co» board stayed «in play» 6 min with 0 moves (/dev/vendor/pixi-8.5.2.min.js 404 locally) — local-serve artefact, judge on github.io.
+
+## HANDOVER — HARNESS FIXER #12 (11/26/2026)
+State: review/robot-realtap tip = this commit (items 21–24 + proofs above) → ONE re-review 6677dd13..tip for BIG #13 (recipe: RT_TEST_KNE=2 Fold pf/pt_su sens 43 + iPad pf 61
+→ «#dawn «Tiếp theo»» ≤ 15 s, NO-EXIT 0; RT_TEST_SKIPCOV=2 MODE steady|leave|anim on both devices → DEAD BUTTON «Tiếp» cover div#rtTestSc; mix-* still DEAD; RT_TEST_SKIPLAYER
+plain/cover/css ≤ 10 s). Seeds die «Ban hoa» at buổi 1 now and then: run 2 copies. Open (not blocking): N3 dress board reads no theme / slot count; N4 tho board 0 moves.
+
+## HARNESS FIXER #13 (11/26–27/2026, worker of F #24 successor; START_CTX ~5 %) — BIG #13 FAIL f0737e88 (report efcf6429) fixed on top of f0737e88
+PRIORITY #1 CHECK: OD robot real-tap rules 25/11 (dev/handover/briefs/F-robot-2511.md) | review/robot-realtap 8ea10d7e PASS → f0737e88 FAIL by BIG #13 (report efcf64295) | reused: the reviewer's RT_REV13 fixture (/home/user/wt/rr13-out/hook-rev13.js) ported as RT_TEST_STALELABEL | claims: HARNESS FIXER #12 done; this job is its successor.
+Tests: game = newest origin/main 03a8c17c (fetched fresh; page build 1b5137935266, CTM_BI.s 8d5e3382+) by git archive, served 127.0.0.1:8871, RT_PIN=0 RT_NOSHOT=1 (RELOAD+DRIFT with the pin on), harness from a git worktree of this tip. Logs: /home/user/wt/hf13-out/<run>/log.txt.
+25. BLOCKING 1 — «NEW BUTTON SINCE THE SKIP LAYER CAME UP» (item 21 rule b). It keyed the first scan's hit buttons by label + spot, so a PAGE button whose label changed
+   (top bar «Bạc…Sức…», «Buổi trưa, còn 4 khắc», «Tin báo…», «(có mới)») was «new» → the scan left the .kscn scene for the page → DEAD BUTTON flood under div.kscn-veil +
+   false stuck / softlock. Rule now (SCAN, one place): (b) = a hit button inside a LAYER that was not up at the skip layer's first scan — never a page (body-layer) button,
+   never a label change: the base is the set of LAYER elements visible at that first scan (+ the layers of its hit buttons), by element, not by text; the new layer must be
+   outside the skip layer, not its host (host = rule a, kept: #dawn «Tiếp theo»), and on top at its own centre (stacked above, not under the scene's veil). Buttons in the
+   skip layer's own tree never reach this branch (they are its own buttons). When every button of the layer the scan would be pulled to is covered by the skip layer
+   itself, the scan stays on the skip layer (skip taps; trace «SKIPWIN … stay»), and a button covered by the skip layer is never a DEAD suspect (skEl). Every pull / stay is
+   now a trace line «SKIPWIN <layer> host|new|stay …».
+   Self-test RT_TEST_STALELABEL=<buổi> RT_TEST_STALELABEL_MODE=stale5|rerender5|newbtn|newlayer (the reviewer's fixture: .kscn scene on the right 65 % that needs 6 taps,
+   a page bar of 2 buttons re-drawn every 1.5 s; stale5 = label counts up «Tin báo (k)»; newbtn = a 3rd PAGE button 4.5 s in; newlayer = scene never closes by taps,
+   a NEW role=dialog «Xong» opens on top 4.5 s in):
+   | mode | Fold 755x1000 | iPad 1180x820 | control f0737e88 + same hook |
+   | stale5 | s21 12 s, s43 11 s: 6 skip taps, 0 page taps, 0 dead | s61 13 s / 6 s: 6 skip taps, 0 page taps, 0 dead | Fold s21 «still open» 180 s, 75 page taps, 24 dead · iPad s61 «still open» 187 s, 27 dead |
+   | rerender5 | s21 13 s, 6 skip taps, 0 dead | s61 6 s, 0 dead | (BIG #13: closed on the tip too) |
+   | newbtn | s21 8 s, 6 skip taps, 0 page taps, 0 dead | s61 6 s, 0 dead | (BIG #13: iPad 173 s, 21 dead) |
+   | newlayer | s21 6 s ×2 gone «newlayer» (rule b takes a new LAYER), 0 dead | s61 6 s ×2 gone «newlayer», 0 dead | — |
+   FAMILY SCAN (law 11) — every use of the «new button» set:
+   | place | before (f0737e88) | after |
+   | SCAN pull off a skip layer, (b) fresh | any hit button not in label+spot base, page included | hit button in a LAYER not up at base, outside / not host of the skip layer, on top |
+   | SCAN pull, (a) host | layer encloses the skip layer | unchanged (RT_TEST_KNE) |
+   | pulled-to layer all covered by the skip layer | pulled → deadCheck on covered buttons | stays on the skip layer (skip taps) |
+   | deadSuspect of a button covered by the skip layer after a pull | DEAD suspect | never (skEl) |
+   | skipWin / __rtSkipWin | returned, read by nobody | trace «SKIPWIN …» once per change |
+   | skipFree / main-loop skip taps / NO-EXIT exemption / backdrop rule / deadCheck(ownOnly) | read lay + btns after the pull | same code; a page is never the pulled-to layer now, so a page bar under a .kscn veil no longer reaches deadCheck |
+   | robot-rt-coop.js | Seat() of robot-rt.js | same code |
+26. N1 rt-serve-build.sh --b walked FIRST-PARENT main only; origin/main 03a8c17c is a merge whose SECOND parent line holds LIVE f573dc94 (build cc68dcfd2b1b). Now
+   `rev-list --topo-order -n 200` over every parent of the fetched tip (FETCH_HEAD, else origin/main when a twin's fetch left no FETCH_HEAD). Proof on today's main:
+   old script `--b cc68dcfd2b1b` → exit 2 «no main commit with build cc68dcfd2b1b in the last 60 main commits»; new → «serving f573dc949 … on :8915», page "b":"cc68dcfd2b1b".
+   Pin on (RELOAD+DRIFT) the life's own build 1b5137935266 = 03a8c17c is found and served on :8868.
+REGRESSION (this tip, both devices): KNE Fold s43 {6.5 s, «SKIPWIN #dawn host Tiếp theo», skipTaps 1, noExit 0, unstick 0}, iPad s61 {6.4 s, same} · SKIPCOV steady Fold s21b /
+   iPad s61, leave Fold s43 / iPad s61, anim Fold s21 / iPad s61 → «DEAD BUTTON «Tiếp» cover div#rtTestSc», skipTaps 0, noExit 0; mix-steady Fold s21 / iPad s61, mix-leave
+   iPad s61 (Fold s21: the hook never fired before the slice end — not rerun; Fold leave cover shown by leave s43), mix-anim Fold s21 / iPad s61 → DEAD «Tiếp», then «Xem thêm» (closedBy more) · OWNCLOSE own Fold s21 / iPad s61 {1, 0,
+   «Đóng» 8 s}; dead Fold s21 / s43 / iPad s61b {noEffect 1} · QUOTA+RELOAD cp=5 slice=30 Fold s21 + iPad s61 «SAVE REWIND … from b8 … to the stored b2 (6 buổi lost)» +
+   «SAVE STALE stored b2 live b25 … QuotaExceededError» · LATE Fold s21 34.6 s / iPad s61 34.1 s «LATE BUTTON … «Ta biết rồi»», NO-EXIT withdrawn · SKIPLAYER plain Fold s43
+   7.6 s / iPad s61 7.6 s, cover Fold s43 7.6 s / iPad s61 7.5 s, css Fold s43b 7.6 s / Fold s21b 7.7 s / iPad s61 7.8 s, noWayOut 0, noExit 0 · DRESS Fold s43 placed 4 (66 s; one «150 taps
+   no clock» on the board, not on the rerun s43b placed 3 / 16 s = known N3) / iPad s61 placed 4 / 40 s · RELOAD+DRIFT pin on Fold s43 + iPad s61 «BUILD PIN: unstick reload —
+   the tab was on :8871, back to the pinned :8868 (carrying 5 localStorage keys)», pinReturn 1, 0 dead. robot-lint OK 0 findings · rt-bare-unit 20/20 · 0 .click( /
+   dispatchEvent (fixture listeners are their own test layers, tapped for real).
+LIVE slices (no hooks, origin/main 03a8c17c, slice=12): Fold speed s21 a/b/c 12/12/12 · Fold pf/pt_su sens s43 a 12, f 12, c 12 (N5), b/d/e/g «Ban hoa» at buổi 1 · iPad pf/pt_su sens s61 a/b
+   12/12 · iPad cautious s72 a/d/h/i 12/12/12/12, b/c/e/f/g «Ban hoa» at buổi 1 → jsClicks 0, DEAD BUTTON 0 and 0 «kscn-veil» lines in every life. «SÂN CHỜ» on iPad s72:
+   e / f / g took «Ngày thứ hai — Điện tuyển» → «Sân chờ» (g: «Đứng yên giữ sức» → 11 «SKIP TAP .kscn» → «Điện tuyển» «Quỳ xuống thỉnh an»), 0 dead, then the game's own
+   selection ended them «Ban hoa» at buổi 1 (that road ends there on this build). Fold s21 «Sân chờ» lives (self-test lives oc-own / sc-mix-leave / sc-leave) 0 false dead.
+   NO-EXIT 0 in every slice but ONE: Fold s43 c b8 «.kmov div.kmov.kcf.km-full — picker stalled 80 steps, no close / next» (see N5).
+N5 (OPEN, found on the way, not this change: no SKIPWIN in that life, choose() untouched): the card flip «Lật thẻ bài» twice in one buổi (jflip «Chuẩn bị thị tẩm» kmend). The
+   first flip's end button is tapped, a second tap on it is refused «gone» (repeat +5 on the same sig = layer|title|labels), the second flip of the same buổi has the SAME
+   sig, so its «Chuẩn bị thị tẩm» is capped out of b and the picker area / skip-taps 60 s; the DIALOG STALL force then taps it but first calls noExit («no close / next»:
+   a .kmend end button is not NEXT_RE) → NOEXIT UNSTICK 3 → reload. iPad s61 q-i61 and L-i61a met the same double flip (one stall → «Ta biết rồi», one passed). Fix for
+   the next fixer: a refused «gone» tap should not add 5 to repeat (the layer moved on), and the stall force's noExit check should count a scene end button (.kmend /
+   data-km-close) as a way on. Repro: Fold pf/pt_su sens s43 (L-f43c), trace 142–212 s.
+
+## HANDOVER — HARNESS FIXER #13 (11/27/2026)
+State: review/robot-realtap tip = this commit (items 25–26 + proofs) → ONE re-review f0737e88..tip for BIG #14. Recipe: (1) RT_TEST_STALELABEL=2 MODE stale5 / newbtn on Fold
+s21 + iPad pf s61 → gone «skip», 6 skip taps, 0 page taps, 0 dead ≤ 20 s; MODE newlayer → gone «newlayer»; control f0737e88 + the same hook → «still open» + DEAD flood.
+(2) LIVE iPad cautious s72 ×3–6 (the «Sân chờ» road is random, ~1 of 3) and Fold speed s21 ×3 → 0 «DEAD BUTTON … cover div.kscn-veil». (3) RT_TEST_KNE, SKIPCOV, SKIPLAYER
+as before. (4) `bash dev/test/rt-serve-build.sh --b cc68dcfd2b1b <port>` on today's main serves f573dc94. Open: N5 (double card flip stall, above), N3 dress board, N4 tho board.
+
+## HARNESS FIXER #14 (11/27/2026, session_01UV1SzhDcuHJwQqJ2abxEh7, worker of FOREMAN F ROOT session_01UV1SzjGcJHxzVCtPAppfos; START_CTX ~5 %) — BIG #14 notes N1–N7 + FOREMAN E items, on top of 97e55a457
+PRIORITY #1 CHECK: OD robot real-tap rules 25/11 (dev/handover/briefs/F-robot-2511.md) | main: harness not landed (LAND READY 97e55a457) | review/robot-realtap 97e55a457 = BIG #14 PASS (report 592bf26d5, notes N1–N7) | FOREMAN E asks in dev/handover/FOREMAN_F_STATUS.md 26/11 18:38Z, 20:32Z, 22:02Z, 22:12Z, 23:58Z (all on 8ea10d7e) | claims HARNESS FIXER #14 (FOREMAN F ROOT 00:45Z).
+Tests: game = origin/main a22cf45d (build c1633dab8e17) by git archive on 127.0.0.1:8891, older build 653cff86007d (c8754d1e) by rt-serve-build on :8960; RT_PIN=0 RT_NOSHOT=1 unless said; controls = 97e55a457 (rt-old) or 97e55a457 + the tip's fixture block (rt-ctl, scratch copy). Logs /home/user/wt/o14/<run>/log.txt (not in git). Harness only, no game change.
+27. N1 — SCAN «dialog without a backdrop»: the filter used offsetParent (null for EVERY position:fixed element) → a fixed role=dialog without aria-modal was dropped and a partly visible .dlg under a scene won. Now getClientRects(); among the open dialogs the one ON TOP at its own centre wins (a covered one only when the vote said «page»). SCAN probe (/home/user/wt/probe14/n1.js: #modal .dlg «Lịch tháng» under a .kscn, one day button still hit + a new fixed dialog on the middle):
+   | case | 97e55a457 Fold / iPad | tip Fold / iPad |
+   |---|---|---|
+   | role=dialog, no aria-modal | .dlg «Lịch tháng», 1 dead suspect | the new dialog «Lớp mới», 0 |
+   | role=dialog aria-modal | new dialog | new dialog |
+   | plain div popup (N6) | .dlg «Lịch tháng», 1 dead suspect | the popup «Xong», 0 |
+   Live fixture RT_TEST_STALELABEL_MODE=newlayerdlg (the scene + an old .dlg under it + the new fixed role=dialog): Fold s43 5 s / Fold s21 (died Ban hoa b1, rerun s43) / iPad s61 6 s ×2 → gone «newlayer», 0 dead, 0 page taps (control rt-ctl iPad s61: also 6 s — the vote point lands on the new dialog in that layout; the probe above is the case that differs).
+28. N2 — RT_TEST_* fixtures inserted after the step's SCAN: one signature of every fixture flag (fxSig); a fixture that starts / moves on → re-scan (continue, harness.fixtureRescan). RT_TEST_SKIPLAYER cover at buổi 1 Đông sở (the BIG #14 timing case): Fold s21 ×2 2.8 / 2.6 s, iPad s61 2.7 s, 0 DEAD (BIG #14: 2 of 13 runs 127 s, 19 DEAD).
+29. N3 — deadCheck probed covered buttons one by one (3 s wait + a 2.5 s realtap settle EACH). Now ONE 3-s settle + ONE re-scan for the group, then every still-covered suspect gets its real tap with no second settle (realtap info.settled) — each one is still tapped (no DEAD hidden); > 25 suspects or > 20 s → the rest next round (harness.deadCheckDefer). Fixture RT_TEST_DEADMANY (18 buttons under a separate opaque div + a live «Xong»): tip Fold s43 17.8 s / iPad s61 17.6 s, 18 DEAD each · control rt-ctl iPad s61 119.5 s, 18 DEAD.
+30. N4 — the «stay (all covered by the skip layer)» branch could not fire (the pull needs a HIT button) → removed; FIXER #13 table line «pulled-to layer all covered by the skip layer | … | stays on the skip layer» is void (rule (b) itself unchanged).
+31. N5 — double «Lật thẻ bài» NO-EXIT: (a) a tap refused as gone / moved / zero adds 0 to the repeat cap (was +5: the 2nd flip of the buổi has the same sig, its «Chuẩn bị thị tẩm» was capped out); (b) SCAN marks a scene end button (.kmend / data-km-close) `end`; the stall force's NO-EXIT check and the NO-EXIT fast path count it as a way on. Fixture RT_TEST_FLIP2 (the GAME's own kitCardFlip end card «Chuẩn bị thị tẩm» twice in one buổi, the 2nd 0.4 s after the 1st closed): Fold s43 10 s / 9 s, iPad s61 6 s: 2 end taps, 0 NO-EXIT, 0 stall force, 0 unstick (the «gone» race itself did not happen in these runs; (a) removes its effect).
+32. N6 — a plain-div popup (fixed / absolute box appended to <body>, z ≥ 100, holding a button, not a LAYER, not #kpop/#kpzoom/#kpinfo/#rtoast) is a layer: in the vote, in rule (b) beside a skip layer (popOf, base set by element), and it keeps only its own buttons (no big-panel page buttons). Body-child only, so a page re-render is never «new» (BIG #13 lesson). Fixture MODE=newpopup: tip Fold s21 5 s / Fold s43 5 s / iPad s61 6 s ×2 → gone «newpopup», 0 dead · control rt-ctl iPad s61 192 s, 30 DEAD («… cover div#rtTestSl.kscn», «… cover div#rtTestSlNew»). (iPad s61 run 2 logged one «area tap would have landed on a button — blocked: «Xong»» = the JOB 11 guard catching the popup mounting under a skip tap: no wrong tap.)
+33. N7 — rt-serve-build.sh --b re-fetched main --depth=60 on every call. Now: build cache /home/user/wt/rt-build-cache.txt («b t sha», verified against the commit's index.html) → walk of what is already fetched (no network) → only then fetch --depth=60 → still none: --deepen=300 (an older build of a resumed life). The blanket depth-30 fetch before the checkout is gone (only the missing commit is fetched). Same build c1633dab8e17: old script 94 s, new 1 s (local walk) and 1 s (cache hit).
+34. E (1) — resume with pin=0 on a life recorded on an older build → hard stop. Now buildGate on a mismatch serves the RECORDED build itself (pinUrl → rt-serve-build --b, pin=0 or not), carries localStorage to that origin, re-reads the gate; hard stop only when the build cannot be served or still differs (harness.autoServe). Proof: a ckpt recorded on c1633dab8e17 (iPad s61 buổi 11), resumed with pin=0 and the OLDER build's url :8960 (653cff86007d): tip «BUILD PIN: reload — page is 653cff86007d, life recorded on c1633dab8e17 → serving the recorded build (pin=0 …)» → «moved to … :8897 (carrying 5 localStorage keys)» → save restored 190580/190580, content identical, slice to buổi 14, exit 0 · control 97e55a457 same ckpt → «BUILD MISMATCH at reload … hard stop», exit 3.
+35. E (2) — gift chooser loop: jgpick marks a locked item .kshno (kipLocked) — the tile test missed it; now a locked tile is never «given». Every opening of a chooser counts with the button that opened it (last real tap); a gift (kipgo) resets it; 3 openings in a row with no gift = [game] bug once + that opener set aside on that screen for 6 buổi; an unreachable confirm → its ✕ (was: fell back to tile taps). Fixture RT_TEST_GIFTLOOP (person dialog «Biếu quà làm lành | Thôi», grid all locked, confirm disabled): Fold s43 / iPad s61 ×2: 3 openings, [game] «re-opened 3× … no gift given» once, then «Thôi», 8–9 s.
+36. E (3) — LIFE IDENTITY CHANGE: identity = name + origin (birth year logged with it; the game sets the age on the first screens: −19 → −17 at buổi 1, same life, so it is evidence only), recorded at the first in-life scan, kept in the ckpt. A change = hard stop: bug, dump + shot, results life {id IDENTITY, type harness} (robot-audit: INVALID «harness error»), ckpt stamped ENDED + void, exit 4 (co-op: the seat throws → HARNESS life). A co-op name-clash rename (jcoopthinb, same origin + birth year) = note, same life. Fixture RT_TEST_IDENT (S.name changed, age +5): Fold s43 / iPad s61 «LIFE IDENTITY CHANGE at buổi 2 (name … → Thử Người Khác, birth year −19 → −22)» exit 4; rerun resume=1 → «LIFE ALREADY ENDED … (checkpoint stamped ENDED)».
+37. E (4) — never auto «Chuyển kiếp»: NEWLIFE_RE (chuyển kiếp / đầu thai / bắt đầu kiếp mới / kiếp mới / bắt đầu lại / chơi lại) is never a move once this life started (or a resumed life had started) — picker and unstick lvl 2; the loop ends on S.dead / the end card (.kend-close) / a «Chuyển kiếp» button also for a RESUMED life (was: `started` only → the pre-life picker took «Chuyển kiếp», EXIT_RE had no such word); the ending of a resumed life is read from S. A resumed ckpt whose save is already over (S.dead) — or holds NO save while the Sổ luân hồi (cung-luanhoi) starts with THIS life's name (the game deletes the slot at an ending) — is stamped ENDED from it, never replayed. Fixtures: RT_TEST_END (the game's own over(«Thử kết», …, «Bị ban hoa, xuất cung», alive)): Fold s43 / iPad s61 → LIFE DONE «Thử kết» buổi 2, 0 «Chuyển kiếp» in the trace; RT_TEST_END + RT_TEST_ENDKILL=1 (ckpt written after the ending, the process dies before the stamp) → resume=1: before the luân hồi rule it REPLAYED the life to buổi 8 (the E-S8 shape); now «RESUME: the saved life is already over («Thử kết» — Bị ban hoa, xuất cung …) — stamped ENDED», LIFE DONE.
+38. E (5) — #kdaytc «Chạm để bỏ qua» tap-anywhere (s14 / E-S7 on 8ea10d7e): already a skip layer since JOB 17 (bb89b055); new fixture MODE=day = the GAME's own kitDayTitleShow alone, held 10 min: Fold s43 1.7 s / iPad s61 1.5 s by skip taps, NO-EXIT 0, noWayOut 0.
+39. E (6) — .kmov picker stall (~96 steps on 8ea10d7e): N5 (a)+(b) plus a faster stall rule on scene layers (.kmov/.kne/.kscn): with an end button 8 steps / 8 s, else 15 steps / 20 s (dialogs keep 40 / 60 s); a help «?» is never the forced tap on a scene.
+LAW 11 FAMILY SCAN (every place the changed rule is read):
+| rule | places | before → after |
+|---|---|---|
+| dialog-without-backdrop filter | SCAN dl | offsetParent → getClientRects; topmost at own centre wins (N1) |
+| what is a layer | SCAN vote, rule (b) fresh / base, big-panel rule, layer name | + plain body-child popup (N6); a nameless layer is named by tag |
+| repeat cap after a refused tap | choose() repeat (sig#label) | +5 for every refusal → 0 for gone / moved / zero (N5) |
+| «a way on» of a scene | stall force NO-EXIT check, NO-EXIT fast path hasWay | close / next → + end button (.kmend / data-km-close) |
+| stall thresholds | stall force | one 40 / 60 s → scene layers 8 / 8 s (end button) or 15 / 20 s |
+| dead-button probe | deadCheck (both callers: hit layer / own-covered skip layer) | 3 s + 2.5 s per button → one settle per group (N3) |
+| fixture vs scan | all RT_TEST_* inserts | same-step stale scan → re-scan (N2) |
+| build served | boot (pin on), reloadPinned, buildGate (start / resume / pin / unstick reload) | mismatch = exit 3 → serve the recorded build, then gate (E1) |
+| new-life buttons | choose hb, unstick lvl 2, loop end test, end read, resume restore | tapped when the only option → never once the life started; resumed ended save stamped (E4) |
+| item pick grid | tile lock test, opener count, unreachable confirm | .kshno missed / loop / tiles for ever → locked skipped, loop bug + opener set aside, ✕ (E2) |
+REGRESSION (tip, old RT_TEST_* modes): KNE Fold s43 / iPad s61 1.6 s «SKIPWIN #dawn host Tiếp theo», noExit 0 · SKIPCOV steady Fold s21 / iPad s61, leave Fold s43, anim iPad s61 → «DEAD BUTTON «Tiếp» cover div#rtTestSc» (then the «no way out» reload as before), skipTaps 0; mix-anim Fold s21 → DEAD «Tiếp» then «Xem thêm» · OWNCLOSE own Fold s21 / iPad s61 {closeOwnLayer 1, noEffect 0, «Đóng» 4 s}; dead Fold s43 / iPad s61 {noEffect 1} · QUOTA+RELOAD cp=5 slice=30 iPad s61 + Fold s43 «SAVE REWIND … from b8 … to the stored b2 (6 buổi lost)» (+ «21 buổi lost» on Fold) + «SAVE STALE stored b2 live b25 … QuotaExceededError» · LATE RT_TEST_LATE=34000 Fold s43 / iPad s61 «LATE BUTTON … «Ta biết rồi» after 32.8 s», NO-EXIT withdrawn (with 40000 the way out now comes after the reload on tip AND on 97e55a457 at 34000-ish timings here: fixture timing on this machine; old 40000 iPad 34.1 s) · SKIPLAYER plain Fold s43 2.7 s / iPad s61 2.8 s, css Fold s43 2.9 s · DRESS Fold s43 placed 4 / 24 s, iPad s61 placed 4 / 53 s · STALELABEL stale5 Fold s43 6 s / iPad s61 7 s, newbtn Fold s43 6 s, newlayer iPad s61 6 s: 0 dead, 0 page taps · RELOAD+DRIFT pin on (tab sent to the older build :8960) Fold s43 / iPad s61 «BUILD PIN: unstick reload — the tab was on :8960, back to the pinned :8897 (carrying 3 localStorage keys)», pinReturn 1 · robot-lint OK 0 findings · rt-bare-unit 20/20 · added lines: 0 `.click(` / dispatchEvent / keyboard / focus (fixture listeners are their own test layers, tapped for real).
+LIVE slices (no hooks, game a22cf45d build c1633dab8e17, slice=12): Fold speed s21 a 12 (b «Ban hoa» b1, stopped and stamped, no «Chuyển kiếp») · Fold pf/pt_su sens s43 a/b 12/12 · iPad pf/pt_su sens s61 a/b 12/12 · iPad cautious s72 b 12 (a «Ban hoa» b1) → jsClicks 0, DEAD 0, NO-EXIT 0, stuck 0, bugs 0, exitPick none in all 8.
+
+## HANDOVER — HARNESS FIXER #14 (11/27/2026)
+State: review/robot-realtap tip = this commit (items 27–39 + proofs above) → ONE re-review 97e55a457..tip. Recipe: run.sh pattern = `RT_PIN=0 RT_NOSHOT=1 <RT_TEST_*> node dev/test/robot-rt.js <url> <out> life=<n> <dev args> slice=6`; Fold pf/pt_su sens s43, iPad pf/pt_su sens s61, Fold speed s21 (s21 / s72 often «Ban hoa» at buổi 1: run 2 copies). New fixtures: RT_TEST_STALELABEL_MODE=newlayerdlg|newpopup, RT_TEST_DEADMANY, RT_TEST_FLIP2, RT_TEST_GIFTLOOP, RT_TEST_END (+RT_TEST_ENDKILL=1 then resume=1), RT_TEST_IDENT (then resume=1 → LIFE ALREADY ENDED), RT_TEST_SKIPLAYER_MODE=day. SCAN probe /home/user/wt/probe14/n1.js <harness dir> fold|ipad (scratch). E (1): serve an older build (`bash dev/test/rt-serve-build.sh --b <b> <port>`), copy a ckpt recorded on the newer build, resume with pin=0 and the older url → must move to the recorded build.
+Open (not blocking): the «gone» race of N5 was not provoked by RT_TEST_FLIP2 (the fix removes its effect); RT_TEST_LATE=40000 now reloads before the late button on this machine (tip and 97e55a457 alike) — use 34000; older N3 dress / N4 tho boards unchanged.
+
+## HARNESS FIXER #15 (11/27/2026) — rt-serve-build.sh serves every local file LIVE loads
+Fault: a pinned build dir (/home/user/wt/build-<sha>, also via --b) had no dev/vendor/pixi-8.5.2.min.js → 404 on every pinned seat (pixi loads dynamically). Family fix: sparse set now = LIVE whitelist of dev/site/pages_stage.sh ('/dev/vendor/' '/audio/' '/icons/' added); old pin dirs (no '/dev/vendor/' in their sparse file) get the paths checked out on the next call; after the server is up a self-check GETs every same-origin path named by index.html / sw.js that exists in the build (+ dev/vendor/*) and kills the server with «SELF-CHECK FAIL … <path>» (exit 143) if any is not 200. N7 cache/walk untouched.
+Proof: LIVE 17f23656 :8971 and --b e95cdd29036d (42cfbac8) :8972 → GET /dev/vendor/pixi-8.5.2.min.js 200 (658780 B), «self-check OK: 8 local paths all 200»; old-style dir (dev/ absent) fixed on next call; deleted pixi file → FAIL naming it, exit 143; bash -n clean.
+
+## HARNESS FIXER #16 (11/27/2026, session_01UV1SzhmLdhAoeBPmqnYguC, worker of FOREMAN F ROOT #2 session_01UV1SzjiyJzqC1pGgm8zVFQ; START_CTX ~6 %) — board loop family (s7b b2417), on 39c6e505
+PRIORITY #1 CHECK: OD robot rules 25/11 (dev/handover/briefs/F-robot-2511.md) | review/robot-realtap 39c6e505 (BIG #15 PASS) robot-rt.js BOARD PLAY (job 8, FIXER #11) | claims HARNESS FIXER #16 (F ROOT #2 03:12Z) | main: no board-over / stuck-progress rule.
+Tests: game = LIVE origin/main 17f23656 (build 5a7a9c4004c1) by rt-serve-build on 127.0.0.1:8990, RT_PIN=0 RT_NOSHOT=1, Fold pf/pt_su sens s43 + iPad pf/pt_su sens s61; control = 39c6e505 + only the tip's fixture block (scratch /home/user/wt/rt16-ctl). Logs /home/user/wt/o16/<run>/log.txt (not in git). Harness only.
+40. (b) BOARD OVER under «play»: GAME-SIDE ROOT (for MAIN): jexam exRun `after` (Môn kế tiếp / Xem kết quả), jmgcal `after` (Hồi kế tiếp / Xem mức tay) and jroute `done` (Đã hiểu) show the round result with kg82ShowRes (it hides #kg82box) but never set KG82.phase «result» → KG82.phase stays «play» after the round; the harness trusted the phase (SCAN mgLive / mgPh, board loop wait) → s7b sat 26 min on «Khảo hạch Môn 2/2 Thêu» 9/10. Fix: ONE in-page test mgOver() (SCAN; window.__rtMgOver for the board loop): phase «play» AND (#kg82box hidden OR its centre is not the box, never a hint / info layer) AND a way on (kitOvBtn, or an enabled on-top button outside the box that is not ✕ / Quay lại / help / Sẵn sàng / Chơi tiếp / Bỏ cuộc) → mgPh «result», mgLive false; the board loop's frame wait and its end wait leave at once («BOARD <kind> N moves over (phase still «play», way on …)»), [game] bug «KG82.phase stays «play» after the round ended …» once per kind (R.harness.boardOver); the normal real-tap picker then presses the button. Scan script dev/test/rt-board-phase-scan.js (every board end path on a ref):
+   | file | end path | sets KG82.phase «result» |
+   |---|---|---|
+   | j82 | kg82Play → finish / done (playArt, Lễ ra mắt boards) | yes |
+   | j92 | own engine (chai) | yes |
+   | jentry | kg82Play → after | yes |
+   | jexam | kg82Play → after (exam rounds) | NO |
+   | jmgcal | kg82Play → after (Thử tay rounds) | NO |
+   | jroute | own engine → done | NO |
+   | jsgame / jslap / jtd / jts | own / inline / result / fin | yes |
+   Fixture RT_TEST_EXAM=1 RT_TEST_EXAM_ROUNDS=theu,theu (the s7b exam, tap boards PLAYED): tip Fold s43 «BOARD theu 32 moves over (… #kg82ok Môn kế tiếp) 10/10 (33 s)» → «… #kg82ok Xem kết quả» 9/10 (29 s) → exam done raws [10, 9]; iPad s61 same (23 s / 22 s), boardOver 2, DEAD 0 · control Fold s43 «BOARD theu 32 moves still in play (368 s)» + harness bug «still in play after 6 min», exam not done after 8 min (the s7b loop). Regression RT_TEST_BOARD=mua (playArt): Fold / iPad 29 moves 10/10, ready 1, boardOver 0.
+41. (a) STUCK LADDER = GAME PROGRESS: the board loop (`lastProg = Date.now()` after every 6-min pass) and every skip tap reset the 15-min no-progress timer → a frozen board never reached the ladder (s7b stuck 0). Now lastProg moves only on a clock step, a NEW screen (layer + title, digits masked, not seen since the last clock step — so a countdown or an A↔B ping-pong is not progress), a gift given, and after a ladder action itself. Two board give-ups (MG_GIVEUP_MS each) with no progress → «BOARD STUCK <kind> ×2 → stuck ladder» → [stuck] «frozen board: 2 board give-ups …» + shot + dump, unstick lvl 3 = reload of the same save (R.harness.boardStuck). Fixture RT_TEST_BOARDHANG=1 (+ test-only RT_TEST_MGGIVEUP=30000): a #kg82 frame with a canvas, KG82.phase «play», no peek, no guard: tip Fold s43 2 passes → stuck 1 → board gone after 91 s, slice to buổi 3; iPad s61 gone after 82 s · control iPad s61: 9 passes «still in play» in 7 min, stuck 0, never left.
+   | reset of lastProg | before → after |
+   |---|---|
+   | clock step | yes → yes (+ clears the screen set) |
+   | board loop pass | every pass → never (2 give-ups → ladder) |
+   | skip tap | every tap → never (the scene moving on is a new screen) |
+   | new layer / title | no → yes (first sight since the last clock step) |
+   | ladder / unstick / reload actions, gift given | yes → yes |
+42. (c) rt-serve-build self-check covers audio/: the game builds audio names at run time (fetch audio/VOICES.json, AU_PRELOAD «sfx-…»+«.mp3», kmusUrl «bgm-<key>.mp3», vo-<key>-n.mp3), so every git file of audio/ in the build is GET-ed (LIVE 17f23656: «self-check OK: 137 local paths all 200»). The old-dir repair now checks EVERY sparse entry (was only /dev/vendor/): a dir with dev/vendor but no audio/ → repaired on the next call (131 files back) · control 39c6e505 on that dir: «SELF-CHECK FAIL … audio/MANIFEST.json(not checked out) audio/VOICES.json(not checked out)», nothing repaired. CDN-only on LIVE (not in git, skipped): the KMUS_NEW bgm keys (IMG_BASE + audio/bgm-<key>.mp3). s7b's 404s came from a hand-started python server on an old dir — start pins through rt-serve-build.sh only.
+Gate: robot-lint LINT OK 0 findings · rt-bare-unit 20/20 · added lines: 0 `.click(` / dispatchEvent / keyboard / focus · LIVE slices (no hooks, slice=12) Fold s43 / iPad s61: jsClicks 0, DEAD 0, NO-EXIT 0, stuck 0, bugs 0, exitPick none, boardOver 0 (Fold: «BOARD hat 170 moves 0/10» = the known Đàn/Hát ±90 ms item, not this change).
+GAME-SIDE (for MAIN): (1) jexam / jmgcal / jroute leave KG82.phase «play» after the round (table above) — set KG82.phase="result" in their result path (as jentry `after` does); (2) the Mt._tick renderer freeze (900+ MB) on s7b's «theu» was the FINISHED exam still flagged «play» — whether the pixi ticker keeps running on a finished board is worth checking with (1).
