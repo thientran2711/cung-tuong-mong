@@ -109,7 +109,7 @@ Object.assign(BAL,{srvSpyHit:25});
 Object.assign(BAL,{pace:1.75});
 function kitPace(ms){try{return typeof kfStill==="function"&&kfStill()?ms:Math.round(ms*(BAL.pace||1))}catch(e){return ms}}
 try{document.documentElement.style.setProperty("--pace",String(BAL.pace))}catch(e){}
-Object.assign(BAL,{reveal:{shake:Math.round(420*BAL.pace),pause:Math.round(700*BAL.pace),rise:Math.round(550*BAL.pace),hold:Math.round(1300*BAL.pace),shelf:Math.round(380*BAL.pace),list:Math.round(350*BAL.pace),total:8000,minScale:.3,fast:.12,page:12,gainMin:900,fall:Math.round(1300*BAL.pace),coins:Math.round(900*BAL.pace)}});
+Object.assign(BAL,{dth:{thoAge:60},reveal:{shake:Math.round(420*BAL.pace),pause:Math.round(700*BAL.pace),rise:Math.round(550*BAL.pace),hold:Math.round(1300*BAL.pace),shelf:Math.round(380*BAL.pace),list:Math.round(350*BAL.pace),total:8000,minScale:.3,fast:.12,page:12,gainMin:900,fall:Math.round(1300*BAL.pace),coins:Math.round(900*BAL.pace)}});
 /* TRUE EVIDENCE (jtruth, owner 15/11): a spy who finds no wrong learns her habits instead: +spyKnowB on the next scheme against her for
    spyKnowW weeks. Frame defence (the framed one clears herself): clearBase + Tai mắt × clearMat, + ksB with a Kính sự phòng night in the
    last ksW weeks, + wB a loyal (≥60) maid as witness, + tyB Thái y (own doctor or Y thuật ≥3), + evB per evidence (max 2) on the framer;
