@@ -18,3 +18,13 @@ kit-hand PASS · kit-hand-mount PASS · kit-hand-rows PASS · kit-stage / kit-pi
 
 ## Handover
 START_CTX ≈ 20 %. Remaining at write time: mp4 Fold + iPad to CDN → MAIN, RV READY to RV-165/166.
+
+## UPDATE 05:20Z (head = see git log of review/kit-stage-r9)
+KIT CHECK: reuses kitPick tick (`.khconf.kpk-go>button.kbtn.khok.kpk-gob`, BAL.kpkgo, KK54/RV-166 PASS 7a90ad1d), kaRows / kcls (`button.ka .krv .ef.g/.r`, KIT §224/§312), kit `.kb` grid, kitHandConf one source, kit odds part (clone of the card's `.kodds`).
+- OD 27/11 ~04:36Z: enlarged card ABOVE the row (never covers a card; row stays, picked card lifted in its slot; veil removed). Short room → WIDE tier; pane hand at top → card under the row; hand filling its pane (iPad 4x3) → whole hand shrinks (≥ .4) and card under it; sticky tab strip + scroll-pane bounds respected. KIT §101.10 overwritten.
+- OD ~04:33Z colours: removed my `color:inherit` / `.krv *{color:ink}` overrides → Được green, Tốn/Mất/Kèm labels red, values keep kit classes; kit `.kb` grid (one value column) — KIT-STD-AUDIT X01/X05/X13/X12 addressed (X12: locked cards last in the hand, C6).
+- Merged review/kk54-rv166 7a90ad1d (RV-166 PASS tick + LIVE 066d9af0 + ring-build); assemble union incl. jkring-item.
+- Tests PASS on the final build: kit-hand, kit-hand-mount, kit-hand-rows, kit-stage, kit-pick, kit_dupes; result-sieve-card PASS alone (flaky under parallel load); kit-plaque-confirm PASS earlier build.
+- Videos v3: https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-stage-r9/fold-banbai-v3.mp4 · …/ipad-banbai-v3.mp4 · stills fold-v3.png / ipad-v3.png.
+- Known limits: iPad Hành sự pane hand: long info (Cần/Kèm) scrolls inside the small card; kit-std-scan.js (on review/kit-std-audit) not run here.
+- ROLLOVER NOTE: START_CTX ≈ 20 %, now ≈ 55 % → coordinator opens the successor if more work comes (re-run kit-std-scan on this head; X05 label column check).
