@@ -691,3 +691,5 @@ ALLOT-PACE (fit allot-season 72a6e1c8 to pace-speed soft ceiling «evening» + p
 F14ROLE-CNV (opus fixer; f14Row inherit + cnv_chu ch.7 stall; MAIN 179 order 1) | review/f14role-inherit | session_01N1tNP2yqZHTdFAiw5WwCkG (Foreman B ROOT 3) | RUNNING | 27/11 17:30Z
 LAO-HEALTH (opus numbers; hidden lao kills age 22 y3; MAIN 179 order 3) | review/lao-health | session_01N1tNP6QJZQkBVLWCaMR97K (Foreman B ROOT 3) | DONE (= DESIGN, reports/lao-health.md, archived) | 27/11 17:30Z
 LANHCUNG-EARLY (opus numbers; rank→0 via Lãnh cung early; MAIN 179 order 4) | review/lanhcung-early | session_01N1tNP2tteYrn7gJruqD63a (Foreman B ROOT 3) | RUNNING | 27/11 17:30Z
+SIL-EUNUCH | review/sil-eunuch-rv168 b664f80e | session_01PEhRbvVPQepjduga2PqdYq | DONE (LIVE in 772bee4f via UI bundle 6a493881; archived) | 27/11 18:28Z (Foreman C ROOT 4)
+C3-SEALS | review/c3-seals-lrm 7082b569 | session_01PEhRbuThfqRgsb1V4EPoSx | DONE (LIVE in 772bee4f via UI bundle 6a493881) | 27/11 18:28Z (Foreman C ROOT 4)
