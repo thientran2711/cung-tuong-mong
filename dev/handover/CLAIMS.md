@@ -684,3 +684,4 @@ A-COOP #3 (opus; co-op pair host Fold / guest iPad; successor of A-COOP #2 sessi
 E-GAIN3b-RV re-review review/e-gain3-live 4db15919 | reviews/e-gain3b-review.md RE-REVIEW 2 | session_01DgYSWoM9Gu8eQ8DXikZPXT | DONE (PASS, archived) | 27/11 15:45Z (Foreman E child4)
 E-GAIN3c-RV re-review review/e-gain3-live 4db15919 | reviews/e-gain3c-review.md RE-REVIEW | session_01DgYSWnDjkvAFhkxHR1FwW2 | DONE (PASS, archived) | 27/11 15:45Z (Foreman E child4)
 E-GAIN3-LIVE-2 (successor of E-GAIN3-LIVE) review/e-gain3-live 4db15919 LAND READY; preparing review/e-gain3-live-m | reports/e-gain3-live.md | session_01DgYSWnf2mstVedSHmT1NNq | RUNNING | 27/11 15:45Z (Foreman E child4)
+FLIGHT2-S2H life (seat s2g, sonnet; Fold 755x1000 cautious, seed 2026112560, newest LIVE origin/main via rt-serve-build.sh + pin=1 fresh profile, harness f65d019b) | dev/handover/robot/flight2-s2h.* | session_01UV1SzgzrhdKkkkfVybpEZe | RUNNING | 27/11 16:15Z (Foreman F ROOT #5)
