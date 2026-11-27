@@ -1,0 +1,4 @@
+# E-S2 (E-S3 row) ES3-R2-random-5-h — end-of-life review (robot as player: casual newcomer, bot=rand, Fold 755x1000)
+thd / thd_hoc seed 2707375734, fresh rerun (-h) on harness 97e55a45 pin=0 (LIVE github.io build a22cf45d+ fb660cb78eec), real taps (jsClicks 0), started 01:09Z 27/11, ended ~03:25Z (~2.3 h). 5 years (age 22), rank 0, ending «Hồng nhan bạc mệnh — Lao phổi nguy kịch, không qua khỏi» (death, VALID, no exit pick); boards played (mua 24/27 moves, hat 58/75 moves). 696 buổi, 0 dead buttons, 0 stuck, 3 bugs (1 js error «to is not defined», 1 gift-picker confirm off-screen, 1 harness block). 
+Scores: a 5 · b 4 · c 6 · d 4 · e 4 · f 3 · g 3 (ending under «Bổng lộc tháng chạp») · h 6 (boards played, 4–6/10) · i 6.
+Loved: boards. Hated: dying of illness at 22 with no warning, under a chest. Bugs: js «to is not defined»; gift-picker confirm off-screen; end card under chest.
