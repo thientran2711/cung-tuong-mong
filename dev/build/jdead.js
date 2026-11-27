@@ -14,16 +14,16 @@ function dthClean(w){return String(w==null?"":w).replace(/<[^>]*>/g,"").replace(
 function dthStamp(p,why,fb){if(!dthIs(p)||p.dth)return;let a=p.age;try{if(typeof ageOf==="function"){const x=ageOf(p);if(x>0)a=x}}catch(e){}
  p.dth={a:Math.max(0,a|0),c:dthClean(why)||fb||"",y:(typeof S==="object"&&S&&S.year)||0}}
 function dthSweep(){try{if(!S||typeof rivals==="undefined")return;
- for(const v of rivals)if(dthIs(v)&&!v.dth)dthStamp(v,"","lâm trọng bệnh qua đời");
- for(const m of (S.men||[]))if(dthIs(m)&&!m.dth)dthStamp(m,"","bị trị tội");
- for(const [k] of (typeof allKids==="function"?allKids():[]))if(dthIs(k)&&!k.dth)dthStamp(k,k.nbWhy||"","yểu mệnh")}catch(e){}}
+ for(const v of rivals)if(dthIs(v)&&!v.dth)dthStamp(v,"","");
+ for(const m of (S.men||[]))if(dthIs(m)&&!m.dth)dthStamp(m,"","");
+ for(const [k] of (typeof allKids==="function"?allKids():[]))if(dthIs(k)&&!k.dth)dthStamp(k,k.nbWhy||"","")}catch(e){}}
 function dthOf(p){if(!dthIs(p))return null;if(!p.dth)dthStamp(p,"","");const d=p.dth;return{age:d.a,term:d.a>=TH()?"Hưởng thọ":"Hưởng dương",cause:d.c||"không ai rõ nguyên do"}}
 /* the two lines of the record, from the kit rows part */
 function dthRows(p){const d=dthOf(p);if(!d)return"";return kitRows([[d.term,`${d.age} tuổi`],["Nguyên do",d.cause]])}
 window.dthIs=dthIs;window.dthOf=dthOf;window.dthRows=dthRows;window.dthSweep=dthSweep;window.dthStamp=dthStamp;
 /* ---- stamps from the code paths that know the cause (the same words as the log line) ---- */
 /* (jmort kill() stamps its own rivals / men with the same words as its log line) */
-try{const d0=kidDie;kidDie=function(k,why){const r=d0.apply(this,arguments);try{dthStamp(k,why,"yểu mệnh")}catch(e){}return r}}catch(e){}
+try{const d0=kidDie;kidDie=function(k,why){const r=d0.apply(this,arguments);try{dthStamp(k,why,"")}catch(e){}return r}}catch(e){}
 try{const s0=deathSentence;deathSentence=function(a,b){const r=s0.apply(this,arguments);try{const p=typeof a==="string"?S:a,w=typeof a==="string"?a:b;if(p&&p!==S)dthStamp(p,"bị ban chết vì "+dthClean(w).replace(/^bị ban chết vì /,""))}catch(e){}return r}}catch(e){}
 try{const e0=dieIf;dieIf=function(p,why){const r=e0.apply(this,arguments);try{dthStamp(p,why)}catch(e){}return r}}catch(e){}
 try{const r0=render;render=function(){dthSweep();return r0.apply(this,arguments)}}catch(e){}
