@@ -112,6 +112,9 @@ function kLine(key,pool,o){o=o||{};let L=pool;
      it rotates with the week + buổi, so both seats show the same line, and no line comes back within L.length buổi */
   if(o.shared!=null){let h=0;const sd=key+"|"+o.shared;for(let i=0;i<sd.length;i++)h=(h*31+sd.charCodeAt(i))|0;let t3=0;try{t3=now()*3+(S.buoi|0)}catch(e){}
     const line=untag(L[((Math.abs(h)+t3)%L.length+L.length)%L.length]);return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,line,o):line}
+  /* save-unseen-lists r3: a card made again from the sổ (j3 rcpMk, RCPRE) only BUILDS — it takes the last line drawn for this key (the one the
+     card showed) and writes no memory, whatever buổi the reload lands in */
+  if(typeof RCPRE!=="undefined"&&RCPRE){const m0=S&&S.vmem&&S.vmem[key];const l0=m0&&m0.__l&&L.includes(m0.__l)?untag(m0.__l):untag(L[0]);return o.sp!=null||o.ls!=null?kSay(o.sp,o.ls,l0,o):l0}
   let mem={};try{S.vmem=S.vmem||{};mem=S.vmem[key]=S.vmem[key]||{}}catch(e){}
   const t=now(),gap=V().noRepeat;
   /* a dialog rebuilt several times for ONE occurrence (PEND builders run on queue, show and reload) keeps its line: same key in the same buổi
