@@ -485,3 +485,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 00:31Z OWNER 00:32Z (167 chat): Hậu cung = info only; person acts move to Dư đồ meet + Hành sự → ACT-MOVE session_01Rc5AsLFs4oXTwHRN1Mv54e (opus; plan first → MAIN OK → build → LOOK → RV-163D). KK51-P told by 167 (info-only panel). C emperor plan aligned.
 - 00:33Z HOURLY: ctx ~12 % (roll 30 %). LOAD: main running ~19 (owner bugs/UI/go-live + kit + ACT-MOVE) | B save rv17 | C emperor plan | D promo lr5 | E robot | F realtap | moved: none new. No READY TO PUSH. LIVE a22cf45d. LOOK PASS ring-build cc4515dc → RV-165.
 - 00:35Z owner 00:42Z rec (167 chat, OD): card = info + «Tìm gặp» + «Ghé cung»; acts place-bound → ACT-MOVE + KK51-P + C told.
+- 00:38Z OWNER 00:46Z (167 chat): 3-tier choice law → law 2 rewritten in place in START_CORE (law 14); Foreman E ORDER tier audit (STEP 1); reviewers told; kit tier label → KK51 (after audit).

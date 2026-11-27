@@ -3,7 +3,7 @@
 ## ★ THE 18 LAWS — READ FIRST, ABOVE EVERYTHING (owner 18/11 ~16:20Z: "Bất kỳ một cái chat nào mở ra nó phải đọc những cái này trước tiên ... nó phải là cái nằm ở trên cùng, để không có ai bỏ lỡ. Để mà khi thợ hay là người duyệt mà có làm á thì phải theo cái luật này cho tao.")
 Every chat (main, foreman, worker, reviewer, art) reads this block FIRST (all 18 laws, owner 18/11 ~16:25Z: "tổng cộng 18 cái luật này phải là nằm đầu tiên"). Every design, build and review must follow it; reviewers FAIL any work that breaks one of these laws. Laws 1–6 are her top priority.
 1. TWO-WAY LAW (luật hai chiều): whatever others can do to her, she can do back to them, and the reverse (OD:L33, L1534).
-2. EQUAL-VALUE CHOICES (luật lựa chọn ngang giá): all options of one choice have equivalent value; none clearly better; a bạc road always has another road of equal cost (OD:L582, OD 18/11 ~09:20Z).
+2. TIERED CHOICES (luật ba bậc Nhẹ · Vừa · Nặng; owner 27/11 ~00:46Z, canon overwrite of «equal-value choices»): a choice set about ONE matter has at most THREE tiers NHẸ · VỪA · NẶNG; cost (Tốn) and result (Được / Mất) rise together by tier; options leading to the same kind of result are merged into one tier (never 3–4 «balanced» options that all do the same thing); the player picks by what she can pay / is willing to lose; a bạc road always has another road of matching tier (OD 27/11 ~00:46Z).
 3. GAIN-AND-LOSS (luật được–mất): no option is cost-only with no gain; gain-only is fine (time/khắc is its cost) (OD 18/11 ~09:20Z).
 4. ONE CORE (một lõi số): every number comes from BAL; nothing computes or types its own number (OD:L1267).
 5. HARDER AS SHE CLIMBS (càng lên càng khó): mini-games and trials get harder with rank (OD:L1254).
