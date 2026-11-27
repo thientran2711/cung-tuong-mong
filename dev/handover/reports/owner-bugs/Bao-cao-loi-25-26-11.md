@@ -1,10 +1,10 @@
 # Báo cáo lỗi sếp báo 25–26/11
 
-Bản kiểm: 27/11 ~11:55Z · MAIN CHÍNH 161 · bản live **f28d28b9** (lùi về 00dca386 nếu cần).
+Bản kiểm: 27/11 ~19:40Z · MAIN CHÍNH 161 · bản live **bd47c753** (lùi về f28d28b9 nếu cần).
 Nguồn: mọi dòng OWNER trong sổ quyết định từ 25/11 ~23:30Z (trên máy bay, iPad không tiếng) đến cuối.
 Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main, hàng đợi lander, nhánh review và CLAIMS — không viết từ trí nhớ.
 
-**Tóm tắt.** 77 dòng sếp báo hoặc ra lệnh (57 của 25–26/11 + 20 của 27/11): **45 đã lên live · 7 nửa live, nửa còn lại chờ hoặc đang làm · 20 chưa lên live (3 chờ lên live, 17 đang làm hoặc chưa làm) · 5 là luật ghi nhận, không có bản dựng riêng.** Bàn bài / thẻ gỗ / vòng bị giữ lại, chờ sếp xem video.
+**Tóm tắt.** 78 dòng sếp báo hoặc ra lệnh (57 của 25–26/11 + 21 của 27/11): **47 đã lên live · 7 nửa live, nửa còn lại chờ hoặc đang làm · 19 chưa lên live (3 chờ lên live, 16 đang làm hoặc chưa làm) · 5 là luật ghi nhận, không có bản dựng riêng.** Bàn bài / thẻ gỗ / vòng bị giữ lại, chờ sếp xem video.
 
 **Cách đọc cột «Trạng thái»:** LIVE <sha> = đã chạy trên game thật · chờ lên live = đã qua kiểm, đang xếp hàng lander · đang duyệt = người kiểm đang xem · đang làm (tên thợ) · chưa làm.
 
@@ -62,7 +62,7 @@ Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main,
 |---|---|---|
 | **39. Khắc cuối của nơi sắp đóng cửa: chip phải nháy phía trên Dư đồ.** Chip nháy «Nơi này sắp đóng cửa, mời tiểu chủ rời đi», chạm là «Về phòng»; 2 khắc ân hạn, quá giờ chỉ phạt nhẹ. | **LIVE 611fca61** (Bundle 1: kk54 place-close 208d11d0, `jstagehere.js` + `jnotice.js`): chip kit nháy khắc cuối «Nơi này sắp đóng cửa, mời tiểu chủ rời đi», chạm là «Về phòng · N khắc»; ân hạn 2 khắc chip đỏ «Đã quá giờ…»; quá hạn chỉ phạt nhẹ, không hộp thoại thị vệ. | Chip nháy báo đóng cửa, không bị cấm túc oan. |
 | **40. Giữ mọi hàng kết quả, kể cả «Tốn: không», «Được: không».** Luật ẩn hàng trống KHÔNG được lên. | **LIVE f573dc94**: main không có luật ẩn (`kitRowNil` = 0). Nhánh kit-empty-rows / kit-g4-r2 đã rút; KK44 làm lại không có §6.7. | Mọi hàng kết quả vẫn hiện, kể cả «không». |
-| **41. Không biết mua đồ ở đâu; chương bắt mua của thái giám mà không biết gặp ai.** Mọi dòng mục tiêu có tên người / nơi / vật thành liên kết, «Đi tới»; Dư đồ ghi «Mua bán»; chỉ rõ thái giám. | **Đang làm (GOAL-LINKS)**. Phần kit đã **LIVE**: `kitGoalLink` + «Cách làm» `kitHowPanel` (24bfab11); còn nối vào mọi dòng mục tiêu + Dư đồ «Mua bán» + thái giám bán đồ. | Chạm tên trong mục tiêu là ra «Cách làm» + «Đi tới». |
+| **41. Không biết mua đồ ở đâu; chương bắt mua của thái giám mà không biết gặp ai.** Mọi dòng mục tiêu có tên người / nơi / vật thành liên kết, «Đi tới»; Dư đồ ghi «Mua bán»; chỉ rõ thái giám. | **LIVE 772bee4f** (lc31-goal: goal-links-rv174-f28 8aee40a9, `jglink.js` + `kitGoalLink` nối vào dòng mục tiêu; kit «Cách làm» đã live từ 24bfab11). | Chạm tên trong mục tiêu là ra «Cách làm» + «Đi tới». |
 | **42. Khách tới tìm: bấm chọn mà kết quả không hiện ngay.** Mọi lựa chọn hiện kết quả liền, tại chỗ. | **LIVE 98c77517** (ob-verdict-3 dacba11b, RV-165 PASS: khách tới / lựa chọn hiện kết quả ngay). | Chọn «Nhịn» là thấy kết quả ngay. |
 | **43. Xuất giá, đi tu, tự vẫn ghi «Rất vững» — để chữ thật, thêm cảnh báo.** Chữ odds chỉ cho việc thật sự tung may rủi; việc đổi đời không chữ odds, có dòng «Cẩn thận khi lựa chọn». | **LIVE 814bd77d** (FIRSTCARD-3 c8754d1e; dòng kit «Cẩn thận khi lựa chọn» f179256e có trong jk2b.js, jopic.js). | Việc đổi đời có dòng cảnh báo, không có chữ odds. |
 | **44. Biểu tượng từng nơi trên Dư đồ bị co nhỏ như con kiến.** To bằng dấu «Ta», đặt trên tên nơi. | **Đang làm (KK44)** (kit §78); map-zones-r7 bị giữ chờ việc này. | Biểu tượng nơi to rõ trên mọi bản đồ. |
@@ -87,11 +87,11 @@ Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main,
 |---|---|---|
 | **Tiếng «tèo» khi bấm nút.** Thay âm thanh nghe như thất bại. | **LIVE 310bad2e** (25/11 04:57Z: `audio/sfx-tap.mp3` thay tại chỗ). Rủi ro: máy đã nhớ tiếng cũ (gói offline, iOS) vẫn có thể nghe tiếng cũ → **đang làm (SOUND-CACHE)**: đổi tên file. | Tiếng bấm nhẹ, không «tèo». |
 | **Thứ tự ngày mới / cửa sổ chồng nhau (từ 24/11).** | **LIVE 611fca61** (Bundle 1: dialog-order-r4 4594ec2b, `jdayq.js` DIALOG-ORDER r2/r4, test `dayq-hold`). | Hộp thoại không chen lên màn của mình. |
-| **Hàng chờ lên live (lander LC24).** | **Mới nhất f28d28b9** (gói giao diện lc29-ui: dfx, map-r9, sil-eunuch, rv171-land = kk56-live + kit-std-audit, verdict-dlg-fix-r172, 7 nhánh -lrm gồm kit-name-stranger và kit-veil-buoi, kc-odds-chip-r3). Trước đó 00dca386 (sx-scope-fix + scope-classb + kc-nc-palace). Trước đó 0562e15f (door-onetap 371067c9 + act-move 90488b6c: mọi cửa hành sự thành một chạm, việc người chuyển ra Dư đồ; lệnh sếp 27/11 ~00:32–01:14Z, ngoài khoảng 25–26/11 nên không có dòng riêng). **Bundle 1 = 611fca61** (ring-build, kk54 place-close, boot-skel-flash, dialog-order-r4, e-odds2, npcroads-red, title-parity, result-sieve; kit-std-audit rút lại, goal-links + map-r9 ra ngoài vì xung đột mã). Đã lên live từ lần trước: lc23-oan 53319e6f (số 37), renderer-mem 03a8c17c (sửa nghẽn bộ nhớ, không thuộc dòng nào của sếp), os stack 504d2e6a (số 19, 20, 38), pace-all + stat-pace 4cfcda61 (số 15, 55), wording-gain 539603bf (số 53), firstcard-3 814bd77d (số 43), title-bal fa722503 (số 46, 54), wording-marks 540358c4 (số 53), mg-trim 0b43ee55 (số 14, 21, 27), ob-verdict-3 98c77517 (số 42). Cũng đã lên live: end-maxrank 17f23656, dayq-qsoftlock b16b4b93 (sửa kẹt ngày), parity-facfix 066d9af0, kptitle-close 4cd3f974 (không thuộc dòng riêng của sếp). Còn xếp hàng/giữ: map-zones-r7, mg-trim-r6, kit-bac-progress, contest-thitam, kit-stage-r2 (chờ sếp xem video).
+| **Hàng chờ lên live (lander LC24).** | **Mới nhất bd47c753** (ngăn xếp lưu Foreman B rv26: sửa mất ván khi QuotaExceeded và lùi ván khi tải lại; không có dòng riêng của sếp). Trước đó 772bee4f (lc31-goal), lc30-b2 (help-housemate, srv-rank, selx-fair), lc30-kg82 (kg82-phase, sửa kẹt). **f28d28b9** (gói giao diện lc29-ui: dfx, map-r9, sil-eunuch, rv171-land = kk56-live + kit-std-audit, verdict-dlg-fix-r172, 7 nhánh -lrm gồm kit-name-stranger và kit-veil-buoi, kc-odds-chip-r3). Trước đó 00dca386 (sx-scope-fix + scope-classb + kc-nc-palace). Trước đó 0562e15f (door-onetap 371067c9 + act-move 90488b6c: mọi cửa hành sự thành một chạm, việc người chuyển ra Dư đồ; lệnh sếp 27/11 ~00:32–01:14Z, ngoài khoảng 25–26/11 nên không có dòng riêng). **Bundle 1 = 611fca61** (ring-build, kk54 place-close, boot-skel-flash, dialog-order-r4, e-odds2, npcroads-red, title-parity, result-sieve; kit-std-audit rút lại, goal-links + map-r9 ra ngoài vì xung đột mã). Đã lên live từ lần trước: lc23-oan 53319e6f (số 37), renderer-mem 03a8c17c (sửa nghẽn bộ nhớ, không thuộc dòng nào của sếp), os stack 504d2e6a (số 19, 20, 38), pace-all + stat-pace 4cfcda61 (số 15, 55), wording-gain 539603bf (số 53), firstcard-3 814bd77d (số 43), title-bal fa722503 (số 46, 54), wording-marks 540358c4 (số 53), mg-trim 0b43ee55 (số 14, 21, 27), ob-verdict-3 98c77517 (số 42). Cũng đã lên live: end-maxrank 17f23656, dayq-qsoftlock b16b4b93 (sửa kẹt ngày), parity-facfix 066d9af0, kptitle-close 4cd3f974 (không thuộc dòng riêng của sếp). Còn xếp hàng/giữ: map-zones-r7, mg-trim-r6, kit-bac-progress, contest-thitam, kit-stage-r2 (chờ sếp xem video).
 
 ## 6. Sếp báo 27/11 (00:05Z → 07:20Z)
 
-Bản kiểm trên main **f28d28b9**. Nhánh liệt kê lấy từ `git ls-remote` và so với lịch sử main; «chưa lên live» = chưa thấy mã trên main.
+Bản kiểm trên main **bd47c753**. Nhánh liệt kê lấy từ `git ls-remote` và so với lịch sử main; «chưa lên live» = chưa thấy mã trên main.
 
 | Việc sếp báo · quyết định | Trạng thái + bằng chứng | Sếp sẽ thấy |
 |---|---|---|
@@ -115,10 +115,11 @@ Bản kiểm trên main **f28d28b9**. Nhánh liệt kê lấy từ `git ls-remot
 | **75. Rà hết việc sếp hỏi mấy ngày qua, ai đang làm.** «Không thể một việc cứ làm tới làm lui.» | **Luật ghi nhận.** Chính là báo cáo này. | Một bảng cho sếp xem. |
 | **76. Lên live theo nhóm; mọi thay đổi vẫn qua người kiểm.** Nhóm theo khu vực; rút lại lệnh bỏ qua kiểm cho việc đổi màu (07:15Z). | **LIVE 611fca61** (Bundle 1) + 0562e15f (đợt kế). | Mỗi đợt lên live gồm nhiều việc cùng khu. |
 | **77. Lỗi `sx` ReferenceError (MAIN 177).** Sửa gấp. | **LIVE 00dca386** (sx-scope-fix 79c5a62d: sửa «sx is not defined» trong `jkc`/`jkc2`, kèm scope-classb và kc-nc-palace). | Hết văng lỗi. |
+| **78. Vừa vào game thấy màn khung trống thô sơ trước màn tựa.** «Rương mở đồ ok, nhưng khi vừa vào game, lại có cái màn này bị lỗi nè» (ô trống, thanh chỉ số thành khối nâu to). | **LIVE 611fca61** (Bundle 1: boot-skel-flash 6e11c262; test `boot-skel-strip`). | Vào game không còn thấy khung trống lóe lên. |
 
 ## 5. Hết
 
-~67% xong · ~67% chơi được (đếm theo bảng: 45 live + 7 nửa live trên 72 việc có bản dựng; việc đã live đều chơi được)
+~69% xong · ~69% chơi được (đếm theo bảng: 47 live + 7 nửa live trên 73 việc có bản dựng; việc đã live đều chơi được)
 
 ---
 Cập nhật: sửa file .md này rồi chạy `python3 dev/handover/reports/owner-bugs/build_pdf.py` (cần Playwright).
