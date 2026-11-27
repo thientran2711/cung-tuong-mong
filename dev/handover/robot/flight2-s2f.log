@@ -1,0 +1,181 @@
+GAME BUILD {"s":"0a4c8010+","b":"d402e37a51ed","t":"2026-11-26T02:21Z"}
+CP buổi 50 year 1 save 312267 chars
+CP buổi 100 year 1 save 432842 chars
+CP buổi 150 year 2 save 456350 chars
+CP buổi 200 year 2 save 524986 chars
+CP buổi 250 year 2 save 588728 chars
+CP buổi 300 year 3 save 745915 chars
+CP buổi 350 year 3 save 827428 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:348:13)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:557:9 {
+  log: []
+}
+RESUME flight2-s2f from 2026-11-26T05:24:16.698Z buổi 361
+CP buổi 361 year null save 880098 chars
+CP buổi 411 year 4 save 940015 chars
+CP buổi 461 year 4 save 1123921 chars
+CP buổi 511 year 4 save 1165144 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:351:324)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:570:9 {
+  log: []
+}
+RESUME flight2-s2f from 2026-11-26T06:13:43.784Z buổi 521
+CP buổi 521 year null save 1238373 chars
+CP buổi 571 year 5 save 1268758 chars
+CP buổi 621 year 5 save 1339070 chars
+CP buổi 671 year 5 save 1391726 chars
+STATUS flight2-s2f · buổi 719 · year 6 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 721 year 6 save 1480486 chars
+CP buổi 771 year 6 save 1611130 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:355:324)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:575:9 {
+  log: []
+}
+RESUME flight2-s2f from 2026-11-26T07:39:24.936Z buổi 796
+CP buổi 796 year null save 1652576 chars
+CP buổi 846 year 7 save 1712082 chars
+CP buổi 896 year 7 save 1732321 chars
+CP buổi 946 year 7 save 1826581 chars
+touchscreen.tap: Target page, context or browser has been closed
+    at tap1 (/home/user/wt/rt/dev/test/realtap.js:122:39)
+    at async Object.tap (/home/user/wt/rt/dev/test/realtap.js:97:46)
+    at async Object.play (/home/user/wt/rt/dev/test/robot-rt.js:354:14)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:581:9 {
+  log: []
+}
+RESUME flight2-s2f from 2026-11-26T08:31:53.320Z buổi 956
+CP buổi 956 year null save 1884458 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «Quản sự ma ma Doãn Uyển Hề»
+CNV EXIT CHOICE buổi 991 → /home/user/wt/out4/shots-flight2-s2f/cnvexit-991.json opts ["Xuất cung về quê","Xin ở lại"]
+CNV EXIT CHOICE picked «Xin ở lạiRất vữngTốnkhôngĐượcở lại đến b»
+CP buổi 1006 year 8 save 1906862 chars
+CP buổi 1056 year 8 save 1963269 chars
+CP buổi 1106 year 8 save 2032590 chars
+STATUS flight2-s2f · buổi 1126 · year 8 · rank 0 · bugs 1 · stuck 0 · dead buttons 0
+CP buổi 1156 year 9 save 2115128 chars
+CP buổi 1206 year 9 save 2208801 chars
+CP buổi 1256 year 9 save 2414862 chars
+STATUS flight2-s2f · buổi 1267 · year 9 · rank 0 · bugs 1 · stuck 0 · dead buttons 0
+touchscreen.tap: Target page, context or browser has been closed
+    at tap1 (/home/user/wt/rt/dev/test/realtap.js:122:39)
+    at async Object.tap (/home/user/wt/rt/dev/test/realtap.js:97:46)
+    at async Object.play (/home/user/wt/rt/dev/test/robot-rt.js:360:14)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:592:9 {
+  log: []
+}
+RESUME flight2-s2f from 2026-11-26T10:41:55.527Z buổi 1281
+CP buổi 1281 year null save 2531186 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:399:13)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:620:9 {
+  log: []
+}
+RESUME flight2-s2f from 2026-11-26T10:51:37.463Z buổi 1299
+CP buổi 1299 year null save 2494779 chars
+CP buổi 1349 year 10 save 2640118 chars
+CP buổi 1399 year 10 save 2837713 chars
+STATUS flight2-s2f · buổi 1442 · year 11 · rank 0 · bugs 1 · stuck 0 · dead buttons 0
+CP buổi 1449 year 11 save 2864677 chars
+CP buổi 1499 year 11 save 2890088 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:389:324)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:620:9 {
+  log: []
+}
+RESUME flight2-s2f from 2026-11-26T12:40:35.297Z buổi 1505
+CP buổi 1505 year null save 0 chars
+BUG stuck life not (re)opened within 5 min on #modal «Chọn sổ»
+BUG stuck life not (re)opened within 5 min on #modal «Cung Tường Mộng»
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:395:24)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:675:9 {
+  log: []
+}
+RESUME flight2-s2f from 2026-11-26T12:40:35.297Z buổi 1505
+CP buổi 1505 year null save 2892036 chars
+BUG game item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)
+BUG note item pick grid: no item can be given now (616 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+BUG note item pick grid: no item can be given now (632 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:215:69)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:675:9 {
+  log: []
+}
+RESUME flight2-s2f from 2026-11-26T14:40:57.823Z buổi 1540
+RESUME: save restored on https://thientran2711.github.io (2917525 of 2917525 chars, 12 keys)
+CP buổi 1540 year null save 2917525 chars
+BUG note item pick grid: no item can be given now (654 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+BUG note item pick grid: no item can be given now (666 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+BUG note item pick grid: no item can be given now (686 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+STATUS flight2-s2f · buổi 1570 · year 11 · rank 0 · bugs 7 · stuck 0 · dead buttons 0
+BUG note item pick grid: no item can be given now (688 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+BUG note item pick grid: no item can be given now (700 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+CP buổi 1590 year 12 save 3080829 chars
+BUG note item pick grid: no item can be given now (716 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+BUG note item pick grid: no item can be given now (728 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+STATUS flight2-s2f · buổi 1600 · year 12 · rank 0 · bugs 11 · stuck 0 · dead buttons 0
+BUG note item pick grid: no item can be given now (738 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+CP buổi 1640 year 12 save 3202011 chars
+BUG crash tab crashed (Page crashed) at buổi 1688
+PAGE CRASHED flight2-s2f at buổi 1688 → exit 3, rerun with resume=1
+RESUME flight2-s2f from 2026-11-26T17:32:34.427Z buổi 1688
+BUILD MISMATCH at reload: life recorded on 1dcb373e+ (5ab5b80e406e 2026-11-26T10:49Z), page is 03e9c9d2 (4eb0cbfc91b0 2026-11-26T14:23Z) via https://thientran2711.github.io/cung-tuong-mong/ — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b 5ab5b80e406e <port>) and resume
+BUG harness BUILD MISMATCH at reload: life recorded on 1dcb373e+ (5ab5b80e406e 2026-11-26T10:49Z), page is 03e9c9d2 (4eb0cbfc91b0 2026-11-26T14:23Z) via https://thientran2711.github.io/cung-tuong-mong/ — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b 5ab5b80e406e <port>) and resume
+RESUME flight2-s2f from 2026-11-26T17:32:34.427Z buổi 1688
+BUILD MISMATCH at reload: life recorded on 1dcb373e+ (5ab5b80e406e 2026-11-26T10:49Z), page is 03e9c9d2 (4eb0cbfc91b0 2026-11-26T14:23Z) via https://thientran2711.github.io/cung-tuong-mong/ — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b 5ab5b80e406e <port>) and resume
+BUG harness BUILD MISMATCH at reload: life recorded on 1dcb373e+ (5ab5b80e406e 2026-11-26T10:49Z), page is 03e9c9d2 (4eb0cbfc91b0 2026-11-26T14:23Z) via https://thientran2711.github.io/cung-tuong-mong/ — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b 5ab5b80e406e <port>) and resume
+RESUME flight2-s2f from 2026-11-26T17:32:34.427Z buổi 1688
+BUILD MISMATCH at reload: life recorded on 1dcb373e+ (5ab5b80e406e 2026-11-26T10:49Z), page is 03e9c9d2 (4eb0cbfc91b0 2026-11-26T14:23Z) via https://thientran2711.github.io/cung-tuong-mong/ — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b 5ab5b80e406e <port>) and resume
+BUG harness BUILD MISMATCH at reload: life recorded on 1dcb373e+ (5ab5b80e406e 2026-11-26T10:49Z), page is 03e9c9d2 (4eb0cbfc91b0 2026-11-26T14:23Z) via https://thientran2711.github.io/cung-tuong-mong/ — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b 5ab5b80e406e <port>) and resume
+RESUME flight2-s2f from 2026-11-26T17:32:34.427Z buổi 1688
+BUILD MISMATCH at reload: life recorded on 1dcb373e+ (5ab5b80e406e 2026-11-26T10:49Z), page is 03e9c9d2 (4eb0cbfc91b0 2026-11-26T14:23Z) via https://thientran2711.github.io/cung-tuong-mong/ — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b 5ab5b80e406e <port>) and resume
+BUG harness BUILD MISMATCH at reload: life recorded on 1dcb373e+ (5ab5b80e406e 2026-11-26T10:49Z), page is 03e9c9d2 (4eb0cbfc91b0 2026-11-26T14:23Z) via https://thientran2711.github.io/cung-tuong-mong/ — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b 5ab5b80e406e <port>) and resume
+RESUME flight2-s2f from 2026-11-26T17:32:34.427Z buổi 1688
+BUILD MISMATCH at reload: life recorded on 1dcb373e+ (5ab5b80e406e 2026-11-26T10:49Z), page is 03e9c9d2 (4eb0cbfc91b0 2026-11-26T14:23Z) via https://thientran2711.github.io/cung-tuong-mong/ — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b 5ab5b80e406e <port>) and resume
+BUG harness BUILD MISMATCH at reload: life recorded on 1dcb373e+ (5ab5b80e406e 2026-11-26T10:49Z), page is 03e9c9d2 (4eb0cbfc91b0 2026-11-26T14:23Z) via https://thientran2711.github.io/cung-tuong-mong/ — hard stop; serve the recorded build (dev/test/rt-serve-build.sh --b 5ab5b80e406e <port>) and resume
+RESUME flight2-s2f from 2026-11-26T17:32:34.427Z buổi 1688
+RESUME: save restored on http://127.0.0.1:8729 (3301818 of 3301818 chars, 30 keys, ckpt from https://thientran2711.github.io)
+CP buổi 1688 year null save 3301818 chars
+BUG note item pick grid: no item can be given now (794 items, every confirm disabled or greyed; card says «Thường Phấn gạo Son phấn PHẨM Thường LOẠI Son phấn HỢP ĐỀ Hương sắc! Phấn gạo CẦN món còn nhẹ, chưa đủ lễ (nàng ta coi như 1 bạc, cần 12) GH») on «Biếu quà làm lành» → ✕
+STATUS flight2-s2f · buổi 1708 · year 12 · rank 0 · bugs 14 · stuck 0 · dead buttons 0
+BUG note item pick grid: no item can be given now (804 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+BUG note item pick grid: no item can be given now (820 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «kemo kemo-binh kemo-live kemo-m-nod»
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «kemo kemo-so kemo-live kemo-m-tremble»
+NO-EXIT DIALOG .kmov «» div.kmov.kcf.km-full — picker stalled 94 steps, no close / next
+BUG harness NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): picker stalled 94 steps, no close / next → later visits unstuck at once by taps
+BUG harness picker stalled 94 steps / 60 s on .kmov «» without a real tap (area 94, deadEnd 1; last refused tap: gone «Ta biết rồi») → tapped «Ta biết rồi»
+BUG crash tab crashed (Page crashed) at buổi 1724
+PAGE CRASHED flight2-s2f at buổi 1724 → exit 3, rerun with resume=1
+RESUME flight2-s2f from 2026-11-26T19:29:25.825Z buổi 1723
+RESUME: save restored on http://127.0.0.1:8729 (3266225 of 3266225 chars, 30 keys)
+CP buổi 1723 year null save 3266225 chars
+BUG note item pick grid: no item can be given now (836 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+BUG note item pick grid: no item can be given now (854 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+STATUS flight2-s2f · buổi 1748 · year 13 · rank 0 · bugs 23 · stuck 0 · dead buttons 0
+BUG note item pick grid: no item can be given now (866 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+BUG crash tab crashed (Page crashed) at buổi 1763
+PAGE CRASHED flight2-s2f at buổi 1763 → exit 3, rerun with resume=1
+RESUME flight2-s2f from 2026-11-26T21:22:48.107Z buổi 1763
+RESUME: save restored on http://127.0.0.1:8729 (3371689 of 3371689 chars, 30 keys)
+CP buổi 1763 year null save 3371689 chars
+BUG note item pick grid: no item can be given now (876 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+STATUS flight2-s2f · buổi 1784 · year 13 · rank 0 · bugs 26 · stuck 0 · dead buttons 0
+BUG note item pick grid: no item can be given now (890 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+BUG note item pick grid: no item can be given now (906 items, every confirm disabled or greyed; card says «Thường Than liễu Son phấn PHẨM Thường LOẠI Son phấn! Than liễu CẦN món còn nhẹ, chưa đủ lễ (nàng ta coi như 1 bạc, cần 12) GHI CHÚ chọn rồi ») on «Biếu quà làm lành» → ✕
+BUG crash tab crashed (Page crashed) at buổi 1796
+PAGE CRASHED flight2-s2f at buổi 1796 → exit 3, rerun with resume=1
+RESUME flight2-s2f from 2026-11-26T23:09:21.357Z buổi 1796
+RESUME: save restored on http://127.0.0.1:8729 (3406274 of 3406274 chars, 30 keys)
+CP buổi 1796 year null save 3406274 chars
+BUG note item pick grid: no item can be given now (918 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕
+CP buổi 1846 year 13 save 3546965 chars
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «kemo kemo-tutin kemo-live kemo-m-nod»
+STATUS flight2-s2f · buổi 1881 · year 13 · rank 0 · bugs 31 · stuck 0 · dead buttons 0
+CP buổi 1896 year 14 save 3610912 chars
+BUG game no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): #kdaytc «» — lost: Ô lưu / Xem bản thân / Sắc69Tài62Tâm cơ54Đức78D / Bạc11Sức99/99
+CP buổi 1946 year 14 save 3742309 chars
+LIFE DONE flight2-s2f Hồng nhan bạc mệnh age 31 · buổi 1964 · taps 1835 · dead buttons 0 · stuck 0 · bugs 32
