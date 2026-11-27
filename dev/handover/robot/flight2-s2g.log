@@ -1,0 +1,614 @@
+BUILD PIN: life flight2-s2g on 539603bf+ c1633dab8e17 served at http://127.0.0.1:8897/
+GAME BUILD {"s":"539603bf+","b":"c1633dab8e17","t":"2026-11-26T21:29Z"}
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:481:45)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:748:9 {
+  log: []
+}
+RESUME flight2-s2g from 2026-11-27T00:40:39.627Z buổi 16
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+RESUME: save restored on http://127.0.0.1:8897 (363794 of 363794 chars, 17 keys)
+RESUME: hclh-save-v2-1 content identical (hash ckpt 2258a934 · page 2258a934, clock ckpt 1.2.0.2 · page 1.2.0.2)
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/lo.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/lo.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/binh.webp
+PAGE CONSOLE error ×100: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD hat 59 moves 4/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×200: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD hat 86 moves 5/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×300: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD hat 61 moves 6/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 71 moves 6/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×400: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error ×500: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD hat 64 moves 7/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×600: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 50 year 1 save 549892 chars
+BOARD kim 0 moves 0/10 raw 0.00 (98 s, area 57, rand)
+PAGE CONSOLE error ×700: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD hat 74 moves 7/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×800: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD mua 24 moves 10/10 raw 10.00 (31 s, area 0, rand)
+PAGE CONSOLE error ×900: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×1000: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD td_cong 134 moves 4/10 raw 3.82 (63 s, area 0, rand)
+BOARD hat 65 moves 8/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×1100: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD dan 12 moves 1/10 raw 5.20 (21 s, area 0, rand)
+PAGE CONSOLE error ×1200: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error ×1300: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error ×1400: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+AREA BLOCKED {"screen":".kmov «»","x":583,"y":375,"ev":"touchstart","hit":"img.kemo.kemo-tinhtu.kemo-live","tgt":"img.kemo.kemo-tinhtu.kemo-live","dt":19,"top0":"img.kfr"}
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «kemo kemo-tinhtu kemo-live kemo-m-sway»
+NO-EXIT DIALOG .kmov «» div.kmov.kcf.km-full — picker stalled 79 steps, no close / next
+BUG harness NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): picker stalled 79 steps, no close / next → later visits unstuck at once by taps
+BUG harness picker stalled 79 steps / 61 s on .kmov «» without a real tap (area 79, deadEnd 1; last refused tap: gone «Nhận») → tapped «Ta biết rồi»
+PAGE CONSOLE error ×1500: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/sfx-birth.mp3?h=424a426e0ebeca54
+BUG game item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)
+PAGE CONSOLE error ×1600: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD hat 67 moves 8/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 100 year 1 save 713346 chars
+PAGE CONSOLE error ×1700: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD mua 24 moves 10/10 raw 10.00 (30 s, area 0, rand)
+PAGE CONSOLE error ×1800: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD tho 0 moves 0/10 raw 0.00 (84 s, area 49, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (33 s, area 0, rand)
+PAGE CONSOLE error ×1900: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD tho 0 moves 2/10 raw 0.00 (84 s, area 49, rand)
+PAGE CONSOLE error ×2000: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+AREA BLOCKED {"screen":"#kg82 «»","x":544,"y":620,"ev":"touchstart","hit":"button","tgt":"button","dt":12,"top0":"div#kg82box.kgbox.kgbox-bg"}
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «»
+AREA BLOCKED {"screen":"#kg82 «»","x":392,"y":476,"ev":"touchstart","hit":"button","tgt":"button","dt":12,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":210,"y":607,"ev":"touchstart","hit":"button","tgt":"button","dt":10,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":400,"y":441,"ev":"touchstart","hit":"button","tgt":"button","dt":10,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":423,"y":476,"ev":"touchstart","hit":"button","tgt":"button","dt":9,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":354,"y":579,"ev":"touchstart","hit":"button","tgt":"button","dt":8,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":263,"y":612,"ev":"touchstart","hit":"button","tgt":"button","dt":10,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":446,"y":580,"ev":"touchstart","hit":"button","tgt":"button","dt":10,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":211,"y":425,"ev":"touchstart","hit":"button","tgt":"button","dt":9,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":212,"y":417,"ev":"touchstart","hit":"button","tgt":"button","dt":9,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":540,"y":446,"ev":"touchstart","hit":"button","tgt":"button","dt":9,"top0":"div#kg82box.kgbox.kgbox-bg"}
+PAGE CONSOLE error ×2100: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+AREA BLOCKED {"screen":"#kg82 «»","x":491,"y":590,"ev":"touchstart","hit":"button","tgt":"button","dt":9,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":492,"y":539,"ev":"touchstart","hit":"button","tgt":"button","dt":9,"top0":"div.goban"}
+FREEZE STACK buổi 115 renderer 1244 MB: f @:1:232
+AREA BLOCKED {"screen":"#kg82 «»","x":278,"y":568,"ev":"touchstart","hit":"button","tgt":"button","dt":9,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":543,"y":562,"ev":"touchstart","hit":"button","tgt":"button","dt":10,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":400,"y":414,"ev":"touchstart","hit":"button","tgt":"button","dt":10,"top0":"div.goban"}
+BOARD co 0 moves still in play (367 s, area 92, rand)
+BUG harness BOARD co still in play after 6 min (0 moves) — the round never ended
+AREA BLOCKED {"screen":"#kg82 «»","x":211,"y":546,"ev":"touchstart","hit":"button","tgt":"button","dt":10,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":540,"y":419,"ev":"touchstart","hit":"button","tgt":"button","dt":10,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":354,"y":441,"ev":"touchstart","hit":"button","tgt":"button","dt":10,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":210,"y":476,"ev":"touchstart","hit":"button","tgt":"button","dt":9,"top0":"div#kg82box.kgbox.kgbox-bg"}
+PAGE CONSOLE error ×2200: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+AREA BLOCKED {"screen":"#kg82 «»","x":427,"y":522,"ev":"touchstart","hit":"button","tgt":"button","dt":9,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":215,"y":601,"ev":"touchstart","hit":"button","tgt":"button","dt":6,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":308,"y":393,"ev":"touchstart","hit":"button","tgt":"button","dt":9,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":221,"y":521,"ev":"touchstart","hit":"button","tgt":"button","dt":9,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":399,"y":466,"ev":"touchstart","hit":"button","tgt":"button","dt":10,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":212,"y":535,"ev":"touchstart","hit":"button","tgt":"button","dt":10,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":309,"y":581,"ev":"touchstart","hit":"button","tgt":"button","dt":55,"top0":"div.goban"}
+FREEZE STACK buổi 115 renderer 852 MB: Mt._tick @:7:65685
+BOARD co 0 moves still in play (366 s, area 78, rand)
+AREA BLOCKED {"screen":"#kg82 «»","x":263,"y":465,"ev":"touchstart","hit":"button","tgt":"button","dt":52,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":301,"y":613,"ev":"touchstart","hit":"button","tgt":"button","dt":53,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":541,"y":475,"ev":"touchstart","hit":"button","tgt":"button","dt":45,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":214,"y":476,"ev":"touchstart","hit":"button","tgt":"button","dt":41,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":254,"y":521,"ev":"touchstart","hit":"button","tgt":"button","dt":48,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":213,"y":568,"ev":"touchstart","hit":"button","tgt":"button","dt":50,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":211,"y":422,"ev":"touchstart","hit":"button","tgt":"button","dt":86,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":211,"y":467,"ev":"touchstart","hit":"button","tgt":"button","dt":35,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":540,"y":613,"ev":"touchstart","hit":"button","tgt":"button","dt":46,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":279,"y":430,"ev":"touchstart","hit":"button","tgt":"button","dt":20,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":212,"y":611,"ev":"touchstart","hit":"button","tgt":"button","dt":30,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":400,"y":595,"ev":"touchstart","hit":"button","tgt":"button","dt":49,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":492,"y":610,"ev":"touchstart","hit":"button","tgt":"button","dt":47,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":233,"y":613,"ev":"touchstart","hit":"button","tgt":"button","dt":34,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":213,"y":553,"ev":"touchstart","hit":"button","tgt":"button","dt":48,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":211,"y":412,"ev":"touchstart","hit":"button","tgt":"button","dt":51,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":537,"y":474,"ev":"touchstart","hit":"button","tgt":"button","dt":35,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":540,"y":588,"ev":"touchstart","hit":"button","tgt":"button","dt":48,"top0":"div#kg82box.kgbox.kgbox-bg"}
+FREEZE STACK buổi 115 renderer 847 MB: Mt._tick @:7:65685
+AREA BLOCKED {"screen":"#kg82 «»","x":263,"y":428,"ev":"touchstart","hit":"button","tgt":"button","dt":56,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":211,"y":567,"ev":"touchstart","hit":"button","tgt":"button","dt":52,"top0":"div#kg82box.kgbox.kgbox-bg"}
+BOARD co 0 moves still in play (366 s, area 82, rand)
+AREA BLOCKED {"screen":"#kg82 «»","x":212,"y":560,"ev":"touchstart","hit":"button","tgt":"button","dt":47,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":546,"y":444,"ev":"touchstart","hit":"button","tgt":"button","dt":52,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":537,"y":606,"ev":"touchstart","hit":"button","tgt":"button","dt":53,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":215,"y":534,"ev":"touchstart","hit":"button","tgt":"button","dt":55,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":324,"y":431,"ev":"touchstart","hit":"button","tgt":"button","dt":45,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":544,"y":581,"ev":"touchstart","hit":"button","tgt":"button","dt":44,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":214,"y":506,"ev":"touchstart","hit":"button","tgt":"button","dt":52,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":537,"y":575,"ev":"touchstart","hit":"button","tgt":"button","dt":22,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":542,"y":422,"ev":"touchstart","hit":"button","tgt":"button","dt":47,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":263,"y":466,"ev":"touchstart","hit":"button","tgt":"button","dt":50,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":388,"y":522,"ev":"touchstart","hit":"button","tgt":"button","dt":35,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":214,"y":423,"ev":"touchstart","hit":"button","tgt":"button","dt":38,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":326,"y":431,"ev":"touchstart","hit":"button","tgt":"button","dt":46,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":213,"y":523,"ev":"touchstart","hit":"button","tgt":"button","dt":50,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":537,"y":625,"ev":"touchstart","hit":"button","tgt":"button","dt":33,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":354,"y":404,"ev":"touchstart","hit":"button","tgt":"button","dt":56,"top0":"div.goban"}
+FREEZE STACK buổi 115 renderer 819 MB: Mt._tick @:7:65685
+AREA BLOCKED {"screen":"#kg82 «»","x":216,"y":419,"ev":"touchstart","hit":"button","tgt":"button","dt":49,"top0":"div.goban"}
+BOARD co 0 moves still in play (367 s, area 90, rand)
+STATUS flight2-s2g · buổi 115 · year 1 · rank 1 · bugs 6 · stuck 0 · dead buttons 0
+AREA BLOCKED {"screen":"#kg82 «»","x":210,"y":542,"ev":"touchstart","hit":"button","tgt":"button","dt":36,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":209,"y":400,"ev":"touchstart","hit":"button","tgt":"button","dt":39,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":542,"y":486,"ev":"touchstart","hit":"button","tgt":"button","dt":31,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":492,"y":624,"ev":"touchstart","hit":"button","tgt":"button","dt":49,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":545,"y":437,"ev":"touchstart","hit":"button","tgt":"button","dt":47,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":541,"y":562,"ev":"touchstart","hit":"button","tgt":"button","dt":62,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":400,"y":470,"ev":"touchstart","hit":"button","tgt":"button","dt":33,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":542,"y":467,"ev":"touchstart","hit":"button","tgt":"button","dt":48,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":416,"y":521,"ev":"touchstart","hit":"button","tgt":"button","dt":33,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":544,"y":484,"ev":"touchstart","hit":"button","tgt":"button","dt":49,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":545,"y":435,"ev":"touchstart","hit":"button","tgt":"button","dt":51,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":540,"y":623,"ev":"touchstart","hit":"button","tgt":"button","dt":33,"top0":"div#kg82box.kgbox.kgbox-bg"}
+AREA BLOCKED {"screen":"#kg82 «»","x":538,"y":460,"ev":"touchstart","hit":"button","tgt":"button","dt":31,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":520,"y":522,"ev":"touchstart","hit":"button","tgt":"button","dt":17,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":446,"y":426,"ev":"touchstart","hit":"button","tgt":"button","dt":33,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":216,"y":470,"ev":"touchstart","hit":"button","tgt":"button","dt":33,"top0":"div.goban"}
+AREA BLOCKED {"screen":"#kg82 «»","x":498,"y":522,"ev":"touchstart","hit":"button","tgt":"button","dt":35,"top0":"div.goban"}
+FREEZE STACK buổi 115 renderer 838 MB: (anon) @:46206:19
+AREA BLOCKED {"screen":"#kg82 «»","x":447,"y":568,"ev":"touchstart","hit":"button","tgt":"button","dt":33,"top0":"div.goban"}
+BOARD co 0 moves 0/10 raw 0.00 (332 s, area 74, rand)
+BOARD hat 56 moves 8/10 raw 0.00 (22 s, area 0, rand)
+BOARD hoa 2 moves 0/10 raw 0.00 (97 s, area 0, rand)
+BOARD hat 60 moves 8/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 66 moves 8/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×2300: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD hat 71 moves 9/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 150 year 2 save 903704 chars
+BOARD mua 24 moves 10/10 raw 10.00 (27 s, area 0, rand)
+BOARD hat 74 moves 9/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×2400: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD mua 24 moves 10/10 raw 10.00 (30 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (31 s, area 0, rand)
+BOARD tho 0 moves 3/10 raw 0.00 (82 s, area 48, rand)
+BOARD hat 77 moves 9/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 200 year 2 save 1034262 chars
+BOARD ve 2 moves 0/10 raw 0.00 (97 s, area 24, rand)
+BOARD hat 77 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 69 moves 9/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×2500: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD hat 72 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD huong 0 moves 2/10 raw 0.00 (83 s, area 48, rand)
+BOARD huong 0 moves 5/10 raw 1.27 (83 s, area 48, rand)
+BOARD tho 0 moves 4/10 raw 0.00 (82 s, area 48, rand)
+BOARD mua 20 moves 7/10 raw 8.00 (32 s, area 0, rand)
+BOARD hat 76 moves 9/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 250 year 2 save 1149672 chars
+BOARD mua 22 moves 9/10 raw 9.20 (31 s, area 0, rand)
+BOARD hat 77 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 74 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (30 s, area 0, rand)
+PAGE CONSOLE error ×2600: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD hat 84 moves 9/10 raw 0.00 (22 s, area 0, rand)
+STATUS flight2-s2g · buổi 294 · year 3 · rank 1 · bugs 6 · stuck 0 · dead buttons 0
+BOARD hat 58 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (28 s, area 0, rand)
+CP buổi 300 year 3 save 1278329 chars
+BOARD huong 0 moves 7/10 raw 2.48 (83 s, area 48, rand)
+PAGE CONSOLE error ×2700: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD hat 76 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (31 s, area 0, rand)
+BOARD hat 58 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 76 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD dan 9 moves 0/10 raw 3.50 (21 s, area 0, rand)
+BOARD mua 24 moves 9/10 raw 10.00 (32 s, area 0, rand)
+CP buổi 350 year 3 save 1340888 chars
+PAGE CONSOLE error ×2800: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×2900: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 400 year 3 save 1504585 chars
+CP buổi 450 year 4 save 1600228 chars
+PAGE CONSOLE error ×3000: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 500 year 4 save 1707635 chars
+PAGE CONSOLE error ×3100: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/vo-f-gasp-1.mp3?h=bcf0765da8dacddb
+BOARD mua 24 moves 9/10 raw 10.00 (32 s, area 0, rand)
+BOARD hat 67 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 66 moves 9/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 550 year 4 save 1753034 chars
+PAGE CONSOLE error ×3200: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD mua 24 moves 9/10 raw 10.00 (31 s, area 0, rand)
+BOARD hat 53 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 9/10 raw 10.00 (29 s, area 0, rand)
+BOARD hat 78 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 9/10 raw 10.00 (29 s, area 0, rand)
+STATUS flight2-s2g · buổi 576 · year 5 · rank 0 · bugs 6 · stuck 0 · dead buttons 0
+CP buổi 600 year 5 save 1844862 chars
+BOARD hat 63 moves 9/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×3300: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 650 year 5 save 1954555 chars
+PAGE CONSOLE error ×3400: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×3500: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 700 year 5 save 1988268 chars
+PAGE CONSOLE error ×3600: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 750 year 6 save 2149372 chars
+PAGE CONSOLE error ×3700: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/vo-f-gasp-1.mp3?h=bcf0765da8dacddb
+CP buổi 800 year 6 save 2206037 chars
+BOARD kim 0 moves 0/10 raw 0.00 (97 s, area 57, rand)
+PAGE CONSOLE error ×3800: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/sfx-banquet.mp3?h=6c728e321aaa4a75
+BOARD hat 74 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 20 moves 7/10 raw 8.67 (30 s, area 0, rand)
+BOARD hat 54 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (28 s, area 0, rand)
+CP buổi 850 year 6 save 2267870 chars
+PAGE CONSOLE error ×3900: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD hat 72 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (27 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (31 s, area 0, rand)
+PAGE CONSOLE error ×4000: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+STATUS flight2-s2g · buổi 888 · year 7 · rank 0 · bugs 6 · stuck 0 · dead buttons 0
+CP buổi 900 year 7 save 2293946 chars
+PAGE CONSOLE error ×4100: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 950 year 7 save 2434303 chars
+PAGE CONSOLE error ×4200: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 1000 year 7 save 2529046 chars
+PAGE CONSOLE error ×4300: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 1050 year 8 save 2607669 chars
+PAGE CONSOLE error ×4400: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 1100 year 8 save 2692081 chars
+BOARD mua 24 moves 10/10 raw 10.00 (28 s, area 0, rand)
+PAGE CONSOLE error ×4500: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 1150 year 9 save 2718494 chars
+BOARD mua 24 moves 9/10 raw 10.00 (30 s, area 0, rand)
+PAGE CONSOLE error ×4600: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BUG SAVE REWIND: reload went back from b1186 (clock 9.101.1.1) to the stored b1185 (clock 9.101.1.0) (1 buổi lost)
+BOARD hat 63 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 9/10 raw 10.00 (31 s, area 0, rand)
+CP buổi 1200 year 9 save 2727344 chars
+PAGE CONSOLE error ×4700: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+STATUS flight2-s2g · buổi 1211 · year 9 · rank 0 · bugs 6 · stuck 0 · dead buttons 0
+CP buổi 1250 year 9 save 2934798 chars
+PAGE CONSOLE error ×4800: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 1300 year 10 save 2997657 chars
+PAGE CONSOLE error ×4900: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD hat 70 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 9/10 raw 10.00 (32 s, area 0, rand)
+BOARD mua 24 moves 9/10 raw 10.00 (30 s, area 0, rand)
+BOARD hat 76 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 20 moves 7/10 raw 8.40 (32 s, area 0, rand)
+CP buổi 1350 year 10 save 3096653 chars
+BOARD hat 71 moves 9/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×5000: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD kim 0 moves 1/10 raw 0.00 (98 s, area 56, rand)
+BOARD hat 84 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (28 s, area 0, rand)
+BOARD hat 71 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 20 moves 8/10 raw 8.00 (30 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (30 s, area 0, rand)
+BOARD hoa 2 moves 2/10 raw 0.00 (97 s, area 0, rand)
+BOARD hat 82 moves 9/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 1400 year 10 save 3150836 chars
+PAGE CONSOLE error ×5100: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD hat 90 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (30 s, area 0, rand)
+CP buổi 1450 year 11 save 3287176 chars
+PAGE CONSOLE error ×5200: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD mua 24 moves 10/10 raw 10.00 (30 s, area 0, rand)
+STATUS flight2-s2g · buổi 1492 · year 11 · rank 0 · bugs 6 · stuck 0 · dead buttons 0
+BOARD mua 24 moves 10/10 raw 10.00 (31 s, area 0, rand)
+BOARD hat 77 moves 9/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 1500 year 11 save 3304480 chars
+BOARD ban 6 moves 10/10 raw 7.50 (16 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (29 s, area 0, rand)
+BOARD tho 0 moves 4/10 raw 0.00 (83 s, area 48, rand)
+PAGE CONSOLE error ×5300: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD mua 21 moves 8/10 raw 8.50 (30 s, area 0, rand)
+CP buổi 1550 year 11 save 3410938 chars
+PAGE CONSOLE error ×5400: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 1600 year 12 save 3500023 chars
+PAGE CONSOLE error ×5500: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 1650 year 12 save 3629440 chars
+PAGE CONSOLE error ×5600: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 1700 year 12 save 3749458 chars
+BOARD mua 24 moves 10/10 raw 10.00 (33 s, area 0, rand)
+PAGE CONSOLE error ×5700: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD huong 0 moves 6/10 raw 0.00 (85 s, area 49, rand)
+CP buổi 1750 year 13 save 3859701 chars
+BOARD hat 70 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (29 s, area 0, rand)
+STATUS flight2-s2g · buổi 1791 · year 13 · rank 0 · bugs 6 · stuck 0 · dead buttons 0
+PAGE CONSOLE error ×5800: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 1800 year 13 save 3892458 chars
+BOARD kim 0 moves 2/10 raw 0.00 (97 s, area 56, rand)
+BOARD hat 62 moves 9/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 1850 year 13 save 3997935 chars
+PAGE CONSOLE error ×5900: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD dan 10 moves 1/10 raw 4.40 (22 s, area 0, rand)
+PAGE CONSOLE error ×6000: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 1900 year 14 save 4078454 chars
+PAGE CONSOLE error ×6100: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 1950 year 14 save 4194372 chars
+CP buổi 2000 year 14 save 4224528 chars
+PAGE CONSOLE error ×6200: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD mua 24 moves 10/10 raw 10.00 (29 s, area 0, rand)
+BOARD hat 68 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 65 moves 9/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 2050 year 15 save 4332562 chars
+BOARD mua 24 moves 10/10 raw 10.00 (33 s, area 0, rand)
+STATUS flight2-s2g · buổi 2050 · year 15 · rank 0 · bugs 6 · stuck 0 · dead buttons 0
+BOARD mua 24 moves 10/10 raw 10.00 (33 s, area 0, rand)
+PAGE CONSOLE error ×6300: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD hat 65 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 80 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (34 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (31 s, area 0, rand)
+CP buổi 2100 year 15 save 4459091 chars
+PAGE CONSOLE error ×6400: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 2150 year 15 save 4533803 chars
+PAGE CONSOLE error ×6500: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 2200 year 16 save 4557641 chars
+PAGE CONSOLE error ×6600: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 2250 year 16 save 4655616 chars
+PAGE CONSOLE error ×6700: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 2300 year 16 save 4702657 chars
+BOARD mua 24 moves 10/10 raw 10.00 (33 s, area 1, rand)
+STATUS flight2-s2g · buổi 2343 · year 17 · rank 0 · bugs 6 · stuck 0 · dead buttons 0
+CP buổi 2350 year 17 save 4776615 chars
+BOARD hat 82 moves 9/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×6800: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD hat 71 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (30 s, area 0, rand)
+BOARD hat 92 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 49 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 62 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 65 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 74 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD hat 78 moves 9/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 2400 year 17 save 4806282 chars
+BOARD mua 24 moves 10/10 raw 10.00 (32 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (31 s, area 0, rand)
+BOARD hat 64 moves 9/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×6900: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD hat 85 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (30 s, area 0, rand)
+BOARD mua 24 moves 9/10 raw 10.00 (34 s, area 0, rand)
+CP buổi 2450 year 17 save 4915667 chars
+PAGE CONSOLE error ×7000: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 2500 year 18 save 5071445 chars
+BOARD dan 12 moves 3/10 raw 5.20 (21 s, area 0, rand)
+BOARD hat 53 moves 9/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error ×7100: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 2550 year 18 save 5149910 chars
+BOARD hat 70 moves 9/10 raw 0.00 (22 s, area 0, rand)
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5247844 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BUG game QuotaExceededError: the game save no longer fits localStorage (j6 save() swallows it: every later save is lost)
+PAGE CONSOLE error ×2: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5247844 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×3: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5247844 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD mua 24 moves 10/10 raw 10.00 (28 s, area 0, rand)
+BOARD kim 0 moves 3/10 raw 0.00 (97 s, area 56, rand)
+PAGE CONSOLE error ×100: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5262661 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD hat 70 moves 9/10 raw 0.00 (22 s, area 0, rand)
+STATUS flight2-s2g · buổi 2572 · year 18 · rank 0 · bugs 7 · stuck 0 · dead buttons 0
+BOARD hat 56 moves 9/10 raw 0.00 (22 s, area 0, rand)
+BOARD mua 24 moves 10/10 raw 10.00 (31 s, area 0, rand)
+PAGE CONSOLE error ×7200: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×200: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5282277 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD mua 24 moves 10/10 raw 10.00 (29 s, area 0, rand)
+BOARD hat 71 moves 9/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 2600 year 18 save 5154622 chars
+CP SAVE ERROR: setItem failed 259× — QuotaExceededError key hclh-save-v2-1 (5299793 chars)
+BUG SAVE STALE stored b2550 live b2600 chars 5154622 (stored clock 18.218.2.3, live 18.223.2.1, QuotaExceededError)
+BUG game SAVE STALE: the stored save stopped following the live game (QuotaExceededError)
+PAGE CONSOLE error ×300: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5269555 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×400: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5338842 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×7300: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD mua 24 moves 10/10 raw 10.00 (30 s, area 0, rand)
+PAGE CONSOLE error ×500: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5377273 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD hat 93 moves 9/10 raw 0.00 (22 s, area 0, rand)
+CP buổi 2650 year 19 save 5222025 chars
+CP SAVE ERROR: setItem failed 538× — QuotaExceededError key hclh-save-v2-1 (5341031 chars)
+BOARD mua 24 moves 9/10 raw 10.00 (30 s, area 0, rand)
+PAGE CONSOLE error ×600: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5387182 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD tho 0 moves 4/10 raw 0.00 (76 s, area 43, rand)
+PAGE CONSOLE error ×700: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5429628 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD kim 0 moves 3/10 raw 0.00 (98 s, area 53, rand)
+CP buổi 2700 year 19 save 5222025 chars
+CP SAVE ERROR: setItem failed 767× — QuotaExceededError key hclh-save-v2-1 (5437107 chars)
+BUG SAVE STALE stored b2602 live b2700 chars 5222025 (stored clock 18.223.2.3, live 19.232.0.1, QuotaExceededError)
+BOARD hoa 2 moves 3/10 raw 0.00 (97 s, area 0, rand)
+PAGE CONSOLE error ×800: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5484170 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD dan 13 moves 4/10 raw 6.50 (21 s, area 0, rand)
+PAGE CONSOLE error ×7400: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×900: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5546063 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×1000: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5554149 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 2750 year 19 save 5222025 chars
+CP SAVE ERROR: setItem failed 1009× — QuotaExceededError key hclh-save-v2-1 (5538608 chars)
+PAGE CONSOLE error ×1100: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5606341 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×1200: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5588226 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×7500: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 2800 year 20 save 5222025 chars
+CP SAVE ERROR: setItem failed 1278× — QuotaExceededError key hclh-save-v2-1 (5640842 chars)
+BUG SAVE STALE stored b2602 live b2800 chars 5222025 (stored clock 18.223.2.3, live 20.241.0.1, QuotaExceededError)
+PAGE CONSOLE error ×1300: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5650652 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×1400: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5689861 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×1500: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5684341 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 2850 year 20 save 5222025 chars
+CP SAVE ERROR: setItem failed 1542× — QuotaExceededError key hclh-save-v2-1 (5717089 chars)
+STATUS flight2-s2g · buổi 2859 · year 20 · rank 0 · bugs 8 · stuck 0 · dead buttons 0
+PAGE CONSOLE error ×1600: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5711748 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×7600: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×1700: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5694603 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 2900 year 20 save 5222025 chars
+CP SAVE ERROR: setItem failed 1784× — QuotaExceededError key hclh-save-v2-1 (5759741 chars)
+BUG SAVE STALE stored b2602 live b2900 chars 5222025 (stored clock 18.223.2.3, live 20.249.1.1, QuotaExceededError)
+PAGE CONSOLE error ×1800: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5765017 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD co 5 moves 10/10 raw 10.00 (6 s, area 0, rand)
+PAGE CONSOLE error ×7700: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×1900: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5827085 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×2000: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5793937 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 2950 year 21 save 5222025 chars
+CP SAVE ERROR: setItem failed 2013× — QuotaExceededError key hclh-save-v2-1 (5811785 chars)
+PAGE CONSOLE error ×2100: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5928337 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×7800: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/vo-f-gasp-1.mp3?h=bcf0765da8dacddb
+PAGE CONSOLE error ×2200: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5945873 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3000 year 21 save 5222025 chars
+CP SAVE ERROR: setItem failed 2298× — QuotaExceededError key hclh-save-v2-1 (6006262 chars)
+BUG SAVE STALE stored b2602 live b3000 chars 5222025 (stored clock 18.223.2.3, live 21.258.1.1, QuotaExceededError)
+PAGE CONSOLE error ×2300: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6012791 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×2400: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6037097 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×2500: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6095932 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3050 year 21 save 5222025 chars
+CP SAVE ERROR: setItem failed 2567× — QuotaExceededError key hclh-save-v2-1 (6114601 chars)
+PAGE CONSOLE error ×2600: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6121765 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×7900: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×2700: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6160817 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×2800: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6193224 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3100 year 22 save 5222025 chars
+CP SAVE ERROR: setItem failed 2840× — QuotaExceededError key hclh-save-v2-1 (6194450 chars)
+BUG SAVE STALE stored b2602 live b3100 chars 5222025 (stored clock 18.223.2.3, live 22.266.2.1, QuotaExceededError)
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key ctm-nr (18891 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-nr' exceeded the quota.
+PAGE CONSOLE error ×2900: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6244389 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×3000: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6268009 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×8000: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×3100: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6279436 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3150 year 22 save 5222025 chars
+CP SAVE ERROR: setItem failed 3103× — QuotaExceededError key hclh-save-v2-1 (6255615 chars)
+STATUS flight2-s2g · buổi 3154 · year 22 · rank 0 · bugs 8 · stuck 0 · dead buttons 0
+PAGE CONSOLE error ×2: [rt] localStorage.setItem failed: QuotaExceededError key ctm-nr (18912 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-nr' exceeded the quota.
+PAGE CONSOLE error ×3200: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6323662 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×3: [rt] localStorage.setItem failed: QuotaExceededError key ctm-nr (18928 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-nr' exceeded the quota.
+BOARD co 5 moves 10/10 raw 10.00 (6 s, area 0, rand)
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key ctm-gech (128 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-gech' exceeded the quota.
+PAGE CONSOLE error ×3300: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6320469 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×8100: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 3200 year 23 save 5222025 chars
+CP SAVE ERROR: setItem failed 3405× — QuotaExceededError key hclh-save-v2-1 (6346306 chars)
+BUG SAVE STALE stored b2602 live b3200 chars 5222025 (stored clock 18.223.2.3, live 23.275.0.1, QuotaExceededError)
+PAGE CONSOLE error ×3400: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6358357 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×3500: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6393708 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×3600: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6442514 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×8200: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 3250 year 23 save 5222025 chars
+CP SAVE ERROR: setItem failed 3681× — QuotaExceededError key hclh-save-v2-1 (6439279 chars)
+PAGE CONSOLE error ×3700: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6423774 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×3800: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6479435 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×3900: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6480437 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3300 year 23 save 5222025 chars
+CP SAVE ERROR: setItem failed 3965× — QuotaExceededError key hclh-save-v2-1 (6491507 chars)
+BUG SAVE STALE stored b2602 live b3300 chars 5222025 (stored clock 18.223.2.3, live 23.283.1.1, QuotaExceededError)
+PAGE CONSOLE error ×4000: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6519308 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD dan 11 moves 4/10 raw 5.50 (21 s, area 0, rand)
+BOARD co 5 moves 10/10 raw 10.00 (7 s, area 0, rand)
+PAGE CONSOLE error ×8300: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×4100: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6533563 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×4200: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6589842 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3350 year 24 save 5222025 chars
+CP SAVE ERROR: setItem failed 4257× — QuotaExceededError key hclh-save-v2-1 (6588546 chars)
+PAGE CONSOLE error ×4300: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6567184 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×4400: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6619768 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×4500: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6630739 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3400 year 24 save 5222025 chars
+CP SAVE ERROR: setItem failed 4517× — QuotaExceededError key hclh-save-v2-1 (6630739 chars)
+BUG SAVE STALE stored b2602 live b3400 chars 5222025 (stored clock 18.223.2.3, live 24.291.2.1, QuotaExceededError)
+PAGE CONSOLE error ×4600: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6671858 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×8400: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×4700: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6663456 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD co 5 moves 10/10 raw 10.00 (6 s, area 0, rand)
+CP buổi 3450 year 24 save 5222025 chars
+CP SAVE ERROR: setItem failed 4786× — QuotaExceededError key hclh-save-v2-1 (6675095 chars)
+BOARD co 5 moves 10/10 raw 10.00 (6 s, area 0, rand)
+PAGE CONSOLE error ×4800: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6692809 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+STATUS flight2-s2g · buổi 3480 · year 24 · rank 0 · bugs 8 · stuck 0 · dead buttons 0
+PAGE CONSOLE error ×4900: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6792223 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key ctm-kyngo (1187 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-kyngo' exceeded the quota.
+PAGE CONSOLE error ×8500: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/vo-f-gasp-1.mp3?h=bcf0765da8dacddb
+BOARD huong 0 moves 7/10 raw 0.00 (80 s, area 46, rand)
+CP buổi 3500 year 25 save 5222025 chars
+CP SAVE ERROR: setItem failed 5011× — QuotaExceededError key ctm-nr (19947 chars)
+BUG SAVE STALE stored b<2700 live b3500 chars 5222025 (stored clock 18.223.2.3, live 25.300.0.1, QuotaExceededError)
+PAGE CONSOLE error ×5000: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6781376 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×5100: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6843126 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×2: [rt] localStorage.setItem failed: QuotaExceededError key ctm-gech (126 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-gech' exceeded the quota.
+CP buổi 3550 year 25 save 5222025 chars
+CP SAVE ERROR: setItem failed 5260× — QuotaExceededError key hclh-save-v2-1 (6809284 chars)
+PAGE CONSOLE error ×8600: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×5200: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6857050 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×5300: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6956459 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×5400: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6980101 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3600 year 25 save 5222025 chars
+CP SAVE ERROR: setItem failed 5536× — QuotaExceededError key hclh-save-v2-1 (6959880 chars)
+BUG SAVE STALE stored b<2800 live b3600 chars 5222025 (stored clock 18.223.2.3, live 25.309.0.1, QuotaExceededError)
+PAGE CONSOLE error ×8700: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×5500: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (6983505 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×5600: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7014839 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×5700: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7043340 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3650 year 26 save 5222025 chars
+CP SAVE ERROR: setItem failed 5797× — QuotaExceededError key hclh-save-v2-1 (7078486 chars)
+PAGE CONSOLE error ×8800: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×5800: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7107805 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×5900: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7143627 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3700 year 26 save 5222025 chars
+CP SAVE ERROR: setItem failed 6066× — QuotaExceededError key hclh-save-v2-1 (7128895 chars)
+BUG SAVE STALE stored b<2900 live b3700 chars 5222025 (stored clock 18.223.2.3, live 26.317.1.1, QuotaExceededError)
+PAGE CONSOLE error ×6000: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7095681 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×100: [rt] localStorage.setItem failed: QuotaExceededError key ctm-nr (21019 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-nr' exceeded the quota.
+PAGE CONSOLE error ×8900: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD theu 32 moves 9/10 raw 10.00 (27 s, area 0, rand)
+PAGE CONSOLE error ×6100: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7192141 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×6200: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7194891 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3750 year 26 save 5222025 chars
+CP SAVE ERROR: setItem failed 6324× — QuotaExceededError key hclh-save-v2-1 (7230090 chars)
+PAGE CONSOLE error ×6300: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7236117 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×9000: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+STATUS flight2-s2g · buổi 3779 · year 26 · rank 0 · bugs 8 · stuck 0 · dead buttons 0
+PAGE CONSOLE error ×6400: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7297451 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×3: [rt] localStorage.setItem failed: QuotaExceededError key ctm-gech (125 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-gech' exceeded the quota.
+CP buổi 3800 year 27 save 5222025 chars
+CP SAVE ERROR: setItem failed 6612× — QuotaExceededError key hclh-save-v2-1 (7303732 chars)
+BUG SAVE STALE stored b<3000 live b3800 chars 5222025 (stored clock 18.223.2.3, live 27.326.1.1, QuotaExceededError)
+PAGE CONSOLE error ×6500: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7311306 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×6600: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7351297 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×6700: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7370688 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×9100: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD mua 24 moves 9/10 raw 10.00 (32 s, area 0, rand)
+CP buổi 3850 year 27 save 5222025 chars
+CP SAVE ERROR: setItem failed 6899× — QuotaExceededError key hclh-save-v2-1 (7426389 chars)
+PAGE CONSOLE error ×6800: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7399626 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×6900: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7437285 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×7000: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7477135 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3900 year 27 save 5222025 chars
+CP SAVE ERROR: setItem failed 7164× — QuotaExceededError key hclh-save-v2-1 (7455779 chars)
+BUG SAVE STALE stored b<3100 live b3900 chars 5222025 (stored clock 18.223.2.3, live 27.334.2.1, QuotaExceededError)
+PAGE CONSOLE error ×7100: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7488133 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×9200: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×7200: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7525941 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key ctm-ge (36 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-ge' exceeded the quota.
+PAGE CONSOLE error ×7300: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7510830 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3950 year 28 save 5222025 chars
+CP SAVE ERROR: setItem failed 7423× — QuotaExceededError key hclh-save-v2-1 (7485656 chars)
+PAGE CONSOLE error ×7400: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7581237 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×9300: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/vo-f-gasp-1.mp3?h=bcf0765da8dacddb
+PAGE CONSOLE error ×7500: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7606968 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 4000 year 28 save 5222025 chars
+CP SAVE ERROR: setItem failed 7684× — QuotaExceededError key ctm-nr (21739 chars)
+BUG SAVE STALE stored b<3200 live b4000 chars 5222025 (stored clock 18.223.2.3, live 28.343.0.1, QuotaExceededError)
+PAGE CONSOLE error ×7600: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7609907 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×9400: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×7700: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7615987 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD hat 72 moves 9/10 raw 0.00 (22 s, area 0, rand)
+STATUS flight2-s2g · buổi 4046 · year 28 · rank 0 · bugs 8 · stuck 0 · dead buttons 0
+CP buổi 4050 year 28 save 5222025 chars
+CP SAVE ERROR: setItem failed 7930× — QuotaExceededError key hclh-save-v2-1 (7675138 chars)
+PAGE CONSOLE error ×7800: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7730299 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD doi 0 moves 0/10 raw 0.00 (82 s, area 47, rand)
+PAGE CONSOLE error ×9500: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD dan 9 moves 3/10 raw 3.90 (21 s, area 0, rand)
+PAGE CONSOLE error ×7900: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7793278 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×8000: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7846678 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 4100 year 29 save 5222025 chars
+CP SAVE ERROR: setItem failed 8177× — QuotaExceededError key hclh-save-v2-1 (7829431 chars)
+BUG SAVE STALE stored b<3300 live b4100 chars 5222025 (stored clock 18.223.2.3, live 29.352.0.1, QuotaExceededError)
+PAGE CONSOLE error ×8100: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7856855 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×9600: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/vo-f-gasp-1.mp3?h=bcf0765da8dacddb
+PAGE CONSOLE error ×8200: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (7901987 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 4150 year 29 save 5222025 chars
+CP SAVE ERROR: setItem failed 8435× — QuotaExceededError key hclh-save-v2-1 (7883116 chars)
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key cung-kiep (138 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'cung-kiep' exceeded the quota.
+PAGE CONSOLE error ×2: [rt] localStorage.setItem failed: QuotaExceededError key ctm-ge (34 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-ge' exceeded the quota.
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key cung-luanhoi (401 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'cung-luanhoi' exceeded the quota.
+LIFE DONE flight2-s2g Lãnh cung age 47 · buổi 4150 · taps 35446 · dead buttons 0 · stuck 0 · bugs 8
