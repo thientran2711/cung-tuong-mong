@@ -73,6 +73,17 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
    const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0&&!a.pend&&!c.pend){okW=true;break}await sleep(600)}
   const dmp=o=>o.p.evaluate(()=>({wk:COOP.state.week,ended:COOP.state.ended,k:(typeof wk==='function'?wk():0)+':'+(S.buoi||0),Q:Q.length,q0:Q[0]&&String(Q[0].t||'').slice(0,40),mg:!!S.mg,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,nrdy:COOPW.nrdy,ngoW:COOPW.ngoW,inLife:COOPW.inLife,life:COOPW.life,tr:COOPW.tr.slice(-24)})).catch(e=>e.message);
   ok(okW,'after the three ends + rebirths: a week end is reached by both seats',okW?undefined:[await dmp(A),await dmp(B)])}
+ /* N1 (F A-COOP #3 room 3T7K wk70): the guest is ready at tối (her «rd» out) but holds no «where» of her tối (she missed it: rejoin / reload /
+    a new life at tối); the host commits, runs his night and ends. Before: her night waited for a «where» that never comes (his next one is
+    buổi 0) → «Chờ hảo hữu…» for ever, server ended.b false, host «Đợi hảo hữu xong tuần». */
+ {const D=o=>o.p.evaluate(()=>({w:COOP.state.week,b:S.buoi||0,pend:!!COOPW.pend,sent:COOPW.sent,ended:COOP.state.ended,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,wk:COOPW.whereKey,tr:COOPW.tr.slice(-12)})).catch(e=>e.message);
+  const LAST=await A.p.evaluate(()=>typeof B4L==='number'?B4L:3);const press=o=>o.p.evaluate(()=>{const n=document.getElementById('next');if(n&&!n.disabled){n.click();return true}return false}).catch(()=>false);
+  let t0=Date.now();while(Date.now()-t0<180000){await clear(A);await clear(B);const a=await D(A),c=await D(B);if(a.b>=LAST&&c.b>=LAST)break;if(a.b<LAST)await press(A);if(c.b<LAST)await press(B);await sleep(600)}
+  const w0=(await D(A)).w;let rd=false;t0=Date.now();while(Date.now()-t0<30000&&!rd){await clear(B);await press(B);await sleep(500);rd=await B.p.evaluate(()=>!!(COOPW.nReady&&COOPW.nReady()))}
+  ok(rd,'N1: guest ready at tối',await D(B));
+  await B.p.evaluate(()=>{COOPW.whereKey='missed'});/* she holds no «where» of this tối */
+  t0=Date.now();let okN=false;while(Date.now()-t0<120000){await clear(A);await press(A);await B.p.evaluate(()=>{try{COOPW.nCheck()}catch(e){}});const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0){okN=true;break}await sleep(700)}
+  ok(okN,'N1: guest without the tối «where», host ends first → her night runs, the week merges',okN?undefined:[await D(A),await D(B)])}
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});

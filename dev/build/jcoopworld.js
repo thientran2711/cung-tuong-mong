@@ -353,7 +353,7 @@ function snapStats(){const o={};for(const k of ["sung","danh","bac","suc","sac",
 function waiting(){const s=COOP.state;return CW.on&&(CW.sent===wk()||!!(s.ended&&s.ended[CW.seat]))}
 function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOnline||!!CW.hold)}  /* CW.hold: the two are on different builds (swreg.js, KIT §35.2) */
 /* touch #next only when its state really changes (j63 observes every "disabled" write) */
-function lockNext(){const n=$("next");if(!n)return;const eR=!!(CW.on&&eW()&&CW.eWait&&CW.eWait());const wb=CW.on&&(CW.bend||eR||nReady()||needWhere()||!!CW.pendBuoi);const gap=!!(CW.on&&(CW.lvWas|0)>=5&&!eW());/* r1 #3: reconnected, the room level not back yet: no press may take the old road */const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb||gap);
+function lockNext(){const n=$("next");if(!n)return;const eR=!!(CW.on&&eW()&&CW.eWait&&CW.eWait());const wb=CW.on&&(CW.bend||eR||nReady()||whereWait()||!!CW.pendBuoi);const gap=!!(CW.on&&(CW.lvWas|0)>=5&&!eW());/* r1 #3: reconnected, the room level not back yet: no press may take the old road */const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb||gap);
  if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";/* owner 16/11 (owner-coop-stuck.jpg: faded "Sang buổi", no word): every lock says why */
   const s=COOP.state;const t=(CW.bend||eR||nReady()||waiting()||CW.pend)?CTM_WAIT.coopWaitPeer:wb?CTM_WAIT.coopWaitPeer2:CW.hold?CTM_WAIT.coopWaitBuild:frozen()?(s.status==="moved"?CTM_WAIT.coopMoved:s.status!=="open"?CTM_WAIT.coopRelink:CTM_WAIT.coopAbsent):CTM_WAIT.coopLinking;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
   if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait");n.textContent=t}}
@@ -371,6 +371,8 @@ const eW=()=>!!(CW.thin&&CW.thin.on&&CW.thin.on(5));CW.eW=eW;
 /* thin F1 (jcoopthinf, level 6): her acts run on the host as intents; ONE switch fW() */
 const fW=()=>!!(CW.thin&&CW.thin.on&&CW.thin.on(6));CW.fW=fW;
 function needWhere(){if(eW())return false;return CW.on&&CW.p2&&!host()&&CW.whereKey!==bkey()}
+/* review/coop-rebirth-resync: at night, once the friend's end is out (his commit) no «where» of her buổi tối will come (see nCheck): never wait for it */
+function whereWait(){return needWhere()&&!(nAtNight()&&nOtherEnded())}
 /* her place as I see it: her "home" is her own palace; my palace in her eyes ("r"+my pid) is my "home" */
 function mapPlace(pl){if(!pl)return null;if(pl==="home"){const f=friendEntry();return f?palaceOf(f):null}if(pl==="r"+me())return"home";return pl}
 function sendWhere(){if(eW())return;if(!CW.on||!CW.p2||!host()||!S||!S.where)return;const W=mapMe(J(S.where),true,me());delete W[String(fp())];if(S.menW)W.__menW=J(S.menW);
@@ -474,7 +476,7 @@ COOP.on("thin",()=>setTimeout(()=>{try{lockNext();if(!CW.on||!CW.bend||!eW())ret
    CW.nightEnd() ends THIS seat's current buổi once: nothing while her buổi is already ended (bend sent, week pending / sent), while
    the room is frozen, while a dialog or a room step is pending, or while her buổi is not the room's buổi (never ahead of the friend).
    Returns the buổi key it ended ("week:buổi") or "" (nothing done: jnight asks again on the next render). */
-CW.nightEnd=function(){drainAg();if(!CW.on||!S||S.dead||Q.length||S.mg)return"";if(waiting()||frozen()||CW.pend||!CW.base||CW.bend||CW.pendBuoi||needWhere())return"";
+CW.nightEnd=function(){drainAg();if(!CW.on||!S||S.dead||Q.length||S.mg)return"";if(waiting()||frozen()||CW.pend||!CW.base||CW.bend||CW.pendBuoi||whereWait())return"";
  const b=S.buoi||0;if(typeof CW.rbuoi==="number"&&CW.rweek===wk()&&CW.rbuoi!==b)return"";
  const k=bkey();used=BAL.time.khac;nextBuoi();return (CW.bend||nReady()||CW.pend||(S.buoi||0)!==b||(eW()&&CW.eAsked&&CW.eAsked()))?k:""};/* thin E: her ready (or his) is the end of this buổi */
 CW.bkey=bkey;
@@ -854,7 +856,7 @@ COOP.on("act",onAct);COOP.on("res",onRes);COOP.on("actr",onActr);
 /* my acts on her not yet acknowledged (10 s at most: she may have dropped; the freeze covers that) */
 function resWait(){const n=Date.now();for(const id in CW.rpend)if(n-CW.rpend[id]>10000)delete CW.rpend[id];return Object.keys(CW.rpend).length>0}
 let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pend&&resWait()){tryT=setTimeout(tryEnd,400);return}if(CW.on&&CW.pendBuoi&&S&&!Q.length&&!S.mg){onBuoi(CW.pendBuoi);return}
- if(CW.on&&CW.wantB&&S){if(CW.wantB!==bkey()||S.dead||CW.bend||CW.pend||nReady())CW.wantB=null;else if(!Q.length&&!S.mg&&!needWhere()&&!waiting()&&!frozen()&&CW.base){T("wantB go "+CW.wantB);CW.wantB=null;nextBuoi();return}}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
+ if(CW.on&&CW.wantB&&S){if(CW.wantB!==bkey()||S.dead||CW.bend||CW.pend||nReady())CW.wantB=null;else if(!Q.length&&!S.mg&&!whereWait()&&!waiting()&&!frozen()&&CW.base){T("wantB go "+CW.wantB);CW.wantB=null;nextBuoi();return}}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
 function soonEnd(){if(CW.on&&(CW.pend||CW.pendBuoi||CW.wantB||CW.ngoW===wk()||CW.nrdy===wk())&&!tryT)tryT=setTimeout(tryEnd,0)}
 
 /* ---------- receiving ---------- */
@@ -963,7 +965,12 @@ function nCheck(){if(!CW.on||!S)return;const w=wk();
     nrdy / ngoW but its commit CW.ngo stays this week, so the line above the guest's never re-opens it and nGoNow is done: the host sat in
     buổi tối on «Chờ hảo hữu…» for ever while the guest had already ended (both seats stuck, no button). Committed = her night may run. */
  if(host()&&CW.ngo===w&&CW.ngoW!==w&&nAtNight())CW.ngoW=w;
- if(CW.ngoW!==w||CW.pend||CW.sent===w||!nAtNight()||S.dead||Q.length||S.mg||frozen()||!CW.base||needWhere()||CW.inLife)return;
+ /* review/coop-rebirth-resync (F A-COOP #3 room 3T7K wk70, real taps: guest «Chờ hảo hữu…» locked, server ended.b false, host «Đợi hảo hữu xong
+    tuần»): the guest's night waited for the host's «where» of her buổi tối. Once the host's night has run, his next «where» is buổi 0 of the
+    SAME room week (sendWhere after his night), so a guest who missed the tối one (rejoin / reload / a new life on a fresh page at tối) waited
+    for a «where» that never comes → her night never ran, her end never went out, both seats stuck. The NPC places do not matter for the
+    night: when the friend's end is already out (his commit), her night does not wait for a «where». */
+ if(CW.ngoW!==w||CW.pend||CW.sent===w||!nAtNight()||S.dead||Q.length||S.mg||frozen()||!CW.base||whereWait()||CW.inLife)return;
  T("night "+w);CW.allowN=true;try{nextBuoi()}finally{CW.allowN=false}}
 CW.nCheck=()=>nCheck();CW.nightReady=()=>nightReady();CW.mapPlace=mapPlace;CW.refreshHere=()=>refreshHere();
 CW.forceNight=()=>{if(!CW.on||!host()||!nAtNight()||CW.ngo===wk())return false;CW.nforce=wk();nCheck();return true};
@@ -1121,7 +1128,7 @@ const mute=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=funct
  /* same buổi for both: buổi sáng / chiều end with `bend`; the server's `buoi` runs the real step (CW.allow); buổi tối ends the week (`end`) */
  if(CW.p2&&!CW.allow&&(S.buoi||0)<(typeof B4L==="number"?B4L:2)){if(!S||S.dead)return;if(Q.length||S.mg||needWhere()){wantB();return}CW.wantB=null;bend();return}
  /* buổi tối: "Sẵn sàng" only marks her ready; the night + week end (endTurn) runs on the host's `go` for both (nightReady below) */
- if(CW.p2&&!CW.allowN&&(S.buoi||0)>=LASTB()){if(!S||S.dead)return;if(Q.length||S.mg||needWhere()){wantB();return}CW.wantB=null;nightReady();return}
+ if(CW.p2&&!CW.allowN&&(S.buoi||0)>=LASTB()){if(!S||S.dead)return;if(Q.length||S.mg||whereWait()){wantB();return}CW.wantB=null;nightReady();return}
  const r=f.apply(this,arguments);if(!CW.pend){keepFriendPos();refreshHere()}famSweep();return r}})();
 /* #next was wired to the bare nextBuoi in j6 (before any wrapper): in co-op route the button through the wrapped one */
 (function(){const n=$("next");if(!n)return;const o=n.onclick;n.onclick=function(e){if(CW.on)return nextBuoi();return o?o.call(this,e):undefined}})();
