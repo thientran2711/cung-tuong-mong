@@ -30,7 +30,7 @@ function hsvKey(){return hsvList().map(s=>s.sid).join(",")}
 /* the acts: the maid's acts with this servant as the agent, then the Cung nhân tab's acts for this servant */
 function hsvDone(lab,bf,ok){try{if(typeof resultShow==="function")setTimeout(()=>{try{resultShow(lab,bf,ok)}catch(e){}},0)}catch(e){}}
 function hsvActs(s){const A=[],H=BAL.house;if(!s||!(S.staff||[]).includes(s))return A;const nm=s.name,he=s.role==="eunuch"?"hắn":"nàng";
- const c=s.cause,fault=c&&c.fault,merit=c&&!c.fault,tr=s.trouble!=null&&wk()-s.trouble<=4,spy=s.spyFor&&s.spyFor!=="me";
+ const c=s.cause,fault=c&&c.fault,merit=c&&!c.fault,tr=s.trouble!=null&&wk()-s.trouble<=4,spy=s.spyFor&&s.spyFor!=="me"&&knSoldK(s)/* TAI-MAT-KNOW: only once found */;
  /* 1. the trusted maid's acts (j2 Tâm sự numbers, jwhy dò la / nghe ngóng with this servant sent) */
  A.push({n:"Tâm sự",dom:"Sai bảo",o:100,x:`thiện cảm ${nm} ${balSg(BAL.eff.jhouse.loyalRun)}`,run:()=>staffTam(S,s)});
  try{whyMaidInit(s);const t=spyTarget();
