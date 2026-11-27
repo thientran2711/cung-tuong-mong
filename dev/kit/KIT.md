@@ -3094,6 +3094,7 @@ Owner: "Bất kỳ một cái thông báo nào của cái game đều phải vô
 - Every goal / task line that names a person, place, item or act (chapter goals, Mệnh truyện, NPC requests, notices) wraps that name with `kitGoalLink(label, how)`: ONE look `.kglink` = the text underlined with a gold dotted line (no colour change, keyboard reachable).
 - Tap → the small kit info panel «Cách làm»: the person's painting (subject) + kit rows Ai · Ở đâu (place icon §78 + name) · Giờ mở · Tốn · Ghi chú (empty rows are not drawn: they are data the caller has not got, not gain/cost rows) + ONE option «Đi tới» (`tốn: N khắc` from `how.goK`) running `how.go` (walk her there), and a second option «Xem Dư đồ» when `how.map` is given (open the Dư đồ with the place pulsing + the person marked).
 - `how = {who: person object | name, where: place key | name, hours, cost, note, go, goK}` — the caller (goal list) supplies the data from BAL / the place table (law 4: no typed numbers); the kit only draws. Kit page sample §6.2l. Fixer: GOAL-LINKS.
+- KK54 (RV-165 §6.2l, law 10): the panel's nav cards («Đi tới», «Xem Dư đồ») are ONE long row each (kitOptTier: `.kgoalhow` skips the 2-column tier); test kit-goal-link checks `data-kol=1`.
 
 ### 42.3 THỜI TIẾT THEO BUỔI — `WX_BUOI`
 - The week rolls ONE weather (`S.wx.b`, its flag f drives every rule); the WORDS shown follow the buổi (`S.wx.n = wxAt(S.wx.b, buổi)[0]`, icon
