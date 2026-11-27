@@ -647,3 +647,4 @@ FLIGHT2-S19A life (NEW seat s19, sonnet; iPad 1180x820 cautious, seed 2026112548
 E-GAIN3b | review/e-gain3b | session_01DgYSWoLuNzXKnrryMfczWF | READY 78c8608a → BIG rv E-GAIN3b-RV session_01DgYSWoM9Gu8eQ8DXikZPXT | 27/11 07:36Z (Foreman E child2)
 BIG REVIEWER #19 (opus) review/robot-realtap-lc27 605c596a..4a430cc2 (ring crawler job 2 + job 2b F1–F3 fix) | review/robot-realtap-lc27 | (id in FOREMAN_F_STATUS) | RUNNING | 2026-11-27T07:50Z (F ROOT #3)
 D-RANKPACE-RV (BIG rv of review/rank-pace 548ef991) | review/rank-pace(-rv) | FOREMAN D session_01D3E3NagaVYs8K14c2bMUy1 / rv (opening) | RUNNING | 27/11 07:55Z
+HARNESS FIXER #19 (opus) finish job 3 (per-kind board BEFORE/AFTER table, seed 3683447523) + job 4 (two-tap picker in robot-rt, ring-build slice + 3 LIVE slices) | review/robot-realtap-lc27 (from ab6355af) | session_01UV1SziWJHf53TUMtvyFeek | RUNNING | 2026-11-27T07:53Z (F ROOT #3; FIXER #18 rolled at ctx 33 %, archived)
