@@ -56,3 +56,16 @@ Branch `review/tmk-warn` (base review/tmk-oanpace-fix b96bb0d5 — LC33 asked fo
 - LC33 reply (arrived after the roll): there is no 3b restack yet. The current 3b is review/lc31-b3b 07f7cd16; it sits on OLD LIVE, with
   tmk-oanpace-fix-rv 4206db2c and punish-stack on top. Queue: lc32-ui3 → e-gain3 → 3a → 3b restack. This work touches b3b code (jagknow /
   tai-mat-know lineage), so per LC33 the base should be review/lc31-b3b 07f7cd16, with one re-merge expected when 3b lands. MAIN 181 decides.
+
+## TMK-WARN-2 (session_01Rc5AsKKRbFjb8jq7W9R9UA, MAIN 182) — 27/11 ~23:00Z on, START_CTX ~6 % (own estimate; used_tokens read 0) → roll at ~31 %
+- ROOT of OPEN 1 (kit, law 9 → KK63 session_01Rc5AsJdLpzqwAuGx1Gycwg, told 23:15Z; KK62 archived): the hand plate `.khplate` (and the «!»
+  overlay #kpinfo) shows a CLONE `button.opt.ka.kopinfo` with `disabled`; j63.js:239 `button.ka:disabled .kr-mat/.kr-kem/.kr-bai{display:none}`
+  hides Mất / Kèm / Bại → only ĐƯỢC + GHI CHÚ. Same root as KIT_REQUESTS «E75 option «!» overlay hides Kèm / Bại / Mất» (24/11, still OPEN).
+  Proven: injecting `display:revert` for those rows brings MẤT back (Fold + iPad) but breaks the row grid (iPad: one word per line) → the kit
+  keeper fixes it for the whole family (normal .kr display, or an inert clone without `disabled`).
+- My side (cfe1df9d): the jcharge clause was going to **Kèm** (folded) even on the small card: kitParse → kaRows puts a loss with no number and
+  no «khả năng …» clause in Kèm. mcwTakeX now reads «bị đuổi khỏi cung khi {v} bị nắm đủ {need} chứng tội mua chuộc người hầu (mỗi lần {m} dò,
+  ra một chứng: {chanceW(find odds)})», joined to the watch clause with «, » → stays in the Mất row (the «có người nắm chứng …» line = Ghi chú).
+  «Gió lọt» «Cứ làm tai mắt» uses the same text under «mất:» (was «kèm:»). Test adds «the charge stands in the kit Mất row, not Kèm»:
+  tmk-warn.test 17/17 PASS; MUTATE nowarn / notext / nocut exit 1; tmk-warn-scan 0 gaps / 26 sites.
+- Stills (scratchpad): small take card Mất row = watch odds + kill odds + Tân Giả khố + the charge; hand plate still ĐƯỢC + GHI CHÚ until KK63.
