@@ -2526,6 +2526,8 @@ Code `dev/build/j93.js` (after j86, before j84). Art `img/kit/mo-*.webp` (Magnif
 - Tap anywhere skips to the final frame; a second tap closes. Long pieces show "Chạm để bỏ qua" / "Chạm để đóng".
 - `prefers-reduced-motion: reduce` or the "Cảnh động" switch off (`OPT.fxon=false`) = final frame at once, no travel (`kmReduced()`).
 - Big moments go through ONE queue `kmPush(fn(done))`: one at a time, waiting while the week panel (#dawn), the podium (#kpodov) or the roulette is open. Death clears the queue.
+  RANK SCREEN FIRST (MAIN 179, DLG-DEAD-BTN-2, law 11): a reward / notice scene never covers a rank-change screen — the rank scenes `kitEdict` / `kitGloom` are queued with `kmPushRank` (played ahead of every other queued scene), and while a rank scene is queued / on screen or a rank card is in Q (`rk:1` on the kit notice: «Lãnh cung», «Rời lãnh cung», «Bị giáng phẩm»; `kmRankCard`) every other scene waits (`kmRankWait` in `kmPump`; a non-rank `kmPush` starts one task later so a pay-out of the same month roll sees the rank change). A new rank-change notice MUST carry `rk:1`. Scan `python3 dev/test/rank-screen-scan.py`; test `node dev/test/rank-screen-first.js --save <y05>`.
+  END CARD HOLD: under a living end card (`.kes` «Đại kết cục») kit scenes and `kitReward` wait in the queue (`kmFree` / `kitEndUp`) and `kitAlarm` does not pulse; only a dead life drops them (`kmLifeOver`). The dark «Lãnh cung» notice (cls "end") is a rank screen, not the life end. Test `node dev/test/endcard-hold.js`.
 - Overlays auto-close (except the reward, which waits for "Nhận"); nothing is blocked for longer than the moment.
 - Bot runs (`window.__bot`) and `quiet` code paths never animate. Loading a save never animates (the first render only takes a snapshot).
 
