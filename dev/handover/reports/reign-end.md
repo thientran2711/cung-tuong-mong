@@ -41,7 +41,40 @@ Final numbers, 42 lives (3 seed sets):
 |---|---|---|---|---|---|---|
 | 42 | 13.3 | 7 | 15 | 18 | 83 % | nhường ngôi 30 · phế 4 · lật đổ 4 · tai nạn 2 · ám sát 1 · băng hà tự nhiên 1 |
 
-ROBOT_TABLE
+## Robot table — real play (dev/measure/reignend.js = pacespeed.js harness + «re»; seeds 0–5, 6 lives per arm, 264-month cap)
+
+LIVE = origin/main 03a8c17c (old Emperor curve adult 45/15, age-40 end present) vs BRANCH = review/reign-end (on pace-speed). Summary: `python3 dev/measure/reignend-sum.py LIVE=… BRANCH=…`.
+Real hours: one bot action = one tap; calibrated as pacespeed-sum.py (LIVE = 30 real min per game year → 1.34 s per tap, same rate for both arms).
+At PACE-SPEED's own estimate (~12 real min per game year) the hours scale ×0.4: BRANCH ≈ 2.6 h mean / 3.3 h max per life.
+
+calibration: LIVE = 30 real min per game year → 1.34 s per tap
+
+| arm | lives | reign years mean / p10 / p90 (reign ended) | all lives incl. censored mean | end causes | real h per life (mean / max) | months played (mean) |
+|---|---|---|---|---|---|---|
+| LIVE | 6 | 9.7 / 6 / 12 (n=3) | 12.3 | natural 3, cap 2, her 1 | 6.3 / 9.6 | 151 |
+| BRANCH | 6 | 14.3 / 11 / 17 (n=6) | 14.3 | abd 5, coup 1 | 6.6 / 8.2 | 177 |
+
+Per life:
+
+| arm | seed | origin | end | cause | reign years | Emperor age | her ending | reign-end cards seen | real h |
+|---|---|---|---|---|---|---|---|---|---|
+| LIVE | s1 | ch | ended | her | 9 | 34 | Đại kết cục · Đức Thọ đời sau · Đại kết cục: Đức Thọ đời sau | {} | 4.5 |
+| LIVE | s0 | cn | ended | natural | 11 | 33 | Hồng nhan bạc mệnh · Năm 12, Hoàng thượng niên hiệu Khang Địn | {} | 5.6 |
+| LIVE | s3 | ch | ended | natural | 12 | 33 | Mẫu hậu Hoàng thái hậu · Thành Thái hậu (đích mẫu) | {} | 6.3 |
+| LIVE | s4 | dtq | ended | natural | 6 | 31 | Thái phi · Thành Thái phi | {} | 2.9 |
+| LIVE | s2 | tt | cap | cap | 17 | 37 | – ·  | {} | 8.8 |
+| LIVE | s5 | dtq | cap | cap | 19 | 41 | – ·  | {} | 9.6 |
+| BRANCH | s1 | ch | ended | coup | 15 | 40 | Hoàng thái hậu · Hoàng thái hậu | {"abd": 1, "coup": 1} | 6.7 |
+| BRANCH | s0 | cn | ended | abd | 17 | 39 | Mẫu hậu Hoàng thái hậu · Mẫu hậu Hoàng thái hậu | {"abd": 1} | 8.2 |
+| BRANCH | s3 | ch | ended | abd | 11 | 32 | Mẫu hậu Hoàng thái hậu · Mẫu hậu Hoàng thái hậu | {"abd": 1} | 4.9 |
+| BRANCH | s2 | tt | ended | abd | 15 | 35 | Mẫu hậu Hoàng thái hậu · Mẫu hậu Hoàng thái hậu | {"abd": 1} | 7.2 |
+| BRANCH | s4 | nc | ended | abd | 14 | 37 | Thái phi · Thái phi theo con ra phủ | {"abd": 1} | 6.3 |
+| BRANCH | s5 | thd | ended | abd | 14 | 37 | Mẫu hậu Hoàng thái hậu · Mẫu hậu Hoàng thái hậu | {"coup": 3, "abd": 1} | 6.5 |
+
+Reading: BRANCH — every life ends with the REIGN (no cap, no early natural death): nhường ngôi 5, lật đổ 1; reign 11–17 y (mean 14.3), never a fixed number;
+her outcome follows from it (Mẫu hậu Hoàng thái hậu ×4, Hoàng thái hậu after the coup, Thái phi theo con ra phủ). LIVE — the Emperor dies of the old curve at
+6–12 y or the life runs to the cap. Phế was not drawn in these 6 robot lives (seen 4× in the 42 month-loop lives); natural death / accident / assassination seen in the
+month loop. 0 page errors in all 12 lives. Same seeds, same harness.
 
 ## Stills (CDN img/_review/reign-end/, Fold 755x1000 + iPad 1180x820 @2, looked at)
 
@@ -50,4 +83,9 @@ her son heir) — `-fold.webp` / `-ipad.webp`. Note: the stills set the reign 12
 
 ## Tóm tắt cho sếp
 
-TOM_TAT
+- Hoàng thượng giờ hiếm khi băng hà vì tuổi; triều đại kết thúc theo thế cục: **nhường ngôi** cho Thái tử (già, bệnh, Thái hậu + triều thần ép), **bị phế** (một nhà quyền thần đủ thế lực, có phi tần được sủng và đủ chứng cứ), **bị lật đổ** (một nhà thế lực vượt ngai vàng dấy binh).
+- Mỗi lần có biến, nàng nhận một thẻ 3 đường ngang giá: ngăn · giúp · đứng ngoài. Nhà của cha nàng cũng có thể là kẻ mưu phế lập — đường để đưa con nàng lên ngôi.
+- Đã bỏ kết cục «Tuổi xuân qua đi» năm 40 tuổi; bệnh, độc, ám sát giữ nguyên.
+- Robot chơi thật 6 đời: triều dài 11–17 năm (trung bình 14), mọi đời đều kết bằng biến cố triều; mô phỏng 42 đời: trung bình 13 năm, 83 % nằm trong 8–20 năm, đủ cả nhường ngôi / phế / lật đổ / băng hà.
+- Một đời chơi ≈ 2,5–3,5 giờ thật (theo nhịp PACE-SPEED).
+~X% xong / ~Y% chơi được: do MAIN điền.
