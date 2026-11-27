@@ -30,10 +30,18 @@ BAL.stp={on:1,
    band cap per change BAL.stp.band[k]; no rank ceiling, no hard stop below 100, never taken away; same rule for every NPC. Target: a focused year ≈ +20–25 from 50,
    80 → 90 ≈ 3 years (robot table in dev/handover/reports/pace-speed.md). */
 BAL.stp.abs={sac:{pow:2,min:.15},tai:{pow:2,min:.15},tamco:{pow:2,min:.15}};
-/* scale = the PROPORTIONAL adjustment at each PROMOTION (owner 26/11 ~23:35Z via MAIN 164; jstatpace spScaleAt): keys = per the new RANK GROUP, T = ceil[rank] × t
-   (Đức never under BAL.stp.floor.duc; Danh / Sủng never under the next rank's bar); pal = per WHOLE palace with T = tq 85 (above every absolute gate of
-   Sắc 80 / Tài 70 / Tâm cơ 60, dev/measure/scale-gates.py). */
-BAL.stp.scale={on:1,t:.85,keys:["danh","duc","sung"],pal:["sac","tai","tamco"],tq:85};
+/* soft = ONE SOFT CEILING for the six palace stats (owner OD 26/11 ~23:55Z, confirmed «Ok làm chỉ số như khuyến nghị»; replaces the hard stop and the
+   dropped promotion adjustment): near / above its ceiling a stat still rises at dm.min (abs: abs[k].min), never a hard stop below 100 (jstatpace spSoft / spTop).
+   Example (approved): Sủng ceiling 58, a +8 event → +7 at 30, +4 at 45, +1 at 55+; Sắc +6 at 50, +3 at 80, +1.5 at 90, +1 at 95+. */
+BAL.stp.soft=["sung","danh","duc","sac","tai","tamco"];
+/* fade = what falls BY ITSELF (owner OD 26/11 ~23:47Z rec, kept at ~23:55Z; law 1 her and every NPC; jstatpace spFadeMonth at each month end):
+   sung: a month in which Hoàng thượng did not see her (no night with him: p.nightLog, nor p.empSeenW) → − first, then − step more each further month,
+   at most − max a month; seen again → the run stops (p.ngM = 0); never demotes by itself. wk = the old unconditional weekly fade (j3 endTurn / j75 NPCs,
+   «ân sủng nhạt dần» −1 a week), now 0: the neglect fade replaces it (law 14).
+   sac: from age from, − per each new year. Danh · Đức · Tài · Tâm cơ never fade by themselves (only events / punishment).
+   History check (law 8): «以色事人者，色衰而愛弛» (Sử ký / Hán Phi Tử — beauty fades, love slackens); Qing Kính sự phòng records: favour followed the nights
+   summoned, a consort not summoned for months counted as thất sủng (Chân Hoàn truyện, Diên Hy công lược, Như Ý truyện show the same arc). */
+BAL.fade={sung:{first:2,step:1,max:5,wk:0},sac:{from:28,per:1}};
 Object.assign(BAL.stp.band,{sac:[2,5,8],tai:[2,5,8],tamco:[2,5,8]});
 BAL.stpPre={A:{ceil:[45,55,65,75,85,92,97,100],pow:3,cap:3},B:{ceil:[40,50,60,70,80,90,96,100],pow:2,cap:2}};
 BAL.stpPick="A";

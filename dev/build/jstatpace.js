@@ -14,11 +14,16 @@ function spBar(k){const T=BAL.stp.bar;return T&&k&&T[k]||null}
    with their OWN curve BAL.stp.abs[k] {pow, min} against 100 (every rise × max(min, 1 − (now/100)^pow), band cap per change); nothing is ever taken away. */
 function spAbs(k){const A=BAL.stp.abs;return A&&k&&A[k]||null}
 function spCeil(rk,k){rk=Math.max(0,rk|0);if(spAbs(k))return 100;const b=spBar(k);if(b&&typeof RANKS==="object"){const n=Math.min(RANKS.length-1,rk+1);return rk>=RANKS.length-1?b.top:Math.min(b.top,RANKS[n][b.f]+b.m)}
- const C=BAL.stp.ceil;return C[Math.min(C.length-1,rk)]}
+ const C=BAL.stp.ceil,c=C[Math.min(C.length-1,rk)];return spSoft(k)?Math.max(c,BAL.stp.floor&&BAL.stp.floor[k]||0):c}
+/* ONE SOFT CEILING for the six palace stats (owner OD 26/11 ~23:55Z, confirmed «Ok làm chỉ số như khuyến nghị»; CANON OVERWRITE of the hard stop):
+   near / above its ceiling a stat still rises, only at the slow share dm.min (≈ 15 %), never a hard stop below 100. Ceilings: Sủng · Danh = the NEXT
+   rank's bar + BAL.stp.bar[k].m; Đức (no rank bar) = the rank ceiling BAL.stp.ceil but never below the hiền đức floor BAL.stp.floor.duc 80;
+   Sắc · Tài · Tâm cơ = 100. Same rule for every NPC (law 1). BAL.stp.soft lists the six. */
+function spSoft(k){const L=BAL.stp.soft;return !!(L&&k&&L.indexOf(k)>=0)}
 /* the hard stop of a rise = the rank ceiling, but never below BAL.stp.floor[k] (the highest stat gate the game asks at any rank, BIG review 1:
    above the rank ceiling a rise still counts at the slow share dm.min, so every gate stays reachable at every rank; law 16) */
 /* a bar-tied stat (BAL.stp.bar) stops at its ceiling + bar[k].x (above the ceiling only the slow share dm.min counts; owner (A): no overshoot far above it) */
-function spTop(k,rk){if(spAbs(k))return 100;const b=spBar(k);if(b)return Math.min(b.top,spCeil(rk,k)+(b.x||0));const f=BAL.stp.floor;return Math.max(spCeil(rk,k),f&&f[k]||0)}
+function spTop(k,rk){if(spAbs(k)||spSoft(k))return 100;const b=spBar(k);if(b)return Math.min(b.top,spCeil(rk,k)+(b.x||0));const f=BAL.stp.floor;return Math.max(spCeil(rk,k),f&&f[k]||0)}
 const SP_SIGN=Object.fromEntries(["th","hh","rel"].map(k=>[k,true]));/* thiện cảm runs −100..100: dislike growing (below 0) is paced the same way as liking; a fall back toward 0 is not */
 function spG(k,h,now,n,rk,ck,peek){const B=typeof BAL==="object"&&BAL.stp;if(!B||!B.on||SP_OFF||!n||!SP_K[k])return n;
  if(n<0){if(!SP_SIGN[k])return n;const c=+now||0,z=Math.min(-n,Math.max(0,c)),rest=-n-z;return -(z+(rest>0?spG(k,h,Math.max(0,-Math.min(0,c)),rest,rk,(ck||k)+"-",peek):0))}
@@ -46,27 +51,20 @@ function spRow(h,map,id,n,rk){if(!h||!n)return h&&h[map]?h[map][id]||0:0;const M
    the rule is off, so a new life starts exactly as on LIVE; every rise after that is paced */
 var SP_OFF=0;
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){SP_OFF++;try{return s0.apply(this,arguments)}finally{SP_OFF--}}})();
-/* PACE-SPEED · PROPORTIONAL ADJUSTMENT AT EACH PROMOTION (owner 26/11 ~23:35Z row via MAIN 164; the monthly version of ~23:00Z was dropped at ~23:24Z):
-   when ANYONE is promoted (decree promoteP, direct decree exDirectUp, grace exam exGraceUp; every other road through a rank watcher at each render), Danh / Đức / Sủng are checked in the
-   NEW rank group (the consorts holding that rank, the promoted one included; T = spScaleT) and Sắc / Tài / Tâm cơ over the WHOLE palace (T = BAL.stp.scale.tq):
-   if the top value is above T, EVERY value in that group × T / top (rounded; order and ratios kept, no hard ceiling); else nothing. Lãnh cung, the dead and
-   servants are left out. Co-op: NPC values change on the host only (jmort rule). Her own changes = one line on the promotion result text + her Sổ ghi. */
-function spScaleT(k,r){const B=BAL.stp,C=B.ceil;r=Math.max(0,r|0);
- let T=C[Math.min(C.length-1,r)]*B.scale.t;const f={sung:"s",danh:"d"}[k];
- if(f&&typeof RANKS==="object"&&r<RANKS.length-1)T=Math.max(T,RANKS[r+1][f]);if(!f&&B.floor&&B.floor[k])T=Math.max(T,B.floor[k]);return T}
-function spScaleAt(who){const B=BAL.stp&&BAL.stp.scale;if(!B||!B.on||!S||S.dead||!who)return"";
- const host=!(window.COOPW&&COOPW.on)||COOPW.seat==="a";const L=consorts().filter(p=>p&&!p.out&&p.alive!==false);const rw=who===S?(S.rank|0):rkOf(who);
- const grp=L.filter(p=>(p===S?(S.rank|0):rkOf(p))===rw);const mine=[],palm=[];
- const run=(P,k,T,out)=>{if(!P.length)return;const hi=Math.max(...P.map(p=>+p[k]||0));if(!(hi>T))return;const f=T/hi;
-  for(const p of P){if(p!==S&&!host)continue;const now=+p[k]||0,nv=Math.round(now*f);if(nv===now)continue;p[k]=nv;if(typeof statSet==="function")statSet(p,k,p[k]);if(p===S)out.push([k,nv-now])}};
- for(const k of B.keys)run(grp,k,spScaleT(k,rw),mine);
- for(const k of (B.pal||[]))run(L,k,B.tq,palm);
- if(!mine.length&&!palm.length)return"";const N={sung:"Sủng",danh:"Danh",duc:"Đức",sac:"Sắc",tai:"Tài",tamco:"Tâm cơ"},W=a=>a.map(([k,n])=>`${N[k]||k} ${n>0?"+":"−"}${Math.abs(n)}`).join(", ");
- const t=[mine.length?`Hàng ${RANKS[rw].n} xếp lại thứ bậc: ${W(mine)}.`:"",palm.length?`Cả hậu cung so tài sắc, ngươi được xếp lại: ${W(palm)}.`:""].filter(Boolean).join(" ");log(t);return " "+t}
-/* every rank-up road: run the adjustment once the rank really rose; the line joins that road's result text */
-(function(){const W=(n,who)=>{const f0=window[n];if(typeof f0!=="function")return;window[n]=function(){const p=who(arguments)||S,r0=p===S?S.rank:rkOf(p);let r=f0.apply(this,arguments);
-  try{const r1=p===S?S.rank:rkOf(p);if(r1>r0){const t=spScaleAt(p);if(t&&typeof r==="string")r+=t}p.spRk0=r1}catch(e){console.error(e)}return r}};
- W("promoteP",a=>a[0]);W("exDirectUp",a=>a[0]);W("exGraceUp",a=>a[0]);
- /* every OTHER rank-up road (the grand-ending road geRank inside jge, story decrees, …): a watcher at each render compares the rank last seen (p.spRk0) */
- const watch=()=>{try{if(!S||S.dead)return;for(const p of consorts()){if(!p||p.out||p.alive===false)continue;const r=p===S?(S.rank|0):rkOf(p);if(p.spRk0==null){p.spRk0=r;continue}if(r>p.spRk0)spScaleAt(p);p.spRk0=r}}catch(e){console.error(e)}};
- if(typeof render==="function"){const r0=render;render=function(){watch();return r0.apply(this,arguments)}}})();
+/* FADE BY ITSELF (owner OD 26/11 ~23:47Z rec, kept ~23:55Z; numbers BAL.fade; law 1 her and every NPC; co-op: NPCs on the host only, worldOn):
+   at each month end — Sủng: a month without Hoàng thượng (no night in p.nightLog this month, nor p.empSeenW) → −first, −step more each further month,
+   at most −max a month (p.ngM = months in a row); seen → p.ngM 0, no fade. Never demotes by itself (a stat only). Sắc: each new year, from age BAL.fade.sac.from,
+   −per. Her own fade = one Sổ ghi line with the exact old → new (the result card's kitWhy reads it, j63 kaWhyStat «<stat> N →»). */
+function spFadeSeen(p,w0){return (p.nightLog||[]).some(w=>w>=w0)||(p.empSeenW!=null&&p.empSeenW>=w0)}
+function spFadeMonth(w0,y0){const F=BAL.fade;if(!F||!S||S.dead)return;const host=typeof worldOn!=="function"||worldOn();const L=[];
+ for(const p of consorts()){if(!p||p.alive===false||(p!==S&&!host))continue;const me=p===S;
+  if(F.sung&&!p.out&&!((me?S.rank:rkOf(p))>=7)){if(spFadeSeen(p,w0))p.ngM=0;else{p.ngM=(p.ngM||0)+1;const d=Math.min(F.sung.max,F.sung.first+(p.ngM-1)*F.sung.step),a=+p.sung||0,b=Math.max(0,a-d);
+    if(b!==a){p.sung=b;if(typeof statSet==="function")statSet(p,"sung",b);if(me)L.push(`Lâu không được gặp Hoàng thượng (${p.ngM} tháng): Sủng ${a} → ${b}.`)}}}
+  if(F.sac&&S.year!==y0&&(+p.age||0)>=F.sac.from){const a=+p.sac||0,b=Math.max(0,a-F.sac.per);if(b!==a){p.sac=b;if(typeof statSet==="function")statSet(p,"sac",b);if(me)L.push(`Tuổi ${p.age}, nhan sắc phai dần: Sắc ${a} → ${b}.`)}}}
+ for(const t of L)log(t)}
+(function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){const w0=S.turn*3,y0=S.year;const r=m0.apply(this,arguments);try{spFadeMonth(w0,y0)}catch(e){console.error(e)}return r}})();
+/* the player-facing rule in ONE line (owner OD 26/11 ~23:55Z (5), wording verbatim): it joins the kit glossary meaning of the six stats (j79 kitGlossText →
+   every kitGloss word, stat row, header help), consort road only (kitRoad() ""); data only, no new UI part. */
+const SP_RULE_LINE="Chỉ số nào cũng càng cao càng khó lên; Danh, Đức, Sủng chậm hẳn khi vượt mức phẩm kế; Sủng phai khi lâu không gặp Hoàng thượng, Sắc phai theo tuổi.";
+(function(){if(typeof kitGlossText!=="function")return;const g0=kitGlossText,K=["Sủng","Danh","Đức","Sắc","Tài","Tâm cơ"];
+ kitGlossText=function(term){const t=g0.apply(this,arguments);try{if(K.indexOf(term)>=0&&!(typeof kitRoad==="function"&&kitRoad())&&t&&t.indexOf(SP_RULE_LINE)<0)return t+" "+SP_RULE_LINE}catch(e){}return t}})();

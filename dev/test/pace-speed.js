@@ -21,16 +21,29 @@ const {chromium}=require('playwright');const path=require('path');
     const lo=spG(k,{},20,5,0),hi=spG(k,{},85,5,0);ok(hi<lo&&hi>=1,`${k}: +5 at 20 → ${lo}, at 85 → ${hi} (slower near 100, never 0 forever)`);
     ok(spG(k,{},60,-7,0)===-7,`${k}: a fall untouched`);ok(spTop(k,0)===100&&spTop(k,7)===100,`${k}: no rank ceiling`)}
    const v=liveRivals(false)[0];v.tai=50;v.spc={};ap(v,{tai:30});ok(v.tai<=50+BAL.stp.band.tai[2],`same rule for an NPC (Tài 50 +30 → ${v.tai})`)}
-  /* proportional adjustment at each promotion (owner 26/11 ~23:35Z) */
-  {const C=BAL.stp.scale;ok(C&&C.keys.join()==="danh,duc,sung"&&C.pal.join()==="sac,tai,tamco"&&C.tq===85,"scale: Danh·Đức·Sủng per new rank group, Sắc·Tài·Tâm cơ palace-wide (T 85)");
-   ok(typeof spScaleMonth==="undefined","no monthly rescale (dropped 23:24Z)");
-   const L=consorts().filter(p=>!p.out&&p.alive!==false);for(const v of L)v.tai=40;const w=L.find(p=>p!==S);w.tai=100;S.tai=50;
-   const r0=S.rank;S.lastPromo=-99;const t=exDirectUp(S,"thử");ok(S.rank===r0+1||r0>=6,`exDirectUp promoted her (${r0} → ${S.rank})`);
-   if(S.rank===r0+1){ok(w.tai===85&&S.tai===Math.round(50*85/100),`on promotion Tài palace-wide: leader 100 → ${w.tai}, her 50 → ${S.tai}`);ok(/xếp lại/.test(t),`line on the promotion result: «${String(t).trim().slice(0,90)}»`)}
-   for(const v of L)v.tai=40;S.tai=60;spScaleAt(S);ok(S.tai===60,"top under T → nothing");
-   {for(const v of L)v.tai=40;w.tai=100;S.spRk0=S.rank;S.rank++;render();ok(w.tai===85,`watcher: a rank-up by any road adjusts too (leader Tài 100 → ${w.tai})`)}
-const r=S.rank|0,grp=L.filter(p=>(p===S?(S.rank|0):rkOf(p))===r);for(const v of grp)v.duc=50;S.duc=100;spScaleAt(S);
-   const T=spScaleT("duc",r);ok(S.duc===Math.round(T)&&grp.every(p=>p===S||p.duc===Math.round(50*T/100)),`Đức in the new rank group: top 100 → ${S.duc} (T ${T.toFixed(1)}), others 50 → ${Math.round(50*T/100)}`)}
+  /* owner 26/11 ~23:55Z (confirmed): the promotion adjustment is GONE; ONE soft ceiling for the six; Sủng neglect fade + Sắc age fade */
+  ok(typeof spScaleAt==="undefined"&&!BAL.stp.scale,"no promotion adjustment (dropped 23:55Z)");ok(typeof spScaleMonth==="undefined","no monthly rescale");
+  {ok(["sung","danh","duc","sac","tai","tamco"].every(k=>spSoft(k)&&spTop(k,0)===100&&spTop(k,7)===100),"soft ceiling: the six never hard-stop below 100");
+   const c=spCeil(3,"sung");ok(c===RANKS[4].s+BAL.stp.bar.sung.m,`Sủng ceiling at Tần = next bar ${RANKS[4].s} + ${BAL.stp.bar.sung.m} = ${c}`);
+   /* the curve itself = the approved example (OD 23:55Z: ceiling 58, +8 → +7 at 30, +4 at 45, +1 at 55+; Sắc +6/+3/+1.5/+1); a raw +8 is first cut by
+      the size band (BAL.stp.band, over) like every change, so the band is opened here to check the curve alone */
+   const B0=JSON.stringify(BAL.stp.band);for(const k of ["sung","sac"])BAL.stp.band[k]=[8,8,8];
+   const g=v=>spG("sung",{},v,8,3,0,1);const a=g(30),m=g(45),z=g(c-3),y=g(c+10);
+   ok(a===7&&m>=4&&m<=5&&z>=1&&z<=2&&y===1,`Sủng ceiling ${c}, +8 event → +${a} at 30, +${m} at 45, +${z} at ${c-3}, +${y} at ${c+10} (still rises above the ceiling)`);
+   const s=v=>spG("sac",{},v,8,0,0,1);ok(s(50)===6&&s(80)===3&&s(95)===1,`Sắc +8 → +${s(50)} at 50, +${s(80)} at 80, +${s(90)} at 90, +${s(95)} at 95`);
+   BAL.stp.band=JSON.parse(B0);ok(spG("sung",{},30,8,2,0,1)<=Math.ceil(BAL.stp.band.sung[2]),`a raw +8 is still cut by the size band first (Sủng at 30 → +${spG("sung",{},30,8,2,0,1)})`);
+   ok(spCeil(0,"duc")===BAL.stp.floor.duc&&spCeil(7,"duc")>=BAL.stp.floor.duc,`Đức ceiling never below the hiền đức floor ${BAL.stp.floor.duc} (Đáp ứng ${spCeil(0,"duc")}, Hoàng hậu ${spCeil(7,"duc")})`);
+   ok(spG("duc",{},90,8,0,0,1)>=1,"Đức above its ceiling still rises (slow share)")}
+  {const F=BAL.fade.sung;S.rank=Math.min(S.rank,5);S.out=0;S.sung=60;S.ngM=0;S.nightLog=[];S.empSeenW=null;const got=[];
+   for(let i=0;i<6;i++){const w0=S.turn*3;const a=S.sung;spFadeMonth(w0,S.year);got.push(a-S.sung)}
+   ok(got.join()===[2,3,4,5,5,5].map((x,i)=>Math.min(F.max,F.first+i*F.step)).join(),`Sủng neglect fade by month: −${got.join(", −")}`);
+   const r0=S.rank;S.nightLog.push(S.turn*3);const a=S.sung;spFadeMonth(S.turn*3,S.year);ok(S.sung===a&&S.ngM===0&&S.rank===r0,"seen by Hoàng thượng → no fade, run reset, no demotion");
+   const v=liveRivals(false).find(x=>rkOf(x)<7&&!x.out);if(v){v.sung=50;v.ngM=0;v.nightLog=[];v.empSeenW=null;spFadeMonth(S.turn*3,S.year);ok(v.sung===50-F.first,`same for an NPC (law 1): Sủng 50 → ${v.sung}`)}
+   ok(BAL.fade.sung.wk===0,"the old weekly −1 is off (replaced by the neglect fade)")}
+  {const A=BAL.fade.sac;S.age=A.from+2;S.sac=70;spFadeMonth(S.turn*3,S.year-1);ok(S.sac===70-A.per,`Sắc fades with age: age ${S.age}, a new year → Sắc 70 → ${S.sac}`);
+   S.age=A.from-3;S.sac=70;spFadeMonth(S.turn*3,S.year-1);ok(S.sac===70,`no Sắc fade before ${A.from}`);
+   S.tai=60;S.tamco=60;S.danh=40;S.duc=60;spFadeMonth(S.turn*3,S.year-1);ok(S.tai===60&&S.tamco===60&&S.danh===40&&S.duc===60,"Danh · Đức · Tài · Tâm cơ never fade by themselves")}
+  ok(/càng cao càng khó lên/.test(kitGlossText("Sủng"))&&/Sắc phai theo tuổi/.test(kitGlossText("Tâm cơ")),"the one-line rule shows in the kit glossary of the six stats");
   /* Emperor curve */
   const D=BAL.mort.life.dice;ok(D.emp&&typeof D.emp==="object"&&D.emp.mean>D.adult.mean&&D.emp.sd>=D.adult.sd,`Emperor natural death rare + wide: ${JSON.stringify(D.emp)} (adult ${JSON.stringify(D.adult)})`);
   return R});
