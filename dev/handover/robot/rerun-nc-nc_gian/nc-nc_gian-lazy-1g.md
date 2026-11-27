@@ -2,7 +2,7 @@
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick | promotion roads seen / taken |
 |---|---|---|---|---|---|---|---|---|---|
-| nc-nc_gian-lazy-1g | running |  | 536 |  | 0 | 0 | 0 | — | 90 / 30 (decree 90) |
+| nc-nc_gian-lazy-1g | Lãnh cung — Tuổi xuân qua đi | 40 | 3519 | 2031 | 0 | 0 | 0 | — | 280 / 93 (decree 276, select 4) |
 
 ## Dead buttons
 
