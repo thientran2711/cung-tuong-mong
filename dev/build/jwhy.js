@@ -125,7 +125,7 @@ function kitWhyHtml(b,lv){const W=whyOfBtn(b);if(!W)return"";const q=lotB(S,W.do
  if(!F.length&&!q)h+=row(W.deck?"Cơ may của việc này không đổi theo tư chất: chỉ Quẻ tuần và Sức mới làm khác đi":"Không có yếu tố nào làm dễ hay khó hơn",0);
  return h}
 function word_(o){return word(oddsCl(Math.round(o)))}
-document.addEventListener("click",e=>{const od=e.target.closest(".kodm");if(!od)return;const b=od.closest("button");if(!b)return;if(b.matches("button.opt,button.kopt,.opts>button,.kpopts>button,.k3btns>button,.kfoc-b,#mr>button,.kszopts>button")&&!od.closest(".kopinfo"))return;/* MAIN 136 25/11: a tap anywhere on an option card chooses it; the «Vì sao» pop opens from the «!» overlay copy (.kopinfo) */const lv=+od.dataset.kodds;
+document.addEventListener("click",e=>{const od=e.target.closest(".kodm");if(!od)return;const b=od.closest("button");if(!b)return;if(b.matches(window.KIT_OPT_TAP)&&!od.closest(".kopinfo"))return;/* MAIN 136 25/11: a tap anywhere on an option card chooses it; the «Vì sao» pop opens from the «!» overlay copy (.kopinfo) */const lv=+od.dataset.kodds;
  const h=kitWhyHtml(b,lv);if(!h)return;e.stopPropagation();e.preventDefault();setTimeout(()=>kpPop(od,h+`<div class="kpwl">${kitOddsLadder(lv)}</div>`),0)},true);
 /* act-audit fix: the odds word on a consort-act card left out the penalty of sending a servant (runAct: ACTX.pen = sentPen − rank×3),
    so the card read easier than the roll. Her cards now show the odds the roll will use (spy has it inside its own formula). */

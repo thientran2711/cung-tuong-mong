@@ -15,7 +15,7 @@ MANUAL = {"fig-maid-m15-t8-a18.webp": 382}
 # grey "Người lạ" silhouettes (img/kit/unknown-fig-f|m|k.webp, no face): head top = painted top + SIL_K x body, the same crown/hair allowance a plain-hair real figure has
 # (median of (head top - painted top) / (feet - head top) over the 60 cold-palace figures = 0.046, see the report), so a silhouette stands exactly where a real figure would
 SIL_K = 0.046
-SILS = ("unknown-fig-f.webp", "unknown-fig-m.webp", "unknown-fig-k.webp")
+SILS = ("unknown-fig-f.webp", "unknown-fig-m.webp", "unknown-fig-k.webp", "unknown-fig-e.webp")
 def silhouette_rows():
     out = {}
     for n in SILS:
