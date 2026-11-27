@@ -486,3 +486,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 00:33Z HOURLY: ctx ~12 % (roll 30 %). LOAD: main running ~19 (owner bugs/UI/go-live + kit + ACT-MOVE) | B save rv17 | C emperor plan | D promo lr5 | E robot | F realtap | moved: none new. No READY TO PUSH. LIVE a22cf45d. LOOK PASS ring-build cc4515dc → RV-165.
 - 00:35Z owner 00:42Z rec (167 chat, OD): card = info + «Tìm gặp» + «Ghé cung»; acts place-bound → ACT-MOVE + KK51-P + C told.
 - 00:38Z OWNER 00:46Z (167 chat): 3-tier choice law → law 2 rewritten in place in START_CORE (law 14); Foreman E ORDER tier audit (STEP 1); reviewers told; kit tier label → KK51 (after audit).
+- 00:41Z ACT-MOVE PLAN READY 1437d979 (act-move-plan.md) → MAIN OK with 00:42Z card rule (Tìm gặp / Ghé cung; palace-bound vs person-bound), Q1 no new strip, Q2 rec. TITLE-BAL got remaining title-sys fails. Tier-audit add (00:50Z verbatim) in FOREMAN_E_STATUS.
