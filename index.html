@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6842b223","t":"2026-11-26T15:59Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"9469ca7ffb0b","h":[{"s":"6b5d3d05+","t":"2026-11-26T06:59Z","c":"Điểm trang: chạm vào bộ y phục là mặc vào ngay."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"},{"s":"0756a05b+","t":"2026-11-25T05:01Z","c":"STACK LAND sansang-music-fix: merge c70cfd17 onto LIVE 4da55ce8 (index.html/sw.js rebuilt)"}]};
+window.CTM_BI={"s":"5435a49c","t":"2026-11-26T22:18Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ.","b":"111562db8c64","h":[{"s":"03e9c9d2","t":"2026-11-26T14:23Z","c":"Gộp nút trùng: cả game còn 85 nút thay 157; bấm một nút mở khung chọn cách làm, giá, khắc và kết quả giữ nguyên."},{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"},{"s":"ca5af050+","t":"2026-11-25T05:57Z","c":"makeup: diem big faces unchanged, vung big x.85, diem small x.595 (BAL.toil.lod.soft)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -51701,7 +51701,7 @@ function syncRoom(m){if(!m||!CW.on||!S)return;try{const o=COOP.other();if(m.wher
  try{if(!S.dead&&m.week===wk()){const me=CW.seat;
   if(!eW()&&CW.bend&&m.buoi===(S.buoi||0)&&m.bended&&!m.bended[me]){T("rebend "+m.week+"."+m.buoi);CW.bend=false;bend()}
   if(CW.sent===wk()&&m.ended&&!m.ended[me]&&!gG()){T("re-end "+m.week);CW.sent=-1;CW.pend=true;soonEnd()}}}catch(e){console.error(e)}
- if(CW.p2&&!eW()&&!S.dead&&m.week===wk()&&CW.sent!==wk()&&typeof m.buoi==="number")while((S.buoi||0)<m.buoi){const b0=S.buoi||0;onBuoi({week:m.week,buoi:b0+1});if((S.buoi||0)===b0)break}/* a dialog open: onBuoi keeps the step as pendBuoi (stepped when it closes) — before, nothing caught her up and her next bend was refused (badbuoi): stuck */
+ if(CW.p2&&!eW()&&!S.dead&&m.week===wk()&&CW.sent!==wk()&&!CW.pend&&!(()=>{const rd=CW.roomDate();return !!(rd&&CAL.some(k=>S[k]!==rd[k]))})()/* OPEN 2: a pending week end / a date past the room's (her week end ran: restored after a reload) is past every buổi of the week */&&typeof m.buoi==="number")while((S.buoi||0)<m.buoi){const b0=S.buoi||0;onBuoi({week:m.week,buoi:b0+1});if((S.buoi||0)===b0)break}/* a dialog open: onBuoi keeps the step as pendBuoi (stepped when it closes) — before, nothing caught her up and her next bend was refused (badbuoi): stuck */
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);sendPos();lockNext()}
 COOP.on("room",m=>{if(m.buoi!==undefined)CW.p2=true;CW.roomMsg=m;T("room "+m.week+"."+m.buoi+" sent "+CW.sent+" in "+CW.wkIn);if(!CW.on||!m.state)return;const C=m.state;
  /* review/coop-week-stall: the Worker builds the snapshot across awaits (acceptWebSocket → loadC → chat …); a week merge that lands in
@@ -52304,13 +52304,36 @@ CW.snap=()=>{if(!CW.on||!S||S.dead||!CW.base||CW.inLife)return null;let d;try{d=
    start, the host's own copy is the room's buổi (his snapshot wins; her buổi is adopted from the host's view, jcoopthine gView) */
 /* robot-coop-fix-6 (CAUSE 4 family: reload / resume): a snapshot whose own date is not the room's merged date (taken after her night moved
    her calendar, before the merge) is not this week's buổi: never restored (the room's week start from fromCanon stands) */
-CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk()||o.c.pend||o.c.sent===wk()||(()=>{const rd=CW.roomDate(),dS=o.d&&o.d.S;if(rd&&dS&&CW.CAL.some(k=>dS[k]!==rd[k])){T("restore: date ahead");return true}return false})()||(!(eW()||(o.c.thl|0)>=5)&&roomB()!=null&&roomB()<o.buoi))return false;
+/* coop-afk-l13 OPEN 2 (MAIN 159 ruling «NO replay»): a reload while MY OWN week end waits (pend: it ran here, its `end` not out yet) keeps that
+   week end — before, every pend copy was refused and the room's week start replayed the whole week (wk6 R1 6.0 1/5/1 → 6.0 1/5/0). Own = this
+   device's copy of this room (dev + room), same seat / week; a FOREIGN pending copy (another device's) is still refused (its end may be out from
+   there). Its date is ahead of the room's by design (the week end moved it): the date / buổi checks are for a copy taken mid-week only. At level
+   13 the host's pending end also holds HER week end (run here, CW.gBack = her store after it + G.done): without it the pend copy is refused
+   (the old path), never a pend host whose part G cannot finish. Twin (law 11): her own copy after the go at level 13 (CW.sent = this week, her
+   phone runs nothing, gG) keeps her waiting for the host's week instead of a fresh week start. */
+CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk())return false;const c=o.c||{},own=o.dev===DEV&&o.room===COOP.state.room,ended=!!(COOP.state.ended||{})[CW.seat];
+ /* level 13 = the room's level or, before the level message arrived after a reload, the copy's own (thl), as the buổi check below */
+ const g13=gW()||(c.thl|0)>=13,gst=g13&&!host();
+ /* law 11, same family: MY end sent but never reached the server (socket down, then the reload: the room says not ended) = still my pending end
+    (sent again, as syncRoom's re-end does); only when the room's ended list is known */
+ const lost=own&&!c.pend&&c.sent===wk()&&!gst&&!!COOP.state.ended&&typeof COOP.state.ended==="object"&&!ended;
+ const ahead=(()=>{const rd=CW.roomDate(),dS=o.d&&o.d.S;return !!(rd&&dS&&CW.CAL.some(k=>dS[k]!==rd[k]))})();
+ /* her phone at 13 runs no week end: a copy past the go (sent) or ahead of the room's date (her week end's patches from the host) is HER week end as
+    the host ran it — kept (before: refused → the room's week start on her screen until the host's week; coop-afk-l13 RELOAD=g THIN 13) */
+ const pk=own&&!ended&&((!!c.pend&&c.sent!==wk())||lost),gk=own&&gst&&!c.pend&&(c.sent===wk()||ahead);
+ if((c.pend&&!pk)||(c.sent===wk()&&!gk&&!lost))return false;
+ if(!pk&&!gk&&((ahead&&(T("restore: date ahead"),true))||(!(eW()||(c.thl|0)>=5)&&roomB()!=null&&roomB()<o.buoi)))return false;
+ const gb=own&&g13&&host()&&CW.gBack?CW.gBack(o.week):null;if(pk&&g13&&host()&&!gb){T("restore: pend without her week end");return false}
  quiet=true;try{if(o.d)o.d.tab="act";/* owner 16/11: rejoin opens her room (Hành sự) */deser(o.d)}finally{quiet=false}used=o.used||0;try{deal()}catch(e){}  /* the hand of acts is not in a sổ: dealt again, as the title's Tiếp tục does */
  Object.assign(CW,o.c);CW.bend=false;CW.pendBuoi=null;CW.posKey="";CW.inLife=false;
  /* her "Sẵn sàng" of this buổi survives too: the room still holds her bend (the night's ready is re-sent by nResync) */
  {const rm=CW.roomMsg;if(rm&&rm.week===wk()&&rm.buoi===(S.buoi||0)&&rm.bended&&rm.bended[CW.seat])CW.bend=true}
+ if(lost){CW.sent=-1;CW.pend=true}
+ /* a pending week end = its night was committed and ran (the commit lives in memory only: lost by the reload, so the ONE AFK bound — jcooptimer
+    nafEnd / gAfk read ngoW — never armed again: fix-h13 SWAP 1 run, the room held on her open cards) */
+ if(pk){CW.ngoW=wk();if(host())CW.ngo=wk()}if(gb)try{gb()}catch(e){console.error("restore her week end",e)}if(pk)T("restore: own pend "+o.week+(lost?" (lost end)":""));
  try{keepFriendPos();refreshHere()}catch(e){}syncRoom(CW.roomMsg);try{$("title").hidden=true}catch(e){}
- if(Q.length)showModal();render();lockNext();return true};
+ if(Q.length)showModal();render();lockNext();if(CW.pend)soonEnd();return true};
 
 
 /* ================= part D (review/coop-thin-d): the cards between the two players, built on the host =================
@@ -99467,6 +99490,17 @@ CW.gBlob=function(){if(!on()||!host())return null;const seat=other();let st=null
  s.thpn=(D.N&&D.N[seat])||0;
  const p=st.pers||{};s.empKnown=(p.kn&&p.kn[0])||{};s.cmP=J(p.cm||{});s.menP=J(p.men||{});G.stat.blob++;
  return {pid:902,ok:st.ok||(s.origin&&s.origin.k)||"tt",name:s.name,rank:s.rank,dead:!!s.dead,srv:!!(s.srv&&!s.srv.risen),life:st.life||0,S:s}};
+/* coop-afk-l13 OPEN 2 (MAIN 159 «NO replay»): her week end ran HERE (G.done) and lives only in this page's memory (her store ST): a host reload
+   before his `end` lost it, so the restored host either replayed the week (pend copy refused) or ran her week end a second time on the room's
+   week-start person (her cards and patches twice, law 6c). Kept beside his own week copy (same snapSave moment, this device only, never in the
+   seat copy): her store as his toCanon writes it (CW.gBlob). CW.gBack(week) = the way to put it back (jcoopworld CW.restore, own copy only). */
+const GK="ctm-coop-gwk";
+{const f=CW.snap;if(typeof f==="function")CW.snap=function(){const o=f.apply(this,arguments);try{if(o&&on()&&host()&&!CW.ctx){const w=wkR();
+  if(G.done[w]){const b=CW.gBlob();if(b)localStorage.setItem(GK,JSON.stringify({room:COOP.state.room,week:w,b}))}}}catch(e){}return o}}
+CW.gBack=function(w){if(!host())return null;/* not on(): right after a reload the room's level may not have arrived yet (the copy's thl says 13) */let o=null;try{o=JSON.parse(localStorage.getItem(GK)||"null")}catch(e){}const seat=other();
+ if(!o||!o.b||!o.b.S||o.room!==COOP.state.room||o.week!==w||(o.b.life||0)!==TH.lifeOf(seat))return null;
+ return ()=>{const P=CW.base&&CW.base.P;if(!P)return;const b=J(o.b);if(P[seat]&&P[seat].pid)b.pid=P[seat].pid;P[seat]=b;try{TH.seatDrop(seat)}catch(e){}
+  G.done[w]=true;G.stat.back=(G.stat.back|0)+1;lg(["back",w,b.S.tuan,b.S.month])}};
 /* jcoopworld onWeek (host, before his own reign ending): her reign ending, her seat-cap check, her places = his. The store is rebuilt from the
    new C first; what this run changes is written into CW.base.P.b too (a later rebuild of the store keeps it) */
 CW.gEmp=function(){if(!on()||!host()||CW.ctx||!CW.base||!CW.base.P||!CW.base.P[other()])return;const seat=other();
@@ -99954,7 +99988,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="9469ca7ffb0b";window.CTM_BUILD=BUILD;
+const BUILD="111562db8c64";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

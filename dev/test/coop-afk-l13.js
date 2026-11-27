@@ -113,7 +113,7 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
   ok(await isRd(Y)||await press(Y),'afk: '+Y.name+' presses Sẵn sàng at tối');await clear(X);ok(await isRd(X)||await press(X),'afk: '+X.name+' presses Sẵn sàng at tối, then goes AFK');
   /* OPEN 2: RELOAD=h|g — that seat reloads while its week end waits, then the bound is shortened to NMS on the fresh pages */
   let HIT0=0;const RL=process.env.RELOAD;if(RL){const Z=RL==='h'?A:B;let z0=null,zl=null,hl=0;const tr=Date.now();
-   while(Date.now()-tr<120000){if(Z!==X)await clear(Z);const h=await RUN.p.evaluate(()=>window.__afkHit||0);if(!h&&Z===X)await clear(X)/* a reloading AFK seat still reads its tối choices up to its week end (else a real choice holds its night: fix-h0 run 2) */;const z=await D(Z);zl=z;hl=h;
+   while(Date.now()-tr<240000){if(Z!==X)await clear(Z);const h=await RUN.p.evaluate(()=>window.__afkHit||0);if(!h&&Z===X&&!(await X.p.evaluate(()=>window.__afkHit||Q.some(m=>m&&m.pid==='afkT')).catch(()=>true)))await clear(X,1)/* one tap per look: never the test card; a reloading AFK seat still reads its tối choices up to its week end (else a real choice holds its night: fix-h0 run 2) */;const z=await D(Z);zl=z;hl=h;
     /* level 13: her week end ran on the host (G.done) = the host's pend waits on her cards / her phone is past her go (her date moves by the host's patches) */
     const gd=lv.gW?await A.p.evaluate(()=>!!(COOPW.thin&&COOPW.thin.G&&COOPW.thin.G.done[COOP.state.week||0])):true;
     const at=z=>Z===B&&lv.gW?gd&&!z.pend:z.pend;
