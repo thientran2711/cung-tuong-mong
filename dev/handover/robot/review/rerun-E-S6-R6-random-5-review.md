@@ -1,8 +1,10 @@
-# R6-random-5 (Fold 755x1000, bot=sens, seed 3552077722, pf/pt_tang) — end-of-life notes — COUNTED (shortest life of the unit)
-Ending **«Duyên cung lỡ hẹn» — Bị ban hoa, xuất cung** («Thuyền đưa ta về Phù Tang. Ta sống lặng lẽ bên bờ biển quê nhà.»), age 18, year 1, **buổi 1**, rank 2 (Quý nhân), 85 real taps, 0 JS clicks, 0 bugs. robot-audit VALID (a game-imposed ending; exitPick none). GAME BUILD {s:f009e1a6+, b:dd1ce3d0ffa1, t:2026-11-26T02:21Z}, github.io LIVE, harness d2e03d80, no resume. I looked at shots m-new-1-9 and m-new-1-10 and end.png.
-## What happened (read from shots + last taps)
-On the first morning (buổi sáng, Tháng ba thượng tuần, «Chưa điểm trang», Sức 95) the event **«Lễ ra mắt: Môn thi · Đàn»** (TÀI NGHỆ mini-game; rule «Chạm vào dây khi hoa mai chạm vạch son»; «Độ khó: Vừa · tuyển tú, tài nghệ bậc 0»; «Lên tới Quý nhân: để tài nghệ quyết định: Mong manh · chơi xuất sắc: Mong manh») offered «Sẵn sàng» / «Hướng dẫn» / «Bỏ qua». The robot PLAYED the board (11 «AREA x,y» taps = the string board, then the mini-game's «Quay lại» #kg82 at the end) and the life closed at once with the card «Duyên cung lỡ hẹn».
-## Findings (for player review / balance, not asserted as bugs)
-1. FAIRNESS / DESIGN (laws 2, 3, 5): a first-buổi mini-game result can END THE WHOLE LIFE with no second chance: «Mong manh» odds shown on the card and a no-retry «Bị ban hoa» outcome; at «tài nghệ bậc 0» the player has had no chance to learn the game («Hướng dẫn» exists, but the robot, like a casual newcomer, did not use it). As a player: a 1-minute life with the princess story («Tiền truyện · Công chúa Phù Tang hòa thân») unplayed is FRUSTRATING; suggest (parking lot) a soft landing for the first trial. Needs the expert / owner view.
-2. ODD: the end card reads «Phù sinh nhược mộng, một kiếp đã khép lại…» but the stat line says «Phẩm cao nhất: Quý nhân» for a life that lasted one buổi (rank 2 → was it granted before the exam?), check order of rank grant vs exam result.
-3. UX: the harness note «Quay lại» on #kg82 is the mini-game back button after the last note; the real result came from the game, not from a bot exit.
+# R6-random-5 (fold, bot=sens, seed 3552077722, pf/pt_tang) — end-of-life notes — COUNTED, flag «mixed build»
+Ending **Lãnh cung — «Phát điên trong lãnh cung»**, age 30, year 13, rank 0, **buổi 1843**, 6649 real taps, 0 JS clicks, 6 bug rows, 1 dead button. robot-audit VALID (game-imposed natural ending). Written from the result JSON + moment log, not played by eye. Fresh rerun on LIVE github.io (the first R6-random-5 run was INVALID under the owner's robot rules), harness f65d019b.
+## Builds
+Game build 9ab008eb74f9 at start; one OOM page crash at b1214, resumed from ckpt with build0 synced to LIVE (flag «mixed build» as a precaution; no mismatch reported). No save-quota error (save peaked ≈ 3.9M chars).
+## Findings
+1. GAME: dead close button — «Danh hiệu mới» dialog, «Để sau» does nothing after 3 real taps (year 9, age 26, rank 0).
+2. GAME: item pick grid — the confirm «kipgo» stays off-screen after 8 real scrolls (×2, incl. «Biếu quà làm lành»): the confirm button is below the fold.
+3. GAME (JS): page error «sx is not defined» once.
+4. DESIGN: same quiet-decline shape (rank 0 from year ≈ 9, Lãnh cung at 30; 148 offers seen, 75 picked = 51 %).
+5. HARNESS: area tap blocked because a button appeared under the point («Thường Son sáp…»), by design.
