@@ -76,3 +76,8 @@ Laws: 3 (no cost-only dead tiles) ok · 4/7 (odds lambdas = rolled member; no nu
 Wording nit (not blocking): the reason text carries the trait name capitalised mid-sentence («nàng ta Kiêu ngạo, …») — from giftEval's why, LIVE wording.
 
 Shots folder to wipe after landing: `python3 dev/site/cdn_sync.py --wipe-review live-bugs-2711`.
+
+## REMERGE r3 — review/live-bugs-2711-rv @ 7f12c638 (FF of LIVE 00dca386 «LAND sx unit») — LAND READY 7f12c638
+- jkc.js / jkc2.js conflicted with LIVE's sx-scope-fix 79c5a62d (same sites, same kcR-at-call-time fix): took LIVE's files whole (no double fix). Branch vs LIVE in dev/build is now ONLY the gift part (jgift.js, jptime.js, jts.js), unchanged.
+- Gates on 7f12c638: undef-scan PASS (343) · LIVE scope-scan class A 0 + --strict 0 unexplained · gift-dead-scan y14 / y05 PASS (0 dead) · gift-pick-scan ok · quickcheck PASS (old save ok; perf new/live render 283/280, tab 670/557, buổi 1933/1530 ms, tasks>200 34/34), core gates: only the LIVE-flaky G4 80-dialog-fixed (r2 note).
+- coop-e2e: hangs at buoiBoth (step 29/30) again — same as LIVE 98c77517 in r2; not this branch (only gift pickers differ from LIVE).
