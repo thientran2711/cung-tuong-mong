@@ -196,3 +196,4 @@ FOR MAIN 165 (Foreman C ROOT 3-1-1-1-1, ~23:25Z 26/11): evidence-card «Ban ch�
 - (27/11 ~07:10Z) MAIN 173: owner on Tài nghệ cells: drop rank word, keep «Bậc n/5» + «Tiến độ x/y» bar below (OD row) + wider no-repeat in môn frame/skill surfaces → R11.
 - (27/11 ~07:15Z) MAIN 173: owner withdrew the look-only review skip (OD row) → everything to a reviewer again; OWNER-UI-C → RV-167.
 - (27/11 ~07:20Z) MAIN 173: OWNER-ASK-AUDIT done (reports/owner-ask-audit-2711.md; 22 PASS-not-landed) → summary to sếp; **LAND-REMERGE-1 session_01Rc5AsJrpCHQbqRwKj7tG49** opened to remerge D1–D22; stale claims closed (RING-BUILD-6/7, PUNISH-TIER-4, KK51). Audit seat archived.
+- (27/11 ~07:25Z) MAIN 173: LOOK 2 R11 e9f33937 Tài nghệ PASS (cells Bậc+Tiến độ, frame name once, Phát bạc LIVE odds row, chips no count) → sếp. FAIL hanhsu-04: tab «Nghỉ ngơi» opens VIỆC stage hand (owner 06:30Z/06:42Z) → R11 + DOOR-ONETAP fix, LIVE vs branch stills before RV-168.
