@@ -31,7 +31,7 @@ async function tap(p,target,o={}){let rt=RTS.get(p);if(!rt){rt={cur:null};rt.rt=
    so «the next card moves the lift» is checked; (F1) «chosen» is judged against the screen AFTER the lift (mid sig), not before it: PASS only when the
    chip tap changes the screen AND the lift is gone (or the frame changed) — a no-op ✓ / «Chọn» now FAILS. o.liftOnly: first tap only (a card that is
    lifted, not chosen). Used by the BFS, the selx / talk walk, the path replay, the tour — and ported to robot-rt.js's picker (JOB 4). */
-async function press(p,el,o={}){/* FIXER #21 (BIG #20 N2): she waits for the person ring's own move (focus / back / turn: kring R.busy ignores every tap) before she taps — a ✕ tapped mid-move «did nothing» */await p.waitForFunction(()=>!(window.kitRing&&kitRing.cur&&kitRing.cur.busy),null,{timeout:2500}).catch(()=>{});const k=await el.evaluate(e=>window.__bc?__bc.kind2(e):'').catch(()=>'');const lab=k?await el.evaluate(e=>__bc.label(e)).catch(()=>''):'';const ok=await tap(p,el,o);if(!ok||!k)return{ok,two:'',k};
+async function press(p,el,o={}){/* FIXER #21 (BIG #20 N2): she waits for the person ring's own move (focus / back / turn: kring R.busy ignores every tap) before she taps — a ✕ tapped mid-move «did nothing» */await p.waitForFunction(()=>!(window.kitRing&&kitRing.cur&&kitRing.cur.busy),null,{timeout:2500}).catch(()=>{});const k=await el.evaluate(e=>window.__bc?__bc.kind2(e):'').catch(()=>'');const lab=k?await el.evaluate((e,k)=>__bc.lkey(e,k),k).catch(()=>''):'';const ok=await tap(p,el,o);if(!ok||!k)return{ok,two:'',k};
  let L={n:0,mine:false},ch=null;for(let i=0;i<14;i++){await p.waitForTimeout(150);L=await p.evaluate(([k,lab])=>__bc.liftOf(k,lab),[k,lab]).catch(()=>({n:0,mine:false}));const h=await p.evaluateHandle(k=>__bc.chip(k),k).catch(()=>null);ch=h&&h.asElement();if(L.mine&&ch)break;if(!L.n&&i>=4)break}
  const w0=L.mine?'':L.n?'the tapped '+(k==='hand'?'card':'plaque')+' did not take the lift (another one is lifted)':'';
  if(o.liftOnly)return{ok,k,two:'lift-only',up:L.mine,ch:!!ch,why:w0||(L.mine&&!ch?'lifted, but no '+(k==='hand'?'✓':'«Chọn»')+' chip came':L.mine?'':'the tapped card did not lift')};
@@ -112,9 +112,14 @@ const INPAGE=()=>{
   /* the card / plaque may be re-laid (a new node) by the lift: read the lift on the part, not on the old handle */
   /* FIXER #18 F2: the lifted parts now, and whether the ONE lifted part is the tapped one (by its label, the node may be re-laid) */
   /* FIXER #21: a lift counts only while she can SEE it (LIVE f28d28b9 hides #modal on a choice and leaves the chosen card's .klift in the hidden DOM); liftOf compares the FULL label (BIG #19 N3) */
-  liftSeen(x){if(!x.isConnected||x.closest('[hidden]'))return false;const r=x.getBoundingClientRect(),cs=getComputedStyle(x);return r.width>2&&r.height>2&&cs.visibility!=='hidden'&&+cs.opacity>.05},
+  /* FIXER #22 F1 (BIG #21): «gone» ONLY when the node is disconnected, under [hidden] / display:none (no client rects), or lost its lift class (the selector) —
+     NEVER by opacity / rect: kitHandChoose flies EVERY chosen card to opacity 0 (WAAPI fill forwards) before go(), so an opacity read called a ✓ whose go() never ran «chosen» (M8) */
+  liftSeen(x){return x.isConnected&&!x.closest('[hidden]')&&x.getClientRects().length>0},
+  /* FIXER #22 F2 (BIG #21): the lift key = the plaque's data-id (.kpk-n[data-id]: the tapped .kpk-b carries «name · odds · Tốn» as aria-label, the lifted .kpk-n has none → a label compare never matched);
+     hand cards keep the full label (the tapped node IS the lifted node) */
+  lkey(e,k){if(k==='plaque'){const n=e.closest('.kpk-n');const id=n&&n.getAttribute('data-id');if(id!=null&&id!=='')return 'id:'+id}return this.label(e)},
   lifts(k){return(k==='hand'?[...document.querySelectorAll('#modal .opts>button.kopt.klift')]:k==='plaque'?[...document.querySelectorAll('.kpk-n.kpk-up')]:[]).filter(x=>this.liftSeen(x))},
-  liftOf(k,lab){const U=this.lifts(k);const t=String(lab||'');return{n:U.length,mine:U.length===1&&!!t&&this.label(U[0])===t}},
+  liftOf(k,lab){const U=this.lifts(k);const t=String(lab||'');return{n:U.length,mine:U.length===1&&!!t&&this.lkey(U[0],k)===t}},
   lifted(e,k){return this.lifts(k).length>0},
   chip(k){const C=k==='hand'?[...document.querySelectorAll('#modal .dlg>.khconf>button.khok')]:[...document.querySelectorAll('.kpk-conf>button.kpk-gob,.kpk-go>button')];return C.find(x=>this.vis(x)&&!x.disabled)||null},
   liveRoots(){const roots=new Set(this.cands().map(e=>this.root(e)));for(const f of this.fixed)if(this.root(f)===f)roots.add(f);return [...roots].filter(r=>this.live(r))},
@@ -123,7 +128,7 @@ const INPAGE=()=>{
    for(const e of this.cands()){const rt=this.root(e);if(!lr.has(rt))continue;
     const rd=rt===document.body?'body':rt.tagName.toLowerCase()+(rt.id?'#'+rt.id:(typeof rt.className==='string'&&rt.className.trim()?'.'+rt.className.trim().split(/\s+/)[0]:''));
     const key=rd+'|'+e.tagName.toLowerCase()+(e.id?'#'+e.id:'')+'|'+this.label(e);cnt[key]=(cnt[key]||0)+1;
-    e.setAttribute('data-bc',key+'#'+cnt[key]);L.push({key:key+'#'+cnt[key],label:this.label(e),el:this.desc(e),layer:rd,tab:e.getAttribute('data-tab')||'',on:e.matches('.on,.sel,.active,[aria-selected=true],[aria-pressed=true]'),inPanel:!!e.closest('#panel,#stage,.stage'),rk:rt===document.body?'body':this.rootKey(rt),x:e.matches('.kit-x')||/^(✕|×|x)$/i.test(this.label(e))})}
+    e.setAttribute('data-bc',key+'#'+cnt[key]);L.push({key:key+'#'+cnt[key],label:this.label(e),el:this.desc(e),layer:rd,tab:e.getAttribute('data-tab')||'',on:e.matches('.on,.sel,.active,[aria-selected=true],[aria-pressed=true]'),inPanel:!!e.closest('#panel,#stage,.stage'),rk:rt===document.body?'body':this.rootKey(rt),x:e.matches('.kit-x')||/^(✕|×|x)$/i.test(this.label(e)),rx:!!e.closest('.kring-x')/* FIXER #22 (BIG #21 N3): the ring's own ✕ */})}
    return L},
   /* a loading / scene veil the player waits for (not a button layer) */
   busy(){return [...document.querySelectorAll('#klife,#kload,#kroul,#kroulw,#dawn,.kload')].some(e=>this.vis(e))},
@@ -181,7 +186,7 @@ function verdict(b,pre,post,errs,closedOwn,par){
  const backTo=par&&JSON.stringify(post.roots)===JSON.stringify(par.roots);
  /* KIT §13.9: the ✕ «Quay lại» of a mini-game frame gives up = the caller's own lose RESULT; it must never start the board / open the next screen */
  if(closeLike&&!closedOwn&&pre.kg!==''&&(post.kg==='result'||post.S!==pre.S))return['PASS','gave up → the game ended with its lose result (KIT §13.9)'];
- if(closeLike)return closedOwn?['PASS','closed its layer']:backTo?['PASS','back to the screen before']:(pre.ring!=null&&pre.ring>=0&&post.ring!=null&&post.ring<0)?['PASS','stepped back from the person to the ring (ring ✕ «Lui» = one step back; the next ✕ closes)']:(changed?['FAIL','close button did not close its layer (something else changed)']:['FAIL','close button: nothing happened']);
+ if(closeLike)return closedOwn?['PASS','closed its layer']:backTo?['PASS','back to the screen before']:(b.rx&&pre.ring!=null&&pre.ring>=0&&post.ring!=null&&post.ring<0)?['PASS','stepped back from the person to the ring (ring ✕ «Lui» = one step back; the next ✕ closes)']:(changed?['FAIL','close button did not close its layer (something else changed)']:['FAIL','close button: nothing happened']);
  if(b.tab)return post.tab===b.tab||pre.tab===b.tab&&changed?['PASS','tab '+b.tab+' shown']:changed?['WARN','tab button changed the screen but tab '+b.tab+' not marked on']:['FAIL','tab button: nothing happened'];
  if(!changed&&b.on)return['PASS','already on (tapping the shown tab/choice again changes nothing)'];
  if(!changed)return['FAIL','no effect (screen and state unchanged)'];
@@ -474,7 +479,7 @@ async function crawlDev(b,URL,dev){
     a ring build (kitHand / kitPick present) whose selx / talk walk drove NO two-tap row on ANY device = sure FAIL too */
  if(!rows.some(r=>r.two)&&(STARTS.includes('selx')||STARTS.includes('talk'))&&DEV.some(d=>RB[d]))for(const d of DEV)rows.push({dev:d,start:'ring',label:'(ring floor)',verdict:'FAIL',why:'ring UI not driven: this build has kitHand / kitPick but the selx / talk walk made 0 two-tap rows on every device'});
  else if(rows.some(r=>r.two)&&(STARTS.includes('selx')||STARTS.includes('talk')))for(const d of DEV)if(!rows.some(r=>r.dev===d&&r.two))rows.push({dev:d,start:'ring',label:'(ring floor)',verdict:'FAIL',why:'ring UI not driven: 0 two-tap rows on this device (another device drove '+rows.filter(r=>r.two).length+')'});
- const sure=sure0.concat(rows.filter(r=>r.label==='(home floor)'||r.label==='(ring floor)'||r.label==='(budget)'||r.label==='(first load)')).filter(r=>!isKnown(r));if(FAST)for(const r of sure0.filter(isKnown))console.log('  KNOWN',r.dev,'·',r.label,'·',isKnown(r).why);
+ const sure=sure0.concat(rows.filter(r=>r.label==='(home floor)'||r.label==='(ring floor)'||r.label==='(budget)'||r.label==='(first load)'||r.label==='(no target)'/* FIXER #22 F1b (BIG #21): a selection-day screen with nothing to tap = a player stuck there */)).filter(r=>!isKnown(r));if(FAST)for(const r of sure0.filter(isKnown))console.log('  KNOWN',r.dev,'·',r.label,'·',isKnown(r).why);
  if(FAST){for(const r of sure.slice(0,12))console.log('  FAIL',r.dev,'·',(r.screen||'').slice(0,50),'·',r.label,'·',r.why.slice(0,140));console.log(`BUTTON CRAWL GATE ${sure.length?'FAIL':'PASS'} · ${sure.length} sure faults (dead/JS error/close) · ${n('FAIL')-sure.length} soft «no effect» rows not gating`)}
  process.exit(FAST&&sure.length?1:0)})();
 
