@@ -190,3 +190,4 @@ FOR MAIN 165 (Foreman C ROOT 3-1-1-1-1, ~23:25Z 26/11): evidence-card «Ban ch�
 - (27/11 ~07:25Z) MAIN 173: owner ~06:57Z (via 172): full check of all asks + duplicates → OWNER-ASK-AUDIT session_01Rc5AsN3VjEKRPNahxU31aV (opened by 172; reports to 173; partial ~40 min). LC28 to list STARVED PASS after B1 (tainghe-info-r5 starved inside kit-bac-progress 16fe9dca). R11 told to use 16fe9dca + 624d39ea as Tài nghệ base.
 - (27/11 ~07:30Z) MAIN 173: LOOK PASS lãnh cung .85/1.03/.97 review/owner-ui-a f3d25b5a (real-game d-side stills) → sent sếp. DRESS-FIX n1 4d9a171e → RV-163G.
 - (27/11 ~07:00Z) MAIN 173: OWNER APPROVED lãnh cung look («Lãnh cung ok», OD row) → OWNER-UI-C f3d25b5a → RV-167 → next UI bundle.
+- (27/11 ~07:05Z) MAIN 173: OD row — owner-approved look-only CSS changes skip reviewer → LC28 gates + bundle. owner-ui-a → LC28 directly (if branch also carries JS/markup, only that part goes to RV-167).
