@@ -34,6 +34,15 @@ try{const p0=pMan;pMan=function(m){const f=p0.apply(this,arguments);try{const s=
 const mark=(h,f,re,sp)=>{try{if(f&&f.st&&typeof h==="string")return h.replace(re,m=>m+(sp?" ":"")+"kst-"+f.st+(sp?"":" "))}catch(e){}return h};
 try{const m0=mdH;mdH=function(p){return mark(m0.apply(this,arguments),p,/class="md /)}}catch(e){}
 try{const c0=pcPort;pcPort=function(f){return mark(c0.apply(this,arguments),f,/class="pcp/,1)}}catch(e){}
+/* ---- the figure hook (owner 27/11 ~05:46Z: «mọi nơi nàng xuất hiện»): stage tokens (j59 figimg / .md), #mefig, img.kesimg, .kszfs>img bypass mdH/pcPort,
+   so ONE pass finds each figure's owner with jfigseal's kfsFigs()/kfsPerson() and sets the same kit state class; the --kst var is in every figure filter chain ---- */
+function kstPaint(){try{const set=(e,s)=>{e.classList.toggle("kst-lc",s==="lc");e.classList.toggle("kst-dead",s==="dead")};
+ if(typeof kfsFigs==="function"&&typeof kfsPerson==="function")kfsFigs().forEach(im=>{const p=kfsPerson(im);set(im,p?stOf(p.ref||p):"")});
+ const ppl=typeof curPeople==="function"?curPeople():[];document.querySelectorAll("#tokens .tok:not(.fig) .md").forEach(md=>{const t=md.closest(".tok"),p=ppl[+(t&&t.dataset.p)];set(md,p?stOf(p.ref||p):"")})}catch(e){}}
+let kstQ=0;const kstSched=()=>{if(kstQ)return;kstQ=requestAnimationFrame(()=>{kstQ=0;kstPaint()})};
+try{const r0=render;render=function(){const r=r0.apply(this,arguments);kstSched();return r}}catch(e){}
+try{if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kstSched();return r}}}catch(e){}
+try{new MutationObserver(kstSched).observe(document.body,{childList:true,subtree:true})}catch(e){}
 /* ---- the cards ---- */
 try{const r0=rvCard;rvCard=function(v){let h=r0.apply(this,arguments);try{
  if(dthIs(v)){h=h.replace(">Đã chết<",">Đã khuất<");const rows=dthRows(v);if(rows)h=h.replace('<div class="pcr">','<div class="pcr">'+rows)}
