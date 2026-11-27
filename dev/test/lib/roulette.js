@@ -7,6 +7,7 @@
      await autoDismissRoulette(ctx);   // once per context/page, before page.goto: keeps tapping those buttons in the background
      await dismissRoulette(page);      // right after start(): wait for the overlays, tap, wait until they are gone
    The loading placeholder #kroulw has no button: it is waited out (the roulette replaces it). */
+const {keepNotesSeen}=require('./notes-seen');
 const BUSY=()=>!!(document.getElementById('kroul')||document.getElementById('kroulw')||document.querySelector('#kload:not(.out)'));
 async function dismissRoulette(page,opt){
   const o=Object.assign({wait:4000,max:45000},opt||{});
@@ -32,6 +33,8 @@ async function autoDismissRoulette(target){
     const f0=window.fetch;window.fetch=function(u,o){try{const url=String(u&&u.url||u);const h=o&&o.headers;
       if(/ctmload=1/.test(url)||(h&&(h['x-ctm-load']||(h.get&&h.get('x-ctm-load')))))return Promise.reject(new TypeError('test: first-run download blocked'))}catch(e){}return f0.apply(this,arguments)};
     setInterval(()=>{document.querySelectorAll('.krskip,#kload [data-kl="go"]').forEach(b=>b.click())},300)});
+  /* rv27: a wiped storage keeps the «Điều mới trong cung» record (lib/notes-seen.js) */
+  await keepNotesSeen(target);
 }
 /* contest / mini-game result: a podium (#kpodov, tap its "Tiếp") may sit over the result card, and the card has no visible
    "Đã hiểu" button: a player closes it with the kit ✕ (.kit-x[data-kitx=ov]), which presses #kg82ok for them. */
