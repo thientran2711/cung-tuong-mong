@@ -677,3 +677,4 @@ E-T2FLAKE-RV (sonnet reviewer) review/titles2-unit-harden cf124903 | dev/handove
 HARNESS FIXER #22 (opus) review/robot-realtap-live from d1d1541f — fix BIG #21 FAIL F1/F1b/F2 (+ N3 .kring-x, job-3 road pin) | PROGRESS «HARNESS FIXER #22» on review/robot-realtap-live | session_01UV1SzjtdyPATQdayasH1mi | RUNNING | 27/11 14:12Z (Foreman F ROOT #5)
 E-T2FLAKE review/titles2-unit-harden 6cc8a0c4 | reports/titles2-unit-harden.md | session_01DgYSWpputcRCYEcdKJoZsf | DONE (LAND READY, archived) | 27/11 14:22Z (Foreman E child4)
 E-T2FLAKE-RV review/titles2-unit-harden-rv 15c30ac1 | reviews/titles2-unit-harden-review.md | session_01DgYSWouvVnrGk64WS9p3mJ | DONE (PASS, archived) | 27/11 14:22Z (Foreman E child4)
+SAVE-REWIND (every reload loses the last buổi; F s18d + E tallies; opus fixer) | review/save-rewind | Foreman B child 6 (pending) | RUNNING | 27/11 14:50Z
