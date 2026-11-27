@@ -82,7 +82,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const w0=(await D(A)).w;let rd=false;t0=Date.now();while(Date.now()-t0<30000&&!rd){await clear(B);await press(B);await sleep(500);rd=await B.p.evaluate(()=>!!(COOPW.nReady&&COOPW.nReady()))}
   ok(rd,'N1: guest ready at tối',await D(B));
   await B.p.evaluate(()=>{COOPW.whereKey='missed'});/* she holds no «where» of this tối */
-  t0=Date.now();let okN=false;while(Date.now()-t0<120000){await clear(A);await press(A);await B.p.evaluate(()=>{try{COOPW.nCheck()}catch(e){}});const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0){okN=true;break}await sleep(700)}
+  t0=Date.now();let okN=false;while(Date.now()-t0<120000){await clear(A);await clear(B);await press(A);await B.p.evaluate(()=>{try{COOPW.nCheck()}catch(e){}});const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0){okN=true;break}await sleep(700)}
   ok(okN,'N1: guest without the tối «where», host ends first → her night runs, the week merges',okN?undefined:[await D(A),await D(B)])}
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
