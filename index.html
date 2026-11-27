@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2933e560+","t":"2026-11-27T04:07Z","c":"Thẻ đầu đời: lựa chọn có may rủi ghi rõ khả năng bằng lời; lựa chọn đổi cả đời ghi «Cẩn thận khi lựa chọn».","b":"5ce78deb9665","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
+window.CTM_BI={"s":"e71a493b+","t":"2026-11-27T04:18Z","c":"Thẻ đầu đời: lựa chọn có may rủi ghi rõ khả năng bằng lời; lựa chọn đổi cả đời ghi «Cẩn thận khi lựa chọn».","b":"55adc528c5b8","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -100582,12 +100582,23 @@ function covWitDo(a,id,x,ok){const w=covPerson(id);if(!a||!w)return"";const wn=c
  if(x==="vua"){const bac=covWitBac(a,id);if(!ok){try{if(w.rel!=null||w===S)relAdd(a,w,-B.vua.aff)}catch(e){}return `${wn} từ chối bạc, không nhận lời; ${covWho(a)} không mất bạc nào.`}
   if(a!==S)ap(a,{bac:-bac});if(w===S)apply({bac:bac});else if(w.rel!=null)ap(w,{bac:bac});
   const pk=COV.ctx;COV.ctx++;try{deedAdd(a,"wbribe",w.rel!=null?w:null,null,`mua chuộc ${wn} bịt miệng`)}finally{COV.ctx=pk}covSilence(a,id);return `${wn} nhận ${bac} lượng bạc, từ nay câm lặng.`}
- const pk=COV.ctx;COV.ctx++;COV.force=!ok;let d=null;try{d=deedAdd(a,"wkill",w.rel!=null||w===S?w:null,null,`mưu thủ tiêu ${wn}`)}finally{COV.ctx=pk;COV.force=0}
- if(ok){covSilence(a,id);return covKill(a,id)||`${wn} không còn trên đời.`}
+ const o=covOwner(w,id);/* OD 27/11 ~04:08Z: the one she belongs to (a maid's / servant's mistress, a housemate) — the deed is a deed on her house, so its pieces are hers to find */
+ const pk=COV.ctx;COV.ctx++;COV.force=!ok;let d=null;try{d=deedAdd(a,"wkill",w.rel!=null||w===S?w:o,null,`mưu thủ tiêu ${wn}`)}finally{COV.ctx=pk;COV.force=0}
+ if(ok){covSilence(a,id);let sw=[];try{sw=chHere(a).filter(x=>x!==id&&x!==ledgerId(o||{}))}catch(e){}const r=covKill(a,id)||`${wn} không còn trên đời.`;covTell(o,w,a,d,sw);return r}
  /* failure = exposed at once: Danh now, the witness holds evidence of the attempt and saw it */
  try{chSawAdd(a,"mh",id)}catch(e){}covDanh(a,covTier("wkill"),`mưu thủ tiêu ${wn} bị lộ`);
  try{const h=w===S||w.rel!=null?w:ownerOf(w);if(h&&h!==a)evA(h,a,covB().wit.nang.ev,"mh")}catch(e){}
  return `<span class="r">Vụ thủ tiêu ${wn} bị lộ</span>: ${wn} thoát được và biết kẻ chủ mưu là ${covWho(a)}.`}
+/* OD 27/11 ~04:08Z (owner: «Lúc cung nữ chết có báo lý do chết không? Lỡ cung nữ của tôi chết vì bị người khác thủ tiêu thì báo gì»): when a person tied to
+   someone is killed, the one she belongs to hears it AT ONCE — who, where / how she was found (only what the world shows: the killer is never named; the
+   pieces / witnesses of the deed are real, via deedAdd, so the existing «Tố giác» works), the exposure line when a trace or a witness exists, and the new
+   maid Nội vụ phủ sends. Her: a notice card + the Sổ ghi line. An NPC mistress: the same deed on her house (her pieces to find) and her new maid (law 1). */
+const COVSIGN=["được tìm thấy chết dưới giếng sau, trên cổ có vết bầm","được tìm thấy chết trong hồ sen lúc tờ mờ sáng, móng tay còn dính máu","được phát hiện chết trong phòng chứa củi, khóe miệng thâm đen","được tìm thấy chết ở góc ngự uyển, sau gáy có vết đánh"];
+function covOwner(w,id){try{if(w===S)return null;if(w.rel!=null&&rivals.includes(w))return sameHouse(S,w)?S:null;if(/^mu:/.test(id||""))return chMaidO(String(id).split(":")[1]);return ownerOf(w)||null}catch(e){return null}}
+function covTell(o,w,a,d,sw){if(!o||o===a||!w)return;try{const sign=COVSIGN[Math.floor(Math.random()*COVSIGN.length)];const ex=(d&&d.w>0)||(sw&&sw.length)?covLine([{d,sw}]):"";const nm=o.maid&&o.maid!==w&&w.uid!=null?o.maid.name:"";
+  if(o!==S)return;const role=w.rel!=null?"người ở cùng cung":w.uid!=null?"cung nữ thân cận":"người hầu trong cung";/* no pronoun: the notice voice turns «ngươi» around */
+  const h=`<p>${covWho(w)}, ${role}, ${sign}.</p><p>Không ai biết kẻ nào ra tay.</p>${ex?`<p class="r">${ex}</p>`:""}${nm?`<p>Nội vụ phủ đưa ${nm} đến hầu thay.</p>`:""}`;
+  Q.push({t:"Tin dữ",h});log(`<span class="r">${covWho(w)} (${role}) ${sign}; chưa rõ kẻ ra tay.</span>${ex?" "+ex:""}${nm?` Nội vụ phủ đưa ${nm} đến hầu thay.`:""}`)}catch(e){console.error("covTell",e)}}
 /* her three options on a witness, one door (jdoor) */
 const COVN={nhe:"Đe dọa bịt miệng",vua:"Mua chuộc nhân chứng",nang:"Thủ tiêu nhân chứng"};
 function covWitOpts(p){const id=covWitId(p);if(!id||!covSaw(S,id).length)return[];const B=covB().wit,bac=covWitBac(S,id),wn=covWho(covPerson(id));
@@ -102737,7 +102748,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5ce78deb9665";window.CTM_BUILD=BUILD;
+const BUILD="55adc528c5b8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
