@@ -154,3 +154,7 @@ VERDICT: PASS cb17c233 — no BLOCKING. Deploy note of §4 stands.
 
 ## r4 — LAND READY cb17c233 (FF from LIVE 4cfcda61)
 rv PASS cb17c233. Extra fix: Bảng vàng kit dialogs open above #krkov (were under it on LIVE). Videos on CDN img/_review/end-maxrank/cb17c233-*.webm (8, 206). Known, not fixed: «Cách tính» point tiles wrap in a narrow column on Fold (kit tile layout, never visible on LIVE before) — ticket for the kit keeper.
+
+## 7. MERGE RE-CHECK (opus BIG, session_01D3E3Naxk5ytaK9o5afgRus) — PASS 7a646501
+7a646501 = cb17c233 + merge of LIVE a22cf45d; FF from LIVE a22cf45d. Branch source delta vs LIVE (dev/build, rank, dev/test) byte-identical to cb17c233's vs 4cfcda61; jksize.js kszRankName line intact after LIVE's auto-merge. Build same (only CTM_BI); end-maxrank.js ALL PASS; one-core ×3 PASS. Deploy note of §4 stands.
+VERDICT: PASS 7a646501 — no BLOCKING.
