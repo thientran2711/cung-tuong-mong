@@ -64,7 +64,7 @@ function oldCard(P,T){setTimeout(()=>{try{if(typeof petcFx==="function")petcFx()
 /* one pet dies of old age: remove it the way jpet does, with no Thái hậu penalty (src cleared first), keepsake to the owner */
 function die(p,i,P){const me=p===S,T=petT(P),y=ageY(P);note(p,P);P.src="";
  const n=petLose(p,i,"qua đời vì tuổi già");if(!n)return;
- try{(p.inv=p.inv||[]).push({k:"petkv",of:T.n})}catch(e){}
+ try{invAdd(p,{k:"petkv",of:T.n})}catch(e){}
  if(me){log(`<span class="r">${T.n} của ngươi đã qua đời vì tuổi già (${y} năm). Ngươi chôn nó dưới gốc mai, giữ lại túi kỷ vật.</span>`);if(tsbOn()&&!tsbBot())farewell(P,T,y)}
  else try{log(`${NM(p)}: ${T.n.toLowerCase()} của nàng đã chết già.`)}catch(e){}}
 function plWeek(){if(!L.on||!S||S.dead)return;const D=BAL.pet.decay,ex=L.oldDecay-1;

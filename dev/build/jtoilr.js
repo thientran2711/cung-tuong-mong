@@ -54,7 +54,7 @@ function toilRxOpts(r){const R=toilRx(),L=[];const h=r.host,cons=h&&h!=="th"&&h!
   const done=(what)=>toilRxGive(S,h,nm,gain,what);
   L.push({n:"Tặng lại",fx:{bac:-cost},hideOut:true,hint:lv=>lv?`đáp lễ bằng bạc; ${boss?"bề trên":nm} thêm quý ta`:"đáp lễ bằng bạc, người nhận thêm quý ta",risk:"an toàn",go:()=>done("chút bạc")});
   L.push(kitOffIf({n:item?`Tặng lại: ${item.n}`:"Tặng lại bằng một món đồ",fx:{},hideOut:true,hint:`tốn một món của ta, đáng giá ngang chút bạc kia; ${boss?"bề trên":nm} thêm quý ta`,risk:"an toàn",
-   go:()=>{if(!item)return;const i=(S.inv||[]).findIndex(e=>e&&IT[e.k]&&itm(e.k).n===item.n&&!e.h&&!e.w&&!e.t&&!e.wk&&!econNo(S,e)&&!econGiver(e)&&econPrice(S,e)===item.pr);if(i<0)return;const x=S.inv.splice(i,1)[0];/* the piece goes to the person thanked (item ledger jil) */if(h&&typeof h==="object"&&h.inv)h.inv.push(x);else if(typeof ilGone==="function")ilGone(S,x,h==="emp"?"emp":h==="th"?"th":"net");done(item.n)}},!!item,kitWhyItem("món đồ đáng giá ngang chút bạc kia"),kitWhenItem()))}
+   go:()=>{if(!item)return;const i=(S.inv||[]).findIndex(e=>e&&IT[e.k]&&itm(e.k).n===item.n&&!e.h&&!e.w&&!e.t&&!e.wk&&!econNo(S,e)&&!econGiver(e)&&econPrice(S,e)===item.pr);if(i<0)return;const x=S.inv.splice(i,1)[0];/* the piece goes to the person thanked (item ledger jil) */if(h&&typeof h==="object"&&h.inv)invAdd(h,x);else if(typeof ilGone==="function")ilGone(S,x,h==="emp"?"emp":h==="th"?"th":"net");done(item.n)}},!!item,kitWhyItem("món đồ đáng giá ngang chút bạc kia"),kitWhenItem()))}
  /* Hỏi bí quyết */
  if(cons&&!h.queen&&!toilTipOn()){let np=null;try{np=toilNpc(h)}catch(e){}const mine=toilToday(S),my=mine&&mine.makeup?(mine.score|0):0;
   if(np&&np.makeup&&np.score>=my+R.askGap){const odds=toilAskO(S,h);
@@ -65,4 +65,9 @@ function toilRxOpts(r){const R=toilRx(),L=[];const h=r.host,cons=h&&h!=="th"&&h!
 (function(){const f0=toilFlush;toilFlush=function(){const L=(typeof TOIL_POP!=="undefined"?TOIL_POP.slice():[]).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n)).slice(0,BAL.toil.popMax);const n0=Q.length;
  const r=f0.apply(this,arguments);try{const A=Q.slice(n0).filter(m=>m&&m.toilEv);let first=false;A.forEach((m,i)=>{const x=L[i];if(!x||m.toilEv!==x.k||m.toilRx)return;m.toilRx=1;const E=toilRxOpts(x);if(!E.length)return;m.opts=m.opts.concat(E);if(m===Q[0])first=true});
   if(first)showModal()}catch(e){console.error("toil rx",e)}return r};window.toilFlush=toilFlush})();
+/* save r6 (LAW 11, the «.opts=» family): the four answers above are put on the toilPop card (jtoil, rcpReg) AFTER it was made, so a true reload
+   (rcpMk → the bare generator) showed the card without them. The remake now adds them the same way, from the same reaction record (the
+   generator's own argument: host as id, n, name) — the card comes back with every answer she had */
+(function(){if(typeof QRC!=="object"||typeof QRC.toilPop!=="function")return;const g0=QRC.toilPop;QRC.toilPop=function(r){const m=g0.apply(this,arguments);
+  try{if(RCPRE&&m&&Array.isArray(m.opts)&&!m.toilRx&&r&&m.toilEv===r.k){m.toilRx=1;const E=toilRxOpts(r);if(E.length)m.opts=m.opts.concat(E)}}catch(e){console.error("toil rx remake",e)}return m}})();
 window.toilRxOpts=toilRxOpts;Object.assign(window,{toilTellO,toilAskO,toilRxGrudge,toilRxTell,toilRxGive,toilRxAsk,toilGiveCost});window.toilGrudgeOf=toilGrudgeOf;window.toilTipOn=toilTipOn;
