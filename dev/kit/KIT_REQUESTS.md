@@ -351,6 +351,12 @@ Owner OD 25/11 ~23:20Z: the mirror lost its preset sets (jration lxColRows dropp
 - (26/11 ~07:00Z, KK38, review/kit-stage-r2) kit-stage re-merged onto LIVE 02f564ae: 4 source conflicts resolved (assemble.py module list = union: main's jrdcsd/jroadc/jselx*/jplrule + kit-stage's jkpick/jkhand/jkstage/jkmapban; jksize kszLivePick3 = main's fitfast hint loop + §101 hand rules (Fold hand → stacked NL>NM>NS, iPad hand → XL, a hand never seeds the size hint); jopic kitOptTier = main's KOT memo + §101 hand early return; jplst = §98.2 railW + main's ResizeObserver). K-MAP-BANNER adopted by PLACE-RULES' jplrule: plMap/plBanTick now set kitMapBanner (reason + «⌂ Nhà ta» home mark) instead of the .fest chip + kitNotice stand-in.
 - (26/11 KK38) WORDING «thiện cảm thiện cảm +6» (FOREMAN E 06:15Z, «Vì sao» row; same family j72 «thiện cảm với ngươi ±N»): j84 rule «với ngươi|ta ±N» → «thiện cảm» no longer fires right after the word «thiện cảm». Scan dev/test/vp-doubled.js (every j*.js literal with với/quý ngươi|ta, every WHY_STAT label × real causes through the result row, every KIT_REL/NAMES label): LIVE 02f564ae 33 doubled (A 3 · B 18 · C 12) → 0.
 
+## 26/11 KIT-STAGE-R4 → KK44: «kitHand outside #modal» — ✅ DONE → KIT §101.13 kitHand.mount (KK51, review/kit-hand-mount; no pager per OD 26/11 ~22:43Z, the «≤7 + ‹ ›» ask below is overwritten)
+kitHand (jkhand.js) only takes `#modal .opts`. The new-kit set (OD 26/11 ~19:00Z) needs the Bàn bài on 8 card rows that are NOT in #modal (KK44 §1 rows):
+1 SELSCENE kbare answers (jselxday.js:70 → jkitsel.js kitBareOpt) · 2 kpsc identity pair `.nlopts` (j79.js:810) · 3 Hành sự act deck (j6.js renderPanel0 `.cards`, j19 cardH) ·
+4 Khuê các decks + Việc groups (jkc.js:632/654, jkc2.js:449) · 5 Tài nghệ / skill act cells `.kpanec` (j79.js kitSkillCard) · 6 empty-tab act (j79.js kitEmptyTab) ·
+7 jactj4 tab doors (DOOR.card) · 8 jflip card row (Lật thẻ bài) — (kpdlg guide buttons jpdlg: MAIN to say if related; default = not a choice hand).
+ASK: a non-modal host for kitHand — `kitHand.mount(container,{cards,onPick,onLift})` (or kitHandOn accepting a marked `.opts.khost` outside #modal) with the same deal / lift / plate / ✓ ✕, the MAIN 162 ruling (a) applied (>10 cards → ≤7 per hand + ‹ › paging, same card size, never shrink), sized for a tab pane (Fold 755x1000 + iPad 1180x820). Then KIT-STAGE wires the 8 rows.
 - (26/11 ~22:40Z, RING-BUILD-4, review/ring-build 21efde24) KIT REQUEST «kitScene.refit» → kit keeper (KK45): kitScene.open sizes its layer ONCE from kscnGeo(); when the bottom bar grows (3-line «Sang buổi» label after an act) or the HUD / window changes, an open scene keeps its old height and covers the bottom buttons (17 px Fold / 33–46 px iPad; owner 26/11 ~20:30Z «Vòng người che nút chọn ở dưới»). Ask: re-apply kscnGeo() to the open layer (L.style + L.g) on resize / bar or HUD size change and notify its owner (onRefit), for every scene. Until then jkring.js refits only the ring layer (watch/refit); drop that once the kit does it.
 
 ## 26/11 K-CHOICE-WARN — the small warning line «Cẩn thận khi lựa chọn» (FIRSTCARD-3, owner OD 26/11 ~18:25Z; kit keeper KK44)
@@ -385,6 +391,8 @@ cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) 
   the night card (jne `kitNightEnd`) uses the same parts («Kết cục» row with a `kitChip(seal)`). KK39: please confirm or restyle in place.
   Open word question for MAIN: the brief says «Hỏng»; the kit seal word stays BẠI (one place to flip: kitResultSeal).
 
+## 27/11 MAIN 167/168 → KK51/KK52: «NO-FLIP Game-of-Dice kitHand» (owner OD 26/11 ~23:58Z «Ok bỏ lật, làm theo Game of Dice»; spec god-research.md) — ✅ DONE → KIT §101.10 (KK52, review/kit-hand-mount)
+Info on the card FRONT (hand face: picture · name · Tốn; enlarged: plaque name · picture · Tốn + odds word · Được · Mất / locked why); tap = enlarge in the centre + ONE «Chọn» (since 27/11 ~04:00Z: the small green ✓ BAL.kpkgo INSIDE the card top-right, KIT-STAGE-R9); tap another = switch, elsewhere = back. Flip code + CSS removed (kit_dupes guards it). Family-wide apply (incl. the 8 rows outside #modal via kitHand.mount) = KIT-STAGE successor.
 ## 27/11 KK53 — kitPick plaque: ONE «Chọn» + silk card face (MAIN 169 ruling 01:27Z; owner OD 27/11 ~01:35Z / ~01:40Z)
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
