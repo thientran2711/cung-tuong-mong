@@ -12,7 +12,7 @@ const MIME={html:'text/html',js:'text/javascript',json:'application/json',webp:'
   const f=path.join(ROOT,decodeURIComponent(u.pathname));if(/assets\.json$/.test(f)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});
   r.fulfill({status:200,body:fs.readFileSync(f),headers:{'content-type':MIME[f.split('.').pop()]||'application/octet-stream'}})});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
- const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto('http://ht.local/'+PAGE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(3500);
  const clean=()=>p.evaluate(()=>{for(let i=0;i<4;i++)document.querySelectorAll('[data-km-close]').forEach(b=>b.click());Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;const w=document.getElementById('dawn');if(w){w.hidden=true;w.innerHTML='';w.classList.remove('on')}document.body.classList.remove('kbk-open');try{render()}catch(e){}});
  if(SC==='old'){const d=fs.readFileSync(SAVE,'utf8');await p.evaluate(d=>{localStorage.setItem(SK(2),d);showTitle();const b=document.querySelector('[data-load="2"]');if(b)b.click();else{deser(loadSlot(2));SLOT=2}},d);await p.waitForTimeout(3000);await p.evaluate(()=>{document.getElementById('title').hidden=true;try{render()}catch(e){}});await clean()}

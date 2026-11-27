@@ -61,7 +61,7 @@ if(typeof figPick==="function"){const p0=figPick;figPick=function(who){let r=p0.
    if(ct){const k=ct.fid;delete ct.fid;who.fid=k;r=k}}}catch(e){}return r}}
 
 /* 4 — stage strangers: never the real figure blurred */
-try{["m","f"].forEach(g=>{if(typeof j59unkSrc==="function")j59unkSrc(g)})}catch(e){}
+try{["m","f","e"].forEach(g=>{if(typeof j59unkSrc==="function")j59unkSrc(g)})}catch(e){}
 const st=document.createElement("style");st.id="jimg";st.textContent=
  ".stage.j59 .tok.fig.j59unk .figimg,.stage.j59 .tok.fig.j59unk.j59sel .figimg{filter:none!important;visibility:hidden!important}";
 document.head.appendChild(st);

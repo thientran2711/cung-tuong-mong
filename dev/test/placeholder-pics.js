@@ -6,7 +6,7 @@ const [,,OLD,NEW,SIZE,SHOT]=process.argv;const sleep=t=>new Promise(r=>setTimeou
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});const [wh,dpr]=(SIZE||"755x1000@1").split("@");const [W,H]=wh.split("x").map(Number);
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(dpr||1),hasTouch:true,isMobile:W<1000,serviceWorkers:'block',reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(240000);
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(240000);
  const boot=async u=>{await p.goto(u,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function');await sleep(4000);await p.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove()})};
  await boot(OLD);
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start();NLP=null;Q.length=0;quiet=false;S.year+=1;save()});
