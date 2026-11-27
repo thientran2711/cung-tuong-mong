@@ -13,7 +13,7 @@ const {chromium}=require('playwright');const path=require('path');const A=proces
 const U=x=>/^(https?|file):/.test(x)?x:'file://'+path.resolve(x);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,700):''))};
 (async()=>{const b=await chromium.launch();const errs=[];
- const boot=async u=>{const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ const boot=async u=>{const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();await require('./lib/veil').guard(p);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(U(u),{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);return p};
  const fresh=`(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;Q.length=0})()`;
  let oldSave=null;
