@@ -29,6 +29,13 @@ try{const e0=dieIf;dieIf=function(p,why){const r=e0.apply(this,arguments);try{dt
 try{const r0=render;render=function(){dthSweep();return r0.apply(this,arguments)}}catch(e){}
 /* ---- portrait state on the f object the ONE renderers read ---- */
 const stOf=p=>!p?"":p.alive===false?(dthIs(p)?"dead":""):p.out?"lc":"";
+window.kstOfP=stOf;
+/* K-NOTICE-SUBJECT-FREE (KIT §8.2d; PUNISH-TIER-8, MAIN 177 ruling): the subject of a notice about a person who has NO live registry key any more (a dead maid:
+   WHO(["m"]) is the CURRENT maid) — the face object carries the person herself (__kp: kitStagePeople → kitEventStage draws HER full-body figure via kitStageFig,
+   kitName for the plate) and her portrait state (st) for pframe / pcPort. No w key: a reload shows the notice without a subject rather than the wrong person. */
+function kitDeadWho(p){try{if(!p)return null;const f=p.rel!=null&&typeof pv==="function"?Object.assign({},pv(p)):typeof pServ0==="function"?Object.assign({rk:"sv"+(BAL.srvRk&&BAL.srvRk.dai||0),rw:typeof kitMaidTitle==="function"&&p.role!=="eunuch"&&p.uid!=null?kitMaidTitle(p):""},pServ0(p.uid!=null&&!p.role?Object.assign({role:"maid"},p):p)):{};
+ delete f.w;f.__kp=p;const s=stOf(p);if(s)f.st=s;return f}catch(e){return null}}
+window.kitDeadWho=kitDeadWho;
 try{const p0=pv;pv=function(v){const f=p0.apply(this,arguments);try{const s=stOf(v);if(s&&f&&typeof f==="object")f.st=s}catch(e){}return f}}catch(e){}
 try{const p0=pMan;pMan=function(m){const f=p0.apply(this,arguments);try{const s=stOf(m);if(s&&f&&typeof f==="object")f.st=s}catch(e){}return f}}catch(e){}
 const mark=(h,f,re,sp)=>{try{if(f&&f.st&&typeof h==="string")return h.replace(re,m=>m+(sp?" ":"")+"kst-"+f.st+(sp?"":" "))}catch(e){}return h};
@@ -37,6 +44,9 @@ try{const c0=pcPort;pcPort=function(f){return mark(c0.apply(this,arguments),f,/c
 /* ---- the figure hook (owner 27/11 ~05:46Z: «mọi nơi nàng xuất hiện»): stage tokens (j59 figimg / .md), #mefig, img.kesimg, .kszfs>img bypass mdH/pcPort,
    so ONE pass finds each figure's owner with jfigseal's kfsFigs()/kfsPerson() and sets the same kit state class; the --kst var is in every figure filter chain ---- */
 function kstPaint(){try{const set=(e,s)=>{e.classList.toggle("kst-lc",s==="lc");e.classList.toggle("kst-dead",s==="dead")};
+ /* KIT §8.2d (PUNISH-TIER-8): the left figure of a dialog (KIT §3 .kszfs>img / .kesimg) shows its person's state too — a «Tin dữ» about the dead shows her b/w,
+    the plate included (.kszfig / .kesf get the class: owner ~05:59Z «khung trắng đen»); kfsFigs() leaves #modal figures out for the head seals only */
+ if(typeof kfsPerson==="function")document.querySelectorAll("#modal .kszfs>img,#modal img.kesimg").forEach(im=>{const p=kfsPerson(im);const s=p?stOf(p.ref||p):"";set(im,s);const box=im.closest(".kszfig,.kesf");if(box)set(box,s)});
  if(typeof kfsFigs==="function"&&typeof kfsPerson==="function")kfsFigs().forEach(im=>{const p=kfsPerson(im);set(im,p?stOf(p.ref||p):"")});
  const ppl=typeof curPeople==="function"?curPeople():[];document.querySelectorAll("#tokens .tok:not(.fig) .md").forEach(md=>{const t=md.closest(".tok"),p=ppl[+(t&&t.dataset.p)];set(md,p?stOf(p.ref||p):"")})}catch(e){}}
 let kstQ=0;const kstSched=()=>{if(kstQ)return;kstQ=requestAnimationFrame(()=>{kstQ=0;kstPaint()})};

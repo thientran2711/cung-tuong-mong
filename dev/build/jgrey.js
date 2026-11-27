@@ -24,6 +24,7 @@ function kitTam(standin){return standin?`<span class="ktam" role="note" title="T
 (function(){const st=document.createElement("style");st.textContent=`
 .kst-lc{--kst:saturate(.85) contrast(.97) brightness(1.03)}
 .kst-dead{--kst:grayscale(1) brightness(.92)}
+.kesf.kst-dead>.kpsn,.kszfig.kst-dead .kt3{filter:var(--kst)}/* KIT §8.2d: a dead person's dialog figure — the name plate too (owner ~05:59Z «khung trắng đen») */
 /* status band of a kit portrait (Ở lãnh cung / Đã khuất) sits INSIDE the picture, above the tassel: it covered the relation rows under the portrait (MAIN LOOK 172) */
 .pcp.kit>.pcs{bottom:31%;left:14%;right:14%;border-radius:4px}
 /* the band is its OWN dark plate + white text in both states, never washed by the picture state (MAIN 172 ruling 27/11 ~06:28Z); the legacy .rk-cold grayscale(.6) on the whole portrait is gone for lãnh cung so the kit lãnh cung FRAME keeps its colours (owner ~05:53Z) — the pale filter is on the image only */

@@ -74,6 +74,11 @@ function covWitO(a,id,x){const B=covB().wit[x],w=covPerson(id);let b=B.band+covG
 function covSilence(a,id){if(!a||!id)return;const W=a.wsee||{};for(const c in W)W[c]=(W[c]||[]).filter(x=>x!==id);const k=key(a);
  for(const h of [S].concat(rivals||[])){const E=h&&h.ewc&&h.ewc[k];if(!E)continue;for(const c in E)if(Array.isArray(E[c]))E[c]=E[c].filter(x=>x!==id)}
  a.wsil=a.wsil||{};a.wsil[id]=wk()}
+/* MAIN 177 LOOK: the stage list is a snapshot (S.visit.people, j2 homePeople): a maid killed while she stands on HER stage leaves it at once and
+   the new maid from Nội vụ phủ takes her place; a dead servant / housemate just leaves */
+function covStageSwap(o,w){try{if(o!==S||!S.visit||!Array.isArray(S.visit.people))return;const P=S.visit.people;
+ const i=P.findIndex(x=>x&&(x.ref===w||x.kind==="maid"&&!x.ref&&x.name===w.name));if(i<0)return;
+ if(w.uid!=null&&S.maid&&S.maid!==w&&typeof homePeople==="function"){const nm=homePeople().find(x=>x&&x.kind==="maid");if(nm){P[i]=nm;return}}P.splice(i,1)}catch(e){}}
 function covWho(p){return p===S?"ngươi":p&&p.rel!=null?NM(p):(p&&p.name)||"người ấy"}
 /* the attempt on a witness's life: the person really dies (consort: jmort kill → npcRetire, ledger; a servant: asOut «dead»); her: a heavy Sức blow */
 function covKill(a,id){const w=covPerson(id);if(!w)return"";const why=`bị thủ tiêu để bịt miệng`;
@@ -82,9 +87,9 @@ function covKill(a,id){const w=covPerson(id);if(!w)return"";const why=`bị th�
   try{if(typeof npcRetire==="function")npcRetire(w)}catch(e){}w.alive=false;if(w.queen){w.queen=false;if(S.vacSince==null)S.vacSince=S.turn}
   try{S.mort=S.mort||{};(S.mort.dl=S.mort.dl||[]).push({g:"consort",a:w.age,c:"plot",y:S.year});if(S.mort.dl.length>300)S.mort.dl.shift()}catch(e){}
   return `<span class="r">${w.name} ${why}, ${w.age} tuổi.</span>`}
- if(/^mu:/.test(id)){/* a maid witness (chWitP «mu:»): she really dies, her mistress gets a new maid from Nội vụ phủ (j8 maidMk) */const o=chMaidO(id.split(":")[1]);w.dead=1;
-  try{if(o&&o.maid===w)o.maid=maidMk(o);(S.mort=S.mort||{}).dl=S.mort.dl||[];S.mort.dl.push({g:"maid",a:w.age||0,c:"plot",y:S.year});if(S.mort.dl.length>300)S.mort.dl.shift()}catch(e){}return `<span class="r">${w.name} ${why}.</span>`}
- w.dead=1;try{if(typeof asOut==="function"&&ownerOf(w))asOut(w,"dead")}catch(e){}return `${w.name} ${why}.`}
+ if(/^mu:/.test(id)){/* a maid witness (chWitP «mu:»): she really dies, her mistress gets a new maid from Nội vụ phủ (j8 maidMk) */const o=chMaidO(id.split(":")[1]);w.dead=1;w.alive=false;/* jdead dthIs: the kit dead state */
+  try{if(o&&o.maid===w){o.maid=maidMk(o);covStageSwap(o,w)}(S.mort=S.mort||{}).dl=S.mort.dl||[];S.mort.dl.push({g:"maid",a:w.age||0,c:"plot",y:S.year});if(S.mort.dl.length>300)S.mort.dl.shift()}catch(e){}return `<span class="r">${w.name} ${why}.</span>`}
+ w.dead=1;w.alive=false;try{const ow=ownerOf(w);if(typeof asOut==="function"&&ow)asOut(w,"dead");covStageSwap(ow,w)}catch(e){}return `${w.name} ${why}.`}
 /* one road for her and every NPC: x = nhe | vua | nang; returns the result text; pay = the bạc already handled by the caller (her option card) */
 function covWitDo(a,id,x,ok){const w=covPerson(id);if(!a||!w)return"";const wn=covWho(w),B=covB().wit;if(ok==null)ok=roll(covWitO(a,id,x));
  if(x==="nhe"){const pk=COV.ctx;COV.ctx++;try{deedAdd(a,"wthreat",w===S?S:w.rel!=null?w:null,null,`đe dọa ${wn} bịt miệng`)}finally{COV.ctx=pk}
@@ -108,7 +113,10 @@ function covOwner(w,id){try{if(w===S)return null;if(w.rel!=null&&rivals.includes
 function covTell(o,w,a,d,sw){if(!o||o===a||!w)return;try{const sign=COVSIGN[Math.floor(Math.random()*COVSIGN.length)];const ex=(d&&d.w>0)||(sw&&sw.length)?covLine([{d,sw}]):"";const nm=o.maid&&o.maid!==w&&w.uid!=null?o.maid.name:"";
   if(o!==S)return;const role=w.rel!=null?"người ở cùng cung":w.uid!=null?"cung nữ thân cận":"người hầu trong cung";/* no pronoun: the notice voice turns «ngươi» around */
   const h=`<p>${covWho(w)}, ${role}, ${sign}.</p><p>Không ai biết kẻ nào ra tay.</p>${ex?`<p class="r">${ex}</p>`:""}${nm?`<p>Nội vụ phủ đưa ${nm} đến hầu thay.</p>`:""}`;
-  Q.push({t:"Tin dữ",h});log(`<span class="r">${covWho(w)} (${role}) ${sign}; chưa rõ kẻ ra tay.</span>${ex?" "+ex:""}${nm?` Nội vụ phủ đưa ${nm} đến hầu thay.`:""}`)}catch(e){console.error("covTell",e)}}
+  /* MAIN 177 LOOK (OD 27/11 ~05:59Z + OD:L448): the figure is the DEAD person, full-body, kit dead state (kitDeadWho → kitStageFig .kst-dead);
+     the new maid is a NAME only on the Nội vụ phủ line (who:[] = no inline avatar); the trace line keeps the kit's own people avatars */
+  const facts=[{text:`${covWho(w)}, ${role}, ${sign}.`,who:[]},{text:"Không ai biết kẻ nào ra tay.",who:[]}];if(ex)facts.push({text:`<span class="r">${ex}</span>`});if(nm)facts.push({text:`Nội vụ phủ đưa ${nm} đến hầu thay.`,who:[]});
+  Q.push({t:"Tin dữ",h,kit:{facts,group:false},who:typeof kitDeadWho==="function"?kitDeadWho(w):null});log(`<span class="r">${covWho(w)} (${role}) ${sign}; chưa rõ kẻ ra tay.</span>${ex?" "+ex:""}${nm?` Nội vụ phủ đưa ${nm} đến hầu thay.`:""}`)}catch(e){console.error("covTell",e)}}
 /* her three options on a witness, one door (jdoor) */
 const COVN={nhe:"Đe dọa bịt miệng",vua:"Mua chuộc nhân chứng",nang:"Thủ tiêu nhân chứng"};
 function covWitOpts(p){const id=covWitId(p);if(!id||!covSaw(S,id).length)return[];const B=covB().wit,bac=covWitBac(S,id),wn=covWho(covPerson(id));
