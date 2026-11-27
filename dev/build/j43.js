@@ -6,7 +6,7 @@
    3. wit: every head may slip (low Tâm cơ most, high ~12%); the clever wait for better odds;
    4. a bad week (punished, demoted, fallen) makes anyone rash for about three weeks;
    5. tells reach her through a named servant of hers, by Tai mắt and servant traits; a servant who spies for the schemer keeps silent (withholds, never lies). ================= */
-const PUSHK=["lygian","tocao","xinhh","slowpoison","expose"];
+const PUSHK=["lygian","accuse","xinhh","slowpoison"];/* split-merge B1: tocao / expose folded into accuse */
 const PUSHW={slowpoison:"poison",lygian:"rumor",xinhh:"ally",tocao:"accuse",expose:"accuse"};
 PUSHK.forEach(k=>{if(!BIG.includes(k))BIG.push(k)});
 Object.assign(TELLS,{lygian:"đem bạc lén biếu thái giám hầu cận Hoàng thượng, dò lúc ngài vui buồn",tocao:"sai người gom lời cung nhân, chép lại sổ sách cũ",

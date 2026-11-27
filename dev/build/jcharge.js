@@ -280,3 +280,15 @@ function chFailPun(t,a){a=a||S;const c=t?chReady(a,t):null;return c?chBackTxt(a,
 function chWinTxt(k,a,t,W){const u=chUse(k,a,t);return u?`${W||NM(t)} ${chPunTxt(t,u.c)}`:null}
 (function(){if(typeof AOUT!=="object")return;for(const k of ["accuse","tocao"]){const d=Object.getOwnPropertyDescriptor(AOUT,k);const base=()=>d?(d.get?d.get.call(AOUT):d.value):null;
  try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const b=base()||["",""];const t=typeof J78==="object"&&J78.cardV;const w=t?chWinTxt(k,S,t,j78who(t)):null;const f=k==="accuse"&&t?`Danh ${balSg(chFailDanh())}, thù ${balSg(BAL.eff.j8.f_6)}, chứng cứ bị hủy${chFailPun(t)?"; "+chFailPun(t):""}`:b[1];return w?[w+(k==="accuse"?`; Danh ${balSg(BAL.eff.j8.accuseDanh)}`:""),f]:[b[0],f]}})}catch(e){}}})();
+/* split-merge B1/B3/P6 (owner 26/11 ~21:00Z «hạn chế tách 1 việc», 27/11 ~00:46Z one matter = one road, ~01:00Z general button + specific true result):
+   ONE «Tố giác» (ACT accuse) for her and every NPC (law 1). The charge = the full one the pieces + witnesses make (chReady); the listener = the highest one who
+   can judge it: a Hoàng hậu above the accused (the «Trình Hoàng hậu» road: her odds, her verdict card jrcv), else Hoàng thượng (the accuse road). «Tố tội thật»,
+   «Bóc chuyện tư tình», «Trình Thái hậu», «Trình Hoàng hậu» are no longer offered as their own buttons or NPC choices. */
+function chTo(a,t){const q=typeof queenP==="function"?queenP():null;return q&&q!==a&&q!==t&&rkOf(t)<7?"trinhhh":"accuse"}
+(function(){const A=ACT.accuse,T=ACT.trinhhh;if(!A||!T)return;const ok0=A.ok,o0=A.o,f0=A.f;
+ A.ok=function(a,t){return chTo(a,t)==="trinhhh"?!!T.ok(a,t):ok0.apply(this,arguments)};
+ A.o=function(a,t){return chTo(a,t)==="trinhhh"?T.o(a,t):o0.apply(this,arguments)};
+ A.f=function(a,t){return chTo(a,t)==="trinhhh"?T.f(a,t):f0.apply(this,arguments)}})();
+/* the one «Tố giác» row tells the true result of the road it takes (Trình Hoàng hậu when a Hoàng hậu hears it) */
+(function(){if(typeof AOUT!=="object")return;const d=Object.getOwnPropertyDescriptor(AOUT,"accuse");const base=()=>d?(d.get?d.get.call(AOUT):d.value):null;
+ try{Object.defineProperty(AOUT,"accuse",{configurable:true,enumerable:true,get(){const t=typeof J78==="object"&&J78.cardV;if(t&&chTo(S,t)==="trinhhh"&&AOUT.trinhhh)return AOUT.trinhhh;return base()}})}catch(e){}})();
