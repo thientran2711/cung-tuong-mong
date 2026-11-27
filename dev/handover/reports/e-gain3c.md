@@ -60,13 +60,16 @@ rvGroups (j15:39) falls back to `a.x` when LACK (j25) has no text. In-page scan 
 | blockf Nhờ ơn người quen rút thẻ bài | its whole x line («không tốn bạc · người quen … trả ơn …») | «chưa có người quen nào đủ thân để nhờ» · «thẻ bài của nàng đã bị rút» |
 
 ## Tests (final build = this branch, dev/index.html via assemble.py; file:// URL)
-- `node dev/test/door-loss.js <url> out 755x1000@1` (NEW): **0 bad hints / 0 page errors, exit 0** (≈600 door ways, 6 states). Before (= MUTANT=1, doorHint blanked): **FAIL, 6 distinct** (Phạt vô cớ, Đổi người, Nghe ngóng chung ×2 kinds, Rỉ tai, Khoe quà ngự ban). MUTANT=2 (Phạt vô cớ without its gain): **FAIL, 1 distinct LOSS-ONLY** (Phạt vô cớ).
-- `node dev/test/gain-empty.js` FULL 6 states: Fold 755x1000 — **1627 cards, 0 empty, 0 page errors, exit 0**; iPad 1180x820 — RESULT_IPAD.
+- `node dev/test/door-loss.js <url> out 755x1000@1` (NEW): **0 bad hints / 0 page errors, exit 0** (≈600 door ways, 6 states). Before (= MUTANT=1, doorHint blanked): **FAIL, 6 distinct** (Phạt vô cớ, Đổi người, Nghe ngóng chung ×2 kinds, Rỉ tai, Khoe quà ngự ban). MUTANT=2 (Phạt vô cớ without its gain): **FAIL, 1 distinct LOSS-ONLY** (Phạt vô cớ). iPad 1180x820: 426 door ways, **0 bad, 0 page errors, exit 0**.
+- `node dev/test/gain-empty.js` FULL 6 states: Fold 755x1000 — **1627 cards, 0 empty, 0 page errors, exit 0**; iPad 1180x820 — **1685 cards, 0 empty, 0 page errors, exit 0**.
 - `node dev/test/act-audit.js <url> out 755x1000@1 cao`: **done errs=0, exit 0** (666 runs; «Phạt vô cớ» option card: «Được: răn đe: tám tuần kẻ hầu sợ chủ, cung khác khó mua chuộc …» · «Mất: thiện cảm −−−, Đức −−»).
 - `node dev/test/egain3c-parity.js .tmp/old.html dev/index.html` (old = origin/main 611fca61 build): **64 same, 0 different** (every ACT `c` with getters read + the f-side moved numbers).
 - `node dev/test/oldsave-r1.js` (old = origin/main 611fca61): **16 / 16** (755x1000, 1180x820, 1366x1024; loads, tabs, no overflow, 0 page errors).
 - `node dev/measure/act-literal-scan.js`: 15 → **0**, exit 0. (C) LACK scan: 6 → **0**.
 - Răn đe run (toi): bribe odds 23 → 8 → 23 (8 weeks); NPC servDo phat sets the NPC's dread; save→load keeps `dreadW`.
+
+## OPEN — waits for E-GAIN3b-FIX (Foreman E 27/11 ~08:36Z)
+The base 78c8608a got a BIG review FAIL (dev/handover/reviews/e-gain3b-review.md #1: the J2 door-row hint takes kitHint(raw way) first → NEED text / tips / «Danh +» shown as her gain). doorHint here keeps that h1-first order for both door paths. When the fixer's sha lands: merge it, move ITS gate into doorHint (one helper, both paths), re-run door-loss + gain-empty + the reviewer's base↔head door-row diff. Not READY before that.
 
 ## Found, not fixed (separate families)
 1. Module-local number tables typed in code (law 4, a wider family than ACT defs): e.g. jface.js:80 `FXF={…tat:3,tatDuc:-2,tatRel:-20,phatDuc:-1,…}`, j9 trip `roll(25)` / `suc:-15` (miscarry), j8/j9 odds formulas `odA(a,38+…)`, j24 svDefect `fx:{bac:-20}`. Needs its own scan + move.
