@@ -119,3 +119,30 @@ Every round: line check on every file both sides changed = 0 missing; CHANGE = u
 - QUICKCHECK: part 2 PASS (open 2006 ms, old save ok, perf new/live render 268/238, tab 426/395, buổi 1420/1352, tasks 24/23). Core gates: all PASS except G4 q-softlock («view parked by a tab change → card on court», fold + ipad) under quickcheck load. Standalone q-softlock: branch 2/2 PASS, LIVE 772bee4f 2/2 PASS. The same gate failed on LIVE 611fca61 under quickcheck in round 3 → intermittent under load, not promo.
 - coop-e2e (coop-clear now on LIVE): branch 747a4787 = 134 ok · 1 FAIL «after rejoin: same world» (R#25/26/30 .evc.902 A undefined / B {} = the LIVE jcharge.js read-path write seen in round 1), then a hang in a later week (coop-e2e.js:396), exit 124. LIVE 772bee4f = 73 ok · 0 FAIL, then a hang in week 3 (coop-e2e.js:290 buoiBoth), exit 124. → **= LIVE (LIVE stops earlier)**; coop-clear does not yet make coop-e2e finish on LIVE → MAIN / RV-173 follow-up. Logs: scratch coop-br2.log / coop-live2.log.
 - Open LIVE items unchanged: reach2 elder card (j95.js:629), coop-e2e hang, jcharge evc read-write.
+
+## ROUND 7 (same reviewer, 27/11 ~22:05Z): LIVE 772bee4f → bd47c753 (save-fix-stack rv26) merged as **1ef034be** (FF from bd47c753, pushed) — NOT LAND READY yet · ROLLOVER HANDOVER
+Merge: 15 source files conflicted. 17 hunks token-merged (disjoint edits on one line; tool /home/user/wt/rv-tools/tokmerge.py, conservative: any touching edit = conflict). 3 by hand:
+- j24 approach gift: D giftHand line kept (law 6c).
+- jemoact: LIVE eaHitMineCard (rcpReg generator) + D's pvOan preview moved into it.
+- jts: D `gl=tsLeGifts(G,S)` + LIVE tsLeMeCard (rcpReg) + D's two pvQuy previews moved into it.
+LAW 11: LIVE's dev/test/inv-stack-scan.py found 2 raw `.inv.push` in D's jmind giftHand → `--fix` → invAdd (RAW 0). assemble.py = union (+ LIVE jstack). CHANGE = LIVE (lander adds the promo line). Line check: misses only on lines both sides edited (token-merged) or hand-moved into the generators. j8 LIVE `invAdd(p,{k,from:"th"})` present.
+Gates on 1ef034be:
+| gate | branch | LIVE bd47c753 |
+|---|---|---|
+| kit-promo-hook | 8/8 | – |
+| promo-build | 47/48 run 1 (HH đề cử «not granted»), 48/48 × 15 re-runs (12 instrumented: set-up always reaches the cut; pbTry is deterministic → fresh() random-life set-up miss, 2 in ~17 runs since 772bee4f) | – |
+| help-housemate / srv-rank | ALL PASS / 16/16 | – |
+| save-unseen-lists | 32/32 | 32/32 |
+| save-rewind (needs commit 8ae99226, fetched --depth=1) | 4/4 | 4/4 |
+| inv-stack | 25/27 (DOM Dâng quà 2319 / Biếu quà 2790 > 2000) | identical 25/27 |
+| quickcheck part 2 | PASS (old save ok, perf ≈ live) | PASS |
+| core gates | all PASS except G4 q-softlock | all PASS except G4 next-dead (this run) |
+| **q-softlock under equal parallel load** | **2/4 PASS** (FAIL «view parked by a tab change» foc="" i.e. the person-view layer .kfoc is GONE, not hidden, after the tab tap; card itself shows; + 3 other ipad rows once) | **4/4 PASS** |
+| q-softlock alone | 2/2 PASS (round 6) | 2/2 |
+| coop-e2e | 82 ok · 1 FAIL «after week 2 same world» (66 diffs: S.emp.met, S.wxDay.sk, staff loyal/tin/suc), stop :292 | 131 ok · 4 FAIL incl. the same «after week 2 same world» (114 diffs, same family) → = LIVE |
+OPEN for the successor (the one blocker):
+1. **q-softlock on the branch under load (2/4 vs LIVE 4/4)** — find why the person view layer is removed (not parked by jdfv dfTabLayers) after a tab change on the branch. No D-added line touches .kfoc / DF.F (grep of the D diff). Next: run `node dev/test/q-softlock.js <wt>/index.html` 4 parallel per side again; if the branch stays worse, bisect D's render/tab wrappers (renderPanel / render / showModal wrappers added by D files jpromob, jpdist, jtperc, jsvt, j8 promo rows) — or prove load flake with ≥8 runs each side. Then quickcheck, push, LAND READY, tell Foreman D (session_01D3E3NYmw9Zcix4ZdKH48EG) + rank-pace rv NX4yGtbq (restacks on the final sha).
+2. If LIVE moves again: same method (token merge tool + inv-stack-scan + line check).
+Worktrees (container-local): /home/user/wt/rv-plr4 (branch 1ef034be, built), /home/user/wt/rv-live (LIVE bd47c753, built), /home/user/wt/rv-ho (handover), /home/user/wt/rv-tools (elder.js / elder2.js probes, tokmerge.py).
+Rollover (verbatim canon): "Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop." "Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker)."
+This session: START_CTX ~4 %, now 33 % → rolled over (worker rule: coordinator opens the successor).
