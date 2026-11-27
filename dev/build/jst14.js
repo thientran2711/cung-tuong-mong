@@ -82,13 +82,20 @@ function f14Norm(){if(!f14())return;const c=S.st.ch,P=c.plan;const isT=x=>/^ms:/
  for(let g=0;g<8&&cnt()>F14.max;g++){let j=-1;for(let i=P.length-1;i>c.i;i--)if(P[i]==="s"){j=i;break}if(j<0)break;P.splice(j,1)}
  c.max=F14.max}
 /* the 14-chapter advance: a chapter that cannot run is replaced by a shared arc so the numbers stay 1..14 */
-function f14Shared(E){const c=S.st.ch;const ids=arcIds67("*").filter(id=>!c.usedS.includes(id)&&arcOk67(ARC67[id]));if(!ids.length)return false;const id=choose67("*",ids);const B=newThread67(id,"m");if(!B)return false;c.usedS.push(id);histAdd67("*",id);chStartArc67(B,E);return true}
+/* CNVSTALL (27/11, whole family): every shared arc is ok:nsrv67, so for a maid (and once the shared pool is spent) nothing filled the slot and the
+   frame closed early (road-full cnv_chu: mistress gone after ch.7 → .8–.11 cast false → ch.all at 7, no origin ending). Then the origin's own
+   premises still in c.pool (j67 chNext67, the "o" slot's pool; each arc's own ok() decides, so a maid only gets maid arcs) fill it. */
+function f14Shared(E){const c=S.st.ch;const ids=arcIds67("*").filter(id=>!c.usedS.includes(id)&&arcOk67(ARC67[id]));
+ if(ids.length){const id=choose67("*",ids);const B=newThread67(id,"m");if(B){c.usedS.push(id);histAdd67("*",id);chStartArc67(B,E);return true}}
+ const B=chNext67(E||{k:0});if(B){chStartArc67(B,E);return true}return false}
 (function(){const a0=chAdvance67;chAdvance67=function(E){if(!f14())return a0.apply(this,arguments);try{f14Norm()}catch(e){console.error(e)}const c=S.st.ch;S.st.M=null;
  while(++c.i<c.plan.length){if(c.n>=F14.max)break;const p=c.plan[c.i];
   if(p==="fin"){chFinale67();continue}
   if(p==="o"){const rd=S.st.f14.road;if(rd&&!S.st.f14.r0&&c.pool.includes(rd)){S.st.f14.r0=1;const B=newThread67(rd,"m");if(B){c.pool=c.pool.filter(x=>x!==rd);histAdd67(c.k,rd);chStartArc67(B,E);return}}
    const B=chNext67(E||{k:0});if(B){chStartArc67(B,E);return}if(f14Shared(E))return;continue}
   if(p==="s"){if(f14Shared(E))return;continue}
+  /* chapter 12 is chosen by her state when it OPENS (jend14 eg12: still a maid → ms:len14), also when the slots before it were skipped */
+  if(p==="end:12"&&typeof eg12==="function"&&typeof egOn==="function"&&egOn()){const q=eg12();if(q!=="end:12"){c.plan[c.i]=q;c.i--;continue}}
   if(p==="end:12"){for(const id of ["st_dong","st_con"]){if(ARC67[id]&&arcOk67(ARC67[id])){const B=newThread67(id,"m");if(B){chStartArc67(B,E);return}}}if(f14Shared(E))return;continue}
   if(p.startsWith("st:")){const id=p.slice(3);if(ARC67[id]&&arcOk67(ARC67[id])){const B=newThread67(id,"m");if(B){chStartArc67(B,E);return}}if(f14Shared(E))return;continue}
   if(p.startsWith("ms:")){const id=p.slice(3);if((id==="hau"&&S.rank>=7)||(id==="ke"&&S.heir&&!S.heir.v)||(id==="len14"&&S.srv&&S.srv.risen)){if(f14Shared(E))return;continue}msStart67(id);return}}
