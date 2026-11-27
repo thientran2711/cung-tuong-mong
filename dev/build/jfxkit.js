@@ -59,7 +59,7 @@ function kfkSp(kind,x,y,v,tint,sc,blend,frame){const P=window.PIXI,K=KFK_SP[kind
  let s=KFK.pool.pop();if(!s){s=new P.Sprite(fr[0]);s.anchor.set(.5);KFK.made++}
  s.texture=fr[frame!=null?frame%fr.length:Math.floor(Math.random()*fr.length)];s.x=x;s.y=y;s.__pt=!!KFK.pt;s.__pic=!!KFK.inpic;/* §57.1c: a point effect (kitFxBurst / jfx kfPx) — kfTick hides it where it sits on an open dialog */s.rotation=Math.random()*6.28;s.visible=true;
  s.tint=K.t&&tint!=null?tint:0xffffff;s.blendMode=blend||K.b||"normal";const k=(sc||1)*K.d/K.s*(typeof KFK_U!=="undefined"&&KFK_U.test(kind)?kfUnit():1);s.scale.set(k);
- s.v=Object.assign({vx:0,vy:0,g:0,drag:1,life:60,max:60,spin:0,grow:0,a0:1,fade:"out",sway:0,ph:Math.random()*6.28,sc:k},v);s.v.max=s.v.life;
+ s.v=Object.assign({vx:0,vy:0,g:0,drag:1,life:60,max:60,spin:0,grow:0,a0:1,fade:"out",sway:0,ph:Math.random()*6.28,sc:k},v);s.v.max=s.v.life;if(!s.__pic&&!s.v.clip){const DB=kfkDlgBox();if(DB){const hw=Math.abs(s.width||0)*.5,hh=Math.abs(s.height||0)*.5;if(x+hw>DB.left&&x-hw<DB.right&&y+hh>DB.top&&y-hh<DB.bottom)s.alpha=0}}/* §57.1c: hidden from its first frame (kfTick keeps it so) */
  if(s.v.grow)s.v.grow*=K.d/K.s;s.alpha=s.v.fade==="in"||s.v.fade==="inout"?0:s.v.a0;KFX.root.addChild(s);KFX.parts.push(s);return s}
 function kfkFree(s){try{s.parent&&s.parent.removeChild(s);s.v=null;if(KFK.pool.length<400){s.visible=false;KFK.pool.push(s)}else s.destroy();KFK.freed++}catch(e){}}
 function kfkAt(at){if(at==null)return{x:innerWidth/2,y:innerHeight*.42};if(at.getBoundingClientRect){const r=at.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2,r}}return at}
