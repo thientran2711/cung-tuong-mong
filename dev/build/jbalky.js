@@ -7,7 +7,7 @@
    E[id] = {w weight, b allowed bands, o:[{g gains, c costs, s special, od base odds of the option's roll}] | plain:{g,s}}.
    Measured / tuned by dev/measure/kyngo-bot.js (OD 19/11 ~03:25Z: the roll is set FROM the measured eligibility, no double gate). */
 Object.assign(BAL,{kyngo:{on:1,
- p0:85,step:15,pMax:95,pity:2,festP:4,wxP:2,cd:[1,1,1,1],V:[1,1,1.4,1.8],hard:[0,0,8,16],
+ p0:85,step:15,pMax:95,pity:2,festP:4,wxP:2,cd:[2,2,3,3],/* stat-pace (OD 26/11 ~04:20Z «sự kiện diễn ra liên tục»): wait after a hit 2 / 2 / 3 / 3 tuần by band (was 1 each); one a day at most (BAL.evc.q.ky) */V:[1,1,1.4,1.8],hard:[0,0,8,16],
  eqTol:1.25,zeroMax:5,parTol:.35,
  pw:{vuon:1.4,lc:1,tn:1,kn:.8,thu:.8,dtd:.8,tyv:1,nvp:1,ksp:.8},fest:1.8,wx:1.4,world:1.5,
  seenOd:62,seenDanh:4,  /* «seen with a man / at the cold palace» roll inside an option: odds she is NOT seen; Danh lost when seen */

@@ -1,0 +1,28 @@
+#!/usr/bin/env node
+/* dev/test/kscue-shots.js — F10 look gate for the scroll cue fix: the same cue dialogs on two builds (LIVE vs fix), Fold 755x1000@2 + iPad
+   1180x820@2, shot at open and after the scroll column is scrolled to its end, + a video per build/device (open → slow scroll → end); prints
+   the pixel difference of each shot pair. usage: node dev/test/kscue-shots.js <old index.html> <new index.html> <out dir> [ids=j7c,evidence,…] */
+'use strict';
+const { chromium } = require('playwright'); const fs = require('fs'), path = require('path'); const [, , OLD, NEW, OUT, IDS] = process.argv; const sleep = t => new Promise(r => setTimeout(r, t));
+const PIDS = (IDS || 'j7c,evpick,giftpick').split(','); const DEV = [['fold', 755, 1000], ['ipad', 1180, 820]];
+(async () => { fs.mkdirSync(OUT, { recursive: true }); const b = await chromium.launch(); const shots = {};
+  for (const [tag, src] of [['old', OLD], ['new', NEW]]) { const html = fs.readFileSync(src);
+    for (const [dn, W, H] of DEV) { const vd = path.join(OUT, 'v-' + tag + '-' + dn); const ctx = await b.newContext({ viewport: { width: W, height: H }, deviceScaleFactor: 2, hasTouch: true, isMobile: W < 1100, serviceWorkers: 'block', recordVideo: { dir: vd, size: { width: W, height: H } } });
+      await ctx.addInitScript(() => { window.__bot = 1; let s = 12345; Math.random = () => { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296 } });
+      await ctx.route('http://ctm.test/**', r => r.fulfill({ status: 200, body: html, contentType: 'text/html; charset=utf-8' })); const p = await ctx.newPage(); p.on('pageerror', () => { });
+      await p.goto('http://ctm.test/index.html', { waitUntil: 'domcontentloaded', timeout: 120000 }); await p.waitForFunction(() => typeof start === 'function' && typeof kitScrollCues === 'function', null, { timeout: 120000 });
+      await sleep(4000); await p.evaluate(() => { try { localStorage.clear() } catch (e) { } let s = 777; Math.random = () => { s = (s * 1664525 + 1013904223) % 4294967296; return s / 4294967296 }; /* same life on both builds */ document.getElementById('title').hidden = true; window.__nlInner = 1; start(); window.__nlInner = 0; Q.length = 0; for (const e of [...document.body.querySelectorAll('*')]) { const cs = getComputedStyle(e); if (cs.position === 'fixed' && /Luân hồi/.test(e.textContent || '')) e.remove() } document.getElementById('modal').hidden = true }); await sleep(3000);
+      for (const id of PIDS) { const ok = await p.evaluate(id => { const v = liveRivals(true)[0]; for (const pp of [{ v: v && v.id }, {}]) { let d = null; try { d = PEND[id](Object.assign({}, pp)) } catch (e) { } if (!d) continue; try { Q.length = 0; pushDil(mkP(id, pp), 'Tuyến truyện'); showModal(); if (Q.length) return true } catch (e) { } } return false }, id);
+        if (!ok) { console.log(tag, dn, id, 'not opened'); continue } await sleep(2200); const k = dn + '-' + id; const f0 = path.join(OUT, tag + '-' + k + '-open.png'); await p.screenshot({ path: f0 });
+        /* the scroll owner (the cue's column): scroll it slowly to the end, like a finger */
+        const n = await p.evaluate(() => { const c = document.querySelector('#modal .kscue:not(.sib)'); const s = c ? c.parentElement : document.querySelector('#modal .kscue.sib') && document.querySelector('#modal .kscue.sib').previousElementSibling; if (!s) return 0; window.__scr = s; return Math.ceil((s.scrollHeight - s.clientHeight) / 60) });
+        for (let i = 0; i < n; i++) { await p.evaluate(() => { window.__scr.scrollTop += 60 }); await sleep(120) } await sleep(800);
+        const f1 = path.join(OUT, tag + '-' + k + '-end.png'); await p.screenshot({ path: f1 }); (shots[k] = shots[k] || {})[tag] = [f0, f1];
+        const cues = await p.evaluate(() => [...document.querySelectorAll('#modal .kscue')].map(c => c.className + '@' + (c.parentElement.id || c.parentElement.className.split(' ')[0]))); console.log(tag, dn, id, 'cues', JSON.stringify(cues), 'scroll steps', n);
+        await p.evaluate(() => { Q.length = 0; document.getElementById('modal').hidden = true }); await sleep(600) }
+      await ctx.close() } }
+  /* pixel difference old vs new (same dialog, same device) */
+  const cmp = await b.newPage(); for (const [k, o] of Object.entries(shots)) { if (!o.old || !o.new) continue; for (let i = 0; i < 2; i++) { const [a, c] = [o.old[i], o.new[i]].map(f => 'data:image/png;base64,' + fs.readFileSync(f).toString('base64'));
+      const d = await cmp.evaluate(async ([a, c]) => { const L = u => new Promise(r => { const im = new Image(); im.onload = () => r(im); im.src = u }); const [x, y] = [await L(a), await L(c)]; const W = x.width, H = x.height; if (y.width !== W || y.height !== H) return { size: 'differs' }; const cv = document.createElement('canvas'); cv.width = W; cv.height = H; const g = cv.getContext('2d'); g.drawImage(x, 0, 0); const A = g.getImageData(0, 0, W, H).data; g.drawImage(y, 0, 0); const B = g.getImageData(0, 0, W, H).data; let n = 0; for (let j = 0; j < A.length; j += 4) if (Math.abs(A[j] - B[j]) + Math.abs(A[j + 1] - B[j + 1]) + Math.abs(A[j + 2] - B[j + 2]) > 30) n++; return { diffPct: +(100 * n / (W * H)).toFixed(3) } }, [a, c]);
+      console.log('DIFF', k, i ? 'end' : 'open', JSON.stringify(d)) } }
+  await b.close() })().catch(e => { console.error(e); process.exit(2) });
