@@ -83,11 +83,14 @@ const ng0=night;night=function(p){p=p||S;if(p!==S)return ng0.apply(this,argument
 function pregFind(){if(!S||S.dead)return;if(!S.preg){S.pregUnk=0;return}if(!S.pregUnk)return;if(wk()<(S.pregDisc||0)&&S.preg<4)return;
  S.pregUnk=0;const m=S.preg;const canHide=S.hidden&&S.preg<=3;
  const h=`<p>Mấy hôm nay ${S.maid?`cung nữ ${S.maid.name}`:"cung nữ"} thấy ngươi biếng ăn, hay buồn nôn, liền mời thái y.</p><p><b class="g">Thái y bắt mạch: ngươi đã có thai, đang tháng thứ ${m}.</b></p>${canHide?`<p class="past">Ngươi có thể giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.</p>`:""}`;
- const card={ev:1,t:"Thái y bắt mạch",who:pDoc(),h};/* ev: keep secret / announce is an EVENT choice (KIT 28.6; reviewer r7: its opts are set after the literal, so it slipped) */
+ log(`<span class="g">Thái y bắt mạch: ngươi đã có thai, đang tháng thứ ${m}.</span>`);Q.push(pregCard(h,canHide))}
+/* save r6 (LAW 11, the «.opts=» family): the finding card got its keep-secret / announce options AFTER the literal (card.opts=…), so it was a code
+   card made at the week flip — the step write left it out and, S.pregUnk being cleared, a reload lost the choice for good (the census parsed only
+   literals). Now made by a registered generator (body, can-hide): written {rk,ra}, made again on load with the same two answers */
+const pregCard=rcpReg("pregFind",(h,canHide)=>{const card={ev:1,t:"Thái y bắt mạch",who:pDoc(),h};/* ev: keep secret / announce is an EVENT choice (KIT 28.6; reviewer r7: its opts are set after the literal, so it slipped) */
  if(canHide)card.opts=[{n:"Giữ kín, dặn thái y không nói",fx:{},x:"giấu thai đến hết tháng thứ 3 · phi tần chưa biết để nhắm vào thai",go:()=>{S.hidden=true;log("Ngươi giữ kín tin có thai.")}},
   {n:"Báo tin cho Hoàng thượng",fx:{sung:6,th:5},x:`các phi tần ghen +${ghenN(BAL.ghen.preg)} · kẻ ác có thể nhắm vào thai`,go:()=>{S.hidden=false;ghenAll(BAL.ghen.preg,"ngươi mang long thai");log("Ngươi báo tin có thai.")}}];
- else card.btn="Đã hiểu";
- log(`<span class="g">Thái y bắt mạch: ngươi đã có thai, đang tháng thứ ${m}.</span>`);Q.push(card)}
+ else card.btn="Đã hiểu";return card});
 window.pregFind=pregFind;
 /* before it is found nobody knows: the tablet still treats her as not pregnant (no second conception: night() skips) */
 const nc0=nightCh;nightCh=function(p){p=p||S;if(p===S&&S.pregUnk&&S.preg){const k=S.preg;S.preg=0;try{return nc0.call(this,p)}finally{S.preg=k}}return nc0.apply(this,arguments)};
