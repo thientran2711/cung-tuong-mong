@@ -56,7 +56,7 @@ function kidCard(k){const lines=k.alive?[tuoi(k.age),`Sức khỏe <b>${k.hp}</b
  const chips=[k.heir?chip("Thái tử","ok"):"",k.alive&&k.hp<40?chip("Yếu ớt","hot"):""];
  const home=S.place==="home";
  return pcard({f:kidFace(k),name:k.name,rank:`${ic("con",16)}${k.sex==="m"?"Hoàng tử":"Công chúa"} · ${k.alive?k.age+" tuổi":"đã khuất"}`,status:k.alive?"":"Đã khuất",out:!k.alive,lines,chips,
-  groups:k.alive?[["",[pbtn(`data-go="home"`,"Về tẩm cung thăm con",`tốn: ${home?0:travel(S.place,"home")} khắc đi đường · thành: gặp các con, chăm con tại tẩm cung`,home?"đang ở tẩm cung":S.out?"đang ở lãnh cung":S.confined?"đang cấm túc":walkBlock("home"))]]]:[],empty:"Con đã mất."})}
+  groups:k.alive?[["",[pbtn(`data-go="home"`,"Về tẩm cung thăm con",`tốn: ${home?0:travel(S.place,"home")} khắc đi đường · thành: gặp các con, chăm con tại tẩm cung`,home?"đang ở tẩm cung":S.out?"đang ở lãnh cung":S.confined?"đang cấm túc":walkBlock("home"))]]]:[],empty:"Con đã khuất."})}
 function kidTabHTML(hl){return `<div class="pgwrap"><div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+(S.kids.length?pager("kid",S.kids.map(k=>({p:k,f:kidFace(k),name:shortN(k.name),dim:!k.alive})),i=>kidCard(S.kids[i])):`<p class="past">Chưa có con. Chỉ được thị tẩm mới mang thai.</p>`)+`</div>`}
 
 /* ---- servants and palace people (Kẻ hầu tab) ---- */
