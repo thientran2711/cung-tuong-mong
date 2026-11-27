@@ -294,3 +294,69 @@ Tested on LIVE origin/main f573dc94 (build cc68dcfd2b1b), git archive served 127
 ## HANDOVER — BIG REVIEWER #13 (resume), 26/11 ~22:30Z
 - Verdict: FAIL robot-realtap f0737e88 (item 21 rule (b): a changed page label = «new button» → robot leaves the .kscn scene, false DEAD BUTTON flood + false stuck/softlock; LIVE iPad s72 88 dead) · audit 74d434fb PASS. Items 22, 23, N2, KNE (a), SKIPCOV (b), regressions (c), (e) and Fold s21 / iPad s61 LIVE slices checked OK.
 - Re-review recipe: (1) LIVE iPad `bot=cautious seed=72 slice=12` and Fold `bot=speed seed=21` ×3 each → 0 «DEAD BUTTON … cover div.kscn-veil» through «Ngày thứ hai — Điện tuyển» / «Sân chờ»; (2) RT_REV13=stale5 (hook /home/user/wt/rr13-out/hook-rev13.js, insert after the RT_TEST_KNE block in a scratch copy; better as an RT_TEST_* mode) Fold s21 + iPad pf s61 → closed by 6 skip taps ≤ 20 s, 0 dead, 0 page taps; (3) RT_TEST_KNE Fold s43 + iPad s61 still «#dawn «Tiếp theo»» ≤ 15 s; (4) RT_TEST_SKIPCOV steady/anim/mix-* still DEAD «Tiếp». Server: `python3 -m http.server 8861` in /home/user/wt/rr13-live (git archive f573dc94); for DRIFT also serve /home/user/wt/build-f573dc949ee37af84e46ad2d385fdba2344dee94 on :8914 (see N1). Logs: /home/user/wt/rr13-out/<run>/log.txt.
+
+## REVIEW robot-realtap 8ea10d7e..97e55a457 — BIG #14 (+ audit 74d434fb), 27/11 ~01:30Z
+PRIORITY #1 CHECK: OD robot real-tap rules 25/11 (dev/handover/briefs/F-robot-2511.md) | review/robot-realtap 8ea10d7e PASS (BIG #10) → 947aeec9 FAIL (BIG #11) → 6677dd13 FAIL (BIG #12) → f0737e88 FAIL (BIG #13, efcf64295) → 97e55a457 (FIXER #13 items 25–26) | claims: BIG #13 re-review queue = this job.
+### VERDICT: PASS review/robot-realtap 97e55a457 (one verdict for 8ea10d7e..97e55a457, test files only) · audit 74d434fb PASS
+Tested on the NEWEST main 4cfcda61 (build 97a2b0691bf3, CTM_BI.s 504d2e6a+; main moved since the fixer's 03a8c17c), git archive served 127.0.0.1:8881, RT_NOSHOT=1, RT_PIN=0 (pin on for DRIFT), harness from fresh sparse worktrees of 97e55a457 (tip), f0737e88 (control) and 8ea10d7e (base). Control with the same hook = f0737e88 + the tip's RT_TEST_STALELABEL block pasted in (scratch copy). Logs: /home/user/wt/rr14-out/<run>/log.txt. Many lives end «Ban hoa» at buổi 1 (game selection); extra copies were run, only finished hook lines / 12-buổi slices are counted.
+### (1) BIG #13 BLOCKING 1 — FIXED
+- LIVE repro, no hook, `life=L-i72a dev=ipad bot=cautious seed=72 slice=12` ×6: a = «Sân chờ» «Đứng yên giữ sức» → «Điện tuyển» «Quỳ xuống thỉnh an» → Thái hậu / Hoàng thượng, 0 DEAD, 0 «kscn-veil», no stuck / softlock (then «Ban hoa» b1, game); e = «Sân chờ» → 14 «SKIP TAP .kscn» → «Điện tuyển», 0 dead (Ban hoa b1); b/c/d/f 12/12 buổi, 0 dead. Fold speed s21 ×3: a = «Sân chờ» → 14 .kscn skip taps → «Điện tuyển», 0 dead; b/c 12 buổi, 0 dead. On f0737e88 BIG #13 had 88 «… cover div.kscn-veil» on the same road.
+- RT_TEST_STALELABEL (6-tap .kscn on the right 65 % + a page bar re-drawn every 1.5 s):
+| mode | tip Fold 755x1000 | tip iPad 1180x820 | control f0737e88 + same hook |
+|---|---|---|---|
+| stale5 | s21 7 s, s43 11 s: 6 skip taps, 0 page taps, 0 dead | s61 7 s, 6 skip taps, 0 dead | Fold s21 «still open» 180 s, 28 DEAD («Bạc85Sức80/100 cover div#rtTestSl.kscn» …) · iPad s61 «still open» 211 s, 32 DEAD |
+| rerender5 | s21 11 s, 6 skip taps, 0 dead | s61 11 s, 0 dead | — |
+| newbtn | s21 11 s, 6 skip taps, 0 page taps, 0 dead | s61 11 s, 0 dead | Fold s21 «still open» 215 s, 32 DEAD · iPad s61 closed 12 s (timing) |
+| newlayer | s21 6 s ×2 gone «newlayer», 0 dead | s61 6 s gone «newlayer»; 1 run «still open» 193 s, 29 DEAD (see N1, pre-existing) | Fold 43 s / iPad 6 s «newlayer» |
+### (2) A NEW LAYER ON TOP IS STILL TAKEN
+Synthetic SCAN probe (SCAN extracted from each robot-rt.js, setContent page: .kscn scene + page bar, scan 1, then change, scan 2), Fold + iPad, same on both devices:
+| change after the scene's first scan | 8ea10d7e | f0737e88 | 97e55a457 |
+|---|---|---|---|
+| role=dialog on the screen middle (fixed / aria-modal) | dialog | dialog | dialog |
+| role=dialog off-centre (top right) | scene (skip taps) | dialog (new) | dialog (new) |
+| .kpop off-centre | scene | .kpop (new) | .kpop (new) |
+| .ov > .dlg off-centre | scene | .dlg (new) | .dlg (new) |
+| page label change «Tin báo (0)→(3)» | scene | PAGE (= BIG #13 bug) | scene |
+| new PAGE button | scene | PAGE | scene |
+| role=dialog UNDER the scene (z lower) | scene | PAGE | scene |
+| plain div popup (no LAYER class) off-centre | scene | page | scene (= 8ea10d7e; see N6) |
+→ a new LAYER that opens on top and holds the way on is taken (rule b), a label change / page button / layer under the veil is not. Live fixture newlayer above. Host rule (a) kept: RT_TEST_KNE below.
+### (3) NO REGRESSIONS (tip, both devices)
+- KNE: Fold s43 6.5 s / iPad s61 1.5 s «SKIPWIN #dawn host Tiếp theo», skipTaps 1, noExit 0, unstick 0.
+- SKIPCOV: steady Fold s21 + iPad s61, leave Fold s43 + iPad s61, anim iPad s61 → «DEAD BUTTON «Tiếp» cover div#rtTestSc», skipTaps 0, noExit 0; mix-steady iPad s61, mix-leave Fold s43, mix-anim Fold s21 → DEAD «Tiếp» then «Xem thêm» (closedBy more). (Fold anim: both copies «Ban hoa» b1; Fold animated cover shown by mix-anim.)
+- OWNCLOSE: own Fold s21 / iPad s61 {closeOwnLayer 1, noEffect 0, «Đóng» 9 s}; dead Fold s43 / iPad s61 {noEffect 1}.
+- QUOTA+RELOAD cp=5 slice=30: Fold s21 + iPad s61 «SAVE REWIND … from b8 (1.0.1.3) to the stored b2 (1.0.0.1) (6 buổi lost)» + «SAVE STALE stored b2 live b25 … QuotaExceededError», 0 dead.
+- LATE (RT_TEST_NOEXIT + RT_TEST_LATE=40000): iPad s61 33.5 s, Fold s21 34.5 / 34.8 s «LATE BUTTON … «Ta biết rồi»» + NO-EXIT withdrawn.
+- SKIPLAYER: plain Fold s43 7.6 s / iPad s61 2.8 s; cover iPad s61 7.8 s, Fold s21 7.6–7.7 s in 11 of 13 runs; css iPad s61 7.6 s; noWayOut 0, noExit 0. The 2 other Fold cover runs (127 s, 19 DEAD) = hook timing, N2.
+- DRESS: Fold s43 placed 4 / 23 s, iPad s61 placed 4 / 34 s, not skipped.
+- RELOAD+DRIFT (pin on): Fold s43 + iPad s61 «BUILD PIN: life … on 504d2e6a+ 97a2b0691bf3 served at :8723» → «unstick reload — the tab was on :8881, back to the pinned :8723 (carrying 5 localStorage keys)», pinReturn 1, 0 dead (Fold: then «#kload» stall NO-EXIT = BIG #11 N6, local serve without assets).
+- Law-11 goto/reload scan: tip has the same 5 .goto( / 4 .reload( / 3 reloadPinned( lines as f0737e88 (line text identical).
+- rt-serve-build.sh --b on today's main (each run): 97a2b0691bf3 (= 4cfcda61) → tip and old both serve 4cfcda61f; 1b5137935266 (03a8c17c, on the second-parent line of 504d2e6a) → tip «serving 03a8c17ca», old f0737e88 exit 2 «no main commit with build 1b5137935266»; cc68dcfd2b1b → both serve f573dc949 (main moved: it is now on the first-parent chain). Item 26 proven.
+### (4) N5 (double «Lật thẻ bài» NO-EXIT) — PRE-EXISTING, NOT A REGRESSION (note)
+- Seen again on the tip: L-f43b (Fold pf/pt_su sens s43) «GONE Chuẩn bị thị tẩm» at 167 s, second flip at 228 s → «NO-EXIT DIALOG .kmov … picker stalled 80 steps, no close / next» → NOEXIT UNSTICK 3 → reload (1 of 4 Fold s43 slices; fixer 1 of 7).
+- Code: the three parts are byte-identical in 8ea10d7e and 97e55a457 — `repeat.set(rk, … + (ok ? 1 : 5))` (8ea L476 / tip L623), sig = layer|title|labels|clock (L407 / L552), stall-force `noExit(… 'no close / next')` unless CLOSE_RE / NEXT_RE / x (L453 / L598). Nothing in the range touches them; skip taps never run here (the .kmov has a hit button).
+- Runs: scratch hook RT_REV14 = the GAME's own kitCardFlip end card «Chuẩn bị thị tẩm» twice in one buổi: 8ea10d7e Fold s21 «gone 1» (the +5 refusal also happens on the base), second card closed 9.6 s; iPad s61 6 s · f0737e88 iPad s61 ×2 9 s · tip Fold s21 / s43 / iPad s61 ×2 5–10 s — 0 NO-EXIT on every version (the fixture does not reach the stall: the game's second natural flip has a full deck). 11 base 8ea10d7e Fold s43 lives (7 reached 12 buổi) met only 1 single flip. → pre-existing, rare; fix stays with the next fixer (as N5 says: a refused «gone» tap adds 0, not 5; the stall force counts a .kmend / data-km-close end button as a way on).
+### (5) STATIC
+- 8ea10d7e..97e55a457 added lines: 0 `.click(` / dispatchEvent / focus / keyboard (only rt-bare-unit's own p.mouse.click / touchscreen.tap); STALELABEL builds DOM only (no game call); game calls only in env-gated RT_TEST_KNE / RT_TEST_DRESS (stamped in harness.testHooks).
+- robot-lint «LINT OK 0 finding(s)» · rt-bare-unit «RT-BARE-UNIT OK 20/20» · robot-audit-unit «UNIT OK» on the handover tip (robot-audit.js = 74d434fb content, no diff).
+### (6) LIVE SLICES (no hooks, main 4cfcda61, slice=12)
+| seed | 12-buổi copies | jsClicks / dead / NO-EXIT / stuck |
+|---|---|---|
+| Fold speed s21 | b, c (a «Ban hoa» b1 after «Sân chờ», 0 dead) | 0 / 0 / 0 / 0 |
+| Fold pf/pt_su sens s43 | a, c, d (+ b = N5) | 0 / 0 / 0 / 0 (b: NO-EXIT 1 = N5) |
+| iPad pf/pt_su sens s61 | a, b, c | 0 / 0 / 0 / 0 |
+| iPad cautious s72 | b, c, d, f (a, e «Ban hoa» b1 after «Sân chờ», 0 dead) | 0 / 0 / 0 / 0 |
+realtap true, exitPick none, build 97a2b0691bf3 in every life; skip taps 2–7 per slice; 0 «kscn-veil» lines in any tip life.
+### NOTES (not blocking)
+- N1 (pre-existing, all three versions): SCAN's «dialog without a backdrop» rule keeps only `.dlg,[role=dialog]` with `offsetParent !== null`, so a position:fixed role=dialog WITHOUT aria-modal is dropped and a partly visible .dlg under a scene wins. Live: newlayer iPad s61 run 1 — the robot had opened «Lịch tháng» just as the fixture came; the scan stayed on «Lịch tháng» (some day buttons left of the scene still hit), 29 DEAD (covered by the scene / new layer, true covers), «Xong» never taken in 193 s. Probe (.dlg under a .kscn + fixed role=dialog on the middle): 8ea10d7e, f0737e88, tip all → .dlg, 9 dead suspects; with aria-modal → the dialog. Most game role=dialog are aria-modal; KP_SEAL / x.name / RK_T.screen dialogs are not. Fix idea: use getClientRects().length (not offsetParent) in that filter.
+- N2 (hook timing): RT_TEST_* fixtures are inserted AFTER the step's SCAN and the same step goes on with the pre-fixture scan. 2 of 13 Fold s21 SKIPLAYER cover runs (buổi 1, Đông sở) fired while the page had 19 dead suspects (only «Thỉnh tranh nhân vật (có mới)» hit, the rest under the .k3btns option panel) → deadCheck probed them under the new fixture → 19 DEAD «cover div in #rtTestTs», closed 127 s later via #kdaytc. Instrumented proof: «DC550 92 page hits=Thỉnh tranh nhân vật n=20» right after «RT_TEST_SKIPLAYER on». Fix idea: `continue` (re-scan) after every fixture insert.
+- N3 (pre-existing): that same Đông sở screen (Sân chờ road) costs ~60 s with no tap: deadCheck probes the ~19 covered page buttons one by one, then «GONE Thỉnh tranh nhân vật (có mới)». Same gap on base 8ea10d7e (E-f21b 94 → 153 s). No false DEAD in natural lives; time only.
+- N4: item 25's «stay (all covered by the skip layer)» branch cannot fire (the pull needs a HIT button in the pulled-to layer, so `nb.every(bySk)` is false); harmless, the table line overstates it.
+- N5 = section (4).
+- N6: a new popup that is not a LAYER (plain div) beside a scene is not taken by rule (b) — same as 8ea10d7e; it would end as skip taps → NO-EXIT (loud, not hidden).
+- N7: every `rt-serve-build.sh --b` call re-fetches main --depth=60 (≈12k objects, 1–5 min here) before the walk; a pinned life start waits that long.
+
+## HANDOVER — BIG REVIEWER #14, 27/11 ~01:30Z
+- Verdict: PASS robot-realtap 97e55a457 (one verdict 8ea10d7e..97e55a457) · audit 74d434fb PASS. The tip is ready for the coordinator (test files only: dev/test/robot-rt.js, rt-serve-build.sh, realtap.js, rt-bare-unit.js + PROGRESS).
+- Open for the next harness fixer (none blocking): N5 double flip (+5 on «gone», stall force vs .kmend), N1 offsetParent in the dialog rule, N2 continue after RT_TEST_* fixture insert, N3 60 s deadCheck at Đông sở, N7 fetch per --b, older N3 dress / N4 tho.
+- Recipe reuse: worktrees /home/user/wt/rr14-{tip,ctl,8ea} (+ «x» copies with the RT_REV14 kitCardFlip×2 hook, rr14-ctlh = f0737e88 + STALELABEL, rr14-dbg = tip + DBG/DC prints), LIVE /home/user/wt/rr14-live (git archive 4cfcda61) on :8881, runner /home/user/wt/rr14-out/run.sh «H|name|env|args», SCAN probes /home/user/wt/rr14-probe/probe*.js.
