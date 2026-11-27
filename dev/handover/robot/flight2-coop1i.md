@@ -18,3 +18,9 @@ Game-side co-op mutual end-of-week wait (family M «Đợi hảo hữu xong tu�
 3. The stall is reproduced by any pair that reaches a week end with one seat done and the other at «Hết buổi · Chờ hảo hữu…».
 ## Handover (ctx 50%)
 A-COOP #2 session_01UV1SziX7QGW5M2nktXq8Av stopped the room and the supervisors 19:5xZ 11/26; nothing runs. No other open item except F #24's push of this folder and the game-bug post to MAIN 161.
+
+## UNPARK 11/27 15:27-15:50Z (F ROOT #5 order) + HANDOVER #2 (ctx 55%)
+- LIVE served CTM_BI s=d9ca7892+ t=2026-11-27T12:32Z. Resumed the SAME pair P89H with harness 2df8f5fa resume=1: hang unchanged after 11 min (host «Đợi hảo hữu xong tuần», guest disabled «Chờ hảo hữu…», stats = 11/25 17:06Z). Shots host-unpark.png / guest-unpark.png, run-unpark1.log.
+- F ROOT #5 15:39Z: 8e1121d3 coop-clear-rv173 is TEST-ONLY (dev/test/lib/coop-clear.js: bot never tapped result card «Tiếp ▸», read body.kscn-on as a scene). Step (b) done by hand on both real profiles (real taps, 15:45Z): NO pending «Tiếp»/«Nhận»/«Đã rõ» button and NO .kscn-* body class on EITHER seat after «Cùng hảo hữu → Trở lại phòng»; layers visible only the normal HUD/kit ones; both seats still «Hết buổi» (guest: disabled «Chờ hảo hữu…», host: «Đợi hảo hữu xong tuần»). Shots host-step-b.png / guest-step-b.png. So for THIS saved room there is nothing left to tap → looks like a real game mutual wait, but the saved room may predate the fix at the game side; not conclusive.
+- NOT DONE (needs a fresh container / successor, I am at 55% ctx, hard stop 60%): (a) port 8e1121d3 coop-clear.js into harness 2df8f5fa; (c) a FRESH room on newest LIVE origin/main with the ported harness (new seed, fresh profiles); if it reaches a mutual wait with nothing left to tap → «COOP HANG REAL <sha>» to F ROOT #5.
+- State left: nothing runs; /home/user/wt/out-coop1i profiles+ckpts kept; harness worktrees /home/user/wt/rt16 (2df8f5fa); supervisors stopped.

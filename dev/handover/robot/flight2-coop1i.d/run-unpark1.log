@@ -1,0 +1,218 @@
+RESUME coop-rt-flight2-coop1i-guest-k1 from 2026-11-26T19:49:23.958Z buổi 245
+RESUME coop-rt-flight2-coop1i-host-k1 from 2026-11-26T19:48:24.937Z buổi 253
+CP buổi 245 year null save 0 chars
+NOW #modal «Cung Tường Mộng» hit 6 idle 0 buổi 245 areaTaps 2996
+RESUMEPRE #modal «Cung Tường Mộng» Lui | Chơi một mìnhchọn sổ,  | Cùng hảo hữuMời hảo hữ | Sổ luân hồi | Bảng vàng | Thiết lập
+CP buổi 253 year null save 0 chars
+NOW #kload «» hit 0 idle 0 buổi 253 areaTaps 574
+RESUMEPRE #modal «Cung Tường Mộng» Lui | Chơi một mìnhchọn sổ,  | Cùng hảo hữuMời hảo hữ | Sổ luân hồi | Bảng vàng | Thiết lập
+TAP #modal «Cung Tường Mộng» «Cùng hảo hữuMời hảo hữu · Nhập ám hiệu»
+TAP #modal «Cung Tường Mộng» «Cùng hảo hữuMời hảo hữu · Nhập ám hiệu»
+RESUMEPRE .dlg «Chọn sổ» Lui | Một mình | Cùng hảo hữu | Nhập ám hiệu | Trở lại phòng | Mời hảo hữu | Mời hảo hữu
+TAP .dlg «Chọn sổ» «Trở lại phòng»
+RESUMEPRE #modal «Chọn sổ» Lui | Một mình | Cùng hảo hữu | Nhập ám hiệu | Trở lại phòng | Mời hảo hữu | Mời hảo hữu
+TAP #modal «Chọn sổ» «Trở lại phòng»
+RESUMEPRE #modal «Nhập ám hiệu» Lui | Ám hiệu | Vào phòng
+RESUMEPRE #modal «Nhập ám hiệu» Lui | Ám hiệu | Vào phòng
+RESUMEPRE #modal «Nhập ám hiệu» Lui | Ám hiệu | Vào phòng
+RESUMEPRE #modal «Nhập ám hiệu» Lui | Ám hiệu | Vào phòng
+RESUMEPRE #modal «Nhập ám hiệu» Lui | Ám hiệu | Vào phòng
+RESUMEPRE #modal «Nhập ám hiệu» Lui | Ám hiệu | Vào phòng
+TAP #klife «Vào cung ngay»
+TAP #klife «Vào cung ngay»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sáchRất vữ»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngnhẹ: Nghỉ ngơi »
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sáchRất vữ»
+NOW #coopfz «» hit 1 idle 0 buổi 254 areaTaps 574
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngnhẹ: Nghỉ ngơi »
+NOW page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» hit 40 idle 0 buổi 246 areaTaps 2996
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «trăng thu»
+TAP info #kpop
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Hành sự»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Mưu kếMưu kếXem sổ Kính sự phòngCó cơnhẹ: Xem lén »
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Hôm nay mặt mộc»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tư trang»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tin báo: 1 tin mới»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Số lần ân thưởng0»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Hoàng tự»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «3Chí tôn»
+TAP .kscn «‹»
+TAP .kscn «‹»
+TAP .kscn «›»
+NOW #coopfz «» hit 1 idle 0 buổi 254 areaTaps 574
+TAP .kscn «‹»
+TAP .kscn «‹»
+NOW .kscn «» hit 3 idle 0 buổi 246 areaTaps 2996
+TAP .kscn «›»
+TAP .kscn «›»
+TAP .kscn «›»
+TAP .kscn «Lui»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Bạc0Sức94/99»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Xem thêm»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Bổng lộcsau 1 tuần»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Dư đồ»
+TAP .mapsc «Mệnh truyện»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tư trang»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Thư từ»
+TAP #kchatp «Gửi»
+TAP #kchatp «Gửi»
+TAP #kchatp «Gửi»
+TAP #kchatp «Gửi»
+TAP #kchatp «Lui»
+NOW #coopfz «» hit 1 idle 0 buổi 254 areaTaps 574
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Cung nữ thân tín tam đẳngTịch Nguyệt»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Dư đồ»
+NOW .mapsc «» hit 45 idle 0 buổi 246 areaTaps 2996
+TAP .mapsc «Hành sự»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tâm bệnh · nhẹ»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Hành sự»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Lật thẻThấp»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tâm bệnh · nhẹ»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Hoàng tự»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Con của ta»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «‹ Bác Văn · 1/16 ›»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Hôn sự»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Buổi tối, còn 4 khắc»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Giao tình»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Quẻ Trung (Giao thiệp)»
+NOW #coopfz «» hit 1 idle 0 buổi 254 areaTaps 574
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Cung nữ thân tín tam đẳngTịch Nguyệt»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Ân tình (đêm)2»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «trăng thu»
+TAP info #kpop
+NOW page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» hit 42 idle 0 buổi 246 areaTaps 2996
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Xem quan hệ của Ta»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Dư đồ»
+TAP .mapsc «Danh sách»
+TAP .mapsc «Trường Môn viện1 bóng»
+TAP .mapsc «Xem bản thân»
+TAP .mapsc «Phóng to»
+TAP .mapsc «Bạc0Sức94/99»
+TAP .mapsc «Về phòng, Dực Khôn cung»
+TAP .mapsc «Hậu cung»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «‹ Hoàng thượng · 1/2 ›»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tai mắt0»
+NOW #coopfz «» hit 1 idle 0 buổi 254 areaTaps 574
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Nam nhân»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Thông tin»
+NOW page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» hit 46 idle 0 buổi 246 areaTaps 2996
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Phi tần»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Về phòng, Dực Khôn cung»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Bổng lộcsau 1 tuần»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Số lần ân thưởng0»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Số lần ân thưởng0»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Có thaiRất thấp»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Số lần ân thưởng0»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Bạc0Sức94/99»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tin báo: 1 tin mới»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Lật thẻThấp»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tâm trạngBình thản+1»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Bạc0Sức94/99»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tai mắt0»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Số lần ân thưởng0»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tin báo»
+NOW #coopfz «» hit 1 idle 0 buổi 254 areaTaps 574
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Quẻ Trung (Giao thiệp)»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Nam nhân»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Cung nữ thân tín tam đẳngTịch Nguyệt»
+NOW page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» hit 46 idle 0 buổi 246 areaTaps 2996
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Giao tình»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tài nghệ»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Lịch tháng»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tin báo»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Hoàng tự»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «1Cung nhân»
+TAP .kscn «Lui»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tư trang»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Đi lạiĐi lạiSoát đồTùy duyênTốn2 khắcThànhtìm ra đ»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Về phòng, Dực Khôn cung»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Mệnh truyện»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Thư từ»
+TAP #kchatp «Lui»
+NOW #coopfz «» hit 1 idle 0 buổi 254 areaTaps 574
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Thư từ»
+TAP #kchatp «Lui»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «trăng thu»
+TAP info #kpop
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Triều cục»
+NOW page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» hit 49 idle 0 buổi 246 areaTaps 2996
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Dư đồ»
+TAP .mapsc «Thượng Quan Ngân Chúc: Đã sẵn sàng»
+TAP .mapsc «Lật thẻThấp»
+TAP .mapsc «Ân tình (đêm)2»
+TAP .mapsc «Ra vào cung cấm»
+TAP .mapsc «Có thaiRất thấp»
+TAP .mapsc «Số lần ân thưởng0»
+TAP .mapsc «3Chí tôn»
+NOW #coopfz «» hit 1 idle 0 buổi 254 areaTaps 574
+TAP .mapsc «Thu nhỏ»
+TAP .mapsc «Hậu cung»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Hành sự»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Mưu kếMưu kếTai mắtCó cơnhẹ: Nghe ngóng chung · vừ»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngnhẹ: Nghỉ ngơi »
+NOW page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» hit 40 idle 0 buổi 246 areaTaps 2996
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sáchRất vữ»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Quẻ Trung (Giao thiệp)»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Cung nữ thân tín tam đẳngTịch Nguyệt»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Giao tình»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Phe phái»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Có thaiRất thấp»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Mục tiêu chương»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Xét phẩmthiếu 2»
+NOW #coopfz «» hit 1 idle 0 buổi 254 areaTaps 574
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Bạc0Sức94/99»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Thượng Quan Ngân Chúc: Đã sẵn sàng»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Bạc0Sức94/99»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «3Chí tôn»
+TAP .kscn «Lui»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Xét phẩmthiếu 2»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tài nghệ»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tai mắt0»
+NOW page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» hit 46 idle 0 buổi 246 areaTaps 2996
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Giao tình»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Sắc51Tài34Tâm cơ38Đức35Danh34Sủng0»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Sắc51Tài34Tâm cơ38Đức35Danh34Sủng0»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Chọn chính mình»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Ân oánPhe pháiĐáp ứngTa▾⇄Hoàng thượng▾Quan hệ giữa»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Buổi tối, còn 4 khắc»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Mục tiêu chương»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Mục tiêu chương»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Ân oán»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «trăng thu»
+TAP info #kpop
+NOW #coopfz «» hit 1 idle 0 buổi 254 areaTaps 574
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Sắc51Tài34Tâm cơ38Đức35Danh34Sủng0»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Cung nữ thân tín tam đẳngTịch Nguyệt»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Đổi chỗ hai người»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Mệnh truyện»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Mệnh truyệnViệc nhờSổ ghiChương này Sắc phong Đã q»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tâm bệnh · nhẹ»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Chương này»
+NOW page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» hit 49 idle 0 buổi 246 areaTaps 2996
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tư trang»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tâm trạngBình thản+1»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tin báo»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tư trang»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Quẻ Trung (Giao thiệp)»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tài nghệ»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tứ đức 4/5Cầm kỳ thi họa 4/4Vũ · Y · Nữ công 4/4Tá»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Học tập · Tài nghệHọc tập · Tài nghệCác lối, sách »
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tin báo»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Có thaiRất thấp»
+NOW #coopfz «» hit 1 idle 0 buổi 254 areaTaps 574
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Vũ · Y · Nữ công 4/4»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tứ đức 4/5Cầm kỳ thi họa 4/4Vũ · Y · Nữ công 4/4Tá»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Về phòng, Dực Khôn cung»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Hôm nay mặt mộc»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Cung nữ thân tín tam đẳngTịch Nguyệt»
+NOW page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» hit 46 idle 0 buổi 246 areaTaps 2996
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Tứ đức 4/5»
+TAP page «Dực Khôn cung · Mặc Hương trai · Ở đây còn 2 người» «Có thaiRất thấp»
+SEAT LIFE DONE host k1 HARNESS
+SEAT LIFE DONE guest k1 HARNESS
+browserContext.close: Target page, context or browser has been closed
+    at async /home/user/wt/rt16/dev/test/robot-rt-coop.js:86:34 {
+  log: []
+}
