@@ -216,14 +216,17 @@ function kmEmpAct(a,kind){const why=kmEmpWhy(a,kind);if(why)return null;a.kmEmpD
 (function(){const n0=nightCh;nightCh=function(p){const r=n0.apply(this,arguments);try{const q=p||S;if(q&&q.kmWalk===wk()&&r>0)return cl(r+BAL.empDay.walkNight,0,70)}catch(e){}return r}})();
 /* her: buttons in the Emperor card, result + the choice inside it */
 function kmEmpBtns(){return Object.keys(KM_EMPACT).map(k=>pbtn(`data-kmemp="${k}"`,KM_EMPACT[k][0],kmEmpLine(k),kmEmpWhy(S,k)))}
-document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-kmemp]");if(!b||b.disabled)return;ev.stopPropagation();ev.preventDefault();const kind=b.dataset.kmemp;
+document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-kmemp]");if(!b||b.disabled)return;ev.stopPropagation();ev.preventDefault();kmEmpRun(b.dataset.kmemp)},true);
+/* ACT-MOVE: the button path as ONE function, so the Emperor's pop-up door «Hiến nghệ» / «Hầu chuyện» runs the very same act (jamove) */
+function kmEmpRun(kind){
  try{closeModal()}catch(e){}const r=kmEmpAct(S,kind);if(!r){render();return}log(r.txt);
  if(r.ok&&kind!=="walk"){const tc=S.tamco||0;const oW=odA(S,30+tc/2),oL=odA(S,40+tc/2);
   Q.push({ev:1,t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="g">${r.txt}</p><p>${kind==="ky"?"Ván cờ đến hồi gay cấn.":"Khúc đàn sắp hết."} Ngươi định thế nào?</p>`,
    opts:[{n:kind==="ky"?"Thắng khéo, để ngài thua mà vẫn vui":"Kết khúc thật hay, khoe tài",fx:{},x:`${word(oW)} · thành: Danh ${balSg(BAL.eff.jgift.danhGo)}, Sủng ${balSg(BAL.eff.jgift.sungGo)} · hỏng: ngài phật ý, Sủng ${balSg(BAL.eff.jgift.sungGo_2)}`,go:()=>{if(roll(oW)){ap(S,{danh:BAL.eff.jgift.danhGo,sung:BAL.eff.jgift.sungGo});log(`Ngài khen ngươi khéo léo. Danh ${balSg(BAL.eff.jgift.danhGo)} · ${sgStat(BAL.eff.jgift.sungGo)}.`)}else{ap(S,{sung:BAL.eff.jgift.sungGo_2});log(`Ngài thoáng phật ý. ${sgStat(BAL.eff.jgift.sungGo_2)}.`)}}},
     {n:kind==="ky"?"Cố ý thua một nước":"Cố ý đàn chậm lại, để ngài chỉ bảo",fx:{},x:`${word(oL)} · thành: Ân tình ${balSg(BAL.eff.jgift.anGo)} · hỏng: ngài nhận ra, Sủng ${balSg(BAL.eff.jgift.sungGo_3)}`,go:()=>{if(roll(oL)){ap(S,{an:BAL.eff.jgift.anGo});log(`Ngài đắc ý, càng thương ngươi. Ân tình ${balSg(BAL.eff.jgift.anGo)}.`)}else{ap(S,{sung:BAL.eff.jgift.sungGo_3});log(`Ngài nhận ra ngươi cố ý nhường. ${sgStat(BAL.eff.jgift.sungGo_3)}.`)}}}]})}
  else Q.push({t:KM_EMPACT[kind][0],h:`<p>${KM_EMPACT[kind][1]}</p><p class="${r.ok?"g":"r"}">${r.txt}</p>`});
- showModal();render()},true);
+ showModal();render()}
+window.kmEmpRun=kmEmpRun;
 (function(){const c0=courtMeet;courtMeet=function(t){const B=c0.apply(this,arguments);if(t==="emp")try{B.splice(Math.max(0,B.length-1),0,...kmEmpBtns())}catch(e){}return B}})();
 /* Xin yết kiến shares the one-a-day meeting with the three acts (coordinator 13:35Z): accState gives askWhy (the one reason every
    yết kiến button / card shows), accAsk marks the day. */
