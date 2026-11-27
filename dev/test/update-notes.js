@@ -8,7 +8,7 @@ const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefine
  for(const [w,h] of VPS){const tag=w+'x'+h;
   const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:w<1100,reducedMotion:'reduce'});await serve(ctx);
   await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9/'});
-  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+  const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
   /* the title's Tiếp tục opens Chọn sổ; the saved sổ is then loaded from its card ([data-load]) */
   const cont=async()=>{await p.evaluate(()=>{document.querySelector('[data-tgo="slots"]').click()});await p.waitForSelector('#modal [data-load]',{timeout:15000});await p.evaluate(()=>{document.querySelector('#modal [data-load]').click()})};
   const boot=async()=>{await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:120000});await p.waitForFunction(()=>window.CTM_NOTES_UI&&document.querySelector('#modal.kpthome'),null,{timeout:90000})};
