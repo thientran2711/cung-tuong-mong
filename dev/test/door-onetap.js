@@ -13,12 +13,12 @@
 const fs=require('fs'),path=require('path');const ROOT=path.resolve(__dirname,'../..');const {chromium}=require('playwright');
 const src=fs.readFileSync(path.join(ROOT,'dev/test/act-audit.js'),'utf8');const LIB=src.match(/const LIB=String\.raw`([\s\S]*?)`;\n\(async/)[1];
 const URL='file://'+path.resolve(process.argv[2]||path.join(ROOT,'dev/index.html'));
-const RUN=String.raw`(()=>{window.__bot=1;const R={fail:[],warn:[],n:{door:0,one:0,tier:0,best:0,pick:0,taps:0,deck:0,npcG:0,npcO:0},seen:{},picked:{},domin:{},split:{}};
+const RUN=String.raw`(()=>{window.__bot=1;const R={fail:[],warn:[],n:{door:0,one:0,tier:0,best:0,pick:0,taps:0,deck:0,npcG:0,npcO:0},seen:{},picked:{},domin:{},split:{},loss:{}};
  const F=t=>{if(R.fail.length<120&&!R.fail.includes(t))R.fail.push(t)};const T=h=>String(h||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
  const go=k=>{Q.splice(0);used=0;S.confined=0;popIdx=null;window.__j77etq=1;window.__accStay=1;window.__walkFree=1;try{goTo(k)}catch(e){}finally{window.__j77etq=0;window.__accStay=0;window.__walkFree=0}return S.place===k};
  const SPLIT=new Set(["Quyền Hoàng hậu","Xin chủ"]);const SPLITD=new Set(["Thỉnh an","Cáo bệnh","An thai"]);
  const key=(r,m)=>r.k+"|"+T(m.n).replace(/ (cho|với) .+$/,"").replace(/^Bàn tán về .+$/,"Bàn tán về …");
- const see=(r,L)=>{if(r.one1)return;L.forEach(m=>{if(!m.off)R.seen[key(r,m)]=1})};const got=(r,m)=>{if(m)R.picked[key(r,m)]=1};
+ const see=(r,L)=>{if(r.one1)return;const harm=!!(ONE.M[r.k]||{}).harm;L.forEach(m=>{if(m.off)return;if(!harm&&ONE.lossOnly(m)){R.loss[key(r,m)]=1;return}R.seen[key(r,m)]=1})};const got=(r,m)=>{if(m)R.picked[key(r,m)]=1};
  const VAR=[()=>{},()=>{for(const a in S.arts)S.arts[a]=20},()=>{S.bac=0},()=>{S.tamco=80;S.bac=9999},()=>{try{for(const k in S.emp.likes)S.emp.known[k]=1}catch(e){}},()=>{for(const a in S.arts)S.arts[a]=Math.floor(Math.random()*12)}];
  const places=()=>["home","tn","kn","ksp","tyv","nvp","vuon"].concat(rivals.filter(v=>v&&v.alive&&!v.out).map(v=>palaceOf(v))).filter((x,i,a)=>x&&a.indexOf(x)===i);
  const check=(p,i)=>{let A=[];try{A=talkOpts(p)}catch(e){F("talkOpts "+e.message);return}
@@ -29,10 +29,11 @@ const RUN=String.raw`(()=>{window.__bot=1;const R={fail:[],warn:[],n:{door:0,one
     const ts=rows.map(x=>x.t);if(new Set(ts).size!==ts.length)F("tier dup "+r.k);
     for(const x of rows){const free=x.T.filter(m=>!m.off);for(let s=0;s<12;s++){const m=ONE.pick(r,x.T,"s"+s+":"+Math.random());if(!m)continue;R.n.pick++;got(r,m);
       if(ONE.tierOf(r,m)!==x.t)F("HARM tier not bounded: "+r.k+" "+x.t+" picked "+T(m.n)+" ("+ONE.tierOf(r,m)+")");
-      if(!harm){const best=Math.max(...free.map(ONE.lv));if(ONE.lv(m)<best)F("tier pick worse than best: "+r.k+" "+x.t+" "+T(m.n));free.forEach(o=>{if(ONE.lv(o)<ONE.lv(m))R.domin[key(r,o)]=1})}}}}
+      if(!harm&&ONE.lossOnly(m))F("favour tier pick is loss-only (law 3): "+r.k+" "+T(m.n));if(!harm){const best=Math.max(...free.filter(o=>!ONE.lossOnly(o)).map(ONE.lv));if(ONE.lv(m)<best)F("tier pick worse than best: "+r.k+" "+x.t+" "+T(m.n));free.forEach(o=>{if(ONE.lv(o)<ONE.lv(m))R.domin[key(r,o)]=1})}}}}
    else{R.n.one++;const free=L.filter(m=>!m.off);if(!free.length)continue;
     for(let s=0;s<12;s++){const m=ONE.pick(r,L,"s"+s+":"+Math.random());got(r,m);R.n.pick++;
-     if(!harm){const best=Math.max(...free.map(ONE.lv));if(ONE.lv(m)<best)F("ONE pick worse than best: "+r.k+" "+T(m.n));else R.n.best++;
+     if(!m)continue;if(!harm&&ONE.lossOnly(m))F("favour pick is loss-only (law 3): "+r.k+" "+T(m.n));
+     if(!harm){const best=Math.max(...free.filter(o=>!ONE.lossOnly(o)).map(ONE.lv));if(ONE.lv(m)<best)F("ONE pick worse than best: "+r.k+" "+T(m.n));else R.n.best++;
       free.forEach(o=>{if(ONE.lv(o)<ONE.lv(m))R.domin[key(r,o)]=(R.domin[key(r,o)]||0)+1})}}
     if(!harm&&d.o!=null){const best=Math.max(...free.map(ONE.lv));const dl=d.o>=100?KIT_ODDS.length:oddsLv(d.o);if(dl<best&&!(d.o>=100))F("door word worse than best: "+r.k)}}}};
  for(const sc of ["dau","cao","hh","con"])for(let bu=0;bu<3;bu++)for(let vi=0;vi<VAR.length;vi++){AA.scen(sc);S.buoi=bu;S.turn=(S.turn||0)+vi*7+bu;try{VAR[vi]()}catch(e){}used=0;
@@ -55,7 +56,7 @@ const RUN=String.raw`(()=>{window.__bot=1;const R={fail:[],warn:[],n:{door:0,one
    const r0=ONE.deckRow(b);const r=r0?Object.assign({},r0,{n:nm}):{k:"?",n:nm};const md=ONE.mode(r.k);if(md==="keep")continue;const L=ONE.deckM(b);see(r,L);
    const tiers=["nhẹ","vừa","nặng"].filter(x=>L.some(m=>ONE.tierOf(r,m)===x));
    if(md==="tier"&&tiers.length>=2){for(const x of ONE.tierRows(r,L,"me")){const m=ONE.pick(r,x.T,"d"+Math.random());got(r,m);if(m&&ONE.tierOf(r,m)!==x.t)F("deck tier not bounded "+nm);if(m)x.T.filter(o=>!o.off).forEach(o=>{if(ONE.lv(o)<ONE.lv(m))R.domin[key(r,o)]=1})}}
-   else{const free=L.filter(m=>!m.off);const m=ONE.pick(r,L,"d"+Math.random());got(r,m);if(m){const best=Math.max(...free.map(ONE.lv));if(ONE.lv(m)<best)F("deck pick worse "+nm);free.forEach(o=>{if(ONE.lv(o)<ONE.lv(m))R.domin[key(r,o)]=1})}}}}
+   else{const free=L.filter(m=>!m.off);const m=ONE.pick(r,L,"d"+Math.random());got(r,m);if(m){const best=Math.max(...free.filter(o=>!ONE.lossOnly(o)).map(ONE.lv));if(ONE.lv(m)<best)F("deck pick worse "+nm);free.forEach(o=>{if(ONE.lv(o)<ONE.lv(m))R.domin[key(r,o)]=1})}}}}
  /* one real deck tap per door name */{AA.scen("cao");deal();render();AA.show(AA.surfaces().find(x=>x.id==="act"));const b=document.querySelector("#panel button[data-ddoor]:not([disabled])");
   if(b){Q.splice(0);ONE.last=null;b.click();if(Q.length&&Q[0].opts){const o=Q[0].opts.find(x=>x.go&&!x.off);Q.splice(0);if(o)o.go()}if(!ONE.last)F("deck tap ran nothing: "+b.dataset.ddoor);R.n.taps++}}
  /* F: NPCs */
@@ -73,6 +74,7 @@ const RUN=String.raw`(()=>{window.__bot=1;const R={fail:[],warn:[],n:{door:0,one
  console.log(`DOOR-ONETAP · ${URL}`);
  console.log(`doors seen ${N.door} (ONE ${N.one} · TIER ${N.tier} · KEEP ${N.keep||0}) · picks ${N.pick} · favour picks = best ${N.best} · deck doors ${N.deck} · real taps ${N.taps} (${R.tapped.join(' ')}) · NPC harm options ${N.npcO}, grouped ${N.npcG} (calls ${R.npcGroups})`);
  console.log(`members seen ${Object.keys(R.seen).length} · picked ${Object.keys(R.picked).length} · never picked ${R.never.length} (dominated ${R.neverDom.length})`);
+ if(Object.keys(R.loss).length)console.log('  loss-only ways never auto-picked (law 3):',Object.keys(R.loss).join(' · '));
  if(R.neverDom.length)console.log('  dominated (always a better way runnable):',R.neverDom.join(' · '));
  if(R.neverReal.length)console.log('  NEVER PICKED:',R.neverReal.join(' · '));
  if(R.warn.length)console.log('warn',[...new Set(R.warn)].slice(0,12).join(' | '));

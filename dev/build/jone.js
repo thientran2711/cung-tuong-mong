@@ -90,7 +90,14 @@ function prefOf(r,m){const p=(M[r.k]||{}).pref;const n=txt(m.n);try{
  if(p==="art"){const A=S.arts||{};const L={cam:/đàn|cầm/i,ky:/cờ|kỳ/i,thi:/thơ|thi/i,hoa:/vẽ|họa/i,vu:/múa|vũ/i,theu:/thêu/i};let s=0;
   for(const k in L)if(L[k].test(n))s=Math.max(s,(+A[k]||0)+((S.emp&&S.emp.known&&S.emp.known.art&&S.emp.likes&&S.emp.likes.art===k)?2:0));return s}}catch(e){}return 0}
 /* ONE pick among members M (each {id, n, x, off, a?, cost?}); seed fixed per target + buổi + door (+ tier) → co-op host and guest agree */
-function pick(r,L,seed){const ok=L.filter(m=>!m.off);if(!ok.length)return null;const h=hash(seed);
+/* law 3 (gain-and-loss) + ACT-MOVE-6 finding: a way whose only outcome is a LOSS (e.g. «Bàn tán về X» when she likes X: «kèm: nàng quý ngươi -N») is never
+   auto-picked by a favour door — it would show a loss on the green «Được» row. Read from the way's own gain text (fmt(w) + x): no «+» gain and a «-N» */
+function lossOnly(m){try{const a=m.a;let t="";if(a){let fw="";try{fw=fmt(a.w||{})}catch(e){}t=[fw,a.x||""].filter(Boolean).join(" · ")}else{const x=txt(m.x);const i=x.indexOf("thành:");t=i>=0?x.slice(i+6):x}
+ t=txt(t).replace(/(^|·\s*)(hỏng|bại|mất)\s*:.*$/i,"").trim();/* what a FAILURE costs is not the way's outcome */if(!t)return false;
+ const plus=/(\+\s*\d|được|thêm|bớt|hợp chuyện|thấy|biết|nắm|có thêm)/i.test(t);const minus=/(-|−)\s*\d/.test(t.replace(/bạc\s*(-|−)\s*\d+/gi,"").replace(/(-|−)\s*\d+\s*bạc/gi,""));/* a bạc minus is the price, not a loss */
+ return minus&&!plus}catch(e){return false}}
+ONE.lossOnly=lossOnly;
+function pick(r,L,seed){let ok=L.filter(m=>!m.off);if(!(M[r.k]||{}).harm)ok=ok.filter(m=>!lossOnly(m));if(!ok.length)return null;const h=hash(seed);
  if((M[r.k]||{}).harm)return ok[h%ok.length];
  /* FAVOUR: the members whose odds WORD is the best word she has (never worse than her best old way, as she reads it), then the pref
     (his liked topic she knows / his favourite art · her strongest), then equal chance among the rest (seeded): variety of real outcomes, same word */
