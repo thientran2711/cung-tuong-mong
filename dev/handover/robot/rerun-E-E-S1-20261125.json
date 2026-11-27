@@ -1737,6 +1737,89 @@
      "buoi": null
     }
    ]
+  },
+  {
+   "id": "E-S1-R1-speed-5-3753418049",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "speed",
+   "botHarness": "bold",
+   "kiep": 5,
+   "seed": 3753418049,
+   "dev": "ipad",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "97e55a457",
+    "deadButtons": 0,
+    "stuck": 0
+   },
+   "live": "Build fb660cb78eec (LIVE, pin=0), one continuous run",
+   "end": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Kiết lỵ nguy kịch, không qua khỏi",
+   "death": true,
+   "age": 23,
+   "year": 6,
+   "rank": 0,
+   "buoi": 832,
+   "steps": 12729,
+   "taps": 7016,
+   "exitPick": null,
+   "bugCounts": {
+    "js": 1,
+    "note": 4,
+    "game": 1
+   },
+   "valid": "VALID",
+   "flags": [
+    "kim board 2/10 at debut (97 s idle); Lãnh cung ~1y later, death 2y later — Foreman E to confirm"
+   ],
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-speed-5-3753418049-moments.md",
+    "review/rerun-E-S1-E-S1-R1-speed-5-3753418049-review.md"
+   ],
+   "bugs": [
+    {
+     "type": "js",
+     "msg": "page error: c is not defined",
+     "n": 2,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)",
+     "n": 7,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (126 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (160 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕",
+     "n": 4,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (178 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (240 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Nội vụ p») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    }
+   ]
   }
  ],
  "parked": [
