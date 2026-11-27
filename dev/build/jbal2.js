@@ -202,15 +202,20 @@ BAL.mort={on:1,playerFloorYears:0,
    or it is her father's house), strikes at mo months at odds base + (gap over)·k + army (Đại tướng quân) + her push; lose: power −fail, women's
    Sủng −sungLoss and rank (punish 2), the throne's grip +gripWin.
    amb = a house's drive: 1 + corrupt (a greedy head) + sk × (head skill − 50) + prince (a prince of its blood).
-   her = her card (three roads of equal weight): block / help / stand aside — sung, danh, th, bac, duc = the stat moves; blk / psh = abdication
-   pressure moved; od = odds moved on a phế / coup case; evCut = evidence a mật tấu takes away; af / rel = the house's favour / its women's
-   relation; lose = what she loses if she helped a case that fails. */
+   omenX = the lifespan-omen illness weighs omenX × ill; gripMid = the grip where the damping is neutral (and its span); skMid = a head's
+   neutral skill. npc.max = NPC consorts with a stake who take a road per case (law 1: the same roads, same numbers as her).
+   her = the three roads, ONE rule for her and NPCs, tiers Nhẹ · Vừa · Nặng (owner OD 27/11 ~00:46Z: cost and result rise together):
+   t1 = Nhẹ «giữ mình» (no cost, Đức t1.duc); t2 = Vừa (a stat cost of size t2 → a stat gain of size t2: abd block Danh→Sủng, abd help
+   Sủng→Thái hậu (Danh once she is gone), phế/lật đổ block Danh→Sủng); t3 = Nặng phế/lật đổ help (Bạc t3.bac → Danh t3.danh + the house's
+   backing); blk / psh = abdication pressure moved; od = odds moved on a phế / coup case; evCut = evidence a mật tấu takes away; af / rel =
+   the house's favour / its women's relation; lose = what every helper of a failed case loses (loseMine × lose when it is only her father's house). */
 BAL.re={on:1,minY:7,
- abd:{heirAge:10,heir:.35,heirK:.05,th:.45,hieu:1.5,noHeir:.15,petP:3,pet:5,temper:{chamchinh:.7,nongnay:.85,datinh:1.25,mesac:1.15,nhantu:1.1},ill:2.5,old:.3,age:45,yr:.1,yrs:10,court:.4,courtPow:55,gripK:.5,gripMin:.4,decay:.5,warn:55,at:100},
+ abd:{heirAge:10,heir:.35,heirK:.05,th:.45,hieu:1.5,noHeir:.15,petP:3,pet:5,temper:{chamchinh:.7,nongnay:.85,datinh:1.25,mesac:1.15,nhantu:1.1},ill:2.5,omenX:2,old:.3,age:45,yr:.1,yrs:10,court:.4,courtPow:55,gripK:.5,gripMid:50,gripMin:.4,decay:.5,warn:55,at:100},
  phe:{pow:60,evLead:8,sung:45,ev:4,evMax:8,evP:5,evFade:4,bad:40,mo:3,base:60,powD:2,evK:5,th:5,fail:25,sungLoss:15},
  coup:{pow:65,gap:15,amb:1,rum:2,mo:3,eyes:2,rumP:50,base:35,k:1.5,army:10,fail:35,sungLoss:15,gripWin:8},
- amb:{corrupt:.3,sk:.01,prince:.4},
- her:{sung:4,danh:4,th:4,bac:60,duc:2,blk:25,psh:20,od:15,evCut:2,af:20,rel:6,lose:6}};
+ amb:{corrupt:.3,sk:.01,skMid:50,prince:.4},
+ npc:{max:3},
+ her:{t1:{duc:2},t2:4,t3:{bac:60,danh:8},blk:25,psh:20,od:15,evCut:2,af:20,rel:6,lose:6,loseMine:.5}};
 /* D49 collection milestones (jcol): [items, Phúc duyên once per life (OD L46: ~+5/+10/+20/+35), danh hiệu (VANPHONG cổ trang)]; keep = lives remembered in the once-only ledger */
 BAL.col={ms:[[20,5,"Tích bảo"],[50,10,"Tàng bảo"],[100,20,"Bách bảo"],[200,35,"Vạn bảo các chủ"]],keep:80};
 /* TÂN QUÂN LẬP UY (jreign, owner 16/11 D5): the Emperor's side story + her faction road. Months from the accession: at[c] opens chapter c+1;
