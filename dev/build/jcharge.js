@@ -78,7 +78,8 @@ function chWitGo(h,t,c,m,W){const wn=chWitNeed(t,c),w=chWitL(W,c).length;if(w>=w
 function chWitKind(t,c,id){const K=(chC(c)||{}).wk||[];if(!K.length)return"";const p=chWitP(id);const D=chDeedMap(t)[c];const vic=D&&D.list&&D.list.some(d=>d&&d.t!=null&&ledgerId(byKey(d.t)||d.t)===id);
  const f=rx=>K.find(x=>rx.test(x));if(vic&&f(/bị hại/))return f(/bị hại/);if(/^s\d/.test(id)){const s=K.find(x=>/^lời khai/.test(x)&&!/bị hại/.test(x));if(s)return s}return f(/tận mắt/)||K[0]}
 function chWitNames(t,c,L){return L.map(id=>{const k=chWitKind(t,c,id);return `${chWitNm(id)}${k?` (${k})`:""}`})}
-function chWitTxt(h,t,c){const wn=chWitNeed(t,c);if(!wn)return"";const L=chWitL(chWitS(h,t),c);return `nhân chứng ${L.length}/${wn}${L.length?` (${L.map(chWitNm).join(", ")})`:""}`}
+/* REAL-PROOF-2 (owner 27/11 ~00:13Z «sợ … tách nhiều tầng chi tiết quá lại rối»): a card shows only the COUNT «Nhân chứng c/d»; the names live in the Sổ ghi find line and her notice */
+function chWitTxt(h,t,c){const wn=chWitNeed(t,c);if(!wn)return"";return `Nhân chứng ${chWit(h,t,c)}/${wn}`}
 let CHWS=null;/* the witnesses the last presented charge spent (her notice names them) */
 /* the charge a new piece (or a search) goes to: the one she is already building (closest to full), else her newest unproven deed */
 function chFor(h,t){const m=chSync(h,t),W=chWitS(h,t);const O=chOrd(t);let best=null,gap=1e9;for(const c of O){const n=m[c]||0,w=chWitL(W,c).length;if((n>0||w>0)&&chRoom(h,t,c,m,W)){const g=Math.max(0,chNeed(t,c)-n)+Math.max(0,chWitNeed(t,c)-w);if(g<gap){gap=g;best=c}}}
@@ -236,7 +237,7 @@ if(typeof PUNK==="object")PUNK.phat="Phạt bổng";
 /* «phat» Hình phạt row: jpun punRows (PUNISH-TIER: before the tier rows) */
 /* ---------- the evidence lines for the cards ---------- */
 /* «Tư thông 2/3 · Vượt phẩm 1/1» — every charge she holds a piece of */
-function chLine(h,t){if(!h||!t||h===t)return"";const m=chSync(h,t),W=chWitS(h,t);return chB().order.filter(c=>(m[c]||0)>0||chWitL(W,c).length>0).map(c=>{const w=chWitTxt(h,t,c);return `${chNameW(t,c)} ${m[c]||0}/${chNeed(t,c)}${w?`, ${w}`:""}`}).join(" · ")}
+function chLine(h,t){if(!h||!t||h===t)return"";const m=chSync(h,t),W=chWitS(h,t);return chB().order.filter(c=>(m[c]||0)>0||chWitL(W,c).length>0).map(c=>{const w=chWitTxt(h,t,c);return `${chNameW(t,c)}: chứng cứ ${m[c]||0}/${chNeed(t,c)}${w?`, ${w.toLowerCase()}`:""}`}).join(" · ")}
 function chNeedTxt(h,t,c){const L=chLine(h,t);if(c){const wn=chWitNeed(t,c);return `cần ${chNeed(t,c)} chứng cứ tội ${chName(c).toLowerCase()}, tội ${chTierN(t,c)} (có ${chHave(h,t,c)})${wn?`, và ${wn} nhân chứng (có ${chWit(h,t,c)})`:""}`}
  return L?`chưa đủ chứng một tội: ${L}`:`chưa có chứng cứ về ${chWho(t,"ngươi")}`}
 kitWhyEv=function(a,n){return a?chNeedTxt(S,a):`thiếu chứng cứ`};
@@ -245,8 +246,8 @@ function chTocao(h,t){for(const c of ["uh","il","vp"])if(chReady(h,t,c))return c
 /* the deed behind the piece the last search found (the result line names the right wrong) */
 function chHitDeed(t){const x=(CHLAST&&CHLAST.tries||[]).filter(z=>z.hit).pop();if(!x)return null;const D=chDeedMap(t)[x.c];return D&&D.list[0]||null}
 /* evidence card rows (kit fact rows): one row per charge she holds a piece of — pieces / need, and the next search's odds word */
-function chRows(h,t){if(!h||!t||h===t)return[];const m=chSync(h,t),W=chWitS(h,t);const ag=h===S?S.maid:null;return chB().order.filter(c=>(m[c]||0)>0||chWitL(W,c).length>0).map(c=>{const need=chNeed(t,c),n=m[c]||0;const w=chWitTxt(h,t,c);const x=`${n}/${need}${w?`, ${w}`:""}`;
- return [chNameW(t,c),chReady(h,t,c)?`${x}, đủ để tố`:`${x} · Tìm chứng: ${word(chFind(h,t,c,ag).o)}`]})}
+function chRows(h,t){if(!h||!t||h===t)return[];const m=chSync(h,t),W=chWitS(h,t);const ag=h===S?S.maid:null;return chB().order.filter(c=>(m[c]||0)>0||chWitL(W,c).length>0).map(c=>{const need=chNeed(t,c),n=m[c]||0;const w=chWitTxt(h,t,c);const x=`Chứng cứ ${n}/${need}${w?` · ${w}`:""}`;/* ONE line per charge (OD 27/11 ~00:13Z): «Chứng cứ a/b · Nhân chứng c/d» + the odds word */
+ return [chNameW(t,c),chReady(h,t,c)?`${x} · đủ để tố`:`${x} · Tìm chứng: ${word(chFind(h,t,c,ag).o)}`]})}
 /* the short word for a picker sub-line, and the one plain paragraph that says what decides it (the search dialog) */
 function chFindWord(h,t,ag){if(!h||!t||h===t)return"";const c=chChase(h,t);return `Tìm chứng: ${word(chFind(h,t,c||"hd",ag).o)}`}
 function chHowTxt(h,ag){const B=chB(),n=+h.mat||0;return `«Tìm chứng» là may rủi của một lần dò: có tìm ra một món chứng cứ hay không. Tội nhẹ dấu vết dễ lộ, tội nặng giấu kỹ; ${chWho(h,"Ngươi")} có Tâm cơ ${h.tamco||0}: hơn người bị dò thì dễ tìm, kém thì khó tìm; ${chWho(h)} có ${n} tai mắt (từ ${B.matMid} người trở lên thì dễ hơn), cài được người trong cung nàng thì dễ hơn nữa; cung từ ${RANKS[B.guardRk].n} trở lên canh nghiêm hơn; ${ag&&ag.name?ag.name+" chỉ giúp được chút ít; ":""}mỗi lần dò hụt, lần sau dễ hơn.`}

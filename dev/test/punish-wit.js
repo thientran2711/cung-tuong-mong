@@ -30,7 +30,7 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   {const m=chSync(S,A);m.mh=need;}
   const ev0=chHave(S,A,"mh");ok(ev0===need&&chWit(S,A,"mh")===0&&!chReady(S,A,"mh")&&!chOK(S,A)&&!accOK(S,A),`Tần mưu hại ${ev0}/${need} chứng cứ, 0/${chWitNeed(A,"mh")} nhân chứng → not ready (Tố giác closed)`);
   ok(/nhân chứng 0\/1/.test(chLine(S,A))&&/và 1 nhân chứng \(có 0\)/.test(chNeedTxt(S,A,"mh")),`lines print the witness need: «${chLine(S,A)}» · «${chNeedTxt(S,A,"mh")}»`);
-  {const r=chRows(S,A).find(x=>/Mưu hại/.test(x[0]));ok(r&&/nhân chứng 0\/1/.test(r[1])&&!/đủ để tố/.test(r[1]),`card row: ${JSON.stringify(r)}`)}
+  {const r=chRows(S,A).find(x=>/Mưu hại/.test(x[0]));ok(r&&/^Chứng cứ \d+\/\d+ · Nhân chứng 0\/1 · /.test(r[1])&&!/đủ để tố/.test(r[1]),`card row = ONE line «Chứng cứ a/b · Nhân chứng c/d» + odds word (REAL-PROOF-2): ${JSON.stringify(r)}`)}
   const tot0=evG(S,A);evA(S,A,1,"mh");ok(chWit(S,A,"mh")===1&&chHave(S,A,"mh")===need&&evG(S,A)===tot0&&chReady(S,A,"mh")==="mh",`a find with evidence at the cap = a witness (1/1); evidence total unchanged ${tot0}→${evG(S,A)}; now ready`);
   {const r=chRows(S,A).find(x=>/Mưu hại/.test(x[0]));ok(r&&/đủ để tố/.test(r[1]),`card row ready: ${JSON.stringify(r)}`)}
   /* 4. middle state: witness held, evidence short; finds alternate */
@@ -61,7 +61,7 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   {reset();A.rank=3;deedAdd(A,"poison",C,2,"bỏ độc");A.wsee={};const need=chNeed(A,"mh");evA(S,A,need+3,"mh");
    ok(chWit(S,A,"mh")===0&&chHave(S,A,"mh")===need&&!chReady(S,A,"mh")&&!chRoom(S,A,"mh",chSync(S,A),chWitS(S,A)),`nobody was there → no witness can be found: «${chLine(S,A)}», no room left, not ready`)}
   {reset();A.rank=3;deedAdd(A,"poison",C,2,"bỏ độc");A.wsee={};saw(A,"mh",C);const need=chNeed(A,"mh");evA(S,A,need+1,"mh");const W=chWitS(S,A).mh;
-   ok(Array.isArray(W)&&W.length===1&&W[0]===ledgerId(C)&&chLine(S,A).includes(chWitNm(ledgerId(C)))&&chReady(S,A,"mh"),`the witness is stored by id ${JSON.stringify(W)} and shown by name: «${chLine(S,A)}»`);
+   ok(Array.isArray(W)&&W.length===1&&W[0]===ledgerId(C)&&!chLine(S,A).includes(chWitNm(ledgerId(C)))&&chWitNames(A,"mh",W).join(" ").includes(chWitNm(ledgerId(C)))&&chReady(S,A,"mh"),`the witness is stored by id ${JSON.stringify(W)}; the card line counts only «${chLine(S,A)}», the name is for Sổ ghi / notice «${chWitNames(A,"mh",W)}»`);
    C.alive=false;const dead=chWit(S,A,"mh"),rd=chReady(S,A,"mh");C.alive=true;ok(dead===0&&!rd,`a witness who died no longer counts (${dead}, ready ${rd})`)}
   {reset();A.rank=3;deedAdd(A,"poison",C,2,"bỏ độc");A.wsee={};saw(A,"mh",S,A);evA(S,A,chNeed(A,"mh")+2,"mh");ok(chWit(S,A,"mh")===0,`the accuser and the accused are never witnesses (A.wsee ${JSON.stringify(A.wsee.mh)})`)}
   {reset();A.rank=3;deedAdd(A,"poison",C,2,"bỏ độc");A.wsee={};saw(A,"mh",D);S.ewc={};S.ewc[key(A)]={mh:2};const w=chWit(S,A,"mh");const W=chWitS(S,A).mh;
@@ -82,7 +82,7 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   await p.evaluate(()=>{Q.length=0;closeModal();const L=liveRivals(true).filter(x=>!x.queen&&!x.out);const v=L[0];v.wrongs=[];v.evc={};v.ewc={};v.ev=0;S.evc={};S.ewc={};S.out=0;S.rank=2;v.rank=3;
    deedAdd(v,"poison",L[1],2,`bỏ độc vào điểm tâm của ${L[1].name}`);deedAdd(v,"tryst",null,2,"tư tình với thị vệ");deedAdd(v,"huydung",L[2],1,`hủy dung ${L[2].name}`);chSawAdd(v,"mh",ledgerId(L[2]));chSawAdd(v,"tt",ledgerId(L[2]));
    evA(S,v,2,"mh");evA(S,v,chNeed(v,"tt")+chWitNeed(v,"tt"),"tt");chWitS(S,v).tt=0;/* full evidence, the witness missing */evA(S,v,chNeed(v,"hd"),"hd");try{k61Know(v,"",true,2)}catch(e){}S.met=S.met||{};S.met[v.id]=wk();kitEvidencePanel(v)});await sleep(1500);
-  {const t=await p.evaluate(()=>(document.querySelector("#modal")||document.body).innerText);const g=/nhân chứng 1\/1/.test(t)&&/4\/4, nhân chứng 0\/1/.test(t);console.log((g?"PASS ":"FAIL ")+`evidence card shows the witness counts (mưu hại 1/1 short evidence, tư thông 0/1)`);if(!g)fails++}
+  {const t=await p.evaluate(()=>(document.querySelector("#modal")||document.body).innerText);const g=/Nhân chứng 1\/1/.test(t)&&/Chứng cứ 4\/4 · Nhân chứng 0\/1/.test(t);console.log((g?"PASS ":"FAIL ")+`evidence card shows the witness counts (mưu hại 1/1 short evidence, tư thông 0/1)`);if(!g)fails++}
   await p.screenshot({path:`${DIR}/wit-evidence-${W}x${H}.png`});
   const has=await p.evaluate(()=>{closeModal();Q.length=0;/* a fresh case (the queued one of the checks names the S from before save → load) */const L=liveRivals(true).filter(x=>!x.queen&&!x.out);const A=L[3],D=L[4];
    A.rank=3;S.rank=3;S.out=0;S.coldFrom=null;A.evc={};A.ewc={};A.evm={};deedAdd(S,"poison",D,2,"bỏ độc vào trà của "+D.name);chSawAdd(S,"mh",ledgerId(L[5]||D));evA(A,S,chNeed(S,"mh")+chWitNeed(S,"mh"),"mh");

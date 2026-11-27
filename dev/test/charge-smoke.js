@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;const sleep=t=
   deedAdd(v,"poison",w,2,"bỏ độc")/* PUNISH-TIER: mưu hại = nặng, 3 pieces */;ok(chCapC(v,"mh")===3,'one poisoning: mưu hại cap 3 (= pieces needed)');ok(deedCap(v)===3,'deedCap = per-charge caps');
   /* certain pieces (caught): go to the charge */
   evA(S,v,2);ok(chHave(S,v,"mh")===1&&chWit(S,v,"mh")===1&&v.ev===1,'2 certain pieces → mưu hại 1 chứng cứ + 1 nhân chứng (PUNISH-TIER-3: finds alternate), evidence total 1');ok(!accOK(S,v),'1/3 mưu hại: cannot accuse');
-  ok(/Mưu hại tính mạng \(nặng\) 1\/3, nhân chứng 1\/1/.test(chLine(S,v)),'card line: '+chLine(S,v));ok(/Tìm chứng tội mưu hại/.test(chFindTxt(S,v,S.maid)),'search card text names the charge she builds: '+chFindTxt(S,v,S.maid));
+  ok(/Mưu hại tính mạng \(nặng\): chứng cứ 1\/3, nhân chứng 1\/1/.test(chLine(S,v)),'card line: '+chLine(S,v));ok(/Tìm chứng tội mưu hại/.test(chFindTxt(S,v,S.maid)),'search card text names the charge she builds: '+chFindTxt(S,v,S.maid));
   /* find odds factors */
   S.tamco=60;v.tamco=10;v.rank=2;Object.defineProperty(S,'mat',{get:()=>0,configurable:true});let F=chFind(S,v,"mh",null);ok(F.band===4,`tâm cơ gap +50 → +2 bands (cap): band ${F.band}`);
   S.tamco=10;v.tamco=60;F=chFind(S,v,"mh",null);ok(F.band===0,`tâm cơ −50 → −2: band ${F.band}`);
