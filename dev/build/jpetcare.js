@@ -88,7 +88,7 @@ function petcDraw(msg){const box=document.getElementById("kpcare");const P=tsbPe
 /* the game area: the kit mini-game frame inside the dialog; returns its box */
 function petcGameBox(title,how,kind){const w=document.getElementById("kpcgw");if(!w)return null;{const c=document.getElementById("kpcare");if(c)c.classList.add("kg-open")}/* care info folds away while the frame is open (class, not :has: perf) */w.innerHTML=kitGameFrame({art:"Chăm",title,how,id:"kpcgame",kind:kind==="bath"?"thu_tam":kind==="play"?"thu_choi":""})+
   /* mg-skip-all (KIT §13.6): the quick option of every care game: won = BAL.skip.care of the gain (a middling hand), lost = nothing */
-  `<div class="kg82act">${kitQuick({id:"kpcquick",n:"Để trời định",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;
+  `<div class="kg82act">${kitQuick({id:"kpcquick",n:"Chăm nhanh",win:"được nửa phần như chăm vừa tay",lose:"không thêm gì"})}</div>`;
  try{w.scrollIntoView({block:"nearest"})}catch(e){}return document.getElementById("kpcgame")}
 /* KIT §13.7 (mg-ui-rest, owner OD:L1981): EVERY care game opens on the kit rules screen (kgReady: luật + picture of the move, «Hướng dẫn» guided round, «Sẵn sàng»);
    NO khắc are spent and nothing runs until «Sẵn sàng»; then the khắc go and run(box) starts the real game. tutor(box, env) = the unscored guided round. */
@@ -177,12 +177,12 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  if(k==="maid"){petcMaid(PETC.i);return}
  if(!can(BAL.pet.khac))return;/* KIT §13.7 (mg-ui-rest): the tap opens the RULES screen; the khắc are spent only on «Sẵn sàng» (petcRules) */if(k==="feed")petcFeed();else if(k==="bath")petcBath();else if(k==="play")petcPlay()},true);
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kpcquick");if(!b)return;e.stopPropagation();e.preventDefault();const kind=PETC.kind;if(!kind||!PETC.game)return;
- if(!PETC.rdy){if(!can(BAL.pet.khac))return;spend(BAL.pet.khac)}/* «Để trời định» from the rules screen is a play-through too: same khắc */
+ if(!PETC.rdy){if(!can(BAL.pet.khac))return;spend(BAL.pet.khac)}/* «Chăm nhanh» (owner OD 26/11 ~05:45Z, was «Để trời định») from the rules screen is a play-through too: same khắc */
  kgTutDrop();PETC.game=null;PETC.rdy=0;try{if(PETC.stop)PETC.stop()}catch(x){}PETC.stop=null;/* MG11: the shared engines return their own stop */
  petcQuick(kind)},true);
 /* the engines behind the care buttons (one function each: the tap ends here; co-op thin F4 registers them) */
 function petcMaid(i){const P=tsbPets(S)[i];const m=tsbMaid(S);if(!P||!m)return;P.maidW=tsbWk()+BAL.pet.maidW;petcDraw(`${m.name} nhận chăm ${petT(P).n.toLowerCase()} ${BAL.pet.maidW} tuần.`)}
-function petcQuick(kind){if(kitQuickRoll()){petcGain(kind,BAL.skip.care);return}log("Để trời định: chăm chưa thành, không thêm gì.");petcDraw("Để trời định: chưa thành, không thêm gì.")}
+function petcQuick(kind){if(kitQuickRoll()){petcGain(kind,BAL.skip.care);return}log("Chăm nhanh: chăm chưa thành, không thêm gì.");petcDraw("Chăm nhanh: chưa thành, không thêm gì.")}
 /* "Chăm" on the pet card opens the screen; the card shows stage + effects + next */
 (function(){const d0=petDo;petDo=function(k,b){if(k==="care"){const i=+b.dataset.i;try{closeModal()}catch(e){}petcOpen(i);return}return d0.apply(this,arguments)};window.petDo=petDo})();
 (function(){const r0=petRowsL;petRowsL=function(P,i){const L=r0.apply(this,arguments);try{petcInit(P);const s=petStage(P);return [["Lớn",`<b>${BAL.pet.stages[s]}</b>`],["Đang có",petcEffects(P).length?petcEffects(P):["làm cung thêm vui"],"g"],["Lớn tiếp",[petcNextTxt(P)],"n"],["Chăm",[`No ${Math.round(P.full)} · Sạch ${Math.round(P.clean)} · Vui ${Math.round(P.joy)} · Tình cảm ${Math.round(P.aff)}`],"n"]].concat(L)}catch(e){}return L}})();
