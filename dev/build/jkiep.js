@@ -30,8 +30,9 @@ function kpPenalty(base){const now=pdGet();const lost=Math.max(0,now-base);const
  return r}})();
 /* abandoning a living, unfinished life from the title screen (Kiếp mới over a live slot) */
 (function(){const sl=$("slots");if(!sl)return;const h0=sl.onclick;sl.onclick=function(e){try{const b=e.target.closest("button");if(b&&b.dataset.new&&b.dataset.ask){const d=loadSlot(+b.dataset.new);const s=d&&d.S;
-   if(s&&!s.dead&&!s.kpTron){if(b.dataset.ask==="1"){b.dataset.ask="2";b.innerHTML=`Kiếp này chưa trọn, bỏ ngang sẽ mang nghiệp<small>mất Phúc duyên kiếp này${s.pdLife?` (${s.pdLife})`:""}, trừ thêm ${KIEP.pen}, kiếp sau không được đổi thân phận · bấm lần nữa để bỏ</small>`;return}
-    if(b.dataset.ask==="2"){const base=pdGet()-(s.pdLife||0);kpPenalty(base);try{const p=lifeLog();p.unshift({n:s.name,o:(s.origin&&s.origin.n)||"",r:lifeTopRank(s).n,age:s.age,y:s.year,kids:(s.kids||[]).length,fc:s.fc||"",f:"Bỏ ngang · Kiếp dở dang",foes:[]});store.set("cung-luanhoi",p.slice(0,40))}catch(x){}}}}}catch(x){console.error(x)}
+   /* OB-M3UI (fault 3, SYSTEM act — OD 24/11 ~08:40Z keeps system confirms): abandoning a living life from the title = the ONE kit confirm (kitConfirm), no more «bấm lần nữa» button text */
+   if(s&&!s.dead&&!s.kpTron){if(b.dataset.ask==="1"){e.stopImmediatePropagation&&e.stopImmediatePropagation();kitConfirm({title:"Bỏ ngang kiếp này?",lines:[`Kiếp này chưa trọn, bỏ ngang sẽ mang nghiệp: mất Phúc duyên kiếp này${s.pdLife?` (${s.pdLife})`:""}, trừ thêm ${KIEP.pen}, kiếp sau không được đổi thân phận.`],yes:"Bỏ ngang",no:"Thôi",onYes:()=>{setTimeout(()=>{try{b.dataset.ask="2";b.click()}catch(x){console.error(x)}},0)}});return}
+    if(b.dataset.ask==="2"){const base=pdGet()-(s.pdLife||0);kpPenalty(base);try{const p=lifeLog();p.unshift({n:s.name,o:((typeof originByKey==="function"&&originByKey(d.ok))||{}).n||(s.origin&&s.origin.n)||""/* a save keeps the origin KEY (d.ok), not S.origin */,r:lifeTopRank(s).n,age:s.age,y:s.year,kids:(s.kids||[]).length,fc:s.fc||"",f:"Bỏ ngang · Kiếp dở dang",foes:[]});store.set("cung-luanhoi",p.slice(0,40))}catch(x){}}}}}catch(x){console.error(x)}
  return h0.apply(this,arguments)}})();
 /* identity card: no reroll after an unfinished life */
 (function(){const c0=nlCardHTML;nlCardHTML=function(){let h=c0.apply(this,arguments);try{if(kpLocked())h=h.replace(/<button class="opt" data-nl="re"[\s\S]*?<\/button>/,`<button class="opt" data-nl="re" disabled>Đổi thân phận<small data-kp="1">Kiếp trước dở dang: kiếp này không được đổi thân phận</small></button>`)}catch(e){}return h}})();
@@ -40,11 +41,10 @@ function kpPenalty(base){const now=pdGet();const lost=Math.max(0,now-base);const
 (function(){const a0=nlAccept;nlAccept=function(){const r=a0.apply(this,arguments);try{if(S&&!S.dead){S.kpR0=S.rank||0;S.kpTron=0;
   const m=Q.find(x=>x&&!x.nl&&x.h&&!/kp-rule/.test(x.h));if(m)m.h+=`<p class="past kp-rule">${KP_RULE}</p>`}}catch(e){}return r}})();
 try{KIT_GLOSS["Phúc duyên"]="Điểm tích qua các kiếp. Dùng để đổi thân phận khi bắt đầu kiếp mới. "+KP_RULE}catch(e){}
-/* NO RE-ASK after a game tap (owner OD 24/11 ~08:40Z; ORDER FROM MAIN 119 08:06Z, E74): the old «Kiếp này chưa trọn → Nghĩ lại / Vẫn chọn» card popped
-   on any option whose TEXT matched /chết|tự vẫn|…/ (idioms included: «Để lời đồn tự chết», «Cúng các phi tần chết oan») — a word gate and a re-ask, both
-   gone. The rule itself stays: it is on the entry card (KP_RULE) and its consequence shows AFTER the choice, on the end card («Kiếp dở dang» line, over()
-   wrapper above). The title-screen «bỏ ngang» double tap (a save-slot action = system) is kept. kpGate stays as a no-op for the co-op thin callers. */
-window.kpGate=function(){return false};
+/* OB-M3UI (fault 3 family): OWNER OD 24/11 ~07:25Z + ~08:08Z «không có một lời nhắc nào về bất cứ hành động của tôi» — NO re-ask after she taps a game option, ending choices included
+   («Kiếp này chưa trọn … Nghĩ lại / Vẫn chọn» was one). kpGate stays callable (co-op thin cards call it) but never asks: the loss shows after (Kiếp dở dang card). */
+window.kpGate=function(i){return false};
+(function(){const c0=chooseM;chooseM=function(i){if(window.kpGate(i))return;return c0.apply(this,arguments)}})();
 /* cung nữ milestones */
 function kpMs(k,why){S.kpMs=S.kpMs||{};if(S.kpMs[k])return;S.kpMs[k]=1;try{pdAdd(KIEP.ms[k],why,"ms_"+k)}catch(e){}(S.kpMsL=S.kpMsL||[]).push(why)}
 function kpMsCheck(){if(!S||S.dead||!S.origin||S.origin.k!=="cnv"||!S.srv)return;
