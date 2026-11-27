@@ -31,7 +31,12 @@ async function autoDismissRoulette(target){
        and the tap below enters the game, exactly the player path. */
     const f0=window.fetch;window.fetch=function(u,o){try{const url=String(u&&u.url||u);const h=o&&o.headers;
       if(/ctmload=1/.test(url)||(h&&(h['x-ctm-load']||(h.get&&h.get('x-ctm-load')))))return Promise.reject(new TypeError('test: first-run download blocked'))}catch(e){}return f0.apply(this,arguments)};
-    setInterval(()=>{document.querySelectorAll('.krskip,#kload [data-kl="go"]').forEach(b=>b.click())},300)});
+    setInterval(()=>{document.querySelectorAll('.krskip,#kload [data-kl="go"]').forEach(b=>b.click())},300);
+    /* rv27 (save stack, goal-links Fold 3/13): a test that wipes the storage (localStorage.clear()) and starts a life is a NEW player, and a new
+       player never gets the «Điều mới trong cung» notes pop-up (jnotes: first visit = the id is only recorded). The wipe also removed that record,
+       and since the save stack writes the slot at the life start (jqSaveNow) jnotes then saw «a sổ exists, notes unseen» = an OLD player and queued
+       the pop-up in the first calm moment, in front of the test's next tap. Keep the record across the wipe (update-notes.js resets it itself). */
+    try{const c0=Storage.prototype.clear;Storage.prototype.clear=function(){const r=c0.apply(this,arguments);try{const u=window.CTM_NOTES_UI;if(this===window.localStorage&&u&&u.list&&u.list.length)this.setItem('ctm-notes-seen',u.list[0].id)}catch(e){}return r}}catch(e){}});
 }
 /* contest / mini-game result: a podium (#kpodov, tap its "Tiếp") may sit over the result card, and the card has no visible
    "Đã hiểu" button: a player closes it with the kit ✕ (.kit-x[data-kitx=ov]), which presses #kg82ok for them. */
