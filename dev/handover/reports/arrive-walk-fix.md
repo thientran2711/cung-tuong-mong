@@ -36,9 +36,9 @@ dev/test/arrive-walk.js (new): each round = home → Dư đồ → REAL tap on a
 Before-fix trace example: `ksp/2/ksp,home/4/home` = arrived at Kính sự phòng (used 2), then goTo("home") (used 4).
 - goal-links.js on goal-links b66b9ca2 + this jpm.js hunk: **10/10 PASS** Fold 755x1000 (2 loops in parallel with the arrive robots). RV-171's companion miss is gone.
 - one-core-guard.js: PASS (fails 0).
-- door-onetap.js (randomised law-6c coverage sweep): LIVE 00dca386 PASS; fix build PASS ×DOORN. One earlier run on the 0562e15f fix build FAILed law 6c only («talk|Cảnh báo nàng» never picked in that run's random seeds; it goes through goTo with __walkFree, never through the hall-arrival render path) — a coverage flake, not this change; one run lost to a Chromium «Target crashed» (2 × 20 MB pages in parallel).
+- door-onetap.js (a randomised sweep: law-6c coverage and best-pick checks over random seeds): **flaky on LIVE itself** — LIVE 00dca386: 3 runs = PASS, PASS, FAIL (law 6c «members never picked: 1»). Fix build: 4 runs = PASS, FAIL (law 6c «talk|Cảnh báo nàng» never picked, on 0562e15f), FAIL («door word worse than best: hau»), plus 1 lost to a Chromium «Target crashed». The fails change from run to run and come from door picks run through goTo with __walkFree, which never goes through the hall-arrival render path this change touches → same flake as LIVE, not caused by this fix. Owner of the flake: the door-onetap owner (seeded picks would make it stable).
 - 0 page errors in every run.
 
 ## Build
-dev/site/build_site.sh run; assets.json = LIVE (restored); own CHANGE line (dev/site/CHANGE.txt). Gate: merge-base --is-ancestor 0562e15f <sha>; 0 LIVE deletions.
+dev/site/build_site.sh run; assets.json = LIVE (restored); own CHANGE line (dev/site/CHANGE.txt). Gate: merge-base --is-ancestor 0562e15f and 00dca386 = both OK; 0 files deleted vs LIVE (7 files, +193/−9: the jpm hunk, CHANGE line, rebuilt index/sw).
 Note for MAIN: goal-links-rv168b needs no change — it lands clean on top of this (jpm.js untouched there).
