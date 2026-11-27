@@ -678,4 +678,4 @@ HARNESS FIXER #22 (opus) review/robot-realtap-live from d1d1541f — fix BIG #21
 E-T2FLAKE review/titles2-unit-harden 6cc8a0c4 | reports/titles2-unit-harden.md | session_01DgYSWpputcRCYEcdKJoZsf | DONE (LAND READY, archived) | 27/11 14:22Z (Foreman E child4)
 E-T2FLAKE-RV review/titles2-unit-harden-rv 15c30ac1 | reviews/titles2-unit-harden-review.md | session_01DgYSWouvVnrGk64WS9p3mJ | DONE (PASS, archived) | 27/11 14:22Z (Foreman E child4)
 SAVE-REWIND (every reload loses the last buổi; F s18d + E tallies; opus fixer) | review/save-rewind | session_01N1tNP32jhAFNgcHJLVZMQL (Foreman B child 6) | RUNNING | 27/11 14:50Z
-coop-dayq-noclock BIG REVIEW (opus) | review/coop-dayq-noclock c32160d8 | Foreman B child 6 | RUNNING | 27/11 14:56Z
+coop-dayq-noclock BIG REVIEW (opus) | review/coop-dayq-noclock c32160d8 | session_01N1tNP5GZwGB897F2q6s8zi (Foreman B child 6) | RUNNING | 27/11 14:56Z
