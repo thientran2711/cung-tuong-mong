@@ -589,6 +589,9 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
    brings no event that has no fitting morning slot: dawnSlot = the buổi an unslotted world card moves to (1 = trưa); dawnOpt = odds (0..100) that an optional
    j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn; wake = ms a card may wait in Q with nothing on screen before the safety net shows it (button-crawl-fix-5 dqWake; SANGBUOI-HELD r3 folded its r2 net into it: one net); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
 Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000}});
+/* F10 renderer-mem (26/11), BAL.kobs = the kit's DOM observers. The «Kéo xuống» scroll cue (jksize kitScrollCues). short = a scroller under this many px gets the slim strip below it
+   (was a typed 260); hyst = a scroller keeps its short/tall look until its own height moves by more than this (its own cue never flips it). */
+Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* kaPass: card-normaliser passes per wake (j63 kaRun) */
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
@@ -1110,6 +1113,11 @@ Object.assign(BAL.kc2.st,{kc:{moi:40,hot:60,mien:50,nhan:70,dinh:90,kgt:[40,20],
 /* review/one-core-jkc (ONE CORE OD:L1267, dev/measure/one-core-jkc-move.js): BAL.kc2.kcCard = the tiểu thư home road (jkc.js) cards and event options —
    odds bases od(N+…) (<card>_od) / roll(N±…) (<option>_rb) and the house-stat kap / kgt / khm amounts of a card's c / w / l (<card>_<slot>_<stat>). */
 Object.assign(BAL.kc2,{kcCard:{"vietNhatKyGiau_od":78,"chaiChuotThuY_od":70,"thinhAn_w_kgt":1,"hauChaOThu_od":55,"khuyenChaChonPhe_od":30,"xinChaDangSo_od":10,"xinChaTienRieng_od":45,"lamVuaLong_od":65,"lamVuaLong_w_khm":5,"ketThan_od":60,"ngangChanThuMuoi_od":40,"ngangChanThuMuoi_l_kgt":-3,"doLaVien_od":30,"toTruocToMau_od":50,"toTruocToMau_w_kgt":2,"quanViecNha_od":50,"quanViecNha_w_kgt":1,"quanViecNha_l_kgt":-2,"daoPhoCho_od":80,"ngheChuyenOTra_od":40,"ngheChuyenOTra_l_kgt":-4,"tham_od":65,"kheoTuChoiNha_od":45,"kheoTuChoiNha_w_kap":-10,"kheoTuChoiNha_l_kgt":-3,"giaBenhTranhXem_od":45,"giaBenhTranhXem_w_kap":-15,"guiThuChoNguoi_od":40,"moiDanhSu_od":35,"muaTinCuaThai_od":50,"guiQuaVaoCung_od":60,"xinToMauMoi_od":35,"nhoHuynhTruongDo_od":45,"guiBucTheuTu_od":50,"nhoToMauKhuyen_od":10,"hauTronBuoi_od":65,"hauTronBuoi_w_khm":5,"giupMotViec_od":60,"saiTyNuNgang_od":40,"saiTyNuNgang_l_kgt":-3,"kcCards_od":30,"kcCards_od_2":30,"diXemChoKhong_od":80,"ngheLomNgoaiHien_od":35,"ngheLomNgoaiHien_l_kgt":-4,"mangBanhNhaLam_od":65,"nhinAnTranhXem_od":45,"nhinAnTranhXem_w_kap":-15,"tuTayDuaThu_od":30,"kcMonth_rb":30,"dungThu_rb":50,"dungRaBenh_rb":40,"xinToMauCho_rb":45,"noiLaiVoiCha_rb":50,"doiLaiCauDoi_rb":30,"thucDemTheuBach_rb":50,"thuaConDoiKy_rb":40,"quyXinChaCho_rb":45,"thuMotChutLen_rb":50}});
+/* FIRSTCARD (law 4; MAIN 153): numbers that were typed inside jkc, moved here unchanged so the roll and the card's odds word read ONE value —
+   ill = the dịch fever (kcIll): Sức lost, below low Sức the death chance dieLo, else dieHi (Sức ≤ 0 after the fever = death);
+   dienSel = the tiểu thư Điện tuyển keep chance (kcDienSel): base + (score − KC.cut[0])·k, floor lo (cap BAL.kcSelMax), 0 below cut[0] − gap; noise = ± of the score;
+   kcCard.quyXinChaWant = the plea bonus when she wants the tuyển tú (kcQuyP). */
+Object.assign(BAL.kc2,{ill:{suc:35,low:20,dieLo:40,dieHi:8},dienSel:{base:45,k:1.2,lo:20,gap:15,noise:4}});BAL.kc2.kcCard.quyXinChaWant=15;
 
 /* ONE CORE (owner OD:L1267; review/show-why, from review-trait-pool-r1 follow-up): every number chosen by a nết test lives here.
    BAL.net.k: quality-keyed sizes for nq(p,quality,n) / netIs (servant + agent qualities). BAL.net.n: nết-keyed tables read by

@@ -16,7 +16,7 @@ const KA_STAT=/^(Bạc|Hồi môn|Sức|Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|T
 const kaPlain=h=>String(h||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* sentiment of one value for her: g gain, r loss, n neutral word */
 const kaWord=h=>String(h).replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1");
-function kaSent(h,old){const s=kaPlain(h);if(!s)return"n";if(old!=="g"&&old!=="r"){const lo=s.match(/^(Áp lực hôn sự|Lời đồn)\s*([+−-])\s?\d/);if(lo)return lo[2]==="+"?"r":"g"}/* kit-cost-rows-home: pressure / rumour — less is better (j1 KLOW) */if(old==="g"||old==="r")return old; /* kit-rows-b KP12: the writer's explicit class g/r beats the word-meaning colouring */let c="n";try{c=kcls(String(h).replace(/<b>[^<]*<\/b>/g,"x"))}catch(e){} /* an unclassed <b>item name</b> never colours the row (e.g. "Son phần giáng") */
+function kaSent(h,old){const s=kMk(kaPlain(h));if(!s)return"n";if(old!=="g"&&old!=="r"){const lo=s.match(/^(Áp lực hôn sự|Lời đồn)\s*([+−-])\s?\d/);if(lo)return lo[2]==="+"?"r":"g"}/* kit-cost-rows-home: pressure / rumour — less is better (j1 KLOW) */if(old==="g"||old==="r")return old; /* kit-rows-b KP12: the writer's explicit class g/r beats the word-meaning colouring */let c="n";try{c=kcls(String(h).replace(/<b>[^<]*<\/b>/g,"x"))}catch(e){} /* an unclassed <b>item name</b> never colours the row (e.g. "Son phần giáng") */
  /* sign wins: a value whose only number is negative is a loss for her (unless it is harm to a rival or less hostility) */
  if(c!=="r"&&/[-−]\s?\d/.test(s)&&!/\+\s?\d/.test(s)&&!/(^|\s)(nàng|con nàng|của nàng|hắn)(\s|$)/.test(s)&&!/(ghen|oán|thù|nghi)\s*[-−]/.test(s))c="r";return c}
 /* split one value "X +1 (note)" into value + trailing note */
@@ -134,7 +134,7 @@ function kaBody(R,dis){kaNoteDedup(R);const one=R.one!==false;let h="";
 (function(){const kp0=kitParse;kitParse=function(str){const s=String(str||"");if(/class="kb/.test(s))return s;const M=kaModelStr(typeof sgTxt==="function"?sgTxt(s):s)/* SG-CARD: her literal Sủng drawn as applied (j1 sgTxt) */;const R=kaRows(M);const o=kaOdds(M);return (o?`<span class="kodds">${o}</span>`:"")+kaBody(R).replace(/^<small class="kb">/,'<span class="kb">').replace(/<\/small>$/,"</span>")}})();
 /* ---------- the frame: rebuild a button into [title + odds] + rows ---------- */
 const KA_SEL="button.kcard,.pcb button,.rbtn button,button.btn,button.opt,.opts button,.srvb button";
-function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the quick button keeps its own one look (never an option card) */if(b.dataset.ka==="1"){const kan=b.querySelector(":scope > .kat > .kan");if(kan)[...b.childNodes].reverse().forEach(n=>{if(n.nodeType===1&&!n.matches(".kat,.klead,.kb,.kinfo"))kan.prepend(n)});return}if(b.closest(".hud2,#hud2,.tabs,.mapnav"))return;
+function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the quick button keeps its own one look (never an option card) */if(b.dataset.ka==="1"){const kan=b.querySelector(":scope > .kat > .kan");if(kan)[...b.childNodes].reverse().forEach(n=>{if(n.nodeType===1&&!n.matches(".kat,.klead,.kb,.kinfo,.kscue"))kan.prepend(n)});return}if(b.closest(".hud2,#hud2,.tabs,.mapnav"))return;
  const isCard=b.classList.contains("kcard");const sm=isCard?null:[...b.children].find(c=>c.tagName==="SMALL");
  if(!isCard&&!sm)return;
  b.dataset.ka="1";const dis=b.disabled;
@@ -170,7 +170,30 @@ function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the 
  b.innerHTML=`<span class="kat"><span class="kan">${titleH||"&nbsp;"}</span>${odds?`<span class="kodds">${odds}</span>`:""}</span>`+(leadH?`<span class="klead">${leadH}</span>`:"")+kaBody(R,dis)+kinfo}
 function kaNorm(root){try{(root||document).querySelectorAll(KA_SEL).forEach(b=>{try{kaNorm1(b);if(typeof kitNoUnkDom==="function")kitNoUnkDom(b,true)}catch(e){console.error("kaNorm",e)}})}catch(e){}}
 /* disabled state can change after build: keep the class honest */
-let kaQ=false;const kaMO=new MutationObserver(ms=>{if(kaQ)return;let hit=false;for(const m of ms){if(m.type==="attributes"){const b=m.target;if(b.classList&&b.classList.contains("ka"))b.classList.toggle("kdis",b.disabled);continue}if(m.addedNodes.length){hit=true}}if(hit){kaQ=true;queueMicrotask(()=>{kaQ=false;kaNorm(document)})}});
+/* F10 member 3 (26/11, Foreman E E-S1 iPad y13 b2239 «Biếu quà làm lành», 1351 option cards from a long save; R1 cnv_ban y16–17): the
+   normaliser woke on EVERY added node in the page (a picture's loading mark, a memory mark, a word inside a card …) and each wake re-ran kaNorm
+   over the WHOLE document (7 s with 1386 cards: every card goes through kpOptArt again) → the page never idled. A wake now sorts its records
+   (kaSort): a NEW card (a KA_SEL button with no data-ka yet) → kaNorm over the place that holds it (the added node, or the card's parent),
+   never the whole page; a node added INSIDE an already normalised card → that card alone (kaNorm1 + the «???» mask); anything else (not a
+   card) → nothing. A card the normaliser still wants anywhere in the page (kaWants) is picked up on the next card wake. */
+let kaQ=false;const kaTouch=new Set(),kaRoots=new Set();
+function kaWants(b){return !b.dataset.ka&&!b.classList.contains("kquick")&&!b.closest(".hud2,#hud2,.tabs,.mapnav")&&(b.classList.contains("kcard")||[...b.children].some(c=>c.tagName==="SMALL"))}/* = what kaNorm1 rebuilds */
+function kaNew(n){if(n.nodeType!==1||!n.isConnected)return null;if(n.matches(KA_SEL)&&!n.dataset.ka)return n.parentElement||n;return n.querySelector(KA_SEL)&&[...n.querySelectorAll(KA_SEL)].some(b=>!b.dataset.ka)?n:null}
+function kaSort(ms){let hit=false;for(const m of ms){if(m.type==="attributes"){const b=m.target;if(b.classList&&b.classList.contains("ka"))b.classList.toggle("kdis",b.disabled);continue}
+ if(!m.addedNodes.length)continue;for(const n of m.addedNodes){if(n.nodeType===1&&n.classList&&n.classList.contains("kscue"))continue;/* F10: a scroll cue (jksize) is not a card: it never wakes the normaliser (the two fed each other forever) */
+  const r=kaNew(n);if(r){kaRoots.add(r);hit=true;continue}
+  const t=m.target.nodeType===1?m.target:m.target.parentElement;const c=t&&t.isConnected&&(t.matches(KA_SEL)?t:t.closest(KA_SEL));if(c){if(c.dataset.ka==="1")kaTouch.add(c);else kaRoots.add(c.parentElement||c);hit=true}}}return hit}
+const kaMO=new MutationObserver(ms=>{if(kaSort(ms)&&!kaQ){kaQ=true;queueMicrotask(kaRun)}});
+/* F10 (26/11, robots A2 nc_su b703 / R1 / T1d): kaNorm's own DOM edits (kaNorm1 → kpOptArt / kitOptUnify / kitOptFinal rebuilding a card) were
+   records for kaMO → another kaNorm → … a chain that never let the page breathe when one card's rebuild never settles. A pass takes back
+   the records it made itself; it runs again only for a card that is really new, at most BAL.kobs.kaPass passes per wake. */
+function kaRun(){kaQ=false;const N=BAL.kobs.kaPass;/* ONE CORE: BAL.kobs (jbal2) */
+ if(kaRoots.size)document.querySelectorAll(KA_SEL).forEach(b=>{if(kaWants(b))kaRoots.add(b.parentElement||b)});/* a card made outside a record (class set later) */
+ for(let i=0;i<N&&(kaRoots.size||kaTouch.size);i++){const R=[...kaRoots].filter(r=>r.isConnected);kaRoots.clear();const T=[...kaTouch];kaTouch.clear();
+  const top=R.filter(r=>!R.some(o=>o!==r&&o.contains(r)));top.forEach(r=>kaNorm(r===document.documentElement?document:r));
+  T.forEach(c=>{if(!c.isConnected||top.some(r=>r.contains(c)))return;try{kaNorm1(c);if(typeof kitNoUnkDom==="function")kitNoUnkDom(c,true)}catch(e){console.error("kaNorm",e)}});
+  for(const m of kaMO.takeRecords()){if(m.type!=="childList")continue;for(const n of m.addedNodes){const r=kaNew(n);if(r)kaRoots.add(r)}}/* own edits dropped; only a really new card runs again */
+  kaTouch.clear()}}
 kaMO.observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["disabled"]});
 (function(){const kf=kitFix;kitFix=function(root){kf.apply(this,arguments);kaNorm(root)}})();
 /* ---------- the look (scoped to .ka act cards / options) ---------- */
