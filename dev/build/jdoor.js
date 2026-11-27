@@ -222,7 +222,7 @@ DOOR.rowsJ2=function(r,M,v){const out=[];const seen=new Set();const seed=[S.turn
  else{if(pp.kind!=null)pp.i=doorIdx(pp);const p=curPeople()[pp.i];if(!p||!S.visit)return null;v=p.ref;let A=[];try{A=doorRaw(p)}catch(e){return null}
   A.forEach((a,j)=>{if(!a||a.k61||a.door||DOOR.of(a.n,p.kind)!==r)return;const tc=talkK(a);const poor=!!(a.c&&a.c.bac&&S.bac+a.c.bac<0);
    const why=a.lock?doorTxt(a.t)||"chưa làm được":poor?"không đủ bạc":!can(tc)?(doorTxt(typeof whyTime==="function"?whyTime(tc):"")||"hết khắc buổi này"):"";
-   let x="";try{x=optLine(a)}catch(e){}M.push({id:"t:"+doorTxt(a.n),n:a.n,x,hint:a.hint||(lv=>{try{return kitHint(a,null,lv).hint}catch(e){return""}})/* E-GAIN3b law 3: the row hint reads the way itself (its x / BAL numbers), not its optLine whose numbers are already marks (kitHint then said «chẳng được gì») */,off:!!why,why,go:()=>doorPick(pp,j,a.n)})});
+   let x="";try{x=optLine(a)}catch(e){}M.push({id:"t:"+doorTxt(a.n),n:a.n,x,hint:a.hint||(lv=>{const NO=/^(chẳng được gì|không được mất gì)/;let h1="",h2="";try{h1=kitHint(a,null,lv).hint}catch(e){}if(h1&&!NO.test(h1))return h1;try{h2=kitHint({x,o:a.o,c:a.c},null,lv).hint}catch(e){}return h2&&!NO.test(h2)?h2:h1})/* E-GAIN3b law 3: the row hint reads the way itself (its x / BAL numbers), not its optLine whose numbers are already marks (kitHint then said «chẳng được gì») */,off:!!why,why,go:()=>doorPick(pp,j,a.n)})});
   if(typeof DOOR.more==="function")M=M.concat(DOOR.more(p,r));nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";
   const w=doorWho(p);try{who=w&&typeof WHO==="function"?WHO(w):null}catch(e){}}
  const o=DOOR.rowsJ2(r,M,v);if(!o.length)return null;o.push({n:"Thôi"});return{t:`${r.h}${nm?` <b>${nm}</b>`:""}`,o,who}}})();
