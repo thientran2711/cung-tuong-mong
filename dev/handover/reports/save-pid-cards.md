@@ -79,3 +79,43 @@ All 3 failing rows are identical on the plain stack → pre-existing, for their 
 
 ## Done
 FIXER save-pid-cards done 11/27. SSK posted for 5e0e0d1e; the BIG rv (session_01N1tNP5p71UEmkesbLLD9jC) merges the final save stack. No handover needed.
+
+## REVIEW (BIG opus rv session_01N1tNP5p71UEmkesbLLD9jC, depth 5, START_CTX ≈ 3 %; 11/27/2026)
+PRIORITY #1 CHECK ('save-pid-cards' / 'evcN' / 'EVCW' / 'evn'): OD 0 | ledger 0 | main: jevc.js evcPaint / EVCW (LIVE pace-all), no evn | review/*: save-fix-stack-rv15…rv23, save-pid-cards 5e0e0d1e | claims: this session + rv22/rv23 fixer 2WGctyD7 (told 03:55Z) — reused everything, nothing rebuilt.
+**Head: review/save-pid-cards-rv5 `4e27a5887e75251c46a8a485c95c7b13e98b9434`** = save-fix-stack-rv23 15bd0e29 (LAND READY) + fixer 5e0e0d1e + reviewer fix b385df9b. Merges on the way: rv18 → -rv 04609c3d, rv20 → -rv2 6a202157, rv21 → -rv3 6bb373ba / -rv4 b385df9b, rv23 → -rv5. Every merge: only built index.html / sw.js conflicted (rebuilt); no save stack step between rv15 and rv23 touches j3 serM/deserQ, j68 evGate/EVLAST, jroute/jtsb deserQ wrappers.
+Diff vs rv23 (source): j3.js +12/-2, j68.js +13/-1, jroute.js 1, jtsb.js 1 (fixer) · **jevc.js +10/-1 (REVIEWER CODE)** · dev/test/save-pid-cards.js (fixer; reviewer: test setup for the jevc cap + SPC_P progress), dev/test/save-evc-onscreen.js (new, reviewer), dev/test/lib/device.js CTM_ROOT.
+
+### Fixer diff — checked
+- LAW 6c (no card lost / duplicated): pidX writes only plain fields (≤ 1500 chars each, no code, no person objects — /"alive|rel|sid"/ skipped, never h/opts/who/pp/pid); deserQ puts them back only where the rebuilt card has no such field → nothing on the card is made twice, options are rebuilt by mkP against the loaded world (no stale closure). evl: written only when Q[0] === EVLAST and optional; given back only to the same pid / rk / title → a card answered before the save never comes back (ANSWERED row). Old saves (no x, no evl) load as before.
+- LAW 4 one core: no number, no BAL key. LAW 7 wording: none. Kit: none.
+- LAW 11 field family scan (every Q.push/unshift of a pid card in dev/build/j*.js): 20 top-level fields (t pid h opts pp who cls headArt optLayout stage showOut onClose kit must entp qtags art evId ky ev) — all go through the one pidX rule (onClose = function → skipped, rebuilt by its maker where it has one). deserQ wrapper family (rt, tsb, tsbPet, menEnc, HTFULL, kc3, jqsave $full, j68 e68Fits): only rt / tsb retitled → both honour __ts now; the others never touch t.
+- ser/deser wrap order: j68's E68LD / evl wrap is inside every later deser wrapper; the evl give-back runs before deser returns, so the j6 showModal → evGate after load sees EVLAST. jevc d.W uses serM → held pid cards carry x too.
+
+### NEW, same family (pre-existing on plain rv21 / rv23; fixed here, LAW 11)
+jevc daily big-event cap (LIVE pace-all, not on rv15 when the fixer started) counts the card ON SCREEN by `m.evcN` = page memory. A generator card (knSell «Có người bán tin» {rk,ra}) comes back from the sổ without it → after a TRUE reload evcPaint saw a NEW big card of a full day (visit 1) and moved the card she was looking at OFF screen into EVCW (later day; dropped after BAL.evc.wait = 3 days with no room). Plain rv21: `Q [] · EVCW [«Có người bán tin»]`. (pid cards were already covered: j3 x carries evcN.) Likelihood có thể (every reload with a visit / Kỳ ngộ / opt generator card on screen on a full day), weight vừa (card leaves her screen, can be lost), seen by save-evc-onscreen.js.
+**Reviewer jevc.js hunks (for Foreman B's independent check):**
+1. `let EVCLD=0;` + `evcPaint(){if(!evcOn()||EVCLD)return;…` — the paint gate never runs while a sổ is being rebuilt.
+2. ser wrap: `delete d.evn; if(Q[0] && evcToday(Q[0])) d.evn={t,k:evcKind,n:evcN}` — the on-screen card's day mark goes into the sổ.
+3. deser wrap: `EVCLD=1` around the inner deser; then `if(d.evn && Q[0] && !Q[0].evcN && same t && same kind) Q[0].evcN=d.evn.n` — the same card gets its mark back, so the j6 showModal after load leaves it on screen. Old saves (no evn) as before; the cards behind Q[0] are capped exactly as in play. No number, no wording, no draw.
+Test setup fix (TEST ONLY): save-pid-cards.js clear() also resets EVCW + S.evc (a fresh day), where()/saved() count EVCW / sổ W as «held». Without it the new base SKIPped 721 kinds («not open after push» = the cap held them).
+
+### Gates
+| gate | result |
+|---|---|
+| save-pid-cards.js base / fix / MUTATE (Fold, 10 named kinds; base = plain rv18) | base FAIL 3 (pact reload2 lost, DECO lost, PROD tsbBul retitled) · MUT1 (no EVLAST give-back) FAIL 2 · MUT2 (no x give-back) FAIL 3 · fix PASS |
+| save-pid-cards.js full family, rv5 4e27a588 | Fold **281 PASS / 0 FAIL** (SKIP 476) · iPad **281 / 0** (SKIP 476) — same as the fixer's table; also rv4: Fold 281/0, iPad 281/0 |
+| save-evc-onscreen.js (new) | plain rv21 FAIL (card in EVCW) · MUTATE (hunk 3 removed) FAIL · rv4 PASS 2/2 · rv5 PASS 2/2 (Fold + iPad) |
+| save-residue-probe Fold s1 / iPad s1 (rv2) | SAVE-RESIDUE PASS / PASS (0 cards lost) |
+| save-death-rebirth | rv18 6/6 · rv2 6/6 |
+| save-unseen-lists fold,ipadAir 1 | rv3 32/32 · rv5 32/32 (rv18 31/32: flip-year-0s-s2 iPad lost «Y phục dự Tết», a dc rk card; re-run 3/3 PASS on plain rv18 and on rv2 → flake) |
+| save-boundary-reload fold,ipadAir 1,2,3 (rv3) | 22/24 — the 2 = «day seed 1 SCREEN NOT FREE», 0 moments sổ ≠ screen (known test harness, rv r8) |
+| knsell-remake | rv3 PASS (7 cards) · plain rv18 PASS (21) · rv2 «0 cards» (this life had no seller: the test's world draw, not a card fault) |
+| inv-stack-scan.py | RAW 0 (rv2, rv5) |
+| look-dedupe | rv3 = plain rv21 (6 rows, rv21 flips the «Tâm trạng P 1» row 5/6/8) · **rv5 PASS ×2** |
+| quickcheck ALONE rv5 | CORE GATES PASS (13 hooks incl. 90 button-crawl, 92 look-dedupe), open 2177 ms, old save ok. Perf run 1: tab 673/480 FAIL; run 2 (--runs 5): tab 554/579 ok, buổi 3596/1197 FAIL. Plain rv23 --runs 5: QUICKCHECK PASS, buổi new 4170/1483/4188/1323/1128, LIVE 1378/1229/4257/4459/1217 → the ~4 s buổi comes and goes on LIVE and plain rv23 alike (life-dependent), not this diff |
+| coop-e2e SWAP0 (local Worker, rv5) | **143/143 PASS** (0 timeouts) |
+Note: two save-pid-cards runs in parallel were OOM-killed (cgroup; one page 5 GB). The sổ stays ~130 KB through the run (SPC_P=1 prints it); the page heap rises and falls over ~600 true reloads in one browser (177 → 1280 → 553 MB) — test-harness memory, not a save growth. Run one device per process.
+
+### Verdict
+**PASS → LAND READY review/save-pid-cards-rv5 4e27a5887e75251c46a8a485c95c7b13e98b9434** (BIG; save; lands right AFTER save-fix-stack-rv23 15bd0e29; FF onto 15bd0e29; Worker deploy: no). **Reviewer wrote game code: jevc.js 3 hunks above (evn / EVCLD) → Foreman B independent check before relay.** If the save stack moves again (rv24…), re-merge = built files only (rebuild) + save-pid-cards + save-evc-onscreen + SUL + look-dedupe + quickcheck alone.
+Open (not made worse): j68 evGate / jevc evcRelease still let a held optional CHOICE card go silently when the hold is full / too old (evDropInfo logs notices only) — pacing by design, owner's pacing rules. Scratch shots: none kept; worktrees in /home/user/wt (pid*, base*, mut*, ho) are scratch.
