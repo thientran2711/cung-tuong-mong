@@ -7,7 +7,7 @@ function serve(){return new Promise(r=>{const s=http.createServer((q,res)=>{let 
  s.listen(0,()=>r({url:`http://127.0.0.1:${s.address().port}/`,close:()=>s.close()}))})}
 (async()=>{let srv=null,URL=process.argv[2]||'index.html';if(!/^http/.test(URL)){srv=await serve();URL=srv.url+URL}
  const b=await chromium.launch();let fail=0;const ck=(n,ok,info)=>{if(!ok)fail++;console.log((ok?'ok   ':'FAIL ')+n+(info!==undefined?' · '+JSON.stringify(info).slice(0,500):''))};
- const p=await (await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+ const p=await (await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'})).newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'load',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&window.__ctmBuilt,null,{timeout:0});await p.waitForTimeout(2500);
  for(const real of [false,true]){
   const r=await p.evaluate(real=>{try{$("title").hidden=true}catch(e){}start();try{const ok=document.querySelector('button[data-nl="ok"]');if(ok)ok.click()}catch(e){}Q.length=0;

@@ -8,7 +8,7 @@ const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(UR
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();
  for(const [W,H,tag] of [[755,1000,'fold'],[1180,820,'ipad'],[412,1058,'cover'],[390,844,'phone']]){
-  const p=await b.newPage({viewport:{width:W,height:H},deviceScaleFactor:OUT?2:1});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+  const p=await b.newPage({viewport:{width:W,height:H},deviceScaleFactor:OUT?2:1});await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
   await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;try{render()}catch(e){}});
   const r=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const o={};
