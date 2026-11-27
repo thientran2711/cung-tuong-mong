@@ -9,7 +9,7 @@ const A=process.argv[2]||require('path').join(__dirname,'..','..','index.html');
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());
  await p.goto(URL,{waitUntil:'domcontentloaded'});for(let i=0;i<300;i++){if(await p.evaluate(()=>typeof start==='function'&&!!window.__ctmBuilt).catch(()=>false))break;await sleep(300)}
  await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;quiet=false});await sleep(1000);
- const R=await p.evaluate(()=>{const out=[];const ks=Object.keys(IT);
+ const R=await p.evaluate(()=>{BAL.charge.rep.n=99;/* PUNISH-TIER: the repeat-nhẹ rule is tested in punish-tier.js; these steps punish the same people many times */const out=[];const ks=Object.keys(IT);
   const ilK=ks.find(k=>itm(k).il&&!itm(k).dr),tjK=ks.filter(k=>IT[k].kd==="Trang sức"&&!itm(k).dr).sort((x,y)=>itm(y).rk-itm(x).rk)[0];
   const L=liveRivals(true).filter(x=>!x.queen&&!x.coop);const v=L[0],w=L[1];
   const where=e=>{const I=ilS();const x=I.box.find(z=>z.e&&z.e.iu===e.iu);if(x)return x.at;for(const q of ilPeople())for(const a of ilSlots(q))if(a&&a.iu===e.iu)return "chest:"+ilKey(q);for(const c of ilCases())if(c.e&&c.e.iu===e.iu)return "lost";return "NOWHERE"};
