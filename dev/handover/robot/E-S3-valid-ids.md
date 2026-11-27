@@ -10,3 +10,4 @@ Note: E-S2's «rebel-4-h» (seed 2193975486) is NOT in this list — if you coun
 UPDATE 27/11 05:05Z: + R2-speed-5 2044122702 VALID (exit only option) → E-S3 own valid = 25.
 UPDATE 27/11 05:10Z: + R2-scholar-5b 2439320743 VALID (board played 20 moves 3/10) → E-S3 own valid = 26.
 UPDATE 27/11 05:15Z: + R2-scholar-4b 1709108512 VALID? (dialogue-only Điện tuyển, no board on the path) → E-S3 own valid = 27 pending Foreman E confirm.
+UPDATE 27/11 08:55Z: + R2-skilled-2 3869935016 VALID (mixed build; illness death y11) → E-S3 own valid = 28 (27 + skilled-2), scholar-4b still pending Foreman E confirm.
