@@ -1,4 +1,4 @@
-# ~84% xong · còn 42 việc không tính hình nhân vật (LIVE d9ca7892)
+# ~84% xong · còn 42 việc không tính hình nhân vật (LIVE 772bee4f)
 Recount MAIN 177 27/11 ~10:12Z: rows 40 ACT-MOVE + 41 DOOR-ONETAP → LIVE 0562e15f → 42 open, ~84 %.
 Footer % = whole game (MAIN 167: 88 % at 28 open rows → 86 % at 35; list-only progress = 31 %). List method: X = done/(done+open); size weights S=1 M=2 L=3; done = struck rows + LIVE since 24/11 (owner-bug batch counts 10), a «partly live» row counts half its weight; only jobs on this list, not the whole game. N = open rows below.
 Recount MAIN 169 27/11 ~01:48Z: +1 owner job (row 45 Cơ duyên) → 42 open, ~83 % (wording-marks 540358c4 live). Recount MAIN 168 27/11 ~01:10Z: +6 new owner jobs tonight (rows 39–44), row 5 partly → 41 open, ~84 %. Earlier recount by MAIN 167 worker WORKLIST-RECOUNT, 27/11 ~00:10Z, from `git log origin/main --first-parent` (LIVE 4cfcda61), FOREMAN_B–F STATUS tails, HANDOVER_SESSION9 (MAIN 165/166/167), CLAIMS, owner-bugs report. Every main keeps this current and reports at 08:00 / 20:00 her time; owner (26/11): recount after each batch and update this top line.
