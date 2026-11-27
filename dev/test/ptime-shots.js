@@ -18,7 +18,7 @@ async function clean(g,keepLine){await g.evaluate(k=>{try{Q.length=0;S.mg=0;cons
 async function shot(p,g,path,keepLine){await settle(g);/* every picture on screen loaded (faces in fact rows arrive late) */await g.waitForFunction(()=>[...document.images].filter(i=>i.offsetParent).every(i=>i.complete&&i.naturalWidth>0),null,{timeout:10000}).catch(()=>{});await sleep(400);await p.screenshot({path})}
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();const errs=[],wait=[];
  for(const [nm,prof] of [["fold","fold"],["ipad","ipadAir"]]){const ctx=await D.newDeviceContext(b,prof,{deviceScaleFactor:2,viewport:nm==="fold"?{width:755,height:1000}:{width:1180,height:820}});
-  const p=await ctx.newPage();p.on('pageerror',e=>errs.push(nm+": "+e.message));const g=await D.openHost(p,srv.url);await g.waitForFunction(()=>window.__ctmBuilt===1,null,{timeout:90000});
+  const p=await ctx.newPage();await require('./lib/veil').guard(p);p.on('pageerror',e=>errs.push(nm+": "+e.message));const g=await D.openHost(p,srv.url);await g.waitForFunction(()=>window.__ctmBuilt===1,null,{timeout:90000});
   wait.push([nm,"open",await settle(g)]);
   await g.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__bot=1;for(let i=0;i<20;i++){window.__nlInner=1;start();window.__nlInner=0;if(!isSrv()&&S.maid&&!S.out)break}window.__bot=0;
    Q.length=0;document.getElementById('modal').hidden=true;for(let i=0;i<12&&!((S.buoi||0)===0&&used===0);i++){Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}

@@ -17,7 +17,7 @@ const devices=(DEVS&&DEVS!=='-'?DEVS:'fold,ipadAir').split(',');const sleep=t=>n
   const info=()=>g.evaluate(()=>{const P=document.getElementById('panel');const t=(P.innerText||'').replace(/\s+/g,' ').trim();
    const sub=[...P.querySelectorAll('[data-ksub],[data-tdv],[data-ktsub] .pct,.ktsub .pct,.kpbar .pct')].filter(e=>e.offsetParent).map(e=>({k:e.dataset.ksub||e.dataset.tdv||e.dataset.kt||e.textContent.trim(),t:e.textContent.trim()}));
    return{text:t.slice(0,170),len:t.length,empty:!!P.querySelector('.kskill .ksteps,.kskill')&&!!P.querySelector('.kempty,.kskill'),kitEmpty:P.querySelectorAll('.kskill').length,ht:P.querySelectorAll('.kempty').length,
-    pic:!!P.querySelector('.kempty img,.kskill img'),sub}});
+    pic:!!P.querySelector('.kempty img,.kskill img'),tw:[...P.querySelectorAll('.kempty-t')].map(e=>Math.round(e.getBoundingClientRect().width)).filter(w=>w>0),sub}});
   for(const k of tabs){await g.evaluate(k=>{tab=k;render()},k);await sleep(500);const r=await info();rows.push({dev,view:k,...r});
    for(const s of r.sub){await g.evaluate(s=>{const e=[...document.querySelectorAll('#panel [data-ksub],#panel [data-tdv],#panel .ktsub .pct,#panel .kpbar .pct')].find(x=>(x.dataset.ksub||x.dataset.tdv||x.textContent.trim())===s.k||x.textContent.trim()===s.t);if(e)e.click()},s);await sleep(500);
     const r2=await info();rows.push({dev,view:k+' › '+s.t,...r2,sub:[]});
@@ -25,6 +25,8 @@ const devices=(DEVS&&DEVS!=='-'?DEVS:'fold,ipadAir').split(',');const sleep=t=>n
     await g.evaluate(k=>{tab=k;render()},k);await sleep(250)}}
   if(errs.length)console.log(dev,'page errors',errs);await ctx.close()}
  await b.close();srv.close();
- console.log('| device | view | kit cards | htEmpty | pic | len | text |\n|---|---|---|---|---|---|---|');
- for(const r of rows)console.log(`| ${r.dev} | ${r.view} | ${r.kitEmpty} | ${r.ht} | ${r.pic?'y':'n'} | ${r.len} | ${r.text.slice(0,90)} |`);
- process.exit(0)})();
+ console.log('| device | view | kit cards | htEmpty | pic | title w | len | text |\n|---|---|---|---|---|---|---|---|');
+ let narrow=0;
+ for(const r of rows){const bad=(r.tw||[]).some(w=>w<200);if(bad)narrow++;console.log(`| ${r.dev} | ${r.view} | ${r.kitEmpty} | ${r.ht} | ${r.pic?'y':'n'} | ${(r.tw||[]).join('/')||'-'}${bad?' FAIL':''} | ${r.len} | ${r.text.slice(0,90)} |`)}
+ console.log(narrow?`empty-scan: ${narrow} view(s) with a kitEmpty title narrower than 200 px (RV-172 FAIL-1 rule)`:'empty-scan: kitEmpty title ≥200 px everywhere');
+ process.exit(narrow?1:0)})();
