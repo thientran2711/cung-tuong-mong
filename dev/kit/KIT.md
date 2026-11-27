@@ -5004,6 +5004,7 @@ OWNER (26/11 ~18:55Z, verbatim excerpt): «… cái vòng người, đúng nghĩ
 
 ## §104.4 «VÒNG BẢO VẬT» — the ITEM ring `kitRingItem` (MOTION-BUILD, review/motion-bao-vat; owner OD 26/11 ~18:50Z / ~18:55Z / ~19:00Z; kit owner KK44 integrates)
 Part of the ONE new animation kit (vòng người · vòng nhóm · vòng bảo vật · Bàn bài · thẻ gỗ treo) — same motion language as kitRing (RING-BUILD). Code: `dev/build/jkring-item.js`.
+- FRAME RULE (RV-166 ruling, law 10, same as §102): a ring screen is a `kitScene` layer (`.kscn`), frameless — it takes the scene geometry `kscnGeo()` (screen minus top bar / tab bar), NOT a frame size S/M/L/XL; `dev/test/dialog-fixed.js` #71 measures it against `kscnGeo()`.
 - `kitRingItem.open({title, sub, bg, tabs, tab, onTab, items:[]|fn(tab), info(it)→html, acts(it)→[{n, main, off, q:{max}, label(q), fn(it,q)→result|"close"|null}], empty, onClose})`; `kitRingItem.cur`, `.front()`, `.close()`.
 - Item = `{id, src, src512, name, grade, qty, lux, mark, sub, lock, ref}`; tiles = `kitItem` (size md); grade colour/chip per KIT_GRADE.
 - TEXT TILES (`it.tile`, kit title plate): law 10 one size on every device — plate text `KIT_RINGI.plateRem` (1.6 rem), depth shrinks a plate only by `plateDepth` (.4) of the picture curve, the ring narrows by the widest plate so every side plate stays inside the stage.
