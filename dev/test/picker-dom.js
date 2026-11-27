@@ -70,6 +70,15 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    await deep('Dâng quà (Hoàng thượng)','giftto',{t:'emp'});
    await deep('Cài đồ vào rương','plantpick',{v:v.id});
    await deep('Biếu quà làm lành · đồ','tsgiftpick',{v:v.id,k:'it'});
+   /* rv round 3: the dialog FRAME (layout classes the kit fit passes give it: kszlive / kdper / kdscroll / kesdlg / kdpbanner / kdpall …) of a paged
+      picker = the frame of LIVE's path (every card drawn: kipOnly never set), for small chests around the pick-list line KIT_SIZE.v3.live.maxOpts
+      (5 / 6 / 7 items) and a chest that pages (30), on its first page and after a page turn */
+   if(typeof kipOnlySet==='function'){const inv0=S.inv.slice();const fcls=()=>{const d=document.querySelector('#modal .dlg');return d?[...d.classList].filter(c=>!/^(kfit|kv\d|kpanel|kipdlg)$/.test(c)).sort().join(' '):''};const fst=async pid=>{let a=null,b=fcls(),k=0;while(k++<20&&(a!==b||!Q[0]||Q[0].pid!==pid)){await w(300);a=b;b=fcls()}return (Q[0]&&Q[0].pid===pid?'':'(not '+pid+') ')+b};/* read the frame once it has stopped changing (two equal reads 300 ms apart) and the dialog in view is this picker */
+    try{for(const N of [5,6,7,30]){S.inv=inv0.slice(0,N);for(const [lab,pid,pp] of [['Tặng quà','giftpick',{v:v.id}],['Dâng quà','giftto',{t:'emp'}],['Cài đồ','plantpick',{v:v.id}],['Biếu quà · đồ','tsgiftpick',{v:v.id,k:'it'}]]){
+     console.log('PD frame '+lab+' chest '+N);while(Q.length)Q.shift();try{closeModal()}catch(e){}pushDil(mkP(pid,pp),lab);showModal();await w(600);const A=await fst(pid);let A2=null;
+     const nb=document.querySelector('#modal .kipw .kpkpg[data-kippg="1"]');if(nb&&!nb.disabled){nb.click();await w(600);A2=await fst(pid)}const ent=(Q[0].opts||[]).filter(c=>c&&c.ik!=null).length;
+     while(Q.length)Q.shift();try{closeModal()}catch(e){}const o0=kipOnlySet;kipOnlySet=(mm,v)=>v;try{pushDil(mkP(pid,pp),lab);showModal();await w(600);var B=await fst(pid)}finally{kipOnlySet=o0}
+     out.push({frame:1,name:lab,N,ent,A,A2,B})}}}finally{S.inv=inv0}}
    while(Q.length)Q.shift();try{closeModal()}catch(e){}
    try{KINV_SUB='tui'}catch(e){}tab='inv';render();await w(500);out.push({name:'Tư trang (túi)',pid:'bag',nodes:document.querySelectorAll('#panel *').length,page:document.querySelectorAll('*').length,tiles:document.querySelectorAll('#panel .kitem').length});
    tab='act';render();return out});
@@ -80,6 +89,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    ok(!(r.fit||[]).length,`${vw}x${vh} ${r.name}: the page uses every column the kit tile (${r.tile} px) allows in the ${r.gw} px box (no stretched / squeezed columns)`,(r.fit||[]).slice(0,3));
    for(const c of r.cmp)ok(c.none||c.same,`${vw}x${vh} ${r.name}: ${c.lab} tile${c.none?' (none on this save)':''} — paged card = full-draw card (classes, disabled, data-*, text, chip)`,c.same||c.none?undefined:{A:c.A,B:c.B});
    ok(r.gave===1||r.gave==='no doable'||/không thành|chưa dịu|trả lại|uổng công/.test(r.log||''),`${vw}x${vh} ${r.name}: confirm gives exactly one piece (or she refuses it / the roll fails: nothing lost)`,{gave:r.gave,log:r.log})}
+  for(const r of R)if(r.frame)ok(r.A===r.B&&(r.A2==null||r.A2===r.B),`${vw}x${vh} ${r.name} (chest ${r.N}, ${r.ent} entries): dialog frame = LIVE's (all cards drawn)${r.A2!=null?' on page 1 and page 2':''} — ${r.B}`,r.A===r.B&&(r.A2==null||r.A2===r.B)?undefined:{paged:r.A,page2:r.A2,live:r.B});
   for(const r of R)if(r.nodes!=null)ok(r.nodes<MAX,`${vw}x${vh} ${r.name}: ${r.nodes} nodes in the dialog (page ${r.page}); tiles ${r.tiles}, hidden cards ${r.hid??'-'}, entries ${r.ent??'-'}, can choose ${r.can??'-'}${r.ms!=null?', '+r.ms+' ms':''}`);
   ok(!errs.length,`${vw}x${vh} no page errors`,errs.slice(0,3));await ctx.close()}
  await b.close();fs.writeFileSync(arg('--json','/dev/null'),JSON.stringify(rows,null,1));

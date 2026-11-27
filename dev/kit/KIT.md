@@ -1579,15 +1579,16 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   columns are read once the grid's size has stayed still `BAL.kip.settle` ms (resolved px tracks only; a mid-fit size never counts), kept per
   dialog kind and width; a different count draws the page again (first tile in view kept in view). The grid keeps the FULL width of the
   option box: the §23 kit pager buttons sit in ONE row under it (`.kippg`: ‹ `.kpkpg` · `.kpkpn` «trang N/M» · › `.kpkpg`; no count; no row
-  on a single page). The dialog keeps ONE layout on every page: a paged picker counts ALL its options for the pick-list rule (jksize
-  `kitFrameLive3`, `KIT_SIZE.v3.live.maxOpts`), exactly as when every card was drawn. Measured on F's s7 save (box px / kit tile `--kshsz`):
+  on a single page). The dialog keeps ONE frame on every page, the frame LIVE gives it: every fit pass that picks a frame by the number of
+  option buttons reads `kszOptN3` (jksize: `kitFrameLive3` pick-list rule `KIT_SIZE.v3.live.maxOpts`, the Fold XL step-down and the iPad
+  grow `stepOpts`), and a paged picker counts ALL its options except «Thôi» (drawn as the kit ✕, never a button) = the buttons LIVE draws. Measured on F's s7 save (box px / kit tile `--kshsz`):
   Fold 755x1000 Tặng quà 3, Dâng quà 5, Cài đồ 4, Biếu quà 4 columns; iPad 1180x820 3, 5, 3, 3 (same box widths; the iPad tile is 96 px,
   the Fold tile 84 px, so a 376 px box holds 4 on Fold, 3 on iPad). The page that holds the chosen tile opens first. The dialog (j3
   `showModal`, `m.kipOnly`) draws the option cards of THAT page + the chosen one; a page turn (or a card not drawn yet) runs `showModal`
   again, so every decorator that wraps the draw (giftto lock / `.kgiftno` + chip, hideOut, eaLockWhy …) dresses every card the same way.
   Test: `node dev/test/picker-dom.js` (DOM < 2,000 per picker on F's s7 save; every page whole rows, no inner scroll, every column the tile
-  size allows; every tile reached; a locked + an open card per picker = the full-draw card: classes, disabled, data-*, text, chip; confirm
-  gives one piece); scan `node dev/test/picker-dom-scan.js`.
+  size allows; every tile reached; a locked + an open card per picker = the full-draw card: classes, disabled, data-*, text, chip; the
+  dialog frame classes = LIVE's for 5 / 6 / 7 / 30-item chests, page 1 and page 2; confirm gives one piece); scan `node dev/test/picker-dom-scan.js`.
 - Phone landscape (height ≤ 500): grid and detail side by side.
 - Users: giftpick (Hậu cung act "Tặng quà", now with the gift card's own line `giftEval`: odds · tốn · thành · kèm), giftto (Dâng quà
   Hoàng thượng / Thái hậu), plantpick (Cài đồ vào rương). Scan: `node dev/test/gift-pick-scan.js` (every option list built from S.inv).

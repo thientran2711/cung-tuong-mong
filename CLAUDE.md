@@ -18,7 +18,7 @@ This file wins over AGENTS.md wherever they differ. Owner = "sếp" (Victoria); 
 - LUẬT ƯU TIÊN SỐ 1: before any new work, grep OWNER_DECISIONS + HANDOVER + PROGRESS and `git grep` origin/main + all origin/review/*; reuse what exists.
 - LUẬT SỬA CẢ NHÓM: one reported fault ⇒ fix the whole family (scan script + before/after table).
 - LUẬT KIT TRƯỚC: every info display from the shared kit; missing part ⇒ stop, file in KIT_REQUESTS.md, coordinator gets it built first. Reviewers FAIL any custom chip/row/frame.
-- Every player-visible word per VANPHONG.md (cổ trang; no %, odds ladder Liều/Khó/Năm ăn năm thua/Khá chắc/Chắc/Rất chắc/Nắm chắc).
+- Every player-visible word per VANPHONG.md (cổ trang; no %, odds in words Mong manh / Hiểm / Khó lường / Tùy duyên / Có cơ / Vững / Rất vững — 7 equal bands, BAL.odds.cut (START_CORE law 7)).
 - Art: Magnific gpt-2-6 only; look at every image. Images live on the CDN, not in git.
 - Disk: sparse worktrees, fetch `--depth=30` under `flock /home/user/wt/fetch.lock`, never full-clone.
 - Coordinator watch: one wake per hour (owner 15/11), plus wakes on worker reports.
