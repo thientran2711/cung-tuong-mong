@@ -41,7 +41,9 @@ No act truly gained nothing → **no new BAL gain, no merge** (no BIG rule chang
 
 ## 4. Tests
 - `node dev/test/gain-empty.js <url> out.json 755x1000@1` → before: 14 distinct empty (exit 1); after: see §6 (exit 0). 0 page errors.
-- Mutant: `MUTANT=1 node dev/test/gain-empty.js <url>` (blanks doorGain = one producer) → FAIL expected (§6).
+- Mutant: `MUTANT=1 node dev/test/gain-empty.js <url> m.json 755x1000@1 toi` (blanks doorGain = one producer) → **FAIL, exit 1**: 5 cards empty (Hãm hại, Hạ uy thế, Tố cáo, Học, Mua đồ).
+- Same state, no mutant, iPad 1180x820: **PASS, exit 0** (271 cards, 0 empty, 0 page errors).
+- Full run (6 states, Fold): 1528 cards, 3 empty in one state (§5.0), 0 page errors.
 - Shots (not in git; scratch only): Fold 755x1000 and iPad 1180x820, Hậu cung card Mưu kế group (Hạ uy thế, Tố cáo): green Được list, no overflow, no clipping.
 
 ## 5. Found, NOT fixed here (follow-up for MAIN; separate families)
