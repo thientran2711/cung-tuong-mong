@@ -31,7 +31,7 @@ async function tap(p,target,o={}){let rt=RTS.get(p);if(!rt){rt={cur:null};rt.rt=
    so «the next card moves the lift» is checked; (F1) «chosen» is judged against the screen AFTER the lift (mid sig), not before it: PASS only when the
    chip tap changes the screen AND the lift is gone (or the frame changed) — a no-op ✓ / «Chọn» now FAILS. o.liftOnly: first tap only (a card that is
    lifted, not chosen). Used by the BFS, the selx / talk walk, the path replay, the tour — and ported to robot-rt.js's picker (JOB 4). */
-async function press(p,el,o={}){const k=await el.evaluate(e=>window.__bc?__bc.kind2(e):'').catch(()=>'');const lab=k?await el.evaluate(e=>__bc.label(e)).catch(()=>''):'';const ok=await tap(p,el,o);if(!ok||!k)return{ok,two:'',k};
+async function press(p,el,o={}){/* FIXER #21 (BIG #20 N2): she waits for the person ring's own move (focus / back / turn: kring R.busy ignores every tap) before she taps — a ✕ tapped mid-move «did nothing» */await p.waitForFunction(()=>!(window.kitRing&&kitRing.cur&&kitRing.cur.busy),null,{timeout:2500}).catch(()=>{});const k=await el.evaluate(e=>window.__bc?__bc.kind2(e):'').catch(()=>'');const lab=k?await el.evaluate(e=>__bc.label(e)).catch(()=>''):'';const ok=await tap(p,el,o);if(!ok||!k)return{ok,two:'',k};
  let L={n:0,mine:false},ch=null;for(let i=0;i<14;i++){await p.waitForTimeout(150);L=await p.evaluate(([k,lab])=>__bc.liftOf(k,lab),[k,lab]).catch(()=>({n:0,mine:false}));const h=await p.evaluateHandle(k=>__bc.chip(k),k).catch(()=>null);ch=h&&h.asElement();if(L.mine&&ch)break;if(!L.n&&i>=4)break}
  const w0=L.mine?'':L.n?'the tapped '+(k==='hand'?'card':'plaque')+' did not take the lift (another one is lifted)':'';
  if(o.liftOnly)return{ok,k,two:'lift-only',up:L.mine,ch:!!ch,why:w0||(L.mine&&!ch?'lifted, but no '+(k==='hand'?'✓':'«Chọn»')+' chip came':L.mine?'':'the tapped card did not lift')};
@@ -133,6 +133,8 @@ const INPAGE=()=>{
    const M=A.filter(e=>norm(e.getAttribute('data-bc'))===nk);return M[n-1]||M[0]||null},
   rootKey(r){const h=r.querySelector('h1,h2,h3,.kt,.ttl,.title,header');return this.desc(r)+':'+((h&&h.innerText)||r.innerText||'').replace(/\s+/g,' ').trim().slice(0,40)},
   sig(){const roots=this.liveRoots().map(r=>this.rootKey(r));
+   /* FIXER #21 (BIG #20 N2): the person ring's own level — sel ≥ 0 = one person stepped forward (focus); ✕ «Lui» there goes ONE step back to the ring (game rule: kring ✕ handler `if(R.sel>=0)return back(R)`), the next ✕ closes */
+   let ring=null;try{const C=window.kitRing&&kitRing.cur;if(C)ring=C.sel}catch(e){}
    const tab=(document.querySelector('#tabs .on,#tabs [aria-selected=true]')||{}).getAttribute?.('data-tab')||'';
    let sh='';try{if(typeof S!=='undefined'&&S){const s=JSON.stringify(S);let h=0;for(let i=0;i<s.length;i+=7)h=(h*31+s.charCodeAt(i))|0;sh=s.length+':'+h}}catch(e){}
    /* whole page text + which things are marked on/selected (a filter tab, a picked card) */
@@ -142,7 +144,7 @@ const INPAGE=()=>{
    /* moved / zoomed / resized things (a map zoom, a slider) show only in inline styles */
    let sty=0;{const R=[document.getElementById('panel'),...this.liveRoots().filter(r=>r!==document.body)].filter(Boolean);let n=0;for(const r of R)for(const e of r.querySelectorAll('[style]')){if(++n>600)break;const t=e.getAttribute('style');for(let i=0;i<t.length;i++)sty=(sty*31+t.charCodeAt(i))|0}}
    let kg='';try{const g=document.getElementById('kg82')||document.querySelector('#ov .kgame');if(typeof KG82!=='undefined'&&g&&this.vis(g))kg=KG82.phase||(KG82.setup?'setup':'intro')}catch(e){}
-   return{roots:roots.sort(),tab,panel,kg,sty,S:sh,txt:txt.length+':'+th,title:!!(document.getElementById('title')&&!document.getElementById('title').hidden),q:(typeof Q!=='undefined'&&Q||[]).length}},
+   return{roots:roots.sort(),tab,panel,kg,sty,S:sh,txt:txt.length+':'+th,title:!!(document.getElementById('title')&&!document.getElementById('title').hidden),q:(typeof Q!=='undefined'&&Q||[]).length,ring}},
   baseline(){this.base=new Set([...document.body.children]);this.hid=[...document.querySelectorAll('[id]')].filter(e=>this.isFixedRoot(e)).map(e=>[e,e.hidden])},
   /* the sub-tab picks of the panes (Tư trang / Dư đồ / Tài nghệ… : KTSUB + localStorage ctm-ktsub-*, KINV_SUB hclh-inv-sub, hclh-kcat-*) are
      viewer memory, not the save: a restore puts them back too, so a path through a sub-tab replays (fix-1-r3, the SKIP gap of full6) */
@@ -179,7 +181,7 @@ function verdict(b,pre,post,errs,closedOwn,par){
  const backTo=par&&JSON.stringify(post.roots)===JSON.stringify(par.roots);
  /* KIT §13.9: the ✕ «Quay lại» of a mini-game frame gives up = the caller's own lose RESULT; it must never start the board / open the next screen */
  if(closeLike&&!closedOwn&&pre.kg!==''&&(post.kg==='result'||post.S!==pre.S))return['PASS','gave up → the game ended with its lose result (KIT §13.9)'];
- if(closeLike)return closedOwn?['PASS','closed its layer']:backTo?['PASS','back to the screen before']:(changed?['FAIL','close button did not close its layer (something else changed)']:['FAIL','close button: nothing happened']);
+ if(closeLike)return closedOwn?['PASS','closed its layer']:backTo?['PASS','back to the screen before']:(pre.ring!=null&&pre.ring>=0&&post.ring!=null&&post.ring<0)?['PASS','stepped back from the person to the ring (ring ✕ «Lui» = one step back; the next ✕ closes)']:(changed?['FAIL','close button did not close its layer (something else changed)']:['FAIL','close button: nothing happened']);
  if(b.tab)return post.tab===b.tab||pre.tab===b.tab&&changed?['PASS','tab '+b.tab+' shown']:changed?['WARN','tab button changed the screen but tab '+b.tab+' not marked on']:['FAIL','tab button: nothing happened'];
  if(!changed&&b.on)return['PASS','already on (tapping the shown tab/choice again changes nothing)'];
  if(!changed)return['FAIL','no effect (screen and state unchanged)'];
