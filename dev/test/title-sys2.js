@@ -27,7 +27,8 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   S.rank=B.hieu.minRank-1;if(dhHieuOK(S).ok)F.push('rank below accepted');ready(S);S.confined=1;if(dhHieuOK(S).ok)F.push('cấm túc accepted');ready(S);
   S.lastPromo=S.turn;if(dhHieuOK(S).ok)F.push('gap ignored');ready(S);
   /* the grant: hiệu + book + seal + Danh */
-  Q.length=0;const d0=S.danh;const h=dhHieuGrant(S,'month');o.grant=h;if(!h||S.hieu!==h)F.push('no hiệu granted');if(S.danh!==Math.min(100,d0+B.hieu.danhG))F.push('Danh not +danhG '+d0+'>'+S.danh);
+  /* stat-pace (jstatpace spG, LIVE since 4cfcda61): the +danhG rise goes through the ONE rise rule (size band + slowdown), so the expected value is what spG gives */
+  Q.length=0;const d0=S.danh;const dx=typeof spG==='function'?spG('danh',S,d0,B.hieu.danhG,S.rank|0,'danh',1):B.hieu.danhG;const h=dhHieuGrant(S,'month');o.grant=h;if(!h||S.hieu!==h)F.push('no hiệu granted');if(S.danh!==Math.min(100,d0+dx))F.push('Danh not +danhG (paced '+dx+') '+d0+'>'+S.danh);
   if(has(S,'sacphong')!==1||has(S,'ngocan')!==1)F.push('book/seal not in chest');if(!Q.some(m=>m.kit&&m.kit.kind==='reward'))F.push('no reward panel');
   if(!/^[^ ]+ phi$/.test(rkName(S)))F.push('hiệu not joined to rank: '+rkName(S));Q.length=0;
   /* never sold / given */
