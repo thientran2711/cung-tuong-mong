@@ -206,7 +206,7 @@ BAL.mort={on:1,playerFloorYears:0,
    neutral skill. npc.max = NPC consorts with a stake who take a road per case (law 1: the same roads, same numbers as her).
    her = the three roads, ONE rule for her and NPCs, tiers Nhẹ · Vừa · Nặng (owner OD 27/11 ~00:46Z: cost and result rise together):
    t1 = Nhẹ «giữ mình» (no cost, Đức t1.duc); t2 = Vừa (a stat cost of size t2 → a stat gain of size t2: abd block Danh→Sủng, abd help
-   Sủng→Thái hậu (Danh once she is gone), phế/lật đổ block Danh→Sủng); t3 = Nặng phế/lật đổ help (Bạc t3.bac → Danh t3.danh + the house's
+   Sủng→Thái hậu (Danh once she is gone), phế/lật đổ block Danh→Sủng); t3 = Nặng phế/lật đổ help (Bạc t3.bac, or Sủng t3.stat — the matching road, law 2 — → Danh t3.danh + the house's
    backing); blk / psh = abdication pressure moved; od = odds moved on a phế / coup case; evCut = evidence a mật tấu takes away; af / rel =
    the house's favour / its women's relation; lose = what every helper of a failed case loses (loseMine × lose when it is only her father's house). */
 BAL.re={on:1,minY:7,
@@ -215,7 +215,7 @@ BAL.re={on:1,minY:7,
  coup:{pow:65,gap:15,amb:1,rum:2,mo:3,eyes:2,rumP:50,base:35,k:1.5,army:10,fail:35,sungLoss:15,gripWin:8},
  amb:{corrupt:.3,sk:.01,skMid:50,prince:.4},
  npc:{max:3},
- her:{t1:{duc:2},t2:4,t3:{bac:60,danh:8},blk:25,psh:20,od:15,evCut:2,af:20,rel:6,lose:6,loseMine:.5}};
+ her:{t1:{duc:2},t2:4,t3:{bac:60,stat:8,danh:8},blk:25,psh:20,od:15,evCut:2,af:20,rel:6,lose:6,loseMine:.5}};
 /* D49 collection milestones (jcol): [items, Phúc duyên once per life (OD L46: ~+5/+10/+20/+35), danh hiệu (VANPHONG cổ trang)]; keep = lives remembered in the once-only ledger */
 BAL.col={ms:[[20,5,"Tích bảo"],[50,10,"Tàng bảo"],[100,20,"Bách bảo"],[200,35,"Vạn bảo các chủ"]],keep:80};
 /* TÂN QUÂN LẬP UY (jreign, owner 16/11 D5): the Emperor's side story + her faction road. Months from the accession: at[c] opens chapter c+1;

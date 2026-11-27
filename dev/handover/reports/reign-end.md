@@ -109,3 +109,10 @@ her son heir) — `-fold.webp` / `-ipad.webp`. Note: the stills set the reign 12
   own cases). Robot table above is r0 (before NPC roads).
 - Stills re-shot (new road order) → CDN img/_review/reign-end/. INFO for the kit keeper (not this branch): on iPad the coup card's small «who» avatar
   overlaps the first text line under a short head-art band (kit act-card layout).
+
+## r2 — RV-163D r1 FAIL (1 item, law 2 «a bạc road always has a road of matching tier») fixed
+
+phế / lật đổ cards now have FOUR roads: Nhẹ «Giữ mình» · Vừa «Mật tấu / Mật báo» · Nặng «Ngầm tiếp tay / mở đường bằng bạc» (Bạc 60) · Nặng
+«Đứng ra làm chứng / Đích thân đưa tin» (Sủng 8 = BAL.re.her.t3.stat) — the two Nặng roads give the SAME result (Danh 8 + the house backs her,
+odds +15, the price of a failed case). npcRoads: an NPC without the Bạc takes the stat road. Test adds: the stat road is tier 3, no Bạc, same gain
+as the Bạc road; an NPC with 0 Bạc helps through it. PASS 755x1000 + 1180x820; one-core-guard PASS. Abdication card unchanged (no Bạc road).

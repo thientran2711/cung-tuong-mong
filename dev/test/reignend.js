@@ -24,14 +24,14 @@ const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
  for(const k of ['abd','phe','coup']){await fresh();
   r=await p.evaluate(k=>{Q.length=0;const c=k==='abd'?null:'Hộ bộ';try{kmReset();const dt=document.getElementById('kdaytc');if(dt)dt.remove()}catch(e){}const okc=reDbg.card(k,c);showModal();const m=Q[0];const md=document.getElementById('modal');
    if(md.hidden){md.className='modal';showModal()}const txt=md.innerText;return{okc,t:m&&m.t,n:m&&m.opts.length,names:m?m.opts.map(o=>o.n):[],pct:/%/.test(txt),open:!md.hidden,ov:[Q.length,md.className,md.hidden,kmFree(),[...document.querySelectorAll("body>*")].filter(e=>!e.hidden&&getComputedStyle(e).display!=="none").map(e=>e.id).join(",")],lines:m?m.opts.map(o=>o.j67):[],art:!!(m&&m.headArt)}},k);
-  console.log('card',k,JSON.stringify(r));ok(r.okc&&r.n===3&&r.open,`card ${k} builds with 3 roads`);ok(!r.pct,`card ${k}: no %`);ok(r.lines.every(x=>x&&/được|tốn/.test(x)),`card ${k}: every road shows tốn/được`);
+  console.log('card',k,JSON.stringify(r));ok(r.okc&&r.n===(k==='abd'?3:4)&&r.open,`card ${k} builds with ${k==='abd'?3:4} roads`);ok(!r.pct,`card ${k}: no %`);ok(r.lines.every(x=>x&&/được|tốn/.test(x)),`card ${k}: every road shows tốn/được`);
   await shot('card-'+k);
   /* each road */
-  for(let i=0;i<3;i++){const q=await p.evaluate(([k,i])=>{Q.length=0;const c=k==='abd'?null:'Hộ bộ';S.re.a=60;const f=reDbg.F('Hộ bộ');f.her=0;f.ev=5;f.pl=2;reDbg.card(k,c);
+  for(let i=0;i<(k==='abd'?3:4);i++){const q=await p.evaluate(([k,i])=>{Q.length=0;const c=k==='abd'?null:'Hộ bộ';S.re.a=60;const f=reDbg.F('Hộ bộ');f.her=0;f.ev=5;f.pl=2;reDbg.card(k,c);
     const a0=S.re.a,h0=f.her,s0={sung:S.sung,danh:S.danh,duc:S.duc,bac:S.bac};S.bac=Math.max(S.bac,200);const A=[];const ap0=apply;apply=function(o){A.push(o);return ap0.apply(this,arguments)};try{chooseM(i)}finally{apply=ap0}return{da:S.re.a-a0,dh:f.her-h0,dsung:S.sung-s0.sung,dduc:S.duc-s0.duc,ducAsk:A.some(o=>o&&o.duc>0)}},[k,i]);
    console.log(' road',k,i,JSON.stringify(q));
    /* roads in tier order: 0 Nhẹ giữ mình · 1 block · 2 help */
-   if(k==='abd')ok(i===1?q.da<0:i===2?q.da>0:q.da===0,`abd road ${i} moves the pressure`);else ok(i===1?q.dh<0:i===2?q.dh>0:q.dh===0,`${k} road ${i} moves the odds`);
+   if(k==='abd')ok(i===1?q.da<0:i===2?q.da>0:q.da===0,`abd road ${i} moves the pressure`);else ok(i===1?q.dh<0:i>=2?q.dh>0:q.dh===0,`${k} road ${i} moves the odds`);
    if(i===0)ok(q.ducAsk,`${k} stand-aside road gains Đức`)}
   await p.evaluate(()=>{Q.length=0;$("modal").hidden=true;$("modal").className='modal';for(const id of ['ov','kres','kresult']){const e=document.getElementById(id);if(e)e.hidden=true}})}
  /* 1b. tiers (law 2, OD 27/11 ~00:46Z): Nhẹ costs nothing; a Vừa road costs t2 and gains t2; the Nặng road costs Bạc and gains more; NPC roads move a case exactly like hers */
@@ -39,11 +39,15 @@ const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
  r=await p.evaluate(()=>{const P=BAL.re.her,out={};for(const k of ['abd','phe','coup'])out[k]=[0,-1,1].map(s=>reDbg.roadFx(k,s,S));
   const v=liveRivals(false).find(x=>x.clan==='Hộ bộ');const f=reDbg.F('Hộ bộ');f.her=0;const h0=f.her;v.bac=500;const b0=v.bac;reDbg.road(v,'phe','Hộ bộ',1);const npc={dh:f.her-h0,bac:v.bac-b0,hp:f.hp.length};
   f.her=0;reDbg.road(S,'phe','Hộ bộ',1);const her={dh:f.her};S.re=S.re||{a:0,F:{},seen:{},her:0};S.re.a=60;const w=liveRivals(false).find(x=>x!==v)||v;const a0=S.re.a;reDbg.road(w,'abd',null,-1);npc.da=S.re.a-a0;
-  const n=reDbg.npcRoads('phe','Hộ bộ');Q.length=0;return{out,npc,her,n,P}});
+  const n=reDbg.npcRoads('phe','Hộ bộ');Q.length=0;
+  /* law 2: the Bạc help has a matching stat road with the same result; an NPC without Bạc takes it */
+  const m={b:reDbg.roadFx('phe',1,S),s:reDbg.roadFx('phe',2,S)};v.bac=0;const sung0=v.sung,bac0=v.bac;f.her=0;f.pm=0;reDbg.npcRoads('phe','Hộ bộ');m.npcBac=v.bac-bac0;m.npcDh=f.her;Q.length=0;
+  return{out,npc,her,n,P,m}});
  console.log('tiers/npc',JSON.stringify(r).slice(0,600));
  for(const k of ['abd','phe','coup']){const [a,b,c]=r.out[k];ok(a.tier===1&&!Object.keys(a.cost).length,`${k}: Nhẹ road costs nothing`);
   const sz=x=>Math.max(0,...Object.values(x).map(Math.abs));ok(sz(b.cost)===sz(b.gain),`${k}: Vừa block costs = gains`);ok(c.tier>=b.tier&&(c.tier===2?sz(c.cost)===sz(c.gain):sz(c.gain)>sz(b.gain)),`${k}: help road tier: cost and result rise together`)}
  ok(r.npc.dh===r.her.dh&&r.npc.dh>0,'NPC help moves the odds exactly like hers');ok(r.npc.bac===-r.P.t3.bac,'NPC pays the same Bạc');ok(r.npc.da===-r.P.blk,'NPC block moves the abdication pressure like hers');ok(r.n>=1,'NPC consorts with a stake take a road when a case opens');
+ ok(r.m.s.tier===3&&!r.m.s.cost.bac&&JSON.stringify(r.m.s.gain)===JSON.stringify(r.m.b.gain),'Nặng Bạc road has a matching stat road with the same result');ok(r.m.npcBac===0&&r.m.npcDh>0,'an NPC without Bạc helps through the stat road');
  /* 2. each end through the real month (mortEmpDue → emperorDies) */
  for(const k of ['abd','phe','coup']){await fresh();
   r=await p.evaluate(k=>{let got=null;const o0=over;over=function(h,t,f,a){got={h,t:String(t).replace(/<[^>]+>/g,''),f,a};return o0.apply(this,arguments)};

@@ -119,11 +119,12 @@ if(PEND.succ0)(function(){const p0=PEND.succ0;PEND.succ0=function(){const d=p0.a
    result rise together) — Nhẹ = giữ mình (no cost, small Đức); Vừa = a stat cost of size t2 for a stat gain of size t2 + the case moves one step;
    Nặng = Bạc t3.bac for a bigger gain (t3.danh + the house's backing) + the case moves, and the price of a failed case. ---------- */
 function line(cost,win,extra){return [cost?"tốn: "+cost:"",win?"được: "+win:"",extra||""].filter(Boolean).join(" · ")}
-/* cost (fx) and gain of road s (−1 block · 0 aside · +1 help) on case k, for person p */
+/* cost (fx) and gain of road s (−1 block · 0 aside · +1 help · +2 help paid in a stat, phế / lật đổ only) on case k, for person p */
 function roadFx(k,s,p){const P=RB().her,v=P.t2;const thOk=!S.thDead;
  if(s===0)return{tier:1,cost:{},gain:{duc:P.t1.duc}};
  if(k==="abd")return s<0?{tier:2,cost:{danh:-v},gain:{sung:v}}:{tier:2,cost:{sung:-v},gain:thOk?{th:v}:{danh:v}};
- return s<0?{tier:2,cost:{danh:-v},gain:{sung:v}}:{tier:3,cost:{bac:-P.t3.bac},gain:{danh:P.t3.danh}}}
+ /* Nặng help: the same result paid in Bạc (s = 1) or in a stat of the same tier (s = 2, law 2: a Bạc road always has a matching road) */
+ return s<0?{tier:2,cost:{danh:-v},gain:{sung:v}}:s===2?{tier:3,cost:{sung:-P.t3.stat},gain:{danh:P.t3.danh}}:{tier:3,cost:{bac:-P.t3.bac},gain:{danh:P.t3.danh}}}
 function pN(p){if(p===S)return"Ngươi";try{return typeof kitKnownName!=="function"||kitKnownName(p)?p.name:"Một vị phi tần"}catch(e){return p.name}}
 /* road(p,k,c,s): p takes road s. Her cost is paid by chooseM (the card's fx); an NPC pays it here. Same gains, same case moves. */
 function road(p,k,c,s){const P=RB().her,R=reS(),me=p===S,X=roadFx(k,s,p);if(!me&&X.cost)ap(p,X.cost);ap(p,X.gain);const who=pN(p);let t="";
@@ -146,7 +147,7 @@ function npcPick(p,k,c){const h=heir();const son=(()=>{try{return kvSonOf(p)}cat
  if(k==="abd"){if(h&&h.v===p)return 1;if(son&&!(h&&h.k===son))return -1;return 0}
  const pr=prince(c);if(houseOfMom(p)===c)return 1;if(h&&h.v===p&&!(pr&&pr.k===h.k))return -1;return 0}
 function npcRoads(k,c){const N=RB().npc;let L=[];try{L=liveRivals(true).filter(v=>v.alive&&!v.out&&!v.coop)}catch(e){}const out=[];
- for(const v of L){if(out.length>=N.max)break;const s=npcPick(v,k,c);if(!s)continue;const X=roadFx(k,s,v);if(X.cost.bac&&(v.bac||0)+X.cost.bac<0)continue;out.push(road(v,k,c,s))}
+ for(const v of L){if(out.length>=N.max)break;let s=npcPick(v,k,c);if(!s)continue;const X=roadFx(k,s,v);if(X.cost.bac&&(v.bac||0)+X.cost.bac<0)s=2;/* no Bạc: the matching stat road */out.push(road(v,k,c,s))}
  if(out.length&&!cw())news(k==="abd"?"Hậu cung chia phe":"Hậu cung dậy sóng",out.join(" "));return out.length}
 PEND.re=pp=>{try{if(!reOn())return null;const k=pp.k,c=pp.c;const R=reS();
  const opt=(n,s,extra)=>{const X=roadFx(k,s,S);return{n,fx:X.cost,j67:line(fmt(X.cost),fmt(X.gain),extra),go:()=>road(S,k,c,s)}};
@@ -162,7 +163,8 @@ PEND.re=pp=>{try{if(!reOn())return null;const k=pp.k,c=pp.c;const R=reS();
   :`<p>${mine?"Thư nhà mang về một tin dữ: phụ thân ngươi":`Người của ngươi báo về: ${nm}`} đang ngầm điều binh, thế lực đã lấn cả ngai vàng${pr?`; họ định tôn ${prN}`:""}.</p><p>Nếu không ai ngăn, chỉ vài tháng nữa cửa cung sẽ mở trong đêm.</p>`;
  const o=[opt("Giữ mình, không nói vào",0,"triều cục tự định"),
   opt(k==="phe"?"Mật tấu với Hoàng thượng":"Mật báo cấm quân",-1,`${k==="phe"?"sớ phế lập":"binh biến"} khó thành · <span class="r">${mine?"phụ thân giận":`${nm} thành kẻ thù`}</span>`),
-  opt(k==="phe"?`Ngầm tiếp tay ${nm}`:`Ngầm mở đường cho ${nm}`,1,`${k==="phe"?"sớ phế lập":"binh biến"} dễ thành, ${mine?"phụ thân":nm} đứng sau ngươi · <span class="r">nếu hỏng: ${fmt({sung:-P.lose,danh:-P.lose})}</span>`)];
+  opt(k==="phe"?`Ngầm tiếp tay ${nm} bằng bạc`:`Ngầm mở đường cho ${nm} bằng bạc`,1,`${k==="phe"?"sớ phế lập":"binh biến"} dễ thành, ${mine?"phụ thân":nm} đứng sau ngươi · <span class="r">nếu hỏng: ${fmt({sung:-P.lose,danh:-P.lose})}</span>`),
+  opt(k==="phe"?`Đứng ra làm chứng cho ${nm}`:`Đích thân đưa tin cho ${nm}`,2,`${k==="phe"?"sớ phế lập":"binh biến"} dễ thành, ${mine?"phụ thân":nm} đứng sau ngươi · <span class="r">nếu hỏng: ${fmt({sung:-P.lose,danh:-P.lose})}</span>`)];
  let who=null;try{who=pMin(h)}catch(e){}return{t,o,who:who||pEmp()}}catch(e){console.error(e);return null}};
 function card(k,c){const d=mkP("re",{k,c});if(!d)return false;Q.push({t:k==="abd"?"Triều cục · Sớ xin nhường ngôi":k==="phe"?"Triều cục · Sớ phế lập":"Triều cục · Mưu biến",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,headArt:REART[k]});try{evBusyMark()}catch(e){}return true}
 window.reDbg={reMonth,abdGain,amb,prince,heir,reY,grip,F,card,end,fall,road,roadFx,npcPick,npcRoads};
