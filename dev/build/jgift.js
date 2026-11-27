@@ -12,9 +12,12 @@ function giftArt(e){try{const a=typeof itemArt==="function"?itemArt(e&&e.wk?e:e&
 function giftName(e){if(!e)return"";if(e.wk)return e.wk.n;return itm(e.k).n}
 function giftE(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 /* every possible recipient: [group, id, target, label]; groups: ct Chí tôn · pt Phi tần · nn Nam nhân · cn Cung nhân */
-function giftPeople(e){const L=[];L.push(["ct","emp","emp","Hoàng thượng"]);if(!S.thDead)L.push(["ct","th","th","Thái hậu"]);
+function giftPeople(e){const L=[];
+ /* at home before the palace (review/ob-ngoaicung, law 6): the emperor, Thái hậu and the consorts are out of her reach; her maid keeps her own title */
+ if(typeof road8==="function"&&road8()==="kc"){if(e&&e.wk&&S.maid)L.push(["cn","maid","maid",`${S.maid.name} (${kitMaidTitle(null,1)})`]);return L}
+ L.push(["ct","emp","emp","Hoàng thượng"]);if(!S.thDead)L.push(["ct","th","th","Thái hậu"]);
  for(const v of liveRivals(true)){const nm=typeof kitName==="function"?giftPlain(kitName(v)):`${rkName(v)} ${v.name}`;L.push([v.queen?"ct":"pt",String(v.id),v,nm])}
- if(e&&e.wk&&S.maid)L.push(["cn","maid","maid",`${S.maid.name} (cung nữ thân tín)`]);return L}
+ if(e&&e.wk&&S.maid)L.push(["cn","maid","maid",`${S.maid.name} (${typeof kitMaidTitle==="function"?kitMaidTitle(null,1):"cung nữ thân tín"})`]);return L}
 function giftPlain(h){return String(h||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim()}
 /* what giving THIS item to THIS person does: {ok, why, x (kit line), v (value, for sorting)} */
 function giftEval(e,t){const pre="tốn: 2 khắc";
@@ -80,7 +83,7 @@ function giftDecorate(){const M=$("modal");const m=Q[0];const gix=giftIxOf(m);if
   if(o.lock){b.disabled=true;b.classList.add("kgiftno")}const c=cnt[b.dataset.kgg]||(cnt[b.dataset.kgg]=[0,0]);c[1]++;if(!o.lock)c[0]++});
  const box=M.querySelector(".opts");if(box&&!M.querySelector(".kgifttabs")){const tabs=GIFT_TABS.filter(([k])=>cnt[k]);
   if(!tabs.some(([k])=>k===GIFT_TAB))GIFT_TAB=(tabs.find(([k])=>cnt[k][0])||tabs[0]||[])[0];
-  if(typeof kitTabRowHTML==="function"&&tabs.length>1)box.insertAdjacentHTML("beforebegin",`<div class="pctabs kcattabs kgifttabs" role="tablist">${kitTabRowHTML(tabs.map(([k,l])=>({k,label:l,n:`${cnt[k][0]}/${cnt[k][1]}`,tip:`tặng được ${cnt[k][0]} trên ${cnt[k][1]} người`})),GIFT_TAB,"data-kgtab")}</div>`);
+  if(typeof kitTabRowHTML==="function"&&tabs.length>1)box.insertAdjacentHTML("beforebegin",`<div class="pctabs kcattabs kgifttabs" role="tablist">${kitTabRowHTML(tabs.map(([k,l])=>({k,label:(typeof placeW==="function"&&road8()==="kc"&&(k==="ct"||k==="cn")&&placeW(k))||l,n:`${cnt[k][0]}/${cnt[k][1]}`,tip:`tặng được ${cnt[k][0]} trên ${cnt[k][1]} người`})),GIFT_TAB,"data-kgtab")}</div>`);
   }
  /* the sub-tab filter runs on EVERY draw (a re-layout of the options — jopic / kitDlgFit — made new buttons that never got filtered: Chí tôn showed the whole harem) */
  if(M.querySelector(".kgifttabs"))giftFilter(M);

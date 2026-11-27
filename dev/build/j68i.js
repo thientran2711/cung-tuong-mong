@@ -18,4 +18,4 @@ function rsn6(rows){return rows.map(r=>String(r[1]).replace(/\s*\(.*\)\s*/,"").r
  for(const o of SEN){const i=H.findIndex(h=>h[1].test(o.t));const tgt=i>=0?groups[i][1]:other;const cap=i>=0?H[i][2]:3;if(tgt.length>=cap*2)continue;tgt.push(o.t);if(o.why){const parts=o.why.replace(/^Lý do:\s*/,"").replace(/\.$/,"").split(" · ");let cur="";const out=[];for(const q of parts){if(cur&&(cur+" · "+q).length>92){out.push(cur);cur=q}else cur=cur?cur+" · "+q:q}if(cur)out.push(cur);out.forEach((q,j)=>tgt.push((j?"Lý do (tiếp): ":"Lý do: ")+q+"."))}}
  if(other.length)groups.push(["Chuyện khác",other.slice(0,4)]);
  const D=[["Sủng",S.sung-s.sung],["Danh",S.danh-s.danh],["Sức",S.suc-s.suc],["Bạc",S.bac-s.bac]];
- return{D,groups,rank:S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):"",kids:S.kids.length-s.kids}}})();
+ return{D,groups,rank:S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":meRankN()):"",kids:S.kids.length-s.kids}}})();
