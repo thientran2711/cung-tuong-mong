@@ -194,7 +194,7 @@ function thRows67(A,row){const a=ARC67[A.a];const n=A.seq.length,i=A.done?n:A.i;
 if(typeof srvRoadHTML==="function")(function(){const r0=srvRoadHTML;srvRoadHTML=function(){const h=r0.apply(this,arguments);try{if(v267())return h+`<div class="st67">${panel67()}</div>`}catch(e){}return h}})();
 /* ---------- shared outcome helpers (only existing systems) ---------- */
 function e67heir(n){const s=son67();if(s){s.fond=cl((s.fond||0)+n,0,100);return `Hoàng thượng thương ${s.name} hơn (+${n}).`}const W=BAL.arc.e67.heirNo;apply(W);return `Chưa có hoàng tử: Danh +${W.danh}.`}
-function e67drop(v,why){if(!rvOk67(v)||v.queen||v.rank<=0)return"";v.rank=seatDown(v,v.rank-1);return `${v.name} ${why}, bị giáng xuống ${RANKS[v.rank].n}.`}
+function e67drop(v,why){if(!rvOk67(v)||v.queen||v.rank<=0||punTwice(v))return"";{const r0=v.rank;v.rank=punDown(v);punMark(v,r0)}return `${v.name} ${why}, bị giáng xuống ${RANKS[v.rank].n}.`}
 function e67ally(v,n){if(!rvOk67(v))return"";relAdd(S,v,n||30);return `${v.name} thành người một phe với ngươi (thiện cảm +${n||30}).`}
 function e67foe(v,n){if(!rvOk67(v))return"";n=Math.round((n||15)/2);oanAdd(v,S,n);return `${v.name} oán ngươi thêm.`}
 function e67pun(v,n){if(!rvOk67(v))return"";v.sung=Math.max(0,(v.sung||0)-n);return `${v.name}: Sủng -${n}.`}
@@ -1083,7 +1083,7 @@ ARC67.ch_ho=arcFx("ch_ho",{o:"ch",t:"Hai người cháu",w:"v",sj:"cuộc tranh 
  E:{win:{tag:"Hai người cháu một lòng",w:"th",t:"Thái hậu mừng vì con cháu hòa thuận, dồn sức cho cả hai. {v} thành đồng minh vững nhất của ngươi.",go:(A,_ok,G)=>e67ally(rv67(A,"v"),G[0])},
   win2:{tag:"Người cháu được chọn",w:"th",t:"Thái hậu chọn ngươi. Họ ngoại dồn sức cho ngươi; {v} đứng ngoài, ấm ức.",go:(A,_ok,G)=>e67foe(rv67(A,"v"),G[0])},
   mid:{tag:"Mỗi người một đường",t:"Thái hậu không chọn ai. Hai người cháu giữ lễ, mỗi người một đường."},
-  lose:{tag:"{v} được chọn",t:"Thái hậu chọn {v}. Họ ngoại dồn sức cho nàng, ngươi phải tự lo.",go:A=>{const v=rv67(A,"v");if(v)v.sung=cl((v.sung||0)+6,0,100);return v?`${v.name} được Thái hậu đỡ lời, được sủng hơn.`:""}}}});
+  lose:{tag:"{v} được chọn",t:"Thái hậu chọn {v}. Họ ngoại dồn sức cho nàng, ngươi phải tự lo.",go:A=>{const v=rv67(A,"v");if(v)spAdd(v,"sung",6);return v?`${v.name} được Thái hậu đỡ lời, được sủng hơn.`:""}}}});
 ARC67.ch_bi=arcFx("ch_bi",{o:"ch",t:"Bí mật năm xưa",w:"th",sj:"bí mật năm xưa của Thái hậu",g:"Một lá thư cũ cho thấy năm xưa Thái hậu từng hại một phi tần để giữ ngôi. Người cầm thư đang tìm cách dùng nó. Bảo vệ bà, hay biến nó thành sức mạnh của mình.",
  p:[["s1","s2"],["c1","c2","c3","G.spy","G.emp"],["t1"],["x1"]],
  B:{

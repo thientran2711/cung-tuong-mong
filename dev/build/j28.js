@@ -45,7 +45,44 @@ function npcAct(v,t){const b=bandVT(v,t);if(!b)return"";const allow=BANDS.slice(
 /* reactions: Oán from a slight scales with the victim's traits; forgiveness (monthly fade) too; trust gains from her too */
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0&&x&&x!==S)n*=persF(x,"slight",1);return o0.call(this,x,y,n)}})();
 (function(){const a0=affAdd;affAdd=function(x,y,n){/* AG-ALL-2 G12 (one rule both ways): her trust trait slows how fast she warms to ANYONE, the player or an NPC */if(n>0&&x&&x!==S&&y&&y!==x)n*=persF(x,"trust",1);return a0.call(this,x,y,Math.round(n))}})();
-function oanMonth(){for(const v of rivals){const f=Math.round(BAL.oanFade*persF(v,"forgive",1));v.oan=Math.max(0,(v.oan||0)-f);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-f)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-BAL.oanFade);
+/* review/pace-all PART B (owner OD 26/11 ~08:25Z «làm cách nào để giảm bớt oán … Điểm thì nó tăng cao chót vót mà không biết làm cách nào để cho nó giảm»):
+   OÁN COOL-DOWN = the ONE fade of every grudge (canon overwrite: it replaces the old flat «BAL.oanFade a month»; oanMonth keeps its monthly hooks).
+   Each tuần (rivalsTurn), a grudge nothing new fed for BAL.oanCool.quiet tuần fades by (the width of its oán band, BAL.oanLv) ÷ BAL.oanCool.season
+   × the holder's nết (persF "forgive": Thù dai slower, Rộng lượng faster), so a feud left alone one season drops one band. Same rule for every holder:
+   consorts, men, servants and HER own oán toward them (law 1). It never goes below the floor while the CAUSE stands (law 6a real evidence): the holder
+   still remembers a bad deed of that person (jmem memTop, weight ≥ BAL.mem.faint) → floor «Chút oán» (BAL.oanLv[floor.mem − 1]); a deed carved for
+   life (keep / khắc cốt) → «Oán» (BAL.oanLv[floor.keep − 1]); the memory itself fades by BAL.mem.fadeMo, then the floor goes. A new rise
+   (oanAdd n > 0) restarts the quiet count (p.ocq[key] = tuần of the last rise); fractions carry (p.occ). Old saves: no stamp = quiet. */
+function ocBandW(v){const L=BAL.oanLv;let i=0;while(i<L.length&&v>=L[i])i++;return Math.max(1,(i<L.length?L[i]:100)-(i?L[i-1]:0))}
+function ocKey(p){return p===S?"me":p&&p.id!=null?String(p.id):null}
+function ocWk(){try{return wk()}catch(e){return 0}}
+function ocStamp(x,y){try{if(!x||!y||typeof x!=="object")return;const k=ocKey(y);if(k==null)return;(x.ocq=x.ocq&&typeof x.ocq==="object"?x.ocq:{})[k]=ocWk()}catch(e){}}
+function ocFloor(h,t){const C=BAL.oanCool,L=BAL.oanLv;try{if(typeof memTop!=="function"||!t)return 0;const m=memTop(h,t,-1);if(!m)return 0;
+  if(m.L||m.k)return L[C.floor.keep-1]||0;return m.g>=BAL.mem.faint?(L[C.floor.mem-1]||0):0}catch(e){return 0}}
+/* fade one grudge value v held by h toward t (key k) by w tuần of cool-down; returns the new value */
+function ocOne(h,t,k,v,w,kf){const C=BAL.oanCool;v=+v||0;if(!(v>0))return v;const q=h.ocq&&h.ocq[k];if(q!=null&&ocWk()-q<C.quiet)return v;
+ const fl=ocFloor(h,t);if(v<=fl)return v;const cc=h.occ=h.occ&&typeof h.occ==="object"?h.occ:{};
+ const d=(cc[k]||0)+w*ocBandW(v)/C.season*kf;const n=Math.floor(d);cc[k]=Math.round((d-n)*1000)/1000;if(!n)return v;return Math.max(fl,v-n)}
+function ocPerson(id){try{return (typeof rivals!=="undefined"?rivals:[]).find(v=>v&&String(v.id)===String(id))||null}catch(e){return null}}
+/* w tuần of cool-down for every grudge in the world; mine = also HER own grudges (S.ro) */
+function oanCool(w,mine,onlyMine){const C=BAL.oanCool;if(!C||!C.on||!S)return;w=w||1;
+ if(!onlyMine)for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||typeof v!=="object"||v.alive===false)continue;
+  /* co-op (review B1): the friend entry (jcoopworld buildFriend, v.coop) mirrors the OTHER player's own grudges (toCanon writes them back into her S.ro);
+     those cool once, on her own client (oanMonth → oanCool(3,true,true) / her rivalsTurn S.ro pass) — never a second time here */if(v.coop)continue;const kf=persF(v,"forgive",1);
+  if(v.oan)v.oan=ocOne(v,S,"me",v.oan,w,kf);if(v.ro&&typeof v.ro==="object")for(const k in v.ro)v.ro[k]=ocOne(v,ocPerson(k),k,v.ro[k],w,kf)}
+ if(mine&&S.ro)for(const k in S.ro)S.ro[k]=ocOne(S,ocPerson(k),k,S.ro[k],w,C.me);
+ /* rel-men-servants: men and servants forget by the same rule (their nết, j28 persF) */
+ if(!onlyMine)for(const h of relMSAll()){const kf=persF(h,"forgive",1);if(h.oan)h.oan=ocOne(h,S,"me",h.oan,w,kf);if(h.ro&&typeof h.ro==="object")for(const k in h.ro)h.ro[k]=ocOne(h,ocPerson(k),k,h.ro[k],w,kf)}}
+/* the weekly jealousy fade of one consort (j8 rivalsTurn): BAL.oanCool.ghen.than when she likes her, .base otherwise, + .pct of the jealousy itself (high jealousy
+   cools faster: a quiet season takes about a third off, like one oán band), × her nết; fractions carry (v.gcc) */
+function ghenCool(v){const G=BAL.oanCool.ghen;const b0=(+v.rel||0)>=netTh(v,"than")?G.than:G.base;/* rollback (BAL.oanCool.on = 0): the old flat «3 : 1» exactly */
+ if(!(BAL.oanCool&&BAL.oanCool.on))return b0;const b=b0+G.pct*(+v.ghen||0);const d=(+v.gcc||0)+b*persF(v,"forgive",1),n=Math.floor(d);v.gcc=Math.round((d-n)*1000)/1000;return n}
+/* the weekly tick: inside rivalsTurn (host only in co-op: jcoopworld mutes it on the guest, whose OWN grudges cool in her oanMonth, 3 tuần at once) */
+(function(){const r0=rivalsTurn;rivalsTurn=function(){const r=r0.apply(this,arguments);try{oanCool(1,true)}catch(e){console.error("oanCool",e)}return r}})();
+/* a new rise restarts the quiet count of that grudge */
+(function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0)ocStamp(x,y);return o0.apply(this,arguments)}})();
+function oanMonth(){if(BAL.oanCool&&BAL.oanCool.on){try{if(typeof worldOn==="function"&&!worldOn())oanCool(3,true,true)}catch(e){}return}
+ for(const v of rivals){const f=Math.round(BAL.oanFade*persF(v,"forgive",1));v.oan=Math.max(0,(v.oan||0)-f);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-f)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-BAL.oanFade);
  /* rel-men-servants: men and servants forget by the same rule (their nết, j28 persF) */
  for(const h of relMSAll()){const f=Math.round(BAL.oanFade*persF(h,"forgive",1));if(h.oan)h.oan=Math.max(0,h.oan-f);if(h.ro&&typeof h.ro==="object")for(const k in h.ro)h.ro[k]=Math.max(0,h.ro[k]-f)}}
 /* gifts land by trait: Kiêu ngạo shrugs at small ones, Tham vọng warms to a rising giver, Tham tiền to anything */
@@ -56,8 +93,8 @@ const SOC={
  visit:{w:0.8,ok:(v,t)=>t!==S?(t.suc<50||t.preg):(S.suc<50||S.preg),run:(v,t)=>{relAdd(v,t,BAL.eff.j28.run_2);if(t===S)apply({suc:3});return `${v.name} sang thăm ${NM(t)} lúc ốm mệt`}},
  warn:{w:0.8,ok:(v,t)=>aff(v,t)>=netTh(v,"than")&&liveRivals(true).some(x=>x!==v&&x!==t&&bandVT(x,t)>=2),run:(v,t)=>{const x=mindPickBy(liveRivals(true).filter(x=>x!==v&&x!==t&&bandVT(x,t)>=2),x=>danger(x,t)+Math.max(0,oan(v,x)),v);/* npc-mind: was FIRST */if(t===S){if(traitsOf(S).length){}S.dKnown=S.dKnown||{};S.dKnown[x.id]=wk();noteAdd(x.id,`${v.name} báo: nàng có ý hại ngươi`)}else{t.shield=Math.max(t.shield||0,1)}relAdd(v,t,BAL.eff.j28.run_3);return `${v.name} lén báo ${NM(t)} đề phòng ${x.name}`}},
  mediate:{w:0.8,ok:(v,t)=>t!==S&&oan(t,S)>=netTh(t,"oan"),run:(v,t)=>{/* net-build: she lets it go only while her oán is under her own «nguoi» level */if(!netForgive(t,S))return `${v.name} đứng ra hòa giải giữa ${t.name} và ngươi, nhưng ${t.name} không chịu bỏ qua`;oanAdd(t,S,BAL.eff.j28.run_4);return `${v.name} đứng ra hòa giải giữa ${t.name} và ngươi`}},
- provoke:{w:0.6,ok:(v,t)=>danger(v,t)>=netThK(v,"act","provoke"),run:(v,t)=>{oanAdd(t,v,BAL.eff.j28.run_5);if(t===S)apply({duc:0});else ghenUp(t,3,`bị ${v.name} buông lời khiêu khích`,v);ap(v,{danh:-1});return `${v.name} buông lời khiêu khích ${NM(t)}`}},
- humiliate:{w:0.5,ok:(v,t)=>danger(v,t)>=netThK(v,"act","humiliate")&&rkOf(v)>=rkOf(t),run:(v,t)=>{oanAdd(t,v,BAL.eff.j28.run_6);ap(t,{danh:-2});ap(v,{danh:-1});return `${v.name} hạ nhục ${NM(t)} trước mặt cung nhân`}},
+ provoke:{w:0.6,ok:(v,t)=>danger(v,t)>=netThK(v,"act","provoke")&&mockOK(v,t)/* rank respect */,run:(v,t)=>{oanAdd(t,v,BAL.eff.j28.run_5);if(t===S)apply({duc:0});else ghenUp(t,3,`bị ${v.name} buông lời khiêu khích`,v);ap(v,{danh:-1});return `${v.name} buông lời khiêu khích ${NM(t)}`}},
+ humiliate:{w:0.5,ok:(v,t)=>danger(v,t)>=netThK(v,"act","humiliate")&&mockOK(v,t),run:(v,t)=>{oanAdd(t,v,BAL.eff.j28.run_6);ap(t,{danh:-2});ap(v,{danh:-1});return `${v.name} hạ nhục ${NM(t)} trước mặt cung nhân`}},
  flaunt:{w:0.5,ok:(v,t)=>v.sung>=40,run:(v,t)=>{liveRivals(true).forEach(x=>{if(x!==v)ghenUp(x,2,`thấy ${v.name} khoe quà ngự ban`,v)});return `${v.name} đi khắp cung khoe quà ngự ban`}},
  spy:{w:0.6,ok:()=>true,run:(v,t)=>{evA(v,t,roll(40)?BAL.eff.j28.evRun[0]:BAL.eff.j28.evRun[1]);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}},
  test:{w:0.4,ok:(v,t)=>aff(v,t)>=0,run:(v,t)=>{const ok=t===S?roll(60):roll(50);affAdd(v,t,ok?BAL.eff.j28.run_7[0]:BAL.eff.j28.run_7[1]);return `${v.name} thử lòng ${NM(t)}: ${ok?"tin thêm một chút":"càng ngờ vực"}`}},
@@ -68,8 +105,8 @@ const SOC={
  bribeksp:{w:0.4,ok:v=>v.bac>=BAL.bacFee.ksp,run:v=>{ap(v,{bac:-BAL.bacFee.ksp,sung:2});return `${v.name} đút lót Kính sự phòng để được lật thẻ`}},
  follow:{w:0.5,ok:v=>liveRivals(true).some(x=>x!==v&&rkOf(x)>rkOf(v)+1),run:v=>{const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);const x=mindPickBy(L,y=>BAL.mind.pick.j28up.base+rkOf(y)+Math.max(0,aff(v,y))/BAL.mind.pick.j28up.aff,v);relAdd(v,x,BAL.eff.j28.run_11)/* npc-mind: was ARGMAX rank */;return `${v.name} nép theo ${x.name}`}},
  feign:{w:0.5,ok:(v,t)=>danger(v,t)>=netThK(v,"act","feign"),run:(v,t)=>{affAdd(t,v,BAL.eff.j28.run_12);return `${v.name} niềm nở với ${NM(t)}, chuyện trò thân mật`}},
- apologise:{w:0.4,ok:(v,t)=>oan(t,v)>=netTh(t,"oan"),run:(v,t)=>{/* net-build: accepted only under the wronged one's «nguoi» level (Rộng lượng forgives deep wrongs, Thù dai / Kiêu ngạo hardly) */if(!netForgive(t,v))return netRefused(v,t,"sang xin lỗi");oanAdd(t,v,BAL.eff.j28.run_13);return `${v.name} sang xin lỗi ${NM(t)}`}},
- serveTH:{w:0.5,ok:()=>!S.thDead,run:v=>{v.th=cl((v.th||0)+2,-100,100);return `${v.name} sớm hôm hầu hạ Thái hậu`}},
+ apologise:{w:0.4,ok:(v,t)=>oan(t,v)>=netTh(t,"oan")&&netForgive(t,v)/* jmend: deep grudge → the costly roads */,run:(v,t)=>{/* net-build: accepted only under the wronged one's «nguoi» level (Rộng lượng forgives deep wrongs, Thù dai / Kiêu ngạo hardly) */if(!netForgive(t,v))return netRefused(v,t,"sang xin lỗi");oanAdd(t,v,BAL.eff.j28.run_13);return `${v.name} sang xin lỗi ${NM(t)}`}},
+ serveTH:{w:0.5,ok:()=>!S.thDead,run:v=>{spAdd(v,"th",2);return `${v.name} sớm hôm hầu hạ Thái hậu`}},
  gossip:{w:0.4,ok:v=>liveRivals(true).some(y=>y!==v&&hostility(v,y)>=netTh(v,"tell")),run:(v,t)=>{/* net-build: she spreads talk about someone she bears enough against (her «tell» level: Nhiều chuyện soon, Kín đáo hardly) */const x=pick(liveRivals(true).filter(y=>y!==v&&hostility(v,y)>=netTh(v,"tell")));if(x)ap(x,{danh:-1});return `${v.name} rỉ tai chuyện trong cung`}},
  pray:{w:0.3,ok:()=>true,run:v=>{v.pray=Math.max(v.pray||0,1);return `${v.name} lên chùa cầu khấn`}},
  idle:{w:3,ok:()=>true,run:()=>""}};
@@ -79,8 +116,12 @@ function npcSocial(v){const T=others(v);if(!T.length)return"";const t=mindPickBy
 /* the weekly news feed: deeds that show character; seen deeds may reveal a trait */
 function newsAdd(v,k,txt,toMe){S.news=S.news||[];/* npc-purpose G2: news reaches her through a real witness who chooses to tell (grudge vs the doer / liking for her), her informants (eyes), or a talkative servant of hers */
  const seen=toMe||(()=>{try{return !!npcTell(v,{place:whereOf(v)})}catch(e){return false}})()||(eyes(S)>=1&&roll(BAL.odb.j28.rbSeen+eyes(S)*8))||(S.staff||[]).some(s=>netIs(s,"talk")&&roll(30));if(!seen)return;S.news.unshift({w:wk(),id:v.id,k,t:txt});if(S.news.length>40)S.news.length=40;try{kitKnow({key:"news:"+v.id+":"+k,pri:1,text:txt})}catch(e){}/* KNOW-NOTICE: a rumour she hears = one notice */
- S.trK=S.trK||{};const T=traitsOf(v);const which=T.find(t=>PERS[t]&&PERS[t].w&&PERS[t].w[k]>1.5);if(which){const K=S.trK[v.id]=S.trK[v.id]||[];if(!K.includes(which)&&roll(35)){K.push(which);noteAdd(v.id,`Qua việc ${txt.replace(v.name+" ","")}: lộ nết ${which}`);try{kitKnow({key:"n:"+v.id,pri:2,text:`Ngươi biết ${knowWho(v)} vốn tính ${String(which).toLowerCase()}.`})}catch(e){}}}}
-function trKnown(v){S.trK=S.trK||{};if(typeof k61Kin==="function"&&k61Kin(v))return[v.tr,v.tr2].filter(Boolean).map(s=>s[0].toUpperCase()+s.slice(1));/* home family: she knows their nature */return S.trK[v.id]||[]}
+ S.trK=S.trK||{};const T=traitsOf(v);const which=nsNetOpen()?null/* news-sieve: nết is open from the start, a deed no longer «reveals» it */:T.find(t=>PERS[t]&&PERS[t].w&&PERS[t].w[k]>1.5);if(which){const K=S.trK[v.id]=S.trK[v.id]||[];if(!K.includes(which)&&roll(35)){K.push(which);noteAdd(v.id,`Qua việc ${txt.replace(v.name+" ","")}: lộ nết ${which}`);try{kitKnow({key:"n:"+v.id,pri:2,text:`Ngươi biết ${knowWho(v)} vốn tính ${String(which).toLowerCase()}.`})}catch(e){}}}}
+/* NẾT OPEN (owner OD 26/11 ~04:40Z: "những thông tin này không cần thiết phải giấu nữa"): with BAL.news.netOpen every consort's nết is known
+   from the start (trKnown = all of them); trLearned keeps the old «what she found out» list for the rules that read it (j85 ducKnown) */
+function nsNetOpen(){try{return !!(BAL.news&&BAL.news.on&&BAL.news.netOpen)}catch(e){return false}}
+function trKnown(v){if(v&&v!==S&&nsNetOpen()){try{const T=traitsOf(v);if(T&&T.length)return T.slice()}catch(e){}}return trLearned(v)}
+function trLearned(v){S.trK=S.trK||{};if(typeof k61Kin==="function"&&k61Kin(v))return[v.tr,v.tr2].filter(Boolean).map(s=>s[0].toUpperCase()+s.slice(1));/* home family: she knows their nature */return S.trK[v.id]||[]}
 function learnTrait(v,why,shown){/* shown: the caller's card already tells this nature (KNOW-NOTICE, no second notice) */const T=traitsOf(v).filter(t=>!trKnown(v).includes(t));if(!T.length)return"";const t=T[0];(S.trK[v.id]=S.trK[v.id]||[]).push(t);noteAdd(v.id,`${why}: biết nàng ${t}`,shown);try{if(!shown)kitKnow({key:"n:"+v.id,pri:2,text:`Ngươi biết ${knowWho(v)} vốn tính ${String(t).toLowerCase()}.`})}catch(e){}return t}
 /* KNOW-NOTICE: the name a notice may print for someone (never a name she has not learned) */
 function knowWho(v){try{return typeof kitKnownName==="function"&&!kitKnownName(v)?(typeof k61Desc==="function"?k61Desc(v):"một người"):v.name}catch(e){return"người ấy"}}
@@ -88,7 +129,7 @@ function knowWho(v){try{return typeof kitKnownName==="function"&&!kitKnownName(v
 /* talking to someone, her servants' reports and watching them reveal traits */
 (function(){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);try{if(v&&S.chat[v.id]>=1&&roll(30))learnTrait(v,"Chuyện trò")}catch(e){}return r}})();
 /* weekly news card section */
-function newsHTML(){const L=(S.news||[]).filter(n=>wk()-n.w<=3);if(!L.length)return"";return `<h3>Tin trong cung tuần qua</h3><div class="pcb rows">${L.slice(0,8).map(n=>{const v=RV(n.id);return `<div class="pcrow"><span>${v?mdH(pv(v),"xs"):""} ${n.t}</span></div>`}).join("")}</div>`}
+function newsHTML(){const L=(S.news||[]).filter(n=>wk()-n.w<=3&&!n.npc/* news-sieve: NPC-only deeds go to the month */);if(!L.length)return"";return `<h3>Tin trong cung tuần qua</h3><div class="pcb rows">${L.slice(0,8).map(n=>{const v=RV(n.id);return `<div class="pcrow"><span>${v?mdH(pv(v),"xs"):""} ${n.t}</span></div>`}).join("")}</div>`}
 (function(){if(typeof wkSummary!=="function")return;const w0=wkSummary;wkSummary=function(){let h=w0.apply(this,arguments);try{const n=newsHTML();if(n&&typeof h==="string")h+=n}catch(e){}return h}})();
 /* the dossier: traits hidden until learned, then a one-line 'tends to' */
 function trLine(v){const K=trKnown(v);const T=traitsOf(v);const un=T.filter(t=>!K.includes(t)).length;return (K.length?K.map(t=>`<b>${kitGloss(t)}</b>`).join(" · ")+(un?` <span class="past">(còn ${un} nết chưa rõ)</span>`:""):`<span class="past">chưa rõ</span>`)+(K.length?`<br><span class="past">Hay: ${K.map(t=>PERS[t]&&PERS[t].tend).filter(Boolean).join("; ")}</span>`:"")}

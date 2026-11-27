@@ -27,7 +27,7 @@ function asC(s,k){const G=ASN[asGrp(s)];G[k]=(G[k]||0)+1;ASN.n++}
 function asSt(s){if(s.duc==null){const T=asB().st;const ri=a=>a[0]+R(a[1]-a[0]+1);try{amSt(s)}catch(e){s.sac=s.sac||30;s.tai=s.tai||10}
   s.duc=ri(T.duc);s.tamco=ri(T.tamco);s.danh=ri(T.danh);s.suc=ri(T.suc);s.bac=ri(T.bac)}if(s.mp==null)s.mp=0;if(s.loyal==null)s.loyal=BAL.srvLoyal.base;return s}
 function asAp(s,fx){for(const k in fx||{}){const v=fx[k];if(!v)continue;if(k==="tin")s.loyal=cl((s.loyal||0)+v,0,100);else if(k==="bac")s.bac=Math.max(0,(s.bac||0)+v);
-  else if(k==="sung")s.sung=cl((s.sung||0)+v,0,100);else s[k]=cl((s[k]||0)+v,0,100)}}
+  else if(k==="sung")spAdd(s,"sung",v);else s[k]=cl((s[k]||0)+v,0,100)}}
 function asTxt(o,s,t){return t}
 /* ---------- 3 her needs ---------- */
 function asGap(g,x){return g>0?cl((g-(x||0))/g,0,1):0}
@@ -114,7 +114,7 @@ function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(
 const AS_DO={
  nvp(s){/* NPC-PURPOSE G3: a bully is a servant there who bears her a grudge (her own af < 0), the worst first; none → no bullying. A friend = the one she already likes best */
   const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));const by=npwPick(L,x=>-(((x.af||{})[s.sid])||0));if(by&&roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);s.bullyBy=by.sid;oanAdd(s,by,BAL.relMS.bully);return""}if(L.length){const x=npwPick(L,y=>1+Math.max(0,((s.af||{})[y.sid])||0));s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+BAL.ag.staff.nvpAf,-100,100)}return""},
- spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/evA(v,m,SRVA.spy.ev);return v===S?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${SRVA.spy.ev}. `:""}
+ spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/const n=chSearch(v,s,()=>evA(v,m,SRVA.spy.ev));return v===S?(n?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${n}. `:`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: ${chMissed()?chMissTxt(m):"chưa thấy điều gì sai trái"} `):""}
   if(roll(SRVA.spy.out)){asOut(s,"tgk");return asSee(m,v)?`${m===S?"Ngươi":m.name} bắt gặp ${s.name} lén lút với người của ${NM(v)}, đày xuống Tân Giả khố. `:""}return""},
  tellMis(s,m){const iv=(s.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];s.intel=(s.intel||[]).slice(1);if(iv){/*evok: servant intel, capped*/evA(m,iv,SRVA.tellMis.ev);if(m===S)return `${s.name} bẩm tin dò được về ${iv.name}: chứng cứ +${SRVA.tellMis.ev}. `}return""},
  askRec(s,m,o,ok){if(ok)servMerit(s,SRVA.askRec.mpOk);return""},
