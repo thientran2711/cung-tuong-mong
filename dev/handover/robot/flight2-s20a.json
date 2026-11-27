@@ -1,0 +1,3821 @@
+{
+ "job": {
+  "id": "flight2-s20a",
+  "origin": null,
+  "road": null,
+  "pick": null,
+  "bot": "bold",
+  "seed": 2026112553,
+  "dev": "ipad",
+  "url": "http://127.0.0.1:8920/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "f65d019b",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 1,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 189,
+    "lvl": 2,
+    "layer": ".dlg",
+    "title": "Dò hỏi ma ma"
+   }
+  ],
+  "slice": null,
+  "mgBackN": 1,
+  "mgBackQuitN": 0,
+  "builds": [
+   {
+    "s": "48ab87e6",
+    "b": "fddb4bfbce60",
+    "where": "start"
+   }
+  ],
+  "build0": {
+   "s": "48ab87e6",
+   "b": "fddb4bfbce60",
+   "t": "2026-11-27T09:35Z",
+   "at": "2026-11-27T11:13:11.844Z"
+  },
+  "pinUrl": "http://127.0.0.1:8949/",
+  "build": {
+   "s": "48ab87e6",
+   "b": "fddb4bfbce60",
+   "t": "2026-11-27T09:35Z"
+  },
+  "areaTaps": 141,
+  "bareCovered": 13,
+  "bareCoveredBy": {
+   "moving button.kbtn.k1": 1,
+   "div.kscn-veil over section#panel.panel": 8,
+   "div.kscn-veil over img#mefig.j59sz": 2,
+   "div.kscn-veil over button.tok.fig.bob": 2
+  },
+  "consoleErrN": 6,
+  "ident": {
+   "name": "Nghiêm Vân Khanh",
+   "org": "Cung nữ được sủng hạnh",
+   "born": -19,
+   "at": 1
+  },
+  "dlgScroll": 7,
+  "scrolls": 7,
+  "skipLayerTaps": 33,
+  "dlgClose": 7,
+  "infoTaps": 12,
+  "loops": 1,
+  "mgReady": 2,
+  "mgQuickSkipped": 1,
+  "boards": [
+   {
+    "at": 330,
+    "buoi": 1,
+    "kind": "huong",
+    "layer": "#kg82",
+    "moves": 0,
+    "area": 40,
+    "s": 76,
+    "res": "5/10 raw 3.35",
+    "raw": 3.3490519143009387
+   }
+  ],
+  "boardN": 1,
+  "mgBackWhy": [
+   {
+    "at": 330,
+    "buoi": 1,
+    "ph": "result",
+    "res": true,
+    "long": false,
+    "btns": [
+     "Quay lại"
+    ]
+   }
+  ],
+  "taps": 227
+ },
+ "life": {
+  "id": "Ban hoa",
+  "type": "end",
+  "fate": "Bị ban hoa, xuất cung",
+  "death": false,
+  "age": 20,
+  "year": 1,
+  "rank": 1,
+  "text": "Ngươi trở về nhà, nghề trà của gia đình vẫn đợi. Tiếng đồn ngươi từng được gọi vào cung theo ngươi cả đời.",
+  "card": [
+   "",
+   "",
+   "",
+   ""
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   "AREA 924,554",
+   "AREA 776,370",
+   "AREA 819,545",
+   "AREA 584,309",
+   "AREA 533,521",
+   "AREA 927,516",
+   "BOARD huong 0 moves 5/10 raw 3.35",
+   "#kg82 «Quay lại»",
+   ".mapsc «2Cung nhân»",
+   "AREA 590,464",
+   "SKIP TAP .kscn «» tap",
+   ".dlg «Thái hậu» «Thần thiếp khẽ gạt con côn trùng ra, rồi uống nốt,»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "dead|close button has no effect: .dlg «Tin báo» «Để sau»",
+   "type": "dead",
+   "msg": "close button has no effect: .dlg «Tin báo» «Để sau»",
+   "n": 1,
+   "at": 151,
+   "shot": "/home/user/wt/s20out/shots-flight2-s20a/noeffect-1795778137173.png"
+  },
+  {
+   "k": "stuck|no-clock loop: 150 taps without a clock step on .dlg «Dò hỏi ma ma»",
+   "type": "stuck",
+   "msg": "no-clock loop: 150 taps without a clock step on .dlg «Dò hỏi ma ma»",
+   "n": 1,
+   "at": 189,
+   "shot": "/home/user/wt/s20out/shots-flight2-s20a/loop-1.png",
+   "dump": "/home/user/wt/s20out/shots-flight2-s20a/loop-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Nghiêm Vân Khanh",
+    "org": "Cung nữ được sủng hạnh",
+    "kend": "",
+    "fate": ""
+   },
+   "buttons": [
+    "Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Thái hậu ưa gì, trọng gìGợi ýma ma kể",
+    "Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, bà kể nhiều",
+    "Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầuGợi ýma ma đ"
+   ],
+   "trace": [
+    ".dlg «Dò hỏi ma ma» «Hỏi về Hoàng thượngTốnkhôngĐượcchọn rồi xem kết qu»",
+    ".dlg «Dò hỏi ma ma» «Chọn lá này»",
+    ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»",
+    ".dlg «Dò hỏi ma ma» «Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn»",
+    ".dlg «Dò hỏi ma ma» «Đặt lại»",
+    ".dlg «Dò hỏi ma ma» «Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn»",
+    ".dlg «Dò hỏi ma ma» «Chọn lá này»",
+    ".dlg «Dò hỏi ma ma» «Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể »",
+    ".dlg «Tây sở» «Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sa»",
+    ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»",
+    ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»",
+    ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»",
+    ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»",
+    ".dlg «Dò hỏi ma ma» «Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở »",
+    ".dlg «Dò hỏi ma ma» «Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở »",
+    ".dlg «Dò hỏi ma ma» «Chọn lá này»",
+    ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»",
+    ".dlg «Dò hỏi ma ma» «Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể»",
+    ".dlg «Dò hỏi ma ma» «Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể»",
+    ".dlg «Dò hỏi ma ma» «Đặt lại»"
+   ],
+   "next": {
+    "dis": true,
+    "q": 1,
+    "mg": false,
+    "qt": [
+     "Dò hỏi ma ma"
+    ],
+    "t": "Sang buổi"
+   }
+  }
+ ],
+ "dead": [
+  {
+   "k": "NO EFFECT",
+   "screen": ".dlg «Tin báo»",
+   "label": "Để sau",
+   "cover": "tapped 3× for real, dialog stays",
+   "shot": "/home/user/wt/s20out/shots-flight2-s20a/noeffect-1795778137173.png",
+   "at": 151,
+   "S": {
+    "dead": false,
+    "y": 1,
+    "t": 0,
+    "w": 0,
+    "b": 0,
+    "age": 20,
+    "rank": 1,
+    "name": "Nghiêm Vân Khanh",
+    "org": "Cung nữ được sủng hạnh",
+    "kend": "",
+    "fate": ""
+   }
+  }
+ ],
+ "saves": [],
+ "buoi": 1,
+ "steps": 375,
+ "status": [],
+ "_loopAt": 1795778320243,
+ "_bootFirst": 1,
+ "_scr": ".kscn «»",
+ "_snapAt": 1795778316380,
+ "trace": [
+  [
+   17,
+   "AREA 440,269"
+  ],
+  [
+   18,
+   "AREA 273,590"
+  ],
+  [
+   18,
+   "AREA 642,208"
+  ],
+  [
+   19,
+   "AREA 302,175"
+  ],
+  [
+   19,
+   "AREA 889,413"
+  ],
+  [
+   19,
+   "AREA 648,287"
+  ],
+  [
+   20,
+   "AREA 695,574"
+  ],
+  [
+   20,
+   "AREA 578,303"
+  ],
+  [
+   21,
+   "AREA 670,304"
+  ],
+  [
+   21,
+   "AREA 287,339"
+  ],
+  [
+   21,
+   "AREA 929,342"
+  ],
+  [
+   22,
+   "AREA 446,622"
+  ],
+  [
+   22,
+   "AREA 437,530"
+  ],
+  [
+   23,
+   "AREA 709,488"
+  ],
+  [
+   23,
+   "AREA 846,387"
+  ],
+  [
+   23,
+   "AREA 524,339"
+  ],
+  [
+   24,
+   "AREA 769,642"
+  ],
+  [
+   24,
+   "AREA 407,216"
+  ],
+  [
+   25,
+   "AREA 667,288"
+  ],
+  [
+   25,
+   "AREA 504,331"
+  ],
+  [
+   25,
+   "AREA 466,386"
+  ],
+  [
+   26,
+   "AREA 712,533"
+  ],
+  [
+   26,
+   "AREA 928,554"
+  ],
+  [
+   27,
+   "AREA 752,623"
+  ],
+  [
+   27,
+   "AREA 421,317"
+  ],
+  [
+   27,
+   "AREA 369,344"
+  ],
+  [
+   28,
+   "AREA 399,448"
+  ],
+  [
+   28,
+   "AREA 242,467"
+  ],
+  [
+   29,
+   "AREA 817,314"
+  ],
+  [
+   29,
+   "AREA 758,331"
+  ],
+  [
+   29,
+   "AREA 540,217"
+  ],
+  [
+   30,
+   "AREA 424,205"
+  ],
+  [
+   30,
+   "AREA 378,270"
+  ],
+  [
+   31,
+   "AREA 753,377"
+  ],
+  [
+   31,
+   "AREA 514,486"
+  ],
+  [
+   31,
+   "AREA 518,251"
+  ],
+  [
+   32,
+   "AREA 943,221"
+  ],
+  [
+   32,
+   "AREA 485,313"
+  ],
+  [
+   33,
+   "AREA 968,283"
+  ],
+  [
+   33,
+   "AREA 816,414"
+  ],
+  [
+   33,
+   "AREA 445,193"
+  ],
+  [
+   34,
+   "AREA 556,561"
+  ],
+  [
+   34,
+   "AREA 234,404"
+  ],
+  [
+   35,
+   "AREA 391,361"
+  ],
+  [
+   35,
+   "AREA 353,270"
+  ],
+  [
+   35,
+   "AREA 288,369"
+  ],
+  [
+   36,
+   "AREA 665,293"
+  ],
+  [
+   36,
+   "AREA 287,227"
+  ],
+  [
+   37,
+   "AREA 466,454"
+  ],
+  [
+   37,
+   "AREA 608,554"
+  ],
+  [
+   37,
+   "AREA 743,458"
+  ],
+  [
+   38,
+   "AREA 653,498"
+  ],
+  [
+   38,
+   "AREA 906,551"
+  ],
+  [
+   39,
+   "AREA 391,445"
+  ],
+  [
+   39,
+   "AREA 487,351"
+  ],
+  [
+   39,
+   "AREA 854,395"
+  ],
+  [
+   40,
+   "AREA 626,553"
+  ],
+  [
+   40,
+   "AREA 466,643"
+  ],
+  [
+   41,
+   "AREA 867,193"
+  ],
+  [
+   41,
+   "AREA 862,619"
+  ],
+  [
+   41,
+   "AREA 932,575"
+  ],
+  [
+   42,
+   "AREA 633,244"
+  ],
+  [
+   42,
+   "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»"
+  ],
+  [
+   43,
+   ".dlg «Chọn sổ» «Bắt đầu kiếp mới»"
+  ],
+  [
+   49,
+   "#klife «Vào cung ngay»"
+  ],
+  [
+   50,
+   "#kroul «Tiếp»"
+  ],
+  [
+   50,
+   "#kroul «Bỏ qua»"
+  ],
+  [
+   53,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   53,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   54,
+   ".dlg «Thân phận kiếp này» «Dung mạo 26»"
+  ],
+  [
+   54,
+   ".kscn «Lui»"
+  ],
+  [
+   56,
+   ".dlg «Thân phận kiếp này» «Dung mạo 20»"
+  ],
+  [
+   56,
+   ".kscn «Lui»"
+  ],
+  [
+   58,
+   ".dlg «Thân phận kiếp này» «Dung mạo 21»"
+  ],
+  [
+   58,
+   ".kscn «Lui»"
+  ],
+  [
+   59,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   60,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   60,
+   ".dlg «Thân phận kiếp này» «Dung mạo 16»"
+  ],
+  [
+   60,
+   ".kscn «Lui»"
+  ],
+  [
+   62,
+   ".dlg «Thân phận kiếp này» «Dung mạo 23»"
+  ],
+  [
+   62,
+   ".kscn «Lui»"
+  ],
+  [
+   64,
+   ".dlg «Thân phận kiếp này» «Dung mạo 24»"
+  ],
+  [
+   64,
+   ".kscn «Lui»"
+  ],
+  [
+   66,
+   ".dlg «Thân phận kiếp này» «Dung mạo 20»"
+  ],
+  [
+   66,
+   ".kscn «Lui»"
+  ],
+  [
+   67,
+   ".dlg «Thân phận kiếp này» «Trang sau»"
+  ],
+  [
+   68,
+   ".dlg «Thân phận kiếp này» «Dung mạo cung nữ 5»"
+  ],
+  [
+   68,
+   ".kscn «Lui»"
+  ],
+  [
+   70,
+   ".dlg «Thân phận kiếp này» «Dung mạo 28»"
+  ],
+  [
+   70,
+   ".kscn «Lui»"
+  ],
+  [
+   71,
+   ".dlg «Thân phận kiếp này» «Trang sau»"
+  ],
+  [
+   72,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   72,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   72,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   73,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   73,
+   ".dlg «Thân phận kiếp này» «Dung mạo 32»"
+  ],
+  [
+   73,
+   ".kscn «Lui»"
+  ],
+  [
+   75,
+   ".dlg «Thân phận kiếp này» «Dễ»"
+  ],
+  [
+   76,
+   ".dlg «Thân phận kiếp này» «Dung mạo 17»"
+  ],
+  [
+   76,
+   ".kscn «Lui»"
+  ],
+  [
+   77,
+   ".dlg «Thân phận kiếp này» «Dung mạo 22»"
+  ],
+  [
+   78,
+   ".kscn «Lui»"
+  ],
+  [
+   79,
+   ".dlg «Thân phận kiếp này» «Dung mạo 19»"
+  ],
+  [
+   80,
+   ".kscn «Lui»"
+  ],
+  [
+   81,
+   ".dlg «Thân phận kiếp này» «Dung mạo 25»"
+  ],
+  [
+   81,
+   ".kscn «Lui»"
+  ],
+  [
+   83,
+   ".dlg «Thân phận kiếp này» «Dung mạo 22»"
+  ],
+  [
+   83,
+   ".kscn «Lui»"
+  ],
+  [
+   85,
+   ".dlg «Thân phận kiếp này» «Dung mạo 16»"
+  ],
+  [
+   85,
+   ".kscn «Lui»"
+  ],
+  [
+   87,
+   ".dlg «Thân phận kiếp này» «Dung mạo 21»"
+  ],
+  [
+   87,
+   ".kscn «Lui»"
+  ],
+  [
+   88,
+   ".dlg «Thân phận kiếp này» «Dung mạo 27»"
+  ],
+  [
+   89,
+   ".kscn «Lui»"
+  ],
+  [
+   90,
+   ".dlg «Thân phận kiếp này» «Trang trước»"
+  ],
+  [
+   91,
+   ".dlg «Thân phận kiếp này» «Khó»"
+  ],
+  [
+   91,
+   ".dlg «Thân phận kiếp này» «Dung mạo 18»"
+  ],
+  [
+   91,
+   ".kscn «Lui»"
+  ],
+  [
+   93,
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+  ],
+  [
+   94,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 1/4» «Tiếp theo»"
+  ],
+  [
+   94,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 2/4» «Tiếp theo»"
+  ],
+  [
+   95,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 3/4» «Tiếp theo»"
+  ],
+  [
+   95,
+   ".dlg «Tiền truyện · Cung nữ được sủng hạnh · 4/4» «Vào cung»"
+  ],
+  [
+   97,
+   "AREA 590,410"
+  ],
+  [
+   97,
+   "SKIP TAP .kmov «» tap"
+  ],
+  [
+   98,
+   ".kmov «Tiếp theo»"
+  ],
+  [
+   100,
+   ".dlg «Ngày thứ nhất — Nhập cung» «Theo thái giám vào cửa việnTốn2 khắcĐượcvào Dưỡng »"
+  ],
+  [
+   100,
+   "AREA 590,464"
+  ],
+  [
+   100,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   101,
+   "AREA 590,464"
+  ],
+  [
+   101,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   102,
+   "AREA 590,464"
+  ],
+  [
+   102,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   103,
+   "AREA 590,464"
+  ],
+  [
+   103,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   104,
+   "AREA 590,464"
+  ],
+  [
+   104,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   105,
+   "AREA 590,464"
+  ],
+  [
+   105,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   106,
+   "AREA 590,464"
+  ],
+  [
+   106,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   108,
+   "AREA 590,464"
+  ],
+  [
+   108,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   109,
+   "AREA 590,464"
+  ],
+  [
+   109,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   110,
+   "AREA 590,464"
+  ],
+  [
+   110,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   111,
+   "AREA 590,464"
+  ],
+  [
+   111,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   112,
+   "AREA 590,464"
+  ],
+  [
+   112,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   113,
+   "AREA 590,464"
+  ],
+  [
+   113,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   114,
+   "AREA 590,464"
+  ],
+  [
+   114,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   115,
+   "AREA 590,464"
+  ],
+  [
+   115,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   116,
+   "AREA 590,464"
+  ],
+  [
+   116,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   117,
+   "AREA 590,464"
+  ],
+  [
+   117,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   118,
+   "AREA 590,464"
+  ],
+  [
+   118,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   119,
+   "AREA 590,464"
+  ],
+  [
+   119,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   120,
+   "AREA 590,464"
+  ],
+  [
+   120,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   123,
+   "AREA 292,568"
+  ],
+  [
+   125,
+   ".dlg «Dưỡng Tú viện» «Cất đồ, ra Tiền sảnhTốn1 khắcĐượcra học quy củ với»"
+  ],
+  [
+   125,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 3 người.» «Tiếp ▸»"
+  ],
+  [
+   126,
+   ".dlg «Tiền sảnh» «Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo t»"
+  ],
+  [
+   127,
+   ".dlg «Tiền sảnh» «Tập cho thuộc rồi thôiTốn2 khắcĐượcĐức +Gợi ýĐức +»"
+  ],
+  [
+   127,
+   ".dlg «Tiền sảnh» «Đặt lại»"
+  ],
+  [
+   127,
+   ".dlg «Tiền sảnh» «Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +»"
+  ],
+  [
+   128,
+   ".dlg «Tiền sảnh» «Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo t»"
+  ],
+  [
+   128,
+   ".dlg «Tiền sảnh» «Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +»"
+  ],
+  [
+   129,
+   ".dlg «Tiền sảnh» «Đặt lại»"
+  ],
+  [
+   129,
+   ".dlg «Tiền sảnh» «Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo t»"
+  ],
+  [
+   129,
+   ".dlg «Tiền sảnh» «Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo t»"
+  ],
+  [
+   129,
+   ".dlg «Tiền sảnh» «Tập cho thuộc rồi thôiTốn2 khắcĐượcĐức +Gợi ýĐức +»"
+  ],
+  [
+   130,
+   ".dlg «Tiền sảnh» «Tập cho thuộc rồi thôiTốn2 khắcĐượcĐức +Gợi ýĐức +»"
+  ],
+  [
+   130,
+   ".dlg «Tiền sảnh» «Tập cho thuộc rồi thôiTốn2 khắcĐượcĐức +Gợi ýĐức +»"
+  ],
+  [
+   131,
+   ".dlg «Tiền sảnh» «Đặt lại»"
+  ],
+  [
+   131,
+   ".dlg «Tiền sảnh» «Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +»"
+  ],
+  [
+   131,
+   ".dlg «Tiền sảnh» «Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +»"
+  ],
+  [
+   132,
+   ".dlg «Tiền sảnh» «Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +»"
+  ],
+  [
+   132,
+   ".dlg «Tiền sảnh» «Chọn lá này»"
+  ],
+  [
+   134,
+   "ZERO Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +"
+  ],
+  [
+   135,
+   "page «Dưỡng Tú viện · Đông sở · Ở đây có 3 người.» «Tiếp ▸»"
+  ],
+  [
+   137,
+   ".dlg «Đông sở» «Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàn»"
+  ],
+  [
+   137,
+   ".dlg «Đông sở» «Đặt lại»"
+  ],
+  [
+   138,
+   ".dlg «Đông sở» «Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàn»"
+  ],
+  [
+   138,
+   ".dlg «Đông sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối,»"
+  ],
+  [
+   139,
+   ".dlg «Đông sở» «Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi»"
+  ],
+  [
+   139,
+   ".dlg «Đông sở» «Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sa»"
+  ],
+  [
+   140,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   141,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   142,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   142,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   143,
+   ".mapsc «‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mườ»"
+  ],
+  [
+   143,
+   ".mapsc «Tin báo: 3 tin mới»"
+  ],
+  [
+   145,
+   ".dlg «Tin báo» «Để sau»"
+  ],
+  [
+   147,
+   ".dlg «Tin báo» «Để sau»"
+  ],
+  [
+   149,
+   ".dlg «Tin báo» «Để sau»"
+  ],
+  [
+   151,
+   ".dlg «Tin báo» «Để sau»"
+  ],
+  [
+   153,
+   ".dlg «Tin báo» «Chọn lá này»"
+  ],
+  [
+   155,
+   "ZERO Để sau"
+  ],
+  [
+   159,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   160,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   160,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   161,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   161,
+   ".mapsc «Tư trang»"
+  ],
+  [
+   163,
+   ".dlg «Đông sở» «Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sa»"
+  ],
+  [
+   163,
+   ".mapsc «Hoàng tự»"
+  ],
+  [
+   163,
+   ".dlg «Đông sở» «Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàn»"
+  ],
+  [
+   164,
+   ".dlg «Đông sở» «Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!»"
+  ],
+  [
+   164,
+   ".dlg «Đông sở» «Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi»"
+  ],
+  [
+   164,
+   ".dlg «Đông sở» «Đặt lại»"
+  ],
+  [
+   164,
+   ".dlg «Đông sở» «Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sa»"
+  ],
+  [
+   165,
+   ".mapsc «Đông sở4 bóng người»"
+  ],
+  [
+   165,
+   ".dlg «Đông sở» «Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàn»"
+  ],
+  [
+   166,
+   ".mapsc «Tai mắt0»"
+  ],
+  [
+   167,
+   ".mapsc «Tây sở3 bóng ngườitốn: một khắc»"
+  ],
+  [
+   168,
+   ".dlg «Tây sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối,»"
+  ],
+  [
+   168,
+   ".dlg «Tây sở» «Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi»"
+  ],
+  [
+   168,
+   ".dlg «Tây sở» «Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi»"
+  ],
+  [
+   169,
+   ".dlg «Tây sở» «Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!»"
+  ],
+  [
+   169,
+   ".dlg «Tây sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối,»"
+  ],
+  [
+   169,
+   ".dlg «Tây sở» «Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàn»"
+  ],
+  [
+   169,
+   ".dlg «Tây sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối,»"
+  ],
+  [
+   170,
+   ".dlg «Tây sở» «Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!»"
+  ],
+  [
+   170,
+   ".dlg «Tây sở» «Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi»"
+  ],
+  [
+   170,
+   ".dlg «Tây sở» «Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sa»"
+  ],
+  [
+   171,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   171,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   172,
+   ".mapsc «Tài nghệ»"
+  ],
+  [
+   172,
+   ".dlg «Tây sở» «Chọn lá này»"
+  ],
+  [
+   175,
+   ".dlg «Dò hỏi ma ma» «Chọn lá này»"
+  ],
+  [
+   175,
+   ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»"
+  ],
+  [
+   175,
+   ".dlg «Dò hỏi ma ma» «Hỏi về Hoàng thượngTốnkhôngĐượcchọn rồi xem kết qu»"
+  ],
+  [
+   175,
+   ".dlg «Dò hỏi ma ma» «Chọn lá này»"
+  ],
+  [
+   176,
+   ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»"
+  ],
+  [
+   178,
+   ".dlg «Dò hỏi ma ma» «Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn»"
+  ],
+  [
+   178,
+   ".dlg «Dò hỏi ma ma» «Đặt lại»"
+  ],
+  [
+   179,
+   ".dlg «Dò hỏi ma ma» «Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn»"
+  ],
+  [
+   179,
+   ".dlg «Dò hỏi ma ma» «Chọn lá này»"
+  ],
+  [
+   179,
+   ".dlg «Dò hỏi ma ma» «Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể »"
+  ],
+  [
+   181,
+   ".dlg «Tây sở» «Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sa»"
+  ],
+  [
+   184,
+   ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»"
+  ],
+  [
+   184,
+   ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»"
+  ],
+  [
+   184,
+   ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»"
+  ],
+  [
+   185,
+   ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»"
+  ],
+  [
+   185,
+   ".dlg «Dò hỏi ma ma» «Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở »"
+  ],
+  [
+   185,
+   ".dlg «Dò hỏi ma ma» «Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở »"
+  ],
+  [
+   185,
+   ".dlg «Dò hỏi ma ma» «Chọn lá này»"
+  ],
+  [
+   186,
+   ".dlg «Dò hỏi ma ma» «Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông đượ»"
+  ],
+  [
+   188,
+   ".dlg «Dò hỏi ma ma» «Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể»"
+  ],
+  [
+   188,
+   ".dlg «Dò hỏi ma ma» «Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể»"
+  ],
+  [
+   189,
+   ".dlg «Dò hỏi ma ma» «Đặt lại»"
+  ],
+  [
+   189,
+   ".dlg «unstick Giúp ma ma việc vặt cho bà vui»"
+  ],
+  [
+   190,
+   ".dlg «Dò hỏi ma ma» «Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể »"
+  ],
+  [
+   190,
+   ".dlg «Dò hỏi ma ma» «Chọn lá này»"
+  ],
+  [
+   191,
+   ".dlg «Dò hỏi ma ma» «Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể»"
+  ],
+  [
+   191,
+   ".dlg «Tây sở» «Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!»"
+  ],
+  [
+   192,
+   ".dlg «Tây sở» «Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!»"
+  ],
+  [
+   192,
+   ".dlg «Tây sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối,»"
+  ],
+  [
+   192,
+   ".dlg «Tây sở» «Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi»"
+  ],
+  [
+   192,
+   ".dlg «Tây sở» «Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sa»"
+  ],
+  [
+   193,
+   ".mapsc «Tây sở4 bóng người»"
+  ],
+  [
+   193,
+   ".dlg «Tây sở» «Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàn»"
+  ],
+  [
+   194,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   194,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   195,
+   ".mapsc «Đông sở2 bóng người»"
+  ],
+  [
+   195,
+   ".dlg «Đông sở» «Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàn»"
+  ],
+  [
+   195,
+   ".dlg «Đông sở» «Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi»"
+  ],
+  [
+   196,
+   ".dlg «Đông sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối,»"
+  ],
+  [
+   196,
+   ".dlg «Đông sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối,»"
+  ],
+  [
+   196,
+   ".dlg «Đông sở» «Đặt lại»"
+  ],
+  [
+   196,
+   ".dlg «Đông sở» «Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!»"
+  ],
+  [
+   197,
+   ".dlg «Đông sở» «Đặt lại»"
+  ],
+  [
+   197,
+   ".dlg «Đông sở» «Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sa»"
+  ],
+  [
+   197,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   198,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   198,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   199,
+   ".mapsc «Nguy hiểm chung: 0»"
+  ],
+  [
+   199,
+   ".mapsc «sương sớm»"
+  ],
+  [
+   202,
+   ".mapsc «Xét phẩm: thiếu 4»"
+  ],
+  [
+   204,
+   ".dlg «Xét phẩm cuối tháng · Quý nhân» «Lui»"
+  ],
+  [
+   206,
+   ".mapsc «Tiền sảnh3 bóng ngườitốn: một khắc»"
+  ],
+  [
+   207,
+   ".dlg «Tiền sảnh» «Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!»"
+  ],
+  [
+   208,
+   ".dlg «Tiền sảnh» «Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi»"
+  ],
+  [
+   208,
+   ".dlg «Tiền sảnh» «Đặt lại»"
+  ],
+  [
+   208,
+   ".dlg «Tiền sảnh» «Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi»"
+  ],
+  [
+   209,
+   ".dlg «Tiền sảnh» «Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi»"
+  ],
+  [
+   209,
+   ".dlg «Tiền sảnh» «Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàn»"
+  ],
+  [
+   209,
+   ".dlg «Tiền sảnh» «Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàn»"
+  ],
+  [
+   209,
+   ".dlg «Tiền sảnh» «Đặt lại»"
+  ],
+  [
+   210,
+   ".dlg «Tiền sảnh» «Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàn»"
+  ],
+  [
+   210,
+   ".dlg «Tiền sảnh» «Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!»"
+  ],
+  [
+   210,
+   ".dlg «Tiền sảnh» «Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!»"
+  ],
+  [
+   210,
+   ".dlg «Tiền sảnh» «Chọn lá này»"
+  ],
+  [
+   211,
+   ".dlg «Tiền sảnh» «Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sa»"
+  ],
+  [
+   214,
+   ".dlg «Tiền sảnh» «Ta cười xòa, coi như chuyện đùa.TốnkhôngĐượcđỡ tốn»"
+  ],
+  [
+   214,
+   ".dlg «Tiền sảnh» «Ta đáp thẳng, không để ai đổ oan.Tốn1 khắcĐượcĐức »"
+  ],
+  [
+   215,
+   ".dlg «Tiền sảnh» «Ta xin ma ma phân xử.Tốn2 khắcĐượcGiáo tập ma ma c»"
+  ],
+  [
+   215,
+   ".dlg «Tiền sảnh» «Ta nhịn, cúi đầu cho qua chuyện.Tốn1 khắcĐượcmột v»"
+  ],
+  [
+   215,
+   ".dlg «Tiền sảnh» «Ta cười xòa, coi như chuyện đùa.TốnkhôngĐượcđỡ tốn»"
+  ],
+  [
+   216,
+   ".dlg «Tiền sảnh» «Đặt lại»"
+  ],
+  [
+   216,
+   ".dlg «Tiền sảnh» «Ta xin ma ma phân xử.Tốn2 khắcĐượcGiáo tập ma ma c»"
+  ],
+  [
+   217,
+   ".dlg «Tiền sảnh» «Ta đáp thẳng, không để ai đổ oan.Tốn1 khắcĐượcĐức »"
+  ],
+  [
+   217,
+   ".dlg «Tiền sảnh» «Ta xin ma ma phân xử.Tốn2 khắcĐượcGiáo tập ma ma c»"
+  ],
+  [
+   217,
+   ".dlg «Tiền sảnh» «Ta cười xòa, coi như chuyện đùa.TốnkhôngĐượcđỡ tốn»"
+  ],
+  [
+   218,
+   ".dlg «Tiền sảnh» «Ta đáp thẳng, không để ai đổ oan.Tốn1 khắcĐượcĐức »"
+  ],
+  [
+   218,
+   ".dlg «Tiền sảnh» «Đặt lại»"
+  ],
+  [
+   218,
+   ".dlg «Tiền sảnh» «Ta nhịn, cúi đầu cho qua chuyện.Tốn1 khắcĐượcmột v»"
+  ],
+  [
+   219,
+   ".dlg «Tiền sảnh» «Ta nhịn, cúi đầu cho qua chuyện.Tốn1 khắcĐượcmột v»"
+  ],
+  [
+   219,
+   ".dlg «Tiền sảnh» «Chọn lá này»"
+  ],
+  [
+   221,
+   "ZERO Ta cười xòa, coi như chuyện đùa.TốnkhôngĐượcđỡ tốn"
+  ],
+  [
+   225,
+   ".dlg «Đêm» «NgủTốnkhôngĐượcSức +Gợi ýSức +!»"
+  ],
+  [
+   228,
+   ".dlg «Ngày thứ hai — Điện tuyển» «Ngồi trước gương điểm trang»"
+  ],
+  [
+   228,
+   "#kg82 «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   229,
+   "#kg82 «Mặc bộ này»"
+  ],
+  [
+   229,
+   "#kg82 «Để mặt mộc»"
+  ],
+  [
+   230,
+   "AREA 590,410"
+  ],
+  [
+   230,
+   "SKIP TAP .kmov «» tap"
+  ],
+  [
+   231,
+   ".kmov «Tiếp theo»"
+  ],
+  [
+   233,
+   "GONE Tiếp theo"
+  ],
+  [
+   233,
+   "#kg82 «Đã hiểu»"
+  ],
+  [
+   234,
+   ".dlg «Sân chờ» «Đứng yên giữ sức»"
+  ],
+  [
+   237,
+   ".dlg «Sân chờ» «Ta xin ma ma phân xử.»"
+  ],
+  [
+   239,
+   ".dlg «Sân chờ» «Đứng yên giữ sức»"
+  ],
+  [
+   240,
+   "AREA 590,464"
+  ],
+  [
+   240,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   241,
+   "AREA 590,464"
+  ],
+  [
+   241,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   242,
+   "AREA 590,464"
+  ],
+  [
+   242,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   243,
+   "AREA 590,464"
+  ],
+  [
+   243,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   244,
+   "AREA 590,464"
+  ],
+  [
+   244,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   245,
+   "AREA 590,464"
+  ],
+  [
+   245,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   246,
+   "AREA 590,464"
+  ],
+  [
+   246,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   247,
+   "AREA 590,464"
+  ],
+  [
+   247,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   248,
+   "AREA 590,464"
+  ],
+  [
+   248,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   249,
+   "AREA 590,464"
+  ],
+  [
+   249,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   251,
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»"
+  ],
+  [
+   252,
+   ".dlg «Thái hậu» «Nên học đọc sách, biết chữ thì mới hiểu đạo lý và »"
+  ],
+  [
+   253,
+   ".dlg «Hoàng thượng» «Pha một chén trà dâng lên»"
+  ],
+  [
+   254,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   257,
+   "AREA 633,249"
+  ],
+  [
+   259,
+   "AREA 901,434"
+  ],
+  [
+   261,
+   "AREA 764,394"
+  ],
+  [
+   263,
+   "AREA 636,248"
+  ],
+  [
+   265,
+   "AREA 535,258"
+  ],
+  [
+   267,
+   "AREA 630,319"
+  ],
+  [
+   268,
+   "AREA 914,443"
+  ],
+  [
+   270,
+   "AREA 533,320"
+  ],
+  [
+   272,
+   "AREA 600,365"
+  ],
+  [
+   274,
+   "AREA 547,253"
+  ],
+  [
+   276,
+   "AREA 525,394"
+  ],
+  [
+   278,
+   "AREA 824,488"
+  ],
+  [
+   279,
+   "AREA 893,249"
+  ],
+  [
+   281,
+   "AREA 691,346"
+  ],
+  [
+   283,
+   "AREA 912,527"
+  ],
+  [
+   285,
+   "AREA 912,452"
+  ],
+  [
+   287,
+   "AREA 657,529"
+  ],
+  [
+   289,
+   "AREA 930,531"
+  ],
+  [
+   290,
+   "AREA 743,299"
+  ],
+  [
+   292,
+   "AREA 761,364"
+  ],
+  [
+   294,
+   "AREA 578,463"
+  ],
+  [
+   296,
+   "AREA 741,350"
+  ],
+  [
+   298,
+   "AREA 829,439"
+  ],
+  [
+   300,
+   "AREA 842,549"
+  ],
+  [
+   301,
+   "AREA 731,252"
+  ],
+  [
+   303,
+   "AREA 821,428"
+  ],
+  [
+   305,
+   "AREA 850,326"
+  ],
+  [
+   307,
+   "AREA 692,291"
+  ],
+  [
+   309,
+   "AREA 675,264"
+  ],
+  [
+   311,
+   "AREA 615,444"
+  ],
+  [
+   313,
+   "AREA 895,387"
+  ],
+  [
+   314,
+   "AREA 629,473"
+  ],
+  [
+   316,
+   "AREA 896,465"
+  ],
+  [
+   318,
+   "AREA 650,540"
+  ],
+  [
+   320,
+   "AREA 924,554"
+  ],
+  [
+   322,
+   "AREA 776,370"
+  ],
+  [
+   324,
+   "AREA 819,545"
+  ],
+  [
+   325,
+   "AREA 584,309"
+  ],
+  [
+   327,
+   "AREA 533,521"
+  ],
+  [
+   329,
+   "AREA 927,516"
+  ],
+  [
+   330,
+   "BOARD huong 0 moves 5/10 raw 3.35"
+  ],
+  [
+   330,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   332,
+   ".mapsc «2Cung nhân»"
+  ],
+  [
+   332,
+   "AREA 590,464"
+  ],
+  [
+   332,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   333,
+   ".dlg «Thái hậu» «Thần thiếp khẽ gạt con côn trùng ra, rồi uống nốt,»"
+  ]
+ ],
+ "_lastOpen": "Thần thiếp khẽ gạt con côn trùng ra, rồi",
+ "_lastOpenScr": ".dlg «Thái hậu»",
+ "_started": true,
+ "_clk": {
+  "1.0.0.0": 1
+ },
+ "_maxClk": "1.0.0.0",
+ "_ckAt": 1795778214127,
+ "_ckB": 1,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1715,
+   "rendererMB": 550,
+   "heapMB": 111,
+   "dom": 2473,
+   "q": 3,
+   "lsK": 5
+  },
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 2377,
+   "rendererMB": 1105,
+   "heapMB": 111,
+   "dom": 867,
+   "q": 1,
+   "lsK": 126
+  }
+ ],
+ "consoleErr": [
+  {
+   "at": 46,
+   "buoi": 1,
+   "t": "Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp"
+  },
+  {
+   "at": 99,
+   "buoi": 1,
+   "t": "Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/vui.webp"
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  ".kscn|",
+  ".dlg|Tiền truyện · Cung nữ được sủng hạnh · #",
+  "#modal|Ngày thứ nhất — Nhập cung",
+  ".kmov|",
+  ".dlg|Ngày thứ nhất — Nhập cung",
+  ".dlg|Dưỡng Tú viện",
+  "page|Dưỡng Tú viện · Tiền sảnh · Ở đây có # n",
+  ".dlg|Tiền sảnh",
+  "page|Dưỡng Tú viện · Đông sở · Ở đây có # ngư",
+  "#modal|Đông sở",
+  ".dlg|Đông sở",
+  ".mapsc|",
+  "#modal|Tin báo",
+  ".dlg|Tin báo",
+  ".dlg|Tây sở",
+  "page|Dưỡng Tú viện · Tây sở · Ở đây có # ngườ",
+  ".dlg|Dò hỏi ma ma",
+  "#modal|Xét phẩm cuối tháng · Quý nhân",
+  ".dlg|Xét phẩm cuối tháng · Quý nhân",
+  ".dlg|Đêm",
+  ".dlg|Ngày thứ hai — Điện tuyển",
+  "#kg82|",
+  ".dlg|Sân chờ",
+  ".dlg|Điện tuyển",
+  ".dlg|Thái hậu",
+  ".dlg|Hoàng thượng"
+ ],
+ "_momRank": 1,
+ "_kipG": {},
+ "_kipOpen": null,
+ "_unsFail": {
+  "#klife|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Cung nữ được sủng hạnh · #/#": {},
+  ".dlg|Ngày thứ nhất — Nhập cung": {},
+  ".dlg|Dưỡng Tú viện": {},
+  ".dlg|Tiền sảnh": {},
+  ".dlg|Đông sở": {},
+  ".mapsc|": {},
+  ".dlg|Tin báo": {
+   "Để sau": 4
+  },
+  ".dlg|Tây sở": {},
+  ".dlg|Dò hỏi ma ma": {
+   "Giúp ma ma việc vặt cho bà vui lòng rồi ": 1
+  },
+  ".dlg|Đêm": {},
+  ".dlg|Ngày thứ hai — Điện tuyển": {},
+  ".kmov|": {},
+  ".dlg|Sân chờ": {},
+  ".dlg|Điện tuyển": {},
+  ".dlg|Thái hậu": {},
+  ".dlg|Hoàng thượng": {}
+ },
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|871,392": {
+   "left": 363,
+   "n": 3
+  },
+  ".mapsc||590,463": {
+   "left": 161,
+   "n": 3
+  },
+  "#kg82||727,425": {
+   "left": 179,
+   "n": 1
+  }
+ },
+ "choicePts": [
+  {
+   "k": ".dlg|Thân phận kiếp này|Dung mạo 15/Dung mạo 16/Dung mạo 17/Dung mạo 18/Dung mạo 19/Dung mạo 20/Dung mạo 21/Dung mạo 22/Dung mạo 23/Dung mạo 24/Dung mạo 25/Dung mạo 26/Dung mạo 27/Dung mạo 28/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Trang trước/Vừa",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Trang trước",
+    "Dung mạo 15",
+    "Dung mạo 16",
+    "Dung mạo 17",
+    "Dung mạo 18",
+    "Dung mạo 19",
+    "Dung mạo 20",
+    "Dung mạo 21",
+    "Dung mạo 22",
+    "Dung mạo 23",
+    "Dung mạo 24",
+    "Dung mạo 25",
+    "Dung mạo 26",
+    "Dung mạo 27",
+    "Dung mạo 28",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Khó",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Khó": 4,
+    "Dung mạo 26": 1,
+    "Dung mạo 20": 1,
+    "Dung mạo 21": 1
+   },
+   "n": 7
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Dung mạo 15/Dung mạo 16/Dung mạo 17/Dung mạo 18/Dung mạo 19/Dung mạo 20/Dung mạo 21/Dung mạo 22/Dung mạo 23/Dung mạo 24/Dung mạo 25/Dung mạo 26/Dung mạo 27/Dung mạo 28/Dễ/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Trang trước/Vừa",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Trang trước",
+    "Dung mạo 15",
+    "Dung mạo 16",
+    "Dung mạo 17",
+    "Dung mạo 18",
+    "Dung mạo 19",
+    "Dung mạo 20",
+    "Dung mạo 21",
+    "Dung mạo 22",
+    "Dung mạo 23",
+    "Dung mạo 24",
+    "Dung mạo 25",
+    "Dung mạo 26",
+    "Dung mạo 27",
+    "Dung mạo 28",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dung mạo 16": 2,
+    "Dung mạo 23": 1,
+    "Dung mạo 24": 1,
+    "Dung mạo 20": 1,
+    "Trang sau": 2,
+    "Dung mạo 28": 1,
+    "Dễ": 1,
+    "Dung mạo 17": 1,
+    "Dung mạo 22": 2,
+    "Dung mạo 19": 1,
+    "Dung mạo 25": 1,
+    "Dung mạo 21": 1,
+    "Dung mạo 27": 1,
+    "Trang trước": 1
+   },
+   "n": 17
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Dung mạo 29/Dung mạo 30/Dung mạo 31/Dung mạo 32/Dung mạo cung nữ 1/Dung mạo cung nữ 10/Dung mạo cung nữ 2/Dung mạo cung nữ 3/Dung mạo cung nữ 4/Dung mạo cung nữ 5/Dung mạo cung nữ 6/Dung mạo cung nữ 7/Dung mạo cung nữ 8/Dung mạo cung nữ 9/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Trang trước/Vừa",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Trang trước",
+    "Dung mạo 29",
+    "Dung mạo 30",
+    "Dung mạo 31",
+    "Dung mạo 32",
+    "Dung mạo cung nữ 1",
+    "Dung mạo cung nữ 2",
+    "Dung mạo cung nữ 3",
+    "Dung mạo cung nữ 4",
+    "Dung mạo cung nữ 5",
+    "Dung mạo cung nữ 6",
+    "Dung mạo cung nữ 7",
+    "Dung mạo cung nữ 8",
+    "Dung mạo cung nữ 9",
+    "Dung mạo cung nữ 10",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Khó",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dung mạo cung nữ 5": 1,
+    "Khó": 4
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Dung mạo 29/Dung mạo 30/Dung mạo 31/Dung mạo 32/Dung mạo cung nữ 1/Dung mạo cung nữ 10/Dung mạo cung nữ 2/Dung mạo cung nữ 3/Dung mạo cung nữ 4/Dung mạo cung nữ 5/Dung mạo cung nữ 6/Dung mạo cung nữ 7/Dung mạo cung nữ 8/Dung mạo cung nữ 9/Dễ/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Trang trước/Vừa",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Trang trước",
+    "Dung mạo 29",
+    "Dung mạo 30",
+    "Dung mạo 31",
+    "Dung mạo 32",
+    "Dung mạo cung nữ 1",
+    "Dung mạo cung nữ 2",
+    "Dung mạo cung nữ 3",
+    "Dung mạo cung nữ 4",
+    "Dung mạo cung nữ 5",
+    "Dung mạo cung nữ 6",
+    "Dung mạo cung nữ 7",
+    "Dung mạo cung nữ 8",
+    "Dung mạo cung nữ 9",
+    "Dung mạo cung nữ 10",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dung mạo 32": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Dung mạo 1/Dung mạo 10/Dung mạo 11/Dung mạo 12/Dung mạo 13/Dung mạo 14/Dung mạo 2/Dung mạo 3/Dung mạo 4/Dung mạo 5/Dung mạo 6/Dung mạo 7/Dung mạo 8/Dung mạo 9/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Vừa",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Dung mạo 1",
+    "Dung mạo 2",
+    "Dung mạo 3",
+    "Dung mạo 4",
+    "Dung mạo 5",
+    "Dung mạo 6",
+    "Dung mạo 7",
+    "Dung mạo 8",
+    "Dung mạo 9",
+    "Dung mạo 10",
+    "Dung mạo 11",
+    "Dung mạo 12",
+    "Dung mạo 13",
+    "Dung mạo 14",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Khó",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Khó": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Dung mạo 15/Dung mạo 16/Dung mạo 17/Dung mạo 18/Dung mạo 19/Dung mạo 20/Dung mạo 21/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Dung mạo 15",
+    "Dung mạo 16",
+    "Dung mạo 17",
+    "Dung mạo 18",
+    "Dung mạo 19",
+    "Dung mạo 20",
+    "Dung mạo 21",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dung mạo 18": 1,
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Tiền sảnh|Tập cho thuộc rồi thôiTốn2 khắcĐượcĐức +Gợi ýĐức +!/Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +Mấtma ma không vừa ý taGợi ýSứ/Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo tập ma ma để ý tới ta hơn, có k",
+   "screen": ".dlg «Tiền sảnh»",
+   "opts": [
+    "Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo tập ma ma để ý tới ta hơn, có k",
+    "Tập cho thuộc rồi thôiTốn2 khắcĐượcĐức +Gợi ýĐức +!",
+    "Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +Mấtma ma không vừa ý taGợi ýSứ"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo tập ma ma để ý tới ta hơn, có k": 2,
+    "Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +Mấtma ma không vừa ý taGợi ýSứ": 3
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Tiền sảnh|Chọn lá này/Tập cho thuộc rồi thôiTốn2 khắcĐượcĐức +Gợi ýĐức +!/Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +Mấtma ma không vừa ý taGợi ýSứ/Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo tập ma ma để ý tới ta hơn, có k/Đặt lại",
+   "screen": ".dlg «Tiền sảnh»",
+   "opts": [
+    "Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo tập ma ma để ý tới ta hơn, có k",
+    "Tập cho thuộc rồi thôiTốn2 khắcĐượcĐức +Gợi ýĐức +!",
+    "Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +Mấtma ma không vừa ý taGợi ýSứ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Tập cho thuộc rồi thôiTốn2 khắcĐượcĐức +Gợi ýĐức +!": 4,
+    "Đặt lại": 2,
+    "Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo tập ma ma để ý tới ta hơn, có k": 2,
+    "Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +Mấtma ma không vừa ý taGợi ýSứ": 1
+   },
+   "n": 9
+  },
+  {
+   "k": ".dlg|Tiền sảnh|Chọn lá này/Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +Mấtma ma không vừa ý taGợi ýSứ/Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo tập ma ma để ý tới ta hơn, có k/Đặt lại",
+   "screen": ".dlg «Tiền sảnh»",
+   "opts": [
+    "Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo tập ma ma để ý tới ta hơn, có k",
+    "Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +Mấtma ma không vừa ý taGợi ýSứ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 1,
+    "Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +Mấtma ma không vừa ý taGợi ýSứ": 2,
+    "Chọn lá này": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Đông sở|Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých/Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả/Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!/Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b/Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+   "screen": ".dlg «Đông sở»",
+   "opts": [
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả",
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých",
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!",
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả": 2,
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b": 3,
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!": 1
+   },
+   "n": 6
+  },
+  {
+   "k": ".dlg|Đông sở|Chọn lá này/Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých/Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả/Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!/Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b/Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b/Đặt lại",
+   "screen": ".dlg «Đông sở»",
+   "opts": [
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả",
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých",
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!",
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 4,
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b": 3,
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých": 3,
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b": 1,
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!": 1
+   },
+   "n": 12
+  },
+  {
+   "k": ".mapsc||2Cung nhân/3Chí tôn/Buổi sáng, còn 4 khắc/Bạc84Sức95/100/Bắc sở2 bóng người/Bắc sở2 bóng ngườitốn: một khắc/Bổng lộcsau 3 tuần/Chưa điểm trang/Có thaiRất thấp/Dư đồ/Giao tình/Hoàng tự/Hành sự/Hậu cung/Lật thẻKhông có/Lịch tháng/Mệnh truyện/Mục tiêu chương (có mới)/Nguy hiểm chung: 0/Quẻ Thượng (Sức khỏe)/Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22/Số lần ân thưởng0/Tai mắt0/Tin báo: 3 tin mới/Tiền sảnh3 bóng người/Tiền sảnh3 bóng ngườitốn: một khắc/Tài nghệ/Tâm trạngBình thản+10/Tây sở3 bóng người/Tây sở3 bóng ngườitốn: một khắc/Tư trang/Về Dư đồ/Xem bản thân/Xét phẩm: thiếu 4/sương sớm/Ân tình (đêm)0/Đông sở4 bóng người/Đông sở4 bóng người/‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mười hai khắc Đông sở4 bóng người",
+   "screen": ".mapsc «»",
+   "opts": [
+    "Xem bản thân",
+    "Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22",
+    "Bạc84Sức95/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Thượng (Sức khỏe)",
+    "Tâm trạngBình thản+10",
+    "Tin báo: 3 tin mới",
+    "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mười hai khắc Đông sở4 bóng người",
+    "Đông sở4 bóng người",
+    "Tây sở3 bóng người",
+    "Bắc sở2 bóng người",
+    "Tiền sảnh3 bóng người",
+    "Đông sở4 bóng người",
+    "Tây sở3 bóng ngườitốn: một khắc",
+    "Bắc sở2 bóng ngườitốn: một khắc",
+    "Tiền sảnh3 bóng ngườitốn: một khắc",
+    "Về Dư đồ",
+    "Lịch tháng",
+    "Mục tiêu chương (có mới)",
+    "2Cung nhân",
+    "3Chí tôn",
+    "Tai mắt0",
+    "Có thaiRất thấp",
+    "Lật thẻKhông có",
+    "Ân tình (đêm)0",
+    "Số lần ân thưởng0",
+    "Bổng lộcsau 3 tuần",
+    "Nguy hiểm chung: 0",
+    "Xét phẩm: thiếu 4",
+    "Hành sự",
+    "Dư đồ",
+    "Hậu cung",
+    "Giao tình",
+    "Hoàng tự",
+    "Tư trang",
+    "Tài nghệ",
+    "Mệnh truyện"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nguy hiểm chung: 0": 4
+   },
+   "n": 4
+  },
+  {
+   "k": ".mapsc||2Cung nhân/3Chí tôn/Buổi sáng, còn 4 khắc/Bạc84Sức95/100/Bắc sở2 bóng người/Bắc sở2 bóng ngườitốn: một khắc/Bổng lộcsau 3 tuần/Chưa điểm trang/Có thaiRất thấp/Dư đồ/Giao tình/Hoàng tự/Hành sự/Hậu cung/Lật thẻKhông có/Lịch tháng/Mệnh truyện/Mục tiêu chương (có mới)/Quẻ Thượng (Sức khỏe)/Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22/Số lần ân thưởng0/Tai mắt0/Tin báo: 3 tin mới/Tiền sảnh3 bóng người/Tiền sảnh3 bóng ngườitốn: một khắc/Tài nghệ/Tâm trạngBình thản+10/Tây sở3 bóng người/Tây sở3 bóng ngườitốn: một khắc/Tư trang/Về Dư đồ/Xem bản thân/Xét phẩm: thiếu 4/sương sớm/Ân tình (đêm)0/Đông sở4 bóng người/Đông sở4 bóng người/‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mười hai khắc Đông sở4 bóng người",
+   "screen": ".mapsc «»",
+   "opts": [
+    "Xem bản thân",
+    "Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22",
+    "Bạc84Sức95/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Thượng (Sức khỏe)",
+    "Tâm trạngBình thản+10",
+    "Tin báo: 3 tin mới",
+    "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mười hai khắc Đông sở4 bóng người",
+    "Đông sở4 bóng người",
+    "Tây sở3 bóng người",
+    "Bắc sở2 bóng người",
+    "Tiền sảnh3 bóng người",
+    "Đông sở4 bóng người",
+    "Tây sở3 bóng ngườitốn: một khắc",
+    "Bắc sở2 bóng ngườitốn: một khắc",
+    "Tiền sảnh3 bóng ngườitốn: một khắc",
+    "Về Dư đồ",
+    "Lịch tháng",
+    "Mục tiêu chương (có mới)",
+    "2Cung nhân",
+    "3Chí tôn",
+    "Tai mắt0",
+    "Có thaiRất thấp",
+    "Lật thẻKhông có",
+    "Ân tình (đêm)0",
+    "Số lần ân thưởng0",
+    "Bổng lộcsau 3 tuần",
+    "Xét phẩm: thiếu 4",
+    "Hành sự",
+    "Dư đồ",
+    "Hậu cung",
+    "Giao tình",
+    "Hoàng tự",
+    "Tư trang",
+    "Tài nghệ",
+    "Mệnh truyện"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mười hai khắc Đông sở4 bóng người": 1,
+    "Tin báo: 3 tin mới": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Tin báo|Chọn lá này/Đặt lại/Để ta xemTốnkhôngĐượckhông",
+   "screen": ".dlg «Tin báo»",
+   "opts": [
+    "Để ta xemTốnkhôngĐượckhông",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".mapsc||2Cung nhân/3Chí tôn/Buổi sáng, còn 4 khắc/Bạc84Sức95/100/Bắc sở2 bóng người/Bắc sở2 bóng ngườitốn: một khắc/Bổng lộcsau 3 tuần/Chưa điểm trang/Có thaiRất thấp/Dư đồ/Giao tình/Hoàng tự/Hành sự/Hậu cung/Lật thẻKhông có/Lịch tháng/Mệnh truyện/Mục tiêu chương (có mới)/Nguy hiểm chung: 0/Quẻ Thượng (Sức khỏe)/Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22/Số lần ân thưởng0/Tai mắt0/Tin báo: 1 tin mới/Tiền sảnh3 bóng người/Tiền sảnh3 bóng ngườitốn: một khắc/Tài nghệ/Tâm trạngBình thản+10/Tây sở3 bóng người/Tây sở3 bóng ngườitốn: một khắc/Tư trang/Về Dư đồ/Xem bản thân/Xét phẩm: thiếu 4/sương sớm/Ân tình (đêm)0/Đông sở4 bóng người/Đông sở4 bóng người/‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mười hai khắc Đông sở4 bóng người",
+   "screen": ".mapsc «»",
+   "opts": [
+    "Xem bản thân",
+    "Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22",
+    "Bạc84Sức95/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Thượng (Sức khỏe)",
+    "Tâm trạngBình thản+10",
+    "Tin báo: 1 tin mới",
+    "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mười hai khắc Đông sở4 bóng người",
+    "Đông sở4 bóng người",
+    "Tây sở3 bóng người",
+    "Bắc sở2 bóng người",
+    "Tiền sảnh3 bóng người",
+    "Đông sở4 bóng người",
+    "Tây sở3 bóng ngườitốn: một khắc",
+    "Bắc sở2 bóng ngườitốn: một khắc",
+    "Tiền sảnh3 bóng ngườitốn: một khắc",
+    "Về Dư đồ",
+    "Lịch tháng",
+    "Mục tiêu chương (có mới)",
+    "2Cung nhân",
+    "3Chí tôn",
+    "Tai mắt0",
+    "Có thaiRất thấp",
+    "Lật thẻKhông có",
+    "Ân tình (đêm)0",
+    "Số lần ân thưởng0",
+    "Bổng lộcsau 3 tuần",
+    "Nguy hiểm chung: 0",
+    "Xét phẩm: thiếu 4",
+    "Hành sự",
+    "Dư đồ",
+    "Hậu cung",
+    "Giao tình",
+    "Hoàng tự",
+    "Tư trang",
+    "Tài nghệ",
+    "Mệnh truyện"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nguy hiểm chung: 0": 4
+   },
+   "n": 4
+  },
+  {
+   "k": ".mapsc||2Cung nhân/3Chí tôn/Buổi sáng, còn 4 khắc/Bạc84Sức95/100/Bắc sở2 bóng người/Bắc sở2 bóng ngườitốn: một khắc/Bổng lộcsau 3 tuần/Chưa điểm trang/Có thaiRất thấp/Dư đồ/Giao tình/Hoàng tự/Hành sự/Hậu cung/Lật thẻKhông có/Lịch tháng/Mệnh truyện/Mục tiêu chương (có mới)/Quẻ Thượng (Sức khỏe)/Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22/Số lần ân thưởng0/Tai mắt0/Tin báo: 1 tin mới/Tiền sảnh3 bóng người/Tiền sảnh3 bóng ngườitốn: một khắc/Tài nghệ/Tâm trạngBình thản+10/Tây sở3 bóng người/Tây sở3 bóng ngườitốn: một khắc/Tư trang/Về Dư đồ/Xem bản thân/Xét phẩm: thiếu 4/sương sớm/Ân tình (đêm)0/Đông sở4 bóng người/Đông sở4 bóng người/‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mười hai khắc Đông sở4 bóng người",
+   "screen": ".mapsc «»",
+   "opts": [
+    "Xem bản thân",
+    "Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22",
+    "Bạc84Sức95/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Thượng (Sức khỏe)",
+    "Tâm trạngBình thản+10",
+    "Tin báo: 1 tin mới",
+    "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn mười hai khắc Đông sở4 bóng người",
+    "Đông sở4 bóng người",
+    "Tây sở3 bóng người",
+    "Bắc sở2 bóng người",
+    "Tiền sảnh3 bóng người",
+    "Đông sở4 bóng người",
+    "Tây sở3 bóng ngườitốn: một khắc",
+    "Bắc sở2 bóng ngườitốn: một khắc",
+    "Tiền sảnh3 bóng ngườitốn: một khắc",
+    "Về Dư đồ",
+    "Lịch tháng",
+    "Mục tiêu chương (có mới)",
+    "2Cung nhân",
+    "3Chí tôn",
+    "Tai mắt0",
+    "Có thaiRất thấp",
+    "Lật thẻKhông có",
+    "Ân tình (đêm)0",
+    "Số lần ân thưởng0",
+    "Bổng lộcsau 3 tuần",
+    "Xét phẩm: thiếu 4",
+    "Hành sự",
+    "Dư đồ",
+    "Hậu cung",
+    "Giao tình",
+    "Hoàng tự",
+    "Tư trang",
+    "Tài nghệ",
+    "Mệnh truyện"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Tư trang": 1,
+    "Hoàng tự": 1,
+    "Đông sở4 bóng người": 1,
+    "Tai mắt0": 1,
+    "Tây sở3 bóng ngườitốn: một khắc": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Tây sở|Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých/Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả/Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!/Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b/Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+   "screen": ".dlg «Tây sở»",
+   "opts": [
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả",
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých",
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!",
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b": 1,
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Tây sở|Chọn lá này/Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých/Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả/Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!/Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b/Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b/Đặt lại",
+   "screen": ".dlg «Tây sở»",
+   "opts": [
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả",
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých",
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!",
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých": 4,
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!": 3,
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b": 3,
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả": 1,
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b": 1
+   },
+   "n": 12
+  },
+  {
+   "k": ".mapsc||2Cung nhân/3Chí tôn/Buổi sáng, còn 4 khắc/Bạc84Sức95/100/Bắc sở2 bóng người/Bắc sở2 bóng ngườitốn: một khắc/Bổng lộcsau 3 tuần/Chưa điểm trang/Có thaiRất thấp/Dư đồ/Giao tình/Hoàng tự/Hành sự/Hậu cung/Lật thẻKhông có/Lịch tháng/Mệnh truyện/Mục tiêu chương (có mới)/Nguy hiểm chung: 0/Quẻ Thượng (Sức khỏe)/Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22/Số lần ân thưởng0/Tai mắt0/Tin báo: 1 tin mới/Tiền sảnh3 bóng người/Tiền sảnh3 bóng ngườitốn: một khắc/Tài nghệ/Tâm trạngBình thản+10/Tây sở4 bóng người/Tây sở4 bóng người/Tư trang/Về Dư đồ/Xem bản thân/Xét phẩm: thiếu 4/sương sớm/Ân tình (đêm)0/Đông sở3 bóng người/Đông sở3 bóng ngườitốn: một khắc/‹ Dư đồDưỡng Tú viện · ta đang ở Tây sở · còn mười một khắc Đông sở3 bóng ngườiT",
+   "screen": ".mapsc «»",
+   "opts": [
+    "Xem bản thân",
+    "Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22",
+    "Bạc84Sức95/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Thượng (Sức khỏe)",
+    "Tâm trạngBình thản+10",
+    "Tin báo: 1 tin mới",
+    "‹ Dư đồDưỡng Tú viện · ta đang ở Tây sở · còn mười một khắc Đông sở3 bóng ngườiT",
+    "Đông sở3 bóng người",
+    "Tây sở4 bóng người",
+    "Bắc sở2 bóng người",
+    "Tiền sảnh3 bóng người",
+    "Đông sở3 bóng ngườitốn: một khắc",
+    "Tây sở4 bóng người",
+    "Bắc sở2 bóng ngườitốn: một khắc",
+    "Tiền sảnh3 bóng ngườitốn: một khắc",
+    "Về Dư đồ",
+    "Lịch tháng",
+    "Mục tiêu chương (có mới)",
+    "2Cung nhân",
+    "3Chí tôn",
+    "Tai mắt0",
+    "Có thaiRất thấp",
+    "Lật thẻKhông có",
+    "Ân tình (đêm)0",
+    "Số lần ân thưởng0",
+    "Bổng lộcsau 3 tuần",
+    "Nguy hiểm chung: 0",
+    "Xét phẩm: thiếu 4",
+    "Hành sự",
+    "Dư đồ",
+    "Hậu cung",
+    "Giao tình",
+    "Hoàng tự",
+    "Tư trang",
+    "Tài nghệ",
+    "Mệnh truyện"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nguy hiểm chung: 0": 2,
+    "Tài nghệ": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Tây sở|Chọn lá này/Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả/Đặt lại",
+   "screen": ".dlg «Tây sở»",
+   "opts": [
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Dò hỏi ma ma|Chọn lá này/Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết /Đặt lại",
+   "screen": ".dlg «Dò hỏi ma ma»",
+   "opts": [
+    "Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Dò hỏi ma ma|Chọn lá này/Hỏi về Hoàng thượngTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem /Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết /Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông được mất gì!/Đặt lại",
+   "screen": ".dlg «Dò hỏi ma ma»",
+   "opts": [
+    "Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết ",
+    "Hỏi về Hoàng thượngTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem ",
+    "Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông được mất gì!",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông được mất gì!": 1,
+    "Hỏi về Hoàng thượngTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem ": 1,
+    "Chọn lá này": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Dò hỏi ma ma|Hỏi về Hoàng thượngTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem /Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết /Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông được mất gì!",
+   "screen": ".dlg «Dò hỏi ma ma»",
+   "opts": [
+    "Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết ",
+    "Hỏi về Hoàng thượngTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem ",
+    "Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông được mất gì!"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Thôi, không hỏi nữaTốnkhôngĐượckhôngGợi ýkhông được mất gì!": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Dò hỏi ma ma|Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Hoàng thượng ưa gì, trọng g/Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b",
+   "screen": ".dlg «Dò hỏi ma ma»",
+   "opts": [
+    "Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Hoàng thượng ưa gì, trọng g",
+    "Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Dò hỏi ma ma|Chọn lá này/Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầuGợ/Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Hoàng thượng ưa gì, trọng g/Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b/Đặt lại",
+   "screen": ".dlg «Dò hỏi ma ma»",
+   "opts": [
+    "Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Hoàng thượng ưa gì, trọng g",
+    "Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b",
+    "Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầuGợ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Dò hỏi ma ma|Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầuGợ/Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Hoàng thượng ưa gì, trọng g/Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b",
+   "screen": ".dlg «Dò hỏi ma ma»",
+   "opts": [
+    "Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Hoàng thượng ưa gì, trọng g",
+    "Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b",
+    "Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầuGợ"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b": 1,
+    "Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Hoàng thượng ưa gì, trọng g": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Tây sở|Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých/Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả/Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+   "screen": ".dlg «Tây sở»",
+   "opts": [
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả",
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Dò hỏi ma ma|Chọn lá này/Hỏi về Hoàng thượngTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem /Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết /Đặt lại",
+   "screen": ".dlg «Dò hỏi ma ma»",
+   "opts": [
+    "Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết ",
+    "Hỏi về Hoàng thượngTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Hỏi về Thái hậuTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết ": 2,
+    "Chọn lá này": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Dò hỏi ma ma|Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầuGợ/Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Thái hậu ưa gì, trọng gìGợi/Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b",
+   "screen": ".dlg «Dò hỏi ma ma»",
+   "opts": [
+    "Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Thái hậu ưa gì, trọng gìGợi",
+    "Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b",
+    "Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầuGợ"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầuGợ": 2
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Dò hỏi ma ma|Chọn lá này/Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầuGợ/Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Thái hậu ưa gì, trọng gìGợi/Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b/Đặt lại",
+   "screen": ".dlg «Dò hỏi ma ma»",
+   "opts": [
+    "Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Thái hậu ưa gì, trọng gìGợi",
+    "Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏiTốn3 khắcĐượcma ma vui lòng ta, b",
+    "Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầuGợ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Cứ hỏi thẳngTốn1 khắcĐượcma ma đáp tùy tính bà: kể đủ, nói một ý, hoặc lắc đầuGợ": 1,
+    "Đặt lại": 1,
+    "Dúi bạc vào tay ma maTốn1 khắc·Bạc 40Đượcma ma kể đủ Thái hậu ưa gì, trọng gìGợi": 1,
+    "Chọn lá này": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Tây sở|Chọn lá này/Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả/Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!/Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b/Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b/Đặt lại",
+   "screen": ".dlg «Tây sở»",
+   "opts": [
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả",
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!",
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".mapsc||2Cung nhân/3Chí tôn/Buổi sáng, còn 4 khắc/Bạc44Sức95/100/Bắc sở3 bóng người/Bắc sở3 bóng ngườitốn: một khắc/Bổng lộcsau 3 tuần/Chưa điểm trang/Có thaiRất thấp/Dư đồ/Giao tình/Hoàng tự/Hành sự/Hậu cung/Lật thẻKhông có/Lịch tháng/Mệnh truyện/Mục tiêu chương (có mới)/Nguy hiểm chung: 0/Quẻ Thượng (Sức khỏe)/Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22/Số lần ân thưởng0/Tai mắt0/Tin báo: 3 tin mới/Tiền sảnh3 bóng người/Tiền sảnh3 bóng ngườitốn: một khắc/Tài nghệ/Tâm trạngBình thản+10/Tây sở4 bóng người/Tây sở4 bóng người/Tư trang/Về Dư đồ/Xem bản thân/Xét phẩm: thiếu 4/sương sớm/Ân tình (đêm)0/Đông sở2 bóng người/Đông sở2 bóng ngườitốn: một khắc/‹ Dư đồDưỡng Tú viện · ta đang ở Tây sở · còn bảy khắc Đông sở2 bóng ngườiTây sở",
+   "screen": ".mapsc «»",
+   "opts": [
+    "Xem bản thân",
+    "Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22",
+    "Bạc44Sức95/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Thượng (Sức khỏe)",
+    "Tâm trạngBình thản+10",
+    "Tin báo: 3 tin mới",
+    "‹ Dư đồDưỡng Tú viện · ta đang ở Tây sở · còn bảy khắc Đông sở2 bóng ngườiTây sở",
+    "Đông sở2 bóng người",
+    "Tây sở4 bóng người",
+    "Bắc sở3 bóng người",
+    "Tiền sảnh3 bóng người",
+    "Đông sở2 bóng ngườitốn: một khắc",
+    "Tây sở4 bóng người",
+    "Bắc sở3 bóng ngườitốn: một khắc",
+    "Tiền sảnh3 bóng ngườitốn: một khắc",
+    "Về Dư đồ",
+    "Lịch tháng",
+    "Mục tiêu chương (có mới)",
+    "2Cung nhân",
+    "3Chí tôn",
+    "Tai mắt0",
+    "Có thaiRất thấp",
+    "Lật thẻKhông có",
+    "Ân tình (đêm)0",
+    "Số lần ân thưởng0",
+    "Bổng lộcsau 3 tuần",
+    "Nguy hiểm chung: 0",
+    "Xét phẩm: thiếu 4",
+    "Hành sự",
+    "Dư đồ",
+    "Hậu cung",
+    "Giao tình",
+    "Hoàng tự",
+    "Tư trang",
+    "Tài nghệ",
+    "Mệnh truyện"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Tây sở4 bóng người": 1,
+    "Nguy hiểm chung: 0": 2,
+    "Đông sở2 bóng người": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Tây sở|Chọn lá này/Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả/Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b/Đặt lại",
+   "screen": ".dlg «Tây sở»",
+   "opts": [
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả",
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Đông sở|Chọn lá này/Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả/Đặt lại",
+   "screen": ".dlg «Đông sở»",
+   "opts": [
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".mapsc||2Cung nhân/3Chí tôn/Buổi sáng, còn 4 khắc/Bạc44Sức95/100/Bắc sở3 bóng người/Bắc sở3 bóng ngườitốn: một khắc/Bổng lộcsau 3 tuần/Chưa điểm trang/Có thaiRất thấp/Dư đồ/Giao tình/Hoàng tự/Hành sự/Hậu cung/Lật thẻKhông có/Lịch tháng/Mệnh truyện/Mục tiêu chương (có mới)/Nguy hiểm chung: 0/Quẻ Thượng (Sức khỏe)/Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22/Số lần ân thưởng0/Tai mắt0/Tin báo: 3 tin mới/Tiền sảnh3 bóng người/Tiền sảnh3 bóng ngườitốn: một khắc/Tài nghệ/Tâm trạngBình thản+10/Tây sở3 bóng người/Tây sở3 bóng ngườitốn: một khắc/Tư trang/Về Dư đồ/Xem bản thân/Xét phẩm: thiếu 4/sương sớm/Ân tình (đêm)0/Đông sở3 bóng người/Đông sở3 bóng người/‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn sáu khắc Đông sở3 bóng ngườiTây s",
+   "screen": ".mapsc «»",
+   "opts": [
+    "Xem bản thân",
+    "Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22",
+    "Bạc44Sức95/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Thượng (Sức khỏe)",
+    "Tâm trạngBình thản+10",
+    "Tin báo: 3 tin mới",
+    "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn sáu khắc Đông sở3 bóng ngườiTây s",
+    "Đông sở3 bóng người",
+    "Tây sở3 bóng người",
+    "Bắc sở3 bóng người",
+    "Tiền sảnh3 bóng người",
+    "Đông sở3 bóng người",
+    "Tây sở3 bóng ngườitốn: một khắc",
+    "Bắc sở3 bóng ngườitốn: một khắc",
+    "Tiền sảnh3 bóng ngườitốn: một khắc",
+    "Về Dư đồ",
+    "Lịch tháng",
+    "Mục tiêu chương (có mới)",
+    "2Cung nhân",
+    "3Chí tôn",
+    "Tai mắt0",
+    "Có thaiRất thấp",
+    "Lật thẻKhông có",
+    "Ân tình (đêm)0",
+    "Số lần ân thưởng0",
+    "Bổng lộcsau 3 tuần",
+    "Nguy hiểm chung: 0",
+    "Xét phẩm: thiếu 4",
+    "Hành sự",
+    "Dư đồ",
+    "Hậu cung",
+    "Giao tình",
+    "Hoàng tự",
+    "Tư trang",
+    "Tài nghệ",
+    "Mệnh truyện"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nguy hiểm chung: 0": 4
+   },
+   "n": 4
+  },
+  {
+   "k": ".mapsc||2Cung nhân/3Chí tôn/Buổi sáng, còn 4 khắc/Bạc44Sức95/100/Bắc sở3 bóng người/Bắc sở3 bóng ngườitốn: một khắc/Bổng lộcsau 3 tuần/Chưa điểm trang/Có thaiRất thấp/Dư đồ/Giao tình/Hoàng tự/Hành sự/Hậu cung/Lật thẻKhông có/Lịch tháng/Mệnh truyện/Mục tiêu chương (có mới)/Quẻ Thượng (Sức khỏe)/Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22/Số lần ân thưởng0/Tai mắt0/Tin báo: 3 tin mới/Tiền sảnh3 bóng người/Tiền sảnh3 bóng ngườitốn: một khắc/Tài nghệ/Tâm trạngBình thản+10/Tây sở3 bóng người/Tây sở3 bóng ngườitốn: một khắc/Tư trang/Về Dư đồ/Xem bản thân/Xét phẩm: thiếu 4/sương sớm/Ân tình (đêm)0/Đông sở3 bóng người/Đông sở3 bóng người/‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn sáu khắc Đông sở3 bóng ngườiTây s",
+   "screen": ".mapsc «»",
+   "opts": [
+    "Xem bản thân",
+    "Sắc63Tài39Tâm cơ13Đức30Danh14Sủng22",
+    "Bạc44Sức95/100",
+    "Buổi sáng, còn 4 khắc",
+    "Chưa điểm trang",
+    "sương sớm",
+    "Quẻ Thượng (Sức khỏe)",
+    "Tâm trạngBình thản+10",
+    "Tin báo: 3 tin mới",
+    "‹ Dư đồDưỡng Tú viện · ta đang ở Đông sở · còn sáu khắc Đông sở3 bóng ngườiTây s",
+    "Đông sở3 bóng người",
+    "Tây sở3 bóng người",
+    "Bắc sở3 bóng người",
+    "Tiền sảnh3 bóng người",
+    "Đông sở3 bóng người",
+    "Tây sở3 bóng ngườitốn: một khắc",
+    "Bắc sở3 bóng ngườitốn: một khắc",
+    "Tiền sảnh3 bóng ngườitốn: một khắc",
+    "Về Dư đồ",
+    "Lịch tháng",
+    "Mục tiêu chương (có mới)",
+    "2Cung nhân",
+    "3Chí tôn",
+    "Tai mắt0",
+    "Có thaiRất thấp",
+    "Lật thẻKhông có",
+    "Ân tình (đêm)0",
+    "Số lần ân thưởng0",
+    "Bổng lộcsau 3 tuần",
+    "Xét phẩm: thiếu 4",
+    "Hành sự",
+    "Dư đồ",
+    "Hậu cung",
+    "Giao tình",
+    "Hoàng tự",
+    "Tư trang",
+    "Tài nghệ",
+    "Mệnh truyện"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "sương sớm": 1,
+    "Xét phẩm: thiếu 4": 1,
+    "Tiền sảnh3 bóng ngườitốn: một khắc": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Tiền sảnh|Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých/Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả/Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!/Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b/Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+   "screen": ".dlg «Tiền sảnh»",
+   "opts": [
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả",
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých",
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!",
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!": 1,
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých": 1,
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả": 1,
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Tiền sảnh|Chọn lá này/Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých/Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả/Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!/Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b/Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b/Đặt lại",
+   "screen": ".dlg «Tiền sảnh»",
+   "opts": [
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả",
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých",
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!",
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých": 2,
+    "Đặt lại": 2,
+    "Làm quen với một vị tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả": 2,
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!": 2,
+    "Chọn lá này": 1
+   },
+   "n": 9
+  },
+  {
+   "k": ".dlg|Tiền sảnh|Ta cười xòa, coi như chuyện đùa.TốnkhôngĐượcđỡ tốn khắcMấtngười đứng xem ghét ta/Ta nhịn, cúi đầu cho qua chuyện.Tốn1 khắcĐượcmột vị tú nữ có thiện cảm với ta hơ/Ta xin ma ma phân xử.Tốn2 khắcĐượcGiáo tập ma ma có thiện cảm với ta hơnGợi ýGiá/Ta đáp thẳng, không để ai đổ oan.Tốn1 khắcĐượcĐức +Mấtmột vị tú nữ ghét ta hơnGợ",
+   "screen": ".dlg «Tiền sảnh»",
+   "opts": [
+    "Ta đáp thẳng, không để ai đổ oan.Tốn1 khắcĐượcĐức +Mấtmột vị tú nữ ghét ta hơnGợ",
+    "Ta nhịn, cúi đầu cho qua chuyện.Tốn1 khắcĐượcmột vị tú nữ có thiện cảm với ta hơ",
+    "Ta xin ma ma phân xử.Tốn2 khắcĐượcGiáo tập ma ma có thiện cảm với ta hơnGợi ýGiá",
+    "Ta cười xòa, coi như chuyện đùa.TốnkhôngĐượcđỡ tốn khắcMấtngười đứng xem ghét ta"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ta cười xòa, coi như chuyện đùa.TốnkhôngĐượcđỡ tốn khắcMấtngười đứng xem ghét ta": 2,
+    "Ta xin ma ma phân xử.Tốn2 khắcĐượcGiáo tập ma ma có thiện cảm với ta hơnGợi ýGiá": 1,
+    "Ta nhịn, cúi đầu cho qua chuyện.Tốn1 khắcĐượcmột vị tú nữ có thiện cảm với ta hơ": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Tiền sảnh|Chọn lá này/Ta cười xòa, coi như chuyện đùa.TốnkhôngĐượcđỡ tốn khắcMấtngười đứng xem ghét ta/Ta nhịn, cúi đầu cho qua chuyện.Tốn1 khắcĐượcmột vị tú nữ có thiện cảm với ta hơ/Ta xin ma ma phân xử.Tốn2 khắcĐượcGiáo tập ma ma có thiện cảm với ta hơnGợi ýGiá/Ta đáp thẳng, không để ai đổ oan.Tốn1 khắcĐượcĐức +Mấtmột vị tú nữ ghét ta hơnGợ/Đặt lại",
+   "screen": ".dlg «Tiền sảnh»",
+   "opts": [
+    "Ta đáp thẳng, không để ai đổ oan.Tốn1 khắcĐượcĐức +Mấtmột vị tú nữ ghét ta hơnGợ",
+    "Ta nhịn, cúi đầu cho qua chuyện.Tốn1 khắcĐượcmột vị tú nữ có thiện cảm với ta hơ",
+    "Ta xin ma ma phân xử.Tốn2 khắcĐượcGiáo tập ma ma có thiện cảm với ta hơnGợi ýGiá",
+    "Ta cười xòa, coi như chuyện đùa.TốnkhôngĐượcđỡ tốn khắcMấtngười đứng xem ghét ta",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ta đáp thẳng, không để ai đổ oan.Tốn1 khắcĐượcĐức +Mấtmột vị tú nữ ghét ta hơnGợ": 3,
+    "Ta xin ma ma phân xử.Tốn2 khắcĐượcGiáo tập ma ma có thiện cảm với ta hơnGợi ýGiá": 2,
+    "Ta nhịn, cúi đầu cho qua chuyện.Tốn1 khắcĐượcmột vị tú nữ có thiện cảm với ta hơ": 2,
+    "Ta cười xòa, coi như chuyện đùa.TốnkhôngĐượcđỡ tốn khắcMấtngười đứng xem ghét ta": 2,
+    "Đặt lại": 2,
+    "Chọn lá này": 1
+   },
+   "n": 12
+  },
+  {
+   "k": ".dlg|Ngày thứ hai — Điện tuyển|Dò hỏi ma ma về các vị chí tôn/Ngồi trước gương điểm trang/Theo ma ma ra sân chờ, để mặt mộc",
+   "screen": ".dlg «Ngày thứ hai — Điện tuyển»",
+   "opts": [
+    "Theo ma ma ra sân chờ, để mặt mộc",
+    "Ngồi trước gương điểm trang",
+    "Dò hỏi ma ma về các vị chí tôn"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ngồi trước gương điểm trang": 1
+   },
+   "n": 1
+  },
+  {
+   "k": "#kg82||Giữ đồ hôm quamặc như cũ/Mặc bộ này/Áo gấm hoa mai",
+   "screen": "#kg82 «»",
+   "opts": [
+    "Áo gấm hoa mai",
+    "Mặc bộ này",
+    "Giữ đồ hôm quamặc như cũ"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Mặc bộ này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": "#kg82||Tự tay điểm trangkẻ mày, đánh phấn, chấm son/Điểm trangĐoan trang: Có cơ · Kiều diễm: Khó lường · Khuynh thành: Mong manh/Để mặt mộc",
+   "screen": "#kg82 «»",
+   "opts": [
+    "Điểm trangĐoan trang: Có cơ · Kiều diễm: Khó lường · Khuynh thành: Mong manh",
+    "Tự tay điểm trangkẻ mày, đánh phấn, chấm son",
+    "Để mặt mộc"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Để mặt mộc": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Sân chờ|Làm quen với một vị tú nữ/Đứng yên giữ sức",
+   "screen": ".dlg «Sân chờ»",
+   "opts": [
+    "Làm quen với một vị tú nữ",
+    "Đứng yên giữ sức"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Đứng yên giữ sức": 2
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Sân chờ|Ta cười xòa, coi như chuyện đùa./Ta nhịn, cúi đầu cho qua chuyện./Ta xin ma ma phân xử./Ta đáp thẳng, không để ai đổ oan.",
+   "screen": ".dlg «Sân chờ»",
+   "opts": [
+    "Ta đáp thẳng, không để ai đổ oan.",
+    "Ta nhịn, cúi đầu cho qua chuyện.",
+    "Ta xin ma ma phân xử.",
+    "Ta cười xòa, coi như chuyện đùa."
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ta xin ma ma phân xử.": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Thái hậu|Nên học cách phụng dưỡng cha mẹ, điều ấy là gốc của mọi điều khác./Nên học quản việc nhà, biết chi dùng tằn tiện, tay làm được việc thì lòng mới yê/Nên học đọc sách, biết chữ thì mới hiểu đạo lý và biết cách xử thế./Nữ nhi nên học lễ nghi trước, biết cúi chào đúng chỗ thì mới đứng được trong nhà",
+   "screen": ".dlg «Thái hậu»",
+   "opts": [
+    "Nên học đọc sách, biết chữ thì mới hiểu đạo lý và biết cách xử thế.",
+    "Nên học cách phụng dưỡng cha mẹ, điều ấy là gốc của mọi điều khác.",
+    "Nên học quản việc nhà, biết chi dùng tằn tiện, tay làm được việc thì lòng mới yê",
+    "Nữ nhi nên học lễ nghi trước, biết cúi chào đúng chỗ thì mới đứng được trong nhà"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nên học đọc sách, biết chữ thì mới hiểu đạo lý và biết cách xử thế.": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Hoàng thượng|Cúi đầu chờ xét/Pha một chén trà dâng lên",
+   "screen": ".dlg «Hoàng thượng»",
+   "opts": [
+    "Cúi đầu chờ xét",
+    "Pha một chén trà dâng lên"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Pha một chén trà dâng lên": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".mapsc||2Cung nhân/3Chí tôn/Buổi sáng, còn 4 khắc/Bạc44Sức95/100/Bắc sở3 bóng người/Bắc sở3 bóng ngườitốn: một khắc/Bổng lộcsau 3 tuần/Có thaiRất thấp/Dư đồ/Giao tình/Hoàng tự/Hành sự/Hậu cung/Lật thẻKhông có/Lịch tháng/Mệnh truyện/Mục tiêu chương (có mới)/Nguy hiểm chung: 0/Quẻ Thượng (Sức khỏe)/Sắc63Tài39Tâm cơ13Đức30Danh13Sủng22/Số lần ân thưởng0/Tai mắt0/Tin báo: 5 tin mới/Tiền sảnh3 bóng người/Tiền sảnh3 bóng ngườitốn: một khắc/Tài nghệ/Tâm trạngBình thản+10/Tây sở3 bóng người/Tây sở3 bóng ngườitốn: một khắc/Tư trang/Về Dư đồ/Xem bản thân/Xét phẩm: thiếu 4/Y phục hợp phẩm · mặt mộc/sương sớm/Ân tình (đêm)0/Đông sở2 bóng người/Đông sở2 bóng ngườitốn: một khắc/‹ Dư đồDưỡng Tú viện · ta đang ở · còn chín khắc Đông sở2 bóng ngườiTây sở3 bóng",
+   "screen": ".mapsc «»",
+   "opts": [
+    "Xem bản thân",
+    "Sắc63Tài39Tâm cơ13Đức30Danh13Sủng22",
+    "Bạc44Sức95/100",
+    "Buổi sáng, còn 4 khắc",
+    "Y phục hợp phẩm · mặt mộc",
+    "sương sớm",
+    "Quẻ Thượng (Sức khỏe)",
+    "Tâm trạngBình thản+10",
+    "Tin báo: 5 tin mới",
+    "‹ Dư đồDưỡng Tú viện · ta đang ở · còn chín khắc Đông sở2 bóng ngườiTây sở3 bóng",
+    "Đông sở2 bóng người",
+    "Tây sở3 bóng người",
+    "Bắc sở3 bóng người",
+    "Tiền sảnh3 bóng người",
+    "Đông sở2 bóng ngườitốn: một khắc",
+    "Tây sở3 bóng ngườitốn: một khắc",
+    "Bắc sở3 bóng ngườitốn: một khắc",
+    "Tiền sảnh3 bóng ngườitốn: một khắc",
+    "Về Dư đồ",
+    "Lịch tháng",
+    "Mục tiêu chương (có mới)",
+    "2Cung nhân",
+    "3Chí tôn",
+    "Tai mắt0",
+    "Có thaiRất thấp",
+    "Lật thẻKhông có",
+    "Ân tình (đêm)0",
+    "Số lần ân thưởng0",
+    "Bổng lộcsau 3 tuần",
+    "Nguy hiểm chung: 0",
+    "Xét phẩm: thiếu 4",
+    "Hành sự",
+    "Dư đồ",
+    "Hậu cung",
+    "Giao tình",
+    "Hoàng tự",
+    "Tư trang",
+    "Tài nghệ",
+    "Mệnh truyện"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "2Cung nhân": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Thái hậu|Thần thiếp khẽ gạt con côn trùng ra, rồi uống nốt, không bỏ phí trà ngự./Thần thiếp thưa thật rằng chén có côn trùng, xin bề trên cho phép đổi./Thần thiếp xin thái giám đổi chén khác, không dám dâng bề trên chén đã nhiễm bẩn/Thần thiếp đặt chén xuống, chờ bề trên cho phép bỏ trà đó.",
+   "screen": ".dlg «Thái hậu»",
+   "opts": [
+    "Thần thiếp khẽ gạt con côn trùng ra, rồi uống nốt, không bỏ phí trà ngự.",
+    "Thần thiếp thưa thật rằng chén có côn trùng, xin bề trên cho phép đổi.",
+    "Thần thiếp đặt chén xuống, chờ bề trên cho phép bỏ trà đó.",
+    "Thần thiếp xin thái giám đổi chén khác, không dám dâng bề trên chén đã nhiễm bẩn"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Thần thiếp khẽ gạt con côn trùng ra, rồi uống nốt, không bỏ phí trà ngự.": 1
+   },
+   "n": 1
+  }
+ ],
+ "_tsW": {
+  "ts|.kmov|": {
+   "n": 1,
+   "t": 1795778216529,
+   "last": 1795778216529
+  },
+  "ts|.kscn|": {
+   "n": 1,
+   "t": 1795778318684,
+   "last": 1795778318684
+  }
+ },
+ "dumps": [
+  "/home/user/wt/s20out/shots-flight2-s20a/loop-1-dump.json"
+ ],
+ "_dress": {
+  "k": "#kg82|",
+  "put": 0,
+  "look": 0
+ },
+ "t": {
+  "total": 334569
+ }
+}
