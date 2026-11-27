@@ -201,7 +201,7 @@ window.dh2Secs=function(){if(!S)return[];const out=[],ok=dhHieuOK(S);const rows=
   out.push({h:"Bị thu · đường sám hối",rows:R2})}
  return out};
 /* NPC wear after restore: jdh's own rule (earned + highest tier) */
-window.dhAutoWear0=function(p){try{if(typeof dhSync==="function")dhSync(p,true);const L=Object.keys(window.DH_CAT||{}).filter(k=>p.dh&&p.dh[k]&&p.dh[k].i>=0&&!p.dh[k].conf);if(!wornK(p)&&L.length&&typeof dhObj==="function"){const o=L.map(k=>dhObj(p,k)).filter(Boolean).sort((a,b)=>b.tier-a.tier)[0];if(o)dhWear(p,o.key,true)}}catch(e){}};
+window.dhAutoWear0=function(p){try{if(typeof dhSync==="function")dhSync(p,true);const L=Object.keys(window.DH_CAT||{}).filter(k=>p.dh&&p.dh[k]&&p.dh[k].i>=0&&!p.dh[k].conf&&!DH_CAT[k].rep/* jdh3 reputation titles are never worn */);if(!wornK(p)&&L.length&&typeof dhObj==="function"){const o=L.map(k=>dhObj(p,k)).filter(Boolean).sort((a,b)=>b.tier-a.tier)[0];if(o)dhWear(p,o.key,true)}}catch(e){}};
 /* §64: the dialogs show the piece in the kit item frame */
 setTimeout(()=>{try{if(typeof IEV_PID==="object"){IEV_PID.dhlost=pp=>{const c=typeof loGet==="function"?loGet(pp&&pp.id):null;return c&&c.e?{e:c.e,acts:[null,null,null]}:false};IEV_PID.dhatone=()=>false}}catch(e){}},0);
 }catch(e){console.error("jdh2",e)}})();
