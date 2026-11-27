@@ -33,7 +33,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    r.live=KG82.phase;r.liveRun=!!KG82.run;
    if(KG82.cur&&typeof KG82.cur.end==='function'&&KG82.phase==='play'&&!o.quit)KG82.cur.end(7);else if(typeof KG82.quit==='function'){r.byQuit=1;const q=KG82.quit;KG82.quit=null;q()}
    await sleep(o.res||1200);await __fx();
-   r.phase=KG82.phase;r.run=!!KG82.run;r.shown=__shown();r.btns=__resBtns();r.signs=r.btns.filter(t=>/^[●?✓↶↷♨]$/.test(t)).length;
+   r.phase=KG82.phase;r.run=!!KG82.run;{const rs=document.getElementById('kg82box-res');const tx=rs&&!rs.hidden?rs.innerText:'';r.card=(tx.match(/(?<!\d)\d+\/10/g)||[]).slice(0,3);const ch=document.querySelector('#kg82 [data-kg=score]');r.chip=ch?ch.textContent.trim():'';r.used=(window.__done||[]).slice(-1)[0];if(window.__ex&&window.__ex.pend)r.used=window.__ex.pend.raws.slice(-1)[0]}r.shown=__shown();r.btns=__resBtns();r.signs=r.btns.filter(t=>/^[●?✓↶↷♨]$/.test(t)).length;
    const a0=window.__raf;await sleep(2000);r.rafS=Math.round((window.__raf-a0)/2);r.tick=__tick();r.cls=(document.getElementById('kg82')||{}).className||'';return r}});
  const D='(x)=>window.__done.push(x===undefined?"cb":x&&x.raw!=null?x.raw:x)';const v=`(liveRivals(true)[0])`;
  const CALL=[
@@ -50,19 +50,20 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const rows=[];
  for(const [l,src,o] of CALL){let r;try{r=await p.evaluate(([s,o])=>window.__board(s,o),[src,o||{}])}catch(e){r={err:String(e.message).slice(0,160)}}rows.push([l,r])}
  /* jexam: Môn 1 → «Môn kế tiếp» → Môn 2 → «Xem kết quả» → final «Đã hiểu» */
- {let r1,r2,r3;try{r1=await p.evaluate(()=>window.__board('exRun(exPlan(S),{},'+'(x)=>window.__done.push(1))'));rows.push(['jexam khảo hạch · Môn 1 → «'+(r1.btns||[]).join('/')+'»',r1]);
+ {let r1,r2,r3;try{r1=await p.evaluate(()=>window.__board('exRun(exPlan(S),window.__ex={},'+'(x)=>window.__done.push(x))'));rows.push(['jexam khảo hạch · Môn 1 → «'+(r1.btns||[]).join('/')+'»',r1]);
    r2=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));document.getElementById('kg82ok').click();await sleep(300);return window.__board('',{keep:1})});rows.push(['jexam khảo hạch · Môn 2 → «'+(r2.btns||[]).join('/')+'»',r2]);
-   r3=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const k=document.getElementById('kg82ok');const last=k&&/Xem kết quả/.test(k.textContent);if(k)k.click();await sleep(1000);return{last,phase:KG82.phase,run:!!KG82.run,shown:__shown(),btns:__resBtns(),signs:0,tick:__tick(),rafS:0}});rows.push(['jexam khảo hạch · kết quả',r3])}catch(e){rows.push(['jexam',{err:String(e.message).slice(0,160)}])}}
+   r3=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const raws=window.__ex.pend.raws.slice();const k=document.getElementById('kg82ok');const last=k&&/Xem kết quả/.test(k.textContent);if(k)k.click();await sleep(1000);const rs=document.getElementById('kg82box-res');const tx=rs?rs.textContent:'';window.__ex=null;return{raws,card:[(tx.match(/Các môn[^+]*/)||[''])[0].slice(0,80)],last,phase:KG82.phase,run:!!KG82.run,shown:__shown(),btns:__resBtns(),signs:0,tick:__tick(),rafS:0}});rows.push(['jexam khảo hạch · kết quả',r3])}catch(e){rows.push(['jexam',{err:String(e.message).slice(0,160)}])}}
  /* jmgcal Thử tay: hồi 1 → «Hồi kế tiếp» */
  {let r;try{r=await p.evaluate(()=>window.__board('mgCalRun("dan")'));r.signs=(r.btns||[]).filter(t=>/^[●?✓↶↷♨]/.test(t)&&!/Chép|Thử|Dừng|Hồi|Xem/.test(t)).length}catch(e){r={err:String(e.message).slice(0,160)}}rows.push(['jmgcal Thử tay · hồi 1 → «'+((r.btns||[]).join('/'))+'»',r])}
  if(SHOT){const fs=require('fs');fs.mkdirSync(SHOT,{recursive:true});await p.screenshot({path:`${SHOT}/mgcal-res-${VW}x${VH}.png`});
   await p.evaluate(()=>window.__board('exRun(exPlan(S),{},()=>{})'));await p.screenshot({path:`${SHOT}/exam-mon1-res-${VW}x${VH}.png`})}
- console.log('\n| caller · screen | live board phase | result: KG82.phase | KG82.run | result shown | buttons (● = turned to a sign) | rAF/s idle on result | Pixi tickers px/fx |');console.log('|---|---|---|---|---|---|---|---|');
- for(const [l,r] of rows)console.log(`| ${l} | ${r.live||'–'} | ${r.err?'ERR '+r.err:r.phase} | ${r.run?'running':'stopped'} | ${r.shown?'yes':'no'} | ${(r.btns||[]).join(' / ')} | ${r.rafS} | ${r.tick?(r.tick.px?'on':'off')+'/'+(r.tick.fx?'on':'off'):'–'} |`);
+ console.log('\n| caller · screen | live board phase | result: KG82.phase | KG82.run | result shown | buttons (● = turned to a sign) | rAF/s idle on result | Pixi tickers px/fx | card marks | header chip | value the rules use |');console.log('|---|---|---|---|---|---|---|---|---|---|---|');
+ for(const [l,r] of rows)console.log(`| ${l} | ${r.live||'–'} | ${r.err?'ERR '+r.err:r.phase} | ${r.run?'running':'stopped'} | ${r.shown?'yes':'no'} | ${(r.btns||[]).join(' / ')} | ${r.rafS} | ${r.tick?(r.tick.px?'on':'off')+'/'+(r.tick.fx?'on':'off'):'–'} | ${(r.card||[]).join(' ')} | ${r.chip||''} | ${r.raws?r.raws.join(', '):r.used!==undefined?r.used:''} |`);
  /* 10-board memory / idle loop */
  const mem=[await heap()];const loop=[];for(let i=0;i<10;i++){const [l,src,o]=CALL[i%CALL.length];const r=await p.evaluate(([s,o])=>window.__board(s,o),[src,o||{}]).catch(e=>({err:e.message}));await p.evaluate(()=>__clean());mem.push(await heap());loop.push(r.rafS)}
  console.log('\nheap MB after board 0..10: '+mem.map(m=>m.heapMB).join(' → ')+' · DOM nodes '+mem[0].nodes+' → '+mem[10].nodes+' · rAF/s idle on each result: '+loop.join(' '));
  const bad=rows.filter(([l,r])=>r.err||r.phase!=='result'||r.run||!r.shown);ok(!bad.length,'every board end path: result screen shows with KG82.phase «result» and the run stopped',bad.map(([l,r])=>l+' '+JSON.stringify(r).slice(0,200)));
+ {const mm=rows.filter(([l,r])=>typeof r.used==='number'&&r.card&&r.card.length&&!/kết quả/.test(l)&&+r.card[0].split('/')[0]!==Math.round(r.used));ok(!mm.length,'the mark on the result card = the value the rules use (law 4)',mm.map(([l,r])=>l+' card '+r.card.join(' ')+' used '+r.used))}
  const sg=rows.filter(([l,r])=>r.signs>0);ok(!sg.length,'result / next-round buttons keep their words (no ● sign pass on a result screen)',sg.map(([l,r])=>l+' '+(r.btns||[]).join('/')));
  ok(mem[10].heapMB-mem[1].heapMB<25,'10 boards: no heap growth beyond 25 MB (board 1 → 10)',mem.map(m=>m.heapMB));
  ok(!errs.length,'no page errors',errs.slice(0,5));
