@@ -410,7 +410,7 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
   else ok(false,'host: a free moment to check the #next heal',await A.p.evaluate(()=>({Q:Q.length,mg:!!S.mg,dis:document.getElementById('next').disabled,txt:document.getElementById('next').textContent})))}
  /* 6 one more week after rebirth */
  {const wk=(await C(A)).week;await weekBoth(A,B,1);const adv=await untilC(B,x=>__co().week===x+1,wk,90000);
-  const dump=o=>o.p.evaluate(()=>({co:__co(),k:wk()+':'+(S.buoi||0),used,Q:Q.length,mg:!!S.mg,dead:!!S.dead,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,rb:[COOPW.rweek,COOPW.rbuoi],tm:S.toMorning,tr:COOPW.tr.slice(-20)})).catch(e=>e.message);
+  const dump=o=>o.p.evaluate(()=>({co:__co(),k:wk()+':'+(S.buoi||0),used,Q:Q.length,mg:!!S.mg,dead:!!S.dead,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,rb:[COOPW.rweek,COOPW.rbuoi],tm:S.toMorning,q0:Q[0]&&String(Q[0].t||'').slice(0,40),modal:!document.getElementById('modal').hidden,cy:COOPW.cyHold,rp:Object.keys(COOPW.rpend||{}).length,fz:!!__co().frozen,selx:typeof selxDaysOn==='function'&&selxDaysOn(),life:window.__lifeTr&&window.__lifeTr.slice(-8),tr:COOPW.tr.slice(-20)})).catch(e=>e.message);
   ok(adv,'week after rebirth advances',adv?undefined:{w0:wk,A:await dump(A),B:await dump(B)});}
  /* 7 single player untouched + old save loads */
  /* COOP_OLD_REF: the build whose save must still load (default origin/main; in a shared checkout whose origin/main ref was moved, pass the base main commit) */
