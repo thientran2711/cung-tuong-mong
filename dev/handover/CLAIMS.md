@@ -626,3 +626,4 @@ owner-ui-a | review/owner-ui-a | session_01Rc5AsL76TjyWixB9Lf5iWr | RUNNING | 20
 ALLOT-SEASON (Nội vụ phủ allotment plan: fabric by season, cosmetics, than, tea, candles; unused-item rule) | plan only → reports/allot-season-plan.md | session_01PEhRbutKkyUU1W6mBp7ru8 | RUNNING | 27/11 05:16Z Foreman C
 act-move law-3 fix | review/act-move | session_01Rc5AsM9iW1G2zcaDL3uNtq | RUNNING | 2026-11-27T05:30Z (ACT-MOVE-6, MAIN 172; ACT-MOVE-5 rolled)
 lander | land-chain-28 | session_01Rc5AsKBqhCq1XrtewR7VyR | RUNNING | 2026-11-27T05:36Z (LC28, MAIN 172)
+boot skeleton flash (owner bug) | review/boot-skel-flash | session_01Rc5AsLUw7gDgkkzHaZqLd7 | RUNNING | 2026-11-27T05:42Z (MAIN 172)
