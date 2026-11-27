@@ -348,6 +348,26 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-skilled5-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-skilled5-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-speed3",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 291451175,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "8ea10d7e"
+   },
+   "ending": "Hồng nhan bạc mệnh — Lao phổi nguy kịch, không qua khỏi (age 37 y20; mixed build)",
+   "age": 37,
+   "buoi": 2933,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed3-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed3-moments.md"
   }
  ],
  "parked": [
