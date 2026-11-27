@@ -96,10 +96,24 @@ function whyFlushLate(){if(!S||!Array.isArray(S.logs))return;const L=WHYL.filter
  for(const [i,E] of by){const t=whyLogTail(E);if(t)S.logs[i]=S.logs[i].replace(/\s*$/,"")+t}}
 /* ---------- the result card: one more row of the kit grid ---------- */
 (function(){const r0=rsnap;rsnap=function(){const o=r0.apply(this,arguments);if(o)o.whyAt=WHYN;return o}})();
-function whyRows(before){if(!before)return[];const k=before.whyAt!=null?WHYN-before.whyAt:0;const L=k>0?WHYL.slice(-Math.min(k,WHYL.length)):WHYL.filter(e=>e.tk===WHYN_T);
- return whyUniq(whyMerge(L).map(e=>{let d=e.d;if((e.stat==="th"||e.stat==="hh")&&before[e.stat]!=null){const m=(S[e.stat]||0)-before[e.stat];if(m)d=m}return whyText(e,d)}).filter(Boolean))}
+function whyRowsE(before){if(!before)return[];const k=before.whyAt!=null?WHYN-before.whyAt:0;const L=k>0?WHYL.slice(-Math.min(k,WHYL.length)):WHYL.filter(e=>e.tk===WHYN_T);
+ const out=[],seen=new Set();for(const e of whyMerge(L)){let d=e.d;if((e.stat==="th"||e.stat==="hh")&&before[e.stat]!=null){const m=(S[e.stat]||0)-before[e.stat];if(m)d=m}const t=whyText(e,d);if(!t||seen.has(t))continue;seen.add(t);out.push({who:e.who,d,t})}return out}
+function whyRows(before){return whyRowsE(before).map(x=>x.t)}
+/* ONE SIEVE on the «Vì sao» row (owner OD 26/11 ~22:07Z (1) family, MAIN 167): her own lines, Thái hậu / Hoàng thượng, her household and every person
+   still NAMED on the card (Được / Mất / Kèm rows, title) keep their reason; the reasons of other people (bystanders) show at most BAL.news.card.rowMax
+   (largest change first) + «… và N người khác» (the Kèm wording); the folded reasons go into the card's Sổ ghi record (law 6c: nothing lost). */
+function whyOwn(p){try{if(!p||p===S||p==="th"||p==="emp"||p==="me")return true;if(typeof p!=="object")return true;if(p===S.maid||(S.staff||[]).includes(p))return true;return !!p.queen&&!p.name}catch(e){return true}}
+function whySieve(E,shown){const B=typeof BAL==="object"&&BAL.news&&BAL.news.card;if(!B||B.rowMax==null)return {keep:E,fold:[]};const keep=[],by=[];
+ for(const x of E){const p=x.who;if(whyOwn(p)||(p&&p.name&&shown.includes(p.name)))keep.push(x);else by.push(x)}
+ by.sort((a,b)=>Math.abs(b.d||0)-Math.abs(a.d||0));const fold=by.splice(B.rowMax);const kp=new Set(by);return {keep:E.filter(x=>keep.includes(x)||kp.has(x)),fold}}
+function whyFoldRec(fold,title,h0){try{if(!fold.length||!S)return;const tail=` Vì sao: ${fold.map(x=>x.t.replace(/<[^>]+>/g,"")).join("; ")}.`;const L=Array.isArray(S.hrec)?S.hrec:(S.hrec=[]);
+  const ids=fold.map(x=>x.who&&x.who.id).filter(x=>x!=null);
+  if(L[0]&&L[0]!==h0){L[0].t+=tail;L[0].ids=[...new Set((L[0].ids||[]).concat(ids))];return}/* the card's own fold record (jnsieve nsCard), made in this result */
+  L.unshift({q:S.logSeq||0,w:typeof wk==="function"?wk():0,dt:`T${S.month}/${S.year} ${typeof TUAN!=="undefined"?TUAN[S.tuan]:""}`,t:`${title?String(title).replace(/<[^>]+>/g,"")+" — ":""}kèm theo trong cung —${tail}`,ids,kem:1})}catch(e){}}
 function kitWhyRowHTML(T){return T&&T.length?`<span class="kr kr-note kr-vi"><span class="krl">Vì sao</span><span class="krv">${T.map(x=>`<span class="kitem"><span class="ef n">${x}</span></span>`).join("")}</span></span>`:""}
-(function(){const s0=resultShow;resultShow=function(title,before){const r=s0.apply(this,arguments);try{const T=whyRows(before);if(!T.length||window.__bot)return r;const t=document.getElementById("rtoast");
+(function(){const s0=resultShow;resultShow=function(title,before){const h0=S&&Array.isArray(S.hrec)?S.hrec[0]:null;const r=s0.apply(this,arguments);try{const E=whyRowsE(before);if(!E.length||window.__bot)return r;const t=document.getElementById("rtoast");
+ const shown=(t&&t.classList.contains("on")?(t.querySelector(".kb")||t).textContent:"")+" "+String(title||"");const SV=whySieve(E,shown);let T=SV.keep.map(x=>x.t);
+ if(SV.fold.length){T=T.concat([`… và ${SV.fold.length} người khác`]);whyFoldRec(SV.fold,title,h0)}
  if(t&&t.classList.contains("on")){const kb=t.querySelector(".kb");if(kb&&!kb.querySelector(".kr-vi")){const kem=kb.querySelector(".kr-kem");const tmp=document.createElement("span");tmp.innerHTML=kitWhyRowHTML(T);const row=tmp.firstChild;if(kem)kb.insertBefore(row,kem);else kb.appendChild(row)}}
  if(window.kaLastResult&&Array.isArray(window.kaLastResult.rows))window.kaLastResult.rows.push({k:"vi",label:"Vì sao",items:T.slice()})}catch(e){}return r}})();
 /* the result card's sentence never takes the why tail (kaSentence reads the Sổ ghi lines) */
