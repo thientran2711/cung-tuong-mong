@@ -26,3 +26,19 @@ B. BAL only: BAL.ex.win 2 → 3 tuần (one whole month) and a LAPSE (never sat)
 C. OWNER QUESTION only (law 16, do not build): should Đáp ứng→Thường tại→Quý nhân (ranks 0→2) still need the exam?
 D. To Foreman F: rt-offer.js «Lễ tấn phong» must count only when the title names HER (S.name) — harness fix, not mine.
 Before/after: rank-pace.js lazy / even / noexam(the «misses the card» player answering dialogs) / quiet on the fix build: time to rank 3 / 5 / HH. Base: LIVE + promo-stack-lr4 if it lands first (said in report).
+
+## BUILD 27/11 ~06:40Z — Foreman D GO (A + B; C to sếp via MAIN; D to Foreman F) · base review/promo-stack-lr4 e2c5d5ae (not yet LIVE at 98c77517)
+Branch review/rank-pace: e05a979d (A+B) · 88aac71e (card rows, lapse date ≤ next kỳ) · CHANGE line + robot pick · site build.
+A. jexam exAsk(ex,last): the ONE kit event card (Q.push ev card, existing kit) «Khảo hạch tấn phong»: «Thi ngay» (odds word · tốn: Sức BAL.ex.suc, BAL.ex.k khắc · được: thánh chỉ tấn phong X · hỏng: the Hành sự card's fail wait) / «Để sau» (card stays in Hành sự to the end of the window). Last tuần: one log line + the same card «Sắp hết hạn khảo hạch» once (e.rem). No new chip / kit part.
+   WHOLE FAMILY (scan in dev/test/rank-pace.js (0)): window openers = 2 sites, both call exAsk — jexam exTick (her consort window: ordinary/kỳ, son grace, daughter grace, Hoàng hậu special — all open here) and exSrvOpen (serving-maid Nội vụ phủ exam). Before: 0/2 with a card.
+B. BAL.ex.win 2 → 3 tuần; BAL.ex.cdLapse 1 (a window never sat); a fail keeps BAL.ex.cd. Consort under the kỳ rule: a lapse still waits to the next kỳ (exCdLapse = max(cdLapse, pbCdKy)) so the printed date is true; maid: 1 month.
+ROBOT before/after (rank-pace.js, 4 lives × 72 months; before = promo-stack-lr4 build; NOEXAM/QUIET answer dialogs; a player shown the card takes «Thi ngay»):
+| profile | before: max rank per life · reach Quý phi · HH | after: max rank · reach Tần / Quý phi / HH (median month) |
+|---|---|---|
+| NOEXAM (never opens Hành sự) | 1,2,3,3 · 0/4 · 0/4 (0 exams, 22 lapses) | 7,7,6,6 · Tần 3/4 m3 · Quý phi 4/4 m21.5 · HH 2/4 m40 (32 sat, 29 passed) |
+| QUIET (answers dialogs only) | 2,1,0,2 (LIVE) · 0 · 0 | 2,2,2,2 · 0 · 0 — Sủng gate 86–100 % (by design: no striving, no favour) |
+| even | 7,6,7,6 · 2/4 m20.5 · HH 2/4 m46 | 6,6,6,7 · Quý phi 3/4 m42 · HH 1/4 m57 (unchanged within noise) |
+| lazy (sits exams) | LIVE 6,3,6,6 | 5,7,7,7 · Tần 4/4 m3 · HH 3/4 m66 |
+LAW 5 (harder as she climbs) still holds after: months spent per rank (NOEXAM after) r1 4 · r2 27 · r3 28 · r4 53 · r6 99; higher ranks are held by seats, Hoàng hậu block, Thái hậu for the HH seat — no gate loosened.
+TESTS: dev/test/rank-pace.js ALL PASS (scan + 12 runtime cases incl. old save with an open / lapsed window). Old promo tests fix vs base: promo-exam 30/32 vs 29/32 (same 2 baseline FAILs; test now closes the new card before playing the Hành sự card), promo-rules / promo-skip / promote-servants / promo-next-rank / promo-root = identical results on base and fix (baseline FAILs), promo-build crashes on both (harness path).
+SHOTS/VIDEO (CDN, curl 206): img/_review/rank-pace/ fold-exam-dialog.mp4, ipad-exam-dialog.mp4, {fold,ipad}-{1-exam-card,2-hanhsu,3-reminder,4-board}.webp.
