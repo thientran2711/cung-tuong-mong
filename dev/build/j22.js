@@ -24,9 +24,10 @@ function whoMayKnow(){const w=watcher();return [w?w.name+" (canh cửa)":"",...l
 function ttExposed(p,m,lead){p=p||S;const me=p===S,who=m?m.name:"thị vệ";
  if(m){m.alive=false;log(`<span class="r">${lead?lead+" ":""}${m.name} bị xử trảm.</span>`)}else if(lead)log(`<span class="r">${lead}</span>`);
  if(!me)p.affair=null;
- /* PUNISH-TIER (OD 26/11 ~19:50Z / ~20:35Z, newer than MAIN 118 P2 of 24/11): the CRIME decides the penalty — Tư thông is BAL.charge.C.tt.tier (nặng =
-    giáng một bậc + lãnh cung) on the one fall() road, her and an NPC alike; the man is still xử trảm. Clash table: reports/punish-tier.md PUNISH-TIER-9. */
- fall(p,`tư thông với ${who}, bị lộ`,null,(BAL.charge.C.tt&&BAL.charge.C.tt.tier)||"nang")}
+ /* PUNISH-TIER (OD 26/11 ~19:50Z / ~20:35Z) + MAIN 179 ruling 27/11 ~17:56Z: tư thông PROVEN (caught / its letter / the book — every ttExposed caller) =
+    BAL.charge.ttProven (tử tội: ban chết, or the Emperor commutes it to phế vị + lãnh cung chung thân, BAL.charge.tu.spare) on the one fall() road; a charge
+    still only SUSPECTED (the «Tố giác» road, chPunish) = BAL.charge.C.tt.tier (nặng = giáng + lãnh cung). Her and an NPC alike; the man is still xử trảm. */
+ fall(p,`tư thông với ${who}, bị lộ`,null,BAL.charge.ttProven||"tu")}
 function affairExposed(m,how,p){return ttExposed(p||S,m,how)}
 /* ONE builder (role-parity part 2, law 1 two-way + law 4): the steps with a man, for her talk card and an NPC consort's day plan
    (jagacts4 cx4:man<step>, run by p4Run) — same odds of the doer, same tình ý, same eyes and the same death if caught.

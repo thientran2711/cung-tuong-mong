@@ -2491,6 +2491,7 @@ BAL.charge.tier={nhe:{n:"nhẹ",need:1},vua:{n:"vừa",need:2},nang:{n:"nặng",
 BAL.charge.tierOrd=["nhe","vua","nang","tu"];
 BAL.charge.tuDeed=["cyfake","catswap"];
 BAL.charge.tuTgt=["emp"];
+BAL.charge.ttProven="tu";/* MAIN 179 ruling 27/11 ~17:56Z: tư thông PROVEN (j22 ttExposed: caught, its letter, the book) = tử tội; suspected (charge road) stays C.tt.tier */
 BAL.charge.tu={spare:{base:10,sungD:4,thMin:60,th:20,hh:15,dadMin:60,dad:10}};
 BAL.charge.rkPlus=[0,0,0,1,1,1,2,2];/* owner 26/11 ~21:00Z: a plain COUNT by the ACCUSED's rank group — ≤ Quý nhân +0 · Tần / Phi / Quý phi +1 · Hoàng quý phi / Hoàng hậu +2 (index 7 = Hoàng hậu); with tier need: nhẹ 1/2/3 · vừa 2/3/4 · nặng 3/4/5 · tử tội 4/5/6 */
 /* PUNISH-TIER-3 WITNESSES (owner OD 26/11 ~21:10Z + ~21:17Z as overwritten ~21:40Z, verbatim on the handover branch): NHÂN CHỨNG is a SEPARATE
