@@ -187,7 +187,7 @@ function ktBtns(k){if(!k.alive)return[];ktSync(k);const B=[],t2=whyTime(2),t1=wh
  B.push(pbtn(`data-kt53="tv" data-kn="${k.name}"`,"Dạy chữ",`tốn: 2 khắc, Sức -${BAL.kidTeach.suc} · thành: Văn ${k.name} +${ktG(gv)} (mỗi mùa dạy một lần)`,t2||young||(k.mtv===ktSea()?"mùa này đã dạy chữ":S.suc<BAL.sucNeed.kid?"Sức dưới "+BAL.sucNeed.kid:"")));
  B.push(pbtn(`data-kt53="td" data-kn="${k.name}"`,"Dạy lễ nghi",`tốn: 2 khắc, Sức -${BAL.kidTeach.suc} · thành: Đức ${k.name} +${ktG(gd)} (mỗi mùa dạy một lần)`,t2||young||(k.mtd===ktSea()?"mùa này đã dạy lễ nghi":S.suc<BAL.sucNeed.kid?"Sức dưới "+BAL.sucNeed.kid:"")));
  const small=k.age<6?"con chưa đủ 6 tuổi vào Thượng thư phòng":"";
- if(small){B.push(pbtn(`data-kt53="none"`,"Mời thầy riêng",`tốn: Bạc -${KT.fee[1]} đến -${KT.fee[3]} mỗi tháng · thành: Văn, Đức, Võ tăng nhanh hơn học chung`,small));return B}
+ if(small){B.push(pbtn(`data-kt53="none"`,"Mời thầy riêng",`tốn: Bạc -${KT.fee[1]} đến -${KT.fee[3]} mỗi tháng · thành: ba môn (Văn, Đức, Võ) tăng nhanh hơn học chung`,small));return B}
  for(let t=0;t<4;t++){const r=ktRates(Object.assign({},k,{tut:t,age:Math.max(6,k.age)}),true);const cur=k.tut===t&&(t<3||!k.fav);
   const fee=KT.fee[t];const gain=`Văn khoảng +${ktYear(k,"tv",r.v)}/năm, Đức khoảng +${ktYear(k,"td",r.d)}/năm`;
   const sm=t===0?`thành: không tốn học phí · kèm: học chậm nhất (${gain})`:`tốn: 1 khắc, Bạc -${fee} mỗi tháng · thành: ${gain}${t===3?" · kèm: con giỏi quá thì phi tần khác ghen, dễ nhắm vào con":""}`;

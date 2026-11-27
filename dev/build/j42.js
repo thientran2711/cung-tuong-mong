@@ -230,7 +230,7 @@ function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const
  if(S.suc<SRVA.med.at&&!srvOnce("med"))X.push(med);
  /* AG-ALL-2 G6: the NPC servant's pilfering, as her card (jeitem eitPilTake: the same "notice" odds and the master's same four answers) */
  if(typeof eitPilMaidOk==="function"&&eitPilMaidOk()){const P=BAL.eit.pil;X.push({n:"Lén giữ đồ Nội vụ phủ phát",t:`Đồ Nội vụ phủ phát cho ${m.name} tháng này còn chưa kiểm; giấu đi một món đáng giá.`,k:SRVA.pil.k,c:{},o:SRVA.pil.o(S,m),w:{},l:{},
-  x:`thành: bán đi được bạc · hỏng: ${m.name} bắt được, tùy chủ xử: phạt (Chủ tin -${P.punLoyal}), tha, trả về Nội vụ phủ, hoặc làm ngơ`,once:"pil",go:()=>log(eitPilTake(true)),fail:()=>{const r=eitPilTake(false);if(r)log(r)}})}
+  x:`thành: bán đi được bạc · hỏng: ${m.name} bắt được, tùy chủ xử (phạt: Chủ tin -${P.punLoyal}; hoặc tha, trả về Nội vụ phủ, làm ngơ)`,once:"pil",go:()=>log(eitPilTake(true)),fail:()=>{const r=eitPilTake(false);if(r)log(r)}})}
  if(S.srv.rk>=SRVA.books.rk&&!srvOnce("so"))X.push({n:"Quản sổ sách trong cung",t:"Giữ sổ đồ dùng, sắp việc cho cung nữ dưới.",k:SRVA.books.k,c:SRVA.books.c,o:od(SRVA.books.o(S)),w:SRVA.books.w,l:SRVA.books.l,x:`công lao +${SRVA.books.mp}`,once:"so",go:()=>srvMerit(SRVA.books.mp)});
  if(!S.srv.err||S.srv.err.b!==B)S.srv.err=roll(SRVA.errand.offer)?Object.assign({b:B},srvErrPick()):{b:B,none:1};
  const er=S.srv.err;if(!er.none&&!er.acc)X.push({n:"Việc chủ sai",t:er.n+".",k:1,c:{},o:100,fix:1,w:{},x:"được vào nơi ấy buổi này · đến nơi chạm “Việc chủ sai”",go:()=>{er.acc=1;S.srv.sent={k:er.k,n:er.n,until:B,done:0,v:er.v||null};srvGoTo(er.k)}});

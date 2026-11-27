@@ -417,13 +417,16 @@ function pmLadLine(p){const L=[];for(const k of B().lad.arts){const q=pmLadPos(p
 function pmLadHTML(kind){const L=pmLad(kind),T=B().lad.top;
  const rows=L.map((p,i)=>{const tal=pmTal(p,kind);return{who:p,auto:false,text:`<span class="kgrow"><span><b class="kgpl">${i+1}.</b> ${kg82Name(p,p.name)}</span><b>${tal}</b></span><small>tài nghệ ${tal}${T[i]?` · mỗi tháng Danh +${T[i]}`:""}</small>`}});
  return `<p>Thứ bậc ${pmKindN(kind)} trong hậu cung. Chỉ đổi khi thắng nhau thật: người dưới thắng người trên thì lên thay chỗ ấy. Ngươi đứng thứ ${pmLadPos(S,kind)} / ${L.length}.</p>`+kg82Facts(rows)}
-PEND.pmLad=pp=>{const v=pp&&pp.v!=null?RV(pp.v):null;
- return{who:v?pv(v):null,t:`<p>Bảng tài nghệ hậu cung: xem thứ bậc của môn nào?</p><p class="past">Ba người đầu mỗi môn được thêm Danh mỗi tháng; ai đứng dưới có thể thách người trên để giành chỗ.</p>`,
-  o:B().lad.arts.map(k=>{const L=pmLad(k),top=L[0];return{n:pmKindN(k),fx:{},x:`ngươi thứ ${pmLadPos(S,k)} / ${L.length}${v?` · ${v.name} thứ ${pmLadPos(v,k)}`:""}${top?` · đứng đầu: ${top===S?"ngươi":top.name}`:""}`,
-   go:()=>{pushModal({t:`Bảng tài nghệ · ${pmKindN(k)}`,who:top?pv(top):null,h:pmLadHTML(k)});/* the figure = the art's leader */try{showModal()}catch(e){}}}}).concat([{n:"Thôi",fx:{}}])}};
+/* «Bảng tài nghệ hậu cung» is a VIEW (MAIN 164 ruling 26/11 ~22:04Z on owner 21:25Z «maximum 7 lá»): ONE kit info panel — every board in one look
+   (her place, the leader, the top names who earn Danh), no option cards (it was 8 boards + «Thôi» = 9 cards). Read-only: the challenge stays on the person card. */
+PEND.pmLad=pp=>{const v=pp&&pp.v!=null?RV(pp.v):null,T=B().lad.top;
+ const rows=B().lad.arts.map(k=>{const L=pmLad(k),top=L[0],tops=L.slice(0,T.length).map(p=>p===S?"ngươi":kg82Name(p,p.name)).join(", ");
+  return{who:top||null,auto:false,text:`<span class="kgrow"><span><b>${pmKindN(k)}</b></span><b>ngươi thứ ${pmLadPos(S,k)} / ${L.length}</b></span><small>${tops?`đứng đầu: ${tops}`:"chưa ai xếp hạng"}${v?` · ${v.name} thứ ${pmLadPos(v,k)}`:""}</small>`}});
+ return{who:v?pv(v):null,kind:"list",kit:{kind:"info"},t:`<p>Bảng tài nghệ hậu cung: thứ bậc từng môn.</p><p class="past">Ba người đầu mỗi môn được thêm Danh mỗi tháng (${T.map(n=>"+"+n).join(" / ")}); ai đứng dưới có thể thách người trên để giành chỗ.</p>`+kg82Facts(rows),
+  o:[{n:"Đã xem",fx:{}}]}};
 /* the entry = a VIEW, not an act toward a person (role-parity): one button at the end of her «Tài nghệ» tab (j83 artTabHTML) */
 function pmLadBtn(){if(isSrvSafe()||S.dead)return"";const l=pmLadLine(S);return pbtn(`data-pmlad="-1"`,"Bảng tài nghệ hậu cung",`xem thứ bậc từng môn${l?` · ngươi: ${l}`:""} · không tốn khắc`,"")}
-if(typeof artTabHTML==="function"){const a0=artTabHTML;artTabHTML=function(){const h=a0.apply(this,arguments);try{return h+pmLadBtn()}catch(e){console.error(e);return h}};window.artTabHTML=artTabHTML}
+if(typeof artTabHTML==="function"){const a0=artTabHTML;artTabHTML=function(){const h=a0.apply(this,arguments);try{return /ktn-grid/.test(h)?h:h+pmLadBtn()/* Tài nghệ cells (KIT §21e): the board is the «ⓘ Bảng tài nghệ» link in the sub-tab head */}catch(e){console.error(e);return h}};window.artTabHTML=artTabHTML}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-pmlad]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();const id=+b.dataset.pmlad;pushDil(mkP("pmLad",id>=0?{v:id}:{}),"Bảng tài nghệ");try{showModal();render()}catch(x){}}},true);
 /* ---------- memory (jmem): the deeds this act leaves ---------- */
 try{if(window.MEM_DEEDS){Object.assign(MEM_DEEDS,{pmplay:[1,0,"cùng {o} chơi {x}"],pmwin:[-1,0,"thắng {o} một ván {x}, lấy mất món cược"],pmyield:[1,0,"nhường {o} một ván {x}"],pmsaw:[0,0,"xem {o} thắng một ván {x}"],pmlad:[-1,0,"bị {o} giành ngôi trên bảng {x}"]})}
