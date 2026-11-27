@@ -104,3 +104,5 @@ Merged f28d28b9 (KIT_REQUESTS both; LIVE carries the K-PICK-LIVE sign-off + KIT.
   | branch af294eb2 | 134 ok, FAIL «same world after week 1» 39 diffs (S.wxDay.sk, R#1.staff loyal/tin… coop-host-lag family), then hang at 1700 s |
   | LIVE 772bee4f | 73 ok, hang in buoiBoth (week loop, «Target page closed» at 1700 s) |
   = LIVE family (co-op world sync / week loop), branch not worse; the branch touches only gift pickers. FOR D/MAIN: coop-e2e is red on LIVE 772bee4f even with coop-clear.
+
+## LANDED — LIVE 8330e8b8 (LC32) carries af294eb2 on rv26; my remerge 47e39f68 had identical sources. Gates on 47e39f68 above in FOREMAN_D_STATUS (inv-stack.js DOM fail = LIVE). Review closed.
