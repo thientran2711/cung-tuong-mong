@@ -291,6 +291,7 @@ let KIT_OPT_UNI=0;function kitOptUnify(b){if(KIT_OPT_UNI)return;const c=b&&b.par
 function kitOptUnify0(c){if(KIT_OPT_UNI)return;try{KIT_OPT_UNI=1;const sib=[...c.children].filter(x=>x.matches&&x.matches("button.ka")&&x.matches(KIT_OPT_SEL));if(!sib.some(x=>x.querySelector(":scope > .kaart")))return;
  sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;if(x.__kouS&&x.__kouS===kitOptUnSig(x))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);kitOptCompactRows(x);kitOptFinal(x);x.__kouS=kitOptUnSig(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
 function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.classList.contains("kcard")||b.closest(".pc")||b.classList.contains("kbare"))return;/* KIT §93.7 bare selection card: no rows */
+ kitOddsBadge(b);/* KK56: the odds live on the picture, before any idempotent early return (the card DOM can be rebuilt with the meter back in the title row) */
  {const k1=b.querySelector("small.kb");if(b.__kofSig&&k1&&b.__kofSig===kitOptSig(b,k1))return}/* idempotent: our own DOM edits must not re-trigger the observers that call us */
  b.querySelectorAll(".kfill,.kobang,.kdup").forEach(e=>e.remove());b.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  const body=b.querySelector(":scope > .kabody")||b;let kb=body.querySelector(":scope > small.kb, :scope > .kb");if(!kb){kb=document.createElement("small");kb.className="kb";body.appendChild(kb)}
@@ -304,7 +305,7 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  const free=false;/* KK56 (KIT-STD-AUDIT F7, OD 26/11 ~17:55Z KEEP ALL rows): a NAVIGATION option (nav:1) shows its Tốn / Được rows through the same kit rows (kaRows) like every card; the §6.2m no-row nav card is retired *//* OD 26/11 ~17:55Z (canon overwrite of tinbao-words): KEEP ALL result rows — «Tốn: không», «Được: không» stay on every card, nothing hidden; the .kfree no-row card is retired */
  /* LAW 3 (review/odds-meter-back): a card with NO roll (no odds of its own; a no-roll option carries no odds word at all, owner 26/11 ~18:25Z) cannot fail — its
     «mất: …» (parsed as a Bại row beside Thành) is a CERTAIN loss and stands in Tốn like a Mất row, never folded behind «!» */
- const sure=!b.querySelector(".kat .kodds");if(sure)mats=mats.concat(R("bai"));
+ const sure=!b.querySelector(".kat .kodds,:scope > .kaart .kodb");if(sure)mats=mats.concat(R("bai"));
  /* OD 21/11 ~05:0xZ (#72): the LOSS has its own «Mất» row (Tốn = the price, Được = the gain, Mất = what can be lost), never folded into Tốn */
  const loss=[];if(!ton){ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n kdup";e.textContent="không";ton.querySelector(".krv").appendChild(e)}
  mats.forEach(m=>chipsOf(m).forEach(c=>loss.push(dupOf(c))));
@@ -329,6 +330,28 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
    made the next kaNorm pass rebuild every copy (bare again), the painter titled them again, … — ~1900 DOM edits / 600 ms, the option list re-laid out
    every frame and its scroll snapped back to the top (pgin, rcpacc, empnight, …). */
 function kitOptSig(b,kb){try{const c=kb.cloneNode(true);c.querySelectorAll(".kdup,.kfill,.kobang").forEach(e=>e.remove());return c.innerHTML+"|"+(typeof kfCls==="function"?kfCls(b):b.className)}catch(e){return kb.innerHTML+"|"+(typeof kfCls==="function"?kfCls(b):b.className)}}/* kfCls: the press class is not a change (button-crawl-fix-4) */
+/* ================= KIT §93.8 · kitOddsBadge — THE ODDS ON THE PICTURE (owner 27/11 ~06:10Z; law 7 ladder, law 9/11 one part for every kit card with a picture + odds) =================
+   The kit odds part (kitOdds: 7-segment bar + word, the same look and words everywhere) sits as a small badge on the TOP edge of the card PICTURE (.kaart), centred, on a light kit plate so it
+   reads on any picture; the odds leave the title row / Tốn row (saves the row). A sure card (no roll, no odds word) gets NO badge. The badge scales with the picture (--kas): font clamp(.6rem, .12·--kas, .95rem),
+   so one rule serves the ~90-128 px small hand card and the 340-420 px big card.
+   API: kitOddsBadge(card) — moves the card's .kodds (or builds none) into card > .kaart as <span class="kodb"> (idempotent, returns the badge or null);
+        kitOddsBadgeHTML(word) → '<span class="kodb">…kitOdds…</span>' for a picture built by hand (plaque picture, event hand); kitOddsBadgeOn(pictureEl, word) puts one on any picture box.
+   Used by: act / option cards (kitOptFinal), plaques with a picture (jfocus btnHTML), the Bàn bài hand (KIT-STAGE wires kitOddsBadge on its cards and on the enlarged card). */
+function kitOddsBadgeHTML(w,o){try{if(typeof kitOdds!=="function"||typeof kitOddsLv!=="function"||kitOddsLv(w)<0)return"";return `<span class="kodb">${kitOdds(w,o)}</span>`}catch(e){return""}}
+function kitOddsBadgeOn(art,w,o){try{if(!art)return null;const old=art.querySelector(":scope > .kodb");if(old)old.remove();const h=kitOddsBadgeHTML(w,o);if(!h)return null;art.insertAdjacentHTML("beforeend",h);return art.querySelector(":scope > .kodb")}catch(e){return null}}
+function kitOddsBadge(b){try{if(!b||!b.querySelector)return null;const art=b.querySelector(":scope > .kaart");if(!art)return null;const k=b.querySelector(".kat .kodds,:scope > .kodds");
+ if(!k){return art.querySelector(":scope > .kodb")}const m=k.querySelector(".kodm");if(!m){k.remove();return null}let bd=art.querySelector(":scope > .kodb");if(!bd){bd=document.createElement("span");bd.className="kodb";art.appendChild(bd)}bd.innerHTML="";bd.appendChild(m);k.remove();return bd}catch(e){console.error("kitOddsBadge",e);return null}}
+window.kitOddsBadge=kitOddsBadge;window.kitOddsBadgeOn=kitOddsBadgeOn;window.kitOddsBadgeHTML=kitOddsBadgeHTML;
+/* every kit card with a picture and a meter, wherever it is built (act cards, event hands, option cards, …): ONE pass per frame after DOM changes moves the meter onto the picture */
+function kitOddsBadgeAll(){try{document.querySelectorAll("button.ka .kat .kodds, button.ka > .kodds").forEach(k=>{const c=k.closest("button.ka");if(c&&c.querySelector(":scope > .kaart"))kitOddsBadge(c)})}catch(e){}}
+(function(){let raf=0;const go=()=>{raf=0;kitOddsBadgeAll()};try{new MutationObserver(()=>{if(!raf)raf=requestAnimationFrame(go)}).observe(document.documentElement,{childList:true,subtree:true})}catch(e){}})();
+window.kitOddsBadgeAll=kitOddsBadgeAll;
+(function(){const st=document.createElement("style");st.id="kit-oddsbadge";st.textContent=`
+.kodb{position:absolute;top:3px;left:50%;transform:translateX(-50%);z-index:4;display:flex;align-items:center;justify-content:center;max-width:calc(100% - 6px);box-sizing:border-box;padding:1px 6px 1px 5px;border-radius:999px;background:#fffaf0f2;border:1px solid var(--gold,#c9a46a);box-shadow:0 1px 3px #0005;pointer-events:none;font-size:clamp(.6rem,calc(var(--kas,100px)*.12),.95rem);line-height:1.15;white-space:nowrap}
+.kodb .kodm{display:inline-flex;align-items:center;gap:.35em;margin:0;padding:0;background:none;border:0;pointer-events:none}
+.kodb .kodm b{font-size:1em}.kodb .kseg i{height:.55em;width:.55em}
+.kfoc-pic{position:relative}
+`;document.head.appendChild(st)})();
 window.kitOptFinal=kitOptFinal;
 (function(){const k0=kpOptArt;kpOptArt=function(b){const r=k0.apply(this,arguments);try{kitOptCompactRows(b);kitOptFinal(b);kitOptUnify(b)}catch(e){}return r};window.kpOptArt=kpOptArt})();
 /* KIT §6.2d — TWO OPTION LAYOUTS (1 long row per line / 2-column grid), phone AND iPad, and ONE SIZE PER BUTTON TIER (owner 18/11 ~16:05Z + 16:15Z).
