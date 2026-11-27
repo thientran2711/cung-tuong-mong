@@ -44,29 +44,27 @@ try{const r0=render;render=function(){const r=r0.apply(this,arguments);kstSched(
 try{if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kstSched();return r}}}catch(e){}
 try{new MutationObserver(kstSched).observe(document.body,{childList:true,subtree:true})}catch(e){}
 /* ---- the cards ---- */
+/* dthIn(h,rows): the dead record goes INTO the card's left column (.pcl) as ONE box .kdrec — jkpp §6.4b (kitPP) already routes «anything else under the portrait» to «Thông tin», so no kit part is touched.
+   The «đã mất» line (.past, the card's empty text) moves in with it (it would otherwise stay in the right column's hidden act holder). */
+function dthIn(h,rows){try{const pm=/<p class="past">[\s\S]*?<\/p>/.exec(h);let past="";if(pm){past=pm[0];h=h.replace(pm[0],"")}
+ const box=`<div class="kdrec">${rows||""}${past}</div>`,i=h.indexOf('</div><div class="pcr">');return i<0?h.replace('<div class="pcr">','<div class="pcr">'+(rows||"")+past):h.slice(0,i)+box+h.slice(i)}catch(e){return h}}
 try{const r0=rvCard;rvCard=function(v){let h=r0.apply(this,arguments);try{
- if(dthIs(v)){h=h.replace(">Đã chết<",">Đã khuất<");const rows=dthRows(v);if(rows)h=h.replace('<div class="pcr">','<div class="pcr">'+rows)}
+ if(dthIs(v)){h=h.replace(">Đã chết<",">Đã khuất<");h=dthIn(dthDrop(h,["Dạo này"]),kitRows(dthLife(v))+dthRows(v))}
  else if(v&&v.alive===false)h=h.replace(">Đã chết<",v.nun?">Đã xuất gia<":">Đã rời cung<")}catch(e){}return h}}catch(e){}
 try{const m0=manCard;manCard=function(m){if(!dthIs(m))return m0.apply(this,arguments);const f=pMan(m);
- return dthDrop(pcard({f,col:"#6a8aa0",name:m.name,rank:m.role,status:"Đã khuất",out:true,lines:[tuoi(m.age)].filter(Boolean),chips:[],note:"",groups:[],empty:`<p>${m.name} đã khuất. Chỉ còn lại những gì người ta còn nhớ về hắn.</p>`}).replace('<div class="pcr">','<div class="pcr">'+dthRows(m)),["Dạo này"])}}catch(e){}
+ return dthDrop(dthIn(pcard({f,col:"#6a8aa0",name:m.name,rank:m.role,status:"Đã khuất",out:true,lines:[tuoi(m.age)].filter(Boolean),chips:[],note:"",groups:[],empty:`<p>${m.name} đã khuất. Chỉ còn lại những gì người ta còn nhớ về hắn.</p>`}),dthRows(m)),["Dạo này"])}}catch(e){}
 /* ---- the whole record as it was (owner 27/11 ~05:10Z, MAIN LOOK): what she was in life from existing data; no live lines about a dead person ---- */
 function dthDrop(h,labels){try{const t=document.createElement("template");t.innerHTML=h;t.content.querySelectorAll(".kr").forEach(r=>{const l=(r.querySelector(".krl")||{}).textContent||"";const v=(r.querySelector(".krv")||{}).textContent||"";if(labels.includes(l.trim())||(/^Đã biết$/.test(l.trim())&&/chưa biết gì thêm/.test(v)))r.remove()});return t.innerHTML}catch(e){return h}}
 function dthLife(v){const R=[];try{const pn=palName(palaceOf(v));if(pn&&!pn.includes(v.name))R.push(["Cung ở",pn])}catch(e){}
- const K=v.kids||[];if(K.length)R.push(["Con cái",K.map(k=>`${k.name}${k.alive?"":" (đã mất)"}`).join(", ")]);
+ const K=v.kids||[];if(K.length)R.push(["Con cái",K.map(k=>`${k.name}${k.alive?"":" (đã khuất)"}`).join(", ")]);
  if(v.out)R.push(["Lúc mất","đang ở lãnh cung"]);return R}
-try{const r1=rvCard;rvCard=function(v){let h=r1.apply(this,arguments);try{if(dthIs(v)){h=dthDrop(h,["Dạo này"]);const life=kitRows(dthLife(v));if(life)h=h.replace('<div class="pcr">','<div class="pcr">'+life)}}catch(e){}return h}}catch(e){}
 try{const kf=kidFace;kidFace=function(k){const f=kf.apply(this,arguments);try{const s=stOf(k);if(s&&f&&typeof f==="object")f.st=s}catch(e){}return f}}catch(e){}
-try{const kc=kidCard;kidCard=function(k){let h=kc.apply(this,arguments);try{if(dthIs(k)){h=h.replace(">Đã mất<",">Đã khuất<");let mom="";try{const m=allKids().find(([x])=>x===k);mom=m&&m[1]?m[1].name:S.name}catch(e){}const rows=dthRows(k)+kitRows(mom?[["Mẹ",mom]]:[]);h=dthDrop(h.replace('<div class="pcr">','<div class="pcr">'+rows).replace("Con đã mất.",""),["Dạo này"])}}catch(e){}return h}}catch(e){}
+try{const kc=kidCard;kidCard=function(k){let h=kc.apply(this,arguments);try{if(dthIs(k)){h=h.replace(">Đã mất<",">Đã khuất<");let mom="";try{const m=allKids().find(([x])=>x===k);mom=m&&m[1]?m[1].name:S.name}catch(e){}const rows=dthRows(k)+kitRows(mom?[["Mẹ",mom]]:[]);h=dthDrop(dthIn(h.replace("Con đã mất.",""),rows),["Dạo này"])}}catch(e){}return h}}catch(e){}
 
 /* ---- her dead servants (S.dstaff, kept by jmort kill): own group «Đã khuất» at the end of the Cung nhân strip ---- */
 try{const p0=pager;pager=function(key,items,mk){if(key!=="staff"||!S||!(S.dstaff||[]).length)return p0.apply(this,arguments);const D=S.dstaff.filter(dthIs);if(!D.length)return p0.apply(this,arguments);const n=items.length;
  const it2=items.concat(D.map((s,j)=>({f:Object.assign({},pServ(s),{st:"dead"}),name:shortN(s.name),dim:true,sep:j?"":"Đã khuất"})));
- const h=p0.call(this,key,it2,i=>i<n?mk(i):(s=>dthDrop(pcard({f:it2[i].f,name:s.name,rank:s.role==="maid"?"Cung nữ":"Thái giám",status:"Đã khuất",out:true,lines:[tuoi(s.age)].filter(Boolean),chips:[],groups:[],empty:`<p>${s.name} đã khuất.</p>`}).replace('<div class="pcr">','<div class="pcr">'+dthRows(s)),["Dạo này"]))(D[i-n]));
+ const h=p0.call(this,key,it2,i=>i<n?mk(i):(s=>dthDrop(dthIn(pcard({f:it2[i].f,name:s.name,rank:s.role==="maid"?"Cung nữ":"Thái giám",status:"Đã khuất",out:true,lines:[tuoi(s.age)].filter(Boolean),chips:[],groups:[],empty:`<p>${s.name} đã khuất.</p>`}),dthRows(s)),["Dạo này"]))(D[i-n]));
  return h.replace(/(<span class="pcount">[^<]*)/,`$1 · Đã khuất: ${D.length}`)}}catch(e){}
 })();
 
-/* ---- dead card × KIT §6.4b person info panel (jkpp, main 0562e15f): kitPP moves everything the right column held into the hidden act holder (.kppact) and shows only «Thông tin» (.pcf) / «Giao tình»;
-   the dead record rows (Con cái · Hưởng dương/Hưởng thọ · Nguyên do · Mẹ … = .kpkb) and the «đã mất» line (.past) were therefore out of sight. For a dead person they stand FIRST in «Thông tin». ---- */
-try{const kp0=kitPP;kitPP=function(pc,force){const r=kp0.apply(this,arguments);try{if(pc&&pc.dataset&&pc.dataset.kpp==="1"&&pc.querySelector(":scope>.pcl .kst-dead")){
-  const A=pc.querySelector(":scope>.pcr>.kppact"),I=pc.querySelector(':scope>.pcr>.kppv[data-v="info"]');
-  if(A&&I){const mv=[...A.querySelectorAll(".kpkb,.past")].filter(e=>e.parentNode!==I&&!e.closest(".pcf"));if(mv.length)I.prepend(...mv);I.classList.remove("kppempty")}}}catch(e){console.error("dead info",e)}return r};window.kitPP=kitPP}catch(e){}

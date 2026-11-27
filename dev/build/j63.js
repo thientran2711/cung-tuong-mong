@@ -326,7 +326,7 @@ function kaAimPart(k,nm,a,b){return `<span class="ef ${b<a?"r":"g"}">${nm} ${kaN
 /* the target's own change since the act began: stats, rank, cấm túc, phế, mất (status words VANPHONG) */
 function kaAimStat(x){const v=x.v,b=x.b0||{},P=[];for(const [k,nm] of KA_AIMK){if(b[k]==null||typeof v[k]!=="number")continue;const a=Math.round(b[k]),n=Math.round(v[k]);if(a!==n)P.push(kaAimPart(k,nm,a,n))}
  if(typeof rivals==="undefined"||!rivals.includes(v))return P;/* rank / cấm túc / phế: consorts only (a servant's rank is another ladder) */
- if(b.alive&&v.alive===false)P.push('<span class="ef r">đã mất</span>');else if(!b.out&&v.out)P.push('<span class="ef r">bị phế, ra khỏi cung</span>');
+ if(b.alive&&v.alive===false)P.push('<span class="ef r">đã khuất</span>');else if(!b.out&&v.out)P.push('<span class="ef r">bị phế, ra khỏi cung</span>');
  else{if(b.rank!=null&&v.rank!=null&&v.rank!==b.rank&&typeof RANKS!=="undefined"&&RANKS[v.rank])P.push(`<span class="ef ${v.rank<b.rank?"r":"g"}">${v.rank<b.rank?"bị giáng xuống":"được thăng"} ${RANKS[v.rank].n}</span>`);
   if(!b.confined&&(v.confined||0)>0)P.push('<span class="ef r">bị cấm túc</span>')}
  return P}
