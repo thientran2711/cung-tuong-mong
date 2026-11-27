@@ -18,13 +18,13 @@ function kitOffAttr(c){if(!c||!c.off||!c.off.why)return"";const t=c.off.why+(c.o
       (art.tam true / kitTam(true)); gone by itself when the exact picture exists. Caller: kitTam(isStandin) -> html ('' when exact).
       Put it inside a position:relative picture box. */
 function kitTam(standin){return standin?`<span class="ktam" role="note" title="Tranh tạm, sẽ có tranh đúng sau">tạm</span>`:""}
-/* 3. PORTRAIT STATE (owner 27/11 ~05:10Z, one kit part): who is in lãnh cung keeps her OWN colours, only faded and washed warm like an old painting (.kst-lc);
+/* 3. PORTRAIT STATE (owner 27/11 ~05:10Z, one kit part): who is in lãnh cung keeps her OWN colours, much paler and washed out, no tint (.kst-lc);
       black-and-white is reserved for the DEAD (.kst-dead). Set by jdead.js from f.st ('lc' | 'dead') on the two portrait renderers (mdH → .md, pcPort → .pcp),
       so every place a person is drawn (Hậu cung strip + card, men, relation rows, panels) shows the same state. Values are the look, not game numbers. */
 (function(){const st=document.createElement("style");st.textContent=`
-.md.kst-lc,.pcp.kst-lc{filter:saturate(.4) sepia(.35) brightness(1.06)}
+.md.kst-lc,.pcp.kst-lc{filter:saturate(.45) brightness(1.12) contrast(.86)}
 .md.kst-dead,.pcp.kst-dead{filter:grayscale(1) brightness(.92)}
-html body .pface.on>.md.kst-lc{filter:saturate(.4) sepia(.35) brightness(1.06) var(--k-glow)}html body .pface.on>.md.kst-dead{filter:grayscale(1) brightness(.92) var(--k-glow)}
+html body .pface.on>.md.kst-lc{filter:saturate(.45) brightness(1.12) contrast(.86) var(--k-glow)}html body .pface.on>.md.kst-dead{filter:grayscale(1) brightness(.92) var(--k-glow)}
 `;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.textContent=`
 .ktam{position:absolute;top:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
