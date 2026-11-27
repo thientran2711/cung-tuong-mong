@@ -194,7 +194,7 @@ function exAdd(){try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.exam))deck.unshi
 function exDrop(){try{if(Array.isArray(deck))deck=deck.filter(a=>!(a&&a.exam))}catch(e){}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(exOn()&&!S.out&&!exSrv(S)&&S.ex&&S.ex.w1!=null&&!S.ex.pass)exAdd()}catch(e){}return r}})();
 (function(){const r0=runOpt;runOpt=function(a){if(a&&a.exam){if(!canPay(a))return null;if(a.c)apply(a.c);log(`${a.exLbl||`Dự khảo hạch tấn phong ${exRk(exS(S).to)}.`} ${fmt(a.c)||""}`);try{a.go()}catch(e){console.error(e)}return true}return r0.apply(this,arguments)}})();
-(function(){const c0=cardH;cardH=function(a){let h=c0.apply(this,arguments);try{if(a&&a.exam)h=h.split("không mất gì").join(`trượt: chờ ${pbWk(a.cdN||exCd(exS(S).to))} tuần mới được thi lại`).replace(/<button\b/,'<button data-kexam="1"')}catch(e){}return h}})();
+(function(){const c0=cardH;cardH=function(a){let h=c0.apply(this,arguments);try{if(a&&a.exam)h=h.split("không mất gì").join(`trượt: chờ ${pbWkIn(a.cdN||exCd(exS(S).to))} tuần mới được thi lại`).replace(/<button\b/,'<button data-kexam="1"')}catch(e){}return h}})();
 /* its category word on the picture frame: an exam of etiquette and duties is «Lễ nghi», not the default «Giao thiệp» (same pattern as j79 sung-ai) */
 try{KIT_ACT_CATS.unshift(["le-nghi",/khảo hạch tấn phong|khảo hạch nội vụ phủ/i])}catch(e){}
 /* the act picture (owner 14:30Z: no group images): the exam card shows ONLY its own picture (ACTS.json «Khảo hạch tấn phong»); with no own key
@@ -226,7 +226,7 @@ function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n
  const result=()=>{const sc=exScore(P,raws);const r=Object.assign(sc,{P,raws});
   kg82Open({art:"Khảo hạch",round:"Môn",pic:kg82Pic(P.rounds[P.rounds.length-1]||"tho"),title:`Kết quả · ${P.rk}`,how:"Tổng phần = phần thi các môn + Tứ đức + tài nghệ. Đạt mức đỗ của giám khảo thì đỗ."});
   const parts=[["Các môn",raws.map((x,j)=>`${KG82_KIND[P.rounds[j]].n} ${x}/10`).join(" · ")],[`Phần thi (trung bình ${String(sc.avg).replace(".",",")} × ${BAL.ex.wPlay})`,`+${sc.play}`],[`Tứ đức (${P.virL})`,`+${P.vir}`],[P.artL,`+${P.art}`],["Mức đỗ","cần "+exBarTxt(P)]];
-  const note=sc.pass?`Đỗ. ${P.passTxt}`:`Trượt. Chờ ${pbWk(P.cdN)} tuần mới được thi lại.`;
+  const note=sc.pass?`Đỗ. ${P.passTxt}`:`Trượt. Chờ ${pbWkIn(P.cdN)} tuần mới được thi lại.`;
   kg82ShowRes(kitGameResult({parts,total:`${sc.total} phần · cần ${P.bar}`,note})+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,P.srv?!!sc.pass:null);/* final: player exam = null (exDone plays examPass / examFail); servant exam has no exDone sound, so the panel plays it */
   kg82Set("score",String(sc.total));kg82Set("round",`${n}/${n}`);kg82Set("time","đã hết");try{$("kg82ok").scrollIntoView({block:"nearest"})}catch(x){}
   $("kg82ok").onclick=()=>{e.pend=null;kg82Close();done(r);try{save()}catch(x){}render()}};

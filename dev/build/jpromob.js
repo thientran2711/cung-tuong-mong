@@ -51,12 +51,15 @@ function pbCdKy(){if(!S||!BAL.promoR)return 0;const A=pbA(),n=pbNextKy(A+1);retu
 /* promo-stack-lr4 (OD 26/11 ~22:58Z «vì 1 ngày của mình là theo tuần, nên để theo tuần đi»; MAIN 167): ONE count of tuần for a span of months —
    months × the tuần of a month (BAL.cut.tuanDays.length + 1); every «còn N tuần» to a kỳ / đại lễ and the HUD slot read this (law 4, no typed number) */
 function pbWk(m){const W=((BAL.cut&&BAL.cut.tuanDays)||[]).length+1;return Math.max(0,Math.round((+m||0)*W))}
-window.pbWk=pbWk;
+/* rv-promo-stack-lr4: «còn N tuần» from NOW to a month m months ahead — a kỳ / đại lễ / retry opens at that month's first tuần, so the tuần already
+   gone in this month (S.tuan, 0-based) are taken off: pbWk(m) − S.tuan. pbWk stays the plain span (HUD x/y total). */
+function pbWkIn(m){return Math.max(0,pbWk(m)-(+(S&&S.tuan)||0))}
+window.pbWk=pbWk;window.pbWkIn=pbWkIn;
 /* the promoReqP row (j8): true in a kỳ month, while her kỳ window runs on, or once the exam is passed (the decree waits for a seat) */
 function pbKyRow(p){try{if(!BAL.promoR||typeof exOn!=="function"||!exOn()||!p||p.out||rkOf(p)+1>=7||(typeof exSrv==="function"&&exSrv(p)))return null;const e=p.ex,to=rkOf(p)+1;
  if(e&&e.to===to&&e.pass)return[true,"Kỳ sắc phong: đã đỗ khảo hạch"];const A=pbA(),k=pbKyAt(A);if(k)return[true,`Kỳ sắc phong: ${pbFestN(k)} (đang mở)`];
  if(p===S&&e&&e.to===to&&e.w1!=null&&e.kyw!=null)return[true,"Kỳ sắc phong: đang trong hạn thi"];
- const n=pbNextKy(A+1);return[false,n?`Kỳ sắc phong: chưa tới (kỳ tới ${n.n}, còn ${pbWk(n.A-A)} tuần)`:"Kỳ sắc phong: chưa tới"]}catch(x){console.error("pbKyRow",x);return null}}
+ const n=pbNextKy(A+1);return[false,n?`Kỳ sắc phong: chưa tới (kỳ tới ${n.n}, còn ${pbWkIn(n.A-A)} tuần)`:"Kỳ sắc phong: chưa tới"]}catch(x){console.error("pbKyRow",x);return null}}
 
 /* ---------- special exams (daughter weight) ---------- */
 function pbGuest(){return !!(window.COOPW&&COOPW.on&&COOPW.seat&&COOPW.seat!=="a")}
@@ -148,7 +151,7 @@ function pbDl(){const B=BAL.promoR.dl;if(!B||!B.on)return"";const X=pbDlWhich();
  for(const r in by){const L=by[r];const free=SEATCAP[r]==null?L.length:Math.max(0,SEATCAP[r]-holders(+r).length);
   if(L.length<=free){for(const p of L){const t=exDirectUp(p,nm.toLowerCase(),{fx:p===S?1:0});const c=pbDlCost(p);if(p===S)mine+=t+c;else{ev+=t;try{newsAdd(p,"promo",t,true)}catch(x){}}window.__pbDlN=(window.__pbDlN||0)+1}}
   else{for(const p of L){const e=exS(p);e.pass=true;e.dl=A}ev+=`Ghế ${RANKS[r].n} không đủ cho ${L.length} người đủ điều kiện (${L.map(p=>p===S?"ngươi":p.name).join(", ")}): phải tranh ghế. `}}
- if(!mine&&!ok.includes(S)&&pbCan(S)){const miss=pbDlRows(S).filter(x=>!x[0]).map(x=>x[1]);const n=pbNextKy(A+1);mine=`Ngươi chưa đủ điều kiện (${miss[0]||""}${miss.length>1?`, còn ${miss.length-1} điều nữa`:""}): chờ kỳ sắc phong tới${n?` (${n.n}, còn ${pbWk(n.A-A)} tuần)`:""}. `}
+ if(!mine&&!ok.includes(S)&&pbCan(S)){const miss=pbDlRows(S).filter(x=>!x[0]).map(x=>x[1]);const n=pbNextKy(A+1);mine=`Ngươi chưa đủ điều kiện (${miss[0]||""}${miss.length>1?`, còn ${miss.length-1} điều nữa`:""}): chờ kỳ sắc phong tới${n?` (${n.n}, còn ${pbWkIn(n.A-A)} tuần)`:""}. `}
  return ev+mine}
 (function(){const n0=pbFestN;pbFestN=function(k){if(typeof k==="string"&&k.startsWith("dl:"))return PB_DL[k.slice(3)]||"Đại lễ";return n0(k)}})();
 window.pbDl=pbDl;window.pbDlWhich=pbDlWhich;window.pbDlOk=pbDlOk;
@@ -165,20 +168,20 @@ function pbDlNext(){try{const B=BAL.promoR&&BAL.promoR.dl;if(!S||!B||!B.on)retur
   if(!S.thDead&&F.thanhtho&&S.thAge>0){const mo=+F.thanhtho.m,A=y*12+mo-1,age=S.thAge+dy;if(B.thTho.includes(age)&&ok(A,"th"+age))take(A,"thTho")}
   if(S.emp&&S.emp.age>0&&F.vantho){const mo=+F.vantho.m,A=y*12+mo-1,age=S.emp.age+dy;if(B.empTho.includes(age)&&ok(A,"e"+age+era))take(A,"empTho")}
   if(best)break}
- if(!best)return null;const m=best.A-A0;return{A:best.A,k:best.k,name:PB_DL[best.k],m,w:pbWk(m)}}catch(e){console.error("pbDlNext",e);return null}}
+ if(!best)return null;const m=best.A-A0;return{A:best.A,k:best.k,name:PB_DL[best.k],m,w:pbWkIn(m)}}catch(e){console.error("pbDlNext",e);return null}}
 window.pbDlNext=pbDlNext;
 (function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{if(S&&!S.dead)ev+=pbMonth()}catch(e){console.error("promo-build",e)}return ev}})();
 /* her kỳ notice: once per kỳ month, the festival + whether she may sit + when the next one is */
 function pbNotice(){if(!S||S.dead||S.out||rkOf(S)>=7||(typeof exSrv==="function"&&exSrv(S))||!exOn())return;pbKyUpdate();const P=pbSt(),A=pbA();
  if(S.pbV==null){S.pbV=1;if((S.turn||0)>0)log("Luật mới trong cung: thăng phẩm thường chỉ xét ở kỳ sắc phong (vài dịp lễ trong năm); đủ điều kiện mới được dự khảo hạch.")}
- const k=pbKyAt(A);if(!k||P.kn===A)return;P.kn=A;const e=exS(S),nm=pbFestN(k),n=pbNextKy(A+1),nx=n?` Kỳ tới: ${n.n}, còn ${pbWk(n.A-A)} tuần.`:"";
+ const k=pbKyAt(A);if(!k||P.kn===A)return;P.kn=A;const e=exS(S),nm=pbFestN(k),n=pbNextKy(A+1),nx=n?` Kỳ tới: ${n.n}, còn ${pbWkIn(n.A-A)} tuần.`:"";
  if(e.pass)return;const miss=promoReqP(S).filter(x=>!x[0]&&!/^Kỳ sắc phong|Khảo hạch/.test(x[1])).map(x=>x[1]);
  if(miss.length)log(`${nm} là kỳ sắc phong. Ngươi chưa đủ điều kiện nên không được dự (${miss[0]}${miss.length>1?`, còn ${miss.length-1} điều nữa`:""}).${nx}`);
  else log(`<b class="g">${nm} là kỳ sắc phong</b>: Nội vụ phủ mở khảo hạch tấn phong ${exRk(e.to)} cho người đủ điều kiện.${nx}`)}
 (function(){const t0=exTick;exTick=function(){try{pbNotice()}catch(e){console.error("pbNotice",e)}return t0.apply(this,arguments)}})();
 /* Mệnh truyện › Sắc phong: one more kit chip, the next kỳ */
 (function(){if(typeof exChips!=="function")return;const c0=exChips;exChips=function(){let h=c0.apply(this,arguments)||"";try{if(h&&BAL.promoR){const A=pbA(),k=pbKyAt(A),n=pbNextKy(A+1);
- const e=exS(S);const sp=e.grace===e.to?exGw(e):"";if(sp)h+=" "+kitChip(`Thi riêng: ${sp}`,"g");h+=" "+kitChip(k?`Kỳ sắc phong: ${pbFestN(k)}`:n?`Kỳ tới: ${n.n}, còn ${pbWk(n.A-A)} tuần`:"Chưa định kỳ sắc phong",k?"g":"n")}}catch(e){}return h}})();
+ const e=exS(S);const sp=e.grace===e.to?exGw(e):"";if(sp)h+=" "+kitChip(`Thi riêng: ${sp}`,"g");h+=" "+kitChip(k?`Kỳ sắc phong: ${pbFestN(k)}`:n?`Kỳ tới: ${n.n}, còn ${pbWkIn(n.A-A)} tuần`:"Chưa định kỳ sắc phong",k?"g":"n")}}catch(e){}return h}})();
 
 /* ---------- PHÂN CUNG: the host rule (jpal palFix → pcHostPick) ---------- */
 function pcN(x,k){const B=BAL.promoR.pc;return cl(((x||0)-B.mid[k])/B.span[k],-1,1)}
