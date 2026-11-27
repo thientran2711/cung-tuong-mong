@@ -1564,17 +1564,15 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   picture) · name in its KIT_GRADE colour (2 lines) · what it is (IT.d, or the work tier) · (grade = the chip on the picture). No button row. Taint = corner tag
   "đã tẩm". A tile she cannot choose (option `lock`, or not enough bạc) is greyed (`.kshno`) but still selectable to read why.
   Doable tiles first, then the dialog's own order. Horizontal rows that wrap (the Tư trang look).
-- PAGES (K-LIST-PAGE, picker-dom 26/11, MAIN 164 play-stopper: a year-18 chest drew 36k–63k nodes, iPad tab crash): the grid shows
-  `BAL.kip.page` tiles at a time, with the §23 kit pager around it (`.kpkwrap` ‹ › `.kpkpg` + `.kpkpn` «trang N/M», no count; pager
-  hidden on one page; the tile box keeps its max height and scroll as above). The page that holds the chosen tile opens first. The dialog (j3 `showModal`, `m.kipOnly`) draws only the CHOSEN
-  item's option card; another tile's card is built when it is chosen (`kipCard` = the same `optBtnHTML` + `kitFix`, so the copy and the
-  confirm are the real option). Test: `node dev/test/picker-dom.js` (DOM < 2,000 per picker on F's s7 save, every entry reached once,
-  on-demand card = drawn card, confirm gives one piece); scan `node dev/test/picker-dom-scan.js`.
-- Tap a tile → selected (31.13: glow + ×1.06, the rest at .75 opacity; `aria-checked`), the first doable tile is preselected.
-  Under the grid `.kipd`: that option's OWN kit card (display copy of its `.opt`: name, odds word, Tốn / Được / Mất / Kèm or the reason
-  `.kwhy`) + ONE confirm button `.kipgo` (kit `.kbtn`, verb per dialog: Tặng / Dâng / Cài vào rương), greyed when the option is locked.
-  Confirm clicks the real option button, so chooseM and every wrapper (cost, j25 visit ticket, §64 item-event hooks) run unchanged.
-  Above the card: the KIT §70 item detail strip (`kitItemDetail({e},{cls:"kidet-strip",noLux:true})`, jitd). Close = the kit ✕ (32.10), no Thôi row.
+- PAGES (K-LIST-PAGE, picker-dom 26/11, MAIN 164 play-stopper: a year-18 chest drew 36k–63k nodes, iPad tab crash): the grid shows ONE
+  PAGE = whole rows that fit, no inner scroll, no half row (§23): the columns the grid really shows in that dialog at that width (measured
+  once the dialog has settled, kept per dialog kind and width; Fold 755 = 2, iPad 1180 = 4–5) × `BAL.kip.rows` (2). The §23 kit pager sits
+  around it (`.kpkwrap` ‹ › `.kpkpg` + `.kpkpn` «trang N/M», no count; hidden on one page). The page that holds the chosen tile opens first.
+  The dialog (j3 `showModal`, `m.kipOnly`) draws the option cards of THAT page + the chosen one; a page turn (or a card not drawn yet) runs
+  `showModal` again, so every decorator that wraps the draw (giftto lock / `.kgiftno` + chip, hideOut, eaLockWhy …) dresses every card the
+  same way. Test: `node dev/test/picker-dom.js` (DOM < 2,000 per picker on F's s7 save; every page whole rows, no inner scroll; every tile
+  reached; a locked + an open card per picker = the full-draw card: classes, disabled, data-*, text, chip; confirm gives one piece);
+  scan `node dev/test/picker-dom-scan.js`.
 - Phone landscape (height ≤ 500): grid and detail side by side.
 - Users: giftpick (Hậu cung act "Tặng quà", now with the gift card's own line `giftEval`: odds · tốn · thành · kèm), giftto (Dâng quà
   Hoàng thượng / Thái hậu), plantpick (Cài đồ vào rương). Scan: `node dev/test/gift-pick-scan.js` (every option list built from S.inv).

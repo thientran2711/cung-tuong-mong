@@ -40,9 +40,13 @@ function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=
  d.insertAdjacentHTML("beforeend",`<button type="button" class="kbtn kipgo" data-kipgo="${i}"${lock?" disabled":""}>${kipE(KIP_VERB[m.pid]||"Chọn")}</button>`)}
 /* K-LIST-PAGE (picker-dom, MAIN 164 play-stopper 26/11; Foreman F s14 iPad b1570 tab crash, one screen 20,108 nodes; s7 save 36k–63k nodes,
    «Dâng quà» 232 s to open): the grid used to draw a FULL hidden act card (.opts.kiphas>.opt, ~26 nodes, kaNorm'd) for EVERY entry + a tile.
-   Now (1) the base dialog (j3, m.kipOnly) draws only the chosen item's card; kipCard draws another one when its tile is chosen (same
-   optBtnHTML + kitFix → kaNorm1, so the copy and the confirm are the real option); (2) the grid shows BAL.kip.page tiles at a time with the
-   kit pager of §23 (‹ › + «trang N/M», kitPicker's .kpkwrap/.kpkpg/.kpkpn look; no count). Doable first, then the dialog's order (unchanged). */
+   Now the grid shows ONE PAGE = whole rows that fit (columns of the grid × BAL.kip.rows; no inner scroll, no half row, KIT §23) with the §23
+   kit pager (‹ › + «trang N/M», kitPicker's .kpkwrap/.kpkpg/.kpkpn look; no count). The dialog (j3 showModal, m.kipOnly) draws the option
+   cards of THAT page (+ the chosen one) through the one real path: a page turn, or a choice whose card is not drawn, runs showModal again,
+   so every wrapper that decorates the cards after the draw (jgift giftto lock/.kgiftno + item chip, jk2b hideOut, jemoact eaLockWhy …) runs on
+   every card the same way (rv picker-dom FAIL 1). Doable first, then the dialog's order (unchanged). */
+const KIP_PG=new WeakMap(),KIP_FIT=new WeakMap(),KIP_COLS=new Map();let kipRO=null;
+function kipColKey(m){return (m&&m.pid||"")+"|"+innerWidth}
 /* the cards the base dialog draws (j3 showModal): never saved with the queue (not enumerable) */
 function kipOnlySet(m,v){Object.defineProperty(m,"kipOnly",{value:v,writable:true,configurable:true,enumerable:false});return v}
 function kipList(m){const L=m.opts.map((c,i)=>[c,i]).filter(([c])=>c&&c.ik!=null&&S.inv[c.ik]);L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));
@@ -51,30 +55,37 @@ function kipList(m){const L=m.opts.map((c,i)=>[c,i]).filter(([c])=>c&&c.ik!=null
  const D=new Map(),SEEN=new Set(),L2=[];for(const x of L){const e=S.inv[x[0].ik];const s=typeof invCan==="function"&&invCan(e)?[invSig(e),kipLocked(x[0]),x[0].n||"",x[0].x||""].join("#"):null;
   if(s&&D.has(s)){D.get(s)[2]++;continue}const o=[x[0],x[1],1+(s&&typeof invMoreOnce==="function"?invMoreOnce(S,e,SEEN):0)];if(s)D.set(s,o);L2.push(o)}return L2}
 function kipSel0(m,L){let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}return sel}
-function kipCard(M,m,i){const ops=M.querySelector(".opts");if(!ops||ops.querySelector(`:scope>.opt[data-m="${i}"]`))return;const c=m.opts[i];if(!c)return;
- kipOnlySet(m,(m.kipOnly instanceof Set?m.kipOnly:new Set())).add(i);ops.insertAdjacentHTML("beforeend",optBtnHTML(c,i));try{kitFix(M)}catch(e){console.error("kipCard",e)}}
-function kipSelect(M,m,i){KIP_SEL.set(m,i);kipCard(M,m,i);M.querySelectorAll(".kipc").forEach(t=>{const on=+t.dataset.kip===i;t.classList.toggle("on",on);t.setAttribute("aria-checked",on?"true":"false")});
+/* tiles per page = the grid's columns (measured for this dialog kind at this screen width, 4 until first measured) × BAL.kip.rows (ONE CORE: jbal2) */
+function kipPer(m){const c=KIP_COLS.get(kipColKey(m))||4;return Math.max(1,c*Math.max(1,BAL.kip.rows|0))}
+function kipPg(m,L,sel){const per=kipPer(m),pages=Math.max(1,Math.ceil(L.length/per));let pg=KIP_PG.get(m);
+ if(pg==null){const at=sel!=null?L.findIndex(x=>x[1]===sel):0;pg=Math.floor(Math.max(0,at)/per)}pg=Math.min(Math.max(0,pg|0),pages-1);KIP_PG.set(m,pg);return{per,pages,pg}}
+function kipSelect(M,m,i){const ops=M.querySelector(".opts");if(!ops||!ops.querySelector(`:scope>.opt[data-m="${i}"]`)){KIP_SEL.set(m,i);kipRedraw();return}
+ KIP_SEL.set(m,i);M.querySelectorAll(".kipc").forEach(t=>{const on=+t.dataset.kip===i;t.classList.toggle("on",on);t.setAttribute("aria-checked",on?"true":"false")});
  M.querySelector(".kipw").classList.add("has");kipDetail(M,m,i)}
-function kipPage(M,m,pg){const w=M.querySelector(".kipw");if(!w)return;const L=w.__kipL||kipList(m),per=Math.max(1,BAL.kip.page|0),pages=Math.max(1,Math.ceil(L.length/per));
- pg=Math.min(Math.max(0,pg|0),pages-1);w.dataset.pg=pg;const sel=KIP_SEL.get(m);
- w.querySelector(".kipg").innerHTML=L.slice(pg*per,(pg+1)*per).map(([c,i,q])=>kipTile(c,i,i===sel,q)).join("");
- const B=w.querySelectorAll(".kpkpg");B.forEach(b=>{b.hidden=pages<2;b.disabled=b.dataset.kippg<0?pg<=0:pg>=pages-1});
- const n=w.querySelector(".kpkpn");if(n)n.textContent=pages>1?`trang ${pg+1}/${pages}`:""}
+/* the real draw again (page turn / a card not drawn yet); the dialog keeps its scroll */
+function kipRedraw(){const M=$("modal");const sc=M?[...M.querySelectorAll(".dlg,#mb,.opts")].map(x=>[x.matches(".dlg")?".dlg":x.id?"#"+x.id:".opts",x.scrollTop]):[];
+ showModal();try{const N=$("modal");sc.forEach(([q,t])=>{const x=N.querySelector(q);if(x)x.scrollTop=t})}catch(e){}}
 function kipBuild(){const m=Q[0],M=$("modal");if(!M||M.hidden||!kipOn(m))return;const ops=M.querySelector(".opts");if(!ops||M.querySelector(".kipw"))return;
  const L=kipList(m);/* doable first (kitDoableFirst rule), then the dialog's own order */
- const sel=kipSel0(m,L);if(sel!=null)KIP_SEL.set(m,sel);const per=Math.max(1,BAL.kip.page|0);/* ONE CORE: BAL.kip (jbal2) */
- const w=document.createElement("div");w.className="kipw kshop";w.__kipL=L;
- w.innerHTML=`<div class="kpkwrap kipwrap"><button type="button" class="kpkpg" data-kippg="-1" aria-label="Trang trước">‹</button><div class="kshg kipg" role="radiogroup" aria-label="Chọn món"></div><button type="button" class="kpkpg" data-kippg="1" aria-label="Trang sau">›</button></div><div class="kpkpn"></div><div class="kipd" aria-live="polite"></div>`;
+ const sel=kipSel0(m,L);if(sel!=null)KIP_SEL.set(m,sel);const {per,pages,pg}=kipPg(m,L,sel);
+ const w=document.createElement("div");w.className="kipw kshop";
+ w.innerHTML=`<div class="kpkwrap kipwrap"><button type="button" class="kpkpg" data-kippg="-1" aria-label="Trang trước"${pg<=0?" disabled":""}${pages<2?" hidden":""}>‹</button><div class="kshg kipg" role="radiogroup" aria-label="Chọn món">${L.slice(pg*per,(pg+1)*per).map(([c,i,q])=>kipTile(c,i,i===sel,q)).join("")}</div><button type="button" class="kpkpg" data-kippg="1" aria-label="Trang sau"${pg>=pages-1?" disabled":""}${pages<2?" hidden":""}>›</button></div><div class="kpkpn">${pages>1?`trang ${pg+1}/${pages}`:""}</div><div class="kipd" aria-live="polite"></div>`;
  ops.prepend(w);w.style.setProperty("grid-column","1 / -1","important");ops.classList.add("kiphas");  /* inside the option box: the grid takes the options' own place in every dialog layout (person dialog 32.7 too) */M.querySelector(".dlg").classList.add("kipdlg");
- const at=sel!=null?L.findIndex(x=>x[1]===sel):0;kipPage(M,m,Math.floor(Math.max(0,at)/per));
- if(sel!=null)kipSelect(M,m,sel);else kipDetail(M,m,-1)
+ if(sel!=null)kipSelect(M,m,sel);else kipDetail(M,m,-1);
+ /* whole rows: the columns the grid really shows once the dialog has settled (kitDlgFit / kitOptFitAll run in the next frames). A grid
+    narrower than its settled size (mid-fit) reads fewer columns, so the count kept per dialog kind and width only grows (it settles);
+    when it grows past the page drawn, the page is drawn again with the first tile in view kept in view (at most 4 times per dialog) */
+ try{kipRO&&kipRO.disconnect();kipRO=new ResizeObserver(()=>{try{if(Q[0]!==m||!M.contains(w))return kipRO.disconnect();const g=w.querySelector(".kipg");const n=getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length;
+   const k=kipColKey(m);if(!n||n<=(KIP_COLS.get(k)||0))return;KIP_COLS.set(k,n);const per2=kipPer(m);if(per2===per)return;const f=(KIP_FIT.get(m)||0)+1;if(f>4)return;KIP_FIT.set(m,f);
+   KIP_PG.set(m,Math.floor(pg*per/per2));kipRO.disconnect();kipRedraw()}catch(e){}});kipRO.observe(w.querySelector(".kipg"))}catch(e){}
  /* the gift moment's two pictures load when a gift picker opens (on demand, ~60 KB; sw.js caches them) */
  try{if(KIP_VERB[m.pid]&&m.pid!=="plantpick"&&kfOn()&&!kfStill())["gift-hands.webp","gift.webp"].forEach(f=>{const i=new Image();i.src=kfkU(f)})}catch(e){}}
-(function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(kipOn(m)){const sel=kipSel0(m,kipList(m));kipOnlySet(m,new Set(sel!=null?[sel]:[]))}else if(m&&m.kipOnly)kipOnlySet(m,null)}catch(e){}
+(function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(kipOn(m)){const L=kipList(m),sel=kipSel0(m,L),{per,pg}=kipPg(m,L,sel);
+   kipOnlySet(m,new Set(L.slice(pg*per,(pg+1)*per).map(x=>x[1]).concat(sel!=null?[sel]:[])))}else if(m&&m.kipOnly)kipOnlySet(m,null)}catch(e){}
  const r=s0.apply(this,arguments);try{kipBuild()}catch(e){console.error("kipBuild",e)}return r}})();
 document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closest("#modal [data-kip],#modal [data-kipgo],#modal [data-kippg]");if(!t)return;const M=$("modal"),m=Q[0];if(!kipOn(m))return;
  ev.stopPropagation();ev.preventDefault();
- if(t.dataset.kippg!=null){if(t.disabled)return;const w=M.querySelector(".kipw");kipPage(M,m,(+(w&&w.dataset.pg)||0)+(+t.dataset.kippg));return}
+ if(t.dataset.kippg!=null){if(t.disabled)return;KIP_PG.set(m,(KIP_PG.get(m)||0)+(+t.dataset.kippg));kipRedraw();return}
  if(t.dataset.kipgo!=null){if(t.disabled)return;const i=+t.dataset.kipgo,b=M.querySelector(`.opts>.opt[data-m="${i}"]`);if(!b||b.disabled)return;
   KIP_GO={pid:m.pid,pp:m.pp,c:m.opts[i],from:(M.querySelector(`.kipc[data-kip="${i}"] .kitem`)||t).getBoundingClientRect(),to:kipTarget(M)};b.click();return}
  kipSelect(M,m,+t.dataset.kip)},true);
@@ -119,7 +130,7 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 .kshc.kipc>.kshpic{cursor:pointer;transition:transform .15s}
 .kipw.has .kshc.kipc:not(.on){opacity:.75}
 .kshc.kipc.on>.kshpic{filter:var(--k-glow);transform:scale(1.06)}
-.kipw>.kipwrap{grid-template-columns:28px minmax(0,1fr) 28px}.kipw>.kipwrap>.kipg{min-width:0}.kipw>.kipwrap:has(>.kpkpg[hidden]){grid-template-columns:minmax(0,1fr)}.kipw>.kipwrap>.kpkpg[hidden]{display:none}
+.kipw>.kipwrap{grid-template-columns:28px minmax(0,1fr) 28px}.kipw>.kipwrap>.kipg{max-height:none!important;overflow:visible!important}/* a page = whole rows (BAL.kip.rows): no inner scroll, no half row (KIT §23) */.kipw>.kipwrap>.kipg{min-width:0}.kipw>.kipwrap:has(>.kpkpg[hidden]){grid-template-columns:minmax(0,1fr)}.kipw>.kipwrap>.kpkpg[hidden]{display:none}
 .kipd{display:flex;flex-direction:column;gap:6px;min-width:0}
 .kipd>.opt.kipcard{pointer-events:none;margin:0;width:100%}
 .kipd>.kipgo{align-self:stretch;min-height:40px}

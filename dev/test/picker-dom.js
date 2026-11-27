@@ -36,31 +36,48 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    await open('Biếu quà làm lành · tác phẩm','tsgiftpick',{v:v.id,k:'wk'});
    await open('Biếu quà làm lành · cả hai (save cũ)','tsgiftpick',{v:v.id});
    /* paged build only: page turns reach every entry once; an on-demand card = the render-time card; confirm really gives the piece */
-   const deep=async(name,pid,pp)=>{const r={name:name+' · trang',pid,deep:1};while(Q.length)Q.shift();try{closeModal()}catch(e){}pushDil(mkP(pid,pp),name);showModal();await w(300);
-    const M=document.getElementById('modal');const m=Q[0];r.paged=!!M.querySelector('[data-kippg]');if(r.paged){
-    const all=kipList(m).map(x=>x[1]);/* one tile per entry, or per stack of twins once jstack (inv-stack) is in */const seen=[];let guard=0;
-    const nx=()=>M.querySelector('.kipw .kpkpg[data-kippg="1"]');
-    for(;;){seen.push(...[...M.querySelectorAll('.kipc')].map(t=>+t.dataset.kip));const b=nx();if(!b||b.disabled||b.hidden||++guard>500)break;b.click();await w(20)}
-    r.pages=guard+1;r.all=all.length;r.seen=seen.length;r.uniq=new Set(seen).size;r.miss=all.filter(i=>!seen.includes(i)).length;r.maxTiles=+(Math.min(all.length,BAL.kip.page));
-    /* on-demand card on the last page vs the same option drawn by the dialog itself */
-    const t=[...M.querySelectorAll('.kipc')].pop();if(t){const i=+t.dataset.kip;t.click();await w(200);const a=M.querySelector('.kipd .kipcard');r.ondemand=!!a&&!!M.querySelector(`.opts>.opt[data-m="${i}"]`);
-     const ha=a?a.innerHTML:'';const ga=M.querySelector('.kipgo');r.goDis=ga?ga.disabled:null;r.cards=M.querySelectorAll('.opts>.opt[data-m]').length;
-     while(Q.length)Q.shift();try{closeModal()}catch(e){}const it=mkP(pid,pp);pushDil(it,name);KIP_SEL.set(Q[0],i);showModal();await w(300);const b2=document.querySelector('#modal .kipd .kipcard');
-     const norm=h=>h.replace(/ data-[\w-]+="[^"]*"/g,'').replace(/\s+/g,' ');r.same=!!b2&&norm(b2.innerHTML)===norm(ha);if(!r.same)r.diff=[norm(ha).slice(0,300),b2?norm(b2.innerHTML).slice(0,300):''];}
-    }
+   /* paged build: every page = whole rows with no inner scroll; page turns reach every tile once; for a LOCKED and an OPEN tile of every
+      picker, the card the paged dialog draws (reached by page turns) = the card the full draw makes (kip grid off = LIVE's path: every
+      showModal decorator — jgift giftto lock/.kgiftno + chip, jk2b hideOut, jemoact eaLockWhy …); confirm gives exactly one piece */
+   const card=i=>{const b=document.querySelector(`#modal .opts>.opt[data-m="${i}"]`);if(!b)return null;const t=b.cloneNode(true);t.querySelectorAll('.kaart,.kitem img').forEach(x=>x.removeAttribute('src'));
+    return{cls:[...b.classList].filter(c=>!/^(kfit|kopt-|kv)/.test(c)).sort().join(' '),dis:b.disabled,txt:b.textContent.replace(/\s+/g,' ').trim(),chip:!!b.querySelector(':scope>.kitem'),data:[...b.attributes].filter(a=>/^data-/.test(a.name)&&a.name!=='data-kapic')/* data-kapic = jk4/jopic picture-FIT mark, set only on a VISIBLE card (the reference card is visible, the picker's own card sits hidden behind the grid as on LIVE): layout state, not a decoration */.map(a=>a.name+'='+a.value).sort().join('|')}};
+   /* the grid settles its columns a frame or two after a draw (jgpick ResizeObserver): wait for frames, then until no redraw is pending */
+   const fr=()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));const settle=async()=>{for(let k=0;k<4;k++)await fr();await w(30)};
+   const deep=async(name,pid,pp)=>{console.log('PD deep '+name);const r={name:name+' · trang',pid,deep:1};while(Q.length)Q.shift();try{closeModal()}catch(e){}pushDil(mkP(pid,pp),name);showModal();await w(400);await settle();
+    const M=document.getElementById('modal');const m=Q[0];r.paged=!!M.querySelector('[data-kippg]');
+    if(r.paged){const all=kipList(m).map(x=>x[1]);const seen=[];let guard=0;r.rows=[];r.scroll=[];
+     const nx=()=>M.querySelector('.kipw .kpkpg[data-kippg="1"]');
+     for(;;){const T=[...M.querySelectorAll('.kipc')];seen.push(...T.map(t=>+t.dataset.kip));const g=M.querySelector('.kipg');
+      const cols=getComputedStyle(g).gridTemplateColumns.split(' ').filter(Boolean).length;r.cols=Math.max(r.cols||0,cols);const last=!nx()||nx().disabled||nx().hidden;
+      if(!last&&T.length%cols)r.rows.push(T.length+'/'+cols);if(g.scrollHeight>g.clientHeight+1)r.scroll.push(g.scrollHeight+'>'+g.clientHeight);
+      if(last||++guard>800)break;nx().click();await settle()}
+     r.pages=guard+1;r.all=all.length;r.seen=seen.length;r.uniq=new Set(seen).size;r.miss=all.filter(i=>!seen.includes(i)).length;r.per=BAL.kip.rows*r.cols;
+     /* a locked and an open tile, each on a page past the first when there is one */
+     const L=kipList(m);const pick=f=>{const c=L.filter(x=>f(x[0]));return c.length?c[c.length-1][1]:null};
+     r.cmp=[];for(const [lab,i] of [['locked',pick(c=>kipLocked(c))],['open',pick(c=>!kipLocked(c))]]){if(i==null){r.cmp.push({lab,none:1});continue}
+      while(Q.length)Q.shift();try{closeModal()}catch(e){}pushDil(mkP(pid,pp),name);showModal();await w(200);
+      let g2=0;while(!document.querySelector(`#modal .kipc[data-kip="${i}"]`)&&g2++<800){const b=document.querySelector('#modal .kipw .kpkpg[data-kippg="1"]');if(!b||b.disabled)break;b.click();await w(20)}
+      const tl=document.querySelector(`#modal .kipc[data-kip="${i}"] .kshpic`);if(tl){tl.click();await w(150)}const A=card(i);
+      const go=document.querySelector('#modal .kipgo');const goDis=go?go.disabled:null;
+      while(Q.length)Q.shift();try{closeModal()}catch(e){}const k0=kipOn,o0=kipOnlySet;kipOn=()=>false;kipOnlySet=(mm,v)=>o0(mm,new Set([i]));/* LIVE's draw path (no grid, every decorator), only card i drawn: same dialog, same options */try{pushDil(mkP(pid,pp),name);showModal();await w(200);var B=card(i)}finally{kipOn=k0;kipOnlySet=o0}
+      r.cmp.push({lab,i,same:!!A&&!!B&&A.cls===B.cls&&A.dis===B.dis&&A.txt===B.txt&&A.chip===B.chip&&A.data===B.data,goDis,A,B})}}
     /* confirm: the first doable tile goes, her pieces of that kind −1 */
     while(Q.length)Q.shift();try{closeModal()}catch(e){}pushDil(mkP(pid,pp),name);showModal();await w(300);const g=document.querySelector('#modal .kipgo');
-    const tot=()=>{if(typeof invTotals==='function')return Object.values(invTotals(S)).reduce((a,b)=>a+b,0);return S.inv.length};/* stack-aware (jstack S.invS) */const L0=S.logs.length;const n0=tot();if(g&&!g.disabled){used=0;g.click();await w(400);r.gave=n0-tot();r.log=String(S.logs[0]||'').replace(/<[^>]+>/g,'').slice(0,160)}else r.gave='no doable';
+    const tot=()=>{if(typeof invTotals==='function')return Object.values(invTotals(S)).reduce((a,b)=>a+b,0);return S.inv.length};/* stack-aware (jstack S.invS) */
+    const n0=tot();if(g&&!g.disabled){used=0;g.click();await w(400);r.gave=n0-tot();r.log=String(S.logs[0]||'').replace(/<[^>]+>/g,'').slice(0,160)}else r.gave='no doable';
     out.push(r)};
+   await deep('Tặng quà (Hậu cung)','giftpick',{v:v.id});
    await deep('Dâng quà (Hoàng thượng)','giftto',{t:'emp'});
+   await deep('Cài đồ vào rương','plantpick',{v:v.id});
    await deep('Biếu quà làm lành · đồ','tsgiftpick',{v:v.id,k:'it'});
    while(Q.length)Q.shift();try{closeModal()}catch(e){}
    try{KINV_SUB='tui'}catch(e){}tab='inv';render();await w(500);out.push({name:'Tư trang (túi)',pid:'bag',nodes:document.querySelectorAll('#panel *').length,page:document.querySelectorAll('*').length,tiles:document.querySelectorAll('#panel .kitem').length});
    tab='act';render();return out});
   for(const r of R)rows.push(Object.assign({vp:`${vw}x${vh}`},r));
   for(const r of R)if(r.deep&&!r.paged)ok(r.gave===1||r.gave==='no doable'||/không thành|chưa dịu|trả lại/.test(r.log||''),`${vw}x${vh} ${r.name}: (no pager) confirm gives exactly one piece`,{gave:r.gave,log:r.log});
-  for(const r of R)if(r.deep&&r.paged){ok(r.miss===0&&r.uniq===r.seen&&r.seen===r.all,`${vw}x${vh} ${r.name}: ${r.pages} pages reach all ${r.all} entries once`,{seen:r.seen,uniq:r.uniq,miss:r.miss});
-   ok(r.ondemand,`${vw}x${vh} ${r.name}: a tile on the last page builds its own card on demand (cards in the dialog: ${r.cards})`);ok(r.same,`${vw}x${vh} ${r.name}: on-demand card = the card the dialog draws`,r.diff);
+  for(const r of R)if(r.deep&&r.paged){ok(r.miss===0&&r.uniq===r.all&&r.seen-r.uniq<=2*r.per,`${vw}x${vh} ${r.name}: ${r.pages} pages reach all ${r.all} tiles, none lost (${r.seen-r.uniq} seen twice across a column settle)`,{seen:r.seen,uniq:r.uniq,miss:r.miss});
+   ok(!r.rows.length&&!r.scroll.length,`${vw}x${vh} ${r.name}: every page = whole rows (${r.cols} cols × BAL.kip.rows = ${r.per}), no inner scroll`,{halfRows:r.rows.slice(0,3),scroll:r.scroll.slice(0,3)});
+   for(const c of r.cmp)ok(c.none||c.same,`${vw}x${vh} ${r.name}: ${c.lab} tile${c.none?' (none on this save)':''} — paged card = full-draw card (classes, disabled, data-*, text, chip)`,c.same||c.none?undefined:{A:c.A,B:c.B});
    ok(r.gave===1||r.gave==='no doable'||/không thành|chưa dịu|trả lại/.test(r.log||''),`${vw}x${vh} ${r.name}: confirm gives exactly one piece (or she refuses it, nothing lost)`,{gave:r.gave,log:r.log})}
   for(const r of R)if(r.nodes!=null)ok(r.nodes<MAX,`${vw}x${vh} ${r.name}: ${r.nodes} nodes in the dialog (page ${r.page}); tiles ${r.tiles}, hidden cards ${r.hid??'-'}, entries ${r.ent??'-'}, can choose ${r.can??'-'}${r.ms!=null?', '+r.ms+' ms':''}`);
   ok(!errs.length,`${vw}x${vh} no page errors`,errs.slice(0,3));await ctx.close()}

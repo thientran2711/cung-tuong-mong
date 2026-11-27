@@ -559,8 +559,9 @@ Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll
 /* F10 renderer-mem (26/11), BAL.kobs = the kit's DOM observers. The «Kéo xuống» scroll cue (jksize kitScrollCues). short = a scroller under this many px gets the slim strip below it
    (was a typed 260); hyst = a scroller keeps its short/tall look until its own height moves by more than this (its own cue never flips it). */
 Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* kaPass: card-normaliser passes per wake (j63 kaRun) */
-/* picker-dom (MAIN 164 play-stopper 26/11): BAL.kip.page = tiles per page of the KIT 28.13i item pick grid (jgpick; 4 rows of 6 on Fold and iPad) */
-Object.assign(BAL,{kip:{page:24}});
+/* picker-dom (MAIN 164 play-stopper 26/11): BAL.kip.rows = rows of tiles per page of the KIT 28.13i item pick grid (jgpick); a page = the
+   columns the grid shows in that dialog at that width (measured: Fold 755 = 2, iPad 1180 = 4–5) × these rows, whole rows, no inner scroll (KIT §23) */
+Object.assign(BAL,{kip:{rows:2}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
