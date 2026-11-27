@@ -580,3 +580,4 @@ D PROMO-STACK REMERGE (opus BIG; d-stack-lr3 cb398c07 incl. cung-quy + contest-t
 D REMERGE LEAD (opus; mg-trim-r6 4ecc3ce6, srv-rank 8559fea2, parity-facfix 1d0f032d, help-housemate 3aa87e1b, selx-fair c7594222 — verify not on LIVE, remerge one by one onto LIVE, LAND READY each) | review/<topic>-lr5 | session_01D3E3NZuZ53VXut5YsqK6ej | RUNNING | 26/11 23:55Z (Foreman D session_01D3E3Na4WaA2w77G38gsY8w)
 kit keeper KK51 | review/kit-plaque-confirm + review/kit-hand-mount | session_01Rc5AsJN1bdRYgV8aBNXsdX | RUNNING | 2026-11-26T23:52Z (MAIN 167)
 god-research spec | dev/handover/reports/god-research.md | session_01Rc5AsMsPWc1spTKeNmYP4d | RUNNING | 2026-11-26T23:53Z (MAIN 167)
+kit-person-panel (option B) | review/kit-person-panel | session_01Rc5AsLyZ4T4e28PDxP9NdF | RUNNING | 2026-11-27T00:01Z (MAIN 167)
