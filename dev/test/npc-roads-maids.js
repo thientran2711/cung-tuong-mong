@@ -39,7 +39,7 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
   chk(`life ${L+1}: staff eunuchs live «Từ tiểu thái giám đi lên» (U3 template on the servant engine)`,R.eun.length>0&&R.eun.every(x=>x.ok)&&R.eun.some(x=>x.l>0),R.eun);
   chk(`life ${L+1}: raised maids go on as cn roads`,R.raised.every(x=>x.ok&&x.o==='cn'),R.raised)}
  await open();
- const H=await p.evaluate(()=>{if(!__boot('muoi'))return{err:'boot'};const out=[];
+ const H=await p.evaluate(()=>{window.__sqoff=1;/* sideq-trim: content test of the help quests, any asker (the rank gate has its own test, sideq-optscan) */if(!__boot('muoi'))return{err:'boot'};const out=[];
   /* forced raise: the trusted maid with two chapters behind her is sent to serve the night and raised */
   const m=S.maid;nrMInit(m);m.nr.l=[[4,1],[5,-1]];m.nr.n=6;const n0=rivals.length;let txt='';for(let t=0;t<40&&rivals.length===n0;t++){S.maid.nr=S.maid.nr||JSON.parse(JSON.stringify(m.nr));const mm=S.maid;mm.nr=m.nr;txt=sendMaid(S)}
   const nv=rivals.length>n0?rivals[rivals.length-1]:null;const raise=nv?{o:nv.nr&&nv.nr.o,r:nv.nr&&nv.nr.r,pr:nv.nr&&nv.nr.pr,l:nv.nr&&nv.nr.l,n:nv.nr&&nv.nr.n,cn:!!(nv.nr&&ARC67[nv.nr.r]&&ARC67[nv.nr.r].o==='cn')}:null;
@@ -48,7 +48,7 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
   for(const [s,rk] of [[own,'sv'],[oth,'rsv'],[S.maid,'maid']]){if(!s)continue;for(const tid of kinds)for(const oi of [0,2]){s.nr=null;nrMInit(s);const r=nrMaidL().find(x=>x!==s&&nrMis(x)!==nrMis(s));
     S.bac=999;S.suc=90;used=0;const x=q72Make(T72I[tid],q72A(rk,rk==='maid'?null:s.sid));if(!x){out.push({tid,rk,err:'make'});continue}
     if(r){const kk=r===S.maid?['maid',null]:nrMis(r)===S?['sv',r.sid]:['rsv',r.sid];x.bk=kk[0];x.bi=kk[1]}x.p={nr:s.nr.r,nn:s.nr.n};const q=q72();q.a.push(x);const X=q72X(x);
-    const title=plain(q72Title(X));const intro=plain(typeof X.T.h==='function'?X.T.h(X):X.T.h);let tries=0;while(q.a.includes(x)&&tries++<12){used=0;S.suc=90;q72Do(x.u,oi)}
+    const title=plain(q72Title(X));const intro=plain(typeof X.T.h==='function'?X.T.h(X):X.T.h);let tries=0;while(q.a.includes(x)&&tries++<12){used=0;S.suc=90;Q.length=0;/* an NPC popup (jagent) must not block the step */q72Do(x.u,oi)}
     out.push({tid,rk,oi,title,intro,hb:s.nr.hb,done:!q.a.includes(x),hist:q.h[0]&&q.h[0].res})}}
   /* her road line on the Kẻ hầu card */
   let card='';try{tab='staff';if(own){own.nr.l=[[4,1]];own.nr.e='x'}card=staffTabHTML()}catch(e){card='ERR '+e.message}

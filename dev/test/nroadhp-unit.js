@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof nhHp==='function',null,{timeout:120000});await p.waitForTimeout(1500);
  const r=await p.evaluate(()=>{const out=[],fail=[];const ok=(c,m)=>{out.push((c?'ok  ':'FAIL ')+m);if(!c)fail.push(m)};try{
   try{document.getElementById('title').hidden=true}catch(e){}
-  quiet=true;window.__forceOrigin='muoi';start();quiet=false;Q.length=0;const B0=JSON.parse(JSON.stringify(BAL.nroad));const K0=JSON.parse(JSON.stringify(BAL.ag.know));
+  window.__sqoff=1;/* sideq-trim: content test of the help quests, any asker (the rank gate has its own test, sideq-optscan) */quiet=true;window.__forceOrigin='muoi';start();quiet=false;Q.length=0;const B0=JSON.parse(JSON.stringify(BAL.nroad));const K0=JSON.parse(JSON.stringify(BAL.ag.know));
   const reset=()=>{Object.assign(BAL.nroad,JSON.parse(JSON.stringify(B0)));Object.assign(BAL.ag.know,JSON.parse(JSON.stringify(K0)))};
   const roll0=roll;const L=liveRivals(false).filter(v=>!v.queen);let v=L[0],w=L[1];if(!v||!w)return{out,fail:['no rivals']};
   const logs=()=>S.logs.map(x=>String(x).replace(/<[^>]+>/g,''));
