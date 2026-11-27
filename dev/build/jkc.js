@@ -532,12 +532,14 @@ function kcDie(why){if(S.dead)return;S.kc.end="chết";die(why)}
 /* ---------- tuyển tú: Sơ tuyển → Phúc tuyển (minigame) → Điện tuyển → entry / trả thẻ bài ---------- */
 function kcSoTuyen(){if(S.kc.so||S.dead)return;S.kc.so=1;if(S.kc.mien){S.kc.mien=2;S.kap=Math.max(S.kap,BAL.kc2.st.kc.mienSo);const s=S.kc.suit[0]||kcSuitor();if(!S.kc.suit.length)S.kc.suit.push(s);S.kc.forced=1;pushDil(mkP("kcE",{e:"dinhhon"}),"Cha định hôn");return}
  pushDil(mkP("kcE",{e:"so"}),"Sơ tuyển")}
-function kcSoOk(bribe){const C=KC.so;const sc=(S.sac>=C.sac?1:0)+(S.suc>=C.suc?1:0)+(S.kld<C.ld?1:0)+(S.kgt>=C.gt?1:0)+(bribe?1:0);return sc>=3}
+/* D-SELX-FAIR: the five points the ma ma checks (one list read by the roll and by the «Trả thẻ bài» result line) */
+function kcSoPts(bribe){const C=KC.so;return [["dung mạo",S.sac>=C.sac],["khí sắc",S.suc>=C.suc],["tiếng tăm",S.kld<C.ld],["gia thế",S.kgt>=C.gt],["lễ vật",!!bribe]]}
+function kcSoOk(bribe){return kcSoPts(bribe).filter(x=>x[1]).length>=BAL.kc2.soNeed}
 const KC_DICH_W="nhiễm dịch nặng thì có thể chết, kiếp này dừng";const KC_TRAVE_W="bị trả thẻ bài thì nhà ép gả, kiếp này dừng ngoài cung";
 function kcSoD(){return{who:pMe(),t:`<p>Ma ma Nội vụ phủ đến khám tuyển: xem dung mạo, khí sắc, hỏi gia thế, nghe ngóng tiếng tăm. ${S.kc.ldSeen&&S.kld>=40?"Ngươi biết lời đồn về mình đã đến tai họ.":""}</p>`,o:[
  ...[kcO("Ra mắt ma ma",{},()=>kcSoGo(false)),kcO("Dúi bạc cho ma ma khám tuyển",{bac:-BAL.kc2.st.kc.bacMama},()=>kcSoGo(true),{dis:S.bac<BAL.kc2.st.kc.bacMama})].map((o,i)=>kitRiskOpt(o,kcSoOk(i===1)?BAL.odds.hi:BAL.odds.lo,KC_TRAVE_W,true))/* FIRSTCARD (law 7): kcSoOk is decided by her numbers, so the word is the true one */]}}
 function kcPd(n,why){try{if(typeof pdAdd==="function")pdAdd(n,why,"kc")}catch(e){}}
-function kcSoGo(bribe){const b=rsnap();if(kcSoOk(bribe)){S.kpTron=1;S.kc.soOk=1;kcPd(5,"qua Sơ tuyển");kcRes("Sơ tuyển",b,"Ngươi qua Sơ tuyển. Tên ngươi được ghi vào sổ tú nữ.")}else{S.kc.soOk=0;kcRes("Sơ tuyển",b,"Ma ma lắc đầu: ngươi bị trả về.");pushDil(mkP("kcE",{e:"trave"}),"Trả thẻ bài")}}
+function kcSoGo(bribe){const b=rsnap();if(kcSoOk(bribe)){S.kpTron=1;S.kc.soOk=1;kcPd(5,"qua Sơ tuyển");kcRes("Sơ tuyển",b,"Ngươi qua Sơ tuyển. Tên ngươi được ghi vào sổ tú nữ.")}else{S.kc.soOk=0;S.kc.soPts=kcSoPts(bribe);/* D-SELX-FAIR: what she met, for the result line */kcRes("Sơ tuyển",b,"Ma ma lắc đầu: ngươi bị trả về.");pushDil(mkP("kcE",{e:"trave"}),"Trả thẻ bài")}}
 function kcTuyen(early){if(S.kc.tt||S.dead)return;if(!early&&!S.kc.soOk)return;S.kc.tt={early:!!early,raw:5};if(early){S.kpTron=1}
  if(early){pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");return}pushDil(mkP("kcE",{e:"phuc"}),"Phúc tuyển")}
 function kcBestArt(){let b="cam",v=-1;for(const a of ARTS){if(a.k==="y")continue;const l=(S.arts||{})[a.k]||0;if(l>v){v=l;b=a.k}}return b}
@@ -577,9 +579,14 @@ function kcDien(way){const sc=kcMyScore(way);const C=KC.cut;S.kc.tt.sc=Math.roun
  const pSel=kcDienSel(sc);S.kc.tt.p=Math.round(pSel);
  if(!pSel||!(window.__kcKeep||roll(pSel))){/* __kcKeep: test hook (dev/test/outside/route.js), never set by the game */pushDil(mkP("kcE",{e:"trave"}),"Trả thẻ bài");log("Điện tuyển: Hoàng thượng trả thẻ bài.");return}
  const rank=sc>=C[2]?2:sc>=C[1]?1:0;kcEnter(rank)}
+/* D-SELX-FAIR (law 7, the family of trials that end the life): the «Trả thẻ bài» card first says WHY in numbers-as-words — Sơ tuyển: the points she met
+   of the five and how many pass (BAL.kc2.soNeed); Điện tuyển: her score, the keep line (KC.cut[0]) and the keep chance she had (kcDienSel, the same roll) */
+function kcTrialW(){try{const K=S.kc,W=typeof selxNumW==="function"?selxNumW:String;
+ if(K.soOk===0&&K.soPts){const ok=K.soPts.filter(x=>x[1]);return `<p>Sơ tuyển: ma ma xét năm điều (${K.soPts.map(x=>x[0]).join(", ")}); ngươi đạt ${W(ok.length)}${ok.length?` (${ok.map(x=>x[0]).join(", ")})`:""}, phải đạt ${W(BAL.kc2.soNeed)} mới qua.</p>`}
+ const T=K.tt;if(T&&T.sc!=null)return `<p>Điện tuyển: ngươi được ${W(Math.max(0,T.sc))} phần; mốc giữ thẻ bài là ${W(KC.cut[0])} phần. Cơ giữ thẻ lúc ấy: ${oddsChip(word(T.p||0))}</p>`}catch(e){console.error("kcTrialW",e)}return""}
 function kcTraveD(){const tm=kcTmMan();const r=!!(S.tm96&&S.tm96.h>=80&&S.tm96.rise&&kcRare("kcR2",.6));const r5=S.duc>=70&&S.danh>=BAL.danhG.kcR5&&kcRare("kcR5",.6);
  if(!S.kc.suit.length)S.kc.suit.push(kcSuitor());const s=S.kc.suit[0];
- return{who:kcFace(kcR("cha")||S.kc.fam[0]),t:`<p>Ngươi bị trả thẻ bài, về nhà. Cha thở dài: "Thôi thì gả cho nhà tử tế." Nhà ${s.n} đã đợi sẵn.</p>`,o:[
+ return{who:kcFace(kcR("cha")||S.kc.fam[0]),t:`${kcTrialW()}<p>Ngươi bị trả thẻ bài, về nhà. Cha thở dài: "Thôi thì gả cho nhà tử tế." Nhà ${s.n} đã đợi sẵn.</p>`,o:[
  kcO(`Gả cho ${s.n}`,{},()=>kcMarry(s)),kcO("Xin ở vậy, mở lớp dạy chữ cho con gái",{},()=>{if(S.tai>=60||S.origin.k==="thd")kcEndDo("Nữ phu tử",`Nàng không lấy chồng. Lớp học của nàng ở ngõ Tây có ba mươi đứa con gái nhà nghèo.`,"Nữ phu tử");else kcMarry(s)},{j67:"tốn: không"}),
  kcO("Cắt tóc đi tu",{},()=>kcEnd("tu"))].concat(r?[kcO(`✦ Gả cho ${tm.name}`,{},()=>kcEnd("kcR2"),{r97:1,j67:"tốn: không · (Cơ duyên hiếm)"})]:[]).concat(r5?[kcO("✦ Nhận làm nghĩa nữ, đi hòa thân",{},()=>kcEnd("kcR5"),{r97:1,j67:"tốn: không · (Cơ duyên hiếm)"})]:[])}}
 /* entry: she becomes a consort; the carry-over table of OUTSIDE_PLAN §9 */
