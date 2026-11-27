@@ -15,7 +15,20 @@ function deathChain(fate){const L=[];const f=String(fate||"");
  else if(/tiên đế băng|Tuẫn táng|Thái phi/.test(f)){L.push("Hoàng thượng băng hà; số phận theo con trai và ngôi vị lúc ấy.")}
  const foes=liveRivals(true).filter(v=>oan(v,S)>=netTh(v,"thu")||bandVT(v,S)>=2).map(v=>v.name);if(foes.length)L.push(`Kẻ thù còn sống: ${foes.slice(0,4).join(", ")}.`);return L}
 function lifeLog(){const p=store.get("cung-luanhoi")||[];return p}
-function lifeSave(fate){const p=lifeLog();const kids=S.kids.filter(k=>k.alive).length;const maxR=Math.max(S.rank,S.maxRank||0);p.unshift({n:S.name,o:S.origin.n,r:maxR>=7?"Hoàng hậu":RANKS[maxR].n,age:S.age,y:S.year,kids,fc:S.fc||"",f:fate,nm:S.kend||"",foes:liveRivals(true).filter(v=>oan(v,S)>=netTh(v,"thu")).map(v=>v.name).slice(0,3)});store.set("cung-luanhoi",p.slice(0,40))}
+/* ONE CORE «best rank held» (D-ENDRANK, law 4 + law 11): the highest standing she ACTUALLY held this life — never the origin's ceiling (OD:L1250: the
+   origin rank is only the HIGHEST she can get, by passing the selection) nor an entry default. Every place that prints a life's best rank reads lifeTopRank:
+   the end card «Phẩm cao nhất», Sổ luân hồi (cung-luanhoi / cung-kiep), the Bảng xếp hạng life (jrank), the abandoned-life line (jkiep), the HUD / portrait word
+   of a tú nữ (jselxsc). rankStage(s): "home" = still at home (kc / kc2 prelude, never entered) · "tunu" = a tú nữ whose selection is not settled (the 3 days,
+   the one-card selection before its answer, ban hoa = sent home) · "srv" = a cung nữ who never rose · "rank" = she holds a consort rank. */
+function rankStage(s){s=s||(typeof S!=="undefined"?S:null);if(!s)return"";if(s.kc&&!s.kc.inPal)return"home";if(s.srv&&!s.srv.risen)return"srv";
+ const X=s.selx,Z=s.selx2;if(X&&Z&&!(s.origin&&s.origin.k==="cnv")&&!Z.done&&(Z.ban||Z.days||!(X.kept===true||(X.done&&X.tier!=null))))return"tunu";return"rank"}
+function rankHeld(s){return rankStage(s)==="rank"}
+/* {r: RANKS index held (-1 = none), n: the word}; a maid shows the highest maid post she held (S.srv.rk / the board trail S.rk.sr, SRK.maid) */
+function lifeTopRank(s){s=s||S;const st=rankStage(s);if(st==="home"||st==="tunu"){const W=(typeof BAL!=="undefined"&&BAL.rank&&BAL.rank.preN)||{home:"Chưa vào cung",tunu:"Tú nữ"};return{r:-1,n:W[st],st}}/* words: BAL.rank.preN (rank/worker/src/score.js, the board reads the same) */
+ if(st==="srv"){const v=s.srv;const b=Math.max(v.rk|0,s.rk&&s.rk.sr!=null?s.rk.sr|0:-1);const n=v.mama?"Ma ma":b>(v.rk|0)&&SRK.maid[b]?SRK.maid[b]:v.lau>0?"Cung nữ Tân Giả khố":SRK.maid[v.rk|0]||"Cung nữ";return{r:-1,n,st}}
+ const r=Math.max(0,Math.min(7,Math.max(s.rank|0,s.maxRank|0,s.queen?7:0)));return{r,n:RANKS[r].n,st}}
+try{window.rankStage=rankStage;window.rankHeld=rankHeld;window.lifeTopRank=lifeTopRank}catch(e){}
+function lifeSave(fate){const p=lifeLog();const kids=S.kids.filter(k=>k.alive).length;p.unshift({n:S.name,o:S.origin.n,r:lifeTopRank(S).n,age:S.age,y:S.year,kids,fc:S.fc||"",f:fate,nm:S.kend||"",foes:liveRivals(true).filter(v=>oan(v,S)>=netTh(v,"thu")).map(v=>v.name).slice(0,3)});store.set("cung-luanhoi",p.slice(0,40))}
 /* over(h,t,fate[,alive]): the end card. "Mệnh tận" only when she died; a living ending (thoái vị, xuất cung, xuất gia…) says "Kết cục".
    Callers may pass alive=true/false; otherwise it is read from the fate wording (kit owner #2, group fix for every ending). */
 function overAlive(fate,a){if(a===true||a===false)return a;return /thoái vị|xuất cung|ra khỏi cung|xuất gia|về quê|ẩn cư|an hưởng|còn sống|trốn khỏi cung|tự do|nhường ngôi/i.test(String(fate||""))&&!/chết|qua đời|tự vẫn|băng hà|ban chết|xử tử/i.test(String(fate||""))}
@@ -34,13 +47,13 @@ function over(h,t,fate,alive){if(S.dead)return"";const live=overAlive(fate,alive
  const nm=typeof endName==="function"?endName(h,t,fate,live):String(h||"");S.kend=nm;const NC=(window.KIT_END&&KIT_END.names&&KIT_END.names.close)||null;record(fate);lifeSave(fate);const ms=mySons().length,md=myDaus().length;const ch=deathChain(fate);
  /* kit sections + kit rows (KIT 9: h4.kpst + kitRows), no boxed panels (owner 15/11). Chain lines "Nhãn: lời" become labelled rows. */
  const chR=ch.map(x=>{const m=String(x).match(/^([^:.]{2,26}):\s*(.+)$/);return m?[m[1],m[2],"t"]:["Nguyên do",x,"t"]});
- const maxR=Math.max(S.rank,S.maxRank||0);
+ const TR=lifeTopRank(S);/* ONE CORE: the rank she really held */
  Q=[{t:nm||"Kiếp này",kend:1,endH:h,cls:"end",art:endArt(h,t,fate,live),who:pMe(),h:`${String(h||"").replace(/<[^>]+>/g,"").trim()!==nm?`<h3>${h}</h3>`:""}<p>${t}</p>${chR.length?`<div class="kpsec kend-why">${kitRows(chR)}</div>`:""}
-  <div class="kpsec kend-life"><h4 class="kpst">Một kiếp nhìn lại</h4>${kitRows([["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Năm tháng",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",maxR>=7?"Hoàng hậu":RANKS[maxR].n,"t"],["Con cái",`${ms} hoàng tử, ${md} công chúa`,"t"],[live?"Kết cục":"Mệnh tận",fate,"t"]])}</div>
+  <div class="kpsec kend-life"><h4 class="kpst">Một kiếp nhìn lại</h4>${kitRows([["Thân phận",`${S.name} · ${S.origin.n}`,"t"],["Năm tháng",`${S.year} năm · ${S.age} tuổi`,"t"],["Phẩm cao nhất",TR.n,"t"],["Con cái",TR.st!=="rank"&&!ms&&!md?"không":`${ms} hoàng tử, ${md} công chúa`,"t"],[live?"Kết cục":"Mệnh tận",fate,"t"]])}</div>
   <p class="past kend-close">${NC?`${NC[live?"live":"dead"]} ${NC.tail}`:""}</p>`,btn:"Chuyển kiếp",onClose:start}];
  showModal();render();return""}
-/* the highest rank this life reached */
-(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S)S.maxRank=Math.max(S.maxRank||0,S.rank)}catch(e){}return r}})();
+/* the highest rank this life reached — only while she HOLDS a rank (not the origin ceiling at home / during the selection, not a maid's 0) */
+(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&rankHeld(S))S.maxRank=Math.max(S.maxRank||0,S.rank)}catch(e){}return r}})();
 /* Sổ luân hồi on the title screen and in the log */
 function pastHTML(){const p=lifeLog();if(!p.length){const o=store.get("cung-kiep")||[];return o.length?`<h3>Sổ luân hồi</h3><div class="past">`+o.map((k,i)=>`Kiếp ${o.length-i}: ${k.n}, ${k.o}, ${k.r}, ${k.age} tuổi. ${k.f}.`).join("<br>")+`</div>`:""}
  return `<h3>Sổ luân hồi</h3>${kitRows(p.slice(0,12).map((k,i)=>[`<span class="md xs" style="--c:#b08a5a">${k.fc?`<img src="${fsrc(k.fc,"")}" alt="" onerror="this.remove()">`:""}</span>${typeof kpLife==="function"?kpLife(p.length-i):`Kiếp ${p.length-i}`}: ${k.n}`,`${k.nm?`«${k.nm}» · `:""}${k.o} · ${k.r} · ${k.y} năm · ${k.kids} con · ${k.f}`,"n"]))}`}
