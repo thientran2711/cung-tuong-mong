@@ -30,3 +30,9 @@ fac-parity-play rows 1/3/4/5 and role-parity-drift2-play row A FAILED on LIVE: t
 
 ## Handover
 Worker done unless D wants more: LAND READY ×2 posted; NEEDS RV ×3 posted. Worktrees /home/user/wt/lr5* kept until the lands / rv (re-merge = `git merge origin/main`, take --theirs index.html sw.js, --ours CHANGE.txt, `bash dev/site/build_site.sh`).
+
+## Update 27/11 ~04:05Z (rollover handover)
+- mg-trim-lr5 LANDED by LC27 (LIVE 0b43ee55, staged auto-merge).
+- parity-facfix-lr5: remote head d767cb1b (= 947283db + LIVE b16b4b93, built files only). Dry merge onto LIVE 0b43ee55 = CLEAN (only CHANGE.txt / index.html / sw.js conflict). LC27 lands it next. If the successor must re-merge: in /home/user/wt/lr5-parity-facfix `git merge origin/main`, `git checkout --ours dev/site/CHANGE.txt`, `git checkout --theirs index.html sw.js`, `bash dev/site/build_site.sh`, commit, push; gates = fac-parity-play, fac-roads-play, role-parity-drift2-play, ag-par3 (arg dev/index.html) + coop-e2e. Videos already on CDN img/_review/parity-facfix-lr5/.
+- NEEDS RV trio (help-housemate-lr5 75eb6e45, srv-rank-lr5 a5fec6d6, selx-fair-lr5 c72de843) is with BIG rv session_01D3E3NYEAw2ySeXbRy1naHN.
+- Worker stops here (context ~29 % = roll line, START ~4 %). Coordinator (Foreman D) opens the successor if needed.
