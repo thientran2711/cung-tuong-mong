@@ -52,3 +52,15 @@ Stills (looked at, Fold + iPad, every XL kind + before shots): https://ctm-img.v
 
 ## HANDOVER
 Ready for UI reviewer RV-175. Worktrees: /home/user/wt/r15 (branch), /home/user/wt/r15bis (bisect, delete), /home/user/wt/r15ho (this report). Build: `bash dev/site/build_site.sh` then `git checkout assets.json`.
+
+## ROUND 2 — MAIN 179 rulings → review/kit-stage-r15 3b00a9df (on cec55446; LIVE 772bee4f ancestor OK, 0 deletions)
+(1) ONE XL size PER DEVICE = that device's OWN screen room: `KIT_SIZE.v3.live.room.h = {kv1:"100dvh", kv2:"100*var(--kvh,1vh)"}` (gap 24, iPad max 780, all read from KIT_SIZE). The R1 «NOTE for MAIN» (Fold 708) is overwritten by this ruling.
+| device | end dialogs ×3 | person + long text | R1 cec55446 (end ; person) |
+|---|---|---|---|
+| Fold | 888 / 220x730 / 90..979 | 976 / 220x830 | 708 / 220x550 ; 796 / 220x650 |
+| iPad | 708 / 220x550 / 90..799 | 780 / 220x635 | same |
+(2) EMO-SEAL TEXT RULE (jemoseal + KIT.md under ROOT-66; same rule as the petals): the big seal clone never covers an open dialog's TEXT. (a) the planned box steps down `lean.textStep` (.9) until it clears every text box (`lean.textPad` 4); below `lean.textMinS` (1.15) no lean this time; (b) a seal inside a dialog leans only after it stood still `lean.stillMs` (200 ms); the watch (`lean.watchMs` 120 ms, was 250) ends a lean the moment text moves under it; (c) a dialog OPENING ends a running STAGE lean at once (showModal wrapper) — found by the new test: a stage seal (kfseal «vui» sway) that started in the gap between two dialogs stayed over the next dialog's name tag for one watch tick.
+Family test dev/test/emo-over-text.js (end ×3 incl. the Đại kết cục banner seal data-kemo-now, person dialogs short / long text; samples every 150 ms for 12 s; `DBG=1` logs each clone's owner): cec55446 FAIL («Đại kết cục · Hiền tướng…», «Hoàng thượng đặt tấu…» covered, iPad); 3b00a9df PASS 3 runs in a row Fold + iPad (the banner seal still leans, 29–31 samples, smaller, clear of the text).
+Measures on 3b00a9df (one sequential batch, alone): emo-over-text all pass · xl-one-size all pass · hook 80 dialog-fixed all pass · hook 96 total 6 ≤ 28 {X06:4, X08:2} · one-core-guard PASS · kit-hand KIT-HAND PASS (172 ok / 0 fail) · badge-hand 22 / 0.
+Stills (looked): https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-stage-r15/ — r2-<device>-<dialog>.png = round 2; after-* / before-* = round 1.
+Finding for MAIN (not fixed, other kit part): the reward motion layer (kmrew gold burst + «Hoàng hậu → ta: thiện cảm +6» toast) flies over the Đại kết cục story text / figure on the Fold for ~1–2 s right after the dialog opens (r2-755x1000-end-i-k-t-c-c.png). The same «no flight over open dialog text» rule would cover it; the owner of kitReward / kmrew to say.
