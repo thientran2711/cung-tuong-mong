@@ -39,6 +39,8 @@ let CUR=null;
 function css(){if(document.getElementById("k-ring"))return;const s=document.createElement("style");s.id="k-ring";s.textContent=`
 .kscn.kring .kscn-bg{filter:none!important}.kscn.kring .kscn-veil{opacity:0!important}
 .kring-band{position:absolute;inset:0;z-index:5;touch-action:none}
+/* §104.1c: a ring layer that is not on screen (opening fade at opacity 0, a build that never finished) takes no tap: the band wakes when the layer is shown (kring-live) */
+.kscn.kring:not(.kring-live),.kscn.kring:not(.kring-live) *{pointer-events:none!important}
 /* RING-BUILD-4 (MAIN LOOK FAIL 26/11): every figure lives in ONE layer UNDER every tap target (✕ ‹ › tabs 60, plaques .kpk 30, bubble 270) — a figure is never drawn over a button */
 .kring-wrap{position:absolute;inset:0;z-index:10;pointer-events:none;will-change:transform}
 .kring-s{position:absolute;left:0;top:0;transform-origin:50% 100%;will-change:transform;pointer-events:none;z-index:10}
@@ -141,7 +143,7 @@ async function open(o){o=o||{};close(true);css();const m=kv();
  band.addEventListener("pointermove",e=>{if(!drag)return;const now=performance.now(),dx=e.clientX-last;if(Math.abs(e.clientX-x0)>6)moved=1;if(!moved)return;R.rot-=dx/stepPx(R);R.v=-(dx/stepPx(R))/Math.max(1,now-lt);last=e.clientX;lt=now;place(R)});
  const up=e=>{if(!drag)return;drag=0;if(!moved){tapAt(R,e.clientX,e.clientY);return}fling(R,R.v)};band.addEventListener("pointerup",up);band.addEventListener("pointercancel",up);
  await build(R);await new Promise(r=>requestAnimationFrame(r));
- if(calm())L.style.opacity="1";else{L.animate([{opacity:0},{opacity:1}],{duration:320,easing:"ease-out",fill:"both"}).onfinish=()=>{L.style.opacity="1"};
+ if(calm()){L.style.opacity="1";L.classList.add("kring-live")}else{{const live=()=>{L.style.opacity="1";L.classList.add("kring-live")};L.animate([{opacity:0},{opacity:1}],{duration:320,easing:"ease-out",fill:"both"}).onfinish=live;setTimeout(live,700)/* RV-175 nit: a fade that never finishes (tab hidden, animation cancelled) can never leave the ring + ✕ inert */}
   R.slots.forEach((s,i)=>{const fin=s.style.transform;s.animate([{transform:`translate(${geo(R).cx-s.__cx}px,${geo(R).floor-geo(R).Ry*2-s.__feet}px) scale(.3)`,opacity:0},{transform:fin,opacity:1}],{duration:520,delay:120+i*50,easing:"cubic-bezier(.2,1.1,.4,1)"})})}
  return R}
 async function build(R){R.slots.forEach(s=>s.remove());R.slots=[];const m=kv(),g0=R.L.g;if(R.stdPx==null)R.stdPx=stdImgR()||g0.H*KIT_RING.stdR[m];R.stdR=R.stdPx/g0.H;const fh0=Math.round(R.stdPx);
@@ -156,7 +158,15 @@ async function setMode(R,m){if(m===R.mode)return;R.busy=1;try{if(R.sel>=0)await 
  if(!calm())R.slots.forEach((s,i)=>s.animate([{opacity:0,transform:s.style.transform+" scale(.85)"},{opacity:1,transform:s.style.transform}],{duration:300,delay:i*40,easing:E}))}finally{R.busy=0}}
 function slotAt(R,x,y){const hit=document.elementsFromPoint(x,y).map(e=>e.closest&&e.closest(".kring-s")).filter(Boolean);if(hit.length)return hit.sort((a,b)=>+b.style.zIndex-+a.style.zIndex)[0];
  /* slots have no pointer events: hit-test the painted boxes in z order */let best=null;R.slots.forEach(s=>{const r=s.getBoundingClientRect();if(x>=r.left&&x<=r.right&&y>=r.top&&y<=r.bottom&&(!best||+s.style.zIndex>+best.style.zIndex))best=s});return best}
-function tapAt(R,x,y){const s=slotAt(R,x,y);if(!s)return;const i=R.slots.indexOf(s);if(i===front(R)&&Math.abs(R.rot-Math.round(R.rot))<.02)return focus(R);turnTo(R,i)}
+function tapAt(R,x,y){const s=slotAt(R,x,y);if(!s)return tapUnder(R,x,y);const i=R.slots.indexOf(s);if(i===front(R)&&Math.abs(R.rot-Math.round(R.rot))<.02)return focus(R);turnTo(R,i)}
+/* KIT §104.1c (K-RING-ALL b, KK59; RV-163J G4 q-softlock + RV-172 nhv family): the band NEVER eats a tap. A tap that hits no ring slot goes to what lies under the ring layer:
+   a stage figure (#tokens .tok[data-p]) whose person stands in the ring = that slot turns to the front and focuses (one figure view); any other stage target (a figure not in the ring,
+   a plaque, a button) gets the tap itself. Nothing under the finger = nothing happens (empty ground). */
+function tapUnder(R,x,y){try{const L=R.L;const el=document.elementsFromPoint(x,y).find(e=>e!==L&&!L.contains(e)&&e!==document.documentElement&&e!==document.body&&!(e.id==="stage"));if(!el)return;
+ const tok=el.closest&&el.closest("#tokens .tok[data-p]");
+ if(tok){const pi=+tok.dataset.p,k=R.slots.findIndex(s=>s.__g&&s.__g.members.some(m=>m.i===pi));
+  if(k>=0){if(R.busy||R.sel>=0)return;return turnTo(R,k).then(()=>{if(CUR===R&&R.sel<0&&front(R)===k)return focus(R)})}}
+ const t=(el.closest&&el.closest("button,a,[data-p],.tok,.kpk,[role=button]"))||el;if(typeof t.click==="function")t.click()}catch(e){console.error("kitRing tapUnder",e)}}
 function turnBy(R,d){return tween(R,Math.round(R.rot)+d,KRING_MATH.stepMs)}
 function turnTo(R,i){const N=R.slots.length;const d=KRING_MATH.short(i,R.rot,N);return tween(R,R.rot+d,Math.min(700,KRING_MATH.stepMs+Math.abs(d)*90))}
 /* ---------- focus: the front slot grows to a big full body, slides LEFT; plaques drop on the RIGHT ---------- */
@@ -325,7 +335,7 @@ kitRing.modalPeople=modalPeople;kitRing.ringable=ringable;
 const PGI=window.__kringPG={};
 if(typeof pager==="function"){const pg0=pager;pager=window.pager=function(key,items,mk){try{if(KIT_RING.wire&&KIT_RING.strip!==false&&!window.__bot&&items&&items.length>1&&items.every(t=>t&&t.p&&typeof t.p==="object")){
   const n=items.length;let i=PG[key];if(i==null||i<0||i>=n)i=0;PG[key]=i;PGI[key]={items,mk};const nm=String(items[i].name||"").replace(/<[^>]*>/g,"");
-  return `<div class="kring-pg"><button type="button" class="kbtn" data-kring-pg="${esc(key)}">‹ ${esc(nm)} · ${i+1}/${n} ›</button></div>`+mk(i)}}catch(e){console.error("kitRing pager",e)}return pg0.apply(this,arguments)};
+  return `<div class="kring-pg"><button type="button" class="kbtn" data-knav="ring" data-kring-pg="${esc(key)}">‹ ${esc(nm)} · ${i+1}/${n} ›</button></div>`+mk(i)}}catch(e){console.error("kitRing pager",e)}return pg0.apply(this,arguments)};
  document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kring-pg]");if(!b)return;e.preventDefault();e.stopPropagation();stripRing(b.dataset.kringPg)},true)}
 function cardBtns(host){const out=[];for(let n=host&&host.nextElementSibling;n;n=n.nextElementSibling)out.push(...n.querySelectorAll(".pcg button"));return out}
 const actNm=b=>{const e=b.querySelector(".kan")||b.querySelector("b,strong")||b.firstElementChild||b;let t=txt(e);try{if(typeof kpActName==="function"&&b.querySelector(".kan"))t=kpActName(b.querySelector(".kan"))}catch(_){}return t.slice(0,40)};
@@ -371,13 +381,15 @@ document.addEventListener("click",e=>{try{if(!KIT_RING.wire||window.__bot||windo
 kitRing.grpBtnRing=grpBtnRing;
 /* ---------- §104.2 wiring G: Phe phái «Lập phe cùng …» / «Mời …» face buttons (facHTML) → ONE kit button «… · N ›» + vòng người of those consorts; the plaque = the old button
    (its words, its cost line, locked = its why); pick = the old button's own click (kept in the panel, hidden). ---------- */
+/* KIT §104.2d (KIT REQUEST #11, KK59): a ring OPENER («Lập phe cùng ai · N ›», «Các phe · N ›», the strip «‹ tên · i/n ›») is a door to a list, not an act: it carries data-knav="ring";
+   law 3 (Được–Mất) is checked on the plaques the ring drops (each the old button's own Tốn / Được / Mất rows), never on the opener — act scans (gain-empty …) skip [data-knav]. */
 const FA_KINDS=["lap","moi","gach","hop"],FA_LAB={lap:["Lập phe cùng ai","Lập phe"],moi:["Mời người vào phe","Mời vào phe"],gach:["Gạch tên ai","Gạch tên"],hop:["Hợp mưu hạ ai","Hợp mưu"]};
 if(typeof facHTML==="function"){const fh0=facHTML;facHTML=window.facHTML=function(){let h=fh0.apply(this,arguments);try{if(!KIT_RING.wire||window.__bot||window.__kringOff)return h;
  FA_KINDS.forEach(kind=>{const re=new RegExp(`<button data-fa="${kind}" data-fv="([^"]+)"[^>]*>[\\s\\S]*?<\\/button>`,"g");const n=(h.match(re)||[]).length;if(!n)return;let first=true;
-  h=h.replace(re,(m)=>{const hid=m.replace("<button ","<button hidden data-kring-fh ");if(first){first=false;return `<button type="button" class="kbtn" data-kring-fa="${kind}">${FA_LAB[kind][0]} · ${n} ›</button>`+hid}return hid})});
+  h=h.replace(re,(m)=>{const hid=m.replace("<button ","<button hidden data-kring-fh ");if(first){first=false;return `<button type="button" class="kbtn" data-knav="ring" data-kring-fa="${kind}">${FA_LAB[kind][0]} · ${n} ›</button>`+hid}return hid})});
  /* §104.3 the faction rows' own acts (Xin vào phe · Ly gián) → ONE kit button «Các phe · N ›» = vòng nhóm of the factions (a slot = the faction's people, her own figure never) */
  const fre=/<button data-fa="(xin|ly)" data-ff="([^"]+)"[^>]*>[\s\S]*?<\/button>/g;const ff=new Set([...h.matchAll(fre)].map(m=>m[2]));
- if(ff.size){h=h.replace(fre,m=>m.replace("<button ","<button hidden data-kring-fh "));h=h.replace(/(<\/div>)/,`$1<div class="rbtn"><button type="button" class="kbtn" data-kring-fac="1">Các phe · ${ff.size} ›</button></div>`)}
+ if(ff.size){h=h.replace(fre,m=>m.replace("<button ","<button hidden data-kring-fh "));h=h.replace(/(<\/div>)/,`$1<div class="rbtn"><button type="button" class="kbtn" data-knav="ring" data-kring-fac="1">Các phe · ${ff.size} ›</button></div>`)}
  }catch(e){console.error("kitRing fac",e)}return h};
  document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kring-fa]");if(!b)return;e.preventDefault();e.stopPropagation();const kind=b.dataset.kringFa;
   const B=[...document.querySelectorAll(`button[data-kring-fh][data-fa="${kind}"]`)];const P=B.map(x=>{const id=x.dataset.fv;return(rivals||[]).find(v=>String(v.id)===String(id))});

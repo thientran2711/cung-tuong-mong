@@ -61,6 +61,11 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
  if(t.dataset.kipgo!=null){if(t.disabled)return;const i=+t.dataset.kipgo,b=M.querySelector(`.opts>.opt[data-m="${i}"]`);if(!b||b.disabled)return;
   KIP_GO={pid:m.pid,pp:m.pp,c:m.opts[i],from:(M.querySelector(`.kipc[data-kip="${i}"] .kitem`)||t).getBoundingClientRect(),to:kipTarget(M)};b.click();return}
  kipSelect(M,m,+t.dataset.kip)},true);
+/* K-PICK-GO-REACH (KIT §28.13i, KK61): the confirm «kipgo» is the LAST child of the whole picker (.kipw), never inside the detail: sticky to
+   the bottom of the dialog's scroller (#mb) while any part of the picker is in view = reachable with no scroll (inside .kipd its sticky could
+   never rise above the detail: 187–254 px below the box on Fold + iPad, Dâng quà dead). Every kipDetail draw moves its button out. */
+(function(){const k0=kipDetail;kipDetail=function(M){try{M&&M.querySelectorAll(".kipw>.kipgo").forEach(x=>x.remove())}catch(e){}const r=k0.apply(this,arguments);
+ try{const d=M&&M.querySelector(".kipd"),g=d&&d.querySelector(":scope>.kipgo");if(g)d.after(g)}catch(e){console.error("kipgo",e)}return r}})();
 /* ---------- the gift moment ---------- */
 let KIP_GO=null;
 /* where the person is: the open person card's portrait in the panel, else the dialog's own figure, else the upper middle */
@@ -104,12 +109,12 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 .kshc.kipc.on>.kshpic{filter:var(--k-glow);transform:scale(1.06)}
 .kipd{display:flex;flex-direction:column;gap:6px;min-width:0}
 .kipd>.opt.kipcard{pointer-events:none;margin:0;width:100%}
-.kipd>.kipgo{align-self:stretch;min-height:40px}
-.kipd>.kipgo:disabled{filter:grayscale(1);opacity:.55}
-/* reviewer r1: with the §70 strip the confirm stays in view — strip | card + confirm side by side on landscape screens, and the confirm
-   sticks to the bottom of the scrolling option box everywhere */
-.kipd>.kipgo{position:sticky;bottom:0;z-index:2}
-/* kv3:.kv2 */:where(.kv2) .kipd.kipd2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:10px}:where(.kv2) .kipd2>.kidet{grid-column:1;grid-row:1/span 2}:where(.kv2) .kipd2>.kipcard,:where(.kv2) .kipd2>.kipgo{grid-column:2}:where(.kv2) .kipd2>.kipgo{align-self:start;max-height:48px}
+.kipw>.kipgo{align-self:stretch;min-height:40px}
+.kipw>.kipgo:disabled{filter:grayscale(1);opacity:.55}
+/* reviewer r1: with the §70 strip, strip | card side by side on landscape screens. K-PICK-GO-REACH (KK61): the confirm sticks to the bottom
+   of the dialog's scroller while the picker is in view (child of .kipw, so the sticky can rise over the grid + detail) */
+.kipw>.kipgo{position:sticky;bottom:0;z-index:2}
+/* kv3:.kv2 */:where(.kv2) .kipd.kipd2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:10px}:where(.kv2) .kipd2>.kidet{grid-column:1;grid-row:1/span 2}:where(.kv2) .kipd2>.kipcard{grid-column:2}
 
 /* kv3:.kv1 */:where(.kv1) .kipg{--kshsz:84px}
 `;document.head.appendChild(st)})();
