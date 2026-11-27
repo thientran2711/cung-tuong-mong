@@ -9,4 +9,6 @@
 7. Pets grow through 4 stages with care stats and minigames; others can help, harm or steal pets (10:20Z–10:57Z).
 8. Makeup and attire reactions shown as event frames, max 1–2 per occasion (14:40Z); lack of protocol rule (09:10Z); inner robe when attire is lost (09:15Z).
 9. Header: left Sắc · Tài · Tâm cơ · Đức · Danh · Sủng, right Bạc · Sức (≈17:50Z).
+10. PARKED (27/11, scope-classb; MAIN ruling, law 16: leave as is) nsSieve known-list reorder: jnsieve wraps `knownList` behind `typeof knownList==="function"` but jhc's function is module-local, so the reorder («ngươi»/evidence/night/rank first) is dead; exporting it would turn it on and change what the owner sees.
+11. PARKED (27/11, scope-classb; MAIN ruling, law 16: leave as is) kitTabStick refit: jinv calls `kitTabStick()` in try{} after the inventory fit but jk3's function is not exported, so the sticky-tab refit only happens on window resize; exporting it would change tab behaviour on the inventory.
 ## Closed
