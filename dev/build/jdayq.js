@@ -153,8 +153,11 @@ function dqInstall(){
 (function(){if(typeof kmFree!=="function")return;const kf=kmFree;kmFree=function(){if(!kf.apply(this,arguments))return false;
  /* (c) a new motion scene waits while a mini-game screen or an on-figure game is open (a scene on screen is already one at a time: kmBusy;
     a scene from her own act in the person view shows there as before) */
- /* (kit scenes never gate the room's week: sendEnd / nextBuoi wait on Q and S.mg only, so this hold stays as DAYQ-3 in a room too — review/coop-night-live) */
- try{if(dqUiC()){const ov=document.getElementById("ov");if((ov&&!dqHidden(ov))||(window.DF&&DF.play)){DQ.stat.actKm++;return false}
+ /* in a room this hold is DAYQ-3 too (review/coop-night-live) while her buổi is open; coop-dayq-noclock (law 11, same family as the cards above): once the ROOM waits on her seat (dqRoomOwes) a held scene starts too. Before, at an
+    overdue / committed tối with the «Phối đồ» board open, the night flip scene (jflip kcf) waited here on the board while jnf's showModal gate held
+    every card on that unstarted scene: nothing on her screen until jnf's CAP dropped the scene (~30 s) and nightAfk carried her cards — the partner
+    sat on «Chờ hảo hữu…», her flip never played (dayq-hold-coop R at tối, 3 red / 4) */
+ try{if(dqHoldC()){const ov=document.getElementById("ov");if((ov&&!dqHidden(ov))||(window.DF&&DF.play)){DQ.stat.actKm++;return false}
   /* a scene posted inside a tap waits one pump (kmPump retries in 250 ms): the tap may be opening an activity (her «Điểm trang» tap spends the
      khắc first, then opens the mirror) — a scene of the khắc never starts before / under that screen */
   const ev=window.event;if(ev&&/click|pointer|touch|key|mouse/.test(ev.type)&&!DQ.kmTap){DQ.kmTap=1;setTimeout(()=>{DQ.kmTap=0},0);DQ.stat.actKm++;return false}}}catch(e){}

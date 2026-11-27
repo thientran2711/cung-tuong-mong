@@ -73,7 +73,7 @@ async function runCase(o,A,Sx){const p=o.p;const r={seat:o.name,A,S:Sx,bad:[]};c
  if(!(await until(Ho,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(Ho,G,'setup');
  await REALL.realize(Ho,G,()=>week(Ho,G,'setup'),ok);
  for(const o of [Ho,G]){await o.p.evaluate(H);ok(await o.p.evaluate(()=>!!(window.COOPW&&COOPW.on)),o.name+': in the co-op world (COOPW.on)');
-  for(const [A,Sx] of CASES){const r=await runCase(o,A,Sx);if(r.skip){console.log('skip '+o.name+' '+A+'×'+Sx+' '+r.skip);continue}
+  for(const [A,Sx] of (process.env.DQ_ONLY==='R'?[]:CASES)){const r=await runCase(o,A,Sx);if(r.skip){console.log('skip '+o.name+' '+A+'×'+Sx+' '+r.skip);continue}
    ok(!r.bad.length,o.name+' '+A+'×'+Sx+': nothing painted inside the activity, shown after',r.bad.length?{bad:r.bad,src:r.src,after:r.after}:{src:r.src})}}
  /* R (review/coop-night-live, LIVE coop-night FAIL 25/11): an activity with NO clock of its own (the «Phối đồ» board, jts tsDressGame / kg82,
     «không giới hạn») open on one seat. While her buổi is open a card still waits behind it (v9, gate (c)); once the ROOM waits on her seat
@@ -85,13 +85,32 @@ async function runCase(o,A,Sx){const p=o.p;const r={seat:o.name,A,S:Sx,bad:[]};c
   /* her buổi must be OPEN for the first check (week() may leave a seat on Sẵn sàng): finish that buổi for both first */
   const free=o=>o.p.evaluate(()=>!COOPW.bend&&!COOPW.pend&&!COOPW.pendBuoi&&!(COOPW.nReady&&COOPW.nReady())&&!(COOPW.tm.od&&COOPW.tm.od()));
   for(let t0=Date.now();Date.now()-t0<60000&&!(await free(X)&&await free(X===Ho?G:Ho));){await press(Ho,3000);await press(G,3000);for(let i=0;i<3;i++){await clear(Ho);await clear(G);await sleep(400)}}
+  /* DQ_AT=<buổi> (coop-dayq-noclock): step both seats to that buổi first (3 = tối: the room clock then COMMITS THE NIGHT instead of a buổi step) */
+  const AT=process.env.DQ_AT!==undefined?+process.env.DQ_AT:-1;
+  if(AT>=0)for(let t0=Date.now();Date.now()-t0<90000;){const a=await Ho.p.evaluate(()=>S.buoi||0),c=await G.p.evaluate(()=>S.buoi||0);if(a===AT&&c===AT&&await free(Ho)&&await free(G))break;
+   if(a<AT&&c<AT||a>AT||c>AT){if(a!==AT)await press(Ho,3000);if(c!==AT)await press(G,3000)}else{if(a<AT)await press(Ho,3000);if(c<AT)await press(G,3000)}for(let i=0;i<3;i++){await clear(Ho);await clear(G);await sleep(400)}}
+  console.log(tag+' starts at buổi',await X.p.evaluate(()=>[S.buoi,COOP.state.week]),'other',await (X===Ho?G:Ho).p.evaluate(()=>S.buoi));
   const op=await X.p.evaluate(()=>{window.__dz=0;try{tsDressGame(Object.keys(TS_THEME)[0],()=>{window.__dz=1})}catch(e){return e.message}return __T.ovOpen()});
   if(op!==true){console.log('skip '+tag+' board n/a',op);continue}
   await X.p.evaluate(()=>__T.src('S4'));await sleep(1500);
   ok(await X.p.evaluate(()=>__T.ovOpen()&&!__T.card()),tag+': her buổi open → the card waits behind the board (v9 in a room)');
   await Ho.p.evaluate(()=>{Object.assign(BAL.coopTm,{buoiMs:6000,pauseCapMs:2000});COOPW.tm.reset()});
-  const sh=await until(X,()=>__T.ovOpen()&&__T.card(),null,40000);
-  ok(sh,tag+': the room clock ran out on her buổi → the held card is shown over the board',sh?undefined:await X.p.evaluate(()=>({Q:Q.map(m=>m.t),od:COOPW.tm.od&&COOPW.tm.od(),due:COOPW.tm.due(),pend:COOPW.pend,bend:COOPW.bend,st:window.DQ&&DQ.stat})));
+  if(process.env.DQ_DIAG)await sleep(+process.env.DQ_DIAG);
+  /* coop-dayq-noclock: at tối the clock COMMITS THE NIGHT: the night's own flip scene (jflip kcf, over the board) comes first, the cards after it
+     (jnf order). She taps the scene as a player does; the card must then be on her screen BEFORE the AFK bound (nightMs) would carry it */
+  const c0=await X.p.evaluate(()=>COOPW.tm.naf().carried);const seen=[];let sh=false;
+  for(let t0=Date.now();Date.now()-t0<(process.env.DQ_DIAG?1000:40000);){if(await X.p.evaluate(()=>__T.ovOpen()&&__T.card())){sh=true;break}
+   const sc=await X.p.evaluate(()=>{const k=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&getComputedStyle(x).display!=='none');if(!k)return '';
+    const b=[...k.querySelectorAll('button')].find(x=>!x.disabled&&x.getBoundingClientRect().width>0&&(x.classList.contains('kmend')||x.classList.contains('krevok')))||[...k.querySelectorAll('button')].filter(x=>!x.disabled&&x.getBoundingClientRect().width>0).pop();
+    const n=k.className.split(' ').slice(0,2).join('.');if(b&&k.classList.contains('km-endon')){b.click();return n+' tapped'}return n});
+   if(sc&&seen[seen.length-1]!==sc){seen.push(sc);if(process.env.SHOTS)await X.p.screenshot({path:`${process.env.SHOTS}/r-${X.name}-scene-${seen.length}.png`})}await sleep(400)}
+  if(sh&&process.env.SHOTS)await X.p.screenshot({path:`${process.env.SHOTS}/r-${X.name}-card.png`});
+  console.log(tag+' over the board:',seen.join(' → ')||'(no scene)');
+  if(sh)ok((await X.p.evaluate(()=>COOPW.tm.naf().carried))===c0,tag+': the card came to her screen, not carried by the AFK bound');
+  if(!sh&&process.env.DQ_DIAG)console.log('DIAG',JSON.stringify(await X.p.evaluate(()=>{const M=document.getElementById('modal');const D=Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden');const L=[];
+   Object.defineProperty(M,'hidden',{configurable:true,get(){return D.get.call(this)},set(v){if(v)L.push((new Error().stack||'').split('\n').slice(1,9).join(' | '));D.set.call(this,v)}});
+   const o={cf:(window.__cfdbg||[]).slice(-6),kmB:typeof kmBusy!=='undefined'?kmBusy:'?',kmq:typeof KMQ!=='undefined'?KMQ.length:'?',kmF:kmFree(),cfA:window.cfAge&&cfAge(),kmov:[...document.querySelectorAll('.kmov')].map(e=>e.className).join('|'),tr:COOPW.tr.slice(-8),qt:Q.map(m=>m.t+'/'+(m.opts?m.opts.length:0)),owes:dqRoomOwes(),holdC:dqHoldC(),act:dqActBlocks(),Q:Q.length,mg:S.mg,h0:D.get.call(M)};const AP=Function.prototype.apply,CH=[];Function.prototype.apply=function(t,a){if(CH.length<400)CH.push(String(this).slice(0,140));return AP.call(this,t,a)};try{showModal()}finally{Function.prototype.apply=AP}o.ch=CH.filter(x=>/showModal|^function\(\)\{/.test(x)).slice(-6);o.h1=D.get.call(M);o.L=L.slice();delete M.hidden;return o})));
+  ok(sh,tag+': the room clock ran out on her buổi → the held card is shown over the board',sh?undefined:await X.p.evaluate(()=>({Q:Q.map(m=>m.t),od:COOPW.tm.od&&COOPW.tm.od(),due:COOPW.tm.due(),my:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),pend:COOPW.pend,bend:COOPW.bend,ngoW:COOPW.ngoW,sent:COOPW.sent,wk:COOP.state.week,buoi:S.buoi,st:window.DQ&&DQ.stat,naf:COOPW.tm.naf(),tr:(COOPW.tr||[]).slice(-25)})));
   await X.p.evaluate(()=>__T.answer());await Ho.p.evaluate(()=>{Object.assign(BAL.coopTm,{buoiMs:600000});COOPW.tm.reset()});
   await week(Ho,G,tag);await X.p.evaluate(()=>{try{kg82Close()}catch(e){}render()})}
  await week(Ho,G,'after the cases');
