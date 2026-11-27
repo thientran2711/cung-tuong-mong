@@ -74,11 +74,11 @@ function kitHandLongOff(g){try{g.__khLong=kitHandSig(g);g.__khSig="";g.classList
    - Tap a card: it ENLARGES in the centre of the frame / pane (`.khplate.khbig`, transform + opacity only, from its hand slot) — plaque (the WHOLE name) ·
      picture · Tốn row with the odds word at its right end · Được · Mất (a locked card: its kit «why») — every number from the SAME kit card the «!» overlay
      shows (a disabled copy, nothing typed). The hand stays small behind it under a soft veil (`.khveil`, never takes taps).
-   - ONE small «Chọn» chip (kit `.kbtn`, BAL.kpkgo) INSIDE the enlarged card, bottom-right = choose: the card flies up, then the frame's own choose path runs.
+   - ONE small green ✓ (kit `.kbtn.khok.kpk-gob`, BAL.kpkgo) INSIDE the enlarged card, top-right = choose: the card flies up, then the frame's own choose path runs.
      A locked card has no «Chọn». Tap another card = switch; tap anywhere else = it shrinks back into its slot. Tapping the enlarged card does nothing.
    - ONE part for every hand (frame hand, stage Bàn bài via jkstage kstgPlate → kitHandBigPlace, kitHand.mount panes). «Cảnh động» off / reduced motion = no motion.
    The element keeps the class .khplate (the stage and the tests key on it). Geometry knobs: KIT_HAND.big. */
-KIT_HAND.big={w:[360,340]/* enlarged card width [Fold, iPad] (god-research 360x504 / 340x476) */,asp:1.4/* 5:7 */,minH:220,under:.8,chip:[6,5]/* the «Chọn» chip sits 6 px in from the right, 5 px up from the bottom of the card (the same as the thẻ gỗ chip, kitPick) — its size = BAL.kpkgo */,ms:200,backMs:150,fs:[22,21,20,19,18,17,16,15,14,13]/* info type scale px: the largest that fits wins */};
+KIT_HAND.big={w:[360,340]/* enlarged card width [Fold, iPad] (god-research 360x504 / 340x476) */,asp:1.4/* 5:7 */,minH:220,under:.8,tick:[3,2]/* the green ✓ sits 3 px in from the right, 2 px down from the top of the card (the same as the thẻ gỗ ✓, kitPick) — its size = BAL.kpkgo */,ms:200,backMs:150,fs:[22,21,20,19,18,17,16,15,14,13]/* info type scale px: the largest that fits wins */};
 function kitHandBigBuild(b,z){const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang").forEach(e=>e.remove());/* the Gợi ý row repeats Được / Mất in prose: shown only when the card has neither row */if(c.querySelector(".kr-duoc,[class*=kr-mat]"))c.querySelectorAll(".kr-hint").forEach(e=>e.remove());
  /* a hint clause the kit pass appended twice («…; hên xui; hên xui», a re-run of kitOptFinal on the hand card) reads once */c.querySelectorAll(".kb .ef").forEach(e=>{if(e.children.length)return;const p=e.textContent.split("; "),q=p.filter((x,i)=>i===0||x!==p[i-1]);if(q.length<p.length)e.textContent=q.join("; ")});c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *")&&!(r.querySelector(".krv")||{}).textContent)r.remove()});
@@ -93,12 +93,12 @@ function kitHandBigFit(z){const fi=z.querySelector(".khbi");if(!fi)return;const 
 /* place the enlarged card in the CENTRE of [L,R] × [top0, bottom] with its «Chọn» block under it; the room caps the height (5:7 kept) */
 function kitHandBigPlace(b,z,dl,top0,L,R){try{const K=KIT_HAND.big,ip=kitHandWide(),D=dl.getBoundingClientRect();
  L=L==null?D.left+8:L;R=R==null?D.right-8:R;let top=top0==null?D.top+4:top0;const bot=dl.__khBot?dl.__khBot():Math.min(innerHeight-4,D.bottom-4);
- const foot=0;/* the «Chọn» chip stands INSIDE the card (a bottom strip), no block under it */let w=Math.round(Math.min(K.w[ip],R-L)),h=Math.round(w*K.asp);
+ const foot=0;/* the green ✓ stands INSIDE the card (top-right corner), no block under it */let w=Math.round(Math.min(K.w[ip],R-L)),h=Math.round(w*K.asp);
  /* the story stays readable: the card starts under the story box when that still leaves ≥ KIT_HAND.big.under of its height, else it stands over it */
  const pm=dl.querySelector(".kpmain");if(pm&&pm.getClientRects().length){const pb=pm.getBoundingClientRect().bottom+8;if(pb>top&&bot-pb-foot-4>=h*K.under)top=pb}
  const room=Math.round(bot-top-foot-4);if(h>room){h=Math.max(K.minH,room);w=Math.round(h/K.asp)}
  const x=Math.round((L+R)/2-w/2),y=Math.round(Math.max(top,top+(bot-top-(h+foot))/2));
- z.style.width=w+"px";z.style.height=h+"px";z.style.left=(x-D.left)+"px";z.style.top=(y-D.top)+"px";z.style.bottom="auto";z.__khRect={l:x-D.left,t:y-D.top,w,h};z.classList.toggle("khgo",!b.disabled);z.style.setProperty("--khgh",BAL.kpkgo.h+"px");kitHandBigFit(z);
+ z.style.width=w+"px";z.style.height=h+"px";z.style.left=(x-D.left)+"px";z.style.top=(y-D.top)+"px";z.style.bottom="auto";z.__khRect={l:x-D.left,t:y-D.top,w,h};z.classList.toggle("khgo",!b.disabled);z.style.setProperty("--kpgw",BAL.kpkgo.w+"px");kitHandBigFit(z);
  const v=dl.querySelector(":scope>.khveil");if(v){const P=dl.__khPane?dl.__khPane():null,Q=P?P.getBoundingClientRect():D;v.style.left=(Q.left-D.left)+"px";v.style.top=(Q.top-D.top)+"px";v.style.width=Q.width+"px";v.style.height=Q.height+"px"}
  kitHandConf(b)}catch(e){console.error("kitHandBigPlace",e)}}
 /* grow / shrink: the copy starts exactly over the hand card (translate + scale) and ends at its centre place; back = the reverse */
@@ -112,12 +112,12 @@ function kitHandPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg,.khos
  const hd=dl.querySelector(":scope>.kph"),D=dl.getBoundingClientRect(),top0=dl.__khTop?dl.__khTop():(hd&&hd.getClientRects().length?hd.getBoundingClientRect().bottom:D.top)+6;
  const LR=dl.__khLR?dl.__khLR():[D.left+8,D.right-8];kitHandBigPlace(b,z,dl,top0,LR[0],LR[1]);
  b.classList.add("khout");if(fresh&&!kitHandStill()){const cf=dl.querySelector(":scope>.khconf");if(cf)cf.style.opacity="0";/* «Chọn» shows when the card has grown */Promise.resolve().then(()=>{if(z.__khFor===b&&!z.hidden)kitHandBigGo(b,z,false,()=>{if(cf)cf.style.opacity=""});else if(cf)cf.style.opacity=""})}}catch(e){console.error("kitHandPlate",e)}}
-/* ONE «Chọn» CHIP (owner 27/11 ~03:17Z, CANON OVERWRITE of the 280x64 bar under the card): the small kit chip INSIDE the enlarged card, bottom-right (6 in / 5 up), size BAL.kpkgo, the same chip as the thẻ gỗ (kitPick).
+/* ONE green ✓ (owner 27/11 ~04:00Z, CANON OVERWRITE of the 280x64 bar and of the «Chọn» chip): the small kit tick INSIDE the enlarged card, top-right (3 in / 2 down), size BAL.kpkgo, the same tick as the thẻ gỗ (kitPick).
    A locked card: none. Putting a card back = a tap anywhere else (or on another card = switch). (The thẻ gỗ picker kitPick has the same chip, §98.1.) */
 function kitHandConf(b){try{const g=b&&b.parentElement,dl=g&&g.closest(".dlg,.khost");if(!dl)return;let c=dl.querySelector(":scope>.khconf");const z=dl.querySelector(":scope>.khplate:not([hidden])"),Rz=z&&z.__khRect;
  if(!b.classList.contains("klift")||b.disabled||!Rz){if(c)c.hidden=true;return}
- if(!c){c=document.createElement("div");c.className="khconf khgo";c.innerHTML=`<button type="button" class="kbtn khok kpk-gob" aria-label="Chọn lá này">Chọn</button>`;dl.appendChild(c)}
- const K=KIT_HAND.big,bw=BAL.kpkgo.w,bh=BAL.kpkgo.h;c.hidden=false;c.style.left=Math.round(Rz.l+Rz.w-bw-K.chip[0])+"px";c.style.top=Math.round(Rz.t+Rz.h-bh-K.chip[1])+"px";c.style.setProperty("--kpgw",bw+"px");c.style.setProperty("--kpgh",bh+"px")}catch(e){console.error("kitHandConf",e)}}
+ if(!c){c=document.createElement("div");c.className="khconf khgo";c.innerHTML=`<button type="button" class="kbtn khok kpk-gob" aria-label="Chọn lá này">✓</button>`;dl.appendChild(c)}
+ const K=KIT_HAND.big,bw=BAL.kpkgo.w,bh=BAL.kpkgo.h;c.hidden=false;c.style.left=Math.round(Rz.l+Rz.w-bw-K.tick[0])+"px";c.style.top=Math.round(Rz.t+K.tick[1])+"px";c.style.setProperty("--kpgw",bw+"px");c.style.setProperty("--kpgh",bh+"px")}catch(e){console.error("kitHandConf",e)}}
 function kitHandConfOff(g){const dl=g&&g.closest&&g.closest(".dlg,.khost"),c=dl&&dl.querySelector(":scope>.khconf");if(c){c.hidden=true;c.style.opacity=""}}
 function kitHandStill(){try{return typeof kfStill==="function"?kfStill():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
 function kitHandVeilOff(dl){const v=dl&&dl.querySelector(":scope>.khveil");if(v)v.hidden=true}
@@ -222,8 +222,8 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt.khout{opacity:0!impor
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-duoc .krl{color:#2f7a3a!important}
 #modal .dlg>.khplate .khbi>button.kopinfo .kb [class*=kr-mat] .krl{color:#a8321e!important}/* Được green mark · Mất red mark (law 3) */
 #modal .dlg>.khplate .khbi>button.kopinfo .kwhy{display:block!important;color:#7a2a1c!important;font-weight:700!important;opacity:1!important}
-#modal .dlg>.khconf.khgo{display:block;gap:0}/* the ONE small «Chọn» chip INSIDE the enlarged card, bottom-right (OD 27/11 ~03:17Z): look = the shared chip rule in jkpick.js, size = BAL.kpkgo */
-#modal .dlg>.khplate.khgo>.khbc{padding-bottom:calc(var(--khgh,32px) + 10px)}/* the card grows a bottom strip one chip tall */`;document.head.appendChild(st)})();
+#modal .dlg>.khconf.khgo{display:block;gap:0}/* the ONE small green ✓ INSIDE the enlarged card, top-right (OD 27/11 ~04:00Z): look = the shared rule in jkpick.js, size = BAL.kpkgo */
+#modal .dlg>.khplate.khgo .khbn{padding-left:calc(var(--kpgw,24px) + 6px);padding-right:calc(var(--kpgw,24px) + 6px)}/* the title never runs under the ✓ (kept centred) */`;document.head.appendChild(st)})();
 /* KK35 — a PERSON card inside a hand (the option names her: «Thì thầm nói xấu …», kopic face:avatar) shows her PORTRAIT as the card picture,
    like kitOptLead: the avatar's frame / crest / gem / tassel stay off the face (they overflowed onto the name); the role tag keeps a space before it. */
 (function(){const st=document.createElement("style");st.id="kit-hand-face";const P="html body #modal#modal#modal#modal .opts.khand>button.kopt.kopav";
