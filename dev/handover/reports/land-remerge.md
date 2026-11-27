@@ -88,3 +88,31 @@ Rule from LC30: lander merges my -lrm branches itself; re-merge ONLY on a SOURCE
 | UI 7 | — | all landed via lc29-ui (endcard-top, kit-name-stranger, c3-seals, kit-home-frame, tainghe-info, kit-veil-buoi, ob-m3ui-sololh). flight-mucluc-kit / kit-evframe dropped (landed as mucluc-evframe-rv171 3ac1747d). titles-daycard-lrm → Foreman E (titles2). |
 Not done: hook 96 / kit-std-baseline-rv171 rebase (only if a reviewer asks). Worktrees /home/user/wt/lrm2/<branch> (local only).
 Lessons: LIVE moves every ~20 min (landers); a one-parent -lrm tip would revert B1 (RV-163H caught e-pack-a once): always `git merge origin/main` (true merge) and check `merge-base --is-ancestor origin/main HEAD` + `git diff --name-status origin/main HEAD | grep -c '^D'` = 0 before pushing.
+
+## LAND-REMERGE-3 (LRM3) session_01Rc5AsJHMnuuBgiJmSggTG5 — 27/11 16:57Z–18:20Z (MAIN 179 worker)
+PRIORITY #1 CHECK ('nhv-areas'): OD 1 | ledger 0 | claims 0 | main 0 | review/* nhv-areas 50840478, nhv-areas-lrm c7135891 | reuse. «Keep tag inside stage» helper: none on main/review/* (git grep) → new kit 93.5b, KK60 sign-off OK 18:03Z.
+KIT CHECK: reuses kitNameTagBox/.kscn-tag plates, kitPick, kitRing; one new kit helper kitTagKeepIn (93.5b, KK60 OK).
+LIVE at all merges = 772bee4f. Every sha below: true merge of origin/main, `merge-base --is-ancestor 772bee4f` TRUE, 0 deleted files, index/sw rebuilt (build_site.sh), assets.json = LIVE, assemble.py list = union (tool /home/user/wt/lrm3-tools/asm.py, container-local).
+
+| item | sha (branch) | state |
+|---|---|---|
+| s3e-display-fix | 23e9d2d3 review/s3e-display-fix-lrm3 | RV READY → RV-163K (static delta clean, browser part queued ~2 h). j42 srvMerit = guard line verbatim + clamp after it (srvmerit-guard landing later = take s3e line). Test (b) FAIL was LIVE design: KIT §103 map banner (jplrule strips her state from spots) + jmapz zone tags (.mzone) + her home spot (.here) → test counts spots+banner = 1, «shut» asks place spots only. s3e-display-fix.js ALL PASS Fold + iPad, one-core PASS, stills looked. |
+| nhv-areas | 3a9fdf8a review/nhv-areas-lrm3 | NOT yet RV READY — final after-scan running (see TODO). FAIL-2 fixed: mklife seeded (KSEED default 1), dead life → next seed, prints `MKLIFE KSEED=n` (my life: seed 1 dead → KSEED=2, «Lâm Tú Uyển · cnv», file /home/user/wt/lrm3-out/life.json). FAIL-1: kitTagKeepIn (jkitsel, KIT.md 93.5b) in jnhv tagsFix + jkring focusTag; jnhv an() re-runs tagsFix when any figure-move animation ends (root cause found by probe: the stepped-out person's group-mate walks to the far left AFTER the last tagsFix → plate −9 px). Probe after fix: plate 2 px inside, translate idempotent. |
+| kit-screenveil | 39ed9a3f review/kit-screenveil-lrm3 | NOT yet RV READY. Late guard (MutationObserver after cap; imgs hidden till decoded, undecoded bg lifted; ends at view change / BAL.kscrv.late 30000). Run 1 (keep 300): Fold cold Ngự hoa viên 1 bad frame at the cap (fig-consort-c12), all other cold/warm steps 0 bad both devices — my nhv probe overlapped that run → re-run alone in progress (KEEP=0 MEM=1, output /home/user/wt/lrm3-out/sv0.txt). Memory keep 300 after warm steps: Fold renderer RSS 1263 MB / JS heap 87 MB / kept 157; iPad 818 MB / 87 MB / 157. keep 0 numbers = sv0.txt. |
+| mgskin-wire | d7efee32 review/mgskin-wire-lrm3 | 92116db8 conflicted with LIVE 772bee4f in assemble.py (source) → re-merged (only assemble union + built). mgskin-wire.js NOT re-run yet. Send to LC32 as replacement of 92116db8 after the test (delta = assemble list only vs RV-163J PASS). |
+
+### nhv plate edge scan (dev/test/nhv/plate-edge-scan.js, life KSEED=2, all garden areas × Fold/iPad × every group: rest / group tap / person tap / edge stress)
+| device/area | BEFORE (NOCLAMP=1) off / checked | AFTER run 1 (clamp in tagsFix only) | AFTER final (+re-run after moves) |
+|---|---|---|---|
+| fold ngudao / vuonhoa / thuyta / loidi0 | 0/24 · 0/23 · 0/23 · 0/24 | 0/23 · 0/23 · 0/23 · 0/9 | running |
+| ipad ngudao / vuonhoa / thuyta | 0/24 · 0/24 · 0/24 | 0/24 · 0/24 · 1/24 (−5 px) | running |
+| ipad loidi0 | **1/14 (−7 px «Thái giám Nội vụ phủ / Tiểu Mậu Tử», person tap)** | 1/24 (−9 px, same plate) | running (probe: +2 px inside) |
+Covered-item check (same scan): covers seen are the result card (#rtoast kan/kti/ksen/seal), klearn preview, kmst/ksart cards = transient game overlays; plus «nhv-f by nhv-f» on Fold person taps (stepped-out person over a group-mate?) — the final run labels the coverer (name + «stepped out»); judge it there.
+
+### HANDOVER (LRM3 → successor; context 29 % ≥ START_CTX 4 % + 25 %; coordinator MAIN 179 opens the successor)
+Background in THIS container (lost if the box dies): /home/user/wt/lrm3-out/sv0.txt (screen-veil KEEP=0 MEM=1) then edge-after.txt (nhv final after-scan). Successor if the box is gone: rebuild worktrees from the pushed branches and re-run:
+1. nhv: `SAVE=<f> KSEED=2 node dev/test/nhv/mklife.js` → `SAVE=<f> node dev/test/nhv/plate-edge-scan.js <out>` (after; expect 0 off) and with NOCLAMP=1 (before) → fill the table above; `SAVE=<f> node dev/test/nhv/area-test.js <out>` ALONE; look at Fold + iPad stills <out>/*-g0.png, *-stressL.png (KK60 condition 4: far-left / far-right plate stills, looked). Then RV READY 3a9fdf8a (or newer) → RV-175 session_01Rc5AsLMYcdYo3HjvgqrH9G + copy KK60 session_01Rc5AsK4uj6wkMaAmaZbMgc + MAIN 179.
+2. screenveil: `node dev/test/screen-veil.js <out> fold,ipadAir` ALONE (~10 min); if the Fold cold Ngự hoa viên cap frame repeats, check which path shows the img (late guard only hides imgs not complete; look for code that resets img style.visibility, or a view-key change at the cap that stops the guard before the new veil cycle). Memory: compare MEM rows keep 300 (above) vs keep 0 (sv0.txt); lower BAL.kscrv.keep only if keep 300 costs a lot more. → RV-175 + MAIN 179.
+3. mgskin d7efee32: `node dev/test/mgskin-wire.js` (+ kit-mgskin, one-core-guard) → LAND READY replacement to LC32 session_01Rc5AsKtJmn2L1UVTbDsRz8 + RV-163K delta note + MAIN 179.
+4. s3e 23e9d2d3: wait for RV-163K verdict → LAND READY to LC32.
+If LIVE moves: `git merge origin/main` in each, asm.py-style union for assemble.py, take theirs + rebuild index/sw, assets.json = LIVE, ancestor + 0-deletion gate.
