@@ -103,3 +103,23 @@ PRIORITY #1 CHECK ('amCardBtns|BAL.time.cost|kgbest'): OD 0 | ledger 0 | claims 
   coregates G1 one-core-guard / text / textrule / bind PASS (inline 3082 < baseline 3592) · G2 rules-one-source bad [] · G3 kit-conform floats none · G4 odds-cap, coop-one-world, mk-layer, manifest-guard, npc-purpose, dialog-fixed, dead-card, look-dedupe PASS · time-spill-guard PASS.
   G4 button-crawl: 1 fault «Ô lưu [title] · Lui · close button did not close its layer» — SAME on LIVE 17f23656 (crawl run on both over http): pre-existing, not this branch.
 - MAIN is now MAIN 171 (session_01Rc5AsLtirkQB1N5Nb16Wct).
+
+## MAIN 171 LOOK FAIL cadf0346 → fixed (kit rows glued on moved acts)
+- Root: the bridge read an old card button's `<small>` (already kitParse-rendered rows) and tag-stripped it → «Tùy duyênThànhBạc−−BạiTồn công»; then optLine wrapped that text as «thành: …» with its own «tốn: 1 khắc», and the Dư đồ focus line (jdf dfActs) wrote «Tốn 0 khắc» from talkK.
+- Fix (jamove, whole moved-act family): while an old card is captured, pbtn keeps its RAW small string on the button (`data-amx`, never fired); the bridged option's x = that raw string (fallback for non-pbtn buttons: rebuilt «label: value» from the rendered span.kl rows). For `amb` options: optLine = kitParse(x) (= exactly the old card's kit rows: odds part, Tốn/Thành/Bại/Kèm/Cần/Ghi chú rows, gains green / losses red); talkK = the khắc its own «tốn» states; the focus line (dfActs) takes odds word + Tốn from the kit model (kaRows(kaModelStr(x))), cost written as the Tốn row writes it («Bạc 20»). No double pay (j25 defers the talk pay; amFire clears it).
+- NEW `dev/test/act-move-rows-scan.js` (scen cao/con/hh × buổi 0–2 × every place, every bridged option): glued label /[a-zà-ỹ0-9)](Tốn|Được|Thành|Bại|Hỏng|Ghi chú|Kèm|Cần)/ in x, nested label in the rendered option line, «0 khắc» / signed cost in the focus line.
+  | kind | before glued/options | after |
+  |---|---|---|
+  | maid | 7/15 | 0/15 |
+  | kid | 9/9 | 0/9 |
+  | elder | 12/12 | 0/17 |
+  | serv | 6/6 | 0/6 |
+  | npc (other palaces' servants) | 18/18 | 0/18 |
+  | ty | 15/15 | 0/15 |
+  | ksp | 9/9 | 0/9 |
+  | peddler | 9/9 | 0/9 |
+  | fallen | 0/1 | 0/1 |
+  | TOTAL (run 1 / last run) | 85/94 · 89/99 | 0/99 · 0/93 |
+- Robots after: reach PASS · reach2 PASS · rows-scan PASS · one-core PASS · 0 page errors. A locked card (e.g. Mua chuộc «Chưa biết người này là ai») shows «Thành: Không được gì thêm» + no Bại = the kit's own disabled-card rule (kaBody dis), same as native locked options.
+- New sheets/videos (looked 3×): https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/b3-fold.mp4 · b3-ipad.mp4 · b3-sheet-fold.jpg · b3-sheet-ipad.jpg
+- KIT_CHECKLIST.md (KIT-STD-AUDIT) not published yet at this commit — to check against when it lands.

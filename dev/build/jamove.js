@@ -136,10 +136,21 @@ window.amCardBtns=amCardBtns;
    (staffTabHTML · kidActs · rvCard) and fired by a hidden twin carrying the same data-* (the delegated handlers run unchanged: cost, odds, result). ---- */
 const AM_NAV=/^data-(pg|pi|pgo|pager|pct|go|see|scout|visit|amoff|ladder|follow|kgmgo|acask)$/;
 const AM_POST={ty:"tyv",ksp:"ksp",tq:"thu",ped:"nvp"};
+/* MAIN 171 LOOK FAIL (kit rows glued): while an old card is captured, pbtn keeps its RAW small text (odds word · tốn: … · thành: … · hỏng: … · kèm: …)
+   on the button (data-amx), so the pop-up option re-parses it into the kit rows (kaRows / kitParse) instead of getting tag-stripped rendered rows */
+(function(){if(typeof pbtn!=="function")return;const p0=pbtn;pbtn=function(at,n,sm,why){const h=p0.apply(this,arguments);if(!(AMV.cap||AMV.rawOn)||typeof h!=="string")return h;
+ return h.replace(/^<button /,`<button data-amx="${encodeURIComponent(String(sm||""))}" `)};window.pbtn=pbtn})();
+/* fallback for a button not made by pbtn: rebuild «label: value» segments from the rendered kit rows (span.kl), the odds chip word first */
+function amRawOf(sm,why){const c=sm.cloneNode(true);c.querySelectorAll(".kwhy").forEach(e=>e.remove());const S2=[];const od=c.querySelector(".kodds,.oc");
+ if(od){const w=txt((od.querySelector(".kow,.ocw")||od).textContent);if(w)S2.push(w);od.remove()}
+ let cur=null;for(const n of [...c.childNodes]){if(n.nodeType===1&&n.classList.contains("kl")){cur={l:txt(n.textContent),v:""};S2.push(cur);continue}
+  const t=n.nodeType===1?n.outerHTML:String(n.textContent||"");if(cur)cur.v+=t;else if(txt(t))S2.push({l:"",v:t})}
+ return S2.map(s=>typeof s==="string"?s:s.l?`${s.l}: ${s.v.trim()}`:s.v.trim()).filter(Boolean).join(" · ")}
 function amBtnsOf(h){const d=document.createElement("div");d.innerHTML=h||"";const R=[];
- for(const b of d.querySelectorAll("button")){if(b.classList.contains("pct"))continue;const at=[...b.attributes].filter(a=>/^data-/.test(a.name)).map(a=>[a.name,a.value]);
+ for(const b of d.querySelectorAll("button")){if(b.classList.contains("pct"))continue;const at=[...b.attributes].filter(a=>/^data-/.test(a.name)&&a.name!=="data-amx").map(a=>[a.name,a.value]);
   if(!at.length||at.some(a=>AM_NAV.test(a[0])))continue;const n=b.dataset.runner?"Đổi người chạy việc":txt(b.childNodes[0]&&b.childNodes[0].nodeType===3?b.childNodes[0].textContent:(b.firstChild&&b.firstChild.textContent)||b.textContent);if(!n)continue;
-  const sm=b.querySelector("small");const why=b.disabled?txt((b.querySelector(".kwhy")||{}).textContent||""):"";R.push({n,at,x:sm?txt(sm.innerHTML).replace(why,"").replace(/\s*·\s*$/,""):"",off:!!b.disabled,why})}
+  const sm=b.querySelector("small");const why=b.disabled?txt((b.querySelector(".kwhy")||{}).textContent||""):"";let x="";try{x=AMV.noRaw?(sm?txt(sm.innerHTML).replace(why,"").replace(/\s*·\s*$/,""):"")/* scan «before» column only (act-move-rows-scan) */:b.hasAttribute("data-amx")?decodeURIComponent(b.getAttribute("data-amx")):sm?amRawOf(sm,why):""}catch(e){x=sm?txt(sm.textContent):""}
+  R.push({n,at,x,off:!!b.disabled,why})}
  return R}
 /* every Cung nhân card of the tab, by name (one paint) — the builder runs whole (pager → every row) with pcard recording its html */
 function amCapStaff(){return memo("cap:staff|"+stamp(),()=>{const M=new Map();if(typeof staffTabHTML!=="function")return M;const c0=AMV.cap;AMV.cap=M;try{staffTabHTML()}catch(e){console.error("amove cap",e)}finally{AMV.cap=c0}return M})}
@@ -166,8 +177,21 @@ function amBridge(p,A){if(AMV.inBr)return A;const old=amOldBtns(p);if(!old.lengt
  for(const b of old){if(have.has(b.n))continue;have.add(b.n);A.push({n:b.n,o:100,x:b.x,amb:1,lock:b.off,t:b.why,open:()=>amFire(b.at)})}
  return A}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(!p||!Array.isArray(A))return A;try{return amBridge(p,A)}catch(e){console.error("amove bridge",e);return A}}})();
+/* MAIN 171 LOOK FAIL: a bridged option shows the OLD card's own kit rows (its raw string: odds word · tốn · thành · hỏng · kèm) — optLine must not wrap it
+   as «thành: …» with a second «tốn: 1 khắc»; its time = the khắc its own «tốn» states (the handler pays it; j25 defers the talk pay, amFire clears it) */
+function amK(x){const m=/(?:^|·)\s*tốn:\s*([^·]*)/i.exec(String(x||"").replace(/<[^>]+>/g," "));const k=m&&/(\d+)\s*khắc/.exec(m[1]);return k?+k[1]:0}
+(function(){if(typeof talkK==="function"){const k0=talkK;talkK=function(a){return a&&a.amb?amK(a.x):k0.apply(this,arguments)}}
+ if(typeof optLine==="function"){const o0=optLine;optLine=function(a){return a&&a.amb&&typeof kitParse==="function"?kitParse(String(a.x||"")):o0.apply(this,arguments)}}})();
+/* the Dư đồ focus view (jdf dfActs) writes each act's small line «odds word · Tốn …» from talkK + c.bac: a bridged act takes both from its own raw string */
+function amSeg(x){const t=String(x||"").replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim();const S2=t.split(/\s·\s/);let word="",ton="";
+ const W=typeof KIT_ODDS!=="undefined"?KIT_ODDS:[];for(const g of S2){const q=g.trim();if(!word&&W.includes(q)){word=q;continue}}
+ try{const R=kaRows(kaModelStr(String(x||"")));ton=(R.ton||[]).map(e=>txt(kaPlain(e.h)).replace(/\s[-−]\s?(\d)/,"\u0020$1")/* a cost is written as the kit Tốn row writes it: «Bạc 20» */).filter(Boolean).join(" · ")}catch(e){const m=/(?:^|\s·\s)tốn:\s*([^·]*)/i.exec(t);if(m)ton=m[1].trim()}/* the kit's own model: «Bạc -20» with no label is a cost, as the card shows it */
+ return{word,ton}}
+(function(){if(typeof window.dfActs!=="function")return;const d0=window.dfActs;window.dfActs=function(i){const R=d0.apply(this,arguments);try{if(!Array.isArray(R))return R;const p=curPeople()[i];if(!p)return R;
+ const T=talkOpts(p);for(const g of R)for(const a of g.acts||[]){const m=/data-o="(\d+)"/.exec(a.info||"");const o=m&&T[+m[1]];if(!o||!o.amb)continue;const sg=amSeg(o.x);a.ton=sg.ton;if(sg.word)a.word=sg.word}}catch(e){console.error("amove dfActs",e)}return R};
+ try{dfActs=window.dfActs}catch(e){}})();
 /* the kid card: j25 string-inserts «Chăm con» (kidActs) — on the card it is empty now (the acts are on the kid's pop-up) */
-(function(){if(typeof kidActs!=="function")return;const k0=kidActs;AMV.kidRaw=k=>k0(k);kidActs=function(){return AMV.inKid?[]:k0.apply(this,arguments)}})();
+(function(){if(typeof kidActs!=="function")return;const k0=kidActs;AMV.kidRaw=k=>{const r0=AMV.rawOn;AMV.rawOn=1;try{return k0(k)}finally{AMV.rawOn=r0}};kidActs=function(){return AMV.inKid?[]:k0.apply(this,arguments)}})();
 (function(){if(typeof kidCard!=="function")return;const c0=kidCard;kidCard=function(k){if(!AMV.card)return c0.apply(this,arguments);const t0=AMV.tab;AMV.inKid=1;AMV.tab="kid";AMV.who=k;
  try{return String(c0.apply(this,arguments)).replace('<h5>Chăm con</h5><div class="pcb"></div>',"")}finally{AMV.inKid=0;AMV.tab=t0;AMV.who=null}}})();
 (function(){if(typeof staffTabHTML!=="function")return;const s0=staffTabHTML;staffTabHTML=function(){if(AMV.cap)return s0.apply(this,arguments);const t0=AMV.tab;AMV.tab="staff";try{return s0.apply(this,arguments)}finally{AMV.tab=t0}}})();
