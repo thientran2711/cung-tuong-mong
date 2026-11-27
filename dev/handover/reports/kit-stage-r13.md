@@ -27,6 +27,12 @@ Stills (real taps, looked at: Fold hand5 big0-4 + iPad hand5 big0-4, hand2-4): h
 ## NOT DONE (context/time) — open for R14
 (2) the 7 pre-existing X08 cuts (court kone ellipsis; iPad kfoc-off card), (3) tab-hand-crawl coverage (person rows / other door buttons). kit-std-scan not re-run on R13 (only the hand big-card + `.ef` chip text changed; run it before RV).
 
+## FOLLOW-UP (MAIN 176 order: items (2)/(3) + scan, separate commits)
+- kit-std-scan (REPORT_ONLY=1, Fold done, iPad still running when this was written): Fold = 3 X08 lines: `span.kwaitl` «Đang thỉnh tranh…» (a loading text, tab:act), `span.krv.kone` «Trong cung: Chương 1: Sơ nhập cung môn.» (tab:court + sub0).
+- `.krv.kone` is NOT a cut: it is the owner's ruled design (OD 21/11 #86 option A, KIT §6.3h): a person-info row is one line, a longer value ends in «…» with a kit «!» (`.kgnb`) that opens the FULL text. kit-std-scan X08 now skips a `.kone` row that carries its `.kgnb` (commit «kit-std-scan: ...»). Law 16: the rule is not changed.
+- OPEN: `kwaitl` «Đang thỉnh tranh…» (loading text; decide with MAIN whether an ellipsis in a loading line counts), iPad `button.kfoc-b.kfoc-off.kitoff` card wider than its card (pre-existing R11), tab-hand-crawl coverage (person rows / non-.ka buttons), full iPad scan result.
+- Rebase on kk56-live still pending its kitHandConf fix sha.
+
 ## HANDOVER (R13)
 State: review/kit-stage-r13 pushed; LOOK REQUEST to MAIN 175 with the stills above. After MAIN LOOK PASS → RV READY to RV-168 session_01Rc5AsMxwdYsrc1aLWggfJw (start «KIT CHECK: reuses …»).
 Build: bash dev/site/build_site.sh then `git checkout assets.json`. CDN: python3 dev/site/cdn_sync.py img/_review/kit-stage-r13.
