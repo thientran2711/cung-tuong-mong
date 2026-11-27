@@ -31,11 +31,11 @@ const M={
  dola:{mode:"tier",t:[["nhẹ",/^Nghe ngóng chung/],["vừa",/^Sai đi dò la/]]},
  P5:{mode:"tier",harm:1,t:[["nhẹ",/^(Dò la|Nghe lén câu chuyện)$/,"a:spy"],["vừa","a:bribe"],["nặng","a:bribel"]]},
  P6:{mode:"tier",harm:1},P7:{mode:"tier",harm:1},P8:{mode:"tier",harm:1},P9:{mode:"tier",harm:1},P10:{mode:"tier",harm:1},P14:{mode:"tier",harm:1},
- P11:{mode:"one"},
- P12:{mode:"tier",harm:1,t:[["nhẹ","a:tieuhuy"],["vừa","a:uyhiep"],["nặng","a:banphe"]]},
+ /* KEEP-CHOICE (MAIN 168 per owner ~01:12Z correction): she picks WHAT / WHOM herself (charge + listener, what to do with the proof) → the old card stays */
+ P11:{mode:"keep"},P12:{mode:"keep"},
  P13:{mode:"tier",harm:1,t:[["nhẹ","e:cutpay"],["vừa","e:conf","a:takeaway"],["nặng","e:judge"]]},
  P13r:{mode:"one"},P13p:{mode:"one"},
- s_phan:{mode:"tier",harm:1,t:[["nhẹ",/^Mật báo/],["nặng",/^Tố cáo/]]},
+ s_phan:{mode:"keep"},
  s_gh:{mode:"tier",t:[["nhẹ",/^Trò chuyện$/],["vừa",/^Biếu quà nhỏ$/]]},
  /* deck doors (DOOR.D k) */
  "hs-nghi":{mode:"tier",t:[["nhẹ",/^Nghỉ ngơi một lát$/],["vừa",/^Nghỉ ngơi dưỡng sức$/]]},
@@ -44,10 +44,9 @@ const M={
  "hs-docsach":{mode:"tier",t:[["nhẹ",/^Đọc sách giải khuây$/],["vừa",/^Đọc binh thư/]]},
  "hs-tainghe":{mode:"one",pref:"art"},
  "hs-taimat":{mode:"tier",t:[["nhẹ",/^Nghe ngóng chung$/],["vừa",/^Sai cung nữ đi dò la$/],["nặng",/^Cài tai mắt$/]]},
- "hs-roicung":{mode:"tier",t:[["nhẹ",/^Xin về quê/],["vừa",/^(Dâng biểu xin xuất gia|Xin ban hôn cho )/],["nặng",/^Nghĩ cách trốn/]]},
+ "hs-roicung":{mode:"keep"},d_srv2:{mode:"keep"},d_cold1:{mode:"keep"},d_cold2:{mode:"keep"},d_cold4:{mode:"keep"},
  d_srv1:{mode:"tier",t:[["nhẹ",/^(Nghe ngóng cho chủ|Canh chừng cung chủ)$/],["vừa",/^Tự đi dò la cho chủ$/]]},
  d_srv4:{mode:"tier",harm:0,t:[["nhẹ",/^Thêu khăn bán ra ngoài$/],["vừa",/^Lén giữ đồ/]]},
- d_cold4:{mode:"tier",t:[["nhẹ",/^Xin phế làm thứ dân$/],["vừa",/^Xuất gia$/],["nặng",/^Nghĩ cách trốn/]]}
 };
 ONE.M=M;
 ONE.mode=k=>(M[k]&&M[k].mode)||"one";
@@ -75,6 +74,8 @@ fix();
 function tierOf(r,m){const id=m.id||"";const T0=r.tiers||{};let t=null;try{t=T0[id]||null}catch(e){}if(t)return t;
  const L=(M[r.k]||{}).t||[];const n=txt(m.n);for(const row of L){for(let j=1;j<row.length;j++){const x=row[j];if(typeof x==="string"?x===id:x.test(n))return row[0]}}return null}
 ONE.tierOf=tierOf;
+/* two-way (law 1): an ACT key's tier from this table too (P5 Dò la, P12, P13 …), so NPC deeds sit in the same tier as her row */
+(function(){const o0=DOOR.ofId;DOOR.ofId=function(id){const m=o0.apply(this,arguments);try{if(m&&!m.tier)m.tier=tierOf(m.r,{id,n:""})}catch(e){}return m}})();
 function wordIx(x){const s=txt(x);for(let i=KIT_ODDS.length-1;i>=0;i--)if(new RegExp("(^|· )"+KIT_ODDS[i]+"( ·|$)").test(s))return i;return -1}
 /* a sortable odds of a member: the option's own odds (oddsOf) when it is a talk/deck option; else the word printed in its line (ACT card buttons) */
 function oddsM(m){if(m.a){try{return oddsOf(m.a)}catch(e){}}const i=wordIx(m.x);if(i<0)return 100;return Math.round((i+.5)*100/KIT_ODDS.length)}
@@ -89,8 +90,12 @@ function prefOf(r,m){const p=(M[r.k]||{}).pref;const n=txt(m.n);try{
 /* ONE pick among members M (each {id, n, x, off, a?, cost?}); seed fixed per target + buổi + door (+ tier) → co-op host and guest agree */
 function pick(r,L,seed){const ok=L.filter(m=>!m.off);if(!ok.length)return null;const h=hash(seed);
  if((M[r.k]||{}).harm)return ok[h%ok.length];
- const sc=ok.map((m,j)=>({m,o:oddsM(m),p:prefOf(r,m),c:m.cost||0,j}));
- sc.sort((a,b)=>(b.o-a.o)||(b.p-a.p)||(a.c-b.c)||(((a.j+h)%ok.length)-((b.j+h)%ok.length)));return sc[0].m}
+ /* FAVOUR: the members whose odds WORD is the best word she has (never worse than her best old way, as she reads it), then the pref
+    (his liked topic she knows / his favourite art · her strongest), then equal chance among the rest (seeded): variety of real outcomes, same word */
+ const lv=m=>{const o=oddsM(m);return o>=100?KIT_ODDS.length:(typeof oddsLv==="function"?oddsLv(o):Math.floor(o*KIT_ODDS.length/100))};
+ const top=Math.max(...ok.map(lv));const C=ok.filter(m=>lv(m)===top);const pm=Math.max(...C.map(m=>prefOf(r,m)));const P=C.filter(m=>prefOf(r,m)===pm);
+ return P[h%P.length]}
+ONE.lv=m=>{const o=oddsM(m);return o>=100?KIT_ODDS.length:(typeof oddsLv==="function"?oddsLv(o):Math.floor(o*KIT_ODDS.length/100))};
 ONE.pick=pick;
 function seedOf(r,who,tier){let t=0,b=0;try{t=S.turn||0;b=S.buoi||0}catch(e){}return [t,b,who==null?"":who,r.k,tier||""].join(":")}
 /* the why of a pick (~01:00Z: the result says what really happened and why it was the one) */
@@ -134,7 +139,7 @@ ONE.tierRows=tierRows;
    if(L.every(m=>m.id&&m.id[0]==="a")&&typeof dfInPerson==="function"&&L.every(m=>dfInPerson(p).some(x=>"a:"+x.k===m.id)))continue;/* dfActs shows a lone ACT itself */
    out.push({n:r.n,door:r.k,o:100,fix:1,x:"",open:()=>doorOpen(p,r.k)})}
   for(const d of out){if(!d||!d.door)continue;const r=DOOR.byK(d.door);if(!r)continue;const {L}=members(pp0(r.k),r);if(!L.length)continue;
-   const md=ONE.mode(r.k);const tiers=TI.filter(t=>L.some(m=>tierOf(r,m)===t));
+   const md=ONE.mode(r.k);if(md==="keep")continue;const tiers=TI.filter(t=>L.some(m=>tierOf(r,m)===t));
    if(md==="tier"&&tiers.length>=2){const R=tierRows(r,L,who(p));d.x=R.map(x=>`${x.t} ${x.m&&!x.off?wordOf(oddsM(x.m))||"chắc":"—"}`).join(" · ");d.one="tier";
     if(R.every(x=>x.off)){d.lock=true;d.t=R[0].off.why}continue}
    const m=pick(r,L,seedOf(r,who(p)));d.one="one";
@@ -164,11 +169,11 @@ function deckTap(b){if(!S||S.dead||Q.length)return true;const r=deckRowR(b);cons
    let wh=null;try{wh=typeof pMe==="function"?pMe():null}catch(e){}DOOR.card(b.dataset.ddoor,"Chọn mức.",rows,wh);return true}}
  const m=pick(r,L,seedOf(r,"me"));if(!m)return false;runM(r,m,L);return true}
 ONE.deckTap=deckTap;
-window.addEventListener("click",e=>{if(!ONE.on)return;const b=e.target.closest&&e.target.closest("#panel button[data-ddoor]");if(!b)return;e.stopImmediatePropagation();e.preventDefault();if(b.disabled)return;
+window.addEventListener("click",e=>{if(!ONE.on)return;const b=e.target.closest&&e.target.closest("#panel button[data-ddoor]");if(!b)return;try{const r=deckRow(b);if(r&&ONE.mode(r.k)==="keep")return}catch(x){}e.stopImmediatePropagation();e.preventDefault();if(b.disabled)return;
  try{deckTap(b)}catch(x){console.error("jone deck tap",x)}},true);
 /* the deck door's small line: the pick (ONE) or the 3 tier words (TIER) */
 function deckPaint(){const P=document.getElementById("panel");if(!P||!Array.isArray(deck))return;for(const b of P.querySelectorAll("button[data-ddoor]")){if(b.dataset.one)continue;b.dataset.one=1;
- try{const r=deckRowR(b);const L=deckM(b);const md=ONE.mode(r.k);const p=b.querySelector("p");
+ try{const r=deckRowR(b);const md=ONE.mode(r.k);if(md==="keep")continue;const L=deckM(b);const p=b.querySelector("p");
   if(md==="tier"){const R=tierRows(r,L,"me");if(R.length>=2){if(p)p.textContent=R.map(x=>`${x.t}: ${x.m&&!x.off?txt(x.m.n):"—"}`).join(" · ");continue}}
   const m=pick(r,L,seedOf(r,"me"));if(!m)continue;const i=deck.indexOf(m.a);if(p)p.textContent=txt(m.n);
   /* the pick's own odds chip + Tốn/Thành/Bại grid (the kit card of that way), so the word she sees is the way that will run */

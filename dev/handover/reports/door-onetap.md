@@ -10,42 +10,39 @@ Each door row gets ONE of three modes (table §2). The member acts themselves ar
 - **Result card (~01:00Z)**: the member's own result card (it already names its own act/topic/art/item) gets ONE kit line on top: «<door>: <member thật> — <vì sao chọn>» (why = the pref that won: «ngài thích nghe chuyện thơ phú» / «sở trường Cầm, bậc 4» / «món ngài quý nhất trong rương: Ngọc bội» / «lối chắc nhất lúc này»). A scan lists every member result text that is generic («thành công / thất bại» without cause) → reworded per VANPHONG in this branch (family fix, before/after table).
 - No number typed (law 4): odds/costs come from the members (BAL). Tier membership + prefs = a data table in the new module (no numbers).
 
-## 2. Plan table (58 door rows on LIVE fa722503)
-| Door (file) | Members | Mode | Best-fit / tiers |
+## 2. Plan table (58 door rows on LIVE fa722503) — MAIN PLAN OK 27/11 + owner ~01:12Z correction (MERGE vs KEEP-CHOICE)
+Test per row: «would she ever pick this herself for a reason the game cannot know?» yes → KEEP-CHOICE (the old card stays: target person, item, place, a genuinely different matter); no (same act, same target, only the method / art / topic / way differs) → MERGE (ONE or TIER). A member that itself asks WHOM / WHICH ITEM (Tặng quà, Dâng quà trong rương, Sai đi dò la, Cài tai mắt, Tự đi dò la …) keeps its own picker after the tap.
+| Door | Members | MERGE / KEEP | Mode · rule |
 |---|---|---|---|
-| talk «Trò chuyện» (jdoor:19) | Hỏi han sức khỏe, Khen tài nghệ, Bàn tán về…, Chia sẻ bí mật, Thử lòng, Cảnh báo nàng, Rỉ tai chuyện trong cung, Nương theo, Tạ lỗi, Nhún nhường, Nhắc lại ân xưa | TIER | nhẹ = lời thăm hỏi (Hỏi han, Khen, Nương theo, Nhún nhường, Nhắc ân xưa, Tạ lỗi — pref Tạ lỗi when she holds a grudge, Khen when her art is known) · vừa = chuyện trong cung (Bàn tán, Rỉ tai, Cảnh báo) · nặng = chuyện thật lòng (Chia sẻ bí mật, Thử lòng) |
-| gh «Giao hảo» (jdoor:21) | Kết giao, Tặng quà, Giúp đỡ nàng, Giúp chăm thú nuôi, Nhờ giúp đỡ, Mượn son phấn, Ghé chơi | TIER + SPLIT «Kết giao» | nhẹ Ghé chơi / Mượn son phấn · vừa Giúp đỡ / Giúp chăm thú (pref: her pet exists) · nặng Tặng quà (auto item: the one she values most that Hành trang holds, law 6c leaves inventory). «Kết giao» (alliance = different result) stays its own button. «Nhờ giúp đỡ» → Q2 |
-| play «Cùng chơi / Thách đấu» (jdoor:23) | Cùng chơi, Thách đấu | TIER | nhẹ Cùng chơi (no stake) · vừa Thách đấu (stake BAL); game = her strongest |
-| hau «Hầu chuyện» (jdoor:24, emp) | Tâng bốc, Nói thật lòng, Bàn chuyện triều chính | ONE | pref: topic in «Điều ngài thích» she knows → else best odds; result names the topic + his reaction (owner's own example) |
-| pho «Phô tài» (jdoor:25, emp) → ACT-MOVE-2 «Hiến nghệ» | Phô tài <môn> (+ KM_EMPACT ways added by ACT-MOVE-2) | ONE | pref: his favourite art if her level ≥ her best − 1, else her strongest; result names art + level |
-| so «Xem sổ Kính sự phòng» (jdoor:26, ksp) | Xem sổ thị tẩm, Xem sổ nguyệt sự, Hầu chuyện xem lén sổ nguyệt sự | SPLIT → 2 | «Xem sổ thị tẩm» ONE · «Xem sổ nguyệt sự» TIER nhẹ xem lén (free, risk) / vừa lót tay (bạc, sure) |
-| dola «Dò la tin tức» (jdoor:27, serv/maid) | Nghe ngóng chung, Sai đi dò la | TIER | nhẹ Nghe ngóng chung · vừa Sai đi dò la (auto target: the rival whose place/plan she knows least, ties → biggest threat) |
-| P5 Dò la (spy, bribe, bribel; spyk hidden) | | TIER | nhẹ Nghe lén · vừa Mua chuộc người hầu · nặng bribel (big bribe) |
-| P6 Khiêu khích | Khoe quà ngự ban, Khiêu khích, Trút giận, Hạ nhục | TIER (tiers exist) | best within tier |
-| P7 Hãm hại | 11 ACT + 3 talk | TIER (exist; roll groups → best-fit, roll seed = tie-break) | best within tier (place-bound ones win where they can run: pushp at the lake) |
-| P8 Hạ uy thế | rumor, block, blockf, lygian, frame, plant, giahoa, xinhh | TIER (exist) | best within tier |
-| P9 Hại hoàng tự | ksab, musk, kframe, kpoison, catswap, pond | TIER (exist) | best within tier |
-| P10 Lấy của | batnat, laydo, laydol, petsteal, thaopet, phonghoa | TIER (exist) | best within tier (phonghoa moved by OD 00:09Z → follows PUNISH rows) |
-| P11 Tố cáo | accuse, tocao, expose, xx, vp, trinhhh, trinhth | ONE (tiers = charge weight from jcharge if ≥ 2 charges are open) | pref: the charge with the strongest real evidence, the right listener |
-| P12 Mặc cả chứng cứ | uyhiep, banphe, tieuhuy | TIER | nhẹ Tiêu hủy đổi ân · vừa Uy hiếp đòi bạc · nặng Bán cho kẻ thù nàng |
-| P13 Quyền Hoàng hậu | judge, conf, reward, pardon, cutpay, takeaway | SPLIT → 3 | «Ban thưởng» ONE · «Tha tội» ONE (only when accused) · «Trừng phạt» TIER nhẹ cắt bổng · vừa tịch thu / bắt người hầu · nặng xử tội |
-| P14 Ra uy | tat, phatquy | TIER (exist) | nhẹ Tát · vừa Phạt quỳ |
-| srv s_xin «Xin chủ» (jdoor5) | ban thưởng, tiến cử, đi cung khác | SPLIT → 3 | three different wishes |
-| srv s_phan «Phản chủ» | Mật báo, Tố cáo trước HH | TIER | nhẹ Mật báo · nặng Tố cáo |
-| srv s_gh «Giao hảo» | Trò chuyện, Biếu quà nhỏ | TIER | nhẹ Trò chuyện · vừa Biếu quà nhỏ |
-| HS H2 Nghỉ ngơi (jact2) | một lát, dưỡng sức, Dưỡng nhan | TIER + SPLIT «Dưỡng nhan» | nhẹ một lát · vừa dưỡng sức; Dưỡng nhan (Sắc, other result) own card |
-| HS H3 Cáo bệnh | Giả bệnh, Đóng cửa tĩnh dưỡng | SPLIT | different results |
-| HS H4 Thỉnh an | Thái hậu, Hoàng hậu | SPLIT | different persons |
-| HS H5 Bắt mạch, chữa bệnh | Mời thái y, Sang Thái y viện, Truyền thái y, Tự bốc thuốc, Tĩnh dưỡng | TIER | nhẹ Tĩnh dưỡng / Tự bốc thuốc · vừa Sang Thái y viện · nặng Mời / Truyền thái y |
-| HS H6 Xem sổ KSP | Xem sổ nguyệt sự, Xem lén | TIER | nhẹ lén · vừa lót tay (same as «so») |
-| HS H7 Đọc sách | giải khuây, binh thư sử sách | TIER | nhẹ giải khuây · vừa binh thư |
-| HS H8 Dâng tài nghệ | Múa yến tiệc, Kinh hồng vũ, Đánh cờ với HT, Đàn Phượng cầu hoàng, Vẽ chân dung tặng TH | ONE (= Hiến nghệ rule) + SPLIT «Vẽ chân dung tặng Thái hậu» | her best art / his favourite |
-| HS H11 Tai mắt | Nghe ngóng chung, Sai cung nữ dò la, Cài tai mắt | TIER | nhẹ nghe ngóng · vừa sai dò la · nặng cài tai mắt |
-| HS H14 Rời cung | trốn, xuất gia, xin ban hôn, về quê, nhờ TH nói giúp | Q1 | different endings |
-| HS anthai | An thai, Báo tin có thai | SPLIT | different results |
-| srv deck ×5 (Hầu việc, Dò la cho chủ, Học, Nghỉ ngơi, Kiếm thêm) | same-purpose ways | ONE (Dò la cho chủ, Kiếm thêm → TIER by risk: nhẹ the safe way · vừa the risky one) | best odds, tie → cheapest she can pay |
-| cold deck ×6 (Nghỉ ngơi, Xin ân xá, Kêu oan, Kiếm sống, Rời cung, letter carriers) | | ONE except «Rời cung» (Q1) | Xin ân xá / Kêu oan: pref the helper with the most tình; letter: the surest carrier |
-| khuê các KCR ×16 + twins | same act, ways differ only by payment / way | ONE | best odds, tie → the payment she holds most of (bạc vs Sức); «Tránh xem mặt» ONE |
+| talk «Trò chuyện» | Hỏi han, Khen tài nghệ, Bàn tán về…, Chia sẻ bí mật, Thử lòng, Cảnh báo, Rỉ tai, Nương theo, Tạ lỗi, Nhún nhường, Nhắc ân xưa | MERGE (topic) | ONE (Q3): best odds word, equal chance among same-word topics |
+| gh «Giao hảo» | Ghé chơi, Mượn son phấn · Giúp đỡ, Giúp chăm thú · Tặng quà | MERGE | TIER nhẹ/vừa/nặng; Tặng quà keeps its item picker |
+| kg «Kết giao» (cut from gh) · «Nhờ giúp đỡ» (Q2) | | own buttons | ONE / bare |
+| play | Cùng chơi · Thách đấu | MERGE | TIER nhẹ/vừa |
+| hau «Hầu chuyện» (emp) | Tâng bốc, Nói thật lòng, Bàn chuyện triều chính (+ walk, ACT-MOVE) | MERGE (topic) | ONE, pref his liked topic she knows |
+| pho «Hiến nghệ» (emp, ACT-MOVE) | Phô tài <môn> + hầu cờ / đánh đàn | MERGE (art) | ONE, pref his favourite / her strongest art |
+| dl «Dâng lễ vật» (emp, ACT-MOVE) | cành hoa · quà trong rương | MERGE tiers, item = her pick | TIER (item picker kept) |
+| so «Xem sổ thị tẩm» / so2 «Xem sổ nguyệt sự» | two books | KEEP (2 buttons) | so2 TIER nhẹ xem lén / vừa lót tay |
+| dola «Dò la tin tức» | Nghe ngóng chung · Sai đi dò la | MERGE tiers, target = her pick | TIER (Sai đi dò la keeps its person list) |
+| P5 Dò la | Nghe lén · mua chuộc · mua chuộc lớn | MERGE (method) | TIER harm |
+| P6 Khiêu khích · P7 Hãm hại · P8 Hạ uy thế · P9 Hại hoàng tự · P10 Lấy của · P14 Ra uy | | MERGE (method on the same target) | TIER harm: equal chance among the tier's real outcomes (~01:12Z) |
+| P11 Tố cáo | charge × listener (Hoàng hậu / Thái hậu) | KEEP | old card (each row its own odds) |
+| P12 Mặc cả chứng cứ | uy hiếp đòi bạc · bán · trả lấy lòng | KEEP (different matter / buyer) | old card |
+| P13 Quyền HH | → «Ban thưởng» · «Tha tội» · «Trừng phạt» | KEEP (3 buttons) | Trừng phạt TIER nhẹ cắt bổng / vừa tịch thu, bắt người hầu / nặng xử tội |
+| srv s_xin | 3 wishes | KEEP (3 buttons) | — |
+| srv s_phan | Mật báo · Tố cáo trước HH (whom) | KEEP | old card |
+| srv s_gh | Trò chuyện · Biếu quà nhỏ | MERGE | TIER |
+| HS H2 Nghỉ ngơi | một lát · dưỡng sức (Dưỡng nhan own card) | MERGE | TIER |
+| HS H3 Cáo bệnh · H4 Thỉnh an · anthai | | KEEP (own cards) | — |
+| HS H5 Bắt mạch | Tĩnh dưỡng/Tự bốc · Sang TYV · Mời/Truyền thái y | MERGE (way) | TIER |
+| HS H6 Xem sổ KSP · H7 Đọc sách | | MERGE | TIER |
+| HS H8 Dâng tài nghệ | 4 arts (Vẽ tặng TH own card) | MERGE (art) | ONE pref art |
+| HS H11 Tai mắt | nghe ngóng · sai dò la · cài tai mắt | MERGE tiers, target = member picker | TIER |
+| HS H14 Rời cung · cold «Rời cung» | different endings | KEEP (owner correction overrides Q1 tiers) | old card |
+| srv deck Hầu việc / Dò la cho chủ / Nghỉ / Kiếm thêm | | MERGE | ONE / TIER |
+| srv deck «Học» | which subject | KEEP | old card |
+| cold Nghỉ / Kiếm sống / letter carrier | | MERGE | ONE |
+| cold Xin ân xá / Kêu oan | through whom | KEEP | old card |
+| khuê các KCR ×16 + twins | same act, way / payment differs | MERGE | ONE |
 
 ## 3. Files (boundary agreed with ACT-MOVE-2 — asked 27/11, waiting reply)
 - NEW dev/build/jone.js only, in assemble.py AFTER jamove.js / jdoor5.js / jact2 deck rows (every door registered). It wraps doorFold d.open, PEND.door, DOOR.rowsJ2 and the deck build/open; reads a row field `best` / `pref` if a row (e.g. ACT-MOVE-2's Emperor doors) brings one. No edit to jdoor.js rows, jdf.js, jbaldf.js, jamove.js.
