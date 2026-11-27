@@ -9,17 +9,21 @@
    groups with the two-tone plates, the reputation info card says «Mất khi», 0 page errors. Exit 1 on any failure. */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
+/* E-T2FLAKE: viewport from env VP (default Fold 755x1000; iPad: VP=1180x820); every wait is on the REAL condition with a bounded timeout and a clear message (no fixed sleeps). */
+const [VW,VH]=(process.env.VP||'755x1000').split('x').map(Number);
+const until=(p,fn,what,ms=20000)=>p.waitForFunction(fn,null,{timeout:ms,polling:50}).catch(e=>{throw new Error('TIMEOUT waiting for '+what+' ('+ms+' ms): '+String(e.message).split('\n')[0])});
+const settle=p=>p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
 (async()=>{const b=await chromium.launch();const R={errs:[],fail:[],ok:[]};
- const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:1,serviceWorkers:'block',reducedMotion:'reduce'});
+ const ctx=await b.newContext({viewport:{width:VW,height:VH},deviceScaleFactor:1,serviceWorkers:'block',reducedMotion:'reduce'});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>R.errs.push(e.message.slice(0,200)));
- await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function'&&typeof dhSync==='function');await sleep(2000);
+ await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function'&&typeof dhSync==='function');await until(p,()=>document.readyState==='complete'&&window.TITLES2&&typeof rpSync==='function'&&typeof deal==='function'&&typeof kitPanel==='function','game boot (readyState complete + TITLES2 + rpSync + kitPanel)');await settle(p);
  const fresh=o=>p.evaluate(o=>{const kl=document.getElementById('kload');if(kl)kl.remove();window.__forceOrigin=o||'tt';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;deal();render();
   try{kmReset()}catch(e){}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},o)
   /* E92f (REVIEW r1 fix 3): card-aware — with the kit day title card (KIT §94b, kit-daytitle) a new life shows #kdaytc at +600 ms and jdayq dqDawn holds
      #modal while it is up (game right: the panel opens once the card is gone). Wait the card out, close it, clear what it held, then test. */
-  .then(()=>p.evaluate(()=>typeof kitDayTitleShow==='function')).then(k=>k?sleep(900).then(()=>p.evaluate(()=>{const c=document.getElementById('kdaytc');if(c)c.remove();
+  .then(()=>p.evaluate(()=>typeof kitDayTitleShow==='function')).then(k=>k?p.waitForFunction(()=>document.getElementById('kdaytc'),null,{timeout:3000,polling:25}).catch(()=>null).then(()=>p.evaluate(()=>{const c=document.getElementById('kdaytc');if(c)c.remove();
    try{kmReset()}catch(e){}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true})):null);
- await fresh('tt');await sleep(500);
+ await fresh('tt');await settle(p);await until(p,()=>!document.getElementById('kdaytc')&&document.getElementById('modal').hidden&&!Q.length,'new life quiet (no day-title card, modal closed, Q empty)');
  const out=await p.evaluate(()=>{const F=[],OK=[],ck=(c,m)=>{if(c)OK.push(m);else F.push(m)};const T2=window.TITLES2;
   if(!T2||typeof rpSync!=='function'){F.push('no jdh3 (TITLES2 / rpSync)');return {F,OK}}
   const C=DH_CAT,RB=BAL.dh.rp;const rp=Object.keys(T2.RP);const good=rp.filter(i=>T2.RP[i][1]==='t'),bad=rp.filter(i=>T2.RP[i][1]==='a');
@@ -120,6 +124,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   /* G = E-TITLES3 (RV-163H §2c). G1–G3 F1: EVERY title panel through the ONE gate (jdh dhNoteGate, BAL.dh.note.per a buổi) — reputation «Tiếng thơm /
      Tiếng xấu» (jdh3 "rp:<id>") and the Emperor's «Sắc phong ban hiệu» (jdh2 "hieu:<why>") wait in S.dhPend like a jdh title; a waiting key whose title is gone
      takes no slot. G4–G7 F2: one matter = one ladder NHẸ · VỪA · NẶNG (jdh3 RPF), only the highest rung held; no name before BAL.dh.rp.seen months in the palace. */
+  if(S.maid)S.maid.loyal=0;/* E-T2FLAKE: S.maid.loyal is 50+R(31) per life; «Khoan hậu» (RULE.khoan) turns true on a high roll and takes the G1/G3 second slot before «Cần kiệm» → pin it */
   const G0={};for(const k of ['sac','tai','duc','danh','sung','tamco','th','ghen','bac','rank','hieu','turn'])G0[k]=S[k];
   {const kp=window.kitPanel;let n=0,T=[];window.kitPanel=kitPanel=function(sp){n++;T.push(sp&&sp.title);return kp.apply(this,arguments)};
    try{const turn=S.turn;for(const x of rivals)if(x){x.sac=Math.min(x.sac||0,50);x.sung=Math.min(x.sung||0,50)}
