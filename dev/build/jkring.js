@@ -206,7 +206,7 @@ function boxOf0(R,x){const s=R.slots[R.sel],sc=R.fSc,ox=R.fCx-s.__cx*sc,oy=R.fFe
  return {x:ox+(left+x.f.ob.l*x.fw)*sc,y:oy+(top+x.f.ob.t*x.fh)*sc,w:(x.f.ob.r-x.f.ob.l)*x.fw*sc,h:(x.f.ob.b-x.f.ob.t)*x.fh*sc}}
 function closePk(R){if(R.pk){try{R.pk.destroy()}catch(e){}R.pk=null}if(R.ftg){R.ftg.remove();R.ftg=null}}
 function focusTag(R,x){if(R.ftg)R.ftg.remove();const b=boxOf(R,x);const t=tagEl(x.p,"kring-ftg",1);t.style.left=(b.x+b.w/2)+"px";t.style.top=Math.min(R.L.g.H-30,b.y+b.h+2)+"px";
- /* the big figure's feet reach the floor: the tag sits over the lower legs, never over a face */if(b.y+b.h+30>R.L.g.H)t.style.top=(b.y+b.h*.86)+"px";R.W.appendChild(t);try{kitNameTagFit(t)}catch(e){}R.ftg=t;if(!calm())t.animate([{opacity:0},{opacity:1}],{duration:220,fill:"both"})}
+ /* the big figure's feet reach the floor: the tag sits over the lower legs, never over a face */if(b.y+b.h+30>R.L.g.H)t.style.top=(b.y+b.h*.86)+"px";R.W.appendChild(t);try{kitNameTagFit(t)}catch(e){}try{if(typeof kitTagKeepIn==="function"){const sg=document.getElementById("stage");kitTagKeepIn(t,(sg&&sg.contains(R.W)?sg:R.W).getBoundingClientRect())}}catch(e){}R.ftg=t;if(!calm())t.animate([{opacity:0},{opacity:1}],{duration:220,fill:"both"})}
 function acts(R,x){let G=[];try{G=dfData(x.i)||[]}catch(e){}return G.filter(g=>g.acts&&g.acts.length).map(g=>({k:g.k,n:g.n,acts:g.acts}))}
 /* the person she talks to = the game's OWN focus-view flow (jdfv: DF.p / DF.F, dfTap → dfRun → dfAfter; an event frame about this person (Q, e.g. «Trò chuyện» topics)
    plays in the same focus: its lines in the kit speech bubble, its answers as thẻ gỗ on the right). The ring is that view's FIGURE + PICKER (adapter F below);

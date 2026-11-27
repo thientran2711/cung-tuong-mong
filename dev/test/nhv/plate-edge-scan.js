@@ -1,0 +1,42 @@
+/* NHV PLATE EDGE SCAN (LRM3, RV-163J FAIL-1 family, law 11): EVERY garden area × Fold 755x1000 + iPad 1180x820 × EVERY group (so every left / right edge slot):
+   at rest, after the group tap and after the person tap (step out + thẻ gỗ), every visible stage name plate / group line (.nhv-tag, .nhv-cap, .kscn-tag in #stage) must sit
+   INSIDE the stage box (±1 px). NOCLAMP=1 switches the kit clamp (kitTagKeepIn, KIT 93.5b) off = the BEFORE column.
+   usage: SAVE=<life.json from mklife.js> [NOCLAMP=1] node dev/test/nhv/plate-edge-scan.js <outdir>   exit 0 = no plate off the stage */
+const {boot}=require('./boot');const fs=require('fs');const path=require('path');
+const OUT=process.argv[2]||'/tmp/nhv-edge';fs.mkdirSync(OUT,{recursive:true});const NOC=!!process.env.NOCLAMP;
+const AUD=`(()=>{const st=document.getElementById('stage').getBoundingClientRect();const o=[];const vis=e=>{if(!e.isConnected)return false;let x=e;while(x&&x!==document.body){const cs=getComputedStyle(x);if(cs.display==='none'||cs.visibility==='hidden'||+cs.opacity<.05)return false;x=x.parentElement}const b=e.getBoundingClientRect();return b.width>2&&b.height>2};
+ const seen=new Set();document.querySelectorAll('#stage .nhv-tag,#stage .nhv-cap .kchip,#stage .kscn-tag').forEach(e=>{const h=e.closest('.nhv-tag')||e;if(seen.has(h))return;seen.add(h);if(!vis(h))return;const r=h.getBoundingClientRect();
+  const off=Math.max(st.left-r.left,r.right-st.right,0);o.push({t:h.textContent.trim().slice(0,34),l:Math.round(r.left-st.left),r:Math.round(st.right-r.right),off:Math.round(off)})});return o})()`;
+/* COVER family (MAIN 178 TODO 1): every tappable stage item (figure, stage button, place chip, plaque) must be TOPMOST at its centre — no other stage layer over it.
+   A transient game overlay (result card, reveal tip, toast catcher, event veil, podium) is listed, not failed (same rule as area-test). */
+const COV=`(()=>{const o=[];const vis=e=>{if(!e.isConnected)return false;let x=e;while(x&&x!==document.body){const cs=getComputedStyle(x);if(cs.display==='none'||cs.visibility==='hidden'||+cs.opacity<.05)return false;x=x.parentElement}const b=e.getBoundingClientRect();return b.width>6&&b.height>6&&b.right>0&&b.bottom>0&&b.left<innerWidth&&b.top<innerHeight};
+ const T=[...document.querySelectorAll('#stage .nhv-f,#stage button,#stage [data-go],#stage .kpk .kpk-n')].filter(e=>vis(e)&&getComputedStyle(e).pointerEvents!=='none'&&!e.closest('.kdim-copy'));
+ T.forEach(e=>{const r=e.getBoundingClientRect();const t=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);if(t&&(t===e||e.contains(t)||t.contains(e)))return;const cv=t?(t.id?'#'+t.id:String(t.className).slice(0,40))+(t.classList&&t.classList.contains('nhv-f')?' «'+((t.querySelector('.nhv-tag')||{}).textContent||'follower').trim().slice(0,16)+'»'+(t.style.zIndex==='30'?' (stepped out)':''):'')+(t&&t.closest&&t.closest('#rtoast,.kres,#kxcatch')?' [result card]':''):'nothing';
+  o.push({it:(e.className&&String(e.className).split(' ')[0]||e.tagName)+' «'+(e.textContent||'').trim().slice(0,16)+'»',by:cv,tr:/\\[result card\\]|kres-next|(^|\\s)rt(\\s|$)|kxcatch|kscn-veil|kpod|kmov|kfgain|kdim/.test(cv)})});return o})()`;
+const rows=[],cov=[];
+async function run(dev){const DV=dev==='ipad'?'ipadAir':'fold';
+ const mk=async()=>{const o=await boot(DV,1,0,{});const {g,pg}=o;if(NOC)await g.evaluate(()=>{kitTagKeepIn=()=>0});const T=ms=>pg.waitForTimeout(ms);
+  const clearQ=async()=>{for(let j=0;j<6;j++){const n=await g.evaluate(()=>{let c=0;const b=document.querySelector('body>.kscn .kscn-box');if(b){b.click();c++}document.querySelectorAll('body>.kmov .kbtn,body>.kmov button,.kfgain button,#kpodov button,#kpodov .kbtn').forEach(x=>{try{x.click();c++}catch(e){}});return c});if(!n)break;await T(500)}
+   for(let j=0;j<8;j++){const n=await g.evaluate(()=>{if(!Q.length)return 0;const m=Q[0];const L=(m.opts||[]);let k=L.findIndex(o=>/một mình/.test(o.n||''));if(k<0)k=Math.max(0,L.findIndex(o=>!o.off));if(L.length)chooseM(k);else closeModal();return 1});if(!n)break;await T(700)}};
+  const click=async s=>g.evaluate(s=>{const e=document.querySelector(s);if(!e)return false;e.click();return true},s);return {o,g,pg,T,clearQ,click}};
+ const enterMap=async(x)=>{await x.clearQ();await x.g.evaluate(()=>{tab='go';window.__mapList=false;render()});await x.T(700);for(let q=0;q<4;q++){await x.clearQ();await x.click('#panel [data-go="vuon"]');await x.T(1000);if(await x.g.evaluate(()=>!!document.querySelector('#panel .nhv-map')))break}};
+ let order;{const x=await mk();await enterMap(x);order=await x.g.evaluate(()=>[...document.querySelectorAll('#panel .nhv-map .kpm-row')].filter(b=>+((b.textContent.match(/(\d+) bóng người/)||[])[1]||0)>0).map(b=>b.dataset.kpmpart));await x.o.b.close();x.o.srv.close()}
+ for(const k of order){const x=await mk();try{await enterMap(x);await x.clearQ();await x.click(`#panel .nhv-map [data-kpmpart="${k}"]`);await x.T(1500);await x.clearQ();await x.T(2600);
+  const push=async(step)=>{const a=await x.g.evaluate(AUD);a.forEach(p=>rows.push({dev,k,step,...p}));if(step==='rest'||/^person/.test(step)){const c=await x.g.evaluate(COV);c.forEach(q=>cov.push({dev,k,step,...q}))}};await push('rest');
+  /* EDGE STRESS (RV-163J case, any life): the far-left and the far-right master get the long two-line plate of the reviewer's still
+     («Thái giám Nội vụ phủ / Thái giám Người lạ»), then the area lays out again — the plate of an edge slot must stay inside the stage */
+  for(const side of ['L','R']){const did=await x.g.evaluate(side=>{const C=NHV.cur;if(!C||!C.G.length)return false;const g=side==='L'?C.G[0]:C.G[C.G.length-1];const m=side==='L'?g.ms[0]:g.ms[g.ms.length-1];if(!m||!m.tg)return false;
+    m.tg.__old=m.tg.innerHTML;m.tg.innerHTML='<span class="j59t">Thái giám Nội vụ phủ</span><span class="j59n">Thái giám Người lạ</span>';NHV.layout(true);return true},side);
+   if(!did)continue;await x.T(400);await push('stress'+side);if(side==='L')await x.pg.screenshot({path:`${OUT}/${dev}-${k}-stressL${NOC?'-before':''}.png`});
+   await x.g.evaluate(()=>{NHV.cur.G.forEach(g=>g.ms.forEach(m=>{if(m.tg&&m.tg.__old!=null){m.tg.innerHTML=m.tg.__old;delete m.tg.__old}}));NHV.layout(true)});await x.T(300)}
+  const nG=await x.g.evaluate(()=>NHV.cur?NHV.cur.G.length:0);
+  for(let gi=0;gi<nG;gi++){await x.clearQ();const okG=await x.g.evaluate(i=>{const g=NHV.cur&&NHV.cur.G[i];if(!g||!g.ms[0])return false;g.ms[0].el.click();return true},gi);if(!okG)continue;await x.T(700);await push('group'+gi);
+   await x.g.evaluate(i=>{const g=NHV.cur&&NHV.cur.G[i];if(g&&g.ms[0])g.ms[0].el.click()},gi);await x.T(1900);await push('person'+gi);
+   if(gi===0||gi===nG-1)await x.pg.screenshot({path:`${OUT}/${dev}-${k}-g${gi}${NOC?'-before':''}.png`});await x.g.evaluate(()=>{try{NHV.unsel()}catch(e){}});await x.T(500)}
+ }catch(e){rows.push({dev,k,step:'THREW',t:String(e&&e.message||e).slice(0,80),off:999})}await x.o.b.close();x.o.srv.close()}}
+(async()=>{await run('fold');await run('ipad');fs.writeFileSync(path.join(OUT,'plate-edge'+(NOC?'-before':'')+'.json'),JSON.stringify({rows,cov},null,1));
+ const covBad=cov.filter(c=>!c.tr);console.log('COVER family: '+covBad.length+' stage items covered by a stage layer · '+(cov.length-covBad.length)+' by a transient game overlay');covBad.slice(0,20).forEach(c=>console.log('COVERED',c.dev,c.k,c.step,c.it,'by',c.by));
+ const bad=rows.filter(r=>r.off>1);const per={};rows.forEach(r=>{const key=r.dev+'/'+r.k;per[key]=per[key]||{plates:0,off:0,minEdge:1e9};per[key].plates++;if(r.off>1)per[key].off++;per[key].minEdge=Math.min(per[key].minEdge,r.l,r.r)});
+ console.log('| device/area | plates checked | off stage | closest edge px |');for(const key in per)console.log(`| ${key} | ${per[key].plates} | ${per[key].off} | ${per[key].minEdge} |`);
+ bad.slice(0,30).forEach(r=>console.log('OFF',r.dev,r.k,r.step,'«'+r.t+'»',r.off+'px'));
+ console.log(`NHV PLATE EDGE SCAN ${NOC?'(NOCLAMP before) ':''}${bad.length?'FAIL':'PASS'} · ${rows.length-bad.length}/${rows.length} plates inside`);process.exit(bad.length||covBad.length?1:0)})();

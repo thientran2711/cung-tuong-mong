@@ -120,7 +120,7 @@ function syncSpots(){try{const P=plan();KPM_DATA.spots.nhv={};P.areas.forEach(a=
 
 /* ---------- 5. the AREA SCENE: groups on the floor band (vòng nhóm), dim, step-out, thẻ gỗ ---------- */
 let L=null,BG=null,CUR=null,SEL=null,SELM=null,KP=null,MEM=[],anims=[];
-function an(el,kf,o){if(!el||!el.animate)return{finished:Promise.resolve()};const a=el.animate(kf,Object.assign({fill:"forwards",easing:"cubic-bezier(.2,.7,.2,1)"},o));anims.push(a);if(anims.length>300)anims.splice(0,150);return a}
+function an(el,kf,o){if(!el||!el.animate)return{finished:Promise.resolve()};const a=el.animate(kf,Object.assign({fill:"forwards",easing:"cubic-bezier(.2,.7,.2,1)"},o));anims.push(a);if(anims.length>300)anims.splice(0,150);/* RV-163J FAIL-1: a figure that moved (step out, followers beside her, back) gets its plate kept inside the stage once the move ends */try{a.finished.then(()=>{clearTimeout(window.__nhvTF);window.__nhvTF=setTimeout(()=>{try{if(CUR&&L&&L.isConnected)tagsFix()}catch(e){}},30)},()=>{})}catch(e){}return a}
 const wait=ms=>new Promise(r=>setTimeout(r,ms));
 function still(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||document.documentElement.classList.contains("kf-still")}catch(e){return false}}
 function st(){return document.getElementById("stage")}
@@ -173,7 +173,8 @@ function capPut(g){if(!g.cap)return;if(!g.capEl||!g.capEl.isConnected){g.capEl=d
 /* name plates never overlap: the chosen person first, then her group, then the rest (a plate that would touch a kept one is hidden) */
 function tagsFix(){try{if(!CUR)return;/* MAIN 127 FAIL 4: whatever wrote a plate, an unlearnt name reads «Người lạ», never «???» */L&&L.querySelectorAll(".nhv-tag .j59n,.nhv-tag .j59t").forEach(e=>{if(e.textContent.indexOf("???")>=0)e.textContent=e.textContent.replace(/\?\?\?/g,"Người lạ")});const F=CUR.G.flatMap(g=>g.P.map(p=>p.m)).filter(m=>m.tg);const pr=m=>(m===SELM?0:SEL&&m.g===SEL?1:2);F.sort((x,y)=>pr(x)-pr(y));const keep=[];
  const caps=CUR.G.map(g=>g.capEl&&g.capEl.style.visibility!=="hidden"&&g.capEl.getBoundingClientRect()).filter(Boolean);
- F.forEach(m=>{m.tg.style.visibility="";const r=m.tg.getBoundingClientRect();const hit=keep.some(k=>!(r.right<k.left-2||r.left>k.right+2||r.bottom<k.top-2||r.top>k.bottom+2));if(hit)m.tg.style.visibility="hidden";else keep.push(r)})}catch(e){}}
+ const stB=(document.getElementById("stage")||L).getBoundingClientRect();
+ F.forEach(m=>{m.tg.style.visibility="";/* RV-163J FAIL-1: a plate never runs off the stage edge (kit 93.5b kitTagKeepIn) */try{if(typeof kitTagKeepIn==="function")kitTagKeepIn(m.tg,stB)}catch(x){}const r=m.tg.getBoundingClientRect();const hit=keep.some(k=>!(r.right<k.left-2||r.left>k.right+2||r.bottom<k.top-2||r.top>k.bottom+2));if(hit)m.tg.style.visibility="hidden";else keep.push(r)})}catch(e){}}
 function css(){if(document.getElementById("nhv-css"))return;const c=document.createElement("style");c.id="nhv-css";c.textContent=`
 html.nhvon #stage #tokens,html.nhvon #stage #mefig,html.nhvon #stage .kmemark,html.nhvon #stage #j59metag,html.nhvon #stage .j59more,html.nhvon #stage .kspet,html.nhvon #stage .j59chip{visibility:hidden!important}
 html.kv1.nhvon #stage .kshR{display:none!important}/* phone: the area needs the whole stage width (ring4 mock, reviewed) */
