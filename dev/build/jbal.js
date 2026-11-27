@@ -16,7 +16,10 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
  /* WORDING-GAIN (owner OD 26/11 ~18:50Z (7)): a gain / loss said without its number is the stat NAME + marks «+ / ++ / +++» (loss «− / −− / −−−»); ONE source for the bands (law 4):
     an amount ≤ max(1, ⌊big × lo⌋) = ONE mark, ≥ big × hi = THREE marks, between = TWO. big = the usual size of one change of that stat (group keys of KIT_HINT_MAG, jk2b).
     word = the marks of a size word in a static kit line when it carries no amount: nhẹ (chút / hơn / thêm / bớt) · vừa (khá / nhiều) · nặng (rất / hẳn / lắm). */
- mk:{lo:.25,hi:1.5,big:{hon:10,hoi:40,rel:10,uu:3,sung:5,dan:4,bac:40,suc:10,cc:2},word:{nhe:1,vua:2,nang:3}},
+ /* MARKS (owner OD 26/11 ~21:55Z + ~22:00Z, canon overwrite of «Danh +8»): ONE table for every CHOICE surface (button, plaque, card, flip back, option row, Tốn / Được / Mất cells, hint row).
+    cut = the size of a change relative to its stat's scale: an amount ≤ max(1, ⌊big × lo⌋) = ONE mark, ≥ big × hi = THREE marks, between = TWO; big = the usual size of one change (group keys of KIT_HINT_MAG, jk2b);
+    word = the marks of a size word in a static kit line without an amount. RULE BY ROW (owner 26/11 ~22:02Z): the TỐN row (what she pays to choose: Bạc, Sức, khắc, items) is always EXACT; ĐƯỢC / MẤT / KÈM rows are marks for every stat incl. Bạc and Sức. Exact numbers elsewhere live only in the result card + Sổ ghi. One formatter (jk2b markTxt) calls this table. */
+ mark:{cut:{lo:.25,hi:1.5,big:{hon:10,hoi:40,rel:10,uu:3,sung:5,dan:4,bac:40,suc:10,cc:2},word:{nhe:1,vua:2,nang:3}},},
  /* TRUNG Y (jty, sếp 15/11 09:15Z): the Y phục slot is empty → she is in her inner robe. ONE source for every number of that rule */
  ty:{out:2,crowd:3,crowdN:3,royal:6,royalDuc:1,meet:1,reissueWk:2,   /* Danh lost: out of her palace / extra with ≥crowdN people / extra (tai tiếng) before the Emperor or Thái hậu (+ Đức); a visitor at home */
   robNight:12,robLonely:8,robPlot:45,robThug:3,robDanh:3,robWalk:2,omenWk:2,plotCh:12, /* robbery: % parts, Danh lost, omen lasts N weeks, weekly % an enemy plans it, relation that makes an enemy */
@@ -53,7 +56,10 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
    is married (princes and princesses alike); matchShow = a child shows in the match lists from this age; matchMax = oldest prince offered as a match; age.reign = the young Emperor rules alone from this age (no regency).
    seat = seats per rank (7 Hoàng hậu, 6 Hoàng quý phi, 5 Quý phi, 4 Phi, 3 Tần); SEATCAP (j30) is this table. res / harem: see below.
    night = the least a night with the Emperor gives: Sủng +sung, Ân tình +an (the night's score adds more, j8 nightFx). */
-Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2,npc:1,pen:1/* jface «đi chậm»: extra khắc per walk while punished (per walker, j9 walkSlow) */},sneak:{danh:8,heavy:15,seen:2,lead:15},srvAge:{ask:25,out:30,mama:45,old:45},
+Object.assign(BAL,{time:{khac:4,sucMin:5,/* khắc a deed costs, ONE source for the player and every NPC (AG-ALL-2 G8): talk option (j2 talk), talk that is an act, a harm act (j8 doAct) */cost:{talk:1,talkAct:2,harm:2}},lot:{bac:10,k:1},walk:{near:1,far:2,npc:1,pen:1/* jface «đi chậm»: extra khắc per walk while punished (per walker, j9 walkSlow) */},sneak:{danh:8,heavy:15,seen:2,lead:15},
+ placeClose:{grace:2,leave:1,sev:0}/* PLACE-CLOSE (owner OD 26/11 ~14:00Z, review/place-close): after the buổi a place closes in, she may stay grace khắc with no punishment (red chip);
+   a talk that spilled over the buổi line counts inside the grace and the grace lasts at least to the end of that talk + leave khắc (the walk out);
+   still there after it = ONE caught roll (accSneakO) → punish weight sev (BAL.punW: 0 = NHẸ, khất bổng / cảnh cáo; overstay is NEVER cấm túc) */,srvAge:{ask:25,out:30,mama:45,old:45},
  age:{sacFrom:25,sacLoss:2,sacMin:10,betroth:16,wed:18,matchShow:14,matchMax:21,reign:16},seat:{7:1,6:1,5:1,4:2,3:3}, /* owner 17/11 04:30Z: halved (was {7:1,6:1,5:2,4:4,3:6}) */
  /* RESIDENCE (owner 17/11 04:20Z + 04:32Z): every chủ vị (Tần, Phi, Quý phi; the player too) takes at most side co-residents in each
     of the halls (Đông phối điện, Tây phối điện), one room each; Hoàng hậu and Hoàng quý phi live alone. harem.cap = most consorts alive at once
