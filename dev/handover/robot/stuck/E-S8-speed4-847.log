@@ -1,0 +1,131 @@
+BUILD PIN: life E-S8-bd_tuyet-R8-speed4 on 8d5e3382+ 1b5137935266 served at http://127.0.0.1:8868/
+GAME BUILD {"s":"8d5e3382+","b":"1b5137935266","t":"2026-11-26T18:38Z"}
+CP buổi 50 year 1 save 326587 chars
+CP buổi 100 year 1 save 440563 chars
+CP buổi 150 year 2 save 457686 chars
+CP buổi 200 year 2 save 506657 chars
+STATUS E-S8-bd_tuyet-R8-speed4 · buổi 205 · year 2 · rank 0 · bugs 0 · stuck 0 · dead buttons 0
+CP buổi 250 year 2 save 613183 chars
+CP buổi 300 year 3 save 869065 chars
+NO-EXIT DIALOG .kmov «» div.kmov.kcf.km-full — picker stalled 93 steps, no close / next
+BUG harness NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): picker stalled 93 steps, no close / next → later visits unstuck at once by taps
+BUG harness picker stalled 93 steps / 61 s on .kmov «» without a real tap (area 93, deadEnd 1; last refused tap: gone «Ta biết rồi») → tapped «Ta biết rồi»
+CP buổi 350 year 3 save 1062370 chars
+STATUS E-S8-bd_tuyet-R8-speed4 · buổi 353 · year 3 · rank 2 · bugs 2 · stuck 0 · dead buttons 0
+CP buổi 400 year 3 save 1262580 chars
+CP buổi 450 year 4 save 1291333 chars
+CP buổi 500 year 4 save 1491977 chars
+STATUS E-S8-bd_tuyet-R8-speed4 · buổi 509 · year 4 · rank 0 · bugs 2 · stuck 0 · dead buttons 0
+CP buổi 550 year 4 save 1561733 chars
+CP buổi 600 year 5 save 1637235 chars
+CP buổi 650 year 5 save 1725347 chars
+STATUS E-S8-bd_tuyet-R8-speed4 · buổi 665 · year 5 · rank 0 · bugs 2 · stuck 0 · dead buttons 0
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:246:69)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:748:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-speed4 from 2026-11-27T00:52:48.643Z buổi 674
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/bgm-day.mp3?h=9d143f7bc2b33498
+RESUME: save restored on http://127.0.0.1:8868 (1712206 of 1712206 chars, 15 keys)
+RESUME: hclh-save-v2-1 content identical (hash ckpt b5fc5a7f · page b5fc5a7f, clock ckpt 5.56.2.0 · page 5.56.2.0)
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-tinhnghich.webp
+CP buổi 675 year 5 save 1713184 chars
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/binh.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/binh.webp
+PAGE CONSOLE error ×100: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD mua 24 moves 10/10 raw 10.00 (29 s, area 0, sens)
+PAGE CONSOLE error ×200: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD mua 24 moves 10/10 raw 10.00 (31 s, area 0, sens)
+BOARD mua 24 moves 9/10 raw 10.00 (28 s, area 0, sens)
+PAGE CONSOLE error ×300: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD mua 24 moves 9/10 raw 10.00 (30 s, area 0, sens)
+page.waitForTimeout: Target page, context or browser has been closed
+    at tap1 (/home/user/wt/rt4/dev/test/realtap.js:113:112)
+    at async Object.tap (/home/user/wt/rt4/dev/test/realtap.js:97:46)
+    at async Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:617:14)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:917:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-speed4 from 2026-11-27T01:07:10.843Z buổi 694
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/bgm-day.mp3?h=9d143f7bc2b33498
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/sfx-alarm.mp3?h=85b0cd3d45b48747
+RESUME: save restored on http://127.0.0.1:8868 (1752895 of 1752895 chars, 15 keys)
+RESUME: hclh-save-v2-1 content identical (hash ckpt cad42ea5 · page cad42ea5, clock ckpt 5.58.0.3 · page 5.58.0.3)
+CP buổi 695 year 5 save 1753477 chars
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/lo.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/lo.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/vui.webp
+PAGE CONSOLE error ×100: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD co 5 moves 10/10 raw 10.00 (7 s, area 0, sens)
+PAGE CONSOLE error ×200: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD mua 23 moves 9/10 raw 9.60 (29 s, area 0, sens)
+PAGE CONSOLE error ×300: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD mua 24 moves 9/10 raw 10.00 (29 s, area 0, sens)
+BOARD mua 24 moves 9/10 raw 10.00 (32 s, area 0, sens)
+page.evaluateHandle: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:615:23)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:917:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-speed4 from 2026-11-27T01:22:42.313Z buổi 711
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+RESUME: save restored on http://127.0.0.1:8868 (1757088 of 1757088 chars, 15 keys)
+RESUME: hclh-save-v2-1 content identical (hash ckpt 18e75165 · page 18e75165, clock ckpt 6.59.1.3 · page 6.59.1.3)
+CP buổi 712 year 6 save 1733743 chars
+BUG SAVE STALE stored b<675 live b712 chars 1733743 (stored clock 6.59.2.0, live 6.59.1.3)
+BUG game SAVE STALE: the stored save stopped following the live game (no setItem error seen)
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/binh.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/binh.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-tinhtu.webp
+PAGE CONSOLE error ×100: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD hat 100 moves 7/10 raw 0.00 (22 s, area 0, sens)
+PAGE CONSOLE error ×200: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error ×300: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD hat 90 moves 7/10 raw 0.00 (21 s, area 0, sens)
+BOARD hat 79 moves 7/10 raw 0.00 (22 s, area 0, sens)
+PAGE CONSOLE error ×400: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+BOARD mua 24 moves 9/10 raw 10.00 (27 s, area 0, sens)
+PAGE CONSOLE error ×500: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error ×600: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:603:24)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:917:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-speed4 from 2026-11-27T02:00:56.768Z buổi 757
+RESUME: save restored on https://thientran2711.github.io (1913594 of 1913594 chars, 15 keys, ckpt from http://127.0.0.1:8868)
+RESUME: hclh-save-v2-1 content identical (hash ckpt 392d74a0 · page 392d74a0, clock ckpt 6.64.0.0 · page 6.64.0.0)
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/ghen.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/ghen.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/vui.webp
+CP buổi 758 year 6 save 1914357 chars
+CP buổi 808 year 6 save 2087888 chars
+BOARD mua 24 moves 9/10 raw 10.00 (26 s, area 0, sens)
+BOARD hat 172 moves 8/10 raw 0.00 (22 s, area 0, sens)
+BOARD mua 24 moves 9/10 raw 10.00 (26 s, area 0, sens)
+BOARD mua 24 moves 9/10 raw 10.00 (27 s, area 0, sens)
+BOARD mua 24 moves 9/10 raw 10.00 (25 s, area 0, sens)
+FREEZE STACK buổi 847 renderer 1477 MB: Mt._tick @:7:65685
+BOARD theu 32 moves still in play (367 s, area 0, sens)
+BUG harness BOARD theu still in play after 6 min (32 moves) — the round never ended
+FREEZE STACK buổi 847 renderer 1180 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+BUG harness BOARD theu still in play after 6 min (0 moves) — the round never ended
+FREEZE STACK buổi 847 renderer 1044 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (366 s, area 0, sens)
+FREEZE STACK buổi 847 renderer 1187 MB: (anon) @:46239:19
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+FREEZE STACK buổi 847 renderer 1048 MB: Mt._tick @:7:65685
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+BOARD #kg82 0 moves ? (163 s, area 0, sens)
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:296:69)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:917:9 {
+  log: []
+}

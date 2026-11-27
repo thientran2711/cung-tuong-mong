@@ -1,0 +1,285 @@
+BUG js page error: f.rk.split is not a function
+BUG stuck no-clock loop: 150 taps without a clock step on page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:157:192)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:312:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-25T11:51:31.875Z buổi 44
+CP buổi 50 year 1 save 349210 chars
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=2: Tin báo / Tin trong cung buổi này)
+BUG game dialog queue holds 2 copies of «Tâm trạng · Tể tướng Hạ Thiệu Khiêm» (each close pops one; looks like a dead ✕)
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»
+BUG stuck no progress 15 min on .dlg «Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1/1»
+BUG game softlock: «Sang buổi» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Có người đến)
+DEAD BUTTON .kmov «?» cover zero size
+BUG dead close button has no effect: .dlg «Tâm trạng · Đáp ứng Khương Nhu Gia» «Lui»
+BUG dead close button has no effect: .dlg «Tâm trạng · Ta» «Lui»
+BUG game dialog queue holds 7 copies of «Tâm trạng · Huệ tần Quách Ngưng Hoa» (each close pops one; looks like a dead ✕)
+BUG game dialog queue holds 7 copies of «Tâm trạng · Thục tần Mạnh Như Yên» (each close pops one; looks like a dead ✕)
+BUG game dialog queue holds 4 copies of «Tâm trạng · Thục tần Mạnh Như Yên» (each close pops one; looks like a dead ✕)
+BUG dead close button has no effect: .dlg «Tâm trạng · Huệ tần Quách Ngưng Hoa» «Lui»
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Hoàng thượng»
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Ta»
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Thái hậu»
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 93 · year 1 · rank 0 · bugs 16 · stuck 2 · dead buttons 5
+BUG stuck no-clock loop: 150 taps without a clock step on .dlg «Tâm trạng · Tể tướng Hạ Thiệu Khiêm»
+CP buổi 100 year 1 save 411786 chars
+DEAD BUTTON page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người» «Nghỉ ngơiNghỉ ngơiNghỉ ngơi một látRất vữngNằm ngh» cover outside viewport
+BUG stuck no-clock loop: 150 taps without a clock step on page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=5: Lịch tháng / Chương 2 · Lần đầu được sủng / Lịch tháng / Tin chờ người sai đi / Tin trong cung buổi này)
+BUG stuck no-clock loop: 150 taps without a clock step on .mapsc «»
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=10: Chương 2 · Lần đầu được sủng / Tin báo / Lịch tháng / Lịch tháng / Tin báo / Lịch tháng)
+BUG game softlock: «Sang ngày mới» tapped but the buổi does not turn with no dialog on screen (dialog queue Q=1: Tin trong cung buổi này)
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-25T13:17:26.323Z buổi 126
+CP buổi 126 year null save 419963 chars
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-25T14:00:07.397Z buổi 130
+CP buổi 130 year null save 419963 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:153:44)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:398:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-25T15:54:56.469Z buổi 131
+CP buổi 131 year null save 419963 chars
+BUG game softlock: «Sang ngày mới» disabled with no dialog on screen (dialog queue Q=17: Lịch tháng / Chương 2 · Lần đầu được sủng / Lịch tháng / Lịch tháng / Tin chờ người sai đi / Tin báo)
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Tin trong cung buổi này)
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-25T15:59:34.918Z buổi 141
+CP buổi 141 year null save 419963 chars
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-25T16:27:51.166Z buổi 148
+CP buổi 148 year null save 419963 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:237:459)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:464:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-25T22:58:13.897Z buổi 153
+CP buổi 153 year null save 441592 chars
+GAME BUILD {"s":"0a4c8010+","b":"d402e37a51ed","t":"2026-11-26T02:21Z"}
+CP buổi 203 year 2 save 617722 chars
+CP buổi 253 year 2 save 720035 chars
+DEAD BUTTON .mapsc «Hàm An4 bóng · 3 khắc · bái kiến» cover span.k3l in #kshR
+CP buổi 303 year 2 save 858734 chars
+DEAD BUTTON .mapsc «Hàm An2 bóng · 2 khắc» cover span.k3l in #kshR
+DEAD BUTTON .mapsc «Hàm An1 bóng · 2 khắc» cover button.k3r.kasr in #kshR
+CP buổi 353 year 3 save 1024589 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 369 · year 3 · rank 0 · bugs 23 · stuck 3 · dead buttons 9
+CP buổi 403 year 3 save 1192559 chars
+CP buổi 453 year 3 save 1317203 chars
+CP buổi 503 year 4 save 1400667 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:348:13)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:557:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-26T05:52:49.276Z buổi 514
+CP buổi 514 year null save 1400290 chars
+CP buổi 564 year 4 save 1490701 chars
+CP buổi 614 year 4 save 1503718 chars
+CP buổi 664 year 5 save 1577834 chars
+CP buổi 714 year 5 save 1585823 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 722 · year 5 · rank 0 · bugs 23 · stuck 3 · dead buttons 9
+CP buổi 764 year 5 save 1793937 chars
+CP buổi 814 year 5 save 1900608 chars
+CP buổi 864 year 6 save 2102908 chars
+CP buổi 914 year 6 save 2204889 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 925 · year 6 · rank 0 · bugs 23 · stuck 3 · dead buttons 9
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:332:24)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:570:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-26T07:53:43.385Z buổi 927
+CP buổi 927 year null save 2221655 chars
+CP buổi 977 year 7 save 2264799 chars
+CP buổi 1027 year 7 save 2323339 chars
+CP buổi 1077 year 7 save 2429215 chars
+page.evaluateHandle: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:353:23)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:581:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-26T08:37:46.206Z buổi 1079
+CP buổi 1079 year null save 2481931 chars
+CP buổi 1129 year 8 save 2528111 chars
+CP buổi 1179 year 8 save 2535939 chars
+CP buổi 1229 year 8 save 2587217 chars
+CP buổi 1279 year 9 save 2684495 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 1315 · year 9 · rank 0 · bugs 23 · stuck 3 · dead buttons 9
+CP buổi 1329 year 9 save 2801638 chars
+CP buổi 1379 year 9 save 2862975 chars
+CP buổi 1429 year 10 save 2953833 chars
+CP buổi 1479 year 10 save 3041481 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 1504 · year 10 · rank 0 · bugs 23 · stuck 3 · dead buttons 9
+CP buổi 1529 year 10 save 3112477 chars
+CP buổi 1579 year 11 save 3153238 chars
+CP buổi 1629 year 11 save 3232293 chars
+CP buổi 1679 year 11 save 3297434 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 1702 · year 12 · rank 0 · bugs 23 · stuck 3 · dead buttons 9
+CP buổi 1729 year 12 save 3387808 chars
+BUG crash tab crashed (Page crashed) at buổi 1741
+PAGE CRASHED E-S8-bd_tuyet-R8-skilled2 at buổi 1741 → exit 3, rerun with resume=1
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-26T11:50:28.524Z buổi 1741
+CP buổi 1741 year null save 3422038 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:367:324)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:592:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-26T11:55:10.667Z buổi 1750
+CP buổi 1750 year null save 3466154 chars
+CP buổi 1800 year 12 save 3503700 chars
+DEAD BUTTON .mapsc «Hàm An2 bóng · 1 khắc» cover span.k3l in #kshR
+CP buổi 1850 year 13 save 3594782 chars
+DEAD BUTTON .mapsc «Hàm An2 khắc» cover button.k3r.kasr in #kshR
+DEAD BUTTON .mapsc «Hàm An2 bóng · 2 khắc» cover button.k3r.kasr in #kshR
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 1886 · year 13 · rank 0 · bugs 24 · stuck 3 · dead buttons 12
+DEAD BUTTON .mapsc «Chung Tú3 bóng · 2 khắc» cover button.k3r.kasr in #kshR
+CP buổi 1900 year 13 save 3689892 chars
+DEAD BUTTON .mapsc «Diên Huy10 bóng · 3 khắc · bái kiến» cover button.k3r.kasr in #kshR
+BUG dead close button has no effect: .dlg «Tin trong cung buổi này» «Lui»
+CP buổi 1950 year 13 save 3742747 chars
+CP buổi 2000 year 14 save 3836486 chars
+CP buổi 2050 year 14 save 3910730 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 2060 · year 14 · rank 0 · bugs 25 · stuck 3 · dead buttons 15
+CP buổi 2100 year 14 save 3984632 chars
+CP buổi 2150 year 15 save 4047981 chars
+DEAD BUTTON .mapsc «Hàm An1 bóng · 2 khắc» cover span.k3l in #kshR
+CP buổi 2200 year 15 save 4112089 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 2218 · year 15 · rank 0 · bugs 25 · stuck 3 · dead buttons 16
+CP buổi 2250 year 15 save 4245205 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:389:324)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:620:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-26T15:19:13.807Z buổi 2272
+RESUME: origin moved https://thientran2711.github.io → http://127.0.0.1:8729 (build pin) — save restored again there
+RESUME: save restored on http://127.0.0.1:8729 (4241922 of 4241922 chars, 10 keys)
+CP buổi 2272 year null save 4241922 chars
+DEAD BUTTON .kmov «?» cover img.kfr
+NO-EXIT DIALOG .kmov «» div.kmov.kcf.km-full — picker stalled 93 steps, no close / next
+BUG harness NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): picker stalled 93 steps, no close / next → later visits unstuck at once by taps
+BUG harness picker stalled 93 steps / 61 s on .kmov «» without a real tap (area 93, deadEnd 1; last refused tap: gone «Chuẩn bị thị tẩm») → tapped «Ta biết rồi»
+CP buổi 2322 year 16 save 4313367 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 2370 · year 16 · rank 0 · bugs 27 · stuck 3 · dead buttons 17
+CP buổi 2372 year 16 save 4394818 chars
+CP buổi 2422 year 17 save 4538949 chars
+CP buổi 2472 year 17 save 4626682 chars
+CP buổi 2522 year 17 save 4682604 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 2550 · year 17 · rank 0 · bugs 27 · stuck 3 · dead buttons 17
+CP buổi 2572 year 18 save 4748289 chars
+CP buổi 2622 year 18 save 4853261 chars
+NO-EXIT DIALOG #kload «» div.dlg.kpanel.kpsc — picker stalled 126 steps, no close / next
+BUG harness NO-EXIT DIALOG #kload «» (div.dlg.kpanel.kpsc): picker stalled 126 steps, no close / next → later visits unstuck at once by taps
+BUG harness picker stalled 126 steps / 61 s on #kload «» without a real tap (wait 126, pick 1; last refused tap: gone «Vào cung ngay») → tapped «Thỉnh tiếp»
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 2650 · year 18 · rank 0 · bugs 29 · stuck 3 · dead buttons 17
+CP buổi 2672 year 18 save 4908894 chars
+CP buổi 2722 year 19 save 4984516 chars
+CP buổi 2772 year 19 save 5110297 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 2782 · year 19 · rank 0 · bugs 29 · stuck 3 · dead buttons 17
+CP buổi 2822 year 19 save 5171224 chars
+CP buổi 2872 year 20 save 5222581 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 2883 · year 20 · rank 0 · bugs 29 · stuck 3 · dead buttons 17
+CP buổi 2922 year 20 save 5232235 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 2971 · year 20 · rank 0 · bugs 29 · stuck 3 · dead buttons 17
+CP buổi 2972 year 20 save 5233661 chars
+CP buổi 3022 year 20 save 5233661 chars
+CP buổi 3072 year 20 save 5233661 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 3092 · year 20 · rank 0 · bugs 29 · stuck 3 · dead buttons 17
+CP buổi 3122 year 20 save 5233661 chars
+CP buổi 3172 year 20 save 5233661 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 3186 · year 20 · rank 0 · bugs 29 · stuck 3 · dead buttons 17
+CP buổi 3222 year 20 save 5233661 chars
+CP buổi 3272 year 20 save 5233661 chars
+CP buổi 3322 year 20 save 5233661 chars
+STATUS E-S8-bd_tuyet-R8-skilled2 · buổi 3332 · year 20 · rank 1 · bugs 29 · stuck 3 · dead buttons 17
+CP buổi 3372 year 20 save 5233661 chars
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:246:69)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:748:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-27T00:52:57.872Z buổi 3379
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/bgm-day.mp3?h=9d143f7bc2b33498
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/sfx-alarm.mp3?h=85b0cd3d45b48747
+RESUME: save restored on http://127.0.0.1:8729 (5233661 of 5233661 chars, 20 keys)
+RESUME: hclh-save-v2-1 content identical (hash ckpt 35bceddc · page 35bceddc, clock ckpt 20.240.2.1 · page 20.240.2.1)
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5233982 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BUG game QuotaExceededError: the game save no longer fits localStorage (j6 save() swallows it: every later save is lost)
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-hungkhoi.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/hungkhoi.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/hungkhoi.webp
+PAGE CONSOLE error ×2: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5233876 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×3: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5233876 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3380 year 20 save 5233661 chars
+CP SAVE ERROR: setItem failed 3× — QuotaExceededError key hclh-save-v2-1 (5233876 chars)
+PAGE CONSOLE error ×100: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key ctm-nr (8586 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-nr' exceeded the quota.
+PAGE CONSOLE error ×2: [rt] localStorage.setItem failed: QuotaExceededError key ctm-nr (8605 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-nr' exceeded the quota.
+PAGE CONSOLE error ×3: [rt] localStorage.setItem failed: QuotaExceededError key ctm-nr (8619 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-nr' exceeded the quota.
+PAGE CONSOLE error ×200: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key ctm-bgpause (1 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-bgpause' exceeded the quota.
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key ctm-kyngo (186 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-kyngo' exceeded the quota.
+BOARD #kg82 27 moves ? (61 s, area 0, sens)
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:296:69)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:917:9 {
+  log: []
+}
+RESUME E-S8-bd_tuyet-R8-skilled2 from 2026-11-27T01:07:35.640Z buổi 3397
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (File not found) — /audio/VOICES.json
+RESUME: save restored on http://127.0.0.1:8729 (5233661 of 5233661 chars, 20 keys)
+RESUME: hclh-save-v2-1 content identical (hash ckpt 35bceddc · page 35bceddc, clock ckpt 20.240.2.1 · page 20.240.2.1)
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5233982 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-hungkhoi.webp
+BUG SAVE REWIND: reload went back from b3397 (clock 20.242.0.2) to the stored b3380 (clock 20.240.2.1) (17 buổi lost)
+BUG game SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/hungkhoi.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/hungkhoi.webp
+PAGE CONSOLE error ×2: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5233876 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+CP buổi 3398 year 20 save 5233661 chars
+CP SAVE ERROR: setItem failed 2× — QuotaExceededError key hclh-save-v2-1 (5233876 chars)
+PAGE CONSOLE error ×3: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5233876 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×100: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key ctm-kyngo (186 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-kyngo' exceeded the quota.
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key ctm-nr (8586 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-nr' exceeded the quota.
+PAGE CONSOLE error ×2: [rt] localStorage.setItem failed: QuotaExceededError key ctm-nr (8602 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-nr' exceeded the quota.
+PAGE CONSOLE error ×3: [rt] localStorage.setItem failed: QuotaExceededError key ctm-nr (8617 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'ctm-nr' exceeded the quota.
+BOARD mua 21 moves 7/10 raw 8.40 (34 s, area 0, sens)
+PAGE CONSOLE error ×200: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error ×300: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+FREEZE STACK buổi 3406 renderer 824 MB: f @:1:232
+BOARD theu 27 moves still in play (367 s, area 0, sens)
+BUG harness BOARD theu still in play after 6 min (27 moves) — the round never ended
+PAGE CONSOLE error ×400: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+FREEZE STACK buổi 3406 renderer 804 MB: f @:1:232
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+BUG harness BOARD theu still in play after 6 min (0 moves) — the round never ended
+PAGE CONSOLE error ×500: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error ×600: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+FREEZE STACK buổi 3406 renderer 666 MB: f @:1:232
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+PAGE CONSOLE error ×700: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+FREEZE STACK buổi 3406 renderer 812 MB: f @:1:232
+BOARD theu 0 moves still in play (367 s, area 0, sens)
+PAGE CONSOLE error ×800: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error ×900: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+FREEZE STACK buổi 3406 renderer 817 MB: f @:1:232
+BOARD theu 0 moves still in play (368 s, area 0, sens)
+PAGE CONSOLE error ×1000: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+FREEZE STACK buổi 3406 renderer 825 MB: f @:1:232
+BOARD theu 0 moves still in play (366 s, area 0, sens)
+PAGE CONSOLE error ×1100: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+PAGE CONSOLE error ×1200: Failed to load resource: the server responded with a status of 404 (File not found) — /dev/vendor/pixi-8.5.2.min.js
+FREEZE STACK buổi 3406 renderer 840 MB: f @:1:232
+BOARD theu 0 moves still in play (366 s, area 0, sens)
+BOARD #kg82 0 moves ? (5 s, area 0, sens)
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt4/dev/test/robot-rt.js:296:69)
+    at async /home/user/wt/rt4/dev/test/robot-rt.js:917:9 {
+  log: []
+}

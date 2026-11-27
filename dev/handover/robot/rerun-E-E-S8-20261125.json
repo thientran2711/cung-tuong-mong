@@ -298,16 +298,20 @@
    "why": "STUCK-gamebug iPad Tân quân lập uy Ch.2"
   },
   {
-   "life": "E-S8-bd_tuyet-R8-skilled2",
-   "why": "paused at buổi 141 (iPad Tân quân lập uy)"
-  },
-  {
    "life": "E-S8-bd_san-R7-cautious3",
    "why": "INVALID (harness): #kg82 archery board played 2+4 moves then «Quay lại» (board-idle quit, fixer #11 job 8) → Ban hoa buổi 1; rerun after fix"
   },
   {
    "life": "E-S8-bd_san-R7-greedy2",
    "why": "STUCK-gamebug (Fold, buổi ~1328): «Biếu quà làm lành» gift picker confirm «kipgo» off-screen after 8 scrolls; save+shots kept; rerun when fixed"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-skilled2",
+   "why": "STUCK buổi 3406 (year 20, age 38): «theu» board 0 moves ×dozens + renderer freeze 840 MB; save quota hit (5,233,876 chars) at buổi ~2972, ~400 buổi lost on resume; evidence dev/handover/robot/stuck/E-S8-skilled2-3406.{json,log}"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-speed4",
+   "why": "STUCK buổi 847 (year 6): «theu» board 0 moves ×5 (367 s each) + renderer 1048 MB freeze (Mt._tick); «SAVE STALE» game-bug candidate; evidence dev/handover/robot/stuck/E-S8-speed4-847.{json,log}"
   }
  ]
 }
