@@ -28,7 +28,7 @@ function open(o){if(CUR)CUR.destroy();o=o||{};const host=o.host||document.getEle
  const P={o,host,m,anims:[],open:true,up:null};CUR=P;
  const gs=o.groups&&o.groups.length?o.groups:[{k:"",n:"",acts:o.acts||[]}];P.groups=gs;P.group=o.group||gs[0].k;
  P.obst=obstacles(host);const el=P.el=document.createElement("div");el.className="kpk kpk-"+m+(still()?" kpk-still":"");el.setAttribute("role","group");el.setAttribute("aria-label","Chọn việc");host.appendChild(el);
- document.body.classList.add("kpk-open");/* §98.1: the stage HUD under the post yields while a board is open */build(P);if(o.dismiss!==false){P.away=e=>{if(!P.open||el.contains(e.target))return;P.close()};setTimeout(()=>{if(P.open)document.addEventListener("pointerdown",P.away,true)},0)}
+ document.body.classList.add("kpk-open");/* §98.1: the stage HUD under the post yields while a board is open */build(P);/* KK53 (MAIN 170 note): a tap anywhere that is not a plaque / its «Chọn» / a tab puts the lifted plaque back (the board stays) */P.dropAway=e=>{if(!P.open||!P.up)return;const t=e.target;if(t&&t.closest&&t.closest(".kpk-n,.khconf,.kpk-tabs"))return;drop(P)};document.addEventListener("pointerdown",P.dropAway,true);if(o.dismiss!==false){P.away=e=>{if(!P.open||el.contains(e.target))return;P.close()};setTimeout(()=>{if(P.open)document.addEventListener("pointerdown",P.away,true)},0)}
  P.lift=id=>lift(P,id);P.setGroup=k=>{if(k===P.group)return;P.group=k;build(P,true)};P.close=()=>close(P);P.destroy=()=>destroy(P);
  return P}
 /* KIT §98.1 PLAQUE POST (owner OD 26/11 ~21:41Z «để cái sự lựa chọn nào nó cũng tới từ một cái cột thôi … lúc thì nằm bên giữa, lúc thì nằm bên phải là sao?»; KK47, canon overwrite of the
@@ -86,28 +86,26 @@ function fitNames(P){const el=P.el;el.classList.remove("kpk-slimall","kpk-tight"
  el.classList.add("kpk-four");if(P.__fitR)return;/* the plaque box (.kpk-b) must hold the unclamped name: grow by what spills (only grows → never loops with a name pass) */
  const ex=Math.max(0,...[...el.querySelectorAll(".kpk-n:not(.kpk-up) .kfoc-b.kpk-b")].map(k=>{const b=k.querySelector(".kfoc-t b");return Math.max(k.scrollHeight-k.clientHeight,b?b.getBoundingClientRect().bottom-k.getBoundingClientRect().bottom+4:0)}));
  if(ex>1){P.hx=(P.G&&P.G.h||KIT_PLAQUE.h[P.m])+Math.ceil(ex)+2;P.__fitR=1;try{build(P,true)}finally{P.__fitR=0}}}
-/* «CHỌN» CONFIRM (owner OD 26/11 ~23:58Z + 27/11 ~01:35Z, law 14 — replaces the ✓ / ✕ pair of 25/11 ~21:55Z and «tap again = choose»; the SAME one-button rule as the no-flip hand §101.10):
-   tap = the plaque lifts + its line shows, and ONE kit «Chọn» button (.kbtn.kpk-gob, size BAL.kpkgo) stands 12 px UNDER the lifted plaque, centred on it, inside the band box.
-   Another plaque = switch; a tap elsewhere = the board's own away-close; a tap on the lifted plaque body does nothing. A keyboard / robot click (detail 0) on the lifted
-   plaque still chooses (harness path unchanged: click twice). onPick / «kpkpick» are unchanged for the callers. Never in a column left of the band, never right of the post:
-   kitPick.postBox().x0 is the band's real left edge and callers keep NO button room. */
+/* «CHỌN» CONFIRM v2 (owner OD 27/11 ~03:17Z, law 14 — replaces the ✓ / ✕ pair of 25/11, the KK51 strip pair and the KK53 v1 bar under the plaque): tap = the plaque lifts + its line shows, and a SMALL kit «Chọn» chip
+   (.kbtn.khok.kpk-gob, size BAL.kpkgo) stands INSIDE its bottom-right corner (the plaque grows one chip-tall strip, .kpk-cf); the lifted plaque never covers the row below. A tap on the lifted plaque body again = Chọn too
+   (two-tap: 1st lifts, 2nd chooses); another plaque = switch; a tap outside = the lift drops. onPick / «kpkpick» unchanged for the callers. */
 function pick(P,a,b){if(!P.open)return;if(a.off){try{P.o.onOff&&P.o.onOff(a,P)}catch(e){}return}
  b.dispatchEvent(new CustomEvent("kpkpick",{bubbles:true,detail:{id:a.id,act:a}}));try{P.o.onPick&&P.o.onPick(a.id,a,P)}catch(e){}}
-function tap(P,a,n,b,ev){if(!P.open)return;if(P.up===n){if(ev&&ev.detail===0)pick(P,a,b);return}
+function tap(P,a,n,b,ev){if(!P.open)return;if(P.up===n){pick(P,a,b);return}
  lift(P,a.id)}
 function conf(P){try{let c=P.el.querySelector(":scope>.khconf");const n=P.up;if(!n||!P.open){if(c)c.hidden=true;return}
  const a=(P.G&&P.G.acts||[]).find(x=>String(x.id)===n.dataset.id);if(!a||a.off){if(c)c.hidden=true;return}
  if(!c){c=document.createElement("div");c.className="khconf kpk-conf kpk-go";c.innerHTML=`<button type="button" class="kbtn khok kpk-gob" aria-label="Chọn">Chọn</button>`;
   c.addEventListener("click",e=>{e.stopPropagation();const k=e.target.closest("button");if(!k||!P.up)return;const u=P.up,aa=(P.G.acts||[]).find(x=>String(x.id)===u.dataset.id);if(aa)pick(P,aa,u.querySelector(".kpk-b"))});P.el.appendChild(c)}
- /* KK53 (owner OD 27/11 ~01:35Z, canon overwrite of the KK51 ✓ / ✕ pair; same part as the no-flip hand §101.10): ONE kit «Chọn» button (.kbtn) 12 px UNDER the lifted plaque, centred on it, kept inside the
-    band box [x0 … post]; another plaque = switch, a tap elsewhere = the board's own away-close (the ✕ is gone). Near the stage floor the plaque rises so the button stays on the stage. */
- const K=KIT_PLAQUE,bw=BAL.kpkgo.w,bh=BAL.kpkgo.h,gap=BAL.kpkgo.gap,G=P.G;n.classList.remove("kpk-cf");
+ /* KK53 v2 (owner 03:17Z «nút chọn dưới thẻ nhìn kì quá, choáng chỗ»; MAIN 170 rec): NO bar under the plaque. A SMALL kit «Chọn» chip (BAL.kpkgo {w,h}) stands INSIDE the lifted plaque's bottom-right corner, in a strip the plaque grows at its bottom
+    (.kpk-cf, one chip tall), so the lifted plaque grows by one line and never covers the row below / a neighbour. The chip sits where the odds line is NOT (strip under the text). Near the stage floor the plaque rises. */
+ const K=KIT_PLAQUE,G=P.G,bw=BAL.kpkgo.w,bh=BAL.kpkgo.h;n.style.setProperty("--kpgh",bh+"px");n.classList.add("kpk-cf");
  n.style.top=n.__y+"px";const hh=n.offsetHeight||G.h,wd=n.offsetWidth||G.cw,x0=parseFloat(n.style.left)||n.__x,k=K.liftScale,kc=parseFloat(n.style.getPropertyValue("--kc"))||12;
- const over=n.__y+K.liftDy+(hh+kc)*k-kc+gap+bh-(G.H-4);if(over>0)n.style.top=Math.round(n.__y-over)+"px";const y0=n.offsetTop;
+ const over=n.__y+K.liftDy+(hh+kc)*k-kc-(G.H-4);if(over>0)n.style.top=Math.round(n.__y-over)+"px";const y0=n.offsetTop;
  /* the LIFTED box (translateY liftDy + scale liftScale about its cord top), whatever moment of the lift animation this runs in */
  const oy=y0-kc,L={l:x0+wd/2-wd*k/2,t:oy+kc*k+K.liftDy,w:wd*k,h:hh*k};
- const bL=G.x0,bR=G.x0+G.bandW+G.post+4,w=Math.round(Math.min(bw,Math.max(L.w,BAL.kpkgo.minW),bR-bL)),x=Math.round(Math.max(bL,Math.min(bR-w,L.l+L.w/2-w/2))),y=Math.round(L.t+L.h+gap);
- c.hidden=false;c.style.left=x+"px";c.style.top=Math.max(2,y)+"px";c.style.setProperty("--kpgw",w+"px");c.style.setProperty("--kpgh",bh+"px")}catch(e){console.error("kitPick conf",e)}}
+ const x=Math.round(L.l+L.w-bw*k-6*k),y=Math.round(L.t+L.h-bh*k-5*k);
+ c.hidden=false;c.style.left=x+"px";c.style.top=Math.max(2,y)+"px";c.style.setProperty("--kpgw",bw+"px");c.style.setProperty("--kpgh",bh+"px");c.style.transform=`scale(${k})`;c.style.transformOrigin="0 0"}catch(e){console.error("kitPick conf",e)}}
 function drop(P){const K=KIT_PLAQUE,u=P.up;if(!u)return;P.up=null;u.classList.remove("kpk-up","kpk-wrap","kpk-sm","kpk-cf");u.style.width=P.G.cw+"px";u.style.left=u.__x+"px";if(u.__y!=null)u.style.top=u.__y+"px";u.querySelector(".kpk-b").setAttribute("aria-pressed","false");
  if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"});else u.style.transform="";P.anims.forEach(x=>{try{if(x.effect&&x.effect.target===u)x.cancel()}catch(e){}});conf(P)}
 /* RING-DESIGN-5: a lifted plaque grows with its small line: «Vững · Tốn 1 khắc» stays on ONE line, so the plaque widens (towards the outer side, inside the stage) instead of growing a 4th text line */
@@ -120,9 +118,9 @@ function lift(P,id){const K=KIT_PLAQUE,n=P.el.querySelector(`.kpk-n[data-id="${C
  if(P.up&&P.up!==n)drop(P);
  P.up=n;n.classList.add("kpk-up");widen(P,n);n.querySelector(".kpk-b").setAttribute("aria-pressed","true");conf(P);
  if(!still()&&n.animate){const a=n.animate([{transform:"none"},{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`}],{duration:K.liftMs,easing:"cubic-bezier(.3,.8,.4,1)",fill:"forwards"});P.anims.push(a)}else n.style.transform=`translateY(${K.liftDy}px) scale(${K.liftScale})`}
-function close(P){if(!P||!P.open)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);const K=KIT_PLAQUE,N=[...P.el.querySelectorAll(".kpk-n,.kpk-tabs,.kpk-rail,.kpk-post")];
+function close(P){if(!P||!P.open)return;P.open=false;document.removeEventListener("pointerdown",P.away,true);document.removeEventListener("pointerdown",P.dropAway,true);const K=KIT_PLAQUE,N=[...P.el.querySelectorAll(".kpk-n,.kpk-tabs,.kpk-rail,.kpk-post")];
  if(!still()&&N[0]&&N[0].animate){N.forEach(x=>x.animate([{opacity:1},{opacity:0}],{duration:K.closeMs,fill:"forwards"}));setTimeout(()=>destroy(P,true),K.closeMs+20)}else destroy(P,true)}
-function destroy(P,fromClose){if(!P)return;P.open=false;try{P.__nmo&&P.__nmo.disconnect()}catch(e){}document.removeEventListener("pointerdown",P.away,true);P.anims.forEach(a=>{try{a.cancel()}catch(e){}});P.anims.length=0;try{P.el.remove()}catch(e){}if(CUR===P){CUR=null;document.body.classList.remove("kpk-open");yieldCard();if(P.o.onClose&&fromClose!==false)try{P.o.onClose()}catch(e){}}}
+function destroy(P,fromClose){if(!P)return;P.open=false;try{P.__nmo&&P.__nmo.disconnect()}catch(e){}document.removeEventListener("pointerdown",P.away,true);document.removeEventListener("pointerdown",P.dropAway,true);P.anims.forEach(a=>{try{a.cancel()}catch(e){}});P.anims.length=0;try{P.el.remove()}catch(e){}if(CUR===P){CUR=null;document.body.classList.remove("kpk-open");yieldCard();if(P.o.onClose&&fromClose!==false)try{P.o.onClose()}catch(e){}}}
 /* §98.1b RESULT CARD YIELDS TO THE PLAQUE BOARD (owner OD 26/11 ~21:41Z (b) «khung kết quả … che»; KK47): while a board is open, the kit result card (#rtoast, resultShow + kitResultCard)
    sits in the free span LEFT of the band (bottom unchanged), narrowed to that span when needed; the board never moves for the card. Restored when the board closes. */
 function yieldCard(){try{const t=document.getElementById("rtoast");if(!t)return;const P=CUR,on=t.classList.contains("on");
@@ -185,7 +183,8 @@ body.kpk-open #kshR,body.kpk-open .kshR,body.kpk-open #kpname,body.kpk-open .j59
 .kpk .kfoc-b.kpk-b.kfoc-off{filter:grayscale(.6);opacity:1}
 .kpk .kfoc-b.kpk-b:focus-visible{outline:2px solid #c9a24a;outline-offset:2px}
 .kpk>.khconf.kpk-go{position:absolute;z-index:6;display:block;gap:0;pointer-events:auto}.kpk>.khconf.kpk-go[hidden]{display:none!important}
-.kpk>.khconf.kpk-go>button.kpk-gob{background:linear-gradient(#b0402c,#8a2a1e);color:#fff8e6;width:var(--kpgw,200px)!important;height:var(--kpgh,52px)!important;min-height:0!important;border-radius:12px!important;font-size:1.1rem!important;font-weight:800!important;letter-spacing:.4px;display:grid;place-items:center;padding:0 10px!important;margin:0!important;border:2px solid #fffaf0!important;box-shadow:0 4px 12px #0006!important}/* the ONE «Chọn» (kit .kbtn) under the lifted plaque */
+.kpk>.khconf.kpk-go>button.kpk-gob{width:var(--kpgw,68px)!important;height:var(--kpgh,32px)!important;min-height:0!important;min-width:0!important;border-radius:8px!important;font-size:.8rem!important;font-weight:800!important;letter-spacing:.2px;display:grid;place-items:center;padding:0 6px!important;margin:0!important;background:#fff6e4!important;color:#9a2c1c!important;border:1px solid #b0402c!important;box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(70,40,12,.25)!important}/* the small «Chọn» chip INSIDE the lifted plaque (kit small button, dark red on silk) */
+.kpk-n.kpk-up.kpk-cf .kfoc-b.kpk-b{padding-bottom:calc(var(--kpgh,32px) + 8px)}
 .kdim-d{filter:brightness(var(--kdb,.7)) saturate(var(--kds,.75))!important}
 .kdim-c{transform-origin:50% 100%}
 `;document.head.appendChild(css);
