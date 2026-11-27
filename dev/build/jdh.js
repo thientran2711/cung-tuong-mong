@@ -31,11 +31,14 @@ DH.meta={n:"Tài hoa vô song",g:"thi",u:"môn",how:n=>`Đứng đầu hội thi
 DH.podium={n:"Bảng vàng đề tên",g:"thi",how:n=>`Đứng trong ba hạng đầu một hội thi ${nTimes(n)}`};
 DH.nights={n:"Trăng soi rèm ngọc",g:"an",how:n=>`Được thị tẩm ${nTimes(n)}`};
 DH.kids={n:"Phúc ấm đầy nhà",g:"an",u:"hoàng tự",how:n=>`Sinh hạ ${n} hoàng tự`};
-DH.a_thinh={n:"Sớm viếng chiều thăm",g:"ngay",me:1,how:n=>`Thỉnh an ${nTimes(n)}`};
+DH.a_thinh={n:"Sớm viếng chiều thăm",g:"ngay",me:1,u:"ngày liền",how:n=>`Thỉnh an ${n} ngày liền, không bỏ ngày nào`};/* TITLE-BAL: a streak (condition), not a count */
 DH.a_doc={n:"Thư hương",g:"ngay",me:1,how:n=>`Đọc sách ${nTimes(n)}`};
 DH.a_nhan={n:"Dung nhan như ngọc",g:"ngay",me:1,how:n=>`Điểm trang, dưỡng nhan ${nTimes(n)}`};
 for(const k in MAST)DH["l_"+k]={n:MAST[k],g:"nghe",u:"bậc",how:n=>`${artN(k)} lên bậc ${n}`};
-for(const k in WORK)DH["m_"+k]={n:WORK[k][0],g:"nghe",how:n=>`${WORK[k][1]} ${nTimes(n)}`};
+for(const k in WORK)DH["m_"+k]={n:WORK[k][0],g:"nghe",u:"tác phẩm",how:n=>`${WORK[k][1]}: ${n} tác phẩm từ hạng ${WTIER[BAL.dh.q.wk]} trở lên`};/* TITLE-BAL: quality, not tries (BAL.dh.q.wk) */
+/* TITLE-BAL condition titles (owner OD 26/11 ~18:20Z rec (3), approved ~18:50Z (8)): a feat under hardship, a person's lasting favour */
+DH.c_han={n:"Sen nở trong bùn",g:"thi",how:()=>`Đứng đầu một hội thi khi còn ở phẩm ${RANKS[BAL.dh.cond.han.rank].n} trở xuống, hay đang bị cấm túc, đày lãnh cung`};
+DH.c_th={n:"Thái hậu ưu ái",g:"an",me:1,u:"tháng liền",how:n=>`Được Thái hậu quý mến (từ ${BAL.dh.cond.th.v} trở lên) ${n} tháng liền`};
 const GROUPS=[["tm","Thiên mệnh"],["kc","Khuê các"],["thi","Hội thi"],["nghe","Tài nghệ"],["ngay","Ngày thường"],["an","Ân sủng"]];/* "kc" = jkcg «Khuê các» (OUTSIDE_PLAN §11): like tm, listed only once earned */
 /* «Thiên mệnh» (jge.js, grand endings): one title per grand-ending shading, earned only by reaching it — never listed as "still to earn", never counted in the totals until earned */
 const dhTot=()=>Object.keys(DH).filter(k=>(DH[k].g!=="tm"&&DH[k].g!=="kc")||((S&&S.dh||{})[k]&&S.dh[k].i>=0)).length;
@@ -87,10 +90,12 @@ function seedOld(p){/* old saves: her past contest places from the Sổ ân thư
  if(p!==S||!Array.isArray(S.honors)||!S.honors.length)return;const D=bag(p);const rev={};try{for(const k in CU_KHOI)rev[CU_KHOI[k]]=k}catch(e){}
  for(const h of S.honors){(D.podium=D.podium||{n:0}).n++;if(h.p===1){const k=rev[String(h.t||"").split(" · ")[0]];if(k&&DH["w_"+k])(D["w_"+k]=D["w_"+k]||{n:0}).n++}}}
 function dhSync(p,quiet){if(!p||typeof p!=="object")return [];const first=!p.dh;if(first){bag(p);seedOld(p);quiet=true}const D=bag(p),got=[];
+ if(p.dhV!==2){/* TITLE-BAL old saves: «Sớm viếng chiều thăm» counted tries and the works counted every try; their counts restart under the new rule
+   (streak / quality). A step already earned stays hers (steps only go up). */if(!first)for(const k of ["a_thinh"].concat(Object.keys(WORK).map(x=>"m_"+x)))if(D[k]){if(k!=="a_thinh"&&D[k].raw==null)D[k].raw=D[k].n||0;D[k].n=0}p.dhV=2}
  for(const key in DH){if(DH[key].me&&p!==S)continue;const c=count(p,key),i=stepOf(key,c);if(i<0&&!D[key])continue;const e=D[key]||(D[key]={n:0});
   if(!key.startsWith("l_")&&key!=="meta"&&key!=="nights"&&key!=="kids")e.n=Math.max(e.n||0,c);
   if(i>(e.i==null?-1:e.i)){e.at=e.at||[];for(let j=(e.i==null?0:e.i+1);j<=i;j++)e.at[j]=when();e.i=i;got.push(key)}}
- if(got.length){if(p===S){if(!quiet)got.forEach(k=>dhNotice(k))}else if(!p.coop)dhAutoWear(p)}
+ if(got.length){if(p===S){if(!quiet)got.forEach(k=>dhNoteGate(k))}else if(!p.coop)dhAutoWear(p)}
  dhApplyFx(p);return got}
 function dhInc(p,key,d){if(!p||!DH[key]||(DH[key].me&&p!==S))return;const D=bag(p);const e=D[key]||(D[key]={n:0});e.n=(e.n||0)+(d||1);return dhSync(p)}
 window.dhSync=dhSync;window.dhInc=dhInc;
@@ -148,11 +153,22 @@ let RUMT=null;
  kitTitleDef=function(id){try{if(typeof id==="string"&&/^dh-/.test(id)){const [k,pid]=id.slice(3).split("@");return dhObj(byPid(pid||"me"),k)}}catch(e){}return d0.apply(this,arguments)}})();
 /* ---------- counting hooks ---------- */
 (function(){if(typeof cFin7!=="function")return;const f0=cFin7;cFin7=function(k,kind,L){const r=f0.apply(this,arguments);
- try{(L||[]).slice(0,3).forEach((x,i)=>{const p=x&&x.p;if(!p||p.coop||(p!==S&&!npcOK()))return;const D=bag(p);(D.podium=D.podium||{n:0}).n++;if(i===0&&DH["w_"+kind])(D["w_"+kind]=D["w_"+kind]||{n:0}).n++;dhSync(p)})}catch(e){console.error("dh",e)}return r}})();
-(function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const r=r0.apply(this,arguments);try{if(r===true&&a&&a.n&&S&&!S.dead){const m=ACTK.find(([re])=>re.test(a.n));if(m)dhInc(S,m[1])}}catch(e){console.error("dh",e)}return r}})();
-(function(){if(typeof wkMake!=="function")return;const m0=wkMake;wkMake=function(p,kind){const r=m0.apply(this,arguments);try{if(r&&p&&WORK[kind]&&!p.coop&&(p===S||npcOK()))dhInc(p,"m_"+kind)}catch(e){console.error("dh",e)}return r}})();
+ try{(L||[]).slice(0,3).forEach((x,i)=>{const p=x&&x.p;if(!p||p.coop||(p!==S&&!npcOK()))return;const D=bag(p);(D.podium=D.podium||{n:0}).n++;if(i===0&&DH["w_"+kind])(D["w_"+kind]=D["w_"+kind]||{n:0}).n++;if(i===0&&(p.rank<=BAL.dh.cond.han.rank||p.out||p.confined))(D.c_han=D.c_han||{n:0}).n++;dhSync(p)})}catch(e){console.error("dh",e)}return r}})();
+(function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const r=r0.apply(this,arguments);try{if(r===true&&a&&a.n&&S&&!S.dead){const m=ACTK.find(([re])=>re.test(a.n));if(m&&m[1]==="a_thinh")dhStreak();else if(m)dhInc(S,m[1])}}catch(e){console.error("dh",e)}return r}})();
+(function(){if(typeof wkMake!=="function")return;const m0=wkMake;wkMake=function(p,kind){const r=m0.apply(this,arguments);try{if(r&&p&&WORK[kind]&&!p.coop&&(p===S||npcOK())){const D=bag(p),e=D["m_"+kind]||(D["m_"+kind]={n:0});e.raw=(e.raw||0)+1;/* every work made (jdh2 kinhN: the atonement copies count all) */if(r.wk&&r.wk.ti>=BAL.dh.q.wk)dhInc(p,"m_"+kind)}}catch(e){console.error("dh",e)}return r}})();
 (function(){if(typeof rivalsMonth!=="function")return;const f0=rivalsMonth;rivalsMonth=function(){const r=f0.apply(this,arguments);try{if(npcOK())for(const v of rivals)if(v&&v.alive&&!v.coop)dhSync(v)}catch(e){console.error("dh",e)}return r}})();
-(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead)dhSync(S)}catch(e){console.error("dh",e)}return r}})();
+(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const t0=S&&S.turn;const r=e0.apply(this,arguments);try{if(S&&!S.dead){if(S.turn!==t0)dhThMonth();dhSync(S)}}catch(e){console.error("dh",e)}return r}})();
+/* TITLE-BAL streaks: «Sớm viếng chiều thăm» = days in a row with a Thỉnh an that went well (one per day counts); «Thái hậu ưu ái» = months in a row
+   with Thái hậu's liking ≥ BAL.dh.cond.th.v. e.cur = the streak now, e.n = her best streak (the count the steps read). */
+function dhStreak(){const D=bag(S),e=D.a_thinh||(D.a_thinh={n:0});const d=typeof wk==="function"?wk():0;if(e.last===d)return;e.cur=e.last===d-1?(e.cur||0)+1:1;e.last=d;if(e.cur>(e.n||0))e.n=e.cur;dhSync(S)}
+function dhThMonth(){const D=bag(S),e=D.c_th||(D.c_th={n:0});e.cur=(S.th||0)>=BAL.dh.cond.th.v&&!S.thDead?(e.cur||0)+1:0;if(e.cur>(e.n||0))e.n=e.cur}
+window.dhStreak=dhStreak;window.dhThMonth=dhThMonth;
+/* TITLE-BAL pacing (rec (5) «never several titles popping in the same buổi»): at most BAL.dh.note.per new-title panels a buổi; the rest wait
+   in S.dhPend and come one by one on the next buổi (the title itself is already hers; only the panel waits). */
+const bKey=()=>`${S.turn||0}.${S.tuan||0}.${S.buoi||0}`;
+function dhNoteGate(key){if(S.dhNB&&S.dhNB.k===bKey()&&S.dhNB.n>=BAL.dh.note.per){S.dhPend=S.dhPend||[];if(!S.dhPend.includes(key))S.dhPend.push(key);return}
+ if(!S.dhNB||S.dhNB.k!==bKey())S.dhNB={k:bKey(),n:0};S.dhNB.n++;dhNotice(key)}
+(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&S.dhPend&&S.dhPend.length&&(!S.dhNB||S.dhNB.k!==bKey())){const k=S.dhPend.shift();if(!S.dhPend.length)delete S.dhPend;dhNoteGate(k);if(Q.length&&typeof showModal==="function"&&$("modal").hidden&&!window.__bot)showModal()}}catch(e){console.error("dh pend",e)}return r}})();
 /* ---------- her new title: a kit reward panel, wear it now or later ---------- */
 function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")return;const up=(S.dh[key].i||0)>0;
  if(typeof log==="function"&&!RCPRE)log(up?`Danh hiệu «${o.name}» lên bậc ${KIT_TIER_NAME[Math.min(7,o.tier)]}.`:`Ngươi được danh hiệu «${o.name}».`);

@@ -125,7 +125,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 /* ---------- OR14 «Khuê các» title set (OUTSIDE_PLAN §11): first selection, Quý nhân on entry, each rare ending ----------
    jdh catalogue group "kc" (shown only once earned, like «Thiên mệnh»); cosmetic, one step, tier BAL.kcg.title.*; kept across lives in
    localStorage "ctm-kct" (the Sổ luân hồi lists them) and worn again in a later life like the Thiên mệnh titles (jge geCarry). */
-const KCT={kc_tuyen:["Trâm hoa ngự ban","Qua kỳ tuyển tú, được giữ thẻ bài vào cung"],kc_quy:["Khuê tú danh môn","Từ khuê các vào cung, phong ngay Quý nhân"],
+const KCT={kc_tuyen:["Trâm hoa ngự ban",`Qua kỳ tuyển tú với tiếng thơm khắp kinh thành (Danh từ ${BAL.kcg.title.tuyenDanh} trở lên), được giữ thẻ bài vào cung`],kc_quy:["Khuê tú danh môn","Từ khuê các vào cung, phong ngay Quý nhân"],
  kc_R1:["Thuyền xuôi phương Nam","Kết cục hiếm ngoài cung: bỏ trốn cùng người thương"],kc_R2:["Thanh mai kết tóc","Kết cục hiếm ngoài cung: thanh mai thành phu quân"],
  kc_R3:["Hội thơ ngộ vương","Kết cục hiếm ngoài cung: làm Vương phi"],kc_R4:["Cân quắc Nhạn Môn","Kết cục hiếm ngoài cung: nữ tướng Nhạn Môn"],
  kc_R5:["Sứ hoa hòa thân","Kết cục hiếm ngoài cung: hòa thân thay công chúa"],kc_R6:["Muối trắng Giang Nam","Kết cục hiếm ngoài cung: nữ thương Giang Nam"]};
@@ -134,7 +134,9 @@ function kctStore(){const g=store.get("ctm-kct");return g&&typeof g==="object"&&
   BAL.dh.T[k]={n:[1],b:/^kc_R/.test(k)?BAL.kcg.title.rare:BAL.kcg.title.tier,ch:[]}}}catch(e){console.error("kct",e)}})();
 function kctGive(k){try{if(!KCT[k]||!S)return;const g=kctStore();const life=(window.geK&&typeof geK.lifeNo==="function"?geK.lifeNo():typeof lifeLog==="function"?lifeLog().length+1:1);/* geK.lifeNo = jge geLifeNo (it lives in jge's closure): the one count */const e=g.t[k]||(g.t[k]={lives:[],first:{life,who:S.name}});if(!e.lives.includes(life))e.lives.push(life);store.set("ctm-kct",g);
   S.dh=S.dh||{};if(!S.dh[k]||S.dh[k].i==null||S.dh[k].i<0){if(typeof dhInc==="function")dhInc(S,k,1);else S.dh[k]={n:1,i:0,at:[""]}}log(`<b class="g">Danh hiệu mới: «${KCT[k][0]}».</b>`)}catch(e){console.error("kct",e)}}
-(function(){const e0=kcEnter;kcEnter=function(rank){const r=e0.apply(this,arguments);try{if(S.kc&&S.kc.inPal){kctGive("kc_tuyen");if(S.rank>=BAL.kcg.title.quyRank)kctGive("kc_quy")}}catch(e){}return r}})();
+(function(){const e0=kcEnter;kcEnter=function(rank){const r=e0.apply(this,arguments);try{if(S.kc&&S.kc.inPal){/* TITLE-BAL (owner OD 26/11 ~18:20Z (3)(5)): ONE entry title, never two at once, and never just for walking in:
+   Quý nhân or higher → «Khuê tú danh môn»; else «Trâm hoa ngự ban» only with her home Danh ≥ BAL.kcg.title.tuyenDanh (a lady the capital speaks of) */
+   if(S.rank>=BAL.kcg.title.quyRank)kctGive("kc_quy");else if((S.danh||0)>=BAL.kcg.title.tuyenDanh)kctGive("kc_tuyen")}}catch(e){}return r}})();
 (function(){const e0=kcEnd;kcEnd=function(id){try{const m=/^kcR(\d)$/.exec(id||"");if(m)kctGive("kc_R"+m[1])}catch(e){}return e0.apply(this,arguments)}})();
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);try{const g=kctStore();if(S&&BAL.kcg.title.carry){S.dh=S.dh||{};for(const k in g.t)if(DH_CAT[k]&&!S.dh[k])S.dh[k]={n:1,i:0,at:[""],carry:1}}}catch(e){}return r}})();
 if(typeof pastHTML==="function")(function(){const p0=pastHTML;pastHTML=function(){const h=p0.apply(this,arguments);try{const g=kctStore();const n=Object.keys(g.t).filter(k=>KCT[k]).length;if(!n)return h;

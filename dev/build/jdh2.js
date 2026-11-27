@@ -109,7 +109,7 @@ function dhCheck(p){if(!p||!alive(p))return;const n=snap(p),o=p.dhSn;p.dhSn=n;if
  if(kind)window.dhConfiscate(p,kind,why?`${KIND[kind]} (${why})`:KIND[kind])}
 window.dhCheck=dhCheck;
 /* ---------- 4. ATONEMENT ---------- */
-function kinhN(p){const e=p&&p.dh&&p.dh.m_kinh;return e?(e.n|0):0}
+function kinhN(p){const e=p&&p.dh&&p.dh.m_kinh;return e?((e.raw!=null?e.raw:e.n)|0):0}/* TITLE-BAL: every copy (raw), the title counts only fine ones */
 function confOpenOK(p){const c=p&&p.dhConf;return !!c&&(c.hieu||(c.titles||[]).length)&&!p.out&&!((p.confined||0)>0)&&S.turn-(c.at|0)>=C().wait}
 function confState(p){const c=p.dhConf;if(!c)return null;const B=C();if(!c.open)return{open:0,left:Math.max(0,B.wait-(S.turn-(c.at|0))),blocked:p.out?"đang ở lãnh cung":(p.confined||0)>0?"đang bị cấm túc":""};
  const kn=kinhN(p)-(c.kn|0),dn=(p.danh|0)-(c.d0|0),dN=congNeed(c.d0);return{open:1,kn:Math.max(0,kn),kNeed:B.kinh,dn:Math.max(0,dn),dNeed:dN,done:kn>=B.kinh||dn>=dN}}
