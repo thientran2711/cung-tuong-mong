@@ -54,5 +54,8 @@ Plan for a worker KID-STAGE (small, ~1 worker, 0 art credits): 1. reproduce on i
 ## Handover
 Done in one context (~45 %). Nothing pending except the coordinator's review of review/sil-eunuch and the KID-STAGE worker.
 
-## 6. quickcheck — HONEST RESULT: FAIL (not green), cause not isolated
-`bash dev/tools/quickcheck.sh` on 452dda71 (1346 s): `QUICKCHECK FAIL · CORE GATES FAIL · G4 95-next-dead` (gate text: «FIX-6 FAIL 1», it ran 859 s with 11 life rerolls «ban hoa»; this gate plays random lives) and perf `tabMs 619 vs live 457 (limit 594)`. open 2276 ms OK, **old save ok**. I ran other node/chromium jobs on the same box during the run (perf is load-sensitive) and my one manual re-run of next-dead.js / quickcheck.js hit the tool time limit, so I could NOT show these two are unrelated to the silhouette change; none of the touched code is in the tab/render path except the small kitSilG calls, and no silhouette test failed. The coordinator should re-run quickcheck on a quiet box (or compare 95-next-dead on origin/main) before accepting RV.
+## 6. quickcheck — PRE-EXISTING on main (re-run per FOREMAN C, quiet box, back to back)
+Rebased review/sil-eunuch onto origin/main 98c77517 (index.html/sw.js conflicts = rebuild) → local **a366a2b8** (the force-push of the rebased branch was DENIED by the permission classifier, so origin/review/sil-eunuch is still the old 452dda71; coordinator: allow it or tell me a new branch name).
+- branch a366a2b8: `QUICKCHECK FAIL · CORE GATES FAIL · G4 80-dialog-fixed · 850 s` — «FAIL 1180x820/755x1000 frame size XL: left figure same size + position in 5 dialogs» (figure heights 770 vs 767 on 3-dai-ket-cuc). open OK, **old save ok**, perf NOT a failure (tabMs runs 574/567/452, no perf FAIL).
+- origin/main 98c77517: `QUICKCHECK FAIL · CORE GATES FAIL · G4 80-dialog-fixed · 874 s` with the SAME FAIL line and the SAME numbers (770/767 px, same x/y/w/h) → **PRE-EXISTING on main, not caused by this branch** (dialog figures, not stage silhouettes; the gate that failed on my first run, 95-next-dead, passed this time → that one and the perf tabMs blip were load noise/flaky).
+- sil-role.js PASS on a366a2b8 (Fold).
