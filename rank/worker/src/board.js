@@ -68,7 +68,7 @@ export function makeBoard(db,now){now=now||(()=>Date.now());
   const trail=Array.isArray(L.trail)?L.trail.slice(0,80).map(t=>Array.isArray(t)?[I(t[0]),I(t[1]),T(t[2],2),I(t[3])]:t):null;
   return{n:T(L.n,30),o:T(o,8),on:R.RULES.origins[o]||T(L.on,48),mr:I(L.mr),sr:I(L.sr),mama:!!L.mama,out:!!L.out,endk:T(L.endk,40),fate:T(L.fate,140),
    alive:!!L.alive,rare:!!L.rare,y:I(L.y),age:I(L.age),age0:I(L.age0),sons:I(L.sons),daus:I(L.daus),tz:I(L.tz),danh:I(L.danh),duc:I(L.duc),tg:I(L.tg),
-   fig:fig(L.fig),por:fig(L.por),mode:L.mode==="coop"?"coop":"solo",seed:I(L.seed)>>>0,ver:T(L.ver,24),t0:I(L.t0),trail}}
+   fig:fig(L.fig),por:fig(L.por),mode:L.mode==="coop"?"coop":"solo",pre:R.RULES.preN[L.pre]?String(L.pre):undefined,seed:I(L.seed)>>>0,ver:T(L.ver,24),t0:I(L.t0),trail}}
  const H={
   async hello(b,ip){if(!rate("h:"+ip,DAY,LIMITS.helloIpDay))return[429,{ok:false,why:"rate"}];const id=await ids(b.gid);if(!id)return[400,{ok:false,why:"gid"}];
    const p=ensure(id);if(!p)return[403,{ok:false,why:"gid"}];return[200,{ok:true,me:meView(p)}]},

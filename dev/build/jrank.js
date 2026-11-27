@@ -33,21 +33,22 @@ async function rkHello(force){const d=rkIdGet();if(!force&&d.pn&&Date.now()-(d.h
 function rkSrvNever(){return !!(S&&S.srv&&!S.srv.risen)}
 function rkTrack(){if(!S||S.dead)return;const k=S.rk=S.rk||{t:[],mr:-1,sr:-1,k:(S.kids||[]).length,a0:S.age-((S.year||1)-1)};const y=(S.year||1)-1,m=S.month||1;
  try{S.rkGid=rkIdGet().gid}catch(e){}
- if(!rkSrvNever()){const r=S.rank|0;if(r>k.mr){if(k.t.length<70)k.t.push([y,m,"r",r]);k.mr=r}}
+ if(rankHeld(S)){const r=S.rank|0;if(r>k.mr){if(k.t.length<70)k.t.push([y,m,"r",r]);k.mr=r}}
  if(S.srv){const r=S.srv.rk|0;if(r>k.sr){if(k.t.length<70)k.t.push([y,m,"s",r]);k.sr=r}if(S.srv.mama)k.mama=1}
  const nk=(S.kids||[]).length;while(nk>k.k){const c=S.kids[k.k];if(k.t.length<78)k.t.push([y,m,"k",c&&c.sex==="m"?1:0]);k.k++}}
 function rkSummary(endk,fate){const k=S.rk||{};const kids=S.kids||[];const y=Math.max(0,(S.year||1)-1);
- const mr=rkSrvNever()?-1:Math.max(S.rank|0,S.maxRank|0,k.mr==null?-1:k.mr);const sr0=S.srv?Math.max(S.srv.rk|0,k.sr==null?-1:k.sr):-1;/* the board keeps its 5 servant steps (rank/worker score.js): a six-rung maid rung is sent as its tier (BAL.srvRk.tier, maid-ladder-6) */const sr=sr0>=0?srkTier(sr0):-1;
+ const TR=lifeTopRank(S);const mr=TR.r<0?-1:Math.max(TR.r,k.mr==null?-1:k.mr);/* ONE CORE (j32 lifeTopRank): the rank she really held */const sr0=S.srv?Math.max(S.srv.rk|0,k.sr==null?-1:k.sr):-1;/* the board keeps its 5 servant steps (rank/worker score.js): a six-rung maid rung is sent as its tier (BAL.srvRk.tier, maid-ladder-6) */const sr=sr0>=0?srkTier(sr0):-1;
  let fig="",por="";try{fig=typeof figFor==="function"?figFor(S)||"":""}catch(e){}try{por=typeof figFor==="function"?figFor(S,"por")||"":""}catch(e){}
  if(!por)try{por=fsrc(S.fc,"")}catch(e){}
  /* the server keeps only "img/<file>.webp": strip the CDN base (assemble.py turns every quoted "img/…" literal into IMG_BASE+"img/…", so no quoted img/ here) */
  const cut=s=>{const m=String(s||"").match(/(?:^|\/)(img\/[^?#]+)$/);return m?m[1]:""};
  let alive=false;try{alive=typeof overAlive==="function"?!!overAlive(fate):false}catch(e){}
- return{n:S.name,o:S.origin&&S.origin.k||"",on:S.origin&&S.origin.n||"",mr,sr,mama:!!(k.mama||(S.srv&&S.srv.mama)),out:!!S.out,endk,fate:String(fate||"").slice(0,140),
+ const pre=(st=>st==="home"||st==="tunu"?st:undefined)(TR.st);/* D-ENDRANK: never entered = its TRUE standing (BAL.rank.preN), Công danh 0 */
+ return{n:S.name,o:S.origin&&S.origin.k||"",on:S.origin&&S.origin.n||"",mr,sr,pre,mama:!!(k.mama||(S.srv&&S.srv.mama)),out:!!S.out,endk,fate:String(fate||"").slice(0,140),
   alive:alive||/Thái hậu|Thái phi/.test(endk),rare:!!(S.rareEnd||S.rare||/Cơ duyên hiếm/.test(String(fate||""))),y,age:S.age|0,age0:Math.max(12,Math.min(40,(S.age|0)-y)),
   sons:kids.filter(x=>x&&x.sex==="m").length,daus:kids.filter(x=>x&&x.sex!=="m").length,tz:Math.min(kids.filter(x=>x&&x.sex==="m").length,(S.pdw&&S.pdw.tz||[]).length),
   danh:Math.round(S.danh||0),duc:Math.round(S.duc||0),tg:(S.pdN&&S.pdN.tg)|0,fig:cut(fig),por:cut(por),
-  mode:rkCoop()?"coop":"solo",seed:(S.rkSeed>>>0)||0,ver:RK_VER,t0:S.rkT0||0,trail:(k.t||[]).slice(0,80)}}
+  mode:rkCoop()?"coop":"solo",seed:(S.rkSeed>>>0)||0,ver:RK_VER,t0:S.rkT0||0,trail:(k.t||[]).filter(t=>!pre||t[2]!=="r").slice(0,80)}}
 /* ---------- queue (offline: kept until sent) ---------- */
 function rkQ(){const q=store.get(RK_Q);return Array.isArray(q)?q:[]}
 function rkRes(lid){const r=store.get(RK_RES)||{};return lid?r[lid]:r}
@@ -99,7 +100,7 @@ rkBase();if(typeof deser==="function")(function(){const d0=deser;deser=function(
 const RK={tab:"lives",data:{},busy:0,err:0,view:"list",lid:"",ends:{},msg:""};
 /* the kit frame of the highest standing of that life (KIT 4.3): consort rank 0–7 → frame-consort-N, servant title → frame-maid-N, Ma ma → frame-mama */
 function rkRole(ph){const R=BAL.rank;ph=String(ph||"");let i=R.consortN.indexOf(ph);if(i>=0)return{role:"consort",rank:i};
- if(ph==="Ma ma")return{role:"mama",rank:3};i=R.servantN.indexOf(ph);if(i>=0)return{role:"maid",rank:i};return ph?{role:"maid",rank:1}:{role:"other"}}
+ if(ph==="Ma ma")return{role:"mama",rank:3};if(R.preN&&Object.values(R.preN).includes(ph))return{role:"other",rank:null};/* D-ENDRANK: never entered (Chưa vào cung / Tú nữ) = no rank, no maid decor */i=R.servantN.indexOf(ph);if(i>=0)return{role:"maid",rank:i};return ph?{role:"maid",rank:1}:{role:"other"}}
 const rkImg=v=>v&&typeof IMG_U==="function"?IMG_U(v):v||"";/* stored "img/…" → the picture CDN */
 function rkFace(row){const r=rkRole(row.p);return{src:rkImg(row.por),ini:String(row.n||row.pn||"?").trim().charAt(0)||"?",col:"#b08a5a",
  __kr:Object.assign({origin:null,sex:"f",kid:false},r)}}
@@ -130,7 +131,7 @@ function rkRulesSpec(){const R=BAL.rank;const n=v=>`<b>${v}</b>`;
  return{kind:"rule",cls:"krkp",title:`Cách tính ${RK_T.unit}`,sub:"điểm của một kiếp, tính lúc kiếp khép lại",sections:[
  {html:`<p class="kpnote">Mỗi kiếp khép lại được chấm một số ${RK_T.unit}: cộng các phần dưới đây. ${RK_T.screen} tự tính lại từ sổ kiếp gửi lên, số tự khai không được nhận.</p>`},
  {h:`${own?"Kiếp vừa rồi của ta":"Ví dụ một kiếp"}: ${who}`,html:`<p class="kpnote">${lifeLine}</p>`+kitRows(sc.parts.map(([k,v])=>[k,`+${v}`,"g"]).concat(sc.partial?[["Kiếp dở dang","chỉ tính một nửa","r"]]:[]).concat([[RK_T.unit,n(sc.score),"t"]]))},
- {h:"Phẩm cao nhất từng đạt",html:kitTiles(R.consortN.map((x,i)=>[x,`${R.consort[i]}`]))+`<p class="kpnote">Cung nữ chưa lên phi tần: ${R.servantN.map((x,i)=>`${x} ${R.servant[i]}`).join(", ")}, Ma ma ${R.servant[3]}. Lấy số cao nhất.</p>`},
+ {h:"Phẩm cao nhất từng đạt",html:kitTiles(R.consortN.map((x,i)=>[x,`${R.consort[i]}`]))+`<p class="kpnote">Cung nữ chưa lên phi tần: ${R.servantN.map((x,i)=>`${x} ${R.servant[i]}`).join(", ")}, Ma ma ${R.servant[3]}. Lấy số cao nhất.</p>${R.preN?`<p class="kpnote">Kiếp chưa vào cung (${Object.values(R.preN).join(", ")}): không có phẩm, ${RK_T.unit} bằng 0, đứng dưới mọi kiếp trong cung.</p>`:""}`},
  {h:"Kết cục",html:kitTiles(E.map(([k,v])=>[k,`${v}`]))+`<p class="kpnote">Kết cục khác (chết, lãnh cung, bị đuổi…) không thêm.</p>`},
  {h:"Cộng thêm",rows:[
   ["Năm trong cung",`${R.year} mỗi năm tròn, nhiều nhất ${R.yearCap} năm`,"t"],["Con cái",`hoàng tử ${R.son}, công chúa ${R.dau}; nhiều nhất ${R.kidCap} người con`,"t"],
@@ -229,7 +230,7 @@ setInterval(()=>{if(rkQ().length&&navigator.onLine!==false)rkFlush()},60000);
 setTimeout(()=>{rkHello().then(()=>rkFlush())},1500);
 /* ---------- kit CSS (tokens of j79; frame and stage of j90) ---------- */
 (function(){const st=document.createElement("style");st.id="kitrank";st.textContent=`
-#modal.krkp{z-index:9100}
+html body #modal.krkp{z-index:9100}/* D-ENDRANK: jk4 kit-dialog-stack «html body #modal:not(.kptitle){z-index:42}» outranked this, so «Cách tính» / «Mã khôi phục» / «Đổi tên hiệu» opened UNDER #krkov (8990) */
 #krkov{position:fixed;inset:0;z-index:8990;display:flex;align-items:stretch;justify-content:center;background:#2a1a12b8}
 .kpod.krk{grid-template-rows:auto auto minmax(0,1fr) auto;cursor:auto;user-select:text;-webkit-user-select:text}
 .krk .kpod-hd{padding:10px clamp(8px,2.5vw,32px) 0;justify-content:stretch}

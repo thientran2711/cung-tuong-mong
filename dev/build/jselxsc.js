@@ -44,7 +44,8 @@ function selxFigP(p){if(p==="emp")return{kind:"emp"};if(p==="th")return{kind:"th
 (function(){if(typeof figRoles!=="function")return;const r0=figRoles;figRoles=function(who){const r=r0.apply(this,arguments);return !r.length&&who&&who.tuNu?["consort"]:r};window.figRoles=figRoles})();
 /* LAW 11 (whole group): during the 3 days she is a TÚ NỮ, not rank 0 — the HUD rank chip (#me-r, as the maid / kc modes already do) and her rank word in the one face core rkOfFace (j59 name tags,
    stage portrait pMe, podium) said «Quý nhân» (RANKS[0]) before any edict */
-(function(){const T=()=>{try{return selxDaysOn()}catch(e){return false}};
+(function(){const T=()=>{try{return selxDaysOn()||rankStage(S)==="tunu"}catch(e){return false}};/* D-ENDRANK: ONE CORE rankStage (j32) — also after ban hoa (S.dead) and before the one-card answer */
+ if(typeof pMe==="function"){const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);try{if(T()&&!S.out)f.rw="Tú nữ"}catch(e){}return f};window.pMe=pMe}
  if(typeof rkOfFace==="function"){const f0=rkOfFace;rkOfFace=function(kind,o){const g=f0.apply(this,arguments);return (o===S||o&&o.tuNu)&&kind==="consort"&&T()?[g[0],"Tú nữ"]:g};window.rkOfFace=rkOfFace}
  /* RV-SELX (same group): the other tú nữ too (day-3 «Thường tại Bạch Nghi Tu» before the edict; OD 23/11 ~22:53Z the rank is known only at the sắc phong), and rkName (j8: k61 name masks, Sổ ghi, news) as jkc / jkc2 do */
  if(typeof rkName==="function"){const n0=rkName;rkName=function(p){return (p===S||p&&p.tuNu)&&T()?"Tú nữ":n0.apply(this,arguments)};window.rkName=rkName}
