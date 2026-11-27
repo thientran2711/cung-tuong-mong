@@ -158,3 +158,7 @@ rv PASS cb17c233. Extra fix: Bảng vàng kit dialogs open above #krkov (were un
 ## 7. MERGE RE-CHECK (opus BIG, session_01D3E3Naxk5ytaK9o5afgRus) — PASS 7a646501
 7a646501 = cb17c233 + merge of LIVE a22cf45d; FF from LIVE a22cf45d. Branch source delta vs LIVE (dev/build, rank, dev/test) byte-identical to cb17c233's vs 4cfcda61; jksize.js kszRankName line intact after LIVE's auto-merge. Build same (only CTM_BI); end-maxrank.js ALL PASS; one-core ×3 PASS. Deploy note of §4 stands.
 VERDICT: PASS 7a646501 — no BLOCKING.
+
+## 8. MERGE RE-CHECK (opus BIG, session_01D3E3Naxk5ytaK9o5afgRus) — PASS f0ec2379
+f0ec2379 = 7a646501 + merge of LIVE fa722503 (title-bal); FF from LIVE fa722503. Branch source delta vs LIVE (dev/build, rank, dev/test) byte-identical to 7a646501's vs a22cf45d. Build same (only CTM_BI); end-maxrank.js ALL PASS; one-core ×3 PASS. Deploy note of §4 stands.
+VERDICT: PASS f0ec2379 — no BLOCKING.
