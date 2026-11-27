@@ -102,7 +102,11 @@ function kriPlace(R){const N=R.tiles.length;if(!N)return;const g=R.geo();let fi=
  if(R.nameEl&&R.__nf!==fi){R.__nf=fi;const it=R.items[fi];const G=typeof KIT_GRADE!=="undefined"?KIT_GRADE[Math.max(0,Math.min(4,it.grade|0))]:null;
   R.nameEl.innerHTML=`<b>${kriE(it.name)}</b><small>${G&&G.n?`<span class="kri-gr" style="--gc:${G.c||"#888"}">${kriE(G.n)}</span> `:""}${kriE(it.sub||"")}</small>`;
   /* K-RING-SUBLINE (KK61): the hint goes under the name block's REAL height (a sub line that wraps to 2–3 lines on Fold overlapped the fixed +58 px hint) */
-  if(R.hint){const t0=parseFloat(R.nameEl.style.top)||0;R.hint.style.top=Math.max(t0+58,t0+R.nameEl.offsetHeight+6)+"px"}}}
+  kriHintAt(R)}}
+/* K-RING-SUBLINE (KK61): hint under the name block's real height; also re-placed whenever that block changes size (filled while the layer was
+   still hidden = height 0 → the +58 fallback; RV-176 Fold cover 412x1058: a 6-line sub line ran 11 px over the hint) */
+function kriHintAt(R){try{if(!R.hint||!R.nameEl)return;const nm=R.nameEl;const t0=parseFloat(nm.style.top)||0;R.hint.style.top=Math.max(t0+58,t0+nm.offsetHeight+6)+"px";
+ if(!nm.__kro&&typeof ResizeObserver==="function"){nm.__kro=new ResizeObserver(()=>{if(R.nameEl===nm)kriHintAt(R)});nm.__kro.observe(nm)}}catch(e){}}
 /* ---------- spin: swipe with inertia, ‹ ›, tap a side item, tap the bright item ---------- */
 function kriBand(R){const L=R.L;let x0=0,y0=0,last=0,lt=0,drag=0,moved=0;
  const step=()=>{const g=R.geo(),N=Math.max(3,Math.min(KRING_MATH.seats,R.tiles.length));return g.Rx*2*Math.PI/N*.75};
@@ -206,7 +210,11 @@ function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kip
  const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?V.name:""):m.pid==="giftto"?((M.querySelector(".kptitle")||{}).textContent||""):"";
  const why=(c,i)=>{const b=ops.querySelector(`.opt[data-m="${i}"]`);return c.kgwhy||(b&&b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):kipLocked(c)?"Thiếu bạc":"")};
  kitRingItem.open({key:"gift:"+m.pid,title:(M.querySelector(".kptitle")||{}).textContent||verb,sub:who?`${verb} cho ${kriE(who)}`:"",bg:kriBg(),
-  items:()=>L.filter(([c])=>S.inv[c.ik]).map(([c,i])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);return{id:i,src:I.src,name:I.name,grade:I.grade,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}}),
+  items:()=>{/* K-RING-QTY (KK61, RV-176 nit, law 6c): the grid folds same-kind same-offer twins into ONE tile ×N (jgpick inv-stack) and removes their cards —
+    the ring shows the same count on that tile (kit stack badge), so no piece of her chest is out of sight */
+   const sg=c=>{const e=S.inv[c.ik];return typeof invCan==="function"&&invCan(e)?[invSig(e),kipLocked(c),c.n||"",c.x||""].join("#"):null};const QN=new Map(),SEEN=new Set();
+   m.opts.forEach(c=>{if(!c||c.ik==null||!S.inv[c.ik])return;const s=sg(c);if(!s)return;QN.set(s,QN.has(s)?QN.get(s)+1:1+(typeof invMoreOnce==="function"?invMoreOnce(S,S.inv[c.ik],SEEN):0))});
+   return L.filter(([c])=>S.inv[c.ik]).map(([c,i])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);const s=sg(c);return{id:i,src:I.src,name:I.name,grade:I.grade,qty:s?QN.get(s)||1:1,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}})},
   /* info = the item's kit detail + the option's own kit card (odds · Tốn · Được · Mất · Kèm) — the same display copy as the old grid detail (kipDetail) */
   info:it=>{try{kipSelect(M,m,it.i);const d=M.querySelector(".kipd");if(d){const c=d.cloneNode(true);c.querySelectorAll(".kipgo").forEach(x=>x.remove());c.classList.remove("kipd");return c.innerHTML}}catch(e){}return""},
   acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{const b=ops.querySelector(`.opt[data-m="${it.i}"]`);if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark();window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
