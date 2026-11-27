@@ -184,7 +184,7 @@ agRunReg("cx3:threat",v=>{const s=p3ThreatT(v);return s?p3Res("threat",String(th
 Object.assign(window,{itemTest,hireTake,staffTam,recommend,searchMaids});
 /* ---------------- phe phái: Lập phe cùng · Xin vào phe · Rời phe · Bán đứng · Ly gián (j10 facAct for her = found / askJoin / leaveFac / sellOut / divide; the same for an NPC) ---------------- */
 function p3FacOn(){return p3On()&&!!BAL.ag.par3.fac}
-function p3FacFr(v){const F=BAL.ag.par3.fac;return others(v).filter(x=>x&&facIn(x)/* cold-faction: not her in lãnh cung (was x===S||…) */&&!facOf(x)&&!sameHouse(v,x)&&(aff(v,x)>=netTh(v,"than")||clanOf(v)===clanOf(x)&&aff(v,x)>=netTh(v,"quen")||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=netTh(v,"act")&&oan(x,e)>=netTh(x,"act"))))}
+function p3FacFr(v){const F=BAL.ag.par3.fac;return others(v).filter(x=>x&&facIn(x)/* cold-faction: not her in lãnh cung (was x===S||…) */&&!facOf(x)&&!sameHouse(v,x)&&facFrOk(v,x))}/* parity-facfix: j10 facFrOk = the ONE founding rule (her button too) */
 function p3FacJoin(v){const F=BAL.ag.par3.fac;return (S.facs||[]).filter(f=>{const l=facLeader(f);return l&&l!==v&&aff(v,l)>=netTh(v,"quen")})}
 /* facfound-parity (law 1 TWO-WAY): she can rủ an NPC to found a faction and ask to join an NPC's faction (j10 facAct lap / xin), so an NPC may rủ HER
    (p3FacFr keeps S) and ask to join HER faction (p3FacJoin keeps a faction she leads); her answer is the jrcv card (PEND.rcvAsk facFound / facJoin, 4 answers) */
