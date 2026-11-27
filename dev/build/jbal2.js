@@ -2343,7 +2343,7 @@ BAL.charge.rkPlus=[0,0,0,1,1,1,2,2];/* owner 26/11 ~21:00Z: a plain COUNT by the
    count: no buy-off / recant / silence (owner ~21:35Z). C[c].wk = the witness kinds of each charge (the «lời khai …» / «người tận mắt chứng kiến»
    names moved out of the evidence kinds pk). A found piece of a charge that still lacks witnesses goes to the witness store every other find
    (and always once its evidence is at the cap); presenting the charge spends its witnesses with its pieces. Same for her and for every NPC (law 1). */
-BAL.charge.wit={need:{nhe:0,vua:0,nang:1,tu:2}};
+BAL.charge.wit={need:{nhe:0,vua:0,nang:1,tu:2},keep:8/* REAL-PROOF (owner 27/11 ~00:10Z): the most people kept per person and charge as «who really saw it» (t.wsee[c], jcharge chSawAdd); oldest drop first */};
 BAL.charge.rep={n:3,win:36};
 BAL.charge.conf={down:1,up:1};
 for(const c in BAL.charge.C)Object.defineProperty(BAL.charge.C[c],"need",{configurable:true,enumerable:true,get(){return BAL.charge.tier[this.tier].need}});

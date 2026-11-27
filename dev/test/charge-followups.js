@@ -42,7 +42,7 @@ const A=process.argv[2]||require('path').join(__dirname,'..','..','index.html');
    ok(!u.staff.includes(su)&&/Người hầu bị mua/.test(notes()),`mua chuộc her: ${su.name} dismissed, notice row «Người hầu bị mua»`)}
   /* (c) Trình Hoàng hậu: pieces of another charge do not move the odds; pieces of the proven one do */
   const q=(rivals||[]).find(x=>x&&x.queen&&x.alive!==false);if(q&&ACT.trinhhh){clean(w);deedAdd(w,"poison",u,2,"bỏ độc");deedAdd(w,"trip",u,1,"ngáng chân");deedAdd(w,"vp",null,1,"vượt phẩm");
-   S.evc={};S.ewc={};const nm=chNeed(w,"mh");/* PUNISH-TIER: mưu hại needs tier vừa = 2 */evA(S,w,nm+chWitNeed(w,"mh"),"mh");/* PUNISH-TIER-3: + its witness */const o1=chTrinhO(S,w,q);evA(S,w,1,"vp");const o2=chTrinhO(S,w,q);
+   for(const s of allServ().filter(s=>s&&s.sid!=null).slice(0,3))chSawAdd(w,"mh","s"+s.sid);/* REAL-PROOF: real servants saw it */S.evc={};S.ewc={};const nm=chNeed(w,"mh");/* PUNISH-TIER: mưu hại needs tier vừa = 2 */evA(S,w,nm+chWitNeed(w,"mh"),"mh");/* PUNISH-TIER-3: + its witness */const o1=chTrinhO(S,w,q);evA(S,w,1,"vp");const o2=chTrinhO(S,w,q);
    ok(o1===o2,`another charge's piece does not change Trình Hoàng hậu: ${o1} = ${o2}`);
    ok(Math.round(o1-(B.trinh.base+aff(q,S)/B.trinh.affD))===nm*B.trinh.per,`${nm} proven pieces × ${B.trinh.per}: ${Math.round(o1)}`);
    const oc=ACT.trinhhh.o(S,w);ok(typeof oc==="number"&&oc>0,`card odds read the rule: ${oc}`)}else ok(true,'no Hoàng hậu in this world: (c) skipped');

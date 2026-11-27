@@ -71,16 +71,21 @@ function j78proof(v){/* what a new piece proves: the most telling real thing not
  const bad=(v.inv||[]).filter(e=>e.t||(IT[e.k]&&(itm(e.k).il||itm(e.k).mat)));if(bad.length&&!have.has("items"))return{proves:`${j78Who(v)} giấu trong rương ${bad.map(iname).join(", ")}`,ref:"items"};
  const vp=vpItems(v);if(vp.length&&!have.has("vp"))return{proves:`${j78Who(v)} dùng đồ quá phẩm: ${vp.map(e=>itm(e.k).n).join(", ")}`,ref:"vp"};
  if(dd.length)return mk(dd[0]);
- const O=others(v).filter(x=>x===S||x.alive&&!x.out).map(x=>[x,hostility(v,x)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
- const h=O.find(x=>!have.has("talk:"+key(x[0])));if(h)return{proves:`lời ${j78who(v)} nói xấu ${j78who(h[0])} sau lưng`,ref:"talk:"+key(h[0]),aim:key(h[0])};
- const t0=O.length?O[0][0]:(queenP()&&queenP()!==v?queenP():S);const c=(S.evd[v.id]||[]).filter(e=>e.ref&&e.ref.indexOf("talk:"+key(t0))===0).length;return{proves:`lời ${j78who(v)} nói xấu ${j78who(t0)} sau lưng, lần thứ ${c+1} có người nghe thấy`,ref:"talk:"+key(t0)+":"+c,aim:key(t0)}}
-function j78mkEvd(v,ctx){const c=ctx||{};const p=c.proves?{proves:c.proves,ref:c.ref||null,aim:c.aim}:j78proof(v);
+ /* REAL-PROOF (owner 27/11 ~00:10Z, law 6a): a piece exists only for a real thing — a real deed in her ledger (jtruth deedsOf: the deeds the evidence cap
+    is made of), else talk her Tai mắt TRULY overheard (a «để bụng» fact learned about v, S.intel), once per person; never an invented «nói xấu … lần thứ N» */
+ try{const W=deedsOf(v).filter(d=>d&&d.x);const tr=d=>"td:"+(d.at==null?"o":d.at+":"+d.k+":"+(d.t||""));const w=W.slice().reverse().find(d=>!have.has(tr(d)));if(w)return{proves:`${j78Who(v)} ${w.x}`,ref:tr(w),aim:w.t};
+  if(W.length){const d=W[W.length-1];return{proves:`${j78Who(v)} ${d.x}`,ref:tr(d)+":"+(S.evd[v.id]||[]).length,aim:d.t}}}catch(e){}
+ const heard=(S.intel&&S.intel[v.id]||[]).some(x=>x.kind==="hate"&&/để bụng/.test(x.txt||""));
+ if(heard){const O=others(v).filter(x=>x===S||x.alive&&!x.out).map(x=>[x,hostility(v,x)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);const h=O.find(x=>!have.has("talk:"+key(x[0])));
+  if(h)return{proves:`lời ${j78who(v)} nói xấu ${j78who(h[0])} sau lưng, tai mắt nghe được`,ref:"talk:"+key(h[0]),aim:key(h[0])}}
+ return null}
+function j78mkEvd(v,ctx){const c=ctx||{};const p=c.proves?{proves:c.proves,ref:c.ref||null,aim:c.aim}:j78proof(v);if(!p)return null;/* REAL-PROOF: nothing real behind it → no record */
  return {n:++J78.seq,w:c.legacy?null:wk(),when:c.legacy?"":j78when(),how:c.how||"Tai mắt của ngươi",proves:p.proves,ref:p.ref,aim:p.aim||null}}
 /* keep S.evd in step with the counters; announce new pieces with what they prove and what they allow now */
 function evdSync(ctx){if(!S||!rivals)return;S.evd=S.evd||{};const legacy=!S.evdV;const fresh=[];
  for(const v of rivals){const L=S.evd[v.id]=S.evd[v.id]||[];const n=Math.max(0,v.ev||0);if(L.length>n)L.splice(0,L.length-n);
   while(L.length<n){let c=ctx||J78.ctx;if(legacy)c={legacy:1,how:"Đã có từ trước khi sổ chứng cứ được lập"};else if(!c){c={how:"Tai mắt của ngươi"}/* owner 16:55Z: never the text of whatever log line last named her (a gift is not evidence) */}
-   const e=j78mkEvd(v,c);L.push(e);if(!legacy)fresh.push([v,e])}}
+   const e=j78mkEvd(v,c);if(!e)break;L.push(e);if(!legacy)fresh.push([v,e])}}
  S.evdV=1;J78.lseq=S.logSeq||0;if(fresh.length&&!S.dead){const by={};for(const [v,e] of fresh)(by[v.id]=by[v.id]||[v,[]])[1].push(e);for(const id in by){const [v,E]=by[id];log(j78gainTxt(v,E))}J78.lseq=S.logSeq||0}}
 function j78gainTxt(v,E){const A=evidenceActs(v);const tw=whyTime(2);const ok=A.filter(a=>!a.why||a.why===tw).map(a=>`${a.n} (${a.gain[0]||""})`);const need=A.filter(a=>a.why&&/chứng cứ/.test(a.why)).map(a=>`${a.n}: ${a.why}`);
  /* owner 11/15 16:55Z: the line says where the evidence came from (who found what, by which road), one source per piece, never another
