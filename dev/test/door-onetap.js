@@ -29,7 +29,7 @@ const RUN=String.raw`(()=>{window.__bot=1;const R={fail:[],warn:[],n:{door:0,one
     const ts=rows.map(x=>x.t);if(new Set(ts).size!==ts.length)F("tier dup "+r.k);
     for(const x of rows){const free=x.T.filter(m=>!m.off);for(let s=0;s<(harm?12:1);s++){const m=ONE.pick(r,x.T,"s"+s+":"+Math.random());if(!m)continue;R.n.pick++;got(r,m);
       if(ONE.tierOf(r,m)!==x.t)F("HARM tier not bounded: "+r.k+" "+x.t+" picked "+T(m.n)+" ("+ONE.tierOf(r,m)+")");
-      if(!harm){const best=Math.max(...free.map(ONE.lv));if(ONE.lv(m)<best)F("tier pick worse than best: "+r.k+" "+x.t+" "+T(m.n))}}}}
+      if(!harm){const best=Math.max(...free.map(ONE.lv));if(ONE.lv(m)<best)F("tier pick worse than best: "+r.k+" "+x.t+" "+T(m.n));free.forEach(o=>{if(ONE.lv(o)<ONE.lv(m))R.domin[key(r,o)]=1})}}}}
    else{R.n.one++;const free=L.filter(m=>!m.off);if(!free.length)continue;
     for(let s=0;s<(harm?12:1);s++){const m=ONE.pick(r,L,"s"+s+":"+Math.random());got(r,m);R.n.pick++;
      if(!harm){const best=Math.max(...free.map(ONE.lv));if(ONE.lv(m)<best)F("ONE pick worse than best: "+r.k+" "+T(m.n));else R.n.best++;
@@ -54,7 +54,7 @@ const RUN=String.raw`(()=>{window.__bot=1;const R={fail:[],warn:[],n:{door:0,one
   for(const b of document.querySelectorAll("#panel button[data-ddoor]")){R.n.deck++;const nm=b.dataset.ddoor;if(SPLITD.has(nm))F("split deck door still shown: "+nm);
    const r0=ONE.deckRow(b);const r=r0?Object.assign({},r0,{n:nm}):{k:"?",n:nm};const md=ONE.mode(r.k);if(md==="keep")continue;const L=ONE.deckM(b);see(r,L);
    const tiers=["nhẹ","vừa","nặng"].filter(x=>L.some(m=>ONE.tierOf(r,m)===x));
-   if(md==="tier"&&tiers.length>=2){for(const x of ONE.tierRows(r,L,"me")){const m=ONE.pick(r,x.T,"d"+Math.random());got(r,m);if(m&&ONE.tierOf(r,m)!==x.t)F("deck tier not bounded "+nm)}}
+   if(md==="tier"&&tiers.length>=2){for(const x of ONE.tierRows(r,L,"me")){const m=ONE.pick(r,x.T,"d"+Math.random());got(r,m);if(m&&ONE.tierOf(r,m)!==x.t)F("deck tier not bounded "+nm);if(m)x.T.filter(o=>!o.off).forEach(o=>{if(ONE.lv(o)<ONE.lv(m))R.domin[key(r,o)]=1})}}
    else{const free=L.filter(m=>!m.off);const m=ONE.pick(r,L,"d"+Math.random());got(r,m);if(m){const best=Math.max(...free.map(ONE.lv));if(ONE.lv(m)<best)F("deck pick worse "+nm);free.forEach(o=>{if(ONE.lv(o)<ONE.lv(m))R.domin[key(r,o)]=1})}}}}
  /* one real deck tap per door name */{AA.scen("cao");deal();render();AA.show(AA.surfaces().find(x=>x.id==="act"));const b=document.querySelector("#panel button[data-ddoor]:not([disabled])");
   if(b){Q.splice(0);ONE.last=null;b.click();if(Q.length&&Q[0].opts){const o=Q[0].opts.find(x=>x.go&&!x.off);Q.splice(0);if(o)o.go()}if(!ONE.last)F("deck tap ran nothing: "+b.dataset.ddoor);R.n.taps++}}

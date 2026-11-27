@@ -92,10 +92,10 @@ function pick(r,L,seed){const ok=L.filter(m=>!m.off);if(!ok.length)return null;c
  if((M[r.k]||{}).harm)return ok[h%ok.length];
  /* FAVOUR: the members whose odds WORD is the best word she has (never worse than her best old way, as she reads it), then the pref
     (his liked topic she knows / his favourite art · her strongest), then equal chance among the rest (seeded): variety of real outcomes, same word */
- const lv=m=>{const o=oddsM(m);return o>=100?KIT_ODDS.length:(typeof oddsLv==="function"?oddsLv(o):Math.floor(o*KIT_ODDS.length/100))};
+ /* a sure way and a «Rất vững» way read the same top word to her: one band */const lv=m=>{const o=oddsM(m);return o>=100?KIT_ODDS.length-1:(typeof oddsLv==="function"?oddsLv(o):Math.floor(o*KIT_ODDS.length/100))};
  const top=Math.max(...ok.map(lv));const C=ok.filter(m=>lv(m)===top);const pm=Math.max(...C.map(m=>prefOf(r,m)));const P=C.filter(m=>prefOf(r,m)===pm);
  return P[h%P.length]}
-ONE.lv=m=>{const o=oddsM(m);return o>=100?KIT_ODDS.length:(typeof oddsLv==="function"?oddsLv(o):Math.floor(o*KIT_ODDS.length/100))};
+ONE.lv=m=>{const o=oddsM(m);return o>=100?KIT_ODDS.length-1:(typeof oddsLv==="function"?oddsLv(o):Math.floor(o*KIT_ODDS.length/100))};
 ONE.pick=pick;
 function seedOf(r,who,tier){let t=0,b=0;try{t=S.turn||0;b=S.buoi||0}catch(e){}return [t,b,who==null?"":who,r.k,tier||""].join(":")}
 /* the why of a pick (~01:00Z: the result says what really happened and why it was the one) */
