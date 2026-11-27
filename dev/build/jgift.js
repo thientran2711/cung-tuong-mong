@@ -149,9 +149,12 @@ html body #mb .kesov>.kpsn[data-row="1"]{bottom:calc(12px + 2.6em)!important}
      work a week, repeats tire him; giftVal for bought items); the Thái hậu card: "Thỉnh an" (Đức Thọ cung, mornings, j41) and "Dâng quà".
    Hầu cờ / đánh đàn / dạo ngự hoa viên: KM_EMPACT below (one meeting a day, shared with Xin yết kiến). */
 function giftBagFor(t){return S.inv.map((e,i)=>[e,i]).filter(([e])=>e&&!e.h&&(e.wk||IT[e.k])).map(([e,i])=>Object.assign({e,i},giftEval(e,t)))}
-PEND.giftto=p=>{const t=p.t;const L=giftBagFor(t);if(!L.length)return{t:"<p>Rương trống: chưa có món nào để dâng.</p>",o:[{n:"Thôi",fx:{},kgx:1}]};
- L.sort((a,b)=>(b.ok-a.ok)||(b.v-a.v));const who=t==="emp"?"Hoàng thượng":"Thái hậu";const best=L.find(x=>x.ok);/* ACT-MOVE-5 (MAIN 168 keep-the-pick): the item he/she values most opens preselected (jgpick kgbest) */
- return{t:`<p>Dâng món gì lên ${who}? Mỗi món ghi đúng điều được, theo tâm trạng và sở thích của ${t==="emp"?"ngài":"người"}.</p>`,
+/* live-bugs-2711 (gift-dead-scan, law 6c): only the pieces that can go up are tiles; the others are one line (how many, why) */
+function giftRestNote(n,why){return n>0?`<p class="past">Còn ${n} món khác trong rương ${why}.</p>`:""}
+function giftWhyTop(L){const C={};for(const x of L){const w=String(x.why||"").trim();if(w)C[w]=(C[w]||0)+1}return Object.keys(C).sort((a,b)=>C[b]-C[a]).slice(0,2).join("; ")}
+PEND.giftto=p=>{const t=p.t;const L0=giftBagFor(t);if(!L0.length)return{t:"<p>Rương trống: chưa có món nào để dâng.</p>",o:[{n:"Thôi",fx:{},kgx:1}]};
+ const L=L0.filter(x=>x.ok),no=L0.filter(x=>!x.ok);L.sort((a,b)=>b.v-a.v);const who=t==="emp"?"Hoàng thượng":"Thái hậu";const wy=giftWhyTop(no);const best=L[0];/* ACT-MOVE-5 (MAIN 168 keep-the-pick): the item he/she values most opens preselected (jgpick kgbest) */
+ return{t:`<p>Dâng món gì lên ${who}? Mỗi món ghi đúng điều được, theo tâm trạng và sở thích của ${t==="emp"?"ngài":"người"}.</p>`+giftRestNote(no.length,`chưa dâng được${wy?" ("+wy+")":""}`),
   o:L.map(x=>({n:`${giftName(x.e)}${x.e.wk?" ("+WTIER[x.e.wk.ti]+")":""}`,ik:x.i,fx:{},kgift:x.ok?x.x:"",kgwhy:x.ok?"":x.why,lock:!x.ok,kgg:x.e.wk?"wk":"it",kgbest:x===best?1:0,
    go:()=>{if(!x.ok)return;spend(BAL.time.cost.give);const i=S.inv.indexOf(x.e);window.__kitLastEvArt={src:giftArt(x.e).src,lab:giftName(x.e)};log(giveTo(S,t,i))}})).concat([{n:"Thôi",fx:{},kgx:1}])}};
 /* the buổi she arrives in when the walk spills (j9 walkSpill) */
