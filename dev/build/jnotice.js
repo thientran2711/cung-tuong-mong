@@ -45,6 +45,16 @@ function kitNoUnkT(s){if(typeof s!=="string")return s;if(s.indexOf("chưa quen b
 function kitNoUnk(s){if(typeof s!=="string"||(s.indexOf("???")<0&&s.indexOf("chưa quen biết")<0))return s;if(s.indexOf("<")<0)return kitNoUnkT(s);
  const P=/class="[^"]*\b(?:kname2?|kti|krname|kptag|ktag|kpname|kprank)\b/;let prot=null,depth=0;return s.split(/(<[^>]+>)/).map(x=>{if(x.charAt(0)==="<"){const m=/^<(\/?)([a-zA-Z0-9]+)/.exec(x);if(m){if(prot===null&&!m[1]&&P.test(x)&&!/\/>$/.test(x)){prot=m[2].toLowerCase();depth=1}else if(prot!==null&&m[2].toLowerCase()===prot){depth+=m[1]?-1:1;if(depth<=0)prot=null}}return x}return prot!==null?x:kitNoUnkT(x)}).join("")}
 window.kitNoUnk=kitNoUnk;
+/* KIT §7.4b TITLE NAME RULE (KK47, MAIN LOOK FAIL «Yến tiệc mời Đáp ứng ???»): a TITLE (result card .kan, dialog / panel h1–h4, toast head, kit page title)
+   never prints «???», «một vị …», «một người …», «chưa quen biết», «undefined» / «null» / «NaN». A person she has not met by name reads by the TITLE the dress shows
+   only («Yến tiệc mời Đáp ứng», «Bái kiến Tần»); a bare unknown person drops out of the title. Name tags / chips inside a title (.kname …) keep their «???» tag (OD:L673).
+   ONE function; the name-mask DOM pass (j61 k61Node) runs it on every title text node after the mask. */
+const KIT_TTL_SEL="h1,h2,h3,h4,.kan,.rtoast .rt > b,.kptitle,[data-kttl]";window.KIT_TTL_SEL=KIT_TTL_SEL;
+function kitTitleClean(s,lead){if(typeof s!=="string"||!s)return s;const s0=s;
+ s=s.replace(/(^|[^\p{L}])(?:một vị|một người)(\s+chưa quen biết)?(?=$|[^\p{L}])\s*/giu,"$1").replace(/\s+chưa quen biết(?=$|[^\p{L}])/giu,"").replace(/\s*\?\?\?/g,"").replace(/(^|\s)(?:undefined|null|NaN)(?=$|[\s,.;:·)])/g,"$1");
+ if(s===s0)return s;s=s.replace(/[ \t]{2,}/g," ").replace(/\s+([,.;:)])/g,"$1").replace(/[ \t]+·\s*$/,"").replace(/\(\s*\)/g,"");if(lead)s=s.replace(/^(\s*)(\p{Ll})/u,(m,a,b)=>a+b.toUpperCase());return s}
+window.kitTitleClean=kitTitleClean;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§7.4b",title:"kitTitleClean · tiêu đề không bao giờ có «???» / «một vị»",where:"mọi tiêu đề: thẻ kết quả, khung hội thoại, bảng, tin báo",html:()=>kitFacts(["Yến tiệc mời Đáp ứng ???","Bái kiến một vị Tần chưa quen biết","Đề bạt undefined"].map(x=>`${x} → <b>${kitTitleClean(x,true)}</b>`),{group:false})})}catch(e){}
 (function(){const st=document.createElement("style");st.id="knt-css";st.textContent=".kntg{display:block;margin:1px 0 0;font-size:.92em}.kntrh{list-style:none;margin-left:-.2em}";document.head.appendChild(st)})();
 /* option / act cards (kaNorm1, j63) + the card detail parser (kitParse, j19): prose text nodes lose «???» too; the stranger NAME chips (.kname / .kti / name tags) keep the j61 mask (owner flight bug 24/11, law 11) */
 window.kitNoUnkDom=function(root,qq){try{if(!root||(root.textContent.indexOf("???")<0&&root.textContent.indexOf("chưa quen biết")<0))return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const L=[];let n;while(n=w.nextNode()){if(((qq&&n.nodeValue.indexOf("???")>=0)||n.nodeValue.indexOf("chưa quen biết")>=0)&&!(n.parentElement&&n.parentElement.closest(".kname,.kti,.krname,.kptag,.ktag,.kan,.kpname,.kprank,.kname2")))L.push(n)}L.forEach(t=>{t.nodeValue=qq?kitNoUnk(t.nodeValue):kitNoUnk(t.nodeValue.replace(/\?\?\?/g,"\u0001")).replace(/\u0001/g,"???")})}catch(e){}};

@@ -627,7 +627,8 @@ window.kitRtoastClear=kitRtoastClear;addEventListener("resize",()=>{try{kitRtoas
 #rtoast.kevres{display:grid!important;grid-template-columns:84px minmax(0,1fr);column-gap:10px;row-gap:0!important;grid-auto-rows:min-content;align-items:start}/* KIT §7.4 size to content (MAIN 162: an empty band under «Tiếp ▸»): the picture spans 9 grid rows, so the base card gap made 8 empty row gaps (≈ 89 px) — no row gap, rows as tall as their content */
 #rtoast.kevres>:not(.kpevr){grid-column:2}
 #rtoast.kevres>:not(.kpevr)+:not(.kpevr){margin-top:10px}
-#rtoast.kevres>.kpevr{grid-column:1;grid-row:1/span 9;width:84px;height:124px}
+/* KIT §7.4c (owner OD 26/11 ~22:07Z (1) «khung kết quả … phía dưới còn trống quá nhiều»): the card height = its content — the picture follows the rows' height (stretch, 72–124 px), it never holds the card taller than its rows */
+#rtoast.kevres>.kpevr{grid-column:1;grid-row:1;width:84px;height:auto;min-height:72px;max-height:124px;align-self:stretch;overflow:hidden}
 #rtoast.kevres>.kpevr>.ksart,.kpsubj.kpev>.ksart{width:100%;height:100%;aspect-ratio:auto}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
