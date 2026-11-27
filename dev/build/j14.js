@@ -28,7 +28,7 @@ function coldActsOf(p){const me=p===S,A=[],X=BAL.ag.par3.cold,odP=b=>odA(p,b),fr
 /* cold-faction (law 1 + 6): faction business from lãnh cung goes by LETTER only — the same cards for her and for an NPC inside (p3Cold).
    Two roads of equal worth (law 2): the food eunuch (Bạc BAL.ag.par3.cold.lt.bac, sure-ish) or her own kept maid (no bạc, odds by the maid's loyalty;
    caught → that maid's loyalty − lt.maidLoy). Deeds: Rời phe · Tố phe (j10 sellOut: members in lãnh cung are named too) · Xin vào phe (the leader answers: jrcv facJoin). */
-function coldFacActs(p){const me=p===S,L=BAL.ag.par3.cold.lt,F=BAL.ag.par3.fac,odP=b=>odA(p,b),f=facOf(p),A=[],say=r=>{if(me&&r)log(r);return r||""};
+function coldFacActs(p){const me=p===S,L=BAL.ag.par3.cold.lt,F=BAL.ag.par3.fac,odP=b=>odA(p,b),f=facOf(p),A=[],say=r=>{r=r||"Thư gửi đi rồi, chưa có hồi âm. ";if(me)log(r);return r};
  let mds=[];try{mds=(me?(S.staff||[]).concat(S.maid&&!(S.staff||[]).includes(S.maid)?[S.maid]:[]):(p.staff||[])).filter(m=>m&&m.role!=="eunuch"&&(m===S.maid||m.role==="maid")).filter(m=>m&&m.alive!==false&&!m.coop&&(m.loyal||0)>=BAL.loy.trust).sort((a,b)=>(b.loyal||0)-(a.loyal||0))}catch(e){}
  const m=mds[0],R=[{w:"thái giám đưa cơm",c:{bac:-L.bac},o:odP(L.euO)}];
  if(m)R.push({w:m.name,c:{},o:odP(L.maidO+(m.loyal||0)/L.loyD),fail:()=>{m.loyal=cl((m.loyal||0)-L.maidLoy,0,100);return say(`${m.name} bị lính gác bắt được thư, bị tra hỏi một trận. Thiện cảm ${balSg(-L.maidLoy)}.`)},fx:` · bị bắt: ${m.name} thiện cảm ${balSg(-L.maidLoy)}`});

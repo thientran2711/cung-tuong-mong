@@ -85,6 +85,16 @@ const isOpen={A1:`__T.ovOpen()`,A2:`__T.ovOpen()`,A3:`!!document.querySelector('
   {const r={vp:tag,A:'A3',S:'S4+kmReset',bad:[]};await p.evaluate(()=>__T.clean());await sleep(500);r.act=await p.evaluate(OPEN.A3);await sleep(500);r.src=await p.evaluate(()=>__T.src('S4'));
    await sleep(600);if(await p.evaluate(()=>__T.card()))r.bad.push('card painted under the scene');await p.evaluate(()=>{kmReset();document.querySelectorAll('.kmov,#kmrew').forEach(e=>e.remove())});
    await sleep(1500);if(!await p.evaluate(()=>__T.card()))r.bad.push('held card not shown after kmReset');await p.evaluate(()=>__T.answer());if(r.bad.length)fail++;rows.push(r)}
+  /* N1/N2 (E96r REVIEW r2, dialog-order r3): an UNSEEN card + her real tap on «Sang buổi» — the turn never passes over it (M4 rule): N1 the card
+     waits behind the person view she opened (gate (c)), N2 a card queued with nothing painting it. Pass = same buổi, card still in Q, N2 card on screen. */
+  for(const N of ['N1','N2']){const r={vp:tag,A:N,S:'next-tap',bad:[]};await p.evaluate(()=>{__T.clean();used=0;S.buoi=0;render()});await sleep(700);
+   await p.evaluate(()=>{document.querySelectorAll('.kmov,#kmrew').forEach(e=>e.remove());try{KMQ.length=0;kmBusy=false}catch(e){}Q.length=0;document.getElementById('modal').hidden=true});
+   if(N==='N1'){r.act=await p.evaluate(OPEN.A4);if(!r.act){r.skip='activity n/a';rows.push(r);continue}await sleep(2200)/* past mineLook of the open tap */;r.src=await p.evaluate(()=>{pushModal({t:'HOLD-N1',h:'x',opts:[{n:'Được',fx:{}}]});showModal();return 'card'})}
+   else{r.act='none';r.src=await p.evaluate(()=>{Q.push({t:'HOLD-N2',h:'x',opts:[{n:'Được',fx:{}}]});return 'queued'})}
+   await sleep(600);const b0=await p.evaluate(()=>S.buoi);const nx=p.locator('#next');try{await nx.click({timeout:3000,force:true})}catch(e){r.bad.push('next not tappable')}await sleep(2500);
+   const af=await p.evaluate(()=>({b:S.buoi,q:Q.map(m=>m.t),card:__T.card()}));r.after=af;
+   if(af.b!==b0)r.bad.push('buổi passed over the unseen card ('+b0+'→'+af.b+')');if(!af.q.some(t=>/HOLD-N/.test(t)))r.bad.push('card lost');if(N==='N2'&&!af.card)r.bad.push('N2 card not painted first');
+   await p.evaluate(()=>{try{const x=document.querySelector('.kfoc .kfoc-x');x&&x.click()}catch(e){}});await sleep(800);await p.evaluate(()=>__T.answer());await sleep(400);if(r.bad.length)fail++;rows.push(r)}
   if(pe.length){fail++;rows.push({vp:tag,pageErrors:pe})}
   await c.close()}
  for(const r of rows)console.log(r.pageErrors?`${r.vp} PAGE ERRORS ${JSON.stringify(r.pageErrors)}`:`${r.vp} ${r.A}×${r.S} ${r.skip?'SKIP '+r.skip:(r.bad.length?'FAIL '+r.bad.join('; '):'ok')}  [${r.act||''} · ${r.src||''}]`);
