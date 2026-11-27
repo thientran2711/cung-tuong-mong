@@ -50,11 +50,13 @@ function covLine(E){if(!E||!E.length)return"";const tr=E.some(e=>e.d&&e.d.w>0);c
 /* ---- 3: Xóa dấu vết ---- */
 function covTraced(p){const B=covB().wipe,now=wk();const L=((p&&p.wrongs)||[]).filter(d=>d&&d.w>0&&!d.wp&&d.at!=null&&now-d.at<=B.win);return L.length?L[L.length-1]:null}
 function covWipeBac(d){const B=covB().wipe;return B.bac[d&&d.x2||covTier(d&&d.k)]||B.bac.nhe}
+/* the price of a wipe for p: Bạc when p has it, else Sức of the same weight (law 2 / OD:L582: a bạc road always has a matching road; ONE act) */
+function covWipeCost(p,d){const B=covB().wipe,x=d&&d.x2||covTier(d&&d.k),bac=B.bac[x]||B.bac.nhe;return (+(p&&p.bac)||0)>=bac?{bac:-bac}:{suc:-(B.suc[x]||B.suc.nhe)}}
 function covWipeO(p){return covO(covB().wipe.band+covG(p))}
 function covWipe(p,d){d=d||covTraced(p);if(!p||!d)return false;p.dw=Math.max(0,(p.dw||0)-(d.w||0));d.w=0;d.wp=1;return true}
-function covWipeOpt(){const d=covTraced(S);if(!d)return null;const bac=covWipeBac(d);
- return{n:"Xóa dấu vết",act:1,o:covWipeO(S),c:{bac:-bac},x:`dấu vết việc «${plain(d.x||"")}» bị xóa sạch, không ai còn tìm ra chứng cứ`,risk:"dấu vết còn đó",cov:"wipe",
-  go:()=>{covWipe(S,d);log(`${S.maid?S.maid.name:"Người hầu"} lặng lẽ xóa sạch dấu vết việc ${plain(d.x||"")}.`)},fail:()=>log(`Xóa dấu vết việc ${plain(d.x||"")} không xong: dấu vết vẫn còn.`)}}
+function covWipeOpt(){const d=covTraced(S);if(!d)return null;const c=covWipeCost(S,d),self=!c.bac;
+ return{n:"Xóa dấu vết",act:1,o:covWipeO(S),c,x:`dấu vết việc «${plain(d.x||"")}» bị xóa sạch, không ai còn tìm ra chứng cứ`,risk:"dấu vết còn đó",cov:"wipe",
+  go:()=>{covWipe(S,d);log(`${self?"Ngươi tự tay":S.maid?S.maid.name:"Người hầu"} lặng lẽ xóa sạch dấu vết việc ${plain(d.x||"")}.`)},fail:()=>log(`Xóa dấu vết việc ${plain(d.x||"")} không xong: dấu vết vẫn còn.`)}}
 /* ---- 4: a named real witness ---- */
 function covWitId(p){const r=covWitId0(p);return r&&/^mm:/.test(r)?chMaidId(r):r/* a maid = the person «mu:» (jcharge chMaidId), never the role */}
 function covWitId0(p){if(!p)return null;if(p.lid)return p.lid;if(p.kind==="maid")return"mm:me";/* her own maid in the day record (j95) */if(p.sid!=null)return"s"+p.sid;try{return ledgerId(p.ref||p)}catch(e){return null}}
@@ -123,7 +125,7 @@ RCVK.witBribe={t:"Lời mua chuộc",act:"mang bạc sang mua chuộc",kind:"hel
   {n:"Từ chối",fx:{},x:"vẫn là nhân chứng",go:()=>{try{relAdd(p,S,-covB().wit.vua.aff)}catch(e){}return `Ngươi trả lại bạc của ${p.name}.`}}]}};
 /* ---- law 1: every NPC wipes her own traces and deals with her own witnesses by her nết (one road, the same numbers) ---- */
 function covNpcTurn(){const B=covB().npc;let n=0;for(const v of liveRivals(true)){if(v.coop||deedSyncGuest(v))continue;
- const d=covTraced(v);if(d&&(v.bac||0)>=covWipeBac(d)&&roll(B.wipe)){ap(v,{bac:-covWipeBac(d)});if(roll(covWipeO(v)))covWipe(v,d)}
+ const d=covTraced(v);if(d&&roll(B.wipe)){const c=covWipeCost(v,d);if(!c.suc||(+v.suc||0)>-c.suc){ap(v,c);if(roll(covWipeO(v)))covWipe(v,d)}}
  const ids=[...new Set([].concat(...Object.values(v.wsee||{})))].filter(id=>covSaw(v,id).length&&covPerson(id));if(!ids.length||!roll(B.wit))continue;
  const id=pick(ids);const duc=+v.duc||0;const x=duc>=B.ducHi?"nhe":(v.bac||0)>=covWitBac(v,id)?"vua":duc<B.ducLo?"nang":"nhe";
  if(x==="vua"&&id==="me"){rcvAsk("witBribe",v,S);n++;continue}

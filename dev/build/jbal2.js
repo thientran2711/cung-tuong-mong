@@ -2371,7 +2371,7 @@ BAL.charge.wit={need:{nhe:0,vua:0,nang:1,tu:2},keep:8/* REAL-PROOF (owner 27/11 
    dev/measure/cover-scan.js (every scheme, before / after): one nặng deed = Đức −8 known or not, and Danh −10 (+ the high-rank watch) only when it comes
    out, on stats of 0–100 — felt, never game-ending; the old flat caught Danh −5 now runs nhẹ −3 · vừa −6 · nặng −10. */
 BAL.charge.cover={duc:{nhe:-2,vua:-4,nang:-8,tu:-12},danh:{nhe:-3,vua:-6,nang:-10,tu:-15},trace:{band:{nhe:3,vua:4,nang:5,tu:6}},
- wipe:{bac:{nhe:10,vua:20,nang:40,tu:60},band:3,win:6},
+ wipe:{bac:{nhe:10,vua:20,nang:40,tu:60},suc:{nhe:5,vua:10,nang:20,tu:30}/* the matching road (law 2 / OD:L582): no Bạc → she does it herself, Sức by the same weight */,band:3,win:6},
  wit:{nhe:{suc:10,band:2,aff:6},vua:{bac:{nhe:15,vua:30,nang:50,tu:80},band:3,aff:4},nang:{band:5,hit:30,ev:1/* a failed attempt: the witness holds this many pieces of «mưu hại» */}},
  names:2,ownDuc:["caught","story","ls","mlframe","mlhframe","mlpoison","giahoa","laydo","laydol","tat"]/* roads that already take Đức themselves (jmline mlCaught) or are not her choice (story = the past, ls = a birth off the register, caught = the record of an act already paid); giahoa / laydo / laydol / tat take Đức inside their own act (cover-scan before/after) */,npc:{wipe:40,wit:25,ducHi:60,ducLo:30,cap:3}};
 BAL.charge.rep={n:3,win:36};

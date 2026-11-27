@@ -46,7 +46,8 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
    ok(!doorRaw(mp).some(a=>a&&a.n==="Xóa dấu vết"),"nothing left to wipe → no button");
    COV.ctx++;COV.force=1;try{deedAdd(S,"trip",C,1,"ngáng chân")}finally{COV.ctx--;COV.force=0}const o2=doorRaw(mp).find(a=>a&&a.n==="Xóa dấu vết");const b0=S.bac;force(false,()=>runOpt(o2));const d2=S.wrongs[S.wrongs.length-1];
    ok(d2.w>0&&!d2.wp,`failure: the trace stays (w ${d2.w})`);
-   const keep=V.wipe.bac.nhe;V.wipe.bac.nhe=keep+7;const o3=doorRaw(mp).find(a=>a&&a.n==="Xóa dấu vết");ok(o3&&o3.c.bac===-(keep+7),`BAL change → cost follows (${o3&&o3.c.bac})`);V.wipe.bac.nhe=keep}
+   const keep=V.wipe.bac.nhe;V.wipe.bac.nhe=keep+7;const o3=doorRaw(mp).find(a=>a&&a.n==="Xóa dấu vết");ok(o3&&o3.c.bac===-(keep+7),`BAL change → cost follows (${o3&&o3.c.bac})`);V.wipe.bac.nhe=keep;
+   /* law 2 / OD:L582: no Bạc → the same ONE act paid in Sức of the same weight */const bk=S.bac;S.bac=0;const o4=doorRaw(mp).find(a=>a&&a.n==="Xóa dấu vết");ok(o4&&!o4.c.bac&&o4.c.suc===-V.wipe.suc[covTier("trip")],`no Bạc → «Xóa dấu vết» costs Sức ${o4&&o4.c.suc} (BAL wipe.suc)`);S.bac=bk}
   /* 4. the witness door: three tiers at once */
   reset();const rp1=v=>({kind:"rival",ref:v,name:v.name});
   {COV.ctx++;COV.force=1;try{deedAdd(S,"poison",C,2,"bỏ độc")}finally{COV.ctx--;COV.force=0}chSawAdd(S,"mh",ledgerId(D));evA(A,S,4,"mh");
