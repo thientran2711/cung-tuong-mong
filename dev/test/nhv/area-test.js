@@ -5,7 +5,7 @@
    no name plate / group line is cut or overlaps another; (3) a group tap dims the others with the kit dim (opaque copies), a person tap steps her out and hangs the
    kit thẻ gỗ (kitPick) with every plaque inside the stage and no plaque text cut. Then BOTH devices: the same areas and the same people per area (MAIN 127 FAIL 1).
    Exit 0 = PASS. */
-const {boot}=require('./boot');const fs=require('fs');const path=require('path');
+const {boot}=require('./boot');if(!process.env.KSEED)process.env.KSEED='1';console.log('SEED KSEED='+process.env.KSEED+' (boot Math.random seeded; rebuild with the same KSEED + SAVE) life='+(process.env.SAVE||'none'));const fs=require('fs');const path=require('path');
 const OUT=process.argv[2]||'/tmp/nhv-test';fs.mkdirSync(OUT,{recursive:true});
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,400):''))};
 const AUDIT=`(()=>{const out=[];const L=document.getElementById('nhv');if(!L)return ['NO SCENE'];const st=document.getElementById('stage').getBoundingClientRect();

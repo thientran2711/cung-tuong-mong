@@ -1,8 +1,9 @@
 /* NHV PLATE EDGE SCAN (LRM3, RV-163J FAIL-1 family, law 11): EVERY garden area × Fold 755x1000 + iPad 1180x820 × EVERY group (so every left / right edge slot):
    at rest, after the group tap and after the person tap (step out + thẻ gỗ), every visible stage name plate / group line (.nhv-tag, .nhv-cap, .kscn-tag in #stage) must sit
    INSIDE the stage box (±1 px). NOCLAMP=1 switches the kit clamp (kitTagKeepIn, KIT 93.5b) off = the BEFORE column.
+   KK60 sign-off (93.5b): + idempotent check (kitTagKeepIn twice = same translate) + resize step (window shrinks with the long far-left plate, then back).
    usage: SAVE=<life.json from mklife.js> [NOCLAMP=1] node dev/test/nhv/plate-edge-scan.js <outdir>   exit 0 = no plate off the stage */
-const {boot}=require('./boot');const fs=require('fs');const path=require('path');
+const {boot}=require('./boot');if(!process.env.KSEED)process.env.KSEED='1';console.log('SEED KSEED='+process.env.KSEED+' (boot Math.random seeded; rebuild with the same KSEED + SAVE) life='+(process.env.SAVE||'none'));const fs=require('fs');const path=require('path');
 const OUT=process.argv[2]||'/tmp/nhv-edge';fs.mkdirSync(OUT,{recursive:true});const NOC=!!process.env.NOCLAMP;
 const AUD=`(()=>{const st=document.getElementById('stage').getBoundingClientRect();const o=[];const vis=e=>{if(!e.isConnected)return false;let x=e;while(x&&x!==document.body){const cs=getComputedStyle(x);if(cs.display==='none'||cs.visibility==='hidden'||+cs.opacity<.05)return false;x=x.parentElement}const b=e.getBoundingClientRect();return b.width>2&&b.height>2};
  const seen=new Set();document.querySelectorAll('#stage .nhv-tag,#stage .nhv-cap .kchip,#stage .kscn-tag').forEach(e=>{const h=e.closest('.nhv-tag')||e;if(seen.has(h))return;seen.add(h);if(!vis(h))return;const r=h.getBoundingClientRect();
@@ -13,7 +14,7 @@ const COV=`(()=>{const o=[];const vis=e=>{if(!e.isConnected)return false;let x=e
  const T=[...document.querySelectorAll('#stage .nhv-f,#stage button,#stage [data-go],#stage .kpk .kpk-n')].filter(e=>vis(e)&&getComputedStyle(e).pointerEvents!=='none'&&!e.closest('.kdim-copy'));
  T.forEach(e=>{const r=e.getBoundingClientRect();const t=document.elementFromPoint(r.left+r.width/2,r.top+r.height/2);if(t&&(t===e||e.contains(t)||t.contains(e)))return;const cv=t?(t.id?'#'+t.id:String(t.className).slice(0,40))+(t.classList&&t.classList.contains('nhv-f')?' «'+((t.querySelector('.nhv-tag')||{}).textContent||'follower').trim().slice(0,16)+'»'+(t.style.zIndex==='30'?' (stepped out)':''):'')+(t&&t.closest&&t.closest('#rtoast,.kres,#kxcatch')?' [result card]':''):'nothing';
   o.push({it:(e.className&&String(e.className).split(' ')[0]||e.tagName)+' «'+(e.textContent||'').trim().slice(0,16)+'»',by:cv,tr:/\\[result card\\]|kres-next|(^|\\s)rt(\\s|$)|kxcatch|kscn-veil|kpod|kmov|kfgain|kdim/.test(cv)})});return o})()`;
-const rows=[],cov=[];
+const rows=[],cov=[],idemR=[];
 async function run(dev){const DV=dev==='ipad'?'ipadAir':'fold';
  const mk=async()=>{const o=await boot(DV,1,0,{});const {g,pg}=o;if(NOC)await g.evaluate(()=>{kitTagKeepIn=()=>0});const T=ms=>pg.waitForTimeout(ms);
   const clearQ=async()=>{for(let j=0;j<6;j++){const n=await g.evaluate(()=>{let c=0;const b=document.querySelector('body>.kscn .kscn-box');if(b){b.click();c++}document.querySelectorAll('body>.kmov .kbtn,body>.kmov button,.kfgain button,#kpodov button,#kpodov .kbtn').forEach(x=>{try{x.click();c++}catch(e){}});return c});if(!n)break;await T(500)}
@@ -29,14 +30,22 @@ async function run(dev){const DV=dev==='ipad'?'ipadAir':'fold';
     m.tg.__old=m.tg.innerHTML;m.tg.innerHTML='<span class="j59t">Thái giám Nội vụ phủ</span><span class="j59n">Thái giám Người lạ</span>';NHV.layout(true);return true},side);
    if(!did)continue;await x.T(400);await push('stress'+side);if(side==='L')await x.pg.screenshot({path:`${OUT}/${dev}-${k}-stressL${NOC?'-before':''}.png`});
    await x.g.evaluate(()=>{NHV.cur.G.forEach(g=>g.ms.forEach(m=>{if(m.tg&&m.tg.__old!=null){m.tg.innerHTML=m.tg.__old;delete m.tg.__old}}));NHV.layout(true)});await x.T(300)}
+  /* KK60 sign-off conditions (93.5b): (1) IDEMPOTENT — calling kitTagKeepIn again on every plate leaves the same translate (it resets before it measures);
+     (2) RE-RUN ON RESIZE — the long plate on the far-left master, then the window shrinks (Fold 755→600 wide, iPad 1180x820→1024x768): every plate still inside, then back */
+  if(!NOC){const idem=await x.g.evaluate(()=>{const st=document.getElementById('stage').getBoundingClientRect();let n=0,diff=0;document.querySelectorAll('#stage .nhv-tag').forEach(t=>{if(!t.getBoundingClientRect().width)return;n++;const a=t.style.translate;kitTagKeepIn(t,st);const b=t.style.translate;kitTagKeepIn(t,st);if(t.style.translate!==b||(a&&a!==b))diff++});return {n,diff}});
+   idemR.push({dev,k,...idem});
+   const vp=x.pg.viewportSize();const did=await x.g.evaluate(()=>{const C=NHV.cur;if(!C||!C.G.length)return false;const m=C.G[0].ms[0];if(!m||!m.tg)return false;m.tg.__old=m.tg.innerHTML;m.tg.innerHTML='<span class="j59t">Thái giám Nội vụ phủ</span><span class="j59n">Thái giám Người lạ</span>';NHV.layout(true);return true});
+   if(did){await x.T(300);await x.pg.setViewportSize(dev==='ipad'?{width:1024,height:768}:{width:600,height:1000});await x.T(900);await push('resize');if(k===order[0])await x.pg.screenshot({path:`${OUT}/${dev}-${k}-resize.png`});
+    await x.pg.setViewportSize(vp);await x.T(900);await push('resizeBack');await x.g.evaluate(()=>{NHV.cur.G.forEach(g=>g.ms.forEach(m=>{if(m.tg&&m.tg.__old!=null){m.tg.innerHTML=m.tg.__old;delete m.tg.__old}}));NHV.layout(true)});await x.T(300)}}
   const nG=await x.g.evaluate(()=>NHV.cur?NHV.cur.G.length:0);
   for(let gi=0;gi<nG;gi++){await x.clearQ();const okG=await x.g.evaluate(i=>{const g=NHV.cur&&NHV.cur.G[i];if(!g||!g.ms[0])return false;g.ms[0].el.click();return true},gi);if(!okG)continue;await x.T(700);await push('group'+gi);
    await x.g.evaluate(i=>{const g=NHV.cur&&NHV.cur.G[i];if(g&&g.ms[0])g.ms[0].el.click()},gi);await x.T(1900);await push('person'+gi);
    if(gi===0||gi===nG-1)await x.pg.screenshot({path:`${OUT}/${dev}-${k}-g${gi}${NOC?'-before':''}.png`});await x.g.evaluate(()=>{try{NHV.unsel()}catch(e){}});await x.T(500)}
  }catch(e){rows.push({dev,k,step:'THREW',t:String(e&&e.message||e).slice(0,80),off:999})}await x.o.b.close();x.o.srv.close()}}
 (async()=>{await run('fold');await run('ipad');fs.writeFileSync(path.join(OUT,'plate-edge'+(NOC?'-before':'')+'.json'),JSON.stringify({rows,cov},null,1));
+ const idBad=idemR.filter(r=>r.diff);if(!NOC)console.log('KK60 (1) idempotent: '+idemR.reduce((a,r)=>a+r.n,0)+' plates called twice, '+idBad.length+' area(s) changed · (2) resize steps: '+rows.filter(r=>/^resize/.test(r.step)).length+' plates checked');
  const covBad=cov.filter(c=>!c.tr);console.log('COVER family: '+covBad.length+' stage items covered by a stage layer · '+(cov.length-covBad.length)+' by a transient game overlay');covBad.slice(0,20).forEach(c=>console.log('COVERED',c.dev,c.k,c.step,c.it,'by',c.by));
  const bad=rows.filter(r=>r.off>1);const per={};rows.forEach(r=>{const key=r.dev+'/'+r.k;per[key]=per[key]||{plates:0,off:0,minEdge:1e9};per[key].plates++;if(r.off>1)per[key].off++;per[key].minEdge=Math.min(per[key].minEdge,r.l,r.r)});
  console.log('| device/area | plates checked | off stage | closest edge px |');for(const key in per)console.log(`| ${key} | ${per[key].plates} | ${per[key].off} | ${per[key].minEdge} |`);
  bad.slice(0,30).forEach(r=>console.log('OFF',r.dev,r.k,r.step,'«'+r.t+'»',r.off+'px'));
- console.log(`NHV PLATE EDGE SCAN ${NOC?'(NOCLAMP before) ':''}${bad.length?'FAIL':'PASS'} · ${rows.length-bad.length}/${rows.length} plates inside`);process.exit(bad.length||covBad.length?1:0)})();
+ console.log(`NHV PLATE EDGE SCAN ${NOC?'(NOCLAMP before) ':''}${bad.length?'FAIL':'PASS'} · ${rows.length-bad.length}/${rows.length} plates inside`);process.exit(bad.length||covBad.length||idBad.length?1:0)})();
