@@ -525,3 +525,42 @@ PRIORITY #1 CHECK ('save-fix-stack'): continued r7's LEFT list on rv15 273c64c3;
 A–I of r5–r7 unchanged. J = item 1 above (harness fix).
 ### Gain vs risk
 GAIN: the save-loss cure (silent ~5.2 M-char write failure, E's QuotaExceeded, lost waiting cards) lands on today's LIVE with every LIVE change of the night kept. RISKS: (1) a hand merge of jts/jne dropped a LIVE change — hiếm, nhỏ; each LIVE hunk was moved in by text and checked in the built page (old wording 0, new wording present). (2) LIVE moves again before landing — có thể, nhỏ; built-only conflicts → LC26 restacks. → **Được lớn hơn**.
+
+## LOOK-DEDUPE FIX (rv22) (fixer opus, session_01N1tNP2WGctyD7uE2CnSUuN, for Foreman B ROOT 2 child 5; LC26 hold)
+PRIORITY #1 CHECK ('look-dedupe'): reused dev/test/look-dedupe.js + quickcheck.d/92; r6/r8 notes «92 flaky on LIVE too / LIVE FAIL 7» explained below; no new test file.
+**Verdict: STACK GAME CODE INNOCENT — the fault is the rv21 harness edit.** save-unseen-lists r3 added `nlAccept(false)` to the setup of look-dedupe.js (so the unseen identity card no longer comes back in the last check). On a tú nữ life, accepting starts the 3 selection days (jselxday nlAccept wrap) and `selxRefill` puts «Ngày thứ nhất — Nhập cung» back after every render → the mood-seal tap, the ✕ tap and the kit-notice round trip all met the day card. Check (3) was a cascade (Q held the day card → q 2, body = day card), NOT a lost kit body.
+Why the runs disagreed: quickcheck runs each tree's OWN test file. Lander: LIVE tree + LIVE test = PASS, rv21 tree + rv21 test = FAIL 6. r8 ran the rv21 test on the LIVE page = FAIL 7. Not env/port/timing.
+### A/B (serve tree, cp index.html _aa.html, http://127.0.0.1:PORT/_aa.html, Fold + iPad each run)
+| game page | test file | runs | result |
+|---|---|---|---|
+| LIVE 17f23656 | LIVE test | 4 | PASS ×4 |
+| rv21 61085ce0 | rv21 test | 4 | FAIL 6 / 9 / 7 / 7 (rows 1, 2, 3 per device; +«P 1» under load) |
+| LIVE 17f23656 | rv21 test | 1 | **FAIL 6 (same 3 rows)** → harness, not stack |
+| rv21 | LIVE test | 1 | FAIL 2: «save + load with Tâm trạng open» Q 1 = «Thân phận kiếp này» = the save-unseen-lists cure (identity card unseen while the new-life panel is open), the reason r3 edited the setup |
+| rv22 | rv22 test | 4 (incl. quickcheck G4 92) | **PASS ×4** |
+| LIVE 17f23656 | rv22 test | 3 | FAIL 2 ×3 = only the NEW row (identity card lost on LIVE) = base FAIL |
+| rv22 + LD_MUTATE=kit (kit spec dropped at save) | rv22 test | 1 | **FAIL 2** (kit rows) = mutation caught |
+### Fix (test + scan only, NO game code): review/save-fix-stack-rv22
+1. look-dedupe.js setup: after nlAccept, a life still in its selection days is ended for the harness (`S.selx2.days=0;done=1`).
+2. check (3) runs on its own queue (whatever waits stays aside) over 3 notice shapes a restore reads: kit notice about her (subject S), kit notice about another person (@p id), plain text notice → each saved with its spec, back ONCE with its body.
+3. NEW check: save + load with the new-life panel open → «Thân phận kiếp này» back exactly once, no look-up (LIVE FAIL, stack PASS).
+4. unseen-lists-scan census: row jopic kitHowPanel «Cách làm» = PANEL (UNCLASSIFIED 1 → 0; LIVE code, a panel she opens, never saved by design).
+LAW 11 (saved fields a restore / re-shown modal reads): kit notices (her / other person) KEEP — round trip proven; text notices KEEP; look-up / view panels NOT SAVED by design (checks 2,4,5); identity card (unseen) KEEP (new check); pid / rk cards KEEP (probe 0 families, knsell, SUL); jevc daily cap on a remade card = fixed in save-pid-cards b385df9b (not touched here).
+### Gates on rv22 (game code = rv21, byte-identical)
+| gate | result |
+|---|---|
+| look-dedupe ×3 Fold+iPad (+ G4 92 in quickcheck) | PASS ×4; base rv21 FAIL; mutate FAIL |
+| save-unseen-lists Fold+iPad (SUL_FCS=1) | 24/24 PASS |
+| probe save-residue Fold s1 / iPad s1 | 0 families, PASS |
+| save-death-rebirth | PASS |
+| notice-late-save | PASS Fold + iPad |
+| knsell-remake / mutLazy | PASS 13 cards / mutLazy **FAIL** ✔ (S touched 17) |
+| inv-stack-scan | RAW 0 |
+| census (unseen-lists-scan) | UNCLASSIFIED 0, SCAN PASS (33 lists) |
+| time-advance-save-scan | PASS (10 paths, 11 gates) |
+| coop-e2e SWAP0 (local Worker) | 143/143 |
+| quickcheck ALONE | QUICKCHECK PASS (old save ok; perf new/live render 243/213, tab 570/578, buổi 1183/1442 ms); CORE G4 90 button-crawl FAIL «Ô lưu · Lui» = **identical on LIVE 17f23656 same run** (pre-existing, r8 item 2); every other G4 hook PASS |
+Old saves (d): quickcheck «old save ok»; SUL / death on LIVE-format paths PASS; no save code changed.
+Note: LIVE moved to 066d9af0 meanwhile; rv22 = FF on 17f23656; no gate needed a merge (lander restacks built-only conflicts).
+### Gain vs risk
+GAIN: the LC26 hold is lifted without touching game code; the gate now really tests the kit-notice round trip (mutation-proven) and the identity-card cure. RISK: (1) ending the selection days in the harness hides a look-up bug that only shows during those days — hiếm, nhỏ; selx-* tests own those days. (2) LIVE moved past 17f23656 — dễ xảy ra, nhỏ; built-only restack. → **Được lớn hơn**.
