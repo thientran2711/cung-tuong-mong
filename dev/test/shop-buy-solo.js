@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const {autoDismissRoulette,dismissRoulett
 const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];let fail=0;const chk=(n,c,x)=>{if(!c)fail++;console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,400))};
  const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});await autoDismissRoulette(ctx);
- const p=await ctx.newPage();p.setDefaultTimeout(30000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(30000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL+(URL.includes('?')?'&':'?')+'khost=0',{waitUntil:'domcontentloaded',timeout:0});
  await p.waitForFunction(()=>typeof start==='function',null,{timeout:0});await p.waitForTimeout(800);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__forceOrigin='tt';start()});
