@@ -9,6 +9,13 @@ Object.assign(BAL,{df:{
  on:1,                 /* 0 = the stage tap opens the old person pop-up (rollback / tests) */
  npc:1,                /* 0 = NPC-initiated cards keep the centre card (row 15 off) */
  inPerson:["tat","phatquy","nuoc","tea","ink"],/* Hậu cung acts that need her THERE, offered in the focus view too (ONE act, same lock: doAct) */
+ /* ACT-MOVE (owner OD 27/11 ~00:32Z + ~00:42Z, MAIN 168): the Hậu cung card offers no acts; every consort act key of the old card is bound to WHERE it happens.
+    person = only on HER pop-up where she really is (together, real schedule); palace = at her palace (palaceOf), owner home OR out (the chest «Rương của …»);
+    either = remote «sai người» ways that stay inside the target's door (MAIN Q2): offered on her pop-up AND at her palace. jamove.js reads these three lists. */
+ person:["ally","trip","tat","phatquy","nuoc","tea","ink","pushp","batnat","takeaway","pond","kframe","ksab","rumor","frame","lygian","accuse","tocao","expose","vp","xx","uyhiep","banphe","tieuhuy","spyk"],
+ palace:["gift","petcare","plant","rash","bribe","bribel","laydo","laydol","giahoa","thaopet","petsteal","thathu","phonghoa","poison","slowpoison","musk","huydung","spy","kpoison","catswap","pgift"],
+ either:["block","blockf","xinhh","trinhhh","trinhth"],
+ personE:["judge","conf","reward","pardon","cutpay"],/* Quyền Hoàng hậu (data-e, rank ≥ 7): face to face, like person */
  art:0,                /* 1 when Foreman C's hand / prop sprites are on the CDN (ART REQUEST df-hand / df-props / df-npc-hand) */
  /* engine knobs (all lerp pairs are [at ease 0, at ease 5]; ease = mgTier(kind,{occ:"df"}).ease clamped 0..5). ms = play time.
     geo = where on the figure box each target sits (share of the figure height from its top; x share of the height from the centre line). */
