@@ -693,3 +693,5 @@ LAO-HEALTH (opus numbers; hidden lao kills age 22 y3; MAIN 179 order 3) | review
 LANHCUNG-EARLY (opus numbers; rank→0 via Lãnh cung early; MAIN 179 order 4) | review/lanhcung-early | session_01N1tNP2tteYrn7gJruqD63a (Foreman B ROOT 3) | DONE (= COVERED by punish-stack-live-3; test review/lanhcung-early 4d53f761; archived) | 27/11 17:30Z
 SIL-EUNUCH | review/sil-eunuch-rv168 b664f80e | session_01PEhRbvVPQepjduga2PqdYq | DONE (LIVE in 772bee4f via UI bundle 6a493881; archived) | 27/11 18:28Z (Foreman C ROOT 4)
 C3-SEALS | review/c3-seals-lrm 7082b569 | session_01PEhRbuThfqRgsb1V4EPoSx | DONE (LIVE in 772bee4f via UI bundle 6a493881) | 27/11 18:28Z (Foreman C ROOT 4)
+3B-GREEN (monthly-allotment «evening» pace-speed + role-parity FAIL 2; MAIN 179 19:05Z) | review/allot-pace (b3b family) | session_01PEhRbvHx5Tdoz3k3iZ7VTk | RUNNING | 27/11 19:30Z (Foreman C ROOT 4)
+C4-RINGART (faction ring act pictures Lập phe/Mời vào phe/Gạch tên/Xem + ACTS.json fallback fix; MAIN 179 18:46Z) | review/c4-ring-art | session_01PEhRbtWZ3sD3nbQtNSs3sP | RUNNING | 27/11 19:30Z (Foreman C ROOT 4)
