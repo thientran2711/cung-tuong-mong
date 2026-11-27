@@ -1,7 +1,7 @@
 /* kit-hand-mount.js (KK51, KIT §101.13 kitHand.mount — the Bàn bài outside #modal): real game, Fold 755x1000 + iPad 1180x820 (+ any WxH list).
    A hand is mounted into a tab-pane stand-in at #panel's place (#khmpane, scrolling box) with 2 / 4 / 7 / 10 / 12 cards (short, long, person names; one locked card):
    (1) every card is a kit hand card (.khost>.opts.khand>button.ka.kopt, picture .kaart + name), ONE card size, all inside the pane width, no page h-overflow, every card at once (12 → 12, no pager);
-   (2) no card name cut (.kan fits);  (3) real tap = lift + the flipped card (.khplate.khflip) + ✓ / ✕ visible, the flipped card inside the screen;
+   (2) no card name cut (.kan fits);  (3) real tap = lift + the ENLARGED card (.khplate.khbig, KIT §101.10 no flip: info on its front) in the centre of the pane + ONE «Chọn» 12 px under it, on screen; no flip class / code;
    (4) ✕ puts back; ✓ = fly then onPick(id) once;  (5) a robot click (detail 0) → onPick at once;  (6) a locked card lifts with ✕ only (no ✓), never picks;
    (7) a tap outside the host puts the card back;  (8) onLift fires;  (9) destroy removes the host;  (10) the #modal hand is unchanged (kit-hand.js covers it);  no page errors.
    usage: node dev/test/kit-hand-mount.js <index.html> [WxH,...] [shotdir]   exit 1 on FAIL */
@@ -29,19 +29,19 @@ const {chromium}=require('playwright');const path=require('path');const SRC=path
   await p.evaluate(()=>{__mount(4);document.getElementById('khmtest').scrollIntoView({block:'center'})});await p.waitForTimeout(1300)/* the deal-in lands first */;
   const tap=async sel=>{const bb=await p.evaluate(s=>{const e=document.querySelector(s);if(!e)return null;const r=e.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]},sel);if(!bb)return false;await p.mouse.click(bb[0],bb[1]);return true};
   await tap('#khmtest button[data-khid=c1]');await p.waitForTimeout(600);
-  const s1=await p.evaluate(()=>{const z=document.querySelector('#khmtest .khplate.khflip:not([hidden])'),c=document.querySelector('#khmtest .khconf:not([hidden])');const zr=z&&z.getBoundingClientRect();
-   const bt=document.querySelector('#khmtest button[data-khid=c1]'),br=bt.getBoundingClientRect(),hit=document.elementFromPoint(br.left+br.width/2,br.top+br.height/2);return {hit:hit&&(hit.tagName+'.'+String(hit.className).slice(0,30)+(hit.closest('#khmtest')?' in':' OUT')),modal:!document.getElementById('modal').hidden,up:!!document.querySelector('#khmtest button.klift[data-khid=c1]'),plate:!!z,conf:!!c&&!c.querySelector('.khok').hidden,plateIn:!!zr&&zr.left>=-1&&zr.right<=innerWidth+1&&zr.top>=-1&&zr.bottom<=innerHeight+1,confOnCard:!!c&&!!zr&&(()=>{const q=c.getBoundingClientRect();return q.top<zr.bottom&&q.bottom>zr.bottom-4&&q.left>=zr.left-2&&q.right<=zr.right+2})()/* ✓ / ✕ on the flipped card's lower edge */,plateW:zr?Math.round(zr.width):0,lf:window.__lf.slice(),pk:window.__pk.slice()}});
+  const s1=await p.evaluate(()=>{const z=document.querySelector('#khmtest .khplate.khbig:not([hidden])'),c=document.querySelector('#khmtest .khconf:not([hidden])');const zr=z&&z.getBoundingClientRect();
+   const bt=document.querySelector('#khmtest button[data-khid=c1]'),br=bt.getBoundingClientRect(),hit=document.elementFromPoint(br.left+br.width/2,br.top+br.height/2);return {hit:hit&&(hit.tagName+'.'+String(hit.className).slice(0,30)+(hit.closest('#khmtest')?' in':' OUT')),modal:!document.getElementById('modal').hidden,up:!!document.querySelector('#khmtest button.klift[data-khid=c1]'),plate:!!z,conf:!!c&&!c.querySelector('.khok').hidden,plateIn:!!zr&&zr.left>=-1&&zr.right<=innerWidth+1&&zr.top>=-1&&zr.bottom<=innerHeight+1,confOnCard:!!c&&!!zr&&(()=>{const q=c.querySelector('.khok').getBoundingClientRect();return Math.round(q.top-zr.bottom)===12&&Math.abs((q.left+q.right)/2-(zr.left+zr.right)/2)<=2&&q.bottom<=innerHeight&&c.querySelector('.khok').textContent.trim()==='Chọn'&&!c.querySelector('.khx')})()/* ONE «Chọn» 12 px under the enlarged card */,flip:!!document.querySelector('.khflip,.khback,.khff,.khfb')||typeof window.kitHandFlipPlace==='function'||!!KIT_HAND.flip,plateW:zr?Math.round(zr.width):0,lf:window.__lf.slice(),pk:window.__pk.slice()}});
   if(SHOT)await p.screenshot({path:`${SHOT}/mount-${wh}.png`});
-  chk(wh+' real tap = lift + flipped card (reading size ≥ 200 px) + ✓/✕ on its lower edge, card on screen, onLift',s1.up&&s1.plate&&s1.conf&&s1.plateIn&&s1.confOnCard&&s1.plateW>=200&&s1.lf[0]==='c1'&&!s1.pk.length,s1);
-  await tap('#khmtest .khconf>.khx');await p.waitForTimeout(500);const s2=await p.evaluate(()=>({up:document.querySelectorAll('#khmtest button.klift').length,pk:window.__pk.slice()}));
-  chk(wh+' ✕ puts back',s2.up===0&&!s2.pk.length,s2);
+  chk(wh+' real tap = lift + enlarged card (≥ 200 px, front only) + ONE «Chọn» 12 px under it, on screen, onLift, no flip',s1.up&&s1.plate&&s1.conf&&s1.plateIn&&s1.confOnCard&&s1.plateW>=200&&!s1.flip&&s1.lf[0]==='c1'&&!s1.pk.length,s1);
+  await p.mouse.click(5,Math.round(H*.5));await p.waitForTimeout(500);const s2=await p.evaluate(()=>({up:document.querySelectorAll('#khmtest button.klift').length,pk:window.__pk.slice()}));
+  chk(wh+' tap elsewhere puts back',s2.up===0&&!s2.pk.length,s2);
   await tap('#khmtest button[data-khid=c3]');await p.waitForTimeout(500);await tap('#khmtest .khconf>.khok');await p.waitForTimeout(700);const s3=await p.evaluate(()=>window.__pk.slice());
-  chk(wh+' ✓ = choose → onPick once',s3.length===1&&s3[0]==='c3',s3);
+  chk(wh+' «Chọn» = choose → onPick once',s3.length===1&&s3[0]==='c3',s3);
   await p.evaluate(()=>{__mount(4)});await p.waitForTimeout(1300);const s4=await p.evaluate(()=>{document.querySelector('#khmtest button[data-khid=c0]').click();return window.__pk.slice()});
   chk(wh+' robot click (detail 0) → onPick at once',s4.length===1&&s4[0]==='c0',s4);
   await p.evaluate(()=>{window.__pk=[];document.getElementById('khmtest').scrollIntoView({block:'center'})});await tap('#khmtest button[data-khid=c2]');await p.waitForTimeout(500);
   const s5=await p.evaluate(()=>{const c=document.querySelector('#khmtest .khconf:not([hidden])');return {up:!!document.querySelector('#khmtest button.klift[data-khid=c2]'),ok:c?!c.querySelector('.khok').hidden:null,x:!!c,pk:window.__pk.slice()}});
-  chk(wh+' locked card lifts with ✕ only, never picks',s5.up&&s5.ok===false&&s5.x&&!s5.pk.length,s5);
+  chk(wh+' locked card enlarges with no «Chọn», never picks',s5.up&&!s5.x&&!s5.pk.length,s5);
   await p.mouse.click(5,Math.round(H*.5));await p.waitForTimeout(400);const s6=await p.evaluate(()=>document.querySelectorAll('#khmtest button.klift').length);
   chk(wh+' tap outside the host puts the card back',s6===0,s6);
   const s7=await p.evaluate(()=>{__H.destroy();return !document.querySelector('#khmtest .khost')});chk(wh+' destroy removes the host',s7,s7);

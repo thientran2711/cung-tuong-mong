@@ -1,14 +1,12 @@
 /* ===== KIT §101 kitHand «BÀN BÀI» — event choices as a HAND OF CARDS (owner 24/11 ~15:15Z mẫu 1 GO + 25/11 ~15:12Z «cho kiểu animation game đi»; KK30, review/kit-hand)
    ONE place, every event-choice frame: an option list (`#modal .opts`) of 2–7 kit option cards (§101.11) (`button.ka.kopt`, jopic §6.2b) becomes a hand.
-   - Card face = the option's own picture (.kaart) + its SHORT name (.kan) ONLY (owner 24/11 ~15:15Z b, restated via MAIN 146 25/11 ~22:40Z): no odds meter, no Tốn / Được / Mất on the face —
-     the odds word + Gợi ý + rows show only in the lifted card's details plate.
-   - Tap 1 = the card lifts a little + its details plate shows (the SAME kit card clone the «!» overlay shows: Tốn · Được · Mất · odds word · Gợi ý; a locked card shows its kit «why»).
-   - The lifted card carries green ✓ (choose: the card flies up, then the frame's own choose path runs: #modal onclick → chooseM, unchanged) + ✕ (put back); a body tap again does nothing (owner 25/11 ~21:55Z).
+   - Card face = the option's own picture (.kaart) + its SHORT name (.kan) + its Tốn line (§101.10, owner 26/11 ~23:58Z «info on the FRONT»; the odds word / Được / Mất show on the enlarged card).
+   - Tap = the card ENLARGES in the centre with ONE «Chọn» under it (KIT §101.10, Game-of-Dice, NO FLIP); tap another = switch, tap elsewhere = back; «Chọn» = the card flies up, then the frame's own choose path runs (#modal onclick → chooseM, unchanged).
    - Keyboard / robot / synthetic clicks (event.detail === 0) choose at once, as before (data-m and every data attribute the tests and the harness read stay on the same buttons).
    - All cards visible, no scroll: one row when they fit at the minimum card width, else 2 (3 on a narrow phone) rows; ONE card size per hand (law 10).
    - Smooth: deal-in, lift and fly are transform/opacity on the CARDS only (never on figures, never a cross-fade of two screens); «Cảnh động» off / reduced motion = no animation (kfStill).
    Numbers: geometry knobs here (KIT_HAND, layout px like KIT_OPT); every game number on the cards comes from the kit card (BAL), nothing typed (law 4). */
-const KIT_HAND={min:2,max:10/* KIT §101.11 (owner 26/11 ~22:43Z «không bắt buộc max 7 lá, những option nào cần nhiều hơn 7 lá thì cứ giữ»; no paging, 21:25Z): every card of a hand shows at once (2–3 rows); > max = not a hand (list) */,gap:[8,12],minW:[88,100],maxW:[128,124],cmpW:[[74,92],[78,92]]/* compact hand [min,max] per view: a long story keeps its text readable */,nameFs:[12.5,14],liftK:.13,dealMs:420,readyMs:700,dealStep:70,flyMs:260,plateW:560,confPx:44,notKinds:["info","rule","help"]/* KK36 (MAIN 151, KK35 question): an INFO panel (kitPanel kind) whose options are shortcut cards («Mục tiêu chương» «Đi làm: …») is never a hand / stage — one panel = one look */};
+const KIT_HAND={min:2,max:10/* KIT §101.11 (owner 26/11 ~22:43Z «không bắt buộc max 7 lá, những option nào cần nhiều hơn 7 lá thì cứ giữ»; no paging, 21:25Z): every card of a hand shows at once (2–3 rows); > max = not a hand (list) */,gap:[8,12],minW:[88,100],maxW:[128,124],cmpW:[[74,92],[78,92]]/* compact hand [min,max] per view: a long story keeps its text readable */,nameFs:[12.5,14],liftK:.13,dealMs:420,readyMs:700,dealStep:70,flyMs:260,notKinds:["info","rule","help"]/* KK36 (MAIN 151, KK35 question): an INFO panel (kitPanel kind) whose options are shortcut cards («Mục tiêu chương» «Đi làm: …») is never a hand / stage — one panel = one look */};
 /* KIT §101.9 FRAME KIND — the hand is OPT-IN BY KIND (KIT-STAGE-R3; OD 26/11 ~19:00Z «the new animation kit replaces every old frame of the same kind», KK44 NEW-KIT
    FAMILY SCAN wrong-part rows). The showModal pass no longer turns «any 2–10 option list» into a hand: each frame names its KIND and gets THAT part.
    kitKind(m) → "hand" (Bàn bài, §101) · "pick" (thẻ gỗ treo on the stage, §98/§102.3) · "ring" (a PERSON picker → vòng người, RING-BUILD) ·
@@ -37,13 +35,14 @@ function kitHandH(){try{return kitView().h||innerHeight}catch(e){return innerHei
 /* layout: slots per card (x, y, rotation) inside the list box; the box gets the hand height; idempotent per (width, count) */
 function kitHandLay(g,quiet){try{if(kitHandIsLong(g))return;const bs=kitHandCards(g),n=bs.length;if(!n)return;bs.forEach(kitHandShort);const K=KIT_HAND,ip=kitHandWide(),W=g.clientWidth;if(!W)return;
  const cm=g.dataset.khc==="1";const sig=W+"|"+n+"|"+kitHandH()+"|"+cm;
- const mnW=cm?K.cmpW[ip][0]:K.minW[ip],mxW=cm?K.cmpW[ip][1]:K.maxW[ip],gap=K.gap[ip],side=Math.round(10+mxW*1.5*.045)/* frame padding + what a turned outer card swings out */,fit=Math.max(1,Math.floor((W-2*side+gap)/(mnW+gap)));let rows=Math.ceil(n/fit);const per=Math.ceil(n/rows);
+ const mnW=cm?K.cmpW[ip][0]:K.minW[ip],mxW=cm?K.cmpW[ip][1]:K.maxW[ip],gap=K.gap[ip],side=Math.round(10+mxW*1.75*.07)/* frame padding + what a turned outer card swings out (the face is ~1.75 × its width with the Tốn line, §101.10) */,fit=Math.max(1,Math.floor((W-2*side+gap)/(mnW+gap)));let rows=Math.ceil(n/fit);const per=Math.ceil(n/rows);
  let cw=Math.min(mxW,(W-2*side-(per-1)*gap)/per);const fs=cw<100?K.nameFs[0]-.5:K.nameFs[ip];
- const face=h=>Math.round(h-10+fs*1.15*3+12);/* picture square (card width − padding) + up to 3 name lines + gaps (no odds meter on the face) */
+ const face=h=>{const tl=kitHandTonL(bs,h,fs);return Math.round(h-10+fs*1.15*3+12+(tl?tl*fs*.84*1.2+4:0))};/* picture square (card width − padding) + up to 3 name lines + the Tốn line(s) (§101.10, info on the FRONT) + gaps */
  let ch=face(cw);const lift=Math.round(ch*K.liftK);
  /* the hand may take at most ~46 % of the screen height (the story text and the speaker keep the rest; law 10) */
  const cap=g.__khCap?g.__khCap():Math.round(kitHandH()*(n>(ip?5:6)?.46:(ip?.36:.40)));/* kitHand.mount: the host may set its own cap (o.maxH) */const need=()=>lift+6+rows*ch+(rows-1)*gap+8;
  while(need()>cap&&cw>mnW*.78){cw-=4;ch=face(cw)}
+ g.style.setProperty("--khtl",kitHandTonL(bs,cw,fs)||1);
  g.classList.add("khand");g.dataset.khand=n;g.dataset.khrows=rows;g.style.setProperty("--khw",Math.floor(cw)+"px");g.style.setProperty("--khh",ch+"px");g.style.setProperty("--khfs",fs+"px");g.style.setProperty("--khlift",lift+"px");
  let maxY=0;bs.forEach((b,i)=>{const r=Math.floor(i/per),k=i%per,inRow=r<rows-1?per:n-per*(rows-1),rowW=inRow*cw+(inRow-1)*gap,x=(W-rowW)/2+k*(cw+gap),mid=(inRow-1)/2,d=k-mid;
   const rot=rows===1?d*Math.min(2.4,8/Math.max(1,mid)):d*1.1,arc=d*d*(rows===1?Math.min(2.2,10/Math.max(1,mid*mid)):.6),y=lift+6+r*(ch+gap)+arc;maxY=Math.max(maxY,y+ch);
@@ -51,6 +50,8 @@ function kitHandLay(g,quiet){try{if(kitHandIsLong(g))return;const bs=kitHandCard
  g.style.setProperty("--khH",Math.ceil(maxY+8)+"px");
  const dl=g.closest(".dlg,.khost");if(dl){dl.classList.add("khdlg");if(!quiet&&dl.classList.contains("dlg"))try{if(typeof kszEvLaw10==="function")kszEvLaw10(dl);if(typeof kszTextFirst3==="function")kszTextFirst3(dl)}catch(e){}}
  kitHandNameFit(g);const L=g.querySelector(":scope>button.klift");if(L)kitHandPlate(L)}catch(e){console.error("kitHandLay",e)}}
+/* §101.10 the Tốn line on the hand face: 0 = no card has a Tốn row; else 1 or 2 lines (the longest Tốn at the card width), one value per hand (law 10) */
+function kitHandTonL(bs,cw,fs){try{let n=0;bs.forEach(b=>{const r=b.querySelector(".kb>.kr-ton");if(!r)return;const t=r.textContent.trim();if(!t)return;const per=Math.max(6,Math.floor((cw-10)/(fs*.84*.52)));n=Math.max(n,Math.min(2,Math.ceil(t.length/per)))});return n}catch(e){return 0}}
 /* KK35 (item 2, OD:L177 a name is never cut; iPad «Đi làm: Thay y phục hay trang sức trong Tư…»): a card name that spills its 3 lines → the WHOLE hand takes the tighter face font (.khn1); still spilling → 4 lines (.khn2). One face size per hand (law 10). */
 function kitHandNameFit(g){try{g.classList.remove("khn1","khn2");const over=()=>kitHandCards(g).some(b=>{const k=b.querySelector(".kan");return k&&k.scrollHeight>k.clientHeight+1});if(!over())return;g.classList.add("khn1");if(!over())return;g.classList.add("khn2");if(over()&&!g.closest(".khost"))kitHandLongTo(g)/* a mounted hand never changes the frame kind */}catch(e){}}
 /* KK41 (MAIN 157 ruling, OD:L177 a name is never cut, law 11 every hand-face frame): a name that still spills the 4-line face (.khn2) → that frame is NOT a hand:
@@ -65,74 +66,72 @@ function kitHandLongTo(g){try{const m=typeof Q!=="undefined"?Q[0]:null;const kd=
 function kitHandSig(g){try{return[...g.children].filter(b=>b.tagName==="BUTTON").map(b=>{const k=b.querySelector(".kan");return(k||b).textContent.trim()}).join("\u241e")}catch(e){return""}}
 function kitHandIsLong(g){return !!(g&&g.__khLong&&g.__khLong===kitHandSig(g))}
 function kitHandLongOff(g){try{g.__khLong=kitHandSig(g);g.__khSig="";g.classList.remove("khand","khn1","khn2","khpre");delete g.dataset.khand;delete g.dataset.khrows;delete g.dataset.khc;["--khw","--khh","--khfs","--khlift","--khH"].forEach(p=>g.style.removeProperty(p));
- [...g.children].forEach(b=>{if(b.tagName!=="BUTTON")return;b.classList.remove("klift","khfly","khfl");delete b.dataset.khi;["--kx","--ky","--kr"].forEach(p=>b.style.removeProperty(p))});kitHandConfOff(g);
- const dl=g.closest(".dlg,.khost");if(dl){dl.querySelectorAll(":scope>.khplate,:scope>.khconf").forEach(e=>e.remove());dl.classList.remove("khdlg");if(dl.classList.contains("kstage")&&typeof kstgOff==="function")kstgOff(dl);if(typeof kszLiveRepick3==="function")kszLiveRepick3(dl)}}catch(e){console.error("kitHandLongOff",e)}}
-/* KIT §101.10 «LẬT THẺ» — the lifted card FLIPS and its BACK holds the info (owner 26/11 ~20:45Z, verbatim: "như hình 1 khi chọn 1 thẻ, là ngày trên thẻ hiện thông tin,
-   chứ không phải 1 chip thông tin ở trên, làm animation kiểu lật thẻ mặt sau, để đọc thông tin á"; CANON OVERWRITE of the §101 details plate above the hand).
-   Tap 1 on a card: a reading-size copy of THAT card grows out of it and turns over in 3D (rotateY 0 → 180°, transform only on the copy, never on figures);
-   its BACK = the SAME kit card clone the «!» overlay shows (full name · Tốn · Được · Mất · the odds word of the 7-band ladder · Gợi ý; a locked card its kit «why»),
-   every number from the kit card (BAL), nothing typed (law 4). The flipped card stands ON its hand card (bottom on the card's bottom, centred on it, inside the frame);
-   ✓ / ✕ sit on its lower edge. ✕ / a tap elsewhere = it turns back and shrinks into its card; ✓ = the flipped card flies up, then the frame's own choose path runs.
-   ONE part for every hand (kitHand callers + the stage Bàn bài, jkstage kstgPlate uses kitHandFlipPlace). «Cảnh động» off / reduced motion = no motion (kfStill).
-   The element keeps the class .khplate (the stage and the tests key on it) + .khflip. Geometry knobs: KIT_HAND.flip. */
-KIT_HAND.flip={wK:2.15,minW:[216,236],maxW:[292,300],ms:420,backMs:260,fs:[28,26,24,22,20,18,17,16,15,14,13]/* back type scale px: the largest that fits the card wins */};
-function kitHandFlipBuild(b,z){const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
+ [...g.children].forEach(b=>{if(b.tagName!=="BUTTON")return;b.classList.remove("klift","khfly","khout");delete b.dataset.khi;["--kx","--ky","--kr"].forEach(p=>b.style.removeProperty(p))});kitHandConfOff(g);
+ const dl=g.closest(".dlg,.khost");if(dl){dl.querySelectorAll(":scope>.khplate,:scope>.khconf,:scope>.khveil").forEach(e=>e.remove());dl.classList.remove("khdlg");if(dl.classList.contains("kstage")&&typeof kstgOff==="function")kstgOff(dl);if(typeof kszLiveRepick3==="function")kszLiveRepick3(dl)}}catch(e){console.error("kitHandLongOff",e)}}
+/* KIT §101.10 «THẺ PHÓNG TO» — Game-of-Dice hand, NO FLIP (owner 26/11 ~23:58Z, verbatim: "Ok bỏ lật, làm theo Game of Dice"; CANON OVERWRITE of the 22:07Z
+   «tap 1 enlarge, tap 2 flip» ruling; spec dev/handover/reports/god-research.md). Every card shows its info on the FRONT; there is no back side anywhere.
+   - The hand card face = picture + short name + its Tốn line (exact, from the kit card rows = BAL, law 4).
+   - Tap a card: it ENLARGES in the centre of the frame / pane (`.khplate.khbig`, transform + opacity only, from its hand slot) — plaque (the WHOLE name) ·
+     picture · Tốn row with the odds word at its right end · Được · Mất (a locked card: its kit «why») — every number from the SAME kit card the «!» overlay
+     shows (a disabled copy, nothing typed). The hand stays small behind it under a soft veil (`.khveil`, never takes taps).
+   - ONE «Chọn» button (kit `.kbtn`, tier L KIT_HAND.big.btn) 12 px under the enlarged card = choose: the card flies up, then the frame's own choose path runs.
+     A locked card has no «Chọn». Tap another card = switch; tap anywhere else = it shrinks back into its slot. Tapping the enlarged card does nothing.
+   - ONE part for every hand (frame hand, stage Bàn bài via jkstage kstgPlate → kitHandBigPlace, kitHand.mount panes). «Cảnh động» off / reduced motion = no motion.
+   The element keeps the class .khplate (the stage and the tests key on it). Geometry knobs: KIT_HAND.big. */
+KIT_HAND.big={w:[360,340]/* enlarged card width [Fold, iPad] (god-research 360x504 / 340x476) */,asp:1.4/* 5:7 */,minH:220,under:.8,btn:[280,64]/* «Chọn», tier L: the largest the tier needs */,gap:12,ms:200,backMs:150,fs:[22,21,20,19,18,17,16,15,14,13]/* info type scale px: the largest that fits wins */};
+function kitHandBigBuild(b,z){const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang").forEach(e=>e.remove());/* the Gợi ý row repeats Được / Mất in prose: shown only when the card has neither row */if(c.querySelector(".kr-duoc,[class*=kr-mat]"))c.querySelectorAll(".kr-hint").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *")&&!(r.querySelector(".krv")||{}).textContent)r.remove()});
- ["--kx","--ky","--kr","--k3s","min-height"].forEach(p=>c.style.removeProperty(p));c.classList.remove("kopt","kart","klift","kfdown","khfl");c.classList.add("kopinfo");if(b.disabled)c.classList.add("khlock");c.disabled=true;c.type="button";c.removeAttribute("data-m");c.removeAttribute("data-khi");c.removeAttribute("aria-pressed");
- /* front = the card face as it lies in the hand (its picture + short name), seen only during the first half of the turn */
- const f=document.createElement("div");f.className="khff";const im=b.querySelector(".kaart img");if(im){const i=document.createElement("img");i.src=im.currentSrc||im.src;i.alt="";f.appendChild(i)}
- const n=document.createElement("div");n.className="khffn";const kan=b.querySelector(".kan");if(kan){const k=kan.cloneNode(true);k.querySelectorAll(".khnx").forEach(e=>e.remove());n.textContent=k.textContent.trim()}f.appendChild(n);const hn=document.createElement("div");hn.className="khffh";hn.textContent="Chạm vào lá để lật xem";f.appendChild(hn);
- const bk=document.createElement("div");bk.className="khfb";bk.appendChild(c);const fi=document.createElement("div");fi.className="khfi";fi.appendChild(f);fi.appendChild(bk);z.innerHTML="";z.appendChild(fi);z.__khFor=b}
-/* place the flipped card ON its hand card: width from the card (wK), bottom = the card's resting bottom, centred on it inside [L,R]; height = its back, at most up to top0 (then the back scrolls) */
-function kitHandFlipPlace(b,z,dl,top0,L,R){try{const K=KIT_HAND.flip,ip=kitHandWide(),D=dl.getBoundingClientRect(),g=b.parentElement,B=b.getBoundingClientRect(),G=g.getBoundingClientRect();
- const lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0,cw=parseFloat(getComputedStyle(g).getPropertyValue("--khw"))||B.width,ch=parseFloat(getComputedStyle(g).getPropertyValue("--khh"))||B.height;
- L=L==null?D.left+8:L;R=R==null?D.right-8:R;let w=Math.round(Math.min(R-L,K.maxW[ip],Math.max(K.minW[ip],cw*K.wK)));const asp=ch/cw;/* owner 26/11 ~22:07Z: the enlarged card and its back keep the CARD's own shape */
- /* the card's resting slot (the lift transition may still run): list box top + its --ky */
- const ky=parseFloat(b.style.getPropertyValue("--ky"))||0,bot=Math.min(D.bottom-4,G.top+ky+ch+2);const s=KIT_HAND.confPx,room=Math.round(s*.5);
- z.style.width=w+"px";z.style.maxHeight="";z.style.height="";z.style.top="auto";const fb=z.querySelector(".khfb");if(fb)fb.style.maxHeight="";
- const top=Math.max(dl.classList.contains("khost")&&top0!=null?top0:D.top+4,top0==null?D.top+4:top0),maxH=Math.max(120,Math.round(bot-room-top));let h=Math.round(w*asp);if(h>maxH){h=maxH;w=Math.round(h/asp)}z.style.width=w+"px";
- z.style.height=h+"px";if(fb){fb.style.maxHeight=h+"px";/* fill: the largest step of the kit scale whose content fits the back */const F=K.fs;let i=0;for(;i<F.length;i++){fb.style.setProperty("--khbfs",F[i]+"px");if(fb.scrollHeight<=fb.clientHeight+1)break}if(i>=F.length)fb.style.setProperty("--khbfs",F[F.length-1]+"px")}
- const x=Math.round(Math.max(L,Math.min(R-w,B.left+B.width/2-w/2)));z.style.left=(x-D.left)+"px";
- /* kitHand.mount (§101.13): a hand at the TOP of its pane has no room above — the flipped card opens DOWNWARD from its card's top when the pane gives more room there */
- const pb=dl.__khBot?dl.__khBot():0,ct=G.top+ky,want=Math.round(Math.min(R-L,K.maxW[ip],Math.max(K.minW[ip],cw*K.wK))*asp);
- if(pb&&h<want&&pb-ct-room>maxH){let h2=Math.min(want,Math.round(pb-ct-room-4)),w2=Math.round(h2/asp);const x2=Math.round(Math.max(L,Math.min(R-w2,B.left+B.width/2-w2/2)));z.style.width=w2+"px";z.style.height=h2+"px";if(fb){fb.style.maxHeight=h2+"px";const F=K.fs;let i=0;for(;i<F.length;i++){fb.style.setProperty("--khbfs",F[i]+"px");if(fb.scrollHeight<=fb.clientHeight+1)break}if(i>=F.length)fb.style.setProperty("--khbfs",F[F.length-1]+"px")}
-  z.style.left=(x2-D.left)+"px";z.style.bottom="auto";z.style.top=Math.round(ct-D.top)+"px";z.__khRect={l:x2-D.left,t:ct-D.top,w:w2,h:h2};kitHandConf(b);return}
- z.style.bottom=Math.round(D.bottom-(bot-room))+"px";
- z.__khRect={l:x-D.left,t:bot-room-h-D.top,w,h};kitHandConf(b)}catch(e){console.error("kitHandFlipPlace",e)}}
-/* the 3D turn: the copy starts exactly over the hand card (scale) at 0°, ends at reading size at 180°; back = the reverse */
-function kitHandFlipGo(b,z,back,done){try{const fi=z.querySelector(".khfi");if(kitHandStill()||!z.animate||!fi){if(done)done();return}const K=KIT_HAND.flip,R=z.getBoundingClientRect(),B=b.getBoundingClientRect();if(!R.width||!R.height){if(done)done();return}
- const from=`translate(${Math.round(B.left-R.left)}px,${Math.round(B.top-R.top)}px) scale(${(B.width/R.width).toFixed(3)},${(B.height/R.height).toFixed(3)})`,ms=back?K.backMs:K.ms,E="cubic-bezier(.3,.7,.3,1)";
- z.style.transformOrigin="0 0";const a=z.animate(back?[{transform:"none"},{transform:from}]:[{transform:from},{transform:"none"}],{duration:ms,easing:E,fill:back?"forwards":"none"});
-  if(done)a.onfinish=done}catch(e){if(done)done()}}
-function kitHandPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg,.khost");if(!dl)return;let z=dl.querySelector(":scope>.khplate");if(!z){z=document.createElement("div");z.className="khplate khflip";z.setAttribute("role","status");dl.appendChild(z)}
- z.classList.add("khflip");z.classList.toggle("khstill",kitHandStill());const fresh=z.hidden||z.__khFor!==b;if(fresh){z.classList.remove("khback");z.getAnimations&&z.getAnimations({subtree:true}).forEach(a=>a.cancel());kitHandFlipBuild(b,z)}z.hidden=false;
- const hd=dl.querySelector(":scope>.kph"),D=dl.getBoundingClientRect(),top0=dl.__khTop?dl.__khTop():(hd&&hd.getClientRects().length?hd.getBoundingClientRect().bottom:D.top)+6,G=g.getBoundingClientRect();
- kitHandFlipPlace(b,z,dl,top0,Math.max(D.left+8,Math.min(G.left,D.right-8-KIT_HAND.flip.maxW[kitHandWide()])),Math.min(D.right-8,Math.max(G.right,D.left+8+KIT_HAND.flip.maxW[kitHandWide()])));
- b.classList.add("khfl");if(fresh&&!kitHandStill()){const cf=dl.querySelector(":scope>.khconf");if(cf)cf.style.opacity="0";/* ✓ / ✕ show when the turn ends */Promise.resolve().then(()=>{if(z.__khFor===b&&!z.hidden)kitHandFlipGo(b,z,false,()=>{if(cf)cf.style.opacity=""});else if(cf)cf.style.opacity=""})}}catch(e){console.error("kitHandPlate",e)}}
-/* ✓ / ✕ CONFIRM (owner 25/11 ~21:55Z, replaces «tap again = choose», law 14): green ✓ = choose this card, ✕ = put it back (look at the others).
-   §101.10: they sit on the FLIPPED card's lower edge (centred, half over its border), never above the hand. Tapping the flipped card does nothing; tapping another card lifts that one.
-   One part for every hand (and the same rule for the thẻ gỗ picker kitPick). Size = KIT_HAND.confPx (kit tap size). */
-function kitHandConf(b){try{const g=b&&b.parentElement,dl=g&&g.closest(".dlg,.khost");if(!dl)return;let c=dl.querySelector(":scope>.khconf");
- if(!b.classList.contains("klift")){if(c)c.hidden=true;return}
- if(!c){c=document.createElement("div");c.className="khconf";c.innerHTML=`<button type="button" class="khok" aria-label="Chọn lá này">✓</button><button type="button" class="khx" aria-label="Đặt lại">✕</button>`;dl.appendChild(c)}
- /* a LOCKED card flips too: ✕ alone (same 2-button kit form, no ✓; KK46 review) */const ok=c.querySelector(".khok");if(ok)ok.hidden=!!b.disabled;
- c.hidden=false;const D=dl.getBoundingClientRect(),s=KIT_HAND.confPx,gap=Math.round(s*.6),w=(b.disabled?1:2)*s+(b.disabled?0:gap);const z=dl.querySelector(":scope>.khplate:not([hidden])"),Rz=z&&z.__khRect;
- let x,y;if(Rz){x=Math.round(Rz.l+Rz.w/2-w/2);y=Math.round(Rz.t+Rz.h-s*.5)}else{const B=b.getBoundingClientRect();x=Math.round(B.right-D.left-w+s*.35);y=Math.round(B.top-D.top-s*.55)}
- x=Math.max(4,Math.min(D.width-w-4,x));y=Math.max(dl.__khTop?Math.round(dl.__khTop()-D.top):4,Math.min((dl.__khBot?Math.round(dl.__khBot()-D.top):D.height)-s-2,y))/* a mounted host: its flipped card may stand above / below the host, inside its pane */;c.style.left=x+"px";c.style.top=y+"px";c.style.gap=gap+"px";c.style.setProperty("--khcs",s+"px")}catch(e){console.error("kitHandConf",e)}}
+ ["--kx","--ky","--kr","--k3s","min-height"].forEach(p=>c.style.removeProperty(p));c.classList.remove("kopt","kart","klift","kfdown","khout");c.classList.add("kopinfo");if(b.disabled)c.classList.add("khlock");c.disabled=true;c.type="button";c.removeAttribute("data-m");c.removeAttribute("data-khi");c.removeAttribute("aria-pressed");
+ /* the odds word sits at the right end of the Tốn row (spec); no Tốn row → it heads the rows */
+ const od=c.querySelector(".kodds"),tr=c.querySelector(".kr-ton");const kan=c.querySelector(".kan");const name=kan?kan.textContent.trim():"";if(kan)kan.remove();if(od){if(tr)tr.appendChild(od);else{const kb=c.querySelector(".kb");if(kb)kb.insertBefore(od,kb.firstChild)}}
+ const card=document.createElement("div");card.className="khbc";const pn=document.createElement("div");pn.className="khbn";pn.textContent=name;card.appendChild(pn);
+ const im=b.querySelector(".kaart img.kpor")||b.querySelector(".kaart figure img")||b.querySelector(".kaart img");const pic=document.createElement("div");pic.className="khbp";if(im){const i=document.createElement("img");i.src=im.currentSrc||im.src;i.alt="";pic.appendChild(i)}card.appendChild(pic);
+ const inf=document.createElement("div");inf.className="khbi";inf.appendChild(c);card.appendChild(inf);z.innerHTML="";z.appendChild(card);z.__khFor=b}
+/* fill: the largest step of the kit scale whose info fits the card */
+function kitHandBigFit(z){const fi=z.querySelector(".khbi");if(!fi)return;const F=KIT_HAND.big.fs;let i=0;for(;i<F.length;i++){z.style.setProperty("--khbfs",F[i]+"px");if(fi.scrollHeight<=fi.clientHeight+1)break}if(i>=F.length)z.style.setProperty("--khbfs",F[F.length-1]+"px")}
+/* place the enlarged card in the CENTRE of [L,R] × [top0, bottom] with its «Chọn» block under it; the room caps the height (5:7 kept) */
+function kitHandBigPlace(b,z,dl,top0,L,R){try{const K=KIT_HAND.big,ip=kitHandWide(),D=dl.getBoundingClientRect();
+ L=L==null?D.left+8:L;R=R==null?D.right-8:R;let top=top0==null?D.top+4:top0;const bot=dl.__khBot?dl.__khBot():Math.min(innerHeight-4,D.bottom-4);
+ const foot=b.disabled?0:K.gap+K.btn[1];let w=Math.round(Math.min(K.w[ip],R-L)),h=Math.round(w*K.asp);
+ /* the story stays readable: the card starts under the story box when that still leaves ≥ KIT_HAND.big.under of its height, else it stands over it */
+ const pm=dl.querySelector(".kpmain");if(pm&&pm.getClientRects().length){const pb=pm.getBoundingClientRect().bottom+8;if(pb>top&&bot-pb-foot-4>=h*K.under)top=pb}
+ const room=Math.round(bot-top-foot-4);if(h>room){h=Math.max(K.minH,room);w=Math.round(h/K.asp)}
+ const x=Math.round((L+R)/2-w/2),y=Math.round(Math.max(top,top+(bot-top-(h+foot))/2));
+ z.style.width=w+"px";z.style.height=h+"px";z.style.left=(x-D.left)+"px";z.style.top=(y-D.top)+"px";z.style.bottom="auto";z.__khRect={l:x-D.left,t:y-D.top,w,h};kitHandBigFit(z);
+ const v=dl.querySelector(":scope>.khveil");if(v){const P=dl.__khPane?dl.__khPane():null,Q=P?P.getBoundingClientRect():D;v.style.left=(Q.left-D.left)+"px";v.style.top=(Q.top-D.top)+"px";v.style.width=Q.width+"px";v.style.height=Q.height+"px"}
+ kitHandConf(b)}catch(e){console.error("kitHandBigPlace",e)}}
+/* grow / shrink: the copy starts exactly over the hand card (translate + scale) and ends at its centre place; back = the reverse */
+function kitHandBigGo(b,z,back,done){try{if(kitHandStill()||!z.animate){if(done)done();return}const K=KIT_HAND.big,R=z.getBoundingClientRect(),B=b.getBoundingClientRect();if(!R.width||!R.height){if(done)done();return}
+ const from=`translate(${Math.round(B.left-R.left)}px,${Math.round(B.top-R.top)}px) scale(${(B.width/R.width).toFixed(3)},${(B.height/R.height).toFixed(3)})`;
+ z.style.transformOrigin="0 0";const a=z.animate(back?[{transform:"none",opacity:1},{transform:from,opacity:.6}]:[{transform:from,opacity:.6},{transform:"none",opacity:1}],{duration:back?K.backMs:K.ms,easing:"cubic-bezier(.2,.8,.3,1)",fill:back?"forwards":"none"});
+ if(done)a.onfinish=done}catch(e){if(done)done()}}
+function kitHandPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg,.khost");if(!dl)return;let z=dl.querySelector(":scope>.khplate");if(!z){z=document.createElement("div");z.className="khplate khbig";z.setAttribute("role","status");dl.appendChild(z)}
+ let v=dl.querySelector(":scope>.khveil");if(!v){v=document.createElement("div");v.className="khveil";dl.insertBefore(v,z)}v.hidden=false;
+ const fresh=z.hidden||z.__khFor!==b;if(fresh){z.getAnimations&&z.getAnimations().forEach(a=>a.cancel());kitHandBigBuild(b,z)}z.hidden=false;
+ const hd=dl.querySelector(":scope>.kph"),D=dl.getBoundingClientRect(),top0=dl.__khTop?dl.__khTop():(hd&&hd.getClientRects().length?hd.getBoundingClientRect().bottom:D.top)+6;
+ const LR=dl.__khLR?dl.__khLR():[D.left+8,D.right-8];kitHandBigPlace(b,z,dl,top0,LR[0],LR[1]);
+ b.classList.add("khout");if(fresh&&!kitHandStill()){const cf=dl.querySelector(":scope>.khconf");if(cf)cf.style.opacity="0";/* «Chọn» shows when the card has grown */Promise.resolve().then(()=>{if(z.__khFor===b&&!z.hidden)kitHandBigGo(b,z,false,()=>{if(cf)cf.style.opacity=""});else if(cf)cf.style.opacity=""})}}catch(e){console.error("kitHandPlate",e)}}
+/* ONE «Chọn» (owner 26/11 ~23:58Z, CANON OVERWRITE of the ✓ / ✕ pair of 25/11 ~21:55Z for the hand): a wide kit button 12 px under the enlarged card, same centre.
+   A locked card: none. Putting a card back = a tap anywhere else (or on another card = switch). (The thẻ gỗ picker kitPick keeps its own .khconf ✓ / ✕, §98.1.) */
+function kitHandConf(b){try{const g=b&&b.parentElement,dl=g&&g.closest(".dlg,.khost");if(!dl)return;let c=dl.querySelector(":scope>.khconf");const z=dl.querySelector(":scope>.khplate:not([hidden])"),Rz=z&&z.__khRect;
+ if(!b.classList.contains("klift")||b.disabled||!Rz){if(c)c.hidden=true;return}
+ if(!c){c=document.createElement("div");c.className="khconf khgo";c.innerHTML=`<button type="button" class="kbtn khok" aria-label="Chọn lá này">Chọn</button>`;dl.appendChild(c)}
+ const K=KIT_HAND.big,w=Math.min(K.btn[0],Rz.w);c.hidden=false;c.style.left=Math.round(Rz.l+Rz.w/2-w/2)+"px";c.style.top=Math.round(Rz.t+Rz.h+K.gap)+"px";c.style.setProperty("--khbw",w+"px");c.style.setProperty("--khbh",K.btn[1]+"px")}catch(e){console.error("kitHandConf",e)}}
 function kitHandConfOff(g){const dl=g&&g.closest&&g.closest(".dlg,.khost"),c=dl&&dl.querySelector(":scope>.khconf");if(c){c.hidden=true;c.style.opacity=""}}
 function kitHandStill(){try{return typeof kfStill==="function"?kfStill():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
-/* drop: the flipped card turns back and shrinks into its hand card (anim = false when another card is lifted at once) */
+function kitHandVeilOff(dl){const v=dl&&dl.querySelector(":scope>.khveil");if(v)v.hidden=true}
+/* drop: the enlarged card shrinks back into its hand slot (anim = false when another card is lifted at once) */
 function kitHandDrop(g,anim){if(!g)return;const dl=g.closest(".dlg,.khost"),z=dl&&dl.querySelector(":scope>.khplate");const L=g.querySelector(":scope>button.klift");
  g.querySelectorAll(":scope>button.klift").forEach(x=>{x.classList.remove("klift");x.removeAttribute("aria-pressed")});kitHandConfOff(g);
- if(!z||z.hidden){g.querySelectorAll(":scope>button.khfl").forEach(x=>x.classList.remove("khfl"));return}
- const end=()=>{if(z.__khFor===L||!L){z.hidden=true;z.getAnimations&&z.getAnimations({subtree:true}).forEach(a=>a.cancel());z.__khFor=null}if(L&&!L.classList.contains("klift"))L.classList.remove("khfl")};
- if(anim&&L&&L.isConnected)kitHandFlipGo(L,z,true,end);else{g.querySelectorAll(":scope>button.khfl").forEach(x=>x.classList.remove("khfl"));z.hidden=true;z.__khFor=null}}
+ if(!z||z.hidden){g.querySelectorAll(":scope>button.khout").forEach(x=>x.classList.remove("khout"));kitHandVeilOff(dl);return}
+ const end=()=>{if(z.__khFor===L||!L){z.hidden=true;z.getAnimations&&z.getAnimations().forEach(a=>a.cancel());z.__khFor=null;kitHandVeilOff(dl)}if(L&&!L.classList.contains("klift"))L.classList.remove("khout")};
+ if(anim&&L&&L.isConnected)kitHandBigGo(L,z,true,end);else{g.querySelectorAll(":scope>button.khout").forEach(x=>x.classList.remove("khout"));z.hidden=true;z.__khFor=null;kitHandVeilOff(dl)}}
 function kitHandLift(b){const g=b.parentElement;if(!g||g.__khBusy)return;if(b.classList.contains("klift"))return;kitHandDrop(g,false);b.classList.add("klift");b.setAttribute("aria-pressed","true");kitHandPlate(b);if(g.__khLift)try{g.__khLift(b)}catch(e){}}
-/* choose: the FLIPPED card flies up a little and fades, the rest sink; then the frame's own choose path (a synthetic click = detail 0, passes the two-tap gate) */
+/* choose: the ENLARGED card flies up a little and fades, the rest sink; then the frame's own choose path (a synthetic click = detail 0, passes the tap gate) */
 function kitHandChoose(b){const g=b.parentElement;if(!g||g.__khBusy)return;g.__khBusy=1;window.__khFlyT=performance.now();const dl=g.closest(".dlg,.khost"),z=dl&&dl.querySelector(":scope>.khplate:not([hidden])");
- const go=()=>{g.__khBusy=0;if(z){z.hidden=true;z.__khFor=null}b.classList.remove("khfl");if(g.__khPick){g.__khPick(b);return}if(b.isConnected)b.click()};kitHandConfOff(g);
+ const go=()=>{g.__khBusy=0;if(z){z.hidden=true;z.__khFor=null}kitHandVeilOff(dl);b.classList.remove("khout");if(g.__khPick){g.__khPick(b);return}if(b.isConnected)b.click()};kitHandConfOff(g);
  if(kitHandStill()||!b.animate){go();return}
- const rot=b.style.getPropertyValue("--kr")||"0deg",lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0,ms=KIT_HAND.flyMs;
+ const lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0,ms=KIT_HAND.flyMs;
  if(z)z.animate([{transform:"none",opacity:1},{transform:"translateY(-46px) scale(1.06)",opacity:0}],{duration:ms,easing:"cubic-bezier(.3,.6,.4,1)",fill:"forwards"});
  else b.animate([{transform:`translateY(${-lift}px) rotate(0deg)`,opacity:1},{transform:`translateY(${-lift-46}px) scale(1.12)`,opacity:0}],{duration:ms,easing:"cubic-bezier(.3,.6,.4,1)",fill:"forwards"});
  kitHandCards(g).filter(x=>x!==b).forEach(x=>x.animate([{transform:`translateY(0px) rotate(${x.style.getPropertyValue("--kr")||"0deg"})`,opacity:1},{transform:`translateY(26px) rotate(${x.style.getPropertyValue("--kr")||"0deg"})`,opacity:0}],{duration:ms-40,easing:"ease-in",fill:"forwards"}));
@@ -158,11 +157,10 @@ window.kitHand=kitHand;window.kitHandWants=kitHandWants;window.kitHandLay=kitHan
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=document.getElementById("modal");if(M&&!M.hidden){kitHand(M);requestAnimationFrame(()=>kitHand(M))}}catch(e){console.error("kitHand",e)}return r}})();
 /* the two-tap gate (capture, before #modal onclick): a REAL tap (detail ≥ 1) on a resting card lifts it; on the lifted card it chooses (with the fly); a tap elsewhere in the frame drops the lifted card */
 document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;
- const cf=t.closest("#modal .dlg>.khconf>button");/* the hand's own ✓/✕ (a kitPick .kpk-conf inside the stage is its own part) */if(cf){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const dl=cf.closest(".dlg"),L=dl&&dl.querySelector(".opts.khand>button.klift");if(!L)return;
-  if(cf.classList.contains("khok"))kitHandChoose(L);else kitHandDrop(L.parentElement,true);return}
+ const cf=t.closest("#modal .dlg>.khconf>button");/* the hand's ONE «Chọn» (a kitPick .kpk-conf inside the stage is its own part) */if(cf){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const dl=cf.closest(".dlg"),L=dl&&dl.querySelector(".opts.khand>button.klift");if(L&&cf.classList.contains("khok"))kitHandChoose(L);return}
  const b=t.closest("#modal .opts.khand > button.kopt");
  if(!b){const g=t.closest("#modal .opts.khand");if(g){/* a tap that landed on the list box: a locked card under the finger (browsers that swallow events on disabled buttons) */const hit=kitHandCards(g).find(x=>{const r=x.getBoundingClientRect();return x.disabled&&e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom});if(hit){e.stopPropagation();kitHandLift(hit);return}}
-  {const zp=t.closest("#modal .dlg>.khplate.khflip");if(zp&&!zp.hidden){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();zp.classList.toggle("khback");return}}/* §101.10 tap 2 on the enlarged card = it turns over (tap again = front) */
+  {const zp=t.closest("#modal .dlg>.khplate");if(zp&&!zp.hidden){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();return}}/* §101.10 a tap on the enlarged card does nothing (no flip, owner 26/11 ~23:58Z) */
   if(t.closest("#modal")&&!t.closest(".khplate,.khconf,#kpinfo,#kpop"))document.querySelectorAll("#modal .opts.khand").forEach(g=>kitHandDrop(g,true));return}
  if(e.detail===0||b.disabled)return;/* keyboard / robot / synthetic click: chooses at once (unchanged path) */
  e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();if(b.parentElement.__khBusy)return;if(!b.classList.contains("klift"))kitHandLift(b)/* the lifted card body: nothing (✓ chooses) */}catch(x){console.error("kitHand tap",x)}},true);
@@ -178,8 +176,12 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt>.kabody{flex:1 1 auto
 html body #modal#modal#modal#modal .opts.khand>button.kopt .kat{display:flex!important;flex-direction:column!important;align-items:center!important;gap:4px!important;min-height:0!important;width:100%!important;padding:0!important}
 html body #modal#modal#modal#modal .opts.khand>button.kopt .kan{font-size:var(--khfs)!important;line-height:1.15!important;text-align:center!important;white-space:normal!important;display:-webkit-box!important;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden!important;max-width:100%!important;width:auto!important;flex:none!important}
 html body #modal#modal#modal#modal .opts.khand>button.kopt .kodds{display:none!important}
-html body #modal#modal#modal#modal .opts.khand>button.kopt .khnx{display:none!important}/* face = picture + short name only; the odds word lives in the plate */
-html body #modal#modal#modal#modal .opts.khand>button.kopt .kb,html body #modal#modal#modal#modal .opts.khand>button.kopt>.kobang,html body #modal#modal#modal#modal .opts.khand>button.kopt .kwhy,html body #modal#modal#modal#modal .opts.khand>button.kopt small:not(.kodds *){display:none!important}
+html body #modal#modal#modal#modal .opts.khand>button.kopt .khnx{display:none!important}/* face = picture + short name + Tốn; the odds word / Được / Mất live on the enlarged card (§101.10) */
+html body #modal#modal#modal#modal .opts.khand>button.kopt .kb{display:block!important;flex:none!important;width:100%!important;margin:0!important;padding:0!important;font-size:calc(var(--khfs) * .84)!important;line-height:1.2!important;text-align:center!important}
+html body #modal#modal#modal#modal .opts.khand>button.kopt .kb>.kr-ton{display:-webkit-box!important;-webkit-box-orient:vertical;-webkit-line-clamp:var(--khtl,1);overflow:hidden!important;white-space:normal!important;padding:0!important;margin:0!important;border:0!important;background:none!important}
+html body #modal#modal#modal#modal .opts.khand>button.kopt .kb>.kr-ton>.krl{display:inline!important;font-weight:700;color:#8a5a1c;margin-right:.3em;text-transform:none!important;font-size:1em!important;letter-spacing:0!important}
+html body #modal#modal#modal#modal .opts.khand>button.kopt .kb>.kr-ton>.krv,html body #modal#modal#modal#modal .opts.khand>button.kopt .kb>.kr-ton>.krv *{display:inline!important}
+html body #modal#modal#modal#modal .opts.khand>button.kopt .kb>.kr:not(.kr-ton),html body #modal#modal#modal#modal .opts.khand>button.kopt>.kobang,html body #modal#modal#modal#modal .opts.khand>button.kopt .kwhy,html body #modal#modal#modal#modal .opts.khand>button.kopt small:not(.kodds *):not(.kb){display:none!important}
 html body #modal#modal#modal#modal .opts.khand>button.kopt.klift{--kyo:calc(var(--khlift) * -1);--kr:0deg;z-index:3;box-shadow:0 0 0 2px var(--k-gold,#c9a24a),0 10px 20px rgba(60,30,10,.32)}
 html body #modal#modal#modal#modal .opts.khand>button.kopt:disabled{filter:grayscale(.55) brightness(.96)}
 html body #modal#modal#modal#modal .opts.khand>button.kopt:disabled.klift{filter:none}
@@ -191,30 +193,36 @@ html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!importan
 .khconf[hidden],.khconf>button[hidden]{display:none!important}
 #modal .dlg>.khconf>button,.khconf>button{width:var(--khcs,44px);height:var(--khcs,44px);min-width:0;min-height:0;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;font-size:calc(var(--khcs,44px)*.5);font-weight:800;line-height:1;cursor:pointer;box-shadow:0 3px 10px #0005;border:2px solid #fffaf0}
 #modal .dlg>.khconf>.khok .kmk,.khconf>.khok .kmk{background:#fff!important;color:#fff!important;width:.95em;height:.95em;margin:0!important;vertical-align:0}
-#modal .dlg>.khconf>.khok,.khconf>.khok{background:#2f8a3e;color:#fff}
+#modal .dlg>.khconf:not(.khgo)>.khok,.khconf:not(.khgo)>.khok{background:#2f8a3e;color:#fff}/* the thẻ gỗ ✓ (kitPick); the hand «Chọn» is the plain kit .kbtn */
 #modal .dlg>.khconf>.khx,.khconf>.khx{background:#fffaf0;color:#7a2a1c;border-color:var(--k-gold,#c9a24a)}
 #modal .dlg>.khconf>button:active,.khconf>button:active{transform:scale(.92)}
-#modal .dlg>.khplate{position:absolute;z-index:6;pointer-events:auto;perspective:1100px}/* §101.10 the flipped card: taps on it do nothing (never fall through to the cards under it) */
-#modal .dlg>.khplate[hidden]{display:none}
-#modal .dlg>.khplate>.khfi{position:relative;width:100%;height:100%;transform:rotateY(0deg);transform-style:preserve-3d;transition:transform .42s cubic-bezier(.3,.7,.3,1)}
-#modal .dlg>.khplate.khback>.khfi{transform:rotateY(180deg)}
-#modal .dlg>.khplate.khstill>.khfi{transition:none}
-#modal .dlg>.khplate .khff>.khffh{position:absolute;top:12px;left:50%;transform:translateX(-50%);white-space:nowrap;font-size:.78rem;font-weight:700;color:#7a4a14;line-height:1.2;padding:2px 10px;border-radius:999px;background:#fffaf0e8;box-shadow:0 0 0 1px var(--k-gold,#c9a24a)}
-#modal .dlg>.khplate .khff,#modal .dlg>.khplate .khfb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:12px;background:var(--k-card,#fffaf0);box-shadow:0 0 0 2px var(--k-gold,#c9a24a),0 10px 22px rgba(60,30,10,.34)}
-#modal .dlg>.khplate .khff{display:flex;flex-direction:column;align-items:center;gap:6px;padding:6px 6px calc(var(--khcs,44px) * .62);overflow:hidden}/* the name stays above ✓ / ✕ on the lower edge */
-#modal .dlg>.khplate .khff>img{width:100%;flex:1 1 auto;min-height:0;object-fit:cover;border-radius:8px}
-#modal .dlg>.khplate .khff>.khffn{font-weight:700;text-align:center;color:var(--ink,#2a1a12);line-height:1.15}
-#modal .dlg>.khplate .khfb{transform:rotateY(180deg);overflow:auto;overscroll-behavior:contain;padding:10px 10px calc(var(--khcs,44px) * .62);display:flex;flex-direction:column;justify-content:center;font-size:var(--khbfs,16px)}/* MAIN 165 rec: the back is FILLED — its type from ONE kit scale (KIT_HAND.flip.fs, largest that fits), content centred */
-#modal .dlg>.khplate .khfb>button.kopinfo{font-size:1em!important;width:100%;margin:0;flex:none;box-shadow:none!important;border:0!important;text-align:left;opacity:1!important;filter:none!important;background:transparent!important;color:var(--ink,#2a1a12)!important;cursor:default;pointer-events:none}
-#modal .dlg>.khplate .khfb>button.kopinfo:not(.khlock) .kodds{filter:none!important;opacity:1!important}/* the back is a disabled COPY: its meter keeps the live colours unless the card is locked */
-html body #modal#modal#modal#modal .opts.khand>button.kopt.khfl{opacity:0!important}
-#modal .dlg>.khplate .khfb>button.kopinfo .kabody{display:flex!important;flex-direction:column!important;gap:6px!important;width:100%!important;padding:0!important;transform:none!important}
-#modal .dlg>.khplate .khfb>button.kopinfo .kat{display:flex!important;flex-direction:column!important;align-items:center!important;gap:6px!important;padding:0 0 6px!important;border-bottom:1px solid var(--k-gold,#c9a24a)}
-#modal .dlg>.khplate .khfb>button.kopinfo .kan{font-size:1.18em!important;font-weight:800!important;line-height:1.2!important;text-align:center!important;color:var(--ink,#2a1a12)!important;opacity:1!important;white-space:normal!important;-webkit-line-clamp:unset!important;display:block!important}
-#modal .dlg>.khplate .khfb>button.kopinfo .kb{display:flex!important;flex-direction:column!important;gap:.45em!important;font-size:1em!important;line-height:1.3!important;color:var(--ink,#2a1a12)!important;opacity:1!important}
-#modal .dlg>.khplate .khfb>button.kopinfo .kb .krl{color:#8a5a1c!important;opacity:1!important;font-weight:700!important}
-#modal .dlg>.khplate .khfb>button.kopinfo .kb .krv,#modal .dlg>.khplate .khfb>button.kopinfo .kb .krv *{color:var(--ink,#2a1a12)!important;opacity:1!important}
-#modal .dlg>.khplate .khfb>button.kopinfo .kwhy{display:block!important;color:#7a2a1c!important;font-weight:700!important;opacity:1!important}/* the hand card under its flipped copy */`;document.head.appendChild(st)})();
+#modal .dlg>.khplate{position:absolute;z-index:6;pointer-events:auto}/* §101.10 the ENLARGED card (front only, no flip): taps on it do nothing (never fall through to the cards under it) */
+#modal .dlg>.khplate[hidden],#modal .dlg>.khveil[hidden]{display:none}
+#modal .dlg>.khveil{position:absolute;z-index:5;pointer-events:none;background:rgba(40,22,10,.35);border-radius:inherit}/* the hand stays small BEHIND, under a soft veil; taps pass through (switch / put back) */
+#modal .dlg>.khplate>.khbc{position:absolute;inset:0;display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:14px;background:var(--k-card,#fffaf0);box-shadow:0 0 0 2px var(--k-gold,#c9a24a),0 14px 30px rgba(40,20,8,.42);overflow:hidden;font-size:var(--khbfs,16px)}
+#modal .dlg>.khplate .khbn{flex:none;text-align:center;font-weight:800;font-size:1.12em;line-height:1.2;color:#5a2a12;padding:5px 10px;border-radius:10px;background:linear-gradient(#fff3d6,#f3dfae);box-shadow:inset 0 0 0 1px var(--k-gold,#c9a24a)}/* plaque: the WHOLE name */
+#modal .dlg>.khplate .khbp{flex:1 1 auto;min-height:45%;border-radius:9px;overflow:hidden;background:#efe2c4}
+#modal .dlg>.khplate .khbp>img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;display:block}
+#modal .dlg>.khplate .khbi{flex:0 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;display:flex;flex-direction:column;justify-content:center}/* the info takes its own height, type from ONE kit scale (KIT_HAND.big.fs, largest that fits); the picture (≥ 45 %) takes the rest — no empty band */
+#modal .dlg>.khplate .khbi>button.kopinfo{font-size:1em!important;width:100%;margin:0;padding:0 2px!important;flex:none;min-height:0!important;box-shadow:none!important;border:0!important;text-align:left;opacity:1!important;filter:none!important;background:transparent!important;color:var(--ink,#2a1a12)!important;cursor:default;pointer-events:none}
+#modal .dlg>.khplate .khbi>button.kopinfo:not(.khlock) .kodds{filter:none!important;opacity:1!important}/* a disabled COPY: the odds word keeps its live colours unless the card is locked */
+html body #modal#modal#modal#modal .opts.khand>button.kopt.khout{opacity:0!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kabody{display:flex!important;flex-direction:column!important;gap:6px!important;width:100%!important;padding:0!important;transform:none!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kat:empty{display:none!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb{display:flex!important;flex-direction:column!important;gap:.4em!important;font-size:1em!important;line-height:1.3!important;color:var(--ink,#2a1a12)!important;opacity:1!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb>.kr{display:block!important;margin:0!important;padding:0!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .kdup,#modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .ef{display:inline!important;color:inherit!important;font-weight:inherit!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .krl{opacity:1!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .krl{display:inline!important;font-size:.82em!important;margin-right:.35em!important;text-transform:none!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-ton{display:flex!important;align-items:center!important;gap:.4em!important;flex-wrap:wrap!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-ton>.kodds{margin-left:auto!important}/* the odds word at the right end of the Tốn row (spec) */
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .krl{color:#8a5a1c!important;opacity:1!important;font-weight:700!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .krv,#modal .dlg>.khplate .khbi>button.kopinfo .kb .krv *{color:var(--ink,#2a1a12)!important;opacity:1!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-duoc .krl{color:#2f7a3a!important}
+#modal .dlg>.khplate .khbi>button.kopinfo .kb [class*=kr-mat] .krl{color:#a8321e!important}/* Được green mark · Mất red mark (law 3) */
+#modal .dlg>.khplate .khbi>button.kopinfo .kwhy{display:block!important;color:#7a2a1c!important;font-weight:700!important;opacity:1!important}
+#modal .dlg>.khconf.khgo{display:block;gap:0}
+#modal .dlg>.khconf.khgo>button.khok{width:var(--khbw,280px)!important;height:var(--khbh,64px)!important;min-height:0!important;border-radius:14px!important;font-size:1.25rem!important;font-weight:800!important;letter-spacing:.5px;display:grid;place-items:center;padding:0 12px!important;margin:0!important;border:2px solid #fffaf0!important;box-shadow:0 4px 12px #0006!important}/* the ONE «Chọn» (kit .kbtn, tier L) */`;document.head.appendChild(st)})();
 /* KK35 — a PERSON card inside a hand (the option names her: «Thì thầm nói xấu …», kopic face:avatar) shows her PORTRAIT as the card picture,
    like kitOptLead: the avatar's frame / crest / gem / tassel stay off the face (they overflowed onto the name); the role tag keeps a space before it. */
 (function(){const st=document.createElement("style");st.id="kit-hand-face";const P="html body #modal#modal#modal#modal .opts.khand>button.kopt.kopav";
@@ -233,10 +241,10 @@ ${P}.khn2>button.kopt .kan{font-size:calc(var(--khfs) * .82)!important;-webkit-l
    API: const H=kitHand.mount(container,{cards:[{id,n,line,off,why,html}],onPick(id,card,H),onLift(id,card,H),maxH,pane});
      card: n = the option name (kit option text, a person kitName allowed), line = its small line (Tốn / Được / odds, the same text a frame option carries), off = locked,
      html = a whole raw option button instead (the frame's own `<button class="opt" …>` markup); every card goes through the SAME kit passes as a frame option
-     (kaNorm → kpOptArt picture → kitOptFinal rows), so face = picture + short name, back = the kit card (Tốn · Được · Mất · odds word · Gợi ý / locked «why»).
-     maxH = px cap of the hand height (default KIT_HAND.mountK .72 of the screen: a pane holds the hand alone); pane = the scrolling box the flipped card may stand in (default: the nearest scrolling ancestor).
+     (kaNorm → kpOptArt picture → kitOptFinal rows), so face = picture + short name + Tốn, the ENLARGED card (§101.10, no flip) = plaque · picture · the kit card (Tốn + odds word · Được · Mất / locked «why»).
+     maxH = px cap of the hand height (default KIT_HAND.mountK .72 of the screen: a pane holds the hand alone); pane = the scrolling box the enlarged card stands in the centre of (default: the nearest scrolling ancestor).
    H.lift(id) · H.drop() · H.lay() · H.destroy() · H.el (the .khost) · H.cards() → the card buttons (data-khid = id).
-   Same deal / lift / flip / ✓ ✕ / fly as the frame hand (one part, §101 / §101.10); ✓ → onPick(id); robot / keyboard click (detail 0) on a card → onPick at once. PURE DISPLAY. */
+   Same deal / enlarge / «Chọn» / fly as the frame hand (one part, §101 / §101.10); «Chọn» → onPick(id); robot / keyboard click (detail 0) on a card → onPick at once. PURE DISPLAY. */
 const KH_HOSTS=new Set();KIT_HAND.mountK=.72;
 function khPane(el){let p=el&&el.parentElement;while(p&&p!==document.body){const o=getComputedStyle(p).overflowY;if(o==="auto"||o==="scroll"||o==="hidden")return p;p=p.parentElement}return null}
 function kitHandMount(container,o){o=o||{};if(!container)return null;const old=container.querySelector(":scope>.khost");if(old&&old.__kh)old.__kh.destroy();
@@ -250,10 +258,10 @@ function kitHandMount(container,o){o=o||{};if(!container)return null;const old=c
  const H={el:host,g,o,cards:()=>kitHandCards(g),lay:()=>{g.__khSig="";kitHandLay(g,true)},lift:id=>{const b=g.querySelector(`:scope>button[data-khid="${CSS.escape(String(id))}"]`);if(b)kitHandLift(b)},drop:()=>kitHandDrop(g,true),
   destroy:()=>{KH_HOSTS.delete(H);try{g.__khRO&&g.__khRO.disconnect();g.__khMO&&g.__khMO.disconnect()}catch(e){}host.remove()}};host.__kh=H;KH_HOSTS.add(H);
  g.__khPick=b=>{try{o.onPick&&o.onPick(b.dataset.khid,card(b),H)}catch(e){console.error("kitHand.mount onPick",e)}};g.__khLift=b=>{try{o.onLift&&o.onLift(b.dataset.khid,card(b),H)}catch(e){}};
- g.__khCap=()=>o.maxH?(typeof o.maxH==="function"?o.maxH():o.maxH):Math.round(kitHandH()*KIT_HAND.mountK)/* a tab pane holds the hand alone (no story above it): a larger share, so cards keep the frame-hand size and names fit */;host.__khTop=()=>{const p=o.pane||khPane(host);return Math.max(4,p?p.getBoundingClientRect().top:0)+6};host.__khBot=()=>{const p=o.pane||khPane(host);return Math.min(innerHeight-4,p?p.getBoundingClientRect().bottom:innerHeight)-6};
- /* the gate (capture on the host): real tap = lift; ✓ = choose (fly → onPick); ✕ = put back; the flipped card = turn over; elsewhere in the host = put back; locked card = lift (its «why») */
- host.addEventListener("click",e=>{try{const t=e.target;const cf=t.closest(".khost>.khconf>button");if(cf){e.preventDefault();e.stopPropagation();const L=g.querySelector(":scope>button.klift");if(!L)return;if(cf.classList.contains("khok"))kitHandChoose(L);else kitHandDrop(g,true);return}
-  const zp=t.closest(".khost>.khplate.khflip");if(zp&&!zp.hidden){e.preventDefault();e.stopPropagation();zp.classList.toggle("khback");return}
+ g.__khCap=()=>o.maxH?(typeof o.maxH==="function"?o.maxH():o.maxH):Math.round(kitHandH()*KIT_HAND.mountK)/* a tab pane holds the hand alone (no story above it): a larger share, so cards keep the frame-hand size and names fit */;host.__khTop=()=>{const p=o.pane||khPane(host);return Math.max(4,p?p.getBoundingClientRect().top:0)+6};host.__khBot=()=>{const p=o.pane||khPane(host);return Math.min(innerHeight-4,p?p.getBoundingClientRect().bottom:innerHeight)-6};host.__khPane=()=>o.pane||khPane(host);host.__khLR=()=>{const p=o.pane||khPane(host),r=p?p.getBoundingClientRect():{left:0,right:innerWidth};return [Math.max(4,r.left)+8,Math.min(innerWidth-4,r.right)-8]}/* §101.10: the enlarged card stands in the CENTRE of its pane */;
+ /* the gate (capture on the host): real tap = enlarge; «Chọn» = choose (fly → onPick); the enlarged card = nothing; elsewhere in the host = put back; locked card = lift (its «why») */
+ host.addEventListener("click",e=>{try{const t=e.target;const cf=t.closest(".khost>.khconf>button");if(cf){e.preventDefault();e.stopPropagation();const L=g.querySelector(":scope>button.klift");if(L&&cf.classList.contains("khok"))kitHandChoose(L);return}
+  const zp=t.closest(".khost>.khplate");if(zp&&!zp.hidden){e.preventDefault();e.stopPropagation();return}
   const b=t.closest(".opts.khand>button.kopt");if(!b||b.parentElement!==g){/* a tap that landed on the list box: a locked card under the finger (browsers swallow events on disabled buttons) */const hit=kitHandCards(g).find(x=>{const r=x.getBoundingClientRect();return x.disabled&&e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom});if(hit){e.stopPropagation();kitHandLift(hit);return}kitHandDrop(g,true);return}e.preventDefault();e.stopPropagation();if(g.__khBusy)return;
   if(e.detail===0&&!b.disabled){g.__khPick(b);return}/* robot / keyboard: chooses at once (the frame hand's rule) */if(!b.classList.contains("klift"))kitHandLift(b)}catch(x){console.error("kitHand.mount tap",x)}},true);
  host.addEventListener("pointerdown",e=>{try{if(e.button>0)return;const b=e.target.closest&&e.target.closest(".opts.khand>button.kopt:disabled");if(b&&b.parentElement===g)kitHandLift(b)}catch(x){}},{capture:true,passive:true});

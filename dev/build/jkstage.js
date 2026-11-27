@@ -157,10 +157,10 @@ function kstgIn(dl){try{const still=typeof kitHandStill==="function"&&kitHandSti
   const sp=mb.querySelector(":scope>.kstg-sp"),me=mb.querySelector(":scope>.kstg-me");
   if(sp)sp.animate([{transform:"translateX(-36%)"},{transform:"none"}],{duration:a,easing:E,fill:"backwards"});
   if(me)me.animate([{transform:"translateX(30%)"},{transform:"none"}],{duration:b,delay:160,easing:E,fill:"backwards"})})}catch(e){}}
-/* the flipped card on the stage (KIT §101.10, one part with the hand): ON its hand card, never above the faces band; the story box ends above it */
+/* the ENLARGED card on the stage (KIT §101.10 no flip, one part with the hand): in the centre under the faces band; the story box ends above it */
 function kstgPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg.kstage");if(!dl)return;const z=dl.querySelector(":scope>.khplate");if(!z||z.hidden)return;
- const D=dl.getBoundingClientRect();const top0=D.top+(dl.__kstFace||0)+4;if(typeof kitHandFlipPlace==="function")kitHandFlipPlace(b,z,dl,top0,D.left+8,D.right-8);
- /* the story box beside the faces (iPad) never runs under the flipped card: it ends above its top and shows its LAST lines (MAIN 147 look; KK34) */
+ const D=dl.getBoundingClientRect();const top0=D.top+(dl.__kstFace||0)+4;if(typeof kitHandBigPlace==="function")kitHandBigPlace(b,z,dl,top0,D.left+8,D.right-8);
+ /* the story box beside the faces (iPad) never runs under the enlarged card: it ends above its top and shows its LAST lines (MAIN 147 look; KK34) */
  const pm=dl.querySelector(".kpmain:not(.kstg-foot):not(.ksay)");if(pm&&dl.__kstBox&&z.__khRect){const pt=z.__khRect.t-8,bh=Math.max(60,Math.round(pt-dl.__kstBox.by));if(dl.__kstBox.by+pm.offsetHeight>pt){pm.style.setProperty("--bhL",bh+"px");requestAnimationFrame(()=>{pm.scrollTop=pm.scrollHeight})}else pm.style.removeProperty("--bhL")}}catch(e){console.error("kstgPlate",e)}}
 (function(){if(typeof kitHandLay!=="function")return;const L0=kitHandLay;
  kitHandLay=function(g,quiet){let dl=null;try{dl=g&&g.closest&&g.closest(".dlg");if(dl&&kitHandWants(g))kstgOn(dl,g)}catch(e){}
