@@ -101,6 +101,7 @@ const CLASS=[/* [file, regex on «enclosing function chain + title», class, rea
  ['jgoal.js',/kitGoalDetail/,'PANEL','goal detail she opens'],
  ['jload.js',/dlPanel/,'PANEL','look panel (spec.look)'],
  ['jmen.js',/menNtCard/,'PANEL','rule panel at a closed gate'],
+ ['jopic.js',/kitHowPanel/,'PANEL','«Cách làm» how-to panel she opens from a goal link (Đi tới / Xem Dư đồ, built from the live goal; rv22 census row)'],
  ['jnotice.js',/kitNoticeOpen/,'PANEL','«Tin báo» view (spec.view, never saved; its rows are NT.list = nt)'],
  ['jptime.js',/ptPanel|ptOrdOpen/,'PANEL','orders panel she opens (S.ordQ is on S)'],
  ['jts.js',/tsDangerPanel/,'PANEL','«Nguy hiểm chung» panel she opens'],
