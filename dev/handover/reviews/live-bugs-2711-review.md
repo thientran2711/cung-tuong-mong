@@ -94,3 +94,13 @@ Merged f28d28b9 (KIT_REQUESTS both; LIVE carries the K-PICK-LIVE sign-off + KIT.
   | branch b5639104 | 139/143 — FAIL week 2 fold/ipad advanced (known co-op week flake) + «same world after week 3 / after rejoin» 1 diff `R#6.spc.rel:me` (coop-host-lag family) |
   | LIVE d9ca7892 | hung at 1700 s after 134 ok — FAIL «same world after week 1» 37 diffs (coop-host-lag family), then timeout |
   Both fail in the same co-op sync family; the branch is no worse than LIVE (better). Not this branch (gift pickers only). FOR D/MAIN: coop-e2e not green on LIVE even with the coop-clear fix — coop-host-lag world diffs.
+
+## REMERGE r6 — LAND READY af294eb2 (FF of LIVE 772bee4f: goal-links-rv174-f28 + coop-clear-rv173) — for Foreman D depth 6
+- Merge: built files only (rebuilt; assets.json = LIVE). Delta vs LIVE in dev/build = only jgift/jptime/jts gift tiles (unchanged since r2). No UI change since r2 → Fold/iPad shots of r2 (worker CDN after-y05/after-y14, looked at) still valid.
+- Gates on af294eb2: undef-scan PASS (348) · gift-dead-scan y14 / y05 0 dead · quickcheck FULL PASS exit 0 (old save ok; core gates green; perf new/live render 265/293, tab 498/544, buổi 1876/1825 ms, tasks>200 30/30).
+- coop-e2e alone (coop-clear now on LIVE): NOT 143 on either tree:
+  | tree | result |
+  |---|---|
+  | branch af294eb2 | 134 ok, FAIL «same world after week 1» 39 diffs (S.wxDay.sk, R#1.staff loyal/tin… coop-host-lag family), then hang at 1700 s |
+  | LIVE 772bee4f | 73 ok, hang in buoiBoth (week loop, «Target page closed» at 1700 s) |
+  = LIVE family (co-op world sync / week loop), branch not worse; the branch touches only gift pickers. FOR D/MAIN: coop-e2e is red on LIVE 772bee4f even with coop-clear.
