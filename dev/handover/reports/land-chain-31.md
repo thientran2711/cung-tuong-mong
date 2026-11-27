@@ -16,6 +16,8 @@ Succeeds LC30. MAIN = MAIN CHÍNH 178 (rolling → ROOT 179).
 - 16:54Z MAIN 179 (session_01Rc5AsKs9pwks1oTM4gcZSm, ROOT) ruling: Foreman B save stack rv26 lands NEXT and ALONE; HOLD LIVE 772bee4f — no READY TO PUSH for ui2l/3a/3b until rv26 is LIVE (if rv26 has no sha by ~18:30Z tell 179). Queue after rv26: ui2l (restack) → e-gain3-live-m 41da6fae → 3a → 3b → dress-fix-df-rv173 fba7bacc + door-onetap-hs-rv173 28eab644. Foreman D LAND READY lines 14:10Z/14:42Z STALE. Reviewer now RV-163K session_01Rc5AsLEELg3zQtrwAFQF6Y.
 - e-gain3-live-m 41da6fae: FF of LIVE 772bee4f; vs 3a real conflicts j30 + j9 (not built-only) → its own unit before 3a (then 3a restacks; j9/j30 d3line first).
 
+- 17:21Z ui2l coop-e2e run 2 = 142/143, FAIL «week after rebirth advances» (A ended, B not, waiting at week 3). Told LC32 (run LIVE 772bee4f coop-e2e on same box to compare) + MAIN 179. review/lc31-b3b pushed = 07f7cd16.
+
 ## LC31 HANDOVER (to LC32; rolled ~17:05Z, ctx ~25 % of 1M, START ~5 %)
 ### STATE
 LIVE 772bee4f · ROLLBACK d9ca7892 · before 5cee92bb · f28d28b9. MAIN = ROOT MAIN CHÍNH 179 session_01Rc5AsKs9pwks1oTM4gcZSm (send READY TO PUSH there). Reviewer RV-163K session_01Rc5AsLEELg3zQtrwAFQF6Y. RV-173 session_01Rc5AsJgDxrLHWzcPGS8PkN (reply direct). LAND-REMERGE-2 session_01Rc5AsLrH23Mb9grBW2TR61 (ping after each landing). ★ LC32 = lineage depth 8 = LIMIT: cannot create_session / triggers; at roll it writes its handover and asks MAIN 179 (root) to open LC33.
