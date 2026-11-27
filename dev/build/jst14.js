@@ -150,13 +150,23 @@ const F14ROLE={tt_co:{v:1},tt_oan:{v:1},tt_tranh:{v:0},tt_mat:{v:0},dtq_bien:{v:
  thd_tho:{v:1},thd_tro:{v:0},thd_hoc:{v:0},cnv_mat:{v:0},s_than:{v:1},s_thu:{v:1,v2:0},s_hoa:{v:1},s_dich:{v:1},s_ban:{v:1,v2:1},
  st_the:{v:0,v2:1},st_con:{v:1},st_dong:{v:1},tm96b:{v:1},tm96c:{v:1}};
 window.F14ROLE=F14ROLE;
-function f14Hostile(A,k){try{return !!(A&&F14ROLE[A.a]&&F14ROLE[A.a][k]===1)}catch(e){return false}}
+/* road chapters .5–.11 (jroad rdDef: ARC67["<road>_<n>"], o:"rd", road, rn) INHERIT the nearest EARLIER row (MAIN 178 ruling 27/11 ~11:03Z):
+   own row first, then <road>_<n-1> … <road>_5, then <road> (= the .4 premise cast). Only a real road chapter inherits (o:"rd" + its road),
+   so an id that only looks like "<x>_<n>" never borrows a row. null = no row anywhere on the road (role not hostile). */
+function f14Row(id){try{if(F14ROLE[id])return F14ROLE[id];const a=ARC67[id];if(!a||a.o!=="rd"||!a.road||!(a.rn>0))return null;
+ for(let n=a.rn-1;n>=BAL.road.first;n--)if(F14ROLE[a.road+"_"+n])return F14ROLE[a.road+"_"+n];return F14ROLE[a.road]||null}catch(e){return null}}
+window.f14Row=f14Row;
+function f14Hostile(A,k){try{const R=A&&f14Row(A.a);return !!(R&&R[k]===1)}catch(e){return false}}
 /* hate for real: both sides' thiện cảm drop by at least hate.min (j9 relAdd also raises oán both ways) */
 function f14Hate(v){if(!v)return;const H=BAL.st14.hate;const m=Math.max(aff(S,v)||0,aff(v,S)||0);relAdd(S,v,-Math.max(H.min,H.base+m))}
 /* a hostile role takes, when it can, someone who is not already her friend (thiện cảm under each side's netTh "than") */
 (function(){const c0=castRv67;castRv67=function(A,k,f){if(!f14()||!A||!f14Hostile(A,k))return c0.apply(this,arguments); let r=c0.call(this,A,k,v=>(!f||f(v))&&(aff(S,v)||0)<netTh(S,"than")&&(aff(v,S)||0)<netTh(v,"than"));if(!r)r=c0.apply(this,arguments);
  try{if(r&&!(A.host14||{})[k]){const v=rv67(A,k);if(v){A.host14=A.host14||{};A.host14[k]=v.id;f14Hate(v)}}}catch(e){console.error(e)}return r}})();
-(function(){const n0=newThread67;newThread67=function(id,kind){const A=n0.apply(this,arguments);try{if(A&&f14())for(const k of ["v","v2"]){if(A.act&&A.act[k]!=null&&!(A.host14||{})[k]){const v=rv67(A,k);if(v&&f14Hostile(A,k)){A.host14=A.host14||{};A.host14[k]=v.id;f14Hate(v)}}}}catch(e){console.error(e)}return A}})();
+/* once per person: a road chapter's person CARRIED from the chapter before (jroad rdCast: S.st.f14.act) whose role was already hostile there
+   was hated when first cast, so the inherited row (f14Row) does not hate her again chapter after chapter */
+function f14Carried(A,k,v){try{const a=ARC67[A.a];if(!a||a.o!=="rd"||!a.road)return false;const K=S.st.f14&&S.st.f14.act;if(!K||K[k]!==v.id)return false;
+ return f14Hostile({a:a.rn>BAL.road.first?a.road+"_"+(a.rn-1):a.road},k)}catch(e){return false}}
+(function(){const n0=newThread67;newThread67=function(id,kind){const A=n0.apply(this,arguments);try{if(A&&f14())for(const k of ["v","v2"]){if(A.act&&A.act[k]!=null&&!(A.host14||{})[k]){const v=rv67(A,k);if(v&&f14Hostile(A,k)){A.host14=A.host14||{};A.host14[k]=v.id;if(!f14Carried(A,k,v))f14Hate(v)}}}}catch(e){console.error(e)}return A}})();
 function f14Foe(){try{if(!f14()||!S.foe)return;const e=rivals.find(v=>v.name===S.foe&&v.alive);if(!e||S.st.f14.foe)return;e.enemy=true;f14Hate(e);S.st.f14.foe=e.id}catch(e){console.error(e)}}
 (function(){const i0=a67init;a67init=function(k){const r=i0.apply(this,arguments);f14Foe();return r}})();
 /* OD:L1253 (owner 16/11 07:00Z): the same identity + road + option must not always give the same result across lives. In a 14-chapter life
