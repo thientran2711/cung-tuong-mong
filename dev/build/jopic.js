@@ -245,8 +245,16 @@ function kitOptCompactRows(b){try{if(!b||b.dataset.kocr==="1")return;const kb=b.
   note.querySelectorAll(".krv > .ksep").forEach(s=>{if(!s.previousElementSibling||!s.nextElementSibling)s.remove()});if(!note.querySelector(".krv > .ef"))note.remove()}}catch(e){}}
 window.kitOptCompactRows=kitOptCompactRows;
 /* a picture-less option gets the §59 placeholder in the same slot when a sibling has a picture (one form per dialog) */
-let KIT_OPT_UNI=0;function kitOptUnify(b){if(KIT_OPT_UNI)return;try{KIT_OPT_UNI=1;const c=b.parentElement;if(!c)return;const sib=[...c.children].filter(x=>x.matches&&x.matches("button.ka")&&x.matches(KIT_OPT_SEL));if(!sib.some(x=>x.querySelector(":scope > .kaart")))return;
- sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);kitOptCompactRows(x);kitOptFinal(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
+/* F10 member 5 (26/11, Seat A nc_gian speed-1 b1649 crawl: kitOptUnify ← kpOptArt ← kaNorm1, 1 buổi per 3–4 min): every card of a list ran the
+   whole-list unify, and each run rebuilt EVERY art-less sibling again (data-kopt off/on, rows redone) → n × n rebuilds + mutation records per pass.
+   Now: one list is unified once per synchronous pass (a card normalised later in the same pass re-runs it once at the next microtask), and a
+   sibling already unified whose card is unchanged is skipped. */
+const KIT_OPT_UNQ=new Set(),KIT_OPT_UNL=new Set();const kitOptUnSig=x=>x.childElementCount+"|"+x.textContent.length+"|"+(x.dataset.kopt||"");
+let KIT_OPT_UNI=0;function kitOptUnify(b){if(KIT_OPT_UNI)return;const c=b&&b.parentElement;if(!c)return;
+ if(KIT_OPT_UNQ.has(c)){if(!KIT_OPT_UNL.size)queueMicrotask(()=>{const L=[...KIT_OPT_UNL];KIT_OPT_UNL.clear();L.forEach(c=>{if(c.isConnected)kitOptUnify0(c)})});KIT_OPT_UNL.add(c);return}
+ if(!KIT_OPT_UNQ.size)queueMicrotask(()=>KIT_OPT_UNQ.clear());KIT_OPT_UNQ.add(c);kitOptUnify0(c)}
+function kitOptUnify0(c){if(KIT_OPT_UNI)return;try{KIT_OPT_UNI=1;const sib=[...c.children].filter(x=>x.matches&&x.matches("button.ka")&&x.matches(KIT_OPT_SEL));if(!sib.some(x=>x.querySelector(":scope > .kaart")))return;
+ sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;if(x.__kouS&&x.__kouS===kitOptUnSig(x))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);kitOptCompactRows(x);kitOptFinal(x);x.__kouS=kitOptUnSig(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
 function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.classList.contains("kcard")||b.closest(".pc")||b.classList.contains("kbare"))return;/* KIT §93.7 bare selection card: no rows */
  {const k1=b.querySelector("small.kb");if(b.__kofSig&&k1&&b.__kofSig===kitOptSig(b,k1))return}/* idempotent: our own DOM edits must not re-trigger the observers that call us */
  b.querySelectorAll(".kfill,.kobang,.kdup").forEach(e=>e.remove());b.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
@@ -258,10 +266,10 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  let ton=R("ton")[0],mats=R("mat"),gains=[...R("thanh"),...R("duoc")],gain=gains[0];
  /* tinbao-words (owner OD 25/11 ~23:36Z, Tin báo «Xem tin» card read «TỐN không / ĐƯỢC không»): a FREE CHOICE card — no cost, no gain, no loss, no
     hint row and no odds of its own (only notes such as «kèm: trả lời trước …», which stay behind «!») — shows NO grey «không» rows (.kfree) */
- const free=!ton&&!mats.length&&!gains.length&&!R("bai").length&&!R("hint").some(r=>!/^(không|chưa rõ|không được mất gì)?\.?$/i.test((r.querySelector(".krv")||r).textContent.trim()))&&!b.querySelector(".kat .kodds:not([data-ksure])");
- /* LAW 3 (review/odds-meter-back): a card with NO roll (no odds of its own; the «Nắm chắc» meter kitOptOdds adds is data-ksure) cannot fail — its
+ const free=false;/* OD 26/11 ~17:55Z (canon overwrite of tinbao-words): KEEP ALL result rows — «Tốn: không», «Được: không» stay on every card, nothing hidden; the .kfree no-row card is retired */
+ /* LAW 3 (review/odds-meter-back): a card with NO roll (no odds of its own; a no-roll option carries no odds word at all, owner 26/11 ~18:25Z) cannot fail — its
     «mất: …» (parsed as a Bại row beside Thành) is a CERTAIN loss and stands in Tốn like a Mất row, never folded behind «!» */
- const sure=!b.querySelector(".kat .kodds:not([data-ksure])");if(sure)mats=mats.concat(R("bai"));
+ const sure=!b.querySelector(".kat .kodds");if(sure)mats=mats.concat(R("bai"));
  /* OD 21/11 ~05:0xZ (#72): the LOSS has its own «Mất» row (Tốn = the price, Được = the gain, Mất = what can be lost), never folded into Tốn */
  const loss=[];if(!ton){ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n kdup";e.textContent="không";ton.querySelector(".krv").appendChild(e)}
  mats.forEach(m=>chipsOf(m).forEach(c=>loss.push(dupOf(c))));
@@ -397,6 +405,16 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Th�
  `<div class="opts kitpg-opts">`+
  [["Tiếp","thân +3"],["Xin về tảo mộ tổ tiên",`tốn: Sức -${BAL.kitpage.demo.tomb.suc} · được: Đức +${BAL.kitpage.demo.tomb.duc}, cha mẹ vui lòng · ghi chú: chơi 6 phần ra Khá`],["Thôi, không làm gì","ghi chú: để lần sau"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
+/* kit sample page (§6.2b-END, FIRSTCARD-3, owner OD 26/11 ~18:25Z): the odds word only on an option that really rolls. The button opens a REAL dialog
+   (Q + showModal, the game's own path): (1) a hidden roll declared by the real kitRiskOpt (true chance → word(p) lead + the red Mất row), (2) a certain
+   ending of a real choice → NO odds word, (3) a safe option → NO odds word; the choice holds a life-changing option, so the small line «Cẩn thận khi lựa chọn» stands above it. */
+function kitEndSample(){try{if(typeof S==="undefined"||!S||typeof Q==="undefined"||Q.length)return false;const pg=document.getElementById("kitpage");const was=!!(pg&&!pg.hidden);const back=()=>{if(was&&pg)pg.hidden=false};if(pg)pg.hidden=true;
+ const nop=()=>setTimeout(back,0);const o1=kitRiskOpt({n:"Dâng khúc đàn",fx:{},x:"",j67:"tốn: không",hint:"chơi một màn đàn",go:nop},BAL.odds.cut[0],"không lọt vào bốn người đứng đầu thì bị ban hoa, kiếp này dừng",true);
+ Q.push({t:"Lễ ra mắt (mẫu kit)",h:"<p>Mẫu §6.2b-END: chữ cơ hội chỉ ở lựa chọn có gieo; lựa chọn đổi kết cục có dòng cẩn thận phía trên.</p>",pid:"kitpg-end",onClose:back,
+  opts:[o1,{n:"Cắt tóc đi tu",fx:{},x:"",j67:"tốn: không",hint:"thoát khỏi mọi chuyện; nhưng kiếp này dừng",go:nop},{n:"Vâng lời, chờ ngày khác",fx:{},x:"",j67:"tốn: không",go:nop}]});showModal();return true}catch(e){console.error("kitEndSample",e);return false}}
+window.kitEndSample=kitEndSample;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b-END",title:"Thẻ lựa chọn có thể dừng kiếp này: chữ cơ hội chỉ ở lựa chọn có thật sự gieo; lựa chọn đổi kết cục không có chữ, có dòng «Cẩn thận khi lựa chọn» (chạm để mở thẻ thật)",html:()=>{const ok=typeof S!=="undefined"&&S;
+ return `<div class="kitpg-row"><button type="button" class="kbtn alt" onclick="kitEndSample()"${ok?"":" disabled"}>Lễ ra mắt · ban hoa · đi tu</button></div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem thẻ."],{group:false}))}})}catch(e){}
 /* kit sample page (§6.2c): the tall-frame rule, described (the real frames are the modals themselves) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2c",title:"Khung hội thoại: điện thoại, chỉ khung cao (L / XL) kéo đúng tỷ lệ màn hình",html:()=>
  `<div class="kpnote">Điện thoại dọc: chỉ khung hội thoại cao (cỡ L, XL) kéo cao cả trên lẫn dưới, tỷ lệ bằng màn hình. Khung thấp, nhỏ, ngắn (S, M) giữ nguyên.</div>`})}catch(e){}
@@ -422,3 +440,39 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Vi�
 const KIT_ACT_ALIAS={"Nhờ thái giám mua đồ":"mua-hang","Soát đồ":"kiem-tra-ruong","Sai cung nữ thân tín mua lén ngoài cung":"len-mua-ngoai-cung-h","Hối lộ người ở Thái y viện":"mua-chuoc","Chợ đen ở cửa Thần Vũ":"buon-ban-len","Xin đồng minh":"ket-minh"};
 try{const kak0=kitActKey;kitActKey=function(name){try{const a=KIT_ACT_ALIAS[kpPlain(name)];if(a&&!((KIT_ACTS.acts||{})[kpPlain(name)]))return a}catch(e){}return kak0.apply(this,arguments)}}catch(e){}
 try{const ka0=kitActArt;kitActArt=function(name){const r=ka0.apply(this,arguments);try{const n=kpPlain(name),a=KIT_ACT_ALIAS[n];if(a&&r&&!((KIT_ACTS.acts||{})[n]))r.src=`img/act-${a}.webp`}catch(e){}return r};window.kitActArt=kitActArt}catch(e){}
+/* ===== KIT §6.2k «CẨN THẬN KHI LỰA CHỌN» — ONE small warning line above a choice (owner 26/11 ~18:25Z, KK44) =====
+   Options that do NOT roll a chance but change her ending / life (xuất giá, đi tu / xuất gia, tự vẫn, rời cung, chuyển kiếp, «Cúi đầu chờ xét» …) show NO odds word;
+   instead the dialog carries warn:1 (Q card, or kitPanel spec.warn) and the kit draws ONE line «Cẩn thận khi lựa chọn» right above its option list (.opts).
+   The word lives in VANPHONG (KIT_WARN_LINE); one look (.kwarnl: small, the kit red, the «!» disc), every dialog path (j3 cards and kit panels). */
+const KIT_WARN_LINE="Cẩn thận khi lựa chọn";window.KIT_WARN_LINE=KIT_WARN_LINE;
+function kitWarnLine(text){return `<div class="kwarnl" role="note"><i class="khap" aria-hidden="true">!</i><span>${text||KIT_WARN_LINE}</span></div>`}
+function kitWarnPut(){try{const m=Q[0],M=document.getElementById("modal");if(!m||!M||M.hidden)return;const wv=m.warn||(m.kit&&m.kit.warn);const on=!!wv;const o=M.querySelector("#mb .opts");const old=M.querySelectorAll(".kwarnl");
+ if(!on||!o){old.forEach(e=>e.remove());return}if(o.previousElementSibling&&o.previousElementSibling.classList.contains("kwarnl"))return;old.forEach(e=>e.remove());o.insertAdjacentHTML("beforebegin",kitWarnLine(typeof wv==="string"?wv:""))}catch(e){console.error("kitWarnPut",e)}}
+window.kitWarnLine=kitWarnLine;window.kitWarnPut=kitWarnPut;
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);kitWarnPut();setTimeout(kitWarnPut,120);return r};window.showModal=showModal})();
+(function(){const st=document.createElement("style");st.textContent=`#modal .kwarnl{display:flex;align-items:center;justify-content:center;gap:6px;margin:4px auto 6px;padding:2px 10px;font-size:.82rem;line-height:1.3;color:var(--bad);font-weight:600;letter-spacing:.01em;flex:0 0 auto}
+#modal .kwarnl .khap{flex:0 0 auto;margin:0;width:16px;height:16px;line-height:16px;font-size:.72rem;background:var(--bad);color:var(--panel,#fff);animation:none}`;document.head.appendChild(st)})();
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2k",title:"Dòng cảnh báo «Cẩn thận khi lựa chọn» trên lựa chọn đổi kết cục (không có chữ cơ hội)",html:()=>`<div id="modal" style="position:static"><div id="mb">${kitWarnLine()}<div class="opts kitpg-opts"><button class="opt">Xuất gia<small>đổi kiếp này</small></button><button class="opt">Ở lại<small>giữ nguyên</small></button></div></div></div>`})}catch(e){}
+/* ===== KIT §6.2l GOAL LINK + «CÁCH LÀM» PANEL (owner 26/11 ~18:05Z: «mấy cái dấu gạch hướng dẫn dưới chân của cái dòng đó … bấm vào là để hiện ra cái hướng dẫn, hoặc là hiện ra là đi tới nơi đó»; KK44) =====
+   kitGoalLink(label, how) → an UNDERLINED (dotted) link inside any goal / task / notice text; tap → kitHowPanel(how) = the small kit panel «Cách làm»:
+   who (name + painting), where (place + its open hours), what it costs, + ONE button «Đi tới» (its khắc cost shown) that runs how.go (walk her there /
+   open the Dư đồ with the place pulsing). how = {who: person object | name, where: place key | name, hours: text, cost: text, note: text, go: fn, goK: khắc, map: fn («Xem Dư đồ»)}.
+   The data comes from the caller (the goal list knows its target); the kit only draws it. One look everywhere (.kglink), registry by id (no inline code). */
+const KGL=window.KGL=window.KGL||{n:0,m:{}};
+function kitGoalLink(label,how){const id="g"+(++KGL.n);KGL.m[id]=how||{};if(KGL.n>400){const ks=Object.keys(KGL.m);ks.slice(0,ks.length-300).forEach(k=>delete KGL.m[k])}
+ return `<span class="kglink" role="button" tabindex="0" data-kglink="${id}">${label}</span>`}
+function kitHowPanel(how){try{how=how||{};const p=how.who&&typeof how.who==="object"?how.who:null;const nm=p?(p.name||""):(how.who||"");
+ const wk=how.where||"";let pl=wk;try{if(wk&&typeof placeName==="function"&&typeof placeOf==="function"&&placeOf(wk))pl=placeName(wk)||wk}catch(e){}
+ const ico=wk&&typeof kitPlaceIcon==="function"?kitPlaceIcon(wk,16):"";
+ const rows=[["Ai",nm?(typeof kitName==="function"&&p?kitName(p):nm):""],["Ở đâu",pl?`<span class="kglwhere">${ico}${pl}</span>`:""],["Giờ mở",how.hours||""],["Tốn",how.cost||""],["Ghi chú",how.note||""]];
+ const html=(typeof kitRows==="function"?kitRows(rows):rows.filter(r=>r[1]).map(r=>`<p><b>${r[0]}:</b> ${r[1]}</p>`).join(""));
+ const opts=[];if(typeof how.go==="function")opts.push({n:"Đi tới",fx:{},x:how.goK!=null?`tốn: ${how.goK} khắc`:"",go:()=>{try{how.go()}catch(e){console.error("kitHowPanel go",e)}}});if(typeof how.map==="function")opts.push({n:"Xem Dư đồ",fx:{},go:()=>{try{how.map()}catch(e){console.error("kitHowPanel map",e)}}});
+ return typeof kitModal==="function"?kitModal({kind:"info",title:"Cách làm",subject:p||undefined,html,opts:opts.length?opts:undefined,cls:"kgoalhow"}):null}catch(e){console.error("kitHowPanel",e);return null}}
+window.kitGoalLink=kitGoalLink;window.kitHowPanel=kitHowPanel;
+/* window capture: runs before the document-level frame / tap-catcher handlers that take a tap inside an info frame */
+window.addEventListener("click",e=>{const t=e.target&&e.target.closest&&e.target.closest("[data-kglink]");if(!t)return;const h=KGL.m[t.dataset.kglink];if(!h)return;e.stopImmediatePropagation();e.preventDefault();kitHowPanel(h)},true);
+document.addEventListener("keydown",e=>{if(e.key!=="Enter"&&e.key!==" ")return;const t=e.target&&e.target.closest&&e.target.closest("[data-kglink]");if(!t)return;e.preventDefault();t.click()});
+(function(){const st=document.createElement("style");st.textContent=`.kglink{text-decoration:underline dotted;text-decoration-thickness:1.5px;text-underline-offset:3px;text-decoration-color:var(--gold);color:inherit;cursor:pointer;font-weight:600}
+#modal .kglwhere{display:inline-flex;align-items:center;gap:4px;white-space:nowrap}
+.kglink:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:3px}`;document.head.appendChild(st)})();
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2l",title:"Chữ dẫn đường trong mục tiêu (gạch chấm) + khung «Cách làm» với nút «Đi tới»",html:()=>`<p class="kitpg-row">Mua một hộp phấn của ${kitGoalLink("thái giám Nội vụ phủ",{who:"Thái giám Nội vụ phủ",where:"nvp",hours:"buổi sáng, buổi trưa",cost:"Bạc theo món",goK:1,go:()=>{}})} trước rằm.</p>`})}catch(e){}
