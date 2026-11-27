@@ -16,7 +16,9 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   for(const [n,pid,pp] of [['giftpick','giftpick',{v:v.id}],['giftto','giftto',{t:'emp'}],['plantpick','plantpick',{v:v.id}],['tsgiftpick-it','tsgiftpick',{v:v.id,k:'it'}],['tsgiftpick-wk','tsgiftpick',{v:v.id,k:'wk'}]]){
    while(Q.length)Q.shift();try{kitRingItem.cur&&kitRingItem.close(1)}catch(e){}try{closeModal()}catch(e){}
    const it=mkP(pid,pp);if(!it){out.push({n,none:1});continue}pushDil(it,n);const mm=Q.find(z=>z.pid===pid&&z.h===it.t);{const j=Q.indexOf(mm);if(j>0){Q.splice(j,1);Q.unshift(mm)}}showModal();await w(1500);
-   const M=document.getElementById('modal'),C=kitRingItem.cur;const o={n,nodes:M.querySelectorAll('*').length,page:document.querySelectorAll('*').length,front:Q[0]===mm,ring:!!C,kriOn:kriOn(),hid:M.hidden,kriDlg:KRI_DLG===Q[0],cur:!!kitRingItem.cur,kon:kipOn(Q[0]),q:Q.map(z=>z.pid||z.t).slice(0,4)};if(!C){out.push(o);continue}
+   /* the probe empties Q between pickers (a game never does): a late callback of the previous step may find Q empty and hide #modal → open once more, counted (as picker-dom-frames.js) */
+   let reopen=0;while(document.getElementById('modal').hidden&&Q[0]===mm&&reopen<3){reopen++;showModal();await w(1200)}
+   const M=document.getElementById('modal'),C=kitRingItem.cur;const o={reopen,n,nodes:M.querySelectorAll('*').length,page:document.querySelectorAll('*').length,front:Q[0]===mm,ring:!!C,kriOn:kriOn(),hid:M.hidden,kriDlg:KRI_DLG===Q[0],cur:!!kitRingItem.cur,kon:kipOn(Q[0]),q:Q.map(z=>z.pid||z.t).slice(0,4)};if(!C){out.push(o);continue}
    const it2=Q[0];o.same=it2===it;o.live=typeof kipList!=='function';const L=o.live?it2.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]).sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1])):kipList(it2);o.kip=L.length;o.ringN=C.items.length;o.cap=KIT_RINGI.maxN;o.wantN=Math.min(L.length,KIT_RINGI.maxN);
    const drawn=new Set([...M.querySelectorAll('.opts>.opt[data-m]')].map(x=>+x.dataset.m));o.drawn=drawn.size;
    o.ids=C.items.map(x=>x.id).join()===L.slice(0,KIT_RINGI.maxN).map(x=>x[1]).join();
