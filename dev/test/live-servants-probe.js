@@ -23,7 +23,7 @@ const r=await p.evaluate(n=>{localStorage.clear();SLOT=4;document.getElementById
   try{nextBuoi()}catch(e){}Q.length=0}
  const RS={};for(const k in ret){const L=ret[k];RS[k]={n:L.length,max:Math.max(...L),mean:+(L.reduce((a,b)=>a+b,0)/L.length).toFixed(2)}}
  const top=Object.entries(why).sort((a,b)=>b[1]-a[1]).slice(0,25);
- return{fill,tot,away:+(away.a/Math.max(1,away.n)).toFixed(3),ret:RS,top,day,stat:window.__j95s?window.__j95s():null,save:(()=>{try{save()}catch(e){}return (localStorage.getItem("hclh-save-v2-4")||"").length})()}},N);
+ return{fill,tot,away:+(away.a/Math.max(1,away.n)).toFixed(3),ret:RS,top,day,stat:window.__j95s?window.__j95s():null,save:(()=>{try{save()}catch(e){}return ((window.slotGet?slotGet("hclh-save-v2-4"):localStorage.getItem("hclh-save-v2-4"))||"").length})()}},N);
 if(JS){console.log(JSON.stringify(Object.assign(r,{errs})));await b.close();return}
 console.log("FILLER reasons by kind (filler / rows):");for(const k in r.tot)console.log(`  ${k}: ${r.fill[k]||0} / ${r.tot[k]}`);
 console.log(`servants away from their palace: ${r.away}`);console.log("retinue by mistress rank:",JSON.stringify(r.ret));

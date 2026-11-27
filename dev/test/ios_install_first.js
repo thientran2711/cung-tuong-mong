@@ -14,7 +14,7 @@ let fails=0;const ok=(c,m)=>{console.log((c?"PASS ":"FAIL ")+m);if(!c)fails++};
   await ctx.addInitScript(({ios,sa,save})=>{
    if(ios){Object.defineProperty(navigator,"platform",{get:()=>"MacIntel"});Object.defineProperty(navigator,"maxTouchPoints",{get:()=>5})}
    if(sa)Object.defineProperty(navigator,"standalone",{get:()=>true});
-   if(save&&!localStorage.getItem("hclh-save-v2-1"))localStorage.setItem("hclh-save-v2-1","{}")},{ios:o.ios,sa:o.sa,save:o.save});
+   if(save&&!(window.slotGet?slotGet("hclh-save-v2-1"):localStorage.getItem("hclh-save-v2-1")))localStorage.setItem("hclh-save-v2-1","{}")},{ios:o.ios,sa:o.sa,save:o.save});
   const pg=await ctx.newPage(),reqs=[];/* only jload's bulk download counts (x-ctm-load header, or &ctmload=1 on the CDN); the game's own boot pictures are not the download */
   pg.on("request",q=>{const u=q.url();if(q.headers()["x-ctm-load"]||/ctmload=1/.test(u))reqs.push(u)});
   const errs=[];pg.on("pageerror",e=>errs.push(String(e)));

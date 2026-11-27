@@ -50,7 +50,7 @@ async function run(b,SZx){const [W,H]=SZx.split('x').map(Number);const tag=SZx;
   await p.evaluate(()=>{window.__r0=Math.random;Math.random=()=>0.999});await choose(P==='b'?1:2);await p.evaluate(()=>{const m=Q[0];const i=m&&m.opts?m.opts.findIndex(o=>/^Vẫn chọn/.test(o.n||'')):-1;if(i>=0)chooseM(i)});await sleep(500);await p.evaluate(()=>{Math.random=window.__r0});
   res.push({name:'fail-'+P,st:await p.evaluate(()=>({dead:S.dead,fate:S.fate,p:S.succ&&S.succ.p,title:Q[0]&&Q[0].t}))})}
  /* old save (no S.succ) loads and a turn passes */
- await fresh();const old=await p.evaluate(()=>{save();const d=JSON.parse(localStorage.getItem(SK(3)));delete d.S.succ;localStorage.setItem(SK(3),JSON.stringify(d));deser(loadSlot(3));render();try{endTurn()}catch(e){return 'err '+e.message}return {ok:true,turn:S.turn,dead:S.dead,succ:S.succ===undefined?'none':'set'}});
+ await fresh();const old=await p.evaluate(()=>{save();const d=JSON.parse((window.slotGet?slotGet(SK(3)):localStorage.getItem(SK(3))));delete d.S.succ;localStorage.setItem(SK(3),JSON.stringify(d));deser(loadSlot(3));render();try{endTurn()}catch(e){return 'err '+e.message}return {ok:true,turn:S.turn,dead:S.dead,succ:S.succ===undefined?'none':'set'}});
  res.push({name:'old-save',old});
  const book=await p.evaluate(()=>{const h=pastHTML();return {has:/Kết cục kế vị/.test(h)}});res.push({name:'book',book});
  await ctx.close();return {tag,errs,res}}

@@ -22,7 +22,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
    /* road 1: bạc */
    const g0=V.map(v=>[v.ghen,oan(v,S)]),b0=S.bac;apply(d.o[0].fx);d.o[0].go();res.bac={spent:b0-S.bac,want:V.length*G.bac,ghen:V.map((v,i)=>g0[i][0]-v.ghen),oan:V.map((v,i)=>g0[i][1]-oan(v,S)),log:plain(S.logs[0]||"")};
    /* road 2: a work → the picker → give */
-   const v=V[0];const pw=PEND.tsgiftpick({v:v.id,k:"wk"});res.wkPick=pw.o.map(o=>({n:o.n,x:o.x,dis:!!o.tsDis,need:(o.need||[]).map(n=>n.t)}));
+   const v=V[0];const pw=PEND.tsgiftpick({v:v.id,k:"wk"});res.wkPick=pw.o.map(o=>({n:o.n,x:o.x,dis:!!o.tsDis,need:(o.need||[]).map(n=>n.t)}));res.wkPickT=plain(pw.t||"");
    const iw=pw.o.findIndex(o=>o.ik!=null&&!o.tsDis);if(iw>=0){const G1=[v.ghen,oan(v,S),aff(v,S)],n0=S.inv.length;pw.o[iw].go();res.wk={gave:pw.o[iw].n,ghen:G1[0]-v.ghen,oan:G1[1]-oan(v,S),aff:aff(v,S)-G1[2],inv:n0-S.inv.length,log:plain(S.logs[0]||"")}}else res.wk={none:true};
    /* road 3: an item */
    const pi=PEND.tsgiftpick({v:v.id,k:"it"});res.itPick=pi.o.map(o=>({n:o.n,x:o.x,dis:!!o.tsDis,need:(o.need||[]).map(n=>n.t)}));
@@ -73,7 +73,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
   ck(JSON.stringify(x.names)===JSON.stringify(["Lễ bạc","Tác phẩm tự tay làm","Đồ trong rương","Thôi"]),'three roads + Thôi: '+JSON.stringify(x.names));
   ck(x.bac&&x.bac.spent===x.bac.want&&x.bac.ghen.every(n=>n===8)&&x.bac.oan.every(n=>n>0)&&/Mất:/.test(x.bac.log)&&/Được:/.test(x.bac.log),'bạc road '+JSON.stringify(x.bac));
   ck(x.wk&&x.wk.inv===1&&x.wk.ghen===8&&x.wk.oan>0&&x.wk.aff>0&&/Mất:/.test(x.wk.log),'work road '+JSON.stringify(x.wk));
-  ck(x.wkPick&&x.wkPick.some(o=>o.dis&&o.need.length),'a work not enough is greyed with its reason');
+  ck(x.wkPick&&x.wkPick.length&&!x.wkPick.some(o=>o.dis)&&/Còn \d+ món khác trong rương chưa đủ lễ/.test(x.wkPickT||''),'live-bugs-2711: a work not enough is NOT a tile (no dead tile); the text says how many and why: '+(x.wkPickT||''));
   ck(x.it&&x.it.inv===1&&x.it.ghen===8&&x.it.oan>0&&x.it.aff>0&&/Mất:/.test(x.it.log),'item road '+JSON.stringify(x.it));
   ck(x.refused&&x.refused.found&&x.refused.ghen===0&&x.refused.oan===0&&x.refused.inv===0&&/không thành/.test(x.refused.log),'refused piece eases nothing '+JSON.stringify(x.refused));
   ck(x.old&&x.old.n>1,'old-save picker (no kind) opens');ck(x.noRoad&&x.noRoad.dis,'act greyed when no road is open');
