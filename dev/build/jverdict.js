@@ -153,26 +153,26 @@ const on=()=>{const t=T();return !!(t&&t.classList.contains("on")&&t.classList.c
 /* the result card really on screen (not parked / hidden): only a VISIBLE card may hold the next screen */
 const vis=()=>{try{const t=T();if(!on()||t.hidden)return false;const cs=getComputedStyle(t);if(cs.display==="none")return false;
  /* KIT 32.10a park (body.kdlg-on) lags one frame behind (rAF sync): a held card is un-parked by the kitDialogOpen exception below, so the park class is not «hidden» */
- return cs.visibility!=="hidden"||document.body.classList.contains("kdlg-on")}catch(e){return false}};
+ return cs.visibility!=="hidden"||document.body.classList.contains("kdlg-on")||t.classList.contains("kres-front")}catch(e){return false}};
 const ui=()=>{try{return !window.__bot&&typeof S==="object"&&!!S&&!S.dead}catch(e){return false}};
 const GRACE=300;/* a result drawn a few ms after its choice (setTimeout 0 / 30: Bái kiến, house servants, nhà ngoại) still belongs to it */
 function modalOff(){try{const M=document.getElementById("modal");if(M&&!M.hidden)M.hidden=true}catch(e){}}
-function cue(){const t=T();if(!t)return;t.classList.add("kres-hold");clearTimeout(window.__rtT);/* held: no auto-hide, she taps it away */
+function cue(){const t=T();if(!t)return;t.classList.add("kres-hold");setTimeout(front,0);clearTimeout(window.__rtT);/* held: no auto-hide, she taps it away */
  const rt=t.querySelector(".rt");if(rt&&!rt.querySelector(".kres-next"))rt.insertAdjacentHTML("beforeend",`<button type="button" class="kbtn kres-next">Tiếp ▸</button>`)}
 function hold(){if(RF.held){cue();return}RF.held=true;RF.stat.hold++;cue();dog()}
 /* SAFETY (no soft-lock, LC25 G4): while held, a result card that is no longer on screen (parked, hidden by a screen change, a new life) lets the
    held screen go at once — a card is never left in Q with nothing on screen */
 function dog(){if(RF.dogT)return;const tick=()=>{RF.dogT=0;if(!RF.held&&!RF.wantModal&&!RF.later.length)return;if(!ui()||!vis()){RF.stat.dog=(RF.stat.dog|0)+1;release();return}RF.dogT=setTimeout(tick,700)};RF.dogT=setTimeout(tick,700)}
 function release(){if(!RF.held&&!RF.wantModal&&!RF.later.length)return;RF.held=false;RF.stat.rel++;const t=T();if(t){t.classList.remove("kres-hold");const b=t.querySelector(".kres-next");if(b)b.remove()}
- const L=RF.later.splice(0);for(const f of L){try{f()}catch(e){console.error("RF later",e)}}
+ try{front()}catch(e){}const L=RF.later.splice(0);for(const f of L){try{f()}catch(e){console.error("RF later",e)}}
  if(RF.wantModal){RF.wantModal=false;try{if(Q.length&&!S.dead)showModal()}catch(e){console.error("RF modal",e)}}}
 /* the result card closes by its own tap (j63 onclick removes .on) or the «Xem đầy đủ trong Sổ ghi» jump: then the held screen opens */
-function watch(){const t=T();if(!t||t.__rfw)return;t.__rfw=1;new MutationObserver(()=>{if(t.classList.contains("on")||!(RF.held||RF.wantModal||RF.later.length))return;
+function watch(){const t=T();if(!t||t.__rfw)return;t.__rfw=1;new MutationObserver(()=>{front();if(t.classList.contains("on")||!(RF.held||RF.wantModal||RF.later.length))return;
   if(RF.held&&ui()&&performance.now()-(RF.tapAt||-1e9)>800){RF.stat.keep=(RF.stat.keep|0)+1;t.classList.add("on");clearTimeout(window.__rtT);return}/* a timer, not her tap */
   setTimeout(release,0)}).observe(t,{attributes:true,attributeFilter:["class"]})}
 /* the result card of a choice: drawn → remembered; inside / just after a choice → it holds what comes next */
 const r0=resultShow;resultShow=function(){const was=window.kaLastResult;const r=r0.apply(this,arguments);
- try{if(ui()&&on()&&window.kaLastResult!==was){watch();RF.shown++;const now=performance.now();
+ try{front();if(ui()&&on()&&window.kaLastResult!==was){watch();RF.shown++;const now=performance.now();
   if(RF.held)cue();/* a second card while held keeps «Tiếp ▸» */if(RF.depth>0)RF.mine=1;else if(now-RF.end<GRACE&&!RF.nav){/* late card: the next card may already be up — take it back until the result is seen */
    RF.stat.late++;try{const M=document.getElementById("modal");if(Q.length&&M&&!M.hidden){modalOff();RF.wantModal=true}}catch(e){}if(RF.wantModal||RF.later.length)hold()}}}catch(e){console.error("RF show",e)}return r};
 /* the next card while a choice is running: held until the choice is over; shown at once when the choice made no result card */
@@ -185,22 +185,27 @@ function isNav(nm,a){try{if(nm!=="chooseM")return false;const m=Q[0],c=m&&m.opts
 function wrap(nm){const f=window[nm];if(typeof f!=="function")return;window[nm]=function(){const top=RF.depth===0;let was=null;if(top){RF.mine=0;RF.nav=isNav(nm,arguments);was=window.kaLastResult}RF.depth++;let r;
  try{r=f.apply(this,arguments)}finally{RF.depth--;if(top){RF.end=performance.now();
    /* jaudit hands a card raised inside the choice to the INNER resultShow (window.__aaR0) at its end: the card is known by kaLastResult */
-   try{if(!RF.mine&&window.kaLastResult!==was&&on()&&ui()){RF.mine=1;watch();RF.shown++}if(RF.nav){RF.mine=0;RF.stat.nav=(RF.stat.nav|0)+1}}catch(e){}
+   try{front();if(!RF.mine&&window.kaLastResult!==was&&on()&&ui()){RF.mine=1;watch();RF.shown++}if(RF.nav){RF.mine=0;RF.stat.nav=(RF.stat.nav|0)+1}}catch(e){}
    try{if(RF.mine&&on()&&ui()&&(RF.wantModal||RF.later.length||(window.DF&&DF.enc===1)/* the encounter's talk acts come next */))hold();else if(!RF.held&&RF.wantModal){RF.wantModal=false;if(Q.length&&ui())showModal()}}catch(e){console.error("RF end",e)}}}
  return r}}
 /* every choice runner of the result card family (the same set j19 wrapR gives a result card) */
 for(const nm of ["chooseM","talk","act","doAct","servAct","empAct","courtAct","recommend"])wrap(nm);
 /* the visitor ENCOUNTER (jdfv): after her reply the person's talk acts come only after the result; the reply buttons fold meanwhile */
 if(typeof dfSetGroups==="function"){const g0=dfSetGroups;dfSetGroups=function(F,G){try{if(ui()&&RF.held&&vis()){
-  RF.stat.enc++;try{F.choices([],null)}catch(e){}RF.later.push(()=>{let H=G;try{const j=dfIdx();if(j<0)return;H=dfData(j)}catch(e){}g0(F,H)});return}}catch(e){console.error("RF enc",e)}return g0.apply(this,arguments)}}
+  RF.stat.enc++;try{F.choices([],null)}catch(e){}RF.later.push(()=>{let H=G;try{if(!window.DF||DF.F!==F)return;/* that focus is gone already */const j=dfIdx();if(j<0){dfGone();return}/* the person left while the result was up: close the focus as jdfv does, never an empty layer over the stage */H=dfData(j)}catch(e){}g0(F,H)});return}}catch(e){console.error("RF enc",e)}return g0.apply(this,arguments)}}
 /* KIT 32.10a exception (the root of the owner's «bấm xong … không thấy hiện gì»): the result card is PARKED (hidden) while a dialog is open, and the
    focus layer (.kfoc, jfocus role=dialog) counted as one — every result of a visitor reply or an in-visit talk act stayed hidden for the whole
    visit. The focus layer is the STAGE view, not a dialog: the result card stands over it (z 47); a HELD card is the front screen (nothing parks it). */
-if(typeof kitDialogOpen==="function"){const kd0=kitDialogOpen;kitDialogOpen=function(){try{if(RF.held&&on())return false;
-  if(document.querySelector(".kfoc[role=dialog]")){for(const d of document.querySelectorAll('#modal,[role="dialog"]')){if(d.closest("#rtoast,#kupdline")||d.matches(".kfoc"))continue;
-    if(d.id==="modal"){if(!d.hidden&&getComputedStyle(d).display!=="none")return true;continue}
-    if(d.closest("#modal"))continue;if(!d.getClientRects().length)continue;const cs=getComputedStyle(d);if(cs.visibility==="hidden"||+cs.opacity===0)continue;return true}return false}}catch(e){}
-  return kd0.apply(this,arguments)};window.kitDialogOpen=kitDialogOpen}
+/* the shared park rule (kitDialogOpen / body.kdlg-on) is NOT changed (LC26 button-crawl G4: changing it left every other floating card
+   un-parked over the focus and the focus no longer counted as an open layer): only the RESULT CARD gets `.kres-front` (CSS below: visible over
+   the park) while it is held, or while the only open "dialog" is the focus layer .kfoc (the stage view) */
+function dlgBeyondFocus(){try{for(const d of document.querySelectorAll('#modal,[role="dialog"]')){if(d.closest("#rtoast,#kupdline")||d.matches(".kfoc"))continue;
+  if(d.id==="modal"){if(!d.hidden&&getComputedStyle(d).display!=="none")return true;continue}
+  if(d.closest("#modal"))continue;if(!d.getClientRects().length)continue;const cs=getComputedStyle(d);if(cs.visibility==="hidden"||+cs.opacity===0)continue;return true}}catch(e){}return false}
+function front(){try{const t=T();if(!t)return;const f=on()&&(RF.held||(!!document.querySelector(".kfoc[role=dialog]:not([hidden])")&&!dlgBeyondFocus()));t.classList.toggle("kres-front",!!f)}catch(e){}}
+RF.front=front;
+/* the park state changes (a dialog opens / closes over the focus): the front flag follows */
+try{new MutationObserver(()=>front()).observe(document.body,{attributes:true,attributeFilter:["class"]})}catch(e){}
 /* a HELD card closes only by her tap (the card, its «Tiếp ▸», the kit tap catcher #kxcatch, «Xem đầy đủ trong Sổ ghi»): a timer of the card
    family (j63 9 s, KIT 32.10a 7 s re-timer) that takes it away while held puts it back */
 document.addEventListener("pointerdown",()=>{RF.tapAt=performance.now()},true);document.addEventListener("click",()=>{RF.tapAt=performance.now()},true);
@@ -210,5 +215,7 @@ const st=document.createElement("style");st.id="rf-css";st.textContent=`
 /* KIT 7.4: the result card of a choice is above the focus layer (.kfoc z 46) and every card (#modal z 42) */
 .rtoast.karesult{z-index:47}
 .rtoast.karesult.kres-hold{pointer-events:auto}
+/* over the KIT 32.10a park: only the held result card, or the result card over the focus layer (stage view) */
+body.kdlg-on #rtoast.karesult.kres-front{visibility:visible!important;pointer-events:auto!important}
 .rtoast.karesult .kres-next{align-self:flex-end;margin-top:4px}`;document.head.appendChild(st);
 })();

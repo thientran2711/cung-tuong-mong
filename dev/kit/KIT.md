@@ -2662,9 +2662,10 @@ the first tap).** While any dialog is open (`#modal`, any visible `[role=dialog]
 body class `kdlg-on` — the act result card `#rtoast` and the `kitLine` pill `#kupdline` are PARKED (hidden, no `#kxcatch`). When the last dialog
 closes, a parked result card comes back with a fresh 7 s timer and its catcher. New floating cards join the same rule (add their id to the
 `kdlg-on` CSS in jk4). Test `dev/test/small-bugs-3.js` toast.
-EXCEPTION (KIT 7.4 RESULT FIRST, OB-VERDICT-3, owner OD 26/11 ~18:15Z): the focus layer `.kfoc` (jfocus, `role=dialog`) is the STAGE view, not a
-dialog — it never parks the result card (before: every result of a visitor reply / in-visit talk act stayed hidden for the whole visit); and a HELD
-result card (7.4) is the front screen, nothing parks it. Hook: `kitDialogOpen` wrapper in jverdict.js.
+EXCEPTION (KIT 7.4 RESULT FIRST, OB-VERDICT-3, owner OD 26/11 ~18:15Z): the park rule itself is unchanged (`kitDialogOpen` / `kdlg-on`: the
+focus layer `.kfoc` still parks every floating card and still counts as an open layer — LC26 button-crawl G4). Only the RESULT CARD gets
+`.kres-front` (visible over the park) while it is HELD (7.4) or while the only open "dialog" is the focus layer (the stage view: before, every
+result of a visitor reply / in-visit talk act stayed hidden for the whole visit). Hook: `front()` in jverdict.js.
 THE component — one place, every panel inherits it (#modal: event dialogs, choice cards, place cards 32.8, person cards / self / Hoàng thượng
 (pcm), info and report cards, Tư trang item and slot cards 28.13f, the shop 28.13d, title-screen pages, co-op pages; plus the week book
 kitBook, game / lesson results in #ov and the person card opened from the room #popw).
