@@ -11,7 +11,8 @@ await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getEle
  const k=mkKid("f",9);k.bt=S.turn-9*12;k.alive=false;S.kids.push(k);
  const s=S.staff[0];if(s){s.alive=false;S.dstaff=(S.dstaff||[]).concat([s]);S.staff=S.staff.filter(x=>x!==s)}});
 let n=0;const shot=async()=>{await p.waitForTimeout(1500);await p.screenshot({path:`${OUT}/scene-${DEV}-${n++}.png`});await p.waitForTimeout(1200)};
-const clickFace=async(sel)=>{await p.evaluate(sel=>{const e=[...document.querySelectorAll(".pface")].find(x=>sel?x.querySelector(sel):true);if(e)e.click()},sel)};
+const clickFace=async(sel)=>{for(let i=0;i<8&&sel&&!(await p.evaluate(s=>!!document.querySelector(".pface "+s),sel));i++){await p.evaluate(()=>{const b=[...document.querySelectorAll("button")].filter(x=>/^[›»>]$/.test(x.textContent.trim())&&x.getBoundingClientRect().width>0);if(b.length)b[b.length-1].click()});await p.waitForTimeout(500)}
+ await p.evaluate(sel=>{const e=[...document.querySelectorAll(".pface")].find(x=>sel?x.querySelector(sel):true);if(e)e.click()},sel)};
 await p.evaluate(()=>{tab="rv";PG.rv=0;render()});await p.waitForTimeout(1200);
 await clickFace(".kst-lc");await shot();                         // 0 lãnh cung pale
 await clickFace(".kst-dead");await shot();                        // 1 dead consort
