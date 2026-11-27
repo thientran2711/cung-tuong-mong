@@ -1,0 +1,3 @@
+- year 5 · turn 54 · tuần 1 · buổi 3 · rank 0 · .dlg «Phòng bị» · NEW SCREEN · first time on this screen; buttons: Lui | Canh chừng cungRất vữngTốnkh | Thử độc đồ ănRất vữngTốnkhôn | Theo dõi một ngườiRất vữngTố | Giữ sổ sách, làm chứngRất vữ · shots-E-S4-R5-speed-2-ipad-v2/m-new-633-73.png
+- year 10 · turn 121 · tuần 2 · buổi 3 · rank 0 · #modal «Phòng bị» · NEW SCREEN · first time on this screen; buttons:  · shots-E-S4-R5-speed-2-ipad-v2/m-new-1421-1.png
+- year 10 · turn 124 · tuần 1 · buổi 1 · rank 0 · - · ODD · [harness] NO-EXIT DIALOG .dlg «Phòng bị» (div.dlg.kpsc.kpanel): no close / next after scrolling to its end → later visits unstuck at once by taps · shots-E-S4-R5-speed-2-ipad-v2/noclose-1795788240166.png

@@ -1,0 +1,62 @@
+{
+ "life": "E-S4-R5-speed-2-ipad-v2",
+ "job": {
+  "id": "E-S4-R5-speed-2-ipad-v2",
+  "origin": "pf",
+  "road": "pt_hai",
+  "bot": "bold",
+  "seed": 3835466079,
+  "dev": "ipad",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/"
+ },
+ "device": "iPad 1180x820",
+ "harness_sha_at_start": "08a4ff8b",
+ "game_year": 10,
+ "turn": 124,
+ "tuan": 1,
+ "buoi_counter_at": 1456,
+ "player_age": 27,
+ "player": "Bành Tuyết Kiến (Công chúa Phù Tang hòa thân), rank 0",
+ "bug_rows": [
+  {
+   "k": "harness|NO-EXIT DIALOG .dlg «Phòng bị» (div.dlg.kpsc.kpanel): no close / next after scrolling to its end → later visits unstuck at once by taps",
+   "type": "harness",
+   "msg": "NO-EXIT DIALOG .dlg «Phòng bị» (div.dlg.kpsc.kpanel): no close / next after scrolling to its end → later visits unstuck at once by taps",
+   "n": 1,
+   "at": 1456,
+   "shot": "/home/user/wt/e-s4-out/shots-E-S4-R5-speed-2-ipad-v2/noclose-1795788240166.png",
+   "selector": "div.dlg.kpsc.kpanel",
+   "buttons": [
+    "Bãi lệnh: Cung nữ thân tín tam",
+    "Giữ nguyênTốnkhôngĐượckẻ hầu y"
+   ],
+   "S": {
+    "dead": false,
+    "y": 10,
+    "t": 124,
+    "w": 1,
+    "b": 1,
+    "age": 27,
+    "rank": 0,
+    "name": "Bành Tuyết Kiến",
+    "org": "Công chúa Phù Tang hòa thân",
+    "kend": "",
+    "fate": ""
+   }
+  },
+  {
+   "k": "game|dialog scrolled to the end has no close / next button: .dlg «Phòng bị»",
+   "type": "game",
+   "msg": "dialog scrolled to the end has no close / next button: .dlg «Phòng bị»",
+   "n": 1,
+   "at": 1456,
+   "shot": "/home/user/wt/e-s4-out/shots-E-S4-R5-speed-2-ipad-v2/noclose-1795788240166.png",
+   "buttons": [
+    "Bãi lệnh: Cung nữ thân tín tam đẳng Yên Chi: thử độc đồ ănTốnkhôngĐượcCung nữ thân tín tam",
+    "Giữ nguyênTốnkhôngĐượckẻ hầu yên việc cũ, giữ bạc mỗi thángMấtphòng bị như cũGợi ýkẻ hầu y"
+   ]
+  }
+ ],
+ "shot_not_in_git": "/home/user/wt/e-s4-out/shots-E-S4-R5-speed-2-ipad-v2/noclose-1795788240166.png",
+ "dom_dump": "NOT CAPTURED by the harness for this tag (only the shot + selector + button list); reproduce from the save: ckpt/stuck dumps of this life are not stored for this buổi. Selector div.dlg.kpsc.kpanel; buttons listed in bug_rows[*].buttons."
+}
