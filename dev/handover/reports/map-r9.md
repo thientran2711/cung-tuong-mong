@@ -24,3 +24,6 @@ map-icon Fold+iPad exit 0 · map-zones PASS · map-labels PASS (Fold + iPad day/
 Not covered: home map face chips `.mfaces` over next tag name (pre-existing, r8 notes).
 
 ## Stills @2 (looked): CDN img/_review/map-r9/ — fold-1-night fold-2-zone-nv fold-3-courtyard fold-4-home fold-5-day · ipad-1-night ipad-2-zone-dlc ipad-3-courtyard ipad-4-home ipad-5-day (.png). Base https://ctm-img.victoria-tntt.workers.dev/img/_review/map-r9/<name>.png
+
+## RV + quickcheck on 073d48b3 (27/11)
+RV-165: PASS map-r9 073d48b3 (nothing to fix). quickcheck re-run once on 073d48b3: perf PASS (median new/live: render 171/158 ms, tab 385/353, buổi 1052/934, tasks>200ms 17/17, old save ok); core gates: G4 80-dialog-fixed now PASS; FAIL only G4 90-button-crawl «fold · Ô lưu [#modal.kptitle:Cung Tường Mộng] · Lui · close button did not close its layer» = the same title-modal fault r8 saw on LIVE 03a8c17c (not map code).
