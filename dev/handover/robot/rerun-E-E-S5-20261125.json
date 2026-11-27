@@ -10,7 +10,7 @@
  ],
  "note": "flagged lives left #kg82 mini-game boards unplayed per audit (mg quit); verdict INVALID under Foreman E rule 26/11 until F posts the board-play PASS; audit script verdict stays VALID",
  "game": "LIVE github.io",
- "finished": 28,
+ "finished": 29,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -20292,6 +20292,547 @@
    "exitPick": null,
    "mgDragSkip": null,
    "mgReady": 86
+  },
+  {
+   "life": "E-S5-R5-scholar-3",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 3274393281,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "death": true,
+   "age": 26,
+   "buoi": 965,
+   "harness": {
+    "kind": "realtap",
+    "sha": "97e55a45",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [],
+    "slice": null,
+    "mgBackN": 20,
+    "mgBackQuitN": 0,
+    "builds": [
+     {
+      "s": "b16b4b93+",
+      "b": "07fd4084f856",
+      "where": "start"
+     },
+     {
+      "s": "066d9af0+",
+      "b": "ef5d32d4ff1e",
+      "where": "reload"
+     }
+    ],
+    "build0": {
+     "s": "b16b4b93+",
+     "b": "07fd4084f856",
+     "t": "2026-11-27T03:24Z",
+     "at": "2026-11-27T04:02:12.531Z"
+    },
+    "build": {
+     "s": "b16b4b93+",
+     "b": "07fd4084f856",
+     "t": "2026-11-27T03:24Z"
+    },
+    "areaTaps": 2741,
+    "bareCovered": 2,
+    "bareCoveredBy": {
+     "moving button.kbtn.k1": 2
+    },
+    "consoleErrN": 58,
+    "dlgScroll": 149,
+    "scrolls": 199,
+    "skipLayerTaps": 239,
+    "mgQuickSkipped": 129,
+    "mgReady": 20,
+    "mgMiss": 545,
+    "boards": [
+     {
+      "at": 77,
+      "buoi": 1,
+      "kind": "co",
+      "layer": "#kg82",
+      "moves": 5,
+      "area": 0,
+      "s": 7,
+      "res": "10/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 211,
+      "buoi": 8,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 198,
+      "area": 0,
+      "s": 22,
+      "res": "0/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 281,
+      "buoi": 12,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 180,
+      "area": 0,
+      "s": 22,
+      "res": "2/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 361,
+      "buoi": 16,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 205,
+      "area": 0,
+      "s": 22,
+      "res": "3/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 451,
+      "buoi": 20,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "10/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 523,
+      "buoi": 24,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 176,
+      "area": 0,
+      "s": 22,
+      "res": "3/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 658,
+      "buoi": 32,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 26,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 734,
+      "buoi": 36,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 826,
+      "buoi": 40,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 26,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 893,
+      "buoi": 44,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 198,
+      "area": 0,
+      "s": 22,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 959,
+      "buoi": 48,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1052,
+      "buoi": 52,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 156,
+      "area": 0,
+      "s": 22,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1150,
+      "buoi": 56,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 241,
+      "area": 0,
+      "s": 22,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1293,
+      "buoi": 64,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 26,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1383,
+      "buoi": 68,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 180,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1578,
+      "buoi": 80,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 165,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1646,
+      "buoi": 84,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 221,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1828,
+      "buoi": 96,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 167,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1911,
+      "buoi": 100,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 26,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1989,
+      "buoi": 104,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     }
+    ],
+    "boardN": 20,
+    "mgPeekTaps": 2324,
+    "boardTaps": 2324,
+    "mgBackWhy": [
+     {
+      "at": 77,
+      "buoi": 1,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 211,
+      "buoi": 8,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 281,
+      "buoi": 12,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 362,
+      "buoi": 16,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 451,
+      "buoi": 20,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 523,
+      "buoi": 24,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 658,
+      "buoi": 32,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 734,
+      "buoi": 36,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 826,
+      "buoi": 40,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 893,
+      "buoi": 44,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 959,
+      "buoi": 48,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1052,
+      "buoi": 52,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1150,
+      "buoi": 56,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1293,
+      "buoi": 64,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1383,
+      "buoi": 68,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1578,
+      "buoi": 80,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1646,
+      "buoi": 84,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1828,
+      "buoi": 96,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1911,
+      "buoi": 100,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1989,
+      "buoi": 104,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     }
+    ],
+    "infoTaps": 1005,
+    "dlgClose": 241,
+    "kfocVisits": 3,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-27T04:54:51.613Z",
+      "buoi": 196,
+      "from": "2026-11-27T04:53:57.376Z"
+     }
+    ],
+    "pinUrl": "http://127.0.0.1:8778/",
+    "autoServe": [
+     {
+      "at": "2026-11-27T04:56:34.234Z",
+      "where": "reload",
+      "from": "ef5d32d4ff1e",
+      "to": "http://127.0.0.1:8778/",
+      "carried": 13
+     }
+    ],
+    "resumeRestore": [
+     {
+      "at": "2026-11-27T04:56:40.461Z",
+      "origin": "http://127.0.0.1:8778",
+      "from": "https://thientran2711.github.io",
+      "want": 914917,
+      "got": 914917,
+      "keys": 13
+     }
+    ],
+    "resumeHash": [
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "ef368c87",
+      "page": "ef368c87",
+      "same": true,
+      "ckClk": "2.16.2.3",
+      "pageClk": "2.16.2.3"
+     }
+    ],
+    "ident": {
+     "name": "Khổng Diệu Âm",
+     "org": "Công chúa Phù Tang hòa thân",
+     "born": -19,
+     "at": 196
+    },
+    "dressPut": 20,
+    "taps": 4908
+   },
+   "bugs": [],
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": 20
   }
  ],
  "parked_stuck_gamebug": [
