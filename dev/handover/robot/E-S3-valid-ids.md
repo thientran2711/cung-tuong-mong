@@ -13,3 +13,4 @@ UPDATE 27/11 05:15Z: + R2-scholar-4b 1709108512 VALID? (dialogue-only Điện tu
 UPDATE 27/11 08:55Z: + R2-skilled-2 3869935016 VALID (mixed build; illness death y11) → E-S3 own valid = 28 (27 + skilled-2), scholar-4b still pending Foreman E confirm.
 UPDATE 27/11 09:35Z: + R2-skilled-5 1195490457 VALID (mixed build, game-imposed Xuất gia làm ni cô y15) → E-S3 own valid = 30 (28 + scholar-4b confirmed + skilled-5; greedy-5 1191337177 parked).
 UPDATE 27/11 15:55Z: + R2-rebel-5 2633677533 VALID (mixed build; Lãnh cung y23, 3792 buổi; save wall evidence) → E-S3 own valid = 31 (30 + rebel-5).
+UPDATE 27/11 16:55Z: + R2-speed-3 194501652 VALID (mixed build; Lãnh cung y23) → E-S3 own valid = 32. Remaining: skilled-3 4042475087 running (Fold, y18+), greedy-5 1191337177 parked.
