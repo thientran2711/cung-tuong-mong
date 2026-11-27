@@ -36,7 +36,7 @@ function rcvHelpOpts(p,t){const X=BAL.ag.cx2.help,R=BAL.rcv.help,H=BAL.road.hp,q
    go:()=>{affAdd(p,t,R.af[0]);if(pay(X.bac))return{ok:1,r:p===S?`${t.name} cho ngươi mượn ${X.bac} lượng.`:me?`Ngươi cho ${p.name} mượn ${X.bac} lượng.`:`${t.name} cho ${p.name} mượn ${X.bac} lượng`};
     const x=evGuilty(p,others(p).filter(y=>y&&y!==p&&y!==t&&(y===S||y.alive)));if(x&&evA(p,x,BAL.ag.ev.one))return{ok:1,r:p===S?`${t.name} kể cho ngươi một chuyện về ${x.name}: ${evSg(BAL.ag.ev.one)}.`:`${rcvNm(t)} kể cho ${p.name} một chuyện về ${agcNm(x)}`};
     return{ok:1,r:p===S?`${t.name} tiếp ngươi ân cần.`:`${me?"Ngươi":t.name} tiếp ${p.name} ân cần`}}},
-  {i:1,id:"half",n:rcvKw(1),risk:"có rủi ro",fx:{},x:`mất: ${half} lượng bạc · được: quý ${balSg(R.af[1])} · ${rcvSeenX(p,t)}`,
+  {i:1,id:"half",n:rcvKw(1),risk:"an toàn"/* KC-ODDS-CHIP: a fixed outcome (pay half; seen-through is a state, not a roll) */,fx:{},x:`mất: ${half} lượng bạc · được: quý ${balSg(R.af[1])} · ${rcvSeenX(p,t)}`,
    go:()=>{if(!rcvSeen(p,t))affAdd(p,t,R.af[1]);if(pay(half))return{ok:1,r:p===S?`${t.name} miễn cưỡng đưa ngươi ${half} lượng.`:`${me?"Ngươi":t.name} đưa ${p.name} ${half} lượng cho có`};return{ok:1,r:p===S?`${t.name} tiếp ngươi qua loa.`:`${me?"Ngươi":t.name} tiếp ${p.name} qua loa`}}},
   rcvNoO(p,t,{g:"giữ bạc",r:p===S?`${t.name} khéo từ chối. Nàng quý ngươi -${X.fail}.`:me?`Ngươi khéo từ chối ${p.name}.`:`${t.name} khéo từ chối lời nhờ của ${p.name}`}),
   rcvSabO(p,t,{g:"giữ bạc",r:tq=>p===S?`${t.name} nhận lời rồi đem chuyện ngươi nhờ đi kể${tq?" với "+rcvQn(tq):""}. Danh ${balSg(-R.danh)}.`:me?`Ngươi đem chuyện ${p.name} nhờ đi kể${tq?" với "+rcvQn(tq):""}.`:`${t.name} đem chuyện ${p.name} nhờ đi kể khắp nơi`})]}
