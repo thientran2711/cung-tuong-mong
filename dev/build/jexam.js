@@ -204,11 +204,13 @@ function exAsk(ex,last){try{if(!S||S.dead||(typeof quiet!=="undefined"&&quiet)||
  const names=a.t.replace(/^[^:]*:\s*/,"").replace(/\.\s.*$/,"");
  const h=`<p>${last?`Hạn khảo hạch ${ex===2?"":"tấn phong "}${rk} chỉ còn tuần này (đến hết ${exDateW(e.w1)}).`:`Nội vụ phủ báo: ngươi được dự khảo hạch ${ex===2?"":"tấn phong "}${rk}, hạn đến hết ${exDateW(e.w1)}.`} Thi: ${names}.</p>`;
  Q.push({ev:1,exAsk:ex,t:last?"Sắp hết hạn khảo hạch":(ex===2?"Khảo hạch Nội vụ phủ":"Khảo hạch tấn phong"),who:pMe(),h,opts:[
-  {n:"Thi ngay",fx:Object.assign({},a.c),off:!ok,x:`${ok?"":"hôm nay không đủ khắc, thi ở Hành sự · "}tốn ${k} khắc · ${word(a.o)} · được: ${a.x}`,go:()=>{try{spend(k);exDrop();if(ex===2){exSrvDrop();exSrvStart()}else exStart()}catch(x){console.error("exAsk",x)}}},
-  {n:"Để sau",x:last?"được: giữ sức hôm nay · mất: hết tuần này không thi là lỡ hạn":`được: giữ sức hôm nay · thẻ «${a.n}» ở Hành sự đến hết ${exDateW(e.w1)}`,go:()=>{if(ex===2)exSrvAdd();else exAdd()}}]});
+  {n:"Thi ngay",fx:Object.assign({},a.c),off:!ok,x:`${word(a.o)} · tốn: ${k} khắc${ok?"":" (hôm nay không đủ, thi ở Hành sự)"} · được: ${a.x} · hỏng: chờ ${exAskCdW(ex,e)} tuần mới được thi lại`,go:()=>{try{spend(k);exDrop();if(ex===2){exSrvDrop();exSrvStart()}else exStart()}catch(x){console.error("exAsk",x)}}},
+  {n:"Để sau",x:last?"được: giữ sức hôm nay · mất: hết tuần này không thi là lỡ hạn":`được: giữ sức hôm nay · thẻ «${a.n}» ở Hành sự đến hết hạn`,go:()=>{if(ex===2)exSrvAdd();else exAdd()}}]});
  try{showModal()}catch(x){}}catch(x){console.error("exAsk",x)}}
-/* a window never sat waits BAL.ex.cdLapse months (a fail keeps exCd); under the kỳ rule the next window still needs the next kỳ (pbKyRow) */
-function exCdLapse(to){const n=BAL.ex.cdLapse;return n!=null?n:exCd(to)}
+/* the fail wait the card prints (same source as the Hành sự card: cdN / exCd, shown in tuần by pbWkIn) */
+function exAskCdW(ex,e){const n=ex===2?exSrvCdN(e.to):exCd(e.to);try{if(typeof pbWkIn==="function")return pbWkIn(n)}catch(x){}return n*3}
+/* a window never sat waits BAL.ex.cdLapse months (a fail keeps exCd); under the kỳ rule it waits to the next kỳ like a fail (pbCdKy), so the date it prints is true */
+function exCdLapse(to){const n=BAL.ex.cdLapse;if(n==null)return exCd(to);let k=0;try{if(typeof pbCdKy==="function")k=pbCdKy()||0}catch(e){}return Math.max(n,k)/* the kỳ rule: never a date before the next kỳ */}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(exOn()&&!S.out&&!exSrv(S)&&S.ex&&S.ex.w1!=null&&!S.ex.pass)exAdd()}catch(e){}return r}})();
 (function(){const r0=runOpt;runOpt=function(a){if(a&&a.exam){if(!canPay(a))return null;if(a.c)apply(a.c);log(`${a.exLbl||`Dự khảo hạch tấn phong ${exRk(exS(S).to)}.`} ${fmt(a.c)||""}`);try{a.go()}catch(e){console.error(e)}return true}return r0.apply(this,arguments)}})();
 (function(){const c0=cardH;cardH=function(a){let h=c0.apply(this,arguments);try{if(a&&a.exam)h=h.split("không mất gì").join(`trượt: chờ ${pbWkIn(a.cdN||exCd(exS(S).to))} tuần mới được thi lại`).replace(/<button\b/,'<button data-kexam="1"')}catch(e){}return h}})();

@@ -21,7 +21,7 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ok=(c,m)=>{console
   const fresh=()=>{window.__nlInner=1;for(let i=0;i<60;i++){start();if(!isSrv())break}window.__nlInner=0;Q.length=0;used=0;
    S.sung=90;S.danh=90;S.duc=90;S.th=60;S.hh=60;S.lastPromo=-99;S.rank=0;S.suc=90;S.confined=0;S.ex=null};
   const kyOpen=window.pbKyAt;const card=()=>Q.find(m=>m&&m.exAsk);const deckHas=()=>deck.some(a=>a&&a.exam===1);
-  const words=new Set(KIT_ODDS);const wordOk=m=>m&&m.opts.every(o=>!/%/.test(o.x||'')&&!/%/.test(m.h||''))&&words.has((m.opts[0].x.match(/khắc · ([^·]+) ·/)||[])[1].trim());
+  const words=new Set(KIT_ODDS);const wordOk=m=>m&&m.opts.every(o=>!/%/.test(o.x||'')&&!/%/.test(m.h||''))&&words.has((m.opts[0].x.split(' · ')[0]||'').trim());
   /* (1) ordinary window: the kỳ is open */
   fresh();window.pbKyAt=()=>"newyear";exTick();let m=card();out.ord={t:m&&m.t,n:m&&m.opts.map(o=>o.n),w:wordOk(m),win:S.ex&&S.ex.w1-S.ex.w0+1,deck:deckHas()};
   /* (7) «Để sau» keeps the card */
@@ -29,7 +29,7 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ok=(c,m)=>{console
   /* (6) last-tuần reminder: jump to the window's last tuần */
   {const e=S.ex;window.wk0=wk;const W=e.w1;wk=()=>W;Q.length=0;exTick();const m2=card();exTick();out.rem={t:m2&&m2.t,once:Q.filter(x=>x&&x.exAsk).length===1};Q.length=0;
    /* (9) lapse: past the window, never sat */
-   wk=()=>W+1;const t0=S.turn;exTick();out.lapse={cd:S.ex.cd-t0,lapse:S.ex.lapse,deck:deckHas()};wk=window.wk0}
+   wk=()=>W+1;const t0=S.turn;const want=Math.max(BAL.ex.cdLapse,typeof pbCdKy==="function"?(pbCdKy()||0):0);exTick();out.lapse={cd:S.ex.cd-t0,want,lapse:S.ex.lapse,deck:deckHas()};wk=window.wk0}
   window.pbKyAt=kyOpen;
   /* (8) «Thi ngay» runs the exam (auto) */
   fresh();window.pbKyAt=()=>"newyear";window.__exAuto=1;exTick();m=card();const s0=S.suc,u0=used;if(m)chooseM(0);out.now={sit:!!(S.ex&&(S.ex.pass||S.ex.n)),suc:s0-S.suc,khac:used-u0,deck:deckHas()};window.__exAuto=0;window.pbKyAt=kyOpen;
@@ -47,7 +47,7 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ok=(c,m)=>{console
  ok(R.ord.w,'(12) odds word is a KIT_ODDS word, no %');
  ok(!R.later.q&&R.later.deck,'(7) «Để sau» closes the card, the exam card stays in Hành sự');
  ok(R.rem.t==="Sắp hết hạn khảo hạch"&&R.rem.once,'(6) last-tuần reminder shown once');
- ok(R.lapse.lapse===1&&R.lapse.cd===R.cdLapse&&!R.lapse.deck,`(9) window never sat waits BAL.ex.cdLapse ${R.cdLapse} month(s)`);
+ ok(R.lapse.lapse===1&&R.lapse.cd===R.lapse.want&&!R.lapse.deck,`(9) window never sat waits max(BAL.ex.cdLapse ${R.cdLapse}, months to the next kỳ) = ${R.lapse.cd}`);
  ok(R.now.sit&&R.now.suc>0&&R.now.khac>0&&!R.now.deck,'(8) «Thi ngay» sits the exam, spends Sức and khắc, card leaves Hành sự');
  for(const s of ['m','f','hh'])ok(R['g'+s]&&R['g'+s].open&&R['g'+s].t==="Khảo hạch tấn phong",`(${{m:2,f:3,hh:4}[s]}) grace/special window «${s}» → kit card`);
  ok(R.srvLife&&R.srv&&R.srv.t==="Khảo hạch Nội vụ phủ"&&R.srv.w,'(5) serving-maid window → kit card');
