@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"37b2508f+","t":"2026-11-27T05:44Z","c":"OWNER-UI-A report round 2","b":"70fb33972f37","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
+window.CTM_BI={"s":"999d05e6+","t":"2026-11-27T06:20Z","c":"Các màn tài nghệ có thêm tranh vẽ tay: Tát, Né, Nghe ngóng, Truyền lời, Mặc cả, Thời cơ, Cờ năm quân, Tưới cây, chơi với thú, cùng hoa giấy…","b":"255271320a75","h":[{"s":"b881686f+","t":"2026-11-26T15:46Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được."},{"s":"03e9c9d2","t":"2026-11-26T14:23Z","c":"Gộp nút trùng: cả game còn 85 nút thay 157; bấm một nút mở khung chọn cách làm, giá, khắc và kết quả giữ nguyên."},{"s":"1dcb373e+","t":"2026-11-26T10:49Z","c":"Nút «Về phòng · N khắc» (thanh trên, Dư đồ) đưa nàng về phòng; lỗi nhẹ chỉ khất bổng; hết khắc thì được đưa về, không bị phạt."},{"s":"bf6dd041+","t":"2026-11-26T06:59Z","c":"Sửa gốc lỗi \"bị bỏ quên\" không được thăng: mỗi đường được 6 tháng an toàn, lưu cũ được một lần ân hạn."},{"s":"0a4c8010+","t":"2026-11-26T02:21Z","c":"Kỳ tuyển tú diễn ra từng ngày: mỗi ngày một cảnh, cuối kỳ ban hoa cho người được chọn."},{"s":"3762da08+","t":"2026-11-25T19:34Z","c":"Nút «Sang buổi» / «Sẵn sàng» không còn nằm mờ khi chẳng có gì đang chờ."},{"s":"08e7d79f+","t":"2026-11-25T18:33Z","c":"Nhạc riêng cho từng lễ tết, sự kiện."},{"s":"5b7b4cf4","t":"2026-11-25T16:59Z","c":"Đường đi có rủi ro về sau nay báo thế cả đường; phán xử theo sổ Kính sự phòng thật; việc chắc chắn không còn bị đóng dấu Bại."},{"s":"7e8136dd+","t":"2026-11-25T15:34Z","c":"Tên nơi chốn không còn bị che như tên người lạ."},{"s":"ee37ab5f+","t":"2026-11-25T06:01Z","c":"STACK LAND sansang-music-fix-2: merge a6b4d573 onto ca5af050 (index.html/sw.js rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -697,9 +697,9 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 /* full-body figures */
 .stage{container-type:size}
 .tok.fig{min-width:0}
-.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0006);transform-origin:50% 100%}
+.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:url(#kfa) var(--klf,brightness(1)) var(--kst,) drop-shadow(0 6px 6px #0006);transform-origin:50% 100%}
 .tok.fig:hover .figimg{transform:translateY(-3px)}
-#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006);pointer-events:none}
+#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:url(#kfa) var(--klf,brightness(1)) var(--kst,) drop-shadow(0 8px 8px #0006);pointer-events:none}
 .stage.hasme .tokens{justify-content:flex-end}
 /* review/face-sharp (owner 15/11): no idle sway on people pictures; an animated transform/filter re-samples the face every frame (hazy face) */
 @keyframes figidle{0%,100%{scale:1 1}50%{scale:1 1.012}}
@@ -9178,8 +9178,8 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  st.__j59here=persons}
 /* KIT element "rank outline": thin edge glow in --halo (her rank colour) along her own figure only; never an aura; pulse only with Hiệu ứng hình and no reduced motion.
    KIT element "selection outline" (.j59sel): brighter warm-white edge glow #fff3c4 on the one person she has selected (popIdx) or on herself (tap her figure); replaces her rank outline while she is selected */
-const SG=(a,o)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
-const HG=(a,c)=>`url(#kfa) var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006) drop-shadow(0 0 ${a}px color-mix(in srgb,var(--halo) ${c}%,transparent))`;
+const SG=(a,o)=>`url(#kfa) var(--klf,brightness(1)) var(--kst,) drop-shadow(0 6px 6px #0005) drop-shadow(0 0 1.5px #fff3c4) drop-shadow(0 0 3px #fff3c4) drop-shadow(0 0 ${a}px rgba(255,236,170,${o}))`;
+const HG=(a,c)=>`url(#kfa) var(--klf,brightness(1)) var(--kst,) drop-shadow(0 8px 8px #0006) drop-shadow(0 0 ${a}px color-mix(in srgb,var(--halo) ${c}%,transparent))`;
 const css=document.createElement("style");css.textContent=`
 /* portrait ground classes .rk-c0..c7 are generated from RCOL by the "kit-rk" style in jk4, not typed here */
 .stage.j59{--halo:#f0d070}
@@ -45677,7 +45677,7 @@ window.kitOnePic=kitOnePic;
 .kesf{margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;min-width:0;flex:1 1 0}
 .kesf.kesno{display:none}
 .kesfi{position:relative;display:block;max-width:100%}
-.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,calc(40*var(--kvh,1dvh)),400px)*var(--kfr,1));filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
+.kesfi>.kesimg{display:block;width:auto;height:auto;max-width:100%;max-height:calc(clamp(200px,calc(40*var(--kvh,1dvh)),400px)*var(--kfr,1));filter:url(#kfa) var(--klf,brightness(1)) var(--kst,) drop-shadow(0 6px 8px #3a201033)}
 .kesfi>.kesfx{position:absolute;inset:0;pointer-events:none;z-index:2}
 .kesf>.kpsn{margin-top:2px;text-align:center}
 /* KIT 33.5: the event-stage / book-page name chip is the same two-line chip as the stage: rank / role small on top, name below, rank-tinted */
@@ -45787,7 +45787,7 @@ window.kitEsOvFit=kitEsOvFit;
 #mb .kesov{position:absolute;inset:0;pointer-events:none;z-index:2;overflow:hidden}
 #mb .kesov>.kesf{position:absolute;margin:0;display:block}
 #mb .kesov>.kesf .kesfi{display:block;position:relative}
-#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 4px 5px #0006)}
+#mb .kesov>.kesf .kesimg{display:block;max-width:none!important;max-height:none!important;filter:url(#kfa) var(--klf,brightness(1)) var(--kst,) drop-shadow(0 4px 5px #0006)}
 #mb .kesov>.kpsn{position:absolute;bottom:3px;transform:translateX(-50%);z-index:20;white-space:nowrap;background:none;border:0;padding:0 6px;font-size:.78rem;line-height:1.25;text-align:center}
 #mb .kesov>.kpsn[data-row="1"]{bottom:calc(3px + 2.6em)}
 #mb>.kdlgart.kesonpic .ksart>figcaption,#mb>.kdlgart.kesonpic .ksart>.ksart-chip{top:6px;bottom:auto}
@@ -46710,7 +46710,7 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg .kpdfig{position:relative;flex:1 1 auto;min-height:0;width:100%;overflow:visible}
 .kpdlg .kpdfig .kesf{margin:0}
 .kpdlg .kpdfig .kesfi{display:block}
-.kpdlg .kpdfig .kesimg{display:block;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
+.kpdlg .kpdfig .kesimg{display:block;filter:url(#kfa) var(--klf,brightness(1)) var(--kst,) drop-shadow(0 6px 8px #3a201033)}
 .kpdlg .kpdfig .kesf>.kpsn{display:none}
 .kpdlg .kpdr{position:relative;z-index:1;min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}/* KIT 56.4: text drawn ON TOP of the figure */
 .kpdlg .kdpban{flex:none;margin:0;padding:0}
@@ -77481,13 +77481,20 @@ function kitOffAttr(c){if(!c||!c.off||!c.off.why)return"";const t=c.off.why+(c.o
       (art.tam true / kitTam(true)); gone by itself when the exact picture exists. Caller: kitTam(isStandin) -> html ('' when exact).
       Put it inside a position:relative picture box. */
 function kitTam(standin){return standin?`<span class="ktam" role="note" title="Tranh tạm, sẽ có tranh đúng sau">tạm</span>`:""}
-/* 3. PORTRAIT STATE (owner 27/11 ~05:10Z, one kit part): who is in lãnh cung keeps her OWN colours, much paler and washed out, no tint (.kst-lc);
-      black-and-white is reserved for the DEAD (.kst-dead). Set by jdead.js from f.st ('lc' | 'dead') on the two portrait renderers (mdH → .md, pcPort → .pcp),
+/* 3. PORTRAIT STATE (owner 27/11 ~05:10Z, one kit part): who is in lãnh cung keeps her OWN colours, NO sepia/brown tint, only much paler and lighter (.kst-lc: lower saturation + lift toward white; owner 27/11 ~05:46Z);
+      black-and-white is reserved for the DEAD (.kst-dead: the WHOLE portrait incl. its frame, owner ~05:59Z; lãnh cung = image only, frame keeps its colours, owner ~05:53Z). Set by jdead.js from f.st ('lc' | 'dead') on the two portrait renderers (mdH → .md, pcPort → .pcp) AND by kstPaint on every full-body figure (stage tokens, #mefig, img.kesimg, .kszfs>img: the --kst var sits in each figure's filter chain next to --klf),
       so every place a person is drawn (Hậu cung strip + card, men, relation rows, panels) shows the same state. Values are the look, not game numbers. */
 (function(){const st=document.createElement("style");st.textContent=`
-.md.kst-lc,.pcp.kst-lc{filter:saturate(.45) brightness(1.12) contrast(.86)}
-.md.kst-dead,.pcp.kst-dead{filter:grayscale(1) brightness(.92)}
-html body .pface.on>.md.kst-lc{filter:saturate(.45) brightness(1.12) contrast(.86) var(--k-glow)}html body .pface.on>.md.kst-dead{filter:grayscale(1) brightness(.92) var(--k-glow)}
+.kst-lc{--kst:saturate(.6) contrast(.92) brightness(1.06)}
+.kst-dead{--kst:grayscale(1) brightness(.92)}
+/* status band of a kit portrait (Ở lãnh cung / Đã khuất) sits INSIDE the picture, above the tassel: it covered the relation rows under the portrait (MAIN LOOK 172) */
+.pcp.kit>.pcs{bottom:31%;left:14%;right:14%;border-radius:4px}
+/* the band is its OWN dark plate + white text in both states, never washed by the picture state (MAIN 172 ruling 27/11 ~06:28Z); the legacy .rk-cold grayscale(.6) on the whole portrait is gone for lãnh cung so the kit lãnh cung FRAME keeps its colours (owner ~05:53Z) — the pale filter is on the image only */
+.pcp.kit>.pcs{background:#2a1a12f2;color:#fff;font-size:.78rem;filter:none}
+.pcp.rk-cold.kst-lc,.md.rk-cold.kst-lc{filter:none}
+html body .pface.on>.md.rk-cold.kst-lc{filter:var(--k-glow)}
+.md.kst-dead,.pcp.kst-dead,.md.kst-lc>img:not(.pcb2),.md.kst-lc .kin>img.kpor,.md.kst-lc .kin>.kbg,.pcp.kst-lc>img:not(.pcb2),.pcp.kst-lc .kin>img.kpor,.pcp.kst-lc .kin>.kbg,img.kst-lc:not(.figimg):not(.kesimg):not(#mefig),img.kst-dead:not(.figimg):not(.kesimg):not(#mefig){filter:var(--kst)}
+html body .pface.on>.md.kst-dead{filter:var(--kst) var(--k-glow)}
 `;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.textContent=`
 .ktam{position:absolute;top:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
@@ -93354,6 +93361,15 @@ try{const p0=pMan;pMan=function(m){const f=p0.apply(this,arguments);try{const s=
 const mark=(h,f,re,sp)=>{try{if(f&&f.st&&typeof h==="string")return h.replace(re,m=>m+(sp?" ":"")+"kst-"+f.st+(sp?"":" "))}catch(e){}return h};
 try{const m0=mdH;mdH=function(p){return mark(m0.apply(this,arguments),p,/class="md /)}}catch(e){}
 try{const c0=pcPort;pcPort=function(f){return mark(c0.apply(this,arguments),f,/class="pcp/,1)}}catch(e){}
+/* ---- the figure hook (owner 27/11 ~05:46Z: «mọi nơi nàng xuất hiện»): stage tokens (j59 figimg / .md), #mefig, img.kesimg, .kszfs>img bypass mdH/pcPort,
+   so ONE pass finds each figure's owner with jfigseal's kfsFigs()/kfsPerson() and sets the same kit state class; the --kst var is in every figure filter chain ---- */
+function kstPaint(){try{const set=(e,s)=>{e.classList.toggle("kst-lc",s==="lc");e.classList.toggle("kst-dead",s==="dead")};
+ if(typeof kfsFigs==="function"&&typeof kfsPerson==="function")kfsFigs().forEach(im=>{const p=kfsPerson(im);set(im,p?stOf(p.ref||p):"")});
+ const ppl=typeof curPeople==="function"?curPeople():[];document.querySelectorAll("#tokens .tok:not(.fig) .md").forEach(md=>{const t=md.closest(".tok"),p=ppl[+(t&&t.dataset.p)];set(md,p?stOf(p.ref||p):"")})}catch(e){}}
+let kstQ=0;const kstSched=()=>{if(kstQ)return;kstQ=requestAnimationFrame(()=>{kstQ=0;kstPaint()})};
+try{const r0=render;render=function(){const r=r0.apply(this,arguments);kstSched();return r}}catch(e){}
+try{if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);kstSched();return r}}}catch(e){}
+try{new MutationObserver(kstSched).observe(document.body,{childList:true,subtree:true})}catch(e){}
 /* ---- the cards ---- */
 try{const r0=rvCard;rvCard=function(v){let h=r0.apply(this,arguments);try{
  if(dthIs(v)){h=h.replace(">Đã chết<",">Đã khuất<");const rows=dthRows(v);if(rows)h=h.replace('<div class="pcr">','<div class="pcr">'+rows)}
@@ -95288,7 +95304,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="70fb33972f37";window.CTM_BUILD=BUILD;
+const BUILD="255271320a75";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

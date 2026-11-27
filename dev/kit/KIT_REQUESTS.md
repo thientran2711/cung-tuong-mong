@@ -264,4 +264,4 @@ KIT CHECK: reuses pcard `.pc.kpwide`, `.kpkey` (kitPcKey / pcfKey kitRelTable co
   (the rest of that IIFE — the `kit-pc-fill` style — unchanged.) Needs `.kwear` NOT counted (it sits below the rows and is 280 px tall; counting it forced the floor).
 - Verified by runtime injection of exactly this body (dev/test/pckey-fit.inject.js) + `node dev/test/pckey-scan.js all [inject.js]` (table per card: portrait width · key bottom · card bottom · visible): iPad before 17 cards NO → after all yes (portrait 137 Phi tần / 139–174 Cung nhân); Fold before and after all yes (one Cung nhân card 240 → 229 px).
 - Also re-run on resize/orientation + font load: kitPcKeyFit is already called from jk2b.js:1001 after `--kpcmax`; no new call site.
-- Status: OPEN — KK56 signs/applies (OD L1103); OWNER-UI-C did not touch the kit parts.
+- Status: WITHDRAWN (MAIN 172 ruling 27/11 ~06:28Z: KEEP owner 21/11 KIT §6.3e «figure fills the column», law 17; the card scroll + «more below» fade cue stays). No kit change; dev/test/pckey-scan.js stays as a measuring tool only.
