@@ -2,7 +2,7 @@
    Every button of every main tab + sub-tab (tú nữ palace life) and every option / buy / give button of the dialog it opens is tapped ONCE and, from the same
    saved state and the same seeded dice, tapped TWICE the way a fast finger does (two real taps at the same point, ~70 ms apart). The spend of each run is read
    from the state: khắc used, bạc, Sức, items held (inv / tư trang counts), log lines. FAIL = the double tap spent MORE than the single tap (a second action ran).
-   usage: node dev/test/double-tap-scan.js <index.html> [WxH,...]   env TABS=a,b  MAXB=n (buttons per tab, default 30)  MAXO=n (options per dialog, default 8)
+   usage: node dev/test/double-tap-scan.js <index.html> [WxH,...]   env BUSY=ms (the 1st tap's work outlasts the double-tap window) CPU=n (slow device) TABS=a,b  MAXB=n (buttons per tab, default 30)  MAXO=n (options per dialog, default 8)
    exit 1 on any FAIL */
 const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000').split(',');
 const TABS=process.env.TABS?process.env.TABS.split(','):['act','go','court','rel','kid','inv','art','story'];const MAXB=+process.env.MAXB||30,MAXO=+process.env.MAXO||8;
@@ -10,7 +10,7 @@ const TABS=process.env.TABS?process.env.TABS.split(','):['act','go','court','rel
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
   await ctx.addInitScript(()=>{window.__seed=7;Math.random=()=>{window.__seed=(window.__seed*16807)%2147483647;return (window.__seed-1)/2147483646}});
-  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,140)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
+  const p=await ctx.newPage();if(+process.env.CPU>1){const cdp=await ctx.newCDPSession(p);await cdp.send('Emulation.setCPUThrottlingRate',{rate:+process.env.CPU})}/* env CPU=N: a slow phone (the 1st tap's work can outlast BAL.kdlg.tapArm) */const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,140)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
   await p.goto('file://'+SRC,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:240000});await p.waitForTimeout(2000);
   await p.evaluate(async()=>{quiet=true;window.__forceOrigin='tt';document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin&&S.st)||++n>150)r();else setTimeout(t,100)};t()});Q.length=0;try{kmReset()}catch(e){}document.getElementById('modal').hidden=true;['kload','kboot','klife'].forEach(i=>{const k=document.getElementById(i);if(k)k.remove()});S.bac=40;S.suc=Math.max(S.suc||0,60);window.__dtSnap=JSON.stringify(ser());window.__dtUsed=used;
    window.__dtDig=()=>{const n=x=>Array.isArray(x)?x.length:(x&&typeof x==='object'?Object.keys(x).length:0);const items=['inv','items','tt','tutrang','cloth','gifts','pets'].reduce((a,k)=>a+n(S[k]),0);return {khac:used,bac:S.bac,suc:S.suc,items,logs:(S.logs||[]).length,turn:S.turn,buoi:S.buoi}};
@@ -20,7 +20,13 @@ const TABS=process.env.TABS?process.env.TABS.split(','):['act','go','court','rel
    if(sub){const s=document.querySelector(sub);if(s)s.click();await sl(350)}window.__seed=7;return window.__dtDig()},[tab,sub]);
   const panelBtns=()=>p.evaluate(()=>[...document.querySelectorAll('#panel button')].filter(window.__dtVis).filter(e=>!e.closest('#modal,#title,.kpop,#kpop')&&!e.matches('[role=tab],.ksubb,.ktab,[data-tab]')).map((e,i)=>({i,t:(e.textContent||'').replace(/\s+/g,' ').trim().slice(0,40)})));
   const at=(sel,i,txt)=>p.evaluate(([sel,i,txt])=>{const B=[...document.querySelectorAll(sel)].filter(window.__dtVis).filter(e=>sel!=='#panel button'||(!e.closest('#modal,#title,.kpop,#kpop')&&!e.matches('[role=tab],.ksubb,.ktab,[data-tab]')));const e=B[i];if(!e||(e.textContent||'').replace(/\s+/g,' ').trim().slice(0,40)!==txt)return null;e.scrollIntoView({block:'center'});const r=e.getBoundingClientRect();return [r.x+r.width/2,r.y+r.height/2]},[sel,i,txt]);
-  const tap=async(xy,two)=>{await p.mouse.click(xy[0],xy[1]);if(two){await p.waitForTimeout(70);await p.mouse.click(xy[0],xy[1])}await p.waitForTimeout(900)};
+  const BUSY=+process.env.BUSY||0;/* env BUSY=ms: the 1st tap's own work takes this long (a busy phone): the 2nd tap is queued behind it (RV-163C F1) */
+  const cdp=BUSY?await ctx.newCDPSession(p):null;
+  /* BUSY: the finger taps twice 70 ms apart (event timestamps of a real finger), sent without waiting for the page; the 1st tap's own work takes BUSY ms, so the 2nd tap waits in the queue behind it */
+  const fingerTwice=async(x,y)=>{const t0=Date.now()/1000,ev=(type,t)=>cdp.send('Input.dispatchMouseEvent',{type,x,y,button:'left',clickCount:1,timestamp:t});
+   await Promise.all([ev('mousePressed',t0),ev('mouseReleased',t0+0.01),new Promise(r=>setTimeout(r,70)).then(()=>Promise.all([ev('mousePressed',t0+0.07),ev('mouseReleased',t0+0.08)]))])};
+  const tap=async(xy,two)=>{if(two&&BUSY){await p.evaluate(ms=>{const f=()=>{document.removeEventListener('click',f);const t=performance.now();while(performance.now()-t<ms);};document.addEventListener('click',f)},BUSY);await fingerTwice(xy[0],xy[1])}
+   else{await p.mouse.click(xy[0],xy[1]);if(two){await p.waitForTimeout(70);await p.mouse.click(xy[0],xy[1])}}await p.waitForTimeout(900)};
   const OPT='#modal .opt:not(:disabled), #modal button.kopt:not(:disabled), #modal [data-kshbuy], #modal [data-kgive], #modal button.main:not(#mclose)';
   const optList=()=>p.evaluate(OPT=>[...document.querySelectorAll(OPT)].filter(window.__dtVis).map((e,i)=>({i,t:(e.textContent||'').replace(/\s+/g,' ').trim().slice(0,40)})),OPT);
   const dig=()=>p.evaluate(()=>window.__dtDig());

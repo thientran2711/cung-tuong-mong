@@ -89,14 +89,22 @@ function kitDlgTwinsDone(m,picked){const T=m&&m.__tw;if(!T||!T.length)return;m._
    (robots, tests, co-op relays) are never held. Test: dev/test/double-tap-scan.js. */
 let kDlgFront=null,kDlgAt=0;
 function kitDlgArm(){try{const m=Q[0];if(m&&m!==kDlgFront){kDlgFront=m;kDlgAt=performance.now()}}catch(e){}}
-let kTapLast=null;
-document.addEventListener("click",e=>{try{if(!e.isTrusted)return;const now=performance.now(),L=kTapLast;const el=e.target&&e.target.closest?e.target.closest("button,[role=button],[data-ka]"):null;kTapLast={t:now,x:e.clientX,y:e.clientY,el};
+let kTapLast=null;/* what a tap can spend (khắc / Bạc / Sức / items): read when each tap lands */
+const KTAP_HELD=["inv","items","tt","tutrang","cloth","gifts","pets"];/* every list of things she holds (a buy / give / pet adds or takes one) */
+function kTapDig(){try{const n=x=>Array.isArray(x)?x.length:(x&&typeof x==="object"?Object.keys(x).length:0);return [typeof used!=="undefined"?used:0,S?S.bac:0,S?S.suc:0,S?KTAP_HELD.reduce((a,k)=>a+n(S[k]),0):0].join(",")}catch(e){return""}}
+document.addEventListener("click",e=>{try{if(!e.isTrusted)return;const now=performance.now(),L=kTapLast;const el=e.target&&e.target.closest?e.target.closest("button,[role=button],[data-ka]"):null;kTapLast={t:now,ts:e.timeStamp,x:e.clientX,y:e.clientY,el,dg:kTapDig()};
  /* only the SECOND tap of a double tap (same spot, within tapArm ms), and only when the first one DID something: it opened the dialog now in front, or
     its button is gone (the screen was redrawn after the act — the 2nd tap would run the act again on the new copy). A stepper / toggle that stays is untouched. */
- const arm=(BAL.kdlg&&BAL.kdlg.tapArm)||0;if(!L||now-L.t>=arm||Math.hypot(e.clientX-L.x,e.clientY-L.y)>((BAL.kdlg&&BAL.kdlg.tapNear)||0))return;
+ /* RV-163C F1 (double-tap-scan «Y dược · Hỏi thái y»: khắc +1, Bạc −4 twice on a busy phone): the window is the time between her two FINGER taps (e.timeStamp =
+    when the tap happened), not between the moments the game got round to them — the 1st tap's own work (spend, redraw) can outlast tapArm, and the 2nd tap,
+    queued behind it, used to be read as a new tap. Either measure under tapArm = the same double tap. */
+ const arm=(BAL.kdlg&&BAL.kdlg.tapArm)||0;const gap=L?Math.min(now-L.t,(e.timeStamp&&L.ts)?e.timeStamp-L.ts:Infinity):Infinity;if(!L||gap>=arm||Math.hypot(e.clientX-L.x,e.clientY-L.y)>((BAL.kdlg&&BAL.kdlg.tapNear)||0))return;
  const M=$("modal");const inDlg=!!(M&&!M.hidden&&e.target&&e.target.closest&&e.target.closest("#modal"));
  const opened=inDlg&&kDlgFront&&kDlgAt>=L.t,redrawn=!!(L.el&&!L.el.isConnected&&el);
- if(!opened&&!redrawn)return;e.stopImmediatePropagation();e.preventDefault()}catch(x){}},true);
+ /* RV-163C F1 family (BUSY scan: «Soát đồ» khắc 2→4 on a busy phone): the 1st tap already SPENT (khắc / Bạc / Sức / items changed since it landed) but the
+    screen is not redrawn yet — the 2nd tap would hit the same live button and spend again. A stepper / toggle spends nothing and stays untouched. */
+ const spent=!!(L.dg&&el&&el===L.el&&kTapDig()!==L.dg);
+ if(!opened&&!redrawn&&!spent)return;e.stopImmediatePropagation();e.preventDefault()}catch(x){}},true);
 function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const m=Q[0];
   M.className="modal "+(m.cls||"");$("mt").textContent=/pcm/.test(m.cls||"")?"":m.t;$("mt").hidden=/pcm/.test(m.cls||"");try{const ar=evArt();M.querySelector(".dlg").style.setProperty("--dart",ar&&(m.who||/pcm/.test(m.cls||""))?`url(${ar})`:"none")}catch(e){}
   const wh=m.who||null;const art=!m.who&&m.opts&&!m.faces?evArt():"";$("mb").innerHTML=(m.faces?`<div class="faces">${m.faces.map(f=>`<figure>${pframe(Object.assign({},f[0],{rw:""}))}<figcaption>${typeof kitNameRank==="function"?kitNameRank(f[0].rw||"",f[0].rw===f[1]?"":f[1],f[0].col):`<b>${f[1]}</b>${f[0].rw?`<small>${f[0].rw}</small>`:""}`}</figcaption></figure>`).join("")}</div>`:"")+(m.faces||/pcm/.test(m.cls||"")?m.h:`<div class="spk">${wh?pframe(wh):pframeArt(art||evArt())}<div class="spkt">${m.h}</div></div>`)+(m.opts?`<div class="opts">${m.opts.map((c,i)=>{if(i===kitCancelIx(m))return "";const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;if(poor&&!c.off&&typeof kitOffBac==="function")kitOffBac(c,-c.fx.bac);return `<button class="opt" data-m="${i}" ${poor||c.off?"disabled":""}${typeof kitOffAttr==="function"?kitOffAttr(c):""}>${c.n}<small>${dilLine(c)}</small></button>`}).join("")}</div>`:"");
