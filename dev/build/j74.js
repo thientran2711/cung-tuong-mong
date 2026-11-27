@@ -141,8 +141,8 @@ function wrapPark(name){const f=window[name];if(typeof f!=="function")return;win
 /* showTitle: from the game (title was hidden) always opens on the home screen; a refresh while open keeps the sub-screen */
 const t0=showTitle;showTitle=function(){const was=T.hidden;park();const r=t0.apply(this,arguments);try{drawSlots()}catch(e){}try{go(was?"home":PG,was)}catch(e){console.error(e)}return r};
 window.showTitle=showTitle;
-const m=$("menu");if(m){const m0=m.onclick;m.onclick=function(){PG="home";return m0&&m0.apply(this,arguments)}}
-new MutationObserver(()=>{if(T.hidden&&(HM||SM))dropAll()}).observe(T,{attributes:true,attributeFilter:["hidden"]});
+const m=$("menu");if(m){const m0=m.onclick;m.onclick=function(){PG="home";window.__kmOver=typeof S!=="undefined"&&!!S&&!S.dead;/* kptitle-close: ☰ pressed over a live life: ✕ goes back to THAT life even when no sổ is saved yet */return m0&&m0.apply(this,arguments)}}
+new MutationObserver(()=>{if(T.hidden)window.__kmOver=false;if(T.hidden&&(HM||SM))dropAll()}).observe(T,{attributes:true,attributeFilter:["hidden"]});
 /* TITLE NEVER BLANK (robot M1 #2, soft-lock; owner law: every way to reach the title shows its buttons). The home / Chọn sổ panels ARE the title's
    buttons (#title .tbox is never shown): when the title is up and nothing is on #modal (the home ✕ / Esc / tap outside closed it, a reload landed on
    a dead life, a fresh profile, a panel closed by another module…) the title was only cover art with 0 tappable elements — only a reload recovered.
@@ -151,6 +151,8 @@ new MutationObserver(()=>{if(T.hidden&&(HM||SM))dropAll()}).observe(T,{attribute
 const tgBlank=()=>{const M=$("modal");return !T.hidden&&(!M||M.hidden)&&!Q.length&&!document.querySelector("#kload,#klife,#kroul")};
 function tgFix(){try{if(!tgBlank())return false;
   if(typeof S!=="undefined"&&S&&!S.dead&&lastSlot()&&resumeGame())return true;
+  /* kptitle-close (G4 90 «Ô lưu · Lui»): ☰ over a live life that has no saved sổ yet: ✕ / Esc / tap outside put the menu away and the life carries on (before: the home menu came straight back, the close button closed nothing) */
+  if(window.__kmOver&&typeof S!=="undefined"&&S&&!S.dead){window.__kmOver=false;PG="home";dropAll();T.hidden=true;try{tab="act";render()}catch(e){console.error(e)}return true}
   PG="home";go("home",false);return true}catch(e){console.error("title guard",e);return false}}
 let tgT=0;function tgSoon(ms){if(tgT)clearTimeout(tgT);tgT=setTimeout(()=>{tgT=0;tgFix()},ms==null?350:ms)}
 try{new MutationObserver(()=>{if(tgBlank())tgSoon(350)}).observe($("modal"),{attributes:true,attributeFilter:["hidden","class"]});
