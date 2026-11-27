@@ -95,7 +95,7 @@ function startArc67(k){const ids=arcIds67(k).filter(id=>arcOk67(ARC67[id]));if(!
 /* milestone chapters: Chương 1 (vào cung, đứng vững) and the last two (ngôi Trung cung, kế vị): goals are the game's own goals */
 const MS67={
  nhap:{t:()=>S.origin.k==="cnv"?"Phận tỳ nữ buổi đầu":"Sơ nhập cung môn",g:()=>S.origin.k==="cnv"?"Mới vào cung làm kẻ hầu: làm tròn phận sự, giữ lòng tin của chủ. Xong chương khi qua tám tháng đầu, hoặc được phong Đáp ứng.":"Mới vào cung: giữ mình, được Hoàng thượng để mắt. Xong chương khi được tấn phong một bậc, hoặc qua sáu tháng đầu.",
-  steps:m=>S.origin.k==="cnv"?[[`Qua tám tháng đầu (${Math.min(8,S.turn-m.t0)}/8)`,S.turn-m.t0>=8],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)]]:[[`Được tấn phong một bậc (nay ${RANKS[Math.min(S.rank,7)].n})`,S.rank>m.r0],[`Qua sáu tháng đầu (${Math.min(6,S.turn-m.t0)}/6)`,S.turn-m.t0>=6]],any:1,fx:BAL.arc.ms.nhap,end:"Ngươi đã đứng được chân trong cung."},
+  steps:m=>S.origin.k==="cnv"?[[`Qua tám tháng đầu (${Math.min(8,S.turn-m.t0)}/8)`,S.turn-m.t0>=8],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)]]:[[`Được tấn phong một bậc (nay ${meRankN()})`,S.rank>m.r0],[`Qua sáu tháng đầu (${Math.min(6,S.turn-m.t0)}/6)`,S.turn-m.t0>=6]],any:1,fx:BAL.arc.ms.nhap,end:"Ngươi đã đứng được chân trong cung."},
  hau:{t:()=>"Tranh phượng vị",g:()=>"Leo lên ngôi Hoàng hậu. Từng bậc phải đủ Sủng và Danh; khi ngôi Trung cung trống, Hoàng thượng chọn trong người có hoàng tử, được Thái hậu ủng hộ và đủ Đức.",
   steps:()=>[3,4,5,6,7].map(r=>[`Lên ${RANKS[r].n}`,S.rank>=r]),fx:BAL.arc.ms.hau,end:"Ngươi đã ngồi trên ngôi Trung cung."},
  ke:{t:()=>"Mẫu nghi thiên hạ",g:()=>"Đưa con mình lên ngôi Đông cung; khi con lên ngôi, ngươi thành Hoàng thái hậu.",

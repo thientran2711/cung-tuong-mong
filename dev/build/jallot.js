@@ -98,7 +98,7 @@ function alSrvList(rk,lau){const B=BAL.allot.srv;if(lau)return B.lau.map(x=>x.sl
 function alSrvSkim(L){const D=BAL.stip.down;const ix=L.map((x,i)=>i).filter(i=>L[i][0] in D).sort((a,b)=>((IT[L[b][0]]&&itm(L[b][0]).pr)||0)-((IT[L[a][0]]&&itm(L[a][0]).pr)||0))[0];
  if(ix==null)return {L,cut:null};const k0=L[ix][0],k=D[k0];const M=L.slice();if(k)M[ix]=[k,M[ix][1]];else M.splice(ix,1);return {L:M,cut:{k0,k}}}
 function alSrvTxt(rk){const B=BAL.allot.srv;const L=B.goods[Math.max(0,Math.min(B.goods.length-1,rk|0))];
- return L.map(([k,n])=>(IT[k]&&IT[k].kd==="Vải vóc"?"đầu mùa ":"")+stipNm(k,n)).join(" · ")+` · mùa đông ${stipNm("thanden",B.coal)}`}
+ return L.map(([k,n])=>(IT[k]&&IT[k].kd==="Vải vóc"?"đầu mùa ":"")+stipNm(k,n)).join(", ")+`, mùa đông ${stipNm("thanden",B.coal)}`}/* BIG #10 1c: commas, not a «·» chain */
 /* the player maid: after her wage (j42 srvMonth) */
 function alSrvMonth(){try{if(!alOn()||!S||S.dead||!(typeof isSrv==="function"&&isSrv())||!S.srv)return;const m=typeof srvM==="function"?srvM():null;
  let L=alSrvList(S.srv.rk,(S.srv.lau||0)>0);let cut=null;if(m&&alSkimmed(m)&&!(S.srv.lau>0)){const x=alSrvSkim(L);L=x.L;cut=x.cut}

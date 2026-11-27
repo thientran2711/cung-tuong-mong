@@ -1181,6 +1181,10 @@ BAL.greet={ann:{emp:1,th:1},rank:{top:100,th:99,cons:10,out:9,man:8,srv:1,tq:5,m
  meet:{on:1,stay:.35,spite:.6,base:1,affK:20,oanK:20,max:3,
   opt:{greet:"visit",health:"visit",praise:"help",secret:"ally",gossip:"gossip",warn:"warn",provoke:"provoke"}}};
 BAL.net.n.greetName={"Kiêu ngạo":0,"Lạnh lùng":0,"_":1};
+/* law1-audit (Ban cung, jbancung bcNpcAsk): 1 = a newly made chủ vị of this nết asks the HUMBLE palace on her card (Đức road) instead of asking up */
+BAL.net.n.bcHumble={"Khiêm nhường":1,"Ân cần":1,"_":0};
+/* law1-audit (wardrobe, j92 wdNpcPawn): 1 = an NPC short of silver of this nết PAWNS a piece (wants it back), else she sells it quietly (her two roads) */
+BAL.net.n.wdPawn={"Kín đáo":1,"Khiêm nhường":1,"Ân cần":1,"_":0};
 BAL.net.n.meetW={"Ân cần":1.6,"Nhiều chuyện":1.8,"Xu nịnh":1.4,"Nóng nảy":1.2,"Lạnh lùng":.4,"Kín đáo":.6,"Kiêu ngạo":.8,"_":1};
 /* the person-dialog chat options (j9 topicOpts, j2 Khiêu khích): ONE table read by her options AND by the same options an NPC uses on her (AG-MEET, jgreet:
    mirrored, she is the judge). Gains are × chatF (fewer each repeat). praise odds = od(o + the speaker's Tài / div); foe = oán a third must hold to warn. */
@@ -2225,6 +2229,19 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:2,th:2,hh:2,duc:2,maid:3,rel:4,proof:1},
      m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},
      l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
+/* jscent (review/scent, PARKING #10 HƯƠNG RIÊNG, owner 20/11 ~06:35Z): every number of the signature scent (law 4).
+   list: the four scents (key → name, the monthly gain while she burns it; equal value, law 2: one stat each at the huongtram ratio Đức 1 ≈ Sức 5).
+   pr: one box of that incense (all equal); npcStock: boxes an NPC brings from home [min,max]; keep: bạc an NPC keeps after a restock buy.
+   like / dis: the Emperor's liked / disliked scent on a night (sung = Sủng to the one he visits; tell = odds points added to «others smell who was
+   with him» — liked = he lingers, everyone smells it; disliked = he leaves early, few notice: gain AND loss both ways, law 3).
+   tell: odds that one observer smells it = base + eye·eyes(observer) + tm (she has tai mắt) + rk·rank of the visited (law 5: the higher she is,
+   the more eyes on her) + like/dis; ghen / rel = what the observer feels toward the one she THINKS was there (two can share a scent: the tell can
+   point to the wrong person — law 6a). copy: an NPC whose Ghen toward her ≥ ghen copies her scent with odds p a month (and one whose thiện cảm toward another consort ≤ −ghen copies that one's; review r1) (frames her; she can do the
+   same by buying a rival's scent). poison: the j70 route «Mua chuộc cung nữ coi lò hương» (bạc only when it lands, payWin70) and its vis / need;
+   doc: TAINT «tẩm hương độc» on a box (c = bạc to taint one herself, suc = Sức lost by the one who burns that box). */
+BAL.scent={list:{tram:{n:"trầm",g:{duc:1}},lan:{n:"lan",g:{sac:1}},que:{n:"quế",g:{suc:5}},mai:{n:"mai",g:{danh:1}}},
+ pr:12,npcStock:[2,4],keep:10,like:{sung:3,tell:15},dis:{sung:-3,tell:-15},
+ tell:{base:20,eye:4,tm:15,rk:3,ghen:4,rel:3},copy:{p:10,ghen:40},poison:{bac:35,vis:2,need:2},doc:{c:5,suc:-8}};
 
 /* NEWS SIEVE (owner OD 26/11 ~04:40Z, jnsieve): the daily «Tin trong cung» / «Tin báo» keep only news that touches HER or her choices;
    NPC ↔ NPC drama keeps running (law 6b) and reaches her as ONE monthly summary (jnsieve nsMonth). on: the sieve; netOpen: every consort's
@@ -2243,6 +2260,37 @@ BAL.news={on:1,netOpen:1,sumTop:6,sumMin:5,sumOwnMin:5,recMax:300,bigBand:2,keep
 /* KIT §95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
 BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
 BAL.kdlg.tapArm=320;BAL.kdlg.tapNear=40;/* px: the 2nd tap lands within this distance of the 1st *//* KIT §6.2j (KK44, MAIN 160 «double tap spends twice»): ms after a NEW dialog paints during which a real tap inside it is not taken (the 2nd tap of a double tap that opened it) */
+/* LEAVE-THE-PALACE = ENDING (owner OD 24/11 ~06:05Z, review/leave-palace, jleave.js): every choice that takes her out of the palace ends the life;
+   the end card adds one varied «Về sau» passage decided by the PARTNER's real nết × her own state × the kind of leaving.
+   yrs[kind] = [min,max] years she still lives after leaving; kids[kind] = [min,max] children born after; cls = partner classes scored from his 3 nết
+   (BAL.net words; the highest score wins, ties keep the order of clsOrd); mod[cls] = y (years ×), k (children ±), w (cause weights ×).
+   suc: her Sức shifts the years (y × (sucA + Sức/sucD)); maxAge caps the age at death; old = from this age a death is «tuổi già». */
+/* MAIN 118 06:16Z (OD 24/11 ~07:55Z severity): crime tiers for deathSentence (j8). first = the first-year mercy applies; mercy = what the nhân từ
+   Emperor commutes death to (cold = lãnh cung, dan = phế làm thứ dân, out of the palace). nghich = gián điệp, hại Hoàng hậu / hoàng tự, vu cổ. */
+/* E74 (law 11, one tier for every proven treason deed, she and NPCs the same): nghichK = act / plot kinds that are «nghịch» whatever the target
+   (gián điệp, hại hoàng tự: kpoison / pond / musk / catswap, vu cổ: kframe / vuco); queenK = kinds that are «nghịch» when the target is Hoàng hậu
+   (hạ độc / đẩy xuống hồ Hoàng hậu). j8 crimeTier() reads these; convict() is the one road (deathSentence «nghich» or punish). */
+BAL.crime={thuong:{first:1,mercy:"cold"},nghich:{first:0,mercy:"dan"},nghichK:["spy","kpoison","pond","musk","catswap","kframe","vuco"],queenK:["poison","pushp"]};
+/* thất sủng (j8 tsMonth, MAIN 118 P3): enter at Sủng ≤ sung, Danh ≤ BAL.danhG.forget, rank ≤ rank; Sủng −decay a month while in it; back at Sủng ≥ back */
+/* E74 (law 1, MAIN 118 «she can win him back … same for NPCs»): recall = the monthly chance (%) that Hoàng thượng chợt nhớ a thất sủng consort,
+   EVERY consort the same (her too, besides her own Sủng roads): base + Danh/danhD + Đức/ducD + kid × living children, at most max; she comes back
+   with Sủng = back. lonely = j70 «lúc nàng vắng ân sủng» opening: thất sủng, or Sủng below this. */
+BAL.thatS={sung:0,rank:1,decay:2,back:15,recall:{base:2,danhD:20,ducD:25,kid:2,max:12},lonely:25};
+BAL.leave={maxAge:84,old:62,sucA:.7,sucD:200,birthAge:42,
+ yrs:{tron:[6,38],tron1:[4,34],hon:[10,46],thiep:[8,44],que:[12,50],tu:[16,54],dan:[5,36],duoi:[4,32],vuong:[14,44],phu:[10,34],other:[8,42],hoa:[10,40],day:[14,50]},
+ kids:{tron:[0,4],tron1:[0,2],hon:[1,5],thiep:[0,3],que:[0,3],tu:[0,0],dan:[0,3],duoi:[0,2],vuong:[1,4],phu:[0,0],other:[0,3],hoa:[1,4],day:[0,0]},
+ clsOrd:["chung","datinh","quyen","bao","lanh"],
+ cls:{chung:{"Ân cần":2,"Thật thà":2,"Trọng nghĩa":3,"Rộng lượng":1,"An phận":2,"Điềm tĩnh":1,"Thanh liêm":1},
+      datinh:{"Ham vui":3,"Vì mình":2,"Xu nịnh":1,"Nhiều chuyện":1,"Thực dụng":1,"Xảo quyệt":1},
+      quyen:{"Tham vọng":3,"Vì gia tộc":2,"Xảo quyệt":1,"Ham lợi":2},
+      bao:{"Nóng nảy":3,"Thù dai":2,"Cương trực":1},
+      lanh:{"Lạnh lùng":3,"Kín đáo":1,"Thực tế":1,"Ham học":1}},
+ mod:{chung:{y:1.15,k:1},datinh:{y:.9,k:0},quyen:{y:.85,k:0},bao:{y:.75,k:0},lanh:{y:1,k:-1},none:{y:1,k:0}},
+ /* cause-of-death weights (the pool picks one; class/kind rows multiply) */
+ cause:{gia:3,benh:3,sinh:1,sau:1,hai:.5,loan:1,dich:1},/* hai only with a partner's house (no partner → 0); gia only from age «old»; sinh only with children born, before birthAge */
+ causeK:{tron:{loan:3,dich:1.5},tron1:{loan:3,benh:1.5},dan:{benh:2,dich:2,loan:1.5},duoi:{benh:2.5,dich:2},tu:{sinh:0,sau:.5,benh:1.5},thiep:{hai:1.5,sau:1.5,loan:.3},hon:{loan:.4},phu:{loan:.3},que:{loan:.6},vuong:{loan:1.5},hoa:{loan:1.5,benh:1.3},day:{loan:.6}},
+ causeC:{chung:{sau:.3,hai:0},datinh:{sau:3,hai:2},quyen:{hai:2.5,sau:1.5},bao:{hai:2,sau:2,benh:1.3},lanh:{sau:2.5}}};
+
 /* review/net-build (owner OD 24/11 ~06:00Z / ~06:40Z, MAIN 119 order; design dev/handover/reports/net-thresholds.md §3): NẾT THRESHOLDS — ONE CORE (law 4).
    Every relation LEVEL the game tests ("quen", "thân", "ghét", "oán to act"…) is ONE base number here, and each person's nết shifts it:
    netTh(p,key) (jnet.js) = th[key] + Σ over p's 3 nết of BAL.net.T[t].th[key] (a key a nết lacks = thFrom[key] = [source key, × share]), clamped to thClamp[key].
@@ -2358,3 +2406,16 @@ BAL.charge={C:{
  actW:{poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
   rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
  w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1}};
+/* PLAYER-NOISE BUDGET + TEXT HYGIENE (owner OD 26/11 ~06:50Z (A)+(D); review/qc-noise-hygiene; gate dev/tools/quickcheck.d/96-noise-hygiene.sh).
+   Read ONLY by the QC tools (dev/measure/noise-day.js, dev/test/text-hygiene.js); the game itself never reads it.
+   day = one game day (wk(), tuần) of a real-tap robot life; a channel above its budget on ANY measured day FAILS the build.
+     tinbao  new rows in the Tin báo box per day · chip  toast chips per day · seal  cards with an emotion seal per day
+     dlgB    dialogs / cards per buổi (story pages she pages through on purpose are apart) · dlg  dialogs / cards per day
+     resRows rows (Được / Mất / Ghi chú items) on ONE result card
+     big / visit: NOT here — the ONE daily big-event cap is FOREMAN D's BAL.evc (D2 stat-pace, jbalsp.js): big ≤ BAL.evc.cap, visit ≤ BAL.evc.q.visit;
+       a build without BAL.evc measures them and reports «no D2 cap in this build» (no second set of caps, owner order MAIN 154).
+   text: lineMax[surface] = longest one-line text (letters) · dotMax = most «·» in one line · noDup = words that are a fault when said twice in a row (Vietnamese doubles many words on purpose: nương nương, rưng rưng) ·
+     leakOk = Latin words allowed in player text (proper names of the setting) */
+BAL.noise={tinbao:10,chip:6,seal:2,dlgB:4,dlg:10,resRows:8,
+ text:{lineMax:{chip:90,tinbao:110,resrow:70},dotMax:3,
+  noDup:["ta","ngươi","nàng","hắn","và","với","là","được","mất","thì","đã","đang","khắc","bạc","danh","đức","sủng","oán","ghen","thiện"],leakOk:[]}};/*NOISE-END*/

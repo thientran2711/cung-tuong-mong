@@ -30,7 +30,7 @@ const OPP70={
  preg:{n:"khi nàng đang mang thai",ok:(p,t)=>!!t.preg,b:4},
  birth:{n:"lúc nàng trở dạ",ok:(p,t)=>(t.preg||0)>=8,b:12},
  rain:{n:"sau cơn mưa, bậc đá trơn",ok:()=>!!(S.wx&&/mưa|bão|giông|tuyết/i.test(S.wx.b||S.wx.n||"")),b:8},
- lonely:{n:"lúc nàng thất sủng, ít người qua lại",ok:(p,t)=>(t===S?S.sung:t.sung||0)<25,b:6},
+ lonely:{n:"lúc nàng vắng ân sủng, ít người qua lại",ok:(p,t)=>!!t.thatS||(t===S?S.sung:t.sung||0)<BAL.thatS.lonely,b:6},/* E74: reads the thất sủng flag (j8 tsMonth) + BAL */
  night:{n:"một đêm vắng",ok:()=>true,b:0}};
 /* ---------- methods x routes (stage templates). k = the existing act that executes it ---------- */
 /* route: n name · tl [tell of step 1, tell of step 2] (what her people see, third person, no subject) · pl place key where it can be seen
@@ -207,7 +207,7 @@ function exec70(p,opp){const a=pa70(p),t=pt70(p),M=pm70(p);const O=OPP70[opp]||O
  if(!okAct70(a,t,M.k)&&M.k!=="joint"){p.end="miss";try{mindLog(a,"_abandon")}catch(e){}if(p.kn&&a!==S)log(`${a.name} bày mưu ${M.n.toLowerCase()} nhưng thời cơ đã qua, đành thôi.`);return ""}
  let r="";const bonus=J70CFG.prep+O.b+(p.bonus||0);const err=(p.err||0)+p.g-bonus;
  if(p.foil){/* cut at the root earlier *//*evok: plot deed (newPlot70)*/evA(t===S?S:t,a,BAL.eff.j70.evExec70);r=`${a===S?"Ngươi":a.name} định ra tay (${M.n.toLowerCase()}) ${O.n}, nhưng đường dây đã bị cắt từ trước. ${t===S?`Ngươi nắm thêm ${balAb(BAL.eff.j70.evExec70)} chứng cứ về ${a.name}.`:""}`;try{if(a!==S){a.fails=a.fails||{};a.fails[M.k]=(a.fails[M.k]||0)+1}}catch(e){}}
- else if(p.trap){/*evok: plot deed*/evA(S,a,BAL.eff.j70.evExec70_2);try{punish(a,`bị bắt quả tang ${M.n.toLowerCase()} nhắm vào ${nm70(t)}`,2)}catch(e){}relAdd(a,S,BAL.eff.j70.exec70);r=`Bẫy của ngươi sập đúng lúc: người của ${a.name} bị bắt quả tang ${M.n.toLowerCase()} ${O.n}. Chứng cứ ${balSg(BAL.eff.j70.evExec70_2)}.`}
+ else if(p.trap){/*evok: plot deed*/evA(S,a,BAL.eff.j70.evExec70_2);try{convict(a,`bị bắt quả tang ${M.n.toLowerCase()} nhắm vào ${nm70(t)}`,M.k,t,2)/* E74: a treason kind caught red-handed → the one «nghịch» tier */}catch(e){}relAdd(a,S,BAL.eff.j70.exec70);r=`Bẫy của ngươi sập đúng lúc: người của ${a.name} bị bắt quả tang ${M.n.toLowerCase()} ${O.n}. Chứng cứ ${balSg(BAL.eff.j70.evExec70_2)}.`}
  else{window.__j70exec=1;if(a)a.__won=0;try{
    if(M.k==="joint"){const f=facOf(a);r=f&&jointScheme0?jointScheme0(f,t):""}
    else if(a===S){S.__err=err;try{r=runAct(S,t,M.k)}finally{S.__err=0}}
@@ -393,7 +393,7 @@ function self70(a){const out=[];const busy=ords70().map(o=>o.sid);
    if(S.doctor&&/độc|xạ hương/.test(ACT[k].n))used.push("thái y tâm phúc ngươi đã kết giao");if(S.shield)used.push("Hoàng hậu đang che chở ngươi");if(S.guardWarn)used.push("thị vệ ngươi đã nhờ canh chừng");if(eyes(S)>0)used.push(`Tai mắt ${S.mat}`)}
   return note70({a,k,ok,mo,by:used,self:SP,gain:evG(S,a)-e0,snap,body,known})}})();
 function motNow70(a){const g=a.ghen||0,o=Math.round(oan(a,S)),h=Math.max(0,-aff(a,S));if(g>=o&&g>=h&&g>0)return{k:"ghen",v:g,t:`ghen với ngươi, Ghen ${g}`};if(o>=h&&o>0)return{k:"oan",v:o,t:`oán ngươi, Oán ${o}`};if(h>0)return{k:"ghet",v:-h,t:`ghét ngươi, thiện cảm ${-h}`};return{k:"khac",v:0,t:"vì lợi riêng"}}
-function loss70(sn){const L=[];const d=(k,n)=>{const v=(S[k]||0)-(sn[k]||0);if(v)L.push(`${n} ${v>0?"+":""}${v}`)};d("danh","Danh");d("sung","Sủng");d("suc","Sức");d("duc","Đức");if(S.rank<sn.rank)L.push(`bị giáng xuống ${RANKS[S.rank]?RANKS[S.rank].n:"phẩm thấp hơn"}`);if(sn.preg&&!S.preg)L.push("mất cái thai");const kd=(S.kids||[]).filter(x=>x.alive).length;if(kd<sn.kids)L.push(`mất ${sn.kids-kd} đứa con`);if(!sn.cold&&S.out)L.push("bị đày vào lãnh cung");if(S.scar&&!sn.scar)L.push(`bị hủy dung (${SCAR70[S.scar.sev].n}): Sắc -${S.scar.d} đến khi lành`);return L}
+function loss70(sn){const L=[];const d=(k,n)=>{const v=(S[k]||0)-(sn[k]||0);if(v)L.push(`${n} ${v>0?"+":""}${v}`)};d("danh","Danh");d("sung","Sủng");d("suc","Sức");d("duc","Đức");if(S.rank<sn.rank)L.push(`bị giáng xuống ${(meRankN()||"phẩm thấp hơn")}`);if(sn.preg&&!S.preg)L.push("mất cái thai");const kd=(S.kids||[]).filter(x=>x.alive).length;if(kd<sn.kids)L.push(`mất ${sn.kids-kd} đứa con`);if(!sn.cold&&S.out)L.push("bị đày vào lãnh cung");if(S.scar&&!sn.scar)L.push(`bị hủy dung (${SCAR70[S.scar.sev].n}): Sắc -${S.scar.d} đến khi lành`);return L}
 /* one clear notice: who (rank + name), what, why (the real grudge), what stopped it (her own orders), what she gained or lost */
 function note70(o){const z=j70();const a=o.a,A=ACT[o.k];const who=o.known?title70(a):"Kẻ giấu mặt";const what=A?A.n.toLowerCase():"hại ngươi";const lost=loss70(o.snap);const need=accNeed(a);const ev=evG(S,a);
  const N={wk:wk(),id:o.known?a.id:null,who,rank:o.known?rkName(a):null,act:o.k,actName:A?A.n:"",ok:o.ok,why:o.known?o.mo.t:null,whyK:o.known?o.mo.k:null,whyV:o.known?o.mo.v:null,by:o.ok?[]:o.by,gainEv:o.gain>0?o.gain:0,evNow:o.known?ev:null,evNeed:need,lost,body:String(o.body||"").replace(/<[^>]+>/g,"").trim()};

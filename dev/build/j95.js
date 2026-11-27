@@ -43,7 +43,7 @@ function j95kh(){return Math.max(0,Math.min(J95.KH-1,typeof used==="number"?used
 function j95key(){return wk()+"-"+(S.buoi||0)}
 function j95z(){const z=S.j95=S.j95||{};for(const k of ["obs","me","meK","it","wit","owe","hold","seen","told","plant"])z[k]=z[k]||{};z.sec=z.sec||[];z.clue=z.clue||[];return z}
 function j95pn(k){try{return k?placeName(k):"—"}catch(e){return String(k)}}
-function j95rk(p){try{return p===S?(typeof isSrv==="function"&&isSrv()?srvTitle():S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):p.out?"Phế phi":p.queen?"Hoàng hậu":RANKS[p.rank].n}catch(e){return""}}
+function j95rk(p){try{return p===S?(typeof isSrv==="function"&&isSrv()?srvTitle():S.rank>=7?"Hoàng hậu":meRankN()):p.out?"Phế phi":p.queen?"Hoàng hậu":RANKS[p.rank].n}catch(e){return""}}
 function j95acc(p,k){if(!k)return false;try{return palaceOf(p)===k||accessOf(p,k).ok}catch(e){return true}}
 function j95bl(c){return J95.B4[c].toLowerCase()}
 
@@ -441,7 +441,7 @@ function j95catchOpts(v,m,s,out){const O=[];const q=queenP();const love=s.kind==
 function j95accuse(v,m,s,to){if(typeof can==="function"&&can(BAL.m95.k))spend(BAL.m95.k);const c=j95chg(s),pr=chHave(S,v,c);const q=queenP();
  const o=j95accO(v,to,s);
  if(j95dice(o)){evA(S,v,-pr,c);apply({danh:BAL.m95.accWin.danh});const what=s.kind==="tryst"?`tư thông${m?" với "+m.name:""}`:"chuẩn bị mưu hại";log(`<span class="r">${v.name} bị xét tội ${what}.</span>`);
-  if(s.kind==="tryst"){if(m){m.alive=false;v.affair=null;log(`<span class="r">${m.name} bị xử trảm.</span>`)}deathSentence(v,`tư thông${m?" với "+m.name:""}`)}else punish(v,"chuẩn bị mưu hại",2);
+  if(s.kind==="tryst"){ttNpcExposed(v,m)}else punish(v,"chuẩn bị mưu hại",2);
   Q.push({t:"Tố giác",who:pv(v),h:`<p>Chứng cứ đủ, ${v.name} bị xét tội ${what}.</p><p class="g">Danh +${BAL.m95.accWin.danh}</p>`})}
  else{apply({danh:-BAL.tw.g.accFail[0]});oanAdd(v,S,BAL.tw.g.accFail[1]);affAdd(v,S,-BAL.tw.g.accFail[2]);punish(S,"vu cáo phi tần không đủ chứng cứ",to==="emp"?2:1);Q.push({t:"Tố giác",who:pv(v),h:`<p>${to==="emp"?"Hoàng thượng":"Hoàng hậu"} cho rằng chứng cứ chưa đủ, ngươi bị coi là vu cáo.</p><p class="r">Danh -${BAL.tw.g.accFail[0]} · ${v.name} oán ngươi +${BAL.tw.g.accFail[1]}</p>`})}
  showModal()}

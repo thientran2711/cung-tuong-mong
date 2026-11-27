@@ -51,9 +51,9 @@ function econStipend(p){const r=rkOf(p),me=p===S,staff=(p.staff||[]).length;let 
  const pat=econPatron(p);const d=econDuty(p),bt=econBan(p);
  if(!me){econDoDuty(p,true);try{if(SK&&typeof stipNpc==="function")stipNpc(p,SK,G)}catch(e){console.error("stip npc",e)}return""}
  const tot=net+(pat?pat.n:0);const gn=typeof stipGoodsTxt==="function"?stipGoodsTxt(G):"";
- const parts=[`+${base} bạc`];if(gn)parts.push(gn);if(skB)parts.push(`Nội vụ phủ cắt xén −${skB} bạc`);if(wage)parts.push(`trả công ${staff} kẻ hầu: −${wage} bạc`);if(bonus)parts.push(`ân thưởng +${bonus}`);if(home)parts.push(`nhà gửi +${home}`);if(pat)parts.push(`việc vặt +${pat.n}`);
+ const parts=[`+${base} bạc`];if(gn)parts.push(gn);if(skB)parts.push(`Nội vụ phủ cắt xén −${skB} bạc`);if(wage)parts.push(`trả công ${staff} kẻ hầu −${wage} bạc`);if(bonus)parts.push(`ân thưởng +${bonus}`);if(home)parts.push(`nhà gửi +${home}`);if(pat)parts.push(`việc vặt +${pat.n}`);
  if(SK&&SK.why)why.push(`cắt xén vì ${SK.why}`);
- const line=`Bổng lộc tháng ${econMonthName()}: ${parts.join(" · ")} = ${tot>=0?"+":""}${tot} bạc${why.length?" ("+why.join("; ")+")":""}.`;
+ /* BIG #10 1c/1d: a sentence, not a ledger: commas between parts, «; tổng cộng …» instead of «= …» */const line=`Bổng lộc tháng ${econMonthName()}: ${parts.join(", ")}; tổng cộng ${tot>=0?"+":""}${tot} bạc${why.length?" ("+why.join("; ")+")":""}.`;
  try{if(!(typeof isSrv==="function"&&isSrv())){
    /* review/bongloc-options (owner 21/11 ~04:30Z + ~05:39Z, M83): the notes go behind the kit «!» RIGHT NEXT TO the line they explain (no
       visible Ghi chú row); EVERY month the frame carries its action options: the Nội vụ phủ cut answers ON this frame when something was cut
