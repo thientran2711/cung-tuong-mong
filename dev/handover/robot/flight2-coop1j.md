@@ -37,3 +37,6 @@ Watcher /home/user/wt/coop1j-watch.sh: stops when either seat (host / guest) has
 - Same family as P89H (coop1i 11/25: host «Đợi hảo hữu xong tuần», guest «Hết buổi» + disabled «Chờ hảo hữu…»), now on a FRESH room, post-fix build, RV-173 harness port.
 - Side findings: (1) guest «Nghỉ ngơi» repeatable with no khắc cost in this state (mood farm); (2) before the in-room «Chuyển kiếp», a dead host who rejoined got her pre-death week back once («SAVE REWIND»).
 - Shots (CDN img/_review/coop1j/): HANG-guest.png, HANG-host.png, P-guest-spent.png, guest-2101-now.png, host-2101-now.png. Probe scripts: flight2-coop1j.d/hand.js, probe.js, cw.js. Profiles kept on this container: /home/user/wt/out-coop1j-c/profile-coop-flight2-coop1j-c-{fold,ipad} (local build server 127.0.0.1:8812). Runner stopped.
+
+### Room d — ESXA, seed 7104, from 21:14Z — RUNNING on LIVE 8330e8b8 (CTM_BI s 24beb1a4 b bf5366a06e45 t 2026-11-27T19:22Z), fresh profiles, harness 021944b7 stack
+- F ROOT 7 order 21:14Z: does the coopWait / ended.b=false week hang repeat on the new LIVE? Note any «Ban hoa» b1 room block (D fix in 8330e8b8). Room c 3T7K profiles kept untouched as evidence.
