@@ -411,7 +411,18 @@
   "leak|jtoil.js|kitDressPicker · màn chọn trang phục: nhân vật của nàng bên trái (xem trước theo bộ đang mặc), lựa chọn bên phải",
   "leak|jtoil.js|kitSwatches · màu trang điểm (phấn mắt, phấn má, son môi, màu mày)",
   "leak|jtoil.js|thông tin món y phục / trang sức (hàng «Màu»), lịch lễ, cổng lễ: màu chính + màu phụ; màu lấy từ MỘT bảng dữ liệu (BAL.dc.fam), kit không tự giữ màu nào",
-  "pct|jkitpage.js|Ô đồ Xa xỉ · MỘT khuôn chủ (đơn vị theo khung: ô vuông 22,7 % khung, số phẩm bên trong) ở mọi cỡ: sm · md · lg · xl · slot"
+  "pct|jkitpage.js|Ô đồ Xa xỉ · MỘT khuôn chủ (đơn vị theo khung: ô vuông 22,7 % khung, số phẩm bên trong) ở mọi cỡ: sm · md · lg · xl · slot",
+  "leak|jkitpage.js|RESULT FIRST: a held result card (the next screen waits) ends with the kit button «Tiếp ▸»",
+  "leak|jkitpage.js|kitRing «vòng người · vòng nhóm»: the ring of a place (front bright, others dim; spin / ‹ › / tap a side slot; tap the front = big figure LEFT + thẻ gỗ RIGHT; g",
+  "leak|jkitpage.js|kitStage «sân khấu không khung»: ONE figure (the speaker; her figure only on a two-person dialogue), story box, the hand at the foot; §102.2 dialogue = lines on",
+  "leak|jkitpage.js|kitHand «Bàn bài»: 2–10 event options = a hand of cards (tap = lift + plate + ✓ / ✕, ✓ = choose; a name longer than the 4-line face keeps the LIST card, KK41; o",
+  "leak|jkitpage.js|kitResultSeal: THÀNH · BẠI · BỎ DỞ · KẾT QUẢ",
+  "leak|jkitpage.js|kitKemRow (one line per named person, strangers grouped «N vị khác»; person rows of a result card one per line)",
+  "leak|jkitpage.js|Người: đổi bao nhiêu (tổng mới) · kaNT / kitRelW",
+  "leak|jkitpage.js|Glossary popover: meaning + «Cách giảm» (rise hurts) / «Cách tăng» (fall hurts) row from kitLowerText",
+  "leak|jnotice.js|kitNotice hold · chip giữ lại, nhấp nháy (sắp đóng cửa) + trạng thái đỏ (quá giờ)",
+  "leak|jkpick.js|kitPick · cột treo thẻ lụa MỘT chỗ (1–4 thẻ một cột, 5–7 hai cột, 8+ ba cột mọc sang trái) · MỘT nút «Chọn» dưới thẻ đang nâng",
+  "leak|jkring-item.js|kitRingItem · Vòng bảo vật (món đứng trên vòng xoay, món trước sáng, chạm → phóng to trái, nút thả phải, kết quả tại chỗ)"
  ],
  "runtime": [
   {
@@ -436,5 +447,18 @@
    "re": "(che miệng cười|mách Hoàng hậu|thắng .+ một ván|nhận nửa lễ|nghe lời đồn|bớt xén bổng lộc)",
    "why": "NPC↔NPC world news told whole in the Tin báo row / chip (newsAdd, jagacts deeds, jnroad rumours, Nội vụ phủ pay cuts) — not about her. Owner: NEWS-SIEVE-2 (daily news only about her)"
   }
- ]
+ ],
+ "frozenBy": {
+  "leak|jkitpage.js|RESULT FIRST: a held result card (the next screen waits) ends with the kit button «Tiếp ▸»": "dev-only kit sample, MAIN 174 27/11",
+  "leak|jkitpage.js|kitRing «vòng người · vòng nhóm»: the ring of a place (front bright, others dim; spin / ‹ › / tap a side slot; tap the front = big figure LEFT + thẻ gỗ RIGHT; g": "dev-only kit sample, MAIN 174 27/11",
+  "leak|jkitpage.js|kitStage «sân khấu không khung»: ONE figure (the speaker; her figure only on a two-person dialogue), story box, the hand at the foot; §102.2 dialogue = lines on": "dev-only kit sample, MAIN 174 27/11",
+  "leak|jkitpage.js|kitHand «Bàn bài»: 2–10 event options = a hand of cards (tap = lift + plate + ✓ / ✕, ✓ = choose; a name longer than the 4-line face keeps the LIST card, KK41; o": "dev-only kit sample, MAIN 174 27/11",
+  "leak|jkitpage.js|kitResultSeal: THÀNH · BẠI · BỎ DỞ · KẾT QUẢ": "dev-only kit sample, MAIN 174 27/11",
+  "leak|jkitpage.js|kitKemRow (one line per named person, strangers grouped «N vị khác»; person rows of a result card one per line)": "dev-only kit sample, MAIN 174 27/11",
+  "leak|jkitpage.js|Người: đổi bao nhiêu (tổng mới) · kaNT / kitRelW": "dev-only kit sample, MAIN 174 27/11",
+  "leak|jkitpage.js|Glossary popover: meaning + «Cách giảm» (rise hurts) / «Cách tăng» (fall hurts) row from kitLowerText": "dev-only kit sample, MAIN 174 27/11",
+  "leak|jnotice.js|kitNotice hold · chip giữ lại, nhấp nháy (sắp đóng cửa) + trạng thái đỏ (quá giờ)": "dev-only kit sample, MAIN 174 27/11",
+  "leak|jkpick.js|kitPick · cột treo thẻ lụa MỘT chỗ (1–4 thẻ một cột, 5–7 hai cột, 8+ ba cột mọc sang trái) · MỘT nút «Chọn» dưới thẻ đang nâng": "dev-only kit sample (KIT_SAMPLES title), MAIN 174 27/11 family",
+  "leak|jkring-item.js|kitRingItem · Vòng bảo vật (món đứng trên vòng xoay, món trước sáng, chạm → phóng to trái, nút thả phải, kết quả tại chỗ)": "dev-only kit sample (KIT_SAMPLES title), MAIN 174 27/11 family"
+ }
 }
