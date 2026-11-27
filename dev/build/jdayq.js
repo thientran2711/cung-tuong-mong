@@ -69,7 +69,7 @@ function dqActEl(){try{const ov=document.getElementById("ov");if(ov&&!dqHidden(o
   /* button-crawl-fix-5 (F #10 25/11 11:01Z, robot s6d: «Sang ngày mới» greyed, Q = 12 cards, NOTHING on screen): the person view is an activity
      only while it is ON SCREEN. A tap on another tab parks it (jdfv dfTabLayers: .kfoc hidden, DF.F kept) — she is no longer inside it, so the
      waiting card shows on the tab she is on; a view whose layer is gone (no .kfoc) holds nothing either (it used to return document.body = held for ever) */
-  const D=window.DF;if(D&&D.F&&(D.play||(DQ.fo&&D.tk===DQ.fo))){const f=document.querySelector(".kfoc");if(f&&dqShown(f))return f;
+  const D=window.DF;if(D&&D.F&&(D.play||(DQ.fo&&D.tk===DQ.fo))){const f=dqOn(".kfoc");if(f)return f;
    if(D.play&&!f&&(typeof tab==="undefined"||tab==="act"))return document.body/* an on-figure game drawn on the stage itself */;return null}}catch(e){}return null}
 function dqShown(el){try{if(!el||!el.isConnected||dqHidden(el))return false;for(let e=el;e&&e!==document.body;e=e.parentElement)if(e.hidden)return false;
   const cs=getComputedStyle(el);if(cs.display==="none"||cs.visibility==="hidden")return false;const r=el.getBoundingClientRect();return r.width>0&&r.height>0}catch(e){return false}}
@@ -101,7 +101,7 @@ function dqPaintQ(){try{if(!dqUiC()||!dqQHidden())return false;DQ.stat.painted++
 /* the night gate's exception (jnf showModal): the «Tin trong cung» card on top that jdayq newsHold holds the queued (NOT yet on screen) flip scene
    for. It paints first (≤ one poll), then the flip plays and the choice follows it at once (owner OD 16/11 22:45Z «no dialog under / over the flip
    scene» = while the scene is ON SCREEN). */
-function dqNewsPass(){try{if(!DQ.newsHold||!dqUi()||!Q[0]||!dqIsNews(Q[0])||dqDawn())return false;if(document.querySelector(".kmov:not(.km-out)"))return false;
+function dqNewsPass(){try{if(!DQ.newsHold||!dqUi()||!Q[0]||!dqIsNews(Q[0])||dqDawn())return false;if(dqOn(".kmov:not(.km-out)"))return false;/* r4: only a scene ON SCREEN (dqOn, as dqActEl) */
   if(typeof kmBusy!=="undefined"&&kmBusy)return false;if(!(typeof window.cfBusy==="function"&&window.cfBusy()))return false;DQ.stat.newsPass++;return true}catch(e){return false}}
 window.dqNewsPass=dqNewsPass;
 /* (a) the held turn runs by itself once the old buổi is finished (same buổi, nothing else open) */
@@ -141,10 +141,35 @@ function dqInstall(){
  try{/* the activity is gone (scene / podium / mini-game screen closed): the held card is painted AT ONCE, not at the next poll (DAYQ-3) */
   const mo=new MutationObserver(()=>{if(!Q.length)return;dqPull();try{if(DQ.mt&&DQ.mtf&&dqUiC()&&!dqActEl()&&!(dqUi()&&dqDawn()))DQ.mtf()}catch(e){}});mo.observe(document.body,{childList:true});const ov=document.getElementById("ov");if(ov)mo.observe(ov,{attributes:true,attributeFilter:["hidden"]})}catch(e){console.error("dayq observe",e)}}
 /* (b) the new day's motion scenes (stipend chest, rewards …) wait until «Tin trong cung» is closed */
-(function(){if(typeof kmFree!=="function")return;const kf=kmFree;kmFree=function(){if(!kf.apply(this,arguments))return false;
+/* Q-SOFTLOCK (MAIN 150 order, F s3f LIVE 5e013076: (a) «Sang ngày mới» ×3 no turn, Q=1 «Tin trong cung buổi này» ×19; (b) «Có tin đang chờ» greyed,
+   Q=8 Tin báo / Xét phẩm, 150 taps): the MOTION-SCENE QUEUE (KMQ) blocked with nothing on screen. A blocked queue holds the turn (dqOldPending:
+   KMQ.length) and a queued, unstarted night flip makes the jnf night gate hold every card (up to BAL.steal.choice cap, 80 s) — a held card neither
+   shows nor lets the turn pass. Two blockers, both «a host that is not on screen» (the dqShown family of r3 / r4 / coop-rebirth):
+   (1) j93 kmFree says «not free» while #kmrew / #kpodov / a roulette / #dawn.on merely EXISTS in the page (a left-over host);
+   (2) a scene job keeps kmBusy (its finish guard is 600 s) while nothing of it is on screen (a picture preload that never lands, a host removed).
+   Rule (one rule, the on-screen rule): a host / busy flag that holds the queue with NOTHING on screen for BAL.dayq.stale ms no longer holds it —
+   (1) kmFree counts only hosts ON SCREEN (dqDawn / dqOn) once the ghost has lasted BAL.dayq.wake ms; (2) the stale job's finish is voided (kmGen,
+   exactly what kmReset does for a whole life) and the queue moves on. Solo only (dqUi; a co-op room keeps its own caps). Paint only: no S key, no draw. */
+function dqKmReal(){return dqDawn()||!!dqOn('#kpodov,[id^="kroul"],.kroul-ov,#kmrew')}
+function dqScreenEmpty(){try{const M=document.getElementById("modal");if(M&&!dqHidden(M))return false;if(dqDawn()||(typeof S!=="undefined"&&S&&S.mg))return false;
+  return !dqOn('.kmov:not(.km-out),#kmrew,#kpodov,.kroul-ov,[id^="kroul"],.kfoc,#ov,#title,#kload,#ktut .ktut-card')}catch(e){return false}}
+function dqKmStale(){try{if(!dqUi()||typeof kmBusy==="undefined"||!kmBusy||typeof KMQ==="undefined"||!KMQ.length||!dqScreenEmpty()){DQ.kz=0;return false}
+  const n=Date.now();if(!DQ.kz){DQ.kz=n;return false}if(n-DQ.kz<((BAL.dayq&&BAL.dayq.stale)||10000))return false;
+  DQ.kz=0;DQ.stat.kmStale=(DQ.stat.kmStale||0)+1;console.warn("dayq: stale scene job released (nothing on screen), queue",KMQ.length);
+  if(typeof kmGen!=="undefined")kmGen++;kmBusy=false;if(typeof kmPump==="function")kmPump();return true}catch(e){console.error("dayq kmStale",e);return false}}
+setTimeout(()=>setTimeout(()=>{try{setInterval(dqKmStale,700)}catch(e){}},0),0);
+window.dqKmStale=dqKmStale;
+(function(){if(typeof kmFree!=="function")return;const kf=kmFree;kmFree=function(){if(!kf.apply(this,arguments)){
+  /* (1) the base said «not free»: only a host ON SCREEN keeps that answer; a ghost host for BAL.dayq.wake ms does not */
+  try{if(!dqUi()||dqKmReal()){DQ.kg=0;return false}const n=Date.now();if(!DQ.kg)DQ.kg=n;if(n-DQ.kg<((BAL.dayq&&BAL.dayq.wake)||2000))return false;DQ.stat.kmGhost=(DQ.stat.kmGhost||0)+1}catch(e){return false}}else DQ.kg=0;
  /* (c) a new motion scene waits while a mini-game screen or an on-figure game is open (a scene on screen is already one at a time: kmBusy;
     a scene from her own act in the person view shows there as before) */
- try{if(dqUiC()){const ov=document.getElementById("ov");if((ov&&!dqHidden(ov))||(window.DF&&DF.play)){DQ.stat.actKm++;return false}
+ try{if(dqUiC()){const ov=document.getElementById("ov"),ovS=!!(ov&&!dqHidden(ov)),dfS=!!(window.DF&&DF.play);
+  /* Q-SOFTLOCK (c) (F s9e 03:47Z: Q=0, DQ.want held, screen free, actKm +4/s): the same on-screen rule as (1) — only a mini-game screen or a person
+     view REALLY on screen holds the scene; an un-hidden #ov that is not on screen, or a left-over DF.play handle with no .kfoc on screen, stops
+     holding it once it has lasted BAL.dayq.wake ms (solo only, dqUi, as (1); a co-op seat keeps the old answer; paint/queue only, no S key, no draw) */
+  if(ovS||dfS){if(!dqUi()||(ovS&&dqShown(ov))||(dfS&&dqOn(".kfoc"))){DQ.ka=0;DQ.stat.actKm++;return false}
+   const n=Date.now();if(!DQ.ka)DQ.ka=n;if(n-DQ.ka<((BAL.dayq&&BAL.dayq.wake)||2000)){DQ.stat.actKm++;return false}DQ.stat.kmGhost=(DQ.stat.kmGhost||0)+1}else DQ.ka=0;
   /* a scene posted inside a tap waits one pump (kmPump retries in 250 ms): the tap may be opening an activity (her «Điểm trang» tap spends the
      khắc first, then opens the mirror) — a scene of the khắc never starts before / under that screen */
   const ev=window.event;if(ev&&/click|pointer|touch|key|mouse/.test(ev.type)&&!DQ.kmTap){DQ.kmTap=1;setTimeout(()=>{DQ.kmTap=0},0);DQ.stat.actKm++;return false}}}catch(e){}
@@ -175,7 +200,7 @@ window.dqNextCue=dqNextCue;
    motion scene / person view / new-day host / title on screen, for BAL.dayq.wake ms → the waiting card is shown (showModal: every module's own gate
    still runs, so a card a gate holds on purpose stays held). Solo only (dqUi; a co-op room paces Q with its own gates). Paint only: no S key, no draw. */
 function dqFreeScreen(){try{if(dqActEl()||dqDawn()||(typeof S!=="undefined"&&S&&S.mg))return false;
-  for(const sel of [".kfoc","#ov","#title","#kload","#kpodov","#kmrew",".kmov:not(.km-out)",".kroul-ov","[id^=\"kroul\"]","#ktut .ktut-card"]){const e=document.querySelector(sel);if(e&&dqShown(e))return false}return true}catch(e){return false}}
+  for(const sel of [".kfoc","#ov","#title","#kload","#kpodov","#kmrew",".kmov:not(.km-out)",".kroul-ov","[id^=\"kroul\"]","#ktut .ktut-card"]){if(dqOn(sel))return false}/* r4: EVERY match (a zero-size / hidden one first in the page no longer hides a real one behind it — same rule as dqActEl r3) */return true}catch(e){return false}}
 function dqWake(){try{dqNextSync()}catch(e){}/* r3: the emptied-queue mirror (Q 0, «Sang buổi» stale-disabled) */try{const M=document.getElementById("modal");const m=Q[0];
   if(!dqUi()||!Q.length||!M||!dqHidden(M)||!dqFreeScreen()){DQ.wk=null;return}
   const now=Date.now(),W=(BAL.dayq&&BAL.dayq.wake)||2000;if(!DQ.wk||DQ.wk.m!==m){DQ.wk={m,at:now,n:0};return}
@@ -186,10 +211,10 @@ window.dqWake=dqWake;
    only j6 render() and jcoopworld lockNext() write #next.disabled, and both run on events. A disabled #next whose reason is gone (the card closed,
    the mini-game ended, a co-op lock cleared) with no render / lockNext after it stayed dead for ever. HEAL: every BAL.dayq.wake ms, a disabled
    #next while nothing holds it (alive, Q empty, no mini-game) is looked at again by its OWN rule — co-op: lockNext() (keeps every room lock and its
-   words); solo: render()'s rule (no co-op wait on it). Never enables a button a real reason holds. Paint only: no S key, no draw, no message. */
+   words); solo: dqNextSync() (r4 net: calls render() itself; no co-op wait on it). Never enables a button a real reason holds. Paint only: no S key, no draw, no message. */
 function dqNextHeal(){try{const n=document.getElementById("next");if(!n||!n.disabled||typeof S==="undefined"||!S||S.dead||Q.length||S.mg)return;
  const c=window.COOPW;if(c&&c.on){if(typeof c.lockNext==="function"){c.lockNext();if(!n.disabled)DQ.stat.healed=(DQ.stat.healed||0)+1}return}
- if(n.dataset.coopWait)return;n.disabled=false;DQ.stat.healed=(DQ.stat.healed||0)+1;dqNextCue()}catch(e){console.error("dayq heal",e)}}
+ if(n.dataset.coopWait)return;/* ONE RULE (law 13, one net): solo goes through r4's render-based net dqNextSync = render()'s own rule; no second writer */dqNextSync();if(!n.disabled)DQ.stat.healed=(DQ.stat.healed||0)+1;return}catch(e){console.error("dayq heal",e)}}
 setTimeout(()=>setTimeout(()=>{try{setInterval(dqNextHeal,(BAL.dayq&&BAL.dayq.wake)||2000)}catch(e){}},0),0);
 window.dqNextHeal=dqNextHeal;
 window.DQ=DQ;
@@ -205,7 +230,7 @@ window.DQ=DQ;
 function dqRoomWait(){try{const m=Q[0],D=window.DF;return dqUi()&&!!m&&typeof tab!=="undefined"&&tab!=="act"&&!!(m.dfSeen&&D&&D.encM===m&&D.F)}catch(e){return false}}
 function dqMgStale(){try{if(!dqUi()||!S.mg)return false;const ov=document.getElementById("ov");if(ov&&!dqHidden(ov))return false;if(window.DF&&DF.play)return false;
   const M=document.getElementById("modal");if(M&&!dqHidden(M))return false;if(dqDawn())return false;
-  for(const sel of [".kmov:not(.km-out)","#kmrew","#kpodov",".kroul-ov","[id^=\"kroul\"]","#title","#kload"]){const e=document.querySelector(sel);if(e&&dqShown(e))return false}return true}catch(e){return false}}
+  for(const sel of [".kmov:not(.km-out)","#kmrew","#kpodov",".kroul-ov","[id^=\"kroul\"]","#title","#kload"]){if(dqOn(sel))return false}/* r4: EVERY match (a zero-size / hidden one first in the page no longer hides a real one behind it — same rule as dqActEl r3) */return true}catch(e){return false}}
 function dqBring(){try{if(dqRoomWait()){DQ.stat.room=(DQ.stat.room||0)+1;tab="act";render();return true}
   if(dqMgStale()){DQ.stat.mgStale=(DQ.stat.mgStale||0)+1;const k=S.mg&&S.mg.k;try{resumeMG()}catch(e){console.error("dayq mg",e)}try{const ov=document.getElementById("ov");if(S.mg&&ov&&dqHidden(ov)){console.warn("dayq: stale mini-game record cleared",k);S.mg=null}}catch(e){}render();return true}
   const M=document.getElementById("modal");if(dqUi()&&Q.length&&M&&dqHidden(M)&&dqFreeScreen()){showModal();return true}}catch(e){console.error("dayq bring",e)}return false}
