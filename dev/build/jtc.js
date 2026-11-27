@@ -47,7 +47,7 @@ function thcGroups(s){try{if(!S||!s||S.dead)return[];const p=S;const isM=s===p.m
  const B=thcB(),k=isM?"m:"+s.name:s.sid,cur=thcOf(p);const ka=`data-thcp="${k}"`;
  if(cur===s)return [["Thân cận",[pbtn(`${ka} data-thcon="0"`,"Thôi làm cung nữ thân cận",`nàng: thiện cảm ${balSg(spSee("rel",B.drop.loy))} · cung nữ khác: thiện cảm ${balSg(spSee("rel",B.drop.calm))}`,"")]]];
  const why=thcWhyNot(p,s);
- return [["Thân cận",[pbtn(`${ka} data-thcon="1"`,"Chọn làm cung nữ thân cận",`Bạc ${balSg(-B.pick.bac)} · nàng: thiện cảm ${balSg(spSee("rel",B.pick.loy))} · cung nữ khác ghen: thiện cảm ${balSg(spSee("rel",-B.pick.envy))}${cur?` · thay ${cur.name}`:""}`,why)]]]}catch(e){return[]}}
+ return [["Thân cận",[pbtn(`${ka} data-thcon="1"`,"Chọn làm cung nữ thân cận",`tốn: Bạc ${balSg(-B.pick.bac)} · thành: <span class="g">nàng thành cung nữ thân cận của ngươi</span> · nàng: thiện cảm ${balSg(spSee("rel",B.pick.loy))} · cung nữ khác ghen: thiện cảm ${balSg(spSee("rel",-B.pick.envy))}${cur?` · thay ${cur.name}`:""}`,why)]]]}catch(e){return[]}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button[data-thcp]");if(!b||b.disabled)return;const k0=b.dataset.thcp;const k=/^m:/.test(k0)?k0:+k0;
  thcPick(k,b.dataset.thcon==="1"?1:0)});
 /* NPC masters (every living consort, Hoàng hậu, Thái hậu): once a month by their own reasons — the most loyal trusted maid at npc.p odds when none;

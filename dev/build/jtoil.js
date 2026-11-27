@@ -264,7 +264,7 @@ if(typeof leAttire==="function"){const la0=leAttire;
     return o})}
   /* a consort met in person: her nết decides */
   if(p.kind==="rival"&&p.ref){const v=p.ref,e=toilRival(v,false);if(!e)return A;
-   return A.map(a=>{if(!a)return a;const o=Object.assign({},a,{risk:[a.risk,e.txt].filter(Boolean).join(" · ")});const r0=o.run,g0=o.go,f0=o.fail;
+   return A.map(a=>{if(!a)return a;const o=Object.assign({},a,{kem:[a.kem,e.txt].filter(Boolean).join(", ")});/* ACT-MOVE-6 law 3: how she takes your look happens whether the deed works or not → «kèm:», never the deed's Bại (it split the card into Thành / Bại and left «Thành: Không được gì thêm») */const r0=o.run,g0=o.go,f0=o.fail;
     if(r0)o.run=function(){toilRival(v,true);return r0.apply(this,arguments)};else{o.go=function(){toilRival(v,true);return g0?g0.apply(this,arguments):undefined};o.fail=function(){toilRival(v,true);return f0?f0.apply(this,arguments):undefined}}return o})}
  }catch(e){console.error("toil talkOpts",e)}return A}})();
 function toilLook(){const rec=toilToday(S);const mk=toilMk(rec);const dr=toilDress(S,toilFOf(null));return{mk,dv:dr.v,showy:dr.style==="showy",plain:dr.style==="plain"}}
