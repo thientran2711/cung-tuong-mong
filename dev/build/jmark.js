@@ -14,7 +14,7 @@
    ITEMS: markers are owned items (S.meMarks = ranks owned; S.meMark = the one she shows, null = highest owned). Every promotion gives that rank's
    marker (shown in the rank chest of review/gift-chest — jrankset rsChest/kitReward kind "chest" — via the hook below); old saves get every rank
    up to the current one on load. Tư trang has a "Dấu ấn" tab; tapping a marker → "Dùng" switches to it (any owned one, older ones too). ===== */
-window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,big:1.05,bob:11,edge:4,/* bob = the bounce height of kmmBob (px up from rest, +3 % squash); edge = air kept under the frame's top edge (owner 18/11 ~03:5xZ: the marker's whole bounce range stays INSIDE the stage frame) */sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
+window.KIT_MEMARK=window.KIT_MEMARK||{mapBase:36,/* mapBase = the «Ta» marker's height on a map tag at scale 1 (px); the place icons (kitPlaceIcPx, jact) use the SAME number */h:.085,gap:.012,min:26,max:72,tiny:12,big:1.05,bob:11,edge:4,/* bob = the bounce height of kmmBob (px up from rest, +3 % squash); edge = air kept under the frame's top edge (owner 18/11 ~03:5xZ: the marker's whole bounce range stays INSIDE the stage frame) */sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
 /* glow gold = the Hoàng hậu title pill's token (jtitle kdh tier 8 = RCOL[7]); owner 18/11 ~06:05Z "rực giống Phượng minh thiên hạ" */
 const KMM_GOLD=(typeof RCOL!=="undefined"&&RCOL[7])||"#efbd69";
 const KMM_NAMES=["Mai ngà","Lan bạc ngọc bích","Hoa bạc ngọc lam","Búp sen ngọc","Cúc tím chim loan","Mẫu đơn hồng ngọc","Phượng vàng mây ngọc","Cánh phượng hổ phách"];
@@ -193,7 +193,7 @@ try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(
  .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","hidden"]})}catch(e){}
 (function(){const st=document.createElement("style");st.id="kmm-css";st.textContent=`
 /* KIT §41.2 kitMeMapMark(): the SAME marker (her owned rank marker, same glow + squash-bounce loop) over HER place on the Dư đồ (owner 17/11 ~12:20Z "dấu ấn ta ở đây ở trên dư đồ"); the map label shows it above the place name, in the label's own scale. */
-.kmmapmk{position:absolute;left:50%;bottom:calc(100% - 1px);height:calc(36px * var(--kmm-mapsc,1));aspect-ratio:1;transform:translateX(-50%);z-index:6;pointer-events:none;display:block;--dh:${KMM_GOLD}}
+.kmmapmk{position:absolute;left:50%;bottom:calc(100% - 1px);height:calc(${KIT_MEMARK.mapBase}px * var(--kmm-mapsc,1));aspect-ratio:1;transform:translateX(-50%);z-index:6;pointer-events:none;display:block;--dh:${KMM_GOLD}}
 .mspot .mlab:has(>.kmmapmk){position:relative;overflow:visible!important}
 .kmmapmk>img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;transform-origin:50% 100%}
 @media (prefers-reduced-motion:no-preference){.kmmapmk.kmmove>img{animation:kmmBob 2.6s linear infinite;will-change:transform}}

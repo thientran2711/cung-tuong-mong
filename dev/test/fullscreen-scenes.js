@@ -34,7 +34,7 @@ const NEWDAY=[
   have:['kit/ne-dawn-xuan-port','kit/ne-dawn-xuan-land','kit/ne-night-lonely-xuan-port','kit/ne-night-lonely-xuan-land']}];
 (async()=>{const b=await chromium.launch();
  for(const z of SIZES){const tag=`${z.w}x${z.h}`;const ori=z.w>z.h?'land':'port';
-  const ctx=await b.newContext({viewport:{width:z.w,height:z.h},deviceScaleFactor:z.d,serviceWorkers:'block'});const p=await ctx.newPage();
+  const ctx=await b.newContext({viewport:{width:z.w,height:z.h},deviceScaleFactor:z.d,serviceWorkers:'block'});const p=await ctx.newPage();await require('./lib/veil').guard(p);
   await p.route(/img\/(learn-art-ky|kit\/ne-dawn-xuan|kit\/ne-night-lonely-xuan)-(port|land)\.webp/,r=>{const o=r.request().url().match(/-(port|land)\.webp/)[1];r.fulfill({body:STUB[o],contentType:'image/png'})});
   const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,300)));
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof kitLearn==='function'&&typeof kitNewDay==='function'&&typeof kitFullPicHTML==='function',null,{timeout:0});await p.waitForTimeout(2500);

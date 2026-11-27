@@ -68,7 +68,7 @@ function mmFig(){try{const f=mmFace();const s=String(f.src||"");return s.replace
 const st=document.createElement("style");st.id="kit-tut";st.textContent=`
 #ktut{position:fixed;inset:0;z-index:9300;pointer-events:none}
 #ktut[hidden]{display:none!important}
-#ktut .ktut-dim{position:fixed;inset:0;background:rgba(30,18,10,.58)}
+#ktut .ktut-dim{position:fixed;inset:0;background:var(--kveil,rgba(30,18,10,.58))}
 #ktut .ktut-hole{position:fixed;left:0;top:0;width:0;height:0;border-radius:10px;
  box-shadow:0 0 0 3px #f0d070,0 0 16px 5px #ffd66e99,0 0 0 4000px rgba(30,18,10,.58)}
 #ktut.ktut-mv .ktut-hole{transition:left .28s ease,top .28s ease,width .28s ease,height .28s ease}
