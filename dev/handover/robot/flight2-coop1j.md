@@ -12,7 +12,8 @@ Branch: review/flight2-coop (harness/test files + this folder only; game code = 
 ### Room a — RCT6, seed 7101, 15:51–15:56Z — STOPPED (not a co-op test)
 - guest-k1 «Nhan Kiều Ân» (Tú nữ, Sắc 86) ended at Điện tuyển, buổi 1: «Ban hoa — Bị ban hoa, xuất cung», age 18 (game over() verdict, no exit pick, 0 dead buttons) = game-imposed ending, VALID life.
 - The guest then took kiếp 2…6 IN THE ROOM («Trở lại phòng» → «Kiếp thứ hai/ba…»): the same fixed thân phận (j52 «Thân phận này đã định sẵn»), same stats, same picks → «Ban hoa» at buổi 1 every time (6×). Host meanwhile at #coopfz «Đợi hảo hữu trở lại — Hảo hữu đang vắng» between the guest's lives. Room can never reach a week end → stopped, new seed. Not a game hang (the guest seat always had a way on).
-- Note for MAIN (balance, not a bug claim): both fresh rooms lost a seat to «Ban hoa» at the very first Điện tuyển (room a guest, room b host).
+- «Ban hoa» at the first Điện tuyển (room a guest, room b host) = KNOWN live bug «Ban hoa b1» per F ROOT #5 16:08Z (fix Foreman D review/live-bugs-2711-rv b5639104, LAND READY, not live) — logged, not hunted.
+- F ROOT #5 16:08Z caution: harness base d1d1541f under BIG #21 FAIL (F1 lift PASS rows not proof; F2 plaque «mine» bugs = harness-suspect). Hang judgement uses real screen state of both seats only.
 ### Room b — QWWC, seed 7102, from 15:56Z — RUNNING
 - host-k1 «Ban hoa» at Điện tuyển, buổi 1, age 19 (game verdict; bugs: 1 two-tap «Trò chuyện với Quách Lạc Anh» nothing lifted; 1 coop rejoin) → host-k2 in the same room, past buổi 2 by 16:07Z. guest-k1 alive.
 
