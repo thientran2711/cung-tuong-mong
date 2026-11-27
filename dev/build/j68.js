@@ -145,7 +145,7 @@ function bk6(){return wk()*B4N+(S.buoi||0)}
 let EVHOLD=[],EVLAST=null;lifeStore("EVHOLD held events",()=>{EVHOLD=[];EVLAST=null});/* was reset by start() only: a slot load released the OLD life's held events into the loaded one */
 function evDropInfo(m){if(!m.opts&&m.h){try{log(evTxt(m).slice(0,200))}catch(e){}}}
 /* dry=1 (D13 jspread, during a buổi change): hold / drop the optional cards exactly as at a real show, but mark nothing as shown */
-function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}
+function evGate(dry){if(!S||S.dead||window.__e68off||!Q.length||E68LD)return;const sc=evS();const b=bk6(),day=wk();if(sc.day!==day){sc.day=day;sc.dn=0}
  const now=wk();let keepOpt=Q[0]&&Q[0]===EVLAST&&evOptional(Q[0]);const hasMust=Q.some(m=>!evOptional(m)&&!m.__seen);
  for(let i=0;i<Q.length;i++){const m=Q[i];if(m===EVLAST&&i===0)continue;if(!evOptional(m))continue;
   const K=evKeys(m);const tl=sc.tpl[K.tpl],kl=sc.key[K.key];
@@ -191,4 +191,15 @@ function evSer1(m){try{const q0=Q;Q=[m];try{return (serQ()||[])[0]||null}finally
 
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{evRelease()}catch(x){console.error(x)}return r}})();
 (function(){const t0=typeof tdPop==="function"?tdPop:null;if(!t0)return;tdPop=function(){const n=Q.length;const r=t0.apply(this,arguments);if(Q.length>n)Q[Q.length-1].opt=1;return r}})();
+/* save-pid-cards (LAW 6c + LAW 11, every card kind the pacing can hold: pid «Việc khó xử» / j7 ev / e68 / generator rk / data card / notice):
+   EVLAST (the optional card the gate already let onto her screen) was page memory only. After a TRUE reload the card she was looking at came
+   back as Q[0] but the gate saw it as a NEW optional card in a buổi that had already shown one (its own showing, sc.bk) → it was held again or,
+   with the hold full, dropped (silently: a choice card has no notice text) — the on-screen dilemma vanished on reload (save-unseen-lists
+   follow-up A: «4 written, 1 rebuilt, 0 after Tiếp tục»). ONE rule: the sổ writes which card was on screen (evl = its own sổ entry); a load
+   (deser: slot «Tiếp tục», co-op seat restore, snapshot) never gates while it rebuilds, and gives the gate back that same card as already shown.
+   The cards behind it are gated as before (held for a later buổi → evh). A card answered before the save is no longer in Q: never comes back. */
+let E68LD=0;
+(function(){const s0=ser;ser=function(){const d=s0.apply(this,arguments);try{if(d&&typeof d==="object"){delete d.evl;const m=Q[0];if(m&&m===EVLAST&&evOptional(m)){const e=evSer1(m);if(e)d.evl={pid:e.pid||null,rk:e.rk||null,t:e.t||null}}}}catch(x){console.error("evl ser",x)}return d}})();
+(function(){const d0=deser;deser=function(d){E68LD=1;let r;try{r=d0.apply(this,arguments)}finally{E68LD=0}
+ try{const l=d&&d.evl,m=Q[0];if(l&&m&&(l.pid?m.pid===l.pid:l.rk?m.rk===l.rk:!m.pid&&!m.rk)&&(m.t||null)===(l.t||null)&&evOptional(m)){EVLAST=m;m.__seen=1}}catch(x){console.error("evl deser",x)}return r}})();
 (function(){const s0=start;start=function(){EVHOLD=[];EVLAST=null;return s0.apply(this,arguments)}})();
