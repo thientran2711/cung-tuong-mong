@@ -2347,3 +2347,21 @@ BAL.charge={C:{
  actW:{poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
   rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
  w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1}};
+/* SIDEQ-TRIM (owner OD 26/11 ~19:15Z «phụ tuyến nhiều quá … phẩm bậc nó phải tương ứng với nhau … ngắn gọn … không xuyên suốt cả game»):
+   the ONE table of who may bring her a Việc nhờ / Phụ tuyến, read by jsideq.js for EVERY offer site (random tick, follow-ups, NPC-road help hồi,
+   Tâm nguyện lines, meetings on the map, NPC visits, exam errors, debts collected, her own «Hỏi han»).
+   band = her rank index (j1 RANKS) → band 0 «≤ Quý nhân» · 1 «Tần, Phi» · 2 «Quý phi, Hoàng quý phi, Hoàng hậu»; as she rises the pool moves up.
+   who[kind] = [lowest band, highest band] at which that kind of person may ask her ("man:<role>" before "man"); a kind not listed asks at every band.
+     own maid / own staff / own family / own child / the Emperor: every band (her own people). Another house's cung nữ or thái giám (rsv): band 0 only.
+     Court eunuchs (Tổng quản, Kính sự phòng), thái y, painters, musicians, guards, a woman in lãnh cung: bands 0–1.
+     Hoàng hậu, Thái hậu, a prince / princess not hers, a foreign envoy: bands 1–2. Ministers (off: Tể tướng, Thượng thư…): band 2 only, never a Quý nhân.
+   rvDn / rvUp = a consort asks her only when her rank is at most rvDn below / rvUp above her own (nobody far below asks a Hoàng hậu).
+   know = the net threshold a consort (or the mistress of a servant who asks, or a fallen woman) must feel for her: only people who know her ask.
+   knowSt = the j61 reveal stage she must have of any asker (2 = she knows the name; 0 = «Người lạ»): a stranger never asks. offKnow = a minister's regard for her (trS().H[c].af) needed to ask. open = most open quests at once per band (2 at every band: MAIN 162 LOOK «2/2 max, never /3»).
+   mo = new asks a month; gapW = tuần between two new asks from anyone (her own «Hỏi han» is exempt); dlMax = longest deadline in tuần (a short
+   errand done within about a tuần; never under its own waits + 1); stepMax = most steps; lateR = the asker's small regard loss when she accepted
+   and never began before the deadline (the asker took it to someone else). */
+BAL.sideq={band:[0,0,0,1,1,2,2,2],
+ who:{maid:[0,2],sv:[0,2],kid:[0,2],fam:[0,2],emp:[0,2],rsv:[0,0],eun:[0,1],ksp:[0,1],doc:[0,1],fallen:[0,1],ly:[0,1],
+  hh:[1,2],th:[1,2],ak:[1,2],off:[2,2],"man:sứ thần":[1,2],man:[0,1]},
+ rvDn:2,rvUp:2,know:"quen",knowSt:2,offKnow:0,open:[2,2,2],mo:2,gapW:2,dlMax:2,stepMax:3,lateR:-2};

@@ -95,7 +95,7 @@ function q72Odds(b,sk,X){return odA(S,b+q72Sk(sk,X))}
 /* ---------- a live quest ---------- */
 function q72X(x){const T=T72I[x.tid];if(!T)return null;const A=q72A(x.rk,x.ri);if(!A)return null;let B=null;if(x.bk){B=q72A(x.bk,x.bi);if(!B)return null}return{T,A,B,q:x,p:x.p||{}}}
 function q72Txt(t,X){if(typeof t==="function"){try{t=t(X)}catch(e){t=""}}const sea=SEASON[S.month-1];
- return String(t||"").replace(/\{A\}/g,X.A?X.A.n:"").replace(/\{B\}/g,X.B?X.B.n:"").replace(/\{M\}/g,S.maid?S.maid.name:"cung nữ").replace(/\{S\}/g,sea.toLowerCase()).replace(/\{E\}/g,"Hoàng thượng").replace(/\{Nc\}/g,"{Goi}").replace(/\{N\}/g,"{goi}").replace(/\{(?:[Gg]oi|[Xx]ung)\}/g,m=>{/* palace voice: the one address core (jvoice) — the requester A speaks to her */const sp=kSpk(X.A)||{srv:"f"};return kSay(sp,S,m)})}
+ return String(t||"").replace(/\{A\}/g,X.A?(X.A.k==="fam"?q72Short(X.A):X.A.n):"").replace(/\{B\}/g,X.B?X.B.n:"").replace(/\{M\}/g,S.maid?S.maid.name:"cung nữ").replace(/\{S\}/g,sea.toLowerCase()).replace(/\{E\}/g,"Hoàng thượng").replace(/\{Nc\}/g,"{Goi}").replace(/\{N\}/g,"{goi}").replace(/\{(?:[Gg]oi|[Xx]ung)\}/g,m=>{/* palace voice: the one address core (jvoice) — the requester A speaks to her */const sp=kSpk(X.A)||{srv:"f"};return kSay(sp,S,m)})}
 function q72StepPl(st,X){if(st&&st.plf){try{return st.plf(X)}catch(e){return null}}if(!st||!st.pl)return null;if(st.pl==="A")return q72Home(X.A);if(st.pl==="B")return q72Home(X.B);return st.pl}
 function q72Title(X){return q72Txt(X.T.t,X)}
 /* tokens of an outcome (for offer lines and the list) */
@@ -146,13 +146,13 @@ function q72Offer(x,how){const q=q72();q.mo[S.turn]=(q.mo[S.turn]||0)+1;q.n.off+
  {const X=q72X(x);Q.push({t:"Việc nhờ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,qtags:X?[KIND72[X.T.kind],`Hạn ${X.T.dl||6} tuần`]:null})}return true}
 PEND.q72o=pp=>{try{const x=pp.x;const X=q72X(x);if(!X)return null;const T=X.T;const ok=q72OutTok(q72OkDef(X),X,"ok"),no=q72OutTok(q72NoDef(X),X,"no"),bad=T.bad?q72OutTok(T.bad,X,"bad"):[];
   const owe=q72Debt(X.A)<0;const dec=Math.min(-2,-(T.dec||3)*(owe?2:1));const est=q72Est(X);
-  const pre=pp.how==="ask"?`<p class="past">Ngươi hỏi han, ${X.A.n} ngỏ lời.</p>`:pp.how==="fu"?`<p class="past">Lại là ${X.A.n}: chuyện lần trước còn tiếp.</p>`:"";
+  const pre=pp.how==="ask"?`<p class="past">Ngươi hỏi han, ${q72Short(X.A)} ngỏ lời.</p>`:pp.how==="fu"?`<p class="past">Lại là ${q72Short(X.A)}: chuyện lần trước còn tiếp.</p>`:"";
   const tr=T.tr?`<p class="past">${q72Txt(T.tr,X)}</p>`:"";
   const h=`${pre}<p>${q72Lead(X,q72Txt(T.h,X))}</p>${tr}${q72InfoRows(X)}${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
   const accX=`${est>=95?"":word(est)+" · "}thành: ${ok.join(", ")||"êm chuyện"} · hỏng: ${no.join(", ")}${bad.length?` · kèm: nếu bại lộ: ${bad.join(", ")}`:""}`;
-  const decX=`giữ sức, không mắc thêm ân tình · tốn: ${[q72Tok(X.A,dec)||R72(`${X.A.n} phật ý`)].concat(owe?[R72("nợ ân vẫn còn")]:[]).join(", ")}`;
-  const o=[{n:"Nhận lời",fx:{},x:accX,go:()=>{const q=q72();if(q.a.length>=Q72CFG.max){log("Ngươi đang bận quá nhiều việc, đành khất.");return}x.t0=wk();x.dl=wk()+(T.dl||6);q.a.push(x);q.n.acc++;if(T.acc)try{T.acc(X)}catch(e){}q72Enter(x,X);log(`Ngươi nhận lời ${X.A.n}: ${q72Title(X)}. Hạn ${T.dl||6} tuần. ${T.acc?q72Txt(T.accX||"",X):""}`)}},
-   {n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:decX,go:()=>{const q=q72();q.n.dec++;q72Rel(X.A,dec);log(`Ngươi khéo khước từ ${X.A.n} (${q72Title(X)}). ${plain(q72Tok(X.A,dec))}.`)}}];
+  const decL=[q72Tok(X.A,dec)].filter(Boolean).concat(owe?[R72("nợ ân vẫn còn")]:[]);const decX=`giữ sức, không mắc thêm ân tình${decL.length?` · tốn: ${decL.join(", ")}`:""}`;/* sideq-trim: the loss is the asker's real regard (q72Rel); family-by-letter and princes have none → no invented «… phật ý» */
+  const o=[{n:"Nhận lời",fx:{},x:accX,go:()=>{const q=q72();if(q.a.length>=Q72CFG.max){log("Ngươi đang bận quá nhiều việc, đành khất.");return}x.t0=wk();x.dl=wk()+(T.dl||6);q.a.push(x);q.n.acc++;if(T.acc)try{T.acc(X)}catch(e){}q72Enter(x,X);log(`Ngươi nhận lời ${q72Short(X.A)}: ${q72Title(X)}. Hạn ${T.dl||6} tuần. ${T.acc?q72Txt(T.accX||"",X):""}`)}},
+   {n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:decX,go:()=>{const q=q72();q.n.dec++;q72Rel(X.A,dec);log(`Ngươi khéo khước từ ${q72Short(X.A)} (${q72Title(X)}). ${q72Tok(X.A,dec)?plain(q72Tok(X.A,dec))+".":""}`)}}];
   return{who:X.A.f,t:h,o}}catch(e){console.error(e);return null}};
 function q72Enter(x,X){const st=X.T.s[x.st];if(st&&st.w)x.wt=wk()+st.w}
 
@@ -169,12 +169,12 @@ function q72End(x,res,X,late){const q=q72();const i=q.a.indexOf(x);if(i>=0)q.a.s
  if(res==="ok"&&o.ch&&T72I[o.ch])q.ch.push({tid:o.ch,at:wk()+4+R(5),rk:x.rk,ri:x.ri,bk:x.bk,bi:x.bi,p:x.p});
  q.n[res]=(q.n[res]||0)+1;
  const tok=q72OutTok(o,X,res==="ok"?"ok":"no").map(plain).join(", ");
- const head=res==="ok"?`Xong việc ${X.A.n} nhờ (${q72Title(X)})`:res==="bad"?`<span class="r">Bại lộ:</span> việc ${X.A.n} nhờ (${q72Title(X)})`:`<span class="r">${late?"Lỡ hẹn":"Không thành"}:</span> việc ${X.A.n} nhờ (${q72Title(X)})`;
+ const head=res==="ok"?`Xong việc ${q72Short(X.A)} nhờ (${q72Title(X)})`:res==="bad"?`<span class="r">Bại lộ:</span> việc ${q72Short(X.A)} nhờ (${q72Title(X)})`:`<span class="r">${late?"Lỡ hẹn":"Không thành"}:</span> việc ${q72Short(X.A)} nhờ (${q72Title(X)})`;
  let end=q72Txt(res==="ok"?T.okT:res==="bad"?T.badT:T.noT,X);
  if(!end&&res!=="bad"){const l=q72Tone(X,res==="ok"?"askOk":"askNo",res==="ok"?"q72:ok":"q72:no");if(l)end=`${X.A.n} ${l}${/[.”]$/.test(l)?"":"."}`}
  log(`${head}. ${end?end+" ":""}${tok?tok+".":""} ${ev}`.trim());
  q.h.unshift({tid:x.tid,res,w:wk(),t:q72Title(X),n:X.A.n,pn:q72PgN(X.A),f:X.A.f,lg:x.log.slice(-4),end,tok});if(q.h.length>12)q.h.length=12;
- if(late&&!window.__bot&&!quiet)Q.push({t:"Lỡ hẹn",btn:"Đã hiểu",who:X.A.f,h:`<p>Đã quá hạn việc ${X.A.n} nhờ: <b>${q72Title(X)}</b>.</p>${end?`<p>${end}</p>`:""}<p>${q72OutTok(o,X,"no").join(" · ")||"Không mất gì."}</p>`});
+ if(late&&!window.__bot&&!quiet)Q.push({t:"Lỡ hẹn",btn:"Đã hiểu",who:X.A.f,h:`<p>Đã quá hạn việc ${q72Short(X.A)} nhờ: <b>${q72Title(X)}</b>.</p>${end?`<p>${end}</p>`:""}<p>${q72OutTok(o,X,"no").join(" · ")||"Không mất gì."}</p>`});
  return ev}
 /* one step act from the list: do-step (place, khắc, odds) or a branch option */
 function q72Why(x,X,st,o){if(S.dead)return"đã hết kiếp";if(Q.length)return"đang có việc chờ";if(S.out)return"đang ở lãnh cung";
