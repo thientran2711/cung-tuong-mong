@@ -279,3 +279,75 @@ The day record's maid row «mm:<owner>» is a ROLE (the next maid gets the same 
 RV READY: review/real-proof-2 ae2e0a07 (base a2902d43 = real-proof on LIVE a22cf45d; the lander restacks onto LIVE 17f23656, only built files should conflict).
 ### ROLLOVER → PUNISH-TIER-7: JOB 2 review/split-merge-fix NOT STARTED
 Build list and rules unchanged: «PUNISH-TIER-4 … JOB 2» + «PUNISH-TIER-5 … JOB 2» above (A1–A6, B1–B3, P1–P4, P6, P7, j0.js:4; merges only; OD 27/11 ~00:46Z / ~01:00Z / ~01:12Z). Build ON TOP of review/real-proof-2 ae2e0a07. Env: worktrees /home/user/wt/rp6 (review/real-proof-2), /home/user/wt/ho6 (handover, local pt6-ho) — delete when done. MAIN now = MAIN 171 session_01Rc5AsLtirkQB1N5Nb16Wct.
+
+## PUNISH-TIER-7 (MAIN CHÍNH 171, session_01Rc5AsHuiZGX8Ag8NH7CPTW) — review/split-merge-fix (from review/real-proof-2 ae2e0a07)
+START_CTX ≈ 5 % (get_session reads 0; own estimate). PRIORITY #1 CHECK: OD 27/11 ~00:09Z (arson → mh) / ~00:13Z (merges only, no new layer) / ~00:46Z / ~00:50Z (Nhẹ·Vừa·Nặng) / ~01:00Z / ~01:12Z, law 2 | main 2a80712b (no chTo / one Tố giác / tcw) | review/real-proof-2 ae2e0a07 (built on top, unchanged at RV time) | git grep main + review/*: no «chTo», «BAL.tcw», «j95owe», door chT | claims PUNISH-TIER-6 → PUNISH-TIER-7.
+Branch review/split-merge-fix: 2933e560 (A1 A2 B3 P2 A3 A4 A6 P3 P7) · 46a34673 is the death notice; B1 B2 + scan in the 2nd commit · e71a493b (tests). Only merges / removals / one-source reads; no new step, button, state or screen.
+### Built (her and NPCs the same, law 1)
+- A1 j95 bribe card «Lời nhờ cậy» removed (v.j95bribe, j95bribeTake, BAL.eff.j95.j95bribeTake).
+- A2 catch card: ONE «Lặng im, đổi lấy ân tình» («Giả như không thấy» gone); z.wit tag gone (the rival's oán carries the threat).
+- B3 catch card: ONE «Tố giác» (was «lên Hoàng hậu» / «Xử tội theo luật cung» / «lên Hoàng thượng»): listener j95to = she as Hoàng hậu → luật cung, a Hoàng hậu above → Hoàng hậu, else Hoàng thượng; NOW gated on chReady and locked with chNeedTxt (pieces AND witnesses) — before it had no gate. Card = 3 roads.
+- P2 z.owe (write-only) → j72 nợ ân ledger (j95owe → q72DebtAdd; NPC who kept quiet for her → she owes her −1).
+- A3 jroute «Bị nắm thóp»: one card, one payment, no monthly repeat (since / paid / k loop gone; an old save's running one closes at the month tick).
+- A4 j42 maid blackmail: «Đút bạc bịt miệng» removed (obey / mặc kệ; BAL…cnv.black.pay gone). A6 j4 cn2: «Đút bạc bịt miệng» half-road removed (secret 2 kept / 1 not).
+- B1 ONE «Tố giác» = ACT accuse routed by chTo (jcharge): a Hoàng hậu above the accused → the Trình Hoàng hậu road (her odds, jrcv verdict card), else Hoàng thượng (accuse, phản tọa). Evidence panel: one accusation row (+ «tâu Hoàng hậu / Hoàng thượng» in Tốn), she as Hoàng hậu = Xử tội; «Dùng chứng cứ» group = accuse · uyhiep · banphe; door P11 = accuse · xx · vp; NPC menus (j30 BANDS/push list, j43 PUSHK, j78 mindMenu) no longer offer tocao / expose / trinhth / trinhhh. AOUT.accuse tells the true road. The old ACT defs stay internal (old saves' NPC plans keep running).
+- B2 «Trả chứng cứ lấy lòng» (tieuhuy) folded away: panel, door P12, NPC jagharm road. Uy hiếp / Bán kept.
+- P3 arson phonghoa → mh (nặng). jdoor P7–P10: the typed `tiers` maps are gone; tiers READ BAL.charge (deed → C[c].tier) via DOOR.chTier (talk members mapped to their deed; xinhh = no crime keeps «nặng», tiers0).
+  Tier changes: block · blockf · lygian vừa→nhẹ · frame · plant · giahoa · «Vu oan» nặng→vừa · musk vừa→nặng · laydo · laydol · petsteal · thaopet vừa→nhẹ · phonghoa nặng (now also by charge). Others unchanged.
+- P7 BAL.wit → BAL.tcw (13 reads j40/j43/j51/j70 + dev/measure/one-core-dup2-move.py).
+### Already done before me (no change): P6 jtsb already ONE «Báo lên <judge>» (judge picked); P8 j0.js:1–4 comment already the live ladder (old words = parse-only).
+### NOT built — MAIN's call
+- P1 (S.hh / p.hh ↔ aff(queen, x) one store): touches ~every «hh» story fx and co-op (q.rel is world state, S.hh viewer state: a guest's apply would write the world); and the switch overwrites each save's hh with aff (origin hh −15 etc. jump). Needs a ruling on which value wins + a co-op plan; not a split the player sees.
+- P4 (evc only, total = sum on read): internal only, touches evG everywhere + co-op viewer rows (t.ev); no player change → left.
+### FAMILY SCAN (law 11) dev/test/split-merge-scan.py ae2e0a07 → HEAD
+| check | ae2e0a07 | HEAD |
+|---|---|---|
+| A1 j95 bribe card «Lời nhờ cậy» (buy the witness) | 1 | 0 |
+| A2 j95 silent roads on the catch card | 2 | 1 |
+| A2 j95 z.wit witness tag writes | 1 | 0 |
+| B3 j95 catch card accuse buttons (one per listener) | 3 | 1 |
+| B3 j95 accuse button gated on chReady | 0 | 1 |
+| j95 catch card options total | 6 | 3 |
+| P2 write-only z.owe ledger writes | 5 | 0 |
+| A3 jroute monthly blackmail repeat (paid / since / k counter) | 7 | 0 |
+| A4 j42 «Đút bạc bịt miệng» on the maid blackmail card | 1 | 0 |
+| A6 j4 «Đút bạc bịt miệng» half road | 1 | 0 |
+| B1 evidence panel act code paths (evidenceActs; HEAD shows ONE accusation by listener + 2 trades) | 9 | 5 |
+| B1 «Dùng chứng cứ» card group keys | 8 | 3 |
+| B1 door P11 «Tố cáo» members | 7 | 3 |
+| B2 door P12 «Mặc cả chứng cứ» members | 3 | 2 |
+| B1 NPC menus offering tocao / expose / trinhth / trinhhh | 11 | 0 |
+| B2 NPC «Trả chứng cứ lấy lòng» road (jagharm) | 1 | 0 |
+| P6 jtsb «Báo lên …» buttons on one card | 1 | 1 |
+| P3 jdoor typed crime tiers (P7–P10 «a:<act>»:tier pairs) | 31 | 1 |
+| P3 arson (phonghoa) charge = Mưu hại (mh) | 0 | 1 |
+| P7 reads of BAL.wit (Tâm cơ marks under a «witness» name) | 23 | 0 |
+### Tests (http 127.0.0.1, Fold 755x1000 + iPad 1180x820)
+| test | Fold | iPad |
+|---|---|---|
+| split-merge (NEW, 21 checks incl. death notice) | ALL PASS | ALL PASS |
+| punish-wit · punish-tier (+B1 chTo check; phản tọa checks run with no Hoàng hậu) · punish-reason · charge-followups · charge-trinh-punish (person card = evidence card on the one road) · seize-ledger · dup-piece-scan | ALL PASS | ALL PASS |
+| charge-smoke · charge-taps | 0 FAIL, 0 page errors | 0 FAIL, 0 page errors |
+| cover | logic ALL PASS; LOOK «witness door card shows the three tiers at once» FAIL — SAME on base ae2e0a07 (pre-existing, stills branch only) | same |
+| act-merge-j2 | PASS T1–T6 | — |
+| cold-faction | ALL PASS 20 | — |
+| one-core-guard | PASS (fails 0) | |
+| quickcheck e71a493b | QUICKCHECK PASS part (open 2428 ms · old LIVE save loads + plays a buổi · TIME-SPILL PASS · perf new/live render 239/259, tab 600/500, buổi 1565/1600 ms, tasks>200 25/32); core gates FAIL = the known pre-existing ones only: G1 one-core-text-rule jph.js:169, npc-purpose j8.js:89, button-crawl «Ô lưu · Lui» (files untouched) | |
+| coop-e2e 46a34673 (LIVE Worker) | 143/143 passed | |
+RV READY: review/split-merge-fix 46a34673 (base review/real-proof-2 ae2e0a07, unchanged; lands after it). Env cleaned: worktrees /home/user/wt/smf, /home/user/wt/ho7 removed after push.
+Context at end ≈ 30 % (START ≈ 5 %): no successor needed unless MAIN sends a new job.
+
+### OWNER ITEM (MAIN 171, OD 27/11 ~04:08Z) — death notice, built FIRST-priority in 46a34673
+- jcover covWitDo «Thủ tiêu nhân chứng» success on a person tied to someone (maid «mu:», servant, housemate consort): covOwner finds the one she belongs to; the wkill deed is written ON that house (t = mistress), so its real pieces / witnesses are hers to find and the existing «Tố giác» works (law 6a). covTell: HER → ONE kit notice «Tin dữ» at once (who, role, how found from what the world shows — 4 sign lines, never the killer's name; «Không ai biết kẻ nào ra tay.»; the 00:15Z exposure line only when a real trace or witness exists; «Nội vụ phủ đưa <tên> đến hầu thay.») + the same line in Sổ ghi. NPC mistress: the same deed on her house + her new maid (law 1), no card to the player. No new button / screen.
+- LOOK (looked at, both devices): https://ctm-img.victoria-tntt.workers.dev/img/_review/split-merge-fix/ tin-du-755x1000 · tin-du-1180x820 (fits, no scroll). Verdict giver wipes: python3 dev/site/cdn_sync.py --wipe-review split-merge-fix
+FAMILY (law 11) — every road where a person tied to her dies:
+| road | notice before | after |
+|---|---|---|
+| jcover Thủ tiêu her maid (mu:) | none (silently replaced) | «Tin dữ» + Sổ ghi + new maid; deed on her house |
+| jcover Thủ tiêu her servant | none | «Tin dữ» + Sổ ghi; deed on her house |
+| jcover Thủ tiêu a housemate consort | killer's line only | «Tin dữ» to her (sameHouse) |
+| jcover Thủ tiêu an NPC's maid / servant | none | deed on the NPC mistress's house + new maid (law 1) |
+| jmort natural death of her maid | «Cung nữ thân cận … lâm bệnh qua đời. Nội vụ phủ đưa … đến hầu thay.» | unchanged (already) |
+| jmort her staff / housemate / court / Thái hậu / child (kidDie) / kin (kc3Die) | own death line each | unchanged (already) |
+| j42 maid beaten to death / jagstaff betrayer killed | ordered by the mistress herself (she knows; jagstaff asSee line) | unchanged |
+| jagstaff Tân Giả khố / wed / age / expel | not deaths | — |
