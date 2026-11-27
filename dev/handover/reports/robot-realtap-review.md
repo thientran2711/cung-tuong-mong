@@ -449,3 +449,49 @@ realtap true, exitPick none, build 5a7a9c4004c1 in all; 0 «Chuyển kiếp» ta
 ## HANDOVER — BIG REVIEWER #16, 27/11 ~04:40Z
 - Verdict: PASS robot-realtap f65d019b (one verdict 39c6e505..f65d019b). Ready for the coordinator (test files only).
 - Recipe reuse: /home/user/wt/rr16-out/{run.sh,q.sh} (lines «name|wt|env|args|tmo», 2 at a time), probe harness /home/user/wt/rr16-tiph (FOPROBE), LIVE /home/user/wt/rr16-live :8895.
+
+## REVIEW robot-realtap-lc27 38cf2208..605c596a — BIG #17 (for F ROOT #3 session_01UV1SzkcxS44fsNiWVm2QoE), 27/11 ~05:45Z
+PRIORITY #1 CHECK: OD robot real-tap rules 25/11 (dev/handover/briefs/F-robot-2511.md) | review/robot-realtap f65d019b PASS (BIG #16, above) | MAIN 171 orders 03:46Z/03:52Z: remerge f65d019b onto review/lc27-em 38cf2208 → review/robot-realtap-lc27 | FIXER #17 READY 605c596a (merge 40db39e4 + proof 605c596a; PROGRESS «HARNESS FIXER #17») | claims: BIG REVIEWER #17 = this job (CLAIMS 8ccf3ae7).
+START_CTX ~8 %, depth 3.
+### VERDICT: PASS review/robot-realtap-lc27 605c596a (one verdict for 38cf2208..605c596a; test-harness files only)
+Tip vs lc27-em 38cf2208: 13 files, all dev/test/*, dev/measure/renderer-mem-lib.js, dev/PROGRESS_robot-realtap.md; 0 game / site / root files (the served build is lc27-em's own, b 3c8aded052bf). Worktrees /home/user/wt/rr17-{tip (605c596a), ctl (38cf2208)}; lc27 build served by the tip's rt-serve-build.sh 38cf2208 on 127.0.0.1:8917; RT_PIN=0 RT_NOSHOT=1; logs /home/user/wt/rr17-out/<run>/log.txt (not in git). ≤2 browsers.
+### (1) MERGE CORRECTNESS (merge base 69e41729; line-set check: every line a side added vs the base must be in the tip)
+| file | lc27 side (69e41729..38cf2208) | realtap side (69e41729..f65d019b) | tip 605c596a |
+|---|---|---|---|
+| dev/measure/renderer-mem-lib.js | +116 (RT_MOB, RT_PROF, initLight, hang-frame locals) | +87 | = 38cf2208 byte for byte (0 lc27 lines lost). The 3 realtap lines not in the tip are the OLD forms of init() / the RT_LIGHT sample line / the watch() frame line; each LC27 line is the same text extended (init adds MOB/PROF/initLight before the unchanged REG+PKT+MIN body; the LIGHT line adds the RT_MOB __moHot dump after the unchanged row; the watch line adds evaluateOnCallFrame). Non-LIGHT path identical; exports init/sample unchanged → realtap copy is a strict subset, nothing realtap needed is dropped. |
+| dev/test/robot-rt.js | +4/−2 (MEMH require, MEMH.sample per buổi, RT_DSF, MEMH.init) | +775/−85 | = f65d019b byte for byte. Each lc27 line present: L24 MEMH require, L371 `if (MEMH) MEMH.sample(p, R)` inside the R.buoi++ branch (the realtap form of the same line, also carries the clock/SAVE REWIND code), L1023 deviceScaleFactor `+(process.env.RT_DSF \|\| 1)`, L1025 `if (MEMH) await MEMH.init(ctx)`. RT_MOB/RT_PROF/initLight live in renderer-mem-lib (LC27 copy kept) and are switched by env → reach robot-rt through MEMH.init/sample. |
+| dev/test/realtap.js | +1 | +49/−6 | = f65d019b (lc27 line present) |
+| 10 other harness files (robot-lint, robot-rt-coop, rt-bare-unit, rt-board-phase-scan, rt-choice-scan, rt-label-scan, rt-membase, rt-offer, rt-optcard-spots, rt-serve-build.sh) | — | changed | = f65d019b byte for byte |
+| PROGRESS_robot-realtap.md | — | — | f65d019b + 12 lines (FIXER #17 section) |
+→ Nothing of BIG #16's PASS is lost: every file of 69e41729..f65d019b is identical in the tip except renderer-mem-lib (LC27 superset) and PROGRESS (+FIXER #17).
+### (2) STATIC
+- Lines added 38cf2208..605c596a with .click( / dispatchEvent / .focus( / keyboard. / mouse.click / touchscreen.tap: 0 JS .click() / dispatchEvent / focus / new keyboard. The pointer taps (robot-rt.js L221 bareTapOn after RT.bareCheck, L355 info layer close at its own rect, L615 board point checked in the same page call, L734 stall point tap only if elementFromPoint is the same enabled option; rt-bare-unit / rt-membase / rt-optcard-spots test fixtures) are the real-tap mechanism itself, each at a hit-checked point, and all are identical to f65d019b (BIG #15/#16 PASS). L630 «keyboard» = a comment («taps only, no keyboard»). robot-rt.js L753 keyboard.type (name field after a real tap) is already in 38cf2208.
+- node --check all rt / realtap / renderer-mem files + bash -n rt-serve-build.sh: clean · robot-lint «LINT OK 0 finding(s)» · rt-bare-unit «RT-BARE-UNIT OK 20/20».
+### (3) FIXER #17 CLAIMS — my own runs (lc27 build 3c8aded052bf)
+| claim | tip 605c596a | control 38cf2208 (lc27's own harness) |
+|---|---|---|
+| rt-serve-build self-check | «self-check OK: 137 local paths all 200 (incl. pixi-8.5.2.min.js)» fresh dir | — |
+| RT_TEST_EXAM=1 ROUNDS=theu,theu Fold s43 | «BOARD theu 32 moves over (… #kg82ok Môn kế tiếp) 10/10 (41 s)» → «… Xem kết quả» 9/10 (31 s), exam done raws [10, 9], boardOver 2, DEAD 0, bugs 2 = the known game-side «KG82.phase stays play» (N4 of BIG #16), 243 s | the LIVE/lc27 harness has no RT_TEST_EXAM / BOARDHANG / mgOver at all (only RT_TEST_CRASH/FREEZE, 363 lines): exam never opened, life just played 6 buổi → the fixtures need the tip |
+| RT_TEST_BOARDHANG=1 RT_TEST_MGGIVEUP=30000 iPad s61 | 2 passes (36/37 s) → «BUG stuck frozen board: 2 board give-ups …» → board gone 90 s, stuck 1, boardStuck 1, slice to buổi 6 | (no fixture in the control) |
+| RT_MEM full Fold s43 slice 6 | LIFE DONE, mem.jsonl 6 rows (rss + img/bg catalogue) + mem.min.jsonl, dead 0, bugs 0 | — |
+| RT_MEM+LIGHT+MOB+PROF iPad s61 slice 6 | LIFE DONE buổi 6, 6 light rows {at,buoi,peak,rss} + min rows + mem.prof.txt (kaRun/kaNorm/kitOpt* counters), no mob.json (no storm), dead 0, bugs 0, 143 s | same row keys, 6 rows, prof.txt — BUT «BUG stuck life not (re)opened within 5 min on #title» (stuck 1), 466 s: the lc27 harness lost 5 min at the title on iPad; the tip did not |
+### (4) RISK SIDE
+- lc27-side tools that share dev/test/realtap.js (button-crawl.js, next-dead, q-softlock, press-keep, kit-opts-realtap …) now get the realtap version (PROBE option-card points, sideways tab-row swipe, by-design cover name, BARE_CHECK export; make/PROBE API unchanged). button-crawl --fast Fold on the lc27 build: tip «PASS 80 · FAIL 0 (dead 0) · SKIP 1 · hard restores 2 · 160 s, GATE PASS» = control «PASS 80 · FAIL 0 · SKIP 1 · hard restores 4 · 163 s» → no change to the quickcheck gate.
+- RT_LIGHT now skips REG in init (LC27 behaviour, by design: nothing runs in the page) — robot-rt's per-buổi sample still writes one row per buổi (seen above).
+### (5) LIVE SLICES (lc27 build, no RT_TEST hooks, slice=12, harness tip)
+| seed | buổi | jsClicks / DEAD / NO-EXIT / stuck | bugs |
+|---|---|---|---|
+| Fold speed s21 copy b | 12 | 0 / 0 / 0 / 0 | 0 |
+| Fold sens s43 (pf/pt_su) | 12 | 0 / 0 / 0 / 0 | 0 |
+| iPad sens s61 (pf/pt_su) | 12 | 0 / 0 / 0 / 0 | 0 |
+| Fold speed s21 copy a · s22 | «Ban hoa» b1 (natural end, age 18 / 20) | 0 / 0 / 0 / 0 | 0 |
+realtap true, exitPick none, build 3c8aded052bf in all; 0 «Chuyển kiếp» taps; boardOver none outside the exam fixture.
+### NOTES (not blocking)
+- N1: the exam-fold slice's natural boards «dan 17 moves 0/10» and «hat 164 moves 0/10» (timed boards, 2 browsers on one container) — scored, not «over», not stuck; robot-rt.js is byte-identical to the PASSed f65d019b, so not a merge effect.
+- N2: control finding — lc27-em's own harness (38cf2208) stalls 5 min at the title on iPad s61 with RT_MEM light; landing this branch replaces it.
+- N3 (game, for MAIN, carried): jexam / jmgcal / jroute still leave KG82.phase «play» on the result path (2 bugs in the exam fixture, as BIG #16 N4).
+- N4: «Ban hoa» at buổi 1 on Fold speed s21/s22 (game content, BIG #16 N2).
+
+## HANDOVER — BIG REVIEWER #17, 27/11 ~05:45Z
+- Verdict: PASS robot-realtap-lc27 605c596a (one verdict 38cf2208..605c596a). Ready for the coordinator (test files only, ancestor 38cf2208 = lc27-em).
+- Recipe reuse: /home/user/wt/rr17-out/{run1.sh,run2.sh (P=),sum.py} (lines «name|wt|env|args|tmo»), lc27 build /home/user/wt/rr17-live :8917.
