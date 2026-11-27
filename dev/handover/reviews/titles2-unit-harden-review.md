@@ -17,3 +17,9 @@ PRIORITY #1 CHECK: OD «titles2» = E-TITLES3 work | main d9ca7892 none | review
    Follow-up (one-line test fix, not blocking this PASS; Foreman E may order it or fold it into the next test touch): in titles2-ui.js add `S.rep.t0=-1e9` before `rpSync(S)` in the notice case; check the other cases of that file that earn an rp name on a fresh life.
 
 Reviewer did not push anything to main; no PR; scratch outputs in /tmp only.
+
+## RE-CHECK 6cc8a0c4 (add-on, titles2-ui.js only) — PASS
+- (a) `S.rep.t0=-1e9` before `rpSync` in the «notice» case: setup only (the seen gate, jdh3.js:133, bars a fresh life); the assertions (`chk`, «Tiếng thơm» dialog present, topmost, no overflow) are unchanged.
+- (b) `S.dhNB=null;delete S.dhPend` before `cpGive` in the «chapter notice» case: setup only. One notice per buổi is the designed gate (dhNoteGate, BAL.dh.note.per=1), so the chapter title queued in S.dhPend behind the previous notice; clearing the state gives it its own buổi. Assertion «Gỡ lời đàn hặc» present is unchanged. Not hiding a fault: the gate itself is covered by titles2-unit G1–G3 (mutant-proven above).
+- Diff 6cc8a0c4 vs cf124903: only those two lines in titles2-ui.js + report text.
+- Run (merged build, each run covers Fold 755 and iPad 1180): titles2-ui PASS 0 issues ×2 (4 kit-caption WARNs K-DH-CAPFIT, pre-existing, warnings only); titles2-unit PASS ok 84 / fail 0 ×2 (VP=755x1000 and VP=1180x820).
