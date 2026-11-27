@@ -487,3 +487,41 @@ A–H of r5/r6 unchanged. I. A non-visitor rk card whose person dies / leaves wh
 
 ### Gain vs risk
 GAIN: the stack is FF on LIVE 03a8c17c with ctp + ob-oan + renderer-mem; the knSell remake can no longer lose a follow-up or roll S.tb silently; a visitor who left the palace no longer leaves a ghost card (live = reload). RISKS: (1) the purge drops a visitor card whose person is only briefly missing from every list (e.g. a servant mid-transfer) — hiếm, nhỏ; opts-asg + probe show it, the card's maker can re-offer it. (2) knCarryGo runs a newer favour fact's follow-up (she «knows» the current Sủng, the text she bought is older) — có thể, nhỏ; the next Sủng change is offered as news again. → **Được lớn hơn** (two save-loss paths closed, every risk small and caught by a gate).
+
+## REVIEW r8 (BIG rv successor, opus, session_01N1tNP4iUdmBPnqSx74gVJM, depth 5, START_CTX ≈ 4 %) — **PASS → LAND READY review/save-fix-stack-rv21 61085ce07f3336cc52e71a14daf42a96a7456351**
+PRIORITY #1 CHECK ('save-fix-stack'): continued r7's LEFT list on rv15 273c64c3; reused every test of the branch; LIVE moved 6× during the review → merged each time (no force).
+### Branches (all FF on the LIVE of their time)
+| branch | sha | LIVE | merge |
+|---|---|---|---|
+| rv16 | 3bb55b12 | 504d2e6a (os stack) | assemble UNION (+jnsieve/jverdict), KIT_REQUESTS both |
+| rv17 | 3dcabd75 | 4cfcda61 (pace-all + stat-pace) | jts: tsLeMeCard generator kept, LIVE's lì xì «thiện cảm BAL.eff.jts.liXiAff» moved INTO it; assemble UNION (+jmend/jbalsp/jstatpace/jevc) |
+| rv18 | 35fb4542 | a22cf45d (wording-gain + firstcard-3) | jne: generator kept, LIVE's «Đáp lại» odds-word hint moved INTO it |
+| rv19 | 6e1f0c02 | fa722503 (title-bal) | sources auto-merged |
+| rv20 | 08e36be0 | 540358c4 (wording-marks) | sources auto-merged (stack does not touch j19/j63/jbal/jk2b) |
+| **rv21** | **61085ce07f3336cc52e71a14daf42a96a7456351** | **17f23656 (end-maxrank)** | j3/j42 auto-merged (record()/ending rank only, no save code); built rebuilt — LAND THIS |
+### Gates
+| gate | result |
+|---|---|
+| probe save-residue Fold s1,2 / iPad s1 (rv15) | 0 families, 0 page errors |
+| save-death-rebirth (rv15) | 6/6 |
+| notice-late-save | rv15 / rv17 / rv19 PASS |
+| opts-asg-remake | 9/9 on rv15, rv17, rv18, rv19, rv20 |
+| knsell-remake + mutLazy (C4) | PASS on rv15/17/18/19; mutLazy **FAIL** every time ✔ (S.intel / S.j95 touched) |
+| save-unseen-lists Fold+iPad | 32/32 on rv17, rv18, rv19 |
+| coop-e2e SWAP0 (rv17) | 143/143 |
+| stat-pace / pace-all (rv17) | PASS (LIVE PASS) / 32/32 |
+| wording-gain-scan / odds-word-rule (rv18) | 0 left / PASS |
+| title-bal (rv19) | PASS (LIVE PASS); title-sys / title-sys2 FAIL rows ⊆ LIVE fa722503's own FAIL rows |
+| marks-choice-scan (rv20) | 0 numbers, 0 errs |
+| kit-gloss-lower (rv15) | PASS |
+| quickcheck ALONE (rv20) | QUICKCHECK PASS core (perf new/live render 193/214, tab 546/654, buổi 1586/1768 ms); G4 90-button-crawl FAIL = pre-existing (below) |
+| scans every rv | inv-stack RAW 0 · census UNCLASSIFIED 0 · time-advance PASS 11 gates · punish/seize/charge 0 |
+### Pre-existing (A/B on LIVE, not this stack)
+1. sbr fold «day seed 1 SCREEN NOT FREE» (0 sổ≠screen): LIVE 03a8c17c same state {modal shown, Q []} 2/4 vs stack 2/4. ROOT (debug copy of the test): every NOT FREE follows the harness's forced `Q.shift()` (sameM ≥ 3) on «Hội phối đồ: báo đề» when its pick «Sai tai mắt dò bên chủ hội» is refused/deferred by a chooseM wrapper; the harness drops the card WITHOUT showModal → the modal stays on screen. TEST HARNESS fault, not a stuck card for a player (she taps «Đã hiểu»). Follow-up J (test): the harness should skip need-unmet / locked options and call showModal after a forced shift.
+2. G4 button-crawl «Ô lưu · Lui» close button: LIVE 540358c4 FAIL 2/2, stack same.
+3. look-dedupe: LIVE FAIL 7, stack FAIL 6.
+4. ob-oan-enc Fold «Nguy hiểm chung» blocks the «Làm lành» card: LIVE FAIL 2/2, stack 2/3 PASS.
+### Open follow-ups (not blocking)
+A–I of r5–r7 unchanged. J = item 1 above (harness fix).
+### Gain vs risk
+GAIN: the save-loss cure (silent ~5.2 M-char write failure, E's QuotaExceeded, lost waiting cards) lands on today's LIVE with every LIVE change of the night kept. RISKS: (1) a hand merge of jts/jne dropped a LIVE change — hiếm, nhỏ; each LIVE hunk was moved in by text and checked in the built page (old wording 0, new wording present). (2) LIVE moves again before landing — có thể, nhỏ; built-only conflicts → LC26 restacks. → **Được lớn hơn**.
