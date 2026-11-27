@@ -100,7 +100,9 @@ function kriPlace(R){const N=R.tiles.length;if(!N)return;const g=R.geo();let fi=
   t.style.transform=`translate(${(x-g.tw/2).toFixed(1)}px,${(y-g.tw*.6).toFixed(1)}px) scale(${sc.toFixed(3)})`;
   const front=Math.abs(m.a)<.5;const op=m.hide?0:Math.min(1,(1-T.dim*(1-KIT_RINGI.dim))*Math.min(1,(KRING_MATH.seats/2-Math.abs(m.a))));/* dim tiers: L none, M light, S = KIT_RINGI.dim */t.style.opacity=op.toFixed(3);t.style.visibility=op<.02?"hidden":"";t.style.zIndex=Math.round(100+m.c*50);t.classList.toggle("kri-front",front)});
  if(R.nameEl&&R.__nf!==fi){R.__nf=fi;const it=R.items[fi];const G=typeof KIT_GRADE!=="undefined"?KIT_GRADE[Math.max(0,Math.min(4,it.grade|0))]:null;
-  R.nameEl.innerHTML=`<b>${kriE(it.name)}</b><small>${G&&G.n?`<span class="kri-gr" style="--gc:${G.c||"#888"}">${kriE(G.n)}</span> `:""}${kriE(it.sub||"")}</small>`}}
+  R.nameEl.innerHTML=`<b>${kriE(it.name)}</b><small>${G&&G.n?`<span class="kri-gr" style="--gc:${G.c||"#888"}">${kriE(G.n)}</span> `:""}${kriE(it.sub||"")}</small>`;
+  /* K-RING-SUBLINE (KK61): the hint goes under the name block's REAL height (a sub line that wraps to 2–3 lines on Fold overlapped the fixed +58 px hint) */
+  if(R.hint){const t0=parseFloat(R.nameEl.style.top)||0;R.hint.style.top=Math.max(t0+58,t0+R.nameEl.offsetHeight+6)+"px"}}}
 /* ---------- spin: swipe with inertia, ‹ ›, tap a side item, tap the bright item ---------- */
 function kriBand(R){const L=R.L;let x0=0,y0=0,last=0,lt=0,drag=0,moved=0;
  const step=()=>{const g=R.geo(),N=Math.max(3,Math.min(KRING_MATH.seats,R.tiles.length));return g.Rx*2*Math.PI/N*.75};

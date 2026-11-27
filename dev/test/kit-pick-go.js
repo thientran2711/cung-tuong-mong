@@ -184,9 +184,12 @@ async function runRing(p, dev, name, rows) {
   if (!n) { rows.push({ dev, name, verdict: 'SKIP', why: 'ring did not open', offered }); return }
   await p.waitForTimeout(900);
   await p.screenshot({ path: path.join(OUT, `${dev}-${name}-open.jpg`), type: 'jpeg', quality: 50 });
-  const dead = []; const seen = new Set();
+  const dead = []; const seen = new Set(); const subl = []; let maxLines = 0;
   for (let k = 0; k < n; k++) {
     const fi = await p.evaluate(() => { const f = document.querySelector('.kri .kri-t.kri-front'); return f ? f.__i : null });
+    /* K-RING-SUBLINE (KK61): the front item's name block (name + sub line) never overlaps the hint, and the hint stays inside the ring layer */
+    const ov = await p.evaluate(() => { const n = document.querySelector('.kri .kri-name'), h = document.querySelector('.kri .kri-hint'); if (!n || !h) return null; const a = n.getBoundingClientRect(), b = h.getBoundingClientRect(), L = (n.offsetParent || document.body).getBoundingClientRect(); return { over: Math.max(0, Math.round(a.bottom - b.top)), out: Math.max(0, Math.round(b.bottom - L.bottom)), lines: Math.round((n.querySelector('small') || n).getBoundingClientRect().height / 14) } });
+    if (ov && (ov.over > 0 || ov.out > 0)) subl.push(fi + ':over ' + ov.over + (ov.out ? ' out ' + ov.out : '')); if (ov) maxLines = Math.max(maxLines, ov.lines); if (process.env.SHOTFRONT && String(fi) === process.env.SHOTFRONT) await p.screenshot({ path: path.join(OUT, `${dev}-${name}-front${fi}.jpg`), type: 'jpeg', quality: 70 });
     if (fi != null) { seen.add(fi); const pr = await p.$eval('.kri .kri-t.kri-front', RT.PROBE).catch(() => ({ gone: true })); if (!pr || !pr.ok) dead.push(fi + ':' + (pr && (pr.cover || (pr.zero ? 'zero' : pr.gone ? 'gone' : 'covered')) || '?')) }
     const ok = await rt.tap('.kri .kri-ar[aria-label]:last-of-type', { screen: name, label: '›' }).catch(() => false);
     if (!ok) { dead.push('arrow ›'); break }
@@ -201,7 +204,7 @@ async function runRing(p, dev, name, rows) {
   else if (main) { const before = await p.evaluate(() => (document.querySelector('.kri .kri-pane') || {}).textContent || ''); const r = await rt.tap('.kri .kri-acts .kbtn.kri-main', { screen: name, label: 'act' }); await p.waitForTimeout(2200); const after = await p.evaluate(() => ({ t: (document.querySelector('.kri .kri-pane') || {}).textContent || '', ring: !!document.querySelector('.kri') })); act = r && (!after.ring || after.t !== before) ? 'ok' : 'DEAD'; if (act === 'DEAD') actWhy = r ? 'act tapped, nothing changed' : 'act button not reachable' }
   else act = 'locked';
   if (dead.length || act === 'DEAD') await p.screenshot({ path: path.join(OUT, `${dev}-${name}-dead.jpg`), type: 'jpeg', quality: 55 });
-  rows.push({ dev, name, offered, ring: n, cut: Math.max(0, offered - n), fronts: seen.size, dead: dead.length, deadList: dead.slice(0, 8), act, verdict: dead.length || act === 'DEAD' ? 'FAIL' : 'ok', why: [dead.length ? dead.length + ' ring tile(s) / arrows dead' : '', actWhy].filter(Boolean).join('; ') });
+  rows.push({ dev, name, offered, ring: n, cut: Math.max(0, offered - n), fronts: seen.size, dead: dead.length, deadList: dead.slice(0, 8), act, subline: subl.length, sublineList: subl.slice(0, 6), maxLines, verdict: dead.length || act === 'DEAD' || subl.length ? 'FAIL' : 'ok', why: [dead.length ? dead.length + ' ring tile(s) / arrows dead' : '', subl.length ? subl.length + ' front item(s): sub line over the hint' : '', actWhy].filter(Boolean).join('; ') });
 }
 
 /* STALE HAND LIFT (law 11, F «Tin báo» «Để sau» → «Đặt lại» / «Chọn lá này» dead): she lifts a card of queue card A, then A is REPLACED by the next card
@@ -297,7 +300,7 @@ async function runCase(p, dev, name, C, rows) {
     await p.goto('http://localhost:8817/index.html', { waitUntil: 'domcontentloaded' });
     await p.waitForFunction(() => typeof start === 'function' && typeof deser === 'function' && typeof kitNoticeOpen === 'function', null, { timeout: 240000 });
     await p.waitForTimeout(1500);
-    for (const [name, C] of Object.entries(Object.assign({}, CASES, { grid_bieuqua: PICKERS.grid_bieuqua, grid_tangqua: PICKERS.grid_tangqua, grid_dangqua: PICKERS.grid_dangqua, grid_dangtha: PICKERS.grid_dangtha, grid_plant: PICKERS.grid_plant }, NOFX, HANDS, RINGS))) {
+    for (const [name, C] of Object.entries(Object.assign({}, CASES, { ring_bieuqua: RINGS.ring_bieuqua, ring_tangqua: RINGS.ring_tangqua, ring_dangqua: RINGS.ring_dangqua, grid_bieuqua: PICKERS.grid_bieuqua, grid_tangqua: PICKERS.grid_tangqua, grid_dangqua: PICKERS.grid_dangqua, grid_dangtha: PICKERS.grid_dangtha, grid_plant: PICKERS.grid_plant }, NOFX, HANDS, RINGS))) {
       if (ONLY && !ONLY.includes(name)) continue;
       try { if (!p.__home || name === 'dongso' || p.__dirty) { await home(p); p.__home = 1; p.__dirty = 0 } if (name === 'dongso') p.__dirty = 1; if (/^grid_/.test(name)) await runPicker(p, dev, name, rows); else if (NOFX[name]) await runNoFx(p, dev, name, rows); else if (RINGS[name]) await runRing(p, dev, name, rows); else if (HANDS[name]) await runHand(p, dev, name, rows); else await runCase(p, dev, name, C, rows) } catch (e) { rows.push({ dev, name, verdict: 'ERR', why: String(e.message).slice(0, 200) }) }
       const r = rows[rows.length - 1]; if (r.verdict !== 'ok' && r.verdict !== 'SKIP') fails++;
