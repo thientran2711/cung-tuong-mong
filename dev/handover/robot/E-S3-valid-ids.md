@@ -6,3 +6,5 @@ PARKED (game bug): greedy-5 1191337177 (Fold «Biếu quà làm lành» confirm 
 RUNNING: rebel-5 2633677533, speed-3 194501652, skilled-5 1195490457, skilled-2 3869935016 (board «theu» 10/10 with 0 moves), speed-5 2044122702.
 NOT STARTED: scholar-4b 1709108512, scholar-5b 2439320743, rebel-… (rows left in lives2.txt), skilled-3 4042475087.
 Note: E-S2's «rebel-4-h» (seed 2193975486) is NOT in this list — if you counted it for E-S3 that explains +1 on your side; my list may be ahead of yours by the 6 newest pushes (speed-1/2/4, scholar-2b, rebel-2, random-1/2).
+
+UPDATE 27/11 05:05Z: + R2-speed-5 2044122702 VALID (exit only option) → E-S3 own valid = 25.
