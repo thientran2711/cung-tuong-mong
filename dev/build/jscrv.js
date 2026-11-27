@@ -80,7 +80,7 @@ function scrvLateScan(n){if(!n||n.nodeType!==1||n.id==="kveil")return;try{if(n.t
   for(const im of n.querySelectorAll("img"))scrvLateImg(im);for(const el of n.querySelectorAll("*"))if(el.tagName!=="IMG")scrvLateBg(el)}catch(e){}}
 function scrvHideLate(root){scrvLateStop();root=root||document.body;scrvLateScan(root);
  const mo=new MutationObserver(R=>{if(!SCRV_LATE)return;for(const r of R){if(r.type==="childList")r.addedNodes.forEach(scrvLateScan);
-  else if(r.target.nodeType===1){const el=r.target;if(el.tagName==="IMG"){if(r.attributeName==="src"||r.attributeName==="srcset")scrvLateImg(el)}else if(!el.__scrvB)scrvLateBg(el)}}});
+  else if(r.target.nodeType===1){const el=r.target;if(el.tagName==="IMG"){if(r.attributeName==="src"||r.attributeName==="srcset")scrvLateImg(el);else if(r.attributeName==="style"&&el.__scrvH&&el.style.visibility!=="hidden"&&!(el.complete&&el.naturalWidth))el.style.visibility="hidden"/* LRM4: a layout that rewrites the picture's style (j59 room figures: cssText / visibility="") must not unhide a picture still decoding */}else if(!el.__scrvB)scrvLateBg(el)}}});
  mo.observe(root,{childList:true,subtree:true,attributes:true,attributeFilter:["src","srcset","style","class"]});
  SCRV_LATE={mo,key:SCRV_KEY,t:setTimeout(scrvLateStop,KIT_SCRV.late||30000)}}
 /* wait (scan again after each wait: pictures set a frame later are caught) until all decoded or the cap */
