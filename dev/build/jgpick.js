@@ -29,7 +29,7 @@ function kipTile(c,i,on){const e=S.inv[c.ik],I=kipItem(e),lock=kipLocked(c);
   `<span class="kshe" title="${kipE(I.use)}">${kipE(I.use)}</span></div>`}
 /* the detail: the option's own decorated kit card (a display copy: name, odds, Tốn / Được / Mất / Kèm or the reason) + the confirm button.
    KIT §70 item detail (kitItemDetail strip, jitd) sits above the card (reviewer r1, item-info landed). */
-function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=m.opts[i];M.querySelectorAll(".kipw>.kipgo").forEach(x=>x.remove());const src=M.querySelector(`.opts>.opt[data-m="${i}"]`);
+function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=m.opts[i];const src=M.querySelector(`.opts>.opt[data-m="${i}"]`);
  if(!c||!src){d.innerHTML=typeof kinlDetail==="function"?kinlDetail(null,{key:"gpick"}):`<p class="kshm">Chạm vào một món để xem được gì.</p>`;return}
  const lock=kipLocked(c)||src.disabled;const card=src.cloneNode(true);card.removeAttribute("data-m");card.setAttribute("tabindex","-1");card.setAttribute("aria-hidden","true");
  card.classList.add("kipcard");card.querySelectorAll(".kitem,.kaart").forEach(x=>x.remove());card.classList.remove("kart","kopt");/* reviewer r1: no KIT §6.2 option picture in the display copy (jopic): the §70 strip above already shows the item; the squeezed title broke letter by letter */card.disabled=false;
@@ -37,10 +37,7 @@ function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=
  let det="";try{const e=S.inv[c.ik];if(e&&typeof kitItemDetail==="function")det=kinlDetail({e},{key:"gpick",noLux:true})}catch(x){}
  d.innerHTML=det;d.classList.toggle("kipd2",!!det);
  d.appendChild(card);
- /* K-PICK-GO-REACH (KIT §28.13i, KK61): the confirm is the LAST child of the whole picker (.kipw), not of the detail: sticky to the bottom of
-    the dialog's scroller (#mb) while any part of the picker is in view, so it is reachable without scrolling (inside .kipd its sticky could
-    never rise above the detail, 187–231 px below the box on Fold + iPad) */
- d.insertAdjacentHTML("afterend",`<button type="button" class="kbtn kipgo" data-kipgo="${i}"${lock?" disabled":""}>${kipE(KIP_VERB[m.pid]||"Chọn")}</button>`)}
+ d.insertAdjacentHTML("beforeend",`<button type="button" class="kbtn kipgo" data-kipgo="${i}"${lock?" disabled":""}>${kipE(KIP_VERB[m.pid]||"Chọn")}</button>`)}
 function kipSelect(M,m,i){KIP_SEL.set(m,i);M.querySelectorAll(".kipc").forEach(t=>{const on=+t.dataset.kip===i;t.classList.toggle("on",on);t.setAttribute("aria-checked",on?"true":"false")});
  M.querySelector(".kipw").classList.add("has");kipDetail(M,m,i)}
 function kipBuild(){const m=Q[0],M=$("modal");if(!M||M.hidden||!kipOn(m))return;const ops=M.querySelector(".opts");if(!ops||M.querySelector(".kipw"))return;
@@ -60,6 +57,11 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
  if(t.dataset.kipgo!=null){if(t.disabled)return;const i=+t.dataset.kipgo,b=M.querySelector(`.opts>.opt[data-m="${i}"]`);if(!b||b.disabled)return;
   KIP_GO={pid:m.pid,pp:m.pp,c:m.opts[i],from:(M.querySelector(`.kipc[data-kip="${i}"] .kitem`)||t).getBoundingClientRect(),to:kipTarget(M)};b.click();return}
  kipSelect(M,m,+t.dataset.kip)},true);
+/* K-PICK-GO-REACH (KIT §28.13i, KK61): the confirm «kipgo» is the LAST child of the whole picker (.kipw), never inside the detail: sticky to
+   the bottom of the dialog's scroller (#mb) while any part of the picker is in view = reachable with no scroll (inside .kipd its sticky could
+   never rise above the detail: 187–254 px below the box on Fold + iPad, Dâng quà dead). Every kipDetail draw moves its button out. */
+(function(){const k0=kipDetail;kipDetail=function(M){try{M&&M.querySelectorAll(".kipw>.kipgo").forEach(x=>x.remove())}catch(e){}const r=k0.apply(this,arguments);
+ try{const d=M&&M.querySelector(".kipd"),g=d&&d.querySelector(":scope>.kipgo");if(g)d.after(g)}catch(e){console.error("kipgo",e)}return r}})();
 /* ---------- the gift moment ---------- */
 let KIP_GO=null;
 /* where the person is: the open person card's portrait in the panel, else the dialog's own figure, else the upper middle */
