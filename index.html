@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a921f9eb+","t":"2026-11-26T23:26Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"6f761943946d","h":[]};
+window.CTM_BI={"s":"0b12f35d+","t":"2026-11-26T23:47Z","c":"Bị trị tội: hiện trước ai tố, vì sao, chứng cứ, hình phạt; mỗi lần chỉ giáng một bậc; mỗi tội cần chứng cứ riêng mới tố được.","b":"687c7139ae2f","h":[]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -97582,7 +97582,7 @@ function build(P,swap){const K=KIT_PLAQUE;const G=geo(P),el=P.el,m=P.m;P.G=G;P.u
   const th=Math.ceil(t.getBoundingClientRect().height);t.style.top=Math.max(2,G.railY-th-8)+"px";t.style.visibility=""}
  G.acts.forEach((a,i)=>{const c=i%G.cols,r=(i/G.cols)|0,n=document.createElement("div");n.className="kpk-n";n.dataset.id=a.id;
   const kc=r?G.gap:K.cord.rail,x=G.x0+c*(G.cw+K.gx),y=G.railY+K.cord.rail+r*(G.h+G.gap);
-  n.__x=x;n.style.cssText=`left:${x}px;top:${y}px;width:${G.cw}px;height:${G.h}px;--kc:${kc}px;--kph:${G.h}px;--kpp:${K.pic[m]}px;--sd:${(K.swayDeg*(1-.12*r)).toFixed(2)}deg;--ss:${(K.swayS[0]+(K.swayS[1]-K.swayS[0])*((i*37%10)/10)).toFixed(2)}s;--sdl:${(-(i*.9+c*1.3)).toFixed(2)}s`;
+  n.__x=x;n.__y=y;n.style.cssText=`left:${x}px;top:${y}px;width:${G.cw}px;height:${G.h}px;--kc:${kc}px;--kph:${G.h}px;--kpp:${K.pic[m]}px;--sd:${(K.swayDeg*(1-.12*r)).toFixed(2)}deg;--ss:${(K.swayS[0]+(K.swayS[1]-K.swayS[0])*((i*37%10)/10)).toFixed(2)}s;--sdl:${(-(i*.9+c*1.3)).toFixed(2)}s`;
   n.innerHTML=`<i class="kpk-cord"></i>`+btn(a,i);if(G.cw<K.slimW)n.classList.add("kpk-slim");/* narrow side: no picture, the whole name gets the room (OD:L177 names never cut) */const b=n.querySelector(".kfoc-b");b.classList.add("kpk-b");b.dataset.id=a.id;b.setAttribute("aria-pressed","false");
   b.addEventListener("click",ev=>{ev.stopPropagation();tap(P,a,n,b,ev)});el.appendChild(n);
   /* fall-in from the rail: transform + opacity only, staggered top → bottom, settles with a damped swing */
@@ -97604,8 +97604,11 @@ function fitNames(P){const el=P.el;el.classList.remove("kpk-slimall","kpk-tight"
  const ex=Math.max(0,...[...el.querySelectorAll(".kpk-n:not(.kpk-up) .kfoc-b.kpk-b")].map(k=>{const b=k.querySelector(".kfoc-t b");return Math.max(k.scrollHeight-k.clientHeight,b?b.getBoundingClientRect().bottom-k.getBoundingClientRect().bottom+4:0)}));
  if(ex>1){P.hx=(P.G&&P.G.h||KIT_PLAQUE.h[P.m])+Math.ceil(ex)+2;P.__fitR=1;try{build(P,true)}finally{P.__fitR=0}}}
 /* ✓ / ✕ CONFIRM (owner 25/11 ~21:55Z, law 14 — replaces «tap again = choose»; the SAME kit part as the hand §101 `.khconf`): tap = the plaque lifts + its line shows
-   and two buttons sit on its outer top corner: green ✓ = choose it, ✕ = put it back. A tap on the lifted plaque body does nothing. A keyboard / robot click (detail 0)
-   on the lifted plaque still chooses (harness path unchanged: click twice). onPick / «kpkpick» are unchanged for the callers. */
+   and two buttons sit ON the lifted plaque: green ✓ = choose it, ✕ = put it back. A tap on the lifted plaque body does nothing. A keyboard / robot click (detail 0)
+   on the lifted plaque still chooses (harness path unchanged: click twice). onPick / «kpkpick» are unchanged for the callers.
+   KK51 (MAIN 167 rec for RING-BUILD-7, canon overwrite of the KK36 outer-side / §98.1 upright-on-the-post spots): the pair sits ON the lifted plaque, at its RIGHT END:
+   the lifted plaque grows a strip at its bottom (.kpk-cf) and the pair stands in it (never over a name, its own odds / cost line or another plaque's name; the lifted plaque is
+   in front of its neighbours while it is up). Never in a column left of the band, never right of the post: kitPick.postBox().x0 is the band's real left edge and callers keep NO ✓/✕ room. */
 function pick(P,a,b){if(!P.open)return;if(a.off){try{P.o.onOff&&P.o.onOff(a,P)}catch(e){}return}
  b.dispatchEvent(new CustomEvent("kpkpick",{bubbles:true,detail:{id:a.id,act:a}}));try{P.o.onPick&&P.o.onPick(a.id,a,P)}catch(e){}}
 function tap(P,a,n,b,ev){if(!P.open)return;if(P.up===n){if(ev&&ev.detail===0)pick(P,a,b);return}
@@ -97614,21 +97617,23 @@ function conf(P){try{let c=P.el.querySelector(":scope>.khconf");const n=P.up;if(
  const a=(P.G&&P.G.acts||[]).find(x=>String(x.id)===n.dataset.id);if(!a||a.off){if(c)c.hidden=true;return}
  if(!c){c=document.createElement("div");c.className="khconf kpk-conf";c.innerHTML=`<button type="button" class="khok" aria-label="Chọn">✓</button><button type="button" class="khx" aria-label="Đặt lại">✕</button>`;
   c.addEventListener("click",e=>{e.stopPropagation();const k=e.target.closest("button");if(!k||!P.up)return;const u=P.up,aa=(P.G.acts||[]).find(x=>String(x.id)===u.dataset.id);if(k.classList.contains("khok")){if(aa)pick(P,aa,u.querySelector(".kpk-b"))}else drop(P)});P.el.appendChild(c)}
- const s=(typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44,gap=6,w=2*s+gap,G=P.G,x0=parseFloat(n.style.left)||n.__x,wd=n.offsetWidth||G.cw,y0=n.offsetTop;
- /* beside the plaque on its outer side, centred on it (never over its name); no room → on its outer top corner */let x,y;/* KK36 (NHV: the ✓/✕ of a LEFT-column plaque sat over the RIGHT column's name): with two columns each plaque's outer side is the side away from the other column */
- const sd=G.cols>1?(((n.__x!=null?n.__x:x0)>G.x0+(G.cols-1)*(G.cw+KIT_PLAQUE.gx)/2)?"r":"l"):G.side;const hh=n.offsetHeight||G.h;
- /* candidate spots (outer side first, then the outer / inner top corners, then the bottom corners): the one that covers the least of the OTHER plaques' names wins */
- /* §98.1 a plaque against the post (one column, or the right column of two) has no outer room: its ✓ / ✕ stand UPRIGHT on the post, beside its own right edge */const vt=x0+wd>=G.x0+G.bandW-2&&G.postTop!=null,vh=2*s+gap;
- const C=[...(vt?[[Math.min(G.x0+G.bandW+4+G.post/2-s/2,G.W-3-s),y0+(hh-vh)/2,1]]:[]),[sd==="l"?x0-w-6:x0+wd+6,y0+(hh-s)/2],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0-s*.62],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0-s*.62],[sd==="l"?x0-w*.35:x0+wd-w*.65,y0+hh-s*.38],[sd==="l"?x0+wd-w*.65:x0-w*.35,y0+hh-s*.38]];
- const hr=(n.offsetParent||P.el).getBoundingClientRect(),NB=[...P.el.querySelectorAll(".kpk-n")].filter(o=>o!==n).map(o=>{const b=(o.querySelector(".kfoc-t b")||o).getBoundingClientRect(),r=o.getBoundingClientRect();return {b:[b.left-hr.left,b.top-hr.top,b.right-hr.left,b.bottom-hr.top],r:[r.left-hr.left,r.top-hr.top,r.right-hr.left,r.bottom-hr.top]}});
- const ov=(a,q)=>Math.max(0,Math.min(a[2],q[2])-Math.max(a[0],q[0]))*Math.max(0,Math.min(a[3],q[3])-Math.max(a[1],q[1]));let best=null;
- C.forEach(([cx,cy,v],i)=>{const cw2=v?s:w,ch2=v?vh:s;const off=(cx<2||cx+cw2>G.W-2||cy<2||cy+ch2>G.H-2)?1:0;const a=[cx,cy,cx+cw2,cy+ch2];const cost=off*1e9+NB.reduce((z,o)=>z+ov(a,o.b)*100+ov(a,o.r),0)+i;if(!best||cost<best.c)best={c:cost,x:cx,y:cy,v:!!v}});x=best.x;y=best.y;x=Math.max(2,Math.min(G.W-(best.v?s:w)-2,x));y=Math.max(2,y);c.classList.toggle("kpk-cv",best.v);
- c.hidden=false;c.style.left=Math.round(x)+"px";c.style.top=Math.round(y)+"px";c.style.setProperty("--khcs",s+"px")}catch(e){console.error("kitPick conf",e)}}
-function drop(P){const K=KIT_PLAQUE,u=P.up;if(!u)return;P.up=null;u.classList.remove("kpk-up","kpk-wrap","kpk-sm");u.style.width=P.G.cw+"px";u.style.left=u.__x+"px";u.querySelector(".kpk-b").setAttribute("aria-pressed","false");
+ const K=KIT_PLAQUE,s=(typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44,gap=6,w=2*s+gap,G=P.G;n.style.setProperty("--khcs",s+"px");n.classList.add("kpk-cf");
+ /* the lifted plaque grows a strip at its bottom (.kpk-cf, height = the pair + 8 px); near the stage floor it rises instead of leaving the stage */
+ n.style.top=n.__y+"px";const hh=n.offsetHeight||G.h,wd=n.offsetWidth||G.cw,x0=parseFloat(n.style.left)||n.__x,k=K.liftScale,kc=parseFloat(n.style.getPropertyValue("--kc"))||12;
+ const over=n.__y+K.liftDy+(hh+kc)*k-kc-(G.H-4);if(over>0)n.style.top=Math.round(n.__y-over)+"px";const y0=n.offsetTop;
+ /* the LIFTED box (translateY liftDy + scale liftScale about its cord top), whatever moment of the lift animation this runs in */
+ const oy=y0-kc,L={l:x0+wd/2-wd*k/2,t:oy+kc*k+K.liftDy,w:wd*k,h:hh*k};
+ /* the pair: inside the strip, at the lifted plaque's right end (6 px in), kept inside the band box [x0 … post] */
+ const bL=G.x0,bR=G.x0+G.bandW+G.post+4,x=Math.round(Math.max(bL,Math.min(bR-w,L.l+L.w-w-6))),y=Math.round(L.t+L.h-s-5*k);
+ c.hidden=false;c.style.left=x+"px";c.style.top=Math.max(2,y)+"px";c.style.setProperty("--khcs",s+"px")}catch(e){console.error("kitPick conf",e)}}
+function drop(P){const K=KIT_PLAQUE,u=P.up;if(!u)return;P.up=null;u.classList.remove("kpk-up","kpk-wrap","kpk-sm","kpk-cf");u.style.width=P.G.cw+"px";u.style.left=u.__x+"px";if(u.__y!=null)u.style.top=u.__y+"px";u.querySelector(".kpk-b").setAttribute("aria-pressed","false");
  if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"});else u.style.transform="";P.anims.forEach(x=>{try{if(x.effect&&x.effect.target===u)x.cancel()}catch(e){}});conf(P)}
 /* RING-DESIGN-5: a lifted plaque grows with its small line: «Vững · Tốn 1 khắc» stays on ONE line, so the plaque widens (towards the outer side, inside the stage) instead of growing a 4th text line */
 function widen(P,n){const G=P.G,sm=n.querySelector(".kfoc-t small"),t=n.querySelector(".kfoc-t");n.classList.remove("kpk-wrap","kpk-sm");n.style.width=G.cw+"px";n.style.left=n.__x+"px";if(!sm||!t)return;let need=Math.ceil(sm.scrollWidth-t.clientWidth);if(need<=0)return;
- const room=(G.side==="r"?G.W-2-(n.__x+G.cw):n.__x-2)-10/* the lift scales the plaque a little */,add=Math.min(need,Math.max(0,room));if(add>0){n.style.width=(G.cw+add)+"px";if(G.side==="l")n.style.left=(n.__x-add)+"px"}if(need>add){/* still too long for the room: the small line steps down once, then (last resort) wraps */n.classList.add("kpk-sm");need=Math.ceil(sm.scrollWidth-(t.clientWidth+add));if(need>0)n.classList.add("kpk-wrap")}return;n.style.width=(G.cw+add)+"px";if(G.side==="l")n.style.left=(n.__x-add)+"px"}
+ /* KK51: the lifted plaque widens INSIDE the band box only (over its neighbour column — it is in front while up): never left of postBox().x0, never over the post;
+    a small line still too long for the band steps down once, then (last resort) wraps */
+ const lr=Math.max(0,n.__x-G.x0),rr=Math.max(0,G.x0+G.bandW-(n.__x+G.cw)),addL=Math.min(need,lr),addR=Math.min(need-addL,rr),add=addL+addR;
+ if(add>0){n.style.width=(G.cw+add)+"px";n.style.left=(n.__x-addL)+"px"}if(need>add){n.classList.add("kpk-sm");need=Math.ceil(sm.scrollWidth-(t.clientWidth+add));if(need>0)n.classList.add("kpk-wrap")}}
 function lift(P,id){const K=KIT_PLAQUE,n=P.el.querySelector(`.kpk-n[data-id="${CSS.escape(String(id))}"]`);if(!n)return;
  if(P.up&&P.up!==n)drop(P);
  P.up=n;n.classList.add("kpk-up");widen(P,n);n.querySelector(".kpk-b").setAttribute("aria-pressed","true");conf(P);
@@ -97647,10 +97652,10 @@ function yieldCard(){try{const t=document.getElementById("rtoast");if(!t)return;
  const cx=r.left+r.width/2,want=r.left>=L&&r.right<=R?cx:(L+R)/2;t.style.setProperty("--kyx",Math.round((want-cx)*sc)+"px")}catch(e){console.error("kitPick yieldCard",e)}}
 setTimeout(()=>{for(const f of ["resultShow","kitResultCard"]){const f0=window[f];if(typeof f0!=="function"||f0.__ky)continue;const w=function(){const r=f0.apply(this,arguments);try{yieldCard()}catch(e){}return r};w.__ky=1;window[f]=w;try{if(f==="resultShow")resultShow=w;else kitResultCard=w}catch(e){}}},0);
 window.kitPick={open,postBox,yieldCard,drop:()=>{if(CUR)drop(CUR)},rect,obstacles,current:()=>CUR,close:()=>{if(CUR)CUR.close()},destroy:()=>{if(CUR)CUR.destroy()}};
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§98.1",title:"kitPick · cột treo thẻ gỗ MỘT chỗ (1–4 thẻ một cột, 5–7 thẻ hai cột mọc sang trái)",where:"mọi bảng chọn thẻ gỗ: vòng người, vòng nhóm, bảo vật, lời đáp, việc với một người",
- html:()=>`<div data-kpkdemo style="position:relative;height:440px;border-radius:8px;background:linear-gradient(#efe4cf,#d9c7a4);overflow:hidden"></div><div class="kitpg-row"><button type="button" class="kbtn alt" data-kpkd="2">2 thẻ</button><button type="button" class="kbtn alt" data-kpkd="4">4 thẻ</button><button type="button" class="kbtn alt" data-kpkd="7">7 thẻ</button></div>`});
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§98.1",title:"kitPick · cột treo thẻ gỗ MỘT chỗ (1–4 thẻ một cột, 5–7 hai cột, 8+ ba cột mọc sang trái) · ✓ / ✕ nằm trên thẻ đang nâng",where:"mọi bảng chọn thẻ gỗ: vòng người, vòng nhóm, bảo vật, lời đáp, việc với một người",
+ html:()=>`<div data-kpkdemo style="position:relative;height:540px;border-radius:8px;background:linear-gradient(#efe4cf,#d9c7a4);overflow:hidden"></div><div class="kitpg-row"><button type="button" class="kbtn alt" data-kpkd="2">2 thẻ</button><button type="button" class="kbtn alt" data-kpkd="4">4 thẻ</button><button type="button" class="kbtn alt" data-kpkd="7">7 thẻ</button><button type="button" class="kbtn alt" data-kpkd="7" data-kpkup="a2">7 thẻ · nâng một thẻ</button></div>`});
  document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpkd]");if(!b)return;e.stopPropagation();const h=document.querySelector("#kitpage [data-kpkdemo]");if(!h)return;
-  const N=["Trò chuyện","Giao hảo","Khiêu khích","Cùng chơi / Thách đấu","Tặng quà","Hỏi han chuyện nhà","Nhờ dò la tin tức"];kitPick.open({host:h,acts:N.slice(0,+b.dataset.kpkd).map((n,i)=>({id:"d"+i,n,pic:"",word:"Vững",ton:"1 khắc",off:false,why:""})),onPick:()=>kitPick.close()})},true)}catch(e){}
+  const N=["Trò chuyện","Giao hảo","Khiêu khích","Cùng chơi / Thách đấu","Tặng quà","Hỏi han chuyện nhà","Nhờ dò la tin tức"];const P=kitPick.open({host:h,acts:N.slice(0,+b.dataset.kpkd).map((n,i)=>({id:"d"+i,n,pic:"",word:"Vững",ton:"1 khắc",off:false,why:""})),onPick:()=>kitPick.close()});if(b.dataset.kpkup)setTimeout(()=>P.lift("d2"),900)},true)}catch(e){}
 
 /* ---------- kitDim: ONE dim for the people who are not chosen (owner OD 24/11 ~09:05Z + ~15:30Z) ----------
    figure only, never the background, never see-through: a copy of the figure image with a STATIC filter (brightness + saturate from BAL.kdim) cross-fades on top of the figure
@@ -97672,7 +97677,6 @@ const css=document.createElement("style");css.id="kpk-css";css.textContent=`
 .kpk{--kpk-w1:#c99a5b;--kpk-w2:#b4813f;--kpk-w3:#97662d;--kpk-line:#5a3a1a;--kpk-ink:#2b1708;--kpk-hi:rgba(255,236,196,.55);--kpk-img:none;position:absolute;left:0;top:0;width:0;height:0;z-index:30;pointer-events:none}
 .kpk>*{pointer-events:auto}
 .rtoast.kres-y{translate:var(--kyx,0px) 0}
-.kpk .khconf.kpk-cv{flex-direction:column}
 body.kpk-open #kshR,body.kpk-open .kshR,body.kpk-open #kpname,body.kpk-open .j59mr{visibility:hidden!important}
 .kpk-post{position:absolute;border-radius:4px 4px 2px 2px;border:1px solid var(--kpk-line);box-sizing:border-box;background:var(--kpk-img),linear-gradient(90deg,var(--kpk-w3),var(--kpk-w2) 45%,var(--kpk-w1) 55%,var(--kpk-w3));box-shadow:2px 3px 5px rgba(0,0,0,.35);pointer-events:none}
 .kpk-post::before{content:"";position:absolute;left:50%;top:-5px;width:12px;height:12px;margin-left:-6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e7c27a,#a8782f 70%);border:1px solid var(--kpk-line);box-sizing:border-box}
@@ -97695,7 +97699,8 @@ body.kpk-open #kshR,body.kpk-open .kshR,body.kpk-open #kpname,body.kpk-open .j59
 .kpk .kfoc-b.kpk-b .kfoc-t b{color:var(--kpk-ink);text-shadow:0 1px 0 var(--kpk-hi);letter-spacing:.1px}
 .kpk .kfoc-b.kpk-b .kfoc-t small{display:none!important;visibility:hidden;position:absolute;opacity:0;pointer-events:none;color:#3d2410;text-shadow:0 1px 0 var(--kpk-hi);font-weight:600}
 .kpk-n.kpk-up .kfoc-b.kpk-b .kfoc-t small{display:block!important;visibility:visible;position:static;opacity:1}
-.kpk-n.kpk-up{height:auto!important;min-height:var(--kph,58px)}.kpk-n.kpk-up .kfoc-b.kpk-b{height:auto;min-height:var(--kph,58px);padding-top:5px;padding-bottom:5px}.kpk-n.kpk-up .kfoc-t b{-webkit-line-clamp:unset;max-height:none}.kpk-n.kpk-up .kfoc-t small{max-height:none;white-space:nowrap}.kpk-n.kpk-up.kpk-sm .kfoc-t small{font-size:.66rem}.kpk-n.kpk-up.kpk-wrap .kfoc-t small{white-space:normal}/* the small line stays on ONE line; the lifted plaque widens for it (kpkWiden) */
+.kpk-n.kpk-up{height:auto!important;min-height:var(--kph,58px)}.kpk-n.kpk-up .kfoc-b.kpk-b{height:auto;min-height:var(--kph,58px);padding-top:5px;padding-bottom:5px}.kpk-n.kpk-up .kfoc-t b{-webkit-line-clamp:unset;max-height:none}.kpk-n.kpk-up .kfoc-t small{max-height:none;white-space:nowrap}.kpk-n.kpk-up.kpk-sm .kfoc-t small{font-size:.66rem}.kpk-n.kpk-up.kpk-wrap .kfoc-t small{white-space:normal}/* the small line stays on ONE line; the lifted plaque widens inside the band for it (widen), else steps down, then wraps */
+.kpk-n.kpk-up.kpk-cf .kfoc-b.kpk-b{padding-bottom:calc(var(--khcs,44px) + 8px)}/* KK51: the strip the ✓ / ✕ stand in (right end) */
 .kpk-n.kpk-up .kfoc-b.kpk-b{box-shadow:inset 0 1.5px 0 var(--kpk-hi),inset 0 -2px 0 rgba(70,40,12,.45),0 8px 14px rgba(0,0,0,.45),0 0 0 2px #f1d79a}
 .kpk .kfoc-b.kpk-b.kfoc-off{filter:grayscale(.6);opacity:1}
 .kpk .kfoc-b.kpk-b:focus-visible{outline:2px solid #fff3c4;outline-offset:2px}
@@ -97840,7 +97845,7 @@ function kitNameTag(p,o){o=o||{};let st=o.stage;try{if(st==null)st=!(typeof j59k
 /* o.fix = the FIXED-SIZE name plate (owner 26/11 ~21:45Z «Phi Đường Mi Trang · Tố…» runs under the figures → one plate per figure, one size; KIT §93.5a) */
 function kitNameTagBox(p,o){const c=typeof j59col==="function"?j59col(p):"";return `<span class="kscn-tag${o&&o.fix?" kscn-fix":""}"${c?` style="--tc:${c}"`:""}>${kitNameTag(p,o)}</span>`}
 /* §93.5a ONE HEIGHT per row (KK49): every fixed plate under one root takes the tallest plate's height (a long name wraps to a 3rd line → the whole row grows with it, never cut, never run on). Call after the plates are in the DOM. */
-function kitNameTagFit(root){try{const T=[...(root||document).querySelectorAll(".kscn-tag.kscn-fix")];if(!T.length)return 0;T.forEach(t=>t.style.height="");const h=Math.ceil(Math.max(...T.map(t=>t.getBoundingClientRect().height)));T.forEach(t=>t.style.height=h+"px");return h}catch(e){return 0}}
+function kitNameTagFit(root){try{const T=[...(root||document).querySelectorAll(".kscn-tag.kscn-fix")];if(!T.length)return 0;T.forEach(t=>t.style.height="");const h=Math.ceil(Math.max(...T.map(t=>t.getBoundingClientRect().height)));if(!h)return 0;/* KK51: a detached / hidden root measures 0 → leave the plates at their own height (never 0 px) */T.forEach(t=>t.style.height=h+"px");return h}catch(e){return 0}}
 /* 93.6 sắc phong news row: kit face (stranger rule of kitFaceH) + name or placeholder + new rank chip + how she is known; list = the kit list frame */
 function kitNewsRankRow(p,o){o=o||{};const named=typeof kitKnownName==="function"?kitKnownName(p):true;const col=(typeof kitRankCol==="function"&&o.rank!=null&&typeof o.rank==="number"?kitRankCol(o.rank):"")||"";
  const rk=o.rank==null?"":typeof o.rank==="number"&&typeof kmRankName==="function"?kmRankName(o.rank):String(o.rank);
@@ -100342,7 +100347,7 @@ function paintX(s){let l=1e9,r=-1e9;s.__g.members.forEach(x=>{const L0=x.left||0
    yields to the board THIS focus really opens — R.nPk plaques (pkCount): a person = her acts (the largest tab);
    a group = «Đứng nghe» + one «Nói với …» per member; a group-picker slot = its choices. A member who steps out re-yields to her own board (reyield, awaited); a later bigger board (talk answers) re-yields as it opens (pickOpen, grow only). Owner 22:43Z: > 7 is
    allowed (no paging) → postBox lays the extra columns leftward; the yield follows whatever box it returns. */
-function plaqueNeed(m,R,n){try{if(R&&R.L&&kitPick.postBox){const B=kitPick.postBox(R.L,n||R.nPk||7),cf=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6;return Math.round(B.W-B.x0+cf+10)}}catch(e){}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
+function plaqueNeed(m,R,n){try{if(R&&R.L&&kitPick.postBox){const B=kitPick.postBox(R.L,n||R.nPk||7);/* KK51 §98.1: ✓/✕ stand ON the lifted plaque → x0 is the board's real left edge, no extra room */return Math.round(B.W-B.x0+12)}}catch(e){}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
 function maxActs(G){return Math.max(0,...(G||[]).map(g=>g&&g.acts?g.acts.length:1))}
 function personN(R,x){let n=0;try{if(R.o.acts){const A=R.o.acts(x)||[];n=A.length&&A[0].acts?maxActs(A):A.length}else n=maxActs(acts(R,x))}catch(e){}return Math.max(1,n)}
 function pkCount(R,s){const M=s.__g.members;try{if(R.o.groups){const A=R.o.gacts?R.o.gacts(s.__g.gi)||[]:[];return Math.max(1,A.length&&A[0].acts?maxActs(A):A.length)}}catch(e){return 7}return M.length>1?1+M.length:personN(R,M[0])}
@@ -102891,7 +102896,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6f761943946d";window.CTM_BUILD=BUILD;
+const BUILD="687c7139ae2f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

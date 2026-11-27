@@ -177,7 +177,7 @@ function paintX(s){let l=1e9,r=-1e9;s.__g.members.forEach(x=>{const L0=x.left||0
    yields to the board THIS focus really opens — R.nPk plaques (pkCount): a person = her acts (the largest tab);
    a group = «Đứng nghe» + one «Nói với …» per member; a group-picker slot = its choices. A member who steps out re-yields to her own board (reyield, awaited); a later bigger board (talk answers) re-yields as it opens (pickOpen, grow only). Owner 22:43Z: > 7 is
    allowed (no paging) → postBox lays the extra columns leftward; the yield follows whatever box it returns. */
-function plaqueNeed(m,R,n){try{if(R&&R.L&&kitPick.postBox){const B=kitPick.postBox(R.L,n||R.nPk||7),cf=((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*2+6;return Math.round(B.W-B.x0+cf+10)}}catch(e){}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
+function plaqueNeed(m,R,n){try{if(R&&R.L&&kitPick.postBox){const B=kitPick.postBox(R.L,n||R.nPk||7);/* KK51 §98.1: ✓/✕ stand ON the lifted plaque → x0 is the board's real left edge, no extra room */return Math.round(B.W-B.x0+12)}}catch(e){}const K=window.KIT_PLAQUE||{};return ((K.w&&K.w[m])||170)+(K.post||8)+30}
 function maxActs(G){return Math.max(0,...(G||[]).map(g=>g&&g.acts?g.acts.length:1))}
 function personN(R,x){let n=0;try{if(R.o.acts){const A=R.o.acts(x)||[];n=A.length&&A[0].acts?maxActs(A):A.length}else n=maxActs(acts(R,x))}catch(e){}return Math.max(1,n)}
 function pkCount(R,s){const M=s.__g.members;try{if(R.o.groups){const A=R.o.gacts?R.o.gacts(s.__g.gi)||[]:[];return Math.max(1,A.length&&A[0].acts?maxActs(A):A.length)}}catch(e){return 7}return M.length>1?1+M.length:personN(R,M[0])}
