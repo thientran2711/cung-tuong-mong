@@ -8,3 +8,4 @@ NOT STARTED: scholar-4b 1709108512, scholar-5b 2439320743, rebel-… (rows left 
 Note: E-S2's «rebel-4-h» (seed 2193975486) is NOT in this list — if you counted it for E-S3 that explains +1 on your side; my list may be ahead of yours by the 6 newest pushes (speed-1/2/4, scholar-2b, rebel-2, random-1/2).
 
 UPDATE 27/11 05:05Z: + R2-speed-5 2044122702 VALID (exit only option) → E-S3 own valid = 25.
+UPDATE 27/11 05:10Z: + R2-scholar-5b 2439320743 VALID (board played 20 moves 3/10) → E-S3 own valid = 26.
