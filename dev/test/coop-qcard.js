@@ -9,6 +9,7 @@
    (B) while a kit scene is open, body.kscn-on is set;
    (C) the queued card «Dưỡng Tú viện» reaches the screen within the player's taps (scene over, its road «Cất đồ …» the top of the screen); no page error.
    (D) law 11: every result card kind (plain resultShow / kitResultCard §93.8 / held) is the top of the screen over an open kit scene.
+   (E) BIG rv r3: a held result card under the item reveal «Nhận» (a layer she closes herself) stays held and is there after «Nhận».
    MUTATE: COOP_QCARD_MUT=1 puts the result card back under the scene layer (z 47) → (A) and (D) must FAIL.
    usage: python3 dev/build/assemble.py && node dev/test/coop-qcard.js [index.html] */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
@@ -70,6 +71,25 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   kitScene.close(true);M.hidden=false;try{showModal()}catch(e){}return out});
  ok(fam.flag&&fam.plain==='TOP'&&fam.kitRes==='TOP'&&fam.held==='TOP',dev+': (D) every result card (plain / kitResultCard / held) is over an open kit scene',fam);
  await p.screenshot({path:path.join(SHOTS,'coop-qcard-'+dev+(MUT?'-mut':'')+'.png')}).catch(()=>{});
+ /* (E) BIG rv r3: a choice that GIVES an item (kitGain: the item reveal .kmov «Nhận», z 9100, over the held card) while the next card is queued —
+    the held result card stays held under the reveal (a layer she closes by her own tap) and is there after «Nhận» with «Tiếp ▸»; her tap → the next card.
+    (r2's «covered 2 looks → release» dropped it: she never saw what her choice did, KIT 7.4.) Real taps; the effects switch is forced on (kfOn). */
+ await p.evaluate(()=>{try{kfOn=()=>true}catch(e){}document.querySelectorAll('.kmov,#kmrew,#kprevov,#kpodov,.kscn').forEach(x=>x.remove());try{KMQ.length=0}catch(e){}
+  const t=document.getElementById('rtoast');if(t)t.classList.remove('on','kres-hold','kres-front');RF.held=false;RF.wantModal=false;RF.later.length=0;
+  const M=document.getElementById('modal');M.hidden=true;Q.unshift({t:'Thử: người tặng quà',d:'qcard E',opts:[{n:'Nhận lấy',fx:{bac:5},go:()=>{kitGain(S.inv[0])}}]},{t:'Thử: thẻ kế tiếp',d:'qcard E next',opts:[{n:'Đã rõ',fx:{}}]});showModal()});
+ await sleep(500);
+ const eo=await p.evaluateHandle(()=>[...document.querySelectorAll('#modal button')].find(x=>x.offsetParent!==null&&/Nhận lấy/.test(x.textContent))||null);
+ let E={opt:!!eo.asElement()};if(E.opt){await eo.asElement().click();await sleep(400);
+  E.rev=await p.evaluate(()=>!!document.querySelector('.kmov.kfgain:not(.km-out)'));let lost=0;
+  for(let i=0;i<10;i++){await sleep(300);lost+=await p.evaluate(()=>{const t=document.getElementById('rtoast');return RF.held&&t&&t.classList.contains('on')?0:1})}E.lost=lost;
+  await sleep(600);const ok2=await p.evaluateHandle(()=>document.querySelector('.kmov.kfgain .krevok'));if(ok2.asElement())await ok2.asElement().click();await sleep(900);
+  E.after=await p.evaluate(()=>{const t=document.getElementById('rtoast');const b=t&&t.querySelector('.kres-next');const r=b&&b.getBoundingClientRect();const h=r&&r.width?document.elementFromPoint(r.left+r.width/2,r.top+r.height/2):null;
+   return{held:RF.held,on:!!(t&&t.classList.contains('on')),top:!!(h&&t.contains(h)),txt:t?t.innerText.slice(0,40):'',nx:r&&r.width?[r.left+r.width/2,r.top+r.height/2]:null}});
+  await p.screenshot({path:path.join(SHOTS,'coop-qcard-E-'+dev+(MUT?'-mut':'')+'.png')}).catch(()=>{});
+  if(E.after.nx){await p.mouse.click(E.after.nx[0],E.after.nx[1]);await sleep(700)}
+  E.next=await p.evaluate(()=>{const M=document.getElementById('modal');return !M.hidden&&!!Q[0]&&Q[0].t==='Thử: thẻ kế tiếp'})}
+ ok(E.opt&&E.rev&&E.lost===0&&E.after&&E.after.held&&E.after.top&&/KẾT QUẢ/.test(E.after.txt)&&E.next,dev+': (E) a held result card under the item reveal «Nhận» stays held, is the top after «Nhận», «Tiếp ▸» → the next card',E);
+ await p.evaluate(()=>{try{const M=document.getElementById('modal');if(Q[0]&&/^Thử:/.test(Q[0].t)){Q.shift();M.hidden=true}}catch(e){}});
  ok(covMax<2,dev+': (A) the held result card is never under another layer (looks in a row covered: '+covMax+')',covMax<2?undefined:tr.slice(-24));
  ok(noFlag===0,dev+': (B) body.kscn-on is set whenever a kit scene is open (looks without it: '+noFlag+')');
  ok(reached,dev+': (C) the queued card «Dưỡng Tú viện» reaches the screen ('+steps+' taps)',reached?undefined:tr.slice(-12));
