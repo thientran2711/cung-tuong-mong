@@ -1,1 +1,1 @@
-Khung lựa chọn không còn kẹt: khi không còn lựa chọn nào dùng được thì hiện lời báo và nút đóng.
+Mục tiêu: nút «Cách làm», «Đi làm», «Xem Dư đồ» đưa thẳng tới người và nơi cần đến; mọi nút «Đóng» trả về đúng chỗ cũ.
