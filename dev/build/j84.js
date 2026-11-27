@@ -117,7 +117,9 @@ function itemLow(s,before){if(!s||!/\p{Lu}/u.test(s))return s;const rx=itRx();if
 const INL=/^(B|I|SPAN|EM|STRONG|SMALL|A|U|MARK)$/;
 function prevText(n){let x=n;for(let d=0;d<3&&x;d++){let p=x.previousSibling;while(p&&p.nodeType===8)p=p.previousSibling;if(p)return (p.textContent||"").slice(-40);
   x=x.parentElement;if(!x||!INL.test(x.tagName))return""}return""}
-function fixText(n){const p=n.parentElement;if(!p||SKIP.test(p.tagName)||p.closest("[data-vp-skip]"))return;const v=n.nodeValue;let t=fix(v,p);try{t=itemLow(t,prevText(n))}catch(e){}if(t!==v){n.nodeValue=t;changed++}}
+function fixText(n){const p=n.parentElement;if(!p||SKIP.test(p.tagName)||p.closest("[data-vp-skip]"))return;const v=n.nodeValue;const pv=prevText(n);
+ /* «thiện cảm» | « với ta +3» in two nodes (a split line of jwhyn «Vì sao»): «với ta» is part of the label already — never «thiện cảm thiện cảm +3» (MAIN 167, law 11) */
+ const g=/[Tt]hiện cảm\s*$/.test(pv)&&/^\s*với (?:ta|ngươi)(?=\s*(?:[-+−]?\d|:))/.test(v);let t=fix(g?v.replace(/với (ta|ngươi)/,"\u0001$1"):v,p);if(g)t=t.replace(/\u0001(ta|ngươi)/,"với ta");try{t=itemLow(t,pv)}catch(e){}if(t!==v){n.nodeValue=t;changed++}}
 function fixAttr(el,a){const v=el.getAttribute(a);if(!v)return;const t=fix(v,el);if(t!==v){el.setAttribute(a,t);changed++}}
 function fixEl(el){if(el.nodeType===3)return fixText(el);if(el.nodeType!==1||SKIP.test(el.tagName))return;
   for(const a of ATTR)if(el.hasAttribute(a))fixAttr(el,a);
