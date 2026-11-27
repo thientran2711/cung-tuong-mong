@@ -1,0 +1,64 @@
+# Moments — E-S7 R8-rebel-3 (bd/bd_hen, rebel→bot bold, ipad 1180x820, seed 3327674226)
+Runner notes (shot end.png):
+- year 1 · «Thân phận kiếp này» · CONFUSED · the origin dialog offers «Vào cung ngay» or «Ở cố quốc chờ hòa ước» plus 17+ «Dung mạo» looks; this life took the home-country road: no palace, no concubine road at all
+- year 1–2 · «Hòa ước» dialog · FRUSTRATED/ODD · two cards: «Thưa: con xin đi, vì muôn dân» (TỐN không, ĐƯỢC hòa ước vững) and «Xin để muội muội đi thay» (Tùy duyên, TỐN Sức 5, ĐƯỢC không): the robot took the second and the life ended at once with «Công chúa ở lại cố quốc» (game-imposed, death flag true)
+- end · transition frame over the home-country main screen: a white ribbon + ink smear fades the Hành sự list (the end card is not yet shown in the shot); the screen has a new top bar «Ngày lên đường còn 12 tháng · Phe chủ chiến 52» and a «Hòa ước 40» meter · ODD · this is a different road from the palace lives
+- JS error · «c is not defined» · ODD · a page error early in the life (new)
+
+## Harness moment log (auto)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-rebel-3/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-R8-rebel-3/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 2 · .dlg «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Vào cung ngayTốnkhôngĐượcsan | Ở cố quốc chờ hòa ướcTốnkhôn | Trang trước | Dung mạo 15 | Dung mạo 16 | Dung mạo 17 | Dung mạo 18 | Dung mạo 19 · shots-R8-rebel-3/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Công chúa Ba Tư hòa thân · 1/3» · EVENT · rank 2 → 0 · shots-R8-rebel-3/m-rank-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Công chúa Ba Tư hòa thân · 1/3» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-R8-rebel-3/m-rank-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Công chúa Ba Tư» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-rebel-3/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Tẩm điện của ta · Ở đây có 1 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài76Tâm cơ18Đức30Danh1 | Bạc60Sức100/100 | Buổi sáng, còn 4 khắc | Ngày lên đườngcòn 22 tháng | sương sớm | Tâm trạngBình thản0 · shots-R8-rebel-3/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 1 · rank 0 · page «Tẩm điện của ta · Không gặp ai.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài76Tâm cơ18Đức30Danh1 | Bạc60Sức100/100 | Buổi trưa, còn 4 khắc | Ngày lên đườngcòn 22 tháng | hoa đào bay | Tâm trạngBình thản0 · shots-R8-rebel-3/m-new-1-7.png
+- year 1 · turn 0 · tuần 0 · buổi 2 · rank 0 · #modal «Tin báo» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-rebel-3/m-new-3-8.png
+- year 1 · turn 0 · tuần 0 · buổi 2 · rank 0 · .dlg «Tin báo» · NEW SCREEN · first time on this screen; buttons: Để ta xemTốnkhôngĐượckhông | Để sau · shots-R8-rebel-3/m-new-3-9.png
+- year 1 · turn 0 · tuần 0 · buổi 3 · rank 0 · .dlg «Thỉnh tranh nhân vật» · NEW SCREEN · first time on this screen; buttons: Lui | Tạm ngưngTốnkhôngĐượcCho tra · shots-R8-rebel-3/m-new-4-10.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · #kdaytc «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài76Tâm cơ18Đức30Danh1 | Bạc60Sức100/100 | Buổi sáng, còn 4 khắc | Ngày lên đườngcòn 22 tháng | trời quang | Tâm trạngBình thản+2 · shots-R8-rebel-3/m-new-4-11.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .kbk «Tổng lược» · NEW SCREEN · first time on this screen; buttons: Trang sau | Lui · shots-R8-rebel-3/m-new-5-12.png
+- year 1 · turn 0 · tuần 1 · buổi 0 · rank 0 · .dlg «Tâm trạng · Ta» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-rebel-3/m-new-5-13.png
+- year 1 · turn 0 · tuần 1 · buổi 1 · rank 0 · .dlg «Phụ vương ngã bệnh» · NEW SCREEN · first time on this screen; buttons: Ngày đêm hầu thuốcTốnSức 25Đ | Xin sứ đoàn mời thầy thuốc Đ · shots-R8-rebel-3/m-new-5-14.png
+- year 1 · turn 0 · tuần 1 · buổi 3 · rank 0 · .dlg «Lịch tháng» · NEW SCREEN · first time on this screen; buttons: Lui | Tháng trước | Tháng sau | mồng 1: Lĩnh bổng lộc · Nội | mồng 2 | mồng 3 | mồng 4 | mồng 5: Tiết Thanh minh · shots-R8-rebel-3/m-new-8-15.png
+- year 1 · turn 0 · tuần 1 · buổi 3 · rank 0 · .dlg «Sắc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-rebel-3/m-new-8-16.png
+- year 1 · turn 0 · tuần 2 · buổi 2 · rank 0 · .dlg «Chương 1 · Chờ ngày hòa thân» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/37 | Thiên mệnh | Đi làm: Học lễ nghi Đại HyTố | Đi làm: Giữ hòa ướcTốnkhôngĐ | Đi làm: Giữ lòng phụ vươngTố · shots-R8-rebel-3/m-new-11-17.png
+- year 1 · turn 0 · tuần 2 · buổi 2 · rank 0 · .dlg «Danh hiệu» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/37 | Thiên mệnh · shots-R8-rebel-3/m-new-11-18.png
+- year 1 · turn 1 · tuần 0 · buổi 2 · rank 0 · #modal «Thiên mệnh» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-rebel-3/m-new-15-19.png
+- year 1 · turn 1 · tuần 0 · buổi 2 · rank 0 · .dlg «Thiên mệnh» · NEW SCREEN · first time on this screen; buttons: Lui | Mục tiêu | Danh hiệu 0/37 | Thiên mệnh · shots-R8-rebel-3/m-new-15-20.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · #modal «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-rebel-3/m-new-17-21.png
+- year 1 · turn 1 · tuần 1 · buổi 0 · rank 0 · .dlg «Lễ Phật đản» · NEW SCREEN · first time on this screen; buttons: Cúng dường hậu hĩnhTốnBạc 40 | Chép kinh cầu phúcTốnSức 8Đư | Lễ Phật rồi vềTốnkhôngĐượckh · shots-R8-rebel-3/m-new-17-22.png
+- year 1 · turn 1 · tuần 1 · buổi 1 · rank 0 · .dlg «Bạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-rebel-3/m-new-18-23.png
+- year 1 · turn 1 · tuần 1 · buổi 1 · rank 0 · .dlg «Tin chờ người sai đi» · NEW SCREEN · first time on this screen; buttons: Lui | Xem lời nhờTốnkhôngĐượcCó kh · shots-R8-rebel-3/m-new-18-24.png
+- year 1 · turn 1 · tuần 1 · buổi 1 · rank 0 · #modal «Có khách đến chơi» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-rebel-3/m-new-18-25.png
+- year 1 · turn 1 · tuần 1 · buổi 1 · rank 0 · .dlg «Có khách đến chơi» · NEW SCREEN · first time on this screen; buttons: Tiếp đón nồng hậuTốnSức 4Đượ | Tiếp qua loaTốnSức 2Đượcthiệ | Từ chốiTốnkhôngĐượcDanh +, g | Tiếp rồi đem chuyện đi kểTốn · shots-R8-rebel-3/m-new-18-26.png
+- year 1 · turn 1 · tuần 1 · buổi 2 · rank 0 · .dlg «chiều · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-rebel-3/m-new-19-27.png
+- year 1 · turn 1 · tuần 1 · buổi 3 · rank 0 · page «Tẩm điện của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-rebel-3/m-look-20.png
+- year 1 · turn 2 · tuần 0 · buổi 0 · rank 0 · .dlg «Học Công» · NEW SCREEN · first time on this screen; buttons: Lui | Tự họcTốn2 khắc·Sức 15Đượcch | Học với ma maTốn2 khắc·Bạc 3 · shots-R8-rebel-3/m-new-25-28.png
+- year 1 · turn 2 · tuần 0 · buổi 0 · rank 0 · .dlg «Học Công: làm gì?» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-rebel-3/m-new-25-29.png
+- year 1 · turn 2 · tuần 0 · buổi 1 · rank 0 · .dlg «trưa · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-rebel-3/m-new-26-30.png
+- year 1 · turn 2 · tuần 2 · buổi 3 · rank 0 · .dlg «tối · còn» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-rebel-3/m-new-36-31.png
+- year 1 · turn 3 · tuần 0 · buổi 3 · rank 0 · page «Tẩm điện của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-rebel-3/m-look-40.png
+- year 1 · turn 3 · tuần 0 · buổi 3 · rank 0 · #modal «Lịch tháng» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-rebel-3/m-new-40-32.png
+- year 1 · turn 4 · tuần 0 · buổi 0 · rank 0 · .dlg «Công · Nữ công» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-rebel-3/m-new-49-33.png
+- year 1 · turn 4 · tuần 0 · buổi 1 · rank 0 · .dlg «Hòa ước» · NEW SCREEN · first time on this screen; buttons: Ra mắt đoan trang, đáp lời b | Ra mắt theo lễ cố quốcTốnkhô · shots-R8-rebel-3/m-new-49-34.png
+- year 1 · turn 4 · tuần 2 · buổi 3 · rank 0 · page «Tẩm điện của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-rebel-3/m-look-60.png
+- year 1 · turn 5 · tuần 1 · buổi 1 · rank 0 · .dlg «Điều khoản hòa ước» · NEW SCREEN · first time on this screen; buttons: Xin giữ quyền thư từ với cố | Không đòi gì, để hai bên địn · shots-R8-rebel-3/m-new-65-35.png
+- year 1 · turn 5 · tuần 1 · buổi 1 · rank 0 · #kxcatch «» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc61Tài76Tâm cơ18Đức32Danh1 | Bạc130Sức100/100 | Buổi trưa, còn 4 khắc | Ngày lên đườngcòn 17 tháng | lá phong rơi | Tâm trạngBình thản+4 · shots-R8-rebel-3/m-new-66-36.png
+- year 1 · turn 5 · tuần 2 · buổi 1 · rank 0 · .dlg «Muội muội tranh phần» · NEW SCREEN · first time on this screen; buttons: Mặc nàng taTốnkhôngĐượcthế c | Nói chuyện thẳng với nàngVữn | Tâu với phụ thânTốnkhôngĐược · shots-R8-rebel-3/m-new-69-37.png
+- year 1 · turn 5 · tuần 2 · buổi 1 · rank 0 · - · ODD · [js] page error: c is not defined · -
+- year 1 · turn 6 · tuần 1 · buổi 2 · rank 0 · page «Tẩm điện của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-rebel-3/m-look-80.png
+- year 1 · turn 7 · tuần 0 · buổi 1 · rank 0 · .dlg «Có người bán tin» · NEW SCREEN · first time on this screen; buttons: Mua tinTốnBạc 35·1 khắcĐượcn | Không muaTốnkhôngĐượckhôngGh · shots-R8-rebel-3/m-new-86-38.png
+- year 1 · turn 7 · tuần 0 · buổi 1 · rank 0 · .dlg «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons: Xin thử một tiếng đàn lạTốnS | Khen Tần Thạch Dung Âm biết | Cười và hỏi giá món lạTốnDan | Ngồi lặng giữ nét trang trọn · shots-R8-rebel-3/m-new-87-39.png
+- year 1 · turn 7 · tuần 0 · buổi 2 · rank 0 · .dlg «Thích khách» · NEW SCREEN · first time on this screen; buttons: Kêu cứuVữngTốnkhôngĐượcthườn | Tự mình chống trảVữngTốnSức  · shots-R8-rebel-3/m-new-87-40.png
+- year 1 · turn 7 · tuần 0 · buổi 2 · rank 0 · #modal «Sứ đoàn vào triều» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-rebel-3/m-new-88-41.png
+- year 1 · turn 8 · tuần 0 · buổi 0 · rank 0 · .dlg «Cầm» · NEW SCREEN · first time on this screen; buttons: Lui · shots-R8-rebel-3/m-new-98-42.png
+- year 1 · turn 8 · tuần 0 · buổi 2 · rank 0 · page «Tẩm điện của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-rebel-3/m-look-100.png
+- year 1 · turn 9 · tuần 1 · buổi 1 · rank 0 · .dlg «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons: Bỏ bạc mua thêm thanTốnBạc 2 | Chịu rét cho quaTốnSức 8Được · shots-R8-rebel-3/m-new-114-43.png
+- year 1 · turn 9 · tuần 1 · buổi 1 · rank 0 · #modal «Đại hàn, tuyết lớn» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-rebel-3/m-new-115-44.png
+- year 1 · turn 9 · tuần 2 · buổi 2 · rank 0 · page «Tẩm điện của ta · Không gặp ai.» · LOOK · every-20-buổi look (runner: write how it feels) · shots-R8-rebel-3/m-look-120.png
+- year 2 · turn 10 · tuần 0 · buổi 1 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons:  · shots-R8-rebel-3/m-new-123-45.png
+- year 2 · turn 10 · tuần 0 · buổi 1 · rank 0 · ending · EVENT · life over: Công chúa ở lại cố quốc — Công chúa ở lại cố quốc · age 19 · buổi 123 · bugs 1 · stuck 0 · dead buttons 0 · shots-R8-rebel-3/end.png
