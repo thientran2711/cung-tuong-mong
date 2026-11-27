@@ -6,7 +6,7 @@ const devices=DEV.length?DEV:['fold','ipadAir','ipadPro','pixel','iphone14'];con
 fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});const res=[];
  for(const d of devices){const VP=process.env.VP;const ctx=await D.newDeviceContext(b,d,VP?{viewport:{width:+VP.split('x')[0],height:+VP.split('x')[1]}}:{});await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(x=>x.click())},300)});
-  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+  const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   const g=await D.openHost(p,srv.url);await g.waitForFunction(()=>typeof start==='function',null,{timeout:60000});await p.waitForTimeout(1500);
   await g.evaluate(([mv,lay,old])=>{KLIFE.off=1;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}
    Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;for(let i=0;i<3;i++){try{nextBuoi()}catch(e){}Q.length=0}

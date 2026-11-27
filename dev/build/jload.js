@@ -331,10 +331,10 @@ window.kitLifeGate=lifeGate;
 /* entry-blank-r3: the two kit silhouettes (KIT §59.1 stand-in of a figure on its way): their body box is known (fixed kit art), so it is set at boot
    (KIT_SILBB = kitFigBody of img/kit/unknown-fig-f|m.webp; dev/test/entry-blank.js checks it against a live measure) — the room stage never waits
    seconds for a measure of the silhouette it shows while the real figure loads (was 2–3.5 s of empty room on Tiếp tục). */
-const KIT_SILBB={f:{t:0,b:.998,l:.1764,r:.8606,ht:.044,ar:.5407,cl:.2074,cr:.8296},m:{t:0,b:1,l:.088,r:.8989,ht:.044,ar:.4563,cl:.1487,cr:.8382}};window.KIT_SILBB=KIT_SILBB;
-try{const FB=window.__KITFB||(window.__KITFB={});["f","m"].forEach(g=>{const v=Object.assign({},KIT_SILBB[g]);v.wl=Array(21).fill(v.l);v.wr=Array(21).fill(v.r);
+const KIT_SILBB={f:{t:0,b:.998,l:.1764,r:.8606,ht:.044,ar:.5407,cl:.2074,cr:.8296},m:{t:0,b:1,l:.088,r:.8989,ht:.044,ar:.4563,cl:.1487,cr:.8382},e:{t:0,b:.998,l:.0475,r:.9574,ht:.044,ar:.4067,cl:.2187,cr:.7862}};window.KIT_SILBB=KIT_SILBB;
+try{const FB=window.__KITFB||(window.__KITFB={});["f","m","e"].forEach(g=>{const v=Object.assign({},KIT_SILBB[g]);v.wl=Array(21).fill(v.l);v.wr=Array(21).fill(v.r);
  [(typeof IMG_BASE!=="undefined"?IMG_BASE:"")+"img/kit/unknown-fig-"+g+".webp","img/kit/unknown-fig-"+g+".webp"].forEach(k=>{if(!FB[k])FB[k]={v,w:[]}})})}catch(e){}
-setTimeout(()=>{try{["f","m"].forEach(g=>{if(typeof j59unkSrc==="function")j59unkSrc(g)})}catch(e){}},0);
+setTimeout(()=>{try{["f","m","e"].forEach(g=>{if(typeof j59unkSrc==="function")j59unkSrc(g)})}catch(e){}},0);
 /* TITLE PREFETCH (owner 18/11 02:06Z "không lẽ bây giờ tôi cứ bấm từng kiếp"): as soon as the game opens, the life sets of EVERY saved life
    (all slots, newest first) come in the background, 4 at a time, before the generic 'fig' set (it waits while LIFE.busy) — so tapping any life
    is usually instant and the gate above shows nothing. The set of a save is read by lending its S / rivals to kitLifeSet for one synchronous call. */
