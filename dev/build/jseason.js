@@ -43,8 +43,8 @@ function ssCeil(p,G,SK){let qb=0;const L=[];const have={};
 (function(){if(typeof stipGoodsTxt!=="function")return;const t0=stipGoodsTxt;stipGoodsTxt=function(G){
   /* a line paid wholly in silver is said once, in the quy bạc part (never «0 súc …») */
   let t=t0.call(this,Array.isArray(G)?G.filter(g=>!(g.qbN&&!g.n)):G)||"";try{
-  if(G&&G.qb)t+=`${t?" · ":""}rương còn đủ ${G.qbL.join(", ")}: Nội vụ phủ quy ra ${G.qb} lượng bạc`;
-  if(G&&G.stale)t+=`${t?" · ":""}${G.stale} phần trà để lâu đã mốc`}catch(e){}return t};window.stipGoodsTxt=stipGoodsTxt})();
+  if(G&&G.qb)t+=`${t?"; ":""}rương còn đủ ${G.qbL.join(", ")}: Nội vụ phủ quy ra ${G.qb} lượng bạc`;
+  if(G&&G.stale)t+=`${t?"; ":""}${G.stale} phần trà để lâu đã mốc`}catch(e){}return t};window.stipGoodsTxt=stipGoodsTxt})();
 /* the chest shows the silver too */
 (function(){if(typeof stipShow!=="function")return;const s0=stipShow;stipShow=function(G,net){const a=[...arguments];try{if(G&&G.qb)a[1]=(net||0)+G.qb}catch(e){}return s0.apply(this,a)};window.stipShow=stipShow})();
 /* 1. the garment knows its season; worn in its half of the year → Sắc +fit */
