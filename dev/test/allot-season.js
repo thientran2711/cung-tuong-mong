@@ -16,13 +16,13 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
    Q.length=0;document.getElementById('modal').hidden=true;render()});await sleep(800);
   const calm=()=>p.evaluate(()=>{try{const dw=document.getElementById('dawn');if(dw){dw.classList.remove('on');dw.hidden=true}KMQ.length=0;document.querySelectorAll('.kmov').forEach(o=>o.remove());kmBusy=false}catch(e){}});await calm();
   if(first){first=false;
-   const r=await p.evaluate(()=>{const o={};const B=BAL.stip;const fam=k=>ssFam(k);
+   const r=await p.evaluate(()=>{for(let i=0;i<400&&isSrv();i++)start();Q.length=0;const o={srv:isSrv()};const B=BAL.stip;const fam=k=>ssFam(k);
     /* 1. cloth by season, tea one a month, grade by rank */
     o.noMonthCloth=[0,1,2,3,4,5,6,7].every(r=>!stipList(r,false,false,false,false).some(([k])=>fam(k)==="vai"));
     o.seasonCloth=[0,3,7].every(r=>{const L=stipList(r,false,false,false,true).filter(([k])=>fam(k)==="vai");return L.length===1&&L[0][0]===B.cloth.k[r]&&L[0][1]===B.cloth.n});
     o.coldCloth=stipList(3,true,false,false,true).some(([k])=>k===B.cloth.cold)&&!stipList(3,true,false,false,false).some(([k])=>fam(k)==="vai");
     o.tea1=[0,1,2,3,4,5,6,7].every(r=>stipList(r,false,false,false,false).filter(([k])=>fam(k)==="tra").reduce((a,x)=>a+x[1],0)===1);
-    const t=stipRankTxt(3);o.rankTxt=/đầu mùa \(tháng 1, 4, 7, 10\)/.test(t)&&t.includes(IT[B.cloth.k[3]].n);o.rankTxtS=t;
+    const t=stipRankTxt(3);o.rankTxt=/đầu mùa \(tháng [^,)]+, tháng [^,)]+, tháng [^,)]+, tháng [^,)]+\)/.test(t)&&!/tháng \d/.test(t)&&t.includes(IT[B.cloth.k[3]].n);o.rankTxtS=t;
     o.blCard=!/2 súc lụa|4 súc gấm/.test(blCard())&&blCard().includes("đầu mùa");
     S.rank=3;S.sung=80;const goods=m=>{S.month=m;S.turn++;S.stip=S.stip||{};S.stip.tip=S.turn;return stipGoods(S,null)};
     S.inv=S.inv.filter(e=>!fam(e.k));
@@ -54,18 +54,21 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
     /* one core: the new BAL keys exist */
     o.bal=B.cloth&&B.keep&&B.teaAge>0&&B.ban&&B.keep.on===true;
     return o});
-   for(const k of ["noMonthCloth","seasonCloth","coldCloth","tea1","rankTxt","blCard","issueSeason","noIssueMid","teaCap","vaiCap","nenCap","dauCap","lxCap","qb","qbTxtOk","noVanish","qbSkim","npcCap","npcQb","npcNoTrim","stale","freshKept","sea","fit","fitWear","sewTxtOk","ban","banNotMoc","bal"])ok(k,!!r[k],k==="rankTxt"?r.rankTxtS:k==="qbTxtOk"?r.qbTxt:k==="sewTxtOk"?r.sewTxt:undefined);
+   ok("consort life (not the servant road)",r.srv===false);for(const k of ["noMonthCloth","seasonCloth","coldCloth","tea1","rankTxt","blCard","issueSeason","noIssueMid","teaCap","vaiCap","nenCap","dauCap","lxCap","qb","qbTxtOk","noVanish","qbSkim","npcCap","npcQb","npcNoTrim","stale","freshKept","sea","fit","fitWear","sewTxtOk","ban","banNotMoc","bal"])ok(k,!!r[k],k==="rankTxt"?r.rankTxtS:k==="qbTxtOk"?r.qbTxt:k==="sewTxtOk"?r.sewTxt:undefined);
    /* old save (a save written before this branch: monthly cloth heaps, no e.d on tea) loads and plays a month */
    const os=await p.evaluate(()=>{try{S.inv=S.inv.filter(e=>ssFam(e.k)!=="vai"&&ssFam(e.k)!=="tra");for(let i=0;i<9;i++)S.inv.push({k:"luahang",from:"noivu"},{k:"trahop",from:"noivu"});
      const raw=JSON.stringify(S);S=JSON.parse(raw);S.month=2;S.turn++;const G=stipGoods(S,null);const n=S.inv.filter(e=>e.k==="luahang").length;return{ok:n===9&&S.inv.filter(e=>e.k==="trahop"&&e.d!=null).length>=9&&!G.some(g=>g.k==="trahop"&&g.E.length),n}}catch(e){return{ok:false,err:String(e)}}});
    ok("oldSaveKeepsHeap(no piece taken, no new tea)",os.ok,os);
   }
   /* shots: the Bổng lộc panel (rank table) and this month's frame with a quy bạc line */
-  await p.evaluate(()=>{Q.length=0;Q.unshift({t:"Bổng lộc",h:blCard()});showModal()});await sleep(900);await calm();
+  await p.evaluate(()=>{try{closeModal()}catch(e){}for(let i=0;i<400&&isSrv();i++)start();Q.length=0;S.month=4;S.turn++;S.sung=80;/* her tea at the ceiling → this month's tea is paid as bạc */for(let i=0;i<BAL.stip.keep.tra;i++)S.inv.push({k:"tragoi",from:"noivu",d:S.turn});S.stip=S.stip||{};S.stip.tip=S.turn;econStipend(S);showModal()});await sleep(900);await calm();
+  await p.waitForFunction(()=>{const m=document.getElementById('modal');if(m&&!m.hidden&&/Bổng lộc tháng/.test(m.innerText))return true;try{if(Q.length&&(!m||m.hidden))showModal()}catch(e){}return false},null,{timeout:20000,polling:500}).catch(()=>{});await calm();
+  const ft=await p.evaluate(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.innerText:""});ok(`month frame says quy bạc ${W}x${H}`,/quy ra \d+ lượng bạc/.test(ft)&&!/%/.test(ft),ft.slice(0,400));
+  await p.screenshot({path:`${OUT}/bongloc-month-${W}x${H}.jpg`,quality:70,type:'jpeg'});
+  /* the rank panel (Bổng lộc help): opened while the modal system is live (after the month frame) */
+  await p.evaluate(()=>{try{closeModal()}catch(e){}Q.length=0;Q.unshift({t:"Bổng lộc",h:blCard()});showModal()});await sleep(1200);await calm();
+  const pt=await p.evaluate(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.innerText:""});ok(`rank panel shown, says đầu mùa ${W}x${H}`,/Bổng lộc phát ngày đầu/.test(pt)&&/đầu mùa/.test(pt)&&!/%/.test(pt));
   await p.screenshot({path:`${OUT}/bongloc-panel-${W}x${H}.jpg`,quality:70,type:'jpeg'});
   const ov=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);ok(`no h-scroll panel ${W}x${H}`,!ov);
-  await p.evaluate(()=>{try{closeModal()}catch(e){}Q.length=0;S.month=4;S.turn++;S.sung=80;S.stip=S.stip||{};S.stip.tip=S.turn;econStipend(S);showModal()});await sleep(900);await calm();
-  const ft=await p.evaluate(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.innerText:""});ok(`month frame says quy bạc ${W}x${H}`,/quy ra \d+ lượng bạc/.test(ft)&&!/%/.test(ft));
-  await p.screenshot({path:`${OUT}/bongloc-month-${W}x${H}.jpg`,quality:70,type:'jpeg'});
   ok(`no page errors ${W}x${H}`,!errs.length,errs.slice(0,3));await ctx.close()}
  await b.close();if(SV)SV.close();console.log(bad?`${bad} FAIL`:"ALL PASS");process.exit(bad?1:0)})();
