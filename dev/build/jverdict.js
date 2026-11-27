@@ -162,7 +162,18 @@ function cue(){const t=T();if(!t)return;t.classList.add("kres-hold");setTimeout(
 function hold(){if(RF.held){cue();return}RF.held=true;RF.stat.hold++;cue();dog()}
 /* SAFETY (no soft-lock, LC25 G4): while held, a result card that is no longer on screen (parked, hidden by a screen change, a new life) lets the
    held screen go at once — a card is never left in Q with nothing on screen */
-function dog(){if(RF.dogT)return;const tick=()=>{RF.dogT=0;if(!RF.held&&!RF.wantModal&&!RF.later.length)return;if(!ui()||!vis()){RF.stat.dog=(RF.stat.dog|0)+1;release();return}RF.dogT=setTimeout(tick,700)};RF.dogT=setTimeout(tick,700)}
+/* COOP-QCARD (RV-173 LIVE hang, co-op + solo, law 11 whole family): «on screen» = she can SEE and TAP it, not only «not hidden». A held card that
+   another layer covers (the kit scene layer .kscn z 57 the selection days open right after «Theo thái giám vào cửa viện», a ring screen, any
+   full-screen layer drawn later) held the next card («Dưỡng Tú viện») hidden behind a result card nobody could reach: Q[0] never painted,
+   «Sẵn sàng» / «Sang buổi» dead. The held card now stands over the kit scene layer (CSS below, KIT_SCN.z + 1); and whatever still covers its
+   «Tiếp ▸» for two looks in a row lets the held screen go and takes the covered card away (its result stays in the Sổ ghi): a card is never
+   left in Q behind a screen she cannot reach. */
+function covered(){try{const t=T();if(!t)return false;const b=t.querySelector(".kres-next")||t;const r=b.getBoundingClientRect();if(!r.width||!r.height)return false;
+ const x=Math.min(innerWidth-1,Math.max(0,r.left+r.width/2)),y=Math.min(innerHeight-1,Math.max(0,r.top+r.height/2));const h=document.elementFromPoint(x,y);
+ return !h||!(t.contains(h)||h.id==="kxcatch")}catch(e){return false}}
+function dog(){if(RF.dogT)return;const tick=()=>{RF.dogT=0;if(!RF.held&&!RF.wantModal&&!RF.later.length)return;if(!ui()||!vis()){RF.stat.dog=(RF.stat.dog|0)+1;release();return}
+  if(RF.held&&covered()){if((RF.cov=(RF.cov|0)+1)>=2){RF.cov=0;RF.stat.cover=(RF.stat.cover|0)+1;release();try{const t=T();if(t)t.classList.remove("on")}catch(e){}return}}else RF.cov=0;
+  RF.dogT=setTimeout(tick,700)};RF.dogT=setTimeout(tick,700)}
 function release(){if(!RF.held&&!RF.wantModal&&!RF.later.length)return;RF.held=false;RF.stat.rel++;const t=T();if(t){t.classList.remove("kres-hold");const b=t.querySelector(".kres-next");if(b)b.remove()}
  try{front()}catch(e){}const L=RF.later.splice(0);for(const f of L){try{f()}catch(e){console.error("RF later",e)}}
  if(RF.wantModal){RF.wantModal=false;try{if(Q.length&&!S.dead)showModal()}catch(e){console.error("RF modal",e)}}}
@@ -214,7 +225,7 @@ try{if(typeof lifeStore==="function")lifeStore("RF result-first hold",()=>{RF.he
 const st=document.createElement("style");st.id="rf-css";st.textContent=`
 /* KIT 7.4: the result card of a choice is above the focus layer (.kfoc z 46) and every card (#modal z 42) */
 .rtoast.karesult{z-index:47}
-.rtoast.karesult.kres-hold{pointer-events:auto}
+.rtoast.karesult.kres-hold{pointer-events:auto;z-index:${KIT_SCN.z+1}}/* COOP-QCARD: a HELD card stands over the kit scene layer (.kscn, KIT_SCN.z) too — «on top of everything» (KIT 7.4) */
 /* over the KIT 32.10a park: only the held result card, or the result card over the focus layer (stage view) */
 body.kdlg-on #rtoast.karesult.kres-front{visibility:visible!important;pointer-events:auto!important}
 .rtoast.karesult .kres-next{align-self:flex-end;margin-top:4px}`;document.head.appendChild(st);

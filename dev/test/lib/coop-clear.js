@@ -3,6 +3,7 @@
    (night-balance-bundle [data-km-close], coop-thin-g-f1 jfocus/jdfv, coop-host-lag-r2-r2) → every merge of two lanes conflicted.
    Now each bot's clear() calls  require('./lib/coop-clear.js').first(o, <its own page step>)  and only its own extra steps stay inline.
    Order (a player always meets them on top of the game first):
+     0. a HELD result card «Tiếp ▸» (jverdict) when it is the top of the screen                          (COOP-QCARD, RV-173)
      1. the Luân hồi roulette of a new life: «Bỏ qua» (#kroul .krskip)                                   (night-balance-bundle / coop-thin-g-f1)
      1b. a podium (#kpodov): its «Tiếp» .kpod-next — the room's cards wait behind it (review/day-queue-2, owner 24/11 ~22:02Z)   (DAYQ-4)
      2. a manual kit scene (night-end «Nhận» #kneov, reward box, person reveal): its own close [data-km-close]; the kit ITEM REVEAL (jfx kitGain)
@@ -21,6 +22,10 @@
    first(o, fn [, arg]) → 'x' after a tap, else the bot's own step o.p.evaluate(fn, arg).
    Count: window.__kfocN = taps of 3 + 4 (coop-room-faces prints it). */
 const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
+ /* 0. a HELD result card (jverdict ob-verdict-3: «KẾT QUẢ … Tiếp ▸», the next card waits until she taps it away) — tapped only when its «Tiếp ▸» is really
+    the top of the screen at its centre (a player cannot tap a card another layer covers; COOP-QCARD RV-173: the card sat under the selection scene) */
+ {const t=document.getElementById('rtoast'),b=t&&t.classList.contains('kres-hold')&&t.classList.contains('on')?t.querySelector('.kres-next'):null;
+  if(b){const r=b.getBoundingClientRect();const h=r.width?document.elementFromPoint(r.left+r.width/2,r.top+r.height/2):null;if(h&&(t.contains(h)||h.id==='kxcatch')){window.__kresN=(window.__kresN||0)+1;b.click();return'x'}}}
  const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
  /* 1a. the roulette's picture wait (jk2b kitRoulette: ≤ 8 s cover #kroulw «Tranh luân hồi đang trải…», no button on it): a player waits — 'x' keeps
     the bot's clear() polling, so the roulette's «Bỏ qua» is tapped the moment it shows (coop-title-leave guest ☰ race, SANGBUOI r4 25/11) */
