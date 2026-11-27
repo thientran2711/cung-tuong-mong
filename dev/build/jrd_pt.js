@@ -504,7 +504,7 @@ rdDef("pt_su",8,{t:"Hồi tứ",w:"emp",sj:"lễ vật Đại Hy ban về {land}
   {n:"Để mặc",wx:"không thêm thù",lx:"lụa có thể mỏng",rt:"Nhà {v} dệt lụa."}]},
  t1:{h:"Hộ bộ đếm",w:"emp",t:"Hộ bộ đếm xong: hồi tứ cho {land} nặng gấp đôi cống phẩm. Hộ bộ thượng thư nói: thế là Đại Hy lỗ.",o:[
   {n:"Thưa: Đại Hy lỗ lụa, được lòng",f:"sach",wx:"ngài thấy ngươi nghĩ xa",lx:"Hộ bộ ghét ngươi",rt:"Hoàng thượng cười: “Nàng nói như một Thượng thư.”"},
-  {n:"Xin bớt lụa, giữ sách",f:"sach",wx:"Hộ bộ đỡ lỗ",lx:"{land} ít lụa",rt:"Lụa bớt một nửa. Sách giữ nguyên."},
+  {n:"Xin bớt lụa, giữ sách",f:"sach",wx:"Hộ bộ Bạc +",lx:"{land} ít lụa",rt:"Lụa bớt một nửa. Sách giữ nguyên."},
   {n:"Xin bớt sách, giữ lụa",f:"bac",wx:"của quý ở lại Đại Hy",lx:"{land} thiếu sách",rt:"Sách bớt một nửa. Hộ bộ gật đầu."}]},
  x1:{h:"Ngự phê hồi tứ",w:"emp",t:"Hoàng thượng cầm bút son trên danh mục hồi tứ. Ngài hỏi ngươi lần cuối.",o:[
   {n:"Xin cho {land} đủ sách, kể cả luật lệnh",e:["win","lose"],rt:"Ngài phê đủ. Đại sứ cầm danh mục, run tay.",rf:"Ngài phê, nhưng Hộ bộ giữ lại sách luật lệnh: ‘của quý không ra khỏi nước’."},

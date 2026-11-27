@@ -556,6 +556,9 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
    brings no event that has no fitting morning slot: dawnSlot = the buổi an unslotted world card moves to (1 = trưa); dawnOpt = odds (0..100) that an optional
    j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn; wake = ms a card may wait in Q with nothing on screen before the safety net shows it (button-crawl-fix-5 dqWake; SANGBUOI-HELD r3 folded its r2 net into it: one net); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
 Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000}});
+/* F10 renderer-mem (26/11), BAL.kobs = the kit's DOM observers. The «Kéo xuống» scroll cue (jksize kitScrollCues). short = a scroller under this many px gets the slim strip below it
+   (was a typed 260); hyst = a scroller keeps its short/tall look until its own height moves by more than this (its own cue never flips it). */
+Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* kaPass: card-normaliser passes per wake (j63 kaRun) */
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
@@ -572,7 +575,7 @@ BAL.relOan={hurt:.6,doer:.2,mend:.3};
    grudge = a man reported to the guards / Cung Chính ti, or threatened and refusing (jmen m.grudge); grudge2 = the guard shamed beside him (grudgeN 1);
    hail = a greeting with a man (j22 manHail, both ways: relAdd); srvGrudge = a servant punished without cause (j24 s.grudge); bully = a servant bullied by another (jagstaff s.bullyBy);
    threat = a servant threatened over a secret tie (j10 threatServ, j42 the servant road); bribe = thiện cảm of a servant who took the bribe toward the giver.
-   The fade is the shared BAL.oanFade (j28 oanMonth), the caps the shared −100..100 / 0..100. */
+   The fade is the weekly cool-down BAL.oanCool (j28 oanCool; BAL.oanFade / oanMonth only with BAL.oanCool.on = 0), the caps the shared −100..100 / 0..100. */
 BAL.relMS={hail:5,grudge:40,grudge2:20,srvGrudge:30,bully:20,threat:30,bribe:10};
 BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
  need:{fav:1,rank:.6,heir:.8},heirHas:.25,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
@@ -752,20 +755,29 @@ BAL.entry.phuc={lv:[11,12,5],sp:4,max:10,duc:[30,30],pow:[40,30],foul:{od:40,oan
      thi   contest: +v phần of talent (SC7[kind].f, so the shown odds and the real score agree)
      suc   Sức +v on each night's sleep (j76sleep)
      don   rumour resistance: a rumour (ACT.rumor) against the wearer has v fewer odds (oRumor) */
-BAL.dh={n0:[1,5,10],step:2,artLv:[3,4,5],
- B:{sac:{v:[1,1,2]},danh:{v:[1,1,2]},sung:{v:[1,1,2]},duc:{v:[1,1,2]},tai:{v:[1,1,2]},tamco:{v:[1,1,2]},
-  gSung:{v:[20,14,10]},gDanh:{v:[20,14,10]},gBac:{v:[12,8,6]},gTren:{v:[12,8,6]},gHau:{v:[12,8,6]},gTrung:{v:[10,7,5]},
-  phuc:{v:[2,3,4]},thai:{v:[0,1,2]},nghe:{v:[15,25,35]},thi:{v:[2,3,5]},suc:{v:[1,2,3]},don:{v:[5,8,12]}},
+/* TITLE-BAL (owner OD 26/11 ~18:20Z «TITLE REBALANCE», ~18:50Z (8) «6 recs approved; top tier = beauty + small bonus; lower tiers khó vừa vừa»;
+   robot dev/measure/title-bal-bot.js, table dev/handover/reports/title-bal.md): the old flat 1 / 5 / 10 ladder is gone; every title's steps come from
+   how often its deed really happens in a robot life (median per life): step 1 ≈ a season-plus of steady play at that deed, top = a life's devotion.
+   q.wk = the least work tier (WTIER: 0 Thường, 1 Khá, 2 Tinh xảo, 3 Tuyệt phẩm) that counts for the «work» titles (quality, not tries);
+   note.per = new-title panels at most per buổi (the rest wait for the next buổi: never a pile in one buổi);
+   cond = the condition titles: han.rank = «Sen nở trong bùn» (first place at this rank or below, or while punished), th.v = «Thái hậu ưu ái» (her liking ≥ v
+   for n months in a row). «Sớm viếng chiều thăm» counts DAYS IN A ROW with a Thỉnh an (a streak), not tries.
+   Bonus v per step [s1,s2,s3]: s2 clearly above s1 (the harder bar pays more), s3 ≈ s2 + a little (the top step is mostly beauty: a higher colour tier). */
+BAL.dh={n0:[2,6,12],step:2,artLv:[4,5],q:{wk:2},note:{per:1},cond:{han:{rank:1},th:{v:60}},
+ B:{sac:{v:[1,2,2]},danh:{v:[1,2,2]},sung:{v:[1,2,2]},duc:{v:[1,2,2]},tai:{v:[1,2,2]},tamco:{v:[1,2,2]},
+  gSung:{v:[20,12,10]},gDanh:{v:[20,12,10]},gBac:{v:[12,7,6]},gTren:{v:[12,7,6]},gHau:{v:[12,7,6]},gTrung:{v:[10,6,5]},
+  phuc:{v:[1,2,3]},thai:{v:[0,1,1]},nghe:{v:[10,20,25]},thi:{v:[1,2,3]},suc:{v:[1,2,2]},don:{v:[4,8,10]}},
  T:{w_doden:{b:3,ch:["tamco","phuc","thi"]},w_tho:{b:3,ch:["tai","danh","thi"]},w_doi:{b:3,ch:["tai","gDanh","thi"]},w_dan:{b:3,ch:["sac","nghe","thi"]},
   w_mua:{b:3,ch:["sac","danh","thi"]},w_hat:{b:3,ch:["sac","gTren","thi"]},w_theu:{b:3,ch:["danh","gBac","thi"]},w_kim:{b:3,ch:["sac","phuc","thi"]},
   w_hoa:{b:3,ch:["sac","gHau","thi"]},w_ve:{b:3,ch:["tai","danh","thi"]},w_co:{b:3,ch:["tamco","phuc","thi"]},w_banh:{b:3,ch:["sung","gTren","thi"]},
   w_ban:{b:3,ch:["suc","danh","thi"]},w_dauho:{b:3,ch:["phuc","gHau","thi"]},w_huong:{b:3,ch:["sac","sung","thi"]},
-  meta:{b:6,st:1,n:[3,6,10],ch:["gSung","gDanh","phuc"]},podium:{b:2,ch:["danh","thi"]},
-  nights:{b:2,n:[1,10,30],ch:["sung","gSung","thai"]},kids:{b:3,n:[1,3,5],ch:["danh","gTren","thai"]},
-  a_thinh:{b:1,n:[5,20,50],ch:["duc","gTren"]},a_doc:{b:1,n:[5,20,50],ch:["tai","nghe"]},a_nhan:{b:1,n:[5,20,50],ch:["sac","suc"]},
-  l_cam:{b:2,st:1,ch:["suc","nghe"]},l_ky:{b:2,st:1,ch:["tamco","nghe","don"]},l_thi:{b:2,st:1,ch:["tai","nghe"]},l_hoa:{b:2,st:1,ch:["danh","nghe"]},
-  l_vu:{b:2,st:1,ch:["sac","nghe"]},l_y:{b:2,st:1,ch:["suc","nghe"]},l_theu:{b:2,st:1,ch:["gBac","nghe"]},l_nau:{b:2,st:1,ch:["gTrung","nghe"]},
-  m_mon:{b:1,ch:["sung","gTrung"]},m_kinh:{b:1,ch:["duc","don"]},m_theu:{b:1,ch:["gBac","sac"]},m_tranh:{b:1,ch:["tai","danh"]},m_khuc:{b:1,ch:["sac","gHau"]}},
+  meta:{b:6,st:1,n:[3,6,10],ch:["gSung","gDanh","phuc"]},podium:{b:2,n:[3,12,30],ch:["danh","thi"]},
+  nights:{b:2,n:[5,25,80],ch:["sung","gSung","thai"]},kids:{b:3,n:[2,4,6],ch:["danh","gTren","thai"]},
+  a_thinh:{b:1,n:[12,36,90],ch:["duc","gTren"]},a_doc:{b:1,n:[15,50,120],ch:["tai","nghe"]},a_nhan:{b:1,n:[15,50,120],ch:["sac","suc"]},
+  l_cam:{b:4,st:1,ch:["suc","nghe"]},l_ky:{b:4,st:1,ch:["tamco","nghe","don"]},l_thi:{b:4,st:1,ch:["tai","nghe"]},l_hoa:{b:4,st:1,ch:["danh","nghe"]},
+  l_vu:{b:4,st:1,ch:["sac","nghe"]},l_y:{b:4,st:1,ch:["suc","nghe"]},l_theu:{b:4,st:1,ch:["gBac","nghe"]},l_nau:{b:4,st:1,ch:["gTrung","nghe"]},
+  m_mon:{b:1,n:[4,12,30],ch:["sung","gTrung"]},m_kinh:{b:1,n:[4,12,30],ch:["duc","don"]},m_theu:{b:1,n:[4,12,30],ch:["gBac","sac"]},m_tranh:{b:1,n:[4,12,30],ch:["tai","danh"]},m_khuc:{b:1,n:[4,12,30],ch:["sac","gHau"]},
+  c_han:{b:5,n:[1],ch:["danh","thi"]},c_th:{b:3,n:[6,18,36],ch:["gTren","duc"]}},
 /* PHASE 2 (jdh2, review/title-sys2; owner 16/11 13:00Z / 13:20Z (2)(4)(5) / 13:30Z (3)):
    hieu  the Emperor's hiệu (Thục, Hiền… TITLES): rank ≥ minRank (3 = Tần), Sủng ≥ RANKS[rank].s + sung, Danh ≥ RANKS[rank].d + danh, gapM months
          at the rank; eligible → p % each month (bestow on son / promo / contest: at once); Danh +danhG on the grant. Book + seal come with it.
@@ -906,7 +918,9 @@ BAL.srvGate={rew:60,rec:50,get frameLoy(){return -BAL.eff.j42.loyalSrvStaffAct},
    srvMp = công lao per bậc (need (bậc+1)*srvMp); srvLoyal = a new servant's loyalty base+R(r) */
 BAL.srvRisk={vuon:28,thu:34,tyv:20,tn:40,home:18,def:26,fr:4,tc:10,min:6,max:92};
 BAL.caught={fac:4};/* j8 caughtOdds (clamped by the ONE odds cap, oddsCl) */
-BAL.srvGrant={tin:55,get base(){return BAL.odb.j42.rbTop_2},bond:3,stayLoy:5};BAL.srvMp=5;BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
+BAL.srvGrant={tin:55,get base(){return BAL.odb.j42.rbTop_2},bond:3,stayLoy:5};BAL.srvMpN=[6,8,10,12,14,16,18];/* review/pace-all: Công lao a servant needs at each rank (srvMpNeed; her and every NPC servant, law 1), rising (law 5); with the whole-number merits
+   (BAL.eff.j42 merit* 1 / 2, errand / order 3; BAL.ag … listen / watch 1, scout 2) one ordinary chore moves 1/6 … 1/16 of a rank step (was 0.25–0.5 of (rank+1)×5: 1/20 … 1/100,
+   and the shown «Công lao n/need» did not move for 2–4 chores). Canon overwrite of the old BAL.srvMp = 5 (need = (rank+1) × 5). */BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
 BAL.ag.staff={st:{duc:[10,40],tamco:[10,40],danh:[0,10],suc:[60,90],bac:[0,20]},goal:{tin:70,suc:60,bac:40,sac:60,tai:40,duc:40,friend:2},
  nw:{tin:1.2,mp:1,suc:1.2,bac:.6,self:.4,ally:.5,sung:1,love:.3,spite:.4},greed:2,mpS:4,sc:{af:.3,tinh:.3,spite:.3,sung:.25},
  riskD:3,caughtTin:20,caughtSuc:20,vowTinh:20,dt:40,expel:30,exile:35,vowW:.5,outW:.3,monthSuc:10,secSee:30,hit:1,uMul:3,peerGap:40,nvpAf:5,askAf:2};
@@ -1075,6 +1089,11 @@ Object.assign(BAL.kc2.st,{kc:{moi:40,hot:60,mien:50,nhan:70,dinh:90,kgt:[40,20],
 /* review/one-core-jkc (ONE CORE OD:L1267, dev/measure/one-core-jkc-move.js): BAL.kc2.kcCard = the tiểu thư home road (jkc.js) cards and event options —
    odds bases od(N+…) (<card>_od) / roll(N±…) (<option>_rb) and the house-stat kap / kgt / khm amounts of a card's c / w / l (<card>_<slot>_<stat>). */
 Object.assign(BAL.kc2,{kcCard:{"vietNhatKyGiau_od":78,"chaiChuotThuY_od":70,"thinhAn_w_kgt":1,"hauChaOThu_od":55,"khuyenChaChonPhe_od":30,"xinChaDangSo_od":10,"xinChaTienRieng_od":45,"lamVuaLong_od":65,"lamVuaLong_w_khm":5,"ketThan_od":60,"ngangChanThuMuoi_od":40,"ngangChanThuMuoi_l_kgt":-3,"doLaVien_od":30,"toTruocToMau_od":50,"toTruocToMau_w_kgt":2,"quanViecNha_od":50,"quanViecNha_w_kgt":1,"quanViecNha_l_kgt":-2,"daoPhoCho_od":80,"ngheChuyenOTra_od":40,"ngheChuyenOTra_l_kgt":-4,"tham_od":65,"kheoTuChoiNha_od":45,"kheoTuChoiNha_w_kap":-10,"kheoTuChoiNha_l_kgt":-3,"giaBenhTranhXem_od":45,"giaBenhTranhXem_w_kap":-15,"guiThuChoNguoi_od":40,"moiDanhSu_od":35,"muaTinCuaThai_od":50,"guiQuaVaoCung_od":60,"xinToMauMoi_od":35,"nhoHuynhTruongDo_od":45,"guiBucTheuTu_od":50,"nhoToMauKhuyen_od":10,"hauTronBuoi_od":65,"hauTronBuoi_w_khm":5,"giupMotViec_od":60,"saiTyNuNgang_od":40,"saiTyNuNgang_l_kgt":-3,"kcCards_od":30,"kcCards_od_2":30,"diXemChoKhong_od":80,"ngheLomNgoaiHien_od":35,"ngheLomNgoaiHien_l_kgt":-4,"mangBanhNhaLam_od":65,"nhinAnTranhXem_od":45,"nhinAnTranhXem_w_kap":-15,"tuTayDuaThu_od":30,"kcMonth_rb":30,"dungThu_rb":50,"dungRaBenh_rb":40,"xinToMauCho_rb":45,"noiLaiVoiCha_rb":50,"doiLaiCauDoi_rb":30,"thucDemTheuBach_rb":50,"thuaConDoiKy_rb":40,"quyXinChaCho_rb":45,"thuMotChutLen_rb":50}});
+/* FIRSTCARD (law 4; MAIN 153): numbers that were typed inside jkc, moved here unchanged so the roll and the card's odds word read ONE value —
+   ill = the dịch fever (kcIll): Sức lost, below low Sức the death chance dieLo, else dieHi (Sức ≤ 0 after the fever = death);
+   dienSel = the tiểu thư Điện tuyển keep chance (kcDienSel): base + (score − KC.cut[0])·k, floor lo (cap BAL.kcSelMax), 0 below cut[0] − gap; noise = ± of the score;
+   kcCard.quyXinChaWant = the plea bonus when she wants the tuyển tú (kcQuyP). */
+Object.assign(BAL.kc2,{ill:{suc:35,low:20,dieLo:40,dieHi:8},dienSel:{base:45,k:1.2,lo:20,gap:15,noise:4}});BAL.kc2.kcCard.quyXinChaWant=15;
 
 /* ONE CORE (owner OD:L1267; review/show-why, from review-trait-pool-r1 follow-up): every number chosen by a nết test lives here.
    BAL.net.k: quality-keyed sizes for nq(p,quality,n) / netIs (servant + agent qualities). BAL.net.n: nết-keyed tables read by
@@ -1241,7 +1260,7 @@ Object.assign(BAL.ag,{kh2:{on:1,spill:1,rest:1,max:3,maxX:1,see:{on:1,w:{ignore:
    tell.late = weight of a report a buổi late (peaks at lòng 50); scout.caught = % of failed scouting that is caught (else she comes back empty-handed);
    scout.oan = the target's regard lost when the spy is caught (the player's "Sai đi dò la": oán +5); keep = news kept per day */
 BAL.ag.know={eye:100,tell:{tell:1,late:.5,keep:1,sell:1.5,q:{trung:.4,chuyen:.2,lanh:.1,tham:-.3,nhat:-.2}},voice:{warm:70,cool:40},serve:.25,
- hear:{safe:4,spite:2,ally:1},base:.01,listen:{k:1,o:50,tc:3,tin:2,mp:.25},scout:{k:2,tin:3,lose:5,mp:.5,oan:5,caught:50},watch:{k:1,tin:2,mp:.25},keep:20,share:[5,20]};
+ hear:{safe:4,spite:2,ally:1},base:.01,listen:{k:1,o:50,tc:3,tin:2,mp:1},scout:{k:2,tin:3,lose:5,mp:2,oan:5,caught:50},watch:{k:1,tin:2,mp:1},keep:20,share:[5,20]};
 /* AG-ALL-2g INFO SELLERS (jagknow tail; owner OD 17/11 ~16:50Z (2)): o = % per buổi that a seller comes to a buyer (her and each consort);
    kh = khắc to hear him out (dayFit); min = least worth of news that may be sold (never trivial); val = worth per kind of news (j78 fact key prefix;
    scheme / schemeMe = a scheme deed of this buổi against another / against the buyer; fav = a change of favour ≥ fav.d Sủng); price = bạc at worth 100
@@ -2023,12 +2042,13 @@ BAL.dc={on:1,
    (+ (af − mid) × k), writeBac / writeAf / lostDanh / askAf = the two «Thư nhà» acts, know = j61 intel depth, keep = letters listed, gifts = items home sends.
    ld = «lời đồn cũ» event: p % a month; own (admit) / wit (mother's letter, witBac, witO odds, foe Danh −witFoe and Oán witOan, lose Danh −witLose) / wait.
    Law 2 (review r1): writeBac 5→15, askAf 3→1 — writing (af +, a letter item Sức+10/Đức+2, true intel) dominated asking (af −, one gift item worth 6–30 bạc).
-   title = «Khuê các» titles: tier, rare tier, quyRank (Quý nhân), carry (worn again in later lives). */
+   title = «Khuê các» titles: tier, rare tier, quyRank (Quý nhân), carry (worn again in later lives); TITLE-BAL: ONE entry title only — Quý nhân+ → «Khuê tú danh môn»,
+   else «Trâm hoa ngự ban» only with home Danh ≥ tuyenDanh (never just for walking in). */
 BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac:80,vpRare:.4,
  carry:{cap:0,ldOld:40,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
  home:{p:8,mid:50,khac:1,pk:.2,giftShare:30,writeO:70,giftO:60,k:.3,writeBac:15,writeAf:4,lostDanh:1,askAf:1,know:2,keep:12,gifts:["tuithom","luahang","huongtram","khantay"]},
  ld:{p:6,own:{danh:4,duc:2},witBac:10,witO:55,witFoe:4,witOan:6,witLose:6,wait:{danh:2,tamco:1}},
- title:{tier:4,rare:6,quyRank:2,carry:1}};
+ title:{tier:4,rare:6,quyRank:2,carry:1,tuyenDanh:30}};
 /* jkcco (GAP OR13 co-op half, review/outside-coop; OUTSIDE_PLAN §13): the friend at home <-> the friend in the palace, both ways.
    letter: o odds, suc Sức price, bond tình hảo hữu (S.rl[friend]) when kept, lost = Danh (palace) / Lời đồn (home) when it fails, know = j61 level,
        burn = Tâm cơ for «Đọc xong đốt đi» (law 2, review r1).
@@ -2184,6 +2204,20 @@ BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's n�
      m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},
      l:{sung:6,danh:6,bac:60,suc:15,mat:6,th:6,hh:6,duc:6,maid:9,rel:12,proof:2}}};
 
+/* NEWS SIEVE (owner OD 26/11 ~04:40Z, jnsieve): the daily «Tin trong cung» / «Tin báo» keep only news that touches HER or her choices;
+   NPC ↔ NPC drama keeps running (law 6b) and reaches her as ONE monthly summary (jnsieve nsMonth). on: the sieve; netOpen: every consort's
+   nết is shown from the start (trKnown), tai mắt no longer «discover» it; sumTop: most pairs listed in the summary; sumMin: smallest thiện cảm
+   change worth a line; sumOwnMin: smallest change of a person's feeling toward HER worth a line; keepK: newsAdd kinds that always stay
+   (the night / accusation / rank / title); recMax: lines kept in the harem record S.hrec shown in the Sổ ghi (OD ~05:05Z); bigBand: an NPC ↔ NPC act of
+   this danger band (BANDS, j24) or higher is also a «Tin báo» line («ai mưu hại ai»); mock: open-mockery kinds that a lower rank never does to a higher one (mockOK, j8). */
+BAL.news={on:1,netOpen:1,sumTop:6,sumMin:5,sumOwnMin:5,recMax:300,bigBand:2,keepK:["steal","illicit","hieu","rank","evd"],
+ mock:["provoke","humiliate","humil","tease","cham","apTaunt"],
+ /* ONE SIEVE (owner OD 26/11 ~06:50Z (B), jnsieve nsSieve): on a result card a person row of someone else (not her act's target, not her household,
+    not Thái hậu / Hoàng hậu) shows only when the span's own log names that person about HER, or the change is at least `big`; at most `rowMax`
+    such rows; Kèm (ghen / oán of others) lists at most `kemMax` people who pass the same sieve, one per line; every other person change is only counted («… và N người khác») and fully recorded in the Sổ ghi. */
+ card:{big:5,rowMax:3,kemMax:4},
+ /* Sổ ghi kinds (the kind tabs of the Sổ ghi, nsKind): her own lines, the harem record, big harm, rumours heard */
+ logTabs:[["all","Tất cả"],["me","Việc của ta"],["hc","Chuyện hậu cung"],["big","Mưu hại"]]};
 /* KIT §95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
 BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
 /* review/net-build (owner OD 24/11 ~06:00Z / ~06:40Z, MAIN 119 order; design dev/handover/reports/net-thresholds.md §3): NẾT THRESHOLDS — ONE CORE (law 4).

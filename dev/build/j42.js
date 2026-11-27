@@ -550,7 +550,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 function srvMen(){try{menInit()}catch(e){}return (S.men||[]).filter(m=>m.alive&&(m.age||0)>=BAL.ageMin)}
 function srvAdult(m){return (S.age||0)>=BAL.ageMin&&!!m&&(m.age||0)>=BAL.ageMin}
 function srvRiskOf(k,eyes,fr,tc){const T=BAL.srvRisk;const base=T[k]!=null&&k!=="def"?T[k]:T.def;return cl(Math.round(base+eyes-fr*T.fr-(tc||0)/T.tc),T.min,T.max)}
-function srvMpNeed(rk){return ((rk||0)+1)*BAL.srvMp}
+function srvMpNeed(rk){const N=BAL.srvMpN;return N[Math.max(0,Math.min(N.length-1,rk|0))]}
 function srvRisk(k){const eN=liveRivals(true).reduce((s,v)=>s+eyes(v),0);return srvRiskOf(k,eN,srvFriendList().length,S.tamco)}
 function srvBond(){const L=srvMen().filter(m=>m.tinh>=BAL.tinhLv.close&&m.rw!=="vương gia").sort((a,b)=>(b.tinh+(S.srv.vow===b.id?50:0))-(a.tinh+(S.srv.vow===a.id?50:0)));return L[0]||null}
 function srvSeen(m,n){S.srv.rumor=(S.srv.rumor||0)+n;const mi=srvM(),W=npcWit(S.place,null,{not:[mi,S],vs:S}).map(x=>x.p).filter(v=>rivals.includes(v));const lv=npwPick(W,x=>hostility(x,S)+(mi?hostility(x,mi):0)-BAL.ag.why.srv.leakMin);if(lv&&roll(BAL.odb.j42.rlSrvSeen)){S.srv.leak=lv.id}/* npc-purpose G2a: only one who was really there, with a grudge to use it, holds it over her */log(`Có người thấy ngươi với ${m.name}. Lời ra tiếng vào.`)}
