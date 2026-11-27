@@ -159,14 +159,19 @@ function dqInstall(){
 (function(){if(typeof kmOnReset==="function")kmOnReset(()=>{const arm=!!DQ.mt;DQ.want=null;DQ.newsHold=0;clearTimeout(DQ.t);clearTimeout(DQ.mt);DQ.t=DQ.mt=0;if(arm)try{dqArmModal()}catch(e){}})})();
 /* installed after every load-time wrapper and after the setTimeout(0) ones (jagent, jk4, jksize …): the outermost layer */
 setTimeout(()=>setTimeout(()=>{try{dqInstall()}catch(e){console.error("dayq install",e)}},0),0);
+/* KK47 (owner OD 26/11 ~21:41Z (c); law 10 ONE fixed button size): «Sang buổi» / «Sang ngày mới» / every wait cue share ONE width = the widest normal label on this device
+   (iPad: the button grew 108 → 144 px with the label); measured once per layout (load, resize, design-canvas change), never while a cue shows. */
+function kitNextSize(){try{const n=document.getElementById("next");if(!n||n.classList.contains("kcwait")||!n.offsetWidth)return;const t0=n.textContent;n.style.width="";let w=0;
+ for(const t of ["Sang buổi","Sang ngày mới"]){n.textContent=t;w=Math.max(w,n.offsetWidth)}n.textContent=t0;n.style.width=w+"px"}catch(e){}}
+window.kitNextSize=kitNextSize;setTimeout(kitNextSize,600);addEventListener("resize",()=>setTimeout(kitNextSize,120));
 /* m-fix-1 item 2 (robot M4 25/11 05:52Z + 05:58Z: «Sang ngày mới» greyed with NO cue while a card waited held behind a person view (kfoc) / away
    from her room; a newcomer saw a dead button). j6 render() disables #next while Q holds a card; when that card is HELD here (gate (c) / the book:
    nothing on screen shows it), the button SAYS WHY with the one waiting-words table (CTM_WAIT.dqHeld) in the same wrapping look as the co-op wait
    (#next.kcwait, jcoopworld lockNext); the normal label comes back at the next render once the card is shown. Solo only (dqUi), like the hold. */
 function dqNextCue(){try{const n=document.getElementById("next");if(!n)return;const M=document.getElementById("modal");
- const held=dqUi()&&n.disabled&&!S.mg&&Q.length>0&&(!M||dqHidden(M));const W=window.CTM_WAIT||{};const t=held&&W.dqRoom&&typeof dqRoomWait==='function'&&dqRoomWait()?W.dqRoom:W.dqHeld;/* button-crawl-fix-6 (A) */
- if(held&&t){if(!n.dataset.dqCue){n.dataset.dqCue="1";if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait")}if(n.textContent!==t)n.textContent=t;n.title=t}
- else if(n.dataset.dqCue){delete n.dataset.dqCue;n.style.maxWidth="";n.classList.remove("kcwait");n.removeAttribute("title");if(n.textContent===W.dqHeld||n.textContent===W.dqRoom)n.textContent=(S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2))?"Sang ngày mới":"Sang buổi"}}catch(e){}}
+ const held=dqUi()&&n.disabled&&!S.mg&&Q.length>0&&(!M||dqHidden(M));const W=window.CTM_WAIT||{};const rm=held&&W.dqRoom&&typeof dqRoomWait==='function'&&dqRoomWait(),why=rm?W.dqRoom:W.dqHeld,t=rm?(W.dqRoomBtn||W.dqRoom):(W.dqHeldBtn||W.dqHeld);/* button-crawl-fix-6 (A); KK47 law 10: the button = the SHORT label, the reason = the kit notice line */
+ if(held&&t){if(!n.dataset.dqCue){n.dataset.dqCue="1";if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait")}if(n.textContent!==t)n.textContent=t;n.title=why;if(n.dataset.dqWhy!==why){n.dataset.dqWhy=why;try{if(typeof kitNotice==="function")kitNotice({id:"dqcue",line:why})}catch(e){}}}
+ else if(n.dataset.dqCue){delete n.dataset.dqCue;delete n.dataset.dqWhy;try{if(typeof kitNoticeDrop==="function")kitNoticeDrop("dqcue")}catch(e){}n.style.maxWidth="";n.classList.remove("kcwait");n.removeAttribute("title");if([W.dqHeld,W.dqRoom,W.dqHeldBtn,W.dqRoomBtn].includes(n.textContent))n.textContent=(S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2))?"Sang ngày mới":"Sang buổi"}}catch(e){}}
 setTimeout(()=>setTimeout(()=>{try{if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);dqNextCue();return r}}
  setInterval(dqNextCue,700)/* the hold releases on a close that may not render */;
  try{const n=document.getElementById("next");if(n)new MutationObserver(()=>dqNextCue()).observe(n,{childList:true,characterData:true,subtree:true,attributes:true,attributeFilter:["disabled"]})}catch(e){}/* an inner render (a wrapper's saved r0) rewrites the label: put the cue back at once, no flicker; idempotent (no write when equal) */}catch(e){console.error("dayq cue",e)}},0),0);
