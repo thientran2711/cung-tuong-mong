@@ -69,10 +69,11 @@ const RUN=String.raw`(()=>{window.__bot=1;const R={fail:[],warn:[],n:{door:0,one
  R.never=Object.keys(R.seen).filter(k=>!R.picked[k]);R.neverDom=R.never.filter(k=>R.domin[k]);R.neverReal=R.never.filter(k=>!R.domin[k]);
  return R})()`;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},reducedMotion:'reduce',serviceWorkers:'block'});
- const p=await ctx.newPage();const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
+ const SEED=+(process.env.SEED||177);/* seeded from the FIRST script (boot draws rivals with Math.random too) and again before RUN */
+ await ctx.addInitScript(sd=>{let a=sd>>>0;Math.random=()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}},SEED); const p=await ctx.newPage();const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(LIB);/* MAIN 177: a SEEDED run (each kept member picked ≥1×, reproducible): Math.random = mulberry32(SEED) from here on */
- await p.evaluate(sd=>{let a=sd>>>0;Math.random=()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}},+(process.env.SEED||177));const R=await p.evaluate(RUN);await b.close();const N=R.n;
+ await p.evaluate(sd=>{let a=sd>>>0;Math.random=()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}},SEED);const R=await p.evaluate(RUN);await b.close();const N=R.n;
  console.log(`DOOR-ONETAP · ${URL}`);
  console.log(`doors seen ${N.door} (ONE ${N.one} · TIER ${N.tier} · KEEP ${N.keep||0}) · picks ${N.pick} · favour picks = best ${N.best} · deck doors ${N.deck} · real taps ${N.taps} (${R.tapped.join(' ')}) · NPC harm options ${N.npcO}, grouped ${N.npcG} (calls ${R.npcGroups})`);
  console.log(`members seen ${Object.keys(R.seen).length} · picked ${Object.keys(R.picked).length} · never picked ${R.never.length} (dominated ${R.neverDom.length})`);
