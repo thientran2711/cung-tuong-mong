@@ -1,0 +1,6 @@
+# E-S4 R5-speed-2-v2 (iPad) — end-of-life review (evidence limited, see moments)
+1. Summary: speed («bold»), pf/pt_hai, iPad, real taps, jsClicks 0, harness 08a4ff8b→f65d019b (12 resumes, 6 mixed-build flagged), 1758 buổi, 12 game years, age 29, rank 0 → Lãnh cung, ending «Lãnh cung — Phát điên trong lãnh cung» (game-imposed, no exitPick, VALID per mixed-build ruling), 16 bug rows (1 freeze, 1 crash, 5 dead/no-effect, gift-picker family ×2, dead-end frame .dlg «Phòng bị», late button «Vào cung ngay» +29 s).
+2. Scores: a first 15 min 6 · b pacing 3 · c buttons 4 (gift picker with only locked items; «Phòng bị» dead-end frame) · d story 4 · e characters 4 · f choices/fairness 4 · g feedback 6 (readable illness/lãnh cung warning in the header) · h mini-games 6 (ceremony board played) · i visuals 7 · j co-op n/a.
+3. Loved: the visible warning before the end. Hated: the gift picker stalls; rank 0 for 12 years. Replay: yes.
+4. BUGS: GIFT PICKER «Biếu quà làm lành» — every item locked, picker re-opens after each confirm (harness-confirmed, game bug; greedy-4 ipad parked on it); dead-end frame .dlg «Phòng bị» (no close/next after scrolling); «Vào cung ngay» appears only 29 s after #klife opens; page freeze at buổi 1417 / crash at 1629 on the runner.
+5. Suggestions (parking lot): gift picker should offer at least one affordable item or a «Bỏ qua».
