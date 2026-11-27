@@ -203,14 +203,16 @@ function mount(a){css();const s=st();if(!s)return false;let l=document.getElemen
  return true}
 function unmount(){const l=document.getElementById("nhv");if(l)l.remove();document.documentElement.classList.remove("nhvon");closePk(true);try{kitDim.off()}catch(e){}CUR=null;SEL=SELM=null;L=null}
 /* tap: a group → it stays lit, the others dim (figures only); a person of the lit group → she steps out toward her, the thẻ gỗ hang beside her */
-function onTap(m){if(!CUR||S.dead||Q.length)return;const g=m.g;if(SEL!==g){pickGroup(g);return}if(SELM===m){openPk(m);return}stepOut(m).then(()=>openPk(m))}
-function figsNot(g){return CUR.G.filter(x=>x!==g).flatMap(x=>x.P.map(p=>p.m.el))}
-function pickGroup(g){closePk();if(SELM)back(SELM,true);SEL=g;try{kitDim.on(()=>figsNot(g))}catch(e){}CUR.G.forEach(x=>{if(x.capEl)an(x.capEl,[{opacity:x===g?1:.45}],{duration:260})});tagsFix()}
-function unsel(){closePk();if(SELM)back(SELM);SEL=null;try{kitDim.off()}catch(e){}if(CUR)CUR.G.forEach(x=>{if(x.capEl)an(x.capEl,[{opacity:1}],{duration:240})});tagsFix()}
-function back(m,quick){const g=m.g;SELM=null;an(m.el,[{transform:m.el.__t}],{duration:quick?200:420});g.P.forEach(p=>{if(p.m!==m)an(p.m.el,[{transform:p.m.el.__t}],{duration:quick?200:360})});m.el.style.zIndex=String(10+m.z);
+function onTap(m){if(!CUR||S.dead||Q.length||!liveM(m))return;const g=m.g;if(SEL!==g){pickGroup(g);return}if(SELM===m){openPk(m);return}stepOut(m).then(()=>openPk(m))}
+/* a figure is live only while its scene is (layout/unmount replace the figures and clear SEL/SELM): every selection call on a dead one is a no-op (RV-169 FAIL, law 11 family) */
+function liveM(m){return !!(m&&m.g&&m.el&&CUR&&CUR.G&&CUR.G.includes(m.g))}
+function figsNot(g){if(!CUR||!CUR.G)return[];return CUR.G.filter(x=>x!==g).flatMap(x=>x.P.map(p=>p.m.el))}
+function pickGroup(g){if(!g||!CUR||!CUR.G||!CUR.G.includes(g)){SEL=SELM=null;return}closePk();if(SELM){if(liveM(SELM))back(SELM,true);else SELM=null}SEL=g;try{kitDim.on(()=>figsNot(g))}catch(e){}CUR.G.forEach(x=>{if(x.capEl)an(x.capEl,[{opacity:x===g?1:.45}],{duration:260})});tagsFix()}
+function unsel(){closePk();if(SELM){if(liveM(SELM))back(SELM);else SELM=null}SEL=null;try{kitDim.off()}catch(e){}if(CUR)CUR.G.forEach(x=>{if(x.capEl)an(x.capEl,[{opacity:1}],{duration:240})});tagsFix()}
+function back(m,quick){if(!liveM(m)){if(SELM===m||!liveM(SELM))SELM=null;return}const g=m.g;SELM=null;an(m.el,[{transform:m.el.__t}],{duration:quick?200:420});g.P.forEach(p=>{if(p.m!==m)an(p.m.el,[{transform:p.m.el.__t}],{duration:quick?200:360})});m.el.style.zIndex=String(10+m.z);
  CUR.G.forEach(x=>{if(x.capEl)x.capEl.style.visibility=""});tagsFix()}
 /* step out: she walks to the talk spot (speaker-left rule); her followers stand beside her on the left with a gap, the plaque band keeps her right side free */
-async function stepOut(m){const g=m.g;if(SEL!==g)pickGroup(g);if(SELM&&SELM!==m)back(SELM,true);SELM=m;const B=AB(),D=CUR.D,k=B.stepK||1.12,gp=(B.folGap||.05)*CUR.fh;
+async function stepOut(m){if(!liveM(m))return;const g=m.g;if(SEL!==g)pickGroup(g);if(!liveM(m))return;if(SELM&&SELM!==m){if(liveM(SELM))back(SELM,true);else SELM=null}SELM=m;const B=AB(),D=CUR.D,k=B.stepK||1.12,gp=(B.folGap||.05)*CUR.fh;
  /* her followers stand BEHIND-beside her on the left, in one row with a gap (never on her shoulder, never on each other — MAIN 127 FAIL 3); a smaller scale = further back.
     She keeps the right side free for the thẻ gỗ band (BAL.area.band, two plaque columns on the phone) */
  const fo=g.P.filter(p=>p.m!==m).map(p=>p.m),band=(B.band||{})[kv()]||150,W=m.w*k;
@@ -226,7 +228,7 @@ async function stepOut(m){const g=m.g;if(SEL!==g)pickGroup(g);if(SELM&&SELM!==m)
  await wait(still()?30:(B.walkMs||700)+40);tagsFix()}
 /* THẺ GỖ TREO = kit §98.1 kitPick, fed by the real act list of this person (jdfv dfData) */
 function closePk(now){const k=KP;KP=null;if(!k)return;try{now?k.destroy():k.close()}catch(e){}}
-function openPk(m){closePk(true);if(!CUR||typeof kitPick==="undefined")return;let G=[];try{G=dfData(m.i)}catch(e){}
+function openPk(m){closePk(true);if(!CUR||!liveM(m)||typeof kitPick==="undefined")return;let G=[];try{G=dfData(m.i)}catch(e){}
  /* names she has not learnt (the kit shows them as «???» on a button): those acts are not offered by that name */let unk=[];try{unk=(rivals||[]).filter(v=>typeof k61Named==="function"&&!k61Named(v)).map(v=>v.name).filter(Boolean)}catch(e){}
  G=(G||[]).map(g=>Object.assign({},g,{acts:(g.acts||[]).filter(a=>a&&a.n&&!/\?\?\?/.test(a.n+" "+(a.word||""))&&!unk.some(n=>String(a.n).includes(n)))})).filter(g=>g.acts.length);/* an act naming someone she has not learnt is not offered by that name (MAIN 127 FAIL 4, ring4 rule) */if(!G.length)return;
  const others=[...L.querySelectorAll(".nhv-f")].filter(e=>e!==m.el&&e.offsetParent!==null).map(e=>kitPick.rect(e,L));
