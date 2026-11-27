@@ -59,3 +59,4 @@ LIVE 8330e8b8 (lc32-livebugs) · ROLLBACK bd47c753 · before 772bee4f. MAIN = MA
 - dev/index.html is gitignored: assemble in every fresh worktree before coregates / coop-e2e / dev-index tests (cost me one false G4 50 FAIL).
 - save-rewind.js needs commit 8ae99226 (review/flight2-s18 checkpoint): `git fetch --depth=1 origin 8ae992262d76ae965f224f67cac54a42e1c96022`.
 - Never pipe test logs through cut before saving (lost role-parity lists).
+- (late, 21:09Z) RV-176 LAND READY review/kk61-band fa7b0c0e = test-only (dev/test/kit-ring-band.js), merge-tree clean with kk61-rv176 → LC33: merge it into lc32-ui3 (test-only, no rebuild) and use its kit-ring-band.js (run 1 Fold flake = kmbox-o motion box over stage; test nit for KK61).
