@@ -602,6 +602,6 @@ E-PHUCDUYEN-PLAN | (report only) dev/handover/reports/phucduyen-plan.md | sessio
 E-TIER-AUDIT v2 (MERGE vs KEEP-CHOICE column, MAIN 169 order) | dev/handover/reports/tier-audit.md | session_01DgYSWoFVCrpS7YmQGBGr58 | DONE 99ead418 | 2026-11-27T02:22Z (FOREMAN E ROOT)
 promo-stack-lr4 BIG rv | review/promo-stack-lr4 d713f162 | session_01D3E3NacPigdjGR1RRt4q3j | RUNNING | 27/11 01:55Z (Foreman D)
 HARNESS FIXER #15 (sonnet) item 14: rt-serve-build.sh pin set lacks /dev/vendor/ (pixi 404 on every pinned seat) — add every local path index.html/sw.js load + post-pin GET self-check; on review/robot-realtap on top of 943285b5 | dev/test/rt-serve-build.sh | (session id in FOREMAN_F_STATUS) | DONE 39c6e505 | 2026-11-27T02:12Z (FOREMAN F ROOT #2 session_01UV1SzjiyJzqC1pGgm8zVFQ)
-BIG REVIEWER #15 (opus) review/robot-realtap 97e55a457..943285b5 (+ FIXER #15 item-14 commit on top) | dev/handover/reports/robot-realtap-review.md | (session id in FOREMAN_F_STATUS) | CLAIMED | 2026-11-27T02:12Z (FOREMAN F ROOT #2)
+BIG REVIEWER #15 (opus) review/robot-realtap 97e55a457..943285b5 (+ FIXER #15 item-14 commit on top) | dev/handover/reports/robot-realtap-review.md | (session id in FOREMAN_F_STATUS) | DONE PASS 39c6e505 | 2026-11-27T02:12Z (FOREMAN F ROOT #2)
 C3-KHOBAI (Kho bài left-column icon art) | CDN img/ui-khobai.webp | session_01PEhRbtuvj5NuMwR76Gfqcp (Foreman C) | RUNNING | 2026-11-27T02:15Z
 C3-KHOBAI | img/ui-khobai.webp | session_01PEhRbtuvj5NuMwR76Gfqcp | DONE (ART READY, LOOK PASS, archived) | 2026-11-27T02:20Z
