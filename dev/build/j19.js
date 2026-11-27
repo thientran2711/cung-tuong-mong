@@ -27,7 +27,12 @@ function kcls(t){const s=kMk(t.replace(/<[^>]+>/g,"").trim());if(!s)return"n";if
  if(/(\bnàng\b|con nàng|của nàng)/i.test(s)&&(/-\s?\d|sảy|chết|mất|phế|bị phạt|tịch thu|sa sút|không được lật thẻ|rơi/i.test(s)))return"g";
  if(KRED.test(s))return"r";if(KGOOD.test(s))return"g";if(/-\s?\d/.test(s))return"r";return"n"}
 /* one effect token -> coloured span; fmt() spans keep their colour */
-function eff(t){t=String(t).trim();if(!t)return"";if(/^<span class="(g|r)">/.test(t)&&/<\/span>$/.test(t)&&(t.match(/<span/g)||[]).length===1)return t.replace(/^<span class="(g|r)">/,'<span class="ef $1">');
+/* R13 (MAIN 175 LOOK R12, whole family of stat marks): «Sủng +», «thiện cảm --», «Danh ++» never break between the word and its mark (a «+» alone on a line); the pair is one nowrap span, textContent unchanged */
+function kNwMk(h){return String(h).replace(/(^|>)([^<]+)/g,(m,a,t)=>a+t.replace(/([^\s<>]+) ([+−-]{1,3})(?![\w+−-])/g,'<span class="knw">$1 $2</span>'))}
+/* the same wrap on chips that were built by DOM code (the hand card's copied rows .kdup): every .ef text leaf in root */
+function kNwMkDom(root){try{(root||document).querySelectorAll(".ef").forEach(e=>{if(e.children.length||e.querySelector(".knw"))return;const t=e.textContent;if(!/[^\s] [+−-]{1,3}(?![\w+−-])/.test(t))return;e.innerHTML=kNwMk(t.replace(/&/g,"&amp;").replace(/</g,"&lt;"))})}catch(x){console.error("kNwMkDom",x)}}
+function eff(t){return kNwMk(eff0(t))}
+function eff0(t){t=String(t).trim();if(!t)return"";if(/^<span class="(g|r)">/.test(t)&&/<\/span>$/.test(t)&&(t.match(/<span/g)||[]).length===1)return t.replace(/^<span class="(g|r)">/,'<span class="ef $1">');
  if(/^<b class="r">/.test(t))return `<span class="ef r">${t.replace(/<[^>]+>/g,"")}</span>`;return `<span class="ef ${kcls(t)}">${t}</span>`}
 function effList(x,def){const parts=[].concat(x).filter(Boolean).join(" · ");if(!parts)return eff("không");return kSplitTop(parts,/ · |, /y).filter(s=>s.trim()).map(s=>{let h=eff(s);if(def&&/class="ef n"/.test(h)&&!KNEU.test(s.replace(/<[^>]+>/g,"").trim()))h=h.replace('class="ef n"',`class="ef ${def}"`);return h}).join('<span class="ksep">·</span>')}
 function oddsChip(w){if(!w)return"";w=kitOddsNorm(w);/* no odds word = no roll (ODDS CAP: the ladder has no "sure" word) */const m=String(w).match(ODDW);const k=m?m[1]:w;const lv=KIT_ODDS.indexOf(kitOddsCanon(k))<0?undefined:KIT_ODDS.indexOf(kitOddsCanon(k));const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");
