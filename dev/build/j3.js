@@ -20,6 +20,9 @@ function newMaid(name,loyal,age){return{name,loyal,age:age||16+R(7),fc:""}}
 
 /* modal queue */
 function pushModal(m){Q.push(m);}
+/* DIALOG-ORDER r2: the ONE tap hook of the queue rule (jdayq dqTap: a card nobody can see never makes her tap dead; what her tap opens goes to the
+   FRONT). Registered HERE, before every other module, on window capture: it runs before any handler of her tap reads Q */
+try{["pointerdown","pointerup","click","keydown","touchstart"].forEach(k=>window.addEventListener(k,e=>{try{if(window.dqTap)window.dqTap(k,e)}catch(x){}},true))}catch(e){}
 /* saveable pending choices: a modal with opts is stored as {pid,pp,t}; PEND[pid](pp) rebuilds text and handlers */
 const PEND={};const RV=id=>rivals.find(x=>x.id===id)||null;
 function mkP(id,pp){pp=pp||{};const d=PEND[id]&&PEND[id](pp);if(!d)return null;d.pid=id;d.pp=pp;return d}
