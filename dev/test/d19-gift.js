@@ -17,7 +17,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
       the roads run with «Nhận» (FORCE.gift="take"); «Trả lại quà» is checked on its own below. The set-up grudge is written with stat-pace off
       (SP_OFF): a rise of 30 is paced to 12 (BAL.stp.band.oan), which three roads ease to 0 — the item road then had nothing left to ease. */
    window.__rcvF=window.__rcvF||{};if(!window.__rcvP0){window.__rcvP0=rcvPick;rcvPick=function(t,a,O,k){const f=window.__rcvF[k];if(f){const o=(O||[]).find(x=>x&&x.id===f);if(o)return o}return window.__rcvP0.apply(this,arguments)}}
-   window.__rcvF.gift="take";const V=rivals.filter(x=>x.alive!==false&&!x.out&&!x.queen&&!traitsOf(x).includes("Kiêu ngạo")&&!traitsOf(x).includes("Tham vọng")).slice(0,3);SP_OFF++;try{V.forEach(v=>{v.ghen=40;oanAdd(v,S,30-oan(v,S))})}finally{SP_OFF--};window.__o0=V.map(v=>oan(v,S))
+   window.__rcvF.gift="take";const V=rivals.filter(x=>x.alive!==false&&!x.out&&!x.queen&&!traitsOf(x).includes("Kiêu ngạo")&&!traitsOf(x).includes("Tham vọng")).slice(0,3);SP_OFF++;try{V.forEach(v=>{v.ghen=40;for(let k=0;k<12&&oan(v,S)<30;k++)oanAdd(v,S,30-oan(v,S))})}finally{SP_OFF--};window.__o0=V.map(v=>oan(v,S))
    const liked=Object.keys(IT).filter(k=>Array.isArray(IT[k].tg)&&IT[k].tg.includes("rv")&&IT[k].pr>=20&&IT[k].pr<=80&&!IT[k].il&&!IT[k].keep&&!IT[k].nt).slice(0,2);
    S.inv=S.inv.filter(e=>e.h);for(const k of liked)S.inv.push({k});
    S.inv.push({k:"tp",wk:{kind:"theu",a:"hoa",ti:2,q:6,n:"Khăn thêu uyên ương",m:1,bn:"ngươi",d:"x",lv:2}});S.inv.push({k:"tp",wk:{kind:"theu",a:"hoa",ti:0,q:1,n:"Khăn thêu tạm",m:0,bn:"ngươi",d:"x"}});
@@ -52,7 +52,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
   /* --- NPC: the same rule --- */
   r.npc=await g.evaluate(()=>{try{window.__rcvF.gift="take";const L=rivals.filter(x=>x.alive!==false&&!x.out);const a=L[3]||L[1],v=L[4]||L[2];a.ro=a.ro||{};v.ro=v.ro||{};
    const k=Object.keys(IT).find(k=>{const w=tsGiftWorth({k},v,a);return w.ok&&w.bac<=BAL.tsGift.bac});a.inv=(a.inv||[]).filter(e=>e.h);a.inv.push({k});
-   SP_OFF++;try{oanAdd(v,a,30)}finally{SP_OFF--}const o0=oan(v,a),n0=a.inv.length,vi0=(v.inv||[]).length,b0=a.bac;const t=tsNpcGift(a,{top:[{v,q:.3,b:2}],n:30,unk:0});
+   SP_OFF++;try{for(let k=0;k<12&&oan(v,a)<30;k++)oanAdd(v,a,30-oan(v,a))}finally{SP_OFF--}const o0=oan(v,a),n0=a.inv.length,vi0=(v.inv||[]).length,b0=a.bac;const t=tsNpcGift(a,{top:[{v,q:.3,b:2}],n:30,unk:0});
    const r1={item:k,txt:plain(t||""),oan:o0-oan(v,a),aInv:n0-a.inv.length,vInv:(v.inv||[]).length-vi0,bac:b0-a.bac};
    /* no piece: bạc */
    a.inv=a.inv.filter(e=>e.h);a.bac=100;const o1=oan(v,a);const t2=tsNpcGift(a,{top:[{v,q:.3,b:2}],n:30,unk:0});r1.bacRoad={txt:plain(t2||""),oan:o1-oan(v,a),bac:100-a.bac};
@@ -85,7 +85,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
   r.errs=errs;R[dev]=r;await ctx.close();
   /* verdicts */
   const x=r.roads||{};const ck=(c,m)=>{if(!c)F.push(`${dev}: ${m}`)};
-  ck(!x.err,'roads threw '+x.err);ck(x.act&&x.act.n==="Biếu quà làm lành"&&!x.act.dis,'act card');
+  ck(!x.err,'roads threw '+x.err);ck(Array.isArray(x.o0)&&x.o0.every(n=>n>=30),'set-up: each grudge ≥ 30 before the roads '+JSON.stringify(x.o0));ck(x.act&&x.act.n==="Biếu quà làm lành"&&!x.act.dis,'act card');
   ck(JSON.stringify(x.names)===JSON.stringify(["Lễ bạc","Tác phẩm tự tay làm","Đồ trong rương","Thôi"]),'three roads + Thôi: '+JSON.stringify(x.names));
   ck(x.bac&&x.bac.spent===x.bac.want&&x.bac.ghen.every(n=>n===8)&&x.bac.oan.every(n=>n>0)&&/Mất:/.test(x.bac.log)&&/Được:/.test(x.bac.log),'bạc road '+JSON.stringify(x.bac));
   ck(x.wk&&x.wk.inv===1&&x.wk.ghen===8&&x.wk.oan>0&&x.wk.aff>0&&/Mất:/.test(x.wk.log),'work road '+JSON.stringify(x.wk));
