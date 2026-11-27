@@ -52,7 +52,7 @@ const DEPTH=+opt('depth',FAST?1:3),MAXTAPS=+opt('max',FAST?80:100000);
 const STARTS=String(opt('start',FAST?'home,selx,talk':'title,home,tour,selx,talk')).split(',');
 /* FIXER #17 (RV-165 ring blind spot): the first-life SELECTION DAYS (jselxday: «Ngày thứ nhất — Nhập cung» … kitScene talk, Bàn bài hand cards, thẻ lụa plaques)
    are walked as their own start «selx» with their own tap budget (fast 30), so they never eat the home budget and home never sits under them */
-const SELXMAX=+opt('selx-max',FAST?30:400),TALKMAX=+opt('talk-max',FAST?12:60);
+const SELXMAX=+opt('selx-max',FAST?60:400),TALKMAX=+opt('talk-max',FAST?24:60);
 const GAME=opt('game',path.join(REPO,'index.html'));
 /* pictures load as she sees them (layout depends on them; --noimg blocks them for speed); sound/video are blocked */
 const BLOCK=opt('noimg',false)?/\.(webp|png|jpe?g|gif|mp3|ogg|m4a|mp4|webm)(\?|$)/i:/\.(mp3|ogg|m4a|mp4|webm)(\?|$)/i;
@@ -164,7 +164,7 @@ const INPAGE=()=>{
 
 /* ---------- node side ---------- */
 async function settle(p,ms=8000){const t=Date.now();while(Date.now()-t<ms){const b=await p.evaluate(()=>__bc.busy()).catch(()=>false);if(!b)return Date.now()-t;await p.waitForTimeout(250)}return -1}
-const rows=[];let taps=0,hard=0;
+const rows=[];let taps=0,hard=0;const vHome={};
 function verdict(b,pre,post,errs,closedOwn,par){
  if(errs.length)return['FAIL','JS error: '+errs[0].slice(0,120)];
  const changed=JSON.stringify(pre)!==JSON.stringify(post);
@@ -185,33 +185,44 @@ function verdict(b,pre,post,errs,closedOwn,par){
 /* START selx (FIXER #17): a fresh Tú nữ life whose selection days start (accepted the way her «Nhập cung» does), walked screen by screen like a player:
    a talk line → tap the box (Chạm để tiếp); a screen with Bàn bài cards / thẻ lụa plaques → every card but the last is LIFTED by a real tap (its ✓ / «Chọn» chip must show;
    a tap on the next card moves the lift), the last is pressed (lift + chip = chosen); any other frame → its first option / main button. Every tap is a row. Ends at the room. */
-async function walkSelx(p,dev,ER,setup,NM='selx',MAXW=SELXMAX){const T0=taps;const SELXMAX=MAXW;
+/* FIXER #19 G2 ROOT (BIG #19 «first home pass vacuous on both devices, the re-crawl saves it»): #kload is the game's FIRST-LOAD asset screen (jload.js: the
+   'core' set, ~80 MB, blocks entry until cached). Every crawl is a fresh browser profile → the first page downloads core while the crawl runs; two devices at
+   once make it slower than the setup's veil waits, so the screen (div#kload.modal.kpscene) covered the room for the whole first home pass (every button «gone»)
+   and came back after each hard-restore reload; the re-crawl ran on a filled cache. A player waits for that screen: wait ≤ 30 s for it to go before any START and after every reload;
+   still up (core never completes when CDN art is not served — measured: KLOAD stays «core» > 4 min) → taken down as the setup does. */
+async function waitLoad(p,dev,why){const t=Date.now();await p.waitForFunction(()=>{const e=document.getElementById('kload');return !e||!e.isConnected||e.hidden||getComputedStyle(e).display==='none'},null,{timeout:30000,polling:500}).catch(()=>{});const ms=Date.now()-t;
+ /* here core never completes (CDN art is blocked / not served): after 30 s the screen is the setup veil — taken down as startState.home does (setup, not a press) */
+ const rm=await p.evaluate(()=>{const e=document.getElementById('kload');if(!e)return '';const ph=window.KLOAD?KLOAD.phase:'?';e.remove();return ph}).catch(()=>'');if(ms>3000||rm)console.log(`[${dev}] first-load screen (${why}): waited ${Math.round(ms/1000)} s${rm?' → still up (KLOAD '+rm+'), taken down (setup)':' → gone'}`);return ms}
+async function walkSelx(p,dev,ER,setup,NM='selx',MAXW=SELXMAX){const SELXMAX=MAXW;let wt=0,ended=false;/* FIXER #19 G1 (BIG #19): the walk budget counts THIS walk's own taps on THIS device (wt) — the global `taps` is shared by every device crawled in parallel (two-device ring run: Fold selx cut at 16 rows, talk at 7, before any hand card, no end row) */
  /* the life is drawn at random: only some origins / ranks go through the selection days (jselxday selxDaysFit) → draw again (≤ 6 lives, setup only) */
  for(let n=0;n<(NM==='talk'?1:12);n++){/* FIXER #18: the start check read window.S — S is a top-level «let» (j1.js), never on window → «not started» after 1.2 s on EVERY draw; the walk ran only when the frame happened to be up after the last draw (selx SKIP 3 runs in 4). Now typeof S; 12 draws (setup only) */await setup();let up=false;for(let i=0;i<30&&!up;i++){if(NM!=='talk'&&i>=3&&!(await p.evaluate(()=>!!(typeof S!=='undefined'&&S&&S.selx2&&S.selx2.days)).catch(()=>false)))break;/* the selection days start inside nlAccept (sync): not started = draw again at once */up=await p.evaluate(nm=>{const M=document.getElementById('modal');return nm==='talk'?!M.hidden&&!!M.querySelector('.dlg.kstalk'):(!M.hidden||!!document.querySelector('.kscn'))&&!!(typeof S!=='undefined'&&S&&S.selx2&&S.selx2.days)},NM);if(!up)await p.waitForTimeout(400)}if(up)break}
  if(!(await p.evaluate(()=>{const M=document.getElementById('modal');return !M.hidden||!!document.querySelector('.kscn')}))){rows.push({dev,start:NM,screen:NM,label:'(start)',verdict:'SKIP',why:NM==='talk'?'no talk frame came (this build has no kitStage talk)':'no selection-day screen came (this build has no multi-day selection for this life)'});return}
  let same=0,last='',noT=0;
- while(taps-T0<SELXMAX){await settle(p,6000);await p.waitForTimeout(500);
+ while(wt<SELXMAX){await settle(p,6000);await p.waitForTimeout(500);
   const S0=await p.evaluate(()=>{const L=__bc.list();const sg=__bc.sig();const top=L.filter(b=>b.layer!=='body');const M=document.getElementById('modal');
    const home=M.hidden&&!document.querySelector('.kscn')&&!!document.getElementById('next')&&__bc.vis(document.getElementById('next'));
    const two=top.filter(b=>{const e=document.querySelector('[data-bc="'+CSS.escape(b.key)+'"]');return e&&__bc.kind2(e)});return{L:top,two:two.map(b=>b.key),home,scr:(sg.roots[sg.roots.length-1]||'').slice(0,60)}});
-  if(S0.home){rows.push({dev,start:NM,screen:NM,label:'(end)',verdict:'PASS',why:'back to the room after '+(taps-T0)+' taps'});break}
+  if(S0.home){rows.push({dev,start:NM,screen:NM,label:'(end)',verdict:'PASS',why:'back to the room after '+wt+' taps'});ended=true;break}
   if(!S0.L.length&&++noT<10)continue;/* between two talk lines / two scenes the box is rebuilt: look again (≤ ~10 s) before calling it a fault */
-  if(S0.L.length)noT=0;else{rows.push({dev,start:NM,screen:S0.scr,label:'(no target)',verdict:'FAIL',why:'a selection-day screen with nothing to tap (no button, no talk box)'});await p.screenshot({path:path.join(OUT,'shots',dev+'-selx-none.jpg'),type:'jpeg',quality:50});break}
+  if(S0.L.length)noT=0;else{rows.push({dev,start:NM,screen:S0.scr,label:'(no target)',verdict:'FAIL',why:'a selection-day screen with nothing to tap (no button, no talk box)'});await p.screenshot({path:path.join(OUT,'shots',dev+'-selx-none.jpg'),type:'jpeg',quality:50});ended=true;break}
   const sk=S0.scr+'|'+S0.L.map(b=>b.label).join('|').slice(0,400);/* a talk line / a new card set on the same frame is a new step */
-  if(sk===last){if(++same>=6){rows.push({dev,start:NM,screen:S0.scr,label:'(loop)',verdict:'FAIL',why:'the same screen after 6 taps'});break}}else{same=0;last=sk}
+  if(sk===last){if(++same>=6){rows.push({dev,start:NM,screen:S0.scr,label:'(loop)',verdict:'FAIL',why:'the same screen after 6 taps'});ended=true;break}}else{same=0;last=sk}
   const screen=NM+' · '+S0.scr;const doTap=async(key,lbl,full)=>{const h=await p.evaluateHandle(k=>__bc.find(k),key);const el=h.asElement();if(!el){rows.push({dev,start:NM,screen,label:lbl,verdict:'SKIP',why:'button gone before its tap'});return null}
    const pre=await p.evaluate(()=>__bc.sig());ER.clr();let dm='';const shot=path.join(OUT,'shots',`${dev}-${NM}-${rows.length}.jpg`);let r;
    await p.waitForFunction(k=>{const e=__bc.find(k);return !__bc.busy()||!!(e&&e.closest('#klife,#kload,#kroul,#kroulw,#dawn,.kload'))},key,{timeout:8000}).catch(()=>{});/* (not when the target sits IN that veil: the #kload «BÁO … Vào cung ngay» page is the screen itself) *//* FIXER #18: a fresh-page draw brings the #kload veil back a moment after the snapshot (iPad «Theo thái giám…» covered by div.kpnote in #kload) — a player waits for it */
    r=await press(p,el,{screen,label:lbl,shot,log:m=>dm=m,liftOnly:!full});
-   taps+=r.two==='lift+chip'?2:1;await p.waitForTimeout(500);await settle(p,6000);const post=await p.evaluate(()=>__bc.sig());const er=ER.get();const ch=JSON.stringify(pre)!==JSON.stringify(post);
+   /* FIXER #19 N1 (BIG #19): under load the scene veil (#kload.kpscene) stays past the 8 s wait → a legit talk line read DEAD «covered by div#kload»; a player waits for the veil to go: wait (≤ 20 s more) and tap once more before judging */
+   if(!r.ok&&/#kload|\.kload|#klife|#dawn/.test(dm)&&!(await el.evaluate(e=>!!e.closest('#klife,#kload,#kroul,#kroulw,#dawn,.kload')).catch(()=>true))){await p.waitForFunction(()=>!__bc.busy(),null,{timeout:20000}).catch(()=>{});await p.waitForTimeout(300);const h2=await p.evaluateHandle(k=>__bc.find(k),key);const el2=h2.asElement();if(el2){dm='';r=await press(p,el2,{screen,label:lbl,shot,log:m=>dm=m,liftOnly:!full});if(r.ok)rows.push({dev,start:NM,screen,label:lbl,verdict:'WARN',why:'veil (#kload) over the target past 8 s — waited for it, tapped again'})}}
+   const n2=r.two==='lift+chip'?2:1;taps+=n2;wt+=n2;await p.waitForTimeout(500);await settle(p,6000);const post=await p.evaluate(()=>__bc.sig());const er=ER.get();const ch=JSON.stringify(pre)!==JSON.stringify(post);
    const v=!r.ok?'FAIL':er.length?'FAIL':r.two==='lift-only'?(r.up&&r.ch?'PASS':'FAIL'):r.two==='lift'?'FAIL':r.two==='lift+chip'?(r.chosen?'PASS':'FAIL'):ch?'PASS':'FAIL';
    const why=!r.ok?(dm||r.why||'not tappable'):er.length?'JS error: '+er[0]:r.two==='lift-only'?(r.up&&r.ch?'lifts (the tapped card), its chip shows':'1st tap: '+(r.why||'lifted '+r.up+', chip '+r.ch)):r.two==='lift'?r.why:r.two==='lift+chip'&&!r.chosen?r.why:(r.two?r.two+': ':'')+(ch?'next':'no effect');
    if(v==='FAIL')await p.screenshot({path:shot,type:'jpeg',quality:55}).catch(()=>{});rows.push({dev,start:NM,screen,label:lbl,el:'',hit:r.ok?'ok':'DEAD',two:r.two||undefined,kind:r.k||undefined,verdict:v,why,shot:v==='FAIL'?shot:''});return r};
   const box=S0.L.find(b=>/^\(Chạm để tiếp\)/.test(b.label));
   if(box){await doTap(box.key,box.label,true);continue}
-  if(S0.two.length){const T=S0.L.filter(b=>S0.two.includes(b.key));for(const b of T.slice(0,-1)){await doTap(b.key,b.label,false);if(taps-T0>=SELXMAX)break}const z=T[T.length-1];await doTap(z.key,z.label,true);continue}
+  if(S0.two.length){const T=S0.L.filter(b=>S0.two.includes(b.key));for(const b of T.slice(0,-1)){await doTap(b.key,b.label,false);if(wt>=SELXMAX)break}const z=T[T.length-1];await doTap(z.key,z.label,true);continue}
   const PRIM=/^(Tiếp|Đi|Vào|Được|Nhận|Xong|Đã hiểu|Ngủ|Theo|Cất|Ra)/;const b=S0.L.find(b=>b.el.startsWith('button')&&!b.x&&PRIM.test(b.label))||S0.L.find(b=>/kopt|opt/.test(b.el))||S0.L.find(b=>!b.x)||S0.L[0];await doTap(b.key,b.label,true)}
- console.log(`[${dev}] ${NM} · ${taps-T0} taps`)}
+ if(!ended)rows.push({dev,start:NM,screen:NM,label:'(budget)',verdict:'FAIL',why:'walk cut by budget at '+wt+' taps (no end: the room was never reached) — raise --'+NM+'-max'});
+ console.log(`[${dev}] ${NM} · ${wt} taps${ended?'':' (cut by budget)'}`)}
 async function crawlTour(p,dev,ER){
  /* a brand-new player: title → «Chơi một mình» → every first-life screen, by real taps on the main button of each screen; every tap logged */
  const fresh=async(log)=>{await p.evaluate(()=>{try{localStorage.clear();localStorage.setItem('hclh-tut-test','1')/* jtut autoOk(): a webdriver page gets the tour only with the test flag (a real phone has no webdriver) */}catch(e){}try{REC.tour='';REC.asked=0}catch(e){}document.querySelectorAll('#kload,#klife').forEach(e=>e.remove());
@@ -290,6 +301,7 @@ async function crawlDev(b,URL,dev){
   p.on('dialog',d=>d.dismiss().catch(()=>{}));p.on('crash',()=>console.log('PAGE CRASH ('+dev+')'));p.on('close',()=>console.log('PAGE CLOSED ('+dev+')'));
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:180000});
   await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof showTitle==='function',null,{timeout:180000});
+  await waitLoad(p,dev,'open');
   await p.waitForTimeout(1500);await p.evaluate(INPAGE)}
  await open();
  const startState={};
@@ -318,16 +330,16 @@ async function crawlDev(b,URL,dev){
  const SL=STARTS.concat(['__chk']);let hRetry=0;/* FIXER #18 F3: a vacuous START home (below --home-floor, or more «gone» than taps: iPad «1 tap, 25 gone» under load) is crawled ONCE more on this device; the gate floor judges the second pass */
  for(const st of SL){if(st==='__chk'){const H=rows.filter(r=>r.dev===dev&&r.start==='home'),tp=H.filter(r=>r.verdict!=='SKIP').length,gone=H.filter(r=>/gone before its tap/.test(r.why||'')).length;
    if(FAST&&STARTS.includes('home')&&!hRetry&&(tp<+opt('home-floor',40)||gone>tp)){hRetry=1;for(let i=rows.length-1;i>=0;i--)if(rows[i].dev===dev&&rows[i].start==='home')rows.splice(i,1);rows.push({dev,start:'home-retry',label:'(home re-crawl)',verdict:'WARN',why:'first START home pass was vacuous ('+tp+' taps, '+gone+' gone) — crawled once more'});console.log(`[${dev}] home vacuous (${tp} taps, ${gone} gone) → re-crawl once`);await p.close().catch(()=>{});await open().catch(()=>{});SL.push('home','__chk')}continue}
-  if(st==='tour'){await crawlTour(p,dev,errsRef);continue}if(st==='talk'){await walkSelx(p,dev,errsRef,startState.talk,'talk',TALKMAX);continue}if(st==='selx'){/* a fresh page per drawn life: after a long home crawl the in-memory game state no longer starts the selection days */await walkSelx(p,dev,errsRef,async()=>{await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof deser==='function',null,{timeout:180000});await p.waitForTimeout(1200);await p.evaluate(INPAGE);await startState.selx()});continue}if(!startState[st])continue;
+  if(st==='tour'){await crawlTour(p,dev,errsRef);continue}if(st==='talk'){await walkSelx(p,dev,errsRef,startState.talk,'talk',TALKMAX);continue}if(st==='selx'){/* a fresh page per drawn life: after a long home crawl the in-memory game state no longer starts the selection days */await walkSelx(p,dev,errsRef,async()=>{await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof deser==='function',null,{timeout:180000});await waitLoad(p,dev,'reload');await p.waitForTimeout(1200);await p.evaluate(INPAGE);await startState.selx()});continue}if(!startState[st])continue;
   await startState[st]();await p.waitForTimeout(600);
   const withTitle=st==='title';
   const goto=async(pathK)=>{ /* restore + replay a path of real taps */
    if(p.isClosed()||!(await p.evaluate(()=>!!window.__bc).catch(()=>false))){await open();await startState[st]()}
-   if(withTitle){await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof showTitle==='function',null,{timeout:180000});await p.waitForTimeout(1200);await p.evaluate(INPAGE);await startState.title()}
+   if(withTitle){await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof showTitle==='function',null,{timeout:180000});await waitLoad(p,dev,'reload');await p.waitForTimeout(1200);await p.evaluate(INPAGE);await startState.title()}
    else{await p.evaluate(t=>__bc.restore(t),withTitle);await p.waitForTimeout(150);await settle(p);
     if(!(await p.evaluate(()=>__bc.isHome()))||(await p.waitForTimeout(700),!(await p.evaluate(()=>__bc.isHome())))){ /* FIXER #17: also a frame that comes BACK just after the restore (ring build iPad: the ☰ «Lui» frame re-opened → 36 home buttons «gone») */ /* soft restore left a frame up: reload the page and load the same snapshot (harness) */
      const sv=await p.evaluate(()=>__bc.sv);hard++;
-     await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof deser==='function',null,{timeout:180000});await p.waitForTimeout(1200);await p.evaluate(INPAGE);
+     await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof deser==='function',null,{timeout:180000});await waitLoad(p,dev,'reload');await p.waitForTimeout(1200);await p.evaluate(INPAGE);
      await p.evaluate(sv=>{try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}document.getElementById('title').hidden=true;document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());
       deser(JSON.parse(sv));try{S.tutTour=1}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;render();try{k3Home()}catch(e){}},sv);
      await p.waitForTimeout(2500);await p.evaluate(sv=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render();__bc.sv=sv;__bc.snap();__bc.sv=sv},sv)}}
@@ -361,9 +373,17 @@ async function crawlDev(b,URL,dev){
     if(dirty){const g2=await goto(pathK);if(g2){rows.push({dev,start:st,path:pathK,screen,label:bt.label,verdict:'SKIP',why:g2});continue}dirty=false}
     await settle(p);await p.evaluate(()=>__bc.list());
     const pre=await p.evaluate(()=>__bc.sig());errs=[];
-    const h=await p.evaluateHandle(k=>__bc.find(k),bt.key);const el=h.asElement();
+    let h=await p.evaluateHandle(k=>__bc.find(k),bt.key);let el=h.asElement();
+    /* FIXER #19 G2 ROOT (BIG #19, two-device ring run: first home pass 0 / 1 taps, every row «gone» with «live div#kload.modal.kpscene · busy true»): the life-start scene veil
+       (#kload .kpscene «nhập cung») comes back AFTER the setup's late-frame checks (≈4.5 s) under load, and after every hard restore (page reload) — it covers the whole room, so
+       list() tags nothing under it. A player waits for the veil: wait ≤ 15 s; still up = the setup veil (the same one startState.home removes; it also comes back after a restore under a frame: iPad «sương sớm» › kpop, 33 rows) → take it
+       down, list again, find the button. Not when the button sits IN that veil. */
+    if(!el&&await p.evaluate(()=>__bc.busy()).catch(()=>false)){await p.waitForFunction(()=>!__bc.busy(),null,{timeout:15000}).catch(()=>{});
+     const rm=await p.evaluate(()=>{const b=__bc.busy();if(b)document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());__bc.list();return b}).catch(()=>false);
+     h=await p.evaluateHandle(k=>__bc.find(k),bt.key);el=h.asElement();vHome[dev]=(vHome[dev]||0)+1;if(vHome[dev]===1)rows.push({dev,start:st,path:pathK,label:'(home veil)',verdict:'WARN',why:'the life-start veil (#kload) came back over the room after the setup / a restore — '+(rm?'still up after 15 s: taken down (setup)':'waited for it')+(el?', the button is back':', the button is still gone')})}
     if(!el){if(process.env.BCDBG){const now=await p.evaluate(()=>__bc.list().map(x=>x.key));console.log('GONE',bt.key,'\n NOW',now.filter(k=>!L.some(x=>x.key===k)).join(' ;; '));await p.screenshot({path:path.join(OUT,'gone.jpg')})}
-     rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,verdict:'SKIP',why:'button gone before its tap'});continue}
+     const gw=await p.evaluate(k=>{const n=document.querySelectorAll('[data-bc]').length;const R=__bc.liveRoots().map(r=>r===document.body?'body':__bc.desc(r));const nk=k.replace(/#\d+$/,'').split('|').pop();const same=[...__bc.cands()].filter(e=>__bc.label(e)===nk).map(e=>(__bc.vis(e)?'vis ':'hidden ')+__bc.desc(__bc.root(e))).slice(0,2);return 'live '+R.join(',')+' · busy '+__bc.busy()+' · modal '+(document.getElementById('modal').hidden?'off':'on')+' · tagged '+n+' · same label: '+(same.join(' / ')||'none')},bt.key).catch(e=>'probe failed');
+     rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,verdict:'SKIP',why:'button gone before its tap ('+gw+')'});continue} /* FIXER #19 G2: what the page held when the button was «gone» (the root of the vacuous first home pass) */
     const rootH=await el.evaluateHandle(e=>__bc.root(e));const selfSt=e=>e.isConnected?e.className+'|'+(e.getAttribute('aria-pressed')||'')+'|'+(e.getAttribute('aria-expanded')||'')+'|'+(e.innerText||'').slice(0,40):'gone';
     const self0=await el.evaluate(e=>e.isConnected?e.className+'|'+(e.getAttribute('aria-pressed')||'')+'|'+(e.getAttribute('aria-expanded')||'')+'|'+(e.innerText||'').slice(0,40):'gone').catch(()=>'');
     const shot=path.join(OUT,'shots',`${dev}-${String(rows.length).padStart(4,'0')}.jpg`);
@@ -405,7 +425,9 @@ async function crawlDev(b,URL,dev){
  /* FIXER #18 F3 (BIG #18, RV-165 lesson): a vacuous home is a gate FAIL — START home with fewer than --home-floor tapped rows (fast 40), or more «gone» SKIPs than taps */
  if(FAST&&STARTS.includes('home'))for(const d of DEV){const H=rows.filter(r=>r.dev===d&&r.start==='home'),tp=H.filter(r=>r.verdict!=='SKIP').length,gone=H.filter(r=>/gone before its tap/.test(r.why||'')).length,fl=+opt('home-floor',40);
   if(tp<fl||gone>tp)rows.push({dev:d,start:'home',label:'(home floor)',verdict:'FAIL',why:'vacuous home: '+tp+' home taps (floor '+fl+'), '+gone+' «button gone before its tap» SKIPs — the room was not crawled'})}
- const sure=sure0.concat(rows.filter(r=>r.label==='(home floor)')).filter(r=>!isKnown(r));if(FAST)for(const r of sure0.filter(isKnown))console.log('  KNOWN',r.dev,'·',r.label,'·',isKnown(r).why);
+ /* FIXER #19 G1 (BIG #19): ring UI seen on ANY device (a two-tap row) ⇒ EVERY device crawled must have driven ≥ 1 two-tap part (selx / talk / home) — the two-device run where Fold drove 0 hand cards read PASS */
+ if(rows.some(r=>r.two)&&(STARTS.includes('selx')||STARTS.includes('talk')))for(const d of DEV)if(!rows.some(r=>r.dev===d&&r.two))rows.push({dev:d,start:'ring',label:'(ring floor)',verdict:'FAIL',why:'ring UI not driven: 0 two-tap rows on this device (another device drove '+rows.filter(r=>r.two).length+')'});
+ const sure=sure0.concat(rows.filter(r=>r.label==='(home floor)'||r.label==='(ring floor)'||r.label==='(budget)')).filter(r=>!isKnown(r));if(FAST)for(const r of sure0.filter(isKnown))console.log('  KNOWN',r.dev,'·',r.label,'·',isKnown(r).why);
  if(FAST){for(const r of sure.slice(0,12))console.log('  FAIL',r.dev,'·',(r.screen||'').slice(0,50),'·',r.label,'·',r.why.slice(0,140));console.log(`BUTTON CRAWL GATE ${sure.length?'FAIL':'PASS'} · ${sure.length} sure faults (dead/JS error/close) · ${n('FAIL')-sure.length} soft «no effect» rows not gating`)}
  process.exit(FAST&&sure.length?1:0)})();
 
