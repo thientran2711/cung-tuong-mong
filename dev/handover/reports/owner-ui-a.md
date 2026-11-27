@@ -48,3 +48,4 @@ NOT DONE: nothing open from MAIN's list.
 
 ## ROUND 5 (OWNER-UI-C, 27/11 ~06:40Z owner «hình lãnh cung phải có màu hơn»)
 `.kst-lc{--kst:saturate(.85) contrast(.97) brightness(1.03)}` (jgrey §3, image only, frame-cold unchanged; was .6/.92/1.06) @f3d25b5a. Real-game stills alive vs lãnh cung (same woman, card + thumb, Fold + iPad, dev/test/lc-compare.js): img/_review/owner-ui-a/d-side-{fold,ipad}-{0,1}.png. Videos re-recorded with the new value: list-fold.mp4, list-ipad.mp4 (same folder). KK56: told the new value (earlier KIT OK 2c57b8a1 = .6). quickcheck: not re-run after this CSS-only change; the earlier old-save FAIL was inside the LIVE build f573dc94 (env), first run PASS.
+quickcheck re-run @47699b91 (clean, 07:05Z): PASS · 226 s · open 1493 ms · old save ok · perf render 240/170 ms, tab 411/485 ms, buổi 1242/305 ms. RV READY sent to RV-167 (session_01Rc5AsJitDXapnYo42uDY6S); owner «Lãnh cung ok».
