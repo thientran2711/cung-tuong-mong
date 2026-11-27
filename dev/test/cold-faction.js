@@ -36,8 +36,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    const lv=A2.find(c=>/^Gửi thư xin rời/.test(c.n)&&/thái giám đưa cơm/.test(c.n));o.lvCost=lv&&lv.c.bac===-LT.bac;const d0=S.danh;lv.go();o.lvDone=[!facOf(S),S.danh===d0+PD];
    reset(6);found(S,m);joinFac(n,facOf(S));goCold();S.staff=[md];md.loyal=90;const A3=coldActs();const mr=A3.find(c=>/^Gửi thư xin rời/.test(c.n)&&/Thu Cúc/.test(c.n));
    o.l3=names(A3).filter(x=>/^Gửi thư/.test(x));if(!mr){o.mdRoad=false;o.mdFail=false}else{o.mdRoad=!!mr&&!mr.c.bac&&mr.o<100;const l0=md.loyal;mr.fail();o.mdFail=md.loyal===l0-LT.maidLoy}
-   reset(7);found(S,m);joinFac(n,facOf(S));const g=facOf(S);goCold();S.staff=[];const so=coldActs().find(c=>/^Gửi thư tố/.test(c.n));const om=oan(m,S),d1=S.danh;so.go();
-   o.sell=[!facOf(S),oan(m,S)>=om+Math.min(B.fac.sell.oan,100-om)-1,S.danh>=d1+B.fac.sell.danh-0]}
+   reset(7);found(S,m);joinFac(n,facOf(S));const g=facOf(S);goCold();S.staff=[];const so=coldActs().find(c=>/^Gửi thư tố/.test(c.n));m.opz={};const om=oan(m,S),d1=S.danh;so.go();
+   o.sell=[!facOf(S),oan(m,S)>om&&oan(m,S)<=om+Math.min(B.fac.sell.oan*persF(m,"slight",1),BAL.stp&&BAL.stp.on?BAL.stp.band.oan[2]:1e9)+1/* review/oan-pace-2: one cause = stat-pace's size band (BAL.stp.band.oan, ONE cap per stat) */,S.danh>=d1+B.fac.sell.danh-0]}
   /* 6. her letter asking to join a faction: the leader (an NPC) answers by jrcv's own pick */
   reset(8);{const [l,m]=L();found(l,m);const f=facOf(l);affAdd(l,S,60);goCold();S.staff=[];const jc=coldActs().find(c=>/^Gửi thư xin vào/.test(c.n));o.jCard=!!jc;
    const RP=window.rcvPick;let got=null;window.rcvPick=function(t,a,O,k){const c=RP.apply(this,arguments);if(t===l&&a===S)got=c&&c.id;return c};
@@ -51,8 +51,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    o.ncJCard=!!card&&card.o.length===4&&/lãnh cung/.test(card.t);Q.length=0;if(card)card.o[0].go();o.ncJYes=facOf(y)===facOf(S)&&!facMembers(facOf(S)).includes(y)}
   /* 8. struck off the roll: she (leader) drops an NPC in lãnh cung (button + facAct); an NPC leader drops her (facMonth) */
   reset(12);{const [m,n]=L();S.rank=6;m.rank=1;n.rank=1;found(S,m);joinFac(n,facOf(S));const f=facOf(S);o.lead=facLeader(f)===S;npcCold(m);const h=facHTML();o.gachBtn=new RegExp('data-fa="gach" data-fv="'+m.id+'"').test(h);
-   const om=oan(m,S),d0=S.danh;facAct("gach",{fv:String(m.id)});o.gach=[facOf(m)!==f,!f.m.includes(key(m)),oan(m,S)>om,S.danh===d0+PD];
-   reset(13);const [l,k]=L();found(l,k);joinFac(S,facOf(l));const g=facOf(l);goCold();affAdd(l,S,-100);const dp=FD.p;FD.p=100;let ev="";try{ev=facMonth()}catch(e){o.e8=e.message}FD.p=dp;
+   m.opz={};/* review/oan-pace: a fresh day for this pair (the earlier steps of this test fed the same pair in the same buổi) */const om=oan(m,S),d0=S.danh;facAct("gach",{fv:String(m.id)});o.gach=[facOf(m)!==f,!f.m.includes(key(m)),oan(m,S)>om,S.danh===d0+PD];
+   reset(13);const [l,k]=L();found(l,k);joinFac(S,facOf(l));const g=facOf(l);goCold();{/* setup: a leader who hates her at once (review/oan-pace bypassed for the setup) */const P0=BAL.oanPace&&BAL.oanPace.on;if(P0)BAL.oanPace.on=0;try{affAdd(l,S,-100)}finally{if(P0)BAL.oanPace.on=P0}}const dp=FD.p;FD.p=100;let ev="";try{ev=facMonth()}catch(e){o.e8=e.message}FD.p=dp;
    o.drop=[facOf(S)!==g,/gạch tên ngươi/.test(ev)]}
   /* 9. NPC → NPC in lãnh cung: an NPC never rủ another NPC who is inside (p3FacFr) */
   reset(14);{const [v,y]=L();affAdd(v,y,80);npcCold(y);o.nn=!p3FacFr(v).includes(y)}

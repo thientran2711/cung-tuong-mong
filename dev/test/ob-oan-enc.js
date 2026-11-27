@@ -19,7 +19,7 @@ const boot=async p=>{await p.goto('http://ctm.local/index.html',{waitUntil:'domc
 const seed=(p,needFig)=>p.evaluate(needFig=>{render();const visTok=i=>{const t=document.querySelector('#tokens .tok[data-p="'+i+'"]');return !!(t&&t.getBoundingClientRect().width>0)};
  /* a rival of another house, her figure drawn on the stage (not folded into «+N»), whose nết does not gate harm (j28 danger harmGate) */
  const i=curPeople().findIndex((x,j)=>(x.kind==='rival'||x.kind==='hh')&&x.ref&&!sameHouse(S,x.ref)&&!persF(x.ref,'harmGate',0)&&(!needFig||visTok(j)));if(i<0)return null;const v=curPeople()[i].ref;
- for(const o of liveRivals(true)){if(o!==v){o.ghen=0;o.oan=0}}v.oan=Math.max(3,netTh(v,'nguoi')-3);v.ghen=95;S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();try{S.met[v.id]=S.met[v.id]??wk()}catch(e){}try{const K=k61S();if(K)K[kOf61(v)]=3}catch(e){}
+ for(const o of liveRivals(true)){if(o!==v){o.ghen=0;o.oan=0;if((+o.rel||0)<0)o.rel=0}}/* review/oan-pace-2 (WORKLIST row 38): another consort's dislike (thiện cảm < 0, danger × net.heat.affK) could outrank the hater, so her «Làm lành» card was not in the panel's top 3 (random life: FAIL on some lives, LIVE too) */v.oan=Math.max(3,netTh(v,'nguoi')-3);v.ghen=95;S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();try{S.met[v.id]=S.met[v.id]??wk()}catch(e){}try{const K=k61S();if(K)K[kOf61(v)]=3}catch(e){}
  used=0;S.suc=Math.max(S.suc,80);S.bac=Math.max(S.bac,200);Q.length=0;render();return{i,id:v.id,name:v.name,oan:Math.round(oan(v,S)),fig:visTok(i)}},needFig);
 /* every place a «Nhún nhường» choice is visible now: centre modal buttons + encounter (kitFocus) buttons */
 const seen=p=>p.evaluate(()=>{const vis=e=>!!(e&&e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden');const M=document.getElementById('modal');
@@ -41,7 +41,7 @@ const tapHumble=p=>p.evaluate(()=>{const vis=e=>!!(e&&e.getClientRects().length)
    const enc=await p.evaluate(()=>typeof dfEncOn==='function'&&dfEncOn());ok(enc,`${sz} ${flow}: stage encounter is on (figure art: ${await p.evaluate(i=>typeof dfHasFig==='function'&&dfHasFig(i),v.i)})`);
    if(flow==='A'){
     await p.evaluate(()=>{const b=document.querySelector('[data-k3="tsnh"],[data-hx="tsnh"]');if(b)b.click()});await p.waitForTimeout(1500);
-    const tapped=await p.evaluate(n=>{const b=[...document.querySelectorAll('#modal .opt[data-m]')].find(x=>/^Làm lành với/.test(x.innerText)&&x.innerText.includes(n));if(!b)return null;b.scrollIntoView({block:'center'});b.click();return b.innerText.slice(0,40)},v.name);
+    /* review/oan-pace-2 (WORKLIST row 38): wait for the panel's «Làm lành với …» card to be built (a busy box at iPad size missed it after the fixed 1.5 s) */await p.waitForFunction(n=>[...document.querySelectorAll('#modal .opt[data-m]')].some(x=>/^Làm lành với/.test(x.innerText)&&x.innerText.includes(n)),v.name,{timeout:15000,polling:250}).catch(()=>{});const tapped=await p.evaluate(n=>{const b=[...document.querySelectorAll('#modal .opt[data-m]')].find(x=>/^Làm lành với/.test(x.innerText)&&x.innerText.includes(n));if(!b)return null;b.scrollIntoView({block:'center'});b.click();return b.innerText.slice(0,40)},v.name);
     ok(!!tapped,`${sz} A: «Làm lành với ${v.name}» card tapped in the panel`,tapped);await p.waitForTimeout(3500);
     const s1=await seen(p);ok(s1.modal+s1.scene===1,`${sz} A: the choice shows ONCE (modal ${s1.modal} + scene ${s1.scene})`,s1);
     const via=await tapHumble(p);await p.waitForTimeout(3500);const o1=await p.evaluate(id=>Math.round(oan(RV(id),S)),v.id);

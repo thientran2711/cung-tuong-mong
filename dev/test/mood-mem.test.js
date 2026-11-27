@@ -60,10 +60,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   __MW.loc={};__MW.tog={};let err=null;try{__T.tick();render()}catch(e){err=e.message}return {err,n:__T.causes(S).length}});
  ok(!r6.err&&r6.n===0,'old save: no pl / ww / mwc → no throw, first look wakes nothing',r6);
  /* 7 ghen family: her v.pg */
- const r7=await p.evaluate(()=>{__T.reset();const [v]=__T.R();S.mk=[];mkSync(S);const g0=v.pg||0;const d=pgUp(v,8,"thử");const c0=(S.mk||[]).find(m=>m.k==="ghen");
+ const r7=await p.evaluate(()=>{__T.reset();const [v]=__T.R();S.mk=[];mkSync(S);/* review/oan-pace-2: her jealousy follows the ghen pace (band BAL.stp.band.ghen, relative favour, one incident per buổi): same favour as hers, a fresh incident */const fresh=()=>{S.bqN=(S.bqN||0)+1;S.opg={};v.pUc=0;v.sung=S.sung};fresh();const g0=v.pg||0;const d=pgUp(v,8,"thử");const want=(BAL.oanPace&&BAL.oanPace.on)?Math.round(opBand(8,BAL.stp.band.ghen)):8;const c0=(S.mk||[]).find(m=>m.k==="ghen");
   const c=c0&&{why:c0.why,t:c0.t,left:c0.k1-c0.k0};const g1=v.pg;for(const m of S.mk)m.k1=mkNow();mkSync(S);const g2=v.pg;
-  S.mk=[];mkSync(S);rivalNight(v);const n=(S.mk||[]).find(m=>m.k==="ghen");return {d,g0,g1,g2,c,vk:emoKey(v),dur:BAL.mood2.dur.e.ghenUp,night:n&&n.why,pg3:v.pg,step:BAL.mood2.ghen.pgNight}});
- ok(r7.d===8&&r7.g1===r7.g0+8&&r7.c&&r7.c.t===r7.vk&&r7.c.left===r7.dur,'ghen family: pgUp raises her score v.pg and adds her Chạnh lòng feeling aimed at that consort',r7);
+  S.mk=[];mkSync(S);fresh();rivalNight(v);const n=(S.mk||[]).find(m=>m.k==="ghen");return {d,g0,g1,g2,c,vk:emoKey(v),dur:BAL.mood2.dur.e.ghenUp,night:n&&n.why,pg3:v.pg,step:BAL.mood2.ghen.pgNight,want}});
+ ok(r7.d===r7.want&&r7.g1===r7.g0+r7.want&&r7.c&&r7.c.t===r7.vk&&r7.c.left===r7.dur,'ghen family: pgUp raises her score v.pg and adds her Chạnh lòng feeling aimed at that consort',r7);
  ok(r7.g1===r7.g2,'ghen family: her feeling ending never lowers v.pg',{g1:r7.g1,g2:r7.g2});
  ok(r7.night&&/thị tẩm/.test(r7.night),'ghen family: a consort night (rivalNight) raises v.pg through pgUp with its true why',{night:r7.night});
  /* 8 bot days */
