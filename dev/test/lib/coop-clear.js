@@ -33,6 +33,7 @@ const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
  /* 1b. a podium on screen (j90 kitPodiumShow: her contest's «Hội phối đồ» / mini-game dais): its «Tiếp» (.kpod-next), as a player does —
     since review/day-queue-2 (owner 24/11 ~22:02Z) the cards of the room wait while she is on the dais, so a bot that never taps it holds the room night for ever */
  const kp=document.querySelector('#kpodov .kpod-next');if(kp&&kp.offsetParent!==null&&!kp.disabled){kp.click();return'x'}
+ /* 1c (RV-173 coop-clear-rv173 8e1121d3: tap the held «Tiếp ▸») = step 0 above, which taps it only when it is really the top of the screen — a player cannot tap a covered card (COOP-QCARD) */
  if(!window.__noclose){const kc=[...document.querySelectorAll('.kmov [data-km-close],.kmov .krevok')].find(x=>vis(x)&&x.getClientRects().length);if(kc){kc.click();return'x'}}
  {const sc=document.querySelector('body.kscn-on .kscn');if(sc&&sc.querySelector('.kdv-box')&&getComputedStyle(sc).visibility!=='hidden'){window.__kscnN=(window.__kscnN||0)+1;sc.click();return'x'}}
  const kf=[...document.querySelectorAll('.kfoc-next')].find(x=>x.offsetParent!==null);if(kf){window.__kfocN=(window.__kfocN||0)+1;kf.click();return'x'}
@@ -44,7 +45,8 @@ const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
  return''};
 async function tap(o){try{return await o.p.evaluate(TAP)}catch(e){return''}}
 /* a kit selection scene covers the game (body.kscn-on): a player can only touch the scene — the bot's own step (cards, #next, tabs) waits (2b) */
-const SCN=()=>{try{return document.body.classList.contains('kscn-on')}catch(e){return false}};
+/* RV-173: body.kscn-on is ALSO set by the kit STAGE dialog (jkstage, Bundle 1: #modal.kstg is the card itself) — only a real scene layer (.kscn) covers the game */
+const SCN=()=>{try{return document.body.classList.contains('kscn-on')&&!!document.querySelector('.kscn')}catch(e){return false}};
 async function first(o,fn,arg){if(await tap(o)==='x')return'x';try{if(await o.p.evaluate(SCN))return''}catch(e){return''}return arg===undefined?o.p.evaluate(fn):o.p.evaluate(fn,arg)}
 /* SCR — a stuck seat's screen + night relay, for any bot's failure dump: o.p.evaluate(SCR) (modal title / buttons, visible scenes and
    overlays with their buttons, S.mg, the jnf night word nfDebug + S.nfLast, coop-e2e's day / relay traces when that bot installed them) */
