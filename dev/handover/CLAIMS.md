@@ -581,3 +581,4 @@ D REMERGE LEAD (opus; mg-trim-r6 4ecc3ce6, srv-rank 8559fea2, parity-facfix 1d0f
 kit keeper KK51 | review/kit-plaque-confirm + review/kit-hand-mount | session_01Rc5AsJN1bdRYgV8aBNXsdX | RUNNING | 2026-11-26T23:52Z (MAIN 167)
 god-research spec | dev/handover/reports/god-research.md | session_01Rc5AsMsPWc1spTKeNmYP4d | RUNNING | 2026-11-26T23:53Z (MAIN 167)
 kit-person-panel (option B) | review/kit-person-panel | session_01Rc5AsLyZ4T4e28PDxP9NdF | RUNNING | 2026-11-27T00:01Z (MAIN 167)
+real-proof + split-merge-fix | review/real-proof, review/split-merge-fix | session_01Rc5AsJgemEyzYz28CFtYq4 | RUNNING | 2026-11-27T00:09Z (MAIN 167)
