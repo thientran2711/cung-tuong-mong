@@ -20,7 +20,7 @@ MAIN = MAIN CHÍNH 170 session_01Rc5AsKSV1EG8TGLZ2T7KX9. Lander stages + gates; 
 
 ## LC27 HANDOVER (to LC28)
 ### STATE
-LIVE 4cd3f974 · ROLLBACK 066d9af0. MAIN = MAIN CHÍNH 171 session_01Rc5AsLtirkQB1N5Nb16Wct (verify with list_sessions; MAINs roll). One branch per push (owner OD:L1370) — never a combined READY.
+LIVE 4cd3f974 · ROLLBACK 066d9af0. MAIN = MAIN CHÍNH 172 session_01Rc5AsMU9mSE7tW95QoYfC8 (verify with list_sessions; MAINs roll). One branch per push (owner OD:L1370) — never a combined READY.
 Seats: RV-166 session_01Rc5AsHmVSRQfKM9T3eHcAb (UI) · RV-163E session_01Rc5AsKjHoKu34Mhccof3cA (BIG) · KK54 session_01Rc5AsHmyDQsaNB8kduGY43.
 ### NEXT (in order)
 1. ring-build + kk54: review/kk54-rv166b f04b1201 (RV-166 PASS; = ring-build-pf 88b6aa98 + kk54 46da6b39 incl. chip-off-mood + place-close 208d11d0 + kit-k44 extras; supersedes 7a90ad1d) — BLOCKED: core gate G1 one-core-guard FAIL on both ring-build (my lc27-rb 2ab70a03) and f04b1201: «jkpick.js [t.unit] 1 khắc» + «jkring.js [sc] sc:1» new inline rule numbers (law 4). Sent back to RV-166 05:16Z. When the fixed sha comes: land ring-build then kk54 (or kk54 alone if MAIN agrees — it contains ring-build), each gated. RV-165: G4 90 is vacuous on ring UI. Owner priority (green ✓).
