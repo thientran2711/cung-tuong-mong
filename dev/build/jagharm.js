@@ -42,7 +42,7 @@ function haName(t){return t===S?"ngươi":t&&t.name||""}
 function haDoor(k){try{return typeof DOOR==="object"&&DOOR&&typeof DOOR.ofKey==="function"?DOOR.ofKey(k):null}catch(e){return null}}
 function haVerb(k,t){const V=(typeof J78VERB==="object"&&J78VERB[k])||((ACT[k]&&ACT[k].n||k).toLowerCase()+" {t}");return V.replace("{t}",haName(t))}
 /* the player's cheaper ways of the same act (jecon / jlost: by her own trusted maid or a favour owed, no silver): open where the base act is open */
-const HA_VAR={spyk:"spy",bribel:"bribe",blockf:"block",laydol:"laydo"};
+const HA_VAR={spyk:"spy",bribel:"bribe",blockf:"block",laydol:"laydo"};/* tyrobl stays internal: «Giật y phục» (tyrob) already picks the Bạc or the maid road (RV-163F, law 2) */
 function haGain(k){const G=haB().g;return G[k]||G[HA_VAR[k]]||G._}
 function haPlace(k,v,t,kh,prep){let w=prep?(HA_PREP[k]||"own"):(HA_AT[k]||HA_AT._);
  if(w==="own")return palaceOf(v);if(w==="tpal")return t===S?"home":palaceOf(t);if(w==="tgt"){const p=agAt(t,kh);return k==="pushp"&&p!=="vuon"?null:p}

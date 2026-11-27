@@ -48,11 +48,21 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   o.inEnemy=inEnemy;o.robHome=home;o.reissueDup=dup;
   /* two-way: her act */const t=rivals.find(x=>x&&x.alive!==false&&!x.out&&x!==en&&wdOf(x).y)||en;const ty=(wdOf(t).y||{}).k;S.bac=500;const save1=window.caught;window.caught=()=>"";const r0=window.aRoll;window.aRoll=()=>true;
   o.actOk=!!(ACT.tyrob&&ACT.tyrob.ok(S,t)&&ACT.tyrobl);let txt="";try{txt=ACT.tyrob.f(S,t)}catch(e){txt="ERR "+e}window.caught=save1;window.aRoll=r0;
-  o.act={txt:String(txt).replace(/<[^>]+>/g,""),mine:(S.inv||[]).some(e=>e&&e.k===ty),tTy:tyOn(t),lack:LACK.tyrob(t)};window.curPeople=save0;
+  o.act={txt:String(txt).replace(/<[^>]+>/g,""),mine:(S.inv||[]).some(e=>e&&e.k===ty),tTy:tyOn(t),lack:LACK.tyrob(t)};
+  /* n1 (law 1 parity): NPC schemes «nặng» include tyrob; an NPC on an NPC = the robe moves now; an NPC on HER = the omen plot (her real risk), then the robe goes into THAT NPC's chest */
+  o.bands=BANDS[2][2].includes("tyrob");o.robThug=("robThug" in BAL.ty);
+  const nA=rivals.find(x=>x&&x.alive!==false&&!x.out&&x!==t&&x!==en)||en,nT=rivals.find(x=>x&&x.alive!==false&&!x.out&&x!==nA&&wdOf(x).y&&!tyOn(x));
+  if(nA&&nT){nA.bac=500;const k2=(wdOf(nT).y||{}).k;window.caught=()=>"";window.aRoll=()=>true;try{ACT.tyrob.f(nA,nT)}catch(e){o.npcErr=String(e)}window.caught=save1;window.aRoll=r0;o.npcNpc={inA:(nA.inv||[]).some(e=>e&&e.k===k2),tTy:tyOn(nT)}}
+  S.tyOmen=null;Q.length=0;nA.bac=500;window.caught=()=>"";let rS="";try{rS=ACT.tyrob.f(nA,S)}catch(e){rS="ERR "+e}window.caught=save1;
+  const om=S.tyOmen&&S.tyOmen.by===nA.id,card=Q.some(m=>m&&m.t==="Điềm báo");let w0=wdOf(S);if(!w0.y){const k=earnPlainY(S);if(k)w0.y={k,src:"nvp",nvp:1}}const rk2=(wdOf(S).y||{}).k;const n0=(nA.inv||[]).filter(e=>e&&e.k===rk2).length;
+  S.buoi=3;window.curPeople=()=>[];const odds=tyRobOdds(k0,0);tyRob(k0);window.curPeople=save0;o.npcHer={omen:om,card,odds,robeInA:(nA.inv||[]).filter(e=>e&&e.k===rk2).length>n0,txt:String(rS).replace(/<[^>]+>/g,"")};Q.length=0;window.curPeople=save0;
   /* (6) maid road */S.tyRobW=null;S.tyOmen=null;const O=eitReOpts(true);const m=O.find(x=>/^Sai /.test(x.n));o.maid=m?{fx:m.fx,x:m.x}:null;window.curPeople=save0;return o});
  ok(R.mergeWear===1,'(3) wear(): Ngọc bội + Túi thơm = one Đeo eo slot (one worn)',R.mergeWear);ok(R.mergeOld===1,'(3) old save with both worn → one after wearMerge',R.mergeOld);ok(R.mergeNpc===1,'(3) NPC: the same rule',R.mergeNpc);
  ok(R.noPlot===0,'(5) no enemy plot → no robbery at night in a lonely place (no random thug)',R.noPlot);ok(R.plot>0,'(5) an enemy who chose it (omen plot) → the risk is real',R.plot);
  ok(R.inEnemy===20&&R.robHome===0,'(5) the robbed robe goes into THAT enemy\'s chest (20/20), never back into hers',{inEnemy:R.inEnemy,home:R.robHome});ok(R.reissueDup===0,'(5) a reissued robe is never a copy of one she owns',R.reissueDup);
  ok(R.actOk&&R.act.mine&&R.act.tTy,'(5) two-way: her «Thuê người giật y phục» puts the target\'s robe in HER chest, the target in trung y',R.act);
+ ok(R.bands&&!R.robThug,'(5 n1) NPC schemes «nặng» include tyrob; BAL.ty.robThug gone',{bands:R.bands,robThug:R.robThug});
+ ok(R.npcNpc&&R.npcNpc.inA&&R.npcNpc.tTy,'(5 n1) NPC → NPC «Thuê người giật y phục»: robe into the actor\'s chest, target in trung y',R.npcNpc||R.npcErr);
+ ok(R.npcHer&&R.npcHer.omen&&R.npcHer.card&&R.npcHer.odds>0&&R.npcHer.robeInA,'(5 n1) NPC → her: omen card + real risk on her night walk, then the robe goes into THAT NPC\'s chest',R.npcHer);
  ok(R.maid&&R.maid.fx&&R.maid.fx.danh<0&&!R.maid.fx.suc&&/khắc/.test(R.maid.x),'(6) maid road: Danh + 2-khắc wait, no Sức',R.maid);ok(!errs.length,'rules page: no page errors',errs.slice(0,3));
  const n=res.filter(x=>x).length;console.log(res.every(x=>x)?`PASS ${n}`:`FAIL ${res.length-n}/${res.length}`);await b.close()})();

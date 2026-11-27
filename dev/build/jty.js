@@ -110,9 +110,7 @@ function tyRob(k){const T=BAL.ty;const w=wdOf(S);const e=w.y;if(!e||!wdItem(e))r
   try{if(S&&!S.dead&&k&&k!=="home"&&S.place===k&&p0!==k&&!tyOn(S)&&!window.__tyGo&&!S.out&&!(typeof isSrv==="function"&&isSrv())){const o=tyRobOdds(k);if(o>0&&roll(o)){tyRob(k);render()}}}catch(e){console.error(e)}return r};window.goTo=goTo})();
 /* the omen: an enemy plans it; her people warn her (a card) — then night walks to lonely places are dangerous for omenWk weeks */
 function tyWeek(){const T=BAL.ty;let ev="";try{
- if(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&!(S.tyOmen&&S.tyOmen.until>=wk())){const o=npcWhy("tyPlot",{t:S},()=>roll(T.plotCh));/* npc-purpose G2: the plotter = the enemy whose grudge pushes her most; plotCh = the success (cd stamped only when she acts) */if(o){const v=o.who;S.tyOmen={by:v.id,until:wk()+T.omenWk};
-   Q.push({t:"Điềm báo",kind:"notice",act:1,h:`<p class="past">${when()}</p><p>Cung nhân báo: mấy đêm nay có kẻ lạ lảng vảng quanh lối đi vắng, hỏi han giờ giấc ngươi ra vào.</p><p>Có người thấy kẻ ấy từng ra vào chỗ ${v.name}.</p>`,
-    opts:[{n:"Đã rõ",fx:{},x:`kèm: ${T.omenWk} tuần tới đi đêm, qua nơi vắng dễ bị giật y phục (ở nơi đông người, đi ban ngày thì không sao)`,go:()=>{}}]})}}
+ if(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&!(S.tyOmen&&S.tyOmen.until>=wk())){const o=npcWhy("tyPlot",{t:S},()=>roll(T.plotCh));/* npc-purpose G2: the plotter = the enemy whose grudge pushes her most; plotCh = the success (cd stamped only when she acts) */if(o){const v=o.who;tyOmenSet(v)}}
  /* Nội vụ phủ issues a plain robe of her rank (a chest) */
  if(S&&!S.dead&&S.tyNvp!=null&&wk()>=S.tyNvp){S.tyNvp=null;const w=wdOf(S);if(!w.y){const k=typeof earnPlainY==="function"?earnPlainY(S):null;if(k&&WD_ITEMS[k]){S.inv=S.inv||[];S.inv.push({k,src:"nvp",nvp:1,giver:"Nội vụ phủ",d:typeof wdWhen==="function"?wdWhen():""});try{earnK(S,k)}catch(e){}
    log(`Nội vụ phủ đưa tới ${WD_ITEMS[k].n}, cất trong Tư trang.`);try{kitReward({kind:"gift",title:"Nội vụ phủ cấp y phục",from:"Nội vụ phủ",items:[{n:WD_ITEMS[k].n,d:"Y phục · mặc trong Tư trang",img:WD_ITEMS[k].icon,tier:WD_ITEMS[k].g|0}]})}catch(e){}}}}
@@ -130,7 +128,14 @@ function tyWeek(){const T=BAL.ty;let ev="";try{
    trusted maid (loyalty cost, harder). Caught (j8 caught): the target holds true evidence. Numbers BAL.ty.act. */
 function tyActOk(a,t){try{if(!t||a===t||t.out||t.alive===false)return false;const e=wdOf(t).y,it=e&&wdItem(e);return !!(it&&!it.nt&&!tyOn(t))}catch(x){return false}}
 function tyActO(a,t,self){return loStealO(a,t,self)}/* one odds rule for taking a piece from someone (jlost laydo / laydol) */
-function tyActDo(a,t,self){const T=BAL.ty;a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,T.act.duc,"thuê người giật y phục");else ap(a,{duc:T.act.duc});
+/* the omen card: an enemy v plans to have her robed snatched (tyWeek's oán-driven plot and an NPC's own «Thuê người giật y phục» on her — one card) */
+function tyOmenSet(v){const T=BAL.ty;S.tyOmen={by:v.id,until:wk()+T.omenWk};
+ Q.push({t:"Điềm báo",kind:"notice",act:1,h:`<p class="past">${when()}</p><p>Cung nhân báo: mấy đêm nay có kẻ lạ lảng vảng quanh lối đi vắng, hỏi han giờ giấc ngươi ra vào.</p><p>Có người thấy kẻ ấy từng ra vào chỗ ${v.name}.</p>`,
+  opts:[{n:"Đã rõ",fx:{},x:`kèm: ${T.omenWk} tuần tới đi đêm, qua nơi vắng dễ bị giật y phục (ở nơi đông người, đi ban ngày thì không sao)`,go:()=>{}}]})}
+function tyActDo(a,t,self){const T=BAL.ty;
+ /* dress-fix-n1 (law 1): an NPC's «Thuê người giật y phục» on HER = the hired man lies in wait (the omen plot: a real risk on her night walks to lonely places, the robe then goes into a's chest) — never a robe snatched off-screen */
+ if(t===S&&a!==S){if(S.tyOmen&&S.tyOmen.until>=wk())return"";a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,T.act.duc,"thuê người giật y phục");else ap(a,{duc:T.act.duc});
+  if(self){const m=typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid;if(m)m.loyal=cl((m.loyal||0)-(BAL.loyalCost),0,100)}tyOmenSet(a);return `${NMc(a)} sai người rình ${S.name}. `}a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,T.act.duc,"thuê người giật y phục");else ap(a,{duc:T.act.duc});
  if(self){const m=typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid;if(m)m.loyal=cl((m.loyal||0)-(BAL.loyalCost),0,100)}
  const cg=caught(a,t,false,"thuê người giật y phục của "+NM(t));if(cg)return cg;
  if(!aRoll(tyActO(a,t,self),a))return `Người ${NM(a)} sai đi rình ${NM(t)} mãi không gặp lúc vắng người, đành về tay không. `;
@@ -151,5 +156,5 @@ A("tyrob","Giật y phục",{get c(){return S&&tyBac(S)?{bac:-BAL.ty.act.bac}:{}
  LACK.tyrobl=t=>!(typeof econLoyalMaid==="function"?econLoyalMaid(S):S.maid)?`cần cung nữ thân tín (Thiện cảm ${balAb(BAL.loy.low)}+)`:why(t);
  ACTDOM.tyrob=ACTDOM.tyrobl="Mưu kế";if(typeof J78VERB==="object"){J78VERB.tyrob="sai người giật y phục của {t}";J78VERB.tyrobl="sai cung nữ giật y phục của {t}"}
  const G=RVGRP.find(x=>x[0]==="Hại nặng");if(G)for(const k of ["tyrob"])if(!G[1].includes(k))G[1].push(k);
- if(!DIRTY.includes("tyrob"))DIRTY.push("tyrob","tyrobl");try{DIRTY_SENT.tyrobl=DIRTY_SENT.laydol}catch(e){}}catch(e){console.error("jty acts",e)}
+ if(!DIRTY.includes("tyrob"))DIRTY.push("tyrob","tyrobl");/* dress-fix-n1 (law 1 parity, RV-163G N1): NPC schemes «nặng» can pick it too, like laydo */if(typeof BANDS==="object"&&BANDS[2]&&!BANDS[2][2].includes("tyrob"))BANDS[2][2].push("tyrob");try{DIRTY_SENT.tyrobl=DIRTY_SENT.laydol}catch(e){}}catch(e){console.error("jty acts",e)}
 window.tyOn=tyOn;window.tyCost=tyCost;window.tyRob=tyRob;window.tyWeek=tyWeek;window.tyFig=tyFig;
