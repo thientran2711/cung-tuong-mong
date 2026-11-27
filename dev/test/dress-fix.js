@@ -18,13 +18,17 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    await p.click('#kg82 [data-kinvtab="hd"]');await p.waitForTimeout(300);
    const i=await p.evaluate(()=>{const o=KINV.reg.toil;const e=[...document.querySelectorAll('#kg82 .toilinv [data-kinvi]')].find(e=>{const it=o.items[+e.dataset.kinvi];return e.offsetParent&&it&&it.g&&it.g.k==="hd_lan"});return e?+e.dataset.kinvi:-1});
    if(i<0){ok(false,`${tag} ${way}: hoa điền in the chest tab`);continue}
-   await p.click(`#kg82 .toilinv [data-kinvi="${i}"]`);await p.waitForTimeout(500);
+   await p.click(`#kg82 .toilinv [data-kinvi="${i}"]`);await p.waitForTimeout(900);
+   /* LIVE chest ring (jkring-item «Rương trang phục»): the tap opens the ring on that piece → its act «Dán» (real tap), then the ring closes back to the toilette */
+   {const bs=await p.$$('button');let d=null;for(const x of bs){if(!(await x.isVisible().catch(()=>false)))continue;const t=((await x.textContent())||'').trim();if(/^Dán\b/.test(t)){d=x;break}}
+    if(d){await d.click();await p.waitForTimeout(900);await p.evaluate(()=>{try{if(window.kitRingItem&&kitRingItem.close)kitRingItem.close()}catch(e){}});await p.waitForTimeout(900)}}
    const sl=await p.evaluate(()=>[...document.querySelectorAll('#kg82 .keqg [data-keqk="toil"]')].map(e=>e.getAttribute('title')||'').join('|'));
    ok(/Hoa điền/.test(sl)&&/lan/i.test(sl),`${tag} ${way}: the «Hoa điền» slot shows the picked one`,sl);
    await p.click('#toilok');await p.waitForTimeout(500);
    if(way==='quick'){await p.click('#toilquick');await p.waitForTimeout(400)}else if(way==='moc'){await p.click('#toilmoc');await p.waitForTimeout(400)}
-   else{const r=await p.evaluate(()=>{let used=null;const o=hdBoard;hdBoard=function(x){used=x.k;hdBoard=o;return o.apply(this,arguments)};const ctx={C:null,G:null,file:"",box:document.createElement('div'),draw:()=>0,done:()=>0};
-     try{TOIL.st.parts=TOIL.st.parts||{};const L=hdOwned(S);/* the step must go straight to the board with the pick, no chooser buttons */const ch=hdStep.toString().includes('st.hdk!=null');return{ch,k:TOIL.st.hdk}}catch(e){return{err:String(e)}}});
+   else{const r=await p.evaluate(()=>{let used=null;const o=hdBoard;hdBoard=function(x){used=x.k;hdBoard=o;return{stop(){}}};const ctx={C:null,G:null,file:"",box:document.createElement('div'),draw:()=>0,done:()=>0};
+     /* behaviour, not text: the makeup step goes straight to the drag board with the PICKED hoa điền — no chooser buttons, no chooser ring */
+     try{TOIL.st.parts=TOIL.st.parts||{};const took=hdStep(ctx);const ring=!!(window.kitRingItem&&kitRingItem.cur);const ch=took&&used===TOIL.st.hdk&&!ctx.box.querySelector('[data-hdk]')&&!ring;hdBoard=o;try{if(KG82.run&&KG82.run.stop)KG82.run.stop()}catch(e){}return{ch,k:TOIL.st.hdk,used,ring}}catch(e){hdBoard=o;return{err:String(e)}}});
      ok(r.ch&&r.k==="hd_lan",`${tag} hand: the makeup step places the picked hoa điền (no chooser)`,r);await p.evaluate(()=>toilFinish(false));await p.waitForTimeout(300)}
    const t=await p.evaluate(()=>({hd:S.toilette&&S.toilette.hd,shown:typeof hdShown==="function"?hdShown(S):null,lux:luxParts(S).hd}));
    if(way!=='hand')ok(t.hd&&t.hd.k==="hd_lan"&&typeof t.hd.q==="number",`${tag} ${way}: today's face keeps the picked hoa điền`,t)}
