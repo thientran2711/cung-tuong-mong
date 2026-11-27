@@ -109,6 +109,7 @@ const CLASS=[/* [file, regex on «enclosing function chain + title», class, rea
  ['jts.js',/^tsPanel /,'KIT','tsPanel itself (its callers are counted at their own site)'],
  ['jksize.js',/kszLevels3|kitFrameLive3|kszSheet|kszSpecs3/,'KIT','kit frame internals / size-sheet samples'],
  ['jkitpage.js',/kitPopSample/,'KIT','kit sample page'],
+ ['jkitpage.js',/kitPgHand/,'KIT','kit sample page «Mẫu kit · Bàn bài / Đối thoại» (LIVE BUNDLE 1 kit hand demo; dev sample page, not a game card; rv24 merge row)'],
  ['jcoopworld.js',/onAct|bribe/,'COOP','the friend\'s act arriving in a co-op room (no slot write)'],
  ['jcoopthin.js',/standIn/,'COOP','co-op thin card stand-in'],
  ['jagent.js',/^ /,'NOTCARD','the AG state object (opts = timing stats)'],
