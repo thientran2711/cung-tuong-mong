@@ -53,3 +53,6 @@ Branch `review/tmk-warn` (base review/tmk-oanpace-fix b96bb0d5 — LC33 asked fo
   restack sha from LC33 (session_01Rc5AsNBC5amrkZhbDeusae) if it differs, then RV READY (BIG) → RV-163L session_01Rc5AsL7cUEBT1XLPxhuwSm + MAIN 181.
 - Stills script: rebuild with `bash dev/site/build_site.sh`, then a playwright page on index.html: start() until isSrv(), pushModal({opts:cnvPend(S,
   cnvBribeOpts(S,v,m,BAL.coopBribe.pay))}) (PEND.cnvBribe returns null under the AG loop), click the option, screenshot.
+- LC33 reply (arrived after the roll): there is no 3b restack yet. The current 3b is review/lc31-b3b 07f7cd16; it sits on OLD LIVE, with
+  tmk-oanpace-fix-rv 4206db2c and punish-stack on top. Queue: lc32-ui3 → e-gain3 → 3a → 3b restack. This work touches b3b code (jagknow /
+  tai-mat-know lineage), so per LC33 the base should be review/lc31-b3b 07f7cd16, with one re-merge expected when 3b lands. MAIN 181 decides.
