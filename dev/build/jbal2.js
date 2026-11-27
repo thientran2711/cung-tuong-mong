@@ -565,8 +565,8 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000}});
 /* F10 renderer-mem (26/11), BAL.kobs = the kit's DOM observers. The «Kéo xuống» scroll cue (jksize kitScrollCues). short = a scroller under this many px gets the slim strip below it
    (was a typed 260); hyst = a scroller keeps its short/tall look until its own height moves by more than this (its own cue never flips it). */
-Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* KK53 (OD 27/11 ~01:35Z): the ONE «Chọn» kit button under a lifted kitPick plaque (jkpick conf): w = widest (never wider than the band), minW = narrowest, h = its height, gap = px under the plaque */
-Object.assign(BAL,{kpkgo:{w:280,minW:120,h:52,gap:12}});/* kaPass: card-normaliser passes per wake (j63 kaRun) */
+Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* KK53 v2 (OD 27/11 ~03:17Z): the SMALL «Chọn» chip inside a lifted kitPick plaque's bottom-right corner (jkpick conf): w × h px */
+Object.assign(BAL,{kpkgo:{w:68,h:32}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.

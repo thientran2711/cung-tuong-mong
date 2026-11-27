@@ -1,8 +1,8 @@
 /* kit-plaque-confirm.js (KK51, KIT §98.1 ONE «Chọn» under the lifted plaque (KK53 canon overwrite of the KK51 ✓/✕ pair); MAIN 167 rec for RING-BUILD-7): real stage, Fold 755x1000 + iPad 1180x820 (+ any WxH list).
    For boards of 1,2,4,5,7,8,10 plaques with long and short names, EVERY plaque is lifted in turn:
-   (1) ONE kit «Chọn» button (.kbtn, BAL.kpkgo) sits UNDER the lifted plaque, centred on it unless the band clamps it, no ✕;
+   (1) ONE small kit «Chọn» chip (.kbtn, BAL.kpkgo) sits INSIDE the lifted plaque's bottom-right corner (v2, owner 03:17Z), no ✕, no bar under the plaque;
    (2) it stays inside the band box [postBox.x0 … post right] — never in a column left of the band, never right of the post;
-   (3) the lifted (widened) plaque never goes left of postBox.x0;  (4) it never covers its own name / odds / cost line (it may stand over the plaque below — the lifted plaque is in front);
+   (3) the lifted (widened) plaque never goes left of postBox.x0;  (4) it never covers its own name / odds / cost line or any other plaque;
    (5) it is inside the stage;  (6) «Chọn» chooses (one board);  (7) kitNameTagFit on a DETACHED root returns 0 and never sets a 0 px plate height.
    usage: node dev/test/kit-plaque-confirm.js <index.html> [WxH,...] [shotdir]   exit 1 on FAIL */
 const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');const SHOT=process.argv[4]||'';
@@ -19,9 +19,9 @@ const {chromium}=require('playwright');const path=require('path');const SRC=path
     const Sx=st.getBoundingClientRect(),B=kitPick.postBox(st,n),bl=Sx.left+B.x0,br=Sx.left+B.x1;
     for(const nd of [...P.el.querySelectorAll('.kpk-n')]){nd.querySelector('.kpk-b').click();await sl(30);const c=P.el.querySelector('.khconf:not([hidden])');if(!c){out.push({n,id:nd.dataset.id,err:'no conf'});continue}
      const cr=c.getBoundingClientRect(),pr=nd.querySelector('.kpk-b').getBoundingClientRect(),nr={left:Sx.left+nd.offsetLeft};
-     const on=cr.top>=pr.bottom-3&&cr.top-pr.bottom<=BAL.kpkgo.gap+8/* ONE «Chọn» UNDER the lifted plaque (KK53) */,mid=Math.round((cr.left+cr.right)/2-(pr.left+pr.right)/2),btn=c.querySelector('button');
+     const on=cr.left>=pr.left-1&&cr.right<=pr.right+1&&cr.top>=pr.top-1&&cr.bottom<=pr.bottom+1/* the chip INSIDE the lifted plaque (KK53 v2) */,mid=Math.round(pr.right-cr.right),btn=c.querySelector('button');
      const names=[...P.el.querySelectorAll('.kpk-n')].filter(o=>o!==nd).filter(o=>{const e=o.querySelector('.kfoc-t b')||o,g=document.createRange();g.selectNodeContents(e);const q=g.getBoundingClientRect();/* the name TEXT's box */return Math.min(cr.right,q.right)-Math.max(cr.left,q.left)>2&&Math.min(cr.bottom,q.bottom)-Math.max(cr.top,q.top)>6/* a line box's top / bottom leading (≤ 6 px) is no glyph */}).map(o=>o.dataset.id);
-     const own=[...nd.querySelectorAll('.kfoc-t b,.kfoc-t small')].reduce((z,sm)=>{const g=document.createRange();g.selectNodeContents(sm);const sq=g.getBoundingClientRect();return z+(sq.width?Math.max(0,Math.min(cr.right,sq.right)-Math.max(cr.left,sq.left))*Math.max(0,Math.min(cr.bottom,sq.bottom)-Math.max(cr.top,sq.top)):0)},0),inside=Math.round(cr.width)<=BAL.kpkgo.w+1&&Math.abs(cr.height-BAL.kpkgo.h)<=1&&/^Chọn$/.test(btn.textContent.trim())&&btn.classList.contains('kbtn')&&!c.querySelector('.khx');
+     const own=[...nd.querySelectorAll('.kfoc-t b,.kfoc-t small')].reduce((z,sm)=>{const g=document.createRange();g.selectNodeContents(sm);const sq=g.getBoundingClientRect();return z+(sq.width?Math.max(0,Math.min(cr.right,sq.right)-Math.max(cr.left,sq.left))*Math.max(0,Math.min(cr.bottom,sq.bottom)-Math.max(cr.top,sq.top)):0)},0),inside=Math.round(cr.width)<=BAL.kpkgo.w*1.1+1&&Math.round(cr.height)<=BAL.kpkgo.h*1.1+1&&/^Chọn$/.test(btn.textContent.trim())&&btn.classList.contains('kbtn')&&!c.querySelector('.khx');
      const kb=nd.querySelector('.kpk-b'),cs=getComputedStyle(kb),tb=getComputedStyle(nd.querySelector('.kfoc-t b')),pcs=getComputedStyle(kb,'::before'),silk=/255, 25[04], 2?[0-9]{2}|255, 254, 250/.test(cs.backgroundImage)&&(c3=>c3[0]>=200&&c3[1]>=170&&c3[2]>=90&&c3[2]<=160)(cs.borderTopColor.match(/\d+/g).map(Number))&&parseFloat(cs.borderTopWidth)<=1.01&&tb.color==='rgb(122, 42, 28)'&&(pcs.content==='none'||pcs.content==='normal')/* thẻ lụa (KK53): ivory face, thin pale-gold border, dark-red title, no wood nails */;
      const ix=+nd.dataset.id.slice(1),row=(ix/P.G.cols)|0,edge=row===0||row===P.G.rows-1;/* a first / last row plaque has a free side (rail above / nothing below) */
      out.push({silk,set:set===LONG?'long':'short',n,cols:P.G.cols,id:nd.dataset.id,edge,on,inside,own:Math.round(own),rEnd:mid,inBand:cr.left>=bl-1&&cr.right<=br+1,leftOK:nr.left>=bl-1,names,inStage:cr.left>=Sx.left-1&&cr.right<=Sx.right+1&&cr.top>=Sx.top-1&&cr.bottom<=Sx.bottom+1,
@@ -37,10 +37,10 @@ const {chromium}=require('playwright');const path=require('path');const SRC=path
   if(SHOT)await p.screenshot({path:`${SHOT}/confirm-${wh}.png`});
   const o=r.out;console.log('   boards',o.length,'lifts; sample',JSON.stringify(o.filter(x=>x.n===7&&x.set==='long').map(x=>({id:x.id,c:x.cx,band:x.band}))));
   chk(wh+' every lift shows the «Chọn» button',o.every(x=>!x.err),o.filter(x=>x.err).slice(0,3));
-  chk(wh+' «Chọn» sits UNDER the lifted plaque (gap BAL.kpkgo.gap), centred on it unless the band clamps it',o.every(x=>x.on&&Math.abs(x.rEnd)<=40),o.filter(x=>!(x.on&&Math.abs(x.rEnd)<=40)).slice(0,3));
+  chk(wh+' «Chọn» chip INSIDE the lifted plaque, at its bottom-right corner',o.every(x=>x.on&&x.rEnd>=-1&&x.rEnd<=16),o.filter(x=>!(x.on&&x.rEnd>=-1&&x.rEnd<=16)).slice(0,3));
   chk(wh+' «Chọn» inside the band box [postBox.x0 … post] (no button room left of the band)',o.every(x=>x.inBand),o.filter(x=>!x.inBand).slice(0,3));
   chk(wh+' lifted plaque never left of postBox.x0',o.every(x=>x.leftOK),o.filter(x=>!x.leftOK).slice(0,3));
-  chk(wh+' «Chọn» = ONE kit .kbtn, width ≤ BAL.kpkgo.w, height BAL.kpkgo.h, no ✕',o.every(x=>x.inside),o.filter(x=>!x.inside).slice(0,3));
+  chk(wh+' «Chọn» = ONE small kit .kbtn chip (BAL.kpkgo), no ✕',o.every(x=>x.inside),o.filter(x=>!x.inside).slice(0,3));
   chk(wh+' «Chọn» never over its own name or odds / cost line',o.every(x=>x.own<=20),o.filter(x=>x.own>20).slice(0,3).map(x=>x.set+x.n+':'+x.id+' '+x.own+'px²'));
   chk(wh+' «Chọn» inside the stage',o.every(x=>x.inStage),o.filter(x=>!x.inStage).slice(0,3));
   chk(wh+' «Chọn» chooses',r.flow&&r.flow.xBack&&r.flow.pick==='a1',r.flow);
