@@ -18,7 +18,7 @@ npwReg("srvCard",{grp:"G2a",cdOf:p=>{const B=npwB().srvWk;return p===srvM()?B.cd
   if(p===m){const mo=srvCardW(m,"mood"),or=srvCardW(m,"order");return mo>=or?{s:mo,t:S,r:(S.tin||0)>=B.mid?"vui lòng với ngươi":"chán ghét ngươi"}:{s:or,r:"lòng dạ hiểm, muốn hại người"}}
   if(rivals.includes(p))return {s:hostility(p,m)*B.bribe,t:m,r:"oán "+npwNm(m)+", muốn mua tai mắt trong cung nàng"};
   const a=S.srv.af[p.sid]||0;return a<0?{s:-a*B.frame,t:S,r:"ghét ngươi"}:{s:a*B.tip,t:S,r:"thân với ngươi"}}});
-npwReg("srvBuy",{grp:"G2a",who:c=>{const m=c.m;if(!m)return[];const B=BAL.ag.why.srv.buy;try{return liveRivals(true).filter(x=>x!==m&&rkOf(x)>rkOf(m)+B.gap&&(x.bac||0)>=B.bac)}catch(e){return[]}},
+npwReg("srvBuy",{grp:"G2a",who:c=>{const m=c.m;if(!m)return[];const B=BAL.ag.why.srv.buy;try{return liveRivals(true).filter(x=>x!==m&&!x.coop/* review/srv-rank rv#1 */&&rkOf(x)>rkOf(m)+B.gap&&(x.bac||0)>=B.bac)}catch(e){return[]}},
  why:(x,c)=>{const B=npwB().srv.buy;const sk=(S.srv.rk||0)*B.rk+(S.tai||0)*B.tai,h=Math.max(0,hostility(x,c.m))*B.host;
   return {s:sk+h,t:c.m,r:h>sk?"oán "+npwNm(c.m)+", muốn lấy người hầu của nàng":"muốn có người hầu giỏi"}}});
 npwReg("srvWatch",{grp:"G2a",who:c=>c.m?[c.m]:[],why:m=>{const B=npwB().srv.watch;return {s:(100-(S.tin||0))*B.tin+(hasT(m,"Kín đáo")?B.close:0),t:S,r:"không tin ngươi, sai người để mắt"}}});
