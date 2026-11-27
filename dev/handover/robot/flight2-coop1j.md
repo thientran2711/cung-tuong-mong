@@ -18,7 +18,13 @@ Branch: review/flight2-coop (harness/test files + this folder only; game code = 
 - host-k1 «Ban hoa» at Điện tuyển, buổi 1, age 19 (known bug Ban hoa b1; bugs: 1 two-tap «Trò chuyện với Quách Lạc Anh» nothing lifted (BIG #21-suspect); 1 coop rejoin).
 - HARNESS FAULT: the next kiếp of a seat had pre=null → host-k2 tapped «Chơi một mình → Một mình» and played SOLO (k2 voided IDENTITY at buổi 46 after a reload, k3 Ban hoa, k4 solo) while guest-k1 «Thôi Dao Quang» sat at #coopfz «Đợi hảo hữu trở lại · HẢO HỮU đang vắng · TA đang ở trong cuộc» (stuck-1 15 min, guest still had «Chép đường dẫn / Về màn đầu» + «Nhận» behind). Not a mutual wait: the host had left the room.
 - FIX c5a242e0 robot-rt-coop.js: a seat's next kiếp uses resumePre (title → «Cùng hảo hữu» → «Trở lại phòng»), never «Chơi một mình» / «Mời hảo hữu».
-### Room c — seed 7103, from 16:30Z on c5a242e0 — RUNNING
+### Room c — 3T7K, seed 7103, from 16:30Z — RUNNING (resumed 20:00Z on 021944b7)
+- host-k1 «Ban hoa» b1 (known) → host-k2 rejoined the SAME room (c5a242e0 works); both seats reached year 3 turn 25 (≈69 room weeks).
+- 19:3xZ host-k2 «Nhâm Thuần Nguyên» died «Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 22 tuổi» (real death, lãnh cung, trọng bệnh nguy kịch). Then the harness started the next kiếp from the title; the room canon gave back her pre-death / dead seat each time → k3…k21 «Hồng nhan bạc mệnh» (header «Kiếp thứ 21»), safety net stopped the host seat; guest at #coopfz «Đợi hảo hữu xong tuần · HẢO HỮU chưa xong tuần» (only «Về màn đầu»), room week 69, COOP.state.ended {a:false, b:true}.
+- HAND CHECK 20:0xZ (real taps, both real profiles, /home/user/wt/coop1j-hand/hand.js; shots t*-host/guest.png kept off git): guest rejoin → «Đợi hảo hữu xong tuần», buttons only «Về màn đầu» + friend chip; host «Cùng hảo hữu → Trở lại phòng» → dead S «Liễu yếu gặp sương» → «Tiếp theo» → «Chuyển kiếp» → NEW LIFE «Lôi Vân La» IN THE ROOM (#kroul Tiếp / Bỏ qua). So there WAS a way on: NOT a «COOP HANG REAL».
+- HARNESS FAULTS fixed: 89d78fa2 robot-rt-coop rebirthInRoom (after a seat's life is stamped ended: real tap «Tiếp theo» → «Chuyển kiếp» on the end card); 021944b7 robot-rt (a noBoot next kiếp already on the pinned build keeps its page — before, the build-pin step did p.goto → title → the in-room new life was lost and the dead seat came back).
+- Resumed 20:00Z (resume=1 room=3T7K): host «Chuyển kiếp» in room → host-k2 new life (rank 3 by turn 26), guest saw «Hảo hữu vào cung», week advanced (turn 26). Earlier host lives kept in out dir run1-lives / run2-lives (not in git).
+- Game note (not a hang, for MAIN to judge): before the in-room «Chuyển kiếp», a dead host who reloads/rejoins once got her alive pre-death week back and died again (guest log «SAVE REWIND»; host k3 replayed buổi 3 «Trọng bệnh · nguy kịch» → same death).
 - Foreman = F ROOT #6 session_01UV1SzhyWsBExe78xC7zMYR from 16:29Z.
 
 ## (c) Hang watch
