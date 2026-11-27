@@ -38,8 +38,9 @@ if [ ! -e "$DIR/index.html" ]; then
   git -C "$REPO" worktree add -q --no-checkout --detach "$DIR" "$SHA"
   git -C "$DIR" sparse-checkout set --no-cone "${SPARSE[@]}"
   git -C "$DIR" checkout -q
-elif ! grep -qxF '/dev/vendor/' "$(git -C "$DIR" rev-parse --git-path info/sparse-checkout)" 2>/dev/null; then
+elif ! ( SPF="$(git -C "$DIR" rev-parse --git-path info/sparse-checkout)"; for x in "${SPARSE[@]}"; do grep -qxF -- "$x" "$SPF" 2>/dev/null || exit 1; done ); then
   # FIXER #15 (3): a pin dir made before the fix (index.html there, dev/vendor missing): add the missing paths in place, no re-create
+  # FIXER #16 (c): EVERY entry of the sparse set is checked (a dir with dev/vendor but no audio/ or icons/ is repaired too; s7b's hand-started old dir: 404 /audio/VOICES.json)
   git -C "$DIR" sparse-checkout set --no-cone "${SPARSE[@]}"
   git -C "$DIR" checkout -q
 fi
@@ -53,7 +54,9 @@ cd "$DIR"; echo "serving $(git log --oneline -1 | cut -c1-60) on http://127.0.0.
   for f in index.html sw.js; do P="$P
 $(grep -ohE "[\"'\`(](\./)?[A-Za-z0-9_][A-Za-z0-9_./-]*\.(js|json|png|mp3|html|webmanifest|css|webp|svg|ico|wasm|woff2?|txt)[\"'\`)]" "$f" 2>/dev/null | tr -d "\"'\`()" | grep -v '^http')"; done
   P="$P
-$(git ls-files 'dev/vendor/*' 2>/dev/null)"
+$(git ls-files 'dev/vendor/*' 2>/dev/null)
+$(git ls-files 'audio/*' 2>/dev/null)"  # FIXER #16 (c): the game builds audio names at run time (fetch audio/VOICES.json, AU_PRELOAD «sfx-…» + ".mp3", kmusUrl «bgm-<key>.mp3», vo-<key>-n.mp3),
+  # never as quoted paths → every file of audio/ in this build is checked. Names NOT in git (KMUS_NEW bgm keys, IMG_BASE+audio/…) are CDN-only on LIVE too: not served here, skipped.
   P="$(printf '%s\n' "$P" | sed 's#^\./##' | grep -E '^([^/]+|(dev/vendor|audio|icons|coop)/.+)$' | sort -u)"
   for i in $(seq 1 100); do (exec 3<>/dev/tcp/127.0.0.1/$PORT) 2>/dev/null && break; sleep 0.1; done
   MISS=""; N=0
