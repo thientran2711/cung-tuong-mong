@@ -151,7 +151,11 @@ function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;cons
 /* ---------- wiring: the clock ---------- */
 (function(){try{
  const sp0=spend;spend=function(){const r=sp0.apply(this,arguments);try{if(ptOn())ptTick()}catch(e){ptErr("spend",e)}return r};
- if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{if(ptOn()){ptTick();ptLedger()}}catch(e){ptErr("buoi",e)}return r}}
+ /* save-unseen-lists r2 (rv r2 FIX 3, the Danh drift on reload): ptTick runs AFTER the step (and on a nextBuoi that did not move time, e.g. jnight
+   rerun): a late order lands as «Từ chối» (its fx: Danh …) with no write after it, so a reload right then gave the older number. When ptTick
+   changed her numbers, the slot is written at once (the same write a step makes). */
+const PT_FP=()=>{try{return [S.danh,S.sung,S.bac,S.duc,S.tai,S.sac,S.tamco,S.suc,S.th,S.hh,(S.ordQ||[]).length,(S.erra||[]).length].join(",")}catch(e){return ""}};
+if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{if(ptOn()){const f0=PT_FP();ptTick();ptLedger();if(PT_FP()!==f0&&S&&!S.dead&&!quiet&&typeof save==="function")save()}}catch(e){ptErr("buoi",e)}return r}}
  if(typeof j95sync==="function"){const js0=j95sync;j95sync=function(){const r=js0.apply(this,arguments);try{if(ptOn()&&ptZ().length)ptLedger()}catch(e){ptErr("j95sync",e)}return r}}
 }catch(e){ptErr("wire",e)}})();
 window.PTIME={repRows:ptRepRows,repFacts:ptRepFacts,repText:ptRepText,on:ptOn,now:ptNow,/* true while the core lands tasks (its runners call the game's own acts: no new send from them) */landing:()=>ptBusyTick||!!PT.landing,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat,
@@ -170,6 +174,9 @@ function ptFree(s,owner){const id=ptPid(s,owner);return !!s&&!ptBusy(id)}
 /* the person she sends for a task with no named servant (đưa lời mời, dò nơi ở, …): her runner (jhc), else the best free servant, else her maid */
 function ptRunner(){try{const b=bestSent(S);if(b&&ptFree(b))return b}catch(e){}if(S.maid&&S.maid.name&&ptFree(S.maid))return S.maid;return null}
 function ptNoRunner(){return"không còn ai rảnh để sai (người hầu đang đi việc)"}
+/* live-bugs-2711: the TRUE reason no servant can be sent (bestSent null): none in her household / none trusted enough to send (jtin BAL.tinLv.send) / all out on errands */
+function ptNoSentWhy(){try{const L=(S.staff||[]).filter(s=>s&&!s.spyFor);if(!L.length)return"trong cung chưa có người hầu nào để sai";
+ if(typeof tinOf==="function"&&!L.some(s=>tinOf(s)>=BAL.tinLv.send))return"chưa có người hầu nào đủ tin để sai đi";}catch(e){}return ptNoRunner()}
 /* ---- busy servants are never picked to be sent (her runner, NPC mistresses too: two-way) ---- */
 (function(){try{if(typeof bestSent!=="function")return;const b0=bestSent;bestSent=function(p){const r=b0.apply(this,arguments);try{if(!ptOn()||!r||!p)return r;if(!ptBusy(ptPid(r,p)))return r;
   const L=(p.staff||[]).filter(s=>s&&s!==r&&!s.spyFor&&!ptBusy(ptPid(s,p)));if(!L.length)return null;return L.sort((a,b)=>(b.loyal||0)-(a.loyal||0))[0]}catch(e){return r}}}catch(e){ptErr("bestSent",e)}})();
@@ -304,20 +311,20 @@ ptReg("harm",a=>{const v=RV(a.a.v),k=a.a.k;const s=ptPerson(a.a);const nm=s?s.na
  const r=fzRun(a.a.fz,k,()=>runAct(S,v,k));if(r)log(r);return{t:`${nm} ${String(ACT[k].n).toLowerCase()} ${v.name} trở về`}});
 /* ---- 7. Sai người lẻn vào cung … cài đồ (PEND.plantpick, not "tại cung nàng"): the servant carries the item (it leaves her chest), lands at due ---- */
 (function(){try{const b0=PEND.plantpick;if(!b0)return;PEND.plantpick=function(p){const d=b0.apply(this,arguments);try{if(!d||!ptOn()||p.here)return d;const v=RV(p.v);const s=bestSent(S);
-  if(!s){d.o=(d.o||[]).map(o=>o.ik!=null?Object.assign({},o,{lock:true,x:ptNoRunner()}):o);return d}
+  if(!s){d.o=(d.o||[]).filter(o=>o.ik==null);if(!d.o.some(o=>/^Thôi/.test(o.n||"")))d.o.push({n:"Thôi",fx:{}});d.t=(d.t||"")+`<p class="past">Chưa sai ai đi được: ${ptNoSentWhy()}.</p>`;return d}/* live-bugs-2711: no dead tiles (gift-dead-scan) */
   d.t=(d.t||"")+`<p class="past">${s.name} đi · tốn ${ptRow("plant").o} khắc, ${ptWaitTxt("plant")}</p>`;
   d.o=(d.o||[]).map(o=>o.ik==null?o:Object.assign({},o,{go:()=>{const fz=actOdds(S,v,"plant");const e=S.inv[o.ik];if(!e)return;S.inv.splice(o.ik,1);
    ptSend({who:ptPid(s),nm:s.name,kind:"plant",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,sid:s.sid,item:e,fz},lbl:`lẻn vào cung ${v.name}`});spend(ptRow("plant").o)}}))}catch(e){ptErr("plantpick",e)}return d}}catch(e){ptErr("plant wire",e)}})();
-ptReg("plant",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)S.inv.push(e);/* the item is real (law 6c): back in her chest, then used */
+ptReg("plant",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)invAdd(S,e);/* the item is real (law 6c): back in her chest, then used */
  if(!e)return{ok:null};if(!v||!v.alive||v.out){log(`${nm} trở về, mang ${iname(e)} về lại rương.`);return{ok:null}}
  const i=S.inv.indexOf(e);let r="";fzRun(a.a.fz,"plant",()=>{r=runAct(S,v,"plant",i)});if(r)log(r);return{t:`${nm} lẻn vào cung ${v.name} trở về`}});
 /* ---- 8. Tặng quà by hand (PEND.giftpick from her card, not together): a servant carries the gift ---- */
 (function(){try{const b0=PEND.giftpick;if(!b0)return;PEND.giftpick=function(p){const d=b0.apply(this,arguments);try{if(!d||!ptOn()||p.v==null)return d;const v=RV(p.v);if(!v||v.coop/* the co-op friend: ONE path for gifts between the two players = the ASK act (she answers first, no servant), as the co-op giftin above (coop-ptime-reds) */||together(S,v))return d;const s=bestSent(S);
-  if(!s){d.o=(d.o||[]).map(o=>o.ik!=null?Object.assign({},o,{lock:true,x:ptNoRunner()}):o);return d}
+  if(!s){d.o=(d.o||[]).filter(o=>o.ik==null);if(!d.o.some(o=>/^Thôi/.test(o.n||"")))d.o.push({n:"Thôi",fx:{}});d.t=(d.t||"")+`<p class="past">Chưa sai ai đi được: ${ptNoSentWhy()}.</p>`;return d}/* live-bugs-2711: no dead tiles (gift-dead-scan) */
   d.t=(d.t||"")+`<p class="past">${s.name} mang quà đi · tốn ${ptRow("gift").o} khắc, ${ptWaitTxt("gift")}</p>`;
   d.o=(d.o||[]).map(o=>o.ik==null?o:Object.assign({},o,{go:()=>{const e=S.inv[o.ik];if(!e)return;S.inv.splice(o.ik,1);
    ptSend({who:ptPid(s),nm:s.name,kind:"gift",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,sid:s.sid,item:e},lbl:`mang quà sang cung ${v.name}`});spend(ptRow("gift").o)}}))}catch(e){ptErr("giftpick",e)}return d}}catch(e){ptErr("gift wire",e)}})();
-ptReg("gift",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)S.inv.push(e);if(!e)return{ok:null};
+ptReg("gift",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)invAdd(S,e);if(!e)return{ok:null};
  if(!v||!v.alive||v.out){log(`${nm} trở về, mang ${iname(e)} về lại rương.`);return{ok:null}}
  const r=giveTo(S,v,S.inv.indexOf(e));if(r)log(r);return{t:`${nm} mang quà sang cung ${v.name} trở về`}});
 /* ---- 9. Sai cung nữ thân tín mua lén ngoài cung (j83 IROUTE.maid): she leaves by the Thần Vũ gate; caught or not is known when she is back
@@ -504,7 +511,7 @@ ptReg("npcMind",a=>ptNpcBack(a,(v,t)=>mindRun(v,t,a.a.k,a.a.err)));
   const tsb=typeof TSB!=="undefined"&&TSB.now?1:0;/* jtsb's planned harm: still its own week + omen first; the servant goes when it is due */
   let it=null;if(k==="plant"&&a.inv&&extra!=null&&a.inv[extra]){it=a.inv[extra];a.inv.splice(extra,1)}/* the item is carried (law 6c) */
   return ptNpcDeed(a,t,k,"npcAct",{tsb,item:it})}}catch(e){ptErr("runAct wire",e)}})();
-ptReg("npcAct",a=>ptNpcBack(a,(v,t)=>{let ix;if(a.a.item){v.inv=v.inv||[];v.inv.push(a.a.item);ix=v.inv.indexOf(a.a.item)}
+ptReg("npcAct",a=>ptNpcBack(a,(v,t)=>{let ix;if(a.a.item){v.inv=v.inv||[];invAdd(v,a.a.item);ix=v.inv.indexOf(a.a.item)}
  const T0=typeof TSB!=="undefined"?TSB.now:0;if(a.a.tsb&&typeof TSB!=="undefined")TSB.now=1;try{return runAct(v,t,a.a.k,ix)}finally{if(typeof TSB!=="undefined")TSB.now=T0}}));
 /* an NPC's trusted maid away on an errand (mm:<vid>) is away for EVERY deed of her mistress, not only the same deed sent again */
 function ptMaidOut(v){return !!v&&v!==S&&!v.coop&&v.id!=null&&ptOn()&&ptBusy("mm:"+v.id)}
@@ -537,3 +544,10 @@ try{ptNpcWire()}catch(e){ptErr("npcWire3",e)}
   if(ptMaidOut(p))return"";ptSend({who:"mm:"+p.id,nm:p.maid.name,kind:"buy",by:"v"+p.id,byNm:p.name,place:typeof J95OUT_!=="undefined"?J95OUT_:null,a:{run:"npcBuy",v:p.id,k},lbl:`lén ra cửa Thần Vũ mua ${itm(k).n}`});PT.stat.npc++;return""}}catch(e){ptErr("npc illBuy wire",e)}})();
 ptReg("npcBuy",a=>{const v=RV(a.a.v);if(!v||!v.alive||v.out)return null;PT.landing=1;let r="";try{r=illBuy(v,"maid",a.a.k)||""}catch(e){ptErr("npcBuy",e)}finally{PT.landing=0}
  try{if(r)newsAdd(v,"ill",r,false)}catch(e){}return null});
+
+/* live-bugs-2711 r2 (rv FAIL 1, law 11): «Tặng quà» from her card — the gift line (jgpick, giftEval) locks every piece she will not take; those are
+   dropped here too (this module loads after jgpick, so this wrapper is outermost): only pieces she can give are tiles, one line says how many are left and why */
+(function(){try{const b0=PEND.giftpick;if(!b0)return;PEND.giftpick=function(p){const d=b0.apply(this,arguments);try{if(!d||!d.o||!p||p.v==null)return d;
+  const no=d.o.filter(o=>o&&o.ik!=null&&o.lock);if(!no.length)return d;d.o=d.o.filter(o=>!(o&&o.ik!=null&&o.lock));
+  if(!d.o.some(o=>/^Thôi/.test(o.n||"")))d.o.push({n:"Thôi",fx:{}});const wy=giftWhyTop(no.map(o=>({why:o.kgwhy||""})));
+  d.t=(d.t||"")+giftRestNote(no.length,`chưa tặng được${wy?" ("+wy+")":""}`)}catch(e){ptErr("giftpick rest",e)}return d}}catch(e){ptErr("giftpick rest wire",e)}})();

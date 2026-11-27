@@ -62,7 +62,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r5.her>0&&r5.npc>0,'AG-MEET: she is picked sometimes, other people too',r5);ok(r5.cards>0&&r5.optsOk===r5.cards,'AG-MEET: she gets the kit card with reply options',r5);
  ok(r5.p95<=r5.budget,'perf: gmTick p95 within the agent budget',{p95:r5.p95,max:r5.max,budget:r5.budget});
  /* 7 old save */
- const r7=await p.evaluate(()=>{quiet=false;save();const k=SK(SLOT);const d=JSON.parse(localStorage.getItem(k));const strip=o=>{if(o&&typeof o==="object"){delete o.gmeet;for(const x in o)if(o[x]&&typeof o[x]==="object"&&x!=="logs")strip(o[x])}};strip(d);localStorage.setItem(k,JSON.stringify(d));
+ const r7=await p.evaluate(()=>{quiet=false;save();const k=SK(SLOT);const d=JSON.parse((window.slotGet?slotGet(k):localStorage.getItem(k)));const strip=o=>{if(o&&typeof o==="object"){delete o.gmeet;for(const x in o)if(o[x]&&typeof o[x]==="object"&&x!=="logs")strip(o[x])}};strip(d);localStorage.setItem(k,JSON.stringify(d));
   let e=null;try{loadSlot(SLOT);Q.length=0;placeWhere();agFlush();endTurn();Q.length=0}catch(x){e=x.message}return{e,has:!!S.gmeet}});
  ok(!r7.e,'old save without S.gmeet loads and plays a buổi',r7);
  /* 8 co-op guest */

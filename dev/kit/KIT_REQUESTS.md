@@ -369,6 +369,14 @@ Hot (self time, CPU profile of that tap): forced layout reads — getBoundingCli
 Ask: one measure pass per open (read all rects first, then write), no style write between reads, and run each fit once per paint (several fits run 2–4× per open now). Target: picker on screen ≤ 1 s at CPU 4x on Fold + iPad. The same cost sits in every person dialog with many option cards (whole group).
 - ✅ DONE → KIT §12.2 (KK40, review/kit-gloss-lower 233de84d: kitLowerRow / kitGlossPopHtml, «Cách giảm» for a rising-bad stat, «Cách tăng» for a falling-bad one, consort road; text = kitLowerText in jts.js; OB-OAN checked every line names real consort acts, 26/11 ~09:35Z). K-GLOSS-LOWER (OB-OAN, owner OD 26/11 ~08:25Z «làm cách nào để giảm bớt oán ... giảm cái độ nguy hiểm», MAIN rec (2), law 11): the kit glossary popup (j79 `.kgl` tap → kpPop `.kpopt` title + `.kpopx` meaning) needs ONE more line «Cách giảm: …» under the meaning when the term is a stat whose RISE is bad for her. Data is ready on review/ob-oan (jts.js, one table): `kitLowerText(term)` returns the text ("" = no row) for Oán, Thù, Ghen, Nguy hiểm, Nguy hiểm chung, Thiện cảm, Quý, Sủng, Sức khỏe, Danh (names of the existing acts only). Ask: KK39 renders `kitLowerText(gl.dataset.kgl)` as the kit «Cách giảm» row in that popup (every kitGloss surface: kitRel2 rows, stat rows, header cells, person card «Có thể hại ngươi» → «Nguy hiểm»). Until then the «Cách giảm» row shows only in the Nguy hiểm chung panel and the «Làm lành với …» dialog (existing kitRows row). Scan: `python3 dev/test/ob-oan-scan.py`.
 
+## 26/11 K-LIST-PAGE — long option/tile lists render only what is on screen (FIXER inv-stack, Foreman B ROOT 2 child 2; MAIN 154 ORDER ~07:50Z part 3)
+After stacking (review/inv-stack) the s7 late save's gift pickers fell from ~37k to ~2.3k DOM nodes, but a picker can still hold ~80 distinct pieces
+(son phấn boxes by colour × uses left, gifts by giver): «Dâng quà» 2,319 nodes (78 tiles), «Biếu quà làm lành» 2,226 (target < 2,000 per list).
+Most of it is the hidden option cards behind the jgpick tile grid (`.opts.kiphas>.opt{display:none}`, ~26 nodes each; kipDetail clones the chosen one).
+Wanted (ONE kit part, every long list): the kip tile grid (and the bag grid kitInvGrid, any kitPanel list) renders only the rows in view (or a page
++ «Xem thêm»), and the hidden option card is built on demand when its tile is chosen (kipDetail) instead of up front. Until then review/inv-stack
+dedupes twin tiles (one tile ×N with the kitItem `qty` badge) and drops their hidden twin cards. Test: dev/test/inv-stack.js (DOM check).
+
 ## 26/11 map-r8 — ART REQUEST «place glyphs r8» (to Foreman C via MAIN 163 / KK45; worker MAP-R8 draws nothing)
 Owner rule via MAIN 163 + RV-163B: a stat glyph (danh / duc / sung / suc / bac / y-thuat) never stands for a place. map-r8 maps every place key to a painted `img/place-<key>.webp` (place glyphs v3). Six palace places have NO painted glyph yet and show the neutral palace roof `place-cung` (KIT_PLACE_STAND, jact):
 - `place-thu` Cần Chính điện · `place-dtd` Dưỡng Hòa điện · `place-tn` Đức Thọ cung · `place-kn` Càn Ninh cung (queen's palace; note `place-cnh` is a different place) · `place-nvp` Nội vụ phủ · `place-tyv` Thái y viện.
@@ -405,3 +413,14 @@ cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) 
 - **K-PICK-LIVE** (D-LIVEBUGS3): SIGNED, KIT.md §28.13i line rewritten in place (law 14): only pickable pieces are tiles, one `p.past` line for the rest; code side is D's (review/live-bugs-2711).
 - Checks: one-core-guard PASS; kit-mark, marks-choice-scan (40 turns: 0 numbers left on choices, 0 errors), kit-pair, badge-scope, kit-plaque-post, kit-notice-action PASS.
 - K-FRAME-HOME (ART, Foreman C; KK40 26/11, KIT §4.3a, OB-NGOAICUNG pre-palace): her portrait frame before the palace is the plain consort-0 frame with crest + gem removed. Wanted: `img/kit/frame-home.webp` (tiểu thư: plain warm lacquer + silk, no crest, no gem, NO consort ornament; same 550x1037 canvas, opening 384x506 at (83,214), cut with Magnific background removal) and `frame-dan.webp` (thôn nữ: simple wood + cloth). Kit wiring when they land: kitDecor player + kitPrePal → frame-home / frame-dan by placeCtx (kc / kc:dan); KIT_FRW + KIT_PFO numbers measured from the files. — DONE 26/11 (KK41): frame-home + frame-dan on the CDN, wired on review/kit-home-frame (KIT §4.3a).
+
+## 27/11 LIVE-BUGS-2711 — K-PICK-LIVE: §28.13i item pick grid shows ONLY pickable tiles (kit keeper KK54 sign-off, law 9/14)
+- Fault (F 27/11 03:12Z s16c «Biếu quà làm lành» 326 tiles all disabled; s2f 686, s14 794): dialogs listed every chest entry and greyed those she can NEVER pick
+  there. review/live-bugs-2711 (D-LIVEBUGS3) changed the DATA side (jts tsgiftpick, jgift giftto, jptime giftpick/plantpick; jgpick.js untouched):
+  a piece the rule refuses is not an option; the dialog text gets ONE `p.past` line «Còn N món khác trong rương <why>.» (jgift giftRestNote + giftWhyTop).
+  Scan: `node dev/test/gift-dead-scan.js <save.json>` (0 dead tiles; gate on y14-ncBtuc-010 + y05-ncBtuc-035).
+- Wanted (rewrite IN PLACE, KIT.md §28.13i, the line «A tile she cannot choose (option `lock`, or not enough bạc) is greyed (`.kshno`) but still selectable to read why.»):
+  «ONLY pieces she can give in that dialog are tiles: a piece the rule refuses (not enough lễ, she will not take it, Thái hậu / Hoàng thượng refuse, no servant
+  can be sent) is NOT a tile; the dialog text gets ONE `p.past` line «Còn N món khác trong rương <why>.» (count + the one or two most common reasons).
+  No tile left = the text line(s) + the kit ✕ only. A pickable tile short of bạc at the moment stays greyed (`.kshno`), selectable to read why.
+  Scan: dev/test/gift-dead-scan.js.»
