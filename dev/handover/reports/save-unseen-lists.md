@@ -664,3 +664,32 @@ New LIVE modules jplink / jamove / jone / jkpp: no S list, no store write, no sa
 | quickcheck ALONE | `bash dev/tools/quickcheck.sh` (×2, default 3 runs) | run 1: G4 94 FAIL 4 iPad + perf longTaskMax 4125/2031; run 2: G4 94 FAIL 1 (same LIVE-flaky row) + longTaskMax 3058/1861 (LIVE runs had a 4,601 ms outlier) |
 | quickcheck ALONE `--runs 5` | `bash dev/tools/quickcheck.sh --runs 5` | **QUICKCHECK PASS · core gates PASS (hooks 14, incl. 94)** · old save ok · perf median of 5 new/live: render 282/230, tab 463/462, buổi 1315/1278 ms, tasks>200 26/24, longTaskMax 1865/2857 |
 Long gates (SUL, look-dedupe ×2, probe Fold+iPad, death, notice, knsell+mutLazy, coop-e2e with coop-clear-rv173) follow below.
+
+## MERGE rv26 (same merger, session_01N1tNP4dWzNLTa9hBMQxHNc; Foreman B priority change 27/11 ~15:41Z)
+PRIORITY #1 CHECK ('save-fix-stack save-rewind'): base review/save-rewind a9772d74 (= rv25 22ae90b4 + dev/test/save-rewind.js); LIVE 772bee4f (lc31-goal: goal-links-rv174-f28 8aee40a9 + coop-clear-rv173 8e1121d3); reused LIVE's goal-links.js / arrive-walk.js / auto-click-scan.js.
+**review/save-fix-stack-rv26 bd47c7532c7c3adfa33773d3cbc2cd8466e8d66a = merge of LIVE 772bee4f into save-rewind a9772d74.** DO 2 (pid-cards-rv6 on rv25, local 6068aa6e, built-only conflicts) paused, not pushed; redo on rv26.
+### Source hunks (both sides kept)
+| file | stack side | LIVE side (goal-links r2) | resolution |
+|---|---|---|---|
+| dev/build/assemble.py module list | + jstack.js after jplrule.js | + jglink.js | LIVE list + jstack after jplrule (set = both, 475 modules, no duplicate) |
+| dev/build/jinv.js kitShopNvp | `have:()=>invCount(S,…)`, `onBuy … invAdd(S,{k})` (inv-stack) | shop title names the eunuch (`Nhờ thái giám ${nm} mua đồ`) | stack's have/onBuy lines + LIVE's kitShop title line |
+| index.html / sw.js | built | built | rebuilt; assets.json = LIVE (diff 0) |
+jglink.js: no S list / store write / save wrapper → census unchanged (UNCLASSIFIED 0).
+**Merge slip caught before push (whole-family check added):** the first rv26 commit's assemble.py union did not apply (no assert) → jstack.js missing from the build → `invAdd is not defined` in every month step (stipGoods, al/rt goods, promo, ilWeek …) → the month step threw, save-rewind showed «NO month flip» (buổi back to 0). Found by save-rewind + console capture; fixed by amend before push. Check used: `git diff --name-only <LIVE> HEAD -- dev` of rv26 = rv25's set + save-rewind.js (identical), and `grep -c 'function invAdd' index.html` = 1. Follow-up K (scan): a build check that every assemble.py module of the stack is in the built page — the source scans (census/inv-stack/time-advance) read dev/build files and could not see it.
+### Gates on rv26 bd47c753 — paste
+| gate | command | result |
+|---|---|---|
+| inv-stack-scan · census · time-advance | as rv25 | RAW 0 · UNCLASSIFIED 0 (33 lists) · PASS 12 gates |
+| save-rewind | `SR_CKPT=<flight2-s18d.ckpt.json from 8ae99226> node dev/test/save-rewind.js index.html fold,ipadAir` | **PASS 4/4** (month flip, sổ = screen 0 bad moments); LIVE 772bee4f FAIL 2/2 (sổ ≠ screen at the month flip = the bug the stack cures) |
+| goal-links (LIVE jinv/jglink owner) | `node dev/test/goal-links.js file://…/index.html 755x1000,1180x820` | iPad PASS every run. Fold «đi tới» (place stays home after Đi tới + companion pick, q 0) FAIL in 3 of 13 Fold runs on rv26 (2 of them under load with coop-e2e running); LIVE 772bee4f 0 of 5; debug copy 6/6 PASS → intermittent, root not found. Open for the reviewer / follow-up L |
+| arrive-walk | `node dev/test/arrive-walk.js index.html 755x1000,1180x820` | PASS (19/20 rounds ok, 1 miss = LIVE's own allowance) |
+| auto-click-scan | `node dev/measure/auto-click-scan.js` | BUG 0 · UNCLASSIFIED 0 |
+| inv-stack.js | `node dev/test/inv-stack.js` | 25/27; FAIL 2 = DOM «Biếu quà làm lành 2,789 (<2,000)» = identical on rv24/rv25 (open K-LIST-PAGE) |
+| SUL | `SUL_FCS=1 node dev/test/save-unseen-lists.js index.html fold,ipadAir 1` | SAVE-UNSEEN PASS 24/24 (one earlier run under load FAIL 1/24 flip-month-0s, before the jstack fix) |
+| quickcheck ALONE `--runs 5` | `bash dev/tools/quickcheck.sh --runs 5` | **QUICKCHECK PASS · core gates PASS (hooks 14)** · old save ok · perf new/live render 227/229, tab 451/410, buổi 1331/1253 ms, tasks>200 23/23 |
+### rv25 long gates (done before the priority change; game code of rv26 = rv25 + LIVE goal-links)
+| gate | result |
+|---|---|
+| SUL 24/24 · look-dedupe ×2 PASS · death PASS · probe Fold/iPad s1 SAVE-RESIDUE PASS (families 0, page errors 0) · notice PASS Fold+iPad | PASS |
+| knsell + mutLazy | PASS 31 cards S touched 0 · mutLazy FAIL ✔ (S touched 24) |
+| coop-e2e SWAP0 (local Worker, coop-clear.js of rv173) | **139/143**: «the same world on both seats (coop-host-lag family)» after week 2 / week 3 / rejoin + R10RV maid loyalty ±1 differ. Ran in parallel with other browsers (load). A/B on LIVE 772bee4f (coop-clear now live) NOT yet run → next |
