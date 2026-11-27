@@ -90,3 +90,4 @@ Hoàng hậu, the same band as LIVE (~90). The «~54–60» was MID-RANK Danh (r
 the rank, not ahead of it. LIVE climbs Danh to 70–90 by m12–42 while still at Tần–Quý phi (the overshoot ruling A removed). Đức on the branch reaches 70 earlier
 than LIVE (m11–15 vs m12–103). NO BAL TUNE (MAIN 171 accepted 04:14Z). Both arms keep dropping 7 → 6 → 7 at the top (same on LIVE; not this branch).
 STATE: review/pace-speed 47bbe2e8 = RV READY to RV-163E (final BIG); reign-end 85791268 lands after it.
+RESULT (27/11 06:11Z): RV-163E PASS d64f53cf (review/pace-speed-rv163e = 47bbe2e8 on LIVE 4cd3f974; title-sys merged with LIVE nn()/NN() counts). Nothing owed. PACE-SPEED-3 done.
