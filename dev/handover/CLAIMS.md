@@ -605,3 +605,4 @@ HARNESS FIXER #15 (sonnet) item 14: rt-serve-build.sh pin set lacks /dev/vendor/
 BIG REVIEWER #15 (opus) review/robot-realtap 97e55a457..943285b5 (+ FIXER #15 item-14 commit on top) | dev/handover/reports/robot-realtap-review.md | (session id in FOREMAN_F_STATUS) | DONE PASS 39c6e505 | 2026-11-27T02:12Z (FOREMAN F ROOT #2)
 C3-KHOBAI (Kho bài left-column icon art) | CDN img/ui-khobai.webp | session_01PEhRbtuvj5NuMwR76Gfqcp (Foreman C) | RUNNING | 2026-11-27T02:15Z
 C3-KHOBAI | img/ui-khobai.webp | session_01PEhRbtuvj5NuMwR76Gfqcp | DONE (ART READY, LOOK PASS, archived) | 2026-11-27T02:20Z
+FLIGHT2-S17A life (NEW seat s17, sonnet; Fold 755x1000 greedy, seed 2026112546, newest LIVE origin/main via rt-serve-build.sh + pin=1 fresh profile, harness review/robot-realtap 39c6e505) | dev/handover/robot/flight2-s17a.* on review/flight2-s17 | (session id in FOREMAN_F_STATUS) | CLAIMED | 2026-11-27T03:08Z (FOREMAN F ROOT #2 session_01UV1SzjiyJzqC1pGgm8zVFQ)
