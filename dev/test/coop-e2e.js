@@ -223,8 +223,9 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
     /* a number one seat moved after its own merge copy (same merged week on both): in-week play, the next merge carries it */
     {const ma=await A.p.evaluate(()=>window.__wAtMerge||null),mb=await B.p.evaluate(()=>window.__wAtMerge||null);
      if(ma&&mb&&ma.w&&mb.w&&ma.wk===mb.wk&&ma.wk===(await C(A)).week){const wa=await wc(A),wb=await wc(B);const isN=v=>typeof v==='number'||v===undefined;
-      const moved=k=>isN(wa[k])&&isN(wb[k])&&isN(ma.w[k])&&isN(mb.w[k])&&(wa[k]!==ma.w[k]||wb[k]!==mb.w[k])&&JSON.stringify(ma.w[k])===JSON.stringify(mb.w[k]);
-      const inw=dif.filter(x=>moved(x.split(' ')[0]));if(inw.length){console.log('   info '+tag+': numbers moved after the merge by one seat\'s own play (next merge carries them) '+inw.length+' '+inw.slice(0,4).join(' ; ').slice(0,300));dif=dif.filter(x=>!inw.includes(x))}}}
+      const E=(x,y)=>JSON.stringify(x)===JSON.stringify(y);/* equal at the merge; then the GUEST alone moved it (her own play reaches the host at the next merge: level < 3 never relays her world writes) or the HOST moved a NUMBER (jcoophl: numbers wait for the merge); a host string / face / name still gates (jcoophl relays those at once) */
+      const moved=k=>{if(!E(ma.w[k],mb.w[k]))return false;const H=[wa,ma],G=[wb,mb];/* A hosts in both seatings (SWAP only swaps the devices) */const hM=!E(H[0][k],H[1].w[k]),gM=!E(G[0][k],G[1].w[k]);return (gM&&!hM)||(hM&&!gM&&isN(H[0][k])&&isN(H[1].w[k]))};
+      const inw=dif.filter(x=>moved(x.split(' ')[0]));if(inw.length){console.log('   info '+tag+': moved after the merge by one seat\'s own play (next merge carries them) '+inw.length+' '+inw.slice(0,4).join(' ; ').slice(0,300));dif=dif.filter(x=>!inw.includes(x))}}}
     if(process.env.COOP_WDIFF)fs.appendFileSync(OUT+'/wdiff.txt',tag+' '+dif.length+'\n'+dif.slice(0,80).join('\n')+'\n');
     if(process.env.COOP_EMOTRACE&&dif.length){const ids=[...new Set(dif.map(x=>(x.match(/^R#(\d+)\.(emoH|emo|mk)/)||[])[1]).filter(Boolean))].slice(0,3).map(Number);
      for(const o of [A,B])fs.appendFileSync(OUT+'/wdiff.txt','EMOH '+o.name+' '+JSON.stringify(await o.p.evaluate(ids=>ids.map(id=>{const v=rivals.find(x=>x.id===id);const b=COOPW.base&&COOPW.base.W&&(COOPW.base.W.R||[]).find(x=>x.id===id);
