@@ -623,3 +623,4 @@ E-ODDS2 (MAIN 171 order ~04:40Z: raw odds words outside the 7-word ladder, whole
 E-GAIN3 (MAIN 171 order ~04:53Z: KK54 census 59 act cards with empty «Được», law 3, per producer) | review/e-gain3 (from main 4cd3f974) | session_01DgYSWnjWesPpZdFrpLFxAq | RUNNING | 27/11 05:00Z (Foreman E child2)
 E-ODDS2 | review/e-odds2 | session_01DgYSWn4eZYMkLbVVmYfEz2 | LAND READY fb2a9141 (rv PASS, stacked on e-f4fac) | 27/11 05:27Z (Foreman E child2)
 owner-ui-a | review/owner-ui-a | session_01Rc5AsL76TjyWixB9Lf5iWr | RUNNING | 2026-11-27T05:11Z (MAIN 171, owner 05:10Z lãnh cung/dead/chest)
+ALLOT-SEASON (Nội vụ phủ allotment plan: fabric by season, cosmetics, than, tea, candles; unused-item rule) | plan only → reports/allot-season-plan.md | opening | RUNNING | 27/11 05:16Z Foreman C
