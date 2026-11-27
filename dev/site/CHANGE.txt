@@ -1,1 +1,2 @@
 Sắc phong xét vào các kỳ lễ trong năm và các đại lễ; số tuần tới kỳ kế tiếp hiện rõ; được phong xong có cảnh phân cung.
+Mỗi lựa chọn hiện thẻ kết quả trước, rồi mới sang màn sau; câu kết quả không lặp lại tên thẻ.
