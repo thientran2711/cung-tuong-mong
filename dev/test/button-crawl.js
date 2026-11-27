@@ -208,6 +208,11 @@ async function waitLoad(p,dev,why){const t=Date.now();
  const t2=Date.now();await p.waitForFunction(()=>{const e=document.getElementById('klife');return !e||!e.isConnected||e.classList.contains('out')},null,{timeout:30000,polling:300}).catch(()=>{});const ms2=Date.now()-t2;
  const rl=await p.evaluate(()=>{const e=document.getElementById('klife');if(!e||e.classList.contains('out'))return '';e.remove();return 'up'}).catch(()=>'');
  const core=await p.evaluate(()=>window.KLOAD?KLOAD.phase+' '+Math.round((KLOAD.core&&KLOAD.core.have||0)/1e6)+'/'+Math.round((KLOAD.core&&KLOAD.core.total||0)/1e6)+' MB':'?').catch(()=>'?');
+ /* FIXER #20 H1 (BIG #20 M6: jload core never resolves → the crawl took the veil down by script and the gate PASSED): a first-load screen (#kload) or a life gate
+    (#klife) STILL UP after the player's wait is what a real player meets = a SURE FAIL row («(first load)», gating), never hidden. The crawl then goes on (setup) so the
+    rest of the run is still measured — but the run cannot pass. */
+ if(rm)rows.push({dev,start:why,label:'(first load)',verdict:'FAIL',why:`first-load screen «Lần đầu nhập cung» still up after ${Math.round(ms/1000)} s (KLOAD ${rm}, ${core}) — a player is stuck there`});
+ if(rl)rows.push({dev,start:why,label:'(first load)',verdict:'FAIL',why:`life gate (#klife) still up after ${Math.round(ms2/1000)} s more — a player is stuck behind it`});
  WL.push({dev,why,ms,ms2,rm,rl,core});
  if(ms>3000||rm||ms2>3000||rl)console.log(`[${dev}] first-load screen (${why}): ${Math.round(ms/1000)} s${rm?' → STILL UP (KLOAD '+rm+'), taken down (setup)':' → done'} (${core}) · life gate ${Math.round(ms2/1000)} s${rl?' → STILL UP, taken down (setup)':''}`);return ms}
 async function walkSelx(p,dev,ER,setup,NM='selx',MAXW=SELXMAX){const SELXMAX=MAXW;let wt=0,ended=false;/* FIXER #19 G1 (BIG #19): the walk budget counts THIS walk's own taps on THIS device (wt) — the global `taps` is shared by every device crawled in parallel (two-device ring run: Fold selx cut at 16 rows, talk at 7, before any hand card, no end row) */
@@ -393,6 +398,10 @@ async function crawlDev(b,URL,dev){
    if(par){const pd=new Set(par.roots.map(r=>r.startsWith('body')?'body':r));const tabNew=par.tab!==sig0.tab||par.panel!==sig0.panel;
     if(process.env.BCDBG)console.log('FILTER',JSON.stringify({pd:[...pd],tabNew,pp:par.panel,sp:sig0.panel,sample:L.slice(0,40).map(b=>[b.label.slice(0,12),b.rk.slice(0,30),b.inPanel])}));
     L=L.filter(b=>!pd.has(b.rk)||(b.rk==='body'&&tabNew&&b.inPanel))}
+   /* FIXER #20 N3 (BIG #20: iPad 22–23 SKIP «gone … live div#kpop» each run): on a POPOVER screen (#kpop «sương sớm» weather, a non-modal kpPop over the room) the
+      room's own panel buttons were re-listed as «new» (the popover changes the panel sig) — they are the home buttons already tapped at depth 0, and after the replay
+      they read «gone». A popover screen = only the popover's own buttons. */
+   if(topL.some(r=>/kpop/.test(r)))L=L.filter(b=>b.rk!=='body');
    const screen=(pathK.length?pathK.map(k=>k.split('|').pop().replace(/#\d+$/,'')).join(' › '):st)+' ['+(sig0.roots[sig0.roots.length-1]||'').slice(0,60)+']';
    console.log(`[${dev}] ${st} depth ${pathK.length} · ${L.length} buttons · ${screen}`);
    /* what moves by itself on this screen (an animation, a clock) is not an effect of a tap */
@@ -460,7 +469,7 @@ async function crawlDev(b,URL,dev){
     a ring build (kitHand / kitPick present) whose selx / talk walk drove NO two-tap row on ANY device = sure FAIL too */
  if(!rows.some(r=>r.two)&&(STARTS.includes('selx')||STARTS.includes('talk'))&&DEV.some(d=>RB[d]))for(const d of DEV)rows.push({dev:d,start:'ring',label:'(ring floor)',verdict:'FAIL',why:'ring UI not driven: this build has kitHand / kitPick but the selx / talk walk made 0 two-tap rows on every device'});
  else if(rows.some(r=>r.two)&&(STARTS.includes('selx')||STARTS.includes('talk')))for(const d of DEV)if(!rows.some(r=>r.dev===d&&r.two))rows.push({dev:d,start:'ring',label:'(ring floor)',verdict:'FAIL',why:'ring UI not driven: 0 two-tap rows on this device (another device drove '+rows.filter(r=>r.two).length+')'});
- const sure=sure0.concat(rows.filter(r=>r.label==='(home floor)'||r.label==='(ring floor)'||r.label==='(budget)')).filter(r=>!isKnown(r));if(FAST)for(const r of sure0.filter(isKnown))console.log('  KNOWN',r.dev,'·',r.label,'·',isKnown(r).why);
+ const sure=sure0.concat(rows.filter(r=>r.label==='(home floor)'||r.label==='(ring floor)'||r.label==='(budget)'||r.label==='(first load)')).filter(r=>!isKnown(r));if(FAST)for(const r of sure0.filter(isKnown))console.log('  KNOWN',r.dev,'·',r.label,'·',isKnown(r).why);
  if(FAST){for(const r of sure.slice(0,12))console.log('  FAIL',r.dev,'·',(r.screen||'').slice(0,50),'·',r.label,'·',r.why.slice(0,140));console.log(`BUTTON CRAWL GATE ${sure.length?'FAIL':'PASS'} · ${sure.length} sure faults (dead/JS error/close) · ${n('FAIL')-sure.length} soft «no effect» rows not gating`)}
  process.exit(FAST&&sure.length?1:0)})();
 
