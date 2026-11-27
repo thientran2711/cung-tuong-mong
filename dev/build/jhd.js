@@ -176,6 +176,10 @@ const HD={peek:()=>null};window.HD=HD;
 
 /* ---------- the makeup step (called by jtoil toilMakeup after the lips; return true = it took over) ---------- */
 function hdStep(ctx){try{if(!S||!TOIL.st)return false;const L=hdOwned(S);if(!L.length)return false;const st=TOIL.st;
+ /* DRESS-FIX (owner OD 26/11 ~18:50Z (2)): the hoa điền of the day is PICKED in the dress picker (slot «Hoa điền», st.hdk); here she only places it. None picked = no step */
+ if(st.hdk!=null){const k=st.hdk;if(!k||!L.some(e=>e.k===k))return false;TOIL.hdLbl="Kéo hoa điền vào giữa hai đầu mày";try{toilHUD({round:"Hoa điền",time:"thong thả"})}catch(e){}
+  const run=hdBoard({C:ctx.C,G:ctx.G,file:ctx.file,box:ctx.box,k,sk:(st.sk&&st.sk.sk)||0,lvF:hdLvF(BAL.hd.mkLv),seed:wdHash(k+":"+toilWk()),paint:()=>ctx.draw(),onEnd:(q,info)=>{st.parts.hd=q;st.hd=info;TOIL.hdLbl="";ctx.done()}});
+  KG82.run={stop:run.stop};return true}
  TOIL.hdLbl="Chọn một hoa điền để dán";/* keep the glass painted while she chooses (pictures may still be arriving) */let pk=true;const loop=()=>{if(!pk)return;ctx.draw();requestAnimationFrame(loop)};loop();KG82.run={stop:()=>{pk=false}};
  const btn=e=>{const w=WD_ITEMS[e.k];return `<button class="${kg82Btn(true)}" data-hdk="${e.k}">${w.n}<small>${KIT_GRADE[w.g|0].n} · xa xỉ ${wdLux(w.k)}</small></button>`};
  const old=ctx.box.querySelector(".kg82act");if(old)old.remove();
@@ -194,7 +198,10 @@ function hdStep(ctx){try{if(!S||!TOIL.st)return false;const L=hdOwned(S);if(!L.l
    HD_ANCHOR), never where she dragged it; straight when q ≥ BAL.toil.fail, the fixed tilt BAL.hd.vungA when vụng. Size BAL.hd.size × face width.
    Painted once per (picture, hoa điền, vụng) into a transparent canvas the size of the picture; a picture without face points shows none (never guessed). */
 const HD_FL={},HD_FLQ=[];
-function hdShown(p){try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;if(!r||!r.makeup||!r.hd||!hdIsK(r.hd.k))return null;return{k:hdMap(r.hd.k),vung:hdVung(r.hd.q),sz:hdSizeOf(p)}}catch(e){return null}}
+/* DRESS-FIX (2): a hoa điền picked in the dress picker but not placed by hand (Điểm trang nhanh / Để mộc) is placed by her own hand: the SAME hashed hand as hdNpc (no Math.random) */
+function hdHandQ(p,k,sk,h){const B=BAL.hd;const r=i=>(wdHash(String(h)+":hd"+i)%1000)/1000;return +Math.max(0,Math.min(B.npcCap,B.npc.q0+B.npc.qSk*(sk||0)+(r(1)+r(2)-1)*B.npc.spread)).toFixed(3)}
+window.hdHandQ=hdHandQ;
+function hdShown(p){try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;if(!r||!r.hd||!hdIsK(r.hd.k))return null;return{k:hdMap(r.hd.k),vung:hdVung(r.hd.q),sz:hdSizeOf(p)}}catch(e){return null}}
 function hdFaceLayer(p,file){if(!BAL.hd.npcShow&&p&&p!==S&&!p.coop)return"";const sh=hdShown(p);if(!sh||!file)return"";let v=null;try{v=MK_FIT.get(file)}catch(e){}if(!v&&!(typeof HD_ANC!=="undefined"&&HD_ANC[file]))return"";/* mg-play2: the spot table is enough */
  const key=[file,sh.k,sh.vung?1:0,sh.sz].join("|");let e=HD_FL[key];if(!e){e=HD_FL[key]={src:"",box:null};HD_FLQ.push(key);if(HD_FLQ.length>80)delete HD_FL[HD_FLQ.shift()];hdFlPaint(file,sh,e,key)}
  return `<img class="kmkl" data-hdl="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="${hdBoxCss(e.box)}">`}
