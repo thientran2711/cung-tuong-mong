@@ -98,3 +98,8 @@ PRIORITY #1 CHECK ('amCardBtns|BAL.time.cost|kgbest'): OD 0 | ledger 0 | claims 
 - CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/b2-fold.mp4 · b2-ipad.mp4 · b2-sheet-fold.jpg · b2-sheet-ipad.jpg (batch-1 files from ACT-MOVE-3 still there).
 - Note (not this job): iPad kid on stage = grey silhouette (no full-body kid figure art) — art gap for Foreman C if MAIN wants; Fold shows the kid portrait card.
 ~90 % this task / ~0 % in game (until RV PASS).
+## Gates (9be8932f build)
+- quickcheck.sh: timed out at 590 s here (blocked host ctm-rank.victoria-tntt.workers.dev, proxy 403), so its parts ran by hand:
+  coregates G1 one-core-guard / text / textrule / bind PASS (inline 3082 < baseline 3592) · G2 rules-one-source bad [] · G3 kit-conform floats none · G4 odds-cap, coop-one-world, mk-layer, manifest-guard, npc-purpose, dialog-fixed, dead-card, look-dedupe PASS · time-spill-guard PASS.
+  G4 button-crawl: 1 fault «Ô lưu [title] · Lui · close button did not close its layer» — SAME on LIVE 17f23656 (crawl run on both over http): pre-existing, not this branch.
+- MAIN is now MAIN 171 (session_01Rc5AsLtirkQB1N5Nb16Wct).
