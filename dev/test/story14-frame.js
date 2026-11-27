@@ -59,8 +59,8 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
  const H=await p.evaluate(()=>window.__H14);chk('OD:L1247 hostile cast people hate her for real (thiện cảm < 0 both ways, oán > 0)',H.length>0&&H.every(h=>h.her<0&&h.me<0&&h.oan>0),H.slice(0,6));
  /* OD:L1253: one fixed choice path (always the first option), many lives of one origin → outcomes spread */
  /* ROAD-TESTS-QDRAIN 27/11: tt has more roads now (composed roads), so 14 lives gave each arc only 3 plays and the 4+ rule had nothing to judge.
-    Same rule, more samples: at least 14 lives, then on until 4 arcs have 4+ plays (cap 40). */
- const SP=[];const plays={};const enough=()=>Object.values(plays).filter(v=>v>=4).length>=4;
+    Same rule, more samples: at least 14 lives, then on until 4 arcs have 6+ plays (cap 40). */
+ const SP=[];const plays={};const enough=()=>Object.values(plays).filter(v=>v>=6).length>=4;/* 6 plays: with only 4 an arc can end one way by plain chance (seen 3/10 in one run) */
  for(let n=0;n<40&&(n<14||!enough());n++){const r=await p.evaluate(()=>window.__fast('tt',0,8));SP.push(r);r.ends.forEach(x=>{const a=x.split('=')[0];plays[a]=(plays[a]||0)+1})}console.log('L1253 lives:',SP.length);
  const E={},C={};SP.forEach(r=>{r.ends.forEach(x=>{const [a,e]=x.split('=');(E[a]=E[a]||[]).push(e)});r.ctx.forEach(x=>{const q=x.split(':');const key=q[0]+':'+q[1];(C[key]=C[key]||new Set()).add(q[2])})});
  const tab=Object.entries(E).filter(([a,L])=>L.length>=3).map(([a,L])=>{const cnt={};L.forEach(e=>cnt[e]=(cnt[e]||0)+1);return [a,L.length,cnt,Math.max(...Object.values(cnt))/L.length]});
