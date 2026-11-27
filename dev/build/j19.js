@@ -16,7 +16,14 @@ function kStepW(a,b){const w=n=>NUMW[n]||String(n);return b==null||a===b?`${w(a)
 function kRangeW(t){return String(t==null?"":t).replace(/(tiến bộ(?: [^\s+<]+(?: [^\s+<]+)?)?) \+(\d+)(?:\.\.(\d+))?(?![\d.])/g,(m,p,a,b)=>`${p} ${kStepW(+a,b==null?null:+b)}`)
  .replace(/([+\-−])(\d+)\.\.(\d+)/g,"$1$2 đến $1$3")}
 const KNEU=/^(không|không tốn|không mất gì|không được mất gì|chỉ |—|\d+ (khắc|việc)|2 khắc|tốn 2 khắc|chọn )/i;
-function kcls(t){const s=t.replace(/<[^>]+>/g,"").trim();if(!s)return"n";if(/bớt (ghen|thù|oán)|hết (ghen|thù)/i.test(s))return"g";if(KNEU.test(s))return"n";if(KHOST.test(s))return"r";
+/* WORDING-GAIN (owner OD 26/11 ~18:50Z (7)): a stat said in marks «Danh −−» / «Sủng ++» is read like «Danh −2» / «Sủng +2» by every colour / row rule (bands BAL.mk, ONE CORE); display is untouched */
+const kMk=s=>String(s).replace(/(^|[\s:(])([+−])(\2{0,2})(?=$|[\s,;.)·:])/g,(m,a,g,r)=>a+g+(1+r.length));
+/* WORDING-GAIN (RV-161 fail 4, law 4): a static mark line «Danh −−» is the ONLY source of that stat's size when the option carries no typed amount; when the option's own
+   fx (w / l / c) already names the stat, the number printed from BAL wins and the typed mark is dropped here (never two sources). */
+const WG_STAT={"Danh":"danh","Sủng":"sung","Đức":"duc","Sức":"suc","Bạc":"bac","Tâm cơ":"tamco","Tai mắt":"mat","Tài":"tai","Sắc":"sac"};
+function wgDrop(t,...fx){t=String(t||"");if(!t||!/[+−]/.test(t))return t;const has=k=>fx.some(o=>o&&typeof o==="object"&&o[k]);
+ return t.split(/(?<=[,;]) /).filter(i=>{const m=i.replace(/[,;]\s*$/,"").match(/^(?:[^:,;]+: )?(Danh|Sủng|Đức|Sức|Bạc|Tâm cơ|Tai mắt|Tài|Sắc) [+−]{1,3}$/);return !(m&&has(WG_STAT[m[1]]))}).join(" ").replace(/[,;]\s*$/,"")}
+function kcls(t){const s=kMk(t.replace(/<[^>]+>/g,"").trim());if(!s)return"n";if(/bớt (ghen|thù|oán)|hết (ghen|thù)/i.test(s))return"g";if(KNEU.test(s))return"n";if(KHOST.test(s))return"r";
  if(/(\bnàng\b|con nàng|của nàng)/i.test(s)&&(/-\s?\d|sảy|chết|mất|phế|bị phạt|tịch thu|sa sút|không được lật thẻ|rơi/i.test(s)))return"g";
  if(KRED.test(s))return"r";if(KGOOD.test(s))return"g";if(/-\s?\d/.test(s))return"r";return"n"}
 /* one effect token -> coloured span; fmt() spans keep their colour */
