@@ -359,3 +359,14 @@ cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) 
   seal value `kitResultSeal("soft")` → «BỎ DỞ» (grey `.sure`); rows «Người ấy» (`kr-tgt`) and «Ai làm» (`kr-by`); `kaAim` / `kaAimVerdict` / `kaAimUse`;
   the night card (jne `kitNightEnd`) uses the same parts («Kết cục» row with a `kitChip(seal)`). KK39: please confirm or restyle in place.
   Open word question for MAIN: the brief says «Hỏng»; the kit seal word stays BẠI (one place to flip: kitResultSeal).
+
+## 27/11 LIVE-BUGS-2711 — K-PICK-LIVE: §28.13i item pick grid shows ONLY pickable tiles (kit keeper KK54 sign-off, law 9/14)
+- Fault (F 27/11 03:12Z s16c «Biếu quà làm lành» 326 tiles all disabled; s2f 686, s14 794): dialogs listed every chest entry and greyed those she can NEVER pick
+  there. review/live-bugs-2711 (D-LIVEBUGS3) changed the DATA side (jts tsgiftpick, jgift giftto, jptime giftpick/plantpick; jgpick.js untouched):
+  a piece the rule refuses is not an option; the dialog text gets ONE `p.past` line «Còn N món khác trong rương <why>.» (jgift giftRestNote + giftWhyTop).
+  Scan: `node dev/test/gift-dead-scan.js <save.json>` (0 dead tiles; gate on y14-ncBtuc-010 + y05-ncBtuc-035).
+- Wanted (rewrite IN PLACE, KIT.md §28.13i, the line «A tile she cannot choose (option `lock`, or not enough bạc) is greyed (`.kshno`) but still selectable to read why.»):
+  «ONLY pieces she can give in that dialog are tiles: a piece the rule refuses (not enough lễ, she will not take it, Thái hậu / Hoàng thượng refuse, no servant
+  can be sent) is NOT a tile; the dialog text gets ONE `p.past` line «Còn N món khác trong rương <why>.» (count + the one or two most common reasons).
+  No tile left = the text line(s) + the kit ✕ only. A pickable tile short of bạc at the moment stays greyed (`.kshno`), selectable to read why.
+  Scan: dev/test/gift-dead-scan.js.»

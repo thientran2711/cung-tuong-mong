@@ -1567,7 +1567,7 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
 - Grid = the 28.13e tile grid (`.kshg`, here `.kipg`, columns `minmax(96px,1fr)`, 84 px under 600 px wide; max height min(46vh, 420 px),
   scrolls) of PICK tiles `.kshc.kshpick.kipc`: picture = kitItem "slot" in the item's grade frame (`giftArt` / j98 itemArt, the Tư trang
   picture) · name in its KIT_GRADE colour (2 lines) · what it is (IT.d, or the work tier) · (grade = the chip on the picture). No button row. Taint = corner tag
-  "đã tẩm". ONLY pieces she can give in that dialog are tiles (live-bugs-2711, F 27/11: 326–1357 dead tiles; law 6c): a piece the rule refuses (not enough lễ, she will not take it, Thái hậu / Hoàng thượng refuse, no servant can be sent) is NOT a tile; the dialog text gets ONE `p.past` line «Còn N món khác trong rương <why>.» (jgift `giftRestNote` + `giftWhyTop`: the count and the one or two most common reasons). No tile left = the text line(s) + the kit ✕ only. A tile that is pickable but short of bạc at the moment stays greyed (`.kshno`), selectable to read why. Scan: `node dev/test/gift-dead-scan.js <save.json>` (0 dead tiles in every item pick dialog).
+  "đã tẩm". A tile she cannot choose (option `lock`, or not enough bạc) is greyed (`.kshno`) but still selectable to read why.
   Doable tiles first, then the dialog's own order. Horizontal rows that wrap (the Tư trang look).
 - Tap a tile → selected (31.13: glow + ×1.06, the rest at .75 opacity; `aria-checked`), the first doable tile is preselected.
   Under the grid `.kipd`: that option's OWN kit card (display copy of its `.opt`: name, odds word, Tốn / Được / Mất / Kèm or the reason
