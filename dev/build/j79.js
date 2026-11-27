@@ -1368,12 +1368,14 @@ function kitSkillArt(kind,k,name){const key=`${kind}-${k}`;const have=(KIT_INFOM
  return have.includes(key)?`img/${key}.webp`:ah.includes("act-cat-hoc-tap")?"img/act-cat-hoc-tap.webp":""}
 function kitSteps(l,max,attr,word){max=max||5;word=word||"Bậc";const seg=Array.from({length:max},(_,i)=>`<i class="${i<l?"on":""}"></i>`).join("");
  return `<${attr?"button type=\"button\"":"span"} class="ksteps" ${attr||""} aria-label="${word} ${l} trên ${max}"><span class="kstepd">${seg}</span><b>${word} ${l}/${max}</b></${attr?"button":"span"}>`}
-function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${cur}/${need}</b></div>`}
+function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${kitNeed(cur,need)}</b></div>`}
 /* tainghe-info (owner OD 25/11 ~23:48Z «Bấm vào dung nghi thì không ra gì hết … không biết bấm vô cái gì mở ra cái khung này»): the card's info
    opens from ONE visible labelled target = the NAME, drawn as the kit info link (ⓘ + dotted underline, the §kitInfo look of «ⓘ Cách học»).
    o.info (or the old o.stepsAttr) = the attribute that opens it (e.g. data-v85tab="cam"). The «Bậc l/max» steps are never a hidden button. */
 function kitSkillName(o){const a=o.info||o.stepsAttr||"";const n=o.name||"";if(!a||!n)return `<b>${n}</b>`;
  return `<button type="button" class="kskn" ${a} aria-label="Xem luật ${kpPlain?kpPlain(n):n}"><i class="kskni" aria-hidden="true">ⓘ</i><b>${n}</b></button>`}
+/* kit-need (s3e-display-fix, robot «Công lao 11/10»): ONE rule for every «have/need» text — the have shown never passes its need (a met need reads need/need) */
+function kitNeed(cur,need){cur=Math.floor(+cur||0);need=+need||0;return `${need>0?Math.min(cur,need):cur}/${need}`}
 /* kitHitGrow(root): see the CSS note «tainghe-info r4». Run debounced on DOM changes + resize. */
 function kitHitGrow(root){try{const MIN=44,T=".kgl,.kskn,button.ladi,.khap:not([role=img])";
  const vis=r=>r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth;
