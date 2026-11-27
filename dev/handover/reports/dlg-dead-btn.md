@@ -84,3 +84,43 @@ The ring cut at 24 (cut column) is K-RING-ALL, fixed by KK59 on review/kk59-ring
 ROLLOVER (context ≈ 30 % est., START ≈ 4 % → roll at 29 %): eb3703be is READY with RV-175; KK60 has the K-HAND-STALE ack. Worktree /home/user/wt/ddb (review/dlg-dead-btn), scan + fixtures in /home/user/wt/ddb-out/fx (y05, y14 from dev/handover/fixtures/save-growth).
 NEXT JOB for the successor (MAIN 179 18:33Z): «Bổng lộc tháng …» (#kmrew) pops over the END CARD and over the «Lãnh cung» rank-drop screen (E robots ×14, F s2h). Rule: reward/notice pop-ups never cover a life-end card or rank-change screen — queue after it.
 PRIORITY #1 CHECK done: CLAIMS:441 **E98 endcard-top** (review/endcard-top e560c7c2 + -r6 3f38961f, REVIEW PASS) is **already in LIVE 772bee4f** (kitEndClear in j93.js:42/55 removes .kmov/#kmrew at the end card). So the robots' cases are a path E98 misses → start from E98's kitEndClear / its test (review/endcard-top), find which producer pops #kmrew after the end card / during the Lãnh cung drop (j93 kmrew producer line ~257, stipend = econ-stipend), whole family = every #kmrew / .kmov / reward pop-up vs every life-end + rank-change screen. Also CLAIMS:410 coop-freeze-kmrew (co-op #kmrew freeze, B) = a separate fault, do not mix. RV-175 FAIL items, if any, go to the successor too.
+
+---
+# DLG-DEAD-BTN-2 (successor, session_01Rc5AsHhwsbeTWxuEgYu7fY; START_CTX ≈ 4 % est. (get_session reads 0), roll at ≈ 29 %, ceiling 60 %)
+Branch **review/dlg-dead-btn-2 417a510c** = review/dlg-dead-btn ffa55582 (eb3703be: NO-EFFECT-HOLD + K-HAND-STALE, still at RV-175, no verdict yet) + RANK SCREEN FIRST.
+PRIORITY #1 CHECK ('kmrew|Bổng lộc|end card|kitEndUp|kmLifeOver|rank screen'): OD — MAIN 179 rule (brief) | main 772bee4f: E98 j93 kmLifeOver/kitEndClear + jend KES_GATE/kesFront, KK29 kitEndUp, KK31 56.31c #modal watcher | review/* endcard-top e560c7c2 / -r6 3f38961f (= LIVE since lc29-ui f28d28b9, 27/11 10:27Z) | claims CLAIMS:441 E98 (done), CLAIMS:410 coop-freeze-kmrew (B, separate) | B LANHCUNG-EARLY (cause of the early drop, not mine).
+KIT CHECK: reuses the kit scene queue (j93 kmPush / kmStage / kmPump), kit rank scenes kitEdict / kitGloom, kit notice (kitPanel) — no new part, no CSS, no player word.
+
+## What the robots saw (root cause)
+| report | build | finding |
+|---|---|---|
+| Foreman E 14 lives «Bổng lộc» over the END CARD (E-S1 608519237 18:01Z/18:04Z = the 14th) | that life ran on pinned build **fb660cb78eec** (review file: «Builds: 1b5137935266 → d3f360028603 → LIVE fb660cb78eec → pinned fb660cb78eec») — older than every LIVE sw.js since 26/11 20:43Z; E98 reached LIVE only at f28d28b9 (27/11 10:27Z) | **not a new path**: all 14 lives ended before E98 was on their build. On LIVE 772bee4f the E98 test is 124/124 PASS (8 endings × 26 popup sources × before/after + month-roll death), so the end card is covered. E should re-check on an unpinned LIVE life. |
+| Foreman F s2h FLIGHT2-S2H (seed 2026112560, LIVE 772bee4f): HUD «Lãnh cung» behind «Bổng lộc tháng chín», then «Lãnh cung» | LIVE 772bee4f | **real, new family** (rank-change screen, not life end). monthTick runs monthPay (stipend chest → kmPush → kmPump starts it AT ONCE, same task) BEFORE the «Bị bỏ quên» cold() (j3:170) → the chest is up over the board while the state is already Lãnh cung; the kitGloom «Vào lãnh cung» is queued behind the chest; the «Lãnh cung» card waits in Q behind the month cards; the gloom then plays OVER the «Lãnh cung» card. Also the «Lãnh cung» notice uses cls "end" (dark frame) → KK29 kitEndUp() read it as the life end: a reward fired under it was DROPPED, and the KK31 watcher closed an open chest. Same for every rank change: demote («Bị giáng phẩm»), promote (kitEdict), restore («Rời lãnh cung»), and every kit pop-up (chest, stipend, kitGain, kitLearn, kitBloom, kitPersonReveal). |
+
+## Fix (one rule in the kit queue, j93)
+- `kmPush`: a non-rank scene starts one task later (setTimeout 0), so a pay-out made earlier in the same month roll / choice sees the rank change of that task. kend (ending entrance) and krank jobs start at once.
+- `kmPushRank` (kitEdict, kitGloom → `krank`): played ahead of every other queued scene (kmPump picks kend / krank first).
+- `kmRankWait()`: while a rank scene is queued / on screen, a rank change is in the state but not drawn yet (kmDiff snapshot → kmDiff() now), or a rank card (`rk:1`) is still in Q (shown or waiting), every other scene waits (kmPump retries every 250 ms). Rank cards marked `rk:1`: j14 «Lãnh cung», «Rời lãnh cung», jpun «Bị giáng phẩm».
+- `kitEndUp()`: #modal.end counts as the life end only with S.dead (kmLifeOver) or Q[0].kend; «Lãnh cung» (cls end) no longer drops / closes rewards — they queue after it. Life end unchanged (E98 drops a dead life's scenes).
+- Order now (s2h case): «Vào lãnh cung» gloom (with the reason «Bị bỏ quên, đưa vào lãnh cung») → month cards → «Lãnh cung» card → «Bổng lộc» chest.
+
+## Scan — family before / after
+`python3 dev/test/rank-screen-scan.py` (static, every kmPush producer + rank card): 16 producers; LIVE: 2 rank scenes not first + 3 rank cards unmarked; branch: 0 / 0 (j93 tablet/note/bloom/reward/ink, jfx kitGain, jflip ×2, jlevel kitLearn, jne, jpromo kitPersonReveal = pop-ups that wait; edict/gloom = rank scenes first; ink = ending first).
+`node dev/test/rank-screen-first.js --save y05.json` (REAL taps Fold 755x1000 + iPad 1180x820, in-page sampler of the top layer; FAIL = a pop-up visible while a rank card is in Q or before the rank scene, or a reward never shown):
+| case (rank change + pop-up, when) | LIVE 772bee4f fold / ipad | review/dlg-dead-btn-2 fold / ipad |
+|---|---|---|
+| monthroll (real monthTick «Bị bỏ quên») + its own stipend | FAIL chest before «Lãnh cung» / FAIL | ok / ok |
+| cold / demote / promote / restore + stipend, before | FAIL ×4 / FAIL ×4 | ok ×4 / ok ×4 |
+| cold + chest / gain / learn / bloom / person, before | FAIL ×5 / FAIL ×5 | ok ×5 / ok ×5 |
+| cold + stipend / chest / gain / learn / bloom / person, after (fired while the rank screen is up) | FAIL ×6 / FAIL ×6 | ok ×6 / ok ×6 |
+| demote + chest, restore + chest, after | FAIL ×2 / FAIL ×2 | ok ×2 / ok ×2 |
+| total | **0/36** | **36/36** |
+Regressions on the branch: endcard-top.js (E98) **124/124 PASS** (Fold + iPad) · kit-endcard-ink.js 4 cases 0 FAIL · dlg-dead-scan (tinbao, toast, eventlong, lichthang, dongso, nofx_hold, fx_hold_control, stale_hand) 16/16 ok.
+Stills (looked at, Fold + iPad side by side) CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/dlg-dead-btn-2/ : before-chest-over-lanhcung (LIVE: «Bổng lộc tháng chín» chest over the board, HUD «Phế phi · lãnh cung»), before-monthroll-chest-first (LIVE: «Bổng lộc tháng mười · bị cắt xén» first), after-monthroll-gloom-first (branch: «Vào lãnh cung · Bị bỏ quên…» first), after-gloom-up-no-chest, after-chest-after-lanhcung-card. Wipe on verdict: `python3 dev/site/cdn_sync.py --wipe-review dlg-dead-btn-2`.
+Seen, not mine: small stat chips (kitStatFx «Danh +1», «Bạc +63») still fly over the gloom on both builds (status chips, not pop-up scenes); the HUD date line reads «Tháng mười · undefined · năm thứ năm» after the test's direct monthTick (both builds; likely the harness calling monthTick outside endTurn).
+
+## Gates
+`git merge-base --is-ancestor 772bee4f 417a510c` ok · 0 deletions vs LIVE · built files rebuilt (dev/site/build_site.sh), assets.json = LIVE.
+
+## Handover (if I roll)
+Worktree /home/user/wt/ddb2 (review/dlg-dead-btn-2), LIVE copy /home/user/wt/live772, outputs + fixture /home/user/wt/ddb2-out (fx/y05.json). Waiting: RV-175 verdict on eb3703be (job 1) and on 417a510c (job 2).
