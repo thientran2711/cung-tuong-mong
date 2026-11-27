@@ -2352,6 +2352,87 @@
      "buoi": null
     }
    ]
+  },
+  {
+   "id": "ES7-R8-speed-5-h",
+   "column": "E-S7",
+   "origin": "bd",
+   "road": "bd_hen",
+   "bot": "speed",
+   "botHarness": "bold",
+   "seed": 1191047549,
+   "dev": "ipad",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "f65d019b"
+   },
+   "live": "Build 86170222adab → LIVE bf5366a06e45 (s 24beb1a4) mid-life (unstick reload)",
+   "end": "Lãnh cung",
+   "type": "end",
+   "fate": "Phát điên trong lãnh cung",
+   "death": false,
+   "age": 26,
+   "year": 7,
+   "rank": 0,
+   "buoi": 939,
+   "steps": 27537,
+   "taps": 17912,
+   "exitPick": null,
+   "bugCounts": {
+    "game": 4,
+    "harness": 1,
+    "dead": 1
+   },
+   "valid": "VALID",
+   "flags": [
+    "mg-unplayed (debut ve 0/10 + kim 0/10)",
+    "mixed build (LIVE update mid-life)"
+   ],
+   "reviewFiles": [
+    "review/rerun-E-S1-ES7-R8-speed-5-h-moments.md",
+    "review/rerun-E-S1-ES7-R8-speed-5-h-review.md"
+   ],
+   "bugs": [
+    {
+     "type": "game",
+     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls ()",
+     "n": 3,
+     "buoi": null
+    },
+    {
+     "type": "dead",
+     "msg": "close button has no effect: .dlg «Danh hiệu mới» «Để sau»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "item pick grid «» re-opened 3× by «Chọn lá này» with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi",
+     "n": 2,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "NO-EXIT DIALOG .dlg «Phòng bị» (div.dlg.kpsc.kipdlg): no close / next after scrolling to its end → later visits unstuck at once by taps",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "dialog scrolled to the end has no close / next button: .dlg «Phòng bị»",
+     "n": 1,
+     "buoi": null
+    }
+   ]
   }
  ]
 }
