@@ -16,6 +16,12 @@ const read=f=>rev?cp.execSync(`git show ${rev}:dev/build/${f}`,{cwd:path.join(__
 /* verdict table: [file, regex on the 240 chars before the call, verdict, why] — first match wins */
 const V=[
  ["jpm.js",/getElementById\("k3room"\)/,"BUG","render wrapper (hall arrival) clicks «Về phòng» #k3room = k3RoomTap → homeGo(): a real walk home, khắc spent"],
+ ["j6.js",/data-new|ask="2"/,"USER","after her «Bắt đầu kiếp mới» confirm (kitConfirm onYes), re-presses the new-life button she chose"],
+ ["jkiep.js",/ask="2"/,"USER","after her new-life confirm (kitConfirm onYes), re-presses the button she chose"],
+ ["jglink.js",/data-tab="go"/,"UI","glMap: her «Xem Dư đồ» tap opens the Dư đồ tab (view)"],
+ ["jplink.js",/data-pg\]\[data-pi/,"UI","plkGo: her tap on a person's name opens that person's page in the people tab (pager button, view)"],
+ ["jk4.js",/KeyboardEvent/,"EVENT","Back (popstate) = one Escape key event to the focused element (her Back press)"],
+ ["jk4.js",/kgback|kchatp/,"UI","kitTopClose on her Esc / Back: closes the chat panel ✕ or the mini-game «Quay lại» only while that back is free"],
  ["jcooptimer.js",/kmend|krevok|data-km-close/,"AUTO-DESIGN","co-op AFK timeout presses a ONE-button end scene (KIT §81: kmend / krevok / km-close), no choice; documented rule"],
  ["jload.js",/data-tgo="opt"/,"UI","after her «peek»/«close» tap: opens the Sổ mây options tab of the menu (view only)"],
  ["jk4.js",/kbk-x/,"UI","kitCloseOthers: closes the open book (✕) when an end/night dialog must win (KIT 8.9); view only"],

@@ -876,12 +876,36 @@ window.kitCloseLayer=kitCloseLayer;
  M.addEventListener("pointerdown",e=>{down=e.target===M&&M.__kx?{x:e.clientX,y:e.clientY,t:Date.now()}:null},true);
  M.addEventListener("click",e=>{const d=down;down=null;if(!d||e.target!==M)return;if(Math.hypot(e.clientX-d.x,e.clientY-d.y)>10||Date.now()-d.t>900)return;e.stopPropagation();kitModalClose()})})();
 /* Esc: the top-most open closable panel (another overlay over the dialog first, then the dialog, then the room person card) */
-document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()=>{if(e.defaultPrevented||document.body.classList.contains("kbk-open"))return;
- if([...document.querySelectorAll(".kpod")].some(x=>x.offsetParent))return;
+/* KIT 32.11 ONE WAY OUT (OB-M3UI, robot M3 26/11: a legend / picture / «!» card with no visible way back = a soft-lock; whole family):
+   every closable layer closes the SAME three ways — the kit ✕, a tap outside, Esc / the device Back. kitTopClose() closes the top-most closable
+   thing and says whether it did: the word pop-up #kpop, the «!» card #kpinfo, the picture #kpzoom, kitCloseLayer layers (by pri), the dialog
+   (only when closable: a FORCED event panel never closes this way), the room person card. Back = ONE history guard entry kept on top ALWAYS
+   (kitBackArm: at boot, on every pointerdown / key, and again on every popstate — RV-OB-M3UI: arming only after a tap missed forced events, the bare
+   room and cards opened by a timer); the Back press pops it, the guard is re-pushed at once and Back acts as Esc (kitTopClose + each layer's own Esc): a closable layer closes, otherwise
+   nothing happens — Back never leaves the game and never skips a required choice. */
+function kitOvOpen(id){const z=document.getElementById(id);return !!z&&!z.hidden&&z.getClientRects().length>0&&z}
+function kitTopClose(dry){try{if(document.body.classList.contains("kbk-open"))return false;
+ for(const id of ["kpop","kpinfo","kpzoom"]){const z=kitOvOpen(id);if(z){if(!dry)z.hidden=true;return true}}
+ /* the co-op letters panel (#kchatp, own layer with the kit ✕) */
+ {const z=kitOvOpen("kchatp");const x=z&&z.querySelector(".kit-x");if(x){if(!dry)x.click();return true}}
+ /* a mini-game shell (#ov, kg82): its kit ✕ «Quay lại» only while that back is FREE (KG82.backPre before «Sẵn sàng», KG82.back nothing at stake);
+    during a live round with stakes nothing happens (the ✕ there = give up; Esc / Back never give up for her) */
+ {const ov=kitOvOpen("ov");const x=ov&&ov.querySelector('[data-kitx="kgback"]');if(x&&x.getClientRects().length&&typeof KG82!=="undefined"&&(KG82.backPre||KG82.back)){if(!dry)x.click();return true}}
+ if([...document.querySelectorAll(".kpod")].some(x=>x.offsetParent))return false;
  const L=KIT_LAYERS.filter(r=>r.isConnected&&!r.hidden&&getComputedStyle(r).display!=="none"&&r.__kxl.box()).sort((a,b)=>b.__kxl.pri-a.__kxl.pri);
- if(L.length){e.preventDefault();L[0].__kxl.close();return}
- if(kitModalClose()){e.preventDefault();return}
- const px=document.getElementById("popx");if(px&&px.offsetParent){e.preventDefault();px.click()}},0)});
+ if(L.length){if(!dry)L[0].__kxl.close();return true}
+ const M=document.getElementById("modal");if(M&&!M.hidden){const f=M.__kx||kitModalCloser();if(!f)return false;if(!dry)f();return true}
+ const px=document.getElementById("popx");if(px&&px.offsetParent){if(!dry)px.click();return true}}catch(x){console.error("kitTopClose",x)}return false}
+window.kitTopClose=kitTopClose;
+document.addEventListener("keydown",e=>{if(e.key!=="Escape")return;setTimeout(()=>{if(e.defaultPrevented)return;if(kitTopClose())e.preventDefault()},0)});
+function kitBackArm(){try{if(!history.pushState||window.__kbackOff)return;if(!(history.state&&history.state.kback))history.pushState({kback:1},"")}catch(x){}}
+window.kitBackArm=kitBackArm;
+(function(){if(typeof window==="undefined"||!window.history)return;
+ kitBackArm();/* boot */for(const t of ["pointerdown","keydown"])document.addEventListener(t,kitBackArm,true);
+ /* Back = Esc, by construction (MAIN 156 r2): the guard comes back, then ONE Escape key event goes to the focused element, so every layer's own
+    Esc handler (title pages, book, podium, Bảng vàng, item card, shop, chat, mini-game tutorial, kitTopClose) answers Back exactly as it answers Esc */
+ window.addEventListener("popstate",()=>{try{if(window.__kbackOff)return;kitBackArm();const a=document.activeElement;const t=a&&a!==document.body&&a.isConnected?a:document.body;
+  t.dispatchEvent(new KeyboardEvent("keydown",{key:"Escape",code:"Escape",bubbles:true,cancelable:true}))}catch(x){console.error("kitBack",x)}})})();
 /* KIT 8.9 ONE DIALOG STACK (owner 21/11, mark #46: the «Kiếp này» death card opened with a person pop-up still open ON TOP of its bottom part).
    ONE rule for the kit modal layer (#modal / Q), applied from showModal, for every dialog opener (kitModal, kitConfirm, kitPanel, resultShow, over(), events, PEND cards):
    (1) a newer dialog is always the TOP layer: #modal sits above the room pop-up card (#popw) and every second-layer pop-up (kitCloseLayer layers, .kpop) — never under them (CSS below);
@@ -953,7 +977,11 @@ function kitCatchOn(card,close){let c=document.getElementById("kxcatch");if(!c){
   const shut=()=>{if(!c.__close||c.__closing)return;c.__closing=1;try{c.__close()}catch(x){}setTimeout(()=>{c.hidden=true;c.__closing=0;c.__close=null},400)};
   ["pointerdown","touchstart","mousedown","mouseup","contextmenu","click","dblclick"].forEach(t=>c.addEventListener(t,eat,{passive:false}));
   c.addEventListener("pointerup",e=>{eat(e);shut()},{passive:false});c.addEventListener("touchend",e=>{eat(e);shut()},{passive:false})}
- const z=parseInt(getComputedStyle(card).zIndex)||45;c.style.zIndex=String(z-1);c.__close=close;c.__closing=0;c.hidden=false}
+ const z=parseInt(getComputedStyle(card).zIndex)||45;c.style.zIndex=String(z-1);c.__close=close;c.__closing=0;c.hidden=false;
+ /* r5 (KK37, info-tap-audit iPad «Hành sự» tab DEAD under #kxcatch): the catcher lives only while ITS card is on screen — a card removed / hidden by any other
+    path (a re-draw, another layer) takes the catcher with it at once, so no tap is ever spent on closing nothing */
+ c.__card=card;if(c.__mo)c.__mo.disconnect();const gone=()=>!card.isConnected||card.hidden||getComputedStyle(card).display==="none"||getComputedStyle(card).visibility==="hidden";
+ c.__mo=new MutationObserver(()=>{if(c.hidden){c.__mo.disconnect();return}if(c.__card===card&&!c.__closing&&gone()){c.__mo.disconnect();c.hidden=true;c.__close=null}});c.__mo.observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:["hidden","class","style"]})}
 function kitCatchOff(){const c=document.getElementById("kxcatch");if(c&&!c.__closing){c.hidden=true;c.__close=null}}
 window.kitCatchOn=kitCatchOn;window.kitCatchOff=kitCatchOff;
 (function(){let obs=null;const watch=t=>{if(!t||t.__kxw)return;t.__kxw=1;
@@ -1111,7 +1139,7 @@ button.ka.kanoart>.kaart{display:none!important}
 .pc>.pcr,.kpanec{container:kpane/inline-size}
 @container kpane (max-width:640px){
  button.ka.kanoart>.kaart{display:none!important}
- .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:flex!important;flex-direction:column!important;gap:8px!important;grid-template-columns:none!important}
+ .pcb:has(> button.ka.kart),.cards:has(> button.ka.kart){display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:1fr!important;gap:8px!important}/* KK56 ONE SET = ONE SIZE (OD 27/11 ~07:20Z): one column, every row the tallest card's height */
 ${kitCompactCSS("button.ka.kart",84,112)}
 }
 @container kpane (max-width:420px){
@@ -1128,7 +1156,7 @@ ${kitCompactCSS("button.ka.kart",84,112)}
    kaNorm → kitActCompactOn(root) after every normalisation pass, so no place has to call it by hand. The Hành sự deck (.cards in #panel, its own kit part)
    and dialog options (.kopt, §6.2) are not touched. */
 (function(){const st=document.createElement("style");st.id="kit-pcard-actrow";st.textContent=`
-.pc>.pcr .pcb:has(> button.ka),.pc>.pcr .rbtn:has(> button.ka){display:flex!important;flex-direction:column!important;flex-wrap:nowrap!important;gap:8px!important;grid-template-columns:none!important;align-items:stretch!important}
+.pc>.pcr .pcb:has(> button.ka),.pc>.pcr .rbtn:has(> button.ka){display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:1fr!important;gap:8px!important;align-items:stretch!important}
 .pc>.pcr .pcb>button.ka,.pc>.pcr .rbtn>button.ka{width:100%!important;min-width:0!important;max-width:none!important;height:auto!important;min-height:0!important;flex:0 0 auto!important;box-sizing:border-box}
 .pc>.pcr button.ka.kanoart>.kaart{display:none!important}
 ${kitCompactCSS(":is(.pc>.pcr,.kpanec) button.ka.kart:not(.kopt)",84,84)}
@@ -1208,13 +1236,20 @@ document.addEventListener("click",e=>{try{const t=e.target&&e.target.closest&&e.
    kitInfoOneLine(root) measures after layout and is re-run by the observer / on resize, so no host calls it. The block therefore never grows with text: the action list is always right under it, only the action list scrolls. */
 function kitInfoOneLine(root){try{(root&&root.querySelectorAll?root:document).querySelectorAll(".pc .pcf .kr > .krv, .pc .pcb > .kb.kpkb > .kr > .krv").forEach(v=>{/* K-INFO-TAP (law 11): the kit-rows info block of a person card body (Hoàng tự / Quý tộc cards: Tuổi · Thứ bậc · Tước vị …) is the same info block */
   if(v.dataset.k1full==null){if(v.querySelector(".kgnb"))return;v.dataset.k1full=v.innerHTML}
-  const full=v.dataset.k1full;v.classList.remove("kone");const old=v.querySelector(":scope > .kgnb");if(old)old.remove();
-  if(v.scrollWidth>v.clientWidth+1){const lab=(v.parentElement.querySelector(".krl")||{}).textContent||"";v.classList.add("kone");const plain=document.createElement("div");plain.innerHTML=full;v.insertAdjacentHTML("beforeend",kitNoteBang(plain.textContent.replace(/\s+/g," ").trim(),lab.trim()||"Chi tiết"))}})}catch(e){console.error("kitInfoOneLine",e)}}
+  const full=v.dataset.k1full;v.classList.remove("kone");const old=v.querySelector(":scope > .kgnb");if(old)old.style.display="none";
+  /* tainghe-info r4: measure with the old «!» hidden and KEEP it when it is still needed (it used to be removed and re-made on every pass: ~15 new «!» a second,
+     a tap could land on one that was just thrown away) */
+  /* r5 (KK37, LC19 hit-overlap «Trong cung: Chương 1…» × «!»): the cut text lives in its own block .kone-t that ends BEFORE the «!» lane — overflow:hidden on the row
+     clips at its padding edge, so the hidden rest of the words used to lie under the «!» and take its taps. Made once and kept (no re-make churn); measured on it. */
+  let t=v.querySelector(":scope > .kone-t");if(!t&&v.scrollWidth>v.clientWidth+1){t=document.createElement("span");t.className="kone-t";[...v.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains("kgnb")))t.appendChild(n)});v.insertBefore(t,v.firstChild)}
+  if(t?t.scrollWidth>t.clientWidth+1:v.scrollWidth>v.clientWidth+1){v.classList.add("kone");if(old){old.style.display="";return}const lab=(v.parentElement.querySelector(".krl")||{}).textContent||"";const plain=document.createElement("div");plain.innerHTML=full;v.insertAdjacentHTML("beforeend",kitNoteBang(plain.textContent.replace(/\s+/g," ").trim(),lab.trim()||"Chi tiết"))}
+  else if(old)old.remove()})}catch(e){console.error("kitInfoOneLine",e)}}
 window.kitInfoOneLine=kitInfoOneLine;
 (function(){const st=document.createElement("style");st.id="kit-info-one";st.textContent=`
 .pc .pcf .kr>.krv,.pc .pcb>.kb.kpkb>.kr>.krv{position:relative;display:block!important;min-width:0!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
 .pc .pcf .kr>.krv>*,.pc .pcb>.kb.kpkb>.kr>.krv>*{white-space:nowrap!important}
 .pc .pcf .kr>.krv.kone,.pc .pcb>.kb.kpkb>.kr>.krv.kone{padding-right:26px}
+.pc .pcf .kr>.krv>.kone-t,.pc .pcb>.kb.kpkb>.kr>.krv>.kone-t{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .pc .pcf .kr>.krv>.kgnb,.pc .pcb>.kb.kpkb>.kr>.krv>.kgnb{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
 /* dialog hosts (pop-up card with the ✕ .pcx in the corner, which follows the scroll): the «!» of a long row stands LEFT of the ✕ lane, never under it (a tap on it would close the dialog) */
 .pcpop .pc .pcf .kr>.krv.kone,.pcpop .pc .pcb>.kb.kpkb>.kr>.krv.kone{padding-right:72px}
@@ -1260,7 +1295,7 @@ function kitPcFitPortrait(pc){try{const max=parseFloat(pc.style.getPropertyValue
  const nm=pc.querySelector(":scope > .pcl > .pcname"),pcp=pc.querySelector(":scope > .pcl > .pcp"),head=(nm?nm.offsetHeight:44)+8,mb=pcp?parseFloat(pcp.style.marginBottom)||0:0,vis=1;void mb;/* the text starts BELOW the frame's pendant + tassel (kitPcClearTassel), so the whole frame counts */
  const w=Math.max(120,Math.min(nat,Math.floor((max-head-80)/vis*550/1037)));pc.style.setProperty("--kpcw",w+"px");kitPcClearTassel(pc);requestAnimationFrame(()=>{kitPcClearTassel(pc);requestAnimationFrame(()=>kitPcClearTassel(pc))})}catch(e){}}
 /* the rows under the frame used to start OVER the pendant + tassel (negative margin of the frame): inside the scrolling text area that overlapped the label («Hoàng thượng → ta», owner-visible, KK23b nit): the text area now starts under the tassel */
-function kitPcClearTassel(pc){try{const pcp=pc.querySelector(":scope > .pcl > .pcp"),sc=pc.querySelector(":scope > .pcl > .kplscr");if(!pcp||!sc)return;const mb=parseFloat(pcp.style.marginBottom)||0;sc.style.marginTop=(mb<0?-mb:0)+"px"}catch(e){}}
+function kitPcClearTassel(pc){try{if(window.KIT_PFO&&KIT_PFO.clear)return KIT_PFO.clear(pc);const pcp=pc.querySelector(":scope > .pcl > .pcp"),sc=pc.querySelector(":scope > .pcl > .kplscr");if(!pcp||!sc)return;const mb=parseFloat(pcp.style.marginBottom)||0;sc.style.marginTop=(mb<0?-mb:0)+"px"}catch(e){}}
 window.kitPcClearTassel=kitPcClearTassel;
 window.kitPcFitPortrait=kitPcFitPortrait;
 (function(){const k0=window.kitPcKeyFit;kitPcKeyFit=function(pc){try{k0&&k0.apply(this,arguments)}catch(e){}try{kitPcScroll(pc);kitPcFitPortrait(pc)}catch(e){}};window.kitPcKeyFit=kitPcKeyFit;

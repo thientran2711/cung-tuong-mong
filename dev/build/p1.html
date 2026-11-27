@@ -120,7 +120,7 @@ html.kv2 .game{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-r
 .main{background:var(--red);color:#fff;border:1px solid var(--trim);border-radius:8px;padding:8px 16px;font-weight:600;cursor:pointer;min-height:44px;white-space:nowrap}
 .main:disabled{opacity:.45;cursor:default}
 /* modal, overlays, juice */
-.modal{position:fixed;inset:0;background:#2a1a1288;display:flex;align-items:center;justify-content:center;padding:14px;z-index:30}
+.modal{position:fixed;inset:0;background:var(--kveil,#2a1a1288);display:flex;align-items:center;justify-content:center;padding:14px;z-index:30}
 .dlg{background:linear-gradient(var(--panel2),var(--panel));border:1px solid var(--gold);border-radius:10px;width:100%;max-width:470px;max-height:calc(100dvh - 28px);overflow:auto;padding:14px;animation:pop .25s ease-out}
 .dlg h2{font-family:var(--display);color:var(--gold);font-size:1.15rem;margin:0 0 8px}
 .dlg .body{line-height:1.55}
