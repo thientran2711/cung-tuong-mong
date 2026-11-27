@@ -29,7 +29,7 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();p.on('pageerror',e=
       try{const v=j95whereId(id,kh);if(v&&RAWW(v.act))bump("j95whereId.act",x[1],v.act);if(v&&RAW(v.why))bump("row why",x[1],v.why)}catch(e){}}
      try{const seen=new Set();for(const id in R.P){const x=R.P[id][kh];if(!x||seen.has(x[0]))continue;seen.add(x[0]);for(const h of j95here(x[0],kh))if(RAWW(h.act))bump("j95here.act",h.id,h.act)}}catch(e){}
      try{const q=j95table(null,null,kh);const rows=(q&&q.rows)||[];for(const w of rows)if(RAWW(w.act))bump("j95table.act",w.id,w.act)}catch(e){}}
-    if(k===1||k===3){try{save()}catch(e){}res.saves.push(localStorage.getItem("hclh-save-v2-4"))}
+    if(k===1||k===3){try{save()}catch(e){}res.saves.push((window.slotGet?slotGet("hclh-save-v2-4"):localStorage.getItem("hclh-save-v2-4")))}
     const kh=j95kh();try{spend(1)}catch(e){}if(j95kh()===kh)break}
    try{nextBuoi()}catch(e){}Q.length=0}
   try{for(const key in (S.rlog&&S.rlog.e)||{}){const L=S.rlog.e[key];for(const a of (L.D&&L.D.A)||[]){res.rows.n++;if(RAWW(a))bump("S.rlog words",key,a)}}}catch(e){}

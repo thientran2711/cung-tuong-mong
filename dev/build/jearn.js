@@ -18,7 +18,7 @@ function earnFromChest(p,sl){const P=Math.min(8,wdPOf(p));const L=(p.inv||[]).fi
  if(!L.length)return null;L.sort((a,b)=>wdBelPE(p,b,p)-wdBelPE(p,a,p));const e=L[0];p.inv.splice(p.inv.indexOf(e),1);return e}
 (function(){if(typeof wdOf!=="function")return;const o0=wdOf;wdOf=function(p){const w=o0.apply(this,arguments);if(!w||!p)return w;try{
   if(!p.wdK0){p.wdK0=1;for(const sl of ["tram","y"]){const e=w[sl];if(e&&e.from==="base"){w[sl]={k:e.k,src:"cap",nvp:1};earnK(p,e.k)}}
-   if(p===S&&(S.turn||0)<=1){const P=Math.min(8,wdPOf(S)),wk0=w.y&&w.y.k;let k=null;for(const q of [P,P-1,P-2]){const L=WD_LIST.filter(r=>r[1]==="y"&&r[3]===q&&r[4]===0&&r[0]!==wk0&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])).map(r=>r[0]);if(L.length){k=L[wdHash(wdKey(S)+"y1")%L.length];break}}if(k){S.inv=S.inv||[];S.inv.push({k,src:"cap",nvp:1});earnK(S,k)}}}
+   if(p===S&&(S.turn||0)<=1){const P=Math.min(8,wdPOf(S)),wk0=w.y&&w.y.k;let k=null;for(const q of [P,P-1,P-2]){const L=WD_LIST.filter(r=>r[1]==="y"&&r[3]===q&&r[4]===0&&r[0]!==wk0&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])).map(r=>r[0]);if(L.length){k=L[wdHash(wdKey(S)+"y1")%L.length];break}}if(k){S.inv=S.inv||[];invAdd(S,{k,src:"cap",nvp:1});earnK(S,k)}}}
   else for(const sl of ["tram","y"]){const e=w[sl];if(!e||e.from!=="base")continue;
    if(e.k==="y_tang"){w[sl]={k:"y_tang",src:"nvp",nvp:1,giver:"Nội vụ phủ"};continue}
    /* trung y (jty, sếp 15/11): the player's lost robe leaves the slot EMPTY until she wears another from Tư trang
