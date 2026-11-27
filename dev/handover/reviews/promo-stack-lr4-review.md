@@ -74,3 +74,33 @@ OPEN for the successor:
 2. **coop-e2e cannot pass on LIVE since BUNDLE 1 (611fca61)**: LIVE alone and the branch both stop after 28 ok («05-world»), then «Target page, context or browser has been closed» at coop-e2e.js:114 buoiBoth / :68 press, and hang to timeout. Reported to Foreman D for MAIN / LC28.
 3. Then quickcheck + coop-e2e on the final sha, push, «LAND READY».
 Worktrees left: /home/user/wt/rv-plr4 (branch d79c08b5), /home/user/wt/rv-live (LIVE 0562e15f, built), probe /home/user/wt/rv-tools/probe/elder.js (args: <worktree root>).
+
+## ROUND 4 (successor reviewer session_01D3E3NbMdjyPsvcEGgZBrQ1, 27/11 ~11:30Z) → VERDICT PASS · LAND READY **f85c2c61** (FF from LIVE 00dca386)
+PRIORITY #1 CHECK: OD ORDER 165 kỳ sắc phong theo lễ + MAIN 167 HUD-SACPHONG | main 00dca386 (LC29 sx unit) | review/promo-stack-lr4 d79c08b5 → f85c2c61 | claims D promo-stack (Foreman D session_01D3E3NagaVYs8K14c2bMUy1).
+KIT CHECK: reuses kitChip / promo rows / kpanel (no UI change this round; merge + gates only).
+START_CTX ~4 % (get_session read 0; own estimate).
+
+### LIVE moved 0562e15f → 00dca386 (sx-scope-fix jkc/jkc2 + scope-classb dev/measure + kc-nc-palace test) — merged as f85c2c61
+- Conflicts: built files only (index.html, sw.js, CHANGE.txt). CHANGE = promo lines + LIVE line; site rebuilt (build_site.sh); assets.json = LIVE.
+- jkc.js / jkc2.js auto-merged (D changed jkc kcMapHTML `BAL.walk.near`; LIVE changed the kc card closures — disjoint hunks). Line check: every line LIVE or D added since 0562e15f is present in the result (0 missing, both files, both sides).
+- LAW 4 re-verify (round-3 key swap): `git grep 'btn\.give|k61Ask\.k|BAL\.btn\.k61Ask'` in dev/build + dev/test = no reader left; every caller reads BAL.time.cost.give / .ask.
+
+### Open item 1 (act-move-reach2 «Giao việc phòng bị» on elder Diệp Thanh Hòa) = LIVE fault, NOT promo
+Runs: LIVE 0562e15f 2 FAIL / 3 this round (@tyv, @tgk) + 2 PASS / 2 last round = 2/5 FAIL; branch 1 FAIL / 2 this round (@nvp) + 2/3 last round = 3/5 FAIL. Same single miss, same person, both sides.
+Root cause (probe /home/user/wt/rv-tools/elder.js + elder2.js, both builds): in scenario hh (rank 7) the Khôn Ninh elder ma ma (eid "kn", Diệp Thanh Hòa, call «Diệp ma ma») is IN S.staff on both builds. At home she stands as kind "serv" (jhouse hsvPerson → hsvActs has «Giao việc phòng bị»); away from home the roster (j95.js:629 `if(s.eid)return j95elderEntry(s)` — eid checked BEFORE the S.staff → hsvPerson branch) puts the SAME person on stage as kind "elder", whose pop-up has no household acts. The test checks each name only at its FIRST sighting (`seen`), so it fails exactly when the random walk meets her away from home before home. Not a flake, not promo code; identical on LIVE.
+MAIN follow-up (law 6b one person one card + law 11 family = every elder who joined her household): either j95.js:629 test `(S.staff||[]).includes(s)&&hsvOn()` before `s.eid`, or jhouse talkOpts wrapper add hsvActs(p.ref) for kind "elder" when p.ref ∈ S.staff (keeping the elder's own office acts). Design call → not made in this merge.
+
+### Gates on f85c2c61
+| gate | result |
+|---|---|
+| promo-build | 48/48 ok, errors none, old save (no S.pb) loads |
+| kit-promo-hook | 8/8 ok, errors none |
+| kc-roads/scope-cards (new LIVE test) | refErrors [] · pageErrors [] |
+| scope-scan --strict | 194 class-B names, 0 unexplained |
+| quickcheck core gates | G1 guard/text/khac/bind/textrule/c6 PASS · G4 coop-one-world PASS ×2, manifest, npc-purpose, dead-card, button-crawl (0 faults), look-dedupe, press-keep, q-softlock, next-dead PASS · time-spill PASS · **G4 80-dialog-fixed 2 FAIL = LIVE**: same test on LIVE 00dca386 = 5 FAIL (superset: «3-dai-ket-cuc» frame XL figure size + seal, plus «2-hoi-nga-re-2 dialog open null»); branch 3 FAIL on a re-run, all in the 3-dai-ket-cuc family |
+| quickcheck part 2 | QUICKCHECK PASS · open 2423 ms · old save ok · perf median new/live: render 285/272, tab 614/580, buổi 2391/1765, tasks>200 31/39 (box loaded by parallel coop runs; within the gate) |
+| coop-e2e | **= LIVE**: LIVE 00dca386 stops after 28 ok («05-world … no horizontal overflow»), then hangs to the timeout, «Target page, context or browser has been closed» at coop-e2e.js:290 (exit 124); branch f85c2c61: SAME — 28 ok, same step, same line :290, exit 124. Logs: scratch coop-live.log / coop-br.log (this session). LIVE fault since BUNDLE 1 (already with Foreman D → MAIN / LC28) |
+
+### VERDICT: PASS → LAND READY review/promo-stack-lr4 **f85c2c61** (FF from LIVE 00dca386)
+Laws: 1 / 4 (key swap re-verified) / 7 / 9–12 unchanged from round 1 (no new UI, no new number). Remaining reds are all = LIVE (reach2 elder card, dialog-fixed 3-dai-ket-cuc, coop-e2e hang).
+If LIVE moves again before landing: merge the same way (token / line check on every shared source file), re-run promo-build + kit-promo-hook + quickcheck.
