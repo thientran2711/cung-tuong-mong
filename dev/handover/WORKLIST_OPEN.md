@@ -1,32 +1,44 @@
-# OPEN WORK LIST (not counting character art) — source for the «~X% xong · còn N việc» footer
-Written by MAIN CHÍNH 116, 24/11 ~10:10Z after sếp's new rulings (OD 24/11 ~04:00Z → ~10:05Z). Every main keeps this file current (strike items when LIVE) and reports it to sếp at 08:00 and 20:00 her time (OD 24/11 ~10:10Z).
+# ~31% xong · còn 35 việc không tính hình nhân vật
+Method (one line): X = done/(done+open); size weights S=1 M=2 L=3; done = struck rows + LIVE since 24/11 (owner-bug batch counts 10), a «partly live» row counts half its weight; only jobs on this list, not the whole game. N = open rows below.
+Recount by MAIN 167 worker WORKLIST-RECOUNT, 27/11 ~00:10Z, from `git log origin/main --first-parent` (LIVE 4cfcda61), FOREMAN_B–F STATUS tails, HANDOVER_SESSION9 (MAIN 165/166/167), CLAIMS, owner-bugs report. Every main keeps this current and reports at 08:00 / 20:00 her time; owner (26/11): recount after each batch and update this top line.
+State: LIVE = on main · partly = some pieces LIVE · open.
 | # | Job | Owner | State |
 |---|-----|-------|-------|
-| 1 | Opening 3 days (Dưỡng Tú viện, Nhập cung / Điện tuyển / Chờ chiếu, contest 12→top 4, ban hoa ending, dramas, ma ma, phân cung) | SELSCENE-6 | polish + rich pools + owner mock (145205be+) |
-| 2 | Character intro shots + royal reveal (intro kit) | INTRO-DESIGN → KK | MOCK READY for sếp (r4 PASS 24/11 11:35Z) |
-| 3 | Dialogue kit: speaker spotlight + typewriter + cue hook + focus shot + square option buttons | KK | building |
-| 4 | Story DIALOGUE SCENES for every main road chapter / side line / quest | B (side lines) + C (roads, E70 moved) + KK18 (UI) | ordered 06:42Z |
-| 5 | Day title card «Ngày … · Chương N — tên» | KK + E | ordered |
-| 6 | Event frame relayout (speaker left full, her right half) + toilette v3.5 standard size | KK | building |
-| 7 | Promotion redesign: kỳ sắc phong on festivals, đại lễ, weight table, caps, favour per Emperor nết, patron routes TH/HH | D | building |
-| 8 | Phân cung scene by HT/HH/TH thiện cảm + palace distance effect | D | ordered |
-| 9 | Personality-driven thresholds (thân, oán, ân …) + deeper nết behaviour | D | ordered |
-| 10 | Gifts / likes / dislikes two-way incl. her | D | ordered |
-| 11 | Whole-game law-1 (two-way) audit + fixes | B | ordered |
-| 12 | Leave-palace endings (own choice = end, no confirm) + forced-removal severity ladder | E | ordered |
-| 13 | Music groups (events, festivals, contests, banquets, thị tẩm, endings, kỳ ngộ) + wiring | F → KK | ~~LIVE 351122ba 25/11 19:34Z~~ |
-| 14 | Emotion seals, all groups animated like Thái hậu | C | drawing |
-| 15 | Event backgrounds (hương nang / ban hoa, major events) + Dưỡng Tú viện 3 sở + Tiền sảnh | C | drawing |
-| 16 | Old far-shot illustration redraws (option B) | C | drawing |
-| 17 | Art style unification audit | C | audit |
-| 18 | ~~Dư đồ slow open (map-perf) + map-fix-2~~ | LC10 | LIVE ac4790f0 (24/11 09:09Z) |
-| 19 | coop-thin-g (co-op world sync) | B | re-merge |
-| 20 | TITLES2 (per-chapter titles) | E | fix r3 |
-| 21 | Parking lot rows still not built | E | audit + build |
-| 22 | THIN P4/P6/P8 roads content landing | B / LC9 | landing |
-| 23 | Screen-change veil: no half-painted screens (owner bug) | VEIL-1 + KK18 → LC10 | kit-screenveil-r1 in landing queue |
-| 24 | «Vòng người» figure ring + drama signals — DESIGN MOCK for sếp (no build until she picks) | RING-DESIGN | MOCK READY for sếp |
-| 25 | GAME FEEL / event animation design study (card draw, rings for items/events, entrances) — mocks for sếp | MOTION-DESIGN | MOCK READY for sếp |
-| 26 | Relationship effects of talking to others' people (servant refuses / talks → suspicion, trust, leaks) + greeting etiquette | D | ordered 07:58Z |
-- (25/11 01:10Z, MAIN 130 20:00 report) No item LIVE since last report (LIVE still 502c48c9; lander LC13 waits sếp's permission). Nothing struck; count stays 28 (incl. owner-bug items 24/11 evening).
-- (26/11 12:53Z, MAIN 159 08:00 report) LIVE since last report: 1dcb373e FREEZE fix (coop-freeze-kmrew-rv2; not a list item). Nothing struck; count stays 28. Lander LC22 queue 24 branches + ACT-MERGE (BIG rv verdict ≈13:05Z, LIVE ≈16:30Z).
+| 1 | Opening 3 days (Dưỡng Tú viện, Nhập cung, Điện tuyển, contest 12→top 4, ban hoa, ma ma, phân cung) | SELSCENE | partly: selection-scene-r19 LIVE f009e1a6, rankroom b69f0f5f; polish + owner mock open |
+| 2 | Character intro shots + royal reveal | INTRO-DESIGN→KK | open: MOCK READY, waits sếp |
+| 3 | Dialogue kit (spotlight, typewriter, cue, square options) | KK | open: KIT-STAGE-R7 (see 28) |
+| 4 | Dialogue scenes for every road / side line / quest | B, C | partly: thin-p8-r2 LIVE 2fd303aa; rest open |
+| 5 | Titles: day title card + TITLES2 + title-parity 36cb49a8 (RV-163C) + TITLE-BAL (OB 46/54) | KK, E, PACE-SPEED-2 | open |
+| 6 | Event frame relayout + toilette v3.5 size | KK | open |
+| 7 | Promotion redesign + D promo-stack land (promo-stack-lr4, contest-thitam, cung-quy, pbDlNext) | D | partly: a9 promo-root LIVE 6b5d3d05; stack remerge running |
+| 8 | Phân cung by thiện cảm + palace distance | D | open |
+| 9 | Personality-driven thresholds + nết behaviour | D | open |
+| 10 | Gifts / likes / dislikes two-way | D | open |
+| 11 | Whole-game law-1 (two-way) audit | B | open |
+| 12 | Leave-palace endings + removal ladder | E | open: end-maxrank cb17c233 LAND READY |
+| ~~13~~ | ~~Music groups~~ | F→KK | LIVE 351122ba |
+| 14 | Emotion seals animated | C | open |
+| 15 | Event backgrounds + Dưỡng Tú viện 3 sở | C | partly (c3-rankroom LIVE); rest open |
+| 16 | Old far-shot redraws | C | partly: c3-farshot LIVE 0a4c8010 |
+| 17 | Art style unification audit | C | open |
+| ~~18~~ | ~~Dư đồ slow open~~ | LC10 | LIVE ac4790f0 |
+| 19 | coop-thin-g world sync + coop1i week-end deadlock | B, F | partly: coop-clear 7abb60cc, rebirth-stuck 5e013076 LIVE; deadlock open |
+| 21 | Parking-lot rows not built | E | open |
+| 22 | THIN P4/P6/P8 roads | B | partly: P8 LIVE 2fd303aa |
+| 23 | Screen-change veil (kit-screenveil-r1) | VEIL-1 | open: no LIVE trace found |
+| 24 | «Vòng người» ring + ring >7 board (ring-build-7) | RING-BUILD-7 | open: Fold figure ~320px, plaque ✓/✕ via KK51 |
+| 25 | Game-feel / event animation mocks | MOTION | open: MOCK READY, waits sếp |
+| 26 | Talking to others' people → suspicion/trust + greeting | D | open |
+| 27 | PACE-SPEED-2: 6-stat soft ceiling (next bar+8 / 100), Sủng monthly fade, Sắc −1/yr from 28, result-card line | PACE-SPEED-2 | open (owner OK 26/11 23:50Z) |
+| 28 | Bàn bài no-flip, Game-of-Dice style (KK51 → KIT-STAGE-R7) + VIDEO Fold+iPad owed to sếp | KK51, R7 | open |
+| 29 | HUD Sắc phong slot (HUD-SACPHONG, kitHudSlot 470d4ece) | HUD-SACPHONG | open |
+| 30 | Tốn no-minus | — | RV PASS, in land queue |
+| 31 | B save stack rv17 (5.2 M-char silent save loss, inv-stack) — PLAY-STOPPER | B | open: LAND READY ETA ~01:45Z |
+| 32 | Q-SOFTLOCK dayq-qsoftlock 25828054 | D | LAND READY (BIG PASS) |
+| 33 | mg-trim-r6 group: Trang điểm một chạm, Học nhanh, Chăm nhanh (OB 14/21/27) + srv-rank, parity-facfix, help-housemate, selx-fair | D lead | open: 4ecc3ce6 not FF, remerging |
+| 34 | DRESS-FIX: Trang điểm chọn áo/hoa, ô gộp, xa xỉ, thay đồ ngang giá, NPC-driven lột đồ (OB 48–52, 56) | DRESS-FIX | open |
+| 35 | KK44 kit sweep: map icons big (44), buổi tint (45), old frames → kit (57), map-zones-r7 (5/31) | KK44 | open |
+| 36 | Wording/hint batch: odds wording 43, WORDING-GAIN 53, closing-chip 39, buy-where links 41, OB-VERDICT-3 (42), kit-bac-progress 36, kit-name-stranger 22 | various | open/queue |
+| 37 | Oán rate (OB 55) + daily noise (qc-noise r10b) | D | open |
+| 38 | Found on LIVE: «Hội phối đồ: báo đề» empty-list stuck modal (Fold); ob-oan-enc «Nguy hiểm chung» FAIL | MAIN assign | open |
+- LIVE since 24/11 not above: ACT-MERGE b881686f, ctp 639455a2, os 504d2e6a (one-sieve, ob-verdict, kem-row = OB 19/20/38), oan 53319e6f (OB 37), stat-pace 4cfcda61 (OB 15), audio-ipad 4fae357a, tinbao 50f8a13b, tainghe e4314b74, place-rules 9812646a.
