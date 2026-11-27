@@ -27,10 +27,21 @@ async function tap(p,target,o={}){let rt=RTS.get(p);if(!rt){rt={cur:null};rt.rt=
 /* FIXER #17 (RV-165: --fast drove 1/80 taps on the ring UI): press = what her finger does on a two-tap kit part — a REAL tap on the card / plaque (it lifts),
    then a REAL tap on the chip that appears (hand ✓ «khok» / plaque «Chọn» .kpk-gob). Plain buttons: one tap, as before. Returns {ok, two, why}:
    two = 'lift+chip' (chosen), 'lift' (lifted, no chip came = fault), '' (not a two-tap part, or it acted at once). Never .click()/dispatch. */
-async function press(p,el,o={}){const k=await el.evaluate(e=>window.__bc?__bc.kind2(e):'').catch(()=>'');const ok=await tap(p,el,o);if(!ok||!k)return{ok,two:'',k};
- let up=false,ch=null;for(let i=0;i<14;i++){await p.waitForTimeout(150);up=await p.evaluate(k=>__bc.lifted(null,k),k).catch(()=>false);const h=await p.evaluateHandle(k=>__bc.chip(k),k).catch(()=>null);ch=h&&h.asElement();if(ch)break;if(!up&&i>=4)break}
- if(!ch)return{ok,k,two:up?'lift':'',why:up?'lifted, but no '+(k==='hand'?'✓':'«Chọn»')+' chip came':''};
- const ok2=await tap(p,ch,Object.assign({},o,{label:(o.label||'')+' › '+(k==='hand'?'✓':'Chọn')}));return{ok:ok2,k,two:ok2?'lift+chip':'lift',why:ok2?'':'chip not tappable'}}
+/* FIXER #18 JOB 2b (BIG #18 F1/F2): (F2) the lift is read on the TAPPED part — exactly one lifted card / plaque and it is the one tapped (label) —
+   so «the next card moves the lift» is checked; (F1) «chosen» is judged against the screen AFTER the lift (mid sig), not before it: PASS only when the
+   chip tap changes the screen AND the lift is gone (or the frame changed) — a no-op ✓ / «Chọn» now FAILS. o.liftOnly: first tap only (a card that is
+   lifted, not chosen). Used by the BFS, the selx / talk walk, the path replay, the tour — and ported to robot-rt.js's picker (JOB 4). */
+async function press(p,el,o={}){const k=await el.evaluate(e=>window.__bc?__bc.kind2(e):'').catch(()=>'');const lab=k?await el.evaluate(e=>__bc.label(e)).catch(()=>''):'';const ok=await tap(p,el,o);if(!ok||!k)return{ok,two:'',k};
+ let L={n:0,mine:false},ch=null;for(let i=0;i<14;i++){await p.waitForTimeout(150);L=await p.evaluate(([k,lab])=>__bc.liftOf(k,lab),[k,lab]).catch(()=>({n:0,mine:false}));const h=await p.evaluateHandle(k=>__bc.chip(k),k).catch(()=>null);ch=h&&h.asElement();if(L.mine&&ch)break;if(!L.n&&i>=4)break}
+ const w0=L.mine?'':L.n?'the tapped '+(k==='hand'?'card':'plaque')+' did not take the lift (another one is lifted)':'';
+ if(o.liftOnly)return{ok,k,two:'lift-only',up:L.mine,ch:!!ch,why:w0||(L.mine&&!ch?'lifted, but no '+(k==='hand'?'✓':'«Chọn»')+' chip came':L.mine?'':'the tapped card did not lift')};
+ if(!L.n&&!ch)return{ok,k,two:''};/* acted at once (no lift): judged by the caller like a one-tap button */
+ if(!L.mine)return{ok,k,two:'lift',why:w0};
+ if(!ch)return{ok,k,two:'lift',why:'lifted, but no '+(k==='hand'?'✓':'«Chọn»')+' chip came'};
+ const mid=await p.evaluate(()=>JSON.stringify(__bc.sig())).catch(()=>'');
+ const ok2=await tap(p,ch,Object.assign({},o,{label:(o.label||'')+' › '+(k==='hand'?'✓':'Chọn')}));if(!ok2)return{ok:false,k,two:'lift',why:'chip not tappable'};
+ let chosen=false;for(let i=0;i<20&&!chosen;i++){await p.waitForTimeout(200);const st=await p.evaluate(([k,mid])=>{const s=__bc.sig();const m=mid?JSON.parse(mid):null;return{chg:JSON.stringify(s)!==mid,gone:!__bc.lifted(null,k),frame:!m||JSON.stringify(s.roots)!==JSON.stringify(m.roots)}},[k,mid]).catch(()=>({chg:true,gone:true,frame:true}));chosen=st.chg&&(st.gone||st.frame)}
+ return{ok:true,k,two:'lift+chip',chosen,why:chosen?'':(k==='hand'?'✓':'«Chọn»')+' does nothing (the screen after the lift did not move on / the lift stays)'}}
 const A=process.argv.slice(2);const opt=(k,d)=>{const i=A.indexOf('--'+k);return i<0?d:(A[i+1]&&!A[i+1].startsWith('--')?A[i+1]:true)};
 const REPO=path.join(__dirname,'..','..');
 const FAST=!!opt('fast',false);
@@ -95,6 +106,8 @@ const INPAGE=()=>{
   /* FIXER #17 two-tap kit parts: «hand» = a Bàn bài card (KIT kitHand: 1st real tap lifts, its ✓ chooses), «plaque» = a thẻ lụa plaque (KIT §98.1 kitPick: 1st tap lifts, the in-plaque «Chọn» chip chooses) */
   kind2(e){return e.matches('#modal .opts.khand>button.kopt:not(.kcard):not(.kbare)')?'hand':e.closest('.kpk-n')?'plaque':''},/* = jkhand kitHandCards (a .kcard / .kbare row in the hand box is a plain button) */
   /* the card / plaque may be re-laid (a new node) by the lift: read the lift on the part, not on the old handle */
+  /* FIXER #18 F2: the lifted parts now, and whether the ONE lifted part is the tapped one (by its label, the node may be re-laid) */
+  liftOf(k,lab){const U=k==='hand'?[...document.querySelectorAll('#modal .opts>button.kopt.klift')]:k==='plaque'?[...document.querySelectorAll('.kpk-n.kpk-up')]:[];const t=String(lab||'').slice(0,24);return{n:U.length,mine:U.length===1&&!!t&&this.label(U[0]).slice(0,24)===t}},
   lifted(e,k){return k==='hand'?!!document.querySelector('#modal .opts>button.kopt.klift'):k==='plaque'?!!document.querySelector('.kpk-n.kpk-up'):false},
   chip(k){const C=k==='hand'?[...document.querySelectorAll('#modal .dlg>.khconf>button.khok')]:[...document.querySelectorAll('.kpk-conf>button.kpk-gob,.kpk-go>button')];return C.find(x=>this.vis(x)&&!x.disabled)||null},
   liveRoots(){const roots=new Set(this.cands().map(e=>this.root(e)));for(const f of this.fixed)if(this.root(f)===f)roots.add(f);return [...roots].filter(r=>this.live(r))},
@@ -174,7 +187,7 @@ function verdict(b,pre,post,errs,closedOwn,par){
    a tap on the next card moves the lift), the last is pressed (lift + chip = chosen); any other frame → its first option / main button. Every tap is a row. Ends at the room. */
 async function walkSelx(p,dev,ER,setup,NM='selx',MAXW=SELXMAX){const T0=taps;const SELXMAX=MAXW;
  /* the life is drawn at random: only some origins / ranks go through the selection days (jselxday selxDaysFit) → draw again (≤ 6 lives, setup only) */
- for(let n=0;n<(NM==='talk'?1:4);n++){await setup();let up=false;for(let i=0;i<30&&!up;i++){if(NM!=='talk'&&i>=3&&!(await p.evaluate(()=>!!(window.S&&S.selx2&&S.selx2.days)).catch(()=>false)))break;/* the selection days start inside nlAccept (sync): not started = draw again at once */up=await p.evaluate(nm=>{const M=document.getElementById('modal');return nm==='talk'?!M.hidden&&!!M.querySelector('.dlg.kstalk'):(!M.hidden||!!document.querySelector('.kscn'))&&!!(window.S&&S.selx2&&S.selx2.days)},NM);if(!up)await p.waitForTimeout(400)}if(up)break}
+ for(let n=0;n<(NM==='talk'?1:12);n++){/* FIXER #18: the start check read window.S — S is a top-level «let» (j1.js), never on window → «not started» after 1.2 s on EVERY draw; the walk ran only when the frame happened to be up after the last draw (selx SKIP 3 runs in 4). Now typeof S; 12 draws (setup only) */await setup();let up=false;for(let i=0;i<30&&!up;i++){if(NM!=='talk'&&i>=3&&!(await p.evaluate(()=>!!(typeof S!=='undefined'&&S&&S.selx2&&S.selx2.days)).catch(()=>false)))break;/* the selection days start inside nlAccept (sync): not started = draw again at once */up=await p.evaluate(nm=>{const M=document.getElementById('modal');return nm==='talk'?!M.hidden&&!!M.querySelector('.dlg.kstalk'):(!M.hidden||!!document.querySelector('.kscn'))&&!!(typeof S!=='undefined'&&S&&S.selx2&&S.selx2.days)},NM);if(!up)await p.waitForTimeout(400)}if(up)break}
  if(!(await p.evaluate(()=>{const M=document.getElementById('modal');return !M.hidden||!!document.querySelector('.kscn')}))){rows.push({dev,start:NM,screen:NM,label:'(start)',verdict:'SKIP',why:NM==='talk'?'no talk frame came (this build has no kitStage talk)':'no selection-day screen came (this build has no multi-day selection for this life)'});return}
  let same=0,last='',noT=0;
  while(taps-T0<SELXMAX){await settle(p,6000);await p.waitForTimeout(500);
@@ -188,11 +201,11 @@ async function walkSelx(p,dev,ER,setup,NM='selx',MAXW=SELXMAX){const T0=taps;con
   if(sk===last){if(++same>=6){rows.push({dev,start:NM,screen:S0.scr,label:'(loop)',verdict:'FAIL',why:'the same screen after 6 taps'});break}}else{same=0;last=sk}
   const screen=NM+' · '+S0.scr;const doTap=async(key,lbl,full)=>{const h=await p.evaluateHandle(k=>__bc.find(k),key);const el=h.asElement();if(!el){rows.push({dev,start:NM,screen,label:lbl,verdict:'SKIP',why:'button gone before its tap'});return null}
    const pre=await p.evaluate(()=>__bc.sig());ER.clr();let dm='';const shot=path.join(OUT,'shots',`${dev}-${NM}-${rows.length}.jpg`);let r;
-   if(full)r=await press(p,el,{screen,label:lbl,shot,log:m=>dm=m});else{const k=await el.evaluate(e=>__bc.kind2(e));const ok=await tap(p,el,{screen,label:lbl,shot,log:m=>dm=m});let up=false,ch=false;
-    for(let w=0;w<10&&ok;w++){await p.waitForTimeout(150);up=await p.evaluate(k=>__bc.lifted(null,k),k).catch(e=>{if(process.env.BCDBG)console.log('LIFTERR',e.message);return false});ch=await p.evaluate(k=>!!__bc.chip(k),k);if(up&&ch)break}r={ok,k,two:'lift-only',up,ch};if(process.env.BCDBG&&!(up&&ch))console.log('LIFTDBG',await p.evaluate(()=>JSON.stringify({cards:[...document.querySelectorAll('#modal .opts>button')].map(b=>b.className),pk:[...document.querySelectorAll('.kpk-n')].map(n=>n.className+'|'+n.parentElement.className),conf:[...document.querySelectorAll('.khconf')].map(c=>c.className+'|'+c.parentElement.className+'|'+c.hidden)})))}
+   await p.waitForFunction(k=>{const e=__bc.find(k);return !__bc.busy()||!!(e&&e.closest('#klife,#kload,#kroul,#kroulw,#dawn,.kload'))},key,{timeout:8000}).catch(()=>{});/* (not when the target sits IN that veil: the #kload «BÁO … Vào cung ngay» page is the screen itself) *//* FIXER #18: a fresh-page draw brings the #kload veil back a moment after the snapshot (iPad «Theo thái giám…» covered by div.kpnote in #kload) — a player waits for it */
+   r=await press(p,el,{screen,label:lbl,shot,log:m=>dm=m,liftOnly:!full});
    taps+=r.two==='lift+chip'?2:1;await p.waitForTimeout(500);await settle(p,6000);const post=await p.evaluate(()=>__bc.sig());const er=ER.get();const ch=JSON.stringify(pre)!==JSON.stringify(post);
-   const v=!r.ok?'FAIL':er.length?'FAIL':r.two==='lift-only'?(r.up&&r.ch?'PASS':'FAIL'):r.two==='lift'?'FAIL':ch?'PASS':'FAIL';
-   const why=!r.ok?(dm||r.why||'not tappable'):er.length?'JS error: '+er[0]:r.two==='lift-only'?(r.up&&r.ch?'lifts, its chip shows':'1st tap: lifted '+r.up+', chip '+r.ch):r.two==='lift'?r.why:(r.two?r.two+': ':'')+(ch?'next':'no effect');
+   const v=!r.ok?'FAIL':er.length?'FAIL':r.two==='lift-only'?(r.up&&r.ch?'PASS':'FAIL'):r.two==='lift'?'FAIL':r.two==='lift+chip'?(r.chosen?'PASS':'FAIL'):ch?'PASS':'FAIL';
+   const why=!r.ok?(dm||r.why||'not tappable'):er.length?'JS error: '+er[0]:r.two==='lift-only'?(r.up&&r.ch?'lifts (the tapped card), its chip shows':'1st tap: '+(r.why||'lifted '+r.up+', chip '+r.ch)):r.two==='lift'?r.why:r.two==='lift+chip'&&!r.chosen?r.why:(r.two?r.two+': ':'')+(ch?'next':'no effect');
    if(v==='FAIL')await p.screenshot({path:shot,type:'jpeg',quality:55}).catch(()=>{});rows.push({dev,start:NM,screen,label:lbl,el:'',hit:r.ok?'ok':'DEAD',two:r.two||undefined,kind:r.k||undefined,verdict:v,why,shot:v==='FAIL'?shot:''});return r};
   const box=S0.L.find(b=>/^\(Chạm để tiếp\)/.test(b.label));
   if(box){await doTap(box.key,box.label,true);continue}
@@ -302,7 +315,10 @@ async function crawlDev(b,URL,dev){
  startState.save=SAVELS&&(async()=>{await p.evaluate(ls=>{try{localStorage.clear();for(const k in ls)localStorage.setItem(k,ls[k])}catch(e){}try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}
   const n=+(ls['hclh-slot']||1)||1;const d=loadSlot(n);SLOT=n;try{kmReset&&kmReset()}catch(e){}quiet=true;d.tab='act';deser(d);quiet=false;document.getElementById('title').hidden=true;deal();render();if(S.mg)S.mg=null;/* = j6 data-load handler (setup only) */try{S.tutTour=1;coachOff&&coachOff()}catch(e){}},SAVELS);
   await p.waitForTimeout(3000);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn,.kmov').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render();try{k3Home()}catch(e){}__bc.snap()})});
- for(const st of STARTS){if(st==='tour'){await crawlTour(p,dev,errsRef);continue}if(st==='talk'){await walkSelx(p,dev,errsRef,startState.talk,'talk',TALKMAX);continue}if(st==='selx'){/* a fresh page per drawn life: after a long home crawl the in-memory game state no longer starts the selection days */await walkSelx(p,dev,errsRef,async()=>{await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof deser==='function',null,{timeout:180000});await p.waitForTimeout(1200);await p.evaluate(INPAGE);await startState.selx()});continue}if(!startState[st])continue;
+ const SL=STARTS.concat(['__chk']);let hRetry=0;/* FIXER #18 F3: a vacuous START home (below --home-floor, or more «gone» than taps: iPad «1 tap, 25 gone» under load) is crawled ONCE more on this device; the gate floor judges the second pass */
+ for(const st of SL){if(st==='__chk'){const H=rows.filter(r=>r.dev===dev&&r.start==='home'),tp=H.filter(r=>r.verdict!=='SKIP').length,gone=H.filter(r=>/gone before its tap/.test(r.why||'')).length;
+   if(FAST&&STARTS.includes('home')&&!hRetry&&(tp<+opt('home-floor',40)||gone>tp)){hRetry=1;for(let i=rows.length-1;i>=0;i--)if(rows[i].dev===dev&&rows[i].start==='home')rows.splice(i,1);rows.push({dev,start:'home-retry',label:'(home re-crawl)',verdict:'WARN',why:'first START home pass was vacuous ('+tp+' taps, '+gone+' gone) — crawled once more'});console.log(`[${dev}] home vacuous (${tp} taps, ${gone} gone) → re-crawl once`);await p.close().catch(()=>{});await open().catch(()=>{});SL.push('home','__chk')}continue}
+  if(st==='tour'){await crawlTour(p,dev,errsRef);continue}if(st==='talk'){await walkSelx(p,dev,errsRef,startState.talk,'talk',TALKMAX);continue}if(st==='selx'){/* a fresh page per drawn life: after a long home crawl the in-memory game state no longer starts the selection days */await walkSelx(p,dev,errsRef,async()=>{await p.reload({waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof deser==='function',null,{timeout:180000});await p.waitForTimeout(1200);await p.evaluate(INPAGE);await startState.selx()});continue}if(!startState[st])continue;
   await startState[st]();await p.waitForTimeout(600);
   const withTitle=st==='title';
   const goto=async(pathK)=>{ /* restore + replay a path of real taps */
@@ -324,7 +340,8 @@ async function crawlDev(b,URL,dev){
     let dm='';const ok=(await press(p,el,{screen:dev,label:k,shot:fsh,log:m=>{dm=m}})).ok;if(!ok)return 'path button not tappable: '+k+' '+dm;await p.waitForTimeout(700);await settle(p)}
    return ''};
   const seen=new Set();const queue=[[]];const parentOf=new Map();
-  while(queue.length&&taps<MAXTAPS){const pathK=queue.shift();const par=parentOf.get(pathK.join('>'))||null;
+  const used=()=>rows.filter(r=>r.dev===dev&&r.start===st&&r.verdict!=='SKIP').length;/* FIXER #18 F3 ROOT: the --max budget was the GLOBAL tap count of every device crawled in parallel (+ selx / talk taps): Fold's home used it up and iPad's home got the rest (BIG #18 iPad «0 taps», here «1» / «8») — now per device and START */
+  while(queue.length&&used()<MAXTAPS){const pathK=queue.shift();const par=parentOf.get(pathK.join('>'))||null;
    const g=await goto(pathK);if(g){rows.push({dev,start:st,path:pathK,label:'(replay)',verdict:'SKIP',why:g});continue}
    const sig0=await p.evaluate(()=>__bc.sig());const topL=sig0.roots.filter(r=>!r.startsWith('body'));const sk=topL.length?JSON.stringify(topL):JSON.stringify([sig0.roots.map(r=>r.startsWith('body')?'body':r),sig0.tab,sig0.panel,sig0.title]);/* a frame on top = the same screen whatever tab lies under it */
    if(seen.has(sk)&&pathK.length){continue}seen.add(sk);
@@ -340,7 +357,7 @@ async function crawlDev(b,URL,dev){
    const nz=await p.evaluate(async()=>{const a=__bc.sig();await new Promise(r=>setTimeout(r,700));const b=__bc.sig();return Object.keys(a).filter(k=>JSON.stringify(a[k])!==JSON.stringify(b[k]))});
    const strip=o=>{if(!o||o.nav)return o;const c=Object.assign({},o);for(const k of nz)delete c[k];return c};
    let dirty=false;
-   for(const bt of L){if(taps>=MAXTAPS)break;
+   for(const bt of L){if(used()>=MAXTAPS)break;
     if(dirty){const g2=await goto(pathK);if(g2){rows.push({dev,start:st,path:pathK,screen,label:bt.label,verdict:'SKIP',why:g2});continue}dirty=false}
     await settle(p);await p.evaluate(()=>__bc.list());
     const pre=await p.evaluate(()=>__bc.sig());errs=[];
@@ -352,6 +369,7 @@ async function crawlDev(b,URL,dev){
     const shot=path.join(OUT,'shots',`${dev}-${String(rows.length).padStart(4,'0')}.jpg`);
     let dead=null;const pr=await press(p,el,{screen,label:bt.label,shot,log:m=>{dead=m}});const ok=pr.ok;taps+=pr.two==='lift+chip'?2:1;
     if(pr.two==='lift'){rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',two:'lift',verdict:'FAIL',why:'two-tap part: '+pr.why,shot});await p.screenshot({path:shot,type:'jpeg',quality:55}).catch(()=>{});dirty=true;continue}
+    if(pr.two==='lift+chip'&&!pr.chosen){rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'ok',two:'lift+chip',verdict:'FAIL',why:'two-tap part: '+pr.why,shot});await p.screenshot({path:shot,type:'jpeg',quality:55}).catch(()=>{});dirty=true;continue} /* FIXER #18 F1: judged after the lift, never against the pre-lift screen */
     if(!ok&&!dead)dead='DEAD BUTTON '+JSON.stringify({why:'chip not tappable'});
     if(!ok){const d=JSON.parse(dead.replace(/^DEAD BUTTON /,''));if(/^(disabled|gone|popup)$/.test(d.why)){rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:d.why,verdict:'WARN',why:d.why==='disabled'?'greyed out (not tappable now)':d.why==='gone'?'left the page before the tap':'under a hint popup '+d.cover});continue}rows.push({dev,start:st,path:pathK,screen,label:bt.label,el:bt.el,hit:'DEAD',verdict:'FAIL',why:'dead button: '+d.why+(d.cover?' under '+d.cover+(d.coverText?' «'+d.coverText+'»':''):''),shot});continue}
     await p.waitForTimeout(450);await settle(p,4000);
@@ -383,8 +401,11 @@ async function crawlDev(b,URL,dev){
  /* faults already filed and owned (dev/tools/quickcheck.d/button-crawl-known.txt: «regex<TAB>owner/request») are listed, not gating */
  let known=[];try{known=fs.readFileSync(path.join(REPO,'dev','tools','quickcheck.d','button-crawl-known.txt'),'utf8').split('\n').filter(l=>l.trim()&&!l.startsWith('#')).map(l=>{const [re,why]=l.split('\t');return{re:new RegExp(re),why:why||''}})}catch(e){}
  const isKnown=r=>known.find(k=>k.re.test((r.screen||'')+' · '+(r.label||'')+' · '+(r.why||'')));
- const sure0=rows.filter(r=>r.verdict==='FAIL'&&(r.hit==='DEAD'||/^JS error|^close button|crawler crashed/.test(r.why||'')));
- const sure=sure0.filter(r=>!isKnown(r));if(FAST)for(const r of sure0.filter(isKnown))console.log('  KNOWN',r.dev,'·',r.label,'·',isKnown(r).why);
+ const sure0=rows.filter(r=>r.verdict==='FAIL'&&(r.hit==='DEAD'||/^JS error|^close button|crawler crashed/.test(r.why||'')||!!r.two)); /* FIXER #18 F1/F2: a two-tap part that does not lift the tapped card / whose ✓ «Chọn» does nothing is a sure fault too */
+ /* FIXER #18 F3 (BIG #18, RV-165 lesson): a vacuous home is a gate FAIL — START home with fewer than --home-floor tapped rows (fast 40), or more «gone» SKIPs than taps */
+ if(FAST&&STARTS.includes('home'))for(const d of DEV){const H=rows.filter(r=>r.dev===d&&r.start==='home'),tp=H.filter(r=>r.verdict!=='SKIP').length,gone=H.filter(r=>/gone before its tap/.test(r.why||'')).length,fl=+opt('home-floor',40);
+  if(tp<fl||gone>tp)rows.push({dev:d,start:'home',label:'(home floor)',verdict:'FAIL',why:'vacuous home: '+tp+' home taps (floor '+fl+'), '+gone+' «button gone before its tap» SKIPs — the room was not crawled'})}
+ const sure=sure0.concat(rows.filter(r=>r.label==='(home floor)')).filter(r=>!isKnown(r));if(FAST)for(const r of sure0.filter(isKnown))console.log('  KNOWN',r.dev,'·',r.label,'·',isKnown(r).why);
  if(FAST){for(const r of sure.slice(0,12))console.log('  FAIL',r.dev,'·',(r.screen||'').slice(0,50),'·',r.label,'·',r.why.slice(0,140));console.log(`BUTTON CRAWL GATE ${sure.length?'FAIL':'PASS'} · ${sure.length} sure faults (dead/JS error/close) · ${n('FAIL')-sure.length} soft «no effect» rows not gating`)}
  process.exit(FAST&&sure.length?1:0)})();
 
