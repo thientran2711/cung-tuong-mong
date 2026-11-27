@@ -103,11 +103,14 @@ function kesFx(M,m,t){if(m.__kesFx)return;try{Object.defineProperty(m,"__kesFx",
  const calm=typeof kmReduced==="function"?kmReduced():false;M.classList.toggle("kes-calm",!!calm);KE.log.push(t);if(KE.log.length>40)KE.log.shift();
  M.classList.remove("kes-in");void M.offsetWidth;M.classList.add("kes-in");
  if(calm||window.__bot||(typeof quiet!=="undefined"&&quiet))return;
- const d=M.querySelector(".dlg");const r=d?d.getBoundingClientRect():null;const top=r?{x:r.left+r.width/2,y:r.top+8}:null;
- setTimeout(()=>{try{if(M.hidden||!M.classList.contains("kes"))return;
+ /* KIT §57.1c: the burst is aimed at the dialog top measured AFTER its entrance settled (2 equal reads; at 380 ms the box is still rising, the
+    old measure put the gold burst on the title line) — the kit guard (jfxkit kfkDlgKeep) then keeps it above the dialog box */
+ const d=M.querySelector(".dlg");let last="",n=0,top=null;
+ const fire=()=>{try{if(M.hidden||!M.classList.contains("kes"))return;const r=d&&d.isConnected?d.getBoundingClientRect():null;const key=r?[r.left,r.top,r.width,r.height].map(Math.round).join():"";
+  if(r&&key!==last&&++n<16){last=key;setTimeout(fire,100);return}top=r?{x:r.left+r.width/2,y:r.top+8}:null;
   if(KE.types[t].tone==="fest"){if(typeof kitFxBurst==="function"){kitFxBurst("glowburst",top,1);kitFxBurst("spark",top,12);kitFxBurst(t==="grand"||t==="throne"?"petal-peach":"petal-plum",null,14)}}
   else if(t!=="death"&&typeof kitFxBurst==="function")kitFxBurst(t==="fail"?"ash":"incense",top,6)/* death: j93 already plays ink + white silk + incense */
- }catch(e){console.error("kes fx",e)}},380)}
+ }catch(e){console.error("kes fx",e)}};setTimeout(fire,380)}
 function kesShow(){const M=document.getElementById("modal");if(!M)return;const m=typeof Q!=="undefined"?Q[0]:null;const t=M.hidden?"":kitEndType(m);
  if(!t){if(M.querySelector(":scope>.kes-bg"))kesClear(M);return}kesDecorate(M,m,t);kesFx(M,m,t)}
 /* pre: the card carries the frame class BEFORE the base paints it, so the kit size fit measures the full-screen frame; post: layers + entrance */
