@@ -591,3 +591,4 @@ save-pid-cards BIG rv | review/save-pid-cards-rv | session_01N1tNP5p71UEmkesbLLD
 EMP-DAY (emperor daytime where/when plan, PLAN ONLY) | report dev/handover/reports/emperor-favour-plan.md | Foreman C ROOT 3-1-1-1-1-1 session_01PEhRbuzy86KDdoFoYxBatH (worker id follows) | RUNNING | 2026-11-27T01:25Z
 EMP-DAY | reports/emperor-favour-plan.md | session_01PEhRbuMDVjApgDKJapJENo (Foreman C) | RUNNING | 2026-11-27T01:30Z
 FLIGHT2-S16B life (seat s16 session_01UV1Szhqp1P7gBX2vN1HGfg, ctx ~15 %; iPad 1180x820 sens, seed 2026112544, newest LIVE origin/main served locally via rt-serve-build.sh + pin=1 fresh profile, harness review/robot-realtap 97e55a457) | dev/handover/robot/flight2-s16b.* | session_01UV1Szhqp1P7gBX2vN1HGfg | CLAIMED | 2026-11-27T01:20Z (FOREMAN F ROOT)
+EMP-DAY | reports/emperor-favour-plan.md @f868ff7b | session_01PEhRbuMDVjApgDKJapJENo | DONE (PLAN READY, worker archived) | 2026-11-27T01:25Z
