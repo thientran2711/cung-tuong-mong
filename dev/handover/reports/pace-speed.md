@@ -67,3 +67,26 @@ review/title-bal 3f8eb36a report line 51) → BAL-only proposal per road; NOT st
 QUICKCHECK b7430190 --runs 3: open / old save / perf PASS (median new/live: render 224/234 ms, tab 582/637, buổi 1504/1315, tasks>200ms 32/28) · CORE GATE G4 80-dialog-fixed FAIL
 «kit-dialog-2 a no empty Tốn / Được cell» at 755x1000 + 1180x820 — the SAME 2 FAIL on LIVE main 4cfcda61 (pre-existing, not this branch; kit-dialog owner). RV READY sent 27/11 ~02:45Z.
 ROLLED (context) after RV READY: successor = TODO (2)(3) above.
+
+## PACE-SPEED-3 (session PACE-SPEED-3, opened by MAIN 170 → MAIN 171; 27/11 03:00–05:00Z) — branch review/pace-speed 47bbe2e8
+PRIORITY #1 CHECK ('Danh.*Đức.*(band|cao|high)|long life|stp\.(ceil|floor)|dm\.pow'): OD 7 | ledger 0 | claims 2 | main 12 (jstatpace/jbalsp LIVE stat-pace) | review/* 0 new | archive 3. START_CTX ~3 %.
+JOB (OWNER OK 02:50Z via MAIN): do Danh and Đức still reach high bands in a long life? If not, tune BAL before RV-163E's final review.
+1. RV-163E §1 (law 1) FIXED 47bbe2e8: jagmaid riseCore — an NPC maid now carries her servant Danh (staff record has none = 0) × BAL.danhG.srvRise exactly like the
+   player maid, then the same D.danh (BAL.ag.maid.rise.danh 5). It kept her born Đáp ứng Danh ~8–10, and under the bar-tied soft ceiling (rank 0: Thường tại bar 10 + m 8 = 18)
+   the same +5 counted 4 for her vs 5 for the player. No new number. role-parity.test.js on the branch: riseCore Danh 5 / 5 ✓; remaining 3 FAIL = LIVE baseline
+   (gap set N-ONLY cx2:flat; drifting NPC act set born ["cx:mendGift"]; old-master ghen 4 vs 5 — the same on LIVE 17f23656 per rv-163e.md §1).
+2. LONG-LIFE ROBOT (dev/measure/pacespeed.js, PAR 2, CAP 3600 s, ≤240 months, 3 lives each; raw jsonl not in git). LIVE = origin/main 17f23656, BRANCH = b7430190
+   (life 3 of the branch ran on the 47bbe2e8 build; the fix touches only an NPC maid's Danh at her rise).
+| life | arm | end | to Hoàng hậu (m) | Danh first 70/80/90 (m) | Đức first 70/80/90 (m) | Danh yearly at top rank | Đức yearly at top rank |
+|---|---|---|---|---|---|---|---|
+| 0 | LIVE | cap m227 | 114 | 99 / 104 / 110 | 103 / 107 / 120 | 89–96 | 86–91 |
+| 1 | LIVE | m168 Mẫu hậu Hoàng thái hậu | 61 | 14 / 27 / 42 | 25 / 44 / 81 | 89–96 | 79–92 |
+| 2 | LIVE | cap m236 | 56 | 12 / 17 / 29 | 12 / 31 / 47 | 83–100 | 85–93 |
+| 0 | BRANCH | cap m236 | 83 | 65 / 81 / 87 | 13 / 58 / 68 | 74–99 | 84–91 |
+| 1 | BRANCH | cap m234 | 69 | 28 / 69 / 73 | 15 / 62 / 76 | 84–99 | 86–93 |
+| 2 | BRANCH | m238 Lãnh cung | 116 | 43 / 67 / 75 | 11 / 40 / 81 | 87–100 | 86–92 |
+VERDICT: yes — on the branch Danh and Đức both reach 90 in every long life (Danh 90 at m73–87, Đức 90 at m68–81) and sit at ~87–99 / ~86–93 once she is
+Hoàng hậu, the same band as LIVE (~90). The «~54–60» was MID-RANK Danh (ruling A: Danh ceiling = next rank's bar + 8, e.g. Quý nhân 38, Phi 63): Danh climbs with
+the rank, not ahead of it. LIVE climbs Danh to 70–90 by m12–42 while still at Tần–Quý phi (the overshoot ruling A removed). Đức on the branch reaches 70 earlier
+than LIVE (m11–15 vs m12–103). NO BAL TUNE (MAIN 171 accepted 04:14Z). Both arms keep dropping 7 → 6 → 7 at the top (same on LIVE; not this branch).
+STATE: review/pace-speed 47bbe2e8 = RV READY to RV-163E (final BIG); reign-end 85791268 lands after it.
