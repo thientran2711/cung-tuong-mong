@@ -1,0 +1,16 @@
+{
+ "PLACES": "read as `(PLACES&&PLACES[where]||{}).n` inside try{} with a catch fallback to the place key (j79 P()); harmless, name never defined — fallback is the live path",
+ "J59BB": "always read behind `window.J59BB&&` (j79); the table is a `const` inside j59, never exported, so the guarded branch is skipped (default box {t:0,b:1,l:0,r:1}); harmless",
+ "KIT_EXPR": "read behind `window.KIT_EXPR&&` (jface); optional expression-effects set, absent ⇒ no expression fx; harmless",
+ "PCOL": "j93 weather particles: whole IIFE returns at once on `typeof PCOL!==\"object\"` — dead tweak, no throw",
+ "mkPart": "j93 weather particles: guarded by `typeof mkPart!==\"function\"` return — dead tweak, no throw",
+ "caches": "browser CacheStorage (window.caches); jload reads it inside async try/catch paths; absent only on insecure origins (file://) where the SW cache is skipped",
+ "kitNoticeBox": "called inside try{}catch(e){} in jstagehere; provided at runtime (typeof function) via Object.assign(window,{kitNoticeBox:boxPaint,…}) in jnotice.js; harmless",
+ "memName": "provided at runtime (typeof function) via Object.assign(window,{…}) in jmem.js; read after `typeof memPhrase` guards",
+ "memNum": "provided at runtime (typeof function) via Object.assign(window,{…}) in jmem.js",
+ "memPhrase": "provided at runtime (typeof function) via Object.assign(window,{…}) in jmem.js",
+ "memPron": "provided at runtime (typeof function) via Object.assign(window,{…}) in jmem.js",
+ "lgr": "jkcg reads it inside try{} (kc «thư nhà»/«quà nhà» ledger line): jdh2's function is module-local, so the ledger line is silently skipped — no throw; dead-by-scope, see SCOPE_CLASSB.md (design call: export or drop)",
+ "kitTabStick": "jinv calls it inside try{}: jk3's function is not exported, so the call is a silent no-op (resize handler in jk3 still works) — no throw; see SCOPE_CLASSB.md",
+ "knownList": "jnsieve assigns it inside try{} behind `typeof knownList===\"function\"`: jhc's function is module-local, so the nsSieve reorder is dead by guard — no throw; see SCOPE_CLASSB.md"
+}
