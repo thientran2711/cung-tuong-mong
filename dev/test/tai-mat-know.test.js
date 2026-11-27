@@ -77,14 +77,18 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   o.noTell={sold:knSoldK(s),logs:TK.logsSince(n0).filter(x=>x.includes(s.name)).length,d:TK.rel(S,v).oan-b0.oan};
   /* b. the Tra khảo button is hidden until found */
   const btn0=(servJudgeBtns(s)||[]).join("").includes("Tra khảo");knSoldFound(s);const btn1=(servJudgeBtns(s)||[]).join("").includes("Tra khảo");o.btn={before:btn0,after:btn1};S.tmSold=null;
-  /* c. an unfound spy punished: plain punishment, no confession text */
-  const r=servDo(S,"phat",s);o.phat={r,still:(S.staff||[]).includes(s),tell:/tai mắt|không khai/.test(r)};
+  /* c. an unfound spy punished (RV-163F law 1: the same confession roll as an NPC master's servDo phat): keeps silent → plain punishment, nothing told;
+     confesses → she learns who (found + oán), like an NPC master */
+  const R0=roll;let r;try{roll=()=>false;r=servDo(S,"phat",s)}finally{roll=R0}o.phat={r,still:(S.staff||[]).includes(s),tell:/tai mắt|không khai/.test(r)};
+  const b1=TK.rel(S,v);let r2;try{roll=()=>true;r2=servDo(S,"phat",s)}finally{roll=R0}o.conf={r:r2,gone:!(S.staff||[]).includes(s),named:r2.includes(v.name),d:TK.rel(S,v).oan-b1.oan};
+  if(o.conf.gone)(S.staff=S.staff||[]).push(s);
   /* d. the leak sign: once a week */
   S.leakW=null;const a=spyLeak(S,1),bb=spyLeak(S,1);o.leak={a,b:bb};
   s.spyFor=null;return o});
  ok(!r3.noTell.sold&&r3.noTell.logs===0&&r3.noTell.d===0,'her servant bought, no Tai mắt there: no notice, not «found», no oán',r3.noTell);
  ok(!r3.btn.before&&r3.btn.after,'«Tra khảo» shows only once she has found him two-faced',r3.btn);
  ok(r3.phat.still&&!r3.phat.tell,'an unfound spy punished: plain punishment, nothing revealed',r3.phat);
+ ok(r3.conf.gone&&r3.conf.named&&r3.conf.d>0,'an unfound spy punished who confesses: named, sent away, she resents the buyer (same road as an NPC master, law 1)',r3.conf);
  ok(r3.leak.a==="Chuyện trong cung ngươi dường như lọt ra ngoài."&&r3.leak.b==="",'leak sign: the one line, once a week',r3.leak);
  /* 3e. a Tai mắt of hers in the buyer's palace sees the deal (j10 servMonth NPC buy) — static: the notice requires a real Tai mắt there */
  const fs=require('fs');const j10=fs.readFileSync(path.join(__dirname,'..','build','j10.js'),'utf8');
