@@ -8,7 +8,7 @@ kc3Reg("kc_dtq",{t:"Tin dữ Nhạn Môn",w:"cha",g:"Huynh trưởng {huynhN} l�
   {n:"Xin cha dâng sớ cầu viện",f:"own",wx:"mẫu thân thấy ngươi thương huynh",lx:"cha giận ngươi xen việc quân",rt:"Cha gạt đi, nhưng đêm ấy đèn thư phòng sáng đến canh ba.",go:(A,ok,G)=>{if(kcLore())S.kc.lost=1;kc3Af("cha",G[0]);kc3Af("me",G[1])}},
   {n:"Lén hỏi tên lính đưa thư",f:"read",wx:"biết huynh lạc ở hướng nào",lx:"cha biết ngươi dò chuyện quân",rt:"Tên lính kể: huynh trưởng bị vây ở hẻm núi phía bắc, không ai thấy xác.",rf:"Tên lính câm như hến, rồi kể lại với cha.",go:(A,ok,G)=>{if(kcLore())S.kc.lost=1;if(ok)A.f.where=1;else kc3Af("cha",-G[0])}}]},
  c1:{h:"Người lính cũ",w:"cha",t:"Một tên lính cũ về kể: huynh trưởng có thể còn sống, bị giữ ở trại giặc. Giặc đòi bạc chuộc.",o:[
-  {n:"Gom bạc riêng chuộc người",f:"ransom",wx:"có hy vọng đưa huynh về",lx:"bạc riêng vơi đi",rt:"Bạc theo một lái buôn ngựa ra biên ải.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
+  {n:"Gom bạc riêng chuộc người",f:"ransom",wx:"có hy vọng đưa huynh về",lx:"Bạc −",rt:"Bạc theo một lái buôn ngựa ra biên ải.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Tự cải trang theo lái buôn ra hỏi tin",f:"ransom",wx:"tận mắt biết huynh còn sống",lx:"mệt lả, lộ ra thì mất tiếng khuê nữ",rt:"Ngươi trở về sau nửa tháng: huynh còn sống, gầy rộc trong trại giặc.",rf:"Đi được nửa đường thì bị gia nhân đuổi kịp, đưa về.",go:(A,ok,G)=>{if(ok)kc3Af("cha",G[0])}},
   {n:"Chờ triều đình",wx:"giữ được tiếng nhà",lx:"cha thấy ngươi bỏ mặc huynh",rt:"Ngươi chờ. Tin biên ải mỗi tuần một thưa.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
  c2:{h:"Mẫu thân đòi biết",w:"me",if:()=>!!kc3P("me"),t:"Mẫu thân {meN} đoán ra có chuyện, nắm tay ngươi: “Con nói thật đi, huynh con ra sao rồi?”",o:[
@@ -22,7 +22,7 @@ kc3Reg("kc_dtq",{t:"Tin dữ Nhạn Môn",w:"cha",g:"Huynh trưởng {huynhN} l�
  t1:{h:"Lời gièm trên triều",w:"cha",t:"Trên triều có kẻ tâu cha ngươi giấu tin bại trận, nuôi binh riêng. Cha về nhà, ngồi lặng trước bản đồ biên ải.",o:[
   {n:"Pha trà, ngồi cạnh cha",wx:"cha thấy còn có người hiểu mình",lx:"không đổi được gì trên triều",rt:"Cha kể chuyện thuở mới tòng quân, đến khuya.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Khuyên cha tự dâng sớ nói thật",f:"own",wx:"lời gièm hết chỗ bám",lx:"cha giận ngươi dạy khôn",rt:"Cha dâng sớ nhận tội giấu tin. Hoàng thượng phạt bổng mà không nghi.",rf:"Cha đập bàn: “Con biết gì việc triều!”",go:(A,ok,G)=>{if(!ok)kc3Af("cha",G[0])}},
-  {n:"Biếu nhà ngự sử một lễ để bớt lời",wx:"lời gièm thưa đi",lx:"bạc riêng vơi đi",rt:"Mấy hôm sau, không ai nhắc chuyện ấy nữa.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
+  {n:"Biếu nhà ngự sử một lễ để bớt lời",wx:"lời gièm thưa đi",lx:"Bạc −",rt:"Mấy hôm sau, không ai nhắc chuyện ấy nữa.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
  x1:{h:"Cha muốn tự cầm quân",w:"cha",t:"Cha nói muốn tự mình dẫn quân đi Nhạn Môn, để mặc lời gièm pha trong triều. Ông hỏi ngươi nghĩ sao.",o:[
   {n:"Ủng hộ cha",e:"win",wx:"cha ra trận với lòng con gái",lx:"nhà vắng chủ, triều càng nghi binh quyền",rt:"Cha mặc giáp, xoa đầu ngươi rồi lên ngựa.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Khuyên cha ở lại kinh thành",e:"mid",wx:"cha giữ được thế trên triều",lx:"huynh trưởng vẫn trong tay giặc",rt:"Cha ở lại. Đêm nào ông cũng ngồi trước bản đồ biên ải.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
@@ -37,21 +37,21 @@ kc3Reg("kc_muoi",{t:"Sổ muối",w:"cha",g:"Nhà buôn muối giàu nứt vách
  p:[["s1"],["c1","c2","c3"],["t1"],["x1"]],
  B:{
  s1:{h:"Một tước vị cho nhà buôn",w:"cha",t:"Cha muốn bỏ nửa gia sản dâng quốc khố để xin một tước vị, để nhà buôn thành nhà có tước trước kỳ tuyển tú.",o:[
-  {n:"Ủng hộ cha",f:"obey",wx:"nhà có tước, Gia thanh lên",lx:"gia tư vơi một nửa",rt:"Cha cười lớn, sai người khiêng bạc lên Hộ bộ.",go:(A,ok,G)=>{S.kgtu=Math.max(BAL.kc3.gtuMin,S.kgtu-G[0]);kc3Af("cha",G[1])}},
+  {n:"Ủng hộ cha",f:"obey",wx:"nhà có tước, Gia thanh +",lx:"Gia tư −−",rt:"Cha cười lớn, sai người khiêng bạc lên Hộ bộ.",go:(A,ok,G)=>{S.kgtu=Math.max(BAL.kc3.gtuMin,S.kgtu-G[0]);kc3Af("cha",G[1])}},
   {n:"Khuyên cha giữ bạc",f:"own",wx:"nhà còn của làm vốn",lx:"cha chê ngươi đầu óc nhà buôn",rt:"Cha lắc đầu, cất sổ vào rương.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Xin cha dâng một phần, giữ một phần",wx:"được tước mà không cạn của",lx:"cha thấy ngươi so đo",rt:"Cha nghĩ một đêm rồi nghe theo.",rf:"Quan Hộ bộ chê ít, đòi đủ số.",go:(A,ok,G)=>{if(ok){S.kgtu=Math.max(BAL.kc3.gtuMin,S.kgtu-G[0]);S.kgt+=G[1]}else kc3Af("cha",G[2])}}]},
  c1:{h:"Sổ muối có chỗ thiếu",w:"cha",t:"Sổ muối có chỗ thiếu: người của quan Hộ bộ đòi chia phần.",o:[
   {n:"Giúp cha chép lại sổ",f:"obey",wx:"cha coi ngươi là người giữ sổ",lx:"tay ngươi dính vào sổ giả",rt:"Ngươi chép suốt ba đêm, nét chữ khớp từng dòng.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Khuyên cha khai thật",f:"own",wx:"lòng ngay",lx:"cha giận, quan Hộ bộ thù",rt:"Cha nhìn ngươi như nhìn người lạ.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
-  {n:"Biếu quan Hộ bộ một lễ, xin giữ nguyên sổ",wx:"sổ yên, người kia thôi đòi",lx:"bạc riêng vơi đi",rt:"Quan Hộ bộ nhận lễ, không nhắc chuyện chia phần nữa.",rf:"Hắn nhận lễ rồi vẫn đòi thêm."}]},
+  {n:"Biếu quan Hộ bộ một lễ, xin giữ nguyên sổ",wx:"sổ yên, người kia thôi đòi",lx:"Bạc −",rt:"Quan Hộ bộ nhận lễ, không nhắc chuyện chia phần nữa.",rf:"Hắn nhận lễ rồi vẫn đòi thêm."}]},
  c2:{h:"Thuyền muối đêm",w:"cha",t:"Thuyền muối đêm cập bến, chở thứ không phải muối. Người chèo thuyền nhận ra ngươi đứng trên bờ.",o:[
   {n:"Giả như không biết",f:"obey",wx:"cha chia cho ngươi một phần lời",lx:"ngươi đã biết điều không nên biết",rt:"Sáng ra trong rương ngươi có thêm một túi bạc.",go:(A,ok,G)=>{kc3Af("cha",G[0]);A.f.lau=1}},
   {n:"Lén ghi lại hàng và giờ thuyền đến",f:"read",wx:"nắm được bằng chứng của nhà",lx:"bị bắt gặp thì cha không tha",rt:"Ngươi ghi đủ ba chuyến, giấu dưới gối.",rf:"Người chèo thuyền thấy ngươi cầm bút, đi báo cha.",go:(A,ok,G)=>{if(!ok)kc3Af("cha",G[0])}},
   {n:"Lặng lẽ về phòng",wx:"không dính vào",lx:"không biết thuyền chở gì",rt:"Ngươi quay về, cài then cửa."}]},
  c3:{h:"Năm đói ở quê",w:"me0",t:"Quê cũ ở Giang Nam mất mùa. Dân đói kéo lên kinh, ngồi kín phố trước cửa kho muối nhà ngươi.",o:[
-  {n:"Bỏ bạc riêng nấu cháo phát cho dân",wx:"cả kinh thành nhắc tên ngươi",lx:"bạc riêng vơi đi",rt:"Nồi cháo trước cửa kho muối bốc khói suốt tháng.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
+  {n:"Bỏ bạc riêng nấu cháo phát cho dân",wx:"cả kinh thành nhắc tên ngươi",lx:"Bạc −",rt:"Nồi cháo trước cửa kho muối bốc khói suốt tháng.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Tự tay phát cháo mỗi sáng",wx:"cả kinh thành nhắc tên ngươi",lx:"mệt lả cả tháng",rt:"Tay ngươi phồng rộp, nhưng dân nhớ mặt tiểu thư nhà muối."},
-  {n:"Khuyên cha mở kho bán muối rẻ",wx:"nhà vẫn có lời, dân bớt oán",lx:"người ta vẫn chê nhà buôn hám lợi",rt:"Cha bán muối giá rẻ. Lời ít mà tiếng đỡ.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
+  {n:"Khuyên cha mở kho bán muối rẻ",wx:"nhà vẫn có lời, dân: oán −",lx:"người ta vẫn chê nhà buôn hám lợi",rt:"Cha bán muối giá rẻ. Lời ít mà tiếng đỡ.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
  t1:{h:"Thư lại Hộ bộ dò hỏi",w:"cha",t:"Một thư lại Hộ bộ đến nhà, hỏi ngươi bâng quơ về sổ sách, về thuyền đêm. Hắn cười: “Tiểu thư sắp đi tuyển, chắc không muốn nhà có chuyện.”",o:[
   {n:"Biếu hắn một lễ cho xong",wx:"hắn thôi hỏi",lx:"hắn biết nhà ngươi sợ",rt:"Thư lại nhận lễ, chắp tay ra về.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Đối đáp cho hắn hớ lời",f:"own",wx:"hắn để lộ kẻ sai hắn đến",lx:"hắn về báo lại, nhà bị để ý",rt:"Hắn lỡ miệng nhắc tên một quan Hộ bộ. Ngươi ghi nhớ.",rf:"Hắn cười nhạt, ghi gì đó vào sổ.",go:(A,ok,G)=>{if(!ok)kc3Af("cha",G[0])}},
@@ -70,7 +70,7 @@ kc3Reg("kc_thd",{t:"Tài nữ kinh thành",w:"cha",g:"Cha ngươi, thầy đồ 
  p:[["s1"],["c1","c2","c3"],["t1"],["x1"]],
  B:{
  s1:{h:"Lớp học của cha",w:"cha",t:"Cha mở lớp dạy học cho con nhà nghèo, thiếu bạc mua sách.",o:[
-  {n:"Bán trâm mua sách cho cha",wx:"cha cảm động, lớp học đủ sách",lx:"bạc riêng vơi đi",rt:"Cha cầm bó sách mới, mắt đỏ hoe.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
+  {n:"Bán trâm mua sách cho cha",wx:"cha cảm động, lớp học đủ sách",lx:"Bạc −",rt:"Cha cầm bó sách mới, mắt đỏ hoe.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Mặc cha lo",wx:"giữ thì giờ học cho mình",lx:"cha buồn",rt:"Ngươi về phòng đọc sách. Cha chép tay sách cho học trò đến khuya.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Viết thơ bán ở thư phường lấy tiền mua sách",wx:"thơ ngươi đến tai người ngoài",lx:"mệt nhoài",rt:"Thơ ngươi bán hết trong ba ngày.",rf:"Chủ thư phường trả rẻ, chê thơ con gái."}]},
  c1:{h:"Hội thơ kinh thành",w:"me0",t:"Hội thơ kinh thành: danh hiệu Tài nữ đang chờ người tranh. Khuê hữu của ngươi cũng ghi tên.",o:[
@@ -88,7 +88,7 @@ kc3Reg("kc_thd",{t:"Tài nữ kinh thành",w:"cha",g:"Cha ngươi, thầy đồ 
  t1:{h:"Người đọc thơ ngươi",w:"me0",t:"Một thư sinh lạ để lại ở thư phường một bài họa thơ ngươi, chữ đẹp, ý sâu. Ai cũng đoán người ấy xuất thân cao.",o:[
   {n:"Không họa lại",wx:"giữ được danh tiết khuê nữ",lx:"lỡ một tri âm",rt:"Ngươi gấp bài thơ, cất vào hộp.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Họa lại một bài",f:"fame",wx:"tiếng thơ ngươi bay cao",lx:"người ta đồn tiểu thư thư từ với nam nhân",rt:"Bài họa của ngươi được chép thành bản đôi.",rf:"Bài họa không hay bằng bài kia. Người ta chê ngươi."},
-  {n:"Biếu thư phường một lễ, nhờ dò ai viết",wx:"biết người kia là ai",lx:"bạc riêng vơi đi",rt:"Chủ thư phường thì thầm: người ấy đi cùng mấy người hầu không nói tiếng nào.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
+  {n:"Biếu thư phường một lễ, nhờ dò ai viết",wx:"biết người kia là ai",lx:"Bạc −",rt:"Chủ thư phường thì thầm: người ấy đi cùng mấy người hầu không nói tiếng nào.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
  x1:{h:"Danh hiệu Tài nữ",w:"cha",t:"Trước kỳ tuyển, Hàn lâm viện muốn chọn một Tài nữ kinh thành đọc thơ mừng thọ Thái hậu. Tên ngươi nằm trong ba người.",o:[
   {n:"Dâng bản thảo của cha thay thơ mình",e:"mid",wx:"sách của cha đến tay Hàn lâm",lx:"danh Tài nữ về tay người khác",rt:"Hàn lâm viện nhận bản thảo của cha, hẹn xem xét.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Dốc sức tranh danh hiệu",e:["win","lose"],wx:"cả kinh thành gọi ngươi là Tài nữ",lx:"thua trước mặt cả kinh thành",rt:"Tên ngươi được viết lên bảng vàng ở Hàn lâm viện.",rf:"Ngươi đứng thứ hai. Người đứng đầu là tiểu thư nhà Hàn lâm.",go:(A,ok,G)=>{if(!ok)kc3Af("cha",G[0])}},
@@ -110,7 +110,7 @@ kc3Reg("kc_ch",{t:"Thư của cô mẫu",w:"th",g:"Thái hậu là cô mẫu c�
   {n:"Lấn lướt người kia",f:"vs",wx:"người kia lép vế",lx:"người kia ôm hận",rt:"Thư ngươi đến cung trước, dài hơn, kèm quà quý hơn.",rf:"Người kia biết ngươi chơi khăm, kể lại với cô mẫu."},
   {n:"Mặc, để cô mẫu tự chọn",wx:"không ai oán ngươi",lx:"cô mẫu thấy ngươi nhạt",rt:"Ngươi không nhắc đến người kia trong thư.",go:(A,ok,G)=>{S.th=Math.max(0,(S.th||0)+G[0])}}]},
  c2:{h:"Quà vào cung",w:"th",t:"Tiết Trung thu, nhà nào có người trong cung cũng gửi quà. Cô mẫu thích trà Vũ Di và đồ thêu.",o:[
-  {n:"Mua trà Vũ Di thượng hạng",wx:"cô mẫu nhận quà quý",lx:"bạc riêng vơi đi",rt:"Người của Đức Thọ cung nhận trà, cúi đầu tạ.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}},
+  {n:"Mua trà Vũ Di thượng hạng",wx:"cô mẫu nhận quà quý",lx:"Bạc −",rt:"Người của Đức Thọ cung nhận trà, cúi đầu tạ.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}},
   {n:"Tự thêu một bức Quan Âm",wx:"cô mẫu nhận quà bằng tay cháu",lx:"thức trắng nửa tháng",rt:"Bức thêu được treo trong Phật đường của Đức Thọ cung.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}},
   {n:"Chỉ gửi một phong thư thăm hỏi",wx:"không tốn gì",lx:"cô mẫu thấy thiếu lòng",rt:"Ngươi gửi thư, không kèm quà.",go:(A,ok,G)=>{S.th=Math.max(0,(S.th||0)+G[0])}}]},
  c3:{h:"Lá thư cũ của tổ mẫu",w:"to",if:()=>!!kc3P("to"),t:"Tổ mẫu {toN} đưa ngươi một lá thư cũ của cô mẫu thời còn ở nhà, dặn: “Đọc rồi đốt. Có những chuyện chỉ người nhà được biết.”",o:[
@@ -120,7 +120,7 @@ kc3Reg("kc_ch",{t:"Thư của cô mẫu",w:"th",g:"Thái hậu là cô mẫu c�
  t1:{h:"Người của cô mẫu đến",w:"th",t:"Một ma ma của Đức Thọ cung đến phủ, ở lại ba ngày, xem ngươi đi đứng, ăn uống, đối đáp với người hầu.",o:[
   {n:"Cư xử như mọi ngày",wx:"ma ma thấy ngươi thật thà",lx:"không có gì nổi bật",rt:"Ma ma về cung, không nói gì.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}},
   {n:"Đánh một khúc đàn cho ma ma nghe",wx:"ma ma kể lại với cô mẫu",lx:"đàn dở thì thành chuyện cười",rt:"Ma ma ngồi nghe đến hết, gật đầu.",rf:"Dây đàn đứt giữa khúc.",go:(A,ok,G)=>{if(ok)spAdd(S,"th",G[0])}},
-  {n:"Biếu ma ma một lễ",wx:"ma ma nói tốt cho ngươi",lx:"bạc riêng vơi đi",rt:"Ma ma nhận lễ, cười tít mắt.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}}]},
+  {n:"Biếu ma ma một lễ",wx:"ma ma nói tốt cho ngươi",lx:"Bạc −",rt:"Ma ma nhận lễ, cười tít mắt.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}}]},
  x1:{h:"Ra mắt người của cô mẫu",w:"th",t:"Thái hậu cho người ra xem mặt ngươi trước kỳ tuyển. Người cháu kia cũng được xem cùng ngày.",o:[
   {n:"Ra mắt khiêm nhường",e:"mid",wx:"cô mẫu thấy ngươi biết giữ lễ",lx:"người kia rực rỡ hơn",rt:"Ngươi cúi đầu suốt buổi. Người của cô mẫu gật đầu.",go:(A,ok,G)=>{spAdd(S,"th",G[0])}},
   {n:"Ra mắt rực rỡ",e:["win","lose"],wx:"người của cô mẫu chọn ngươi",lx:"bị chê phô trương",rt:"Cả sảnh lặng đi khi ngươi bước vào.",rf:"Người của cô mẫu nhíu mày: con gái nhà quốc cữu mà phô trương quá.",go:(A,ok,G)=>{if(ok)spAdd(S,"th",G[0])}},
@@ -140,19 +140,19 @@ kc3Reg("kc_td",{t:"Án đang dựng",w:"cha",g:"Cha ngươi, Thị lang bộ L�
  c1:{h:"Người lạ ở cửa sau",w:"me0",t:"Một người lạ tìm đến, nói khẽ: án đã dựng gần xong; nhận tội thay cha thì đổi được mạng cả nhà.",o:[
   {n:"Gạt đi, tìm chứng cứ",f:"foe",wx:"lần ra kẻ sai người lạ đến",lx:"mệt nhoài",rt:"Ngươi sai tỳ nữ theo dấu hắn: hắn vào cửa sau một phủ quan trong kinh.",rf:"Tỳ nữ lạc dấu hắn giữa chợ.",go:(A,ok,G)=>{if(!ok)S.kgt=Math.max(0,S.kgt-G[0])}},
   {n:"Khuyên cha nhận",wx:"có thể giữ mạng cả nhà",lx:"cha giận, kẻ thù biết nhà đã sợ",rt:"Cha đập bàn: “Nhận tội không làm, là bất trung.”",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
-  {n:"Đưa bạc cho hắn, hỏi kẻ đứng sau",wx:"có thể biết tên kẻ thù",lx:"bạc riêng vơi đi",rt:"Hắn nhận bạc, chỉ nói: “Người họ ấy ở bộ Lại.”"}]},
+  {n:"Đưa bạc cho hắn, hỏi kẻ đứng sau",wx:"có thể biết tên kẻ thù",lx:"Bạc −",rt:"Hắn nhận bạc, chỉ nói: “Người họ ấy ở bộ Lại.”"}]},
  c2:{h:"Thư phòng bị lục",w:"cha",t:"Đêm qua có kẻ lẻn vào thư phòng của cha, lật tung tủ sách. Sáng ra cha giận dữ hỏi cả nhà.",o:[
   {n:"Tự dò xem kẻ nào trong nhà mở cửa",wx:"tìm ra kẻ nội ứng",lx:"kẻ kia biết ngươi dò",rt:"Ngươi tìm ra một gia nhân mới nhận bạc của người ngoài.",rf:"Gia nhân kia biết ngươi dò, bỏ trốn trước."},
   {n:"Đứng ra trấn an cả nhà",wx:"cả nhà yên lòng",lx:"kẻ nội ứng vẫn ở trong nhà",rt:"Ngươi thu xếp lại tủ sách, dặn gia nhân cẩn thận cửa nẻo.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Lặng im, để xem kẻ ấy làm gì tiếp",wx:"kẻ ấy lộ mặt lần sau",lx:"cha thấy ngươi dửng dưng",rt:"Ngươi để ý ai hay đi qua thư phòng lúc tối.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
  c3:{h:"Em trai út",w:"me",if:()=>!!kc3P("me"),t:"Mẫu thân {meN} dặn ngươi khẽ: “Nếu nhà có biến, con phải lo cho em út. Nó còn nhỏ quá.”",o:[
   {n:"Hứa với mẹ",wx:"mẹ yên lòng",lx:"một gánh nặng nữa trên vai",rt:"Mẫu thân nắm tay ngươi, không nói thêm.",go:(A,ok,G)=>{kc3Af("me",G[0])}},
-  {n:"Gửi bạc cho nhà thế giao, nhờ đón em khi cần",f:"bro",wx:"em út có đường thoát",lx:"bạc riêng vơi đi",rt:"Nhà thế giao nhận lời, hẹn một ám hiệu.",go:(A)=>{A.f.bro=1}},
+  {n:"Gửi bạc cho nhà thế giao, nhờ đón em khi cần",f:"bro",wx:"em út có đường thoát",lx:"Bạc −",rt:"Nhà thế giao nhận lời, hẹn một ám hiệu.",go:(A)=>{A.f.bro=1}},
   {n:"Tự dạy em đường tắt ra cửa sau, đêm nào cũng tập",f:"bro",wx:"em út biết đường chạy",lx:"mệt nhoài, bị phát hiện thì cả nhà hoảng",rt:"Em út thuộc lối đi qua vườn sau, nhắm mắt cũng chạy được.",rf:"Gia nhân bắt gặp hai chị em lúc nửa đêm, kể với cha."}]},
  t1:{h:"Ngự sử hỏi chuyện",w:"cha",t:"Một ngự sử quen của cha ghé nhà, hỏi ngươi bâng quơ về thư từ của cha. Ông ta có thể là bạn, có thể là người của kẻ thù.",o:[
   {n:"Đáp lễ phép, không nói gì",wx:"cha thấy ngươi kín đáo",lx:"lỡ một đồng minh",rt:"Ngự sử cười, uống cạn chén trà rồi về.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Thử lòng ông ta bằng một tin giả",f:"foe",wx:"biết ông ta đứng về phía nào",lx:"tin giả lan ra thì nhà mang tiếng",rt:"Tin giả đến tai phủ kia ngay hôm sau. Ngươi biết ai là người của kẻ thù.",rf:"Ông ta không mắc lừa, còn nhìn ngươi dò xét."},
-  {n:"Biếu ông ta một lễ, nhờ để mắt giúp",wx:"ông ta nói đỡ cho cha",lx:"bạc riêng vơi đi",rt:"Ngự sử nhận lễ, hứa sẽ báo nếu có sớ hặc.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
+  {n:"Biếu ông ta một lễ, nhờ để mắt giúp",wx:"ông ta nói đỡ cho cha",lx:"Bạc −",rt:"Ngự sử nhận lễ, hứa sẽ báo nếu có sớ hặc.",go:(A,ok,G)=>{kc3Af("cha",G[0])}}]},
  x1:{h:"Còn kịp làm một việc",w:"cha",t:"Cha gọi ngươi vào thư phòng dặn khẽ: dù ngày nào nhà có biến, ngươi cứ đi con đường của mình. Còn kịp làm một việc.",o:[
   {n:"Gửi sổ sao sang nhà thế giao",e:"win",wx:"chứng cứ thật nằm ở nơi an toàn",lx:"nhà thế giao bị kéo vào",rt:"Bản sao sổ sách nằm lại nhà thế giao, chờ ngày cần đến.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
   {n:"Đốt thư từ của cha",e:"mid",wx:"kẻ lục soát chẳng có gì để dựa vào",lx:"mất luôn chứng cứ minh oan",rt:"Thư từ của cha thành tro.",go:(A,ok,G)=>{kc3Af("cha",G[0])}},
