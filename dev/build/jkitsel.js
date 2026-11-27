@@ -44,7 +44,10 @@ button.ka.kbare .kat{margin:auto 0}button.ka.kbare .kabody{display:flex;flex-dir
 button.ka.kbare.kbare{--kasq:${KIT_SQOPT.pic}px;--kaw:var(--kasq)!important;--kah:var(--kasq)!important;min-height:0!important;height:auto!important;padding:6px 10px 6px 6px!important;align-items:center!important}
 button.ka.kbare.kbare>.kaart{flex:0 0 var(--kasq)!important;width:var(--kasq)!important;height:var(--kasq)!important;min-height:0!important;aspect-ratio:1/1;align-self:center!important;margin-block:0!important}
 html.kpnarrow button.ka.kbare.kbare{--kasq:${KIT_SQOPT.narrow}px}
-.kscn-tag{display:inline-block;width:max-content;max-width:12em;text-align:center;font-size:.82rem;line-height:1.2;color:var(--ink,#3a2a1c);padding:2px 6px;border-radius:8px;background:#fffaf0e8;border:1px solid color-mix(in srgb,var(--tc,#5a6878) 70%,#fff);box-shadow:0 2px 6px #0003}`;document.head.appendChild(st)}catch(e){}})();
+.kscn-tag{display:inline-block;width:max-content;max-width:12em;text-align:center;font-size:.82rem;line-height:1.2;color:var(--ink,#3a2a1c);padding:2px 6px;border-radius:8px;background:#fffaf0e8;border:1px solid color-mix(in srgb,var(--tc,#5a6878) 70%,#fff);box-shadow:0 2px 6px #0003}
+/* §93.5a FIXED-SIZE NAME PLATE: one width + one height (2 lines) for every plate of a row of figures (law 10); a long name wraps inside it, never runs on, never cut (OD:L177) */
+html .kscn-tag.kscn-fix{width:var(--kscn-fixW,7.6em);max-width:none;min-height:calc(2.3em + 4px);display:inline-flex;flex-direction:column;justify-content:center;white-space:normal;overflow-wrap:anywhere;font-size:.74rem;line-height:1.15;box-sizing:border-box}
+html.kv2 .kscn-tag.kscn-fix{--kscn-fixW:8.4em}`;document.head.appendChild(st)}catch(e){}})();
 function kscnGeo(){const h=document.querySelector("header.hud"),b=document.querySelector("nav.bar");const hr=h?h.getBoundingClientRect():{bottom:0,left:0,right:innerWidth},br=b?b.getBoundingClientRect():{top:innerHeight};
  const t=Math.round(hr.bottom+4),bt=Math.round(br.top-4),L=Math.round(hr.left),R=Math.round(innerWidth-hr.right);return{t,H:bt-t,L,R,w:innerWidth-L-R}}
 function kscnCalm(){try{return(typeof reducedMotion==="function"&&reducedMotion())||(typeof kfStill==="function"&&kfStill())}catch(e){return false}}
@@ -53,7 +56,7 @@ function kscnOpaque(im){try{const W=120,H=Math.max(1,Math.round(120*im.naturalHe
  let l=W,r=-1,t=H,b=-1;for(let y=0;y<H;y++)for(let i=0;i<W;i++)if(D[(y*W+i)*4+3]>24){if(i<l)l=i;if(i>r)r=i;if(y<t)t=y;if(y>b)b=y}return r<0?{l:0,r:1,t:0,b:1}:{l:l/W,r:(r+1)/W,t:t/H,b:(b+1)/H}}catch(e){return{l:0,r:1,t:0,b:1}}}
 const kitScene={
  open(o){o=o||{};kitScene.close(true);const g=kscnGeo();const L=document.createElement("div");L.className="kscn"+(o.night?" kscn-night":"")+(o.intro&&!kscnCalm()?" kscn-clear":"");
-  L.style.cssText=`left:${g.L}px;right:${g.R}px;top:${g.t}px;height:${g.H}px`;L.innerHTML=`<div class="kscn-bg" style="background-image:url('${String(o.bg||"").replace(/'/g,"%27")}')"></div><div class="kscn-veil"></div>`;
+  L.style.cssText=`left:${g.L}px;right:${g.R}px;top:${g.t}px;height:${g.H}px`;L.innerHTML=`<div class="kscn-bg" style="background-image:url('${String(o.bg||(typeof kstgPlacePic==="function"?kstgPlacePic():"")).replace(/'/g,"%27")}')"></div><div class="kscn-veil"></div>`;
   document.body.appendChild(L);document.body.classList.add("kscn-on");/* the stage mood seal (.kemo-big, z 9990) must not pop over the scene */L.g=g;L.figs=[];L.boxes=[];const S0={L,
    fig:(src,f)=>kitScene.fig(L,src,f),box:(title,nodes,pos,tail,ho)=>kitDlgBox(L,title,nodes,pos,tail,ho),pair:x=>kitScene.pair(L,x),
    /* intro: the picture clear and full for o.intro ms, then blur + veil (KIT_SCN.toBlur), then figures from the left, boxes from the right */
@@ -139,7 +142,10 @@ function kitNameTag(p,o){o=o||{};let st=o.stage;try{if(st==null)st=!(typeof j59k
  const t=o.title||(typeof j59title==="function"&&j59title(p))||"Tú nữ";if(st<=0&&!o.ph&&typeof j59tagHTML==="function")return j59tagHTML(p,p.name);
  return `<span class="j59t" style="--tc:${c};--rt:${typeof kitRankTone==="function"?kitRankTone(t,c):c}">${esc(t)}</span><span class="j59n" style="--tc:${c}">${esc(o.ph||"Chưa rõ tên")}</span>`}
 /* the tag in its own box (a scene layer, not the place stage): <span class="kscn-tag"> + the j59 title/name lines */
-function kitNameTagBox(p,o){const c=typeof j59col==="function"?j59col(p):"";return `<span class="kscn-tag"${c?` style="--tc:${c}"`:""}>${kitNameTag(p,o)}</span>`}
+/* o.fix = the FIXED-SIZE name plate (owner 26/11 ~21:45Z «Phi Đường Mi Trang · Tố…» runs under the figures → one plate per figure, one size; KIT §93.5a) */
+function kitNameTagBox(p,o){const c=typeof j59col==="function"?j59col(p):"";return `<span class="kscn-tag${o&&o.fix?" kscn-fix":""}"${c?` style="--tc:${c}"`:""}>${kitNameTag(p,o)}</span>`}
+/* §93.5a ONE HEIGHT per row (KK49): every fixed plate under one root takes the tallest plate's height (a long name wraps to a 3rd line → the whole row grows with it, never cut, never run on). Call after the plates are in the DOM. */
+function kitNameTagFit(root){try{const T=[...(root||document).querySelectorAll(".kscn-tag.kscn-fix")];if(!T.length)return 0;T.forEach(t=>t.style.height="");const h=Math.ceil(Math.max(...T.map(t=>t.getBoundingClientRect().height)));if(!h)return 0;/* KK51: a detached / hidden root measures 0 → leave the plates at their own height (never 0 px) */T.forEach(t=>t.style.height=h+"px");return h}catch(e){return 0}}
 /* 93.6 sắc phong news row: kit face (stranger rule of kitFaceH) + name or placeholder + new rank chip + how she is known; list = the kit list frame */
 function kitNewsRankRow(p,o){o=o||{};const named=typeof kitKnownName==="function"?kitKnownName(p):true;const col=(typeof kitRankCol==="function"&&o.rank!=null&&typeof o.rank==="number"?kitRankCol(o.rank):"")||"";
  const rk=o.rank==null?"":typeof o.rank==="number"&&typeof kmRankName==="function"?kmRankName(o.rank):String(o.rank);
@@ -167,6 +173,8 @@ function kitResultCard(o){o=o||{};let t=document.getElementById("rtoast");if(!t)
 try{if(typeof KIT_SAMPLES!=="undefined"){
  KIT_SAMPLES.push({id:"§93.5",title:"kitNameTag · thẻ tên người chỉ biết mặt / chỉ biết nhà",where:"cảnh tuyển tú (sân chờ, hàng tú nữ, lượt 1–2), mọi chỗ cần tên người chưa rõ",html:()=>{const v=(typeof rivals!=="undefined"&&rivals[0])||{name:"Tô Uyển Nhi"};
   return `<div style="display:flex;gap:28px;padding:10px">${[[1,""],[1,"Con gái Đô thống"],[2,""]].map(([s,ph])=>kitNameTagBox(v,{stage:s,ph,title:"Tú nữ"})).join("")}</div>`}});
+ KIT_SAMPLES.push({id:"§93.5a",title:"kitNameTagBox {fix:1} · bảng tên cố định cỡ (một bảng mỗi người, cùng cỡ, tên dài xuống dòng)",where:"vòng người (nhóm: một bảng dưới chân mỗi người)",html:()=>{const R=(typeof rivals!=="undefined"?rivals:[]).slice(0,3);const P=R.length?R:[{name:"Tô Uyển Nhi"},{name:"Đường Mi Trang"},{name:"Phi Đường Mi Trang"}];
+  setTimeout(()=>{try{document.querySelectorAll(".kfix-demo").forEach(kitNameTagFit)}catch(e){}},0);return `<div class="kfix-demo" style="display:flex;gap:18px;padding:10px;align-items:flex-start">${P.map(v=>kitNameTagBox(v,{fix:1})).join("")}</div>`}});
  KIT_SAMPLES.push({id:"§93.6",title:"kitNewsRankRow · hàng tin sắc phong (mặt + tên + phẩm mới + biết qua đâu)",where:"màn tin sắc phong sau thánh chỉ (SELSCENE), mọi danh sách tin phong phẩm",html:()=>{const L=(typeof rivals!=="undefined"?rivals:[]).slice(0,3);
   return kitNewsRankList(L.map((v,i)=>kitNewsRankRow(v,{rank:Math.max(0,(v.rank||1)),how:i?"quen ở sân chờ":"cùng lượt"})))}});
 KIT_SAMPLES.push({id:"§93.1-4",title:"kitScene · Sc.fig · kitDlgBox · Sc.pair · cảnh bố cục A (nền rõ → mờ, hai nhân vật toàn thân, hai khung đối thoại)",where:"cảnh tuyển tú (SELSCENE); mọi cảnh không phải #modal. Nút mở cảnh thật, chạm một thẻ để về trang mẫu",html:()=>{const ok=typeof S!=="undefined"&&S&&typeof liveRivals==="function";return `<div class="kitpg-row"><button type="button" class="kbtn alt" data-kselsc="pair"${ok?"":" disabled"}>Mở cảnh: sứ giả + ta</button><button type="button" class="kbtn alt" data-kselsc="solo"${ok?"":" disabled"}>Mở cảnh: một mình</button></div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem cảnh."],{group:false}))}});
