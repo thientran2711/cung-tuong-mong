@@ -216,13 +216,36 @@ DOOR.rowsJ2=function(r,M,v){const out=[];const seen=new Set();const seed=[S.turn
  for(const g of r.roll||[]){const L=M.filter(m=>g.includes(m.id));if(!L.length)continue;L.forEach(m=>seen.add(m.id));const one=DOOR.pickRoll(L,seed+":"+g[0]);if(one)out.push(one)}
  for(const m of M)if(!seen.has(m.id)&&!(r.hide||[]).includes(m.id))out.push(m);
  const T=(r.tiers||{}),ti=m=>{const t=T[m.id];return t?DOOR.TIER.indexOf(t):-1};
- return out.map((m,j)=>({m,j})).sort((a,b)=>(ti(a.m)-ti(b.m))||(a.j-b.j)).map(({m})=>{const t=T[m.id];const row={n:t?`${m.n} · ${t}`:m.n,x:m.x||"chọn rồi xem kết quả ở bước sau",go:m.go};if(m.hint)row.hint=m.hint;if(m.off)row.off={why:m.why||"chưa làm được"};return row})};
+ return out.map((m,j)=>({m,j})).sort((a,b)=>(ti(a.m)-ti(b.m))||(a.j-b.j)).map(({m})=>{const t=T[m.id];const row={n:t?`${m.n} · ${t}`:m.n,x:m.x||"chọn rồi xem kết quả ở bước sau",go:m.go};if(m.hint)row.hint=m.hint;if(m.c)Object.defineProperty(row,"__c",{value:m.c,enumerable:false});/* the way's price (tests: a stat she pays is no gain) */if(m.off)row.off={why:m.why||"chưa làm được"};return row})};
+/* E-GAIN3b-FIX (law 3, reviewer FAIL 1): the hint of a pop-up door-dialog row. FIRST the row's own line (kitHint of {n, x = optLine}: what the row
+   always showed); only when that says nothing gained («chẳng được gì» / «không được mất gì» / empty: Khoe quà ngự ban, Khiêu khích, Vu oan, Dò la) the
+   way's own hint (its fx / BAL numbers / a.hint), or the hint of its full data, and ONLY when it names a REAL gain (DOOR.hintGain). A need text
+   («cần nguyên cớ …»), a tip («có … thì khỏi …») or a stat she PAYS («Danh» of Hạ nhục) is never shown as a gain. */
+DOOR.HINT_NO=/^(chẳng được gì|không được mất gì)/;
+DOOR.HINT_STAT={"Sủng":"sung","Danh":"danh","Đức":"duc","Bạc":"bac","Sức":"suc","Tâm cơ":"tamco"};
+DOOR.hintGain=function(h,c){const g=String(h||"").split("; ")[0];if(!g||DOOR.HINT_NO.test(g))return false;
+ return g.split(/,\s+/).some(p=>{p=p.trim();if(/^cần\b|^có .* thì\b|\bthì khỏi\b/.test(p))return false;
+  const m=p.match(/^(\S+(?: \S+)?)\s(\+{1,3})$/);if(m&&!/\snàng$/.test(m[1])){const k=DOOR.HINT_STAT[m[1]];return !(k&&c&&(c[k]||0)<0)}/* «Danh +» she pays for = no gain */
+  return /(^|\s)nàng(\s|$)/.test(p)&&/(−|mất|trúng|ngã|bị|giảm|quở|phạt|quỳ|bẽ)/.test(p)})};/* a harm to the target («Danh nàng −−», «nàng bị quở …») */
+/* a row line that is already kit HTML (optLine of a way drawn as rows: «Hạ nhục», «Nghe lén câu chuyện») read as a labelled text line, so the hint
+   never glues the row heads («Danh nàng −−Bạichỉ uổng công…»). The Tốn row is left out (the hint names the price beyond Tốn); a Mất / Bại / Kèm piece
+   whose subject is the TARGET and that harms her («Danh nàng −−») is the gain (same reading as doorGain). */
+DOOR.TGT=p=>/^(\S+ )?nàng\s/.test(p)&&!/(oán|ghen|thù|nghi|nắm|quý|thiện cảm|tin ngươi|biết|đoán|khai)/.test(p)&&/(−|mất|trúng|ngã|bị|giảm|quở|phạt|quỳ|bẽ)/.test(p);
+DOOR.lineOf=function(x){x=String(x||"");const at=x.search(/<span class="kb"/);if(at<0||!/class="kr[ "]/.test(x))return x;
+ const d=document.createElement("div");d.innerHTML=x.slice(at);const T=e=>e.textContent.replace(/\s+/g," ").trim();const B={thành:[],hỏng:[],kèm:[]};
+ const pre=x.slice(0,at).replace(/<[^>]*>/g,"").replace(/[\s·]+$/,"").trim();const od=pre||T(d.querySelector(".kodds")||document.createElement("i"));
+ d.querySelectorAll(".kr").forEach(r=>{const l=T(r.querySelector(".krl")||r).toLowerCase();const k=/^(thành|được|thắng)/.test(l)?"thành":/^(bại|mất|hỏng)/.test(l)?"hỏng":/^kèm/.test(l)?"kèm":null;if(!k)return;
+  if(/^bại/.test(l)&&!od)return;/* a «Bại» with no odds word cannot be read as a roll: the hint leaves it out (as the row's line always did) */
+  [...r.querySelectorAll(".krv .ef")].map(T).join(", ").split(/,\s+/).filter(Boolean).forEach(p=>{let z=k;if(k!=="thành"&&DOOR.TGT(p))z="thành";else if(k==="thành"&&od&&!DOOR.TGT(p)){try{if(kitHintSign(p,"thành")<0)z="kèm"}catch(e){}}B[z].push(p)})});/* a price inside a rolled «Thành» («thiện cảm −−−» of Khiêu khích) stays named in the hint («nhưng …») */
+ return [od].concat(Object.keys(B).filter(k=>B[k].length).map(k=>k+": "+B[k].join("; "))).filter(Boolean).join(" · ")};/* «; » keeps each kit piece its own item (marks hold no digit) */
+DOOR.rowHint=function(a,x,lv){x=DOOR.lineOf(x);let h0="";try{h0=kitHint({n:a.n,x},null,lv).hint}catch(e){}if(h0&&!DOOR.HINT_NO.test(h0))return h0;
+ for(const f of [()=>kitHint(a,null,lv).hint,()=>kitHint({x,o:a.o,c:a.c},null,lv).hint]){let h="";try{h=f()}catch(e){}if(DOOR.hintGain(h,a.c))return h}return h0};
 (function(){const P0=PEND.door;PEND.door=pp=>{const r=DOOR.byK(pp&&pp.k);if(!r||!r.acts)return P0(pp);let M=[],v=null,who=null,nm="";
  if(pp.r!=null){v=typeof rivals!=="undefined"?rivals[pp.r]:null;if(!v||typeof DOOR.cardM!=="function")return null;M=DOOR.cardM(pp.r,r);nm=v.name;try{who=typeof WHO==="function"?WHO(["r",v.id]):null}catch(e){}}
  else{if(pp.kind!=null)pp.i=doorIdx(pp);const p=curPeople()[pp.i];if(!p||!S.visit)return null;v=p.ref;let A=[];try{A=doorRaw(p)}catch(e){return null}
   A.forEach((a,j)=>{if(!a||a.k61||a.door||DOOR.of(a.n,p.kind)!==r)return;const tc=talkK(a);const poor=!!(a.c&&a.c.bac&&S.bac+a.c.bac<0);
    const why=a.lock?doorTxt(a.t)||"chưa làm được":poor?"không đủ bạc":!can(tc)?(doorTxt(typeof whyTime==="function"?whyTime(tc):"")||"hết khắc buổi này"):"";
-   let x="";try{x=optLine(a)}catch(e){}M.push({id:"t:"+doorTxt(a.n),n:a.n,x,hint:a.hint||(lv=>{const NO=/^(chẳng được gì|không được mất gì)/;let h1="",h2="";try{h1=kitHint(a,null,lv).hint}catch(e){}if(h1&&!NO.test(h1))return h1;try{h2=kitHint({x,o:a.o,c:a.c},null,lv).hint}catch(e){}return h2&&!NO.test(h2)?h2:h1})/* E-GAIN3b law 3: the row hint reads the way itself (its x / BAL numbers), not its optLine whose numbers are already marks (kitHint then said «chẳng được gì») */,off:!!why,why,go:()=>doorPick(pp,j,a.n)})});
+   let x="";try{x=optLine(a)}catch(e){}M.push({id:"t:"+doorTxt(a.n),n:a.n,x,c:a.c,hint:lv=>DOOR.rowHint(a,x,lv)/* E-GAIN3b-FIX law 3: base hint first, the way's own hint only when it names a real gain */,off:!!why,why,go:()=>doorPick(pp,j,a.n)})});
   if(typeof DOOR.more==="function")M=M.concat(DOOR.more(p,r));nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";
   const w=doorWho(p);try{who=w&&typeof WHO==="function"?WHO(w):null}catch(e){}}
  const o=DOOR.rowsJ2(r,M,v);if(!o.length)return null;o.push({n:"Thôi"});return{t:`${r.h}${nm?` <b>${nm}</b>`:""}`,o,who}}})();
