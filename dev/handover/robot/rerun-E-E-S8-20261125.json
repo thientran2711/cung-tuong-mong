@@ -307,6 +307,27 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-cautious4-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-cautious4-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-speed1",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 2868713973,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "f65d019b (resumed through c826eca4…97e55a45)"
+   },
+   "ending": "Hồng nhan bạc mệnh — Bị ban chết vì con không phải cốt nhục hoàng gia (age 35)",
+   "age": 35,
+   "buoi": 3273,
+   "valid": true,
+   "flag": "mixed build (5ab5b80e406e→5a7a9c4004c1→ef5d32d4ff1e); save quota hit at buổi 2589 (QuotaExceeded ×3399, SAVE STALE ×6, SAVE REWIND ×3); 4 tab crashes",
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed1-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed1-moments.md"
   }
  ],
  "parked": [
