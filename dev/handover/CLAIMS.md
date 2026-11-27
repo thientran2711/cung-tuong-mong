@@ -721,3 +721,4 @@ F14ROLE-ROWS (MAIN 182 23:26Z: 413 roles on 70 roads/premises lack F14ROLE rows;
 ILLNESS-CURE (MAIN 182 23:40Z: grave illness offers only «Lui», Sức shown 91–95 vs «nguy kịch» death; whole family cure road + honest Sức/odds words; opus, BIG) | review/illness-cure | (opening, Foreman C ROOT 4-1) | RUNNING | 27/11 23:45Z (Foreman C ROOT 4-1)
 F14ROLE-ROWS (session id for the 23:45Z claim) | review/f14role-rows | session_01PEhRbwC87NmvYopoF5ocup | RUNNING | 27/11 23:41Z (Foreman C ROOT 4-1)
 ILLNESS-CURE (session id for the 23:45Z claim) | review/illness-cure | session_01PEhRbvzcp527pLLt31A9W4 | RUNNING | 27/11 23:41Z (Foreman C ROOT 4-1)
+SAVE-FAIL-WARN (opus fixer; failed save write → kit notice, every writer; MAIN 182 order 23:14Z; reuse saveBlocked j6:115) | review/save-fail-warn | Foreman B ROOT 3 (opening) | RUNNING | 27/11 23:42Z
