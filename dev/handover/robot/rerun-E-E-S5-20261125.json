@@ -10,7 +10,7 @@
  ],
  "note": "flagged lives left #kg82 mini-game boards unplayed per audit (mg quit); verdict INVALID under Foreman E rule 26/11 until F posts the board-play PASS; audit script verdict stays VALID",
  "game": "LIVE github.io",
- "finished": 34,
+ "finished": 36,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -25365,10 +25365,3680 @@
    "exitPick": null,
    "mgDragSkip": null,
    "mgReady": 20
+  },
+  {
+   "life": "E-S5-R5-skilled-4",
+   "dev": "fold",
+   "bot": "sens",
+   "seed": 4290667466,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Xuất gia",
+   "type": "end",
+   "death": false,
+   "age": 30,
+   "buoi": 1437,
+   "harness": {
+    "kind": "realtap",
+    "sha": "f65d019b",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 1,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [],
+    "slice": null,
+    "mgBackN": 69,
+    "mgBackQuitN": 0,
+    "builds": [
+     {
+      "s": "4c4f7d0f+",
+      "b": "a7f223b6780d",
+      "where": "start"
+     },
+     {
+      "s": "48ab87e6",
+      "b": "fddb4bfbce60",
+      "where": "reload"
+     }
+    ],
+    "build0": {
+     "s": "4c4f7d0f+",
+     "b": "a7f223b6780d",
+     "t": "2026-11-27T07:38Z",
+     "at": "2026-11-27T08:58:07.527Z"
+    },
+    "build": {
+     "s": "4c4f7d0f+",
+     "b": "a7f223b6780d",
+     "t": "2026-11-27T07:38Z"
+    },
+    "areaTaps": 7482,
+    "consoleErrN": 306,
+    "ident": {
+     "name": "Bành Kinh Hồng",
+     "org": "Công chúa Phù Tang hòa thân",
+     "born": -19,
+     "at": 1
+    },
+    "dlgScroll": 306,
+    "scrolls": 339,
+    "skipLayerTaps": 525,
+    "mgQuickSkipped": 432,
+    "mgReady": 75,
+    "mgMiss": 1681,
+    "boards": [
+     {
+      "at": 115,
+      "buoi": 1,
+      "kind": "co",
+      "layer": "#kg82",
+      "moves": 5,
+      "area": 0,
+      "s": 8,
+      "res": "10/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 183,
+      "buoi": 4,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 156,
+      "area": 0,
+      "s": 22,
+      "res": "0/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 259,
+      "buoi": 8,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 28,
+      "res": "10/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 360,
+      "buoi": 12,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 123,
+      "area": 0,
+      "s": 22,
+      "res": "2/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 474,
+      "buoi": 16,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 165,
+      "area": 0,
+      "s": 22,
+      "res": "3/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 583,
+      "buoi": 20,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 159,
+      "area": 0,
+      "s": 22,
+      "res": "3/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 658,
+      "buoi": 24,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 142,
+      "area": 0,
+      "s": 22,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 748,
+      "buoi": 28,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 142,
+      "area": 0,
+      "s": 22,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 835,
+      "buoi": 32,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 124,
+      "area": 0,
+      "s": 22,
+      "res": "4/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 916,
+      "buoi": 36,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 166,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1025,
+      "buoi": 40,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 139,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1145,
+      "buoi": 44,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 140,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1508,
+      "buoi": 64,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 29,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1844,
+      "buoi": 80,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 131,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1909,
+      "buoi": 84,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 127,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2016,
+      "buoi": 88,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 155,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2215,
+      "buoi": 96,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 2341,
+      "buoi": 100,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 29,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 2604,
+      "buoi": 111,
+      "kind": "huong",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 44,
+      "s": 78,
+      "res": "3/10 raw 3.21",
+      "raw": 3.214922014655187
+     },
+     {
+      "at": 2876,
+      "buoi": 124,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 128,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 3577,
+      "buoi": 164,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 29,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 3642,
+      "buoi": 168,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 132,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 3750,
+      "buoi": 172,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 3845,
+      "buoi": 176,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 3920,
+      "buoi": 180,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 4095,
+      "buoi": 188,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 144,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4156,
+      "buoi": 192,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 148,
+      "area": 0,
+      "s": 22,
+      "res": "5/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4248,
+      "buoi": 196,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 151,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4317,
+      "buoi": 200,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 4653,
+      "buoi": 224,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 28,
+      "area": 1,
+      "s": 30,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 4730,
+      "buoi": 228,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 172,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4841,
+      "buoi": 232,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 128,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4946,
+      "buoi": 236,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 28,
+      "res": "6/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 5071,
+      "buoi": 240,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 132,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 5161,
+      "buoi": 244,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 163,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 5288,
+      "buoi": 248,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 133,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 5443,
+      "buoi": 256,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 139,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 5576,
+      "buoi": 260,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 28,
+      "area": 1,
+      "s": 29,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 3247,
+      "buoi": 589,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 153,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 3358,
+      "buoi": 593,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 28,
+      "res": "6/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 3465,
+      "buoi": 597,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 135,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 7142,
+      "buoi": 953,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 164,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 7279,
+      "buoi": 961,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 28,
+      "area": 1,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 7378,
+      "buoi": 965,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 151,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 7506,
+      "buoi": 969,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 141,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 7867,
+      "buoi": 989,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 129,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 8049,
+      "buoi": 997,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 124,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 8161,
+      "buoi": 1001,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 1,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 8324,
+      "buoi": 1009,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 29,
+      "res": "6/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 8410,
+      "buoi": 1013,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 148,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 8526,
+      "buoi": 1021,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 1,
+      "s": 29,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 8654,
+      "buoi": 1025,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 131,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 8735,
+      "buoi": 1029,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 128,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 8809,
+      "buoi": 1033,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 28,
+      "res": "6/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 11155,
+      "buoi": 1281,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 144,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 11299,
+      "buoi": 1289,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 27,
+      "res": "6/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 11448,
+      "buoi": 1297,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 151,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 11592,
+      "buoi": 1305,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 27,
+      "res": "6/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 11671,
+      "buoi": 1309,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 146,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 11849,
+      "buoi": 1317,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 1,
+      "s": 29,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 11947,
+      "buoi": 1321,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 28,
+      "area": 1,
+      "s": 27,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 12091,
+      "buoi": 1329,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 28,
+      "res": "6/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 12284,
+      "buoi": 1333,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 1,
+      "s": 28,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 12441,
+      "buoi": 1341,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 159,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 12547,
+      "buoi": 1345,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 3,
+      "s": 28,
+      "res": "6/10 raw 8.00",
+      "raw": 8
+     },
+     {
+      "at": 12630,
+      "buoi": 1349,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 156,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 12716,
+      "buoi": 1353,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 116,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 12780,
+      "buoi": 1357,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 152,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 12840,
+      "buoi": 1361,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 175,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     }
+    ],
+    "boardN": 69,
+    "mgPeekTaps": 6728,
+    "boardTaps": 6728,
+    "mgBackWhy": [
+     {
+      "at": 4653,
+      "buoi": 224,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4730,
+      "buoi": 228,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4841,
+      "buoi": 232,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4946,
+      "buoi": 236,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5071,
+      "buoi": 240,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5162,
+      "buoi": 244,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5289,
+      "buoi": 248,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5443,
+      "buoi": 256,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5576,
+      "buoi": 260,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 3247,
+      "buoi": 589,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 3358,
+      "buoi": 593,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 3465,
+      "buoi": 597,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 7142,
+      "buoi": 953,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 7279,
+      "buoi": 961,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 7378,
+      "buoi": 965,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 7506,
+      "buoi": 969,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 7867,
+      "buoi": 989,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 8049,
+      "buoi": 997,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 8161,
+      "buoi": 1001,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 8324,
+      "buoi": 1009,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 8410,
+      "buoi": 1013,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 8526,
+      "buoi": 1021,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 8654,
+      "buoi": 1025,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 8735,
+      "buoi": 1029,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 8810,
+      "buoi": 1033,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 11155,
+      "buoi": 1281,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 11299,
+      "buoi": 1289,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 11448,
+      "buoi": 1297,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 11592,
+      "buoi": 1305,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 11671,
+      "buoi": 1309,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 11849,
+      "buoi": 1317,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 11947,
+      "buoi": 1321,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 12091,
+      "buoi": 1329,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 12285,
+      "buoi": 1333,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 12441,
+      "buoi": 1341,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 12548,
+      "buoi": 1345,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 12630,
+      "buoi": 1349,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 12716,
+      "buoi": 1353,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 12780,
+      "buoi": 1357,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 12840,
+      "buoi": 1361,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     }
+    ],
+    "infoTaps": 813,
+    "bareCovered": 215,
+    "bareCoveredBy": {
+     "not on the layer scanned": 205,
+     "div.kne.kne-beat over button.mspot.sm.here": 1,
+     "div.kbk-cv over section#panel.panel": 1,
+     "div.kpod-col.kpod-p1 over img#mefig.j59sz.kfxon": 1,
+     "div.kne.kne-beat over div.kmrow": 4,
+     "div.kne.kne-beat over button.tok.fig.bob": 3
+    },
+    "dlgClose": 601,
+    "deadChecks": 10,
+    "deadCheckMs": 33577,
+    "dressPut": 51,
+    "skipCoverTaps": 32,
+    "kipScroll": 8,
+    "kfocVisits": 39,
+    "bareBlocked": 5,
+    "bareBlockedWhy": [
+     {
+      "at": 1929,
+      "buoi": 85,
+      "screen": "#kdaytc «»",
+      "x": 378,
+      "y": 500,
+      "ev": "touchstart",
+      "hit": "div.kmrow",
+      "tgt": "small",
+      "dt": 64,
+      "top0": "b.kdt1"
+     },
+     {
+      "at": 3312,
+      "buoi": 151,
+      "screen": ".kscn «»",
+      "x": 378,
+      "y": 538,
+      "ev": "mousedown",
+      "hit": "button.opt.ka.kodw",
+      "tgt": "span.krl",
+      "dt": 39,
+      "top0": "div.kri-t.kri-front"
+     },
+     {
+      "at": 7292,
+      "buoi": 962,
+      "screen": "#kdaytc «»",
+      "x": 378,
+      "y": 500,
+      "ev": "touchstart",
+      "hit": "div.kmrow",
+      "tgt": "b",
+      "dt": 165,
+      "top0": "b.kdt1"
+     }
+    ],
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-27T10:50:27.049Z",
+      "buoi": 340,
+      "from": "2026-11-27T10:49:43.743Z"
+     }
+    ],
+    "pinUrl": "http://127.0.0.1:8762/",
+    "autoServe": [
+     {
+      "at": "2026-11-27T10:50:35.364Z",
+      "where": "reload",
+      "from": "fddb4bfbce60",
+      "to": "http://127.0.0.1:8762/",
+      "carried": 21
+     }
+    ],
+    "resumeRestore": [
+     {
+      "at": "2026-11-27T10:50:41.843Z",
+      "origin": "http://127.0.0.1:8762",
+      "from": "https://thientran2711.github.io",
+      "want": 1332304,
+      "got": 1332304,
+      "keys": 21
+     }
+    ],
+    "resumeHash": [
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "bfe821c9",
+      "page": "bfe821c9",
+      "same": true,
+      "ckClk": "3.28.2.3",
+      "pageClk": "3.28.2.3"
+     }
+    ],
+    "nextNoTurn": 5,
+    "taps": 11368
+   },
+   "bugs": [
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls ()"
+    },
+    {
+     "type": "harness",
+     "n": 2,
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Thường Nước bào hoa Chải tóc vấn Kiểu cầu kỳ: mỗi »"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Trâm bạc ngọc lan Rất vững TỐN 2 khắc, trâm bạc ng»"
+    },
+    {
+     "type": "dead",
+     "n": 1,
+     "msg": "close button has no effect: .dlg «Danh hiệu lên bậc» «Để sau»"
+    }
+   ],
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": 75
+  },
+  {
+   "life": "E-S5-R5-speed-1",
+   "dev": "fold",
+   "bot": "bold",
+   "seed": 2289644890,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "HARNESS",
+   "type": "harness",
+   "death": null,
+   "age": null,
+   "buoi": 81,
+   "harness": {
+    "kind": "realtap",
+    "sha": "f65d019b",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 6,
+    "unstick": [
+     {
+      "at": 1305,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1316,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1327,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1338,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1349,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1360,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1371,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1383,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1394,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1405,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1416,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1427,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1439,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1450,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1461,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1472,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1483,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1495,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1506,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1517,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1528,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1540,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1551,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1562,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1573,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1584,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1595,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1607,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1618,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1629,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1640,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1651,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1663,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1674,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1685,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1696,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1707,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1718,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1730,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1741,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1752,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1763,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1774,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1786,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1797,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1808,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1820,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1831,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1842,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1854,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1865,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1876,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1887,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1898,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1910,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1921,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1932,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1943,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1954,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1965,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1976,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1988,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 1999,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2010,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2021,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2032,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2044,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2055,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2066,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2077,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2088,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2100,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2111,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2122,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2133,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2144,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2155,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2167,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2178,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2189,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 2194,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 3243,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 3 người."
+     },
+     {
+      "at": 3499,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3510,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3521,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3532,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3544,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3555,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3566,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3577,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3588,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3600,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3611,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3622,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3633,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3644,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3655,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3667,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3678,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3689,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3700,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3711,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3722,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3734,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3745,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3756,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3767,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3778,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3789,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3801,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3812,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3823,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3834,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3845,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3856,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3868,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3879,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3890,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3901,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3913,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3924,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3935,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3946,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3957,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3968,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3979,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 3990,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4002,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4013,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4024,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4035,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4046,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4057,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4069,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4080,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4091,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4102,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4113,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4125,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4136,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4147,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4158,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4169,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4181,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4192,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4203,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4214,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4225,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4236,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4247,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4259,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4270,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4281,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4292,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4303,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4314,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4326,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4337,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4348,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4359,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4370,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4382,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4387,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 2 người."
+     },
+     {
+      "at": 4462,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4473,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4484,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4495,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4507,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4518,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4529,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4540,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4551,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4562,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4573,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4585,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4596,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4607,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4618,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4630,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4641,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4652,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4663,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4674,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4686,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4697,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4708,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4719,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4730,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4741,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4752,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4763,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4774,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4786,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4797,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4808,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4819,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4830,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4841,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4853,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4864,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4875,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4886,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4897,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4908,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4919,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4930,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4941,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4952,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4963,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4974,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4985,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 4996,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5008,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5019,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5030,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5041,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5052,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5063,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5074,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5085,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5096,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5107,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5119,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5130,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5141,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5152,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5163,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5174,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5185,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5196,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5208,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5219,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5230,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5241,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5252,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5264,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5275,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5286,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5297,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5309,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5320,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5331,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5342,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5348,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 4 người."
+     },
+     {
+      "at": 5994,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6005,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6017,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6028,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6039,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6050,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6061,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6073,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6084,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6095,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6107,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6118,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6129,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6140,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6151,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6163,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6174,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6185,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6197,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6208,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6219,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6230,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6242,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6253,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6265,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6276,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6287,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6298,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6309,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6321,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6332,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6343,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6355,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6366,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6377,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6388,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6400,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6411,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6422,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6433,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6444,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6456,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6467,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6478,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6489,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6501,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6512,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6523,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6534,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6545,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6558,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6569,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6580,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6591,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6602,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6614,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6625,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6636,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6648,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6659,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6670,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6681,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6693,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6704,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6715,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6726,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6738,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6749,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6760,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6771,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6782,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6794,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6805,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6816,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6827,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6838,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6850,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6862,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6873,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 6883,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 7200,
+      "lvl": 1,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     },
+     {
+      "at": 7792,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
+     }
+    ],
+    "slice": null,
+    "mgBackN": 6,
+    "mgBackQuitN": 0,
+    "builds": [
+     {
+      "s": "cf61b8e4",
+      "b": "1b04f52f65fd",
+      "where": "start"
+     },
+     {
+      "s": "28d8bd1e",
+      "b": "c701d39f1073",
+      "where": "unstick reload"
+     }
+    ],
+    "build0": {
+     "s": "cf61b8e4",
+     "b": "1b04f52f65fd",
+     "t": "2026-11-27T10:29Z",
+     "at": "2026-11-27T12:01:29.443Z"
+    },
+    "build": {
+     "s": "cf61b8e4",
+     "b": "1b04f52f65fd",
+     "t": "2026-11-27T10:29Z"
+    },
+    "areaTaps": 526,
+    "consoleErrN": 58,
+    "ident": {
+     "name": "Lưu Nhược Lan",
+     "org": "Công chúa Phù Tang hòa thân",
+     "born": -19,
+     "at": 1
+    },
+    "backdropTaps": 2,
+    "skipLayerTaps": 46,
+    "infoTaps": 106,
+    "dlgScroll": 3,
+    "scrolls": 4,
+    "dlgClose": 37,
+    "mgQuickSkipped": 10,
+    "mgReady": 6,
+    "mgMiss": 85,
+    "boards": [
+     {
+      "at": 344,
+      "buoi": 8,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 152,
+      "area": 0,
+      "s": 22,
+      "res": "0/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 447,
+      "buoi": 12,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 26,
+      "res": "10/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 724,
+      "buoi": 20,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 883,
+      "buoi": 24,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 154,
+      "area": 0,
+      "s": 22,
+      "res": "1/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 5704,
+      "buoi": 69,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 29,
+      "area": 0,
+      "s": 27,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 5749,
+      "buoi": 72,
+      "kind": "co",
+      "layer": "#kg82",
+      "moves": 5,
+      "area": 0,
+      "s": 6,
+      "res": "10/10 raw 10.00",
+      "raw": 10
+     }
+    ],
+    "boardN": 6,
+    "mgPeekTaps": 398,
+    "boardTaps": 398,
+    "mgBackWhy": [
+     {
+      "at": 344,
+      "buoi": 8,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 447,
+      "buoi": 12,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 724,
+      "buoi": 20,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 883,
+      "buoi": 24,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5704,
+      "buoi": 69,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 5758,
+      "buoi": 72,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕"
+      ]
+     }
+    ],
+    "dressPut": 7,
+    "bareBlocked": 7,
+    "bareBlockedWhy": [
+     {
+      "at": 945,
+      "buoi": 26,
+      "screen": ".kscn «»",
+      "x": 378,
+      "y": 538,
+      "ev": "mousedown",
+      "hit": "span.kobang",
+      "tgt": "span.kobang",
+      "dt": 47,
+      "top0": "div.kri-t.kri-front"
+     },
+     {
+      "at": 1072,
+      "buoi": 34,
+      "screen": ".kscn «»",
+      "x": 378,
+      "y": 538,
+      "ev": "mousedown",
+      "hit": "button.opt.ka.kodw",
+      "tgt": "span.krl",
+      "dt": 31,
+      "top0": "div.kri-t.kri-front"
+     },
+     {
+      "at": 1268,
+      "buoi": 42,
+      "screen": ".kscn «»",
+      "x": 378,
+      "y": 538,
+      "ev": "mousedown",
+      "hit": "button.opt.ka.kodw",
+      "tgt": "span.krl",
+      "dt": 48,
+      "top0": "div.kri-t.kri-front"
+     },
+     {
+      "at": 3372,
+      "buoi": 49,
+      "screen": ".kscn «»",
+      "x": 378,
+      "y": 538,
+      "ev": "mousedown",
+      "hit": "button.opt.ka.kodw",
+      "tgt": "span.krl",
+      "dt": 56,
+      "top0": "div.kri-t.kri-front"
+     },
+     {
+      "at": 3457,
+      "buoi": 52,
+      "screen": ".kscn «»",
+      "x": 378,
+      "y": 538,
+      "ev": "mousedown",
+      "hit": "button.opt.ka.kodw",
+      "tgt": "span.krl",
+      "dt": 23,
+      "top0": "div.kri-t.kri-front"
+     },
+     {
+      "at": 5913,
+      "buoi": 78,
+      "screen": ".kscn «»",
+      "x": 378,
+      "y": 538,
+      "ev": "mousedown",
+      "hit": "button.opt.ka.kodw",
+      "tgt": "span.krl",
+      "dt": 39,
+      "top0": "div.kri-t.kri-front"
+     },
+     {
+      "at": 5956,
+      "buoi": 79,
+      "screen": ".kscn «»",
+      "x": 378,
+      "y": 538,
+      "ev": "mousedown",
+      "hit": "button.opt.ka.kodw",
+      "tgt": "span.krl",
+      "dt": 49,
+      "top0": "div.kri-t.kri-front"
+     }
+    ],
+    "kipScroll": 64,
+    "kipLoopBan": 4,
+    "kipBanSkip": 12042,
+    "pinUrl": "http://127.0.0.1:8763/",
+    "autoServe": [
+     {
+      "at": "2026-11-27T12:39:21.068Z",
+      "where": "unstick reload",
+      "from": "c701d39f1073",
+      "to": "http://127.0.0.1:8763/",
+      "carried": 16
+     }
+    ],
+    "bareCovered": 10,
+    "bareCoveredBy": {
+     "not on the layer scanned": 10
+    },
+    "skipCoverTaps": 2
+   },
+   "bugs": [
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «!»"
+    },
+    {
+     "type": "game",
+     "n": 8,
+     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls ()"
+    },
+    {
+     "type": "harness",
+     "n": 6,
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Lụa Hàng Châu Rất vững TỐN 2 khắc, lụa Hàng Châu 1»"
+    },
+    {
+     "type": "game",
+     "n": 3,
+     "msg": "item pick grid «» re-opened 3× by «Tiếp ▸» with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi"
+    },
+    {
+     "type": "stuck",
+     "n": 2,
+     "msg": "no progress 15 min on page «Ngọc Thanh các · Ở đây còn 3 người.»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no progress 15 min on page «Ngọc Thanh các · Ở đây còn 2 người.»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no progress 15 min on page «Ngọc Thanh các · Ở đây còn 4 người.»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "item pick grid «» re-opened 3× by «Chọn lá này» with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi"
+    },
+    {
+     "type": "stuck",
+     "n": 2,
+     "msg": "no progress 15 min on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng»"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed"
+    }
+   ],
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": 6
   }
  ],
  "parked_stuck_gamebug": [
   "fold 1770537827 pt_su cautious-4: STUCK Kính sự phòng báo tin sole card no-op; rerun after choose-guard LIVE",
-  "c1 fold 2750626096 STUCK Kính sự phòng báo tin Tắm gội chờ giá (game softlock) buoi 101 after 7 stucks; c3 ipad 1302643430 STUCK Tân quân lập uy Chương 2 / Tin báo buoi 310; rerun after fixes"
+  "c1 fold 2750626096 STUCK Kính sự phòng báo tin Tắm gội chờ giá (game softlock) buoi 101 after 7 stucks; c3 ipad 1302643430 STUCK Tân quân lập uy Chương 2 / Tin báo buoi 310; rerun after fixes",
+  "speed-1 ipad? pf/pt_su: PARKED at buoi 80 y1 rank 1: item pick grid «Biếu quà làm lành» trap (confirm kipgo off-screen after 8 scrolls ×6+, grid re-opened 3× by «Tiếp ▸» with no gift given; every item locked / confirm never usable), ~0 buổi progress in 25 min with 16k steps; ckpt kept"
  ]
 }
