@@ -27,6 +27,7 @@ BAL.ge={
  seat:["NDE","THH","HH","TM"],  /* one per world: taken by anyone → every other ending needing it turns fail-only */
  /* summits that close the life with an epilogue under D4 "rec" (the game cannot simulate the life after) */
  exitSum:["FREE","NUN","FOLLOW","NDE","THH","NV","KING","ANNEX","TM","REUNION"],
+ exitFork:[2,3],       /* leave-palace (owner OD 24/11 ~06:05Z): Ngã rẽ 1 «rời cung» (2) / «theo người» (3) = she leaves the palace → the life closes (jleave «Về sau»), whatever the summit */
  title:{tier:8,carry:"prev"},   /* D5; tier 8 = the top kit plate until K-GE-2 (2-tone Thiên mệnh plate) ships */
  pt:30,                /* leaderboard points of a grand ending (Bảng Thiên mệnh) */
  kimsach:"kimsachtm",  /* the one treasure kind: Kim sách Thiên mệnh (cannot be sold, given or lost, OD:L1314) */
