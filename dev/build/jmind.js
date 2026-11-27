@@ -172,8 +172,8 @@ function giftSpyLearn(a,t){if(!a||!t||a===t)return null;return giftLearn(a,t,"l"
 /* a gift HANDED over in a visit (no carrier card: the event card is the hand-over): a REAL piece from the giver's chest — the one giftPickIx picks — or,
    with none, one she buys at Nội vụ phủ from the given list with her own bạc (law 6c: never a piece made from nothing). Taste rule: giftTaste. null = none. */
 function giftHand(a,r,buy){if(!a||!r)return null;a.inv=a.inv||[];let i=giftPickIx(a,r,e=>!!IT[e.k]&&!e.t&&!itm(e.k).il);
- if(i<0&&Array.isArray(buy)){const L=buy.filter(k=>IT[k]&&(a.bac||0)>=itm(k).pr);if(L.length){const k=L[0];ap(a,{bac:-itm(k).pr});a.inv.push({k,from:"nvp"});i=a.inv.length-1}}
- if(i<0)return null;const P=giftTastePre(a,r,a.inv[i]);const e=a.inv.splice(i,1)[0];const ent=Object.assign({},e,{from:key(a)});(r.inv=r.inv||[]).push(ent);ent.tx=giftTaste(a,r,ent,P);return ent}
+ if(i<0&&Array.isArray(buy)){const L=buy.filter(k=>IT[k]&&(a.bac||0)>=itm(k).pr);if(L.length){const k=L[0];ap(a,{bac:-itm(k).pr});invAdd(a,{k,from:"nvp"});i=a.inv.length-1}}
+ if(i<0)return null;const P=giftTastePre(a,r,a.inv[i]);const e=a.inv.splice(i,1)[0];const ent=Object.assign({},e,{from:key(a)});invAdd(r,ent);ent.tx=giftTaste(a,r,ent,P);return ent}
 Object.assign(window,{giftKnLikes,giftKnDis,giftLearn,giftPickIx,giftSpyLearn,giftTaste,giftHand});
 /* talking: a chance to learn a like (consorts; jdis already learns dislikes the same way) */
 (function(){const c0=chatMark;chatMark=function(v){const r=c0.apply(this,arguments);try{if(v&&!(jdisLikes(v)&&disLikeKeys(v).length)&&!likeKnown(v)&&roll(BAL.mind.learnTalk))learnLike(v,"Chuyện trò")}catch(e){}return r}})();

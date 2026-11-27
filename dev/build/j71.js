@@ -342,12 +342,18 @@ function fPlan7(){const n=nextT7();const f=festAt7(n.m,n.t);if(!f||!FV7[f.k])ret
  const vi=fvPick(f.k);if(vi==null)return null;const pp=fPP7(f.k,vi);if(!pp)return null;pp.y=n.y;fMark7(f.k,vi);j.plans[f.k]={y:n.y,pp,me:0};
  return FV7[f.k][vi][0]==="C"&&!S.confined?fInv7(f.k,pp,true):null}
 /* the festival day */
+/* save-unseen-lists r4 (LAW 11 / 6c): her festival-day contest card (made at the turn of the tuần) is BUILT by a registered generator from the festival
+   key + its plan (variant, entrants as ids, her preparation: carried in ra since rv4; an old {rk,ra:[k]} falls back to j.plans[k]); its «held» mark (P.y)
+   is set before, once — written into the sổ and made again on load. Queued by its caller (not pushed here). */
+const fDayCard7=rcpReg("j71Day",(k,pp0,me0,pb0)=>{const j=j7s();const P=pp0&&typeof pp0==="object"?{pp:pp0,me:me0||0,pb:pb0||0}:(j.plans&&j.plans[k]);if(!P||!P.pp||!FV7[k])return null;const pp=P.pp,V=FV7[k][pp.vi];if(!V||V[0]!=="C")return null;
+  const E=[S].concat(ents7(pp));const meB=(P.me===2?J71.prep:0)+(P.pb||0);
+  return {t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p><p>Ngươi đã ghi tên. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(V[1],S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
+   opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh ${balSg(BAL.rl.j71.danhCRun7)} và quà nhỏ · hỏng: đứng chót thì Danh ${balSg(BAL.rl.j71.danhCRun7_2)} · kèm: thắng thì các phi tần ghen +${ghenN(BAL.ghen.contest)}`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),30),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
+    {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{const L=mgX7(FBIG7.includes(k),()=>cScore7(E.filter(p=>p!==S),()=>V[1],pp.pr||[],0));if(L.length)cFin7(k,V[1],L)}}]}});
 function fDay7(k){const j=j7s();const P=j.plans&&j.plans[k];if(P&&P.y===S.year){const pp=P.pp,V=FV7[k][pp.vi];P.y=-1;
   if(V[0]!=="C")return fMake7(k,null,false,pp);
   const E=[S].concat(ents7(pp));const meIn=P.me>0&&present7(S);const meB=(P.me===2?J71.prep:0)+(P.pb||0);
-  if(meIn&&mgOn7())return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p><p>Ngươi đã ghi tên. Phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(V[1],S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
-   opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đoạt giải, ${pz7(prize7(k))}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh ${balSg(BAL.rl.j71.danhCRun7)} và quà nhỏ · hỏng: đứng chót thì Danh ${balSg(BAL.rl.j71.danhCRun7_2)} · kèm: thắng thì các phi tần ghen +${ghenN(BAL.ghen.contest)}`,go:()=>mgRun7({title:fName7(k),big:FBIG7.includes(k),fk:k,art:V[1],E,kindOf:()=>V[1],pr:pp.pr||[],meB,stakes:stk7(prize7(k),30),done:(L,sh)=>cFin7(k,V[1],L,sh)})},
-    {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>{const L=mgX7(FBIG7.includes(k),()=>cScore7(E.filter(p=>p!==S),()=>V[1],pp.pr||[],0));if(L.length)cFin7(k,V[1],L)}}]};
+  if(meIn&&mgOn7())return fDayCard7(k,pp,P.me,P.pb||0);/* rv4: the plan travels WITH the card — a festival of several tuần (Hội Phượng t:[0,1,2]) is planned again for the next tuần in the same step (fPlan7 replaces j.plans[k]), so a remake from the live plan built another contest or lapsed */
   if(meIn)apply({suc:-J71.cost});window.__j71rows="";const r=cRun7(k,V[1],E,pp.pr||[],meB,meIn);if(!r)return null;log(`${fName7(k)}: ${r}`);
   return{t:`${fShort7(k)} · ${fTitle7(k,pp.vi)}`,h:`<p>${V[2]}</p>${meIn?"":"<p>Ngươi không ghi tên, chỉ đứng xem.</p>"}${window.__j71rows||""}`,who:pEmp(),must:1}}
  return fMake7(k,null,true)}
@@ -386,13 +392,17 @@ PEND.j71x=pp=>{if(!S)return null;const F=FX7[pp.kk];if(!F)return null;const n=li
  return{who:pEmp(),t:`<p class="past">Lời mời · ${F.n} (đầu tháng ${F.m===1?"giêng":"bảy"})</p><p>Hoàng thượng cho các cung ghi tên dâng nghệ trong ${F.n}; ${n} phi tần khác sẽ dự, mỗi người chọn tài nghệ giỏi nhất của mình. Bậc may rủi dưới đây tính theo tài nghệ hiện nay; từ giờ tới ngày hội luyện thêm thì phần thi cao hơn; mỗi lần luyện tập (Luyện cầm kỳ thi họa, Làm thơ dâng lên, Đánh đàn ở ngự hoa viên, Múa trong yến tiệc) thêm +3 phần chuẩn bị, tối đa +12.${mgOn7()?" Ngày hội ngươi tự chơi phần thi; tài nghệ được cộng phần.":""}</p>`,o}};
 function fxInvite7(){const j=j7s();for(const kk in FX7){const F=FX7[kk];const m0=F.m===1?12:F.m-1;if(S.month!==m0||S.tuan!==0)continue;const y=F.m===1?S.year+1:S.year;j.fxi=j.fxi||{};if(j.fxi[F.f]===y)continue;j.fxi[F.f]=y;
   const d=mkP("j71x",{kk,y,sd:1+R(1e6)});if(d)return{t:`${F.n} · Lời mời`,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1}}return null}
+/* save-unseen-lists r4 (LAW 11 / 6c): her festival contest card (made on the festival day, at the step) is BUILT by a registered generator from the
+   festival (title, key), the entrants (people as ids) and her preparation; her entry is marked done before, once — written into the sổ and made again on load */
+const j71FestCard=rcpReg("j71Fest",(title,kk,E,meB)=>{const F=FX7[kk];if(!F)return null;const j=j7s();const me=j.fx&&j.fx[F.f];if(!me||me.a==null)return null;
+ const m={ev:1,t:`${title}`,h:`<p>Ngày ${title}. Ngươi đã ghi tên dâng ${SC7[me.a].n}; phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(me.a,S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
+    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đứng đầu, Sủng ${balSg(BAL.eff.j71.sungStakes)}, Danh ${balSg(BAL.eff.j71.danhStakes)}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh ${balSg(BAL.eff.j71.danhFxRank)} và quà nhỏ · hỏng: đứng chót thì Danh ${balSg(BAL.rl.j71.danhFxFin7)} · kèm: đứng đầu thì các phi tần ghen +${ghenN(BAL.ghen.contestTop)}`,go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7({sung:BAL.eff.j71.sungStakes,danh:BAL.eff.j71.danhStakes},50),done:(L,sh)=>fxFin7(title,L,sh)})},
+     {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>fxFin7(title,mgX7(true,()=>cScore7(E.filter(p=>p!==S),p=>fxBest7(p,F.arts),[],0)))}]};Q.push(m);return m});
 (function(){if(typeof festival!=="function")return;const f0=festival;festival=function(title,kk){try{const F=FX7[kk];if(!F||!S||S.dead||window.__j71off||!j7On())return f0.apply(this,arguments);
   const j=j7s();const me=j.fx&&j.fx[F.f]&&j.fx[F.f].y===S.year&&j.fx[F.f].a&&present7(S)?j.fx[F.f]:null;
   const E=liveRivals(true).filter(present7);if(me)E.unshift(S);if(E.length<2)return "";if(me)me.done=1;
   const meB=me?(me.pr?J71.prep:0)+(me.pb||0):0;
-  if(me&&mgOn7()){Q.push({ev:1,t:`${title}`,h:`<p>Ngày ${title}. Ngươi đã ghi tên dâng ${SC7[me.a].n}; phần của ngươi = phần tự chơi, cộng thêm theo tài nghệ (${det7(me.a,S)}) và chuẩn bị +${meB}.</p>`,who:pEmp(),must:1,
-    opts:[{n:"Vào thi (tự chơi phần thi)",fx:{suc:-J71.cost},x:`đứng đầu, Sủng ${balSg(BAL.eff.j71.sungStakes)}, Danh ${balSg(BAL.eff.j71.danhStakes)}, kèm vật quý và bạc theo hạng · hạng nhì hoặc ba: Danh ${balSg(BAL.eff.j71.danhFxRank)} và quà nhỏ · hỏng: đứng chót thì Danh ${balSg(BAL.rl.j71.danhFxFin7)} · kèm: đứng đầu thì các phi tần ghen +${ghenN(BAL.ghen.contestTop)}`,go:()=>mgRun7({title,big:true,fk:F.f,art:me.a,E,kindOf:p=>p===S?me.a:fxBest7(p,F.arts),pr:[],meB,stakes:stk7({sung:BAL.eff.j71.sungStakes,danh:BAL.eff.j71.danhStakes},50),done:(L,sh)=>fxFin7(title,L,sh)})},
-     {n:"Bỏ thi",fx:{},x:"không được không mất",go:()=>fxFin7(title,mgX7(true,()=>cScore7(E.filter(p=>p!==S),p=>fxBest7(p,F.arts),[],0)))}]});return ""}
+  if(me&&mgOn7()){j71FestCard(title,kk,E,meB);return ""}
   if(me)apply({suc:-J71.cost});
   const L=capRank7(cScore7(E,p=>p===S?me.a:fxBest7(p,F.arts),[],meB));const w=L[0].p;ap(w,win7());if(empGive(w,50,"contest"))try{bestow(w,"contest")}catch(e){}
   let r="";const mi=L.findIndex(x=>x.p===S);

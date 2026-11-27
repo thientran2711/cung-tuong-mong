@@ -582,4 +582,38 @@ function knwOf(id){const Z=S.knw;if(!Z||!Z.K[id])return[];return Object.keys(Z.K
 })();
 Object.assign(window,{knwSee,knwGossip,knwOf});
 /* night-ledger-coop r4: the seller's card is carried as data (j3 rcpReg: seller + news, people as ids) */
-knSellCard=rcpReg("knSell",knSellCard);
+/* save r6 (LAW 11, probe iPad seed 1 rv10 LOST-AT-WRITE «Có người bán tin»): the news object carries code (a fact's go, a happening), so rcpEnc
+   threw and the card had no rk — a code card made at a step, left out of the sổ. The card now carries the seller + the news ID only; the news is
+   found again from the live world (knSellNews, the same list the offer was picked from). An old {rk:"knSell", ra:[s, news]} still works */
+const knSellCard0=knSellCard;
+/* the news as plain data (its code — a fact's go — left out; people stay people, carried as ids) */
+const knSellData=n=>{const c={};for(const k in n){const v=n[k];if(typeof v==="function")continue;if(k==="f"&&v&&typeof v==="object"){const f={};for(const q in v)if(typeof v[q]!=="function")f[q]=v[q];c.f=f}else c[k]=v}return c};
+/* the live news with this id, read as the offer was (J78MEMO pass, as knSellTick); S is left as it was (j78facts adds an empty S.intel) */
+const knSellLive=(s,id)=>{/* empty stores the fact readers make lazily (S.intel, S.j95 and its lists) are taken away again: the remake leaves S as it was */
+   /* S.tb (Tai mắt news) rolls itself forward to the current buổi / khắc on any read (knTb, knNo): the read here is put back as it was —
+      the next real read (render) makes the same roll (owner time only), so nothing is lost or gained (probe rv12 iPad s1 REMAKE-SIDE [S.tb]) */
+ const emp=v=>v&&typeof v==="object"&&!Object.keys(v).length;const k0=new Set(Object.keys(S)),j0=S.j95?new Set(Object.keys(S.j95)):null;const M0=window.J78MEMO;let N=null;const tb=S.tb;
+ /* r7 (independent check C3): S.tb is put back BY REFERENCE (the roll re-assigns top-level stores, e.g. knNo's T.no); only a store changed in place
+    falls back to a JSON copy, and that (or any throw here) is logged + counted in window.__knLive (no silent loss; the probe reads it) */
+ const tbR=tb?Object.assign({},tb):null,tbJ={};if(tb)for(const k of Object.keys(tb))try{tbJ[k]=JSON.stringify(tb[k])}catch(e){tbJ[k]=null}
+ try{window.J78MEMO=M0||new Map();N=knSellNews(S,s).find(q=>q.id===id)||null}catch(e){console.error("knSellLive read",e);knLiveFlag("read")}
+ finally{window.J78MEMO=M0;try{if(S.j95&&j0)for(const k of Object.keys(S.j95))if(!j0.has(k)&&emp(S.j95[k]))delete S.j95[k];
+  for(const k of Object.keys(S))if(!k0.has(k)&&(emp(S[k])||k==="j95"&&Object.values(S[k]).every(emp)))delete S[k];
+  if(!tb&&!k0.has("tb")&&S.tb)delete S.tb;
+  if(tb&&S.tb===tb){for(const k of Object.keys(tb))if(!(k in tbR))delete tb[k];
+   for(const k of Object.keys(tbR)){if(tb[k]!==tbR[k]){tb[k]=tbR[k];continue}let j=null;try{j=JSON.stringify(tb[k])}catch(e){}if(j!==tbJ[k]){if(tbJ[k]==null){knLiveFlag("tb:"+k);continue}tb[k]=JSON.parse(tbJ[k]);console.warn("knSellLive: S.tb."+k+" changed in place, put back as a copy");knLiveFlag("tbcopy:"+k)}}}
+  }catch(e){console.error("knSellLive restore",e);knLiveFlag("restore")}}return N};
+function knLiveFlag(w){const L=window.__knLive=window.__knLive||{};L[w]=(L[w]||0)+1}
+/* r7 (independent check C1): the carried copy has no code, so buying it ran no follow-up (a «Sủng vừa lên/xuống» fact could come again).
+   The follow-up = the live fact with the same key about the same person (its go marks what she now knows: seeLoc, dKnown, onGuard, a trait);
+   for favour (fav / sung, both S.kf) a newer favour fact stands in. No such live fact → nothing to mark (that news is no longer offered either) */
+function knCarryGo(n){try{const o=n&&n.about;const f=n&&n.f;if(!o||!f||!f.k||o===S)return"";const kd=String(f.k).split(":")[0];
+ let F=[];try{F=j78facts(o)}catch(e){}const fv=knFavFact(o);if(fv)F.push(fv);
+ const KF=["fav","sung"];/* both write S.kf (what she last knew of his favour): a newer favour fact stands in for the gone one */
+ const g=F.find(x=>x&&x.k===f.k)||(KF.includes(kd)&&F.find(x=>x&&KF.includes(String(x.k).split(":")[0])));return g&&typeof g.go==="function"?(g.go()||""):""}catch(e){console.error("knCarryGo",e);knLiveFlag("carryGo");return""}}
+const knSellById=rcpReg("knSell",(s,n)=>{if(!s||!n||typeof n!=="object")return null;
+ /* remade on load: the live news with this id when it is still there (its follow-up kept), else the carried copy (same text and price) */
+ const N=RCPRE&&typeof n.id==="string"?knSellLive(s,n.id):null;
+ const C=N||(n.kind==="fact"&&n.f&&typeof n.f==="object"&&typeof n.f.go!=="function"?Object.assign({},n,{f:Object.assign({},n.f,{go:()=>knCarryGo(n)})}):n);return knSellCard0(s,C)});
+/* the live offer: built from the live news; carried as {rk:"knSell", ra:[seller, the news as data]} (the shape rcpReg gives) */
+knSellCard=function(s,n){const m=knSellCard0(s,n);try{if(m&&m.opts&&m.opts.length&&!RCPRE&&n&&typeof n==="object"){const a=rcpEnc([s,knSellData(n)]);if(JSON.stringify(a).length<RCP_MAX){m.rk="knSell";m.ra=a}else m.__rkLen=JSON.stringify(a).length}}catch(e){if(m)m.__rkErr="knSell"}return m};

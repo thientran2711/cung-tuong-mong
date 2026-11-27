@@ -1714,7 +1714,7 @@ const RTHEME67={tt_co:"court",tt_oan:"family",tt_tranh:"family",tt_mat:"court",d
  cn_chu:"court",cn_tinh:"emp",cn_ban:"med",cn_than:"family",nc_gian:"emp",nc_su:"emp",nc_tuc:"court",nc_vuong:"emp",td_an:"family",td_ke:"family",td_song:"family",td_tha:"court",
  ch_co:"court",ch_benh:"med",ch_ho:"court",ch_bi:"court",thd_tho:"scholar",thd_sach:"scholar",thd_tro:"scholar",thd_hoc:"scholar",cnv_chu:"court",cnv_ban:"court",cnv_mat:"emp",cnv_ma:"court",
  s_than:"family",s_thu:"court",s_hoa:"emp",s_su:"emp",s_dich:"med",s_tinh:"med",s_thay:"court",s_ban:"court",st_the:"court",st_con:"med",st_dong:"emp"};
-function reward67(theme,tier){if(tier<0)return null;const k=(RPOOL67[theme]||RPOOL67.court)[Math.min(3,tier)];if(!IT[k])return null;S.inv=S.inv||[];S.inv.push({k,from:"story"});
+function reward67(theme,tier){if(tier<0)return null;const k=(RPOOL67[theme]||RPOOL67.court)[Math.min(3,tier)];if(!IT[k])return null;S.inv=S.inv||[];invAdd(S,{k,from:"story"});
  return {k,row:["Phần thưởng",`${itm(k).n} · <b>${RTIER67[Math.min(3,tier)]}</b> · ${itm(k).d} (đã vào Rương)`,"g"]}}
 function rTier67(A,E,ign){if(ign)return -1;const long=A&&A.seq&&A.seq.length>=5?1:0;return E.k>0?1+long+(A.sc>=3?1:0):E.k===0?0:-1}
 /* chapter end (replaces the earlier one: reward instead of a random gift; ignored chapters say so) */

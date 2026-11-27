@@ -239,7 +239,7 @@ try{KG82_ENG.hoadien=kgHoaDien;KG82_KIND.hoadien={e:"hoadien",n:"Dán hoa điề
 
 /* ---------- getting one: shop, NPC hands (→ their gifts), found, +1 per promotion ---------- */
 (function(){if(typeof restock!=="function")return;const r0=restock;restock=function(){const r=r0.apply(this,arguments);try{if(roll(BAL.hd.shop)){const k=hdPick(Math.max(1,Math.min(8,wdPOf(S)-1+R(3))));if(k&&!S.shop.includes(k))S.shop.push(k)}}catch(e){}return r}})();
-(function(){if(typeof wdNpcInit!=="function")return;const n0=wdNpcInit;wdNpcInit=function(v){const r=n0.apply(this,arguments);try{if(v&&!v.hdI&&!v.coop/* E44j: never NPC starting pieces into her entry (j92 wdNpcInit family) */){v.hdI=1;if(roll(BAL.hd.npcHave)){const k=hdPick(Math.max(1,Math.min(8,wdPOf(v)-1+R(2))));if(k){v.inv=v.inv||[];v.inv.push({k,from:"base0"})}}}}catch(e){}return r}})();
+(function(){if(typeof wdNpcInit!=="function")return;const n0=wdNpcInit;wdNpcInit=function(v){const r=n0.apply(this,arguments);try{if(v&&!v.hdI&&!v.coop/* E44j: never NPC starting pieces into her entry (j92 wdNpcInit family) */){v.hdI=1;if(roll(BAL.hd.npcHave)){const k=hdPick(Math.max(1,Math.min(8,wdPOf(v)-1+R(2))));if(k){v.inv=v.inv||[];invAdd(v,{k,from:"base0"})}}}}catch(e){}return r}})();
 function hdGive(p,why){const P=Math.max(1,Math.min(8,wdPOf(p)));const k=hdPick(P);if(!k)return"";const g=wdGain(p,k,{from:why==="promo"?"nvp":"find",nvp:why==="promo"});if(!g)return"";const n=WD_ITEMS[k].n;
  if(p!==S)return"";return why==="promo"?` Nội vụ phủ đưa sang một <b>${n}</b> mừng tấn phong (đã vào Rương).`:`Cung nữ dọn rương cũ, tìm được một ${n}.${g.txt||""}`}
 (function(){if(typeof promoteP!=="function")return;const p0=promoteP;promoteP=function(p){const r0=rkOf(p),al=p===S||p.alive;const r=p0.apply(this,arguments);
@@ -247,5 +247,5 @@ function hdGive(p,why){const P=Math.max(1,Math.min(8,wdPOf(p)));const k=hdPick(P
 (function(){if(typeof wdMonth!=="function")return;const m0=wdMonth;wdMonth=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead&&!S.out&&roll(BAL.hd.find)){const t=hdGive(S,"find");if(t)try{log(t)}catch(e){}}}catch(e){}return r}})();
 
 /* ---------- old saves: a hoa điền worn in the Cài tóc slot (it was a "tram" until hoa-dien) goes back to the chest ---------- */
-(function(){const o0=wdOf;wdOf=function(p){const w=o0.apply(this,arguments);try{if(w&&w.tram&&hdIsK(w.tram.k)){const e=w.tram;w.tram=null;if(e.from!=="base"){p.inv=p.inv||[];p.inv.push(e)}const k=wdDefault(p,"tram");if(k)w.tram={k,from:"base"}}}catch(e){}return w};window.wdOf=wdOf})();
+(function(){const o0=wdOf;wdOf=function(p){const w=o0.apply(this,arguments);try{if(w&&w.tram&&hdIsK(w.tram.k)){const e=w.tram;w.tram=null;if(e.from!=="base"){p.inv=p.inv||[];invAdd(p,e)}const k=wdDefault(p,"tram");if(k)w.tram={k,from:"base"}}}catch(e){}return w};window.wdOf=wdOf})();
 window.hdQ=hdQ;window.hdNpc=hdNpc;window.hdOwned=hdOwned;window.hdAnchor=hdAnchor;window.hdLux=hdLux;window.hdStep=hdStep;
