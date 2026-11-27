@@ -81,3 +81,10 @@ road-full cnv_chu (sideq harness, seeded, one process at a time):
 Not in this branch (reused only): review/sideq-road-fold dev/test/road-full.js + dev/test/lib/qdrain.js + dev/test/story14-frame.js harness fix (jdayq holds the turn when __bot is unset → LIVE road-full / story14-frame bots never leave ch.1). When both land, story14-frame here and there differ only in item 3's line (mine) and the harness lines (theirs) — separate hunks.
 
 Files: dev/build/jst14.js, dev/build/jroad.js, dev/test/f14role-inherit.js (new), dev/test/road-cut.js (new), dev/test/story14-frame.js (item 3 line), index.html + sw.js (build_site.sh; assets.json = LIVE). No BAL, no wording, no kit change.
+
+## Re-merge on newer LIVE 8330e8b8 (lc32-livebugs = rv26 + live-bugs-2711)
+Only built files conflicted (index.html, sw.js → LIVE, then build_site.sh; assets.json = LIVE). On the merged build: f14role-inherit PASS 6/6 · road-cut PASS 273/273 · quickcheck ALONE PASS (core gates PASS; open 1966 ms; old LIVE save loads + plays; perf new/live render 255/316, tab 488/477, buổi 1514/1551 ms). The long gates above (road-full sample, story14-frame, road-saves) ran on the 772bee4f merge; LIVE's new source (save stack + live bugs) does not touch jst14 / jroad / jend14 / j67.
+
+## Handover / open items
+- FOR MAIN: rows for the 70 roads/premises with no reviewed F14ROLE row (413 roles) — content review role by role; until then story14-frame item 3 FAILs and those roads' rivals are never «hostile».
+- review/sideq-road-fold (harness fix for road-full / story14-frame / road-saves …) should land so these bots play on LIVE.
