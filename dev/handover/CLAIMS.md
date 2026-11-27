@@ -627,3 +627,4 @@ ALLOT-SEASON (Nội vụ phủ allotment plan: fabric by season, cosmetics, than
 act-move law-3 fix | review/act-move | session_01Rc5AsM9iW1G2zcaDL3uNtq | RUNNING | 2026-11-27T05:30Z (ACT-MOVE-6, MAIN 172; ACT-MOVE-5 rolled)
 lander | land-chain-28 | session_01Rc5AsKBqhCq1XrtewR7VyR | RUNNING | 2026-11-27T05:36Z (LC28, MAIN 172)
 boot skeleton flash (owner bug) | review/boot-skel-flash | session_01Rc5AsLUw7gDgkkzHaZqLd7 | RUNNING | 2026-11-27T05:42Z (MAIN 172)
+item-detail blank space (owner bug, kit frame family) | KK56 branch | session_01Rc5AsJ6UhcqbDDXVR7k7Bq | RUNNING | 2026-11-27T05:44Z (MAIN 172)
