@@ -219,3 +219,4 @@ FOR MAIN 165 (Foreman C ROOT 3-1-1-1-1, ~23:25Z 26/11): evidence-card «Ban ch�
 - (27/11 ~08:08Z) FROM MAIN 174: ALLOT-SEASON PASS (RV-163G) → review/allot-season-rv163g 72a6e1c8 → LC28 Bundle 3. Economy note for Foreman D (not blocking): hoarder gets 13–16 % of bổng back as silver at resell price (= selling to Nội vụ phủ); knobs BAL.stip.keep.*, BAL.stip.resell if D wants lower.
 - (27/11 ~08:10Z) MAIN 174: act-move-law3 516752a3 FAIL F2 → OD MAIN-rec row (flaunt Danh reuse e-gain3b; Lạnh nhạt Nguy hiểm − BAL.tw.g.coldRisk) → ACT-MOVE-6.
 - (27/11 ~08:12Z) MAIN 174: RV-163G rolled+archived → **BIG REVIEWER RV-163H session_01Rc5AsLWoEtAwPsYkTNEVXz** (oan-pace-ghen-lc28 fa35bacd → LAND-REMERGE ob-ngoaicung/e-pack-c/titles-daycard → act-move-law3 F2 re-review). Workers told.
+- (27/11 ~08:15Z) MAIN 174 ROLLING (ctx ~28 %): handover dev/handover/TAKEOVER_MAIN_175.md; opening MAIN CHÍNH 175. Send everything to 175.
