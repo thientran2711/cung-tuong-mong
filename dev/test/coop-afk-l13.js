@@ -126,6 +126,9 @@ const DUMP=o=>o.p.evaluate(()=>{try{const m=document.getElementById('modal');ret
     await sleep(2500);await Z.p.evaluate(()=>{window.__ownEnd=0;const f=endTurn;endTurn=function(){if(!COOPW.ctx)window.__ownEnd++;return f.apply(this,arguments)};if(typeof COOPW.weekEnd==="function"){const g=COOPW.weekEnd;COOPW.weekEnd=function(){if(!COOPW.ctx)window.__ownEnd++;return g.apply(this,arguments)}}});
     const z1=await D(Z);console.log('reload trace',JSON.stringify((z1.tr||[])));if(process.env.VIDEO){await shot(A,'rl-2-host-after');await shot(B,'rl-2-guest-after')}
     ok(z1.date===z0.date&&((z1.w===z0.w&&z1.b===z0.b&&z1.pend===z0.pend&&z1.sent===z0.sent)||(z1.w===z0.w+1&&!z1.pend&&z0.w===(await D(Z===A?B:A)).w-1))/* its kept end may already have gone out: the room stepped once from it */,'reload: '+Z.name+' keeps the SAME week end (same date; same pend / sent, or the room stepped once from it): no replay',[z0,z1]);
+    /* reviewer r4 (MUTATE gk=false passed: the host's view heals her screen within ~150 ms, so the date check alone cannot tell): at level 13
+       her phone must take back HER OWN copy (trace «restored»), never refuse it as «date ahead» and fall to the room's week start */
+    if(Z===B&&lv.gW){const t=await B.p.evaluate(()=>(COOPW.tr||[]).filter(x=>/^restored |^restore: /.test(x)));ok(t.some(x=>/^restored /.test(x)),'reload: guest at level 13 gets HER OWN copy back (restored, not the room\'s week start)',t)}
     for(const o of [A,B])await setTm(o,{nightMs:+process.env.NAFMS2||8000,buoiMs:600000});await reset(A)}}
   /* from here the AFK seat is never touched; the other plays on like a player */
   const t0=Date.now();let hit=HIT0,st=-1;while(Date.now()-t0<NMS+MARGIN+60000){await clear(Y);if(!hit)hit=await RUN.p.evaluate(()=>window.__afkHit||0);
