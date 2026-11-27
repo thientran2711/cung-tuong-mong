@@ -368,3 +368,8 @@ cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) 
   seal value `kitResultSeal("soft")` → «BỎ DỞ» (grey `.sure`); rows «Người ấy» (`kr-tgt`) and «Ai làm» (`kr-by`); `kaAim` / `kaAimVerdict` / `kaAimUse`;
   the night card (jne `kitNightEnd`) uses the same parts («Kết cục» row with a `kitChip(seal)`). KK39: please confirm or restyle in place.
   Open word question for MAIN: the brief says «Hỏng»; the kit seal word stays BẠI (one place to flip: kitResultSeal).
+
+## 27/11 KK53 — kitPick plaque: ONE «Chọn» + silk card face (MAIN 169 ruling 01:27Z; owner OD 27/11 ~01:35Z / ~01:40Z)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 27/11 | KK53 (MAIN 169/170) | **kitPick lifted plaque: ONE kit «Chọn» (.kbtn, `BAL.kpkgo`) under the plaque, no ✕ / ✓** (canon overwrite of KK51); **every plaque = thẻ lụa** (ivory silk face, pale-gold 1 px border, dark-red title, lifted = brighter + soft gold glow; CSS only); **doubled odds clause fixed at its root** (jopic kitOptFinal strips a whole odds-word clause from the hint before it fills Được; jk2b kitHintRow reads a repeated clause once) | every kitPick board (people, dialogue answers, ring picker) | MAIN / RB-8 / KIT-STAGE-R8 | **BUILT on review/kk53** |
