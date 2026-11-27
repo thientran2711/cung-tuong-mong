@@ -77,7 +77,7 @@ Object.assign(BAL,{shelf:{
  allowF:1,          /* dwelling allowance = her rank allowance (jinv luxAllow) × allowF */
  plainF:.15,lv3:1.5,/* sc below plainF × allowance = đơn sơ; above allowance = xa hoa; above lv3 × allowance = quá xa xỉ */
  /* what a visitor's eye does (once per visitor and owner every see.cdW tuần) */
- see:{cdW:4,supAff:[0,0,-4,-8],ghen:[0,0,3,6],/* NPC↔NPC jealousy → oán × BAL.net.ghenOanK (review/net-ghen: the one rule, was npcOanK .5 here) */fitAff:2,nguGhen:2,witherAff:-2,seenW:12},
+ see:{cdW:4,supAff:[0,0,-4,-8],ghen:[0,0,3,6],/* NPC↔NPC jealousy → oán × BAL.oanCool.ghen.npc (review/net-ghen: the one rule, was npcOanK .5 here) */fitAff:2,nguGhen:2,witherAff:-2,seenW:12},
  /* EACH person's own taste for luxury (owner OD 17/11 ~19:50Z: "mỗi người sẽ có một cái độ thích và ghét xa xỉ khác nhau"): taste −1 (hates show) … +1 (loves it)
     = Σ nết weights (tr, the one trait pool) + trọng weights (jtrong) + a once-per-life personal lean (S.ctxSeed hash, ± spread), clamped.
     The viewer judges a room against HER OWN line: allowance × (1 + taste × k) — a frugal eye calls a lawful (even ngự ban) room "quá xa xỉ", a lover of show admires
@@ -236,7 +236,7 @@ window.shelfLook=shelfLook;window.shelfSeen=shelfSeen;window.shelfNow=shelfNow;
 function shelfReact(obs,t){if(!obs||!t||obs===t||obs===S)return"";const B=BAL.shelf.see;obs.shR=obs.shR||{};const k=wdKey(t);if(obs.shR[k]!=null&&wk()-obs.shR[k]<B.cdW)return"";obs.shR[k]=wk();
  const x=shelfLux(t);if(!x.n)return"";const pl=shelfLvFor(obs,t),ta=shelfTaste(obs);const sup=obs.queen||rkOf(obs)>rkOf(t);let m=1;try{m=tv(LUX_TR,obs)||1}catch(e){}
  /* by HER OWN eye (taste): too lavish → a superior frowns, a peer envies; to her liking → admired, a lover of show admires more */
- /* W10 (RV4 N2, one raise rule): every jealousy rise goes through j1 ghenUp — t = her → obs.ghen + the Chạnh lòng feeling; t = an NPC → obs's oán toward t × BAL.net.ghenOanK */
+ /* W10 (RV4 N2, one raise rule): every jealousy rise goes through j1 ghenUp — t = her → obs.ghen + the Chạnh lòng feeling; t = an NPC → obs's oán toward t × BAL.oanCool.ghen.npc */
  if(pl>=2){if(sup)affAdd(obs,t,B.supAff[pl]);else ghenUp(obs,Math.round(B.ghen[pl]*m),`thấy ${t===S?"ngươi":t.name} bày đồ xa hoa`,t)}
  else if(pl===1)affAdd(obs,t,B.fitAff+Math.round(Math.max(0,ta)*BAL.shelf.taste.likeAff*(x.lv>=2?1:.5)));
  if(!sup&&shelfList(t).some(e=>e.from==="emp"||e.from==="th"))ghenUp(obs,B.nguGhen,`thấy ${t===S?"ngươi":t.name} bày đồ ngự ban`,t)

@@ -1,7 +1,7 @@
 /* relshow-rt (review/net-ghen, law 11 «shown == applied»): in a fresh life, for EVERY consort and several amounts,
    (1) the shared preview pvOan / pvQuy (jaudit §5, the one function every wired text prints) brackets what oanAdd / affAdd REALLY apply
        (the j28 nết wrappers); when she knows all of the holder's nết the preview is ONE number and must equal the applied one;
-   (2) the ghen rule: ghenUp caused by another consort raises no jealousy of HER and gives oán toward that consort × BAL.net.ghenOanK;
+   (2) the ghen rule: ghenUp caused by another consort raises no jealousy of HER and gives oán toward that consort × BAL.oanCool.ghen.npc (promo-stack-lr4: LIVE pace-all key);
        ghenCool is the one cooling rule for an NPC holder and for her own v.pg;
    (3) the wired text builders render without an error (j78out, evidenceActs, apHostOpts, talkOpts per consort).
    usage: node dev/test/relshow-rt.js [index.html]   exit 1 on any miss */
@@ -21,8 +21,8 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
     const cap2=a0+ga>=BAL.linkRange.rl[1];const ok2=sq&&(cap2||(ga>=sq[0]&&ga<=sq[1]));out.rows.push(["aff",v.name,n,sq&&sq.join("..")||"?",ga,ok2?"ok":"MISS"]);if(!ok2)out.miss.push(`thiện cảm ${v.name} n=${n} shown ${sq} applied ${ga}`)}}
   // (2) ghen rule
   if(L.length>=2){const [v,w]=L;const g0=v.ghen||0,o0=oan(v,w);const d=ghenUp(v,10,"thử",w);const g1=v.ghen||0,o1=oan(v,w);
-   out.ghen.push(`NPC-caused: ghen of her ${g0}→${g1} (want same), oán ${v.name}→${w.name} ${o0}→${o1} (want +${Math.round(10*BAL.net.ghenOanK*persF(v,"slight",1))})`);
-   if(g1!==g0||d!==0)out.miss.push("ghenUp by an NPC still raised her ghen");if(o1-o0!==Math.round(10*BAL.net.ghenOanK*persF(v,"slight",1))&&o0+10<BAL.linkRange.ro[1])out.miss.push(`ghen→oán ${o1-o0}`);
+   out.ghen.push(`NPC-caused: ghen of her ${g0}→${g1} (want same), oán ${v.name}→${w.name} ${o0}→${o1} (want +${Math.round(Math.max(1,Math.round(10*BAL.oanCool.ghen.npc))*persF(v,"slight",1))})`);
+   if(g1!==g0||d!==0)out.miss.push("ghenUp by an NPC still raised her ghen");if(o1-o0!==Math.round(Math.max(1,Math.round(10*BAL.oanCool.ghen.npc))*persF(v,"slight",1))&&o0+10<BAL.linkRange.ro[1])out.miss.push(`ghen→oán ${o1-o0}`);
    const h0=v.ghen||0;ghenUp(v,5,"thử",S);if((v.ghen||0)!==Math.min(100,h0+5))out.miss.push("ghenUp by her did not raise");
    const c60=ghenCool(v,60,false),s60=ghenCool(S,60,false);out.ghen.push(`ghenCool 60 → NPC ${c60} · her ${s60}`);if(!(c60<60&&s60<60))out.miss.push("ghenCool")}
   // (3) text builders
