@@ -1,0 +1,9 @@
+# R6-cautious-2 (iPad 1180x820, bot=sens, seed 4092526129, pf/pt_tang) — end-of-life notes — COUNTED, flags «mixed build (pin-server resume)» + «save quota»
+Ending **Lãnh cung — «Tuổi xuân qua đi» («sống cô quạnh nơi thâm cung»)**, age 40, year 23, rank 0 at the end, **3160 buổi**, 4261 real taps since the last resume (5 resumes), 0 JS clicks, 8 bug rows, 0 dead buttons. robot-audit VALID (game-imposed natural ending). From the result JSON + moment log; not played by eye: no score table.
+## Builds / harness / flags
+≈ 36 h, 4 builds (4eb0cbfc91b0 pinned → fb660cb78eec → 5a7a9c4004c1, plus the start build): flag «mixed build (pin-server resume)». Harness 2df8f5fa → 8ea10d7e → 97e55a457; 5 same-life resumes (b1024, b2346, b2445, b2484, b2631) incl. two OOM «Page crashed» (b1027, b2347: headless Chrome killed by the 15 GB cgroup with 4 big lives running). **Flag «save quota»**: from ≈ buổi 2636 (save 5.19M chars) every localStorage.setItem failed (QuotaExceededError ×1435, «SAVE STALE» ×3): the stored save stopped following the live game for the last ≈ 500 buổi — a reload/crash would have rolled the player back to year ≈ 19.
+## Findings
+1. **GAME (data loss): the save no longer fits localStorage at ≈ 5.19M chars (year ≈ 19-20) — reported to Foreman E 27/11 02:20Z (fix = packed save in save-fix-stack, not LIVE). cautious-2, rebel-1, greedy-1 and lazy-4 all hit it.**
+2. GAME: «no way out: no button of the dialog can be reached» at #kdaytc (×2, year 8): a day-card dialog whose buttons are below the fold (older build).
+3. DESIGN: rank 3 at year 3 (buổi 266), falling to 0 by year 8, then 15 quiet Lãnh cung years: the same shape as lazy-4/greedy-1 (no mid-game recovery, no story closure; owner 25/11 07:15Z); 380 offers seen / 134 picked (35 %).
+4. HARNESS (closed by F): NO-EXIT .kmov picker stall (95 steps), the build-mismatch halts, the OOM crashes (RAM, not the game).
