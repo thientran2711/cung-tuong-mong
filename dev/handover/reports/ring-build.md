@@ -236,3 +236,4 @@ PRIORITY #1 CHECK: OD 26/11 ring rows + RB-7 handover (read) | main 17f23656 non
 ## Gates (file:// build of the merge)
 - ring-overlap F+I 36 states: overlap 0 / headCut 0 / layerOverNav 0 / errs 0 (one flaky Fold `group-ring` 264 px² against the lingering KẾT QUẢ card; re-run ×2 → 0, figs count varies = test timing, not code).
 - kit-ring-oldleft F 0 (gift flake, re-run) + I 0 · kit-pick ALL PASS · kit-plaque-confirm PASS · kit-plaque-post PASS.
+## RB-8 round 2: merged KK53 review/kk53 9771ffb9 (thẻ lụa + one «Chọn»); index.html/sw.js theirs + rebuild. Gates: ring-overlap F+I 0/0/0 errs 0, oldleft 0/0, kit-pick / confirm / post see message.
