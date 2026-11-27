@@ -18,7 +18,11 @@ function kppWho(pc){try{const w=(pc.dataset.kppw||"").split(":"),k=w[0];
 window.kppWho=kppWho;
 /* the two source buttons (html) — ACT-MOVE hook first, else the existing buttons; a known reason when there is no target */
 function kppSrc(W){const v=W.v,kind=W.kind;let r=null;
- if(typeof window.amCardBtns==="function"){try{r=window.amCardBtns(v,kind)}catch(e){console.error("amCardBtns",e)}}
+ /* ACT-MOVE hook (review/act-move jamove.js): amCardBtns(v) with v = rival object | "emp" | "th" → array of button html, matched by title (Hoàng thượng gives
+    only «Tìm gặp», Thái hậu only «Ghé cung»; [] = no button: dead / lãnh cung); served for rv / emp / th only */
+ if(typeof window.amCardBtns==="function"&&(kind==="rv"||kind==="emp"||kind==="th")){try{const a=window.amCardBtns(kind==="rv"?v:kind);
+  if(Array.isArray(a)){const T=h=>{const d=document.createElement("div");d.innerHTML=h||"";const b=d.querySelector("button");return b?(b.firstChild&&b.firstChild.textContent||"").trim():""};
+   r=[a.find(h=>/^Tìm gặp/.test(T(h)))||"",a.find(h=>/^Ghé cung/.test(T(h)))||""]}}catch(e){console.error("amCardBtns",e)}}
  if(!r){r=["",""];try{
   if(kind==="rv"){r=[seeBtn(v)||scoutBtn(v)||"",visitBtn(v)||""];
    const why=!v.alive?"đã mất":v.out?"đang ở lãnh cung":"";if(!r[0])r[0]={why:why||(together(S,v)?"đang ở cùng chỗ với ta":"")};if(!r[1])r[1]={why:why||(sameHouse(S,v)?"ở cùng cung với ta":"")}}
