@@ -43,3 +43,48 @@ Before any build, the worker confirms these counts with a 12-month bot on the re
 
 ## 4. FOR MAIN — 8 lines for sếp
 See FOREMAN_C_STATUS.md line «ALLOT-SEASON … PLAN READY».
+
+## §BUILD (ALLOT-SEASON, session_01PEhRbutKkyUU1W6mBp7ru8, order MAIN 172 ~05:40Z via Foreman C ~06:17Z)
+PRIORITY #1 CHECK: OD 27/11 ~05:10Z (row 3) + ~05:40Z (MAIN REC APPLIED, per owner OD 26/11 ~05:55Z «khuyến nghị gì thì tự làm luôn») | main 4cd3f974: jstip BAL.stip.goods/stipList/stipGoods + NPC npcKeep trim, jallot/jration/jeitem stipGoods wrappers, jecon econStipend card (kitRows), jwdinv wdSew, jinv kinvOpen buttons (pbtn), j20 BLG typed list | review/* none for this | claims ALLOT-SEASON = this worker.
+**Branch review/allot-season @64cddf81** (from origin/main 4cd3f974; generated index.html/sw.js rebuilt; assets.json kept = main).
+
+### What (plan A–E, as accepted)
+- **A cloth by season** — jstip: cloth left BAL.stip.goods; `stipList(r,out,winter,summer,cloth)` adds ONE bolt only when `stipClothM()` (S.month in `BAL.stip.cloth.m` [1,4,7,10]); grade `BAL.stip.cloth.k` by rank (vải bông 0–1 · lụa Hàng Châu 2–4 · gấm Tô Châu 5–7), lãnh cung `cloth.cold` vải thô (was monthly). Rank text (`stipRankTxt` → Bổng lộc panel, j20/jecon) says «đầu mùa (tháng giêng, tháng tư, tháng bảy, tháng mười) 1 súc …». **Fit bonus (gain only)**: jseason wraps `wdSew` → the garment carries `sea`; worn in the same half of the year (Xuân·Hạ / Thu·Đông) → `wearBonus` Sắc +`BAL.stip.cloth.fit`; no penalty out of season (history: none recorded for palace women). «May áo» button text now says the garment + «áo mùa … · mặc hợp mùa (…): Sắc +1» (the old «Sắc +N trong 3 tháng» was stale).
+- **B tea one a month every rank** (grade by rank): BAL.stip.goods rewritten in place (law 14); yến/sâm stay rank 6–7; coal/ice unchanged.
+- **C «phát bù đủ lệ, dư thì quy bạc»** — new module `dev/build/jseason.js` (after jeitem in assemble.py; outermost stipGoods wrapper): each line has a chest ceiling `BAL.stip.keep` {vải 2, trà 2, than 3, yến 2, sâm 2, son phấn 2 per part, dầu 1, nến 3}; at the monthly issue pieces above the ceiling are not given and their Nội vụ phủ buy-back value (`econPrice` → `BAL.stip.resell`) is paid as bạc; skimmed month: that silver loses `BAL.stip.cutSmall`. Traceable (law 6c): the frame row «Đồ phát» + log say «rương còn đủ lụa Hàng Châu, trà …: Nội vụ phủ quy ra N lượng bạc», the chest reveal adds the bạc, `p.stip.qb` / `qbM` keep the total for every consort. A line wholly paid in silver is not listed as «0 súc». **NPCs: same rule; the silent npcKeep trim is off while `BAL.stip.keep.on`** (jstip guard). Old saves: an existing heap is never taken away; that line just gets silver until it is under the ceiling.
+- **D stale tea** — issued tea older than `BAL.stip.teaAge` (3) months turns into Trà mốc in place (same piece); her line says «N phần trà để lâu đã mốc»; tea without a date gets one on first sight (old saves).
+- **E roads for stock she has** — new button «Ban cho kẻ hầu» (same kit `pbtn`, item detail) on allotment lines (not hàng kém): the piece goes to her cung nữ's bag (`from:"ban"`), thiện cảm cung nữ +`BAL.stip.ban.maid` (2); with the existing «Bán» (bạc) and «Tặng» (relation) = Nhẹ/Vừa/Nặng. The buttons are not relabelled with tier words (would change every item card in the game: a kit question, not mine).
+- **j20 BLG** typed rank-goods list deleted; j20 stipend0 line + blCard + jecon blCard read `stipRankTxt` (one core, law 4).
+Laws: 1 (NPC same issue, ceiling, silver, stale tea; ssBan(p) works for any consort) · 2/3 (fit bonus gain-only; ban/sell/gift each gain) · 4 (every number BAL.stip.cloth/keep/teaAge/ban; resell/cutSmall reused) · 6c (piece never made → its value in purse + row + log; ban → maid bag; stale → same piece) · 7 (no %, words only) · 9 (kitRows row, pbtn button, kitReward chest: no new screen, no CSS) · 11 (every monthly line: cloth, tea, yến/sâm, coal, son phấn, dầu, nến; every place the rank goods show).
+
+### 12-month bot (dev/measure/allot-season-bot.js, real page, «never uses anything», her + one non-Empress NPC at the same rank, sung 80 so no skim)
+BEFORE = origin/main 4cd3f974, AFTER = this branch. Stock at year end per line; quy bạc = silver paid instead; share = quy bạc / year's bổng.
+| rank | who | vải | trà | yến, sâm | than | son phấn | dầu | nến | quy bạc | share |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | her BEFORE | 12 | 12 | 0 | 3 | 24 | 12 | 36 | 0 | 0 |
+| 0 | her AFTER | 2 | 2 | 0 | 3 | 8 | 1 | 3 | 72 | 0.150 |
+| 3 | her BEFORE | 12 | 12 | 0 | 3 | 24 | 12 | 36 | 0 | 0 |
+| 3 | her AFTER | 2 | 2 | 0 | 3 | 8 | 1 | 3 | 144 | 0.126 |
+| 7 | her BEFORE | 24 | 24 | 24 | 9 | 24 | 12 | 36 | 0 | 0 |
+| 7 | her AFTER | 2 | 2 | 4 | 3 | 8 | 1 | 3 | 540 | 0.161 |
+| 0 | NPC BEFORE / AFTER | 1 / 2 | 1 / 2 | 0 / 0 | 2 / 3 | 6 / 5 | 2 / 1 | 6 / 3 | 0 / 53 | 0 / 0.110 |
+| 3 | NPC BEFORE / AFTER | 1 / 2 | 1 / 2 | 0 / 0 | 2 / 3 | 4 / 5 | 2 / 1 | 6 / 3 | 0 / 93 | 0 / 0.082 |
+| 7 | NPC BEFORE / AFTER | 1 / 2 | 2 / 2 | 2 / 4 | 3 / 3 | 5 / 5 | 1 / 1 | 3 / 3 | 0 / 352 | 0 / 0.105 |
+Stock ≤ ceiling on every line, her and NPC (son phấn 8 = 4 parts × 2). Quy bạc share: her 0.13–0.16 of bổng (spread 0.035), NPC 0.08–0.11 (NPCs spend some) — flat across rank (law C). This is the worst case (a player who uses nothing); a player who sews/drinks/makes up gets less silver. **For the BIG reviewer / Foreman D**: ~15 phần trăm of bổng extra silver for a hoarder is new money in the economy; one knob each (`BAL.stip.keep.*`, `BAL.stip.resell`) if D wants it lower.
+
+### Tests
+- `node dev/test/allot-season.js <wt> <out>` (new): **ALL PASS 40 checks**, Fold 755x1000@2 + iPad 1180x820@2 — consort life guard, no monthly cloth, season cloth by rank, cold cloth, tea 1, rank text (month names, no digits), blCard, season issue / none mid-season, ceilings (vải, trà, nến, dầu, son phấn per part), quy bạc = bạc delta = qb record, text («quy ra N lượng bạc», no «0 súc», no %), nothing vanishes, skimmed silver, NPC ceiling + quy bạc + no trim, stale tea + fresh kept, garment season, fit +1 in season / 0 out (no penalty), wearBonus, May áo text, Ban cho kẻ hầu (piece in maid bag, thiện cảm +2, text), ban only on allotment lines, BAL keys, **old save** (a pre-branch heap of 9 lụa + 9 trà loads, is kept, no new tea), month frame says quy bạc, rank panel shown, no h-scroll, no page errors.
+- `dev/test/monthly-allotment.js` (1180x820): only **presetsHidden FAIL = the same on origin/main 4cd3f974** (pre-existing). Two checks updated to the ceiling rule (goods: empties her oil/candles first; npcSpend: a bottle with lần left → paid as bạc).
+- `dev/test/monthly-ration.js`: crashes `TypeError … reading 'run'` before any check — **the same on origin/main** (pre-existing; FOR MAIN: test broken on main).
+- `dev/test/stipend.js` (URL, 755x1000 + 1180x820): STIPEND FAIL on **both main and branch**, same cause `ev.shown:false` (the cut-answer frame not visible in that test while the chest reveal is busy) — pre-existing. Branch-only difference `noivuPrice:null` = no issued cloth that month (cloth is seasonal now), not in its verdict.
+- `bash dev/tools/quickcheck.sh` on abd31d85 (the build before the two text fixes below): **QUICKCHECK PASS** · core gates PASS (one-core-guard, rules-one-source, kit-conform, hooks 13) · time-spill guard PASS · old save from LIVE loads and plays · perf new/live render 197/232, tab 603/567, buổi 1352/1396 ms.
+- Text fix after abd31d85 (jstip month names written out) is covered by allot-season.js ALL PASS on the final sha.
+
+### Shots (LOOKED; scratch only, not in git): bongloc-panel-{755x1000,1180x820}, bongloc-month-{755x1000,1180x820}
+- Panel (LUẬT · Bổng lộc): every rank row shows «… · đầu mùa (tháng giêng, tháng tư, tháng bảy, tháng mười) 1 súc …»; no monthly cloth; Fold scrolls with «Kéo xuống» (kit). Month frame (VIỆC · Bổng lộc tháng tư): «Đồ phát: 1 khối băng đá · rương còn đủ lụa Hàng Châu, trà Quân Sơn ngân châm, …: Nội vụ phủ quy ra 20 lượng bạc», green kit row; chest «Bạc +20».
+- CDN review upload not done (cdn_sync needs the CDN key on this box; earlier workers hit HTTP 401) → reviewer: run `node dev/test/allot-season.js <wt> <out>` to regenerate the four shots.
+
+### Known limits
+- Tier words (Nhẹ/Vừa/Nặng) are not printed on the item buttons (kit-wide change; left to the kit keeper if wanted).
+- Servants' own lệ tháng (jallot srv) keeps its own keep=4 trim (servant bags, not consorts) — unchanged.
+- The garment season tag starts with garments sewn after this build; older garments have none (no bonus, no penalty).
