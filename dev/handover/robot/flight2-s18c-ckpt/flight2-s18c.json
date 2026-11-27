@@ -65,15 +65,15 @@
    "b": "128ec6b7d5fa",
    "t": "2026-11-27T08:01Z"
   },
-  "areaTaps": 5123,
-  "bareCovered": 75,
+  "areaTaps": 5124,
+  "bareCovered": 80,
   "bareCoveredBy": {
    "moving button.kbtn.k1": 1,
    "div.kscn-veil over img#mefig.j59sz": 6,
    "div.kscn-veil over button.tok.fig.bob": 4,
    "div.kscn-veil over button.k3r.kasr": 1,
    "moving button.opt.ka.kart": 1,
-   "not on the layer scanned": 55,
+   "not on the layer scanned": 60,
    "div.kbk-cv over section#panel.panel": 1,
    "div.kbk-cv over button.tok.fig.bob": 4,
    "div.kne.kne-beat over div.kmrow": 2
@@ -87,14 +87,14 @@
   },
   "dlgScroll": 16,
   "scrolls": 19,
-  "dlgClose": 136,
-  "skipLayerTaps": 177,
+  "dlgClose": 138,
+  "skipLayerTaps": 178,
   "loops": 2,
-  "infoTaps": 207,
+  "infoTaps": 209,
   "closeSpent": 1,
-  "mgQuickSkipped": 32,
-  "mgReady": 34,
-  "mgMiss": 547,
+  "mgQuickSkipped": 33,
+  "mgReady": 35,
+  "mgMiss": 562,
   "boards": [
    {
     "at": 411,
@@ -774,7 +774,7 @@
     ]
    }
   ],
-  "skipCoverTaps": 4,
+  "skipCoverTaps": 5,
   "kfocVisits": 8,
   "deadChecks": 3,
   "deadCheckMs": 10416,
@@ -808,7 +808,10 @@
    }
   ]
  },
- "life": null,
+ "life": {
+  "id": "HARNESS",
+  "type": "harness"
+ },
  "exitPick": null,
  "bugs": [
   {
@@ -969,6 +972,11 @@
     "dt": 19,
     "top0": "div.opts.kpopts.khand"
    }
+  },
+  {
+   "type": "harness",
+   "msg": "runner error: touchscreen.tap: Target page, context or browser has been closed",
+   "n": 1
   }
  ],
  "dead": [
@@ -1036,176 +1044,16 @@
    "err": 0
   }
  ],
- "buoi": 276,
- "steps": 6399,
+ "buoi": 279,
+ "steps": 6456,
  "status": [
   "STATUS flight2-s18c · buổi 192 · year 2 · rank 0 · bugs 5 · stuck 0 · dead buttons 1"
  ],
- "_loopAt": 1795777323460,
+ "_loopAt": 1795777366142,
  "_bootFirst": 1,
- "_scr": "#kdaytc «»",
+ "_scr": "#kg82 «»",
  "_snapAt": 1795777321708,
  "trace": [
-  [
-   4385,
-   "page «Ngọc Thanh các · Ở đây còn 1 người.» «mai nở trong tuyết»"
-  ],
-  [
-   4388,
-   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang buổi»"
-  ],
-  [
-   4390,
-   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Mệnh truyện»"
-  ],
-  [
-   4390,
-   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang ngày mới»"
-  ],
-  [
-   4392,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   4394,
-   ".kmov «Ta biết rồi»"
-  ],
-  [
-   4396,
-   "GONE Ta biết rồi"
-  ],
-  [
-   4396,
-   ".dlg «Kính sự phòng» «Tranh sủngHiểmTốnkhôngĐượcdựa vào ân sủng; tài ngh»"
-  ],
-  [
-   4396,
-   ".dlg «Kính sự phòng» «Chọn lá này»"
-  ],
-  [
-   4397,
-   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
-  ],
-  [
-   4419,
-   "BOARD hat 220 moves 8/10 raw 0.00"
-  ],
-  [
-   4419,
-   "#kg82 «Quay lại»"
-  ],
-  [
-   4420,
-   "AREA 378,500"
-  ],
-  [
-   4420,
-   "SKIP TAP #kdaytc «» tap"
-  ],
-  [
-   4422,
-   "AREA 378,500"
-  ],
-  [
-   4422,
-   "SKIP TAP .kne «» tap"
-  ],
-  [
-   4423,
-   "#dawn «Tiếp theo»"
-  ],
-  [
-   4424,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4424,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4424,
-   ".kbk «Tổng lược» «Trang sau»"
-  ],
-  [
-   4425,
-   ".kbk «Tổng lược» «Trang trước»"
-  ],
-  [
-   4425,
-   ".kbk «Tổng lược» «Lui»"
-  ],
-  [
-   4427,
-   ".dlg «Tin trong cung buổi này» «Lui»"
-  ],
-  [
-   4430,
-   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Cung nữ thân tín tam đẳngTăng Hà Nhi»"
-  ],
-  [
-   4431,
-   ".kfoc «Thêm thái giám · Tốn Bạc 20»"
-  ],
-  [
-   4433,
-   ".kfoc «Buôn bán 1/1»"
-  ],
-  [
-   4433,
-   ".kfoc «Đi lại 0/1»"
-  ],
-  [
-   4434,
-   ".kfoc «Lui»"
-  ],
-  [
-   4435,
-   "page «Ngọc Thanh các · Ở đây còn 1 người.» «Sang buổi»"
-  ],
-  [
-   4437,
-   ".dlg «Người bên cạnh» «Cho mượnTốnBạc 20Đượcthiện cảm ++, Bạc +Gợi ýthiện»"
-  ],
-  [
-   4437,
-   ".dlg «Người bên cạnh» «Đặt lại»"
-  ],
-  [
-   4438,
-   ".dlg «Người bên cạnh» «Từ chốiTốnkhôngĐượcBạc +Mấtthiện cảm −−Gợi ýBạc +;»"
-  ],
-  [
-   4438,
-   ".dlg «Người bên cạnh» «Đặt lại»"
-  ],
-  [
-   4438,
-   ".dlg «Người bên cạnh» «Cho mượnTốnBạc 20Đượcthiện cảm ++, Bạc +Gợi ýthiện»"
-  ],
-  [
-   4439,
-   ".dlg «Người bên cạnh» «Chọn lá này»"
-  ],
-  [
-   4441,
-   ".dlg «Lễ Lạp bát · Lời mời: Thi nấu cháo lạp bát» «Ghi tên, bỏ bạc mời thầy kèm trướcRất vữngTốnBạc 2»"
-  ],
-  [
-   4441,
-   ".dlg «Lễ Lạp bát · Lời mời: Thi nấu cháo lạp bát» «Ghi tên, bỏ bạc mời thầy kèm trướcRất vữngTốnBạc 2»"
-  ],
-  [
-   4442,
-   ".dlg «Lễ Lạp bát · Lời mời: Thi nấu cháo lạp bát» «Ghi tên, bỏ bạc mời thầy kèm trướcRất vữngTốnBạc 2»"
-  ],
-  [
-   4442,
-   ".dlg «Lễ Lạp bát · Lời mời: Thi nấu cháo lạp bát» «Ghi tên, bỏ bạc mời thầy kèm trướcRất vữngTốnBạc 2»"
-  ],
-  [
-   4442,
-   ".dlg «Lễ Lạp bát · Lời mời: Thi nấu cháo lạp bát» «Ghi tên, bỏ bạc mời thầy kèm trướcRất vữngTốnBạc 2»"
-  ],
   [
    4443,
    ".dlg «Lễ Lạp bát · Lời mời: Thi nấu cháo lạp bát» «Chọn lá này»"
@@ -2653,9 +2501,165 @@
   [
    4884,
    "#kg82 «Quay lại»"
+  ],
+  [
+   4886,
+   "AREA 378,500"
+  ],
+  [
+   4886,
+   "SKIP TAP #kdaytc «» tap"
+  ],
+  [
+   4887,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   4888,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4888,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4889,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4889,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4889,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4891,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   4892,
+   ".dlg «Lời nhận xét» «Lui»"
+  ],
+  [
+   4896,
+   "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Lịch tháng»"
+  ],
+  [
+   4896,
+   ".dlg «Lịch tháng» «ngày 16»"
+  ],
+  [
+   4897,
+   ".dlg «Lịch tháng» «ngày 27: Nguyệt tín»"
+  ],
+  [
+   4897,
+   ".dlg «Lịch tháng» «ngày 23»"
+  ],
+  [
+   4897,
+   ".dlg «Lịch tháng» «mồng 8»"
+  ],
+  [
+   4898,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   4900,
+   "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Sang buổi»"
+  ],
+  [
+   4901,
+   ".dlg «Hoàng thượng» «Giận dỗi, bỏ vào trongTốnkhôngĐượcSủng ++, Tai mắt»"
+  ],
+  [
+   4902,
+   ".dlg «Hoàng thượng» «Giận dỗi, bỏ vào trongTốnkhôngĐượcSủng ++, Tai mắt»"
+  ],
+  [
+   4902,
+   ".dlg «Hoàng thượng» «Giận dỗi, bỏ vào trongTốnkhôngĐượcSủng ++, Tai mắt»"
+  ],
+  [
+   4902,
+   ".dlg «Hoàng thượng» «Chọn lá này»"
+  ],
+  [
+   4905,
+   ".dlg «Y phục dự Tết Nguyên tiêu» «Cáo lỗi, về cung nghỉTốnkhôngĐượcvề cung nghỉ, khô»"
+  ],
+  [
+   4905,
+   ".dlg «Y phục dự Tết Nguyên tiêu» «Đặt lại»"
+  ],
+  [
+   4905,
+   ".dlg «Y phục dự Tết Nguyên tiêu» «Cáo lỗi, về cung nghỉTốnkhôngĐượcvề cung nghỉ, khô»"
+  ],
+  [
+   4906,
+   ".dlg «Y phục dự Tết Nguyên tiêu» «Chọn lá này»"
+  ],
+  [
+   4913,
+   "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Mệnh truyện»"
+  ],
+  [
+   4914,
+   "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Sang buổi»"
+  ],
+  [
+   4916,
+   ".dlg «Tết Nguyên tiêu · Thi điều hương trong đèn lồng» «Lui»"
+  ],
+  [
+   4917,
+   "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Bổng lộcsau 2 tuần»"
+  ],
+  [
+   4917,
+   ".dlg «Bổng lộc» «Lui»"
+  ],
+  [
+   4919,
+   "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Sang buổi»"
+  ],
+  [
+   4921,
+   "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «1Cung nhân»"
+  ],
+  [
+   4921,
+   ".kscn «Lui»"
+  ],
+  [
+   4923,
+   "page «Thừa Minh cung · Duyệt Xuân hiên · Ở đây còn 1 ngư» «Sang ngày mới»"
+  ],
+  [
+   4925,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   4927,
+   "GONE Ta biết rồi"
+  ],
+  [
+   4927,
+   ".dlg «Kính sự phòng» «Tranh sủngHiểmTốnkhôngĐượcdựa vào ân sủng; tài ngh»"
+  ],
+  [
+   4928,
+   ".dlg «Kính sự phòng» «Chọn lá này»"
+  ],
+  [
+   4928,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
   ]
  ],
- "_lastOpen": "Quay lại",
+ "_lastOpen": "Sẵn sàngtừ lúc này mới tính giờ",
  "_lastOpenScr": "#kg#",
  "_started": true,
  "_clk": {
@@ -2932,9 +2936,12 @@
   "3.24.0.1": 273,
   "3.24.0.2": 274,
   "3.24.0.3": 275,
-  "3.24.1.0": 276
+  "3.24.1.0": 276,
+  "3.24.1.1": 277,
+  "3.24.1.2": 278,
+  "3.24.1.3": 279
  },
- "_maxClk": "3.24.1.0",
+ "_maxClk": "3.24.1.3",
  "_ckAt": 1795777323492,
  "_ckB": 276,
  "consoleErr": [
@@ -3783,7 +3790,8 @@
   ".dlg|Tết Nguyên đán · Chuyện bên lề hội",
   ".dlg|Chương #: Hàng tướng",
   ".dlg|Tết Nguyên đán · Trò vui",
-  ".dlg|Tết Nguyên tiêu · Lời mời: Thi điều hươn"
+  ".dlg|Tết Nguyên tiêu · Lời mời: Thi điều hươn",
+  ".dlg|Tết Nguyên tiêu · Thi điều hương trong đ"
  ],
  "_momRank": 0,
  "_kipG": {},
@@ -6260,10 +6268,10 @@
     ""
    ],
    "took": {
-    "Trang sau": 97,
-    "Trang trước": 77
+    "Trang sau": 99,
+    "Trang trước": 78
    },
-   "n": 174
+   "n": 177
   },
   {
    "k": ".dlg|Việc khó xử|Mua lấyTốnBạc 80ĐượcChứng cứ +Gợi ýChứng cứ +!/Đuổi hắn điTốnkhôngĐượckhôngGợi ýkhông được mất gì!",
@@ -7069,9 +7077,9 @@
     "Mong manh"
    ],
    "took": {
-    "Tranh sủngHiểmTốnkhôngĐượcdựa vào ân sủng; tài nghệ góp ít · thành: sủng chút ít": 22
+    "Tranh sủngHiểmTốnkhôngĐượcdựa vào ân sủng; tài nghệ góp ít · thành: sủng chút ít": 23
    },
-   "n": 22
+   "n": 23
   },
   {
    "k": ".dlg|Kính sự phòng|Chặn ngự giáMong manhTốnkhôngĐượcdựa vào nhan sắc, ân sủng; tài nghệ nặng ký (mô/Chọn lá này/Tranh sủngHiểmTốnkhôngĐượcdựa vào ân sủng; tài nghệ góp ít · thành: sủng chút ít/Đặt lại",
@@ -7089,10 +7097,10 @@
     ""
    ],
    "took": {
-    "Chọn lá này": 13,
+    "Chọn lá này": 14,
     "Đặt lại": 9
    },
-   "n": 22
+   "n": 23
   },
   {
    "k": ".dlg|Tết Đoan ngọ · Lời mời: Thi gói bánh ú|Ghi tên dự thi bếp núcMong manhTốnkhôngĐượcđoạt giải, Sủng +MấtSức −, Phi tần gh/Không dựTốnkhôngĐượckhôngGợi ýkhông được mất gì!",
@@ -12263,9 +12271,10 @@
     ""
    ],
    "took": {
-    "Cứ thế vào dựTốnkhôngĐượcvào dự lễ như đang mặcGợi ývào dự lễ như đang mặc!": 1
+    "Cứ thế vào dựTốnkhôngĐượcvào dự lễ như đang mặcGợi ývào dự lễ như đang mặc!": 1,
+    "Cáo lỗi, về cung nghỉTốnkhôngĐượcvề cung nghỉ, không dự lễGợi ývề cung nghỉ, khô": 2
    },
-   "n": 1
+   "n": 3
   },
   {
    "k": ".dlg|Y phục dự Tết Nguyên tiêu|Chọn lá này/Cáo lỗi, về cung nghỉTốnkhôngĐượcvề cung nghỉ, không dự lễGợi ývề cung nghỉ, khô/Cứ thế vào dựTốnkhôngĐượcvào dự lễ như đang mặcGợi ývào dự lễ như đang mặc!/Đặt lại",
@@ -12283,9 +12292,10 @@
     ""
    ],
    "took": {
-    "Chọn lá này": 1
+    "Chọn lá này": 2,
+    "Đặt lại": 1
    },
-   "n": 1
+   "n": 3
   },
   {
    "k": ".dlg|Tết Nguyên tiêu · Chuyện bên lề hội|Ghi lại trong lòng, lúc khác trảTốnSức 8·Đức 3ĐượcTâm cơ +++/Huých lại, cũng giả vờ bị đẩyTốnĐức 3ĐượcTâm cơ ++·Sức ++MấtThường tại Diệp Thục/Lùi một bước nhường lốiTốnDanh 6ĐượcĐức ++·Sức ++/Nói to đòi người đẩy xin lỗiTốnSủng 4ĐượcDanh ++·Hoàng hậu → ta: thiện cảm ++Mất",
@@ -13386,8 +13396,8 @@
   },
   "ts|#kdaytc|": {
    "n": 1,
-   "t": 1795777229888,
-   "last": 1795777229888
+   "t": 1795777323619,
+   "last": 1795777323619
   },
   "ts|.kne|": {
    "n": 1,
