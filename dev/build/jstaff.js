@@ -95,7 +95,7 @@ function monthReport(){try{if(!isGuest())elderInit();const st=elderBy("kn");if(!
  return `${st.call} (${office(st)}) bẩm sổ tháng: ${parts.join(", ")}. `}catch(e){return""}}
 if(typeof heirMonth==="function"){const h0=heirMonth;heirMonth=function(){const r=h0.apply(this,arguments)||"";return r+monthReport()}}
 /* ---------- Cung nhân list (j15 staffTabHTML): Thái hậu's household rows; the named women's card groups ---------- */
-window.elderTabRows=function(){try{const T=S&&S.thO&&S.thO.staff||[];return T.map((s,j)=>({t:"thh",s,f:pServ(s),name:typeof shortN==="function"?shortN(s.name):s.name,sep:j?"":"Cung Thái hậu"}))}catch(e){return[]}};
+window.elderTabRows=function(){try{const T=S&&S.thO&&S.thO.staff||[];return T.map((s,j)=>({t:"thh",s,p:s,f:pServ(s),name:typeof shortN==="function"?shortN(s.name):s.name,sep:j?"":"Cung Thái hậu"}))}catch(e){return[]}};
 function giaoBtns(st){const p=postOf(st.eid);const t2=typeof whyTime==="function"?whyTime(B().talk||2):"";const g=B().gift||20;
  return [pbtn(`data-elder="bieu" data-eid="${st.eid}"`,"Biếu",`Bạc -${g} · người ấy quý ngươi +${B().giftAf||10}`,S.bac<g?`cần ${g} bạc`:""),
   pbtn(`data-elder="hoi" data-eid="${st.eid}"${capAt({k:B().talk})}`,"Hỏi chuyện",`${capW()} · ${B().talk} khắc · thành: nghe chuyện ${p.palace}, người ấy thiện cảm ${balSg(BAL.eff.jstaff.meAct)}`/* RV5 (LAW 11): elderAct hoi adds af.me meAct — say it, like the court card */,t2)]}

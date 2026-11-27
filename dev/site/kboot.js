@@ -15,7 +15,10 @@
      lifted as soon as the game gets ready), the panel turns into a failure card: "Cửa cung chưa mở
      được", buttons "Tải lại" and "Xóa bộ nhớ đệm rồi tải lại" (drops the shell caches + service worker, keeps pictures and saves), and the
      last error text, small. Errors before the game is ready are kept in localStorage "ctm-boot-err" (last 8) for the coordinator.
-   - automated direct mode (navigator.webdriver, no host, no ?kboot=1): removed at once, no fade, so old tests see the game as before.
+   - automated direct mode (navigator.webdriver, no host, no ?kboot=1; the test/video robots): the SAME cover from the first paint, dropped
+     with no fade and no wait inside kbootDone() (the last script, before DOMContentLoaded), so tests see the game exactly as before but no
+     robot screenshot/video ever shows the bare skeleton (owner 27/11 ~05:42Z "khi vừa vào game, lại có cái màn này bị lỗi nè": frame 0:00 of
+     a robot video was the raw shell, because this mode used to remove the cover at once; boot-skel-strip.js).
    Backdrop values = KIT_BD.title in dev/build/jbd.js (change both together). Test: dev/test/boot-flash.js. Hook: window.__kbootDone. */
 (function(){var W=window.CTM_WAIT||{},d=document,IMG="__IMG__",T=IMG+"img/title-key",inFrame;try{inFrame=window.top!==window}catch(e){inFrame=true}
  var css="#kboot{position:fixed;top:0;right:0;bottom:0;left:0;z-index:2147483000;overflow:hidden;transition:opacity .35s ease;font-family:'Be Vietnam Pro',system-ui,sans-serif;color:#2a1a12;"+
@@ -45,7 +48,8 @@
  window.__kbootHost=function(box,w,h){var c=make(w,h);box.appendChild(c);window.__kbootHostDrop=function(){if(c.parentNode)c.parentNode.removeChild(c);window.__kbootHostDrop=null}};
  var q=location.search||"";
  if(!inFrame&&!(/[?&]khost=0/.test(q)||(navigator.webdriver&&!/[?&]khost=1/.test(q))))return;  /* host page: rot.js mounts it */
- if(!inFrame&&navigator.webdriver&&!/[?&]kboot=1/.test(q)){window.__kbootDone=1;window.kbootDone=function(){};return}
+ if(!inFrame&&navigator.webdriver&&!/[?&]kboot=1/.test(q)){var rc=make(innerWidth,innerHeight);d.documentElement.appendChild(rc);
+  window.kbootDone=function(){if(rc.parentNode)rc.parentNode.removeChild(rc);window.__kbootDone=1};return}
  var c=make(innerWidth,innerHeight);d.documentElement.appendChild(c);
  /* errors while booting: kept (localStorage ctm-boot-err, last 8, for the coordinator) and shown small on the failure card */
  var ERR=[];function keep(t){t=String(t||"").slice(0,300);if(!t)return;ERR.push(t);try{var L=JSON.parse(localStorage.getItem("ctm-boot-err")||"[]");

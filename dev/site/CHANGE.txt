@@ -1,2 +1,3 @@
 Sắc phong xét vào các kỳ lễ trong năm và các đại lễ; số tuần tới kỳ kế tiếp hiện rõ; được phong xong có cảnh phân cung.
 Mỗi lựa chọn hiện thẻ kết quả trước, rồi mới sang màn sau; câu kết quả không lặp lại tên thẻ.
+Chọn việc bằng thẻ lụa treo, chạm dấu tích xanh ở góc để làm; chạm việc với một người là làm ngay; chip nhấp nháy khi sắp đóng cửa; danh hiệu nay hai chiều; thẻ kết quả có tranh gọn lại; mở game không còn chớp khung trống.

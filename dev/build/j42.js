@@ -499,7 +499,7 @@ function srvRoadHTML(){const m=srvM();return `<div class="story"><h3>Thân phậ
    Order and rows = srvColleagues (her palace first, then the people she knows). Nothing yet = the kit empty card. */
 function srvStaffTabHTML(){const L0=srvColleagues();const m=srvM();if(!L0.length)return kitEmpty("Đồng liêu","Chưa quen ai.");
  const oc=od(SRVA.chat.o(S)),of=od(SRVA.frame.o(S));let s0=false,s1=false;
- const L=L0.map(s=>{const own=ownerOf(s)===m&&!!m;const sep=own&&!s0?(s0=true,"Cùng cung"):!own&&!s1?(s1=true,"Người quen"):"";return{s,f:pServ(s),name:shortN(s.name),sep}});
+ const L=L0.map(s=>{const own=ownerOf(s)===m&&!!m;const sep=own&&!s0?(s0=true,"Cùng cung"):!own&&!s1?(s1=true,"Người quen"):"";return{s,p:s,f:pServ(s),name:shortN(s.name),sep}});
  const mk=i=>{const s=L[i].s;const a=S.srv.af[s.sid]||0;const o=ownerOf(s);const kn=S.srv.know[s.sid];const t1=!can(1)?"Hết khắc buổi này":"";
   const B=[pbtn(`data-cnv="chat" data-sid="${s.sid}"`,"Trò chuyện",`${word(oc)} · tốn: ${SRVA.chat.k} khắc · thành: người ấy quý ngươi ${balSg(SRVA.chat.af)} · hỏng: người ấy quý ngươi ${balSg(SRVA.chat.afL)}`,t1),
    pbtn(`data-cnv="gift" data-sid="${s.sid}"${capAt(BAL.btn.cnv,BAL.bacFee.cnvGift)}`,"Biếu quà",`${capW()} · tốn: Bạc -${BAL.bacFee.cnvGift}, ${BAL.btn.cnv.k} khắc · thành: người ấy quý ngươi ${balSg(SRVA.gift.af)}`,S.bac<BAL.bacFee.cnvGift?"Thiếu bạc (cần "+BAL.bacFee.cnvGift+")":t1),
