@@ -465,15 +465,3 @@ function kaTimeNeeds(c,bacCost){const L=[];const left=BAL.time.khac-used;L.push(
   if(ok){if(/^cần /i.test(x))L.push({t:x.replace(/^cần /i,"")+ev,ok:true})}
   else{let lw="";try{lw=typeof LACK!=="undefined"&&LACK[k]?LACK[k](v):""}catch(e){}L.push({t:lw||(x?x.replace(/^cần /i,"")+ev:"điều kiện riêng của việc này chưa có"),ok:false})}
   return String(h).replace(/^<button /,`<button${kaNeedAttr(L)} `)})}catch(e){}return G}})();
-/* KIT §7.4a RESULT CARD PEOPLE FOLD (owner OD 26/11 ~20:45Z «hình 2 khung kết quả quá nhiều thông tin»; KK46): every result card (#rtoast: resultShow + kitResultCard)
-   keeps HER own rows (incl. her «không» rows) + at most KIT_RES_FOLD.keep (3) named people most affected (people named in the choice = card title / sentence first,
-   then the biggest total change); everyone else (other named people + every nameless «một vị …» person) is folded into ONE summary line per group,
-   «Hậu cung: thiện cảm −4 (10 người) · oán +1 (9 người)» (net change per stat · number of people), + «Xem đủ trong Sổ ghi»; the full list is written
-   once into Sổ ghi (the newest line of this act). No nameless line stays on the card. One post-render rule for every result builder. */
-const KIT_RES_FOLD={keep:3,kx:/^(thiện cảm|oán|ghen|quý ngươi|tin cậy|ta quý nàng|nàng quý ta|chứng cứ về nàng)\s*([+−-])\s*(\d+)/u,nameless:/^(một vị|người chưa quen)(\s|$)/iu,other:"Người khác",harem:"Hậu cung"};window.KIT_RES_FOLD=KIT_RES_FOLD;
-function kitResTxt(e){return [...e.childNodes].filter(n=>!(n.classList&&n.classList.contains("kwy"))).map(n=>n.textContent).join("").replace(/\s+/g," ").trim()}
-function kitResGroup(who){try{const R=typeof rivals!=="undefined"?rivals:[];if(R.some(v=>v&&v.name&&who.includes(v.name)))return KIT_RES_FOLD.harem;
- const rk=(typeof RANKS!=="undefined"?RANKS:[]).map(r=>r.n).concat(["phi tần","Hoàng hậu"]);if(rk.some(n=>n&&new RegExp("(^|\\s)"+n+"(\\s|$)","iu").test(who.replace(/^một vị\s*/iu,""))))return KIT_RES_FOLD.harem}catch(e){}return KIT_RES_FOLD.other}
-/* nameless = «một vị …» / «người chưa quen», a masked «???» name, or a consort she has not met yet (k61Named: the card masks her name after this pass) */
-function kitResNameless(who){if(KIT_RES_FOLD.nameless.test(who)||/\?\?\?/.test(who))return true;try{const v=(typeof rivals!=="undefined"?rivals:[]).find(v=>v&&v.name&&who.includes(v.name));if(v&&!kaNamed(v))return true}catch(e){}return false}
-function kitResEsc(s){return String(s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"})[c])}
