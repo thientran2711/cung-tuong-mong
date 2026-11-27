@@ -117,7 +117,7 @@ function rtGate(v,k){return rtGateT(v,S,k)}
 function rtCaughtBy(v,m,what){const T=rtS();rtStat("tt_caught");
  if(aff(v,S)>=netTh(v,"than2")){relAdd(S,v,BAL.route.seen.rel);log(`${rtVn(v)} thấy ngươi với ${rtMnm(m)}. Nàng lặng lẽ quay đi, giữ kín cho ngươi.`);return}
  const greedy=netRx(v,/Tham|Xảo quyệt/);/* G3: not greedy → she blackmails only for silver she needs (bạc under BAL.ag.why.g3.bmBac), else her grudge would rather report */
-  const bm=greedy||npwPick(["bm","tell"],x=>x==="bm"?BAL.ag.why.g3.bmBac-(v.bac||0):Math.max(0,hostility(v,S)))==="bm";if(bm&&rtGate(v,"uyhiep").ok){T.bm={v:v.id,mid:m.id,n:30+R(4)*10,since:S.turn,k:0};rtEmo("so",55,`${v.name} nắm thóp`);rtPush("rtBm",{v:v.id});return}
+  const bm=greedy||npwPick(["bm","tell"],x=>x==="bm"?BAL.ag.why.g3.bmBac-(v.bac||0):Math.max(0,hostility(v,S)))==="bm";if(bm&&rtGate(v,"uyhiep").ok){T.bm={v:v.id,mid:m.id,n:30+R(4)*10};rtEmo("so",55,`${v.name} nắm thóp`);rtPush("rtBm",{v:v.id});return}
  if(!rtGate(v,"tocao").ok){log(`${rtVn(v)} thấy ngươi với ${rtMnm(m)}. Nàng không nói gì, nhưng đã ghi nhớ.`);return}
  rtReport(v,m)}
 function rtReport(v,m){const T=rtS();rtStat("tt_report");{const kk=rtKidsAlive().find(k=>k.tf&&!k.tfOk);if(kk&&!T.ng){log(`<span class="r">${rtVn(v)} tâu: ${kk.name} không phải cốt nhục hoàng gia, xin trích huyết nghiệm thân.</span>`);rtNgSet(kk,v.id,false);return}}const ev=(typeof evG==="function"?evG(v,S):2)||2;
@@ -226,10 +226,10 @@ function rtOpt(n,fx,x,go){return{n,fx:fx||{},x,go,showOut:true}}
 (function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^rt/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.t=d.ti;q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows";q.showOut=true}}})}catch(e){}return out}})();
 PEND.rtBm=pp=>{const T=S&&S.rt;const v=RV(pp.v);const B=T&&T.bm;if(!v||!v.alive||!B)return null;const m=manById(B.mid);const n=B.n;const ev=typeof evG==="function"?evG(v,S):2;
  const oA=od(BAL.odb.jroute.odOA+S.tamco/3+(evG?evG(S,v)*8:0)-ev*4);
- return{ti:"Bị nắm thóp",t:`<p>${rtVn(v)} cho người gọi ngươi ra sau hành lang: «Chuyện của muội với ${m?m.name:"người kia"}, tỷ biết cả. Mỗi tháng ${n} lượng bạc, tỷ sẽ quên.»</p><p class="past">Nàng nắm ${ev} chứng cứ về ngươi.</p>`,
+ return{ti:"Bị nắm thóp",t:`<p>${rtVn(v)} cho người gọi ngươi ra sau hành lang: «Chuyện của muội với ${m?m.name:"người kia"}, tỷ biết cả. ${n} lượng bạc, tỷ sẽ quên.»</p><p class="past">Nàng nắm ${ev} chứng cứ về ngươi.</p>`,
   stage:[v],headArt:{src:RT_ART.don,label:"Uy hiếp"},o:[
-  rtOpt(`Nộp ${n} lượng bạc`,{bac:-n},rtX(100,`nàng im lặng tháng này`,"","tháng sau nàng lại đòi"),()=>{B.k++;B.paid=S.turn;rtHeat(-3);log(`Ngươi đưa ${n} lượng bạc cho ${v.name}.`)}),
-  rtOpt("Làm việc cho nàng",{...BAL.route.bmWork},rtX(100,"nàng im lặng · đổi lại ngươi nói giúp nàng trước mặt Hoàng thượng","",`${v.name} Sủng +${BAL.route.bmWorkSung} · Hoàng thượng nghi ngươi kết bè`),()=>{spAdd(v,"sung",BAL.route.bmWorkSung);B.paid=S.turn;B.k++}),
+  rtOpt(`Nộp ${n} lượng bạc`,{bac:-n},rtX(100,`nàng giữ kín, thôi uy hiếp`,""),()=>{T.bm=null;rtHeat(-3);log(`Ngươi đưa ${n} lượng bạc cho ${v.name}; nàng thôi uy hiếp.`)}),
+  rtOpt("Làm việc cho nàng",{...BAL.route.bmWork},rtX(100,"nàng im lặng · đổi lại ngươi nói giúp nàng trước mặt Hoàng thượng","",`${v.name} Sủng +${BAL.route.bmWorkSung} · Hoàng thượng nghi ngươi kết bè`),()=>{spAdd(v,"sung",BAL.route.bmWorkSung);T.bm=null}),
   rtOpt("Ra tay trước: tố nàng",{},rtX(oA,`${v.name} rước họa trước khi kịp mở miệng · thoát cảnh uy hiếp`,"nàng tố ngươi ngay",`dùng chứng cứ ngươi nắm về nàng (${typeof evG==="function"?evG(S,v):0})`),()=>{if(roll(oA)){try{punish(v,"bị tố vu khống",2)}catch(e){}T.bm=null;rtEmo("vui",30,"thoát khỏi kẻ uy hiếp");log(`${v.name} bị phạt trước khi kịp mở miệng.`)}else{T.bm=null;rtReport(v,m||{name:"người kia",alive:false})}}),
   rtOpt("Mặc kệ nàng",{},rtX(od(BAL.odb.jroute.odO_12+S.danh/5),"nàng chỉ dọa suông","nàng tố giác ngươi"),()=>{T.bm=null;if(!roll(od(BAL.odb.jroute.odO_12+S.danh/5))&&m)rtReport(v,m);else log(`${v.name} không dám làm gì thêm.`)})]}};
 PEND.rtPromise=pp=>{const m=manById(pp.m);if(!m||!S)return null;const T=rtS();
@@ -257,7 +257,8 @@ function rtMonth(){if(!rtRoad()||!S.rt)return"";const T=S.rt;let ev="";
  const w=watcher();T.heat=cl(T.heat-RTC.decay-(w&&w.loyal>=BAL.loy.top?2:0),0,100);if(S.out)T.wasCold=1;
  /* someone hostile pieces it together (two-way: same as NPCs seeing NPCs) */
  const m=rtMan();if(m&&T.heat>=40&&!T.bm&&roll(T.heat/4)){const foes=liveRivals(true).filter(v=>aff(v,S)<0||(v.ghen||0)>=50);if(foes.length){/* G3: the sharpest, most hostile foe pieces it together */const v=npwPick(foes,x=>eyes(x)*BAL.ag.why.wit.eye+Math.max(0,hostility(x,S))*BAL.ag.why.wit.host);evA(v,S,BAL.eff.jroute.evRtMonth);rtCaughtBy(v,m,"gap")}}
- if(T.bm&&T.bm.since<S.turn&&T.bm.paid!==S.turn&&RV(T.bm.v)&&RV(T.bm.v).alive){if((T.bm.k||0)>=8){log(`${RV(T.bm.v).name} đã vơ đủ; nàng thôi đòi bạc.`);T.bm=null}else if(!rtGate(RV(T.bm.v),"uyhiep").ok){log(`${RV(T.bm.v).name} thôi đòi bạc của ngươi.`);T.bm=null}else rtPush("rtBm",{v:T.bm.v})}
+ /* split-merge A3: the blackmail is ONE card (pay once / work / tố / mặc kệ), no monthly repeat; an old save's running one is closed here */
+ if(T.bm&&T.bm.since!=null){T.bm=null}
  /* her children by the lover */
  for(const k of rtKidsAlive())if(k.tf&&!k.tfOk&&(k.age||0)>=3&&(k.age||0)<=12){/* G3: the talk has a mouth — one who resents her (npcTell) carries it to Hoàng thượng; nobody → no talk */const tl=npcTell(S,{from:liveRivals(true),to:S.emp||{}});if(tl&&roll(RTC.kidRoll)){rtPush("rtKid",{k:k.name,by:tl.who.id,w:tl.why});break}}
  /* quiet life */
@@ -292,7 +293,7 @@ function rtStoryHTML(){if(!S||!S.rt||!S.rt.open)return"";const T=S.rt;const ck=(
  const rows=[["Lối riêng",on.length?on.join(" · "):"đã mở nhóm «Lối riêng» ở Hành sự"],["Lời ra tiếng vào",`${rtHeatW(T.heat)} (${T.heat}/100)`,T.heat>=60?"r":""]];
  const why=rtWeary();if(why.length)rows.push(["Cớ chán cung",why.join("; ")]);
  const m=rtMan();if(T.tt&&m)rows.push([`Tư tình · ${rtMnm(m)}`,ckL([ck("để ý y",1),ck("trao tín vật",T.tt.tok),ck(`hẹn gặp lén (${T.tt.meet||0} lần)`,T.tt.meet>=2),ck("đêm riêng",T.tt.night),ck("y hứa đưa ngươi đi",T.tt.st>=4)])]);
- if(T.bm){const v=RV(T.bm.v);if(v)rows.push(["Bị uy hiếp",`${rtVn(v)} đòi ${T.bm.n} lượng bạc mỗi tháng`,"r"])}
+ if(T.bm){const v=RV(T.bm.v);if(v)rows.push(["Bị uy hiếp",`${rtVn(v)} đòi ${T.bm.n} lượng bạc`,"r"])}
  if(T.tc){const P=T.tc.prep;rows.push(["Trốn khỏi cung",ckL([ck("đồng lõa gác cổng",P.guard),ck("cung nữ tâm phúc",P.maid),ck("người nhà đón",P.home),ck("dò đường",P.route),ck("yêu bài",P.pass),ck("y phục cung nữ",P.cloth),ck("thuốc giả chết",P.drug)])])}
  if(T.ad&&T.ad.on)rows.push(["Ẩn dật",`đã ${Math.floor((S.turn-T.ad.since)/12)} năm / 3 năm · Đức ${S.duc}/${BAL.route.anDuc} · ${T.ad.harm?"đã hại người: mất kết an nhiên":"chưa hại ai"}`]);
  const kt=rtKidsAlive().filter(k=>k.tf);if(kt.length)rows.push(["Con riêng",kt.map(k=>k.name).join(", ")+" (chỉ ngươi biết)"]);

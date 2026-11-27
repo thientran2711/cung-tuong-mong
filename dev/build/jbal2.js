@@ -1522,7 +1522,7 @@ BAL.ag.par3={on:1,
    fest = Rót rượu (odds o + Sắc/sacD + Tài/taiD; his regard +nt, fail Chủ tin −tin), Đứng sau (tin); black = Đút bạc (pay), Mặc kệ (odds the threatener keeps quiet), caught (NPC đối thực told: lòng −tin, odds tgk);
    aff = Dọa tố (odds o + Tâm cơ/tcD, Bạc, fail: odds lau of Tân Giả khố lauW tuần), Bẩm chủ (Chủ tin), w = worth weights of an NPC maid's pick */
 BAL.ag.par3.cnv={scold:{humble:{tin:1,duc:1},beg:{get o(){return BAL.odb.j42.odO_8},sacD:3,get tin(){return BAL.eff.j42.tinGo},get tinL(){return BAL.eff.j42.tinGo_2}},talk:{danh:2,tin:8,kneel:40,get suc(){return -BAL.eff.j42.sucGo}}},fest:{pour:{get o(){return BAL.odb.j42.odO_11},sacD:3,taiD:10,nt:12,get tin(){return -BAL.eff.j42.tinGo_7}},stand:{tin:3}},
- black:{pay:20,ignore:{o:40},caught:{tin:10,tgk:30}},aff:{threat:{get o(){return BAL.odb.j42.odTop_4},tcD:3,get bac(){return BAL.eff.j42.bacTop},lau:35,lauW:8},tell:{get tin(){return BAL.eff.j42.tinTop}}}};
+ black:{ignore:{o:40},caught:{tin:10,tgk:30}},aff:{threat:{get o(){return BAL.odb.j42.odTop_4},tcD:3,get bac(){return BAL.eff.j42.bacTop},lau:35,lauW:8},tell:{get tin(){return BAL.eff.j42.tinTop}}}};
 /* 2e4: Đánh đàn chờ ngự giá (qinCard, her garden pop-up and NPC cx3:qin): odds o + Tài/taiD + cầm × cam (× tt with Trống tài) + like when she knows his music; Sủng w / wLike, fail −l; Sức suc; NPC needs cầm ≥ minCam
    study: an NPC lesson (j85 npcStudyDo) — pays a teacher only keeping keep bạc; teacher / self weights for mindPick */
 Object.assign(BAL.ag.par3,{qin:{get o(){return BAL.odb.jact.odO},taiD:3,cam:4,tt:2,like:15,w:7,wLike:9,get l(){return -BAL.eff.jact.sungGo},suc:10,minCam:1,g:{"sung":2}},study:{keep:40,teach:1,self:1}});
@@ -2291,7 +2291,7 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,oneBelow:1/* PUNISH-TIER r
    count that warns her when someone searches HER (once a day per searcher). EIGHT charges = the owner's approved list (OD 26/11 ~05:15Z «D4 A»);
    the former 9th «Bày mưu hại người» (a plot begun / caught in the act / an old scheme) is folded into «Ức hiếp quấy phá» (same 2 pieces, same cấm túc).
    deed map completed by D4 #3 from dup-report §4.1: rash → hd, xa xỉ → vp, laydo/laydol/tat/phatquy/nuoc/tea/ink/mlbeat → uh, maid-line frame → vo,
-   maid-line poison → mh, ls (sổ Kính sự phòng lệch ngày) → tt like pm; pushp (đẩy xuống hồ, can drown) → mh like pond; phonghoa (burns a store) → uh. */
+   maid-line poison → mh, ls (sổ Kính sự phòng lệch ngày) → tt like pm; pushp (đẩy xuống hồ, can drown) → mh like pond; phonghoa (arson: a palace fire endangers lives) → mh (OD 27/11 ~00:09Z, split-merge P3). */
 BAL.charge={C:{
  vp:{n:"Vượt phẩm xa xỉ",tier:"nhe",lite:"bong",band:6,pk:["món vượt phẩm thấy tận nơi"],wk:["người tận mắt chứng kiến"]},
  il:{n:"Giấu đồ cấm",tier:"nhe",lite:"cam",band:5,pk:["đồ cấm thấy trong rương"],wk:["lời khai kẻ mua hộ"]},
@@ -2303,7 +2303,7 @@ BAL.charge={C:{
  tt:{n:"Tư thông",tier:"nang",band:1,pk:["tín vật, thư từ","sổ Kính sự phòng"],wk:["lời khai kẻ canh cửa","người tận mắt chứng kiến"]}},
  order:["tt","mh","vo","hd","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
-  bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",rash:"hd",pushp:"mh",phonghoa:"uh",
+  bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",rash:"hd",pushp:"mh",phonghoa:"mh",
   xx:"vp",laydo:"uh",laydol:"uh",tat:"uh",phatquy:"uh",nuoc:"uh",tea:"uh",ink:"uh",
   poison:"mh",kpoison:"mh",slowpoison:"mh",pgift:"mh",musk:"mh",pond:"mh",catswap:"mh",frame:"vo",kframe:"vo",giahoa:"vo",plant:"vo",
   tryst:"tt",pm:"tt",flirt:"tt",mangift:"tt",
