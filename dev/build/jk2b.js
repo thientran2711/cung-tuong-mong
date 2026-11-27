@@ -621,8 +621,9 @@ function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src=
 (function(){if(typeof runOpt!=="function"&&typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(){const r=r0.apply(this,arguments);try{const a=window.__kitLastEvArt;window.__kitLastEvArt=null;const t=$("rtoast");if(a&&t&&!t.querySelector(".kpev")){t.classList.add("kevres");t.insertAdjacentHTML("afterbegin",`<div class="kpev kpevr">${kitSceneArt(a.src,a.lab,{shape:"tall",cap:false})}</div>`)}else if(t&&!a){t.classList.remove("kevres");const o=t.querySelector(".kpevr");if(o)o.remove()}}catch(e){}return r}})();
 (function(){const c0=closeModal;closeModal=function(){const m=Q[0];const r=c0.apply(this,arguments);try{if(!(m&&kitIsEventChoice(m)))window.__kitLastEvArt=null}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="k2b-evart";st.textContent=`
-#rtoast.kevres{display:grid!important;grid-template-columns:84px minmax(0,1fr);column-gap:10px;align-items:start}
+#rtoast.kevres{display:grid!important;grid-template-columns:84px minmax(0,1fr);column-gap:10px;row-gap:0!important;align-items:start}/* owner 26/11 ~22:07Z (1): height = content. The picture spans up to 9 rows for any number of text parts; the empty spanned rows took the 10 px row gap each (~80 px band) — no row gap, the text parts keep their 10 px apart by margin */
 #rtoast.kevres>:not(.kpevr){grid-column:2}
+#rtoast.kevres>:not(.kpevr)+:not(.kpevr){margin-top:10px}
 #rtoast.kevres>.kpevr{grid-column:1;grid-row:1/span 9;width:84px;height:124px}
 #rtoast.kevres>.kpevr>.ksart,.kpsubj.kpev>.ksart{width:100%;height:100%;aspect-ratio:auto}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
