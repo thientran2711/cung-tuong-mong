@@ -127,7 +127,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
    localStorage "ctm-kct" (the Sổ luân hồi lists them) and worn again in a later life like the Thiên mệnh titles (jge geCarry). */
 const KCT={kc_tuyen:["Trâm hoa ngự ban",`Qua kỳ tuyển tú với tiếng thơm khắp kinh thành (Danh từ ${BAL.kcg.title.tuyenDanh} trở lên), được giữ thẻ bài vào cung`],kc_quy:["Khuê tú danh môn","Từ khuê các vào cung, phong ngay Quý nhân"],
  kc_R1:["Thuyền xuôi phương Nam","Kết cục hiếm ngoài cung: bỏ trốn cùng người thương"],kc_R2:["Thanh mai kết tóc","Kết cục hiếm ngoài cung: thanh mai thành phu quân"],
- kc_R3:["Hội thơ ngộ vương","Kết cục hiếm ngoài cung: làm Vương phi"],kc_R4:["Cân quắc Nhạn Môn","Kết cục hiếm ngoài cung: nữ tướng Nhạn Môn"],
+ kc_R3:["Thơ ngộ vương gia","Kết cục hiếm ngoài cung: làm Vương phi"],kc_R4:["Cân quắc Nhạn Môn","Kết cục hiếm ngoài cung: nữ tướng Nhạn Môn"],
  kc_R5:["Sứ hoa hòa thân","Kết cục hiếm ngoài cung: hòa thân thay công chúa"],kc_R6:["Muối trắng Giang Nam","Kết cục hiếm ngoài cung: nữ thương Giang Nam"]};
 function kctStore(){const g=store.get("ctm-kct");return g&&typeof g==="object"&&g.t?g:{t:{}}}
 (function(){try{if(typeof DH_CAT!=="object")return;BAL.dh.T=BAL.dh.T||{};for(const k in KCT){const d=KCT[k];DH_CAT[k]={n:d[0],g:"kc",how:()=>{const r=kctStore().t[k];return `${d[1]}${r&&r.first?` · kiếp ${r.first.life}`:""}`}};

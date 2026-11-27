@@ -20,6 +20,9 @@ function newMaid(name,loyal,age){return{name,loyal,age:age||16+R(7),fc:""}}
 
 /* modal queue */
 function pushModal(m){Q.push(m);return m}/* save-unseen-lists r4: hands the card back (a registered generator returns it) */
+/* DIALOG-ORDER r2: the ONE tap hook of the queue rule (jdayq dqTap: a card nobody can see never makes her tap dead; what her tap opens goes to the
+   FRONT). Registered HERE, before every other module, on window capture: it runs before any handler of her tap reads Q */
+try{["pointerdown","pointerup","click","keydown","touchstart"].forEach(k=>window.addEventListener(k,e=>{try{if(window.dqTap)window.dqTap(k,e)}catch(x){}},true))}catch(e){}
 /* saveable pending choices: a modal with opts is stored as {pid,pp,t}; PEND[pid](pp) rebuilds text and handlers */
 const PEND={};const RV=id=>rivals.find(x=>x.id===id)||null;
 function mkP(id,pp){pp=pp||{};const d=PEND[id]&&PEND[id](pp);if(!d)return null;d.pid=id;d.pp=pp;return d}
@@ -78,11 +81,13 @@ function kitCloseTxt(h){return String(h==null?"":h).replace(/<[^>]*>/g,"").repla
 function kitCancelIx(m){if(!m||!m.opts||m.mustChoose)return -1;return m.opts.findIndex(c=>c&&KIT_CLOSE_W.test(kitCloseTxt(c.n))&&(!c.fx||Object.keys(c.fx).every(k=>!c.fx[k])))}
 function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const m=Q[0];
   M.className="modal "+(m.cls||"");$("mt").textContent=/pcm/.test(m.cls||"")?"":m.t;$("mt").hidden=/pcm/.test(m.cls||"");try{const ar=evArt();M.querySelector(".dlg").style.setProperty("--dart",ar&&(m.who||/pcm/.test(m.cls||""))?`url(${ar})`:"none")}catch(e){}
-  const wh=m.who||null;const art=!m.who&&m.opts&&!m.faces?evArt():"";$("mb").innerHTML=(m.faces?`<div class="faces">${m.faces.map(f=>`<figure>${pframe(Object.assign({},f[0],{rw:""}))}<figcaption>${typeof kitNameRank==="function"?kitNameRank(f[0].rw||"",f[0].rw===f[1]?"":f[1],f[0].col):`<b>${f[1]}</b>${f[0].rw?`<small>${f[0].rw}</small>`:""}`}</figcaption></figure>`).join("")}</div>`:"")+(m.faces||/pcm/.test(m.cls||"")?m.h:`<div class="spk">${wh?pframe(wh):pframeArt(art||evArt())}<div class="spkt">${m.h}</div></div>`)+(m.opts?`<div class="opts">${m.opts.map((c,i)=>{if(i===kitCancelIx(m))return "";const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;if(poor&&!c.off&&typeof kitOffBac==="function")kitOffBac(c,-c.fx.bac);return `<button class="opt" data-m="${i}" ${poor||c.off?"disabled":""}${typeof kitOffAttr==="function"?kitOffAttr(c):""}>${c.n}<small>${dilLine(c)}</small></button>`}).join("")}</div>`:"");
+  const wh=m.who||null;const art=!m.who&&m.opts&&!m.faces?evArt():"";$("mb").innerHTML=(m.faces?`<div class="faces">${m.faces.map(f=>`<figure>${pframe(Object.assign({},f[0],{rw:""}))}<figcaption>${typeof kitNameRank==="function"?kitNameRank(f[0].rw||"",f[0].rw===f[1]?"":f[1],f[0].col):`<b>${f[1]}</b>${f[0].rw?`<small>${f[0].rw}</small>`:""}`}</figcaption></figure>`).join("")}</div>`:"")+(m.faces||/pcm/.test(m.cls||"")?m.h:`<div class="spk">${wh?pframe(wh):pframeArt(art||evArt())}<div class="spkt">${m.h}</div></div>`)+(m.opts?`<div class="opts">${m.opts.map((c,i)=>{if(i===kitCancelIx(m))return "";const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;if(poor&&!c.off&&typeof kitOffBac==="function")kitOffBac(c,-c.fx.bac);return `<button class="opt" data-m="${i}"${c.nav?' data-knav="1"':""} ${poor||c.off?"disabled":""}${typeof kitOffAttr==="function"?kitOffAttr(c):""}>${c.n}<small>${dilLine(c)}</small></button>`}).join("")}</div>`:"");
   $("mr").innerHTML=m.opts?"":`<button class="main" id="mclose">${m.btn||"Đã rõ"}</button>`;
   kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
 function closeModal(){const m=Q.shift();if(m&&m.onClose){if(m.nl&&window.renderHold)renderHold(m.onClose,m,[],false);else m.onClose()}if(!S.dead||Q.length)showModal();if(m&&m.entI&&!m.onClose&&Q.length&&!S.dead)return;if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* an origin story panel (jentry/joi entI: text + picture, no effect, no onClose) followed by another card: the board did not change, no redraw *//* the life card (m.nl): its nlAccept chain renders once, here (jrbatch); another card follows: the board under it is drawn at the end of this task (jrbatch renderSoon) */
 function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(!c){chooseBad(i,m);return}if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
+  /* KIT §6.2m nav: a pure NAVIGATION option (Đi tới / Xem Dư đồ / Đi làm …) changes nothing by itself: no effects, no log line, no result card */
+  if(c.nav){window.__kNav=(window.__kNav||0)+1;try{if(c.go)c.go()}catch(e){console.error("nav option",e)}setTimeout(()=>{window.__kNav=Math.max(0,(window.__kNav||1)-1)},0);showModal();render();return}
   const b0=snapReal(),s0=S.logSeq||0;
   /* ODDS CAP: a formerly-sure CHANCE option (cap = its khắc) rolls at the cap; a failure is the one soft failure (j63 oddsSoft), its go never runs */
   if(c.cap!=null&&!roll(BAL.odds.hi)){if(c.cap&&can(c.cap))spend(c.cap);oddsSoft("",c.fx)}else{apply(c.fx||{});if(c.go)c.go()}try{logChoice(m,c,b0,s0)}catch(e){console.error(e)}showModal();if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* a card follows (result, next event): the board under it at the end of this task (jrbatch renderSoon) */
@@ -187,8 +192,8 @@ function emperorDies(ev){if(ev)log(ev);let h=S.heir&&S.heir.k.alive?S.heir:null;
   if(S.rank>=7)return over("Mẫu hậu Hoàng thái hậu",pre+`${h.k.name}, con của ${v.name}, lên ngôi. Ngươi là đích mẫu, được tôn làm Mẫu hậu Hoàng thái hậu${live?`; nhưng ${v.name} cũng được tôn Thánh mẫu, cùng ngươi chia đôi hậu cung`:""}.`,"Thành Thái hậu (đích mẫu)",true);
   if(!live)return over("Thái phi",pre+`${h.k.name} lên ngôi. Mẹ ruột tân đế đã không còn, không ai truy cứu chuyện cũ. Ngươi thành Thái phi.`,"Thành Thái phi",true);
   const o=od(BAL.odb.j3.odO+S.duc/2+v.rel/2);
-  if(roll(o))return over("Thái phi",pre+`${h.k.name} lên ngôi. Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}) rồi tha cho ngươi, cho dời đến Thọ Khang cung.`,"Thành Thái phi",true);
-  return die(`${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (khả năng: ${chanceLo(o)}), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế`)}
+  if(roll(o))return over("Thái phi",pre+`${h.k.name} lên ngôi. Tân Thái hậu ${v.name} xét lại chuyện cũ (cơ may: ${word(o)}) rồi tha cho ngươi, cho dời đến Thọ Khang cung.`,"Thành Thái phi",true);
+  return die(`${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (cơ may: ${word(o)}), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế`)}
 function record(fate){const p=store.get("cung-kiep")||[];const e={n:S.name,o:S.origin.n,r:typeof lifeTopRank==="function"?lifeTopRank(S).n:RANKS[S.rank].n,age:S.age,f:fate+(S.st.tag?" · "+S.st.tag:"")};
   if(S.recorded&&p.length)p[0]=e;else p.unshift(e);S.recorded=true;store.set("cung-kiep",p.slice(0,12))}
 function die(why){over("Hồng nhan bạc mệnh",why+".",why)}
