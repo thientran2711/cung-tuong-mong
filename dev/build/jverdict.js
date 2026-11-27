@@ -223,9 +223,12 @@ document.addEventListener("pointerdown",()=>{RF.tapAt=performance.now()},true);d
 /* a new life / a death: nothing stays held */
 try{if(typeof lifeStore==="function")lifeStore("RF result-first hold",()=>{RF.held=false;RF.wantModal=false;RF.later.length=0})}catch(e){}
 const st=document.createElement("style");st.id="rf-css";st.textContent=`
-/* KIT 7.4: the result card of a choice is above the focus layer (.kfoc z 46) and every card (#modal z 42) */
-.rtoast.karesult{z-index:47}
-.rtoast.karesult.kres-hold{pointer-events:auto;z-index:${KIT_SCN.z+1}}/* COOP-QCARD: a HELD card stands over the kit scene layer (.kscn, KIT_SCN.z) too — «on top of everything» (KIT 7.4) */
+/* KIT 7.4: the result card of a choice is above the focus layer (.kfoc z 46), every card (#modal z 42) AND the kit scene layer (.kscn, KIT_SCN.z):
+   COOP-QCARD r2 (law 11, whole family): the plain result card, the scene's own result card with given rows (kitResultCard §93.8) and the HELD card
+   all stood under a kit scene opened after the choice (z 47 < 57) — she never saw what her choice did, the held one could not be tapped. One rule
+   for every result card: KIT_SCN.z + 1 (the ring screens keep theirs, .kring-on #rtoast z 290; an open card still PARKS it, KIT 32.10a) */
+.rtoast.karesult{z-index:${KIT_SCN.z+1}}
+.rtoast.karesult.kres-hold{pointer-events:auto}
 /* over the KIT 32.10a park: only the held result card, or the result card over the focus layer (stage view) */
 body.kdlg-on #rtoast.karesult.kres-front{visibility:visible!important;pointer-events:auto!important}
 .rtoast.karesult .kres-next{align-self:flex-end;margin-top:4px}`;document.head.appendChild(st);

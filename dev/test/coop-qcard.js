@@ -8,10 +8,12 @@
    (A) a HELD result card is never covered by another layer (2 looks in a row) — it is the front screen (KIT 7.4 «on top of everything»);
    (B) while a kit scene is open, body.kscn-on is set;
    (C) the queued card «Dưỡng Tú viện» reaches the screen within the player's taps (scene over, its road «Cất đồ …» the top of the screen); no page error.
-   MUTATE: COOP_QCARD_MUT=1 puts the held card back under the scene layer (z 47) → (A) must FAIL.
+   (D) law 11: every result card kind (plain resultShow / kitResultCard §93.8 / held) is the top of the screen over an open kit scene.
+   MUTATE: COOP_QCARD_MUT=1 puts the result card back under the scene layer (z 47) → (A) and (D) must FAIL.
    usage: python3 dev/build/assemble.py && node dev/test/coop-qcard.js [index.html] */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html';const MUT=+process.env.COOP_QCARD_MUT||0;
+/* shots never in git (owner OD 16/11 18:50Z): QC_SHOTS or a scratch folder outside the repo */const SHOTS=process.env.QC_SHOTS||'/home/user/wt/coop-qcard-shots';fs.mkdirSync(SHOTS,{recursive:true});
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m,x)=>{if(!c){bad++;console.log('FAIL',m,x!==undefined?JSON.stringify(x).slice(0,900):'')}else console.log('ok  ',m)};
  for(const [dev,vp] of (process.env.QC_DEV==='ipad'?[['ipad',[1180,820]]]:process.env.QC_DEV==='fold'?[['fold',[755,1000]]]:[['fold',[755,1000]],['ipad',[1180,820]]])){
@@ -19,7 +21,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  await ctx.route('http://localhost:8813/**',r=>{const u=new URL(r.request().url());const f=path.join(ROOT,decodeURIComponent(u.pathname));if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});return r.fulfill({status:200,contentType:f.endsWith('.html')?'text/html; charset=utf-8':'application/octet-stream',body:fs.readFileSync(f)})});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto('http://localhost:8813/'+PAGE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof selxDay==='function'&&typeof selxScRooms==='function'&&!!window.RF,null,{timeout:240000});
- if(MUT)await p.addStyleTag({content:'.rtoast.karesult.kres-hold{z-index:47!important}'});
+ if(MUT)await p.addStyleTag({content:'.rtoast.karesult,.rtoast.karesult.kres-hold{z-index:47!important}'});
  /* a tú nữ life up to the day-1 gate card (set-up as a bot: no holds, no scenes), then she plays it herself */
  const st=await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;window.__bot=1;window.__selxNoSc=1;try{nlFigsReady=()=>true}catch(e){}/* set-up only: the roulette's figure wait (CDN pictures) is async */;
   for(let i=0;i<600;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(S&&S.origin&&S.origin.k==='tt')break}if(!S||!S.origin||S.origin.k!=='tt')return{err:'no tt life',k:S&&S.origin&&S.origin.k,sd:!!(S&&S.dead)};S.kcPick='cung';nlAccept();
@@ -54,7 +56,20 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   if(s.card){reached=true;break}
   /* the player taps what is on top: the held card's «Tiếp ▸» when it is the top, else the scene's line */
   if((i%2)===1){steps++;if(s.held&&!s.cov&&s.nx)await p.mouse.click(s.nx[0],s.nx[1]);else if(s.box)await p.mouse.click(s.box[0],s.box[1]);else if(s.held&&s.nx)await p.mouse.click(s.nx[0],s.nx[1])}}
- await p.screenshot({path:path.join(ROOT,'shots','coop-qcard-'+dev+(MUT?'-mut':'')+'.png')}).catch(()=>{});
+ /* (D) LAW 11 — the whole result-card family over a kit scene (z order): with a kit scene open (kitScene, KIT_SCN.z), every kind of result card
+    she must SEE — the plain result card of a choice (resultShow), the scene's own result card with given rows (kitResultCard §93.8, the selection
+    days' «Giáo tập ma ma» card) and the HELD result card (jverdict) — is the top of the screen at its centre (KIT 7.4 «on top of everything») */
+ const fam=await p.evaluate(async()=>{const sl=ms=>new Promise(r=>setTimeout(r,ms));const t0=document.getElementById('rtoast');
+  const top=()=>{const t=document.getElementById('rtoast');if(!t||!t.classList.contains('on'))return 'not shown';const b=t.querySelector('.kres-next')||t;const r=b.getBoundingClientRect();if(!r.width)return 'zero';
+   const h=document.elementFromPoint(r.left+r.width/2,r.top+Math.min(r.height/2,20));return h&&t.contains(h)?'TOP':'under '+(h?(h.id||String(h.className)).slice(0,24):'null')};
+  /* no card open (an open card PARKS every result card by design, KIT 32.10a jk4 kdlg-on): only the scene is up */const M=document.getElementById('modal');M.hidden=true;await sl(200);
+  const out={};const Sc=kitScene.open({intro:0});try{Sc.show&&Sc.show()}catch(e){}await sl(500);out.flag=document.body.classList.contains('kscn-on');
+  try{resultShow('Thử',{},true)}catch(e){out.err=String(e).slice(0,80)}await sl(250);out.plain=top();
+  kitResultCard({title:'Thử',ok:true,rows:[{k:'duoc',label:'Được',items:['a']}]});await sl(250);out.kitRes=top();
+  const t=document.getElementById('rtoast');RF.held=true;t.classList.add('on','kres-hold','kres-front')/* hold() + front() */;await sl(150);out.held=top();t.classList.remove('kres-hold','kres-front','on');RF.held=false;
+  kitScene.close(true);M.hidden=false;try{showModal()}catch(e){}return out});
+ ok(fam.flag&&fam.plain==='TOP'&&fam.kitRes==='TOP'&&fam.held==='TOP',dev+': (D) every result card (plain / kitResultCard / held) is over an open kit scene',fam);
+ await p.screenshot({path:path.join(SHOTS,'coop-qcard-'+dev+(MUT?'-mut':'')+'.png')}).catch(()=>{});
  ok(covMax<2,dev+': (A) the held result card is never under another layer (looks in a row covered: '+covMax+')',covMax<2?undefined:tr.slice(-24));
  ok(noFlag===0,dev+': (B) body.kscn-on is set whenever a kit scene is open (looks without it: '+noFlag+')');
  ok(reached,dev+': (C) the queued card «Dưỡng Tú viện» reaches the screen ('+steps+' taps)',reached?undefined:tr.slice(-12));

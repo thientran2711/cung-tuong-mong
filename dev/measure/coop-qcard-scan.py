@@ -5,6 +5,9 @@ Two families of «a queued card stays hidden while «Sẵn sàng» / «Sang bu�
           a gate is SAFE when it (a) only holds while something she can see and tap is on screen and (b) repaints Q[0] itself when it lets go.
   F-SCN   every site that drops body.kscn-on (the «a kit scene is up» flag shared by the kit scene layer jkitsel §93 and the #modal stage jkstage §102):
           SAFE only when it keeps the flag while the OTHER owner is still up (kitScene.cur / #modal.kstg).
+  F-Z     (r2) every layer she must SEE or TAP that can be up while a kit scene plays (.kscn, KIT_SCN.z): over the scene, or under it BY DESIGN
+          (a card / the focus layer under the scene waits for it, F-HOLD); the result card (#rtoast.karesult: plain, kitResultCard §93.8, held)
+          is SAFE only when its z reads KIT_SCN.z+1 (or more).
 usage: python3 dev/measure/coop-qcard-scan.py [build dir]   (prints one row per site + the totals line)"""
 import re,sys,glob,os
 D=sys.argv[1] if len(sys.argv)>1 else os.path.join(os.path.dirname(__file__),'..','build')
@@ -47,7 +50,22 @@ for f in sorted(glob.glob(os.path.join(D,'j*.js'))):
         safe=('kitScene.cur' in ctx and ('kstg' in ctx or n=='jkstage.js'))
         scn+=1;unsafe+=0 if safe else 1
         rows.append(('F-SCN',f'{n}:{ln}','drops body.kscn-on','keeps it while the other owner is up' if safe else 'drops it whatever else is up','SAFE' if safe else 'UNSAFE'))
+# F-Z: z of the layers against the kit scene layer
+allsrc=''.join(open(f,encoding='utf-8').read() for f in sorted(glob.glob(os.path.join(D,'j*.js'))) if not f.endswith('all.js'))
+zs=re.search(r'const KIT_SCN=\{z:(\d+)',allsrc);SZ=int(zs.group(1)) if zs else 57
+def zof(sel):
+    m=re.search(re.escape(sel)+r'\{[^}]*?z-index:\s*(\$\{KIT_SCN\.z\+(\d+)\}|\d+)',allsrc)
+    if not m:return None
+    return SZ+int(m.group(2)) if m.group(2) else int(m.group(1))
+zr=zof('.rtoast.karesult');zu=0
+for what,z,need in [('#rtoast.karesult plain result card (resultShow)',zr,1),('#rtoast kitResultCard §93.8 (selection days: Giáo tập ma ma)',zr,1),('#rtoast.karesult.kres-hold held card (jverdict)',zr,1),
+                    ('body.kring-on #rtoast (ring screens)',zof('body.kring-on #rtoast'),1),('#kpodov podium',zof('#kpodov'),1),('.kmov manual kit scene / reveal',zof('.kmov'),1),('.kroul life roulette',zof('.kroul'),1),
+                    ('#modal cards / #modal.kstg stage',42,0),('.modal.kptitle title card',zof('.modal.kptitle'),0),('.kfoc focus layer',zof('.kfoc'),0)]:
+    if need:
+        ok=z is not None and z>SZ;zu+=0 if ok else 1
+        rows.append(('F-Z',what,f'z {z} vs scene {SZ}','over the scene' if ok else 'UNDER the scene: she cannot see / tap it while a scene plays','SAFE' if ok else 'UNSAFE'))
+    else:rows.append(('F-Z',what,f'z {z} vs scene {SZ}','under the scene by design: the scene covers the game, the card waits (F-HOLD)','KEEP'))
 for r in rows:print(' | '.join(r))
 chk=sum(1 for r in rows if r[0]=='F-HOLD' and r[4]=='CHECK')
 hu=sum(1 for r in rows if r[0]=='F-HOLD' and r[4]=='UNSAFE')
-print(f'TOTAL F-HOLD gates {hold} (unknown {chk}, unsafe {hu}) | F-SCN sites {scn} unsafe {unsafe}')
+print(f'TOTAL F-HOLD gates {hold} (unknown {chk}, unsafe {hu}) | F-SCN sites {scn} unsafe {unsafe} | F-Z layers unsafe {zu}')
