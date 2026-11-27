@@ -24,8 +24,10 @@ const M={
  gh:{mode:"tier",t:[["nhẹ",/^(Ghé chơi|Mượn son phấn)/],["vừa",/^(Giúp đỡ nàng|Giúp chăm thú nuôi)/,"a:petcare"],["nặng",/^Tặng quà/,"a:gift"]]},
  kg:{mode:"one"},                                     /* SPLIT from gh: «Kết giao» (alliance = another result) */
  play:{mode:"tier",t:[["nhẹ",/^Cùng chơi/],["vừa",/^Thách đấu/]]},
- hau:{mode:"one",pref:"like"},
- pho:{mode:"one",pref:"art"},
+ hau:{mode:"tier",pref:"like"},                      /* MAIN 177: LIVE's card already titled its rows nhẹ Tâng bốc · vừa Nói thật lòng · nặng triều chính | dạo vườn
+                                                         (jamove tiers + roll); as ONE «Mời ngài dạo ngự hoa viên» was never picked */
+ pho:{mode:"tier",pref:"art"},                       /* MAIN 177 (dead-member ruling): the row's own ACT-MOVE tiers — nhẹ «Phô tài» (1 khắc) · vừa hầu cờ / đánh đàn
+                                                         (2 khắc, Ân tình, then the win/lose choice); as ONE the vừa ways were never picked (lower odds) */
  dl:{mode:"tier"},                                    /* jamove tiers: nhẹ cành hoa · vừa quà trong rương */
  so:{mode:"one"},so2:{mode:"tier",t:[["nhẹ",/^Hầu chuyện, xem lén/],["vừa",/^Xem sổ nguyệt sự/]]},
  dola:{mode:"tier",t:[["nhẹ",/^Nghe ngóng chung/],["vừa",/^Sai đi dò la/]]},
@@ -36,6 +38,8 @@ const M={
  P13:{mode:"tier",harm:1,t:[["nhẹ","e:cutpay"],["vừa","e:conf","a:takeaway"],["nặng","e:judge"]]},
  P13r:{mode:"one"},P13p:{mode:"one"},
  s_phan:{mode:"keep"},
+ sj:{mode:"keep"},                                    /* MAIN 177 + MAIN 168 KEEP-CHOICE: «Thưởng phạt» (her servant) — reward · punish · pardon · replace are
+                                                         different matters she picks herself; as ONE «Phạt vô cớ» (no gain) was a dead option */
  s_gh:{mode:"tier",t:[["nhẹ",/^Trò chuyện$/],["vừa",/^Biếu quà nhỏ$/]]},
  /* deck doors (DOOR.D k) */
  /* owner 27/11 ~06:30Z (via MAIN 172): «Nghỉ ngơi» is ONE matter — nhẹ nghỉ một lát (free, Sức) · vừa dưỡng sức (thuốc bổ, more Sức) · nặng dưỡng nhan (dearer, Sắc) */
@@ -55,6 +59,9 @@ ONE.mode=k=>(M[k]&&M[k].mode)||"one";
 function fix(){
  const gh=DOOR.byK("gh");if(gh){gh.re=/^(Tặng quà|Giúp đỡ nàng|Giúp chăm thú nuôi của nàng|Mượn son phấn|Ghé chơi)/;if(gh.acts&&gh.acts.a)gh.acts.a=gh.acts.a.filter(k=>k!=="ally")}
  if(!DOOR.byK("kg"))DOOR.add({k:"kg",n:"Kết giao",kinds:["rival","hh","chest","card"],rep:"Kết giao",h:"Kết giao với nàng.",re:/^Kết giao/,acts:{a:["ally"]},one1:1});
+ /* MAIN 177 (law 1, no dead member): «Thử lòng» (test HER trust in the other: ngươi tin nàng hơn) is not the talk matter and its odds are always below
+    the sure talk ways, so inside the door it was never picked → out of the door: it stands as its own button on the pop-up again (jtwoway topicOpts) */
+ const tk=DOOR.byK("talk");if(tk&&tk.re&&/\|Thử lòng/.test(tk.re.source))tk.re=new RegExp(tk.re.source.replace("|Thử lòng",""),tk.re.flags);
  const so=DOOR.byK("so");if(so)so.re=/^Xem sổ thị tẩm/;
  if(!DOOR.byK("so2"))DOOR.add({k:"so2",n:"Xem sổ nguyệt sự",kinds:["ksp"],rep:"Xem sổ nguyệt sự",h:"Xem sổ nguyệt sự: xem lén, hay lót tay.",re:/^(Xem sổ nguyệt sự|Hầu chuyện, xem lén sổ nguyệt sự)/});
  const p13=DOOR.byK("P13");if(p13){p13.n="Trừng phạt";p13.rep="Xử tội";p13.h="Chọn mức trừng phạt nàng.";p13.acts={e:["judge","conf","cutpay"],a:["takeaway"]}}
@@ -100,7 +107,14 @@ function lossOnly(m){try{const a=m.a;let t="";if(a){let fw="";try{fw=fmt(a.w||{}
  const minus=t2.split("·").some(g=>/(-|−)\s*\d/.test(g)&&(/ngươi|(^|\s)ta(\s|$)/i.test(g)||/^\s*(Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Sức|Ân tình|Thiện cảm|thiện cảm)\b/.test(g)));
  return minus&&!plus}catch(e){return false}}
 ONE.lossOnly=lossOnly;
-function pick(r,L,seed){let ok=L.filter(m=>!m.off);if(!(M[r.k]||{}).harm)ok=ok.filter(m=>!lossOnly(m));if(!ok.length)return null;const h=hash(seed);
+/* MAIN 177 (no dead member) — the row's ROLL groups (jamove: «Bàn chuyện triều chính» | «Mời ngài dạo ngự hoa viên», hầu cờ | đánh đàn; jdoor harm rolls):
+   LIVE's card shows ONE way per roll group, equal chance (DOOR.pickRoll), so her «best old way» was the rolled one. Same here: each group is cut to one
+   runnable member by the same seed (co-op agrees) BEFORE the odds pick — no roll member is shadowed for ever by its group mate's odds. FAVOUR rows only. */
+function rollCut(r,L,seed){const G0=r&&r.roll;if(!G0||!G0.length||typeof DOOR.pickRoll!=="function"||(M[r.k]||{}).harm)return L;/* harm: owner ~01:12Z equal weight among a tier's real outcomes already — no cut */const drop=new Set();
+ for(const g of G0){const G=L.filter(m=>!m.off&&g.includes(m.id));if(G.length<2)continue;const one=DOOR.pickRoll(G,seed+":"+g[0]);G.forEach(m=>{if(m!==one)drop.add(m)})}
+ return drop.size?L.filter(m=>!drop.has(m)):L}
+ONE.rollCut=rollCut;
+function pick(r,L,seed){let ok=rollCut(r,L.filter(m=>!m.off),seed);if(!(M[r.k]||{}).harm)ok=ok.filter(m=>!lossOnly(m));if(!ok.length)return null;const h=hash(seed);
  if((M[r.k]||{}).harm)return ok[h%ok.length];
  /* FAVOUR: the members whose odds WORD is the best word she has (never worse than her best old way, as she reads it), then the pref
     (his liked topic she knows / his favourite art · her strongest), then equal chance among the rest (seeded): variety of real outcomes, same word */

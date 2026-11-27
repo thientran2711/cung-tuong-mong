@@ -389,3 +389,8 @@ cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) 
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
 | 27/11 | KK53 (MAIN 169/170) | **kitPick lifted plaque: ONE SMALL GREEN ✓ tick (`BAL.kpkgo` {24,24}) INSIDE the plaque's TOP-RIGHT corner (v3 KK54, owner 27/11 ~04:00Z; the «Chọn» chip and the bar are gone, no strip), two-tap, no ✕ / ✓** (canon overwrite of KK51); **every plaque = thẻ lụa** (ivory silk face, pale-gold 1 px border, dark-red title, lifted = brighter + soft gold glow; CSS only); **doubled odds clause fixed at its root** (jopic kitOptFinal strips a whole odds-word clause from the hint before it fills Được; jk2b kitHintRow reads a repeated clause once) | every kitPick board (people, dialogue answers, ring picker) | MAIN / RB-8 / KIT-STAGE-R8 | **BUILT on review/kk53** |
+
+## 27/11 DOOR-ONETAP — odds meter readable on a dark primary button
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 27/11 | DOOR-ONETAP (MAIN 177 X06 fix) | **odds meter `.kodm` inside a primary `.kbtn` (dark red)**: the word takes `--oc` = KIT_ODDS_COL (red «Mong manh», amber «Tùy duyên») → red on red, unreadable (Fold/iPad stills: Hậu cung «Tìm gặp» sub-line). Need ONE kit rule for the meter on dark buttons (e.g. light word / light segment track inside `.kbtn:not(.alt)`), every host. | jkpp kppBtn (Hậu cung «Tìm gặp» / «Ghé cung»), any one-tap door button with odds | coordinator | OPEN |
