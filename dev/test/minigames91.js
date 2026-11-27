@@ -18,7 +18,7 @@ const ALL='dan,hat,co,dauho,ban,tho,doi,doden,ve,hoa,theu,kim,mua,banh,huong';co
   const F=CanvasRenderingContext2D.prototype.fillText;CanvasRenderingContext2D.prototype.fillText=function(t,x,y,mw){try{const c=this.canvas;if(c&&c.closest&&c.closest('#kg82')&&this.globalAlpha>.2&&String(t).trim()){const m=this.measureText(t);let w=m.actualBoundingBoxLeft+m.actualBoundingBoxRight;const sc=mw&&m.width>mw?mw/m.width:1;
     const T=this.getTransform(),X=T.a,Y=T.d;const l=x-m.actualBoundingBoxLeft*sc,r=x+m.actualBoundingBoxRight*sc,tp=y-m.actualBoundingBoxAscent,bt=y+m.actualBoundingBoxDescent;
     list.push({c,dr:!!window.__drag,pop:!!(window.KG82&&KG82.inPop),s:String(t),l:T.e+l*X,r:T.e+r*X,t:T.f+tp*Y,b:T.f+bt*Y})}}catch(e){}return F.apply(this,arguments)}});
- const p=await ctx.newPage();const cdp=await ctx.newCDPSession(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);const cdp=await ctx.newCDPSession(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
   setTimeout(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true},50);Object.assign(S.arts,{cam:3,ky:2,thi:4,hoa:1,vu:3,y:2});S.tai=62;render()});

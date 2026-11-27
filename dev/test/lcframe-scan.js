@@ -1,6 +1,7 @@
 /* lcframe-scan (OWNER-UI-C, 27/11, owner ~06:15Z): a LÃNH CUNG person must wear the kit LÃNH CUNG frame (frame-cold), never her old rank frame; the DEAD wear the frame of the rank she held (+ b/w).
    Every portrait of the seeded lãnh cung woman (R[0]) and dead woman (R[3]) in every context: table «context | portraits | frame srcs | FAIL». usage: node dev/test/lcframe-scan.js [fold|ipad]; exit 1 on FAIL */
 const path=require('path');const {chromium}=require('playwright');
+require('./lib/fresh-build')();
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost'}}:{});let bad=0;
 for(const [n,w,h] of [["fold",755,1000],["ipad",1180,820]]){if(process.argv[2]&&process.argv[2]!==n)continue;const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:1});
  await p.goto('file://'+path.resolve('dev/index.html'));await p.waitForTimeout(2500);

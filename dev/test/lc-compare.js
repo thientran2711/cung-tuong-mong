@@ -1,5 +1,6 @@
 /* lc-compare (OWNER-UI-C, 27/11): REAL game, N faces: the SAME woman alive (own colours) vs in lãnh cung (kit lãnh cung frame + pale image), card + thumb, side by side → <outdir>/cmp-<dev>.png.  usage: node dev/test/lc-compare.js <outdir> [n=2] */
 const path=require('path'),cp=require('child_process');const {chromium}=require('playwright');const OUT=process.argv[2],N=+process.argv[3]||2;
+require('./lib/fresh-build')();
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost'}}:{});
 for(const [n,w,h] of [["fold",755,1000],["ipad",1180,820]]){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:2});
  await p.goto('file://'+path.resolve('dev/index.html'));await p.waitForTimeout(2500);

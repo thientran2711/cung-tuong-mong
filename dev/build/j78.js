@@ -193,7 +193,7 @@ function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=riva
  const odds=k=>{let o=null;try{o=actOdds(S,p,k)}catch(e){}return o==null?"":word(oddsCl(o))};/* actOdds (j9): the odds evidenceDo's roll uses (one path) */
  const add=(k,o)=>{const a=ACT[k];if(!a)return;let ok=false;try{ok=a.ok(S,p)}catch(e){}R0.push(Object.assign({k,n:a.n,odds:"",why:"",cost:[],gain:[],fail:[],risk:[],go:()=>evidenceDo(p.id,k)},o(ok)))};
  const nf=(need)=>`cần ${need} chứng cứ, đang có ${n}`;
- const busy=()=>!p.alive?"nàng đã mất":p.out?"nàng ở lãnh cung":sameHouse(S,p)?houseLine(p,"ngươi").replace(/^./,c=>c.toLowerCase()):t2||"";
+ const busy=()=>!p.alive?"nàng đã khuất":p.out?"nàng ở lãnh cung":sameHouse(S,p)?houseLine(p,"ngươi").replace(/^./,c=>c.toLowerCase()):t2||"";
  /* split-merge B1 (owner 26/11 ~21:00Z «hạn chế tách 1 việc», 27/11 ~00:46Z / ~01:00Z): ONE «Tố giác» — the pieces held pick the charge (chReady), the listener is
     the highest one who can judge it (chTo: a Hoàng hậu above the accused, else Hoàng thượng; she as Hoàng hậu = Xử tội). «Tố tội thật», «Bóc chuyện tư tình» and
     «Trình Thái hậu» are no longer separate roads (the same charge, the same punishment by its weight); B2: «Trả chứng cứ lấy lòng» folded away (Uy hiếp / Bán kept). */

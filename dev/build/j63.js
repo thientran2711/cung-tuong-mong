@@ -77,7 +77,7 @@ function kaEfTag(x){x=String(x);return /^\s*<span class="ef [^"]*"/.test(x)&&!/k
   if(/^\(.*\)$/.test(p)){add("note",h,"n");continue}
   if(KA_TIME.test(p)){add("ton",p.replace(/^[●○]+\s*/,""),"t");continue}
   if(KA_RISK.test(p)&&!(l==="hỏng"&&!cont)){add("kem",h,"r",l==="thành"?"t":l==="kèm"?kb:"b");continue}
-  if(l==="tốn"&&!cont){if(neu)add("ton",h,"n");else if(c==="g")add("duoc",h,"g","t");else if(/\d/.test(p)&&(c==="r"||/[-−]\s?\d/.test(p)))add("ton",h,"r");else add("kem",h,"r","b");continue}
+  if(l==="tốn"&&!cont){if(neu)add("ton",h,"n");else if(c==="g")add("ton",h,/\d/.test(p)?"r":"n");/* KK56 (E-GAIN3b #1, law 3): a piece written under «tốn:» is ALWAYS a cost («Chứng cứ 1 (tội …)» paid, never a green «Được») */else if(/\d/.test(p)&&(c==="r"||/[-−]\s?\d/.test(p)))add("ton",h,"r");else add("kem",h,"r","b");continue}
   if(l==="ngay"&&!cont){if(neu)add("note",h,"n");else if(c==="r")add("ton",h,"r");else add("duoc",h,"g","a");continue}
   if(l==="thành"){if(neu)add("note",h,"n");else if(c==="r")add(sure&&KA_STAT.test(p)?"ton":/[-−]\s?\d/.test(p)?"mat":"kem",h,"r","t");else if(c==="n"&&cont&&!/\d/.test(p)&&/(nếu|có khi|tang vật)/.test(p))add("note",h,"n");else add("duoc",h,"g","t");continue}
   if(l==="hỏng"&&!cont){const g=c==="g"&&/\+\s?\d/.test(p)&&!/-\s?\d/.test(p);add(g?"duoc":"mat",h,/^không (được )?mất gì$/i.test(p)?"n":g?"g":"r","b");continue}
@@ -157,7 +157,7 @@ function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the 
  else{M=kaModel(bodyHTML);R=kaRows(M);odds=kaOdds(M)}
  extraTime.reverse().forEach(x=>R.ton.unshift({h:x,c:"t"}));R.why=R.why.map(x=>({h:kaWhyCut(x.h),c:"r"}));{const wt=R.why.map(x=>kaPlain(x.h).toLowerCase());R.note=R.note.filter(x=>!wt.some(w=>w.includes(kaPlain(x.h).toLowerCase())))}if(R.ton.length>1)R.ton=R.ton.filter(x=>!/^không(\s|$)/i.test(kaPlain(x.h)));
  let needs=null;try{needs=b.dataset.kneed?JSON.parse(decodeURIComponent(b.dataset.kneed)):null}catch(e){}
- if(needs&&needs.length){const kn=t=>kaPlain(t).replace(/^[✓✗]\s*/,"").toLowerCase().replace(/^cần\s+/,"").replace(/\s*\(có [^)]*\)$/,"").trim();const un=needs.filter(n=>!n.ok).map(n=>kn(n.t));const gen=/^(chưa đủ điều kiện|hết khắc|sức dưới 20|chỉ buổi|đã qua|đang cấm túc|đã làm trong buổi|đã mất|ở lãnh cung)/i;
+ if(needs&&needs.length){const kn=t=>kaPlain(t).replace(/^[✓✗]\s*/,"").toLowerCase().replace(/^cần\s+/,"").replace(/\s*\(có [^)]*\)$/,"").trim();const un=needs.filter(n=>!n.ok).map(n=>kn(n.t));const gen=/^(chưa đủ điều kiện|hết khắc|sức dưới 20|chỉ buổi|đã qua|đang cấm túc|đã làm trong buổi|đã mất|đã khuất|ở lãnh cung)/i;
   const extra=R.why.filter(w=>{const x=kn(w.h);if(w.c==="g")return false;if(un.length&&gen.test(x))return false;return !un.some(u=>u.includes(x)||x.includes(u))});
   R.why=[...needs.filter(n=>!n.ok).map(n=>({h:n.t,c:"r"})),...extra.map(w=>({h:w.h,c:"r"})),...needs.filter(n=>n.ok).map(n=>({h:n.t,c:"g"}))]}
  /* owner 09:40Z (KIT 31.11): never the same fact twice. A Cần item that is only "afford the cost" (Bạc) goes: the Tốn line already
@@ -326,7 +326,7 @@ function kaAimPart(k,nm,a,b){return `<span class="ef ${b<a?"r":"g"}">${nm} ${kaN
 /* the target's own change since the act began: stats, rank, cấm túc, phế, mất (status words VANPHONG) */
 function kaAimStat(x){const v=x.v,b=x.b0||{},P=[];for(const [k,nm] of KA_AIMK){if(b[k]==null||typeof v[k]!=="number")continue;const a=Math.round(b[k]),n=Math.round(v[k]);if(a!==n)P.push(kaAimPart(k,nm,a,n))}
  if(typeof rivals==="undefined"||!rivals.includes(v))return P;/* rank / cấm túc / phế: consorts only (a servant's rank is another ladder) */
- if(b.alive&&v.alive===false)P.push('<span class="ef r">đã mất</span>');else if(!b.out&&v.out)P.push('<span class="ef r">bị phế, ra khỏi cung</span>');
+ if(b.alive&&v.alive===false)P.push('<span class="ef r">đã khuất</span>');else if(!b.out&&v.out)P.push('<span class="ef r">bị phế, ra khỏi cung</span>');
  else{if(b.rank!=null&&v.rank!=null&&v.rank!==b.rank&&typeof RANKS!=="undefined"&&RANKS[v.rank])P.push(`<span class="ef ${v.rank<b.rank?"r":"g"}">${v.rank<b.rank?"bị giáng xuống":"được thăng"} ${RANKS[v.rank].n}</span>`);
   if(!b.confined&&(v.confined||0)>0)P.push('<span class="ef r">bị cấm túc</span>')}
  return P}

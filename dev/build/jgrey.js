@@ -29,6 +29,8 @@ function kitTam(standin){return standin?`<span class="ktam" role="note" title="T
 .pcp.kit>.pcs{bottom:31%;left:14%;right:14%;border-radius:4px}
 /* the band is its OWN dark plate + white text in both states, never washed by the picture state (MAIN 172 ruling 27/11 ~06:28Z); the legacy .rk-cold grayscale(.6) on the whole portrait is gone for lãnh cung so the kit lãnh cung FRAME keeps its colours (owner ~05:53Z) — the pale filter is on the image only */
 .pcp.kit>.pcs{background:#2a1a12f2;color:#fff;font-size:.78rem;filter:none}
+/* the dead record box (jdead dthIn): under the facts in «Thông tin», clear of the wear row's grade badges */
+.kdrec{margin-top:18px}
 .pcp.rk-cold.kst-lc,.md.rk-cold.kst-lc{filter:none}
 html body .pface.on>.md.rk-cold.kst-lc{filter:var(--k-glow)}
 .md.kst-dead,.pcp.kst-dead,.md.kst-lc>img:not(.pcb2),.md.kst-lc .kin>img.kpor,.md.kst-lc .kin>.kbg,.pcp.kst-lc>img:not(.pcb2),.pcp.kst-lc .kin>img.kpor,.pcp.kst-lc .kin>.kbg,img.kst-lc:not(.figimg):not(.kesimg):not(#mefig),img.kst-dead:not(.figimg):not(.kesimg):not(#mefig){filter:var(--kst)}

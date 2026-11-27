@@ -21,9 +21,9 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
    if(s.none){R.push({dev:W+'x'+H,n,act,res:'no panel',FAIL:true});continue}
    if(OUT&&n===60&&act){fs.mkdirSync(OUT,{recursive:true});await p.screenshot({path:`${OUT}/${W}-notice-60-act.png`})}
    let exit=s.xin;let how=exit?'✕':'';let closed=null;
-   const tap=await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');const bt=[...d.querySelectorAll('.opts > button')].filter(e=>e.getClientRects().length);const e=bt[bt.length-1]||d.querySelector('.kit-x');if(!e)return null;const r=e.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,ok:r.top>=0&&r.bottom<=innerHeight}});
+   const tap=await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');const bt=[...d.querySelectorAll('.opts > button')].filter(e=>e.getClientRects().length);const e=d.querySelector('.kit-x')||bt[bt.length-1];/* KK56: «Để sau» is the frame ✕ now */if(!e)return null;const r=e.getBoundingClientRect();return {x:r.left+r.width/2,y:r.top+r.height/2,ok:r.top>=0&&r.bottom<=innerHeight}});
    if(tap&&tap.ok){await p.touchscreen.tap(tap.x,tap.y);await p.waitForTimeout(900);closed=await p.evaluate(()=>document.getElementById('modal').hidden||!Q.length||Q[0].t!=='Tin báo')}
-   const okRow=(s.opts===(act?2:0)||!act)&&(act?s.inView:true)&&s.frameFits&&(act?closed===true:(s.xin||s.opts>0||true));
+   const okRow=(s.opts===(act?1:0)||!act)&&(act?s.inView&&s.xin:true)&&s.frameFits&&(act?closed===true:(s.xin||s.opts>0||true));
    R.push({dev:W+'x'+H,n,action:act,opts:s.opts,'opts in view':s.inView,'✕ in view':s.xin,'frame fits':s.frameFits,scrollers:s.scrollers,'tap closes':closed,FAIL:!okRow})}
   await ctx.close()}
  await b.close();console.table(R);const bad=R.filter(r=>r.FAIL);console.log('cases',R.length,'FAIL',bad.length);process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
