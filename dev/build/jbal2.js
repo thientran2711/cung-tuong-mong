@@ -1610,7 +1610,11 @@ BAL.talk.secretMal=50;BAL.talk.secretGrab=50;
    servant at lòng ≥ BAL.loy.mid reports the attempt to her master (oan = the master's regard lost toward the recruiter). cap = most Tai mắt one can hold. */
 BAL.ag.know.tm={cap:10,want:{bac:15,protect:15,post:10,revenge:20},post:3,loyalMul:.35,tell:50,oan:6,
  /* 2f2: threat = fear bonus on tmOdds for Dọa tố (threatServ); vol = the j7 volunteer comes only when her odds for him reach min, she pays bac */
- threat:20,vol:{min:55,bac:30}};
+ threat:20,vol:{min:55,bac:30,danh:3/* j7 «Thử lòng trước» failed: the two-faced one sells her palace's talk (was typed −3) */},
+ /* TAI-MAT-KNOW (owner OD 27/11 ~04:16Z): a master's feeling toward a spymaster changes ONLY when that master LEARNS it (spyLearn, jagknow):
+    learn.oan = oán added at that moment; the thiện cảm drop is tm.oan (the old refusal-report number, one number for every learning road);
+    def.bac = what the j24 «Có người đến» defecting maid costs (was typed 20; the jtsb card reads it too) */
+ learn:{oan:8},def:{bac:20}};
 /* AG-MOODKNOW (owner OD 17/11 ~17:55Z (1)): who knows the CAUSE of a mood (jmoodknow). pub = morning "Tin trong cung" leak odds per cause event
    (def for others; clamped BAL.odds.lo/hi; max lines a morning); pubEv = PUBLIC cause events (jemo EMO_EV keys), the rest SECRET; pubRe = PUBLIC cause
    words for causes set without an event key (old saves too); spy = a Tai mắt inside that person's household learns it; eye = % of oSee for the

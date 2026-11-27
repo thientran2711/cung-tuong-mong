@@ -140,7 +140,7 @@ function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return n
  if(r.acc==="tsv"){const L=(t.staff||[]).filter(s=>s.spyFor!==p.a);const s=L.sort((x,y)=>(x.loyal+nq(x,"loyal",BAL.net.k.firmLoyal))-(y.loyal+nq(y,"loyal",BAL.net.k.firmLoyal)))[0];
   if(s){p.acc=s.sid;/* 2f2: the approached servant CHOOSES by tmOdds (traits, lòng, what she wants); a refusal is told as before */const ao=typeof tmOdds==="function"?tmOdds(a,s):(s.loyal+nq(s,"loyal",BAL.net.k.firmLoyal)+nq(s,"greed",BAL.net.k.firmGreed)>=60?25:100),aok=ao>=100||agTry(ao);
    if(!aok&&agSoft(ao)){/* review ag-all-2 r2 C5: a capped miss is soft (OD ~17:35Z): nobody hears, nothing changes, the plot just ends */p.end="refused";p.sv=s.sid;if(a===S)agSoftTxt(S,`Mua chuộc ${s.name}`);else if(a.plan&&a.plan.j70===p.id)a.plan=null;return p}
-   if(!aok){p.end="refused";p.sv=s.sid;evA(t,a,BAL.eff.j70.evNewPlot70);s.loyal=cl(s.loyal+BAL.eff.j70.loyalNewPlot70,0,100);try{mindLog(a,"_abandon")}catch(e){}
+   if(!aok){p.end="refused";p.sv=s.sid;evA(t,a,BAL.eff.j70.evNewPlot70);/* TAI-MAT-KNOW: the refusing servant tells = the master LEARNS who */typeof spyLearn==="function"&&spyLearn(t,a);s.loyal=cl(s.loyal+BAL.eff.j70.loyalNewPlot70,0,100);try{mindLog(a,"_abandon")}catch(e){}
     if(t===S){p.kn=1;p.kt.push(tellOf70(p,0));p.pend="serv"}else if(a===S){p.pend="ownfail"}
     if(a!==S&&a.plan&&a.plan.j70===p.id)a.plan=null;return p}
    s.spyFor=s.spyFor||p.a;p.bonus=(p.bonus||0)+8;if(r.bac)ap(a,{bac:-Math.min(r.bac,Math.max(0,a.bac||0))})/* she took it: now the bạc is paid */}}
