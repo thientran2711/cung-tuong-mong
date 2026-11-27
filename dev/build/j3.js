@@ -77,8 +77,11 @@ function kitCancelIx(m){if(!m||!m.opts||m.mustChoose)return -1;return m.opts.fin
 function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const m=Q[0];
   M.className="modal "+(m.cls||"");$("mt").textContent=/pcm/.test(m.cls||"")?"":m.t;$("mt").hidden=/pcm/.test(m.cls||"");try{const ar=evArt();M.querySelector(".dlg").style.setProperty("--dart",ar&&(m.who||/pcm/.test(m.cls||""))?`url(${ar})`:"none")}catch(e){}
   const wh=m.who||null;const art=!m.who&&m.opts&&!m.faces?evArt():"";$("mb").innerHTML=(m.faces?`<div class="faces">${m.faces.map(f=>`<figure>${pframe(Object.assign({},f[0],{rw:""}))}<figcaption>${typeof kitNameRank==="function"?kitNameRank(f[0].rw||"",f[0].rw===f[1]?"":f[1],f[0].col):`<b>${f[1]}</b>${f[0].rw?`<small>${f[0].rw}</small>`:""}`}</figcaption></figure>`).join("")}</div>`:"")+(m.faces||/pcm/.test(m.cls||"")?m.h:`<div class="spk">${wh?pframe(wh):pframeArt(art||evArt())}<div class="spkt">${m.h}</div></div>`)+(m.opts?`<div class="opts">${m.opts.map((c,i)=>{if(i===kitCancelIx(m))return "";const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;if(poor&&!c.off&&typeof kitOffBac==="function")kitOffBac(c,-c.fx.bac);return `<button class="opt" data-m="${i}"${c.nav?' data-knav="1"':""} ${poor||c.off?"disabled":""}${typeof kitOffAttr==="function"?kitOffAttr(c):""}>${c.n}<small>${dilLine(c)}</small></button>`}).join("")}</div>`:"");
-  $("mr").innerHTML=m.opts?"":`<button class="main" id="mclose">${m.btn||"Đã rõ"}</button>`;
-  kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
+  /* empty-modal (MAIN 167, WORKLIST row 38: «Hội phối đồ: báo đề» empty list, stuck on Fold): a card whose option list is EMPTY or ALL locked
+     shows THE kit empty state (kitEmpty) and the plain close «Đã rõ» — never a dialog with nothing to press */
+  const live=kitModalLive(m);
+  $("mr").innerHTML=m.opts&&live?"":`<button class="main" id="mclose">${m.btn||"Đã rõ"}</button>`;
+  M.__m=m;kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
 function closeModal(){const m=Q.shift();if(m&&m.onClose){if(m.nl&&window.renderHold)renderHold(m.onClose,m,[],false);else m.onClose()}if(!S.dead||Q.length)showModal();if(m&&m.entI&&!m.onClose&&Q.length&&!S.dead)return;if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* an origin story panel (jentry/joi entI: text + picture, no effect, no onClose) followed by another card: the board did not change, no redraw *//* the life card (m.nl): its nlAccept chain renders once, here (jrbatch); another card follows: the board under it is drawn at the end of this task (jrbatch renderSoon) */
 function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(!c){chooseBad(i,m);return}if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
   /* KIT §6.2m nav: a pure NAVIGATION option (Đi tới / Xem Dư đồ / Đi làm …) changes nothing by itself: no effects, no log line, no result card */
@@ -121,7 +124,7 @@ PEND.tuyen=p=>({who:pEmp(),t:"Hoàng thượng hỏi ý ngươi: năm nay nên t
 PEND.thbenh=()=>({who:pTH(),t:"Thái hậu lâm bệnh, Đức Thọ cung đóng cửa không tiếp khách.",o:[
     {n:"Hầu bệnh cả tháng",fx:{suc:-25,th:15,duc:4}},{n:"Gửi lễ vật vấn an",fx:{bac:-30,th:4}}]});
 PEND.loveletter=p=>{const v=RV(p.v);if(!v)return null;const m=p.m!=null&&typeof manById==="function"?manById(p.m):null;return{who:pSpy(),t:`Tai mắt nhặt được thư tình ${v.name} viết cho ${m?m.name:"một thị vệ"}.`,o:[
-    {n:"Trình lên Hoàng thượng",fx:{},x:`${word(50)} · thành: ${v.name} thất thế · hỏng: Danh ${balSg(BAL.eff.j3.danhGo)}`,go:()=>{if(roll(50))fall(v,"bị bắt được thư tư tình với thị vệ");else{apply({danh:BAL.eff.j3.danhGo});log(`<span class="r">Hoàng thượng cho là thư giả, trách ngươi gây chuyện.</span> Danh ${balSg(BAL.eff.j3.danhGo)}.`)}}},
+    {n:"Trình lên Hoàng thượng",fx:{},x:`${word(50)} · thành: ${v.name} thất thế · hỏng: Danh ${balSg(BAL.eff.j3.danhGo)}`,go:()=>{if(roll(50))fall(v,"bị bắt được thư tư tình với thị vệ",null,"nang");else{apply({danh:BAL.eff.j3.danhGo});log(`<span class="r">Hoàng thượng cho là thư giả, trách ngươi gây chuyện.</span> Danh ${balSg(BAL.eff.j3.danhGo)}.`)}}},
     {n:"Cất giữ làm con tin",fx:{},x:`chứng cứ ${v.name} ${balSg(BAL.eff.j3.evGo_2)}`,go:()=>{evStory(v,BAL.eff.j3.evGo_2,"viết thư tình cho một thị vệ")}}]}};
 /* npc-purpose G1 (owner OD 18/11 ~04:08Z): a weekly card comes only from a PERSON with a GOAL (kinds in jagwhy1, numbers BAL.ag.why.dil).
    Every card's actor is asked why (npwAsk); the world / duty cards with no one scheming (festival, flood, the Emperor's question when the palace is
@@ -164,7 +167,7 @@ function monthTick(){let ev="";
   ev+=kidsMonth();S.storms=0;ev+=rivalsMonth();ev+=storyMonth();if(S.dead)return ev;ev+=heirMonth();
   /* promo-root (25/11): «Bị bỏ quên» only after BAL.danhG.forgetGrace months since she entered the palace or last left lãnh cung (S.forgetAt, set by restore j14): before, a release from lãnh cung was undone in the same monthTick (Sủng 0 / Danh 0 / rank 0 after restore) and rank-0 origins were forgotten in month 1–3 */
   if(S.forgetAt==null)S.forgetAt=S.turn+BAL.danhG.forgetGrace;
-  if(!S.out&&S.turn>=S.forgetAt&&S.sung<=0&&S.danh<=BAL.danhG.forget&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung");return ev}
+  if(!S.out&&S.turn>=S.forgetAt&&S.sung<=0&&S.danh<=BAL.danhG.forget&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung",null,"keep");return ev}
   const wasQ=S.rank>=7;ev+=promote();if(!wasQ&&S.rank>=7)S.justCrowned=1;
   S.month++;S.tuan=0;
   if(S.month>12){S.month=1;S.year++;S.age++;S.emp.age++;if(typeof ageYear==="function")ageYear();allKids().forEach(([k])=>{if(k.alive)k.age++});
@@ -194,3 +197,10 @@ function record(fate){const p=store.get("cung-kiep")||[];const e={n:S.name,o:S.o
 function die(why){over("Hồng nhan bạc mệnh",why+".",why)}
 /* the base night rest of everyone (endTurn; AG3: the maid road's week too, j42 srvEndTurn) */
 function nightRg(){return harsh()?1:4}
+
+/* empty-modal (MAIN 167): the ONE queue dialog always follows the queue — if any code took the shown card out of Q (spread, splice, Q=[]), the next
+   render shows Q[0] or closes the dialog; a stale card over an empty queue (no way out) cannot stay. Wrapped after every module has loaded. */
+function kitModalLive(m){if(!m||!m.opts)return true;const ci=kitCancelIx(m);return m.opts.some((c,i)=>c&&i!==ci&&!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0))}
+setTimeout(()=>{try{/* the empty state goes in AFTER every dialog wrapper has drawn (kit dialog frames rebuild the body) */const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=document.getElementById("modal"),m=Q[0];
+  if(M&&!M.hidden&&m&&!kitModalLive(m)&&!M.querySelector(".kempty")&&typeof kitEmpty==="function"){const host=M.querySelector(".opts")||document.getElementById("mb");if(host)host.insertAdjacentHTML("beforeend",kitEmpty("Lúc này không còn việc để chọn",["Đóng thẻ này; khi đủ điều kiện, việc sẽ mở lại."],{topic:m.t}))}}catch(e){}return r};window.showModal=showModal}catch(e){console.error("modal empty",e)}
+ try{if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{const M=document.getElementById("modal");if(M&&!M.hidden&&M.__m&&M.__m!==Q[0])showModal()}catch(e){}return r};window.render=render}catch(e){console.error("modal sync",e)}},0);
