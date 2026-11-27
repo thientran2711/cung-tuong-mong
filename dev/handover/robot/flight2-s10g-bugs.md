@@ -1,0 +1,8 @@
+# flight2-s10g bug file (final)
+Fold 755x1000, bot=sens, seed 2026112537, game pinned 1dcb373e+ / 5ab5b80e406e (2026-11-26T10:49Z, served locally). Harness 0e0ebe29 → 8ea10d7e (buổi 246, save restored 575663/575663) → 97e55a45 (buổi 2846).
+- Ending: «Lãnh cung — Tuổi xuân qua đi», age 40, year 23, buổi 3252, 2966 taps. Game-imposed. VALID (robot-audit.js). RANK 0 the whole life: 254 promo offers seen, 101 picked (99 decree, 2 select), highest offer rank 0.
+- GAME BUG «SAVE QUOTA SPLIT»: localStorage quota (~5.21M chars). CP b2796 5,215,582 → b2846 5,217,822 (+2.2K vs ~+100K normal); stored save frozen at clock 20.241.2.2 while live had reached ≥ turn 243; harness log «QuotaExceededError: the game save no longer fits localStorage (j6 save() swallows it)» ×1907 and «SAVE STALE» ×4. The harness switch restart at b2846 resumed from the stale save (≥2 turns lost), then no voluntary restarts (F ROOT order).
+- GAME BUG «no way out»: #kdaytc dialog (daily/time card) — no button reachable (all below the screen / clipped, nothing scrolls) ×2 (harness steps 2193, 2788); unstuck by other taps. (Dialog «Ô lưu / Xem bản thân / …» row.)
+- HARNESS: .kmov (div.kmov.kcf.km-full) picker stalled 95 steps / 61 s ×~10, always unstuck by real tap «Ta biết rồi» (possible late/flickering button in the game dialog); «area tap would have landed on a button» ×8 on .kemo flicker elements.
+- HARNESS: pin server root lacked /dev/vendor/pixi-8.5.2.min.js (404), fixed at harness buổi ~3021 by copying origin/main's file without restart → every s10g screen before that is «degraded vs LIVE».
+- Memory: no freeze; dead buttons 0; stuck 0; pin exit 3 none.
