@@ -1106,6 +1106,10 @@ Object.assign(BAL.kc2,{kcCard:{"vietNhatKyGiau_od":78,"chaiChuotThuY_od":70,"thi
    dienSel = the tiểu thư Điện tuyển keep chance (kcDienSel): base + (score − KC.cut[0])·k, floor lo (cap BAL.kcSelMax), 0 below cut[0] − gap; noise = ± of the score;
    kcCard.quyXinChaWant = the plea bonus when she wants the tuyển tú (kcQuyP). */
 Object.assign(BAL.kc2,{ill:{suc:35,low:20,dieLo:40,dieHi:8},dienSel:{base:45,k:1.2,lo:20,gap:15,noise:4}});BAL.kc2.kcCard.quyXinChaWant=15;
+/* KC-ODDS-CHIP (27/11, law 4/7): the numbers of the two hand-rolled contests, moved from literals to BAL (values unchanged) so the roll and the odds word read ONE place.
+   fest = kcFest (khuê các festivals: score = art·BAL.art.score + Tài/3 + Sắc/6 + R(span); score ≥ top first, ≥ ok praised, below = loses 1 Danh);
+   hoi = jkc2 n_hoi (dance / polo / water rite: raw = Vũ·vu + Sắc/sac + (bd: Sức/suc) + R(span); raw ≥ ok = the envoy remembers her). */
+BAL.kc2.fest={top:60,ok:40,span:30,tai:3,sac:6};BAL.kc2.hoi={ok:55,span:30,vu:12,sac:3,suc:4};
 
 /* ONE CORE (owner OD:L1267; review/show-why, from review-trait-pool-r1 follow-up): every number chosen by a nết test lives here.
    BAL.net.k: quality-keyed sizes for nq(p,quality,n) / netIs (servant + agent qualities). BAL.net.n: nết-keyed tables read by
