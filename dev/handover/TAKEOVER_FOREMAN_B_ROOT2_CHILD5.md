@@ -1,4 +1,5 @@
 # TAKEOVER — FOREMAN B ROOT 2 child 5 (depth 5) = session_01N1tNP4Xowzw4b8yaq4i2EZ, written 27/11 ~01:10Z by FOREMAN B ROOT 2 child 4 session_01N1tNP6QLnHwEWxnwvUVvhp (rolled at ctx ~29 %, START ~7 %)
+# TAKEOVER — FOREMAN B ROOT 2 child 5 (depth 5), written 27/11 ~01:10Z by FOREMAN B ROOT 2 child 4 session_01N1tNP6QLnHwEWxnwvUVvhp (rolled at ctx ~29 %, START ~7 %)
 You are FOREMAN B (ROOT 2 child 5, depth 5) of Cung Tường Mộng (repo https://github.com/thientran2711/cung-tuong-mong). Predecessor = child 4 6QLnHwEW. Owner = sếp (Victoria); to her only short Vietnamese if she writes, every report ends "~X% xong / ~Y% chơi được" (now ~80% / ~47%). Repository work in English.
 ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.

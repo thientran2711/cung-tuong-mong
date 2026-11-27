@@ -594,3 +594,5 @@ FLIGHT2-S16B life (seat s16 session_01UV1Szhqp1P7gBX2vN1HGfg, ctx ~15 %; iPad 11
 EMP-DAY | reports/emperor-favour-plan.md @f868ff7b | session_01PEhRbuMDVjApgDKJapJENo | DONE (PLAN READY, worker archived) | 2026-11-27T01:25Z
 coop-afk-l13 BIG rv (r2+r3) | review/coop-afk-l13-r3 | <opening> | RUNNING | 27/11 01:30Z (Foreman B child 5)
 FLIGHT2-S16C life (seat s16 session_01UV1Szhqp1P7gBX2vN1HGfg, ctx ~19 %; iPad 1180x820 bold, seed 2026112545, newest LIVE origin/main served locally via rt-serve-build.sh + pin=1 fresh profile + dev/vendor copied, harness review/robot-realtap 97e55a457) | dev/handover/robot/flight2-s16c.* | session_01UV1Szhqp1P7gBX2vN1HGfg | CLAIMED | 2026-11-27T01:33Z (FOREMAN F ROOT #2 session_01UV1SzjiyJzqC1pGgm8zVFQ)
+E-TIER-AUDIT | (report only) dev/handover/reports/tier-audit.md | session_01DgYSWoFVCrpS7YmQGBGr58 | RUNNING | 2026-11-27T01:05Z (FOREMAN E ROOT, ordered by MAIN 168)
+save-pid-cards BIG rv | review/save-pid-cards-rv | session_01N1tNP5p71UEmkesbLLD9jC | RUNNING | 27/11 01:05Z (Foreman B child 4)
