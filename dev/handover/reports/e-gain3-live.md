@@ -88,3 +88,11 @@ Changes:
 
 Shots (looked at; not in git, /home/user/wt/eg3shots): maid pop-up «Đổi người chạy việc» Fold (Tốn không · Được «tự chọn người chạy việc cho ta (đi dò la, đưa thư, mua đồ · lòng cao thì ít khi khai ra ta)», no cut text); deck «Nghỉ ngơi» Fold + iPad (Thành Nghỉ ngơi một lát · Nghỉ ngơi dưỡng sức), tier dialog iPad (2 tier cards, Được «Sức ++, tâm trạng +++»; played on Fold → result «Được Sức +6»); Giao hảo tier door Fold + iPad (Ghé chơi · nhẹ / Giúp đỡ nàng ta · vừa / Tặng quà · nặng). «Mượn son phấn» is now a member of the nhẹ tier (jone gh) and shows only when it is the picked member; its text is covered by door-row-hint (0 bad), no own shot.
 Notes for Foreman E (LIVE-own, not touched, out of this unit): (a) «Đổi người chạy việc» sits under the pop-up tab «Trừng phạt»; (b) the deck card summary prints «vừa: —» for a locked tier (jone.js:192 on LIVE); (c) Giao hảo «Ghé chơi · nhẹ» Bại line carries «nàng ta chuộng giản dị: quý ta +».
+
+## E. Landing merge (Foreman E order 27/11 ~15:31Z; E-GAIN3b-RV PASS 4db15919)
+Branch **review/e-gain3-live-m** = 4db15919 + LIVE **772bee4f** → merge **443c6761**. Source clean; only index.html + sw.js conflicted → rebuilt (assemble.py + build_site.sh), assets.json = LIVE. review/e-gain3-live not moved.
+| test on 443c6761 | result |
+|---|---|
+| door-row-hint Fold / iPad | 7740 rows 0 bad / 8268 rows 0 bad, exit 0, 0 page errors |
+| gain-empty Fold | 2145 cards, 1 distinct empty = «Lập phe cùng ai · 1 ›» (cao:fac) = KIT REQUEST #11 (LIVE-own kit part, jkring; same as before), 0 page errors |
+| oldsave-r1 (LIVE 772bee4f save → merge) | 16 / 16 |
