@@ -360,3 +360,54 @@ realtap true, exitPick none, build 97a2b0691bf3 in every life; skip taps 2–7 p
 - Verdict: PASS robot-realtap 97e55a457 (one verdict 8ea10d7e..97e55a457) · audit 74d434fb PASS. The tip is ready for the coordinator (test files only: dev/test/robot-rt.js, rt-serve-build.sh, realtap.js, rt-bare-unit.js + PROGRESS).
 - Open for the next harness fixer (none blocking): N5 double flip (+5 on «gone», stall force vs .kmend), N1 offsetParent in the dialog rule, N2 continue after RT_TEST_* fixture insert, N3 60 s deadCheck at Đông sở, N7 fetch per --b, older N3 dress / N4 tho.
 - Recipe reuse: worktrees /home/user/wt/rr14-{tip,ctl,8ea} (+ «x» copies with the RT_REV14 kitCardFlip×2 hook, rr14-ctlh = f0737e88 + STALELABEL, rr14-dbg = tip + DBG/DC prints), LIVE /home/user/wt/rr14-live (git archive 4cfcda61) on :8881, runner /home/user/wt/rr14-out/run.sh «H|name|env|args», SCAN probes /home/user/wt/rr14-probe/probe*.js.
+
+## REVIEW robot-realtap 97e55a457..39c6e505 — BIG #15 (session_01UV1SzhuX1hpBKRWeY1SQPX, for F ROOT #2 session_01UV1SzjiyJzqC1pGgm8zVFQ), 27/11 ~03:10Z
+PRIORITY #1 CHECK: OD robot real-tap rules 25/11 (dev/handover/briefs/F-robot-2511.md) | review/robot-realtap 97e55a457 PASS (BIG #14) → 943285b5 (FIXER #14, PROGRESS items 27–39) → 39c6e505 (FIXER #15, item 14 rt-serve-build) | claims: BIG REVIEWER #15 = this job (CLAIMS.md 02:12Z).
+### VERDICT: PASS review/robot-realtap 39c6e505 (one verdict for 97e55a457..39c6e505, test files only: robot-rt.js, realtap.js, rt-serve-build.sh + PROGRESS)
+Tested on the NEWEST main 17f23656 (build 5a7a9c4004c1, CTM_BI.s 540358c4+; main moved since the fixer's a22cf45d), git archive (root files + coop + icons + dev/vendor) served 127.0.0.1:8895, RT_NOSHOT=1, RT_PIN=0 unless said. Harness from fresh sparse worktrees of 943285b5 (rr15-tip), 39c6e505 (rr15-fin; robot-rt.js identical to 943285b5) and 97e55a457 (rr15-ctl); control rr15-ctlh = 97e55a457 + the tip's STALELABEL block + RT_TEST_DEADMANY block pasted in (scratch). Logs /home/user/wt/rr15-out/<run>/log.txt (not in git).
+### (1) STATIC
+- 97e55a457..39c6e505 added lines: 0 `.click(` / dispatchEvent / focus / keyboard. Every new tap (deadCheck group, kipgo, «close (confirm unreachable)») goes through rt.tap (real pointer). Game calls only in env-gated RT_TEST_* fixtures (END over(), IDENT S.name, FLIP2 kitCardFlip, day kitDayTitleShow) + one read-only overAlive(fate) (j32:34, a pure regex test).
+- robot-lint «LINT OK 0 finding(s)» · rt-bare-unit «RT-BARE-UNIT OK 20/20».
+- Identity rule: game writes S.name only at life start (j2:12 freshName) and the co-op clash rename (jcoopthinb:58, handled as a note); S.origin only on load (j6/jload) → no false IDENTITY stop expected in a natural life.
+### (2) LIVE SLICES (no hooks, main 17f23656, slice=12, harness 943285b5)
+| seed | copies | jsClicks / DEAD / NO-EXIT / stuck |
+|---|---|---|
+| Fold speed s21 | a «Ban hoa» b1 (stamped, 0 «Chuyển kiếp» taps), b 12 | 0 / 0 / 0 / 0 |
+| Fold pf/pt_su sens s43 | a, b 12/12 | 0 / 0 / 0 / 0 (b: game bug js «sx is not defined», see N5) |
+| iPad pf/pt_su sens s61 | a, b 12/12 | 0 / 0 / 0 / 0 |
+| iPad cautious s72 | a, b 12/12 | 0 / 0 / 0 / 0 |
+realtap true, exitPick none, build 5a7a9c4004c1 in all 8; 0 «Chuyển kiếp» lines; 0 «popup» skip wins.
+### (3) FIXER #14 CLAIMS — each on my own runs
+| claim | tip | control |
+|---|---|---|
+| N1 dialog filter (getClientRects, top at own centre) | STALELABEL newlayerdlg iPad s61 5 s gone «newlayer», 0 dead, 0 page taps; SCAN probe: fixed role=dialog no aria-modal on the middle → the dialog (Fold + iPad) | probe same (my layout does not split them; fixer's probe is the differing case) |
+| N2 re-scan after a fixture | SKIPLAYER cover at buổi 1 Fold s21: 3.9 s, 0 dead, noWayOut 0 (1st copy «Ban hoa» b1 before it) | — |
+| N3 deadCheck one settle per group | DEADMANY Fold s43 18.0 s / iPad s61 18.1 s, 18 DEAD each (every covered button still tapped) | iPad s61 120.3 s, 18 DEAD |
+| N5 refused «gone» adds 0 + end button = a way on | FLIP2 Fold s43 13 s / iPad s61 12 s: 2 end taps, 0 NO-EXIT, 0 stall force, 0 unstick | — |
+| N6 plain-div popup is a layer | STALELABEL newpopup Fold s43 6 s / iPad s61 7 s gone «newpopup», 0 dead, 0 page taps | iPad s61 171 s, 25 DEAD («Tin báo … cover div#rtTestSl.kscn» …), 3 page taps |
+| E1 pin=0 resume on an older build | ckpt F21b (b11, recorded 5a7a9c4004c1) resumed pin=0 on the OLDER build a22cf45d (:8782) → «serving the recorded build (pin=0 …)» → «moved to … :8841 (carrying 5 localStorage keys)», save hash identical, played b11→b14, 0 dead | — |
+| E2 gift chooser loop | GIFTLOOP Fold s43 10 s / iPad s61 11 s: 3 openings, [game] «re-opened 3×» once, loopBan 1, closed «Thôi» | — |
+| E3 life identity hard stop | IDENT Fold s43: «LIFE IDENTITY CHANGE at buổi 2 (name … → Thử Người Khác, birth year −18 → −23)» → LIFE VOID, exit 4; resume=1 → «LIFE ALREADY ENDED (checkpoint stamped ENDED)» | — |
+| E4 never auto «Chuyển kiếp» | END Fold s43: «LIFE DONE … Thử kết · buổi 2», 0 «Chuyển kiếp» taps; ENDKILL iPad s61 exit 3 → resume=1: «NO SAVE IN CKPT» → «the saved life is already over («Thử kết» …) — stamped ENDED, never «Chuyển kiếp»» (read from Sổ luân hồi) | — |
+| E5 #kdaytc tap-anywhere | SKIPLAYER_MODE=day Fold s43 1.9 s, 3 skip taps, NO-EXIT 0, noWayOut 0 | — |
+| E6 .kmov stall | covered by FLIP2 (0 stall force) + 0 NO-EXIT in all 8 live slices | — |
+| N7 cache / local walk | c1633dab8e17: 1st call 7 s (local walk), next calls «build cache: … → a22cf45d» ~1–2 s | — |
+### (4) REGRESSIONS (tip)
+KNE iPad s61 1.5 s «SKIPWIN #dawn host Tiếp theo», noExit 0 · SKIPCOV mix-anim Fold s43 → «DEAD BUTTON «Tiếp» cover div#rtTestSc», closed by «more», skipTaps 0 · OWNCLOSE own iPad s61 {closeOwnLayer 1, noEffect 0, «Đóng» 4 s} · STALELABEL stale5 Fold s43 7 s / newbtn iPad s61 7 s (6 skip taps, 0 page taps, 0 dead) / newlayer Fold s43 6 s gone «newlayer» · DRESS iPad s61 placed 3 / 14 s, Fold s43 placed 4 / 13 s, not skipped.
+### (5) FIXER #15 DELTA 943285b5..39c6e505 (rt-serve-build.sh)
+- Old script 943285b5 on build c1633dab8e17 :8781 → GET /dev/vendor/pixi-8.5.2.min.js = 404 (item 14 confirmed). Same pin dir, new script :8782 → sparse set repaired IN PLACE (+ /dev/vendor/ /audio/ /icons/), «self-check OK: 8 local paths all 200 (incl. pixi-8.5.2.min.js)», pixi 200, audio/bgm-day.mp3 200, not killed (foreman ask (a)).
+- Fail case: pixi file removed from the pin dir → «SELF-CHECK FAIL: … does not serve: dev/vendor/pixi-8.5.2.min.js(not checked out)», exit 143; port up at 0.34 s, down at 0.78 s. Race (foreman ask (b)): pinUrl's first re-check is 5 s after the spawn, then exit ≠ 2 → «no pin», so the life that spawned it never starts on the dying server (see N4 for a twin).
+- E1 auto-serve above ran on the FIXED script: the auto-served :8841 serves pixi 200.
+- Foreman extra (s7b): build a1d2c8d4a29c (older, not in the depth-30 main) → found by the --deepen=300 step: «serving 9d5d1af37 act-merge-ALL r4», self-check OK, 454 s (network fetch; now in the cache). Resume after a «container restart» (pin server killed): pin ON (RT_PIN=1) → re-serves itself (boot pinUrl) → «save restored on :8841», hash identical, b12→b16, 0 dead. pin=0 → see N1.
+### NOTES (not blocking)
+- N1 (pin=0 + dead pin server): a resumed ckpt that holds pinUrl of a server that died is loaded as URL0 without a check when RT_PIN=0 → p.goto ERR_CONNECTION_REFUSED → seat exits 1 (robot-rt.js:255). No life lost (ckpt intact, not stamped; a rerun with pin on resumes). Fix idea: in boot, when R.harness.pinUrl is set and PIN is off, call pinUrl(build0) too (it checks the kept server first) or fall back to the given url and let the gate auto-serve.
+- N2 (N6 rule, probe only): a body-child fixed box (z ≥ 100, holding buttons) that the PAGE re-creates (remove + append) while a skip scene is up counts as a «new popup» → the scan leaves the scene for its buttons (probe E_bodyBarRecreated: tip → «new popup Trang 1», 97e55a457 → stays on the scene). Not seen in 8 live lives (0 popup wins). Fix idea: a fresh popup must be stacked above the skip layer (z / elementFromPoint over the skip layer's rect), not beside it.
+- N3: the self-check GETs only the 8 paths quoted in index.html / sw.js + dev/vendor; audio mp3 names are built at run time, so they are served (in the sparse set) but not checked.
+- N4: a TWIN life whose own first servesBuild lands inside the ~0.45 s window between port-up and the self-check kill would pin to a dying server (rare; it then fails loudly like N1).
+- N5 (game, for the coordinator): Fold pf/pt_su sens s43 copy b: [js] page error «sx is not defined» (main 17f23656).
+- RT_TEST_DRESS iPad s61 placed 3 (Fold 4); not skipped, no dead — board content, not a harness fault.
+
+## HANDOVER — BIG REVIEWER #15, 27/11 ~03:10Z
+- Verdict: PASS robot-realtap 39c6e505 (one verdict 97e55a457..39c6e505). Ready for the coordinator (test files only).
+- Open for the next harness fixer (none blocking): N1 pin=0 dead pin server at resume, N2 re-created body box as «new popup», N3/N4 self-check scope / twin window.
+- Recipe reuse: worktrees /home/user/wt/rr15-{tip,fin,ctl,ctlh}, LIVE /home/user/wt/rr15-live (git archive 17f23656 incl. dev/vendor) on :8895, runner /home/user/wt/rr15-out/run.sh <list> (lines «name|wt|env|args», U= / RT_PIN= / TMO= env), summary sum.py, SCAN probes /home/user/wt/rr15-probe/probe.js <tip|ctl>.
