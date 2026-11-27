@@ -230,7 +230,7 @@ async function runNoFx(p, dev, name, rows) {
   const rt = RT.make(p, { dev, touch: true, shots: OUT }); const N = NOFX[name];
   await clean(p);
   await p.evaluate(() => { try { if (window.DQ) DQ.user = (DQ.user || 0) + 1;
-    Q.push({ t: 'Chiều trong vườn', h: '<p>Gió chiều lay rèm, hoa trong vườn vừa nở.</p>', opts: [{ n: 'Ngắm hoa một lát', fx: {}, x: '', go: () => { } }, { n: 'Dạo quanh vườn', fx: { danh: 1 }, x: 'thành: Danh +1' }, { n: 'Tặng hộp nhạc Tây dương', fx: {}, x: '', go: () => { const v = liveRivals(true)[0]; kaAim(v, {}); v.loyal = (v.loyal || 0) + 6 } }] });
+    Q.push({ t: 'Chiều trong vườn', h: '<p>Gió chiều lay rèm, hoa trong vườn vừa nở.</p>', opts: [{ n: 'Ngắm hoa một lát', fx: {}, x: '', go: () => { } }, { n: 'Dạo quanh vườn', fx: { danh: 1 }, x: 'thành: Danh +1' }, { n: 'Tặng hộp nhạc Tây dương', fx: {}, x: '', go: () => { const v = liveRivals(true)[0]; kaAim(v, {}); v.danh = (v.danh || 0) + 6 } }] });
     Q.push({ t: 'Cung nữ bẩm báo', h: '<p>Có người ngoài cửa xin vào.</p>', opts: [{ n: 'Cho vào', fx: { danh: 1 }, x: 'thành: Danh +1' }, { n: 'Bảo đợi', fx: { duc: 1 }, x: 'thành: Đức +1' }] });
     showModal() } finally { if (window.DQ) DQ.user-- } });
   let st = null; for (let k = 0; k < 10; k++) { await p.waitForTimeout(400); await p.evaluate(() => document.querySelectorAll('.kfgain').forEach(e => e.remove())); st = await p.evaluate(READ); if (st.up) break }
