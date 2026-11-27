@@ -229,7 +229,7 @@ PEND.rtBm=pp=>{const T=S&&S.rt;const v=RV(pp.v);const B=T&&T.bm;if(!v||!v.alive|
  return{ti:"Bị nắm thóp",t:`<p>${rtVn(v)} cho người gọi ngươi ra sau hành lang: «Chuyện của muội với ${m?m.name:"người kia"}, tỷ biết cả. Mỗi tháng ${n} lượng bạc, tỷ sẽ quên.»</p><p class="past">Nàng nắm ${ev} chứng cứ về ngươi.</p>`,
   stage:[v],headArt:{src:RT_ART.don,label:"Uy hiếp"},o:[
   rtOpt(`Nộp ${n} lượng bạc`,{bac:-n},rtX(100,`nàng im lặng tháng này`,"","tháng sau nàng lại đòi"),()=>{B.k++;B.paid=S.turn;rtHeat(-3);log(`Ngươi đưa ${n} lượng bạc cho ${v.name}.`)}),
-  rtOpt("Làm việc cho nàng",{...BAL.route.bmWork},rtX(100,"nàng im lặng · đổi lại ngươi nói giúp nàng trước mặt Hoàng thượng","",`${v.name} Sủng +${BAL.route.bmWorkSung} · Hoàng thượng nghi ngươi kết bè`),()=>{v.sung=cl((v.sung||0)+BAL.route.bmWorkSung,0,100);B.paid=S.turn;B.k++}),
+  rtOpt("Làm việc cho nàng",{...BAL.route.bmWork},rtX(100,"nàng im lặng · đổi lại ngươi nói giúp nàng trước mặt Hoàng thượng","",`${v.name} Sủng +${BAL.route.bmWorkSung} · Hoàng thượng nghi ngươi kết bè`),()=>{spAdd(v,"sung",BAL.route.bmWorkSung);B.paid=S.turn;B.k++}),
   rtOpt("Ra tay trước: tố nàng",{},rtX(oA,`${v.name} rước họa trước khi kịp mở miệng · thoát cảnh uy hiếp`,"nàng tố ngươi ngay",`dùng chứng cứ ngươi nắm về nàng (${typeof evG==="function"?evG(S,v):0})`),()=>{if(roll(oA)){try{punish(v,"bị tố vu khống",2)}catch(e){}T.bm=null;rtEmo("vui",30,"thoát khỏi kẻ uy hiếp");log(`${v.name} bị phạt trước khi kịp mở miệng.`)}else{T.bm=null;rtReport(v,m||{name:"người kia",alive:false})}}),
   rtOpt("Mặc kệ nàng",{},rtX(od(BAL.odb.jroute.odO_12+S.danh/5),"nàng chỉ dọa suông","nàng tố giác ngươi"),()=>{T.bm=null;if(!roll(od(BAL.odb.jroute.odO_12+S.danh/5))&&m)rtReport(v,m);else log(`${v.name} không dám làm gì thêm.`)})]}};
 PEND.rtPromise=pp=>{const m=manById(pp.m);if(!m||!S)return null;const T=rtS();
@@ -372,8 +372,8 @@ function rtNgNpcAuto(v,k){const N=BAL.ngh,truth=!k.tf;const foe0=liveRivals(fals
  rtStat(truth?"npc_ng_oan":"npc_ng_lo");
  return `<span class="r">${rtVn(v)}: trích huyết nghiệm thân, máu ${k.name} không hòa. Nàng bị trị tội.</span>${truth&&eyes(S)>=N.oilMat?` Tai mắt báo: bát nước đã bị ${foe.name} nhỏ dầu.`:""} `}
 /* she demands the test on another consort's child (honest, or with oil = a frame-up) */
-function rtNgNpcCards(){const A=[];if(S.out)return A;for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&!x.tfOk&&(x.age||0)>=1);if(!k)continue;const ev=typeof evG==="function"?evG(S,v):0,ne=BAL.ngh.needEv;if(ev<ne&&!v.kidRumor)continue;
-  A.push(rtCard({id:"ngn_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`Ngươi nắm ${ev} chứng cứ về ${rtVn(v)}.`,art:RT_ART.con,k:BAL.route.k.ngn_,need:[[`chứng cứ về ${v.name} (có ${ev}/${ne})`,ev>=ne]],x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>rtPush("rtNgNpc",{v:v.id,k:k.name})}));break}
+function rtNgNpcCards(){const A=[];if(S.out)return A;for(const v of liveRivals(true)){const k=(v.kids||[]).find(x=>x.alive&&!x.tfOk&&(x.age||0)>=1);if(!k)continue;const ev=typeof chHave==="function"?chHave(S,v,"tt"):0,ne=typeof chNeed==="function"?chNeed(v,"tt"):BAL.ngh.needEv;if(ev<ne&&!v.kidRumor)continue;
+  A.push(rtCard({id:"ngn_"+v.id,n:`Tâu xin nghiệm thân ${k.name}`,t:`Ngươi nắm ${ev} chứng cứ tội tư thông về ${rtVn(v)}.`,art:RT_ART.con,k:BAL.route.k.ngn_,need:[[`chứng cứ tội tư thông về ${v.name} (có ${ev}/${ne})`,ev>=ne]],x:"mở buổi trích huyết nghiệm thân (chọn cách ở bước sau)",kem:"máu hòa thì ngươi mang tội vu cáo",go:()=>rtPush("rtNgNpc",{v:v.id,k:k.name})}));break}
  return A}
 PEND.rtNgNpc=pp=>{const v=RV(pp.v);const k=v&&(v.kids||[]).find(x=>x.name===pp.k&&x.alive);if(!v||!k)return null;const oF=rtMgO(4);
  const N=BAL.ngh;const fin=(shown)=>{k.tfOk=1;if(shown){apply(BAL.route.demandFail);oanAdd(v,S,N.accOan);punish(S,"vu cáo phi tần",N.accPun);log(`<span class="r">Máu hòa. ${v.name} quỳ khóc kêu oan; ngươi mang tội vu cáo.</span>`)}

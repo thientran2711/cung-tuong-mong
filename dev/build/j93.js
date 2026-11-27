@@ -304,7 +304,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  else if(a.srv&&!b.srv&&!b.out&&S.srv&&S.srv.risen)kitEdict({from:-1,to:b.rank});
  else if(b.srv){}
  else if(b.rank>a.rank&&!b.out)kitEdict({from:a.rank,to:b.rank});
- else if(b.rank<a.rank&&!b.out)kitGloom({title:`Bị giáng xuống ${kmRankName(b.rank)}`,sub:`Từ ${kmRankName(a.rank)} xuống ${kmRankName(b.rank)}.`,from:a.rank,to:b.rank});
+ else if(b.rank<a.rank&&!b.out)kitGloom({title:`Bị giáng xuống ${kmRankName(b.rank)}`,sub:`${S.punLast&&S.punLast.why&&S.punLast.wk===punNow()?`Vì ${S.punLast.why}${S.punLast.who?` (${S.punLast.who} tố)`:""}. `:""}Từ ${kmRankName(a.rank)} xuống ${kmRankName(b.rank)}.`,from:a.rank,to:b.rank});/* punish-reason: the reason is on the gloom too (jpun S.punLast) */
  if(!a.preg&&b.preg)kitBloom({title:"Có tin vui",sub:"Thái y bắt mạch: ngươi đã mang long thai."});
  if(b.kids>a.kids){const k=S.kids[S.kids.length-1];kitBloom({title:k&&k.sex==="m"?"Hạ sinh hoàng tử":"Hạ sinh công chúa",sub:k&&k.name?`${k.name} chào đời, mẹ tròn con vuông.`:"Mẹ tròn con vuông."})}
  const added=b.inv.filter(x=>!a.inv.includes(x));if(added.length&&added.length<=4){const gifts=added.filter(x=>x.from&&x.from!=="emp"&&x.from!=="me");const bought=added.filter(x=>!x.from);
@@ -410,7 +410,8 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 @keyframes kmStick{0%{opacity:0;transform:translate(-50%,30px) rotate(0)}45%{opacity:1;transform:translate(-50%,-46px) rotate(8deg)}100%{opacity:1;transform:translate(10px,6px) rotate(64deg)}}
 /* 3 result card: seal, floating numbers, bars */
 .rtoast.karesult{overflow:visible}
-.kmseal{position:absolute;right:6px;top:auto;bottom:calc(100% - 2px);/* KIT stamp placement (owner 24/11, MAIN 129): the stamp sits on the card's TOP EDGE, above the text, never on words */width:78px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp calc(.5s*var(--pace)) cubic-bezier(.3,1.4,.5,1) calc(.1s*var(--pace)) both}
+.kmseal{position:absolute;right:10px;top:8px;bottom:auto;/* KIT stamp placement (owner 24/11, MAIN 129: at the card's top edge, never on words; MAIN 157 26/11: ON the result card only — it hung above the card onto the option card behind): the stamp sits INSIDE the card's top-right corner; the title and sentence keep that corner free (below) */width:58px;height:auto;z-index:3;pointer-events:none;transform:rotate(-12deg);mix-blend-mode:multiply;animation:kmStamp calc(.5s*var(--pace)) cubic-bezier(.3,1.4,.5,1) calc(.1s*var(--pace)) both}
+#rtoast:has(>.kmseal) .rt>.kat,#rtoast:has(>.kmseal) .rt>.ksen{margin-right:66px}/* a margin, not a padding: no text box reaches under the stamp */#rtoast:has(>.kmseal) .rt>.kat{min-height:34px}#rtoast:has(>.kmseal) .rt>.ksen{min-height:24px}#rtoast:has(>.kmseal) .rt>.kat:not(:has(+.ksen)){min-height:62px}
 .km-thump{animation:kmThump calc(.35s*var(--pace)) ease calc(.45s*var(--pace)) both!important}
 .kmfls{position:fixed;z-index:9050;pointer-events:none;transform:translateX(-50%);display:flex;flex-wrap:wrap;justify-content:center;gap:6px;width:max-content}
 .kmfl{position:relative;font-weight:800;font-size:1rem;white-space:nowrap;background:var(--k-card,#fffaf0);border:1.5px solid currentColor;border-radius:12px;padding:1px 9px;box-shadow:0 4px 12px #5a3a2050;animation:kmFloat calc(1.5s*var(--pace)) var(--km-out) both}

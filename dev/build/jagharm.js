@@ -38,6 +38,8 @@ const HA_AT={tieuhuy:"tpal",trip:"tgt",pushp:"tgt",rumor:"vuon",spy:"tpal",block
 const HA_PREP={musk:"nvp",poison:"tyv",kpoison:"tyv",pond:"vuon",pushp:"vuon",catswap:"own",kframe:"own",frame:"own",plant:"tpal"};
 const HA_NO=new Set(["steal","road","gift","ally"]);/* not harm options here: steal / road at the flip (§3), gift / ally = part A (jagacts cx:gift / cx:ally) */
 function haName(t){return t===S?"ngươi":t&&t.name||""}
+/* ACT-MERGE J2 (two-way, law 1): the door + tier of an NPC deed = the SAME door she uses on them (jdoor DOOR.ofKey, J2 ext: Hãm hại nhẹ·vừa·nặng, Hạ uy thế …) */
+function haDoor(k){try{return typeof DOOR==="object"&&DOOR&&typeof DOOR.ofKey==="function"?DOOR.ofKey(k):null}catch(e){return null}}
 function haVerb(k,t){const V=(typeof J78VERB==="object"&&J78VERB[k])||((ACT[k]&&ACT[k].n||k).toLowerCase()+" {t}");return V.replace("{t}",haName(t))}
 /* the player's cheaper ways of the same act (jecon / jlost: by her own trusted maid or a favour owed, no silver): open where the base act is open */
 const HA_VAR={spyk:"spy",bribel:"bribe",blockf:"block",laydol:"laydo"};
@@ -87,7 +89,7 @@ function haOpts0(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)retu
    const prep=BIG.includes(k);const {o,pc}=haOdds(v,t,k);
    const gl={g:gn.g,l:gn.l||{},f:(gn.f||0)*pc};const u0=agU(v,N2,o,gl,haCost(k),"harm");if(u0<=0)continue;
    const u=u0*persW(v,k)*haFail(v,k)*haGuardW(t)*haPenW(v);if(!(u>0))continue;HA.stat.opt++;
-   O.push({k:"harm:"+k,ak:k,t,u,tag:"harm",prep,mot:g.why,act:prep?((typeof TELLS==="object"&&TELLS[k])||("chuẩn bị "+haVerb(k,t))):haVerb(k,t),
+   O.push({k:"harm:"+k,ak:k,t,u,tag:"harm",door:haDoor(k),prep,mot:g.why,act:prep?((typeof TELLS==="object"&&TELLS[k])||("chuẩn bị "+haVerb(k,t))):haVerb(k,t),
     at:(kh,vv,tt)=>haPlace(k,vv||v,tt||t,kh,prep)})}
   /* §2 preparation of a poisoner / framer (the player's own Tẩm đồ and workshop): it serves the spite the next deed will vent */
   if((!need||need==="spite")&&N2.spite>0){

@@ -30,7 +30,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r1.skip||r1.btn,'maid: Đồng liêu shows "Bỏ độc vào bát cơm" for a hostile palace\'s maid',r1);
  ok(r1.skip||r1.me,'maid: her button runs mlPoisonDo (master, her, victim)',r1);ok(r1.skip||r1.npcOpt&&r1.npc,'NPC maid: the option exists by spite and runs the same mlPoisonDo',r1);
  const r2=await p.evaluate(()=>{const m=srvM();m.inv=m.inv||[];const k=Object.keys(IT).find(z=>IT[z].pr>0);m.inv.push({k,from:"noivu",d:S.turn});S.tin=10;S.srv.pilM=null;S.srv.pilDet=null;S.srv.lau=0;S.srv.spyFor=null;
-  deal();const card=deck.find(a=>a.n==="Lén giữ đồ Nội vụ phủ phát");const out={card:!!card,o:card&&card.o,see:100-eitPilSee(m)};
+  deal();const card=DOOR.flat(deck).find(a=>a.n==="Lén giữ đồ Nội vụ phủ phát");const out={card:!!card,o:card&&card.o,see:100-eitPilSee(m)};
   const f=eitPilJudge;let n=0,arg=null;eitPilJudge=function(X){n++;arg=X;return f.apply(this,arguments)};
   try{eitPilTake(false);out.me=n===1&&arg.p===m&&arg.s===S;
    const v=liveRivals(true).find(z=>z!==m&&(z.staff||[]).length);const s=v.staff[0];v.inv=v.inv||[];v.inv.push({k,from:"noivu",d:S.turn});n=0;const r0=roll;roll=()=>true;try{eitPilNpc({p:v,s,k,g:null})}finally{roll=r0}out.npc=n===1}finally{eitPilJudge=f}return out});
@@ -92,7 +92,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(!r9.E.length,'12 tuần as a consort: no throw',r9);
  await fresh(true);
  const r10=await p.evaluate(()=>{const E=[];const ce=console.error;console.error=(...a)=>{E.push(String(a[0]))};S.tin=20;try{for(let i=0;i<12&&isSrv()&&!S.dead;i++){try{Q.length=0;used=0;deal();
-   for(const a of deck.slice()){const j=deck.indexOf(a);if(a&&!a.lock&&/Lén giữ đồ/.test(a.n)){try{act(j)}catch(e){E.push(e.message)}}}
+   for(const a of DOOR.flat(deck)){if(a&&!a.lock&&/Lén giữ đồ/.test(a.n)){try{DOOR.run(a.n)}catch(e){E.push(e.message)}}}
    for(const x of srvTalk({sk:"mis"}))if(/Xin chủ cho đi/.test(x.n)&&!x.lock){try{x.run()}catch(e){E.push(e.message)}}
    endTurn()}catch(e){E.push(e.message)}}}finally{console.error=ce}return{E:E.slice(0,5),srv:isSrv(),dead:!!S.dead}});
  ok(!r10.E.length,'12 tuần as a maid using the new cards: no throw',r10);
