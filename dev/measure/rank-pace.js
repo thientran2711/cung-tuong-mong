@@ -34,8 +34,11 @@ const GATE=`window.__rpGate=function(t){t=String(t).replace(/<[^>]+>/g,"");
   src=src.replace('function modalStep(sens){','function modalStep(sens){{const m=Q[0];if(m&&/làm gì\\?|tác phẩm gì\\?/.test(m.t||"")&&!document.getElementById("modal").hidden){const B=[...document.querySelectorAll("#modal button")].filter(b=>!b.disabled&&/^\\s*Làm/.test(b.textContent));if(B.length){B[0].click();return true}}}');
   /* noexam = the lazy player who never sits the promotion exam card (the real-tap seats: the board is a mini-game she must play herself) */
   if(prof==='noexam'||prof==='quiet')src=src.replace('{const ei=deck.findIndex(a=>a&&a.exam&&cardOK(a));if(ei>=0){note("exam");act(ei);return}}','').replace('function cardOK(a){','function cardOK(a){if(a&&a.exam)return false;');
-  await p.evaluate(src);await p.evaluate(GATE);
+  await p.evaluate(src);await p.evaluate(GATE);if(process.env.NOASK)await p.evaluate(()=>{window.__noAsk=1});
   await p.evaluate(pr=>{
+   /* review/rank-pace: a player who is SHOWN the exam card («Thi ngay / Để sau», jexam exAsk) reads «được: thánh chỉ tấn phong …» and takes it
+      (the inpage6 scorer only values fx, so it always took the free «Để sau»); env NOASK=1 keeps the old scorer */
+   if(!window.__noAsk)window.__persPick=(okIdx,m)=>{if(m&&m.exAsk){const j=okIdx.find(([o])=>o.n==="Thi ngay");if(j)return j[1]}return null};
    if(pr==='lazy'||pr==='noexam')window.__minS=2.0;if(pr==='quiet')window.__minS=99;
    if(pr==='greedy'){window.__minS=0.1;window.__persOpts=(opts)=>{const W=S.where||{};for(const o of opts){const L=String(o.L||'');if(W.emp&&L==='g'+W.emp)o.s+=1.5;else if(/^c/.test(L)){const a=deck.find(x=>x&&'c'+x.n===L);const t=a?String(a.x||'')+String(a.t||''):'';if(/Sủng|Danh/.test(t))o.s+=1.0}}}}
    const R=window.__rp={cnt:{},sole:{},months:0,first:{},chg:[],lastRk:S.rank,lastLog:""};R.first[S.rank]=S.turn;
