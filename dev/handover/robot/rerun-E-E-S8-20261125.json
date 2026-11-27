@@ -394,6 +394,21 @@
   {
    "life": "E-S8-bd_tuyet-R8-speed4",
    "why": "STUCK buổi 847 (year 6): «theu» board 0 moves ×5 (367 s each) + renderer 1048 MB freeze (Mt._tick); «SAVE STALE» game-bug candidate; evidence dev/handover/robot/stuck/E-S8-speed4-847.{json,log}"
+  },
+  {
+   "life": "bd_tuyet-random4",
+   "seed": 2859551964,
+   "note": "handed to E-S3 as ES8-bd_tuyet-random4-h (27/11 18:05Z)"
+  },
+  {
+   "life": "bd_tuyet-random5",
+   "seed": 902785299,
+   "note": "handed to E-S3 as ES8-bd_tuyet-random5-h (27/11 18:05Z)"
+  },
+  {
+   "life": "bd_tuyet-greedy4",
+   "seed": 3029570759,
+   "note": "handed to E-S3 as ES8-bd_tuyet-greedy4-h (27/11 18:05Z)"
   }
  ]
 }
