@@ -62,3 +62,11 @@ Other chest-sized lists checked: Tư trang bag + dress chest (kitInvGrid, groupe
 
 ## Handover (if a successor is needed)
 Worktree /home/user/wt/picker-dom (sparse). Save /home/user/wt/s7.json (from handover ref, see picker-dom.js). Remaining: KK47 sign-off, BIG review, land after or with rv15.
+
+## RV FAIL 8f1fd91c → fix (27/11, sha b63705f6, FF from LIVE 17f23656)
+Review dev/handover/reviews/picker-dom-review.md @e57bf999 (BIG rv session_01D3E3NX3JZAycKJ8cs4P7qd), 2 items, both fixed for the whole family:
+1. On-demand card ≠ drawn card (post-showModal decorators jgift:179 giftto lock/.kgiftno/chip, jk2b:347 hideOut, jemoact:677 eaLockWhy skipped). FIX: no hand-built card at all. The dialog draws the cards of the page in view + the chosen one (`m.kipOnly`); a page turn, or a choice whose card is not drawn, runs the ONE real `showModal` again (`kipRedraw`, scroll kept), so every decorator dresses every card. Test: per picker (giftpick, giftto, plantpick, tsgiftpick) a locked and an open tile reached by page turns → card = the full draw of LIVE's path (grid off, same dialog): classes, disabled, data-* (except data-kapic, the jk4/jopic picture-FIT mark set only on a visible card), text, item chip — all ok (or «none on this save»).
+2. §23 whole rows / no inner scroll. FIX: page = `BAL.kip.rows` (2) × the columns the grid shows once the dialog has settled (ResizeObserver; resolved px tracks; per dialog kind + width); FLIP-LAYOUT PIN for dialogs whose layout flips with the tile count (pinned to the smaller count, tiles stretch); grid has no max-height/scroll in paged mode. jbal2 comment + KIT.md bullet rewritten in place; KIT_REQUESTS K-LIST-PAGE entry → awaiting kit keeper «KIT OK K-LIST-PAGE <sha>».
+Also: j3 drew every dialog calling kitCancelIx(m) once PER OPTION (O(n²): 320 ms of a 410 ms draw on s7) → once per draw (page turn 410 → 70 ms).
+Gates on b63705f6: picker-dom-scan PASS 5/5 (main FAIL 4) · picker-dom.js PASS 56/56 (Fold 755x1000 + iPad 1180x820: every page whole rows / no inner scroll, every tile reached, card equality, confirm, DOM per picker 129–695 nodes) · coop-e2e 143/143.
+Videos (206, new): img/_review/picker-dom/picker-dom-fold.mp4 · picker-dom-ipad.mp4. Seen in them: on Fold the dialog frame changes size between draws (kitDlgFit re-fits each draw; kit behaviour, not this branch's code) — flagged for the reviewer.
