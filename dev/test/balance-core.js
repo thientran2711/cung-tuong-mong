@@ -18,7 +18,9 @@ const {chromium}=require('playwright');const path=require('path');
   /* old save */const old={arts:{cam:3,ky:5},artp:{cam:4,ky:0},vir:{dung:2},virp:{dung:3}};crsMigrate(old);
   ok("old save keeps its bậc, progress share moves",old.arts.cam===3&&old.arts.ky===5&&Math.abs(old.artp.cam-4/5*artNeed(3))<.2&&old.vir.dung===2,old);
   /* nobc: NO growth curve (LIVE growth): a gain of Tâm cơ at 50 lands whole, her and an NPC alike (two-way) */S.tamco=50;apply({tamco:20});w.tamco=50;ap(w,{tamco:20});
-  ok("no growth curve: +20 Tâm cơ at 50 → 70, her and the NPC the same",S.tamco===70&&w.tamco===70,[S.tamco,w.tamco]);ok("BAL.grow is gone",typeof BAL.grow==="undefined"&&typeof growScale==="undefined");
+  /* CANON OVERWRITE (sếp FINAL 26/11 ~23:24Z + ~23:55Z): Sắc · Tài · Tâm cơ now go through the ONE stat-pace rule (size band + slowdown, jstatpace spG / BAL.stp.abs);
+     the old BAL.grow curve stays gone; her and the NPC get the same gain (law 1) */
+  ok("Tâm cơ +20 at 50 = the stat-pace rule (band + slowdown), her and the NPC the same",S.tamco===w.tamco&&S.tamco>50&&S.tamco<70&&S.tamco-50===spG("tamco",{},50,20,0,0,1),[S.tamco,w.tamco]);ok("BAL.grow is gone",typeof BAL.grow==="undefined"&&typeof growScale==="undefined");
   /* night odds */S.sung=40;S.sac=60;const f=oSteal(S,"feign"),r=oSteal(S,"road");S.sung=10;S.sac=85;const f2=oSteal(S,"feign"),r2=oSteal(S,"road");
   ok("Tranh sủng rides on Sủng, Chặn ngự giá on Sắc",f>r&&r2>f2,[f,r,f2,r2]);ok("oKeep is a number 5..95",oKeep(S)>=5&&oKeep(S)<=95,oKeep(S));
   ok("rungDown drops one word rung",oddsLv(rungDown(60,1))===oddsLv(60)-1&&rungDown(20,1)>=5,[rungDown(60,1),rungDown(20,1)]);

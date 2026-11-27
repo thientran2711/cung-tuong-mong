@@ -12,7 +12,8 @@ Object.assign(BAL,{ad:{hapP:65,hap2:35,strollP:80,rareMinGrade:3,nightSneak:10,n
 /* balance-pass 15/11: bar [22,27,31] -> [22,25,28]: at a sensible player's level (arts 1-2, Đức 45-60) the mid exam passed 52-56 % and the
    high one 27-40 % (cooldown 3 months), so Quý phi -> Hoàng hậu took years; now mid ~75-93 %, high ~64-72 % (the odds the exam was designed
    for, PROGRESS_promo-exam). dev/tmp probe: exChance at ranks 0/3/5. */
-BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[22,25,28],wPlay:6,wVir:2,wArt:2,attDiv:10,attMax:6,k:2,suc:8,mc:240,
+/* PACE-SPEED (owner OD 26/11 ~19:10Z (D) «điều kiện để lên những bậc cao phải khó hơn», law 5; (A) the low ranks quicker): bar [22,25,28] -> [21,26,30]. */
+BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[21,26,30],wPlay:6,wVir:2,wArt:2,attDiv:10,attMax:6,k:2,suc:8,mc:240,
  /* servant / ma ma road (review/promo-rules; maid-ladder-6: six rungs): bar and wait by target, index 1..5 = SRK.maid rank, 6 = ma ma (BAL.srvRk.mama) */
  srvBar:[0,18,19,20,22,24,24],srvCd:[1,1,1,1,2,2,3]};
 /* NO-WORD-GAMES family C (jnwq, owner 16/11 07:20Z): the four promotion-exam games (le lay · tc sort · xa clue · thq seat). tier = level tier 0..2 (+shift;
@@ -171,7 +172,11 @@ Object.assign(BAL,{dis:{n:[1,2],aff:4,sung:1,refuse:35,refAff:2,refSung:1,talk:2
         else xuất gia; childless favourite (Sủng ≥ tuanSung) faces tuẫn táng (tuanP %), averted by Đức ≥ tuanDuc or Thái hậu ≥ tuanTh */
 BAL.mort={on:1,playerFloorYears:0,
  life:{show:0,care:1,careAdd:1,careMax:3,cureTy:40,careYt:1,cureOther:20,cureSuc:5,careSuc:70,careP:12,careLapse:40,careIll:15,floorMe:0,floorEmp:0,minMo:3,
-  dice:{adult:{mean:45,sd:15,lo:15,hi:85},me:"adult",emp:"adult",
+  /* emp = the Emperor's OWN natural-death curve (owner 26/11 ~21:20Z via MAIN 163, replaces the 36/7 «reign ~14 y» curve of the same day): natural
+     death is RARE and on a WIDE curve (mean far past the play horizon: ~6 % die naturally within 20 years of reign, ~10 % within 25); the reign
+     ends instead through game-state events (nhường ngôi / phế / lật đổ — REIGN-END worker). Plots (BAL.mort.emp) unchanged. Everyone else keeps
+     adult 45/15; her age-40 end (j3) unchanged. A save whose Emperor already rolled his lifespan keeps it (no reroll, jmort rule). */
+  dice:{adult:{mean:45,sd:15,lo:15,hi:85},me:"adult",emp:{mean:70,sd:18,lo:30,hi:95},
         kid:{risk:12,early:[[1,3,5],[3,6,3],[6,10,2]],adult:"adult"}}},
  oldFloor:0,thIllKeep:30,sudden:15,omen:[2,6],omenSt:[1,3],oldAge:55,thDanh:5,maidLoy:40,repl:{young:[22,8],adult:[40,10]},pre:{mo:12,ill:6,suc:2,omenSuc:3},acc:{me:.05,npc:.08,emp:.15},oddP:30,
  emp:{ass:.45,poi:.3,weak:1.2,foil:60,foilLo:20,foilHi:90,rumour:50,rumourMat:2,plotMo:[1,2]},
