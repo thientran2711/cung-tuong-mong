@@ -3,6 +3,7 @@
 PRIORITY #1 CHECK: OD 26/11 ~05:55Z (law 3) + OD 27/11 ~08:10Z | main LIVE **f28d28b9** (brief said 0562e15f; LIVE moved 00dca386 → f28d28b9, merged both) | review/e-gain3 23b44074, review/e-gain3b 76821d10, review/e-gain3c 8b6eadb9 (E-GAIN3c-RV FAIL → items below) | claims: E-GAIN3-LIVE (this, session_01DgYSWow6S6bMgkTAvopBX4).
 KIT CHECK: reuses kaRows/kcls rows, writer class `<span class="g">` (KP12), kitHint (read-only), doorGain / DOOR.rowHint / doorHint (jdoor), DOOR.card / PEND.door dialogs. No kit internal edited (j63, j19, jk2b, jopic, jkring untouched); KIT REQUEST #9–#11 filed. kit-std-scan not run (no CSS / frame / part added).
 START_CTX ~5 %. **ROLLED OVER at ~34 %** (see HANDOVER at the end) — the coordinator opens the successor.
+Successor **E-GAIN3-LIVE-2** (session_01DgYSWnf2mstVedSHmT1NNq), START_CTX ~4 % of 1M: finished the HANDOVER TODO — section D below. **READY head = see D.**
 
 Branch **review/e-gain3-live** = review/e-gain3c 8b6eadb9 + LIVE 00dca386 + LIVE f28d28b9 (both merges: one docs conflict, dev/kit/KIT_REQUESTS.md, kept both, LIVE first). Head at handover: **224e8524**.
 
@@ -61,3 +62,29 @@ On head 224e8524 still to do:
 4. Shots Fold + iPad of the fixed cards (node /home/user/wt/eg3live-tools/shots.js → /home/user/wt/eg3live-shots; look at each: Nghỉ ngơi tier dialog, maid «Đổi người chạy việc», Giao hảo door with «Mượn son phấn»).
 5. quickcheck: `bash dev/site/build_site.sh` + commit root index.html/sw.js if the coordinator wants an own build, then `bash dev/tools/quickcheck.sh`; core gates PASS or prove pre-existing on LIVE (dialog-fixed / q-softlock: compare vs LIVE f28d28b9).
 6. Push, fill the «C. Tests» table, send READY to Foreman E (session_01DgYSWn1AhiLBvHqmVLmY3B).
+
+## D. E-GAIN3-LIVE-2 (successor) — HANDOVER TODO done
+PRIORITY #1 CHECK: report HANDOVER (this file) | main LIVE moved f28d28b9 → **d9ca7892** (lc30-b2 on 5cee92bb kg82-phase) → merged 40042835 (clean, no conflict) | review/e-gain3-live cd2317f2 | claims: E-GAIN3-LIVE-2 (this).
+KIT CHECK: reuses kaRows/kcls rows, kitHint, DOOR.rowHint / doorHint, PEND.door; no kit internal edited, no CSS / frame / part added.
+
+Changes:
+1. **Law 4, one reader** — giveTo (relAdd + log line) and jgift rows now CALL `giftRel()`; before, both typed `giftVal+BAL.eff.j8.giftRelPlus` themselves (3 places, same number). In-page (cao, 8 rivals): hub «Tặng quà» +N = max gift row +N **8/8 same**; gift row +4 = giveTo relAdd 4.
+2. **door-row-hint MUTANT=1 was surviving** on the merge (dau: «changed 0», exit 0 — LIVE's jone already cleans the raw texts, so on some seeds no live row reaches the raw-first rule). Added 2 fixed SELF cases on DOOR.rowHint (need-text way / tip way with a gain line) → MUTANT=1 now exit 1 in any state (2 SELF bad + 50 rows); clean exit 0.
+3. **Law 3, LIVE-own empty** — gain-empty iPad cao: «Hỏi chuyện › Mặc kệ» (agReact witness card, agSeen / haSeen, jagent.js; identical on LIVE). Now the «Mặc kệ» family form (j4 / j7 / j95b): `fx:{suc:BAL.cv.rest}`, «giữ sức, không dính vào chuyện» → kit hint «Sức ++, …». Family scan (every `n:"Mặc kệ…"` in dev/build): all others already show a gain (wx / x with a gain / fx). This is likely the same card as the earlier state-random «Lấy trộm son phấn › Mặc kệ», «Lục rương › Mặc kệ», «Thỉnh an › Mặc kệ» (agReact is the shared witness reaction).
+4. Own build on LIVE d9ca7892 (index.html + sw.js; assets.json unchanged = LIVE).
+
+| test (merge on LIVE d9ca7892) | result |
+|---|---|
+| door-row-hint Fold / iPad | **8158 rows 0 bad / 7714 rows 0 bad**, exit 0, 0 page errors |
+| door-loss Fold / iPad | **478 ways 0 bad / 424 ways 0 bad**, exit 0 |
+| gain-empty Fold | **1661 cards, 0 empty**, exit 0 |
+| gain-empty iPad | 2397 cards, 2 distinct: «Hỏi chuyện › Mặc kệ» (fixed, item 3) + «Lập phe cùng ai · 1 ›» (KIT REQUEST #11, LIVE-own kit part) → after the fix dau+cao 581 cards **0 empty** |
+| mutants door-row-hint (dau) | MUTANT=1 exit 1 (after item 2) · hg exit 1 · tgt exit 1 (3) · reg exit 1 |
+| mutants door-loss (dau) | MUTANT=1 exit 1 · MUTANT=2 exit 1 (4 loss-only «Phạt vô cớ») |
+| mutant gain-empty (dau) | MUTANT=1 exit 1 (5 runs / 2 distinct) |
+| act-audit cao 755x1000 | **errs=0** |
+| hub «Tặng quà» = gift row = giveTo | 8/8 same (item 1) |
+| quickcheck 26308d3f vs LIVE d9ca7892 | open 1753 ms 0 errors · old save loads + plays a buổi · perf PASS (render 251/219, tab 399/408, buổi 1560/1325 ms) · time-spill PASS · **CORE GATES FAIL only G4 94-q-softlock** = **pre-existing on LIVE**: q-softlock.js on LIVE d9ca7892 index.html (same local server) = Q-SOFTLOCK FAIL (4), the same 4 checks (person view holds the card / ✕ shows it / parked view / stale view; device that fails flips Fold↔iPad run to run) |
+
+Shots (looked at; not in git, /home/user/wt/eg3shots): maid pop-up «Đổi người chạy việc» Fold (Tốn không · Được «tự chọn người chạy việc cho ta (đi dò la, đưa thư, mua đồ · lòng cao thì ít khi khai ra ta)», no cut text); deck «Nghỉ ngơi» Fold + iPad (Thành Nghỉ ngơi một lát · Nghỉ ngơi dưỡng sức), tier dialog iPad (2 tier cards, Được «Sức ++, tâm trạng +++»; played on Fold → result «Được Sức +6»); Giao hảo tier door Fold + iPad (Ghé chơi · nhẹ / Giúp đỡ nàng ta · vừa / Tặng quà · nặng). «Mượn son phấn» is now a member of the nhẹ tier (jone gh) and shows only when it is the picked member; its text is covered by door-row-hint (0 bad), no own shot.
+Notes for Foreman E (LIVE-own, not touched, out of this unit): (a) «Đổi người chạy việc» sits under the pop-up tab «Trừng phạt»; (b) the deck card summary prints «vừa: —» for a locked tier (jone.js:192 on LIVE); (c) Giao hảo «Ghé chơi · nhẹ» Bại line carries «nàng ta chuộng giản dị: quý ta +».
