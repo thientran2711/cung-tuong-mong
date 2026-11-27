@@ -137,14 +137,19 @@ function tyActDo(a,t,self){const T=BAL.ty;a.schemes=(a.schemes||0)+1;if(typeof d
  const w=wdOf(t),e=w.y,it=wdItem(e);if(!it)return"";w.y=null;if(typeof ilRob==="function")ilRob(t,e,a);tyLost(t,"cuop");if(typeof t.danh==="number")t.danh=Math.max(0,t.danh-T.robDanh);
  try{newsAdd(t,"ty",`${t.name} đi qua lối vắng, bị kẻ lạ giật mất y phục, phải mặc trung y về cung`)}catch(x){}
  return a===S?`<span class="g">Người của ngươi giật được ${it.n} của ${NM(t)}</span>; áo ấy nay nằm trong rương ngươi. Mặc ra ngoài thì dễ bị nhận ra. `:`${NMc(a)} thuê người giật y phục của ${NM(t)}. `}
-try{A("tyrob","Thuê người giật y phục",{c:{bac:-BAL.ty.act.bac},ok:(a,t)=>(a.bac||0)>=BAL.ty.act.bac&&tyActOk(a,t),o:(a,t)=>tyActO(a,t),x:"y phục nàng về rương ngươi, nàng phải mặc trung y",f:(a,t)=>{ap(a,{bac:-BAL.ty.act.bac});return tyActDo(a,t,false)}});
- A("tyrobl","Sai cung nữ thân tín giật y phục",{c:{},ok:(a,t)=>!!(typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid)&&tyActOk(a,t),o:(a,t)=>tyActO(a,t,true),get x(){return `không tốn bạc · cung nữ thân tín thiện cảm -${balAb(BAL.loyalCost)} · khó hơn`},f:(a,t)=>tyActDo(a,t,true)});
- AOUT.tyrob=[`y phục nàng về rương ngươi, nàng mặc trung y, Danh -${BAL.ty.robDanh} · Đức ${balSg(BAL.ty.act.duc)}`,`về tay không · bị bắt: nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`];
+try{/* RV-163F (law 2 «same result = one road; a bạc road always has another road of matching tier», RV-163E precedent): ONE act «Giật y phục» —
+   paid in Bạc for a hired man when the doer has it, else by her trusted maid (loyalty, harder); one button, one result */
+const tyM=a=>typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid;const tyBac=a=>(a.bac||0)>=BAL.ty.act.bac;
+A("tyrob","Giật y phục",{get c(){return S&&tyBac(S)?{bac:-BAL.ty.act.bac}:{}},ok:(a,t)=>(tyBac(a)||!!tyM(a))&&tyActOk(a,t),o:(a,t)=>tyActO(a,t,!tyBac(a)),
+  get x(){return S&&tyBac(S)?"thuê người: y phục nàng về rương ngươi, nàng phải mặc trung y":`sai cung nữ thân tín (không tốn bạc · thiện cảm -${balAb(BAL.loyalCost)} · khó hơn): y phục nàng về rương ngươi, nàng phải mặc trung y`},
+  f:(a,t)=>{if(tyBac(a)){ap(a,{bac:-BAL.ty.act.bac});return tyActDo(a,t,false)}return tyActDo(a,t,true)}});
+ A("tyrobl","Sai cung nữ thân tín giật y phục",{c:{},ok:(a,t)=>!!tyM(a)&&tyActOk(a,t),o:(a,t)=>tyActO(a,t,true),get x(){return `không tốn bạc · cung nữ thân tín thiện cảm -${balAb(BAL.loyalCost)} · khó hơn`},f:(a,t)=>tyActDo(a,t,true)});/* internal only (old saves / plans); not offered: «Giật y phục» is the one road */
+ AOUT.tyrob=aoLz(()=>`y phục nàng về rương ngươi, nàng mặc trung y, Danh -${BAL.ty.robDanh} · Đức ${balSg(BAL.ty.act.duc)}${S&&!tyBac(S)?` · cung nữ thân tín thiện cảm -${balAb(BAL.loyalCost)}`:""}`,()=>`về tay không · bị bắt: nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`);
  AOUT.tyrobl=aoLz(()=>`y phục nàng về rương ngươi · cung nữ thân tín thiện cảm -${balAb(BAL.loyalCost)} · Đức ${balSg(BAL.ty.act.duc)}`,()=>`về tay không · bị bắt: nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`);
  const why=t=>{try{return tyOn(t)?"nàng đang mặc trung y":!(wdOf(t).y&&wdItem(wdOf(t).y))?"nàng không mặc y phục nào":""}catch(e){return""}};
- LACK.tyrob=t=>S.bac<BAL.ty.act.bac?`cần Bạc ${BAL.ty.act.bac} để thuê người`:why(t);
+ LACK.tyrob=t=>!tyBac(S)&&!tyM(S)?`cần Bạc ${BAL.ty.act.bac} để thuê người, hoặc cung nữ thân tín (Thiện cảm ${balAb(BAL.loy.low)}+)`:why(t);
  LACK.tyrobl=t=>!(typeof econLoyalMaid==="function"?econLoyalMaid(S):S.maid)?`cần cung nữ thân tín (Thiện cảm ${balAb(BAL.loy.low)}+)`:why(t);
- ACTDOM.tyrob=ACTDOM.tyrobl="Mưu kế";if(typeof J78VERB==="object"){J78VERB.tyrob="thuê người giật y phục của {t}";J78VERB.tyrobl="sai cung nữ giật y phục của {t}"}
- const G=RVGRP.find(x=>x[0]==="Hại nặng");if(G)for(const k of ["tyrob","tyrobl"])if(!G[1].includes(k))G[1].push(k);
+ ACTDOM.tyrob=ACTDOM.tyrobl="Mưu kế";if(typeof J78VERB==="object"){J78VERB.tyrob="sai người giật y phục của {t}";J78VERB.tyrobl="sai cung nữ giật y phục của {t}"}
+ const G=RVGRP.find(x=>x[0]==="Hại nặng");if(G)for(const k of ["tyrob"])if(!G[1].includes(k))G[1].push(k);
  if(!DIRTY.includes("tyrob"))DIRTY.push("tyrob","tyrobl");try{DIRTY_SENT.tyrobl=DIRTY_SENT.laydol}catch(e){}}catch(e){console.error("jty acts",e)}
 window.tyOn=tyOn;window.tyCost=tyCost;window.tyRob=tyRob;window.tyWeek=tyWeek;window.tyFig=tyFig;
