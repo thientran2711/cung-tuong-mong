@@ -75,7 +75,7 @@ function send(kind,pl,extra){const s=seat(),m=Object.assign({id:mid(),kind,from:
 /* ---------- the receiver's cards ---------- */
 const who=()=>pMe()/* the sender never stands on the receiver's stage (law 6b): she reads it in her own room */;
 function answer(m,a,extra){const r=Object.assign({},J(m),{ans:a,rc:myClan(),rn:S.name},extra||{});route(m.from,"ans",r);return r}
-function itIn(e,m){const x=Object.assign({},e);x.from="coop:"+pidOf(m.from);S.inv=S.inv||[];S.inv.push(x);try{if(typeof ilLog==="function")ilLog(x,"coop:"+pidOf(m.from),"me",m.kind==="letter"?"thư hảo hữu":"quà hảo hữu")}catch(er){}return x}
+function itIn(e,m){const x=Object.assign({},e);x.from="coop:"+pidOf(m.from);S.inv=S.inv||[];invAdd(S,x);try{if(typeof ilLog==="function")ilLog(x,"coop:"+pidOf(m.from),"me",m.kind==="letter"?"thư hảo hữu":"quà hảo hữu")}catch(er){}return x}
 function intel(id){const v=typeof RV==="function"?RV(id):null;if(!v||!v.alive)return null;try{if(mySide()==="h"&&typeof kcIntel1==="function")kcIntel1(v,K().letter.know);else if(typeof k61Know==="function")k61Know(v,"thư hảo hữu",true,K().letter.know)}catch(e){}return v}
 const nameKey=()=>mySide()==="h"?"Lời đồn":"Danh";
 function nameMove(n){/* her name with the world: palace Danh up = good; at home Lời đồn (kld) down = good */if(mySide()==="h")S.kld=Math.max(0,(S.kld||0)-n);else statSet(S,"danh",(S.danh||0)+n)}
@@ -115,7 +115,7 @@ H.card=m=>{if(m.kind==="so"&&m.pl.dir==="dn"){pushDil(mkP("kcco",{m}),"Sớ hặ
  const d=mkP("kcco",{m});if(!d){answer(m,"gone");return}pushDil(d,{letter:"Thư hảo hữu",gift:"Quà hảo hữu",so:"Sớ tiến cử",rumour:"Lời đồn",join:"Đón hảo hữu"}[m.kind]||"Hảo hữu")};
 /* the sender's side of the answer */
 H.ans=r=>{const o=kccoS();const m=o.out.find(x=>x.id===r.id);if(m)m.ans=r.ans;const fn=fLabel();
- if(r.kind==="gift"&&(r.ans==="back"||r.ans==="gone")&&r.pl&&r.pl.e){const e=Object.assign({},r.pl.e);delete e.from;S.inv=S.inv||[];S.inv.push(e);try{if(typeof ilLog==="function")ilLog(e,"coop:"+pidOf(r.to),"me","hảo hữu trả lại")}catch(x){}
+ if(r.kind==="gift"&&(r.ans==="back"||r.ans==="gone")&&r.pl&&r.pl.e){const e=Object.assign({},r.pl.e);delete e.from;S.inv=S.inv||[];invAdd(S,e);try{if(typeof ilLog==="function")ilLog(e,"coop:"+pidOf(r.to),"me","hảo hữu trả lại")}catch(x){}
   log(`${fn} gửi trả ${itm(e.k).n}.`);hist(`${fn} trả lại ${itm(e.k).n}`)}
  else if(r.kind==="gift"&&r.ans==="take"){log(`${fn} đã nhận ${itm(r.pl.e.k).n}.`);hist(`${fn} nhận quà`)}
  else if(r.kind==="letter"){log(`${fn} đã nhận thư của ngươi.`)}
