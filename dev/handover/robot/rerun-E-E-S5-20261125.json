@@ -10,7 +10,7 @@
  ],
  "note": "flagged lives left #kg82 mini-game boards unplayed per audit (mg quit); verdict INVALID under Foreman E rule 26/11 until F posts the board-play PASS; audit script verdict stays VALID",
  "game": "LIVE github.io",
- "finished": 25,
+ "finished": 27,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -3661,6 +3661,614 @@
    "exitPick": null,
    "mgDragSkip": null,
    "mgReady": 91
+  },
+  {
+   "life": "E-S5-R5-cov-pick-dang",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 1931787457,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "HARNESS",
+   "type": "harness",
+   "death": null,
+   "age": null,
+   "buoi": 469,
+   "harness": {
+    "kind": "realtap",
+    "sha": "8ea10d7e",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 0,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [
+     {
+      "at": 27,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 2011,
+      "lvl": 3,
+      "layer": "#kdaytc",
+      "title": ""
+     },
+     {
+      "at": 2041,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 3648,
+      "lvl": 3,
+      "layer": "#kdaytc",
+      "title": ""
+     },
+     {
+      "at": 3679,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 5739,
+      "lvl": 3,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 5772,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 28,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 32,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     }
+    ],
+    "slice": null,
+    "mgBackN": 9,
+    "mgBackQuitN": 0,
+    "builds": [
+     {
+      "s": "d811a46d+",
+      "b": "d3f360028603",
+      "where": "start"
+     },
+     {
+      "s": "540358c4+",
+      "b": "5a7a9c4004c1",
+      "where": "start"
+     }
+    ],
+    "build": {
+     "s": "d811a46d+",
+     "b": "d3f360028603",
+     "t": "2026-11-26T18:02Z"
+    },
+    "areaTaps": 754,
+    "kloadEnter": 6,
+    "pick": {
+     "re": "Dâng Cầm|Dâng Kỳ",
+     "n": 0,
+     "exitRefused": 0,
+     "log": []
+    },
+    "dlgScroll": 67,
+    "scrolls": 115,
+    "noHitScroll": 22,
+    "dlgClose": 159,
+    "infoTaps": 276,
+    "noHitReload": 2,
+    "nextNoTurn": 1,
+    "mgQuickSkipped": 48,
+    "mgReady": 11,
+    "mgMiss": 106,
+    "mgPeekTaps": 404,
+    "boardTaps": 404,
+    "mgBackWhy": [
+     {
+      "at": 4759,
+      "buoi": 267,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4884,
+      "buoi": 273,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 6175,
+      "buoi": 330,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 6301,
+      "buoi": 334,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 6522,
+      "buoi": 342,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 6797,
+      "buoi": 353,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 6907,
+      "buoi": 358,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 7034,
+      "buoi": 362,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 587,
+      "buoi": 412,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     }
+    ],
+    "skipTaps": 95,
+    "stallForce": 1,
+    "noExit": [
+     {
+      "k": "nx|.kmov|",
+      "at": 5738,
+      "buoi": 309,
+      "screen": ".kmov «»",
+      "selector": "div.kmov.kcf.km-full",
+      "why": "picker stalled 95 steps, no close / next",
+      "shot": "/home/user/wt/es5-out/shots-E-S5-R5-cov-pick-dang/noexit-1795738897710.png",
+      "buttons": [
+       "✕",
+       "✕",
+       "✕",
+       "✕",
+       "(not hit) ✕",
+       "✕",
+       "✕",
+       "Chuẩn bị thị tẩm"
+      ]
+     }
+    ],
+    "noExitFast": 102,
+    "mgDragSkip": 1,
+    "mgDragSkipExam": 1,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-27T00:54:48.652Z",
+      "buoi": 389,
+      "from": "2026-11-27T00:52:48.027Z"
+     },
+     {
+      "at": "2026-11-27T01:09:11.243Z",
+      "buoi": 421,
+      "from": "2026-11-27T01:08:20.977Z"
+     },
+     {
+      "at": "2026-11-27T01:58:41.868Z",
+      "buoi": 466,
+      "from": "2026-11-27T01:56:16.267Z"
+     }
+    ],
+    "consoleErrN": 1949,
+    "resumeRestore": [
+     {
+      "at": "2026-11-27T00:54:54.177Z",
+      "origin": "http://127.0.0.1:8746",
+      "from": "http://127.0.0.1:8746",
+      "want": 1171712,
+      "got": 1171712,
+      "keys": 17
+     },
+     {
+      "at": "2026-11-27T01:09:18.313Z",
+      "origin": "http://127.0.0.1:8746",
+      "from": "http://127.0.0.1:8746",
+      "want": 1261559,
+      "got": 1261559,
+      "keys": 17
+     },
+     {
+      "at": "2026-11-27T01:58:47.881Z",
+      "origin": "https://thientran2711.github.io",
+      "from": "http://127.0.0.1:8746",
+      "want": 1344083,
+      "got": 1344083,
+      "keys": 17
+     }
+    ],
+    "resumeHash": [
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "777f66d5",
+      "page": "777f66d5",
+      "same": true,
+      "ckClk": "3.31.2.3",
+      "pageClk": "3.31.2.3"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "fb7ca410",
+      "page": "fb7ca410",
+      "same": true,
+      "ckClk": "4.34.1.1",
+      "pageClk": "4.34.1.1"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "a2cbf949",
+      "page": "a2cbf949",
+      "same": true,
+      "ckClk": "4.37.2.3",
+      "pageClk": "4.37.2.3"
+     }
+    ],
+    "skipLayerTaps": 49,
+    "bareCovered": 31,
+    "bareCoveredBy": {
+     "img.kfr over button.card.kcard.ka": 2,
+     "moving img.kemo.kemo-ghen.kemo-live": 1,
+     "moving img.kemo.kemo-gian.kemo-live": 1,
+     "not on the layer scanned": 19,
+     "b.kdt1 over section#panel.panel.kpane": 2,
+     "div#kdaytc over button.tok.fig.j59silt": 2,
+     "div#kdaytc over button.card.kcard.ka": 1,
+     "div#kdaytc over img#mefig.j59sz": 2,
+     "div.kdayt over button.k3r.kasr": 1
+    },
+    "closeOwnLayer": 1,
+    "boards": [
+     {
+      "at": 587,
+      "buoi": 412,
+      "kind": "ne",
+      "layer": "#kg82",
+      "moves": 1,
+      "area": 0,
+      "s": 1,
+      "res": "10/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1356,
+      "buoi": 466,
+      "kind": "dan",
+      "layer": "#kg82",
+      "moves": 11,
+      "area": 0,
+      "s": 366,
+      "res": "still in play",
+      "raw": 2.8499999999999996
+     },
+     {
+      "at": 1723,
+      "buoi": 466,
+      "kind": "dan",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 0,
+      "s": 366,
+      "res": "still in play",
+      "raw": 2.8499999999999996
+     },
+     {
+      "at": 2090,
+      "buoi": 466,
+      "kind": "dan",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 0,
+      "s": 366,
+      "res": "still in play",
+      "raw": 2.8499999999999996
+     },
+     {
+      "at": 2457,
+      "buoi": 466,
+      "kind": "dan",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 0,
+      "s": 367,
+      "res": "still in play",
+      "raw": 2.8499999999999996
+     },
+     {
+      "at": 2825,
+      "buoi": 466,
+      "kind": "dan",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 0,
+      "s": 367,
+      "res": "still in play",
+      "raw": 2.8499999999999996
+     },
+     {
+      "at": 502,
+      "buoi": 469,
+      "kind": "dan",
+      "layer": "#kg82",
+      "moves": 18,
+      "area": 0,
+      "s": 367,
+      "res": "still in play",
+      "raw": 5.799999999999998
+     },
+     {
+      "at": 869,
+      "buoi": 469,
+      "kind": "dan",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 0,
+      "s": 366,
+      "res": "still in play",
+      "raw": 5.799999999999998
+     },
+     {
+      "at": 1235,
+      "buoi": 469,
+      "kind": "dan",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 0,
+      "s": 366,
+      "res": "still in play",
+      "raw": 5.799999999999998
+     },
+     {
+      "at": 1602,
+      "buoi": 469,
+      "kind": "dan",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 0,
+      "s": 366,
+      "res": "still in play",
+      "raw": 5.799999999999998
+     },
+     {
+      "at": 1906,
+      "buoi": 469,
+      "kind": "#kg82",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 0,
+      "s": 305,
+      "res": "?"
+     }
+    ],
+    "boardN": 11,
+    "saveRewind": [
+     {
+      "at": 47,
+      "buoi": 422,
+      "from": 421,
+      "fromClk": "4.34.1.2",
+      "to": 420,
+      "toClk": "4.34.1.1",
+      "lost": 1
+     },
+     {
+      "at": 55,
+      "buoi": 467,
+      "from": 466,
+      "fromClk": "4.38.0.1",
+      "to": 464,
+      "toClk": "4.37.2.3",
+      "lost": 2
+     }
+    ],
+    "skipCoverTaps": 2,
+    "freezeStackAt": 1795745957078,
+    "freezeStack": [
+     {
+      "buoi": 466,
+      "at": "2026-11-27T01:30:41.608Z",
+      "rendererMB": 1349,
+      "stack": [
+       "f @:1:232"
+      ]
+     },
+     {
+      "buoi": 466,
+      "at": "2026-11-27T01:37:12.959Z",
+      "rendererMB": 1061,
+      "stack": [
+       "f @:43773:90"
+      ]
+     },
+     {
+      "buoi": 466,
+      "at": "2026-11-27T01:43:11.759Z",
+      "rendererMB": 1078,
+      "stack": [
+       "f @:43773:90"
+      ]
+     },
+     {
+      "buoi": 466,
+      "at": "2026-11-27T01:49:11.843Z",
+      "rendererMB": 1093,
+      "stack": [
+       "f @:43773:90"
+      ]
+     },
+     {
+      "buoi": 466,
+      "at": "2026-11-27T01:55:11.917Z",
+      "rendererMB": 1096,
+      "stack": [
+       "f @:43773:90"
+      ]
+     },
+     {
+      "buoi": 469,
+      "at": "2026-11-27T02:06:12.199Z",
+      "rendererMB": 848,
+      "stack": [
+       "Mt._tick @:7:65685"
+      ]
+     },
+     {
+      "buoi": 469,
+      "at": "2026-11-27T02:12:12.891Z",
+      "rendererMB": 661,
+      "stack": [
+       "(anon) @:67210:23"
+      ]
+     },
+     {
+      "buoi": 469,
+      "at": "2026-11-27T02:18:12.063Z",
+      "rendererMB": 663,
+      "stack": [
+       "Mt._tick @:7:65685"
+      ]
+     },
+     {
+      "buoi": 469,
+      "at": "2026-11-27T02:24:42.139Z",
+      "rendererMB": 702,
+      "stack": [
+       "(anon) @:100905:22"
+      ]
+     }
+    ],
+    "pinMoves": [
+     {
+      "from_pinUrl": "http://127.0.0.1:8746/",
+      "from_build0": {
+       "s": "d811a46d+",
+       "b": "d3f360028603",
+       "t": "2026-11-26T18:02Z",
+       "at": "2026-11-26T22:46:06.004Z"
+      },
+      "note": "mixed build (pin-server resume): pin server lacked /dev/vendor/pixi + img/kit (Foreman E ruling 01:08Z 27/11); moved to LIVE github.io with pin=0"
+     }
+    ],
+    "build0": {
+     "s": "540358c4+",
+     "b": "5a7a9c4004c1",
+     "t": "2026-11-27T00:21Z",
+     "at": "2026-11-27T01:58:44.020Z"
+    }
+   },
+   "bugs": [
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): #kdaytc «» — lost: Ô lưu / Xem bản thân / Sắc100Tài100Tâm cơ19Đức3 / Bạc84Sức100/100"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): #kdaytc «» — lost: Ô lưu / Xem bản thân / Sắc100Tài100Tâm cơ20Đức3 / Bạc70Sức100/100"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): picker stalled 95 steps, no close / next → later visits unstuck at once by taps"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "picker stalled 95 steps / 60 s on .kmov «» without a real tap (area 95, deadEnd 1; last refused tap: gone «Chuẩn bị thị tẩm») → tapped «Chuẩn bị thị tẩm»"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "BOARD dan still in play after 6 min (11 moves) — the round never ended"
+    },
+    {
+     "type": "harness",
+     "n": 7,
+     "msg": "BOARD dan still in play after 6 min (0 moves) — the round never ended"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "BOARD dan still in play after 6 min (18 moves) — the round never ended"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed"
+    }
+   ],
+   "exitPick": null,
+   "mgDragSkip": 1,
+   "mgReady": 11
   },
   {
    "life": "E-S5-R5-greedy-1",
@@ -16221,6 +16829,1122 @@
    "exitPick": null,
    "mgDragSkip": null,
    "mgReady": null
+  },
+  {
+   "life": "E-S5-R5-random-5",
+   "dev": "ipad",
+   "bot": "rand",
+   "seed": 2104411590,
+   "origin": "pf",
+   "road": "pt_su",
+   "ending": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "death": true,
+   "age": 28,
+   "buoi": 1557,
+   "harness": {
+    "kind": "realtap",
+    "sha": "8ea10d7e",
+    "realtap": true,
+    "jsClicks": 0,
+    "deadButtons": 1,
+    "cap": null,
+    "stuck": 0,
+    "unstick": [
+     {
+      "at": 215,
+      "lvl": 1,
+      "layer": ".dlg",
+      "title": "Thân phận kiếp này"
+     },
+     {
+      "at": 28,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 24,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 229,
+      "lvl": 3,
+      "layer": ".kmov",
+      "title": ""
+     },
+     {
+      "at": 261,
+      "lvl": 1,
+      "layer": "#kload",
+      "title": ""
+     }
+    ],
+    "slice": null,
+    "mgBackN": 118,
+    "mgBackQuitN": 0,
+    "builds": [
+     {
+      "s": "f573dc94+",
+      "b": "653cff86007d",
+      "where": "start"
+     },
+     {
+      "s": "540358c4+",
+      "b": "5a7a9c4004c1",
+      "where": "start"
+     }
+    ],
+    "pinFail": {
+     "b": "653cff86007d",
+     "t": "2026-11-26T17:33Z",
+     "code": 2
+    },
+    "build": {
+     "s": "f573dc94+",
+     "b": "653cff86007d",
+     "t": "2026-11-26T17:33Z"
+    },
+    "pick": {
+     "re": "Dâng Cầm|Dâng Kỳ",
+     "n": 0,
+     "exitRefused": 0,
+     "log": []
+    },
+    "dlgScroll": 823,
+    "scrolls": 1106,
+    "dlgClose": 721,
+    "infoTaps": 1053,
+    "nextNoTurn": 57,
+    "kfocVisits": 79,
+    "mgQuickSkipped": 990,
+    "mgReady": 129,
+    "mgMiss": 4290,
+    "areaTaps": 5981,
+    "mgPeekTaps": 5306,
+    "boardTaps": 5306,
+    "mgBackWhy": [
+     {
+      "at": 14792,
+      "buoi": 840,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 14866,
+      "buoi": 843,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕",
+       "✕"
+      ]
+     },
+     {
+      "at": 14921,
+      "buoi": 844,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 308,
+      "buoi": 872,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕",
+       "✕"
+      ]
+     },
+     {
+      "at": 349,
+      "buoi": 1116,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 441,
+      "buoi": 1120,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 504,
+      "buoi": 1124,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 661,
+      "buoi": 1128,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 759,
+      "buoi": 1132,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 836,
+      "buoi": 1136,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 874,
+      "buoi": 1136,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1149,
+      "buoi": 1140,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1221,
+      "buoi": 1144,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1289,
+      "buoi": 1148,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1365,
+      "buoi": 1152,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1445,
+      "buoi": 1156,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1524,
+      "buoi": 1160,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1598,
+      "buoi": 1164,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1667,
+      "buoi": 1168,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1736,
+      "buoi": 1172,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1809,
+      "buoi": 1176,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2075,
+      "buoi": 1184,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2206,
+      "buoi": 1192,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2595,
+      "buoi": 1215,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕",
+       "✕"
+      ]
+     },
+     {
+      "at": 2710,
+      "buoi": 1224,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 918,
+      "buoi": 1310,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1727,
+      "buoi": 1370,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 2953,
+      "buoi": 1458,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 3032,
+      "buoi": 1461,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 3346,
+      "buoi": 1485,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 3406,
+      "buoi": 1489,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 3666,
+      "buoi": 1508,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕",
+       "✕"
+      ]
+     },
+     {
+      "at": 3713,
+      "buoi": 1509,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 3785,
+      "buoi": 1513,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 3866,
+      "buoi": 1517,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4013,
+      "buoi": 1525,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4091,
+      "buoi": 1529,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4266,
+      "buoi": 1541,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4330,
+      "buoi": 1545,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 4425,
+      "buoi": 1549,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     }
+    ],
+    "kipGo": 4,
+    "kipScroll": 592,
+    "kipPick": 70,
+    "backdropTaps": 2,
+    "taps0": 0,
+    "resumed": [
+     {
+      "at": "2026-11-27T00:54:40.629Z",
+      "buoi": 863,
+      "from": "2026-11-27T00:52:00.135Z"
+     },
+     {
+      "at": "2026-11-27T01:09:02.971Z",
+      "buoi": 897,
+      "from": "2026-11-27T01:08:30.394Z"
+     },
+     {
+      "at": "2026-11-27T01:58:33.579Z",
+      "buoi": 1090,
+      "from": "2026-11-27T01:57:35.862Z"
+     },
+     {
+      "at": "2026-11-27T02:45:57.698Z",
+      "buoi": 1234,
+      "from": "2026-11-27T02:45:25.589Z"
+     }
+    ],
+    "consoleErrN": 2735,
+    "resumeRestore": [
+     {
+      "at": "2026-11-27T00:54:46.164Z",
+      "origin": "http://127.0.0.1:8925",
+      "from": "https://thientran2711.github.io",
+      "want": 2135433,
+      "got": 2135433,
+      "keys": 28
+     },
+     {
+      "at": "2026-11-27T01:09:08.662Z",
+      "origin": "http://127.0.0.1:8925",
+      "from": "http://127.0.0.1:8925",
+      "want": 2190003,
+      "got": 2190003,
+      "keys": 29
+     },
+     {
+      "at": "2026-11-27T01:58:39.677Z",
+      "origin": "https://thientran2711.github.io",
+      "from": "http://127.0.0.1:8925",
+      "want": 2521766,
+      "got": 2521766,
+      "keys": 29
+     },
+     {
+      "at": "2026-11-27T02:46:03.749Z",
+      "origin": "https://thientran2711.github.io",
+      "from": "https://thientran2711.github.io",
+      "want": 2745239,
+      "got": 2745239,
+      "keys": 29
+     }
+    ],
+    "resumeHash": [
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "7ae3e1ba",
+      "page": "7ae3e1ba",
+      "same": true,
+      "ckClk": "7.72.1.2",
+      "pageClk": "7.72.1.2"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "f1ed78ec",
+      "page": "f1ed78ec",
+      "same": true,
+      "ckClk": "7.75.2.3",
+      "pageClk": "7.75.2.3"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "c6fc5ae6",
+      "page": "c6fc5ae6",
+      "same": true,
+      "ckClk": "8.91.2.2",
+      "pageClk": "8.91.2.2"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "1df98745",
+      "page": "1df98745",
+      "same": true,
+      "ckClk": "9.104.1.1",
+      "pageClk": "9.104.1.1"
+     }
+    ],
+    "kloadEnter": 3,
+    "skipLayerTaps": 266,
+    "boards": [
+     {
+      "at": 299,
+      "buoi": 872,
+      "kind": "tho",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 39,
+      "s": 77,
+      "res": "2/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 349,
+      "buoi": 1116,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 79,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 441,
+      "buoi": 1120,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 0,
+      "s": 32,
+      "res": "8/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 504,
+      "buoi": 1124,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 0,
+      "s": 28,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 661,
+      "buoi": 1128,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 0,
+      "s": 30,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 759,
+      "buoi": 1132,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 24,
+      "area": 0,
+      "s": 28,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 835,
+      "buoi": 1136,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 27,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 874,
+      "buoi": 1136,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 27,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1149,
+      "buoi": 1140,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 28,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1220,
+      "buoi": 1144,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 76,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1288,
+      "buoi": 1148,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 53,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1364,
+      "buoi": 1152,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 82,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1445,
+      "buoi": 1156,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 25,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1524,
+      "buoi": 1160,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 74,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1598,
+      "buoi": 1164,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 26,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 1667,
+      "buoi": 1168,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 80,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1736,
+      "buoi": 1172,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 85,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1809,
+      "buoi": 1176,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 27,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 2075,
+      "buoi": 1184,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 28,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 2206,
+      "buoi": 1192,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 47,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2585,
+      "buoi": 1215,
+      "kind": "tho",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 45,
+      "s": 78,
+      "res": "3/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 2710,
+      "buoi": 1224,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 54,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 918,
+      "buoi": 1310,
+      "kind": "td_cong",
+      "layer": "#kg82",
+      "moves": 199,
+      "area": 0,
+      "s": 72,
+      "res": "4/10 raw 2.47",
+      "raw": 2.474459880726484
+     },
+     {
+      "at": 1727,
+      "buoi": 1370,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 26,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 2952,
+      "buoi": 1458,
+      "kind": "td_cong",
+      "layer": "#kg82",
+      "moves": 178,
+      "area": 0,
+      "s": 72,
+      "res": "5/10 raw 2.46",
+      "raw": 2.4626869141813756
+     },
+     {
+      "at": 3032,
+      "buoi": 1461,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 27,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 3345,
+      "buoi": 1485,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 25,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 3406,
+      "buoi": 1489,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 84,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 3656,
+      "buoi": 1508,
+      "kind": "dan",
+      "layer": "#kg82",
+      "moves": 11,
+      "area": 0,
+      "s": 22,
+      "res": "1/10 raw 3.30",
+      "raw": 3.2999999999999994
+     },
+     {
+      "at": 3713,
+      "buoi": 1509,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 25,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 3785,
+      "buoi": 1513,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 76,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 3866,
+      "buoi": 1517,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 80,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4013,
+      "buoi": 1525,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 72,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4091,
+      "buoi": 1529,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 26,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 4266,
+      "buoi": 1541,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 78,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4330,
+      "buoi": 1545,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 75,
+      "area": 0,
+      "s": 22,
+      "res": "7/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4424,
+      "buoi": 1549,
+      "kind": "mua",
+      "layer": "#kg82",
+      "moves": 19,
+      "area": 0,
+      "s": 25,
+      "res": "9/10 raw 10.00",
+      "raw": 10
+     }
+    ],
+    "boardN": 37,
+    "bareCovered": 129,
+    "bareCoveredBy": {
+     "img.kfr over button.k3r": 1,
+     "div.kcf-cards over button.tok.fig.bob": 2,
+     "div.kcf-cards over section#panel.panel.kpane": 2,
+     "img.kgem over section#panel.panel.kpane": 1,
+     "div.kcf-cards over button.pct": 1,
+     "div.kcf-cards over img#mefig.kfxon.j59sz.j59sel": 1,
+     "img.kfr over section#panel.panel.kpane": 2,
+     "moving img.kemo.kemo-gian.kemo-live": 3,
+     "moving img.kemo.kemo-tinhtu.kemo-live": 2,
+     "moving img.kemo.kemo-vui.kemo-live": 2,
+     "moving img.kemo.kemo-binh.kemo-live": 4,
+     "moving img.kemo.kemo-buon.kemo-live": 4,
+     "moving img.kemo.kemo-ghen.kemo-live": 7,
+     "img.kfr over button.tok.fig.bob": 2,
+     "moving img.kemo.kemo-so.kemo-live": 1,
+     "not on the layer scanned": 85,
+     "div.kne.kne-beat over button.mspot.sm.kmmv": 1,
+     "div.kcf-cards over button.card.kcard.ka": 2,
+     "div.kne.kne-beat over div.kmrow": 3,
+     "div.kne.kne-beat over section#panel.panel.kpane": 1,
+     "div.kne.kne-beat over button.mspot.sm.kmnw": 1,
+     "div.kbk-cv over button.mspot.sm.kmmv": 1
+    },
+    "skipTaps": 78,
+    "stallForce": 1,
+    "noExit": [
+     {
+      "k": "nx|.kmov|",
+      "at": 228,
+      "buoi": 902,
+      "screen": ".kmov «»",
+      "selector": "div.kmov.kcf.km-full",
+      "why": "picker stalled 78 steps, no close / next",
+      "shot": "/home/user/wt/es5-out/shots-E-S5-R5-random-5/noexit-1795741970895.png",
+      "buttons": [
+       "✕",
+       "✕",
+       "✕",
+       "✕",
+       "✕",
+       "✕",
+       "✕",
+       "✕"
+      ]
+     }
+    ],
+    "noExitFast": 254,
+    "skipCoverTaps": 10,
+    "pinMoves": [
+     {
+      "from_pinUrl": "http://127.0.0.1:8925/",
+      "from_build0": {
+       "s": "f573dc94+",
+       "b": "653cff86007d",
+       "t": "2026-11-26T17:33Z",
+       "at": "2026-11-26T20:37:40.360Z"
+      },
+      "note": "mixed build (pin-server resume): pin server lacked /dev/vendor/pixi + img/kit (Foreman E ruling 01:08Z 27/11); moved to LIVE github.io with pin=0"
+     }
+    ],
+    "build0": {
+     "s": "540358c4+",
+     "b": "5a7a9c4004c1",
+     "t": "2026-11-27T00:21Z",
+     "at": "2026-11-27T01:58:36.391Z"
+    },
+    "closeOwnLayer": 3,
+    "kipDeadEnd": 1,
+    "dressPut": 14,
+    "taps": 2678
+   },
+   "bugs": [
+    {
+     "type": "game",
+     "n": 4,
+     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): picker stalled 78 steps, no close / next → later visits unstuck at once by taps"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "picker stalled 78 steps / 61 s on .kmov «» without a real tap (area 78, deadEnd 1; last refused tap: gone «Ta biết rồi») → tapped «Ta biết rồi»"
+    },
+    {
+     "type": "note",
+     "n": 1,
+     "msg": "item pick grid: no item can be given now (14 items, every confirm disabled or greyed; card says «Khá Thư thăm hỏi Tác phẩm tự tay · Ngôn PHẨM Tinh phẩm (9 phần) LOẠI Tác phẩm tự tay · Ngôn ĐƯỢC đem tặng: quý 3 Nội vụ phủ mua: Bạc +12 bán») on «Biếu quà làm lành» → ✕"
+    }
+   ],
+   "exitPick": null,
+   "mgDragSkip": null,
+   "mgReady": 129
   },
   {
    "life": "E-S5-R5-rebel-5",
