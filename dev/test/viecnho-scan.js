@@ -1,5 +1,5 @@
 /* review/viecnho-fix family scans (LUẬT SỬA CẢ NHÓM): node dev/test/viecnho-scan.js <outdir>
-   A) every tab / sub-tab: is an «open new …» act (.ktacts/.kpanec outside a person card) rendered ABOVE the main content (.pgwrap / .pc / list)?  B) every person card (.pc[data-k2]) on every tab: kit §6.4b shape (kpwide ⇒ panel B with 3 tabs, card never scrolls, fixed height; was §6.4 .kplscr). Prints before/after-style table. */
+   A) every tab / sub-tab: is an «open new …» act (.ktacts/.kpanec outside a person card) rendered ABOVE the main content (.pgwrap / .pc / list)?  B) every person card (.pc[data-k2]) on every tab: kpwide ⇒ person tabs (KPP.on) = §6.4b info panel (tabs Thông tin + Giao tình, no act tab), every other tab = §6.4 (.kplscr); card never scrolls, fixed height. Prints before/after-style table. */
 const {chromium}=require('playwright');const path=require('path'),fs=require('fs');const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||'/tmp/viecnho-scan';fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const rows=[];
  for(const [name,w,h] of [['fold',755,1000],['ipad',1180,820]]){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:1});
@@ -15,7 +15,7 @@ const {chromium}=require('playwright');const path=require('path'),fs=require('fs
    for(const [key,val] of cases){if(key){await p.evaluate(([k,v])=>{KTSUB[k]=v;render()},[key,val]);await p.waitForTimeout(500)}
     const r=await p.evaluate(()=>{const P=document.getElementById('panel');const acts=[...P.querySelectorAll('.ktacts,.kskacts')].filter(e=>!e.closest('.pc'));const main=P.querySelector('.pgwrap,.pc,.ktpeople,.kslide,.logs');
      const above=acts.some(a=>main&&(a.compareDocumentPosition(main)&Node.DOCUMENT_POSITION_FOLLOWING));
-     const pcs=[...P.querySelectorAll('.pc[data-k2]')].map(pc=>({wide:pc.classList.contains('kpwide'),scr:pc.dataset.kpp==='1'&&pc.querySelectorAll(':scope>.pcr>.kppt>.pct').length===3,fixed:!!pc.style.getPropertyValue('--kpcmax'),cardScroll:pc.scrollHeight-pc.clientHeight>1,rOv:getComputedStyle(pc.querySelector(':scope>.pcr')).overflowY}));
+     const pcs=[...P.querySelectorAll('.pc[data-k2]')].map(pc=>({wide:pc.classList.contains('kpwide'),scr:pc.dataset.kpp==='1'?[...pc.querySelectorAll(':scope>.pcr>.kppt>.pct')].map(e=>e.textContent).join('|')==='Thông tin|Giao tình':!!pc.querySelector(':scope>.pcl>.kplscr'),fixed:!!pc.style.getPropertyValue('--kpcmax'),cardScroll:pc.scrollHeight-pc.clientHeight>1,rOv:getComputedStyle(pc.querySelector(':scope>.pcr')).overflowY}));
      return{acts:acts.length,above,pcs}});
     rows.push({dev:name,tab:t,sub:key?key+'='+val:'-',...r})}}
   await p.close()}

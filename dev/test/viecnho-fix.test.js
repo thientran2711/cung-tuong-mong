@@ -1,4 +1,4 @@
-/* review/viecnho-fix (owner 24/11 ~21:50Z real): (1) Việc nhờ «Tìm việc» sub-tab + Đang làm order, (2) person panel B (kit §6.4b; was the §6.4 scroll check), (3) «Vì sao» wording.
+/* review/viecnho-fix (owner 24/11 ~21:50Z real): (1) Việc nhờ «Tìm việc» sub-tab + Đang làm order, (2) person-panel scroll (kit §6.4), (3) «Vì sao» wording.
    node dev/test/viecnho-fix.test.js [outdir]   (after dev/site/build_site.sh; shots go to outdir, never git). exit 1 on any FAIL */
 const {chromium}=require('playwright');const path=require('path'),fs=require('fs');const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||'/tmp/viecnho-fix';fs.mkdirSync(OUT,{recursive:true});
 let fails=0;const ok=(c,m)=>{if(!c){fails++;console.log('FAIL',m)}else console.log('ok  ',m)};
@@ -16,16 +16,23 @@ let fails=0;const ok=(c,m)=>{if(!c){fails++;console.log('FAIL',m)}else console.l
   const now=await p.evaluate(()=>({ask:!!document.querySelector('#panel [data-q72a="ask"]'),firstIsPerson:(()=>{const a=document.querySelector('#panel .pgwrap');const k=document.querySelector('#panel .ktacts');return !!a&&!k})(),pc:!!document.querySelector('#panel .pc')}));
   ok(!now.ask&&now.pc&&now.firstIsPerson,`${name} Đang làm: no ask act, person panel present (${JSON.stringify(now)})`);
   await p.screenshot({path:`${OUT}/${name}-1-dang-lam.png`});
-  /* (2) person panel = KIT §6.4b panel B (canon overwrite of the §6.4 two-scroller check): 3 tabs, switching tabs never moves the portrait / name / card */
-  const pre=await p.evaluate(()=>{const pc=document.querySelector('#panel .pc[data-k2]');if(!pc)return null;return{kpp:pc.dataset.kpp==='1',tabs:pc.querySelectorAll(':scope>.pcr>.kppt>.pct').length}});
-  ok(pre&&pre.kpp&&pre.tabs===3,`${name} person panel is panel B with 3 tabs ${JSON.stringify(pre)}`);
+  /* (2) scroll */
+  const pre=await p.evaluate(()=>{const pc=document.querySelector('#panel .pc[data-k2]');if(!pc)return null;const L=pc.querySelector('.kplscr'),R=pc.querySelector(':scope>.pcr');if(!L||!R)return{noScr:true};
+   const pad=document.createElement('div');pad.style.cssText='height:900px';pad.textContent='.';L.appendChild(pad.cloneNode(true));R.appendChild(pad);return{ok:1}});await p.waitForTimeout(900);
+  ok(pre&&pre.ok,`${name} person panel has .kplscr + .pcr scrollers`);
   const rect=sel=>p.evaluate(s=>{const e=document.querySelector(s);if(!e)return null;const r=e.getBoundingClientRect();return[Math.round(r.x),Math.round(r.y),Math.round(r.width),Math.round(r.height)]},sel);
-  const sel=['#panel .pc .pcl>.pcp','#panel .pc .pcname','#panel .pc'];
-  const r0=await Promise.all(sel.map(rect));
-  for(const v of ['info','rel','act']){await p.evaluate(v=>{const b=document.querySelector(`#panel .pc .kppt .pct[data-kppv="${v}"]`);if(b)b.click()},v);await p.waitForTimeout(300);
-   const r1=await Promise.all(sel.map(rect));ok(JSON.stringify(r0)===JSON.stringify(r1),`${name} tab ${v}: portrait / name / card rects unchanged ${JSON.stringify(r1)}`);
-   const sh=await p.evaluate(()=>{const pc=document.querySelector('#panel .pc');const e=pc.querySelector(`:scope>.pcr>.kppv[data-v="${pc.dataset.kppv}"]`);return!!(e&&e.offsetParent)});ok(sh,`${name} tab ${v}: its view is shown`);
-   await p.screenshot({path:`${OUT}/${name}-2-tab-${v}.png`})}
+  const sel=['#panel .pc .pcl>.pcp','#panel .pc .pcname','#panel .pc .kpstick','#panel .pc'];
+  await p.waitForTimeout(900);
+  for(const [col,s] of [['left','#panel .pc .kplscr'],['right','#panel .pc>.pcr']]){
+   await p.evaluate(()=>{const L=document.querySelector('#panel .pc .kplscr'),R=document.querySelector('#panel .pc>.pcr');for(const e of [L,R])if(!e.querySelector(':scope>.tpad')){const d=document.createElement('div');d.className='tpad';d.style.cssText='height:900px';e.appendChild(d)}});await p.waitForTimeout(250);
+   const r0=await Promise.all(sel.map(rect));
+   const st=await p.evaluate(s=>{const e=document.querySelector(s);e.scrollTop=300;return[e.scrollTop,document.querySelector('#panel .pc .kplscr').scrollTop,document.querySelector('#panel .pc>.pcr').scrollTop]},s);
+   await p.waitForTimeout(150);const r1=await Promise.all(sel.map(rect));
+   ok(JSON.stringify(r0)===JSON.stringify(r1),`${name} scroll ${col}: portrait / name / info block / card rects unchanged ${JSON.stringify(r1)}`);
+   ok(st[0]>0,`${name} scroll ${col}: that column scrolled (${st[0]})`);
+   const other=col==='left'?st[2]:st[1];ok(other===0,`${name} scroll ${col}: the other column did not move (${other})`);
+   await p.evaluate(()=>{document.querySelector('#panel .pc .kplscr').scrollTop=0;document.querySelector('#panel .pc>.pcr').scrollTop=0});
+   await p.screenshot({path:`${OUT}/${name}-2-scroll-${col}.png`});}
   const pcs=await p.evaluate(()=>{const pc=document.querySelector('#panel .pc[data-k2]');return{pcScroll:pc.scrollHeight-pc.clientHeight,pcOv:getComputedStyle(pc).overflowY}});
   ok(pcs.pcScroll<=1,`${name} the card itself never scrolls (${JSON.stringify(pcs)})`);
   /* Tìm việc sub-tab */
@@ -44,9 +51,14 @@ let fails=0;const ok=(c,m)=>{if(!c){fails++;console.log('FAIL',m)}else console.l
  for(const r of rows){const bad=r.items.filter(t=>/\d+\s*→\s*\d+|\(\+\d+\)|\(\d+\s*→/.test(t)/* KIT §7.1 (OD 26/11 ~03:55Z): «+8 (42)» = the new TOTAL in brackets is right; an arrow or a repeated «(+8)» change is not */||t.toLowerCase().includes(r.title.toLowerCase().split(':')[0])||/chưa quen/.test(t));
   ok(r.items.length>0&&bad.length===0,`result popup «${r.title}» (${r.ok?'THÀNH':'BẠI'}): ${r.items.length} rows all short, no a→b / (±N) / title copy [${r.items.join(' | ').slice(0,260)}]${bad.length?' BAD: '+bad.join(' | '):''}`)}
  /* the stamp sits on the card edge, never on words */
- const stamp=await p.evaluate(async()=>{window.__bot=0;Q.length=0;const bf=rsnap();affAdd(rivals.filter(r=>!r.queen)[0],S,8);resultShow("Vá lại quạt tròn bị mối cắn: Cắt viền",bf,true);await new Promise(r=>setTimeout(r,1500));const t=document.getElementById('rtoast');const s=t&&t.querySelector('.kmseal');if(!s)return{none:1};const r=s.getBoundingClientRect();
-  const hit=[...t.querySelectorAll('.kan,.ksen,.kitem,.krl,.seal,.kat')].filter(e=>{const q=e.getBoundingClientRect();return q.width&&q.height&&!(q.right<=r.left+4||q.left>=r.right-4||q.bottom<=r.top+4||q.top>=r.bottom-4)}).map(e=>e.className);return{hit}});
- ok(stamp.none||stamp.hit.length===0,'result stamp covers no text ('+JSON.stringify(stamp)+')');
+ const stamp=await p.evaluate(async()=>{window.__bot=0;Q.length=0;const bf=rsnap();affAdd(rivals.filter(r=>!r.queen)[0],S,8);resultShow("Vá lại quạt tròn bị mối cắn: Cắt viền",bf,true);await new Promise(r=>setTimeout(r,300));const t=document.getElementById('rtoast');const s=t&&t.querySelector('.kmseal');if(!s)return{none:1};
+  /* measure the stamp AT REST (KK51-P2 27/11): the picture loaded (CDN) and every finite animation of the card done — the kmStamp slam starts at scale 2.6 and the card thumps,
+     so a fixed 1.5 s wait measured a half-scaled stamp when the picture came late (fail) or an unloaded 12 px stamp (false pass) */
+  for(let n=0;n<100&&!(s.complete&&s.naturalWidth);n++)await new Promise(r=>setTimeout(r,100));
+  await Promise.all([t,...t.querySelectorAll('*')].flatMap(e=>e.getAnimations()).filter(a=>isFinite(a.effect&&a.effect.getComputedTiming().endTime)).map(a=>a.finished.catch(()=>0)));await new Promise(r=>setTimeout(r,100));
+  const r=s.getBoundingClientRect();
+  const hit=[...t.querySelectorAll('.kan,.ksen,.kitem,.krl,.seal,.kat')].filter(e=>{const q=e.getBoundingClientRect();return q.width&&q.height&&!(q.right<=r.left+4||q.left>=r.right-4||q.bottom<=r.top+4||q.top>=r.bottom-4)}).map(e=>e.className);return{hit,loaded:s.naturalWidth>0,seal:[r.left,r.top,r.width,r.height].map(Math.round)}});
+ ok(!stamp.none&&stamp.loaded&&stamp.hit.length===0,'result stamp (loaded, at rest) covers no text ('+JSON.stringify(stamp)+')');
  const lines=await p.evaluate(()=>{const out=[];const V=rivals.slice(0,4);const nets=Object.keys(BAL.net.T).slice(0,3);window.trKnown=()=>[nets[0]];window.trongKnown=()=>true;
   for(const v of V)for(const known of [0,1])for(const st of ["aff","oan"])for(const d of [12,-6]){const sv=typeof k61Named==="function"?k61Named:null;try{if(sv)window.k61Named=()=>!!known;const F=[{k:"net",t:nets[0],s:1},{k:"trong",v:"Lễ",s:1,j:v}];out.push(whyText({who:v,stat:st,d,F},d))}finally{if(sv)window.k61Named=sv}}
   out.push(whyText({who:"th",stat:"th",d:4,F:[{k:"mood",t:"lòng ngươi đang vui",s:1}]},4));out.push(whyText({who:"emp",stat:"sung",d:5,F:[{k:"talk",t:"đêm vui"}]},5));
