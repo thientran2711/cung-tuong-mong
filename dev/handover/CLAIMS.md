@@ -598,6 +598,6 @@ E-TIER-AUDIT | (report only) dev/handover/reports/tier-audit.md | session_01DgYS
 save-pid-cards BIG rv | review/save-pid-cards-rv | session_01N1tNP5p71UEmkesbLLD9jC | RUNNING | 27/11 01:05Z (Foreman B child 4)
 FLIGHT2-S16B life (seat s16 session_01UV1Szhqp1P7gBX2vN1HGfg, ctx ~15 %; iPad 1180x820 sens, seed 2026112544, newest LIVE origin/main served locally via rt-serve-build.sh + pin=1 fresh profile, harness review/robot-realtap 97e55a457) | dev/handover/robot/flight2-s16b.* | session_01UV1Szhqp1P7gBX2vN1HGfg | CLAIMED | 2026-11-27T01:20Z (FOREMAN F ROOT)
 EMP-DAY | reports/emperor-favour-plan.md @f868ff7b | session_01PEhRbuMDVjApgDKJapJENo | DONE (PLAN READY, worker archived) | 2026-11-27T01:25Z
-E-PHUCDUYEN-PLAN | (report only) dev/handover/reports/phucduyen-plan.md | session_01DgYSWmrvcBipCfWarncs3U | RUNNING | 2026-11-27T02:20Z (FOREMAN E ROOT, ordered by MAIN 168/169)
+E-PHUCDUYEN-PLAN | (report only) dev/handover/reports/phucduyen-plan.md | session_01DgYSWmrvcBipCfWarncs3U | DONE (plan pushed) | 2026-11-27T02:20Z (FOREMAN E ROOT, ordered by MAIN 168/169)
 E-TIER-AUDIT v2 (MERGE vs KEEP-CHOICE column, MAIN 169 order) | dev/handover/reports/tier-audit.md | session_01DgYSWoFVCrpS7YmQGBGr58 | DONE 99ead418 | 2026-11-27T02:22Z (FOREMAN E ROOT)
 promo-stack-lr4 BIG rv | review/promo-stack-lr4 d713f162 | session_01D3E3NacPigdjGR1RRt4q3j | RUNNING | 27/11 01:55Z (Foreman D)
