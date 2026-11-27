@@ -141,7 +141,7 @@ function tsMkScoutOpts(th,m){const w=tsMkWant(th,m),k=tsMkKnown(w);if(k.tone&&k.
  {const o=tsMkSpyO();L.push(tsOpt({n:"Sai tai mắt dò bên chủ hội",odds:o,need:[tsNeedBac(B.spy.cost),{t:`Tai mắt ≥${B.spy.need} (có ${S.mat||0})`,ok:eyes(S)>=B.spy.need}],duoc:["biết đề chuộng son phấn nào, kiểu nào"],kem:[`Bạc -${B.spy.cost}`],
   go:()=>{apply({bac:-B.spy.cost});if(roll(o))got("Tai mắt báo",all);else log("Tai mắt về tay không.")}}))}
  {let f=null;try{f=liveRivals(true).filter(v=>!v.out&&aff(v,S)>=netTh(v,"than")).sort((a,b)=>aff(b,S)-aff(a,S))[0]}catch(e){}
-  if(f){const o=B.ask.o0+aff(f,S)*B.ask.aff+(S.tamco||0)*B.ask.tamco;L.push(tsOpt({n:`Hỏi ${f.name} (từng dự hội)`,odds:o,need:[{t:`nàng thân với ngươi (${aff(f,S)}/${netTh(f,"than")})`,ok:aff(f,S)>=netTh(f,"than")}],duoc:["biết đề chuộng son phấn tông nào"],
+  if(f){const o=B.ask.o0+aff(f,S)*B.ask.aff+(S.tamco||0)*B.ask.tamco;L.push(tsOpt({n:`Hỏi ${f.name} (từng dự hội)`,odds:o,need:[{t:`nàng thân với ngươi (${kitNeed(aff(f,S),netTh(f,"than"))})`,ok:aff(f,S)>=netTh(f,"than")}],duoc:["biết đề chuộng son phấn tông nào"],
    go:()=>{if(roll(o))got(f.name,{tone:1});else log(`${f.name} cũng không nhớ rõ.`)}}))}}
  return L}
 /* a rival's contest face: does she know the want (her own scouting), then the same sitting as every NPC (toilNpcPlay, festival allowance, her rank) */

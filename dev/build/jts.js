@@ -16,9 +16,9 @@ function tsSrv(){return typeof isSrv==="function"&&isSrv()}
 /* her next rung: the srvMonth gate, row by row (Công lao · bậc cung chủ cho phép · Chủ tin; then the Nội vụ phủ exam, jexam exSrv*) */
 function tsSrvNext(){try{const r=S.srv.rk|0;if(S.srv.mama||r>=SRK.maid.length-1)return null;return SRK.maid[r+1]}catch(e){return null}}
 function tsSrvRows(){const r=S.srv.rk|0,need=srvMpNeed(r),mx=srvMax(),nx=SRK.maid[r+1];const L=[];
- L.push([Math.floor(S.srv.mp)>=need,`Công lao ${Math.floor(S.srv.mp)}/${need}`]);
+ L.push([Math.floor(S.srv.mp)>=need,`Công lao ${kitNeed(S.srv.mp,need)}`]);
  L.push([r<mx,r<mx?`Cung chủ cho lên tới ${SRK.maid[mx]}`:`Cung chủ phẩm này chỉ cho tới ${SRK.maid[mx]||SRK.maid[r]}`]);
- L.push([(S.tin|0)>=BAL.srvx.tinUp,`Chủ tin ${S.tin|0}/${BAL.srvx.tinUp}`]);
+ L.push([(S.tin|0)>=BAL.srvx.tinUp,`Chủ tin ${kitNeed(S.tin,BAL.srvx.tinUp)}`]);
  if(S.srv.lau>0)L.push([false,`Đang ở Tân Giả khố (còn ${S.srv.lau} tuần)`]);
  /* cnv-exit-promo (robots s5d / M1: «Xét phẩm: đủ» for years, never promoted): the Nội vụ phủ exam is the LAST gate of the rung (j42 srvMonth → jexam
     exSrvGate); it is a row of its own, so the box never says «đủ» while the exam card waits in Hành sự, lapsed, or is on its wait */
@@ -65,7 +65,8 @@ KG82_SPR.duho=["hat-lotus"];KG82_SPR.den=["doden-lantern","hat-lotus"];
 /* boards: existing event paintings of the palace lake (img/ev-le-ha: hồ ngày hè · img/ev-le-thu-2: đèn trôi trên hồ đêm), cover-fit like every board */
 const TS_IMG={"tsduho-bg":"img/ev-le-ha.webp","tsden-bg":"img/ev-le-thu-2.webp"};
 (function(){const b0=kg82BgName;kg82BgName=function(kind){if(kind==="duho")return"tsduho-bg";if(kind==="den")return"tsden-bg";return b0.apply(this,arguments)}})();
-(function(){const i0=kg82Img;kg82Img=function(n){if(TS_IMG[n]){let i=KG82_IMG[n];if(!i){i=new Image();i.decoding="async";i.src=TS_IMG[n];KG82_IMG[n]=i}return i}return i0.apply(this,arguments)}})();
+/* KIT MG-SKIN: the lake boards ask the kit resolver first (kg82SkinSrc: tsduho-bg / tsden-bg -> img/mg/tsduho-<id>.webp / tsden-<id>.webp); no skin, or the file not on the CDN index / failing to load = the event painting above */
+(function(){const i0=kg82Img;kg82Img=function(n){if(TS_IMG[n]){const id=KG82.skin&&KG82.skin.id||"",k=id?n+"@"+id:n;let i=KG82_IMG[k];if(!i){i=new Image();i.decoding="async";const d=TS_IMG[n],s=id?kg82SkinSrc(n,id):d,sk=s.indexOf("img/mg/")===0;if(sk)i.onerror=()=>{i.onerror=null;i.src=d};i.src=sk?s:d;KG82_IMG[k]=i}return i}return i0.apply(this,arguments)}})();
 function tsEngPluck(box,env){const C=kg82Canvas(box,1,460),{g,W,H}=C;const N=12,lv=env.lv||0,dur=24000,spd=W/(5200+lv*350);const t0=performance.now();
  const L=[];let next=600,made=0,credit=0,got=0,lost=0,wrong=0,stop=false,raf=0;const pops=[];const zx0=W*.28,zx1=W*.72,zy=H*.4,zy1=H*.74;
  const risk=KG82.tsRisk||null;let alarm=null;KG82.tsGuard=null;
@@ -491,7 +492,7 @@ const tsDressAnnCard=rcpReg("tsDressAnn",(th,dm)=>{const T=TS_THEME[th];if(!T)re
 function tsBorFit(e,T){return T.tags.includes(e.k)&&(typeof dcFree!=="function"||dcFree(e))&&!S.inv.some(x=>x.k===e.k)}
 function tsBorDue(){const D=tsS().dress;if(!D||!D.m||typeof dcWk!=="function")return null;return dcWk()+Math.max(0,3*((D.y*12+D.m)-(S.year*12+S.month)))+(1-(S.tuan|0))}/* the contest tuần (jts: month 4 / 10, tuần index 1) */
 function tsBorrowOpts(th){const T=TS_THEME[th];const s=tsS();if(s.borrow)return[];if(typeof dcBorrow!=="function"||(typeof dcLend==="function"&&!dcLend()))return[];const F=liveRivals(true).filter(v=>!v.coop&&aff(v,S)>=netTh(v,"than")&&v.inv&&v.inv.some(e=>tsBorFit(e,T)));
- return F.slice(0,2).map(v=>{const e=v.inv.find(e=>tsBorFit(e,T));return tsOpt({n:`Mượn ${itm(e.k).n} của ${v.name}`,need:[{t:`nàng thân với ngươi (${aff(v,S)}/${netTh(v,"than")})`,ok:aff(v,S)>=netTh(v,"than")}],duoc:[`mặc ${itm(e.k).n} dự hội: hợp đề, dễ được chấm cao hơn`],mat:[],kem:[`thiện cảm ${balSg(BAL.cv.tsBorrow.cost)} (nợ ân tình)`,"làm mất hay hỏng thì phải đền"],note:"xong hội thì trả",
+ return F.slice(0,2).map(v=>{const e=v.inv.find(e=>tsBorFit(e,T));return tsOpt({n:`Mượn ${itm(e.k).n} của ${v.name}`,need:[{t:`nàng thân với ngươi (${kitNeed(aff(v,S),netTh(v,"than"))})`,ok:aff(v,S)>=netTh(v,"than")}],duoc:[`mặc ${itm(e.k).n} dự hội: hợp đề, dễ được chấm cao hơn`],mat:[],kem:[`thiện cảm ${balSg(BAL.cv.tsBorrow.cost)} (nợ ân tình)`,"làm mất hay hỏng thì phải đền"],note:"xong hội thì trả",
   go:()=>{/* E30r3 (law 6c): the dialog was built earlier; the piece may have left her chest meanwhile (lent at a festival, given, lost): nothing moves */if(v.inv.indexOf(e)<0||!dcFree(e)||!dcBorrow(S,v,e,{due:tsBorDue(),why:"ts",chest:1,aff:false})){log(`${itm(e.k).n} của ${v.name} đã không còn trong rương nàng.`);return}s.borrow=1;tsAff(v,BAL.cv.tsBorrow.cost);log(`Ngươi mượn ${itm(e.k).n} của ${v.name} để dự hội phối đồ.`)}})})}
 /* the contest is over: what she borrowed for it goes home now through the one loan return (dcGiveBack: the lender's book, the co-op «dcin», the ledger when the lender is gone) */
 function tsDressReturn(){const s=tsS();s.borrow=0;try{if(typeof dcMigTs==="function")dcMigTs()}catch(e){}if(typeof dcGiveBack!=="function")return;

@@ -59,9 +59,9 @@ function selxBare(L){return (L||[]).map(selxBare1)}
 function selxRes(title,b,txt,know){try{if(txt)log(txt)}catch(e){}try{(know||[]).forEach(k=>kitKnow({text:k,key:"selx:"+k}))}catch(e){}
  const dm=SELX_B&&S.selx2?(S.selx2.ma||0)-SELX_B.ma:0;SELX_B=null;
  /* the ma ma's regard is not a stat: when it moved, the kit §93.8 card with given rows shows it in words beside the stat rows (no digits, law 7) */
- if(dm&&!window.__bot&&typeof kitResultCard==="function"&&typeof kaResultRows==="function"){try{const [G,B]=kaResultRows(b,title);const who='<span class="ef t">Giáo tập ma ma:</span> ';
+ if(dm&&!window.__bot&&typeof kitResultCard==="function"&&typeof kaResultRows==="function"){try{const [G,B,K]=kaResultRows(b,title);const who='<span class="ef t">Giáo tập ma ma:</span> ';
    (dm>0?G:B).push(who+(dm>0?'<span class="ef g">để ý tới ngươi hơn</span>':'<span class="ef r">không vừa ý ngươi</span>'));let sen="";try{sen=kaSentence(b)}catch(e){}
-   kitResultCard({title,ok:null,sen,rows:[{k:"duoc",label:"Được",items:G},{k:"mat",label:"Mất",items:B}]});selxResHold();return}catch(e){}}
+   kitResultCard({title,ok:null,sen,kem:K,rows:[{k:"duoc",label:"Được",items:G},{k:"mat",label:"Mất",items:B}]});selxResHold();return}catch(e){}}
  try{resultShow(title,b,true)}catch(e){}selxResHold()}
 /* ONE card per selx deed: the option wrapper (j19 wrapR «chooseM») would show a second, generic card titled by the option (it reads only stats, so the ma ma's regard read «không đổi chỉ số»
    and covered the selx card); after selxRes the rest of this click shows no other result card (same pattern as jts __tsNoRes) */
