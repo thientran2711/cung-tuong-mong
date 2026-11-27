@@ -1,7 +1,7 @@
 # E-S5-R5-random-4 — player review (pf / pt_su, random = casual newcomer, iPad 1180x820, seed 2564901989)
 PRIORITY #1 CHECK: OD 25/11 rules | harness 8ea10d7e → 97e55a457 → f65d019b (same-life resumes ×9, 2 of them after Page crashed at buổi 2879/3032) | Builds: 5ab5b80e406e (pinned, 8729) → LIVE (pin released ~buổi 2076) → …ef5d32d4ff1e: MIXED-BUILD per audit, VALID per Foreman E | claims E-S5.
 ## 1. Summary
-Persona random (bot=rand). Origin pf, road pt_su (harem life). Ended by the game-imposed ending «Lãnh cung — Tuổi xuân qua đi» age 40, year 23, rank 0, 3532 buổi, 4403 taps after the last resume (≈ 58 000 total), jsClicks 0, exitPick none, mgReady 267 (boards played). Audit VALID (flag MIXED-BUILD). Real time ≈ 52 h (05:15Z 25/11 … first run; resumed ≥9 times, last start 05:50Z 27/11 → end 08:12Z 27/11).
+Persona random (bot=rand). Origin pf, road pt_su (harem life). Ended by the game-imposed ending «Lãnh cung — Tuổi xuân qua đi» age 40, year 23, rank 0, 3532 buổi, 4403 taps after the last resume (≈ 58 000 total), jsClicks 0, exitPick none, mgReady 267 (boards played). Audit VALID (flag MIXED-BUILD). Real time ≈ 18 h (14:12Z 26/11 → 08:12Z 27/11 incl. 9 same-life resumes).
 ## 2. Scores
 a. 6  b. 2: 23 years, one map page  c. Buttons & UI — 4: Hàm An map cards covered ×11 (dead buttons, .mapsc), «Biếu quà làm lành» confirm off-screen ×6, item grid re-opened 3×, 2 tab crashes (runner memory), a .kmov picker stall  d. Story — 3  e. Characters — 3  f. Choices & fairness — 4  g. Rewards — 2  h. Mini-games — 6: 267 boards started  i. Visuals — 6  j. Co-op — n/a
 ## 3. Top
