@@ -64,3 +64,14 @@ LOOK READY to MAIN.
   «Người bên cạnh: Nhịn lời khiêu khích của Hoàng hậu … — Đức +2 vì nhịn.» → «Đức +2 vì nhịn.». KIT §7.4 line.
 - Tests: ob-verdict-3 **34/34 ALL OK** (new: on-screen sentence ≠ title, encounter ×2 devices + family scan **0/46 repeated**, family 46/46 result-first;
   e68 rows vary with the seed), ob-verdict **ALL 84 OK**. Stills re-uploaded (after-*-enc0-3-result.png). Note (a) empty band → KK44 (MAIN 162).
+
+## r3 (LC25 HOLD: core gate G4 «94 q-softlock» FAIL on b5213f63) — review/ob-verdict-3 = 8b777871 (merges LIVE 4cfcda61)
+- ROOT: on the view panels the test opens («Lịch tháng», «Tin báo», «Tin chờ người sai đi»), «Để sau» on «Tin báo» ran chooseM → j19 wrapR drew an
+  empty result card («Để sau · Ghi chú: không được gì») → RESULT FIRST held the next queued panel → after one tap nothing in #modal (the card only in
+  the toast) = Q 1, modal hidden. Second root found while fixing: the KIT 32.10a park class (body.kdlg-on) lags one rAF, so the first `vis()` check
+  read the held card as hidden and let the next card through (all «+next» family rows broke) — fixed.
+- FIX (whole family, jverdict): NOT A CHOICE = a `kit.view` panel or a no-effect close/nav option (Đóng / Để sau / Đã rõ / Thôi / Xem …, `c.back`)
+  → never held; SAFETY watchdog (700 ms): a held screen is released as soon as the result card is not on screen; park class ≠ hidden. KIT §7.4.
+- LIVE 4cfcda61 merged (CHANGE.txt lines kept, rebuilt). Test setup line (LC25) in ob-verdict-3.test.js: `BAL.evc.on=0` + comment (stat-pace daily cap).
+- Tests: `node dev/test/q-softlock.js index.html` **Q-SOFTLOCK PASS** (Fold + iPad, served); ob-verdict-3 **35/35** (new F: view panels never held,
+  one tap each, Q empty; family 48/48, 0/48 title repeated); ob-verdict **ALL 84 OK**.
