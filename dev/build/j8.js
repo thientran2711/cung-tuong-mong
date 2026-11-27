@@ -136,8 +136,8 @@ function tsMonthAll(){let ev="";try{ev+=tsMonth(S);for(const v of rivals)if(v&&v
 /* a proven crime (accusation with evidence) */
 /* punish-reason (D1): ONE punishment = lãnh cung OR one rank down (never two ranks, never two punishments the same day: punTwice → cấm túc);
    her notice names who accused, why and which evidence (jpun punNote) */
-/* PUNISH-TIER (OD 26/11 ~19:50Z): a proven crime of weight x (default vừa = one rank down + lãnh cung, Sủng −BAL.pun.fallSung; nặng = ban chết;
-   jpun punTier, the same for every rank) — was a coin toss lãnh cung OR giáng */
+/* PUNISH-TIER (OD 26/11 ~20:35Z, canon over ~19:50Z): a proven crime of weight x — nhẹ = minor punishment · vừa (default) = giáng 1 bậc, Sủng −BAL.pun.fallSung ·
+   nặng = giáng + lãnh cung · tử tội = ban chết or commuted phế vị + lãnh cung chung thân (jpun punTier, the same for every rank) — was a coin toss lãnh cung OR giáng */
 function fall(p,why,by,x){x=x||"vua";const a=punWho(by);if(p===S){if(S.out||S.dead)return;if(a)S.framedBy=key(a)}else{if(p.out||p.alive===false)return;if(a&&a!==p)p.coldBy=key(a)}
  const pt=PUNT;PUNT={x};try{if(x==="vua"){if(p===S)apply({sung:-BAL.pun.fallSung});else p.sung=cl(p.sung-BAL.pun.fallSung,0,100)}punTier(p,x,p===S?`Ngươi ${why}`:why,a)}finally{PUNT=pt}}
 /* a fabricated charge that sticks */
