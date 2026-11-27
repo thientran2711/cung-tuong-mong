@@ -103,6 +103,10 @@ const CASES = {
   danhhieu: { way: /^(✕|Để sau|Đóng|Lui)$/, open: () => { const k = Object.keys(DH_CAT).find(x => !(S.dh && S.dh[x] && S.dh[x].i >= 0)); S.dh = S.dh || {}; S.dh[k] = { n: 1, i: 0, at: [''] }; dhNotice(k); showModal() } },
   /* a long event card with 6 options (S/M/L frames; options at the end of the scroller) */
   eventlong: { way: /^(Thôi|✕)$/, open: () => { const L = []; for (let i = 0; i < 18; i++)L.push('<p>Trong cung lời đồn lan nhanh như gió, người này nói với người kia, chẳng ai biết thật giả ra sao, chỉ thấy lòng người xao động không yên.</p>'); Q.push({ t: 'Lời đồn trong cung', h: L.join(''), opts: [1, 2, 3, 4, 5].map(i => ({ n: 'Cách thứ ' + i, fx: { danh: 1 }, x: 'thành: Danh +1', go: () => { } })).concat([{ n: 'Thôi', fx: {}, go: () => { } }]) }); showModal() } },
+  /* VIEW panels (kit.view: one copy in Q, never saved): «Lịch tháng», «Tin chờ người sai đi» (robots: «Lui» no effect on a duplicated queued copy) */
+  lichthang: { way: /^(✕|Lui|Đóng)$/, open: () => { kitMonthCalOpen() } },
+  lichthang2: { way: /^(✕|Lui|Đóng)$/, open: () => { kitMonthCalOpen(); kitMonthCalOpen() } },
+  tinbao2: { way: /^(✕|Đóng|Để sau)$/, open: () => { for (let i = 0; i < 3; i++)kitNotice({ id: 'dd2' + i, kind: 'tin', line: 'Có tin ' + i, text: 'Tin số ' + i + '.' }); kitNoticeOpen(); kitNoticeOpen() } },
   /* the selection lodge free card «Đông sở» (jselxday selxFree; kit scene panel .kpsc) */
   dongso: { way: /^(Ngồi yên chờ tới tối)/, choose: true, open: null },
 };
@@ -190,6 +194,30 @@ async function runRing(p, dev, name, rows) {
   rows.push({ dev, name, offered, ring: n, cut: Math.max(0, offered - n), fronts: seen.size, dead: dead.length, deadList: dead.slice(0, 8), act, verdict: dead.length || act === 'DEAD' ? 'FAIL' : 'ok', why: [dead.length ? dead.length + ' ring tile(s) / arrows dead' : '', actWhy].filter(Boolean).join('; ') });
 }
 
+/* STALE HAND LIFT (law 11, F «Tin báo» «Để sau» → «Đặt lại» / «Chọn lá này» dead): she lifts a card of queue card A, then A is REPLACED by the next card
+   (news / a timer / a one-copy panel unshifted into Q). The new card must show no ✓/✕ pair and no lift plate without a lifted card, and its own card is
+   chosen by real taps (lift → ✓). Variant «x»: she closes A with the frame ✕ while a card is lifted, then the next card opens. */
+const HANDS = { stale_hand: { how: 'replace' }, stale_hand_x: { how: 'x' } };
+async function runHand(p, dev, name, rows) {
+  const rt = RT.make(p, { dev, touch: true, shots: OUT }); const H = HANDS[name];
+  await clean(p);
+  await p.evaluate(() => { window.__ddsCard = (t, n) => ({ t, h: '<p>' + t + ': việc trong cung cần ngươi định liệu.</p>', opts: n.map(x => ({ n: x, fx: { danh: 1 }, x: 'thành: Danh +1', go: () => { } })).concat([{ n: 'Thôi', fx: {}, go: () => { } }]) }); try { if (window.DQ) DQ.user = (DQ.user || 0) + 1; Q.push(__ddsCard('Việc thứ nhất', ['Cách A', 'Cách B', 'Cách C'])); showModal() } finally { if (window.DQ) DQ.user-- } });
+  await p.waitForTimeout(1500); await p.evaluate(() => document.querySelectorAll('.kfgain').forEach(e => e.remove()));
+  const mark = async (txt, tag) => p.evaluate(([txt, tag]) => { const b = [...document.querySelectorAll('#modal .opts button[data-m]')].find(b => b.textContent.includes(txt)); if (!b) return false; b.setAttribute('data-ddsw', tag); return true }, [txt, tag]);
+  if (!await mark('Cách A', 'hA')) { rows.push({ dev, name, verdict: 'SKIP', why: 'card A not drawn' }); return }
+  await rt.tap('[data-ddsw="hA"]', { screen: name, label: 'Cách A (lift)' }); await p.waitForTimeout(700);
+  const lifted = await p.evaluate(() => !!document.querySelector('#modal .opts.khand>button.klift'));
+  if (H.how === 'x') { await rt.tap('#modal .kit-x, #modal [data-kx]', { screen: name, label: '✕' }); await p.waitForTimeout(1000); await p.evaluate(() => { try { if (window.DQ) DQ.user = (DQ.user || 0) + 1; Q.push(__ddsCard('Việc thứ hai', ['Cách D', 'Cách E'])); showModal() } finally { if (window.DQ) DQ.user-- } }) }
+  else await p.evaluate(() => { Q.unshift(__ddsCard('Việc thứ hai', ['Cách D', 'Cách E'])); showModal() });
+  await p.waitForTimeout(1500);
+  const st = await p.evaluate(() => { const M = document.getElementById('modal'); const v = e => !!e && !e.hidden && e.getBoundingClientRect().width > 0; return { q0: Q[0] && Q[0].t, pair: v(M.querySelector('.dlg>.khconf')), plate: v(M.querySelector('.dlg>.khplate')), lift: !!M.querySelector('.opts.khand>button.klift') } });
+  const stale = (st.pair || st.plate) && !st.lift;
+  let chose = false;
+  if (await mark('Cách D', 'hD')) { await rt.choose('[data-ddsw="hD"]', { screen: name, label: 'Cách D' }); await p.waitForTimeout(1500); chose = await p.evaluate(() => !(Q[0] && Q[0].t === 'Việc thứ hai')) }
+  if (stale || !chose) await p.screenshot({ path: path.join(OUT, `${dev}-${name}-fail.jpg`), type: 'jpeg', quality: 55 });
+  rows.push({ dev, name, lifted, st, chose, verdict: !stale && chose ? 'ok' : 'FAIL', why: [stale ? 'stale ✓/✕ pair / lift plate on the new card (✓ dead)' : '', chose ? '' : 'new card not chosen by real taps'].filter(Boolean).join('; ') });
+}
+
 /* NO-EFFECT-HOLD (MAIN 178 ruling): card A's option «Ngắm hoa một lát» changes nothing (result card «ta không được gì, cũng không mất gì»);
    the next card B must show at once — never held behind the result card's «Tiếp ▸». Control: A's option with a gain still holds (RESULT-FIRST). */
 const NOFX = {
@@ -257,9 +285,9 @@ async function runCase(p, dev, name, C, rows) {
     await p.goto('http://localhost:8817/index.html', { waitUntil: 'domcontentloaded' });
     await p.waitForFunction(() => typeof start === 'function' && typeof deser === 'function' && typeof kitNoticeOpen === 'function', null, { timeout: 240000 });
     await p.waitForTimeout(1500);
-    for (const [name, C] of Object.entries(Object.assign({}, CASES, PICKERS, NOFX, RINGS))) {
+    for (const [name, C] of Object.entries(Object.assign({}, CASES, { grid_bieuqua: PICKERS.grid_bieuqua }, NOFX, HANDS, RINGS))) {
       if (ONLY && !ONLY.includes(name)) continue;
-      try { await home(p); if (PICKERS[name]) await runPicker(p, dev, name, rows); else if (NOFX[name]) await runNoFx(p, dev, name, rows); else if (RINGS[name]) await runRing(p, dev, name, rows); else await runCase(p, dev, name, C, rows) } catch (e) { rows.push({ dev, name, verdict: 'ERR', why: String(e.message).slice(0, 200) }) }
+      try { if (!p.__home || name === 'dongso' || p.__dirty) { await home(p); p.__home = 1; p.__dirty = 0 } if (name === 'dongso') p.__dirty = 1; if (name === 'grid_bieuqua') await runPicker(p, dev, name, rows); else if (NOFX[name]) await runNoFx(p, dev, name, rows); else if (RINGS[name]) await runRing(p, dev, name, rows); else if (HANDS[name]) await runHand(p, dev, name, rows); else await runCase(p, dev, name, C, rows) } catch (e) { rows.push({ dev, name, verdict: 'ERR', why: String(e.message).slice(0, 200) }) }
       const r = rows[rows.length - 1]; if (r.verdict !== 'ok' && r.verdict !== 'SKIP') fails++;
       console.log(JSON.stringify(r));
     }
