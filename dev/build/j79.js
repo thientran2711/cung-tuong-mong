@@ -1441,7 +1441,7 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .ktn-pop .kskk{display:none}
 .dlg:has(.ktn-pop) .k3body>.k3main,.dlg:has(.ktn-pop) .k3body>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpsubj{display:none!important}.dlg:has(.ktn-pop) .k3right{flex:1 1 100%;width:100%}.dlg .kpb.kphas:has(.ktn-pop){grid-template-columns:minmax(0,1fr)!important}
 html body #modal:has(.ktn-pop){--kph:min(calc(100dvh - 24px),920px)}html.kv2 body #modal:has(.ktn-pop){--kpw:min(900px,calc(100vw - 28px))}
-.ktn-pop{container-type:inline-size}.ktn-pop .kskacts.pcb{grid-auto-rows:auto!important}@container (min-width:600px){.ktn-pop .kskacts.pcb{grid-template-columns:repeat(2,minmax(0,1fr))!important}}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
+.ktn-pop{container-type:inline-size}.ktn-pop .kskacts.pcb{grid-auto-rows:1fr!important;align-items:stretch}.ktn-pop .kskacts>.kpanec{display:flex;min-width:0}.ktn-pop .kskacts>.kpanec>button.ka{flex:1 1 auto;width:100%;height:auto;margin:0}/* owner 27/11 ~07:20Z: every act card of the môn frame = ONE width and ONE height (the tallest), both rows */@container (min-width:600px){.ktn-pop .kskacts.pcb{grid-template-columns:repeat(2,minmax(0,1fr))!important}}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
 `;document.head.appendChild(st)})();
 /* ---- PERSON STATS (owner 11/14): every consort shows the SAME stat set as the player, as kit tiles: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ.
    A value shows only once known, else "chưa rõ". Hook for the reveal stages (j61/j85 Đức, tai mắt/intel): window.kitStatKnown(v, key) -> true|false.
