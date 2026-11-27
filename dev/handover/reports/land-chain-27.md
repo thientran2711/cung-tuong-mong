@@ -13,3 +13,5 @@ MAIN = MAIN CHÍNH 170 session_01Rc5AsKSV1EG8TGLZ2T7KX9. Lander stages + gates; 
 - robot-realtap 39c6e505 (MAIN 170 add): test conflicts with LIVE F10 (robot-rt.js, renderer-mem-lib.js) → F remerges onto lc27-em (order in FOREMAN_F_STATUS).
 - ring-build-rv165 02b19b2a (RV-165 PASS, carries kk53; kit-plaque-confirm SKIPPED per MAIN 171): source conflicts assemble/j84/jkc/jkc3 → asked MAIN 171 → RV-166 remerge onto lc27-gl. Note: G4 90 vacuous on ring-build.
 - HELD: reign-end 85791268 (RV-163E PASS) until pace-speed bc3cb096 PASS.
+- 04:20Z LIVE 0b43ee55 (mg-trim). READY TO PUSH 066d9af0 (parity-facfix): fac-roads-play ALL PASS (run with default dev/index.html, not the root), coregates baseline only, QC PASS 804 s.
+- MAIN 171 order: ring-build (RV-166 remerge onto lc27-pf asked) → kk54-plaque a4dd8db6 (on RV-166 PASS) → rest of chain restacked; + place-close 208d11d0 (NOT 73cd1864). kptitle-close coregates running meanwhile.
