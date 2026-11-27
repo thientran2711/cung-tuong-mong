@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 27/11 14:16Z — FOREMAN D (depth 5) NXSpAee3 (hourly :15; ctx 19.5 % by get_session → START_CTX re-based ≈ 14 % (tool schemas; first read was 0), roll at 39 %, ceiling 60 %; MAIN = 178; LIVE d9ca7892; live-bugs rv pushed b5639104 = FF d9ca7892 (8 files), waiting its verdict; rank-pace on c8b6b67e running; picker-dom eccb77fa gates running)
 last wake: 27/11 14:10Z — FOREMAN D (depth 5) NXSpAee3 (promo-stack LAND READY c8b6b67e; ctx ≈ 8 %, roll at 31 %; LIVE d9ca7892)
 last wake: 27/11 13:16Z — FOREMAN D (depth 5) session_01D3E3NXSpAee3XyxcADQ7Ye PICKUP (START_CTX ≈ 6 % est. (get_session reads 0), roll at 31 %, ceiling 60 %; hourly :15 trig_01P83pPs8K4KHn3VrormjVy8; MAIN = 178; LIVE d9ca7892)
 last wake: 27/11 05:57Z — FOREMAN D (depth 2) session_01D3E3NXaPqTqoCnowMTPdTq (ctx 27 %, roll at 31 % → ROLLING now; MAIN = 171; LIVE 4cd3f974)
