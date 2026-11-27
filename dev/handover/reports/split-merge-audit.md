@@ -103,3 +103,18 @@ Recs that change something: **P1, P2, P3, P6** (play / numbers), **P4, P7** (int
 
 ## HANDOVER (worker)
 Both parts done; nothing built. If MAIN / sếp pick rows, owners: A1–A3, B1–B3, P3–P7 → PUNISH-TIER-2 (charge/evidence code) or the seat MAIN names; A4–A6, P1, P2 → seat MAIN names; P8 → coordinator (CLAUDE.md / WORKER_BRIEF). Worker ctx at end ≈ 22 % (START_CTX ~3 %): no successor needed.
+
+## DELTA vs the WITNESS STORE (PUNISH-TIER-3, session_01Rc5AsMnybeP3fAzDgPB67Y; MAIN 167 order 27/11 ~00:06Z)
+PRIORITY #1 CHECK: this file (Part 1 + Part 2, audited on 03a8c17c) | witness store = review/punish-tier-wit b5f3d85e → land sha 85d1c0ec (RV-163C PASS, LC26 landing) | MAIN 167 order: build A1–A6, B1–B3, P1–P7 ONLY where they merge / fix law 4 / fix a real bug; anything that ADDS a split → list, do not build; P8 docs too.
+What changed since the audit: BAL.charge.wit.need {nhe 0, vua 0, nang 1, tu 2}; own store h.ewc[key(t)][c]; testimony kinds moved C[c].pk → C[c].wk; chReady / chOK / accOK need evidence AND witnesses; presenting a charge spends both; the evidence total (t.ev / h.evm) stays evidence only.
+| row | status after the witness store | note for the builder |
+|---|---|---|
+| P5 | **DONE** (85d1c0ec) | close it |
+| P4 | unchanged, still open | h.ewc is ONE store (no total copy), so it adds no new dup. If P4 is built (evc only, total = sum on read), witnesses must NOT be added into that sum |
+| P7 | **now real**: three «wit» keys live — BAL.wit (Tâm cơ marks, jbal.js:369; read j40 ×5, j43 ×2, j51 ×2, j70 ×4), BAL.ag.wit / BAL.ag.why.wit (witness hearing / rank, jbal2.js), BAL.charge.wit (witness need) | build: rename BAL.wit → BAL.tcw (13 reads, no play change, law 4) |
+| A1 / A2 | unchanged | j95 z.wit = «she saw a rival's tryst» tag; it is NOT the charge witness store (another name clash). The A2 rec (drop z.wit as a separate state) stands and also removes the clash |
+| B1 / B3 / P6 | unchanged, still open | a merged «Tố tội» / «Tố giác» MUST gate on chReady (it now includes witnesses) and print chNeedTxt (prints «và N nhân chứng»); never re-check the evidence count alone |
+| B2 | unchanged | «Trả chứng cứ» hands evidence back: the builder decides whether witnesses go back too. Simplest + no new rule: spend the charge's witnesses with its pieces (the same as presenting it) |
+| P3 | unchanged; **note**: moving phonghoa → mh lifts arson from nhẹ to nặng, so it now also needs 1 witness | a remap, not a new split; a play change → MAIN to confirm before building |
+| A3, A4, A5, A6, P1, P2 | unaffected by the witness store | as audited |
+Recs that would ADD a split / sub-mechanic (do NOT build, per MAIN 167 + owner 21:35Z): none in A1–A6 / B1–B3 / P1–P7 — they all remove, merge or rename. P3's arson remap is a play change (flagged above), not a new split.
