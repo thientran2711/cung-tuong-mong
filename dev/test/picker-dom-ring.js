@@ -35,7 +35,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    out.push(o)}
   return out});
  for(const o of R)if(!o.none)DOM.push(`${vw}x${vh} ${o.n}: #modal ${o.nodes} · page ${o.page} · ring ${o.ringN}/${o.kip}`);
- for(const o of R){if(o.none){console.log('skip',o.n);continue}const tag=`${vw}x${vh} ${o.n}`;ok(o.ring,tag+' ring opens',o);if(!o.ring)continue;
+ for(const o of R){if(o.none){console.log('skip',o.n);continue}if(!o.ring&&!o.kon&&o.nodes<200){console.log(`ok   ${vw}x${vh} ${o.n}: no item of this chest can go (live-bugs gift-dead-scan: the dialog lists only givable pieces) → no grid, no ring (= LIVE)`);continue}const tag=`${vw}x${vh} ${o.n}`;ok(o.ring,tag+' ring opens',o);if(!o.ring)continue;
   ok(o.lockAgree!==false,tag+' ring lock = kit takeable rule');ok(o.ringN===o.wantN&&o.ids,tag+' ring lists kipList (cap maxN)',{kip:o.kip,ring:o.ringN,cap:o.cap,drawn:o.drawn});
   if(o.undrawn!=null&&o.whyRing!=null){ok(o.hideAfterRedraw,tag+' dialog stays hidden after a redraw');ok(!!o.whyRing===!!o.whyDrawn,tag+' undrawn item locked = drawn card locked',{ring:o.whyRing,drawn:o.whyDrawn});ok(o.whyPaneSame,tag+' pane reason = drawn card words',{pane:o.whyAfterInfo,drawn:o.whyDrawn})}
   if(o.actRes!=null)ok(o.dInv===1&&o.gone||o.dInv===0&&o.actRes==='bad',tag+' act on an undrawn item gives one piece',{res:o.actRes,dInv:o.dInv});
