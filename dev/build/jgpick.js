@@ -44,7 +44,7 @@ function kipBuild(){const m=Q[0],M=$("modal");if(!M||M.hidden||!kipOn(m))return;
  const L=m.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]&&ops.querySelector(`.opt[data-m="${i}"]`));
  /* doable first (kitDoableFirst rule), then the dialog's own order */
  L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));
- let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}
+ let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>x[0].kgbest&&!kipLocked(x[0]))||L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}/* kgbest: the dialog's preselected item (giftto: the one he values most) */
  const w=document.createElement("div");w.className="kipw kshop";
  w.innerHTML=`<div class="kshg kipg" role="radiogroup" aria-label="Chọn món">${L.map(([c,i])=>kipTile(c,i,i===sel)).join("")}</div><div class="kipd" aria-live="polite"></div>`;
  ops.prepend(w);w.style.setProperty("grid-column","1 / -1","important");ops.classList.add("kiphas");  /* inside the option box: the grid takes the options' own place in every dialog layout (person dialog 32.7 too) */M.querySelector(".dlg").classList.add("kipdlg");
