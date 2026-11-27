@@ -289,7 +289,7 @@ const kitRing=window.kitRing={open,close,groupsOf,get cur(){return CUR},
  turnBy:d=>CUR&&turnBy(CUR,d),turnTo:i=>CUR&&turnTo(CUR,i),focus:()=>CUR&&focus(CUR),back:()=>CUR&&back(CUR),setMode:m=>CUR&&setMode(CUR,m),pick:i=>{const P=CUR&&CUR.pk;return P},
  front:()=>CUR?front(CUR):-1};
 /* ---------- wiring (prototype): a crowded place visit opens the ring over the place stage ---------- */
-function wants(){try{if(!KIT_RING.wire||window.__bot||window.__kringOff||!S||S.dead||(typeof Q!=="undefined"&&Q.length))return false;const V=S.visit;if(!V||V.k==="home")return false;
+function wants(){try{if(!KIT_RING.wire||window.__bot||window.__kringOff||!S||S.dead||(typeof Q!=="undefined"&&Q.length))return false;if(window.NHV&&NHV.owns&&NHV.owns())return false;/* the garden area scene shows its own people (jnhv) */const V=S.visit;if(!V||V.k==="home")return false;
  return V.people.filter(ringable).length>=KIT_RING.min&&(typeof tab==="undefined"||tab==="act")}catch(e){return false}}
 kitRing.wants=wants;
 /* the person held by the ring IS on the scene: the game's encounter flow (jdfv showModal) plays her event frames in the ring focus even when her stage token is folded («+N») under the ring */

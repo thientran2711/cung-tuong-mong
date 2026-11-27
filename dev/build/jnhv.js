@@ -193,7 +193,7 @@ function bgSrc(a){const P=areaArt(a.k);if(P){if(CUR)Object.assign(CUR,{want:P.wa
 function mount(a){css();const s=st();if(!s)return false;let l=document.getElementById("nhv");const key=plan().key+"|"+a.k+"|"+curPeople().length;
  if(l&&l.parentNode===s&&CUR&&CUR.key===key){if(!CUR.D||Math.abs(CUR.D.W-s.getBoundingClientRect().width)>2||Math.abs(CUR.D.H-s.getBoundingClientRect().height)>2)layout(true);return false}
  const fresh=!l||!CUR||CUR.a.k!==a.k;if(l)l.remove();closePk(true);SEL=SELM=null;try{kitDim.off()}catch(e){}
- L=l=document.createElement("div");l.id="nhv";l.className=kv();s.appendChild(l);document.documentElement.classList.add("nhvon");
+ L=l=document.createElement("div");l.id="nhv";l.className=kv();s.appendChild(l);document.documentElement.classList.add("nhvon");try{if(window.kitRing&&kitRing.cur)kitRing.close(true)}catch(e){}/* a ring opened before the area mounted goes */
  const G=sceneGroups(a);CUR={a,G,key,D:geo()};BG=document.createElement("div");BG.className="nhv-bg";const bsrc=bgSrc(a);
  /* the new painting shows only once decoded; until then the painting she saw last (this area at another buổi, or the garden map) stays under (kit rule a) */
  const under=DONE[bsrc]?bsrc:(LASTBG&&DONE[LASTBG]?LASTBG:(DONE[mapSrc()]?mapSrc():null));if(under){BG.style.backgroundImage=`url("${under}")`;CUR.bgReady=true}
@@ -275,6 +275,8 @@ function holdOn(srcIn,readyFn){holdOff();try{const hud=document.querySelector("h
   const cur=(BG.style.backgroundImage.match(/url\(["']?([^"')]+)/)||[])[1];
   holdOn(cur,()=>{if(!ok||typeof tab==="undefined"||tab!=="go")return false;const im=document.querySelector("#panel .nhv-map .mapimg");return !!im&&im.complete&&im.naturalWidth>0})}catch(x){}},true);
 })();
-window.NHV={plan,entries,count,areaArt,areaOfP,hall,on,mount,unmount,layout,pickGroup,stepOut,openPk,unsel,get cur(){return CUR},get kp(){return KP}};
+/* the area scene owns the people of its place: no place ring (kitRing, jkring.js wants()) opens over it — the ring layer (z 57, whole stage) would cover the plaques (RV-172 FAIL-1) */
+function owns(){try{const h=S&&S.hall;return !!(document.documentElement.classList.contains("nhvon")||(h&&h.part&&areaByK(h.part)))}catch(e){return false}}
+window.NHV={owns,plan,entries,count,areaArt,areaOfP,hall,on,mount,unmount,layout,pickGroup,stepOut,openPk,unsel,get cur(){return CUR},get kp(){return KP}};
 try{if(window.KIT_SAMPLES)KIT_SAMPLES.push({id:"§76.nhv",title:"kitPalaceMap · Ngự hoa viên",html:()=>kitPalaceMap({slot:SLOT,k:K})})}catch(e){}
 }catch(e){console.error("jnhv",e)}})();
