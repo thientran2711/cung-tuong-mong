@@ -9,9 +9,11 @@
    "kiep": "1",
    "seed": "7103",
    "tag": "flight2-coop1j-c",
-   "pin": "1"
+   "pin": "1",
+   "resume": "1",
+   "room": "3T7K"
   },
-  "at": "2026-11-27T16:30:29.602Z"
+  "at": "2026-11-27T20:00:23.371Z"
  },
  "pairs": [
   {
@@ -28,39 +30,25 @@
      "extra": false,
      "room": "3T7K",
      "life": {
-      "id": "Ban hoa",
-      "type": "end",
-      "fate": "Bị ban hoa, xuất cung",
-      "death": false,
-      "age": 20,
-      "year": 1,
-      "rank": 2,
-      "text": "Ngươi về lại nhà. Người ta bàn tán ít lâu, rồi quên.",
-      "card": [
-       "",
-       "",
-       "",
-       ""
-      ],
+      "id": "Hồng nhan bạc mệnh",
+      "type": "death",
+      "fate": "Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 22 tuổi",
+      "death": true,
+      "age": 22,
+      "year": 3,
+      "rank": 0,
+      "text": "Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 22 tuổi.",
+      "card": [],
       "duringArea": false,
       "lastTaps": [
-       "AREA 378,538",
-       "SKIP TAP .kscn «» tap",
-       "AREA 378,538",
-       "SKIP TAP .kscn «» tap",
-       "AREA 378,538",
-       "SKIP TAP .kscn «» tap",
-       "AREA 378,538",
-       "SKIP TAP .kscn «» tap",
-       ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»",
-       ".dlg «Thái hậu» «Tay con từng bóp thuốc, chăm sóc cha mẹ khi ốm, đó»",
-       ".dlg «Hoàng thượng» «Cúi đầu chờ xét»",
-       ".dlg «Thái hậu» «Thần thiếp thưa rằng trâm quý rơi nơi thần thiếp, »"
+       "#modal «Cung Tường Mộng» «Cùng hảo hữuMời hảo hữu · Nhập ám hiệu»",
+       "#modal «Chọn sổ» «Trở lại phòng»",
+       "#modal «Nhập ám hiệu» «Vào phòng»"
       ]
      },
      "harness": {
       "kind": "realtap",
-      "sha": "c5a242e0",
+      "sha": "021944b7",
       "realtap": true,
       "jsClicks": 0,
       "deadButtons": 0,
@@ -81,7 +69,7 @@
        "s": "d9ca7892+",
        "b": "86170222adab",
        "t": "2026-11-27T12:32Z",
-       "at": "2026-11-27T16:30:35.811Z"
+       "at": "2026-11-27T20:00:26.156Z"
       },
       "pinUrl": "http://127.0.0.1:8812/",
       "build": {
@@ -89,57 +77,3879 @@
        "b": "86170222adab",
        "t": "2026-11-27T12:32Z"
       },
-      "areaTaps": 145,
-      "consoleErrN": 11,
+      "taps": 3,
+      "consoleErrN": 3
+     },
+     "exitPick": null,
+     "bugs": [],
+     "dead": [],
+     "buoi": 1,
+     "saves": []
+    },
+    {
+     "seat": "host",
+     "dev": "fold",
+     "kiep": 2,
+     "extra": true,
+     "room": "3T7K",
+     "life": {
+      "id": "HARNESS",
+      "type": "harness"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "021944b7",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 3,
+      "unstick": [
+       {
+        "at": 385,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 396,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 407,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 418,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 428,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 439,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 450,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 461,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 472,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 482,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 493,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 504,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 515,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 526,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 537,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 547,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 558,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 569,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 580,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 591,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 602,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 613,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 623,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 634,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 645,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 656,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 666,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 677,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 688,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 699,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 710,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 721,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 731,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 742,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 753,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 764,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 774,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 785,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 796,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 807,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 818,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 828,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 839,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 850,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 861,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 871,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 882,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 893,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 904,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 915,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 926,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 937,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 947,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 958,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 969,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 980,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 991,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1001,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1012,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1023,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1034,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1044,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1055,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1066,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1077,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1088,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1098,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1109,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1120,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1131,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1141,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1152,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1163,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1174,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1185,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1195,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1206,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1217,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1228,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1239,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1249,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1260,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1271,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1276,
+        "lvl": 3,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1304,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1319,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1331,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1346,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1359,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1372,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1385,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1398,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1412,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1426,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1441,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1456,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1469,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1482,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1495,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1508,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1522,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1535,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1548,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1561,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1576,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1591,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1604,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1617,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1631,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1644,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1657,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1671,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1684,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1697,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1710,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1724,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1737,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1750,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1765,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1779,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1792,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1805,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1820,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1833,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1846,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1859,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1873,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1888,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1902,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1915,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1929,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1941,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1954,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1968,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1981,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1995,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2008,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2020,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2034,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2047,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2060,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2074,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2088,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2102,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2115,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2128,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2141,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2154,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2167,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2181,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2190,
+        "lvl": 3,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2221,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2237,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2250,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2262,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2275,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2289,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2302,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2315,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2328,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2342,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2355,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2368,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2382,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2394,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2406,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2420,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2432,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2445,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2457,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2470,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2483,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2496,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2509,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2522,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2535,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2548,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2560,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2573,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2585,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2598,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2611,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2625,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2638,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2651,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2665,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2678,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2691,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2704,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2717,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2730,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2743,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2756,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2769,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2784,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2798,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2811,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2824,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2837,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2850,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2863,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2876,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2889,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2902,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2915,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2928,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2941,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2953,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2967,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2979,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2992,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3005,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3018,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3031,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3044,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3057,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3071,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3085,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3099,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3106,
+        "lvl": 3,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3113,
+        "lvl": 3,
+        "layer": "#klife",
+        "title": ""
+       },
+       {
+        "at": 3134,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3150,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3163,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3176,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3188,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3201,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3213,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3226,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3239,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3252,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3266,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3278,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3290,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3304,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3318,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3331,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3344,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3357,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3371,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3384,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3397,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3410,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3423,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3437,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3449,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3462,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3475,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3487,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3500,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3513,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3526,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3538,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3550,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3563,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3576,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3589,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3602,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3614,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3627,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3640,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3653,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3665,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3678,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3691,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3704,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       }
+      ],
+      "slice": null,
+      "mgBackN": 1,
+      "mgBackQuitN": 0,
+      "builds": [
+       {
+        "s": "d9ca7892+",
+        "b": "86170222adab",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z",
+       "at": "2026-11-27T20:00:42.204Z"
+      },
+      "pinUrl": "http://127.0.0.1:8812/",
+      "build": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z"
+      },
       "ident": {
-       "name": "Nhâm Thuần Nguyên",
-       "org": "Cháu gái Thái hậu",
-       "born": -19,
-       "at": 1
+       "name": "Đổng Linh Lung",
+       "org": "Con gái Tể tướng",
+       "born": -17,
+       "at": 0
       },
-      "bareCovered": 7,
+      "consoleErrN": 3,
+      "areaTaps": 51,
+      "skipLayerTaps": 43,
+      "bareCovered": 12,
       "bareCoveredBy": {
-       "top changed img.kmeg-d.kmeg-dr → div.kmeg-gate": 1,
-       "div.kscn-veil over img#mefig.j59sz": 2,
-       "div.kscn-veil over button.tok.fig.bob": 4
+       "not on the layer scanned": 10,
+       "img over section#panel.panel": 1,
+       "top changed div#klife.modal.kpscene.kload → div#coopfz.modal.kpscene": 1
       },
-      "skipLayerTaps": 37,
-      "infoTaps": 13,
-      "kresTaps": 13,
       "twoTap": {
-       "hand": 9,
+       "hand": 21,
        "plaque": 0,
-       "chosen": 7,
+       "chosen": 20,
        "liftOnly": 0,
        "chipFail": 0,
-       "oneTap": 1,
-       "noLift": 1
+       "oneTap": 1
       },
-      "dlgScroll": 3,
-      "scrolls": 3,
-      "dlgClose": 1,
+      "dlgClose": 6,
+      "infoTaps": 30,
+      "kresTaps": 25,
+      "dlgScroll": 1,
+      "scrolls": 1,
+      "mgReady": 2,
+      "mgQuickSkipped": 1,
+      "mgMiss": 1,
+      "boards": [
+       {
+        "at": 118,
+        "buoi": 2,
+        "kind": "co",
+        "layer": "#kg82",
+        "moves": 5,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 6,
+        "res": "10/10 raw 10.00",
+        "raw": 10
+       }
+      ],
+      "boardN": 1,
+      "mgPeekTaps": 5,
+      "boardTaps": 5,
+      "mgBackWhy": [
+       {
+        "at": 118,
+        "buoi": 2,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       }
+      ],
+      "saveRewind": [
+       {
+        "at": 194,
+        "buoi": 4,
+        "from": 3,
+        "fromClk": "3.26.2.0",
+        "to": 2,
+        "toClk": "3.26.0.0",
+        "lost": 1
+       },
+       {
+        "at": 1285,
+        "buoi": 9,
+        "from": 8,
+        "fromClk": "3.26.1.0",
+        "to": 2,
+        "toClk": "3.26.0.0",
+        "lost": 6
+       }
+      ],
+      "nextNoTurn": 3,
+      "kfocVisits": 2,
       "deadChecks": 1,
-      "deadCheckMs": 3014,
-      "taps": 46
+      "deadCheckMs": 3009,
+      "lobbyWait": 4,
+      "peerRejoin": 1
      },
      "exitPick": null,
      "bugs": [
       {
-       "k": "game|two-tap hand «Trò chuyện với Chung Như MặcTốn1 khắcĐượ»: tapped for real, nothing lifted (2 s) and the frame is still there",
+       "k": "stuck|no progress 15 min on #coopfz «»",
+       "type": "stuck",
+       "msg": "no progress 15 min on #coopfz «»",
+       "n": 3,
+       "at": 1276,
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-host-k2/stuck-1.png",
+       "save": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-host-k2/stuck-1-dump.json",
+       "S": {
+        "dead": false,
+        "y": 3,
+        "t": 26,
+        "w": 1,
+        "b": 0,
+        "age": 20,
+        "rank": 3,
+        "name": "Đổng Linh Lung",
+        "org": "Con gái Tể tướng",
+        "kend": "",
+        "fate": ""
+       },
+       "buttons": [
+        "Về màn đầu"
+       ]
+      },
+      {
+       "k": "game|SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)",
        "type": "game",
-       "msg": "two-tap hand «Trò chuyện với Chung Như MặcTốn1 khắcĐượ»: tapped for real, nothing lifted (2 s) and the frame is still there",
+       "msg": "SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)",
        "n": 1,
-       "at": 166,
-       "screen": ".dlg «Tiền sảnh»"
+       "at": 1285,
+       "line": "SAVE REWIND: reload went back from b8 (clock 3.26.1.0) to the stored b2 (clock 3.26.0.0) (6 buổi lost)",
+       "lost": 6
+      },
+      {
+       "k": "coop|friend seat reloaded to rejoin the room → this seat rejoins too (reload → Cùng hảo hữu → Trở lại phòng)",
+       "type": "coop",
+       "msg": "friend seat reloaded to rejoin the room → this seat rejoins too (reload → Cùng hảo hữu → Trở lại phòng)",
+       "n": 1,
+       "at": 3113
+      },
+      {
+       "type": "harness",
+       "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+       "n": 1
       }
      ],
      "dead": [],
-     "buoi": 1,
+     "buoi": 10,
      "saves": []
+    },
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 1,
+     "extra": false,
+     "room": "3T7K",
+     "life": {
+      "id": "HARNESS",
+      "type": "harness"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "c5a242e0",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 3,
+      "unstick": [
+       {
+        "at": 2840,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3543,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3676,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 5339,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10706,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10719,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10732,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10745,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10758,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10771,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10785,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10945,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10958,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10971,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10983,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 10996,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11008,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11021,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11034,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11047,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11059,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11071,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11083,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11096,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11107,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11120,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11133,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11146,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11158,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11170,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11182,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11194,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11206,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11219,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11231,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11243,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11255,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11267,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11279,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11291,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11303,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11315,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11328,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11340,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11353,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11366,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11378,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11390,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11403,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11416,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11428,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11441,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11454,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11466,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11479,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11491,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11503,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11516,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11528,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11541,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11553,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11565,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11578,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11590,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11595,
+        "lvl": 3,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11621,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11635,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11647,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11660,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11673,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11685,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11698,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11711,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11723,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11736,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11750,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11763,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11776,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11789,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11802,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11815,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11828,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11840,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11853,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11866,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11880,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11892,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11906,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11918,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11931,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 11943,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 18,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 28,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 38,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 49,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 59,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 69,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 80,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 90,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 100,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 110,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 120,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 131,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 141,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 151,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 161,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 172,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 182,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 192,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 202,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 213,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 223,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 233,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 243,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 254,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 264,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 274,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 284,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 295,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 305,
+        "lvl": 1,
+        "layer": ".dlg",
+        "title": "Mời hảo hữu",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       },
+       {
+        "at": 32,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 46,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 58,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 70,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 81,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 92,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 103,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 114,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 125,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 137,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 148,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 159,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 170,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 182,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 193,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 205,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 1296,
+        "lvl": 3,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 2211,
+        "lvl": 3,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 3123,
+        "lvl": 3,
+        "layer": "page",
+        "title": "Trường Môn viện · Gió lùa qua song cửa mục. Ở đây "
+       },
+       {
+        "at": 3133,
+        "lvl": 3,
+        "layer": "#klife",
+        "title": ""
+       }
+      ],
+      "slice": null,
+      "mgBackN": 24,
+      "mgBackQuitN": 0,
+      "consoleErrN": 33,
+      "builds": [
+       {
+        "s": "d9ca7892+",
+        "b": "86170222adab",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z",
+       "at": "2026-11-27T16:30:35.507Z"
+      },
+      "pinUrl": "http://127.0.0.1:8812/",
+      "build": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z"
+      },
+      "areaTaps": 600,
+      "typed": 1,
+      "ident": {
+       "name": "Đậu Tố Nga",
+       "org": "Cung nữ được sủng hạnh",
+       "born": -19,
+       "at": 1
+      },
+      "skipLayerTaps": 132,
+      "infoTaps": 278,
+      "kresTaps": 124,
+      "twoTap": {
+       "hand": 269,
+       "plaque": 70,
+       "chosen": 264,
+       "liftOnly": 48,
+       "chipFail": 0,
+       "oneTap": 1,
+       "chipNoFx": 4,
+       "noLift": 22
+      },
+      "dlgScroll": 21,
+      "scrolls": 28,
+      "mgReady": 27,
+      "mgQuickSkipped": 24,
+      "mgMiss": 69,
+      "boards": [
+       {
+        "at": 195,
+        "buoi": 1,
+        "kind": "huong",
+        "layer": "#kg82",
+        "moves": 17,
+        "area": 0,
+        "drags": 14,
+        "holds": 0,
+        "btns": 3,
+        "s": 10,
+        "res": "10/10 raw 9.70",
+        "raw": 9.699156205524096
+       },
+       {
+        "at": 373,
+        "buoi": 5,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 6,
+        "area": 0,
+        "drags": 0,
+        "holds": 6,
+        "btns": 0,
+        "s": 22,
+        "res": "1/10 raw 1.88",
+        "raw": 1.8772845352766596
+       },
+       {
+        "at": 484,
+        "buoi": 9,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 8,
+        "area": 0,
+        "drags": 0,
+        "holds": 8,
+        "btns": 0,
+        "s": 22,
+        "res": "3/10 raw 2.91",
+        "raw": 2.9133212466545477
+       },
+       {
+        "at": 596,
+        "buoi": 13,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 7,
+        "area": 0,
+        "drags": 0,
+        "holds": 7,
+        "btns": 0,
+        "s": 22,
+        "res": "4/10 raw 2.99",
+        "raw": 2.9864089398973825
+       },
+       {
+        "at": 908,
+        "buoi": 21,
+        "kind": "mua",
+        "layer": "#kg82",
+        "moves": 16,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 42,
+        "res": "4/10 raw 5.33",
+        "raw": 5.333333333333334
+       },
+       {
+        "at": 1009,
+        "buoi": 25,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 9,
+        "area": 0,
+        "drags": 0,
+        "holds": 9,
+        "btns": 0,
+        "s": 22,
+        "res": "4/10 raw 3.15",
+        "raw": 3.1538461538461537
+       },
+       {
+        "at": 1236,
+        "buoi": 33,
+        "kind": "mua",
+        "layer": "#kg82",
+        "moves": 24,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 54,
+        "res": "7/10 raw 8.07",
+        "raw": 8.066666666666666
+       },
+       {
+        "at": 1478,
+        "buoi": 41,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 6,
+        "area": 0,
+        "drags": 0,
+        "holds": 6,
+        "btns": 0,
+        "s": 23,
+        "res": "3/10 raw 2.73",
+        "raw": 2.7273435673652875
+       },
+       {
+        "at": 1572,
+        "buoi": 45,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 12,
+        "area": 0,
+        "drags": 0,
+        "holds": 12,
+        "btns": 0,
+        "s": 23,
+        "res": "4/10 raw 3.38",
+        "raw": 3.3757961783439487
+       },
+       {
+        "at": 1673,
+        "buoi": 49,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 7,
+        "area": 0,
+        "drags": 0,
+        "holds": 7,
+        "btns": 0,
+        "s": 22,
+        "res": "4/10 raw 2.93",
+        "raw": 2.9310344827586206
+       },
+       {
+        "at": 2011,
+        "buoi": 60,
+        "kind": "dan",
+        "layer": "#kg82",
+        "moves": 15,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 22,
+        "res": "1/10 raw 4.70",
+        "raw": 4.699999999999998
+       },
+       {
+        "at": 2077,
+        "buoi": 61,
+        "kind": "mua",
+        "layer": "#kg82",
+        "moves": 13,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 38,
+        "res": "2/10 raw 4.67",
+        "raw": 4.666666666666667
+       },
+       {
+        "at": 2329,
+        "buoi": 65,
+        "kind": "mua",
+        "layer": "#kg82",
+        "moves": 16,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 42,
+        "res": "3/10 raw 5.80",
+        "raw": 5.8
+       },
+       {
+        "at": 2522,
+        "buoi": 69,
+        "kind": "mua",
+        "layer": "#kg82",
+        "moves": 19,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 41,
+        "res": "4/10 raw 6.07",
+        "raw": 6.066666666666666
+       },
+       {
+        "at": 4614,
+        "buoi": 130,
+        "kind": "mua",
+        "layer": "#kg82",
+        "moves": 29,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 41,
+        "res": "9/10 raw 10.00",
+        "raw": 10
+       },
+       {
+        "at": 4921,
+        "buoi": 138,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 11,
+        "area": 0,
+        "drags": 0,
+        "holds": 11,
+        "btns": 0,
+        "s": 23,
+        "res": "6/10 raw 5.95",
+        "raw": 5.9494752257749575
+       },
+       {
+        "at": 5100,
+        "buoi": 142,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 8,
+        "area": 0,
+        "drags": 0,
+        "holds": 8,
+        "btns": 0,
+        "s": 22,
+        "res": "4/10 raw 3.20",
+        "raw": 3.2039558713472576
+       },
+       {
+        "at": 5296,
+        "buoi": 146,
+        "kind": "mua",
+        "layer": "#kg82",
+        "moves": 24,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 43,
+        "res": "6/10 raw 8.00",
+        "raw": 8
+       },
+       {
+        "at": 5534,
+        "buoi": 150,
+        "kind": "mua",
+        "layer": "#kg82",
+        "moves": 23,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 55,
+        "res": "5/10 raw 7.60",
+        "raw": 7.6
+       },
+       {
+        "at": 6275,
+        "buoi": 170,
+        "kind": "mua",
+        "layer": "#kg82",
+        "moves": 14,
+        "area": 2,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 45,
+        "res": "2/10 raw 4.33",
+        "raw": 4.333333333333334
+       },
+       {
+        "at": 7356,
+        "buoi": 194,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 2,
+        "area": 0,
+        "drags": 0,
+        "holds": 2,
+        "btns": 0,
+        "s": 27,
+        "res": "1/10 raw 0.75",
+        "raw": 0.7522347867231122
+       },
+       {
+        "at": 7641,
+        "buoi": 198,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 0,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 5,
+        "res": "2/10 raw 0.45",
+        "raw": 0.45101930362619524
+       },
+       {
+        "at": 8130,
+        "buoi": 210,
+        "kind": "hat",
+        "layer": "#kg82",
+        "moves": 7,
+        "area": 0,
+        "drags": 0,
+        "holds": 7,
+        "btns": 0,
+        "s": 22,
+        "res": "6/10 raw 3.92",
+        "raw": 3.92073348559261
+       },
+       {
+        "at": 9742,
+        "buoi": 255,
+        "kind": "td_cong",
+        "layer": "#kg82",
+        "moves": 64,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 40,
+        "res": "10/10 raw 9.54",
+        "raw": 9.543859649122808
+       }
+      ],
+      "boardN": 24,
+      "mgPeekTaps": 357,
+      "boardTaps": 357,
+      "mgBackWhy": [
+       {
+        "at": 195,
+        "buoi": 1,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 374,
+        "buoi": 5,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 485,
+        "buoi": 9,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 597,
+        "buoi": 13,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 915,
+        "buoi": 21,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 1010,
+        "buoi": 25,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 1242,
+        "buoi": 33,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 1483,
+        "buoi": 41,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 1574,
+        "buoi": 45,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 1675,
+        "buoi": 49,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 2011,
+        "buoi": 60,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 2080,
+        "buoi": 61,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 2334,
+        "buoi": 65,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 2526,
+        "buoi": 69,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 4615,
+        "buoi": 130,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 4922,
+        "buoi": 138,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 5102,
+        "buoi": 142,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 5298,
+        "buoi": 146,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 5542,
+        "buoi": 150,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 6278,
+        "buoi": 170,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 7381,
+        "buoi": 194,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 7649,
+        "buoi": 198,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 8133,
+        "buoi": 210,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 9742,
+        "buoi": 255,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       }
+      ],
+      "dlgClose": 153,
+      "kfocVisits": 9,
+      "nextNoTurn": 129,
+      "bareCovered": 87,
+      "bareCoveredBy": {
+       "not on the layer scanned": 83,
+       "div.kne.kne-beat over div.kmrow": 1,
+       "div.kne.kne-beat over section#panel.panel.kpane.kpfr": 2,
+       "div.kne.kne-beat over section#panel.panel.kpane": 1
+      },
+      "skipCoverTaps": 13,
+      "deadChecks": 9,
+      "deadCheckDefer": 5,
+      "deadCheckMs": 27091,
+      "closeOwnLayer": 3,
+      "saveRewind": [
+       {
+        "at": 3147,
+        "buoi": 87,
+        "from": 86,
+        "fromClk": "1.8.2.0",
+        "to": 87,
+        "toClk": "1.8.0.0",
+        "lost": -1
+       },
+       {
+        "at": 11602,
+        "buoi": 284,
+        "from": 283,
+        "fromClk": "3.25.0.0",
+        "to": 279,
+        "toClk": "3.24.2.0",
+        "lost": 4
+       }
+      ],
+      "taps0": 0,
+      "resumed": [
+       {
+        "at": "2026-11-27T19:50:02.595Z",
+        "buoi": 284,
+        "from": "2026-11-27T19:49:35.597Z"
+       },
+       {
+        "at": "2026-11-27T20:00:23.572Z",
+        "buoi": 285,
+        "from": "2026-11-27T19:55:15.300Z"
+       }
+      ],
+      "resumeRestore": [
+       {
+        "at": "2026-11-27T19:50:08.206Z",
+        "origin": "http://127.0.0.1:8812",
+        "from": "http://127.0.0.1:8812",
+        "want": 0,
+        "got": 0,
+        "keys": 30
+       },
+       {
+        "at": "2026-11-27T20:00:28.573Z",
+        "origin": "http://127.0.0.1:8812",
+        "from": "http://127.0.0.1:8812",
+        "want": 0,
+        "got": 0,
+        "keys": 30
+       }
+      ],
+      "peerRejoin": 3
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "k": "dead|close button has no effect: .dlg «Tin trong cung buổi này» «Lui»",
+       "type": "dead",
+       "msg": "close button has no effect: .dlg «Tin trong cung buổi này» «Lui»",
+       "n": 5,
+       "at": 3599,
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/noeffect-1795800626558.png"
+      },
+      {
+       "k": "dead|close button has no effect: .dlg «tối · còn» «Lui»",
+       "type": "dead",
+       "msg": "close button has no effect: .dlg «tối · còn» «Lui»",
+       "n": 1,
+       "at": 3982,
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/noeffect-1795801009786.png"
+      },
+      {
+       "k": "dead|close button has no effect: .dlg «Ân tình (đêm)» «Lui»",
+       "type": "dead",
+       "msg": "close button has no effect: .dlg «Ân tình (đêm)» «Lui»",
+       "n": 1,
+       "at": 4667,
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/noeffect-1795801694122.png"
+      },
+      {
+       "k": "game|two-tap hand «Đọc sách giải khuây · nhẹTốnkhôngĐượcTâm»: ✓ tapped for real, the lift stays (does nothing)",
+       "type": "game",
+       "msg": "two-tap hand «Đọc sách giải khuây · nhẹTốnkhôngĐượcTâm»: ✓ tapped for real, the lift stays (does nothing)",
+       "n": 2,
+       "at": 5391,
+       "screen": ".dlg «Đọc sách»"
+      },
+      {
+       "k": "game|two-tap hand «Đọc binh thư, sử sách · vừaTốnkhôngĐượcT»: ✓ tapped for real, the lift stays (does nothing)",
+       "type": "game",
+       "msg": "two-tap hand «Đọc binh thư, sử sách · vừaTốnkhôngĐượcT»: ✓ tapped for real, the lift stays (does nothing)",
+       "n": 2,
+       "at": 5398,
+       "screen": ".dlg «Đọc sách»"
+      },
+      {
+       "k": "game|two-tap hand «Đọc binh thư, sử sách · vừaTốnkhôngĐượcT» lifted, but no ✓ chip came",
+       "type": "game",
+       "msg": "two-tap hand «Đọc binh thư, sử sách · vừaTốnkhôngĐượcT» lifted, but no ✓ chip came",
+       "n": 2,
+       "at": 5433,
+       "screen": ".dlg «Đọc sách»"
+      },
+      {
+       "k": "game|two-tap plaque «Hòa giải · Rất vững · Tốn 1 khắc»: the tapped part did not take the lift (another one is lifted)",
+       "type": "game",
+       "msg": "two-tap plaque «Hòa giải · Rất vững · Tốn 1 khắc»: the tapped part did not take the lift (another one is lifted)",
+       "n": 5,
+       "at": 6883,
+       "screen": ".kscn «»"
+      },
+      {
+       "k": "game|two-tap plaque «Khiêu khích · Rất vững · Tốn 1 khắc»: the tapped part did not take the lift (another one is lifted)",
+       "type": "game",
+       "msg": "two-tap plaque «Khiêu khích · Rất vững · Tốn 1 khắc»: the tapped part did not take the lift (another one is lifted)",
+       "n": 8,
+       "at": 6894,
+       "screen": ".kscn «»"
+      },
+      {
+       "k": "game|two-tap plaque «Hòa giải · Rất vững · Tốn 1 khắc»: tapped for real, nothing lifted (2 s) and the frame is still there",
+       "type": "game",
+       "msg": "two-tap plaque «Hòa giải · Rất vững · Tốn 1 khắc»: tapped for real, nothing lifted (2 s) and the frame is still there",
+       "n": 2,
+       "at": 6906,
+       "screen": ".kscn «»"
+      },
+      {
+       "k": "game|two-tap plaque «Tố cáo · Tốn 2 khắc»: the tapped part did not take the lift (another one is lifted)",
+       "type": "game",
+       "msg": "two-tap plaque «Tố cáo · Tốn 2 khắc»: the tapped part did not take the lift (another one is lifted)",
+       "n": 2,
+       "at": 6929,
+       "screen": ".kscn «»"
+      },
+      {
+       "k": "game|two-tap plaque «Hạ uy thế · Tốn 2 khắc»: the tapped part did not take the lift (another one is lifted)",
+       "type": "game",
+       "msg": "two-tap plaque «Hạ uy thế · Tốn 2 khắc»: the tapped part did not take the lift (another one is lifted)",
+       "n": 1,
+       "at": 6932,
+       "screen": ".kscn «»"
+      },
+      {
+       "k": "game|two-tap plaque «Đưa cơm áo · Rất vững · Tốn 1 khắc · 20 »: the tapped part did not take the lift (another one is lifted)",
+       "type": "game",
+       "msg": "two-tap plaque «Đưa cơm áo · Rất vững · Tốn 1 khắc · 20 »: the tapped part did not take the lift (another one is lifted)",
+       "n": 15,
+       "at": 8386,
+       "screen": ".kscn «»"
+      },
+      {
+       "k": "game|two-tap plaque «Đưa cơm áo · Rất vững · Tốn 1 khắc · 20 »: tapped for real, nothing lifted (2 s) and the frame is still there",
+       "type": "game",
+       "msg": "two-tap plaque «Đưa cơm áo · Rất vững · Tốn 1 khắc · 20 »: tapped for real, nothing lifted (2 s) and the frame is still there",
+       "n": 11,
+       "at": 8388,
+       "screen": ".kscn «»"
+      },
+      {
+       "k": "game|two-tap plaque «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»: the tapped part did not take the lift (another one is lifted)",
+       "type": "game",
+       "msg": "two-tap plaque «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»: the tapped part did not take the lift (another one is lifted)",
+       "n": 15,
+       "at": 8396,
+       "screen": ".kscn «»"
+      },
+      {
+       "k": "game|two-tap plaque «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»: tapped for real, nothing lifted (2 s) and the frame is still there",
+       "type": "game",
+       "msg": "two-tap plaque «Hỏi chuyện cũ · Có cơ · Tốn 1 khắc»: tapped for real, nothing lifted (2 s) and the frame is still there",
+       "n": 9,
+       "at": 8399,
+       "screen": ".kscn «»"
+      },
+      {
+       "k": "stuck|no progress 15 min on #coopfz «»",
+       "type": "stuck",
+       "msg": "no progress 15 min on #coopfz «»",
+       "n": 1,
+       "at": 11595,
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/stuck-1.png",
+       "save": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/stuck-1-dump.json",
+       "S": {
+        "dead": false,
+        "y": 3,
+        "t": 25,
+        "w": 0,
+        "b": 0,
+        "age": 22,
+        "rank": 0,
+        "name": "Đậu Tố Nga",
+        "org": "Cung nữ được sủng hạnh",
+        "kend": "",
+        "fate": ""
+       },
+       "buttons": [
+        "Về màn đầu"
+       ]
+      },
+      {
+       "k": "game|SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)",
+       "type": "game",
+       "msg": "SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)",
+       "n": 1,
+       "at": 11602,
+       "line": "SAVE REWIND: reload went back from b283 (clock 3.25.0.0) to the stored b279 (clock 3.24.2.0) (4 buổi lost)",
+       "lost": 4
+      },
+      {
+       "k": "harness|RESUME: NO SAVE IN CKPT — the ckpt holds no game save (hclh-save-*), the resume cannot reopen the same life",
+       "type": "harness",
+       "msg": "RESUME: NO SAVE IN CKPT — the ckpt holds no game save (hclh-save-*), the resume cannot reopen the same life",
+       "n": 2,
+       "at": 6,
+       "S": null
+      },
+      {
+       "k": "stuck|life not (re)opened within 5 min on .dlg «Mời hảo hữu»",
+       "type": "stuck",
+       "msg": "life not (re)opened within 5 min on .dlg «Mời hảo hữu»",
+       "n": 1,
+       "at": 307,
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/prestart-stuck-2.png",
+       "dump": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/prestart-stuck-2-dump.json",
+       "buttons": [
+        "Lui",
+        "Đường dẫn mời",
+        "Gửi đường dẫn cho hảo hữuqua Zalo, Messenger, tin nhắn",
+        "Chép đường dẫn",
+        "Chép mã 3T7K"
+       ]
+      },
+      {
+       "k": "coop|friend seat reloaded to rejoin the room → this seat rejoins too (reload → Cùng hảo hữu → Trở lại phòng)",
+       "type": "coop",
+       "msg": "friend seat reloaded to rejoin the room → this seat rejoins too (reload → Cùng hảo hữu → Trở lại phòng)",
+       "n": 3,
+       "at": 1296
+      },
+      {
+       "k": "stuck|no progress 15 min on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+       "type": "stuck",
+       "msg": "no progress 15 min on page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+       "n": 1,
+       "at": 3123,
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/stuck-3.png",
+       "save": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/stuck-3-dump.json",
+       "S": {
+        "dead": false,
+        "y": 3,
+        "t": 26,
+        "w": 2,
+        "b": 3,
+        "age": 22,
+        "rank": 0,
+        "name": "Đậu Tố Nga",
+        "org": "Cung nữ được sủng hạnh",
+        "kend": "",
+        "fate": ""
+       },
+       "buttons": [
+        "Ô lưu",
+        "Xem bản thân",
+        "Sắc81Tài53Tâm cơ65Đức32Danh0Sủng0",
+        "Bạc16Sức100/100",
+        "Buổi tối, còn 3 khắc",
+        "Lãnh cung",
+        "hoa đào bay dưới trăng",
+        "Quẻ Hạ (Sức khỏe)",
+        "Tâm trạngBình thản+7",
+        "Tin báo: 2 tin mới",
+        "Về phòng",
+        "Đổng Linh Lung: Đã sẵn sàng"
+       ]
+      },
+      {
+       "type": "harness",
+       "msg": "runner error: page.evaluateHandle: Target page, context or browser has been closed",
+       "n": 1
+      }
+     ],
+     "dead": [
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «Tin trong cung buổi này»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/noeffect-1795800626558.png",
+       "at": 3599,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 9,
+        "w": 0,
+        "b": 3,
+        "age": 20,
+        "rank": 0,
+        "name": "Đậu Tố Nga",
+        "org": "Cung nữ được sủng hạnh",
+        "kend": "",
+        "fate": ""
+       }
+      },
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «tối · còn»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/noeffect-1795801009786.png",
+       "at": 3982,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 10,
+        "w": 0,
+        "b": 3,
+        "age": 20,
+        "rank": 0,
+        "name": "Đậu Tố Nga",
+        "org": "Cung nữ được sủng hạnh",
+        "kend": "",
+        "fate": ""
+       }
+      },
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «Tin trong cung buổi này»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/noeffect-1795801259118.png",
+       "at": 4231,
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 10,
+        "w": 2,
+        "b": 3,
+        "age": 20,
+        "rank": 0,
+        "name": "Đậu Tố Nga",
+        "org": "Cung nữ được sủng hạnh",
+        "kend": "",
+        "fate": ""
+       }
+      },
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «Ân tình (đêm)»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/noeffect-1795801694122.png",
+       "at": 4667,
+       "S": {
+        "dead": false,
+        "y": 2,
+        "t": 11,
+        "w": 2,
+        "b": 3,
+        "age": 21,
+        "rank": 0,
+        "name": "Đậu Tố Nga",
+        "org": "Cung nữ được sủng hạnh",
+        "kend": "",
+        "fate": ""
+       }
+      },
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «Tin trong cung buổi này»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/noeffect-1795802207112.png",
+       "at": 5180,
+       "S": {
+        "dead": false,
+        "y": 2,
+        "t": 12,
+        "w": 2,
+        "b": 3,
+        "age": 21,
+        "rank": 0,
+        "name": "Đậu Tố Nga",
+        "org": "Cung nữ được sủng hạnh",
+        "kend": "",
+        "fate": ""
+       }
+      },
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «Tin trong cung buổi này»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/noeffect-1795806524736.png",
+       "at": 9498,
+       "S": {
+        "dead": false,
+        "y": 2,
+        "t": 22,
+        "w": 0,
+        "b": 3,
+        "age": 21,
+        "rank": 0,
+        "name": "Đậu Tố Nga",
+        "org": "Cung nữ được sủng hạnh",
+        "kend": "",
+        "fate": ""
+       }
+      },
+      {
+       "k": "NO EFFECT",
+       "screen": ".dlg «Tin trong cung buổi này»",
+       "label": "Lui",
+       "cover": "tapped 3× for real, dialog stays",
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/noeffect-1795806998614.png",
+       "at": 9971,
+       "S": {
+        "dead": false,
+        "y": 2,
+        "t": 23,
+        "w": 0,
+        "b": 3,
+        "age": 21,
+        "rank": 0,
+        "name": "Đậu Tố Nga",
+        "org": "Cung nữ được sủng hạnh",
+        "kend": "",
+        "fate": ""
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+       "label": "Tất cả 3/6Nghỉ ngơi 1/1Giao thiệp 2/4Lễ nghi 0/1Ng",
+       "cover": "outside viewport",
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/dead-ipad-1795810269620.png",
+       "dev": "ipad",
+       "at": 648,
+       "S": {
+        "dead": false,
+        "y": 3,
+        "t": 26,
+        "w": 2,
+        "b": 3,
+        "age": 22,
+        "rank": 0,
+        "name": "Đậu Tố Nga",
+        "org": "Cung nữ được sủng hạnh",
+        "kend": "",
+        "fate": ""
+       }
+      },
+      {
+       "k": "DEAD BUTTON",
+       "screen": "page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây »",
+       "label": "Tất cả 5/6Nghỉ ngơi 1/1Giao thiệp 4/4Lễ nghi 0/1Ng",
+       "cover": "outside viewport",
+       "shot": "/home/user/wt/out-coop1j-c/shots-coop-rt-flight2-coop1j-c-guest-k1/dead-ipad-1795811135923.png",
+       "dev": "ipad",
+       "at": 1514,
+       "S": {
+        "dead": false,
+        "y": 3,
+        "t": 26,
+        "w": 2,
+        "b": 3,
+        "age": 22,
+        "rank": 0,
+        "name": "Đậu Tố Nga",
+        "org": "Cung nữ được sủng hạnh",
+        "kend": "",
+        "fate": ""
+       }
+      }
+     ],
+     "buoi": 290,
+     "saves": [
+      {
+       "buoi": 50,
+       "year": 1,
+       "chars": 0,
+       "key": "",
+       "stored": null,
+       "err": 0
+      },
+      {
+       "buoi": 100,
+       "year": 1,
+       "chars": 0,
+       "key": "",
+       "stored": null,
+       "err": 0
+      },
+      {
+       "buoi": 150,
+       "year": 2,
+       "chars": 0,
+       "key": "",
+       "stored": null,
+       "err": 0
+      },
+      {
+       "buoi": 200,
+       "year": 2,
+       "chars": 0,
+       "key": "",
+       "stored": null,
+       "err": 0
+      },
+      {
+       "buoi": 250,
+       "year": 2,
+       "chars": 0,
+       "key": "",
+       "stored": null,
+       "err": 0
+      },
+      {
+       "buoi": 285,
+       "year": 3,
+       "chars": 0,
+       "key": "",
+       "stored": null,
+       "err": 0
+      },
+      {
+       "buoi": 286,
+       "year": 3,
+       "chars": 0,
+       "key": "",
+       "stored": null,
+       "err": 0
+      }
+     ]
     }
    ],
-   "partial": true,
-   "bugs": []
+   "partial": false,
+   "bugs": [
+    {
+     "type": "coop",
+     "msg": "rebirth host: in-room «Chuyển kiếp» tapped",
+     "at": "2026-11-27T20:00:42.174Z"
+    },
+    {
+     "type": "harness",
+     "msg": "browserContext.close: Target page, context or browser has been closed"
+    }
+   ]
   }
  ]
 }
