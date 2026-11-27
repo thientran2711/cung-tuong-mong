@@ -532,6 +532,8 @@ html body .kbtn,html body .kbtn *{word-break:normal!important;overflow-wrap:norm
 .kseg{display:inline-flex;gap:1.5px;padding:2px;border-radius:4px;background:#efe3cc;border:1px solid #d9c49a}
 .kseg i{display:block;width:5px;height:9px;border-radius:1.5px;background:var(--k-card,#fffaf0);box-shadow:inset 0 0 0 1px #d9c49a}
 .kodm.oc{background:none!important;border:0!important;padding:0!important;margin:0}
+/* KIT §53.d (KK59; KIT_REQUESTS 27/11 DOOR-ONETAP, MAIN 178 ruling): the meter inside a DARK button (primary .kbtn, kdanger, the dialog's main) = LIGHT variant — the ladder word in the button's own light ink, the 7-step track keeps its light plate (filled steps stay the ladder colours); a light button (.alt, kdone, disabled grey) keeps the ladder colour word */
+.kbtn:not(.alt):not(.kdone):not(:disabled) .kodm b,.dlg.kpanel #mr .main .kodm b{color:#fff8e6!important;text-shadow:0 1px 1px #0007}
 button.ka .kodds .kodm{flex-direction:row}
 .hc.khc{display:inline-flex;align-items:center;gap:4px}.hc.khc .kodm b{font-size:.68rem}
 .kpop{position:fixed;z-index:9995;/* above the big emotion avatar (.kemo-big, 9990/9991) — rv kit-ghichu-sections: a kit popup is never covered by a picture */background:var(--k-card);border:1px solid var(--gold);border-radius:var(--k-rad);box-shadow:0 0 0 3px #f6ead6,0 10px 30px #2a1a1250;padding:8px 10px;font-size:.82rem;color:var(--ink);/* m-fix-2: a tip never covers its own dialog (robot s5d: a 40-line «Ghi chú» filled the Fold): at most half the screen, scrolls inside */max-height:calc(50*var(--kvh,1dvh) - 16px);overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box}
