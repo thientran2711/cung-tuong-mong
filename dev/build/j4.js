@@ -110,7 +110,7 @@ PEND.tt3=p=>{const st=S.st,son=p.son?mySons().find(k=>k.name===p.son):null,o=p.o
 PEND.cn1=p=>{const st=S.st,m=st.mis;if(!m)return null;return {who:pv(m),t:`${m.name}, chủ cũ của ngươi, bắt ngươi quỳ dâng trà trước mặt các phi tần, nhắc ngươi từng là nô tỳ.`,o:[
    {n:"Nhẫn nhịn",fx:{duc:3,danh:-2},go:()=>{st.step=1}},{n:"Đáp trả sắc sảo",fx:{danh:2},x:`${m.name} thù ngươi hơn`,go:()=>{m.rel-=20;st.step=1}}]}};
 PEND.cn2=p=>{const st=S.st,m=st.mis,o=p.o;return {t:`${st.guard}, người từng hẹn ước với ngươi thuở còn làm cung nữ, nay gác cửa cung ngươi. Thái giám của ${m.name} đã đánh hơi thấy.`,o:[
-   {n:"Đút bạc bịt miệng",fx:{bac:-50},x:"chuyện chưa dứt hẳn",go:()=>{st.secret=1;st.step=2}},
+   /* split-merge A6: no «Đút bạc bịt miệng» half-road (−50 bạc for a half-kept secret was worse than biên ải); secret = kept (2) or not (1, failed diệt khẩu) */
    {n:"Diệt khẩu tên thái giám",fx:{duc:-8},x:`${word(o)} · thành: bịt được miệng, Tâm cơ ${balSg(BAL.eff.j4.tamcoGo)} · hỏng: lộ chuyện, Danh ${balSg(BAL.eff.j4.danhGo_2)}`,go:()=>{S.schemes++;st.step=2;if(roll(o)){st.secret=2;apply({tamco:BAL.eff.j4.tamcoGo});log("Tên thái giám chết đuối ở giếng sau.")}else{st.secret=1;apply({danh:BAL.eff.j4.danhGo_2});log(`<span class="r">Diệt khẩu hỏng, lời đồn đã lan.</span>`)}}},
    {n:"Xin cho hắn ra biên ải",fx:{bac:-20,duc:4},go:()=>{st.secret=2;st.step=2}}]}};
 PEND.nc1=p=>{const st=S.st;return {t:"Mật sứ Cao Ly trao thư của phụ vương: muốn ngươi dò bố phòng biên ải Đại Hy.",o:[
