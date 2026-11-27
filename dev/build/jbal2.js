@@ -1,5 +1,16 @@
 /* ================= jbal2: late balance knobs for the merged logic modules (review/balance). Same rule for every consort; numbers only. ================= */
 Object.assign(BAL,{illAdd:1,illDie:2});
+/* ONE DIM for the people who are NOT chosen (KIT §98 kitDim; owner 24/11 ~09:05Z / ~15:30Z): brightness + saturation on the FIGURE only, opaque, never the background; ms = cross-fade */
+BAL.kdim={b:.7,s:.75,ms:220};
+/* RING-BUILD (KIT §104 kitRing, owner OD 26/11 ~18:55Z «những người còn lại là tối»): the ring dims every slot that is not in front harder than kitDim (static filter on a copy, opacity cross-fade) */
+BAL.kring={dimB:.48,dimS:.6,
+ /* §104.1 the ONE ring table read by every ring (vòng người · vòng nhóm · vòng bảo vật; MOTION-BUILD-2 ask 26/11 ~20:12Z): seats = visible seats (N > seats scrolls), decay = fling
+    velocity kept per 60 Hz frame, stop = fling speed (slots/ms) that snaps, snapMs = snap tween, stepMs = one ‹ › step */
+ seats:12,decay:.93,stop:.0012,snapMs:200,stepMs:280,
+ /* OWNER 26/11 ~21:45Z «3 size … small là những người ở xa, medium là những người ở gần hơn, large là những người mà tôi đang chọn»: EXACTLY 3 figure sizes in every ring
+    (người · nhóm · bảo vật · danh hiệu · dung mạo): L = the front (the one she is choosing; ×1 = the LIVE stage size), M = the nearer ones (|seat| ≤ near), S = the far ones;
+    dim follows the same tiers (dimL none, dimM light, dimS most = the full dim copy); between seats (while turning) the size/dim slide from one tier to the next */
+ szL:1,szM:.66,szS:.46,near:1,dimL:0,dimM:.45,dimS:1};
 /* ACT SPLIT (jact wave 1, jact2 waves 2-3; owner-approved split 16/11). "!" happenings on Dư đồ: hapP = chance of a random happening in a buổi,
    hap2 = chance of a second one (never more than 2 per buổi); strollP = chance the Emperor's garden stroll takes the FIRST slot when he is in
    Ngự hoa viên (flag 2 of the wave-1 report: it was 9 in 300 buổi); rareMinGrade = Nội vụ phủ weekly rare item grade.
@@ -554,11 +565,12 @@ Object.assign(BAL,{led:{court:2,cnt:"now"}});
 Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 /* FLIGHT-DAYQ (owner 24/11 ~18:05Z (5): "Mới sáng sớm là có sự kiện tới tìm liền ngay lập tức"): the FIRST buổi of a day (right after the title card + Tuần lục + Tin trong cung)
    brings no event that has no fitting morning slot: dawnSlot = the buổi an unslotted world card moves to (1 = trưa); dawnOpt = odds (0..100) that an optional
-   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; stale = ms a busy motion queue with no scene on screen may hold the turn; wake = ms a card may wait in Q with nothing on screen before the safety net shows it (button-crawl-fix-5 dqWake; SANGBUOI-HELD r3 folded its r2 net into it: one net); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
-Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000}});
+   j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; mineLook = ms after her tap inside a person view during which a NEW queued card is hers and painted on top (E96 dialog-order); stale = ms a busy motion queue with no scene on screen may hold the turn; wake = ms a card may wait in Q with nothing on screen before the safety net shows it (button-crawl-fix-5 dqWake; SANGBUOI-HELD r3 folded its r2 net into it: one net); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
+Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000,mineLook:400}});
 /* F10 renderer-mem (26/11), BAL.kobs = the kit's DOM observers. The «Kéo xuống» scroll cue (jksize kitScrollCues). short = a scroller under this many px gets the slim strip below it
    (was a typed 260); hyst = a scroller keeps its short/tall look until its own height moves by more than this (its own cue never flips it). */
-Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* kaPass: card-normaliser passes per wake (j63 kaRun) */
+Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* KK53 v2 (OD 27/11 ~03:17Z): the SMALL «Chọn» chip inside a lifted kitPick plaque's bottom-right corner (jkpick conf): w × h px */
+Object.assign(BAL,{kpkgo:{w:24,h:24}});
 /* picker-dom (MAIN 164 play-stopper 26/11): KIT 28.13i item pick grid in pages (jgpick). rows = rows of tiles per page (a page = the columns the
    grid shows in that dialog at that width × these rows; s7: Fold 3–5, iPad 3–5 columns by dialog); settle = ms the grid's size must stay still before
    its columns are read (a mid-fit size never counts) */
