@@ -31,14 +31,15 @@ for(const sz of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=sz.split('x
    const cr=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]),segX=(p,q,r,s)=>cr(p,q,r)*cr(p,q,s)<0&&cr(r,s,p)*cr(r,s,q)<0;
    const N=(A,u)=>[Math.min(Math.max(A[0],u[0]),u[2]),Math.min(Math.max(A[1],u[1]),u[3])];const bad={union:[],dot:[],lineTag:[],cross:[],hid:[],outside:[],cut:[],endAir:[],tooLong:[],dotNear:[],dotNear40:0,leadOff:[]};const sc0=document.querySelector('.game.maptab .mapsc').getBoundingClientRect(),mw=getComputedStyle(document.querySelector('.game.maptab .mapw')),VP=[sc0.left+(parseFloat(mw.marginLeft)||0),sc0.top,sc0.right-(innerHeight>innerWidth?0:(parseFloat(mw.marginRight)||0)),sc0.bottom];
    const dRect=(p,r)=>Math.hypot(Math.max(r[0]-p[0],0,p[0]-r[2]),Math.max(r[1]-p[1],0,p[1]-r[3]));
-   info.forEach((a,i)=>{if(!a.vis){bad.hid.push(a.k);return}if(!a.inMap)bad.outside.push(a.k);if(a.u[2]>VP[0]+1&&a.u[0]<VP[2]-1&&(a.u[0]<VP[0]-1||a.u[2]>VP[2]+1))bad.cut.push(a.name);
+   const zoneVis={};spots.forEach((s,j)=>{if(s.classList.contains('mzone')&&info[j].vis)zoneVis[s.dataset.zone]=1});info.forEach((a,j)=>{a.zone=spots[j].classList.contains('mzone');a.zh=spots[j].classList.contains('mzh')?spots[j].dataset.zn:''});
+   info.forEach((a,i)=>{if(!a.vis){/* KIT §85.10: a zone member is hidden under its visible zone tag (owner 25/11 ~23:45Z gom lại) */if(a.zh&&zoneVis[a.zh])return;bad.hid.push(a.k);return}if(!a.inMap)bad.outside.push(a.k);if(a.u[2]>VP[0]+1&&a.u[0]<VP[2]-1&&(a.u[0]<VP[0]-1||a.u[2]>VP[2]+1))bad.cut.push(a.name);
     if(a.ld){const d=a.ld;if(Math.min(...a.ch.map(r=>dRect(d.end,r)))>3)bad.endAir.push(a.k);if(d.len>92)bad.tooLong.push(a.k+':'+Math.round(d.len));
      if(!(a.u[0]>=VP[0]-1&&a.u[2]<=VP[2]+1&&d.dot[0]>=VP[0]-1&&d.dot[0]<=VP[2]+1))bad.leadOff.push(a.k)}
     info.forEach((c,j)=>{if(i===j||!c.vis)return;if(j>i&&ov(a.u,c.u))bad.union.push(a.k+'|'+c.k);
      if(a.ld){const md=Math.min(...c.ch.map(r=>dRect(a.ld.dot,r)));if(md<16)bad.dotNear.push(a.k+'>'+c.k+':'+Math.round(md));else if(md<40)bad.dotNear40++;
       if(c.ch.some(r=>segR(a.ld.dot,a.ld.end,[r[0]-2,r[1]-2,r[2]+2,r[3]+2])))bad.lineTag.push(a.k+'>'+c.k);
       if(j>i&&c.ld&&segX(a.ld.dot,a.ld.end,c.ld.dot,c.ld.end))bad.cross.push(a.k+'x'+c.k)}})});
-   const greyBad=info.filter(a=>a.grey!==a.unreach).map(a=>a.k+(a.grey?':grey-but-reachable':':unreachable-not-grey'));
+   const greyBad=info.filter(a=>!a.zone&&a.grey!==a.unreach).map(a=>a.k+(a.grey?':grey-but-reachable':':unreachable-not-grey'));
    const emptyBad=info.filter(a=>a.empty&&(/cung trống$/.test(a.title)?!!a.metaTxt:!a.metaTxt)).map(a=>a.name);const mk=document.querySelector('.game.maptab .kmmapmk');let markBad='';if(mk){const g=mk.querySelector('img.kmglw'),m=mk.querySelector('img:not(.kmglw)');const cs=getComputedStyle(mk);markBad=(!g||!m)?'noGlowLayer':(getComputedStyle(g).zIndex>=getComputedStyle(m).zIndex)?'glowNotUnder':(cs.getPropertyValue('--dh').trim().toLowerCase()!==RCOL[Math.min(7,S.rank|0)].toLowerCase())?'colour!=rank':(getComputedStyle(m).filter.includes('brightness')?'overlayFilter':'')}
    return{markBad,err:window.__mapErr,ms:window.__mapMs,buoi:S.buoi,rank:S.rank,img:(document.querySelector('.mapimg')||{}).src,mls:window.__mapMls,z:window.__mapZ,fit:window.__mapFit,solve:window.__mapSolve,info,bad,greyBad,emptyBad}});
   /* every locked place stays tappable with its dialog + «Lẻn vào» (GREY IS LOOK ONLY, OD 18/11 ~19:15Z) */
