@@ -265,6 +265,27 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover1-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover1-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-speed5",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 1739433841,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "8ea10d7e (resumed twice)"
+   },
+   "ending": "Hồng nhan bạc mệnh — thọ 22",
+   "age": 22,
+   "buoi": 543,
+   "valid": true,
+   "flag": "mixed build (pin-server resume)",
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed5-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed5-moments.md"
   }
  ],
  "parked": [
