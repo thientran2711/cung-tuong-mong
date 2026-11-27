@@ -3,7 +3,7 @@
    (a) all 39 KG82_KIND kinds list 5 skins (default + xuan/ha/thu/dong, palettes dao/ngoc/kim/mac, names non-empty, no «%»); kinh / may follow «ve» (KG82_BOARDOF);
    (b) every skin of every kind resolves to a painted file that is on the CDN index (img/mg/<board>-<id>.webp) for the board the kind plays (both Thử tay contexts), hoadien through its chai-bg;
    (c) an unpainted skin id falls back to today's art (img/kit/mg-<n>.webp); duho / den (jts.js resolver) resolve tsduho-<id> / tsden-<id> and fall back to the event painting;
-   (d) the pick goes through the shared no-repeat memory (mgskin:<kind>:<skin>): five draws on a fresh memory show default + the four skins once each;
+   (d) the pick goes through the shared no-repeat memory (mgskin:<kind>:<skin>) and follows the month: only default or the CURRENT season's skin (RV-171, law 6);
    (e) real frames (Thử tay → Sẵn sàng) with a skin on ≥ 8 boards (incl. duho, den, kinh, may, a DOM board): data-mgskin set, the board really loaded the skinned file (canvas: KG82_IMG[<n>@<id>] complete; DOM: .kgbox-bg url), no page errors;
    (f) the default (no skin) frame is today's art.
    Shots (scratch, never in git): <outdir>/<dev>-<kind>-<skin>.png */
@@ -38,10 +38,11 @@ const SEA=['xuan','ha','thu','dong'];const SHOT=['dan','duho','den','kinh','may'
   /* every painted file the table can reach is on the index (independent of the page: names from the page, keys from the CDN) */
   const FILES=await p.evaluate(()=>{const s=new Set();for(const k of Object.keys(KG82_KIND)){for(const c of ['','hoc']){KG82.ctx=c;const bg=kg82BgName(k);for(const x of kitMgSkinList(k).slice(1))for(const n of [bg].concat(KG82_SPR[k]||[])){const u=kg82SkinSrc(n,x.id).replace(/^.*?(?=img\/)/,'');if(/^img\/mg\//.test(u))s.add(u)}}KG82.ctx=''}return[...s]});
   const miss=FILES.filter(f=>!KEYS.includes(f));ok(FILES.length>100&&!miss.length,`${tag} (b) ${FILES.length} skinned files reachable, all on the CDN index`,miss);
-  /* (d) memory */
-  const D=await p.evaluate(()=>{const o={};for(const k of ['dan','duho','kinh']){localStorage.removeItem('x');const seen=[];for(let i=0;i<5;i++){const s=mgpSkin(k);seen.push(s||'default')}o[k]={seen,uniq:new Set(seen).size,mem:['xuan','ha','thu','dong'].map(s=>typeof nrNow==='function'?!!nrNow('mgskin:'+k,s):null)}}return o});
-  for(const k in D)ok(D[k].uniq===5,`${tag} (d) ${k}: 5 draws = default + 4 skins once each (fresh-first memory)`,D[k].seen);
-  ok(D.dan.mem.every(Boolean),`${tag} (d) draws are written to the memory (mgskin:dan:<skin>)`,D.dan.mem);
+  /* (d) memory + season: a seasonal skin is drawn only in ITS month (RV-171 FAIL); the memory still rotates default + that season's skin */
+  const SEAS=['xuan','xuan','xuan','ha','ha','ha','thu','thu','thu','dong','dong','dong'];
+  const D=await p.evaluate(SE=>{const o={};for(const k of ['dan','duho','kinh']){const bad=[],both=new Set();for(let m=1;m<=12;m++){S.month=m;localStorage.clear();const seen=[];for(let i=0;i<6;i++){seen.push(mgpSkin(k)||'default')}const ok=seen.every(x=>x==='default'||x===SE[m-1]);if(!ok)bad.push([m,seen]);seen.forEach(x=>both.add(x))}S.month=3;localStorage.clear();const mem=[];for(let i=0;i<2;i++)mem.push(mgpSkin(k)||'default');o[k]={bad,both:[...both].sort(),mem:typeof nrNow==='function'?!!nrNow('mgskin:'+k,'xuan'):null,mems:mem}}return o},SEAS);
+  for(const k in D){ok(!D[k].bad.length,`${tag} (d) ${k}: 12 months × 6 draws only default or THAT month's season skin`,D[k].bad.slice(0,3));ok(['default','dong','ha','thu','xuan'].every(x=>D[k].both.includes(x)),`${tag} (d) ${k}: across the year the memory still reaches default + all four season skins, each in its own month`,D[k].both)}
+  ok(D.dan.mem,`${tag} (d) draws are written to the memory (mgskin:dan:<skin>)`,D.dan.mem);
   /* (e)(f) real frames */
   for(const [i,k] of SHOT.entries()){const sk=SEA[i%4];
    const E=await p.evaluate(async([k,sk])=>{const sleep=t=>new Promise(r=>setTimeout(r,t));try{kg82Close()}catch(e){}KG82.preSkin=sk;mgCalRun(k);await sleep(900);const d=document.getElementById('kg82');
