@@ -76,5 +76,5 @@ const fs=require('fs');
  await p.evaluate(()=>{tab="inv";render()});await p.waitForTimeout(500);await check('hud');
  await p.evaluate(()=>{tab="act";render()});await p.waitForTimeout(500);await check('hud-room');
  /* old save loads */
- const old=await p.evaluate(()=>{try{const raw=localStorage.getItem('hclh-save-v2-3')||localStorage.getItem('hclh-slot');return !!raw}catch(e){return false}});
+ const old=await p.evaluate(()=>{try{const raw=(window.slotGet?slotGet('hclh-save-v2-3'):localStorage.getItem('hclh-save-v2-3'))||localStorage.getItem('hclh-slot');return !!raw}catch(e){return false}});
  console.log(JSON.stringify({TAG,R,errs:errs.slice(0,8),old}));await b.close()})();
