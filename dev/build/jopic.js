@@ -329,6 +329,23 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
    made the next kaNorm pass rebuild every copy (bare again), the painter titled them again, … — ~1900 DOM edits / 600 ms, the option list re-laid out
    every frame and its scroll snapped back to the top (pgin, rcpacc, empnight, …). */
 function kitOptSig(b,kb){try{const c=kb.cloneNode(true);c.querySelectorAll(".kdup,.kfill,.kobang").forEach(e=>e.remove());return c.innerHTML+"|"+(typeof kfCls==="function"?kfCls(b):b.className)}catch(e){return kb.innerHTML+"|"+(typeof kfCls==="function"?kfCls(b):b.className)}}/* kfCls: the press class is not a change (button-crawl-fix-4) */
+/* ================= KIT §93.8 · kitOddsBadge — THE ODDS ON THE PICTURE OF AN EVENT lá bài (owner 27/11 ~06:10Z; scope owner 06:45Z + ~07:12Z) =================
+   OPT-IN ONLY: nothing calls it by itself (no observer, not kitOptFinal). Only the EVENT hand (Bàn bài: small cards + the enlarged card) calls kitOddsBadgeHand(handEl) / kitOddsBadge(card) / kitOddsBadgeOn(pictureEl, word).
+   Everywhere else (tabs, frames, popups, plaques, môn cells) the odds stay on their own row exactly as LIVE: small pictures cannot hold the badge.
+   The kit odds part (kitOdds: 7-segment bar + the WHOLE ladder word, law 7) is a badge `.kodb` centred on the TOP edge of the card picture (.kaart / .khbp) on a light kit plate. Sure card (no odds) = no badge.
+   On a narrow picture (~85-95 px) the bar sits above the word (flex-wrap) and the word is never clipped; font clamp(.56rem, .12 x --kas, .95rem).
+   API: kitOddsBadge(card) moves card's .kodds meter onto card > .kaart; kitOddsBadgeHand(handEl) does it for every button.ka of a hand container; kitOddsBadgeOn(pictureEl, word); kitOddsBadgeHTML(word). Test: dev/test/badge-scope.js. */
+function kitOddsBadgeHTML(w,o){try{if(typeof kitOdds!=="function"||typeof kitOddsLv!=="function"||kitOddsLv(w)<0)return"";return `<span class="kodb">${kitOdds(w,o)}</span>`}catch(e){return""}}
+function kitOddsBadgeOn(art,w,o){try{if(!art)return null;const old=art.querySelector(":scope > .kodb");if(old)old.remove();const h=kitOddsBadgeHTML(w,o);if(!h)return null;art.insertAdjacentHTML("beforeend",h);return art.querySelector(":scope > .kodb")}catch(e){return null}}
+function kitOddsBadge(b){try{if(!b||!b.querySelector)return null;const art=b.querySelector(":scope > .kaart");if(!art)return null;const k=b.querySelector(".kat .kodds,:scope > .kodds");
+ if(!k)return art.querySelector(":scope > .kodb");const m=k.querySelector(".kodm");if(!m){k.remove();return null}let bd=art.querySelector(":scope > .kodb");if(!bd){bd=document.createElement("span");bd.className="kodb";art.appendChild(bd)}bd.innerHTML="";bd.appendChild(m);k.remove();return bd}catch(e){console.error("kitOddsBadge",e);return null}}
+function kitOddsBadgeHand(hand){try{const n=[];(hand||document).querySelectorAll("button.ka").forEach(c=>{const r=kitOddsBadge(c);if(r)n.push(r)});return n}catch(e){return[]}}
+window.kitOddsBadge=kitOddsBadge;window.kitOddsBadgeOn=kitOddsBadgeOn;window.kitOddsBadgeHTML=kitOddsBadgeHTML;window.kitOddsBadgeHand=kitOddsBadgeHand;
+(function(){const st=document.createElement("style");st.id="kit-oddsbadge";st.textContent=`
+.kodb{position:absolute;top:3px;left:50%;transform:translateX(-50%);z-index:4;display:flex;align-items:center;justify-content:center;max-width:calc(100% - 4px);box-sizing:border-box;padding:1px 5px;border-radius:10px;background:#fffaf0f2;border:1px solid var(--gold,#c9a46a);box-shadow:0 1px 3px #0005;pointer-events:none;font-size:clamp(.56rem,calc(var(--kas,100px)*.12),.95rem);line-height:1.15}
+.kodb .kodm{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.1em .35em;margin:0;padding:0;background:none;border:0;pointer-events:none;max-width:100%}
+.kodb .kodm b{font-size:1em;white-space:nowrap;overflow:visible;text-overflow:clip;max-width:none}.kodb .kseg i{height:.55em;width:.55em}
+`;document.head.appendChild(st)})();
 window.kitOptFinal=kitOptFinal;
 (function(){const k0=kpOptArt;kpOptArt=function(b){const r=k0.apply(this,arguments);try{kitOptCompactRows(b);kitOptFinal(b);kitOptUnify(b)}catch(e){}return r};window.kpOptArt=kpOptArt})();
 /* KIT §6.2d — TWO OPTION LAYOUTS (1 long row per line / 2-column grid), phone AND iPad, and ONE SIZE PER BUTTON TIER (owner 18/11 ~16:05Z + 16:15Z).
