@@ -1,4 +1,4 @@
-/* review/viecnho-fix (owner 24/11 ~21:50Z real): (1) Việc nhờ «Tìm việc» sub-tab + Đang làm order, (2) person-panel scroll (kit §6.4), (3) «Vì sao» wording.
+/* review/viecnho-fix (owner 24/11 ~21:50Z real): (1) Việc nhờ «Tìm việc» sub-tab + Đang làm order, (2) person panel B (kit §6.4b; was the §6.4 scroll check), (3) «Vì sao» wording.
    node dev/test/viecnho-fix.test.js [outdir]   (after dev/site/build_site.sh; shots go to outdir, never git). exit 1 on any FAIL */
 const {chromium}=require('playwright');const path=require('path'),fs=require('fs');const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||'/tmp/viecnho-fix';fs.mkdirSync(OUT,{recursive:true});
 let fails=0;const ok=(c,m)=>{if(!c){fails++;console.log('FAIL',m)}else console.log('ok  ',m)};
@@ -16,23 +16,16 @@ let fails=0;const ok=(c,m)=>{if(!c){fails++;console.log('FAIL',m)}else console.l
   const now=await p.evaluate(()=>({ask:!!document.querySelector('#panel [data-q72a="ask"]'),firstIsPerson:(()=>{const a=document.querySelector('#panel .pgwrap');const k=document.querySelector('#panel .ktacts');return !!a&&!k})(),pc:!!document.querySelector('#panel .pc')}));
   ok(!now.ask&&now.pc&&now.firstIsPerson,`${name} Đang làm: no ask act, person panel present (${JSON.stringify(now)})`);
   await p.screenshot({path:`${OUT}/${name}-1-dang-lam.png`});
-  /* (2) scroll */
-  const pre=await p.evaluate(()=>{const pc=document.querySelector('#panel .pc[data-k2]');if(!pc)return null;const L=pc.querySelector('.kplscr'),R=pc.querySelector(':scope>.pcr');if(!L||!R)return{noScr:true};
-   const pad=document.createElement('div');pad.style.cssText='height:900px';pad.textContent='.';L.appendChild(pad.cloneNode(true));R.appendChild(pad);return{ok:1}});await p.waitForTimeout(900);
-  ok(pre&&pre.ok,`${name} person panel has .kplscr + .pcr scrollers`);
+  /* (2) person panel = KIT §6.4b panel B (canon overwrite of the §6.4 two-scroller check): 3 tabs, switching tabs never moves the portrait / name / card */
+  const pre=await p.evaluate(()=>{const pc=document.querySelector('#panel .pc[data-k2]');if(!pc)return null;return{kpp:pc.dataset.kpp==='1',tabs:pc.querySelectorAll(':scope>.pcr>.kppt>.pct').length}});
+  ok(pre&&pre.kpp&&pre.tabs===3,`${name} person panel is panel B with 3 tabs ${JSON.stringify(pre)}`);
   const rect=sel=>p.evaluate(s=>{const e=document.querySelector(s);if(!e)return null;const r=e.getBoundingClientRect();return[Math.round(r.x),Math.round(r.y),Math.round(r.width),Math.round(r.height)]},sel);
-  const sel=['#panel .pc .pcl>.pcp','#panel .pc .pcname','#panel .pc .kpstick','#panel .pc'];
-  await p.waitForTimeout(900);
-  for(const [col,s] of [['left','#panel .pc .kplscr'],['right','#panel .pc>.pcr']]){
-   await p.evaluate(()=>{const L=document.querySelector('#panel .pc .kplscr'),R=document.querySelector('#panel .pc>.pcr');for(const e of [L,R])if(!e.querySelector(':scope>.tpad')){const d=document.createElement('div');d.className='tpad';d.style.cssText='height:900px';e.appendChild(d)}});await p.waitForTimeout(250);
-   const r0=await Promise.all(sel.map(rect));
-   const st=await p.evaluate(s=>{const e=document.querySelector(s);e.scrollTop=300;return[e.scrollTop,document.querySelector('#panel .pc .kplscr').scrollTop,document.querySelector('#panel .pc>.pcr').scrollTop]},s);
-   await p.waitForTimeout(150);const r1=await Promise.all(sel.map(rect));
-   ok(JSON.stringify(r0)===JSON.stringify(r1),`${name} scroll ${col}: portrait / name / info block / card rects unchanged ${JSON.stringify(r1)}`);
-   ok(st[0]>0,`${name} scroll ${col}: that column scrolled (${st[0]})`);
-   const other=col==='left'?st[2]:st[1];ok(other===0,`${name} scroll ${col}: the other column did not move (${other})`);
-   await p.evaluate(()=>{document.querySelector('#panel .pc .kplscr').scrollTop=0;document.querySelector('#panel .pc>.pcr').scrollTop=0});
-   await p.screenshot({path:`${OUT}/${name}-2-scroll-${col}.png`});}
+  const sel=['#panel .pc .pcl>.pcp','#panel .pc .pcname','#panel .pc'];
+  const r0=await Promise.all(sel.map(rect));
+  for(const v of ['info','rel','act']){await p.evaluate(v=>{const b=document.querySelector(`#panel .pc .kppt .pct[data-kppv="${v}"]`);if(b)b.click()},v);await p.waitForTimeout(300);
+   const r1=await Promise.all(sel.map(rect));ok(JSON.stringify(r0)===JSON.stringify(r1),`${name} tab ${v}: portrait / name / card rects unchanged ${JSON.stringify(r1)}`);
+   const sh=await p.evaluate(()=>{const pc=document.querySelector('#panel .pc');const e=pc.querySelector(`:scope>.pcr>.kppv[data-v="${pc.dataset.kppv}"]`);return!!(e&&e.offsetParent)});ok(sh,`${name} tab ${v}: its view is shown`);
+   await p.screenshot({path:`${OUT}/${name}-2-tab-${v}.png`})}
   const pcs=await p.evaluate(()=>{const pc=document.querySelector('#panel .pc[data-k2]');return{pcScroll:pc.scrollHeight-pc.clientHeight,pcOv:getComputedStyle(pc).overflowY}});
   ok(pcs.pcScroll<=1,`${name} the card itself never scrolls (${JSON.stringify(pcs)})`);
   /* Tìm việc sub-tab */

@@ -101,3 +101,19 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.4b",title:"Khu
  const live=typeof S!=="undefined"&&S&&typeof rivals!=="undefined"&&rivals&&rivals[0]&&typeof rvCard==="function";if(!live)return `<div class="kitpg-row"><i>Mở một kiếp rồi mở trang mẫu để xem khung người B.</i></div>`;
  setTimeout(()=>{try{document.querySelectorAll("#kitpage .kpp-demo .pc").forEach(pc=>{pc.style.setProperty("--kpcmax","520px");kitPcFix(pc);kitPP(pc);if(typeof kaNorm==="function")kaNorm(pc)})}catch(e){console.error(e)}},60);
  return `<div class="kitpg-row kpp-demo" style="width:min(735px,100%);height:540px;overflow:hidden">${rvCard(rivals[0],0)}</div>`}})}catch(e){}
+
+/* KIT §6.4c ROUND PICKER AVATAR — Hậu cung person-picker row ONLY (owner 27/11 ~00:05Z «trên này nên để hình tròn đi, cho đỡ choáng chỗ» + ~00:08Z «Chỉ có chỗ đó đổi tròn thôi,
+   còn khung ở avatar người được chọn vẫn ở dưới»; overrides KIT §4.2 «no round avatars» for THIS row only). The pager strip faces of Chí tôn / Phi tần / Nam nhân / Cung nhân
+   (pager keys court · rv · men · staff) show the SAME portrait picture (mdH → pcPort cell) cropped to a KPR.d px circle: frame, pendant, tassel, crest, label hidden. Every other
+   picker / list (Hoàng tự, Giao tình, dialogs) and the selected person's big frame below are unchanged. */
+const KPR={d:50,keys:["court","rv","men","staff"]};
+(function(){const S0=KPR.keys.map(k=>`html body #panel .pstrip .pface[data-pg="${k}"]>.md.kit`).join(",");const S=x=>KPR.keys.map(k=>`html body #panel .pstrip .pface[data-pg="${k}"]>.md.kit${x}`).join(",");
+ const st=document.createElement("style");st.id="kit-pp-round";st.textContent=`
+${S0}{width:${KPR.d}px!important;height:${KPR.d}px!important;min-width:${KPR.d}px!important;max-width:none!important;aspect-ratio:1!important;border-radius:50%!important;overflow:hidden!important;margin:0 auto 2px!important;padding:0!important;position:relative!important;display:block!important;box-shadow:0 0 0 2px var(--rt,#c9a24a),0 1px 3px #0003!important;background:var(--k-card,#fffaf0)}
+${S(">.kin")}{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;transform:none!important;margin:0!important}
+${S(" .kin>.kfr")},${S(" .kin>.kgem")},${S(" .kin>.kemb")},${S(" .kin>.kemo")},${S(" .kin>.klab")},${S(" .kin>.kcrest")}{display:none!important}
+${S(" .kin>.kbg")}{left:0!important;top:0!important;width:100%!important;height:100%!important}
+${S(" .kin>img.kpor")}{left:0!important;top:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:50% 6%!important;transform:scale(1.15);transform-origin:50% 10%}
+${KPR.keys.map(k=>`html body #panel .pstrip .pface[data-pg="${k}"]`).join(",")}{min-height:0!important}
+${KPR.keys.map(k=>`html body #panel .pstrip .pface[data-pg="${k}"].on>.md.kit`).join(",")}{box-shadow:0 0 0 3px var(--gold,#b8892f),0 0 6px 1px #e8c46a!important}
+`;document.head.appendChild(st)})();

@@ -7,7 +7,7 @@ const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG,SHOTS]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300);window.kitRoulette=function(){}});
- const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();if(process.env.ROUNDOFF)await ctx.addInitScript(()=>{const iv=setInterval(()=>{const s=document.getElementById('kit-pp-round');if(s){s.disabled=true;clearInterval(iv)}},50)});p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:90000});await p.waitForTimeout(2000);
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;
@@ -26,7 +26,8 @@ const [,,BASE,SZ,OUT,TAG,SHOTS]=process.argv;const [W,H]=SZ.split('x').map(Numbe
   return{name:nm.trim().slice(0,30),kpp:pc.dataset.kpp||0,tab:pc.dataset.kppv||'',tabs:[...pc.querySelectorAll(':scope>.pcr>.kppt>.pct')].map(e=>e.textContent),
    por:pr?[Math.round(pr.width),Math.round(pr.height)]:null,porShare:pr?Math.round(pr.height/innerHeight*100):null,btn:btn.length,whole,cut,hid,scroll:scr,
    nameCut:(()=>{const n=pc.querySelector(':scope>.pcl>.pcname');if(!n)return 0;const L=n.parentNode.getBoundingClientRect();const r=document.createRange();r.selectNodeContents(n);const q=r.getBoundingClientRect();return (q.left<L.left-1||q.right>L.right+1)?1:0})(),nameLines:(()=>{const n=pc.querySelector(':scope>.pcl>.pcname');if(!n)return 0;const r=document.createRange();r.selectNodeContents(n);return new Set([...r.getClientRects()].map(x=>Math.round(x.top))).size})(),
-   ovf:document.documentElement.scrollWidth>innerWidth+1}});
+   ovf:document.documentElement.scrollWidth>innerWidth+1,
+   strip:(()=>{const s=document.querySelector('#panel .pstrip');if(!s)return null;const fs=[...s.querySelectorAll('.pface')].filter(e=>e.offsetParent);const md=fs[0]&&fs[0].querySelector('.md');const r=s.getBoundingClientRect();return{h:Math.round(r.height),faces:fs.length,round:md?getComputedStyle(md).borderRadius==='50%':false,cardTop:Math.round(pc.getBoundingClientRect().top)}})()}});
  const R=[];const tabs=['court','rv','men','staff','kid'];
  for(const t of tabs){await p.evaluate(t=>{Q.length=0;const mo=document.getElementById('modal');if(mo)mo.hidden=true;document.body.classList.remove('kbk-open');const dw=document.getElementById('dawn');if(dw){dw.hidden=true;dw.innerHTML='';dw.classList.remove('on')}tab=t;try{K3SH.home=false}catch(e){};render();try{k3Shell()}catch(e){};document.querySelectorAll('.kres,.ktoast,#ktoast').forEach(e=>e.remove())},t);await settle();
   const n=await p.evaluate(()=>document.querySelectorAll('#panel .kpstrip button, #panel [data-pi]').length);
