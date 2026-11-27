@@ -105,3 +105,23 @@ No picker loses a tile per page against LIVE on either device; no stretched colu
   https://ctm-img.victoria-tntt.workers.dev/img/_review/picker-dom/picker-dom-ipad.mp4 (1180x820, 72 s). Looked at contact sheets + full frames.
 - Seen in the videos, NOT this branch (kit dialog fit, same frame on LIVE; rv round 2 already noted it): the dialog with a big scene picture keeps the option box short, so row 2 of the page (and the pager / card / confirm) sits under «Kéo xuống» in the dialog's own scroller (Fold Biếu quà, iPad Biếu quà + Dâng quà). The grid itself has whole rows; the outer kit frame cuts it. Law 10 («a big scene picture only when the content fits without scrolling») → for KK47 / MAIN, kit frame part, not 28.13i.
 - Kit law 9: still needs kit keeper «KIT OK K-LIST-PAGE <sha>» (28.13i paging + the one-line jksize kitFrameLive3 count).
+
+## RV ROUND 3 FAIL 705d50e0 → fix r4 (worker r3 session_01D3E3Nb9VErJBWw6bmHB87X)
+PRIORITY #1 CHECK: rv ROUND 3 @fa0f8c62 | main LIVE 4cd3f974 (merged) | review/picker-dom | claims Foreman D (now session_01D3E3NagaVYs8K14c2bMUy1), rv session_01D3E3NX3JZAycKJ8cs4P7qd.
+1. ROOT: the r2 count `m.opts.filter(Boolean).length` included «Thôi» (kitCancelIx); j3 never draws it as a button (it is the kit ✕). A 6-item chest = 7 counted ≥ maxOpts 7 → pick-list frame instead of LIVE's event frame (kszlive). FIX: ONE helper `kszOptN3(o,m)` (jksize): a paged picker (m.kipOnly) counts `m.opts.filter((c,i)=>c&&i!==kitCancelIx(m))` (= j3's own draw rule: it skips only cx), any other dialog counts its drawn `.opts > button`.
+   FAMILY SCAN — every fit pass that reads the option-button count (grep of dev/build/j*.js for `querySelectorAll(... button / .opt ...)` + `.length` / `childElementCount`):
+   | pass | file:line | picks | paged picker before | now |
+   |---|---|---|---|---|
+   | kitFrameLive3 pick-list rule (maxOpts 7) | jksize.js:702 | event frame kszlive vs pick-list | counted Thôi (r2) / drawn page (r1) | kszOptN3 |
+   | kszLivePick3 Fold XL step-down (stepOpts) | jksize.js:682 | NL/NM/NS stacked frame | drawn page only | kszOptN3 |
+   | kszLivePick3 iPad L/XL grow (stepOpts) | jksize.js:684 | full-height frame | drawn page only | kszOptN3 |
+   | kszStaleSnap3 | jksize.js:649 | position snapshot (tap guard), not a count | — | unchanged |
+   | kitDomDead (all visible buttons disabled) | jnolock.js:29 | no-road check; item cards are display:none, same as LIVE | — | unchanged |
+   | jtsb tsbNeedMark | jtsb.js:29 | decorates each drawn card, not a count | — | unchanged |
+   | j56 row counter / jk3 `button.ka` ≥6 / jinv `.kinvacts` | j56.js:31, jk3.js:517, jinv.js:183 | other panels (no `.opts` of a picker) | — | unchanged |
+   Not counting passes: jk4 kitDlgFit / kitDpApply / kitDpAll (scroll heights, no count) — they see the same frame as LIVE once kitFrameLive3 decides the same way.
+   Frame classes, LIVE 4cd3f974 vs branch (probe on both builds, s7 chest cut to N, Fold + iPad, page 1 and page 2): N = 4, 5, 6, 7, 8, 12, 30 → all 4 pickers IDENTICAL on both devices (6 = kszlive, 7+ = kdper/kdscroll/kesdlg/kdpbanner[/kdpall] as LIVE). The r3 code (ece06266) on the same probe: N = 6 → DIFF on all 4 pickers, both devices (the rv's finding, reproduced).
+   picker-dom.js new rows: for chests of 5 / 6 / 7 / 30 items, per picker, the dialog frame classes = LIVE's path (same build, kipOnly never set = every card drawn), on page 1 and page 2; read once the frame stops changing.
+2. Merged LIVE 4cd3f974 (only index.html / sw.js conflicted → assemble + build_site.sh; assets.json = LIVE).
+KIT.md 28.13i PAGES bullet + KIT_REQUESTS K-LIST-PAGE row rewritten in place (law 14). Kit keeper re-sign needed on r4 (now covers kszOptN3).
+Gates on 6f2cf8c7 (code): picker-dom.js Fold+iPad **PASS 96/96** · scan **PASS** · coop-e2e (alone) **143/143** · quickcheck --runs 5 vs LIVE 4cd3f974 **PASS** (old save loads + plays a buổi, 0 errors; perf median new/live render 241/265, tab 742/585, buổi 1409/1332, tasks>200 36/31). Look of the s7 dialogs unchanged (1,437 entries: same frame before/after) → videos not re-shot (rv: «only if the look changes»).
