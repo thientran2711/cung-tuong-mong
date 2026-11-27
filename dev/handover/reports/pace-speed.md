@@ -29,11 +29,41 @@ Per rank months LIVE → branch: Thường tại 4 → 2 · Quý nhân 32 (Tần
 Stall months by cause (below Hoàng hậu): LIVE seat 31–46 · gap 25–27 · qBlock 0–9; branch stat 16–44 · gap 10–44 · qBlock 0–10 · seat 0–9 → MAIN 164 ruled m 8, gap [4,6,8,10], qBlock ease (built).
 Reign length: PENDING REIGN-END (with the rare natural death most lives run to the cap; «her end at 40» = obsolete).
 
-## HANDOVER (for the successor; MAIN opens it)
-STATE: branch review/pace-speed 7c619951 pushed. Robots that were running in my container (results NOT in git): br5 = branch before the promotion adjustment (49159ddd build) · br7 = tip 7c619951 · live6 = LIVE 504d2e6a with the new 70/80/90 tally. The successor must RERUN in its own container:
-  `PAR=3 CAP=3600 node dev/measure/pacespeed.js <live index.html> 3 240 0 > live.jsonl` and the same on the branch build (dev/index.html after `python3 dev/build/assemble.py`), then
-  `python3 dev/measure/pacespeed-sum.py LIVE=live.jsonl BRANCH=br.jsonl` (+ a small script over ps.reach for «months to 70/80/90 per stat»).
-TODO in order: (1) robot table LIVE vs tip: min/game yr, per-rank months, stall by cause, months to 70/80/90 for all six stats (target: focused year ≈ +20–25 from 50; 80 → 90 ≈ 3 y — tune BAL.stp.abs pow/min if off) → MAIN 166; (2) `bash dev/tools/quickcheck.sh HEAD --runs 3` (needs a quiet CPU; my run was stopped) + dev/test/stat-pace.js on tip → RV READY to RV-163C session_01Rc5AsLFUVRepsLs2do3jnh; (3) art-pace family (MAIN 164): `node dev/measure/artpace.js <page> srv|consort 3 36` LIVE → find the cnv duty-act source of fast Y thuật (TITLE-BAL review/title-bal 3f8eb36a «FINDING for MAIN») → BAL-only proposal per road so top bậc = a life's effort; table LIVE vs branch.
-NOTE: inpage6 bot overrides render(), so in robot runs the render watcher of item 7 does not fire (decree roads still do). The branch is on lc24-sp (stat-pace) which is not LIVE yet — the lander stacks it after lc24-sp.
-ADDED by MAIN 166 (23:33–23:36Z, OD ~23:35Z): (4) the promotion adjustment line must show on the promotion RESULT CARD / Sổ ghi through the KIT (exact numbers per the marks rule; no custom row — ask KK50 session_01Rc5AsMUwtXE6eVHGdk8jfo if a line part is missing); today spScaleAt only appends to the decree text + log(). (5) robot table adds: adjusts per life + the biggest single drop (instrument spScaleAt in pacespeed.js: count calls that changed values, max |delta| for her and for NPCs).
+## PACE-SPEED-2 (session_01Rc5AsN2DLjhrFeTq7DV51d, 27/11 00:00–02:30Z) — branch review/pace-speed b7430190
+PRIORITY #1 CHECK: OD 26/11 23:24Z / 23:35Z / 23:47Z / 23:55Z + «Ok làm chỉ số như khuyến nghị» | main LIVE 4cfcda61 | review/pace-speed 7c619951 | claims PACE-SPEED-2.
+BUILT (owner 23:55Z confirmed row, CANON OVERWRITE of 23:35Z):
+- ONE SOFT CEILING for the six (BAL.stp.soft; jstatpace spSoft → spTop 100): above the ceiling a rise × dm.min, never a hard stop below 100. Sủng/Danh = next bar + 8,
+  Đức = rank ceil but ≥ floor 80, Sắc/Tài/Tâm cơ = 100. Curve = the approved example (a raw +8 is first cut by the existing size band, kept).
+- Promotion adjustment REMOVED (spScaleAt, hooks, watcher, BAL.stp.scale, scale-gates.py).
+- Sủng neglect fade (BAL.fade.sung {first 2, step 1, max 5}; month with no night: p.nightLog / p.empSeenW) + Sắc −1/yr from 28 (BAL.fade.sac); her + NPCs; queen rank exempt;
+  her fade = Sổ ghi line «Lâu không được gặp Hoàng thượng (N tháng): Sủng a → b.» (result card kitWhy reads it). Old weekly −1 Sủng (j3/j75) = BAL.fade.sung.wk 0 (MAIN 167: keep 0).
+- One-line player rule (owner wording) appended to the kit glossary meaning of the six stats (kitGlossText); CHANGE.txt line updated.
+- Tâm cơ too fast (MAIN 167 flag): robot source tally (pacespeed.js ps.tsrc): card options («runOpt») gave Tâm cơ ~110 times / 40 months → BAL.stp.abs.tamco {pow 2, min .15, k .4}
+  (k = share of a raw rise that counts). Robot after: +14–19 a year mid-range, 70 at m36 / m58 (before: 90 at m19–34; LIVE m12–15).
+- Test family (stat-pace): title-sys gSung/gDanh/gTren/gHau/NPC gSung (one huge rise was cut by the band; Math.random pinned .5) → several in-band rises; title-sys2 Danh +danhG
+  expects the paced spG; balance-core Tâm cơ +20 = stat-pace. NOT stat-pace (→ TITLE-BAL): title-sys «no dialog», «place/festival style name», «thai a,b»; title-sys2 «loss dialog:
+  no item frame», random «hiệu not back» / «NPC lập công did not restore».
+- Tests on tip: pace-speed.js PASS · stat-pace.js PASS (1 flaky FAIL under robot CPU load, 3 reruns PASS) · balance-core PASS · title-sys stat items PASS.
+ROBOT (3 lives each, ≤240 mo, 60-min cap; raw jsonl not in git): months to 70/80/90 per life
+| stat | LIVE 4cfcda61 | BRANCH (soft ceiling + fade; tamco k before the .4 tune) |
+|---|---|---|
+| Sắc | 40·1·1 / 76·1·1 / 85·1·4 (starts 61/100/100) | –·1·1 / –·7·1 / –·–·1 (starts 51/80/92) |
+| Tài | 22·1·43 / 41·4·72 / 62·9·129 | 1·–·218 / 1·–·– / 3·–·– |
+| Tâm cơ | 9·11·12 / 10·13·14 / 12·15·15 | 13·–·17 / 18·–·25 / –·–·34 |
+| Đức | 58·22·55 / 67·30·65 / 83·53·94 | 14·13·18 / –·–·24 / –·–·60 |
+| Danh | 54·16·51 / 65·22·64 / 76·28·76 | –·–·22 / –·–·36 / –·–·54 |
+| Sủng | 52·14·34 / 60·22·57 / 73·30·66 | –·–·14 / –·–·19 / –·–·24 |
+Lives: LIVE ended m112 Đại kết cục, m168 Mẫu hậu Hoàng thái hậu, cap m200 (to Hoàng hậu m78/m61/m110). BRANCH ended m19 Xuất gia, m18 Hồng nhan bạc mệnh, cap m229 (Hoàng hậu m75).
+min/game yr LIVE 30 · BRANCH 31. Sủng after 3 / 6 months of neglect (her): 23 (Thường tại) · 38 → 54 (Quý nhân → Tần) · 67 → 72 (Tần → Quý phi); longest neglect run her 5–7 mo, NPC 10–17 mo.
+Per rank months LIVE → BRANCH: Thường tại 23 → 3 · Quý nhân 6 → 3.5 · Tần 5 → 7. Stats at promotion vs bar LIVE +10…+36 → BRANCH +3…+14.
 
+## HANDOVER (for the successor; MAIN opens it)
+STATE: review/pace-speed b7430190 pushed (robot jsonl lost on rollover; rerun: `PAR=3 CAP=3600 node dev/measure/pacespeed.js <page> 3 240 0`, then
+`python3 dev/measure/pacespeed-sum.py LIVE=… BRANCH=…`; per-stat 70/80/90 + neglect from ps.reach / ps.ng; Tâm cơ sources from ps.tsrc).
+TODO: (1) quickcheck ×3 result → RV READY to RV-163D session_01Rc5AsMQU1ehAQ8bwbw6pWo + MAIN (see the last report line below if done);
+(2) art-pace family (MAIN 164): `node dev/measure/artpace.js <page> srv|consort 3 36` LIVE → the cnv duty-act source of fast Y thuật (TITLE-BAL FINDING,
+review/title-bal 3f8eb36a report line 51) → BAL-only proposal per road; NOT started.
+(3) a full 3-life robot on tip b7430190 (Tâm cơ k .4 checked only with 2 × 40–60-month lives).
+QUICKCHECK b7430190 --runs 3: open / old save / perf PASS (median new/live: render 224/234 ms, tab 582/637, buổi 1504/1315, tasks>200ms 32/28) · CORE GATE G4 80-dialog-fixed FAIL
+«kit-dialog-2 a no empty Tốn / Được cell» at 755x1000 + 1180x820 — the SAME 2 FAIL on LIVE main 4cfcda61 (pre-existing, not this branch; kit-dialog owner). RV READY sent 27/11 ~02:45Z.
+ROLLED (context) after RV READY: successor = TODO (2)(3) above.
