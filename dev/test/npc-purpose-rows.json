@@ -2087,7 +2087,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"done": "npcWhy(\"kcMeet\",{tm},()=>roll(BAL.odb.jkc.rlKcMeet_2))"
+"done": "npcWhy(\"kcMeet\",{tm},()=>roll(rp()))"
 },
 {
 "f": "jkc.js",
