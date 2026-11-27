@@ -109,7 +109,7 @@ for(const k of ["giftpick","wkgive"])(function(k){const g0=PEND[k];if(!g0)return
   d.o=d.o.filter(o=>!(o&&/^Lén bỏ Hạc đỉnh hồng/.test(o.n||"")));const e=S.inv[p.ix];
   if(e&&pgFood(e)&&pgHeld(S).length){const i=d.o.findIndex(o=>o&&(o.kgx||o.n==="Thôi"));d.o.splice(i<0?d.o.length:i,0,pgRow(p.ix))}}}catch(x){console.error("pg gift",x)}return d}})(k);
 /* NPC act (same function): a malicious consort with a poison and a dish */
-A("pgift","Tặng quà ăn có độc",{c:{},ok:(a,t)=>a!==t&&pgHeld(a).length>0&&(a.inv||[]).some(pgFood),o:(a,t)=>{const e=(a.inv||[]).find(pgFood);return e?pgOdds(a,t,e).o:BAL.odds.lo},x:"nàng trúng độc nếu ăn",
+A("pgift","Tặng quà ăn có độc",{c:{},ok:(a,t)=>a!==t&&pgHeld(a).length>0&&(a.inv||[]).some(pgFood),o:(a,t)=>{const e=(a.inv||[]).find(pgFood);return e?pgOdds(a,t,e).o:BAL.odds.lo},x:'thành: <span class="g">nàng trúng độc nếu ăn</span>'/* E-GAIN3b law 3: her gain (explicit green, kit KP12) */,
  why:(a,t)=>{const e=(a.inv||[]).find(pgFood);return e?pgOdds(a,t,e).F:[]},
  f:(a,t)=>{const ix=(a.inv||[]).findIndex(pgFood);const L=pgHeld(a).filter(k=>!PGX[k].preg||(t.preg&&!t.hidden));if(ix<0||!L.length)return"";return pgGive(a,t,ix,L.sort((x,y)=>PGX[y].duc-PGX[x].duc)[0])}});
 try{ACTDOM.pgift="Mưu kế";J78VERB.pgift="tặng {t} quà ăn có độc";const G=RVGRP.find(x=>x[0]==="Sát hại");if(G&&!G[1].includes("pgift"))G[1].push("pgift");if(BANDS[3]&&!BANDS[3][2].includes("pgift"))BANDS[3][2].push("pgift");
