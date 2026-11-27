@@ -7,7 +7,7 @@
 /* maxPx (owner 11/15): body height never exceeds what the 1180 iPad stage gives (.79 × 685 ≈ 542 px), so taller stages (1366, larger iPads) do not make figures wider */
 const KIT_FIG={h:.79,man:1.07,maxPx:542,men:{emperor:1,eunuch:1,official:1,physician:1,man:1},
  kid(a){return typeof a==="number"&&a<BAL.ageMin?Math.min(1,.55+.03*Math.max(1,a)):1},
- fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");const un=/unknown-fig-m\./.test(src||""); /* the unknown-man silhouette is a man too (review/men) */
+ fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");const un=/unknown-fig-[me]\./.test(src||""); /* the unknown-man silhouette is a man too (review/men) */
   return((m&&this.men[m[1]])||un?this.man:1)*this.kid(age)}};
 window.KIT_FIG=KIT_FIG;
 /* KIT 33.8 · STAGE PET (owner 16/11 18:00Z, review/stage-pets) — the ONE "theo hầu" pet of every person on a room / place stage (j59), player and NPCs:
