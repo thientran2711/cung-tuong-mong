@@ -286,6 +286,27 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed5-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed5-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-cautious4",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "cautious",
+   "seed": 1760969598,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "97e55a45 (pin=0, LIVE)"
+   },
+   "ending": "Xuất gia — Xuất gia làm ni cô (time-driven: emperor died year 2)",
+   "age": 21,
+   "buoi": 192,
+   "valid": true,
+   "flag": "last board «hat» left via Quay lại (3/10 moves) just before the time-driven ending; earlier mua boards played 9/10, 7/10",
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-cautious4-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-cautious4-moments.md"
   }
  ],
  "parked": [
