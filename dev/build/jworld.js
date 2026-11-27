@@ -133,7 +133,7 @@ EVD.tuyen={place:w=>typeof qOn==="function"&&qOn()?"kn":"tn",
  card(w){return{t:"Đại tuyển tú nữ",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
  scene(w){const b=B().tuyen;const N=(w.x.n||[]).map(byPid).filter(v=>v&&v.alive);if(!N.length)return null;const t=N[0];
   return{t:"Tú nữ mới vào cung",who:pv(t),h:`<p>Các tú nữ mới quỳ ra mắt. ${nmList(N)} cúi đầu, chưa dám ngẩng lên.</p>`,
-   opts:[{n:"Tặng quà làm quen",fx:{bac:-b.giftBac},x:`thành: ${t.name} quý ngươi +${b.giftAff}`,go:()=>affAdd(t,S,b.giftAff)},
+   opts:[{n:"Tặng quà làm quen",fx:{bac:-b.giftBac},x:`thành: ${t.name} ${pvQuy(t,b.giftAff,"quý ngươi")}`,go:()=>affAdd(t,S,b.giftAff)},
     {n:"Ra oai phủ đầu",fx:{},x:`thành: ${t.name} sợ ngươi · kèm: ${t.name} oán ngươi`,go:()=>relAdd(S,t,b.ambushRel)},
     {n:"Đứng xem rồi về",fx:{},x:"không được mất gì"}]}},
  night(w,p){return false}};
@@ -148,7 +148,7 @@ EVD.hoa={place:w=>{const p=byPid(w.x.who);return p&&p!==S&&typeof palaceOf==="fu
  card(w){const p=byPid(w.x.who);try{if(p&&p!==S&&p.alive&&EVI&&EVI.fire){const pp=EVI.fire.pp()||{};pp.v=p.id;const d=mkP("fire",pp);if(d){log(`${w.cause}. ${w.txt||""}`);return{t:"Hỏa hoạn lớn",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(e){wErr("fire card",e)}
   return{t:"Hỏa hoạn lớn",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,headArt:typeof tsbArt==="function"?tsbArt("ev-hoa-hoan","Hỏa hoạn"):undefined}},
  scene(w){const b=B().hoa;const p=byPid(w.x.who);if(!p||p===S)return null;return{t:"Đám cháy đêm qua",who:pv(p),h:`<p>Cung ${p.name} còn khói. Nàng đứng giữa đống đồ cháy dở.</p>`,
-  opts:[{n:"Mang đồ sang giúp",fx:{bac:-b.helpBac},x:`thành: ${p.name} quý ngươi +${b.helpAff}, Đức +${b.helpDuc}`,go:()=>{affAdd(p,S,b.helpAff);apply({duc:b.helpDuc})}},
+  opts:[{n:"Mang đồ sang giúp",fx:{bac:-b.helpBac},x:`thành: ${p.name} ${pvQuy(p,b.helpAff,"quý ngươi")}, Đức +${b.helpDuc}`,go:()=>{affAdd(p,S,b.helpAff);apply({duc:b.helpDuc})}},
    {n:"Hỏi han vài câu rồi về",fx:{},x:"không được mất gì"}]}},
  night(w,p){return false}};
 /* 5 THIÊN TAI (row 5): j55 flood / drought whose relief FAILED and Kho lúa is low. Reuses j55 (Hộ bộ roll, Kho lúa), j3 mood, the stipend

@@ -89,7 +89,7 @@ function relMSOf(k){if(/^m\d+$/.test(k))return (S.men||[]).find(m=>m.id===k&&m.a
 /* one name per person on the whole screen (strip, pair heading, side label): a man / servant whose NAME she has not learnt is the strip's stranger label "Người lạ" (never "???", VANPHONG §3) */
 function relMSName(o){try{if(S.known&&typeof k61Named==="function"&&!k61Named(o))return "Người lạ"}catch(e){}return ""}
 function relMSMet(o){try{if(S.known&&typeof k61St==="function")return k61St(o)>=1}catch(e){}return true}
-window.relMSMet=relMSMet;
+window.relMSMet=relMSMet;window.relMSOf=relMSOf;/* REVIEW temper-perception B1-R: jtperc tpP resolves a servant / man / minister / nữ quan / child doer through this one resolver */
 function relCourtK(o){for(const c in (S.court||{}))if(S.court[c]===o)return c;return null}
 function relMSFace(o){if(relMan(o))return pMan(o);if(o===S.maid)return pMaid();const c=relCourtK(o);if(c)return c==="ty"?pDoc():{src:courtSrc(c,o),ini:"Hoạn",col:"#8a8aa0"};return pServ(o)}
 function relSrvRank(o){if(o===S.maid)return kitMaidTitle();if(relCourtK(o))return o.n||"";const w=ownerOf(o);const r=o.role==="maid"?"Cung nữ":"Thái giám";

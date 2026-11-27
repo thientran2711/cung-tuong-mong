@@ -70,7 +70,7 @@ function pqClan(p){const Q=BAL.pq.clan;let c="";try{c=tdHouse(p)||""}catch(e){}
 /* treason found: the doer dies */
 function pqDoom(a,who,txt){pqCount("doom_"+who);const cl0=pqClan(a);
  if(a===S){over("Ban chết",`${txt} Tội mưu hại ${PQ_N[who]}: ban lụa trắng. ${cl0}`,`Ban chết vì mưu hại ${PQ_N[who]}`,false);return ""}
- let ev="";try{ev=typeof mortKill==="function"?mortKill(a,`bị ban chết vì mưu hại ${PQ_N[who]}`):(a.alive=false,"")}catch(e){a.alive=false}
+ let ev="";try{ev=typeof mortKill==="function"?mortKill(dieMk(a,"crime"),`bị ban chết vì mưu hại ${PQ_N[who]}`):(a.alive=false,"")}catch(e){a.alive=false}
  try{newsAdd(a,"poison",`${rkName(a)} ${a.name} bị ban chết vì mưu hại ${PQ_N[who]}.`,true)}catch(e){}
  return `${txt} ${ev||`<span class="r">${a.name} bị ban chết.</span> `}${cl0}`}
 /* the act: same function for her and every NPC */

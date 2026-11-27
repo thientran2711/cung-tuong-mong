@@ -218,7 +218,7 @@ function j95bHear(r){const y=RV(r.y);if(!y||!y.alive)return;r.known=1;J95B.stat.
   opts:j95bRumOpts(r,y,x)})}
 /* port 16/11 (owner 11/15 07:15Z): whole Tốn / Được / Mất + odds word on every option */
 function j95bRumOpts(r,y,x){const oc=j95bClearOdds(r),ot=oddsCl(Math.min(35+eyes(S)*8+(S.tamco||0)/4,90));
- return[{n:`Sang gặp ${y.name} giải bày`,fx:{},x:`${word(oc)} · tốn: ${BAL.m95b.k} khắc · thành: hết hiểu lầm, ${y.name} bớt oán ngươi · hỏng: ${y.name} chưa tin, oán ngươi ${balSg(BAL.eff.j95b.j95bClear_3)} · (chuyện có thật thì khó giải, chỉ nguôi một nửa)`,go:()=>j95bClear(r.u,"card")},
+ return[{n:`Sang gặp ${y.name} giải bày`,fx:{},x:`${word(oc)} · tốn: ${BAL.m95b.k} khắc · thành: hết hiểu lầm, ${y.name} bớt oán ngươi · hỏng: ${y.name} chưa tin, ${pvOan(y,BAL.eff.j95b.j95bClear_3,"oán ngươi")} · (chuyện có thật thì khó giải, chỉ nguôi một nửa)`,go:()=>j95bClear(r.u,"card")},
   {n:"Cho người tra xem ai tung tin",fx:{...BAL.m95b.trace},x:`${word(ot)} · tốn: ${BAL.m95b.k} khắc · Bạc ${BAL.m95b.trace.bac} · thành: biết kẻ tung tin, chứng cứ về kẻ ấy ${balSg(BAL.eff.j95b.evJ95bTrace)} · giải bày về sau dễ hơn · hỏng: không lần ra ai`,go:()=>j95bTrace(r.u)},
   {n:"Mặc kệ",fx:{suc:BAL.cv.rest},x:`giữ sức · kèm: ${y.name} vẫn tin lời đồn, sẽ tìm dịp ra tay với ngươi`,go:()=>log(`Ngươi bỏ ngoài tai lời đồn về ${y.name}.`)}]}
 function j95bRumOf(y){const z=j95bZ();for(let i=z.rum.length-1;i>=0;i--){const r=z.rum[i];if(r.y===y.id&&!r.cleared&&wk()-r.w<=J95B.RUMW+4)return r}return null}
