@@ -512,7 +512,7 @@ window.KIT_CREST={ar:{"consort-0":.329,"consort-1":.337,"consort-2":.538,"consor
  key:function(frame){const m=/frame-([a-z0-9-]+)\.webp/.exec(frame||"");if(!m)return null;let k=m[1];if(/^eunuch-[012]$/.test(k))k="eunuch";return this.ar[k]?k:null},
  html:function(frame){const k=this.key(frame);if(!k)return"";const w=this.w[k]||this.W,h=w*this.ar[k],by=this.bar[k]!=null?this.bar[k]:this.bar[k.replace(/-\d$/,"")]!=null?this.bar[k.replace(/-\d$/,"")]:this.BAR,top=by-this.base[k]*h;
   return `<img class="kcrest" src="img/kit/crest-${k}.webp" alt="" aria-hidden="true" style="--cl:${((550-w)/2/550*100).toFixed(3)}%;--ct:${(top/1037*100).toFixed(3)}%;--cw:${(w/550*100).toFixed(3)}%;--ch:${(h/1037*100).toFixed(3)}%" onerror="this.remove()">`}};
-(function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{const m=/<img class="kfr" src="([^"]+)"/.exec(h);if(m&&!/kcrest/.test(h)){const c=KIT_CREST.html(m[1]);if(c)h=h.replace(/(<img class="kfr"[^>]*>)/,`$1${c}`)}}catch(e){}return h}})();
+(function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{const m=/<img class="kfr" src="([^"]+)"/.exec(h);if(m&&!/kcrest/.test(h)&&!(typeof kitNoCrest==="function"&&kitNoCrest(f))){const c=KIT_CREST.html(m[1]);if(c)h=h.replace(/(<img class="kfr"[^>]*>)/,`$1${c}`)}}catch(e){}return h}})();
 /* the small frame = the same pcPort cell, smaller */
 (function(){const m0=mdH;mdH=function(p,cls){const h0=m0.apply(this,arguments);try{if(!p||!/class="md[^"]*\bkit\b/.test(h0))return h0;const big=pcPort(p,p.col);const a=big.indexOf('<span class="kin">');if(a<0)return h0;
   let depth=0,i=a,end=-1;const re=/<\/?span\b[^>]*>/g;re.lastIndex=a;let mm;while((mm=re.exec(big))){if(mm[0][1]==="/"){depth--;if(depth===0){end=mm.index+mm[0].length;break}}else depth++}if(end<0)return h0;
@@ -1207,8 +1207,25 @@ const KIT_PFO={gap:10,dflt:762,band:{cold:762,"consort-0":749,"consort-1":749,"c
   const h=kin.offsetHeight||pcp.offsetHeight;if(!h)return;const k=h/1037,top=kin===pcp?0:kin.offsetTop;
   const want=top+this.of(pcp)*k+this.gap;let mb=Math.round(want-pcp.offsetHeight);const set=v=>{if(pcp.__kpfoMb!==v){pcp.__kpfoMb=v;pcp.style.setProperty("margin-bottom",v+"px","important")}};set(mb);pcp.classList.add("kpfo");
   /* the column's own row-gap and empty rows also push: correct once on the first visible row after the frame, so its top is EXACTLY band + gap */
-  const pt=pcp.getBoundingClientRect().top;let first=null;for(const c of L.children){if(c===pcp||!c.offsetHeight||c.offsetTop<pcp.offsetTop+pcp.offsetHeight*.5)continue;const t=c.getBoundingClientRect().top;if(first==null||t<first)first=t}
-  if(first!=null){const d=Math.round(first-pt-want);if(d)set(mb-d)}}catch(e){}}};
+  const pt=pcp.getBoundingClientRect().top;let first=null;for(const c of L.children){if(c===pcp||!c.offsetHeight||c.offsetTop<pcp.offsetTop+pcp.offsetHeight*.5)continue;const t=c.getBoundingClientRect().top-(c.classList.contains("kplscr")?parseFloat(c.style.marginTop)||0:0)/* its own clear-tassel margin (below) is not a column gap */;if(first==null||t<first)first=t}
+  if(first!=null){const d=Math.round(first-pt-want);if(d)set(mb-d)}
+  /* KK42 (MAIN 158 LOOK nit «Hoa▪tai», law 11): a card's SCROLLING text area (.kplscr, KIT §6.4) starts UNDER the pendant + tassel (kitPcClearTassel rule) in EVERY
+     person card — it only ran for cards with a fixed height (--kpcmax), so the identity card's item grid lay under her frame's tassel */
+  KIT_PFO.clear(pc)}catch(e){}},
+ /* THE clear-tassel rule (one part; jk4 kitPcClearTassel calls it; KK42, MAIN 158 LOOK 26/11, law 10 «content fits without scrolling where it can»):
+    (1) SIDE: a person card whose right column (.pcr) has room under its own content takes the item grid (.kwear) there (.kpside), so it shows whole at scroll 0;
+    (2) the text area (.kplscr) left under the frame starts so that nothing READS over the tassel: a tile grid first → the tassel tip hides behind the first
+        tile row's PICTURE (never its label); text rows first → the text starts 4 px under the tip (KIT_FRW opaque bottom). */
+ clear:function(pc){try{const L=pc&&pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp"),sc=L&&L.querySelector(":scope > .kplscr");if(!pcp||!sc)return;
+  KIT_PFO.side(pc,sc);
+  const kin=pcp.querySelector(".kin")||pcp;const k=(kin.offsetHeight||pcp.offsetHeight)/1037;const im=pcp.querySelector(".kin img.kfr");
+  const F=im&&typeof kitFrw==="function"?kitFrw(im.getAttribute("src")):null;const tip=kin.getBoundingClientRect().top+(F?F[1][2]:1037)*k;
+  const m0=parseFloat(sc.style.marginTop)||0;const top0=sc.getBoundingClientRect().top-m0;let want=tip+4;
+  const first=[...sc.children].find(c=>c.offsetHeight);const pic=first&&first.matches(".kwear")&&first.querySelector(".kitem>.kitb");if(pic)want=tip-Math.max(0,pic.offsetHeight-8);
+  sc.style.marginTop=Math.max(0,Math.round(want-top0))+"px"}catch(e){}},
+ side:function(pc,sc){try{if(!pc.classList.contains("kpwide"))return;const R=pc.querySelector(":scope > .pcr");const W=sc.querySelector(":scope > .kwear");if(!R||!W||R.querySelector(":scope > .kpside"))return;
+  const room=pc.getBoundingClientRect().bottom-R.getBoundingClientRect().bottom-2/* .kpside margin-top */;if(room<60)return;const box=document.createElement("div");box.className="kpside";R.appendChild(box);box.appendChild(W);
+  if(box.offsetHeight>room){sc.prepend(W);box.remove()}}catch(e){}}};
 window.KIT_PFO=KIT_PFO;
 /* the ONE person-info component: every person card / sheet on every device goes through kitPcFix → kitPersonChips */
 window.kitPersonChips=kitPcGrid;
@@ -1226,6 +1243,7 @@ html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;marg
 /* §4.1c frame column: the frame is centred on the column (overflows both sides equally); the rows after it sit ABOVE the pendant + tassel in the NORMAL kit text (owner 21/11 ~19:25Z: no halo / glow / outline) */
 html body .pc[data-k2]>.pcl>.pcp.kit.kit.kpfo,html body .pc>.pcl>.pcp.kit.kit.kpfo{align-self:center!important;justify-self:center!important;margin-left:0!important;margin-right:0!important;flex-shrink:0}/* auto side margins would pin an overflowing frame to the left */
 .pc>.pcl>.pcp.kit.kpfo~:is(.pcrows,.kpkey,.kpgrid,.kpfacts,.kwear){position:relative;z-index:2}
+.pc.kpwide>.pcr>.kpside{margin-top:2px}.pc.kpwide>.pcr>.kpside>.kwear{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-start;width:auto;margin:0}.pc.kpwide>.pcr>.kpside>.kwear>.kitem{width:calc(var(--isz) + 10px)}.pc.kpwide>.pcr>.kpside>.kwear>.kitem>.kitb{width:var(--isz);align-self:center}.pc.kpwide>.pcr>.kpside>.kwear>.kwearl{flex:0 1 auto;width:auto;max-width:100%;align-self:center;margin:0}/* the wear status («Xa xỉ 48») takes the free end of the last row *//* KK42: the item grid in the right column when it fits there (KIT_PFO.side) */
 .pc.kpwide[data-k2]>.pcl>.kwear,.pc.kpwide[data-k2]>.pcl>.kpgrid,.pc.kpwide[data-k2]>.pcl>.kpfacts{order:2!important}
 .pc.kpwide[data-k2]>.pcl>.kwear{width:auto}
 .pc.kpnar[data-k2]>.pcl>.kpkey{grid-area:key;margin:6px 0 0;flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 12px}
