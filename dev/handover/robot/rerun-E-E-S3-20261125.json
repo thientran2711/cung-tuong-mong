@@ -74455,7 +74455,8 @@
    },
    "t": {
     "total": 13259514
-   }
+   },
+   "verdict": "VALID (flag: mixed build — first ~50 buổi on older harness f39770cd/1ffae8bb, same life continued; Foreman E child5 ruling 27/11 19:24Z)"
   },
   {
    "job": {
@@ -285238,7 +285239,7 @@
    "t": {
     "total": 13835950
    },
-   "verdict": "VALID (flag: mixed build — 5 builds across 8 resumes; Foreman E ruling)"
+   "verdict": "VALID (flag: mixed build — first ~50 buổi on older harness f39770cd/1ffae8bb, same life continued; Foreman E child5 ruling 27/11 19:24Z)"
   }
  ]
 }
