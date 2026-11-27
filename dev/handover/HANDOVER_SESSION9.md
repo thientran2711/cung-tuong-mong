@@ -487,3 +487,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 00:35Z owner 00:42Z rec (167 chat, OD): card = info + «Tìm gặp» + «Ghé cung»; acts place-bound → ACT-MOVE + KK51-P + C told.
 - 00:38Z OWNER 00:46Z (167 chat): 3-tier choice law → law 2 rewritten in place in START_CORE (law 14); Foreman E ORDER tier audit (STEP 1); reviewers told; kit tier label → KK51 (after audit).
 - 00:41Z ACT-MOVE PLAN READY 1437d979 (act-move-plan.md) → MAIN OK with 00:42Z card rule (Tìm gặp / Ghé cung; palace-bound vs person-bound), Q1 no new strip, Q2 rec. TITLE-BAL got remaining title-sys fails. Tier-audit add (00:50Z verbatim) in FOREMAN_E_STATUS.
+- 00:43Z ACT-MOVE rolled (design in review/act-move ab585c98 act-move.md) → archived; ACT-MOVE-2 session_01Rc5AsKcua4c5HAaG5qQueY (opus) builds. KK51-P told hook. RV-165: PASS result-sieve-r2 575917ae (rv165 5ac24fef) + map-r9 073d48b3; HOLD kit-plaque-confirm (6 conflicts vs LIVE → KK51 remerge).
