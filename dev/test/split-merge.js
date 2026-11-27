@@ -43,6 +43,12 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   try{const b0=S.bac=Math.max(S.bac,100);card.o[0].go&&card.o[0].go();ok(!T.bm,`A3 paying once ends it (no monthly repeat)`)}catch(e){ok(0,"A3 pay go threw "+e.message)}
   /* A4: the maid's blackmail card has no bribe road, for her and an NPC maid */
   const ids=cnvBlackOpts(S,A,null).map(o=>o.id);ok(!ids.includes("pay")&&ids.length===2,`A4 maid blackmail card: ${ids.join(", ")}`);
+  /* OD 27/11 ~04:08Z: her maid / servant killed → ONE notice to her at once (who, how found; no killer name), real deed on her house, new maid; NPC mistress = same deed */
+  {const K=L[2]||A;const m0=S.maid;const mid=chMaidId("mm:me");Q.length=0;const r=covWitDo(K,mid,"nang",true);const N=Q.find(x=>x&&x.t==="Tin dữ");const h=N?N.h.replace(/<[^>]+>/g," "):"";
+   const dd=(K.wrongs||[]).slice(-1)[0]||{};
+   ok(N&&h.includes(m0.name)&&/cung nữ thân cận/.test(h)&&!h.includes(K.name)&&S.maid!==m0&&h.includes(S.maid.name)&&dd.k==="wkill"&&dd.t===key(S),`maid killed: «${h.replace(/\s+/g," ").trim().slice(0,170)}» · deed ${dd.k}→${dd.t}`);
+   const sv=(S.staff||[]).find(x=>x&&!x.out);if(sv){Q.length=0;covWitDo(K,ledgerId(sv),"nang",true);const N2=Q.find(x=>x&&x.t==="Tin dữ");ok(N2&&/người hầu trong cung/.test(N2.h)&&!N2.h.includes(K.name),`servant killed: «${N2?N2.h.replace(/<[^>]+>/g," ").replace(/\s+/g," ").trim().slice(0,120):"no notice"}»`)}
+   const V=L[3]||C;const vm=V.maid||(V.maid=maidMk(V));const vid=chMaidId("mm:v"+V.id);Q.length=0;if(vid){covWitDo(K===V?A:K,vid,"nang",true);const dv=((K===V?A:K).wrongs||[]).slice(-1)[0]||{};ok(!Q.some(x=>x&&x.t==="Tin dữ")&&V.maid!==vm&&dv.t===key(V),`NPC mistress: her maid replaced, the deed is on her house (${dv.t}), no card to the player`)}}
   return out});
  let f=0;for(const [c,m] of R){console.log((c?"PASS ":"FAIL ")+m);if(!c)f++}
  if(errs.length){console.log("page errors: "+errs.slice(0,5).join(" | "));f++}
