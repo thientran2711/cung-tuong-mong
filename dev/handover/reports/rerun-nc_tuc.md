@@ -28,3 +28,9 @@ Popup «Bổng lộc tháng mười» over ending card; JS error `f.rk.split is 
 Shots are container-local (not in git).
 
 Harness from 03:14Z 26/11: rt2 = review/robot-realtap 54fa01129 (incl. bfa73a6e) + F10 hang watchdog hooks (RT_MEM/RT_LIGHT/RT_HANGKILL).
+
+## FINAL STATUS 2026-11-27 ~22:20Z (seat A3 closing report)
+- Tally: 13/14 lives finished and VALID (real ending, no bot-chosen exit); digest robot/review digest in reports/robot-review-digest-nc_tuc.md (no per-area scores: no live moment log).
+- scholar-2 (sens, ipad, seed 3059023128) is NOT finished: still alive at buổi ~6390 (about year 21), no game-imposed ending yet, no cap per brief. Not counted as a valid life; no review/result file exists for it. Checkpoint out-tuc/rerun-nc_tuc-scholar-2.ckpt.json is container-local (not in git); the run dies if the seat is archived.
+- Stability: only two renderer hangs (speed-2 b65, scholar-2 b2635), both on pre-F10 builds; none since the 21:14Z 26/11 reload in ~25 h / 4000+ buổi of scholar-2. No new play-stopper.
+- Note: one 4 h gap (07:20-11:10Z 27/11) was my fault (untracked relaunch died); no game cause.
