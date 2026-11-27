@@ -1148,6 +1148,11 @@ identity, she never filters** — `kitFaceScope()` (j88, the one rule for solo +
 faces m01–m52 only; every other life → `facePool("all")` = the whole pool of 84 painted women of «90 nhân vật nữ» (every id has rank-ladder art).
 (`filters` / `onFilter` stay in the part for a future non-face picker; no face picker passes them.) j86 (face pick on the identity card) is the only user; the standing figure follows.
 
+## 24b. BUỔI VEIL TOKEN · `KIT_BVEIL` / `--kveil` (owner 26/11 ~18:45Z «mọi màn hình mờ theo buổi: sáng mờ sáng, trưa mờ trưa, chiều mờ chiều, tối như cũ») — `dev/build/jkitsel.js`
+- ONE token family: `KIT_BVEIL` {0 sáng: pale warm-gold/rose morning mist · 1 trưa: bright warm-white haze · 2 chiều: amber/orange sunset haze}; CSS var `--kveil` is set on `body[data-buoi=N]` (set by j12 on every stage render and by the render hook in jkitsel); all 4 buổi set it (tối `rgba(42,26,18,.32)`, lighter than every old layer (.33–.80); sáng .34 / trưa .30 / chiều .34, owner 26/11 20:05Z «đang đục quá»), ONE alpha per buổi for every layer; the `var(--kveil,<dark>)` fallback only shows before `body[data-buoi]` exists.
+- Every dimmed backdrop reads `background:var(--kveil,<its own dark colour>)`: `#modal` (every dialog, visitor «giá đáo» scene, event cards over the stage, `.modal.kload` loading), `.kscn-veil` (kit scenes, also `.kscn-night`), `.kidfl`, `#kpodov`, `#krkov`, `#kpzoom`, `.ktut-dim`. NOT included: `#kdaytc` (the day curtain, its words sit directly on the dark ground). A new veil MUST use the same var; no per-screen colour.
+- Scan: `node dev/test/veil-buoi-scan.js <url> WxH shotDir` (computed backdrop of every layer × 4 buổi; tối must equal the old colour, the other three must differ; stills of dialog + kit scene).
+
 ## 24. VEIL OVERLAY (kit 2, for j70 scars)
 `scarOf(p).veil` → the veil is drawn over the face in every tall portrait (`.kin > img.kveil`, over the portrait image box), every small frame
 (`.kmini > img.kveil`) and on the stage figure (`.tok > img.kveilf`, at the head of the figure's opaque box from j59: 4–15 % of body height,
