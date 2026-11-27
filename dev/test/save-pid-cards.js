@@ -31,14 +31,14 @@ const H=`window.__spc={
  /* TEST SETUP ONLY: a synthetic pp (syn) is built past the j95b actor gate the way a LOAD builds it (J95C.loading: «they passed the gate when made») */
  mk(id,pp,syn){if(!syn||typeof J95C==='undefined')return mkP(id,pp);const l=J95C.loading;J95C.loading=1;try{return mkP(id,pp)}finally{J95C.loading=l}},
  /* a fresh buổi with nothing open: no card, nothing held, the event pacing (j68) as at the start of a quiet buổi */
- clear(){Q.length=0;try{EVHOLD=[];EVLAST=null}catch(e){}try{const e=e68();e.sch=null}catch(e){}const M=document.getElementById('modal');if(M)M.hidden=true;S.buoi=1},
+ clear(){Q.length=0;try{EVHOLD=[];EVLAST=null}catch(e){}try{EVCW=[];if(S)S.evc=null}catch(e){}/* jevc daily big-event cap (LIVE pace-all): a fresh day too */try{const e=e68();e.sch=null}catch(e){}const M=document.getElementById('modal');if(M)M.hidden=true;S.buoi=1},
  /* the game's own path: the maker builds the card, pushDil queues it, showModal shows it (j68 evGate runs there) */
  push(L){const r=[];for(const k of L){const d=this.mk(k.id,k.pp,k.syn);if(!d){r.push({id:k.id,miss:1});continue}const n0=Q.length;pushDil(d,undefined);if(Q.length===n0){r.push({id:k.id,nopush:1});continue}r.push({id:k.id})}
   try{showModal()}catch(e){}try{render()}catch(e){}try{save()}catch(e){}return r},
  answerFirst(){const m=Q[0];if(!m||!m.pid)return null;const s=this.sig(m),id=m.pid;const j=m.opts.findIndex(o=>!o.off&&!o.dis&&!o.lk);try{chooseM(j<0?0:j)}catch(e){}try{render()}catch(e){}try{save()}catch(e){}return {id,s}},
  /* where every pid card is: in the queue (q: index) or held for a later buổi (hold) */
- where(){const o=[];Q.forEach((m,i)=>{if(m&&m.pid)o.push({id:m.pid,at:'q'+i,sig:this.sig(m)})});try{EVHOLD.forEach(h=>{if(h.m&&h.m.pid)o.push({id:h.m.pid,at:'hold',sig:this.sig(h.m)})})}catch(e){}return o},
- saved(){try{const raw=window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1');const d=JSON.parse(raw);return (d.P||[]).filter(e=>e&&e.pid).map(e=>e.pid).concat((d.evh||[]).map(h=>h.e&&h.e.pid))}catch(e){return ['err:'+e.message]}}
+ where(){const o=[];Q.forEach((m,i)=>{if(m&&m.pid)o.push({id:m.pid,at:'q'+i,sig:this.sig(m)})});try{EVHOLD.forEach(h=>{if(h.m&&h.m.pid)o.push({id:h.m.pid,at:'hold',sig:this.sig(h.m)})})}catch(e){}try{EVCW.forEach(w=>{if(w.m&&w.m.pid)o.push({id:w.m.pid,at:'hold',sig:this.sig(w.m)})})}catch(e){}/* jevc: held for a later day (sổ W) */return o},
+ saved(){try{const raw=window.slotGet?slotGet('hclh-save-v2-1'):localStorage.getItem('hclh-save-v2-1');const d=JSON.parse(raw);return (d.P||[]).filter(e=>e&&e.pid).map(e=>e.pid).concat((d.evh||[]).map(h=>h.e&&h.e.pid)).concat((d.W||[]).map(w=>w.e&&w.e.pid))}catch(e){return ['err:'+e.message]}}
 };`;
 async function run(b,dev,url){const ctx=await D.newDeviceContext(b,dev,{serviceWorkers:'block'});await ctx.addInitScript(seedInit,1);
  await ctx.route(/\.(webp|png|jpg|jpeg|mp3|ogg|m4a|mp4|webm)(\?|$)/,r=>r.abort());const p=await ctx.newPage();p.setDefaultTimeout(180000);const pe=[];p.on('pageerror',e=>pe.push(e.message.slice(0,160)));
