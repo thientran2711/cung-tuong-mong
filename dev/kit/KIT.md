@@ -1624,7 +1624,10 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   Doable tiles first, then the dialog's own order. Horizontal rows that wrap (the Tư trang look).
 - Tap a tile → selected (31.13: glow + ×1.06, the rest at .75 opacity; `aria-checked`), the first doable tile is preselected.
   Under the grid `.kipd`: that option's OWN kit card (display copy of its `.opt`: name, odds word, Tốn / Được / Mất / Kèm or the reason
-  `.kwhy`) + ONE confirm button `.kipgo` (kit `.kbtn`, verb per dialog: Tặng / Dâng / Cài vào rương), greyed when the option is locked.
+  `.kwhy`); then ONE confirm button `.kipgo` (kit `.kbtn`, verb per dialog: Tặng / Dâng / Cài vào rương), greyed when the option is locked.
+  K-PICK-GO-REACH (KK61, 27/11): `.kipgo` is the LAST child of the whole picker `.kipw` (after `.kipd` and the pager), `position:sticky; bottom:0`,
+  so it sticks to the bottom edge of the dialog's scroller (#mb) whenever any part of the picker is in view — reachable with no scroll on every
+  device, every picker of the family; at the end of the scroll it rests in its own slot under the card (nothing stays covered). Never inside `.kipd`.
   Confirm clicks the real option button, so chooseM and every wrapper (cost, j25 visit ticket, §64 item-event hooks) run unchanged.
   Above the card: the KIT §70 item detail strip (`kitItemDetail({e},{cls:"kidet-strip",noLux:true})`, jitd). Close = the kit ✕ (32.10), no Thôi row.
 - Phone landscape (height ≤ 500): grid and detail side by side.
@@ -1632,6 +1635,8 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   Hoàng thượng / Thái hậu), plantpick (Cài đồ vào rương). Scan: `node dev/test/gift-pick-scan.js` (every option list built from S.inv).
 - Gift moment: a confirmed gift (giveTo by her) plays §68 `kitFxGiftCarry` after the state is applied.
 - Test: `node dev/test/gift-pick.js <build url> <outdir> [WxH@dpr,…] [shots]`. Kit page sample "§28.13i".
+  Confirm reach (K-PICK-GO-REACH): `node dev/test/kit-pick-go.js --save <y05 fixture>` — grid face of Biếu quà / Tặng quà / Dâng quà (Hoàng thượng,
+  Thái hậu) / Cài đồ, Fold 755x1000 + iPad 1180x820, real taps: tiles chosen, confirm 0 px below the scroller and it moves the dialog on.
 ### 28.13c kitEquipSlots — "Đang mang" EQUIPMENT SLOTS (owner 11/15, RPG-style) — `dev/build/jinv.js` — KIT READY
 `kitEquipSlots({key, title, slots:[{k,label,item:{src,name,grade,tip}|null,ghost,mini}], sum, onPick:fn(slot)})` → `.keq` under the bag:
 header = kit section title + totals (Sắc/Danh chips · "Xa xỉ <total>" neutral · "N món vượt phẩm: dễ bị tố" law notice; chips wrap, never cut).
@@ -5092,6 +5097,7 @@ Part of the ONE new animation kit (vòng người · vòng nhóm · vòng bảo 
 - TEXT TILES (`it.tile`, kit title plate): law 10 one size on every device — plate text `KIT_RINGI.plateRem` (1.6 rem), depth shrinks a plate only by `plateDepth` (.4) of the picture curve, the ring narrows by the widest plate so every side plate stays inside the stage.
 - RING: `KRING_MATH.slot/front/short` (§104.1, the ONE ring maths in jkring.js; numbers in BAL.kring), `KIT_RINGI.seats` = 12 seat spacing; more items = a scrolling ring (only seats near the front show). K-RING-ALL (law 6c REAL OBJECTS, KK59): NO item cap — `kriItems` puts EVERY item the caller gives on the ring (the old `KIT_RINGI.maxN` 24 cut is deleted; the kit sample bag shows the whole bag); test `dev/test/kit-ring-all.js` (10/24/40/120 items → all tiles, spin to the last = front; bag 40 → 40). FRONT item bright (opacity 1, grade chip, name + grade + use under the ring); the rest = the 3 tiers of `KRING_MATH.tier` (size + dim, §104.1).
 - SPIN: swipe with inertia + snap · ‹ › · arrow keys · tap a side item = it turns to the front.
+- NAME + HINT (K-RING-SUBLINE, KK61): under the ring the front item's name plate + sub line (`.kri-name`: grade chip · what it is · its use, wraps freely, never cut) and UNDER it the hint «Vuốt để xoay · chạm món sáng để xem» (`.kri-hint`) placed by the name block's REAL height (min +58 px, +6 px gap) each time the front changes — never overlapping on any device. Test: `dev/test/kit-pick-go.js --only ring_bieuqua,ring_tangqua,ring_dangqua` (every front item, subline = 0).
 - FOCUS: tap the bright item → it zooms big to the LEFT (warm glow), the ring folds down; the kit pane (`.dlg.kpanel.kri-pane`) DROPS on the RIGHT: kit info (kinlDetail / kitItemDetail / the caller's spec) + the caller's buttons (+ −/+ when an act has q.max>1) + «‹ Vòng».
 - RESULT IN PLACE: the act's result = kit result rows (seal THÀNH / BẠI / KẾT QUẢ; Được / Mất / Ghi chú; an empty row shows «không», kept) + «Xem món khác». `kriDiffRows` = her stats (j1 NAMES), person → ta thiện cảm, items in/out of Tư trang. An act that opens its own dialog closes the ring.
 - Motion: transform + opacity only (no animated filter / layout); reduced motion / Gọn = no tweening; bots keep the old UI. Scene layer = kitScene §93 (bg = the stage she stands on).
