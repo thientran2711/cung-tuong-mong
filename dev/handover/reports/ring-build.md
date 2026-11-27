@@ -238,3 +238,4 @@ PRIORITY #1 CHECK: OD 26/11 ring rows + RB-7 handover (read) | main 17f23656 non
 - kit-ring-oldleft F 0 (gift flake, re-run) + I 0 · kit-pick ALL PASS · kit-plaque-confirm PASS · kit-plaque-post PASS.
 ## RB-8 round 2: merged KK53 review/kk53 9771ffb9 (thẻ lụa + one «Chọn»); index.html/sw.js theirs + rebuild. Gates: ring-overlap F+I 0/0/0 errs 0, oldleft 0/0, kit-pick / confirm / post see message.
 ## RB-8 round 3: merged KK53 a7ee4459 (chip inside plaque; supersedes 9771ffb9/4e333222). Gates: ring-overlap F+I 0/0/0 errs 0, oldleft 0/0 (I flake re-run), kit-pick ALL PASS, confirm PASS, post PASS. e021408e = pre-kk53 fallback.
+## RB-8 verdict: RV-165 PASS ring-build bb6bea6d (landed as review/ring-build-rv165 02b19b2a, to LC27). Info: oldleft flakes when run parallel with another suite (0 quiet x3) - run the gate quiet; button-crawl --fast taps 1/80 (stage/ring UI not crawlable). Nothing to fix. RB-8 done.
