@@ -51,9 +51,14 @@ let fails=0;const ok=(c,m)=>{if(!c){fails++;console.log('FAIL',m)}else console.l
  for(const r of rows){const bad=r.items.filter(t=>/\d+\s*→\s*\d+|\(\+\d+\)|\(\d+\s*→/.test(t)/* KIT §7.1 (OD 26/11 ~03:55Z): «+8 (42)» = the new TOTAL in brackets is right; an arrow or a repeated «(+8)» change is not */||t.toLowerCase().includes(r.title.toLowerCase().split(':')[0])||/chưa quen/.test(t));
   ok(r.items.length>0&&bad.length===0,`result popup «${r.title}» (${r.ok?'THÀNH':'BẠI'}): ${r.items.length} rows all short, no a→b / (±N) / title copy [${r.items.join(' | ').slice(0,260)}]${bad.length?' BAD: '+bad.join(' | '):''}`)}
  /* the stamp sits on the card edge, never on words */
- const stamp=await p.evaluate(async()=>{window.__bot=0;Q.length=0;const bf=rsnap();affAdd(rivals.filter(r=>!r.queen)[0],S,8);resultShow("Vá lại quạt tròn bị mối cắn: Cắt viền",bf,true);await new Promise(r=>setTimeout(r,1500));const t=document.getElementById('rtoast');const s=t&&t.querySelector('.kmseal');if(!s)return{none:1};const r=s.getBoundingClientRect();
-  const hit=[...t.querySelectorAll('.kan,.ksen,.kitem,.krl,.seal,.kat')].filter(e=>{const q=e.getBoundingClientRect();return q.width&&q.height&&!(q.right<=r.left+4||q.left>=r.right-4||q.bottom<=r.top+4||q.top>=r.bottom-4)}).map(e=>e.className);return{hit}});
- ok(stamp.none||stamp.hit.length===0,'result stamp covers no text ('+JSON.stringify(stamp)+')');
+ const stamp=await p.evaluate(async()=>{window.__bot=0;Q.length=0;const bf=rsnap();affAdd(rivals.filter(r=>!r.queen)[0],S,8);resultShow("Vá lại quạt tròn bị mối cắn: Cắt viền",bf,true);await new Promise(r=>setTimeout(r,300));const t=document.getElementById('rtoast');const s=t&&t.querySelector('.kmseal');if(!s)return{none:1};
+  /* measure the stamp AT REST (KK51-P2 27/11): the picture loaded (CDN) and every finite animation of the card done — the kmStamp slam starts at scale 2.6 and the card thumps,
+     so a fixed 1.5 s wait measured a half-scaled stamp when the picture came late (fail) or an unloaded 12 px stamp (false pass) */
+  for(let n=0;n<100&&!(s.complete&&s.naturalWidth);n++)await new Promise(r=>setTimeout(r,100));
+  await Promise.all([t,...t.querySelectorAll('*')].flatMap(e=>e.getAnimations()).filter(a=>isFinite(a.effect&&a.effect.getComputedTiming().endTime)).map(a=>a.finished.catch(()=>0)));await new Promise(r=>setTimeout(r,100));
+  const r=s.getBoundingClientRect();
+  const hit=[...t.querySelectorAll('.kan,.ksen,.kitem,.krl,.seal,.kat')].filter(e=>{const q=e.getBoundingClientRect();return q.width&&q.height&&!(q.right<=r.left+4||q.left>=r.right-4||q.bottom<=r.top+4||q.top>=r.bottom-4)}).map(e=>e.className);return{hit,loaded:s.naturalWidth>0,seal:[r.left,r.top,r.width,r.height].map(Math.round)}});
+ ok(!stamp.none&&stamp.loaded&&stamp.hit.length===0,'result stamp (loaded, at rest) covers no text ('+JSON.stringify(stamp)+')');
  const lines=await p.evaluate(()=>{const out=[];const V=rivals.slice(0,4);const nets=Object.keys(BAL.net.T).slice(0,3);window.trKnown=()=>[nets[0]];window.trongKnown=()=>true;
   for(const v of V)for(const known of [0,1])for(const st of ["aff","oan"])for(const d of [12,-6]){const sv=typeof k61Named==="function"?k61Named:null;try{if(sv)window.k61Named=()=>!!known;const F=[{k:"net",t:nets[0],s:1},{k:"trong",v:"Lễ",s:1,j:v}];out.push(whyText({who:v,stat:st,d,F},d))}finally{if(sv)window.k61Named=sv}}
   out.push(whyText({who:"th",stat:"th",d:4,F:[{k:"mood",t:"lòng ngươi đang vui",s:1}]},4));out.push(whyText({who:"emp",stat:"sung",d:5,F:[{k:"talk",t:"đêm vui"}]},5));
