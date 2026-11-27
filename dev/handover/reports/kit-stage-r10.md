@@ -29,3 +29,10 @@ kit-std-scan: NOT RUN — dev/test/kit-std-scan.js is not on any fetchable branc
 ## Left
 RV-166 session_01Rc5AsHmVSRQfKM9T3eHcAb after MAIN LOOK. Kit keeper KK56 session_01Rc5AsJ6UhcqbDDXVR7k7Bq: Mất chip of a hint-only card keeps the words «hỏng thì …» (hint text); if the owner wants the label «Bại» on rolled cards instead, that is a kit-keeper wording call.
 ~100% xong (this item) / ~ playable: Bàn bài card reads right.
+
+## UPDATE 05:5xZ (OD 27/11 ~05:27Z, owner approved 05:29Z «Ok làm vậy đi»; MAIN 171/172)
+- Labels: a card WITH odds reads «Thành:» (green) then its own line «Bại:» (red); a SURE card «Được:» / «Mất:» (kaRows words, as the act cards). The «hỏng thì …» words are cut from the value (the label says it): never inside a row. jopic kitOptFinal (gain slot kr-thanh + «Thành», loss row kr-bai + «Bại» when the card has .kodds); jkhand: hint row hide, label colour, empty-row cleanup know kr-thanh / kr-bai.
+- Scan kit-hand-split.js now also fails an odds card labelled Được/Mất and a sure card labelled Thành/Bại: 0 / 33 cards.
+- KIT-STD-AUDIT §3 items (kit-std-scan review/kit-std-audit a2934493, SUBS=0 REPORT_ONLY=1): scene hand 5 → 0 findings; tabs: X08 «Tốn … line-clamp cut / Bạc 10 outside card» (Hành sự fold+iPad, Tài nghệ iPad) gone. Cause: kitHandTonL guessed the Tốn lines from text length, capped at 2, while every stat item is one unbreakable unit; now simulated (units wrap whole) with a measured +1 line (max 4) when still cut. The enlarged-card Được squeezed to 25 px = the display:inline on `.kdup` rows (fixed above, display:contents).
+- Not mine, still open in the same scan (tabs): court X08 ellipsis «Trong cung: Chương 1…», X09/X12 on div.pcb (Hậu cung person cards) — KK56 / MAIN.
+- Media re-recorded with the new labels: same CDN folder (…/kit-stage-r10/), both devices looked at (-03 = Thành green / Bại red own lines).
