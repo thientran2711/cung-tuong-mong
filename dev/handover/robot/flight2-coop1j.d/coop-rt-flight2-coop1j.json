@@ -1,0 +1,699 @@
+{
+ "run": {
+  "tag": "flight2-coop1j",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/",
+  "harness": "realtap",
+  "args": {
+   "host": "fold",
+   "guest": "ipad",
+   "kiep": "1",
+   "seed": "7101",
+   "tag": "flight2-coop1j",
+   "pin": "1"
+  },
+  "at": "2026-11-27T15:51:01.454Z"
+ },
+ "pairs": [
+  {
+   "job": {
+    "id": "coop-rt-flight2-coop1j",
+    "kiep": 1,
+    "seed": 7101
+   },
+   "lives": [
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 1,
+     "extra": false,
+     "room": "RCT6",
+     "life": {
+      "id": "Ban hoa",
+      "type": "end",
+      "fate": "Bị ban hoa, xuất cung",
+      "death": false,
+      "age": 18,
+      "year": 1,
+      "rank": 1,
+      "text": "Ngươi trở về nhà, nghề trà của gia đình vẫn đợi. Tiếng đồn ngươi từng được gọi vào cung theo ngươi cả đời.",
+      "card": [
+       "",
+       "",
+       "",
+       ""
+      ],
+      "duringArea": false,
+      "lastTaps": [
+       "AREA 590,464",
+       "SKIP TAP .kscn «» tap",
+       "AREA 590,464",
+       "SKIP TAP .kscn «» tap",
+       "AREA 590,464",
+       "SKIP TAP .kscn «» tap",
+       "AREA 590,464",
+       "SKIP TAP .kscn «» tap",
+       ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»",
+       ".dlg «Thái hậu» «Nên học quản việc nhà, biết chi dùng tằn tiện, tay»",
+       ".dlg «Hoàng thượng» «Cúi đầu chờ xét»",
+       ".dlg «Thái hậu» «Thần thiếp xin phép thái giám hỏi lại mức trâm đún»"
+      ]
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "f3a3c18a",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [
+       {
+        "at": 78,
+        "lvl": 1,
+        "layer": "#modal",
+        "title": "Đợi hảo hữu chọn thân phận",
+        "skipped": "co-op lobby: wait for the friend, never «Lui»"
+       }
+      ],
+      "slice": null,
+      "mgBackN": 0,
+      "mgBackQuitN": 0,
+      "builds": [
+       {
+        "s": "d9ca7892+",
+        "b": "86170222adab",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z",
+       "at": "2026-11-27T15:51:08.181Z"
+      },
+      "pinUrl": "http://127.0.0.1:8812/",
+      "build": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z"
+      },
+      "consoleErrN": 28,
+      "areaTaps": 140,
+      "bareCovered": 4,
+      "bareCoveredBy": {
+       "moving button.kbtn.k1": 4
+      },
+      "typed": 1,
+      "ident": {
+       "name": "Nhan Kiều Ân",
+       "org": "Cung nữ được sủng hạnh",
+       "born": -17,
+       "at": 1
+      },
+      "skipLayerTaps": 28,
+      "infoTaps": 14,
+      "kresTaps": 14,
+      "twoTap": {
+       "hand": 3,
+       "plaque": 0,
+       "chosen": 3,
+       "liftOnly": 0,
+       "chipFail": 0
+      },
+      "taps": 33
+     },
+     "exitPick": null,
+     "bugs": [],
+     "dead": [],
+     "buoi": 1,
+     "saves": []
+    },
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 2,
+     "extra": true,
+     "room": "RCT6",
+     "life": {
+      "id": "Ban hoa",
+      "type": "end",
+      "fate": "Bị ban hoa, xuất cung",
+      "death": false,
+      "age": 18,
+      "year": 1,
+      "rank": 1,
+      "text": "Ngươi trở về nhà, nghề trà của gia đình vẫn đợi. Tiếng đồn ngươi từng được gọi vào cung theo ngươi cả đời.",
+      "card": [
+       "",
+       "",
+       "",
+       ""
+      ],
+      "duringArea": false,
+      "lastTaps": [
+       "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»",
+       ".dlg «Chọn sổ» «Trở lại phòng»",
+       ".dlg «Thái hậu» «Thần thiếp khẽ gạt con côn trùng ra, rồi uống nốt,»"
+      ]
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "f3a3c18a",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [],
+      "slice": null,
+      "mgBackN": 0,
+      "mgBackQuitN": 0,
+      "builds": [
+       {
+        "s": "d9ca7892+",
+        "b": "86170222adab",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z",
+       "at": "2026-11-27T15:54:07.431Z"
+      },
+      "pinUrl": "http://127.0.0.1:8812/",
+      "build": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z"
+      },
+      "ident": {
+       "name": "Nhan Kiều Ân",
+       "org": "Cung nữ được sủng hạnh",
+       "born": -17,
+       "at": 1
+      },
+      "consoleErrN": 20,
+      "taps": 3
+     },
+     "exitPick": null,
+     "bugs": [],
+     "dead": [],
+     "buoi": 1,
+     "saves": []
+    },
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 3,
+     "extra": true,
+     "room": "RCT6",
+     "life": {
+      "id": "Ban hoa",
+      "type": "end",
+      "fate": "Bị ban hoa, xuất cung",
+      "death": false,
+      "age": 18,
+      "year": 1,
+      "rank": 1,
+      "text": "Ngươi trở về nhà, nghề trà của gia đình vẫn đợi. Tiếng đồn ngươi từng được gọi vào cung theo ngươi cả đời.",
+      "card": [
+       "",
+       "",
+       "",
+       ""
+      ],
+      "duringArea": false,
+      "lastTaps": [
+       ".dlg «Mời hảo hữu» «Lui»",
+       "#modal «Chưa vào được phòng» «Thử lại»",
+       "#modal «Cùng hảo hữu» «Nhập ám hiệuhảo hữu đã gửi ám hiệu hay đường dẫn»",
+       "#modal «Nhập ám hiệu» «Vào phòng»",
+       "GONE Vào phòng",
+       ".dlg «Mời hảo hữu» «Lui»",
+       "#modal «Cùng hảo hữu» «Trở lại phòng»",
+       "GONE Vào phòng",
+       ".dlg «Mời hảo hữu» «Lui»",
+       "#modal «Cùng hảo hữu» «Trở lại phòng»",
+       "GONE Vào phòng",
+       ".dlg «Thái hậu» «Thần thiếp lấy tay áo lót vào đỡ chén, vẫn giữ nét»"
+      ]
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "f3a3c18a",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [],
+      "slice": null,
+      "mgBackN": 0,
+      "mgBackQuitN": 0,
+      "builds": [
+       {
+        "s": "d9ca7892+",
+        "b": "86170222adab",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z",
+       "at": "2026-11-27T15:54:16.723Z"
+      },
+      "pinUrl": "http://127.0.0.1:8812/",
+      "build": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z"
+      },
+      "consoleErrN": 17,
+      "dlgClose": 4,
+      "taps": 34
+     },
+     "exitPick": null,
+     "bugs": [],
+     "dead": [],
+     "buoi": 1,
+     "saves": []
+    },
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 4,
+     "extra": true,
+     "room": "RCT6",
+     "life": {
+      "id": "Ban hoa",
+      "type": "end",
+      "fate": "Bị ban hoa, xuất cung",
+      "death": false,
+      "age": 18,
+      "year": 1,
+      "rank": 1,
+      "text": "Ngươi trở về nhà, nghề trà của gia đình vẫn đợi. Tiếng đồn ngươi từng được gọi vào cung theo ngươi cả đời.",
+      "card": [
+       "",
+       "",
+       "",
+       ""
+      ],
+      "duringArea": false,
+      "lastTaps": [
+       "#modal «Cung Tường Mộng» «Chơi một mìnhchọn sổ, xem Phúc duyên»",
+       ".dlg «Chọn sổ» «Trở lại phòng»",
+       "#modal «Nhập ám hiệu» «Vào phòng»",
+       ".dlg «Thái hậu» «Thần thiếp tâu rằng khăn của thần thiếp làm ồn thá»"
+      ]
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "f3a3c18a",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [],
+      "slice": null,
+      "mgBackN": 0,
+      "mgBackQuitN": 0,
+      "builds": [
+       {
+        "s": "d9ca7892+",
+        "b": "86170222adab",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z",
+       "at": "2026-11-27T15:55:02.369Z"
+      },
+      "pinUrl": "http://127.0.0.1:8812/",
+      "build": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z"
+      },
+      "ident": {
+       "name": "Nhan Kiều Ân",
+       "org": "Cung nữ được sủng hạnh",
+       "born": -17,
+       "at": 1
+      },
+      "consoleErrN": 14,
+      "taps": 4
+     },
+     "exitPick": null,
+     "bugs": [],
+     "dead": [],
+     "buoi": 1,
+     "saves": []
+    },
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 5,
+     "extra": true,
+     "room": "RCT6",
+     "life": {
+      "id": "Ban hoa",
+      "type": "end",
+      "fate": "Bị ban hoa, xuất cung",
+      "death": false,
+      "age": 18,
+      "year": 1,
+      "rank": 1,
+      "text": "Ngươi trở về nhà, nghề trà của gia đình vẫn đợi. Tiếng đồn ngươi từng được gọi vào cung theo ngươi cả đời.",
+      "card": [
+       "",
+       "",
+       "",
+       ""
+      ],
+      "duringArea": false,
+      "lastTaps": [
+       ".dlg «Mời hảo hữu» «✓ 3 phút»",
+       ".dlg «Mời hảo hữu» «8 phút»",
+       ".dlg «Mời hảo hữu» «3 phút»",
+       ".dlg «Mời hảo hữu» «5 phút»",
+       ".dlg «Mời hảo hữu» «3 phút»",
+       ".dlg «Mời hảo hữu» «Lui»",
+       ".dlg «Cùng hảo hữu» «Trở lại phòng»",
+       ".dlg «Mời hảo hữu» «Lui»",
+       ".dlg «Cùng hảo hữu» «Trở lại phòng»",
+       ".dlg «Mời hảo hữu» «Lui»",
+       ".dlg «Cùng hảo hữu» «Trở lại phòng»",
+       ".dlg «Thái hậu» «Thần thiếp đứng yên, để trâm nằm đó cho đến khi bề»"
+      ]
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "f3a3c18a",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [],
+      "slice": null,
+      "mgBackN": 0,
+      "mgBackQuitN": 0,
+      "builds": [
+       {
+        "s": "d9ca7892+",
+        "b": "86170222adab",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z",
+       "at": "2026-11-27T15:55:11.763Z"
+      },
+      "pinUrl": "http://127.0.0.1:8812/",
+      "build": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z"
+      },
+      "consoleErrN": 9,
+      "dlgClose": 4,
+      "ident": {
+       "name": "Nhan Kiều Ân",
+       "org": "Cung nữ được sủng hạnh",
+       "born": -17,
+       "at": 1
+      },
+      "taps": 51
+     },
+     "exitPick": null,
+     "bugs": [],
+     "dead": [],
+     "buoi": 1,
+     "saves": []
+    },
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 6,
+     "extra": true,
+     "room": "RCT6",
+     "life": {
+      "id": "Ban hoa",
+      "type": "end",
+      "fate": "Bị ban hoa, xuất cung",
+      "death": false,
+      "age": 18,
+      "year": 1,
+      "rank": 1,
+      "text": "Ngươi trở về nhà, nghề trà của gia đình vẫn đợi. Tiếng đồn ngươi từng được gọi vào cung theo ngươi cả đời.",
+      "card": [
+       "",
+       "",
+       "",
+       ""
+      ],
+      "duringArea": false,
+      "lastTaps": [
+       ".dlg «Mời hảo hữu» «3 phút»",
+       ".dlg «Mời hảo hữu» «5 phút»",
+       ".dlg «Mời hảo hữu» «✓ 5 phút»",
+       ".dlg «Mời hảo hữu» «✓ 5 phút»",
+       ".dlg «Mời hảo hữu» «3 phút»",
+       ".dlg «Mời hảo hữu» «8 phút»",
+       ".dlg «Mời hảo hữu» «Lui»",
+       ".dlg «Cùng hảo hữu» «Mời hảo hữulập phòng mới, gửi ám hiệu cho hảo hữu»",
+       ".dlg «Mời hảo hữu» «Lui»",
+       ".dlg «Mời hảo hữu» «Lui»",
+       ".dlg «Cùng hảo hữu» «Trở lại phòng»",
+       ".dlg «Thái hậu» «Thần thiếp đứng yên, vì không có lệnh thì không dá»"
+      ]
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "f3a3c18a",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [],
+      "slice": null,
+      "mgBackN": 0,
+      "mgBackQuitN": 0,
+      "builds": [
+       {
+        "s": "d9ca7892+",
+        "b": "86170222adab",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z",
+       "at": "2026-11-27T15:55:37.753Z"
+      },
+      "pinUrl": "http://127.0.0.1:8812/",
+      "build": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z"
+      },
+      "consoleErrN": 3,
+      "dlgClose": 3,
+      "closeOwnLayer": 1,
+      "ident": {
+       "name": "Nhan Kiều Ân",
+       "org": "Cung nữ được sủng hạnh",
+       "born": -17,
+       "at": 1
+      },
+      "taps": 28
+     },
+     "exitPick": null,
+     "bugs": [],
+     "dead": [],
+     "buoi": 1,
+     "saves": []
+    },
+    {
+     "seat": "host",
+     "dev": "fold",
+     "kiep": 1,
+     "extra": false,
+     "room": "RCT6",
+     "life": {
+      "id": "HARNESS",
+      "type": "harness"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "f3a3c18a",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [
+       {
+        "at": 212,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 222,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 261,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       }
+      ],
+      "slice": null,
+      "mgBackN": 0,
+      "mgBackQuitN": 0,
+      "consoleErrN": 40,
+      "builds": [
+       {
+        "s": "d9ca7892+",
+        "b": "86170222adab",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z",
+       "at": "2026-11-27T15:51:08.399Z"
+      },
+      "pinUrl": "http://127.0.0.1:8812/",
+      "build": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z"
+      },
+      "areaTaps": 111,
+      "ident": {
+       "name": "Lữ Uyển Thanh",
+       "org": "Con gái nhà buôn muối",
+       "born": -19,
+       "at": 1
+      },
+      "bareCovered": 1,
+      "bareCoveredBy": {
+       "top changed div#klife.modal.kpscene.kload → div.krf": 1
+      },
+      "twoTap": {
+       "hand": 7,
+       "plaque": 0,
+       "chosen": 7,
+       "liftOnly": 0,
+       "chipFail": 0
+      },
+      "skipLayerTaps": 3,
+      "infoTaps": 8,
+      "nextNoTurn": 1,
+      "dlgClose": 20,
+      "rejoin": 1,
+      "lobbyWait": 2
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "k": "coop|seat dropped to the title mid-room → rejoined by taps (Cùng hảo hữu → Trở lại phòng)",
+       "type": "coop",
+       "msg": "seat dropped to the title mid-room → rejoined by taps (Cùng hảo hữu → Trở lại phòng)",
+       "n": 1,
+       "at": 241
+      },
+      {
+       "type": "harness",
+       "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+       "n": 1
+      }
+     ],
+     "dead": [],
+     "buoi": 1,
+     "saves": []
+    },
+    {
+     "seat": "guest",
+     "dev": "ipad",
+     "kiep": 7,
+     "extra": true,
+     "room": "RCT6",
+     "life": {
+      "id": "HARNESS",
+      "type": "harness"
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "f3a3c18a",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [],
+      "slice": null,
+      "mgBackN": 0,
+      "mgBackQuitN": 0,
+      "builds": [
+       {
+        "s": "d9ca7892+",
+        "b": "86170222adab",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z",
+       "at": "2026-11-27T15:55:57.266Z"
+      },
+      "pinUrl": "http://127.0.0.1:8812/",
+      "build": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z"
+      },
+      "consoleErrN": 1,
+      "dlgClose": 3,
+      "closeOwnLayer": 1
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "type": "harness",
+       "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+       "n": 1
+      }
+     ],
+     "dead": [],
+     "buoi": 0,
+     "saves": []
+    }
+   ],
+   "partial": false,
+   "bugs": [
+    {
+     "type": "harness",
+     "msg": "browserContext.close: Target page, context or browser has been closed"
+    }
+   ]
+  }
+ ]
+}
