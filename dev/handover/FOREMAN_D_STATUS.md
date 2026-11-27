@@ -1,5 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
+last wake: 27/11 01:53Z — FOREMAN D (depth 1) session_01D3E3NYwRePZXPzMMwNfkEq (ctx ≈ 19 %, roll at 31 %; hourly :52; MAIN = 169 → ROOT 170 pending; LIVE 17f23656)
 last wake: 27/11 00:53Z — FOREMAN D (depth 1) session_01D3E3NYwRePZXPzMMwNfkEq PICKUP (START_CTX ≈ 6 %, roll at 31 %, ceiling 60 %; hourly :52 trig_018uKhZYUo8RgPFWDXJHQcia; MAIN = 169/170; LIVE fa722503)
 last wake: 26/11 19:50Z — FOREMAN D (depth 8) session_01D3E3NY2u2bQJrn5BAVTxpR ROLLED (ctx 37 %) → STANDBY session_01D3E3Na4WaA2w77G38gsY8w; MAIN = 162; LIVE 53319e6f
 last wake: 26/11 18:47Z — FOREMAN D (depth 8) session_01D3E3NY2u2bQJrn5BAVTxpR (hourly :45 trig_01Q7kuUGdwAy4DesbyB7J4wb; ctx ≈ 21 %, roll at 33 %; MAIN = 161; LIVE f573dc94)
@@ -478,3 +479,4 @@ Rollover lines (verbatim canon): "Trigger = context (owner OD:L1217 + ceiling 16
 - (27/11 ~01:50Z) FROM MAIN 169: end-maxrank f0ec2379 LANDED → LIVE 17f23656 (rank-worker deploy running). Thanks.
 - (27/11 01:45Z) Q-SOFTLOCK: rv NXxnUhq4 merged LIVE 540358c4 → **efda2628** (built files only, jdayq identical); full gate chain ~75 min → LAND READY ~03:00Z. FOR MAIN 169/170 + KK: pre-existing LIVE bug now the gating G4 fail: 90-button-crawl «Ô lưu · Lui» close does not close (Fold), same on LIVE 540358c4 ×2 — kit ticket. Old D depth 0 NA4WaA2w archived (rolled, stood down).
 - (27/11 01:45Z) CORRECTION: old D depth 0 NA4WaA2w is a claude.ai ROOT the owner opened → UNARCHIVED again (only the owner closes her own chats); it is idle and stood down.
+- (27/11 01:53Z) WAKE: **D-ENDRANK DONE** — end-maxrank LANDED (stack of f0ec2379) → LIVE 17f23656 (rank-worker deploy by MAIN 169); worker NYUsUqaC + rv Naxk ARCHIVED. LIVE moved again → mg-trim-lr5 01ba2168 not FF: REMERGE lead told to remerge 17f23656 (or lander restacks). Q-SOFTLOCK rv told LIVE 17f23656. PICKER-DOM fix not pushed yet (8f1fd91c). PROMO-STACK lr4 at d713f162, no SẴN SÀNG KIỂM yet. RUNNING now: Q-SOFTLOCK rv · PICKER-DOM worker+rv · PROMO-STACK lr4 · REMERGE lr5 · seats A/A2/A3 · D8 art (owner input).
