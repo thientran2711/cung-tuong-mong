@@ -116,7 +116,7 @@ PEND.tuyen=p=>({who:pEmp(),t:"Hoàng thượng hỏi ý ngươi: năm nay nên t
 PEND.thbenh=()=>({who:pTH(),t:"Thái hậu lâm bệnh, Đức Thọ cung đóng cửa không tiếp khách.",o:[
     {n:"Hầu bệnh cả tháng",fx:{suc:-25,th:15,duc:4}},{n:"Gửi lễ vật vấn an",fx:{bac:-30,th:4}}]});
 PEND.loveletter=p=>{const v=RV(p.v);if(!v)return null;const m=p.m!=null&&typeof manById==="function"?manById(p.m):null;return{who:pSpy(),t:`Tai mắt nhặt được thư tình ${v.name} viết cho ${m?m.name:"một thị vệ"}.`,o:[
-    {n:"Trình lên Hoàng thượng",fx:{},x:`${word(50)} · thành: ${v.name} thất thế · hỏng: Danh ${balSg(BAL.eff.j3.danhGo)}`,go:()=>{if(roll(50))fall(v,"bị bắt được thư tư tình với thị vệ");else{apply({danh:BAL.eff.j3.danhGo});log(`<span class="r">Hoàng thượng cho là thư giả, trách ngươi gây chuyện.</span> Danh ${balSg(BAL.eff.j3.danhGo)}.`)}}},
+    {n:"Trình lên Hoàng thượng",fx:{},x:`${word(50)} · thành: ${v.name} bị xét tội tư thông · hỏng: Danh ${balSg(BAL.eff.j3.danhGo)}`,go:()=>{if(roll(50))ttNpcExposed(v,m,`Thư tình của ${v.name} được trình lên.`);else{apply({danh:BAL.eff.j3.danhGo});log(`<span class="r">Hoàng thượng cho là thư giả, trách ngươi gây chuyện.</span> Danh ${balSg(BAL.eff.j3.danhGo)}.`)}}},
     {n:"Cất giữ làm con tin",fx:{},x:`chứng cứ ${v.name} ${balSg(BAL.eff.j3.evGo_2)}`,go:()=>{evStory(v,BAL.eff.j3.evGo_2,"viết thư tình cho một thị vệ")}}]}};
 /* npc-purpose G1 (owner OD 18/11 ~04:08Z): a weekly card comes only from a PERSON with a GOAL (kinds in jagwhy1, numbers BAL.ag.why.dil).
    Every card's actor is asked why (npwAsk); the world / duty cards with no one scheming (festival, flood, the Emperor's question when the palace is
@@ -157,9 +157,9 @@ function monthTick(){let ev="";
   {const b=typeof lsSnap==="function"?lsSnap():null;const dd=has("nhantu")?2:1;if(S.duc>=BAL.ducLv.up)spAdd(S,"th",dd);else if(S.duc<BAL.ducLv.down)S.th=cl(S.th-dd,-100,100);if(b)lsNote(b,{th:lsDucWhy()},true)}
   if(S.moreRivals&&!roomFor("consort"))S.moreRivals=0;if(S.moreRivals){S.moreRivals=0;const n=newRival(R(3));Object.assign(n,drawFace());rivals.push(n);ev+=`Theo lời ngươi tâu, cung tuyển thêm tú nữ: ${n.name} vào cung, phong ${RANKS[n.rank].n}. `}
   ev+=kidsMonth();S.storms=0;ev+=rivalsMonth();ev+=storyMonth();if(S.dead)return ev;ev+=heirMonth();
-  /* promo-root (25/11): «Bị bỏ quên» only after BAL.danhG.forgetGrace months since she entered the palace or last left lãnh cung (S.forgetAt, set by restore j14): before, a release from lãnh cung was undone in the same monthTick (Sủng 0 / Danh 0 / rank 0 after restore) and rank-0 origins were forgotten in month 1–3 */
+  /* promo-root (25/11): «Bị bỏ quên» only after BAL.danhG.forgetGrace months since she entered the palace or last left lãnh cung (S.forgetAt, set by restore j14) */
   if(S.forgetAt==null)S.forgetAt=S.turn+BAL.danhG.forgetGrace;
-  if(!S.out&&S.turn>=S.forgetAt&&S.sung<=0&&S.danh<=BAL.danhG.forget&&S.rank<=1){cold("Bị bỏ quên, đưa vào lãnh cung");return ev}
+  ev+=tsMonthAll();/* MAIN 118 P3: «bị bỏ quên» = thất sủng (no fault ⇒ no lãnh cung), every consort the same; her own entry waits for the promo-root grace (tsMonth reads S.forgetAt) */
   const wasQ=S.rank>=7;ev+=promote();if(!wasQ&&S.rank>=7)S.justCrowned=1;
   S.month++;S.tuan=0;
   if(S.month>12){S.month=1;S.year++;S.age++;S.emp.age++;if(typeof ageYear==="function")ageYear();allKids().forEach(([k])=>{if(k.alive)k.age++});

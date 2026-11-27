@@ -2220,6 +2220,37 @@ BAL.news={on:1,netOpen:1,sumTop:6,sumMin:5,sumOwnMin:5,recMax:300,bigBand:2,keep
  logTabs:[["all","Tất cả"],["me","Việc của ta"],["hc","Chuyện hậu cung"],["big","Mưu hại"]]};
 /* KIT §95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
 BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
+/* LEAVE-THE-PALACE = ENDING (owner OD 24/11 ~06:05Z, review/leave-palace, jleave.js): every choice that takes her out of the palace ends the life;
+   the end card adds one varied «Về sau» passage decided by the PARTNER's real nết × her own state × the kind of leaving.
+   yrs[kind] = [min,max] years she still lives after leaving; kids[kind] = [min,max] children born after; cls = partner classes scored from his 3 nết
+   (BAL.net words; the highest score wins, ties keep the order of clsOrd); mod[cls] = y (years ×), k (children ±), w (cause weights ×).
+   suc: her Sức shifts the years (y × (sucA + Sức/sucD)); maxAge caps the age at death; old = from this age a death is «tuổi già». */
+/* MAIN 118 06:16Z (OD 24/11 ~07:55Z severity): crime tiers for deathSentence (j8). first = the first-year mercy applies; mercy = what the nhân từ
+   Emperor commutes death to (cold = lãnh cung, dan = phế làm thứ dân, out of the palace). nghich = gián điệp, hại Hoàng hậu / hoàng tự, vu cổ. */
+/* E74 (law 11, one tier for every proven treason deed, she and NPCs the same): nghichK = act / plot kinds that are «nghịch» whatever the target
+   (gián điệp, hại hoàng tự: kpoison / pond / musk / catswap, vu cổ: kframe / vuco); queenK = kinds that are «nghịch» when the target is Hoàng hậu
+   (hạ độc / đẩy xuống hồ Hoàng hậu). j8 crimeTier() reads these; convict() is the one road (deathSentence «nghich» or punish). */
+BAL.crime={thuong:{first:1,mercy:"cold"},nghich:{first:0,mercy:"dan"},nghichK:["spy","kpoison","pond","musk","catswap","kframe","vuco"],queenK:["poison","pushp"]};
+/* thất sủng (j8 tsMonth, MAIN 118 P3): enter at Sủng ≤ sung, Danh ≤ BAL.danhG.forget, rank ≤ rank; Sủng −decay a month while in it; back at Sủng ≥ back */
+/* E74 (law 1, MAIN 118 «she can win him back … same for NPCs»): recall = the monthly chance (%) that Hoàng thượng chợt nhớ a thất sủng consort,
+   EVERY consort the same (her too, besides her own Sủng roads): base + Danh/danhD + Đức/ducD + kid × living children, at most max; she comes back
+   with Sủng = back. lonely = j70 «lúc nàng vắng ân sủng» opening: thất sủng, or Sủng below this. */
+BAL.thatS={sung:0,rank:1,decay:2,back:15,recall:{base:2,danhD:20,ducD:25,kid:2,max:12},lonely:25};
+BAL.leave={maxAge:84,old:62,sucA:.7,sucD:200,birthAge:42,
+ yrs:{tron:[6,38],tron1:[4,34],hon:[10,46],thiep:[8,44],que:[12,50],tu:[16,54],dan:[5,36],duoi:[4,32],vuong:[14,44],phu:[10,34],other:[8,42],hoa:[10,40],day:[14,50]},
+ kids:{tron:[0,4],tron1:[0,2],hon:[1,5],thiep:[0,3],que:[0,3],tu:[0,0],dan:[0,3],duoi:[0,2],vuong:[1,4],phu:[0,0],other:[0,3],hoa:[1,4],day:[0,0]},
+ clsOrd:["chung","datinh","quyen","bao","lanh"],
+ cls:{chung:{"Ân cần":2,"Thật thà":2,"Trọng nghĩa":3,"Rộng lượng":1,"An phận":2,"Điềm tĩnh":1,"Thanh liêm":1},
+      datinh:{"Ham vui":3,"Vì mình":2,"Xu nịnh":1,"Nhiều chuyện":1,"Thực dụng":1,"Xảo quyệt":1},
+      quyen:{"Tham vọng":3,"Vì gia tộc":2,"Xảo quyệt":1,"Ham lợi":2},
+      bao:{"Nóng nảy":3,"Thù dai":2,"Cương trực":1},
+      lanh:{"Lạnh lùng":3,"Kín đáo":1,"Thực tế":1,"Ham học":1}},
+ mod:{chung:{y:1.15,k:1},datinh:{y:.9,k:0},quyen:{y:.85,k:0},bao:{y:.75,k:0},lanh:{y:1,k:-1},none:{y:1,k:0}},
+ /* cause-of-death weights (the pool picks one; class/kind rows multiply) */
+ cause:{gia:3,benh:3,sinh:1,sau:1,hai:.5,loan:1,dich:1},/* hai only with a partner's house (no partner → 0); gia only from age «old»; sinh only with children born, before birthAge */
+ causeK:{tron:{loan:3,dich:1.5},tron1:{loan:3,benh:1.5},dan:{benh:2,dich:2,loan:1.5},duoi:{benh:2.5,dich:2},tu:{sinh:0,sau:.5,benh:1.5},thiep:{hai:1.5,sau:1.5,loan:.3},hon:{loan:.4},phu:{loan:.3},que:{loan:.6},vuong:{loan:1.5},hoa:{loan:1.5,benh:1.3},day:{loan:.6}},
+ causeC:{chung:{sau:.3,hai:0},datinh:{sau:3,hai:2},quyen:{hai:2.5,sau:1.5},bao:{hai:2,sau:2,benh:1.3},lanh:{sau:2.5}}};
+
 /* review/net-build (owner OD 24/11 ~06:00Z / ~06:40Z, MAIN 119 order; design dev/handover/reports/net-thresholds.md §3): NẾT THRESHOLDS — ONE CORE (law 4).
    Every relation LEVEL the game tests ("quen", "thân", "ghét", "oán to act"…) is ONE base number here, and each person's nết shifts it:
    netTh(p,key) (jnet.js) = th[key] + Σ over p's 3 nết of BAL.net.T[t].th[key] (a key a nết lacks = thFrom[key] = [source key, × share]), clamped to thClamp[key].
