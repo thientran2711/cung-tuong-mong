@@ -162,3 +162,7 @@ VERDICT: PASS 7a646501 — no BLOCKING.
 ## 8. MERGE RE-CHECK (opus BIG, session_01D3E3Naxk5ytaK9o5afgRus) — PASS f0ec2379
 f0ec2379 = 7a646501 + merge of LIVE fa722503 (title-bal); FF from LIVE fa722503. Branch source delta vs LIVE (dev/build, rank, dev/test) byte-identical to 7a646501's vs a22cf45d. Build same (only CTM_BI); end-maxrank.js ALL PASS; one-core ×3 PASS. Deploy note of §4 stands.
 VERDICT: PASS f0ec2379 — no BLOCKING.
+
+## 9. MERGE RE-CHECK (opus BIG, session_01D3E3Naxk5ytaK9o5afgRus) — PASS e417fabd
+e417fabd = f0ec2379 + merge of LIVE 540358c4 (wording-marks); FF from LIVE 540358c4. Branch source delta vs LIVE (dev/build, rank, dev/test) byte-identical to f0ec2379's vs fa722503. Build same (only CTM_BI); end-maxrank.js ALL PASS; one-core ×3 PASS. Deploy note of §4 stands.
+VERDICT: PASS e417fabd — no BLOCKING.
