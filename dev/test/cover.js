@@ -35,6 +35,8 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   reset();{const hp=chHere;chHere=()=>[ledgerId(D),ledgerId(E),ledgerId(C)];let b4=snap();COV.ctx++;try{force(false,()=>deedAdd(S,"trip",C,1,"ngáng chân"))}finally{COV.ctx--;chHere=hp}const ln=lo(b4);
    ok(/^.+, .+ và 1 người khác đã trông thấy\.$/.test(ln[0]||""),`clean but seen by 3 → «${ln}» (at most ${V.names} names)`)}
   reset();{let b4=snap();ok(!lo(b4).length,"no deed → no row")}
+  reset();{let b4=snap();COV.ctx++;COV.force=1;try{deedAdd(A,"trip",S,1,"ngáng chân ngươi")}finally{COV.ctx--;COV.force=0}const ln=lo(b4);ok(ln[0]==="Để lại dấu vết.",`an NPC's deed on her: the same row on her card «${ln}» (she can go after the trace)`);
+   let b5=snap();COV.ctx++;COV.force=1;try{deedAdd(A,"trip",C,1,"ngáng chân")}finally{COV.ctx--;COV.force=0}ok(!lo(b5).length,"an NPC's deed on someone else → nothing on her card")}
   /* 3. Xóa dấu vết (her maid) */
   reset();{COV.ctx++;COV.force=1;try{deedAdd(S,"poison",C,2,"bỏ độc "+C.name)}finally{COV.ctx--;COV.force=0}chSawAdd(S,"mh",ledgerId(D));evA(A,S,2,"mh");
    const mp={kind:"maid",ref:S.maid,name:S.maid&&S.maid.name};const raw=doorRaw(mp);const o=raw.find(a=>a&&a.n==="Xóa dấu vết");const cost=V.wipe.bac[covTier("poison")];

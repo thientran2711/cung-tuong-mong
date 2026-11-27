@@ -2352,8 +2352,9 @@ BAL.charge.wit={need:{nhe:0,vua:0,nang:1,tu:2},keep:8/* REAL-PROOF (owner 27/11 
    a trace, minus the doer's Tâm cơ bands (tcStep / tcCap); wipe = «Xóa dấu vết»: bạc by the deed's weight, odds band + Tâm cơ, only deeds of the last win
    wk(); wit = a named witness: nhe «Đe dọa bịt miệng» (Sức suc; aff lost on failure), vua «Mua chuộc nhân chứng» (bạc by the gravest weight the witness saw,
    paid ONLY on acceptance), nang «Thủ tiêu nhân chứng» (band high; hit = her Sức when she is the one); names = most names on the «Ẩn lộ» line;
-   npc = per week: wipe / wit odds, the Đức that picks the tier (≥ ducHi nhẹ, < ducLo nặng, else bạc → vừa), cap = NPC moves per week. Values set by robot
-   (dev/measure/cover-robot.js): a nặng deed is felt, not game-ending. */
+   npc = per week: wipe / wit odds, the Đức that picks the tier (≥ ducHi nhẹ, < ducLo nặng, else bạc → vừa), cap = NPC moves per week. Measured by
+   dev/measure/cover-scan.js (every scheme, before / after): one nặng deed = Đức −8 known or not, and Danh −10 (+ the high-rank watch) only when it comes
+   out, on stats of 0–100 — felt, never game-ending; the old flat caught Danh −5 now runs nhẹ −3 · vừa −6 · nặng −10. */
 BAL.charge.cover={duc:{nhe:-2,vua:-4,nang:-8,tu:-12},danh:{nhe:-3,vua:-6,nang:-10,tu:-15},trace:{band:{nhe:3,vua:4,nang:5,tu:6}},
  wipe:{bac:{nhe:10,vua:20,nang:40,tu:60},band:3,win:6},
  wit:{nhe:{suc:10,band:2,aff:6},vua:{bac:{nhe:15,vua:30,nang:50,tu:80},band:3,aff:4},nang:{band:5,hit:30}},

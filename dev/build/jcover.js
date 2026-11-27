@@ -30,7 +30,8 @@ function covOwnDuc(k){try{if(covB().ownDuc.includes(k))return true;const A2=ACT[
  d.x2=x;/* the weight the deed carried when done */
  if(COV.ctx>0&&!COV.force&&!roll(covO(B.trace.band[x]-covG(p)))){p.dw=Math.max(0,(p.dw||0)-(d.w||0));d.w=0;d.cl=1}
  if(!covOwnDuc(k)&&typeof ducAdd==="function"){const n=B.duc[x];if(n)ducAdd(p,n,d.x||"việc sai trái")}
- if(p===S){let sw=[];try{sw=chHere(p)}catch(e){}COV.last.push({d,seq:S.logSeq||0,sw});if(COV.last.length>8)COV.last.shift()}}catch(e){console.error("jcover deed",e)}return d}})();
+ /* her result card: her own deed, or an NPC's deed on her (OD ~00:15Z «hers or an NPC's toward her») */
+ if(p===S||(t&&t===S)){let sw=[];try{sw=chHere(p).filter(x=>x!=="me")}catch(e){}COV.last.push({d,seq:S.logSeq||0,sw});if(COV.last.length>8)COV.last.shift()}}catch(e){console.error("jcover deed",e)}return d}})();
 /* chDeedMap counted a 0-weight deed as 1: a clean / wiped deed leaves no piece to find */
 (function(){const m0=chDeedMap;chDeedMap=function(t){const M=m0.apply(this,arguments);try{for(const c in M){if(c==="_ord")continue;const D=M[c];if(D&&D.list&&!D.cv){D.w=D.list.reduce((s,d)=>s+(d&&d.w!=null?d.w:1),0);D.cv=1}}}catch(e){}return M}})();
 /* an act runs: its deed may leave no trace; caught red-handed = exposed (Danh by the act's weight) */
