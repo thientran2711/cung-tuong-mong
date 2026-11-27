@@ -1571,7 +1571,11 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   Doable tiles first, then the dialog's own order. Horizontal rows that wrap (the Tư trang look).
 - PAGES (K-LIST-PAGE, picker-dom 26/11, MAIN 164 play-stopper: a year-18 chest drew 36k–63k nodes, iPad tab crash): the grid shows ONE
   PAGE = whole rows that fit, no inner scroll, no half row (§23): the columns the grid really shows in that dialog at that width (measured
-  once the dialog has settled, kept per dialog kind and width; Fold 755 = 2, iPad 1180 = 4–5) × `BAL.kip.rows` (2). The §23 kit pager sits
+  once the dialog has settled — resolved px tracks only — kept per dialog kind and width) × `BAL.kip.rows` (2). FLIP-LAYOUT PIN: a
+  dialog whose layout changes with the number of tiles (Fold «Biếu quà làm lành»: 6 tiles → one wide row of 6, 12 tiles → 3 columns; iPad
+  Tặng quà / Cài đồ / Biếu quà) shows a column count that comes back during the settle; the grid is then PINNED to the SMALLER count
+  (`grid-template-columns: repeat(n, minmax(0,1fr))`, tiles stretch to fill) for that dialog kind and width: every page is 2 whole rows and
+  never flips (today Fold 2–5 columns by dialog, iPad 2–4). The §23 kit pager sits
   around it (`.kpkwrap` ‹ › `.kpkpg` + `.kpkpn` «trang N/M», no count; hidden on one page). The page that holds the chosen tile opens first.
   The dialog (j3 `showModal`, `m.kipOnly`) draws the option cards of THAT page + the chosen one; a page turn (or a card not drawn yet) runs
   `showModal` again, so every decorator that wraps the draw (giftto lock / `.kgiftno` + chip, hideOut, eaLockWhy …) dresses every card the

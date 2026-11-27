@@ -19,6 +19,15 @@ eq(R.score(L({mr:6,y:4,age:20,tg:9})).score,1500+160+500,"Tranh ghế capped at 
 /* ordering: a better ending outranks a longer plain life */
 const a=R.score(L({mr:7,y:6,age:22,sons:1,endk:"Hoàng thái hậu"})).score,b=R.score(L({mr:7,y:30,age:46})).score;eq(a>b,true,"Hoàng thái hậu > long Hoàng hậu life");
 const c=R.score(L({mr:2,y:1,age:17})).score,d=R.score(L({mr:1,y:1,age:17})).score;eq(c>d,true,"higher rank, same time = higher score");
+/* D-ENDRANK: never entered the palace = its true standing, Công danh 0 (below every palace life) */
+eq(R.phamName(L({mr:-1,pre:"tunu",endk:"Ban hoa"})),"Tú nữ","ban hoa = Tú nữ");
+eq(R.phamName(L({mr:-1,pre:"home",endk:"Xuất giá"})),"Chưa vào cung","home ending = Chưa vào cung");
+eq(R.check(L({mr:-1,pre:"tunu",endk:"Ban hoa"})),null,"a tú nữ life is accepted");
+eq(R.score(L({mr:-1,pre:"home",y:3,age:19,endk:"Xuất giá",danh:80})).score,0,"never entered scores 0");
+eq(R.score(L({mr:-1,pre:"home",y:3,age:19,endk:"Xuất giá"})).score<R.score(L({mr:-1,sr:0})).score,true,"below the lowest palace life");
+eq(R.check(L({mr:-1,pre:"x"})),"pre","unknown pre refused");
+eq(R.check(L({mr:2,pre:"tunu"})),"pre vs standing","pre with a rank refused");
+eq(R.check(L({mr:-1,sr:-1})),"no standing","no standing and no pre still refused");
 /* check: refused summaries */
 eq(R.check(L({mr:8})),"mr","rank above Hoàng hậu refused");
 eq(R.check(L({y:5,age:16})),"age vs years","age must follow the years");

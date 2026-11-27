@@ -359,3 +359,8 @@ cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) 
   seal value `kitResultSeal("soft")` → «BỎ DỞ» (grey `.sure`); rows «Người ấy» (`kr-tgt`) and «Ai làm» (`kr-by`); `kaAim` / `kaAimVerdict` / `kaAimUse`;
   the night card (jne `kitNightEnd`) uses the same parts («Kết cục» row with a `kitChip(seal)`). KK39: please confirm or restyle in place.
   Open word question for MAIN: the brief says «Hỏng»; the kit seal word stays BẠI (one place to flip: kitResultSeal).
+
+## 26/11 K-LIST-PAGE — long option/tile lists render only what is on screen (Foreman B FIXER inv-stack, filed 09:15Z; handover-branch KIT_REQUESTS L161 = the same request)
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 27/11 | picker-dom worker session_01D3E3Na4LuR5WU2hdNmAMrS (Foreman D; MAIN 164 play-stopper, F s14 iPad tab crash) | **KIT 28.13i item pick grid in PAGES**: one page = `BAL.kip.rows` whole rows × the columns the grid really shows (measured after the dialog settles, resolved px tracks); FLIP-LAYOUT PIN (a dialog whose layout flips with the tile count is pinned to the smaller column count, tiles stretch); the §23 pager look (`.kpkwrap` ‹ › + «trang N/M», kitPicker's classes, no new part); the dialog draws only that page's option cards through the one real `showModal` path (`m.kipOnly`; every post-draw decorator runs). KIT.md 28.13i «PAGES» bullet; kit page sample §28.13i shows the pager. Tests dev/test/picker-dom.js + picker-dom-scan.js. | giftpick, giftto, plantpick, tsgiftpick (every chest picker) | kit keeper (MAIN side) | **BUILT on review/picker-dom — awaiting «KIT OK K-LIST-PAGE <sha>» from the kit keeper** (the kip tile grid only; kitInvGrid bag is grouped by kind, 30–34 tiles, untouched) |
