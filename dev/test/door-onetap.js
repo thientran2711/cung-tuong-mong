@@ -27,11 +27,11 @@ const RUN=String.raw`(()=>{window.__bot=1;const R={fail:[],warn:[],n:{door:0,one
    const tiers=["nhẹ","vừa","nặng"].filter(t=>L.some(m=>ONE.tierOf(r,m)===t));
    if(md==="tier"&&tiers.length>=2){R.n.tier++;const rows=ONE.tierRows(r,L,"x");if(rows.length>3)F("tier card >3 rows "+r.k);
     const ts=rows.map(x=>x.t);if(new Set(ts).size!==ts.length)F("tier dup "+r.k);
-    for(const x of rows){const free=x.T.filter(m=>!m.off);for(let s=0;s<(harm?12:1);s++){const m=ONE.pick(r,x.T,"s"+s+":"+Math.random());if(!m)continue;R.n.pick++;got(r,m);
+    for(const x of rows){const free=x.T.filter(m=>!m.off);for(let s=0;s<12;s++){const m=ONE.pick(r,x.T,"s"+s+":"+Math.random());if(!m)continue;R.n.pick++;got(r,m);
       if(ONE.tierOf(r,m)!==x.t)F("HARM tier not bounded: "+r.k+" "+x.t+" picked "+T(m.n)+" ("+ONE.tierOf(r,m)+")");
       if(!harm){const best=Math.max(...free.map(ONE.lv));if(ONE.lv(m)<best)F("tier pick worse than best: "+r.k+" "+x.t+" "+T(m.n));free.forEach(o=>{if(ONE.lv(o)<ONE.lv(m))R.domin[key(r,o)]=1})}}}}
    else{R.n.one++;const free=L.filter(m=>!m.off);if(!free.length)continue;
-    for(let s=0;s<(harm?12:1);s++){const m=ONE.pick(r,L,"s"+s+":"+Math.random());got(r,m);R.n.pick++;
+    for(let s=0;s<12;s++){const m=ONE.pick(r,L,"s"+s+":"+Math.random());got(r,m);R.n.pick++;
      if(!harm){const best=Math.max(...free.map(ONE.lv));if(ONE.lv(m)<best)F("ONE pick worse than best: "+r.k+" "+T(m.n));else R.n.best++;
       free.forEach(o=>{if(ONE.lv(o)<ONE.lv(m))R.domin[key(r,o)]=(R.domin[key(r,o)]||0)+1})}}
     if(!harm&&d.o!=null){const best=Math.max(...free.map(ONE.lv));const dl=d.o>=100?KIT_ODDS.length:oddsLv(d.o);if(dl<best&&!(d.o>=100))F("door word worse than best: "+r.k)}}}};

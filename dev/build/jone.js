@@ -107,7 +107,7 @@ function whyOf(r,m,L){const ok=L.filter(x=>!x.off);if((M[r.k]||{}).harm)return""
  if(md==="art"&&p>0){let k="";try{const A=S.arts||{};k=Object.keys(A).sort((x,y)=>(+A[y]||0)-(+A[x]||0))[0]}catch(e){}return"môn ngươi giỏi nhất"+(S.emp&&S.emp.known&&S.emp.known.art?", lại hợp ý ngài":"")}
  return""}
 /* ---------- members of a talk-side door (pop-up), same lists as the old card (jdoor PEND.door + DOOR.more) ---------- */
-function members(pp,r){const out=[];let p=null;if(pp.kind!=null)pp.i=doorIdx(pp);p=curPeople()[pp.i];if(!p||!S.visit)return{p:null,L:out};let A=[];try{A=doorRaw(p)}catch(e){return{p,L:out}}
+function members(pp,r){const out=[];let p=null;if(pp.kind!=null)pp.i=doorIdx(pp);p=curPeople()[pp.i];if(!p||!S.visit)return{p:null,L:out};let A=[];if(ONE.raw&&ONE.raw.p===p)A=ONE.raw.A;else try{A=doorRaw(p)}catch(e){return{p,L:out}}/* perf: inside one fold the raw list is the one the fold got */
  A.forEach((a,j)=>{if(!a||a.k61||a.door||DOOR.of(a.n,p.kind)!==r)return;const tc=talkK(a);const poor=!!(a.c&&a.c.bac&&S.bac+a.c.bac<0);
   const why=a.lock?txt(a.t)||"chưa làm được":poor?"không đủ bạc":!can(tc)?(txt(typeof whyTime==="function"?whyTime(tc):"")||"hết khắc buổi này"):"";
   let x="";try{x=optLine(a)}catch(e){}out.push({id:"t:"+txt(a.n),n:a.n,x,a,off:!!why,why,cost:tc,go:()=>doorPick(pp,j,a.n)})});
@@ -133,15 +133,19 @@ function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>t
    if(harm&&free.length>1)x=`${ln} · ra một trong: ${free.map(y=>txt(y.n)).join(", ")}`;else{x=ln;n=`${txt(m.n)} · ${t}`}}
   const why0=(T[0]&&T[0].why)||"chưa làm được";rows.push({t,m,T,n,x:x||(m?"chọn rồi xem kết quả ở bước sau":`chưa làm được: ${txt(why0)}`),off:m?null:{why:why0}})}return rows}
 ONE.tierRows=tierRows;
+/* perf: one paint asks the same person + door many times (render → dfActs → card); the members list is kept for that paint only (state stamp) */
+const MC={c:new Map(),t:0};
+function stamp(){try{return [S.turn||0,S.buoi||0,typeof used!=="undefined"?used:0,S.logSeq||0,S.bac|0,S.suc|0,S.place,Q.length,S.visit&&S.visit.talked,JSON.stringify(S.visit&&S.visit.tk||{}),JSON.stringify(S.arts||{}),(S.emp&&S.emp.known)?Object.keys(S.emp.known).length:0].join(":")}catch(e){return Math.random()}}
+function memo(k,f){k=k+"#"+stamp();if(MC.c.has(k))return MC.c.get(k);const r=f();MC.c.set(k,r);if(!MC.t)MC.t=setTimeout(()=>{MC.c.clear();MC.t=0},0);return r}
 /* ---------- (1) the pop-up: decorate the folded doors (button = the pick's odds word + line) ---------- */
 (function(){const f0=doorFold;doorFold=function(p,A){try{fix()}catch(e){}const out=f0.apply(this,arguments);if(!ONE.on||!Array.isArray(out))return out;
- try{const i=curPeople().indexOf(p);if(i<0)return out;const pp0=k=>doorPP(p,i,k);
+ const raw0=ONE.raw;ONE.raw={p,A};try{const i=curPeople().indexOf(p);if(i<0)return out;const pp0=k=>doorPP(p,i,k);
   /* a split row with ONE member only (Kết giao act, Ban thưởng, Tha tội): its own one-tap button */
   for(const r of DOOR.T){if(!r.one1||out.some(d=>d&&d.door===r.k)||(r.kinds&&!r.kinds.includes(p.kind)))continue;const {L}=members(pp0(r.k),r);if(!L.length)continue;
    if(L.length===1&&L[0].id&&L[0].id[0]==="t")continue;/* a bare talk option already stands for it */
    if(L.every(m=>m.id&&m.id[0]==="a")&&typeof dfInPerson==="function"&&L.every(m=>dfInPerson(p).some(x=>"a:"+x.k===m.id)))continue;/* dfActs shows a lone ACT itself */
    out.push({n:r.n,door:r.k,o:100,fix:1,x:"",open:()=>doorOpen(p,r.k)})}
-  for(const d of out){if(!d||!d.door)continue;const r=DOOR.byK(d.door);if(!r)continue;const {L}=members(pp0(r.k),r);if(!L.length)continue;
+  for(const d of out){if(!d||!d.door)continue;const r=DOOR.byK(d.door);if(!r)continue;const {L}=memo(["m",p.kind,p.ref&&p.ref.id,p.name,r.k].join("|"),()=>members(pp0(r.k),r));if(!L.length)continue;
    const md=ONE.mode(r.k);if(md==="keep")continue;const tiers=TI.filter(t=>L.some(m=>tierOf(r,m)===t));
    if(md==="tier"&&tiers.length>=2){const R=tierRows(r,L,who(p));d.x=R.map(x=>`${x.t} ${x.m&&!x.off?wordOf(oddsM(x.m))||"chắc":"—"}`).join(" · ");d.one="tier";
     if(R.every(x=>x.off)){d.lock=true;d.t=R[0].off.why}continue}
@@ -151,7 +155,7 @@ ONE.tierRows=tierRows;
    if(m.a){/* the option fields the kit line reads (optLine: odds · tốn · được · hỏng) = the picked member's own */for(const f of ["o","oi","inner","c","w","l","lx","act","pk"])if(m.a[f]!=null)d[f]=m.a[f];d.x=[nm,m.a.x].filter(Boolean).join(": ")}
    else{d.o=oddsM(m);const ln=txt(m.x).replace(/^(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững) · /,"");d.x=`${nm} · ${ln}`}
    d.open=()=>{if(!goOne(doorPP(p,curPeople().indexOf(p),r.k),r))doorOpen(p,r.k)}}}
- catch(e){console.error("jone fold",e)}return out}})();
+ catch(e){console.error("jone fold",e)}finally{ONE.raw=raw0}return out}})();
 /* a door card opened from the focus view (her tap on «Hãm hại», a KEEP door …) was queued but never painted (seen on LIVE fa722503 too: Q 1, #modal hidden,
    no jdfv in-scene pick-up) — the card is painted at once through the normal showModal chain (jdfv takes it in-scene when her figure is up) */
 (function(){const o0=doorOpen;doorOpen=function(){const n0=Q.length;const r=o0.apply(this,arguments);try{const m=Q[Q.length-1];const M=document.getElementById("modal");
