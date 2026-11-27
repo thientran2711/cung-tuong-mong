@@ -592,3 +592,4 @@ EMP-DAY (emperor daytime where/when plan, PLAN ONLY) | report dev/handover/repor
 EMP-DAY | reports/emperor-favour-plan.md | session_01PEhRbuMDVjApgDKJapJENo (Foreman C) | RUNNING | 2026-11-27T01:30Z
 FLIGHT2-S16B life (seat s16 session_01UV1Szhqp1P7gBX2vN1HGfg, ctx ~15 %; iPad 1180x820 sens, seed 2026112544, newest LIVE origin/main served locally via rt-serve-build.sh + pin=1 fresh profile, harness review/robot-realtap 97e55a457) | dev/handover/robot/flight2-s16b.* | session_01UV1Szhqp1P7gBX2vN1HGfg | CLAIMED | 2026-11-27T01:20Z (FOREMAN F ROOT)
 EMP-DAY | reports/emperor-favour-plan.md @f868ff7b | session_01PEhRbuMDVjApgDKJapJENo | DONE (PLAN READY, worker archived) | 2026-11-27T01:25Z
+coop-afk-l13 BIG rv (r2+r3) | review/coop-afk-l13-r3 | <opening> | RUNNING | 27/11 01:30Z (Foreman B child 5)
