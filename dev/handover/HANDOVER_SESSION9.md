@@ -475,3 +475,8 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 00:11Z LIVE 4cfcda61 → a22cf45d (LC26 wf = wording-gain + firstcard-3; stray _aa.html dropped). ROLLBACK 4cfcda61. WORDING-GAIN + FIRSTCARD-3 archived.
 - 00:20Z RV-163C rolled → archived; RV-163D session_01Rc5AsMQU1ehAQ8bwbw6pWo (opus BIG; queue: kit-resfold-r2 fix, oan, reign-end, pace-speed, title-parity, later real-proof/split-merge). kit-resfold-r2 double-tap fix (law 11, KIT §6.2j) → DIALOG-ORDER-R4. MAP-R9 LOOK PASS → RV-164. KK51 low queue: Fold Dư đồ bottom info pair empty space. Asked sếp: generic «Xóa dấu vết» action? (waiting).
 - 00:22Z ROLL at ~30.5 % ctx → TAKEOVER_MAIN_168.md; opening «MAIN CHÍNH 168»; my 4 scheduled tasks disabled.
+
+## MAIN CHÍNH 168 (session_01Rc5AsMYn5V43iERgwDRQrj, depth 7 of 8, START_CTX ~5 %, roll at 30 %)
+- 00:23Z: took over from 167; tasks: hourly trig_01QybxdkBkqZfX7xRyRUn9tm (:32) · evening trig_01CeTDjvtK2KzDtnuE8M2B4E (00:52Z) · morning trig_013kXDVQm6KeZ5W2AzGmW2w5 · PDF one-shot 00:30Z → REPORT-PDF trig_01E8LFcCGz8Y8Hdzgd8Kyy82. All seats + 164/166/167 told; FROM MAIN 168 lines in MAIN_STATUS + FOREMAN_B–F. Worktree h168, push /home/user/wt/h168push.sh.
+- 00:35Z LOAD: main running ~18 (owner bugs/UI/go-live + kit set) | B save stack rv17 | C free → ORDER emperor-favour plan (OD 00:26Z) | D promo remerge lr5 | E robot E-S4 | F realtap | moved: emperor-favour gap → C. LIVE a22cf45d · ROLLBACK 4cfcda61.
+- 00:35Z «Xóa dấu vết» answered (00:24Z) + «Mua chuộc → Thủ tiêu» (00:28Z) → PUNISH-TIER-4 re-told both rows verbatim.
