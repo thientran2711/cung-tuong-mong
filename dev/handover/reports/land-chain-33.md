@@ -11,3 +11,5 @@ PRIORITY #1 CHECK: OD (GROUP LANDING OD 27/11 ~06:38Z; GO-LIVE OD 26/11 ~04:30Z)
 - coregates started.
 - 22:02Z MAIN 181: UI reviewer now RV-177 session_01Rc5AsJvc9xFeQxWNzN6LaY. kk61-band2 3728073b (RV-176 PASS) → NOT in ui3 (gates running) → rides next bundle.
 - 22:50Z CORE GATES PASS 1073 s; QUICKCHECK PASS --runs 5 (render 309/325, tab 516/535, buổi 1791/1994, tasks 38/39). READY TO PUSH 5fb13d60 sent to MAIN 181. TMK-WARN asked base: told b3b 07f7cd16 (if touching b3b) else LIVE; ask MAIN.
+- 23:00Z pre-staged review/lc33-eg3 18003079 = lc32-ui3 5fb13d60 + e-gain3-live-m 41da6fae (KIT_REQUESTS.md union; index.html/sw.js rebuilt, assets = LIVE); 0 deletions vs 8330e8b8; tests running (act-literal, egain3c-parity vs LIVE build, oldsave-r1, door-row-hint Fold/iPad, gain-empty Fold, mgskin-wire, kit-ring-all).
+- 23:10Z LIVE = 5fb13d60 (MAIN 181 pushed ui3). ACTS.json cdn_sync DENIED by my auto-mode classifier → MAIN told to run it. Foreman E child7 not reachable by send_message (other account) → note in FOREMAN_E_STATUS: LC33 restacks e-gain3; titles2-unit-harden (real jdh.js/assemble/test conflicts) → E worker.
