@@ -1543,7 +1543,7 @@ BAL.ag.par3={on:1,
    fest = Rót rượu (odds o + Sắc/sacD + Tài/taiD; his regard +nt, fail Chủ tin −tin), Đứng sau (tin); black = Đút bạc (pay), Mặc kệ (odds the threatener keeps quiet), caught (NPC đối thực told: lòng −tin, odds tgk);
    aff = Dọa tố (odds o + Tâm cơ/tcD, Bạc, fail: odds lau of Tân Giả khố lauW tuần), Bẩm chủ (Chủ tin), w = worth weights of an NPC maid's pick */
 BAL.ag.par3.cnv={scold:{humble:{tin:1,duc:1},beg:{get o(){return BAL.odb.j42.odO_8},sacD:3,get tin(){return BAL.eff.j42.tinGo},get tinL(){return BAL.eff.j42.tinGo_2}},talk:{danh:2,tin:8,kneel:40,get suc(){return -BAL.eff.j42.sucGo}}},fest:{pour:{get o(){return BAL.odb.j42.odO_11},sacD:3,taiD:10,nt:12,get tin(){return -BAL.eff.j42.tinGo_7}},stand:{tin:3}},
- black:{pay:20,ignore:{o:40},caught:{tin:10,tgk:30}},aff:{threat:{get o(){return BAL.odb.j42.odTop_4},tcD:3,get bac(){return BAL.eff.j42.bacTop},lau:35,lauW:8},tell:{get tin(){return BAL.eff.j42.tinTop}}}};
+ black:{ignore:{o:40},caught:{tin:10,tgk:30}},aff:{threat:{get o(){return BAL.odb.j42.odTop_4},tcD:3,get bac(){return BAL.eff.j42.bacTop},lau:35,lauW:8},tell:{get tin(){return BAL.eff.j42.tinTop}}}};
 /* 2e4: Đánh đàn chờ ngự giá (qinCard, her garden pop-up and NPC cx3:qin): odds o + Tài/taiD + cầm × cam (× tt with Trống tài) + like when she knows his music; Sủng w / wLike, fail −l; Sức suc; NPC needs cầm ≥ minCam
    study: an NPC lesson (j85 npcStudyDo) — pays a teacher only keeping keep bạc; teacher / self weights for mindPick */
 Object.assign(BAL.ag.par3,{qin:{get o(){return BAL.odb.jact.odO},taiD:3,cam:4,tt:2,like:15,w:7,wLike:9,get l(){return -BAL.eff.jact.sungGo},suc:10,minCam:1,g:{"sung":2}},study:{keep:40,teach:1,self:1}});
@@ -2139,7 +2139,7 @@ Object.assign(BAL.eff.j85,{
     /* Hạnh bậc 3: Đức each month up to BAL.virx.hanhCap (j85 v85Month, VIRFX.hanh, Đức panel) */
            /* Đức ≥ ducLv.up / < ducLv.down: Thái hậu, Hoàng hậu regard ± each month (j85 v85Month, Đức panel) */
         /* Đức ≥ ducLv.staffUp / < staffDown: servants' Thiện cảm ± each month (j85 v85Month, Đức panel) */
- caughtDanh:-5     /* a scheme caught (j85 caught wrap): the schemer's Danh */
+ caughtDanh:-5     /* a scheme caught (j85 caught wrap): the schemer's Danh — REAL-PROOF-2 canon overwrite: read through a getter from BAL.charge.cover.danh by the weight of the act caught (jcover); this literal is only the fallback before jcover loads */
 });
 Object.assign(BAL.eff.j23,{
  camSucMonth:1     /* Cầm bậc 1: her Sức each month (j23 artMonth, ARTFX.cam) */
@@ -2301,11 +2301,11 @@ BAL.kmus={holdMs:6000};
 /* PUNISH-REASON (review/punish-reason, D1; owner 26/11 ~01:25Z + ~04:15Z): coldMinDays = days (tuần, wk()) in lãnh cung before any release
    (ân xá, đại xá, cầu xin, minh oan — hers and an NPC's); gapDays = no second rank punishment on one person within this many days (it becomes
    cấm túc); fallSung = Sủng lost with a one-rank fall (was the typed 15 in j8 fall); evShow = most evidence lines a notice lists */
-BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDING OWNER (law 16, asked via MAIN 152): false = today's rule (an NPC always comes back as Đáp ứng); true = release one rank below the old rank */};
+BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,oneBelow:1/* PUNISH-TIER rule (4), OD 26/11 ~19:05Z MAIN rec applied (canon overwrite of the old npcOneBelow question): leaving lãnh cung, her and an NPC alike, she takes back the rank she is owed when its seat is free, else this many ranks lower */};
 /* CHARGE-EVIDENCE (review/charge-evidence, D4 option A; owner 26/11 ~05:15Z «D4 A» + ~05:35Z find-odds formula, verbatim in OD): evidence is kept
-   PER CHARGE (tội danh) — each charge needs its own pieces of its own kind, never a total count (jcharge.js). C[id]: n = player text, need = pieces
-   to accuse (Hoàng hậu target + queenPlus), band = base find odds (index into BAL.odds.cut bands: 0 Mong manh … 6 Rất vững; lighter crime easier),
-   pk = the kinds of piece, in the order found (the record and the evidence card name each piece «deed · kind», table A rule 4; rv); pun = what a proven charge brings (light = phạt bổng + Danh −, cam = cấm túc, giang = one rank, cold = lãnh cung; one punishment, D1).
+   PER CHARGE (tội danh) — each charge needs its own pieces of its own kind, never a total count (jcharge.js). C[id]: n = player text, tier = the weight (PUNISH-TIER, BAL.charge.tier: need = its
+   pieces, the same for every rank), band = base find odds (index into BAL.odds.cut bands: 0 Mong manh … 6 Rất vững; lighter crime easier),
+   pk = the kinds of piece, in the order found (the record and the evidence card name each piece «deed · kind», table A rule 4; rv); lite = the nhẹ penalty (bong = phạt bổng + Danh −, cam = cấm túc); vừa / nặng penalties: BAL.charge.tier note below.
    deed = jtruth deed key → charge. FIND ODDS per search (chFind): band + Tâm cơ of the MASTER vs the target (±1 band per tcStep, cap tcCap) +
    sent servant (±1 only at the extremes: sharp & bậc ≥ srvHi / timid & bậc ≤ srvLo) + TAI MẮT (master's real eyes ≥ matMid +1, ≥ matHigh +2, a planted
    eye in the target's palace +plantB, eye bonus cap eyeCap) + guard (target Phi+ = rank ≥ guardRk: guard) + each miss on that charge +missStep
@@ -2313,31 +2313,33 @@ BAL.pun={coldMinDays:3,gapDays:1,fallSung:15,evShow:4,npcOneBelow:false/* PENDIN
    count that warns her when someone searches HER (once a day per searcher). EIGHT charges = the owner's approved list (OD 26/11 ~05:15Z «D4 A»);
    the former 9th «Bày mưu hại người» (a plot begun / caught in the act / an old scheme) is folded into «Ức hiếp quấy phá» (same 2 pieces, same cấm túc).
    deed map completed by D4 #3 from dup-report §4.1: rash → hd, xa xỉ → vp, laydo/laydol/tat/phatquy/nuoc/tea/ink/mlbeat → uh, maid-line frame → vo,
-   maid-line poison → mh, ls (sổ Kính sự phòng lệch ngày) → tt like pm; pushp (đẩy xuống hồ, can drown) → mh like pond; phonghoa (burns a store) → uh. */
+   maid-line poison → mh, ls (sổ Kính sự phòng lệch ngày) → tt like pm; pushp (đẩy xuống hồ, can drown) → mh like pond; phonghoa (arson: a palace fire endangers lives) → mh (OD 27/11 ~00:09Z, split-merge P3). */
 BAL.charge={C:{
- vp:{n:"Vượt phẩm xa xỉ",need:1,band:6,pun:"light",pk:["tận mắt thấy món vượt phẩm"]},
- il:{n:"Giấu đồ cấm",need:2,band:5,pun:"cam",pk:["đồ cấm thấy trong rương","lời khai kẻ mua hộ"]},
- uh:{n:"Ức hiếp quấy phá",need:2,band:5,pun:"cam",pk:["lời khai người bị hại","người tận mắt chứng kiến"]},
- mc:{n:"Mua chuộc người hầu",need:2,band:4,pun:"light",pk:["bạc đút lót tìm thấy","lời khai người hầu bị mua"]},
- hd:{n:"Hại dung nhan",need:2,band:3,pun:"giang",pk:["tang vật","lời khai người hầu"]},
- mh:{n:"Mưu hại tính mạng",need:3,band:2,pun:"cold",pk:["tang vật","lời khai người hầu","dấu vết nơi ra tay"]},
- vo:{n:"Vu oan giá họa",need:3,band:2,pun:"cold",pk:["thư từ giả mạo","lời khai kẻ được sai","dấu vết đồ bị cài"]},
- tt:{n:"Tư thông",need:3,band:1,pun:"cold",pk:["tín vật, thư từ","lời khai kẻ canh cửa","sổ Kính sự phòng"]}},
+ vp:{n:"Vượt phẩm xa xỉ",tier:"nhe",lite:"bong",band:6,pk:["món vượt phẩm thấy tận nơi"],wk:["người tận mắt chứng kiến"]},
+ il:{n:"Giấu đồ cấm",tier:"nhe",lite:"cam",band:5,pk:["đồ cấm thấy trong rương"],wk:["lời khai kẻ mua hộ"]},
+ uh:{n:"Ức hiếp quấy phá",tier:"nhe",lite:"cam",band:5,pk:["dấu vết nơi ra tay"],wk:["lời khai người bị hại","người tận mắt chứng kiến"]},
+ mc:{n:"Mua chuộc người hầu",tier:"nhe",lite:"bong",band:4,pk:["bạc đút lót tìm thấy"],wk:["lời khai người hầu bị mua"]},
+ hd:{n:"Hại dung nhan",tier:"vua",band:3,pk:["tang vật"],wk:["lời khai người hầu"]},
+ mh:{n:"Mưu hại tính mạng",tier:"nang",band:2,pk:["tang vật","dấu vết nơi ra tay"],wk:["lời khai người hầu","người tận mắt chứng kiến"]},
+ vo:{n:"Vu oan giá họa",tier:"vua",band:2,pk:["thư từ giả mạo","dấu vết đồ bị cài"],wk:["lời khai kẻ được sai"]},
+ tt:{n:"Tư thông",tier:"nang",band:1,pk:["tín vật, thư từ","sổ Kính sự phòng"],wk:["lời khai kẻ canh cửa","người tận mắt chứng kiến"]}},
  order:["tt","mh","vo","hd","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
-  bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",rash:"hd",pushp:"mh",phonghoa:"uh",
+  bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",rash:"hd",pushp:"mh",phonghoa:"mh",
   xx:"vp",laydo:"uh",laydol:"uh",tat:"uh",phatquy:"uh",nuoc:"uh",tea:"uh",ink:"uh",
   poison:"mh",kpoison:"mh",slowpoison:"mh",pgift:"mh",musk:"mh",pond:"mh",catswap:"mh",frame:"vo",kframe:"vo",giahoa:"vo",plant:"vo",
   tryst:"tt",pm:"tt",flirt:"tt",mangift:"tt",
   /* charge-evidence rv (whole family: every key deedAdd / deedOnce / cyDeed / mlCaught writes): maid-line deeds = the act ordered, the pregnancy-register
      deeds = the «thai không khớp sổ» row of Tư thông (table A, H), bribing Kính sự phòng = Mua chuộc */
-  mlpoison:"mh",mlframe:"vo",mlhframe:"vo",mlbeat:"uh",ls:"tt",cyfake:"tt",cylie:"tt",cyforge:"mc"},
- queenPlus:1,tcStep:20,tcCap:2,bandWord:[2,5]/* chFind weight words: band ≤ [0] «tội nặng» · ≥ [1] «tội nhẹ» · else «tội vừa» */,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:4/* Phi (RANKS[4]) and up = Cung chủ, owner canon «Phi+ −1»; rv: was 5 = Quý phi */,guard:-1,missStep:1,missCap:6,
+  mlpoison:"mh",mlframe:"vo",mlhframe:"vo",mlbeat:"uh",ls:"tt",cyfake:"tt",cylie:"tt",cyforge:"mc",
+  /* REAL-PROOF-2 (jcover): dealing with a witness is itself a deed — threat = Ức hiếp quấy phá, bribe = Mua chuộc, the attempt on a life = Mưu hại tính mạng */
+  wthreat:"uh",wbribe:"mc",wkill:"mh"},
+ tcStep:20,tcCap:2,bandWord:[2,5]/* chFind weight words: band ≤ [0] «tội nặng» · ≥ [1] «tội nhẹ» · else «tội vừa» */,srvHi:3,srvLo:1,matMid:2,matHigh:4,plantB:1,eyeCap:2,guardRk:4/* Phi (RANKS[4]) and up = Cung chủ, owner canon «Phi+ −1»; rv: was 5 = Quý phi */,guard:-1,missStep:1,missCap:6,
  fine:20,danh:-3,duc:-3,warnMat:2,accW:15/* Tố giác odds per piece of the proven charge (the j8 accuse weight per piece; rv: was typed in jcharge) */,
  /* charge-followups (b), D4 table A (reports/punish-reason.md): beside the charge's one punishment — Ức hiếp quấy phá: bồi uhPay lượng bạc to each person
     she harmed (victims of her uh deeds, at most «need» people); Mua chuộc người hầu: the servants she bought (spyFor = her) are dismissed from the palace
     (jagstaff asOut "expel"), those named by her mc deeds first, at most mcFire. Same for every consort (law 1). */
- uhPay:20,mcFire:2,
+ uhPay:20,uhMax:2/* most people paid (PUNISH-TIER: was the charge need) */,mcFire:2,
  /* charge-followups (c): «Trình Hoàng hậu» odds = base + the Hoàng hậu's thiện cảm to the one presenting / affD + per × the pieces of the PROVEN charge
     (jaudit card + j78 legacy; was 35 + aff/2 + 8 × the TOTAL pieces, typed) — like Tố giác (accW per piece of the proven charge) */
  trinh:{base:35,affD:2,per:8},
@@ -2346,4 +2348,44 @@ BAL.charge={C:{
     deedAdd / deedOnce / mlCaught call). The weight = the evidence cap of that deed (jcharge chCapC) and its share of the «old» schemes. */
  actW:{poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
   rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
- w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1}};
+ w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1,wthreat:1,wbribe:1,wkill:2}};
+/* PUNISH-TIER (review/punish-tier, owner OD 26/11 ~20:35Z + MAIN recs, ~20:40Z, ~21:00Z; canon overwrite of ~19:05Z / ~19:10Z / ~19:50Z; history note
+   dev/handover/reports/punish-tier.md): the CRIME decides the penalty, the SAME for every rank; the evidence only decides whether it sticks.
+   nhẹ = C[c].lite «bong» phạt bổng (fine, Danh, Đức) / «cam» cấm túc ngắn (punish weight 1), no rank change;
+   vừa = giáng 1 bậc (the seat frees); nặng = giáng 1 bậc + lãnh cung (jpun punTier / punCold);
+   tu = TỬ TỘI, rare: ban chết, or the Emperor commutes it to phế vị + lãnh cung chung thân (only minh oan opens it) — odds tu.spare:
+   base + Sủng / sungD + who pleads (Thái hậu favour ≥ thMin: th; the Hoàng hậu at «thân»: hh; family dad ≥ dadMin: dad).
+   tier[x].need = pieces (C[c].need reads it) + rkPlus[the accused's rank group] — a plain count, no kinds of proof (owner ~21:00Z).
+   tuDeed = deeds that make their charge TỬ TỘI (khi quân trọng tội: giả thai, tráo hoàng tự); tuTgt = a mưu hại aimed at these (Hoàng thượng).
+   rep: a 3rd nhẹ conviction within win wk() (one year = 12 months × 3 tuần) counts as vừa. conf: tự thú lowers the weight by one step, a lie
+   under a proven charge raises it by one. PHẢN TỌA: a failed accusation puts the same weight back on the accuser (jcharge chBack).
+   defer: a pregnant consort's vừa / nặng / tử penalty waits until after the birth (待产; jpun punDefer, j8 birthP). */
+BAL.charge.tier={nhe:{n:"nhẹ",need:1},vua:{n:"vừa",need:2},nang:{n:"nặng",need:3},tu:{n:"tử tội",need:4}};
+BAL.charge.tierOrd=["nhe","vua","nang","tu"];
+BAL.charge.tuDeed=["cyfake","catswap"];
+BAL.charge.tuTgt=["emp"];
+BAL.charge.tu={spare:{base:10,sungD:4,thMin:60,th:20,hh:15,dadMin:60,dad:10}};
+BAL.charge.rkPlus=[0,0,0,1,1,1,2,2];/* owner 26/11 ~21:00Z: a plain COUNT by the ACCUSED's rank group — ≤ Quý nhân +0 · Tần / Phi / Quý phi +1 · Hoàng quý phi / Hoàng hậu +2 (index 7 = Hoàng hậu); with tier need: nhẹ 1/2/3 · vừa 2/3/4 · nặng 3/4/5 · tử tội 4/5/6 */
+/* PUNISH-TIER-3 WITNESSES (owner OD 26/11 ~21:10Z + ~21:17Z as overwritten ~21:40Z, verbatim on the handover branch): NHÂN CHỨNG is a SEPARATE
+   count from CHỨNG CỨ, kept in its own store (holder h → target t → charge c: h.ewc[key(t)][c], jcharge chWit). need[tier] = witnesses a charge of that
+   weight needs beside its evidence count: nhẹ / vừa none, nặng 1, tử tội 2 — the same for every rank group (do not over-split). Witnesses are only a
+   count: no buy-off / recant / silence (owner ~21:35Z). C[c].wk = the witness kinds of each charge (the «lời khai …» / «người tận mắt chứng kiến»
+   names moved out of the evidence kinds pk). A found piece of a charge that still lacks witnesses goes to the witness store every other find
+   (and always once its evidence is at the cap); presenting the charge spends its witnesses with its pieces. Same for her and for every NPC (law 1). */
+BAL.charge.wit={need:{nhe:0,vua:0,nang:1,tu:2},keep:8/* REAL-PROOF (owner 27/11 ~00:10Z): the most people kept per person and charge as «who really saw it» (t.wsee[c], jcharge chSawAdd); oldest drop first */};
+/* REAL-PROOF-2 COVER (owner OD 27/11 ~00:15Z / ~00:24Z / ~00:38Z / ~00:50Z / ~00:57Z; jcover.js): every number of covering one's tracks, the same for her
+   and every NPC. duc = Đức on ANY wicked deed (known or not) by the deed's weight — only where the road has no Đức cost of its own (ownDuc + ACT c.duc);
+   danh = Danh when the deed is EXPOSED (caught red-handed / proven), by weight; trace.band = odds band (BAL.odds.cut) that a deed done in an action leaves
+   a trace, minus the doer's Tâm cơ bands (tcStep / tcCap); wipe = «Xóa dấu vết»: bạc by the deed's weight, odds band + Tâm cơ, only deeds of the last win
+   wk(); wit = a named witness: nhe «Đe dọa bịt miệng» (Sức suc; aff lost on failure), vua «Mua chuộc nhân chứng» (bạc by the gravest weight the witness saw,
+   paid ONLY on acceptance), nang «Thủ tiêu nhân chứng» (band high; hit = her Sức when she is the one); names = most names on the «Ẩn lộ» line;
+   npc = per week: wipe / wit odds, the Đức that picks the tier (≥ ducHi nhẹ, < ducLo nặng, else bạc → vừa), cap = NPC moves per week. Measured by
+   dev/measure/cover-scan.js (every scheme, before / after): one nặng deed = Đức −8 known or not, and Danh −10 (+ the high-rank watch) only when it comes
+   out, on stats of 0–100 — felt, never game-ending; the old flat caught Danh −5 now runs nhẹ −3 · vừa −6 · nặng −10. */
+BAL.charge.cover={duc:{nhe:-2,vua:-4,nang:-8,tu:-12},danh:{nhe:-3,vua:-6,nang:-10,tu:-15},trace:{band:{nhe:3,vua:4,nang:5,tu:6}},
+ wipe:{bac:{nhe:10,vua:20,nang:40,tu:60},suc:{nhe:5,vua:10,nang:20,tu:30}/* the matching road (law 2 / OD:L582): no Bạc → she does it herself, Sức by the same weight */,band:3,win:6},
+ wit:{nhe:{suc:10,band:2,aff:6},vua:{bac:{nhe:15,vua:30,nang:50,tu:80},band:3,aff:4},nang:{band:5,hit:30,ev:1/* a failed attempt: the witness holds this many pieces of «mưu hại» */}},
+ names:2,ownDuc:["caught","story","ls","mlframe","mlhframe","mlpoison","giahoa","laydo","laydol","tat"]/* roads that already take Đức themselves (jmline mlCaught) or are not her choice (story = the past, ls = a birth off the register, caught = the record of an act already paid); giahoa / laydo / laydol / tat take Đức inside their own act (cover-scan before/after) */,npc:{wipe:40,wit:25,ducHi:60,ducLo:30,cap:3}};
+BAL.charge.rep={n:3,win:36};
+BAL.charge.conf={down:1,up:1};
+for(const c in BAL.charge.C)Object.defineProperty(BAL.charge.C[c],"need",{configurable:true,enumerable:true,get(){return BAL.charge.tier[this.tier].need}});
