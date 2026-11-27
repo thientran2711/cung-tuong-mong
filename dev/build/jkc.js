@@ -409,12 +409,12 @@ const KCE={
   kcO("Đọc kỹ, ghi nhớ",{},()=>kcDo("Thư từ trong cung",()=>{kcIntel(1,3);return""})),
   kcO("Hồi âm, gửi kèm quà",{bac:-BAL.kc2.st.kc.bacThu},()=>kcDo("Thư từ trong cung",()=>{kcIntel(2,3);return"Người trong cung nhận quà, hứa để mắt giúp."}),{dis:S.bac<BAL.kc2.st.kc.bacThu})]}}},
  tho:{t:"Hội thơ xuân",b:()=>({who:pMe(),t:`<p>Phủ thế giao mở hội thơ xuân. Các tiểu thư kinh thành đều tới; nghe nói có cả người nhà các vương phủ.</p>`,o:[
-  kcO("Dự hội, làm thơ",{suc:-15},()=>kcFest("Hội thơ","thi")),kcO("Cáo bệnh ở nhà",{},()=>kcDo("Hội thơ",()=>"Ngươi ở nhà đọc sách."))]})},
+  kitRiskOpt(kcO("Dự hội, làm thơ",{suc:-15},()=>kcFest("Hội thơ","thi")),()=>kcFestP("thi")),kcO("Cáo bệnh ở nhà",{},()=>kcDo("Hội thơ",()=>"Ngươi ở nhà đọc sách."))]})},
  hoa:{t:"Hội ngắm mẫu đơn",b:()=>({who:pMe(),t:`<p>Hầu phủ mời các nhà đến ngắm mẫu đơn. Các phu nhân đi xem mặt dâu.</p>`,o:[
-  kcO("Đi, đánh đàn góp vui",{suc:-15},()=>kcFest("Ngắm hoa","cam")),kcO("Đi, chỉ ngắm hoa",{suc:-10},()=>kcDo("Ngắm hoa",()=>{spAdd(S,"danh",1);S.kap+=BAL.eff.jkc.kapO_3;return"Có phu nhân hỏi tuổi ngươi."})),kcO("Ở nhà",{},()=>kcDo("Ngắm hoa",()=>""))]})},
+  kitRiskOpt(kcO("Đi, đánh đàn góp vui",{suc:-15},()=>kcFest("Ngắm hoa","cam")),()=>kcFestP("cam")),kcO("Đi, chỉ ngắm hoa",{suc:-10},()=>kcDo("Ngắm hoa",()=>{spAdd(S,"danh",1);S.kap+=BAL.eff.jkc.kapO_3;return"Có phu nhân hỏi tuổi ngươi."})),kcO("Ở nhà",{},()=>kcDo("Ngắm hoa",()=>""))]})},
  thuongnguyen:{t:"Tết Thượng nguyên",b:()=>({who:pMe(),t:`<p>Đêm rằm tháng giêng, cả kinh thành treo đèn. Khuê nữ được ra phố ngắm đèn, thắp đèn thi.</p>`,o:[
   ((rp)=>kitRiskOpt(kcO("Ra phố thắp đèn thi",{suc:-15},()=>kcFest("Thượng nguyên","thi",()=>{const tm=kcTmMan();if(tm&&S.tm96&&npcWhy("kcMeet",{tm},()=>roll(rp()))){S.tm96.h=Math.min(100,S.tm96.h+10);S.kld+=4;return `Dưới đèn hoa, ngươi gặp ${tm.name}. Hai người đứng cạnh nhau rất lâu.`}return""})),()=>rp()))(()=>BAL.odb.jkc.rlKcMeet_2),kcO("Ở nhà cùng mẫu thân",{},()=>kcDo("Thượng nguyên",()=>{const m=kcR("me")||kcR("di");if(m)kcAf(m,BAL.eff.jkc.o_20);return""}))]})},
- thattich:{t:"Đêm Thất tịch",b:()=>({who:pMe(),t:`<p>Đêm Thất tịch, các khuê nữ thi xâu kim dưới trăng, cầu khéo tay.</p>`,o:[kcO("Thi xâu kim",{suc:-10},()=>kcFest("Thất tịch","theu")),kcO("Ngồi xem",{},()=>kcDo("Thất tịch",()=>""))]})},
+ thattich:{t:"Đêm Thất tịch",b:()=>({who:pMe(),t:`<p>Đêm Thất tịch, các khuê nữ thi xâu kim dưới trăng, cầu khéo tay.</p>`,o:[kitRiskOpt(kcO("Thi xâu kim",{suc:-10},()=>kcFest("Thất tịch","theu")),()=>kcFestP("theu")),kcO("Ngồi xem",{},()=>kcDo("Thất tịch",()=>""))]})},
  trungduong:{t:"Tết Trùng dương",b:()=>({who:pMe(),t:`<p>Cả nhà lên núi ngắm cúc, uống rượu hoa cúc.</p>`,o:[kcO("Đi cùng cả nhà",{suc:-10},()=>kcDo("Trùng dương",()=>{for(const m of S.kc.fam.filter(x=>x.alive&&!/^ban/.test(x.r)))kcAf(m,BAL.eff.jkc.o_21);apply({suc:5});return"Một ngày yên ấm hiếm hoi."}))]})},
  tmrise:{t:"Người ấy đỗ đạt",b:()=>{const tm=kcTmMan();S.kc.ev.tmrise=1;S.tm96.rise=1;return{who:pMan(tm),t:`<p>${tm.name} ${TM96V[S.tm96.k]?TM96V[S.tm96.k].how:"thành danh"}. Tin bay khắp kinh thành.</p>`,o:[
   kcO("Gửi lời chúc mừng",{bac:-5},()=>kcDo("Người ấy đỗ đạt",()=>{S.tm96.h=Math.min(100,S.tm96.h+6);return"Chàng gửi lại một bài thơ."})),kcO("Im lặng",{},()=>kcDo("Người ấy đỗ đạt",()=>""))]}}},
@@ -455,10 +455,14 @@ const KCE={
  so:{t:"Sơ tuyển",b:()=>kcSoD()},phuc:{t:"Phúc tuyển",b:()=>kcPhucD()},dien:{t:"Điện tuyển",b:()=>kcDienD()},trave:{t:"Trả thẻ bài",b:()=>kcTraveD()}};
 PEND.kcE=pp=>{if(!S||!S.kc||S.dead)return null;if(!isKc()&&!/^(dien)$/.test(pp.e))return null;const E=KCE[pp.e];if(!E)return null;const d=E.b(pp);if(!d)return null;
  d.o=(d.o||[]).filter(o=>!o.dis);return d};
-function kcFest(t,art,extra){const b=rsnap();const sc=artOE(S,art)*BAL.art.score+S.tai/3+S.sac/6+R(30);let txt;
- if(sc>=60){spAdd(S,"danh",4);S.kap+=BAL.eff.jkc.kapKcFest;txt=`${t}: ngươi đứng đầu, cả kinh thành nhắc tên.`;if(!S.kc.ev.vp&&S.danh>=BAL.danhG.kcVihanh&&S.sac>=80&&kcRare("kcR3",.4)){S.kc.ev.vp=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
- else if(sc>=40){spAdd(S,"danh",2);txt=`${t}: ngươi được khen.`}else{S.danh=Math.max(0,S.danh-1);txt=`${t}: ngươi không nổi bật.`}
- const mu=kcR("muoi");if(mu&&roll(BAL.odb.jkc.rlKcFest))statSet(mu,"danh",(mu.danh||0)+(sc<40?3:1));const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
+/* KC-ODDS-CHIP (law 7): kcSpanP(base, need, span) = the true chance (0..100) that base + R(span) >= need — the ONE formula the festival roll and the card's odds word share */
+function kcSpanP(base,need,span){const lo=Math.max(0,Math.min(span,Math.ceil(need-base)));return 100*(span-lo)/span}
+function kcFestBase(art){const F=BAL.kc2.fest;return artOE(S,art)*BAL.art.score+S.tai/F.tai+S.sac/F.sac}
+function kcFestP(art){return kcSpanP(kcFestBase(art),BAL.kc2.fest.ok,BAL.kc2.fest.span)}/* «nổi danh» = praised or first (score >= ok); below it she loses a little Danh */
+function kcFest(t,art,extra){const b=rsnap();const F=BAL.kc2.fest;const sc=kcFestBase(art)+R(F.span);let txt;
+ if(sc>=F.top){spAdd(S,"danh",4);S.kap+=BAL.eff.jkc.kapKcFest;txt=`${t}: ngươi đứng đầu, cả kinh thành nhắc tên.`;if(!S.kc.ev.vp&&S.danh>=BAL.danhG.kcVihanh&&S.sac>=80&&kcRare("kcR3",.4)){S.kc.ev.vp=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
+ else if(sc>=F.ok){spAdd(S,"danh",2);txt=`${t}: ngươi được khen.`}else{S.danh=Math.max(0,S.danh-1);txt=`${t}: ngươi không nổi bật.`}
+ const mu=kcR("muoi");if(mu&&roll(BAL.odb.jkc.rlKcFest))statSet(mu,"danh",(mu.danh||0)+(sc<F.ok?3:1));const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
 /* FIRSTCARD (law 4/7): the fever numbers live in BAL.kc2.ill; kcIllLive(p, cost) = the chance (0..100) she lives through the dịch card (the same rolls) */
 /* FIRSTCARD: the plea's chance (one place: the roll and the card's odds word) */
 function kcQuyP(c){return BAL.kc2.kcCard.quyXinChaCho_rb+(c?c.af/2:0)+(S.kc.want?BAL.kc2.kcCard.quyXinChaWant:0)}
@@ -775,12 +779,12 @@ const KCH={
  gianhan:[["Nghe hắn kể","có thể nghe ra chứng cứ về di nương","có rủi ro"],["Nhờ tỳ nữ","có thể nghe ra chứng cứ về di nương; tỳ nữ phải nhọc lòng","có rủi ro"],["Cho bạc","Đức tăng chút ít","an toàn"],["Tiễn hắn","Đức tăng chút ít","an toàn"]],
  moi:[["Xin cha cho xem mặt","nhà trai hẹn ngày đến; áp lực hôn sự tăng","an toàn"],["Thưa: con đợi","cha có thể đồng ý, hoặc phật ý","có rủi ro"],["Nhận lời","xuất giá; nhưng kiếp này dừng ở ngoài cung","an toàn"]],
  dinhhon:[["Vâng lời","xuất giá; nhưng kiếp này dừng ở ngoài cung","an toàn"],["Quỳ xin cha","cha có thể trả sính lễ; không thì vẫn bị gả","có rủi ro"]],
- dinhhon2:[["Lên kiệu hoa","xuất giá; nhưng kiếp này dừng ở ngoài cung","an toàn"],["Cắt tóc","xuất gia; nhưng kiếp này dừng ở cửa chùa","an toàn"],["Thắt cổ","thoát cảnh ép gả; nhưng mất mạng, kiếp này dừng","liều"]],
+ dinhhon2:[["Lên kiệu hoa","xuất giá; nhưng kiếp này dừng ở ngoài cung","an toàn"],["Cắt tóc","xuất gia; nhưng kiếp này dừng ở cửa chùa","an toàn"],["Thắt cổ","thoát cảnh ép gả; nhưng mất mạng, kiếp này dừng","an toàn"]],
  chieu:[["Ghi tên","nhà thôi bàn chuyện gả ta, chờ kỳ tuyển tú","an toàn"],["Xin cha lo","không phải đi tuyển; nhà sẽ lo gả chồng","an toàn"],["Xin tổ mẫu","không phải đi tuyển; nhà sẽ lo gả chồng; tổ mẫu phật ý (nhiều)","an toàn"]],
  so:[["Ra mắt","qua hay không tùy dung mạo, sức khỏe, tiếng tăm và gia thế","có rủi ro"],["Dúi bạc","dễ qua hơn","có rủi ro"],["Nhờ tổ mẫu","dễ qua hơn; tổ mẫu phật ý (nhiều)","có rủi ro"]],
- phuc:[["Dâng","tài nghệ dâng lên cộng vào Điện tuyển","có rủi ro"],["Để tài nghệ","lấy phần giữa, cộng vào Điện tuyển","an toàn"]],
+ phuc:[["Dâng","tài nghệ dâng lên cộng vào Điện tuyển","an toàn"],["Để tài nghệ","lấy phần giữa, cộng vào Điện tuyển","an toàn"]],
  dien:[["Đáp lời","Đức nặng hơn; giữ thẻ bài hay không, không bao giờ chắc","có rủi ro"],["Đối đáp","Tài nặng hơn; giữ thẻ bài hay không, không bao giờ chắc","có rủi ro"]],
- trave:[["Gả cho","xuất giá; nhưng kiếp này dừng ở ngoài cung","an toàn"],["Xin ở vậy","Tài cao hay nhà thầy đồ thì thành nữ phu tử; không thì vẫn bị gả; nhưng đường nào cũng vậy, kiếp này dừng ngoài cung","có rủi ro"],["Cắt tóc","xuất gia; nhưng kiếp này dừng ở cửa chùa","an toàn"]]};
+ trave:[["Gả cho","xuất giá; nhưng kiếp này dừng ở ngoài cung","an toàn"],["Xin ở vậy","Tài cao hay nhà thầy đồ thì thành nữ phu tử; không thì vẫn bị gả; nhưng đường nào cũng vậy, kiếp này dừng ngoài cung","an toàn"],["Cắt tóc","xuất gia; nhưng kiếp này dừng ở cửa chùa","an toàn"]]};
 /* the non-bạc road of every bạc choice (owner 15/11 20:30Z: same value, by how hard bạc is to earn at home — about 10–20 bạc a month) */
 const KCALT={
  phan:()=>{const d=kcR("di");return d?[((rp)=>kitRiskOpt(kcO("Thử một chút lên cổ tay",{suc:-10},()=>kcDo("Hộp phấn lạ",()=>{if(roll(rp())){apply({sac:-2});S.kc.proof[d.id]=(S.kc.proof[d.id]||0)+1;return"Cổ tay nổi mẩn đỏ. Ngươi giữ hộp phấn làm chứng."}return"Không có gì lạ."})),()=>rp()))(()=>BAL.kc2.kcCard.thuMotChutLen_rb+(nv(d,"kcPowder")))]:[]},
