@@ -20,13 +20,13 @@ function lộRisk(k,p){p=p||S;const base={vuon:28,thu:34,tyv:20,tn:40,home:15}[k
 function watcher(p){p=p||S;const s=(p.staff||[]).filter(x=>x&&x.loyal>=BAL.loy.close).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(p.maid&&p.maid.loyal>=BAL.loy.close)return{name:p.maid.name,loyal:p.maid.loyal};return null}
 function whoMayKnow(){const w=watcher();return [w?w.name+" (canh cửa)":"",...liveRivals(true).filter(v=>eyes(v)>=3).map(v=>v.name)].filter(Boolean).slice(0,3).join(", ")||"không ai rõ"}
 /* ONE tư thông rule (E74, MAIN 118 P2, law 1 + 11): any woman p (her or an NPC consort) proven in tư thông with man m (m may be unknown):
-   the man is xử trảm; Hoàng thượng's own regard for her (npc-purpose empMercy: her Sủng, her children) → lãnh cung; else deathSentence (its
-   first-year mercy, its nhân từ mercy). Every caller: affairExposed (her), ttNpcExposed (NPC), trystNpc, j30 «Bóc chuyện tư tình», jmen report. */
+   the man is xử trảm; she takes the Tư thông crime tier (PUNISH-TIER, below). Every caller: affairExposed (her), ttNpcExposed (NPC), trystNpc, j30 «Bóc chuyện tư tình», jmen report. */
 function ttExposed(p,m,lead){p=p||S;const me=p===S,who=m?m.name:"thị vệ";
  if(m){m.alive=false;log(`<span class="r">${lead?lead+" ":""}${m.name} bị xử trảm.</span>`)}else if(lead)log(`<span class="r">${lead}</span>`);
  if(!me)p.affair=null;
- if(npcWhy("empMercy",{p})){if(me)return cold(`Tư thông với ${who} bị lộ`);p.out=true;if(p.queen)p.queen=false;log(`<span class="r">${p.name} tư thông với ${who} bị lộ. Hoàng thượng còn nghĩ tình, tha chết, đày vào lãnh cung.</span>`);return}
- deathSentence(p,`Bị ban chết vì tư thông với ${who}`)}
+ /* PUNISH-TIER (OD 26/11 ~19:50Z / ~20:35Z, newer than MAIN 118 P2 of 24/11): the CRIME decides the penalty — Tư thông is BAL.charge.C.tt.tier (nặng =
+    giáng một bậc + lãnh cung) on the one fall() road, her and an NPC alike; the man is still xử trảm. Clash table: reports/punish-tier.md PUNISH-TIER-9. */
+ fall(p,`tư thông với ${who}, bị lộ`,null,(BAL.charge.C.tt&&BAL.charge.C.tt.tier)||"nang")}
 function affairExposed(m,how,p){return ttExposed(p||S,m,how)}
 /* ONE builder (role-parity part 2, law 1 two-way + law 4): the steps with a man, for her talk card and an NPC consort's day plan
    (jagacts4 cx4:man<step>, run by p4Run) — same odds of the doer, same tình ý, same eyes and the same death if caught.
