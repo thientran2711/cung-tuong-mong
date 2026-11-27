@@ -74,3 +74,9 @@ try{const p0=pager;pager=function(key,items,mk){if(key!=="staff"||!S||!(S.dstaff
  const h=p0.call(this,key,it2,i=>i<n?mk(i):(s=>dthDrop(pcard({f:it2[i].f,name:s.name,rank:s.role==="maid"?"Cung nữ":"Thái giám",status:"Đã khuất",out:true,lines:[tuoi(s.age)].filter(Boolean),chips:[],groups:[],empty:`<p>${s.name} đã khuất.</p>`}).replace('<div class="pcr">','<div class="pcr">'+dthRows(s)),["Dạo này"]))(D[i-n]));
  return h.replace(/(<span class="pcount">[^<]*)/,`$1 · Đã khuất: ${D.length}`)}}catch(e){}
 })();
+
+/* ---- dead card × KIT §6.4b person info panel (jkpp, main 0562e15f): kitPP moves everything the right column held into the hidden act holder (.kppact) and shows only «Thông tin» (.pcf) / «Giao tình»;
+   the dead record rows (Con cái · Hưởng dương/Hưởng thọ · Nguyên do · Mẹ … = .kpkb) and the «đã mất» line (.past) were therefore out of sight. For a dead person they stand FIRST in «Thông tin». ---- */
+try{const kp0=kitPP;kitPP=function(pc,force){const r=kp0.apply(this,arguments);try{if(pc&&pc.dataset&&pc.dataset.kpp==="1"&&pc.querySelector(":scope>.pcl .kst-dead")){
+  const A=pc.querySelector(":scope>.pcr>.kppact"),I=pc.querySelector(':scope>.pcr>.kppv[data-v="info"]');
+  if(A&&I){const mv=[...A.querySelectorAll(".kpkb,.past")].filter(e=>e.parentNode!==I&&!e.closest(".pcf"));if(mv.length)I.prepend(...mv);I.classList.remove("kppempty")}}}catch(e){console.error("dead info",e)}return r};window.kitPP=kitPP}catch(e){}
