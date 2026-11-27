@@ -69,8 +69,8 @@ let top0=(hd&&hd.getClientRects().length?hd.getBoundingClientRect().bottom:D.top
 function kitHandConf(b){try{const g=b&&b.parentElement,dl=g&&g.closest(".dlg");if(!dl)return;let c=dl.querySelector(":scope>.khconf");
  if(!b.classList.contains("klift")||b.disabled){if(c)c.hidden=true;return}
  if(!c){c=document.createElement("div");c.className="khconf";c.innerHTML=`<button type="button" class="khok" aria-label="Chọn lá này">✓</button><button type="button" class="khx" aria-label="Đặt lại">✕</button>`;/* KK56 (X21, owner OD 27/11 ~04:00Z): the green ✓ is the TOP-RIGHT corner button of the lifted / enlarged card (row-reverse: ✕ sits to its left) */dl.appendChild(c)}
- c.hidden=false;const D=dl.getBoundingClientRect(),z0=dl.querySelector(":scope>.khplate"),B=(z0&&!z0.hidden&&z0.getClientRects().length?z0:b).getBoundingClientRect()/* the ✓ rides the ENLARGED card when it is up */,s=KIT_HAND.confPx,gap=6,w=2*s+gap;
- let x=Math.round(B.right-D.left-w-4),y=Math.round(B.top-D.top+4);x=Math.max(4,Math.min(D.width-w-4,x));y=Math.max(4,y);
+ c.hidden=false;const D=dl.getBoundingClientRect(),B=b.getBoundingClientRect()/* the pair rides the LIFTED CARD's top edge, never the info plate (RV-169: it covered the GỢI Ý text) */,s=KIT_HAND.confPx,gap=6,w=2*s+gap;
+ let x=Math.round(B.right-D.left-w+s*.35),y=Math.round(B.top-D.top-s*.55);x=Math.max(4,Math.min(D.width-w-4,x));y=Math.max(4,y);
  c.style.left=x+"px";c.style.top=y+"px";c.style.setProperty("--khcs",s+"px")}catch(e){console.error("kitHandConf",e)}}
 function kitHandConfOff(g){const dl=g&&g.closest&&g.closest(".dlg"),c=dl&&dl.querySelector(":scope>.khconf");if(c)c.hidden=true}
 function kitHandStill(){try{return typeof kfStill==="function"?kfStill():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
