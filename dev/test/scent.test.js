@@ -19,7 +19,8 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
  await p.addInitScript(s=>{let x=s;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648}},seed);
  await p.goto('file://'+path.resolve(F),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;let g=0;do{start();g++}while(isSrv()&&g<30);window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}window.render=render=function(){};});
- const r=await p.evaluate(()=>{const bad=[],B=BAL.scent,K=Object.keys(B.list);const roll0=roll;
+ /* LAND-REMERGE on LIVE: LIVE stat-pace (jstatpace) paces every raw stat write; these probes test the scent rules on EXACT values, so pace is off for the probe (as promo-build / ag-moodknow) */
+ const r=await p.evaluate(()=>{window.SP_OFF=(window.SP_OFF||0)+1;const bad=[],B=BAL.scent,K=Object.keys(B.list);const roll0=roll;
   const box=k=>"hg_"+k,cnt=(x,k)=>(x.inv||[]).filter(e=>e.k===box(k)&&!e.h).length;
   /* T1 */
   for(const k of K){const it=IT[box(k)];if(!it){bad.push("T1 no item "+k);continue}if(it.kd!=="Hương liệu")bad.push("T1 kd "+k);if(it.pr!==B.pr)bad.push("T1 price "+k);if(it.sc!==k)bad.push("T1 sc "+k);
