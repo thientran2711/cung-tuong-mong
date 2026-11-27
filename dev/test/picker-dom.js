@@ -100,9 +100,9 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
      const M=document.getElementById('modal'),pg=M.querySelector('.kipw>.kippg'),t=[...M.querySelectorAll('.kipc')];if(!pg||!t.length){out.push({n,none:1});continue}
      let sc=pg.parentElement;while(sc&&sc!==M&&!(/(auto|scroll)/.test(getComputedStyle(sc).overflowY)&&sc.scrollHeight>sc.clientHeight+2))sc=sc.parentElement;
      const b=sc&&sc!==M?sc.getBoundingClientRect():M.querySelector('.dlg').getBoundingClientRect(),bot=Math.min(b.bottom,innerHeight),r=pg.getBoundingClientRect(),tr=t[0].getBoundingClientRect();
-     out.push({n,rows:new Set(t.map(x=>Math.round(x.getBoundingClientRect().top))).size,cap:BAL.kip.rows,pager:r.top>=b.top-1&&r.bottom<=bot+1,row1:tr.top>=b.top-1&&tr.top<bot-20})}
+     out.push({n,rows:new Set(t.map(x=>Math.round(x.getBoundingClientRect().top))).size,cap:BAL.kip.rows,pager:r.top>=b.top-1&&r.bottom<=bot+1,row1:tr.top>=b.top-1&&tr.top<bot-20,over:t.filter(x=>{const q=x.getBoundingClientRect();return q.bottom>r.top+1&&q.top<r.bottom-1}).length,short:!!M.querySelector('.kipw.kipshort')})}
     S.inv=inv0;return out},N);
-   for(const r of sf)if(!r.none)ok(r.pager&&r.row1&&r.rows>=1&&r.rows<=r.cap,`${vw}x${vh} ${r.n} (chest ${N}): the page = ${r.rows} whole row(s) (≤ BAL.kip.rows ${r.cap}), its first row and the §23 pager in view`,r)}
+   for(const r of sf)if(!r.none)ok((r.pager||r.short)&&!r.over&&r.row1&&r.rows>=1&&r.rows<=r.cap,`${vw}x${vh} ${r.n} (chest ${N}): the page = ${r.rows} whole row(s) (≤ BAL.kip.rows ${r.cap}), its first row in view, the §23 pager over no tile (rv R5 FAIL 2)${r.short?' — box shorter than one row + pager: pager under the row (.kipshort), OPEN K-PICK-SHORT':', pager in view'}`,r)}
   ok(!errs.length,`${vw}x${vh} no page errors`,errs.slice(0,3));await ctx.close()}
  await b.close();fs.writeFileSync(arg('--json','/dev/null'),JSON.stringify(rows,null,1));
  const fail=res.filter(x=>!x).length;{const by={};for(const r of rows)if(r.deep&&r.paged)(by[r.name]=by[r.name]||[]).push(`${r.vp}: ${r.cols} cols (box ${r.gw} px, tile ${r.tile} px)`);for(const k in by)console.log('cols  '+k+' — '+by[k].join(' · '))}
