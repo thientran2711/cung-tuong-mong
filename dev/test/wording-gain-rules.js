@@ -1,7 +1,7 @@
 /* WORDING-GAIN (owner OD 26/11 ~18:50Z (7), law 11 whole family): ONE rule table for the scan AND the rewrite.
    A kit row (Được / Mất / Kèm: the wx / lx / kx text of every option, arc, road and event of dev/build/j*.js) never says a stat change in a VAGUE word
    («thêm thể diện», «tiếng sút», «bớt tin», «hao sức», «bạc vơi», «thêm oán», «để mắt hơn»): it names the STAT and the size in marks
-   «Danh −», «Sủng ++», «oán +» (+ a little · ++ medium · +++ a lot; loss − −− −−−; bands BAL.mk, VANPHONG «Số đo / dấu +»). Rows that already carry a number stay.
+   «Danh −», «Sủng ++», «oán +» (+ a little · ++ medium · +++ a lot; loss − −− −−−; bands BAL.mark.cut, VANPHONG «Số đo / dấu +»). Rows that already carry a number stay.
    RULES  = [regex, replacement, family]   applied in order to the whole text (flags g + unicode);
    VAGUE  = the words that make a stat line vague (what the scan counts); STAT = the quantities the player tracks (a line is in scope only when it names one);
    KEEP   = what is NOT a vague gain word and stays: «không …» rows (owner 17:55Z), an exact count («một người», «hai năm», a number), a chance word («dễ hơn»),
