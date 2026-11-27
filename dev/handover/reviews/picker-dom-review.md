@@ -56,3 +56,31 @@ B. **The FLIP-LAYOUT PIN takes the SMALLEST column count it saw, so on the iPad 
 The wider screen gets FEWER columns than the Fold, and the same iPad frame holds 4 columns in Dâng quà. My iPad Biếu quà shot shows 2 tiles per row, each spread over half the grid. The minimum is taken from a layout that flips with tile count (a short trial draw), not from what a full page needs. Fix: measure or compute the columns for a FULL page (e.g. the grid width ÷ the kit tile size, or a measurement made while `cols × BAL.kip.rows` tiles are drawn), so the count does not depend on the trial draw. Expect iPad ≥ Fold. Then update the KIT.md PAGES text and the jbal2 comment («iPad 1180 = 4–5») to what really happens. Note: with B's inv-stack (rv15, not LIVE yet) the s7 chest drops to 117 entries, but 4 per page is still too few on the iPad.
 
 Everything else passed: laws 4 / 6c / 7, scan, card equality, whole rows, coop, quickcheck, old save. KK47's «KIT OK K-LIST-PAGE» is still needed to land. CDN img/_review/picker-dom/ was left in place for the re-shoot. Shots are in reviewer scratch only.
+
+---
+# ROUND 3 — re-review of 705d50e0 (code ece06266) — verdict: FAIL (1 item + re-merge)
+Reviewer session_01D3E3NX3JZAycKJ8cs4P7qd, for Foreman D session_01D3E3NXaPqTqoCnowMTPdTq. Worker session_01D3E3Nb9VErJBWw6bmHB87X.
+FF: 705d50e0 was FF of 17f23656, but LIVE is now **066d9af0** (3 LAND commits: dayq-qsoftlock, mg-trim, parity-facfix). My trial merge: only index.html / sw.js conflict, so I rebuilt them. All runs below are on that merge (local 2edaf32f).
+
+## Round-2 items
+- A (KIT.md 28.13i bullet): **FIXED.** The tap / .kipd / .kipgo / §70 / ✕ lines are byte-identical to LIVE.
+- B (iPad 2-column pin): **FIXED.** The min-pin is gone. jksize kitFrameLive3 now counts all options of a paged picker, so the layout no longer flips between pages. picker-dom.js 64/64: Fold 4/5/4/4 cols, iPad 3/5/3/3 cols (Tặng/Dâng/Cài/Biếu), whole rows, no inner scroll. Nothing is stretched. iPad < Fold on 3 pickers because the kit tile is 96 px vs 84 px, the same cause as on LIVE. Accepted.
+
+## Gates (on the LIVE 066d9af0 merge)
+scan PASS 5/5 · picker-dom.js 64/64 · coop-e2e 143/143 · quickcheck: old save ok, 0 errors; perf new/live render 166/192, tab 475/468, buổi 920/1057, tasks>200 20/18; the only failing gate is the same G4 crawl row «Ô lưu · Lui» as on LIVE · iPad video looked at (whole rows of 3, pager row, card + «Chọn»).
+
+## FAIL list
+1. **jksize kitFrameLive3 counts the «Thôi» option, but LIVE does not, so a small chest gets a different frame (law 9, consistency with LIVE).** LIVE counts the drawn buttons, and j3 skips `kitCancelIx(m)`. The new count `m.opts.filter(Boolean).length` includes it. Measured on s7 with S.inv cut to N items, both devices, same results on Fold and iPad:
+
+| chest | picker | LIVE 066d9af0 frame | branch frame |
+|---|---|---|---|
+| 5 | giftto / tsgiftpick | kszlive (event frame) | kszlive ✓ |
+| **6** | giftto | **kszlive** | **kdscroll kdtx (pick-list)** |
+| **6** | tsgiftpick | **kszlive** | **kdscroll kesdlg kdper kdpbanner kdpall** |
+| 7 | giftto | kdscroll kdtx | kdscroll kesdlg kdpbanner kdpall kdtx |
+| 7 | tsgiftpick | kdscroll kesdlg kdper kdpbanner kdpall | same ✓ |
+
+Fix: count the options LIVE draws, i.e. `m.opts.filter((c,i)=>c&&i!==kitCancelIx(m)).length`. Also check the 7-item giftto row: the extra `kesdlg kdpbanner kdpall` comes from a later fit pass that still reads the DRAWN count. Use the same «all options» rule wherever a fit pass counts `.opts>button` (scan jksize / j63 / jplace for that query and list each one). Add this 5/6/7-item case to picker-dom.js (frame classes = LIVE's).
+2. **Merge LIVE 066d9af0** (built files only) and send me the new sha.
+
+Everything else PASS. Still needed to land: KK47 «KIT OK K-LIST-PAGE <sha>» (28.13i + the jksize line).
