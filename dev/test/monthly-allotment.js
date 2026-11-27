@@ -27,7 +27,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
     o.down=BAL.stip.down.aldau2==="aldau1"&&BAL.stip.down.aldau0===null&&BAL.stip.down.alnen1==="alnen0";
     const r0=S.rank;const sh=[];for(let r=0;r<8;r++){S.rank=r;sh.push(+(alPrice(S,"dau",BAL.allot.oil.tier[r])/BAL.pay[r]).toFixed(3))}S.rank=r0;o.sh=sh;o.lawC=Math.max(...sh)-Math.min(...sh)<=.03;
     /* a month's goods: oil bottle with lượt + candles into the bag */
-    /* allot-season: the chest ceiling (BAL.stip.keep) — empty her oil/candle stock first so the month really issues them */S.inv=S.inv.filter(e=>!alOf(e.k));const n0=S.inv.length;stipGoods(S,null);const add=S.inv.slice(n0).filter(e=>alOf(e.k));o.goods=add.filter(e=>alOf(e.k).kind==="dau").every(e=>e.u===BAL.allot.oil.uses)&&add.filter(e=>alOf(e.k).kind==="nen").length===BAL.allot.light.n[S.rank];
+    const n0=S.inv.length;stipGoods(S,null);const add=S.inv.slice(n0).filter(e=>alOf(e.k));o.goods=add.filter(e=>alOf(e.k).kind==="dau").every(e=>e.u===BAL.allot.oil.uses)&&add.filter(e=>alOf(e.k).kind==="nen").length===BAL.allot.light.n[S.rank];
     /* hair oil: Kiểu cầu kỳ spends it; without oil it falls back (cap) */
     S.inv.filter(e=>lxOf(e.k)).forEach(e=>e.u=9);const oilU=()=>alOil(S).reduce((a,e)=>a+e.u,0);const u0=oilU();
     const rb={wk:toilWk(),makeup:true,score:70,look:"dep",col:Object.assign(toilColFix({}),{want:"diem"})};lxSit(S,rb);o.oilSpend=u0-oilU()===BAL.allot.oil.use&&rb.col.want==="diem";
@@ -38,7 +38,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
     const rows=toilPreRows(toilColDef());o.presetsHidden=!lxColRows(rows).some(r=>/^pre-/.test(r.k)&&(r.items||[]).some(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);return x&&x[2]==="diem"}));S.inv=keep;
     /* NPC face: no oil → no Kiểu cầu kỳ; NPC month spends oil before the issue */
     const v=consorts().find(x=>x!==S&&x.alive!==false&&!x.out);v.inv=v.inv.filter(e=>!alOf(e.k));const rv={makeup:true,score:70,look:"dep",col:{want:"diem"}};lxNpcCap(v,rv);o.npcNoOil=!rv.col.want;
-    v.inv.push({k:"aldau1",from:"noivu",d:S.turn});alFix(v);const e=v.inv.find(x=>x.k==="aldau1");const eu=e.u;stipGoods(v,null);o.npcSpend=e.u===eu-BAL.allot.oil.npcUse&&(v.inv.filter(x=>alOf(x.k)&&alOf(x.k).kind==="dau").length>=2||/* allot-season: a bottle with lần left = at the ceiling → paid as bạc */!!(v.stip&&v.stip.qbM&&v.stip.qbM.turn===S.turn));
+    v.inv.push({k:"aldau1",from:"noivu",d:S.turn});alFix(v);const e=v.inv.find(x=>x.k==="aldau1");const eu=e.u;stipGoods(v,null);o.npcSpend=e.u===eu-BAL.allot.oil.npcUse&&v.inv.filter(x=>alOf(x.k)&&alOf(x.k).kind==="dau").length>=2;
     /* candles: evening study burns one for +add; morning does nothing; NPC agent the same rule */
     const nC=p=>p.inv.filter(e=>alOf(e.k)&&alOf(e.k).kind==="nen").length;S.inv.push({k:"alnen0",from:"noivu",d:S.turn});
     const card={n:"Luyện cầm kỳ thi họa",c:{},o:100,w:{tai:2},cx:"arts"};S.buoi=0;const t0=S.tai,c0=nC(S);runOpt(card);o.morning=nC(S)===c0;
