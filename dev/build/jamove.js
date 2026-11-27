@@ -48,8 +48,8 @@ function amEmpMore(p,r){if(!r||!["pho","hau","dl"].includes(r.k))return[];if(S.v
  const M=[];const km=k=>{if(typeof KM_EMPACT!=="object"||!KM_EMPACT[k])return;const why=kmEmpWhy(S,k);M.push({id:"x:"+(k==="walk"?"walk":"km"+k),n:KM_EMPACT[k][0],x:kmEmpLine(k),off:!!why,why,go:()=>kmEmpRun(k)})};
  if(r.k==="pho"){km("ky");km("cam")}
  if(r.k==="hau")km("walk");
- if(r.k==="dl"){const n=S.inv.filter(e=>e&&!e.h&&(e.wk||IT[e.k])).length;const why=!n?"rương trống":!can(2)?(txt(whyTime(2))||"hết khắc buổi này"):"";
-  M.push({id:"x:giftemp",n:"Dâng quà trong rương",x:`tốn: 2 khắc · thành: chọn một món trong rương (${n} món), mỗi món ghi đúng điều được`,off:!!why,why,go:()=>{if(!can(2))return;pushDil(mkP("giftto",{t:"emp"}),"Dâng lễ vật");render()}})}
+ if(r.k==="dl"){const n=S.inv.filter(e=>e&&!e.h&&(e.wk||IT[e.k])).length;const why=!n?"rương trống":!can(BAL.time.cost.give)?(txt(whyTime(BAL.time.cost.give))||"hết khắc buổi này"):"";
+  M.push({id:"x:giftemp",n:"Dâng quà trong rương",x:`tốn: ${BAL.time.cost.give} khắc · thành: chọn một món trong rương (${n} món), mỗi món ghi đúng điều được`,off:!!why,why,go:()=>{if(!can(BAL.time.cost.give))return;pushDil(mkP("giftto",{t:"emp"}),"Dâng lễ vật");render()}})}
  return M}
 function amMore(p,r){try{if(!p||!r)return[];if(p.kind==="emp")return amEmpMore(p,r);
  const w=amAt(p);if(!w||(typeof k61Named==="function"&&!k61Named(w.v)))return[];/* j61: an act on a person she cannot name is never offered */
@@ -100,9 +100,9 @@ function amEmpOpts(p,A){const gate=!!(A[0]&&A[0].k61);/* a stranger (j61 gate: g
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);if(!p||!Array.isArray(A))return A;
  try{if(p.kind==="emp")return amEmpOpts(p,A);
   if(p.kind==="th"&&!S.thDead&&!A.some(a=>a&&a.n==="Dâng lễ vật")){const n=S.inv.filter(e=>e&&!e.h&&(e.wk||IT[e.k])).length;
-   A.push({n:"Dâng lễ vật",o:100,lock:!n,t:"rương trống",x:`tốn: 2 khắc · thành: chọn một món trong rương (${n} món), mỗi món ghi đúng điều được`,open:()=>{if(can(2)){pushDil(mkP("giftto",{t:"th"}),"Dâng lễ vật");render()}}})}
+   A.push({n:"Dâng lễ vật",o:100,lock:!n,t:"rương trống",x:`tốn: ${BAL.time.cost.give} khắc · thành: chọn một món trong rương (${n} món), mỗi món ghi đúng điều được`,open:()=>{if(can(BAL.time.cost.give)){pushDil(mkP("giftto",{t:"th"}),"Dâng lễ vật");render()}}})}
   if((p.kind==="rival"||p.kind==="hh")&&p.ref&&typeof k61Named==="function"&&!k61Named(p.ref)&&typeof k61Ask==="function"&&typeof kOf61==="function"&&!A.some(a=>a&&a.n==="Hỏi người hầu: đó là ai?")){
-   const v=p.ref;A.push({n:"Hỏi người hầu: đó là ai?",o:100,lock:!can(1),t:"hết khắc buổi này",x:"tốn: 1 khắc · thành: biết người này là ai (lời thật) · hỏng: người hầu cũng không biết",open:()=>k61Ask(kOf61(v))})}}
+   const v=p.ref;A.push({n:"Hỏi người hầu: đó là ai?",o:100,lock:!can(BAL.time.cost.ask),t:"hết khắc buổi này",x:`tốn: ${BAL.time.cost.ask} khắc · thành: biết người này là ai (lời thật) · hỏng: người hầu cũng không biết`,open:()=>k61Ask(kOf61(v))})}}
  catch(e){console.error("amove talkOpts",e)}return A}})();
 /* the result line: append the real cause to the talk result («Hầu chuyện», «Hiến nghệ», «Dâng lễ vật», «Xin ân điển») */
 (function(){const t0=talk;talk=function(oi){let a=null;try{const p=curPeople()[popIdx];if(p&&p.kind==="emp")a=talkOpts(p)[oi]}catch(e){}const s0=typeof popMsg==="string"?popMsg:"";const r=t0.apply(this,arguments);
