@@ -1,1 +1,1 @@
-Thẻ kết kiếp ghi đúng phẩm cao nhất nàng từng giữ: tú nữ bị ban hoa ghi «Tú nữ», cung nữ chưa được nâng ghi chức cung nữ cao nhất, tiểu thư chưa vào cung ghi «Chưa vào cung».
+Mỗi lựa chọn hiện thẻ kết quả trước, rồi mới sang màn sau; câu kết quả không lặp lại tên thẻ.
