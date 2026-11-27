@@ -310,13 +310,13 @@ function rcpSpyO(){return oddsCl(Math.round(BAL.rcp.spyO+((S.maid&&S.maid.loyal)
    for(const kind in RCP_ST){const sc=WK[kind].a===wkBestArt(v)?BAL.ag.why.g2rcp.best:BAL.ag.why.g2rcp.other;RCP_ST[kind].forEach((s,i)=>{if(i&&rcpNpcKnows(v,kind,s[0])&&!rcpKnows(S,kind,s[0]))L.push({k:rcpBookK(kind,s[0],1),s:sc})})}
    if(L.length&&npcWhy("rcpGift",{p:v},()=>roll(BAL.rcp.giftP))){const g=npwPick(L,x=>x.s);pushDil(mkP("giftin",{f:key(v),e:{k:g.k,from:key(v)}}),"Quà tặng");break}}/* npc-purpose G2c: a friend shares what she knows best */
   if(!S.thDead&&(S.th||0)>=60&&npcWhy("rcpTh",{},()=>roll(BAL.rcp.thGiftP))){const L=[];for(const kind of ["kinh","theu"])RCP_ST[kind].forEach((s,i)=>{if(i&&!rcpKnows(S,kind,s[0]))L.push({k:rcpBookK(kind,s[0],1),s:kind==="kinh"?BAL.ag.why.g2rcp.thKinh:BAL.ag.why.g2rcp.thTheu})});
-   if(L.length){const k=npwPick(L,x=>x.s).k;/* npc-purpose G2c: Thái hậu gives from her regard; a sutra first */S.inv.push({k,from:"th"});log(`<span class="g">Thái hậu ban ta ${itm(k).n}.</span> Cất vào rương.`)}}}}catch(e){console.error("rcp month",e)}return ev}})();
+   if(L.length){const k=npwPick(L,x=>x.s).k;/* npc-purpose G2c: Thái hậu gives from her regard; a sutra first */invAdd(S,{k,from:"th"});log(`<span class="g">Thái hậu ban ta ${itm(k).n}.</span> Cất vào rương.`)}}}}catch(e){console.error("rcp month",e)}return ev}})();
 /* a ma ma of the imperial kitchen / workshops offers to copy out a sub-style (a small story reward with two roads: bạc or Sức) */
 if(typeof ev==="function")ev("rcpMama",()=>S.rank>=0&&!S.out&&["mon","huong","theu","ao"].some(k=>RCP_ST[k].some(s=>!rcpKnows(S,k,s[0]))),
  ()=>{const k=pick(["mon","huong","theu","ao"].filter(k=>RCP_ST[k].some(s=>!rcpKnows(S,k,s[0]))));const s=pick(RCP_ST[k].filter(s=>!rcpKnows(S,k,s[0])));return{k,s:s[0]}},
  p=>{const s=rcpSt(p.k,p.s);if(!s)return null;const fee=Math.max(BAL.rcp.mamaMin,Math.round((BAL.pay?BAL.pay[Math.min(7,S.rank|0)]:40)*BAL.rcp.mamaK)),nm=p.k==="mon"?"Thượng thực cục":"Thượng công cục";return{
  t:`Một ma ma già ở ${nm} sang thỉnh an, kể rằng thuở trẻ từng hầu một vị nương nương rất giỏi ${rcpStN(p.k,p.s)}, còn nhớ cả phổ.<br>“Nếu ${kSay({srv:"f"},S,"{goi}")} muốn, nô tỳ chép lại cho.”`,o:[
- {n:"Biếu ma ma ít bạc, xin chép phổ",fx:{bac:-fee},x:`thành: có ${itm(rcpBookK(p.k,p.s,1)).n}`,go:()=>{S.inv.push({k:rcpBookK(p.k,p.s,1),from:"me"});log(`Ma ma chép lại ${itm(rcpBookK(p.k,p.s,1)).n}, ta cất vào rương.`)}},
+ {n:"Biếu ma ma ít bạc, xin chép phổ",fx:{bac:-fee},x:`thành: có ${itm(rcpBookK(p.k,p.s,1)).n}`,go:()=>{invAdd(S,{k:rcpBookK(p.k,p.s,1),from:"me"});log(`Ma ma chép lại ${itm(rcpBookK(p.k,p.s,1)).n}, ta cất vào rương.`)}},
  {n:"Phụ ma ma một buổi bếp núc, học tận tay",fx:{suc:-15},x:`thành: học ngay ${rcpStN(p.k,p.s)}`,go:()=>{const t=rcpGrant(p.k,p.s,"ma ma dạy tận tay");if(t)log(t)}},
  {n:"Cảm tạ, không cần",fx:{}}]}});
 /* Hoàng thượng's performances: playing / dancing in the sub-style he loves (when she knows it and has learnt it) pleases more */

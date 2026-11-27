@@ -113,14 +113,17 @@ function mbWeek(){if(!mbOn())return;const M=mbS(),b=B(),W=mbW();if(M.wk===W)retu
 function mbComfort(){const M=mbS(),C=B().comfort,W=mbW();const bi=mbBand().i;if(bi>-1)return;const sk=k=>{MOOD_N.cskip=MOOD_N.cskip||{};MOOD_N.cskip[k]=(MOOD_N.cskip[k]||0)+1};
  if(mbFlav()==="gian")return sk("angry");if(M.cw!=null&&W-M.cw<C.cd)return sk("cooldown");if(!roll(bi<=-2?C.ch:C.chLow))return sk("roll");
  let v=null;try{v=liveRivals(true).filter(x=>!x.coop&&!x.queen&&aff(x,S)>=netTh(x,"than")&&(typeof kitIsKnown!=="function"||kitIsKnown(x))).sort((a,b)=>aff(b,S)-aff(a,S))[0]||null}catch(e){}
- const maid=!v&&S.maid&&(S.maid.loyal||0)>=C.maid?S.maid:null;if(!v&&!maid)return sk("nobody");M.cw=W;MOOD_N.comfort++;
+ const maid=!v&&S.maid&&(S.maid.loyal||0)>=C.maid?S.maid:null;if(!v&&!maid)return sk("nobody");M.cw=W;MOOD_N.comfort++;mbComfortCard(v||null)}
+/* save-unseen-lists r4 (LAW 11 / 6c): «Có người đến an ủi» (made at the turn of the tuần) is BUILT by a registered generator from the visitor (id; none
+   = her maid); the cooldown mark (M.cw) and the counter are set before, once — written into the sổ and made again on load */
+const mbComfortCard=rcpReg("mbComfort",v=>{const C=B().comfort;const maid=v?null:S.maid;if(!v&&!maid)return null;
  const nm=v?v.name:maid.name,who=v?pv(v):pMaid(),them=v?"nàng ta":"nàng";const band=mbBand().name.toLowerCase();
  const big=C.big,small=C.small;
  const o1={n:`Giãi bày tâm sự với ${nm}`,risk:"an toàn",hint:`lòng nhẹ đi nhiều, được lòng ${nm}; nhưng mất một khắc buổi này`,x:`tâm trạng +${big}, ${nm} thiện cảm +${C.affUp} · kèm: mất ${C.k} khắc buổi này`,fx:{},
   go:()=>{mbAdd(big,`${nm} đến an ủi`,"comfort");try{if(v)affAdd(v,S,C.affUp);else maid.loyal=cl2((maid.loyal||0)+C.affUp,0,100)}catch(e){}try{spend(C.k)}catch(e){}log(`${nm} ngồi nghe ngươi giãi bày tâm sự; lòng ngươi nhẹ đi nhiều.`)}};
  const o2={n:"Gượng cười, cảm tạ",risk:"an toàn",hint:`lòng nhẹ đi chút ít${v?", giữ được thể diện":""}; nhưng ${nm} thấy ngươi giữ khoảng cách`,x:`tâm trạng +${small}${v?" (giữ thể diện)":""} · kèm: ${nm} thiện cảm −${C.affDown} (thấy ngươi giữ khoảng cách)`,fx:v?{danh:C.danh}:{},
   go:()=>{mbAdd(small,`${nm} đến thăm`,"comfort");try{if(v)affAdd(v,S,-C.affDown);else maid.loyal=cl2((maid.loyal||0)-C.affDown,0,100)}catch(e){}log(`Ngươi gượng cười cảm tạ ${nm}, không nói ra nỗi lòng.`)}};
- Q.push({ev:1,t:"Có người đến an ủi",who,art:"img/act-sang-tham-hoi.webp",h:`<p>Mấy hôm nay ngươi ${band}, ${nm} biết chuyện, mang chút quà sang thăm, hỏi han ân cần.</p><p>Ngươi có muốn nói thật lòng với ${them}?</p>`,opts:[o1,o2]})}
+ const m={ev:1,t:"Có người đến an ủi",who,art:"img/act-sang-tham-hoi.webp",h:`<p>Mấy hôm nay ngươi ${band}, ${nm} biết chuyện, mang chút quà sang thăm, hỏi han ân cần.</p><p>Ngươi có muốn nói thật lòng với ${them}?</p>`,opts:[o1,o2]};Q.push(m);return m});
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w0=mbW();const r=e0.apply(this,arguments);try{if(S&&!S.dead&&mbW()!==w0)mbWeek()}catch(e){console.error(e)}return r}})();
 /* ---------- UI ---------- */
 function mbAgo(w){const d=mbW()-w;return d<=0?"tuần này":`${d} tuần trước`}
