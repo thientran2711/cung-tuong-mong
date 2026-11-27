@@ -141,6 +141,8 @@ if(typeof wdItemRowsE==="function")wdItemRowsE=function(e,o){return kitItemDetai
 #kidfl>.dlg.kpanel{width:var(--kpw,min(560px,calc(100vw - 28px)));max-height:var(--kph,calc(100dvh - 32px));display:flex;flex-direction:column;overflow:hidden}
 #kidfl>.dlg.kpanel>.kidb{overflow:auto;overscroll-behavior:contain;padding:10px 14px 12px}
 .kidc .kidhd,.kshdc .kidet .kidhd{padding-right:40px}
+/* KK56 (OWNER 27/11 ~05:43Z «nhiều blank space không cần thiết», law 10): the item detail frame HUGS its content — the picture column is as tall as its picture (no fixed --kah band under it), the frame as tall as the taller of picture / rows */
+#kidfl .kidet.kpinfo>.kpsubj.kpiart.kidpic{height:auto;align-self:start}#kidfl .kidet.kpinfo{min-height:0;height:auto;align-items:start}#kidfl .kidet>.kpmain{min-height:0}
 .kmrow[data-kid],.kmsh[data-kid],.kiev [data-kid],[data-kid].kitem{cursor:pointer}
 
 `;document.head.appendChild(st)})();
