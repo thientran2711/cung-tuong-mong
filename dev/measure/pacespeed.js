@@ -24,6 +24,11 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
    const tag=(n,f)=>{if(typeof window[n]!=="function")return;const f0=window[n];window[n]=function(){const v0=W.via;W.via=n;try{return f0.apply(this,arguments)}finally{W.via=v0}}};
    ["promoteP","exDirectUp","exGraceUp","exSonUp","promoReward","demote","fall"].forEach(n=>{try{tag(n)}catch(e){}});
    W.last=S.rank;W.lastT=S.turn;
+   /* Tâm cơ / Sắc / Tài rise sources for HER (MAIN 167: Tâm cơ 80 → 90 far too fast): raw rise asked and real rise, by the calling function */
+   W.tsrc={};const who=()=>{const L=String(new Error().stack).split("\n").slice(3,7).map(x=>(x.match(/at (?:Object\.)?([\w$.]+)/)||[])[1]).filter(x=>x&&!/^(apply|ap|spAdd|Array|window)/.test(x));return L[0]||"?"};
+   const tap=(o,before)=>{for(const k of ['tamco','sac','tai'])if(o&&o[k]>0){const key=k+'|'+who();const e=W.tsrc[key]=W.tsrc[key]||[0,0,0];e[0]++;e[1]+=o[k];e[2]+=(S[k]||0)-before[k]}};
+   {const a0=window.apply;window.apply=function(o){const b={tamco:S.tamco||0,sac:S.sac||0,tai:S.tai||0};const r=a0.apply(this,arguments);try{tap(o,b)}catch(e){}return r}}
+   {const a0=window.spAdd;if(a0)window.spAdd=function(p,k,n){const b={tamco:S.tamco||0,sac:S.sac||0,tai:S.tai||0};const r=a0.apply(this,arguments);try{if(p===S)tap({[k]:n},b)}catch(e){}return r}}
   });
   const t0=Date.now();let end='months';
   while(true){
