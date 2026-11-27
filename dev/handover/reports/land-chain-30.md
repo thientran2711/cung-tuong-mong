@@ -26,3 +26,7 @@ LIVE d9ca7892 (Bundle 2) · before: 5cee92bb (kg82) · f28d28b9 (lc29-ui) · ROL
 - d3line.py: after `git checkout --conflict=diff3 -- f`, per hunk with equal line counts: each line takes the side that changed it from base; else leave the hunk.
 - bs_noassets.sh = dev/site/build_site.sh minus line 16 (assets.py); assets.json = `git show <LIVE>:assets.json`; then `CTM_LIVE_REF=<LIVE> python3 dev/site/buildinfo.py "$PWD" <B>`.
 - test args: s3e-display-fix / selx-days take a path under dev (default dev/index.html; `index.html` = root build for selx-days); balance-core / pace-speed / reignend take a PATH (they prefix file://); allot-season / monthly-allotment / ob-oan-enc take the WORKTREE dir.
+### LATE MESSAGES (14:25Z, override NEXT above; full digest sent to LC31)
+- MAIN 178 rulings: 3b lands WITHOUT allot-season (fixer via MAIN 179) + ADD sideq-road-fold-r2 a72a5d7b. dress-fix-n1 4d9a171e = DROPPED (folded inside dress-fix-df; land review/dress-fix-df-rv173 fba7bacc after 3b, with door-onetap-hs-rv173 28eab644).
+- Order: goal-links-rv174-f28 8aee40a9 ALONE (+ coop-clear-rv173 8e1121d3 test-only) → UI bundle 2 (kit-resfold-r4 d500f132 + kit-dlg-avatar-r3 e258a0f9 + punish-stack-live-2 9585e741 [carries owner-ui-a] + mgskin-wire-lrm 92116db8) → 3a → 3b → df + door-onetap-hs.
+- MAIN 178 rolled → ROOT MAIN 179. Big reviewer RV-163J session_01Rc5AsLdmSges1XjCq1vD6Y. titles-daycard-lrm3 → KK59 / Foreman E. coop-e2e not a hard gate (LIVE co-op regression since f28d28b9/kg82).
