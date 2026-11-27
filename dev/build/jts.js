@@ -154,7 +154,7 @@ function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
  const opts=[...D.top.slice(0,3).map(x=>tsOptMend(x.v)),tsOptGuard(),tsOptGifts(D),tsOptHelp(),tsOptDef(),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
  /* its own info picture as before (KIT_INFO «nguy hiểm» → info-nguy-hiem): jk4 kitEvArt guesses an event picture from the words when m.art is empty, and a WHY «tung tin đồn» pulled «cat:tin-don» */
  let art="";try{art=kitInfoArt("Nguy hiểm chung").src||""}catch(e){}
- Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger",art});showModal()}
+ Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger",art,tabdoor:1/* R14 (owner OD 27/11 ~06:42Z): opened by her tap on the Dư đồ chip, NOT an event — stays the LIVE frame, never a Bàn bài hand (tab-hand-crawl found it) */});showModal()}
 /* a dialog she opened from a panel: always the centre modal. dfSeen = the jdfv encounter path is skipped — with the person in her room but her
    figure folded into «+N» (token display:none) that path hid the modal and opened no scene: a dead tap (ob-oan-enc, Fold + iPad) */
 function tsDil(d,title){if(!d)return"";const m={t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,dfSeen:1};if(d.art)m.art=d.art;pushModal(m);return""}

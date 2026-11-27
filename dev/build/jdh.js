@@ -31,14 +31,14 @@ DH.meta={n:"Tài hoa vô song",g:"thi",u:"môn",how:n=>`Đứng đầu hội thi
 DH.podium={n:"Bảng vàng đề tên",g:"thi",how:n=>`Đứng trong ba hạng đầu một hội thi ${nTimes(n)}`};
 DH.nights={n:"Trăng soi rèm ngọc",g:"an",how:n=>`Được thị tẩm ${nTimes(n)}`};
 DH.kids={n:"Phúc ấm đầy nhà",g:"an",u:"hoàng tự",how:n=>`Sinh hạ ${n} hoàng tự`};
-DH.a_thinh={n:"Sớm viếng chiều thăm",g:"ngay",me:1,u:"ngày liền",how:n=>`Thỉnh an ${n} ngày liền, không bỏ ngày nào`};/* TITLE-BAL: a streak (condition), not a count */
-DH.a_doc={n:"Thư hương",g:"ngay",me:1,how:n=>`Đọc sách ${nTimes(n)}`};
-DH.a_nhan={n:"Dung nhan như ngọc",g:"ngay",me:1,how:n=>`Điểm trang, dưỡng nhan ${nTimes(n)}`};
+DH.a_thinh={n:"Sớm viếng chiều thăm",g:"ngay",u:"ngày liền",how:n=>`Thỉnh an ${n} ngày liền, không bỏ ngày nào`};/* TITLE-BAL: a streak (condition), not a count */
+DH.a_doc={n:"Thư hương",g:"ngay",how:n=>`Đọc sách ${nTimes(n)}`};
+DH.a_nhan={n:"Dung nhan như ngọc",g:"ngay",how:n=>`Điểm trang, dưỡng nhan ${nTimes(n)}`};
 for(const k in MAST)DH["l_"+k]={n:MAST[k],g:"nghe",u:"bậc",how:n=>`${artN(k)} lên bậc ${n}`};
 for(const k in WORK)DH["m_"+k]={n:WORK[k][0],g:"nghe",u:"tác phẩm",how:n=>`${WORK[k][1]}: ${n} tác phẩm từ hạng ${WTIER[BAL.dh.q.wk]} trở lên`};/* TITLE-BAL: quality, not tries (BAL.dh.q.wk) */
 /* TITLE-BAL condition titles (owner OD 26/11 ~18:20Z rec (3), approved ~18:50Z (8)): a feat under hardship, a person's lasting favour */
 DH.c_han={n:"Sen nở trong bùn",g:"thi",how:()=>`Đứng đầu một hội thi khi còn ở phẩm ${RANKS[BAL.dh.cond.han.rank].n} trở xuống, hay đang bị cấm túc, đày lãnh cung`};
-DH.c_th={n:"Thái hậu ưu ái",g:"an",me:1,u:"tháng liền",how:n=>`Được Thái hậu quý mến (từ ${BAL.dh.cond.th.v} trở lên) ${n} tháng liền`};
+DH.c_th={n:"Thái hậu ưu ái",g:"an",u:"tháng liền",how:n=>`Được Thái hậu quý mến (từ ${BAL.dh.cond.th.v} trở lên) ${n} tháng liền`};
 const GROUPS=[["tm","Thiên mệnh"],["kc","Khuê các"],["thi","Hội thi"],["nghe","Tài nghệ"],["ngay","Ngày thường"],["an","Ân sủng"]];/* "kc" = jkcg «Khuê các» (OUTSIDE_PLAN §11): like tm, listed only once earned */
 /* «Thiên mệnh» (jge.js, grand endings): one title per grand-ending shading, earned only by reaching it — never listed as "still to earn", never counted in the totals until earned */
 const dhTot=()=>Object.keys(DH).filter(k=>(DH[k].g!=="tm"&&DH[k].g!=="kc")||((S&&S.dh||{})[k]&&S.dh[k].i>=0)).length;
@@ -92,12 +92,12 @@ function seedOld(p){/* old saves: her past contest places from the Sổ ân thư
 function dhSync(p,quiet){if(!p||typeof p!=="object")return [];const first=!p.dh;if(first){bag(p);seedOld(p);quiet=true}const D=bag(p),got=[];
  if(p.dhV!==2){/* TITLE-BAL old saves: «Sớm viếng chiều thăm» counted tries and the works counted every try; their counts restart under the new rule
    (streak / quality). A step already earned stays hers (steps only go up). */if(!first)for(const k of ["a_thinh"].concat(Object.keys(WORK).map(x=>"m_"+x)))if(D[k]){if(k!=="a_thinh"&&D[k].raw==null)D[k].raw=D[k].n||0;D[k].n=0}p.dhV=2}
- for(const key in DH){if(DH[key].me&&p!==S)continue;const c=count(p,key),i=stepOf(key,c);if(i<0&&!D[key])continue;const e=D[key]||(D[key]={n:0});
+ for(const key in DH){const c=count(p,key),i=stepOf(key,c);if(i<0&&!D[key])continue;const e=D[key]||(D[key]={n:0});
   if(!key.startsWith("l_")&&key!=="meta"&&key!=="nights"&&key!=="kids")e.n=Math.max(e.n||0,c);
   if(i>(e.i==null?-1:e.i)){e.at=e.at||[];for(let j=(e.i==null?0:e.i+1);j<=i;j++)e.at[j]=when();e.i=i;got.push(key)}}
  if(got.length){if(p===S){if(!quiet)got.forEach(k=>dhNoteGate(k))}else if(!p.coop)dhAutoWear(p)}
  dhApplyFx(p);return got}
-function dhInc(p,key,d){if(!p||!DH[key]||(DH[key].me&&p!==S))return;const D=bag(p);const e=D[key]||(D[key]={n:0});e.n=(e.n||0)+(d||1);return dhSync(p)}
+function dhInc(p,key,d){if(!p||!DH[key])return;const D=bag(p);const e=D[key]||(D[key]={n:0});e.n=(e.n||0)+(d||1);return dhSync(p)}
 window.dhSync=dhSync;window.dhInc=dhInc;
 function earned(p){const D=(p&&p.dh)||{};return Object.keys(DH).filter(k=>D[k]&&D[k].i!=null&&D[k].i>=0&&!D[k].conf)}/* conf = confiscated (jdh2): not wearable until atonement */
 /* NPCs: wear the highest title, pick the bonus by need (no heir yet → conception; low Sủng / Danh → that; else the first) */
@@ -135,7 +135,10 @@ let NOLUCK=0;(window.THIN_REG=window.THIN_REG||[]).push(["NOLUCK",()=>NOLUCK,v=>
 (function(){if(typeof lotB!=="function")return;const l0=lotB;lotB=function(p,dom){const r=l0.apply(this,arguments);try{if(!NOLUCK&&dom!=="Con cái")return r+dhB(p,"phuc")}catch(e){}return r};
  if(typeof lotTag==="function"){const t0=lotTag;lotTag=function(){NOLUCK++;try{return t0.apply(this,arguments)}finally{NOLUCK--}}}})();
 /* conception: conceiveCh (the final chance, after every multiplier) +v points, only when a chance exists */
-(function(){if(typeof conceiveCh!=="function")return;const c0=conceiveCh;conceiveCh=function(p){const r=c0.apply(this,arguments);try{if(r>0)return r+dhB(p||S,"thai")}catch(e){}return r}})();
+/* conception (title-sys-fix): the «Dễ có thai» bonus is +v points on the FINAL chance, so it is installed OUTERMOST after every module loaded (the
+   cycle phase ×F with rounding (jcycle) and the ledger float ×BAL.nt.concF (jledger) used to swallow an inner +1). In ledger mode the final chance is
+   the float c × concF, so +v points are +v × concF there; only when a chance exists (r > 0: never on a barren / ở cữ / no-chance night). */
+setTimeout(function dhThaiHook(){try{if(typeof conceiveCh!=="function"||conceiveCh.__dh)return;const c0=conceiveCh;const f=function(p){const r=c0.apply(this,arguments);try{if(r>0){const v=dhB(p||S,"thai");if(v){const k=(typeof ldOn==="function"&&(ldOn()||window.__ldNt))&&BAL.nt&&BAL.nt.concF!=null?BAL.nt.concF:1;return r+v*k}}}catch(e){}return r};f.__dh=1;conceiveCh=f;window.conceiveCh=f}catch(e){console.error("dh thai",e)}},0);
 /* self-study: addArt (her) / addArtP (NPC) — a chance of +1 progress */
 (function(){if(typeof addArt==="function"){const a0=addArt;addArt=function(k,g){try{if(g>0&&S&&roll(dhB(S,"nghe")))g+=1}catch(e){}return a0.call(this,k,g)}}
  if(typeof addArtP==="function"){const a1=addArtP;addArtP=function(p,k,g){try{if(p&&p!==S&&g>0&&roll(dhB(p,"nghe")))g+=1}catch(e){}return a1.call(this,p,k,g)}}})();
@@ -154,14 +157,23 @@ let RUMT=null;
 /* ---------- counting hooks ---------- */
 (function(){if(typeof cFin7!=="function")return;const f0=cFin7;cFin7=function(k,kind,L){const r=f0.apply(this,arguments);
  try{(L||[]).slice(0,3).forEach((x,i)=>{const p=x&&x.p;if(!p||p.coop||(p!==S&&!npcOK()))return;const D=bag(p);(D.podium=D.podium||{n:0}).n++;if(i===0&&DH["w_"+kind])(D["w_"+kind]=D["w_"+kind]||{n:0}).n++;if(i===0&&(p.rank<=BAL.dh.cond.han.rank||p.out||p.confined))(D.c_han=D.c_han||{n:0}).n++;dhSync(p)})}catch(e){console.error("dh",e)}return r}})();
-(function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const r=r0.apply(this,arguments);try{if(r===true&&a&&a.n&&S&&!S.dead){const m=ACTK.find(([re])=>re.test(a.n));if(m&&m[1]==="a_thinh")dhStreak();else if(m)dhInc(S,m[1])}}catch(e){console.error("dh",e)}return r}})();
+(function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const r=r0.apply(this,arguments);try{if(r===true&&a&&a.n&&S&&!S.dead){const m=ACTK.find(([re])=>re.test(a.n));if(m&&m[1]==="a_thinh")dhStreak(S);else if(m)dhInc(S,m[1])}}catch(e){console.error("dh",e)}return r}})();
 (function(){if(typeof wkMake!=="function")return;const m0=wkMake;wkMake=function(p,kind){const r=m0.apply(this,arguments);try{if(r&&p&&WORK[kind]&&!p.coop&&(p===S||npcOK())){const D=bag(p),e=D["m_"+kind]||(D["m_"+kind]={n:0});e.raw=(e.raw||0)+1;/* every work made (jdh2 kinhN: the atonement copies count all) */if(r.wk&&r.wk.ti>=BAL.dh.q.wk)dhInc(p,"m_"+kind)}}catch(e){console.error("dh",e)}return r}})();
-(function(){if(typeof rivalsMonth!=="function")return;const f0=rivalsMonth;rivalsMonth=function(){const r=f0.apply(this,arguments);try{if(npcOK())for(const v of rivals)if(v&&v.alive&&!v.coop)dhSync(v)}catch(e){console.error("dh",e)}return r}})();
-(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const t0=S&&S.turn;const r=e0.apply(this,arguments);try{if(S&&!S.dead){if(S.turn!==t0)dhThMonth();dhSync(S)}}catch(e){console.error("dh",e)}return r}})();
+(function(){if(typeof rivalsMonth!=="function")return;const f0=rivalsMonth;rivalsMonth=function(){const r=f0.apply(this,arguments);try{if(npcOK())for(const v of rivals)if(v&&v.alive&&!v.coop){dhThMonth(v);dhSync(v)}}catch(e){console.error("dh",e)}return r}})();
+(function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const t0=S&&S.turn;const r=e0.apply(this,arguments);try{if(S&&!S.dead){if(S.turn!==t0)dhThMonth(S);dhSync(S)}}catch(e){console.error("dh",e)}return r}})();
 /* TITLE-BAL streaks: «Sớm viếng chiều thăm» = days in a row with a Thỉnh an that went well (one per day counts); «Thái hậu ưu ái» = months in a row
-   with Thái hậu's liking ≥ BAL.dh.cond.th.v. e.cur = the streak now, e.n = her best streak (the count the steps read). */
-function dhStreak(){const D=bag(S),e=D.a_thinh||(D.a_thinh={n:0});const d=typeof wk==="function"?wk():0;if(e.last===d)return;e.cur=e.last===d-1?(e.cur||0)+1:1;e.last=d;if(e.cur>(e.n||0))e.n=e.cur;dhSync(S)}
-function dhThMonth(){const D=bag(S),e=D.c_th||(D.c_th={n:0});e.cur=(S.th||0)>=BAL.dh.cond.th.v&&!S.thDead?(e.cur||0)+1:0;if(e.cur>(e.n||0))e.n=e.cur}
+   with Thái hậu's liking ≥ BAL.dh.cond.th.v. e.cur = the streak now, e.n = the best streak (the count the steps read).
+   TITLE-PARITY (law 1 two-way, MAIN 166): the SAME counters for her (S) and every NPC consort p (p.th = Thái hậu's liking of that consort). */
+function dhStreak(p){p=p||S;if(!p||p.coop||(p!==S&&!npcOK()))return;const D=bag(p),e=D.a_thinh||(D.a_thinh={n:0});const d=typeof wk==="function"?wk():0;if(e.last===d)return;e.cur=e.last===d-1?(e.cur||0)+1:1;e.last=d;if(e.cur>(e.n||0))e.n=e.cur;dhSync(p)}
+function dhThMonth(p){p=p||S;if(!p||p.coop)return;const D=bag(p),e=D.c_th||(D.c_th={n:0});e.cur=(p.th||0)>=BAL.dh.cond.th.v&&!S.thDead?(e.cur||0)+1:0;if(e.cur>(e.n||0))e.n=e.cur}
+/* NPC deeds that are the same deed as her counted acts (TITLE-PARITY): Thỉnh an Thái hậu / Hoàng hậu = the ONE two-way deed table TW (jtwoway twDo → D.run(a,t,ok),
+   her talk card included: the same-day rule keeps one count a day); dưỡng nhan / đọc sách of an NPC = the agent deeds cx:face / cx:book (jagacts, the same
+   cost / odds as her deck card); a failed deed returns «… nhưng chẳng được gì» and does not count, as her failed card does not. Installed after every module loaded. */
+const NPCK={"cx:face":"a_nhan","cx:book":"a_doc"};
+setTimeout(function dhNpcHooks(){try{
+ if(typeof TW==="object")for(const k of ["thTH","thHH"]){const D=TW[k];if(!D||D.__dh)continue;const r0=D.run;D.run=function(a,t,ok){const r=r0.apply(this,arguments);try{if(ok&&a)dhStreak(a)}catch(e){console.error("dh",e)}return r};D.__dh=1}
+ if(typeof AGRUN==="object")for(const k in NPCK){const f0=AGRUN[k];if(typeof f0!=="function"||f0.__dh)continue;const f=function(v){const r=f0.apply(this,arguments);try{if(r&&v&&v!==S&&!v.coop&&npcOK()&&!/nhưng chẳng được gì/.test(r))dhInc(v,NPCK[k])}catch(e){console.error("dh",e)}return r};f.__dh=1;AGRUN[k]=f}
+}catch(e){console.error("dh npc hooks",e)}},0);
 window.dhStreak=dhStreak;window.dhThMonth=dhThMonth;
 /* TITLE-BAL pacing (rec (5) «never several titles popping in the same buổi»): at most BAL.dh.note.per new-title panels a buổi; the rest wait
    in S.dhPend and come one by one on the next buổi (the title itself is already hers; only the panel waits). */

@@ -214,7 +214,7 @@ function kitNumVi(n){const D=["không","một","hai","ba","bốn","năm","sáu",
  const two=x=>{if(x<10)return D[x];const t=Math.floor(x/10),u=x%10;const a=t===1?"mười":D[t]+" mươi";return u===0?a:a+" "+(u===1&&t>1?"mốt":u===5?"lăm":u===4&&t>1?"tư":D[u])};
  if(n<100)return two(n);const h=Math.floor(n/100),r=n%100;return D[h]+" trăm"+(r===0?"":r<10?" lẻ "+D[r]:" "+two(r))}
 /* the option's raw kit line (the same text its act card would read), split into labelled items */
-function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){raw=String(o&&o.x||"")}if(typeof sgTxt==="function")raw=sgTxt(raw);/* SG-CARD: the hint reads the same Sủng the card draws */
+function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):(o&&o.w&&typeof optLine==="function"&&Object.keys(o.w).length)?optLine(o)/* KK56 (E-GAIN3b #5): a talk option with gains in `w` reads the line its act card draws */:typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){raw=String(o&&o.x||"")}if(typeof sgTxt==="function")raw=sgTxt(raw);/* SG-CARD: the hint reads the same Sủng the card draws */
  raw=raw.replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ta +${n}`);
  const M={odds:"",items:[],notes:[]};let lab="";
  for(const s0 of raw.split(/ · (?![^<]*>)/)){const s=kaPlain(s0);if(!s)continue;
@@ -229,6 +229,7 @@ function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dil
  return M}
 /* her side of a phrase: +1 good for her, -1 bad, 0 neutral (the kit colour rule kcls/kaSent + story words) */
 function kitHintSign(p,l){if(/^(không (mất|được|tốn)[^,]*gì|không được không mất)/i.test(p))return 0;
+ if(((/^(một phi tần khác|một người khác|phi tần khác)\s/i.test(p)&&/[-−]\s?\d/.test(p))||/^(Danh|Đức|Sủng|Sức|Tài|Sắc) nàng\s*[-−]\s?\d/i.test(p))&&!/(quý|thiện cảm|tin|mến) ngươi/i.test(p))return 1;/* KK56 (E-GAIN3b #4): a stat drop of ANOTHER consort is a gain for her */
  if(/^(Áp lực hôn sự|Lời đồn)\s*\+\s?\d/.test(p))return -1;if(/^(Áp lực hôn sự|Lời đồn)\s*[-−]\s?\d/.test(p))return 1;/* kit-cost-rows-home: less pressure / rumour is good */
 
  if(l==="kèm"&&!/\+\s?\d/.test(p)&&!/bớt (ghen|oán)/.test(p))return -1;/* a side effect is a risk unless it is a plain gain */
@@ -245,7 +246,7 @@ const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh|thế lực nh�
 /* the marks of a change: n = the amount in the phrase (null = none named), sgn = +1 / −1 the stat's OWN direction, lv = clarity */
 function kitMk(sgn,p,lv){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];let m=1;if(n&&lv>=1){const v=+n;const g=(KIT_HINT_MAG.find(r=>r[0].test(p))||[0,"cc"])[1];const big=BAL.mark.cut.big[g];m=v>=big*BAL.mark.cut.hi?3:v<=Math.max(1,Math.floor(big*BAL.mark.cut.lo))?1:2}return (sgn>0?"+":"−").repeat(m)}
 /* THE ONE CHOICE FORMATTER (owner OD 26/11 ~21:55Z, law 4 + 11): every CHOICE surface says a stat change as marks «Danh ++» / «Sủng −» (table BAL.mark.cut, kitMk); the TỐN row (row==='ton') and counts with a unit (khắc, người…) keep their exact number; the result card + Sổ ghi never call it. Idempotent (marks hold no digit). Text in, text out (HTML spans pass through). */
-const MARK_NUM=/([+\-−])\s?(\d+)(?:(?: đến |\.\.)[+\-−]?\s?(\d+))?(?![\d.]|\s?%)/g;
+const MARK_NUM=/([+\-−])\s?(\d+)(?:,\d+)?(?:(?: đến |\.\.)[+\-−]?\s?(\d+))?(?![\d.]|,\d|\s?%)/g;/* KK56 (E-GAIN3b #2): a Vietnamese decimal comma belongs to the number («+1,1» reads as +1, never «+,1») */
 const MARK_UNIT=/^\s?(khắc|lượng|người|việc|món|lần|ngày|tuần|tháng|năm|tuổi|buổi|lá|thẻ|cái|vị)(?![\p{L}])/u;
 function markTxt(h,row){h=String(h==null?"":h);if(row==="ton")return h.replace(/([\p{L}])\s[-−]\s?(?=\d)/gu,"$1 ");/* TỐN row = what she PAYS: the exact amount, no minus sign («Bạc 3», owner OD 26/11 ~22:02Z «Tốn: Bạc 20 · Sức 5 · 1 khắc») */if(/\d\s?→\s?\d/.test(h))h=h.replace(/([\p{L}][\p{L} ]*?) (\d+)\s?→\s?(\d+)(?:\s?\(([+\-−]\d+)\))?/gu,(m,L,a,b,d)=>+a===+b?m:L+" "+(+b>+a?"+":"-")+Math.abs(+b-+a));/* «Đức 40 → 38» = a change of −2 */
  if(!/[+\-−]\s?\d/.test(h))return h;
@@ -626,6 +627,7 @@ window.kitRtoastClear=kitRtoastClear;addEventListener("resize",()=>{try{kitRtoas
 (function(){const st=document.createElement("style");st.id="k2b-evart";st.textContent=`
 #rtoast.kevres{display:grid!important;grid-template-columns:84px minmax(0,1fr);column-gap:10px;row-gap:0!important;grid-auto-rows:min-content;align-items:start}/* KIT §7.4 size to content (MAIN 162: an empty band under «Tiếp ▸»): the picture spans 9 grid rows, so the base card gap made 8 empty row gaps (≈ 89 px) — no row gap, rows as tall as their content */
 #rtoast.kevres>:not(.kpevr){grid-column:2}
+#rtoast.kevres>:not(.kpevr)+:not(.kpevr){margin-top:10px}
 #rtoast.kevres>.kpevr{grid-column:1;grid-row:1/span 9;width:84px;height:124px}
 #rtoast.kevres>.kpevr>.ksart,.kpsubj.kpev>.ksart{width:100%;height:100%;aspect-ratio:auto}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */

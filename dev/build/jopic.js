@@ -347,9 +347,8 @@ window.kitOddsBadge=kitOddsBadge;window.kitOddsBadgeOn=kitOddsBadgeOn;window.kit
 (function(){const st=document.createElement("style");st.id="kit-oddsbadge";st.textContent=`
 .kodb{position:absolute;top:3px;left:50%;transform:translateX(-50%);z-index:4;display:flex;align-items:center;justify-content:center;max-width:calc(100% - 4px);box-sizing:border-box;padding:1px 5px;border-radius:10px;background:#fffaf0f2;border:1px solid var(--gold,#c9a46a);box-shadow:0 1px 3px #0005;pointer-events:none;font-size:clamp(.56rem,calc(var(--kas,100px)*.12),.95rem);line-height:1.15}
 .kodb .kodm{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:.1em .35em;margin:0;padding:0;background:none;border:0;pointer-events:none;max-width:100%}
-.kodb .kodm b{font-size:1em;white-space:nowrap;overflow:visible;text-overflow:clip;max-width:none}
-/* R12 (owner OD 27/11 ~07:12Z: a cut badge word is not allowed): on a narrow hand card (iPad ~80 px picture) bar + word do not fit one row; the badge breaks ONLY between the bar and the word (bar on the first line, the word on the next, one whole nowrap word). The global KIT §5 one-row rule (.kodm.kodm nowrap !important, j79) beat the wrap above, so the word ran out of the picture and .kaart cut it. Higher weight, badge only. */
-.kodb .kodm.kodm.kodm{flex-wrap:wrap!important;row-gap:1px}.kodb .kodm.kodm.kodm>b{flex:none;white-space:nowrap!important;max-width:100%}.kodb .kseg i{height:.55em;width:.55em}
+.kodb .kodm b{font-size:1em;white-space:nowrap;overflow:visible;text-overflow:clip;max-width:none}.kodb .kseg i{height:.55em;width:.55em}
+.kodb .kodm.kodm.kodm{flex-wrap:wrap!important;row-gap:1px}.kodb .kodm.kodm.kodm>b{flex:none;white-space:nowrap!important;max-width:100%}/* wins over the kit-odfit nowrap!important: on a ~80 px picture the bar wraps above the word and the word stays whole (KIT-STAGE-R12 finding) */
 `;document.head.appendChild(st)})();
 window.kitOptFinal=kitOptFinal;
 (function(){const k0=kpOptArt;kpOptArt=function(b){const r=k0.apply(this,arguments);try{kitOptCompactRows(b);kitOptFinal(b);kitOptUnify(b)}catch(e){}return r};window.kpOptArt=kpOptArt})();
