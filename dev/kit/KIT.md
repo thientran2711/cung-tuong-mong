@@ -1958,7 +1958,7 @@ closing ”) — review/toilette 15/11, same rule in the kit fact rows `kpSenten
 - An act RESULT on a person card (`popMsg` → `.pcn`, e.g. "Sai đi dò la: thành …") stays on the card as `.pcn.kpres` under the sticky tabs, listed by
   kitBullets; only a helper sentence ("Không gặp mặt: phải sai người…") moves into the acts' Ghi chú (31.9). Before this fix the result vanished.
 - Her own age: chip "N tuổi" (`#me-a.k3age`) right after the rank chip in the top bar, every device and road; nowhere else in the bar.
-- Act cards never show an empty Mất row ("không mất gì") — j63 kaRows.
+- Act cards keep ALL their rows (OD 26/11 ~17:55Z canon overwrite): «Tốn: không» and «Được: không» stay on every card, nothing hidden; every act button (pbtn, j15 kitTonRow) and every option card carries a Tốn row; a card with no roll shows no Bại row. Navigation cards («Đi tới», «Xem Dư đồ») carry Tốn + Được through kaRows too. A card that only closes is never drawn: the frame ✕ closes (j3 kitCancelIx; the notice panel's close option is «Đóng»). In one list the enabled cards come first, the dimmed after (kitPick board, j19 kitOffLast for .pcb/.rbtn/.kskacts).
 - End card (j32 `over(h,t,fate[,alive])`): "Chết vì" only when she died; a living ending (thoái vị, xuất cung, xuất gia, về quê…) reads "Kết cục"
   and "Kiếp này khép lại." Callers may pass alive=true/false.
 - Dialog options (26.6 event rule hides outcomes): an option with `showOdds:true` keeps its odds word; `showOut:true` shows the full act card.

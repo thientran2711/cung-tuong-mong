@@ -301,7 +301,7 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  let ton=R("ton")[0],mats=R("mat"),gains=[...R("thanh"),...R("duoc")],gain=gains[0];
  /* tinbao-words (owner OD 25/11 ~23:36Z, Tin báo «Xem tin» card read «TỐN không / ĐƯỢC không»): a FREE CHOICE card — no cost, no gain, no loss, no
     hint row and no odds of its own (only notes such as «kèm: trả lời trước …», which stay behind «!») — shows NO grey «không» rows (.kfree) */
- const free=b.dataset.knav==="1";/* §6.2m (kit-k44-parts): a NAVIGATION option (nav:1, «Đi tới · N khắc») has no rows; every other card keeps all rows: *//* OD 26/11 ~17:55Z (canon overwrite of tinbao-words): KEEP ALL result rows — «Tốn: không», «Được: không» stay on every card, nothing hidden; the .kfree no-row card is retired */
+ const free=false;/* KK56 (KIT-STD-AUDIT F7, OD 26/11 ~17:55Z KEEP ALL rows): a NAVIGATION option (nav:1) shows its Tốn / Được rows through the same kit rows (kaRows) like every card; the §6.2m no-row nav card is retired *//* OD 26/11 ~17:55Z (canon overwrite of tinbao-words): KEEP ALL result rows — «Tốn: không», «Được: không» stay on every card, nothing hidden; the .kfree no-row card is retired */
  /* LAW 3 (review/odds-meter-back): a card with NO roll (no odds of its own; a no-roll option carries no odds word at all, owner 26/11 ~18:25Z) cannot fail — its
     «mất: …» (parsed as a Bại row beside Thành) is a CERTAIN loss and stands in Tốn like a Mất row, never folded behind «!» */
  const sure=!b.querySelector(".kat .kodds");if(sure)mats=mats.concat(R("bai"));
@@ -516,10 +516,10 @@ function kitGoalLink(label,how){const id="g"+(++KGL.n);KGL.m[id]=how||{};if(KGL.
  return `<span class="kglink" role="button" tabindex="0" data-kglink="${id}">${label}</span>`}
 function kitHowPanel(how){try{how=how||{};const p=how.who&&typeof how.who==="object"?how.who:null;const nm=p?(p.name||""):(how.who||"");
  const wk=how.where||"";let pl=wk;try{if(wk&&typeof placeName==="function"&&typeof placeOf==="function"&&placeOf(wk))pl=placeName(wk)||wk}catch(e){}
- const ico=wk&&typeof kitPlaceIcon==="function"?kitPlaceIcon(wk,16):"";
+ const ico=wk&&typeof kitPlaceIcon==="function"?kitPlaceIcon(wk,16):"";const kplc=String(pl||"").replace(/\s*·\s*/g," ");/* the kit splits row values at « · » */
  const rows=[["Ai",nm?(typeof kitName==="function"&&p?kitName(p):nm):""],["Ở đâu",pl?`<span class="kglwhere">${ico}${pl}</span>`:""],["Giờ mở",how.hours||""],["Tốn",how.cost||""],["Ghi chú",how.note||""]];
  const html=(typeof kitRows==="function"?kitRows(rows):rows.filter(r=>r[1]).map(r=>`<p><b>${r[0]}:</b> ${r[1]}</p>`).join(""));
- const opts=[];if(typeof how.go==="function")opts.push({n:how.goK!=null?`Đi tới · ${how.goK} khắc`:"Đi tới",nav:1,fx:{},go:()=>{try{how.go()}catch(e){console.error("kitHowPanel go",e)}}});if(typeof how.map==="function")opts.push({n:"Xem Dư đồ",nav:1,fx:{},go:()=>{try{how.map()}catch(e){console.error("kitHowPanel map",e)}}});
+ const opts=[];if(typeof how.go==="function")opts.push({n:"Đi tới",nav:1,fx:{},x:`tốn: ${how.goK!=null?how.goK+" khắc":"không"} · được: tới ${kplc||"nơi ấy"}${nm?", gặp "+nm:""}`,go:()=>{try{how.go()}catch(e){console.error("kitHowPanel go",e)}}});if(typeof how.map==="function")opts.push({n:"Xem Dư đồ",nav:1,fx:{},x:`tốn: không · được: xem ${kplc||"nơi ấy"} trên Dư đồ`,go:()=>{try{how.map()}catch(e){console.error("kitHowPanel map",e)}}});
  const m=typeof kitModal==="function"?kitModal({kind:"info",title:"Cách làm",subject:p||undefined,html,opts:opts.length?opts:undefined,cls:"kgoalhow"}):null;
  /* the head picture is the painting of the PLACE (kitPlaceArt), never the generic event art */try{const a=wk&&typeof kitPlaceArt==="function"&&typeof placeOf==="function"&&placeOf(wk)?kitPlaceArt(wk):null;if(m&&a){m.headArt=a;showModal()}}catch(e){}return m}catch(e){console.error("kitHowPanel",e);return null}}
 window.kitGoalLink=kitGoalLink;window.kitHowPanel=kitHowPanel;
