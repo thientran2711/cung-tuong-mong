@@ -59,15 +59,18 @@ window.CTM_WAIT=window.CTM_WAIT||{
  coopAway:"đang vắng hay đứt đường xa · hảo hữu mở lại là tự vào lại",
  /* m-fix-1 (robot M4 25/11): «Sang buổi / Sang ngày mới» held because a card waits behind what she has open (jdayq gate (c): a person view, a mini-game …) */
  dqHeld:"Có tin đang chờ · xong việc đang làm đã",
+ /* KK47 (owner OD 26/11 ~21:41Z (c) «Sang buổi» 5 lines; law 10 one fixed button size): the bottom-bar button shows only the SHORT label; the long line above goes to the kit notice line (kitNotice) */
+ dqHeldBtn:"Chờ tin",
+ dqRoomBtn:"Về phòng",
  /* button-crawl-fix-6: the card waiting is a person in her room (a visitor scene left when she changed tab): one tap on the button takes her back */
  dqRoom:"Có người đang đợi · về phòng",
  coopWaitPeer:"Chờ hảo hữu…",
  coopWaitPeer2:"Đợi hảo hữu",
- coopWaitBuild:"Đợi cùng bản mới",
+ coopWaitBuild:"Đợi bản mới",/* KK47 law 10: one line on iPad, ≤ 2 on Fold */
  coopMoved:"Ở máy khác",
  coopRelink:"Đang nối lại…",
  coopLinking:"Đang nối…",
- coopAbsent:"Hảo hữu đang vắng",
+ coopAbsent:"Hảo hữu vắng",/* KK47 law 10: the #next button label stays ≤ 2 lines on Fold */
  /* new build (swreg.js) */
  newOpened:"Đã mở bản mới",
  newOpenedRoom:"Đã mở bản mới · vào lại phòng",

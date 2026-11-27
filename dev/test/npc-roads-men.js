@@ -9,7 +9,7 @@ const {chromium}=require('playwright');
 const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log((c?'ok   ':'FAIL ')+n);if(!c)console.error('  ',JSON.stringify(x).slice(0,900))};
  let ctx=null,p=null;
- const open=async()=>{if(ctx)await ctx.close();ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});p=await ctx.newPage();p.setDefaultTimeout(0);
+ const open=async()=>{if(ctx)await ctx.close();ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});p=await ctx.newPage();p.setDefaultTimeout(0);await p.addInitScript(require('./lib/qdrain').init);/* headless month loop: __bot + answer the night choice (lib/qdrain.js) */
   p.on('pageerror',e=>errs.push(e.message.slice(0,300)));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text().slice(0,300))});
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
   await p.waitForFunction(()=>typeof start==='function'&&typeof nrMenL==='function',null,{timeout:0});await p.waitForTimeout(1500);
@@ -17,7 +17,7 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
    window.__boot=k=>{for(let t=0;t<3;t++){quiet=true;window.__forceOrigin=k;start();quiet=false;Q.length=0;if(S&&S.origin)return true}return false};
    window.__life=(k,mons)=>{if(!__boot(k))return{err:'boot'};let err=null,mon=0;const seen=new Map(),bad=[];
     for(;mon<mons;mon++){if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}
-     const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
+     const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
      for(const e of nrMenL())if(e.p.nr)seen.set(e.p,{k:e.k,g:e.g,n:e.n})}
     const M=[...seen.entries()].map(([p,z])=>({n:z.n,k:z.k,g:z.g,r:p.nr.r,l:p.nr.l,x:p.nr.x,e:p.nr.e,valid:!!NRM[p.nr.r]&&NRM[p.nr.r].k===z.k}));
     /* never: the player's father, the m96 man, the player's children */
