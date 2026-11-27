@@ -1,4 +1,4 @@
-# ~83% xong · còn 41 việc không tính hình nhân vật (LIVE b16b4b93)
+# ~83% xong · còn 41 việc không tính hình nhân vật (LIVE 0b43ee55)
 Footer % = whole game (MAIN 167: 88 % at 28 open rows → 86 % at 35; list-only progress = 31 %). List method: X = done/(done+open); size weights S=1 M=2 L=3; done = struck rows + LIVE since 24/11 (owner-bug batch counts 10), a «partly live» row counts half its weight; only jobs on this list, not the whole game. N = open rows below.
 Recount MAIN 169 27/11 ~01:48Z: +1 owner job (row 45 Cơ duyên) → 42 open, ~83 % (wording-marks 540358c4 live). Recount MAIN 168 27/11 ~01:10Z: +6 new owner jobs tonight (rows 39–44), row 5 partly → 41 open, ~84 %. Earlier recount by MAIN 167 worker WORKLIST-RECOUNT, 27/11 ~00:10Z, from `git log origin/main --first-parent` (LIVE 4cfcda61), FOREMAN_B–F STATUS tails, HANDOVER_SESSION9 (MAIN 165/166/167), CLAIMS, owner-bugs report. Every main keeps this current and reports at 08:00 / 20:00 her time; owner (26/11): recount after each batch and update this top line.
 # ~86% xong · còn 35 việc không tính hình nhân vật (LIVE a22cf45d)
@@ -38,7 +38,7 @@ State: LIVE = on main · partly = some pieces LIVE · open.
 | 29 | HUD Sắc phong slot (HUD-SACPHONG, kitHudSlot 470d4ece) | HUD-SACPHONG | open |
 | 30 | Tốn no-minus | — | RV PASS, in land queue |
 | 31 | B save stack rv17 (5.2 M-char silent save loss, inv-stack) — PLAY-STOPPER | B | open: LAND READY ETA ~01:45Z |
-| 33 | mg-trim-r6 group: Trang điểm một chạm, Học nhanh, Chăm nhanh (OB 14/21/27) + srv-rank, parity-facfix, help-housemate, selx-fair | D lead | open: 4ecc3ce6 not FF, remerging |
+| 33 | mg-trim-r6 group: Trang điểm một chạm, Học nhanh, Chăm nhanh (OB 14/21/27) + srv-rank, parity-facfix, help-housemate, selx-fair | D lead | mg-trim LIVE 0b43ee55; rest: parity-facfix landing, srv-rank/help-housemate/selx-fair at D BIG rv |
 | 34 | DRESS-FIX: Trang điểm chọn áo/hoa, ô gộp, xa xỉ, thay đồ ngang giá, NPC-driven lột đồ (OB 48–52, 56) | DRESS-FIX | open |
 | 35 | KK44 kit sweep: map icons big (44), buổi tint (45), old frames → kit (57), map-zones-r7 (5/31) | KK44 | open |
 | 36 | Wording/hint batch: odds wording 43, WORDING-GAIN 53, closing-chip 39, buy-where links 41, OB-VERDICT-3 (42), kit-bac-progress 36, kit-name-stranger 22 | various | open/queue |
