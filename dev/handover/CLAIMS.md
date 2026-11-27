@@ -582,3 +582,4 @@ kit keeper KK51 | review/kit-plaque-confirm + review/kit-hand-mount | session_01
 god-research spec | dev/handover/reports/god-research.md | session_01Rc5AsMsPWc1spTKeNmYP4d | RUNNING | 2026-11-26T23:53Z (MAIN 167)
 kit-person-panel (option B) | review/kit-person-panel | session_01Rc5AsLyZ4T4e28PDxP9NdF | RUNNING | 2026-11-27T00:01Z (MAIN 167)
 real-proof + split-merge-fix | review/real-proof, review/split-merge-fix | session_01Rc5AsJgemEyzYz28CFtYq4 | RUNNING | 2026-11-27T00:09Z (MAIN 167)
+FLIGHT2-S16A life (NEW seat s16 replacing s9 at ctx 30.5 %; iPad 1180x820 bold, seed 2026112542, LIVE origin/main newest served locally via rt-serve-build.sh + pin=1 fresh profile, harness review/robot-realtap 8ea10d7e) | dev/handover/robot/flight2-s16a.* | (session id in FOREMAN_F_STATUS) | CLAIMED | 2026-11-27T00:15Z (FOREMAN F ROOT session_01UV1SzjGcJHxzVCtPAppfos)
