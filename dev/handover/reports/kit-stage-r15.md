@@ -64,3 +64,10 @@ Family test dev/test/emo-over-text.js (end ×3 incl. the Đại kết cục bann
 Measures on 3b00a9df (one sequential batch, alone): emo-over-text all pass · xl-one-size all pass · hook 80 dialog-fixed all pass · hook 96 total 6 ≤ 28 {X06:4, X08:2} · one-core-guard PASS · kit-hand KIT-HAND PASS (172 ok / 0 fail) · badge-hand 22 / 0.
 Stills (looked): https://ctm-img.victoria-tntt.workers.dev/img/_review/kit-stage-r15/ — r2-<device>-<dialog>.png = round 2; after-* / before-* = round 1.
 Finding for MAIN (not fixed, other kit part): the reward motion layer (kmrew gold burst + «Hoàng hậu → ta: thiện cảm +6» toast) flies over the Đại kết cục story text / figure on the Fold for ~1–2 s right after the dialog opens (r2-755x1000-end-i-k-t-c-c.png). The same «no flight over open dialog text» rule would cover it; the owner of kitReward / kmrew to say.
+
+## FINAL (R15 closes) — RV-176 PASS → LAND READY review/kit-stage-r15 d2bf0c8c
+- d2bf0c8c = 3b00a9df + merge LIVE bd47c753 (save rv26). LIVE's save-stack side was kept; 4 lines from the kit-stage line were also kept: (a) Ban cung kind:group, (b) lapbat without «Bỏ qua», (c) jdh «Thôi», (d) j8 R12 wording. RV-176: "fine, no change needed".
+- Tests on d2bf0c8c, each run alone: emo-over-text PASS · xl-one-size PASS · hook 80 all pass · hook 96 6 ≤ 28 · one-core PASS · kit-hand 172/0 · badge-hand 22/0 · thoi-live-scan 0 close cards / 168.
+- Lander note (RV-176): if LC32 lands kk61-rv176 first, d2bf0c8c needs a built-files-only re-merge (index.html / sw.js: take LIVE, rebuild, `git checkout assets.json`).
+- Open work: none in this unit. Handed elsewhere: the kmrew burst / toast over end-dialog text was routed by MAIN 179 to DLG-DEAD-BTN-2. No R16 needed.
+- Worktree /home/user/wt/r15 is kept until landing (branch pushed); nothing unpushed. Context at close ~55 %.
