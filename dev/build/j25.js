@@ -13,7 +13,9 @@ const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|
   return a})}})();
 /* the talk line: cost in khắc, gains green, risks and failure red, needs as disabled reasons */
 optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=talkK(a);
- if(a.k&&AOUT[a.k]){return actLineRaw(a.k,rolled?word(o):"",[`${tc} khắc`,fmt(a.c||{})].filter(Boolean).join(", "))}
+ if(a.k&&AOUT[a.k]){return kitParse(actLineRaw(a.k,rolled?word(o):"",[`${tc} khắc`,fmt(a.c||{})].filter(Boolean).join(", ")))}/* ACT-MOVE-6: kit rows like every other path (was the raw line: an empty card body where the frame does not re-parse) */
+ /* ACT-MOVE-6 law 3: an x that already carries its own kit labels (odds word · thành: … · hỏng: …, e.g. jration «Lấy trộm son phấn») is passed whole — never nested inside one «thành:» row */
+ {const xp=String(a.x||"").replace(/<[^>]+>/g,"");if(/(^|·\s*)(thành|hỏng|kèm|được|bại)\s*:/i.test(xp)){const ow=rolled&&!xp.split(" · ").some(s=>KA_ODDS.test(s.trim()))?word(o):"";return kitParse([ow,`tốn: ${tc} khắc${a.c&&fmt(a.c)?", "+fmt(a.c):""}`,String(a.x)].filter(Boolean).join(" · "))}}
  const xs0=String(a.x||"").split(" · ").filter(Boolean);const wt=xs0.filter(s=>/^chờ \d+ khắc$/.test(s)),xs=xs0.filter(s=>!wt.includes(s));const gain=xs.filter(s=>!RISKRE.test(s)),risk=xs.filter(s=>RISKRE.test(s)).concat(a.risk?[a.risk]:[]);
  return kitParse([rolled?word(o):"",`tốn: ${tc} khắc${a.c&&fmt(a.c)?", "+fmt(a.c):""}${wt.length?", "+wt.join(", "):""}`,[fmt(a.w||{}),...gain].filter(Boolean).length?"thành: "+[fmt(a.w||{}),...gain].filter(Boolean).join(", "):"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,failTxt(a))||(a.fail?"có hậu quả, xem kết quả":"không được gì")):"",risk.length?"hỏng: "+risk.join(", "):""].filter(Boolean).join(" · "))};
 /* R-E: a gift or a planted item spends the time only when an item is chosen */

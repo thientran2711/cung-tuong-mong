@@ -180,3 +180,23 @@ PRIORITY #1 CHECK ('act-move'): OD 9 | ledger 0 | claims 8 | main 0 | review/* 1
 - «Tốn: Bạc -20» minus (MAIN 05:45Z): the source now writes `tốn: Bạc -N`, and the kit row renders it WITHOUT a minus («Tốn Bạc 20», red) — checked on both sheets (Fold maid card, iPad mini-card + «!» card). Same for Chọn làm thân cận («Tốn Bạc 30»).
 - Robots on the merged build: law3-scan PASS 0/98 · rows-scan PASS · reach2 PASS · door-onetap PASS (members 90, 0 page errors) · one-core bind / guard / text PASS.
 - Sheets (looked 3×): https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/act-move6b-fold-sheet.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/act-move6b-ipad-sheet.jpg
+## ACT-MOVE-6 item (a) (MAIN 172 06:18Z LOOK PASS 66afd77e + order): native-option law-3 gaps, same family, on review/act-move-law3 (on top of door-onetap e408ab1d)
+- j25.js optLine (the pop-up line every door / one-tap card reads): (1) an act with an AOUT key returns kit rows (kitParse(actLineRaw …)) — was the raw line, an EMPTY card body where the frame does not re-parse («Đẩy con nàng xuống hồ»); (2) an x that already carries its own labels (odds · thành: · hỏng:) is passed whole, never nested inside one «thành:» row («Lấy trộm son phấn»: «Thành: Khó lường, thành: … hỏng: …» → Thành lấy một hộp son phấn / Bại bị bắt …).
+- jone.js one-tap door: copies k / tgt from the picked member too (an act member such as «Dò la» k:spy lost its AOUT line → «Thành: Dò la: Bạc −−»; now Tốn 2 khắc · Bạc / Thành chứng cứ + · Tâm cơ ++ / Bại bị lộ …).
+- jamove.js Emperor: «Chặn ngự giá» open = odds · tốn fmt(stealCost road) · thành Hoàng thượng dừng bước, sang cung ngươi đêm nay · hỏng fmt(stealLose road); locked = the same Được; «Xin ân điển» locked placeholder = thành ngài ban fmt(BAL.ag.cx2.favor.w).
+- jration.js «Mượn son phấn»: the gain on its own Thành row + Bại (was one neutral note line when her word is «Không ưa»).
+- j9.js «Cùng cung» = a notice (always locked, «không thể lấy lòng hay ra tay») → notice:1, the scan skips notices; tier / group openers («chọn mức và cách / chọn một trong …») are counted apart, never gated.
+| NATIVE=1 scan (every pop-up option, cao/con/hh) | before (42793459) | after |
+|---|---|---|
+| chest · Lấy trộm son phấn | 3/3 | 0 |
+| emp · Chặn ngự giá | 3/3 | 0 |
+| emp · Xin ân điển (locked) | 1/3 | 0 |
+| rival · Dò la (one-tap act member) | 3/3 | 0 |
+| rival · Đẩy con nàng xuống hồ | 1/1 | 0 |
+| rival · Mượn son phấn («Không ưa») | seen 1 | 0 |
+| rival · Trò chuyện / Nhờ giúp đỡ / Nhờ người đứng giữa (one-tap seeds) | 2/3, 1/3, 1/1 | 0 (3 runs) |
+| rival · Cùng cung (notice) | 2/2 | skipped as notice |
+| TOTAL | 17/313 (openers 10 apart) | 0/295 · 0/292 · 0/316 PASS |
+- For MAIN / door-onetap (not changed here): the one-tap «Trò chuyện» may pick «Bàn tán về X» when it loses her thiện cảm (x «nàng quý ngươi −3» shows on a green Được row) — a pick that gives only a loss; jone pick rule territory.
+- Robots: law3-scan (bridged) PASS 0/98 · NATIVE PASS · rows-scan PASS · reach2 PASS · door-onetap PASS · coregates (17f23656) CORE GATES PASS incl. button-crawl (0 faults) · 0 page errors.
+- video2: steps 7c–7h added (rival Mưu kế, chest, Emperor Tranh sủng; iPad taps the «!»). Sheets (looked 3×): https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/act-move6c-fold-sheet.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/act-move/act-move6c-ipad-sheet.jpg

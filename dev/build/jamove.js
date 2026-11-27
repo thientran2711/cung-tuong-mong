@@ -87,11 +87,11 @@ function amEmpOpts(p,A){const gate=!!(A[0]&&A[0].k61);/* a stranger (j61 gate: g
  for(const a of A)if(a&&!a.door&&!a.cause){const c=amCause(a);if(c)a.cause=c}
  for(const d of A)if(d&&d.door&&Array.isArray(d.m))for(const a of d.m)if(a&&!a.cause){const c=amCause(a);if(c)a.cause=c}
  /* Xin ân điển: always one of the six (greyed with its own gate when Sủng is short) */
- if(!A.some(a=>a&&txt(a.n)==="Xin ân điển"))A.push({n:"Xin ân điển",o:100,lock:true,t:`cần Sủng ${AM_FAV()}`});
+ if(!A.some(a=>a&&txt(a.n)==="Xin ân điển"))A.push({n:"Xin ân điển",o:100,lock:true,t:`cần Sủng ${AM_FAV()}`,x:`thành: ngài ban ${fmt(BAL.ag.cx2.favor.w)}`/* ACT-MOVE-6 law 3: what the real option gives (j2 favor w) */});
  /* Chặn ngự giá: the night act against the consort he picked tonight (j8 ACT road, its own cost / odds / result) */
  try{const t=typeof tonightOf==="function"?tonightOf():null;const ri=t&&t!==S?rivals.indexOf(t):-1;let ok=false;try{ok=ri>=0&&!!ACT.road&&!!ACT.road.ok(S,t)}catch(e){}
-  A.push(ok?{n:"Chặn ngự giá",o:100,fix:1,act:1,x:`${typeof oSteal==="function"?word(oSteal(S,"road"))+" · ":""}chờ ngự giá trên đường đến cung ${t.name}`,open:()=>doorFireAct(ri,"road")}
-   :{n:"Chặn ngự giá",o:100,lock:true,t:"chỉ khi đêm nay ngài đã lật thẻ người khác"})}catch(e){console.error("amove road",e)}
+  A.push(ok?{n:"Chặn ngự giá",o:100,fix:1,act:1,x:`${typeof oSteal==="function"?word(oSteal(S,"road"))+" · ":""}tốn: ${fmt(stealCost("road"))} · thành: Hoàng thượng dừng bước, sang cung ngươi đêm nay thay vì cung ${t.name} · hỏng: ${fmt(stealLose("road"))}`/* ACT-MOVE-6 law 3: j8 ACT road → stealNight (cost / loss = BAL.steal via stealCost / stealLose) */,open:()=>doorFireAct(ri,"road")}
+   :{n:"Chặn ngự giá",o:100,lock:true,t:"chỉ khi đêm nay ngài đã lật thẻ người khác",x:"thành: Hoàng thượng dừng bước, sang cung ngươi đêm nay"})}catch(e){console.error("amove road",e)}
  /* Đút lót lật thẻ: the Kính sự phòng act (j2 talk ksp + jtwoway cost), sent from here */
  try{const kp={kind:"ksp",name:(S.court&&S.court.ksp&&S.court.ksp.name)||"Tổng quản"};let R=[];/* she sends someone: the Tổng quản's stranger gate (j61) is about HER meeting him, not about a sent bribe */const k0=K61RAW;K61RAW=true;try{R=typeof doorRaw==="function"?doorRaw(kp):talkOpts(kp)}finally{K61RAW=k0}const b=(R||[]).find(a=>a&&a.n==="Đút lót lật thẻ");
   if(b)A.push(Object.assign({},b,{x:`sai người sang Kính sự phòng · ${b.x||""}`}))}catch(e){console.error("amove ksp",e)}

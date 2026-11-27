@@ -135,7 +135,7 @@ function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=li
  if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:`thành: oán ${balSg(BAL.eff.j9.run_8)}`,run:()=>{chatMark(v);if(!netForgive(v,S))return netRefused(S,v,"hạ mình tạ lỗi với")+".";oanAdd(v,S,BAL.eff.j9.run_8);return `Ngươi hạ mình tạ lỗi. ${v.name} oán ${balSg(BAL.eff.j9.run_8)}.`}});
   A.push({n:"Nhún nhường",o:100,c:{...BAL.ag.cx.humble.c},x:`thành: oán -${BAL.ag.cx.humble.oanDown} · nàng quý ngươi +${BAL.ag.cx.humble.aff}`,run:()=>{if(!netForgive(v,S)){chatMark(v);return netRefused(S,v,"nhún nhường trước")+"."}oanAdd(v,S,-BAL.ag.cx.humble.oanDown);affAdd(v,S,BAL.ag.cx.humble.aff);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán -${BAL.ag.cx.humble.oanDown}, nàng quý ngươi +${BAL.ag.cx.humble.aff}.`}})}
  A.push({n:"Giúp đỡ nàng",c:{bac:-20},o:100,x:`nàng quý ngươi ${balSg(BAL.eff.j9.run_11)} · oán ${balSg(BAL.eff.j9.run_12)}`,run:()=>{relAdd(S,v,BAL.eff.j9.run_11);oanAdd(v,S,BAL.eff.j9.run_12);chatMark(v);return `Ngươi giúp ${v.name} việc khó. Nàng quý ngươi ${balSg(BAL.eff.j9.run_11)}.`}});
- if(same)return A.filter(a=>["Hỏi han sức khỏe","Bàn tán về "+(third?third.name:""),"Tạ lỗi","Nhún nhường"].includes(a.n)).concat([{n:"Cùng cung",o:100,fix:1,lock:true,t:"không thể lấy lòng hay ra tay",x:""}]);
+ if(same)return A.filter(a=>["Hỏi han sức khỏe","Bàn tán về "+(third?third.name:""),"Tạ lỗi","Nhún nhường"].includes(a.n)).concat([{n:"Cùng cung",o:100,fix:1,lock:true,notice:1/* a notice, not a road (law-3 scan skips it) */,t:"không thể lấy lòng hay ra tay",x:""}]);
  return A}
 /* harms that need the place: food served, the lotus pond, her palace while she is away, overhearing */
 const FOOD=["kn","tn","home","dtd"];
