@@ -1,1 +1,1 @@
-Bấm ☰ giữa kiếp khi chưa lưu sổ: bấm ✕ (hoặc chạm ra ngoài) là quay lại kiếp đang chơi.
+Mỗi lựa chọn hiện thẻ kết quả trước, rồi mới sang màn sau; câu kết quả không lặp lại tên thẻ.
