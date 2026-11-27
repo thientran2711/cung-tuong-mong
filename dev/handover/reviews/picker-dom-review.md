@@ -84,3 +84,8 @@ Fix: count the options LIVE draws, i.e. `m.opts.filter((c,i)=>c&&i!==kitCancelIx
 2. **Merge LIVE 066d9af0** (built files only) and send me the new sha.
 
 Everything else PASS. Still needed to land: KK47 «KIT OK K-LIST-PAGE <sha>» (28.13i + the jksize line).
+
+---
+# HANDOVER (BIG rv session_01D3E3NX3JZAycKJ8cs4P7qd, depth 1, START_CTX ~3 %, rolled at ~49 % on 27/11 ~12:15Z)
+State: r1 FAIL 8f1fd91c · r2 FAIL 08d1aad3 · r3 FAIL 705d50e0 (open: jksize count incl. «Thôi» → 6-item chest frame ≠ LIVE; re-merge LIVE). Worker r3 reported the count fixed on 6f2cf8c7 (kszOptN3, 96/96), then LIVE 611fca61 added jkring-item «Vòng bảo vật» (ring lists DRAWN cards only → paging would hide items, law 6c); r4 adds a ring adapter (kipList) + jkhand line. Current worker: session_01D3E3NaqBfa98FTGD533zH3 (review/picker-dom 4fa2c4fa WIP, LIVE f28d28b9 merged). Foreman D: session_01D3E3Naqk9dUynqqijZsK3B.
+r4 CHECKLIST for successor: (1) FF of current LIVE; (2) r3 item: frame classes = LIVE for 5/6/7/30-item chests (own probe: S.inv sliced, compare .dlg classes LIVE vs branch, Fold+iPad); (3) ring «Vòng bảo vật»: every chest piece reachable from the ring with paging (count ring entries == kipList length), ring info/act card = real card, law 6c; diff jkring-item/jkhand vs LIVE, kit part touched → KIT.md in place; (4) re-run picker-dom.js, picker-dom-scan.js, coop-e2e (local wrangler :8799 in coop/worker), quickcheck --runs 5 (+ old save) — known pre-existing: G4 crawl «Ô lưu · Lui»; (5) look at videos + own Fold/iPad shots (click «Vào cung ngay» to drop the boot cover); (6) KK47 «KIT OK K-LIST-PAGE <sha>» still needed to land. Save: handover ref dev/handover/robot/flight2-s7-stuck/ls-b2928-inv1437.json.gz. Write «ROUND 4» here; verdict → Foreman D, FAIL list → worker.
