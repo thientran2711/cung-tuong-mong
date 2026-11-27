@@ -40,7 +40,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   for(let i=0;i<40&&await p.evaluate(()=>!!document.getElementById('kroul'));i++)await sleep(500);/* the roulette waits for its pictures */
   R.picked=await p.evaluate(()=>S.kcPick);await shot('0-card',true);R.m0=await meas();
   await p.evaluate(()=>{const b=document.querySelector('#modal button[data-nl="ok"]');b.scrollIntoView({block:'center'});b.click()});await sleep(1200);
-  R.home=await p.evaluate(()=>({isKc:isKc(),age:S.age,rank:S.rank,place:S.place,fam:S.kc&&S.kc.fam.map(m=>m.t),Q:Q.map(m=>m.t),fig:figFor(S),tabs:[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim())}));
+  R.home=await p.evaluate(()=>({maid:S.maid&&S.maid.name,isKc:isKc(),age:S.age,rank:S.rank,place:S.place,fam:S.kc&&S.kc.fam.map(m=>m.t),Q:Q.map(m=>m.t),fig:figFor(S),tabs:[...document.querySelectorAll('#tabs button')].filter(b=>b.offsetParent).map(b=>b.textContent.trim())}));
   if(!R.home.isKc)F('not at home after Nhận thân phận');if(R.home.age!==18)F('age at home '+R.home.age);
   if(!/-(kc|ngheo)-a18\.webp/.test(R.home.fig||''))F('home dress missing: '+R.home.fig);
   await shot('1-intro',true);R.m1=await meas();
@@ -77,6 +77,12 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
    await shot('4-palace',true);R.m4=await meas();
    for(let i=0;i<4;i++){await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}try{nextBuoi()}catch(e){}});await sleep(300)}
    R.reload=await p.evaluate(()=>{for(let k=0;k<20&&Q.length;k++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}save();const s=SLOT;const n=S.name;deser(loadSlot(s));render();return{same:S.name===n,isKc:isKc(),inPal:!!(S.kc&&S.kc.inPal),rank:S.rank}});
-   if(!R.reload.same||R.reload.isKc)F('reload '+JSON.stringify(R.reload))}
+   if(!R.reload.same||R.reload.isKc)F('reload '+JSON.stringify(R.reload));
+   /* ob-phu §9: the tỳ nữ from home IS her palace maid (never swapped by a Nội vụ phủ pick), and the sister / khuê hữu who entered carry two-way relations */
+   R.carry=await p.evaluate(()=>{try{if(typeof cmMonthMe==='function')cmMonthMe()}catch(e){}const pal=(S.kc.fam||[]).filter(m=>m.pal!=null).map(m=>{const v=RV(m.pal);return{r:m.r,me:m.me,af:m.af,vRel:v&&v.rel,sRl:v&&S.rl[v.id]}});
+    return{maid:S.maid&&S.maid.name,src:S.maid&&S.maid.src,pick:Q.some(m=>m.pid==='cmPick'),pal}});
+   if(R.home.maid&&R.carry.maid!==R.home.maid)F('home maid swapped in the palace: '+R.home.maid+' -> '+R.carry.maid);
+   if(R.carry.src&&!/^(home|land)$/.test(R.carry.src))F('home maid labelled '+R.carry.src);if(R.carry.pick)F('Nội vụ phủ maid pick queued for a home-road girl');
+   for(const x of R.carry.pal)if(x.me!=null&&x.sRl==null)F('consort from home has no her->them relation: '+x.r)}
   R.errs=errs.slice(0,10);if(errs.length)F('page errors');rep.push(R);if(R.fail.length)bad++;await c.close()}
  console.log(JSON.stringify(rep,null,1));await b.close();process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(1)});

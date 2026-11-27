@@ -45,7 +45,7 @@ const SAMPLE=()=>{const process_dbg=1;const vis=e=>{const r=e.getBoundingClientR
   waitWhich:wl,hasWaitLine:document.querySelectorAll('[data-kwaitp],[data-kwaitq]').length}};
 (async()=>{const srv=await serve();const b=await chromium.launch();const R={};
  for(const dev of DEVS.split(','))for(const pth of PATHS.split(',')){BUMP=0;line.on=false;ROOT=OLD||NEW;
-  const ctx=await D.newDeviceContext(b,dev,{serviceWorkers:'allow'});await line(ctx,MBPS);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+  const ctx=await D.newDeviceContext(b,dev,{serviceWorkers:'allow'});await line(ctx,MBPS);const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   const tag=dev+'-'+pth;let g=await D.openHost(p,srv.url);
   const ready=async()=>{for(let k=0;k<60;k++){const ph=await g.evaluate(()=>window.KLOAD&&KLOAD.phase).catch(()=>null);if(ph==='ask'){await g.evaluate(()=>{const x=document.querySelector('[data-kl="web"]');if(x)x.click()});break}if(ph&&ph!=='check')break;await sleep(500)}
    await g.waitForFunction(()=>typeof start==='function'&&window.KLOAD&&['done','all','skipped'].includes(KLOAD.phase)&&!document.getElementById('kload'),null,{timeout:900000})};
@@ -95,7 +95,7 @@ const SAMPLE=()=>{const process_dbg=1;const vis=e=>{const r=e.getBoundingClientR
   const ok=S.filter(s=>!s.cover);const bad=ok.filter(s=>s.blank||s.wait||s.holes||s.toks===0||s.hidStage);
   R[tag]={samples:ok.length,covered:S.length-ok.length,bad:bad.length,blank:ok.filter(s=>s.blank).length,emptyBox:ok.filter(s=>s.wait).length,holes:ok.filter(s=>s.holes).length,stageHidden:ok.filter(s=>s.hidStage).length,noTok:ok.filter(s=>s.toks===0).length,
    first:ok[0],worst:bad[0]||null,gates:await g.evaluate(()=>(window.KLOAD&&KLOAD.lifes||[]).map(x=>({why:x.why,n:x.n,ms:x.ms,late:x.late,cached:!!x.cached}))).catch(()=>null),
-   silbb:await g.evaluate(async()=>{if(!window.KIT_SILBB)return'no KIT_SILBB';const out={};for(const k of ['f','m']){const u=IMG_BASE+'img/kit/unknown-fig-'+k+'.webp?silcheck=1';const v=await new Promise(ok=>{const x=kitFigBody(u,()=>ok(kitFigBody(u)));if(x)ok(x)});
+   silbb:await g.evaluate(async()=>{if(!window.KIT_SILBB)return'no KIT_SILBB';const out={};for(const k of ['f','m','e']){const u=IMG_BASE+'img/kit/unknown-fig-'+k+'.webp?silcheck=1';const v=await new Promise(ok=>{const x=kitFigBody(u,()=>ok(kitFigBody(u)));if(x)ok(x)});
    out[k]=['l','r','ar','cl','cr','b'].every(f=>Math.abs((v[f]||0)-(KIT_SILBB[k][f]||0))<.01)?'ok':JSON.stringify(v).slice(0,120)}return out}).catch(e=>String(e)),longTasks:await g.evaluate(()=>window.__lt&&__lt.filter(x=>x[1]>150)).catch(()=>null),ksw:await g.evaluate(()=>window.KSW&&{resumed:KSW.resumed,applied:KSW.applied,build:KSW.build}).catch(()=>null),errs:errs.slice(0,5)};
   if(process.env.LINELOG&&line.log){const L=line.log.filter(x=>x[0]>=t0-30000);console.log('LINE',tag,L.length,'reqs',L.reduce((a,x)=>a+x[1],0),'KB since t0-30s');console.log(L.slice(0,80).map(x=>((x[0]-t0)/1000).toFixed(1)+'s '+x[1]+'K '+x[3]+' '+x[2]).join('\n'));line.log=[]}
   console.log(tag,JSON.stringify(R[tag]));await p.screenshot({path:`${OUT}/${tag}-end.png`});await ctx.close()}

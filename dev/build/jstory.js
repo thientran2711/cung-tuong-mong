@@ -64,7 +64,7 @@ function pl67(){const P=S&&S.pl67;if(!P)return null;let A=null;try{A=th67(P.t)}c
  else if(!P){const poor=O.map((o,i)=>[o,i]).filter(([o])=>o.c&&o.c.bac<0&&!o.alt67&&S.bac+o.c.bac<0);
   if(poor.length){const [o,i]=poor[0];const sv=sev67(A,p.b,b),nb=BAL["dl67"+sv];const nm=fill67(o.n,A);
    d.o.push({n:`${nm}: nhận lời, lo liệu trong ${dlT67(nb)}`,fx:{},x:"",pl67:1,j67:`kèm: quá ${dlT67(nb)} chưa nộp thì việc hỏng`,
-    kneed:[{t:`nộp Bạc ${-o.c.bac} trong ${dlT67(nb)} (đang có ${S.bac})`,ok:true}],hint:`giữ việc lại; phải gom đủ bạc trong ${dlT67(nb)}`,risk:"có rủi ro",go:()=>pledge67(p,i,sv,nb)})}}
+    kneed:[{t:`nộp Bạc ${-o.c.bac} trong ${dlT67(nb)} (đang có ${S.bac})`,ok:true}],hint:`giữ việc lại; phải gom đủ bạc trong ${dlT67(nb)}`,risk:"an toàn"/* KC-ODDS-CHIP: the outcome follows her Bạc at the deadline, not a roll */,go:()=>pledge67(p,i,sv,nb)})}}
  return d}catch(e){console.error("jstory PEND",e);return d}}})();
 function pledge67(p,i,sv,nb){const A=th67(p.t);if(!A||A.cur!==p.b)return;const b=beatDef67(A,p.b);const o=opts67(A,b)[i];if(!o)return;
  S.pl67={a:p.a,b:p.b,t:p.t,pp:p,i,sev:sv,due:absB67()+nb,t0:absB67(),n:plain(fill67(o.n,A)),h:plain(fill67(b.h||"",A)),cost:-o.c.bac,chap:A.chap||1};
