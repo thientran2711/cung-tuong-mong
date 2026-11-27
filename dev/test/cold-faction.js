@@ -7,7 +7,7 @@ const path=require('path');const {chromium}=require('playwright');const HTML=pro
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(u=>/^https?:/.test(u.href)||/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/.test(u.pathname),r=>r.abort());
- await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
+ /* stat-pace (review/stat-pace): this test checks its own feature's exact BAL numbers and forces its own cards; the stat-pace rule (BAL.stp) and the daily big-event cap (BAL.evc) are switched off here — they have their own test dev/test/stat-pace.js */await p.addInitScript(()=>addEventListener('DOMContentLoaded',()=>{try{BAL.stp.on=0;BAL.evc.on=0}catch(e){}}));await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{window.__seed=s=>{let sd=s;Math.random=()=>{sd=(sd*16807)%2147483647;return (sd-1)/2147483646}};__seed(20261121);localStorage.clear();SLOT=4;
   document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{render()}catch(e){}});
  const r=await p.evaluate(()=>{const o={};const B=BAL.ag.par3,LT=B.cold.lt,FD=B.fac.drop,PD=BAL.rcv.prop.danh;
@@ -60,7 +60,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   reset(15);{const [v,m]=L();const c0=v.coop;v.coop=1;found(v,m);npcCold(v);o.co=[!facIn(v),!p3FacFr(m).includes(v),facRoll(facOf(m)).includes(v),!facMembers(facOf(m)).includes(v)];
    joinFac(S,facOf(m));v.coop=c0}
   /* 11. back from lãnh cung: present again, still a member */
-  reset(16);{const [m,n]=L();found(S,m);joinFac(n,facOf(S));const f=facOf(S);goCold();restore(false,"Thử");Q.length=0;o.back=[!herCold(),facMembers(f).includes(S)]}
+  reset(16);{const [m,n]=L();found(S,m);joinFac(n,facOf(S));const f=facOf(S);goCold();/* punish-reason: the stay (BAL.pun.coldMinDays) is served first */S.coldWk-=BAL.pun.coldMinDays;restore(false,"Thử");Q.length=0;o.back=[!herCold(),facMembers(f).includes(S)]}
   /* 12. every number from BAL (law 4): the card / button words print the keys */
   reset(17);{const [m,n]=L();found(S,m);joinFac(n,facOf(S));const h=facHTML();o.bal=[h.includes("Danh "+balSg(B.fac.sell.danh)),h.includes("oán "+balSg(B.fac.sell.oan)),h.includes(balSg(-B.fac.leave.rel))]}
   /* 13. review (law 3 + law 2): Rời phe of her own will is never cost-only — her tab and an NPC's cx3:facLeave = the letter (Danh + prop.danh);
