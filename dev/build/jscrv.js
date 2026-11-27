@@ -76,13 +76,14 @@ function scrvLateBg(el){if(el.id==="kveil"||el.__scrvB)return;let bg="";try{bg=g
  SCRV_BG.lastIndex=0;let m;const us=[];while((m=SCRV_BG.exec(bg)))if(!/^(data|blob):/.test(m[1]))us.push(scrvAbs(m[1]));const bad=us.filter(u=>!scrvReadyUrl(u));if(!bad.length)return;
  el.__scrvB=1;el.style.setProperty("background-image","none","important");KIT_SCRV.stat.late=(KIT_SCRV.stat.late||0)+1;
  Promise.all(bad.map(scrvWaitUrl)).then(()=>{el.__scrvB=0;el.style.removeProperty("background-image");KIT_SCRV.stat.lateBack=(KIT_SCRV.stat.lateBack||0)+1})}
-function scrvLateScan(n){if(!n||n.nodeType!==1||n.id==="kveil")return;try{if(n.tagName==="IMG")scrvLateImg(n);else scrvLateBg(n);
-  for(const im of n.querySelectorAll("img"))scrvLateImg(im);for(const el of n.querySelectorAll("*"))if(el.tagName!=="IMG")scrvLateBg(el)}catch(e){}}
-function scrvHideLate(root){scrvLateStop();root=root||document.body;scrvLateScan(root);
+function scrvLateScan(n){if(!n||n.nodeType!==1||n.id==="kveil")return;const lt=SCRV_LATE&&SCRV_LATE.light;try{if(n.tagName==="IMG")scrvLateImg(n);else if(!lt)scrvLateBg(n);
+  for(const im of n.querySelectorAll("img"))scrvLateImg(im);if(!lt)for(const el of n.querySelectorAll("*"))if(el.tagName!=="IMG")scrvLateBg(el)}catch(e){}}
+/* light = the short guard after a NORMAL reveal (LRM4: iPad cold «tab court» showed a figure attached a frame after the reveal): no first scan (everything was decoded), only new / changed <img>, for BAL.kscrv.after ms */
+function scrvHideLate(root,light){scrvLateStop();root=root||document.body;if(light)SCRV_LATE={light:1};else scrvLateScan(root);
  const mo=new MutationObserver(R=>{if(!SCRV_LATE)return;for(const r of R){if(r.type==="childList")r.addedNodes.forEach(scrvLateScan);
-  else if(r.target.nodeType===1){const el=r.target;if(el.tagName==="IMG"){if(r.attributeName==="src"||r.attributeName==="srcset")scrvLateImg(el);else if(r.attributeName==="style"&&el.__scrvH&&el.style.visibility!=="hidden"&&!(el.complete&&el.naturalWidth))el.style.visibility="hidden"/* LRM4: a layout that rewrites the picture's style (j59 room figures: cssText / visibility="") must not unhide a picture still decoding */}else if(!el.__scrvB)scrvLateBg(el)}}});
+  else if(r.target.nodeType===1){const el=r.target;if(SCRV_LATE.light&&el.tagName!=="IMG")continue;if(el.tagName==="IMG"){if(r.attributeName==="src"||r.attributeName==="srcset")scrvLateImg(el);else if(r.attributeName==="style"&&el.__scrvH&&el.style.visibility!=="hidden"&&!(el.complete&&el.naturalWidth))el.style.visibility="hidden"/* LRM4: a layout that rewrites the picture's style (j59 room figures: cssText / visibility="") must not unhide a picture still decoding */}else if(!el.__scrvB)scrvLateBg(el)}}});
  mo.observe(root,{childList:true,subtree:true,attributes:true,attributeFilter:["src","srcset","style","class"]});
- SCRV_LATE={mo,key:SCRV_KEY,t:setTimeout(scrvLateStop,KIT_SCRV.late||30000)}}
+ SCRV_LATE={mo,key:SCRV_KEY,light:light?1:0,t:setTimeout(scrvLateStop,light?KIT_SCRV.after:(KIT_SCRV.late||30000))}}
 /* wait (scan again after each wait: pictures set a frame later are caught) until all decoded or the cap */
 async function scrvWaitAll(root,t0,P){const raf=()=>new Promise(r=>requestAnimationFrame(()=>r()));
  for(let k=0;k<12;k++){const left=KIT_SCRV.cap-(performance.now()-t0);if(left<=0){scrvHideLate(root);return "cap"}
@@ -90,7 +91,7 @@ async function scrvWaitAll(root,t0,P){const raf=()=>new Promise(r=>requestAnimat
 function kitScreenVeilUntil(root,dest){root=root||document.body;KIT_SCRV.stat.n++;const P=scrvPend(root);
  if(!P.length){if(!SCRV_RUN)scrvReveal();scrvPrefetch();return Promise.resolve(false)}
  const t0=performance.now();scrvEl(dest);KIT_SCRV.stat.veiled++;(KIT_SCRV.stat.log=KIT_SCRV.stat.log||[]).push(dest);if(KIT_SCRV.stat.log.length>40)KIT_SCRV.stat.log.shift();const run={t0};SCRV_RUN=run;
- return scrvWaitAll(root,t0,P).then(why=>{if(SCRV_RUN!==run)return true;SCRV_RUN=null;const ms=Math.round(performance.now()-t0);KIT_SCRV.stat.ms.push(ms);KIT_SCRV.stat.last={dest,word:kitScrvWord(dest),ms,why,n:P.length};scrvReveal();scrvPrefetch();return true})}
+ return scrvWaitAll(root,t0,P).then(why=>{if(SCRV_RUN!==run)return true;SCRV_RUN=null;const ms=Math.round(performance.now()-t0);KIT_SCRV.stat.ms.push(ms);KIT_SCRV.stat.last={dest,word:kitScrvWord(dest),ms,why,n:P.length};scrvReveal();if(why!=="cap"&&KIT_SCRV.after)scrvHideLate(root,1);scrvPrefetch();return true})}
 /* 97.7 IDLE PREFETCH (MAIN 118, 24/11): once a view is settled, the room pictures of the places one walk away (nearest KIT_SCRV.pre,
    by travel time, reachable now) are fetched + decoded one at a time when the device is idle, so most moves find them ready (no veil). */
 let SCRV_PRE_T=0;
