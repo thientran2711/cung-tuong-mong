@@ -11,6 +11,9 @@ const RULES={
  consort:[100,200,350,550,800,1100,1500,2200],
  servantN:["Cung nữ thô sử","Cung nữ","Đại cung nữ","Chưởng sự cô cô","Nữ quan"],
  servant:[20,40,70,110,160],
+ /* never entered the palace (D-ENDRANK, Foreman D 26/11): a life ended at home or sent home at the selection keeps its TRUE standing; Công danh 0, so it
+    sorts below every palace life (the lowest palace life scores > 0) */
+ preN:{home:"Chưa vào cung",tunu:"Tú nữ"},
  /* kết cục (the headline of the end card) → bonus; any ending not listed (deaths, lãnh cung, bị đuổi…) = 0 */
  end:{"Nữ đế":4000,"Hoàng thái hậu":2500,"Mẫu hậu Hoàng thái hậu":1800,"Thái phi":400,
   "Được Vương gia che chở":600,"Thành thân":250,"Được ban hôn":250,"Vào vương phủ":250,"Xuất giá":200,
@@ -32,12 +35,12 @@ const I=(v,d)=>{v=Number(v);return isFinite(v)?Math.round(v):(d===undefined?NaN:
 const C=(v,a,b)=>Math.max(a,Math.min(b,v));
 function txt(s,n){return String(s==null?"":s).replace(/[\u0000-\u001f<>]/g,"").replace(/\s+/g," ").trim().slice(0,n||60)}
 /* the highest standing as a name (consort rank wins over a servant title once she has risen) */
-function phamName(L){const mr=I(L.mr,-1),sr=I(L.sr,-1);if(mr>=0)return RULES.consortN[C(mr,0,7)];if(L.mama)return"Ma ma";if(sr>=0)return RULES.servantN[C(sr,0,4)];return"Cung nữ"}
+function phamName(L){const mr=I(L.mr,-1),sr=I(L.sr,-1);if(mr<0&&sr<0&&!L.mama&&RULES.preN[L.pre])return RULES.preN[L.pre];if(mr>=0)return RULES.consortN[C(mr,0,7)];if(L.mama)return"Ma ma";if(sr>=0)return RULES.servantN[C(sr,0,4)];return"Cung nữ"}
 function partial(L){return I(L.y,0)<1&&I(L.mr,-1)<2&&I(L.sr,-1)<3}
 /* sanity of a summary: null = fine, else a short reason (the Worker refuses the life) */
 function check(L){if(!L||typeof L!=="object")return"no life";
  const mr=I(L.mr),sr=I(L.sr),y=I(L.y),age=I(L.age),a0=I(L.age0),so=I(L.sons),da=I(L.daus),tz=I(L.tz,0),tg=I(L.tg,0);
- if(!(mr>=-1&&mr<=7))return"mr";if(!(sr>=-1&&sr<=4))return"sr";if(mr<0&&sr<0&&!L.mama)return"no standing";
+ if(!(mr>=-1&&mr<=7))return"mr";if(!(sr>=-1&&sr<=4))return"sr";if(L.pre!=null&&!RULES.preN[L.pre])return"pre";if(L.pre!=null&&(mr>=0||sr>=0||L.mama))return"pre vs standing";if(mr<0&&sr<0&&!L.mama&&!L.pre)return"no standing";
  if(!(y>=0&&y<=60))return"years";if(!(age>=12&&age<=100))return"age";if(!(a0>=12&&a0<=40))return"age0";
  if(age<a0||age-a0>y+1||age-a0<y-1)return"age vs years";
  if(!(so>=0&&so<=20&&da>=0&&da<=20))return"kids";if(so+da>Math.floor(y*1.5)+2)return"kids vs years";
@@ -53,7 +56,7 @@ function check(L){if(!L||typeof L!=="object")return"no life";
   if(nk>so+da)return"trail kids"}
  return null}
 /* the score and its parts (labels are shown in "Cách tính" on the board) */
-function score(L){const R=RULES,mr=I(L.mr,-1),sr=I(L.sr,-1),e=txt(L.endk,40);
+function score(L){const R=RULES,mr=I(L.mr,-1),sr=I(L.sr,-1),e=txt(L.endk,40);if(mr<0&&sr<0&&!L.mama&&R.preN[L.pre])return{score:0,parts:[],partial:false};
  const pham=Math.max(mr>=0?R.consort[C(mr,0,7)]:0,sr>=0?R.servant[C(sr,0,4)]:0,L.mama?R.servant[3]:0);
  const kids=Math.min(R.kidCap,I(L.sons,0)+I(L.daus,0)),sons=Math.min(I(L.sons,0),kids);
  const parts=[["Phẩm cao nhất",pham],["Kết cục",R.end[e]||0],["Năm trong cung",Math.min(R.yearCap,C(I(L.y,0),0,99))*R.year],
