@@ -14,7 +14,7 @@
    R = {el, rot, front(), turnTo(i), focus(), back(), refresh(), close()}.  kitRingItem.cur = the open ring.  Wiring (adapters) at the end of this file. */
 /* tw = the FRONT tile size in px (MAIN look note 26/11: front ≈1.5× the old 82 px, more on iPad); side tiles keep the old size curve (side = old kitItem md 72 px) */
 const KIT_RINGI={tw:{fold:124,ipad:150},side:72,big:{fold:2.0,ipad:2.0},dim:.42,farHide:.5,ry:{fold:.085,ipad:.075},rx:{fold:.40,ipad:.34},cy:{fold:.52,ipad:.56},
- openMs:420,focusMs:520,dropMs:360,stagger:26,maxN:24,
+ openMs:420,focusMs:520,dropMs:360,stagger:26,/* K-RING-ALL (law 6c, KK59): no item cap — every real item stands on the ring (the ring shows KRING_MATH.seats at a time; the rest come round by spin / ‹ ›) */
  /* a TEXT tile (kit title plate, it.tile): law 10 one size on every device = the plate text at plateRem; depth shrinks it only by plateDepth of the picture curve (side plates stay readable) */plateRem:1.6,plateDepth:.4};
 /* ---------- ring maths = KRING_MATH (§104.1, jkring.js; numbers in BAL.kring) — KK44 ruling 26/11: ONE core, KRING_MATH deleted ---------- */
 function kriCalm(){try{return(typeof reducedMotion==="function"&&reducedMotion())||(typeof kfStill==="function"&&kfStill())}catch(e){return false}}
@@ -76,7 +76,7 @@ const kitRingItem={cur:null,
  front(){const R=kitRingItem.cur;return R?KRING_MATH.front(R.rot,R.tiles.length):-1},
  close(now){const R=kitRingItem.cur;if(!R)return;kitRingItem.cur=null;cancelAnimationFrame(R.raf||0);document.body.classList.remove("kring-on");const cb=R.o.onClose;
   try{if(kitScene.cur&&kitScene.cur.L===R.L)kitScene.close(now);else R.L.remove()}catch(e){try{R.L.remove()}catch(x){}}if(cb)try{cb()}catch(e){console.error("kri close",e)}}};
-function kriItems(R){let L=[];try{L=typeof R.o.items==="function"?R.o.items(R.tab):(R.o.items||[])}catch(e){console.error("kri items",e)}return (L||[]).filter(Boolean).slice(0,KIT_RINGI.maxN)}
+function kriItems(R){let L=[];try{L=typeof R.o.items==="function"?R.o.items(R.tab):(R.o.items||[])}catch(e){console.error("kri items",e)}return (L||[]).filter(Boolean)}
 function kriTabs(R){const o=R.o;R.tabsEl.innerHTML=`<div class="pctabs kcattabs" role="tablist">${typeof kitTabRowHTML==="function"?kitTabRowHTML(o.tabs,R.tab,'data-kritab'):o.tabs.map(t=>`<button class="pct${t.k===R.tab?" on":""}" data-kritab="${t.k}">${kriE(t.label)}</button>`).join("")}</div>`;
  R.tabsEl.querySelectorAll("[data-kritab]").forEach(b=>b.addEventListener("click",e=>{e.stopPropagation();const k=b.dataset.kritab||b.getAttribute("data-kritab");if(!k||k===R.tab)return;R.tab=k;try{o.onTab&&o.onTab(k)}catch(x){}if(R.st==="focus")kriBack(R,true);R.rot=0;kriTabs(R);kriBuild(R,true)}))}
 /* ---------- build / place the ring ---------- */
@@ -353,6 +353,6 @@ window.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.closes
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§104",title:"kitRingItem · Vòng bảo vật (món đứng trên vòng xoay, món trước sáng, chạm → phóng to trái, nút thả phải, kết quả tại chỗ)",where:"mọi chỗ chọn món: tặng quà, dâng, cài đồ, mua / bán, Tư trang, mạng che mặt, thú cưng",
  html:()=>`<div class="kitpg-row"><button type="button" class="kbtn alt" data-kriring="1"${typeof S!=="undefined"&&S?"":" disabled"}>Mở vòng bảo vật (Tư trang)</button></div>`})}catch(e){}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kriring]");if(!b)return;e.stopPropagation();const pg=document.getElementById("kitpage");if(pg)pg.hidden=true;
- const L=(S.inv||[]).map((e2,ix)=>({e:e2,ix})).filter(x=>x.e&&!x.e.h&&IT[x.e.k]).slice(0,16);
+ const L=(S.inv||[]).map((e2,ix)=>({e:e2,ix})).filter(x=>x.e&&!x.e.h&&IT[x.e.k]);
  kitRingItem.open({title:"Vòng bảo vật",sub:"mẫu kit §104",items:L.map(x=>{const I=typeof kipItem==="function"?kipItem(x.e):{src:kitItemSrc(x.e.k),name:IT[x.e.k].n,grade:0};return{id:x.ix,src:I.src,name:I.name,grade:I.grade,sub:I.kind||"",ref:{e:x.e}}}),
   acts:it=>[{n:"Xem thử",main:1,fn:()=>({ok:true,title:"Mẫu kit · "+it.name,rows:[{k:"duoc",label:"Được",items:[]},{k:"mat",label:"Mất",items:[]}]})}],onClose:()=>{if(pg)pg.hidden=false}})},true);
