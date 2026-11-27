@@ -54,3 +54,7 @@ Stage pop-ups today (probe, scen con): maid = Trò chuyện / Dò la / Giao vi�
 2. Cards (pcard wrapper, tab staff/kid + rv cards with status): groups → one «Tìm gặp» (own household/kids: data-go home with walkBlock reason; court: their post — ty tyv, ksp ksp, tq thu, ped nvp; elders: tn/kn/home; other servants: visitBtn of the mistress = «Ghé cung»); strip the j25 «Chăm con» insert. Tell KK51-P2 the extra kinds.
 3. Robot: extend act-move-reach.js A (0 act buttons on those cards) + D (every inventoried card label offered on the matching pop-up). Then video, LOOK READY → MAIN 168 → RV-163D.
 ~55 % this task / ~0 % in game (until RV PASS).
+## Late notes (01:21Z) for ACT-MOVE-4
+- MAIN is now **MAIN 169** session_01Rc5AsLs58Sh2uCgF1R9EHu — report there.
+- MAIN 168 BINDING: acts that need a target/item pick KEEP their pick list; only method variants of the same act merge. → «Dâng quà trong rương» (jamove door dl, giftto picker) keeps the item list, with the item he values most preselected (yours, jamove; DOOR-ONETAP leaves it to us).
+- DOOR-ONETAP (jone.js, after jamove in assemble.py) reshapes rows gh (ally → own row «kg»), so (→ so2), P13 (→ Trừng phạt / Ban thưởng / Tha tội) in jone.fix() before each use: do NOT put «ally» back into gh.acts as a hard requirement, and tell it if you change these rows.
