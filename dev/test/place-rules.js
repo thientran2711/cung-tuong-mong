@@ -19,7 +19,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
   window.__turn=async(force)=>{const b0=S.buoi,cards=[];const R0=Math.random;if(force!=null)Math.random=()=>force;
    try{for(let i=0;i<8&&S.buoi===b0;i++){/* motion scenes are hidden in this test: their queue must not hold the turn (jdayq) */try{kmBusy=false;KMQ.length=0}catch(e){}try{nextBuoi()}catch(e){}await new Promise(r=>setTimeout(r,250));for(const m of Q)cards.push(m.t);if(S.buoi===b0){Q.length=0;document.getElementById('modal').hidden=true}}}finally{Math.random=R0}
    await new Promise(r=>setTimeout(r,600));for(const m of Q)cards.push(m.t);return cards};
-  window.__reset=()=>{Q.length=0;document.getElementById('modal').hidden=true;S.dead=false;S.confined=0;S.out=0;S.closeSeen=null;S.stayRoll=null;S.plWarn=null;window.__chips=[];
+  window.__reset=()=>{Q.length=0;document.getElementById('modal').hidden=true;S.dead=false;S.confined=0;S.out=0;S.closeSeen=null;S.stayRoll=null;S.plWarn=null;S.plGrace=null;window.__chips=[];
    S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.buoi=0;used=0;S.acPass={};S.thDead=false;render();Q.length=0;document.getElementById('modal').hidden=true;window.__chips=[]};
   /* a walk out of her palace first asks «Chọn người theo hầu» (j95s): she goes alone */
   window.__go=async k=>{Q.length=0;document.getElementById('modal').hidden=true;goTo(k);for(let i=0;i<4&&S.place!==k&&Q.length;i++){const m=Q[0];const j=(m.opts||[]).findIndex(o=>o.n==="Đi một mình");if(j<0)break;chooseM(j);await new Promise(r=>setTimeout(r,300))}
@@ -30,12 +30,15 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
  const A=await g.evaluate(async()=>{__reset();await __go("tn");document.getElementById('modal').hidden=true;render();await new Promise(r=>setTimeout(r,300));
   const entry=__chips.find(x=>/chỉ được lưu đến hết/.test(x))||"";used=BAL.time.khac-1;render();await new Promise(r=>setTimeout(r,300));
   const last=__chips.find(x=>/sắp đóng cửa sau khắc này/.test(x))||"";used=BAL.time.khac-travel("tn","home");/* review/home-way: she still had the khắc to walk home (no way home = no fault, home-way.js C) */const danh0=S.danh,cut0=S.cutPay||0,placeIn=S.place;const pw=[S.plWarn,S.closeSeen,bkey()];const sr0=stayRoll;
-  const cards=await __turn(0.999);const stageTxt=(document.querySelector('#stage')||document.body).innerText.slice(0,4000);
-  return{pw,placeIn,entry,last,buoi:S.buoi,place:S.place,visitK:S.visit&&S.visit.k,confined:S.confined,dCut:(S.cutPay||0)-cut0,dDanh:S.danh-danh0,cards,stageHome:!/Đức Thọ cung/.test(stageTxt.split("\n").slice(0,3).join(" ")),msg:S.visit&&S.visit.msg}});
+  const cards=await __turn(0.999);const atTurn={place:S.place,conf:S.confined||0,cut:(S.cutPay||0)-cut0,G:!!S.plGrace};
+  /* review/place-close: the turn opens the grace; the roll (forced caught) when it is used up */{const R1=Math.random;Math.random=()=>0.999;try{if(S.plGrace){used=S.plGrace.end;render()}}finally{Math.random=R1}await new Promise(r=>setTimeout(r,300))}
+  const pen=kitNoticeList().some(x=>/^closepen:/.test(x.id));const stageTxt=(document.querySelector('#stage')||document.body).innerText.slice(0,4000);
+  return{atTurn,pen,pw,placeIn,entry,last,buoi:S.buoi,place:S.place,visitK:S.visit&&S.visit.k,confined:S.confined,dCut:(S.cutPay||0)-cut0,dDanh:S.danh-danh0,cards,stageHome:!/Đức Thọ cung/.test(stageTxt.split("\n").slice(0,3).join(" ")),msg:S.visit&&S.visit.msg}});
  /* B: unwarned (the notice never shown) → escorted out, no loss */
  const B=await g.evaluate(async()=>{__reset();window.__accSilent=1;try{accGrant(S,"tn");await __go("tn")}finally{window.__accSilent=0}Q.length=0;document.getElementById('modal').hidden=true;
   S.plWarn=null;S.closeSeen=null;const r0=render;render=function(){};let cards;const danh0=S.danh;try{used=BAL.time.khac-1;cards=await __turn(0.999)}finally{render=r0}render();
-  return{place:S.place,visitK:S.visit&&S.visit.k,confined:S.confined,dDanh:S.danh-danh0,cards}});
+  const atTurn={place:S.place,G:S.plGrace&&{...S.plGrace}};{const R1=Math.random;Math.random=()=>0.999;try{if(S.plGrace){used=S.plGrace.end;render()}}finally{Math.random=R1}}const out=kitNoticeList().some(x=>/^closeout:/.test(x.id));
+  return{atTurn,out,place:S.place,visitK:S.visit&&S.visit.k,confined:S.confined,dDanh:S.danh-danh0,cards}});
  /* C: cấm túc from a plain punish while away */
  const C=await g.evaluate(async()=>{__reset();S.buoi=1;await __go("vuon");document.getElementById('modal').hidden=true;const in0=S.place;punish(S,"thử",1);render();await new Promise(r=>setTimeout(r,200));
   return{in0,place:S.place,visitK:S.visit&&S.visit.k,confined:S.confined,msg:S.visit&&S.visit.msg}});
@@ -62,8 +65,9 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
   const after=S.place;tab="act";render();return{place0:"home",rep,home,ban,btn,after}});
  const old=await g.evaluate(()=>{try{delete S.plWarn;S=JSON.parse(JSON.stringify(S));render();return true}catch(e){return String(e)}});
  const X=[];
- if(A.placeIn!=="tn"||!A.entry||!A.last)X.push("A-warn");if(A.place!=="home"||A.visitK!=="home"||A.confined||!(A.dCut>0)||!A.cards.includes("Bị bắt"))X.push("A-moved");/* review/home-way: a caught overstay is NHẸ (khất bổng, never cấm túc) */
- if(B.place!=="home"||B.visitK!=="home"||B.confined||B.dDanh<0||!B.cards.includes("Hết giờ tiếp"))X.push("B-unwarned");
+ if(A.placeIn!=="tn"||!(A.entry||A.last)||!A.last)X.push("A-warn");/* place-close: arriving on the last khắc she can still walk home from, the pulsing «sắp đóng cửa» chip is the entry warning */
+ if(A.atTurn.place!=="tn"||A.atTurn.conf||A.atTurn.cut||!A.atTurn.G)X.push("A-turn-roll");if(A.place!=="home"||A.visitK!=="home"||A.confined||!(A.dCut>0)||A.cards.includes("Bị bắt")||!A.pen)X.push("A-moved");/* review/home-way: a caught overstay is NHẸ (khất bổng, never cấm túc) */
+ if(!B.atTurn.G||!B.atTurn.G.nf||B.place!=="home"||B.visitK!=="home"||B.confined||B.dDanh<0||B.cards.includes("Hết giờ tiếp")||!B.out)X.push("B-unwarned");
  if(C.in0!=="vuon"||C.place!=="home"||C.visitK!=="home")X.push("C-sweep");
  if(!Dd.onStage||!Dd.with||!Dd.gmNull||!Dd.apNull||Dd.wOther||!Dd.gate||Dd.gate.t!=="Người bên cạnh"||/giá đáo/.test(Dd.gate.h))X.push("D-presence");
  if(E.place!=="tn")X.push("E-summon");if(F.ref&&F.place!=="home")X.push("F-door");if(old!==true)X.push("old");if(G.rep||!G.home||G.ban!==1||!/Về phòng/.test(G.btn)||G.after!=="home")X.push("G-map");

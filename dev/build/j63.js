@@ -397,7 +397,7 @@ document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.targ
  let bf=null;try{bf=rsnap()}catch(x){}oddsSoft(n,{suc:-(+b.dataset.capsuc||0),bac:-(+b.dataset.capbac||0)});try{if(bf)resultShow(n,bf,false)}catch(x){}render()},true);
 /* KIT PART kitResultSeal(ok) (KIT 7): the result seal — true → THÀNH (.ok), false → BẠI (.bad), no roll → "KẾT QUẢ" (.sure, the kit's grey seal, no stamp) */
 function kitResultSeal(ok){return ok===true?{cls:"ok",t:"THÀNH"}:ok===false?{cls:"bad",t:"BẠI"}:ok==="soft"?{cls:"sure",t:"BỎ DỞ"}/* KIT 7.3: a capped act that slipped — nothing done, nothing lost but the effort */:{cls:"sure",t:"KẾT QUẢ"}}
-resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
+resultShow=function(title,before,okHint){if(!S||!before||S.dead||window.__kNav)return;/* §6.2m a nav option shows no result card (kit-k44-parts) */
  /* KAWHY-VERDICT: the reasons follow the card's final verdict (own roll, else the carried act's kaAim); kaAimVerdict reads only — the aims are closed below by kaAimUse */
  const ok0=okHint===true?true:okHint===false?false:(()=>{try{return kaAimVerdict(before).ok}catch(e){return null}})();const [G,B,K]=kaResultRows(before,title,ok0);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
  const why=S.logs.slice(0,Math.min(n,S.logs.length)).map(plain).join(" ");
