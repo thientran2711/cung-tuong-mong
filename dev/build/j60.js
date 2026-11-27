@@ -24,6 +24,20 @@ const KIT_ORIGINS=["tt","dtq","muoi","cn","nc","td","ch","thd"];
 /* the hook another worker implements; keep the name; override by assigning window.kitKnown */
 if(typeof window.kitKnown!=="function")window.kitKnown=function(p){return true};
 function kitIsKnown(p){try{return p==null||p===S||window.kitKnown(p)!==false}catch(e){return true}}
+/* sil-eunuch (owner order main 172, ACT-MOVE-6): ONE rule for the letter of the grey stranger silhouette (img/kit/unknown-fig-<g>, unknown-<g>): k = child, e = eunuch /
+   Thái giám / Tổng quản (soft cap, belted robe, no official hat), m = the other men's ROLES (Emperor, official, physician, guard, prince, man), f = women. It reads the ROLE, never the picture name and never a per-place
+   guess. Stage description records ({kind:"ksp"|"peddler"|"npc"|"elder"|"serv", ini, info, sid, lid}) carry no .role, so a stranger eunuch used to fall to «other» = f and
+   stood as a lady. Every place that picks a stranger silhouette (j59 stage + slot fill, j60 stone frame, j87 week book, j90 dialog figure, jreveal, kitSilFig) calls this. */
+function kitSilG(p){try{if(!p||typeof p!=="object")return"f";let r=null;try{if(p.ref&&typeof p.ref==="object")r=personRoleRank(p.ref);if(!r||r.role==="other")r=personRoleRank(p)}catch(e){}
+ if(r&&r.role!=="other")return r.kid||r.sex==="k"?"k":r.role==="eunuch"?"e":r.sex==="m"?"m":"f";
+ const k=p.kind,ini=p.ini,info=String(p.info||p.rw||""),rk=String(p.rk||"");
+ if(/^(ksp|peddler)$/.test(k))return"e";if(/^(emp|ty|man|min|guard|royal)$/.test(k)||p.sk==="man"||p.sk==="emp"||p.sk==="ty")return"m";
+ if(ini==="Hoạn"||/^eu\d$/.test(rk))return"e";if(ini==="Y"||ini==="Quan"||ini==="帝"||/^(off|emp)$/.test(rk))return"m";
+ if(typeof p.lid==="string"&&/^c:/.test(p.lid))return"e";/* a ledger court person (c:*) is a Thái giám (j95 default name) */
+ if(p.sid!=null&&typeof j95sv==="function"){const s=j95sv("s"+p.sid);if(s&&(s.role==="eunuch"||s.role==="eun"))return"e"}
+ if(/Thái giám|Tổng quản|Kính sự phòng/i.test(info))return"e";if(/thị vệ|Thái y|Vương gia/i.test(info))return"m";
+ const sx=p.sex||(p.ref&&p.ref.sex);if(typeof p.age==="number"&&BAL.m90&&p.age<BAL.m90.kidAge)return"k";return sx==="m"?"m":"f"}catch(e){return"f"}}
+window.kitSilG=kitSilG;
 /* any person object -> role + rank (+ origin for the player) */
 function personRoleRank(p,hint){const out=(role,rank,extra)=>Object.assign({role,rank:rank==null?null:rank,origin:null,sex:(KIT_ROLES[role]||KIT_ROLES.other).sex,kid:false},extra||{});
  try{if(!p)return out(hint||"other");
@@ -101,7 +115,7 @@ function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.siz
 /* person card: unknown people are named "Người lạ" */
 (function(){const c0=pcard;pcard=function(o){try{if(o&&o.f&&o.f.__kp&&!kitIsKnown(o.f.__kp))o=Object.assign({},o,{name:"Người lạ",rank:""})}catch(e){}return c0.call(this,o)}})();
 /* scene: name tags and full-body figures follow the same hook (strangers stand as grey silhouettes img/kit/unknown-fig-f|m|k.webp) */
-(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];if(!p)return;const who=p.ref||(p.kind==="emp"?S.emp:p.kind==="th"?S.thO:p.kind==="maid"?S.maid:null);if(who&&!kitIsKnown(who)){const t=b.querySelector(".tag");if(t)t.textContent="Người lạ";const r=personRoleRank(who);const fi=b.querySelector("img.figimg");if(fi)fi.src=KIT_DIR+`unknown-fig-${r.kid?"k":r.sex==="m"?"m":"f"}.webp`}})}catch(e){}return r}})();
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const ppl=curPeople();document.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];if(!p)return;const who=p.ref||(p.kind==="emp"?S.emp:p.kind==="th"?S.thO:p.kind==="maid"?S.maid:null);if(who&&!kitIsKnown(who)){const t=b.querySelector(".tag");if(t)t.textContent="Người lạ";const r=personRoleRank(who);const fi=b.querySelector("img.figimg");if(fi)fi.src=KIT_DIR+`unknown-fig-${kitSilG(who)}.webp`}})}catch(e){}return r}})();
 /* kit CSS: portrait pieces only; nothing else changes */
 (function(){const st=document.createElement("style");st.id="kit60";st.textContent=`
 .pcp.kit{border:0!important;box-shadow:none!important;background:transparent!important;border-radius:0!important;overflow:visible!important;container-type:size;aspect-ratio:480/1037!important}
