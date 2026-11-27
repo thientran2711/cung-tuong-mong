@@ -69,3 +69,7 @@ Branch `review/tmk-warn` (base review/tmk-oanpace-fix b96bb0d5 — LC33 asked fo
   «Gió lọt» «Cứ làm tai mắt» uses the same text under «mất:» (was «kèm:»). Test adds «the charge stands in the kit Mất row, not Kèm»:
   tmk-warn.test 17/17 PASS; MUTATE nowarn / notext / nocut exit 1; tmk-warn-scan 0 gaps / 26 sites.
 - Stills (scratchpad): small take card Mất row = watch odds + kill odds + Tân Giả khố + the charge; hand plate still ĐƯỢC + GHI CHÚ until KK63.
+- 23:40Z KK63 fixed it in the kit: review/kk63 eb303595 (K-HAND-MAT, KIT §6.2o; kitOptCopy one copy builder; hide rules skip .kopinfo
+  unless locked). Verified locally (cherry-pick in a throw-away worktree, not pushed): kit-hand-mat-scan fold lost «!» 0 / lost plate 0,
+  s21e card plate 2 rows; kit-hand-rows stills Fold + iPad: plate = ĐƯỢC · MẤT (4 dangers incl. the charge + odds word) · GHI CHÚ. My branch
+  gets the fix through the land stack (kk63 must land before/with tmk-warn).
