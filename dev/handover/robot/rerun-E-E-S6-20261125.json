@@ -11132,76 +11132,6 @@
  },
  {
   "job": {
-   "id": "R6-speed-2",
-   "origin": "pf",
-   "road": "pt_tang",
-   "bot": "sens",
-   "seed": 2881086999,
-   "dev": "fold",
-   "url": "https://thientran2711.github.io/cung-tuong-mong/"
-  },
-  "harness": {
-   "kind": "realtap",
-   "sha": "d2e03d80",
-   "realtap": true,
-   "jsClicks": 0,
-   "deadButtons": 0,
-   "cap": null,
-   "stuck": 0,
-   "unstick": 0,
-   "slice": null,
-   "build": {
-    "s": "bf6dd041+",
-    "b": "0281bf7bcef6",
-    "t": "2026-11-26T06:59Z"
-   },
-   "areaTaps": 82,
-   "dlgScroll": 2,
-   "scrolls": 2,
-   "taps": 13
-  },
-  "life": {
-   "id": "Ban hoa",
-   "type": "end",
-   "fate": "Bị ban hoa, xuất cung",
-   "death": false,
-   "age": 20,
-   "year": 1,
-   "rank": 2,
-   "text": "Thuyền đưa ngươi về Phù Tang. Ngươi sống lặng lẽ bên bờ biển quê nhà.",
-   "card": [],
-   "duringArea": false,
-   "lastTaps": [
-    "AREA 531,358",
-    "AREA 331,600",
-    "AREA 369,658",
-    "AREA 494,342",
-    "AREA 529,580",
-    "AREA 576,611",
-    "AREA 493,493",
-    "AREA 418,566",
-    "AREA 571,659",
-    "AREA 586,592",
-    "AREA 361,496",
-    "#kg82 «Quay lại»"
-   ]
-  },
-  "exitPick": null,
-  "bugs": [],
-  "dead": [],
-  "buoi": 1,
-  "steps": 114,
-  "status": [],
-  "t": {
-   "total": 78149
-  },
-  "unit": "E-S6",
-  "row": "R6·speed·2:2881086999 (rerun on LIVE github.io, fold)",
-  "game": "github.io LIVE, GAME BUILD {s:bf6dd041+, b:0281bf7bcef6, t:2026-11-26T06:59Z}; harness d2e03d80; one buổi, no resume",
-  "audit": "INVALID by Foreman E ruling (26/11 ~08:10Z): the robot left the Lễ ra mắt trial before its end («Quay lại» after a few board taps = 0 điểm, owner bug E-a). NOT COUNTED; seed parked until the #kg82 board-play harness PASS + mghelp-dress-r6 LIVE."
- },
- {
-  "job": {
    "id": "R6-lover-1",
    "origin": "pf",
    "road": "pt_tang",
@@ -68817,5 +68747,7578 @@
   "row": "R6·rebel·1:1996422549 (rerun on LIVE github.io, ipad)",
   "game": "github.io LIVE, ≈ 39 h (11-26 06:59Z start build 0281bf7bcef6 → 11-27 22:35Z): MIXED builds (pinned local-serve then LIVE; ckpt build0/mixedBuild edited several times), 10 resumes, 2 OOM page crashes (b3618, b4015), parked ≈10 h for the packed-save fix, resumed 11-27 20:25Z on LIVE 24beb1a4 (packed save); harness 08a4ff8b at the end; SAVE QUOTA exceeded from ≈ b2957 (stored save 5.24M chars stopped following the game) and one SAVE REWIND on reload (clock 22.252 → stored 19.218, ≈ 459 buổi lost) before the repack",
   "audit": "VALID (natural death «Hồng nhan bạc mệnh» — emperor Hưng Long dies in year 22, age 39, real taps, github.io) — COUNTED with flags «mixed build (pin-server resume)», «save quota», «save rewind»"
+ },
+ {
+  "job": {
+   "id": "R6-speed-2",
+   "origin": "pf",
+   "road": "pt_tang",
+   "pick": null,
+   "bot": "sens",
+   "seed": 2881086999,
+   "dev": "fold",
+   "url": "https://thientran2711.github.io/cung-tuong-mong/"
+  },
+  "harness": {
+   "kind": "realtap",
+   "sha": "f65d019b",
+   "realtap": true,
+   "jsClicks": 0,
+   "deadButtons": 3,
+   "cap": null,
+   "stuck": 0,
+   "unstick": 24,
+   "slice": null,
+   "mgBackN": 162,
+   "mgBackQuitN": 0,
+   "builds": [
+    {
+     "s": "4cd3f974+",
+     "b": "9ab008eb74f9",
+     "where": "start"
+    },
+    {
+     "s": "4c4f7d0f+",
+     "b": "a7f223b6780d",
+     "where": "unstick reload"
+    },
+    {
+     "s": "48ab87e6",
+     "b": "fddb4bfbce60",
+     "where": "reload"
+    },
+    {
+     "s": "28d8bd1e",
+     "b": "c701d39f1073",
+     "where": "unstick reload"
+    },
+    {
+     "s": "24beb1a4",
+     "b": "bf5366a06e45",
+     "where": "reload"
+    }
+   ],
+   "build0": {
+    "s": "24beb1a4",
+    "b": "bf5366a06e45",
+    "t": "2026-11-27T19:22Z",
+    "at": "2026-11-27T20:57:20.000Z"
+   },
+   "build": {
+    "s": "4cd3f974+",
+    "b": "9ab008eb74f9",
+    "t": "2026-11-27T03:34Z"
+   },
+   "areaTaps": 12006,
+   "consoleErrN": 814,
+   "ident": {
+    "name": "Trương Lạc Yên",
+    "org": "Công chúa Phù Tang hòa thân",
+    "born": -17,
+    "at": 1
+   },
+   "dlgScroll": 2655,
+   "scrolls": 2833,
+   "infoTaps": 3362,
+   "skipLayerTaps": 942,
+   "dlgClose": 1407,
+   "nextNoTurn": 38,
+   "bareBlocked": 8,
+   "bareBlockedWhy": [
+    {
+     "at": 1302,
+     "buoi": 176,
+     "screen": ".dlg «Phụ hoàng ngã bệnh»",
+     "x": 362,
+     "y": 589,
+     "ev": "touchstart",
+     "hit": "button.opt.ka.kart",
+     "tgt": "button.opt.ka.kart",
+     "dt": 6,
+     "top0": "div.k3right"
+    },
+    {
+     "at": 1303,
+     "buoi": 176,
+     "screen": ".dlg «Phụ hoàng ngã bệnh»",
+     "x": 434,
+     "y": 476,
+     "ev": "touchstart",
+     "hit": "button.opt.ka.kart",
+     "tgt": "button.opt.ka.kart",
+     "dt": 15,
+     "top0": "div.opts.kpopts.k3btns"
+    },
+    {
+     "at": 9953,
+     "buoi": 731,
+     "screen": "#kdaytc «»",
+     "x": 378,
+     "y": 500,
+     "ev": "touchstart",
+     "hit": "div.kmrow",
+     "tgt": "b",
+     "dt": 171,
+     "top0": "b.kdt1"
+    },
+    {
+     "at": 14234,
+     "buoi": 1614,
+     "screen": "#kdaytc «»",
+     "x": 378,
+     "y": 500,
+     "ev": "touchstart",
+     "hit": "div.kmrow",
+     "tgt": "b",
+     "dt": 407,
+     "top0": "div.kmlist"
+    }
+   ],
+   "backdropTaps": 22,
+   "deadEndUnstick": 22,
+   "autoServe": [
+    {
+     "at": "2026-11-27T08:20:31.263Z",
+     "where": "unstick reload",
+     "from": "a7f223b6780d",
+     "to": "http://127.0.0.1:8908/",
+     "carried": 19
+    },
+    {
+     "at": "2026-11-27T13:00:02.817Z",
+     "where": "unstick reload",
+     "from": "c701d39f1073",
+     "to": "http://127.0.0.1:8949/",
+     "carried": 26
+    }
+   ],
+   "kfocVisits": 123,
+   "bareCovered": 985,
+   "bareCoveredBy": {
+    "not on the layer scanned": 923,
+    "div.kne.kne-beat over button.tok.fig.bob": 16,
+    "div.kbk-cv over button.tok.fig.bob": 18,
+    "moving button.tok.fig.bob": 2,
+    "img.kmbox-o over button.tok.fig.bob": 1,
+    "div.kne.kne-beat over div.kmrow": 19,
+    "div.kmlist over button.tok.fig.bob": 1,
+    "div.kcf-cards over button.tok.fig.bob": 1,
+    "div.kcf-cards over img#mefig.j59sz": 1,
+    "span.kin over button.tok.fig.bob": 1,
+    "div.kbk-cv over button.mspot.sm": 1,
+    "div.kbk-cv over button.mspot": 1
+   },
+   "skipCoverTaps": 128,
+   "deadChecks": 22,
+   "deadCheckMs": 74320,
+   "mgQuickSkipped": 2974,
+   "mgReady": 190,
+   "mgMiss": 2670,
+   "boards": [
+    {
+     "at": 2328,
+     "buoi": 289,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 121,
+     "area": 0,
+     "s": 22,
+     "res": "0/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 2446,
+     "buoi": 294,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 112,
+     "area": 0,
+     "s": 22,
+     "res": "2/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 2794,
+     "buoi": 313,
+     "kind": "ban",
+     "layer": "#kg82",
+     "moves": 6,
+     "area": 0,
+     "s": 12,
+     "res": "8/10 raw 7.92",
+     "raw": 7.916666666666667
+    },
+    {
+     "at": 2883,
+     "buoi": 318,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 137,
+     "area": 0,
+     "s": 22,
+     "res": "4/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 3102,
+     "buoi": 330,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 130,
+     "area": 0,
+     "s": 22,
+     "res": "5/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 3334,
+     "buoi": 342,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 24,
+     "area": 1,
+     "s": 29,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 3527,
+     "buoi": 354,
+     "kind": "duho",
+     "layer": "#kg82",
+     "moves": 12,
+     "area": 0,
+     "s": 23,
+     "res": "6/10 raw 7.25",
+     "raw": 7.25
+    },
+    {
+     "at": 4107,
+     "buoi": 390,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 24,
+     "area": 1,
+     "s": 28,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 4170,
+     "buoi": 394,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 23,
+     "area": 1,
+     "s": 28,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 4336,
+     "buoi": 402,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 24,
+     "area": 0,
+     "s": 30,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 4407,
+     "buoi": 406,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 149,
+     "area": 0,
+     "s": 22,
+     "res": "5/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 4481,
+     "buoi": 409,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 125,
+     "area": 0,
+     "s": 22,
+     "res": "6/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 4590,
+     "buoi": 414,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 132,
+     "area": 0,
+     "s": 22,
+     "res": "6/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 4698,
+     "buoi": 418,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 24,
+     "area": 1,
+     "s": 29,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 4836,
+     "buoi": 426,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 24,
+     "area": 1,
+     "s": 31,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 4911,
+     "buoi": 430,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 23,
+     "area": 1,
+     "s": 28,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 5069,
+     "buoi": 438,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 5156,
+     "buoi": 442,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 5282,
+     "buoi": 450,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 129,
+     "area": 0,
+     "s": 22,
+     "res": "6/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 5341,
+     "buoi": 454,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 6208,
+     "buoi": 514,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 6440,
+     "buoi": 526,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 6896,
+     "buoi": 550,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 117,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 7432,
+     "buoi": 582,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 7624,
+     "buoi": 594,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 122,
+     "area": 0,
+     "s": 19,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 7721,
+     "buoi": 598,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 7824,
+     "buoi": 602,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 7946,
+     "buoi": 610,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 142,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 8082,
+     "buoi": 613,
+     "kind": "ve",
+     "layer": "#kg82",
+     "moves": 1,
+     "area": 24,
+     "s": 97,
+     "res": "0/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 8207,
+     "buoi": 618,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 8421,
+     "buoi": 634,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 8566,
+     "buoi": 642,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 103,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 8663,
+     "buoi": 646,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 8741,
+     "buoi": 650,
+     "kind": "duho",
+     "layer": "#kg82",
+     "moves": 12,
+     "area": 0,
+     "s": 21,
+     "res": "6/10 raw 7.25",
+     "raw": 7.25
+    },
+    {
+     "at": 8950,
+     "buoi": 662,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 151,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 9082,
+     "buoi": 670,
+     "kind": "dan",
+     "layer": "#kg82",
+     "moves": 16,
+     "area": 0,
+     "s": 21,
+     "res": "3/10 raw 6.20",
+     "raw": 6.199999999999999
+    },
+    {
+     "at": 9186,
+     "buoi": 674,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 151,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 9258,
+     "buoi": 678,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 9612,
+     "buoi": 706,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 10103,
+     "buoi": 741,
+     "kind": "duho",
+     "layer": "#kg82",
+     "moves": 12,
+     "area": 0,
+     "s": 23,
+     "res": "4/10 raw 5.42",
+     "raw": 5.416666666666668
+    },
+    {
+     "at": 10486,
+     "buoi": 766,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 155,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 11367,
+     "buoi": 821,
+     "kind": "ve",
+     "layer": "#kg82",
+     "moves": 1,
+     "area": 24,
+     "s": 97,
+     "res": "2/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 407,
+     "buoi": 863,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 115,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 622,
+     "buoi": 871,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 128,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 1157,
+     "buoi": 902,
+     "kind": "ban",
+     "layer": "#kg82",
+     "moves": 6,
+     "area": 0,
+     "s": 11,
+     "res": "8/10 raw 7.50",
+     "raw": 7.5
+    },
+    {
+     "at": 1351,
+     "buoi": 911,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 134,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 2340,
+     "buoi": 961,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 2548,
+     "buoi": 968,
+     "kind": "huong",
+     "layer": "#kg82",
+     "moves": 0,
+     "area": 49,
+     "s": 85,
+     "res": "0/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 2612,
+     "buoi": 969,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 139,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 3257,
+     "buoi": 1013,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 3364,
+     "buoi": 1017,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 3459,
+     "buoi": 1021,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 3884,
+     "buoi": 1041,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 147,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 4081,
+     "buoi": 1049,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 4506,
+     "buoi": 1076,
+     "kind": "co",
+     "layer": "#kg82",
+     "moves": 5,
+     "area": 0,
+     "s": 6,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 4751,
+     "buoi": 1085,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 4844,
+     "buoi": 1089,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 4907,
+     "buoi": 1093,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 138,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 6087,
+     "buoi": 1156,
+     "kind": "ban",
+     "layer": "#kg82",
+     "moves": 6,
+     "area": 0,
+     "s": 12,
+     "res": "8/10 raw 7.50",
+     "raw": 7.5
+    },
+    {
+     "at": 7108,
+     "buoi": 1231,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 7637,
+     "buoi": 1259,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 126,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 7811,
+     "buoi": 1267,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 7910,
+     "buoi": 1274,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 24,
+     "area": 0,
+     "s": 29,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 7996,
+     "buoi": 1275,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 8207,
+     "buoi": 1283,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 9488,
+     "buoi": 1353,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 159,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 9565,
+     "buoi": 1357,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 9785,
+     "buoi": 1368,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 10429,
+     "buoi": 1405,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 10806,
+     "buoi": 1421,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 108,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 10899,
+     "buoi": 1424,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 11333,
+     "buoi": 1453,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 142,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 11538,
+     "buoi": 1465,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 126,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 11690,
+     "buoi": 1473,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 153,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 11957,
+     "buoi": 1485,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 12076,
+     "buoi": 1493,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 149,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 12196,
+     "buoi": 1497,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 12314,
+     "buoi": 1501,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 113,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 12492,
+     "buoi": 1513,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 106,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 12622,
+     "buoi": 1516,
+     "kind": "huong",
+     "layer": "#kg82",
+     "moves": 0,
+     "area": 47,
+     "s": 83,
+     "res": "5/10 raw 2.80",
+     "raw": 2.7968264074658027
+    },
+    {
+     "at": 13466,
+     "buoi": 1569,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 13699,
+     "buoi": 1585,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 133,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 13769,
+     "buoi": 1589,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 113,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 14783,
+     "buoi": 1653,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 156,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 14856,
+     "buoi": 1657,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 96,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 15628,
+     "buoi": 1681,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 15813,
+     "buoi": 1691,
+     "kind": "co",
+     "layer": "#kg82",
+     "moves": 5,
+     "area": 0,
+     "s": 6,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 16305,
+     "buoi": 1715,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 163,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 16532,
+     "buoi": 1727,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "9/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 17711,
+     "buoi": 1815,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 168,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 17800,
+     "buoi": 1819,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 18058,
+     "buoi": 1831,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 21349,
+     "buoi": 2111,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 21533,
+     "buoi": 2119,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 21619,
+     "buoi": 2123,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 145,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 21812,
+     "buoi": 2131,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 138,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 21940,
+     "buoi": 2135,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 22186,
+     "buoi": 2150,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 22370,
+     "buoi": 2159,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 22497,
+     "buoi": 2167,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 144,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 22785,
+     "buoi": 2179,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 142,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 23592,
+     "buoi": 2239,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 27,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 23689,
+     "buoi": 2243,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 137,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 23882,
+     "buoi": 2255,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 23983,
+     "buoi": 2259,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 148,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 24055,
+     "buoi": 2263,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 24149,
+     "buoi": 2267,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 24351,
+     "buoi": 2279,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 25188,
+     "buoi": 2327,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 26260,
+     "buoi": 2395,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 26419,
+     "buoi": 2403,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 27,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 26508,
+     "buoi": 2407,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 26593,
+     "buoi": 2411,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 27193,
+     "buoi": 2447,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 27556,
+     "buoi": 2462,
+     "kind": "huong",
+     "layer": "#kg82",
+     "moves": 0,
+     "area": 52,
+     "s": 90,
+     "res": "4/10 raw 1.39",
+     "raw": 1.392126408239904
+    },
+    {
+     "at": 28146,
+     "buoi": 2491,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 28541,
+     "buoi": 2511,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 130,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 28726,
+     "buoi": 2519,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 130,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 29107,
+     "buoi": 2534,
+     "kind": "huong",
+     "layer": "#kg82",
+     "moves": 0,
+     "area": 52,
+     "s": 90,
+     "res": "9/10 raw 4.56",
+     "raw": 4.561147701702114
+    },
+    {
+     "at": 29251,
+     "buoi": 2539,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 30425,
+     "buoi": 2603,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 164,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 30667,
+     "buoi": 2615,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 30842,
+     "buoi": 2623,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 159,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 30916,
+     "buoi": 2627,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 170,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 31017,
+     "buoi": 2631,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 149,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 31281,
+     "buoi": 2647,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 138,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 31576,
+     "buoi": 2663,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 31723,
+     "buoi": 2671,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 141,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 31794,
+     "buoi": 2675,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 147,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 32000,
+     "buoi": 2687,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 137,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 32280,
+     "buoi": 2695,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 32702,
+     "buoi": 2723,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 32852,
+     "buoi": 2731,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 33058,
+     "buoi": 2743,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 164,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 33226,
+     "buoi": 2751,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 33332,
+     "buoi": 2755,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 147,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 33405,
+     "buoi": 2759,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 33797,
+     "buoi": 2767,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 173,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 33876,
+     "buoi": 2771,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 34335,
+     "buoi": 2798,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 34471,
+     "buoi": 2803,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 34554,
+     "buoi": 2807,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 34764,
+     "buoi": 2819,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 226,
+     "buoi": 2846,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 1134,
+     "buoi": 2906,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 1498,
+     "buoi": 2927,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 1562,
+     "buoi": 2930,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 168,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 1778,
+     "buoi": 2946,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 136,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 1960,
+     "buoi": 2954,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 2117,
+     "buoi": 2962,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 134,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 2486,
+     "buoi": 2982,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 176,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 2616,
+     "buoi": 2990,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 2914,
+     "buoi": 3010,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 122,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 3003,
+     "buoi": 3014,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 25,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 3604,
+     "buoi": 3050,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 161,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 4130,
+     "buoi": 3074,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 165,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 4212,
+     "buoi": 3078,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 124,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 4704,
+     "buoi": 3106,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 122,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    },
+    {
+     "at": 5059,
+     "buoi": 3122,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 5146,
+     "buoi": 3126,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 24,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 5467,
+     "buoi": 3146,
+     "kind": "mua",
+     "layer": "#kg82",
+     "moves": 19,
+     "area": 0,
+     "s": 26,
+     "res": "10/10 raw 10.00",
+     "raw": 10
+    },
+    {
+     "at": 6199,
+     "buoi": 3182,
+     "kind": "hat",
+     "layer": "#kg82",
+     "moves": 134,
+     "area": 0,
+     "s": 22,
+     "res": "7/10 raw 0.00",
+     "raw": 0
+    }
+   ],
+   "boardN": 162,
+   "mgPeekTaps": 10711,
+   "boardTaps": 10711,
+   "mgBackWhy": [
+    {
+     "at": 30842,
+     "buoi": 2623,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 30916,
+     "buoi": 2627,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 31017,
+     "buoi": 2631,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 31281,
+     "buoi": 2647,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 31576,
+     "buoi": 2663,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 31723,
+     "buoi": 2671,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 31794,
+     "buoi": 2675,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 32000,
+     "buoi": 2687,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 32280,
+     "buoi": 2695,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 32702,
+     "buoi": 2723,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 32852,
+     "buoi": 2731,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 33058,
+     "buoi": 2743,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 33226,
+     "buoi": 2751,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 33332,
+     "buoi": 2755,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 33405,
+     "buoi": 2759,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 33797,
+     "buoi": 2767,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 33876,
+     "buoi": 2771,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 34344,
+     "buoi": 2798,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại",
+      "✕",
+      "✕"
+     ]
+    },
+    {
+     "at": 34471,
+     "buoi": 2803,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 34554,
+     "buoi": 2807,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 34764,
+     "buoi": 2819,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 226,
+     "buoi": 2846,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 1134,
+     "buoi": 2906,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 1509,
+     "buoi": 2927,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại",
+      "✕",
+      "✕"
+     ]
+    },
+    {
+     "at": 1562,
+     "buoi": 2930,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 1778,
+     "buoi": 2946,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 1960,
+     "buoi": 2954,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 2117,
+     "buoi": 2962,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 2486,
+     "buoi": 2982,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 2616,
+     "buoi": 2990,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 2914,
+     "buoi": 3010,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 3003,
+     "buoi": 3014,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 3604,
+     "buoi": 3050,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 4130,
+     "buoi": 3074,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 4212,
+     "buoi": 3078,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 4704,
+     "buoi": 3106,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 5059,
+     "buoi": 3122,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 5146,
+     "buoi": 3126,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 5467,
+     "buoi": 3146,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    },
+    {
+     "at": 6199,
+     "buoi": 3182,
+     "ph": "result",
+     "res": true,
+     "long": false,
+     "btns": [
+      "Quay lại"
+     ]
+    }
+   ],
+   "dressPut": 198,
+   "kipScroll": 32,
+   "closeOwnLayer": 4,
+   "crashes": 1,
+   "mixedBuild": [
+    {
+     "s": "4cd3f974+",
+     "b": "9ab008eb74f9",
+     "t": "2026-11-27T03:34Z",
+     "at": "2026-11-27T07:58:41.924Z"
+    },
+    {
+     "s": "48ab87e6",
+     "b": "fddb4bfbce60",
+     "t": "2026-11-27T09:35Z",
+     "at": "2026-11-27T11:13:26.000Z"
+    }
+   ],
+   "taps0": 0,
+   "resumed": [
+    {
+     "at": "2026-11-27T11:13:32.621Z",
+     "buoi": 838,
+     "from": "2026-11-27T11:11:47.604Z"
+    },
+    {
+     "at": "2026-11-27T20:57:21.216Z",
+     "buoi": 2835,
+     "from": "2026-11-27T20:56:59.548Z"
+    }
+   ],
+   "resumeRestore": [
+    {
+     "at": "2026-11-27T11:13:40.779Z",
+     "origin": "https://thientran2711.github.io",
+     "from": "http://127.0.0.1:8908",
+     "want": 2032810,
+     "got": 2032810,
+     "keys": 24
+    },
+    {
+     "at": "2026-11-27T20:57:27.017Z",
+     "origin": "https://thientran2711.github.io",
+     "from": "http://127.0.0.1:8949",
+     "want": 5215112,
+     "got": 5215112,
+     "keys": 26
+    }
+   ],
+   "resumeHash": [
+    {
+     "k": "hclh-save-v2-1",
+     "ckpt": "832a3d09",
+     "page": "832a3d09",
+     "same": true,
+     "ckClk": "6.69.2.3",
+     "pageClk": "6.69.2.3"
+    },
+    {
+     "k": "hclh-save-v2-1",
+     "ckpt": "f6904e31",
+     "page": "f6904e31",
+     "same": true,
+     "ckClk": "20.230.2.1",
+     "pageClk": "20.230.2.1"
+    }
+   ],
+   "skipTaps": 64,
+   "closeSpent": 1,
+   "saveRewind": [
+    {
+     "at": 1774,
+     "buoi": 929,
+     "from": 928,
+     "fromClk": "7.77.1.0",
+     "to": 927,
+     "toClk": "7.77.0.3",
+     "lost": 1
+    },
+    {
+     "at": 6433,
+     "buoi": 1179,
+     "from": 1178,
+     "fromClk": "9.98.0.0",
+     "to": 1177,
+     "toClk": "9.97.2.3",
+     "lost": 1
+    },
+    {
+     "at": 8483,
+     "buoi": 1301,
+     "from": 1300,
+     "fromClk": "10.108.0.0",
+     "to": 1299,
+     "toClk": "10.107.2.3",
+     "lost": 1
+    },
+    {
+     "at": 16017,
+     "buoi": 1700,
+     "from": 1699,
+     "fromClk": "12.141.0.1",
+     "to": 1697,
+     "toClk": "12.140.2.3",
+     "lost": 2
+    },
+    {
+     "at": 16069,
+     "buoi": 1703,
+     "from": 1699,
+     "fromClk": "12.141.0.1",
+     "to": 1697,
+     "toClk": "12.140.2.3",
+     "lost": 2
+    },
+    {
+     "at": 8,
+     "buoi": 2836,
+     "from": 2835,
+     "fromClk": "20.235.0.3",
+     "to": 2781,
+     "toClk": "20.230.2.1",
+     "lost": 54
+    }
+   ],
+   "nocloseRetract": 92,
+   "stallForce": 6,
+   "cardWay": 39,
+   "noHitScroll": 1,
+   "saveErr": {
+    "n": 59,
+    "name": "QuotaExceededError",
+    "msg": "Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.",
+    "key": "hclh-save-v2-1",
+    "len": 5231928,
+    "t": 1795812198649
+   },
+   "saveStale": [
+    {
+     "at": 8,
+     "stored": null,
+     "storedClk": "unreadable",
+     "live": 2836,
+     "liveClk": "20.230.2.1",
+     "chars": 396199,
+     "err": null
+    },
+    {
+     "at": 1629,
+     "stored": null,
+     "storedClk": "unreadable",
+     "live": 2936,
+     "liveClk": "21.239.0.1",
+     "chars": 397874,
+     "err": null
+    },
+    {
+     "at": 3290,
+     "stored": null,
+     "storedClk": "unreadable",
+     "live": 3036,
+     "liveClk": "21.247.1.1",
+     "chars": 409510,
+     "err": null
+    },
+    {
+     "at": 5281,
+     "stored": null,
+     "storedClk": "unreadable",
+     "live": 3136,
+     "liveClk": "22.255.2.1",
+     "chars": 419751,
+     "err": null
+    }
+   ],
+   "taps": 5867
+  },
+  "life": {
+   "id": "Lãnh cung",
+   "type": "end",
+   "fate": "Tuổi xuân qua đi",
+   "death": false,
+   "age": 40,
+   "year": 23,
+   "rank": 0,
+   "card": [],
+   "duringArea": false,
+   "lastTaps": [
+    ".dlg «Chuyện trong cung» «Cho người mang đi xaTốnkhôngĐượcTâm cơ +MấtĐức −Gợ»",
+    ".dlg «Chuyện trong cung» «Chọn lá này»",
+    ".dlg «Đại hàn, tuyết lớn» «Chịu rét cho quaTốnSức 8Đượcgiữ lại 20 lượng bạcKè»",
+    ".dlg «Đại hàn, tuyết lớn» «Chọn lá này»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Bạc2111Sức82/90»",
+    ".dlg «Bạc» «Lui»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Giao tình»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang buổi»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Hoàng tự»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Con của taKế vịHoàng tự trong cungHôn sựQuý tộc ké»",
+    "page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.» «Sang ngày mới»"
+   ]
+  },
+  "exitPick": null,
+  "bugs": [
+   {
+    "k": "js|page error: sx is not defined",
+    "type": "js",
+    "msg": "page error: sx is not defined",
+    "n": 1,
+    "at": 1299,
+    "stack": [
+     "ReferenceError: sx is not defined",
+     "at https://thientran2711.github.io/cung-tuong-mong/:82992:418",
+     "at https://thientran2711.github.io/cung-tuong-mong/:82992:147",
+     "at kcDo (https://thientran2711.github.io/cung-tuong-mong/:77995:44)",
+     "at Object.<anonymous> (https://thientran2711.github.io/cung-tuong-mong/:82945:31)",
+     "at Object.g [as go] (https://thientran2711.github.io/cung-tuong-mong/:77993:31)"
+    ]
+   },
+   {
+    "k": "harness|area tap would have landed on a button (it appeared under the point) — blocked: «Xin sứ đoàn mời thầy thuốc Đại Hy TỐN Sức 5 ĐƯỢC t»",
+    "type": "harness",
+    "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Xin sứ đoàn mời thầy thuốc Đại Hy TỐN Sức 5 ĐƯỢC t»",
+    "n": 1,
+    "at": 1302,
+    "screen": ".dlg «Phụ hoàng ngã bệnh»",
+    "why": {
+     "screen": ".dlg «Phụ hoàng ngã bệnh»",
+     "x": 362,
+     "y": 589,
+     "ev": "touchstart",
+     "hit": "button.opt.ka.kart",
+     "tgt": "button.opt.ka.kart",
+     "dt": 6,
+     "top0": "div.k3right"
+    }
+   },
+   {
+    "k": "harness|area tap would have landed on a button (it appeared under the point) — blocked: «Ngày đêm hầu thuốc TỐN Sức 25 ĐƯỢC phụ thân thương»",
+    "type": "harness",
+    "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Ngày đêm hầu thuốc TỐN Sức 25 ĐƯỢC phụ thân thương»",
+    "n": 1,
+    "at": 1303,
+    "screen": ".dlg «Phụ hoàng ngã bệnh»",
+    "why": {
+     "screen": ".dlg «Phụ hoàng ngã bệnh»",
+     "x": 434,
+     "y": 476,
+     "ev": "touchstart",
+     "hit": "button.opt.ka.kart",
+     "tgt": "button.opt.ka.kart",
+     "dt": 15,
+     "top0": "div.opts.kpopts.k3btns"
+    }
+   },
+   {
+    "k": "game|item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)",
+    "type": "game",
+    "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)",
+    "n": 2,
+    "at": 2928,
+    "screen": ".dlg"
+   },
+   {
+    "k": "harness|area tap would have landed on a button (it appeared under the point) — blocked: «Thường Nước bào hoa Chải tóc vấn Kiểu cầu kỳ: mỗi »",
+    "type": "harness",
+    "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Thường Nước bào hoa Chải tóc vấn Kiểu cầu kỳ: mỗi »",
+    "n": 2,
+    "at": 9953,
+    "screen": "#kdaytc «»",
+    "why": {
+     "screen": "#kdaytc «»",
+     "x": 378,
+     "y": 500,
+     "ev": "touchstart",
+     "hit": "div.kmrow",
+     "tgt": "b",
+     "dt": 171,
+     "top0": "b.kdt1"
+    }
+   },
+   {
+    "k": "crash|tab crashed (Page crashed) at buổi 838",
+    "type": "crash",
+    "msg": "tab crashed (Page crashed) at buổi 838",
+    "n": 1,
+    "at": 11639,
+    "freeMB": 4705,
+    "totalMB": 16087,
+    "load": 7.5
+   },
+   {
+    "k": "game|every close of «.kscn» was tapped 3× and the dialog stayed (Lui)",
+    "type": "game",
+    "msg": "every close of «.kscn» was tapped 3× and the dialog stayed (Lui)",
+    "n": 1,
+    "at": 1765,
+    "screen": ".kscn"
+   },
+   {
+    "k": "dead|close button has no effect: .dlg «Danh hiệu lên bậc» «Để sau»",
+    "type": "dead",
+    "msg": "close button has no effect: .dlg «Danh hiệu lên bậc» «Để sau»",
+    "n": 1,
+    "at": 3604,
+    "shot": "/home/user/wt/out/run/shots-R6-speed-2/noeffect-1795781616488.png"
+   },
+   {
+    "k": "dead|close button has no effect: .dlg «Danh hiệu mới» «Để sau»",
+    "type": "dead",
+    "msg": "close button has no effect: .dlg «Danh hiệu mới» «Để sau»",
+    "n": 1,
+    "at": 7939,
+    "shot": "/home/user/wt/out/run/shots-R6-speed-2/noeffect-1795785951118.png"
+   },
+   {
+    "k": "harness|picker stalled 15 steps / 23 s on .kscn «» without a real tap (noclose 16; last refused tap: gone «Ta biết rồi») → tapped «Trang sức»",
+    "type": "harness",
+    "msg": "picker stalled 15 steps / 23 s on .kscn «» without a real tap (noclose 16; last refused tap: gone «Ta biết rồi») → tapped «Trang sức»",
+    "n": 2,
+    "at": 9095,
+    "S": {
+     "dead": false,
+     "y": 10,
+     "t": 110,
+     "w": 1,
+     "b": 0,
+     "age": 27,
+     "rank": 1,
+     "name": "Trương Lạc Yên",
+     "org": "Công chúa Phù Tang hòa thân",
+     "kend": "",
+     "fate": ""
+    },
+    "screen": ".kscn «»",
+    "kinds": {
+     "noclose": 16
+    },
+    "buttons": [
+     "Lui",
+     "Tất cả",
+     "Trâm cài",
+     "Y phục",
+     "Trang sức",
+     "Quay trái",
+     "Quay phải"
+    ]
+   },
+   {
+    "k": "game|SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)",
+    "type": "game",
+    "msg": "SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)",
+    "n": 3,
+    "at": 16017,
+    "line": "SAVE REWIND: reload went back from b1699 (clock 12.141.0.1) to the stored b1697 (clock 12.140.2.3) (2 buổi lost)",
+    "lost": 2
+   },
+   {
+    "k": "harness|picker stalled 15 steps / 23 s on .kscn «» without a real tap (noclose 16; last refused tap: gone «Ta biết rồi») → tapped «Y phục»",
+    "type": "harness",
+    "msg": "picker stalled 15 steps / 23 s on .kscn «» without a real tap (noclose 16; last refused tap: gone «Ta biết rồi») → tapped «Y phục»",
+    "n": 2,
+    "at": 24620,
+    "S": {
+     "dead": false,
+     "y": 17,
+     "t": 190,
+     "w": 0,
+     "b": 0,
+     "age": 34,
+     "rank": 0,
+     "name": "Trương Lạc Yên",
+     "org": "Công chúa Phù Tang hòa thân",
+     "kend": "",
+     "fate": ""
+    },
+    "screen": ".kscn «»",
+    "kinds": {
+     "noclose": 16
+    },
+    "buttons": [
+     "Lui",
+     "Tất cả",
+     "Trâm cài",
+     "Y phục",
+     "Trang sức",
+     "Quay trái",
+     "Quay phải"
+    ]
+   },
+   {
+    "k": "game|QuotaExceededError: the game save no longer fits localStorage (j6 save() swallows it: every later save is lost)",
+    "type": "game",
+    "msg": "QuotaExceededError: the game save no longer fits localStorage (j6 save() swallows it: every later save is lost)",
+    "n": 265,
+    "at": 33924,
+    "first": "[rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5225802 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota."
+   },
+   {
+    "k": "game|SAVE STALE: the stored save stopped following the live game (no setItem error seen)",
+    "type": "game",
+    "msg": "SAVE STALE: the stored save stopped following the live game (no setItem error seen)",
+    "n": 4,
+    "at": 8,
+    "line": "SAVE STALE stored b<2000 live b2836 chars 396199"
+   },
+   {
+    "k": "game|item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls ()",
+    "type": "game",
+    "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls ()",
+    "n": 2,
+    "at": 1842,
+    "screen": ".dlg"
+   },
+   {
+    "k": "harness|picker stalled 15 steps / 24 s on .kscn «» without a real tap (noclose 16; last refused tap: gone «Chuẩn bị thị tẩm») → tapped «Quay phải»",
+    "type": "harness",
+    "msg": "picker stalled 15 steps / 24 s on .kscn «» without a real tap (noclose 16; last refused tap: gone «Chuẩn bị thị tẩm») → tapped «Quay phải»",
+    "n": 1,
+    "at": 3749,
+    "S": {
+     "dead": false,
+     "y": 21,
+     "t": 249,
+     "w": 0,
+     "b": 0,
+     "age": 38,
+     "rank": 0,
+     "name": "Trương Lạc Yên",
+     "org": "Công chúa Phù Tang hòa thân",
+     "kend": "",
+     "fate": ""
+    },
+    "screen": ".kscn «»",
+    "kinds": {
+     "noclose": 16
+    },
+    "buttons": [
+     "Lui",
+     "Tất cả",
+     "Trâm cài",
+     "Y phục",
+     "Trang sức",
+     "Quay trái",
+     "Quay phải"
+    ]
+   },
+   {
+    "k": "harness|picker stalled 15 steps / 23 s on .kscn «» without a real tap (noclose 16; last refused tap: gone «Chuẩn bị thị tẩm») → tapped «Quay trái»",
+    "type": "harness",
+    "msg": "picker stalled 15 steps / 23 s on .kscn «» without a real tap (noclose 16; last refused tap: gone «Chuẩn bị thị tẩm») → tapped «Quay trái»",
+    "n": 1,
+    "at": 3775,
+    "S": {
+     "dead": false,
+     "y": 21,
+     "t": 249,
+     "w": 0,
+     "b": 0,
+     "age": 38,
+     "rank": 0,
+     "name": "Trương Lạc Yên",
+     "org": "Công chúa Phù Tang hòa thân",
+     "kend": "",
+     "fate": ""
+    },
+    "screen": ".kscn «»",
+    "kinds": {
+     "noclose": 16
+    },
+    "buttons": [
+     "Lui",
+     "Tất cả",
+     "Trâm cài",
+     "Y phục",
+     "Trang sức",
+     "Quay trái",
+     "Quay phải"
+    ]
+   }
+  ],
+  "dead": [
+   {
+    "k": "DEAD BUTTON",
+    "screen": ".mapsc",
+    "label": "Thái y viện3 bóng · 2 khắc",
+    "cover": "span.ef.g in #mb",
+    "shot": "/home/user/wt/out/run/shots-R6-speed-2/dead-fold-1795772876676.png",
+    "dev": "fold",
+    "at": 6561,
+    "S": {
+     "dead": false,
+     "y": 4,
+     "t": 44,
+     "w": 1,
+     "b": 2,
+     "age": 21,
+     "rank": 2,
+     "name": "Trương Lạc Yên",
+     "org": "Công chúa Phù Tang hòa thân",
+     "kend": "",
+     "fate": ""
+    }
+   },
+   {
+    "k": "NO EFFECT",
+    "screen": ".dlg «Danh hiệu lên bậc»",
+    "label": "Để sau",
+    "cover": "tapped 3× for real, dialog stays",
+    "shot": "/home/user/wt/out/run/shots-R6-speed-2/noeffect-1795781616488.png",
+    "at": 3604,
+    "S": {
+     "dead": false,
+     "y": 8,
+     "t": 85,
+     "w": 1,
+     "b": 2,
+     "age": 25,
+     "rank": 2,
+     "name": "Trương Lạc Yên",
+     "org": "Công chúa Phù Tang hòa thân",
+     "kend": "",
+     "fate": ""
+    }
+   },
+   {
+    "k": "NO EFFECT",
+    "screen": ".dlg «Danh hiệu mới»",
+    "label": "Để sau",
+    "cover": "tapped 3× for real, dialog stays",
+    "shot": "/home/user/wt/out/run/shots-R6-speed-2/noeffect-1795785951118.png",
+    "at": 7939,
+    "S": {
+     "dead": false,
+     "y": 9,
+     "t": 105,
+     "w": 2,
+     "b": 2,
+     "age": 26,
+     "rank": 2,
+     "name": "Trương Lạc Yên",
+     "org": "Công chúa Phù Tang hòa thân",
+     "kend": "",
+     "fate": ""
+    }
+   }
+  ],
+  "buoi": 3210,
+  "steps": 66080,
+  "status": [
+   "STATUS R6-speed-2 · buổi 356 · year 3 · rank 3 · bugs 4 · stuck 0 · dead buttons 0",
+   "STATUS R6-speed-2 · buổi 568 · year 5 · rank 2 · bugs 4 · stuck 0 · dead buttons 1",
+   "STATUS R6-speed-2 · buổi 795 · year 6 · rank 2 · bugs 5 · stuck 0 · dead buttons 1",
+   "STATUS R6-speed-2 · buổi 1028 · year 8 · rank 2 · bugs 8 · stuck 0 · dead buttons 2",
+   "STATUS R6-speed-2 · buổi 1236 · year 9 · rank 2 · bugs 8 · stuck 0 · dead buttons 2",
+   "STATUS R6-speed-2 · buổi 1422 · year 11 · rank 1 · bugs 10 · stuck 0 · dead buttons 3",
+   "STATUS R6-speed-2 · buổi 1626 · year 12 · rank 1 · bugs 10 · stuck 0 · dead buttons 3",
+   "STATUS R6-speed-2 · buổi 1830 · year 13 · rank 0 · bugs 11 · stuck 0 · dead buttons 3",
+   "STATUS R6-speed-2 · buổi 2123 · year 15 · rank 0 · bugs 11 · stuck 0 · dead buttons 3",
+   "STATUS R6-speed-2 · buổi 2328 · year 17 · rank 0 · bugs 12 · stuck 0 · dead buttons 3",
+   "STATUS R6-speed-2 · buổi 2524 · year 18 · rank 0 · bugs 12 · stuck 0 · dead buttons 3",
+   "STATUS R6-speed-2 · buổi 2706 · year 19 · rank 0 · bugs 12 · stuck 0 · dead buttons 3",
+   "STATUS R6-speed-2 · buổi 3051 · year 21 · rank 0 · bugs 15 · stuck 0 · dead buttons 3"
+  ],
+  "offers": [
+   {
+    "buoi": 288,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Bành Vân Thường»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 288,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Bành Vân Thường»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 200)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 288,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Bành Vân Thường»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 300,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Chung Kiều Ân»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 300,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Chung Kiều Ân»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 232)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 300,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Chung Kiều Ân»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 313,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 313,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 218)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 313,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 336,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý phi Đường Nhã Ninh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 336,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý phi Đường Nhã Ninh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 390)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 336,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý phi Đường Nhã Ninh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 348,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Hoàng quý phi Đường Nhã Ninh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 348,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Hoàng quý phi Đường Nhã Ninh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 454)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 348,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Hoàng quý phi Đường Nhã Ninh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 361,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 361,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 517)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 361,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 373,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Tào Ngữ Yên»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 373,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Tào Ngữ Yên»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 471)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 373,
+    "y": 3,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Tào Ngữ Yên»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 420,
+    "y": 4,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Phùng Ngọc Tranh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 420,
+    "y": 4,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Phùng Ngọc Tranh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 700)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 420,
+    "y": 4,
+    "rank": 3,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Phùng Ngọc Tranh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 433,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 433,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 790)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 433,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 445,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tĩnh tần Đào Lang Hoa»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 445,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tĩnh tần Đào Lang Hoa»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 766)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 445,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tĩnh tần Đào Lang Hoa»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 457,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Hạ Kim Quất»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 457,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Hạ Kim Quất»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 798)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 457,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Hạ Kim Quất»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 468,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Doãn Tử Đằng»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 468,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Doãn Tử Đằng»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 894)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 468,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Doãn Tử Đằng»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 481,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Sử Lạc Y»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 481,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Sử Lạc Y»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 970)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 481,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Sử Lạc Y»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 493,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Chân Tiểu Liên»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 493,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Chân Tiểu Liên»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1007)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 493,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Chân Tiểu Liên»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 517,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Bành Vân Thường»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 517,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Bành Vân Thường»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1072)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 517,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Bành Vân Thường»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 541,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Chân Tiểu Liên»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 541,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Chân Tiểu Liên»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1185)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 541,
+    "y": 4,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Chân Tiểu Liên»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 552,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Sử Lạc Y»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 552,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Sử Lạc Y»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1216)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 552,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Sử Lạc Y»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 565,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Trương Uyển Thanh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 565,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Trương Uyển Thanh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1305)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 565,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Trương Uyển Thanh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 576,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 576,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1345)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 576,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 600,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tào Ngữ Yên»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 600,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tào Ngữ Yên»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1492)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 600,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tào Ngữ Yên»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 648,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 648,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1650)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 648,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 672,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển quý nhân Sử Như Ý»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 672,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển quý nhân Sử Như Ý»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1703)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 672,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển quý nhân Sử Như Ý»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 684,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 684,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1743)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 684,
+    "y": 5,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 708,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 708,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1824)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 708,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 709,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Xin ma ma tha cho nàng taTốnHoàng hậu → ta: thiện cảm 4·Danh",
+    "kind": "select",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 709,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Nhân tiện dạy nàng ta lại thứ tự lễTốnSức 8·Bạc 40ĐượcDanh +",
+    "kind": "select",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 709,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Đứng yên xem, không nói gìTốnĐức 3ĐượcSức ++·Tâm cơ ++MấtQuý",
+    "kind": "select",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 709,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Bí mật cho nàng ta bánh ngọtTốnHoàng hậu → ta: thiện cảm 4·D",
+    "kind": "select",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 721,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 721,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1914)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 721,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 732,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Uông Liễu Nhi»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 732,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Uông Liễu Nhi»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1969)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 732,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Uông Liễu Nhi»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 744,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 744,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1992)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 744,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 757,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Lương Vân Nhi»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 757,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Lương Vân Nhi»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1991)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 757,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Lương Vân Nhi»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 780,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 780,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2068)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 780,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 816,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 816,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2200)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 816,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 829,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Sử Như Ý»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 829,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Sử Như Ý»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2171)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 829,
+    "y": 6,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Sử Như Ý»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 842,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Huệ phi Uông Liễu Nhi»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 842,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Huệ phi Uông Liễu Nhi»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2096)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 842,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Huệ phi Uông Liễu Nhi»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 842,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Huệ phi Uông Liễu Nhi»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 842,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Huệ phi Uông Liễu Nhi»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 854,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tô Thẩm Bình Nhi»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 854,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tô Thẩm Bình Nhi»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2160)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 854,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tô Thẩm Bình Nhi»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 854,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tô Thẩm Bình Nhi»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 854,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tô Thẩm Bình Nhi»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 865,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Sử Như Ý»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 865,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Sử Như Ý»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2073)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 865,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Sử Như Ý»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 865,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Sử Như Ý»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 865,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Sử Như Ý»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 877,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Đường Nhã Ninh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 877,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Đường Nhã Ninh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2108)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 877,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Đường Nhã Ninh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 877,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Đường Nhã Ninh»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 877,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Đường Nhã Ninh»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 889,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Diệp Thúy Mặc»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 889,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Diệp Thúy Mặc»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2072)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 889,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Diệp Thúy Mặc»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 889,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Diệp Thúy Mặc»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 889,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Diệp Thúy Mặc»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 913,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Trương Uyển Thanh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 913,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Trương Uyển Thanh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2231)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 913,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Trương Uyển Thanh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 913,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Trương Uyển Thanh»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 913,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Trương Uyển Thanh»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 926,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Hạ Kim Quất»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 926,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Hạ Kim Quất»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2219)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 926,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Hạ Kim Quất»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 926,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Hạ Kim Quất»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 926,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Hạ Kim Quất»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 951,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 951,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2276)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 951,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 951,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 951,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 963,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Diệp Lương Vân Nhi»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 963,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Diệp Lương Vân Nhi»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2339)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 963,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Diệp Lương Vân Nhi»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 963,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Diệp Lương Vân Nhi»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 963,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Diệp Lương Vân Nhi»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 976,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Doãn Tử Đằng»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 976,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Doãn Tử Đằng»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2335)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 976,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Doãn Tử Đằng»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 976,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Doãn Tử Đằng»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 976,
+    "y": 7,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Doãn Tử Đằng»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1011,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Doãn Tử Đằng»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1011,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Doãn Tử Đằng»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2380)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1011,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Doãn Tử Đằng»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1011,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Doãn Tử Đằng»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1011,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Doãn Tử Đằng»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1035,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Trinh tần Chung Kiều Ân»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1035,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Trinh tần Chung Kiều Ân»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2487)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1035,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Trinh tần Chung Kiều Ân»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1035,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Trinh tần Chung Kiều Ân»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1035,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Trinh tần Chung Kiều Ân»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1071,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Bành Vân Thường»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1071,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Bành Vân Thường»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2406)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1071,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Bành Vân Thường»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1071,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Bành Vân Thường»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1071,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Bành Vân Thường»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1096,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Trinh tần Chung Kiều Ân»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1096,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Trinh tần Chung Kiều Ân»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2477)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1096,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Trinh tần Chung Kiều Ân»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1096,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Trinh tần Chung Kiều Ân»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1096,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Trinh tần Chung Kiều Ân»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1120,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1120,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2510)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1120,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1120,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1120,
+    "y": 8,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1132,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1132,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2576)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1132,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1132,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1132,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1143,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Góp một đĩa bánh vào cuộcTốnBạc 20ĐượcThuần phi Diệp Lương V",
+    "kind": "select",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1143,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Can rằng không nên đặt cuộcTốnkhôngĐượcĐức ++MấtThuần phi Di",
+    "kind": "select",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1143,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Ngồi nghe, giữ ý riêngTốnDanh 2ĐượcTâm cơ +",
+    "kind": "select",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1143,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Nhắc khéo Hoàng hậu về cuộc đặtTốnĐức 2ĐượcHoàng hậu → ta: t",
+    "kind": "select",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1143,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Chọn lá này",
+    "kind": "select",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1143,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Đặt lại",
+    "kind": "select",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1193,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1193,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2894)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1193,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1193,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1193,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1229,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Ngụy Ngân Hạnh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1229,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Ngụy Ngân Hạnh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2898)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1229,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Ngụy Ngân Hạnh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1229,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Ngụy Ngân Hạnh»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1229,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Ngụy Ngân Hạnh»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1241,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1241,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2953)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1241,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1241,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1241,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Chung Kiều Ân»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1253,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1253,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2975)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1253,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1253,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1253,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1265,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển thường tại Sử Như Ý»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1265,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển thường tại Sử Như Ý»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2890)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1265,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển thường tại Sử Như Ý»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1265,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển thường tại Sử Như Ý»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1265,
+    "y": 9,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Uyển thường tại Sử Như Ý»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1278,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Doãn Tử Đằng»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1278,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Doãn Tử Đằng»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3033)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1278,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Doãn Tử Đằng»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1278,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Doãn Tử Đằng»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1278,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Tần Doãn Tử Đằng»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1289,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1289,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3155)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1289,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1289,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1289,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1304,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1304,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3182)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1304,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1304,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1304,
+    "y": 10,
+    "rank": 2,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1315,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1315,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3214)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1315,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1315,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1315,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1339,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Ý phi Doãn Tử Đằng»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1339,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Ý phi Doãn Tử Đằng»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3208)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1339,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Ý phi Doãn Tử Đằng»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1339,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Ý phi Doãn Tử Đằng»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1339,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Ý phi Doãn Tử Đằng»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1351,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1351,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3250)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1351,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1351,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1351,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Diệp Thúy Mặc»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1387,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Diệp Thúy Mặc»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1387,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Diệp Thúy Mặc»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3274)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1387,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Diệp Thúy Mặc»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1387,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Diệp Thúy Mặc»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1387,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Diệp Thúy Mặc»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1399,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Từ Ngưng Sương»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1399,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Từ Ngưng Sương»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3363)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1399,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Từ Ngưng Sương»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1399,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Từ Ngưng Sương»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1399,
+    "y": 10,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Từ Ngưng Sương»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1424,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Diệp Thúy Mặc»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1424,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Diệp Thúy Mặc»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3297)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1424,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Diệp Thúy Mặc»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1424,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Diệp Thúy Mặc»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1424,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Diệp Thúy Mặc»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1435,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Uyển quý nhân Sử Như Ý»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1435,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Uyển quý nhân Sử Như Ý»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3382)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1435,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Uyển quý nhân Sử Như Ý»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1435,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Uyển quý nhân Sử Như Ý»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1435,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Uyển quý nhân Sử Như Ý»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1471,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1471,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3418)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1471,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1471,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1471,
+    "y": 11,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Uyển tần Sử Như Ý»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1579,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thuần quý nhân Diệp Lương Vân Nhi»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1579,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thuần quý nhân Diệp Lương Vân Nhi»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3620)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1579,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thuần quý nhân Diệp Lương Vân Nhi»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1579,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thuần quý nhân Diệp Lương Vân Nhi»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1579,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thuần quý nhân Diệp Lương Vân Nhi»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1580,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Nhường gian phòng của cung taTốnSức 8·Danh 3ĐượcĐức ++·Đáp ứ",
+    "kind": "select",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1580,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Nói giúp Đáp ứng Đường Nhã Ninh với ma maTốnHoàng hậu → ta: ",
+    "kind": "select",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1580,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Cười đùa, đề nghị bốc thăm chiaTốnTâm cơ 2ĐượcĐức ++·Hoàng h",
+    "kind": "select",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1580,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Đứng ngoài xem rồi lui vềTốnDanh 3·Đức 3ĐượcSức +++",
+    "kind": "select",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1580,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Chọn lá này",
+    "kind": "select",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1580,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Đại tuyển tú nữ»",
+    "label": "Đặt lại",
+    "kind": "select",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1676,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Sử Như Ý»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1676,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Sử Như Ý»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3668)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1676,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Sử Như Ý»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1676,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Sử Như Ý»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1676,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Sử Như Ý»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1706,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Kiều Đào Châu Nhi»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1706,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Kiều Đào Châu Nhi»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3735)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1706,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Kiều Đào Châu Nhi»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1706,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Kiều Đào Châu Nhi»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1706,
+    "y": 12,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Thường tại Kiều Đào Châu Nhi»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1718,
+    "y": 13,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 1718,
+    "y": 13,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3787)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1718,
+    "y": 13,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1718,
+    "y": 13,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1718,
+    "y": 13,
+    "rank": 1,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Nguyệt»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1813,
+    "y": 13,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Bạch Chung Tiểu Dung»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1813,
+    "y": 13,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Bạch Chung Tiểu Dung»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 3608)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1813,
+    "y": 13,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Bạch Chung Tiểu Dung»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1813,
+    "y": 13,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Bạch Chung Tiểu Dung»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 1813,
+    "y": 13,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Bạch Chung Tiểu Dung»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2114,
+    "y": 15,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2114,
+    "y": 15,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2658)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2114,
+    "y": 15,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2114,
+    "y": 15,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2114,
+    "y": 15,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2149,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lưu Lưu Tố Cầm»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2149,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lưu Lưu Tố Cầm»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2616)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2149,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lưu Lưu Tố Cầm»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2149,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lưu Lưu Tố Cầm»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2149,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lưu Lưu Tố Cầm»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2161,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Đức đáp ứng Phùng Ngọc Tranh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2161,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Đức đáp ứng Phùng Ngọc Tranh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2677)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2161,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Đức đáp ứng Phùng Ngọc Tranh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2161,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Đức đáp ứng Phùng Ngọc Tranh»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2161,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Đức đáp ứng Phùng Ngọc Tranh»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2173,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Đức thường tại Phùng Ngọc Tranh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2173,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Đức thường tại Phùng Ngọc Tranh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2690)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2173,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Đức thường tại Phùng Ngọc Tranh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2173,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Đức thường tại Phùng Ngọc Tranh»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2173,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Đức thường tại Phùng Ngọc Tranh»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2257,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2257,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2632)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2257,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2257,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2257,
+    "y": 16,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2317,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Bạch Chung Tiểu Dung»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2317,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Bạch Chung Tiểu Dung»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2674)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2317,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Bạch Chung Tiểu Dung»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2317,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Bạch Chung Tiểu Dung»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2317,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Bạch Chung Tiểu Dung»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2329,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2329,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2694)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2329,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2329,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2329,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2365,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lương Đậu Lưu Tô»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2365,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lương Đậu Lưu Tô»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2604)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2365,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lương Đậu Lưu Tô»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2365,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lương Đậu Lưu Tô»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2365,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lương Đậu Lưu Tô»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2413,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Phó Vân Uyển Tâm»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2413,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Phó Vân Uyển Tâm»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2521)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2413,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Phó Vân Uyển Tâm»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2413,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Phó Vân Uyển Tâm»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2413,
+    "y": 17,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Phó Vân Uyển Tâm»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2449,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Đào Châu Nhi»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2449,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Đào Châu Nhi»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2480)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2449,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Đào Châu Nhi»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2449,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Đào Châu Nhi»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2449,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Đào Châu Nhi»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2461,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Lương Đậu Lưu Tô»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2461,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Lương Đậu Lưu Tô»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2473)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2461,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Lương Đậu Lưu Tô»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2461,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Lương Đậu Lưu Tô»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2461,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Lương Đậu Lưu Tô»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2486,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Yến Thiệu Tử Quyên»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2486,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Yến Thiệu Tử Quyên»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2344)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2486,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Yến Thiệu Tử Quyên»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2486,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Yến Thiệu Tử Quyên»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2486,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Yến Thiệu Tử Quyên»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2533,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2533,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2163)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2533,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2533,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2533,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2569,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Đào Châu Nhi»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2569,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Đào Châu Nhi»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2150)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2569,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Đào Châu Nhi»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2569,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Đào Châu Nhi»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2569,
+    "y": 18,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Kiều Đào Châu Nhi»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2629,
+    "y": 19,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Kiều Đào Châu Nhi»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2629,
+    "y": 19,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Kiều Đào Châu Nhi»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2234)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2629,
+    "y": 19,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Kiều Đào Châu Nhi»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2629,
+    "y": 19,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Kiều Đào Châu Nhi»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2629,
+    "y": 19,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Kiều Đào Châu Nhi»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2654,
+    "y": 19,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Quách Hàn Yên»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2654,
+    "y": 19,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Quách Hàn Yên»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2147)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2654,
+    "y": 19,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Quách Hàn Yên»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2654,
+    "y": 19,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Quách Hàn Yên»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2654,
+    "y": 19,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Quách Hàn Yên»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2725,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2725,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2037)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2725,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2725,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2725,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2786,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2786,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1969)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2786,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2786,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2786,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2821,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2821,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1960)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2821,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2821,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2821,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2834,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2834,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 1950)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2834,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2834,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2834,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Ý thường tại Doãn Tử Đằng»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2840,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2840,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2012)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2840,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2840,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2840,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2864,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tăng Hứa Ngân Linh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2864,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tăng Hứa Ngân Linh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2099)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2864,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tăng Hứa Ngân Linh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2864,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tăng Hứa Ngân Linh»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2864,
+    "y": 20,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tăng Hứa Ngân Linh»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2925,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2925,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2045)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2925,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2925,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2925,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Tạ Liêu Lục Châu»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2936,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2936,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2043)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2936,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2936,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2936,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lưu Lưu Tố Cầm»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2949,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Đoan Mộc Tiết Xuân Liễu»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2949,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Đoan Mộc Tiết Xuân Liễu»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2017)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2949,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Đoan Mộc Tiết Xuân Liễu»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2949,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Đoan Mộc Tiết Xuân Liễu»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2949,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Đoan Mộc Tiết Xuân Liễu»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2985,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2985,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2047)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2985,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2985,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2985,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2996,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 2996,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2025)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2996,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2996,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 2996,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 3008,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3008,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2030)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 3008,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3008,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3008,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Hạ Kim Quất»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3020,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Gia thường tại Sử Tố Huyên»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·nàng ta nhớ ta đếnCần✓",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3020,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Gia thường tại Sử Tố Huyên»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2033)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 3020,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Gia thường tại Sử Tố Huyên»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 3020,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Gia thường tại Sử Tố Huyên»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3020,
+    "y": 21,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Gia thường tại Sử Tố Huyên»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 3081,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Yến Thiệu Tử Quyên»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3081,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Yến Thiệu Tử Quyên»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2151)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3081,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Yến Thiệu Tử Quyên»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 3081,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Yến Thiệu Tử Quyên»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3081,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Yến Thiệu Tử Quyên»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 3093,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lôi Lục Bích Ngân»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3093,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lôi Lục Bích Ngân»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2103)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 3093,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lôi Lục Bích Ngân»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3093,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lôi Lục Bích Ngân»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3093,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Thường tại Lôi Lục Bích Ngân»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 3141,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Tăng Hứa Ngân Linh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3141,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Tăng Hứa Ngân Linh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2050)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3141,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Tăng Hứa Ngân Linh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3141,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Tăng Hứa Ngân Linh»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3141,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Tần Tăng Hứa Ngân Linh»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3153,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lôi Lục Bích Ngân»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3153,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lôi Lục Bích Ngân»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2070)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3153,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lôi Lục Bích Ngân»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3153,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lôi Lục Bích Ngân»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3153,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Quý nhân Lôi Lục Bích Ngân»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3200,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Tăng Hứa Ngân Linh»",
+    "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3200,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Tăng Hứa Ngân Linh»",
+    "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 2136)!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   },
+   {
+    "buoi": 3200,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Tăng Hứa Ngân Linh»",
+    "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3200,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Tăng Hứa Ngân Linh»",
+    "label": "Chọn lá này",
+    "kind": "decree",
+    "rule": 2,
+    "picked": true
+   },
+   {
+    "buoi": 3200,
+    "y": 22,
+    "rank": 0,
+    "screen": ".dlg «Lễ tấn phong Phi Tăng Hứa Ngân Linh»",
+    "label": "Đặt lại",
+    "kind": "decree",
+    "rule": 2,
+    "picked": false
+   }
+  ],
+  "t": {
+   "total": 6613898
+  },
+  "unit": "E-S6",
+  "row": "R6·speed·2:2881086999 (fresh rerun on LIVE github.io, fold)",
+  "game": "github.io LIVE, ≈ 17 h (11-27 06:30Z start build 9ab008eb74f9 → 23:00Z): OOM crash at b838, resumed with ckpt build0 synced to LIVE (flag «mixed build»); at b2789 the save (5.2M chars) hit the QuotaExceeded wall on the old build (flag «save quota»), restarted from ckpt at 20:57Z on the packed-save LIVE → repacked 5.2M → 0.4M; harness f65d019b+; SAVE REWINDs on reload: 2 buổi (b1699), 54 buổi (b2835, flag «save rewind»)",
+  "audit": "VALID (natural Lãnh cung «Tuổi xuân qua đi» age 40 year 23, real taps, github.io) — COUNTED with flags «mixed build (pin-server resume)», «save quota», «save rewind»"
  }
 ]
