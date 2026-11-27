@@ -45,7 +45,7 @@ function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=
    cards of THAT page (+ the chosen one) through the one real path: a page turn, or a choice whose card is not drawn, runs showModal again,
    so every wrapper that decorates the cards after the draw (jgift giftto lock/.kgiftno + item chip, jk2b hideOut, jemoact eaLockWhy …) runs on
    every card the same way (rv picker-dom FAIL 1). Doable first, then the dialog's order (unchanged). */
-const KIP_PG=new WeakMap(),KIP_FIT=new WeakMap(),KIP_COLS=new Map();let kipRO=null;
+const KIP_PG=new WeakMap(),KIP_FIT=new WeakMap(),KIP_SEEN=new WeakMap(),KIP_COLS=new Map(),KIP_PIN=new Map();let kipRO=null;
 function kipColKey(m){return (m&&m.pid||"")+"|"+innerWidth}
 /* the cards the base dialog draws (j3 showModal): never saved with the queue (not enumerable) */
 function kipOnlySet(m,v){Object.defineProperty(m,"kipOnly",{value:v,writable:true,configurable:true,enumerable:false});return v}
@@ -72,14 +72,21 @@ function kipBuild(){const m=Q[0],M=$("modal");if(!M||M.hidden||!kipOn(m))return;
  w.innerHTML=`<div class="kpkwrap kipwrap"><button type="button" class="kpkpg" data-kippg="-1" aria-label="Trang trước"${pg<=0?" disabled":""}${pages<2?" hidden":""}>‹</button><div class="kshg kipg" role="radiogroup" aria-label="Chọn món">${L.slice(pg*per,(pg+1)*per).map(([c,i,q])=>kipTile(c,i,i===sel,q)).join("")}</div><button type="button" class="kpkpg" data-kippg="1" aria-label="Trang sau"${pg>=pages-1?" disabled":""}${pages<2?" hidden":""}>›</button></div><div class="kpkpn">${pages>1?`trang ${pg+1}/${pages}`:""}</div><div class="kipd" aria-live="polite"></div>`;
  ops.prepend(w);w.style.setProperty("grid-column","1 / -1","important");ops.classList.add("kiphas");  /* inside the option box: the grid takes the options' own place in every dialog layout (person dialog 32.7 too) */M.querySelector(".dlg").classList.add("kipdlg");
  if(sel!=null)kipSelect(M,m,sel);else kipDetail(M,m,-1);
- /* whole rows: the columns the grid really shows once the dialog has settled (kitDlgFit / kitOptFitAll run in the next frames). A grid
-    narrower than its settled size (mid-fit) reads fewer columns, so the count kept per dialog kind and width only grows (it settles);
-    when it grows past the page drawn, the page is drawn again with the first tile in view kept in view (at most 4 times per dialog) */
- try{kipRO&&kipRO.disconnect();kipRO=new ResizeObserver(()=>{try{if(Q[0]!==m||!M.contains(w))return kipRO.disconnect();const g=w.querySelector(".kipg");const n=getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length;
-   const k=kipColKey(m);if(!n||n<=(KIP_COLS.get(k)||0))return;KIP_COLS.set(k,n);const per2=kipPer(m);if(per2===per)return;const f=(KIP_FIT.get(m)||0)+1;if(f>4)return;KIP_FIT.set(m,f);
-   KIP_PG.set(m,Math.floor(pg*per/per2));kipRO.disconnect();kipRedraw()}catch(e){}});kipRO.observe(w.querySelector(".kipg"))}catch(e){}
- /* the gift moment's two pictures load when a gift picker opens (on demand, ~60 KB; sw.js caches them) */
- try{if(KIP_VERB[m.pid]&&m.pid!=="plantpick"&&kfOn()&&!kfStill())["gift-hands.webp","gift.webp"].forEach(f=>{const i=new Image();i.src=kfkU(f)})}catch(e){}}
+ /* whole rows: the columns the grid really shows once the dialog has settled (kitDlgFit / kitOptFitAll run in the next frames). The grid is
+    watched (ResizeObserver); its last size is the settled one, so the count kept per dialog kind and width is the latest reading, and a page
+    that differs is drawn again (first tile in view kept in view). Some dialogs change layout with the number of tiles (Fold «Biếu quà»:
+    6 tiles → one wide row of 6, 12 tiles → 3 columns): when a reading comes back, the grid is PINNED to the smaller count (fixed columns,
+    tiles stretch) for that dialog kind and width, so a page is always BAL.kip.rows whole rows and never flips. */
+ const k=kipColKey(m),pin=KIP_PIN.get(k);const g0=w.querySelector(".kipg");if(pin){g0.style.setProperty("grid-template-columns",`repeat(${pin},minmax(0,1fr))`,"important");return kipPreload(m)}
+ try{kipRO&&kipRO.disconnect();const ro=kipRO=new ResizeObserver(()=>{try{if(Q[0]!==m||!M.contains(w))return ro.disconnect();/* each grid stops ONLY its own watcher (an old one firing after a redraw stopped the new one) */
+   const n=getComputedStyle(g0).gridTemplateColumns.split(" ").filter(x=>/^[\d.]+px$/.test(x)).length;/* resolved tracks only (before layout the value is the declared repeat(auto-fill, …) text) */
+   if(!n||n===KIP_COLS.get(k))return;const seen=KIP_SEEN.get(m)||new Set([KIP_COLS.get(k)].filter(Boolean));const back=seen.has(n);seen.add(n);KIP_SEEN.set(m,seen);
+   const f=(KIP_FIT.get(m)||0)+1;if(f>6)return;KIP_FIT.set(m,f);
+   if(back){const c=Math.min(...seen);KIP_PIN.set(k,c);KIP_COLS.set(k,c)}else KIP_COLS.set(k,n);
+   const per2=kipPer(m);if(per2===per&&!back)return;KIP_PG.set(m,Math.floor(pg*per/per2));ro.disconnect();kipRedraw()}catch(e){}});ro.observe(g0)}catch(e){}
+ kipPreload(m)}
+/* the gift moment's two pictures load when a gift picker opens (on demand, ~60 KB; sw.js caches them) */
+function kipPreload(m){try{if(KIP_VERB[m.pid]&&m.pid!=="plantpick"&&kfOn()&&!kfStill())["gift-hands.webp","gift.webp"].forEach(f=>{const i=new Image();i.src=kfkU(f)})}catch(e){}}
 (function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(kipOn(m)){const L=kipList(m),sel=kipSel0(m,L),{per,pg}=kipPg(m,L,sel);
    kipOnlySet(m,new Set(L.slice(pg*per,(pg+1)*per).map(x=>x[1]).concat(sel!=null?[sel]:[])))}else if(m&&m.kipOnly)kipOnlySet(m,null)}catch(e){}
  const r=s0.apply(this,arguments);try{kipBuild()}catch(e){console.error("kipBuild",e)}return r}})();
