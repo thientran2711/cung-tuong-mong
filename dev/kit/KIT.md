@@ -1564,24 +1564,30 @@ One dialog for giving any chest item (bought goods and handmade works; chest "T�
 ### 28.13i ITEM PICK GRID — every "choose an item to give / offer / plant / use on someone" dialog (owner 15/11 session 8, review/gift-pick) — `dev/build/jgpick.js` (last module)
 Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo như kiểu ô tư trang á. Xếp hàng ngang để chọn rồi có animation khi tặng."
 - Trigger: a dialog (Q item) whose options carry `ik` = the S.inv index of the item. No other flag; a new picker only sets `ik` on its options.
-- Grid = the 28.13e tile grid (`.kshg`, here `.kipg`, columns `minmax(96px,1fr)`, 84 px under 600 px wide; max height min(46vh, 420 px),
-  scrolls) of PICK tiles `.kshc.kshpick.kipc`: picture = kitItem "slot" in the item's grade frame (`giftArt` / j98 itemArt, the Tư trang
+- Grid = the 28.13e tile grid (`.kshg`, here `.kipg`, columns `minmax(96px,1fr)`, 84 px under 600 px wide; in pages of whole rows (see PAGES:
+  no max height, no inner scroll)) of PICK tiles `.kshc.kshpick.kipc`: picture = kitItem "slot" in the item's grade frame (`giftArt` / j98 itemArt, the Tư trang
   picture) · name in its KIT_GRADE colour (2 lines) · what it is (IT.d, or the work tier) · (grade = the chip on the picture). No button row. Taint = corner tag
   "đã tẩm". A tile she cannot choose (option `lock`, or not enough bạc) is greyed (`.kshno`) but still selectable to read why.
   Doable tiles first, then the dialog's own order. Horizontal rows that wrap (the Tư trang look).
+- Tap a tile → selected (31.13: glow + ×1.06, the rest at .75 opacity; `aria-checked`), the first doable tile is preselected.
+  Under the grid `.kipd`: that option's OWN kit card (display copy of its `.opt`: name, odds word, Tốn / Được / Mất / Kèm or the reason
+  `.kwhy`) + ONE confirm button `.kipgo` (kit `.kbtn`, verb per dialog: Tặng / Dâng / Cài vào rương), greyed when the option is locked.
+  Confirm clicks the real option button, so chooseM and every wrapper (cost, j25 visit ticket, §64 item-event hooks) run unchanged.
+  Above the card: the KIT §70 item detail strip (`kitItemDetail({e},{cls:"kidet-strip",noLux:true})`, jitd). Close = the kit ✕ (32.10), no Thôi row.
 - PAGES (K-LIST-PAGE, picker-dom 26/11, MAIN 164 play-stopper: a year-18 chest drew 36k–63k nodes, iPad tab crash): the grid shows ONE
-  PAGE = whole rows that fit, no inner scroll, no half row (§23): the columns the grid really shows in that dialog at that width (measured
-  once the dialog has settled — resolved px tracks only — kept per dialog kind and width) × `BAL.kip.rows` (2). FLIP-LAYOUT PIN: a
-  dialog whose layout changes with the number of tiles (Fold «Biếu quà làm lành»: 6 tiles → one wide row of 6, 12 tiles → 3 columns; iPad
-  Tặng quà / Cài đồ / Biếu quà) shows a column count that comes back during the settle; the grid is then PINNED to the SMALLER count
-  (`grid-template-columns: repeat(n, minmax(0,1fr))`, tiles stretch to fill) for that dialog kind and width: every page is 2 whole rows and
-  never flips (today Fold 2–5 columns by dialog, iPad 2–4). The §23 kit pager sits
-  around it (`.kpkwrap` ‹ › `.kpkpg` + `.kpkpn` «trang N/M», no count; hidden on one page). The page that holds the chosen tile opens first.
-  The dialog (j3 `showModal`, `m.kipOnly`) draws the option cards of THAT page + the chosen one; a page turn (or a card not drawn yet) runs
-  `showModal` again, so every decorator that wraps the draw (giftto lock / `.kgiftno` + chip, hideOut, eaLockWhy …) dresses every card the
-  same way. Test: `node dev/test/picker-dom.js` (DOM < 2,000 per picker on F's s7 save; every page whole rows, no inner scroll; every tile
-  reached; a locked + an open card per picker = the full-draw card: classes, disabled, data-*, text, chip; confirm gives one piece);
-  scan `node dev/test/picker-dom-scan.js`.
+  PAGE = `BAL.kip.rows` (2) whole rows × the columns the grid shows in that dialog at that width — no inner scroll, no half row (§23). The
+  columns are read once the grid's size has stayed still `BAL.kip.settle` ms (resolved px tracks only; a mid-fit size never counts), kept per
+  dialog kind and width; a different count draws the page again (first tile in view kept in view). The grid keeps the FULL width of the
+  option box: the §23 kit pager buttons sit in ONE row under it (`.kippg`: ‹ `.kpkpg` · `.kpkpn` «trang N/M» · › `.kpkpg`; no count; no row
+  on a single page). The dialog keeps ONE layout on every page: a paged picker counts ALL its options for the pick-list rule (jksize
+  `kitFrameLive3`, `KIT_SIZE.v3.live.maxOpts`), exactly as when every card was drawn. Measured on F's s7 save (box px / kit tile `--kshsz`):
+  Fold 755x1000 Tặng quà 3, Dâng quà 5, Cài đồ 4, Biếu quà 4 columns; iPad 1180x820 3, 5, 3, 3 (same box widths; the iPad tile is 96 px,
+  the Fold tile 84 px, so a 376 px box holds 4 on Fold, 3 on iPad). The page that holds the chosen tile opens first. The dialog (j3
+  `showModal`, `m.kipOnly`) draws the option cards of THAT page + the chosen one; a page turn (or a card not drawn yet) runs `showModal`
+  again, so every decorator that wraps the draw (giftto lock / `.kgiftno` + chip, hideOut, eaLockWhy …) dresses every card the same way.
+  Test: `node dev/test/picker-dom.js` (DOM < 2,000 per picker on F's s7 save; every page whole rows, no inner scroll, every column the tile
+  size allows; every tile reached; a locked + an open card per picker = the full-draw card: classes, disabled, data-*, text, chip; confirm
+  gives one piece); scan `node dev/test/picker-dom-scan.js`.
 - Phone landscape (height ≤ 500): grid and detail side by side.
 - Users: giftpick (Hậu cung act "Tặng quà", now with the gift card's own line `giftEval`: odds · tốn · thành · kèm), giftto (Dâng quà
   Hoàng thượng / Thái hậu), plantpick (Cài đồ vào rương). Scan: `node dev/test/gift-pick-scan.js` (every option list built from S.inv).

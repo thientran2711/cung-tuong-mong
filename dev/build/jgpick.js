@@ -45,7 +45,7 @@ function kipDetail(M,m,i){const d=M.querySelector(".kipd");if(!d)return;const c=
    cards of THAT page (+ the chosen one) through the one real path: a page turn, or a choice whose card is not drawn, runs showModal again,
    so every wrapper that decorates the cards after the draw (jgift giftto lock/.kgiftno + item chip, jk2b hideOut, jemoact eaLockWhy …) runs on
    every card the same way (rv picker-dom FAIL 1). Doable first, then the dialog's order (unchanged). */
-const KIP_PG=new WeakMap(),KIP_FIT=new WeakMap(),KIP_SEEN=new WeakMap(),KIP_COLS=new Map(),KIP_PIN=new Map();let kipRO=null;
+const KIP_PG=new WeakMap(),KIP_FIT=new WeakMap(),KIP_COLS=new Map(),KIP_PIN=new Map();let kipRO=null;
 function kipColKey(m){return (m&&m.pid||"")+"|"+innerWidth}
 /* the cards the base dialog draws (j3 showModal): never saved with the queue (not enumerable) */
 function kipOnlySet(m,v){Object.defineProperty(m,"kipOnly",{value:v,writable:true,configurable:true,enumerable:false});return v}
@@ -69,21 +69,19 @@ function kipBuild(){const m=Q[0],M=$("modal");if(!M||M.hidden||!kipOn(m))return;
  const L=kipList(m);/* doable first (kitDoableFirst rule), then the dialog's own order */
  const sel=kipSel0(m,L);if(sel!=null)KIP_SEL.set(m,sel);const {per,pages,pg}=kipPg(m,L,sel);
  const w=document.createElement("div");w.className="kipw kshop";
- w.innerHTML=`<div class="kpkwrap kipwrap"><button type="button" class="kpkpg" data-kippg="-1" aria-label="Trang trước"${pg<=0?" disabled":""}${pages<2?" hidden":""}>‹</button><div class="kshg kipg" role="radiogroup" aria-label="Chọn món">${L.slice(pg*per,(pg+1)*per).map(([c,i,q])=>kipTile(c,i,i===sel,q)).join("")}</div><button type="button" class="kpkpg" data-kippg="1" aria-label="Trang sau"${pg>=pages-1?" disabled":""}${pages<2?" hidden":""}>›</button></div><div class="kpkpn">${pages>1?`trang ${pg+1}/${pages}`:""}</div><div class="kipd" aria-live="polite"></div>`;
+ w.innerHTML=`<div class="kshg kipg" role="radiogroup" aria-label="Chọn món">${L.slice(pg*per,(pg+1)*per).map(([c,i,q])=>kipTile(c,i,i===sel,q)).join("")}</div>${pages>1?`<div class="kippg"><button type="button" class="kpkpg" data-kippg="-1" aria-label="Trang trước"${pg<=0?" disabled":""}>‹</button><span class="kpkpn">trang ${pg+1}/${pages}</span><button type="button" class="kpkpg" data-kippg="1" aria-label="Trang sau"${pg>=pages-1?" disabled":""}>›</button></div>`:""}<div class="kipd" aria-live="polite"></div>`;/* the §23 kit pager buttons in ONE row under the grid: the grid keeps the full width of the option box (LIVE's columns) */
  ops.prepend(w);w.style.setProperty("grid-column","1 / -1","important");ops.classList.add("kiphas");  /* inside the option box: the grid takes the options' own place in every dialog layout (person dialog 32.7 too) */M.querySelector(".dlg").classList.add("kipdlg");
  if(sel!=null)kipSelect(M,m,sel);else kipDetail(M,m,-1);
- /* whole rows: the columns the grid really shows once the dialog has settled (kitDlgFit / kitOptFitAll run in the next frames). The grid is
-    watched (ResizeObserver); its last size is the settled one, so the count kept per dialog kind and width is the latest reading, and a page
-    that differs is drawn again (first tile in view kept in view). Some dialogs change layout with the number of tiles (Fold «Biếu quà»:
-    6 tiles → one wide row of 6, 12 tiles → 3 columns): when a reading comes back, the grid is PINNED to the smaller count (fixed columns,
-    tiles stretch) for that dialog kind and width, so a page is always BAL.kip.rows whole rows and never flips. */
- const k=kipColKey(m),pin=KIP_PIN.get(k);const g0=w.querySelector(".kipg");if(pin){g0.style.setProperty("grid-template-columns",`repeat(${pin},minmax(0,1fr))`,"important");return kipPreload(m)}
- try{kipRO&&kipRO.disconnect();const ro=kipRO=new ResizeObserver(()=>{try{if(Q[0]!==m||!M.contains(w))return ro.disconnect();/* each grid stops ONLY its own watcher (an old one firing after a redraw stopped the new one) */
+ /* whole rows: a page = BAL.kip.rows rows × the columns the grid shows once the dialog has settled. The grid is watched (ResizeObserver) and
+    read only when its size has stayed still BAL.kip.settle ms, so a mid-fit size never counts; a settled count that differs from the page
+    drawn draws the page again (first tile in view kept in view). The dialog keeps ONE layout on every page (jksize kitFrameLive3 counts all
+    the options of a paged picker, as LIVE drew them all), so the count does not flip; after 4 corrections the last count is pinned (a safety stop). */
+ const k=kipColKey(m),pin=KIP_PIN.get(k),g0=w.querySelector(".kipg"),rows=Math.max(1,BAL.kip.rows|0);
+ if(pin){g0.style.setProperty("grid-template-columns",`repeat(${pin},minmax(0,1fr))`,"important");return kipPreload(m)}
+ try{kipRO&&kipRO.disconnect();let tm=0;const ro=kipRO=new ResizeObserver(()=>{clearTimeout(tm);tm=setTimeout(()=>{try{if(Q[0]!==m||!M.contains(w))return ro.disconnect();/* each grid stops ONLY its own watcher */
    const n=getComputedStyle(g0).gridTemplateColumns.split(" ").filter(x=>/^[\d.]+px$/.test(x)).length;/* resolved tracks only (before layout the value is the declared repeat(auto-fill, …) text) */
-   if(!n||n===KIP_COLS.get(k))return;const seen=KIP_SEEN.get(m)||new Set([KIP_COLS.get(k)].filter(Boolean));const back=seen.has(n);seen.add(n);KIP_SEEN.set(m,seen);
-   const f=(KIP_FIT.get(m)||0)+1;if(f>6)return;KIP_FIT.set(m,f);
-   if(back){const c=Math.min(...seen);KIP_PIN.set(k,c);KIP_COLS.set(k,c)}else KIP_COLS.set(k,n);
-   const per2=kipPer(m);if(per2===per&&!back)return;KIP_PG.set(m,Math.floor(pg*per/per2));ro.disconnect();kipRedraw()}catch(e){}});ro.observe(g0)}catch(e){}
+   if(!n||n*rows===per)return;KIP_COLS.set(k,n);const f=(KIP_FIT.get(m)||0)+1;KIP_FIT.set(m,f);if(f>4)KIP_PIN.set(k,n);/* a safety stop only: the layout no longer flips (jksize counts every option of a paged picker) */
+   const per2=kipPer(m);KIP_PG.set(m,Math.floor(pg*per/per2));ro.disconnect();kipRedraw()}catch(e){}},BAL.kip.settle)});ro.observe(g0)}catch(e){}
  kipPreload(m)}
 /* the gift moment's two pictures load when a gift picker opens (on demand, ~60 KB; sw.js caches them) */
 function kipPreload(m){try{if(KIP_VERB[m.pid]&&m.pid!=="plantpick"&&kfOn()&&!kfStill())["gift-hands.webp","gift.webp"].forEach(f=>{const i=new Image();i.src=kfkU(f)})}catch(e){}}
@@ -137,7 +135,8 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 .kshc.kipc>.kshpic{cursor:pointer;transition:transform .15s}
 .kipw.has .kshc.kipc:not(.on){opacity:.75}
 .kshc.kipc.on>.kshpic{filter:var(--k-glow);transform:scale(1.06)}
-.kipw>.kipwrap{grid-template-columns:28px minmax(0,1fr) 28px}.kipw>.kipwrap>.kipg{max-height:none!important;overflow:visible!important}/* a page = whole rows (BAL.kip.rows): no inner scroll, no half row (KIT §23) */.kipw>.kipwrap>.kipg{min-width:0}.kipw>.kipwrap:has(>.kpkpg[hidden]){grid-template-columns:minmax(0,1fr)}.kipw>.kipwrap>.kpkpg[hidden]{display:none}
+.kipw:has(>.kippg)>.kipg{max-height:none!important;overflow:visible!important}/* a page = whole rows (BAL.kip.rows): no inner scroll, no half row (KIT §23) */
+.kipw>.kippg{display:flex;align-items:center;justify-content:center;gap:10px;margin:4px 0 2px}.kipw>.kippg>.kpkpg{width:44px}
 .kipd{display:flex;flex-direction:column;gap:6px;min-width:0}
 .kipd>.opt.kipcard{pointer-events:none;margin:0;width:100%}
 .kipd>.kipgo{align-self:stretch;min-height:40px}
@@ -149,6 +148,6 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 
 /* kv3:.kv1 */:where(.kv1) .kipg{--kshsz:84px}
 `;document.head.appendChild(st)})();
-if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13i",title:"Item pick grid (Tặng quà · Dâng quà · Cài đồ) — tile + selected, one page + the §23 pager",html:()=>{try{
- const L=Object.keys(IT).filter(k=>!itm(k).story).slice(0,4);return `<div class="kipw kshop has"><div class="kpkwrap kipwrap"><button type="button" class="kpkpg" disabled aria-label="Trang trước">‹</button><div class="kshg kipg">${L.map((k,i)=>{const I=kipItem({k});
-  return `<div class="kshc kshpick kipc${i===1?" on":""}"><span class="kshpic">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot"})}</span><span class="kshn" style="color:${I.col}">${kipE(I.name)}</span><span class="kshe">${kipE(I.use)}</span></div>`}).join("")}</div><button type="button" class="kpkpg" aria-label="Trang sau">›</button></div><div class="kpkpn">trang 1/3</div></div>`}catch(e){return""}}});
+if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13i",title:"Item pick grid (Tặng quà · Dâng quà · Cài đồ) — tile + selected, one page + the §23 pager row under it",html:()=>{try{
+ const L=Object.keys(IT).filter(k=>!itm(k).story).slice(0,4);return `<div class="kipw kshop has"><div class="kshg kipg">${L.map((k,i)=>{const I=kipItem({k});
+  return `<div class="kshc kshpick kipc${i===1?" on":""}"><span class="kshpic">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot"})}</span><span class="kshn" style="color:${I.col}">${kipE(I.name)}</span><span class="kshe">${kipE(I.use)}</span></div>`}).join("")}</div><div class="kippg"><button type="button" class="kpkpg" disabled aria-label="Trang trước">‹</button><span class="kpkpn">trang 1/3</span><button type="button" class="kpkpg" aria-label="Trang sau">›</button></div></div>`}catch(e){return""}}});

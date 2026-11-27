@@ -48,7 +48,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
     if(r.paged){const all=kipList(m).map(x=>x[1]);const seen=[];let guard=0;r.rows=[];r.scroll=[];
      const nx=()=>M.querySelector('.kipw .kpkpg[data-kippg="1"]');
      for(;;){const T=[...M.querySelectorAll('.kipc')];seen.push(...T.map(t=>+t.dataset.kip));const g=M.querySelector('.kipg');
-      const cols=getComputedStyle(g).gridTemplateColumns.split(' ').filter(x=>/^[\d.]+px$/.test(x)).length;r.cols=Math.max(r.cols||0,cols);const last=!nx()||nx().disabled||nx().hidden;
+      const cols=getComputedStyle(g).gridTemplateColumns.split(' ').filter(x=>/^[\d.]+px$/.test(x)).length;r.cols=Math.max(r.cols||0,cols);const cs=getComputedStyle(g),gap=parseFloat(cs.columnGap)||0,tile=parseFloat(cs.getPropertyValue('--kshsz'))||96;const fit=Math.max(1,Math.floor((g.clientWidth-(parseFloat(cs.paddingLeft)||0)-(parseFloat(cs.paddingRight)||0)+gap)/(tile+gap)));if(cols!==fit)(r.fit=r.fit||[]).push(cols+'≠'+fit+'@'+g.clientWidth+'px/'+tile);r.tile=tile;r.gw=g.clientWidth;const last=!nx()||nx().disabled||nx().hidden;
       if(!last&&T.length%cols)r.rows.push(T.length+'/'+cols);if(g.scrollHeight>g.clientHeight+1)r.scroll.push(g.scrollHeight+'>'+g.clientHeight);
       if(last||++guard>800)break;nx().click();await settle()}
      r.pages=guard+1;r.all=all.length;r.seen=seen.length;r.uniq=new Set(seen).size;r.miss=all.filter(i=>!seen.includes(i)).length;r.per=BAL.kip.rows*r.cols;
@@ -77,9 +77,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   for(const r of R)if(r.deep&&!r.paged)ok(r.gave===1||r.gave==='no doable'||/không thành|chưa dịu|trả lại|uổng công/.test(r.log||''),`${vw}x${vh} ${r.name}: (no pager) confirm gives exactly one piece`,{gave:r.gave,log:r.log});
   for(const r of R)if(r.deep&&r.paged){ok(r.miss===0&&r.uniq===r.all&&r.seen-r.uniq<=2*r.per,`${vw}x${vh} ${r.name}: ${r.pages} pages reach all ${r.all} tiles, none lost (${r.seen-r.uniq} seen twice across a column settle)`,{seen:r.seen,uniq:r.uniq,miss:r.miss});
    ok(!r.rows.length&&!r.scroll.length,`${vw}x${vh} ${r.name}: every page = whole rows (${r.cols} cols × BAL.kip.rows = ${r.per}), no inner scroll`,{halfRows:r.rows.slice(0,3),scroll:r.scroll.slice(0,3)});
+   ok(!(r.fit||[]).length,`${vw}x${vh} ${r.name}: the page uses every column the kit tile (${r.tile} px) allows in the ${r.gw} px box (no stretched / squeezed columns)`,(r.fit||[]).slice(0,3));
    for(const c of r.cmp)ok(c.none||c.same,`${vw}x${vh} ${r.name}: ${c.lab} tile${c.none?' (none on this save)':''} — paged card = full-draw card (classes, disabled, data-*, text, chip)`,c.same||c.none?undefined:{A:c.A,B:c.B});
    ok(r.gave===1||r.gave==='no doable'||/không thành|chưa dịu|trả lại|uổng công/.test(r.log||''),`${vw}x${vh} ${r.name}: confirm gives exactly one piece (or she refuses it / the roll fails: nothing lost)`,{gave:r.gave,log:r.log})}
   for(const r of R)if(r.nodes!=null)ok(r.nodes<MAX,`${vw}x${vh} ${r.name}: ${r.nodes} nodes in the dialog (page ${r.page}); tiles ${r.tiles}, hidden cards ${r.hid??'-'}, entries ${r.ent??'-'}, can choose ${r.can??'-'}${r.ms!=null?', '+r.ms+' ms':''}`);
   ok(!errs.length,`${vw}x${vh} no page errors`,errs.slice(0,3));await ctx.close()}
  await b.close();fs.writeFileSync(arg('--json','/dev/null'),JSON.stringify(rows,null,1));
- const fail=res.filter(x=>!x).length;console.log(fail?`picker-dom FAIL ${fail}/${res.length}`:`picker-dom PASS ${res.length}/${res.length}`);process.exit(fail?1:0)})();
+ const fail=res.filter(x=>!x).length;{const by={};for(const r of rows)if(r.deep&&r.paged)(by[r.name]=by[r.name]||[]).push(`${r.vp}: ${r.cols} cols (box ${r.gw} px, tile ${r.tile} px)`);for(const k in by)console.log('cols  '+k+' — '+by[k].join(' · '))}
+ console.log(fail?`picker-dom FAIL ${fail}/${res.length}`:`picker-dom PASS ${res.length}/${res.length}`);process.exit(fail?1:0)})();
