@@ -18,7 +18,7 @@ async function boot(b,vp,seed){const p=await b.newPage({viewport:vp,deviceScaleF
   localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;let g=0;do{start();g++}while((isSrv()||(typeof isKc==='function'&&isKc()))&&g<60);window.__nlInner=0;quiet=false;Q.length=0;try{deal()}catch(e){}render()},seed);
  await p.waitForTimeout(800);
  for(let i=0;i<10;i++){const n=await p.evaluate(()=>{let n=0;for(const o of document.querySelectorAll('.kmrew')){o.click();n++}for(const x of document.querySelectorAll('[data-km-close]')){if(x.getClientRects().length){x.click();n++}}return n});if(!n)break;await p.waitForTimeout(1200)}
- await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}document.getElementById('modal').hidden=true;window.__e68off=1/* the optional-card spread gate (evGate) would hold a test card to a later buổi */;try{DQ.user=1}catch(e){}});await p.waitForTimeout(400);return p}
+ await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}document.getElementById('modal').hidden=true;window.__e68off=1/* the optional-card spread gate (evGate) would hold a test card to a later buổi */;try{if(BAL.evc)BAL.evc.on=0}catch(e){}/* TEST SETUP ONLY (LC25): stat-pace daily event cap (jevc) would drop the test's queued cards after the day's quota */;try{DQ.user=1}catch(e){}});await p.waitForTimeout(400);return p}
 /* what is on screen: the result card (on, visible, topmost at its centre), the modal, the focus buttons */
 const look=p=>p.evaluate(()=>{const t=document.getElementById('rtoast');const r=t&&t.getBoundingClientRect();let top=false;
  if(t&&t.classList.contains('on')&&r.width>0){const e=document.elementFromPoint(r.left+r.width/2,r.top+Math.min(r.height/2,40));top=!!(e&&e.closest('#rtoast'))}
@@ -92,6 +92,15 @@ async function family(p,key,followed){const mk=await p.evaluate(({src,followed,N
  if(isNew)ok(!rows.some(r=>r.rep),'family scan: no result sentence repeats its title (MAIN 162)',rows.filter(r=>r.rep).map(r=>r.dev+' '+r.key));
  console.log('title repeated in the sentence: '+rows.filter(r=>r.rep).length+'/'+rows.length);
  if(isNew)ok(!bad.length,'family scan: every choice shows its result first',bad.map(r=>r.dev+' '+r.key+(r.followed?' +next':'')));
+ /* F (LC25 G4 q-softlock family): VIEW panels («Tin báo» «Để sau», «Tin chờ người sai đi» «Đóng», «Lịch tháng» ✕) are not choices — never held;
+    each closes with one tap and the next one shows at once; Q ends empty */
+ if(isNew){const p=await boot(b,{width:755,height:1000},11);await p.evaluate(()=>{try{const sv=S.maid;PTIME.send({who:'maid',nm:sv.name,kind:'def',lbl:'đi thử',a:{run:'errpic',k:'x',t:sv.name+' về',L:['thử'],d:[]}})}catch(e){}
+   kitNotice({id:'obv3',line:'Thử tin báo.',text:'Thử tin báo.'});kitStatusIcon.open('tin');kitNoticeOpen();kitMonthCalOpen()});
+  let n=0,held=0;for(let i=0;i<8;i++){await p.waitForTimeout(700);const q=await p.evaluate(()=>Q.length);if(!q)break;
+   const x=await p.evaluateHandle(()=>{const B=[...document.querySelectorAll('#modal:not([hidden]) button')].filter(b=>b.getBoundingClientRect().width>3);return B.find(b=>/kit-x|mclose/.test(b.className+' '+b.id))||B.find(b=>/^(Để sau|Đóng|Đã rõ|Lui)/.test(b.textContent.trim()))||null});
+   if(await x.evaluate(e=>!!e)){await x.asElement().click();n++;await p.waitForTimeout(500);if(await p.evaluate(()=>!!(window.RF&&RF.held)))held++}else break}
+  const r=await p.evaluate(()=>({q:Q.length,modal:!document.getElementById('modal').hidden,held:!!(window.RF&&RF.held),nav:window.RF&&RF.stat.nav}));OJ.view=Object.assign({taps:n,heldSeen:held},r);
+  ok(r.q===0&&!r.held&&!held,'view panels: never held, one tap each, Q empty (q-softlock family)',OJ.view);await p.close()}
  /* D bots */
  {const p=await boot(b,{width:755,height:1000},7);const r=await p.evaluate(()=>{window.__bot=1;const V=liveRivals(false)[0];Q.push(AP_MK.apTaunt({who:V,why:"x"}));Q.push({t:"Chuyện trong cung",h:"<p>x</p>",opts:[{n:"Biết rồi",fx:{}}]});showModal();chooseM(0);
    const r={held:!!(window.RF&&RF.held),q:Q.length,modal:!document.getElementById('modal').hidden};window.__bot=undefined;return r});OJ.bot=r;

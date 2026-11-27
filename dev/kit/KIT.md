@@ -449,6 +449,10 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
   The sentence under the title never repeats the title (`kaSenDeTitle`, j63, every result card incl. the 7.3 verdict sentence; MAIN 162 LOOK):
   «Có người đến: Nhịn lời khiêu khích của Hoàng hậu … — Đức +2 vì nhịn.» → «Đức +2 vì nhịn.»; a sentence that IS the title is dropped, the card still shows
   (Ghi chú «ta không được gì, cũng không mất gì» — «không» rows kept).
+  NOT A CHOICE (LC25 core gate G4 q-softlock): a VIEW panel (`kit.view`: «Tin báo», «Tin chờ người sai đi», «Lịch tháng» …) and a pure close /
+  navigation option (no effect: «Đóng / Để sau / Đã rõ / Thôi / Xem …», `c.back`) are never held — the next card shows at once. SAFETY: a held
+  screen is let go at once when the result card is no longer on screen (hidden / gone / a new life); the KIT 32.10a park class lagging one frame
+  does not count as hidden. A card is never left in Q with nothing on screen (`node dev/test/q-softlock.js` PASS Fold + iPad).
   A choice that opens its own next step and shows no result card yet (a picker, «Bày mưu», a mini-game) is not held. Display only (law 4): no state,
   no number, no random draw; bots (`__bot`) get no card, so nothing is held for them; co-op state unchanged. Counts: `window.RF.stat`.
   Test: `node dev/test/ob-verdict-3.test.js index.html <shots>` (REAL taps Fold 755x1000 + iPad 1180x820: the Hoàng hậu encounter, each reply →

@@ -150,12 +150,19 @@ if(typeof giveTo==="function"){const g0=giveTo;giveTo=function(a,r,ix){const e=a
 const RF=window.RF={tapAt:-1e9,depth:0,end:-1e9,shown:0,held:false,wantModal:false,later:[],stat:{hold:0,modal:0,enc:0,late:0,rel:0}};
 const T=()=>document.getElementById("rtoast");
 const on=()=>{const t=T();return !!(t&&t.classList.contains("on")&&t.classList.contains("karesult"))};
+/* the result card really on screen (not parked / hidden): only a VISIBLE card may hold the next screen */
+const vis=()=>{try{const t=T();if(!on()||t.hidden)return false;const cs=getComputedStyle(t);if(cs.display==="none")return false;
+ /* KIT 32.10a park (body.kdlg-on) lags one frame behind (rAF sync): a held card is un-parked by the kitDialogOpen exception below, so the park class is not «hidden» */
+ return cs.visibility!=="hidden"||document.body.classList.contains("kdlg-on")}catch(e){return false}};
 const ui=()=>{try{return !window.__bot&&typeof S==="object"&&!!S&&!S.dead}catch(e){return false}};
 const GRACE=300;/* a result drawn a few ms after its choice (setTimeout 0 / 30: Bái kiến, house servants, nhà ngoại) still belongs to it */
 function modalOff(){try{const M=document.getElementById("modal");if(M&&!M.hidden)M.hidden=true}catch(e){}}
 function cue(){const t=T();if(!t)return;t.classList.add("kres-hold");clearTimeout(window.__rtT);/* held: no auto-hide, she taps it away */
  const rt=t.querySelector(".rt");if(rt&&!rt.querySelector(".kres-next"))rt.insertAdjacentHTML("beforeend",`<button type="button" class="kbtn kres-next">Tiếp ▸</button>`)}
-function hold(){if(RF.held){cue();return}RF.held=true;RF.stat.hold++;cue()}
+function hold(){if(RF.held){cue();return}RF.held=true;RF.stat.hold++;cue();dog()}
+/* SAFETY (no soft-lock, LC25 G4): while held, a result card that is no longer on screen (parked, hidden by a screen change, a new life) lets the
+   held screen go at once — a card is never left in Q with nothing on screen */
+function dog(){if(RF.dogT)return;const tick=()=>{RF.dogT=0;if(!RF.held&&!RF.wantModal&&!RF.later.length)return;if(!ui()||!vis()){RF.stat.dog=(RF.stat.dog|0)+1;release();return}RF.dogT=setTimeout(tick,700)};RF.dogT=setTimeout(tick,700)}
 function release(){if(!RF.held&&!RF.wantModal&&!RF.later.length)return;RF.held=false;RF.stat.rel++;const t=T();if(t){t.classList.remove("kres-hold");const b=t.querySelector(".kres-next");if(b)b.remove()}
  const L=RF.later.splice(0);for(const f of L){try{f()}catch(e){console.error("RF later",e)}}
  if(RF.wantModal){RF.wantModal=false;try{if(Q.length&&!S.dead)showModal()}catch(e){console.error("RF modal",e)}}}
@@ -166,20 +173,25 @@ function watch(){const t=T();if(!t||t.__rfw)return;t.__rfw=1;new MutationObserve
 /* the result card of a choice: drawn → remembered; inside / just after a choice → it holds what comes next */
 const r0=resultShow;resultShow=function(){const was=window.kaLastResult;const r=r0.apply(this,arguments);
  try{if(ui()&&on()&&window.kaLastResult!==was){watch();RF.shown++;const now=performance.now();
-  if(RF.held)cue();/* a second card while held keeps «Tiếp ▸» */if(RF.depth>0)RF.mine=1;else if(now-RF.end<GRACE){/* late card: the next card may already be up — take it back until the result is seen */
+  if(RF.held)cue();/* a second card while held keeps «Tiếp ▸» */if(RF.depth>0)RF.mine=1;else if(now-RF.end<GRACE&&!RF.nav){/* late card: the next card may already be up — take it back until the result is seen */
    RF.stat.late++;try{const M=document.getElementById("modal");if(Q.length&&M&&!M.hidden){modalOff();RF.wantModal=true}}catch(e){}if(RF.wantModal||RF.later.length)hold()}}}catch(e){console.error("RF show",e)}return r};
 /* the next card while a choice is running: held until the choice is over; shown at once when the choice made no result card */
-const s0=showModal;showModal=function(){try{if(ui()&&Q.length){if(RF.depth>0){RF.wantModal=true;modalOff();RF.stat.modal++;return}if(RF.held&&on()){RF.wantModal=true;modalOff();return}}}catch(e){}return s0.apply(this,arguments)};
-function wrap(nm){const f=window[nm];if(typeof f!=="function")return;window[nm]=function(){const top=RF.depth===0;let was=null;if(top){RF.mine=0;was=window.kaLastResult}RF.depth++;let r;
+const s0=showModal;showModal=function(){try{if(ui()&&Q.length){if(RF.depth>0){RF.wantModal=true;modalOff();RF.stat.modal++;return}if(RF.held&&vis()){RF.wantModal=true;modalOff();return}}}catch(e){}return s0.apply(this,arguments)};
+/* NOT A CHOICE (q-softlock G4, LC25): a VIEW panel (kit.view: «Tin báo», «Tin chờ người sai đi», «Lịch tháng» …) and a pure close / navigation
+   option (no effect, «Đóng / Để sau / Đã rõ / Thôi …») are not choices — never held, the next card shows at once */
+const NAV=/^(Thôi|Đi|Đóng|Lui|Để sau|Đã rõ|Biết rồi|Để ta xem|Xem|Quay lại|Đợi buổi sau|Đợi sáng mai)\b/;
+function isNav(nm,a){try{if(nm!=="chooseM")return false;const m=Q[0],c=m&&m.opts&&m.opts[a[0]];if(!m||!c)return false;if(m.kit&&m.kit.view)return true;
+ const fx=c.fx||{};const none=!Object.keys(fx).some(k=>fx[k]);return none&&(c.back||NAV.test(kaPlain(String(c.n||"")).trim()))}catch(e){return false}}
+function wrap(nm){const f=window[nm];if(typeof f!=="function")return;window[nm]=function(){const top=RF.depth===0;let was=null;if(top){RF.mine=0;RF.nav=isNav(nm,arguments);was=window.kaLastResult}RF.depth++;let r;
  try{r=f.apply(this,arguments)}finally{RF.depth--;if(top){RF.end=performance.now();
    /* jaudit hands a card raised inside the choice to the INNER resultShow (window.__aaR0) at its end: the card is known by kaLastResult */
-   try{if(!RF.mine&&window.kaLastResult!==was&&on()&&ui()){RF.mine=1;watch();RF.shown++}}catch(e){}
+   try{if(!RF.mine&&window.kaLastResult!==was&&on()&&ui()){RF.mine=1;watch();RF.shown++}if(RF.nav){RF.mine=0;RF.stat.nav=(RF.stat.nav|0)+1}}catch(e){}
    try{if(RF.mine&&on()&&ui()&&(RF.wantModal||RF.later.length||(window.DF&&DF.enc===1)/* the encounter's talk acts come next */))hold();else if(!RF.held&&RF.wantModal){RF.wantModal=false;if(Q.length&&ui())showModal()}}catch(e){console.error("RF end",e)}}}
  return r}}
 /* every choice runner of the result card family (the same set j19 wrapR gives a result card) */
 for(const nm of ["chooseM","talk","act","doAct","servAct","empAct","courtAct","recommend"])wrap(nm);
 /* the visitor ENCOUNTER (jdfv): after her reply the person's talk acts come only after the result; the reply buttons fold meanwhile */
-if(typeof dfSetGroups==="function"){const g0=dfSetGroups;dfSetGroups=function(F,G){try{if(ui()&&RF.held&&on()){
+if(typeof dfSetGroups==="function"){const g0=dfSetGroups;dfSetGroups=function(F,G){try{if(ui()&&RF.held&&vis()){
   RF.stat.enc++;try{F.choices([],null)}catch(e){}RF.later.push(()=>{let H=G;try{const j=dfIdx();if(j<0)return;H=dfData(j)}catch(e){}g0(F,H)});return}}catch(e){console.error("RF enc",e)}return g0.apply(this,arguments)}}
 /* KIT 32.10a exception (the root of the owner's «bấm xong … không thấy hiện gì»): the result card is PARKED (hidden) while a dialog is open, and the
    focus layer (.kfoc, jfocus role=dialog) counted as one — every result of a visitor reply or an in-visit talk act stayed hidden for the whole
