@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"74ec5d4d+","t":"2026-11-27T07:50Z","c":"Bấm ☰ giữa kiếp khi chưa lưu sổ: bấm ✕ (hoặc chạm ra ngoài) là quay lại kiếp đang chơi.","b":"d162cf580a05","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
+window.CTM_BI={"s":"84bc187c+","t":"2026-11-27T07:56Z","c":"Bấm ☰ giữa kiếp khi chưa lưu sổ: bấm ✕ (hoặc chạm ra ngoài) là quay lại kiếp đang chơi.","b":"a832be352c0d","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -49409,7 +49409,7 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
  ${B} small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
  ${B} small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
  ${B} small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
- ${B} small.kb>.kr>.krv>.ksep{display:none!important}
+ ${B} small.kb>.kr>.krv>.ksep{display:inline-block!important;margin:0!important;opacity:.55;flex:none!important}/* R12 (MAIN 174 LOOK B, law 11): KIT §5 rows «values in one row are separated by .ksep ·» — hidden here, two results ran on as one phrase («tiến bộ một đến ba phần ra một món vật cầu phúc») */
 
 `}
 window.kitCompactCSS=kitCompactCSS;
@@ -77291,8 +77291,8 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- Tài nghệ › Tứ đức cards: real costs, "ra một món", the lối list ---------- */
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(BAL.td.k);for(const s of L){if(s.kind!=="vir"||!TDS_KIND[s.k])continue;const k=s.k,l=virLv(S,k),kind=TDS_KIND[k],W=WK[kind].w.toLowerCase();
   const fee=virCost(l,S),fav=rcpFavorOf(S),game=s.acts.some(h=>/trò nhỏ/.test(h))?"chơi một trò nhỏ · ":"";
-  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.selfSuc} · thành: tiến bộ ${crsGainW("self",l,1)}, ra một món ${W}`,t2||(S.suc<BAL.td.selfMin?`Sức dưới ${BAL.td.selfMin}`:""))
-   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} (ma ma) hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n}) · thành: tiến bộ ${crsGainW("teacher",l,1)}, mở được lối mới, ra một món ${W}`,t2||(S.suc<BAL.td.mMin?`Sức dưới ${BAL.td.mMin}`:"")):h);
+  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.selfSuc} · thành: tiến bộ ${crsGainW("self",l,1)}, ra một món ${W.replace(/, /g," hay ")}`,t2||(S.suc<BAL.td.selfMin?`Sức dưới ${BAL.td.selfMin}`:""))
+   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} (ma ma) hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n}) · thành: tiến bộ ${crsGainW("teacher",l,1)}, mở được lối mới, ra một món ${W.replace(/, /g," hay ")}`,t2||(S.suc<BAL.td.mMin?`Sức dưới ${BAL.td.mMin}`:"")):h);
   s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học và lối chưa học · biết cách học từng lối`,""))}}catch(e){console.error("tds skills",e)}return L}})();
 /* the lối list of a course: lối opened by level are named with their level */
 (function(){const o0=rcpListOpen;rcpListOpen=function(k){if(!TDS_KIND[k])return o0.apply(this,arguments);const V=VIR.find(x=>x.k===k),kind=TDS_KIND[k],R=[];
@@ -104486,7 +104486,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d162cf580a05";window.CTM_BUILD=BUILD;
+const BUILD="a832be352c0d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

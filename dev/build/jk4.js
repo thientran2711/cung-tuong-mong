@@ -1050,7 +1050,7 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
  ${B} small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
  ${B} small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
  ${B} small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
- ${B} small.kb>.kr>.krv>.ksep{display:none!important}
+ ${B} small.kb>.kr>.krv>.ksep{display:inline-block!important;margin:0!important;opacity:.55;flex:none!important}/* R12 (MAIN 174 LOOK B, law 11): KIT §5 rows «values in one row are separated by .ksep ·» — hidden here, two results ran on as one phrase («tiến bộ một đến ba phần ra một món vật cầu phúc») */
 
 `}
 window.kitCompactCSS=kitCompactCSS;

@@ -6,7 +6,7 @@ Use «·» between two real results, «và / hay» inside one phrase, or put a l
 Report: candidates whose last fragment is a «và / hay / hoặc» tail (the typical split phrase). FAIL: any of the fixed R12 phrases comes back.
 usage: python3 dev/test/split-phrase-scan.py   exit 1 on FAIL"""
 import re,glob,sys
-BAD=['xem lối đã học, lối chưa học','người ấy thích, chê hay kiêng','một người thích, chê hay kiêng','rõ Sức, bệnh và','nếu đồ bị tẩm sẽ biết, ai gửi','tha, trả về Nội vụ phủ, hoặc làm ngơ','thành: Văn, Đức, Võ','biết tên, mặt, Sắc, Tài','kèm: vương gia, đại thần']
+BAD=['xem lối đã học, lối chưa học','người ấy thích, chê hay kiêng','một người thích, chê hay kiêng','rõ Sức, bệnh và','nếu đồ bị tẩm sẽ biết, ai gửi','tha, trả về Nội vụ phủ, hoặc làm ngơ','thành: Văn, Đức, Võ','biết tên, mặt, Sắc, Tài','kèm: vương gia, đại thần','ra một món ${W}`']
 pat=re.compile(r'(?:thành|được|hỏng|bại|kèm): ([^`"\'·]*?, [^`"\'·]*)')
 fail=0;cand=0
 for f in sorted(glob.glob('dev/build/j*.js')):
