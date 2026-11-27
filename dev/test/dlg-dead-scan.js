@@ -40,7 +40,7 @@ async function home(p) {
 const VEILS = '.kfgain,#kload,#kroul,#kroulw,#klife,.kroul,#dawn,#kdaytc,.kmov,#rtoast,#kprevov';
 async function clean(p) {
   for (let k = 0; k < 2; k++) {
-    await p.evaluate(v => { document.querySelectorAll(v).forEach(e => e.remove()); Q.length = 0; try { closeModal() } catch (e) { } Q.length = 0; document.getElementById('modal').hidden = true; try { if (window.DQ) { DQ.want = null; DQ.park = null } } catch (e) { } render() }, VEILS);
+    await p.evaluate(v => { try { if (window.kitRingItem && kitRingItem.cur) kitRingItem.cur.close() } catch (e) { } document.querySelectorAll('.kri').forEach(e => e.remove()); document.querySelectorAll(v).forEach(e => e.remove()); Q.length = 0; try { closeModal() } catch (e) { } Q.length = 0; document.getElementById('modal').hidden = true; try { if (window.DQ) { DQ.want = null; DQ.park = null } } catch (e) { } render() }, VEILS);
     await p.waitForTimeout(700);
   }
 }
@@ -212,6 +212,7 @@ async function runHand(p, dev, name, rows) {
   await p.waitForTimeout(1500);
   const st = await p.evaluate(() => { const M = document.getElementById('modal'); const v = e => !!e && !e.hidden && e.getBoundingClientRect().width > 0; return { q0: Q[0] && Q[0].t, pair: v(M.querySelector('.dlg>.khconf')), plate: v(M.querySelector('.dlg>.khplate')), lift: !!M.querySelector('.opts.khand>button.klift') } });
   const stale = (st.pair || st.plate) && !st.lift;
+  await p.screenshot({ path: path.join(OUT, `${dev}-${name}-new.jpg`), type: 'jpeg', quality: 60 });
   let chose = false;
   if (await mark('Cách D', 'hD')) { await rt.choose('[data-ddsw="hD"]', { screen: name, label: 'Cách D' }); await p.waitForTimeout(1500); chose = await p.evaluate(() => !(Q[0] && Q[0].t === 'Việc thứ hai')) }
   if (stale || !chose) await p.screenshot({ path: path.join(OUT, `${dev}-${name}-fail.jpg`), type: 'jpeg', quality: 55 });
@@ -237,6 +238,7 @@ async function runNoFx(p, dev, name, rows) {
   if (!sel) { rows.push({ dev, name, verdict: 'SKIP', why: 'option not drawn' }); return }
   for (let k = 0; k < 2; k++) { await rt.choose(sel, { screen: name, label: N.pick }); await p.waitForTimeout(1500); if (await p.evaluate(() => !(Q[0] && Q[0].t === 'Chiều trong vườn' && window.kaLastResult && !window.kaLastResult.rows.length))) break; if (!(await p.$(sel))) break }
   const r = await p.evaluate(() => { const M = document.getElementById('modal'); const t = document.getElementById('rtoast'); return { q0: Q[0] && Q[0].t || '', modalUp: !M.hidden && getComputedStyle(M).visibility !== 'hidden', held: !!(window.RF && RF.held), next: !!(t && t.querySelector('.kres-next')), res: window.kaLastResult ? window.kaLastResult.rows.map(x => x.k + ':' + x.items.join('/')).join(' | ').slice(0, 120) : '' } });
+  await p.screenshot({ path: path.join(OUT, `${dev}-${name}-after.jpg`), type: 'jpeg', quality: 60 });
   const showsB = r.q0 !== 'Chiều trong vườn' && r.modalUp && !r.held && /không được gì/.test(r.res);/* the next card (B, or a game event that came first) is up, nothing held */
   const ok = N.wantHold ? (r.held && /duoc:/.test(r.res)) : showsB;
   if (!ok) await p.screenshot({ path: path.join(OUT, `${dev}-${name}-fail.jpg`), type: 'jpeg', quality: 55 });

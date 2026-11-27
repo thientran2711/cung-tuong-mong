@@ -17,8 +17,9 @@ KIT CHECK: reuses kit ✕ (j3 kitCancelIx / kit-x), kit hand (jkhand) untouched,
 | 5 | item cards outside the viewport / «kipgo» off-screen after 8 scrolls (s16c iPad, s21a iPad, s18d Fold) | players see the RING (kitRingItem, kriOn) — every ring tile turns to the front and is tappable, the act runs; but the ring shows only KIT_RINGI.maxN = 24 pieces (the rest unreachable) = **K-RING-ALL** (KK59). Robots (and ring-off) see the GRID: every tile is reachable by real scrolling, but the confirm sits under the whole grid (goBelow px in the table: a person scrolls past every tile to give one) | K-RING-ALL → KK59 (kit keeper, filed already); grid confirm distance → **picker-dom** (pages of 24, Foreman D, waiting sign-off) — measured on it below; no change here (law 9: 28.13i is a kit part with a pending owner). |
 | 6 | NO-EFFECT-HOLD (MAIN 178 ruling 13:00Z / 13:42Z: a «không được gì, cũng không mất gì» result must not hold) | jverdict RESULT-FIRST: any result card drawn by a choice held the next card behind «Tiếp ▸», also when it said only «ta không được gì, cũng không mất gì» | **fixed here** (jverdict.js `noFx`): such a card releases like a NAV option — the next card shows at once, the result card still shows and fades. A result with a gain still holds (control case). |
 
-## Fix in this branch (one file of game code)
+## Fixes in this branch
 - `dev/build/jverdict.js`: `noFx(r)` reads kaLastResult (rows only «Ghi chú» «ta không được gì, cũng không mất gì», no Được / Mất / Kèm, no fold) → at the end of the choice `RF.mine=0` (stat `RF.stat.nofx`), and the late-card path skips the take-back. Same release as isNav; nothing else in the hold engine changed.
+- `dev/build/jkhand.js` **K-HAND-STALE** (fault found by this scan, same family as F's «Tin báo» «Để sau» → «Đặt lại» / «Chọn lá này» dead): a card lifted on one queue card, then that card replaced by the next, left the lift plate + ✓/✕ pair on the new card with no lifted card — ✓ tapped 3× did nothing, the plate covered the hand. `kitHandStale(M)` hides them on a frame drawn with no lifted card; a ✓/✕ with no lifted card clears itself. Kit part → KK59 ack.
 - `dev/test/dlg-dead-scan.js` (new): the family scan (below). index.html / sw.js rebuilt (`bash dev/site/build_site.sh`), assets.json = LIVE.
 
 ## Scan — `node dev/test/dlg-dead-scan.js [--root wt] [--dev fold,ipad] [--only …] [--save file] [--tiles N] [--out dir]`
@@ -28,14 +29,56 @@ Families: Tin báo (4 news / 24 news long / opened twice), closing toast «Tin b
 selection «Đông sở», NO-EFFECT-HOLD + control, item pickers: ring face (Biếu quà làm lành / Tặng quà / Dâng quà — every ring tile to the front by › + front tap +
 main act) and grid face (every tile by real scroll + tap, confirm reach + distance). Saves: F/handover fixtures y05-ncBtuc-035 (dialogs) and y14-ncBtuc-010 (chest 1,437).
 
-BEFORE_AFTER_TABLE
+### Before / after (full run, sequential, saves y05 dialogs / y14 pickers; tiles tested per grid: 120)
+| case | device | LIVE 772bee4f | review/dlg-dead-btn |
+|---|---|---|---|
+| tinbao | fold | ok | ok |
+| tinbao | ipad | ok | ok |
+| tinbaolong | fold | ok | ok |
+| tinbaolong | ipad | ok | ok |
+| toast | fold | ok | ok |
+| toast | ipad | ok | ok |
+| danhhieu | fold | FAIL — «Để sau!» tapped 3× for real, dialog stays | FAIL — «Để sau!» tapped 3× for real, dialog stays |
+| danhhieu | ipad | FAIL — «Để sau!» tapped 3× for real, dialog stays | FAIL — «Để sau!» tapped 3× for real, dialog stays |
+| eventlong | fold | ok | ok |
+| eventlong | ipad | ok | ok |
+| lichthang | fold | ok | ok |
+| lichthang | ipad | ok | ok |
+| lichthang2 | fold | ok | ok |
+| lichthang2 | ipad | ok | ok |
+| tinbao2 | fold | ok | ok |
+| tinbao2 | ipad | ok | ok |
+| dongso | fold | FAIL — «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối,» tapped 1× (order-dependent in the full run only; alone 2/2 ok on LIVE) | ok |
+| dongso | ipad | ok | ok |
+| nofx_hold | fold | FAIL — a no-effect result held the next card behind «Tiếp ▸» | ok |
+| nofx_hold | ipad | FAIL — a no-effect result held the next card behind «Tiếp ▸» | ok |
+| fx_hold_control | fold | ok | ok |
+| fx_hold_control | ipad | ok | ok |
+| grid_bieuqua | fold | ok (tiles 1262, confirm ok, 187 px below) | ok (tiles 207, confirm ok, 231 px below) |
+| grid_bieuqua | ipad | ok (tiles 1262, confirm ok, 187 px below) | ok (tiles 207, confirm ok, 231 px below) |
+| ring_bieuqua | fold | ok (offered 1261, ring 24, cut 1237, act ok) | ok (offered 207, ring 24, cut 183, act ok) |
+| ring_bieuqua | ipad | ok (offered 1261, ring 24, cut 1237, act ok) | ok (offered 207, ring 24, cut 183, act ok) |
+| ring_tangqua | fold | ok (offered 1367, ring 24, cut 1343, act locked) | SKIP — 0 pieces she can give (D's K-PICK-LIVE: dialog = text + ✕, no ring); the first full run's FAIL was the scan leaving the previous ring open (fixed in the scan, rerun) |
+| ring_tangqua | ipad | ok (offered 1367, ring 24, cut 1343, act locked) | SKIP — same (0 pieces, rerun) |
+| ring_dangqua | fold | ok (offered 1367, ring 24, cut 1343, act ok) | ok (offered 1368, ring 24, cut 1344, act ok) |
+| ring_dangqua | ipad | ok (offered 1374, ring 24, cut 1350, act ok) | ok (offered 1368, ring 24, cut 1344, act ok) |
+| stale_hand | fold | FAIL — stale ✓/✕ pair / lift plate on the new card (✓ dead) | ok |
+| stale_hand | ipad | FAIL — stale ✓/✕ pair / lift plate on the new card (✓ dead) | ok |
+
+Verified on the owners' branches with the same scan: **danhhieu** on review/titles-daycard-lrm3 14a3a4c2 → ok Fold + iPad (one real tap on «Để sau» closes). **grid_bieuqua** on review/picker-dom eccb77fa → ok, confirm still 230 px below the visible box on Fold + iPad (the «Kéo xuống» note in picker-dom's own report) → filed for KK59 below.
+The ring cut at 24 (cut column) is K-RING-ALL, fixed by KK59 on review/kk59-ring 0fdce448 (MAIN 179 17:45Z) — not redone here.
+
 
 ## Gates
-GATES
+- `git merge-base --is-ancestor 772bee4f HEAD` ok · 0 deletions vs LIVE · built files rebuilt with dev/site/build_site.sh, assets.json = LIVE.
+- dlg-dead-scan (table above): every FAIL on LIVE that this branch owns → ok (stale_hand ×2, nofx_hold ×2); danhhieu FAIL stays until titles-daycard-lrm3 lands (verified ok there).
+- ob-verdict-3.test.js (RESULT-FIRST, jverdict): branch 34 ok / 1 FAIL = «family scan: every choice shows its result first» 0/47 — **LIVE 772bee4f fails the same check 0/45** (stale test case: the maker cards there no longer raise a result card the test sees); encounter hold, in-visit talk act, view panels, bots, old save all ok.
+- Stills (looked at, Fold 755x1000 + iPad 1180x820), CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/dlg-dead-btn/ : before-/after-stale-hand-{fold,ipad}.jpg (LIVE: the old card's «Cách A» plate + ✓✕ over the new card «Việc thứ hai»; branch: clean hand), before-/after-nofx-{fold,ipad}.jpg (LIVE: «Ngắm hoa một lát» result card holds with «Tiếp ▸»; branch: the next card «Cung nữ bẩm báo» is up at once), ring-subline-fold.jpg. Wipe on verdict: `python3 dev/site/cdn_sync.py --wipe-review dlg-dead-btn`.
 
 ## Notes for the kit keeper (KK59) / MAIN
+- K-HAND-STALE (jkhand, built here) needs KK59 ack (law 9) — see KIT_REQUESTS.
 - Ring (kitRingItem) on Fold: the front item's sub line («Hoa điền · Dán trán khi điểm trang…») runs into the hint line «Vuốt để xoay · chạm món sáng để xem» (two text lines overlap under the ring). Kit part → KK59 (filed in KIT_REQUESTS as K-RING-SUBLINE).
 - «Danh hiệu mới» for a title she already wears: its only option «Đã hiểu» is the ✕, so j3's empty state «Lúc này không còn việc để chọn» shows on a notice panel — not dead (✕ closes and applies), wording odd; for E's title work.
 
 ## Handover
-(none yet — work in progress)
+Work complete; no rollover needed (context ≈ 28 % est.). Open for others: titles-daycard-lrm3 (E, danhhieu), kk59-ring (K-RING-ALL), KK59 acks K-HAND-STALE + notes K-PICK-GO-REACH / K-RING-SUBLINE.
