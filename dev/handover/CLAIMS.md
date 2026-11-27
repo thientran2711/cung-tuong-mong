@@ -629,3 +629,5 @@ lander | land-chain-28 | session_01Rc5AsKBqhCq1XrtewR7VyR | RUNNING | 2026-11-27
 boot skeleton flash (owner bug) | review/boot-skel-flash | session_01Rc5AsLUw7gDgkkzHaZqLd7 | RUNNING | 2026-11-27T05:42Z (MAIN 172)
 item-detail blank space (owner bug, kit frame family) | KK56 branch | session_01Rc5AsJ6UhcqbDDXVR7k7Bq | RUNNING | 2026-11-27T05:44Z (MAIN 172)
 lãnh cung pale + stage audit | review/owner-ui-a | session_01Rc5AsLZTE9nJRfFdxEACQL | RUNNING | 2026-11-27T05:45Z (OWNER-UI-B, MAIN 172; OWNER-UI-A rolled)
+E-GAIN3 | review/e-gain3 | session_01DgYSWnjWesPpZdFrpLFxAq | READY 23b44074 → rv E-GAIN3-RV session_01DgYSWkT5dKPzyaHfhL14Dx | 27/11 06:14Z (Foreman E child2)
+E-GAIN3b (successor: Khiêu khích law-3 gain/merge, rolled-card Thành wording, jointScheme tamco → BAL; kit items → KIT_REQUESTS) | review/e-gain3b (on e-gain3 23b44074) | session_01DgYSWoLuNzXKnrryMfczWF | RUNNING | 27/11 06:14Z (Foreman E child2)
