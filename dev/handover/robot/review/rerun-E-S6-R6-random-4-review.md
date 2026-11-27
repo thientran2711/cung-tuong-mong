@@ -1,0 +1,8 @@
+# R6-random-4 (iPad 1180x820, bot=sens, seed 3475684313, pf/pt_tang) — end-of-life notes — COUNTED (the clean rerun)
+Ending **Hồng nhan bạc mệnh — «Kiết lỵ nguy kịch, không qua khỏi»**, age 22, year 5, rank 2, **672 buổi**, 4114 real taps, 0 JS clicks, 1 bug row, 0 stuck, 0 dead buttons. robot-audit VALID (death). **Clean single start**: github.io LIVE GAME BUILD fb660cb78eec, harness 97e55a457 with pin=0, NO resume, no pin server (pixi 404 = 0). From the result JSON + moment log; not played by eye: no score table. NOTE: the first line of the moment log («Ban hoa … buổi 1») is the leftover of the earlier INVALID run of the same seed (08a4ff8b, trial left unplayed); this file is the fresh rerun.
+## What it proves
+The debut trial «Lễ ra mắt» is now PLAYED by real board taps on 97e55a457: the harness logged «BOARD dan 14 moves 1/10 raw 4.20 (21 s)», «BOARD mua 19 moves 10/10 raw 10.00 (24 s)» and «BOARD hat 208 moves 0/10 raw 0.00 (22 s)» — the unplayed-trial / E-a gap is closed for this seed, and the life went on past buổi 1 (the same seed ended there twice before).
+## Findings
+1. GAME (js): «page error: sx is not defined» ×2 at year 1 turn 1 buổi 1 (right after the trial). One occurrence, no visible damage; for MAIN to check in the console (a stray global in the debut / jexam path).
+2. DATA: 50 offers seen, 18 picked; rank 2 held (rank 2 → 0 at the opening, back to 2 at year 3 buổi 266) until the dysentery death at 22: «Kiết lỵ nguy kịch» again a disease death without prior warning (cf. «Sốt rét» in R6-lazy-1).
+3. BALANCE: «BOARD hat … moves 0/10 raw 0.00» — a board scored 0/10 with 0 moves in 22 s; the harness's board policy (sens) did not act on that board; check whether the hát board needs a different input before reading it as a game problem.
