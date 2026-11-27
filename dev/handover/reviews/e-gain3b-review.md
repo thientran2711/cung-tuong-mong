@@ -69,3 +69,42 @@ Written in dev/kit/KIT_REQUESTS.md «27/11 E-GAIN3b» with file:line; each line 
 
 ## 7. Result
 **FAIL 78c8608a** — item 1 (door-dialog hint shows need / tip / wrong-subject text as «Được», 4 rows on Fold + iPad, regression from 23b44074) must be fixed for the whole family with a base↔head row table; item 2 (Danh bot before/after) belongs to the BIG rule change. Everything else (rule, law 1 both sides, law 2 tiers, BAL keys, §5.1 wording, §5.5 values, KIT REQUESTs, regression tests) is PASS-ready. Shots: none taken (wording-only review; rows read from the gain-empty json). Scratch: /home/user/wt/eg3rv-out (not in git).
+
+---
+
+# RE-REVIEW (27/11 ~11:15Z) — review/e-gain3b 76821d10 (fix 5e26fc81 on 78c8608a) + test merge onto LIVE 0562e15f
+
+PRIORITY #1 CHECK: OD 0 new | LIVE/main 0562e15f (no DOOR.rowHint / flauntDanh) | review/* review/e-gain3 23b44074 + review/e-gain3b 76821d10 | claims E-GAIN3b-FIX (Foreman E child3 session_01DgYSWn1AhiLBvHqmVLmY3B).
+KIT CHECK: fix reuses kitHint / kitHintSign (jk2b, read-only), optLine kit HTML (read), doorGain reading; kit internals j63 / j19 / jk2b / jopic not in `git diff 78c8608a 76821d10` (jdoor.js + new test + report only).
+
+**VERDICT: BRANCH FIXES PASS (FAIL 1 + FAIL 2 closed) — LAND UNIT FAIL on 0562e15f (2 items below).** The coordinator lands e-gain3 + e-gain3b as ONE unit on LIVE; on that unit the branch's own law-3 checks are not green.
+
+## A. FAIL 1 (door-dialog row hint) — CLOSED on the branch
+- Code (jdoor.js DOOR.rowHint / hintGain / lineOf / TGT): base hint (kitHint of the row's own line) FIRST; the way's own hint only when the base says nothing gained AND hintGain finds a real gain (no «cần …», no «có … thì khỏi …», no stat in `a.c`). Read and agreed.
+- My door-row-hint runs on 76821d10 (6 states): **Fold 7089 rows, 0 bad, 0 page errors, exit 0; iPad 7467 rows, 0 bad, 0 page errors, exit 0.**
+- The 4 rows of my FAIL 1, fix build (Fold json): Hặc ăn mặc sai phẩm «Bị phạt −, Danh ++; Vững; hỏng thì oán ++, Danh −−» · Tố xa xỉ «Bị phạt −−, tháo món xa xỉ nhất; …» · Hạ độc · nặng «nàng trúng độc, nàng không chết (có thuốc giải); …» · Hạ nhục · nặng «Danh nàng −−; Rất vững; nhưng oán +» — all = base or base cleaned. Khoe quà ngự ban · nhẹ «Danh +; Rất vững; nhưng mọi phi tần ghen +».
+- Worker mutant `MUTANT=1` (dau,cao): **exit 1** (21 distinct bad, e.g. the «có Hạc đỉnh hồng…» tip). My own mutants: (a) `DOOR.hintGain` → `!!h`, (b) `DOOR.TGT` → false: both **exit 0** — the fallback branch and TGT are defence code the 6 states never reach (kit already reads «Danh nàng −−» right); not a defect, noted: the test proves the base-first rule, not hintGain / TGT.
+- Pre-existing kit readings (base = head = fix, KIT REQUEST #4 family, for the kit keeper, not this unit): P14 «Tát · nhẹ» hint «Sắc +» (it is the target's Sắc), «Phạt quỳ · vừa» «Đức +» (check against FXF.phatDuc), «Tung tin đồn» / «Vu oan» «Danh / Sủng +» (subject «nàng» dropped).
+
+## B. FAIL 2 (Danh balance) — CLOSED (accepted on the worker's numbers)
+- Worker ran the life bot (run_par.js sens + indanh, 3 seeds, 21 lives, cap 144 tuần), flauntDanh 0 vs 1: NPC Danh mean 31–45 in both arms at every checkpoint, max ≤ 97, **0 NPCs at 100**; NPC flaunts 2.5–5.5 per life; her bot never flaunts. No runaway; no BAL change. Matches my bound (agent utility for flaunt = spite only, jagent.js:108 → frequency unchanged; +1 Danh per flaunt). Note: the per-arm hook infl.js was scratch, not committed — the run cannot be re-made from the repo (not blocking).
+
+## C. Regression on 76821d10
+| test | result |
+|---|---|
+| gain-empty 6 states Fold / iPad | **1924 / 1656 cards, 0 empty, 0 page errors, exit 0** |
+| act-audit cao | done errs=0, exit 0 |
+| charge-smoke · odds-one-row | exit 0 · 755/1180/390 PASS |
+| fac-parity-play · role-parity-drift2-play | 17 ok ALL PASS · 11 ok ALL PASS |
+
+## D. Test merge onto LIVE 0562e15f (e-gain3 23b44074, then e-gain3b 76821d10)
+- e-gain3: clean (auto-merge j10, j15, jdf). e-gain3b: **1 conflict, dev/kit/KIT_REQUESTS.md** (LIVE added «27/11 KK53 kitPick plaque», the branch added «27/11 E-GAIN3b» at the same end of file) — keep both sections, LIVE first. No source conflict. assemble.py builds (18513573 b). KIT REQUEST file:line refs (j63:80, jk2b:248/:231/:217, j19:27) still right on the merged tree.
+- Merged build (Fold 755x1000): old save LIVE 0562e15f → merged **16/16**, 0 page errors (755x1000 / 1180x820 / 1366x1024); charge-smoke exit 0.
+- Merged build gain-empty Fold: 2254 cards, **10 distinct empty**, exit 1. LIVE 0562e15f alone (same test): 1864 cards, **13 distinct empty**, exit 1. The unit removes 8 (Chưởng sự tra xét, Cài người vào cung khác, Dạy con, Học, Lập phe cùng <X> ×2, Mua đồ, Tố cáo); 5 are LIVE's own and stay (Lấy trộm son phấn › Mặc kệ, Lục rương tìm chứng cứ › Mặc kệ, Lập phe cùng ai · 1, Nghỉ ngơi một lát · nhẹ, Đổi người chạy việc) — not this unit's fault; 5 appear only in the merged run (Thỉnh an › Đeo ngay / Để sau, Thỉnh an, chép kinh › Đeo ngay / Để sau, **Trò chuyện** at con:place:kn#0 / r4#0) — state-random or not, the worker must show which.
+
+## LAND FAIL list (for the worker; fix on review/e-gain3b, re-run on a merge with 0562e15f)
+1. **«nàng quý ta −−» shown as Được on the merged unit (law 3, the family E-GAIN3b fixes).** LIVE words the regard drop as «nàng quý ta −−» (Bàn tán về <X>); the branch's exclusions only know «quý ngươi / tin ngươi / thiện cảm» (jdoor.js doorGain filter, doorGain TG, DOOR.TGT; dev/test/door-row-hint.js DRH). Merged gain-empty: **9 «Trò chuyện» door cards «Bàn tán về <X>: nàng quý ta −−»** as the door's Được (LIVE alone: 13; fix branch alone: 0). Widen every one of those regexes to both pronouns («quý (ngươi|ta)», «tin (ngươi|ta)», «oán (ngươi|ta)» where used), then show 0 such cards on the merged build.
+2. **door-row-hint exits 1 on the merged unit**: 12 rows / 3 lv, Giao hảo door (gh) › «Mượn son phấn» (cao): base «Lắm lời, thiện cảm +» (kit heads glued) → fix «Lắm lời, nàng có thể chia một nửa hộp còn thiếu» (the «thiện cảm +» piece is lost, and «nàng có thể chia …» is a maybe-text the test does not take as a gain). LIVE alone: 0 bad (rows unchanged there). Decide with code (jration lxBorrowCard + jrcv RCVK.rougeBorrow: what the asker really gets) and either keep the base gain pieces or make the hint name the real gain; door-row-hint must be green on the merged build.
+3. With 1 + 2 done, re-run on the merged unit: gain-empty Fold + iPad (6 states) and say for each of the 5 merged-only empties (Thỉnh an › Đeo ngay / Để sau ×2, Trò chuyện) whether LIVE alone shows it in the same state (pre-existing) or the unit causes it.
+
+Shots: none (rows read from test json). Scratch: /home/user/wt/eg3rv2-out (not in git).
