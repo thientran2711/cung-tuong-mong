@@ -94,7 +94,7 @@ function covWitDo(a,id,x,ok){const w=covPerson(id);if(!a||!w)return"";const wn=c
  if(ok){covSilence(a,id);return covKill(a,id)||`${wn} không còn trên đời.`}
  /* failure = exposed at once: Danh now, the witness holds evidence of the attempt and saw it */
  try{chSawAdd(a,"mh",id)}catch(e){}covDanh(a,covTier("wkill"),`mưu thủ tiêu ${wn} bị lộ`);
- try{const h=w===S||w.rel!=null?w:ownerOf(w);if(h&&h!==a)evA(h,a,1,"mh")}catch(e){}
+ try{const h=w===S||w.rel!=null?w:ownerOf(w);if(h&&h!==a)evA(h,a,covB().wit.nang.ev,"mh")}catch(e){}
  return `<span class="r">Vụ thủ tiêu ${wn} bị lộ</span>: ${wn} thoát được và biết kẻ chủ mưu là ${covWho(a)}.`}
 /* her three options on a witness, one door (jdoor) */
 const COVN={nhe:"Đe dọa bịt miệng",vua:"Mua chuộc nhân chứng",nang:"Thủ tiêu nhân chứng"};
