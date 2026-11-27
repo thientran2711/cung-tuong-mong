@@ -216,3 +216,8 @@ b. KK49 KIT READY (A) >7 columns / (B) name plate → merge their branch, switch
 - Gate on 4b321012: ring-overlap 35 states 0/0/0, oldleft F0 I0 (gift flake re-run), kit-pick ALL PASS, kit-plaque-post PASS. CDN ring-build7b-* (videos, sheets, plaques9/12 stills). LOOK READY sent to MAIN 166 ~23:55Z.
 - OPEN (MAIN decides): Fold 3-column board → focus figure ~320 px (band + ✓/✕ room ~500 of 755 px). Options: ✓/✕ over the lifted plaque (kit, KK50) or accept.
 - Next: MAIN PASS → RV READY to RV-164 session_01Rc5AsK6n6JQHacgiCCd7ks.
+## Round 3 (27/11 ~00:00–00:45Z)
+- MAIN 167 LOOK on 4b321012: not PASS on Fold (3-column board → figure ~320 px); empty icon boxes = my test data (pic:""), real acts have art. NO FLIP ruling: ring has none (grep).
+- Merged KK51 review/kit-plaque-confirm 4ac9892e (✓/✕ ON the lifted plaque, postBox.x0 = real left edge); ring plaqueNeed drops its ✓/✕ room → Fold figure ~590 px. Code cc4515dc.
+- Gate cc4515dc: ring-overlap 36 states 0/0/0, oldleft 0/0, kit-pick ALL PASS, kit-plaque-confirm PASS. Stills CDN ring-build7c-plaques{9,12}-{755x1000,1180x820}.jpg. LOOK READY sent to MAIN 168 (session_01Rc5AsMYn5V43iERgwDRQrj).
+- Next: MAIN PASS → RV READY to RV-164. Kit keeper = KK51 session_01Rc5AsJN1bdRYgV8aBNXsdX.
