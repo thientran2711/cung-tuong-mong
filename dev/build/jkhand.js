@@ -84,10 +84,10 @@ function kitHandBigBuild(b,z){const c=b.cloneNode(true);c.removeAttribute("id");
  /* a hint clause the kit pass appended twice («…; hên xui; hên xui», a re-run of kitOptFinal on the hand card) reads once */c.querySelectorAll(".kb .ef").forEach(e=>{if(e.children.length)return;const p=e.textContent.split("; "),q=p.filter((x,i)=>i===0||x!==p[i-1]);if(q.length<p.length)e.textContent=q.join("; ")});c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  c.querySelectorAll(".kr-ton,.kr-duoc,.kr-thanh").forEach(r=>{if(!r.querySelector(".krv > *")&&!(r.querySelector(".krv")||{}).textContent)r.remove()});
  ["--kx","--ky","--kr","--k3s","min-height"].forEach(p=>c.style.removeProperty(p));c.classList.remove("kopt","kart","klift","kfdown","khout");c.classList.add("kopinfo");if(b.disabled)c.classList.add("khlock");c.disabled=true;c.type="button";c.removeAttribute("data-m");c.removeAttribute("data-khi");c.removeAttribute("aria-pressed");
- /* the odds word sits at the right end of the Tốn row (spec); no Tốn row → it heads the rows */
- const od=c.querySelector(".kodds"),tr=c.querySelector(".kr-ton");const kan=c.querySelector(".kan");const name=kan?kan.textContent.trim():"";if(kan)kan.remove();if(od){if(tr)tr.appendChild(od);else{const kb=c.querySelector(".kb");if(kb)kb.insertBefore(od,kb.firstChild)}}
+ /* KK56 §93.8 (owner 27/11 ~06:10Z): the odds never sit in a row of the enlarged card — only as the kit badge on its picture (copied from the small card's badge below) */
+ c.querySelectorAll(".kodds,.kodb").forEach(e=>e.remove());const kan=c.querySelector(".kan");const name=kan?kan.textContent.trim():"";if(kan)kan.remove();
  const card=document.createElement("div");card.className="khbc";const pn=document.createElement("div");pn.className="khbn";pn.textContent=name;card.appendChild(pn);
- const im=b.querySelector(".kaart img.kpor")||b.querySelector(".kaart figure img")||b.querySelector(".kaart img");const pic=document.createElement("div");pic.className="khbp";if(im){const i=document.createElement("img");i.src=im.currentSrc||im.src;i.alt="";pic.appendChild(i)}card.appendChild(pic);
+ const im=b.querySelector(".kaart img.kpor")||b.querySelector(".kaart figure img")||b.querySelector(".kaart img");const pic=document.createElement("div");pic.className="khbp";if(im){const i=document.createElement("img");i.src=im.currentSrc||im.src;i.alt="";pic.appendChild(i)}const bd=b.querySelector(":scope > .kaart > .kodb");if(bd)pic.appendChild(bd.cloneNode(true));/* the same kit odds badge as the small card, on the big picture */card.appendChild(pic);
  const inf=document.createElement("div");inf.className="khbi";inf.appendChild(c);card.appendChild(inf);z.innerHTML="";z.appendChild(card);z.__khFor=b}
 /* fill: the largest step of the kit scale whose info fits the card */
 function kitHandBigFit(z){const fi=z.querySelector(".khbi");if(!fi)return;const F=KIT_HAND.big.fs;let i=0;for(;i<F.length;i++){z.style.setProperty("--khbfs",F[i]+"px");if(fi.scrollHeight<=fi.clientHeight+1)break}if(i>=F.length)z.style.setProperty("--khbfs",F[F.length-1]+"px")}
@@ -218,7 +218,7 @@ html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!importan
 #modal .dlg>.khplate.khwide .khbn{grid-column:1/-1}
 #modal .dlg>.khplate.khwide .khbp{grid-column:1;grid-row:2;min-height:0}
 #modal .dlg>.khplate.khwide .khbi{grid-column:2;grid-row:2;justify-content:flex-start}/* the wide tier: picture left, info right */
-#modal .dlg>.khplate .khbp{flex:1 1 0;min-height:45%;border-radius:9px;overflow:hidden;background:#efe2c4}
+#modal .dlg>.khplate .khbp{position:relative;flex:1 1 0;min-height:45%;border-radius:9px;overflow:hidden;background:#efe2c4}
 #modal .dlg>.khplate .khbp>img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;display:block}
 #modal .dlg>.khplate .khbi{flex:0 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;display:flex;flex-direction:column;justify-content:center}/* the info takes its own height, type from ONE kit scale (KIT_HAND.big.fs, largest that fits); the picture (≥ 45 %) takes the rest — no empty band */
 #modal .dlg>.khplate .khbi>button.kopinfo{font-size:1em!important;width:100%;margin:0;padding:0 2px!important;flex:none;min-height:0!important;box-shadow:none!important;border:0!important;text-align:left;opacity:1!important;filter:none!important;background:transparent!important;color:var(--ink,#2a1a12)!important;cursor:default;pointer-events:none}
@@ -232,7 +232,7 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt.khout{opacity:0!impor
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .kfill .krl{opacity:1!important}
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .krl{display:block!important;font-size:.82em!important;margin:0!important;text-transform:none!important}
 
-#modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-ton>.kodds{grid-column:2!important}/* the odds word at the right end of the Tốn row (spec) */
+
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .krl{color:#8a5a1c!important;opacity:1!important;font-weight:700!important}
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .krv,#modal .dlg>.khplate .khbi>button.kopinfo .kb .krv *{opacity:1!important}#modal .dlg>.khplate .khbi>button.kopinfo .kb .krv .ef:not(.g):not(.r):not(.t){color:var(--ink,#2a1a12)!important}/* only an unclassed chip is ink; gain .ef.g green and loss .ef.r red stay the kit colours */
 #modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-duoc .krl,#modal .dlg>.khplate .khbi>button.kopinfo .kb .kr-thanh .krl{color:#2f7a3a!important}

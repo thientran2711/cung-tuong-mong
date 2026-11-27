@@ -26,16 +26,13 @@ const DEV=[["fold",755,1000],["ipad",1180,820]];
   for(let k=0,quiet=0;k<30&&quiet<8;k++){const open=await p.evaluate(()=>!document.getElementById('modal').hidden);if(!open){quiet++;await p.waitForTimeout(500);continue}quiet=0;await p.evaluate(()=>{const x=document.querySelector('#modal .kit-x,#modal [aria-label="Đóng"]');if(x)x.click();else{Q.length=0;document.getElementById('modal').hidden=true}});await p.waitForTimeout(500)}
   await p.waitForFunction(()=>[...document.images].filter(i=>i.getClientRects().length).every(i=>i.complete),null,{timeout:30000}).catch(()=>{});await p.waitForTimeout(1500);
   const o={boot:await p.evaluate(()=>document.getElementById('modal').hidden?'closed':document.getElementById('modal').textContent.slice(0,40))};const CUT=(Date.now()-T0)/1000;
-  if(vid==='hanhsu'){const TILE='#panel .khost .khand>button.kopt';const tl=()=>p.evaluate(s=>[...document.querySelectorAll(s)].filter(x=>x.getClientRects().length).length,TILE);
-   if(!(await tl()))await tapText('Hành sự');await p.waitForTimeout(2800);o.tiles=await tl();await shot('tiles dealt');
-   await tapEl('#panel .pct:not(.on)',1);await p.waitForTimeout(2200);await shot('filter tab');o.afterFilter=await tl();
-   await tapEl('#panel .pct',0);await p.waitForTimeout(1800);
-   await tapEl(TILE,1);await p.waitForTimeout(1800);await shot('enlarged');o.big=await p.evaluate(()=>!!document.querySelector('.khplate:not([hidden]),#panel .khbig'));
-   await tapEl('#panel .khost .khconf:not([hidden])>.khno,.khost .khno');await p.waitForTimeout(1200);
-   o.locked=await p.evaluate(()=>{const b=[...document.querySelectorAll('#panel .khost .khand>button.kopt')].filter(x=>x.getClientRects().length).findIndex(x=>x.disabled||x.classList.contains('kdis'));return b});
-   if(o.locked>=0){await tapEl(TILE,o.locked);await p.waitForTimeout(1600);await shot('locked tile');await tapEl('.khost .khno');await p.waitForTimeout(1000)}
-   await tapEl(TILE,1);await p.waitForTimeout(1600);await tapEl('#panel .khost .khconf:not([hidden])>.khok,.khost .khok');await p.waitForTimeout(2800);await shot('result');o.result=await p.evaluate(()=>!document.getElementById('modal').hidden);
-   await p.evaluate(()=>{const x=document.querySelector('#modal .kit-x,#modal [aria-label="Đóng"]');if(x)x.click()});await p.waitForTimeout(1800);await shot('back');o.tilesBack=await tl()}
+  if(vid==='hanhsu'){/* R11 (owner 27/11 ~06:42Z): Hành sự = the OLD LIVE act-card grid, full info on every card, ONE tap acts (no hand, no enlarge) */
+   const ACT='#panel .cards>button.ka:not([disabled])';const n=()=>p.evaluate(()=>({cards:[...document.querySelectorAll('#panel .cards>button')].filter(x=>x.getClientRects().length).length,hand:!!document.querySelector('#panel .khost')}));
+   if(!(await n()).cards)await tapText('Hành sự');await p.waitForTimeout(2200);o.grid=await n();await shot('grid');
+   await tapEl('#panel .pct:not(.on)',1);await p.waitForTimeout(1600);await shot('filter tab');o.afterFilter=await n();
+   await tapEl('#panel .pct',0);await p.waitForTimeout(1400);await p.evaluate(()=>{const P=document.getElementById('panel');P.scrollTop=P.scrollHeight});await p.waitForTimeout(900);await shot('grid scrolled');await p.evaluate(()=>{document.getElementById('panel').scrollTop=0});await p.waitForTimeout(600);
+   o.tapped=await p.evaluate(s=>{const b=[...document.querySelectorAll(s)].filter(x=>x.getClientRects().length).find(x=>/Nghỉ|Dạo|Đọc|Luyện/.test(x.textContent))||[...document.querySelectorAll(s)].filter(x=>x.getClientRects().length)[0];if(!b)return null;b.dataset.r11tap=1;return b.textContent.replace(/\s+/g,' ').trim().slice(0,50)},ACT);
+   await tapEl('[data-r11tap]');await p.waitForTimeout(2800);await shot('one tap');o.after=await p.evaluate(()=>{const m=document.getElementById('modal');return m.hidden?'no frame':m.textContent.replace(/\s+/g,' ').slice(0,90)})}
   else if(vid==='tainghe'){/* R11 (owner 27/11 ~06:33Z): Tài nghệ = one square cell per môn → tap → the môn frame */
    const tapHas=async t=>{const r=await p.evaluate(t=>{const e=[...document.querySelectorAll('button,[role=tab]')].filter(x=>x.getClientRects().length&&x.textContent.replace(/\s+/g,' ').trim().startsWith(t))[0];if(!e)return null;const q=e.getBoundingClientRect();return {x:q.left+q.width/2,y:q.top+q.height/2}},t);if(!r)return false;if(touch)await p.touchscreen.tap(r.x,r.y);else await p.mouse.click(r.x,r.y);return true};
    const cells=()=>p.evaluate(()=>[...document.querySelectorAll('#panel .ktn-cell')].filter(x=>x.getClientRects().length).map(c=>{const q=c.getBoundingClientRect();return [c.querySelector('.ktnc-n').textContent,Math.round(q.width),Math.round(q.height),Math.round(q.top),Math.round(q.bottom)]}));
