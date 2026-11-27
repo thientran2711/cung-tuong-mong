@@ -703,3 +703,48 @@ Gain vs loss of FAIL now: F1 reopens the exact hole BIG #18–#20 closed (a dead
 ## HANDOVER — BIG REVIEWER #21, 27/11
 - Verdict: FAIL robot-realtap-live d1d1541f — F1 (opacity / rect «lift gone» → M8 dead ✓ GATE PASS; robot-rt silent), F1b (stuck selx frame = soft row), F2 (plaque «mine» aria-label vs textContent → false bugs, plaques never chosen). Merge with LIVE 5cee92bb clean (local review/robot-realtap-live-r21 acaf6910, not pushed); M1–M6 GATE FAIL; N2 crawler change sound.
 - Recipe reuse: /home/user/wt/r21-out/run.sh <name> <game.html> [crawler args] (TREE=/home/user/wt/r21c for the control); mutations /home/user/wt/r21/index-m1..m8.html (m8 = `setTimeout(go,ms)}` → `setTimeout(()=>{g.__khBusy=0},ms)}`, m7 = kitHandChoose hides #modal + return); M8 for robot-rt: `python3 -m http.server 8920` in /home/user/wt/r21, URL http://127.0.0.1:8920/index-m8.html; verdict unit /tmp/…/scratchpad/vunit.js (copy into the report if needed).
+
+## REVIEW robot-realtap-live d1d1541f..0191f987 — BIG #21 RE-CHECK (for F ROOT #5 session_01UV1SzkUFYpHr77k4v7Z31w), 27/11
+PRIORITY #1 CHECK: «— BIG #21» FAIL d1d1541f (F1, F1b, F2, N1–N4, above) | FIXER #22 READY F1-F2 0191f987 (PROGRESS «HARNESS FIXER #22») | LIVE origin/main 772bee4f | claims: BIG REVIEWER #21 re-check (F ROOT #5).
+KIT CHECK: n/a (harness only).
+### VERDICT: FAIL review/robot-realtap-live 0191f987 — 1 blocking (F3: a locked plaque = false [game] bug; same class as F2, it showed the moment F2 was fixed). F1, F1b, F2 key, N1, N3, .kfoc layer: fixed and mutation-proven.
+Tree /home/user/wt/r21 = review/robot-realtap-live-r21b (local) = 0191f987 + merge of LIVE 772bee4f (f5c8d690). LIVE 772bee4f served by rt-serve-build.sh :8918 (137 paths 200). Mutations index-m1..m9.html rebuilt on 772bee4f's index.html. Logs /home/user/wt/r21-out/rc/<run>/ (scratch).
+### (1) MERGE + STATIC — OK
+- `git merge 772bee4f` into 0191f987: clean; button-crawl.js / robot-rt.js / realtap.js in the merge = 0191f987. 6fa7584c (FIXER's merge of d9ca7892) left the three harness files untouched. 0191f987 vs 6fa7584c = button-crawl.js, robot-rt.js, PROGRESS only (no game file).
+- node --check OK · robot-lint LINT OK 0 (default set + button-crawl.js) · rt-bare-unit 20/20 · added lines with `.click(` / dispatchEvent / `.focus(` / keyboard.: 0. New page work = reads (getClientRects, data-id, S hash, SCAN).
+### (2) MUTATIONS on LIVE 772bee4f (Fold --fast)
+| mutation | start | tip 0191f987 |
+|---|---|---|
+| plain LIVE | selx / talk | GATE PASS / GATE PASS (0 soft rows) |
+| M1 kitHandChoose = return | selx | GATE FAIL (7 sure) |
+| M2 lift lands on another card | selx | GATE FAIL (13) |
+| M3 every body button hidden | home | GATE FAIL (2, home floor) |
+| M4 plaque «Chọn» no-op | talk | GATE FAIL (6) |
+| M5 plaque lift() lifts another | talk | GATE FAIL (2) |
+| M6 first-load never completes | home | GATE FAIL (17 sure, «(first load)» on open + every reload) |
+| M7 ✓ hides #modal, drops the choice | selx | GATE FAIL (1: «(loop) the same screen after 6 taps») — see N5 |
+| M8 ✓ flies the cards, go() never runs | selx | GATE FAIL (2: «✓ does nothing» + «(no target)») — was GATE PASS on d1d1541f ✓ |
+| M9 (new) plaque «Chọn» only drops the lift, nothing chosen | talk | GATE FAIL (6) — N1 «moved» check bites on the plaque too |
+| robot-rt M8 (dev=fold origin=pf road=pt_su bot=sens seed=43) | — | [game] «two-tap hand «Dâng Kỳ…»: ✓ tapped for real, the lift stays (does nothing)» ✓ (was silent on d1d1541f) |
+### (3) LIVE RUNS (tip, LIVE 772bee4f)
+| run | args | result | twoTap (hand / plaque / chosen / liftOnly) | jsClicks · DEAD · stuck · NO-EXIT | bugs |
+|---|---|---|---|---|---|
+| crawler two-device | --fast --dev fold,ipad (home, selx, talk) | 236 taps · GATE FAIL 1 = REAL game DEAD (G1) · home re-crawl both devices (G2b) | rows: 4 lift-only + 2 lift+chip per device | — | — |
+| E-S1 e1 | dev=fold origin=thd road=thd_tho bot=rand seed=3683447523 slice=30 | palace road, 30 buổi, 440 taps; boards mua 6/10, hat 6/10, hat 5/10, mua 8/10, hat 5/10 (area ≤ 3) | 47 / 0 / 47 / 0 | 0 · 0 · 0 · **1** | 1 harness NO-EXIT (N6) |
+| E-S1 e2 | same | home road, 30 buổi, 201 taps; tho 10/10 | 8 / 9 / 9 / **8** | 0 · 0 · 0 · 0 | 3 [game] «lifted, but no «Chọn» chip came» (F3) |
+| iPad 1180x820 sens s61 | dev=ipad bot=sens seed=61 slice=12 | 12 buổi, 156 taps | 17 / 0 / 15 (+2 oneTap) / 0 | 0 · 0 · 0 · 0 | 0 |
+- F2 natural proof: e2 met the nhũ mẫu ring (plaques with a sub line «… · Rất vững · Tốn 1 khắc»): the data-id key matched («mine»), the first plaque was lifted + «Chọn» → chosen (no more «another one is lifted»). F2 = FIXED.
+### (4) FINDINGS
+| # | sev | where | finding | fix |
+|---|---|---|---|---|
+| F3 | BLOCKING | robot-rt two-tap (picker + `up && !chH` branch); crawler press() liftOnly / «lift» rows (same family) | A LOCKED plaque (act.off → `.kfoc-b.kfoc-off.kitoff`, kitPick conf(): `if(!a||a.off) c.hidden=true`) lifts on a tap but never shows «Chọn» — by design. Probe on LIVE (scratch offprobe.js, real taps): off plaque → up b, chip false; open plaque → up a, chip true. robot-rt does not read kitoff: in e2 it tapped the nhũ mẫu plaques 8 more times after the first choice (very likely locked: onceM «nmke» once a month, khắc spent; robot-rt logs no kitoff, so it cannot tell — the fix must log it) and wrote 3 [game] «lifted, but no «Chọn» chip came» rows (liftOnly 8). | a tapped .kpk-b with .kitoff / .kfoc-off = an «off» tap: count `tw.offTap`, no bug; the picker skips kitoff plaques unless nothing else is left (one read of its reason is fine); crawler: a kitoff plaque lift without chip = PASS «locked: lifts, shows its reason, no Chọn». Proof: e2 recipe with liftOnly 0, offTap > 0, 0 such bugs. |
+| N5 | note | crawler M7 | the ✓ row itself still reads PASS «lift+chip: next» ×6 under M7; only the «(loop)» floor row FAILs the gate. Gate right, row text wrong. | the N1 `moved` check: the same hand frame coming back is not «moved» (compare the hand's label set, not only new roots). |
+| N6 | game / harness note | e1, palace road buổi 1 (~373 s) | the FIXER's s21 NO-EXIT shape REPRODUCED once: «.kscn «» no button at all for 31 s», taps hit the scene layer; cleared WITHOUT a reload (unstick []), so the scene took ≥ 31 s before it moved — a real wait a player sees, likely GAME-side (a scene with no running line). Lead-in lost: R.trace keeps 400 rows and RT_NOSHOT=1 → no shot. | harness follow-up (not blocking): the NO-EXIT record carries the last 20 trace rows + the .kscn outerHTML head; game owner: rerun e1 recipe WITHOUT RT_NOSHOT. |
+| G1 | GAME (for MAIN / kit owner) | Fold 755x1000, person focus .kfoc «Cung nữ thân tín tam đẳng Chi Nhi», tab Giao thiệp | plaque «Chọn làm cung nữ thân cận · Tốn Bạc 30» is cut at the right edge (name «…cung n»), its «!» «Chi tiết» off-screen → DEAD (shot /home/user/wt/r21-out/rc/two/shots/fold-0222.jpg, looked at). Shown now because .kfoc is its own layer (FIXER #22). Real fault, not harness; it will FAIL quickcheck on LIVE until fixed or filed KNOWN. | kit: the left plaque column must fit inside the focus band on Fold. |
+| G2b | note (pre-existing) | crawler first home pass | vacuous on BOTH devices in the two-device run (Fold 0 taps / 34 gone, iPad 1 tap); the re-crawl rescued it. | as BIG #20. |
+- Job 3: the road is not pinnable (FIXER #22 dropped rngpin — agreed, 2 seeded runs here again split home / palace); every E-S1 run: 0 DEAD / stuck / jsClicks; area ≤ 3. «ve» debut stays an unpinned sample (accepted as such).
+Gain vs loss of FAIL: F3 writes false [game] rows in every home-origin life that meets a person ring once its actions are spent (likely; medium; easy to see; fix = one class read in two files). Everything else is fixed and proven. Loss of one more short round: small. → FAIL, narrow.
+
+## HANDOVER — BIG REVIEWER #21 (re-check), 27/11
+- Verdict: FAIL robot-realtap-live 0191f987 — F3 only (kitoff plaque). F1 / F1b / F2 / N1 / N3 / .kfoc fixed; M1–M9 all GATE FAIL; robot-rt M8 now flags the dead ✓; iPad slice clean; merge with LIVE 772bee4f clean.
+- Recipe: /home/user/wt/r21-out/run.sh rc/<name> <game.html> [args]; tree /home/user/wt/r21 (index-m1..m9.html, m9 = `if(aa)pick(P,aa,…)` → `if(aa)drop(P)`); E-S1 e2 recipe = the job-3 command (home road ≈ every 2nd run); off-plaque probe = kitPick.open on a fixed host with one act off:true, real-tap both.
