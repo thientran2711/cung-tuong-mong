@@ -158,12 +158,12 @@ function memo(k,f){k=k+"#"+stamp();if(MC.c.has(k))return MC.c.get(k);const r=f()
    out.push({n:r.n,door:r.k,o:100,fix:1,x:"",open:()=>doorOpen(p,r.k)})}
   for(const d of out){if(!d||!d.door)continue;const r=DOOR.byK(d.door);if(!r)continue;const {L}=memo(["m",p.kind,p.ref&&p.ref.id,p.name,r.k].join("|"),()=>members(pp0(r.k),r));if(!L.length)continue;
    const md=ONE.mode(r.k);if(md==="keep")continue;const tiers=TI.filter(t=>L.some(m=>tierOf(r,m)===t));
-   if(md==="tier"&&tiers.length>=2){const R=tierRows(r,L,who(p));d.x=R.map(x=>`${x.t} ${x.m&&!x.off?wordOf(oddsM(x.m))||txt(x.m.n):"—"}`).join(" · ");d.one="tier";
+   if(md==="tier"&&tiers.length>=2){const R=tierRows(r,L,who(p));/* RV-163G (law 7 + KIT X06): this line sits on the green «Được» row → only the tiers and their real ways, never an odds word (each row of the tier card carries its own kit chip) */d.x=R.map(x=>`${x.t}: ${x.m&&!x.off?txt(x.m.n):"—"}`).join(" · ");d.one="tier";
     if(R.every(x=>x.off)){d.lock=true;d.t=R[0].off.why}continue}
    const m=pick(r,L,seedOf(r,who(p)));d.one="one";
    if(!m){d.lock=true;d.t=(L[0]&&L[0].why)||d.t||"chưa làm được";continue}
    d.lock=false;delete d.t;const nm=txt(m.n);
-   if(m.a){/* the option fields the kit line reads (optLine: odds · tốn · được · hỏng) = the picked member's own */for(const f of ["o","oi","inner","c","w","l","lx","act","pk"])if(m.a[f]!=null)d[f]=m.a[f];d.x=[nm,m.a.x].filter(Boolean).join(": ")}
+   if(m.a){/* the option fields the kit line reads (optLine: odds · tốn · được · hỏng) = the picked member's own */for(const f of ["o","oi","inner","c","w","l","lx","act","pk","k","tgt"]/* ACT-MOVE-6 law 3: k / tgt too — an act member (placeHarms k:spy …) keeps its AOUT result line */)if(m.a[f]!=null)d[f]=m.a[f];{const lx=String(m.a.x||"");d.x=/(^|·\s*)(thành|hỏng|kèm|được|bại)\s*:/i.test(lx.replace(/<[^>]+>/g,""))?`${lx} · (${nm})`/* ACT-MOVE-6 law 3: a labelled member line stays label-first (never «tên: thành: …» nested); the topic goes to Ghi chú */:[nm,lx].filter(Boolean).join(": ")}}
    else{d.o=oddsM(m);const ln=txt(m.x).replace(/^(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững) · /,"");d.x=`${nm} · ${ln}`}
    d.open=()=>{if(!goOne(doorPP(p,curPeople().indexOf(p),r.k),r))doorOpen(p,r.k)}}}
  catch(e){console.error("jone fold",e)}finally{ONE.raw=raw0}return out}})();

@@ -39,8 +39,8 @@ function kppBtn(src,title,alt){const cls=`kbtn${alt?" alt":""} kppb`;
  const od=b.querySelector(".kodds,.oc");const odw=od?(od.querySelector(".kow,.ocw")||od).textContent.replace(/\s+/g," ").trim():"";
  let pl="";try{const d=b.dataset;if(d.see)pl=placeName(whereOf(rivals.find(x=>x.id===+d.see)));else if(d.visit)pl=accName(palaceOf(rivals.find(x=>x.id===+d.visit)));
   else if(d.scout)pl="dò nơi ở";else if(d.kgmgo||d.acask)pl=accName(d.kgmgo||d.acask);else if(d.kppl)pl=d.kppl}catch(e){}
- const sm=why?`<span class="kwhy">${why}</span>`:[pl,odw,kh?kh+" khắc":""].filter(Boolean).join(" · ");
- return `<button type="button" class="${cls}" ${at}${b.disabled?" disabled":""}>${title}${sm?`<small>${sm}</small>`:""}</button>`}
+ /* KIT X06 (RV-163G): the odds word only inside the kit odds chip (oddsChip), never bare text */const sm=why?`<span class="kwhy">${why}</span>`:[pl?`<span>${pl}</span>`:"",odw&&typeof oddsChip==="function"?oddsChip(odw):"",kh?`<span>${kh} khắc</span>`:""].filter(Boolean).join(`<span class="ksep">·</span>`);/* parts as kit pieces (kit card grid uses .ksep), no loose text beside the chip */
+ return `<button type="button" class="${cls}" ${at}${b.disabled?" disabled":""}><span>${title}</span>${sm?`<small>${sm}</small>`:""}</button>`}
 function kitPPBtns(pc){try{const R=pc.querySelector(":scope>.pcr");if(!R)return;let box=R.querySelector(":scope>.kppbtns");const W=kppWho(pc);
  const h=W?(()=>{const r=kppSrc(W);return kppBtn(r[0],"Tìm gặp",false)+kppBtn(r[1],"Ghé cung",true)})():"";
  if(!h){if(box)box.remove();return}if(!box){box=document.createElement("div");box.className="kppbtns";R.appendChild(box)}
