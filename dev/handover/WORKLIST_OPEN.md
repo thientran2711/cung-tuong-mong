@@ -1,5 +1,5 @@
-# ~31% xong · còn 35 việc không tính hình nhân vật
-Method (one line): X = done/(done+open); size weights S=1 M=2 L=3; done = struck rows + LIVE since 24/11 (owner-bug batch counts 10), a «partly live» row counts half its weight; only jobs on this list, not the whole game. N = open rows below.
+# ~86% xong · còn 35 việc không tính hình nhân vật
+Footer % = whole game (MAIN 167: 88 % at 28 open rows → 86 % at 35; list-only progress = 31 %). List method: X = done/(done+open); size weights S=1 M=2 L=3; done = struck rows + LIVE since 24/11 (owner-bug batch counts 10), a «partly live» row counts half its weight; only jobs on this list, not the whole game. N = open rows below.
 Recount by MAIN 167 worker WORKLIST-RECOUNT, 27/11 ~00:10Z, from `git log origin/main --first-parent` (LIVE 4cfcda61), FOREMAN_B–F STATUS tails, HANDOVER_SESSION9 (MAIN 165/166/167), CLAIMS, owner-bugs report. Every main keeps this current and reports at 08:00 / 20:00 her time; owner (26/11): recount after each batch and update this top line.
 State: LIVE = on main · partly = some pieces LIVE · open.
 | # | Job | Owner | State |
@@ -40,5 +40,5 @@ State: LIVE = on main · partly = some pieces LIVE · open.
 | 35 | KK44 kit sweep: map icons big (44), buổi tint (45), old frames → kit (57), map-zones-r7 (5/31) | KK44 | open |
 | 36 | Wording/hint batch: odds wording 43, WORDING-GAIN 53, closing-chip 39, buy-where links 41, OB-VERDICT-3 (42), kit-bac-progress 36, kit-name-stranger 22 | various | open/queue |
 | 37 | Oán rate (OB 55) + daily noise (qc-noise r10b) | D | open |
-| 38 | Found on LIVE: «Hội phối đồ: báo đề» empty-list stuck modal (Fold); ob-oan-enc «Nguy hiểm chung» FAIL | MAIN assign | open |
+| 38 | Found on LIVE: «Hội phối đồ: báo đề» empty-list stuck modal (Fold); ob-oan-enc «Nguy hiểm chung» FAIL | DRESS-FIX (Hội phối đồ) + OAN-PACE-2 (ob-oan-enc) | open |
 - LIVE since 24/11 not above: ACT-MERGE b881686f, ctp 639455a2, os 504d2e6a (one-sieve, ob-verdict, kem-row = OB 19/20/38), oan 53319e6f (OB 37), stat-pace 4cfcda61 (OB 15), audio-ipad 4fae357a, tinbao 50f8a13b, tainghe e4314b74, place-rules 9812646a.
