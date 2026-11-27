@@ -392,3 +392,41 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
 UPDATE 10:46Z (after the rollover note): RV-163I PASSED the punish diff of 1cbe0c31 (rv-163i.md §3) and wiped the death-notice CDN folder. Still needed for LAND READY: (a) restack on OWNER-UI-C's fixed owner-ui-a → new sha → RV-163I checks the delta only; (b) KK58 kit sign-off for KIT §84b.2 (law 9).
+
+## PUNISH-TIER-9 (MAIN 179, session_01Rc5AsJMhFUrAuYcVqnYC2Z, depth 1, START_CTX ≈ 3 %) — review/punish-stack-live-3 = 5211d747
+PRIORITY #1 CHECK ('punish-stack-live-2'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 1 (review/punish-stack-live-2 9585e741) | archive 0 — reused that branch, no rebuild.
+BASE: LIVE = 772bee4f; 3a/3b not LIVE → stacked on review/lc31-b3b 612afc75 (holds lc31-b3a 05804755 ← ui2l 26a1eacd ← LIVE). Merge 8fdde380 (punish-stack-live-2 9585e741, carries owner-ui-a 7539432d) + ee44ccd8 (ttExposed family + leave-palace test expectations) + aa42bbab / 5211d747 (npc-purpose rows j22.js:21 → out, j8.js:89 done-text = merged mercy line; test data only, build unchanged since ee44ccd8). Gates: LIVE 772bee4f ancestor OK, b3b ancestor OK, 0 deletions vs LIVE and vs b3b. index.html / sw.js rebuilt; assets.json = b3b; CHANGE.txt = b3b line (lander writes the bundle line).
+RULINGS USED: E74 (e-pack 3a) = OD 24/11 ~07:55Z (6) severity ladder + MAIN 118 06:16Z P1/P2/P3 (OD:L2328–2329). PUNISH-TIER = OD 26/11 ~19:50Z (L2641), ~20:35Z (L2649), ~20:40Z (L2651), ~21:00Z (L2658), ~21:10Z/~21:40Z witnesses (L2661/2667/2668), split-merge 26/11 ~21:00Z + 27/11 ~00:46Z/~01:00Z. 3b display (spSee) and oán door are not rulings that clash — kept beside the newer code.
+### Clash table (hunk | file:line on ee44ccd8 | ruling | kept side)
+| hunk | file:line | ruling OD:Lnn date | kept side |
+|---|---|---|---|
+| deathSentence: mercy for a spared death | dev/build/j8.js:107–112 | OD:L2649 26/11 ~20:35Z rec 1 (tử tội → ban chết or commuted to phế vị + lãnh cung chung thân) > OD:L2329 24/11 ~07:55Z (6) (E74 nghịch mercy = phế làm thứ dân) | PUNISH (punCold "phe", her + NPC); E74 tier arg + «no first-year mercy for nghịch» kept (no newer ruling on it); dsDan removed; BAL.crime.nghich.mercy "phe" (jbal2.js:2310) |
+| crimeTier / convict / tsMonth / tsRecallCh / tsMonthAll | dev/build/j8.js:115–135 | MAIN 118 P1/P3 24/11 (no newer ruling on treason kinds or thất sủng) | E74 (comments moved to «phế vị + lãnh cung chung thân») |
+| fall(): coin toss → crime weight | dev/build/j8.js:141 | OD:L2641 26/11 ~19:50Z + L2649 | PUNISH (punTier x); E74/3a side had only meRankN in the old text |
+| j3 love-letter «Trình lên Hoàng thượng» | dev/build/j3.js:161 | MAIN 118 P2 24/11 (one tư thông road, law 11) — punish side only added "nang" to the old fall() | E74 ttNpcExposed (the one road); its tier now = PUNISH tt (next row) |
+| ttExposed (family of the j3 / j30 hunks, law 11) | dev/build/j22.js:22–29 | OD:L2641/L2649 26/11 (the CRIME decides; BAL.charge.C.tt.tier = nặng) > MAIN 118 P2 24/11 (tư thông = death unless empMercy → lãnh cung) | PUNISH tier on the E74 road: fall(p,…,tt.tier) = giáng + lãnh cung, her + NPC; the man still xử trảm |
+| j3 «bị bỏ quên» | dev/build/j3.js:204 | MAIN 118 P3 24/11 (no fault ⇒ no lãnh cung); no newer ruling | E74 tsMonthAll (punish side was LIVE's old cold "keep") |
+| j14 release rank | dev/build/j14.js:18–20 | OD:L2649 rec 5 26/11 (minh oan = old rank if seat free, else one lower) | PUNISH (coldTitleOf / coldBack) + 3a meRankN() |
+| j30 tocao / expose | dev/build/j30.js:24–25 | OD:L2649 rec 6 + L2651 phản tọa; split-merge 27/11 ~00:46Z; tt tier = nặng | PUNISH (chBack phản tọa, chPunish at tt tier, tử tội spare roll) + 3b spSee on xinhh |
+| j78 person-card acts | dev/build/j78.js:196–207 | split-merge B1 26/11 ~21:00Z + 27/11 ~00:46Z/~01:00Z (one «Tố giác»); owner word «đã khuất» (RV-172) | PUNISH/split-merge + 3b spSee on 8 rel/oán previews |
+| j95 bribe card «Lời nhờ cậy» | dev/build/j95.js:~423 | OD:L2667 26/11 ~21:35Z (no buy-off of witnesses) + split-merge P2 | PUNISH (card stays removed; 3b only had a display wrap) |
+| j95 caught-scene options | dev/build/j95.js:430–441 | split-merge B3/P6 27/11 ~00:46Z (one «Tố giác», listener picked) | PUNISH + 3b spSee on lose / silent lines |
+| jagacts3 p3Free | dev/build/jagacts3.js:106 | OD:L2649 rec 5 (chung thân only by minh oan) ; 26/11 ~21:09Z MAIN (one oán door) | PUNISH signature (full, coldLife) + 3b oanAdd door |
+| jbal2 tables | dev/build/jbal2.js:2447–2520 | none clash (additions both sides) | BOTH: punish w (+wthreat/wbribe/wkill) + 3b noise + sideq + punish tier/wit/cover |
+| assemble.py list | dev/build/assemble.py:15 | — | b3b list + jcover.js after jcharge.js + jdead.js last |
+Laws: law 1 two-way (every kept rule runs for her and NPCs the same: deathSentence, ttExposed, fall, tsMonth); law 3 gain-and-loss kept on the previews (spSee rows); law 4 numbers BAL only (BAL.crime, BAL.charge.C.tt.tier, BAL.charge.*).
+Test expectations moved to the newer rulings (dev/test/leave-palace.test.js, 6 lines, comment PUNISH-TIER-9): treason + nhân từ → phế vị + lãnh cung (S and NPC); tư thông no mercy → giáng + lãnh cung; j30 «Bóc chuyện tư tình» no longer a separate ttExposed caller (folded into «Tố giác»).
+### Tests on ee44ccd8 (http 127.0.0.1, Fold 755x1000 + iPad 1180x820)
+| test | Fold | iPad |
+|---|---|---|
+| split-merge · punish-tier · punish-wit · cover · dup-piece-scan | ALL PASS | ALL PASS |
+| charge-trinh-punish · charge-followups · dead-card · one-core-guard · place-close | ALL PASS | — |
+| leave-palace (after the expectation move) | ALL PASS, 0 page errors | — |
+| dead-family (every dead surface) | PASS 4/4 surfaces | PASS 4/4 |
+| npc-purpose-scan (after 5211d747) | PASS 419 rows | — |
+| door-onetap | run 1 FAIL 1 «NPC: no grouped door+tier choice seen» (NPC harm options 0, under quickcheck load); run 2 PASS (NPC harm options 2, grouped 1, page errors 0). b3b 612afc75 same test: options 12, grouped 4. Random draw of NPC motives; counts lower than b3b — RV please eye it | — |
+| q-softlock | inside quickcheck (load) FAIL 5; standalone on 5211d747 PASS; b3b PASS; punish-stack-live-2 itself FAIL 2 (view parked by tab change) | Fold + iPad in the test |
+| quickcheck --runs 3 | QUICKCHECK PASS part (open 1927 ms · old save loads + plays a buổi · TIME-SPILL PASS · perf median new/live render 200/231, tab 350/380, buổi 1500/1328 ms, tasks>200 17/19). CORE GATES FAIL: G1 one-core-text-rule jph.js:173 / jkpick.js:141 (files = b3b, untouched); G4 npc-purpose (j22:21, j8:89 — fixed in aa42bbab/5211d747, scan PASS); G4 q-softlock (load flake, standalone PASS); G4 kit-std-scan ENOENT .quickcheck/gates/kit-std/kit-std-scan.json (tool); G4 noise-hygiene: text-hygiene static 7 new keys in jkitpage.js / jmapz.js / jnotice.js (files = b3b, untouched), noise-day 0 full days (advisory) | |
+| death-notice + dead-portrait stills, LOOKED: dead maid b/w figure, no killer name, new maid on stage, fits, same layout; dead consort b/w frame «Đã khuất», record rows | OK | OK |
+Stills: https://ctm-img.victoria-tntt.workers.dev/img/_review/punish-stack-live-3/ tin-du-{fold,ipad}.png · lc-{fold,ipad}-dead.png. Verdict giver wipes: python3 dev/site/cdn_sync.py --wipe-review punish-stack-live-3
+Sent: RV-163K (BIG, delta + this table), copy MAIN 179. Worktree /home/user/wt/psl3 (branch psl3, built, http 127.0.0.1:8761) kept for a fix round.
