@@ -9,8 +9,8 @@
      oldest first. No card is ever dropped: after BAL.spread.maxWait buổi it is shown even if the buổi is full.
    - Never moved: must / ending / forced cards, the buổi's own news card, warnings and plots (time matters), festival-day flows, j68 cards it already held.
    - Saving: waiting cards made of data (pid cards, notices, data-only choices — the same rule as jqsave) are written into S.sp13.q and come back on
-     load. A card whose options run code cannot be written down: it may wait at most BAL.spread.codeWait (2) buổi, and while it waits the autosave is
-     held (as jqsave does for an open code card), so a reload lands before it, never after a lost card.
+     load. A card whose options run code cannot be written down: it may wait at most BAL.spread.codeWait (2) buổi; the autosave goes on while it
+     waits (save-year-rollback: holding it lost the buổi / year step on a reload), so a reload in that window does not bring that unseen card back.
    - People in a card are placed at the buổi it is SHOWN: the D29 ledger (j95b) records actors and places when the card is on screen. Before a waiting
      card is shown, its actor is checked in the ledger (S.roster via j95 API): a consort no longer alive / no longer in the record makes the card
      void (its text goes to the log as a line, counted in SP13.stat.void).
@@ -111,9 +111,14 @@ function sp13Tick(){/* inside / right after a buổi change: this buổi's own u
  try{const M=$("modal"),hd=Object.getOwnPropertyDescriptor(HTMLElement.prototype,"hidden");if(M&&hd&&hd.get)Object.defineProperty(M,"hidden",{configurable:true,
   get(){return SP13.vo?false:hd.get.call(this)},set(v){hd.set.call(this,v)}})}catch(e){console.error("spread",e)}
  const sm0=showModal;showModal=function(){if(SP13.nb&&S&&!S.dead&&!SP13.off()&&(SP13.vo||$("modal").hidden)){sp13Pre();return}return sm0.apply(this,arguments)};
- /* save: data cards written into S.sp13.q; a waiting code card holds the autosave (jqsave rule) */
+ /* save: data cards written into S.sp13.q. save-year-rollback (LAW 11, robot M2 25/11): a waiting CODE card (not on screen yet) no longer holds
+    the autosave. It held every save from the buổi change that planned it until it was shown (up to codeWait buổi, chained when new code cards
+    kept arriving: Tết / stipend month), while the screen showed the new buổi / tháng / năm with no card open — a reload then went back to
+    before that step (robot: Year 4 → Year 3, weeks lost). Now the step is always written; a code card still waiting (unseen) cannot be written
+    down and is not in the save (SP13.stat.unsaved counts saves made while one waited). A code card ON SCREEN still holds (jqsave, bounded by
+    the card: time cannot move while Q has a card). */
  const sv0=save;save=function(){if(!S||quiet||S.dead||SP13.off())return sv0.apply(this,arguments);
-  if(SP13.L.some(x=>x.code)){SP13.held=1;SP13.stat.held++;return}SP13.held=0;
+  SP13.held=0;if(SP13.L.some(x=>x.code))SP13.stat.unsaved=(SP13.stat.unsaved||0)+1;
   sp13Sync();return sv0.apply(this,arguments)};
  const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(SP13.held&&S&&!S.dead&&!quiet&&!SP13.L.some(x=>x.code)){SP13.held=0;SP13.stat.flushed++;save()}}catch(e){}return r};
  /* load: rebuild the waiting list from the save (old saves: none) */
