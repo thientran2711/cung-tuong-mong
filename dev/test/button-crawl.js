@@ -76,7 +76,7 @@ const INPAGE=()=>{
     home = the room, as LIVE's crawl sees it; the selection days are walked by START selx */
  try{if(typeof nlAccept==='function'&&!W.__bcSelxW){const a0=nlAccept;W.__bcSelxW=1;nlAccept=function(){if(!W.__bcNoSelx||!W.BAL||!BAL.selx)return a0.apply(this,arguments);const d=BAL.selx.days;BAL.selx.days=1;try{return a0.apply(this,arguments)}finally{BAL.selx.days=d}}}}catch(e){}
  W.__bc={
-  isFixedRoot(e){const cs=getComputedStyle(e);return cs.position==='fixed'||e.id==='modal'||e.id==='title'||e.tagName==='DIALOG'},
+  isFixedRoot(e){const cs=getComputedStyle(e);return cs.position==='fixed'||e.id==='modal'||e.id==='title'||e.tagName==='DIALOG'||e.classList.contains('kfoc')},/* FIXER #22: the person focus (.kfoc, absolute in #game) is its own layer — else the body buttons under its veil were listed with it and read DEAD (iPad Phẩm Nhi, 13 rows) */
   root(e){let x=e;while(x&&x!==document.body){if(this.isFixedRoot(x))return x;x=x.parentElement}return document.body},
   vis(e){if(!e.isConnected||e.closest('[hidden]'))return false;const cs=getComputedStyle(e);if(cs.visibility==='hidden'||cs.display==='none'||+cs.opacity===0)return false;
    const r=e.getBoundingClientRect();return r.width>=4&&r.height>=4},

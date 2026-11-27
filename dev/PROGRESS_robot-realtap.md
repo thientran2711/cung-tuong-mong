@@ -1013,3 +1013,40 @@ Gate on this tip: node --check (robot-rt, button-crawl), robot-lint LINT OK 0 (d
 State: review/robot-realtap-live = cca0289c + this commit (stacked on e5671907 = BIG #20 PASS). READY job3 + READY job4 sent. Open for the successor:
 (1) BIG #20 follow-up N3 not effective: iPad home SKIP 26–27 «gone» (control 29) — the #kpop popover screen is read as [body]; key the depth-1 filter on #kpop open / the tapped chip, or close #kpop + .kpcompactm in the soft restore. (2) G2b: first home pass sometimes vacuous (pre-existing, also 532c6af5) — floor + re-crawl catch it; find the cause. (3) N2: explained + crawler fix (8fb32a5f); repro runs r1–r5 Fold home on f28d28b9 in /home/user/wt/o21/n2 (loop.sh; r1 no N2 row) — read r2–r5 crawl-fold.json for «stepped back» / «did not close» rows. (4) Game-side notes (not harness): Fold s21 run 2 NO-EXIT .kscn after Điện tuyển «Nhận» (taps ignored 31 s); Fold «Mục tiêu chương» tabs DEAD clipped by scroller.
 Scratch (not in git): LIVE f28d28b9 site `bash dev/test/rt-serve-build.sh f28d28b9 8918`; M1 copy /home/user/wt/build-f28d28b9/index-m1.html; probes /home/user/wt/o21/n2p.
+
+## HARNESS FIXER #22 (11/27/2026, session_01UV1SzjtdyPATQdayasH1mi, for F ROOT #5 session_01UV1SzkUFYpHr77k4v7Z31w; depth 5, START_CTX ~6 %)
+PRIORITY #1 CHECK: BIG #21 FAIL d1d1541f (reports/robot-realtap-review.md «— BIG #21»: F1, F1b, F2, N1–N4) | PROGRESS «HANDOVER — HARNESS FIXER #21» | main d9ca7892 (LIVE = rebuild of 5cee92bb) | claims HARNESS FIXER #22 (CLAIMS 14:12Z). KIT CHECK: n/a (harness only).
+Stacked on d1d1541f + merge of origin/main d9ca7892 (6fa7584c, clean, 0 harness files touched by main). Files changed vs d1d1541f: dev/test/button-crawl.js, dev/test/robot-rt.js (+ this file). 0 game files. robot-lint LINT OK 0 (default set + button-crawl.js), rt-bare-unit 20/20, added `.click(` / dispatchEvent / `.focus(` / keyboard. in the two files: 0.
+### Changes
+- F1 (crawler liftSeen + robot-rt `sh` / `gone`, whole family): a lift is «gone» ONLY when the node is disconnected, under [hidden], has no client rects (display:none on it or an ancestor) or lost its lift class (selector). Never opacity / rect: kitHandChoose flies every chosen card to opacity 0 before go().
+- F1b: selx «(no target)» (a selection-day screen with nothing to tap) is in the sure set. Same family: selx «(loop)» (same screen after 6 taps = a stuck player) is sure too (it is how M7 shows in the crawler).
+- F2: the plaque lift is keyed on `.kpk-n[data-id]` («id:<n>», tapped .kpk-b → closest .kpk-n; lifted node = the .kpk-n), crawler `__bc.lkey` + robot-rt twoLab / `t()`. Hand cards keep the full label (the tapped node IS the lifted node).
+- N1 (M7): «chosen» also needs the choice to TAKE. Crawler: S hash changed OR a new dialog / scene root (`div#modal|div.dlg|div.kscn|div#kpop`); the room coming back alone is not enough. robot-rt: full-char S hash (was a 7-step sample) changed OR a new non-`page` screen within 4 s; else counted closeNoFx (+ harness.closeNoFxLog «S a→b screen …») and the [game] «✓ … does nothing» bug.
+- N3: the ring step-back PASS needs the tapped button inside `.kring-x` (list() field `rx`).
+- Crawler roots: `.kfoc` (person focus, absolute in #game) is its own layer. Without it, the body buttons under its veil were listed with it and read DEAD: first two-device run on LIVE, iPad «Cung nữ thân tín … Phẩm Nhi» focus, 13 false sure rows. With it: GATE PASS. Same family as BIG #20 N3.
+- robot-rt «another one is lifted» bug carries `lifts` (each lifted node: opacity, visibility, its .dlg, in #modal) + the tapped key. This caught my own first-cut bug (hand key read «id:false»), fixed before any proof run below.
+- Job 3: I tried seeding the page RNG (Math.random + crypto) from seed=. It did NOT pin the road: 2 runs, same seed and args, gave one home road (30 buổi) and one Điện tuyển → Ban hoa at buổi 1. So I removed it (ab8e3aa6). The «ve» debut of E-S1 is NOT a pinned check; it is one unpinned sample. Timing (setTimeout order) splits roads even with a fixed RNG. A pinned proof needs a save replay (robot-save-replay.js) from a checkpoint.
+### Proof (LIVE d9ca7892 = 5cee92bb build fdc4fec0cd62, served from the worktree by python http.server :8920; Fold --fast unless said)
+| mutant | crawler tip | control e5671907 (BIG #21 numbers) | robot-rt tip |
+|---|---|---|---|
+| plain LIVE --start selx | GATE PASS (hand 2 lift-only + 1 lift+chip PASS) ×3 runs | — | — |
+| plain LIVE --start talk | GATE PASS (plaque 2 lift-only + 1 lift+chip) ×3 runs | — | — |
+| plain LIVE full --fast fold,ipad | GATE PASS 0 sure (after the .kfoc root; before: 13 false iPad DEAD) | GATE PASS | — |
+| M1 kitHandChoose = return | GATE FAIL 6 sure | FAIL | — |
+| M2 kitHandLift lifts another card | GATE FAIL 12 | FAIL | — |
+| M3 body buttons visibility:hidden (home) | GATE FAIL 1 (home floor) | FAIL | — |
+| M4 plaque «Chọn» no-op (talk) | GATE FAIL 6 | FAIL | — |
+| M5 plaque lift() lifts another (talk) | GATE FAIL 2 | FAIL | — |
+| M6 runCore never resolves (home) | GATE FAIL 8 (first load) | FAIL | — |
+| M7 ✓ hides #modal + drops the choice | GATE FAIL 1 sure «(loop)» (was GATE PASS on d1d1541f and on control) | GATE PASS (N1) | 8 × chipNoFx [game] «✓ … does nothing» (closeNoFx 8) |
+| M8 ✓ flies, go() never runs, frame stays | GATE FAIL 2 sure («✓ does nothing» + «(no target)») ×2 runs | GATE FAIL 1 | chipNoFx 1 [game] «Cúi đầu chờ xét … ✓ tapped for real, the lift stays» (d1d1541f: none) |
+robot-rt slices on plain LIVE (Fold; jsClicks 0, DEAD 0, stuck 0 in all):
+- E-S1 args (thd / thd_tho rand 3683447523), 30 buổi: hand 62 / chosen 62, plaque 1 (oneTap), liftOnly 0, bugs 0.
+- Same args, second run: Điện tuyển → Ban hoa age 18 at buổi 1 (game-imposed); hand 14 / chosen 14, bugs 0.
+- seed 77, 2 buổi: hand 21 / chosen 21, closeNoFx 0.
+- seed 77 with pick «mẫu thân» regexes, 10 + 12 buổi: hand 31 / 29 chosen, plaque 0. Bugs: 1 noLift «Hỏi về Hoàng thượng», 1 KG82 phase stays «play» (board hat), 1 noLift «Làm quen với một vị tú nữ». These are game-side or noLift rows, not F1/F2.
+- One run (seed 77, 12 buổi, before the full hash / 4 s window) wrote one closeNoFx on «Ở nhà chờ tuyển tú». It was not reproduced after the fix (seed 77, 0 of 21).
+### OPEN for the successor (honest)
+- F2 has no natural-plaque proof yet. In 6 robot-rt runs the bot met ≤ 1 person-ring plaque, because the road is random: «pick» took «Viện mẫu thân» / «Mẫu thân» but never a ring plaque. In every run liftOnly = 0 and there was no «another one is lifted» bug. The key matches the game DOM: jkit lift() reads `.kpk-n[data-id=…]`, and the lifted node is that `.kpk-n`. Proof still to bring: a save replay at a home buổi with the mẫu thân ring, or BIG #21's es1 when its road comes up again → plaque ≥ 3, liftOnly 0, chosen counts them.
+- Not done: the optional Fold s21 NO-EXIT repro (.kscn after Điện tuyển «Nhận»). No FOR MAIN line, because there is no proof.
+- Scratch (not in git): tree /home/user/wt/f22 (index-m1..m8.html untracked), logs /home/user/wt/f22-out/<run>/, recipe /home/user/wt/f22-out/run.sh <name> <game.html> [crawler args]; robot-rt: `RT_PIN=0 RT_NOSHOT=1 node dev/test/robot-rt.js http://127.0.0.1:8920/<html> <out> life=<n> dev=fold origin=pf road=pt_su bot=sens seed=43 slice=3`.
