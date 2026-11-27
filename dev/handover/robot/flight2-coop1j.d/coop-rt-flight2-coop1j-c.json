@@ -1,0 +1,145 @@
+{
+ "run": {
+  "tag": "flight2-coop1j-c",
+  "url": "https://thientran2711.github.io/cung-tuong-mong/",
+  "harness": "realtap",
+  "args": {
+   "host": "fold",
+   "guest": "ipad",
+   "kiep": "1",
+   "seed": "7103",
+   "tag": "flight2-coop1j-c",
+   "pin": "1"
+  },
+  "at": "2026-11-27T16:30:29.602Z"
+ },
+ "pairs": [
+  {
+   "job": {
+    "id": "coop-rt-flight2-coop1j-c",
+    "kiep": 1,
+    "seed": 7103
+   },
+   "lives": [
+    {
+     "seat": "host",
+     "dev": "fold",
+     "kiep": 1,
+     "extra": false,
+     "room": "3T7K",
+     "life": {
+      "id": "Ban hoa",
+      "type": "end",
+      "fate": "Bị ban hoa, xuất cung",
+      "death": false,
+      "age": 20,
+      "year": 1,
+      "rank": 2,
+      "text": "Ngươi về lại nhà. Người ta bàn tán ít lâu, rồi quên.",
+      "card": [
+       "",
+       "",
+       "",
+       ""
+      ],
+      "duringArea": false,
+      "lastTaps": [
+       "AREA 378,538",
+       "SKIP TAP .kscn «» tap",
+       "AREA 378,538",
+       "SKIP TAP .kscn «» tap",
+       "AREA 378,538",
+       "SKIP TAP .kscn «» tap",
+       "AREA 378,538",
+       "SKIP TAP .kscn «» tap",
+       ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»",
+       ".dlg «Thái hậu» «Tay con từng bóp thuốc, chăm sóc cha mẹ khi ốm, đó»",
+       ".dlg «Hoàng thượng» «Cúi đầu chờ xét»",
+       ".dlg «Thái hậu» «Thần thiếp thưa rằng trâm quý rơi nơi thần thiếp, »"
+      ]
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "c5a242e0",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [],
+      "slice": null,
+      "mgBackN": 0,
+      "mgBackQuitN": 0,
+      "builds": [
+       {
+        "s": "d9ca7892+",
+        "b": "86170222adab",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z",
+       "at": "2026-11-27T16:30:35.811Z"
+      },
+      "pinUrl": "http://127.0.0.1:8812/",
+      "build": {
+       "s": "d9ca7892+",
+       "b": "86170222adab",
+       "t": "2026-11-27T12:32Z"
+      },
+      "areaTaps": 145,
+      "consoleErrN": 11,
+      "ident": {
+       "name": "Nhâm Thuần Nguyên",
+       "org": "Cháu gái Thái hậu",
+       "born": -19,
+       "at": 1
+      },
+      "bareCovered": 7,
+      "bareCoveredBy": {
+       "top changed img.kmeg-d.kmeg-dr → div.kmeg-gate": 1,
+       "div.kscn-veil over img#mefig.j59sz": 2,
+       "div.kscn-veil over button.tok.fig.bob": 4
+      },
+      "skipLayerTaps": 37,
+      "infoTaps": 13,
+      "kresTaps": 13,
+      "twoTap": {
+       "hand": 9,
+       "plaque": 0,
+       "chosen": 7,
+       "liftOnly": 0,
+       "chipFail": 0,
+       "oneTap": 1,
+       "noLift": 1
+      },
+      "dlgScroll": 3,
+      "scrolls": 3,
+      "dlgClose": 1,
+      "deadChecks": 1,
+      "deadCheckMs": 3014,
+      "taps": 46
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "k": "game|two-tap hand «Trò chuyện với Chung Như MặcTốn1 khắcĐượ»: tapped for real, nothing lifted (2 s) and the frame is still there",
+       "type": "game",
+       "msg": "two-tap hand «Trò chuyện với Chung Như MặcTốn1 khắcĐượ»: tapped for real, nothing lifted (2 s) and the frame is still there",
+       "n": 1,
+       "at": 166,
+       "screen": ".dlg «Tiền sảnh»"
+      }
+     ],
+     "dead": [],
+     "buoi": 1,
+     "saves": []
+    }
+   ],
+   "partial": true,
+   "bugs": []
+  }
+ ]
+}
