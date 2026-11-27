@@ -722,3 +722,4 @@ ILLNESS-CURE (MAIN 182 23:40Z: grave illness offers only «Lui», Sức shown 91
 F14ROLE-ROWS (session id for the 23:45Z claim) | review/f14role-rows | session_01PEhRbwC87NmvYopoF5ocup | RUNNING | 27/11 23:41Z (Foreman C ROOT 4-1)
 ILLNESS-CURE (session id for the 23:45Z claim) | review/illness-cure | session_01PEhRbvzcp527pLLt31A9W4 | RUNNING | 27/11 23:41Z (Foreman C ROOT 4-1)
 SAVE-FAIL-WARN (opus fixer; failed save write → kit notice, every writer; MAIN 182 order 23:14Z; reuse saveBlocked j6:115) | review/save-fail-warn | session_01N1tNP6Pj5FGKjGNBJE8zTs (Foreman B ROOT 3) | RUNNING | 27/11 23:42Z
+C4-RINGART | review/c4-ring-art | session_01PEhRbtWZ3sD3nbQtNSs3sP | DONE (LIVE 5fb13d60; CDN ACTS.json = main, _review wiped; archived) | 27/11 23:45Z (Foreman C ROOT 4-1)
