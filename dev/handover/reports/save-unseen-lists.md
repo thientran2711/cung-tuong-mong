@@ -699,3 +699,40 @@ jglink.js: no S list / store write / save wrapper → census unchanged (UNCLASSI
 - Tool running at handover: /home/user/wt/rv26-scr/dbgloop.sh = goal-links with DBG state lines after link / Đi tới / companion / before check + console errors & warnings, up to 20 Fold runs, stops at the first FAIL (log /home/user/wt/rv26-scr/dbgL<n>.log, summary dbgloop.out). Scratch is in this container only — the successor re-creates it: copy dev/test/goal-links.js, add `p.on('console',…)` and a DB() print after each step of «(2b) Đi tới».
 - NEXT (successor): (1) find the cause (console errors in the failing run; if a throw → fix the reader to the stack API invCount/invAdd, whole family scan per LAW 11; if timing → wait-for-condition in the test, prove LIVE unchanged); (2) re-run goal-links Fold 13× on the fix (target 0/13), SUL, save-rewind, quickcheck --runs 5 ALONE; push review/save-fix-stack-rv27 (or a test-only commit on rv26) → SSK to Foreman B ROOT 3 session_01N1tNP2DN7zgnH41uQZm6TD. (3) coop-e2e A/B not done (stopped for this order): rv25 under load 139/143 (world-sync rows); run LIVE 772bee4f and rv26 ALONE (wrangler dev --local --port 8799 in coop/worker after npm install). (4) DO 2 pid-cards-rv6: skip until rv26 lands (Foreman), then merge the landed stack into review/save-pid-cards-rv5 4e27a588 (local try on rv25 = 6068aa6e, built-only conflicts, j3 auto-merged; not pushed).
 - Worktrees: /home/user/wt/rv25, rv26, live5ce (LIVE 772bee4f built), pid6, rv24, ho — remove when done.
+
+## rv27 (B FIXER opus, session_01N1tNP3bH2M8HrgF9ymZ8s6, depth 1, START_CTX ≈ 5 %; brief b-save-stack-rv27-glink.md)
+PRIORITY #1 CHECK ('ctm-notes-seen|CTM_NOTES|Điều mới trong cung|goal-links'): OD 0 | main jnotes.js = rv26 (identical) | dev/test: button-crawl.js marks notes (no-op, see below), next-dead.js + kit-one-opt-tap.js close the card as a player, update-notes.js = the notes test | review/* 0 → reused jnotes' CTM_NOTES_UI handle and lib/roulette.js.
+**review/save-fix-stack-rv27 081c1731777f241386da60b044dc3e5d0511ebf2 = TEST-ONLY, FF of LIVE bd47c753 (rv26 landed alone 19:25Z). Game code / built files unchanged.**
+### Cause of goal-links Fold «đi tới» 3/13 (rv26) vs 0/13 (LIVE 772bee4f) — not a game bug
+- Tests do `localStorage.clear()` then `start()`. The wipe removes jnotes' record `ctm-notes-seen`. On the stack the slot is written at the life start (jqSaveNow, by design); on 772bee4f the slot stayed empty while the opening code cards were held. jnotes then sees «a sổ exists, notes unseen» = an OLD player and queues «Điều mới trong cung» at the first calm moment (Q empty 2 ticks of 1.5 s).
+- In goal-links it sat behind «Cách làm»; «Đi tới» → glGo has `if(Q.length)return` → no walk; the harness then cleared Q → place home, q 0 (the FAIL state). Predecessor's dbgL9 state lines (afterlink Q had «Điều mới trong cung») + this probe:
+| probe (wipe + start, Q kept calm 6 s) | LIVE 772bee4f | rv26 bd47c753 | rv27 |
+|---|---|---|---|
+| slot written at life start | no | yes | yes |
+| notes pop-ups | 0 / 0 | 1 / 1 | 0 / 0 |
+| real player path (title 2.5 s, no wipe) | 0 | 0 | — |
+→ a real player is not affected (first visit: the id is recorded on the title before any sổ).
+### Fix (LAW 11, whole family = every test that wipes the storage then starts/loads a life)
+- dev/test/lib/notes-seen.js `keepNotesSeen(ctx|page)`: init script, `Storage.prototype.clear` keeps `ctm-notes-seen` = newest id (CTM_NOTES_UI.list[0]). lib/roulette.js autoDismissRoulette calls it (covers pw-roulette too).
+- button-crawl.js: its mark used `window.CTM_NOTES` = always undefined (top-level const, not on window) → never marked; now CTM_NOTES_UI.list.
+- quickcheck hook tests exposed (wipe + start, no handling) get keepNotesSeen: dead-card, dialog-fixed, kit-std-scan, look-dedupe, press-keep, q-softlock.
+| scan (dev/test, wipe + start) | before | after |
+|---|---|---|
+| keep the record via shared helper (autoDismissRoulette / pw-roulette) | 0 (helper had no mark) | 28 |
+| quickcheck hook tests exposed | 6 + button-crawl (no-op mark) | 0 |
+| close it as a player (next-dead, kit-one-opt-tap) | 2 | 2 |
+| other dev/test scripts, plain playwright, no hook | 597 | 597 → follow-up K-NOTES: move to keepNotesSeen when touched (only a test that waits ≥ 3 s with Q empty and then asserts Q can be hit) |
+### Gates on rv27 (one browser process at a time)
+| gate | result |
+|---|---|
+| goal-links Fold 755x1000 ×13 (251b1ad7) + ×3 (081c1731) | **0/16 FAIL** (rv26: 3/13) |
+| goal-links iPad 1180x820 ×3 | PASS ×3 |
+| rv27 goal-links.js on LIVE 772bee4f Fold ×3 | PASS ×3 (LIVE unchanged) |
+| arrive-walk Fold+iPad | PASS (19/20, 18/20 = LIVE's own allowance) |
+| inv-stack | 25/27, FAIL 2 = DOM «Biếu quà làm lành 2,790 (<2,000)» = identical on rv24–rv26 (open K-LIST-PAGE) |
+| save-rewind (flight2-s18d ckpt 8ae99226) | PASS 4/4 |
+| SUL `SUL_FCS=1 … fold,ipadAir 1` | SAVE-UNSEEN PASS 24/24 |
+| quickcheck ALONE --runs 5 (081c1731) | **QUICKCHECK PASS · core gates PASS** · old save ok · perf new/live render 279/228, tab 490/443, buổi 1391/1303 ms, tasks>200 23/22 |
+| q-softlock (G4 94) A/B on 251b1ad7 | rv27 FAIL 1 of 6 runs (Fold «person view» rows, notes pop-ups counted = 0 → NOT this family) · LIVE 772bee4f 2/2 PASS here; LIVE d9ca7892 FAIL 1 earlier (rv25 table) → known flaky row, open for the reviewer |
+| coop-e2e A/B | not run: test-only change on LIVE (Foreman B 19:42Z: no game-code gates beyond goal-links / button-crawl / quickcheck) |
+Open: (a) LIVE nit, not this stack: glGo «Đi tới» does nothing while any card waits in Q (e.g. a real notes pop-up behind «Cách làm») — she must tap again; follow-up for the jglink owner. (b) pid-cards-rv6 not started (brief).
