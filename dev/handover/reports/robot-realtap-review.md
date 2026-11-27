@@ -613,3 +613,34 @@ Home pass really taps on both devices (no re-crawl, no veil, DEAD 0).
 ## HANDOVER — BIG REVIEWER #20, 27/11
 - Verdict: FAIL robot-realtap-live 532c6af5 — H1 only (still-up first-load / life-gate veil is removed silently: M6 «load hangs for ever» = GATE PASS). Clean base, G1, G2 root (mp3 abort), N1, M1–M5 and real-tap contract all OK. N2 one unreproduced ✕ FAIL on the Giáo tập ma ma ring (Fold), N3 iPad #kpop SKIPs.
 - Recipe reuse: /home/user/wt/r20-out/run.sh (name game.html [crawler args]), tree /home/user/wt/r20 (index-m1..m6.html; m6 = runCore pool never resolves).
+
+## REVIEW robot-realtap-live e5671907 — BIG #20 RE-CHECK (for F ROOT #4 → F ROOT #5 session_01UV1SzkUFYpHr77k4v7Z31w), 27/11
+PRIORITY #1 CHECK: «— BIG #20» FAIL 532c6af5 (H1, N2, N3, above) | FIXER #20 e5671907 (PROGRESS «HARNESS FIXER #20») | claims: BIG REVIEWER #20 re-check.
+KIT CHECK: n/a (harness only).
+### VERDICT: PASS review/robot-realtap-live e5671907 (H1 fixed and mutation-proven; N3 fix harmless but not effective — follow-up, not blocking)
+Same tree /home/user/wt/r20 checked out at e5671907 (index.html == LIVE 0562e15f), same mutation files. Logs /home/user/wt/r20-out/x-*/ and c-ring/ (control = the 532c6af5 crawler on the same box). The container restarted at ~12:05Z; every run below is after it.
+### (1) CLEAN BASE — still OK
+e5671907 = 532c6af5 + 1 commit (button-crawl.js +11/−1, robot-rt.js 1 line, PROGRESS). `git merge-base --is-ancestor a2902d43 e5671907` FALSE; on LIVE 0562e15f; 0 files outside dev/test, dev/tools, dev/PROGRESS_robot-realtap.md. node --check OK, robot-lint LINT OK 0 (default set + button-crawl.js), rt-bare-unit 20/20.
+### (2) H1 — FIXED
+- button-crawl waitLoad: #kload / #klife still up after the player's wait → a «(first load)» row (FAIL) that is in the `sure` set; the veil is still removed only so the rest of the crawl runs. M6 (runCore pool never resolves): «first-load screen «Lần đầu nhập cung» still up after 300 s (KLOAD core, core 0/435 MB) — a player is stuck there» + one row per reload → **GATE FAIL (12 sure)** (was GATE PASS on 532c6af5).
+- robot-rt family (law 11): the existing #kload path already enters only by a REAL tap on the game's own «Vào cung ngay» after 20 s; it now also writes bug('load', «first-load screen stalled → entered by a real tap on «Vào cung ngay»») — a [load] game-bug row, no silent removal. robot-rt holds no other #kload / #klife remove() (grep).
+### (3) MUTATIONS M1–M6 (Fold, --fast) — all GATE FAIL
+M1 6 sure (✓ does nothing) · M2 12 sure · M3 (home floor) 5 taps · M4 6 sure · M5 2 sure · M6 12 sure (first load).
+### (4) TWO-DEVICE RUNS on LIVE (--fast --dev fold,ipad)
+| run | crawler | first load F / I | home F / I (PASS · SKIP) | 1st home pass | selx F / I | talk F / I | two-tap F / I | gate |
+|---|---|---|---|---|---|---|---|---|
+| x-ring | e5671907 | 55 s / 54 s done | 41·27 / 80·26 | iPad vacuous (0 taps, 35 gone) → re-crawl | 28 / 27 | 11 / 10 | 6 / 6 | PASS |
+| x-ring2 | e5671907 | 42 s / 41 s done | 80·2 / 80·27 | iPad vacuous (0 taps, 35 gone) → re-crawl | 27 / 27 | 10 / 10 | 6 / 6 | PASS |
+| c-ring (control) | 532c6af5 | 50 s / 50 s done | 80·2 / 80·29 | Fold vacuous (0 taps, 34 gone) → re-crawl | 26 / 29 | 11 / 10 | 6 / 6 | PASS |
+Every first load «done 435/435 MB», 0 «(first load)» rows on the plain build (no false FAIL from H1).
+### (5) NOTES (not blocking)
+- N3 NOT EFFECTIVE (but harmless): iPad home SKIP «button gone before its tap» = 26 / 27 on e5671907 (control 29) — not 22→1. The filter drops body buttons only when the popover screen's roots carry #kpop; in x-ring2 / c-ring the «sương sớm» screen was read as «[body:…]» (no #kpop root), so the old 36-button relist and its «gone» SKIPs came back. It hides no real button: the popover has no buttons of its own (0 listed on Fold in every run, before and after), and the dropped body buttons are the home buttons tapped at depth 0. Fix: key the popover screen on the TAPPED button (the weather chip «sương sớm») or on document.getElementById('kpop') being open, not on the roots list; or close #kpop in the soft restore.
+- G2b (pre-existing, caught by the net): the first START home pass is still sometimes vacuous — 3 of 3 two-device runs after the container restart (iPad ×2 on e5671907, Fold on the 532c6af5 control), 0 of 2 before it. Not the #kload veil (load done, 0 first-load rows): the gone rows read «live body · busy false · modal off · same label: none» = the room's buttons were re-laid (new labels) between listing and tap. The home floor + one re-crawl turns it into a full 80-tap pass every time (no false PASS), at ≈ +4 min per run. Successor: log the room label set at list time vs tap time on the first pass to find what re-renders the room in the first minute.
+- Fold x-ring: 23 SKIP under «div#modal.modal.kpcompactm» (the Sắc stat panel left open by a restore) → Fold home 41 PASS, just over the floor. Same restore-left-a-panel family as N3; same fix family (close every left panel / popover in the soft restore).
+- N2 (✕ «Lui» on the Giáo tập ma ma ring) not reached in any re-check run — still open, unreproduced.
+- Job 3 table commits: none on e5671907 (one commit only); nothing else reviewed.
+Gain vs risk of PASS now: the H1 gate hole is closed and M1–M6 all bite; the open notes only cost time / coverage (SKIPs, one re-crawl) and never turn a fault into a PASS (floor + sure rows). Gain is bigger.
+
+## HANDOVER — BIG REVIEWER #20, 27/11 (re-check)
+- Verdict: PASS robot-realtap-live e5671907. Follow-ups for the fixer: N3 popover key (SKIP 26–29 iPad), G2b first-pass re-lay (net catches it), restore leaves kpcompactm / kpop open, N2 unreproduced.
+- Recipe: /home/user/wt/r20-out/run.sh (name game.html [args]); tree /home/user/wt/r20 (index-m1..m6.html).
