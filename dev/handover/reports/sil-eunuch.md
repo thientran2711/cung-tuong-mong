@@ -59,3 +59,5 @@ Rebased review/sil-eunuch onto origin/main 98c77517 (index.html/sw.js conflicts 
 - branch a366a2b8: `QUICKCHECK FAIL · CORE GATES FAIL · G4 80-dialog-fixed · 850 s` — «FAIL 1180x820/755x1000 frame size XL: left figure same size + position in 5 dialogs» (figure heights 770 vs 767 on 3-dai-ket-cuc). open OK, **old save ok**, perf NOT a failure (tabMs runs 574/567/452, no perf FAIL).
 - origin/main 98c77517: `QUICKCHECK FAIL · CORE GATES FAIL · G4 80-dialog-fixed · 874 s` with the SAME FAIL line and the SAME numbers (770/767 px, same x/y/w/h) → **PRE-EXISTING on main, not caused by this branch** (dialog figures, not stage silhouettes; the gate that failed on my first run, 95-next-dead, passed this time → that one and the perf tabMs blip were load noise/flaky).
 - sil-role.js PASS on a366a2b8 (Fold).
+
+**Branch note:** the rebased commit is on **review/sil-eunuch-r2 @a366a2b8** (origin/main 98c77517 + one commit). The old review/sil-eunuch @452dda71 is SUPERSEDED (stale, behind main).
