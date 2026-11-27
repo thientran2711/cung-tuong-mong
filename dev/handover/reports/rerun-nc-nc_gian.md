@@ -17,6 +17,7 @@ Ruling (Foreman D, 26/11 03:18Z): the 5 finished lives stay VALID, no replays �
 | nc-nc_gian-speed-1 | Lãnh cung — Phát điên trong lãnh cung | 31 | 1780 | yes | 54fa0112+F10 hooks (16 resumes), BUILD fa8da73cecdc; crawl b1649+ (kitOptUnify) |
 | nc-nc_gian-speed-2 | Hồng nhan bạc mệnh (dysentery) | 24 | 726 | yes | 54fa0112+F10 hooks, BUILD b7dcbbd06e03 |
 | nc-nc_gian-lazy-1n (quiet 7013) | Hồng nhan bạc mệnh (illness) | 25 | 1010 | yes (VALID, 11th real life) | 54fa0112+F10 hooks, 1 resume (browser closed b784), BUILD 1b5137935266 (first seen 21:17Z 26/11) |
+| nc-nc_gian-lazy-2 (quiet 3891118351) | Hồng nhan bạc mệnh (illness) | 32 | 2173 | yes (VALID, 12th real life) | 54fa0112+F10 hooks, 3 resumes, BUILD cc68dcfd2b1b |
 | nc-nc_gian-lazy-1d (quiet 7003) | Ban hoa (failed selection) | 20 | 1 | VALID-EXIT, no data | cc68dcfd2b1b |
 | nc-nc_gian-lazy-1e (quiet 7004) | Công chúa ở lại cố quốc («Hòa ước» choice «Xin để vương muội đi thay») | 19 | 122 | VALID-EXIT «story ending (stay home)» per Foreman ruling 19:19Z; no life data | |
 | nc-nc_gian-lazy-1f (quiet 7005) | Ban hoa (failed selection) | 20 | 1 | VALID-EXIT, no data | cc68dcfd2b1b |
@@ -39,3 +40,5 @@ Spares 19:50-21:10Z: lazy-1h (quiet 7007) Ban hoa b1 = failed selection; lazy-1i
 
 
 Update 23:55Z 26/11: lazy-1k, 1l, 1m (quiet 7010-7012) failed «Lễ ra mắt» at b1 on cc68dcfd2b1b = VALID-EXIT, no data. lazy-1n passed selection and Hòa ước, died at 25 (valid). Quiet selection-fail count on cc68dcfd2b1b: 1b, 1c, 1d, 1f, 1h, 1k, 1l, 1m fail + 1i/1e stay-home story endings; passes 1e, lazy-2, 1g, 1n. lazy-2 (b2110 y15) and lazy-1g (b1475 y11) still running: 11 valid real lives so far, 13th pending.
+
+Update 00:10Z 27/11: lazy-2 finished (valid death at 32, b2173). 12 valid real lives; lazy-1g (b1525, y11) is the 13th and still running.
