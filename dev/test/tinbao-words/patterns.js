@@ -12,7 +12,7 @@ const P=[
  ['bareNoun', /(?:^|[.!?] )Ở [^.,:;]{2,40} (?:ngày hội|có chuyện|nghe lỏm chuyện|tiếng khóc ở [^.]+)\./u, 'verbless fragment «Ở <nơi> <danh từ>.»'],
  ['eqStay',  /Ở lại = /,                                 '«Ở lại = như lẻn vào»'],
  ['dupHead', /(\b[\p{Lu}][\p{Ll}]+(?: [\p{Lu}][\p{Ll}]+)+ [\p{Ll}][^.:]{4,40}?)[.:]?\s+\1/u, 'the same head said twice'],
- ['tonFree', /TỐN\s*không[\s\S]*ĐƯỢC\s*không/i,          'free choice card «TỐN không / ĐƯỢC không»'],
+ /* 'tonFree' retired: owner OD 26/11 ~17:55Z KEEP ALL rows — «Tốn: không / Được: không» on a free choice card is now the rule, not a fault */
 ];
 /* the same full titled name (title + 2-3 word name) printed 2+ times in one line */
 const TITLES='Cung nữ thân tín(?: (?:thô sử|tam đẳng|nhị đẳng|nhất đẳng))?|Cung nữ (?:thô sử|tam đẳng|nhị đẳng|nhất đẳng)|Chưởng sự cô cô|Hoàng hậu|Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Thái giám|Tiểu thái giám';
