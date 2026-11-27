@@ -158,8 +158,11 @@ document.addEventListener("click",e=>{const b=e.target.closest("#tomap");if(!b||
 /* phone landscape (844x390): no room for a readable courtyard + rows; the picture would be a cropped strip with hidden hotspots, so the hall rows stand alone */
 
 `;document.head.appendChild(st)})();
-/* phone shell (kitPhoneShell §31.7): arriving in a hall shows the ROOM, not the act page */
+/* phone shell (kitPhoneShell §31.7): arriving in a hall shows the ROOM, not the act page.
+   review/arrive-walk-fix (RV-171 §5): switch the VIEW directly (k3Home, the same view call k3RoomTap / jtut goRoom use) — never click the
+   top-bar #k3room: that is «Về phòng» = k3RoomTap → homeGo(), a real walk home that spends khắc whenever she is away (she arrived, then was
+   walked straight back). An auto path never clicks a button with game side effects (dev/measure/auto-click-scan.js). */
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(window.__kpmArrive){const h=kpmHall();
-  if(h&&tab==="act"){window.__kpmArrive=0;window.__k3quiet=1;setTimeout(()=>{try{const rb=document.getElementById("k3room");if(rb&&!rb.hidden)rb.click()}catch(e){}setTimeout(()=>{window.__k3quiet=0},450)},0)}else if(!Q.length&&tab!=="go")window.__kpmArrive=0}}catch(e){}return r}})();
+  if(h&&tab==="act"){window.__kpmArrive=0;window.__k3quiet=1;setTimeout(()=>{try{if(!(window.COOPW&&COOPW.ctx)&&S&&!S.dead&&typeof window.k3Home==="function")window.k3Home()}catch(e){console.error("kpmArrive",e)}setTimeout(()=>{window.__k3quiet=0},450)},0)}else if(!Q.length&&tab!=="go")window.__kpmArrive=0}}catch(e){}return r}})();
 /* kit sample page (KIT §76): the palace detail map of palace 0, opened empty (needs only the game state) */
 try{if(window.KIT_SAMPLES)KIT_SAMPLES.push({id:"§76",title:"kitPalaceMap",html:()=>kitPalaceMap({slot:0,k:null})})}catch(e){}
