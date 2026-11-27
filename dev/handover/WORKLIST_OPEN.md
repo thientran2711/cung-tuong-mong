@@ -51,5 +51,5 @@ State: LIVE = on main · partly = some pieces LIVE · open.
 | 42 | Whole-game 3-tier Nhẹ/Vừa/Nặng audit + convert (law 2 rewritten, OD 00:46–00:50Z) | Foreman E | open: audit running |
 | 43 | Witness 3 tiers (Đe dọa/Mua chuộc/Thủ tiêu), Xóa dấu vết, exposure line, Đức vs Danh (OD 00:13–00:57Z) | PUNISH-TIER-5 | open: real-proof a2902d43 RV PASS |
 | 44 | «Ô lưu · Lui» close fault on LIVE (G4 90) | MAP-R9 | open |
-| 45 | «PHÚC DUYÊN» 1–2 cards once per MONTH (thường/hiếm/cực hiếm, expire at month end; HỘ MỆNH crisis option + THỜI CƠ one-shot boost; real NPCs; not items; NPCs same) (OD ~01:50Z → canon overwrite ~02:00Z) | Foreman E | open: plan first; build after ACT-MOVE + DOOR-ONETAP LIVE |
+| 45 | «PHÚC DUYÊN» = her own deck of EARNED cards (ban thưởng / bought / favours), monthly shuffle draw 2 equal odds, used = spent, unused back to deck; privilege buttons become cards only if robot ablation < ~5 % change on key outcomes (OD ~01:50Z → ~02:00Z → overwrite ~02:10Z) | Foreman E | open: ablation table first → show sếp |
 - LIVE since 24/11 not above: ACT-MERGE b881686f, ctp 639455a2, os 504d2e6a (one-sieve, ob-verdict, kem-row = OB 19/20/38), oan 53319e6f (OB 37), stat-pace 4cfcda61 (OB 15), audio-ipad 4fae357a, tinbao 50f8a13b, tainghe e4314b74, place-rules 9812646a.
