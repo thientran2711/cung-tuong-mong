@@ -35,3 +35,36 @@ The work itself is careful and mostly true to code (law 3 gain for «Phạt vô 
 Note: LIVE main moved to **f28d28b9** (UI bundle lc29-ui) while this review ran; my merge/quickcheck numbers are against 00dca386 — the worker's rebase and reruns must target the newest LIVE main.
 
 **FAIL 8b6eadb9.** Fix items 1–6 on review/e-gain3c rebased onto LIVE main (with the E-GAIN3b re-review result), rerun door-loss + door-row-hint (Fold + iPad, MUTANT exits) + npc-purpose-scan + one-core-bind + gain-empty + parity on the REBASED build, and report the before/after rows for items 2, 3, 5.
+
+# RE-REVIEW (27/11 ~15:30Z) — review/e-gain3-live **4db15919** (code+build 26308d3f; = e-gain3c 8b6eadb9 + E-GAIN3-LIVE / -2 fixes, merged LIVE d9ca7892)
+
+PRIORITY #1 CHECK: report dev/handover/reports/e-gain3-live.md §B/§D | main LIVE d9ca7892 at fetch (ancestor of 4db15919), now **772bee4f** (lc31-goal: goal-links + coop-clear) | review/e-gain3-live 4db15919 | claims E-GAIN3-LIVE-2 session_01DgYSWnf2mstVedSHmT1NNq.
+KIT CHECK: reuses kaRows/kcls, KP12 writer class, kitHint (read-only), DOOR.rowHint/doorHint, jone tier rows (LIVE), kitPick plaque (LIVE); no kit internal or CSS in the fix commits (cbbaf253, 224e8524, a3af1390, 97288398, e595fb51). kit-std-scan not rerun (no UI part added).
+
+**VERDICT: PASS 4db15919** (ancestor = LIVE d9ca7892). Land note: onto today's LIVE 772bee4f the sources merge clean; only the built files index.html + sw.js conflict → rebuild on land (my local merge + assemble: npc-purpose PASS, one-core-bind 0 mismatches, act-literal 0, door-loss Fold 476 ways 0 bad).
+
+| my FAIL | status | evidence |
+|---|---|---|
+| 1 law 1 NPC phat cheaper | **CLOSED** | ONE `svPunishNoCause(m,s)` (j24) for her judgeServ and NPC servDo «phat» (non-spy). In-page (hau): NPC «Phạt … vô cớ»: lòng −24 (−25, the LIVE scold reply +1), other servant −5, Đức −3, grudge, dread · her: −25 / −5 / −3 / grudge / dread. Dead j10 staffHTML «Phạt» removed. |
+| 2 Tặng quà hub number | **CLOSED** | `giftRel()` one reader (giveTo, jgift rows, hub; `BAL.eff.j8.giftRelPlus`=3). In-page (cao, 4 rivals): hub +21/+30/+20/+13 = best gift row = giveTo relAdd input. (The regard then rises less — affAdd damping, game-wide, not this unit.) |
+| 3 banphe typed 15 | **CLOSED** | j78 3 texts print `BAL.eff.j78.bacBanphe*n`; `\$\{15\*` in j78 = 0. |
+| 4 npc-purpose-scan | **CLOSED** | PASS (419 rows). |
+| 5 door-loss on LIVE (jone rows) | **CLOSED** | jone tier rows: base hint first, doorHint when it says nothing gained. door-loss Fold **694 ways 0 bad**, iPad **666 ways 0 bad**, exit 0; MUTANT=1 exit 1, MUTANT=2 exit 1 (Phạt vô cớ LOSS-ONLY). |
+| 6 doorHint a.hint bypass | **CLOSED** | short-circuit removed; door-row-hint Fold **8592 rows 0 bad**, iPad **7434 rows 0 bad**, exit 0; MUTANT=1 exit 1 (SELF case + rows). |
+| inherited one-core-bind G1 | **CLOSED** | `jointWin()` (j10) + `searchEv()` (j14) one reader each → 1617 prints, 0 mismatches. |
+| inherited «Thưởng phạt» garble | **GONE** | LIVE's plaque now shows «Thưởng phạt · Tốn 1 khắc · 10 bạc» (Fold + iPad shots looked at); no way names in Được/Kèm, no cut name. |
+
+New this round, checked: «Hỏi chuyện › Mặc kệ» (jagent agReact) `fx:{suc:BAL.cv.rest}` (3) — applied by chooseM `apply(c.fx)`, same as the j4/j7/j95b «Mặc kệ» family; act-audit sees no hidden/missing effect.
+
+Regression (4db15919 build, assemble.py, file://):
+| test | result |
+|---|---|
+| gain-empty 6 states Fold / iPad | **1828 cards, 1 distinct «Lập phe cùng ai · 1 ›» [cao:fac]**, exit 1 / **1866 cards, 0 empty**, exit 0. The Fold one = LIVE's jkring.js:374 ring opener (file identical to main), KIT REQUEST #11 → LIVE-own, not this unit (my LIVE cao run did not reach the fac surface; code identity is the proof). |
+| act-audit cao | done errs=0, exit 0 |
+| egain3c-parity (old = LIVE d9ca7892 build) | 64 same, 0 different |
+| oldsave-r1 (LIVE d9ca7892 → head) | 16 / 16 |
+| act-literal-scan · npc-purpose · one-core-bind | 0 · PASS 419 · 0 mismatches |
+| q-softlock (worker: pre-existing) | **verified**: LIVE d9ca7892 own index.html, local http server: Q-SOFTLOCK FAIL (1) (iPad «view parked by a tab change»); head FAIL (2) same check (Fold+iPad) — same flaky check on LIVE → pre-existing. In the quickcheck run below it PASSED. |
+| **quickcheck 4db15919 vs LIVE d9ca7892** | **QUICKCHECK PASS, exit 0** · CORE GATES PASS (one-core-guard · rules-one-source · kit-conform · coop-one-world · 14 hooks) · TIME-SPILL PASS · open 2593 ms 0 errors · old save loads + plays a buổi · perf median new/live render 330/285, tab 504/574, buổi 2192/1814 ms, tasks>200 ms 40/33 (within gate) |
+
+Notes (not blocking): the stage plaque for the «Thưởng phạt» door shows only Tốn (LIVE kitPick design); the worker's LIVE-own notes (a)–(c) in the report §D stand for Foreman E. Shots in scratch only, deleted; no CDN upload.
