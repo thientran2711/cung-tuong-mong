@@ -137,6 +137,9 @@ function rpSync(p,quiet){if(!canRun(p))return [];snap(p);const D=p.dh||(p.dh={})
  for(const id in RP){const f=RULE[id];if(!f)continue;let r;try{r=f(p,rT(id))}catch(e){W[id]=held(p,id);continue}W[id]=held(p,id)?!!r[1]:!!r[0]&&sOK}
  for(const f in RPF){const L=RPF[f];let top=-1;L.forEach((id,j)=>{if(W[id])top=j});L.forEach((id,j)=>{if(j!==top)W[id]=false})}
  for(const id in RPX)if(RPF[RPX[id]].some(x=>W[x]))W[id]=false;
+ /* at most BAL.dh.rp.per NEW names a sync (rec (5): never several titles in one buổi; the others come at the next syncs if they still hold).
+    A rung that replaces a held rung of its own ladder is not a new name. */
+ {let n=0;for(const id in RP){if(!W[id]||held(p,id))continue;const F=RPOF[id];if(F&&RPF[F[0]].some(x=>x!==id&&held(p,x)))continue;if(++n>RB().per)W[id]=false}}
  for(const id in RP){if(!(id in W))continue;const k=RKEY(id),h=held(p,id);
   if(!h&&W[id]){D[k]={n:1,i:0,at:[when()]};const H=rep(p).h[id]||(rep(p).h[id]={g:0});H.g++;H.at=mi();got.push(id)}
   else if(h&&!W[id]){delete D[k];const H=rep(p).h[id]||(rep(p).h[id]={g:1});H.out=mi();

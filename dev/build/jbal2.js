@@ -815,7 +815,7 @@ BAL.dh={n0:[2,6,12],step:2,artLv:[4,5],q:{wk:2},note:{per:1},cond:{han:{rank:1},
        mưu truongthiet→dophu→thambat, con phuctinh→maubang, nhẫn nhannhuc→niebann; only the highest rung is held; bar AND effect rise by rung
        (share kinds: smaller d = bigger share; muu / kin: bigger |v| = bigger). grow (cankiem / tham) = bạc she gathered since that first watched
        month (rep.b0), so a dowry she entered with is not her own «bạc chất đầy». */
-BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,seen:8,deg:[4,8]/* additive effect size words: ≤ deg[0] «hơn một chút», ≤ deg[1] «hơn», else «hơn hẳn» */,
+BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,seen:8,per:1/* new reputation names a sync (her: each turn end) */,deg:[4,8]/* additive effect size words: ≤ deg[0] «hơn một chút», ≤ deg[1] «hơn», else «hơn hẳn» */,
  T:{hien:{duc:80,danh:70,offDuc:70,offDanh:60,clean:12,g:["tren",6],l:["danhLoss",2]},
   quocsac:{sac:85,off:80,g:["sung",12],l:["muu",-4]},
   vinhnhu:{tai:80,off:70,g:["thi",2],l:["suc",-1]},

@@ -124,7 +124,8 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   {const kp=window.kitPanel;let n=0,T=[];window.kitPanel=kitPanel=function(sp){n++;T.push(sp&&sp.title);return kp.apply(this,arguments)};
    try{const turn=S.turn;for(const x of rivals)if(x){x.sac=Math.min(x.sac||0,50);x.sung=Math.min(x.sung||0,50)}
     clr(S);S.dhNB=null;delete S.dhPend;Q.length=0;S.duc=90;S.danh=85;S.bac=400;rpSync(S);
-    ck(has(S,'hien')&&has(S,'cankiem')&&n===1&&(S.dhPend||[]).length===1&&/^rp:/.test(S.dhPend[0]),`G1 two reputation titles in one buổi → ONE panel, the other waits (${n} panels, pend ${JSON.stringify(S.dhPend)})`);
+    ck(has(S,'hien')&&!has(S,'cankiem')&&n===1&&!(S.dhPend||[]).length,`G8 two names earned at once → ONE new name a sync (BAL.dh.rp.per), its panel shows (${n})`);
+    rpSync(S);ck(has(S,'cankiem')&&n===1&&(S.dhPend||[]).length===1&&S.dhPend[0]==='rp:cankiem',`G1 the second name comes next sync; same buổi → its panel waits (${n} panels, pend ${JSON.stringify(S.dhPend)})`);
     const nh=n;S.hieu=null;S.dhConf=null;let h='';try{h=dhHieuGrant(S,'month')}catch(e){F.push('G2 dhHieuGrant threw '+e.message)}
     ck(!!h&&n===nh&&(S.dhPend||[]).includes('hieu:month'),`G2 «Sắc phong ban hiệu» in the same buổi waits too (${n-nh} panels now)`);
     S.turn=turn+1;Q.length=0;n=0;T=[];{const k=S.dhPend.shift();window.dhNoteGate(k)}ck(n===1&&/Tiếng thơm/.test(T[0]),`G1 next buổi: the waiting reputation panel comes (${T.join(',')})`);
