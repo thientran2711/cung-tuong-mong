@@ -10,7 +10,8 @@
    Every other pcard (Việc nhờ, Kỳ tuyển tú, Giao tình, dialogs) keeps LIVE §6.4 unchanged. Built INSIDE the card after kitPcFix/kitPcKeyFit (no observer). */
 const KPP={ws:46,wsMin:30,fSteps:[1,.96,.92,.89,.86],cur:"info",tabs:[["info","Thông tin"],["rel","Giao tình"]],on:["court","rv","men","staff","kid","kvo","kin","hon","qt"]};
 /* who is this card about: pcard stamps the face key (pv/pEmp/pTH/pMaid f.w) as data-kppw; men / staff / kids fall back to the name */
-function kppWho(pc){try{const w=(pc.dataset.kppw||"").split(":"),k=w[0];
+function kppWho(pc){try{if(pc.dataset.amw&&typeof window.amWhoOf==="function"){const W=window.amWhoOf(pc.dataset.amw);if(W)return W}/* ACT-MOVE stamps staff / kids / lãnh cung cards */
+ const w=(pc.dataset.kppw||"").split(":"),k=w[0];
  if(k==="r"){const v=rivals.find(x=>String(x.id)===w[1]);return v?{v,kind:"rv"}:null}
  if(k==="e")return{v:S.emp,kind:"emp"};if(k==="t")return{v:S.thO||{name:"Thái hậu"},kind:"th"};if(k==="m")return{v:S.maid,kind:"maid"};
  const nm=((pc.querySelector(":scope>.pcl>.pcname")||{}).textContent||"").trim();let v=typeof kitPersonByName==="function"?kitPersonByName(nm):null;

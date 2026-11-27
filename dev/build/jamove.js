@@ -126,7 +126,7 @@ window.amCardBtns=amCardBtns;
 (function(){if(typeof k61AskBtn!=="function")return;const a0=k61AskBtn;k61AskBtn=function(){return AMV.inCard?"":a0.apply(this,arguments)}})();
 (function(){if(typeof pcard!=="function")return;const P0=pcard;pcard=function(o){if(AMV.cap&&o){const h=P0.apply(this,arguments);try{AMV.cap.set(txt(o.name),h)}catch(e){}return h}
  if(!AMV.card||!o||o.close)return P0.apply(this,arguments);let v=null;
- try{const b2=amCard2(o);if(b2){const j0=window.__j70off;AMV.inCard=1;window.__j70off=1;try{return P0.apply(this,[b2])}finally{AMV.inCard=0;window.__j70off=j0}}}catch(e){console.error("amove card2",e)}
+ try{AMV.lastW=null;const b2=amCard2(o);if(b2){const j0=window.__j70off;AMV.inCard=1;window.__j70off=1;try{return amStamp(P0.apply(this,[b2]),AMV.lastW)}finally{AMV.inCard=0;window.__j70off=j0}}}catch(e){console.error("amove card2",e)}
  try{if(o.tabKey==="rival"&&!o.status){v=rivals.find(x=>x&&x.name===o.name)||null;if(v){o=Object.assign({},o,{groups:[["",amCardBtns(v)]],note:sameHouse(S,v)?o.note:""})}}
   else if(o.rank==="Hoàng thượng"&&Array.isArray(o.groups)&&o.groups.some(g=>g&&g[0]==="Việc hôm nay")){v="emp";o=Object.assign({},o,{groups:[["",amCardBtns("emp")]].concat(o.groups.filter(g=>g&&g[0]==="Điều ngài thích"))})}
   else if(/^Thái hậu/.test(o.rank||"")&&Array.isArray(o.groups)&&o.groups.some(g=>g&&g[0]==="Việc hôm nay")){v="th";o=Object.assign({},o,{groups:[["",amCardBtns("th")]]})}}catch(e){console.error("amove card",e)}
@@ -194,11 +194,15 @@ function amCardPos(v,kind){try{
  const w=typeof rivals!=="undefined"?rivals.find(x=>x&&(x.staff||[]).includes(v)):null;
  if(w){const vis=visitBtn(w);return["",vis?amRetitle(vis,"Ghé cung"):{why:!w.alive?"chủ nhân đã mất":w.out?"chủ nhân ở lãnh cung":sameHouse(S,w)?"cùng cung với ngươi":S.place===palaceOf(w)?`đang ở cung ${w.name}`:"chưa đến được lúc này"}]}
  return null}catch(e){console.error("amCardPos",e);return null}}
+/* ACT-MOVE-5: the card names its person for the kit panel (jkpp kppWho reads data-amw → amWhoOf): unnamed «???» servants and kids have no name to look up */
+const AMW=new Map();let amwN=0;
+function amStamp(h,W){if(!W||typeof h!=="string")return h;if(AMW.size>400)AMW.clear();const id=String(++amwN);AMW.set(id,W);return h.replace(/<div class="pc(?=[ "])[^"]*"/,m=>`${m} data-amw="${id}"`)}
+window.amWhoOf=id=>AMW.get(String(id))||null;
 /* the card (pcard wrapper): Cung nhân / Hoàng tự / lãnh cung → groups = the two buttons only */
 function amCard2(o){if(!o||!Array.isArray(o.groups))return null;let W=null;
  if(AMV.tab==="kid"&&AMV.who)W={v:AMV.who,kind:"p"};else if(AMV.tab==="staff")W=amWho(o.name);
  else if(o.tabKey==="rival"&&o.status==="Ở lãnh cung"){const v=rivals.find(x=>x&&x.name===o.name);if(v)W={v,kind:"rv"}}
- if(!W)return null;const P=amCardPos(W.v,W.kind)||["",""];const L=[];
+ if(!W)return null;AMV.lastW=W;const P=amCardPos(W.v,W.kind)||["",""];const L=[];
  P.forEach((h,j)=>{const t=j?"Ghé cung":"Tìm gặp";if(!h)return;L.push(typeof h==="object"?amOff(t,h.why||""):h)});
  const lines=Array.isArray(o.lines)?o.lines.map(l=>String(l||"").replace(/\s*<button[^>]*data-runner[^>]*>[\s\S]*?<\/button>/g,"")):o.lines;/* «Đổi ›» (người chạy việc) → the maid's pop-up */
  const note=typeof o.note==="string"?o.note.replace(/\s*<button[^>]*data-runner[^>]*>[\s\S]*?<\/button>/g,""):o.note;
