@@ -631,3 +631,4 @@ item-detail blank space (owner bug, kit frame family) | KK56 branch | session_01
 lãnh cung pale + stage audit | review/owner-ui-a | session_01Rc5AsLZTE9nJRfFdxEACQL | RUNNING | 2026-11-27T05:45Z (OWNER-UI-B, MAIN 172; OWNER-UI-A rolled)
 E-GAIN3 | review/e-gain3 | session_01DgYSWnjWesPpZdFrpLFxAq | READY 23b44074 → rv E-GAIN3-RV session_01DgYSWkT5dKPzyaHfhL14Dx | 27/11 06:14Z (Foreman E child2)
 E-GAIN3b (successor: Khiêu khích law-3 gain/merge, rolled-card Thành wording, jointScheme tamco → BAL; kit items → KIT_REQUESTS) | review/e-gain3b (on e-gain3 23b44074) | session_01DgYSWoLuNzXKnrryMfczWF | RUNNING | 27/11 06:14Z (Foreman E child2)
+lãnh cung iPad card + videos | review/owner-ui-a | session_01Rc5AsLoQNjZmHi3rWPc992 | RUNNING | 2026-11-27T06:12Z (OWNER-UI-C, MAIN 172)
