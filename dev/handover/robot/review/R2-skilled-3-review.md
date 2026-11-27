@@ -1,0 +1,9 @@
+# Review R2-skilled-3 — E-S3 rerun (thd/thd_hoc, Fold 755x1000, bot sens≈skilled, seed 4042475087)
+Harness real-tap 97e55a457 pin=0 → f65d019b (8 crash resumes); builds ef5d32d4ff1e → 9ab008eb74f9 → a7f223b6780d → fdc4fec0cd62 → 86170222adab (audit MIXED-BUILD; flag per Foreman E ruling: stays VALID «mixed build (fix resume)»); 11 472 real taps in the last segments; jsClicks 0; ~35 h real (27/11 05:28Z → 17:10Z, plus the resumes).
+## 1 Summary
+skilled · thd_hoc (Kiều Hải Lan) · 21 years, age 40 · max rank 1 (year 5, back to 0 at year 6) · ending «Lãnh cung — Tuổi xuân qua đi» (game-imposed at age 40; VALID, robot-audit MIXED-BUILD/VALID) · 3245 buổi · bugs 18 (8 crashes, 6 game, 2 dead, 2 harness).
+## 2 Scores
+a 6/10 · b 2/10 (21 flat years) · c Buttons & UI 4/10 (two Fold gift pickers with the confirm off-screen; board phase bug; crashes) · d Story 5/10 · e Characters 5/10 · f Choices & fairness 3/10 (unexplained demotion; no lever; collected 1484 items with nothing to use them on) · g Rewards 5/10 (items accumulate, no sink) · h Mini-games 6/10 (thêu 10/10 earned) · i Visuals 9/10 · j Co-op n/a.
+## 3 Loved: the full wardrobe/items economy; art. Hated: demotion without reason; Fold pickers; flat 15 years. Again: yes with a way up.
+## 4 BUGS: 1 GAME/KIT Fold item-pick grids with confirm off-screen («Biếu quà làm lành», «Cài đồ vào rương») — still present on LIVE a7f223b6780d–86170222adab (greedy-5 was parked on it). 2 GAME KG82.phase stays «play» after a round. 3 GAME SAVE WALL (QuotaExceededError ≈5.4 M chars from buổi ~2450; SAVE STALE). 4 GAME SAVE REWIND ×1. 5 PERF 8 tab crashes. 6 DESIGN demotion reason hidden; items with no sink.
+## 5 Suggestions: scroll/anchor the confirm of the item picker on 755x1000; save size cap; show reasons for rank loss; give the 1484-item bag a sink (gift/sell).

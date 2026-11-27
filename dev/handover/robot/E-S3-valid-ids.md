@@ -14,3 +14,4 @@ UPDATE 27/11 08:55Z: + R2-skilled-2 3869935016 VALID (mixed build; illness death
 UPDATE 27/11 09:35Z: + R2-skilled-5 1195490457 VALID (mixed build, game-imposed Xuất gia làm ni cô y15) → E-S3 own valid = 30 (28 + scholar-4b confirmed + skilled-5; greedy-5 1191337177 parked).
 UPDATE 27/11 15:55Z: + R2-rebel-5 2633677533 VALID (mixed build; Lãnh cung y23, 3792 buổi; save wall evidence) → E-S3 own valid = 31 (30 + rebel-5).
 UPDATE 27/11 16:55Z: + R2-speed-3 194501652 VALID (mixed build; Lãnh cung y23) → E-S3 own valid = 32. Remaining: skilled-3 4042475087 running (Fold, y18+), greedy-5 1191337177 parked.
+UPDATE 27/11 17:20Z: + R2-skilled-3 4042475087 VALID (mixed build; Lãnh cung y21) → E-S3 own valid = 33. Only greedy-5 1191337177 (Fold, y8) remains (parked on the gift picker; resumed 17:2xZ to test).
