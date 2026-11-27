@@ -7,7 +7,7 @@
    D. LABELS + TOASTS over an open dialog: a cell-less stat label (Hoàng hậu → ta), a top-bar cell label (Đức), the line toast (kitLineToast), and card→cell
       FLIGHTS fired from the dialog's own card (Danh, Sủng): none covers the dialog (KIT §57.1b + §57.1c).
    E. PAINTED BURSTS over an open dialog (KIT §57.1c, MAIN 177 ruling): every glow / spark sprite (not falling petals) drawn while the dialog is open —
-      the ending's own entrance burst + bursts aimed at the dialog title — keeps its core off the dialog box (or inside a dialog picture). */
+      the ending's own entrance burst + bursts aimed at the dialog title — keeps its core off the dialog box (or inside a dialog picture); falling petals / screen-wide kinds too (MAIN 178 ruling). */
 const {chromium}=require('playwright');const fs=require('fs');
 const URL=process.argv[2];const OUT=process.argv[3]||'';if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const fails=[];const note=(ok,m)=>{if(!ok)fails.push(m)};
@@ -40,7 +40,7 @@ const fails=[];const note=(ok,m)=>{if(!ok)fails.push(m)};
   await p.evaluate(()=>{for(let i=0;i<20&&window.kitRingItem&&kitRingItem.cur;i++){try{kitRingItem.close()}catch(e){break}}document.querySelectorAll('#modal.kri-hide').forEach(m=>m.classList.remove('kri-hide'));Q.length=0;geAsk();showModal()});await settle();await p.evaluate(()=>chooseM(0));await settle();
   await p.evaluate(()=>{window.__fx=[];window.__fxN=0;const sp0=window.kfkSp;if(sp0&&!sp0.__w){window.kfkSp=kfkSp=function(k){const s=sp0.apply(this,arguments);if(s){s.__k=k;window.__fxN++}return s};kfkSp.__w=1}
    window.__fxT=setInterval(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');if(!d||!window.KFX||!KFX.parts)return;const dr=d.getBoundingClientRect();const pics=[...d.querySelectorAll('.k3ev,.k3mpic,.kdlgart,.ksart,.kszfs,.md,.pcp')].map(e=>e.getBoundingClientRect());
-    for(const s of KFX.parts){if(!s||!s.visible||!s.__k||s.alpha<.15||/^(petal-|osmanthus|leaf|snow|ash|coin)/.test(s.__k))continue;const hw=Math.abs(s.width)*.25,hh=Math.abs(s.height)*.25;const c={left:s.x-hw,right:s.x+hw,top:s.y-hh,bottom:s.y+hh};
+    for(const s of KFX.parts){if(!s||!s.visible||!s.__k||s.alpha<.15||(s.v&&s.v.clip))continue;/* petals / weather too (MAIN 178 ruling); stage weather (v.clip) has its own keep-out */const hw=Math.abs(s.width)*.25,hh=Math.abs(s.height)*.25;const c={left:s.x-hw,right:s.x+hw,top:s.y-hh,bottom:s.y+hh};
      const hit=c.left<dr.right&&c.right>dr.left&&c.top<dr.bottom&&c.bottom>dr.top&&!pics.some(q=>__inside(c,q,1));window.__fx.push({k:s.__k,hit,r:[c.left,c.top,c.right-c.left,c.bottom-c.top].map(Math.round)})}},40)});
   await p.evaluate(()=>{window.__lab=[];window.__labT=setInterval(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');if(!d)return;const dr=d.getBoundingClientRect();
     document.querySelectorAll('.ksfl,#ktbtoast,#kupdline').forEach(e=>{const r=e.getBoundingClientRect();if(!r.width||getComputedStyle(e).visibility==='hidden'||+getComputedStyle(e).opacity<.05)return;const hit=r.left<dr.right&&r.right>dr.left&&r.top<dr.bottom&&r.bottom>dr.top;window.__lab.push({t:e.textContent.slice(0,40),hit,r:[r.x,r.y,r.width,r.height].map(Math.round)})});
