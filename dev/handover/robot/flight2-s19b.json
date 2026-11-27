@@ -1,0 +1,5746 @@
+{
+ "job": {
+  "id": "flight2-s19b",
+  "origin": null,
+  "road": null,
+  "pick": null,
+  "bot": "greedy",
+  "seed": 2026112551,
+  "dev": "ipad",
+  "url": "http://127.0.0.1:8972/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "f65d019b",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [
+   {
+    "at": 2004,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Thứ muội giành mối"
+   },
+   {
+    "at": 3753,
+    "lvl": 3,
+    "layer": ".dlg",
+    "title": "Bài vị đổ"
+   }
+  ],
+  "slice": null,
+  "mgBackN": 1,
+  "mgBackQuitN": 0,
+  "builds": [
+   {
+    "s": "cb090860+",
+    "b": "128ec6b7d5fa",
+    "where": "start"
+   }
+  ],
+  "build0": {
+   "s": "cb090860+",
+   "b": "128ec6b7d5fa",
+   "t": "2026-11-27T08:01Z",
+   "at": "2026-11-27T09:41:28.944Z"
+  },
+  "pinUrl": "http://127.0.0.1:8877/",
+  "build": {
+   "s": "cb090860+",
+   "b": "128ec6b7d5fa",
+   "t": "2026-11-27T08:01Z"
+  },
+  "areaTaps": 100,
+  "consoleErrN": 13,
+  "ident": {
+   "name": "Cao Vân Yên",
+   "org": "Con gái Đại tướng quân",
+   "born": -19,
+   "at": 1
+  },
+  "dlgScroll": 10,
+  "scrolls": 10,
+  "dlgClose": 88,
+  "skipLayerTaps": 3,
+  "infoTaps": 67,
+  "cardWay": 5,
+  "backdropTaps": 6,
+  "deadEndUnstick": 2,
+  "mgQuickSkipped": 1,
+  "mgReady": 1,
+  "mgMiss": 9,
+  "boards": [
+   {
+    "at": 4751,
+    "buoi": 278,
+    "kind": "mua",
+    "layer": "#kg82",
+    "moves": 24,
+    "area": 0,
+    "s": 26,
+    "res": "10/10 raw 10.00",
+    "raw": 10
+   }
+  ],
+  "boardN": 1,
+  "mgPeekTaps": 24,
+  "boardTaps": 24,
+  "mgBackWhy": [
+   {
+    "at": 4751,
+    "buoi": 278,
+    "ph": "result",
+    "res": true,
+    "long": false,
+    "btns": [
+     "Quay lại"
+    ]
+   }
+  ],
+  "taps": 1582
+ },
+ "life": {
+  "id": "Nữ phu tử",
+  "type": "death",
+  "fate": "Nữ phu tử",
+  "death": true,
+  "age": 20,
+  "year": 3,
+  "rank": 0,
+  "card": [
+   "Gả cho con trai Thượng thư bộ Hộ",
+   "Xin ở vậy, mở lớp dạy chữ cho con gái",
+   "Cắt tóc đi tu"
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   ".dlg «Phúc tuyển» «Chọn lá này»",
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+   "AREA 863,425",
+   "BOARD mua 24 moves 10/10 raw 10.00",
+   "#kg82 «Quay lại»",
+   ".kpod «Tiếp»",
+   ".dlg «Tỉnh thân» «Lui»",
+   ".dlg «Điện tuyển» «Đáp lời khiêm nhườngTùy duyênTốnkhôngĐượcĐức nặng »",
+   ".dlg «Điện tuyển» «Chọn lá này»",
+   "page «Khuê phòng · Không gặp ai.» «Tiếp ▸»",
+   ".dlg «Trả thẻ bài» «Xin ở vậy, mở lớp dạy chữ cho con gáiTốnkhôngĐượcT»",
+   ".dlg «Trả thẻ bài» «Chọn lá này»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "js|page error: c is not defined",
+   "type": "js",
+   "msg": "page error: c is not defined",
+   "n": 1,
+   "at": 1997,
+   "stack": [
+    "ReferenceError: c is not defined",
+    "at http://127.0.0.1:8877/:78143:321",
+    "at http://127.0.0.1:8877/:78143:105",
+    "at kcDo (http://127.0.0.1:8877/:78120:44)",
+    "at Object.<anonymous> (http://127.0.0.1:8877/:78143:56)",
+    "at Object.g [as go] (http://127.0.0.1:8877/:78118:31)"
+   ]
+  },
+  {
+   "k": "js|page error: to is not defined",
+   "type": "js",
+   "msg": "page error: to is not defined",
+   "n": 1,
+   "at": 3744,
+   "stack": [
+    "ReferenceError: to is not defined",
+    "at http://127.0.0.1:8877/:78135:421",
+    "at http://127.0.0.1:8877/:78135:110",
+    "at kcDo (http://127.0.0.1:8877/:78120:44)",
+    "at Object.<anonymous> (http://127.0.0.1:8877/:78135:64)",
+    "at Object.g [as go] (http://127.0.0.1:8877/:78118:31)"
+   ]
+  }
+ ],
+ "dead": [],
+ "saves": [
+  {
+   "buoi": 50,
+   "year": 1,
+   "chars": 330013,
+   "key": "hclh-save-v2-1",
+   "stored": "1.4.0.1",
+   "err": 0
+  },
+  {
+   "buoi": 100,
+   "year": 1,
+   "chars": 420278,
+   "key": "hclh-save-v2-1",
+   "stored": "1.8.0.3",
+   "err": 0
+  },
+  {
+   "buoi": 150,
+   "year": 2,
+   "chars": 431151,
+   "key": "hclh-save-v2-1",
+   "stored": "2.12.1.1",
+   "err": 0
+  },
+  {
+   "buoi": 200,
+   "year": 2,
+   "chars": 497797,
+   "key": "hclh-save-v2-1",
+   "stored": "2.16.1.3",
+   "err": 0
+  },
+  {
+   "buoi": 250,
+   "year": 2,
+   "chars": 544130,
+   "key": "hclh-save-v2-1",
+   "stored": "2.20.2.1",
+   "err": 0
+  }
+ ],
+ "buoi": 278,
+ "steps": 10209,
+ "status": [
+  "STATUS flight2-s19b · buổi 213 · year 2 · rank 0 · bugs 1 · stuck 0 · dead buttons 0"
+ ],
+ "_loopAt": 1795777241003,
+ "_bootFirst": 1,
+ "_scr": ".kmov «»",
+ "_snapAt": 1795777202679,
+ "trace": [
+  [
+   3387,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3388,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3388,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3388,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3396,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3405,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3407,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3416,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3418,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3428,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3437,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3446,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   3448,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3448,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3448,
+   ".kbk «Tổng lược» «Vào ngày mới»"
+  ],
+  [
+   3451,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3460,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3470,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3479,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3488,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3498,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3500,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3503,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3507,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3507,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3507,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3508,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3508,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3512,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3521,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3530,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3532,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3541,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3551,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3560,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3570,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3572,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3581,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3591,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   3592,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3593,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3593,
+   ".kbk «Tổng lược» «Vào ngày mới»"
+  ],
+  [
+   3600,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3610,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3619,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3628,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3638,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3647,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3656,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3658,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3667,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3672,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3672,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3672,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3673,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3673,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3681,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3690,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3693,
+   ".dlg «Hộp phấn lạ» «Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết »"
+  ],
+  [
+   3694,
+   ".dlg «Hộp phấn lạ» «Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tì»"
+  ],
+  [
+   3694,
+   ".dlg «Hộp phấn lạ» «Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa k»"
+  ],
+  [
+   3694,
+   ".dlg «Hộp phấn lạ» «Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết »"
+  ],
+  [
+   3695,
+   ".dlg «Hộp phấn lạ» «Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết »"
+  ],
+  [
+   3695,
+   ".dlg «Hộp phấn lạ» «Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tì»"
+  ],
+  [
+   3695,
+   ".dlg «Hộp phấn lạ» «Chọn lá này»"
+  ],
+  [
+   3695,
+   "page «Khuê phòng · Không gặp ai.» «Tiếp ▸»"
+  ],
+  [
+   3696,
+   ".dlg «Bà mối đến nhà» «Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có t»"
+  ],
+  [
+   3696,
+   ".dlg «Bà mối đến nhà» «Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có t»"
+  ],
+  [
+   3696,
+   ".dlg «Bà mối đến nhà» «Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có t»"
+  ],
+  [
+   3696,
+   ".dlg «Bà mối đến nhà» «Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có t»"
+  ],
+  [
+   3697,
+   ".dlg «Bà mối đến nhà» «Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có t»"
+  ],
+  [
+   3697,
+   ".dlg «Bà mối đến nhà» «Xin cha cho xem mặt trướcTốnkhôngĐượcnhà trai hẹn »"
+  ],
+  [
+   3697,
+   ".dlg «Bà mối đến nhà» «Đặt lại»"
+  ],
+  [
+   3698,
+   ".dlg «Bà mối đến nhà» «Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có t»"
+  ],
+  [
+   3698,
+   ".dlg «Bà mối đến nhà» «Chọn lá này»"
+  ],
+  [
+   3705,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3715,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3717,
+   ".dlg «Chiếu tuyển tú» «Ghi tênTốnkhôngĐượcnhà thôi bàn chuyện gả ta, chờ »"
+  ],
+  [
+   3717,
+   "page «Khuê phòng · Ở đây có 1 người.» «Tiếp ▸»"
+  ],
+  [
+   3718,
+   ".dlg «Thu săn» «Lui»"
+  ],
+  [
+   3719,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3729,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3731,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   3733,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3733,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3733,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3733,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3734,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3742,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3743,
+   ".dlg «Bài vị đổ» «Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di n»"
+  ],
+  [
+   3744,
+   ".dlg «Bài vị đổ» «Chọn lá này»"
+  ],
+  [
+   3744,
+   ".dlg «Bài vị đổ» «Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di n»"
+  ],
+  [
+   3744,
+   ".dlg «Bài vị đổ» «Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di n»"
+  ],
+  [
+   3744,
+   ".dlg «Bài vị đổ» «Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ »"
+  ],
+  [
+   3745,
+   ".dlg «Bài vị đổ» «Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ »"
+  ],
+  [
+   3745,
+   ".dlg «Bài vị đổ» «Đặt lại»"
+  ],
+  [
+   3745,
+   ".dlg «Bài vị đổ» «Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di n»"
+  ],
+  [
+   3745,
+   ".dlg «Bài vị đổ» «Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di n»"
+  ],
+  [
+   3746,
+   ".dlg «Bài vị đổ» «Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di n»"
+  ],
+  [
+   3746,
+   ".dlg «Bài vị đổ» «Chọn lá này»"
+  ],
+  [
+   3746,
+   ".dlg «Bài vị đổ» «Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ »"
+  ],
+  [
+   3746,
+   ".dlg «Bài vị đổ» «Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ »"
+  ],
+  [
+   3747,
+   ".dlg «Bài vị đổ» «Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ »"
+  ],
+  [
+   3747,
+   ".dlg «Bài vị đổ» «Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ »"
+  ],
+  [
+   3747,
+   ".dlg «Bài vị đổ» «Đặt lại»"
+  ],
+  [
+   3748,
+   "AREA 355,320"
+  ],
+  [
+   3748,
+   "AREA 183,470"
+  ],
+  [
+   3749,
+   "AREA 581,362"
+  ],
+  [
+   3750,
+   ".dlg «Bài vị đổ» «Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ »"
+  ],
+  [
+   3750,
+   ".dlg «Bài vị đổ» «Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di n»"
+  ],
+  [
+   3750,
+   "AREA 590,170"
+  ],
+  [
+   3750,
+   "BACKDROP .dlg «Bài vị đổ» tap"
+  ],
+  [
+   3751,
+   "AREA 590,170"
+  ],
+  [
+   3751,
+   "BACKDROP .dlg «Bài vị đổ» tap"
+  ],
+  [
+   3752,
+   "AREA 590,170"
+  ],
+  [
+   3752,
+   "BACKDROP .dlg «Bài vị đổ» tap"
+  ],
+  [
+   3753,
+   ".dlg «unstick Xin tổ mẫu cho tra xétTốnSức 1»"
+  ],
+  [
+   3757,
+   "title (unstick reload) «chơi một mình»"
+  ],
+  [
+   3758,
+   "title (unstick reload) «chơi tiếp|tiếp tục|vào sổ|^tải$»"
+  ],
+  [
+   3760,
+   "page «Khuê phòng · Ở đây có 1 người.» «Hậu cung»"
+  ],
+  [
+   3761,
+   "page «Khuê phòng · Ở đây có 1 người.» «Thư từGia tộcⓘ Tin trong cungTa chưa có thư từChưa»"
+  ],
+  [
+   3761,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3763,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3773,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3782,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3791,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3794,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   3796,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3796,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3796,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3796,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3797,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3798,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3808,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3809,
+   ".dlg «Vòng ngọc mất tích» «Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRấ»"
+  ],
+  [
+   3810,
+   ".dlg «Vòng ngọc mất tích» «Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRấ»"
+  ],
+  [
+   3810,
+   ".dlg «Vòng ngọc mất tích» «Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRấ»"
+  ],
+  [
+   3810,
+   ".dlg «Vòng ngọc mất tích» «Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRấ»"
+  ],
+  [
+   3810,
+   ".dlg «Vòng ngọc mất tích» «Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRấ»"
+  ],
+  [
+   3811,
+   ".dlg «Vòng ngọc mất tích» «Đặt lại»"
+  ],
+  [
+   3811,
+   ".dlg «Vòng ngọc mất tích» «Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRấ»"
+  ],
+  [
+   3811,
+   ".dlg «Vòng ngọc mất tích» «Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta ngu»"
+  ],
+  [
+   3811,
+   ".dlg «Vòng ngọc mất tích» «Chọn lá này»"
+  ],
+  [
+   3814,
+   ".dlg «Thu săn» «Lui»"
+  ],
+  [
+   3816,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3825,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3834,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3836,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3838,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3847,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3857,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   3859,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3859,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3859,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3860,
+   ".kbk «Tổng lược» «Vào ngày mới»"
+  ],
+  [
+   3867,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3876,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3880,
+   ".dlg «Phiên vương nhập triều» «Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượ»"
+  ],
+  [
+   3881,
+   ".dlg «Phiên vương nhập triều» «Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượ»"
+  ],
+  [
+   3881,
+   ".dlg «Phiên vương nhập triều» «Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượ»"
+  ],
+  [
+   3881,
+   ".dlg «Phiên vương nhập triều» «Tránh mặt cho phải lễTốnkhôngĐượckhông»"
+  ],
+  [
+   3881,
+   ".dlg «Phiên vương nhập triều» «Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượ»"
+  ],
+  [
+   3882,
+   ".dlg «Phiên vương nhập triều» «Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượ»"
+  ],
+  [
+   3882,
+   ".dlg «Phiên vương nhập triều» «Đặt lại»"
+  ],
+  [
+   3882,
+   ".dlg «Phiên vương nhập triều» «Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượ»"
+  ],
+  [
+   3882,
+   ".dlg «Phiên vương nhập triều» «Chọn lá này»"
+  ],
+  [
+   3883,
+   "page «Khuê phòng · Không gặp ai.» «Tiếp ▸»"
+  ],
+  [
+   3883,
+   ".dlg «Phiên vương nhập triều» «Dùng quạt che cho nàng taTốnDanh 2ĐượcĐáp ứng Tống»"
+  ],
+  [
+   3884,
+   ".dlg «Phiên vương nhập triều» «Chọn lá này»"
+  ],
+  [
+   3891,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3901,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3903,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   3905,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3914,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3917,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   3919,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3919,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   3919,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3920,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   3920,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   3927,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3937,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3940,
+   ".dlg «Phiên vương nhập triều» «Lui»"
+  ],
+  [
+   3948,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3957,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   3967,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3976,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   3985,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   3987,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   3997,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4001,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4001,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4002,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4002,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4002,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4010,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4019,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4028,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4037,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4047,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4056,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4065,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4075,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4079,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4079,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4080,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4080,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4080,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4084,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4093,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4097,
+   ".dlg «Hộp phấn lạ» «Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa k»"
+  ],
+  [
+   4097,
+   ".dlg «Hộp phấn lạ» «Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết »"
+  ],
+  [
+   4097,
+   ".dlg «Hộp phấn lạ» «Chọn lá này»"
+  ],
+  [
+   4105,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4114,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4124,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4133,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   4135,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4144,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4148,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4149,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4149,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4149,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4149,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4157,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4166,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4176,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4185,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   4187,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4196,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4206,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4215,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4218,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   4219,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4220,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4220,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4220,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4220,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4228,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   4230,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   4239,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   4249,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   4251,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4260,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4269,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4279,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4283,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4283,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4283,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4284,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4284,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4288,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4297,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4300,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   4301,
+   ".dlg «Huynh trưởng thua bạc» «Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhu»"
+  ],
+  [
+   4302,
+   ".dlg «Huynh trưởng thua bạc» «Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa»"
+  ],
+  [
+   4302,
+   ".dlg «Huynh trưởng thua bạc» «Đặt lại»"
+  ],
+  [
+   4302,
+   ".dlg «Huynh trưởng thua bạc» «Từ chối, giữ kínCó cơTốnkhôngĐượccó thể chủ sòng đ»"
+  ],
+  [
+   4302,
+   ".dlg «Huynh trưởng thua bạc» «Từ chối, giữ kínCó cơTốnkhôngĐượccó thể chủ sòng đ»"
+  ],
+  [
+   4303,
+   ".dlg «Huynh trưởng thua bạc» «Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhu»"
+  ],
+  [
+   4303,
+   ".dlg «Huynh trưởng thua bạc» «Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhu»"
+  ],
+  [
+   4303,
+   ".dlg «Huynh trưởng thua bạc» «Từ chối, giữ kínCó cơTốnkhôngĐượccó thể chủ sòng đ»"
+  ],
+  [
+   4303,
+   ".dlg «Huynh trưởng thua bạc» «Từ chối, giữ kínCó cơTốnkhôngĐượccó thể chủ sòng đ»"
+  ],
+  [
+   4304,
+   ".dlg «Huynh trưởng thua bạc» «Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa»"
+  ],
+  [
+   4304,
+   ".dlg «Huynh trưởng thua bạc» «Chọn lá này»"
+  ],
+  [
+   4311,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   4320,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   4330,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   4332,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4341,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4350,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4360,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   4361,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4362,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4362,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4362,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4362,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4366,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4375,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4385,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4394,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4403,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4413,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4422,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4424,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   4434,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang ngày mới»"
+  ],
+  [
+   4436,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4436,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4436,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4436,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4437,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4444,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4453,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4463,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4472,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4475,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   4477,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4486,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4495,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4505,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4509,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4509,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4509,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4510,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4510,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4514,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4523,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4526,
+   ".dlg «Hộp phấn lạ» «Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏ»"
+  ],
+  [
+   4527,
+   ".dlg «Hộp phấn lạ» «Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tì»"
+  ],
+  [
+   4527,
+   ".dlg «Hộp phấn lạ» «Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏ»"
+  ],
+  [
+   4527,
+   ".dlg «Hộp phấn lạ» «Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tì»"
+  ],
+  [
+   4527,
+   ".dlg «Hộp phấn lạ» «Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa k»"
+  ],
+  [
+   4528,
+   ".dlg «Hộp phấn lạ» «Chọn lá này»"
+  ],
+  [
+   4528,
+   "page «Khuê phòng · Không gặp ai.» «Tiếp ▸»"
+  ],
+  [
+   4528,
+   ".dlg «Sơ tuyển» «Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy »"
+  ],
+  [
+   4529,
+   ".dlg «Sơ tuyển» «Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcd»"
+  ],
+  [
+   4529,
+   ".dlg «Sơ tuyển» «Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcd»"
+  ],
+  [
+   4529,
+   ".dlg «Sơ tuyển» «Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcd»"
+  ],
+  [
+   4529,
+   ".dlg «Sơ tuyển» «Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcd»"
+  ],
+  [
+   4530,
+   ".dlg «Sơ tuyển» «Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy »"
+  ],
+  [
+   4530,
+   ".dlg «Sơ tuyển» «Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy »"
+  ],
+  [
+   4530,
+   ".dlg «Sơ tuyển» «Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcd»"
+  ],
+  [
+   4530,
+   ".dlg «Sơ tuyển» «Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcd»"
+  ],
+  [
+   4531,
+   ".dlg «Sơ tuyển» «Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy »"
+  ],
+  [
+   4531,
+   ".dlg «Sơ tuyển» «Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcd»"
+  ],
+  [
+   4531,
+   ".dlg «Sơ tuyển» «Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy »"
+  ],
+  [
+   4531,
+   ".dlg «Sơ tuyển» «Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcd»"
+  ],
+  [
+   4532,
+   ".dlg «Sơ tuyển» «Đặt lại»"
+  ],
+  [
+   4532,
+   ".dlg «Sơ tuyển» «Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcd»"
+  ],
+  [
+   4532,
+   ".dlg «Sơ tuyển» «Đặt lại»"
+  ],
+  [
+   4532,
+   ".dlg «Sơ tuyển» «Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcd»"
+  ],
+  [
+   4533,
+   ".dlg «Sơ tuyển» «Chọn lá này»"
+  ],
+  [
+   4540,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   4549,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   4551,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   4553,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   4555,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4555,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4556,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4556,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4556,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4560,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4569,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4578,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4588,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4597,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4606,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4616,
+   "page «Khuê phòng · Không gặp ai.» «Sang ngày mới»"
+  ],
+  [
+   4617,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4618,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4618,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4618,
+   ".kbk «Tổng lược» «Vào ngày mới»"
+  ],
+  [
+   4626,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4635,
+   "page «Khuê phòng · Không gặp ai.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   4644,
+   "page «Khuê phòng · Không gặp ai.» «Sang buổi»"
+  ],
+  [
+   4646,
+   ".dlg «Tỉnh thân» «Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++»"
+  ],
+  [
+   4646,
+   ".dlg «Tỉnh thân» «Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++»"
+  ],
+  [
+   4646,
+   ".dlg «Tỉnh thân» «Chọn lá này»"
+  ],
+  [
+   4647,
+   "page «Khuê phòng · Ở đây có 1 người.» «Tiếp ▸»"
+  ],
+  [
+   4647,
+   ".dlg «Tỉnh thân» «Biếu bà một món quà nhỏTốnBạc 80ĐượcĐức ++·Hoàng h»"
+  ],
+  [
+   4647,
+   ".dlg «Tỉnh thân» «Chào mẹ nàng ta, mời sang cung ngồiTốnBạc 40·Sức 8»"
+  ],
+  [
+   4647,
+   ".dlg «Tỉnh thân» «Chào mẹ nàng ta, mời sang cung ngồiTốnBạc 40·Sức 8»"
+  ],
+  [
+   4648,
+   ".dlg «Tỉnh thân» «Chào lấy lệ rồi lui điTốnĐức 3ĐượcSức ++·Bạc ++Mất»"
+  ],
+  [
+   4648,
+   ".dlg «Tỉnh thân» «Chào mẹ nàng ta, mời sang cung ngồiTốnBạc 40·Sức 8»"
+  ],
+  [
+   4648,
+   ".dlg «Tỉnh thân» «Chọn lá này»"
+  ],
+  [
+   4656,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4665,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   4667,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4676,
+   "page «Khuê phòng · Ở đây có 1 người.» «Mưu kếMưu kếViết nhật ký giấu kínVữngGhi chuyện tr»"
+  ],
+  [
+   4686,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sang buổi»"
+  ],
+  [
+   4688,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4697,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4701,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4701,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4702,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   4702,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   4702,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   4706,
+   "page «Khuê phòng · Ở đây có 1 người.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   4715,
+   "page «Khuê phòng · Ở đây có 1 người.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   4720,
+   "ZERO Để tài nghệ quyết địnhTốnSức 10Đượclấy phần giữa, "
+  ],
+  [
+   4720,
+   ".kmov «Vào điện»"
+  ],
+  [
+   4722,
+   ".dlg «Phúc tuyển» «Dâng VũTốnSức 10Đượctài nghệ dâng lên cộng vào Điệ»"
+  ],
+  [
+   4722,
+   ".dlg «Phúc tuyển» «Đặt lại»"
+  ],
+  [
+   4722,
+   ".dlg «Phúc tuyển» «Dâng VũTốnSức 10Đượctài nghệ dâng lên cộng vào Điệ»"
+  ],
+  [
+   4723,
+   ".dlg «Phúc tuyển» «Để tài nghệ quyết địnhTốnSức 10Đượclấy phần giữa, »"
+  ],
+  [
+   4723,
+   ".dlg «Phúc tuyển» «Dâng VũTốnSức 10Đượctài nghệ dâng lên cộng vào Điệ»"
+  ],
+  [
+   4723,
+   ".dlg «Phúc tuyển» «Đặt lại»"
+  ],
+  [
+   4723,
+   ".dlg «Phúc tuyển» «Dâng VũTốnSức 10Đượctài nghệ dâng lên cộng vào Điệ»"
+  ],
+  [
+   4724,
+   ".dlg «Phúc tuyển» «Dâng VũTốnSức 10Đượctài nghệ dâng lên cộng vào Điệ»"
+  ],
+  [
+   4724,
+   ".dlg «Phúc tuyển» «Chọn lá này»"
+  ],
+  [
+   4724,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   4728,
+   "AREA 863,425"
+  ],
+  [
+   4751,
+   "BOARD mua 24 moves 10/10 raw 10.00"
+  ],
+  [
+   4751,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   4752,
+   ".kpod «Tiếp»"
+  ],
+  [
+   4753,
+   ".dlg «Tỉnh thân» «Lui»"
+  ],
+  [
+   4754,
+   ".dlg «Điện tuyển» «Đáp lời khiêm nhườngTùy duyênTốnkhôngĐượcĐức nặng »"
+  ],
+  [
+   4755,
+   ".dlg «Điện tuyển» «Chọn lá này»"
+  ],
+  [
+   4755,
+   "page «Khuê phòng · Không gặp ai.» «Tiếp ▸»"
+  ],
+  [
+   4755,
+   ".dlg «Trả thẻ bài» «Xin ở vậy, mở lớp dạy chữ cho con gáiTốnkhôngĐượcT»"
+  ],
+  [
+   4756,
+   ".dlg «Trả thẻ bài» «Chọn lá này»"
+  ]
+ ],
+ "_lastOpen": "Chọn lá này",
+ "_lastOpenScr": ".dlg «Trả thẻ bài»",
+ "_started": true,
+ "_clk": {
+  "1.0.0.0": 1,
+  "1.0.0.1": 2,
+  "1.0.0.2": 3,
+  "1.0.0.3": 4,
+  "1.0.1.0": 5,
+  "1.0.1.1": 6,
+  "1.0.1.2": 7,
+  "1.0.1.3": 8,
+  "1.0.2.0": 9,
+  "1.0.2.1": 10,
+  "1.0.2.2": 11,
+  "1.0.2.3": 12,
+  "1.1.0.0": 13,
+  "1.1.0.1": 14,
+  "1.1.0.2": 15,
+  "1.1.0.3": 16,
+  "1.1.1.0": 17,
+  "1.1.1.1": 18,
+  "1.1.1.2": 19,
+  "1.1.1.3": 20,
+  "1.1.2.0": 21,
+  "1.1.2.1": 22,
+  "1.1.2.2": 23,
+  "1.1.2.3": 24,
+  "1.2.0.0": 25,
+  "1.2.0.1": 26,
+  "1.2.0.2": 27,
+  "1.2.0.3": 28,
+  "1.2.1.0": 29,
+  "1.2.1.1": 30,
+  "1.2.1.2": 31,
+  "1.2.1.3": 32,
+  "1.2.2.0": 33,
+  "1.2.2.1": 34,
+  "1.2.2.2": 35,
+  "1.2.2.3": 36,
+  "1.3.0.0": 37,
+  "1.3.0.1": 38,
+  "1.3.0.2": 39,
+  "1.3.0.3": 40,
+  "1.3.1.0": 41,
+  "1.3.1.1": 42,
+  "1.3.1.2": 43,
+  "1.3.1.3": 44,
+  "1.3.2.0": 45,
+  "1.3.2.1": 46,
+  "1.3.2.2": 47,
+  "1.3.2.3": 48,
+  "1.4.0.0": 49,
+  "1.4.0.1": 50,
+  "1.4.0.2": 51,
+  "1.4.0.3": 52,
+  "1.4.1.0": 53,
+  "1.4.1.1": 54,
+  "1.4.1.2": 55,
+  "1.4.1.3": 56,
+  "1.4.2.0": 57,
+  "1.4.2.1": 58,
+  "1.4.2.2": 59,
+  "1.4.2.3": 60,
+  "1.5.0.0": 61,
+  "1.5.0.1": 62,
+  "1.5.0.2": 63,
+  "1.5.0.3": 64,
+  "1.5.1.0": 65,
+  "1.5.1.1": 66,
+  "1.5.1.2": 67,
+  "1.5.1.3": 68,
+  "1.5.2.0": 69,
+  "1.5.2.1": 70,
+  "1.5.2.2": 71,
+  "1.5.2.3": 72,
+  "1.6.0.0": 73,
+  "1.6.0.1": 74,
+  "1.6.0.2": 75,
+  "1.6.0.3": 76,
+  "1.6.1.0": 77,
+  "1.6.1.1": 78,
+  "1.6.1.2": 79,
+  "1.6.1.3": 80,
+  "1.6.2.0": 81,
+  "1.6.2.1": 82,
+  "1.6.2.2": 83,
+  "1.6.2.3": 84,
+  "1.7.0.0": 85,
+  "1.7.0.1": 86,
+  "1.7.0.2": 87,
+  "1.7.0.3": 88,
+  "1.7.1.0": 89,
+  "1.7.1.1": 90,
+  "1.7.1.2": 91,
+  "1.7.1.3": 92,
+  "1.7.2.0": 93,
+  "1.7.2.1": 94,
+  "1.7.2.2": 95,
+  "1.7.2.3": 96,
+  "1.8.0.0": 97,
+  "1.8.0.1": 98,
+  "1.8.0.2": 99,
+  "1.8.0.3": 100,
+  "1.8.1.0": 101,
+  "1.8.1.1": 102,
+  "1.8.1.2": 103,
+  "1.8.1.3": 104,
+  "1.8.2.0": 105,
+  "1.8.2.1": 106,
+  "1.8.2.2": 107,
+  "1.8.2.3": 108,
+  "1.9.0.0": 109,
+  "1.9.0.1": 110,
+  "1.9.0.2": 111,
+  "1.9.0.3": 112,
+  "1.9.1.0": 113,
+  "1.9.1.1": 114,
+  "1.9.1.2": 115,
+  "1.9.1.3": 116,
+  "1.9.2.0": 117,
+  "1.9.2.1": 118,
+  "1.9.2.2": 119,
+  "1.9.2.3": 120,
+  "2.10.0.0": 121,
+  "2.10.0.1": 122,
+  "2.10.0.2": 123,
+  "2.10.0.3": 124,
+  "2.10.1.0": 125,
+  "2.10.1.1": 126,
+  "2.10.1.2": 127,
+  "2.10.1.3": 128,
+  "2.10.2.0": 129,
+  "2.10.2.1": 130,
+  "2.10.2.2": 131,
+  "2.10.2.3": 132,
+  "2.11.0.0": 133,
+  "2.11.0.1": 134,
+  "2.11.0.2": 135,
+  "2.11.0.3": 136,
+  "2.11.1.0": 137,
+  "2.11.1.1": 138,
+  "2.11.1.2": 139,
+  "2.11.1.3": 140,
+  "2.11.2.0": 141,
+  "2.11.2.1": 142,
+  "2.11.2.2": 143,
+  "2.11.2.3": 144,
+  "2.12.0.0": 145,
+  "2.12.0.1": 146,
+  "2.12.0.2": 147,
+  "2.12.0.3": 148,
+  "2.12.1.0": 149,
+  "2.12.1.1": 150,
+  "2.12.1.2": 151,
+  "2.12.1.3": 152,
+  "2.12.2.0": 153,
+  "2.12.2.1": 154,
+  "2.12.2.2": 155,
+  "2.12.2.3": 156,
+  "2.13.0.0": 157,
+  "2.13.0.1": 158,
+  "2.13.0.2": 159,
+  "2.13.0.3": 160,
+  "2.13.1.0": 161,
+  "2.13.1.1": 162,
+  "2.13.1.2": 163,
+  "2.13.1.3": 164,
+  "2.13.2.0": 165,
+  "2.13.2.1": 166,
+  "2.13.2.2": 167,
+  "2.13.2.3": 168,
+  "2.14.0.0": 169,
+  "2.14.0.1": 170,
+  "2.14.0.2": 171,
+  "2.14.0.3": 172,
+  "2.14.1.0": 173,
+  "2.14.1.1": 174,
+  "2.14.1.2": 175,
+  "2.14.1.3": 176,
+  "2.14.2.0": 177,
+  "2.14.2.1": 178,
+  "2.14.2.2": 179,
+  "2.14.2.3": 180,
+  "2.15.0.0": 181,
+  "2.15.0.1": 182,
+  "2.15.0.2": 183,
+  "2.15.0.3": 184,
+  "2.15.1.0": 185,
+  "2.15.1.1": 186,
+  "2.15.1.2": 187,
+  "2.15.1.3": 188,
+  "2.15.2.0": 189,
+  "2.15.2.1": 190,
+  "2.15.2.2": 191,
+  "2.15.2.3": 192,
+  "2.16.0.0": 193,
+  "2.16.0.1": 194,
+  "2.16.0.2": 195,
+  "2.16.0.3": 196,
+  "2.16.1.0": 197,
+  "2.16.1.1": 198,
+  "2.16.1.2": 199,
+  "2.16.1.3": 200,
+  "2.16.2.0": 201,
+  "2.16.2.1": 202,
+  "2.16.2.2": 203,
+  "2.16.2.3": 204,
+  "2.17.0.0": 205,
+  "2.17.0.1": 206,
+  "2.17.0.2": 207,
+  "2.17.0.3": 208,
+  "2.17.1.0": 209,
+  "2.17.1.1": 210,
+  "2.17.1.2": 211,
+  "2.17.1.3": 212,
+  "2.17.2.0": 213,
+  "2.17.2.1": 214,
+  "2.17.2.2": 215,
+  "2.17.2.3": 216,
+  "2.18.0.0": 217,
+  "2.18.0.1": 218,
+  "2.18.0.2": 219,
+  "2.18.0.3": 220,
+  "2.18.1.0": 221,
+  "2.18.1.1": 222,
+  "2.18.1.2": 223,
+  "2.18.1.3": 224,
+  "2.18.2.0": 225,
+  "2.18.2.1": 226,
+  "2.18.2.2": 227,
+  "2.18.2.3": 228,
+  "2.19.0.0": 229,
+  "2.19.0.1": 230,
+  "2.19.0.2": 231,
+  "2.19.0.3": 232,
+  "2.19.1.0": 233,
+  "2.19.1.1": 234,
+  "2.19.1.2": 235,
+  "2.19.1.3": 236,
+  "2.19.2.0": 237,
+  "2.19.2.1": 238,
+  "2.19.2.2": 239,
+  "2.19.2.3": 240,
+  "2.20.0.0": 241,
+  "2.20.0.1": 242,
+  "2.20.0.2": 243,
+  "2.20.0.3": 244,
+  "2.20.1.0": 245,
+  "2.20.1.1": 246,
+  "2.20.1.2": 247,
+  "2.20.1.3": 248,
+  "2.20.2.0": 249,
+  "2.20.2.1": 250,
+  "2.20.2.2": 251,
+  "2.20.2.3": 252,
+  "2.21.0.0": 253,
+  "2.21.0.1": 254,
+  "2.21.0.2": 255,
+  "2.21.0.3": 256,
+  "2.21.1.0": 257,
+  "2.21.1.1": 258,
+  "2.21.1.2": 259,
+  "2.21.1.3": 260,
+  "2.21.2.0": 261,
+  "2.21.2.1": 262,
+  "2.21.2.2": 263,
+  "2.21.2.3": 264,
+  "3.22.0.0": 265,
+  "3.22.0.1": 266,
+  "3.22.0.2": 267,
+  "3.22.0.3": 268,
+  "3.22.1.0": 269,
+  "3.22.1.1": 270,
+  "3.22.1.2": 271,
+  "3.22.1.3": 272,
+  "3.22.2.0": 273,
+  "3.22.2.1": 274,
+  "3.22.2.2": 275,
+  "3.22.2.3": 276,
+  "3.23.0.0": 277,
+  "3.23.0.1": 278
+ },
+ "_maxClk": "3.23.0.1",
+ "_ckAt": 1795777172554,
+ "_ckB": 276,
+ "rss": [
+  {
+   "buoi": 1,
+   "y": 1,
+   "totalMB": 1718,
+   "rendererMB": 545,
+   "heapMB": 111,
+   "dom": 2725,
+   "q": 3,
+   "lsK": 5
+  },
+  {
+   "buoi": 6,
+   "y": 1,
+   "totalMB": 2517,
+   "rendererMB": 1181,
+   "heapMB": 111,
+   "dom": 1079,
+   "q": 1,
+   "lsK": 181
+  },
+  {
+   "buoi": 11,
+   "y": 1,
+   "totalMB": 2312,
+   "rendererMB": 982,
+   "heapMB": 111,
+   "dom": 1043,
+   "q": 0,
+   "lsK": 232
+  },
+  {
+   "buoi": 16,
+   "y": 1,
+   "totalMB": 2313,
+   "rendererMB": 981,
+   "heapMB": 111,
+   "dom": 1062,
+   "q": 0,
+   "lsK": 293
+  },
+  {
+   "buoi": 21,
+   "y": 1,
+   "totalMB": 2394,
+   "rendererMB": 1064,
+   "heapMB": 111,
+   "dom": 1428,
+   "q": 1,
+   "lsK": 318
+  },
+  {
+   "buoi": 26,
+   "y": 1,
+   "totalMB": 2272,
+   "rendererMB": 934,
+   "heapMB": 111,
+   "dom": 1014,
+   "q": 2,
+   "lsK": 337
+  },
+  {
+   "buoi": 31,
+   "y": 1,
+   "totalMB": 2446,
+   "rendererMB": 1114,
+   "heapMB": 111,
+   "dom": 936,
+   "q": 0,
+   "lsK": 363
+  },
+  {
+   "buoi": 36,
+   "y": 1,
+   "totalMB": 2310,
+   "rendererMB": 971,
+   "heapMB": 111,
+   "dom": 951,
+   "q": 0,
+   "lsK": 385
+  },
+  {
+   "buoi": 41,
+   "y": 1,
+   "totalMB": 2285,
+   "rendererMB": 931,
+   "heapMB": 111,
+   "dom": 1268,
+   "q": 0,
+   "lsK": 403
+  },
+  {
+   "buoi": 46,
+   "y": 1,
+   "totalMB": 2309,
+   "rendererMB": 981,
+   "heapMB": 111,
+   "dom": 1054,
+   "q": 0,
+   "lsK": 369
+  },
+  {
+   "buoi": 51,
+   "y": 1,
+   "totalMB": 2341,
+   "rendererMB": 1013,
+   "heapMB": 111,
+   "dom": 940,
+   "q": 0,
+   "lsK": 395
+  },
+  {
+   "buoi": 56,
+   "y": 1,
+   "totalMB": 2325,
+   "rendererMB": 994,
+   "heapMB": 111,
+   "dom": 931,
+   "q": 0,
+   "lsK": 407
+  },
+  {
+   "buoi": 61,
+   "y": 1,
+   "totalMB": 2414,
+   "rendererMB": 1081,
+   "heapMB": 111,
+   "dom": 1201,
+   "q": 0,
+   "lsK": 422
+  },
+  {
+   "buoi": 66,
+   "y": 1,
+   "totalMB": 2407,
+   "rendererMB": 1075,
+   "heapMB": 111,
+   "dom": 1010,
+   "q": 0,
+   "lsK": 415
+  },
+  {
+   "buoi": 71,
+   "y": 1,
+   "totalMB": 2344,
+   "rendererMB": 1011,
+   "heapMB": 125,
+   "dom": 1027,
+   "q": 0,
+   "lsK": 423
+  },
+  {
+   "buoi": 76,
+   "y": 1,
+   "totalMB": 2378,
+   "rendererMB": 1044,
+   "heapMB": 125,
+   "dom": 939,
+   "q": 0,
+   "lsK": 458
+  },
+  {
+   "buoi": 81,
+   "y": 1,
+   "totalMB": 2433,
+   "rendererMB": 1080,
+   "heapMB": 125,
+   "dom": 1327,
+   "q": 0,
+   "lsK": 454
+  },
+  {
+   "buoi": 86,
+   "y": 1,
+   "totalMB": 2421,
+   "rendererMB": 1087,
+   "heapMB": 125,
+   "dom": 990,
+   "q": 1,
+   "lsK": 448
+  },
+  {
+   "buoi": 91,
+   "y": 1,
+   "totalMB": 2445,
+   "rendererMB": 1117,
+   "heapMB": 125,
+   "dom": 962,
+   "q": 0,
+   "lsK": 465
+  },
+  {
+   "buoi": 96,
+   "y": 1,
+   "totalMB": 2534,
+   "rendererMB": 1207,
+   "heapMB": 125,
+   "dom": 962,
+   "q": 0,
+   "lsK": 475
+  },
+  {
+   "buoi": 101,
+   "y": 1,
+   "totalMB": 2545,
+   "rendererMB": 1185,
+   "heapMB": 125,
+   "dom": 1418,
+   "q": 0,
+   "lsK": 483
+  },
+  {
+   "buoi": 106,
+   "y": 1,
+   "totalMB": 2542,
+   "rendererMB": 1197,
+   "heapMB": 125,
+   "dom": 925,
+   "q": 0,
+   "lsK": 466
+  },
+  {
+   "buoi": 111,
+   "y": 1,
+   "totalMB": 2440,
+   "rendererMB": 1106,
+   "heapMB": 125,
+   "dom": 1002,
+   "q": 0,
+   "lsK": 492
+  },
+  {
+   "buoi": 116,
+   "y": 1,
+   "totalMB": 1643,
+   "rendererMB": 870,
+   "heapMB": 125,
+   "dom": 892,
+   "q": 0,
+   "lsK": 503
+  },
+  {
+   "buoi": 121,
+   "y": 2,
+   "totalMB": 1806,
+   "rendererMB": 1000,
+   "heapMB": 125,
+   "dom": 1330,
+   "q": 0,
+   "lsK": 513
+  },
+  {
+   "buoi": 126,
+   "y": 2,
+   "totalMB": 1610,
+   "rendererMB": 844,
+   "heapMB": 125,
+   "dom": 947,
+   "q": 0,
+   "lsK": 487
+  },
+  {
+   "buoi": 131,
+   "y": 2,
+   "totalMB": 1671,
+   "rendererMB": 905,
+   "heapMB": 125,
+   "dom": 1082,
+   "q": 0,
+   "lsK": 505
+  },
+  {
+   "buoi": 136,
+   "y": 2,
+   "totalMB": 1789,
+   "rendererMB": 1016,
+   "heapMB": 125,
+   "dom": 929,
+   "q": 0,
+   "lsK": 519
+  },
+  {
+   "buoi": 141,
+   "y": 2,
+   "totalMB": 1694,
+   "rendererMB": 902,
+   "heapMB": 125,
+   "dom": 1150,
+   "q": 0,
+   "lsK": 514
+  },
+  {
+   "buoi": 146,
+   "y": 2,
+   "totalMB": 1750,
+   "rendererMB": 975,
+   "heapMB": 125,
+   "dom": 1064,
+   "q": 2,
+   "lsK": 523
+  },
+  {
+   "buoi": 151,
+   "y": 2,
+   "totalMB": 1717,
+   "rendererMB": 945,
+   "heapMB": 125,
+   "dom": 966,
+   "q": 0,
+   "lsK": 516
+  },
+  {
+   "buoi": 156,
+   "y": 2,
+   "totalMB": 1753,
+   "rendererMB": 982,
+   "heapMB": 125,
+   "dom": 1071,
+   "q": 0,
+   "lsK": 521
+  },
+  {
+   "buoi": 161,
+   "y": 2,
+   "totalMB": 1740,
+   "rendererMB": 968,
+   "heapMB": 125,
+   "dom": 1393,
+   "q": 2,
+   "lsK": 533
+  },
+  {
+   "buoi": 166,
+   "y": 2,
+   "totalMB": 1742,
+   "rendererMB": 969,
+   "heapMB": 125,
+   "dom": 956,
+   "q": 0,
+   "lsK": 530
+  },
+  {
+   "buoi": 171,
+   "y": 2,
+   "totalMB": 1952,
+   "rendererMB": 1167,
+   "heapMB": 125,
+   "dom": 1042,
+   "q": 2,
+   "lsK": 549
+  },
+  {
+   "buoi": 176,
+   "y": 2,
+   "totalMB": 1796,
+   "rendererMB": 1019,
+   "heapMB": 125,
+   "dom": 951,
+   "q": 0,
+   "lsK": 554
+  },
+  {
+   "buoi": 181,
+   "y": 2,
+   "totalMB": 1904,
+   "rendererMB": 1108,
+   "heapMB": 125,
+   "dom": 1328,
+   "q": 0,
+   "lsK": 561
+  },
+  {
+   "buoi": 186,
+   "y": 2,
+   "totalMB": 1761,
+   "rendererMB": 992,
+   "heapMB": 125,
+   "dom": 1071,
+   "q": 1,
+   "lsK": 557
+  },
+  {
+   "buoi": 191,
+   "y": 2,
+   "totalMB": 1830,
+   "rendererMB": 1061,
+   "heapMB": 125,
+   "dom": 941,
+   "q": 0,
+   "lsK": 562
+  },
+  {
+   "buoi": 196,
+   "y": 2,
+   "totalMB": 1852,
+   "rendererMB": 1082,
+   "heapMB": 125,
+   "dom": 931,
+   "q": 0,
+   "lsK": 587
+  },
+  {
+   "buoi": 201,
+   "y": 2,
+   "totalMB": 1924,
+   "rendererMB": 1149,
+   "heapMB": 125,
+   "dom": 1192,
+   "q": 0,
+   "lsK": 581
+  },
+  {
+   "buoi": 206,
+   "y": 2,
+   "totalMB": 1832,
+   "rendererMB": 1062,
+   "heapMB": 125,
+   "dom": 921,
+   "q": 0,
+   "lsK": 574
+  },
+  {
+   "buoi": 211,
+   "y": 2,
+   "totalMB": 1845,
+   "rendererMB": 1077,
+   "heapMB": 125,
+   "dom": 936,
+   "q": 0,
+   "lsK": 590
+  },
+  {
+   "buoi": 216,
+   "y": 2,
+   "totalMB": 1803,
+   "rendererMB": 1037,
+   "heapMB": 125,
+   "dom": 916,
+   "q": 0,
+   "lsK": 597
+  },
+  {
+   "buoi": 221,
+   "y": 2,
+   "totalMB": 1983,
+   "rendererMB": 1180,
+   "heapMB": 125,
+   "dom": 1494,
+   "q": 0,
+   "lsK": 605
+  },
+  {
+   "buoi": 226,
+   "y": 2,
+   "totalMB": 1580,
+   "rendererMB": 741,
+   "heapMB": 111,
+   "dom": 966,
+   "q": 2,
+   "lsK": 587
+  },
+  {
+   "buoi": 231,
+   "y": 2,
+   "totalMB": 1539,
+   "rendererMB": 783,
+   "heapMB": 111,
+   "dom": 1026,
+   "q": 0,
+   "lsK": 620
+  },
+  {
+   "buoi": 236,
+   "y": 2,
+   "totalMB": 1492,
+   "rendererMB": 762,
+   "heapMB": 111,
+   "dom": 954,
+   "q": 0,
+   "lsK": 645
+  },
+  {
+   "buoi": 241,
+   "y": 2,
+   "totalMB": 1604,
+   "rendererMB": 848,
+   "heapMB": 111,
+   "dom": 1290,
+   "q": 0,
+   "lsK": 647
+  },
+  {
+   "buoi": 246,
+   "y": 2,
+   "totalMB": 1613,
+   "rendererMB": 856,
+   "heapMB": 111,
+   "dom": 1049,
+   "q": 0,
+   "lsK": 645
+  },
+  {
+   "buoi": 251,
+   "y": 2,
+   "totalMB": 1552,
+   "rendererMB": 812,
+   "heapMB": 111,
+   "dom": 1056,
+   "q": 0,
+   "lsK": 653
+  },
+  {
+   "buoi": 256,
+   "y": 2,
+   "totalMB": 1598,
+   "rendererMB": 840,
+   "heapMB": 111,
+   "dom": 1022,
+   "q": 0,
+   "lsK": 680
+  },
+  {
+   "buoi": 261,
+   "y": 2,
+   "totalMB": 1717,
+   "rendererMB": 930,
+   "heapMB": 111,
+   "dom": 1348,
+   "q": 0,
+   "lsK": 670
+  },
+  {
+   "buoi": 266,
+   "y": 3,
+   "totalMB": 1672,
+   "rendererMB": 915,
+   "heapMB": 111,
+   "dom": 1034,
+   "q": 2,
+   "lsK": 674
+  },
+  {
+   "buoi": 271,
+   "y": 3,
+   "totalMB": 1655,
+   "rendererMB": 897,
+   "heapMB": 111,
+   "dom": 1027,
+   "q": 0,
+   "lsK": 678
+  },
+  {
+   "buoi": 276,
+   "y": 3,
+   "totalMB": 1625,
+   "rendererMB": 866,
+   "heapMB": 111,
+   "dom": 1012,
+   "q": 0,
+   "lsK": 694
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "consoleErr": [
+  {
+   "at": 40,
+   "buoi": 1,
+   "t": "Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp"
+  },
+  {
+   "at": 154,
+   "buoi": 1,
+   "t": "Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/binh.webp"
+  }
+ ],
+ "_momSeen": [
+  "#klife|",
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  ".kscn|",
+  "#kmrew|",
+  ".dlg|Tiền truyện · Con gái Đại tướng quân · #",
+  ".dlg|Khuê các",
+  "page|Khuê phòng · Không gặp ai.",
+  "page|Khuê phòng · Ở đây có # người.",
+  ".dlg|Chương # · Chờ kỳ tuyển tú",
+  "#kdaytc|",
+  ".kbk|Tổng lược",
+  ".dlg|Hộp phấn lạ",
+  ".dlg|Lễ Phật đản",
+  "#modal|Lễ Phật đản",
+  "#modal|Vòng ngọc mất tích",
+  ".dlg|Vòng ngọc mất tích",
+  "#modal|Tin dữ Nhạn Môn",
+  ".dlg|Tin dữ Nhạn Môn",
+  ".dlg|Danh hiệu mới",
+  ".dlg|Đeo «Thư hương»",
+  ".dlg|Có người bán tin",
+  "#modal|Cha say rượu",
+  ".dlg|Cha say rượu",
+  "#modal|Hôn sự",
+  ".dlg|Hôn sự",
+  "#modal|Hộp phấn lạ",
+  ".dlg|Thu săn",
+  "#modal|Huynh trưởng thua bạc",
+  ".dlg|Huynh trưởng thua bạc",
+  ".dlg|Danh hiệu lên bậc",
+  "#kxcatch|",
+  ".dlg|Tin trong cung buổi này",
+  "#modal|Sứ đoàn vào triều",
+  ".dlg|Sứ đoàn vào triều",
+  ".dlg|Đại hàn, tuyết lớn",
+  "#modal|Đại hàn, tuyết lớn",
+  ".dlg|Thứ muội giành mối",
+  ".dlg|Sắc",
+  ".dlg|sáng · còn",
+  "#modal|Tỉnh thân",
+  ".dlg|Tỉnh thân",
+  ".dlg|Thuở thanh mai",
+  "#modal|Yến đầy tháng công chúa",
+  ".dlg|Yến đầy tháng công chúa",
+  "#modal|Thuở thanh mai",
+  ".dlg|Hội thơ xuân",
+  ".dlg|Mẫu thân lâm bệnh",
+  ".dlg|Yến đầy tháng hoàng tử",
+  "#modal|Cha bị hặc tội",
+  ".dlg|Cha bị hặc tội",
+  ".dlg|Bà mối đến nhà",
+  ".dlg|Chiếu tuyển tú",
+  ".dlg|Bài vị đổ",
+  "#modal|Phiên vương nhập triều",
+  ".dlg|Phiên vương nhập triều",
+  ".dlg|Sơ tuyển",
+  ".dlg|Phúc tuyển",
+  ".kmov|",
+  "#kg82|",
+  ".kpod|",
+  ".dlg|Điện tuyển",
+  ".dlg|Trả thẻ bài"
+ ],
+ "_momRank": 0,
+ "_kipG": {},
+ "_kipOpen": null,
+ "_unsFail": {
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Con gái Đại tướng quân · #/#": {},
+  ".dlg|Chương # · Chờ kỳ tuyển tú": {},
+  "page|Khuê phòng · Ở đây có # người.": {},
+  "page|Khuê phòng · Không gặp ai.": {},
+  ".dlg|Hộp phấn lạ": {},
+  ".dlg|Vòng ngọc mất tích": {},
+  ".dlg|Danh hiệu mới": {},
+  ".dlg|Đeo «Thư hương»": {},
+  ".dlg|Có người bán tin": {},
+  ".dlg|Cha say rượu": {},
+  ".dlg|Huynh trưởng thua bạc": {},
+  ".dlg|Thứ muội giành mối": {},
+  ".dlg|Hội thơ xuân": {},
+  ".dlg|Mẫu thân lâm bệnh": {},
+  ".dlg|Cha bị hặc tội": {},
+  ".dlg|Bà mối đến nhà": {},
+  ".dlg|Chiếu tuyển tú": {},
+  ".dlg|Bài vị đổ": {},
+  ".dlg|Sơ tuyển": {},
+  ".dlg|Phúc tuyển": {},
+  ".kpod|": {},
+  ".dlg|Điện tuyển": {},
+  ".dlg|Trả thẻ bài": {}
+ },
+ "_scrW": {
+  ".dlg|Thân phận kiếp này|871,392": {
+   "left": 210,
+   "n": 1
+  }
+ },
+ "choicePts": [
+  {
+   "k": ".dlg|Thân phận kiếp này|Dung mạo 1/Dung mạo 10/Dung mạo 11/Dung mạo 12/Dung mạo 13/Dung mạo 14/Dung mạo 2/Dung mạo 3/Dung mạo 4/Dung mạo 5/Dung mạo 6/Dung mạo 7/Dung mạo 8/Dung mạo 9/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở /Vừa/Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở ",
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+    "Dung mạo 1",
+    "Dung mạo 2",
+    "Dung mạo 3",
+    "Dung mạo 4",
+    "Dung mạo 5",
+    "Dung mạo 6",
+    "Dung mạo 7",
+    "Dung mạo 8",
+    "Dung mạo 9",
+    "Dung mạo 10",
+    "Dung mạo 11",
+    "Dung mạo 12",
+    "Dung mạo 13",
+    "Dung mạo 14",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Khó",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Vừa": 1,
+    "Dung mạo 4": 3,
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở ": 2,
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn": 4,
+    "Dung mạo 13": 3,
+    "Dung mạo 5": 1,
+    "Dung mạo 1": 4,
+    "Dung mạo 14": 1,
+    "Dung mạo 2": 2,
+    "Dung mạo 9": 2,
+    "Dung mạo 10": 1,
+    "Dung mạo 6": 1,
+    "Dung mạo 11": 1,
+    "Trang sau": 1,
+    "Dung mạo 8": 1
+   },
+   "n": 28
+  },
+  {
+   "k": ".kscn||Quay phải/Quay trái",
+   "screen": ".kscn «»",
+   "opts": [
+    "Quay trái",
+    "Quay phải"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Quay phải": 2,
+    "Quay trái": 4
+   },
+   "n": 6
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Chọn lá này/Dung mạo 1/Dung mạo 10/Dung mạo 11/Dung mạo 12/Dung mạo 13/Dung mạo 14/Dung mạo 2/Dung mạo 3/Dung mạo 4/Dung mạo 5/Dung mạo 6/Dung mạo 7/Dung mạo 8/Dung mạo 9/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở /Vừa/Đặt lại/Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở ",
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+    "Dung mạo 1",
+    "Dung mạo 2",
+    "Dung mạo 3",
+    "Dung mạo 4",
+    "Dung mạo 5",
+    "Dung mạo 6",
+    "Dung mạo 7",
+    "Dung mạo 8",
+    "Dung mạo 9",
+    "Dung mạo 10",
+    "Dung mạo 11",
+    "Dung mạo 12",
+    "Dung mạo 13",
+    "Dung mạo 14",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Khó",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dung mạo 9": 4,
+    "Chọn lá này": 1,
+    "Dễ": 1,
+    "Dung mạo 13": 2,
+    "Dung mạo 7": 2,
+    "Trang sau": 1,
+    "Dung mạo 14": 1,
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn": 2,
+    "Dung mạo 6": 2,
+    "Dung mạo 3": 1,
+    "Dung mạo 8": 1
+   },
+   "n": 18
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Dung mạo 15/Dung mạo 16/Dung mạo 17/Dung mạo 18/Dung mạo 19/Dung mạo 20/Dung mạo 21/Dung mạo 22/Dung mạo 23/Dung mạo 24/Dung mạo 25/Dung mạo 26/Dung mạo 27/Dung mạo 28/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Trang trước/Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở /Vừa/Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở ",
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+    "Trang trước",
+    "Dung mạo 15",
+    "Dung mạo 16",
+    "Dung mạo 17",
+    "Dung mạo 18",
+    "Dung mạo 19",
+    "Dung mạo 20",
+    "Dung mạo 21",
+    "Dung mạo 22",
+    "Dung mạo 23",
+    "Dung mạo 24",
+    "Dung mạo 25",
+    "Dung mạo 26",
+    "Dung mạo 27",
+    "Dung mạo 28",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Khó",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dung mạo 19": 1,
+    "Dung mạo 16": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Chọn lá này/Dung mạo 1/Dung mạo 10/Dung mạo 11/Dung mạo 12/Dung mạo 13/Dung mạo 14/Dung mạo 2/Dung mạo 3/Dung mạo 4/Dung mạo 5/Dung mạo 6/Dung mạo 7/Dung mạo 8/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở /Vừa/Đặt lại/Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở ",
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+    "Dung mạo 1",
+    "Dung mạo 2",
+    "Dung mạo 3",
+    "Dung mạo 4",
+    "Dung mạo 5",
+    "Dung mạo 6",
+    "Dung mạo 7",
+    "Dung mạo 8",
+    "Dung mạo 10",
+    "Dung mạo 11",
+    "Dung mạo 12",
+    "Dung mạo 13",
+    "Dung mạo 14",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Khó",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dung mạo 10": 1,
+    "Dung mạo 3": 3,
+    "Dung mạo 1": 1,
+    "Dễ": 1,
+    "Dung mạo 2": 1,
+    "Chọn lá này": 1,
+    "Dung mạo 5": 1,
+    "Dung mạo 8": 1
+   },
+   "n": 10
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Dung mạo 10/Dung mạo 11/Dung mạo 12/Dung mạo 13/Dung mạo 14/Dung mạo 2/Dung mạo 3/Dung mạo 4/Dung mạo 5/Dung mạo 6/Dung mạo 7/Dung mạo 8/Dung mạo 9/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở /Vừa/Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở ",
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+    "Dung mạo 2",
+    "Dung mạo 3",
+    "Dung mạo 4",
+    "Dung mạo 5",
+    "Dung mạo 6",
+    "Dung mạo 7",
+    "Dung mạo 8",
+    "Dung mạo 9",
+    "Dung mạo 10",
+    "Dung mạo 11",
+    "Dung mạo 12",
+    "Dung mạo 13",
+    "Dung mạo 14",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Khó",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở ": 1,
+    "Dung mạo 12": 1,
+    "Dung mạo 2": 1,
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Chọn lá này/Dung mạo 1/Dung mạo 10/Dung mạo 11/Dung mạo 12/Dung mạo 13/Dung mạo 14/Dung mạo 2/Dung mạo 4/Dung mạo 5/Dung mạo 6/Dung mạo 7/Dung mạo 8/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở /Vừa/Đặt lại/Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở ",
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+    "Dung mạo 1",
+    "Dung mạo 2",
+    "Dung mạo 4",
+    "Dung mạo 5",
+    "Dung mạo 6",
+    "Dung mạo 7",
+    "Dung mạo 8",
+    "Dung mạo 10",
+    "Dung mạo 11",
+    "Dung mạo 12",
+    "Dung mạo 13",
+    "Dung mạo 14",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Khó",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dung mạo 12": 1,
+    "Dung mạo 1": 1,
+    "Dung mạo 7": 2
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Chọn lá này/Dung mạo 1/Dung mạo 10/Dung mạo 11/Dung mạo 12/Dung mạo 13/Dung mạo 14/Dung mạo 2/Dung mạo 4/Dung mạo 5/Dung mạo 6/Dung mạo 8/Dễ/Khó/Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Trang sau/Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở /Vừa/Đặt lại/Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Thường tại (định ở ",
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+    "Dung mạo 1",
+    "Dung mạo 2",
+    "Dung mạo 4",
+    "Dung mạo 5",
+    "Dung mạo 6",
+    "Dung mạo 8",
+    "Dung mạo 10",
+    "Dung mạo 11",
+    "Dung mạo 12",
+    "Dung mạo 13",
+    "Dung mạo 14",
+    "Trang sau",
+    "Dễ",
+    "Vừa",
+    "Khó",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Vừa": 1,
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Chương 1 · Chờ kỳ tuyển tú|Danh hiệu 0/37/Mục tiêu/Thiên mệnh/Đi làm: Giữ lòng cha mẹTốnkhôngĐượctới Hậu cung › Gia tộc/Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài nghệ",
+   "screen": ".dlg «Chương 1 · Chờ kỳ tuyển tú»",
+   "opts": [
+    "Mục tiêu",
+    "Danh hiệu 0/37",
+    "Thiên mệnh",
+    "Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài nghệ",
+    "Đi làm: Giữ lòng cha mẹTốnkhôngĐượctới Hậu cung › Gia tộc"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đi làm: Học một môn tài nghệTốnkhôngĐượctới Tài nghệ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".kbk|Tổng lược|Trang sau/Trang trước",
+   "screen": ".kbk «Tổng lược»",
+   "opts": [
+    "Trang trước",
+    "Trang sau"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Trang trước": 73,
+    "Trang sau": 77
+   },
+   "n": 150
+  },
+  {
+   "k": ".dlg|Hộp phấn lạ|Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn/Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏng da mặtGợi ýphấn lạ có thể l/Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tìm ra chứng cứ trong hộp phấnGợ/Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại ",
+   "screen": ".dlg «Hộp phấn lạ»",
+   "opts": [
+    "Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn",
+    "Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tìm ra chứng cứ trong hộp phấnGợ",
+    "Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏng da mặtGợi ýphấn lạ có thể l",
+    "Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại "
+   ],
+   "ods": [
+    "",
+    "Tùy duyên",
+    "Tùy duyên",
+    "Tùy duyên"
+   ],
+   "took": {
+    "Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏng da mặtGợi ýphấn lạ có thể l": 3,
+    "Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại ": 6,
+    "Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn": 6,
+    "Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tìm ra chứng cứ trong hộp phấnGợ": 5
+   },
+   "n": 20
+  },
+  {
+   "k": ".dlg|Hộp phấn lạ|Chọn lá này/Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn/Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏng da mặtGợi ýphấn lạ có thể l/Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tìm ra chứng cứ trong hộp phấnGợ/Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại /Đặt lại",
+   "screen": ".dlg «Hộp phấn lạ»",
+   "opts": [
+    "Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn",
+    "Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tìm ra chứng cứ trong hộp phấnGợ",
+    "Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏng da mặtGợi ýphấn lạ có thể l",
+    "Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "Tùy duyên",
+    "Tùy duyên",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏng da mặtGợi ýphấn lạ có thể l": 11,
+    "Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại ": 9,
+    "Đặt lại": 8,
+    "Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn": 9,
+    "Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tìm ra chứng cứ trong hộp phấnGợ": 12,
+    "Chọn lá này": 7
+   },
+   "n": 56
+  },
+  {
+   "k": ".dlg|Hộp phấn lạ|Chọn lá này/Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn/Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tìm ra chứng cứ trong hộp phấnGợ/Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại /Đặt lại",
+   "screen": ".dlg «Hộp phấn lạ»",
+   "opts": [
+    "Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn",
+    "Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tìm ra chứng cứ trong hộp phấnGợ",
+    "Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "Tùy duyên",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Nhờ đại phu xem thửTùy duyênTốnBạc 10Đượccó thể tìm ra chứng cứ trong hộp phấnGợ": 4,
+    "Đặt lại": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Hộp phấn lạ|Chọn lá này/Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn/Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại /Đặt lại",
+   "screen": ".dlg «Hộp phấn lạ»",
+   "opts": [
+    "Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn",
+    "Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại ": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Lễ Phật đản|Chép kinh cầu phúcTốnSức 8ĐượcĐức ++·Thái hậu +/Cúng dường hậu hĩnhTốnBạc 40ĐượcThái hậu ++/Lễ Phật rồi vềTốnkhôngĐượckhông",
+   "screen": ".dlg «Lễ Phật đản»",
+   "opts": [
+    "Cúng dường hậu hĩnhTốnBạc 40ĐượcThái hậu ++",
+    "Chép kinh cầu phúcTốnSức 8ĐượcĐức ++·Thái hậu +",
+    "Lễ Phật rồi vềTốnkhôngĐượckhông"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Cúng dường hậu hĩnhTốnBạc 40ĐượcThái hậu ++": 3,
+    "Chép kinh cầu phúcTốnSức 8ĐượcĐức ++·Thái hậu +": 1,
+    "Lễ Phật rồi vềTốnkhôngĐượckhông": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Lễ Phật đản|Chép kinh cầu phúcTốnSức 8ĐượcĐức ++·Thái hậu +/Chọn lá này/Cúng dường hậu hĩnhTốnBạc 40ĐượcThái hậu ++/Lễ Phật rồi vềTốnkhôngĐượckhông/Đặt lại",
+   "screen": ".dlg «Lễ Phật đản»",
+   "opts": [
+    "Cúng dường hậu hĩnhTốnBạc 40ĐượcThái hậu ++",
+    "Chép kinh cầu phúcTốnSức 8ĐượcĐức ++·Thái hậu +",
+    "Lễ Phật rồi vềTốnkhôngĐượckhông",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Lễ Phật rồi vềTốnkhôngĐượckhông": 2,
+    "Cúng dường hậu hĩnhTốnBạc 40ĐượcThái hậu ++": 2,
+    "Chép kinh cầu phúcTốnSức 8ĐượcĐức ++·Thái hậu +": 4,
+    "Đặt lại": 3,
+    "Chọn lá này": 2
+   },
+   "n": 13
+  },
+  {
+   "k": ".dlg|Lễ Phật đản|Cười lớn, kể chuyện giải vâyTốnĐức 3ĐượcDanh ++·Một vị Đáp ứng thiện cảm ++MấtĐá/Nhường phần mình cho Đáp ứng Hách Như MặcTốnSức 8·Bạc 40ĐượcĐáp ứng Hách Như Mặc/Đề nghị chia đôi bát cháoTốnBạc 40·Sức 8ĐượcDanh ++·Đức ++/Đứng ngoài hàng nhìn thôiTốnDanh 3ĐượcSức ++·Bạc ++MấtĐáp ứng Hách Như Mặc thiện",
+   "screen": ".dlg «Lễ Phật đản»",
+   "opts": [
+    "Đề nghị chia đôi bát cháoTốnBạc 40·Sức 8ĐượcDanh ++·Đức ++",
+    "Nhường phần mình cho Đáp ứng Hách Như MặcTốnSức 8·Bạc 40ĐượcĐáp ứng Hách Như Mặc",
+    "Cười lớn, kể chuyện giải vâyTốnĐức 3ĐượcDanh ++·Một vị Đáp ứng thiện cảm ++MấtĐá",
+    "Đứng ngoài hàng nhìn thôiTốnDanh 3ĐượcSức ++·Bạc ++MấtĐáp ứng Hách Như Mặc thiện"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Cười lớn, kể chuyện giải vâyTốnĐức 3ĐượcDanh ++·Một vị Đáp ứng thiện cảm ++MấtĐá": 1,
+    "Đứng ngoài hàng nhìn thôiTốnDanh 3ĐượcSức ++·Bạc ++MấtĐáp ứng Hách Như Mặc thiện": 3,
+    "Nhường phần mình cho Đáp ứng Hách Như MặcTốnSức 8·Bạc 40ĐượcĐáp ứng Hách Như Mặc": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Lễ Phật đản|Chọn lá này/Cười lớn, kể chuyện giải vâyTốnĐức 3ĐượcDanh ++·Một vị Đáp ứng thiện cảm ++MấtĐá/Nhường phần mình cho Đáp ứng Hách Như MặcTốnSức 8·Bạc 40ĐượcĐáp ứng Hách Như Mặc/Đặt lại/Đề nghị chia đôi bát cháoTốnBạc 40·Sức 8ĐượcDanh ++·Đức ++/Đứng ngoài hàng nhìn thôiTốnDanh 3ĐượcSức ++·Bạc ++MấtĐáp ứng Hách Như Mặc thiện",
+   "screen": ".dlg «Lễ Phật đản»",
+   "opts": [
+    "Đề nghị chia đôi bát cháoTốnBạc 40·Sức 8ĐượcDanh ++·Đức ++",
+    "Nhường phần mình cho Đáp ứng Hách Như MặcTốnSức 8·Bạc 40ĐượcĐáp ứng Hách Như Mặc",
+    "Cười lớn, kể chuyện giải vâyTốnĐức 3ĐượcDanh ++·Một vị Đáp ứng thiện cảm ++MấtĐá",
+    "Đứng ngoài hàng nhìn thôiTốnDanh 3ĐượcSức ++·Bạc ++MấtĐáp ứng Hách Như Mặc thiện",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 4,
+    "Đề nghị chia đôi bát cháoTốnBạc 40·Sức 8ĐượcDanh ++·Đức ++": 3,
+    "Nhường phần mình cho Đáp ứng Hách Như MặcTốnSức 8·Bạc 40ĐượcĐáp ứng Hách Như Mặc": 3,
+    "Cười lớn, kể chuyện giải vâyTốnĐức 3ĐượcDanh ++·Một vị Đáp ứng thiện cảm ++MấtĐá": 1
+   },
+   "n": 11
+  },
+  {
+   "k": ".dlg|Lễ Phật đản|Chọn lá này/Cười lớn, kể chuyện giải vâyTốnĐức 3ĐượcDanh ++·Một vị Đáp ứng thiện cảm ++MấtĐá/Nhường phần mình cho Đáp ứng Hách Như MặcTốnSức 8·Bạc 40ĐượcĐáp ứng Hách Như Mặc/Đề nghị chia đôi bát cháoTốnBạc 40·Sức 8ĐượcDanh ++·Đức ++/Đứng ngoài hàng nhìn thôiTốnDanh 3ĐượcSức ++·Bạc ++MấtĐáp ứng Hách Như Mặc thiện",
+   "screen": ".dlg «Lễ Phật đản»",
+   "opts": [
+    "Đề nghị chia đôi bát cháoTốnBạc 40·Sức 8ĐượcDanh ++·Đức ++",
+    "Nhường phần mình cho Đáp ứng Hách Như MặcTốnSức 8·Bạc 40ĐượcĐáp ứng Hách Như Mặc",
+    "Cười lớn, kể chuyện giải vâyTốnĐức 3ĐượcDanh ++·Một vị Đáp ứng thiện cảm ++MấtĐá",
+    "Đứng ngoài hàng nhìn thôiTốnDanh 3ĐượcSức ++·Bạc ++MấtĐáp ứng Hách Như Mặc thiện",
+    "Chọn lá này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đứng ngoài hàng nhìn thôiTốnDanh 3ĐượcSức ++·Bạc ++MấtĐáp ứng Hách Như Mặc thiện": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".kbk|Tổng lược|Trang trước/Vào ngày mới",
+   "screen": ".kbk «Tổng lược»",
+   "opts": [
+    "Vào ngày mới",
+    "Trang trước"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Vào ngày mới": 11,
+    "Trang trước": 9
+   },
+   "n": 20
+  },
+  {
+   "k": ".dlg|Vòng ngọc mất tích|Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng/Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcTùy duyênTốnSức 10Đượctỳ nữ một ",
+   "screen": ".dlg «Vòng ngọc mất tích»",
+   "opts": [
+    "Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcTùy duyênTốnSức 10Đượctỳ nữ một ",
+    "Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng"
+   ],
+   "ods": [
+    "Tùy duyên",
+    ""
+   ],
+   "took": {
+    "Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng": 2
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Vòng ngọc mất tích|Chọn lá này/Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng/Đặt lại/Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcTùy duyênTốnSức 10Đượctỳ nữ một ",
+   "screen": ".dlg «Vòng ngọc mất tích»",
+   "opts": [
+    "Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcTùy duyênTốnSức 10Đượctỳ nữ một ",
+    "Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Tùy duyên",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 2,
+    "Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Tin dữ Nhạn Môn|Giúp cha giữ kínTốnSức 5ĐượcTâm cơ +, cha tin ta kín miệngMấtmẫu thân chưa hay b/Lén hỏi tên lính đưa thưTùy duyênTốnSức 5ĐượcTâm cơ ++, biết huynh lạc ở hướng n/Xin cha dâng sớ cầu việnTốnSức 5ĐượcĐức +, mẫu thân thấy ta thương huynhMấtcha g",
+   "screen": ".dlg «Tin dữ Nhạn Môn»",
+   "opts": [
+    "Giúp cha giữ kínTốnSức 5ĐượcTâm cơ +, cha tin ta kín miệngMấtmẫu thân chưa hay b",
+    "Xin cha dâng sớ cầu việnTốnSức 5ĐượcĐức +, mẫu thân thấy ta thương huynhMấtcha g",
+    "Lén hỏi tên lính đưa thưTùy duyênTốnSức 5ĐượcTâm cơ ++, biết huynh lạc ở hướng n"
+   ],
+   "ods": [
+    "",
+    "",
+    "Tùy duyên"
+   ],
+   "took": {
+    "Giúp cha giữ kínTốnSức 5ĐượcTâm cơ +, cha tin ta kín miệngMấtmẫu thân chưa hay b": 1,
+    "Lén hỏi tên lính đưa thưTùy duyênTốnSức 5ĐượcTâm cơ ++, biết huynh lạc ở hướng n": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Tin dữ Nhạn Môn|Chọn lá này/Giúp cha giữ kínTốnSức 5ĐượcTâm cơ +, cha tin ta kín miệngMấtmẫu thân chưa hay b/Lén hỏi tên lính đưa thưTùy duyênTốnSức 5ĐượcTâm cơ ++, biết huynh lạc ở hướng n/Xin cha dâng sớ cầu việnTốnSức 5ĐượcĐức +, mẫu thân thấy ta thương huynhMấtcha g/Đặt lại",
+   "screen": ".dlg «Tin dữ Nhạn Môn»",
+   "opts": [
+    "Giúp cha giữ kínTốnSức 5ĐượcTâm cơ +, cha tin ta kín miệngMấtmẫu thân chưa hay b",
+    "Xin cha dâng sớ cầu việnTốnSức 5ĐượcĐức +, mẫu thân thấy ta thương huynhMấtcha g",
+    "Lén hỏi tên lính đưa thưTùy duyênTốnSức 5ĐượcTâm cơ ++, biết huynh lạc ở hướng n",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Giúp cha giữ kínTốnSức 5ĐượcTâm cơ +, cha tin ta kín miệngMấtmẫu thân chưa hay b": 1,
+    "Đặt lại": 1,
+    "Chọn lá này": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Danh hiệu mới|Chọn lá này/Đeo ngayTốnkhôngĐượckhôngGhi chúchọn một: Thêm Tài hay Học mau tiến!/Đặt lại",
+   "screen": ".dlg «Danh hiệu mới»",
+   "opts": [
+    "Đeo ngayTốnkhôngĐượckhôngGhi chúchọn một: Thêm Tài hay Học mau tiến!",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Đeo «Thư hương»|Học mau tiếnTốnkhôngĐượcTự học tài nghệ: đôi khi tiến thêm một phần/Thêm TàiTốnkhôngĐượcTài +",
+   "screen": ".dlg «Đeo «Thư hương»»",
+   "opts": [
+    "Thêm TàiTốnkhôngĐượcTài +",
+    "Học mau tiếnTốnkhôngĐượcTự học tài nghệ: đôi khi tiến thêm một phần"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Học mau tiếnTốnkhôngĐượcTự học tài nghệ: đôi khi tiến thêm một phần": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Tin dữ Nhạn Môn|Giấu mẹ như lời cha dặnTốnkhôngĐượcGia thanh +, cha thấy ta giữ lờiMấtmẹ biết ta/Nói nửa thật nửa giấuTùy duyênTốnSức 5Đượcchẳng được gì; hỏng thì Gia thanh −−, /Nói thật với mẹTốnSức 10ĐượcĐức +, mẹ tin taMấtbà mất ăn mất ngủ vì loGợi ýĐức +",
+   "screen": ".dlg «Tin dữ Nhạn Môn»",
+   "opts": [
+    "Nói thật với mẹTốnSức 10ĐượcĐức +, mẹ tin taMấtbà mất ăn mất ngủ vì loGợi ýĐức +",
+    "Giấu mẹ như lời cha dặnTốnkhôngĐượcGia thanh +, cha thấy ta giữ lờiMấtmẹ biết ta",
+    "Nói nửa thật nửa giấuTùy duyênTốnSức 5Đượcchẳng được gì; hỏng thì Gia thanh −−, "
+   ],
+   "ods": [
+    "",
+    "",
+    "Tùy duyên"
+   ],
+   "took": {
+    "Nói nửa thật nửa giấuTùy duyênTốnSức 5Đượcchẳng được gì; hỏng thì Gia thanh −−, ": 1,
+    "Giấu mẹ như lời cha dặnTốnkhôngĐượcGia thanh +, cha thấy ta giữ lờiMấtmẹ biết ta": 2
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Tin dữ Nhạn Môn|Chọn lá này/Giấu mẹ như lời cha dặnTốnkhôngĐượcGia thanh +, cha thấy ta giữ lờiMấtmẹ biết ta/Nói nửa thật nửa giấuTùy duyênTốnSức 5Đượcchẳng được gì; hỏng thì Gia thanh −−, /Nói thật với mẹTốnSức 10ĐượcĐức +, mẹ tin taMấtbà mất ăn mất ngủ vì loGợi ýĐức +/Đặt lại",
+   "screen": ".dlg «Tin dữ Nhạn Môn»",
+   "opts": [
+    "Nói thật với mẹTốnSức 10ĐượcĐức +, mẹ tin taMấtbà mất ăn mất ngủ vì loGợi ýĐức +",
+    "Giấu mẹ như lời cha dặnTốnkhôngĐượcGia thanh +, cha thấy ta giữ lờiMấtmẹ biết ta",
+    "Nói nửa thật nửa giấuTùy duyênTốnSức 5Đượcchẳng được gì; hỏng thì Gia thanh −−, ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Nói nửa thật nửa giấuTùy duyênTốnSức 5Đượcchẳng được gì; hỏng thì Gia thanh −−, ": 1,
+    "Giấu mẹ như lời cha dặnTốnkhôngĐượcGia thanh +, cha thấy ta giữ lờiMấtmẹ biết ta": 2,
+    "Đặt lại": 2,
+    "Chọn lá này": 1
+   },
+   "n": 6
+  },
+  {
+   "k": ".dlg|Có người bán tin|Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy!/Mua tinTốnBạc 35·1 khắcĐượcnghe một tin thật·đáng giá",
+   "screen": ".dlg «Có người bán tin»",
+   "opts": [
+    "Mua tinTốnBạc 35·1 khắcĐượcnghe một tin thật·đáng giá",
+    "Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy!"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy!": 1,
+    "Mua tinTốnBạc 35·1 khắcĐượcnghe một tin thật·đáng giá": 2
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Có người bán tin|Chọn lá này/Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy!/Mua tinTốnBạc 35·1 khắcĐượcnghe một tin thật·đáng giá/Đặt lại",
+   "screen": ".dlg «Có người bán tin»",
+   "opts": [
+    "Mua tinTốnBạc 35·1 khắcĐượcnghe một tin thật·đáng giá",
+    "Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy!",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Mua tinTốnBạc 35·1 khắcĐượcnghe một tin thật·đáng giá": 1,
+    "Đặt lại": 2,
+    "Không muaTốnkhôngĐượckhôngGhi chúkhông biết tin ấy!": 4
+   },
+   "n": 7
+  },
+  {
+   "k": ".dlg|Có người bán tin|Chọn lá này/Mua tinTốnBạc 35·1 khắcĐượcnghe một tin thật·đáng giá/Đặt lại",
+   "screen": ".dlg «Có người bán tin»",
+   "opts": [
+    "Mua tinTốnBạc 35·1 khắcĐượcnghe một tin thật·đáng giá",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Tin dữ Nhạn Môn|Khuyên cha ở lại kinh thànhTốnSức 5Đượccha giữ được thế trên triều, kết: Giữ thế/Xin cha chuộc huynh trước, rồi mới bàn binhTùy duyênTốnSức 10Đượccứu được người /Ủng hộ chaTốnSức 5Đượccha ra trận với lòng con gái, kết: Cha ra Nhạn MônMấtnhà v",
+   "screen": ".dlg «Tin dữ Nhạn Môn»",
+   "opts": [
+    "Ủng hộ chaTốnSức 5Đượccha ra trận với lòng con gái, kết: Cha ra Nhạn MônMấtnhà v",
+    "Khuyên cha ở lại kinh thànhTốnSức 5Đượccha giữ được thế trên triều, kết: Giữ thế",
+    "Xin cha chuộc huynh trước, rồi mới bàn binhTùy duyênTốnSức 10Đượccứu được người "
+   ],
+   "ods": [
+    "",
+    "",
+    "Tùy duyên"
+   ],
+   "took": {
+    "Khuyên cha ở lại kinh thànhTốnSức 5Đượccha giữ được thế trên triều, kết: Giữ thế": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Tin dữ Nhạn Môn|Chọn lá này/Khuyên cha ở lại kinh thànhTốnSức 5Đượccha giữ được thế trên triều, kết: Giữ thế/Xin cha chuộc huynh trước, rồi mới bàn binhTùy duyênTốnSức 10Đượccứu được người /Đặt lại/Ủng hộ chaTốnSức 5Đượccha ra trận với lòng con gái, kết: Cha ra Nhạn MônMấtnhà v",
+   "screen": ".dlg «Tin dữ Nhạn Môn»",
+   "opts": [
+    "Ủng hộ chaTốnSức 5Đượccha ra trận với lòng con gái, kết: Cha ra Nhạn MônMấtnhà v",
+    "Khuyên cha ở lại kinh thànhTốnSức 5Đượccha giữ được thế trên triều, kết: Giữ thế",
+    "Xin cha chuộc huynh trước, rồi mới bàn binhTùy duyênTốnSức 10Đượccứu được người ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Xin cha chuộc huynh trước, rồi mới bàn binhTùy duyênTốnSức 10Đượccứu được người ": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Cha say rượu|Lắng nghe, hỏi chuyện các nhà trên triềuTốnkhôngĐượcTâm cơ tăng, biết thêm tin t/Thưa: con chỉ muốn ở gần cha mẹTốnkhôngĐượccha sẽ lo chuyện gả ta sớmGợi ýcha sẽ/Thưa: con muốn vào cung, làm rạng danh nhàTốnkhôngĐượccha hài lòng, ủng hộ ta đi",
+   "screen": ".dlg «Cha say rượu»",
+   "opts": [
+    "Thưa: con muốn vào cung, làm rạng danh nhàTốnkhôngĐượccha hài lòng, ủng hộ ta đi",
+    "Thưa: con chỉ muốn ở gần cha mẹTốnkhôngĐượccha sẽ lo chuyện gả ta sớmGợi ýcha sẽ",
+    "Lắng nghe, hỏi chuyện các nhà trên triềuTốnkhôngĐượcTâm cơ tăng, biết thêm tin t"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Lắng nghe, hỏi chuyện các nhà trên triềuTốnkhôngĐượcTâm cơ tăng, biết thêm tin t": 3,
+    "Thưa: con chỉ muốn ở gần cha mẹTốnkhôngĐượccha sẽ lo chuyện gả ta sớmGợi ýcha sẽ": 2,
+    "Thưa: con muốn vào cung, làm rạng danh nhàTốnkhôngĐượccha hài lòng, ủng hộ ta đi": 1
+   },
+   "n": 6
+  },
+  {
+   "k": ".dlg|Cha say rượu|Chọn lá này/Lắng nghe, hỏi chuyện các nhà trên triềuTốnkhôngĐượcTâm cơ tăng, biết thêm tin t/Thưa: con chỉ muốn ở gần cha mẹTốnkhôngĐượccha sẽ lo chuyện gả ta sớmGợi ýcha sẽ/Thưa: con muốn vào cung, làm rạng danh nhàTốnkhôngĐượccha hài lòng, ủng hộ ta đi/Đặt lại",
+   "screen": ".dlg «Cha say rượu»",
+   "opts": [
+    "Thưa: con muốn vào cung, làm rạng danh nhàTốnkhôngĐượccha hài lòng, ủng hộ ta đi",
+    "Thưa: con chỉ muốn ở gần cha mẹTốnkhôngĐượccha sẽ lo chuyện gả ta sớmGợi ýcha sẽ",
+    "Lắng nghe, hỏi chuyện các nhà trên triềuTốnkhôngĐượcTâm cơ tăng, biết thêm tin t",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Thưa: con muốn vào cung, làm rạng danh nhàTốnkhôngĐượccha hài lòng, ủng hộ ta đi": 1,
+    "Đặt lại": 3,
+    "Lắng nghe, hỏi chuyện các nhà trên triềuTốnkhôngĐượcTâm cơ tăng, biết thêm tin t": 1,
+    "Thưa: con chỉ muốn ở gần cha mẹTốnkhôngĐượccha sẽ lo chuyện gả ta sớmGợi ýcha sẽ": 1,
+    "Chọn lá này": 2
+   },
+   "n": 8
+  },
+  {
+   "k": ".dlg|Hôn sự|Biếu bà mối, nhờ bà đánh tiếng nhà khácTốnBạc 15Đượcbà mối đứng về phía taGợi ýb/Thưa: con xin đợi kỳ tuyển túCó cơTốnkhôngĐượcÁp lực hôn sự −−, nhà thôi giục; h/Tiếp bà mối, hỏi kỹ về nhà traiTốnSức 5ĐượcTâm cơ +, biết rõ nhà ấyMấtÁp lực hôn",
+   "screen": ".dlg «Hôn sự»",
+   "opts": [
+    "Tiếp bà mối, hỏi kỹ về nhà traiTốnSức 5ĐượcTâm cơ +, biết rõ nhà ấyMấtÁp lực hôn",
+    "Thưa: con xin đợi kỳ tuyển túCó cơTốnkhôngĐượcÁp lực hôn sự −−, nhà thôi giục; h",
+    "Biếu bà mối, nhờ bà đánh tiếng nhà khácTốnBạc 15Đượcbà mối đứng về phía taGợi ýb"
+   ],
+   "ods": [
+    "",
+    "Có cơ",
+    ""
+   ],
+   "took": {
+    "Thưa: con xin đợi kỳ tuyển túCó cơTốnkhôngĐượcÁp lực hôn sự −−, nhà thôi giục; h": 2,
+    "Tiếp bà mối, hỏi kỹ về nhà traiTốnSức 5ĐượcTâm cơ +, biết rõ nhà ấyMấtÁp lực hôn": 2
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Hôn sự|Biếu bà mối, nhờ bà đánh tiếng nhà khácTốnBạc 15Đượcbà mối đứng về phía taGợi ýb/Chọn lá này/Thưa: con xin đợi kỳ tuyển túCó cơTốnkhôngĐượcÁp lực hôn sự −−, nhà thôi giục; h/Tiếp bà mối, hỏi kỹ về nhà traiTốnSức 5ĐượcTâm cơ +, biết rõ nhà ấyMấtÁp lực hôn/Đặt lại",
+   "screen": ".dlg «Hôn sự»",
+   "opts": [
+    "Tiếp bà mối, hỏi kỹ về nhà traiTốnSức 5ĐượcTâm cơ +, biết rõ nhà ấyMấtÁp lực hôn",
+    "Thưa: con xin đợi kỳ tuyển túCó cơTốnkhôngĐượcÁp lực hôn sự −−, nhà thôi giục; h",
+    "Biếu bà mối, nhờ bà đánh tiếng nhà khácTốnBạc 15Đượcbà mối đứng về phía taGợi ýb",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "Có cơ",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Thưa: con xin đợi kỳ tuyển túCó cơTốnkhôngĐượcÁp lực hôn sự −−, nhà thôi giục; h": 4,
+    "Đặt lại": 2,
+    "Tiếp bà mối, hỏi kỹ về nhà traiTốnSức 5ĐượcTâm cơ +, biết rõ nhà ấyMấtÁp lực hôn": 1,
+    "Biếu bà mối, nhờ bà đánh tiếng nhà khácTốnBạc 15Đượcbà mối đứng về phía taGợi ýb": 1
+   },
+   "n": 8
+  },
+  {
+   "k": ".dlg|Hôn sự|Biếu bà mối, nhờ bà đánh tiếng nhà khácTốnBạc 15Đượcbà mối đứng về phía taGợi ýb/Chọn lá này/Tiếp bà mối, hỏi kỹ về nhà traiTốnSức 5ĐượcTâm cơ +, biết rõ nhà ấyMấtÁp lực hôn/Đặt lại",
+   "screen": ".dlg «Hôn sự»",
+   "opts": [
+    "Tiếp bà mối, hỏi kỹ về nhà traiTốnSức 5ĐượcTâm cơ +, biết rõ nhà ấyMấtÁp lực hôn",
+    "Biếu bà mối, nhờ bà đánh tiếng nhà khácTốnBạc 15Đượcbà mối đứng về phía taGợi ýb",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 1,
+    "Tiếp bà mối, hỏi kỹ về nhà traiTốnSức 5ĐượcTâm cơ +, biết rõ nhà ấyMấtÁp lực hôn": 1,
+    "Chọn lá này": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Thu săn|Chúc nàng ta đi săn bình anTốnBạc 20ĐượcDanh ++/Nhận thêu một nửaTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++/Nói bận việc, tránh điTốnkhôngĐượcSức ++MấtPhi Mã Ngọc Hành thiện cảm −−MấtPhi M/Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++",
+   "screen": ".dlg «Thu săn»",
+   "opts": [
+    "Nhận thêu một nửaTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++",
+    "Chúc nàng ta đi săn bình anTốnBạc 20ĐượcDanh ++",
+    "Nói bận việc, tránh điTốnkhôngĐượcSức ++MấtPhi Mã Ngọc Hành thiện cảm −−MấtPhi M",
+    "Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nhận thêu một nửaTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++": 1,
+    "Nói bận việc, tránh điTốnkhôngĐượcSức ++MấtPhi Mã Ngọc Hành thiện cảm −−MấtPhi M": 3,
+    "Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Thu săn|Chúc nàng ta đi săn bình anTốnBạc 20ĐượcDanh ++/Chọn lá này/Nhận thêu một nửaTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++/Nói bận việc, tránh điTốnkhôngĐượcSức ++MấtPhi Mã Ngọc Hành thiện cảm −−MấtPhi M/Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++/Đặt lại",
+   "screen": ".dlg «Thu săn»",
+   "opts": [
+    "Nhận thêu một nửaTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++",
+    "Chúc nàng ta đi săn bình anTốnBạc 20ĐượcDanh ++",
+    "Nói bận việc, tránh điTốnkhôngĐượcSức ++MấtPhi Mã Ngọc Hành thiện cảm −−MấtPhi M",
+    "Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nói bận việc, tránh điTốnkhôngĐượcSức ++MấtPhi Mã Ngọc Hành thiện cảm −−MấtPhi M": 3,
+    "Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++": 2,
+    "Đặt lại": 3,
+    "Nhận thêu một nửaTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++": 4,
+    "Chúc nàng ta đi săn bình anTốnBạc 20ĐượcDanh ++": 2
+   },
+   "n": 14
+  },
+  {
+   "k": ".dlg|Thu săn|Chúc nàng ta đi săn bình anTốnBạc 20ĐượcDanh ++/Chọn lá này/Nói bận việc, tránh điTốnkhôngĐượcSức ++MấtPhi Mã Ngọc Hành thiện cảm −−MấtPhi M/Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++/Đặt lại",
+   "screen": ".dlg «Thu săn»",
+   "opts": [
+    "Chúc nàng ta đi săn bình anTốnBạc 20ĐượcDanh ++",
+    "Nói bận việc, tránh điTốnkhôngĐượcSức ++MấtPhi Mã Ngọc Hành thiện cảm −−MấtPhi M",
+    "Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nói bận việc, tránh điTốnkhôngĐượcSức ++MấtPhi Mã Ngọc Hành thiện cảm −−MấtPhi M": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Thu săn|Chúc nàng ta đi săn bình anTốnBạc 20ĐượcDanh ++/Chọn lá này/Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++/Đặt lại",
+   "screen": ".dlg «Thu săn»",
+   "opts": [
+    "Chúc nàng ta đi săn bình anTốnBạc 20ĐượcDanh ++",
+    "Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Thu săn|Chúc nàng ta đi săn bình anTốnBạc 20ĐượcDanh ++/Chọn lá này/Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++",
+   "screen": ".dlg «Thu săn»",
+   "opts": [
+    "Chúc nàng ta đi săn bình anTốnBạc 20ĐượcDanh ++",
+    "Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++",
+    "Chọn lá này"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đem chỉ vàng dành dụm cho nàng taTốnDanh 2ĐượcĐức ++": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Huynh trưởng thua bạc|Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa lòngGợi ýhuynh trưởng mang oá/Từ chối, giữ kínCó cơTốnkhôngĐượccó thể chủ sòng đến đòi nợ, cả phố biếtGợi ýcó /Xin tổ mẫu đứng ra trả nợTốnSức 10Đượchuynh trưởng mang ơn ta; tổ mẫu phật ý (nh/Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhuynh trưởng mang ơn ta!",
+   "screen": ".dlg «Huynh trưởng thua bạc»",
+   "opts": [
+    "Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhuynh trưởng mang ơn ta!",
+    "Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa lòngGợi ýhuynh trưởng mang oá",
+    "Từ chối, giữ kínCó cơTốnkhôngĐượccó thể chủ sòng đến đòi nợ, cả phố biếtGợi ýcó ",
+    "Xin tổ mẫu đứng ra trả nợTốnSức 10Đượchuynh trưởng mang ơn ta; tổ mẫu phật ý (nh"
+   ],
+   "ods": [
+    "",
+    "",
+    "Có cơ",
+    ""
+   ],
+   "took": {
+    "Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhuynh trưởng mang ơn ta!": 2,
+    "Từ chối, giữ kínCó cơTốnkhôngĐượccó thể chủ sòng đến đòi nợ, cả phố biếtGợi ýcó ": 3,
+    "Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa lòngGợi ýhuynh trưởng mang oá": 3
+   },
+   "n": 8
+  },
+  {
+   "k": ".dlg|Huynh trưởng thua bạc|Chọn lá này/Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa lòngGợi ýhuynh trưởng mang oá/Từ chối, giữ kínCó cơTốnkhôngĐượccó thể chủ sòng đến đòi nợ, cả phố biếtGợi ýcó /Xin tổ mẫu đứng ra trả nợTốnSức 10Đượchuynh trưởng mang ơn ta; tổ mẫu phật ý (nh/Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhuynh trưởng mang ơn ta!/Đặt lại",
+   "screen": ".dlg «Huynh trưởng thua bạc»",
+   "opts": [
+    "Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhuynh trưởng mang ơn ta!",
+    "Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa lòngGợi ýhuynh trưởng mang oá",
+    "Từ chối, giữ kínCó cơTốnkhôngĐượccó thể chủ sòng đến đòi nợ, cả phố biếtGợi ýcó ",
+    "Xin tổ mẫu đứng ra trả nợTốnSức 10Đượchuynh trưởng mang ơn ta; tổ mẫu phật ý (nh",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "Có cơ",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhuynh trưởng mang ơn ta!": 3,
+    "Đặt lại": 3,
+    "Từ chối, giữ kínCó cơTốnkhôngĐượccó thể chủ sòng đến đòi nợ, cả phố biếtGợi ýcó ": 10,
+    "Xin tổ mẫu đứng ra trả nợTốnSức 10Đượchuynh trưởng mang ơn ta; tổ mẫu phật ý (nh": 1,
+    "Chọn lá này": 2,
+    "Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa lòngGợi ýhuynh trưởng mang oá": 2
+   },
+   "n": 21
+  },
+  {
+   "k": ".dlg|Huynh trưởng thua bạc|Chọn lá này/Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa lòngGợi ýhuynh trưởng mang oá/Xin tổ mẫu đứng ra trả nợTốnSức 10Đượchuynh trưởng mang ơn ta; tổ mẫu phật ý (nh/Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhuynh trưởng mang ơn ta!/Đặt lại",
+   "screen": ".dlg «Huynh trưởng thua bạc»",
+   "opts": [
+    "Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhuynh trưởng mang ơn ta!",
+    "Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa lòngGợi ýhuynh trưởng mang oá",
+    "Xin tổ mẫu đứng ra trả nợTốnSức 10Đượchuynh trưởng mang ơn ta; tổ mẫu phật ý (nh",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Xin tổ mẫu đứng ra trả nợTốnSức 10Đượchuynh trưởng mang ơn ta; tổ mẫu phật ý (nh": 2,
+    "Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa lòngGợi ýhuynh trưởng mang oá": 3,
+    "Đặt lại": 2,
+    "Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhuynh trưởng mang ơn ta!": 1
+   },
+   "n": 8
+  },
+  {
+   "k": ".dlg|Huynh trưởng thua bạc|Chọn lá này/Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa lòngGợi ýhuynh trưởng mang oá/Xin tổ mẫu đứng ra trả nợTốnSức 10Đượchuynh trưởng mang ơn ta; tổ mẫu phật ý (nh/Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhuynh trưởng mang ơn ta!",
+   "screen": ".dlg «Huynh trưởng thua bạc»",
+   "opts": [
+    "Đưa bạcTốnBạc 50Đượchuynh trưởng mang ơn taGợi ýhuynh trưởng mang ơn ta!",
+    "Mách chaTốnkhôngĐượchuynh trưởng mang oán; cha vừa lòngGợi ýhuynh trưởng mang oá",
+    "Xin tổ mẫu đứng ra trả nợTốnSức 10Đượchuynh trưởng mang ơn ta; tổ mẫu phật ý (nh",
+    "Chọn lá này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Xin tổ mẫu đứng ra trả nợTốnSức 10Đượchuynh trưởng mang ơn ta; tổ mẫu phật ý (nh": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Hôn sự|Gửi trả bài thơ, không một lờiTốnkhôngĐượcÁp lực hôn sự −−MấtGia thanh −, nhà tr/Họa lại một bài cho phải lễTốnkhôngĐượcĐức +, nhà trai: thiện cảm +MấtÁp lực hôn/Đưa bài thơ cho cha xemTốnkhôngĐượccha thấy ta biết phépMấtÁp lực hôn sự ++, cha",
+   "screen": ".dlg «Hôn sự»",
+   "opts": [
+    "Họa lại một bài cho phải lễTốnkhôngĐượcĐức +, nhà trai: thiện cảm +MấtÁp lực hôn",
+    "Gửi trả bài thơ, không một lờiTốnkhôngĐượcÁp lực hôn sự −−MấtGia thanh −, nhà tr",
+    "Đưa bài thơ cho cha xemTốnkhôngĐượccha thấy ta biết phépMấtÁp lực hôn sự ++, cha"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Họa lại một bài cho phải lễTốnkhôngĐượcĐức +, nhà trai: thiện cảm +MấtÁp lực hôn": 1,
+    "Gửi trả bài thơ, không một lờiTốnkhôngĐượcÁp lực hôn sự −−MấtGia thanh −, nhà tr": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Hôn sự|Chọn lá này/Gửi trả bài thơ, không một lờiTốnkhôngĐượcÁp lực hôn sự −−MấtGia thanh −, nhà tr/Họa lại một bài cho phải lễTốnkhôngĐượcĐức +, nhà trai: thiện cảm +MấtÁp lực hôn/Đưa bài thơ cho cha xemTốnkhôngĐượccha thấy ta biết phépMấtÁp lực hôn sự ++, cha/Đặt lại",
+   "screen": ".dlg «Hôn sự»",
+   "opts": [
+    "Họa lại một bài cho phải lễTốnkhôngĐượcĐức +, nhà trai: thiện cảm +MấtÁp lực hôn",
+    "Gửi trả bài thơ, không một lờiTốnkhôngĐượcÁp lực hôn sự −−MấtGia thanh −, nhà tr",
+    "Đưa bài thơ cho cha xemTốnkhôngĐượccha thấy ta biết phépMấtÁp lực hôn sự ++, cha",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 1,
+    "Gửi trả bài thơ, không một lờiTốnkhôngĐượcÁp lực hôn sự −−MấtGia thanh −, nhà tr": 1,
+    "Chọn lá này": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Sứ đoàn vào triều|Cười và hỏi giá món lạTốnDanh 2ĐượcTâm cơ +/Khen Phi Mã Ngọc Hành biết nhìn món lạTốnTâm cơ 1ĐượcPhi Mã Ngọc Hành thiện cảm /Ngồi lặng giữ nét trang trọngTốnkhôngĐượcĐức ++MấtPhi Mã Ngọc Hành thiện cảm −−M/Xin thử một tiếng đàn lạTốnSức 5ĐượcDanh ++",
+   "screen": ".dlg «Sứ đoàn vào triều»",
+   "opts": [
+    "Xin thử một tiếng đàn lạTốnSức 5ĐượcDanh ++",
+    "Khen Phi Mã Ngọc Hành biết nhìn món lạTốnTâm cơ 1ĐượcPhi Mã Ngọc Hành thiện cảm ",
+    "Cười và hỏi giá món lạTốnDanh 2ĐượcTâm cơ +",
+    "Ngồi lặng giữ nét trang trọngTốnkhôngĐượcĐức ++MấtPhi Mã Ngọc Hành thiện cảm −−M"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ngồi lặng giữ nét trang trọngTốnkhôngĐượcĐức ++MấtPhi Mã Ngọc Hành thiện cảm −−M": 2,
+    "Khen Phi Mã Ngọc Hành biết nhìn món lạTốnTâm cơ 1ĐượcPhi Mã Ngọc Hành thiện cảm ": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Sứ đoàn vào triều|Chọn lá này/Cười và hỏi giá món lạTốnDanh 2ĐượcTâm cơ +/Khen Phi Mã Ngọc Hành biết nhìn món lạTốnTâm cơ 1ĐượcPhi Mã Ngọc Hành thiện cảm /Ngồi lặng giữ nét trang trọngTốnkhôngĐượcĐức ++MấtPhi Mã Ngọc Hành thiện cảm −−M/Xin thử một tiếng đàn lạTốnSức 5ĐượcDanh ++/Đặt lại",
+   "screen": ".dlg «Sứ đoàn vào triều»",
+   "opts": [
+    "Xin thử một tiếng đàn lạTốnSức 5ĐượcDanh ++",
+    "Khen Phi Mã Ngọc Hành biết nhìn món lạTốnTâm cơ 1ĐượcPhi Mã Ngọc Hành thiện cảm ",
+    "Cười và hỏi giá món lạTốnDanh 2ĐượcTâm cơ +",
+    "Ngồi lặng giữ nét trang trọngTốnkhôngĐượcĐức ++MấtPhi Mã Ngọc Hành thiện cảm −−M",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Khen Phi Mã Ngọc Hành biết nhìn món lạTốnTâm cơ 1ĐượcPhi Mã Ngọc Hành thiện cảm ": 4,
+    "Đặt lại": 2,
+    "Ngồi lặng giữ nét trang trọngTốnkhôngĐượcĐức ++MấtPhi Mã Ngọc Hành thiện cảm −−M": 1,
+    "Xin thử một tiếng đàn lạTốnSức 5ĐượcDanh ++": 2
+   },
+   "n": 9
+  },
+  {
+   "k": ".dlg|Sứ đoàn vào triều|Chọn lá này/Cười và hỏi giá món lạTốnDanh 2ĐượcTâm cơ +/Ngồi lặng giữ nét trang trọngTốnkhôngĐượcĐức ++MấtPhi Mã Ngọc Hành thiện cảm −−M/Xin thử một tiếng đàn lạTốnSức 5ĐượcDanh ++/Đặt lại",
+   "screen": ".dlg «Sứ đoàn vào triều»",
+   "opts": [
+    "Xin thử một tiếng đàn lạTốnSức 5ĐượcDanh ++",
+    "Cười và hỏi giá món lạTốnDanh 2ĐượcTâm cơ +",
+    "Ngồi lặng giữ nét trang trọngTốnkhôngĐượcĐức ++MấtPhi Mã Ngọc Hành thiện cảm −−M",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Xin thử một tiếng đàn lạTốnSức 5ĐượcDanh ++": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Hộp phấn lạ|Chọn lá này/Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn/Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏng da mặtGợi ýphấn lạ có thể l/Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại /Đặt lại",
+   "screen": ".dlg «Hộp phấn lạ»",
+   "opts": [
+    "Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn",
+    "Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏng da mặtGợi ýphấn lạ có thể l",
+    "Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "Tùy duyên",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Cảm tạ rồi cất đi, không dùngTốnkhôngĐượcgiữ hòa khí, không dùng phấn; người tặn": 3,
+    "Đặt lại": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Hộp phấn lạ|Chọn lá này/Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏng da mặtGợi ýphấn lạ có thể l/Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại /Đặt lại",
+   "screen": ".dlg «Hộp phấn lạ»",
+   "opts": [
+    "Dùng thửTùy duyênTốnkhôngĐượcphấn lạ có thể làm hỏng da mặtGợi ýphấn lạ có thể l",
+    "Thử một chút lên cổ tayTùy duyênTốnSức 10Đượcbiết phấn có hại hay không; có hại ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Tùy duyên",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Vòng ngọc mất tích|Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng/Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcCó cơTốnSức 10Đượctỳ nữ một lòng",
+   "screen": ".dlg «Vòng ngọc mất tích»",
+   "opts": [
+    "Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcCó cơTốnSức 10Đượctỳ nữ một lòng",
+    "Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng"
+   ],
+   "ods": [
+    "Có cơ",
+    ""
+   ],
+   "took": {
+    "Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng": 2,
+    "Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcCó cơTốnSức 10Đượctỳ nữ một lòng": 2
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Vòng ngọc mất tích|Chọn lá này/Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng/Đặt lại/Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcCó cơTốnSức 10Đượctỳ nữ một lòng",
+   "screen": ".dlg «Vòng ngọc mất tích»",
+   "opts": [
+    "Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcCó cơTốnSức 10Đượctỳ nữ một lòng",
+    "Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Có cơ",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 1,
+    "Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcCó cơTốnSức 10Đượctỳ nữ một lòng": 8
+   },
+   "n": 9
+  },
+  {
+   "k": ".dlg|Vòng ngọc mất tích|Chọn lá này/Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng/Đặt lại",
+   "screen": ".dlg «Vòng ngọc mất tích»",
+   "opts": [
+    "Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 3,
+    "Đặt lại": 2,
+    "Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng": 1
+   },
+   "n": 6
+  },
+  {
+   "k": ".dlg|Hôn sự|Im lặng, để cha tự quyếtTốnkhôngĐượckhông trái ý chaMấtÁp lực hôn sự ++, cha giụ/Thưa: con muốn vào cung làm rạng danh nhàTùy duyênTốnSức 5Đượccha nhìn ta khác đ/Thưa: con nghe theo chaTốnkhôngĐượcĐức +, cha yên lòngMấtlời đã nói khó rút lạiG",
+   "screen": ".dlg «Hôn sự»",
+   "opts": [
+    "Thưa: con nghe theo chaTốnkhôngĐượcĐức +, cha yên lòngMấtlời đã nói khó rút lạiG",
+    "Thưa: con muốn vào cung làm rạng danh nhàTùy duyênTốnSức 5Đượccha nhìn ta khác đ",
+    "Im lặng, để cha tự quyếtTốnkhôngĐượckhông trái ý chaMấtÁp lực hôn sự ++, cha giụ"
+   ],
+   "ods": [
+    "",
+    "Tùy duyên",
+    ""
+   ],
+   "took": {
+    "Thưa: con muốn vào cung làm rạng danh nhàTùy duyênTốnSức 5Đượccha nhìn ta khác đ": 2,
+    "Im lặng, để cha tự quyếtTốnkhôngĐượckhông trái ý chaMấtÁp lực hôn sự ++, cha giụ": 2
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Hôn sự|Chọn lá này/Im lặng, để cha tự quyếtTốnkhôngĐượckhông trái ý chaMấtÁp lực hôn sự ++, cha giụ/Thưa: con muốn vào cung làm rạng danh nhàTùy duyênTốnSức 5Đượccha nhìn ta khác đ/Thưa: con nghe theo chaTốnkhôngĐượcĐức +, cha yên lòngMấtlời đã nói khó rút lạiG/Đặt lại",
+   "screen": ".dlg «Hôn sự»",
+   "opts": [
+    "Thưa: con nghe theo chaTốnkhôngĐượcĐức +, cha yên lòngMấtlời đã nói khó rút lạiG",
+    "Thưa: con muốn vào cung làm rạng danh nhàTùy duyênTốnSức 5Đượccha nhìn ta khác đ",
+    "Im lặng, để cha tự quyếtTốnkhôngĐượckhông trái ý chaMấtÁp lực hôn sự ++, cha giụ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "Tùy duyên",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Thưa: con muốn vào cung làm rạng danh nhàTùy duyênTốnSức 5Đượccha nhìn ta khác đ": 3,
+    "Im lặng, để cha tự quyếtTốnkhôngĐượckhông trái ý chaMấtÁp lực hôn sự ++, cha giụ": 4
+   },
+   "n": 7
+  },
+  {
+   "k": ".dlg|Hôn sự|Chọn lá này/Thưa: con muốn vào cung làm rạng danh nhàTùy duyênTốnSức 5Đượccha nhìn ta khác đ/Thưa: con nghe theo chaTốnkhôngĐượcĐức +, cha yên lòngMấtlời đã nói khó rút lạiG/Đặt lại",
+   "screen": ".dlg «Hôn sự»",
+   "opts": [
+    "Thưa: con nghe theo chaTốnkhôngĐượcĐức +, cha yên lòngMấtlời đã nói khó rút lạiG",
+    "Thưa: con muốn vào cung làm rạng danh nhàTùy duyênTốnSức 5Đượccha nhìn ta khác đ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 3,
+    "Thưa: con muốn vào cung làm rạng danh nhàTùy duyênTốnSức 5Đượccha nhìn ta khác đ": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Hôn sự|Chọn lá này/Thưa: con nghe theo chaTốnkhôngĐượcĐức +, cha yên lòngMấtlời đã nói khó rút lạiG/Đặt lại",
+   "screen": ".dlg «Hôn sự»",
+   "opts": [
+    "Thưa: con nghe theo chaTốnkhôngĐượcĐức +, cha yên lòngMấtlời đã nói khó rút lạiG",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Đại hàn, tuyết lớn|Bỏ bạc mua thêm thanTốnBạc 20Đượcqua mùa rét yên ổn/Chịu rét cho quaTốnSức 8Đượcgiữ lại 20 lượng bạcKèmnhiễm phong hàn: khả năng thấ",
+   "screen": ".dlg «Đại hàn, tuyết lớn»",
+   "opts": [
+    "Bỏ bạc mua thêm thanTốnBạc 20Đượcqua mùa rét yên ổn",
+    "Chịu rét cho quaTốnSức 8Đượcgiữ lại 20 lượng bạcKèmnhiễm phong hàn: khả năng thấ"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Chịu rét cho quaTốnSức 8Đượcgiữ lại 20 lượng bạcKèmnhiễm phong hàn: khả năng thấ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Đại hàn, tuyết lớn|Bỏ bạc mua thêm thanTốnBạc 20Đượcqua mùa rét yên ổn/Chịu rét cho quaTốnSức 8Đượcgiữ lại 20 lượng bạcKèmnhiễm phong hàn: khả năng thấ/Chọn lá này/Đặt lại",
+   "screen": ".dlg «Đại hàn, tuyết lớn»",
+   "opts": [
+    "Bỏ bạc mua thêm thanTốnBạc 20Đượcqua mùa rét yên ổn",
+    "Chịu rét cho quaTốnSức 8Đượcgiữ lại 20 lượng bạcKèmnhiễm phong hàn: khả năng thấ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Đại hàn, tuyết lớn|Góp áo và chăn cùng nàng taTốnBạc 20ĐượcDanh ++/Khen nàng ta nhân hậu, mời nàng ta cùng tràTốnSức 5ĐượcQuý nhân Hách Như Mặc thi/Nói mình chẳng dư, xin lỗiTốnDanh 2ĐượcBạc ++/Tâu xin cung dưới được sưởi chungTốnkhôngĐượcSủng ++MấtQuý nhân Hách Như Mặc thi",
+   "screen": ".dlg «Đại hàn, tuyết lớn»",
+   "opts": [
+    "Góp áo và chăn cùng nàng taTốnBạc 20ĐượcDanh ++",
+    "Khen nàng ta nhân hậu, mời nàng ta cùng tràTốnSức 5ĐượcQuý nhân Hách Như Mặc thi",
+    "Nói mình chẳng dư, xin lỗiTốnDanh 2ĐượcBạc ++",
+    "Tâu xin cung dưới được sưởi chungTốnkhôngĐượcSủng ++MấtQuý nhân Hách Như Mặc thi"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Khen nàng ta nhân hậu, mời nàng ta cùng tràTốnSức 5ĐượcQuý nhân Hách Như Mặc thi": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Đại hàn, tuyết lớn|Chọn lá này/Góp áo và chăn cùng nàng taTốnBạc 20ĐượcDanh ++/Khen nàng ta nhân hậu, mời nàng ta cùng tràTốnSức 5ĐượcQuý nhân Hách Như Mặc thi/Nói mình chẳng dư, xin lỗiTốnDanh 2ĐượcBạc ++/Tâu xin cung dưới được sưởi chungTốnkhôngĐượcSủng ++MấtQuý nhân Hách Như Mặc thi/Đặt lại",
+   "screen": ".dlg «Đại hàn, tuyết lớn»",
+   "opts": [
+    "Góp áo và chăn cùng nàng taTốnBạc 20ĐượcDanh ++",
+    "Khen nàng ta nhân hậu, mời nàng ta cùng tràTốnSức 5ĐượcQuý nhân Hách Như Mặc thi",
+    "Nói mình chẳng dư, xin lỗiTốnDanh 2ĐượcBạc ++",
+    "Tâu xin cung dưới được sưởi chungTốnkhôngĐượcSủng ++MấtQuý nhân Hách Như Mặc thi",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Tâu xin cung dưới được sưởi chungTốnkhôngĐượcSủng ++MấtQuý nhân Hách Như Mặc thi": 1,
+    "Góp áo và chăn cùng nàng taTốnBạc 20ĐượcDanh ++": 1,
+    "Chọn lá này": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Thứ muội giành mối|Mặc nàng taTốnkhôngĐượcmất mối này, áp lực hôn sự giảmGợi ýmất mối này, áp lực h/Nói lại với chaTốnSức 5Đượccha có thể mắng thứ muội, hoặc gạt đi và Gia thanh gi",
+   "screen": ".dlg «Thứ muội giành mối»",
+   "opts": [
+    "Mặc nàng taTốnkhôngĐượcmất mối này, áp lực hôn sự giảmGợi ýmất mối này, áp lực h",
+    "Nói lại với chaTốnSức 5Đượccha có thể mắng thứ muội, hoặc gạt đi và Gia thanh gi"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Nói lại với chaTốnSức 5Đượccha có thể mắng thứ muội, hoặc gạt đi và Gia thanh gi": 2,
+    "Mặc nàng taTốnkhôngĐượcmất mối này, áp lực hôn sự giảmGợi ýmất mối này, áp lực h": 3
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Thứ muội giành mối|Chọn lá này/Mặc nàng taTốnkhôngĐượcmất mối này, áp lực hôn sự giảmGợi ýmất mối này, áp lực h/Nói lại với chaTốnSức 5Đượccha có thể mắng thứ muội, hoặc gạt đi và Gia thanh gi/Đặt lại",
+   "screen": ".dlg «Thứ muội giành mối»",
+   "opts": [
+    "Mặc nàng taTốnkhôngĐượcmất mối này, áp lực hôn sự giảmGợi ýmất mối này, áp lực h",
+    "Nói lại với chaTốnSức 5Đượccha có thể mắng thứ muội, hoặc gạt đi và Gia thanh gi",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nói lại với chaTốnSức 5Đượccha có thể mắng thứ muội, hoặc gạt đi và Gia thanh gi": 4,
+    "Đặt lại": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Thứ muội giành mối|Chọn lá này/Mặc nàng taTốnkhôngĐượcmất mối này, áp lực hôn sự giảmGợi ýmất mối này, áp lực h/Đặt lại",
+   "screen": ".dlg «Thứ muội giành mối»",
+   "opts": [
+    "Mặc nàng taTốnkhôngĐượcmất mối này, áp lực hôn sự giảmGợi ýmất mối này, áp lực h",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 2,
+    "Mặc nàng taTốnkhôngĐượcmất mối này, áp lực hôn sự giảmGợi ýmất mối này, áp lực h": 2
+   },
+   "n": 4
+  },
+  {
+   "k": ".kbk|Tổng lược|Trang sau/Trang trước/Vào ngày mới",
+   "screen": ".kbk «Tổng lược»",
+   "opts": [
+    "Vào ngày mới",
+    "Trang trước",
+    "Trang sau"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Trang trước": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Hôn sự|Trả sính lễ, xin cha cho đi tuyển túVữngTốnSức 10Đượcgiữ mình cho kỳ tuyển, kết:/Xin hoãn hôn ước đến sau kỳ tuyểnTốnkhôngĐượcĐức +, cả hai đường vẫn cònMấtGia t",
+   "screen": ".dlg «Hôn sự»",
+   "opts": [
+    "Trả sính lễ, xin cha cho đi tuyển túVữngTốnSức 10Đượcgiữ mình cho kỳ tuyển, kết:",
+    "Xin hoãn hôn ước đến sau kỳ tuyểnTốnkhôngĐượcĐức +, cả hai đường vẫn cònMấtGia t"
+   ],
+   "ods": [
+    "Vững",
+    ""
+   ],
+   "took": {
+    "Trả sính lễ, xin cha cho đi tuyển túVữngTốnSức 10Đượcgiữ mình cho kỳ tuyển, kết:": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Hôn sự|Chọn lá này/Trả sính lễ, xin cha cho đi tuyển túVữngTốnSức 10Đượcgiữ mình cho kỳ tuyển, kết:/Xin hoãn hôn ước đến sau kỳ tuyểnTốnkhôngĐượcĐức +, cả hai đường vẫn cònMấtGia t/Đặt lại",
+   "screen": ".dlg «Hôn sự»",
+   "opts": [
+    "Trả sính lễ, xin cha cho đi tuyển túVữngTốnSức 10Đượcgiữ mình cho kỳ tuyển, kết:",
+    "Xin hoãn hôn ước đến sau kỳ tuyểnTốnkhôngĐượcĐức +, cả hai đường vẫn cònMấtGia t",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Vững",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Tỉnh thân|Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++/Nhờ cha nói giúp trước triềuTùy duyênTốnkhôngĐượcDanh ++BạiTốn công, không được ",
+   "screen": ".dlg «Tỉnh thân»",
+   "opts": [
+    "Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++",
+    "Nhờ cha nói giúp trước triềuTùy duyênTốnkhôngĐượcDanh ++BạiTốn công, không được "
+   ],
+   "ods": [
+    "",
+    "Tùy duyên"
+   ],
+   "took": {
+    "Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++": 1,
+    "Nhờ cha nói giúp trước triềuTùy duyênTốnkhôngĐượcDanh ++BạiTốn công, không được ": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Tỉnh thân|Chọn lá này/Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++/Nhờ cha nói giúp trước triềuTùy duyênTốnkhôngĐượcDanh ++BạiTốn công, không được /Đặt lại",
+   "screen": ".dlg «Tỉnh thân»",
+   "opts": [
+    "Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++",
+    "Nhờ cha nói giúp trước triềuTùy duyênTốnkhôngĐượcDanh ++BạiTốn công, không được ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Tỉnh thân|Khen cha Tần Nghiêm Thục Hoa, nói nhà Phi Mã Ngọc Hành cũng quýTốnBạc 60·Sức 12·/Lấy cớ mẹ cha mệt, đưa họ vềTốnDanh 10·Đức 5ĐượcSức +++·Bạc +++/Đưa người nhà mình ra, thi cùngTốnBạc 120·Sức 12ĐượcSủng ++·Danh +++/Đứng về phía Tần Nghiêm Thục Hoa, chê nhà Phi Mã Ngọc Hành nhẹTốnDanh 5ĐượcTâm c",
+   "screen": ".dlg «Tỉnh thân»",
+   "opts": [
+    "Khen cha Tần Nghiêm Thục Hoa, nói nhà Phi Mã Ngọc Hành cũng quýTốnBạc 60·Sức 12·",
+    "Đứng về phía Tần Nghiêm Thục Hoa, chê nhà Phi Mã Ngọc Hành nhẹTốnDanh 5ĐượcTâm c",
+    "Đưa người nhà mình ra, thi cùngTốnBạc 120·Sức 12ĐượcSủng ++·Danh +++",
+    "Lấy cớ mẹ cha mệt, đưa họ vềTốnDanh 10·Đức 5ĐượcSức +++·Bạc +++"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Lấy cớ mẹ cha mệt, đưa họ vềTốnDanh 10·Đức 5ĐượcSức +++·Bạc +++": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Tỉnh thân|Chọn lá này/Khen cha Tần Nghiêm Thục Hoa, nói nhà Phi Mã Ngọc Hành cũng quýTốnBạc 60·Sức 12·/Lấy cớ mẹ cha mệt, đưa họ vềTốnDanh 10·Đức 5ĐượcSức +++·Bạc +++/Đưa người nhà mình ra, thi cùngTốnBạc 120·Sức 12ĐượcSủng ++·Danh +++/Đặt lại/Đứng về phía Tần Nghiêm Thục Hoa, chê nhà Phi Mã Ngọc Hành nhẹTốnDanh 5ĐượcTâm c",
+   "screen": ".dlg «Tỉnh thân»",
+   "opts": [
+    "Khen cha Tần Nghiêm Thục Hoa, nói nhà Phi Mã Ngọc Hành cũng quýTốnBạc 60·Sức 12·",
+    "Đứng về phía Tần Nghiêm Thục Hoa, chê nhà Phi Mã Ngọc Hành nhẹTốnDanh 5ĐượcTâm c",
+    "Đưa người nhà mình ra, thi cùngTốnBạc 120·Sức 12ĐượcSủng ++·Danh +++",
+    "Lấy cớ mẹ cha mệt, đưa họ vềTốnDanh 10·Đức 5ĐượcSức +++·Bạc +++",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đưa người nhà mình ra, thi cùngTốnBạc 120·Sức 12ĐượcSủng ++·Danh +++": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Thuở thanh mai|Hẹn chàng ngày rằm ở hậu viện chùaTùy duyênTốnSức 5ĐượcTâm cơ +, có lời hẹn riên/Nhận tín vậtTốnkhôngĐượclời hẹn có vật làm tinMấtgiữ vật của nam nhân là chuyện /Trả lại, giữ lễTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng buồnGợi ýĐức +, k",
+   "screen": ".dlg «Thuở thanh mai»",
+   "opts": [
+    "Nhận tín vậtTốnkhôngĐượclời hẹn có vật làm tinMấtgiữ vật của nam nhân là chuyện ",
+    "Trả lại, giữ lễTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng buồnGợi ýĐức +, k",
+    "Hẹn chàng ngày rằm ở hậu viện chùaTùy duyênTốnSức 5ĐượcTâm cơ +, có lời hẹn riên"
+   ],
+   "ods": [
+    "",
+    "",
+    "Tùy duyên"
+   ],
+   "took": {
+    "Trả lại, giữ lễTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng buồnGợi ýĐức +, k": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Thuở thanh mai|Chọn lá này/Hẹn chàng ngày rằm ở hậu viện chùaTùy duyênTốnSức 5ĐượcTâm cơ +, có lời hẹn riên/Nhận tín vậtTốnkhôngĐượclời hẹn có vật làm tinMấtgiữ vật của nam nhân là chuyện /Trả lại, giữ lễTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng buồnGợi ýĐức +, k/Đặt lại",
+   "screen": ".dlg «Thuở thanh mai»",
+   "opts": [
+    "Nhận tín vậtTốnkhôngĐượclời hẹn có vật làm tinMấtgiữ vật của nam nhân là chuyện ",
+    "Trả lại, giữ lễTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng buồnGợi ýĐức +, k",
+    "Hẹn chàng ngày rằm ở hậu viện chùaTùy duyênTốnSức 5ĐượcTâm cơ +, có lời hẹn riên",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Trả lại, giữ lễTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng buồnGợi ýĐức +, k": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Yến đầy tháng công chúa|Dâng thêm quà để lấp chỗ ngượngTốnBạc 20ĐượcDanh ++/Lặng im, gắp thức ănTốnDanh 2ĐượcSức ++/Nói đỡ cho Phi Mã Ngọc Hành, lễ nhẹ ý nặngTốnkhôngĐượcPhi Mã Ngọc Hành thiện cảm/Đứng về phía Quý nhân Hách Như Mặc, chê quà sơ sàiTốnkhôngĐượcQuý nhân Hách Như ",
+   "screen": ".dlg «Yến đầy tháng công chúa»",
+   "opts": [
+    "Nói đỡ cho Phi Mã Ngọc Hành, lễ nhẹ ý nặngTốnkhôngĐượcPhi Mã Ngọc Hành thiện cảm",
+    "Đứng về phía Quý nhân Hách Như Mặc, chê quà sơ sàiTốnkhôngĐượcQuý nhân Hách Như ",
+    "Lặng im, gắp thức ănTốnDanh 2ĐượcSức ++",
+    "Dâng thêm quà để lấp chỗ ngượngTốnBạc 20ĐượcDanh ++"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đứng về phía Quý nhân Hách Như Mặc, chê quà sơ sàiTốnkhôngĐượcQuý nhân Hách Như ": 2,
+    "Dâng thêm quà để lấp chỗ ngượngTốnBạc 20ĐượcDanh ++": 2,
+    "Nói đỡ cho Phi Mã Ngọc Hành, lễ nhẹ ý nặngTốnkhôngĐượcPhi Mã Ngọc Hành thiện cảm": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Yến đầy tháng công chúa|Chọn lá này/Dâng thêm quà để lấp chỗ ngượngTốnBạc 20ĐượcDanh ++/Lặng im, gắp thức ănTốnDanh 2ĐượcSức ++/Nói đỡ cho Phi Mã Ngọc Hành, lễ nhẹ ý nặngTốnkhôngĐượcPhi Mã Ngọc Hành thiện cảm/Đặt lại/Đứng về phía Quý nhân Hách Như Mặc, chê quà sơ sàiTốnkhôngĐượcQuý nhân Hách Như ",
+   "screen": ".dlg «Yến đầy tháng công chúa»",
+   "opts": [
+    "Nói đỡ cho Phi Mã Ngọc Hành, lễ nhẹ ý nặngTốnkhôngĐượcPhi Mã Ngọc Hành thiện cảm",
+    "Đứng về phía Quý nhân Hách Như Mặc, chê quà sơ sàiTốnkhôngĐượcQuý nhân Hách Như ",
+    "Lặng im, gắp thức ănTốnDanh 2ĐượcSức ++",
+    "Dâng thêm quà để lấp chỗ ngượngTốnBạc 20ĐượcDanh ++",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dâng thêm quà để lấp chỗ ngượngTốnBạc 20ĐượcDanh ++": 2,
+    "Đặt lại": 4,
+    "Đứng về phía Quý nhân Hách Như Mặc, chê quà sơ sàiTốnkhôngĐượcQuý nhân Hách Như ": 1
+   },
+   "n": 7
+  },
+  {
+   "k": ".dlg|Yến đầy tháng công chúa|Chọn lá này/Dâng thêm quà để lấp chỗ ngượngTốnBạc 20ĐượcDanh ++/Lặng im, gắp thức ănTốnDanh 2ĐượcSức ++/Nói đỡ cho Phi Mã Ngọc Hành, lễ nhẹ ý nặngTốnkhôngĐượcPhi Mã Ngọc Hành thiện cảm/Đứng về phía Quý nhân Hách Như Mặc, chê quà sơ sàiTốnkhôngĐượcQuý nhân Hách Như ",
+   "screen": ".dlg «Yến đầy tháng công chúa»",
+   "opts": [
+    "Nói đỡ cho Phi Mã Ngọc Hành, lễ nhẹ ý nặngTốnkhôngĐượcPhi Mã Ngọc Hành thiện cảm",
+    "Đứng về phía Quý nhân Hách Như Mặc, chê quà sơ sàiTốnkhôngĐượcQuý nhân Hách Như ",
+    "Lặng im, gắp thức ănTốnDanh 2ĐượcSức ++",
+    "Dâng thêm quà để lấp chỗ ngượngTốnBạc 20ĐượcDanh ++",
+    "Chọn lá này"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đứng về phía Quý nhân Hách Như Mặc, chê quà sơ sàiTốnkhôngĐượcQuý nhân Hách Như ": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Thuở thanh mai|Gửi lời chúc mừngTốnBạc 5Đượcchàng gửi lại một bài thơGợi ýchàng gửi lại một bài/Im lặngTốnkhôngĐượcĐức +, giữ được tiếngMấtchàng tưởng ta đã quênGợi ýĐức +, giữ/Thêu một chiếc khăn gửi tặngTốnSức 10Đượcchàng giữ khăn bên mìnhMấtkhăn có thể l",
+   "screen": ".dlg «Thuở thanh mai»",
+   "opts": [
+    "Gửi lời chúc mừngTốnBạc 5Đượcchàng gửi lại một bài thơGợi ýchàng gửi lại một bài",
+    "Thêu một chiếc khăn gửi tặngTốnSức 10Đượcchàng giữ khăn bên mìnhMấtkhăn có thể l",
+    "Im lặngTốnkhôngĐượcĐức +, giữ được tiếngMấtchàng tưởng ta đã quênGợi ýĐức +, giữ"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Thêu một chiếc khăn gửi tặngTốnSức 10Đượcchàng giữ khăn bên mìnhMấtkhăn có thể l": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Thuở thanh mai|Chọn lá này/Gửi lời chúc mừngTốnBạc 5Đượcchàng gửi lại một bài thơGợi ýchàng gửi lại một bài/Im lặngTốnkhôngĐượcĐức +, giữ được tiếngMấtchàng tưởng ta đã quênGợi ýĐức +, giữ/Thêu một chiếc khăn gửi tặngTốnSức 10Đượcchàng giữ khăn bên mìnhMấtkhăn có thể l/Đặt lại",
+   "screen": ".dlg «Thuở thanh mai»",
+   "opts": [
+    "Gửi lời chúc mừngTốnBạc 5Đượcchàng gửi lại một bài thơGợi ýchàng gửi lại một bài",
+    "Thêu một chiếc khăn gửi tặngTốnSức 10Đượcchàng giữ khăn bên mìnhMấtkhăn có thể l",
+    "Im lặngTốnkhôngĐượcĐức +, giữ được tiếngMấtchàng tưởng ta đã quênGợi ýĐức +, giữ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Hội thơ xuân|Cáo bệnh ở nhàTốnkhôngĐượcở nhà đọc sách, không được gìGợi ýở nhà đọc sách, khôn/Dự hội, làm thơTốnSức 15Đượcthơ hay thì nổi danh; kém thì mất chút DanhGợi ýthơ ",
+   "screen": ".dlg «Hội thơ xuân»",
+   "opts": [
+    "Dự hội, làm thơTốnSức 15Đượcthơ hay thì nổi danh; kém thì mất chút DanhGợi ýthơ ",
+    "Cáo bệnh ở nhàTốnkhôngĐượcở nhà đọc sách, không được gìGợi ýở nhà đọc sách, khôn"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Cáo bệnh ở nhàTốnkhôngĐượcở nhà đọc sách, không được gìGợi ýở nhà đọc sách, khôn": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Hội thơ xuân|Chọn lá này/Cáo bệnh ở nhàTốnkhôngĐượcở nhà đọc sách, không được gìGợi ýở nhà đọc sách, khôn/Dự hội, làm thơTốnSức 15Đượcthơ hay thì nổi danh; kém thì mất chút DanhGợi ýthơ /Đặt lại",
+   "screen": ".dlg «Hội thơ xuân»",
+   "opts": [
+    "Dự hội, làm thơTốnSức 15Đượcthơ hay thì nổi danh; kém thì mất chút DanhGợi ýthơ ",
+    "Cáo bệnh ở nhàTốnkhôngĐượcở nhà đọc sách, không được gìGợi ýở nhà đọc sách, khôn",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Cáo bệnh ở nhàTốnkhôngĐượcở nhà đọc sách, không được gìGợi ýở nhà đọc sách, khôn": 2,
+    "Chọn lá này": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Mẫu thân lâm bệnh|Mời danh y trong kinh, bán đồ trang sức lấy tiền thuốcTùy duyênTốnBạc 40Đượcmẫu /Tự tay hầu thuốc ngày đêmTùy duyênTốnSức 30Đượcmẫu thân qua khỏi, thiện cảm ++Gợ",
+   "screen": ".dlg «Mẫu thân lâm bệnh»",
+   "opts": [
+    "Mời danh y trong kinh, bán đồ trang sức lấy tiền thuốcTùy duyênTốnBạc 40Đượcmẫu ",
+    "Tự tay hầu thuốc ngày đêmTùy duyênTốnSức 30Đượcmẫu thân qua khỏi, thiện cảm ++Gợ"
+   ],
+   "ods": [
+    "Tùy duyên",
+    "Tùy duyên"
+   ],
+   "took": {
+    "Mời danh y trong kinh, bán đồ trang sức lấy tiền thuốcTùy duyênTốnBạc 40Đượcmẫu ": 2,
+    "Tự tay hầu thuốc ngày đêmTùy duyênTốnSức 30Đượcmẫu thân qua khỏi, thiện cảm ++Gợ": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Mẫu thân lâm bệnh|Chọn lá này/Mời danh y trong kinh, bán đồ trang sức lấy tiền thuốcTùy duyênTốnBạc 40Đượcmẫu /Tự tay hầu thuốc ngày đêmTùy duyênTốnSức 30Đượcmẫu thân qua khỏi, thiện cảm ++Gợ/Đặt lại",
+   "screen": ".dlg «Mẫu thân lâm bệnh»",
+   "opts": [
+    "Mời danh y trong kinh, bán đồ trang sức lấy tiền thuốcTùy duyênTốnBạc 40Đượcmẫu ",
+    "Tự tay hầu thuốc ngày đêmTùy duyênTốnSức 30Đượcmẫu thân qua khỏi, thiện cảm ++Gợ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Tùy duyên",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Tự tay hầu thuốc ngày đêmTùy duyênTốnSức 30Đượcmẫu thân qua khỏi, thiện cảm ++Gợ": 1,
+    "Đặt lại": 2,
+    "Chọn lá này": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Lễ Phật đản|Dâng một nén hương, cầu bình anTốnBạc 20ĐượcĐức ++/Làm lễ qua loa rồi về cungTốnĐức 2ĐượcSức ++/Ngồi tụng kinh cùng Phi Mã Ngọc HànhTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++/Thả đèn hoa đăng cầu phúc cho cungTốnSức 5ĐượcDanh ++",
+   "screen": ".dlg «Lễ Phật đản»",
+   "opts": [
+    "Dâng một nén hương, cầu bình anTốnBạc 20ĐượcĐức ++",
+    "Thả đèn hoa đăng cầu phúc cho cungTốnSức 5ĐượcDanh ++",
+    "Ngồi tụng kinh cùng Phi Mã Ngọc HànhTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++",
+    "Làm lễ qua loa rồi về cungTốnĐức 2ĐượcSức ++"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ngồi tụng kinh cùng Phi Mã Ngọc HànhTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Lễ Phật đản|Chọn lá này/Dâng một nén hương, cầu bình anTốnBạc 20ĐượcĐức ++/Làm lễ qua loa rồi về cungTốnĐức 2ĐượcSức ++/Ngồi tụng kinh cùng Phi Mã Ngọc HànhTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++/Thả đèn hoa đăng cầu phúc cho cungTốnSức 5ĐượcDanh ++/Đặt lại",
+   "screen": ".dlg «Lễ Phật đản»",
+   "opts": [
+    "Dâng một nén hương, cầu bình anTốnBạc 20ĐượcĐức ++",
+    "Thả đèn hoa đăng cầu phúc cho cungTốnSức 5ĐượcDanh ++",
+    "Ngồi tụng kinh cùng Phi Mã Ngọc HànhTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++",
+    "Làm lễ qua loa rồi về cungTốnĐức 2ĐượcSức ++",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Thả đèn hoa đăng cầu phúc cho cungTốnSức 5ĐượcDanh ++": 2,
+    "Làm lễ qua loa rồi về cungTốnĐức 2ĐượcSức ++": 1,
+    "Ngồi tụng kinh cùng Phi Mã Ngọc HànhTốnSức 5ĐượcPhi Mã Ngọc Hành thiện cảm ++": 1,
+    "Chọn lá này": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Yến đầy tháng hoàng tử|Cáo bệnh không tớiTốnkhôngĐượcSức ++·giữ sứcKèmUyển quý nhân Hách Như Mặc để bụn/Dâng quà quýTốnBạc 40ĐượcUyển quý nhân Hách Như Mặc quý ta ++/Quà vừa phảiTốnBạc 15ĐượcUyển quý nhân Hách Như Mặc quý ta ++",
+   "screen": ".dlg «Yến đầy tháng hoàng tử»",
+   "opts": [
+    "Dâng quà quýTốnBạc 40ĐượcUyển quý nhân Hách Như Mặc quý ta ++",
+    "Quà vừa phảiTốnBạc 15ĐượcUyển quý nhân Hách Như Mặc quý ta ++",
+    "Cáo bệnh không tớiTốnkhôngĐượcSức ++·giữ sứcKèmUyển quý nhân Hách Như Mặc để bụn"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Quà vừa phảiTốnBạc 15ĐượcUyển quý nhân Hách Như Mặc quý ta ++": 2,
+    "Dâng quà quýTốnBạc 40ĐượcUyển quý nhân Hách Như Mặc quý ta ++": 2
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Yến đầy tháng hoàng tử|Chọn lá này/Cáo bệnh không tớiTốnkhôngĐượcSức ++·giữ sứcKèmUyển quý nhân Hách Như Mặc để bụn/Dâng quà quýTốnBạc 40ĐượcUyển quý nhân Hách Như Mặc quý ta ++/Quà vừa phảiTốnBạc 15ĐượcUyển quý nhân Hách Như Mặc quý ta ++/Đặt lại",
+   "screen": ".dlg «Yến đầy tháng hoàng tử»",
+   "opts": [
+    "Dâng quà quýTốnBạc 40ĐượcUyển quý nhân Hách Như Mặc quý ta ++",
+    "Quà vừa phảiTốnBạc 15ĐượcUyển quý nhân Hách Như Mặc quý ta ++",
+    "Cáo bệnh không tớiTốnkhôngĐượcSức ++·giữ sứcKèmUyển quý nhân Hách Như Mặc để bụn",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Quà vừa phảiTốnBạc 15ĐượcUyển quý nhân Hách Như Mặc quý ta ++": 2,
+    "Đặt lại": 2,
+    "Dâng quà quýTốnBạc 40ĐượcUyển quý nhân Hách Như Mặc quý ta ++": 4,
+    "Cáo bệnh không tớiTốnkhôngĐượcSức ++·giữ sứcKèmUyển quý nhân Hách Như Mặc để bụn": 1
+   },
+   "n": 9
+  },
+  {
+   "k": ".dlg|Yến đầy tháng hoàng tử|Chọn lá này/Cáo bệnh không tớiTốnkhôngĐượcSức ++·giữ sứcKèmUyển quý nhân Hách Như Mặc để bụn/Quà vừa phảiTốnBạc 15ĐượcUyển quý nhân Hách Như Mặc quý ta ++/Đặt lại",
+   "screen": ".dlg «Yến đầy tháng hoàng tử»",
+   "opts": [
+    "Quà vừa phảiTốnBạc 15ĐượcUyển quý nhân Hách Như Mặc quý ta ++",
+    "Cáo bệnh không tớiTốnkhôngĐượcSức ++·giữ sứcKèmUyển quý nhân Hách Như Mặc để bụn",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Yến đầy tháng hoàng tử|Chỉ chúc phúc, tặng chút tìnhTốnBạc 40·Sức 8ĐượcĐức ++·Uyển quý nhân Hách Như Mặ/Cáo mệt, xin về sớmTốnDanh 3ĐượcSức ++·Bạc ++MấtUyển quý nhân Hách Như Mặc thiện/Dâng một món quà quýTốnBạc 80ĐượcDanh ++·Uyển quý nhân Hách Như Mặc thiện cảm ++/Ngồi bên khen đứa trẻ giống thiên nhanTốnDanh 3·Sức 8ĐượcSủng ++·Uyển quý nhân H",
+   "screen": ".dlg «Yến đầy tháng hoàng tử»",
+   "opts": [
+    "Dâng một món quà quýTốnBạc 80ĐượcDanh ++·Uyển quý nhân Hách Như Mặc thiện cảm ++",
+    "Chỉ chúc phúc, tặng chút tìnhTốnBạc 40·Sức 8ĐượcĐức ++·Uyển quý nhân Hách Như Mặ",
+    "Ngồi bên khen đứa trẻ giống thiên nhanTốnDanh 3·Sức 8ĐượcSủng ++·Uyển quý nhân H",
+    "Cáo mệt, xin về sớmTốnDanh 3ĐượcSức ++·Bạc ++MấtUyển quý nhân Hách Như Mặc thiện"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Cáo mệt, xin về sớmTốnDanh 3ĐượcSức ++·Bạc ++MấtUyển quý nhân Hách Như Mặc thiện": 1,
+    "Ngồi bên khen đứa trẻ giống thiên nhanTốnDanh 3·Sức 8ĐượcSủng ++·Uyển quý nhân H": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Yến đầy tháng hoàng tử|Chỉ chúc phúc, tặng chút tìnhTốnBạc 40·Sức 8ĐượcĐức ++·Uyển quý nhân Hách Như Mặ/Chọn lá này/Cáo mệt, xin về sớmTốnDanh 3ĐượcSức ++·Bạc ++MấtUyển quý nhân Hách Như Mặc thiện/Dâng một món quà quýTốnBạc 80ĐượcDanh ++·Uyển quý nhân Hách Như Mặc thiện cảm ++/Ngồi bên khen đứa trẻ giống thiên nhanTốnDanh 3·Sức 8ĐượcSủng ++·Uyển quý nhân H/Đặt lại",
+   "screen": ".dlg «Yến đầy tháng hoàng tử»",
+   "opts": [
+    "Dâng một món quà quýTốnBạc 80ĐượcDanh ++·Uyển quý nhân Hách Như Mặc thiện cảm ++",
+    "Chỉ chúc phúc, tặng chút tìnhTốnBạc 40·Sức 8ĐượcĐức ++·Uyển quý nhân Hách Như Mặ",
+    "Ngồi bên khen đứa trẻ giống thiên nhanTốnDanh 3·Sức 8ĐượcSủng ++·Uyển quý nhân H",
+    "Cáo mệt, xin về sớmTốnDanh 3ĐượcSức ++·Bạc ++MấtUyển quý nhân Hách Như Mặc thiện",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ngồi bên khen đứa trẻ giống thiên nhanTốnDanh 3·Sức 8ĐượcSủng ++·Uyển quý nhân H": 3,
+    "Dâng một món quà quýTốnBạc 80ĐượcDanh ++·Uyển quý nhân Hách Như Mặc thiện cảm ++": 2,
+    "Cáo mệt, xin về sớmTốnDanh 3ĐượcSức ++·Bạc ++MấtUyển quý nhân Hách Như Mặc thiện": 1,
+    "Đặt lại": 1,
+    "Chọn lá này": 1
+   },
+   "n": 8
+  },
+  {
+   "k": ".dlg|Thuở thanh mai|Gửi chàng một chiếc đèn hoa qua tỳ nữTốnBạc 5Đượcchàng biết ta vẫn nhớGợi ýchàng/Ra phố ngắm đèn cùng chàngCó cơTốnSức 10Đượcmột đêm nhớ suốt đời; hỏng thì có ng/Ở nhà cùng cả nhàTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng chờ đến tàn đèn",
+   "screen": ".dlg «Thuở thanh mai»",
+   "opts": [
+    "Ra phố ngắm đèn cùng chàngCó cơTốnSức 10Đượcmột đêm nhớ suốt đời; hỏng thì có ng",
+    "Ở nhà cùng cả nhàTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng chờ đến tàn đèn",
+    "Gửi chàng một chiếc đèn hoa qua tỳ nữTốnBạc 5Đượcchàng biết ta vẫn nhớGợi ýchàng"
+   ],
+   "ods": [
+    "Có cơ",
+    "",
+    ""
+   ],
+   "took": {
+    "Ra phố ngắm đèn cùng chàngCó cơTốnSức 10Đượcmột đêm nhớ suốt đời; hỏng thì có ng": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Thuở thanh mai|Chọn lá này/Gửi chàng một chiếc đèn hoa qua tỳ nữTốnBạc 5Đượcchàng biết ta vẫn nhớGợi ýchàng/Ra phố ngắm đèn cùng chàngCó cơTốnSức 10Đượcmột đêm nhớ suốt đời; hỏng thì có ng/Đặt lại/Ở nhà cùng cả nhàTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng chờ đến tàn đèn",
+   "screen": ".dlg «Thuở thanh mai»",
+   "opts": [
+    "Ra phố ngắm đèn cùng chàngCó cơTốnSức 10Đượcmột đêm nhớ suốt đời; hỏng thì có ng",
+    "Ở nhà cùng cả nhàTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng chờ đến tàn đèn",
+    "Gửi chàng một chiếc đèn hoa qua tỳ nữTốnBạc 5Đượcchàng biết ta vẫn nhớGợi ýchàng",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Có cơ",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ra phố ngắm đèn cùng chàngCó cơTốnSức 10Đượcmột đêm nhớ suốt đời; hỏng thì có ng": 4
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Thuở thanh mai|Chọn lá này/Gửi chàng một chiếc đèn hoa qua tỳ nữTốnBạc 5Đượcchàng biết ta vẫn nhớGợi ýchàng/Đặt lại/Ở nhà cùng cả nhàTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng chờ đến tàn đèn",
+   "screen": ".dlg «Thuở thanh mai»",
+   "opts": [
+    "Ở nhà cùng cả nhàTốnkhôngĐượcĐức +, không ai nói được gìMấtchàng chờ đến tàn đèn",
+    "Gửi chàng một chiếc đèn hoa qua tỳ nữTốnBạc 5Đượcchàng biết ta vẫn nhớGợi ýchàng",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Gửi chàng một chiếc đèn hoa qua tỳ nữTốnBạc 5Đượcchàng biết ta vẫn nhớGợi ýchàng": 2,
+    "Chọn lá này": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Cha bị hặc tội|Dâng phần hồi môn để cha lo lótCó cơTốnHồi môn 40ĐượcThế lực nhà ++, thiện cảm +/Khuyên cha tự dâng sớ xin giáng chứcTốnkhôngĐượcĐức ++, giữ được nhàMấtThế lực n/Tìm lỗi của kẻ dâng sớ, trả đònTùy duyênTốnSức 15Đượcsớ hặc quay về đầu kẻ dâng,",
+   "screen": ".dlg «Cha bị hặc tội»",
+   "opts": [
+    "Dâng phần hồi môn để cha lo lótCó cơTốnHồi môn 40ĐượcThế lực nhà ++, thiện cảm +",
+    "Khuyên cha tự dâng sớ xin giáng chứcTốnkhôngĐượcĐức ++, giữ được nhàMấtThế lực n",
+    "Tìm lỗi của kẻ dâng sớ, trả đònTùy duyênTốnSức 15Đượcsớ hặc quay về đầu kẻ dâng,"
+   ],
+   "ods": [
+    "Có cơ",
+    "",
+    "Tùy duyên"
+   ],
+   "took": {
+    "Dâng phần hồi môn để cha lo lótCó cơTốnHồi môn 40ĐượcThế lực nhà ++, thiện cảm +": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Cha bị hặc tội|Chọn lá này/Dâng phần hồi môn để cha lo lótCó cơTốnHồi môn 40ĐượcThế lực nhà ++, thiện cảm +/Khuyên cha tự dâng sớ xin giáng chứcTốnkhôngĐượcĐức ++, giữ được nhàMấtThế lực n/Tìm lỗi của kẻ dâng sớ, trả đònTùy duyênTốnSức 15Đượcsớ hặc quay về đầu kẻ dâng,/Đặt lại",
+   "screen": ".dlg «Cha bị hặc tội»",
+   "opts": [
+    "Dâng phần hồi môn để cha lo lótCó cơTốnHồi môn 40ĐượcThế lực nhà ++, thiện cảm +",
+    "Khuyên cha tự dâng sớ xin giáng chứcTốnkhôngĐượcĐức ++, giữ được nhàMấtThế lực n",
+    "Tìm lỗi của kẻ dâng sớ, trả đònTùy duyênTốnSức 15Đượcsớ hặc quay về đầu kẻ dâng,",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Có cơ",
+    "",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Thuở thanh mai|Giữ tín vật, hồi thư hẹn kiếp sauCó cơTốnSức 5Đượclời hẹn còn nguyên, kết: Hẹn k/Đốt thư, gửi trả tín vậtTốnkhôngĐượcĐức +, dứt được, không ai nói được gìMấtchàn",
+   "screen": ".dlg «Thuở thanh mai»",
+   "opts": [
+    "Giữ tín vật, hồi thư hẹn kiếp sauCó cơTốnSức 5Đượclời hẹn còn nguyên, kết: Hẹn k",
+    "Đốt thư, gửi trả tín vậtTốnkhôngĐượcĐức +, dứt được, không ai nói được gìMấtchàn"
+   ],
+   "ods": [
+    "Có cơ",
+    ""
+   ],
+   "took": {
+    "Giữ tín vật, hồi thư hẹn kiếp sauCó cơTốnSức 5Đượclời hẹn còn nguyên, kết: Hẹn k": 2
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Thuở thanh mai|Chọn lá này/Giữ tín vật, hồi thư hẹn kiếp sauCó cơTốnSức 5Đượclời hẹn còn nguyên, kết: Hẹn k/Đặt lại/Đốt thư, gửi trả tín vậtTốnkhôngĐượcĐức +, dứt được, không ai nói được gìMấtchàn",
+   "screen": ".dlg «Thuở thanh mai»",
+   "opts": [
+    "Giữ tín vật, hồi thư hẹn kiếp sauCó cơTốnSức 5Đượclời hẹn còn nguyên, kết: Hẹn k",
+    "Đốt thư, gửi trả tín vậtTốnkhôngĐượcĐức +, dứt được, không ai nói được gìMấtchàn",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Có cơ",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Giữ tín vật, hồi thư hẹn kiếp sauCó cơTốnSức 5Đượclời hẹn còn nguyên, kết: Hẹn k": 3,
+    "Đốt thư, gửi trả tín vậtTốnkhôngĐượcĐức +, dứt được, không ai nói được gìMấtchàn": 1,
+    "Đặt lại": 1,
+    "Chọn lá này": 1
+   },
+   "n": 6
+  },
+  {
+   "k": ".dlg|Bà mối đến nhà|Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có thể đồng ý, hoặc phật ýGợi ýcha/Xin cha cho xem mặt trướcTốnkhôngĐượcnhà trai hẹn ngày đến; áp lực hôn sự tăngGợ",
+   "screen": ".dlg «Bà mối đến nhà»",
+   "opts": [
+    "Xin cha cho xem mặt trướcTốnkhôngĐượcnhà trai hẹn ngày đến; áp lực hôn sự tăngGợ",
+    "Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có thể đồng ý, hoặc phật ýGợi ýcha"
+   ],
+   "ods": [
+    "",
+    "Có cơ"
+   ],
+   "took": {
+    "Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có thể đồng ý, hoặc phật ýGợi ýcha": 2
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Bà mối đến nhà|Chọn lá này/Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có thể đồng ý, hoặc phật ýGợi ýcha/Xin cha cho xem mặt trướcTốnkhôngĐượcnhà trai hẹn ngày đến; áp lực hôn sự tăngGợ/Đặt lại",
+   "screen": ".dlg «Bà mối đến nhà»",
+   "opts": [
+    "Xin cha cho xem mặt trướcTốnkhôngĐượcnhà trai hẹn ngày đến; áp lực hôn sự tăngGợ",
+    "Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có thể đồng ý, hoặc phật ýGợi ýcha",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "Có cơ",
+    "",
+    ""
+   ],
+   "took": {
+    "Thưa: con đợi kỳ tuyển túCó cơTốnkhôngĐượccha có thể đồng ý, hoặc phật ýGợi ýcha": 4
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Bà mối đến nhà|Chọn lá này/Xin cha cho xem mặt trướcTốnkhôngĐượcnhà trai hẹn ngày đến; áp lực hôn sự tăngGợ/Đặt lại",
+   "screen": ".dlg «Bà mối đến nhà»",
+   "opts": [
+    "Xin cha cho xem mặt trướcTốnkhôngĐượcnhà trai hẹn ngày đến; áp lực hôn sự tăngGợ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Xin cha cho xem mặt trướcTốnkhôngĐượcnhà trai hẹn ngày đến; áp lực hôn sự tăngGợ": 1,
+    "Đặt lại": 1,
+    "Chọn lá này": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Bài vị đổ|Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ mẫu thương ta hơnGợi ýĐức tăng/Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di nương bị phạt; không ra thì Gia",
+   "screen": ".dlg «Bài vị đổ»",
+   "opts": [
+    "Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di nương bị phạt; không ra thì Gia",
+    "Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ mẫu thương ta hơnGợi ýĐức tăng"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di nương bị phạt; không ra thì Gia": 4,
+    "Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ mẫu thương ta hơnGợi ýĐức tăng": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Bài vị đổ|Chọn lá này/Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ mẫu thương ta hơnGợi ýĐức tăng/Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di nương bị phạt; không ra thì Gia/Đặt lại",
+   "screen": ".dlg «Bài vị đổ»",
+   "opts": [
+    "Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di nương bị phạt; không ra thì Gia",
+    "Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ mẫu thương ta hơnGợi ýĐức tăng",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 2,
+    "Quỳ nhận lỗi cho yên nhàTốnSức 15ĐượcĐức tăng, tổ mẫu thương ta hơnGợi ýĐức tăng": 4,
+    "Đặt lại": 1,
+    "Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di nương bị phạt; không ra thì Gia": 2
+   },
+   "n": 9
+  },
+  {
+   "k": ".dlg|Bài vị đổ|Chọn lá này/Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di nương bị phạt; không ra thì Gia/Đặt lại",
+   "screen": ".dlg «Bài vị đổ»",
+   "opts": [
+    "Xin tổ mẫu cho tra xétTốnSức 10Đượctra ra thì di nương bị phạt; không ra thì Gia",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Vòng ngọc mất tích|Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng/Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRất vữngTốnSức 10Đượctỳ nữ một l",
+   "screen": ".dlg «Vòng ngọc mất tích»",
+   "opts": [
+    "Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRất vữngTốnSức 10Đượctỳ nữ một l",
+    "Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng"
+   ],
+   "ods": [
+    "Rất vững",
+    ""
+   ],
+   "took": {
+    "Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRất vữngTốnSức 10Đượctỳ nữ một l": 2
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Vòng ngọc mất tích|Chọn lá này/Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng/Đặt lại/Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRất vữngTốnSức 10Đượctỳ nữ một l",
+   "screen": ".dlg «Vòng ngọc mất tích»",
+   "opts": [
+    "Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRất vữngTốnSức 10Đượctỳ nữ một l",
+    "Im lặngTốnkhôngĐượctỳ nữ bị đánh, lòng nàng ta nguội hẳnGợi ýtỳ nữ bị đánh, lòng",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Rất vững",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đứng ra bênh Cung nữ thân tín tam đẳng Hồng NgọcRất vữngTốnSức 10Đượctỳ nữ một l": 4
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Phiên vương nhập triều|Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượcmột vị Vương gia có cảm tình /Tránh mặt cho phải lễTốnkhôngĐượckhông",
+   "screen": ".dlg «Phiên vương nhập triều»",
+   "opts": [
+    "Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượcmột vị Vương gia có cảm tình ",
+    "Tránh mặt cho phải lễTốnkhôngĐượckhông"
+   ],
+   "ods": [
+    "Vững",
+    ""
+   ],
+   "took": {
+    "Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượcmột vị Vương gia có cảm tình ": 2
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Phiên vương nhập triều|Chọn lá này/Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượcmột vị Vương gia có cảm tình /Tránh mặt cho phải lễTốnkhôngĐượckhông/Đặt lại",
+   "screen": ".dlg «Phiên vương nhập triều»",
+   "opts": [
+    "Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượcmột vị Vương gia có cảm tình ",
+    "Tránh mặt cho phải lễTốnkhôngĐượckhông",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Vững",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ra mắt Vương gia ??? ở Đức Thọ cungVữngTốnkhôngĐượcmột vị Vương gia có cảm tình ": 4,
+    "Tránh mặt cho phải lễTốnkhôngĐượckhông": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Phiên vương nhập triều|Chọn lá này/Tránh mặt cho phải lễTốnkhôngĐượckhông/Đặt lại",
+   "screen": ".dlg «Phiên vương nhập triều»",
+   "opts": [
+    "Tránh mặt cho phải lễTốnkhôngĐượckhông",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Phiên vương nhập triều|Báo cho nội giám để rănTốnkhôngĐượcSủng ++MấtĐáp ứng Tống Thư Nhi thiện cảm −−Mấ/Dùng quạt che cho nàng taTốnDanh 2ĐượcĐáp ứng Tống Thư Nhi thiện cảm ++/Khẽ nhắc nàng ta giữ lễTốnkhôngĐượcĐức ++MấtĐáp ứng Tống Thư Nhi thiện cảm −−Mất/Làm ngơ như không thấyTốnĐức 2ĐượcSức ++",
+   "screen": ".dlg «Phiên vương nhập triều»",
+   "opts": [
+    "Khẽ nhắc nàng ta giữ lễTốnkhôngĐượcĐức ++MấtĐáp ứng Tống Thư Nhi thiện cảm −−Mất",
+    "Dùng quạt che cho nàng taTốnDanh 2ĐượcĐáp ứng Tống Thư Nhi thiện cảm ++",
+    "Báo cho nội giám để rănTốnkhôngĐượcSủng ++MấtĐáp ứng Tống Thư Nhi thiện cảm −−Mấ",
+    "Làm ngơ như không thấyTốnĐức 2ĐượcSức ++"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dùng quạt che cho nàng taTốnDanh 2ĐượcĐáp ứng Tống Thư Nhi thiện cảm ++": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Phiên vương nhập triều|Báo cho nội giám để rănTốnkhôngĐượcSủng ++MấtĐáp ứng Tống Thư Nhi thiện cảm −−Mấ/Chọn lá này/Dùng quạt che cho nàng taTốnDanh 2ĐượcĐáp ứng Tống Thư Nhi thiện cảm ++/Khẽ nhắc nàng ta giữ lễTốnkhôngĐượcĐức ++MấtĐáp ứng Tống Thư Nhi thiện cảm −−Mất/Làm ngơ như không thấyTốnĐức 2ĐượcSức ++/Đặt lại",
+   "screen": ".dlg «Phiên vương nhập triều»",
+   "opts": [
+    "Khẽ nhắc nàng ta giữ lễTốnkhôngĐượcĐức ++MấtĐáp ứng Tống Thư Nhi thiện cảm −−Mất",
+    "Dùng quạt che cho nàng taTốnDanh 2ĐượcĐáp ứng Tống Thư Nhi thiện cảm ++",
+    "Báo cho nội giám để rănTốnkhôngĐượcSủng ++MấtĐáp ứng Tống Thư Nhi thiện cảm −−Mấ",
+    "Làm ngơ như không thấyTốnĐức 2ĐượcSức ++",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Sơ tuyển|Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì/Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcdễ qua hơn; tổ mẫu phật ý (nhiề/Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm ",
+   "screen": ".dlg «Sơ tuyển»",
+   "opts": [
+    "Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm ",
+    "Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì",
+    "Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcdễ qua hơn; tổ mẫu phật ý (nhiề"
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững",
+    "Rất vững"
+   ],
+   "took": {
+    "Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm ": 1,
+    "Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì": 1,
+    "Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcdễ qua hơn; tổ mẫu phật ý (nhiề": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Sơ tuyển|Chọn lá này/Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì/Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcdễ qua hơn; tổ mẫu phật ý (nhiề/Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm /Đặt lại",
+   "screen": ".dlg «Sơ tuyển»",
+   "opts": [
+    "Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm ",
+    "Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì",
+    "Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcdễ qua hơn; tổ mẫu phật ý (nhiề",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững",
+    "Rất vững",
+    "",
+    ""
+   ],
+   "took": {
+    "Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcdễ qua hơn; tổ mẫu phật ý (nhiề": 4,
+    "Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì": 3,
+    "Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm ": 3
+   },
+   "n": 10
+  },
+  {
+   "k": ".dlg|Sơ tuyển|Chọn lá này/Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì/Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm /Đặt lại",
+   "screen": ".dlg «Sơ tuyển»",
+   "opts": [
+    "Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm ",
+    "Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững",
+    "",
+    ""
+   ],
+   "took": {
+    "Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Sơ tuyển|Chọn lá này/Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì/Đặt lại",
+   "screen": ".dlg «Sơ tuyển»",
+   "opts": [
+    "Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Rất vững",
+    "",
+    ""
+   ],
+   "took": {
+    "Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Sơ tuyển|Chọn lá này/Đặt lại",
+   "screen": ".dlg «Sơ tuyển»",
+   "opts": [
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 2,
+    "Chọn lá này": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Tỉnh thân|Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++/Nhờ cha nói giúp trước triềuKhó lườngTốnkhôngĐượcDanh ++BạiTốn công, không được ",
+   "screen": ".dlg «Tỉnh thân»",
+   "opts": [
+    "Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++",
+    "Nhờ cha nói giúp trước triềuKhó lườngTốnkhôngĐượcDanh ++BạiTốn công, không được "
+   ],
+   "ods": [
+    "",
+    "Khó lường"
+   ],
+   "took": {
+    "Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Tỉnh thân|Chọn lá này/Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++/Nhờ cha nói giúp trước triềuKhó lườngTốnkhôngĐượcDanh ++BạiTốn công, không được /Đặt lại",
+   "screen": ".dlg «Tỉnh thân»",
+   "opts": [
+    "Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++",
+    "Nhờ cha nói giúp trước triềuKhó lườngTốnkhôngĐượcDanh ++BạiTốn công, không được ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "Khó lường",
+    "",
+    ""
+   ],
+   "took": {
+    "Nhận quà nhà gửi vàoTốnkhôngĐượcBạc ++": 1,
+    "Chọn lá này": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Tỉnh thân|Biếu bà một món quà nhỏTốnBạc 80ĐượcĐức ++·Hoàng hậu Từ Thanh Ca thiện cảm ++/Chào lấy lệ rồi lui điTốnĐức 3ĐượcSức ++·Bạc ++MấtHoàng hậu Từ Thanh Ca thiện cả/Chào mẹ nàng ta, mời sang cung ngồiTốnBạc 40·Sức 8ĐượcDanh ++·Hoàng hậu Từ Thanh/Kể bà nghe nàng ta ở cung hiền lànhTốnDanh 3·Tâm cơ 2ĐượcSủng ++·Hoàng hậu Từ Th",
+   "screen": ".dlg «Tỉnh thân»",
+   "opts": [
+    "Chào mẹ nàng ta, mời sang cung ngồiTốnBạc 40·Sức 8ĐượcDanh ++·Hoàng hậu Từ Thanh",
+    "Biếu bà một món quà nhỏTốnBạc 80ĐượcĐức ++·Hoàng hậu Từ Thanh Ca thiện cảm ++",
+    "Kể bà nghe nàng ta ở cung hiền lànhTốnDanh 3·Tâm cơ 2ĐượcSủng ++·Hoàng hậu Từ Th",
+    "Chào lấy lệ rồi lui điTốnĐức 3ĐượcSức ++·Bạc ++MấtHoàng hậu Từ Thanh Ca thiện cả"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Biếu bà một món quà nhỏTốnBạc 80ĐượcĐức ++·Hoàng hậu Từ Thanh Ca thiện cảm ++": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Tỉnh thân|Biếu bà một món quà nhỏTốnBạc 80ĐượcĐức ++·Hoàng hậu Từ Thanh Ca thiện cảm ++/Chào lấy lệ rồi lui điTốnĐức 3ĐượcSức ++·Bạc ++MấtHoàng hậu Từ Thanh Ca thiện cả/Chào mẹ nàng ta, mời sang cung ngồiTốnBạc 40·Sức 8ĐượcDanh ++·Hoàng hậu Từ Thanh/Chọn lá này/Kể bà nghe nàng ta ở cung hiền lànhTốnDanh 3·Tâm cơ 2ĐượcSủng ++·Hoàng hậu Từ Th/Đặt lại",
+   "screen": ".dlg «Tỉnh thân»",
+   "opts": [
+    "Chào mẹ nàng ta, mời sang cung ngồiTốnBạc 40·Sức 8ĐượcDanh ++·Hoàng hậu Từ Thanh",
+    "Biếu bà một món quà nhỏTốnBạc 80ĐượcĐức ++·Hoàng hậu Từ Thanh Ca thiện cảm ++",
+    "Kể bà nghe nàng ta ở cung hiền lànhTốnDanh 3·Tâm cơ 2ĐượcSủng ++·Hoàng hậu Từ Th",
+    "Chào lấy lệ rồi lui điTốnĐức 3ĐượcSức ++·Bạc ++MấtHoàng hậu Từ Thanh Ca thiện cả",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chào mẹ nàng ta, mời sang cung ngồiTốnBạc 40·Sức 8ĐượcDanh ++·Hoàng hậu Từ Thanh": 3,
+    "Chào lấy lệ rồi lui điTốnĐức 3ĐượcSức ++·Bạc ++MấtHoàng hậu Từ Thanh Ca thiện cả": 1,
+    "Chọn lá này": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Phúc tuyển|Dâng VũTốnSức 10Đượctài nghệ dâng lên cộng vào Điện tuyểnGợi ýtài nghệ dâng lên /Để tài nghệ quyết địnhTốnSức 10Đượclấy phần giữa, cộng vào Điện tuyểnGợi ýlấy ph",
+   "screen": ".dlg «Phúc tuyển»",
+   "opts": [
+    "Dâng VũTốnSức 10Đượctài nghệ dâng lên cộng vào Điện tuyểnGợi ýtài nghệ dâng lên ",
+    "Để tài nghệ quyết địnhTốnSức 10Đượclấy phần giữa, cộng vào Điện tuyểnGợi ýlấy ph"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Để tài nghệ quyết địnhTốnSức 10Đượclấy phần giữa, cộng vào Điện tuyểnGợi ýlấy ph": 1,
+    "Dâng VũTốnSức 10Đượctài nghệ dâng lên cộng vào Điện tuyểnGợi ýtài nghệ dâng lên ": 3
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Phúc tuyển|Chọn lá này/Dâng VũTốnSức 10Đượctài nghệ dâng lên cộng vào Điện tuyểnGợi ýtài nghệ dâng lên /Đặt lại/Để tài nghệ quyết địnhTốnSức 10Đượclấy phần giữa, cộng vào Điện tuyểnGợi ýlấy ph",
+   "screen": ".dlg «Phúc tuyển»",
+   "opts": [
+    "Dâng VũTốnSức 10Đượctài nghệ dâng lên cộng vào Điện tuyểnGợi ýtài nghệ dâng lên ",
+    "Để tài nghệ quyết địnhTốnSức 10Đượclấy phần giữa, cộng vào Điện tuyểnGợi ýlấy ph",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đặt lại": 2,
+    "Để tài nghệ quyết địnhTốnSức 10Đượclấy phần giữa, cộng vào Điện tuyểnGợi ýlấy ph": 1,
+    "Dâng VũTốnSức 10Đượctài nghệ dâng lên cộng vào Điện tuyểnGợi ýtài nghệ dâng lên ": 2,
+    "Chọn lá này": 1
+   },
+   "n": 6
+  },
+  {
+   "k": ".dlg|Điện tuyển|Đáp lời khiêm nhườngTùy duyênTốnkhôngĐượcĐức nặng hơn; giữ thẻ bài hay không, kh/Đối đáp lanh lợiTùy duyênTốnkhôngĐượcTài nặng hơn; giữ thẻ bài hay không, không ",
+   "screen": ".dlg «Điện tuyển»",
+   "opts": [
+    "Đáp lời khiêm nhườngTùy duyênTốnkhôngĐượcĐức nặng hơn; giữ thẻ bài hay không, kh",
+    "Đối đáp lanh lợiTùy duyênTốnkhôngĐượcTài nặng hơn; giữ thẻ bài hay không, không "
+   ],
+   "ods": [
+    "Tùy duyên",
+    "Tùy duyên"
+   ],
+   "took": {
+    "Đáp lời khiêm nhườngTùy duyênTốnkhôngĐượcĐức nặng hơn; giữ thẻ bài hay không, kh": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Điện tuyển|Chọn lá này/Đáp lời khiêm nhườngTùy duyênTốnkhôngĐượcĐức nặng hơn; giữ thẻ bài hay không, kh/Đặt lại/Đối đáp lanh lợiTùy duyênTốnkhôngĐượcTài nặng hơn; giữ thẻ bài hay không, không ",
+   "screen": ".dlg «Điện tuyển»",
+   "opts": [
+    "Đáp lời khiêm nhườngTùy duyênTốnkhôngĐượcĐức nặng hơn; giữ thẻ bài hay không, kh",
+    "Đối đáp lanh lợiTùy duyênTốnkhôngĐượcTài nặng hơn; giữ thẻ bài hay không, không ",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "Tùy duyên",
+    "Tùy duyên",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Trả thẻ bài|Chọn lá này/Xin ở vậy, mở lớp dạy chữ cho con gáiTốnkhôngĐượcTài cao hay nhà thầy đồ thì thà/Đặt lại",
+   "screen": ".dlg «Trả thẻ bài»",
+   "opts": [
+    "Xin ở vậy, mở lớp dạy chữ cho con gáiTốnkhôngĐượcTài cao hay nhà thầy đồ thì thà",
+    "Chọn lá này",
+    "Đặt lại"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Chọn lá này": 1
+   },
+   "n": 1
+  }
+ ],
+ "_tsW": {
+  "ts|#kmrew|": {
+   "n": 2,
+   "t": 1795772636078,
+   "last": 1795772637208
+  },
+  "ts|#kdaytc|": {
+   "n": 1,
+   "t": 1795774504588,
+   "last": 1795774504588
+  }
+ },
+ "_areaW": {
+  "area|.dlg|Thứ muội giành mối": 3,
+  "area|.dlg|Bài vị đổ": 3
+ },
+ "_areaT": {
+  "area|.dlg|Thứ muội giành mối": 1795774483300,
+  "area|.dlg|Bài vị đổ": 1795776232585
+ },
+ "_skipW": {
+  ".dlg|Thứ muội giành mối": {
+   "n": 3,
+   "t": 1795774486039
+  },
+  ".dlg|Bài vị đổ": {
+   "n": 3,
+   "t": 1795776235334
+  }
+ },
+ "_deadRel": {
+  ".dlg|Thứ muội giành mối": 1,
+  ".dlg|Bài vị đổ": 1
+ },
+ "_dress": {
+  "k": "#kg82|",
+  "put": 0,
+  "look": 0
+ },
+ "t": {
+  "total": 4755959
+ }
+}
