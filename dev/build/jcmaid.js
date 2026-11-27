@@ -129,7 +129,7 @@ function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
  if(m.src==="home"&&k==="dtq"&&cdOk){const ob=npcWhy("cmBrawl",{p:m},()=>roll(B.dtqBrawl));const v=ob?ob.tgt:null;if(v){dil("cmBrawl",{v:v.id});return ev}}
  if(((m.src==="home"&&k==="muoi")||(m.src==="pick"&&k==="cnv"))&&cdOk){const os=npcWhy("cmScorn",{},()=>roll(B.scorn));const v=os?os.who:null;if(v){dil("cmScorn",{v:v.id,w:k});return ev}}
  if(m.src==="land"){const ol=cdOk&&npcWhy("cmLand",{},()=>roll(B.landAsk));if(ol){dil("cmLand",{by:ol.who.id});return ev}if(roll(B.landGift)){apply({bac:B.landBac});cmC("landBac",B.landBac);ev+=`Thư và quà cố quốc đến qua tay ${m.name}: Bạc +${B.landBac}. `}}
- if(m.src==="th"&&!S.thDead&&m.loyal>=B.talLoy&&npcWhy("cmTh",{p:m},()=>roll(B.chTh))){S.th=cl((S.th||0)+B.chThUp,-100,100);cmC("chTh",B.chThUp)}
+ if(m.src==="th"&&!S.thDead&&m.loyal>=B.talLoy&&npcWhy("cmTh",{p:m},()=>roll(B.chTh))){spAdd(S,"th",B.chThUp);cmC("chTh",B.chThUp)}
  if(m.src==="pick"&&k==="thd"&&cmTalOn(m))for(const x of (S.staff||[]))if(x.role==="maid"&&typeof servMerit==="function"){servMerit(x,B.thdMerit);cmC("thdMerit",B.thdMerit)}
  if((m.src==="room"&&roll(B.cnSpy))||(m.src==="pick"&&k==="cnv"&&cmTalOn(m)&&roll(B.cnvNet)))ev+=cmFact(m,m.src==="room"?"thuộc từng ngóc ngách, dò ra":"nghe đám cung nữ đồn");
  if(k==="td"&&!S.cmaid.tdOld&&!S.cmaid.tdNo&&cdOk&&roll(B.tdMeet)){S.cmaid.tdNo=1;dil("cmTd");return ev}

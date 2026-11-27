@@ -198,11 +198,11 @@ kitFigRects=function(){const st=$("stage");if(!st)return[];const out=[];st.query
 const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b|Hồi môn/i;/* kit-cost-rows-home: a dowry spent is a price like bạc */
 /* ---------- 6b. KIT HINT + ODDS METER (owner 11/15 15:05Z / 15:10Z, 19/11 ~01:48Z, KIT 28.6 — shared kit parts kitHint / kitHintRow / kitOptOdds) ----------
    kitHint(o, m, lv) → {hint}: read from the option's OWN data (fx + its x / j67 text: the odds, people and state of THIS moment), so it is
-   true now and changes with the context (no fixed answer to learn). Words only: stat numbers never appear (a count in a story phrase is
-   written in words: "hai mươi trượng"). It names the main gain FIRST, then the price beyond Tốn, then what a failure brings.
+   true now and changes with the context (no fixed answer to learn). A stat is NAMED with marks («Sủng ++», «Danh −», WORDING-GAIN OD 26/11 ~18:50Z (7),
+   BAL.mark.cut): its number never appears and no vague gain word is used (a count in a story phrase is written in words: "hai mươi trượng"). It names the main gain FIRST, then the price beyond Tốn, then what a failure brings.
    Clarity lv (kitHintLevel: her Tâm cơ / Tai mắt, BAL.hint*):
-     0 vague — generic people ("bề trên", "đối thủ"), no chance word; a deadly failure is always said ("hỏng thì mất mạng").
-     1 plain — the roles (Thái hậu, Hoàng hậu, Hoàng thượng), a rough chance (thường ổn / hên xui / dễ hỏng) and the failure.
+     0 vague — generic people ("Bề trên: thiện cảm +", "Đối thủ: Sủng −"), one mark, no chance word; a deadly failure is always said ("hỏng thì mất mạng").
+     1 plain — the roles (Thái hậu, Hoàng hậu, Hoàng thượng), the chance as the odds-ladder word of the card (Mong manh … Rất vững) and the failure.
      2 sharp — names (the rival by name) and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
    ODDS (owner 19/11 ~01:48Z, canon overwrite of the 14/11 15:05Z «an toàn / có rủi ro / liều» risk chip, kitRisk RETIRED): the card shows the
    kit odds meter kitOdds (7 segments red → green + the ladder word) of the option's REAL odds; a certain option (no roll) shows «Nắm chắc».
@@ -237,60 +237,74 @@ function kitHintSign(p,l){if(/^(không (mất|được|tốn)[^,]*gì|không đ�
  let c="n";try{c=kaSent(p,"n")}catch(e){}if(c==="g")return 1;if(c==="r")return -1;
  if(/(^|\s)(hài lòng|thoát nạn|vui|hợp ý|thương|tin cậy|giữ được|được giữ|được dời|dọn sang|tạ ơn)(\s|$|,)/i.test(p))return 1;return l==="hỏng"?-1:l==="kèm"?-1:1}
 const KIT_DEADLY=/(tru di|ban chết|mất mạng|lộ là chết|là chết|bị chết|xử tử|xử trảm|\bchết\b)/i;
-/* one effect phrase → [vague, plain, sharp] words (numbers dropped), or null when it is only a cost */
-function kitHintPhrase(p,sg,nm,lv){const who=nm||"\u0001";
+/* one effect phrase → [vague, plain, sharp] hint texts, or null when it is only a cost.
+   WORDING-GAIN (owner OD 26/11 ~18:50Z (7), canon overwrite of the vague words «thêm thể diện» / «để mắt hơn» / «được tiếng hiền đức» / «có lợi cho con»):
+   a hint never says a vague gain word. It names the STAT and the size in marks: «Sủng ++», «Danh −», «Đức +++» (one mark = a little, two = medium, three = a lot;
+   a loss −, −−, −−−; the size bands are BAL.mark.cut, ONE CORE). Clarity: lv 0 = name + one mark; lv 1 = name + the real size; lv 2 = also the person by name. */
+const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh|thế lực nhà/i,"hon"],[/Hồi môn/i,"hoi"],[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,"rel"],[/được ưa/i,"uu"],[/Sủng/i,"sung"],[/Danh|Đức|Ân tình/i,"dan"],[/Bạc/i,"bac"],[/Sức/i,"suc"],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,"cc"]];
+/* the marks of a change: n = the amount in the phrase (null = none named), sgn = +1 / −1 the stat's OWN direction, lv = clarity */
+function kitMk(sgn,p,lv){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];let m=1;if(n&&lv>=1){const v=+n;const g=(KIT_HINT_MAG.find(r=>r[0].test(p))||[0,"cc"])[1];const big=BAL.mark.cut.big[g];m=v>=big*BAL.mark.cut.hi?3:v<=Math.max(1,Math.floor(big*BAL.mark.cut.lo))?1:2}return (sgn>0?"+":"−").repeat(m)}
+/* THE ONE CHOICE FORMATTER (owner OD 26/11 ~21:55Z, law 4 + 11): every CHOICE surface says a stat change as marks «Danh ++» / «Sủng −» (table BAL.mark.cut, kitMk); the TỐN row (row==='ton') and counts with a unit (khắc, người…) keep their exact number; the result card + Sổ ghi never call it. Idempotent (marks hold no digit). Text in, text out (HTML spans pass through). */
+const MARK_NUM=/([+\-−])\s?(\d+)(?:(?: đến |\.\.)[+\-−]?\s?(\d+))?(?![\d.]|\s?%)/g;
+const MARK_UNIT=/^\s?(khắc|lượng|người|việc|món|lần|ngày|tuần|tháng|năm|tuổi|buổi|lá|thẻ|cái|vị)(?![\p{L}])/u;
+function markTxt(h,row){h=String(h==null?"":h);if(row==="ton")return h.replace(/([\p{L}])\s[-−]\s?(?=\d)/gu,"$1 ");/* TỐN row = what she PAYS: the exact amount, no minus sign («Bạc 3», owner OD 26/11 ~22:02Z «Tốn: Bạc 20 · Sức 5 · 1 khắc») */if(/\d\s?→\s?\d/.test(h))h=h.replace(/([\p{L}][\p{L} ]*?) (\d+)\s?→\s?(\d+)(?:\s?\(([+\-−]\d+)\))?/gu,(m,L,a,b,d)=>+a===+b?m:L+" "+(+b>+a?"+":"-")+Math.abs(+b-+a));/* «Đức 40 → 38» = a change of −2 */
+ if(!/[+\-−]\s?\d/.test(h))return h;
+ return h.replace(MARK_NUM,(m,sg,a,b,off,str)=>{const pre=str.slice(Math.max(0,off-40),off),post=str.slice(off+m.length);
+  const lab=pre.replace(/<[^>]*>/g,"").match(/([\p{L}][\p{L}\s]*?)\s*$/u);if(!lab||!/\s$/.test(pre.replace(/<[^>]*>$/,"").slice(-2)+" ")&&!/\s$/.test(pre))return m;
+  const L=lab[1].trim();if(!L||/^\(|\($/.test(pre.trim().slice(-1))||MARK_UNIT.test(post.replace(/^<[^>]*>/,"")))return m;
+  const n=Math.max(+a,b==null?0:+b);return kitMk(sg==="+"?1:-1,L.split(/\s+/).slice(-4).join(" ")+" "+sg+n,1)})}
+function kitHintPhrase(p,sg,nm,lv){const who=nm||"";
  const story=()=>{const t=p.replace(/\s*\([^()]*\d[^()]*\)/g,"").replace(/(\d+)/g,(m,d)=>kitNumVi(d)).replace(/\s*\(\s*\)/g,"").trim();return [t,t,t]};
  if(KIT_DEADLY.test(p))return lv===0?["mất mạng","mất mạng","mất mạng"]:story();
  if(/^(Sức|Bạc)\s*[-−]\s*\d+$/.test(p)||/^\d+\s*khắc$/.test(p)||/^an toàn$/i.test(p))return null;
  if(/(kẻ hầu|cung nhân) khác/i.test(p))return story();/* "kẻ hầu khác giữ kỷ cương (lòng +1)": the others, in the story's words */
- const T=[/* [re, up, down, flags]: flags "i" hostility (her side is the reverse), "w" may match a phrase without a number */
-  [/chứng cứ/i,["nắm thêm thóp kẻ khác","nắm thêm chứng cứ",`nắm thêm chứng cứ về ${who}`],["mất một chứng cứ","mất chứng cứ trong tay","mất chứng cứ trong tay"],"w"],
-  [/long thai|có thai|mang thai|\bthai\b/i,["có phúc con cái","giữ được long thai","giữ được long thai"],["lỡ phúc con cái","lần này không thể có thai","lần này không thể có thai"],"w"],
-  [/Thái hậu/i,["được lòng bề trên","Thái hậu hài lòng","Thái hậu hài lòng"],["mất lòng bề trên","Thái hậu phật ý","Thái hậu để bụng"]],
-  [/Hoàng hậu/i,["được lòng bề trên","Hoàng hậu hài lòng","Hoàng hậu hài lòng"],["mất lòng bề trên","Hoàng hậu phật ý","Hoàng hậu để bụng"]],
-  [/^(nàng|hắn|con nàng)\s+(Sủng|Danh)|Sủng của|bớt sủng/i,["hạ được đối thủ","đối thủ thất thế",`${who} thất sủng`],["đối thủ được lợi","đối thủ được lợi",`${who} được lợi`]],
-  [/phi tần.*ghen|ghen.*phi tần/i,["chuốc lòng ghen","các phi tần ghen ghét","các phi tần ghen ghét"],["bớt người ghen","các phi tần bớt ghen","các phi tần bớt ghen"],"i"],
-  [/ghen|oán|ghét/i,["kết thêm oán","có người ghen ghét",`${who} sinh oán`],["bớt người oán","có người nguôi giận",`${who} nguôi giận`],"i"],
-  [/tình ý/i,["thêm tình riêng","người ấy thêm tình ý",`${who} thêm tình ý`],["dứt tình riêng","người ấy nguội lòng",`${who} nguội lòng`]],
-  [/thế lực nhà\s*[+−-]\s?\d/i,["nhà ngươi thêm vững thế","thế lực nhà ngươi thêm vững","thế lực nhà ngươi thêm vững"],["nhà ngươi sút thế","thế lực nhà ngươi sút giảm","thế lực nhà ngươi sút giảm"]],/* kit-e-rows «KR thế lực nhà» (E25b, E28): HER OWN house only — E28's wording is «thế lực nhà −N»; another house («nhà Hộ bộ thế lực +6», «nhà nàng thế lực −6», j55) has the name BEFORE «thế lực» and must never read as hers (law 6a) */
-  [/(^|[^\p{L}])thế lực\s*[+−-]\s?\d/iu,["thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay"],["thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay","thế các nhà quyền thần đổi thay"]],/* another house (j55): named in the line, not hers — a neutral phrase, the sign is not hers to read */
-  [/quý nhau/i,["hai bên thêm thân thiết","hai bên quý nhau hơn","hai bên quý nhau hơn"],["hai bên sinh xa cách","hai bên bớt quý nhau","hai bên bớt quý nhau"]],/* kit-cost-rows-home «quý nhau» (a decline that costs the liking of both sides) */
-  [/Chủ tin/i,["chủ thêm tin dùng","chủ thêm tin dùng kẻ hầu","chủ thêm tin dùng kẻ hầu"],["chủ bớt tin dùng","chủ bớt tin dùng kẻ hầu","chủ bớt tin dùng kẻ hầu"]],/* KIT REQUEST «Chủ tin» (E31r, or20-j68q): the servant stat NAMES.tin */
-  [/Hoàng thượng để ý/i,["Hoàng thượng để ý đến kẻ hầu","Hoàng thượng để ý đến kẻ hầu","Hoàng thượng để ý đến kẻ hầu"],["Hoàng thượng bớt để ý đến kẻ hầu","Hoàng thượng bớt để ý đến kẻ hầu","Hoàng thượng bớt để ý đến kẻ hầu"]],/* KIT REQUEST «Hoàng thượng để ý» (NAMES.nt) */
-  [/Gia thanh/i,["thêm danh giá gia môn","gia môn thêm danh giá","gia môn thêm danh giá"],["tổn danh giá gia môn","gia môn sút danh giá","gia môn sút danh giá"]],
-  [/Áp lực hôn sự/i,["thêm sức ép hôn sự","hôn sự bị thúc ép hơn","hôn sự bị thúc ép hơn"],["đỡ sức ép hôn sự","hôn sự bớt bị thúc ép","hôn sự bớt bị thúc ép"],"i"],
-  [/Lời đồn/i,["thêm lời ra tiếng vào","người ngoài xì xào thêm","người ngoài xì xào thêm"],["lời đồn lắng xuống","người ngoài bớt xì xào","người ngoài bớt xì xào"],"i"],
-  [/Hồi môn/i,["thêm của hồi môn","thêm của hồi môn","thêm của hồi môn"],["hao của hồi môn","hao của hồi môn","hao của hồi môn"]],
-  [/thân\b|thiện cảm|quý ngươi|quý ta/i,["được lòng người","người ấy có thiện cảm hơn",`${who} có thiện cảm với ta hơn`],["mất lòng người","người ấy mất thiện cảm",`${who} mất thiện cảm với ta`]],
-  [/(^|\s|\()(lòng|Lòng)\s/,["được lòng kẻ hầu","kẻ hầu một lòng theo ta",`${who} một lòng theo ta`],["mất lòng kẻ hầu","kẻ hầu sinh oán",`${who} sinh oán`]],
-  [/thương con|hoàng tử|công chúa|các con/i,["có lợi cho con","con được thương","Hoàng thượng thương con hơn"],["con thiệt","con bị lạnh nhạt","con bị lạnh nhạt"]],
-  [/nghi ngươi|nghi ta|đa nghi|quở|cấm túc|giáng/i,["được tin","bệ hạ thêm tin","Hoàng thượng thêm tin"],["dễ bị nghi, bị phạt","có thể bị nghi, bị phạt","Hoàng thượng có thể sinh nghi, trách phạt"],"w"],
-  [/Ân tình/i,["thêm tình nghĩa","thêm tình nghĩa với bệ hạ","thêm tình nghĩa với Hoàng thượng"],["sứt mẻ tình nghĩa","sứt mẻ tình nghĩa với bệ hạ","sứt mẻ tình nghĩa với Hoàng thượng"]],
-  [/Sủng|được ưa|đêm vui/i,["được để mắt","bệ hạ để mắt hơn","Hoàng thượng để mắt hơn"],["bị lạt lẽo","bệ hạ lạt lẽo đi","Hoàng thượng lạt lẽo đi"]],
-  [/Danh/i,["thêm thể diện","thêm thể diện trong cung","thêm thể diện trong cung"],["mất thể diện","mất thể diện trước lục cung","mất thể diện trước lục cung"]],
-  [/Đức/i,["được tiếng hiền","được tiếng hiền đức","được tiếng hiền đức"],["mang tiếng ác","mang tiếng thất đức","mang tiếng thất đức"]],
-  [/Bạc|lì xì/i,["có thêm bạc","có thêm bạc","có thêm bạc"],["hao bạc","hao bạc","hao bạc"]],
-  [/Sức/i,["dưỡng sức","dưỡng sức","dưỡng sức"],["hao sức","hao sức","hao sức"]],
-  [/Tai mắt/i,["thêm tai mắt","thêm tai mắt","thêm tai mắt"],["mất tai mắt","mất tai mắt","mất tai mắt"]],
-  [/Tâm cơ/i,["thêm mưu trí","thêm tâm cơ","thêm tâm cơ"],["kém mưu trí","sút tâm cơ","sút tâm cơ"]],
-  [/Sắc|Tài\b|tài nghệ/i,["bản thân khá lên","bản thân khá lên","bản thân khá lên"],["bản thân sút đi","bản thân sút đi","bản thân sút đi"]],
-  [/Thái y|thuốc|bệnh|ốm/i,["giữ được thân thể","thân thể được giữ","thân thể được giữ"],["thân thể bị hại","thân thể bị hại","thân thể bị hại"],"w"]];
+ const T=[/* [re, label(who), flags]: "w" may match a phrase without a number; "i" = the stat moves AGAINST her side (hostility, pressure, a rival's rise: her gain is the stat falling) */
+  [/chứng cứ/i,w=>w?`Chứng cứ về ${w}`:"Chứng cứ","w"],
+  [/long thai|có thai|mang thai|\bthai\b/i,()=>"Có thai","w"],
+  [/Thái hậu/i,(w,l)=>l>=1?"Thái hậu: thiện cảm":"Bề trên: thiện cảm"],
+  [/Hoàng hậu/i,(w,l)=>l>=1?"Hoàng hậu: thiện cảm":"Bề trên: thiện cảm"],
+  [/^(nàng|hắn|con nàng)\s+(Sủng|Danh)|Sủng của|bớt sủng/i,(w,l,p)=>`${w||"Đối thủ"}: ${/Danh/.test(p)?"Danh":"Sủng"}`,"i"],
+  [/phi tần.*ghen|ghen.*phi tần/i,()=>"Phi tần ghen","i"],
+  [/ghen|oán|ghét/i,w=>w?`${w}: oán`:"oán","i"],
+  [/tình ý/i,w=>w?`${w}: tình ý`:"tình ý"],
+  [/thế lực nhà\s*[+−-]\s?\d/i,()=>"Thế lực nhà"],/* kit-e-rows «KR thế lực nhà» (E25b, E28): HER OWN house only */
+  [/(^|[^\p{L}])thế lực\s*[+−-]\s?\d/iu,()=>"thế các nhà quyền thần đổi thay","n"],/* another house's thế lực: no gain side for her, so no marks (flag n) */
+  [/quý nhau/i,()=>"thiện cảm hai bên"],/* kit-cost-rows-home «quý nhau» */
+  [/Chủ tin/i,()=>"Chủ tin"],/* KIT REQUEST «Chủ tin» (E31r, or20-j68q): the servant stat NAMES.tin */
+  [/Hoàng thượng để ý/i,()=>"Hoàng thượng để ý"],
+  [/Gia thanh/i,()=>"Gia thanh"],
+  [/Áp lực hôn sự/i,()=>"Áp lực hôn sự","i"],
+  [/Lời đồn/i,()=>"Lời đồn","i"],
+  [/Hồi môn/i,()=>"Hồi môn"],
+  [/thân\b|thiện cảm|quý ngươi|quý ta/i,w=>w?`${w}: thiện cảm`:"thiện cảm"],
+  [/(^|\s|\()(lòng|Lòng)\s/,w=>w?`${w}: lòng`:"Lòng"],
+  [/thương con|hoàng tử|công chúa|các con/i,()=>"Hoàng thượng thương con"],
+  [/nghi ngươi|nghi ta|đa nghi|quở|cấm túc|giáng/i,(w,l,p)=>/nghi/.test(p)?"Hoàng thượng nghi":"Bị phạt","iw"],
+  [/Ân tình/i,()=>"Ân tình"],
+  [/Sủng|được ưa|đêm vui/i,()=>"Sủng"],
+  [/Danh/i,()=>"Danh"],
+  [/Đức/i,()=>"Đức"],
+  [/Bạc|lì xì/i,()=>"Bạc"],
+  [/Sức/i,()=>"Sức"],
+  [/Tai mắt/i,()=>"Tai mắt"],
+  [/Tâm cơ/i,()=>"Tâm cơ"],
+  [/Sắc|Tài\b|tài nghệ/i,(w,l,p)=>/Sắc/.test(p)?"Sắc":"Tài"],
+  [/Thái y|thuốc|bệnh|ốm/i,()=>"Thân thể","w"]];
  const num=/\d/.test(p)||/^(nàng|hắn|con nàng)\s/.test(p);
- for(const [re,U,Dn,fl] of T)if(re.test(p)&&(num||/w/.test(fl||""))){/* hostility: "+" is bad for her — the sign already says which; the words follow her side */
-   const L=/i/.test(fl||"")?(sg>0?Dn:U):(sg>0?U:Dn);if(!num){const s=story();return [L[0],s[1],s[2]]}/* a story phrase keeps its own words */
-   return L[2].includes("\u0001")?[L[0],L[1],L[1]]:L}
+ for(const [re,lab,fl] of T)if(re.test(p)&&(num||/w/.test(fl||""))){/* the sign printed is the stat's OWN: hostility «oán +» is bad for her, «oán −» is her gain */
+   const sgn=/i/.test(fl||"")?-sg:sg;const L=l=>/n/.test(fl||"")?lab(l>=2?who:"",l,p):`${lab(l>=2?who:"",l,p)} ${kitMk(sgn,p,l)}`;
+   if(!num){const s=story();return [L(0),s[1],s[2]]}/* a story phrase keeps its own words */
+   return [L(0),L(1),L(2)]}
  if(/[+−-]\s?\d/.test(p))return null;/* an unknown stat line: never guessed */return story()}
 function kitHintWho(p,m){try{const L=(typeof liveRivals==="function"?liveRivals(true):[]).concat((typeof S!=="undefined"&&S&&S.men)||[],(typeof S!=="undefined"&&S&&S.staff)||[]);
  for(const v of L)if(v&&v.name&&p.includes(v.name))return v.name;
  if(!/^(nàng|hắn|con nàng)\s/.test(p))return"";const w=m&&m.who;if(w&&w.w&&w.w[0]==="r"){const v=typeof RV==="function"?RV(w.w[1]):null;if(v)return v.name}if(w&&w.nm)return w.nm}catch(e){}return""}
 /* how big a change is, in words (from Tâm cơ 25): "(nhiều)" / "(chút ít)" against the usual size of that stat — never the number */
-const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh|thế lực nhà/i,10],[/Hồi môn/i,40],[/Thái hậu|Hoàng hậu|thiện cảm|thân\b|quý|tình ý|(^|\s|\()lòng\s|ghen|oán/i,10],[/được ưa/i,3],[/Sủng/i,5],[/Danh|Đức|Ân tình/i,4],[/Bạc/i,40],[/Sức/i,10],[/chứng cứ|Tai mắt|Tâm cơ|Sắc|Tài\b/i,2]];
-function kitHintMag(p){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];if(!n)return"";const v=+n;for(const [re,big] of KIT_HINT_MAG)if(re.test(p))return v>=big*1.5?" (nhiều)":v<=Math.max(1,Math.floor(big/4))?" (chút ít)":"";return""}
 function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:""};
  if(o.hint){const h=typeof o.hint==="function"?o.hint(lv):String(o.hint);return{hint:h}}
  const M=kitOptModel(o);const od=M.odds||"";const uniq=a=>[...new Set(a.filter(Boolean))];
  const sure=[],win=[],fail=[],side=[];let deadly=false;
- for(const it of M.items){const sg=kitHintSign(it.p,it.l);if(!sg)continue;const ph=kitHintPhrase(it.p,sg,lv===2?kitHintWho(it.p,m):"",lv);if(!ph)continue;const w=ph[lv]+(lv>=1&&!KIT_DEADLY.test(it.p)?kitHintMag(it.p):"");
+ for(const it of M.items){const sg=kitHintSign(it.p,it.l);if(!sg)continue;const ph=kitHintPhrase(it.p,sg,lv===2?kitHintWho(it.p,m):"",lv);if(!ph)continue;const w=ph[lv];/* WORDING-GAIN: the marks are inside the phrase (kitMk), no «(nhiều)» / «(chút ít)» */
   const isFail=it.l==="hỏng";if(KIT_DEADLY.test(it.p)&&(isFail||it.l==="kèm"||sg<0))deadly=true;
   if(it.l==="kèm"){side.push([w,sg]);continue}
   if(isFail&&!M.odds){if(sg<0)sure.push([w,sg]);continue}/* a CERTAIN option cannot fail: its "Mất:" is a sure price ("nhưng …"), never "hỏng thì …" (review pets-fix r6) */
@@ -298,7 +312,7 @@ function kitHint(o,m,lv){if(lv==null)lv=kitHintLevel();if(!o)return{hint:""};
   (od?win:sure).push([w,sg])}
  const good=uniq(sure.concat(win).filter(x=>x[1]>0).map(x=>x[0])).slice(0,2),bad=uniq(sure.concat(side).filter(x=>x[1]<0).map(x=>x[0])).slice(0,2),sideGood=uniq(side.filter(x=>x[1]>0).map(x=>x[0])).slice(0,1);
  const parts=[];parts.push(good.length?good.concat(sideGood).join(", "):sideGood.length?sideGood.join(", "):bad.length||fail.length?"chẳng được gì":"không được mất gì");
- if(od&&lv>=1)parts.push(kitOddsIdx(od)>=5?"thường ổn":kitOddsIdx(od)<=2?"dễ hỏng":"hên xui");
+ if(od&&lv>=1)parts.push(od);/* WORDING-GAIN: the chance is the card's own odds ladder word (BAL.odds.cut), not a private 3-word map */
  if(bad.length)parts.push("nhưng "+bad.join(", "));
  const fl=uniq(fail).slice(0,2);if(fl.length&&(lv>=1||deadly))parts.push("hỏng thì "+(lv===0?(deadly?"mất mạng":fl[0]):fl.join(", ")));
  if(lv===2&&M.notes.length){const n=uniq(M.notes.filter(x=>!/^an toàn$/i.test(x))).slice(0,1);if(n.length)parts.push(n[0])}
@@ -310,27 +324,39 @@ function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);
  return kitHint({j67},null)}
 /* KIT PARTS (KIT 28.6, kit sample page): the hint row + the kit odds meter — every hidden-outcome option uses these, nothing private */
 function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.fix)text=VP.fix(text)}catch(e){}return `<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef i">${text}</span></span></span>`}
-/* the odds meter of an option card: the card's own .kodds (kaNorm → kaOdds → oddsChip → kitOdds, read from the option's line = the odds the
-   roll uses, law 4) stays; a card with NO odds (a certain outcome: nothing is rolled — an exit, a death, a fixed result) shows NO odds word
-   (KK34, MAIN 148 order 25/11 ~23:45Z on robot E «Cha định hôn»: three life-ending cards all «Rất vững»; owner 23/11 ~21:40Z «no ladder word may
-   read as a promise»; overwrites the 19/11 «a sure card shows the top rung» reading, law 14). KIT_ODDS_SURE=true brings the old top-rung meter back. */
-const KIT_ODDS_SURE=false;
-function kitOptOdds(b){try{if(!KIT_ODDS_SURE)return;if(b.classList&&b.classList.contains("kbare"))return;/* KIT §93.7 */const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");if(!kat||kat.querySelector(".kodds"))return;
- kat.insertAdjacentHTML("beforeend",`<span class="kodds" data-ksure="1">${oddsChip(KIT_ODDS[KIT_ODDS.length-1])}</span>`)}catch(e){console.error("kitOptOdds",e)}}
-function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;if(b.classList.contains("kbare"))return;/* KIT §93.7 + §98.16 (K-BARE-HINT): a bare card carries NO «Gợi ý» row (owner: no guidance on selection answers), same guard as kitOptOdds / kitOptFinal */b.dataset.khid="1";b.classList.add("khideout");
+/* ODDS WORD RULE (FIRSTCARD-3, owner OD 26/11 ~18:25Z; laws 7/11/14; KIT §6.2b-END): an odds word (Mong manh … Rất vững) shows ONLY on an option that really
+   rolls a success chance, and is always the TRUE word — never bent to warn. An option that rolls nothing shows NO odds word (the old sure «Nắm chắc / Rất vững»
+   stamp is gone, no toggle). An option that does NOT roll but changes her ending / life (xuất giá, xuất gia, tự vẫn, rời cung, chuyển kiếp, a certain
+   ban hoa …) shows no word either; its choice gets ONE small kit warning line above it, «Cẩn thận khi lựa chọn» (kitChoiceWarn → the kit line §6.2k). Result rows stay visible.
+   kitRiskOpt(o, p, loss, end): a caller whose roll the card cannot see (a contest, a roll inside its go) declares the TRUE chance p (0..100, from the same BAL
+   rule the roll uses) + the loss words: the option line then leads with word(p) (kaNorm → kaOdds meter, BAL.odds.cut) and the hint names the loss
+   («nhưng nếu hỏng: …» → the kit Mất row, red). end = that loss ends this life (o.end).
+   kitLifeOpt(o): the option can change her ending / life (declared end, or its words say so: KIT_END_RE on its name / hint / line). */
+const KIT_END_RE=/kiếp này dừng|kết thúc kiếp này|bị ban hoa|mất mạng|chuyển kiếp|tự vẫn|xuất gia|xuất giá|đi tu\b/i;
+function kitRiskHint(h,loss){h=String(h||"");return !loss||h.includes(loss)?h:(h?h+"; ":"")+"nhưng "+(/ thì /.test(loss)?"":"nếu hỏng: ")+loss}/* a loss that names its own condition («… thì …») is not prefixed */
+function kitRiskOpt(o,p,loss,end){if(typeof p==="function")try{p=p()}catch(e){p=null}/* FIRSTCARD-2: p may be the roll's own function (one formula for the roll and the word) */if(!o||p==null||isNaN(p))return o;p=oddsCl(Math.round(p));o.oddsP=p;if(end)o.end={p};
+ o.j67=[word(p),String(o.j67||"").replace(KIT_ODDS_LEAD,"").replace(/^\s*·\s*/,"")].filter(Boolean).join(" · ");
+ if(loss){o.__rkLoss=loss;const h=o.hint;o.hint=typeof h==="function"?(lv=>kitRiskHint(h(lv),loss)):kitRiskHint(h,loss)}return o}/* __rkLoss: a later hint table (jkc KCH) adds its own hint first, then the loss */
+function kitLifeOpt(o){if(!o)return false;if(o.life||o.end)return true;let t="";try{t=[o.n,typeof o.hint==="function"?o.hint(1):o.hint,o.x,o.j67].filter(Boolean).join(" ")}catch(e){}return KIT_END_RE.test(String(t).replace(/<[^>]*>/g,""))}
+/* the warning line is the kit part §6.2k (jopic kitWarnLine / kitWarnPut, KK44): a Q card (or kitPanel spec) carries warn:1 and the kit draws ONE line above .opts.
+   kitChoiceWarn(m) sets it on every choice that holds a life-changing option (before showModal renders it). */
+/* the sticky option row's shadow + gap (jksize KIT BUG #3) are a scroll cue: only a dialog whose body really scrolls keeps them (MAIN 162 look) */
+function kitOptsFit(){try{const M=document.getElementById("modal"),o=M&&M.querySelector("#mb .opts");if(!o||M.hidden)return;let sc=false;for(let e=o.parentElement;e&&e!==M;e=e.parentElement){if(e.scrollHeight>e.clientHeight+2&&/auto|scroll/.test(getComputedStyle(e).overflowY)){sc=true;break}}
+ if(o.scrollHeight>o.clientHeight+2)sc=true;const v=sc?"":"1";if((o.dataset.kfit||"")!==v){if(v)o.dataset.kfit=v;else delete o.dataset.kfit}}catch(e){}}
+function kitChoiceWarn(m){try{if(!m||!m.opts||(m.opts.length||0)<2)return;if(m.opts.some(kitLifeOpt))m.warn=1}catch(e){console.error("kitChoiceWarn",e)}}
+function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;if(b.classList.contains("kbare"))return;/* KIT §93.7 + §98.16 (K-BARE-HINT): a bare card carries NO «Gợi ý» row (owner: no guidance on selection answers), same guard as kitOptFinal */b.dataset.khid="1";b.classList.add("khideout");
  /* the hint, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
  b.querySelectorAll(".kb .kr").forEach(r=>{if(!r.classList.contains("kr-ton")&&!r.classList.contains("kr-why"))r.remove()});b.querySelectorAll(".kb .kbh").forEach(h=>h.remove());/* kit-thanh-bai r3: the THÀNH / BẠI heads go with their rows (a head with no row under it was left behind) */
  /* kit-ton-row: a price the OPTION itself names — its `ton:{…}` field or a «tốn: …» part of its line — is known up front and stays in the Tốn row whatever the stat (Tâm cơ / Đức / Danh / Sủng …); a plain fx consequence («ngay:») of a hidden-outcome card still goes */
  let ownP=[];try{const ob=(typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null)?Q[0].opts[+b.dataset.m]:null;if(ob){if(ob.ton)ownP=ownP.concat(String(fmt(ob.ton)).split(/<\/span>\s*·\s*<span[^>]*>/).map(kaPlain));ownP=ownP.concat(kitOptModel(ob).items.filter(i=>i.l==="tốn").map(i=>kaPlain(i.p)))}}catch(e){}
  /* kit-ton-row-2 (MAIN CHÍNH 83 decision, per the hint rule «words only, no stat numbers» for relations): the keep-rule covers ECONOMIC stats only (khắc / Sức / Bạc / Hồi môn / Tâm cơ / Đức / Danh / Sủng); a relation / liking price («thiện cảm -3», «quý ngươi -3», Ân tình …) stays words only in a hidden-outcome card («mất lòng bề trên») */
- ownP=ownP.filter(p=>p&&/khắc|(^|\s)(Sức|Bạc|Hồi môn|Tâm cơ|Đức|Danh|Sủng)\s*[-−]\s?\d/i.test(p));
+ ownP=ownP.filter(p=>p&&/khắc|(^|\s)(Sức|Bạc|Hồi môn|Tâm cơ|Đức|Danh|Sủng)\s*[-−]\s?\d/i.test(p)).map(p=>markTxt(p,"ton"));/* the Tốn row prints the price without the minus (markTxt ton): compare against that form */
  let ton=b.querySelector(".kr-ton");if(ton){const v=ton.querySelector(".krv");[...v.children].forEach(e=>{if(e.classList.contains("ksep"))return;const et=kaPlain(e.textContent);if(!KIT_COSTRE.test(e.textContent)&&!ownP.some(p=>p&&(et===p||et.includes(p)||p.includes(et))))e.remove()});
   [...v.children].forEach((e,i,a)=>{if(e.classList.contains("ksep")&&(!e.previousElementSibling||e.previousElementSibling.classList.contains("ksep")||!e.nextElementSibling))e.remove()});
   if(!v.querySelector(".ef"))ton.remove()}/* owner 13:25Z: no cost → no Tốn row at all (never "Tốn: không") */
  let kb=b.querySelector(".kb");if(!kb){b.insertAdjacentHTML("beforeend",`<small class="kb"></small>`);kb=b.querySelector(".kb")}
  if(H&&H.hint)kb.insertAdjacentHTML("beforeend",kitHintRow(H.hint));
- kitOptOdds(b)/* review/opt-pics: an option card with its picture holds .kat inside .kabody (KIT 6.2) */
  /* the KIT 6.2 final card form is computed AFTER hiding (it may have run first, from kpOptArt): the hint's «nhưng …» = the sure loss stands in Tốn (law 3) */
  if(typeof kitOptFinal==="function"&&b.dataset.kofin==="1")kitOptFinal(b)}catch(e){console.error("kitHideOut",e)}}
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
@@ -346,7 +372,7 @@ function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid===
 const KIT_ACT_PIDS=new Set(["giftpick","plantpick","taintpick","evpick","itarget","shop","plantsv","wkgive","runner","vlget","vlcraft","vlnvp","vlout","htban","h54ban"]);
 function kitIsEventChoice(m){if(!m||!m.opts||!m.opts.length||m.showOut||m.act||m.shop)return false;if(m.pid&&KIT_ACT_PIDS.has(m.pid))return false;
  return !!(m.hideOut||m.ev||("pid" in m)||("pp" in m)||(m.kit&&(m.kit.kind==="choice"||m.kit.hideOut)))}
-(function(){const s0=showModal;showModal=function(){const m=Q[0];if(kitIsEventChoice(m))m.hideOut=true;const r=s0.apply(this,arguments);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
+(function(){const s0=showModal;showModal=function(){const m=Q[0];if(kitIsEventChoice(m))m.hideOut=true;kitChoiceWarn(m);const r=s0.apply(this,arguments);setTimeout(kitOptsFit,150);setTimeout(kitOptsFit,700);try{if(m&&m.opts&&(m.hideOut||m.opts.some(o=>o&&o.hideOut))){
   document.querySelectorAll("#modal .opts > button[data-m], #modal .opts button.opt").forEach(b=>{const o=m.opts[+b.dataset.m];if(o&&o.showOut)return;if(m.hideOut||(o&&o.hideOut)){b.dataset.khide="1";if(b.classList.contains("ka"))kitHideOut(b)}})}}catch(e){console.error("hideOut",e)}return r}})();
 /* ACT-LIKE OPTIONS inside a dialog (kit owner #2): every hidden-outcome option keeps its odds meter (owner 19/11 ~01:48Z; the old showOdds
    flag is now the default for all) — an option may carry showOut:true — the full act card (Được / Mất / odds), e.g. "Xin ban", "Mua lén". */

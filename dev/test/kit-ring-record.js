@@ -42,7 +42,7 @@ const [,,URL,OUT,SC,WH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
   await tap('.kring-x .kit-x');await w(1300);mark('end')}
  if(SC==='c'){
   await p.evaluate(()=>kitRing.close(true));await w(800);
-  for(let k=0;k<6;k++){const ok=await p.evaluate(()=>{Q.length=0;if(!rgFire('c2a'))return false;Q.length=1;Q[0].__khT='c2a';showModal();return true});if(ok)break;await w(800)}
+  for(let k=0;k<6;k++){const ok=await p.evaluate(()=>{Q.length=0;try{S.evc=null;EVCW.length=0}catch(e){}if(!rgFire('c2a'))return false;Q.length=1;Q[0].__khT='c2a';showModal();return true});if(ok)break;await w(800)}
   mark('start');await w(3200);
   const cards=await p.$$('#modal .opts.khand > button.kopt');const cc=async i=>{const bb=await cards[i].boundingBox();await tapXY(bb.x+bb.width/2,bb.y+bb.height*.6)};
   if(cards.length){await cc(0);await w(1800);await cc(Math.min(2,cards.length-1));await w(1800);await tap('#modal .khx').catch(()=>{});await w(1200);await cc(1);await w(1600);await tap('#modal .khok');await w(4200)}mark('end')}

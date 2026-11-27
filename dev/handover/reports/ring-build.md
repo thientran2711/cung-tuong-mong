@@ -226,3 +226,13 @@ b. KK49 KIT READY (A) >7 columns / (B) name plate → merge their branch, switch
 State: review/ring-build = cc4515dc code (+ report commits). MAIN 168 LOOK PASS cc4515dc. RV-165 (session_01Rc5AsLoAzF54ipTvF4Hhdn) HOLD: kit-plaque-confirm 4ac9892e does not merge onto main (6 conflicts + odds-word clash). KK52 (session_01Rc5AsLkegccVVVEbeF4bLF) remerges kit-plaque-confirm onto LIVE fa722503 and sends the sha.
 RB-8 TODO: (1) on KK52's sha: fetch (flock, --depth=30), merge/rebase review/ring-build onto it (index.html / sw.js: take theirs then `sh dev/site/build_site.sh`; jkpick/jkitsel/kit tests = kit's, ring code jkring*.js = ours); (2) gate: `SIZES=755x1000,1180x820 node dev/measure/ring-overlap.js file://$PWD/index.html out.json` (36 states 0/0/0; boot timeout → re-run), `node dev/test/kit-ring-oldleft.js <url> <out> WxH` (gift flake → re-run), kit-pick / kit-plaque-confirm; (3) send new sha to RV-165 (RV READY text: see RV message pattern above), report MAIN 168 (session_01Rc5AsMYn5V43iERgwDRQrj).
 Ring facts: plaqueNeed(m,R,n) = postBox(layer,n).W − x0 + 12 (no ✓/✕ room); R.nPk via pkCount; reyield on step-out; kitNameTagFit after append (slot + focus tag). Scratch tools (not in git): /tmp/claude-0/rb7/{gate.sh, big.js (9/12 plaque stills), shot.js (group focus), plate.js}.
+
+# RING-BUILD-8 (successor, MAIN CHÍNH 170, 27/11)
+PRIORITY #1 CHECK: OD 26/11 ring rows + RB-7 handover (read) | main 17f23656 none of this | review/ring-build e37adcd7 + review/kit-plaque-confirm-rv165 bed400c6 (RV-165 PASS of daabd1f1) | claims RB-7 → RB-8.
+## Done
+1. MERGED (not rebased: e37adcd7 is already published/looked) origin/review/kit-plaque-confirm-rv165 bed400c6 into review/ring-build. Conflicts: assemble.py module list = kit's line + `jkring-item.js` after `jkring.js`; index.html / sw.js = theirs then `sh dev/site/build_site.sh`. jkpick/jkitsel/kit tests = kit's. KK53 «thẻ lụa» sha not landed yet (CSS only; merge it when it does, do not restyle).
+2. jkring plaqueNeed: `B.W-B.x0+12` (RB-7 had already dropped `+cf`) → `B.W-B.x0+10`.
+3. Synthetic-frame tests: `S.evc=null;EVCW.length=0` after every `Q.length=0` in dev/measure/ring-overlap.js (+ in M() per state) and dev/test/kit-ring-{boot,item,record,oldleft}.js.
+## Gates (file:// build of the merge)
+- ring-overlap F+I 36 states: overlap 0 / headCut 0 / layerOverNav 0 / errs 0 (one flaky Fold `group-ring` 264 px² against the lingering KẾT QUẢ card; re-run ×2 → 0, figs count varies = test timing, not code).
+- kit-ring-oldleft F 0 (gift flake, re-run) + I 0 · kit-pick ALL PASS · kit-plaque-confirm PASS · kit-plaque-post PASS.

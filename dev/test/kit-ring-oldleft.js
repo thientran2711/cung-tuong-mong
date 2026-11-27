@@ -11,12 +11,12 @@ const [,,BASE,OUT,WH,MODE]=process.argv;const SC='check';fs.mkdirSync(OUT,{recur
  await p.waitForFunction(()=>typeof nlFigsReady!=='function'||nlFigsReady(),null,{timeout:30000}).catch(()=>{});
  await p.evaluate(()=>{try{kitRoulette=function(){}}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
   for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}try{start()}catch(e){}if(typeof S!=='undefined'&&S&&!(typeof isSrv==='function'&&isSrv()))break}
-  if(window.__SC==='face')return;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;document.querySelectorAll('.kroul,#kroul,#kroulw').forEach(e=>e.remove());
+  if(window.__SC==='face')return;Q.length=0;try{S.evc=null;EVCW.length=0}catch(e){}const m=document.getElementById('modal');if(m)m.hidden=true;document.querySelectorAll('.kroul,#kroul,#kroulw').forEach(e=>e.remove());
   S.rank=Math.max(S.rank,2);S.bac=500;S.used=0;
   for(const k of ["tramngoc","vongngoc","sonphan","boodieu","tramphuong","vongvang","ngocboi","tuithom","guong","quatcong"])if(IT[k])S.inv.push({k,from:"me"});
   for(const k of Object.keys(IT).filter(k=>IT[k].kd==="Vải vóc"||IT[k].kd==="Hương liệu").slice(0,4))S.inv.push({k,from:"me"});
   try{KMS=S;KMSNAP=kmSnap()}catch(e){}render()});
- await p.waitForTimeout(1500);if(SC!=='face')await p.evaluate(()=>{document.querySelectorAll('.kroul,#kroulw').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;
+ await p.waitForTimeout(1500);if(SC!=='face')await p.evaluate(()=>{document.querySelectorAll('.kroul,#kroulw').forEach(e=>e.remove());Q.length=0;try{S.evc=null;EVCW.length=0}catch(e){}document.getElementById('modal').hidden=true;
   ['#kdaytc','#klife','#kmrew'].forEach(s=>document.querySelectorAll(s).forEach(e=>e.remove()));try{KMSNAP=kmSnap()}catch(e){}render()});
  const w=ms=>p.waitForTimeout(ms);const tapXY=(x,y)=>p.touchscreen.tap(x,y);
  const at=s=>p.evaluate(s=>{const e=document.querySelector(s);if(!e)return null;const r=e.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]},s);
@@ -42,7 +42,7 @@ const [,,BASE,OUT,WH,MODE]=process.argv;const SC='check';fs.mkdirSync(OUT,{recur
  const vis=s=>p.evaluate(s=>[...document.querySelectorAll(s)].some(e=>{const r=e.getBoundingClientRect();if(!(r.width>0&&r.height>0))return false;if(e.closest('.kri'))return false;
    for(let a=e;a;a=a.parentElement){if(a.hidden)return false;const cs=getComputedStyle(a);if(cs.visibility==='hidden'||cs.display==='none')return false}return r.bottom>0&&r.top<innerHeight}),s);
  const ring=()=>p.evaluate(()=>!!kitRingItem.cur&&!!document.querySelector('.kri .kri-t'));
- const reset=async()=>{await p.evaluate(()=>{try{kitRingItem.close(true)}catch(e){}Q.length=0;const m=document.getElementById('modal');m.hidden=true;m.classList.remove('kri-hide');
+ const reset=async()=>{await p.evaluate(()=>{try{kitRingItem.close(true)}catch(e){}Q.length=0;try{S.evc=null;EVCW.length=0}catch(e){}const m=document.getElementById('modal');m.hidden=true;m.classList.remove('kri-hide');
    const k=document.getElementById('kg82');if(k){k.hidden=true;k.classList.remove('kri-hide')}document.querySelectorAll('#kriInj,#kdaytc,#klife,#kmrew,.kroul,#kroulw').forEach(e=>e.remove());/* a result toast left by the previous place keeps its tap catcher (KIT 32.10): the first tap only closes it — closed here */const t=document.getElementById('rtoast');if(t)t.classList.remove('on');document.querySelectorAll('#kxcatch').forEach(e=>{e.hidden=true;e.__close=null});render()});await w(700)};
  const inj=html=>p.evaluate(h=>{const d=document.createElement('div');d.id='kriInj';d.className='kpanel';d.style.cssText='position:fixed;left:10px;top:200px;width:60vw;z-index:5';d.innerHTML=h;document.body.appendChild(d)},html);
  const tapIn=async s=>{const c=await at(s);if(!c)return false;await tapXY(c[0],c[1]);return true};

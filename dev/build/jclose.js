@@ -146,7 +146,7 @@ function kitToastPendSet(t){if(kitToastPend.t===t)return;kitToastPend.t=t;try{if
 function kitToastCollapse(el){}/* stage-here r4: no rail «!» item — every notice is a kitNotice (jnotice, KIT §42.2): no free top spot → the top-bar box alone */
 function kitToastTap(t){try{if(!t)return;kitToastPendSet("");const el=typeof kitLineToast==="function"?kitLineToast(t):null;
  if(el&&getComputedStyle(el).visibility!=="hidden")return;/* a free spot now: the line shows as the toast */
- if(el)el.remove();if(typeof Q!=="undefined"&&typeof showModal==="function"){Q.push({t:"Tin báo",h:`<p>${typeof esc==="function"?esc(t):t}</p>`});showModal()}}catch(e){}}
+ if(el)el.remove();if(typeof Q!=="undefined"&&typeof showModal==="function"){for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].__once==="toast")Q.splice(i,1);/* one copy (news-sieve) */Q.push({__once:"toast",t:"Tin báo",h:`<p>${typeof esc==="function"?esc(t):t}</p>`});showModal()}}catch(e){}}
 window.kitToastPend=kitToastPend;window.kitToastTap=kitToastTap;window.kitToastPeopleRects=kitToastPeopleRects;window.KIT_TOAST_PEOPLE=KIT_TOAST_PEOPLE;
 function kitToastClear(el,dir){return kitToastPlace(el,dir)}/* old name kept for callers */
 window.kitToastClear=kitToastClear;window.kitToastPlace=kitToastPlace;window.kitToastKeepRects=kitToastKeepRects;window.kitToastCol=kitToastCol;window.kitLinePos=kitLinePos;window.KIT_TOAST_KEEP=KIT_TOAST_KEEP;
