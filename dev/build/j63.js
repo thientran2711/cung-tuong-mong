@@ -397,9 +397,17 @@ document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.targ
  let bf=null;try{bf=rsnap()}catch(x){}oddsSoft(n,{suc:-(+b.dataset.capsuc||0),bac:-(+b.dataset.capbac||0)});try{if(bf)resultShow(n,bf,false)}catch(x){}render()},true);
 /* KIT PART kitResultSeal(ok) (KIT 7): the result seal — true → THÀNH (.ok), false → BẠI (.bad), no roll → "KẾT QUẢ" (.sure, the kit's grey seal, no stamp) */
 function kitResultSeal(ok){return ok===true?{cls:"ok",t:"THÀNH"}:ok===false?{cls:"bad",t:"BẠI"}:ok==="soft"?{cls:"sure",t:"BỎ DỞ"}/* KIT 7.3: a capped act that slipped — nothing done, nothing lost but the effort */:{cls:"sure",t:"KẾT QUẢ"}}
-resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
+/* KIT 7 (MAIN 162 LOOK on OB-VERDICT-3, whole family): the sentence under the title never repeats the title. A Sổ ghi choice line
+   «<việc>: <title> — Đức +2 vì nhịn.» keeps only what follows the title («Đức +2 vì nhịn.»); a sentence that IS the title is dropped. */
+function kaSenDeTitle(sen,title){try{if(!sen)return sen;const t=kaPlain(title||"").replace(/[.!…\s]+$/,"").replace(/\s+/g," ").trim();if(!t)return sen;const P=kaPlain(sen).replace(/\s+/g," ").trim();
+ /* the title's words in order; a name may carry its rank in the sentence («… của Điền Chỉ Lan» → «… của Hoàng hậu Điền Chỉ Lan»): up to 3 extra words between */
+ const esc=w=>w.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");const re=new RegExp("^((?:[^:]{0,60}:\\s*)?)"+t.split(" ").map(esc).join("(?:\\s+\\S+){0,3}?\\s+")+"(?=$|\\s*[.!…:;,—–-])","i");
+ const m=P.match(re);if(!m)return sen;/* «Lệ phi giận ngươi» under «Lệ phi»: the title runs on into the sentence — keep it */
+ const rest=P.slice(m[0].length).replace(/^[\s.:;,—–-]+/,"").trim();if(!rest||/^[.!…]*$/.test(rest))return "";return rest.charAt(0).toUpperCase()+rest.slice(1)}catch(e){return sen}}
+window.kaSenDeTitle=kaSenDeTitle;
+resultShow=function(title,before,okHint){if(!S||!before||S.dead||window.__kNav)return;/* §6.2m a nav option shows no result card (kit-k44-parts) */
  /* KAWHY-VERDICT: the reasons follow the card's final verdict (own roll, else the carried act's kaAim); kaAimVerdict reads only — the aims are closed below by kaAimUse */
- const ok0=okHint===true?true:okHint===false?false:(()=>{try{return kaAimVerdict(before).ok}catch(e){return null}})();const [G,B,K]=kaResultRows(before,title,ok0);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
+ const ok0=okHint===true?true:okHint===false?false:(()=>{try{return kaAimVerdict(before).ok}catch(e){return null}})();const [G,B,K]=kaResultRows(before,title,ok0);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}const sen0=sen;/* the card still shows when its only sentence repeated the title (OD ~17:55Z: «không» rows kept — Ghi chú «ta không được gì») */sen=kaSenDeTitle(sen,title);
  const why=S.logs.slice(0,Math.min(n,S.logs.length)).map(plain).join(" ");
  /* the seal follows the outcome FOR HER (net real changes + what the log says), not which branch fired */
  const failTxt=/chặn kịp|phát giác|bị lộ|bị bắt|không thành|hỏng|từ chối|không ai tin|trách ngươi|quở|bị phạt|mắng|thư giả|vu khống|thất bại|không dò ra|không biết gì|cũng không biết|không thấy gì|không tìm ra|chưa duyệt/i.test(why);/* act audit: a failed search/scout read THÀNH */
@@ -408,11 +416,11 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  /* owner 11/15: THÀNH / BẠI come ONLY from the act's own roll (okHint true / false); no roll ("sure", null) → no seal, the neutral header
     "KẾT QUẢ" — never inferred from the log words or from how many lines are Được / Mất (failTxt / netBad stay for the old callers' log) */
  /* KIT 7.3: an act with no seal of its own (null / "sure", e.g. the night card) takes the verdict of the act it carries (kaAim) */
- const AV=kaAimVerdict(before);const av=AV.ok;if(AV.sen)sen=AV.sen;kaAimUse(AV.AIM);
+ const AV=kaAimVerdict(before);const av=AV.ok;if(AV.sen)sen=kaSenDeTitle(AV.sen,title)||AV.sen;kaAimUse(AV.AIM);
  const ok=okHint===true?true:okHint===false?false:av;const SL=kitResultSeal(ok),seal=SL.t;void failTxt;void netBad;
  /* ODDS CAP: a soft failure changes nothing but still shows its one BẠI line (j63 oddsSoft) */
  if(okHint===false&&window.__oddsSoft&&!sen)sen=window.__oddsSoft;window.__oddsSoft="";
- if(!G.length&&!B.length&&!sen&&!(K&&(K.length||K.more))/* KK42: a K.more-only Kèm still makes the card */&&!(K&&K.tgt&&K.tgt.length)&&!(K&&K.by&&K.by.length))return;if(window.__bot)return;
+ if(!G.length&&!B.length&&!sen&&!sen0&&!(K&&(K.length||K.more))/* KK42: a K.more-only Kèm still makes the card */&&!(K&&K.tgt&&K.tgt.length)&&!(K&&K.by&&K.by.length))return;if(window.__bot)return;
  let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
  t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};

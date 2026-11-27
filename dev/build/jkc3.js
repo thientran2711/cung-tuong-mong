@@ -56,7 +56,7 @@ for(let i=0;i<KC3THAY.length;i++)KCHAB["thay"+i]=[["kc_hoc",3],["",2]];
 (function(){const l0=kcFamList;kcFamList=function(w){const L=l0.apply(this,arguments);return w==="nha"?L.filter(m=>!m.grp):L}})();
 function kc3Grp(g){return S.kc.fam.filter(m=>m.alive&&m.grp===g)}
 /* E25r2: the home roster strip sits INSIDE a scrolling tab (Tài nghệ / Giao du), not as a person tab: kept one level below #panel so the kit person-tab frame (KIT §6.3c #panel.kpfr, LIVE 21/11) does not take the whole panel and squeeze the strip to 0 px */
-function kc3Pager(key,L){return L.length?`<div class="kc3pgw"><div class="pgwrap">`+pager(key,L.map(m=>({sz:"xs",f:kcFace(m),name:m.t})),i=>kcFamCard(L[i]))+`</div></div>`:""}
+function kc3Pager(key,L){return L.length?`<div class="kc3pgw"><div class="pgwrap">`+pager(key,L.map(m=>({p:m,sz:"xs",f:kcFace(m),name:m.t})),i=>kcFamCard(L[i]))+`</div></div>`:""}
 (function(){const a0=kcArtHTML;kcArtHTML=function(){const h=a0.apply(this,arguments);if(!kc3On())return h;return kc3Pager("kcthay",kc3Grp("thay"))+h}})();
 (function(){const s0=kcSocHTML;kcSocHTML=function(){const h=s0.apply(this,arguments);if(!kc3On())return h;return h+kc3Pager("kcsoc",kc3Grp("soc"))}})();
 /* teacher favour → tier (0 học trò, 1 được quý, 2 truyền nhân); the tier speeds the lessons of her art (the base Tài nghệ games) */
