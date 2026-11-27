@@ -80,3 +80,28 @@ DONE on this branch (commit below, NOT yet gated):
 - KIT.md PAGES bullet, jbal2 comment (BAL.kip = {rows:2, settle:150}), KIT_REQUESTS K-LIST-PAGE entry updated to match.
 TODO for the successor (worktree /home/user/wt/picker-dom, sparse; save /home/user/wt/s7.json; scratch tools /home/user/wt/pd-out/{osc2.js,video.js,prof.js}):
 1. Result of `node dev/test/picker-dom.js --save /home/user/wt/s7.json --vp 755x1000,1180x820` (was running into /home/user/wt/pd-out/t10.log); fix any FAIL. 2. Merge newest LIVE (built files: `git checkout --theirs index.html sw.js`, assemble, `bash dev/site/build_site.sh`, `git checkout origin/main -- assets.json`). 3. Gates on the final sha: picker-dom-scan, picker-dom.js Fold+iPad, coop-e2e (`cd coop/worker && npx wrangler dev --local --port 8799`, then `node dev/test/coop-e2e.js <out> http://127.0.0.1:8799`). 4. Videos: `node /home/user/wt/pd-out/video.js /home/user/wt/picker-dom <outdir>`, trim ~9 s after <outdir>/<dev>.start with ffmpeg, copy to img/_review/picker-dom/picker-dom-{fold,ipad}.mp4, `python3 dev/site/cdn_sync.py img/_review/picker-dom`, curl 206. 5. SẴN SÀNG KIỂM to BIG rv session_01D3E3NX3JZAycKJ8cs4P7qd + Foreman D session_01D3E3NYwRePZXPzMMwNfkEq. 6. Kit keeper «KIT OK K-LIST-PAGE <sha>» still needed (now also covers the one-line jksize kitFrameLive3 change).
+
+## RV ROUND 2 fix — verified (worker r3 session_01D3E3Nb9VErJBWw6bmHB87X, depth 2, START_CTX ~3 %)
+PRIORITY #1 CHECK: OD play-stopper picker-dom (MAIN 164) | main LIVE 17f23656 (already merged into this branch; no newer LIVE) | review/picker-dom ece06266 | claims: Foreman D PICKER-DOM row (Foreman D now session_01D3E3NXaPqTqoCnowMTPdTq); rv session_01D3E3NX3JZAycKJ8cs4P7qd.
+Code = ece06266 unchanged (no FAIL found, nothing to fix). Rebuild (assemble.py) gives byte-identical index.html.
+
+### FAIL B — columns per FULL page, per device, vs LIVE (s7 save, settled; probe /home/user/wt/pd-out/cols.js, same code on both builds)
+LIVE = one scrolling grid: «whole» = tiles fully visible without scrolling. Branch = one page (cols × BAL.kip.rows 2), grid never scrolls.
+| picker | Fold LIVE cols / whole | Fold branch cols / per page | iPad LIVE cols / whole | iPad branch cols / per page |
+|---|---|---|---|---|
+| Tặng quà | 3 / 6 | 3–4 / 6–8 | 3 / 6 | 3 / 6 |
+| Dâng quà | 5 / 10 | 5 / 10 | 5 / 10 | 5 / 10 |
+| Cài đồ | 3 / 6 | 4 / 8 | 3 / 6 | 3 / 6 |
+| Biếu quà · đồ | 4 / 8 | 4 / 8 | 3 / 6 | 3 / 6 |
+No picker loses a tile per page against LIVE on either device; no stretched columns (round-2 FAIL B: iPad 2 cols / 4 per page is gone). iPad never has fewer columns than LIVE. Where iPad < Fold (Tặng / Cài / Biếu: 3 vs 4) LIVE has the same or the same cause: same 376 px box, kit tile --kshsz 84 px on Fold (kv1) vs 96 px on iPad (KIT 28.13i tile size, not this branch). Fold Tặng quà reads 3 or 4 depending on the dialog's first fit (both whole rows, test «every column the tile allows» passes).
+
+### Gates on ece06266 (code) — report commit adds no code
+- picker-dom.js Fold 755x1000 + iPad 1180x820: **PASS 64/64** (every page whole rows, no inner grid scroll, every tile reached once, locked + open card = full draw, confirm, DOM per picker < 2,000; column report above).
+- picker-dom-scan: **PASS** 5/5 family members (giftpick, plantpick, giftto, tsgiftpick paged; tsgift fixed roads).
+- coop-e2e (local wrangler :8799): **143/143**.
+- quickcheck --runs 5 vs LIVE 17f23656: **PASS** · open 2.8 s · old save from LIVE loads and plays a buổi, 0 errors · perf median new/live: render 252/214, tab 633/573, buổi 1235/1882, tasks>200 30/33 (noise level, both ways).
+- Videos (s7 save: Biếu quà làm lành grid › › → choose → ‹ ‹ → confirm → Dâng quà › › › → choose → Tặng quà › › → choose), curl 206:
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/picker-dom/picker-dom-fold.mp4 (754x1000, 62 s) ·
+  https://ctm-img.victoria-tntt.workers.dev/img/_review/picker-dom/picker-dom-ipad.mp4 (1180x820, 72 s). Looked at contact sheets + full frames.
+- Seen in the videos, NOT this branch (kit dialog fit, same frame on LIVE; rv round 2 already noted it): the dialog with a big scene picture keeps the option box short, so row 2 of the page (and the pager / card / confirm) sits under «Kéo xuống» in the dialog's own scroller (Fold Biếu quà, iPad Biếu quà + Dâng quà). The grid itself has whole rows; the outer kit frame cuts it. Law 10 («a big scene picture only when the content fits without scrolling») → for KK47 / MAIN, kit frame part, not 28.13i.
+- Kit law 9: still needs kit keeper «KIT OK K-LIST-PAGE <sha>» (28.13i paging + the one-line jksize kitFrameLive3 count).
