@@ -231,7 +231,7 @@ setTimeout(()=>{rkHello().then(()=>rkFlush())},1500);
 /* ---------- kit CSS (tokens of j79; frame and stage of j90) ---------- */
 (function(){const st=document.createElement("style");st.id="kitrank";st.textContent=`
 html body #modal.krkp{z-index:9100}/* D-ENDRANK: jk4 kit-dialog-stack «html body #modal:not(.kptitle){z-index:42}» outranked this, so «Cách tính» / «Mã khôi phục» / «Đổi tên hiệu» opened UNDER #krkov (8990) */
-#krkov{position:fixed;inset:0;z-index:8990;display:flex;align-items:stretch;justify-content:center;background:#2a1a12b8}
+#krkov{position:fixed;inset:0;z-index:8990;display:flex;align-items:stretch;justify-content:center;background:var(--kveil,#2a1a12b8)}
 .kpod.krk{grid-template-rows:auto auto minmax(0,1fr) auto;cursor:auto;user-select:text;-webkit-user-select:text}
 .krk .kpod-hd{padding:10px clamp(8px,2.5vw,32px) 0;justify-content:stretch}
 .krk .kpod-hd .kph{position:relative;flex:1 1 auto}

@@ -16,13 +16,12 @@
    Tranh ghế result (j34), hoàng tự exams (j53 .ktlist), công chúa dâng nghệ (j54 .h54list). */
 KP_SEAL.honor="VINH DANH";
 const KPOD_WORD=["Nhất","Nhì","Tam"];
-function kitFigOf(p){try{if(!p)return"";if(S&&p.kind==="th"&&!p.ref&&p!==S.thO&&!S.thDead)p=S.thO=S.thO||{};else if(S&&p.kind==="emp"&&!p.ref&&p!==S.emp)p=S.emp;if(!kitIsKnown(p)){const r=personRoleRank(p);return KIT_DIR+`unknown-fig-${r.kid?"k":r.sex==="m"?"m":"f"}.webp`}
+function kitFigOf(p){try{if(!p)return"";if(S&&p.kind==="th"&&!p.ref&&p!==S.thO&&!S.thDead)p=S.thO=S.thO||{};else if(S&&p.kind==="emp"&&!p.ref&&p!==S.emp)p=S.emp;if(!kitIsKnown(p)){return KIT_DIR+`unknown-fig-${kitSilG(p)}.webp`}
  if(typeof allKids==="function"&&allKids().some(([k])=>k===p))return typeof kidFigSrc==="function"?kidFigSrc(p):"";
  if(typeof figFor!=="function")return"";const f=figFor(p===S?S:S&&p===S.emp?{kind:"emp"}:S&&p===S.thO?{kind:"th"}:{ref:p})||"";return f||kitSilFig(p)}catch(e){return""}}
 /* D50 review/dlg-fig-ph: a person with no full-body art (story NPC, deposed consort, staff record, child without a ref ...) never leaves an empty frame:
    the kit silhouette unknown-fig-f|m|k by role/sex (same fallback chain as the week book j87 and the §59 placeholder rules). Art still missing is listed by dev/test/dlg-fig-scan.js. */
-function kitSilFig(p){try{if(!p||typeof p!=="object")return"";let r;try{r=personRoleRank(p)}catch(e){r=null}let g=r&&r.kid?"k":r&&r.sex==="m"?"m":"f";
- if(!r||r.role==="other"){const sx=p.sex||(p.ref&&p.ref.sex);if(sx==="m")g="m";if(typeof p.age==="number"&&p.age<BAL.m90.kidAge)g="k"}return KIT_DIR+`unknown-fig-${g}.webp`}catch(e){return""}}
+function kitSilFig(p){try{if(!p||typeof p!=="object")return"";return KIT_DIR+`unknown-fig-${kitSilG(p)}.webp`}catch(e){return""}}
 window.kitSilFig=kitSilFig;
 function kpodNorm(list){const L=(list||[]).filter(x=>x&&x.who).map(x=>Object.assign({},x));
  if(L.every(x=>x.place))L.sort((a,b)=>a.place-b.place);else{L.sort((a,b)=>(parseFloat(b.score)||0)-(parseFloat(a.score)||0));L.forEach((x,i)=>x.place=i+1)}return L}
@@ -122,7 +121,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 
 /* ---------- kit CSS (tokens of j79; art img/kit/podium-bg, podium-step, medal-1..3) ---------- */
 (function(){const st=document.createElement("style");st.id="kit90";st.textContent=`
-#kpodov{position:fixed;inset:0;z-index:9000;display:flex;align-items:stretch;justify-content:center;background:#2a1a12b8}
+#kpodov{position:fixed;inset:0;z-index:9000;display:flex;align-items:stretch;justify-content:center;background:var(--kveil,#2a1a12b8)}
 .kpod{position:relative;width:100%;max-width:1100px;height:100%;display:grid;grid-template-rows:auto minmax(0,1fr) auto;overflow:hidden;
  box-shadow:0 0 0 1px #c9a46a,0 14px 40px #2a1a1270;
  padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom);user-select:none;-webkit-user-select:none;cursor:pointer}
