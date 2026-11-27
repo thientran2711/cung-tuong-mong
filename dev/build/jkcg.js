@@ -117,8 +117,8 @@ PEND.kcgLd=pp=>{if(!kcgPal()||!S.kc.ldOld||S.kc.ldDone)return null;const f=RV(pp
 function kcgHomeO(kind){const m=kcgMom(),H=BAL.kcg.home;return m?oddsCl((kind==="ask"?H.giftO:H.writeO)+Math.round((m.af-H.mid)*H.k)):0}
 function kcgHomeHTML(){const m=kcgMom();if(!m)return"";const H=BAL.kcg.home,K=S.kc;const wO=kcgHomeO("wr"),aO=kcgHomeO("ask");
  const why=k=>K[k]===S.turn?"tháng này đã gửi":!can(BAL.kcg.home.khac)?"hết khắc":"";const wB=why("wr")||(S.bac<H.writeBac?"không đủ bạc":""),aB=why("ask");
- const acts=`<div class="rbtn">`+pbtn(`data-kcgh="wr"`,"Viết thư thăm nhà",`${word(wO)} · tốn: ${BAL.kcg.home.khac} khắc, Bạc -${H.writeBac} · thành: ${m.t} thiện cảm ${balSg(H.writeAf)}, tháng sau có thư hồi âm (tin thật về một phi tần) · hỏng: thư bị chặn, Danh ${balSg(-H.lostDanh)}`,wB)+
-  pbtn(`data-kcgh="ask"`,"Xin nhà gửi đồ vào",`${word(aO)} · tốn: ${BAL.kcg.home.khac} khắc, ${m.t} thiện cảm ${balSg(-H.askAf)} · thành: tháng sau nhận một món đồ nhà gửi`,aB)+`</div>`;
+ const acts=`<div class="rbtn">`+pbtn(`data-kcgh="wr"`,"Viết thư thăm nhà",`${word(wO)} · tốn: ${BAL.kcg.home.khac} khắc, Bạc -${H.writeBac} · thành: ${m.t} thiện cảm ${balSg(spSee("rel",H.writeAf))}, tháng sau có thư hồi âm (tin thật về một phi tần) · hỏng: thư bị chặn, Danh ${balSg(-H.lostDanh)}`,wB)+
+  pbtn(`data-kcgh="ask"`,"Xin nhà gửi đồ vào",`${word(aO)} · tốn: ${BAL.kcg.home.khac} khắc, ${m.t} thiện cảm ${balSg(spSee("rel",-H.askAf))} · thành: tháng sau nhận một món đồ nhà gửi`,aB)+`</div>`;
  const L=kcgMail();const rows=L.length?L.map(x=>[x.y?`Tháng ${x.m}, năm thứ ${x.y}`:"Trước đây",`${x.who}: ${x.what}`,"t"]):[["Chưa có thư","Nhà chưa gửi gì vào","n"]];
  return kitRows([[m.t,`${m.name} · thiện cảm ${m.af}`,"t"]])+acts+`<h4 class="kpst">Thư nhà đã nhận</h4>`+kitRows(rows)}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kcgh]");if(!b||!kcgPal())return;e.stopPropagation();e.preventDefault();if(b.disabled)return;
