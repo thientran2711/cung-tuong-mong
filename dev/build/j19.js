@@ -16,7 +16,7 @@ function kStepW(a,b){const w=n=>NUMW[n]||String(n);return b==null||a===b?`${w(a)
 function kRangeW(t){return String(t==null?"":t).replace(/(tiến bộ(?: [^\s+<]+(?: [^\s+<]+)?)?) \+(\d+)(?:\.\.(\d+))?(?![\d.])/g,(m,p,a,b)=>`${p} ${kStepW(+a,b==null?null:+b)}`)
  .replace(/([+\-−])(\d+)\.\.(\d+)/g,"$1$2 đến $1$3")}
 const KNEU=/^(không|không tốn|không mất gì|không được mất gì|chỉ |—|\d+ (khắc|việc)|2 khắc|tốn 2 khắc|chọn )/i;
-/* WORDING-GAIN (owner OD 26/11 ~18:50Z (7)): a stat said in marks «Danh −−» / «Sủng ++» is read like «Danh −2» / «Sủng +2» by every colour / row rule (bands BAL.mk, ONE CORE); display is untouched */
+/* WORDING-GAIN (owner OD 26/11 ~18:50Z (7)): a stat said in marks «Danh −−» / «Sủng ++» is read like «Danh −2» / «Sủng +2» by every colour / row rule (bands BAL.mark.cut, ONE CORE); display is untouched */
 const kMk=s=>String(s).replace(/(^|[\s:(])([+−])(\2{0,2})(?=$|[\s,;.)·:])/g,(m,a,g,r)=>a+g+(1+r.length));
 /* WORDING-GAIN (RV-161 fail 4, law 4): a static mark line «Danh −−» is the ONLY source of that stat's size when the option carries no typed amount; when the option's own
    fx (w / l / c) already names the stat, the number printed from BAL wins and the typed mark is dropped here (never two sources). */

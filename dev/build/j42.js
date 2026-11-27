@@ -454,10 +454,8 @@ function srvRise(why){if(!S||(S.age||0)<BAL.ageMin)return;const m=srvM();const t
  Q.push({t:"Thánh chỉ",cls:"end",who:pEmp(),h:`<p>${why}. Thánh chỉ: cung nữ ${S.name} được phong <b>${RANKS[0].n}</b>, ở ${palName("home")}.</p><p>${m?`${m.name} ${tin>=60?"vẫn coi ngươi như người nhà.":"nhìn ngươi bằng ánh mắt lạnh như băng."}`:""}</p><p class="past">Từ nay ngươi theo luật của phi tần: Sủng, thị tẩm, phẩm vị.</p>`,btn:"Tạ ơn"});
  deal();render();if($("modal").hidden)showModal()}
 
-/* ---------- endings keep her servant title in the record ---------- */
-(function(){const o0=over;over=function(h,t,fate){const sv=isSrv(),nm=sv?srvRkN():"";const r=o0.apply(this,arguments);
- if(sv){try{for(const k of ["cung-kiep","cung-luanhoi"]){const p=store.get(k)||[];if(p[0]&&p[0].n===S.name){p[0].r=nm;store.set(k,p)}}
-  if(Q[0]&&Q[0].h){Q[0].h=Q[0].h.replace(/<span>Phẩm cao nhất<\/span><b>[^<]*<\/b>/,`<span>Thân phận</span><b>${nm}</b>`).replace(/<span>Con cái<\/span><b>[^<]*<\/b>/,"<span>Con cái</span><b>không</b>");showModal()}}catch(e){}}return r}})();
+/* ---------- endings keep her servant title in the record: ONE CORE lifeTopRank (j32) prints her maid post on the end card, Sổ luân hồi and the board (D-ENDRANK;
+   the old regex rewrite here matched the pre-kit «<span>…</span><b>…</b>» rows and silently failed on kit rows: «Phẩm cao nhất: Đáp ứng» for a maid) ---------- */
 
 /* ---------- UI: HUD, tabs, panels, self card, map ---------- */
 /* maid-8tabs (owner 21/11 ~03:15Z mark #32, ~03:22Z mark #35 ONE SHELL): the cung nữ road shows the consort's 8 bottom tabs (Hành sự · Dư đồ · Hậu cung · Giao tình ·
