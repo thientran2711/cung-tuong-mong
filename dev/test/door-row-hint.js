@@ -49,6 +49,9 @@ DRH.run=(sc)=>{const SF=AA.surfaces();const L=[];
   for(const [h,w] of TG)ck("TGT «"+h+"»",DOOR.TGT(h),w);
   const DG=[["thành: nàng quý ta −−",""],["thành: nàng quý ngươi −−",""],["thành: nàng tin ta −",""],["thành: thiện cảm −−",""]];
   for(const [x,w] of DG){let g="";try{const d=document.createElement("div");d.innerHTML=doorGain([x],2);g=d.textContent.trim()}catch(e){g="ERR "+e}ck("doorGain «"+x+"»",g,w)}
+  /* E-GAIN3-LIVE-2: DOOR.rowHint itself — a way whose OWN text is a need line, its door line a real gain → the row's line wins (base first); the 78c8608a raw-first rule (MUTANT=1) shows the need text */
+  const RH=[[{n:"Thử",x:"cần nguyên cớ: đã nghe người nhận xét"},"thành: Danh +"],[{n:"Thử",x:"có hạc đỉnh hồng thì khỏi mua thạch tín"},"thành: nàng bị quở trách"]];
+  for(const [a,x] of RH){let got="",want="";try{got=DOOR.rowHint(a,x,0);want=kitHint({n:a.n,x},null,0).hint}catch(e){got="ERR "+e}ck("rowHint «"+a.x+"» / «"+x+"»",got,want)}
   return R});
  const ALL=[...SELF];console.error('self cases '+SELF.length+', bad '+SELF.filter(x=>!x.ok).length);for(const sc of (SC||'dau,toi,cao,con,hau,hh').split(',')){await p.evaluate(n=>AA.scen(n),sc);ALL.push(...await p.evaluate(n=>DRH.run(n),sc));console.error(sc+' rows '+ALL.length)}
  const bad=ALL.filter(x=>x.err||x.ok===false);const U={};bad.forEach(x=>{const k=x.err?'ERR '+x.err:`${x.door} › ${x.row} lv${x.lv}: «${x.fin}» (base «${x.base}»)`;U[k]=(U[k]||0)+1});
