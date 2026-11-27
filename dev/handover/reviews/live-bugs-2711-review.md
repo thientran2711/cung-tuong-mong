@@ -84,3 +84,13 @@ Shots folder to wipe after landing: `python3 dev/site/cdn_sync.py --wipe-review 
 
 ## REMERGE r4 — LAND READY 5e8a07e4 (FF of LIVE 5cee92bb)
 Merged f28d28b9 (KIT_REQUESTS both; LIVE carries the K-PICK-LIVE sign-off + KIT.md 28.13i rewritten in place = canon matches code) and 5cee92bb (built files only). vs LIVE: only jgift/jptime/jts. Gates on 5e8a07e4: undef-scan PASS (347) · gift-dead-scan y14/y05 0 dead · quickcheck FULL PASS exit 0 (old save ok; core gates green incl. G4 80).
+
+## RESTACK r5 — LAND READY b5639104 (FF of LIVE d9ca7892, lr5 trio) — for Foreman D depth 5 / MAIN 178
+- Merge: built files only conflicted (rebuilt; assets.json = LIVE). jkc.js/jkc2.js = LIVE (sx-scope-fix, taken in r3). Delta vs LIVE in dev/build = ONLY jgift.js / jptime.js / jts.js (gift tiles), unchanged since r2 — re-read, no new code.
+- Gates on b5639104: undef-scan PASS (347) · gift-dead-scan y14 / y05 0 dead · quickcheck: QUICKCHECK PASS (old save ok; perf new/live render 271/286, tab 503/458, buổi 1888/1821 ms, tasks>200 36/36), core gates had G4 94-q-softlock FAIL in the loaded run → q-softlock.js run alone over http: branch PASS, LIVE PASS (flake under load).
+- coop-e2e alone WITH review/coop-clear-rv173 8e1121d3 test fix (dev/test/lib/coop-clear.js, not landed; applied uncommitted to both trees):
+  | tree | result |
+  |---|---|
+  | branch b5639104 | 139/143 — FAIL week 2 fold/ipad advanced (known co-op week flake) + «same world after week 3 / after rejoin» 1 diff `R#6.spc.rel:me` (coop-host-lag family) |
+  | LIVE d9ca7892 | hung at 1700 s after 134 ok — FAIL «same world after week 1» 37 diffs (coop-host-lag family), then timeout |
+  Both fail in the same co-op sync family; the branch is no worse than LIVE (better). Not this branch (gift pickers only). FOR D/MAIN: coop-e2e not green on LIVE even with the coop-clear fix — coop-host-lag world diffs.
