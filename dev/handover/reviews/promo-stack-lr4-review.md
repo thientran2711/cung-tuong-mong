@@ -104,3 +104,11 @@ MAIN follow-up (law 6b one person one card + law 11 family = every elder who joi
 ### VERDICT: PASS → LAND READY review/promo-stack-lr4 **f85c2c61** (FF from LIVE 00dca386)
 Laws: 1 / 4 (key swap re-verified) / 7 / 9–12 unchanged from round 1 (no new UI, no new number). Remaining reds are all = LIVE (reach2 elder card, dialog-fixed 3-dai-ket-cuc, coop-e2e hang).
 If LIVE moves again before landing: merge the same way (token / line check on every shared source file), re-run promo-build + kit-promo-hook + quickcheck.
+
+## ROUND 5 (same reviewer, 27/11 ~14:30Z): LIVE moved 3× more → VERDICT PASS · LAND READY **c8b6b67e** (FF from LIVE d9ca7892) — supersedes f85c2c61
+| LIVE | merged as | hand resolution | gates |
+|---|---|---|---|
+| f28d28b9 (lc29-ui bundle + kc-odds-chip-r3) | 9126e74f | jkc kcMapHTML = D «tốn: ${BAL.walk.near} khắc» (law 4; LIVE still typed «1 khắc») + LIVE law-6 `mineK` road places; assemble.py = union (D jpromob/jpdist/jtperc/jsvt + LIVE jplink; both orders kept) | promo-build 48/48 · kit-promo-hook 8/8 · scope-scan 195/0 · kc scope-cards clean · QUICKCHECK PASS (all core gates incl. dialog-fixed green) |
+| 5cee92bb (lc30-kg82: j82 kg82ShowRes) | 9d016bc7 | built files + CHANGE only (branch does not touch j82) | promo-build 48/48 · kit-promo-hook 8/8 · kg82-phase-scan 15/0 · kg82-phase 1/7 FAIL «pixi really loaded» = LIVE 5cee92bb (same 1/7; Pixi does not load here) · QUICKCHECK PASS |
+| d9ca7892 (lc30-b2: help-housemate + srv-rank + selx-fair) | **c8b6b67e** | j9 topicOpts = D pvQuy previews (Nhún nhường / Giúp đỡ nàng) + LIVE same-house filter (+«Nhờ giúp đỡ»); BAL.audit (removed by LIVE): no reader left; BAL.srvLoyal / srvCap single home | promo-build 48/48 · kit-promo-hook 8/8 · help-housemate ALL PASS · srv-rank 16/16 (incl. LIVE old save) · QUICKCHECK run 1 FAIL (G4 q-softlock 1 «view parked by a tab change» + one longTaskMax spike 4283 ms), run 2 **PASS** (all core gates PASS, old save ok, perf new/live render 306/275, tab 513/632, buổi 2026/1912, tasks 41/35) → q-softlock = the known intermittent (it failed on LIVE 611fca61 too, round 3) |
+Every round: line check on every file both sides changed = 0 missing; CHANGE = union; site rebuilt; assets.json = LIVE. Open = LIVE items unchanged (reach2 elder card j95:629, coop-e2e hang after 28 ok).
