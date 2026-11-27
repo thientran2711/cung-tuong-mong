@@ -45,7 +45,8 @@ function punRows(o){const a=punWho(o.by),R=[];const w=punPlain(o.why);/* the edi
  else if(o.kind==="nhe")R.push(["Hình phạt",punEsc(o.c>0?`Khất bổng ${o.c} tháng`:"Cảnh cáo")]);/* merge home-way (BAL.punW nhẹ, sev 0): the light punishment shows its reason too (D1) */
  else if(o.kind==="cold")R.push(["Hình phạt",punEsc(`${PUNK.cold}, ở ít nhất ${BAL.pun.coldMinDays} ngày mới được xét tha`)]);
  S.punLast={why:w,who:a?a.name:"",kind:o.kind,wk:punNow()};return R}
-function punNote(o){if(!S||S.dead)return;const R=punRows(o);const a=punWho(o.by);
+function punNote(o){if(!S||S.dead)return;if(window.__punQuiet)return;/* review/place-close: the caller says the punishment in its own kit notice (chip + «Tin báo»), no panel (owner: no dialog for overstay) */
+ const R=punRows(o);const a=punWho(o.by);
  if(typeof kitPanel!=="function"){Q.push({t:PUNK[o.kind]||"Bị phạt",h:`<p>${R.map(r=>`${r[0]}: ${r[1]}`).join("<br>")}</p>`,btn:"Đã rõ"});return}
  kitPanel({kind:"notice",title:o.kind==="giang"?"Bị giáng phẩm":PUNK[o.kind]||"Bị phạt",sub:typeof when==="function"?when():"",subject:a||null,sections:[{h:"",rows:R}],btn:"Đã rõ"})}
 /* LÃNH CUNG STAY: p may leave only after BAL.pun.coldMinDays days inside (an NPC sent there by any road is stamped lazily) */

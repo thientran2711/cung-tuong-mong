@@ -137,7 +137,7 @@ function chipPlace(el){try{el.style.transform="none";el.style.maxWidth="none";co
  if(!p)p=scan({left:H.left+4,right:H.right-4,top:H.top+3,bottom:H.bottom-3},w,h,HR.concat(box?[box.getBoundingClientRect()]:[]),4);
  /* (a2) a quiet part of the top bar: over no word, number, picture or button of it — only its empty bar tracks (the mood slider): the phone's
     top bar has no fully empty slot, and the chip stays IN the top frame for its few seconds (owner: "phải nằm ở trên chứ không phải nằm ở dưới") */
- if(!p){slot="bar2";const Q=HR.filter(r=>r.__t);p=scan({left:H.left+4,right:H.right-4,top:H.top+2,bottom:H.bottom-1},w,h,Q.concat(box?[box.getBoundingClientRect()]:[]),1,"",true)}/* lowest first: the bar's edge nearest the screen */
+ if(!p){slot="bar2";const mood=[...hud.querySelectorAll(".ksbar *")].filter(e=>e.getClientRects().length).map(e=>e.getBoundingClientRect());/* KK54 (MAIN 171 option A, RV-166 on Fold): the mood slider's fill / marker / mid mark are information — the chip never hides them, only the empty part of the track */const Q=HR.filter(r=>r.__t).concat(mood);p=scan({left:H.left+4,right:H.right-4,top:H.top+2,bottom:H.bottom-1},w,h,Q.concat(box?[box.getBoundingClientRect()]:[]),1,"",true)}/* lowest first: the bar's edge nearest the screen */
  /* (b) just under the top bar (a band of two chip heights), over nothing kept (map title plaque .maptools::before included) */
  const mt=[...document.querySelectorAll(".maptools")].filter(e=>e.getClientRects().length).map(e=>e.getBoundingClientRect());
  if(!p){slot="under";p=scan({left:Math.max(col.left,0)+4,right:Math.min(col.right,innerWidth)-4,top:H.bottom+3,bottom:H.bottom+3+2*h},w,h,keep.concat(mt),3)}
