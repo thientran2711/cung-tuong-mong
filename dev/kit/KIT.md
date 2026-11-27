@@ -435,6 +435,29 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
      Sổ ghi names that person; then her own Được / Mất / Kèm as before.
   An outer act's aims (`outer:1`: doAct, talk, servAct, empAct) are closed by their wrapper when the act ends; others are shown once.
   Test: `node dev/test/ob-verdict.test.js index.html <shots>` (real-tap night pillow thành / hỏng / bỏ dở on Fold + iPad, deed + talk scan, two-way, old save).
+- **7.4 RESULT FIRST (OB-VERDICT-3, owner OD 26/11 ~18:15Z «Bấm xong á, không có thấy cái kết quả … tôi phải thấy kết quả ngay lập tức của những cái nút mà tôi bấm»).**
+  EVERY tap that makes a choice — a card option (`chooseM`: visitor «… giá đáo» replies «Nhịn» / «Đáp trả», event cards, roads, night prep), an act
+  (`act`, `doAct`, `talk`, `servAct`, `empAct`, `courtAct`, `recommend`, and every focus act that runs through them) — shows ITS result card (this part:
+  seal, sentence, «Người ấy» = the other person, her Được / Mất / Kèm, «không» rows kept per OD ~17:55Z) RIGHT AWAY, ON TOP (`.rtoast.karesult` z 47:
+  above `#modal` 42 and the focus layer `.kfoc` 46), and the NEXT screen waits until she taps it away:
+  1. the next card already queued (`showModal` during / right after the choice): held; the answered card goes away; the result card is HELD
+     (`.kres-hold`: no auto-hide timer, a timer that takes it away puts it back) and carries the kit button `kbtn kres-next` «Tiếp ▸»;
+     her tap (the card, «Tiếp ▸», the kit catcher `#kxcatch`, «Xem đầy đủ trong Sổ ghi») → the next card;
+  2. the visitor ENCOUNTER on the stage (jdfv §92: say → reply choices L/R → the person's talk acts): after her reply the fan folds
+     (`F.choices([])`), the result card is held, the talk acts (`dfSetGroups`) open on her tap;
+  3. an act in the focus view / person dialog: its result card is drawn above the focus (no hold: nothing else opens).
+  The sentence under the title never repeats the title (`kaSenDeTitle`, j63, every result card incl. the 7.3 verdict sentence; MAIN 162 LOOK):
+  «Có người đến: Nhịn lời khiêu khích của Hoàng hậu … — Đức +2 vì nhịn.» → «Đức +2 vì nhịn.»; a sentence that IS the title is dropped, the card still shows
+  (Ghi chú «ta không được gì, cũng không mất gì» — «không» rows kept).
+  NOT A CHOICE (LC25 core gate G4 q-softlock): a VIEW panel (`kit.view`: «Tin báo», «Tin chờ người sai đi», «Lịch tháng» …) and a pure close /
+  navigation option (no effect: «Đóng / Để sau / Đã rõ / Thôi / Xem …», `c.back`) are never held — the next card shows at once. SAFETY: a held
+  screen is let go at once when the result card is no longer on screen (hidden / gone / a new life); the KIT 32.10a park class lagging one frame
+  does not count as hidden. A card is never left in Q with nothing on screen (`node dev/test/q-softlock.js` PASS Fold + iPad).
+  A choice that opens its own next step and shows no result card yet (a picker, «Bày mưu», a mini-game) is not held. Display only (law 4): no state,
+  no number, no random draw; bots (`__bot`) get no card, so nothing is held for them; co-op state unchanged. Counts: `window.RF.stat`.
+  Test: `node dev/test/ob-verdict-3.test.js index.html <shots>` (REAL taps Fold 755x1000 + iPad 1180x820: the Hoàng hậu encounter, each reply →
+  result on top + «Người ấy» + «Tiếp ▸», talk acts only after the tap; an in-visit talk act result above the focus; family scan of the visitor / event /
+  Thái hậu / servant card makers alone and followed by a queued card, before/after table; bots; a buổi plays).
 - Same `.kb` row grid and colours as the act card; no change at all → Ghi chú "không đổi chỉ số". Stays 9 s; tap closes.
 
 
@@ -2639,6 +2662,10 @@ the first tap).** While any dialog is open (`#modal`, any visible `[role=dialog]
 body class `kdlg-on` — the act result card `#rtoast` and the `kitLine` pill `#kupdline` are PARKED (hidden, no `#kxcatch`). When the last dialog
 closes, a parked result card comes back with a fresh 7 s timer and its catcher. New floating cards join the same rule (add their id to the
 `kdlg-on` CSS in jk4). Test `dev/test/small-bugs-3.js` toast.
+EXCEPTION (KIT 7.4 RESULT FIRST, OB-VERDICT-3, owner OD 26/11 ~18:15Z): the park rule itself is unchanged (`kitDialogOpen` / `kdlg-on`: the
+focus layer `.kfoc` still parks every floating card and still counts as an open layer — LC26 button-crawl G4). Only the RESULT CARD gets
+`.kres-front` (visible over the park) while it is HELD (7.4) or while the only open "dialog" is the focus layer (the stage view: before, every
+result of a visitor reply / in-visit talk act stayed hidden for the whole visit). Hook: `front()` in jverdict.js.
 THE component — one place, every panel inherits it (#modal: event dialogs, choice cards, place cards 32.8, person cards / self / Hoàng thượng
 (pcm), info and report cards, Tư trang item and slot cards 28.13f, the shop 28.13d, title-screen pages, co-op pages; plus the week book
 kitBook, game / lesson results in #ov and the person card opened from the room #popw).
