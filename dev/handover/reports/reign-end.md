@@ -89,3 +89,23 @@ her son heir) — `-fold.webp` / `-ipad.webp`. Note: the stills set the reign 12
 - Robot chơi thật 6 đời: triều dài 11–17 năm (trung bình 14), mọi đời đều kết bằng biến cố triều; mô phỏng 42 đời: trung bình 13 năm, 83 % nằm trong 8–20 năm, đủ cả nhường ngôi / phế / lật đổ / băng hà.
 - Một đời chơi ≈ 2,5–3,5 giờ thật (theo nhịp PACE-SPEED).
 ~X% xong / ~Y% chơi được: do MAIN điền.
+
+## r1 — RV-163D FAIL F1–F3 fixed (65cb489a + this commit)
+
+- F1 law 1: NPC consorts with a stake take the SAME three roads at the same moment (case opens / abdication petition), through ONE function `road(p,k,c,s)`
+  for her and NPCs: same costs (her cost via the card fx, an NPC pays inside road), same gains, same case moves (pressure ±, odds ±, evidence, plot delay),
+  failed-case price for EVERY helper (f.hp list). Goals (`npcPick`): the heir's mother helps the abdication; a mother whose son is not the heir blocks it;
+  the plotting house's women help its phế / coup; the mother of the heir it would push aside blocks it; ≤ BAL.re.npc.max (3) per case; a Nặng road only
+  if she can pay. Each NPC road is logged and told as one «Hậu cung chia phe / dậy sóng» news card.
+- F2 law 2 (OD 27/11 ~00:46Z tiers): roads now read Nhẹ «Giữ mình» (tốn không → Đức) · Vừa block (tốn Danh 4 → Sủng 4; the house's enmity shown as Mất) ·
+  Vừa help on abdication (tốn Sủng 4 → Thái hậu 4, one gain) / Nặng help on phế–lật đổ (tốn Bạc 60 → Danh 8 + the house backs her; Mất if it fails).
+  Numbers BAL.re.her.t1/t2/t3.
+- F3 law 4: omenX, gripMid, skMid, loseMine → BAL.re.
+- Test (dev/test/reignend.js) adds: tier checks (Nhẹ costs nothing; Vừa cost = gain; help cost and result rise together), NPC help moves the odds exactly
+  like hers and pays the same Bạc, NPC block moves the abdication pressure like hers, NPCs act when a case opens; forced ends deterministic.
+  **PASS 755x1000 + 1180x820**; one-core-guard **PASS** (fails 0).
+- Month loop after r1 (NPC roads now push cases too), 28 lives: seed set 5 mean 10.9 / p10 7 / p90 15 (abd 6 · phế 3 · lật đổ 5); seed set 6 mean 12.9 /
+  p10 8 / p90 17 (abd 8 · phế 2 · lật đổ 1 · natural 2 · accident 1) → combined mean ≈ 11.9, phế and lật đổ more common than before (NPC houses now help their
+  own cases). Robot table above is r0 (before NPC roads).
+- Stills re-shot (new road order) → CDN img/_review/reign-end/. INFO for the kit keeper (not this branch): on iPad the coup card's small «who» avatar
+  overlaps the first text line under a short head-art band (kit act-card layout).
