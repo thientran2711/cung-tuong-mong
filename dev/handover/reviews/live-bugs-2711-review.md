@@ -46,3 +46,33 @@ Not changed and correct per law 16: maid-as-carrier question stays open to D/MAI
 
 ## Fix-round gates
 gift-dead-scan y14 + y05 = 0 dead · undef-scan · d19-gift (2 pre-existing only) · gift-pick-scan · scenes3 · coop-e2e 143/143 alone · quickcheck + old save («Ô lưu · Lui» identical to LIVE) · kit-std-scan counts · Fold 755x1000 + iPad 1180x820 shots of tsgiftpick it/wk, giftto th, giftpick (servant + no servant). Then FF/merge from LIVE (4cd3f974 or newer).
+
+---
+# RE-REVIEW r2 — review/live-bugs-2711 @ 574b0012 → review/live-bugs-2711-rv @ d4629189 — VERDICT: PASS · LAND READY d4629189
+
+PRIORITY #1 CHECK: as r1 + LIVE 0562e15f (BUNDLE 1 + door-onetap; act-move giftto kgbest / BAL.time.cost.give) | KIT_REQUESTS K-PICK-LIVE (KK54) | claims D-LIVEBUGS3.
+KIT CHECK: reuses `p.past` (giftRestNote), KIT 28.13i grid (jgpick unchanged), kit ✕. kit-std-scan: worker reports LIVE = branch identical (73/5 rules); not re-run by me.
+
+- FAIL 1 fixed: outer `PEND.giftpick` wrapper at the end of jptime.js (jptime loads after jgpick in assemble.py) drops giftEval-locked tiles + one giftRestNote line. jgpick.js untouched.
+- FAIL 2: KIT.md kept = LIVE; the in-place §28.13i text is filed as KIT REQUEST «27/11 LIVE-BUGS-2711 — K-PICK-LIVE» for KK54 (Foreman D's routing, law 9). Accepted: the kit keeper must rewrite that §28.13i line; until then the canon line «greyed but selectable» is stale for these 4 dialogs (FOR D/MAIN: track K-PICK-LIVE).
+- Nit fixed.
+- LIVE moved twice (98c77517, then 0562e15f). Merged both into -rv. Source conflict in jgift.js giftto: resolved = branch filter (only ok pieces) + LIVE's kgbest preselect (best = L[0], the highest value after the filter) + spend(BAL.time.cost.give). KIT_REQUESTS: both entries kept. index.html/sw.js rebuilt, assets.json = LIVE.
+
+## Gates on d4629189
+| gate | result |
+|---|---|
+| undef-scan | PASS (343 names) |
+| gift-dead-scan y14 / y05 | PASS / PASS (y05 Tặng quà 467/389/78 → 389/389/0) |
+| gift-pick-scan | ok |
+| d19-gift | only the pre-existing «item road oán 0» ×2 (= LIVE) + the known random «NPC piece refused» flake |
+| scenes3 | exit 0 |
+| quickcheck --runs 3 | QUICKCHECK PASS (old save ok; perf new/live render 252/272, tab 518/548, buổi 1295/1526 ms, tasks>200 29/31); CORE GATES: only G4 80-dialog-fixed |
+| G4 80-dialog-fixed | flaky on LIVE too: LIVE 0562e15f failed in both of my runs (XL left figure / seal on «Đại kết cục»); the branch failed once, then PASSED clean (exit 0). Not this branch (no dialog-frame code touched). FOR D/MAIN: LIVE gate flaky/red since BUNDLE 1 (its own note: «XL left-figure fail on ring stack»). |
+| «Ô lưu · Lui» | not flagged (fixed on LIVE by kptitle-close) |
+| coop-e2e alone | NOT green anywhere: hangs at buoiBoth (step 30, «Target page closed» at my timeout) on the branch twice AND on LIVE 98c77517 once, the same way → environment / LIVE issue, not this branch (worker had 143/143 on 4cd3f974 r2). FOR D/MAIN: co-op e2e hangs at the first shared buổi on LIVE. |
+| shots | worker CDN after-y05/after-y14 × Fold/iPad looked at: Tặng quà with servant (tiles + «Còn 78 món… (nàng ta Kiêu ngạo, chỉ nhận đồ quý mua bằng bạc)»), Biếu quà tác phẩm with no tile (text line + ✕), Tặng quà no runner («Chưa sai ai đi được: …») — no overflow, kit look |
+
+Laws: 3 (no cost-only dead tiles) ok · 4/7 (odds lambdas = rolled member; no number typed) ok · 6c (hidden pieces stay in the chest, counted in the line) ok · 9 (KIT REQUEST filed, no private part) ok · 11 (all 4 item pick dialogs, 2 saves) ok · 16 (maid-carrier question left open) ok.
+Wording nit (not blocking): the reason text carries the trait name capitalised mid-sentence («nàng ta Kiêu ngạo, …») — from giftEval's why, LIVE wording.
+
+Shots folder to wipe after landing: `python3 dev/site/cdn_sync.py --wipe-review live-bugs-2711`.
