@@ -43,3 +43,20 @@ Trace (robot/flight2-s16b-moments.md): days road → Thái hậu đối đáp �
 
 ## SẴN SÀNG KIỂM: review/live-bugs-2711 fc6d0ad3
 Worktree removed after push. Rollover not needed (ctx well under START_CTX+25 %).
+
+## FIX ROUND r2 (rv FAIL @6e91e744) — SẴN SÀNG KIỂM review/live-bugs-2711 574b0012
+Commits: 4f167b8c «Tặng quà» outer wrapper + nit · 4e39d27c merge LIVE 4cd3f974 (sources disjoint; index.html/sw.js rebuilt, assets.json = LIVE) · 574b0012 KIT.md back to LIVE + KIT REQUEST.
+1. FAIL 1 fixed: jptime.js (loads AFTER jgpick) adds an outer PEND.giftpick wrapper: the pieces jgpick's gift line locks (giftEval refuses) are dropped; one `p.past` line «Còn N món khác trong rương chưa tặng được (<why>).» (giftRestNote + giftWhyTop). jgpick.js untouched. Nit: unused `n` dropped.
+2. FAIL 2: per Foreman D (kit rule change → KK54), KIT.md is unchanged (= LIVE); KIT REQUEST «27/11 LIVE-BUGS-2711 — K-PICK-LIVE» in dev/kit/KIT_REQUESTS.md carries the in-place rewrite of the §28.13i greyed-tile line.
+gift-dead-scan (tiles / can / dead):
+| picker | y05 LIVE 4cd3f974 | y05 574b0012 | y14 574b0012 |
+|---|---|---|---|
+| Tặng quà | 467/389/78 | 389/389/0 | 0/0/0 (no servant line) |
+| Dâng quà HT | 467/467/0 | 467/467/0 | 1357/1357/0 |
+| Dâng quà TH | 467/389/78 | 389/389/0 | 1250/1250/0 |
+| Cài đồ | 467/467/0 | 467/467/0 | 0/0/0 (no servant line) |
+| Biếu quà · đồ | 389/41/348 | 41/41/0 | 207/207/0 |
+| Biếu quà · tác phẩm | 78/0/78 | 0/0/0 | 3/3/0 |
+| Biếu quà · cả hai | 467/41/426 | 41/41/0 | 210/210/0 |
+Gates on 574b0012: gift-dead-scan y14 + y05 PASS · undef-scan PASS · d19-gift only the 2 pre-existing (item road oán) + random NPC-refusal flake (same as LIVE) · gift-pick-scan ok · scenes3 exit 0 · kit-std-scan (REPORT_ONLY, scanner from review/kit-std-audit-rv166) LIVE 4cd3f974 = branch: FAIL 73 / 5 rules, identical per-rule counts (X02 30, X08 6, X09 31, X12 4, X18 2) → nothing added · quickcheck --runs 5 **PASS** (core gates incl. «Ô lưu · Lui» now pass; old save ok; perf median new/live render 206/198, tab 586/502, buổi 1213/1258, tasks>200 26/24) · coop-e2e alone 143/143.
+Shots (looked at), CDN img/_review/live-bugs-2711/ after-y05-* and after-y14-* × bieuqua-it / bieuqua-wk / tangqua / dangqua-th × fold / ipadAir. Note for rv: a dialog left with NO tile (y05 Biếu quà · tác phẩm) shows the kit's empty-dialog layout (small banner, text lines, ✕) — LIVE's own layout for an option-less dialog, not new.
