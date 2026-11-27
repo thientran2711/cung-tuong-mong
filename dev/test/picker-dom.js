@@ -15,7 +15,7 @@ function save(){const f=arg('--save',process.env.CTM_S7);if(f&&fs.existsSync(f))
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const D=save();const b=await chromium.launch();const rows=[];
  for(const [vw,vh] of VPS){const ctx=await b.newContext({viewport:{width:vw,height:vh},deviceScaleFactor:1,reducedMotion:'reduce'});await serve(ctx,ROOT);
-  await ctx.addInitScript(d=>{if(!sessionStorage.getItem('pdm')){for(const k in d)localStorage.setItem(k,d[k]);sessionStorage.setItem('pdm','1')}},D);
+  await ctx.addInitScript(()=>{window.__kriOff=1/* the grid pass: LIVE's «Vòng bảo vật» ring would take the dialog over (its own pass: picker-dom-ring.js) */});await ctx.addInitScript(d=>{if(!sessionStorage.getItem('pdm')){for(const k in d)localStorage.setItem(k,d[k]);sessionStorage.setItem('pdm','1')}},D);
   const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
   const T0=Date.now();const lg=m=>console.log(`  [${vw}x${vh} ${((Date.now()-T0)/1000).toFixed(1)}s] ${m}`);p.on('console',m=>{if(/^PD /.test(m.text()))lg(m.text())});
   await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof deser==='function'&&typeof loadSlot==='function'&&window.COOPW,null,{timeout:120000});lg('loaded');

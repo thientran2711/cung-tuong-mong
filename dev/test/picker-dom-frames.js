@@ -3,7 +3,7 @@ const path=require('path');const ROOT=path.resolve(process.argv[2]);const NS=(pr
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const cp=require('child_process'),zlib=require('zlib');
 const D=JSON.parse(zlib.gunzipSync(cp.execSync('git show origin/claude/cung-tuong-mong-handover-hj0h8w:dev/handover/robot/flight2-s7-stuck/ls-b2928-inv1437.json.gz',{cwd:__dirname,maxBuffer:1<<28})).toString());
 (async()=>{const b=await chromium.launch();const out={};for(const [vw,vh] of [[755,1000],[1180,820]]){const ctx=await b.newContext({viewport:{width:vw,height:vh},reducedMotion:'reduce'});await serve(ctx,ROOT);
- await ctx.addInitScript(d=>{if(!sessionStorage.getItem('pdm')){for(const k in d)localStorage.setItem(k,d[k]);sessionStorage.setItem('pdm','1')}},D);
+ await ctx.addInitScript(()=>{window.__kriOff=1/* the grid pass: LIVE's «Vòng bảo vật» ring would take the dialog over (its own pass: picker-dom-ring.js) */});await ctx.addInitScript(d=>{if(!sessionStorage.getItem('pdm')){for(const k in d)localStorage.setItem(k,d[k]);sessionStorage.setItem('pdm','1')}},D);
  const p=await ctx.newPage();await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:300000});await p.waitForFunction(()=>typeof deser==='function'&&window.COOPW,null,{timeout:300000});
  await p.evaluate(()=>{const d=loadSlot(1);SLOT=1;quiet=true;d.tab='act';deser(d);quiet=false;document.getElementById('title').hidden=true;while(Q.length)Q.shift();try{deal();render()}catch(e){}window.__inv=S.inv.slice()});
  const R=await p.evaluate(async NS=>{const w=ms=>new Promise(r=>setTimeout(r,ms));const v=liveRivals(true).filter(x=>x.alive!==false&&!x.out)[0];const out=[];

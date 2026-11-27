@@ -197,17 +197,27 @@ function kriBg(){try{const c=[...document.querySelectorAll("#stage, #stage *")].
 /* ---- (1) jgpick family: giftpick / giftto / plantpick (+ wkgive when it carries items): the #modal dialog stays the engine (every wrapper, cost, odds, item hook);
         the ring is its face. Act = the dialog's own option (chooseM). ---- */
 let KRI_DLG=null;
-function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kipOn!=="function"||!kipOn(m)||KRI_DLG===m)return;KRI_DLG=m;
- const ops=M.querySelector(".opts");const L=m.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]&&ops&&ops.querySelector(`.opt[data-m="${i}"]`));
- L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));M.classList.add("kri-hide");
+function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kipOn!=="function"||!kipOn(m))return;
+ /* picker-dom (K-LIST-PAGE): a page turn / a card drawn for the ring redraws the dialog (j3 resets #modal's class) → it stays hidden behind its ring */
+ if(KRI_DLG===m){M.classList.add("kri-hide");return}KRI_DLG=m;
+ /* the ring lists EVERY piece of the chest (kipList: all options, doable first), not only the cards of the drawn page (law 6c: no item vanishes) */
+ const ops=()=>M.querySelector(".opts")||M;const bt=i=>ops().querySelector(`:scope>.opt[data-m="${i}"]`);
+ const L=kipList(m).map(x=>[x[0],x[1]]);M.classList.add("kri-hide");
  const verb=(typeof KIP_VERB!=="undefined"&&KIP_VERB[m.pid])||"Chọn";let V=m.pp&&m.pp.v;try{if(V!=null&&typeof V!=="object")V=(typeof byKey==="function"&&byKey(V))||liveRivals(true).find(x=>x.id===V)||null}catch(e){V=null}
  const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?V.name:""):m.pid==="giftto"?((M.querySelector(".kptitle")||{}).textContent||""):"";
- const why=(c,i)=>{const b=ops.querySelector(`.opt[data-m="${i}"]`);return c.kgwhy||(b&&b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):kipLocked(c)?"Thiếu bạc":"")};
+ const why=(c,i)=>{const b=bt(i);if(c.kgwhy)return c.kgwhy;if(b)return b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):kipLocked(c)?"Thiếu bạc":"";
+  /* a card not drawn (another page): the same reason j3 gives it when drawn (c.off from kitOff / kitOffBac) */
+  const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;if(poor&&!c.off&&typeof kitOffBac==="function")kitOffBac(c,-c.fx.bac);
+  /* every hold-back the kit knows (jnolock kitLockWhy: kitOff · bạc · lock · khắc · unmet Cần · lk · temper) → its words */
+  const k=typeof kitLockWhy==="function"?kitLockWhy(c,m):c.off?(c.off.why||"off"):kipLocked(c)?"bac":"";if(!k)return"";
+  /* the same words the drawn card shows: its unmet Cần row first (j63 kr-why), then bạc / lock = «Thiếu bạc» (as the drawn path above) */
+  const n=Array.isArray(c.need)&&c.need.find(n=>n&&!n.ok);if(n&&n.t)return n.t;if(k==="bac"||k==="lock")return c.off&&c.off.why||"Thiếu bạc";
+  return /^(off|time|none|need)$/.test(k)?"Chưa được":k};
  kitRingItem.open({key:"gift:"+m.pid,title:(M.querySelector(".kptitle")||{}).textContent||verb,sub:who?`${verb} cho ${kriE(who)}`:"",bg:kriBg(),
   items:()=>L.filter(([c])=>S.inv[c.ik]).map(([c,i])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);return{id:i,src:I.src,name:I.name,grade:I.grade,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}}),
   /* info = the item's kit detail + the option's own kit card (odds · Tốn · Được · Mất · Kèm) — the same display copy as the old grid detail (kipDetail) */
   info:it=>{try{kipSelect(M,m,it.i);const d=M.querySelector(".kipd");if(d){const c=d.cloneNode(true);c.querySelectorAll(".kipgo").forEach(x=>x.remove());c.classList.remove("kipd");return c.innerHTML}}catch(e){}return""},
-  acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{const b=ops.querySelector(`.opt[data-m="${it.i}"]`);if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark();window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
+  acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{let b=bt(it.i);if(!b){kipSelect(M,m,it.i);b=bt(it.i)}/* not on the drawn page → draw it (the real dialog path), then click the real option */if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark();window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
    M.classList.remove("kri-hide");KRI_DLG=null;/* a follow-up dialog of the act → the ring steps aside for it */if(Q.length&&!$("modal").hidden){return"close"}
    const L=kriLogSince(l0),bad=L.some(x=>/phát hiện|trả lại|từ chối|không nhận/.test(x));return{ok:!bad,who,title:`${verb} ${it.name}${who?" · "+who:""}`,rows:kriDiffRows(a,V,who).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}],
   onClose:()=>{M.classList.remove("kri-hide");if(KRI_DLG===m&&Q[0]===m&&!M.hidden){KRI_DLG=null;const x=M.querySelector(".kit-x");if(x)x.click();else if(typeof closeModal==="function")closeModal()}KRI_DLG=null}})}

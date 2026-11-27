@@ -1611,6 +1611,13 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   Test: `node dev/test/picker-dom.js` (DOM < 2,000 per picker on F's s7 save; every page whole rows, no inner scroll, every column the tile
   size allows; every tile reached; a locked + an open card per picker = the full-draw card: classes, disabled, data-*, text, chip; the
   dialog frame classes = LIVE's for 5 / 6 / 7 / 30-item chests, page 1 and page 2; confirm gives one piece); scan `node dev/test/picker-dom-scan.js`.
+  RING FACE (§104.4, LIVE jkring-item `kriGiftOpen`): the ring of a paged picker lists the chest from `kipList(m)` = ALL its options, doable first
+  (never only the drawn page's cards, law 6c); an item whose card is not drawn takes its lock from the kit rule (`kitLockWhy`: kitOff · bạc · lock ·
+  khắc · unmet Cần · lk) in the drawn card's words (its unmet Cần row first, bạc / lock = «Thiếu bạc»); its act draws that card through the real
+  `showModal` path (`kipSelect`) and clicks the real option; a redraw keeps `#modal` hidden behind the ring (`kri-hide` put back). Ring test:
+  `node dev/test/picker-dom-ring.js <root>` (ring = kipList up to `KIT_RINGI.maxN`, lock = `kitTakeable`, same reason as drawn, act on an
+  undrawn item gives one piece, the next dialog in Q survives the ring close). OPEN: the ring itself shows at most `KIT_RINGI.maxN` (24) items
+  (`kriItems` slice) — KIT REQUEST K-RING-ALL.
 - Phone landscape (height ≤ 500): grid and detail side by side.
 - Users: giftpick (Hậu cung act "Tặng quà", now with the gift card's own line `giftEval`: odds · tốn · thành · kèm), giftto (Dâng quà
   Hoàng thượng / Thái hậu), plantpick (Cài đồ vào rương). Scan: `node dev/test/gift-pick-scan.js` (every option list built from S.inv).
@@ -5055,4 +5062,4 @@ Part of the ONE new animation kit (vòng người · vòng nhóm · vòng bảo 
 - FOCUS: tap the bright item → it zooms big to the LEFT (warm glow), the ring folds down; the kit pane (`.dlg.kpanel.kri-pane`) DROPS on the RIGHT: kit info (kinlDetail / kitItemDetail / the caller's spec) + the caller's buttons (+ −/+ when an act has q.max>1) + «‹ Vòng».
 - RESULT IN PLACE: the act's result = kit result rows (seal THÀNH / BẠI / KẾT QUẢ; Được / Mất / Ghi chú; an empty row shows «không», kept) + «Xem món khác». `kriDiffRows` = her stats (j1 NAMES), person → ta thiện cảm, items in/out of Tư trang. An act that opens its own dialog closes the ring.
 - Motion: transform + opacity only (no animated filter / layout); reduced motion / Gọn = no tweening; bots keep the old UI. Scene layer = kitScene §93 (bg = the stage she stands on).
-- WIRED (KK44 scan §5): jgpick giftpick/giftto/plantpick (the dialog stays the engine) · kitShop buy + sell (nvp, pet shop, all wrappers) · Tư trang bag family via kinlPick (items, wardrobe, works, recipe books, Trưng bày) · veil chest · pets · toilette dress (#kg82) · titles (Danh hiệu) · hoa điền · face on the new-game card (a card holding a kit picker never becomes a §102 stage, so «Dung mạo» stays tappable). Kit page sample «§104».
+- WIRED (KK44 scan §5): jgpick giftpick/giftto/plantpick (the dialog stays the engine; a PAGED picker's ring lists every option via `kipList`, §28.13i RING FACE) · kitShop buy + sell (nvp, pet shop, all wrappers) · Tư trang bag family via kinlPick (items, wardrobe, works, recipe books, Trưng bày) · veil chest · pets · toilette dress (#kg82) · titles (Danh hiệu) · hoa điền · face on the new-game card (a card holding a kit picker never becomes a §102 stage, so «Dung mạo» stays tappable). Kit page sample «§104».
