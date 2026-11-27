@@ -23,9 +23,13 @@ const AUDIT=`(()=>{const out=[];const L=document.getElementById('nhv');if(!L)ret
  [...L.querySelectorAll('.kpk .kpk-n')].filter(vis).forEach(n=>{const r=n.getBoundingClientRect();if(r.left<st.left-1||r.right>st.right+1||r.bottom>st.bottom+1||r.top<st.top-1)out.push('PLAQUE-OFFSTAGE '+n.textContent.trim().slice(0,20));
   const b=n.querySelector('.kfoc-t b');if(b&&b.scrollHeight>b.clientHeight+1)out.push('PLAQUE-CUT '+b.textContent)});
  return out})()`;
-async function run(dev){const o=await boot(dev==='ipad'?'ipadAir':'fold',1,0,{});const {g,pg}=o;const T=ms=>pg.waitForTimeout(ms);const R={dev,areas:{},audit:{}};
+async function run(dev){const DV=dev==='ipad'?'ipadAir':'fold';const R={dev,areas:{},audit:{}};
+ /* RV-172 ruling (27/11): walking / visiting spends khắc and «Về phòng · hết khắc» is the real rule, so EVERY area gets a FRESH boot of the same SAVE (own page + context): enter -> audit -> group tap -> person tap -> kitPick; the both-devices rows compare the per-area results */
+ const mk=async()=>{const o=await boot(DV,1,0,{});const {g,pg}=o;const T=ms=>pg.waitForTimeout(ms);
  const clearQ=async()=>{for(let j=0;j<8;j++){const n=await g.evaluate(()=>{if(!Q.length)return 0;const m=Q[0];const L=(m.opts||[]);let k=L.findIndex(o=>/một mình/.test(o.n||''));if(k<0)k=Math.max(0,L.findIndex(o=>!o.off));if(L.length)chooseM(k);else closeModal();return 1});if(!n)break;await T(700)}};
  const click=async(sel,i)=>g.evaluate(([s,i])=>{const e=[...document.querySelectorAll(s)][i||0];if(!e)return false;e.click();return true},[sel,i||0]);
+ return {o,g,pg,T,clearQ,click}};
+ let order;{const {o,g,pg,T,clearQ,click}=await mk();
  await clearQ();await g.evaluate(()=>{tab='go';window.__mapList=false;render()});await T(700);
  R.chip=await g.evaluate(()=>{const e=document.querySelector('#panel [data-go="vuon"]');return e?((e.textContent.match(/(\d+)\s*bóng/)||[])[1]|0):-1});
  for(let k=0;k<4;k++){await clearQ();await click('#panel [data-go="vuon"]');await T(1000);if(await g.evaluate(()=>!!document.querySelector('#panel .nhv-map')))break}
@@ -36,8 +40,11 @@ async function run(dev){const o=await boot(dev==='ipad'?'ipadAir':'fold',1,0,{})
  await pg.screenshot({path:`${OUT}/${dev}-map.png`});R.map=M;
  const sum=M.rows.reduce((s,r)=>s+r.n,0);ok(R.chip===M.cnt&&M.tot===M.cnt&&sum===M.cnt,`${dev}: Dư đồ chip = map total = sum of areas = countAt`,{chip:R.chip,tot:M.tot,sum,cnt:M.cnt});
  ok(M.rows.length>=5&&M.spots.length===M.rows.length,`${dev}: garden map has every area as a kit row + hotspot`,{rows:M.rows.length,spots:M.spots.length});
- const order=M.rows.filter(r=>r.n>0).map(r=>r.k);let first=true;
- for(const k of order){if(!first){await clearQ();await click('#tomap');await T(900);if(!(await g.evaluate(()=>!!document.querySelector('#panel .nhv-map')))){await g.evaluate(()=>{window.__kpm={slot:'p:vuon',k:'vuon'};tab='go';render()});await T(600)}}
+ order=M.rows.filter(r=>r.n>0).map(r=>r.k);await o.ctx.close();await o.b.close();o.srv.close()}
+ for(const k of order){const {o,g,pg,T,clearQ,click}=await mk();let first=true;try{
+ await clearQ();await g.evaluate(()=>{tab='go';window.__mapList=false;render()});await T(700);
+ for(let q=0;q<4;q++){await clearQ();await click('#panel [data-go="vuon"]');await T(1000);if(await g.evaluate(()=>!!document.querySelector('#panel .nhv-map')))break}
+ if(!first){await clearQ();await click('#tomap');await T(900);if(!(await g.evaluate(()=>!!document.querySelector('#panel .nhv-map')))){await g.evaluate(()=>{window.__kpm={slot:'p:vuon',k:'vuon'};tab='go';render()});await T(600)}}
   await clearQ();await click(`#panel .nhv-map [data-kpmpart="${k}"]`);await T(first?1500:900);await clearQ();await T(first?2600:1500);first=false;
   const sc=await g.evaluate(k=>{const h=S.hall;window.__khLog=(window.__khLog||[]).concat([k+':used='+used+':kh='+j95kh()+':key='+S.roster.key]);const P=NHV.plan();const a=P.areas.find(x=>x.k===k);return {place:S.place,part:h&&h.part,title:((document.querySelector('#kpname')||{}).textContent||''),
    khl:window.__khLog,err:(window.__nhvErr||[]).slice(-3),names:[...document.querySelectorAll('#nhv .nhv-f')].length,people:curPeople().map(p=>p.name).sort(),want:a?a.g.flatMap(g=>g.ms.concat(g.fol).map(e=>e.name)).sort():[]}},k);
@@ -52,7 +59,8 @@ async function run(dev){const o=await boot(dev==='ipad'?'ipadAir':'fold',1,0,{})
   const pk=await g.evaluate(()=>({kp:!!NHV.kp,n:document.querySelectorAll('#nhv .kpk .kpk-n').length,Q:Q.map(m=>m.t+'|'+(m.pid||'')).join(';'),used,sel:!!NHV.cur&&NHV.cur.G.indexOf(window.__tg)}));ok(pk.kp&&pk.n>0,`${dev}/${k}: person tap → kit thẻ gỗ (kitPick) beside her`,pk);
   await pg.screenshot({path:`${OUT}/${dev}-${k}-pk.png`});const a1=(await g.evaluate(AUDIT)).filter(x=>!/^TEXT-OVERLAP .*\/|^PERSON-OVERLAP/.test(x)||true);R.audit[k+'-pk']=a1;ok(!a1.length,`${dev}/${k}: audit with plaques up`,a1);
   await g.evaluate(()=>NHV.unsel());await T(500)}
- await o.ctx.close();await o.b.close();o.srv.close();return R}
+  catch(e){ok(false,`${dev}/${k}: area run threw`,String(e&&e.message||e))}await o.ctx.close();await o.b.close();o.srv.close()}
+ return R}
 (async()=>{const F=await run('fold'),I=await run('ipad');fs.writeFileSync(path.join(OUT,'area-test.json'),JSON.stringify({F,I},null,1));
  ok(JSON.stringify(F.map.plan)===JSON.stringify(I.map.plan),'BOTH devices: same areas and the same people in each area (from game state, never the screen)',{fold:F.map.plan.map(a=>a.k+':'+a.ids.length),ipad:I.map.plan.map(a=>a.k+':'+a.ids.length)});
  for(const k in F.areas){if(!I.areas[k]||I.areas[k].kh!==F.areas[k].kh){console.log('note: area '+k+' visited at different khắc (fold '+F.areas[k].kh+' / ipad '+(I.areas[k]&&I.areas[k].kh)+': a real game event spent time) — compared with its own record above');continue}
