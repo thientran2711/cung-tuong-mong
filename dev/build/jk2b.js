@@ -323,7 +323,7 @@ function kitHintOf(b,o){if(o)return kitHint(o,typeof Q!=="undefined"?Q[0]:null);
  const j67=[odd?odd[1]:"",(rows["Được"]||rows["Thành"])&&"thành: "+(rows["Được"]||rows["Thành"]).join(", "),(rows["Mất"]||rows["Bại"])&&"hỏng: "+(rows["Mất"]||rows["Bại"]).join(", "),rows["Kèm"]&&"kèm: "+rows["Kèm"].join(", ")].filter(Boolean).join(" · ");
  return kitHint({j67},null)}
 /* KIT PARTS (KIT 28.6, kit sample page): the hint row + the kit odds meter — every hidden-outcome option uses these, nothing private */
-function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.fix)text=VP.fix(text)}catch(e){}return `<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef i">${text}</span></span></span>`}
+function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.fix)text=VP.fix(text)}catch(e){}/* KK53: a clause the hint source wrote twice in a row («…; Tùy duyên; Tùy duyên») reads once, at the one place every hint row is made */text=String(text).split("; ").filter((x,i,a)=>i===0||x!==a[i-1]).join("; ");return `<span class="kr kr-hint"><span class="krl">Gợi ý</span><span class="krv"><span class="ef i">${text}</span></span></span>`}
 /* ODDS WORD RULE (FIRSTCARD-3, owner OD 26/11 ~18:25Z; laws 7/11/14; KIT §6.2b-END): an odds word (Mong manh … Rất vững) shows ONLY on an option that really
    rolls a success chance, and is always the TRUE word — never bent to warn. An option that rolls nothing shows NO odds word (the old sure «Nắm chắc / Rất vững»
    stamp is gone, no toggle). An option that does NOT roll but changes her ending / life (xuất giá, xuất gia, tự vẫn, rời cung, chuyển kiếp, a certain

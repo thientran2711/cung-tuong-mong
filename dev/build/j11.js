@@ -181,10 +181,10 @@ function pxKind(){const P=placeOf(S.place),night=(S.buoi||0)===B4L,out=["vuon","
  if(P.sc==="tn"||P.sc==="tnn")return"smoke";if(P.sc==="thu")return"dust";if(night)return"fly";return w==="rain"||w==="storm"?"rain":"dust"}
 async function pxScene(){if(!S||RM||!OPT.fxon){if(PX.app)PX.app.canvas.style.display="none";return}if(!PX.app){pxLoad();return}PX.app.canvas.style.display="";pxWake();
  lightTick();const P=placeOf(S.place),k=P.sc+"|"+pxKind()+"|"+(S.wx?S.wx.k:"")+"|"+(S.buoi||0);if(PX.key===k)return;PX.key=k;
- for(const p of PX.parts)p.destroy();PX.parts=[];if(PX.bg){PX.bg.destroy({texture:false});PX.bg=null}
+ for(const p of PX.parts)p.destroy();PX.parts=[];/* KIT §102.6 (KK38, RV-OB-NGOAICUNG iPad Khuê phòng buổi chiều: a FLAT GREY box while the next room picture loaded): the old painting stays until the new one is drawn */PX.oldBg=PX.oldBg||[];if(PX.bg){PX.oldBg.push(PX.bg);PX.bg=null}const dropOld=()=>{for(const b of PX.oldBg.splice(0))try{b.destroy({texture:false})}catch(e){}};
  /* ONE backdrop (owner 11/15): the Pixi room copy uses the very picture #scimg shows (kitFloorFit may swap in the portrait painting) */
  const m0=/url\(["']?([^"')]+)["']?\)/.exec(($("scimg")||{}).style?$("scimg").style.backgroundImage||"":"");
- const src=SCIMG[P.sc]?(m0?m0[1]:`img/${SCIMG[P.sc]}.webp`):null;PX.bgSrc=src;PX.src=src;if(src){try{const t=await PIXI.Assets.load(src);if(PX.key!==k||PX.src!==src)return;const sp=new PIXI.Sprite(t);sp.anchor.set(.5);PX.bg=sp;PX.layer.addChildAt(sp,0);$("scimg").style.opacity="0"}catch(e){$("scimg").style.opacity="1"}}else $("scimg").style.opacity="1";}
+ const src=SCIMG[P.sc]?(m0?m0[1]:`img/${SCIMG[P.sc]}.webp`):null;PX.bgSrc=src;PX.src=src;if(src){try{const t=await PIXI.Assets.load(src);if(PX.key!==k||PX.src!==src)return;const sp=new PIXI.Sprite(t);sp.anchor.set(.5);PX.bg=sp;PX.layer.addChildAt(sp,0);dropOld();$("scimg").style.opacity="0"}catch(e){dropOld();$("scimg").style.opacity="1"}}else{dropOld();$("scimg").style.opacity="1"}}
 /* celebration bursts are PAINTED sprites on the jfx canvas (kfPx); no code-drawn particles remain in j11 */
 function pxBurst(kind,n){try{const m={gold:"goldpetals",petal:"petals",ash:"ash",red:"ash"}[kind];if(m&&typeof kfPx==="function")kfPx(m)}catch(e){}}
 function pxTick(tk){const d=tk.deltaTime,W=PX.app.screen.width,H=PX.app.screen.height;PX.t+=d/60;

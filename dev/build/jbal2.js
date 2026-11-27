@@ -1,5 +1,16 @@
 /* ================= jbal2: late balance knobs for the merged logic modules (review/balance). Same rule for every consort; numbers only. ================= */
 Object.assign(BAL,{illAdd:1,illDie:2});
+/* ONE DIM for the people who are NOT chosen (KIT §98 kitDim; owner 24/11 ~09:05Z / ~15:30Z): brightness + saturation on the FIGURE only, opaque, never the background; ms = cross-fade */
+BAL.kdim={b:.7,s:.75,ms:220};
+/* RING-BUILD (KIT §104 kitRing, owner OD 26/11 ~18:55Z «những người còn lại là tối»): the ring dims every slot that is not in front harder than kitDim (static filter on a copy, opacity cross-fade) */
+BAL.kring={dimB:.48,dimS:.6,
+ /* §104.1 the ONE ring table read by every ring (vòng người · vòng nhóm · vòng bảo vật; MOTION-BUILD-2 ask 26/11 ~20:12Z): seats = visible seats (N > seats scrolls), decay = fling
+    velocity kept per 60 Hz frame, stop = fling speed (slots/ms) that snaps, snapMs = snap tween, stepMs = one ‹ › step */
+ seats:12,decay:.93,stop:.0012,snapMs:200,stepMs:280,
+ /* OWNER 26/11 ~21:45Z «3 size … small là những người ở xa, medium là những người ở gần hơn, large là những người mà tôi đang chọn»: EXACTLY 3 figure sizes in every ring
+    (người · nhóm · bảo vật · danh hiệu · dung mạo): L = the front (the one she is choosing; ×1 = the LIVE stage size), M = the nearer ones (|seat| ≤ near), S = the far ones;
+    dim follows the same tiers (dimL none, dimM light, dimS most = the full dim copy); between seats (while turning) the size/dim slide from one tier to the next */
+ szL:1,szM:.66,szS:.46,near:1,dimL:0,dimM:.45,dimS:1};
 /* ACT SPLIT (jact wave 1, jact2 waves 2-3; owner-approved split 16/11). "!" happenings on Dư đồ: hapP = chance of a random happening in a buổi,
    hap2 = chance of a second one (never more than 2 per buổi); strollP = chance the Emperor's garden stroll takes the FIRST slot when he is in
    Ngự hoa viên (flag 2 of the wave-1 report: it was 9 in 300 buổi); rareMinGrade = Nội vụ phủ weekly rare item grade.
@@ -558,7 +569,8 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000}});
 /* F10 renderer-mem (26/11), BAL.kobs = the kit's DOM observers. The «Kéo xuống» scroll cue (jksize kitScrollCues). short = a scroller under this many px gets the slim strip below it
    (was a typed 260); hyst = a scroller keeps its short/tall look until its own height moves by more than this (its own cue never flips it). */
-Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* kaPass: card-normaliser passes per wake (j63 kaRun) */
+Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* KK53 v2 (OD 27/11 ~03:17Z): the SMALL «Chọn» chip inside a lifted kitPick plaque's bottom-right corner (jkpick conf): w × h px */
+Object.assign(BAL,{kpkgo:{w:68,h:32}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
    (relAdd: the robbed one also gains oán rel×BAL.relOan.hurt); ghen = jealousy of the robbed consort.
