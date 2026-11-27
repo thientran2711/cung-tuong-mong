@@ -752,3 +752,36 @@ Gain vs loss of FAIL: F3 writes false [game] rows in every home-origin life that
 ## READY F3 — HARNESS FIXER #23 → review/robot-realtap-live 3ed71335 (for F ROOT #6), 27/11
 - F3 fixed (whole family): locked plaque (.kitoff / .kfoc-off) = robot-rt offTap (no bug) + picker skip unless nothing else (offSkip/offSkipLog); crawler two:'locked' PASS «lifts, shows its reason, no Chọn» (FAIL if a chip shows: M11); realtap.choose logs «locked». N6: NO-EXIT record keeps last 20 trace rows + top-layer outerHTML + middle element chain.
 - Proof on LIVE 772bee4f: M10 (locked plaque, talk) old crawler GATE FAIL 1 false row → tip GATE PASS; M1–M9 + M11 all GATE FAIL; plain selx / talk / two-device (Fold+iPad) GATE PASS; robot-rt E-S1 ×5 + iPad s61 + M10 ×8: liftOnly 0 from locked parts, 0 false «no Chọn chip», offSkip up to 14, offTap 3 (offskip=0), jsClicks / DEAD / stuck 0; lint 0, rt-bare-unit 20/20. N6 shape not reproduced in 5 runs without RT_NOSHOT. Open: .kscn «» chipNoFx on M10 (see PROGRESS «HARNESS FIXER #23»), N5 untouched.
+
+## REVIEW robot-realtap-live 0191f987..3ed71335 — BIG #21 RE-CHECK 2 (for F ROOT 7 session_01UV1Szm5i1gFZxqu9LBGQKH), 27/11
+PRIORITY #1 CHECK: «— BIG #21 RE-CHECK» FAIL 0191f987 (F3 locked plaque, N5, N6) | FIXER #23 READY F3 3ed71335 (PROGRESS «HARNESS FIXER #23», report 1a34076e) | LIVE origin/main 772bee4f (already merged in 43fafa67) | claims: BIG REVIEWER #21 re-check 2.
+KIT CHECK: n/a (harness only).
+### VERDICT: FAIL review/robot-realtap-live 3ed71335 — F3 FIXED; 1 blocking left: F4 robot-rt «noLift» = false [game] bug on a one-tap TOGGLE card (same false-bug family as F2 / F3; the noLift branch came in 8fb32a5f, I missed it in round 1).
+Tree /home/user/wt/r21 at 3ed71335 (root index.html == LIVE 772bee4f); LIVE served :8918; mutations index-m1..m12.html (scratch). Logs /home/user/wt/r21-out/r3/.
+### (1) SCOPE + STATIC — OK
+Fixer commits 02e19653 + 3ed71335 = button-crawl.js, realtap.js (1 line), robot-rt.js, PROGRESS; 43fafa67 = clean merge of LIVE 772bee4f (game files only from LIVE). node --check (3 files) OK · robot-lint LINT OK 0 (default set + button-crawl.js) · rt-bare-unit 20/20 · added `.click(` / dispatchEvent / focus / keyboard: 0. Locked = `.kitoff,.kfoc-off` on the tapped part or its .kpk-n (read only); robot-rt picker drops kitoff buttons only while an open one is left (offSkip log); realtap.choose logs «locked» instead of «no ✓».
+### (2) MUTATIONS (Fold --fast, LIVE 772bee4f)
+| build | start | tip 3ed71335 |
+|---|---|---|
+| plain LIVE | talk / selx | GATE PASS / GATE PASS |
+| **M12 (mine) every plaque's «Chọn» hidden (conf() `if(1)` — OPEN plaques lose the chip)** | talk | GATE FAIL (19) «1st tap: lifted, but no «Chọn» chip came» — the locked rule does not hide a real missing chip ✓ |
+| M4 «Chọn» no-op · M9 «Chọn» only drops the lift · M5 lift lands on another plaque | talk | GATE FAIL 6 · 6 · 2 |
+| M8 ✓ fly, go() never runs · M7 ✓ hides #modal, drops choice · M1 ✓ = return | selx | GATE FAIL 2 · 3 · 7 — M7 now FAILs on the ✓ row itself «✓ does nothing» (N5 fixed) |
+(M2, M3, M6 not re-run: their paths are untouched by 02e19653/3ed71335; the fixer's table has them FAIL.) The off path itself (locked plaque = PASS «locked») is the fixer's M10 (old FAIL → tip PASS) + my LIVE probe of round 2 (kitoff plaque lifts, no chip); not re-run.
+### (3) E-S1 (job-3 recipe, tip)
+| run | road | buổi · taps | twoTap | offSkip | jsClicks · DEAD · stuck · NO-EXIT | bugs |
+|---|---|---|---|---|---|---|
+| e1 | palace | 30 · 420 | hand 51 / chosen 46 / liftOnly 0 / **noLift 3** / oneTap 2 | 0 | 0 · 0 · 0 · 0 | 3 [game] «two-tap hand «…»: tapped for real, nothing lifted (2 s) and the frame is still there» (F4) |
+| e2 | home | 30 · 175 | hand 8 / chosen 8 / 0 | 0 | 0 · 0 · 0 · 0 | 0 (no person ring met: plaque 0) |
+### (4) FINDINGS
+| # | sev | where | finding | fix |
+|---|---|---|---|---|
+| F3 | FIXED | robot-rt + crawler + realtap | locked plaque = offTap / «locked» PASS; a real missing chip on an OPEN plaque still FAILs (M12). | — |
+| F4 | BLOCKING | robot-rt two-tap `else if (!up)` branch (noLift, 8fb32a5f) | «nothing lifted (2 s) and the frame is still there» fires on hand cards that ACT on one tap without a lift. Proof e1 t=443–446: «Chọn người theo hầu», tap «Cung nữ thân tín tam đẳng Xuân Yến» → noLift bug, and the next row is «Lên đường … 1 người theo (Cung nữ thân tí…)» = the tap DID select her (a toggle card, the frame re-rendered with the same title). Same for «Trò chuyện với Tú nữ Chu Vân Tịch» (t=314–316, the frame moved to the next card set). The check only compares layer + title + «a hand card exists». | noLift only when NOTHING changed: S hash (the SH of FIXER #22) unchanged AND the frame's text / card set unchanged after 2 s; otherwise oneTap. Proof: e1 recipe (palace road) noLift 0 on «Chọn người theo hầu»; a mutant with kitHandLift = return must still give noLift ≥ 1. |
+| N6 | OK (code) | robot-rt NO-EXIT record | +20 trace rows + top layer outerHTML; not exercised here (0 NO-EXIT in e1/e2). | — |
+| N7 | note | e2 | no ring in 2 of my E-S1 runs → the natural F3 proof stays the fixer's (M10 ×8, E-S1×5). | — |
+Gain vs loss: F4 writes false [game] rows in palace-road lives (likely: every «Chọn người theo hầu» trip; medium; easy to see; fix = one extra «did anything change» read). Everything else is fixed and mutation-proven. → FAIL, narrow.
+
+## HANDOVER — BIG REVIEWER #21 (re-check 2), 27/11
+- Verdict: FAIL robot-realtap-live 3ed71335 — F4 only (noLift on one-tap toggle cards). F3, N5, N6 done; M1/M4/M5/M7/M8/M9/M12 GATE FAIL; plain LIVE PASS.
+- Recipe: /home/user/wt/r21-out/run.sh r3/<name> <game.html> [args]; tree /home/user/wt/r21 (index-m12.html = conf() `if(!a||a.off)` → `if(1)`); e1 = the job-3 command (palace road ≈ every 2nd run).
