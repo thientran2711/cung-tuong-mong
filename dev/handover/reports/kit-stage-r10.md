@@ -36,3 +36,10 @@ RV-166 session_01Rc5AsHmVSRQfKM9T3eHcAb after MAIN LOOK. Kit keeper KK56 session
 - KIT-STD-AUDIT §3 items (kit-std-scan review/kit-std-audit a2934493, SUBS=0 REPORT_ONLY=1): scene hand 5 → 0 findings; tabs: X08 «Tốn … line-clamp cut / Bạc 10 outside card» (Hành sự fold+iPad, Tài nghệ iPad) gone. Cause: kitHandTonL guessed the Tốn lines from text length, capped at 2, while every stat item is one unbreakable unit; now simulated (units wrap whole) with a measured +1 line (max 4) when still cut. The enlarged-card Được squeezed to 25 px = the display:inline on `.kdup` rows (fixed above, display:contents).
 - Not mine, still open in the same scan (tabs): court X08 ellipsis «Trong cung: Chương 1…», X09/X12 on div.pcb (Hậu cung person cards) — KK56 / MAIN.
 - Media re-recorded with the new labels: same CDN folder (…/kit-stage-r10/), both devices looked at (-03 = Thành green / Bại red own lines).
+
+## UPDATE 06:3xZ (MAIN 172 REC APPLIED, owner 06:12Z Hành sự videos)
+- PANE hands (.khost: Hành sự / Khuê các / Tài nghệ): the hand NEVER shrinks while a card is enlarged (was → 40 % on iPad); the enlarged card (wide tier) sits over the LOWER part of the pane, every tile stays in place. EVENT hands (modal) keep the old rule (card above the row; a hand filling its frame shrinks) — kit-hand test unchanged.
+- Fold (law 10 frame → layout → size): a mounted hand uses its pane: more rows, tiles up to 1.5 × the frame-hand width, the largest that fits the cap (13 tiles now 3 rows × ~5 big tiles, no empty half panel). Code: jkhand kitHandLay + kitHandBigPlace.
+- Media: …/kit-stage-r10/hanhsu-{fold,ipad}.mp4 + hanhsu-{fold,ipad}-{tiles,enlarged}.png (looked at). iPad shows 12 of 13 tiles without scrolling (panel scrolls for the 13th) — unchanged behaviour.
+- Tests PASS after: kit-hand, kit-hand-mount, kit-hand-rows, kit-stage, kit-pick, kit_dupes, kit-hand-split.
+- STILL OPEN: odds badge on the picture (owner 06:10Z) — waiting for KK56's kit part.
