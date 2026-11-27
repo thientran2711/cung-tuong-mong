@@ -632,3 +632,35 @@ Auto-merged files touched by both sides (checked: no overlapping hunks): j42, jd
 - NEXT (successor): merge origin/main 5cee92bb into rv24 06062f15 → review/save-fix-stack-rv25. `git merge-tree` = SOURCE conflicts **dev/build/assemble.py, j6.js, jgift.js, jgpick.js, dev/kit/KIT_REQUESTS.md** (+ index.html/sw.js). Keep both sides, list hunks in «## MERGE rv25»; re-run the scans first (new LIVE save wrappers / code cards need rows), then the gate table above + quickcheck ALONE; run LIVE's own tests of the branches behind j6/jgift/jgpick (lc29-ui: door-onetap/act-move jgift, ob-m3ui-sololh j6, …).
 - Then Foreman B's extra job: review/save-pid-cards-rv6 = merge rv25 into review/save-pid-cards-rv5 4e27a588 (on rv23: merge-tree with rv24 = index.html/sw.js only), rebuild, save-pid-cards Fold then iPad (ONE device per process), save-evc-onscreen, SUL, look-dedupe, quickcheck ALONE; report both SSK lines.
 - Tips: serve the repo root (`python3 -m http.server`) for dialog-order / dayq probes and pass index.html; coop-e2e needs `npm install` in coop/worker + `npx wrangler dev --local --port 8799`; a LIVE A/B tree needs `python3 dev/build/assemble.py` first (dev/index.html is not in git). Worktrees: /home/user/wt/rv24, /home/user/wt/live611 (remove when done).
+
+## MERGE rv25 (merger opus, session_01N1tNP4dWzNLTa9hBMQxHNc, depth 7, START_CTX ≈ 5 %, for Foreman B ROOT 2 child 6; brief b-save-stack-rv25-merge.md)
+PRIORITY #1 CHECK ('save-fix-stack'): OD 0 | ledger 0 | claims B save stack (B) | main 5cee92bb → d9ca7892 | review/* rv7–rv24 | reused every stack test + LIVE's own tests of the branches whose files conflicted (ob-m3ui / act-move / door-onetap / gift-pick / srv-rank / help-housemate); no new game code.
+**review/save-fix-stack-rv25 = rv24 06062f15 + LIVE 5cee92bb (merge cf3b9434) + LIVE d9ca7892 (lc30-b2, merge 22ae90b4)** — LIVE moved during the merge, the 2nd merge had a source conflict so it was merged too (no force).
+### Source hunks (all conflicts, both sides kept)
+| file | stack side (rv24) | LIVE side | resolution |
+|---|---|---|---|
+| dev/build/assemble.py module list | + jstack.js after jplrule.js | + jplink.js (before jplrule), + jamove/jone/jkpp (end) | UNION by script, LIVE order, jstack after jplrule: … jdayq, jplink, jplrule, **jstack**, jkhand … jverdict, jamove, jone, jkpp (set = both, no duplicate) |
+| dev/build/j6.js title slots onclick | load: `try{deser(d)}finally{quiet=false}` (save-year-rollback) | OB-M3UI: «Kiếp mới» over a sổ = kitConfirm; sololh: a living «trọn» life overwritten writes its Sổ luân hồi row «Bỏ ngang» | stack's load line + LIVE's new-life lines verbatim |
+| dev/build/jgift.js courtMeet «Dâng quà» | `n=invCount(S,…)` (inv-stack: stacked pieces counted) | ACT-MOVE-5: khắc from `BAL.time.cost.give` | stack's count line + LIVE's button line |
+| dev/build/jgpick.js kipBuild | twin-tile dedupe (one tile ×N, hidden twin cards dropped) | ACT-MOVE-5 kgbest preselect (`L.find(x=>x[0].kgbest&&…)`) | dedupe block then LIVE's sel line. Checked: kgbest = first ok item of the value-sorted list → it is the first of its twin group, so the dedupe keeps the kgbest tile |
+| dev/build/jpromsv.js spLeaveCard «Để đi» (2nd merge, d9ca7892) | `return tsPanel(…)` + `spLeaveCard=rcpReg("spLeave",spLeaveCard)` generator | srv-rank: kem adds «<sw> bên ấy sang hầu ngươi thay» (spSwapOf) | LIVE's option line + stack's generator registration; spSwapOf/hhHas/capOf read only the live household → generator stays deterministic |
+| dev/kit/KIT_REQUESTS.md | K-LIST-PAGE (26/11) | map-r8 place glyphs (26/11) | both entries |
+| index.html / sw.js | built | built | rebuilt (build_site.sh); assets.json = LIVE (diff 0) |
+New LIVE modules jplink / jamove / jone / jkpp: no S list, no store write, no save wrapper (grep) → census UNCLASSIFIED stays 0 (LAW 11: nothing to classify).
+### Gates on rv25 22ae90b4 (first batch: conflicted-file tests + scans + quickcheck) — paste
+| gate | command | result |
+|---|---|---|
+| inv-stack-scan | `python3 dev/test/inv-stack-scan.py` | RAW sites 0 · listed 8 (both merges) |
+| census | `node dev/measure/unseen-lists-scan.js` | UNCLASSIFIED 0 · UNSEEN-LISTS SCAN PASS (33 lists; 182 code-card sites, 49 rcpReg) |
+| time-advance | `node dev/measure/time-advance-save-scan.js` | PASS (10 paths, 12 gates) |
+| ob-m3ui (LIVE j6 owner) | `node dev/test/ob-m3ui.js index.html m3save.json` (M3 robot save dev/handover/robot/m3/save_dump_latest.json.gz → {"hclh-save-v2-1":…}) | 122 cases FAIL 6 = rows «1 meter-tap plain-card / ksp-card: no meter on the card», «3b death option: NO EFFECT» ×Fold+iPad = **identical on LIVE 5cee92bb, same 6 rows** (pre-existing; the sololh 3a rows PASS) |
+| act-move-reach / reach2 / rows-scan (LIVE jgift owner) | `node dev/test/<t>.js dev/index.html` | PASS / PASS (D 263/263) / PASS |
+| door-onetap (LIVE jgift/jone owner) | `node dev/test/door-onetap.js dev/index.html` | run 1 FAIL 1 «door word worse than best: hau» (random seeds, Math.random), run 2 **PASS**; LIVE 5cee92bb PASS ×1. Stack touches no door/jone/odds code → seed flake (re-run below) |
+| gift-pick-scan (jgpick) | `node dev/test/gift-pick-scan.js origin/main` | every picker = picture grid (28.13i) |
+| inv-stack.js (stack's own jgpick test) | `node dev/test/inv-stack.js` | 25/27, FAIL 2 = DOM «Biếu quà làm lành 2,790 nodes (<2,000)» Fold+iPad = **identical on rv24 06062f15** (the open K-LIST-PAGE kit request); 3 mutations caught ✔ |
+| srv-rank (LIVE jpromsv owner, 2nd merge) | `node dev/test/srv-rank.js file://…/dev/index.html rv25` | 14/14 PASS, no page errors |
+| help-housemate (lc30-b2) | `node dev/test/help-housemate.test.js dev/index.html` | ALL PASS |
+| q-softlock alone (G4 94) | `node dev/test/q-softlock.js index.html` | rv25 PASS ×2 · LIVE d9ca7892 FAIL 1 («view parked by a tab change», Fold) → flaky on LIVE too |
+| quickcheck ALONE | `bash dev/tools/quickcheck.sh` (×2, default 3 runs) | run 1: G4 94 FAIL 4 iPad + perf longTaskMax 4125/2031; run 2: G4 94 FAIL 1 (same LIVE-flaky row) + longTaskMax 3058/1861 (LIVE runs had a 4,601 ms outlier) |
+| quickcheck ALONE `--runs 5` | `bash dev/tools/quickcheck.sh --runs 5` | **QUICKCHECK PASS · core gates PASS (hooks 14, incl. 94)** · old save ok · perf median of 5 new/live: render 282/230, tab 463/462, buổi 1315/1278 ms, tasks>200 26/24, longTaskMax 1865/2857 |
+Long gates (SUL, look-dedupe ×2, probe Fold+iPad, death, notice, knsell+mutLazy, coop-e2e with coop-clear-rv173) follow below.
