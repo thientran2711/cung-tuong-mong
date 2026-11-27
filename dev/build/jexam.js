@@ -181,17 +181,34 @@ function exTick(){if(!exOn()||S.dead||S.out||exSrv(S)||S.rank>=7)return;const e=
  if(S.exV==null){S.exV=1;if((S.turn||0)>0)log("Luật mới trong cung: từ nay muốn thăng phẩm phải qua khảo hạch tấn phong; đủ điều kiện chỉ là được thi.")}
  if(e.pend&&!document.getElementById("kg82"))exAbort();
  if(e.pass||e.pend)return;const w=wk();
- if(e.w1!=null){if(w>e.w1){e.w0=e.w1=null;e.cd=S.turn+exCd(e.to);e.lapse=1;e.kyw=null;window.__exN.lapse++;exDrop();const sp=e.grace===e.to?exGw(e):"";if(sp){delete e.grace;delete e.gw;delete e.gx}
+ if(e.w1!=null){if(w>e.w1){e.w0=e.w1=null;e.cd=S.turn+exCdLapse(e.to);e.lapse=1;e.kyw=null;window.__exN.lapse++;exDrop();const sp=e.grace===e.to?exGw(e):"";if(sp){delete e.grace;delete e.gw;delete e.gx}
    log(`<span class="r">Lỡ hạn khảo hạch tấn phong ${exRk(e.to)}</span>: ${sp?`hết lượt thi riêng (${sp}); `:""}chờ đến ${exDateT(e.cd)} mới được thi.`)}
-  else if(!exElig(S)){e.w0=e.w1=null;exDrop()}return}
+  else if(!exElig(S)){e.w0=e.w1=null;exDrop()}else if(w===e.w1&&e.w0!==e.w1&&e.rem!==e.w1){e.rem=e.w1;log(`<span class="r">Hạn khảo hạch tấn phong ${exRk(e.to)} chỉ còn tuần này.</span>`);exAsk(1,1)}return}
  if(e.cd>S.turn||!exElig(S))return;e.w0=w;e.w1=w+BAL.ex.win-1;e.lapse=0;e.kyw=e.grace===e.to?null:(typeof pbA==="function"?pbA():1);/* promo-build: a window opened by a kỳ stays open to its end in the next month */const P=exPlan(S);
- log(`<b class="g">Được dự khảo hạch tấn phong ${exRk(e.to)}</b>: ${P.ex?P.ex.name:"Nội vụ phủ"} khảo, hạn đến hết ${exDateW(e.w1)}. Thẻ «Khảo hạch tấn phong» ở Hành sự.`);exAdd()}
+ log(`<b class="g">Được dự khảo hạch tấn phong ${exRk(e.to)}</b>: ${P.ex?P.ex.name:"Nội vụ phủ"} khảo, hạn đến hết ${exDateW(e.w1)}. Thẻ «Khảo hạch tấn phong» ở Hành sự.`);exAdd();exAsk(1,0)}
 /* the act card: true cost, the honest chance (as one who plays at her own level), what a fail costs */
 function exCard(){const e=exS(S),P=exPlan(S),o=oddsCl(exChance(S));const names=P.rounds.map(k=>KG82_KIND[k].n.toLowerCase()).join(", ");
  return{n:"Khảo hạch tấn phong",exam:1,t:`${P.ex?P.ex.name:"Quan Nội vụ phủ"} khảo ngươi trước khi sắc phong ${exRk(e.to)}: ${names}. Đỗ hay trượt tùy tài nghệ của ngươi; tự thi càng giỏi thì càng dễ đỗ.`,
   c:{suc:-BAL.ex.suc},k:BAL.ex.k,o,dom:"Khảo hạch",w:{},l:{},x:`thánh chỉ tấn phong ${exRk(e.to)}`,lock:!exElig(S),go:()=>exStart()}}
 function exAdd(){try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.exam))deck.unshift(exCard())}catch(e){}}
 function exDrop(){try{if(Array.isArray(deck))deck=deck.filter(a=>!(a&&a.exam))}catch(e){}}
+/* review/rank-pace (MAIN 171, Foreman D JOB 3): THE EXAM WINDOW CANNOT BE MISSED. Robot lives (dev/measure/rank-pace.js): a player who does not
+   open Hành sự in the BAL.ex.win tuần of a window never rises (LIVE: rank 0–2 for 6 years, the exam row the only unmet gate 122/291 months).
+   Every window opener — her consort window (exTick: ordinary, son/daughter grace, kỳ sắc phong, special exams all open here) and the serving-maid
+   window (exSrvOpen) — now also puts the ONE kit event card in front of her: «Thi ngay» (the same exam as the Hành sự card: its Sức and khắc,
+   then the board) / «Để sau» (the card stays in Hành sự to the end of the window). On the window's last tuần the same card comes once more
+   (last=1) with one log line. ex: 1 = consort exam card (exCard), 2 = Nội vụ phủ maid exam card (exSrvCard). No chance is rolled here. */
+function exAsk(ex,last){try{if(!S||S.dead||(typeof quiet!=="undefined"&&quiet)||(typeof NLP!=="undefined"&&NLP))return;
+ const a=ex===2?exSrvCard():exCard();if(!a||a.lock)return;const e=ex===2?exSrvS():exS(S);if(e.pend)return;
+ if(Q.some(m=>m&&m.exAsk===ex))return;const k=BAL.ex.k,ok=can(k)&&canPay(a);const rk=ex===2?exSrvName(e.to):exRk(e.to);
+ const names=a.t.replace(/^[^:]*:\s*/,"").replace(/\.\s.*$/,"");
+ const h=`<p>${last?`Hạn khảo hạch ${ex===2?"":"tấn phong "}${rk} chỉ còn tuần này (đến hết ${exDateW(e.w1)}).`:`Nội vụ phủ báo: ngươi được dự khảo hạch ${ex===2?"":"tấn phong "}${rk}, hạn đến hết ${exDateW(e.w1)}.`} Thi: ${names}.</p>`;
+ Q.push({ev:1,exAsk:ex,t:last?"Sắp hết hạn khảo hạch":(ex===2?"Khảo hạch Nội vụ phủ":"Khảo hạch tấn phong"),who:pMe(),h,opts:[
+  {n:"Thi ngay",fx:Object.assign({},a.c),off:!ok,x:`${ok?"":"hôm nay không đủ khắc, thi ở Hành sự · "}tốn ${k} khắc · ${word(a.o)} · được: ${a.x}`,go:()=>{try{spend(k);exDrop();if(ex===2){exSrvDrop();exSrvStart()}else exStart()}catch(x){console.error("exAsk",x)}}},
+  {n:"Để sau",x:last?"được: giữ sức hôm nay · mất: hết tuần này không thi là lỡ hạn":`được: giữ sức hôm nay · thẻ «${a.n}» ở Hành sự đến hết ${exDateW(e.w1)}`,go:()=>{if(ex===2)exSrvAdd();else exAdd()}}]});
+ try{showModal()}catch(x){}}catch(x){console.error("exAsk",x)}}
+/* a window never sat waits BAL.ex.cdLapse months (a fail keeps exCd); under the kỳ rule the next window still needs the next kỳ (pbKyRow) */
+function exCdLapse(to){const n=BAL.ex.cdLapse;return n!=null?n:exCd(to)}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(exOn()&&!S.out&&!exSrv(S)&&S.ex&&S.ex.w1!=null&&!S.ex.pass)exAdd()}catch(e){}return r}})();
 (function(){const r0=runOpt;runOpt=function(a){if(a&&a.exam){if(!canPay(a))return null;if(a.c)apply(a.c);log(`${a.exLbl||`Dự khảo hạch tấn phong ${exRk(exS(S).to)}.`} ${fmt(a.c)||""}`);try{a.go()}catch(e){console.error(e)}return true}return r0.apply(this,arguments)}})();
 (function(){const c0=cardH;cardH=function(a){let h=c0.apply(this,arguments);try{if(a&&a.exam)h=h.split("không mất gì").join(`trượt: chờ ${pbWkIn(a.cdN||exCd(exS(S).to))} tuần mới được thi lại`).replace(/<button\b/,'<button data-kexam="1"')}catch(e){}return h}})();
@@ -257,7 +274,7 @@ function exSrvChance(P){const rnd=exRng(((S.turn||0)*131+exSrvIx(P.to)*17+P.vir*
 function exSrvGate(to){if(!exOn()||!isSrv())return false;const e=exSrvS();if(e.to==="mama"&&(e.w1!=null||e.pend))return true;if(e.to!==to){S.srv.ex={to};return exSrvOpen(to)}
  if(e.pend||e.w1!=null)return true;if(e.cd>S.turn)return true;return exSrvOpen(to)}
 function exSrvOpen(to){const e=exSrvS();const w=wk();e.to=to;e.w0=w;e.w1=w+BAL.ex.win-1;e.lapse=0;
- log(`<b class="g">Được dự khảo hạch ${exSrvName(to)}</b>: ma ma Nội vụ phủ khảo, hạn đến hết ${exDateW(e.w1)}. Thẻ «Khảo hạch Nội vụ phủ» ở Hành sự.`);exSrvAdd();return true}
+ log(`<b class="g">Được dự khảo hạch ${exSrvName(to)}</b>: ma ma Nội vụ phủ khảo, hạn đến hết ${exDateW(e.w1)}. Thẻ «Khảo hạch Nội vụ phủ» ở Hành sự.`);exSrvAdd();exAsk(2,0);return true}
 /* the rise itself (the old j42 lines), given on a pass */
 function exSrvRise(to){if(to==="mama"){S.srv.mama=1;log("Ngươi ở lại cung làm ma ma.");return}
  const m=srvM();S.srv.rk=Math.max(S.srv.rk||0,to);S.srv.mp=0;S.tin=cl(S.tin+BAL.eff.jexam.tinExSrvRise,0,100);log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}.</b>`);
@@ -274,7 +291,8 @@ function exSrvCard(){const e=exSrvS(),P=exSrvPlan(e.to),o=oddsCl(exSrvChance(P))
 function exSrvAdd(){try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.exam===2))deck.unshift(exSrvCard())}catch(e){}}
 function exSrvDrop(){try{if(Array.isArray(deck))deck=deck.filter(a=>!(a&&a.exam===2))}catch(e){}}
 function exSrvTick(){if(!exOn()||!isSrv()||S.dead)return;const e=exSrvS();if(e.pend&&!document.getElementById("kg82")){exSrvDone(exFinish(exSrvPlan(e.to),e.pend));return}
- if(e.w1!=null&&wk()>e.w1){const to=e.to;e.w0=e.w1=null;e.cd=S.turn+exSrvCdN(to);e.lapse=1;exSrvDrop();log(`<span class="r">Lỡ hạn khảo hạch ${exSrvName(to)}</span>: chờ đến ${exDateT(e.cd)} mới được thi.`);
+ if(e.w1!=null&&!e.pend&&wk()===e.w1&&e.w0!==e.w1&&e.rem!==e.w1){e.rem=e.w1;log(`<span class="r">Hạn khảo hạch ${exSrvName(e.to)} chỉ còn tuần này.</span>`);exAsk(2,1)}
+ if(e.w1!=null&&wk()>e.w1){const to=e.to;e.w0=e.w1=null;e.cd=S.turn+(BAL.ex.cdLapse!=null?BAL.ex.cdLapse:exSrvCdN(to));e.lapse=1;exSrvDrop();log(`<span class="r">Lỡ hạn khảo hạch ${exSrvName(to)}</span>: chờ đến ${exDateT(e.cd)} mới được thi.`);
   if(to==="mama")log("Không được ở lại làm ma ma; đến tuổi thì xuất cung theo lệ.")}}
 /* the ma ma choice (j42 cnvAge «Ở lại làm ma ma»): an exam instead of the flag */
 function exSrvMama(){if(!exOn()){S.srv.mama=1;log("Ngươi ở lại cung làm ma ma.");return}S.srv.ex={to:"mama"};exSrvOpen("mama")}
