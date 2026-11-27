@@ -903,8 +903,8 @@ button.ka.kcard.kart>.kabody{display:flex;flex-direction:column;gap:3px;flex:1 1
 .kaart img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .kaph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-family:var(--display);font-size:.7rem;font-weight:700;color:#7a5a2a;padding:4px;line-height:1.15}
 button.ka.kdis .kaart{filter:grayscale(.7);opacity:.8}
-/* equal height per ROW, fitted to that row's content (no empty space from a tall card elsewhere) */
-.cards:has(> button.ka),.pcb:has(> button.ka),.opts:has(> button.ka),.rbtn:has(> button.ka),.kpacts{grid-auto-rows:auto!important;align-items:stretch!important}
+/* ONE SET = ONE SIZE (owner OD 27/11 ~07:20Z, repeats OD L1354 (4) + L1867; canon overwrite of «equal height per ROW»): every act card / choice button of ONE container is the SAME width AND the SAME height across ALL rows — the tallest card sets the height, content top-aligned, long content scrolls inside */
+.cards:has(> button.ka),.pcb:has(> button.ka),.opts:has(> button.ka),.rbtn:has(> button.ka),.kpacts,.kskills.ktn-grid{grid-auto-rows:1fr!important;align-items:stretch!important}
 /* columns follow the space the grid really has (the panel is half the screen in landscape): at most 3, each at least 280px */
 .cards:has(> button.ka){grid-template-columns:repeat(auto-fill,minmax(max(280px,31%),1fr))!important}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
@@ -1429,7 +1429,7 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .ksteps{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:default}button.ksteps{cursor:pointer}
 .kstepd{display:inline-flex;gap:3px}.kstepd i{width:14px;height:8px;border-radius:4px;background:var(--k-hair,#e6d3ac);box-shadow:inset 0 0 0 1px #5a3a2018}.kstepd i.on{background:var(--gold,#b8862b)}
 .ksteps b{font-size:.78rem;color:var(--dim);font-weight:600;white-space:nowrap}
-.kskacts.pcb{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px}
+.kskacts.pcb{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px}.kskacts.pcb{grid-auto-rows:1fr!important}html body .pcb:has(> button.ka){display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:1fr!important}/* a person panel list that was a flex column: same one-column grid, equal rows */.kskacts.pcb>.kpanec{display:flex;flex-direction:column;min-height:0}.kskacts.pcb>.kpanec>button{flex:1 1 auto}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
 /* KIT §21e kitSkillCell: square cells, 2 columns, one side --ktnc (caller), picture fills the top, name + bậc under it; the môn frame (.ktn-pop) = the full skill card + its acts */
 .kskills.ktn-grid{display:grid;grid-template-columns:repeat(2,var(--ktnc,minmax(0,1fr)));grid-auto-rows:var(--ktnc,auto);gap:var(--ktng,10px);justify-content:center;align-content:start}
 .ktn-cell{all:unset;box-sizing:border-box;display:flex;flex-direction:column;min-width:0;min-height:0;aspect-ratio:1/1;width:100%;cursor:pointer;overflow:hidden;border-radius:var(--k-r,12px);background:var(--k-card,#fffaf0);border:1px solid var(--k-line,#d9c08f);box-shadow:var(--k-sh,0 2px 6px #5a3a2026)}
@@ -1441,7 +1441,7 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .ktn-pop .kskk{display:none}
 .dlg:has(.ktn-pop) .k3body>.k3main,.dlg:has(.ktn-pop) .k3body>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpsubj{display:none!important}.dlg:has(.ktn-pop) .k3right{flex:1 1 100%;width:100%}.dlg .kpb.kphas:has(.ktn-pop){grid-template-columns:minmax(0,1fr)!important}
 html body #modal:has(.ktn-pop){--kph:min(calc(100dvh - 24px),920px)}html.kv2 body #modal:has(.ktn-pop){--kpw:min(900px,calc(100vw - 28px))}
-.ktn-pop{container-type:inline-size}.ktn-pop .kskacts.pcb{grid-auto-rows:1fr!important;align-items:stretch}.ktn-pop .kskacts>.kpanec{display:flex;min-width:0}.ktn-pop .kskacts>.kpanec>button.ka{flex:1 1 auto;width:100%;height:auto;margin:0}/* owner 27/11 ~07:20Z: every act card of the môn frame = ONE width and ONE height (the tallest), both rows */@container (min-width:600px){.ktn-pop .kskacts.pcb{grid-template-columns:repeat(2,minmax(0,1fr))!important}}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
+.ktn-pop{container-type:inline-size}.ktn-pop .kskacts>.kpanec{min-width:0}.ktn-pop .kskacts>.kpanec>button.ka{width:100%;height:auto;margin:0}/* equal width + height of every act card = KIT §6.2n ONE SET = ONE SIZE (KK56 rule above; R11 one-line interim rule removed) */@container (min-width:600px){.ktn-pop .kskacts.pcb{grid-template-columns:repeat(2,minmax(0,1fr))!important}}/* iPad: 2 columns (MAIN 174 LOOK B PASS), Fold: 1 column */
 `;document.head.appendChild(st)})();
 /* ---- PERSON STATS (owner 11/14): every consort shows the SAME stat set as the player, as kit tiles: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ.
    A value shows only once known, else "chưa rõ". Hook for the reveal stages (j61/j85 Đức, tai mắt/intel): window.kitStatKnown(v, key) -> true|false.
