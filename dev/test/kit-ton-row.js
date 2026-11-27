@@ -26,7 +26,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   ok(hid.filter(r=>r.mn!=='fx').every(r=>r.has),`${tag} hidden-outcome card: a «tốn:» price and a ton:{…} price stay in the Tốn row (14 cases, was 8 hidden)`,hid.filter(r=>r.mn!=='fx'&&!r.has).map(r=>r.mn+':'+r.k));
   ok(hid.filter(r=>r.mn==='fx'&&["tamco","duc","danh","sung"].includes(r.k)).every(r=>!r.has),`${tag} hidden-outcome card: a plain fx consequence (Tâm cơ / Đức / Danh / Sủng) stays hidden`);
   ok(hid.filter(r=>r.mn==='fx'&&["bac","suc","khm"].includes(r.k)).every(r=>r.has),`${tag} hidden-outcome card: fx Bạc / Sức / Hồi môn price still shown (as before)`);
-  ok(R.qn.every(t=>/quý nhau|xa cách/.test(t)),`${tag} «quý nhau» decline line: the liking loss is in the hint at every level`,R.qn);
+  ok(R.qn.every(t=>/thiện cảm hai bên −/.test(t)),/* WORDING-GAIN: stat + marks */ `${tag} «quý nhau» decline line: the liking loss is in the hint at every level`,R.qn);
   ok(!/\d/.test(R.rel||'')&&!/thiện cảm/.test(R.rel||''),`${tag} hidden-outcome card: a relation price («thiện cảm -3») stays words only, no number in Tốn`,R.rel);
   ok(errs.length===0,`${tag} no page errors`,errs.slice(0,2));await p.context().close()}
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`FAIL ${f}/${res.length}`:`PASS ${res.length}`);process.exit(f?1:0)})();
