@@ -30,13 +30,35 @@ SHA="${1:?sha}"; PORT="${2:?port}"; DIR="${3:-/home/user/wt/build-$SHA}"
 # JOB 19 (FIXER #11): two lives of the same build started together raced on «git worktree add» (one exits 1 → that life ran unpinned on LIVE github.io,
 # then a LIVE update hard-stopped it «BUILD MISMATCH at unstick reload»). The checkout is made under a per-directory lock; the loser finds it done.
 exec 9>"$DIR.lock"; flock 9
+# FIXER #15: the sparse set = EVERY local path LIVE serves (dev/site/pages_stage.sh whitelist: root files, audio/, icons/, dev/vendor/ — pixi loads dynamically from dev/vendor, no <script src>).
+SPARSE=('/*.html' '/*.js' '/*.json' '/*.webmanifest' '/coop/' '/dev/vendor/' '/audio/' '/icons/')
 if [ ! -e "$DIR/index.html" ]; then
   # FIXER #14 N7: no blanket fetch here any more — only the commit itself when it is not in the repo yet
   git -C "$REPO" cat-file -e "$SHA^{commit}" 2>/dev/null || ( flock /home/user/wt/fetch.lock git -C "$REPO" fetch -q --depth=1 origin "$SHA" )
   git -C "$REPO" worktree add -q --no-checkout --detach "$DIR" "$SHA"
-  git -C "$DIR" sparse-checkout set --no-cone '/*.html' '/*.js' '/*.json' '/*.webmanifest' '/coop/'
+  git -C "$DIR" sparse-checkout set --no-cone "${SPARSE[@]}"
+  git -C "$DIR" checkout -q
+elif ! grep -qxF '/dev/vendor/' "$(git -C "$DIR" rev-parse --git-path info/sparse-checkout)" 2>/dev/null; then
+  # FIXER #15 (3): a pin dir made before the fix (index.html there, dev/vendor missing): add the missing paths in place, no re-create
+  git -C "$DIR" sparse-checkout set --no-cone "${SPARSE[@]}"
   git -C "$DIR" checkout -q
 fi
 flock -u 9
 cd "$DIR"; echo "serving $(git log --oneline -1 | cut -c1-60) on http://127.0.0.1:$PORT/"
+# FIXER #15 (1)(2): every same-origin path index.html / sw.js name (quoted «x.ext» strings) that exists in this build AND that LIVE serves (root file, audio/, icons/, dev/vendor/, coop/)
+# is GET-ed on the served port once it is up; any non-200 → the missing path is named on stderr and this process (the server, after exec) is killed → exit non-zero (143).
+# dev/vendor/pixi-*.min.js is always checked when the tree has it.
+(
+  set +e; PARENT=$$; P=""
+  for f in index.html sw.js; do P="$P
+$(grep -ohE "[\"'\`(](\./)?[A-Za-z0-9_][A-Za-z0-9_./-]*\.(js|json|png|mp3|html|webmanifest|css|webp|svg|ico|wasm|woff2?|txt)[\"'\`)]" "$f" 2>/dev/null | tr -d "\"'\`()" | grep -v '^http')"; done
+  P="$P
+$(git ls-files 'dev/vendor/*' 2>/dev/null)"
+  P="$(printf '%s\n' "$P" | sed 's#^\./##' | grep -E '^([^/]+|(dev/vendor|audio|icons|coop)/.+)$' | sort -u)"
+  for i in $(seq 1 100); do (exec 3<>/dev/tcp/127.0.0.1/$PORT) 2>/dev/null && break; sleep 0.1; done
+  MISS=""; N=0
+  while IFS= read -r x; do [ -n "$x" ] && [ -e "$x" ] || { [ -n "$x" ] && git ls-files --error-unmatch "$x" >/dev/null 2>&1 && MISS="$MISS $x(not checked out)"; continue; }
+    N=$((N+1)); c="$(curl -s -o /dev/null -m 10 -w '%{http_code}' "http://127.0.0.1:$PORT/$x" 2>/dev/null)"; [ "$c" = 200 ] || MISS="$MISS $x(HTTP $c)"; done <<< "$P"
+  if [ -n "$MISS" ]; then echo "rt-serve-build SELF-CHECK FAIL: the pinned build $SHA does not serve:$MISS" >&2; kill -TERM "$PARENT"; else echo "rt-serve-build self-check OK: $N local paths all 200 (incl. $(ls dev/vendor 2>/dev/null | tr '\n' ' '))" >&2; fi
+) &
 exec python3 -m http.server "$PORT" --bind 127.0.0.1
