@@ -101,15 +101,16 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
   const add=(k,x)=>{const D=TW[k];if(!D||(D.req&&!D.req(S,k==="mediate"?v:v)))return;const c=twCost(k);
    A.push({n:D.n,c:Object.keys(c).length?c:undefined,o:D.o?D.o(S,v):100,x,run:()=>{chatMark(v);return twDo(S,v,k,true)+"."}})};
   const g=G();
+  /* ACT-MOVE-6 law 3 (RV-163G F1): a deed that hurts another is HER gain — written green (explicit class beats word colour), her own loss on «kèm:» */
   add("visit",`nàng quý ngươi +${g.visit[0]} · Sức nàng +${g.visit[1]}`);
   {const x=twFoeOf(S,v);if(x)add("mediate",`nàng bớt oán ${x.name} ${g.mediate}`)}
-  add("humil",`nàng oán ngươi +${g.humil[0]} · Danh nàng -${g.humil[1]}`);
+  add("humil",`thành: <span class="g">Danh nàng -${g.humil[1]}</span> · kèm: nàng oán ngươi +${g.humil[0]}`);
   add("test",`thành: ngươi tin nàng hơn +${g.test[0]} · hỏng: ngờ vực ${g.test[1]}`);
-  add("drop",`ngươi lạnh với nàng -${g.drop}`);
+  add("drop",`thành: <span class="g">ngươi dứt tình thân với người sa cơ</span> · kèm: <span class="r">ngươi lạnh với nàng -${g.drop}</span>`);
   add("follow",`nàng quý ngươi +${g.follow}`);
-  add("gossip",`một phi tần khác Danh -${g.gossip}`);
-  add("admon",`Sủng nàng -${g.admon} · hai tuần ngài để ý người khác`);
-  add("flaunt",`mọi phi tần ghen +${g.flaunt}`)}catch(e){console.error(e)}return A}})();
+  add("gossip",`thành: <span class="g">phi tần ngươi ghét Danh -${g.gossip}</span> · không có ai để nói thì chỉ là chuyện phiếm`);
+  add("admon",`thành: <span class="g">Sủng nàng -${g.admon}</span> · <span class="g">hai tuần ngài để ý người khác</span>`);
+  add("flaunt",`thành: <span class="g">mọi phi tần khác ghen tức +${g.flaunt}</span>`)}catch(e){console.error(e)}return A}})();
 /* her Thái hậu / Hoàng hậu greetings: the same BAL.tw cost (gains stay in her card's w/l, which read the same numbers) */
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&(p.kind==="th"||p.kind==="hh")){const g=G();for(const a of A){
   if(p.kind==="th"&&a.n==="Thỉnh an, chép kinh"){a.c=twCost("thTH");a.o=od(g.thTHo);a.w={th:g.thTH[0],danh:g.thTH[1],duc:g.thTH[2]};a.l={th:g.thTH[3]}}
