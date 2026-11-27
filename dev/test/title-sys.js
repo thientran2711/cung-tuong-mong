@@ -61,16 +61,18 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
   const R0=Math.random;Math.random=()=>0.5;
   try{
   S.dead=false;
-  two('nights',30,'gSung',()=>{S.sung=0;apply({sung:Math.round(70/sg(1))});return S.sung});
+  /* stat-pace (jstatpace spG, owner OD 26/11 ~04:20Z): ONE change never passes the size band (BAL.stp.band), so a single +70 is cut to the band top with or
+     without the title; the title bonus is measured over many in-band rises (fractions carry, p.spc) — the same way it works in play */
+  two('nights',30,'gSung',()=>{S.sung=0;delete S.spc;for(let i=0;i<10;i++)apply({sung:14});return S.sung});
   {dhWear(S,'nights',true);S.dh.nights.pick='gSung';dhWear(S,'nights',true);const sh=new Set();for(let i=0;i<30;i++)sh.add(fmt({sung:5}));if(sh.size!==1)F.push('gSung: preview text rolls');dhWear(S,null,true)}if(!(B.gSung[1]>B.gSung[0]))F.push('gSung');
-  two('meta',10,'gDanh',()=>{S.danh=0;apply({danh:60});return S.danh});if(!(B.gDanh[1]>B.gDanh[0]))F.push('gDanh');
+  two('meta',10,'gDanh',()=>{S.danh=0;delete S.spc;for(let i=0;i<10;i++)apply({danh:14});return S.danh});if(!(B.gDanh[1]>B.gDanh[0]))F.push('gDanh');
   two('w_theu',1,'gBac',()=>{S.bac=0;apply({bac:120});return S.bac});if(B.gBac[1]-B.gBac[0]!==10)F.push('gBac');
-  two('w_hat',1,'gTren',()=>{S.th=0;apply({th:48});return S.th});if(!(B.gTren[1]>B.gTren[0]))F.push('gTren');
-  const v0=liveRivals(true).filter(v=>!v.queen)[0];two('w_hoa',1,'gHau',()=>{v0.rel=0;affAdd(v0,S,48);return v0.rel});if(!(B.gHau[1]>B.gHau[0]))F.push('gHau');
+  two('w_hat',1,'gTren',()=>{S.th=0;delete S.spc;for(let i=0;i<5;i++)apply({th:12});return S.th});if(!(B.gTren[1]>B.gTren[0]))F.push('gTren');
+  const v0=liveRivals(true).filter(v=>!v.queen)[0];two('w_hoa',1,'gHau',()=>{v0.rel=0;delete v0.spc;for(let i=0;i<10;i++)affAdd(v0,S,12);return v0.rel});if(!(B.gHau[1]>B.gHau[0]))F.push('gHau');
   two('m_mon',1,'gTrung',()=>{S.maid.loyal=0;apply({maid:40});return S.maid.loyal});if(!(B.gTrung[1]>B.gTrung[0]))F.push('gTrung');
   two('w_kim',1,'phuc',()=>lotB(S,'Thi'));if(B.phuc[1]-B.phuc[0]!==BAL.dh.B.phuc.v[0])F.push('phuc');
   two('w_kim',1,'phuc',()=>lotB(S,'Con cái'));if(B.phuc[1]!==B.phuc[0])F.push('luck touched conception');
-  S.preg=null;S.lastBirth=null;two('kids',3,'thai',()=>conceiveCh(S));if(B.thai[0]>0&&B.thai[1]-B.thai[0]!==BAL.dh.B.thai.v[1])F.push('thai '+B.thai);
+  S.preg=null;S.lastBirth=null;two('kids',3,'thai',()=>conceiveCh(S));if(B.thai[0]>0&&Math.abs(B.thai[1]-B.thai[0]-BAL.dh.B.thai.v[1])>1e-9)F.push('thai '+B.thai);
   if(dhObj(S,'kids')&&(BAL.dh.T.kids.ch||[]).includes('thai')&&dhB(S,'thai'))F.push('thai at step 1');
   two('a_doc',50,'nghe',()=>{const k='thi';S.arts[k]=1;S.artp[k]=0;const tot=()=>S.arts[k]*1000+S.artp[k];const a=tot();Math.random=()=>0;try{addArt(k,1)}finally{Math.random=()=>0.5}return tot()-a});if(!(B.nghe[1]>B.nghe[0]))F.push('nghe');
   two('w_tho',1,'thi',()=>SC7.tho.f(S));if(B.thi[1]-B.thi[0]!==BAL.dh.B.thi.v[0])F.push('thi');
@@ -79,7 +81,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    if(B.don[0]===B.don[1])F.push('don '+B.don)}
   two('w_tho',1,'tai',()=>S.tai);const t0=S.tai;if(B.tai[1]-B.tai[0]!==1&&B.tai[0]<100)F.push('flat tai');if(S.tai!==B.tai[0])F.push('tai not given back');
   /* NPC by the same rules */
-  {const v=v0;v.dh={nights:{n:30,i:undefined}};dhSync(v);v.dh.nights.pick='gSung';const a=()=>{v.sung=0;ap(v,{sung:60});return v.sung};const w0=v.titleWorn;v.titleWorn=null;const x=a();v.titleWorn='dh-nights';const y=a();B.npc=[x,y];if(!(y>x))F.push('NPC gSung')}
+  {const v=v0;v.dh={nights:{n:30,i:undefined}};dhSync(v);v.dh.nights.pick='gSung';const a=()=>{v.sung=0;delete v.spc;for(let i=0;i<10;i++)ap(v,{sung:14});return v.sung};const w0=v.titleWorn;v.titleWorn=null;const x=a();v.titleWorn='dh-nights';const y=a();B.npc=[x,y];if(!(y>x))F.push('NPC gSung')}
   /* the picker */
   Q.length=0;S.dh.w_kim={n:1};dhSync(S,true);dhPick('w_kim');B.pick=(Q[0]&&Q[0].opts||[]).map(o=>o.n);if(B.pick.length!==4)F.push('picker '+B.pick);Q[0].opts[1].go();if(dhB(S,'phuc')!==BAL.dh.B.phuc.v[0])F.push('pick phuc not worn');Q.length=0;
   /* one bonus only: wearing another title drops the first */
