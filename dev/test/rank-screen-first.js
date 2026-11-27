@@ -150,7 +150,7 @@ function judge(C, log) {
           if (up) { await p.evaluate(c => { (0, eval)(c) }, P.code); popFired = true; await p.waitForTimeout(700) }
         }
         const cur = await p.evaluate(() => window.__rs[window.__rs.length - 1] || { sc: [], t: '', rq: [] });
-        if (OUT && !shotRank && (cur.rq.length || cur.sc.some(s => /km-gloom|km-edict/.test(s)))) { shotRank = true; await p.screenshot({ path: path.join(OUT, `${dev}-${C.name.replace(/[^a-z0-9]+/gi, '_')}-rank.jpg`), type: 'jpeg', quality: 70 }) }
+        if (OUT && !shotRank && (R.card ? cur.t === R.card || (cur.rq.length && cur.sc.length) : cur.sc.some(s => /km-gloom|km-edict/.test(s)))) { shotRank = true; await p.waitForTimeout(900); await p.screenshot({ path: path.join(OUT, `${dev}-${C.name.replace(/[^a-z0-9]+/gi, '_')}-rank.jpg`), type: 'jpeg', quality: 70 }) }
         if (OUT && shotRank && !shotPop && P && cur.sc.some(s => s.includes(P.cls))) { shotPop = true; await p.screenshot({ path: path.join(OUT, `${dev}-${C.name.replace(/[^a-z0-9]+/gi, '_')}-pop.jpg`), type: 'jpeg', quality: 70 }) }
         const s = await step(p, rt); idle = s.k === 'idle' ? idle + 1 : 0;
       }
