@@ -1,1 +1,1 @@
-Thẻ kết quả có tranh không còn khoảng trống dưới tranh; dòng «Vì sao» không còn lặp chữ «thiện cảm».
+Khung lựa chọn không còn kẹt: khi không còn lựa chọn nào dùng được thì hiện lời báo và nút đóng.

@@ -3025,6 +3025,7 @@ for a living player; nothing is lost: each fact now sits on a person card.
   Sắc · Tài (or "chưa rõ"), "Hỏi được cho: <con>" when a match fits her child; act "Dò hỏi gia thế" (1 khắc, Bạc -5, sure) for a stranger.
 
 ### 37.2 Empty tab / sub-tab / panel = ONE kit card (`kitEmpty(title, lines, {art|topic, acts})` → `.kempty`, j79 §21; `htEmpty` = thin alias)
+- EMPTY DIALOG LIST (empty-modal, MAIN 167, WORKLIST row 38 «Hội phối đồ: báo đề» stuck on Fold): a queue-dialog card (j3 `showModal`) whose option list is EMPTY or ALL locked (`kitModalLive(m)` false) shows this same `kitEmpty` card in its options area + the dialog's plain close («Đã rõ» / the kit ✕) — never a dialog with nothing to press. The dialog always FOLLOWS the queue: if any code takes the shown card out of `Q`, the next `render()` shows `Q[0]` or closes it (`M.__m` vs `Q[0]`), and the buổi spread (jspread `sp13Plan`) never pulls the card on screen. Test: dev/test/empty-modal.js (Fold + iPad).
 Owner 21/11: "khi không có thông tin thì hiện như «Ta chưa có con»: nhìn cái trang cho nó đỡ trống". Picture LEFT (`o.art` path, else
 `kitInfoArt(o.topic||title)`, else neutral tile; narrow container ≤ 420 px: picture over text) + title «Ta chưa có …» / «Chưa có …» (seal colour) +
 2–3 hint bullets saying how it fills. Never a blank panel, a lone `<p class="past">` or a run-on paragraph. Used by every empty state: Phe phái hậu cung,
