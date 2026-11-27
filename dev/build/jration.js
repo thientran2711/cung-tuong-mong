@@ -161,7 +161,7 @@ function lxBorrowCard(p,v){const M=lxMiss(p);const lend=M.map(part=>[part,lxLend
  /* RECEIVER CHOICE (jrcv RCVK.rougeBorrow, review FAIL 6 #4): the LENDER answers with the 4 answers — an NPC lender picks (rcvPick, L1876 weights), she as the
     lender gets the card (PEND.rcvAsk). Her asking card shows the lender's willingness word (rcvWord), not odds; od stays the NPC planner's worth (p4O) */
  const ww=typeof rcvWord==="function"?rcvWord(v,p):"";
- return{n:"Mượn son phấn",o:p===S&&ww?null:od,lock:!M.length||!lend,t:!M.length?"son phấn còn đủ":"nàng không có thứ ngươi thiếu",x:`${p===S&&ww?ww:word(od)} · nàng có thể chia một nửa hộp ${lbl}, chia chút ít cho có, từ chối hoặc đem chuyện đi kể · tùy nàng quý ngươi và nết của nàng`,
+ return{n:"Mượn son phấn",o:p===S&&ww?null:od,lock:!M.length||!lend,t:!M.length?"son phấn còn đủ":"nàng không có thứ ngươi thiếu",x:`${p===S&&ww?ww:word(od)} · thành: nàng chia cho ngươi ${lend?lbl:"thứ ngươi còn thiếu"}: một nửa hộp, hay chút ít cho có · hỏng: nàng từ chối, có khi đem chuyện đi kể · tùy nàng quý ngươi và nết của nàng`/* ACT-MOVE-6 law 3: the gain on its own Thành row (was one neutral line when her word is «Không ưa») */,
   run:()=>{if(!lend)return"";if(typeof rcvAsk==="function")return rcvAsk("rougeBorrow",p,v,lend[0])||"";
    if(roll(od)){const g=lxGive(v,p,lend[1],"half");if(p!==S)lxFix(p);return `${v.name} chia cho ${lxNm(p)} ${lxName(g)} (${g.u} lần dùng).`}affAdd(v,p,BAL.ration.borrow.fail);return `${v.name} khéo từ chối${p===S?"":" "+p.name}. Thiện cảm ${BAL.ration.borrow.fail}.`}}}
 function lxBegOdds(p,kind){const B=BAL.ration.beg,hh=kind==="hh";return cl((hh?B.hh:B.th)+Math.round(((hh?p.hh:p.th)||0)/B.stat),5,95)}
