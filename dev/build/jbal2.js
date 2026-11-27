@@ -2347,3 +2347,21 @@ BAL.charge={C:{
  actW:{poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
   rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
  w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1}};
+/* NGỰ HOA VIÊN AREAS (owner OD 24/11 ~15:40Z: second Dư đồ level, areas + head-counts, enter ONE area; plan dev/AREA_PLAN.md on review/ring-design-3; build jnhv.js, NHV-BUILD 25/11).
+   vuon = the areas in garden-map order: acts = purposes from the j95 record (rule 1), net = nết pull for a plain walk (rule 3), x = crop of the stand-in garden painting
+   for the area scene, hs = hotspot box on the garden map picture, cap = the one short line under the area row. near = overflow neighbours (rule 6); route = the Emperor's
+   walk one area per khắc (rule 4); grpMax = groups per area, SAME on every device (MAIN 127 FAIL 1: who stands where comes from game state, never from the screen); span = person
+   units per area (a master 1, a follower folU); art = painted pictures once ART-NHV delivers (CDN paths, null = stand-in «tạm»). Look/motion numbers = the reviewed ring4 mock. */
+BAL.area={on:1,
+ vuon:[{k:"ngudao",n:"Ngự đạo",acts:["stroll","attend","escort","seekemp","ag_flaunt","ag_cx2:court","ag_cx2:show","ag_cx2:flat"],net:["Kiêu ngạo","Tham vọng"],x:.52,hs:{x:.42,y:.36,w:.16,h:.42},cap:"lối chính trước Khâm An điện"},
+  {k:"vuonhoa",n:"Vườn hoa",acts:["paint","walk","ag_effort","ag_cx3:talkPraise","ag_cx3:talkGossip","sell","play"],net:["Ân cần","Nhiều chuyện","Ham vui"],x:.12,hs:{x:.14,y:.24,w:.26,h:.26},cap:"khóm mẫu đơn, hiên Giáng Tuyết"},
+  {k:"thuyta",n:"Thủy tạ",acts:["music","poem","ag_cx3:qin","ag_cx3:talkHealth"],net:["Điềm tĩnh","Khiêm nhường","Ham học"],x:1,hs:{x:.66,y:.46,w:.33,h:.36},cap:"đình bên hồ sen"},
+  {k:"dinhco",n:"Đình cờ",acts:["ag_cx3:pmPlay","ag_cx3:pmDuel","wager"],net:["Nóng nảy","Thực tế"],x:.72,hs:{x:.09,y:.5,w:.15,h:.3},cap:"đình tròn có bàn cờ đá"},
+  {k:"nonbo",n:"Non bộ",acts:["tryst","spy","scheme","ambush","ag_cx3:talkSecret","changed"],net:["Kín đáo","Xảo quyệt","Thù dai"],x:0,hs:{x:.67,y:.08,w:.24,h:.37},cap:"hòn non bộ khuất sau tùng bách"}],
+ near:{ngudao:["vuonhoa","thuyta"],vuonhoa:["ngudao","thuyta"],thuyta:["dinhco","vuonhoa"],dinhco:["thuyta","nonbo"],nonbo:["dinhco","vuonhoa"]},
+ /* hs = hotspots on ART-NHV's garden map img/pl2/ngu-hoa-vien-<mùa>-<buổi> (all 16 states, one framing; MAIN 146 / ART-NHV 25/11 22:12Z). art: {s}=mùa {b}=buổi; areaHave = scene states known painted ("*" = all 16, ART-NHV 25/11 22:50Z: 80/80 live)
+    (a list: others probed at run time, fallback <area>-xuan-<buổi> → <area>-xuan-sang with the kit «tạm» chip); art.x = crop of a painted scene (centre) */
+ route:["ngudao","vuonhoa","thuyta","dinhco"],bold:{sac:75},grpMax:2,span:4.2,folU:.7,extraName:"Lối đi",extraHs:{x:.26,y:.62,w:.14,h:.2},moveKh:0,
+ fol:["follow","ag_follow"],folEmp:["attend","escort","guard"],
+ art:{map:"img/pl2/ngu-hoa-vien-{s}-{b}.webp",mapHave:"*",area:{ngudao:"img/nhv/ngu-dao-{s}-{b}.webp",vuonhoa:"img/nhv/vuon-hoa-{s}-{b}.webp",thuyta:"img/nhv/thuy-ta-{s}-{b}.webp",dinhco:"img/nhv/dinh-co-{s}-{b}.webp",nonbo:"img/nhv/non-bo-{s}-{b}.webp"},areaHave:"*",x:.5},
+ feet:.9,figH:.5,folS:.66,folGap:.05,zoom:{kv1:1,kv2:1.45},enterMs:560,walkMs:700,stepK:1.12,stepY:.045,spot:{kv1:.2,kv2:.28},band:{kv1:292,kv2:300},folMin:.5,folBack:.02};

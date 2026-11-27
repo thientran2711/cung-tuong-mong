@@ -1,0 +1,22 @@
+/* node drive.js <fold|ipad> <outdir> — Dư đồ → garden map → area → group → person → thẻ gỗ (real taps) */
+const {boot}=require('./boot');const fs=require('fs');
+const dev=process.argv[2]||'fold',OUT=process.argv[3]||'/tmp/nhv';fs.mkdirSync(OUT,{recursive:true});
+(async()=>{const o=await boot(dev==='ipad'?'ipadAir':'fold',1,0,{reducedMotion:'no-preference'});const {g,pg}=o;
+ const T=ms=>pg.waitForTimeout(ms);const shot=async n=>{await g.evaluate(()=>{const t=document.getElementById('rtoast');if(t)t.classList.remove('on')});await pg.screenshot({path:`${OUT}/${dev}-${n}.png`})};
+ const info=await g.evaluate(async()=>{Q.length=0;S.buoi=1;try{used=0}catch(e){}S.roster=null;j95sync(false,true);tab='go';window.__mapList=false;render();await new Promise(r=>setTimeout(r,800));
+  const sp=[...document.querySelectorAll('#panel [data-go]')].map(b=>b.dataset.go+'|'+b.textContent.trim().slice(0,30));return {cnt:countAt('vuon'),plan:NHV.plan().areas.map(a=>a.k+':'+NHV.count(a)+':'+a.g.map(x=>x.ms.map(m=>m.name).join('+')+'('+x.fol.length+')['+x.act+']').join(' / ')),sp}});
+ console.log(JSON.stringify(info,null,1));
+ await shot('0-duodo');
+ const tapSel=async(sel,i)=>{const ok=await g.evaluate(([s,i])=>{const L=[...document.querySelectorAll(s)];const e=L[i||0];if(!e)return false;e.click();return true},[sel,i||0]);if(!ok)console.log('NO',sel);return ok};
+ global.tapSel=tapSel;const clearQ0=async()=>{await g.evaluate(()=>{for(let j=0;j<6&&Q.length;j++){const m=Q[0];const L=m.opts||[];if(L.length)chooseM(Math.max(0,L.findIndex(o=>!o.off)));else closeModal()}if(tab!=='go'){tab='go';render()}})};
+ for(let k=0;k<4;k++){await clearQ0();await tapSel('#panel [data-go="vuon"]');await T(1200);if(await g.evaluate(()=>!!document.querySelector('#panel .nhv-map')))break}await shot('1-map');
+ console.log(await g.evaluate(()=>({chip:(document.querySelector('#panel .kpm-t')||{}).textContent,sum:NHV.plan().areas.reduce((s,a)=>s+NHV.count(a),0),cnt:countAt('vuon'),kpm:JSON.stringify(window.__kpm),rows:[...document.querySelectorAll('#panel .kpm-row')].map(b=>b.textContent.trim())})));
+ const first=await g.evaluate(()=>{let b=null;NHV.plan().areas.forEach(a=>{if(!b||a.g.length>b.g.length||(a.g.length===b.g.length&&NHV.count(a)>NHV.count(b)))b=a});return b&&b.k});
+ await tapSel(`#panel [data-kpmpart="${first}"]`);await T(1200);
+ const clearQ=async()=>{for(let j=0;j<6;j++){const n=await g.evaluate(()=>{if(!Q.length)return 0;const m=Q[0];const L=(m.opts||[]);let k=L.findIndex(o=>/một mình/.test(o.n||''));if(k<0)k=Math.max(0,L.findIndex(o=>!o.off));if(L.length)chooseM(k);else closeModal();return Q.length+1});if(!n)break;await T(900)}};
+ global.clearQ=clearQ;await clearQ();await T(2500);await shot('2-area');
+ console.log(await g.evaluate(()=>({place:S.place,hall:JSON.stringify(S.hall),tab,nhv:!!document.getElementById('nhv'),figs:document.querySelectorAll('#nhv .nhv-f').length,cp:curPeople().map(p=>p.name),title:(document.querySelector('#kpname')||{}).textContent,err:(window.__errs||[]).slice(0,3)})));
+ await tapSel('#nhv .nhv-f');await T(900);await shot('3-group');
+ await tapSel('#nhv .nhv-f');await T(1600);await shot('4-plaques');
+ await tapSel('#nhv .kpk .kpk-b');await T(800);await shot('5-lift');
+ await o.ctx.close();await o.b.close();o.srv.close()})();
