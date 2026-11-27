@@ -58,6 +58,18 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
    if(R&&R.P[ia]&&R.P[ic]&&R.P[id]){const keep={};for(const w in R.P)if(R.P[w]&&R.P[w][kh]){keep[w]=R.P[w][kh];if(R.P[w][kh][0]==="__wt")R.P[w][kh]=["__zz","x",null,""]}
     R.P[ia][kh]=["__wt","x",null,""];R.P[ic][kh]=["__wt","x",null,""];R.P[id][kh]=["__far","x",null,""];deedAdd(A,"poison",E,2,"bỏ độc");const L=(A.wsee&&A.wsee.mh)||[];for(const w in keep)R.P[w][kh]=keep[w];
     ok(L.includes(ic)&&!L.includes(id)&&!L.includes(ia),`deed written → who stood at that place that khắc (day record) = the people who saw it: ${JSON.stringify(L)} (${C.name} there, ${D.name} elsewhere)`)}else ok(false,"no day record to read who was there")}
+  /* 10b. MAID WITNESS (MAIN 169 answer (b), law 6b/1): a maid at the place is a real witness, stored as HERSELF («mu:»), never the role «mm:» */
+  {reset();A.rank=3;const R=agRec(),kh=agKh(),ia=ledgerId(A);const mo="mm:"+A.id,mm="mm:me";
+   if(R&&R.P[ia]&&A.maid&&A.maid.name&&S.maid){const keep={};for(const w in R.P)if(R.P[w]&&R.P[w][kh]){keep[w]=R.P[w][kh];R.P[w][kh]=["__zz","x",null,""]}
+    const had={a:R.P[mo],m:R.P[mm]};R.P[mo]=R.P[mo]||[null,null,null,null];R.P[mm]=R.P[mm]||[null,null,null,null];const k0={a:R.P[mo][kh],m:R.P[mm][kh]};
+    R.P[ia][kh]=["__wt","x",null,""];R.P[mm][kh]=["__wt","x",null,""];R.P[mo][kh]=["__wt","x",null,""];deedAdd(A,"poison",E,2,"bỏ độc");const L=(A.wsee&&A.wsee.mh)||[];
+    for(const w in keep)R.P[w][kh]=keep[w];if(had.a)R.P[mo][kh]=k0.a;else delete R.P[mo];if(had.m)R.P[mm][kh]=k0.m;else delete R.P[mm];
+    const im=L.find(x=>/^mu:me:/.test(x)),io=L.find(x=>x.indexOf("mu:"+A.id+":")===0);
+    ok(im&&io&&!L.some(x=>/^mm:/.test(x))&&chWitP(im)===S.maid&&chWitNm(im)===S.maid.name&&chWitNames(A,"mh",[im]).join("").includes("lời khai người hầu"),`her maid and ${A.name}'s own maid stood there → both are witnesses by person id ${JSON.stringify(L)} · «${chWitNames(A,"mh",[im])}»`);
+    const old=S.maid;S.maid=maidMk(S);const gone=chWitP(im);S.maid=old;ok(!gone&&chWitP(im)===old,`a maid replaced → the old id never resolves to her successor (${gone}); back → resolves again`);
+    S.ewc={};S.ewc[key(A)]={mh:[io]};const w0=chWit(S,A,"mh");const nm=A.maid.name;covKill(S,io);const w1=chWit(S,A,"mh");
+    ok(w0===1&&w1===0&&A.maid&&A.maid.name!==nm&&(S.mort.dl||[]).some(d=>d.g==="maid"&&d.c==="plot"),`thủ tiêu a maid witness: she dies (death ledger «maid»), ${A.name} gets a new maid, the witness stops counting (${w0} → ${w1})`)}
+   else ok(false,"no day record / maids to test the maid witness")}
   {reset();A.rank=3;deedAdd(A,"poison",C,2,"bỏ độc");A.wsee={};const need=chNeed(A,"mh");evA(S,A,need+3,"mh");
    ok(chWit(S,A,"mh")===0&&chHave(S,A,"mh")===need&&!chReady(S,A,"mh")&&!chRoom(S,A,"mh",chSync(S,A),chWitS(S,A)),`nobody was there → no witness can be found: «${chLine(S,A)}», no room left, not ready`)}
   {reset();A.rank=3;deedAdd(A,"poison",C,2,"bỏ độc");A.wsee={};saw(A,"mh",C);const need=chNeed(A,"mh");evA(S,A,need+1,"mh");const W=chWitS(S,A).mh;

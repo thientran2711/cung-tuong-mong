@@ -56,7 +56,8 @@ function covWipeOpt(){const d=covTraced(S);if(!d)return null;const bac=covWipeBa
  return{n:"Xóa dấu vết",act:1,o:covWipeO(S),c:{bac:-bac},x:`dấu vết việc «${plain(d.x||"")}» bị xóa sạch, không ai còn tìm ra chứng cứ`,risk:"dấu vết còn đó",cov:"wipe",
   go:()=>{covWipe(S,d);log(`${S.maid?S.maid.name:"Người hầu"} lặng lẽ xóa sạch dấu vết việc ${plain(d.x||"")}.`)},fail:()=>log(`Xóa dấu vết việc ${plain(d.x||"")} không xong: dấu vết vẫn còn.`)}}
 /* ---- 4: a named real witness ---- */
-function covWitId(p){if(!p)return null;if(p.lid)return p.lid;if(p.kind==="maid")return"mm:me";/* her own maid in the day record (j95) */if(p.sid!=null)return"s"+p.sid;try{return ledgerId(p.ref||p)}catch(e){return null}}
+function covWitId(p){const r=covWitId0(p);return r&&/^mm:/.test(r)?chMaidId(r):r/* a maid = the person «mu:» (jcharge chMaidId), never the role */}
+function covWitId0(p){if(!p)return null;if(p.lid)return p.lid;if(p.kind==="maid")return"mm:me";/* her own maid in the day record (j95) */if(p.sid!=null)return"s"+p.sid;try{return ledgerId(p.ref||p)}catch(e){return null}}
 /* the charges of a's deeds that witness id really saw (t.wsee), alive, never the Emperor / Thái hậu */
 function covSaw(a,id){if(!a||!id||id==="emp"||id==="th"||!chWitP(id))return[];const W=a.wsee||{};return Object.keys(W).filter(c=>(W[c]||[]).includes(id))}
 function covSawTier(a,id){const O=chB().tierOrd;let b=-1;for(const c of covSaw(a,id)){const i=O.indexOf(chTier(a,c));if(i>b)b=i}return b<0?null:O[b]}
@@ -79,6 +80,8 @@ function covKill(a,id){const w=covPerson(id);if(!w)return"";const why=`bị th�
   try{if(typeof npcRetire==="function")npcRetire(w)}catch(e){}w.alive=false;if(w.queen){w.queen=false;if(S.vacSince==null)S.vacSince=S.turn}
   try{S.mort=S.mort||{};(S.mort.dl=S.mort.dl||[]).push({g:"consort",a:w.age,c:"plot",y:S.year});if(S.mort.dl.length>300)S.mort.dl.shift()}catch(e){}
   return `<span class="r">${w.name} ${why}, ${w.age} tuổi.</span>`}
+ if(/^mu:/.test(id)){/* a maid witness (chWitP «mu:»): she really dies, her mistress gets a new maid from Nội vụ phủ (j8 maidMk) */const o=chMaidO(id.split(":")[1]);w.dead=1;
+  try{if(o&&o.maid===w)o.maid=maidMk(o);(S.mort=S.mort||{}).dl=S.mort.dl||[];S.mort.dl.push({g:"maid",a:w.age||0,c:"plot",y:S.year});if(S.mort.dl.length>300)S.mort.dl.shift()}catch(e){}return `<span class="r">${w.name} ${why}.</span>`}
  w.dead=1;try{if(typeof asOut==="function"&&ownerOf(w))asOut(w,"dead")}catch(e){}return `${w.name} ${why}.`}
 /* one road for her and every NPC: x = nhe | vua | nang; returns the result text; pay = the bạc already handled by the caller (her option card) */
 function covWitDo(a,id,x,ok){const w=covPerson(id);if(!a||!w)return"";const wn=covWho(w),B=covB().wit;if(ok==null)ok=roll(covWitO(a,id,x));

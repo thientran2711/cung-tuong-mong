@@ -52,14 +52,19 @@ function chHave(h,t,c){if(!h||!t||h===t)return 0;return chSync(h,t)[c]||0}
    OLD SAVE: a count held before (a number, or pieces from before witnesses existed) becomes the real people t.wsee holds, at most that count. */
 function chWitNeed(t,c){const C=chC(c);if(!C)return 0;return (chB().wit.need[t?chTier(t,c):C.tier])|0}
 /* the living person behind a witness id (consort / servant / her / Hoàng thượng / Thái hậu), else null */
-function chWitP(id){try{if(!id)return null;if(id==="th")return S.thDead?null:"th";if(id==="me")return S&&!S.dead?S:null;const p=agTgt(id);if(!p||p==="th")return p||null;
+/* a maid (MAIN 169 answer (b), law 6b/1: her own maid — and every consort's maid — CAN be a witness): the day record's «mm:<owner>» row is a ROLE,
+   so the witness is stored by the maid herself «mu:<owner>:<uid>»; a maid replaced / dead no longer resolves (never her successor) */
+function chMaidO(o){return o==="me"?S:o?RV(+String(o).replace(/^v/,""))||null:null}
+function chMaidId(w){const o=String(w).slice(3),p=chMaidO(o),m=p&&p.maid;if(!m||!m.name||m.dead||(p!==S&&p.alive===false))return null;if(!m.uid)m.uid=S.maidSeq=(S.maidSeq||0)+1;return `mu:${o}:${m.uid}`}
+function chWitP(id){try{if(!id)return null;if(id==="th")return S.thDead?null:"th";if(id==="me")return S&&!S.dead?S:null;
+ if(/^mu:/.test(id)){const [,o,u]=id.split(":"),p=chMaidO(o),m=p&&p.maid;return m&&String(m.uid)===u&&!m.dead&&(p===S||p.alive!==false)?m:null}const p=agTgt(id);if(!p||p==="th")return p||null;
  if(p.alive===false||p.dead||p.gone)return null;return p}catch(e){return null}}
 function chWitNm(id){const p=chWitP(id);if(!p)return"";if(p==="th")return"Thái hậu";if(p===S)return"ngươi";if(S.emp&&p===S.emp)return"Hoàng thượng";return p.rank!=null&&p.rel!=null?j78who(p):p.name||""}
 /* who stood with p (same place, same khắc) in the day record: the landing deed's own window when an agent deed lands, else p's row this khắc */
 let CHLAND=null;
 function chHere(p){try{const R=agRec();if(!R||!p)return[];const id=ledgerId(p);if(!id)return[];let pl,k0,k1;const L=CHLAND;
  if(L&&L.id===id){pl=L.pl;k0=L.kh;k1=agK1(L)}else{const row=R.P[id];if(!row)return[];k0=k1=agKh();pl=row[k0]&&row[k0][0]}
- if(!pl)return[];const out=[];for(const w in R.P){if(w===id||/^(m\d|k:)/.test(w))continue;const r=R.P[w];if(!r)continue;for(let q=k0;q<=k1;q++)if(r[q]&&r[q][0]===pl){if(chWitP(w))out.push(w);break}}return out}catch(e){return[]}}
+ if(!pl)return[];const out=[];for(const w in R.P){if(w===id||/^(m\d|k:)/.test(w))continue;const r=R.P[w];if(!r)continue;for(let q=k0;q<=k1;q++)if(r[q]&&r[q][0]===pl){const wi=/^mm:/.test(w)?chMaidId(w):w;if(wi&&chWitP(wi))out.push(wi);break}}return out}catch(e){return[]}}
 function chSawAdd(t,c,id){if(!t||!c||!id||id===ledgerId(t))return;t.wsee=t.wsee||{};const L=t.wsee[c]||(t.wsee[c]=[]);if(L.includes(id))return;L.push(id);if(L.length>chB().wit.keep)L.shift()}
 /* the real people h could still find as witnesses of t's charge c */
 function chWitAv(h,t,c,W){const hid=ledgerId(h),tid=ledgerId(t);const have=(W&&W[c])||[];return ((t.wsee&&t.wsee[c])||[]).filter(id=>id!==hid&&id!==tid&&!have.includes(id)&&chWitP(id))}
@@ -76,7 +81,7 @@ function chRoom(h,t,c,m,W){const cap=chCapC(t,c);if(!cap)return false;return (m[
 function chWitGo(h,t,c,m,W){const wn=chWitNeed(t,c),w=chWitL(W,c).length;if(w>=wn||!chWitAv(h,t,c,W).length)return false;const n=m[c]||0;return n>=chCapC(t,c)||(n+w)%2===1}
 /* what a witness says: the victim «lời khai người bị hại», a servant «lời khai người hầu / kẻ canh cửa …», anyone else «người tận mắt chứng kiến» (BAL.charge.C[c].wk) */
 function chWitKind(t,c,id){const K=(chC(c)||{}).wk||[];if(!K.length)return"";const p=chWitP(id);const D=chDeedMap(t)[c];const vic=D&&D.list&&D.list.some(d=>d&&d.t!=null&&ledgerId(byKey(d.t)||d.t)===id);
- const f=rx=>K.find(x=>rx.test(x));if(vic&&f(/bị hại/))return f(/bị hại/);if(/^s\d/.test(id)){const s=K.find(x=>/^lời khai/.test(x)&&!/bị hại/.test(x));if(s)return s}return f(/tận mắt/)||K[0]}
+ const f=rx=>K.find(x=>rx.test(x));if(vic&&f(/bị hại/))return f(/bị hại/);if(/^(s\d|mu:)/.test(id)){const s=K.find(x=>/^lời khai/.test(x)&&!/bị hại/.test(x));if(s)return s}return f(/tận mắt/)||K[0]}
 function chWitNames(t,c,L){return L.map(id=>{const k=chWitKind(t,c,id);return `${chWitNm(id)}${k?` (${k})`:""}`})}
 /* REAL-PROOF-2 (owner 27/11 ~00:13Z «sợ … tách nhiều tầng chi tiết quá lại rối»): a card shows only the COUNT «Nhân chứng c/d»; the names live in the Sổ ghi find line and her notice */
 function chWitTxt(h,t,c){const wn=chWitNeed(t,c);if(!wn)return"";return `Nhân chứng ${chWit(h,t,c)}/${wn}`}
