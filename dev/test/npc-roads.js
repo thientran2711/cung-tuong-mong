@@ -10,7 +10,7 @@ const {chromium}=require('playwright');
 const [,,URL,NL,NM]=process.argv;const NLIV=+NL||3,MON=+NM||240;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JSON.stringify(x).slice(0,900))};
  let ctx=null,p=null;/* a fresh page per life (one page over several long lives runs out of memory) */
- const open=async()=>{if(ctx)await ctx.close();ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});p=await ctx.newPage();p.setDefaultTimeout(0);
+ const open=async()=>{if(ctx)await ctx.close();ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});p=await ctx.newPage();p.setDefaultTimeout(0);await p.addInitScript(require('./lib/qdrain').init);/* headless month loop: __bot + answer the night choice (lib/qdrain.js) */
  p.on('pageerror',e=>errs.push(e.message.slice(0,300)));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text().slice(0,300))});
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
  await p.waitForFunction(()=>typeof start==='function'&&typeof nrMonth==='function',null,{timeout:0});await p.waitForTimeout(1500);
@@ -18,7 +18,7 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||3,MON=+NM||240;
   window.__life=(k,mons)=>{quiet=true;window.__forceOrigin=k;start();quiet=false;Q.length=0;if(!S||!S.origin)return{err:'boot'};
    const seen={},bad=[],offers={};let err=null,mon=0;
    for(;mon<mons;mon++){if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}
-    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
+    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
     try{const q=q72();for(const c of q.ch.concat(q.a))if(/^nr_/.test(c.tid)){const id=c.ri;(offers[id]=offers[id]||new Set()).add(c.tid+':'+(c.p&&c.p.nn))}}catch(e){}
     for(const v of rivals){if(!v.nr)continue;const N=v.nr,s=seen[v.id]||(seen[v.id]={o:N.o,r:N.r,l:0,dead:0,x:0});
      if(N.l.length>s.l){const nl=N.l.slice(s.l);s.l=N.l.length;if(s.dead)bad.push([v.id,'played after death',nl]);if(s.x)bad.push([v.id,'played after close',nl]);if(s.out&&v.out)bad.push([v.id,'played in lãnh cung',nl])}

@@ -21,8 +21,16 @@ let fails=0;const ok=(c,msg)=>{console.log((c?'PASS ':'FAIL ')+msg);if(!c)fails+
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}
    for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}try{S.tutTour=1;coachOff&&coachOff()}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render()});
   for(let i=0;i<8;i++){await p.waitForTimeout(800);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());if(Q.length||!document.getElementById('modal').hidden){Q.length=0;document.getElementById('modal').hidden=true;render()}})}
-  const seal=await p.evaluateHandle(()=>[...document.querySelectorAll('img.kemo[data-emo="me"],[data-emo-open="me"]')].find(e=>{const r=e.getBoundingClientRect();return r.width>3&&!e.closest('[hidden]')})||null);
-  const rt=RT.make(p,{dev,log:x=>{if(x.k!=='tap')console.log('  realtap',JSON.stringify(x))}});const hit=await rt.tap(seal,{label:'mood seal',screen:'home'});await p.waitForTimeout(800);
+  /* KK36 (look-dedupe flake, kit-stage 1/4): portrait preloads (PORK / kidPre onload → kitRenderSoon 250 → render) can land after the setup and
+     rebuild the home row, so a seal handle taken earlier is detached («gone»). Harness setup only: wait until the page is quiet (no render for
+     1.5 s, no portrait preload pending, at most 12 s), then take the seal. */
+  await p.evaluate(()=>{window.__ldR=performance.now();const r0=render;render=function(){window.__ldR=performance.now();return r0.apply(this,arguments)}});
+  await p.waitForFunction(()=>{const busy=o=>{try{return o&&Object.values(o).some(v=>v===2)}catch(e){return false}};const pend=(typeof PORK!=='undefined'&&busy(PORK))||(typeof KPORK!=='undefined'&&busy(KPORK));
+   return !pend&&performance.now()-window.__ldR>1500},null,{timeout:12000,polling:250}).catch(()=>{});
+  const findSeal=()=>p.evaluateHandle(()=>[...document.querySelectorAll('img.kemo[data-emo="me"],[data-emo-open="me"]')].find(e=>{const r=e.getBoundingClientRect();return r.width>3&&!e.closest('[hidden]')})||null);
+  const rt=RT.make(p,{dev,log:x=>{if(x.k!=='tap')console.log('  realtap',JSON.stringify(x))}});let hit=false;
+  /* a late render may still rebuild the row between taking the handle and the tap: the SAME seal (re-found, a real finger hits the new node) is tapped again, at most 3 times; a seal that is not there at all still fails */
+  for(let k=0;k<3&&!hit;k++){const live=await p.evaluate(()=>Q.length===0&&document.getElementById('modal').hidden);if(!live)break;hit=await rt.tap(await findSeal(),{label:'mood seal',screen:'home'});if(!hit)await p.waitForTimeout(600)}await p.waitForTimeout(800);
   let st=await p.evaluate(()=>({q:Q.length,t:Q[0]&&Q[0].t,body:(document.querySelector('#modal .dlg')||{}).innerText||''}));
   ok(hit&&st.q===1&&/^Tâm trạng · /.test(st.t||'')&&st.body.replace(/\s+/g,'').length>40,`${dev}: real tap on the mood seal opens «${st.t}» with a body (${st.body.length} chars)`);
   st=await p.evaluate(()=>{for(let i=0;i<20;i++)emoBox('me');const v=rivals.find(x=>x.alive);let k=0;if(v&&typeof kitIntelPanel==='function'){try{kitIntelPanel(v);kitIntelPanel(v);k=1}catch(e){}}

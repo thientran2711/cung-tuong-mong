@@ -94,9 +94,12 @@ function rcvAsk(k,p,t,x){const D=RCVK[k];if(!D||!p||!t||p===t)return"";if(D.ok&&
  if(t===S){rcvCard("rcvAsk",{k,a:key(p),x:x||null},D.t,p);return `${p.name} sai người sang ${D.act} ngươi. `}
  /* the co-op friend is a PLAYER (law 1): inside her accepted offer (jcoopworld invHer: he already tapped «Nhận» on his own card, COOPW.inv) his
     answer is that «Nhận» = the first (yes) option, never a roll for him (coop-ptime-reds: coop-thin-d «Kết giao» came back as «mách lẻo») */
- const O=D.opts(p,t,x);const c=t.coop&&window.COOPW&&COOPW.inv?O[0]:rcvPick(t,p,O,D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
+ const O=D.opts(p,t,x);const c=t.coop&&window.COOPW&&COOPW.inv?O[0]:rcvPick(t,p,O,D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return rcvLine(t,p,c,s)}
+/* ONE closing of an answer line (E-F4FAC, law 6c): an answer that spent her khắc always leaves a Sổ ghi line; an empty one reads as the option's own name; ends with exactly one full stop (the old
+   .replace(/([^.!?])$/,"$1. ") saw the trailing space of «… phe Khổng gia. » and wrote «. .») */
+function rcvLine(t,p,c,s){s=String(s||"").trim();if(!s)s=`${t===S?"Ngươi":t.name} đáp lời ${NM(p)}: ${String(c&&c.n||"đã nhận lời").toLowerCase()}`;return s.replace(/[.!?]*$/,m=>m||".")+" "}
 PEND.rcvAsk=pp=>{const D=RCVK[pp.k],p=byKey(pp.a);if(!D||!p||p===S||!p.alive||(p.out&&!D.cold)/* cold-faction: a letter from lãnh cung still waits */||(D.ok&&!D.ok(p,S,pp.x)))return null;
- return{who:pv(p),t:D.line(p,pp.x),o:D.opts(p,S,pp.x).map(o=>({n:o.n,fx:o.fx,x:o.x,risk:o.risk,need:o.need,tsDis:o.tsDis,go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;if(s)log(s)}}))}};
+ return{who:pv(p),t:D.line(p,pp.x),o:D.opts(p,S,pp.x).map(o=>({n:o.n,fx:o.fx,x:o.x,risk:o.risk,need:o.need,tsDis:o.tsDis,go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;log(rcvLine(S,p,o,s))}}))}};
 const rcvSg=(p,me,a,b)=>p===S?a:me?b:null;
 /* Kết giao (j8 ACT.ally, NPC cx:ally): the asker sends BAL.actBac.ally bạc as the gift (paid when sent); yes / mách keep it, «từ chối» sends it back */
 /* law 2 (equal value, review FAIL 6 #6): to kết giao is to take the asker's side — the asker's worst foe (rcvFoe: the most hostile living consort toward

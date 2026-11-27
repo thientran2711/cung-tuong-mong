@@ -108,4 +108,4 @@ AA.scen=(n)=>{AA.fresh();
    }
   }
  }
- out.write(JSON.stringify({pageErrors:perr})+"\n");out.end();lg('done errs='+perr.length);await b.close()})().catch(e=>{console.error(e);process.exit(1)});
+ out.write(JSON.stringify({noGain:await p.evaluate(()=>window.__kitNoGain||[])})+"\n");out.write(JSON.stringify({pageErrors:perr})+"\n");out.end();lg('done errs='+perr.length);await b.close()})().catch(e=>{console.error(e);process.exit(1)});
