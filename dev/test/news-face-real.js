@@ -39,7 +39,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({executablePath:process.env.CHROME||'/usr/bin/google-chrome'});
  /* ---- 1. world (SAVE=<file> reuses a save made before) ---- */
  let json=null,info=null;if(process.env.SAVE){json=fs.readFileSync(process.env.SAVE,'utf8');info={from:process.env.SAVE}}else{
- const ca=await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});await routeImg(ca);const pa=await ca.newPage();pa.setDefaultTimeout(0);
+ const ca=await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});await routeImg(ca);const pa=await ca.newPage();await require('./lib/veil').guard(pa);pa.setDefaultTimeout(0);
  await pa.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await pa.waitForFunction(()=>typeof start==='function'&&typeof ser==='function',null,{timeout:0});await sleep(1500);
  await pa.addInitScript(()=>{});await pa.evaluate(DRIVE);
  const W0=await pa.evaluate(async([mw])=>{try{localStorage.clear()}catch(e){}const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;
@@ -54,7 +54,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  if(OUT&&json)fs.writeFileSync(`${OUT}/save.json`,json)}
  /* ---- 2. load it like the owner ---- */
  const cb=await b.newContext({viewport:{width:1180,height:820},deviceScaleFactor:1,serviceWorkers:'block',reducedMotion:'reduce'});
- await routeImg(cb);const p=await cb.newPage();p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ await routeImg(cb);const p=await cb.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof showTitle==='function',null,{timeout:0});await sleep(2500);
  await p.evaluate(j=>{localStorage.setItem(SK(1),j);const kl=document.getElementById('kload');if(kl)kl.remove();showTitle()},json);await sleep(500);
  await p.evaluate(()=>{const T=document.getElementById('title');T.hidden=false;const b=document.querySelector('[data-load="1"]');b.click()});await sleep(2500);

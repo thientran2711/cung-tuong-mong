@@ -120,7 +120,7 @@ function menTip(P){try{if(!menRoad()||P.opp)return;if(menEye(S)<P.hide+40)return
 /* ---------- 2. zones on the map data and the place cards ---------- */
 const MEN_NT={box:{x:.445,y:.805,w:.11,h:.12}};
 (function(){try{fetch("img/map-hotspots.json",{cache:"no-cache"}).then(r=>r.ok?r.json():null).then(j=>{if(j&&j.outerCourt&&j.outerCourt.box)MEN_NT.box=j.outerCourt.box}).catch(()=>{})}catch(e){}})();
-(function(){const s0=mapSpots;mapSpots=function(){const L=s0.apply(this,arguments);try{if(menRoad())L.push({k:null,box:MEN_NT.box,n:"Ngoại triều",fn:"cấm nữ quyến bước vào",res:[],small:true,empty:true})}catch(e){}return L}})();
+(function(){const s0=mapSpots;mapSpots=function(){const L=s0.apply(this,arguments);try{if(menRoad())L.push({k:null,box:MEN_NT.box,n:"Ngoại triều",fn:"cấm nữ quyến bước vào",res:[],small:true,empty:true,pk:"ngoaitrieu"})}catch(e){}return L}})();
 /* the outer court: the NORMAL map label + a small lock mark (owner 11/15: no grey overlay on closed places); a tap opens a kit card with the
    reason and the options. The lock mark is .kmlock so the shared kit label (integrator, review/book-release) can take it over when it lands. */
 (function(){const h0=mapHTML;mapHTML=function(){let h=h0.apply(this,arguments);try{if(menRoad())h=h.replace(/<div class="mspot sm off empty" title="Ngoại triều: ([^"]*)" style="([^"]*)"><span class="mlab">Ngoại triều<\/span><\/div>/,(a,why,st)=>`<button class="mspot sm kmen-nt" data-mennt="1" title="Ngoại triều: ${why}" style="${st}"><span class="mlab"><span class="kmlock" aria-label="cấm vào">🔒</span> Ngoại triều</span><span class="mmeta"><em>${why}</em></span></button>`)}catch(e){}return h}})();
