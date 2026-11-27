@@ -31,6 +31,7 @@ const POINT = ([exitSrc, r, ban]) => { const BAN = new Set(ban || []); const EXI
   return null };
 (async () => {
   const OUT = path.resolve(OUT0); fs.mkdirSync(OUT, { recursive: true });
+  require('./lib/rt-profile.js').freshProfile(path.join(OUT, 'profile-membase')); /* FIXER #24 vii: a baseline starts with no old save (HTTP cache kept) */
   const ctx = await chromium.launchPersistentContext(path.join(OUT, 'profile-membase'), { viewport: VP, deviceScaleFactor: 1, hasTouch: DEV !== 'ipad', isMobile: DEV !== 'ipad', serviceWorkers: 'block' });
   const p = ctx.pages()[0] || await ctx.newPage(); await p.goto(URL0, { waitUntil: 'domcontentloaded' });
   const rows = [], used = new Map(); let last = null, b = 0, steps = 0; const T0 = Date.now();
