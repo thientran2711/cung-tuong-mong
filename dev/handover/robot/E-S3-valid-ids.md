@@ -15,3 +15,4 @@ UPDATE 27/11 09:35Z: + R2-skilled-5 1195490457 VALID (mixed build, game-imposed 
 UPDATE 27/11 15:55Z: + R2-rebel-5 2633677533 VALID (mixed build; Lãnh cung y23, 3792 buổi; save wall evidence) → E-S3 own valid = 31 (30 + rebel-5).
 UPDATE 27/11 16:55Z: + R2-speed-3 194501652 VALID (mixed build; Lãnh cung y23) → E-S3 own valid = 32. Remaining: skilled-3 4042475087 running (Fold, y18+), greedy-5 1191337177 parked.
 UPDATE 27/11 17:20Z: + R2-skilled-3 4042475087 VALID (mixed build; Lãnh cung y21) → E-S3 own valid = 33. Only greedy-5 1191337177 (Fold, y8) remains (parked on the gift picker; resumed 17:2xZ to test).
+UPDATE 27/11 23:30Z: + R2-greedy-5 1191337177 VALID (mixed build; Hồng nhan bạc mệnh — Lao phổi y8) → E-S3 own valid = 34. All 35 solo rows now done; ES8 random4-h/random5-h still running.
