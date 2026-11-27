@@ -1,4 +1,5 @@
-# ~85% xong · còn 41 việc không tính hình nhân vật (LIVE 772bee4f)
+# ~86% xong · còn 40 việc không tính hình nhân vật (LIVE bd47c753)
+Recount LC32 27/11 ~19:40Z: bd47c753 B save stack rv26 (QuotaExceeded silent save loss + reload rewind cured) → LIVE → row 31 closed → 40 open, ~86 %.
 Recount LC31 27/11 ~15:20Z (landers recount after each LIVE push): f28d28b9 lc29-ui (rows 14/35/36 partly), 5cee92bb kg82-phase play-stopper, d9ca7892 Bundle 2 (row 33 srv-rank + help-housemate + selx-fair → LIVE, row closed), 772bee4f goal-links + arrive-walk LIVE bug fix → 41 open, ~85 %.
 Recount MAIN 177 27/11 ~10:12Z: rows 40 ACT-MOVE + 41 DOOR-ONETAP → LIVE 0562e15f → 42 open, ~84 %.
 Footer % = whole game (MAIN 167: 88 % at 28 open rows → 86 % at 35; list-only progress = 31 %). List method: X = done/(done+open); size weights S=1 M=2 L=3; done = struck rows + LIVE since 24/11 (owner-bug batch counts 10), a «partly live» row counts half its weight; only jobs on this list, not the whole game. N = open rows below.
@@ -39,7 +40,7 @@ State: LIVE = on main · partly = some pieces LIVE · open.
 | 28 | Bàn bài no-flip, Game-of-Dice style (KK51 → KIT-STAGE-R7) + VIDEO Fold+iPad owed to sếp | KK51, R7 | open |
 | 29 | HUD Sắc phong slot (HUD-SACPHONG, kitHudSlot 470d4ece) | HUD-SACPHONG | open |
 | 30 | Tốn no-minus | — | RV PASS, in land queue |
-| 31 | B save stack rv17 (5.2 M-char silent save loss, inv-stack) — PLAY-STOPPER | B | open: LAND READY ETA ~01:45Z |
+| 31 | B save stack (silent save loss + reload rewind) — PLAY-STOPPER | B | CLOSED: rv26 bd47c753 LIVE 27/11 ~19:24Z |
 | ~~33~~ | ~~mg-trim-r6 group: Trang điểm một chạm, Học nhanh, Chăm nhanh (OB 14/21/27) + srv-rank, parity-facfix, help-housemate, selx-fair~~ | D lead | LIVE d9ca7892 (Bundle 2: srv-rank, help-housemate, selx-fair; mg-trim 0b43ee55, parity-facfix 066d9af0) |
 | 34 | DRESS-FIX: Trang điểm chọn áo/hoa, ô gộp, xa xỉ, thay đồ ngang giá, NPC-driven lột đồ (OB 48–52, 56) | DRESS-FIX | open |
 | 35 | KK44 kit sweep: map icons big (44), buổi tint (45), old frames → kit (57), map-zones-r7 (5/31) | KK44 | open |
