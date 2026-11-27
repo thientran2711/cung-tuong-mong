@@ -52,3 +52,19 @@ Scan = dev/test/text-hygiene.js --static, leak rule, text with a «(identifier)�
 | jkitpage.js:31/43/48/209/214, jksize.js:175/189, jgrey.js:38, jtoil.js:1155 | kit sample page titles / notes | no (KIT_SAMPLES / kit page) | already frozen | unchanged |
 | jkitpage.js:80/83-88/90, jnotice.js:239, jkpick.js:141, jkring-item.js:353 | kit sample page lines new on LIVE | no | NEW (gate FAIL 11) | frozen in text-hygiene-known.json with note «dev-only kit sample, MAIN 174 27/11» (MAIN authorised 6; after B1 the same family is 11 — MAIN 175 please confirm or trim) |
 Result: TEXT-HYGIENE PASS; 0 player-visible code names left in that family.
+
+## Extra job (MAIN 175 starved-PASS list) — onto LIVE 611fca61
+| item | PASSed sha | status | new sha | reviewer |
+|---|---|---|---|---|
+| ob-m3ui-sololh | eca83a5d | REMERGED (j79/jfocus/jkiep joins) | 53f5e1c9 review/ob-m3ui-sololh-lrm | RV-169 |
+| kit-home-frame | f75a3f3c | REMERGED (jkitpage samples join) — kit-home-frame + kit-tassel-clear PASS | 760a4767 | RV-169 |
+| kit-bac-progress | 16fe9dca | PART: only tainghe-info-r5 9f6b252f (tap fixes) taken; cb221604 bậc label SUPERSEDED by OD 27/11 ~07:10Z (KIT-STAGE-R11) — tainghe-info ALL PASS, pcard-overlap PASS | 65bffe11 review/tainghe-info-lrm | RV-169 |
+| srvmerit-guard-r2-rv | 0bbb81fd | REMERGED (assemble union) | b7ff9582 | RV-163H |
+| kit-veil-buoi-r163 | 5b4f8c56 | REMERGED (jrank join) | 633fc1b4 | RV-169 |
+| s3e-display-fix-rv | 7e0cb6c4 (VERDICT PASS) | REMERGED (6 hand joins); test (b) Dư đồ 3 FAIL on LIVE map — reviewer judges | 93d3cb03 | RV-163H |
+| kit-text-first-2 | 166b3000 | ALREADY LIVE (ancestor of main) | — | — |
+UI batch on 611fca61 sent to RV-169: endcard-top 123d5b2c, kit-name-stranger 865ed91a, c3-seals 5097d773, nhv-areas 78f53ee8 (rebuilt on 611fca61; old 5fa42c59 force-replaced, it carried B1 r3 extras), screenveil c43e8b6c, mgskin-wire 31d6bdc3, mucluc 00f113ee, evframe 2046a8f3.
+Verdicts so far: RV-163H LAND READY ob-ngoaicung-lrm 9eb4e849 + e-pack-c-lrm de33f732; titles-daycard-lrm 16e8b575 FAIL on titles2 content vs TITLE REBALANCE (fix → titles2 author via MAIN). MAIN 175 confirmed the 11 frozen kit-sample keys.
+
+## HANDOVER (LAND-REMERGE-1, 27/11 ~08:50Z, rollover at START_CTX ≈3 % + 25 %)
+Open for a successor (coordinator opens it): (1) collect verdicts from RV-163F (e-pack-a c567d0a0, law1-land adb11f02, qc-noise 1318464e), RV-163H (srvmerit b7ff9582, s3e 93d3cb03), RV-169 (UI batch above); fix any FAIL on the same -lrm branch; (2) if LIVE moves again, merge new origin/main into each pending -lrm branch (tools: /home/user/wt/lrm-tools/relive.sh <dir>, asm.py, cf.py; worktrees /home/user/wt/lrm, lrm3..lrm22 — local only, re-create from the pushed branches); (3) still unrun on 611fca61: ob-m3ui.js (needs an old-save json), srvmerit-guard.js, veil-buoi-scan.js, nhv area-test (was 58/60 earlier), screen-veil re-run; b3 test log /home/user/wt/lrm-out/b3.txt if the box survives. (4) D19 rides act-move, D18/D3/D12 = Foreman D, D6/D20/D21 owned elsewhere.
