@@ -15,6 +15,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{render()}catch(e){}});
  const r=await p.evaluate(()=>{const o={},K4=["full","half","no","sab"];
   /* helpers: a fresh world per act (no factions, she is Hoàng hậu with time), the receiver's answer counted by jrcv's own __rcvN */
+ /* stat-pace (LIVE): the liking SETUP writes are exact (pace off for this test, as ag-moodknow / cold-faction; the paced rise has its own test dev/test/stat-pace.js) */window.SP_OFF=(window.SP_OFF||0)+1;
   const reset=s=>{__seed(s);S.facs=[];S.rank=7;S.queen=true;for(const x of rivals)if(x!==S)x.queen=false;S.kh=0;try{used=0}catch(e){}Q.length=0;
    for(const x of liveRivals(true))if(x!==S)x.p3FacM=-1};
   /* the receiver's answer: jrcv rcvPick wrapped (her own global), only the picks of THIS receiver to THIS asker are kept */
@@ -27,16 +28,16 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
     /* her card for an NPC's ask: PEND.rcvAsk builds the 4 answers she taps (the same RCVK opts an NPC picks from) */
   const herCard=(k,a,x)=>PEND.rcvAsk({k,a:key(a),x:x==null?null:x});
   /* ---- 1. Lập phe cùng: she → NPC (facAct lap) ---- */
-  reset(1);{const t=L()[0];const K=k61S();if(K)K[kOf61(t)]=3;affAdd(t,S,40);const h=facHTML();
+  reset(1);{const t=L()[0];const K=k61S();if(K)K[kOf61(t)]=3;affAdd(t,S,Math.max(40,netTh(t,"than")-aff(t,S)));/* parity-facfix: «likes her» = at least «thân» (a drawn start below 0 left +40 short) */const h=facHTML();
    o.lapBtn=new RegExp('data-fa="lap" data-fv="'+t.id+'"').test(h);const a=pick(t,S,()=>facAct("lap",{fv:String(t.id)}));
    o.lapAns=a.k;o.lapJoined=!!(facOf(S)&&facMembers(facOf(S)).includes(t));o.lapOk=a.k.length===1&&K4.includes(a.k[0])&&o.lapJoined===(a.k[0]==="full");
    reset(2);RCVK.facFound.opts(S,t)[0].go();o.lapYes=!!(facOf(S)&&facMembers(facOf(S)).includes(t))}
   /* ---- 2. Lập phe cùng: NPC → NPC (par3fac cx3:facFound + AGRUN) ---- */
-  reset(3);{const v=L()[0],y=L().find(x=>x!==v&&!sameHouse(v,x));affAdd(v,y,60);for(const x of L())if(x!==y)affAdd(v,x,-100);affAdd(v,S,-100);
+  reset(3);{const v=L()[0],y=L().find(x=>x!==v&&!sameHouse(v,x));affAdd(v,y,Math.max(60,netTh(v,"than")-aff(v,y)));/* parity-facfix: at least «thân» */for(const x of L())if(x!==y)affAdd(v,x,-100);affAdd(v,S,-100);
    const op=opt(v,"cx3:facFound");o.nnOpt=!!op&&op.t===y;const a=pick(y,v,()=>AGRUN["cx3:facFound"](v,op?op.t:y));o.nnAns=a.k;
    o.nnOk=a.k.length===1&&(!!facOf(v)===(a.k[0]==="full"));reset(4);RCVK.facFound.opts(v,y)[0].go();o.nnYes=!!(facOf(v)&&facMembers(facOf(v)).includes(y))}
   /* ---- 3. Lập phe cùng: NPC → HER (law 1 reverse; was never sent: p3FacFr / j10 dropped her) ---- */
-  reset(5);{const v=L()[0];affAdd(v,S,60);for(const x of L())if(x!==v)affAdd(v,x,-100);
+  reset(5);{const v=L()[0];affAdd(v,S,Math.max(60,netTh(v,"than")-aff(v,S)));/* parity-facfix: at least «thân» */for(const x of L())if(x!==v)affAdd(v,x,-100);
    const op=opt(v,"cx3:facFound");o.nhOpt=!!op&&op.t===S;const r=op?AGRUN["cx3:facFound"](v,S):"";o.nhSent=/rủ lập phe với ngươi/.test(String(r));
    const c=herCard("facFound",v);o.nhCard=!!c&&c.o.length===4&&c.o[0].n==="Nhận lời lập phe";Q.length=0;if(c){c.o[0].go()}o.nhYes=!!(facOf(v)&&facMembers(facOf(v)).includes(S))}
   /* ---- 4. Xin vào phe: she → NPC leader (facAct xin) and NPC → NPC leader (cx3:facJoin) ---- */
@@ -45,7 +46,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    reset(8);found(l,m);const g2=facOf(l);const v=L().find(x=>x!==l&&x!==m&&!facOf(x));affAdd(v,l,60);const op=opt(v,"cx3:facJoin");o.njOpt=!!op;
    const a2=pick(l,v,()=>AGRUN["cx3:facJoin"](v,l));o.njAns=a2.k;o.njOk=a2.k.length===1&&(facOf(v)===g2)===(a2.k[0]==="full"||a2.k[0]==="half")}
   /* ---- 5. Xin vào phe: NPC → HER faction (law 1 reverse; p3FacJoin dropped factions she leads) ---- */
-  reset(9);{const [m,v]=L();found(S,m);const f=facOf(S);o.herLead=facLeader(f)===S;affAdd(v,S,60);const op=opt(v,"cx3:facJoin");o.hjOpt=!!op&&op.t===S;
+  reset(9);{const [m,v]=L();found(S,m);const f=facOf(S);o.herLead=facLeader(f)===S;affAdd(v,S,Math.max(60,netTh(v,"quen")-aff(v,S)));/* lr5: at least «quen» (p3FacJoin), as rows 1/3/5 — the drawn start on LIVE can sit below −(60 − quen) */const op=opt(v,"cx3:facJoin");o.hjOpt=!!op&&op.t===S;
    const r=op?AGRUN["cx3:facJoin"](v,S):"";o.hjSent=/xin vào phe của ngươi/.test(String(r));
    const c=herCard("facJoin",v,f.id);o.hjCard=!!c&&c.o.length===4&&c.o[0].n==="Nhận vào phe";Q.length=0;if(c)c.o[0].go();o.hjYes=facOf(v)===f}
   /* ---- 6. Mời vào phe: she → NPC (facAct moi) and an NPC leader → her (j10 rcvAsk facInvite, her card) ---- */
