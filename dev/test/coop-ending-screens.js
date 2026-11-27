@@ -25,6 +25,9 @@ const st=p=>p.evaluate(()=>({n:S&&S.name,dead:!!(S&&S.dead),week:COOP.state.week
  ok(a.dead&&/\bkes-t-death\b/.test(a.cls)&&!a.hid,'host sees her own full-screen ending',a);
  ok(c.dead&&/\bkes-t-death\b/.test(c.cls)&&!c.hid,'guest sees her own full-screen ending',c);
  ok(await A.evaluate(n=>document.getElementById('modal').innerText.includes(n),nA)&&await B.evaluate(n=>document.getElementById('modal').innerText.includes(n),nB),'each ending screen names that seat\'s own person');
+ /* D-ENDRANK: each seat's «Phẩm cao nhất» = the rank / post THAT seat really held (ONE CORE j32 lifeTopRank), not the origin ceiling */
+ const pr=p=>p.evaluate(()=>{const r=[...document.querySelectorAll('#modal .kr')].find(x=>(x.querySelector('.krl')||{}).textContent==='Phẩm cao nhất');return{row:r?r.querySelector('.krv').textContent.trim():null,want:typeof lifeTopRank==='function'?lifeTopRank(S).n:null,stage:typeof rankStage==='function'?rankStage(S):''}});
+ {const x=await pr(A),y=await pr(B);ok(x.row&&x.row===x.want&&y.row&&y.row===y.want,'both seats: «Phẩm cao nhất» = the rank she really held',{host:x,guest:y})}
  await tap(A,'^Chuyển kiếp');await tap(B,'^Chuyển kiếp');
  for(let i=0;i<80;i++){await clear(A);await clear(B);const x=await st(A),y=await st(B);if(!x.dead&&!y.dead&&x.n&&y.n&&x.n!==nA&&y.n!==nB)break;await sleep(500)}
  const a2=await st(A),c2=await st(B);ok(!a2.dead&&a2.n&&a2.n!==nA&&!/\bkes\b/.test(a2.cls),'host: «Chuyển kiếp» → a new person, no ending screen left',a2);ok(!c2.dead&&c2.n&&c2.n!==nB&&!/\bkes\b/.test(c2.cls),'guest: «Chuyển kiếp» → a new person, no ending screen left',c2);

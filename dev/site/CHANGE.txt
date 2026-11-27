@@ -1,3 +1,4 @@
+Thẻ kết kiếp ghi đúng phẩm cao nhất nàng từng giữ: tú nữ bị ban hoa ghi «Tú nữ», cung nữ chưa được nâng ghi chức cung nữ cao nhất, tiểu thư chưa vào cung ghi «Chưa vào cung».
 Danh, Đức, Sủng, thiện cảm và oán càng cao càng khó lên thêm; một lần không còn tăng vọt quá mức.
 Sửa lỗi game đứng hình ở các khung lựa chọn dài (thẻ lựa chọn và chữ «Kéo xuống»).
 Thẻ cuối đêm và Sổ ghi: người quanh nàng gộp gọn, mỗi người có tên một dòng, còn lại ghi «… và N người khác».

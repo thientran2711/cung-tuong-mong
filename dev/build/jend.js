@@ -190,3 +190,12 @@ try{if(typeof dawn==="function"&&typeof kitDayTitleShow==="function"){const d0=d
 
 /* KIT §94b: game start = «Ngày 1 — <tên> · Chương 1 — <tên>» (owner OD 24/11 ~07:45Z; MAIN 117 OK): after a NEW life begins (week 0) the same card shows once; not for bots / sims */
 try{if(typeof start==="function"&&typeof kitDayTitleShow==="function"){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(!window.__bot&&typeof S!=="undefined"&&S&&!S.dead&&typeof wk==="function"&&wk()===0)setTimeout(()=>{try{if(S&&!S.dead&&wk()===0)kitDayTitleShow()}catch(e){}},600)}catch(e){}return r}}}catch(e){}
+
+/* D-ENDRANK (ONE CORE j32 lifeTopRank): the moment she is first GIVEN a real consort rank (edict of the 3 days, the one-card selection kept, kc / kc2 entry),
+   the best rank restarts from it: whatever the provisional origin ceiling wrote before (old saves: S.maxRank / the board trail S.rk) was never held. Once per life. */
+(function(){const given=()=>{try{if(S&&!S.dead&&!S.rkIn&&rankHeld(S)){S.rkIn=1;S.maxRank=S.rank|0;if(S.rk&&S.rk.t){S.rk.t=S.rk.t.filter(x=>x[2]!=="r");S.rk.mr=-1}}}catch(e){console.error("rankGiven",e)}};
+ const wrap=n=>{try{const f0=window[n];if(typeof f0!=="function")return;const f=function(){const r=f0.apply(this,arguments);given();return r};window[n]=f;
+  if(n==="selxEdict")selxEdict=f;else if(n==="selxSelDo")selxSelDo=f;else if(n==="kcEnter")kcEnter=f;else if(n==="kc2Enter")kc2Enter=f}catch(e){console.error(e)}};
+ ["selxEdict","selxSelDo","kcEnter","kc2Enter"].forEach(wrap)})();
+/* D-ENDRANK (same group): at home (never entered) her portrait / plate word is never a consort rank (kcInit S.rank=0 read «Đáp ứng»); jkc says «Tiểu thư» only with kcLore */
+(function(){if(typeof pMe!=="function")return;const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);try{if(rankStage(S)==="home"&&RANKS.some(x=>x.n===f.rw))f.rw="Tiểu thư"}catch(e){}return f};window.pMe=pMe})();
