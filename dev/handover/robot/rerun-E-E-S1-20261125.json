@@ -1903,6 +1903,314 @@
      "buoi": null
     }
    ]
+  },
+  {
+   "id": "E-S1-R1-speed-1-608519237",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "speed",
+   "botHarness": "bold",
+   "kiep": 1,
+   "seed": 608519237,
+   "dev": "fold",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "08a4ff8b → 8ea10d7e → 97e55a457 → f65d019b",
+    "deadButtons": 1,
+    "stuck": 0
+   },
+   "live": "Build 1b5137935266 → d3f360028603 (fix resume) → LIVE fb660cb78eec (pin=0) → pinned fb660cb78eec (pin repaired)",
+   "end": "Lãnh cung",
+   "type": "end",
+   "fate": "Tuổi xuân qua đi",
+   "death": false,
+   "age": 40,
+   "year": 23,
+   "rank": 0,
+   "buoi": 3162,
+   "steps": 66276,
+   "taps": 20388,
+   "exitPick": null,
+   "bugCounts": {
+    "crash": 1,
+    "harness": 6,
+    "note": 30,
+    "game": 6
+   },
+   "valid": "VALID",
+   "flags": [
+    "mixed build (fix resume)",
+    "mixed build (pin-server resume, pixi repaired at b978)",
+    "save-quota"
+   ],
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-speed-1-608519237-moments.md",
+    "review/rerun-E-S1-E-S1-R1-speed-1-608519237-review.md"
+   ],
+   "bugs": [
+    {
+     "type": "crash",
+     "msg": "tab crashed (Page crashed) at buổi 303",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «kemo kemo-ghen kemo-live kemo-m-flicker»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): picker stalled 95 steps, no close / next → later visits unstuck at once by taps",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "picker stalled 95 steps / 61 s on .kmov «» without a real tap (area 95, deadEnd 1; last refused tap: gone «Ta biết rồi») → tapped «Ta biết rồi»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)",
+     "n": 157,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (210 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Tổ mẫu ban») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (234 items, every confirm disabled or greyed; card says «Thường Lụa Hàng Châu Vải vóc · may áo PHẨM Thường LOẠI Vải vóc · may áo HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC may thành áo lụa Hàng Châu ») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (246 items, every confirm disabled or greyed; card says «Thường Váy sa xanh ngọc Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã ĐƯỢC mặc: Sắc +2 LAI LỊCH Hoàng thượng ban, Tháng giêng,») on «Biếu quà làm lành» → ✕",
+     "n": 2,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (264 items, every confirm disabled or greyed; card says «Thường Lụa Hàng Châu Vải vóc · may áo PHẨM Thường LOẠI Vải vóc · may áo HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC may thành áo lụa Hàng Châu ») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (274 items, every confirm disabled or greyed; card says «Thường Lụa Hàng Châu Vải vóc · may áo PHẨM Thường LOẠI Vải vóc · may áo HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC may thành áo lụa Hàng Châu ») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (278 items, every confirm disabled or greyed; card says «Thường Lụa Hàng Châu Vải vóc · may áo PHẨM Thường LOẠI Vải vóc · may áo HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC may thành áo lụa Hàng Châu ») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (324 items, every confirm disabled or greyed; card says «Thường Váy sa xanh ngọc Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã ĐƯỢC mặc: Sắc +2 LAI LỊCH Hoàng thượng ban, Tháng năm, n») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (338 items, every confirm disabled or greyed; card says «Thường Váy sa xanh ngọc Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã ĐƯỢC mặc: Sắc +2 LAI LỊCH Hoàng thượng ban, Tháng năm, n») on «Biếu quà làm lành» → ✕",
+     "n": 2,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (350 items, every confirm disabled or greyed; card says «Thường Váy sa xanh ngọc Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã ĐƯỢC mặc: Sắc +2 LAI LỊCH Hoàng thượng ban, Tháng năm, n») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (356 items, every confirm disabled or greyed; card says «Tinh phẩm Nghiên mực Đoan Khê Lễ vật PHẨM Tinh phẩm LOẠI Lễ vật ĐƯỢC đem tặng: hợp ý LAI LỊCH Thưởng hội thi Nghiên mực Đoan Khê CẦN nàng ta») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (368 items, every confirm disabled or greyed; card says «Tinh phẩm Nghiên mực Đoan Khê Lễ vật PHẨM Tinh phẩm LOẠI Lễ vật ĐƯỢC đem tặng: hợp ý LAI LỊCH Thưởng hội thi Nghiên mực Đoan Khê CẦN nàng ta») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (394 items, every confirm disabled or greyed; card says «Tinh phẩm Nghiên mực Đoan Khê Lễ vật PHẨM Tinh phẩm LOẠI Lễ vật ĐƯỢC đem tặng: hợp ý LAI LỊCH Thưởng hội thi Nghiên mực Đoan Khê CẦN nàng ta») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (414 items, every confirm disabled or greyed; card says «Tinh phẩm Nghiên mực Đoan Khê Lễ vật PHẨM Tinh phẩm LOẠI Lễ vật ĐƯỢC đem tặng: hợp ý LAI LỊCH Thưởng hội thi Nghiên mực Đoan Khê CẦN nàng ta») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (426 items, every confirm disabled or greyed; card says «Tinh phẩm Nghiên mực Đoan Khê Lễ vật PHẨM Tinh phẩm LOẠI Lễ vật ĐƯỢC đem tặng: hợp ý LAI LỊCH Thưởng hội thi Nghiên mực Đoan Khê CẦN nàng ta») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (426 items, every confirm disabled or greyed; card says «Thường Váy sa xanh ngọc Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã ĐƯỢC mặc: Sắc +2 LAI LỊCH Hoàng thượng ban, Tháng năm, n») on «Biếu quà làm lành» → ✕",
+     "n": 2,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (444 items, every confirm disabled or greyed; card says «Tinh phẩm Nghiên mực Đoan Khê Lễ vật PHẨM Tinh phẩm LOẠI Lễ vật ĐƯỢC đem tặng: hợp ý LAI LỊCH Thưởng hội thi Nghiên mực Đoan Khê CẦN nàng ta») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (444 items, every confirm disabled or greyed; card says «Tinh phẩm Nghiên mực Đoan Khê Lễ vật PHẨM Tinh phẩm LOẠI Lễ vật ĐƯỢC đem tặng: hợp ý LAI LỊCH Thưởng hội thi Nghiên mực Đoan Khê TỐN không Đ») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (456 items, every confirm disabled or greyed; card says «Thường Váy sa xanh ngọc Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã ĐƯỢC mặc: Sắc +2 LAI LỊCH Hoàng thượng ban, Tháng năm, n») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (470 items, every confirm disabled or greyed; card says «Thường Váy sa xanh ngọc Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã ĐƯỢC mặc: Sắc +2 LAI LỊCH Hoàng thượng ban, Tháng năm, n») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (486 items, every confirm disabled or greyed; card says «Tinh phẩm Nghiên mực Đoan Khê Lễ vật PHẨM Tinh phẩm LOẠI Lễ vật ĐƯỢC đem tặng: hợp ý LAI LỊCH Thưởng hội thi Nghiên mực Đoan Khê TỐN không Đ») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (524 items, every confirm disabled or greyed; card says «Tinh phẩm Nhân sâm trăm năm Thuốc bổ PHẨM Tinh phẩm LOẠI Thuốc bổ ĐƯỢC dùng: Sức +25·an thai LAI LỊCH Thái hậu ban Nhân sâm trăm năm TỐN khô») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (522 items, every confirm disabled or greyed; card says «Tinh phẩm Nghiên mực Đoan Khê Lễ vật PHẨM Tinh phẩm LOẠI Lễ vật ĐƯỢC đem tặng: hợp ý LAI LỊCH Thưởng hội thi Nghiên mực Đoan Khê TỐN không Đ») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (538 items, every confirm disabled or greyed; card says «Tinh phẩm Nghiên mực Đoan Khê Lễ vật PHẨM Tinh phẩm LOẠI Lễ vật ĐƯỢC đem tặng: hợp ý LAI LỊCH Thưởng hội thi Nghiên mực Đoan Khê TỐN không Đ») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (540 items, every confirm disabled or greyed; card says «Tinh phẩm Nghiên mực Đoan Khê Lễ vật PHẨM Tinh phẩm LOẠI Lễ vật ĐƯỢC đem tặng: hợp ý LAI LỊCH Thưởng hội thi Nghiên mực Đoan Khê TỐN không Đ») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (558 items, every confirm disabled or greyed; card says «Tinh phẩm Nhân sâm trăm năm Thuốc bổ PHẨM Tinh phẩm LOẠI Thuốc bổ ĐƯỢC dùng: Sức +25·an thai LAI LỊCH Thái hậu ban Nhân sâm trăm năm TỐN khô») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «kemo kemo-ghen kemo-m-flicker»",
+     "n": 11,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (578 items, every confirm disabled or greyed; card says «Tinh phẩm Nhân sâm trăm năm Thuốc bổ PHẨM Tinh phẩm LOẠI Thuốc bổ ĐƯỢC dùng: Sức +25·an thai LAI LỊCH Thái hậu ban Nhân sâm trăm năm TỐN khô») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (596 items, every confirm disabled or greyed; card says «Tinh phẩm Nhân sâm trăm năm Thuốc bổ PHẨM Tinh phẩm LOẠI Thuốc bổ ĐƯỢC dùng: Sức +25·an thai LAI LỊCH Thái hậu ban Nhân sâm trăm năm TỐN khô») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (644 items, every confirm disabled or greyed; card says «Tinh phẩm Nhân sâm trăm năm Thuốc bổ PHẨM Tinh phẩm LOẠI Thuốc bổ ĐƯỢC dùng: Sức +25·an thai LAI LỊCH Thái hậu ban Nhân sâm trăm năm TỐN khô») on «Biếu quà làm lành» → ✕",
+     "n": 2,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (668 items, every confirm disabled or greyed; card says «Tinh phẩm Nhân sâm trăm năm Thuốc bổ PHẨM Tinh phẩm LOẠI Thuốc bổ ĐƯỢC dùng: Sức +25·an thai LAI LỊCH Thái hậu ban Nhân sâm trăm năm TỐN khô») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (754 items, every confirm disabled or greyed; card says «Tinh phẩm Nhân sâm trăm năm Thuốc bổ PHẨM Tinh phẩm LOẠI Thuốc bổ ĐƯỢC dùng: Sức +25·an thai LAI LỊCH Thái hậu ban Nhân sâm trăm năm TỐN khô») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "item pick grid «Biếu quà làm lành» re-opened 3× by «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán » with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi",
+     "n": 40,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "no way out: no button of the dialog can be reached (all below the screen / clipped, nothing scrolls): #kdaytc «» — lost: Ô lưu / Xem bản thân / Sắc49Tài98Tâm cơ32Đức10D / Bạc20Sức93/98",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Thường Son sáp Hộp son môi dùng khi điểm trang (tô»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «kemo kemo-act-ghen kemo-m-flicker»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Tặng quà)",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "QuotaExceededError: the game save no longer fits localStorage (j6 save() swallows it: every later save is lost)",
+     "n": 1331,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "SAVE STALE: the stored save stopped following the live game (QuotaExceededError)",
+     "n": 2,
+     "buoi": null
+    }
+   ]
   }
  ],
  "parked": [
