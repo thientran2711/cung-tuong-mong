@@ -1,6 +1,7 @@
 /* lc-stills (OWNER-UI-C, 27/11): REAL game stills of lãnh cung (kit lãnh cung frame, image pale) + dead (rank frame b/w): thumb row + card, Fold + iPad, full screen. The old kst-strip.js clones an alive rank-frame card (NOT the game) — do not send its output.
    usage: node dev/test/lc-stills.js <outdir>  → <outdir>/lc-{fold,ipad}-{lc,dead}.png + thumbs-{dev}.png (dsf 2 crop of the strip) */
 const path=require('path');const {chromium}=require('playwright');const OUT=process.argv[2];
+require('./lib/fresh-build')();
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost'}}:{});
 for(const [n,w,h] of [["fold",755,1000],["ipad",1180,820]]){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:2});
  await p.goto('file://'+path.resolve('dev/index.html'));await p.waitForTimeout(2500);

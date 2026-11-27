@@ -1,6 +1,7 @@
 /* kst-scan (OWNER-UI-B, 27/11): every place a lãnh cung / dead person's picture is drawn must carry the kit portrait state (.kst-lc pale own colours / .kst-dead b/w).
    Table «context | pictures of her found | with state | FAIL». usage: node dev/test/kst-scan.js [fold|ipad] ; exit 1 on any FAIL */
 const path=require('path');const {chromium}=require('playwright');
+require('./lib/fresh-build')();
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});let bad=0;
 for(const [n,w,h] of [["fold",755,1000],["ipad",1180,820]]){if(process.argv[2]&&process.argv[2]!==n)continue;const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:1});
  await p.goto('file://'+path.resolve('dev/index.html'));await p.waitForTimeout(2500);

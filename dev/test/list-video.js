@@ -1,6 +1,7 @@
 /* list-video (OWNER-UI-C, 27/11): the owner-ui-a list take, one mp4 per device: lãnh cung (pale, image only) → dead consort (b/w incl. frame) → dead man → dead kid → dead servant → stage lãnh cung.
    usage: node dev/test/list-video.js fold|ipad <outdir>   → <outdir>/list-<dev>.mp4 + still per scene (<outdir>/scene-<dev>-N.png, looked 3× before upload). Shots never go in git. */
 const path=require('path'),fs=require('fs'),cp=require('child_process');const {chromium}=require('playwright');
+require('./lib/fresh-build')();
 const [,,DEV,OUT]=process.argv;const [W,H]=DEV==='fold'?[755,1000]:[1180,820];fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost'}}:{});
 const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,recordVideo:{dir:OUT+'/rec-'+DEV,size:{width:W,height:H}}});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));

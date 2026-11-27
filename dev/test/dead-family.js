@@ -1,6 +1,7 @@
 /* dead-family (OWNER-UI-C, 27/11, RV-172 / MAIN 178): EVERY portrait surface of a DEAD person (consort, man, kid, servant) × Fold + iPad: strip face (visible), open card portrait, record rows in «Thông tin» (.kdrec), the word «Đã khuất» (never «Đã mất») in the panel.
    Table «surface | found | state | record | word | FAIL». usage: node dev/test/dead-family.js ; exit 1 on any FAIL */
 const path=require('path');const {chromium}=require('playwright');
+require('./lib/fresh-build')();
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost'}}:{});let bad=0;
 for(const [n,w,h] of [["fold",755,1000],["ipad",1180,820]]){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:1});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto('file://'+path.resolve('dev/index.html'));await p.waitForTimeout(2500);
