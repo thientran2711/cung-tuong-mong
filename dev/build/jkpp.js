@@ -8,7 +8,7 @@
            the same existing buttons itself (j21 seeBtn / scoutBtn «Sai tai mắt dò nơi ở» / visitBtn, jgift courtMeet). The kit only owns the LOOK: title «Tìm gặp» /
            «Ghé cung», one short small line (place · odds word · khắc, or the lock reason), the source button's data-* attributes + disabled state are kept.
    Every other pcard (Việc nhờ, Kỳ tuyển tú, Giao tình, dialogs) keeps LIVE §6.4 unchanged. Built INSIDE the card after kitPcFix/kitPcKeyFit (no observer). */
-const KPP={ws:46,wsMin:30,cur:"info",tabs:[["info","Thông tin"],["rel","Giao tình"]],on:["court","rv","men","staff","kid","kvo","kin","hon","qt"]};
+const KPP={ws:46,wsMin:30,fSteps:[1,.96,.92,.89,.86],cur:"info",tabs:[["info","Thông tin"],["rel","Giao tình"]],on:["court","rv","men","staff","kid","kvo","kin","hon","qt"]};
 /* who is this card about: pcard stamps the face key (pv/pEmp/pTH/pMaid f.w) as data-kppw; men / staff / kids fall back to the name */
 function kppWho(pc){try{const w=(pc.dataset.kppw||"").split(":"),k=w[0];
  if(k==="r"){const v=rivals.find(x=>String(x.id)===w[1]);return v?{v,kind:"rv"}:null}
@@ -47,11 +47,32 @@ function kitPPBtns(pc){try{const R=pc.querySelector(":scope>.pcr");if(!R)return;
  if(!h){if(box)box.remove();return}if(!box){box=document.createElement("div");box.className="kppbtns";R.appendChild(box)}
  if(box.dataset.h!==h){box.innerHTML=h;box.dataset.h=h}}catch(e){console.error("kitPPBtns",e)}}
 window.kitPPBtns=kitPPBtns;
-function kitPPTab(pc,v){pc.dataset.kppv=v;KPP.cur=v;pc.querySelectorAll(":scope>.pcr>.kppt>.pct").forEach(x=>x.classList.toggle("on",x.dataset.kppv===v));requestAnimationFrame(()=>kitPPWear(pc))}
+/* ONE FACT ONCE in «Thông tin» (law 11, every KPP.on kind): one label = one line. Labels are read from the kit rows (.krl), the stat chips (.kstl) and the
+   «Label: …» lines of the facts block; «Tính» = «Tính nết». A later line with a label already shown is dropped (an informative one replaces an earlier «chưa rõ»);
+   a facts line keeps only its «Hay: …» part (.past) when its label is already shown. Nothing is deleted from the game data — only the repeat on this card. */
+const KPP_LBL={"tính":"tính nết","tính cách":"tính nết"};
+function kppLbl(t){t=String(t||"").replace(/[:：]\s*$/,"").replace(/\s+/g," ").trim().toLowerCase();return KPP_LBL[t]||t}
+function kppUnk(t){return /^(chưa rõ|\?|không rõ|chưa biết)$/i.test(String(t||"").replace(/\s+/g," ").trim())}
+function kitPPDedupe(box){try{const seen={};
+ const rowOf=(lab,val,el)=>{const k=kppLbl(lab);if(!k)return;const o=seen[k];
+  if(!o){seen[k]={el,unk:kppUnk(val)};return}
+  if(o.unk&&!kppUnk(val)){o.el.dataset.kppdup="1";o.el.hidden=true;seen[k]={el,unk:false};return}
+  el.dataset.kppdup="1";el.hidden=true};
+ box.querySelectorAll(".pcf .kr").forEach(r=>{const l=r.querySelector(":scope>.krl"),v=r.querySelector(":scope>.krv");if(l)rowOf(l.textContent,v?v.textContent:"",r)});
+ box.querySelectorAll(".kpfacts .pcinfo>span").forEach(sp=>{if(sp.dataset.kppd)return;const m=/^\s*([^:：]{1,24})[:：]/.exec(sp.firstChild&&sp.firstChild.nodeType===3?sp.firstChild.textContent:"");if(!m)return;const k=kppLbl(m[1]);
+  if(!seen[k]){seen[k]={el:sp,unk:false};return}const hay=sp.querySelector(":scope>.past");sp.dataset.kppd="1";if(hay)sp.replaceChildren(hay);else{sp.hidden=true;sp.dataset.kppdup="1"}});
+ box.querySelectorAll(".kst").forEach(c=>{const l=c.querySelector(".kstl"),v=c.querySelector(".kstv");if(l)rowOf(l.textContent,v?v.textContent:"",c)});
+ box.querySelectorAll(".chips>.chip").forEach(c=>{const m=/^\s*(Tính nết|Tính)\b/i.exec(c.textContent||"");if(m)rowOf(m[1],c.textContent.slice(m[0].length),c)})}catch(e){console.error("kitPPDedupe",e)}}
+window.kitPPDedupe=kitPPDedupe;
+function kitPPTab(pc,v){pc.dataset.kppv=v;KPP.cur=v;pc.querySelectorAll(":scope>.pcr>.kppt>.pct").forEach(x=>x.classList.toggle("on",x.dataset.kppv===v));requestAnimationFrame(()=>{kitPPWear(pc);kitPPFitTab(pc)})}
 /* the wear row of «Thông tin» stays ONE line: slot size = the width / slots (KPP.ws max 46, min KPP.wsMin), so nothing wraps under the fold of the tab */
 function kitPPWear(pc){try{const kw=pc.querySelector(':scope>.pcr>.kppv[data-v="info"]>.kwear');if(!kw||!kw.offsetParent)return;const n=kw.querySelectorAll(":scope>.kitem").length;if(!n)return;
  const W=kw.clientWidth,g=4;const z=Math.max(KPP.wsMin,Math.min(KPP.ws,Math.floor((W-g*(n-1))/n)));kw.style.setProperty("--kppws",z+"px")}catch(e){}}
 window.kitPPWear=kitPPWear;
+/* the open tab never scrolls when a step smaller text fits it: font steps 1 → KPP.fMin em (like the name font-fit); still too long at the floor → that tab scrolls on its own (never cut) */
+function kitPPFitTab(pc){try{const v=pc.querySelector(`:scope>.pcr>.kppv[data-v="${pc.dataset.kppv}"]`);if(!v||!v.offsetParent)return;v.style.removeProperty("--kppif");
+ for(const f of KPP.fSteps){v.style.setProperty("--kppif",f);if(v.scrollHeight<=v.clientHeight+1)return}}catch(e){}}
+window.kitPPFitTab=kitPPFitTab;
 function kppOn(pc){try{return pc.closest("#panel")&&typeof tab!=="undefined"&&KPP.on.includes(tab)}catch(e){return false}}
 function kitPP(pc,force){try{if(!pc||!pc.classList||!pc.classList.contains("kpwide")||!pc.matches("[data-k2]")||!(force===true||pc.dataset.kpp==="1"||kppOn(pc)))return;const L=pc.querySelector(":scope > .pcl"),R=pc.querySelector(":scope > .pcr");if(!L||!R)return;
  let V=pc.dataset.kpp==="1"?{info:R.querySelector(':scope>.kppv[data-v="info"]'),rel:R.querySelector(':scope>.kppv[data-v="rel"]'),act:R.querySelector(':scope>.kppact')}:null;
@@ -73,8 +94,7 @@ function kitPP(pc,force){try{if(!pc||!pc.classList||!pc.classList.contains("kpwi
  {const bs=[...pc.querySelectorAll(".kppbtns")];bs.slice(1).forEach(b=>b.remove());if(bs[0]&&bs[0].parentNode!==R)R.appendChild(bs[0])}
  const sc=L.querySelector(":scope>.kplscr");[...(sc?sc.children:[])].forEach(c=>V.info.appendChild(c));/* anything else under the portrait: Thông tin, never lost */
  [...L.children].forEach(c=>{if(!c.matches(".pcname,.pcrk,.pcp,.kplscr,.kpnm,.pgh,.kppbtns"))V.info.appendChild(c)});
- /* one fact once: the «Tính nết: …» trait words of the facts line repeat the «Tính nết» row of .pcf → only its «Hay: …» part stays */
- if(V.info.querySelector(".pcf")&&/Tính nết/.test(V.info.querySelector(".pcf").textContent))V.info.querySelectorAll(".kpfacts .pcinfo>span").forEach(sp=>{if(sp.dataset.kppd||!/^\s*Tính nết:/.test(sp.textContent))return;const hay=sp.querySelector(":scope>.past");sp.dataset.kppd="1";if(hay){sp.replaceChildren(hay)}else sp.remove()});
+ kitPPDedupe(V.info);
  for(const k of ["info","rel"])V[k].classList.toggle("kppempty",!V[k].children.length);
  kitPPBtns(pc);kitPPTab(pc,pc.dataset.kppv||KPP.cur)}catch(e){console.error("kitPP",e)}}
 window.kitPP=kitPP;
@@ -82,18 +102,18 @@ window.kitPP=kitPP;
  if(typeof pcard==="function"){const p0=pcard;pcard=function(o){const h=p0.apply(this,arguments);try{const w=o&&o.f&&o.f.w;if(w&&typeof h==="string")return h.replace(/<div class="pc(?=[ "])/,`<div data-kppw="${w.join(":")}" class="pc`)}catch(e){}return h};window.pcard=pcard}
  if(typeof kitPcFix==="function"){const f0=kitPcFix;kitPcFix=function(pc){const r=f0.apply(this,arguments);kitPP(pc);return r};window.kitPcFix=kitPcFix}
  if(typeof kitPcKeyFit==="function"){const k0=kitPcKeyFit;kitPcKeyFit=function(pc){const r=k0.apply(this,arguments);kitPP(pc);return r};window.kitPcKeyFit=kitPcKeyFit}
- addEventListener("resize",()=>{clearTimeout(window.__kppR);window.__kppR=setTimeout(()=>document.querySelectorAll(".pc[data-kpp]").forEach(kitPPWear),120)});
+ addEventListener("resize",()=>{clearTimeout(window.__kppR);window.__kppR=setTimeout(()=>document.querySelectorAll(".pc[data-kpp]").forEach(pc=>{kitPPWear(pc);kitPPFitTab(pc)}),120)});
  const P="html body .pc.kpwide[data-k2][data-kpp]";
  const st=document.createElement("style");st.id="kit-pp";st.textContent=`
 ${P}>.pcl>.kplscr{display:none!important}
-${P}>.pcr>.kppbtns{display:flex;gap:8px;margin:6px 0 0;padding-top:6px;border-top:1px solid var(--line,#d8c3a0)}
-${P}>.pcr>.kppbtns>.kbtn{flex:1 1 0;min-width:0;margin:0;min-height:48px;padding:5px 8px;white-space:normal;text-align:center;line-height:1.2}
+${P}>.pcr>.kppbtns{display:flex;gap:8px;margin:4px 0 0;padding-top:5px;border-top:1px solid var(--line,#d8c3a0)}
+${P}>.pcr>.kppbtns>.kbtn{flex:1 1 0;min-width:0;margin:0;min-height:42px;padding:4px 8px;white-space:normal;text-align:center;line-height:1.2}
 ${P}>.pcr>.kppbtns>.kbtn>small{display:block;font-size:.74em;font-weight:400;opacity:.9;margin-top:1px;line-height:1.25}
 ${P}>.pcr{overflow:hidden!important;display:flex!important;flex-direction:column;padding-bottom:4px}
 ${P}>.pcr>*{flex-shrink:0}
 ${P}>.pcr>.kppt{display:flex;gap:4px;margin:0 0 6px;flex-wrap:nowrap}
 ${P}>.pcr>.kppt>.pct{flex:1 1 0;text-align:center;white-space:nowrap}
-${P}>.pcr>.kppv{display:none;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent}
+${P}>.pcr>.kppv{font-size:calc(var(--kppif,1)*1em);display:none;min-height:0;overflow-y:auto;overflow-x:hidden;scrollbar-width:thin;scrollbar-color:var(--gold,#b8892f) transparent}
 ${P}>.pcr>.kppact{display:none!important}
 ${P}[data-kppv="info"]>.pcr>.kppv[data-v="info"],${P}[data-kppv="rel"]>.pcr>.kppv[data-v="rel"]{display:block;flex:1 1 0}
 ${P}>.pcr>.kppv.kppempty::before{content:"Chưa rõ.";display:block;color:var(--dim);font-size:.9em;padding:6px 2px}

@@ -2,8 +2,8 @@
    usage: node dev/test/kit-person-panel.js <url> <W>x<H> <outdir> <tag> [shots=1]
    Opens every person tab (Hậu cung Chí tôn / Phi tần / Nam nhân / Cung nhân, Hoàng tự), taps up to 3 people each, and per card prints:
    kpp (built), tabs (must be exactly Thông tin + Giao tình), visible act buttons (must be 0: info only), the card buttons (≤ 2, titles Tìm gặp / Ghé cung,
-   whole), portrait width + share of screen height, boxes that scroll, name cut, page errors. On LIVE (no kpp) it only measures (before column).
-   Exit 1 on: a built card with a tab set ≠ [Thông tin, Giao tình], a visible act button, > 2 card buttons or one not whole, a scrolling card or tab, a cut name. */
+   whole), repeated label in «Thông tin» (one fact once), portrait width + share of screen height, boxes that scroll, name cut, page errors. On LIVE (no kpp) it only measures (before column).
+   Exit 1 on: a built card with a tab set ≠ [Thông tin, Giao tình], a visible act button, > 2 card buttons or one not whole, a scrolling card or tab, a repeated label in «Thông tin», a cut name. */
 const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG,SHOTS]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,reducedMotion:'reduce'});
@@ -37,9 +37,10 @@ const [,,BASE,SZ,OUT,TAG,SHOTS]=process.argv;const [W,H]=SZ.split('x').map(Numbe
   for(let i=0;i<Math.min(3,Math.max(1,n));i++){
    if(n>1){await p.evaluate(i=>{const a=[...document.querySelectorAll('#panel .kpstrip button, #panel [data-pi]')];if(a[i])a[i].click()},i);await settle()}
    const m=await meas();m.tabk=t;m.i=i;
-   if(m.kpp){for(const v of ['rel','info']){await p.evaluate(v=>{const b=document.querySelector(`#panel .pc .kppt .pct[data-kppv="${v}"]`);if(b)b.click()},v);await p.waitForTimeout(250);const s=await p.evaluate(()=>{const pc=document.querySelector('#panel .pc');const v=pc.querySelector(`:scope>.pcr>.kppv[data-v="${pc.dataset.kppv}"]`);return{v:pc.dataset.kppv,shown:!!(v&&v.offsetParent),scroll:v?v.scrollHeight>v.clientHeight+3:null,over:v?v.scrollHeight-v.clientHeight:null,txt:v?v.textContent.trim().slice(0,60):''}});m['tab_'+v]=s;if(+SHOTS!==0&&i===0)await p.screenshot({path:`${OUT}/${TAG}-${t}-${v}.jpg`,type:'jpeg',quality:72})}
+   if(m.kpp){for(const v of ['rel','info']){await p.evaluate(v=>{const b=document.querySelector(`#panel .pc .kppt .pct[data-kppv="${v}"]`);if(b)b.click()},v);await p.waitForTimeout(250);const s=await p.evaluate(()=>{const pc=document.querySelector('#panel .pc');const v=pc.querySelector(`:scope>.pcr>.kppv[data-v="${pc.dataset.kppv}"]`);const N=t=>{t=String(t||'').replace(/[:：]\s*$/,'').replace(/\s+/g,' ').trim().toLowerCase();return t==='tính'||t==='tính cách'?'tính nết':t};const labs=[];if(v&&pc.dataset.kppv==='info'){v.querySelectorAll('.krl,.kstl').forEach(e=>{if(e.offsetParent)labs.push(N(e.textContent))});v.querySelectorAll('.kpfacts .pcinfo>span').forEach(e=>{if(!e.offsetParent)return;const m=/^\s*([^:：]{1,24})[:：]/.exec(e.firstChild&&e.firstChild.nodeType===3?e.firstChild.textContent:'');if(m)labs.push(N(m[1]))});v.querySelectorAll('.chips>.chip').forEach(e=>{if(e.offsetParent&&/^\s*(Tính nết|Tính)\b/i.test(e.textContent))labs.push('tính nết')})}
+    const dup=[...new Set(labs.filter((x,i)=>x&&labs.indexOf(x)!==i))];return{v:pc.dataset.kppv,dup,shown:!!(v&&v.offsetParent),scroll:v?v.scrollHeight>v.clientHeight+3:null,over:v?v.scrollHeight-v.clientHeight:null,txt:v?v.textContent.trim().slice(0,60):''}});m['tab_'+v]=s;if(+SHOTS!==0&&i===0)await p.screenshot({path:`${OUT}/${TAG}-${t}-${v}.jpg`,type:'jpeg',quality:72})}
    }
    else if(+SHOTS!==0&&i===0)await p.screenshot({path:`${OUT}/${TAG}-${t}.jpg`,type:'jpeg',quality:72});
    R.push(m);if(m.none)break}}
- const bad=R.filter(m=>m.kpp&&(m.btn||m.scroll.length||m.tabs.join('|')!=='Thông tin|Giao tình'||m.cbtn.length>2||m.cbcut||m.cbtn.some(x=>!/^(Tìm gặp|Ghé cung)/.test(x))||m.nameCut||(m.tab_info&&m.tab_info.scroll)||(m.tab_rel&&m.tab_rel.scroll)));
+ const bad=R.filter(m=>m.kpp&&(m.btn||m.scroll.length||m.tabs.join('|')!=='Thông tin|Giao tình'||m.cbtn.length>2||m.cbcut||m.cbtn.some(x=>!/^(Tìm gặp|Ghé cung)/.test(x))||m.nameCut||(m.tab_info&&(m.tab_info.scroll||(m.tab_info.dup||[]).length))||(m.tab_rel&&m.tab_rel.scroll)));
  console.log(JSON.stringify({TAG,W,H,R,errs,bad:bad.length}));await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
