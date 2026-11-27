@@ -43,7 +43,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
  const ob=await p.evaluateHandle(()=>[...document.querySelectorAll('#modal button')].find(x=>x.offsetParent!==null&&/Theo thái giám/.test(x.textContent))||null);
  const obe=ob.asElement();ok(!!obe,dev+': the gate option is on screen',obe?undefined:await p.evaluate(()=>({mh:document.getElementById('modal').hidden,Q:Q.map(m=>m.t),btn:[...document.querySelectorAll('#modal button')].map(x=>x.textContent.trim().slice(0,30)+(x.offsetParent?'':'(inv)')),ov:[...document.querySelectorAll('.kmov,#kroul,#kroulw,.kscn,#dawn,#kpodov')].map(x=>x.id||x.className)})));if(!obe){await ctx.close();continue}
  await obe.click();
- let covRun=0,covMax=0,noFlag=0,reached=false,steps=0;const tr=[];
+ let covRun=0,covMax=0,noFlag=0,reached=false,steps=0,shotScene=0;const tr=[];
  for(let i=0;i<120&&!reached;i++){await sleep(300);
   const s=await p.evaluate(()=>{const t=document.getElementById('rtoast');const held=!!(t&&RF.held&&t.classList.contains('on'));let cov=false,nx=null;
    if(held){const b=t.querySelector('.kres-next')||t;const r=b.getBoundingClientRect();if(r.width){const x=r.left+r.width/2,y=r.top+r.height/2;const h=document.elementFromPoint(x,y);cov=!h||!(t.contains(h)||h.id==='kxcatch');nx=[x,y]}}
@@ -53,6 +53,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
    if(card){const o=[...M.querySelectorAll('button')].find(x=>x.offsetParent!==null&&/Cất đồ/.test(x.textContent));const r=o&&o.getBoundingClientRect();const h=r&&r.width?document.elementFromPoint(r.left+r.width/2,r.top+r.height/2):null;card=!!(h&&o.contains(h))}
    return{held,cov,nx,scene:!!sc,flag:document.body.classList.contains('kscn-on'),box:br&&br.width?[br.left+br.width/2,br.top+br.height-16]:null,card,q0:Q[0]&&String(Q[0].t||'').slice(0,24),mh:M?M.hidden:null}});
   tr.push([s.held?1:0,s.cov?1:0,s.scene?1:0,s.flag?1:0,s.card?1:0,s.q0]);if(tr.length>40)tr.shift();
+  if(s.held&&s.scene&&!shotScene){shotScene=1;await sleep(900);await p.screenshot({path:path.join(SHOTS,'coop-qcard-held-scene-'+dev+(MUT?'-mut':'')+'.png')}).catch(()=>{})}
   covRun=s.held&&s.cov?covRun+1:0;covMax=Math.max(covMax,covRun);if(s.scene&&!s.flag)noFlag++;
   if(s.card){reached=true;break}
   /* the player taps what is on top: the held card's «Tiếp ▸» when it is the top, else the scene's line */
