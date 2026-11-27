@@ -3,20 +3,20 @@
    F1 month hook   : NPC roads of maids/eunuchs/men also run in a kẻ-hầu life (cnv, 24 months): chapters played > 0
    F2 endings      : tags an NPC can be dealt (every road of every NPC kind, every sign): with «ngươi» / rare ✦ → 0
    F3 «lần trước»  : a first nr_* offer card from every asker kind shows «chuyện lần trước» → 0
-   F4 voice        : help cards per asker kind: wrong self-word, «ta» in her quote, lowercase after a full stop inside the quote,
+   F4 voice        : help cards per asker kind: wrong self-word, «ta» in her quote, lowercase after a full stop inside the quote (\\p{Ll}: the old [a-zà-ỹđ] range also matched capital Đ/Ế… of «Đáp ứng», «Đế…» = 16 false hits, e.fac4),
                      a man/eunuch named «nàng» in options/steps/loss/result lines → 0
    F5 ONE CORE     : typed numbers in jnroad*.js code (option odds/losses, odds clamp, stat/loyal defaults, pick sizes) → 0 (source scan)
    F6 help hold    : a maid/eunuch/man/consort whose nr_* quest is active plays the chapter anyway → 0; an unshown queued one is withdrawn */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
 const [,,URL,LABEL]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];
- const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
+ const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);await p.addInitScript(require('./lib/qdrain').init);/* headless month loop: __bot + answer the night choice (lib/qdrain.js) */
  p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
  await p.waitForFunction(()=>typeof start==='function'&&typeof nrMaidL==='function'&&typeof nrMenL==='function',null,{timeout:0});await p.waitForTimeout(1500);
  const R=await p.evaluate(()=>{document.getElementById('title').hidden=true;
   const boot=k=>{for(let t=0;t<3;t++){quiet=true;window.__forceOrigin=k;start();quiet=false;Q.length=0;if(S&&S.origin)return true}return false};
-  const month=n=>{for(let m=0;m<n;m++){if(S.dead){S.dead=false;S.suc=60}const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){break}}Q.length=0}};
+  const month=n=>{for(let m=0;m<n;m++){if(S.dead){S.dead=false;S.suc=60}const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){break}}Q.length=0}};
   const chs=()=>{let n=0;for(const s of nrMaidL().concat(nrServL('eunuch')))if(s.nr)n+=s.nr.l.length;for(const e of nrMenL())if(e.p.nr)n+=e.p.nr.l.length;let c=0;for(const v of rivals)if(v.nr)c+=v.nr.l.length;return[n,c]};
   const out={};
   /* F1: a kẻ-hầu life */
@@ -38,7 +38,7 @@ const [,,URL,LABEL]=process.argv;
   add('consort',cons,'rv',cons&&cons.id,/\b(tỷ|muội|Tỷ|Muội)\b/,0);add('Hoàng hậu',queen,'hh',queen&&queen.id,/bổn cung|Bổn cung/,0);
   add('own maid',own,'sv',own&&own.sid,/nô tỳ|Nô tỳ/,0);add('other maid',oth,'rsv',oth&&oth.sid,/nô tỳ|Nô tỳ/,0);add('trusted maid',S.maid,'maid',null,/nô tỳ|Nô tỳ/,0);
   if(eu)add('staff eunuch',eu,ownerOf(eu)===S?'sv':'rsv',eu.sid,/nô tài|Nô tài/,1);
-  if(man)add('man '+man.p.role,man.p,'man',man.p.id,/\bthần\b|\bThần\b/,1);if(vg)add('Vương gia',vg.p,'man',vg.p.id,/bản vương|Bản vương/,1);
+  if(man)add('man '+man.p.role,man.p,'man',man.p.id,man.p.role==='Thị vệ'?/nô tài|Nô tài/:/\bthần\b|\bThần\b/,1);/* VANPHONG §2 + jnroadm.js:148: Thị vệ says «nô tài», other men «vi thần» */if(vg)add('Vương gia',vg.p,'man',vg.p.id,/bản vương|Bản vương/,1);
   if(off)add('house head',off.p,'off',off.c,/\bthần\b|\bThần\b/,1);for(const e of ct)add('court '+e.a[0],e.p,e.a[0],e.a[1],e.a[0]==='doc'?/\bthần\b|\bThần\b/:/nô tài|Nô tài/,1);
   const F3=[],F4=[];let cards=0;const txt=h=>String(h||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');
   for(const a of A){const N=a.o.nr||(a.rk==='rv'||a.rk==='hh'?nrInit(a.o):a.rk==='man'||a.rk==='off'||a.rk==='doc'||a.rk==='eun'||a.rk==='ksp'?nrMenInit(mL.find(e=>e.p===a.o)):nrMInit(a.o));if(!N)continue;
@@ -48,7 +48,7 @@ const [,,URL,LABEL]=process.argv;
     const all=txt(d.t||d.h)+' '+(d.o||[]).map(o=>txt(o.n)+' '+txt(o.x)).join(' ')+' '+txt(card)+' '+res;
     if(/chuyện lần trước/.test(all))F3.push(a.lab+' '+tid);
     const quote=(txt(d.t||d.h).match(/“([^”]*)”/)||[,''])[1];const f=[];
-    if(!a.self.test(quote))f.push('self-word');if(/\bta\b/.test(quote))f.push('«ta»');if(/[.!?] +[a-zà-ỹđ]/.test(quote))f.push('lowercase after stop');
+    if(!a.self.test(quote))f.push('self-word');if(/\bta\b/.test(quote))f.push('«ta»');if(/[.!?] +\p{Ll}/u.test(quote))f.push('lowercase after stop');
     const mt=(txt(card)+' '+res+' '+(d.o||[]).map(o=>txt(o.x)).join(' ')).match(/.{0,30}\bnàng\b(?! ấy).{0,12}/);if(a.male&&mt)f.push('man called nàng «'+mt[0]+'»');
     if(f.length)F4.push(a.lab+' '+tid+': '+f.join('+')+' | '+quote.slice(0,90))}}
   out.F3={cards,bad:F3.length,ex:F3.slice(0,3)};const by={};for(const z of F4){const k=z.split(' nr_')[0];by[k]=(by[k]||0)+1}out.F4={kinds:A.map(a=>a.lab),cards,bad:F4.length,by,ex:F4.slice(0,6)};
