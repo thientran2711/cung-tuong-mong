@@ -1106,6 +1106,10 @@ Object.assign(BAL.kc2,{kcCard:{"vietNhatKyGiau_od":78,"chaiChuotThuY_od":70,"thi
    dienSel = the tiểu thư Điện tuyển keep chance (kcDienSel): base + (score − KC.cut[0])·k, floor lo (cap BAL.kcSelMax), 0 below cut[0] − gap; noise = ± of the score;
    kcCard.quyXinChaWant = the plea bonus when she wants the tuyển tú (kcQuyP). */
 Object.assign(BAL.kc2,{ill:{suc:35,low:20,dieLo:40,dieHi:8},dienSel:{base:45,k:1.2,lo:20,gap:15,noise:4}});BAL.kc2.kcCard.quyXinChaWant=15;
+/* KC-ODDS-CHIP (27/11, law 4/7): the numbers of the two hand-rolled contests, moved from literals to BAL (values unchanged) so the roll and the odds word read ONE place.
+   fest = kcFest (khuê các festivals: score = art·BAL.art.score + Tài/3 + Sắc/6 + R(span); score ≥ top first, ≥ ok praised, below = loses 1 Danh);
+   hoi = jkc2 n_hoi (dance / polo / water rite: raw = Vũ·vu + Sắc/sac + (bd: Sức/suc) + R(span); raw ≥ ok = the envoy remembers her). */
+BAL.kc2.fest={top:60,ok:40,span:30,tai:3,sac:6};BAL.kc2.hoi={ok:55,span:30,vu:12,sac:3,suc:4};
 
 /* ONE CORE (owner OD:L1267; review/show-why, from review-trait-pool-r1 follow-up): every number chosen by a nết test lives here.
    BAL.net.k: quality-keyed sizes for nq(p,quality,n) / netIs (servant + agent qualities). BAL.net.n: nết-keyed tables read by
@@ -2061,7 +2065,7 @@ BAL.dc={on:1,
    title = «Khuê các» titles: tier, rare tier, quyRank (Quý nhân), carry (worn again in later lives); TITLE-BAL: ONE entry title only — Quý nhân+ → «Khuê tú danh môn»,
    else «Trâm hoa ngự ban» only with home Danh ≥ tuyenDanh (never just for walking in). */
 BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac:80,vpRare:.4,
- carry:{cap:0,ldOld:40,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
+ carry:{cap:0,ldOld:40,rel:{af:.5,me:.5,oan:1}/* ob-phu: sister / khuê hữu who pass tuyển tú → consort: share of af (them→her), me (her→them), Oán carried (af .5 = the old typed /2) */,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
  home:{p:8,mid:50,khac:1,pk:.2,giftShare:30,writeO:70,giftO:60,k:.3,writeBac:15,writeAf:4,lostDanh:1,askAf:1,know:2,keep:12,gifts:["tuithom","luahang","huongtram","khantay"]},
  ld:{p:6,own:{danh:4,duc:2},witBac:10,witO:55,witFoe:4,witOan:6,witLose:6,wait:{danh:2,tamco:1}},
  title:{tier:4,rare:6,quyRank:2,carry:1,tuyenDanh:30}};
