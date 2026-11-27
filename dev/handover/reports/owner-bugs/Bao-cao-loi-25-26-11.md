@@ -1,10 +1,10 @@
 # Báo cáo lỗi sếp báo 25–26/11
 
-Bản kiểm: 27/11 ~00:30Z · MAIN CHÍNH 161 · bản live **a22cf45d** (lùi về 03a8c17c nếu cần).
+Bản kiểm: 27/11 ~01:40Z · MAIN CHÍNH 161 · bản live **540358c4** (lùi về a22cf45d nếu cần).
 Nguồn: mọi dòng OWNER trong sổ quyết định từ 25/11 ~23:30Z (trên máy bay, iPad không tiếng) đến cuối.
 Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main, hàng đợi lander, nhánh review và CLAIMS — không viết từ trí nhớ.
 
-**Tóm tắt.** 57 dòng sếp báo hoặc ra lệnh: **28 đã lên live · 4 nửa live, nửa còn lại chờ hoặc đang làm · 6 chờ lên live (đã qua kiểm, xếp hàng lander) · 15 đang làm · 4 là luật ghi nhận, không có bản dựng riêng.** Bàn bài / thẻ gỗ / vòng bị giữ lại, chờ sếp xem video.
+**Tóm tắt.** 57 dòng sếp báo hoặc ra lệnh: **30 đã lên live · 4 nửa live, nửa còn lại chờ hoặc đang làm · 6 chờ lên live (đã qua kiểm, xếp hàng lander) · 13 đang làm · 4 là luật ghi nhận, không có bản dựng riêng.** Bàn bài / thẻ gỗ / vòng bị giữ lại, chờ sếp xem video.
 
 **Cách đọc cột «Trạng thái»:** LIVE <sha> = đã chạy trên game thật · chờ lên live = đã qua kiểm, đang xếp hàng lander · đang duyệt = người kiểm đang xem · đang làm (tên thợ) · chưa làm.
 
@@ -67,15 +67,15 @@ Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main,
 | **43. Xuất giá, đi tu, tự vẫn ghi «Rất vững» — để chữ thật, thêm cảnh báo.** Chữ odds chỉ cho việc thật sự tung may rủi; việc đổi đời không chữ odds, có dòng «Cẩn thận khi lựa chọn». | **LIVE 814bd77d** (FIRSTCARD-3 c8754d1e; dòng kit «Cẩn thận khi lựa chọn» f179256e có trong jk2b.js, jopic.js). | Việc đổi đời có dòng cảnh báo, không có chữ odds. |
 | **44. Biểu tượng từng nơi trên Dư đồ bị co nhỏ như con kiến.** To bằng dấu «Ta», đặt trên tên nơi. | **Đang làm (KK44)** (kit §78); map-zones-r7 bị giữ chờ việc này. | Biểu tượng nơi to rõ trên mọi bản đồ. |
 | **45. Cảnh có người tới tìm tối đen — mờ theo buổi.** Sáng mờ vàng nhạt, trưa trắng ấm, chiều cam, tối giữ nguyên. | **Đang làm (KK44)** (một token màu mỗi buổi). Có nhánh cũ kit-screenveil 469d7985 chưa duyệt cho việc này. | Màn mờ đổi màu theo buổi. |
-| **46. Danh hiệu: 5 lần là có, 10 lần là có — quá dễ.** Cân lại, cần chất lượng không chỉ số lần. | **Đang làm (TITLE-BAL)**. | Danh hiệu ít, hiếm, phải cố gắng thật. |
+| **46. Danh hiệu: 5 lần là có, 10 lần là có — quá dễ.** Cân lại, cần chất lượng không chỉ số lần. | **LIVE fa722503** (title-bal 61bdd97d: bậc danh hiệu cân lại trong BAL, `jbal2.js:758`; bảng robot `title-bal.md`). | Danh hiệu ít, hiếm, phải cố gắng thật. |
 | **47. Bàn bài, thẻ gỗ, vòng người / nhóm, «vòng bảo vật» — «đưa video tôi coi, tôi chưa duyệt mà đưa lên».** Không lên live trước khi sếp xem video Fold + iPad và nói OK. | **Đang làm (VIDEO-161)**; kit-stage-r2 ec2f7c43 đã rút khỏi hàng đợi. «Bay về túi» (kitFlyItem) đã LIVE. | Sếp xem video trước, rồi mới quyết lên. |
 | **48. Trang điểm một nút: chỉ bỏ phần chơi, vẫn tự chọn áo và hoa điền.** Hoa điền chọn riêng mỗi ngày, có ô riêng. | **Đang làm (DRESS-FIX)**. | Trang điểm nhanh vẫn chọn áo, hoa điền. |
 | **49. Ô đồ đang mặc quá dài, nhiều ô giống nhau.** Gộp ô giống nhau (2 cổ tay → 1), lưới gọn bên dưới. | **Đang làm (DRESS-FIX)** — làm hình mẫu cho sếp xem trước. | Màn mặc đồ ngắn, gọn. |
 | **50. Điểm xa xỉ quá nông: đeo đủ 7–8 món đúng phẩm vẫn quá.** | **Đang làm (DRESS-FIX)**. Ở main có xa xỉ (j8.js, jbal2.js), chưa nâng. | Đeo đủ đúng phẩm không bị ghét. |
 | **51. Sự kiện lột đồ ngày nào cũng có; đồ bị lột vẫn còn.** Ban đầu: làm hiếm, mất thật. Bị ghi đè bởi số 56. | **Đang làm (DRESS-FIX)** — theo số 56. | Xem số 56. |
 | **52. Thay đồ: «tốn 10 bạc ngay» hay «8 Sức, sai cung nữ».** Đường cung nữ phải chờ 2 khắc, mất Danh trong lúc chờ. | **Đang làm (DRESS-FIX)**. | Hai đường thay đồ ngang giá. |
-| **53. Chữ mơ hồ («để mắt thêm một ít») — nêu tên chỉ số + «+ / ++ / +++».** | **LIVE 539603bf** (wording-gain e2d6f281). | Mọi dòng được/mất ghi «Sủng +», «Danh ++» … |
-| **54. Danh hiệu: 6 gợi ý của 160 duyệt; hạng cao nhất chủ yếu là sắc đẹp.** Khó vừa vừa thôi. | **Đang làm (TITLE-BAL)** (như số 46). | Danh hiệu khó vừa phải. |
+| **53. Chữ mơ hồ («để mắt thêm một ít») — nêu tên chỉ số + «+ / ++ / +++».** | **LIVE 539603bf + 540358c4** (wording-gain e2d6f281, rồi wording-marks c580f2cd: «Tốn» không dấu trừ). | Mọi dòng được/mất ghi «Sủng +», «Danh ++» … |
+| **54. Danh hiệu: 6 gợi ý của 160 duyệt; hạng cao nhất chủ yếu là sắc đẹp.** Khó vừa vừa thôi. | **LIVE fa722503** (cùng title-bal; 6 gợi ý của 160, hạng cao nhất chủ yếu là sắc đẹp). | Danh hiệu khó vừa phải. |
 
 | **55. Oán tăng quá nhanh, giảm quá chậm — «chưa làm gì mà ai cũng nhắm vào tôi».** Không giới hạn sự kiện / NPC; kiểm soát con số: oán mỗi lý do một bước, trần mỗi người mỗi ngày, oán nguôi theo ngày, NPC trả thù thì tiêu bớt oán, người mới gần 0. | Nửa live: **LIVE 4cfcda61** (pace-all fa05166a: oán nguôi theo tuần `BAL.oanCool`, stat-pace). Phần còn lại **đang làm (OAN-PACE)** — chưa kiểm riêng. | Oán tăng chậm, nguôi nhanh; mùa đầu ít người nhắm. |
 | **56. Lột đồ phải do NPC chọn: đồ nằm trong rương người đó, thành bằng chứng; sếp cũng lột được người khác.** Không còn là sự kiện hiếm; không giới hạn NPC. | **Đang làm (DRESS-FIX)**. | Lột đồ là việc người ghét sếp chọn làm; có bằng chứng; sếp làm lại được. |
@@ -87,11 +87,11 @@ Mỗi trạng thái đã kiểm bằng `git grep` / `git log` trên origin/main,
 |---|---|---|
 | **Tiếng «tèo» khi bấm nút.** Thay âm thanh nghe như thất bại. | **LIVE 310bad2e** (25/11 04:57Z: `audio/sfx-tap.mp3` thay tại chỗ). Rủi ro: máy đã nhớ tiếng cũ (gói offline, iOS) vẫn có thể nghe tiếng cũ → **đang làm (SOUND-CACHE)**: đổi tên file. | Tiếng bấm nhẹ, không «tèo». |
 | **Thứ tự ngày mới / cửa sổ chồng nhau (từ 24/11).** | **Đang làm (DIALOG-ORDER-R4)**; nhánh dialog-order r3 bị giữ vì lỗi mặc áo. | Hộp thoại không chen lên màn của mình. |
-| **Hàng chờ lên live (lander LC24).** | Đã lên live từ lần trước: lc23-oan 53319e6f (số 37), renderer-mem 03a8c17c (sửa nghẽn bộ nhớ, không thuộc dòng nào của sếp), os stack 504d2e6a (số 19, 20, 38), pace-all + stat-pace 4cfcda61 (số 15, 55), wording-gain 539603bf (số 53), firstcard-3 814bd77d (số 43). Còn xếp hàng/giữ: map-zones-r7, mg-trim-r6, kit-bac-progress, contest-thitam, kit-stage-r2 (chờ sếp xem video).
+| **Hàng chờ lên live (lander LC24).** | Đã lên live từ lần trước: lc23-oan 53319e6f (số 37), renderer-mem 03a8c17c (sửa nghẽn bộ nhớ, không thuộc dòng nào của sếp), os stack 504d2e6a (số 19, 20, 38), pace-all + stat-pace 4cfcda61 (số 15, 55), wording-gain 539603bf (số 53), firstcard-3 814bd77d (số 43), title-bal fa722503 (số 46, 54), wording-marks 540358c4 (số 53). Còn xếp hàng/giữ: map-zones-r7, mg-trim-r6, kit-bac-progress, contest-thitam, kit-stage-r2 (chờ sếp xem video).
 
 ## 5. Hết
 
-~57% xong · ~57% chơi được (đếm theo bảng: 28 live + 4 nửa live trên 53 việc có bản dựng; việc đã live đều chơi được)
+~64% xong · ~64% chơi được (đếm theo bảng: 30 live + 4 nửa live trên 53 việc có bản dựng; việc đã live đều chơi được)
 
 ---
 Cập nhật: sửa file .md này rồi chạy `python3 dev/handover/reports/owner-bugs/build_pdf.py` (cần Playwright).
