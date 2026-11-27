@@ -36,7 +36,7 @@ async function runDevice(b,srvUrl,dev){
   const h=r.headers(),own=u.startsWith(srvUrl),c=cur;
   /* exact wire bytes (compressed, headers included) once the response is finished */
   pend.push(r.request().sizes().then(z=>add(c,u,h['content-type'],z.responseBodySize+z.responseHeadersSize,own)).catch(()=>{const cl=+h['content-length'];if(cl>=0)add(c,u,h['content-type'],cl,own)}))}catch(e){}});
- const p=await ctx.newPage();p.setDefaultTimeout(TMO);p.on('pageerror',e=>R.errors.push(e.message.slice(0,150)));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(TMO);p.on('pageerror',e=>R.errors.push(e.message.slice(0,150)));
  const cdp=await ctx.newCDPSession(p);await cdp.send('Network.enable');
  await cdp.send('Network.emulateNetworkConditions',{offline:false,latency:60,downloadThroughput:MBIT*1e6/8,uploadThroughput:5e6/8});
  await cdp.send('Emulation.setCPUThrottlingRate',{rate:CPU});
