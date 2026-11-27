@@ -54,7 +54,7 @@ Head 5e0e0d1e (rv15 base), run 11/26–11/27:
 | knsell-remake.js (rv12 25d67e01) | PASS |
 | inv-stack-scan.py | RAW sites 0 |
 | inv-stack.js | FAIL 2/27 — the 2 DOM-node rows (Biếu quà làm lành 2225 nodes > 2,000); plain rv12 fa4c0945 built root gives the same 2 rows (2225/2225) → pre-existing, not this diff (no inventory code touched) |
-| quickcheck ALONE | running at SSK time (started 11/27 after every other gate); result appended below as «## quickcheck» |
+| quickcheck ALONE | FAIL on the same 3 rows as plain rv15 273c64c3 (see «## quickcheck») — none from this diff |
 Every new `.inv.push` → invAdd: none in this diff. Old ACT-MERGE action names: none in this diff.
 
 Flaky, pre-existing: save-boundary-reload «fold day seed 1» SCREEN NOT FREE. On rv12 head: mine 1/4 PASS, plain rv12 3/4 in alternate runs; earlier rv6 3/5. Scratch probe (why() at the end, not committed): the screen is held by `#modal` visible with Q EMPTY, the j-card «VIỆC Hội phối đồ: báo đề» (Hoàng hậu announces the matching contest) — the SAME modal on plain rv12. The sổ matches the screen in every failing run (0 moments sổ ≠ screen). On 5e0e0d1e it passed 24/24. Not a save fault; a modal shown outside Q (hội phối đồ notice) — flagged for its owner.
@@ -66,3 +66,16 @@ Flaky, pre-existing: save-boundary-reload «fold day seed 1» SCREEN NOT FREE. O
 ## Open (not made worse)
 - j68 evGate still drops an optional CHOICE card silently when the hold is full (evDropInfo writes a line only for notices) — in-play pacing by design (FLIGHT-DAYQ), not a save fault; flagged for the owner's pacing rules, not changed.
 - selection days (S.selx2) save/reload: own selx-* tests (as r4 C).
+
+## quickcheck (ALONE, 11/27, vs live b881686f)
+| row | 5e0e0d1e (this) | plain rv15 273c64c3 |
+|---|---|---|
+| build / time-spill / open / old save | PASS | PASS |
+| G4 80-dialog-fixed (kit-dialog-2 a «no empty Tốn / Được cell», Fold + iPad) | FAIL 2 | FAIL 2 (same) |
+| G4 90-button-crawl (Fold · Ô lưu · «Lui» did not close its layer) | FAIL 1 | FAIL 1 (same) |
+| G4 92-look-dedupe | FAIL 6 | FAIL 6 (same) |
+| perf median new/live: render · tab · buổi · tasks>200 | 290/220 · 637/571 · 1368/1249 · 33/29 | 268/228 · 550/511 · 1351/1634 · 31/30 |
+All 3 failing rows are identical on the plain stack → pre-existing, for their owners. Perf: tab 637 ms is under the 681 limit; the gap to plain (637 vs 550) is within this box's run-to-run spread (live itself 571 vs 511 between the two runs); this diff adds no per-render work (only ser/deser of the queue and one deser flag).
+
+## Done
+FIXER save-pid-cards done 11/27. SSK posted for 5e0e0d1e; the BIG rv (session_01N1tNP5p71UEmkesbLLD9jC) merges the final save stack. No handover needed.
