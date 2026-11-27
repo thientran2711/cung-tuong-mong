@@ -341,6 +341,9 @@ function sendMe(P0){T("sendMe "+(S&&S.dead));if(!CW.on||!S||S.dead)return;
   if(home&&CW.fNote!==fk){CW.fNote=fk;pushModal({t:"Hảo hữu chọn thân phận",h:`<p>Hảo hữu ngươi đã chọn xong thân phận, nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p><p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`});try{showModal()}catch(e){}}}}catch(e){console.error(e)}
  /* a new life starts in the room's CURRENT buổi (the friend may already be in buổi chiều / tối) */
  if(CW.p2&&typeof CW.rbuoi==="number"&&(S.buoi||0)!==CW.rbuoi&&CW.rweek===wk()){S.buoi=CW.rbuoi;used=0;try{placeWhere()}catch(e){console.error(e)}}
+ /* review/coop-rebirth-resync (law 11): a life begun on a FRESH page (rejoin after her end: begin → newLife) never ran syncRoom, so the
+    room's last «where» (the host's NPC places of this buổi) was unknown → needWhere() kept «Đợi hảo hữu» for ever; take it from the room snapshot */
+ if(!host()&&!CW.lastWhere&&CW.roomMsg&&CW.roomMsg.where)CW.lastWhere=CW.roomMsg.where;
  if(host())sendWhere();else if(CW.lastWhere)applyWhere(CW.lastWhere);CW.posKey="";sendPos();render()
  /* review/coop-week-stall: the gate above is reset (nrdy / ngoW) and nothing looked at it again: a life that ended in her night (died at
     the week end, reborn) landed in the room's buổi tối while the friend's end was already out (= the host's commit, nCheck) and sat there
@@ -890,16 +893,22 @@ function onState(m){T("state");if(!CW.on||!m.state)return;const C=m.state;
  const had=CW.base;CW.base=J(C);if(had&&had.P&&had.P[CW.seat]&&C.P&&!C.P[CW.seat])CW.base.P[CW.seat]=had.P[CW.seat];
  if(S&&!S.dead&&!CW.inLife){const old=friendEntry();placeFriend(C.P[fs()]);try{if(host()&&typeof nmFix==="function")nmFix("join")}catch(e){console.error(e)}/* coop-name-clash: her new person against the one name list, at once */
   const P=C.P[fs()];const fk=P&&((P.name||"")+"#"+(P.life||0)+(friendHome(P)?"h":""));if(P)CW.fWasHome=friendHome(P);
+  /* review/coop-rebirth-resync: her new life (maybe on a fresh page that missed the buổi's «where») gets the NPC places of this buổi again */
+  if(host())try{sendWhere()}catch(e){console.error(e)}
   if(P&&!P.dead&&(old?old.name!==P.name:CW.fNote!==fk)){CW.fNote=fk;const home=friendHome(P);
    pushModal({t:home?"Hảo hữu chọn thân phận":"Hảo hữu vào cung",h:`<p>Hảo hữu ngươi ${old?"đã đầu thai, ":"đã chọn xong thân phận, "}${home?"nay còn ở nhà cha chờ kỳ tuyển tú, chưa vào cung":"nay ở trong cung"+(friendSrv(P)?", làm cung nữ":", phong "+esc(RANKS[P.rank]?RANKS[P.rank].n:""))}. Mặt mũi, tên tuổi kiếp này ra sao, phải gặp mới biết.</p>`+(home?`<p class="past">Qua kỳ tuyển tú, nàng sẽ vào cung; khi ấy hai người mới gặp được nhau.</p>`:`<p class="past">Muốn gặp nhau: hai người cùng đến một nơi trên Dư đồ trong cùng một buổi, rồi chạm vào người kia và chọn Chào hỏi.</p>`)})}
   showModal();render()}}
 function newLife(){CW.inLife=true;CW.newLife=true;try{start()}catch(e){console.error(e)}}
 function begin(d){T("begin");CW.on=true;CW.cyHold=null;CW.cyK="";clearTimeout(CW.cyT);CW.cyT=null;CW.cyTo=null;CW.seat=d.you||COOP.state.you;CW.ssv=COOP.state.msv||0;CW.ssvWk=wk();CW.seatOld=false;const C=d.state||COOP.state.C;CW.base=C?J(C):null;CW.sent=-1;CW.pend=false;CW.wkIn=C&&typeof C.week==="number"?C.week:undefined;
  const s=COOP.state;
- if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead){fromCanon(C);CW.fWasHome=friendHome(C.P[fs()]);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();
+ if(C&&C.P&&C.P[CW.seat]&&!C.P[CW.seat].dead&&!endMarked(C.P[CW.seat])){fromCanon(C);CW.fWasHome=friendHome(C.P[fs()]);/* a fresh page (came back by link / reload) has no hand of cards yet: deal it, as loading a sổ does */if(!deck||!deck.length)try{deal()}catch(e){console.error(e)}if(s.ended&&s.ended[CW.seat])CW.sent=wk();
   /* rejoin / reload (owner 16/11: "khắc và việc đã làm bị mất"): her own week as it stood (snapLoad), never the week start again */
   if(CW.sent!==wk()){const o=snapLoad(C);if(o&&CW.restore(o)){T("restored "+o.week+"."+o.buoi+" u"+o.used);return}}try{$("title").hidden=true}catch(e){}syncRoom(CW.roomMsg);showModal();render();lockNext();return}
  if(!C&&!host()){CW.waitWorld=true;/* the lobby keeps the title backdrop up with a kit panel "Đợi bạn chọn thân phận" (no empty game frame) */try{COOP_LOBBY.hostPick(true)}catch(e){console.error(e)}return}
+ /* review/coop-rebirth-resync (law 11): a fresh page (reload / «Trở lại phòng» / another device) has CW.life 0: her next life must count on from
+    the room's life of her seat (attach: life + 1), never restart at 1 (an old life number again = the end mark / snapshots / friend notes of
+    an earlier life match the new one) */
+ {const P0=C&&C.P&&C.P[CW.seat];if(P0&&typeof P0.life==="number"&&(CW.life||0)<P0.life)CW.life=P0.life}
  newLife()}
 COOP.on("start",begin);
 /* leaving the shared game: back to single-player rules (slots untouched; the room keeps the world) */
@@ -1213,6 +1222,24 @@ function snapLoad(C){try{let L=null;try{L=JSON.parse(slotGet(SNK)||"null")}catch
  const R=snapOk(COOP.state.mine,C)?COOP.state.mine:null;const o=pickSnap(L,R);
  CW.ssv=Math.max(L&&L.sv||0,COOP.state.msv||0);CW.ssvWk=wk();CW.seatOld=false;seatLast="";if(o)T("snap "+(o===R?"server":"local")+" sv"+(o.sv||0));return o}catch(e){return null}}
 CW.pickSnap=pickSnap;CW.seatVer=()=>({ssv:CW.ssv||0,dev:DEV,old:!!CW.seatOld});
+/* review/coop-rebirth-resync (F A-COOP #3 room RCT6, law 6 + 11): a life that ENDED in the room (any over(): death, ban hoa, xuất cung …)
+   left her seat copies (this device's rolling snapshot + the server's seat copy) at the last moment she was alive (CW.snap is null once
+   S.dead), and the room's P[seat] still alive (the room hears of the end only at her next life's sendMe). A reload / «Trở lại phòng»
+   before her next life was accepted restored that copy: the ended life came back alive just before its end and played it again (a fixed
+   ending, e.g. ban hoa at the first Điện tuyển, then repeated every «kiếp» — the room never reached a week end), and a death could be
+   undone by a reload. Now the end writes an END MARK over both copies ({ended:1, room, seat, life}); begin() reads it: her life in the
+   room's world (P[seat].life) is the one that ended → the normal rebirth (newLife → Luân hồi), as when the room already says dead.
+   Both seats, same rule; solo untouched (CW.on only). */
+function endMark(){if(!CW.on||CW.ctx||!S||!S.dead||CW.inLife||!COOP.state||!COOP.state.room)return;const life=CW.life||0,k=COOP.state.room+"|"+CW.seat+"|"+life;if(CW.endK===k)return;CW.endK=k;
+ const o={ended:1,room:COOP.state.room,seat:CW.seat,week:wk(),life,name:S.name,dev:DEV,at:Date.now()};clearTimeout(svT);svT=0;clearTimeout(seatT);seatT=0;
+ try{slotPut(SNK,JSON.stringify(o))}catch(e){}seatBase=null;seatPend=null;seatLast="";
+ try{if(COOP.state.status==="open")COOP.send({t:"seat",sv:CW.ssv||0,o:Object.assign({buoi:0,used:0,c:{life}},o)},true)}catch(e){console.error(e)}T("endmark "+life)}
+function endMarked(P){if(!P||P.dead)return false;const life=P.life||0,ok=o=>!!(o&&o.ended===1&&o.room===COOP.state.room&&o.seat===CW.seat&&(o.life|0)===life);
+ let L=null;try{L=JSON.parse(slotGet(SNK)||"null")}catch(e){}return ok(L)||ok(COOP.state.mine)}
+CW.endMark=endMark;CW.endMarked=endMarked;
+(function(){const f=over;over=function(){const r=f.apply(this,arguments);try{endMark()}catch(e){console.error(e)}return r}})();
+/* a life ended by the room's world (fromCanon → die) or any other road that leaves S.dead: the next render writes the mark too */
+(function(){const f=render;render=function(){const r=f.apply(this,arguments);try{if(CW.on&&S&&S.dead)endMark()}catch(e){}return r}})();
 addEventListener("pagehide",()=>{if(CW.on)snapSave(true)});document.addEventListener("visibilitychange",()=>{if(CW.on&&document.hidden)snapSave(true)});
 (function(){const f=render;render=function(){const r=f.apply(this,arguments);try{snapSoon()}catch(e){}return r}})();
 /* new build in co-op (dev/site/swreg.js, KIT §35.2): the page reloads into the new build and rejoins the room. The room only holds the
