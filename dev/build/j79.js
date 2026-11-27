@@ -1389,14 +1389,18 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
    (how to get it; `lines` = string | array), optional act cards o.acts (HTML of pbtn). Every tab / sub-tab / panel that can be empty uses it; no other empty frame. */
 function kitEmpty(title,lines,o){o=o||{};const ls=(Array.isArray(lines)?lines:[lines]).filter(Boolean);
  const a=o.art!=null?{src:o.art}:(typeof kitInfoArt==="function"?kitInfoArt(o.topic||title):{src:""});
- return `<div class="kempty" data-empty="${String(o.topic||title).replace(/[^\wÀ-ỹ ]/g,"").slice(0,40)}"><div class="kempty-art">${kitArtFrame(a&&a.src||"","")}</div><div class="kempty-b"><b class="kempty-t">${title}</b>${ls.length?`<ul class="kempty-l">${ls.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}${o.acts?`<div class="pcb">${o.acts}</div>`:""}</div></div>`}
+ return `<div class="kempty-w"><div class="kempty${o.noart?" kempty-noart":""}" data-empty="${String(o.topic||title).replace(/[^\wÀ-ỹ ]/g,"").slice(0,40)}">${o.noart?"":`<div class="kempty-art">${kitArtFrame(a&&a.src||"","")}</div>`}<div class="kempty-b"><b class="kempty-t">${title}</b>${ls.length?`<ul class="kempty-l">${ls.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}${o.acts?`<div class="pcb">${o.acts}</div>`:""}</div></div></div>`}
 /* kitEmptyTab(title,lines,o,actsHtml) = THE empty-tab layout (owner 21/11 #30): the big kitEmpty card ON TOP, the tab's act card(s) BELOW it (like Thú cưng «Nhờ thái giám…») */
 function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<div class="pcb ktacts"><div class="kpanec">${acts}</div></div>`:"")}
 (function(){const st=document.createElement("style");st.id="kit2-empty";st.textContent=`
 .kempty{display:grid;grid-template-columns:minmax(110px,170px) minmax(0,1fr);gap:12px 16px;align-items:center;padding:12px;margin:4px 0 8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
 .kempty-art{min-width:0}.kempty-b{min-width:0;display:flex;flex-direction:column;gap:6px}.kempty-t{font-size:1rem;color:var(--k-seal,#9a2c1c)}
 .kempty-l{margin:0;padding:0 0 0 1.05em;display:flex;flex-direction:column;gap:4px;font-size:.86rem}.kempty-l li{line-height:1.35}
+/* the card is its OWN size host (RV-172 FAIL-1, law 10): .kempty-w is the container, so the narrow switch fires in EVERY host (queue dialog ~312 px, panels, pop-ups), not only where an ancestor happened to be a container */
+.kempty-w{container-type:inline-size;display:block;min-width:0}
 @container (max-width:420px){.kempty{grid-template-columns:1fr;justify-items:center}.kempty-art{width:min(170px,60%)}.kempty-b{width:100%}}
+/* o.noart: the host already shows the topic picture (e.g. the queue dialog's left slot) — text only, one column */
+.kempty-noart{grid-template-columns:1fr!important;justify-items:stretch!important}
 `;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kit2-skill";st.textContent=`
 .kskills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:10px}
