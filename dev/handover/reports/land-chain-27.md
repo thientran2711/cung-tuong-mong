@@ -5,3 +5,6 @@ MAIN = MAIN CHÍNH 170 session_01Rc5AsKSV1EG8TGLZ2T7KX9. Lander stages + gates; 
 - 03:28Z up. LC26 still gating dayq (review/lc26-dq b16b4b93) and sends its READY.
 - review/lc27-mt 0b43ee55 = mg-trim-lr5 c8fa513d on dayq b16b4b93; sources disjoint; mg-trim.js ALL PASS (Fold + iPad); coregates running.
 - review/lc27-pf 066d9af0 = parity-facfix-lr5 947283db on 0b43ee55; sources disjoint; staged.
+- 03:40Z staged chain (each = previous + item, pushed): lc27-kc 4cd3f974 kptitle-close + CLAUDE.md odds line · lc27-ov 98c77517 ob-verdict-3 · lc27-mp fb1bda3e map-r9 (assets = map-r9's) · lc27-nr 7bd37087 npcroads-red (tests only) · lc27-rp 3b719d02 real-proof (own CHANGE line) · lc27-tp 796bab9d title-parity · lc27-rs a4f62055 result-sieve · lc27-em 38cf2208 empty-modal.
+- goal-links 9448be40: SOURCE conflicts (assemble/j3/j63/jk2b) → RV-165 asked to remerge onto lc27-em. kit-plaque-confirm bed400c6: superseded by review/kk53 (owner 03:17Z) → asked MAIN 170 (advice skip).
+- Tools: /home/user/wt/lc27-tools/{rebuild.sh,stage.sh,pcheck.sh,pushho.sh} (container-local).
