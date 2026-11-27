@@ -99,7 +99,11 @@ async function runCase(o,A,Sx){const p=o.p;const r={seat:o.name,A,S:Sx,bad:[]};c
   /* coop-dayq-noclock: at tối the clock COMMITS THE NIGHT: the night's own flip scene (jflip kcf, over the board) comes first, the cards after it
      (jnf order). She taps the scene as a player does; the card must then be on her screen BEFORE the AFK bound (nightMs) would carry it */
   const c0=await X.p.evaluate(()=>COOPW.tm.naf().carried);const seen=[];let sh=false;
-  for(let t0=Date.now();Date.now()-t0<(process.env.DQ_DIAG?1000:40000);){if(await X.p.evaluate(()=>__T.ovOpen()&&__T.card())){sh=true;break}
+  /* coop-dayq-noclock: the 40 s are counted from HER tối time-up (the night commit), not from the clock cut: from sáng the room runs 3 buổi
+     (~9.7 s each: pauseCap 2 s + 6 s + grace 1.5 s, COOPW.tm.lens) before the tối clock, so a 40 s window from the cut ended ~1 s after the
+     night scene came (head 6 red / 24, all host from sáng). The AFK row below still fails a card the bound carried. Cap 120 s */
+  let tUp=0;for(let t0=Date.now();Date.now()-t0<(process.env.DQ_DIAG?1000:120000)&&(!tUp||Date.now()-tUp<40000);){if(await X.p.evaluate(()=>__T.ovOpen()&&__T.card())){sh=true;break}
+   if(!tUp&&await X.p.evaluate(()=>(S.buoi||0)>=3&&COOPW.tm.od()&&COOPW.tm.due()===COOPW.tm.myKey()))tUp=Date.now();
    const sc=await X.p.evaluate(()=>{const k=[...document.querySelectorAll('.kmov')].find(x=>!x.classList.contains('km-out')&&getComputedStyle(x).display!=='none');if(!k)return '';
     const b=[...k.querySelectorAll('button')].find(x=>!x.disabled&&x.getBoundingClientRect().width>0&&(x.classList.contains('kmend')||x.classList.contains('krevok')))||[...k.querySelectorAll('button')].filter(x=>!x.disabled&&x.getBoundingClientRect().width>0).pop();
     const n=k.className.split(' ').slice(0,2).join('.');if(b&&k.classList.contains('km-endon')){b.click();return n+' tapped'}return n});
@@ -110,7 +114,7 @@ async function runCase(o,A,Sx){const p=o.p;const r={seat:o.name,A,S:Sx,bad:[]};c
   if(!sh&&process.env.DQ_DIAG)console.log('DIAG',JSON.stringify(await X.p.evaluate(()=>{const M=document.getElementById('modal');const D=Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden');const L=[];
    Object.defineProperty(M,'hidden',{configurable:true,get(){return D.get.call(this)},set(v){if(v)L.push((new Error().stack||'').split('\n').slice(1,9).join(' | '));D.set.call(this,v)}});
    const o={cf:(window.__cfdbg||[]).slice(-6),kmB:typeof kmBusy!=='undefined'?kmBusy:'?',kmq:typeof KMQ!=='undefined'?KMQ.length:'?',kmF:kmFree(),cfA:window.cfAge&&cfAge(),kmov:[...document.querySelectorAll('.kmov')].map(e=>e.className).join('|'),tr:COOPW.tr.slice(-8),qt:Q.map(m=>m.t+'/'+(m.opts?m.opts.length:0)),owes:dqRoomOwes(),holdC:dqHoldC(),act:dqActBlocks(),Q:Q.length,mg:S.mg,h0:D.get.call(M)};const AP=Function.prototype.apply,CH=[];Function.prototype.apply=function(t,a){if(CH.length<400)CH.push(String(this).slice(0,140));return AP.call(this,t,a)};try{showModal()}finally{Function.prototype.apply=AP}o.ch=CH.filter(x=>/showModal|^function\(\)\{/.test(x)).slice(-6);o.h1=D.get.call(M);o.L=L.slice();delete M.hidden;return o})));
-  ok(sh,tag+': the room clock ran out on her buổi → the held card is shown over the board',sh?undefined:await X.p.evaluate(()=>({Q:Q.map(m=>m.t),od:COOPW.tm.od&&COOPW.tm.od(),due:COOPW.tm.due(),my:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),pend:COOPW.pend,bend:COOPW.bend,ngoW:COOPW.ngoW,sent:COOPW.sent,wk:COOP.state.week,buoi:S.buoi,st:window.DQ&&DQ.stat,naf:COOPW.tm.naf(),tr:(COOPW.tr||[]).slice(-25)})));
+  ok(sh,tag+': the room clock ran out on her buổi → the held card is shown over the board',sh?undefined:await X.p.evaluate(()=>({Q:Q.map(m=>m.t),od:COOPW.tm.od&&COOPW.tm.od(),due:COOPW.tm.due(),my:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),pend:COOPW.pend,bend:COOPW.bend,ngoW:COOPW.ngoW,sent:COOPW.sent,wk:COOP.state.week,buoi:S.buoi,st:window.DQ&&DQ.stat,naf:COOPW.tm.naf(),tmv:COOPW.tm.view(),tmd:COOPW.tm.dbg(),lens:COOPW.tm.lens().slice(-6),tr:(COOPW.tr||[]).slice(-25)})));
   await X.p.evaluate(()=>__T.answer());await Ho.p.evaluate(()=>{Object.assign(BAL.coopTm,{buoiMs:600000});COOPW.tm.reset()});
   await week(Ho,G,tag);await X.p.evaluate(()=>{try{kg82Close()}catch(e){}render()})}
  await week(Ho,G,'after the cases');
