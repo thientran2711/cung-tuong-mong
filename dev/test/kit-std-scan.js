@@ -103,7 +103,7 @@ const SCAN=function(rootSel){
  const probes=[];
  for(const [W,H] of SZ){const dev=W<H?'fold':'ipad';const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});
   await ctx.addInitScript(()=>{window.__bot=1;let s=777;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
-  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+  await ctx.route('http://ctm.test/**',r=>/\/index\.html(\?|$)/.test(r.request().url())?r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}):r.fulfill({status:404,body:'',contentType:'text/plain'}));/* only the page itself gets the build: every other ctm.test path (vendor js, json) used to get the whole ~20 MB html too; past ~20.65 MB the browser dropped the pipe on the first tab (allot-pace 27/11) */
   const p=await ctx.newPage();p.setDefaultTimeout(180000);const errs=[];p.on('pageerror',e=>{if(!/Unexpected token '<'/.test(String(e)))errs.push(String(e).slice(0,160))});
   await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:180000});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof pEmp==='function',null,{timeout:180000});
