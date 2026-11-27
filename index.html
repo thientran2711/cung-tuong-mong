@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung","b":"a8a82a832deb","h":[{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"},{"s":"40cb73ad","t":"2026-11-23T19:49Z","c":"thay tranh hành động mới."}]};
+window.CTM_BI={"s":"37b2508f+","t":"2026-11-27T05:44Z","c":"OWNER-UI-A report round 2","b":"70fb33972f37","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -495,7 +495,6 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .pface span{font-size:.66rem;color:var(--dim);max-width:62px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pface .md.sm{width:28px;height:28px;font-size:.8rem;box-shadow:0 0 0 1px #fff}
 .pface.on{border-color:var(--gold);background:var(--panel2)}.pface.on span{color:var(--ink);font-weight:600}
-.pface.dim{opacity:.45}
 .psep{flex:0 0 auto;font-size:.62rem;color:var(--gold);writing-mode:vertical-rl;transform:rotate(180deg);border-left:1px solid var(--line);padding:0 2px;max-height:42px;overflow:hidden}
 .parr{flex:0 0 auto;width:30px;min-height:44px;border:1px solid var(--line);border-radius:6px;background:var(--k-card,#fffaf0);color:var(--gold);font-size:1.3rem;cursor:pointer;line-height:1}
 .pcount{flex:0 0 auto;font-size:.7rem;color:var(--dim)}
@@ -504,7 +503,6 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .pcp{position:relative;flex:0 0 auto;width:min(100%,var(--pfw,100%));align-self:center;aspect-ratio:3/4;max-height:58%;min-height:90px;border-radius:10px;overflow:hidden;border:3px solid var(--c,var(--trim));box-shadow:0 0 0 1px #fff,0 0 0 2px var(--trim),0 3px 10px #5a3a2044;background:radial-gradient(circle at 50% 35%,#b0584a,#5a1e16);display:grid;place-items:center;color:#fff8e8;font-family:var(--display);font-size:2.6rem}
 .pcp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block}
 .pcs{position:absolute;left:0;right:0;bottom:0;background:#2a1a12cc;color:#f3e6cf;font-style:normal;font-size:.72rem;text-align:center;padding:2px;font-family:inherit}
-.pc.out .pcp{filter:grayscale(.8)}
 .pcname{font-family:var(--display);font-size:1rem;line-height:1.2;color:var(--ink)}
 .pcrk{font-size:.78rem;color:var(--gold);display:flex;align-items:center;gap:3px;flex-wrap:wrap}
 .pcinfo{display:flex;flex-direction:column;font-size:.76rem;color:var(--dim);gap:1px}.pcinfo b{color:var(--ink)}
@@ -5421,15 +5419,15 @@ function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung
 /* the Phi tần face strip, grouped by palace (12-16 consorts): Càn Ninh first, then each palace by rank, fallen and dead last */
 /* rvOrd() = the strip order (rivals indexes); PG.rv is a STRIP position, so «open X's card» (kitCourtOpen: Hoàng hậu, a cung nữ's chủ) sets PG.rv = rvPgOf(X), never rivals.indexOf(X)
    (maid-8tabs #34: the chủ row opened another consort's card) */
-function rvOrd(){const ordG=v=>!v.alive?99:v.out?98:palaceOf(v)==="kn"?0:palaceOf(v)==="home"?1:2+(palSlot(palaceOf(v))??9);
+function rvOrd(){const ordG=v=>!v.alive?(typeof dthIs==="function"&&!dthIs(v)?97:99):v.out?98:palaceOf(v)==="kn"?0:palaceOf(v)==="home"?1:2+(palSlot(palaceOf(v))??9);
  return rivals.map((v,i)=>i).sort((a,b)=>ordG(rivals[a])-ordG(rivals[b])||rkOf(rivals[b])-rkOf(rivals[a]))}
 function rvPgOf(v){try{const i=rivals.indexOf(v);if(i<0)return -1;return rvOrd().indexOf(i)}catch(e){return rivals.indexOf(v)}}
 window.rvPgOf=rvPgOf;
 (function(){const p0=pager;pager=function(key,items,mk){if(key!=="rv"||!rivals||items.length<rivals.length)return p0.apply(this,arguments);const n=rivals.length;
- const grp=v=>!v.alive?"Đã mất":v.out?"Lãnh cung":palName(palaceOf(v));
+ const nDead=rivals.filter(v=>typeof dthIs==="function"&&dthIs(v)).length;const grp=v=>!v.alive?(typeof dthIs==="function"&&!dthIs(v)?"Đã rời cung":"Đã khuất"):v.out?"Lãnh cung":palName(palaceOf(v));
  const ord=rvOrd();let last=null;
  const it2=ord.map(i=>{const g=grp(rivals[i]);const x=Object.assign({},items[i]);if(g!==last){x.sep=g;last=g}return x}).concat(items.slice(n));const map=ord.concat(items.slice(n).map((_,j)=>n+j));
- return p0.call(this,key,it2,i=>mk(map[i]))}})();
+ const h=p0.call(this,key,it2,i=>mk(map[i]));/* the count of the dead beside the strip count (owner 27/11 ~05:10Z «Đã khuất: N») */return nDead?h.replace(/(<span class="pcount">[^<]*)/,`$1 · Đã khuất: ${nDead}`):h}})();
 /* old saves: anyone living under the Hoàng hậu / Hoàng quý phi is moved out on load (palFix logs each move) */
 (function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&rivals&&!S.dead)palFix()}catch(e){console.error("palFix load",e)}return r}})();
 /* ================= FIGURES: full-body art read from img/FIGURES.json when present; faces otherwise ================= */
@@ -35993,7 +35991,7 @@ Object.assign(BAL,{srvSpyHit:25});
 Object.assign(BAL,{pace:1.75});
 function kitPace(ms){try{return typeof kfStill==="function"&&kfStill()?ms:Math.round(ms*(BAL.pace||1))}catch(e){return ms}}
 try{document.documentElement.style.setProperty("--pace",String(BAL.pace))}catch(e){}
-Object.assign(BAL,{reveal:{shake:Math.round(420*BAL.pace),pause:Math.round(700*BAL.pace),rise:Math.round(550*BAL.pace),hold:Math.round(1300*BAL.pace),shelf:Math.round(380*BAL.pace),list:Math.round(350*BAL.pace),gainMin:900,fall:Math.round(1300*BAL.pace),coins:Math.round(900*BAL.pace)}});
+Object.assign(BAL,{dth:{thoAge:60},reveal:{shake:Math.round(420*BAL.pace),pause:Math.round(700*BAL.pace),rise:Math.round(550*BAL.pace),hold:Math.round(1300*BAL.pace),shelf:Math.round(380*BAL.pace),list:Math.round(350*BAL.pace),total:8000,minScale:.3,fast:.12,page:12,gainMin:900,fall:Math.round(1300*BAL.pace),coins:Math.round(900*BAL.pace)}});
 /* TRUE EVIDENCE (jtruth, owner 15/11): a spy who finds no wrong learns her habits instead: +spyKnowB on the next scheme against her for
    spyKnowW weeks. Frame defence (the framed one clears herself): clearBase + Tai mắt × clearMat, + ksB with a Kính sự phòng night in the
    last ksW weeks, + wB a loyal (≥60) maid as witness, + tyB Thái y (own doctor or Y thuật ≥3), + evB per evidence (max 2) on the framer;
@@ -38632,12 +38630,12 @@ function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S.emp){S.mort.empDue=why||(p.thoO?"Ngài lâm trọng bệnh đã lâu, thuốc thang vô hiệu":"Ngài trúng phong đột ngột giữa đêm");return ""}
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
  if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||p.nbWhy||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<BAL.mortx.youngAge?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
- if(rivals.includes(p)){p.alive=false;if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
+ if(rivals.includes(p)){p.alive=false;try{dthStamp(p,why,"lâm trọng bệnh qua đời")}catch(e){}if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
  if(p===S.maid){const o=S.maid.name;S.maid=newMaid(nmNew("maid"),M.maidLoy);if(typeof npcRoleGone==="function")npcRoleGone("maid");return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
- for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
+ for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{if(q===S){p.alive=false;dthStamp(p,why,"");(S.dstaff=S.dstaff||[]).push(p)}}catch(e){}/* her dead servant stays on record (owner 27/11 ~05:10Z): S.dstaff, shown as «Đã khuất» in Cung nhân */try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
  const C=S.court||{};for(const k in C)if(C[k]===p){const o=p.name;const pre=OFFICIAL[k]||"Quan";p.af={};p.gen=(p.gen||0)+1;p.pn=nmNew(k==="ty"?"doc":k==="ped"?"eun":"eunE");p.name=p.pn;delete p.fid;delete p.fcKeep;if(typeof npcRoleGone==="function")npcRoleGone({tq:"eun",ty:"doc",ksp:"ksp"}[k]||k);p.age=k==="ped"?M.repl.young[0]+R(M.repl.young[1]):M.repl.adult[0]+R(M.repl.adult[1]);delete p.tho;delete p.fc;delete p.fk;assign(p,K);
   return `${o} ${why||"qua đời"}; ${p.pn?pre+" "+p.name:p.name} lên thay. `}
- if((S.men||[]).includes(p)){p.alive=false;return ""}
+ if((S.men||[]).includes(p)){p.alive=false;try{dthStamp(p,why,"bị trị tội")}catch(e){}return ""}
  return ev}
 /* the omen illness on people who show illness (her, consorts, the Thái hậu, the Emperor) */
 function omen(p,ml){const st=ml<=M.omenSt[0]?3:ml<=M.omenSt[1]?2:1,k=ageOf(p)>=M.oldAge?"laobenh":"trongbenh";let ev="";
@@ -40264,27 +40262,38 @@ function kitReward(o){o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=K
  /* KIT §70: an item of the box (not the silver) is tappable: kitItemCard with the shared item detail */
  const kt=x=>x.k?` data-kid="${kmEsc(x.k)}" role="button" tabindex="0"`:"";if(coins)seq.push({n:`Bạc +${coins}`,img:`${KM_DIR}mo-ingot-silver.webp`,g:0,gn:"Bạc",coin:1});
  const info=x=>({name:x.n,src:x.img,src512:x.img,grade:x.g,gname:x.gn||KG[x.g].n,col:x.coin?"#c9a46a":KG[x.g].c,sub:""});
- const tile=(x,i)=>`<span class="kmsh" style="--i:${i}"${kt(x)}>${kitItem({src:x.img,name:"",grade:x.g,gname:x.gn||"",size:"sm",tip:x.n}).replace('<span class="kitn"></span>','')}</span>`;
- const rows=seq.map(x=>`<div class="kmrow"${kt(x)}>${typeof kitGradeChip==="function"?kitGradeChip(x.g,{name:x.gn,size:"sm",col:x.coin?"#c9a46a":""}):""}<b${x.coin?' class="g"':""}>${kmEsc(x.n)}</b>${x.d?`<small>${kmEsc(x.d)}</small>`:""}</div>`).join("");
+ /* owner 27/11 ~05:10Z: NO list frame under the chest — the items that flew out settle as kit item tiles (kitItem sm: icon + name) in neat rows, ×N when the same thing came twice, paged when many; tap = kitItemCard */
+ const tile=(x,i,n)=>`<span class="kmsh" style="--i:${i}"${kt(x)}>${kitItem({src:x.img,name:kmEsc(x.n),grade:x.g,gname:x.gn||"",size:"sm",tip:x.n})}${n>1?`<i class="kmx">×${n}</i>`:""}</span>`;
+ const grp=()=>{const M=new Map();for(const x of seq){const k=(x.k||x.n)+"|"+x.g+(x.coin?"c":"");if(M.has(k))M.get(k).n++;else M.set(k,{x,n:1})}return[...M.values()]};
  const html=`<div class="kmrew kmrew-${kind}${seq.length>6?" km-long":""}"><div class="kmrew-h"><b>${kmEsc(o.title||B[2])}</b>${o.from?`<small>${kmEsc(o.from)}</small>`:""}</div>
   <div class="kmbox"><i class="kmlight km-loop"></i><img class="kmbox-c km-loop" src="${KM_DIR}${B[0]}.webp" alt="" draggable="false"><img class="kmbox-o" src="${KM_DIR}${B[1]}.webp" alt="" draggable="false"><i class="kmlight kmlight-f km-loop"></i><div class="kmcoins">${coins?Array.from({length:Math.min(9,3+Math.round(coins/10))},(_,i)=>`<img src="${KM_DIR}mo-coin-silver.webp" alt="" style="--i:${i}">`).join(""):""}</div><div class="kmspot" style="--kshelf:${RV.shelf||380}ms"></div></div>
-  <div class="kmshelf"></div><div class="kmtap km-loop">Chạm để mở</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
+  <div class="kmshelf"></div><div class="kmtap km-loop">Chạm để mở</div><div class="kmlist kmlist-t"><div class="kmpg"></div><button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
  kmPush(done=>{const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";let step=0;
   const spot=root.querySelector(".kmspot"),shelf=root.querySelector(".kmshelf");const T=[];const later=(ms,f)=>T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms));
-  /* kit-rows-b KP15: the shelf shows at most KMCAP icons + one «+N» chip (22 items = 3 rows of icons covered the list and the Nhận button); the full list below holds every item */const KMCAP=8,more=n=>`<span class="kmsh kmsh-more" style="--i:${KMCAP}">+${n}</span>`;const shelfAll=()=>seq.slice(0,seq.length>KMCAP+1?KMCAP:seq.length).map(tile).join("")+(seq.length>KMCAP+1?more(seq.length-KMCAP):"");
-  const shelfAdd=(x,i)=>{if(seq.length<=KMCAP+1)return shelf.insertAdjacentHTML("beforeend",tile(x,i));if(i<KMCAP)shelf.insertAdjacentHTML("beforeend",tile(x,i));else{const m=shelf.querySelector(".kmsh-more");if(m)m.textContent="+"+(seq.length-KMCAP);else shelf.insertAdjacentHTML("beforeend",more(i+1-KMCAP))}};
-  const fin=()=>{T.forEach(clearTimeout);T.length=0;step=2;spot.innerHTML="";shelf.innerHTML=shelfAll();root.classList.add("km-done","km-fast");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}};
-  const one=i=>{if(step!==1)return;if(i>=seq.length){later(RV.list||350,()=>{step=2;root.classList.add("km-done");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}});return}
+  /* the shelf shows at most PAGE tiles while the items fly out one by one (+ one «+N» chip); when the last one has landed (or she skipped) it is rebuilt from the merged list, PAGE per page with ‹ › (BAL.reveal.page) */
+  const PAGE=RV.page||12,more=n=>`<span class="kmsh kmsh-more" style="--i:${PAGE}">+${n}</span>`;let pg=0;
+  const shelfAdd=(x,i)=>{if(seq.length<=PAGE+1)return shelf.insertAdjacentHTML("beforeend",tile(x,i,1));if(i<PAGE)shelf.insertAdjacentHTML("beforeend",tile(x,i,1));else{const m=shelf.querySelector(".kmsh-more");if(m)m.textContent="+"+(i+1-PAGE);else shelf.insertAdjacentHTML("beforeend",more(i+1-PAGE))}};
+  const pgBar=root.querySelector(".kmpg");
+  const settle=()=>{const G=grp(),np=Math.max(1,Math.ceil(G.length/PAGE));pg=Math.max(0,Math.min(np-1,pg));
+   shelf.innerHTML=G.slice(pg*PAGE,pg*PAGE+PAGE).map((g,j)=>tile(g.x,j,g.n)).join("");
+   pgBar.innerHTML=np>1?`<button type="button" class="kbtn kmpb" data-kmpg="-1" ${pg?"":"disabled"} aria-label="Trang trước">‹</button><span>${pg+1}/${np}</span><button type="button" class="kbtn kmpb" data-kmpg="1" ${pg<np-1?"":"disabled"} aria-label="Trang sau">›</button>`:""};
+  pgBar.addEventListener("click",e=>{const b=e.target.closest("[data-kmpg]");if(!b||b.disabled)return;e.stopPropagation();pg+=+b.dataset.kmpg;settle()});
+  const fin=()=>{T.forEach(clearTimeout);T.length=0;step=2;spot.innerHTML="";root.classList.add("km-done","km-fast");settle();try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}};
+  /* pacing (root cause of the owner's «nhảy một loạt», 27/11): ~3.8 s per item × a monthly allotment of 10+ items made her tap, and a tap used to show EVERYTHING at once + the list.
+     Now: the whole fly-out fits BAL.reveal.total (per-item time shrinks, never below minScale), and a tap speeds the rest up but they still come out ONE BY ONE (BAL.reveal.fast) */
+  const per=(RV.rise||550)+(RV.hold||1300)+(RV.shelf||380),pace0=parseFloat(getComputedStyle(root).getPropertyValue("--pace"))||1;let sc=Math.max(RV.minScale||.3,Math.min(1,(RV.total||8000)/Math.max(1,seq.length*per))),cur=0,quick=false;
+  const setSc=v=>{sc=v;spot.style.setProperty("--pace",String(pace0*sc))};setSc(sc);
+  const one=i=>{if(step!==1)return;cur=i;if(i>=seq.length){later((RV.list||350)*sc,()=>{step=2;root.classList.add("km-done");settle();try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}});return}
    const x=seq[i];spot.innerHTML=kitRevealHTML(info(x),{noSub:true});root.dataset.kmi=String(i);
    try{if(typeof kitSfx==="function")kitSfx(x.coin?"coinBounce":x.g>=3?"itemRare":"itemPop",{rate:1+Math.min(i,5)*.05});else if(typeof sfx==="function")sfx(x.coin?"sfx-coin":"sfx-open")}catch(e){}
-   if(x.g>=2){const r=spot.getBoundingClientRect();later((RV.rise||550)*.7,()=>kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,x.g>=4?34:x.g>=3?26:16,x.g>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4",KG[x.g].c,"#f6ead6"],x.g>=3?170:130))}
-   later((RV.rise||550)+(RV.hold||1300),()=>{const p=spot.firstElementChild;if(p)p.classList.add("krev-out");
-    later(RV.shelf||380,()=>{spot.innerHTML="";shelfAdd(x,i);one(i+1)})})};
+   if(x.g>=2){const r=spot.getBoundingClientRect();later((RV.rise||550)*sc*.7,()=>kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,x.g>=4?34:x.g>=3?26:16,x.g>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4",KG[x.g].c,"#f6ead6"],x.g>=3?170:130))}
+   later(((RV.rise||550)+(RV.hold||1300))*sc,()=>{const p=spot.firstElementChild;if(p)p.classList.add("krev-out");
+    later((RV.shelf||380)*sc,()=>{spot.innerHTML="";shelfAdd(x,i);one(i+1)})})};
   const open=()=>{if(step)return;step=1;if(kmReduced()){root.classList.add("km-open");fin();return}root.classList.add("km-shake");
    later(RV.shake||420,()=>{root.classList.remove("km-shake");root.classList.add("km-open");
     const b=root.querySelector(".kmbox").getBoundingClientRect();const best=seq.length?Math.max(...seq.map(x=>x.g)):0;kmSpark(st.ov,b.left+b.width/2,b.top+b.height*.45,best>=4?40:24,best>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4","#f6ead6","#e0c080"],best>=3?190:140);
     later(RV.pause||700,()=>one(0))})};
-  st.ov.addEventListener("click",e=>{if(e.target.closest("[data-km-close]")){T.forEach(clearTimeout);return}if(step===0)open();else if(step===1)fin()},true);
+  st.ov.addEventListener("click",e=>{if(e.target.closest("[data-km-close]")){T.forEach(clearTimeout);return}if(step===0)open();else if(step===1){if(quick)fin();else{quick=true;T.forEach(clearTimeout);T.length=0;spot.innerHTML="";setSc(RV.fast||.12);one(cur)}}},true);
   if(kmReduced())open()})}
 function kitFlyItem(k){if(kmReduced()||!k)return;const src=kmItemImg(k);const tb=document.querySelector('[data-tab="inv"]');if(!src||!tb)return;const r=tb.getBoundingClientRect();
  const im=document.createElement("img");im.className="kmfly";im.src=src;im.alt="";const x0=innerWidth/2,y0=innerHeight*.45;im.style.left=x0+"px";im.style.top=y0+"px";document.body.appendChild(im);
@@ -40575,6 +40584,11 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
 /* ONE paper card for the motion screens: the reward list and the person reveal (KIT §65.2) share this frame */
 .kmlist,.kprev-card,.ktrv-card{width:100%;max-width:440px;background:#fffaf0f4;border:1px solid var(--gold);border-radius:var(--k-rad,8px);padding:8px 10px;box-shadow:0 0 0 3px #f6ead6,0 10px 26px #0008;box-sizing:border-box}
 .kmlist{display:none;flex-direction:column;gap:5px}
+/* owner 27/11 ~05:10Z: the reward chest has NO list frame: the shelf of kit item tiles IS the result; pager + Nhận sit under it */
+.kmrew .kmshelf{gap:8px 6px;max-width:min(94vw,560px)}.kmrew .kmsh{position:relative;width:84px}
+.kmrew .kmsh .kitn{color:#f6e3b4;text-shadow:0 1px 3px #000}.kmsh>.kmx{position:absolute;right:12px;top:0;font:700 .7rem/1 var(--kit-font,inherit);font-style:normal;color:#fff3c4;background:#2a1a12d0;border-radius:999px;padding:2px 6px;pointer-events:none}
+.kmrew .kmlist.kmlist-t{background:none;border:0;box-shadow:none;padding:0;max-width:none;align-items:center}
+.kmpg{display:flex;align-items:center;justify-content:center;gap:10px;color:#f6e3b4;font-size:.85rem}.kmpg:empty{display:none}.kmpb{min-width:44px}
 .km-done .kmlist{display:flex;animation:kmUp2 calc(.3s*var(--pace)) var(--km-ease) both}
 .kmrow{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-items:baseline;padding:3px 0;border-bottom:1px dotted var(--k-hair,#e6d3ac)}
 .kmrow small{grid-column:2;font-size:.76rem;color:var(--dim)}.kmrow b{font-size:.9rem}
@@ -50409,8 +50423,9 @@ window.menUnique=menUnique;
 if(typeof menInit==="function"){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);menUnique();return r}}
 function menMet(m){try{if(S.known&&typeof k61St==="function")return k61St(m)>=1;if(S.menMet&&S.menMet[m.id])return true;if(m.af||m.tinh||m.letters||m.trysts)return true;if(typeof k61St==="function"&&k61St(m)>=1)return true;if(m.seen)return true}catch(e){}return false}
 window.menTabHTML=function(){try{menInit()}catch(e){}menUnique();const M=(S.men||[]).filter(m=>m.alive&&menMet(m));
- if(!M.length)return `<div class="pgwrap">`+kitEmpty("Ta chưa gặp nam nhân nào ngoài Hoàng thượng",["Nam nhân (thị vệ, thái y, vương gia, nhạc sư…) chỉ hiện ở đây sau khi ta gặp mặt họ.","Đến nơi họ hay lui tới (Dư đồ) để gặp."],{art:"https://ctm-img.victoria-tntt.workers.dev/img/act-hen-gap.webp"})+`</div>`;
- return `<div class="pgwrap">`+pager("men",M.map(m=>({f:pMan(m),name:m.name.split(" ").slice(-2).join(" ")})),i=>manCard(M[i]))+`</div>`};
+ if(!M.length&&!(S.men||[]).some(m=>typeof dthIs==="function"&&dthIs(m)&&menMet(m)))return `<div class="pgwrap">`+kitEmpty("Ta chưa gặp nam nhân nào ngoài Hoàng thượng",["Nam nhân (thị vệ, thái y, vương gia, nhạc sư…) chỉ hiện ở đây sau khi ta gặp mặt họ.","Đến nơi họ hay lui tới (Dư đồ) để gặp."],{art:"https://ctm-img.victoria-tntt.workers.dev/img/act-hen-gap.webp"})+`</div>`;
+ const D=(S.men||[]).filter(m=>typeof dthIs==="function"&&dthIs(m)&&menMet(m));/* the dead stay in the list, own group after the living (owner 27/11 ~05:10Z) */const MD=M.concat(D);
+ return `<div class="pgwrap">`+pager("men",MD.map((m,i)=>({f:pMan(m),name:m.name.split(" ").slice(-2).join(" "),sep:D.length&&i===M.length?"Đã khuất":""})),i=>manCard(MD[i])).replace(/(<span class="pcount">[^<]*)/,D.length?`$1 · Đã khuất: ${D.length}`:"$1")+`</div>`};
 /* the men leave the Phi tần strip (j22 appended them) */
 /* (j22 no longer appends them: source edit) */
 /* a man's card with no act says why (j22 manCard "empty" text, source edit) */
@@ -50725,12 +50740,12 @@ try{Object.assign(KIT_GLOSS,{"Hiền tài":"Tài học của hoàng tự, suy ra
  "Nhà chồng chống lưng":"Nhà phò mã đứng sau người mẹ của công chúa: cộng vào thế lực phe và tranh ghế."})}catch(e){}
 
 /* 1. Con của ngươi */
-function kidTab(){const K=S.kids;if(!K.length)return htEmpty("https://ctm-img.victoria-tntt.workers.dev/img/act-cat-cham-con.webp","Ngươi chưa có con",[
+function kidTab(){const dd=k=>typeof dthIs==="function"&&dthIs(k),K=S.kids.filter(k=>!dd(k)).concat(S.kids.filter(dd)),nD=K.filter(dd).length,n0=K.length-nD;/* the dead stay, own group after the living (owner 27/11 ~05:10Z) */if(!K.length)return htEmpty("https://ctm-img.victoria-tntt.workers.dev/img/act-cat-cham-con.webp","Ngươi chưa có con",[
   "Con chỉ đến sau những đêm thị tẩm: được Hoàng thượng lật thẻ càng nhiều, càng dễ có tin vui.",
   "Có thai thì giữ gìn Sức, nhờ thái y an thai; kẻ ghen có thể hại thai.",
   "Con sinh ra hiện ở đây: dạy dỗ, chăm con, bàn hôn sự; con trai được xét vào hàng kế vị."]);
  const hl=S.heir&&S.heir.k?(S.heir.v?`Thái tử: ${S.heir.k.name}, con của ${S.heir.v.name}.`:`<span class="g">Con ngươi, ${S.heir.k.name}, là Thái tử.</span>`):"Chưa lập Thái tử.";
- return `<div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+pager("kid",K.map(k=>({f:kidFace(k),name:sname(k),dim:!k.alive})),i=>kidCard(K[i]))}
+ return `<div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+pager("kid",K.map((k,i)=>({f:kidFace(k),name:sname(k),dim:!k.alive,sep:nD&&i===n0?"Đã khuất":""})),i=>kidCard(K[i])).replace(/(<span class="pcount">[^<]*)/,nD?`$1 · Đã khuất: ${nD}`:"$1")}
 /* 2. Kế vị */
 function kvReasons(x,i,o){const L=[];const k=x.k;
  if(k.heir)L.push("Đã được lập làm Thái tử: đứng đầu hàng kế vị.");
@@ -77466,6 +77481,14 @@ function kitOffAttr(c){if(!c||!c.off||!c.off.why)return"";const t=c.off.why+(c.o
       (art.tam true / kitTam(true)); gone by itself when the exact picture exists. Caller: kitTam(isStandin) -> html ('' when exact).
       Put it inside a position:relative picture box. */
 function kitTam(standin){return standin?`<span class="ktam" role="note" title="Tranh tạm, sẽ có tranh đúng sau">tạm</span>`:""}
+/* 3. PORTRAIT STATE (owner 27/11 ~05:10Z, one kit part): who is in lãnh cung keeps her OWN colours, much paler and washed out, no tint (.kst-lc);
+      black-and-white is reserved for the DEAD (.kst-dead). Set by jdead.js from f.st ('lc' | 'dead') on the two portrait renderers (mdH → .md, pcPort → .pcp),
+      so every place a person is drawn (Hậu cung strip + card, men, relation rows, panels) shows the same state. Values are the look, not game numbers. */
+(function(){const st=document.createElement("style");st.textContent=`
+.md.kst-lc,.pcp.kst-lc{filter:saturate(.45) brightness(1.12) contrast(.86)}
+.md.kst-dead,.pcp.kst-dead{filter:grayscale(1) brightness(.92)}
+html body .pface.on>.md.kst-lc{filter:saturate(.45) brightness(1.12) contrast(.86) var(--k-glow)}html body .pface.on>.md.kst-dead{filter:grayscale(1) brightness(.92) var(--k-glow)}
+`;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.textContent=`
 .ktam{position:absolute;top:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
 `;document.head.appendChild(st)})();
@@ -93295,6 +93318,63 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§91",title:"kitEn
 window.kesSample=function(t){try{const T=KE.types[t]?t:"death";const tone=KE.types[T].tone;Q.unshift({t:T==="grand"?"Đại kết cục":"Kiếp này",cls:`kes-t-${T}`,who:typeof pMe==="function"?pMe():null,
   h:`<h3>${T==="grand"?"Đại kết cục · Hiền tướng hậu cung":"Hồng nhan bạc mệnh"}</h3><p>${tone==="fest"?"Thiên hạ truyền tai: ngươi đã thành “Hiền tướng hậu cung”.":"Kiếp này khép lại."}</p>`,btn:"Đóng"});showModal()}catch(e){console.error(e)}};
 })();
+/* jdead: LÃNH CUNG + THE DEAD (owner 27/11 ~05:10Z, OD rows 05:10 «Mấy cái người nào mà bị vào lãnh cung…»; worker OWNER-UI-A).
+   KIT CHECK: reuses kit parts pcard / pager / mdH / pcPort (portraits), kitRows (key/value rows), the kit chip + palace strip; the only NEW kit part is the
+   portrait STATE (jgrey.js §3: .kst-lc faded sepia, .kst-dead b/w), set from f.st by the two portrait renderers — so ONE look everywhere a person is drawn.
+   1. f.st: 'lc' = alive in lãnh cung (own colours faded + warm sepia), 'dead' = died (black and white; ONLY the dead are b/w).
+   2. THE DEAD STAY in the lists (Phi tần strip: own group after the living with the count «Đã khuất: N»; Nam nhân strip likewise). Tap = the whole record as it was +
+      «Hưởng dương N tuổi» (died before BAL.dth.thoAge — the old term for dying young) / «Hưởng thọ N tuổi» (that age or more) + «Nguyên do: …» = the cause as the
+      WORLD knows it (law 6a: the words the log used; an unproven murder reads as what was seen). Save: the record is p.dth = {a: age, c: cause, y: year}, written on
+      the person (rivals / men / kids are already saved), old saves get a record by the sweep (age = the frozen age, cause «không ai rõ nguyên do»).
+   3. alive===false is also used for a nun (v.nun), a woman sent away (v.left), a child married off / removed (k.wed, k.gone): those are NOT dead (dthIs). */
+(function(){
+const TH=()=>(typeof BAL==="object"&&BAL.dth&&BAL.dth.thoAge)||60;
+function dthIs(p){return !!p&&typeof p==="object"&&p!==S&&p.alive===false&&!p.nun&&!p.left&&!p.wed&&!p.gone}
+function dthClean(w){return String(w==null?"":w).replace(/<[^>]*>/g,"").replace(/\s+/g," ").replace(/^\s*(bị )?ban chết:\s*/i,"bị ban chết vì ").replace(/[.\s]+$/,"").trim()}
+function dthStamp(p,why,fb){if(!dthIs(p)||p.dth)return;let a=p.age;try{if(typeof ageOf==="function"){const x=ageOf(p);if(x>0)a=x}}catch(e){}
+ p.dth={a:Math.max(0,a|0),c:dthClean(why)||fb||"",y:(typeof S==="object"&&S&&S.year)||0}}
+function dthSweep(){try{if(!S||typeof rivals==="undefined")return;
+ for(const v of rivals)if(dthIs(v)&&!v.dth)dthStamp(v,"","");
+ for(const m of (S.men||[]))if(dthIs(m)&&!m.dth)dthStamp(m,"","");
+ for(const [k] of (typeof allKids==="function"?allKids():[]))if(dthIs(k)&&!k.dth)dthStamp(k,k.nbWhy||"","")}catch(e){}}
+function dthOf(p){if(!dthIs(p))return null;if(!p.dth)dthStamp(p,"","");const d=p.dth;return{age:d.a,term:d.a>=TH()?"Hưởng thọ":"Hưởng dương",cause:d.c||"không ai rõ nguyên do"}}
+/* the two lines of the record, from the kit rows part */
+function dthRows(p){const d=dthOf(p);if(!d)return"";return kitRows([[d.term,`${d.age} tuổi`],["Nguyên do",d.cause]])}
+window.dthIs=dthIs;window.dthOf=dthOf;window.dthRows=dthRows;window.dthSweep=dthSweep;window.dthStamp=dthStamp;
+/* ---- stamps from the code paths that know the cause (the same words as the log line) ---- */
+/* (jmort kill() stamps its own rivals / men with the same words as its log line) */
+try{const d0=kidDie;kidDie=function(k,why){const r=d0.apply(this,arguments);try{dthStamp(k,why,"")}catch(e){}return r}}catch(e){}
+try{const s0=deathSentence;deathSentence=function(a,b){const r=s0.apply(this,arguments);try{const p=typeof a==="string"?S:a,w=typeof a==="string"?a:b;if(p&&p!==S)dthStamp(p,"bị ban chết vì "+dthClean(w).replace(/^bị ban chết vì /,""))}catch(e){}return r}}catch(e){}
+try{const e0=dieIf;dieIf=function(p,why){const r=e0.apply(this,arguments);try{dthStamp(p,why)}catch(e){}return r}}catch(e){}
+try{const r0=render;render=function(){dthSweep();return r0.apply(this,arguments)}}catch(e){}
+/* ---- portrait state on the f object the ONE renderers read ---- */
+const stOf=p=>!p?"":p.alive===false?(dthIs(p)?"dead":""):p.out?"lc":"";
+try{const p0=pv;pv=function(v){const f=p0.apply(this,arguments);try{const s=stOf(v);if(s&&f&&typeof f==="object")f.st=s}catch(e){}return f}}catch(e){}
+try{const p0=pMan;pMan=function(m){const f=p0.apply(this,arguments);try{const s=stOf(m);if(s&&f&&typeof f==="object")f.st=s}catch(e){}return f}}catch(e){}
+const mark=(h,f,re,sp)=>{try{if(f&&f.st&&typeof h==="string")return h.replace(re,m=>m+(sp?" ":"")+"kst-"+f.st+(sp?"":" "))}catch(e){}return h};
+try{const m0=mdH;mdH=function(p){return mark(m0.apply(this,arguments),p,/class="md /)}}catch(e){}
+try{const c0=pcPort;pcPort=function(f){return mark(c0.apply(this,arguments),f,/class="pcp/,1)}}catch(e){}
+/* ---- the cards ---- */
+try{const r0=rvCard;rvCard=function(v){let h=r0.apply(this,arguments);try{
+ if(dthIs(v)){h=h.replace(">Đã chết<",">Đã khuất<");const rows=dthRows(v);if(rows)h=h.replace('<div class="pcr">','<div class="pcr">'+rows)}
+ else if(v&&v.alive===false)h=h.replace(">Đã chết<",v.nun?">Đã xuất gia<":">Đã rời cung<")}catch(e){}return h}}catch(e){}
+try{const m0=manCard;manCard=function(m){if(!dthIs(m))return m0.apply(this,arguments);const f=pMan(m);
+ return dthDrop(pcard({f,col:"#6a8aa0",name:m.name,rank:m.role,status:"Đã khuất",out:true,lines:[tuoi(m.age)].filter(Boolean),chips:[],note:"",groups:[],empty:`<p>${m.name} đã khuất. Chỉ còn lại những gì người ta còn nhớ về hắn.</p>`}).replace('<div class="pcr">','<div class="pcr">'+dthRows(m)),["Dạo này"])}}catch(e){}
+/* ---- the whole record as it was (owner 27/11 ~05:10Z, MAIN LOOK): what she was in life from existing data; no live lines about a dead person ---- */
+function dthDrop(h,labels){try{const t=document.createElement("template");t.innerHTML=h;t.content.querySelectorAll(".kr").forEach(r=>{const l=(r.querySelector(".krl")||{}).textContent||"";const v=(r.querySelector(".krv")||{}).textContent||"";if(labels.includes(l.trim())||(/^Đã biết$/.test(l.trim())&&/chưa biết gì thêm/.test(v)))r.remove()});return t.innerHTML}catch(e){return h}}
+function dthLife(v){const R=[];try{const pn=palName(palaceOf(v));if(pn&&!pn.includes(v.name))R.push(["Cung ở",pn])}catch(e){}
+ const K=v.kids||[];if(K.length)R.push(["Con cái",K.map(k=>`${k.name}${k.alive?"":" (đã mất)"}`).join(", ")]);
+ if(v.out)R.push(["Lúc mất","đang ở lãnh cung"]);return R}
+try{const r1=rvCard;rvCard=function(v){let h=r1.apply(this,arguments);try{if(dthIs(v)){h=dthDrop(h,["Dạo này"]);const life=kitRows(dthLife(v));if(life)h=h.replace('<div class="pcr">','<div class="pcr">'+life)}}catch(e){}return h}}catch(e){}
+try{const kf=kidFace;kidFace=function(k){const f=kf.apply(this,arguments);try{const s=stOf(k);if(s&&f&&typeof f==="object")f.st=s}catch(e){}return f}}catch(e){}
+try{const kc=kidCard;kidCard=function(k){let h=kc.apply(this,arguments);try{if(dthIs(k)){h=h.replace(">Đã mất<",">Đã khuất<");let mom="";try{const m=allKids().find(([x])=>x===k);mom=m&&m[1]?m[1].name:S.name}catch(e){}const rows=dthRows(k)+kitRows(mom?[["Mẹ",mom]]:[]);h=dthDrop(h.replace('<div class="pcr">','<div class="pcr">'+rows).replace("Con đã mất.",""),["Dạo này"])}}catch(e){}return h}}catch(e){}
+
+/* ---- her dead servants (S.dstaff, kept by jmort kill): own group «Đã khuất» at the end of the Cung nhân strip ---- */
+try{const p0=pager;pager=function(key,items,mk){if(key!=="staff"||!S||!(S.dstaff||[]).length)return p0.apply(this,arguments);const D=S.dstaff.filter(dthIs);if(!D.length)return p0.apply(this,arguments);const n=items.length;
+ const it2=items.concat(D.map((s,j)=>({f:Object.assign({},pServ(s),{st:"dead"}),name:shortN(s.name),dim:true,sep:j?"":"Đã khuất"})));
+ const h=p0.call(this,key,it2,i=>i<n?mk(i):(s=>dthDrop(pcard({f:it2[i].f,name:s.name,rank:s.role==="maid"?"Cung nữ":"Thái giám",status:"Đã khuất",out:true,lines:[tuoi(s.age)].filter(Boolean),chips:[],groups:[],empty:`<p>${s.name} đã khuất.</p>`}).replace('<div class="pcr">','<div class="pcr">'+dthRows(s)),["Dạo này"]))(D[i-n]));
+ return h.replace(/(<span class="pcount">[^<]*)/,`$1 · Đã khuất: ${D.length}`)}}catch(e){}
+})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -95208,7 +95288,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a8a82a832deb";window.CTM_BUILD=BUILD;
+const BUILD="70fb33972f37";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -19,14 +19,15 @@ function kitOffAttr(c){if(!c||!c.off||!c.off.why)return"";const t=c.off.why+(c.o
       Put it inside a position:relative picture box. */
 function kitTam(standin){return standin?`<span class="ktam" role="note" title="Tranh tạm, sẽ có tranh đúng sau">tạm</span>`:""}
 /* 3. PORTRAIT STATE (owner 27/11 ~05:10Z, one kit part): who is in lãnh cung keeps her OWN colours, NO sepia/brown tint, only much paler and lighter (.kst-lc: lower saturation + lift toward white; owner 27/11 ~05:46Z);
-      black-and-white is reserved for the DEAD (.kst-dead). Set by jdead.js from f.st ('lc' | 'dead') on the two portrait renderers (mdH → .md, pcPort → .pcp) AND by kstPaint on every full-body figure (stage tokens, #mefig, img.kesimg, .kszfs>img: the --kst var sits in each figure's filter chain next to --klf),
+      black-and-white is reserved for the DEAD (.kst-dead: the WHOLE portrait incl. its frame, owner ~05:59Z; lãnh cung = image only, frame keeps its colours, owner ~05:53Z). Set by jdead.js from f.st ('lc' | 'dead') on the two portrait renderers (mdH → .md, pcPort → .pcp) AND by kstPaint on every full-body figure (stage tokens, #mefig, img.kesimg, .kszfs>img: the --kst var sits in each figure's filter chain next to --klf),
       so every place a person is drawn (Hậu cung strip + card, men, relation rows, panels) shows the same state. Values are the look, not game numbers. */
 (function(){const st=document.createElement("style");st.textContent=`
 .kst-lc{--kst:saturate(.6) contrast(.92) brightness(1.06)}
 .kst-dead{--kst:grayscale(1) brightness(.92)}
 /* status band of a kit portrait (Ở lãnh cung / Đã khuất) sits INSIDE the picture, above the tassel: it covered the relation rows under the portrait (MAIN LOOK 172) */
 .pcp.kit>.pcs{bottom:31%;left:14%;right:14%;border-radius:4px}
-.md.kst-lc>img:not(.pcb2),.md.kst-lc .kin>img.kpor,.md.kst-lc .kin>.kbg,.pcp.kst-lc>img:not(.pcb2),.pcp.kst-lc .kin>img.kpor,.pcp.kst-lc .kin>.kbg,.md.kst-dead>img:not(.pcb2),.md.kst-dead .kin>img.kpor,.md.kst-dead .kin>.kbg,.pcp.kst-dead>img:not(.pcb2),.pcp.kst-dead .kin>img.kpor,.pcp.kst-dead .kin>.kbg,img.kst-lc:not(.figimg):not(.kesimg):not(#mefig),img.kst-dead:not(.figimg):not(.kesimg):not(#mefig){filter:var(--kst)}
+.md.kst-dead,.pcp.kst-dead,.md.kst-lc>img:not(.pcb2),.md.kst-lc .kin>img.kpor,.md.kst-lc .kin>.kbg,.pcp.kst-lc>img:not(.pcb2),.pcp.kst-lc .kin>img.kpor,.pcp.kst-lc .kin>.kbg,img.kst-lc:not(.figimg):not(.kesimg):not(#mefig),img.kst-dead:not(.figimg):not(.kesimg):not(#mefig){filter:var(--kst)}
+html body .pface.on>.md.kst-dead{filter:var(--kst) var(--k-glow)}
 `;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.textContent=`
 .ktam{position:absolute;top:6px;right:6px;z-index:5;pointer-events:none;font:600 .68rem/1 var(--body);letter-spacing:.04em;color:#ffe7b0;background:#1a0e08b8;border:1px solid #d2b07188;border-radius:999px;padding:3px 8px}
