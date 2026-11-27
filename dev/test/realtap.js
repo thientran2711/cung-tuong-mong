@@ -157,7 +157,7 @@ function make(page, opt = {}) {
     for (let i = 0; i < 4; i++) { const vis = await page.evaluate(s => { const e = document.querySelector(s); return !!(e && e.getClientRects().length && e.getBoundingClientRect().width > 3) }, PL); if (vis) break; if (!(await tap('.kpk .kpkpg[data-pkpg="1"]', { screen: info.screen, label: 'thẻ gỗ ›' }))) break; await page.waitForTimeout(400) }
     if (!(await tap(PL, { ...info, label: lab + ' (thẻ gỗ)' }))) return false;
     for (let i = 0; i < 8 && !(await page.$(PKOK)); i++) await page.waitForTimeout(150);
-    if (!(await page.$(PKOK))) { log({ k: 'no ✓', screen: info.screen, label: lab + ' (thẻ gỗ)' }); return false }
+    if (!(await page.$(PKOK))) { const off = await page.evaluate(s => { const e = document.querySelector(s); return !!(e && e.matches('.kitoff,.kfoc-off')) }, PL).catch(() => false); /* FIXER #23 F3 (BIG #21): a LOCKED plaque shows its reason, never «Chọn» (kitPick conf, by design) — logged «locked», not «no ✓» */ log({ k: off ? 'locked' : 'no ✓', screen: info.screen, label: lab + ' (thẻ gỗ)' }); return false }
     return tap(PKOK, { ...info, label: '✓ ' + lab });
   }
   return { tap, choose, stats: () => ({ ...st, deadList: st.deadList.slice(-200) }), touch, PROBE };
