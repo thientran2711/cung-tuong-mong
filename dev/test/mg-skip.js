@@ -23,17 +23,21 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
 console.log('step0');
  /* 0. the core: one key, one roll */
  const core=await p.evaluate(()=>({od:BAL.skip&&BAL.skip.od,old5:!!(BAL.odb.j5),old83:!!(BAL.odb.j83),w:word(od(BAL.skip.od)),roll:String(kitQuickRoll).includes('BAL.skip.od')}));
- ck('BAL.skip.od = 40, old odb keys gone, kitQuickRoll reads it',core.od===40&&!core.old5&&!core.old83&&core.roll,core);
+ ck('BAL.skip.od = 50 (Tùy duyên, mg-trim OD 26/11 ~05:10Z), old odb keys gone, kitQuickRoll reads it',core.od===50&&!core.old5&&!core.old83&&core.roll,core);
  const wordOK=t=>OW.RE.test(t)&&!/%|Chắc chắn/.test(t);
 
- /* 1. MAKEUP (morning mirror): quick on the dress screen; won = Đoan trang (vua), lost = Vụng về */
- for(const ok of [true,false]){await reset();await p.evaluate(()=>toilOpen());await p.waitForSelector('#kg82',{state:'visible'});
+ /* 1. MAKEUP (morning mirror) — mg-trim (owner OD 26/11 ~05:10Z): ONE-TAP «Điểm trang» by her hand (Dung, Họa, Sắc, rank) + «Tự tay điểm trang» (the mirror game) */
+ for(const dung of [0,5]){await reset();await p.evaluate(d=>{vNorm(S);S.vir=S.vir||{};S.vir.dung=d;toilOpen()},dung);await p.waitForSelector('#kg82',{state:'visible'});
   await p.evaluate(()=>toilDressDone(true));await p.waitForSelector('#toilquick');
-  const q=await btn('#toilquick');ck(`makeup quick button (kit .kquick, odds word) [${ok}]`,q&&/kquick/.test(q.cls)&&/kbtn alt/.test(q.cls)&&wordOK(q.t)&&/Điểm trang nhanh/.test(q.t)&&/Đoan trang/.test(q.t)&&/Vụng về/.test(q.t)&&q.vis,q);
-  if(ok)await shot('makeup');
-  await p.evaluate(o=>{window.__kq=kitQuickRoll;kitQuickRoll=()=>o},ok);await p.evaluate(()=>document.querySelector('#toilquick').click());await p.waitForSelector('#toildone',{state:'attached',timeout:30000}).catch(()=>{});
-  const r=await p.evaluate(()=>{kitQuickRoll=window.__kq;return{mk:toilMk(S.toilette),made:S.toilette.makeup,score:S.toilette.score}});
-  ck(`makeup quick ${ok?'won → vua (Đoan trang)':'lost → vung (Vụng về)'}`,r.made&&r.mk===(ok?'vua':'vung'),r);if(!ok)await shot('makeup-res')}
+  const q=await btn('#toilquick'),hand=await btn('#toilmk');
+  ck(`makeup one-tap button (kit .kbtn, odds words per look) + «Tự tay điểm trang» [Dung ${dung}]`,q&&/kbtn/.test(q.cls)&&wordOK(q.t)&&/^Điểm trang/.test(q.t)&&/Đoan trang/.test(q.t)&&q.vis&&hand&&/Tự tay điểm trang/.test(hand.t),{q,hand});
+  if(dung)await shot('makeup');
+  const want=await p.evaluate(()=>{const r=toilRollOf(toilRollSeed());return{look:r.look,score:r.score}});
+  await p.evaluate(()=>document.querySelector('#toilquick').click());await p.waitForSelector('#toildone',{state:'attached',timeout:30000}).catch(()=>{});
+  const r=await p.evaluate(()=>({mk:toilMk(S.toilette),made:S.toilette.makeup,score:S.toilette.score}));
+  ck(`makeup one tap = the face-table draw on her hand [Dung ${dung}]`,r.made&&r.score===want.score&&(want.look==="vung"?r.mk==="vung":r.mk!=="vung"),{r,want});if(!dung)await shot('makeup-res')}
+ {const d=await p.evaluate(()=>{const o=[];for(const dg of [0,5]){S.vir.dung=dg;o.push(toilRollOdds())}S.vir.dung=0;return o});
+  ck('Dung raises the one-tap odds (law: skill decides)',d[1].vua>=d[0].vua&&d[1].dep>d[0].dep,d)}
  /* colour screen (contest makeup path) has it too */
  await reset();await p.evaluate(()=>toilOpen());await p.waitForSelector('#kg82',{state:'visible'});await p.evaluate(()=>{TOIL.st.F=1;toilColUI()});
  ck('makeup colour screen quick (contest path)',!!(await btn('#toilquick2')));
@@ -58,7 +62,7 @@ console.log('step0');
  /* 4. Tu đức lesson (jtd): button, won = partial progress, lost = 0 */
  await reset();const k=await p.evaluate(()=>{vNorm(S);const v=VIR.find(x=>S.vir[x.k]<4);return v&&v.k});
  await p.evaluate(k=>{S.suc=90;tdPlay(k,'self')},k);await p.waitForSelector('#kg82skip');
- const tq=await btn('#kg82skip');ck('Tu đức «Để trời định» kit button with the odds word',tq&&/kquick/.test(tq.cls)&&wordOK(tq.t)&&/tiến bộ một phần/.test(tq.t)&&!/5\/10/.test(tq.t)&&tq.vis,tq);
+ const tq=await btn('#kg82skip');ck('Tu đức «Học nhanh» kit button with the odds word',tq&&/Học nhanh/.test(tq.t)&&/kquick/.test(tq.cls)&&wordOK(tq.t)&&/tiến bộ \S+ phần/.test(tq.t)/* LIVE balance-pace: kStepW progress words */&&!/5\/10/.test(tq.t)&&tq.vis,tq);
  await shot('tuduc');
  for(const ok of [true,false]){await reset();const g0=await p.evaluate(k=>{S.suc=90;const g={dead:S.dead,q:Q.length,mg:!!S.mg,busy:TDS.busy,l:S.vir[k],can:can(BAL.td.k),suc:S.suc};tdPlay(k,'self');g.vis=!!document.querySelector('#kg82:not([hidden]) #kg82skip');return g},k);console.log('td guard',JSON.stringify(g0));await p.waitForSelector('#kg82skip',{state:'visible'});
   const v0=await p.evaluate(k=>S.vir[k]+(S.virP&&S.virP[k]||0)+JSON.stringify(S.virx||''),k);
@@ -70,7 +74,7 @@ console.log('step0');
 
  /* 5. the old j5 lesson overlay (#mgskip) */
  await reset();await p.evaluate(()=>{S.mg=null;openMG('ky',0,()=>{})});await p.waitForSelector('#mgskip',{state:'visible'});
- const jq=await btn('#mgskip');ck('j5 overlay «Để trời định» = kit quick (odds word, thành/hỏng)',jq&&/kquick/.test(jq.cls)&&wordOK(jq.t)&&/thành:? tiến bộ một phần/i.test(jq.t)&&/hỏng|bại/i.test(jq.t),jq);
+ const jq=await btn('#mgskip');ck('j5 overlay «Học nhanh» = kit quick (odds word, thành/hỏng)',jq&&/Học nhanh/.test(jq.t)&&/kquick/.test(jq.cls)&&wordOK(jq.t)&&/thành:? tiến bộ một phần/i.test(jq.t)&&/hỏng|bại/i.test(jq.t),jq);
  await shot('j5ov');
  const pts=await p.evaluate(()=>new Promise(res=>{window.__kq=kitQuickRoll;kitQuickRoll=()=>false;const ov=document.getElementById('mgskip');ov.click();setTimeout(()=>{kitQuickRoll=window.__kq;res(document.querySelector('#ov .mgres')&&document.querySelector('#ov .mgres').innerText)},200)}));
  ck('j5 quick lost → "Không vào"',/Không vào/.test(pts||''),pts);
