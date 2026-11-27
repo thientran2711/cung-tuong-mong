@@ -141,9 +141,15 @@ const KF_KINDS={rays:["streak"],stars:["spark"],coins:["coin"],ink:["ink"],inks:
  motes:["ember","orb"],ash:["ash"],smoke:["smoke"],lanterns:["orb","lantern"],pop:["spark"],
  brush:["brush"],goldpetals:["petal-peach"],golddust:["spark","ember"],jade:["jade"],incense:["incense"],lotus:["lotuslight","petal-lotus"],peach:["petal-peach"],letter:["letter"]};
 function kfKinds(name){const k=KF_KINDS[name];return typeof k==="function"?k():(k||[])}
-function kfPx(name,p){if(kfStill()||!KF_SPAWN[name])return;kfApp().then(()=>kfkLoad(kfKinds(name))).then(()=>{try{KF_SPAWN[name](p||kfPt());kfWake()}catch(e){console.error(e)}}).catch(()=>{})}
+/* KIT §57.1c: a point effect (stars, smoke, ink, pop, jade, letter, rays, embers, dust…) never lands on an open dialog's text — same guard as kitFxBurst
+   (jfxkit kfkDlgPt): moved above the dialog, else not played. Screen-wide kinds (coins, petals, ash, motes, lanterns, incense) ignore the point. */
+const KF_WIDE={coins:1,petals:1,motes:1,ash:1,lanterns:1,incense:1,goldpetals:1,peach:1};/* screen-wide kinds: every other spawner (also those other modules add) is a point effect */
+function kfPx(name,p){if(kfStill()||!KF_SPAWN[name])return;kfApp().then(()=>kfkLoad(kfKinds(name))).then(()=>{try{let at=p||kfPt();
+  /* checked when it is DRAWN (the textures load first; the dialog may have opened meanwhile) */
+  if(!KF_WIDE[name]&&typeof kfkDlgPt==="function"){const R0=Math.max(110,at.r?Math.max(at.r.width,at.r.height)/2:0),q=kfkDlgPt(at,R0);if(!q)return;if(q!==at)at={x:q.x,y:q.y}}const inPic=window.KFK&&KFK.pic;
+  if(window.KFK)KFK.pt=!KF_WIDE[name]&&!inPic;try{KF_SPAWN[name](at)}finally{if(window.KFK)KFK.pt=0}kfWake()}catch(e){console.error(e)}}).catch(()=>{})}
 function kfWake(){const a=KFX.app;if(!a)return;if(a.canvas.style.display==="none")a.canvas.style.display="";if(!a.ticker.started)a.ticker.start()}
-function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,L=KFX.parts;let amb=0;KFX.gt=(KFX.gt||0)+d/60;KFX.gust=Math.max(0,Math.sin(KFX.gt*.7))*1.6;
+function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,L=KFX.parts;let amb=0;const DB=L.length&&typeof kfkDlgBox==="function"?kfkDlgBox():null;/* §57.1c */KFX.gt=(KFX.gt||0)+d/60;KFX.gust=Math.max(0,Math.sin(KFX.gt*.7))*1.6;
  for(let i=L.length-1;i>=0;i--){const s=L[i],v=s.v;v.life-=d;
   if(v.life<=0||(v.amb&&(v.clip&&KFX.sr?(s.y>KFX.sr.y+KFX.sr.h+20||s.y<KFX.sr.y-90||s.x<KFX.sr.x-90||s.x>KFX.sr.x+KFX.sr.w+90):(s.y>H+20||s.y<-90||s.x<-90||s.x>W+90)))){kfkFree(s);L.splice(i,1);continue}
   if(v.fx!=null){if(KFX.sr){s.x=KFX.sr.x+v.fx*KFX.sr.w;s.y=KFX.sr.y+v.fy*KFX.sr.h}v.ph+=.03*d;s.alpha=v.a0*(.7+.3*Math.sin(v.ph*3));continue}
@@ -151,6 +157,7 @@ function kfTick(tk){const d=Math.min(3,tk.deltaTime),H=innerHeight,W=innerWidth,
   if(v.spin)s.rotation+=v.spin*d;if(v.coin)s.scale.x=v.sc*Math.cos(v.ph*3);if(v.grow)s.scale.set(s.scale.y+v.grow*d);
   const f=v.life/v.max;let a=v.a0;if(v.fade==="out")a=v.a0*Math.min(1,f*2.2);else if(v.fade==="inout")a=v.a0*Math.min(1,f*4,(1-f)*6);if(v.tw)a*=.55+.45*Math.sin(v.ph*v.tw*40);if(v.bl){const q=.5+.5*Math.sin(v.ph*v.bl);a*=.3+.7*Math.sqrt(q)}s.alpha=Math.max(0,a);
   if(v.clip&&kfOverInfo(s.x,s.y,Math.abs(s.width||0)/2+2,Math.abs(s.height||0)/2+2))s.alpha=0;  /* wx-fx-size: weather never sits over a stage chip / the place name (text stays readable) */
+  if(DB&&s.__pt){const hw=Math.abs(s.width||0)*.25,hh=Math.abs(s.height||0)*.25;if(s.x+hw>DB.left&&s.x-hw<DB.right&&s.y+hh>DB.top&&s.y-hh<DB.bottom)s.alpha=0}  /* §57.1c: a point effect that drifted under a dialog opened after it was drawn never shows over the dialog */
   if(v.amb)amb++}
  KFX.live=L.length;KFX.amb=amb;kfBoltTick(d);
  /* PERF (owner 16/11 lag): ambient-only weather (snow / fireflies / petals / mist) runs at 30 fps (motion is dt-based, so speed is unchanged); bursts and lightning get 60; rain streaks are dt-based too */

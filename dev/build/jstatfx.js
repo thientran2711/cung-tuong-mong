@@ -24,13 +24,19 @@ function ksfRun(it){const dv=it.dv,k=it.k,cell=ksfCell(k),txt=`${ksfCellName(cel
  const sp=ksfLabel(txt,dv),w=sp.offsetWidth,h=sp.offsetHeight,vw=innerWidth;const cl=x=>Math.max(4,Math.min(vw-w-4,x));
  let cr=cell&&cell.getBoundingClientRect(),f=it.from;
  if(f&&f.width!=null&&f.left!=null)f={x:f.left+f.width/2,y:f.top};  /* a rect → its top centre */
+ /* KIT §57.1c (MAIN 177 ruling 27/11, whole family of §57.1b): a card→cell FLIGHT never crosses an open dialog either — when its path (from the
+    card to the top-bar cell) would pass over #modal .dlg, it does not fly: the label shows by its cell, above the dialog (or the cell glow alone) */
+ if(f&&cr){const d=ksfDlgBox();if(d){const x0=cl(f.x-w/2+(it.dx||0)),y0=Math.max(4,f.y-h-6),x1=cl(cr.left+cr.width/2-w/2),y1=cr.top+cr.height/2-h/2,g=w*.07;
+  for(let i=0;i<=24;i++){const t=i/24,x=x0+(x1-x0)*t,y=(t<.34?y0-10*t/.34:y0-10+(y1-y0+10)*(t-.34)/.66);if(ksfHit(x-g,y-g,w+2*g,h+2*g,d)){f=null;break}}}}
  if(f){/* flies from where the change came from (the result card) to its cell */
   const x0=cl(f.x-w/2+(it.dx||0)),y0=Math.max(4,f.y-h-6);
   if(cr){const x1=cl(cr.left+cr.width/2-w/2),y1=cr.top+cr.height/2-h/2;
    const an=sp.animate([{transform:`translate(${x0}px,${y0+14}px) scale(.7)`,opacity:0},{transform:`translate(${x0}px,${y0-6}px) scale(1.12)`,opacity:1,offset:.12},
     {transform:`translate(${x0}px,${y0-10}px) scale(1.06)`,opacity:1,offset:.34},{transform:`translate(${x1}px,${y1}px) scale(1)`,opacity:1,offset:.9},{transform:`translate(${x1}px,${y1}px) scale(.8)`,opacity:0}],
     {duration:KSF.HOLD+KSF.FLY,easing:"cubic-bezier(.4,.05,.35,1)",fill:"both"});
-   setTimeout(()=>kitStatGlow(cell,dv),(KSF.HOLD+KSF.FLY)*.88);an.onfinish=()=>ksfDone(sp);return}
+   const gt=setTimeout(()=>kitStatGlow(cell,dv),(KSF.HOLD+KSF.FLY)*.88);an.onfinish=()=>ksfDone(sp);
+   /* §57.1c: a dialog that opens while the label is flying ends the flight at once (the cell glows now) — it never crosses the dialog */
+   const tick=()=>{if(!sp.isConnected)return;const d=ksfDlgBox();if(d){const r=sp.getBoundingClientRect(),g=r.width*.07;if(ksfHit(r.left-g,r.top-g,r.width+2*g,r.height+2*g,d)){try{an.cancel()}catch(e){}ksfDone(sp);clearTimeout(gt);kitStatGlow(cell,dv);return}}requestAnimationFrame(tick)};requestAnimationFrame(tick);return}
   ksfGuard(sp,it,false);/* §57.1b: a cell-less label rising at its source never stays over an open dialog */
   const an=sp.animate([{transform:`translate(${x0}px,${y0+14}px) scale(.7)`,opacity:0},{transform:`translate(${x0}px,${y0-6}px) scale(1.12)`,opacity:1,offset:.15},{transform:`translate(${x0}px,${y0-12}px) scale(1)`,opacity:1,offset:.8},{transform:`translate(${x0}px,${y0-24}px) scale(1)`,opacity:0}],{duration:KSF.HOLD+600,easing:"ease-out",fill:"both"});an.onfinish=()=>ksfDone(sp);return}
  /* a change with no card to fly from: the label appears under its cell (or mid-stage) and stays readable, the cell glows at once */

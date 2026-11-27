@@ -4,7 +4,10 @@
    A. WHOLE-GAME SWEEP of every PEND dialog builder: every avatar on an event picture (.k3ev > .kevav) lies wholly INSIDE its picture (never over text).
    B. STRIP HEIGHTS: the grand-ending dialog (Đại kết cục, a second person on the picture) with its picture forced to 40…220px: the avatar stays inside.
    C. SEAL LEAN: the big seal clone (.kemo-big) of a seal inside an open dialog stays inside its own box (the picture / its avatar frame).
-   D. LABELS + TOASTS over an open dialog: a cell-less stat label (Hoàng hậu → ta), a top-bar cell label (Đức), the line toast (kitLineToast): none covers the dialog. */
+   D. LABELS + TOASTS over an open dialog: a cell-less stat label (Hoàng hậu → ta), a top-bar cell label (Đức), the line toast (kitLineToast), and card→cell
+      FLIGHTS fired from the dialog's own card (Danh, Sủng): none covers the dialog (KIT §57.1b + §57.1c).
+   E. PAINTED BURSTS over an open dialog (KIT §57.1c, MAIN 177 ruling): every glow / spark sprite (not falling petals) drawn while the dialog is open —
+      the ending's own entrance burst + bursts aimed at the dialog title — keeps its core off the dialog box (or inside a dialog picture). */
 const {chromium}=require('playwright');const fs=require('fs');
 const URL=process.argv[2];const OUT=process.argv[3]||'';if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const fails=[];const note=(ok,m)=>{if(!ok)fails.push(m)};
@@ -35,6 +38,10 @@ const fails=[];const note=(ok,m)=>{if(!ok)fails.push(m)};
   /* ---- B. strip heights on the grand ending ---- */
   /* the sweep opens chest pickers whose «Vòng bảo vật» ring stays up after the dialog is dropped: close it (a test leftover, not a game state) */
   await p.evaluate(()=>{for(let i=0;i<20&&window.kitRingItem&&kitRingItem.cur;i++){try{kitRingItem.close()}catch(e){break}}document.querySelectorAll('#modal.kri-hide').forEach(m=>m.classList.remove('kri-hide'));Q.length=0;geAsk();showModal()});await settle();await p.evaluate(()=>chooseM(0));await settle();
+  await p.evaluate(()=>{window.__fx=[];window.__fxN=0;const sp0=window.kfkSp;if(sp0&&!sp0.__w){window.kfkSp=kfkSp=function(k){const s=sp0.apply(this,arguments);if(s){s.__k=k;window.__fxN++}return s};kfkSp.__w=1}
+   window.__fxT=setInterval(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');if(!d||!window.KFX||!KFX.parts)return;const dr=d.getBoundingClientRect();const pics=[...d.querySelectorAll('.k3ev,.k3mpic,.kdlgart,.ksart,.kszfs,.md,.pcp')].map(e=>e.getBoundingClientRect());
+    for(const s of KFX.parts){if(!s||!s.visible||!s.__k||s.alpha<.15||/^(petal-|osmanthus|leaf|snow|ash|coin)/.test(s.__k))continue;const hw=Math.abs(s.width)*.25,hh=Math.abs(s.height)*.25;const c={left:s.x-hw,right:s.x+hw,top:s.y-hh,bottom:s.y+hh};
+     const hit=c.left<dr.right&&c.right>dr.left&&c.top<dr.bottom&&c.bottom>dr.top&&!pics.some(q=>__inside(c,q,1));window.__fx.push({k:s.__k,hit,r:[c.left,c.top,c.right-c.left,c.bottom-c.top].map(Math.round)})}},40)});
   await p.evaluate(()=>{window.__lab=[];window.__labT=setInterval(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');if(!d)return;const dr=d.getBoundingClientRect();
     document.querySelectorAll('.ksfl,#ktbtoast,#kupdline').forEach(e=>{const r=e.getBoundingClientRect();if(!r.width||getComputedStyle(e).visibility==='hidden'||+getComputedStyle(e).opacity<.05)return;const hit=r.left<dr.right&&r.right>dr.left&&r.top<dr.bottom&&r.bottom>dr.top;window.__lab.push({t:e.textContent.slice(0,40),hit,r:[r.x,r.y,r.width,r.height].map(Math.round)})});
     document.querySelectorAll('.kemo-big').forEach(e=>{const r=e.getBoundingClientRect();if(!r.width)return;window.__lab.push({t:'(seal lean)',seal:1,r:[r.x,r.y,r.width,r.height].map(Math.round)})})},40)});
@@ -47,11 +54,18 @@ const fails=[];const note=(ok,m)=>{if(!ok)fails.push(m)};
   console.log(`\nB. STRIP HEIGHTS ${tag} (Đại kết cục): `+(B?B.map(r=>r.none?`${r.h}px: no avatar`:`${r.h}px → avatar ${r.av[0]}x${r.av[1]} ${r.ok?'inside ✓':'OUT ✗'}`).join(' · '):'no picture'));
   note(B&&B.some(r=>!r.none),`${tag} B: the grand-ending picture has no avatar`);(B||[]).forEach(r=>note(r.none||r.ok,`${tag} B: strip ${r.h}px avatar leaves the picture`));
   /* ---- D. labels / toasts fired while the dialog is open ---- */
+  /* E (aimed bursts) + D (flights from the dialog's own card): fired at the title / the option card of the open dialog */
+  await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');const t=d&&(d.querySelector('.k3t,.k3ttl,h3,b')||d);const o=d&&d.querySelector('.opt,.pcard,.k3opt')||t;
+   try{kitFxBurst('glowburst',t,1)}catch(e){}try{kitFxBurst('spark',t,12)}catch(e){}try{const r=o.getBoundingClientRect();kitStatFx([{k:'danh',dv:2,from:r},{k:'sung',dv:1,from:r}],{src:'test0'})}catch(e){}});
+  await p.waitForTimeout(3000);
   await p.evaluate(()=>{try{kitStatFx([{k:'hh',dv:4}],{src:'test1'})}catch(e){}try{kitStatFx([{k:'duc',dv:1}],{src:'test2'})}catch(e){}try{if(typeof kitLineToast==='function')kitLineToast('Hoàng hậu → ta: thiện cảm +4')}catch(e){}});
   await p.waitForTimeout(4000);
   /* ---- C + D results ---- */
-  const L=await p.evaluate(()=>{clearInterval(window.__labT);const d=document.querySelector('#modal:not([hidden]) .dlg');const ev=d&&d.querySelector('.k3ev');const c=ev&&ev.getBoundingClientRect();
-   return {lab:window.__lab,ev:c&&{left:c.left,top:c.top,right:c.right,bottom:c.bottom}}});
+  const L=await p.evaluate(()=>{clearInterval(window.__labT);clearInterval(window.__fxT);const d=document.querySelector('#modal:not([hidden]) .dlg');const ev=d&&d.querySelector('.k3ev');const c=ev&&ev.getBoundingClientRect();
+   return {lab:window.__lab,fx:window.__fx,fxN:window.__fxN,ev:c&&{left:c.left,top:c.top,right:c.right,bottom:c.bottom}}});
+  {const fh=L.fx.filter(x=>x.hit);const kinds=[...new Set(L.fx.map(x=>x.k))];
+   console.log(`E. BURSTS ${tag}: ${L.fxN} sprites made · ${L.fx.length} sprite frames while the dialog is open (${kinds.join(', ')||'none'}) · ${fh.length} cores over the dialog`+(fh[0]?` (e.g. ${fh[0].k} ${fh[0].r})`:''));
+   note(!fh.length,`${tag} E: ${fh.length} burst sprite frames over the open dialog (${[...new Set(fh.map(x=>x.k))].join(' | ')})`);note(L.fxN>0,`${tag} E: no painted burst drawn at all (Pixi off?) — check not run`)}
   const labs=L.lab.filter(x=>!x.seal),hits=labs.filter(x=>x.hit),seals=L.lab.filter(x=>x.seal);
   const sealOut=seals.filter(s=>!(L.ev&&s.r[0]>=L.ev.left-1&&s.r[1]>=L.ev.top-1&&s.r[0]+s.r[2]<=L.ev.right+1&&s.r[1]+s.r[3]<=L.ev.bottom+1));
   console.log(`\nC. SEAL LEAN ${tag}: ${seals.length} frames of the big seal clone · ${sealOut.length} outside its picture`+(sealOut[0]?` (e.g. ${sealOut[0].r})`:''));
