@@ -23,3 +23,4 @@ Branch: review/flight2-coop (harness/test files + this folder only; game code = 
 
 ## (c) Hang watch
 Watcher /home/user/wt/coop1j-watch.sh: stops when either seat (host / guest) has no file change for 15 min; then both seats are checked by hand for every card / button / kscn.
+- F ROOT 7 19:25Z: LIVE moved to bd47c753; room c stays pinned on its served build (86170222adab); any next room / relaunch on bd47c753, restack harness on 3ed71335 only after BIG #21 PASS. Fresh starts must use a NEW profile dir (new tag = new profile-coop-<tag>-* dirs, as rooms a/b/c did). Trường Môn viện covered tab chips: json rows kept for BIG #21.
