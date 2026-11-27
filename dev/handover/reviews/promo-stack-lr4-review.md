@@ -48,3 +48,13 @@ Final: **0aee038a** = d713f162 + reviewer fix commit + merge of LIVE 17f23656 (F
 | promo-rules | 26/28, the same 2 FAIL on LIVE (NPC servant exam roll, 844x390 reveal button) |
 
 Videos / shots: https://ctm-img.victoria-tntt.workers.dev/img/_review/promo-stack-lr4/ fold-755x1000.webm, ipad-1180x820.webm, fold-sacphong.jpg, ipad-sacphong.jpg, ipad-stage-hud.jpg, fold-hanhsu.jpg (kept for the land report; the lander wipes the folder after landing: python3 dev/site/cdn_sync.py --wipe-review promo-stack-lr4).
+
+## REMERGE after the verdict (LIVE moved 3 times) → LAND READY e2c5d5ae (FF from LIVE 4cd3f974)
+| LIVE | what came in | conflicts | resolution |
+|---|---|---|---|
+| b16b4b93 + 0b43ee55 | dayq-qsoftlock (jdayq), mg-trim-lr5 (jshelf, jbal2 skip, j5/j79/j83/jdf/…) | built files only | rebuilt; no overlap with promo code; no BAL.net copy back |
+| 066d9af0 | parity-facfix-lr5 (j10 facFrOk, jagacts3 p3FacFr) | **j10.js facHTML** (source) | by hand: D line (BAL.btn.fac.k, pvOan) + LIVE facFrOk filter + the two founding-road texts; p3FacFr auto-merged |
+| 4cd3f974 | kptitle-close (j74: the «Ô lưu · Lui» button-crawl fault) | built files only | rebuilt |
+
+Gates on e2c5d5ae: promo-build 48/48 · kit-promo-hook 8/8 · fac-parity-play / fac-roads-play / ag-par3 ALL PASS (run on 2883892b; j10 unchanged since) · coop-e2e 143/143 · CORE GATES PASS (button-crawl now green) · QUICKCHECK PASS, old save ok, perf new/live render 256/189, tab 472/427, buổi 1228/966 ms, tasks 28/21 (within the gate; earlier runs of this stack were ≈ live: 210/224, 227/204, 231/208 → run noise).
+Co-op note: one coop-e2e run on 2883892b was 139/143 (S.fidUsed maid face picked on the guest, j39 figPick); the same-time run on LIVE 4cd3f974 was 139/143 with another face mismatch (Thái hậu face). Both are intermittent LIVE co-op face faults, not promo code; with the evc one (jcharge.js:30) → MAIN follow-up «co-op face / read-path writes on the guest».
