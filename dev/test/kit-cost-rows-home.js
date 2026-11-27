@@ -29,7 +29,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r.r3.mat.join()==="Lời đồn +5"&&r.r3.duoc.join()==="Lời đồn -4",'rows: rumour — less is better',r.r3);
  ok(r.r4.duoc.join()==="quý nhau +3"&&r.r4.mat.join()==="quý nhau -2",'rows: quý nhau gain / loss',r.r4);
  ok(r.sg.kap.join()==="-1,1"&&r.sg.kld.join()==="-1,1"&&r.sg.qn.join()==="-1,1",'hint signs: pressure / rumour inverse, quý nhau normal',r.sg);
- for(const [k,re] of [["gt",/danh giá/],["kap",/thúc ép|sức ép/],["khm",/hồi môn/],["kld",/xì xào|lời ra tiếng vào|lời đồn/],["qn",/quý nhau|thân thiết|xa cách/],["qn2",/quý nhau|thân thiết/]]){
+ for(const [k,re] of [["gt",/Gia thanh [+−]/],["kap",/Áp lực hôn sự [+−]/],["khm",/Hồi môn [+−]/],["kld",/Lời đồn [+−]/],["qn",/thiện cảm hai bên [+−]/],["qn2",/thiện cảm hai bên [+−]/]]/* WORDING-GAIN (OD 26/11 ~18:50Z (7)): the hint names the stat + marks, no vague word */){
   ok(r.h[k].every(t=>t&&!/^không được mất gì$/.test(t))&&r.h[k].some(t=>re.test(t)),`word mode ${k}: stat named, not «không được mất gì»`,r.h[k])}
  const named=r.cards.filter(c=>!c.err);const bad=named.filter(c=>!c.h||/^không được mất gì$/.test(c.h)||/^chẳng được gì$/.test(c.h));
  ok(named.length>=8,`real home cards with a home stat: ${named.length} (all origins)`);ok(bad.length===0,'every such card: word-mode hint is not empty / «không được mất gì»',bad.slice(0,4).map(c=>c.n+' | '+c.txt+' → '+c.h));
