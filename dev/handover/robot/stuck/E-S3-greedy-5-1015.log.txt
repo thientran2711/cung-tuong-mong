@@ -1,0 +1,40 @@
+CP buổi 914 year 7 save 2110558 chars
+BUG crash tab crashed (Page crashed) at buổi 916
+PAGE CRASHED R2-greedy-5 at buổi 916 → exit 3, rerun with resume=1
+RESUME R2-greedy-5 from 2026-11-26T14:27:56.186Z buổi 914
+CP buổi 914 year null save 2112526 chars
+STATUS R2-greedy-5 · buổi 944 · year 7 · rank 0 · bugs 4 · stuck 0 · dead buttons 1
+CP buổi 964 year 7 save 2211091 chars
+STATUS R2-greedy-5 · buổi 980 · year 7 · rank 0 · bugs 4 · stuck 0 · dead buttons 1
+BUG crash tab crashed (Page crashed) at buổi 1001
+PAGE CRASHED R2-greedy-5 at buổi 1001 → exit 3, rerun with resume=1
+RESUME R2-greedy-5 from 2026-11-26T17:09:38.997Z buổi 999
+RESUME: origin moved https://thientran2711.github.io → http://127.0.0.1:8767 (build pin) — save restored again there
+RESUME: save restored on http://127.0.0.1:8767 (2245193 of 2245193 chars, 11 keys)
+CP buổi 999 year null save 2245193 chars
+BUG game item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)
+BUG stuck no progress 15 min on .dlg «Biếu quà làm lành»
+BUG stuck no progress 15 min on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 1 người.»
+BUG stuck no progress 15 min on page «Chung Tú cung · Minh Hòa hiên · Ở đây còn 3 người.»
+STATUS R2-greedy-5 · buổi 1007 · year 8 · rank 0 · bugs 9 · stuck 3 · dead buttons 1
+STATUS R2-greedy-5 · buổi 1012 · year 8 · rank 0 · bugs 9 · stuck 6 · dead buttons 1
+page.evaluateHandle: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:470:23)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:748:9 {
+  log: []
+}
+RESUME R2-greedy-5 from 2026-11-26T19:56:22.533Z buổi 1014
+RESUME: save restored on https://thientran2711.github.io (2239899 of 2239899 chars, 20 keys, ckpt from http://127.0.0.1:8767)
+RESUME: hclh-save-v2-1 content identical (hash ckpt 86aaf25c · page 86aaf25c, clock ckpt 8.82.2.3 · page 8.82.2.3)
+CP buổi 1015 year 8 save 2242625 chars
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /cung-tuong-mong/img/kit/ico-download.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-choang.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/ghen.webp
+BUG game item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls ()
+BOARD hat 152 moves 5/10 raw 0.00 (19 s, area 0, bold)
+BUG game item pick grid «» re-opened 3× by «Tiếp ▸» with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:717:24)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:1045:9 {
+  log: []
+}
