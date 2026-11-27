@@ -496,3 +496,4 @@ LOAD: main running KK37, LC20, HOME-WAY, NEWS-SIEVE, RV-OB-NGOAICUNG, NHV-BUILD 
 - 00:53Z EVENING REPORT sent to sếp (PDF Bao-cao-loi-25-26-11.pdf, LIVE fa722503).
 - 00:56Z owner 01:07Z (167 chat): doors → one-tap → DOOR-ONETAP (opus, plan first, coordinate with ACT-MOVE-2). real-proof PASS RV-163D a2902d43 → LC26 (with punish-wit); dup-row issue → PT-5. sếp approved recs 01:05Z.
 - 01:03Z DOOR-ONETAP PLAN READY 4d68aaab (door-onetap.md; 58 rows → ONE/TIER/SPLIT, new jone.js) → MAIN OK; Q1/Q2 recs, Q3 ONE auto-topic; harm tiers = equal-weight real outcomes (01:12Z). title-parity PASS RV-163D 4af19072 → LC26; reign-end FAIL 3 (REIGN-END fixing); empty-modal RV READY → RV-165.
+- 01:06Z ROLL at ~30 % ctx → TAKEOVER_MAIN_169.md; opening «MAIN CHÍNH 169» (depth 8 = limit); my 3 scheduled tasks disabled.
