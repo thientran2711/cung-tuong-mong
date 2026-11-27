@@ -193,12 +193,12 @@ try{Object.assign(KIT_GLOSS,{"Hiền tài":"Tài học của hoàng tự, suy ra
  "Nhà chồng chống lưng":"Nhà phò mã đứng sau người mẹ của công chúa: cộng vào thế lực phe và tranh ghế."})}catch(e){}
 
 /* 1. Con của ngươi */
-function kidTab(){const K=S.kids;if(!K.length)return htEmpty("img/act-cat-cham-con.webp","Ngươi chưa có con",[
+function kidTab(){const dd=k=>typeof dthIs==="function"&&dthIs(k),K=S.kids.filter(k=>!dd(k)).concat(S.kids.filter(dd)),nD=K.filter(dd).length,n0=K.length-nD;/* the dead stay, own group after the living (owner 27/11 ~05:10Z) */if(!K.length)return htEmpty("img/act-cat-cham-con.webp","Ngươi chưa có con",[
   "Con chỉ đến sau những đêm thị tẩm: được Hoàng thượng lật thẻ càng nhiều, càng dễ có tin vui.",
   "Có thai thì giữ gìn Sức, nhờ thái y an thai; kẻ ghen có thể hại thai.",
   "Con sinh ra hiện ở đây: dạy dỗ, chăm con, bàn hôn sự; con trai được xét vào hàng kế vị."]);
  const hl=S.heir&&S.heir.k?(S.heir.v?`Thái tử: ${S.heir.k.name}, con của ${S.heir.v.name}.`:`<span class="g">Con ngươi, ${S.heir.k.name}, là Thái tử.</span>`):"Chưa lập Thái tử.";
- return `<div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+pager("kid",K.map(k=>({p:k,f:kidFace(k),name:sname(k),dim:!k.alive})),i=>kidCard(K[i]))}
+ return `<div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+pager("kid",K.map((k,i)=>({p:k,f:kidFace(k),name:sname(k),dim:!k.alive,sep:nD&&i===n0?"Đã khuất":""})),i=>kidCard(K[i])).replace(/(<span class="pcount">[^<]*)/,nD?`$1 · Đã khuất: ${nD}`:"$1")}
 /* 2. Kế vị */
 function kvReasons(x,i,o){const L=[];const k=x.k;
  if(k.heir)L.push("Đã được lập làm Thái tử: đứng đầu hàng kế vị.");
