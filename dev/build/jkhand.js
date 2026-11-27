@@ -78,7 +78,7 @@ function kitHandLongOff(g){try{g.__khLong=kitHandSig(g);g.__khSig="";g.classList
      A locked card has no «Chọn». Tap another card = switch; tap anywhere else = it shrinks back into its slot. Tapping the enlarged card does nothing.
    - ONE part for every hand (frame hand, stage Bàn bài via jkstage kstgPlate → kitHandBigPlace, kitHand.mount panes). «Cảnh động» off / reduced motion = no motion.
    The element keeps the class .khplate (the stage and the tests key on it). Geometry knobs: KIT_HAND.big. */
-KIT_HAND.big={w:[360,340]/* enlarged card width [Fold, iPad] (god-research 360x504 / 340x476) */,asp:1.4/* 5:7 */,minH:220,under:.8,tick:[3,2]/* the green ✓ sits 3 px in from the right, 2 px down from the top of the card (the same as the thẻ gỗ ✓, kitPick) — its size = BAL.kpkgo */,ms:200,backMs:150,fs:[22,21,20,19,18,17,16,15,14,13]/* info type scale px: the largest that fits wins */};
+KIT_HAND.big={w:[360,340]/* enlarged card width [Fold, iPad] (god-research 360x504 / 340x476) */,asp:1.4/* 5:7 */,minH:220,under:.8,tall:380/* room (px) above the hand under which the card takes the wide tier */,ww:[420,520]/* the wide tier: card width [Fold, iPad] (picture left, info right) */,minHw:170,gapHand:8,tick:[3,2]/* the green ✓ sits 3 px in from the right, 2 px down from the top of the card (the same as the thẻ gỗ ✓, kitPick) — its size = BAL.kpkgo */,ms:200,backMs:150,fs:[22,21,20,19,18,17,16,15,14,13]/* info type scale px: the largest that fits wins */};
 function kitHandBigBuild(b,z){const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang").forEach(e=>e.remove());/* the Gợi ý row repeats Được / Mất in prose: shown only when the card has neither row */if(c.querySelector(".kr-duoc,[class*=kr-mat]"))c.querySelectorAll(".kr-hint").forEach(e=>e.remove());
  /* a hint clause the kit pass appended twice («…; hên xui; hên xui», a re-run of kitOptFinal on the hand card) reads once */c.querySelectorAll(".kb .ef").forEach(e=>{if(e.children.length)return;const p=e.textContent.split("; "),q=p.filter((x,i)=>i===0||x!==p[i-1]);if(q.length<p.length)e.textContent=q.join("; ")});c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *")&&!(r.querySelector(".krv")||{}).textContent)r.remove()});
@@ -92,11 +92,15 @@ function kitHandBigBuild(b,z){const c=b.cloneNode(true);c.removeAttribute("id");
 function kitHandBigFit(z){const fi=z.querySelector(".khbi");if(!fi)return;const F=KIT_HAND.big.fs;let i=0;for(;i<F.length;i++){z.style.setProperty("--khbfs",F[i]+"px");if(fi.scrollHeight<=fi.clientHeight+1)break}if(i>=F.length)z.style.setProperty("--khbfs",F[F.length-1]+"px")}
 /* place the enlarged card in the CENTRE of [L,R] × [top0, bottom] with its «Chọn» block under it; the room caps the height (5:7 kept) */
 function kitHandBigPlace(b,z,dl,top0,L,R){try{const K=KIT_HAND.big,ip=kitHandWide(),D=dl.getBoundingClientRect();
- L=L==null?D.left+8:L;R=R==null?D.right-8:R;let top=top0==null?D.top+4:top0;const bot=dl.__khBot?dl.__khBot():Math.min(innerHeight-4,D.bottom-4);
- const foot=0;/* the green ✓ stands INSIDE the card (top-right corner), no block under it */let w=Math.round(Math.min(K.w[ip],R-L)),h=Math.round(w*K.asp);
- /* the story stays readable: the card starts under the story box when that still leaves ≥ KIT_HAND.big.under of its height, else it stands over it */
- const pm=dl.querySelector(".kpmain");if(pm&&pm.getClientRects().length){const pb=pm.getBoundingClientRect().bottom+8;if(pb>top&&bot-pb-foot-4>=h*K.under)top=pb}
- const room=Math.round(bot-top-foot-4);if(h>room){h=Math.max(K.minH,room);w=Math.round(h/K.asp)}
+ L=L==null?D.left+8:L;R=R==null?D.right-8:R;let top=top0==null?D.top+4:top0;let bot=dl.__khBot?dl.__khBot():Math.min(innerHeight-4,D.bottom-4);
+ const foot=0;/* the green ✓ stands INSIDE the card (top-right corner), no block under it */
+ /* OD 27/11 ~04:36Z: the enlarged card NEVER covers the hand — it opens ABOVE the row (between the story and the row); the row stays in place, all cards visible, the picked one lifted in its slot.
+    Not enough room above → the smaller WIDE tier (picture left, info right), never over the row. */
+ try{const g=b.parentElement,gr=g.getBoundingClientRect(),lf=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0;bot=Math.min(bot,Math.round(gr.top-lf-K.gapHand))}catch(e){}
+ const pm=dl.querySelector(".kpmain");if(pm&&pm.getClientRects().length){const pb=pm.getBoundingClientRect().bottom+8;if(pb>top)top=pb}
+ const room=Math.max(80,Math.round(bot-top-4));let w=Math.round(Math.min(K.w[ip],R-L)),h=Math.round(w*K.asp);const wide=room<K.tall;
+ if(wide){w=Math.round(Math.min(K.ww[ip],R-L));h=Math.min(room,Math.max(K.minHw,Math.round(w*.62)))}else if(h>room){h=room;w=Math.round(h/K.asp)}
+ z.classList.toggle("khwide",wide);
  const x=Math.round((L+R)/2-w/2),y=Math.round(Math.max(top,top+(bot-top-(h+foot))/2));
  z.style.width=w+"px";z.style.height=h+"px";z.style.left=(x-D.left)+"px";z.style.top=(y-D.top)+"px";z.style.bottom="auto";z.__khRect={l:x-D.left,t:y-D.top,w,h};z.classList.toggle("khgo",!b.disabled);z.style.setProperty("--kpgw",BAL.kpkgo.w+"px");kitHandBigFit(z);
  const v=dl.querySelector(":scope>.khveil");if(v){const P=dl.__khPane?dl.__khPane():null,Q=P?P.getBoundingClientRect():D;v.style.left=(Q.left-D.left)+"px";v.style.top=(Q.top-D.top)+"px";v.style.width=Q.width+"px";v.style.height=Q.height+"px"}
@@ -111,7 +115,7 @@ function kitHandPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg,.khos
  const fresh=z.hidden||z.__khFor!==b;if(fresh){z.getAnimations&&z.getAnimations().forEach(a=>a.cancel());kitHandBigBuild(b,z)}z.hidden=false;
  const hd=dl.querySelector(":scope>.kph"),D=dl.getBoundingClientRect(),top0=dl.__khTop?dl.__khTop():(hd&&hd.getClientRects().length?hd.getBoundingClientRect().bottom:D.top)+6;
  const LR=dl.__khLR?dl.__khLR():[D.left+8,D.right-8];kitHandBigPlace(b,z,dl,top0,LR[0],LR[1]);
- b.classList.add("khout");if(fresh&&!kitHandStill()){const cf=dl.querySelector(":scope>.khconf");if(cf)cf.style.opacity="0";/* «Chọn» shows when the card has grown */Promise.resolve().then(()=>{if(z.__khFor===b&&!z.hidden)kitHandBigGo(b,z,false,()=>{if(cf)cf.style.opacity=""});else if(cf)cf.style.opacity=""})}}catch(e){console.error("kitHandPlate",e)}}
+ /* the picked card stays in its slot, lifted (klift) — never hidden */if(fresh&&!kitHandStill()){const cf=dl.querySelector(":scope>.khconf");if(cf)cf.style.opacity="0";/* «Chọn» shows when the card has grown */Promise.resolve().then(()=>{if(z.__khFor===b&&!z.hidden)kitHandBigGo(b,z,false,()=>{if(cf)cf.style.opacity=""});else if(cf)cf.style.opacity=""})}}catch(e){console.error("kitHandPlate",e)}}
 /* ONE green ✓ (owner 27/11 ~04:00Z, CANON OVERWRITE of the 280x64 bar and of the «Chọn» chip): the small kit tick INSIDE the enlarged card, top-right (3 in / 2 down), size BAL.kpkgo, the same tick as the thẻ gỗ (kitPick).
    A locked card: none. Putting a card back = a tap anywhere else (or on another card = switch). (The thẻ gỗ picker kitPick has the same chip, §98.1.) */
 function kitHandConf(b){try{const g=b&&b.parentElement,dl=g&&g.closest(".dlg,.khost");if(!dl)return;let c=dl.querySelector(":scope>.khconf");const z=dl.querySelector(":scope>.khplate:not([hidden])"),Rz=z&&z.__khRect;
@@ -199,9 +203,13 @@ html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!importan
 #modal .dlg>.khconf>button:active,.khconf>button:active{transform:scale(.92)}
 #modal .dlg>.khplate{position:absolute;z-index:6;pointer-events:auto}/* §101.10 the ENLARGED card (front only, no flip): taps on it do nothing (never fall through to the cards under it) */
 #modal .dlg>.khplate[hidden],#modal .dlg>.khveil[hidden]{display:none}
-#modal .dlg>.khveil{position:absolute;z-index:5;pointer-events:none;background:rgba(40,22,10,.35);border-radius:inherit}/* the hand stays small BEHIND, under a soft veil; taps pass through (switch / put back) */
+#modal .dlg>.khveil{display:none!important}/* no veil any more: the enlarged card stands above the row and never covers it (OD 27/11 ~04:36Z) */
 #modal .dlg>.khplate>.khbc{position:absolute;inset:0;display:flex;flex-direction:column;gap:6px;padding:8px;border-radius:14px;background:var(--k-card,#fffaf0);box-shadow:0 0 0 2px var(--k-gold,#c9a24a),0 14px 30px rgba(40,20,8,.42);overflow:hidden;font-size:var(--khbfs,16px)}
 #modal .dlg>.khplate .khbn{flex:none;text-align:center;font-weight:800;font-size:1.12em;line-height:1.2;color:#5a2a12;padding:5px 10px;border-radius:10px;background:linear-gradient(#fff3d6,#f3dfae);box-shadow:inset 0 0 0 1px var(--k-gold,#c9a24a)}/* plaque: the WHOLE name */
+#modal .dlg>.khplate.khwide>.khbc{display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);gap:6px 8px}
+#modal .dlg>.khplate.khwide .khbn{grid-column:1/-1}
+#modal .dlg>.khplate.khwide .khbp{grid-column:1;grid-row:2;min-height:0}
+#modal .dlg>.khplate.khwide .khbi{grid-column:2;grid-row:2;justify-content:flex-start}/* the wide tier: picture left, info right */
 #modal .dlg>.khplate .khbp{flex:1 1 0;min-height:45%;border-radius:9px;overflow:hidden;background:#efe2c4}
 #modal .dlg>.khplate .khbp>img{width:100%;height:100%;object-fit:cover;object-position:50% 18%;display:block}
 #modal .dlg>.khplate .khbi{flex:0 1 auto;min-height:0;overflow:auto;overscroll-behavior:contain;display:flex;flex-direction:column;justify-content:center}/* the info takes its own height, type from ONE kit scale (KIT_HAND.big.fs, largest that fits); the picture (≥ 45 %) takes the rest — no empty band */

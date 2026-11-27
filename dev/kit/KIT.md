@@ -3101,6 +3101,9 @@ Owner: "Bất kỳ một cái thông báo nào của cái game đều phải vô
 - `how = {who: person object | name, where: place key | name, hours, cost, note, go, goK}` — the caller (goal list) supplies the data from BAL / the place table (law 4: no typed numbers); the kit only draws. Kit page sample §6.2l. Fixer: GOAL-LINKS.
 - KK54 (RV-165 §6.2l, law 10): the panel's nav cards («Đi tới», «Xem Dư đồ») are ONE long row each (kitOptTier: `.kgoalhow` skips the 2-column tier); test kit-goal-link checks `data-kol=1`.
 
+### 6.2m NAVIGATION OPTION `nav:1` (MAIN 161 on GOAL-LINKS-2 «Đi tới» printed «Được: không» + a «không được gì» result card; KK44) — j3 chooseM, j63 resultShow, jopic kitOptFinal
+- An option that only takes her somewhere / opens a screen (Đi tới, Xem Dư đồ, Đi làm: <tab> …) carries `nav:1`: its card has NO rows (`data-knav`, drawn like a free choice `.kfree`; a walk's khắc cost is in its title «Đi tới · N khắc»), picking it runs only its `go` — no effects applied, no log line, no result card (`window.__kNav` during the go). The walk itself (go) spends its own khắc and shows whatever the place shows. Every pure-navigation button carries it (fixers: GOAL-LINKS, Mệnh truyện «Đi làm»).
+
 ### 42.3 THỜI TIẾT THEO BUỔI — `WX_BUOI`
 - The week rolls ONE weather (`S.wx.b`, its flag f drives every rule); the WORDS shown follow the buổi (`S.wx.n = wxAt(S.wx.b, buổi)[0]`, icon
   `[1]`). Night never: nắng, ve kêu, "sớm". Day never: trăng, sao, đom đóm, đêm, dế. "sớm" only in the morning. Every new weather row gives all

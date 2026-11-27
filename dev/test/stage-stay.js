@@ -1,4 +1,4 @@
-/* review/stage-here r2 (MAIN ROOT-55 20:08Z (d)): staying in a place after it closes = the «Lẻn vào» caught row, rolled ONCE at the buổi turn.
+/* review/stage-here r2 → review/place-close (owner OD 26/11 ~14:00Z): staying in a place after it closes = ONE caught roll when the grace (BAL.placeClose) is used up; the turn itself rolls nothing; caught = NHẸ in a kit notice, no «Bị bắt» card.
    cases: caught (roll forced to fail) → Danh -BAL.sneak.danh, punished, walked home, "Bị bắt" card; not caught (forced pass) → stays, no loss;
    a second render/turn in the same buổi does not roll again; her own palace / an open place never rolls; the closing notice (its «Tin báo» panel text, r4) names the odds.
    usage (HOST mode, built root): [DEV=ipadAir] node dev/test/stage-stay.js → JSON + exit 1 on a fault */
@@ -17,13 +17,17 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
   const chip=window.__chips.find(x=>/sắp đóng cửa/.test(x))||"";/* place-rules: the entry notice «chỉ được lưu đến hết …» comes first; this checks the last-khắc one */const danh0=S.danh;const want=word(accSneakO("vuon"));
   const R0=Math.random;if(force!=null)Math.random=()=>force;let err="";const b0=S.buoi;let card0=false;try{for(let i=0;i<8&&S.buoi===b0;i++){/* place-rules: hidden motion scenes / a queued card must not hold the turn (jdayq, j9 Q.length) */try{kmBusy=false;KMQ.length=0}catch(e){}nextBuoi();await new Promise(r=>setTimeout(r,250));if(Q.some(m=>m.t==="Bị bắt"))card0=true;if(S.buoi===b0){Q.length=0;document.getElementById("modal").hidden=true}}}catch(e){err=String(e)}finally{Math.random=R0}
   await new Promise(r=>setTimeout(r,1500));
+  /* review/place-close: the turn opens the grace (no roll, no loss); the ONE roll comes when the grace is used up, with no card open */
+  const atTurn={place:S.place,danh:S.danh,G:!!S.plGrace};if(S.plGrace){const R1=Math.random;if(force!=null)Math.random=()=>force;try{used=S.plGrace.end;render()}finally{Math.random=R1}}
+  const pen=(window.kitNoticeList?kitNoticeList():[]).some(x=>/^closepen:/.test(x.id));
   const bk=bkey();const card=card0||Q.some(m=>m.t==="Bị bắt");const placeAfter=S.place;const danh1=S.danh;const seen=S.stayRoll;
   Q.length=0;document.getElementById('modal').hidden=true;render();await new Promise(r=>setTimeout(r,200));const again=S.stayRoll;
-  return{force,chip,chipOdds:/* review/home-way r6: overstay = NHẸ; the chip names the light price from BAL (law 4) and the odds word (law 7), never «lẻn vào» */chip.includes("may rủi: "+want)&&chip.includes("Danh -"+BAL.sneak.danh)&&!/lẻn vào/.test(chip),buoi:S.buoi,placeAfter,dDanh:danh1-danh0,sneakDanh:BAL.sneak.danh,card,seen,rolledOnce:again===seen&&!!seen,err}},force);
+  return{force,atTurn,pen,chip,chipOdds:/* review/home-way r6: overstay = NHẸ; the chip names the light price from BAL (law 4) and the odds word (law 7), never «lẻn vào» */chip.includes("may rủi: "+want)&&chip.includes("Danh -"+BAL.sneak.danh)&&!/lẻn vào/.test(chip),buoi:S.buoi,placeAfter,dDanh:danh1-danh0,sneakDanh:BAL.sneak.danh,card,seen,rolledOnce:again===seen&&!!seen,err}},force);
  const caught=await run(0.999),free=await run(0);
  /* own palace at the same hour never rolls */
  const own=await g.evaluate(async()=>{Q.length=0;S.stayRoll=null;S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.buoi=B4L-1;used=BAL.time.khac-1;render();try{nextBuoi()}catch(e){}await new Promise(r=>setTimeout(r,1200));const x=S.stayRoll;Q.length=0;document.getElementById('modal').hidden=true;return{seen:x}});
  const old=await g.evaluate(()=>{try{delete S.stayRoll;S=JSON.parse(JSON.stringify(S));render();return true}catch(e){return String(e)}});
- const F=[];if(!caught.chipOdds)F.push('chip-odds');if(caught.placeAfter!=='home'||caught.dDanh>-caught.sneakDanh||!caught.card||!caught.rolledOnce)F.push('caught');
+ const F=[];if(!caught.chipOdds)F.push('chip-odds');for(const x of [caught,free])if(x.atTurn.place!=='vuon'||!x.atTurn.G)F.push('turn-roll');
+ if(caught.placeAfter!=='home'||caught.dDanh>-caught.sneakDanh||caught.card||!caught.pen||!caught.rolledOnce)F.push('caught');
  if(free.placeAfter!=='vuon'||free.dDanh!==0||free.card||!free.rolledOnce)F.push('free');if(own.seen)F.push('own');if(old!==true)F.push('old');
  console.log(JSON.stringify({faults:F,caught,free,own,old,errs:errs.slice(0,3)}));await b.close();srv.close();process.exit(F.length||errs.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});
