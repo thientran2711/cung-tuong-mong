@@ -16,7 +16,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   await p.evaluate(()=>{localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0});await p.waitForTimeout(7000);
   const clean=()=>p.evaluate(()=>{try{kmReset()}catch(e){}document.querySelectorAll('.kmov,#kmrew,#kroul').forEach(e=>e.parentNode&&e.parentNode.removeChild(e));Q.length=0;try{showModal()}catch(e){}});
   const st=()=>p.evaluate(()=>{const M=document.getElementById('modal');const vis=!!(M&&!M.hidden);const btn=vis?[...M.querySelectorAll('button')].filter(b=>b.offsetParent&&!b.disabled).map(b=>(b.textContent||'').trim().slice(0,20)):[];
-   return{vis,q:Q.length,t:vis?(document.getElementById('mt')||{}).textContent:'',btn,empty:!!(vis&&M.querySelector('.kempty,.kmempty'))}});
+   return{vis,q:Q.length,t:vis?(document.getElementById('mt')||{}).textContent:'',btn,empty:!!(vis&&M.querySelector('.kempty,.kmempty')),kt:(()=>{const e=vis&&M.querySelector('.kempty-t');if(!e)return null;const k=e.closest('.kempty'),r=e.getBoundingClientRect();return{w:Math.round(r.width),lines:Math.round(r.height/parseFloat(getComputedStyle(e).lineHeight||18)),kw:Math.round(k.getBoundingClientRect().width),cols:getComputedStyle(k).gridTemplateColumns.split(' ').length}})()}});
   const shut=async()=>{await p.evaluate(()=>{const M=document.getElementById('modal');const b=[...M.querySelectorAll('button')].find(b=>b.offsetParent&&!b.disabled&&/^(Đã rõ|✕)$/.test((b.textContent||'').trim()));if(b)b.click()})};
   const free=s=>!s.vis||(s.q>0&&s.btn.length>0);
   /* A: the buổi spread pulls the shown card (a fresh card, not planned yet) */
@@ -28,11 +28,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* C: empty option list */
   await clean();await p.evaluate(()=>{Q.push({t:"Hội phối đồ: báo đề",h:"<p>Thử danh sách rỗng.</p>",opts:[]});showModal()});await p.waitForTimeout(500);
   s=await st();ok(s.vis&&s.empty&&s.btn.some(t=>/Đã rõ|✕/.test(t)),`${tag} C: empty option list → kit empty line + a close («Đã rõ» / ✕)`,s);
+  ok(s.kt&&s.kt.w>=200&&s.kt.lines<=2&&s.kt.cols===1,`${tag} C: kitEmpty title in a narrow host is readable (RV-172: ≥200 px wide, ≤2 lines, one column; was 100 px / 4 lines)`,s.kt);
   if(SHOT)await p.screenshot({path:path.join(SHOT,`empty-modal-${tag}.png`)});
   if(s.btn.length){await shut();await p.waitForTimeout(400);s=await st();ok(!s.vis&&s.q===0,`${tag} C: the close closes it`,s)}
   /* D: every option disabled */
   await clean();await p.evaluate(()=>{Q.push({t:"Thử",h:"<p>Mọi lựa chọn đều khóa.</p>",opts:[{n:"Một",off:1,go:()=>0},{n:"Hai",off:1,go:()=>0}]});showModal()});await p.waitForTimeout(500);
   s=await st();ok(s.vis&&s.empty&&s.btn.some(t=>/Đã rõ|✕/.test(t)),`${tag} D: every option disabled → kit empty line + a close`,s);
+  ok(s.kt&&s.kt.w>=200&&s.kt.lines<=2&&s.kt.cols===1,`${tag} D: kitEmpty title in a narrow host is readable (RV-172: ≥200 px wide, ≤2 lines, one column; was 100 px / 4 lines)`,s.kt);
   if(s.btn.length){await shut();await p.waitForTimeout(400);s=await st();ok(!s.vis,`${tag} D: the close closes it`,s)}
   /* normal card unchanged: options, no extra close */
   await clean();await p.evaluate(()=>{tsDressAnnounce();showModal()});await p.waitForTimeout(500);s=await st();ok(s.vis&&!s.empty&&!s.btn.some(t=>/^Đã rõ$/.test(t)),`${tag}: a normal card keeps its options only`,s);
