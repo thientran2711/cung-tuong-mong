@@ -351,3 +351,5 @@ FAMILY (law 11) — every road where a person tied to her dies:
 | jmort her staff / housemate / court / Thái hậu / child (kidDie) / kin (kc3Die) | own death line each | unchanged (already) |
 | j42 maid beaten to death / jagstaff betrayer killed | ordered by the mistress herself (she knows; jagstaff asSee line) | unchanged |
 | jagstaff Tân Giả khố / wed / age / expel | not deaths | — |
+### LATER (MAIN 171, 27/11 ~04:50Z: ship 46a34673 as is)
+- OPEN: P1 (S.hh / p.hh ↔ aff(queen, x) one store — touches co-op world/viewer split + save values) and P4 (evidence total = sum of evc on read, internal) — not built; for a later seat when MAIN picks it.
