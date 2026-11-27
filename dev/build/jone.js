@@ -85,7 +85,7 @@ function hash(s){let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))|0;ret
 function prefOf(r,m){const p=(M[r.k]||{}).pref;const n=txt(m.n);try{
  if(p==="like"){const E=S.emp||{};let s=0;for(const k in (E.likes||{}))if(E.known&&E.known[k]&&E.likes[k]&&n.toLowerCase().includes(String(E.likes[k]).toLowerCase()))s+=2;
   if(/triều chính/.test(n)&&E.traits&&E.traits.includes("chinh"))s+=1;return s}
- if(p==="mend")return /^Tạ lỗi$/.test(n)?2:0;
+ if(p==="mend")return /^(Tạ lỗi|Nhún nhường)$/.test(n)?2:0;
  if(p==="art"){const A=S.arts||{};const L={cam:/đàn|cầm/i,ky:/cờ|kỳ/i,thi:/thơ|thi/i,hoa:/vẽ|họa/i,vu:/múa|vũ/i,theu:/thêu/i};let s=0;
   for(const k in L)if(L[k].test(n))s=Math.max(s,(+A[k]||0)+((S.emp&&S.emp.known&&S.emp.known.art&&S.emp.likes&&S.emp.likes.art===k)?2:0));return s}}catch(e){}return 0}
 /* ONE pick among members M (each {id, n, x, off, a?, cost?}); seed fixed per target + buổi + door (+ tier) → co-op host and guest agree */
