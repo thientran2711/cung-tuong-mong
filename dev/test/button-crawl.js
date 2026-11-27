@@ -111,8 +111,11 @@ const INPAGE=()=>{
   kind2(e){return e.matches('#modal .opts.khand>button.kopt:not(.kcard):not(.kbare)')?'hand':e.closest('.kpk-n')?'plaque':''},/* = jkhand kitHandCards (a .kcard / .kbare row in the hand box is a plain button) */
   /* the card / plaque may be re-laid (a new node) by the lift: read the lift on the part, not on the old handle */
   /* FIXER #18 F2: the lifted parts now, and whether the ONE lifted part is the tapped one (by its label, the node may be re-laid) */
-  liftOf(k,lab){const U=k==='hand'?[...document.querySelectorAll('#modal .opts>button.kopt.klift')]:k==='plaque'?[...document.querySelectorAll('.kpk-n.kpk-up')]:[];const t=String(lab||'').slice(0,24);return{n:U.length,mine:U.length===1&&!!t&&this.label(U[0]).slice(0,24)===t}},
-  lifted(e,k){return k==='hand'?!!document.querySelector('#modal .opts>button.kopt.klift'):k==='plaque'?!!document.querySelector('.kpk-n.kpk-up'):false},
+  /* FIXER #21: a lift counts only while she can SEE it (LIVE f28d28b9 hides #modal on a choice and leaves the chosen card's .klift in the hidden DOM); liftOf compares the FULL label (BIG #19 N3) */
+  liftSeen(x){if(!x.isConnected||x.closest('[hidden]'))return false;const r=x.getBoundingClientRect(),cs=getComputedStyle(x);return r.width>2&&r.height>2&&cs.visibility!=='hidden'&&+cs.opacity>.05},
+  lifts(k){return(k==='hand'?[...document.querySelectorAll('#modal .opts>button.kopt.klift')]:k==='plaque'?[...document.querySelectorAll('.kpk-n.kpk-up')]:[]).filter(x=>this.liftSeen(x))},
+  liftOf(k,lab){const U=this.lifts(k);const t=String(lab||'');return{n:U.length,mine:U.length===1&&!!t&&this.label(U[0])===t}},
+  lifted(e,k){return this.lifts(k).length>0},
   chip(k){const C=k==='hand'?[...document.querySelectorAll('#modal .dlg>.khconf>button.khok')]:[...document.querySelectorAll('.kpk-conf>button.kpk-gob,.kpk-go>button')];return C.find(x=>this.vis(x)&&!x.disabled)||null},
   liveRoots(){const roots=new Set(this.cands().map(e=>this.root(e)));for(const f of this.fixed)if(this.root(f)===f)roots.add(f);return [...roots].filter(r=>this.live(r))},
   /* the buttons on screen now: in a live layer (a button behind an open dialog is not on screen) */
