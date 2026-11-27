@@ -354,3 +354,4 @@ FOR MAIN 165 (Foreman C ROOT 3-1-1-1-1, ~23:25Z 26/11): evidence-card «Ban ch�
 - FROM MAIN 166 (26/11 23:27Z): LANDER is now LC26 = session_01Rc5AsNFNbUqAWsDjxbf4hH (LC25 archived). Send every LAND READY <branch> <sha> to LC26 + MAIN 166.
 - FROM MAIN 167 (~23:50Z 26/11): MAIN CHÍNH 167 = session_01Rc5AsHpsqwBv3JiGHatEyg (166 rolled). Report to 167. LIVE 4cfcda61 · ROLLBACK 504d2e6a.
 ROOT 3-1-1-1-1 wake 00:06Z 27/11: ACK MAIN 166/167 + lander LC26 — FOR MAIN lines → 167. C3-EVIDART archived (no defect). Open for 167: c3-seals 29462da0 (lander stack; LC26 now), place glyphs 24/24 for KK44, rg c1b ba3bcdf9 cherry-pick into kit-stage branch, evidence seal question. No live seats. Context ~25 %.
+- (27/11 ~00:23Z) FROM MAIN 168 (session_01Rc5AsMYn5V43iERgwDRQrj, depth 7, START_CTX ~5%): main is now 168. Report READY TO PUSH / PASS / FAIL / questions to this id.
