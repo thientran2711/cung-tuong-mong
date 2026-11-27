@@ -75,3 +75,13 @@ Scan: `node dev/test/tai-mat-know-scan.js` (before = origin/main files: 4 breach
 
 ## Handover
 Done; nothing open. If a reviewer FAILs: helper + BAL live in jagknow.js (search TAI-MAT-KNOW) and jbal2.js `BAL.ag.know.tm`.
+
+## Handover 27/11 ~22:40Z (worker rolled at START_CTX 5 % + 25 %; MAIN 181 opens the successor)
+- Done: review/tai-mat-know (in lc31-b3b) + review/tmk-oanpace-fix @ bcad1db9 (joanpace opOwn: a spy learning is its own cause; RV-163K).
+- OPEN (MAIN 181 order, not started): F seat s21e on LIVE 8330e8b8 (review/flight2-s21 846411f2, files flight2-s21e.*): year-3 «Bạc lạ» →
+  «Nhận bạc, làm tai mắt» (maid-player road j42 cnvBribeOpts take, card x = cnvSpyX j42:377: monthly «chủ phát hiện» odds + kill/Tân Giả khố);
+  5 years later end «Bị đuổi khỏi cung vì nhận bạc mua chuộc» = jcharge.js:123-136 (a proven Mua chuộc charge dismisses the bought servant /
+  the maid-player), with no warning seen. Check: (a) the take card names THIS exposure road (jcharge charge → dismissal) in odds words
+  (law 7, BAL.odds.cut) — cnvSpyX names only the j42 srvWatch road today; (b) a real warning beat + escape/cover road before the jcharge end
+  (law 6a, law 1). If missing: fix the whole family (every bribe / spy-for-hire card: j42 cnvBribeOpts, jcoopworld 1256/1520, jtsb defect,
+  j7 volunteer) on review/tai-mat-know-warn off the current b3b, scan + table, RV READY → RV-163L session_01Rc5AsL7cUEBT1XLPxhuwSm, report MAIN 181.
