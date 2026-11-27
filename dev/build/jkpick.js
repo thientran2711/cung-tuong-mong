@@ -95,11 +95,11 @@ function tap(P,a,n,b,ev){if(!P.open)return;if(P.up===n){pick(P,a,b);return}
  lift(P,a.id)}
 function conf(P){try{let c=P.el.querySelector(":scope>.khconf");const n=P.up;if(!n||!P.open){if(c)c.hidden=true;return}
  const a=(P.G&&P.G.acts||[]).find(x=>String(x.id)===n.dataset.id);if(!a||a.off){if(c)c.hidden=true;return}
- if(!c){c=document.createElement("div");c.className="khconf kpk-conf kpk-go";c.innerHTML=`<button type="button" class="kbtn khok kpk-gob" aria-label="Chọn">Chọn</button>`;
+ if(!c){c=document.createElement("div");c.className="khconf kpk-conf kpk-go";c.innerHTML=`<button type="button" class="kbtn khok kpk-gob" aria-label="Chọn">✓</button>`;
   c.addEventListener("click",e=>{e.stopPropagation();const k=e.target.closest("button");if(!k||!P.up)return;const u=P.up,aa=(P.G.acts||[]).find(x=>String(x.id)===u.dataset.id);if(aa)pick(P,aa,u.querySelector(".kpk-b"))});P.el.appendChild(c)}
  /* KK53 v2 (owner 03:17Z «nút chọn dưới thẻ nhìn kì quá, choáng chỗ»; MAIN 170 rec): NO bar under the plaque. A SMALL kit «Chọn» chip (BAL.kpkgo {w,h}) stands INSIDE the lifted plaque's bottom-right corner, in a strip the plaque grows at its bottom
     (.kpk-cf, one chip tall), so the lifted plaque grows by one line and never covers the row below / a neighbour. The chip sits where the odds line is NOT (strip under the text). Near the stage floor the plaque rises. */
- const K=KIT_PLAQUE,G=P.G,bw=BAL.kpkgo.w,bh=BAL.kpkgo.h;n.style.setProperty("--kpgh",bh+"px");n.classList.add("kpk-cf");
+ const K=KIT_PLAQUE,G=P.G,bw=BAL.kpkgo.w,bh=BAL.kpkgo.h;n.style.setProperty("--kpgw",bw+"px");n.style.setProperty("--kpgh",bh+"px");
  n.style.top=n.__y+"px";const hh=n.offsetHeight||G.h,wd=n.offsetWidth||G.cw,x0=parseFloat(n.style.left)||n.__x,k=K.liftScale,kc=parseFloat(n.style.getPropertyValue("--kc"))||12;
  const over=n.__y+K.liftDy+(hh+kc)*k-kc-(G.H-4);if(over>0)n.style.top=Math.round(n.__y-over)+"px";const y0=n.offsetTop;
  /* the LIFTED box (translateY liftDy + scale liftScale about its cord top), whatever moment of the lift animation this runs in */
@@ -107,8 +107,8 @@ function conf(P){try{let c=P.el.querySelector(":scope>.khconf");const n=P.up;if(
  /* KK54 (MAIN nit «lifted plaque bottom edge touches the next row by a few px»; law 11 = every lift): the plaques BELOW the lifted one (same column span) make way: they slide down by the excess so the lifted bottom stays K.liftGap clear above the nearest one (clamped at the stage floor); drop() puts them back */
  try{unmake(P);const bl=[];let nt=1e9,fl=0;P.el.querySelectorAll(".kpk-n").forEach(o=>{if(o===n)return;const ox=o.offsetLeft,ow=o.offsetWidth,ot=o.offsetTop;if(ot<=y0+hh*.5||ox+ow<=L.l+1||ox>=L.l+L.w-1)return;bl.push(o);nt=Math.min(nt,ot);fl=Math.max(fl,ot+o.offsetHeight)});
   const ex=Math.ceil(L.t+L.h-(nt-K.liftGap)),room=Math.max(0,G.H-4-fl),dn=Math.min(ex,room);if(bl.length&&dn>0){bl.forEach(o=>{o.__mv=parseFloat(o.style.top)||o.offsetTop;o.style.top=(o.__mv+dn)+"px"});P.moved=bl}}catch(e){}
- const x=Math.round(L.l+L.w-bw*k-6*k),y=Math.round(L.t+L.h-bh*k-5*k);
- c.hidden=false;c.style.left=x+"px";c.style.top=Math.max(2,y)+"px";c.style.setProperty("--kpgw",bw+"px");c.style.setProperty("--kpgh",bh+"px");c.style.transform=`scale(${k})`;c.style.transformOrigin="0 0"}catch(e){console.error("kitPick conf",e)}}
+ const x=Math.round(L.l+L.w-bw*k-3*k),y=Math.round(L.t+2*k);/* OD 27/11 ~04:00Z: the small green ✓ stands in the lifted plaque's TOP-RIGHT corner */
+ c.hidden=false;c.style.left=x+"px";c.style.top=y+"px";c.style.setProperty("--kpgw",bw+"px");c.style.setProperty("--kpgh",bh+"px");c.style.transform=`scale(${k})`;c.style.transformOrigin="0 0"}catch(e){console.error("kitPick conf",e)}}
 function unmake(P){(P.moved||[]).forEach(o=>{if(o.__mv!=null){o.style.top=o.__mv+"px";o.__mv=null}});P.moved=null}
 function drop(P){unmake(P);const K=KIT_PLAQUE,u=P.up;if(!u)return;P.up=null;u.classList.remove("kpk-up","kpk-wrap","kpk-sm","kpk-cf");u.style.width=P.G.cw+"px";u.style.left=u.__x+"px";if(u.__y!=null)u.style.top=u.__y+"px";u.querySelector(".kpk-b").setAttribute("aria-pressed","false");
  if(!still()&&u.animate)u.animate([{transform:`translateY(${K.liftDy}px) scale(${K.liftScale})`},{transform:"none"}],{duration:K.liftMs-40,easing:"ease-out"});else u.style.transform="";P.anims.forEach(x=>{try{if(x.effect&&x.effect.target===u)x.cancel()}catch(e){}});conf(P)}
@@ -187,8 +187,8 @@ body.kpk-open #kshR,body.kpk-open .kshR,body.kpk-open #kpname,body.kpk-open .j59
 .kpk .kfoc-b.kpk-b.kfoc-off{filter:grayscale(.6);opacity:1}
 .kpk .kfoc-b.kpk-b:focus-visible{outline:2px solid #c9a24a;outline-offset:2px}
 .kpk>.khconf.kpk-go{position:absolute;z-index:6;display:block;gap:0;pointer-events:auto}.kpk>.khconf.kpk-go[hidden]{display:none!important}
-.kpk>.khconf.kpk-go>button.kpk-gob{width:var(--kpgw,68px)!important;height:var(--kpgh,32px)!important;min-height:0!important;min-width:0!important;border-radius:8px!important;font-size:.8rem!important;font-weight:800!important;letter-spacing:.2px;display:grid;place-items:center;padding:0 6px!important;margin:0!important;background:#fff6e4!important;color:#9a2c1c!important;border:1px solid #b0402c!important;box-shadow:inset 0 1px 0 #fff,0 1px 2px rgba(70,40,12,.25)!important}/* the small «Chọn» chip INSIDE the lifted plaque (kit small button, dark red on silk) */
-.kpk-n.kpk-up.kpk-cf .kfoc-b.kpk-b{padding-bottom:calc(var(--kpgh,32px) + 8px)}
+.kpk>.khconf.kpk-go>button.kpk-gob{width:var(--kpgw,24px)!important;height:var(--kpgh,24px)!important;min-height:0!important;min-width:0!important;border-radius:50%!important;font-size:.95rem!important;font-weight:800!important;line-height:1;display:grid;place-items:center;padding:0!important;margin:0!important;background:#2f8a3e!important;color:#fff!important;border:1px solid #1f6a2c!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 1px 2px rgba(40,25,8,.35)!important}/* the small GREEN ✓ (the kit green of the ✓ chips, khok) in the lifted plaque's top-right corner */
+.kpk-n.kpk-up .kfoc-t b{padding-right:calc(var(--kpgw,24px) + 6px)}.kpk-n.kpk-up .kfoc-t small{margin-top:7px}.kpk .kpk-n.kpk-up .kfoc-b.kpk-b .kfoc-t b{-webkit-line-clamp:unset;max-height:none;overflow:visible}/* lifted: the whole name shows (beats the closed plaque's 2/3-line clamp) *//* the title never runs under the ✓; the small line starts below it */
 .kdim-d{filter:brightness(var(--kdb,.7)) saturate(var(--kds,.75))!important}
 .kdim-c{transform-origin:50% 100%}
 `;document.head.appendChild(css);
