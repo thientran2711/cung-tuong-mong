@@ -68,8 +68,8 @@ let top0=(hd&&hd.getClientRects().length?hd.getBoundingClientRect().bottom:D.top
    One part for every hand (and the same rule for the thẻ gỗ picker kitPick). Size = KIT_HAND.confPx (kit tap size), above the card art. */
 function kitHandConf(b){try{const g=b&&b.parentElement,dl=g&&g.closest(".dlg");if(!dl)return;let c=dl.querySelector(":scope>.khconf");
  if(!b.classList.contains("klift")||b.disabled){if(c)c.hidden=true;return}
- if(!c){c=document.createElement("div");c.className="khconf";c.innerHTML=`<button type="button" class="khok" aria-label="Chọn lá này">✓</button><button type="button" class="khx" aria-label="Đặt lại">✕</button>`;dl.appendChild(c)}
- c.hidden=false;const D=dl.getBoundingClientRect(),B=b.getBoundingClientRect(),s=KIT_HAND.confPx,gap=6,w=2*s+gap;
+ if(!c){c=document.createElement("div");c.className="khconf";c.innerHTML=`<button type="button" class="khok" aria-label="Chọn lá này">✓</button><button type="button" class="khx" aria-label="Đặt lại">✕</button>`;/* KK56 (X21, owner OD 27/11 ~04:00Z): the green ✓ is the TOP-RIGHT corner button of the lifted / enlarged card (row-reverse: ✕ sits to its left) */dl.appendChild(c)}
+ c.hidden=false;const D=dl.getBoundingClientRect(),B=b.getBoundingClientRect()/* the pair rides the LIFTED CARD's top edge, never the info plate (RV-169: it covered the GỢI Ý text) */,s=KIT_HAND.confPx,gap=6,w=2*s+gap;
  let x=Math.round(B.right-D.left-w+s*.35),y=Math.round(B.top-D.top-s*.55);x=Math.max(4,Math.min(D.width-w-4,x));y=Math.max(4,y);
  c.style.left=x+"px";c.style.top=y+"px";c.style.setProperty("--khcs",s+"px")}catch(e){console.error("kitHandConf",e)}}
 function kitHandConfOff(g){const dl=g&&g.closest&&g.closest(".dlg"),c=dl&&dl.querySelector(":scope>.khconf");if(c)c.hidden=true}
@@ -133,7 +133,7 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt:disabled.klift{filter
 html body #modal#modal#modal#modal .opts.khand.khpre>button.kopt{opacity:0}
 html body #modal#modal#modal#modal .dlg:not(.khmeas) .k3right>.opts.khand,html body #modal#modal#modal#modal .dlg:not(.khmeas) #mb>.opts.khand{position:sticky!important;bottom:0;z-index:2;background:var(--k-card,#fffaf0)}/* the hand never scrolls out of view: a long story scrolls under it */
 html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!important}
-#modal .dlg>.khconf,.khconf{position:absolute;z-index:8;display:flex;gap:6px;pointer-events:auto}
+#modal .dlg>.khconf,.khconf{position:absolute;z-index:8;display:flex;flex-direction:row-reverse;gap:6px;pointer-events:auto}
 .khconf[hidden]{display:none!important}
 #modal .dlg>.khconf>button,.khconf>button{width:var(--khcs,44px);height:var(--khcs,44px);min-width:0;min-height:0;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;font-size:calc(var(--khcs,44px)*.5);font-weight:800;line-height:1;cursor:pointer;box-shadow:0 3px 10px #0005;border:2px solid #fffaf0}
 #modal .dlg>.khconf>.khok .kmk,.khconf>.khok .kmk{background:#fff!important;color:#fff!important;width:.95em;height:.95em;margin:0!important;vertical-align:0}

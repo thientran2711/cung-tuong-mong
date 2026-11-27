@@ -12,7 +12,7 @@
 const KRV={last:{},ev:{},rect:{}};
 function krvKey(p){try{if(!p||typeof k61PortEnt!=="function")return"";const e=k61PortEnt(p)||(p.__kp&&typeof p.__kp==="object"?p.__kp:null);if(!e||e===S)return"";return kOf61(e)}catch(x){return""}}
 function krvKnown(p){try{return kitIsKnown(p.__kp&&typeof p.__kp==="object"?p.__kp:k61PortEnt(p)||p)}catch(x){return true}}
-function krvSex(p){try{const r=personRoleRank(p.__kp&&typeof p.__kp==="object"?p.__kp:k61PortEnt(p)||p);return r.kid?"k":r.sex==="m"?"m":"f"}catch(x){return"f"}}
+function krvSex(p){try{return kitSilG(p.__kp&&typeof p.__kp==="object"?p.__kp:k61PortEnt(p)||p)}catch(x){return"f"}}
 function krvMark(h,rootRe,p,kind,sil){try{if(typeof h!=="string"||!p)return h;const k=krvKey(p);if(!k)return h;const m=/^\s*<[a-z]+[^>]*>/.exec(h);if(!m||!rootRe.test(m[0]))return h;
  return h.replace(/^(\s*<[a-z]+)/,`$1 data-krv="${k}" data-krvs="${krvKnown(p)?1:0}" data-krvk="${kind}" data-krvsil="${sil}"`)}catch(x){return h}}
 /* the three outer wrappers (this module loads last: they sit outside every other wrapper of the same function) */
