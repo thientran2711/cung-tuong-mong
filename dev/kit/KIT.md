@@ -1421,6 +1421,9 @@ ONE kit part: the SAME mood seal as the pcPort frames (jemo `emoBadge`: `img.kem
 - UNDER THE TUẦN LỤC BOOK (owner 24/11 flight #6): only the seal whose host is `.kbk-person` shows; every stage seal (`body.kbk-open`) is hidden, and each book page is its own stacking context (`.kbk-pg{isolation:isolate}`) so the seal of the page beside it never paints over this page (was: her room seal / the neighbour page's seal = «the wrong person's face»). Book slot = right end of the name row, rule KIT 34.6 r5 (owner 18/11 ~03:35Z «figure runs under the ? chip»).
 - Host: nearest non-clipping ancestor of the figure (class `kfshost` = position:relative when it was static); the seal follows the figure (resize, paging, re-render, image load: `kitFigSealAll()`).
 - Test: `node dev/test/fig-seal.js <W>x<H>@dpr <outdir>` (seal inside stage, not on the face, size, beside the head).
+### 28.8f SEAL LEAN IN A DIALOG — own box (owner 27/11 «Đại kết cục» avatar over the title; KK57 review/kit-dlg-avatar) — `dev/build/jemoseal.js` `kesOwnBox`
+- A seal inside an open dialog (`KIT_EMOSEAL.lean.modalIn`) leans (the big clone `.kemo-big`) only INSIDE its own box: the picture it sits on (`lean.ownPic` = `.k3ev,.k3mpic,.kdlgart,.ksart,.kszfs`), else its avatar frame (`lean.ownFrame` = `.md,.pcp`). Big size ≤ (box short side − 2·marginPx)/(1+2·margin), position clamped inside the box; no room for a lean ≥ 1.15× the still seal = no lean. Stage seals keep the head-size rule (`kesHead`). Test `kit-dlg-avatar.js` part C.
+
 ### 28.9 DELTA CHIPS + WORDING
 - `kpChipify` (jk2b): a delta chip takes the whole short clause before the number (up to 6 words, stops at punctuation): "nhà Hộ bộ thế lực −2";
   linking words in front (và, được, mất, khiến, nên…) stay outside the chip.
@@ -1839,6 +1842,10 @@ Tested 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2, 390x844@3, 1024x768@2 (d
 ## 31. KIT 3 · FOLD LAYOUT (kit owner, owner Fold/iPad shots 11/14) — `dev/build/jk3.js` (before j84) + j59 gutters + jk2b §2/§18/§19
 Supersedes 15 (status in the header), 19 STATUS/STATUS SHEET, 28.3 stage heights, 28.4 header chips. One rule set for every screen and mode
 (consort road, cung nữ road, lãnh cung).
+
+#### 28.19c PICTURE AVATAR FIT — `.k3ev > .kevav` (owner 27/11 «Đại kết cục · Hiền tướng hậu cung»: the speaker avatar sat over the first words of the title line; KK57 review/kit-dlg-avatar) — `dev/build/jksize.js`
+- The second person's avatar on the event picture (ONE AVATAR RULE, `kszAvatarRule3`) is the kit frame cell (`kitFaceH` → mdH → `.kfc`, 550/1037) CUT to its portrait (the top 78 %, no pendant) and sized by the PICTURE HEIGHT: `top:6px … bottom:6px`, at most 90 px tall, width from the frame ratio. So it always lies wholly INSIDE the picture on every strip height (40 px strip → 18×26, 56 → 29×42, 120+ → 61×90); it never reaches the title or text under the picture. (Root cause: jk2b turns mdH's `.kmini` into `.kfc`, so the old `.kevav>span.md.kmini` width rule never applied and the cell drew at its `big` 84×158.)
+- Test `node dev/test/kit-dlg-avatar.js <index.html> [outdir]` (A: every PEND dialog's picture avatar inside its picture, B: strip heights 40–220 px, Fold 755x1000 + iPad 1180x820).
 
 ### 31.1 TOP BAR = ONE slim row
 `☰ · her kit frame + name + rank chip (#me-r, tap = Bảng phẩm vị) + short date · Bạc / Sức / Sủng / Danh` (servant road: Chủ tin in place of Sủng).
@@ -3750,6 +3757,7 @@ gold `kfhit` flash (those now call it).
 - The cell then glows GREEN (+) / dim RED (-), 3 pulses over ~2.6 s, its number (.kstv) scales ~1.15x and takes the colour (`kitStatGlow(cell,dv)`; class `.ksf-g/.ksf-r`).
 - The same change announced by two paths (apply + result card / coin) shows once (2.2 s window per key+delta, different `src`).
 - Gọn (Hiệu ứng: Gọn) = glow only, no label; reduce-motion = steady glow (`.ksf-s`), no movement. Not run in `quiet` / bot.
+- 57.1b NEVER OVER AN OPEN DIALOG (owner 27/11, «Hoàng hậu → ta: thiện cảm +4» over the option card / the figure's feet; KK57 review/kit-dlg-avatar): while a kit dialog is open (`#modal .dlg`) no label covers its box. A label under its top-bar cell sits just above the dialog top (no room = the cell glow alone); a label with no cell (relation words, rising at its source) goes below the dialog, else above it (never on the top bar), else it WAITS in the queue until the dialog closes (a tap does not drop a waiting label). A live guard (`ksfGuard`, every frame) moves a label off a dialog that opens AFTER it was placed. Flights from a result card to their cell (`from` + cell) keep their path. The same keep-out holds for the line toasts (`kitToastPeopleRects`, jclose: the open dialog box counts whole, relaxed pass too). Test `node dev/test/kit-dlg-avatar.js <index.html>` part D.
 - `kitStatSet` on a non-HUD cell/tile (person card, status sheet) whose number changes calls `kitStatDelta` = the same glow, so relation numbers on cards pulse too.
 - Colour is by MEANING: gain green, loss red, never by row. `kcls` (j19) now matches whole words (`KWB`): "Thêu thùa" is no longer hostile (thù), "Nguyên đán" no longer
   "nguy", "truyền/truyện" no longer "truy"; a KÈM value that is an explicit gain stays green (`kemCol`). Scans: `dev/test/stat-fx-scan.py`, `stat-fx-scan.js`. Sample: kit page §57.1.

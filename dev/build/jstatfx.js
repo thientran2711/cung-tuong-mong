@@ -31,18 +31,36 @@ function ksfRun(it){const dv=it.dv,k=it.k,cell=ksfCell(k),txt=`${ksfCellName(cel
     {transform:`translate(${x0}px,${y0-10}px) scale(1.06)`,opacity:1,offset:.34},{transform:`translate(${x1}px,${y1}px) scale(1)`,opacity:1,offset:.9},{transform:`translate(${x1}px,${y1}px) scale(.8)`,opacity:0}],
     {duration:KSF.HOLD+KSF.FLY,easing:"cubic-bezier(.4,.05,.35,1)",fill:"both"});
    setTimeout(()=>kitStatGlow(cell,dv),(KSF.HOLD+KSF.FLY)*.88);an.onfinish=()=>ksfDone(sp);return}
+  ksfGuard(sp,it,false);/* §57.1b: a cell-less label rising at its source never stays over an open dialog */
   const an=sp.animate([{transform:`translate(${x0}px,${y0+14}px) scale(.7)`,opacity:0},{transform:`translate(${x0}px,${y0-6}px) scale(1.12)`,opacity:1,offset:.15},{transform:`translate(${x0}px,${y0-12}px) scale(1)`,opacity:1,offset:.8},{transform:`translate(${x0}px,${y0-24}px) scale(1)`,opacity:0}],{duration:KSF.HOLD+600,easing:"ease-out",fill:"both"});an.onfinish=()=>ksfDone(sp);return}
  /* a change with no card to fly from: the label appears under its cell (or mid-stage) and stays readable, the cell glows at once */
  let x,y;if(cr){x=cl(cr.left+cr.width/2-w/2);y=cr.bottom+6;kitStatGlow(cell,dv)}else{const st=document.getElementById("stage"),sr=st&&st.getBoundingClientRect();x=cl(sr?sr.left+sr.width/2-w/2:vw/2-w/2);y=sr?sr.top+sr.height*.35:innerHeight*.35}
+ {const d=ksfDlgBox();if(d&&ksfHit(x,y,w,h,d)){/* KIT §57.1b (owner 27/11: «Hoàng hậu → ta: thiện cảm +4» over the option card of an open dialog): a label NEVER covers an open dialog —
+   under its own top-bar cell: just above the dialog top (or the glow alone when there is no room); no cell: below the dialog, else above it, else it WAITS until the dialog closes */
+  const hb=ksfHudBottom(),up=d.top-h-6,dn=d.bottom+6;
+  if(cr){if(up>=4)y=up;else{ksfDone(sp);return}}
+  else if(dn+h<=innerHeight-4)y=dn;else if(up>=hb+2)y=up;else{ksfDone(sp);return "wait"}}}
+ ksfGuard(sp,it,!!cr);
  const an=sp.animate([{transform:`translate(${x}px,${y+8}px) scale(.7)`,opacity:0},{transform:`translate(${x}px,${y}px) scale(1.14)`,opacity:1,offset:.14},{transform:`translate(${x}px,${y}px) scale(1)`,opacity:1,offset:.8},{transform:`translate(${x}px,${y-10}px) scale(1)`,opacity:0}],{duration:KSF.HOLD+300,easing:"ease-out",fill:"both"});an.onfinish=()=>ksfDone(sp)}
-function ksfPump(){if(KSF.t)return;const it=KSF.q.shift();if(!it){KSF.busy=0;return}KSF.busy=1;try{ksfRun(it)}catch(e){console.error(e)}KSF.t=setTimeout(()=>{KSF.t=0;ksfPump()},ksfStill()?250:it.src==="card"?950:KSF.GAP)}
+/* §57.1b: the open dialog box (the kit modal frame) a label must keep clear of; the top bar bottom (a cell-less label never sits on the top bar) */
+function ksfDlgBox(){try{const d=document.querySelector('#modal:not([hidden]) .dlg');if(!d||!d.getClientRects().length)return null;const r=d.getBoundingClientRect();return r.width>40&&r.height>40?r:null}catch(e){return null}}
+function ksfHit(x,y,w,h,r){return x<r.right&&x+w>r.left&&y<r.bottom&&y+h>r.top}
+function ksfHudBottom(){try{const e=document.querySelector('header.hud');return e&&e.getClientRects().length?e.getBoundingClientRect().bottom:0}catch(e){return 0}}
+/* §57.1b live guard: a dialog that opens AFTER the label was placed (the change applies, then its dialog shows) — the label moves off the dialog box
+   (a cell label: just above the dialog, else it ends: its cell glow stays; a cell-less label: below / above the dialog, else it goes back to the queue and waits) */
+function ksfGuard(sp,it,hasCell){const P=10;const tick=()=>{if(!sp.isConnected)return;const d=ksfDlgBox();if(d){const r=sp.getBoundingClientRect(),g=r.width*.07;/* room for the 1.14 swell */
+ if(ksfHit(r.left-g,r.top-g,r.width+2*g,r.height+2*g,d)){const cur=parseFloat(sp.style.top)||0,hb=ksfHudBottom(),up=d.top-P-g-r.bottom,dn=d.bottom+P+g-r.top;
+  if(hasCell){if(r.top+up>=4)sp.style.top=(cur+up)+'px';else{ksfDone(sp);return}}
+  else if(r.bottom+dn<=innerHeight-4)sp.style.top=(cur+dn)+'px';else if(r.top+up>=hb+2)sp.style.top=(cur+up)+'px';
+  else{ksfDone(sp);if(!it.reQ){it.reQ=1;it.wait=1;KSF.q.unshift(it);if(!KSF.t)KSF.t=setTimeout(()=>{KSF.t=0;ksfPump()},500)}return}}}requestAnimationFrame(tick)};requestAnimationFrame(tick)}/* first check on the next frame, once the label's animation has placed it (before it is painted) */
+function ksfPump(){if(KSF.t)return;const it=KSF.q.shift();if(!it){KSF.busy=0;return}KSF.busy=1;let r;try{r=ksfRun(it)}catch(e){console.error(e)}if(r==="wait"){it.wait=(it.wait||0)+1;if(it.wait<240){KSF.q.unshift(it);KSF.busy=0;KSF.t=setTimeout(()=>{KSF.t=0;ksfPump()},500);return}}/* §57.1b: waits (up to ~2 min) for the dialog to close; a tap does not drop it */KSF.t=setTimeout(()=>{KSF.t=0;ksfPump()},ksfStill()?250:it.src==="card"?950:KSF.GAP)}
 function kitStatFx(list,o){o=o||{};const src=o.src||"x",now=Date.now();if(screenOff())return;
  for(const it of list||[]){if(!it||!it.dv||!it.k)continue;const key=it.k+":"+it.dv,s=KSF.seen[key];
   if(s&&now-s.t<2200&&s.src!==src)continue;  /* the same change announced by two paths (apply + result card / coin) shows once */
   KSF.seen[key]={t:now,src};it.src=src;KSF.q.push(it)}
  if(KSF.q.length>10)KSF.q.splice(0,KSF.q.length-10);ksfPump()}
 /* tap anywhere skips what is queued and what is flying (the tap itself still goes through) */
-function kitStatFxSkip(){KSF.q.length=0;clearTimeout(KSF.t);KSF.t=0;KSF.busy=0;KSF.labels.forEach(ksfDone)}
+function kitStatFxSkip(){const w=KSF.q.filter(q=>q.wait);/* §57.1b: a label waiting for a dialog to close is not «what is left»: it stays queued */KSF.q.length=0;KSF.q.push(...w);clearTimeout(KSF.t);KSF.t=0;KSF.busy=0;KSF.labels.forEach(ksfDone);if(w.length)KSF.t=setTimeout(()=>{KSF.t=0;ksfPump()},500)}
 document.addEventListener("pointerdown",()=>{if(KSF.busy||KSF.labels.size)kitStatFxSkip()},true);
 /* a number that changes inside a live cell / tile (person card, status sheet) glows too — kitStatSet calls this */
 function kitStatDelta(c,before,after){const a=parseFloat(before),b=parseFloat(after);if(!c||!isFinite(a)||!isFinite(b)||a===b||ksfStill())return;if(!c.isConnected)return;kitStatGlow(c,b-a)}
