@@ -411,3 +411,41 @@ KNE iPad s61 1.5 s «SKIPWIN #dawn host Tiếp theo», noExit 0 · SKIPCOV mix-a
 - Verdict: PASS robot-realtap 39c6e505 (one verdict 97e55a457..39c6e505). Ready for the coordinator (test files only).
 - Open for the next harness fixer (none blocking): N1 pin=0 dead pin server at resume, N2 re-created body box as «new popup», N3/N4 self-check scope / twin window.
 - Recipe reuse: worktrees /home/user/wt/rr15-{tip,fin,ctl,ctlh}, LIVE /home/user/wt/rr15-live (git archive 17f23656 incl. dev/vendor) on :8895, runner /home/user/wt/rr15-out/run.sh <list> (lines «name|wt|env|args», U= / RT_PIN= / TMO= env), summary sum.py, SCAN probes /home/user/wt/rr15-probe/probe.js <tip|ctl>.
+
+## REVIEW robot-realtap 39c6e505..f65d019b — BIG #16 (for F ROOT #2 session_01UV1SzjiyJzqC1pGgm8zVFQ), 27/11 ~04:40Z
+PRIORITY #1 CHECK: OD robot real-tap rules 25/11 (dev/handover/briefs/F-robot-2511.md) | review/robot-realtap 39c6e505 PASS (BIG #15) → f65d019b (FIXER #16, PROGRESS items 40–42) | claims: BIG REVIEWER #16 = this job (CLAIMS.md 03:40Z).
+### VERDICT: PASS review/robot-realtap f65d019b (one verdict for 39c6e505..f65d019b; test files only: robot-rt.js, rt-serve-build.sh, new rt-board-phase-scan.js, PROGRESS)
+Tested on main 17f23656 (build 5a7a9c4004c1), git archive served 127.0.0.1:8895, RT_NOSHOT=1 RT_PIN=0. Worktrees /home/user/wt/rr16-{tip (f65d019b), ctl (39c6e505), ctlh (39c6e505 + the tip's RT_TEST_MGGIVEUP / RT_TEST_EXAM_ROUNDS / RT_TEST_BOARDHANG blocks pasted, scratch), tiph (tip + a read-only in-page probe that samples window.__rtMgOver every 50 ms while KG82.phase is «play» and prints FOPROBE at every board end; no tap / no state write)}. Logs /home/user/wt/rr16-out/<run>/log.txt (not in git). ≤2 browsers.
+### (1) STATIC
+- Added lines: 0 `.click(` / dispatchEvent / focus / keyboard / mouse.click / touchscreen.tap. Game calls only in env-gated fixtures (exRun rounds, kg82Open hang board).
+- robot-lint «LINT OK 0 finding(s)» · rt-bare-unit «RT-BARE-UNIT OK 20/20».
+- rt-board-phase-scan.js origin/main: 11 end paths, 3 leave KG82.phase «play»: jexam kg82Play→after, jmgcal kg82Play→after, jroute own engine (done). Checked by hand: jexam L217/L223 and jmgcal L80/L84 call kg82ShowRes with no KG82.phase="result"; jroute sets phase only "play" (L436), never "result"; jentry `after` does set it. Game-side finding CONFIRMED (for MAIN).
+### (2) FIXER #16 CLAIMS — my own runs
+| claim | tip | control |
+|---|---|---|
+| (b) mgOver, RT_TEST_EXAM=1 ROUNDS=theu,theu | Fold s43: «BOARD theu 32 moves over (phase still «play», way on #kg82ok Môn kế tiếp) 10/10 (42 s)» → «… Xem kết quả» 9/10 (38 s), exam done raws [10,9], boardOver 2, 204 s · iPad s61: 9/10 (28 s) → 8/10 (26 s), done [9,8], 165 s | ctlh Fold s43: «BOARD theu 32 moves still in play (368 s)» + harness bug «still in play after 6 min», exam done false, run timed out at 900 s (the s7b loop) |
+| (b) regression RT_TEST_BOARD=mua | tip Fold s21 24 moves 9/10, ready 1, boardOver 0; tiph Fold 10/10, iPad 10/10 | — |
+| (a) ladder, RT_TEST_BOARDHANG=1 RT_TEST_MGGIVEUP=30000 | iPad s61: 2 passes (37/38 s) → [stuck] «frozen board: 2 board give-ups …» → board gone 91 s, stuck 1, boardStuck 1 · Fold s44: same, gone 90 s, slice to buổi 3 (Fold s43 tip life ended «Ban hoa» at buổi 1 before the fixture opened — natural end, re-run on s44) | ctlh Fold s43: 13+ passes «0 moves still in play (37 s)», stuck 0, never unstuck |
+| (c) rt-serve-build | fresh pin 17f23656 :8781 «self-check OK: 137 local paths all 200» (131 git audio/ files + 6); old dir (sparse set without /audio/ /icons/) → tip repaired in place (131 audio + 6 icons back, sparse file now has all 8 entries), self-check OK | same old dir: «SELF-CHECK FAIL … audio/MANIFEST.json audio/VOICES.json icons/apple-touch-icon.png (not checked out)», exit 143, nothing repaired |
+KMUS_NEW keys: j11.js:53–55 serves them from IMG_BASE (CDN), not git → skipping them in the self-check is right.
+### (3) RISK SIDE
+- False «over» on a live board: tiph RT_TEST_BOARD on all 16 playArt kinds Fold s21 (dan hat co dauho ban tho doi do den ve hoa theu kim mua banh huong) + iPad s61 (dan hat co mua) = 26 boards incl. natural ones in those lives (timed Đàn/Hát notes, drag boards ve/hoa/kim/dauho with area taps, Cờ, «xem bước» phases): 0 «over (» results, 0 non-empty FOPROBE (the 50 ms sampler never saw mgOver true while KG82.phase was «play» on a board whose path sets «result»). Every board done, ready 1, 0 dead.
+- Not covered by a run: co-op boards (no co-op seat in this review). Static: mgOver needs the box hidden or its centre covered by a non-hint layer AND an enabled on-top button outside the box whose text is not ✕/Quay lại/help/Sẵn sàng/Chơi tiếp/Bỏ cuộc; a co-op «waiting» overlay with only a ✕ / back does not pass. Worst case (a #modal with a button over a live board) the loop leaves, the picker answers the modal, mgOver turns false and the loop resumes — the round is not lost, only one false [game] line is logged.
+- Ladder vs long legit screens: lastProg now moves on clock step / NEW layer+title (first sight since the clock step) / gift / ladder actions; it lost only the board-pass and skip-tap resets. Ordinary taps never reset it before either, so no long screen gets a shorter fuse except a skip scene or a board sequence that shows no new title for 15 min. Boards ≤97.5 s each, exam/LRM sequences 2–3 rounds with new titles → no false fire expected; 4 LIVE slices + 26 board runs: stuck 0 except the hang fixture. A real frozen board with a working «Bỏ cuộc?» confirm: first confirm visit is a new screen (bdStill → 0), the repeat is not → ladder at the 3rd pass (~18 min) or the 15-min timer, whichever first — bounded (was never).
+### (4) LIVE SLICES (no RT_TEST hooks, slice=12, harness tiph)
+| seed | buổi | jsClicks / DEAD / NO-EXIT / stuck | bugs |
+|---|---|---|---|
+| Fold speed s21 | 12 | 0 / 0 / 0 / 0 | 0 |
+| Fold sens s43 | 12 | 0 / 0 / 0 / 0 | 0 |
+| iPad sens s61 | 12 | 0 / 0 / 0 / 0 | 0 |
+| iPad cautious s72 | «Ban hoa» b1 (natural end) | 0 / 0 / 0 / 0 | 0 |
+realtap true, exitPick none, build 5a7a9c4004c1 in all; 0 «Chuyển kiếp» taps; boardOver 0.
+### NOTES (not blocking)
+- N1: with RT_TEST_MGGIVEUP=30000 the harness line says «still in play after 1 min» (Math.round of 0.5); cosmetic, test-only.
+- N2: «Ban hoa» at buổi 1 ends several seeds early (s43 hang, s72 cautious, some bd-* lives) — known, game content.
+- N3: co-op boards not run; worth one co-op seat with a board in the next co-op review.
+- N4 (game, for MAIN): jexam / jmgcal / jroute should set KG82.phase="result" in their result path (as jentry `after`); the harness now copes, the game is still wrong.
+
+## HANDOVER — BIG REVIEWER #16, 27/11 ~04:40Z
+- Verdict: PASS robot-realtap f65d019b (one verdict 39c6e505..f65d019b). Ready for the coordinator (test files only).
+- Recipe reuse: /home/user/wt/rr16-out/{run.sh,q.sh} (lines «name|wt|env|args|tmo», 2 at a time), probe harness /home/user/wt/rr16-tiph (FOPROBE), LIVE /home/user/wt/rr16-live :8895.
