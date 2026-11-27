@@ -17,6 +17,9 @@ const ROOT=path.resolve(__dirname,'../..');const MT={'.html':'text/html; charset
   await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}
    Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;for(let i=0;i<5;i++){try{nextBuoi()}catch(e){}Q.length=0}Q.length=0;m.hidden=true;const w=document.getElementById('dawn');if(w){w.hidden=true;w.innerHTML='';w.classList.remove('on')}document.body.classList.remove('kbk-open');tab='act';render()});
   await p.waitForTimeout(2500);await p.addStyleTag({content:'#kload,#klife,.modal.kload,#modal.kptitle,#dawn,.kne,#kneov{display:none!important}'});
+  /* (MAIN 170 / KK53: 8 stale FAILs) the 5 nextBuoi() of the setup now end a day: the end-of-day motion scenes (Lật thẻ bài .kmov card flip, reward / podium hosts)
+     queue over the board and ate every tap on the test scene. They are the game's own scenes, not this test's: clear them before the scene opens. */
+  await p.evaluate(()=>{try{kmReset()}catch(e){}try{KMQ.length=0;kmBusy=false}catch(e){}document.querySelectorAll('.kmov,#kmrew,#kpodov,[id^="kroul"]').forEach(e=>e.remove())});await p.waitForTimeout(300);
   const o=await p.evaluate(async()=>{const Rv=liveRivals(true).filter(x=>x.alive&&!x.out).slice(0,3);while(Rv.length<3)Rv.push(S);
    const Sc=kitScene.open({bg:IMG_U("img/ev-te-le.webp"),intro:0}),g=Sc.L.g,fh=Math.round(g.H*.8);const cx=[.2,.5,.8];for(let i=0;i<3;i++)await Sc.fig(Rv[i],{cx:g.w*cx[i],top:g.H-fh,fh,z:2+i});Sc.show();
    window.__SC=Sc;window.__cue=[];window.__done=0;window.__lines=[];

@@ -56,7 +56,7 @@ function kitNoLock(m){try{if(!m||!m.opts||!m.opts.length||typeof S==="undefined"
 /* outermost wrappers (assembled last): every draw and every pick sees the same roads; the added «Lui» is the card's cancel (forced or not),
    so the kit ✕ / Esc / tap-out (kitModalCloser) and a pick of it leave the card like the ✕ (closeModal: the co-op guest sends i:-1) */
 (function(){if(typeof kitCancelIx==="function"){const k0=kitCancelIx;kitCancelIx=function(m){const i=k0(m);if(i>=0||!m||!m.opts)return i;return m.opts.findIndex(c=>c&&c.__nlAdd)}}
- if(typeof showModal==="function"){const s0=showModal;showModal=function(){let m=null;try{if(typeof Q!=="undefined"&&Q.length){m=Q[0];if(m)delete m.__nlDom;kitNoLock(m)}}catch(e){}
+ if(typeof showModal==="function"){const s0=showModal;showModal=function(){let m=null;try{if(typeof kitDlgFold==="function")kitDlgFold()/* KIT §6.2i one copy of a dialog: the ONE outer entry (j3) */}catch(e){}try{if(typeof Q!=="undefined"&&Q.length){m=Q[0];if(m)delete m.__nlDom;kitNoLock(m)}}catch(e){}
   const r=s0.apply(this,arguments);/* the screen is the truth: every visible road greyed by a DOM-only wrapper → same rule, «Lui» leave, redraw */
   try{const M=document.getElementById("modal");if(m&&m===Q[0]&&m.opts&&M&&!M.hidden&&!m.opts.some(c=>c&&(c.__nlAdd||c.kgx))&&!(typeof kitCancelIx==="function"&&kitCancelIx(m)>=0)&&kitDomDead()){
    m.__nlDom=1;kitNoLock(m);if(m.opts.some(c=>c&&c.__nlAdd))return s0.apply(this,arguments)}}catch(e){console.error("kitNoLock dom",e)}return r}}

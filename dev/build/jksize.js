@@ -884,4 +884,10 @@ window.kszListCols3=kszListCols3;
 .k3ev{position:relative}
 .k3ev>.kevav{position:absolute;left:6px;top:6px;z-index:3;display:flex;gap:4px;pointer-events:none}
 .k3ev>.kevav>span.md.kmini.kmini{width:clamp(34px,11%,62px)!important;max-width:62px;filter:drop-shadow(0 2px 4px #0006)}
+/* KIT §28.19c (owner 27/11, «Đại kết cục»: the avatar on the picture strip sat over the title line): the strip avatar is the kit frame cell (mdH → .kfc, 550/1037) cut to its
+   portrait (top 78 %, no pendant) and sized by the STRIP HEIGHT — top 6px … bottom 6px, never taller than 90px — so it always sits wholly INSIDE the picture, on every strip height */
+html body .k3ev>.kevav{top:6px;bottom:6px;height:auto;max-height:90px;align-items:flex-start}
+html body .k3ev>.kevav>span.md.kfc.kfc{height:calc(100% / .78)!important;width:auto!important;max-width:none!important;flex:0 0 auto;filter:drop-shadow(0 2px 4px #0006)}
+html body .k3ev>.kevav>span.md.kfc.kfc.big,html body .k3ev>.kevav>span.md.kfc.kfc.sm,html body .k3ev>.kevav>span.md.kfc.kfc.xs{width:auto!important}
+html body .k3ev>.kevav{overflow:hidden}
 `;document.head.appendChild(st)})();

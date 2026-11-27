@@ -79,6 +79,40 @@ function deserQ(L){const out=[],seen=new Set();for(const e of L||[]){try{if(e.la
 const KIT_CLOSE_W=/^(?:✕\s*)?(?:‹\s*)?(Thôi|Lui|Đóng|Đã hiểu|Đã rõ|OK|Xong)$/;
 function kitCloseTxt(h){return String(h==null?"":h).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim()}
 function kitCancelIx(m){if(!m||!m.opts||m.mustChoose)return -1;return m.opts.findIndex(c=>c&&KIT_CLOSE_W.test(kitCloseTxt(c.n))&&(!c.fx||Object.keys(c.fx).every(k=>!c.fx[k])))}
+/* KIT §6.2i ONE COPY OF A DIALOG (KK44, owner ruling 26/11 ~17:55Z via MAIN 161: fix the dead-close family at the ROOT): every dialog in the game becomes
+   visible through showModal, so the one-copy guard runs at its ONE outer entry (jnolock, the outermost showModal wrapper, calls kitDlgFold before any
+   inner wrapper rewrites the front card), not in each opener. An IDENTICAL waiting copy of the dialog in front (same title, class,
+   body, kit spec and option names — a fast double tap on its opener queued two) is folded into the front one as a twin (m.__tw) instead of waiting behind it
+   (the old symptom: the first ✕ «did nothing», the same dialog came straight back). A twin is never dropped silently: it RESOLVES WITH its kept twin
+   (kitDlgTwinsDone, from closeModal and chooseM) the same way: closed with ✕ / «Đã rõ» → its own onClose runs too (a flow that waits on that dialog still
+   hears back); answered with an option → like the kept one, no onClose, and the option's effects never run a second time (one tap = one spend). The co-op thin cards and the life card (m.nl) are never folded (own queues). */
+function kitDlgSig(m){try{return m?String(m.t||"")+"|"+(m.cls||"")+"|"+(typeof m.h==="string"?m.h:"")+"|"+JSON.stringify(m.kit||null)+"|"+(m.opts?m.opts.map(o=>o&&o.n).join("/"):"")+"|"+(m.btn||""):""}catch(e){return null}}
+/* the signature is taken the first time the guard sees a card (still as its opener queued it; inner wrappers later rewrite the front card) */
+function kitDlgSg(m){if(m.__sg==null)m.__sg=kitDlgSig(m);return m.__sg}
+function kitDlgFold(){kitDlgArm();try{const m=Q[0];if(!m||m.thin||m.nl)return;kitDlgSg(m);if(Q.length<2)return;let g=null;for(let i=Q.length-1;i>=1;i--){const q=Q[i];if(!q||q===m||q.thin||q.nl||(q.t||"")!==(m.t||""))continue;if(g===null)g=kitDlgSg(m);if(!g||kitDlgSg(q)!==g)continue;Q.splice(i,1);(m.__tw=m.__tw||[]).push(q)}}catch(e){console.error("kitDlgFold",e)}}
+function kitDlgTwinsDone(m,picked){const T=m&&m.__tw;if(!T||!T.length)return;m.__tw=null;for(const t of T){try{if(!picked&&t.onClose&&t.onClose!==m.onClose)t.onClose()}catch(e){console.error("kitDlgTwin onClose",e)}try{kitDlgTwinsDone(t,picked)}catch(e){}}}
+/* KIT §6.2j ONE TAP = ONE ACTION (KK44, MAIN 160/161 double-tap family, law 11): the second tap of a fast double tap lands on whatever the first tap opened —
+   a confirm / buy / give / option card under the finger — and spent a second action. When a NEW dialog comes to the front (kitDlgFold, the ONE outer
+   showModal entry) a real (trusted) tap inside #modal is not taken when it is the 2nd tap of a double tap: the tap before it, at the same spot (BAL.kdlg.tapNear px) and within BAL.kdlg.tapArm ms, opened this dialog. A single fast tap on a just-opened dialog is taken. Scripted clicks
+   (robots, tests, co-op relays) are never held. Test: dev/test/double-tap-scan.js. */
+let kDlgFront=null,kDlgAt=0;
+function kitDlgArm(){try{const m=Q[0];if(m&&m!==kDlgFront){kDlgFront=m;kDlgAt=performance.now()}}catch(e){}}
+let kTapLast=null;/* what a tap can spend (khắc / Bạc / Sức / items): read when each tap lands */
+const KTAP_HELD=["inv","items","tt","tutrang","cloth","gifts","pets"];/* every list of things she holds (a buy / give / pet adds or takes one) */
+function kTapDig(){try{const n=x=>Array.isArray(x)?x.length:(x&&typeof x==="object"?Object.keys(x).length:0);return [typeof used!=="undefined"?used:0,S?S.bac:0,S?S.suc:0,S?KTAP_HELD.reduce((a,k)=>a+n(S[k]),0):0].join(",")}catch(e){return""}}
+document.addEventListener("click",e=>{try{if(!e.isTrusted)return;const now=performance.now(),L=kTapLast;const el=e.target&&e.target.closest?e.target.closest("button,[role=button],[data-ka]"):null;kTapLast={t:now,ts:e.timeStamp,x:e.clientX,y:e.clientY,el,dg:kTapDig()};
+ /* only the SECOND tap of a double tap (same spot, within tapArm ms), and only when the first one DID something: it opened the dialog now in front, or
+    its button is gone (the screen was redrawn after the act — the 2nd tap would run the act again on the new copy). A stepper / toggle that stays is untouched. */
+ /* RV-163C F1 (double-tap-scan «Y dược · Hỏi thái y»: khắc +1, Bạc −4 twice on a busy phone): the window is the time between her two FINGER taps (e.timeStamp =
+    when the tap happened), not between the moments the game got round to them — the 1st tap's own work (spend, redraw) can outlast tapArm, and the 2nd tap,
+    queued behind it, used to be read as a new tap. Either measure under tapArm = the same double tap. */
+ const arm=(BAL.kdlg&&BAL.kdlg.tapArm)||0;const gap=L?Math.min(now-L.t,(e.timeStamp&&L.ts)?e.timeStamp-L.ts:Infinity):Infinity;if(!L||gap>=arm||Math.hypot(e.clientX-L.x,e.clientY-L.y)>((BAL.kdlg&&BAL.kdlg.tapNear)||0))return;
+ const M=$("modal");const inDlg=!!(M&&!M.hidden&&e.target&&e.target.closest&&e.target.closest("#modal"));
+ const opened=inDlg&&kDlgFront&&kDlgAt>=L.t,redrawn=!!(L.el&&!L.el.isConnected&&el);
+ /* RV-163C F1 family (BUSY scan: «Soát đồ» khắc 2→4 on a busy phone): the 1st tap already SPENT (khắc / Bạc / Sức / items changed since it landed) but the
+    screen is not redrawn yet — the 2nd tap would hit the same live button and spend again. A stepper / toggle spends nothing and stays untouched. */
+ const spent=!!(L.dg&&el&&el===L.el&&kTapDig()!==L.dg);
+ if(!opened&&!redrawn&&!spent)return;e.stopImmediatePropagation();e.preventDefault()}catch(x){}},true);
 function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const m=Q[0];
   M.className="modal "+(m.cls||"");$("mt").textContent=/pcm/.test(m.cls||"")?"":m.t;$("mt").hidden=/pcm/.test(m.cls||"");try{const ar=evArt();M.querySelector(".dlg").style.setProperty("--dart",ar&&(m.who||/pcm/.test(m.cls||""))?`url(${ar})`:"none")}catch(e){}
   const wh=m.who||null;const art=!m.who&&m.opts&&!m.faces?evArt():"";$("mb").innerHTML=(m.faces?`<div class="faces">${m.faces.map(f=>`<figure>${pframe(Object.assign({},f[0],{rw:""}))}<figcaption>${typeof kitNameRank==="function"?kitNameRank(f[0].rw||"",f[0].rw===f[1]?"":f[1],f[0].col):`<b>${f[1]}</b>${f[0].rw?`<small>${f[0].rw}</small>`:""}`}</figcaption></figure>`).join("")}</div>`:"")+(m.faces||/pcm/.test(m.cls||"")?m.h:`<div class="spk">${wh?pframe(wh):pframeArt(art||evArt())}<div class="spkt">${m.h}</div></div>`)+(m.opts?`<div class="opts">${(cx=>m.opts.map((c,i)=>{if(i===cx)return "";if(m.kipOnly instanceof Set&&c&&c.ik!=null&&!m.kipOnly.has(i))return "";/* KIT 28.13i K-LIST-PAGE (picker-dom): an item pick grid draws only the cards of its page + the chosen one (jgpick m.kipOnly) */const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;if(poor&&!c.off&&typeof kitOffBac==="function")kitOffBac(c,-c.fx.bac);return `<button class="opt" data-m="${i}"${c.nav?' data-knav="1"':""} ${poor||c.off?"disabled":""}${typeof kitOffAttr==="function"?kitOffAttr(c):""}>${c.n}<small>${dilLine(c)}</small></button>`}))(kitCancelIx(m))/* picker-dom: the cancel index once per draw (was once per option: O(n²), 320 ms a draw on a 1,437-piece chest) */.join("")}</div>`:"");
@@ -87,8 +121,8 @@ function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const
   const live=kitModalLive(m);
   $("mr").innerHTML=m.opts&&live?"":`<button class="main" id="mclose">${m.btn||"Đã rõ"}</button>`;
   M.__m=m;kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
-function closeModal(){const m=Q.shift();if(m&&m.onClose){if(m.nl&&window.renderHold)renderHold(m.onClose,m,[],false);else m.onClose()}if(!S.dead||Q.length)showModal();if(m&&m.entI&&!m.onClose&&Q.length&&!S.dead)return;if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* an origin story panel (jentry/joi entI: text + picture, no effect, no onClose) followed by another card: the board did not change, no redraw *//* the life card (m.nl): its nlAccept chain renders once, here (jrbatch); another card follows: the board under it is drawn at the end of this task (jrbatch renderSoon) */
-function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(!c){chooseBad(i,m);return}if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
+function closeModal(){const m=Q.shift();if(m&&m.onClose){if(m.nl&&window.renderHold)renderHold(m.onClose,m,[],false);else m.onClose()}kitDlgTwinsDone(m);if(!S.dead||Q.length)showModal();if(m&&m.entI&&!m.onClose&&Q.length&&!S.dead)return;if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* an origin story panel (jentry/joi entI: text + picture, no effect, no onClose) followed by another card: the board did not change, no redraw *//* the life card (m.nl): its nlAccept chain renders once, here (jrbatch); another card follows: the board under it is drawn at the end of this task (jrbatch renderSoon) */
+function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(!c){chooseBad(i,m);return}if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();kitDlgTwinsDone(m,true);
   /* KIT §6.2m nav: a pure NAVIGATION option (Đi tới / Xem Dư đồ / Đi làm …) changes nothing by itself: no effects, no log line, no result card */
   if(c.nav){window.__kNav=(window.__kNav||0)+1;try{if(c.go)c.go()}catch(e){console.error("nav option",e)}setTimeout(()=>{window.__kNav=Math.max(0,(window.__kNav||1)-1)},0);showModal();render();return}
   const b0=snapReal(),s0=S.logSeq||0;

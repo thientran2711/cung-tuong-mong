@@ -173,19 +173,23 @@ function watch(){const t=T();if(!t||t.__rfw)return;t.__rfw=1;new MutationObserve
 /* the result card of a choice: drawn → remembered; inside / just after a choice → it holds what comes next */
 const r0=resultShow;resultShow=function(){const was=window.kaLastResult;const r=r0.apply(this,arguments);
  try{front();if(ui()&&on()&&window.kaLastResult!==was){watch();RF.shown++;const now=performance.now();
-  if(RF.held)cue();/* a second card while held keeps «Tiếp ▸» */if(RF.depth>0)RF.mine=1;else if(now-RF.end<GRACE&&!RF.nav){/* late card: the next card may already be up — take it back until the result is seen */
+  if(RF.held)cue();/* a second card while held keeps «Tiếp ▸» */if(RF.depth>0)RF.mine=1;else if(now-RF.end<GRACE&&!RF.nav&&!noFx(window.kaLastResult)){/* late card: the next card may already be up — take it back until the result is seen */
    RF.stat.late++;try{const M=document.getElementById("modal");if(Q.length&&M&&!M.hidden){modalOff();RF.wantModal=true}}catch(e){}if(RF.wantModal||RF.later.length)hold()}}}catch(e){console.error("RF show",e)}return r};
 /* the next card while a choice is running: held until the choice is over; shown at once when the choice made no result card */
 const s0=showModal;showModal=function(){try{if(ui()&&Q.length){if(RF.depth>0){RF.wantModal=true;modalOff();RF.stat.modal++;return}if(RF.held&&vis()){RF.wantModal=true;modalOff();return}}}catch(e){}return s0.apply(this,arguments)};
 /* NOT A CHOICE (q-softlock G4, LC25): a VIEW panel (kit.view: «Tin báo», «Tin chờ người sai đi», «Lịch tháng» …) and a pure close / navigation
    option (no effect, «Đóng / Để sau / Đã rõ / Thôi …») are not choices — never held, the next card shows at once */
 const NAV=/^(Thôi|Đi|Đóng|Lui|Để sau|Đã rõ|Biết rồi|Để ta xem|Xem|Quay lại|Đợi buổi sau|Đợi sáng mai)\b/;
+/* NO-EFFECT-HOLD (MAIN 178 ruling 27/11 ~13:00Z/~13:42Z, DLG-DEAD-BTN): a result card that says only «ta không được gì, cũng không mất gì»
+   (j63 resultShow: no Được, no Mất, no Kèm — the «Ghi chú» note row alone) changed nothing she must read before the next card: it never holds
+   the next card behind «Tiếp ▸» (same release as a NAV option); the card still shows and fades by itself. Read from kaLastResult only. */
+function noFx(r){try{if(!r||!Array.isArray(r.rows)||(r.fold&&r.fold.length))return false;return r.rows.every(x=>x&&(x.k==="note"||x.k==="by"/* MAIN 179 19:21Z: a «Người ấy» row (tgt: thiện cảm / ghen / oán of the other person) is a shown change — that result holds */))&&r.rows.some(x=>x.k==="note"&&/không được gì, cũng không mất gì/.test((x.items||[]).join(" ")))&&!(document.querySelector("#rtoast .kb .kr-kem"))}catch(e){return false}}
 function isNav(nm,a){try{if(nm!=="chooseM")return false;const m=Q[0],c=m&&m.opts&&m.opts[a[0]];if(!m||!c)return false;if(m.kit&&m.kit.view)return true;
  const fx=c.fx||{};const none=!Object.keys(fx).some(k=>fx[k]);return none&&(c.back||NAV.test(kaPlain(String(c.n||"")).trim()))}catch(e){return false}}
 function wrap(nm){const f=window[nm];if(typeof f!=="function")return;window[nm]=function(){const top=RF.depth===0;let was=null;if(top){RF.mine=0;RF.nav=isNav(nm,arguments);was=window.kaLastResult}RF.depth++;let r;
  try{r=f.apply(this,arguments)}finally{RF.depth--;if(top){RF.end=performance.now();
    /* jaudit hands a card raised inside the choice to the INNER resultShow (window.__aaR0) at its end: the card is known by kaLastResult */
-   try{front();if(!RF.mine&&window.kaLastResult!==was&&on()&&ui()){RF.mine=1;watch();RF.shown++}if(RF.nav){RF.mine=0;RF.stat.nav=(RF.stat.nav|0)+1}}catch(e){}
+   try{front();if(!RF.mine&&window.kaLastResult!==was&&on()&&ui()){RF.mine=1;watch();RF.shown++}if(RF.nav){RF.mine=0;RF.stat.nav=(RF.stat.nav|0)+1}else if(RF.mine&&window.kaLastResult!==was&&noFx(window.kaLastResult)){RF.mine=0;RF.stat.nofx=(RF.stat.nofx|0)+1}}catch(e){}
    try{if(RF.mine&&on()&&ui()&&(RF.wantModal||RF.later.length||(window.DF&&DF.enc===1)/* the encounter's talk acts come next */))hold();else if(!RF.held&&RF.wantModal){RF.wantModal=false;if(Q.length&&ui())showModal()}}catch(e){console.error("RF end",e)}}}
  return r}}
 /* every choice runner of the result card family (the same set j19 wrapR gives a result card) */
