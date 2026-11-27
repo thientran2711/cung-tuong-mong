@@ -20,7 +20,7 @@ const TI=["nhẹ","vừa","nặng"];
 /* ---------- the table: mode, harm (equal chance) or favour (best odds), tiers by member id or name ---------- */
 /* t: [[tier, RegExp on the member NAME | "<id>" , …], …] — read after the row's own tiers (jdoor J2 / jamove dl) */
 const M={
- talk:{mode:"one"},                                   /* MAIN 168 Q3: ONE auto topic */
+ talk:{mode:"one",pref:"mend"},                       /* MAIN 168 Q3: ONE auto topic; «Tạ lỗi» first while she bears a grudge (j9 offers it only then) */
  gh:{mode:"tier",t:[["nhẹ",/^(Ghé chơi|Mượn son phấn)/],["vừa",/^(Giúp đỡ nàng|Giúp chăm thú nuôi)/,"a:petcare"],["nặng",/^Tặng quà/,"a:gift"]]},
  kg:{mode:"one"},                                     /* SPLIT from gh: «Kết giao» (alliance = another result) */
  play:{mode:"tier",t:[["nhẹ",/^Cùng chơi/],["vừa",/^Thách đấu/]]},
@@ -85,6 +85,7 @@ function hash(s){let h=0;for(const c of String(s))h=(h*31+c.charCodeAt(0))|0;ret
 function prefOf(r,m){const p=(M[r.k]||{}).pref;const n=txt(m.n);try{
  if(p==="like"){const E=S.emp||{};let s=0;for(const k in (E.likes||{}))if(E.known&&E.known[k]&&E.likes[k]&&n.toLowerCase().includes(String(E.likes[k]).toLowerCase()))s+=2;
   if(/triều chính/.test(n)&&E.traits&&E.traits.includes("chinh"))s+=1;return s}
+ if(p==="mend")return /^Tạ lỗi$/.test(n)?2:0;
  if(p==="art"){const A=S.arts||{};const L={cam:/đàn|cầm/i,ky:/cờ|kỳ/i,thi:/thơ|thi/i,hoa:/vẽ|họa/i,vu:/múa|vũ/i,theu:/thêu/i};let s=0;
   for(const k in L)if(L[k].test(n))s=Math.max(s,(+A[k]||0)+((S.emp&&S.emp.known&&S.emp.known.art&&S.emp.likes&&S.emp.likes.art===k)?2:0));return s}}catch(e){}return 0}
 /* ONE pick among members M (each {id, n, x, off, a?, cost?}); seed fixed per target + buổi + door (+ tier) → co-op host and guest agree */
@@ -102,8 +103,9 @@ function seedOf(r,who,tier){let t=0,b=0;try{t=S.turn||0;b=S.buoi||0}catch(e){}re
 function whyOf(r,m,L){const ok=L.filter(x=>!x.off);if((M[r.k]||{}).harm)return"";
  const p=prefOf(r,m);const md=(M[r.k]||{}).pref;
  if(md==="like"&&p>=2)return"đúng chuyện ngài thích nghe";
+ if(md==="mend"&&p>0)return"nàng đang giận ngươi";
  if(md==="art"&&p>0){let k="";try{const A=S.arts||{};k=Object.keys(A).sort((x,y)=>(+A[y]||0)-(+A[x]||0))[0]}catch(e){}return"môn ngươi giỏi nhất"+(S.emp&&S.emp.known&&S.emp.known.art?", lại hợp ý ngài":"")}
- return ok.length>1?"lối chắc nhất lúc này":""}
+ return""}
 /* ---------- members of a talk-side door (pop-up), same lists as the old card (jdoor PEND.door + DOOR.more) ---------- */
 function members(pp,r){const out=[];let p=null;if(pp.kind!=null)pp.i=doorIdx(pp);p=curPeople()[pp.i];if(!p||!S.visit)return{p:null,L:out};let A=[];try{A=doorRaw(p)}catch(e){return{p,L:out}}
  A.forEach((a,j)=>{if(!a||a.k61||a.door||DOOR.of(a.n,p.kind)!==r)return;const tc=talkK(a);const poor=!!(a.c&&a.c.bac&&S.bac+a.c.bac<0);
@@ -117,7 +119,8 @@ function who(p){try{const v=p&&p.ref;return v&&v.id!=null?v.id:(p&&p.kind)||""}c
 function runM(r,m,L,tier){const why=whyOf(r,m,L);const s0=typeof popMsg==="string"?popMsg:"";ONE.last={k:r.k,n:txt(m.n),id:m.id,tier:tier||null,why};
  (ONE.hist=ONE.hist||[]).push(ONE.last);if(ONE.hist.length>400)ONE.hist.shift();
  try{m.go()}finally{try{const head=`${r.n}${tier?" · "+tier:""}: ${txt(m.n)}${why?" — "+why:""}`;
-  if(typeof popMsg==="string"&&popMsg!==s0&&!popMsg.includes(head)){popMsg=`<span class="ef n">${head}.</span> `+popMsg;try{render()}catch(e){}}
+  /* after the member's own result (the bubble shows the result first; the real member + why follow) */
+  if(typeof popMsg==="string"&&popMsg!==s0&&!popMsg.includes(head)){popMsg=popMsg+` <span class="ef n">(${head})</span>`;try{render()}catch(e){}}
   if(typeof log==="function")log(head)}catch(e){}}}
 ONE.runM=runM;
 /* a ONE door tap / a TIER row tap */
@@ -128,7 +131,7 @@ function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>t
   const free=T.filter(x=>!x.off);const harm=(M[r.k]||{}).harm;
   let x="",n=`${r.n} · ${t}`;if(m){const ln=String(m.x||"");/* the member's own kit line (optLine HTML: odds · tốn · được · hỏng), unchanged */
    if(harm&&free.length>1)x=`${ln} · ra một trong: ${free.map(y=>txt(y.n)).join(", ")}`;else{x=ln;n=`${txt(m.n)} · ${t}`}}
-  rows.push({t,m,T,n,x:x||"chọn rồi xem kết quả ở bước sau",off:m?null:{why:(T[0]&&T[0].why)||"chưa làm được"}})}return rows}
+  const why0=(T[0]&&T[0].why)||"chưa làm được";rows.push({t,m,T,n,x:x||(m?"chọn rồi xem kết quả ở bước sau":`chưa làm được: ${txt(why0)}`),off:m?null:{why:why0}})}return rows}
 ONE.tierRows=tierRows;
 /* ---------- (1) the pop-up: decorate the folded doors (button = the pick's odds word + line) ---------- */
 (function(){const f0=doorFold;doorFold=function(p,A){try{fix()}catch(e){}const out=f0.apply(this,arguments);if(!ONE.on||!Array.isArray(out))return out;
@@ -149,6 +152,14 @@ ONE.tierRows=tierRows;
    else{d.o=oddsM(m);const ln=txt(m.x).replace(/^(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững) · /,"");d.x=`${nm} · ${ln}`}
    d.open=()=>{if(!goOne(doorPP(p,curPeople().indexOf(p),r.k),r))doorOpen(p,r.k)}}}
  catch(e){console.error("jone fold",e)}return out}})();
+/* a door card opened from the focus view (her tap on «Hãm hại», a KEEP door …) was queued but never painted (seen on LIVE fa722503 too: Q 1, #modal hidden,
+   no jdfv in-scene pick-up) — the card is painted at once through the normal showModal chain (jdfv takes it in-scene when her figure is up) */
+(function(){const o0=doorOpen;doorOpen=function(){const n0=Q.length;const r=o0.apply(this,arguments);try{const m=Q[Q.length-1];const M=document.getElementById("modal");
+ if(Q.length===n0+1&&Q.length===1&&m&&!m.dfSeen&&M){/* the focus view holds a centre card it cannot play in its scene: it steps back (✕, as her own close) and the card shows
+   over the stage, like a door card from the pop-up card; then the normal showModal chain paints it (0 / 300 / 900 / 1500 ms, after the closing animation) */
+  const paint=()=>{try{if(Q[0]!==m||m.dfSeen||!M.hidden)return;const F=typeof DF==="object"&&DF?DF.F:null;if(F&&F.open){try{F.close()}catch(e){}return}
+   const dq=typeof DQ==="object"&&DQ?DQ:null;if(dq)dq.user=(dq.user||0)+1;try{showModal()}finally{if(dq)dq.user--}}catch(e){console.error("jone paint",e)}};
+  [0,300,900,1500].forEach(t=>setTimeout(paint,t))}}catch(e){}return r};window.doorOpen=doorOpen})();
 /* ---------- (2) the TIER card (PEND «door»: saveable) — ≤ 3 rows nhẹ · vừa · nặng ---------- */
 (function(){const P0=PEND.door;PEND.door=pp=>{try{fix()}catch(e){}const r=DOOR.byK(pp&&pp.k);if(!ONE.on||!r||pp.r!=null||ONE.mode(r.k)!=="tier")return P0(pp);
  const {p,L}=members(pp,r);if(!p||!L.length)return P0(pp);const R=tierRows(r,L,who(p));if(R.length<2)return P0(pp);
