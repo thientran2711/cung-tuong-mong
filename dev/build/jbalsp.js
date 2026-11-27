@@ -10,7 +10,7 @@
      dm       = diminishing returns: a rise × max(min, 1 − (now / ceiling)^pow); fractions carry over per person and stat (p.spc), nothing is lost.
      relOf    = thiện cảm / oán use the scale 0..100 of the positive side (rel −100..100: only the part above 0 is slowed). */
 BAL.stp={on:1,
- band:{sung:[2,5,8],danh:[2,5,8],duc:[2,5,8],th:[4,8,12],hh:[4,8,12],rel:[4,8,12],oan:[4,8,12]},over:.3,
+ band:{sung:[2,5,8],danh:[2,5,8],duc:[2,5,8],th:[4,8,12],hh:[4,8,12],rel:[4,8,12],oan:[4,8,12],ghen:[3,6,9]/* review/oan-pace-2: the size band of ONE jealousy cause (j1 ghenUp / pgUp via joanpace opBand; MAIN 163 21:09Z «ONE cap per stat = the stat-pace band»; not a paced stat of spG) */},over:.3,
  ceil:[45,55,65,75,85,92,97,100],
  dm:{pow:3,min:.15},
  /* floor[k] = the highest GATE of that stat the game asks at any rank (dev/measure/statpace-gates.py lists all 155 gates + ladder steps; it FAILs when a gate
