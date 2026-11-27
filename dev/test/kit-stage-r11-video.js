@@ -1,4 +1,4 @@
-/* kit-stage-r4-video.js — KIT-STAGE-R4 owner look videos (OD 26/11 ~18:55Z / ~19:00Z; MAIN 162: r3 videos started half-loaded and showed the boot notice).
+/* kit-stage-r11-video.js (was r4/r10) — KIT-STAGE-R4 owner look videos (OD 26/11 ~18:55Z / ~19:00Z; MAIN 162: r3 videos started half-loaded and showed the boot notice).
    Every video starts AFTER full load with the boot notices («Điều mới trong cung» …) closed: the recording is cut at the moment the game is ready (ffmpeg -ss).
    REAL taps only (touch on Fold, mouse on iPad), ≤ 30 s.  Setup that the owner does not see (start, fire the event, put the visit line) runs in page code.
    flows: banbai  = rg c1b event choice as Bàn bài (deal → tap card → lift → ✕ → tap another → ✓)
@@ -36,6 +36,17 @@ const DEV=[["fold",755,1000],["ipad",1180,820]];
    if(o.locked>=0){await tapEl(TILE,o.locked);await p.waitForTimeout(1600);await shot('locked tile');await tapEl('.khost .khno');await p.waitForTimeout(1000)}
    await tapEl(TILE,1);await p.waitForTimeout(1600);await tapEl('#panel .khost .khconf:not([hidden])>.khok,.khost .khok');await p.waitForTimeout(2800);await shot('result');o.result=await p.evaluate(()=>!document.getElementById('modal').hidden);
    await p.evaluate(()=>{const x=document.querySelector('#modal .kit-x,#modal [aria-label="Đóng"]');if(x)x.click()});await p.waitForTimeout(1800);await shot('back');o.tilesBack=await tl()}
+  else if(vid==='tainghe'){/* R11 (owner 27/11 ~06:33Z): Tài nghệ = one square cell per môn → tap → the môn frame */
+   const tapHas=async t=>{const r=await p.evaluate(t=>{const e=[...document.querySelectorAll('button,[role=tab]')].filter(x=>x.getClientRects().length&&x.textContent.replace(/\s+/g,' ').trim().startsWith(t))[0];if(!e)return null;const q=e.getBoundingClientRect();return {x:q.left+q.width/2,y:q.top+q.height/2}},t);if(!r)return false;if(touch)await p.touchscreen.tap(r.x,r.y);else await p.mouse.click(r.x,r.y);return true};
+   const cells=()=>p.evaluate(()=>[...document.querySelectorAll('#panel .ktn-cell')].filter(x=>x.getClientRects().length).map(c=>{const q=c.getBoundingClientRect();return [c.querySelector('.ktnc-n').textContent,Math.round(q.width),Math.round(q.height),Math.round(q.top),Math.round(q.bottom)]}));
+   o.tab=await tapHas('Tài nghệ');await p.waitForTimeout(2200);
+   const subs=await p.evaluate(()=>[...document.querySelectorAll('#panel [data-ktsv]')].map(b=>b.dataset.ktsv));o.subs=subs;o.cells={};
+   for(const [i,sv] of subs.entries()){await tapEl(`#panel [data-ktsv="${sv}"]`);await p.waitForTimeout(1500);o.cells[sv]=await cells();o.scroll=await p.evaluate(()=>{const P=document.getElementById('panel');return P.scrollHeight-P.clientHeight});await shot('cells '+sv);
+    if(i===0||i===1){await tapEl('#panel .ktn-cell',i===0?3:0);await p.waitForTimeout(1600);await shot('frame '+sv);o['frame_'+sv]=await p.evaluate(()=>{const m=document.getElementById('modal');return m.hidden?null:{title:(m.querySelector('.kph,h3,.kpt')||{}).textContent,acts:[...m.querySelectorAll('.ktn-pop button.ka')].map(b=>b.textContent.replace(/\s+/g,' ').trim().slice(0,60))}});
+     await p.evaluate(()=>{const x=document.querySelector('#modal .kit-x,#modal [aria-label="Đóng"]');if(x)x.click()});await p.waitForTimeout(1000)}}
+   await tapEl(`#panel [data-ktsv="${subs[0]}"]`);await p.waitForTimeout(1200);await tapEl('#panel .ktn-cell',0);await p.waitForTimeout(1500);
+   o.learn=await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .ktn-pop button.ka')].find(x=>!x.disabled);return b?b.textContent.replace(/\s+/g,' ').trim().slice(0,40):null});
+   if(o.learn){await tapEl('#modal .ktn-pop button.ka');await p.waitForTimeout(2600);await shot('after learn');o.afterLearn=await p.evaluate(()=>{const m=document.getElementById('modal');return m.hidden?'closed':m.textContent.replace(/\s+/g,' ').slice(0,80)})}}
   else if(vid==='banbai'){o.fired=await p.evaluate(()=>{for(let k=0;k<4;k++){Q.length=0;document.getElementById('modal').hidden=true;if((()=>{try{S.evc=null;EVCW.length=0}catch(e){}/* clean day: LIVE jevc daily cap */return rgFire('c1b')})()){Q.length=1;showModal();return true}}return false});
    await p.waitForTimeout(2800);await shot('dealt');await tapEl('#modal .opts.khand>button.kopt',0);await p.waitForTimeout(1600);await shot('lift 1');o.lift1=await p.evaluate(()=>!!document.querySelector('#modal .opts.khand>button.klift'));
    await tapEl('#modal .dlg>.khconf>.khno');await p.waitForTimeout(1200);await tapEl('#modal .opts.khand>button.kopt',1);await p.waitForTimeout(1600);await shot('lift 2');
