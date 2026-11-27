@@ -400,6 +400,7 @@ cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) 
 | Date | Who | Part | Used in | Given to | Status |
 |---|---|---|---|---|---|
 | 27/11 | DOOR-ONETAP (MAIN 177 X06 fix) | **odds meter `.kodm` inside a primary `.kbtn` (dark red)**: the word takes `--oc` = KIT_ODDS_COL (red «Mong manh», amber «Tùy duyên») → red on red, unreadable (Fold/iPad stills: Hậu cung «Tìm gặp» sub-line). Need ONE kit rule for the meter on dark buttons (e.g. light word / light segment track inside `.kbtn:not(.alt)`), every host. | jkpp kppBtn (Hậu cung «Tìm gặp» / «Ghé cung»), any one-tap door button with odds | coordinator | OPEN |
+
 ## 27/11 KK56 VERDICTS on the pending requests (MAIN 174 task 3)
 - **E-GAIN3b #1** (paid «Chứng cứ n» under «tốn:» landed in green Được): DONE, j63 kaRows tốn branch: a piece written under «tốn:» is ALWAYS a cost (red with a number, neutral without); probe: «tốn: Chứng cứ 1 (tội …) · 1 khắc» now reads Tốn: Chứng cứ 1 (tội …) · 1 khắc.
 - **E-GAIN3b #2** («+1,1» printed «+,1»): DONE, jk2b MARK_NUM consumes the decimal comma and its lookahead refuses «,\d»; «Văn con +1,1» reads «Văn con +».
