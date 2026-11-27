@@ -377,3 +377,6 @@ cell — neither «không» nor hidden). The owner's newer rule (25/11 ~23:36Z) 
    («Rỉ tai chuyện trong cung», jtwoway add("gossip"), the talk hits the consort she resents) gets sign −1, so the door dialog row says she gains nothing and loses Danh.
    Wanted: a stat drop of a named / other person («một phi tần khác …», «<tên> Danh −», «Danh nàng −») is a gain for her (sign +1), the same as kcls's «harm to her (the rival)» rule.
    Note for the kit keeper: dev/test/gain-empty.js counts the hint word «chẳng được gì» as a gain (its empty test is only «không / — / -»); once #4 lands, add KA_NOTHING + «chẳng được gì» to its empty test.
+5. **The door-dialog hint drops a talk option's `w` gains.** dev/build/jk2b.js:217 (kitOptModel) reads `dilLineRaw(o)` (the dilemma line: `fx` + `x`), never a talk option's `w`, so kitHint (:314) says
+   «chẳng được gì; nhưng thiện cảm −−−, oán ++» for «Khiêu khích» (j2.js:175 `w:{danh:BAL.talk.provoke.danh}`, real Danh +1 on success) in the P6 door dialog, while the option card (optLine) shows «Thành: Danh +».
+   Whole family: every talk option whose gain sits in `w` (Thỉnh an `w:{hh,danh,duc}`, Xin Thái hậu đỡ lời, …). Wanted: kitOptModel reads the same line the option card draws (optLine: `fmt(w)` + `x`) for an option with `w`.
