@@ -1,6 +1,6 @@
-# ~86% xong · còn 35 việc không tính hình nhân vật (LIVE a22cf45d)
+# ~84% xong · còn 41 việc không tính hình nhân vật (LIVE fa722503)
 Footer % = whole game (MAIN 167: 88 % at 28 open rows → 86 % at 35; list-only progress = 31 %). List method: X = done/(done+open); size weights S=1 M=2 L=3; done = struck rows + LIVE since 24/11 (owner-bug batch counts 10), a «partly live» row counts half its weight; only jobs on this list, not the whole game. N = open rows below.
-Recount by MAIN 167 worker WORKLIST-RECOUNT, 27/11 ~00:10Z, from `git log origin/main --first-parent` (LIVE 4cfcda61), FOREMAN_B–F STATUS tails, HANDOVER_SESSION9 (MAIN 165/166/167), CLAIMS, owner-bugs report. Every main keeps this current and reports at 08:00 / 20:00 her time; owner (26/11): recount after each batch and update this top line.
+Recount MAIN 168 27/11 ~01:10Z: +6 new owner jobs tonight (rows 39–44), row 5 partly → 41 open, ~84 %. Earlier recount by MAIN 167 worker WORKLIST-RECOUNT, 27/11 ~00:10Z, from `git log origin/main --first-parent` (LIVE 4cfcda61), FOREMAN_B–F STATUS tails, HANDOVER_SESSION9 (MAIN 165/166/167), CLAIMS, owner-bugs report. Every main keeps this current and reports at 08:00 / 20:00 her time; owner (26/11): recount after each batch and update this top line.
 State: LIVE = on main · partly = some pieces LIVE · open.
 | # | Job | Owner | State |
 |---|-----|-------|-------|
@@ -8,7 +8,7 @@ State: LIVE = on main · partly = some pieces LIVE · open.
 | 2 | Character intro shots + royal reveal | INTRO-DESIGN→KK | open: MOCK READY, waits sếp |
 | 3 | Dialogue kit (spotlight, typewriter, cue, square options) | KK | open: KIT-STAGE-R7 (see 28) |
 | 4 | Dialogue scenes for every road / side line / quest | B, C | partly: thin-p8-r2 LIVE 2fd303aa; rest open |
-| 5 | Titles: day title card + TITLES2 + title-parity 36cb49a8 (RV-163C) + TITLE-BAL (OB 46/54) | KK, E, PACE-SPEED-2 | open |
+| 5 | Titles: day title card + TITLES2 + title-parity 36cb49a8 (RV-163C) + TITLE-BAL (OB 46/54) | KK, E, PACE-SPEED-2 | partly: title-bal LIVE fa722503; title-parity-r163d 4af19072 RV PASS in land queue |
 | 6 | Event frame relayout + toilette v3.5 size | KK | open |
 | 7 | Promotion redesign + D promo-stack land (promo-stack-lr4, contest-thitam, cung-quy, pbDlNext) | D | partly: a9 promo-root LIVE 6b5d3d05; stack remerge running |
 | 8 | Phân cung by thiện cảm + palace distance | D | open |
@@ -41,4 +41,10 @@ State: LIVE = on main · partly = some pieces LIVE · open.
 | 36 | Wording/hint batch: odds wording 43, WORDING-GAIN 53, closing-chip 39, buy-where links 41, OB-VERDICT-3 (42), kit-bac-progress 36, kit-name-stranger 22 | various | open/queue |
 | 37 | Oán rate (OB 55) + daily noise (qc-noise r10b) | D | open |
 | 38 | Found on LIVE: «Hội phối đồ: báo đề» empty-list stuck modal (Fold); ob-oan-enc «Nguy hiểm chung» FAIL | DRESS-FIX (Hội phối đồ) + OAN-PACE-2 (ob-oan-enc) | open |
+| 39 | Hậu cung card = info only + big frame + «Tìm gặp»/«Ghé cung» + round picker avatars (OD 27/11 00:05–00:42Z) | KK51-P2 | open: round avatars done 052433a5 |
+| 40 | ACT-MOVE: person acts only where she really is (Dư đồ meet / Hành sự / her palace), Emperor 6 moves (OD 00:32–00:54Z) | ACT-MOVE-3 | open: batch 1 8dbcc69b robot PASS |
+| 41 | DOOR-ONETAP: all 58 merged doors → one-tap best-fit acts, tier bounds outcome, NPC + co-op same (OD 01:03–01:14Z) | DOOR-ONETAP | open: plan OK |
+| 42 | Whole-game 3-tier Nhẹ/Vừa/Nặng audit + convert (law 2 rewritten, OD 00:46–00:50Z) | Foreman E | open: audit running |
+| 43 | Witness 3 tiers (Đe dọa/Mua chuộc/Thủ tiêu), Xóa dấu vết, exposure line, Đức vs Danh (OD 00:13–00:57Z) | PUNISH-TIER-5 | open: real-proof a2902d43 RV PASS |
+| 44 | «Ô lưu · Lui» close fault on LIVE (G4 90) | MAP-R9 | open |
 - LIVE since 24/11 not above: ACT-MERGE b881686f, ctp 639455a2, os 504d2e6a (one-sieve, ob-verdict, kem-row = OB 19/20/38), oan 53319e6f (OB 37), stat-pace 4cfcda61 (OB 15), audio-ipad 4fae357a, tinbao 50f8a13b, tainghe e4314b74, place-rules 9812646a.
