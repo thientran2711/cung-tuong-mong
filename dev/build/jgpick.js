@@ -67,7 +67,7 @@ function kipRowsFit(M,w,g0){const t=[...g0.querySelectorAll(".kipc")];if(!t.leng
  const b=sc.getBoundingClientRect(),bot=Math.min(b.top+sc.clientHeight,innerHeight),gt=g0.getBoundingClientRect().top,cs=getComputedStyle(g0),gap=parseFloat(cs.rowGap)||0;
  const tops=[...new Set(t.map(x=>Math.round(x.getBoundingClientRect().top)))].sort((a,b)=>a-b),pitch=tops.length>1?tops[1]-tops[0]:t[0].getBoundingClientRect().height+gap;
  const pg=w.querySelector(".kippg"),ph=pg?pg.getBoundingClientRect().height+(parseFloat(getComputedStyle(pg).marginTop)||0)+2:0;
- return pitch>0?Math.max(1,Math.floor((bot-Math.max(gt,b.top)-ph+gap)/pitch)):0}
+ const raw=pitch>0?Math.floor((bot-Math.max(gt,b.top)-ph+gap)/pitch):1;w.classList.toggle("kipshort",raw<1);/* not even one row + the pager fits: the pager never covers the row (K-PICK-SHORT) */return pitch>0?Math.max(1,raw):0}
 function kipPg(m,L,sel){const per=kipPer(m),pages=Math.max(1,Math.ceil(L.length/per));let pg=KIP_PG.get(m);
  if(pg==null){const at=sel!=null?L.findIndex(x=>x[1]===sel):0;pg=Math.floor(Math.max(0,at)/per)}pg=Math.min(Math.max(0,pg|0),pages-1);KIP_PG.set(m,pg);return{per,pages,pg}}
 function kipSelect(M,m,i){const ops=M.querySelector(".opts");if(!ops||!ops.querySelector(`:scope>.opt[data-m="${i}"]`)){KIP_SEL.set(m,i);kipRedraw();return}
@@ -153,7 +153,7 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 .kipw.has .kshc.kipc:not(.on){opacity:.75}
 .kshc.kipc.on>.kshpic{filter:var(--k-glow);transform:scale(1.06)}
 .kipw:has(>.kippg)>.kipg{max-height:none!important;overflow:visible!important}/* a page = whole rows (BAL.kip.rows): no inner scroll, no half row (KIT §23) */
-.kipw>.kippg{display:flex;align-items:center;justify-content:center;gap:10px;margin:4px 0 2px;position:sticky;bottom:0;z-index:2;background:var(--k-card,#fffaf0);box-shadow:0 -6px 8px -6px rgba(0,0,0,.18)}/* rv R4 FAIL 2: the §23 pager stays in view at the bottom of the box that scrolls the page (a box shorter than one row + pager: it sits over the row's last line, the row scrolls under it) */.kipw>.kippg>.kpkpg{width:44px}
+.kipw>.kippg{display:flex;align-items:center;justify-content:center;gap:10px;margin:4px 0 2px;position:sticky;bottom:0;z-index:2;background:var(--k-card,#fffaf0);box-shadow:0 -6px 8px -6px rgba(0,0,0,.18)}.kipw.kipshort>.kippg{position:static;box-shadow:none}/* rv R4 FAIL 2: the §23 pager stays in view at the bottom of the box that scrolls the page; it never covers a tile (rv R5 FAIL 2): a box shorter than ONE row + pager (.kipshort) puts the pager under the row — OPEN, frame ruling K-PICK-SHORT (KK / MAIN) */.kipw>.kippg>.kpkpg{width:44px}
 .kipd{display:flex;flex-direction:column;gap:6px;min-width:0}
 .kipd>.opt.kipcard{pointer-events:none;margin:0;width:100%}
 .kipw>.kipgo{align-self:stretch;min-height:40px}
