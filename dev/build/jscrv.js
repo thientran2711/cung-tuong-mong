@@ -24,7 +24,7 @@ const SCRV_OK=new Set(),SCRV_P=new Map(),SCRV_KEEP=new Map();
 /* DECODED MEMORY (MAIN 178 ruling on FAIL-4: no veil on a warm tab switch, only on a cold load): every picture the page has shown stays referenced by a detached Image
    (BAL.kscrv.keep, oldest dropped first), so the browser keeps it decoded in its memory cache and the next view that uses it is complete in the same task = no veil. */
 function scrvKeep(u,i){try{if(SCRV_KEEP.has(u)){const o=SCRV_KEEP.get(u);SCRV_KEEP.delete(u);SCRV_KEEP.set(u,o);return}
- if(!i){i=new Image();i.decoding="async";i.src=u;if(i.decode)i.decode().catch(()=>{})}SCRV_KEEP.set(u,i);const n=KIT_SCRV.keep||300;while(SCRV_KEEP.size>n)SCRV_KEEP.delete(SCRV_KEEP.keys().next().value)}catch(e){}}
+ if(!i){i=new Image();i.decoding="async";i.src=u;if(i.decode)i.decode().catch(()=>{})}SCRV_KEEP.set(u,i);const n=KIT_SCRV.keep==null?300:+KIT_SCRV.keep;/* 0 = keep nothing (was «||300»: 0 silently meant 300, LRM4) */while(SCRV_KEEP.size>n)SCRV_KEEP.delete(SCRV_KEEP.keys().next().value)}catch(e){}}
 try{document.addEventListener("load",e=>{const t=e.target;if(t&&t.tagName==="IMG"&&t.currentSrc&&!/^(data|blob):/.test(t.currentSrc))scrvKeep(t.currentSrc)},true)}catch(e){}
 function scrvAbs(u){try{return new URL(u,document.baseURI).href}catch(e){return u}}
 /* the line for a destination (CTM_WAIT, dev/site/kwait.js; VANPHONG: no "tải") */
