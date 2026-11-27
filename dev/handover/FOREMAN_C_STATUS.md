@@ -394,3 +394,4 @@ FOR MAIN — tóm tắt cho sếp (tiếng Việt):
 6. Đồ đang dư trong rương: 3 đường sẵn có — Nhẹ: ban cho kẻ hầu · Vừa: bán lại Nội vụ phủ · Nặng: biếu bề trên, tặng phi tần. Không thêm màn hình mới.
 7. Sếp chỉ cần nói "được" cho: (a) vải phát theo mùa, (b) luật dư thì quy bạc, (c) không phạt áo trái mùa — rồi em cho thợ làm và đo 12 tháng trước khi đưa lên.
 ~0% xong (mới là kế hoạch) / ~0% chơi được
+ALLOT-SEASON (session_01PEhRbutKkyUU1W6mBp7ru8) ~05:27Z: sha correction after rebase — plan is @6a13cd58 (not 5d07b52d). Stopping.
