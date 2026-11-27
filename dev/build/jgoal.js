@@ -61,7 +61,7 @@ function goWhere(x){try{if(!x||!x.tab)return;const b=document.querySelector(`#ta
 /* ---------- chapter detail (kit panel, event frame) ---------- */
 function art(){try{return{src:typeof kitOriginWide==="function"?kitOriginWide(S.origin.k):kitOriginArt(S.origin.k),label:road()}}catch(e){return null}}
 function nextRows(N){return N.map((x,i)=>[`Việc ${i+1}`,`<b>${esc(x.t)}</b><br><span class="past">${esc(x.why)} · chạm: ${esc(x.where)}</span>`,""])}
-function nextOpts(N){return N.map(x=>({n:`Đi làm: ${x.t}`,fx:{},x:`tới ${x.where}`,go:()=>{setTimeout(()=>goWhere(x),80)}}))}
+function nextOpts(N){return N.map(x=>({n:`Đi làm: ${x.t}`,fx:{},nav:1/* goal-links r2: navigation, no result card (jglink NAV) */,x:`tới ${x.where}`,go:()=>{setTimeout(()=>goWhere(x),80)}}))}
 function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
  const sec=[{h:"Mục tiêu chương",rows:[["Chương",`${G.kicker} · ${esc(C.t)}`],["Mục tiêu",esc(C.g)]]}];
  /* the 14-chapter frame of a new life (jst14): which part she is in, chapters left */
@@ -84,7 +84,7 @@ function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
  /* a milestone chapter: its HẠN row, the same words as the card, the Mệnh truyện tab and the panel (msHan67, j67; review/story14-p1-r2 item 7) */
  if(C.kind==="ms"&&S.st&&S.st.ms&&typeof msHan67==="function")sec.push({h:"Cần lưu ý",rows:[msHan67(S.st.ms,2)]})}
  sec.push({h:"Việc nên làm",rows:nextRows(G.next)});
- kitPanel({kind:"info",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:(CM&&CM.cover&&typeof CM.cover==="string"?{src:CM.cover,label:road()}:CM&&CM.cover&&CM.cover.src?{src:CM.cover.src,label:CM.cover.label||road()}:art()),/* kit-rows-b KP20: the chapter cover (chapModel .cover) replaces the topic picture in the headArt band */sections:sec,opts:nextOpts(G.next).concat([{n:"Đóng",fx:{},go:()=>{}}])},true);showModal()}  /* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
+ kitPanel({kind:"info",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:(CM&&CM.cover&&typeof CM.cover==="string"?{src:CM.cover,label:road()}:CM&&CM.cover&&CM.cover.src?{src:CM.cover.src,label:CM.cover.label||road()}:art()),/* kit-rows-b KP20: the chapter cover (chapModel .cover) replaces the topic picture in the headArt band */sections:sec,opts:nextOpts(G.next).concat([{n:"Đóng",fx:{},nav:1,go:()=>{}}])},true);showModal()}  /* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
 /* ---------- "Mệnh truyện kiếp này": right after Nhập cung ---------- */
 function kitGoalCard(){const G=kitGoalNow();if(!G)return null;const C=G.C;
  const life=isS()?"Từ thân cung nữ, đi lên bằng lòng tin của chủ và ánh mắt của Hoàng thượng.":`Từ ${RANKS[S.rank].n} leo dần lên Hoàng hậu, rồi Hoàng thái hậu; giữ mình, giữ nhà.`;
