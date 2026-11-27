@@ -94,7 +94,10 @@ function prefOf(r,m){const p=(M[r.k]||{}).pref;const n=txt(m.n);try{
    auto-picked by a favour door — it would show a loss on the green «Được» row. Read from the way's own gain text (fmt(w) + x): no «+» gain and a «-N» */
 function lossOnly(m){try{const a=m.a;let t="";if(a){let fw="";try{fw=fmt(a.w||{})}catch(e){}t=[fw,a.x||""].filter(Boolean).join(" · ")}else{const x=txt(m.x);const i=x.indexOf("thành:");t=i>=0?x.slice(i+6):x}
  t=txt(t).replace(/(^|·\s*)(hỏng|bại|mất)\s*:.*$/i,"").trim();/* what a FAILURE costs is not the way's outcome */if(!t)return false;
- const plus=/(\+\s*\d|được|thêm|bớt|hợp chuyện|thấy|biết|nắm|có thêm)/i.test(t);const minus=/(-|−)\s*\d/.test(t.replace(/bạc\s*(-|−)\s*\d+/gi,"").replace(/(-|−)\s*\d+\s*bạc/gi,""));/* a bạc minus is the price, not a loss */
+ const plus=/(\+\s*\d|được|thêm|bớt|hợp chuyện|thấy|biết|nắm|có thêm)/i.test(t);const t2=t.replace(/bạc\s*(-|−)\s*\d+/gi,"").replace(/(-|−)\s*\d+\s*bạc/gi,"");/* a bạc minus is the price, not a loss */
+ /* RV-163F: a minus is HER loss only when it is about her («nàng quý ngươi -3», «ta …») or a bare stat of hers («Sủng -2»); a hit on someone else
+    («một phi tần khác Danh -1» = Rỉ tai) is the gain of the deed, not a loss */
+ const minus=t2.split("·").some(g=>/(-|−)\s*\d/.test(g)&&(/ngươi|(^|\s)ta(\s|$)/i.test(g)||/^\s*(Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Sức|Ân tình|Thiện cảm|thiện cảm)\b/.test(g)));
  return minus&&!plus}catch(e){return false}}
 ONE.lossOnly=lossOnly;
 function pick(r,L,seed){let ok=L.filter(m=>!m.off);if(!(M[r.k]||{}).harm)ok=ok.filter(m=>!lossOnly(m));if(!ok.length)return null;const h=hash(seed);
