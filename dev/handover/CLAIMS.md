@@ -711,3 +711,4 @@ tmk-warn | review/tmk-warn | session_01Rc5AsJe5ywoWUwdcbVh8ZN | RUNNING | 2026-1
 kit-stage-r16 | review/kit-stage-r16 | session_01Rc5AsMH9EMwkQZMHfyL2VU | RUNNING | 2026-11-27T22:57Z (MAIN 181)
 HARNESS FIXER #25 F5 selx skip (+N8) | review/robot-realtap-live (from 01b30018) | (opening, opus, child of F ROOT 7 c1) | RUNNING | 2026-11-27T22:48Z (FOREMAN F ROOT 7 c1 session_01UV1Szk61M2hTnNkbv9xqAz)
 HARNESS FIXER #25 = session_01UV1SziwPA21EcQTJXp3f1J | RUNNING | 2026-11-27T22:48Z (id for the 22:48Z row)
+E-T2FLAKE-L5 (sonnet; test-only re-merge of titles2-unit-harden 6cc8a0c4 onto LIVE 5fb13d60, LC33 23:10Z ask) review/titles2-unit-harden-l5 | dev/handover/reports/titles2-unit-harden-l5.md | session_01DgYSWmG9aSfvW19fvxqjgs | RUNNING | 27/11 22:55Z (Foreman E child7)
