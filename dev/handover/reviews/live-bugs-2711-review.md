@@ -81,3 +81,6 @@ Shots folder to wipe after landing: `python3 dev/site/cdn_sync.py --wipe-review 
 - jkc.js / jkc2.js conflicted with LIVE's sx-scope-fix 79c5a62d (same sites, same kcR-at-call-time fix): took LIVE's files whole (no double fix). Branch vs LIVE in dev/build is now ONLY the gift part (jgift.js, jptime.js, jts.js), unchanged.
 - Gates on 7f12c638: undef-scan PASS (343) · LIVE scope-scan class A 0 + --strict 0 unexplained · gift-dead-scan y14 / y05 PASS (0 dead) · gift-pick-scan ok · quickcheck PASS (old save ok; perf new/live render 283/280, tab 670/557, buổi 1933/1530 ms, tasks>200 34/34), core gates: only the LIVE-flaky G4 80-dialog-fixed (r2 note).
 - coop-e2e: hangs at buoiBoth (step 29/30) again — same as LIVE 98c77517 in r2; not this branch (only gift pickers differ from LIVE).
+
+## REMERGE r4 — LAND READY 5e8a07e4 (FF of LIVE 5cee92bb)
+Merged f28d28b9 (KIT_REQUESTS both; LIVE carries the K-PICK-LIVE sign-off + KIT.md 28.13i rewritten in place = canon matches code) and 5cee92bb (built files only). vs LIVE: only jgift/jptime/jts. Gates on 5e8a07e4: undef-scan PASS (347) · gift-dead-scan y14/y05 0 dead · quickcheck FULL PASS exit 0 (old save ok; core gates green incl. G4 80).
