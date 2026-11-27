@@ -148,12 +148,15 @@ window.thyCardLines=function(){if(!S)return[];const z=thy();const L=[];const r=z
 /* ---------- 3. nausea: a hint before the physician finds it ---------- */
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{
   if(S&&!S.dead&&w0!=null&&wk()!==w0&&!off()){const z=thy();const w=wksPreg();
-   if(w>=2&&S.pregUnk&&z.nz!==S.pregWk&&roll(T().nausea)){z.nz=S.pregWk;const m=S.maid?`Cung nữ ${S.maid.name}`:"Cung nữ";
-    Q.push({t:"Trong người khác lạ",kind:"notice",h:`<p class="past">${when()}</p><p>Mấy hôm nay ngươi biếng ăn, sáng ra hay buồn nôn, ngửi mùi tanh là khó chịu.</p><p>${m} thì thầm: hay là mời thái y xem mạch?</p>`,
+   if(w>=2&&S.pregUnk&&z.nz!==S.pregWk&&roll(T().nausea)){z.nz=S.pregWk;nauseaCard();
+    try{if($("modal").hidden)showModal()}catch(e){}}}}catch(e){console.error(e)}return r};window.endTurn=endTurn})();
+/* save-unseen-lists r4 (LAW 11 / 6c): «Trong người khác lạ» (made at the turn of the tuần) is BUILT by a registered generator from the live state
+   (no argument: the mark z.nz is set before, once) — written into the sổ and made again on load */
+const nauseaCard=rcpReg("thNausea",()=>{if(!S||!S.pregUnk)return null;const m=S.maid?`Cung nữ ${S.maid.name}`:"Cung nữ";
+    const c={t:"Trong người khác lạ",kind:"notice",h:`<p class="past">${when()}</p><p>Mấy hôm nay ngươi biếng ăn, sáng ra hay buồn nôn, ngửi mùi tanh là khó chịu.</p><p>${m} thì thầm: hay là mời thái y xem mạch?</p>`,
      opts:[{n:"Mời thái y bắt mạch",fx:{},x:`tốn: Bạc -${cost()} · ${xLine("pay")}`,lk:()=>why("pay"),go:()=>{setTimeout(()=>req("pay"),0)}},
            {n:"Sang Thái y viện xin bắt mạch",fx:{},x:`tốn: Sức -${T().sucSelf} · ${xLine("self")}`,lk:()=>why("self"),go:()=>{setTimeout(()=>req("self"),0)}},
-           {n:"Đợi thêm ít hôm",fx:{},x:"thái y sẽ tự nhận ra khi đến thỉnh bình an mạch",go:()=>{}}]});
-    try{if($("modal").hidden)showModal()}catch(e){}}}}catch(e){console.error(e)}return r};window.endTurn=endTurn})();
+           {n:"Đợi thêm ít hôm",fx:{},x:"thái y sẽ tự nhận ra khi đến thỉnh bình an mạch",go:()=>{}}]};Q.push(c);return c});
 
 /* ---------- 4 + NPCs: bribes, the monthly visit of every consort (host only in co-op) ---------- */
 function npcMonth(){let ev="";const c=doc();if(!c)return ev;c.af=c.af||{};

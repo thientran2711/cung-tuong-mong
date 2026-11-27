@@ -165,16 +165,20 @@ for(const k in LK_ACT){const D=LK_ACT[k];
 /* an NPC throws at her: level rolled (slap rank table), she may dodge (one level less; nhẹ = miss) */
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k,extra){
  if(!LK_ACT[k]||t!==S||!a||a===S||LKG.npcDone)return r0.apply(this,arguments);
- const sev=typeof slapNpcTier==="function"?slapNpcTier(a):1,self=this,D=LK_ACT[k];
- const fin=s=>{let r="";LKG.npcDone=1;LKG.next=s>0?s:-1;try{r=r0.call(self,a,t,k,extra)}finally{LKG.next=0;LKG.npcDone=0}return r};
+ const sev=typeof slapNpcTier==="function"?slapNpcTier(a):1,self=this;
+ /* rv23 merge: LIVE mg-trim needs no game (slapGame / kg82Open no longer part of the bot test) */
  const bot=typeof window.__bot!=="undefined"||typeof pushModal!=="function"||typeof tsOpt!=="function";
- if(bot)return fin(sev);
+ if(bot){let r="";LKG.npcDone=1;LKG.next=sev>0?sev:-1;try{r=r0.call(self,a,t,k,extra)}finally{LKG.next=0;LKG.npcDone=0}return r}
+ lkCard(a,k,extra,sev);return""};
+/* save-unseen-lists r4 (LAW 11 / 6c): an NPC's look act on her («… bước tới, định …», also at the first khắc of a buổi) is BUILT by a registered
+   generator from the actor (id), the act and its drawn tier: nothing is applied until she answers — written into the sổ and made again on load */
+const lkCard=rcpReg("lkNpc",(a,k,extra,sev)=>{const D=LK_ACT[k];if(!a||a.alive===false||!D)return null;const t=S,self=null;
+ const fin=s=>{let r="";LKG.npcDone=1;LKG.next=s>0?s:-1;try{r=r0.call(self,a,t,k,extra)}finally{LKG.next=0;LKG.npcDone=0}return r};
  const who=typeof pv==="function"?pv(a):undefined;const show=r=>{if(r){log(r);pushModal({t:D.n,who,h:`<p>${r}</p>`});showModal();render()}};
- pushModal({t:D.n,who,h:`<p>${a.name||"Nàng"} bước tới, định ${D.verb.replace("{t}","ngươi")}. Ngươi có kịp né không?</p>`,opts:[
+ return pushModal({t:D.n,who,h:`<p>${a.name||"Nàng"} bước tới, định ${D.verb.replace("{t}","ngươi")}. Ngươi có kịp né không?</p>`,opts:[
   /* mg-trim: «Né» = ONE roll of the odds the card shows, no game */
   (()=>{const dOd=BAL.slap.dodgeOdds[slapMg(true,a).tier];return tsOpt({n:"Né",odds:dOd,duoc:["nhẹ đi một bậc","nhẹ thì tránh hẳn"],mat:["dính trọn"],go:()=>show(fin(roll(dOd)?sev-1:sev))})})(),
-  tsOpt({n:"Đứng yên",odds:null,duoc:[`nhẫn nhịn: Đức +${BAL.cv.duc}`],kem:["dính trọn"],go:()=>{apply({duc:BAL.cv.duc});const r=fin(sev);if(r){log(r);pushModal({t:D.n,who,h:`<p>${r}</p>`})}}})]});
- return""}})();
+  tsOpt({n:"Đứng yên",odds:null,duoc:[`nhẫn nhịn: Đức +${BAL.cv.duc}`],kem:["dính trọn"],go:()=>{apply({duc:BAL.cv.duc});const r=fin(sev);if(r){log(r);pushModal({t:D.n,who,h:`<p>${r}</p>`})}}})]})})})();
 /* ---------- thủy đậu + đậu mùa (j13 rulebook) ---------- */
 try{const X=lkB().pox.thuydau;if(typeof ILL==="object"&&!ILL.thuydau)ILL.thuydau={n:"Thủy đậu",sea:X.sea,cont:X.cont,die:X.die}}catch(e){}
 (function(){if(typeof catchIll!=="function")return;const c0=catchIll;catchIll=function(p,k){const r=c0.apply(this,arguments);
