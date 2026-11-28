@@ -43,9 +43,18 @@ const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sl
    res[nm].sel=await p.evaluate(()=>String(getSelection()).length);await p.evaluate(()=>getSelection().removeAllRanges());await p.screenshot({path:`${OUT}/${wh}-${nm}.jpg`,type:'jpeg',quality:55})};
   /* go to the rival's palace (state), then a REAL tap on her figure opens the person card; returns the card's «Khiêu khích» button text */
   /* the rival comes to HER palace (state: her row of the ONE record says so); a REAL tap on her figure opens the person card */
+  /* STALE-TESTS-8: a ring left open by an earlier step (kitRing auto-opens on a crowded place, jkring goTo wire) stays up when the harness moves her by state;
+     a player never meets that: with a ring up the bottom bar does not switch (probe: tab stays «act», LIVE a96564ad the same) and home has no ring (wants()).
+     She closes it the way a player does — real taps on its ✕ (a focused ring steps back first) — before the next step. */
+  const ringX=async()=>{const t=[];for(let k=0;k<8;k++){const on=await p.evaluate(()=>typeof kitRing==='object'&&!!kitRing.cur);if(!on)break;
+    /* STALE-TESTS-9: a result card in the ring («Kết quả … Tiếp ▸», after the buổi turned) is read and closed with its own «Tiếp» first, as a player does */
+    const nx=await p.evaluateHandle(()=>[...document.querySelectorAll('button.kres-next,.kring button,.kscn button')].find(b=>/^\s*Tiếp\s*▸?\s*$/.test(b.textContent)&&b.getBoundingClientRect().width>1&&(e=>e===b||b.contains(e))(document.elementFromPoint(b.getBoundingClientRect().x+b.getBoundingClientRect().width/2,b.getBoundingClientRect().y+b.getBoundingClientRect().height/2)))||null);
+    if(nx.asElement()){t.push('tiep:'+await rt.tap(nx.asElement(),{screen:'ring',label:'Tiếp'}));await sleep(700);continue}
+    const x=p.locator('.kring-x button').first();if(!(await x.count()))break;t.push(await rt.tap(x,{screen:'ring',label:'✕'}));await sleep(700)}
+   return {left:await p.evaluate(()=>typeof kitRing==='object'&&!!kitRing.cur),t}};
   const openRival=async()=>{const i=await p.evaluate(()=>{const v=window.__tv;Q.length=0;const R=agRec();if(R&&R.P["v"+v.id])for(let q=0;q<J95.KH;q++)R.P["v"+v.id][q]=["home","visit","me","sang chơi"];
     S.where=S.where||{};S.where[v.id]="home";popIdx=null;goTo("home");Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();return curPeople().findIndex(x=>x.ref===v&&x.kind==="rival")});
-   if(i<0)return {i};await sleep(800);
+   if(i<0)return {i};await sleep(800);const rx=await ringX();if(rx.left)return {i,ringStuck:rx};
    /* STALE-TESTS-7: the people of a place stand in the RING (jkring kitRing «Vòng người», KIT §104, owner OD 26/11 ~18:55Z): the band over the stage turns the ring
       (a swipe there no longer pages #tokens), the FRONT slot is bright, tap it = focus → her plaques drop. A player turns the ring with the real ‹ › arrows until
       she is in front, then taps her figure (a real tap at the painted figure: ring slots take no pointer events, the ring layer hit-tests the point). */
@@ -80,7 +89,21 @@ const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sl
   const ROW=()=>p.locator('#modal .dlg .opts > button').filter({hasText:/Khiêu khích/}).first();
   const rowInfo=()=>p.evaluate(()=>{const M=document.getElementById('modal');const b=M&&!M.hidden&&[...M.querySelectorAll('.dlg .opts > button')].find(x=>/^\s*Khiêu khích/.test(x.textContent));
    if(!b)return null;return {t:b.textContent.replace(/\s+/g," ").trim(),cls:b.className,dis:!!b.disabled,off:b.matches('.kitoff,.kfoc-off,[aria-disabled="true"]')||!!b.disabled}});
+  /* STALE-TESTS-9: the door is now a jone TIER card (jone.js (2) PEND.door, ONE mode "tier", law 2 Nhẹ · Vừa · Nặng): «Chọn mức. <tên>» is said in the ring's
+     say box (jkring adapter.say: a tap on the ring layer finishes the typed line, the next tap moves on), then ≤ 3 tier plaques «<way> · nhẹ|vừa|nặng»
+     (kitPick: tap = lift, «Chọn» = pick; a closed tier is a greyed plaque); the way inside a tier is drawn by pick() (seeded). The rows are no longer
+     #modal .dlg .opts buttons. Every step a real tap. */
+  const sayOn=()=>p.evaluate(()=>{const b=document.querySelector('.kring-say');return !!(b&&b.getBoundingClientRect().width>1)});
+  const sayThrough=async()=>{const t=[];for(let k=0;k<6&&await sayOn();k++){t.push(await rt.tap('.kring-say',{screen:'door',label:'lời (tiếp)'}));await sleep(700)}return t};
+  /* read only: the tier that holds the provoke way, its row on the card, and the other ways of that tier */
+  const tierInfo=()=>p.evaluate(()=>{const q=Q[0];if(!q||!q.pp||!q.opts)return null;const r=DOOR.byK(q.pp.k);if(!r)return null;const {L}=ONE.members(q.pp,r);const tx=s=>String(s||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
+    const isP=m=>(m.a&&m.a.tw==="provoke")||m.tw==="provoke"||tx(m.n)==="Khiêu khích";const pm=L.find(isP);if(!pm)return {door:r.k,n:L.map(m=>tx(m.n))};const t=ONE.tierOf(r,pm);
+    const row=q.opts.find(o=>tx(o.n).endsWith("· "+t));const same=L.filter(m=>ONE.tierOf(r,m)===t);
+    return {door:r.k,t,pm:{off:!!pm.off,why:tx(pm.why),x:tx(pm.x)},row:row&&{n:tx(row.n),x:tx(row.x),off:row.off?tx(row.off.why):null},same:same.map(m=>({n:tx(m.n),off:!!m.off,id:m.id}))}});
+  const seenTxt=re=>p.evaluate(src=>{const re=new RegExp(src);const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(re.test(n.nodeValue)){const e=n.parentElement,r=e.getBoundingClientRect(),cs=getComputedStyle(e);if(r.width>1&&r.bottom>0&&r.top<innerHeight&&cs.visibility!=='hidden'&&+cs.opacity>0.05)return n.nodeValue.trim().slice(0,120)}}return ""},re.source);
+  const PLQ=n=>p.locator('.kpk .kpk-b').filter({hasText:n}).first();
   const tabTo=async()=>{/* the act may sit in another group tab of the card: tap the tab that holds it */
+   /* STALE-TESTS-8: the plaques drop in after the tap (kpk animation): wait for them first */for(let w=0;w<16&&!(await kbInfo());w++)await sleep(200);
    if(await kbInfo())return;
    const n=await p.evaluate(()=>document.querySelectorAll('.kfoc-tabs .pct').length);for(let j=0;j<n;j++){await rt.tap(`.kfoc-tabs .pct:nth-child(${j+1})`,{screen:'card',label:'tab'});await sleep(400);
     if(await kbInfo())return}};
@@ -88,27 +111,38 @@ const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sl
   /* gateNo: no reason → inside the door the «Khiêu khích» way is closed with «chưa có cớ»; her real tap on it changes nothing */
   await fresh();await setup();{const o=await openRival();await tabTo();const K=await kbInfo();const r0=await p.evaluate(()=>[window.__tv.rel,S.ro[window.__tv.id]||0,(S.tp&&S.tp.n)||0]);
    /* the way itself (read only): inside the door «Khiêu khích» the way «Khiêu khích» is closed «chưa có cớ» */
-   const way=await p.evaluate(()=>{const v=window.__tv;const P=curPeople().find(x=>x.ref===v&&x.kind==="rival");const d=P&&talkOpts(P).find(a=>a&&a.door&&a.m&&a.m.some(x=>x.tw==="provoke"));const w=d&&d.m.find(x=>x.tw==="provoke");return w?{lock:!!w.lock,t:w.t||"",doorLock:!!d.lock}:null});
-   let door=false,RI=null,tapped=false;
-   if(K&&/kfoc-off|kitoff/.test(K.cls)){/* every way of the door is closed (the other way has its own reason): the plaque is greyed; her real tap only pops a reason */tapped=await kbTap()}
-   else{door=K?await doorOpenTap():false;RI=await rowInfo();tapped=RI?await rt.tap(ROW(),{screen:'door',label:'Khiêu khích (closed)'}):false}
+   const way=await p.evaluate(()=>{const v=window.__tv;const P=curPeople().find(x=>x.ref===v&&x.kind==="rival");const d=P&&talkOpts(P).find(a=>a&&a.door&&a.m&&a.m.some(x=>x.tw==="provoke"));const w=d&&d.m.find(x=>x.tw==="provoke");return w?{lock:!!w.lock,t:w.t||"",doorLock:!!d.lock,doorT:String(d.t||"").replace(/<[^>]+>/g,"").trim()}:null});
+   let door=false,RI=null,tapped=false,say=[],TI=null,plq=null,seen="";
+   if(K&&/kfoc-off|kitoff/.test(K.cls)){/* every way of the door is closed (the other way has its own reason): the plaque is greyed; her real tap only pops a reason */tapped=await kbTap();await sleep(600);
+    /* …and the kit «!» badge on that plaque pops the reason (as in the focus view, jfocus .kfoc-i) */const I=p.locator('.kpk .kpk-b.kfoc-off').filter({hasText:/Khiêu khích/}).locator('.kfoc-i');if(await I.count()){await rt.tap(I.first(),{screen:'card',label:'! (lý do)'});await sleep(700)}
+    seen=way&&way.doorT?await seenTxt(new RegExp(way.doorT.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'))):""}
+   else{door=K?await doorOpenTap():false;say=await sayThrough();TI=await tierInfo();
+    /* the tier that holds provoke: closed «chưa có cớ» (all its ways closed) → a greyed plaque; her real tap on it changes nothing */
+    if(TI&&TI.row){const L=PLQ(TI.row.n);for(let w=0;w<12&&!(await L.count());w++)await sleep(250);plq=await L.count()?await L.evaluate(e=>({t:e.textContent.replace(/\s+/g," ").trim(),off:e.classList.contains('kfoc-off')})):null;
+     RI=plq&&{t:TI.row.x+" | "+plq.t,off:!!TI.row.off&&plq.off};tapped=plq?await rt.tap(L,{screen:'door',label:TI.row.n+' (closed)'}):false;await sleep(700);
+     /* a closed plaque carries the kit «!» badge (jfocus .kfoc-i): her real tap on it pops the reason (kpPop) */const I=L.locator('.kfoc-i');if(await I.count()){await rt.tap(I.first(),{screen:'door',label:'! (lý do)'});await sleep(700)}seen=await seenTxt(/chưa có cớ/)}}
    const B=RI?RI.t:(way?way.t:"");await sleep(900);
    const pop=await p.evaluate(()=>{const e=document.querySelector('#kpop');const r=e&&e.getBoundingClientRect();return e&&!e.hidden&&r.width>1&&getComputedStyle(e).visibility!=='hidden'&&getComputedStyle(e).display!=='none'?e.textContent.replace(/\s+/g," ").trim().slice(0,120):""});
    const r1=await p.evaluate(()=>[window.__tv.rel,S.ro[window.__tv.id]||0,(S.tp&&S.tp.n)||0]);
    await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true});
-   await done('gateNo',{o,K,way,door,RI,B,tapped,pop,r0,r1,ok:!!K&&tapped&&!!way&&way.lock&&/chưa có cớ/.test(way.t)&&(RI?RI.off&&/chưa có cớ/.test(RI.t):!!pop)&&String(r0)===String(r1)})}
+   await done('gateNo',{o,K,way,door,say,TI,plq,seen,RI,B,tapped,pop,r0,r1,ok:!!K&&tapped&&!!way&&way.lock&&/chưa có cớ/.test(way.t)&&(RI?RI.off&&/chưa có cớ/.test(RI.t)&&TI.same.every(m=>m.off):!!way&&way.doorLock)&&!!seen&&String(r0)===String(r1)})}
   /* gateYes: after a grudge the button is open; the data row names the reason «cớ: oán 45»; her real tap lands */
   await fresh();await setup();{await p.evaluate(()=>{S.ro[window.__tv.id]=45;/* one onlooker for sure: another consort's row of the ONE record puts her at her palace this khắc */const v=window.__tv,R=agRec(),kh=j95kh();const w=liveRivals(false).find(x=>x!==v&&!x.confined&&R&&R.P['v'+x.id]);if(w){R.P['v'+w.id][kh]=['home','visit','me','thử'];/* …and gone the next khắc: the deed (1 khắc) is judged by who stood there when it STARTED */if(R.P['v'+w.id].length>kh+1)R.P['v'+w.id][kh+1]=['tp_away','đi','','thử'];window.__tw=w}});const o=await openRival();await tabTo();
-   const K=await kbInfo();const door=K?await doorOpenTap():false;const B=await rowInfo();/* the open way names its reason «cớ: oán 45» on its row */
+   const K=await kbInfo();const door=K?await doorOpenTap():false;const say=await sayThrough();const TI=await tierInfo();
+   /* the tier holding provoke (Oán 45: open). Its row must name the reason «cớ: oán 45»; the drawn way is provoke only when it is the one free way of its tier */
+   const solo=!!(TI&&TI.same&&TI.same.filter(m=>!m.off).length===1&&TI.same.find(m=>!m.off).id===(TI.same.find(m=>/^Khiêu khích$/.test(m.n))||{}).id);
+   let L0=TI&&TI.row?PLQ(TI.row.n):null;if(L0){for(let w=0;w<12&&!(await L0.count());w++)await sleep(250);if(!(await L0.count()))L0=null}
+   const B=TI&&TI.row&&L0?{t:TI.row.x,off:!!TI.row.off||await L0.evaluate(e=>e.classList.contains('kfoc-off')),solo}:null;/* the open way names its reason «cớ: oán 45» on its row */
    const pre=await p.evaluate(()=>{const v=window.__tv,R=agRec(),kh=j95kh(),pl=tpWhere(S);const at=R?Object.keys(R.P).filter(id=>R.P[id][kh]&&j95at(R.P[id][kh][0],pl)&&id!=="me"&&id!=="v"+v.id&&(id==="emp"||id==="th"||/^v\d+$/.test(id))):[];const at1=R?Object.keys(R.P).filter(id=>R.P[id][kh+1]&&j95at(R.P[id][kh+1][0],pl)):[];const atAll=R?Object.keys(R.P).filter(id=>R.P[id][kh]&&j95at(R.P[id][kh][0],pl)):[];return {rel:v.rel,at,at1,atAll,kh,pl,n:(S.tp&&S.tp.n)||0}});
-   const tapped=B&&!B.off?await rt.choose(ROW(),{screen:'door',label:'Khiêu khích'}):false;await sleep(1500);
+   let tapped=false;if(B&&!B.off&&solo){/* kitPick: tap = lift, then the «Chọn» chip inside the lifted plaque (real taps) */await rt.tap(L0,{screen:'door',label:TI.row.n});await sleep(600);
+    const ok=p.locator('.kpk .khconf:not([hidden]) .khok').first();for(let w=0;w<10&&!(await ok.count());w++)await sleep(200);tapped=await ok.count()?await rt.tap(ok,{screen:'door',label:'Chọn ('+TI.row.n+')'}):false}await sleep(1500);
    /* the act opens its mini-game (KIT focus play): she takes «Bỏ qua · kết quả thường» with a real tap, as a player may */
    const skips=[];for(let k=0;k<6;k++){const h=await p.evaluateHandle(()=>[...document.querySelectorAll('.kfoc-skip,button')].find(b=>/^\s*Bỏ qua/.test(b.textContent)&&b.getBoundingClientRect().width>1)||null);const el=h.asElement();if(!el)break;
     skips.push(await rt.tap(el,{screen:'play',label:'Bỏ qua'}));await sleep(1500)}
    /* a follow-up screen of the act (result / confirm) is read, not tapped through: the act has landed on the tap */
    const post=await p.evaluate(()=>{const v=window.__tv,q=(S.tp&&S.tp.q)||[];const it=q[q.length-1];const L=(S.logs||[]).slice(0,6).join(" ").replace(/<[^>]+>/g,"");return {rel:v.rel,it:it&&{d:it.d,x:it.x,v:it.v,j:Object.keys(it.j)},log:/Người chứng kiến/.test(L),logs:L.slice(0,300)}});
    /* every eye-witness the record put there judged it; the doer and the victim never judge it (later hearsay judges may add on) */const sameSet=!!post.it&&pre.at.length>0&&pre.at.every(id=>post.it.j.includes(id))&&!post.it.j.includes('me')&&!post.it.j.includes('v'+post.it.v);
-   await done('gateYes',{o,B:B&&B.t,K,door,tapped,skips,pre,post,ok:!!B&&/cớ: oán 45/.test(B.t)&&tapped&&post.rel<pre.rel&&!!post.it&&post.it.d==="provoke"&&sameSet&&post.log})}
+   await done('gateYes',{o,B:B&&B.t,solo,TI:TI&&{t:TI.t,same:TI.same},K,door,say,tapped,skips,pre,post,ok:!!B&&/cớ: oán 45/.test(B.t)&&tapped&&post.rel<pre.rel&&!!post.it&&post.it.d==="provoke"&&sameSet&&post.log})}
   /* eaHook: an outburst lands in the rule as an outburst; the consorts that stand at her place judge it */
   await fresh();{const r=await p.evaluate(()=>{const v=liveRivals(true)[0];const R=agRec(),kh=j95kh();const pl=tpWhere(S);if(R&&R.P["v"+v.id])R.P["v"+v.id][kh]=[pl,"visit","me","thử"];
     const a0=v.rel;const row=EA_REACT.find(x=>x.k==="mang"&&x.who==="c");const o=window.eaDo(S,row);const q=S.tp.q,it=q[q.length-1];return {o:!!o,it:it&&{d:it.d,o:it.o,j:Object.keys(it.j)},seen:it&&!!it.j["v"+v.id],a0,a1:v.rel,rec:!!R}});
@@ -116,7 +150,7 @@ const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sl
   /* math on one onlooker */
   await fresh();{const r=await p.evaluate(()=>{const P=BAL.tp;const [X,O]=liveRivals(false).filter(x=>!x.queen);const it=d=>({id:999,x:String(X.id),v:null,d,o:1,wk:wk(),j:{}});
     const run=(d,how,setup)=>{S.tp=null;const s0={r:O.rl[X.id]||0};O.rl[X.id]=0;/* STALE-TESTS-7: each run starts with a clean oán-pace store too (joanpace (b') ghét: O.opa = one bounded step per cause per buổi + day cap) — else run 2.. land inside run 1's spent buổi cap */O.opa={};delete O.agw;O.trong=setup.tr||["Cần","Trí"];if(setup.close)O.rl[X.id]=netTh(O,"than");const b=O.rl[X.id];
-     const m0=window.memList;if(setup.kind)window.memList=(h,a)=>h===O&&a===X?[{s:1,w:wk(),n:1,g:20}]:m0(h,a);const m1=window.moodCauseKnownBy;if(setup.reason)window.moodCauseKnownBy=()=>"thử";
+     const m0=window.memList;if(setup.kind)window.memList=(h,a)=>h===O&&a===X?[{s:1,w:wk(),n:1,g:20}]:m0(h,a);const m1=window.moodCauseKnownBy;/* STALE-TESTS-9: «no reason» runs are prepared too — in some lives O already knows her mood cause (the life's own record), which turned every run into «reason known» (base = nhân, apNo = ap) */window.moodCauseKnownBy=setup.reason?()=>"thử":()=>null;
      S.tp=null;tpS().r={};const st=tpS();let v=0;for(let i=0;i<10;i++){v+=tpJudge(O,Object.assign(it(d),{id:999+i}),how)}window.memList=m0;window.moodCauseKnownBy=m1;const out=O.rl[X.id]-b;O.rl[X.id]=s0.r;return out};
     const base=run("mang","eye",{}),nhan=run("mang","eye",{tr:["Nhân","Trí"]}),kind=run("mang","eye",{kind:1}),rs=run("mang","eye",{reason:1}),hear=run("mang","hear",{}),ap=run("pham","eye",{tr:["Tín","Cần"],reason:1}),apNo=run("pham","eye",{tr:["Tín","Cần"]});
     /* Thái hậu cap: 30 harsh deeds by her in a year cost at most cap.th */
@@ -130,13 +164,25 @@ const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sl
    /* the player's road to a consort's facts: «Hậu cung» (bottom bar) → tap her row → the person card with the «Tính nết» row; every step a real tap, the label must be VISIBLE */
    const VIS=`(re)=>[...document.querySelectorAll('button,[data-o],[data-see],[data-pc],[data-p],.kbtn,.row,li,a,figure,.kport,.kpc')].filter(e=>{const r=e.getBoundingClientRect();if(r.width<2||r.height<2||r.bottom<0||r.top>innerHeight)return false;const t=document.elementFromPoint(Math.min(innerWidth-1,Math.max(0,r.x+r.width/2)),Math.min(innerHeight-1,Math.max(0,r.y+r.height/2)));return (t===e||e.contains(t))&&re.test(e.textContent)}).sort((x,y)=>x.textContent.length-y.textContent.length)[0]||null`;
    const tapTxt=async(src,label)=>{const h=await p.evaluateHandle(`(${VIS})(${src})`);const el=h.asElement();if(!el)return false;const ok=await rt.tap(el,{screen:'nav',label});await sleep(1200);return ok};
-   const steps=[];steps.push(await tapTxt('/^\\s*Hậu cung\\s*$/','Hậu cung'));steps.push(await tapTxt('/^\\s*Phi tần\\s*$/','Phi tần'));
+   await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true});const rx=await ringX();const steps=[];steps.push(await tapTxt('/^\\s*Hậu cung\\s*$/','Hậu cung'));steps.push(await tapTxt('/^\\s*Phi tần\\s*$/','Phi tần'));
    const nm=await p.evaluate(()=>window.__tv.name.split(/\s+/).slice(-2).join(' '));/* the portrait row captions the given name *//* a long row pages with ‹ › (iPad): she taps › until the portrait is in view */
-   let got=false;for(let k=0;k<12&&!got;k++){const h=await p.evaluateHandle(`(${VIS})(new RegExp(${JSON.stringify(nm)}))`);if(h.asElement()){got=true;break}if(!await tapTxt('/^\\s*[›>❯]\\s*$/','›'))break}
-   steps.push(await tapTxt(`new RegExp(${JSON.stringify(nm)})`,nm));
+   /* STALE-TESTS-9: the face strip of «Phi tần» is now ONE kit pager button «‹ tên · i/n ›» (jkring §104.2 wiring B): her tap opens the ring of that list;
+      she turns it with the real ‹ › arrows until the consort is in front, taps her figure, then the «Xem» plaque (kitPick: tap = lift, «Chọn» = show her card) */
+   const roadPg=async()=>{const t=[];const pg=p.locator('[data-kring-pg]').first();if(!(await pg.count()))return {t,ok:false,why:'no pager'};t.push(await rt.tap(pg,{screen:'nav',label:'‹ · ›'}));
+    for(let w=0;w<20&&!(await p.$('.kring-s'));w++)await sleep(250);
+    for(let k=0;k<14;k++){const g=await p.evaluate(()=>{const C=kitRing.cur,P=C&&C.o&&C.o.people||[];/* the strip ring's people carry the consort as ref (or a name-only stand-in): matched by her name */const same=x=>!!x&&(x===window.__tv||x.name===window.__tv.name);const i=P.findIndex(x=>same(x.ref)||x.name===window.__tv.name);const L=[...document.querySelectorAll('.kring-s')];
+      const tv=window.__tv,hit=m=>m&&(m.p===P[i]||(m.p&&(same(m.p.ref)||m.p.name===tv.name)));const j=L.findIndex(s=>s.__g&&s.__g.members.some(hit)),f=L.findIndex(s=>s.classList.contains('kring-front'));const r=L[j]&&L[j].getBoundingClientRect();return {i,j,f,n:L.length,x:r?r.left+r.width/2:0,y:r?r.top+r.height*.45:0}});t.push(g.j+'/'+g.f+'/'+g.n);
+     if(g.i<0||g.j<0)return {t,ok:false,why:'not in ring'};
+     if(g.j===g.f){await sleep(500);if(rt.touch)await p.touchscreen.tap(g.x,g.y);else await p.mouse.click(g.x,g.y);await sleep(1200);
+      const X=p.locator('.kpk .kpk-b').filter({hasText:/^\s*Xem/}).first();for(let w=0;w<10&&!(await X.count());w++)await sleep(200);if(!(await X.count()))return {t,ok:false,why:'no Xem'};
+      t.push(await rt.tap(X,{screen:'ring',label:'Xem'}));await sleep(600);const ok=p.locator('.kpk .khconf:not([hidden]) .khok').first();for(let w=0;w<10&&!(await ok.count());w++)await sleep(200);
+      const c=await ok.count()?await rt.tap(ok,{screen:'ring',label:'Chọn (Xem)'}):false;t.push(c);await sleep(1500);return {t,ok:!!c}}
+     const ar=p.locator('button.kring-ar').filter({hasText:'›'}).first();if(!await rt.tap(ar,{screen:'ring',label:'›'}))return {t,ok:false,why:'arrow'};await sleep(700)}
+    return {t,ok:false,why:'turns'}};
+   const rp=await roadPg();steps.push(rp.ok);
    const txt=await p.evaluate(()=>{const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(/Khẩu xà tâm Phật/.test(n.nodeValue)){const r=n.parentElement.getBoundingClientRect();if(r.width>1&&r.bottom>0&&r.top<innerHeight)return true}}return false});
-   const o={tap:steps.every(Boolean),steps};
-   await p.evaluate(()=>{window.memList=window.__m0});await done('label',{lab:r.lab,tap:o.tap,steps:o.steps,txt,ok:r.lab==="good"&&o.tap&&txt})}
+   const o={tap:steps.every(Boolean),steps,rx,rp};
+   await p.evaluate(()=>{window.memList=window.__m0});await done('label',{lab:r.lab,tap:o.tap,steps:o.steps,rp:o.rp,txt,ok:r.lab==="good"&&o.tap&&txt})}
   /* npcMood */
   await fresh();{const r=await p.evaluate(()=>{/* a pair whose motive is short of the gate at oán 25 without mood (no scheming trait, same side): the mood term alone must open it */const L=liveRivals(false).filter(x=>!x.queen);let a=null,t=null,g0=null;for(const x of L){for(const y of L){if(x===y)continue;x.rl[y.id]=0;x.ro[y.id]=25;x.emo=null;const g=motiveOK(x,y,"provoke");if(!g.ok&&/động cơ yếu/.test(g.why)){a=x;t=y;g0=g;break}}if(a)break}if(!a)return {ok:false,why:"no pair"};
     a.emo={k:"gian",v:95,why:"thử",w:wk()};try{mkAdd(a,{kd:"tptest",k:"gian",s:95,why:"thử"},20)}catch(e){}const st=typeof feelSums==="function";const md=tpMoodM(a);const g1=motiveOK(a,t,"provoke");return {g0:g0.ok,g1:g1.ok,why:g1.why,md,
