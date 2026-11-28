@@ -101,11 +101,15 @@ window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
 (function(){const st=document.createElement("style");st.id="kit-ph-wait";st.textContent=`
 img[data-kwait]{background:radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%);animation:kphBreath calc(1.6s*var(--pace,1)) ease-in-out infinite}
 img[data-kwait="s"],img[data-kwait="fs"],img[data-kwait="ms"],img[data-kwait="es"],img[data-kwait="pfs"],img[data-kwait="pms"]{animation:none}
-img[data-kwait^="f"],img[data-kwait^="m"],img[data-kwait^="e"]{background:url("img/kit/unknown-fig-f.webp") center bottom/contain no-repeat;opacity:.55}
-img[data-kwait^="m"]{background-image:url("img/kit/unknown-fig-m.webp")}img[data-kwait^="e"]{background-image:url("img/kit/unknown-fig-e.webp")}
+/* KK45 (MAIN 162 20:30Z SIDEQ-TRIM: a KNOWN person showed the STRANGER silhouette 0.6–0.9 s while her figure loaded): a figure on its way waits as a NEUTRAL soft parchment glow in the body box — never the unknown-fig silhouette (that picture means «Người lạ»; real strangers keep it as their own src) — and the real figure fades in (kphIn) */
+img[data-kwait^="f"],img[data-kwait^="m"],img[data-kwait^="e"]{background:radial-gradient(ellipse 40% 48% at 50% 56%,#f3e7cf 0,rgba(234,219,189,.75) 55%,rgba(234,219,189,0) 100%);opacity:.55}
 img[data-kwait^="f"]{aspect-ratio:730/1350}img[data-kwait^="m"]{aspect-ratio:616/1350}img[data-kwait^="e"]{aspect-ratio:549/1350}
-/* entry-blank-r3 (review item 6): a PORTRAIT on its way (por-*) waits as the kit soft portrait silhouette (img/kit/unknown-f|m.webp, the stranger / empty-seat portrait), never as bare paper — small slots carry no line, so paper alone read as an empty frame */
-img[data-kwait^="p"]{background:url("img/kit/unknown-f.webp") center top/cover no-repeat,radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%)}img[data-kwait^="pm"]{background-image:url("img/kit/unknown-m.webp"),radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%)}
+/* a PORTRAIT on its way (por-*) waits on the same parchment ground, BREATHING even in small slots (so it reads «loading», not an empty frame — entry-blank-r3 item 6) — never the stranger portrait unknown-f|m (KK45, same order as the figures above) */
+img[data-kwait^="p"]{background:radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%);animation:kphBreath calc(1.6s*var(--pace,1)) ease-in-out infinite!important}
+/* a stand-in that must keep a silhouette's box for layout (j79 kpIdFig while FIGURES.json loads) hides its picture and shows the same neutral ground */
+img.kphsil{object-position:-99999px 0;background:radial-gradient(ellipse 40% 48% at 50% 56%,#f3e7cf 0,rgba(234,219,189,.75) 55%,rgba(234,219,189,0) 100%);animation:kphBreathF calc(1.6s*var(--pace,1)) ease-in-out infinite}
+@keyframes kphIn{from{opacity:0}}img.kphin{animation:kphIn calc(.28s*var(--pace,1)) ease-out}
+@media (prefers-reduced-motion:reduce){img.kphin,img[data-kwait^="p"]{animation:none!important}}
 @keyframes kphBreathF{50%{opacity:.3}}
 img[data-kwait="f"],img[data-kwait="m"],img[data-kwait="e"]{animation-name:kphBreathF}
 @keyframes kphBreath{50%{opacity:.62}}
@@ -114,7 +118,7 @@ img[data-kwait="f"],img[data-kwait="m"],img[data-kwait="e"]{animation-name:kphBr
 .kwaitl{position:absolute;left:4px;right:4px;top:50%;transform:translateY(-50%);text-align:center;font:600 .72rem/1.25 var(--display,serif);color:#8a6a40;letter-spacing:.02em;pointer-events:none;z-index:4;text-shadow:0 1px 0 #fff8}
 `;document.head.appendChild(st)})();
 const KPHW_TXT=()=>(typeof CTM_WAIT!=="undefined"&&CTM_WAIT.picWait)||"Đang thỉnh tranh…";
-function kitPhWaitClear(im){try{if(!im.hasAttribute("data-kwait"))return;im.removeAttribute("data-kwait");const p=im.parentElement;if(p&&p.hasAttribute("data-kwaitp")&&!p.querySelector(":scope>img[data-kwait]"))p.removeAttribute("data-kwaitp");
+function kitPhWaitClear(im){try{if(!im.hasAttribute("data-kwait"))return;const fg=/^[fmp]/.test(im.getAttribute("data-kwait")||"");im.removeAttribute("data-kwait");if(fg&&im.naturalWidth){im.classList.add("kphin");setTimeout(()=>im.classList.remove("kphin"),400)}/* KK45: a person picture fades in over its neutral ground */const p=im.parentElement;if(p&&p.hasAttribute("data-kwaitp")&&!p.querySelector(":scope>img[data-kwait]"))p.removeAttribute("data-kwaitp");
  if(p&&p.hasAttribute("data-kwaitq")&&!p.querySelector(":scope>img[data-kwait]")){p.removeAttribute("data-kwaitq");p.querySelectorAll(":scope>.kwaitl").forEach(x=>x.remove())}}catch(e){}}
 let KPHW_Q=[],KPHW_T=0;
 /* the kit silhouette for a full-body cut-out that is still loading: "m" (men: Emperor, eunuch, official, physician…) | "f" | "" (not a figure). ONE rule: the picture slot (here) and the stage layout (j59 wait) read it. */
@@ -169,3 +173,14 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59.2",title:"kit
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59.1",title:"Tranh đang về (đang thỉnh): nền giấy dịu thở nhẹ + dòng chữ ở ô từ 72 px; ô nhỏ chỉ có nền; chân dung đang về hiện bóng người mờ của kit",html:()=>{
  const box=(w,h,mv)=>`<div style="position:relative;width:${w}px;height:${h}px;border-radius:6px;overflow:hidden;border:1px solid var(--line)"${h>=72?` data-kwaitp="${KPHW_TXT()}"`:""}><img data-kph-sample data-kwait="${mv}" alt="" style="width:100%;height:100%;display:block"></div>`;
  return `<div class="kitpg-row" style="align-items:flex-end;gap:8px">${[[44,44],[84,112],[120,160],[162,216],[300,140]].map(([w,h])=>box(w,h,"1")).join("")}${box(120,160,"s")}${box(44,58,"pf")}${box(44,58,"pm")}${box(120,160,"pf")}</div>`}})}catch(e){}
+
+/* KK45 FIGURE WARM-UP (MAIN 162 20:30Z): the people a dialog will show are fetched when the card is QUEUED, not when it paints — kitModal (spec.subject /
+   spec.who / spec.stage) and every card waiting in Q (m.subject / m.who / m.stage / m.faces) warm their figure (kitFigOf) and portrait (porOf) into the
+   browser cache, so a known person's figure is usually there before her dialog shows; the §59.1 neutral ground above covers the rest. One set, capped. */
+const KWARM=new Set();
+function kitWarmFig(p){try{if(!p||typeof p!=="object"||p.__pet)return;const L=[p.__fig||(typeof kitFigOf==="function"?kitFigOf(p):"")];try{if(!p.__fig&&typeof porOf==="function")L.push(porOf(p,""))}catch(e){}
+ for(const u of L){if(!u||typeof u!=="string"||/unknown-|^(data|blob):/.test(u)||KWARM.has(u))continue;if(KWARM.size>400)KWARM.clear();KWARM.add(u);const im=new Image();im.decoding="async";im.src=u}}catch(e){}}
+function kitWarmCard(m){try{if(!m||m.__kw)return;m.__kw=1;kitWarmFig(m.subject);kitWarmFig(m.who);(Array.isArray(m.stage)?m.stage:[]).forEach(kitWarmFig);(Array.isArray(m.faces)?m.faces:[]).forEach(f=>kitWarmFig(f&&f[0]))}catch(e){}}
+window.kitWarmFig=kitWarmFig;window.kitWarmCard=kitWarmCard;window.KWARM=KWARM;
+(function(){if(typeof kitModal==="function"){const k0=kitModal;kitModal=function(spec){try{if(spec){kitWarmFig(spec.subject);kitWarmFig(spec.who);(Array.isArray(spec.stage)?spec.stage:[]).forEach(kitWarmFig)}}catch(e){}return k0.apply(this,arguments)};window.kitModal=kitModal}
+ if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{if(typeof Q!=="undefined")for(let i=0;i<Q.length&&i<6;i++)kitWarmCard(Q[i])}catch(e){}return s0.apply(this,arguments)}}})();

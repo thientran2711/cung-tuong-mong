@@ -109,6 +109,8 @@ function kitToastPeopleRects(el){const H=innerHeight,out=[];
  for(const e of document.querySelectorAll(KIT_TOAST_PEOPLE)){if(el&&(el===e||el.contains(e)))continue;if(e.closest("#ktbtoast,#kupdline,#krail"))continue;if(!e.getClientRects().length)continue;
   const r=e.getBoundingClientRect();if(r.width<2||r.height<2||r.bottom<0||r.top>H)continue;const cs=getComputedStyle(e);if(cs.visibility==="hidden"||+cs.opacity===0)continue;
   out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom,person:1})}
+ /* KIT §57.1b (owner 27/11, toast over an open dialog's option card): an open kit dialog counts WHOLE (its figure, text, option rows), in the relaxed pass too */
+ try{for(const d of document.querySelectorAll('#modal:not([hidden]) .dlg')){if(!d.getClientRects().length)continue;const r=d.getBoundingClientRect();if(r.width>40&&r.height>40)out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom,person:1})}}catch(e){}
  return out}
 function kitToastKeepRects(el,relax){const H=innerHeight,W=innerWidth,out=kitToastPeopleRects(el);
  if(relax){for(const e of document.querySelectorAll('header.hud,#tabs,#krail')){if(!e.getClientRects().length)continue;const r=e.getBoundingClientRect();out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom})}return out}
