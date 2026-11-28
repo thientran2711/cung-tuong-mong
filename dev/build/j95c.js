@@ -68,7 +68,7 @@ function j95cVisitFix(){if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))retu
    placed there before palFix ran): the newest extras leave so palFix finds them another house (the cap the owner set: BAL.res, resCap) */
 function j95cCap(){const live=p=>p===S?!!S&&!S.out&&!S.dead:!!p&&p.alive&&!p.out;let n=0;
  for(const h of [S].concat(rivals)){if(!live(h))continue;const k=key(h);const L=rivals.filter(y=>y!==h&&live(y)&&y.resHead===k&&!(rkOf(y)>=3&&y.pal!=null));const me=S!==h&&live(S)&&S.resHead===k&&!(rkOf(S)>=3&&S.pal!=null)?1:0;
-  const over=L.length+me-resCap();if(over>0)for(const y of L.slice(-over)){y.resHead=null;n++}}
+  const over=L.length+me-resCap();if(over>0)for(const y of L.filter(y=>!y.coop)/* the co-op friend's housing is hers (jpal) */.slice(-over)){y.resHead=null;n++}}
  if(n)J95C.stat.cap=(J95C.stat.cap||0)+n;return n}
 /* a turn-of-buổi act placed at the start of the buổi, then overtaken before the news was read (she is confined / banished right
    after): the news line is withdrawn so nothing on screen says she is where the record no longer has her */

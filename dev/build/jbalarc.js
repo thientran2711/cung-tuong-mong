@@ -189,7 +189,7 @@ BAL.petFx={cavang:{suc:1},cachep:{omen:[12,1]},lyngu:{suc:2,omen:[10,1]},cuuvi:{
 Object.assign(BAL.itFx,{ngocboikc:{w:{sac:1}},vongbackc:{w:{sac:1}},vaibong:{dr:1},aolong:{dr:4},thanbac:{heat:[6,2]},thanden:{heat:[3,1]}});
 /* Tài nghệ lesson Sức cost (magnitudes): self = «Tự học» (j23 lessonMode, j83 deck card), tch = «Học với thầy» (j23, j2 lesson, jrcp teacher / bậc-5 new style),
    th = «Học với Thái hậu» (j23), prac = bậc-5 «Tự học, làm tác phẩm» (j83 wkPractice + deck card). Texts: jtabs, jrcp. (Tứ đức lessons: BAL.td) */
-BAL.artLes={self:15,tch:10,th:10,prac:10};
+BAL.artLes={self:15,tch:10,th:10,prac:10,k:2,pk:2};/* k = khắc of one art lesson (j23 + every lesson card), pk = khắc of one practice (j83 wkPrac) */
 
 /* typed-stat-bal (law 4): RULE AMOUNTS APPLIED AWAY FROM THE OPTION THAT SHOWS THEM (a monthly tick, a deferred night result, a pet table, a
    help panel). Moved out of the per-site BAL.eff (one-core-bind binds an eff key to its own option) — same values; the rule and every text read BAL.rl. */

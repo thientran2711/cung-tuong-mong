@@ -114,7 +114,7 @@ window.slapNpcTier=slapNpcTier;
 function slapFin(r0,a,t,k,extra,sev,self){const B=BAL.slap;let r="";SLAPG.npcDone=1;try{if(sev<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");r=`<span class="g">${NMc(a)} giơ tay tát ngươi nhưng ngươi né kịp, cái tát hụt.</span> `;relAdd(S,a,B.missRel)}
    else{SLAP.next=sev;try{r=r0.call(self,a,t,k,extra)}finally{SLAP.next=0}}}finally{SLAPG.npcDone=0}return r}
 const slapCard=rcpReg("slapNpc",(a,k,extra,sev)=>{if(!a||a.alive===false)return null;const r0=SLAP_R0,t=S,self=null,B=BAL.slap;
- const fin=(s)=>{let r="";SLAPG.npcDone=1;try{if(s<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");r=`<span class="g">${NMc(a)} giơ tay tát ngươi nhưng ngươi né kịp, cái tát hụt.</span> `;relAdd(S,a,B.missRel)}
+ const fin=(s)=>{let r="";SLAPG.npcDone=1;try{if(s<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");r=`<span class="g">${NMc(a)} giơ tay tát ngươi nhưng ngươi né kịp, cái tát hụt.</span> `;relAdd(a,S,B.missRel)}
    else{SLAP.next=s;try{r=r0.call(self,a,t,k,extra)}finally{SLAP.next=0}}}finally{SLAPG.npcDone=0}return r};
  const who=typeof pv==="function"?pv(a):undefined;const show=r=>{if(r){log(r);pushModal({t:"Bị tát",who,h:`<p>${r}</p>`});showModal();render()}};
  const nm=a.name||"Nàng";
@@ -147,6 +147,6 @@ window.slapNpcDraw=slapNpcDraw;window.slapNeOdds=slapNeOdds;
 (function(){const r0=runAct;runAct=function(a,t,k,extra){
  if(k!=="tat"||!a||!t||t===S||t.coop||a.coop||SLAPG.npcDone||!(typeof mg2On==="function"&&mg2On()))return r0.apply(this,arguments);
  const B=BAL.slap;let sev=a===S?cl(SLAP.next|0||B.def,1,3):slapNpcTier(a);
- if(roll(slapNeOdds(t,a))){sev--;if(sev<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");relAdd(t,a,B.missRel);SLAP.next=0;
+ if(roll(slapNeOdds(t,a))){sev--;if(sev<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");relAdd(a,t,B.missRel);SLAP.next=0;
   const m=`${NMc(a)} giơ tay tát ${NM(t)} nhưng ${NM(t)} né kịp, cái tát hụt.`;return a===S?`<span class="r">${m}</span> `:m+" "}}
  SLAP.next=sev;try{return r0.apply(this,arguments)}finally{SLAP.next=0}}})();

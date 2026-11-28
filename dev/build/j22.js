@@ -19,7 +19,16 @@ function tinhW(t){return t>=BAL.tinhLv.love?"si mê ngươi":t>=BAL.tinhLv.close
 function lộRisk(k,p){p=p||S;const base={vuon:28,thu:34,tyv:20,tn:40,home:15}[k]||26;const w=watcher(p);const eN=(p===S?liveRivals(true):[S].concat(liveRivals(true))).filter(v=>v&&v!==p).reduce((s,v)=>s+eyes(v),0);return cl(Math.round(base+eN*2-(w?w.loyal/5:0)-eyes(p)*2),6,92)}
 function watcher(p){p=p||S;const s=(p.staff||[]).filter(x=>x&&x.loyal>=BAL.loy.close).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(p.maid&&p.maid.loyal>=BAL.loy.close)return{name:p.maid.name,loyal:p.maid.loyal};return null}
 function whoMayKnow(){const w=watcher();return [w?w.name+" (canh cửa)":"",...liveRivals(true).filter(v=>eyes(v)>=3).map(v=>v.name)].filter(Boolean).slice(0,3).join(", ")||"không ai rõ"}
-function affairExposed(m,how){/* full weight: the man dies; she faces death (first-year mercy aside) or lãnh cung */m.alive=false;log(`<span class="r">${how} ${m.name} bị xử trảm.</span>`);/* npc-purpose: death or lãnh cung = Hoàng thượng's mercy from his own regard for her (kind empMercy: her Sủng, her children) */if(npcWhy("empMercy",{p:S}))cold(`Tư thông với ${m.name} bị lộ`);else deathSentence(`Bị ban chết vì tư thông với ${m.name}`)}
+/* ONE tư thông rule (E74, MAIN 118 P2, law 1 + 11): any woman p (her or an NPC consort) proven in tư thông with man m (m may be unknown):
+   the man is xử trảm; she takes the Tư thông crime tier (PUNISH-TIER, below). Every caller: affairExposed (her), ttNpcExposed (NPC), trystNpc, j30 «Bóc chuyện tư tình», jmen report. */
+function ttExposed(p,m,lead){p=p||S;const me=p===S,who=m?m.name:"thị vệ";
+ if(m){m.alive=false;dieMk(m,"crime")/* rank-pace death mark, ONE place for every tư thông caller */;log(`<span class="r">${lead?lead+" ":""}${m.name} bị xử trảm.</span>`)}else if(lead)log(`<span class="r">${lead}</span>`);
+ if(!me)p.affair=null;
+ /* PUNISH-TIER (OD 26/11 ~19:50Z / ~20:35Z) + MAIN 179 ruling 27/11 ~17:56Z: tư thông PROVEN (caught / its letter / the book — every ttExposed caller) =
+    BAL.charge.ttProven (tử tội: ban chết, or the Emperor commutes it to phế vị + lãnh cung chung thân, BAL.charge.tu.spare) on the one fall() road; a charge
+    still only SUSPECTED (the «Tố giác» road, chPunish) = BAL.charge.C.tt.tier (nặng = giáng + lãnh cung). Her and an NPC alike; the man is still xử trảm. */
+ fall(p,`tư thông với ${who}, bị lộ`,null,BAL.charge.ttProven||"tu")}
+function affairExposed(m,how,p){return ttExposed(p||S,m,how)}
 /* ONE builder (role-parity part 2, law 1 two-way + law 4): the steps with a man, for her talk card and an NPC consort's day plan
    (jagacts4 cx4:man<step>, run by p4Run) — same odds of the doer, same tình ý, same eyes and the same death if caught.
    His tình ý is kept per woman: m.tinh for her (old saves), m.tw[id] for an NPC consort; khăn / thư are real things he keeps (m.letters / m.lw[id]). */
@@ -27,7 +36,7 @@ function mTinh(m,p){return p===S?(m.tinh||0):((m.tw||{})[p.id]||0)}
 function mTinhAdd(m,p,n,set){if(p===S){m.tinh=set?n:(m.tinh||0)+n;return}m.tw=m.tw||{};m.tw[p.id]=Math.max(0,set?n:(m.tw[p.id]||0)+n)}
 function manWit(p){const L=(p===S?liveRivals(true):[S].concat(liveRivals(true))).filter(v=>v&&v!==p&&v.alive!==false&&!v.out);const W=npcWit(whereOf(p),null,{vs:p,not:[p],pool:L});return W.length?W[0].p:null} /* npc-purpose G1 (two-way): the one who sees is a woman really there (npcWit), never a dice + a random name */
 function manCards(p,m,k){if(!m||!m.alive)return[];const me=p===S,risk=lộRisk(k,p),t=mTinh(m,p),ng=me?"ngươi":p.name;const A=[];
- A.push({id4:"manHail",n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:`hắn quý ngươi +${BAL.relMS.hail}`,go:()=>{relAdd(p,m,BAL.relMS.hail)/* rel-men-servants: a greeting moves both ways (j9 relAdd: m.af / m.afw[id] ↔ her S.rl / v.rl) */}});
+ A.push({id4:"manHail",n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:`hắn ${pvQuy(m,BAL.relMS.hail,"quý ngươi")}`,go:()=>{relAdd(p,m,BAL.relMS.hail)/* rel-men-servants: a greeting moves both ways (j9 relAdd: m.af / m.afw[id] ↔ her S.rl / v.rl) */}});
  A.push({id4:"manFlirt",n:"Liếc mắt đưa tình",o:odA(p,BAL.odb.j22.odO+(p.sac||0)/BAL.manRd.sacD),x:`tình ý của hắn +12 · có thể bị người thấy, một phi tần nắm ${balAb(BAL.eff.j22.evGo)} chứng cứ của ngươi: ${manWit(p)?"quanh đây có người":"quanh đây vắng người"}`,l:{},
   go:()=>{mTinhAdd(m,p,12+(nv(m,"flirtTinh")));deedAdd(p,"flirt",null,deedW("flirt"),`liếc mắt đưa tình với ${m.name}`);{const v=manWit(p);if(v){/*evok: flirt deed written just before*/evA(v,p,BAL.eff.j22.evGo);if(me)log(`Có kẻ thấy ngươi liếc mắt với ${m.name}.`);else if(v===S)log(`Ngươi thấy ${p.name} liếc mắt đưa tình với ${m.name}.`)}}}});
  if(t>=BAL.tinhLv.warm)A.push({id4:"manToken",n:"Trao khăn tay",o:odA(p,BAL.odb.j22.odO_2+(p.tamco||0)/BAL.manRd.tcD),x:`hắn giữ khăn tay của ngươi (là tang vật nếu bị lục) · tình ý +15`,go:()=>{mTinhAdd(m,p,15);if(me){m.letters++;S.aff=S.aff||{};S.aff[m.id]=(S.aff[m.id]||0)+1}else{m.lw=m.lw||{};m.lw[p.id]=(m.lw[p.id]||0)+1}}});
@@ -41,7 +50,9 @@ function tryst(m,risk,p){p=p||S;if(p!==S)return trystNpc(m,risk,p);if(roll(risk)
  return r}
 /* the same night for an NPC consort: caught = he dies and she faces the same sentence; kept = v.affair (the world's affair record: the book,
    a conception by him, spies — affairMonth), Sức, a pregnancy by trystCh with the same book check */
-function trystNpc(m,risk,v){if(roll(risk)){m.alive=false;v.affair=null;log(`<span class="r">Đêm ${v.name} hẹn ${m.name} bị bắt gặp. ${m.name} bị xử trảm.</span>`);try{deathSentence(v,`tư thông với ${m.name}`)}catch(e){}return `${v.name} hẹn gặp ${m.name} bị bắt gặp`}
+/* an NPC consort's tư thông bị lộ = the ONE rule above (ttExposed), never fall() */
+function ttNpcExposed(v,m,lead){return ttExposed(v,m,lead)}
+function trystNpc(m,risk,v){if(roll(risk)){try{ttExposed(v,m,`Đêm ${v.name} hẹn ${m.name} bị bắt gặp.`)}catch(e){console.error(e)}return `${v.name} hẹn gặp ${m.name} bị bắt gặp`}
  m.trysts++;mTinhAdd(m,v,10);v.affair=m.id;v.lastTryst=wk();ap(v,{suc:BAL.eff.j22.sucTryst});
  if(!v.preg&&roll(trystCh(v))){v.preg=1;v.hidden=true;v.pregWk=wk();v.trueFather=m.id;const ok=(v.nightLog||[]).some(w=>Math.abs(w-wk())<=1);v.pregMismatch=!ok}
  return `${v.name} lén gặp riêng ${m.name}`}
@@ -62,7 +73,7 @@ function kspFixCard(go){return {n:"Hối lộ Kính sự phòng sửa sổ",t:"N
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(!S||!S.preg||!S.pregMismatch||S.out)return;
  deck.unshift(kspFixCard(()=>{S.pregMismatch=false;S.khBook=1}));
  deck.unshift({n:"Uống thuốc phá thai",t:"Bài thuốc mạnh, hại thân.",c:{bac:-30},o:od(BAL.odb.j22.odO_4+careY(S)),w:{},l:{suc:BAL.eff.j22.sucL},x:`mất đứa bé, Sức ${balSg(BAL.eff.j22.sucGo)} · hỏng: băng huyết — có thể băng huyết mà chết: ${chanceW(BAL.rk.abortDie)}`,dom:"Sức khỏe",go:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;apply({suc:BAL.eff.j22.sucGo})},fail:()=>{S.preg=0;S.hidden=false;S.pregMismatch=false;S.trueFather=null;if(roll(BAL.rk.abortDie))die("Uống thuốc phá thai, băng huyết mà chết")}});
- const CF=BAL.confess;deck.unshift({n:"Thú tội với Hoàng thượng",t:"Quỳ trước Dưỡng Hòa điện, nhận hết tội.",c:{},o:oddsCl(Math.round(CF.base+(S.sung||0)/CF.sungDiv+(S.th||0)/CF.thDiv)),w:{},l:{},x:"giữ được mạng (vào lãnh cung), hắn bị xử trảm · hỏng: Hoàng thượng không tha — có thể bị ban chết",dom:"Sủng",go:()=>{const m=manById(S.trueFather);if(m){m.alive=false;log(`${m.name} bị xử trảm.`)}S.pregMismatch=false;cold("Thú tội tư thông")},fail:()=>{const m=manById(S.trueFather);if(m)m.alive=false;S.pregMismatch=false;deathSentence("Thú tội tư thông, Hoàng thượng không tha")}})}})();
+ const CF=BAL.confess;deck.unshift({n:"Thú tội với Hoàng thượng",t:"Quỳ trước Dưỡng Hòa điện, nhận hết tội.",c:{},o:oddsCl(Math.round(CF.base+(S.sung||0)/CF.sungDiv+(S.th||0)/CF.thDiv)),w:{},l:{},x:"giữ được mạng (vào lãnh cung), hắn bị xử trảm · hỏng: Hoàng thượng không tha — có thể bị ban chết",dom:"Sủng",go:()=>{const m=manById(S.trueFather);if(m){m.alive=false;dieMk(m,"crime");log(`${m.name} bị xử trảm.`)}S.pregMismatch=false;punTier(S,punStep(chC("tt").tier,-BAL.charge.conf.down),"Thú tội tư thông (tự thú, giảm một bậc tội)")/* PUNISH-TIER rec 4 */},fail:()=>{const m=manById(S.trueFather);if(m){m.alive=false;dieMk(m,"crime")}S.pregMismatch=false;deathSentence("Thú tội tư thông, Hoàng thượng không tha")}})}})();
 /* each month: the book may be checked; rivals carry on affairs too and can be found out */
 function affairMonth(){if(!S||!S.men)return"";let ev="";
  if(S.preg&&S.pregMismatch){const q=queenP();const foes=liveRivals(true).filter(v=>rel(v,S)<=netTh(v,"ky"));const kc=(q&&q!==S&&rel(q,S)<0||foes.length)?npcWhy("kspCheck",{C:(q&&q!==S&&rel(q,S)<0?[q]:[]).concat(foes.filter(x=>x!==q))}):null;if(kc){const who=kc.who;evA(who,S,BAL.eff.j22.evAffairMonth);ev+=`<span class="r">${who.name} cho người tra sổ Kính sự phòng: ngày ngươi có thai không khớp đêm thị tẩm nào.</span> `}}

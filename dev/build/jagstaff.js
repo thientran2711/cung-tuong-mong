@@ -112,20 +112,22 @@ function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o
   return r}
 function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(s);if(i>=0)o.staff.splice(i,1)}s.out=why||1;ASN.out=(ASN.out||0)+1}
 const AS_DO={
+ greet(s,m,o){/* d-followups-1 (law 1): the mirror of her «Hành lễ thỉnh an» (j42): the consort's regard (trSrvGreet) + the greeting of this buổi (jsvt) */const v=o.t;if(v&&typeof svtGreetDo==="function")svtGreetDo(s,v);return""},
  nvp(s){/* NPC-PURPOSE G3: a bully is a servant there who bears her a grudge (her own af < 0), the worst first; none → no bullying. A friend = the one she already likes best */
   const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));const by=npwPick(L,x=>-(((x.af||{})[s.sid])||0));if(by&&roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);s.bullyBy=by.sid;oanAdd(s,by,BAL.relMS.bully);return""}if(L.length){const x=npwPick(L,y=>1+Math.max(0,((s.af||{})[y.sid])||0));s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+BAL.ag.staff.nvpAf,-100,100)}return""},
- spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/const n=chSearch(v,s,()=>evA(v,m,SRVA.spy.ev));return v===S?(n?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${n}. `:`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: ${chMissed()?chMissTxt(m):"chưa thấy điều gì sai trái"} `):""}
+ spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/const n=chSearch(v,s,()=>evA(v,m,SRVA.spy.ev));/* TAI-MAT-KNOW: her own turned servant carried her talk out → only the sign */if(m===S&&typeof spyLeak==="function")spyLeak(S,n);return v===S?(n?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${n}. `:`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: ${chMissed()?chMissTxt(m):"chưa thấy điều gì sai trái"} `):""}
   if(roll(SRVA.spy.out)){asOut(s,"tgk");return asSee(m,v)?`${m===S?"Ngươi":m.name} bắt gặp ${s.name} lén lút với người của ${NM(v)}, đày xuống Tân Giả khố. `:""}return""},
  tellMis(s,m){const iv=(s.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];s.intel=(s.intel||[]).slice(1);if(iv){/*evok: servant intel, capped*/evA(m,iv,SRVA.tellMis.ev);if(m===S)return `${s.name} bẩm tin dò được về ${iv.name}: chứng cứ +${SRVA.tellMis.ev}. `}return""},
  askRec(s,m,o,ok){if(ok)servMerit(s,SRVA.askRec.mpOk);return""},
- betray(s,m,o){const v=o.t;/*evok: master schemed (sec>0)*/evA(v,m,SRVA.betray.ev);s.sec=Math.max(0,(s.sec||0)-1);s.betray={by:key(v)};return v===S?`${s.name}, người hầu của ${m.name}, lén đến mật báo chuyện của chủ: chứng cứ +${SRVA.betray.ev}. `:""},
+ betray(s,m,o){const v=o.t;/*evok: master schemed (sec>0)*/const nb=evA(v,m,SRVA.betray.ev);if(m===S&&typeof spyLeak==="function")spyLeak(S,nb);s.sec=Math.max(0,(s.sec||0)-1);s.betray={by:key(v)};return v===S?`${s.name}, người hầu của ${m.name}, lén đến mật báo chuyện của chủ: chứng cứ +${SRVA.betray.ev}. `:""},
  accuse(s,m,o,ok){const v=o.t;if(!ok){s.betray={by:key(v)};return""}s.sec=0;const a0=ACTX.a;ACTX.a=v;try{fall(m,"bị cung nữ tố giác, chứng cứ rành rành")}finally{ACTX.a=a0}
   asOut(s,"hh");try{(v.staff=v.staff||[]).push(s);s.out=0}catch(e){}return asSee(m,v)?`${s.name}, người hầu của ${NM(m)}, tố chủ trước Hoàng hậu; ${NM(m)} bị xét tội. `:""},
  chat(s,m,o,ok){const x=o.t;s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+(ok?SRVA.chat.af:SRVA.chat.afL),-100,100);if(ok){x.af=x.af||{};x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.chat.af/2,-100,100)}
   /* the friend tell (was j10 servMonth roll): what she says of her palace's schemes this week reaches her friend's master */
-  if(ok&&(m.schemes||0)>(m.schLast||0)&&(s.af[x.sid]||0)>=20){const o2=ownerOf(x);if(o2&&o2!==m&&evA(o2,m,BAL.eff.j10.evServMonth_2)&&o2===S)return `${x.name} nghe bạn là ${s.name} kể chuyện cung ${NM(m)}: chứng cứ ${balSg(BAL.eff.j10.evServMonth_2)}. `}/* one number with j10 servMonth (the old path) */return""},
- gift(s,m,o){const x=o.t;s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+SRVA.gift.af/2,-100,100);x.af=x.af||{};x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.gift.af,-100,100);return""},
- ask(s,m,o){/* G3: she asks after the one her master has a grudge against */const L=liveRivals(true).filter(x=>x!==m);const t=npwPick(L,x=>1+Math.max(0,hostility(m,x)||0));if(t){s.intel=(s.intel||[]).concat([t.id]).slice(-3)}return""},
+  const sv=(typeof svtPeer==="function"?svtPeer(s,x,"chat",ok,o.pl):"")/* servant-trust fix r1: servant ↔ servant across houses (greeting + each master may come to know) */;
+  if(ok&&(m.schemes||0)>(m.schLast||0)&&(s.af[x.sid]||0)>=20){const o2=ownerOf(x);if(o2&&o2!==m&&evA(o2,m,BAL.eff.j10.evServMonth_2)&&o2===S)return `${x.name} nghe bạn là ${s.name} kể chuyện cung ${NM(m)}: chứng cứ ${balSg(BAL.eff.j10.evServMonth_2)}. `+sv}/* one number with j10 servMonth (the old path) */return sv},
+ gift(s,m,o){const x=o.t;s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+SRVA.gift.af/2,-100,100);x.af=x.af||{};x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.gift.af,-100,100);return (typeof svtPeer==="function"?svtPeer(s,x,"gift",true,o.pl):"")},
+ ask(s,m,o){/* G3: she asks after the one her master has a grudge against */const L=liveRivals(true).filter(x=>x!==m);const t=npwPick(L,x=>1+Math.max(0,hostility(m,x)||0));if(t){s.intel=(s.intel||[]).concat([t.id]).slice(-3)}return o.t?(typeof svtPeer==="function"?svtPeer(s,o.t,"ask",true,o.pl):""):""},
  frame(s,m,o,ok){const x=o.t;s.af=s.af||{};x.af=x.af||{};if(ok){x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.frame.af,-100,100);
    /* AG-ALL-2 G10: the framed colleague answers with the maid player's own "Bị vu oan" options (j42 cnvFrameOpts) by her needs (jagstf2) */
    const R=typeof stf2Framed==="function"?stf2Framed(x,s,m):null;if(R&&!R.stands)return m===S&&R.r?R.r+" ":"";if(!R)x.loyal=cl((x.loyal||0)+SRVA.frame.loy,0,100);x.trouble=wk();
@@ -138,7 +140,7 @@ const AS_DO={
  tryst(s,m,o,ok){const man=o.man;if(ok){s.mt[man.id]=(s.mt[man.id]||0)+SRVA.tryst.tinh;s.manLove=man.id;return""}return asCaught(s,m,man)},
  vow(s,m,o,ok){if(!ok)return"";if(o.man){s.vow=o.man.id;s.manLove=o.man.id;return""}const x=o.t;if(x&&!x.lover){s.lover=x.sid;x.lover=s.sid}return""}};
 /* "Hẹn gặp riêng" caught: the player maid's own road for an NPC maid (was maidLoveMonth roll 4: expelled 30 / Tân Giả khố; the man exiled 35) */
-function asCaught(s,m,man){const B=asB();asOut(s,roll(B.expel)?"expel":"tgk");if(man&&man.rw!=="vương gia"&&roll(B.exile))man.alive=false;
+function asCaught(s,m,man){const B=asB();asOut(s,roll(B.expel)?"expel":"tgk");if(man&&man.rw!=="vương gia"&&roll(B.exile)){man.alive=false;dieMk(man,"crime")}
  const mine=isSrv()&&(m===srvM()||((S.srv.af||{})[s.sid]||0)>=30);const line=`${s.name}, cung nữ của ${NM(m)}, tư tình với ${man?man.name:"một nam nhân"} bị lộ: ${s.out==="expel"?"bị đuổi khỏi cung":"bị đày xuống Tân Giả khố"}${man&&!man.alive?"; hắn bị đày ra biên ải":""}. `;
  if(mine||m===S)return line;try{log(line)}catch(e){}return""}
 /* "Quỳ dâng trà" where he passes (jagmaid amDo: ONE rule); choosing it is her seeking (jmline s.seek), so her master may notice */

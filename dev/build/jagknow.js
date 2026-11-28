@@ -80,7 +80,7 @@ function knTell(s,m,hid){const M=knMemo();const kk=knSid(s,m)+"|"+hid;if(M.t[kk]
  const O=[["tell",Math.max(.01,lo*T.tell*(1+knTellQ(s)))],["keep",Math.max(.01,(1-lo)*T.keep*(1-knTellQ(s)))]];
  if(s.spyFor!=null&&byKey(s.spyFor)&&byKey(s.spyFor)!==m)O.push(["sell",(1-lo)*T.sell]);
  let c="keep";try{c=mindPick(O,s)||"keep"}catch(e){}KN.stat[c]=(KN.stat[c]||0)+1;
- if(c==="sell"){const b=byKey(s.spyFor);if(b&&b!==S)M.x[knId(b)+"|"+hid]={by:"s"+knSid(s,m),how:"sell"}}
+ if(c==="sell"){const b=byKey(s.spyFor);if(b&&b!==S){M.x[knId(b)+"|"+hid]={by:"s"+knSid(s,m),how:"sell"};/* TAI-MAT-KNOW: her servant sold what he saw → the sign only */if(m===S)spyLeak(S,1)}}
  return M.t[kk]=c}
 function knStaff(x){let L=[];try{L=((x===S?S.staff:x&&x.staff)||[]).slice()}catch(e){}if(x&&x.maid&&!L.includes(x.maid))L.push(x.maid);return L.filter(s=>s&&!s.out&&s.name)}
 /* ---------- THE RULE ---------- */
@@ -236,8 +236,8 @@ function knErrGive(s,m,k,t,late){if(!m||(m!==S&&(!m.alive||m.out)))return;let f=
  if(k==="scout"&&t){const n=chSearch(m,s,()=>evA(m,t,BAL.ag.ev.one));if(s.sid!=null)s.intel=(s.intel||[]).concat([t.id]).slice(-3);if(m===S){let ff="";try{ff=typeof intelLearn==="function"?intelLearn(t,2,{by:s.name,how:"Tự đi dò la"}):""}catch(e){}f=(n?", nắm được chứng cứ":chMissed()?", chưa tìm ra chứng":"")+(ff?": "+ff:"")}}
  if(m===S)knBao(s,m,knErrWhat(k,t)+(k==="listen"&&f?": "+f:k==="scout"&&f?f:""),t?palaceOf(t):null,late)}
 /* she sells it: the one who bought her hears the truth about her master's errand (the scouted consort learns she is watched) */
-function knErrSell(s,m,k,t){const b=byKey(s.spyFor);if(!b)return;KN.stat.sold=(KN.stat.sold||0)+1;
- if(t&&b===t&&(k==="scout"||k==="scoutF"))affAdd(t,m,-knB().scout.oan);
+function knErrSell(s,m,k,t){const b=byKey(s.spyFor);if(!b)return;KN.stat.sold=(KN.stat.sold||0)+1;if(m===S&&b!==S)spyLeak(S,1);/* TAI-MAT-KNOW: her errand sold → the sign only */
+ if(t&&b===t&&(k==="scout"||k==="scoutF"))spyLearn(t,m,knB().scout.oan);/* the scouted one bought the scout: she LEARNS who sent her (TAI-MAT-KNOW) */
  if(b===S){const w=t===S?"{goi}":t?spyWho(t):"";knBao(s,S,`${m.name} vừa sai {xung} ${/^listen/.test(k)?"đi nghe ngóng các cung":"đi dò la "+w}${k==="scout"?", {xung} dò được rồi":k==="caught"?", {xung} bị bắt gặp":""}`,t&&t!==S?palaceOf(t):palaceOf(m),0,1)}}
 function knErr(s,m,k,t){const c=knErrPick(s,m);if(c==="tell")knErrGive(s,m,k,t,0);else if(c==="late"){S.knQ=(S.knQ||[]).concat([{at:agKey(),sid:s.sid,k,t:t?key(t)/* "me" for her: RV alone lost an NPC's late report on the player (review ag-later #2) */:null}]).slice(-knB().keep)}
  else if(c==="sell")knErrSell(s,m,k,t);return c}
@@ -343,6 +343,22 @@ function knTmN(e){if(!e||e.sid==null||!S)return;S.tmN=S.tmN||{};S.tmN[e.sid]=(S.
    (apply / ap {mat:+N}: "Cài tai mắt", story / event rewards, origins …) is N recruit tries (tmTry) of real servants of other palaces, each deciding by
    tmOdds; a loss {mat:-N} lets N of them go. A refusing servant at lòng ≥ BAL.loy.mid may report the try to her master (oán; her own servant reports it
    to her as a TIN BÁO). Old saves / starting values: a stored mat above the real count becomes that many tries once (p.tmMig). ================= */
+/* ================= TAI-MAT-KNOW (owner OD 27/11 ~04:16Z verbatim in dev/OWNER_DECISIONS.md: "đã làm tai mắt của tôi thì nó có biết hay không?
+   Nó biết thì nó mới có thể ghét được, còn nó không biết thì sao mà nó có thể oán tôi được"). ONE knowledge gate for every spy road, her and every
+   NPC alike (law 1): a master's oán / thiện cảm toward the one who bought / planted / threatened her servant changes ONLY here, and only at a moment
+   that master really LEARNS it — her (or the NPC's) search finds the spy (Tra xét / Tra khảo / Dò xét / caught), the spy confesses, a refused
+   servant reports the offer back, the two-faced one tells, or the learner's own Tai mắt sees the deal. Recruiting itself (Mua chuộc, Cài người,
+   Dọa tố, a volunteer, the defecting maid, a kỳ ngộ) never touches the master's feeling and never tells the master.
+   spyLearn(m, b, aff): m learns b ran a spy on m → oán +BAL.ag.know.tm.learn.oan, thiện cảm −aff (default BAL.ag.know.tm.oan); remembered in
+   m.spyKn[key(b)] = week (lazy, old saves load). No notice of its own: the road that found it says what was found. */
+function spyLearn(m,b,aff){try{if(!m||!b||m===b||!S)return 0;if(m!==S&&(!m.alive||m.out))return 0;const T=BAL.ag.know.tm;const a=aff==null?T.oan:aff;
+ const go=()=>{if(a)affAdd(m,b,-Math.abs(a));oanAdd(m,b,T.learn.oan)};/* its own cause: never folded into another cause of the same buổi, only the daily cap (joanpace opOwn, MAIN 179) */typeof opOwn==="function"?opOwn(go):go();m.spyKn=m.spyKn||{};m.spyKn[key(b)]=wk();KN.stat.spyLearn=(KN.stat.spyLearn||0)+1;return T.learn.oan}catch(e){return 0}}
+/* her own two-faced servant found (Theo dõi / Hỏi thẳng / Thử tin giả, Dò xét kẻ hầu …): the discovery is recorded (knSoldFound) and she LEARNS who
+   bought him → spyLearn; returns the buyer (or null) so the road can name him */
+function spyFound(s){try{if(!s||s.spyFor==null||s.spyFor==="me")return null;const m=s===S.maid?S:ownerOf(s);const b=byKey(s.spyFor);if(m===S)knSoldFound(s);if(m&&b&&b!==m)spyLearn(m,b);return b&&b!==m?b:null}catch(e){return null}}
+function spyWhoN(b){return b?NM(b):"người khác"}
+/* her own turned servant gives no notice; the only sign is real: her palace's talk actually reached a rival through him → one hint line, once a week */
+function spyLeak(p,n,noLog){try{if(p!==S||!n||!S||S.dead)return"";const w=wk();if(S.leakW===w)return"";S.leakW=w;const t="Chuyện trong cung ngươi dường như lọt ra ngoài.";if(!noLog&&!quiet)log(t);return t}catch(e){return""}}
 function tmB(){return BAL.ag.know.tm}
 function tmOn(){try{return !!(BAL.ag&&BAL.ag.know&&BAL.ag.know.tm)&&!window.__tmOff}catch(e){return false}}
 function tmWant(a,s){const W=tmB().want,o=ownerOf(s);if(!o)return["",0];const L=[];const out=(a.rank||0)>(o.rank||0);
@@ -374,15 +390,15 @@ function btRaw(s,m,kind){return btTerms(s,m,kind).reduce((a,f)=>a+f[1],0)}
 function btOdds(s,m,kind){return agOdd(btRaw(s,m,kind))}
 /* a failed approach: the servant SHE (or the NPC) sent with the offer is afraid of being dragged in → lòng −fear (more for a timid one); 17:00Z */
 function tmFear(p,quietLog){try{const sv=typeof bestSent==="function"?bestSent(p):null;if(!sv)return"";const B=btB();const d=Math.round(B.fear*(netIs(sv,"timid")?B.fearTimid:1));
- sv.loyal=cl((sv.loyal||0)-d,0,100);KN.stat.tmFear=(KN.stat.tmFear||0)+1;const r=`${sv.name} đi đưa lời, sợ bị liên lụy: thiện cảm ${balSg(-d)}`;if(p===S&&!quiet&&!quietLog)try{log(r+".")}catch(e){}return r}catch(e){return""}}
+ sv.loyal=cl((sv.loyal||0)-d,0,100);KN.stat.tmFear=(KN.stat.tmFear||0)+1;const r=`${sv.name} đi đưa lời, sợ bị liên lụy: thiện cảm ${balSg(spSee("rel",-d))}`;if(p===S&&!quiet&&!quietLog)try{log(r+".")}catch(e){}return r}catch(e){return""}}
 if(tmOdds0)bribeOdds=tmOdds;
 /* who could be asked: a servant of another living palace, nobody's spy yet */
 function tmCands(p){return tmSrv().filter(/* 2f2: live list */s=>{if(s.spyFor!=null)return false;const o=ownerOf(s);return !!o&&o!==p&&(o===S||(o.alive&&!o.out))})}
-function tmRefuse(p,s){const o=ownerOf(s);if(!o||!npcWhy("tmTell",{s,o},()=>roll(agCap(tmB().tell))))return"";/* npc-purpose G2a: a loyal servant goes to tell her master */affAdd(o,p,-tmB().oan);
+function tmRefuse(p,s){const o=ownerOf(s);if(!o||!npcWhy("tmTell",{s,o},()=>roll(agCap(tmB().tell))))return"";/* npc-purpose G2a: a loyal servant goes to tell her master = the master LEARNS it (TAI-MAT-KNOW) */spyLearn(o,p);
  if(o===S&&p!==S)knBao(s,S,`${p.name} vừa sai người tới mua chuộc {xung} làm tai mắt, {xung} không nhận`,knPal(p));return"tell"}
 /* one try: the recruiter turns to the most promising person (by the same odds); that person decides */
 function tmTry(p,why){const C=tmCands(p);if(!C.length)return null;let best=null,bo=-1;for(const s of C){const o=tmOdds(p,s);if(o>bo){bo=o;best=s}}
- KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(agTry(bo)){best.spyFor=key(p);affAdd(best,p,BAL.relMS.bribe);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
+ KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(agTry(bo)){best.spyFor=key(p);try{if(typeof svTouch==="function"){const x=svTouch(p,best,"tm");if(x&&(p===S||ownerOf(best)===S))log(x)}}catch(e){}/* servant-trust (jsvt) */affAdd(best,p,BAL.relMS.bribe);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
  if(agSoft(bo)){if(p===S&&!quiet)try{agSoftTxt(S,"Cài tai mắt")}catch(e){}return null}
  const t=tmRefuse(p,best);if(p===S&&!quiet)try{log(`Ngỏ ý với ${best.name} (người hầu cung ${NM(ownerOf(best))}), nàng không nhận${t?" và còn bẩm lại với chủ":""}.`)}catch(e){}return null}
 function tmLose(p,n){const L=taiMatRaw(p).sort((a,b)=>tmOdds(p,a)-tmOdds(p,b));for(let i=0;i<n&&i<L.length;i++)L[i].spyFor=null}
@@ -491,7 +507,7 @@ function knSellNpcBuy(x,s,n){const P=knSB();const price=knSellPrice(n.val,s);if(
 /* refused: the seller tries another buyer with the same news (not the one who refused) */
 function knSellNpc(s,n,skip){for(const x of liveRivals(true)){if(x===skip||x===ownerOf(s)||!x.alive||x.out)continue;const N=knSellNews(x,s).filter(q=>q.id===n.id);if(N.length&&knSellNpcBuy(x,s,N[0]))return x}return null}
 /* once per buổi per buyer: BAL.ag.sell.o % that a seller comes (her: only when the day still has the khắc; not as a maid) */
-function knSellTick(){if(!knOn()||!S||S.dead||S.out)return;const T=knTb();const key=agKey();if(T.sl===key)return;T.sl=key;const P=knSB();/* ag2-perf F1: one memo of the owners' facts for this pass (j95 J78MEMO); a sale drops it (knSellGive) */window.J78MEMO=new Map();try{knSellTick0(P)}finally{window.J78MEMO=null}}
+function knSellTick(){if(!knOn()||!S||S.dead||S.out||(typeof isKc==="function"&&isKc()))return;/* no palace servant reaches her at home (review/ob-ngoaicung) */const T=knTb();const key=agKey();if(T.sl===key)return;T.sl=key;const P=knSB();/* ag2-perf F1: one memo of the owners' facts for this pass (j95 J78MEMO); a sale drops it (knSellGive) */window.J78MEMO=new Map();try{knSellTick0(P)}finally{window.J78MEMO=null}}
 function knSellTick0(P){
  try{if(!(typeof isSrv==="function"&&isSrv())&&dayFit(P.kh)&&roll(agOdd(P.o))){const r=knSellPick(S,npcWhy("knSell",{x:S}));if(r){KN.stat.offer=(KN.stat.offer||0)+1;Q.push(knSellCard(r.s,r.n))}}}catch(e){agErr("knSell",e)}
  for(const x of liveRivals(true)){if(!x.alive||x.out||x.confined)continue;try{if(!roll(agOdd(P.o)))continue;/* npc-purpose G2a: roll = the buổi gives a chance to meet; WHO comes is a seller with a goal */const r=knSellPick(x,npcWhy("knSell",{x}));if(r)knSellNpcBuy(x,r.s,r.n)}catch(e){agErr("knSellNpc",e)}}}

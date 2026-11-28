@@ -87,7 +87,7 @@ function kitGoalDetail(){const G=kitGoalNow();if(!G)return;const C=G.C;
  kitPanel({kind:"info",title:`${G.kicker} · ${C.t}`,sub:G.road?`Mệnh truyện: ${G.road}`:"",headArt:(CM&&CM.cover&&typeof CM.cover==="string"?{src:CM.cover,label:road()}:CM&&CM.cover&&CM.cover.src?{src:CM.cover.src,label:CM.cover.label||road()}:art()),/* kit-rows-b KP20: the chapter cover (chapModel .cover) replaces the topic picture in the headArt band */sections:sec,opts:nextOpts(G.next).concat([{n:"Đóng",fx:{},nav:1,go:()=>{}}])},true);showModal()}  /* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10) */
 /* ---------- "Mệnh truyện kiếp này": right after Nhập cung ---------- */
 function kitGoalCard(){const G=kitGoalNow();if(!G)return null;const C=G.C;
- const life=isS()?"Từ thân cung nữ, đi lên bằng lòng tin của chủ và ánh mắt của Hoàng thượng.":`Từ ${RANKS[S.rank].n} leo dần lên Hoàng hậu, rồi Hoàng thái hậu; giữ mình, giữ nhà.`;
+ const life=isS()?"Từ thân cung nữ, đi lên bằng lòng tin của chủ và ánh mắt của Hoàng thượng.":`Từ ${meRankN()} leo dần lên Hoàng hậu, rồi Hoàng thái hậu; giữ mình, giữ nhà.`;
  const sec=[{h:"Đường đời kiếp này",rows:[["Đường lớn",life],G.road?["Truyện riêng",`«${esc(G.road)}» · từng chương mở dần theo thời gian`]:null,["Chương này",`${G.kicker} · ${esc(C.t)}`],["Mục tiêu",esc(C.g)]].filter(Boolean)},
   {h:"Việc nên làm trước",rows:nextRows(G.next)},
   {h:"Xem lại",rows:[["Mục tiêu chương","cuộn chiếu ở cột nút bên trái màn; chạm vào để xem chi tiết chương"],["Mệnh truyện",`mục ${tabName("story")} ở hàng dưới`]]}];

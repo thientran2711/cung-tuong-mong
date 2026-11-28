@@ -64,15 +64,15 @@ function kill(p,why,K){let ev="";note(p,why,K);
  /* D4 (owner OD:L641–643): every NPC can die; the dead person's portrait, figure and name are retired (npcRetire, jnpcd) so a replacement is a NEW person */
  if(p!==S.emp&&p!==S.thO&&!K.has(p)&&typeof npcRetire==="function")npcRetire(p);
  if(p.lyF===1)return typeof lyDie==="function"?lyDie(p,why):(p.dead=1,"");
- if(p===S.emp){S.mort.empDue=why||(p.thoO?"Ngài lâm trọng bệnh đã lâu, thuốc thang vô hiệu":"Ngài trúng phong đột ngột giữa đêm");return ""}
+ if(p===S.emp){S.mort.empDue=why||(p.thoO?"Ngài lâm trọng bệnh đã lâu, thuốc thang vô hiệu":p.sgn?"Ngài đột ngột lâm bệnh nặng, chưa đầy một tháng đã băng":"Ngài trúng phong đột ngột giữa đêm");return ""}
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
  if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||p.nbWhy||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<BAL.mortx.youngAge?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
- if(rivals.includes(p)){p.alive=false;if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
+ if(rivals.includes(p)){p.alive=false;try{dthStamp(p,why,"lâm trọng bệnh qua đời")}catch(e){};dieMk(p,why||"age");if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
  if(p===S.maid){const o=S.maid.name;S.maid=newMaid(nmNew("maid"),M.maidLoy);if(typeof npcRoleGone==="function")npcRoleGone("maid");return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
- for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
+ for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{if(q===S){p.alive=false;dthStamp(p,why,"");(S.dstaff=S.dstaff||[]).push(p)}}catch(e){}/* her dead servant stays on record (owner 27/11 ~05:10Z): S.dstaff, shown as «Đã khuất» in Cung nhân */try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
  const C=S.court||{};for(const k in C)if(C[k]===p){const o=p.name;const pre=OFFICIAL[k]||"Quan";p.af={};p.gen=(p.gen||0)+1;p.pn=nmNew(k==="ty"?"doc":k==="ped"?"eun":"eunE");p.name=p.pn;delete p.fid;delete p.fcKeep;if(typeof npcRoleGone==="function")npcRoleGone({tq:"eun",ty:"doc",ksp:"ksp"}[k]||k);p.age=k==="ped"?M.repl.young[0]+R(M.repl.young[1]):M.repl.adult[0]+R(M.repl.adult[1]);delete p.tho;delete p.fc;delete p.fk;assign(p,K);
   return `${o} ${why||"qua đời"}; ${p.pn?pre+" "+p.name:p.name} lên thay. `}
- if((S.men||[]).includes(p)){p.alive=false;return ""}
+ if((S.men||[]).includes(p)){p.alive=false;try{dthStamp(p,why,"bị trị tội")}catch(e){};dieMk(p,why||"age");return ""}
  return ev}
 /* the omen illness on people who show illness (her, consorts, the Thái hậu, the Emperor) */
 function omen(p,ml){const st=ml<=M.omenSt[0]?3:ml<=M.omenSt[1]?2:1,k=ageOf(p)>=M.oldAge?"laobenh":"trongbenh";let ev="";
@@ -90,6 +90,27 @@ const ACC={me:["trượt chân trên bậc đá đóng băng trước điện, k
  adult:["trượt chân ngã xuống hồ Thái Dịch lúc ngắm trăng","bị ngựa kinh hãi hất ngã ở Nam Uyển","cảm hàn sau đêm thả đèn hoa đăng, không qua khỏi"],
  odd:["nghẹn hạt sen giữa yến tiệc","mải đuổi con vẹt sổng lồng, trượt chân ngã từ lầu vọng nguyệt","cười quá đà khi xem gánh chèo, ngất đi không tỉnh"],
  emp:["ngã ngựa khi săn bắn ở Nam Uyển","trúng phong giữa buổi chầu"],empOdd:["ăn liền ba bát chè hạt sen đêm Trung thu, đau bụng rồi không qua khỏi"]};
+/* tuantang-warn r2 (Q2): the one-month sign before a sudden lifespan death (thoO 0) — people who show illness get the omen illness at its
+   last stage (so the Thái y cure road of the omen, treat(), works the same); her own people get a line; others carry the sign silently (p.sgn) */
+function sudSign(p,ml,K,show){if(p.sgn)return "";p.sgn=1;let ev="";
+ if(show){if(p===S)ev+=`<span class="r">Đêm qua ngươi bỗng choáng váng ngã quỵ, tay chân lạnh ngắt; thái y bắt mạch xong thì biến sắc.</span> `;
+  else if(p===S.emp)ev+="<b>Hoàng thượng bỗng ngất giữa buổi chầu; Thái y viện suốt đêm không dám rời Càn Thanh cung.</b> ";
+  else if(p===S.thO)ev+="Thái hậu bỗng lên cơn đau thắt ngực, Từ Ninh cung đèn sáng suốt đêm. ";
+  return ev+omen(p,Math.min(ml,M.omenSt[0]))}
+ const mine=p===S.maid||(S.staff||[]).includes(p)||(S.kids||[]).includes(p);if(!mine)return "";
+ if(p.nb)return `<span class="r">Đứa bé bú ít, khóc yếu; bà vú bế suốt đêm không dám đặt xuống.</span> `;
+ return `<span class="r">${K.has(p)?(p.name||"Con"):p.name||"Người hầu"} mấy hôm nay bỗng sốt li bì, ăn uống không vào.</span> `}
+/* the sign line a month before an accident (text by kind, the accident's own place when known) */
+const ACCS=[[/bậc đá|đóng băng/,"Mấy hôm nay trời rét đậm, bậc đá trước điện đóng băng trơn trượt"],[/hồ Thái Dịch/,"Mưa dầm cả tuần, bờ hồ Thái Dịch sụt lở mấy chỗ"],
+ [/ngựa/,"Chuồng ngựa Nam Uyển báo có con ngựa mới về còn hoang tính"],[/hoa đăng|cảm hàn/,"Trời trở lạnh bất thường, gió sông về đêm buốt giá"],
+ [/hạt sen|chè/,"Ngự thiện phòng sắp dọn yến, nhiều món hạt sen, chè ngọt"],[/vẹt|lầu vọng nguyệt/,"Lan can lầu vọng nguyệt đã mục mà chưa sửa"],[/gánh chèo|cười/,"Trong cung sắp mở gánh chèo mua vui mấy đêm liền"],
+ [/săn bắn/,"Khâm thiên giám tâu: sao Tử Vi mờ tối, xin Hoàng thượng tạm hoãn cuộc săn ở Nam Uyển"],[/trúng phong/,"Khâm thiên giám tâu: khí trời bất ổn, xin Hoàng thượng giữ gìn long thể"]];
+window.accSignText=function(t){const x=ACCS.find(([r])=>r.test(t||""));return x?x[1]:"Trong cung có điềm gở, thầy bói nói tháng tới phải giữ mình"};
+function accSign(p,K){const w=p.accW,s=accSignText(w.t);
+ if(p===S){try{if(typeof signAccCard==="function")signAccCard()}catch(e){console.error(e)}return `<span class="r">${s}.</span> `}
+ try{if(typeof signAccNpc==="function")signAccNpc(p)}catch(e){console.error(e)}/* law 1: an NPC heeds the sign on the same odds (jsign) */
+ if(p===S.emp)return `${s}. `;return ""}
+function accSafe(p){if(p===S)return `<span class="g">Nhờ ngươi đã cẩn thận giữ mình, tai họa tháng trước báo trước đã không đến.</span> `;if(p===S.emp)return "Hoàng thượng nghe lời can, tạm hoãn cuộc vui; tai họa đã qua. ";return ""}
 function accY(p,K){if(K.has(p))return 0;return p===S?M.acc.me:p===S.emp?M.acc.emp:M.acc.npc}
 function accText(p){const odd=roll(M.oddP);if(p===S.emp)return pick(odd?ACC.empOdd:ACC.emp);return pick(odd?ACC.odd:p===S?ACC.me:ACC.adult)}
 /* Emperor plots: an omen month(s) first, then cấm quân foils it or not */
@@ -105,8 +126,12 @@ function monthMort(){if(!S||!M.on||S.dead)return "";initAll();let ev="";const K=
   const ml=left(p);const show=p===S||p===S.emp||p===S.thO||rivals.includes(p);
   if(ml<=0){ev+=kill(p,p===S?`Tuổi trời đã tận, ${ILL[ageOf(p)>=M.oldAge?"laobenh":"trongbenh"].n.toLowerCase()} không qua khỏi, thọ ${S.age} tuổi`:"",K);continue}
   if(show&&p.thoO&&ml<=p.thoO)ev+=omen(p,ml);
+  else if(!p.thoO&&ml<=M.sign.mo)ev+=sudSign(p,ml,K,show);/* tuantang-warn r2 (Q2): a sudden death gets a one-month sign too */
   else if(p.thoO&&ml<=M.pre.mo)ev+=weak(p);
-  const a=accY(p,K);if(a&&roll(a/12)){const t=accText(p);ev+=p===S?(kill(p,`Ngươi ${t}`,K),""):kill(p,t,K)}}
+  /* tuantang-warn r2 (Q2, law 1): an accident is no longer same-month — it is set M.sign.acc month(s) ahead with a sign line (her: a card with roads, jsign),
+     then strikes unless the sign was heeded (p.accW.safe) */
+  if(p.accW){if(--p.accW.mo>0)continue;const w=p.accW;delete p.accW;if(w.safe){ev+=accSafe(p);continue}ev+=p===S?(kill(p,`Ngươi ${w.t}`,K),""):kill(p,w.t,K);continue}
+  const a=accY(p,K);if(a&&roll(a/12)){p.accW={t:accText(p),mo:M.sign.acc};ev+=accSign(p,K)}}
  if(!S.dead&&!S.mort.empDue)ev+=empPlot();
  if(S.thDead&&!S.mort.thGone){S.mort.thGone=1;ev+=thShift()}
  return ev}
@@ -126,7 +151,7 @@ window.mortKill=function(p,why){return kill(p,why,kidSet())};
 (function(){const p0=illMonthP;illMonthP=function(p){if(!M.on||!p)return p0.apply(this,arguments);if(p.ill&&p.ill.mort){ap(p,{suc:-M.pre.omenSuc*p.ill.st});return ""}
  const had=!!illOf(p);let ev=p0.apply(this,arguments);if(S.dead||p.alive===false)return ev;const a=ageOf(p)||20;
  if(!had&&!illOf(p)&&a>M.illAge[0]&&roll(M.illAge[2]*(a-M.illAge[0])/M.illAge[1])){const sea=SEASON[S.month-1];const L=Object.entries(ILL).filter(([k,d])=>d.sea&&d.sea.includes(sea));ev+=catchIll(p,L.length?pick(L)[0]:"phonghan")}
- const i=illOf(p);if(i&&i.st===3&&!i.mort&&ILL[i.k].die&&a>M.dieAge[0]&&roll(M.dieAge[2]*ILL[i.k].die*(a-M.dieAge[0])/M.dieAge[1])){if(p===S){die(`${ILL[i.k].n} nguy kịch, tuổi cao sức yếu không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;ev+=`<span class="r">${p.name} mất vì ${ILL[i.k].n.toLowerCase()}, tuổi cao sức yếu.</span> `}
+ const i=illOf(p);if(i&&i.st===3&&!i.mort&&ILL[i.k].die&&a>M.dieAge[0]&&roll(M.dieAge[2]*ILL[i.k].die*(a-M.dieAge[0])/M.dieAge[1])){if(p===S){die(`${ILL[i.k].n} nguy kịch, tuổi cao sức yếu không qua khỏi`);return ev}p.alive=false;dieMk(p,"ill");if(p.queen)p.queen=false;ev+=`<span class="r">${p.name} mất vì ${ILL[i.k].n.toLowerCase()}, tuổi cao sức yếu.</span> `}
  return ev}})();
 /* treatment of the omen illness: switch 3 (care) — 0: the lifespan holds, thuốc chỉ đỡ đau; 1: a cure adds careAdd years once per careMax */
 (function(){const t0=treat;treat=function(p,way){const i=p&&p.ill;if(!M.on||!(i&&i.mort))return t0.apply(this,arguments);
@@ -168,8 +193,8 @@ function birthEvent(t,h){if(typeof Q==="object"&&Q)Q.push({t,kind:"news",h})}
   /* giữ con: the child is born, the mother dies */
   p.choiceN=(p.choiceN||0)+1;birthRisk=()=>0;try{res=b0.apply(this,arguments)}finally{birthRisk=br0}
   const t=head+"“Giữ con.”";if(me){die(`${t} Ngươi gắng sinh hạ hài nhi rồi nhắm mắt`);return ""}
-  p.alive=false;if(p.queen)p.queen=false;return res+`<span class="r">${t} ${p.name} sinh hạ hài nhi rồi qua đời.</span> `}
- if(roll(B.hardDie)){if(me){die("Khó sinh, băng huyết mà chết");return ""}p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} khó sinh, băng huyết mà chết.</span> `}
+  p.alive=false;dieMk(p,"birth");if(p.queen)p.queen=false;return res+`<span class="r">${t} ${p.name} sinh hạ hài nhi rồi qua đời.</span> `}
+ if(roll(B.hardDie)){if(me){die("Khó sinh, băng huyết mà chết");return ""}p.alive=false;dieMk(p,"birth");if(p.queen)p.queen=false;return `<span class="r">${p.name} khó sinh, băng huyết mà chết.</span> `}
  birthRisk=()=>0;try{res=b0.apply(this,arguments)}finally{birthRisk=br0}ap(p,{suc:-B.hardSuc});if(roll(B.barrenP))p.barren=1;
  return res+(me?`<span class="r">Ngươi khó sinh, vượt cạn suốt hai ngày mới qua khỏi.</span> Sức -${B.hardSuc}. ${p.barren?"Thái y nói từ nay khó lòng có thai lại. ":""}`:`${p.name} khó sinh nhưng qua khỏi. `)}})();
 /* a woman the Thái y says can never conceive again */
@@ -189,7 +214,7 @@ function mortFate(o0,h,t,fate,alive){if(!M.on||!S||S.dead)return o0.call(this,h,
  if(h!=="Thái phi")return o0.call(this,h,t,fate,alive);
  const sons=mySons(),daus=myDaus(),F=M.fate;const pre=String(t).match(why?/^.*?băng hà, thọ \d+ tuổi\.(?: [^.]*\.){0,2}/:/^.*?băng hà, thọ \d+ tuổi\.(?: [^.]*\.)?/);const P=pre?pre[0]+" ":"";
  let Q=P;if(!sons.length&&!daus.length&&S.sung>=F.tuanSung&&roll(F.tuanP)){
-  const save=S.duc>=F.tuanDuc?"Ngươi xưa nay nhân đức, triều thần dâng sớ can":(!S.thDead&&S.th>=F.tuanTh)?"Thái hậu đứng ra xin cho ngươi":"";
+  const save=S.duc>=F.tuanDuc?"Ngươi xưa nay nhân đức, triều thần dâng sớ can":(!S.thDead&&S.th>=F.tuanTh)?"Thái hậu đứng ra xin cho ngươi":(typeof ttwSpare==="function"&&ttwSpare())?"Ngươi đã sớm lo liệu, người trong triều đứng ra nói giúp":"";/* TUANTANG-WARN: the roads (jttw) */
   if(!save)return o0.call(this,"Tuẫn táng",P+"Di chiếu muốn người được sủng ái theo hầu nơi Hoàng lăng. Ngươi uống chén rượu tiễn biệt, theo tiên đế về chốn suối vàng.","Tuẫn táng theo tiên đế",false);
   Q=P+`Di chiếu muốn người được sủng ái theo hầu nơi Hoàng lăng. ${save}, ngươi được miễn. `;t=P?String(t).replace(P,Q):Q+t}
  if(sons.length)return o0.call(this,"Thái phi",Q+`${sons[0].name} được phong vương, đón mẹ về vương phủ phụng dưỡng. Ngươi thành Thái phi, an hưởng tuổi già bên con cháu.`,"Thái phi theo con ra phủ",true);

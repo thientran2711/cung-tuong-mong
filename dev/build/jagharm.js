@@ -42,7 +42,7 @@ function haName(t){return t===S?"ngươi":t&&t.name||""}
 function haDoor(k){try{return typeof DOOR==="object"&&DOOR&&typeof DOOR.ofKey==="function"?DOOR.ofKey(k):null}catch(e){return null}}
 function haVerb(k,t){const V=(typeof J78VERB==="object"&&J78VERB[k])||((ACT[k]&&ACT[k].n||k).toLowerCase()+" {t}");return V.replace("{t}",haName(t))}
 /* the player's cheaper ways of the same act (jecon / jlost: by her own trusted maid or a favour owed, no silver): open where the base act is open */
-const HA_VAR={spyk:"spy",bribel:"bribe",blockf:"block",laydol:"laydo"};
+const HA_VAR={spyk:"spy",bribel:"bribe",blockf:"block",laydol:"laydo"};/* tyrobl stays internal: «Giật y phục» (tyrob) already picks the Bạc or the maid road (RV-163F, law 2) */
 function haGain(k){const G=haB().g;return G[k]||G[HA_VAR[k]]||G._}
 function haPlace(k,v,t,kh,prep){let w=prep?(HA_PREP[k]||"own"):(HA_AT[k]||HA_AT._);
  if(w==="own")return palaceOf(v);if(w==="tpal")return t===S?"home":palaceOf(t);if(w==="tgt"){const p=agAt(t,kh);return k==="pushp"&&p!=="vuon"?null:p}
@@ -99,11 +99,7 @@ function haOpts0(v,N,need){const O=[];if(!haOn()||v===S||v.coop||v.confined)retu
      if(u>0)O.push({k:"harm:taint",ak:"taint",t,u,tag:"scheme",act:"lén tẩm đồ trong cung",at:(kh,vv)=>palaceOf(vv||v)})}}
    if(typeof pgHeld==="function"&&pgHeld(v).length&&!(v.inv||[]).some(e=>typeof pgFood==="function"&&pgFood(e))){const u=agU(v,N2,100,{g:{spite:H.prep.cook}},{},"scheme");
     if(u>0)O.push({k:"harm:cook",ak:"cook",t,u,tag:"scheme",act:"tự tay nấu một món",at:(kh,vv)=>palaceOf(vv||v)})}}}
- /* Trả chứng cứ lấy lòng (j78 tieuhuy): she hands back what she holds on someone she fears, to buy peace (need safe / ally) */
- if((!need||need==="safe"||need==="ally")&&ACT.tieuhuy){const E=haTargets(v).filter(x=>{try{return evG(v,x)>=1&&ACT.tieuhuy.ok(v,x)}catch(e){return false}});
-  const x=E.length?mindPickBy(E,y=>BAL.mind.pick.ag.base+danger(y,v),v):null;
-  if(x&&motiveOK(v,x,"tieuhuy").ok){const gn=haGain("tieuhuy");const N3=Object.assign({},N);N3.safe=Math.max(N.safe||0,cl(danger(x,v)/100,0,1)*road.safe);
-   const u=agU(v,N3,100,{g:gn.g,l:gn.l||{}},{},"help");if(u>0&&(!need||gn.g[need]!=null))O.push({k:"harm:tieuhuy",ak:"tieuhuy",t:x,u,tag:"help",act:haVerb("tieuhuy",x),at:(kh,vv,tt)=>haPlace("tieuhuy",vv||v,tt||x,kh,false)})}}
+ /* split-merge B2: «Trả chứng cứ lấy lòng» (tieuhuy) folded away for her AND NPCs (law 1); Uy hiếp / Bán cho phe khác stay */
  return O}
 /* ---------- the deed lands: the player's own act function ---------- */
 function haLand(p,seen){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);const v=RV(p.vid);
@@ -160,7 +156,7 @@ function haHapFire(h,k){const x=h.x;const p=haPend(x);if(!p)return false;const v
   if(d){agLand(p,true);pushDil(d,AD_HAP_T.quarrel);return true}agScene(p,v);return true}/* the quarrel card is resting (seen lately): the witness card of the same deed */
  if(h.id==="gossip"){const r=agLand(p,true);let f="";try{f=typeof intelLearn==="function"?intelLearn(v,1,{by:"ngươi",how:"Nghe lỏm"}):""}catch(e){}if(!f){try{f=overhear(k)}catch(e){}}
   pushModal({t:AD_HAP_T.gossip,who:pv(v),h:`<p>Đi ngang hành lang, ngươi nghe nàng ta to nhỏ với người bên cạnh.</p><p>${f||r||"Chỉ là chuyện vặt, không có gì đáng nhớ."}</p>`});return true}
- if(h.id==="favour"&&x.q){try{if(q72X(x.q)&&q72CanOffer()){q72().a.push(x.q);const ok=q72Offer(x.q,"meet");if(!ok){const q=q72();q.a.splice(q.a.indexOf(x.q),1)}else{agLand(p,true);return true}}}catch(e){console.error(e)}return false}
+ if(h.id==="favour"&&x.q){try{if(q72X(x.q)&&q72CanOffer()){const ok=q72Offer(x.q,"meet");/* sideq-trim: no push into q72().a before her answer (see jact favour) */if(ok){agLand(p,true);return true}}}catch(e){console.error(e)}return false}
  /* any other witnessable deed: the witness card of that real deed (jagent agScene / haScene) */
  agScene(p,v);return true}
 for(const id of ["quarrel","gossip","favour","deed"])AD_HAP_FIRE[id]=(function(id0){const f0=AD_HAP_FIRE[id0];return(h,k)=>{if(h&&h.x&&h.x.pid)return haHapFire(h,k);return f0?f0(h,k):false}})(id);

@@ -4,13 +4,18 @@
 (BAL.stp.ceil[rank], raised by BAL.stp.floor[stat] when the branch has it). A gate above the ceiling of a rank = that gate can
 never open by rises at that rank (a working rule silently closed). usage:
   node /path/baldump.js index.html bal.json   (BAL + RANKS of the built page; see report)
-  python3 dev/measure/statpace-gates.py bal.json [--preset A|B] [--nofloor] [--list]"""
+  python3 dev/measure/statpace-gates.py bal.json [--preset A|B] [--nofloor] [--nobar] [--list]"""
 import re,glob,sys,json,os
 BJ=json.load(open(sys.argv[1]));BAL=BJ['BAL'];ROOT=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','build')
 pre=sys.argv[sys.argv.index('--preset')+1] if '--preset' in sys.argv else BAL.get('stpPick','A')
 ceil=BAL['stpPre'][pre]['ceil'] if 'stpPre' in BAL else BAL['stp']['ceil']
 floor={} if '--nofloor' in sys.argv else (BAL['stp'].get('floor') or {})
-def ce(k,r):return max(ceil[r],floor.get(k,0))
+BAR={} if '--nobar' in sys.argv else (BAL['stp'].get('bar') or {});RK=BJ.get('RANKS') or []
+# PACE-SPEED (owner OD 26/11 ~19:10Z (A)): a bar-tied stat (BAL.stp.bar) stops AT the next rank's bar + margin (jstatpace spCeil/spTop), no floor
+def ce(k,r):
+  b=BAR.get(k)
+  if b and RK:return b['top'] if r>=len(RK)-1 else min(b['top'],RK[min(len(RK)-1,r+1)][b['f']]+b['m']+b.get('x',0))
+  return max(ceil[r],floor.get(k,0))
 G=re.compile(r'(?<![\w$])(?:\(\s*)?(?:S|p|x|v|c|o|w|me|F|q|r|t|y|it|who|her)\.(danh|duc|sung|th|hh|rel|oan)(?:\s*\|\|\s*0\s*\))?\s*(>=|>)\s*\(?\s*(BAL(?:\.[A-Za-z_$][\w$]*|\[\d+\])+|\d+)')
 def res(e):
   if e.isdigit():return int(e)
