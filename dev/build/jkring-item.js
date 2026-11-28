@@ -169,8 +169,13 @@ async function kriAct(R,i){const a=R.acts&&R.acts[i];if(!a||a.off||R.busy||R.st!
  kriPane(R,it,r);try{render()}catch(e){}}
 /* the act's real changes as kit result rows: her stats (j1 NAMES), the person's thiện cảm (aff), items in / out of Tư trang */
 function kriSnap(v){const s={};try{for(const k in NAMES)if(typeof S[k]==="number")s[k]=S[k];if(v){s.__aff=typeof aff==="function"?aff(v,S):null}s.__inv=(S.inv||[]).slice()}catch(e){}return s}
-function kriDiffRows(a,v,who){const b=kriSnap(v),D=[],M=[];try{for(const k in a){if(k.startsWith("__"))continue;const d=Math.round((b[k]||0)-(a[k]||0));if(!d)continue;(d>0?D:M).push(`${NAMES[k]||k} ${d>0?"+":""}${d}`)}
- if(a.__aff!=null&&b.__aff!=null){const d=Math.round(b.__aff-a.__aff);if(d)(d>0?D:M).push(`${kriE(who||"Người nhận")} → ta: thiện cảm ${d>0?"+":""}${d}`)}
+/* ONE ROW PER PERSON (MAIN 186 order 28/11 ~06:35Z; iPad ring gift to the queen read «Hoàng hậu → ta: thiện cảm +6 · Lữ Mạn Nhu → ta: thiện cảm +6»):
+   her S.hh («Hoàng hậu → ta») / S.th («Thái hậu → ta») IS the receiver's thiện cảm when the receiver is the queen / Thái hậu — one change, ONE row, named by
+   the receiver (who). Same rule as the act result card (j63 kaResultRows: the queen's person row skips "hh"). */
+function kriSame(v){const k=new Set();try{if(!v)return k;if(typeof queenP==="function"&&queenP()===v)k.add("hh");if(typeof emoByKey==="function"&&emoByKey("th")===v)k.add("th")}catch(e){}return k}
+function kriDiffRows(a,v,who){const b=kriSnap(v),D=[],M=[];try{const one=a.__aff!=null&&b.__aff!=null?kriSame(v):new Set();let dSame=0;
+ for(const k in a){if(k.startsWith("__"))continue;const d=Math.round((b[k]||0)-(a[k]||0));if(!d)continue;if(one.has(k)){dSame=dSame||d;continue}(d>0?D:M).push(`${NAMES[k]||k} ${d>0?"+":""}${d}`)}
+ if(a.__aff!=null&&b.__aff!=null){const d=Math.round(b.__aff-a.__aff)||dSame;if(d)(d>0?D:M).push(`${kriE(who||"Người nhận")} → ta: thiện cảm ${d>0?"+":""}${d}`)}
  const nm=e=>{try{return typeof giftName==="function"?giftName(e):(IT[e.k]||{}).n||e.k}catch(x){return e.k}};
  a.__inv.filter(e=>!b.__inv.includes(e)).forEach(e=>M.push(kriE(nm(e))));b.__inv.filter(e=>!a.__inv.includes(e)).forEach(e=>D.push(kriE(nm(e))+" vào Tư trang"))}catch(e){}
  return[{k:"duoc",label:"Được",items:D},{k:"mat",label:"Mất",items:M}]}
