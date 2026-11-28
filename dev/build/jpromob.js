@@ -189,8 +189,10 @@ function pcFav(p){return{E:pcN(p.sung,"sung"),H:pcN(p===S?S.hh:p.hh,"hh"),T:pcN(
 function pcStand(h){try{if(h.pal==null)return 0;return cl(bcDanh(h.pal)/3+bcNear(h.pal)-1,-1,1)}catch(e){return 0}}
 function pcKind(h){const B=BAL.promoR.pc;const t=pbTemper(h,B.kind);return t?B.kind[t]/2:0}
 function pcAlign(h){return cl((h.th||0)/BAL.promoR.pc.span.th,-1,1)}
-function pcParts(p,h){const B=BAL.promoR.pc,f=pcFav(p);return{E:B.wE*f.E*pcStand(h),H:B.wH*f.H*pcKind(h),T:B.wT*f.T*pcAlign(h),f}}
-function pcScore(p,h,n){const x=pcParts(p,h);return x.E+x.H+x.T-BAL.promoR.pc.load*(n||0)}
+/* D-ROW8 (thiện cảm between consorts): the host and the girl, both ways — liking up, oán down; a palace head is no host of herself */
+function pcMut(p,h){try{if(!h||h===p||typeof aff!=="function")return 0;const B=BAL.promoR.pc;return cl(((aff(h,p)+aff(p,h))-(oan(h,p)+oan(p,h)))/2/B.span.c,-1,1)}catch(e){return 0}}
+function pcParts(p,h){const B=BAL.promoR.pc,f=pcFav(p);return{E:B.wE*f.E*pcStand(h),H:B.wH*f.H*pcKind(h),T:B.wT*f.T*pcAlign(h),C:(B.wC||0)*pcMut(p,h),f}}
+function pcScore(p,h,n){const x=pcParts(p,h);return x.E+x.H+x.T+x.C-BAL.promoR.pc.load*(n||0)}
 /* the host for p among the hosts with a free room c (cnt = co-residents): highest score; ties → the existing order (fewest co-residents first) */
 function pcHostPick(p,c,cnt){try{if(!BAL.promoR||!c||!c.length)return null;let best=null,bs=-1e9;
  const L=c.slice().sort((a,b)=>cnt(a)-cnt(b));for(const h of L){const s=pcScore(p,h,cnt(h));if(s>bs+1e-9){bs=s;best=h}}return best}catch(e){console.error("pcHostPick",e);return null}}
@@ -202,7 +204,8 @@ function pcWhy(p){const me=p===S,B=BAL.promoR.pc,nm=me?"ngươi":p.name;const hd
   if(Math.abs(f.E)>=B.why&&Math.abs(pcStand(h))>=B.why/2&&Math.sign(x.E)>0)/* rv: only when the favour really moved her that way (as the Hoàng hậu / Thái hậu lines) — never «để mắt tới … ở cung xa» */{const sg=pbKnown(p)?` (Sủng ${Math.round(p.sung||0)})`:"";/* promo-build-2 nit: an unknown girl's Sủng never shows (greeting / knowledge rule) */
    L.push(f.E>0?`Hoàng thượng để mắt tới ${nm}${sg}: ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}, danh giá`:`xa ${dh}`}`:`Hoàng thượng chưa để mắt tới ${nm}${sg}: ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}`:`xa ${dh}`}`)}
   if(!own&&Math.abs(f.H)>=B.why&&pcKind(h)!==0&&Math.sign(x.H)>0)L.push(f.H>0?`được Hoàng hậu thương: xếp ở với ${hn}, người hiền hòa`:`Hoàng hậu không ưa ${nm}: xếp ở với ${hn}, người khó tính`);
-  if(!own&&Math.abs(f.T)>=B.why&&Math.abs(pcAlign(h))>=B.why&&Math.sign(x.T)>0)L.push(f.T>0?`Thái hậu thương ${nm}: chủ vị ${hn} là người được Thái hậu tin`:`Thái hậu không ưa ${nm}: chủ vị ${hn} cũng không được lòng Thái hậu`)}
+  if(!own&&Math.abs(f.T)>=B.why&&Math.abs(pcAlign(h))>=B.why&&Math.sign(x.T)>0)L.push(f.T>0?`Thái hậu thương ${nm}: chủ vị ${hn} là người được Thái hậu tin`:`Thái hậu không ưa ${nm}: chủ vị ${hn} cũng không được lòng Thái hậu`)
+  if(!own&&B.wC&&pcMut(p,h)>=B.why&&x.C>0)L.push(`${hn} quý ${nm}, xin cho ${me?"ngươi":"nàng"} về ở chung`)/* D-ROW8: only when the liking really pulled her there */}
  if(!L.length)L.push(h&&h!==p?`Nội vụ phủ xếp ${nm} vào chỗ còn trống, ở với ${hn}`:`Nội vụ phủ xếp ${nm} vào chỗ còn trống`);return L}
 function pcWhere(p){try{return houseName(p)}catch(e){return palName("home")}}
 /* the panel (kit T1 panel via the Q modal + kitRows; no own part) */
@@ -222,7 +225,7 @@ function pcMark(){const P=pbSt();P.hr=rkOf(S);P.hk=String(houseOf(S))+"|"+(S.pal
 (function(){if(typeof palFix!=="function")return;const f0=palFix;palFix=function(){const r=f0.apply(this,arguments);try{if(S&&!S.__pcBusy&&!S.dead&&!S.out&&BAL.promoR&&!(typeof isSrv==="function"&&isSrv())){const P=pbSt();
  const hk=String(houseOf(S))+"|"+(S.pal==null?"":S.pal)+"|"+(S.resHall||"");if(P.hr==null){pcMark();return r}
  if(rkOf(S)>P.hr&&hk!==P.hk&&!S.palCer&&rkOf(S)<7){Q.push(pcPanel([{p:S}],{head:`Thánh chỉ tấn phong ${RANKS[rkOf(S)].n} kèm lệnh dời chỗ ở.`}))}pcMark()}}catch(e){console.error("pc later",e)}return r};window.palFix=palFix})();
-window.pbKyAt=pbKyAt;window.pbNextKy=pbNextKy;window.pbGrant=pbGrant;window.pbTry=pbTry;window.pbMonth=pbMonth;window.pbKyRow=pbKyRow;window.pbA=pbA;window.pcHostPick=pcHostPick;window.pcWhy=pcWhy;window.pbSungCut=pbSungCut;window.pbThCut=pbThCut;window.pbHhCut=pbHhCut;window.pbCdKy=pbCdKy;window.pbHhOf=pbHhOf;window.pbKyUpdate=pbKyUpdate;
+window.pbKyAt=pbKyAt;window.pbNextKy=pbNextKy;window.pbGrant=pbGrant;window.pbTry=pbTry;window.pbMonth=pbMonth;window.pbKyRow=pbKyRow;window.pbA=pbA;window.pcHostPick=pcHostPick;window.pcMut=pcMut;window.pcWhy=pcWhy;window.pbSungCut=pbSungCut;window.pbThCut=pbThCut;window.pbHhCut=pbHhCut;window.pbCdKy=pbCdKy;window.pbHhOf=pbHhOf;window.pbKyUpdate=pbKyUpdate;
 
 /* ================= promo-build-2 (Foreman D; brief D-promo-build-2; OD 24/11 ~05:55Z, ~06:30Z, ~07:00Z real, ~08:30Z; design rows 8–10) =================
    (1) LAW 1: when SHE is the Hoàng hậu she nominates («Hoàng hậu đề cử», act card in Hành sự → kit option sheet). The candidates are the ones the

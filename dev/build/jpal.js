@@ -82,7 +82,7 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
   if(c){p.resHead=key(c);hallFix(c)}else if(r<3){const f=free();if(f>=0){p.pal=f;p.palLone=1;occ[f]=key(p)}}}
  for(const v of rivals){if(!v.palLone||v.coop||!palLive(v)||rkOf(v)>=3)continue;const c=pickHost(v);if(c){delete occ[v.pal];v.pal=null;v.palLone=0;v.resHead=key(c);hallFix(c)}}
  /* spread: a chủ vị with nobody while another is full → the newest NPC of the full house moves over (log line) */
- for(let g=0;g<12;g++){const E=hs.filter(x=>cnt(x)===0),F=hs.filter(x=>cnt(x)>=cap);if(!E.length||!F.length)break;const f=F[0],e=pick(E);
+ for(let g=0;g<12;g++){const E=hs.filter(x=>cnt(x)===0),F=hs.filter(x=>cnt(x)>=cap);if(!E.length||!F.length)break;const f=F[0];const y0=mates(f).filter(x=>x!==S&&!x.coop).slice(-1)[0];const e=(y0&&typeof pcHostPick==="function"&&pcHostPick(y0,E,cnt))||pick(E);/* D-ROW8: the empty house she moves to follows the same thiện cảm rule */
   const y=mates(f).filter(x=>x!==S&&!x.coop).pop();if(!y)break;y.resHead=key(e);y.resHall=null;hallFix(e);hallFix(f);try{log(`${RANKS[y.rank].n} ${y.name} dời sang ${houseName(y)}.`)}catch(x){}}
  for(const h of hs)hallFix(h);
  if(!sv&&palLive(S)&&rkOf(S)<3&&S.resHead!==S0){try{if(S.resHead)log(`Ngươi được xếp ở ${palName("home")}.`);else if(S0)log(`Ngươi dời về ${HOMEN}.`)}catch(x){}}

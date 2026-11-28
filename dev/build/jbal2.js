@@ -493,7 +493,7 @@ Object.assign(BAL,{promoR:{ky:{p:{newyear:85,doanngo:20,vantho:75,thanhtho:55,do
   hh:{cut:{"Ân cần":40,"Khiêm nhường":45,"Điềm tĩnh":50,"Nhiều chuyện":50,"Nóng nảy":55,"Kín đáo":60,"Lạnh lùng":65,"Tham vọng":62,"Xảo quyệt":66,"Kiêu ngạo":70},def:55,maxTo:4,life:1},
   birth:1,cost:{sungGhen:10,sungOan:6,thSung:4,hhOwe:1,hhOan:4,deathHhOan:10,meAff:5,mePassOan:4},meMax:4,meK:1,death:{life:1},tp:{on:1,okK:["ill","birth","age","murder","tuan","other"]/* death kinds (j8 dieMk) that may be examined for truy phong; crime / disgrace / left / unmarked never (fix r1) */}},
  dl:{on:1,minGap:24,bacM:1,ghen:6,oan:3,thTho:[50,60,70,80],empTho:[30,40,50,60],duc:[0,0,10,15,20,30,40,50]},
- pc:{wE:1,wH:1,wT:1,load:.6,why:.25,mid:{sung:30,hh:0,th:0},span:{sung:40,hh:40,th:40},
+ pc:{wE:1,wH:1,wT:1,wC:.5/* D-ROW8: the host chủ vị and the girl's own liking for each other (aff − oán, both ways, jpromob pcMut) — under the royals' weights */,load:.6,why:.25,mid:{sung:30,hh:0,th:0},span:{sung:40,hh:40,th:40,c:40},
   kind:{"Ân cần":2,"Khiêm nhường":1,"Điềm tĩnh":1,"Rộng lượng":2,"Nhiều chuyện":0,"Kín đáo":0,"Lạnh lùng":-1,"Tham vọng":-1,"Xảo quyệt":-2,"Nóng nảy":-2,"Kiêu ngạo":-2}}}});
 /* BAL.il — ITEM LEDGER + ITEM CONSERVATION (owner 16/11 13:30Z (3) + 13:40Z ONE LEDGER; jil.js reads only these):
    no item ever vanishes. Sold → the market ("mkt"): each week it may show up in her Nội vụ phủ tray (shopP), and at the latest by the ceiling
