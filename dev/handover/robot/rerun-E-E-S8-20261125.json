@@ -368,6 +368,56 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed3-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed3-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-speed4",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 1278943442,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "f65d019b"
+   },
+   "ending": "Hồng nhan bạc mệnh — Tuổi trời đã tận, trọng bệnh không qua khỏi (age 38 y21; mixed build, last part on LIVE ca4a1689)",
+   "age": 38,
+   "buoi": 3780,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed4-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-speed4-moments.md"
+  },
+  {
+   "life": "ES8-bd_tuyet-greedy4-h",
+   "note": "run by E-S3, counted once in E-S8",
+   "valid": "EXTRA",
+   "dev": "ipad",
+   "road": "bd_tuyet",
+   "seed": 3029570759,
+   "ending": "see E-S3 file rerun-E-E-S3-20261127-bd",
+   "age": null,
+   "buoi": null,
+   "origin": "bd",
+   "bot": "bold",
+   "review": "dev/handover/robot/review/ES8-bd_tuyet-greedy4-h-review.md",
+   "moments": ""
+  },
+  {
+   "life": "ES8-bd_tuyet-random5-h",
+   "note": "run by E-S3, counted once in E-S8",
+   "valid": "EXTRA",
+   "dev": "ipad",
+   "road": "bd_tuyet",
+   "seed": 902785299,
+   "ending": "Hồng nhan bạc mệnh — tuẫn táng (Tân Thái hậu) y12 age 30; mixed build",
+   "age": 30,
+   "buoi": 1667,
+   "origin": "bd",
+   "bot": "rand",
+   "review": "dev/handover/robot/review/ES8-bd_tuyet-random5-h-review.md",
+   "moments": "dev/handover/robot/review/ES8-bd_tuyet-random5-h-moments.md"
   }
  ],
  "parked": [
