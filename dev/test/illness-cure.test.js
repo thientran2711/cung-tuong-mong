@@ -16,17 +16,23 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
   ok(/Bắt mạch, chữa bệnh/.test(t)&&/· nhẹ/.test(t)&&/· vừa/.test(t)&&/· nặng/.test(t),`${name} chip opens the tier card nhẹ·vừa·nặng: ${t.slice(0,260)}`);
   ok(/Lao phổi · nặng\./.test(t)&&/không qua khỏi: khả năng/.test(t)&&/Sức còn đầy/.test(t),`${name} card shows the honest danger line in words`);
   ok(!/\d+ ?%/.test(t),`${name} no % on the card (law 7)`);
-  ok(/Tĩnh dưỡng · nhẹ|Tự bốc thuốc · nhẹ/.test(t)&&/Sang Thái y viện xin thuốc · vừa/.test(t)&&/(Truyền thái y|Cầu xin ngự y) · nặng/.test(t),`${name} every tier is a CURE road (no pulse-only road while ill)`);
+  ok(/Tĩnh dưỡng · nhẹ|Tự bốc thuốc · nhẹ/.test(t)&&/Sang Thái y viện xin thuốc · vừa/.test(t)&&/Truyền thái y · nặng/.test(t)&&/Cầu xin ngự y · nặng/.test(t),`${name} every tier is a CURE road (no pulse-only road while ill)`);
   await p.screenshot({path:`${OUT}/${name}-1-ill-card.png`});
   /* the flipped back of the nặng card: Tốn / Được (law 3) + an odds word (law 7) */
   const nk=p.locator('#modal button.ka',{hasText:'· nặng'}).first();const flipped=await nk.count();if(flipped)await nk.click();await p.waitForTimeout(1100);
   t=await card(p);const back=await p.evaluate(()=>!!S.ill);ok(flipped&&back&&/Tốn/i.test(t)&&/(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững)/.test(t),`${name} nặng card back (real tap = flip, not run) shows Tốn + odds word: ${t.slice(-300)}`);
   await p.screenshot({path:`${OUT}/${name}-2-nang-back.png`});
   await p.evaluate(()=>{Q.length=0;try{$("modal").hidden=true}catch(e){}render()});await p.waitForTimeout(400);
-  /* (2) the bạc road always has a matching road of the same tier: no bạc → Cầu xin ngự y; no Sủng → Truyền thái y */
-  const nang=await p.evaluate(()=>{const r=(DOOR.D||[]).find(x=>x.k==="hs-thaiy");const run=()=>{IC.deck();const L=[];deck.forEach((a,i)=>{if(a&&r.re.test(a.n)){const off=!!(a.lock||!canPay(a));L.push({id:"d:"+a.n,n:a.n,a,x:a.x,off})}});const R=ONE.tierRows(r,L,"me");const x=R.find(y=>y.t==="nặng");return x&&x.m&&!x.off?x.m.n:"—"};
-   const b0=S.bac,s0=S.sung;S.bac=0;S.sung=30;deal();const a=run();S.bac=200;S.sung=0;deal();const c=run();S.bac=b0;S.sung=s0;deal();return[a,c]});
-  ok(nang[0]==="Cầu xin ngự y"&&nang[1]==="Truyền thái y",`${name} nặng tier: no bạc → ${nang[0]}; no Sủng → ${nang[1]}`);
+  /* (2) law 2: the bạc road always has its matching road in the SAME tier, both shown side by side (each its own Tốn / odds); the one she cannot pay is greyed with the reason */
+  const nang=await p.evaluate(()=>{const r=(DOOR.D||[]).find(x=>x.k==="hs-thaiy");const run=()=>{IC.deck();const L=[];deck.forEach((a,i)=>{if(a&&r.re.test(a.n)){const off=!!(a.lock||!canPay(a));L.push({id:"d:"+a.n,n:a.n,a,x:DOOR.lineOf(a),off,why:off?(a.lock&&a.t)||"không đủ bạc":""})}});
+    return ONE.tierRows(r,L,"me").filter(y=>y.t==="nặng").map(y=>(y.m?y.m.n:"—")+(y.off?" [off: "+y.off.why+"]":"")+(/Tốn|tốn/.test(y.x)?" +ton":""))};
+   const b0=S.bac,s0=S.sung;S.bac=200;S.sung=30;deal();const both=run();S.bac=0;S.sung=30;deal();const poor=run();S.bac=200;S.sung=0;deal();const nos=run();S.bac=b0;S.sung=s0;deal();return{both,poor,nos}});
+  const has=(L,n,off)=>L.some(x=>x.startsWith(n)&&(/\[off/.test(x)===off)&&/\+ton/.test(x));
+  ok(nang.both.length===2&&has(nang.both,"Truyền thái y",false)&&has(nang.both,"Cầu xin ngự y",false),`${name} nặng tier shows BOTH roads with Tốn: ${JSON.stringify(nang.both)}`);
+  ok(has(nang.poor,"Truyền thái y",true)&&has(nang.poor,"Cầu xin ngự y",false),`${name} no bạc: Truyền thái y greyed, Cầu xin open: ${JSON.stringify(nang.poor)}`);
+  ok(has(nang.nos,"Cầu xin ngự y",true)&&has(nang.nos,"Truyền thái y",false),`${name} no Sủng: Cầu xin greyed, Truyền open: ${JSON.stringify(nang.nos)}`);
+  const cardRows=await p.evaluate(()=>{S.bac=200;S.sung=30;Q.length=0;try{$("modal").hidden=true}catch(e){}illOpen();const o=(Q[0]&&Q[0].opts||[]).map(x=>x.n);Q.length=0;try{$("modal").hidden=true}catch(e){}return o});
+  ok(cardRows.includes("Truyền thái y · nặng")&&cardRows.includes("Cầu xin ngự y · nặng"),`${name} the illness card lists both nặng roads: ${cardRows}`);
   /* (3) not ill: the door is the pulse door again (regression) */
   const well=await p.evaluate(()=>{S.ill=null;deal();const r=(DOOR.D||[]).find(x=>x.k==="hs-thaiy");return deck.filter(a=>a&&r.re.test(a.n)).map(a=>a.n+":"+ONE.tierOf(r,a))});
   ok(well.includes("Mời thái y bắt mạch:nặng")&&well.includes("Sang Thái y viện xin bắt mạch:vừa"),`${name} well: pulse roads keep their tiers ${well}`);

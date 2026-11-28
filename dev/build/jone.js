@@ -41,7 +41,7 @@ const M={
  "hs-nghi":{mode:"tier",t:[["nhẹ",/^Nghỉ ngơi một lát$/],["vừa",/^Nghỉ ngơi dưỡng sức$/]]},
  /* ILLNESS-CURE (MAIN 182): while she is ill the door is ONE matter, the cure (law 2): nhẹ rest / own medicine · vừa thuốc from Thái y viện · nặng thái y (bạc) or
     ngự y (cầu xin, no bạc); the pulse-reading roads (no cure) stay off the tiers then — they hid the cure (the favour pick took «Mời thái y bắt mạch», read as sure) */
- "hs-thaiy":{mode:"tier",get t(){let ill=false;try{ill=!!(S&&typeof illOf==="function"&&illOf(S))}catch(e){}
+ "hs-thaiy":{mode:"tier",get both(){let ill=false;try{ill=!!(S&&typeof illOf==="function"&&illOf(S))}catch(e){}return ill?["nặng"]:null},get t(){let ill=false;try{ill=!!(S&&typeof illOf==="function"&&illOf(S))}catch(e){}
   return ill?[["nhẹ",/^(Tĩnh dưỡng|Tự bốc thuốc)$/],["vừa",/^Sang Thái y viện xin thuốc$/],["nặng",/^(Truyền thái y|Cầu xin ngự y)$/]]
    :[["nhẹ",/^(Tĩnh dưỡng|Tự bốc thuốc)$/],["vừa",/^Sang Thái y viện xin bắt mạch$/],["nặng",/^(Mời thái y bắt mạch|Truyền thái y)$/]]}},
  "hs-soksp":{mode:"tier",t:[["nhẹ",/^Xem lén sổ nguyệt sự$/],["vừa",/^Xem sổ nguyệt sự$/]]},
@@ -131,7 +131,11 @@ ONE.runM=runM;
 function goOne(pp,r,tier){const {p,L}=members(pp,r);if(!p)return false;const T=tier?L.filter(m=>tierOf(r,m)===tier):L;const m=pick(r,T,seedOf(r,who(p),tier));if(!m)return false;runM(r,m,T,tier);return true}
 ONE.go=goOne;
 const wordOf=o=>o>=100?"":(typeof dfWord==="function"?dfWord(o):"");
-function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>tierOf(r,m)===t);if(!T.length)continue;const m=pick(r,T,seedOf(r,wh,t));
+function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>tierOf(r,m)===t);if(!T.length)continue;
+  /* law 2 (owner 27/11 ~00:46Z «a bạc road always has another road of matching tier»): a tier listed in the row's `both` shows EVERY way of that tier side by side
+     (each its own Tốn / odds; greyed with the reason when she cannot take it) — never one picked by what she can pay (ILLNESS-CURE: nặng = Truyền thái y + Cầu xin ngự y) */
+  const bo=(M[r.k]||{}).both;if(bo&&bo.includes(t)&&T.length>1&&!(M[r.k]||{}).harm){for(const m of T)rows.push({t,m,T:[m],n:`${txt(m.n)} · ${t}`,x:m.x||"",off:m.off?{why:m.why||"chưa làm được"}:null});continue}
+  const m=pick(r,T,seedOf(r,wh,t));
   const free=T.filter(x=>!x.off);const harm=(M[r.k]||{}).harm;
   let x="",n=`${r.n} · ${t}`;if(m){const ln=String(m.x||"");/* the member's own kit line (optLine HTML: odds · tốn · được · hỏng), unchanged */
    if(harm&&free.length>1)x=`${ln} · ra một trong: ${free.map(y=>txt(y.n)).join(", ")}`;else{x=ln;n=`${txt(m.n)} · ${t}`}}
