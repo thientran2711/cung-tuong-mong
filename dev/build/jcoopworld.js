@@ -974,7 +974,12 @@ function nOtherGone(){const s=COOP.state.seats;return !!(s&&typeof s==="object"&
    room's: the merged world's date (CW.base.W.S). Never while her own night / week end is running or out (her date has moved on by rule). */
 const CLKK=["year","month","tuan","turn"];
 function dateFix(why){try{if(!CW.on||!S||S.dead||CW.inLife||CW.inTurn||CW.pend||CW.sent===wk()||eW()||!CW.base||!CW.base.W||!CW.base.W.S||selxHold())return false;
- const B=CW.base.W.S;if(CLKK.some(k=>typeof B[k]!=="number"))return false;const was=(S.turn||0)*3+(S.tuan||0);let ch=false;
+ const B0=CW.base.W.S;if(CLKK.some(k=>typeof B0[k]!=="number"))return false;const was=(S.turn||0)*3+(S.tuan||0);let ch=false;
+ /* r4 (coop-hang-e K2, law 11): ONE SHARED CLOCK (OD L1641) — a closed selection cohort of this room week (jselxday selxRoomIn, S.selxRm.clk =
+    the clock at the draw + the days) moved the room clock past the merged week's date; that clock is the room's until the merge carries it.
+    Before: dateFix put the host (who ran the days) back to the merged date while the guest's selxClkSync kept the cohort clock → two calendars,
+    both nights waiting on each other (the room-e shape). */
+ let B=B0;try{const R=S.selxRm,n=BAL.selx.tuan;if(R&&R.in&&Array.isArray(R.clk)){const ck=(R.clk[0]||0)*n+(R.clk[1]||0);if(ck>(B0.turn||0)*n+(B0.tuan||0))B=Object.assign({},B0,{year:S.year,month:S.month,turn:R.clk[0]||0,tuan:R.clk[1]||0})}}catch(e){}
  for(const k of CLKK)if(S[k]!==B[k]){S[k]=B[k];ch=true}if(ch)T("date "+why+" "+was+">"+((S.turn||0)*3+(S.tuan||0)));return ch}catch(e){console.error(e);return false}}
 CW.dateFix=dateFix;
 function nightReady(){dateFix("night");if(CW.nrdy===wk()){nCheck();return}CW.nrdy=wk();T("nready "+wk());if(!host())nsay("rd");nCheck();lockNext();try{render()}catch(e){}}

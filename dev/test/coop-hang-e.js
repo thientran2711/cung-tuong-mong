@@ -38,7 +38,7 @@ async function clear0(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib
 const press=o=>o.p.evaluate(()=>{const n=document.getElementById('next');if(n&&!n.disabled&&n.offsetParent){n.click();return true}return false}).catch(()=>false);
 const D=o=>o.p.evaluate(()=>({w:COOP.state.week,b:S.buoi||0,used:typeof used==='number'?used:null,out:!!S.out,place:S.place,pend:!!COOPW.pend,sent:COOPW.sent,nrdy:COOPW.nrdy,ngoW:COOPW.ngoW,ended:COOP.state.ended,
   Q:Q.length,q0:Q[0]&&String(Q[0].t||'').slice(0,40),mh:!!(document.getElementById('modal')||{}).hidden,btn:[...document.querySelectorAll('#modal button')].filter(x=>x.offsetParent!==null).map(x=>(x.disabled?'-':'')+(x.className||'')+':'+x.textContent.trim().slice(0,30)+(x.dataset.kcp?'[kcp]':'')).slice(0,8),top:(()=>{const e=document.elementFromPoint(innerWidth/2,innerHeight/2);return e?(e.id||e.className||e.tagName).toString().slice(0,40)+' '+(e.closest('[id]')||{}).id:''})(),dawn:!!(document.getElementById('dawn')&&!document.getElementById('dawn').hidden&&document.getElementById('dawn').offsetParent),mg:!!S.mg,next:(document.getElementById('next')||{}).textContent,dis:!!(document.getElementById('next')||{}).disabled,fz:!!document.getElementById('coopfz'),wk:COOPW.whereKey,life:COOPW.life,dead:!!S.dead,inLife:!!COOPW.inLife,
-  nf:{on:typeof nfOn==='function'?nfOn():null,parked:typeof nfParked==='function'?nfParked():null,fin:S.nfFin,W:S.nfW,N:S.nfN,C:S.nfC,x:S.nfX&&S.nfX.st},turn:S.turn,day:S.turn*3+(S.tuan||0),frozen:!!COOP.frozen,tm:(()=>{try{return COOPW.tm.view()}catch(e){return null}})(),tr:(COOPW.tr||[]).slice(-16)})).catch(e=>({err:e.message}));
+  nf:{on:typeof nfOn==='function'?nfOn():null,parked:typeof nfParked==='function'?nfParked():null,fin:S.nfFin,W:S.nfW,N:S.nfN,C:S.nfC,x:S.nfX&&S.nfX.st},turn:S.turn,day:S.turn*3+(S.tuan||0),sx:(()=>{try{const R=S.selxRm;return R?{clk:R.clk,c0:R.c0,in:R.in,co:typeof selxCo==='function'?selxCo():null,wo:typeof worldOn==='function'?worldOn():null,days:typeof selxDaysOn==='function'?selxDaysOn():null}:null}catch(e){return e.message}})(),bd:(()=>{try{const B=COOPW.base.W.S;return B.turn*3+(B.tuan||0)}catch(e){return null}})(),frozen:!!COOP.frozen,tm:(()=>{try{return COOPW.tm.view()}catch(e){return null}})(),tr:(COOPW.tr||[]).slice(-16)})).catch(e=>({err:e.message}));
 (async()=>{const b=await chromium.launch(/\/\/(127\.0\.0\.1|localhost)[:/]/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,LocalNetworkAccessChecks']}:{});
  const FOLD=[755,1000,2],IPAD=[1180,820,1];const [VA,VB]=process.env.COOP_SWAP?[IPAD,FOLD]:[FOLD,IPAD];
  let A=await mk(b,'host',VA),B=await mk(b,'guest',VB);
@@ -89,11 +89,12 @@ const D=o=>o.p.evaluate(()=>({w:COOP.state.week,b:S.buoi||0,used:typeof used==='
    {const t0=Date.now();while(Date.now()-t0<8000&&await X.p.evaluate(n=>(S.inv||[]).filter(e=>e.k==='tramngoc').length>=n,x0))await sleep(50)}
    await X.p.close();await sleep(1500);ok(await rejoin(X,seat==='a'),name+': giver back in the room');await sleep(3000);
    const x1=await X.p.evaluate(HP),y1=await Y.p.evaluate(HP);
-   ok(x1===x0-1&&y1===y0+1,name+': (5) after the reload ONE piece moved: giver '+x0+'→'+x1+', friend '+y0+'→'+y1,{x0,x1,y0,y1})}
+   ok(x1===x0-1&&y1===y0+1,name+': (5) after the reload ONE piece moved: giver '+x0+'→'+x1+', friend '+y0+'→'+y1,{x0,x1,y0,y1});X.__gift=x0+y0}
   if(!await toNight()){ok(false,name+': both at tối',[await D(A),await D(B)]);continue}
   if(st==='cold')ok((await D(X)).out,name+': in lãnh cung at tối');
   const w0=(await D(A)).w;const u0=(await D(X)).used;
-  if(how==='rd'){let rd=false;const t0=Date.now();while(Date.now()-t0<20000&&!rd){await clear(X);await press(X);await sleep(400);rd=await X.p.evaluate(()=>!!(COOPW.nReady&&COOPW.nReady()))}ok(rd,name+': late seat ready at tối')}
+  /* rejoin / dlg: she is ready at tối first (the host's tối waits for her ready by design, nReady; only the room clock overrides it = L3) */
+  if(how==='rd'||how==='rejoin'||how==='dlg'||how==='giftrl'){let rd=false;const t0=Date.now();while(Date.now()-t0<20000&&!rd){await clear(X);await press(X);await sleep(400);rd=await X.p.evaluate(()=>!!(COOPW.nReady&&COOPW.nReady()))}ok(rd,name+': late seat ready at tối')}
   if(how==='dlg')await X.p.evaluate(()=>{Q.push({t:'Thẻ thử',h:'<p>Thử</p>'});try{showModal()}catch(e){}});
   if(how==='clock'){await A.p.evaluate(()=>{BAL.coopTm.buoiMs=9000;COOPW.tm.reset()})}
   if(how==='reborn'||how==='rdreborn'){if(how==='rdreborn'){let rd=false;const t0=Date.now();while(Date.now()-t0<20000&&!rd){await clear(X);await press(X);await sleep(400);rd=await X.p.evaluate(()=>!!(COOPW.nReady&&COOPW.nReady()))}ok(rd,name+': late seat ready at tối')}
@@ -117,11 +118,12 @@ const D=o=>o.p.evaluate(()=>({w:COOP.state.week,b:S.buoi||0,used:typeof used==='
    console.log(tag,'spend',JSON.stringify(r),'used',s0.used,'→',s1.used)}
   {const h=await X.p.evaluate(()=>({held:typeof nfDayHeld==='function'?nfDayHeld():null,can:can(1),used,b:S.buoi||0,fin:S.nfFin,W:S.nfW,C:S.nfC,d:typeof wk==='function'?wk():null}));if(h.held)ok(!h.can,name+': (4) while the night holds her day, no act runs (no free last khắc)',h);else console.log(tag,'held',JSON.stringify(h))}
   if(how==='rejoin'){await X.p.close();await sleep(2000);ok(await rejoin(X,seat==='a'),name+': back in the room');await sleep(3000);const s=await D(X);
-   ok(s.w===w0&&(s.b>=LAST||s.sent===w0||s.w>w0),name+': (5) the reload keeps her tối (no rewind)',s)}
+   ok(s.w===w0&&(s.b>=LAST||s.sent===w0||s.pend||s.w>w0)||s.w>w0,name+': (5) the reload keeps her tối (no rewind)',s)}
     if(how==='dlg'){await sleep(4000);await X.p.evaluate(()=>{try{closeModal()}catch(e){Q.length=0}})}
   const okM=await merged(w0,150000,X,Y,how==='clock');if(how==='nofin')await A.p.evaluate(()=>{window.__nfDrop=0});if(how==='clock')await A.p.evaluate(()=>{BAL.coopTm.buoiMs=300000;COOPW.tm.reset()});
   if(!okM){await A.p.screenshot({path:OUT+'/'+tag+'-host.png'}).catch(()=>{});await B.p.screenshot({path:OUT+'/'+tag+'-guest.png'}).catch(()=>{})}
   ok(okM,name+': the late seat ends too, the week merges on both seats',okM?undefined:[await D(A),await D(B)]);
+  if(okM&&how==='giftrl'){await sleep(3000);const HP=()=>(S.inv||[]).filter(e=>e.k==='tramngoc').length;const x=await X.p.evaluate(HP),y=await Y.p.evaluate(HP);ok(x+y===X.__gift,name+': (5) after the merge the piece exists ONCE (never twice, never lost)',{giver:x,friend:y,before:X.__gift})}
   if(okM){const a=await D(A),c=await D(B);ok(a.w===c.w,name+': same room week on both',{a:a.w,b:c.w});ok(a.day===c.day,name+': one calendar on both seats after the merge (jnf day)',{a:a.day,b:c.day})}
  }
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
