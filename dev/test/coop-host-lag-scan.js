@@ -24,7 +24,7 @@ const LIVES=+process.argv[2]||4,MONTHS=+process.argv[3]||14;
    for(let m=0;m<MONTHS;m++)for(let t=0;t<3;t++){Q.length=0;S.mg=null;S.dead=0;S.suc=100;S.buoi=0;used=0;try{endTurn()}catch(e){}}
    Q.length=0;const D=JSON.stringify(ser());
    const wc=()=>{const X=COOPW.X,J=X.J;const d=ser();const sS=d.S;const W={};for(const k of X.W_KEYS)if(k in sS){const v=J(sS[k]);if(k==='cm'&&v)for(const f of X.CM_P)delete v[f];if(k==='men'&&Array.isArray(v))for(const x of v)if(x)for(const f of X.MEN_P)delete x[f];W[k]=v}
-    if(W.emp)delete W.emp.known;const R=d.R.filter(r=>!r.coop).map(r=>{for(const f of ['rel','oan','ghen','ev','rl','ro','gp','ep','evm'])delete r[f];return r});
+    if(W.emp)delete W.emp.known;const R=d.R.filter(r=>!r.coop).map(r=>{for(const f of ['rel','oan','ghen','ev','rl','ro','gp','ep','evm','evR'])delete r[f];return r});
     const out={};const fl=(v,p)=>{if(v&&typeof v==='object'){const ks=Object.keys(v);if(!ks.length)out[p]=Array.isArray(v)?'[]':'{}';for(const k of ks)fl(v[k],p+'.'+(Array.isArray(v)&&v[k]&&(v[k].id!=null||v[k].sid!=null)?'#'+(v[k].id!=null?v[k].id:'s'+v[k].sid):k))}else out[p]=v};
     fl(W,'S');R.forEach(r=>fl(r,'R#'+r.id));return out};
    /* every lazy face pick a screen can make: the Thái hậu, every NPC, her staff, the court (what render draws over a week) */

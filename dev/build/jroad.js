@@ -138,7 +138,9 @@ setTimeout(()=>{try{if(typeof wrap67==="function")Object.keys(STORY).forEach(wra
    passed chapter BAL.road.last, the origin ending is still told — from the last road chapter that ran (its ending and sign → finTier), so every
    full-road life gets its «Khép nẻo đời» (B3 finding, every origin) */
 (function(){const a0=chAdvance67;chAdvance67=function(E){const r=a0.apply(this,arguments);try{if(rdOn()){const c=S.st.ch,f=S.st.f14,rd=f.rd;
-  if(c&&!c.fin&&c.n>BAL.road.last&&f.re){const n=f.re.n,id=n===BAL.road.first-1?rd:ROAD14[rd][n],p=c.past.slice().reverse().find(x=>x.a===id);
+  /* CNVSTALL: also when the frame has already gone past the road's last slot (its .8–.11 could not cast, a maid's slots were skipped) or closed */
+  const li=c?c.plan.indexOf("st:"+ROAD14[rd][BAL.road.last]):-1;
+  if(c&&!c.fin&&f.re&&(c.n>BAL.road.last||(li>=0&&c.i>li)||c.all)){const n=f.re.n,id=n===BAL.road.first-1?rd:ROAD14[rd][n],p=c.past.slice().reverse().find(x=>x.a===id);
    if(p)rdFinale({a:id,tag:p.tag},{k:p.k},1)}}}catch(e){console.error(e)}return r}})();
 /* ================= QUESTLINE Q3 — HELPERS IN HER ROAD (owner D-Q1 = "1", OD 18/11 07:56Z + OD:L1601 (5); QUESTLINES_AUDIT §4 Q3) =================
    A «Nhờ …» option tagged in RDHP (jrdhp.js, data; the road files are not edited) asks a real helper. Before she picks, the option card's Gợi ý row
@@ -228,6 +230,6 @@ setTimeout(()=>{
   if(line)log(`${head}${kw}. ${line}`);
   if(k===0)return done(r0.apply(this,arguments));
   if(k===1)return done(r0.call(this,tk,bid,i,odds>=100?100-B.half:Math.max(B.min,odds-B.half)));
-  const r=r0.call(this,tk,bid,i,0);try{const fx={duc:-B.sab.duc};ap67(fx);let ex=fmt(fx);const v=rv67(A,"v");if(v&&v!==P.p){oanAdd(v,S,B.sab.oan);ex+=` · ${v.name} oán ta +${B.sab.oan}`}log(`${head}${kw}: ${ex}`)}catch(e){console.error(e)}
+  const r=r0.call(this,tk,bid,i,0);try{const fx={duc:-B.sab.duc};ap67(fx);let ex=fmt(fx);const v=rv67(A,"v");if(v&&v!==P.p){oanAdd(v,S,B.sab.oan);ex+=` · ${pvOan(v,B.sab.oan,`${v.name} oán ta`)}`}log(`${head}${kw}: ${ex}`)}catch(e){console.error(e)}
   return done(r)}}catch(e){console.error(e)}},0);
 window.rdHpWho=rdHpWho;window.rdHpW=rdHpW;window.rdHpWord=rdHpWord;window.rdHpTag=rdHpTag;window.rdHpLine=rdHpLine;window.rdHpLab=rdHpLab;

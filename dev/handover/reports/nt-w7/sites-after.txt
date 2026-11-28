@@ -1,0 +1,253 @@
+j10.js:147 | a | b | 5 | + | (a,b){if(facOf(a)||facOf(b))return"";S.facs=S.facs||[];const f={id:Date.now()%1e7+R(999),m:[key(a),key(b)],name:""};S.facs.push(f);f.name=facName(facLeader(f));
+j10.js:149 | p | x | -BAL.ag.par3.fac.leave.rel | - | function leaveFac(p){const f=facOf(p);if(!f)return"";f.m=f.m.filter(k=>k!==key(p));facMembers(f).forEach(x=>
+j14.js:71 | p | n | s.loyal>=BAL.mline.riseLoy?BAL.mline.riseRel:-BAL.mline.riseRel | - | );p.staff.splice(p.staff.indexOf(s),1);const n=newRival(0);Object.assign(n,drawFace());n.fromMaidOf=key(p);if(typeof riseCore==="function")riseCore(n,s,p);else 
+j2.js:2 | S | v | BAL.allyRel | + | function allyBond(L){const v=pick(L||[]);if(v){
+j2.js:170 | S | v | -PK.rel | - | .provoke;A.push({n:"Khiêu khích",o:100,w:{danh:PK.danh},x:`nàng quý ngươi -${PK.rel}, ${pvOan(v,PK.rel*BAL.relOan.hurt,"oán ngươi")}, ghen +${PK.ghen}`,go:()=>{
+j2.js:171 | S | v | -BAL.ag.cx2.vent.rel | - |  if(v.pg>=BAL.ag.cx2.vent.pg)A.push({n:"Trút giận",o:100,w:{...BAL.ag.cx2.vent.c},x:"hả cơn ghen; nàng oán",go:()=>{v.pg=0;
+j2.js:175 | S | v | -BAL.ag.cx2.chest.rel | - | d(cx2O(S,"chest")))){return evA(S,v,BAL.ag.ev.one)?`Lục được thư từ của ${v.name}: ${evSg(BAL.ag.ev.one)}.`:`Lục rương ${v.name}: không thấy điều gì sai trái.`}
+j21.js:65 | S | v | BAL.eff.j21.top | - | eof rcvInviteGo==="function"){rcvInviteGo(S,v)}else if(roll(o)){S.where[v.id]="home";seeLoc(v,"home");log(`${v.name} nhận lời, sang cung ngươi buổi này.`)}else{
+j22.js:30 | p | m | BAL.relMS.hail | + |  A.push({id4:"manHail",n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:`hắn ${pvQuy(m,BAL.relMS.hail,"quý ngươi")}`,go:()=>{
+j24.js:17 | S | v | BAL.eff.j24.go_5 | - | >{ghenUp(v,3,"thấy ngươi nhịn mà vẫn được lòng người",S)}},{n:"Đáp trả sắc sảo",fx:{danh:1},x:`${pvOan(v,-BAL.eff.j24.go_5*BAL.relOan.hurt,"nàng oán")}`,go:()=>
+j24.js:24 | S | v | BAL.eff.j24.go | + | chị em, cùng nhau đứng vững.</p>`,opts:[{n:"Nhận lời",fx:{},x:`${pvQuy(v,BAL.eff.j24.go,"thiện cảm")} · các phi tần khác ghen +${ghenN(BAL.ghen.ally)}`,go:()=>{
+j24.js:24 | S | v | BAL.eff.j24.go_2 | - | ally,"ngươi kết giao với người khác")}},{n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:`giữ sức, không dính vào phe ai · thiện cảm ${balSg(BAL.eff.j24.go_2)}`,go:()=>
+j24.js:25 | S | v | BAL.eff.j24.go_3 | + | ngùng hỏi mượn ${amt} lượng.</p>`,opts:[{n:"Cho mượn",fx:{bac:-amt},x:`${pvQuy(v,BAL.eff.j24.go_3,"thiện cảm")} · nàng trả lại ${amt} lượng khi có bạc`,go:()=>{
+j24.js:25 | S | v | BAL.eff.j24.go_4 | - | go_3);S.loans=(S.loans||[]).concat([{id:v.id,t:S.turn}])}},{n:"Từ chối",fx:{},x:`thành: giữ lại ${amt} lượng bạc · thiện cảm ${balSg(BAL.eff.j24.go_4)}`,go:()=>
+j24.js:26 | S | v | BAL.eff.j24.approachOne | + |  const k=npwPick(["tuithom","lxma0","luahang","huongtram"],()=>1);S.inv.push({k,from:v.id});try{if(typeof lxFix==="function")lxFix(S)}catch(e){}
+j24.js:28 | S | v | BAL.eff.j24.go_7 | + | >`,opts:[{n:"Nhận lời xin lỗi",fx:{},x:`nàng bớt oán ${balAb(BAL.eff.j24.go_6)}, ${pvQuy(v,BAL.eff.j24.go_7,"thiện cảm")}`,go:()=>{oanAdd(v,S,BAL.eff.j24.go_6);
+j24.js:28 | S | v | BAL.eff.j24.go_8 | - | go_6);relAdd(S,v,BAL.eff.j24.go_7)}},{n:"Lạnh lùng",fx:{},x:`thành: giữ uy, nàng biết ngươi không dễ bỏ qua · Mất: thiện cảm ${balSg(BAL.eff.j24.go_8)}`,go:()=>
+j25.js:93 | S | l | BAL.eff.j25.go | + | vào phe (${oa.why}).</p>`,opts:[{n:"Nhận lời vào phe",fx:{},x:`nàng ${pvQuy(l,BAL.eff.j25.go,"quý ngươi")} · kẻ thù của phe oán ngươi`,go:()=>{f.m.push(key(S));
+j25.js:93 | S | l | BAL.eff.j25.go_2 | - | y(S));relAdd(S,l,BAL.eff.j25.go)}},{n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:`giữ sức, không dính vào phe ai · nàng quý ngươi ${balSg(BAL.eff.j25.go_2)}`,go:()=>
+j28.js:60 | v | t | BAL.eff.j28.run | + |  help:{w:1,ok:(v,t)=>aff(v,t)>=netTh(v,"quen"),run:(v,t)=>{
+j28.js:61 | v | t | BAL.eff.j28.run_2 | + |  visit:{w:0.8,ok:(v,t)=>t!==S?(t.suc<50||t.preg):(S.suc<50||S.preg),run:(v,t)=>{
+j28.js:62 | v | t | BAL.eff.j28.run_3 | + | ==S){if(traitsOf(S).length){}S.dKnown=S.dKnown||{};S.dKnown[x.id]=wk();noteAdd(x.id,`${v.name} báo: nàng có ý hại ngươi`)}else{t.shield=Math.max(t.shield||0,1)}
+j28.js:70 | v | t | BAL.eff.j28.run_8 | + |  ally:{w:0.6,ok:(v,t)=>t!==S?t.sung>=v.sung:S.sung>=v.sung,run:(v,t)=>{
+j28.js:74 | v | x | BAL.eff.j28.run_11 | + | L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);const x=mindPickBy(L,y=>BAL.mind.pick.j28up.base+rkOf(y)+Math.max(0,aff(v,y))/BAL.mind.pick.j28up.aff,v);
+j29.js:27 | a | o | -5 | - | {s.name} (người hầu của ${NM(o)}) nhận bạc của ${NM(a)}, thành tai mắt. `}s.loyal=cl(s.loyal+BAL.eff.j29.loyalBribeServ,0,100);evA(o,a,BAL.eff.j29.evBribeServ);
+j31.js:17 | S | v | BAL.eff.j31.go | + | L.eff.j31.sungGo_2})}},{n:"Dạo đèn cùng một phi tần",fx:{},x:`một người ${pvQuy(null,BAL.eff.j31.go,"thiện cảm")}`,go:()=>{const v=pick(liveRivals(false));if(v)
+j42.js:198 | m | v | BAL.eff.j42.srvErrandDone | + |  if(sn.v){const v=RV(sn.v),m=srvM();if(v&&m)
+j42.js:335 | m | t | BAL.eff.j42.srvDoOrder | - |  if(roll(confessRisk({tr:S.tamco>=60?"lanh":"",loyal:S.tin}))){/*evok: ordered scheme (schemes++)*/evA(t,m,BAL.eff.j42.evSrvDoOrder);
+j42.js:377 | m | v | -BAL.ag.ev.rel | - | ,-1);if(a===S)deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,BAL.ag.ev.one);
+j42.js:449 | S | m | tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1] | ? |  if(loyR==null&&m&&m.alive){
+j42.js:572 | S | m | SRVA.hail.af | ? |  T("Chào hỏi đúng lễ",100,`hắn ${pvQuy(m,SRVA.hail.af,"quý ngươi")}`,()=>{
+j54.js:52 | p | c | H54.clanRel | ? |  consorts().filter(c=>c!==p&&clanOf(c)===s.house).forEach(c=>
+j54.js:52 | p | m | H54.envy | ? |  consorts().filter(c=>c!==p&&clanOf(c)===s.house).forEach(c=>relAdd(p,c,H54.clanRel));if(s.tier<=1)h54Rivals(p,k).forEach(m=>
+j55.js:68 | a | t | BAL.eff.j55.tdProbe | - |  if(roll(25)){
+j55.js:70 | a | t | tdLeak_3 | ? | /* review/net-ghen-2 (law 11): a traced leak = oanAdd(t,a,tdLeak_2) + 
+j55.js:77 | a | t | BAL.eff.j55.tdLeak_3 | - |  if(roll(traceO(a))){oanAdd(t,a,BAL.eff.j55.tdLeak_2);
+j67.js:197 | S | v | n||30 | ? | function e67ally(v,n){if(!rvOk67(v))return"";
+j67.js:233 | S | v | G[0] | ? |  {n:"Kéo {v2} về phe mình",wx:"thêm người một phe",lx:"mất bạc vô ích",go:(A,ok,G)=>{const v=rv67(A,"v2");if(v&&ok)
+j67.js:261 | S | v | G[0] | ? |  {n:"Báo cho {v} đề phòng",wx:"{v} mang ơn ngươi",lx:"cha mà biết sẽ giận",f:"own",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)
+j67.js:323 | S | v | G[0] | ? |  {n:"Lặng lẽ kết thân với {v}",f:"v",wx:"biết nàng hứa gì với huynh",lx:"{v} đề phòng ngươi",go:(A,ok,G)=>{const v=rv67(A,"v");if(v&&ok)
+j67.js:334 | S | v | G[0] | ? |  {n:"Để sớ đi, đổi lấy ơn của {v}",f:"v",wx:"{v} mang ơn ngươi",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)
+j67.js:371 | S | v | G[0] | ? |  {n:"Kéo {v} làm đồng minh phòng khi trở mặt",wx:"có thêm đường lui",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)
+j67.js:495 | S | v | G[0] | ? |  {n:"Xin {v} khuyên cha nàng",wx:"phe đánh yếu đi",lx:"{v} khinh ngươi",go:(A,ok,G)=>{const v=rv67(A,"v");if(v&&ok)
+j67.js:611 | S | v | G[0] | ? |  {n:"Xóa nợ, kết ơn",f:"kind",wx:"{v} mang ơn",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)
+j67.js:615 | S | v | G[0] | ? |  {n:"Cho vay không điều kiện",f:"kind",wx:"{v} cảm động",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)
+j67.js:619 | S | v | G[0] | ? |  {n:"Không bán, báo cho {v}",f:"kind",wx:"{v} biết ai bảo vệ nàng",lx:"người kia phật ý",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)
+j67.js:654 | S | v | G[0] | ? |  {n:"Đứng ra nói giúp chủ cũ",f:"kind",wx:"{v} nợ ngươi",lx:"bị kéo vào",go:(A,ok,G)=>{const v=rv67(A,"v");if(v&&ok)
+j67.js:1070 | S | v | G[0] | ? |  {n:"Xin bà cứu {v}",f:"kind",wx:"{v} nợ ngươi",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)
+j67.js:1215 | S | v | G[0] | ? |  {n:"Mời {v} đến dự giờ",wx:"{v} thấy ngươi công bằng",lx:"{v} càng bới lỗi",go:(A,ok,G)=>{const v=rv67(A,"v");if(v&&ok)
+j67.js:1395 | S | v | G[0] | ? |  {n:"Báo ngay cho {v2}",f:"warn",wx:"{v2} đề phòng",lx:"kẻ viết thư biết bị lộ",go:(A,_ok,G)=>{const v=rv67(A,"v2");if(v)
+j67.js:1565 | S | v | G[0] | ? |  {n:"Đỡ lời cho cả {v}",f:"help",wx:"{v} ngạc nhiên",lx:"bị coi là cùng phe",go:(A,ok,G)=>{const v=rv67(A,"v");if(v&&ok)
+j67.js:1568 | S | v | G[0] | ? |  {n:"Báo cho {v}",f:"help",wx:"{v} biết ai là kẻ thù thật",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)
+j67.js:1618 | S | v | G[0] | ? |  {n:"Nhận lời kết nghĩa",f:"ally",wx:"có một đồng minh",lx:"nàng chỉ thăm dò",go:(A,ok,G)=>{const v=rv67(A,"v");if(v&&ok)
+j68.js:50 | S | a.o | n | ? |  if(a.k==="rv")
+j68e.js:100 | S | v | BAL.eff.j68e.ok | - | ững gì mình biết",{w:{th:5},k:[R6(`người bị kể có thể biết: một phi tần mất thiện cảm ${balSg(BAL.eff.j68e.ok)}`)],ok:()=>{const v=pick(liveRivals(false));if(v)
+j70.js:195 | S | w | BAL.eff.j70.step70 | + | (x)/5+(r70vis(p)))));if(al.length){const w=pick(al);/* an ally whose own people really saw the tell */p.kn=1;p.ally=w.id;p.kt.push(tellOf70(p,i));p.pend="warn";
+j70.js:210 | S | a | BAL.eff.j70.exec70 | - |  else if(p.trap){/*evok: plot deed*/evA(S,a,BAL.eff.j70.evExec70_2);try{punish(a,`bị bắt quả tang ${M.n.toLowerCase()} nhắm vào ${nm70(t)}`,2)}catch(e){}
+j70.js:245 | S | t | BAL.eff.j70.ok | + | ${t.name}`,{c:{bac:-5},wt:[G70(`${t.name} ${pvQuy(t,BAL.eff.j70.ok,"thiện cảm")}`),G70("mưu khó thành")],k:[R70(`nếu lộ, ${a.name} oán ngươi`)],ok:()=>{p.g+=25;
+j70.js:459 | S | al | BAL.eff.j70.ok_3 | - | me} báo khi thấy mưu nhắm vào ngươi`)],k:[R70(`${al.name} thiện cảm ${balSg(BAL.eff.j70.ok_3)} (ngươi mắc nợ ân)`)],ok:()=>{j70().allyW={id:al.id,until:wk()+6};
+j71.js:115 | S | al | BAL.eff.j71.go | + |  if(al)o.push({n:`Không dự, cổ vũ ${al.name}`,fx:{},x:`${G7(`${al.name} ${pvQuy(al,BAL.eff.j71.go,"thiện cảm")}`)} · kèm: không có phần thưởng`,go:()=>{
+j71.js:122 | S | A | BAL.eff.j71.go_2 | + |  go:()=>{
+j71.js:125 | S | H | BAL.eff.j71.go_3 | + |  o.push({n:"Mang lễ sang dự",fx:{bac:-10},x:`${G7(`${H.name} ${pvQuy(H,BAL.eff.j71.go_3,"thiện cảm")}`)}, Danh ${balSg(BAL.eff.j71.danhGo)}`,go:()=>{
+j71.js:126 | S | H | BAL.eff.j71.go_4 | - | :"Cáo mệt, không đi",fx:{},x:`Sức ${balSg(BAL.eff.j71.sucGo)} · kèm: ${H.name} mất thiện cảm ${balSg(BAL.eff.j71.go_4)}`,go:()=>{apply({suc:BAL.eff.j71.sucGo});
+j71.js:129 | S | v | BAL.eff.j71.go_5 | + | hỏng: món ăn hỏng, khách chê: Danh ${balSg(BAL.eff.j71.danhGo_3)}`,go:()=>{if(roll(po)){apply({danh:BAL.eff.j71.danhGo_2,sung:BAL.eff.j71.sungGo});G.forEach(v=>
+j71.js:130 | S | G[0] | BAL.eff.j71.go_6 | + | `Tiệc trà nhỏ mời ${G[0].name}`,fx:{bac:-15},x:`${G7(`${G[0].name} ${pvQuy(G[0],BAL.eff.j71.go_6,"thiện cảm")}`)}, Danh ${balSg(BAL.eff.j71.danhGo_4)}`,go:()=>{
+j71.js:190 | S | v | BAL.eff.j71.ok | - | },wt:bonus7({qs:[["kho",4]]}),l:{sung:-3},k:[`các phi tần bị cắt bớt lệ: mỗi người mất thiện cảm ${balSg(BAL.eff.j71.ok)}`],ok:()=>{liveRivals(true).forEach(v=>
+j71.js:190 | S | v | BAL.eff.j71.no | - | Add(S,v,BAL.eff.j71.ok));return `Hoàng thượng chuẩn tấu, cắt bớt chi tiêu hậu cung.${bonusDo7({qs:[["kho",4]]},"cứu tế")}`},no:()=>{liveRivals(true).forEach(v=>
+j71.js:225 | v | m | BAL.eff.j71.npc | + | )=>k.alive&&k.age<16&&m!==v&&m);if(!L.length||(v.suc||0)<40)return"";const [k,m]=pick(L);ap(v,{suc:-10,danh:3,duc:2});k.hp=Math.min(100,k.hp+BAL.eff.j71.hpNpc);
+j71.js:236 | S | v | BAL.eff.j71.res | - |  const res=()=>{punish(v,"mưu hại trong cung",1);v.ev=0;
+j71.js:282 | A.o | B.o | BAL.eff.j71.ok_2 | + | a",{p:od(BAL.odb.j71.odP_16+S.danh/3+(S.duc||0)/4+(S.tamco||0)/5),w:{danh:2,duc:2},r:[[A,5],[B,5]],wt:[G7("hai nàng bớt giận nhau")],lr:[[A,-4],[B,-4]],ok:()=>{
+j71.js:286 | a | b | BAL.eff.j71.npc_2 | + | most among people she cares for; her Danh/Đức = the success */if(!roll(oddsCl(30+(v.danh||0)/3+(v.duc||0)/4)))return"";ap(v,{danh:BAL.eff.j71.danhNpc_2,duc:2});
+j71.js:286 | v | a | BAL.eff.j71.npc_3 | + | r; her Danh/Đức = the success */if(!roll(oddsCl(30+(v.danh||0)/3+(v.duc||0)/4)))return"";ap(v,{danh:BAL.eff.j71.danhNpc_2,duc:2});relAdd(a,b,BAL.eff.j71.npc_2);
+j71.js:286 | v | b | BAL.eff.j71.npc_4 | + | */if(!roll(oddsCl(30+(v.danh||0)/3+(v.duc||0)/4)))return"";ap(v,{danh:BAL.eff.j71.danhNpc_2,duc:2});relAdd(a,b,BAL.eff.j71.npc_2);relAdd(v,a,BAL.eff.j71.npc_3);
+j72.js:65 | S | a.o | n | ? |  if(a.k==="fallen"){
+j72.js:229 | a | b | ok?BAL.eff.j72.q72Npc[0]:BAL.eff.j72.q72Npc[1] | ? |  const what=o.why;const ok=roll(p);
+j72.js:234 | o.who | v | ok?BAL.eff.j72.q72Npc_2[0]:BAL.eff.j72.q72Npc_2[1] | ? |  if(byTh){ap(v,{th:ok?3:-2})}else{
+j72.js:323 | X.A.o | X.B.o | n | ? |  const relAB=n=>X=>{if(X.A&&X.B&&X.A.o&&X.B.o&&X.A.o.id!=null&&X.B.o.id!=null){
+j72.js:324 | q | X.B.o | n | ? |  const relQB=n=>X=>{const q=queenP();if(q&&q!==S&&X.B){
+j72.js:354 | X.A.o | X.B.o | BAL.eff.j72.fn | + |  s:[G("home","Chuẩn bị thuốc bổ","y",80,1,{bac:-10}),G("B","Thăm {B}","duc",85,1)],ok:{r:6,rb:10,fn:X=>{
+j72.js:386 | q | X.B.o | BAL.eff.j72.fn_2 | - |  O("Thưa thật với Hoàng hậu",{fn:X=>{const q=qn();if(!q)return"";if(X.p.tru){
+j72.js:386 | q | X.B.o | BAL.eff.j72.fn_3 | + | g hậu",{fn:X=>{const q=qn();if(!q)return"";if(X.p.tru){relAdd(q,X.B.o,BAL.eff.j72.fn_2);return `Hoàng hậu lạnh nhạt với ${X.B.n} (${balSg(BAL.eff.j72.fn_2)}).`}
+j72.js:386 | S | X.B.o | BAL.eff.j72.fn_4 | + | .fn_2)}).`}relAdd(q,X.B.o,BAL.eff.j72.fn_3);return `Hoàng hậu bớt nghi ${X.B.n} (${balSg(BAL.eff.j72.fn_3)}).`}}),O("Chỉ thưa “chưa nghe thấy gì”",{r:-2,fn:X=>{
+j72.js:413 | S | X.B.own | BAL.eff.j72.fn_5 | - | "Đối chiếu sổ thuốc, hỏi người ra vào","mat",50,2),C(X=>`Ngươi biết sự thật: ${X.p.cn}, người hầu của ${X.p.own}, lấy trộm`,O("Báo thái y đúng như vậy",{fn:X=>{
+j72.js:477 | S | v | BAL.eff.j72.fn_6 | + | y lễ","duc",60,2),G("A","Đưa các nàng sang ra mắt Hoàng hậu","",100,1)],ok:{fx:{duc:2},r:6,fn:()=>{const L=liveRivals(false).filter(v=>v.rank===0);L.forEach(v=>
+j72.js:497 | S | X.A.mom | BAL.eff.j72.fn_7 | + | .A.mom.name} nói giúp`,"tai",55,1,{},"r",{plf:X=>q72Home({k:"rv",o:X.A.mom})})],ok:{fx:{danh:1},fn:X=>{X.A.o.fond=cl((X.A.o.fond||40)+BAL.eff.j72.fondFn,0,100);
+j72.js:525 | S | ow | BAL.eff.j72.fn_8 | - | ,fn:(X,x,ok)=>{if(!ok)return"";const s=X.A.o,ow=X.A.own;const i=(ow.staff||[]).indexOf(s);if(i>=0)ow.staff.splice(i,1);s.spyFor=null;s.loyal=60;S.staff.push(s);
+j72.js:526 | S | X.A.own | BAL.eff.j72.fn_9 | - |  O("Trả về chủ cũ, xin chủ nương tay",{p:60,sk:"danh",lto:"fail",fn:X=>{
+j72.js:527 | S | X.A.own | BAL.eff.j72.fn_10 | - |  ok:{fx:{duc:4},r:15},no:{r:-8},bad:{fx:{danh:-3},r:-5,fn:X=>{
+j77.js:174 | S | h | C.okAff | ? |  spend(C.khac);
+j77.js:176 | S | h | C.okAff | ? |  if(greet){if(!j77Kh(travel(S.place,k)+C.khac))return;spend(C.khac);
+j77.js:177 | S | h | a | ? |  else{if(C.mode==="required")return;const a=accSkipAff(h,S);
+j77.js:254 | v | h | C.okAff | ? |  if(roll(C.npcGreet))
+j77.js:254 | v | h | accSkipAff(h,v) | ? |  if(roll(C.npcGreet))relAdd(v,h,C.okAff);else 
+j78.js:146 | a | b | BAL.eff.j78.f_6 | + |  f:(a,t)=>{const b=j78buyer(a,t);const n=evG(a,t);if(!b)return"";evA(a,t,BAL.evWipe);evA(b,t,n);ap(a,{bac:15*n});
+j8.js:110 | a | t | BAL.eff.j8.caught | - | -side: catch (the roll is the target seeing the act: a "kèm" of every scheme, not its win) */if(!roll(caughtOdds(a,t,ps)))return"";evA(t,a,BAL.eff.j8.evCaught);
+j8.js:118 | a | t | BAL.eff.j8.f | - | },ok:(a,t)=>a.bac>=BAL.actBac.spy,o:(a)=>oSpy(a),f:(a,t)=>{ap(a,{bac:-BAL.actBac.spy});if(aRoll(oSpy(a),a)){ap(a,{tamco:BAL.eff.j8.spyTam});return spyFind(a,t)}
+j8.js:120 | a | t | BAL.eff.j8.f_4 | - |  win:1 route pays now */return `<span class="r">Khắp cung đồn ${NM(t)} tư thông.</span> Danh ${NM(t)} ${balSg(BAL.eff.j8.rumorDanh)}. `}evA(t,a,BAL.eff.j8.evF);
+j8.js:123 | a | t | BAL.eff.j8.f_5 | - |  ap(a,{danh:BAL.eff.j8.frameFailDanh,sung:BAL.eff.j8.frameFailSung});
+j8.js:130 | a | t | BAL.eff.j8.f_6 | - |  ap(a,{danh:BAL.eff.j8.accuseFailDanh});
+j8.js:145 | a | t | BAL.eff.j8.f_7 | - | co:BAL.eff.j8.ksabTam});return `${NMc(a)} mua chuộc thầy dạy, ${k.name} học hành sa sút. Tài -${balAb(BAL.eff.j8.talF)}. `}ap(a,{danh:BAL.eff.j8.ksabFailDanh});
+j8.js:156 | a | t | BAL.eff.j8.f_8 | - |  if(!aRoll(odA(a,40+a.sung/3+rkOf(a)*4),a)){
+j8.js:157 | a | t | BAL.eff.j8.f_9 | - |  t.kids.splice(t.kids.indexOf(k),1);a.kids.push(k);if(k.heir&&S.heir)S.heir.v=a===S?null:a;
+j8.js:164 | a | t | -(M.rel==null?BAL.steal.rel:M.rel) | - | function stealWin(a,t,mode){const M=(BAL.steal.m||{})[mode==="road"?"road":"feign"]||{};
+j8.js:165 | a | q | -M.hh | - |  try{if(M.win&&Object.keys(M.win).length)ap(a,M.win);if(M.hh){const q=queenP();if(a===S&&q!==S)apply({hh:-M.hh});else if(q&&q!==a)
+j8.js:176 | q | p | BAL.eff.j8.judge | - | function judge(q,p){const n=evG(q,p),r=`${q===S?"Ngươi, ngôi Hoàng hậu,":"Hoàng hậu "+q.name} xét tội ${NM(p)} theo ${n} chứng cứ. `;evA(q,p,BAL.evWipe);
+j8.js:179 | a | t | BAL.eff.j8.vpAccuse | - | oVP(a))){ilFilter(t,e=>!(e.w&&(IT[e.k]||{}).rk>rkOf(t)),"conf");if(L.some(e=>e.dress))t.dress=null;ap(t,{danh:BAL.eff.j8.danhVpAccuse});punish(t,"vượt phẩm",1);
+j8.js:180 | a | t | BAL.eff.j8.vpAccuse_2 | - |  ap(a,{danh:BAL.eff.j8.vpFailDanh});
+j8.js:272 | a | r | g+3 | ? |  
+j8.js:279 | a | r | BAL.eff.j8.giveTo | - |  r.inv.push(ent);if(ans!=="check"&&e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,BAL.eff.j8.evGiveTo);
+j8.js:283 | a | t | BAL.eff.j8.plantItem | - |  if(!aRoll(oPlant(a,t),a)){/*evok: plant act (runAct deed)*/evA(t,a,BAL.eff.j8.evPlantItem);
+j8.js:373 | a | n | m.loyal>=BAL.loy.close?BAL.eff.j8.sendMaid[0]:BAL.eff.j8.sendMaid[1] | - |  if(rise&&roomFor("consort")){const n=newRival(0);Object.assign(n,drawFace());n.name=freshName();n.rel=0;
+j8.js:397 | plot | p | BAL.eff.j8.birthP | - |  if(plot&&(plot===S||plot.alive)){if(roll(oSee(p,true))){evA(p,plot,BAL.eff.j8.evBirthP);
+j8.js:430 | a | p | BAL.eff.j8.maidMonthP | - |  if(p.schemes>0){ap(p,{danh:-10});evA(a,p,BAL.eff.j8.evMaidMonthP);
+j8.js:498 | qq | p | -BAL.tw.g.conf[0] | - | two-way: the same act as hers (empAct conf): unfounded = Danh/Thái hậu cost, relation and regard fall */if(evG(qq,p)<1&&!vpItems(p).length)ap(qq,BAL.tw.confNo);
+j8.js:499 | qq | p | BAL.tw.g.reward[0] | + | 6)&&(qq.bac||0)>=-BAL.tw.reward.bac){/* two-way: the same Ban thưởng as hers (empAct reward): her bạc, relation +20, regard +10, Danh +3 */ap(qq,BAL.tw.reward);
+j8.js:515 | S | v | BAL.eff.j8.empAct | - | function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(2)||S.dead||Q.length)return;let r="";if(k==="cutpay"){spend(2);v.cutPay=1;v.cutBy="Hoàng hậu";
+j8.js:517 | S | v | -BAL.tw.g.conf[0] | - | tems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);v.inv.splice(j,1);
+j8.js:518 | S | v | BAL.tw.g.reward[0] | + |  else if(k==="reward"){if(S.bac<-BAL.tw.reward.bac)return;apply(BAL.tw.reward);
+j8.js:519 | S | v | BAL.eff.j8.empAct_2 | + |  else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out&&!roomFor("consort"))return;if(v.out){v.out=false;v.rank=0}v.confined=0;
+j8.js:537 | S | f | hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1] | ? |  keeps it, never lost */if(f.coop&&typeof ilGone==="function")ilGone(S,Object.assign({},e),"kho",{own:""});else{f.inv=f.inv||[];f.inv.push(Object.assign({},e))}
+j8.js:538 | S | f | BAL.eff.j8.go_3 | - | {own:key(f)});log(`Thái y phát hiện ${it.n} của ${f.name} ${TAINT[e.t].n}. Chứng cứ ${f.name} ${balSg(BAL.eff.j8.evGo)}.`)}else{S.inv.push(Object.assign({},e));
+j83.js:104 | a | r | ev.rel | ? |  
+j9.js:132 | S | v | BAL.eff.j9.run_11 | + |  A.push({n:"Giúp đỡ nàng",c:{bac:-20},o:100,x:`nàng ${pvQuy(v,BAL.eff.j9.run_11,"quý ngươi")} · oán ${balSg(BAL.eff.j9.run_12)}`,run:()=>{
+j9.js:142 | a | t | trip | ? |  H.push({n:"Ngáng chân nàng",o:odA(S,50+S.tamco/5),act:1,/* NB-b: trip() applies — win: Danh nàng danhTrip, 
+j9.js:142 | a | t | trip_2 | ? |  H.push({n:"Ngáng chân nàng",o:odA(S,50+S.tamco/5),act:1,/* NB-b: trip() applies — win: Danh nàng danhTrip, relAdd(a,t,trip); seen: 
+j9.js:146 | a | t | BAL.eff.j9.pushPond | - |  if(aRoll(odA(a,40+a.tamco/4),a)){ap(t,{suc:-25});if(t.preg&&!t.fake&&roll(60)){t.preg=0;t.hidden=false}
+j9.js:147 | a | t | BAL.eff.j9.pushPond_2 | - |  ap(a,{danh:-8});
+j9.js:148 | a | t | BAL.eff.j9.trip | - | . Danh ${balSg(BAL.eff.j9.danhTrip)}. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}
+j9.js:149 | a | t | BAL.eff.j9.trip_2 | - |  
+j92.js:290 | a | t | BAL.eff.j92.wdAccuse | - |  if(truth==="ok"){ap(a,{danh:BAL.eff.j92.danhWdAccuseFalse});ap(t,{danh:BAL.eff.j92.danhWdAccuseT});
+j92.js:292 | a | t | BAL.eff.j92.wdAccuse_2 | - |  if(!aRoll(oVP(a),a)){ap(a,{danh:BAL.eff.j92.danhWdAccuse_2});
+j92.js:293 | a | t | BAL.eff.j92.wdAccuse_3 | - |  
+j92.js:308 | a | t | BAL.eff.j92.wdFrame | - |  if(!aRoll(oPlant(a,t),a)){/*evok: giahoa act (runAct deed)*/evA(t,a,BAL.eff.j92.evWdFrame);
+j92.js:330 | a | t | BAL.eff.j92.wdFrameResolve | - |  if(i<0){ap(a,{danh:BAL.rl.j92.danhWdFrameResolve_3});
+j92.js:345 | cu | S | BAL.eff.j92.clear | - |  ap(cu,{danh:BAL.rl.j92.danhWdFrameResolve});
+j95.js:426 | v | S | BAL.eff.j95.j95bribeTake | + | function j95bribeTake(v,g){const n=Math.min(g,Math.floor(v.bac||0));v.bac=Math.max(0,(v.bac||0)-n);apply({bac:n});
+j95.js:449 | v | S | BAL.eff.j95.j95silent_2 | + |  
+j96.js:141 | S | v | G[0] | ? |  {n:"Đưa bạc cho nàng ta im miệng",go:(A,_ok,G)=>{const v=rv67(A,"v");if(v)
+j97.js:229 | S | v | G[0] | ? |  go:(_A,_ok,G)=>{let n=0;liveRivals(true).filter(v=>aff(v,S)>=netTh(v,"than")).slice(0,4).forEach(v=>{
+jagacts.js:67 | a | v | -BAL.ag.hh.cutRel | - |  if(k==="cutpay"){v.cutPay=Math.max(v.cutPay||0,1);v.cutBy=me?"Hoàng hậu":a.name;
+jagacts.js:69 | a | v | -BAL.tw.g.conf[0] | - | ng sức"&&!e.h);if(j<0)return"";if(evG(a,v)<1&&!vpItems(v).length){if(me)apply(BAL.tw.confNo);else ap(a,BAL.tw.confNo)}const n=iname(v.inv[j]);v.inv.splice(j,1);
+jagacts.js:70 | a | v | BAL.tw.g.reward[0] | + |  if(k==="reward"){if((a.bac||0)<-BAL.tw.reward.bac)return"";if(me)apply(BAL.tw.reward);else ap(a,BAL.tw.reward);
+jagacts.js:71 | a | v | BAL.ag.hh.pardonRel | + | d&&!v.out)return"";if(v===S){try{restore(false,`Hoàng hậu ${a.name} ân xá`)}catch(e){S.out=false;S.confined=0}}else{if(v.out){v.out=false;v.rank=0}v.confined=0}
+jagacts2.js:94 | v | t | -X.rel | - | agRunReg("cx2:vent",(v,t)=>{const X=BAL.ag.cx2.vent;if(!t||(t.pg||0)<X.pg||!ag2Pay(v,X.c))return"";t.pg=0;
+jagacts2.js:97 | v | t | -X.rel | - |  if(agSoft(o)){ag2Soft();return ag2Res(v,"chest",0,"")}
+jagemp.js:68 | a | t | -G.rel | - | function pillowDo(a,t,o){const G=BAL.tw.g.pillow;const fx=(p,d)=>p===S?apply(d):ap(p,d);if(agTry(o)){const b=t.sung;fx(t,{sung:-G.hit});
+jagmaid.js:84 | o | n | loy?B.riseRel:-B.riseRel | ? |  if(o&&o!==n&&o.alive!==false){
+jaudit.js:70 | a | t | n | ? |  j28). 
+jaudit.js:95 | −10 |  |  | ? | /* caught by the target's people (j8 caught): evA 2 + 
+jbalcore.js:93 | w | p | -x | - | w,mode){try{const M=BAL.steal.m[mode==="road"?"road":"feign"]||{};const x=Math.round((M.rel==null?BAL.steal.rel:M.rel)*(BAL.steal.keep.oan-1));if(x>0&&w&&w!==p)
+jbancung.js:59 | p | top | -B.fail.rel | - |  if(top&&up>0)
+jclose.js:26 | S | h | C.okAff | ? |  spend(C.khac);
+jcoopworld.js:1234 | S | o | BAL.eff.jcoopworld.briber | - |  else if(m.told){let d=0;if(o&&o.alive){d=evA(o,S,BAL.eff.jcoopworld.evBriber);
+jdress.js:75 | a | t | BAL.eff.j92.wdAccuse_2 | - |  if(!roll(oVP(a))){ap(a,{danh:BAL.eff.j92.danhWdAccuse_2});
+jdress.js:76 | a | t | BAL.eff.j92.wdAccuse_3 | - |  
+jdress.js:89 | a | t | B.falseRel | ? |  if(x.sc<=x.bud){ap(a,{danh:B.falseDanhA});ap(t,{danh:B.falseDanhT});
+jdress.js:91 | a | t | B.rel | ? |  if(!aRoll(oVP(a),a)){ap(a,{danh:B.waveDanhA});
+jdress.js:92 | a | t | B.rel | ? |  
+jecon.js:38 | p | v | BAL.eff.jecon.econDoDuty | + | ||0:0;if(!pre){if(d)ap(p,{bac:-d});if(dg)ap(p,{danh:dg})}if(b){if(!pre)ap(p,{bac:-b});const T=econBanTo(p);T.forEach(v=>{ap(v,{bac:Math.floor(b/T.length)});try{
+jecon.js:177 | a | t | BAL.eff.jecon.f | - |  
+jecon.js:187 | p | v | -BAL.favorCost | - | function rcvBlockGo(p,v,t,pen){
+jemoact.js:324 | p | t | -F.rel | - |  case"pham":{const t=eaSuperior(p);if(!t)return null;target=t;
+jemoact.js:332 | mocker | mocked |  | ? |  mocking vents it). r1 used 
+jface.js:177 | a | t | B.rel[sev] | ? | A("tat","Tát",{c:{},ok:(a,t)=>together(a,t)&&rkOf(a)>rkOf(t)&&!(t.slap&&t.slap.until>wk()),o:()=>100,/* NB-b: the relation numbers 
+jface.js:179 | a | t | B.rel[sev] | ? |  if(typeof ducAdd==="function")ducAdd(a,dc,"tát người");else ap(a,{duc:dc});
+jface.js:184 | a | t | FXF.phatRel | ? |  if(typeof ducAdd==="function")ducAdd(a,FXF.phatDuc,"phạt quỳ");else ap(a,{duc:FXF.phatDuc});
+jfeel.js:255 | p | t | -F.rel | - | get=t;/* review r1: the Emperor has no thiện cảm map (j9 affAdd keys by id; he has none) → a sulk at him costs Sủng */if(t===S.emp)pay({sung:-F.sung});else{try{
+jge.js:126 | S | v | W.mis | ? |  if(W.mis){const v=geMis();if(v&&v.alive){
+jge.js:133 | S | v | L.mis | ? |  const rk=geRank(L.rank||0);if(rk)out.push(rk);if(L.mis){const v=geMis();if(v&&v.alive){
+jgreet.js:133 | v | S | -PK.rel | - |  if(sp>0&&!sameHouse(S,v)){const PK=TK.provoke;A.push({k:"provoke",w:W(B.opt.provoke)*sp/B.oanK,run:()=>{
+jht.js:76 | p | c | HT.clanRel | ? |  if(!by){consorts().filter(c=>c!==p&&clanOf(c)===q.house).forEach(c=>
+jht.js:76 | p | m | HT.envy | ? |  if(!by){consorts().filter(c=>c!==p&&clanOf(c)===q.house).forEach(c=>relAdd(p,c,HT.clanRel));if(q.tier<=1)pkRivals(p,k).forEach(m=>
+jky.js:175 | F | r | n | ? |  if(r&&(r===S||rivals.includes(r))){
+jlost.js:140 | h | a | BAL.eff.jlost.loKeepHear | - |  if(evG(a,h)>0)evA(a,h,BAL.eff.jlost.evLoKeepHear);ap(h,LO.thief);punish(h,"lấy trộm đồ",1);
+jlost.js:143 | h | a | BAL.eff.jlost.loKeepHear_2 | - |  c.asked=0;c.reT=wk()+LO.hearCd;
+jlost.js:176 | h | o | BAL.eff.jlost.loHolderMove | + |  if(c.ret&&wk()>=c.ret){lostUnwear(h);const i=h.inv.indexOf(x.e);if(i>=0)h.inv.splice(i,1);lostReturn(x.e,"nop");const o=loP(c.own);if(o)
+jlost.js:203 | S | o | BAL.eff.jlost.go | + |  {n:"Trả lại",fx:{},j67:"tốn: không tốn gì",go:()=>{const x=loEntry(c);if(x&&x.h===S){loTake(x,o);lostReturn(x.e,"tra")}
+jlost.js:204 | S | o | BAL.eff.jlost.go_2 | - |  {n:"Nói không thấy",fx:{},j67:"tốn: không tốn gì",go:()=>{c.lied=1;
+jlost.js:256 | S | h | BAL.eff.jlost.loUI | - | dds read before the spend (shown-odds r2) */spend(1);if(roll(o)){const x=loEntry(c);if(x){loTake(x,S);lostReturn(x.e,"tra")}r=`${wdNmC(h)} trả lại ${nm}.`}else{
+jlost.js:259 | S | o | BAL.eff.jlost.loUI_2 | + |  if(a==="giveback"&&o){
+jlost.js:261 | S | o | BAL.eff.jlost.loUI_3 | + |  else if(a==="tell"){if(!can(1))return;spend(1);const o=loP(c.own),h=loP(c.at);c.told=1;if(o){loKnowAt(c,o,"");
+jlost.js:261 | S | h | BAL.eff.jlost.loUI_4 | - |  else if(a==="tell"){if(!can(1))return;spend(1);const o=loP(c.own),h=loP(c.at);c.told=1;if(o){loKnowAt(c,o,"");relAdd(S,o,BAL.eff.jlost.loUI_3)}if(h)
+jlost.js:275 | a | t | BAL.eff.jlost.loSteal | - |  if(!aRoll(loStealO(a,t,self),a)){
+jmem.js:366 | S | v | -H.failRel | - |  run:()=>{if(!roll(o)){
+jne.js:216 | S | v | BAL.eff.jne.go | - |  go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{if(v){try{
+jpetcare.js:193 | a | t | … | ? | me gate for her and an NPC; an NPC's friend test is her CHOICE (p3PetFr BAL.pet.helpFr, mind menu BAL.pet.helpMind) */o:()=>null,/* review/net-ghen-2 (law 11): 
+jpetcare.js:194 | a | t | BAL.pet.helpRel | + |  P.full=cl(P.full+BAL.pet.helpGain,0,100);P.clean=cl(P.clean+BAL.pet.helpGain,0,100);P.joy=cl(P.joy+BAL.pet.helpGain,0,100);petcSync(P);
+jpetcare.js:200 | a | t | BAL.eff.jpetcare.f | - |  if(!aRoll(petStealO(a,t),a)){
+jpoison.js:76 | a | t | BAL.eff.jpoison.pgGive | - |  
+jpoison.js:91 | f | S | BAL.eff.jpoison.found | - |  const found=how=>{/*evok: poisoned gift act*/evA(S,f,BAL.eff.jpoison.evFound);
+jpoison.js:97 | S | f | BAL.eff.jpoison.go | - | int:"cất món vào rương; món có độc thì ta dùng phải, độc nặng thì mất mạng",go:()=>{if(!P)return keep();if(roll(ps)){log(`Ngươi thấy ${p.dn} có vị lạ, bỏ đi.`);
+jpoison.js:101 | S | f | BAL.eff.jpoison.go_2 | - | ăn · kèm: ${f.name} với ngươi ${balSg(BAL.eff.jpoison.go_2)}`,hint:lv=>`không động đến món ăn; nhưng ${lv>=1?f.name:"người tặng"} phật ý`,risk:"an toàn",go:()=>
+jptime.js:173 | S | v | BAL.eff.j21.top | - |  
+jptime.js:220 | h | g | BAL.invite.wait.loss | - | function iwLeave(w,K,why){const g=iwP(w.g),h=iwP(w.h);if(!g||!h)return;PT.stat.iwLast={g:w.g,h:w.h,t:w.t,K,why:why||"khac"};try{
+jrcp.js:185 | S | acc | BAL.eff.jrcp.win | - |  const win=()=>{apply({danh:BAL.eff.jrcp.danhWin});if(acc&&acc!==S&&acc!==r){
+jrcp.js:189 | S | r | BAL.eff.jrcp.go | - |  xin chịu phạt nhẹ",fx:big?(r==="emp"?{sung:-3,danh:-2}:{th:-5,danh:-2}):{danh:-2},x:big?"":`thành: không bị phạt · kèm: ${r.name} oán ta thêm`,go:()=>{if(!big)
+jrcp.js:250 | S | v | -BAL.rcp.tFavor | - | tchPaid=function(k){try{const v=RCPT.k===k?rcpTchV():null;if(v){
+jrcv.js:66 | t | f | hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1] | ? |  {i:2,id:"back",go:()=>{if(f===S)S.inv.push(Object.assign({},e));else{f.inv=f.inv||[];f.inv.push(Object.assign({},e))}
+jrcv.js:68 | t | f | BAL.eff.j8.go_3 | - |  
+jrcv.js:111 | p | t | F | ? | uy(t,F,"thiện cảm")}${me?"":`, bớt ghen ${BAL.rcv.prop.ghen}`}`,c:[`kết bè: Danh ${balSg(-A.danh)}`,rcvFoeX(fo,t,-F)].filter(Boolean).join(", "),go:()=>{keep();
+jrcv.js:145 | p | t | g | ? |  rcvYesO(p,t,0,{n:"Tiếp đón nồng hậu",g:`${pvQuy(t,g,"thiện cảm")}`,go:()=>{
+jrcv.js:146 | p | t | gh | ? |  rcvYesO(p,t,1,{n:"Tiếp qua loa",g:`${pvQuy(t,gh,"thiện cảm")}`,go:()=>{
+jrcv.js:251 | p | t | g | ? |  rcvYesO(p,t,0,{n:"Nhận lời, sang chơi",g:`${pvQuy(t,g,"thiện cảm")}`,go:()=>{
+jrcv.js:252 | p | t | gh | ? |  rcvYesO(p,t,1,{n:"Ghé qua cho có",g:`${pvQuy(t,gh,"thiện cảm")}`,go:()=>{
+jrd_cnv.js:38 | S | m | n | ? | function CNV_REL(n){try{const m=CNV_MIS();if(m&&m.alive){
+jrd_cnv.js:596 | S | m | n | ? | const matMis=(n,o)=>{const m=CNV_MIS();if(!m||!m.alive)return;if(n)
+jrd_td.js:120 | S | e | G[0] | ? |  {n:"Đến lãnh cung gặp {foe}",wx:"{foe} thôi viết thư",lx:"người ta nói ngươi đến xát muối",go:(A,ok,G)=>{const e=rivals.find(x=>x.enemy&&x.alive);if(e){if(ok)
+jrd_td.js:193 | S | e | G[0] | ? |  {n:"Đáp: tội ai người nấy chịu",wx:"{foe} biết ngươi không đòi máu cả nhà",lx:"phe kia thấy ngươi mềm",go:(_A,_ok,G)=>{const e=foe67();if(e)
+jrd_td.js:259 | S | e | G[0] | ? |  {n:"Đến gặp",wx:"khép lại một mối",lx:"bị nói ngươi đến hả hê",go:(_A,_ok,G)=>{const e=rivals.find(x=>x.enemy&&x.alive);if(e)
+jrd_td.js:263 | S | e | G[0] | ? |  {n:"Hứa không đòi máu đàn bà trẻ nhỏ",wx:"cả cung nể ngươi",lx:"phe kia bớt sợ",go:(_A,_ok,G)=>{const e=foe67();if(e)
+jrd_td.js:337 | S | e | G[0] | ? |  {n:"Hứa giữ mạng cha nàng",f:"turn",wx:"{foe} theo ngươi",lx:"nàng không tin",go:(A,ok,G)=>{const e=foe67();if(e){if(ok)
+jrd_td.js:407 | S | e | G[0] | ? |  {n:"Bắt tay",f:"turn",wx:"{foe} mở cửa nhà nàng cho ngươi",lx:"nàng giữ lại một nửa",go:(A,ok,G)=>{const e=foe67();if(e){if(ok)
+jrd_td.js:408 | S | e | G[0] | ? |  {n:"Bắt tay, nhưng giữ khoảng cách",f:"turn",wx:"có đồng minh mà không mắc nợ",lx:"nàng thấy ngươi chưa tin",go:(_A,_ok,G)=>{const e=foe67();if(e)
+jrd_td.js:450 | S | e | G[0] | ? |  {n:"Tin nàng",wx:"mồi đến đúng chỗ",lx:"nàng hai lòng",go:(A,ok,G)=>{const e=foe67();if(e){if(ok)
+jrd_td.js:485 | S | e | ok?G[0]:G[1] | ? |  {n:"Để nàng dâng lời trình",wx:"lời con gái kẻ vu cáo",lx:"bị nói nàng là người của ngươi",go:(A,ok,G)=>{const e=foe67();if(e)
+jrd_td.js:486 | S | e | G[0] | ? |  {n:"Khuyên nàng đứng ngoài",wx:"giữ nàng khỏi tai họa",lx:"bớt một lời chứng",go:(_A,_ok,G)=>{const e=foe67();if(e)
+jrd_td.js:517 | S | e | G[0] | ? |  {n:"Là người một phe",wx:"{foe} thành đồng minh",lx:"phe {n1} oán cả hai",go:(_A,_ok,G)=>{const e=foe67();if(e)
+jreign.js:58 | v | S | Math.round(n/2) | 0 | function rgRel(side,n){if(!side||side==="ngoai")return;for(const v of liveRivals(true)){const s=rgSideOf(v);if(!s)continue;if(s===side)
+jreign.js:58 | v | S | -n | 0 |  rgRel(side,n){if(!side||side==="ngoai")return;for(const v of liveRivals(true)){const s=rgSideOf(v);if(!s)continue;if(s===side)relAdd(v,S,Math.round(n/2));else 
+jreign.js:228 | v | S | -BAL.rg.swRel | - |  for(const v of rgMembers(old))
+jreign.js:239 | v | S | BAL.eff.jreign.rgAmnesty | + | function rgAmnesty(){for(const v of rgMembers("quyen"))
+jreign.js:240 | v | S | BAL.eff.jreign.rgPurge | - | function rgPurge(){let n=0;for(const v of rgMembers("quyen")){if(v.queen||rkOf(v)<=0)continue;v.rank=seatDown(v,v.rank-1);
+jroad.js:15 | S | v | n | ? | const rdRel=(A,k,n)=>{const v=rv67(A,k);if(v)
+jroute.js:118 | S | v | BAL.route.seen.rel | + |  if(aff(v,S)>=netTh(v,"than2")){
+jroute.js:207 | S | weak | BAL.route.cheRel | + | ng một tay.",art:RT_ART.ta,c:{...BAL.route.che},k:BAL.route.k.ad_che,w:{...BAL.route.cheW},x:`${weak.name} ${pvQuy(weak,BAL.route.cheRel,"thiện cảm")}`,go:()=>{
+jroute.js:249 | S | v | BAL.route.npcHelpRel | + | .npcHelp},rtX(100,`${v.name} ${pvQuy(v,BAL.route.npcHelpRel,"thiện cảm")} · nàng chỉ ngươi đường đi và người gác cổng`,"","bị lộ thì ngươi cũng mang tội"),()=>{
+jshelf.js:285 | a | t | B.falseRel | ? | function shelfFalse(a,t,what){const B=BAL.shelf.acc,A0=NMc(a),T0=NM(t);ap(a,{danh:B.falseDanhA});ap(t,{danh:B.falseDanhT});
+jshelf.js:290 | a | t | B.rel | ? |  if(!roll(oVP(a))){ap(a,{danh:B.waveDanhA});
+jshelf.js:291 | a | t | B.rel | ? |  
+jshelf.js:299 | a | t | B.rel | ? |  if(!roll(oVP(a))){ap(a,{danh:B.waveDanhA});
+jshelf.js:300 | a | t | B.rel | ? |  
+jslap.js:115 | a | S | B.missRel | ? | ry{if(s<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");r=`<span class="g">${NMc(a)} giơ tay tát ngươi nhưng ngươi né kịp, cái tát hụt.</span> `;
+jslap.js:149 | a | t | B.missRel | ? |  if(roll(slapNeOdds(t,a))){sev--;if(sev<=0){if(typeof ducAdd==="function")ducAdd(a,B.duc[1],"tát hụt");
+jst14.js:155 | S | v | -Math.max(H.min,H.base+m) | - | function f14Hate(v){if(!v)return;const H=BAL.st14.hate;const m=Math.max(aff(S,v)||0,aff(v,S)||0);
+jtds.js:127 | S | v | -rcpFavorOf(S) | - |  if(P.mode==="master"&&TDV.tch){const v=RV(+TDV.tch);if(v){
+jtruth.js:92 | a | p | BAL.eff.jtruth.frameExpose | - |  
+jts.js:53 | S | v | n | ? | function tsAff(v,n){try{
+jts.js:187 | a | v | G.aff | ? | function tsGiftBac(a,L){const G=BAL.tsGift;if(a!==S)ap(a,{bac:-L.length*G.bac});for(const v of L){tsGiftEase(a,v);
+jtsb.js:234 | S | v | BAL.eff.jtsb.go_8 | + | ời đứng về phía ngươi${foes.length?` · kèm: ${foes.length} ${pvOanAny(BAL.eff.jtsb.go_9,"người vốn thù nàng oán ngươi")} (ngươi đứng về phe nàng)`:""}`,go:()=>{
+jtsb.js:235 | S | v | BAL.eff.jtsb.go_10 | - |  {n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:`thành: giữ sức, đứng ngoài chuyện riêng của nàng · Mất: thiện cảm ${balSg(BAL.eff.jtsb.go_10)}`,go:()=>
+jtsb.js:236 | S | v | BAL.eff.jtsb.go_12 | + | ớt oán ${balAb(BAL.eff.jtsb.go_11)} · ${pvQuy(v,BAL.eff.jtsb.go_12,"thiện cảm")} · kèm: người khác thấy ngươi dễ bỏ qua`,go:()=>{oanAdd(v,S,BAL.eff.jtsb.go_11);
+jtsb.js:237 | S | v | BAL.eff.jtsb.go_13 | - | tsb.danhGo_10)} (giữ uy, không để ai coi nhẹ) · Mất: thiện cảm ${balSg(BAL.eff.jtsb.go_13)} · nàng vẫn oán như cũ`,go:()=>{apply({danh:BAL.eff.jtsb.danhGo_10});
+jtwoway.js:50 | a | t | G().help | ? | TWD("help",{n:"Giúp đỡ nàng",req:(a,t)=>!!t,run:(a,t)=>{
+jtwoway.js:62 | a | t | g[1] | ? | TWD("provoke",{n:"Khiêu khích",req:(a,t)=>!!t,run:(a,t)=>{const g=G().provoke;twAp(a,{danh:g[0]});
+jtwoway.js:66 | a | t | g[0] | ? | TWD("visit",{n:"Thăm lúc ốm mệt",req:(a,t)=>!!t&&((t.suc||0)<50||!!t.preg),run:(a,t)=>{const g=G().visit;
+jtwoway.js:72 | a | t | G().follow | ? | TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&rkOf(t)>rkOf(a)+1,run:(a,t)=>{
+jvisit.js:48 | p | lost | -V.lostRel | - |  if(lost&&lost.alive){ghenUp(lost,V.lostGhen,`mất đêm thẻ bài vì Hoàng thượng ngự giá đến cung ${p.name}`,p);
+jvisit.js:88 | S | lost | -V.lostRel | - |  if(lost){ghenUp(lost,V.lostGhen,"mất đêm thẻ bài vì Hoàng thượng ngự giá đến cung ngươi",S);
+jwhy.js:45 | a | t | BAL.eff.jwhy.f | - | c:-actBac("spy",a,t)})/* one core: the jecon §5 price the card shows (was a flat 15) */;const o=spyRoll(a,t);if(aRoll(o,a)){ap(a,{tamco:2});return spyFind(a,t)}
+jworld.js:130 | v | t | b.ambushRel | ? |  if(k==="welcome")affAdd(t,v,b.welcomeAff);else if(k==="ambush"){
+jworld.js:137 | S | t | b.ambushRel | ? |  {n:"Ra oai phủ đầu",fx:{},x:`thành: ${t.name} sợ ngươi · kèm: ${t.name} oán ngươi`,go:()=>
+jworld2.js:31 | v | mother | -b.skipOan | - |  if(k==="give"&&g>0){ap(v,{bac:-g});if(mother)affAdd(mother,v,g>=b.big?b.bigAff:b.midAff);G.push(v)}else if(k==="cold"){if(mother&&mother!==S)
+jworld2.js:47 | S | m | -b.skipOan | - |  {n:"Cáo bệnh không tới",fx:{suc:BAL.cv.rest},x:`giữ sức · kèm: ${m.name} để bụng`,go:()=>

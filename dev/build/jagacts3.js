@@ -11,12 +11,12 @@ const AG3={stat:{opt:0,land:0,by:{}}};
 function p3On(){try{return !!(agOn()&&BAL.ag.par3&&BAL.ag.par3.on)}catch(e){return false}}
 function p3Nm(p){return p===S?"ngươi":p&&p.name||""}
 function p3Ap(p,x){if(!x||!Object.keys(x).length)return;if(p===S)apply(x);else ap(p,x)}
-/* every other consort's jealousy rises when someone dances before the whole harem (her card: ghenAll; an NPC dancer: the others, her included in ghen of NPCs only) */
+/* every other consort's jealousy rises when someone dances before the whole harem (her card: ghenAll → their ghen of her; an NPC dancer: j1 ghenUp → the others' oán toward the dancer × BAL.oanCool.ghen.npc (j1 ghenUp, rounded as applied), so her card text says ghen and an NPC dancer's says oán (W10, RV4 N3)) */
 function p3GhenAll(p,n,why){if(p===S)return ghenAll(n,why);const d=ghenN(n);liveRivals(true).forEach(v=>{if(v!==p)ghenUp(v,d,why||`thấy ${p.name} nổi bật hơn người`,p)})}
 /* ---------------- the player cards, built once ---------------- */
 const P3C={
  dance:p=>{const X=BAL.ag.par3.dance;return{n:"Múa trong yến tiệc",t:"Cả hậu cung nhìn vào.",c:{...X.c},o:odA(p,X.o+(p.sac||0)/X.sacD*(p===S&&has("mesac")?X.mesac:1)+((p.arts&&p.arts.vu)||0)*X.vu),
-  w:{...X.w},l:{...X.l},x:`phi tần ghen +${ghenN(BAL.ghen.dance)}`,go:()=>p3GhenAll(p,BAL.ghen.dance,`${p===S?"ngươi":p.name} múa được Hoàng thượng khen`)}},
+  w:{...X.w},l:{...X.l},x:p===S?`phi tần ghen +${ghenN(BAL.ghen.dance)}`:pvOanAny(Math.max(1,Math.round(ghenN(BAL.ghen.dance)*BAL.oanCool.ghen.npc)),"phi tần oán nàng ta"),go:()=>p3GhenAll(p,BAL.ghen.dance,`${p===S?"ngươi":p.name} múa được Hoàng thượng khen`)}},
  /* 2f2: a REAL person (the most willing servant of another palace, tmBest); the roll IS her choice (tmOdds: traits, lòng, what she wants);
     a refusal may be told to her master (r2 tmRefuse); cost = that person's bribe price (nv bribeCost, as Mua chuộc) */
  eyes:p=>{const X=BAL.ag.par3.eyes;const s=typeof tmBest==="function"?tmBest(p):null;
@@ -103,9 +103,9 @@ function p3Res(k,txt){AG3.stat.land++;AG3.stat.by[k]=(AG3.stat.by[k]||0)+1;retur
  }catch(e){agdErr("par3:asOpts",e)}return L}})();
 if(typeof AS_DO==="object"&&!AS_DO.cut)AS_DO.cut=(s)=>{s.manLove=null;return""};
 /* ---------------- lãnh cung: an NPC inside chooses among HER cards (j14 coldActsOf), once a month (coldMonth; was a flat roll 3 % / 5 %) ---------------- */
-function p3Free(v,why){const X=BAL.ag.par3.cold;if(!coldStayOk(v))return `${v.name} còn ${coldDaysLeft(v)} ngày nữa mới được xét tha`;coldFree(v);v.lastPromo=S.turn;v.coldEv=0;spAdd(v,"oan",X.oanFree);if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,BAL.eff.j14.coldMonth)}
+function p3Free(v,why,full){const X=BAL.ag.par3.cold;if(!coldStayOk(v,full))return coldLife(v)&&!full?`${v.name} bị giam lãnh cung chung thân, chỉ minh oan mới ra`:`${v.name} còn ${coldDaysLeft(v)} ngày nữa mới được xét tha`;coldFree(v,full)/* PUNISH-TIER: minh oan = the rank before the conviction */;v.lastPromo=S.turn;v.coldEv=0;oanAdd(v,S,X.oanFree)/* review/oan-pace: the one oán door (BAL.oanPace) */;if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,BAL.eff.j14.coldMonth)}
  v.p3Freed=why;return `${v.name} được tha khỏi lãnh cung (${why}), phục vị ${RANKS[v.rank].n}`}
-function p3Nun(v){v.alive=false;v.nun=1;return `${v.name} cạo tóc xuất gia, rời lãnh cung`}
+function p3Nun(v){v.alive=false;dieMk(v,"nun");v.nun=1;return `${v.name} cạo tóc xuất gia, rời lãnh cung`}
 function p3Cold(v){const X=BAL.ag.par3.cold;let N;try{N=agNeeds(v)}catch(e){N={}}const L=coldActsOf(v).filter(C=>!C.lock&&agcCan(v,C.c));const best=Math.max(0,...L.filter(C=>/được tha|phục vị|nhớ chuyện cũ/.test(C.x||"")).map(C=>C.o||0));
  const W=[];for(const C of L){const free=(/được tha|phục vị|nhớ chuyện cũ/.test(C.x||"")||String(C.x||"").includes(evSg(BAL.ag.ev.one)))/* the evidence words come from the one helper (evSg), never a typed "+1" */;let u;
   if(C.n==="Xuất gia")u=(v.suc||0)<X.nunSuc&&best<X.nunO?agcU(v,N,100,{rest:BAL.ag.unit},{},"self"):0;
@@ -125,19 +125,19 @@ function p3ChatF(p,v){const [b,k]=p3ChatBox(p,v);return 1/(1+(b[k]||0))}
 function p3ChatMark(p,v){const [b,k]=p3ChatBox(p,v);b[k]=(b[k]||0)+1}
 function p3Who(x){return x===S?"ngươi":x.name}
 const P3T={
- health:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.health*f));return{n:"Hỏi han sức khỏe",o:100,x:`nàng quý ngươi +${n}`,
-  run:()=>{affAdd(v,p,n);p3ChatMark(p,v);return p===S?`${v.name} cảm động. Nàng quý ngươi +${n}.`:`${p.name} hỏi han sức khỏe ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}}},
- praise:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(nv(v,"praise")*f)),o=talkPraiseO(p);return{n:"Khen tài nghệ nàng",o,x:`nàng quý ngươi +${n}`,
-  run:()=>{p3ChatMark(p,v);if(agTry(o)){affAdd(v,p,n);return p===S?`${v.name} tươi cười. Nàng quý ngươi +${n}.`:`${p.name} khen tài nghệ ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}
+ health:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.health*f));return{n:"Hỏi han sức khỏe",o:100,x:`nàng ${pvQuy(v,n,"quý ngươi")}`,
+  run:()=>{affAdd(v,p,n);p3ChatMark(p,v);return p===S?`${v.name} cảm động. Nàng ${pvQuy(v,n,"quý ngươi")}.`:`${p.name} hỏi han sức khỏe ${p3Who(v)}; ${p3Who(v)} ${pvQuy(v,n,"quý "+p.name)}`}}},
+ praise:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(nv(v,"praise")*f)),o=talkPraiseO(p);return{n:"Khen tài nghệ nàng",o,x:`nàng ${pvQuy(v,n,"quý ngươi")}`,
+  run:()=>{p3ChatMark(p,v);if(agTry(o)){affAdd(v,p,n);return p===S?`${v.name} tươi cười. Nàng ${pvQuy(v,n,"quý ngươi")}.`:`${p.name} khen tài nghệ ${p3Who(v)}; ${p3Who(v)} ${pvQuy(v,n,"quý "+p.name)}`}
    if(agSoft(o)){const t=agSoftTxt(p,p===S?"Khen tài nghệ nàng":"");return p===S?"":t}/* her line is logged once by oddsSoft */affAdd(v,p,-T.praiseFail);return p===S?`${v.name} cho là ngươi giả lả. Nàng quý ngươi -${T.praiseFail}.`:`${p.name} khen tài nghệ ${p3Who(v)}, bị cho là giả lả`}}},
  gossip:(p,v,third)=>{const T=BAL.talk,G=T.gossip,f=p3ChatF(p,v),n=Math.max(1,Math.round(G.hit*f));return{n:`Bàn tán về ${third.name}`,o:100,inner:1,
-  x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${n}`:`kèm: nàng quý ngươi -${G.miss} · nàng có thể mách lại`,
-  run:()=>{p3ChatMark(p,v);if(aff(v,third)<0){affAdd(v,p,n);oanAdd(v,third,G.oan);return p===S?`Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} to nhỏ chuyện ${p3Who(third)}`}
-   affAdd(v,p,-G.miss);const tl=npcTell(p,{to:third,from:[v]});/* npc-purpose G2a: she carries it only from a grudge against the gossip or a tie to the one talked of */if(tl&&roll(agCap(G.tell))){oanAdd(third,p,G.tellOan);return p===S?`${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +${G.tellOan}.`:`${p3Who(v)} đem lời ${p.name} bàn tán kể lại với ${p3Who(third)}`}
+  x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng ${pvQuy(v,n,"quý ngươi")}`:`kèm: nàng quý ngươi -${G.miss} · nàng có thể mách lại`,
+  run:()=>{p3ChatMark(p,v);if(aff(v,third)<0){affAdd(v,p,n);oanAdd(v,third,G.oan);return p===S?`Hai người to nhỏ chuyện ${third.name}. Nàng ${pvQuy(v,n,"quý ngươi")}.`:`${p.name} và ${p3Who(v)} to nhỏ chuyện ${p3Who(third)}`}
+   affAdd(v,p,-G.miss);const tl=npcTell(p,{to:third,from:[v]});/* npc-purpose G2a: she carries it only from a grudge against the gossip or a tie to the one talked of */if(tl&&roll(agCap(G.tell))){oanAdd(third,p,G.tellOan);return p===S?`${v.name} đem lời ngươi kể lại với ${third.name}. ${pvOan(third,G.tellOan,`${third.name} oán ngươi`)}.`:`${p3Who(v)} đem lời ${p.name} bàn tán kể lại với ${p3Who(third)}`}
    return p===S?`${v.name} lảng sang chuyện khác. Nàng quý ngươi -${G.miss}.`:`${p.name} bàn tán về ${p3Who(third)}, ${p3Who(v)} lảng sang chuyện khác`}}},
- secret:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.secret*f));return{n:"Chia sẻ bí mật",o:100,inner:1,x:`nàng quý ngươi +${n}${v.malice>BAL.talk.secretMal?" · nàng có thể nắm thóp ngươi":""}`,
-  run:()=>{p3ChatMark(p,v);affAdd(v,p,n);if(v.malice>BAL.talk.secretMal&&npcWhy("p3Grab",{v,p},()=>roll(agCap(BAL.talk.secretGrab)))){evA(v,p,BAL.ag.ev.one);return p===S?`${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${n}.`:`${p.name} chia sẻ bí mật với ${p3Who(v)}; ${p3Who(v)} ghi nhớ từng lời`}
-   return p===S?`${v.name} cũng kể chuyện riêng. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} kể chuyện riêng cho nhau`}}}};
+ secret:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.secret*f));return{n:"Chia sẻ bí mật",o:100,inner:1,x:`nàng ${pvQuy(v,n,"quý ngươi")}${v.malice>BAL.talk.secretMal?" · nàng có thể nắm thóp ngươi":""}`,
+  run:()=>{p3ChatMark(p,v);affAdd(v,p,n);if(v.malice>BAL.talk.secretMal&&npcWhy("p3Grab",{v,p},()=>roll(agCap(BAL.talk.secretGrab)))){evA(v,p,BAL.ag.ev.one);return p===S?`${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng ${pvQuy(v,n,"quý ngươi")}.`:`${p.name} chia sẻ bí mật với ${p3Who(v)}; ${p3Who(v)} ghi nhớ từng lời`}
+   return p===S?`${v.name} cũng kể chuyện riêng. Nàng ${pvQuy(v,n,"quý ngươi")}.`:`${p.name} và ${p3Who(v)} kể chuyện riêng cho nhau`}}}};
 function p3Third(p,v){return liveRivals(true).filter(x=>x!==v&&x!==p).sort((a,b)=>aff(v,a)-aff(v,b))[0]||null}
 Object.assign(AGC3BTN,{talkHealth:"Hỏi han sức khỏe",talkPraise:"Khen tài nghệ nàng",talkGossip:"Bàn tán về",talkSecret:"Chia sẻ bí mật",invoke:"Nhắc lại ân xưa"});
 Object.assign(AGC3ACT,{talkHealth:"sang hỏi han sức khỏe",talkPraise:"sang khen tài nghệ",talkGossip:"ghé tai bàn tán",talkSecret:"sang chia sẻ chuyện riêng",invoke:"nhắc lại ân xưa"});
@@ -155,7 +155,7 @@ agRunReg("cx3:talkGossip",(v,t)=>{if(!t)return"";const th=p3Third(v,t);return th
 agRunReg("cx3:invoke",(v,t)=>t?p3Res("invoke",memInvoke(t,v)):"");
 Object.assign(window,{P3T,p3ChatF,p3ChatMark});
 /* ---------------- household: the same functions as her Cung nhân tab (j8 itemTest, j14 recommend / searchMaids, j29 hireTake, j10 threatServ, staffTam) ---------------- */
-function staffTam(m,s){s.loyal=cl((s.loyal||0)+BAL.eff.jhouse.loyalRun,0,100);return m===S?`${s.name} được ngươi hỏi han: thiện cảm ${balSg(BAL.eff.jhouse.loyalRun)}.`:`${m.name} tâm sự với ${s.name}`}
+function staffTam(m,s){s.loyal=cl((s.loyal||0)+BAL.eff.jhouse.loyalRun,0,100);return m===S?`${s.name} được ngươi hỏi han: thiện cảm ${balSg(spSee("rel",BAL.eff.jhouse.loyalRun))}.`:`${m.name} tâm sự với ${s.name}`}
 /* Nội vụ phủ hands a candidate over (her hireCard choice / an NPC's pick); paid = her option already took the bạc */
 function hireTake(m,role,s,paid){const P=npool()[role];const i=P.indexOf(s);if(i>=0)P.splice(i,1);if(!paid)ap(m,{bac:-BAL.house.hireBac});(m.staff=m.staff||[]).push(s);return m===S?"":`${m.name} nhận ${s.name} từ Nội vụ phủ`}
 /* merge r2: room counted by main's household rule (staff-root: hhHas = maids incl. the close maid, eunuchs; BAL.promo.cap) */
@@ -327,7 +327,7 @@ agRunReg("cx2:maidTalk",v=>{const r=maidTalkDo(v);return r?ag2Res(v,"maidTalk",1
 function maidSpyT(v){const L=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&!t.out&&!sameHouse(v,t));return L.length?mindPickBy(L,t=>BAL.mind.pick.ag.base+Math.max(0,agSpite(v,t))+Math.max(0,danger(t,v))/10,v):null}
 agRunReg("cx2:maidSpy",(v,t)=>{const m=v.maid;t=t||maidSpyT(v);if(!m||!t)return"";const so=spyRoll(v,t,m);if(!agTry(so)){if(agSoft(so))return ag2Res(v,"maidSpy",0,agSoftTxt(v));m.loyal=cl((m.loyal||0)-BAL.eff.jwhy.loyalSpyMaidRun,0,100);oanAdd(t,v,BAL.eff.j78.j78maidFail);
   return ag2Res(v,"maidSpy",0,`${m.name} nấp nghe ngoài cửa sổ cung ${agcNm(t)} thì bị bắt gặp; ${agcNm(t)} đoán ra ${v.name}`)}
- const ok=!!chSearch(v,m,()=>evA(v,t,BAL.eff.j78.evN));return ag2Res(v,"maidSpy",ok,ok?`${m.name} nghe lén được chuyện của ${agcNm(t)} cho ${v.name}`:chMissed()?`${m.name} dò la ${agcNm(t)} cho ${v.name}, chưa tìm ra chứng`:`${m.name} dò la ${agcNm(t)} cho ${v.name}, chẳng thấy điều gì sai trái`)});
+ const ok=!!chSearch(v,m,()=>evA(v,t,BAL.eff.j78.evN));/* law 1: a spy who got in brings a taste of t too (her own spying: jdis j78facts "lk" / "dis") */try{if(typeof giftSpyLearn==="function")giftSpyLearn(v,t)}catch(e){}return ag2Res(v,"maidSpy",ok,ok?`${m.name} nghe lén được chuyện của ${agcNm(t)} cho ${v.name}`:chMissed()?`${m.name} dò la ${agcNm(t)} cho ${v.name}, chưa tìm ra chứng`:`${m.name} dò la ${agcNm(t)} cho ${v.name}, chẳng thấy điều gì sai trái`)});
 /* jgreet: an NPC who comes to her runs her own talk / TW buttons with herself as the speaker */
 (function(){if(typeof gmOpts!=="function")return;const g0=gmOpts;const SAY={health:["Health","hỏi han sức khỏe ngươi"],praise:["Praise","khen tài nghệ của ngươi"],secret:["Secret","kéo ngươi ra một góc, kể chuyện riêng"],gossip:["Gossip","ghé tai bàn tán về {x}"],
   warn:["Warn","nhắc ngươi coi chừng {x}"],provoke:["Provoke","buông lời khiêu khích ngươi trước mặt mọi người"]};

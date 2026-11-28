@@ -16,7 +16,7 @@ async function page(b,errs){const ctx=await b.newContext({viewport:{width:390,he
  /* ---- consort life: O2 ---- */
  let p=await page(b,errs);
  await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;quiet=false});await sleep(1000);
- out.push(...await p.evaluate(()=>{const o=[];const ok=(c,m)=>o.push([!!c,m]);const B=BAL.charge;
+ out.push(...await p.evaluate(()=>{BAL.charge.rep.n=99;/* PUNISH-TIER: the repeat-nhẹ rule is tested in punish-tier.js; these steps punish the same people many times */const o=[];const ok=(c,m)=>o.push([!!c,m]);const B=BAL.charge;
   const L=liveRivals(true).filter(x=>!x.queen&&!x.coop);const [v,w,u]=L;const clean=x=>{x.wrongs=[];x.dw=0;x.evc={};x.evq={};x.ev=0;x.out=x===S?0:false;x.confined=0;x.punWk=null;x.tsbBul={}};
   let cp=[],gp=[];const c0=chPunish;chPunish=function(t,c,why){cp.push([t===S?"S":t.name,c]);return c0.apply(this,arguments)};
   let inC=0;const c1=chPunish;chPunish=function(){inC++;try{return c1.apply(this,arguments)}finally{inC--}};
@@ -51,7 +51,8 @@ async function page(b,errs){const ctx=await b.newContext({viewport:{width:390,he
   if(ob){cp=[];gp=[];const h0=chHave(S,v,"uh");win(()=>ob.go());ok(cp.some(x=>x[0]===v.name&&x[1]==="uh")&&!gp.some(x=>x[0]===v.name)&&chHave(S,v,"uh")===0&&h0>0,`her «Báo lên» won: chPunish ${JSON.stringify(cp)}, pieces ${h0} → ${chHave(S,v,"uh")}`)}
   /* rv F3: the Hậu cung person card (actLineRaw + AOUT) and the evidence card print what the act spends / does — one helper */
   clean(w);S.evc={};deedAdd(w,"trip",u,1,"ngáng chân");deedAdd(w,"batnat",u,1,"bắt nạt");deedAdd(w,"vp",null,1,"vượt phẩm");evA(S,w,chNeed(w,"uh"),"uh");evA(S,w,1,"vp");J78.cardV=w;
-  for(const k of ["accuse","trinhhh"]){const line=String(actLineRaw(k,"",""));const ea=(evidenceActs(w).find(a=>a.k===k)||{});const want=`Chứng cứ ${balSg(-chHave(S,w,"uh"))} (tội ức hiếp quấy phá)`;
+  /* split-merge B1: ONE «Tố giác» on both cards (accuse; the evidence card's row is the listener's road, accuse or trinhhh) */
+  for(const k of ["accuse"]){const line=String(actLineRaw(k,"",""));const ea=(evidenceActs(w).find(a=>a.k==="accuse"||a.k==="trinhhh")||{});const want=`Chứng cứ ${balSg(-chHave(S,w,"uh"))} (tội ức hiếp quấy phá, ${chTierN(w,"uh")})`;/* PUNISH-TIER: the weight is shown */
    ok(line.includes(want)&&String(ea.cost).includes(want)&&!new RegExp("Chứng cứ -"+evG(S,w)+"(?!\\d)").test(line.replace(want,"")),`${k}: person card «${line.replace(/<[^>]+>/g," ").slice(0,90)}» = evidence card «${ea.cost}»`)}
   const ao=AOUT.accuse;ok(ao&&/cấm túc/.test(ao[0])&&!/phế hoặc giáng/.test(ao[0]),`Tố giác «thành» on the person card: ${ao&&ao[0]}`);J78.cardV=null;
   S.confined=0;return o}));

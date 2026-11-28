@@ -25,6 +25,8 @@ const EXEMPT={
 'realtap.js':'real-tap helper on a page the CALLING test made (the caller holds the guard); launches no browser',
 'rt-offer.js':'robot offer-log classifier (pure functions on logged labels); opens no page',
 'selscene-mock/ss2.js':'in-page mock timeline injected by the selscene mock runner (boot.js holds the guard); opens no page',
+'text-hygiene.js':'static text scan of sampler logs + built source (reads files, opens no page)',
+'tai-mat-know-scan.js':'static node scan of dev/build sources (opens no page)',
 'wording-gain-scan.js':'static wording scan of the built source (reads files, opens no page)',
  'dlgs-play.js':'THE scene test: plays every side-line scene tap by tap on both devices on purpose',
  'dlgs-guard-scan.js':'this scan (reads sources, opens no page)',

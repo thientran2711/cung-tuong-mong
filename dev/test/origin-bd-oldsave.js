@@ -8,7 +8,7 @@
 const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,MAIN]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,900))};
- const boot=async url=>{const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:1,serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
+ const boot=async url=>{const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:1,serviceWorkers:'block'});const p=await ctx.newPage();await p.addInitScript(require('./lib/qdrain').init);/* headless loop: __bot + answer the night choice (lib/qdrain.js, NPCROADS-RED) */p.setDefaultTimeout(0);
   p.on('pageerror',e=>errs.push(url.slice(-25)+': '+e.message.slice(0,200)));await p.goto(url,{waitUntil:'domcontentloaded',timeout:0});
   await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1200);return p};
  /* main build: one bd life, saves taken at month 2 (tutorial), 24 (road), and the last alive month in 40–72 (late); a life that dies early is replaced by a new bd life (up to 6) */
@@ -20,7 +20,7 @@ const [,,URL,MAIN]=process.argv;
    rd:S.st.f14?S.st.f14.rd||'':'-',act:S.st.f14&&S.st.f14.act?JSON.stringify(S.st.f14.act):'',story:JSON.stringify(S.st.story||S.st.q||null).length,M:S.st.M?JSON.stringify(Object.keys(S.st.M)).length:0});
   const out={};let late=null;
   for(let life=0;life<6&&!(out.tut&&out.road&&late);life++){if(life){window.__forceOrigin='bd';quiet=true;try{nlNew()}catch(e){}start();quiet=false;await new Promise(r=>setTimeout(r,300));late=null}
-  for(let m=1;m<=72;m++){const t=S.turn;for(let g=0;g<40&&S&&!S.dead&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){out.err=e.message;break}}
+  for(let m=1;m<=72;m++){const t=S.turn;for(let g=0;g<40&&S&&!S.dead&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){out.err=e.message;break}}
    if(!S||S.dead)break;const A=S.st&&S.st.M;try{if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const bd=beatDef67(A,A.cur);const O=opts67(A,bd);res67(thKey67(A),A.cur,0,O[0]&&O[0].o!=null?oOf67(A,O[0],bd):100)}}catch(e){}
    if(S.st&&S.st.ms&&typeof msDone67==='function'){S.st.ms.t0=-99}Q.length=0;if(S.dead)break;
    if(m===2&&!out.tut)out.tut=snap();if(m===24&&!out.road)out.road=snap();if(m>=40)late=snap()}
@@ -34,7 +34,7 @@ const [,,URL,MAIN]=process.argv;
    const g={k:S.origin.k,par:S.origin.par,n0:S.origin.n,land:S.origin.land,name:S.name,rank:S.rank,turn:S.turn,kids:(S.kids||[]).length,n:S.st.ch&&S.st.ch.n,plan:S.st.ch&&S.st.ch.plan.join(','),
     rd:S.st.f14?S.st.f14.rd||'':'-',act:S.st.f14&&S.st.f14.act?JSON.stringify(S.st.f14.act):'',story:JSON.stringify(S.st.story||S.st.q||null).length,M:S.st.M?JSON.stringify(Object.keys(S.st.M)).length:0,
     rare:(typeof ow69Rare==='function')?ow69Rare(S.origin.k):'',hasStory:!!(STORY&&STORY[S.origin.k]),hasQ:!!(typeof QUEST67!=='undefined'&&QUEST67[S.origin.k])};
-   let er=null;for(let i=0;i<60&&!S.dead;i++){Q.length=0;used=0;try{nextBuoi()}catch(e){er=e.message;break}}Q.length=0;g.err=er;g.dead=!!S.dead;
+   let er=null;for(let i=0;i<60&&!S.dead;i++){__qDrain();used=0;try{nextBuoi()}catch(e){er=e.message;break}}Q.length=0;g.err=er;g.dead=!!S.dead;
    try{tab='story';render();g.storyTab=((document.getElementById('panel')||{}).textContent||'').length;tab='act';render()}catch(e){g.err=g.err||('render '+e.message)}
    return g},o.save);
   console.log(nm,JSON.stringify({k:r.k,par:r.par,rank:[o.rank,r.rank],turn:[o.turn,r.turn],n:[o.n,r.n],rd:[o.rd,r.rd],rare:r.rare,dead:r.dead,err:r.err}));

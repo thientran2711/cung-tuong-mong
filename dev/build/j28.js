@@ -65,9 +65,12 @@ function ocStamp(x,y){try{if(!x||!y||typeof x!=="object")return;const k=ocKey(y)
 function ocFloor(h,t){const C=BAL.oanCool,L=BAL.oanLv;try{if(typeof memTop!=="function"||!t)return 0;const m=memTop(h,t,-1);if(!m)return 0;
   if(m.L||m.k)return L[C.floor.keep-1]||0;return m.g>=BAL.mem.faint?(L[C.floor.mem-1]||0):0}catch(e){return 0}}
 /* fade one grudge value v held by h toward t (key k) by w tuần of cool-down; returns the new value */
-function ocOne(h,t,k,v,w,kf){const C=BAL.oanCool;v=+v||0;if(!(v>0))return v;const q=h.ocq&&h.ocq[k];if(q!=null&&ocWk()-q<C.quiet)return v;
+/* review/oan-pace (c) (owner OD 26/11 ~18:40Z «giảm quá chậm»): the longer the holder is left alone, the faster (× 1 + alone.k × days quiet past
+   quiet, at most alone.max days; an old save with no stamp = alone the longest); a deep grudge (≥ BAL.oanLv[deep.lv − 1]) slower (× deep.k) */
+function ocOne(h,t,k,v,w,kf){const C=BAL.oanCool;v=+v||0;if(!(v>0))return v;const q=h.ocq&&h.ocq[k];const qd=q==null?1e9:ocWk()-q;if(qd<C.quiet)return v;
  const fl=ocFloor(h,t);if(v<=fl)return v;const cc=h.occ=h.occ&&typeof h.occ==="object"?h.occ:{};
- const d=(cc[k]||0)+w*ocBandW(v)/C.season*kf;const n=Math.floor(d);cc[k]=Math.round((d-n)*1000)/1000;if(!n)return v;return Math.max(fl,v-n)}
+ const A=C.alone,Dp=C.deep,m=(1+A.k*Math.min(A.max,qd-C.quiet))*(v>=BAL.oanLv[Dp.lv-1]?Dp.k:1);
+ const d=(cc[k]||0)+w*ocBandW(v)/C.season*kf*m;const n=Math.floor(d);cc[k]=Math.round((d-n)*1000)/1000;if(!n)return v;return Math.max(fl,v-n)}
 function ocPerson(id){try{return (typeof rivals!=="undefined"?rivals:[]).find(v=>v&&String(v.id)===String(id))||null}catch(e){return null}}
 /* w tuần of cool-down for every grudge in the world; mine = also HER own grudges (S.ro) */
 function oanCool(w,mine,onlyMine){const C=BAL.oanCool;if(!C||!C.on||!S)return;w=w||1;
@@ -81,7 +84,7 @@ function oanCool(w,mine,onlyMine){const C=BAL.oanCool;if(!C||!C.on||!S)return;w=
 /* the weekly jealousy fade of one consort (j8 rivalsTurn): BAL.oanCool.ghen.than when she likes her, .base otherwise, + .pct of the jealousy itself (high jealousy
    cools faster: a quiet season takes about a third off, like one oán band), × her nết; fractions carry (v.gcc) */
 function ghenCool(v){const G=BAL.oanCool.ghen;const b0=(+v.rel||0)>=netTh(v,"than")?G.than:G.base;/* rollback (BAL.oanCool.on = 0): the old flat «3 : 1» exactly */
- if(!(BAL.oanCool&&BAL.oanCool.on))return b0;const b=b0+G.pct*(+v.ghen||0);const d=(+v.gcc||0)+b*persF(v,"forgive",1),n=Math.floor(d);v.gcc=Math.round((d-n)*1000)/1000;return n}
+ if(!(BAL.oanCool&&BAL.oanCool.on))return b0;const b=(b0+G.pct*(+v.ghen||0))*(typeof opGfK==="function"?opGfK(+v.ghen||0,(+S.sung||0)-(+v.sung||0),v.gLw):1)/* review/oan-pace-ghen: × alone / deep / relative favour */;const d=(+v.gcc||0)+b*persF(v,"forgive",1),n=Math.floor(d);v.gcc=Math.round((d-n)*1000)/1000;return n}
 /* the weekly tick: inside rivalsTurn (host only in co-op: jcoopworld mutes it on the guest, whose OWN grudges cool in her oanMonth, 3 tuần at once) */
 (function(){const r0=rivalsTurn;rivalsTurn=function(){const r=r0.apply(this,arguments);try{oanCool(1,true)}catch(e){console.error("oanCool",e)}return r}})();
 /* a new rise restarts the quiet count of that grudge */
@@ -89,7 +92,7 @@ function ghenCool(v){const G=BAL.oanCool.ghen;const b0=(+v.rel||0)>=netTh(v,"tha
 function oanMonth(){if(BAL.oanCool&&BAL.oanCool.on){try{if(typeof worldOn==="function"&&!worldOn())oanCool(3,true,true)}catch(e){}return}
  for(const v of rivals){const f=Math.round(BAL.oanFade*persF(v,"forgive",1));v.oan=Math.max(0,(v.oan||0)-f);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-f)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-BAL.oanFade);
  /* rel-men-servants: men and servants forget by the same rule (their nết, j28 persF) */
- for(const h of relMSAll()){const f=Math.round(BAL.oanFade*persF(h,"forgive",1));if(h.oan)h.oan=Math.max(0,h.oan-f);if(h.ro&&typeof h.ro==="object")for(const k in h.ro)h.ro[k]=Math.max(0,h.ro[k]-f)}}
+ for(const h of relMSAll()){const f=Math.round(BAL.oanFade*persF(h,"forgive",1));if(h.oan)h.oan=Math.max(0,h.oan-f);if(h.ro&&typeof h.ro==="object")for(const k in h.ro)h.ro[k]=Math.max(0,h.ro[k]-f)}}/* rv-promo-stack-lr4: LIVE rollback line restored (the token merge had put D's oanCool(h,x) call here; LIVE oanCool is (w,mine,onlyMine) → wrote undefined) */
 /* gifts land by trait: Kiêu ngạo shrugs at small ones, Tham vọng warms to a rising giver, Tham tiền to anything */
 (function(){const g0=giftVal;giftVal=function(it,r){let v=g0.apply(this,arguments);if(r&&typeof r==="object"&&r!==S){let m=persF(r,"gift",1);const lav=persF(r,"lavish",0);if(lav&&(it.pr||0)>=lav)m=Math.max(m,1.5);{const rg=Math.max(1,...traitsOf(r).map(t=>(PERS[t]&&PERS[t].riseGift)||1));if(rg>1&&(S.rank>=r.rank||S.sung>=r.sung))m*=rg}v=Math.max(1,Math.round(v*m))}return v}})();
 /* SOCIAL MENU: once a week each consort may do one non-harm deed, by her traits; the same menu toward her and toward anyone */
