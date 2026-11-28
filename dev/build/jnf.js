@@ -265,12 +265,20 @@ const TM={t0:0,id:null,stop(){if(this.id){clearInterval(this.id);this.id=null}th
    const el=document.querySelector("#mb .kchips.kctm");if(el&&typeof kitCoopClock==="function")el.outerHTML=kitCoopClock({left:Math.max(0,left),len:E});   /* the kit text pass drops the wrapper id: find the chip row itself */
    if(left<=0){this.stop();const i=Q.findIndex(m=>m&&m.pid==="nfch");
     const j=i===0&&!$("modal").hidden?Q[0].opts.findIndex(c=>c&&c.n==="Thôi"):-1;/* flight-choose-guard: never chooseM(−1) */if(j>=0)chooseM(j);else{if(i>=0)Q.splice(i,1);mine(null);try{showModal();render()}catch(e){}}}}catch(e){console.error(e)}},250)}};
+/* DAYQ-NOTURN (law 11, the card ⇄ queued-scene family of Q-SOFTLOCK / dqNewsPass): a flip that is only QUEUED (nothing of it on screen, no scene
+   job running) and that the kit queue cannot start now (j93 kmFree false: a host / end card up; kmRankWait: a rank card waits in Q first) never
+   holds a card — the card is painted (no choice put up early: showChoice stays with step()), and the flip plays once the queue frees. Without
+   this the card waited for the flip and the flip for the card (F s21g «Sang ngày mới» dead ×3, up to the CAP bound). Paint only: no S key, no draw. */
+function cfStuck(){try{/* solo only (RV-163M: coop-e2e week-2 night stall on the branch): a co-op room paces its night with its own gates and the CAP bound; jdayq kmFree answers «not free» for every ghost host there (its on-screen rule is solo, dqUi) */if(typeof dqUi!=="function"||!dqUi())return false;if(document.querySelector(".kmov.kcf:not(.km-out)"))return false;if(typeof kmBusy!=="undefined"&&kmBusy)return false;
+ if(typeof KMQ==="undefined"||!KMQ.length)return false;/* a flip queued a moment ago (inside her tap, the pump's next 250 ms try) is not stuck yet: BAL.dayq.wake ms, the safety-net bound */
+ if(typeof window.cfAge==="function"&&window.cfAge()<((BAL.dayq&&BAL.dayq.wake)||2000))return false;const free=typeof kmFree!=="function"||kmFree(KMQ[0]);const rw=typeof kmRankWait==="function"&&kmRankWait();
+ if(free&&!rw)return false;window.NFSTAT=window.NFSTAT||{};NFSTAT.cfStuck=(NFSTAT.cfStuck||0)+1;return true}catch(e){return false}}
 if(typeof showModal==="function"){const sm0=showModal;showModal=function(){
  /* (review/sangbuoi-held-fix) except the «Tin trong cung» card jdayq holds the queued, unstarted flip for (window.dqNewsPass): it paints first,
     then the flip plays — else the two waited on each other ~80 s (Robot M4) */
  /* the scene just closed and the choice is due: it goes up first (showChoice puts it at the front), never a card queued meanwhile
     (a reward, a person met) in the ≤250 ms before step's next tick (owner OD 16/11 22:45Z: the choice right after the scene) */
- try{const x=S&&nfOn()?X():null;if(x&&x.st==="open"&&x.me===undefined&&!x.dlg&&!(typeof window.dqNewsPass==="function"&&window.dqNewsPass())){if(scene()){if(!window.__bot)return}else showChoice()}}catch(e){console.error(e)}
+ try{const x=S&&nfOn()?X():null;if(x&&x.st==="open"&&x.me===undefined&&!x.dlg&&!(typeof window.dqNewsPass==="function"&&window.dqNewsPass())){if(scene()){if(!window.__bot&&!cfStuck())return}else showChoice()}}catch(e){console.error(e)}
  /* the choice is due but the flip scene still plays: no other dialog opens under / over it (a card queued before the flip, a reward, a rumour);
     step() puts the choice up the moment the scene closes and the rest follow it (night-final #7) */
  const r=sm0.apply(this,arguments);try{if(Q[0]&&Q[0].pid==="nfch"&&!$("modal").hidden)TM.start()}catch(e){}return r}}
