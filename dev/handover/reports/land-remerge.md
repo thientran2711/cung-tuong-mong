@@ -171,3 +171,37 @@ Current ids: MAIN 184 session_01Rc5AsLU8kBzUp3sz1f92Uw · UI reviewer RV-177 ses
 RV-177 judged the OLD shas (nhv c44a0a39, screenveil 6d2bb1d0); my newer 24026c8a / b6d3c9d6 still carry the issues below.
 1. nhv: base = review/nhv-areas-rv177 1e0d9e64 (c44a0a39 + KIT.md stale 2nd §98 removed) + merge review/kk63 9618c0b5 (RV-177 PASS, K-SRV-OWNFIG KIT §95.4: kitFigWho maps srv emp/ty; MAIN 183/184 lands it — merge LIVE instead if landed) + my 04d9111f + 24026c8a (cherry-pick / merge review/nhv-areas-lrm3). Then: jnhv figSrc may call figFor(p)/kitFigOf(p) straight (nhvKind stays for entryOfP); run node dev/test/kit-srv-ownfig-scan.js <root> fold|ipadAir. Fixes owed: (a) plate-edge-scan transient regex add `krev`; (b) NOCLAMP «before» column vacuous on seed 1 — make it bite (e.g. force the long plate on the edge slot before measuring, or a seed/life whose edge plate overflows without the clamp); (c) MAIN 182: the fixed thẻ gỗ plaque post hides bystander FACES on the right of the area (Fold Thủy tạ, iPad Ngự đạo) — move/shrink so no face is covered (law 11: every area × both devices; add a face-cover check to the scan), look at Fold + iPad stills. Re-run area-test + plate-edge-scan → RV READY RV-177 + copy KK64 + MAIN 184.
 2. screenveil (on b6d3c9d6): RV-177 FAIL-1 — scrvLateBg setProperty("background-image","none","important") + removeProperty erases an element's OWN inline background (iPad cold Đức Thọ cap: .kbg backdrops blank for good). Fix: class toggle (.kscrv-nobg{background-image:none!important} in the kit-scrv style) instead of touching the inline style; add a test (inline-bg div through scrvLateBg ends with its own url); re-run screen-veil.js ALONE (default + KEEP=0 MEM=1); look at iPad + Fold Đức Thọ stills → RV READY RV-177 + MAIN 184.
+
+## LAND-REMERGE-6 (LRM6) session_01Rc5AsL7cTzQgo5UbmhxRFb — 28/11 01:22Z–~04:50Z (MAIN 184 → 185 → 186 session_01Rc5AsNNdRG9GqK1FC4jasv worker; START_CTX ≈ 3 %)
+PRIORITY #1 CHECK: rv-177 §1/§2 + «LRM5 late queue» | main LIVE 18003079 | review/* lc34-ui6 62b08228 (base per MAIN 185/186; holds kk63-rv178 + kit-kri-xl-rv178 + kit-stage-r17), nhv-areas-rv177 1e0d9e64, nhv-areas-lrm3 24026c8a, kit-screenveil-lrm3 b6d3c9d6 | claims LRM5 → LRM6. Nothing rebuilt; continued LRM5's branches.
+KIT CHECK: nhv reuses kitTagKeepIn (93.5b), kitPick + kitPick.postBox (§98.1: the post never yields → figures yield), kitDim, figFor + KIT §95.4 K-SRV-OWNFIG; screenveil = §97 kitScreenVeil, 2 kit classes in the kit-scrv style (.kscrv-nobg, .kscrv-hide), §97.3 rewritten in place. No other new part.
+Both branches: true merges (source conflicts only assemble.py list union + KIT_REQUESTS union; index.html / sw.js rebuilt), ancestor 18003079 + 62b08228 TRUE, 0 deletions vs LIVE and ui6, assets.json = lc34-ui6, 0 regex lookbehind in my diff (base hits = KK66 review/webkit-lb per MAIN 186).
+
+### nhv-areas → cc4becfc review/nhv-areas-lrm6 — RV READY RV-179 session_01Rc5AsK15XmpbEGvfze2dzo (28/11 ~04:05Z)
+Base 1e0d9e64 (RV-177's §98 ghost removal kept) + LIVE + kk63-rv178 ebf9e552 + LRM5 24026c8a + lc34-ui5 + lc34-ui6.
+1. RV-177 FAIL-1 (law 9/11): jnhv figSrc passes the srv-shaped Emperor / Thái y to kit figFor (K-SRV-OWNFIG wrapper); nhvKind stays for entryOfP / silhouette. kit-srv-ownfig-scan PASS fold + ipadAir; NHV.figSrc probe {srv,emp} → fig-emperor-a18-1, {srv,ty} → fig-physician.
+2. MAIN 182 face cover (law 11): bystander GROUPS whose faces sit under the thẻ gỗ (postBox band + board rects) yield as one to the free floor left of the band nearest their place (speaker + her followers, staying / moved groups, stage edge = obstacles; never crossing — area-test rule), full size if it fits, else smaller (BAL.area.faceMin .45) and higher (faceRise .12); face box BAL.area.face; undone on back(), redone after re-layout. First version (shift only) failed area-test «people never overlap» (Lục Hàm Yên over the speaker 66 px) → reworked.
+3. plate-edge-scan: FACE family + NOYIELD=1 before column; krev + kmgloom/kmdark transient (nit a); NOCLAMP before column bites on every life (nit b: the stress name only wraps, so the edge master is moved to the stage edge, then NHV.tagsFix). area-test transient + .rtoast/.kres/.kitem.
+| life KSEED=2 (mklife on this base) | BEFORE | AFTER cc4becfc |
+|---|---|---|
+| bystander faces behind the board | 6 (NOYIELD: Fold thuyta ×2, Fold dinhco Emperor + follower, iPad thuyta, iPad dinhco Emperor) | 0 / 21 |
+| stress plates past the stage edge | NOCLAMP 16 / 16 OFF (18–32 px) | 0 (238 / 238 inside) |
+| people off stage / covered by a stage layer | 0 / – | 0 / 438 · 0 (512 transient) |
+| KK60 idempotent / resize | – | 16 plates 0 changed · 64 |
+| area-test | first yield 60/68 | 69 / 69 |
+Stills CDN img/_review/nhv-lrm6/ (8, looked). Observation for RV: Fold Ngự đạo Hoàng hậu with 5 followers → LRM5 stepOut shrinks her follower row very small (pre-existing, unchanged).
+
+### kit-screenveil → f87b0d32 review/kit-screenveil-lrm6 — RV READY RV-179 (28/11 ~04:45Z)
+1. RV-177 §2 FAIL-1: scrvLateBg → class .kscrv-nobg (inline background kept). 2. Same family: scrvLateImg style.visibility hide/"" → class .kscrv-hide + watcher re-adds on class rewrite. 3. Fold cold Đức Thọ cap 1-frame hole (c21-th, no hide mark): second observer on the whole body hides every <img> attached outside the view root at attach.
+New test dev/test/screen-veil-latebg.js: BEFORE b6d3c9d6 4/16 ok → AFTER 16/16. screen-veil.js (+ STEP= / SHOT=1) ALONE fold,ipadAir:
+| run | build | bad | warm veils | RSS MB Fold / iPad |
+|---|---|---|---|---|
+| default | fixes 1+2 only | 1 (Fold cold Đức Thọ c21-th) | 1/38 | – |
+| KEEP=0 MEM=1 | fixes 1+2 only | 0 | 13/38 | 1042 / 1018 |
+| default | f87b0d32 | 0 / 76 | 2/38 (iPad place moves) | – |
+| KEEP=0 MEM=1 | f87b0d32 | 0 | 14/38 | 964 / 1057 |
+| STEP=Đức Thọ SHOT=1 | f87b0d32 | 0 | – | – |
+Stills CDN img/_review/scrv-lrm6/ (Fold + iPad cold Đức Thọ, looked).
+
+### HANDOVER
+Context ≈ 20 % of 1M (START ≈ 3 %) — under the roll line; nothing left running. Next = act on RV-179 verdicts only. If the base moves: true merge (theirs for index.html/sw.js, assemble list union /home/user/wt/l6tools/asmunion.py, KIT_REQUESTS union mdunion.py, build_site.sh, assets.json = base), ancestor + 0-deletion gate, re-run nhv (SAVE=/home/user/wt/l6out/life2.json KSEED=2: plate-edge-scan, area-test; NOYIELD=1 / NOCLAMP=1 before columns) and screenveil (screen-veil-latebg.js; screen-veil.js ALONE default + KEEP=0 MEM=1). Container-local: worktrees /home/user/wt/l6nhv, l6scrv, l6ho; outputs /home/user/wt/l6out.
