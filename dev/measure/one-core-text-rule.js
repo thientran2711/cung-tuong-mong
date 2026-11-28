@@ -39,8 +39,10 @@ const out=[];
 for(const t of texts){if(!/[à-ỹÀ-Ỹ]/.test(t.s))continue;let m;PH.lastIndex=0;
  while((m=PH.exec(t.s))){const n=+(m[2]||m[3]||m[4]);if(!n||n>=100)continue;const pre=t.s.slice(Math.max(0,m.index-40),m.index);if(/0\s*[–-]\s*$/.test(pre))continue;if(/từ 0 đến\s*$/i.test(t.s.slice(Math.max(0,m.index-8),m.index+m[0].length-String(n).length)))continue;/* a score range «từ 0 đến 10» */
   let props=null,word=null;for(const [re,ps] of WORDS){const all=[...pre.matchAll(new RegExp(re.source,'gi'))];if(all.length){const at=all[all.length-1].index;if(word===null||at>word.at){word={at,w:all[all.length-1][0]};props=ps}}}
-  if(!props&&t.key&&rules[t.key]){props=[t.key];word={w:'('+t.key+')'}}
-  if(!props&&t.key)for(const [re,ps] of WORDS)if(re.test(t.key)){props=ps;word={w:'('+t.key+')'};break}/* KIT_GLOSS {"Áp lực hôn sự":"…"} */
+  /* RV-184 (law 11, whole family): a UI LABEL key ({title:"…"}, t / n / name / label / text / x / h) is never a stat word — a local named `title` compared in a rule (psl4 jpun kept-rank index o.title>0) made every KIT_SAMPLES / card title text read as a «title» threshold */
+  const LABELK=/^(title|t|n|name|label|text|x|h)$/;
+  if(!props&&t.key&&!LABELK.test(t.key)&&rules[t.key]){props=[t.key];word={w:'('+t.key+')'}}
+  if(!props&&t.key&&!LABELK.test(t.key))for(const [re,ps] of WORDS)if(re.test(t.key)){props=ps;word={w:'('+t.key+')'};break}/* KIT_GLOSS {"Áp lực hôn sự":"…"} */
   if(!props)continue;
   const cuts=new Map();for(const pr of props)for(const [v,w] of (rules[pr]||new Map()))cuts.set(v,(cuts.get(v)||[]).concat(w));
   const kind=/^(jkitpage|jksize)\.js$/.test(t.f)?'SAMPLE':cuts.has(n)?'TYPED':'DIFF';

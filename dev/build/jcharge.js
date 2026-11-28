@@ -90,7 +90,11 @@ let CHWS=null;/* the witnesses the last presented charge spent (her notice names
 function chFor(h,t){const m=chSync(h,t),W=chWitS(h,t);const O=chOrd(t);let best=null,gap=1e9;for(const c of O){const n=m[c]||0,w=chWitL(W,c).length;if((n>0||w>0)&&chRoom(h,t,c,m,W)){const g=Math.max(0,chNeed(t,c)-n)+Math.max(0,chWitNeed(t,c)-w);if(g<gap){gap=g;best=c}}}
  if(best)return best;for(const c of O)if(chRoom(h,t,c,m,W))return c;return null}
 /* a charge whose pieces are full (heaviest first); c given = only that charge */
-function chReady(h,t,c){if(!h||!t||h===t)return null;const m=chSync(h,t),W=chWitS(h,t);const L=c?[c]:chB().order;for(const x of L)if((m[x]||0)>=chNeed(t,x)&&chWitL(W,x).length>=chWitNeed(t,x))return x;return null}
+/* STALE-TESTS-8 perf (ag-all p95 94 ms vs LIVE 8): chNeed / chWitNeed read chTier → chDeedMap → deedsOf → deedSync (luxOf, toilNpc …) for EVERY
+   charge of every NPC plan check (j95except / opEx / motiveOK → chOK), ~200k calls in 10 days. chTier only ever returns the charge's own tier or "tu",
+   so the need is never below the smaller of the two (+ rkPlus): with fewer pieces than that floor the answer is null without reading the deeds. Same result. */
+function chNeedLo(t,c){const C=chC(c);if(!C)return 99;const T=chB().tier;return Math.min(T[C.tier].need,T.tu.need)+(t?chB().rkPlus[Math.max(0,Math.min(7,rkOf(t)))]||0:0)}
+function chReady(h,t,c){if(!h||!t||h===t)return null;const m=chSync(h,t),W=chWitS(h,t);const L=c?[c]:chB().order;for(const x of L){const n=m[x]||0;if(n>=chNeedLo(t,x)&&n>=chNeed(t,x)&&chWitL(W,x).length>=chWitNeed(t,x))return x}return null}
 function chOK(h,t,c){return !!chReady(h,t,c)}
 /* the charge she is building on t (known to her: she holds a piece of it), for the cards */
 function chChase(h,t){const m=chSync(h,t),W=chWitS(h,t);let best=null,gap=1e9;for(const c of chB().order){const n=m[c]||0,w=chWitL(W,c).length;const g=Math.max(0,chNeed(t,c)-n)+Math.max(0,chWitNeed(t,c)-w);if((n>0||w>0)&&g>0){if(g<gap||(g===gap&&!best)){gap=g;best=c}}}return best}

@@ -80,8 +80,9 @@ function kinlPickInline(c,ref,acts){try{const d=c.closest(".kinldet");if(!d||typ
 .kinldet .kinlacts{grid-column:1/-1}
 .kinldet .kinlacts .kinvacts.rbtn{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))!important;gap:6px;margin-top:6px}
 .kinldet .kinlacts .kinvacts>button{height:auto!important;min-height:0!important;align-self:start}
-.kinldet .kinlchips{display:flex;flex-direction:column;gap:5px;align-items:stretch;font-size:.78rem;max-width:132px;padding:6px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px;background:#f4ead8}
-.kinldet .kinlchips .chip{white-space:normal}
+.kinldet .kinlchips{display:flex;flex-direction:column;gap:5px;align-items:stretch;font-size:.78rem;max-width:none;padding:6px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px;background:#f4ead8}
+/* K-TAG-WRAP (KK66, rule X23): a summary chip («✓ Đã biết: Đúng phẩm», «Xa xỉ N» …) stays on ONE line; the column grows to its longest chip (never cut, no ellipsis); host < 420 px = kinl-narrow row */
+.kinldet .kinlchips .chip,.kinldet .kinlchips .kchip{white-space:nowrap}
 .kinldet.kinlwear{margin:6px 0 4px;clear:both}
 .kinldet.kinl-narrow{grid-template-columns:minmax(0,1fr)}
 .kinldet.kinl-narrow .kinlpic{justify-self:center}
