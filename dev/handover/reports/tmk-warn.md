@@ -73,3 +73,16 @@ Branch `review/tmk-warn` (base review/tmk-oanpace-fix b96bb0d5 — LC33 asked fo
   unless locked). Verified locally (cherry-pick in a throw-away worktree, not pushed): kit-hand-mat-scan fold lost «!» 0 / lost plate 0,
   s21e card plate 2 rows; kit-hand-rows stills Fold + iPad: plate = ĐƯỢC · MẤT (4 dangers incl. the charge + odds word) · GHI CHÚ. My branch
   gets the fix through the land stack (kk63 must land before/with tmk-warn).
+- MAIN 182 asked to move every chanceW «khả năng …» to the law-7 ladder → PUSHBACK ACCEPTED (VANPHONG.md l.66–67: ladder = the option's own
+  roll only; side chances in Được/Mất/Kèm = «khả năng rất thấp … rất cao»). Branch follows it (jmcwarn comment fixed, 9598228e).
+- GATES on a4e79f76 (base for comparison = b96bb0d5, same box):
+  | gate | branch | base |
+  |---|---|---|
+  | coop-e2e | 138/143 — week 3 stalls both seats, then 3 follow-on fails | hangs at week 3 (72 ok, killed at 1700 s) — same coop week-stall family, pre-existing |
+  | kit-std-scan (original, route.fulfill) | page CLOSES at tab «act» every run | runs, FAIL 28 |
+  | kit-std-scan (local copy, file://, SUBS=0) | FAIL 28 (X02 20 · X06 4 · X08 4), 0 page errors | FAIL 28, identical list (diff empty) |
+  | kit-hand-mat-scan (with kk63 eb303595) | fold + ipadAir: lost plate 0, lost «!» 0 | — |
+- HARNESS FINDING (not game): kit-std-scan serves the page with ctx.route → route.fulfill(body = whole html); past ~20.65 MB the page target
+  closes (no crash event, no navigation, no window.close) on the first tab click. Proof: replacing jmcwarn.js by a same-size COMMENT file
+  closes it too; removing the file passes. LIVE 20.59 MB / base 20.64 MB under, this branch 20.65 MB over → every branch hits it as the page
+  grows. Fix: the scan opens file://SRC (local copy /tmp only; owner of kit-std-scan to change it).
