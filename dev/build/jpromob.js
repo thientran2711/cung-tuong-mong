@@ -205,7 +205,7 @@ function pcWhy(p){const me=p===S,B=BAL.promoR.pc,nm=me?"ngươi":p.name;const hd
    L.push(f.E>0?`Hoàng thượng để mắt tới ${nm}${sg}: ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}, danh giá`:`xa ${dh}`}`:`Hoàng thượng chưa để mắt tới ${nm}${sg}: ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}`:`xa ${dh}`}`)}
   if(!own&&Math.abs(f.H)>=B.why&&pcKind(h)!==0&&Math.sign(x.H)>0)L.push(f.H>0?`được Hoàng hậu thương: xếp ở với ${hn}, người hiền hòa`:`Hoàng hậu không ưa ${nm}: xếp ở với ${hn}, người khó tính`);
   if(!own&&Math.abs(f.T)>=B.why&&Math.abs(pcAlign(h))>=B.why&&Math.sign(x.T)>0)L.push(f.T>0?`Thái hậu thương ${nm}: chủ vị ${hn} là người được Thái hậu tin`:`Thái hậu không ưa ${nm}: chủ vị ${hn} cũng không được lòng Thái hậu`)
-  if(!own&&B.wC&&pcMut(p,h)>=B.why&&x.C>0)L.push(`${hn} quý ${nm}, xin cho ${me?"ngươi":"nàng"} về ở chung`)/* D-ROW8: only when the liking really pulled her there */}
+  if(!own&&B.wC&&pcMut(p,h)>=B.why&&x.C>0)L.push(`${hn} có thiện cảm với ${nm}, xin cho ${me?"ngươi":"nàng"} về ở chung`)/* D-ROW8: only when the liking really pulled her there */}
  if(!L.length)L.push(h&&h!==p?`Nội vụ phủ xếp ${nm} vào chỗ còn trống, ở với ${hn}`:`Nội vụ phủ xếp ${nm} vào chỗ còn trống`);return L}
 function pcWhere(p){try{return houseName(p)}catch(e){return palName("home")}}
 /* the panel (kit T1 panel via the Q modal + kitRows; no own part) */

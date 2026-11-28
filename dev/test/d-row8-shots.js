@@ -31,7 +31,7 @@ const DEVS=A.filter(a=>D.DEVICES[a]);const NET=!A.includes('--no-net');let bad=0
   for(let i=0;i<30;i++){const t=await g.evaluate(()=>{const m=document.getElementById('modal');const e=[...document.querySelectorAll('body *')].reverse().find(e=>e.tagName!=='SCRIPT'&&e.tagName!=='STYLE'&&!(m&&m.contains(e))&&/Chạm để tiếp/.test(e.textContent)&&e.getBoundingClientRect().width>0);if(!e)return 0;const r=e.getBoundingClientRect();return[r.x+r.width/2,r.y+r.height/2,e.tagName+'.'+e.className]});if(!t)break;console.log('tap',t[2]);await pg.mouse.click(t[0],t[1]);await pg.waitForTimeout(500)}
   await g.evaluate(()=>{try{showModal()}catch(e){}});await pg.waitForTimeout(600);
   await shot('row8-phan-cung');
-  const why=await g.evaluate(()=>pcWhy(S).join(' | '));console.log(tag,'why:',why);if(!/quý ngươi, xin cho ngươi về ở chung/.test(why)){bad++;console.log('FAIL no liking line')}
+  const why=await g.evaluate(()=>pcWhy(S).join(' | '));console.log(tag,'why:',why);if(!/có thiện cảm với ngươi, xin cho ngươi về ở chung/.test(why)){bad++;console.log('FAIL no liking line')}
   if(errs.length){bad++;console.log('page errors',errs.slice(0,3))}
   await ctx.close()}
  await b.close();srv.close&&srv.close();console.log(bad?`FAIL ${bad}`:'PASS');process.exit(bad?1:0)})();

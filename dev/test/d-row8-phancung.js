@@ -36,8 +36,8 @@ const {chromium}=require('playwright');const D=require('./lib/device');
   ck("why line shown == applied (liked host named; neutral → no line)",()=>{fresh();S.rank=1;const hs=hosts();if(!hs.length)return{got:0,bad:"no host"};const un=neutral(S,hs);for(const h of hs)setLike(S,h,0);const cap=resCap();const mt=x=>[S].concat(rivals).filter(y=>y!==x&&y!==S&&y.alive&&!y.out&&!y.queen&&y.resHead===key(x)&&!(rkOf(y)>=3&&y.pal!=null)).length;
    /* the load rule (BAL.promoR.pc.load per co-resident) spreads first: the liked host is one of the least-filled houses */const m0=Math.min(...hs.map(mt));const h=hs.find(x=>mt(x)===m0&&mt(x)<cap);setLike(S,h,80);
    S.resHead=null;S.resHall=null;window.phanCungEdict({list:[{p:S,fav:{}}],then:()=>{}});const m=Q[0];const hd=byKey(houseOf(S));const why=pcWhy(S).join(" | ");Q.length=0;try{closeModal&&closeModal()}catch(e){}
-   const pulled=hd===h;const line=/quý ngươi, xin cho ngươi về ở chung/.test(why);for(const x of hs)setLike(S,x,0);const why0=pcWhy(S).join(" | ");un();
-   return{got:`host ${hd&&hd.name} · ${why.slice(0,90)}`,bad:!m||m.t!=="Phân cung"?"no panel":!pulled?"liked host not picked":!line?"no why line for the liking":/quý ngươi/.test(why0)?"line without liking":/%/.test(why)?"% in text":""}});
+   const pulled=hd===h;const line=/có thiện cảm với ngươi, xin cho ngươi về ở chung/.test(why);for(const x of hs)setLike(S,x,0);const why0=pcWhy(S).join(" | ");un();
+   return{got:`host ${hd&&hd.name} · ${why.slice(0,90)}`,bad:!m||m.t!=="Phân cung"?"no panel":!pulled?"liked host not picked":!line?"no why line for the liking":/có thiện cảm với ngươi/.test(why0)?"line without liking":/%/.test(why)?"% in text":""}});
   ck("spread: empty house chosen by the rule (liked empty host)",()=>{fresh();const hs=hosts();if(hs.length<3)return{got:hs.length,bad:""};
    /* make one full house, two empty; the newest mate (last) likes the second empty host */
    const cap=resCap();const g=liveRivals(false).filter(v=>rkOf(v)<3&&!v.coop&&v.alive&&!v.out);if(g.length<cap)return{got:"few girls",bad:""};
