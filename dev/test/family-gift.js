@@ -17,7 +17,7 @@ const F=[];const ck=(ok,m)=>{console.log((ok?'PASS ':'FAIL ')+m);if(!ok)F.push(m
  await g.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;start();try{NLP=null}catch(e){}Q.length=0;{const k=document.getElementById('kload');if(k)k.hidden=true;const m=document.getElementById('modal');if(m)m.hidden=true}try{render()}catch(e){}});
  try{await g.waitForSelector('#kroul',{timeout:20000});await p.waitForTimeout(1500);await g.evaluate(()=>{const b=[...document.querySelectorAll('#kroul button')].find(x=>/Bỏ qua/.test(x.textContent));b&&b.click()});await g.waitForSelector('#kroul',{state:'detached',timeout:20000})}catch(e){}
  await p.waitForTimeout(1500);await g.evaluate(()=>{document.querySelectorAll('.krbox,#kroul').forEach(x=>{const o=x.id==='kroul'?x:x.parentElement;o&&o.remove()});const c=document.getElementById('curtain');if(c)c.hidden=true;Q.length=0;try{NLP=null}catch(e){}const m=document.getElementById('modal');if(m){m.hidden=true;m.className='modal'}render()});
- const R=await g.evaluate(()=>{const o={};try{const F=BAL.gift.fam;const r0=roll;const box=e=>{const x=S.il.box.find(z=>z.e===e);return x?x.at+":"+x.own:"none"};
+ const R=await g.evaluate(()=>{const o={};try{const F=BAL.gift.fam;o.F=JSON.parse(JSON.stringify(F));const r0=roll;const box=e=>{const x=S.il.box.find(z=>z.e===e);return x?x.at+":"+x.own:"none"};
   delete S.kc;S.origin=ORIGINS.find(x=>x.k==="tt");S.fgh=null;S.fgT=null;S.fgq=null;S.fgLog=null;used=0;
   const m=fgHome(S);o.home=m?{t:m.t,name:m.name,af:m.af}:null;
   o.tdNone=(()=>{const k=S.origin;S.origin=ORIGINS.find(x=>x.k==="td");const s=S.fgh;S.fgh=null;const r=fgHome(S);S.origin=k;S.fgh=s;return r===null})();
@@ -33,7 +33,7 @@ const F=[];const ck=(ok,m)=>{console.log((ok?'PASS ':'FAIL ')+m);if(!ok)F.push(m
   /* family answer */const inv0=S.inv.length;Q.length=0;S.turn=S.fgq.w;fgReply();const last=S.inv[S.inv.length-1];o.reply={card:Q.some(z=>z.t==="Thư nhà"),got:S.inv.length-inv0,from:last&&last.from,up:S.fgUp&&S.fgUp.n};
   const lg=S.il.log.slice(-6).map(x=>x.slice(2).join(">"));o.ledger=lg;
   S.homeCut=0;S.out=0;S.month=1+BAL.homeEvery;const hm=econHome(S);o.homeMoney={got:hm,base:BAL.home.tt};
-  /* NPC (law 1): same act */const v=liveRivals(true).find(x=>!x.queen&&x.alive);v.bac=400;v.dad=40;const vb=v.bac;const r5=fgGo(v,"nang","bac");o.npcB={ok:r5&&r5.ok,bac:vb-v.bac,dad:v.dad-40};
+  /* NPC (law 1): same act */const v=liveRivals(true).find(x=>!x.queen&&x.alive);v.bac=400;v.dad=40;const vb=v.bac,vd0=v.duc||0,vn0=v.danh||0;SP_OFF=(typeof SP_OFF==="number"?SP_OFF:0)+1;const r5=fgGo(v,"nang","bac");SP_OFF--;o.npcB={ok:r5&&r5.ok,bac:vb-v.bac,dad:v.dad-40,duc:(v.duc||0)-vd0,danh:(v.danh||0)-vn0};
   v.inv=(v.inv||[]).filter(z=>!fit(z));const ve={k,from:"mkt"};invAdd(v,ve);const r6=fgGo(v,"vua","item");o.npcI={ok:r6&&r6.ok,inInv:v.inv.includes(ve),at:box(ve),own:String(v.id)};
   roll=()=>false;const ve2={k,from:"mkt"};invAdd(v,ve2);const vd=v.danh||0;const r7=fgGo(v,"vua","item");o.npcStop={ok:r7&&r7.ok,at:box(ve2),danh:(v.danh||0)-vd};
   roll=()=>true;let nN=0;const p0=BAL.gift.fam.npc.p;BAL.gift.fam.npc.p=100;for(const x of liveRivals(true))x.bac=500;const lb=liveRivals(true).map(x=>x.bac);fgNpcMonth();nN=liveRivals(true).filter((x,i)=>x.bac<lb[i]).length;BAL.gift.fam.npc.p=p0;o.npcMonth=nN;
@@ -53,12 +53,16 @@ const F=[];const ck=(ok,m)=>{console.log((ok?'PASS ':'FAIL ')+m);if(!ok)F.push(m
  ck(R.vuaI&&R.vuaI.ok&&!R.vuaI.inInv&&/^nha:me/.test(R.vuaI.at),'B law 6c Vừa: the piece left her chest and sits in box «nha»');
  ck(R.vuaStop&&!R.vuaStop.ok&&!R.vuaStop.inInv&&/^nvp:me/.test(R.vuaStop.at)&&R.vuaStop.danh<0,'B gate stop: the piece goes to the Nội vụ phủ store, Danh down');
  ck(R.empPicked===false,'B an imperial bestowal is never picked to go home');
- ck(R.nangB&&R.nangB.ok&&R.nangB.bac===95,'B Nặng bạc: fee 5 + 90');
- ck(R.reply&&R.reply.card&&R.reply.got===1&&R.reply.from==="nha"&&R.reply.up===10,'B the family answers: letter card, a real home gift, more home money');
- ck(R.homeMoney&&R.homeMoney.got===R.homeMoney.base+10,'B Nặng: home money larger');
- ck(R.npcB&&R.npcB.ok&&R.npcB.bac===95&&R.npcB.dad===4,'B law 1 NPC Nặng bạc: same cost, her house standing up');
+ ck(R.nangB&&R.nangB.ok&&R.nangB.bac===R.F.fee+R.F.nang.bac,'B Nặng bạc: fee + nang.bac (BAL)');
+ ck(R.reply&&R.reply.card&&R.reply.got===1&&R.reply.from==="nha"&&R.reply.up===R.F.nang.up,'B the family answers: letter card, a real home gift, more home money');
+ ck(R.homeMoney&&R.homeMoney.got===R.homeMoney.base+R.F.nang.up,'B Nặng: home money larger');
+ ck(R.npcB&&R.npcB.ok&&R.npcB.bac===R.F.fee+R.F.nang.bac&&R.npcB.dad===R.F.npc.dad[2]&&R.npcB.duc===R.F.nang.duc&&R.npcB.danh===R.F.nang.danh,'B law 1 NPC Nặng bạc: same cost, same Đức / Danh, her house standing up');
  ck(R.npcI&&R.npcI.ok&&!R.npcI.inInv&&R.npcI.at==="nha:"+R.npcI.own,'B law 1 NPC Vừa item: the piece in box «nha» under her owner key');
  ck(R.npcStop&&!R.npcStop.ok&&/^nvp:/.test(R.npcStop.at)&&R.npcStop.danh<0,'B law 1 NPC stopped at the gate: same store, same loss');
+ {/* law 2: at the base gate odds Nặng's expected result beats Vừa's (liking, Đức, Danh) while it costs more */const F=R.F||{},ev=(T,k,l)=>T.o/100*(T[k]||0)-(1-T.o/100)*(T[l]||0);
+  const rowsEv=[['liking',ev(F.vua,'af',''),ev(F.nang,'af','')],['Đức',ev(F.vua,'duc','lostDuc'),ev(F.nang,'duc','lostDuc')],['Danh',ev(F.vua,'danh','lostDanh'),ev(F.nang,'danh','lostDanh')]];
+  console.log('\nLAW 2 EXPECTED | Vừa | Nặng');for(const r of rowsEv)console.log(`${r[0]} | ${r[1].toFixed(2)} | ${r[2].toFixed(2)}`);
+  ck(rowsEv.every(r=>r[2]>r[1])&&F.nang.bac>F.vua.bac&&F.nang.v[0]>F.vua.v[1],'B law 2: Nặng costs more AND its expected Được beats Vừa (liking, Đức, Danh)')}
  ck(R.npcMonth>0,'B NPC monthly sending runs');
  ck(/Nhẹ/.test(R.modal||"")&&/Thôi|✕/.test(R.modal||""),'B dialog renders');
  ck(!errs.length,'B no page error '+errs.join(' | '));

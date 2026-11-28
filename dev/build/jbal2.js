@@ -2625,5 +2625,5 @@ BAL.gift=BAL.gift||{};
 BAL.gift.fam={k:1,fee:5,cd:1,wait:1,keep:12,tcMid:40,tcK:.3,orig:["tt","dtq","muoi","cn","ch","thd"],
  nhe:{suc:8,item:"khantay",af:3,duc:1},
  vua:{v:[15,59],bac:30,o:72,af:6,duc:1,danh:1,lostDanh:2},
- nang:{v:[60,9999],bac:90,o:50,af:10,duc:2,danh:2,lostDanh:4,lostDuc:2,up:10,m:3},
+ nang:{v:[60,9999],bac:90,o:60,af:12,duc:2,danh:3,lostDanh:3,lostDuc:1,up:20,m:3},/* BIG rv (law 2): Nặng must clearly out-gain Vừa — at base odds the expected liking / Đức / Danh of Nặng (7.2 / 0.8 / 0.6) beat Vừa (4.3 / 0.7 / 0.2); was o 50, af 10, danh 2, lost 4 / 2, up 10 = Nặng worse than Vừa in expected Danh and Đức for 60 more Bạc */
  npc:{p:6,nang:30,dad:[0,2,4]}};

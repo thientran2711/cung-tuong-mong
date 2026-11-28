@@ -35,7 +35,7 @@ const F=[];const ck=(ok,m)=>{console.log((ok?'PASS ':'FAIL ')+m);if(!ok)F.push(m
   const snap=f=>({a:aff(f,S),b:aff(S,f),o1:oan(f,S),o2:oan(S,f),hh:f.hh||0});
   const dif=(x,y)=>({a:y.a-x.a,b:y.b-x.b,o1:y.o1-x.o1,o2:y.o2-x.o2,hh:y.hh-x.hh});
   const zero=d=>!d.a&&!d.b&&!d.o1&&!d.o2&&!d.hh;
-  const prep=f=>{f.rel=0;S.rl=S.rl||{};S.ro=S.ro||{};S.rl[f.id]=0;f.oan=20;S.ro[f.id]=20};
+  const prep=f=>{f.rel=0;S.rl=S.rl||{};S.ro=S.ro||{};S.rl[f.id]=0;f.oan=20;S.ro[f.id]=20;/* joanpace (oán / ghét pace, LIVE aecbc267): one pair's fall per day is capped (holder.opa / opz) — clear that store so the want pre-run does not spend the answer's budget */for(const x of [f,S]){delete x.opa;delete x.opz}};
   const plain=h=>String(h||"").replace(/<[^>]+>/g,"");
   const nonFood=Object.keys(IT).filter(k=>Array.isArray(IT[k].tg)&&IT[k].pr>=20&&IT[k].pr<=120&&!IT[k].il&&!IT[k].keep&&!IT[k].nt&&!pgFood({k}));
   const food=Object.keys(IT).find(k=>pgFood({k})&&IT[k].pr);

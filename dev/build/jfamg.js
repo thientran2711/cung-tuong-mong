@@ -36,13 +36,13 @@ function fgLogS(x){S.fgLog=S.fgLog||[];S.fgLog.unshift(x);if(S.fgLog.length>fgF(
 function fgGo(p,t,way){const F=fgF(),T=F[t];if(!T||!fgCan(p,t,way))return null;const me=p===S;const m=me?fgHome(S):null;if(me&&!m)return null;
  let e=null,what="";
  if(t==="nhe"){if(me)S.suc=Math.max(0,S.suc-T.suc);e={k:T.item,from:me?"me":String(p.id)};invAdd(p,e);what=itm(T.item).n}
- else{ap(p,{bac:-F.fee});if(way==="bac"){ap(p,{bac:-T.bac});what=`Bạc ${T.bac}`}else{e=fgPiece(p,t);what=fgPieceN(e)}}
+ else{ap(p,{bac:-(F.fee+(way==="bac"?T.bac:0))})/* rv: ONE deduction (fee + silver) so the float and the result card show the same Bạc */;if(way==="bac")what=`Bạc ${T.bac}`;else{e=fgPiece(p,t);what=fgPieceN(e)}}
  const ok=t==="nhe"||roll(fgO(p,t));
  if(e){try{ilOut(p,e);ilGone(p,e,ok?"home":"conf",{by:ok?"":"gate",keep:1/* the Nhẹ handkerchief is a story item: kept in the ledger all the same (law 6c) */})}catch(x){console.error("fg ledger",x)}}
  const nm=me?"":p.name;
  if(ok){
   if(me){fgAf(m,T.af);apply({duc:T.duc||0,danh:T.danh||0});S.fgq={t,w:S.turn+F.wait};fgLogS({m:S.month,y:S.year,what:`Gửi về: ${what}`})}
-  else{const d=F.npc.dad[["nhe","vua","nang"].indexOf(t)]||0;if(d)p.dad=cl((p.dad==null?40:p.dad)+d,0,100)}
+  else{ap(p,{duc:T.duc||0,danh:T.danh||0});/* law 1: the same Đức / Danh as hers (her mother's liking → the NPC house standing p.dad) */const d=F.npc.dad[["nhe","vua","nang"].indexOf(t)]||0;if(d)p.dad=cl((p.dad==null?40:p.dad)+d,0,100)}
   if(me)S.fgT=S.turn;
   return{ok:true,txt:me?`Thái giám mang ${what} ra cửa cung, đưa tận tay ${m.t.toLowerCase()} ${m.name}.`:`${nm} gửi ${t==="nang"?"một gói lớn":"ít quà"} về nhà mẹ đẻ.`}}
  /* stopped at the gate (expert E2/E6): the piece to the Nội vụ phủ store, talk of sending palace goods out */
@@ -75,15 +75,15 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  if(x){const on0=x.on,h0=x.html;x.on=()=>{try{if(on0())return true}catch(e){}return !!fgHome(S)};x.html=()=>{let h="";try{if(on0())h=h0()}catch(e){}return h+fgHTML()}}
  else KINV_XTRA.push({k:"nha",label:"Thư nhà",on:()=>!!fgHome(S),html:fgHTML})})();
 /* the family's answer (two-way, expert E7): a letter, and for Vừa / Nặng a real home gift; Nặng also more home money for a few rounds */
-function fgReply(){const q=S.fgq;if(!q||S.turn<q.w)return;S.fgq=null;const m=fgHome(S);if(!m)return;const F=fgF();const rows=[];
+function fgReply(){const q=S.fgq;if(!q||S.turn<q.w)return false;S.fgq=null;const m=fgHome(S);if(!m)return false;const F=fgF();const rows=[];
  if(q.t!=="nhe"){const k=pick(BAL.kcg.home.gifts.filter(x=>IT[x]));if(k){const e={k,from:"nha"};invAdd(S,e);try{lgr(e,"nha","me","quà nhà")}catch(x){}rows.push(["Nhận",itm(k).n,"g"])}}
  if(q.t==="nang"){S.fgUp={u:S.turn+F.nang.m*BAL.homeEvery,n:F.nang.up};rows.push(["Tiền nhà",`mỗi kỳ thêm Bạc ${F.nang.up}, ${F.nang.m} kỳ tới`,"g"])}
  fgLogS({m:S.month,y:S.year,what:`${m.t} hồi âm${rows.length?": "+rows.map(r=>r[1]).join(", "):""}`});
- Q.push({t:"Thư nhà",who:pMe(),h:`<p>${m.t} ${m.name} viết thư vào cung: nhà đã nhận quà, cả nhà mừng rỡ, dặn ngươi giữ gìn sức khỏe.</p>`+kitRows(rows.concat([["Cất ở","Tư trang › Thư nhà","n"]]))})}
+ Q.push({t:"Thư nhà",who:pMe(),h:`<p>${m.t} ${m.name} viết thư vào cung: nhà đã nhận quà, cả nhà mừng rỡ, dặn ngươi giữ gìn sức khỏe.</p>`+kitRows(rows.concat([["Cất ở","Tư trang › Thư nhà","n"]]))});return true}
 /* Nặng: the home money (jecon econHome) is larger for a few rounds */
 (function(){if(typeof econHome!=="function")return;const h0=econHome;econHome=function(p){const r=h0.apply(this,arguments);try{if(p===S&&S.fgUp&&S.turn<S.fgUp.u&&S.origin&&!S.out&&!S.homeCut&&(S.month%BAL.homeEvery)===1)return r+S.fgUp.n}catch(e){}return r}})();
 /* law 1: NPC consorts send home too, same act; a stopped NPC parcel is palace news she hears */
 function fgNpcMonth(){const N=fgF().npc;for(const v of (typeof liveRivals==="function"?liveRivals(true):[])){if(!v||v===S||!v.alive||v.out||!roll(N.p))continue;
  const t=roll(N.nang)?"nang":"vua";const way=fgPiece(v,t)&&roll(50)?"item":"bac";if(!fgCan(v,t,way))continue;const r=fgGo(v,t,way);if(r&&!r.ok)log(r.txt)}}
-(function(){const e0=endTurn;endTurn=function(){const t0=S&&S.turn;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&S.turn!==t0&&!(typeof isKc==="function"&&isKc())){fgReply();fgNpcMonth();if(Q.length&&$("modal").hidden)showModal()}}catch(e){console.error("fg month",e)}return r}})();
+(function(){const e0=endTurn;endTurn=function(){const t0=S&&S.turn;const r=e0.apply(this,arguments);try{if(S&&!S.dead&&S.turn!==t0&&!(typeof isKc==="function"&&isKc())){const sh=fgReply();fgNpcMonth();if(sh&&Q.length&&$("modal").hidden)showModal()/* rv: open the queue only for the family letter just pushed */}}catch(e){console.error("fg month",e)}return r}})();
 window.fgGo=fgGo;window.fgHome=fgHome;
