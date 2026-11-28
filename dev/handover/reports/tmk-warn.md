@@ -310,6 +310,8 @@ Not run: full quickcheck (lander step).
      in image mode hide the «Luân hồi» overlay (#kroul or class kroul) before the screenshot. LOOK at both.
   4. RV READY <sha> → RV-189 (session_01Rc5AsKweT3LtMsrkLNmDbV); land after or with K-HINT-KEM → lander LR-RULES-2 (session_01Rc5AsLfpDrXbkzzDZMaJdF).
 - Takeover prompt MUST copy the ROLLOVER lines verbatim (owner OD:L1217) and the LINEAGE line.
+- UPDATE 13:32Z (KK73): K-HINT-KEM is now **review/kk73-hintkem 44cfa57d** (on LIVE 5fc4bc79, which already holds K-HAND-DUPMAT → the jopic conflict
+  is resolved inside it). Merge **44cfa57d**, NOT 874cac12. RV-190 is reviewing it. RV for this branch = RV-191 (RV-189's seat).
 
 ### TMK-WARN-6 REPORT (28/11 ~14:10Z) — K-HINT-KEM + LIVE merged, gates, RV READY → RV-191
 PRIORITY #1 CHECK: OD — (worker continues TMK-WARN on its own branch) | main 5fc4bc79 merged in | review/kk73-hintkem 874cac12 merged in | claims TMK-WARN-6 (this session).
@@ -334,4 +336,5 @@ PRIORITY #1 CHECK: OD — (worker continues TMK-WARN on its own branch) | main 5
   «Danh −−−, … biết kẻ chủ mưu». NOTE for RV (not this task, not touched): on Fold the person name inside the red Bại value is drawn in the
   green name style (iPad shows «một vị cung nữ» all red) — the name mark keeps its own colour inside a red row; iPad header shows «Cung nữ ???»
   for an unknown witness and the left figure is the player «(ta)».
+- 44cfa57d (KK73 UPDATE 13:32Z): merged too after the gates (2-parent); its jopic.js / KIT.md equal HEAD's, dev/build unchanged vs the gated e4a5a2c8 → gates stand.
 - RV READY → RV-191 (session_01Rc5AsJMqvd2gqa6vFecdR5). Land after or with K-HINT-KEM (RV-190); if RV-190 FAILs K-HINT-KEM, re-merge KK73's fix sha.

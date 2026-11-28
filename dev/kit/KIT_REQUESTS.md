@@ -526,7 +526,7 @@ K-DEAD-PORTRAIT = already built: §84b .kst-dead (review/owner-ui-a 9724b12d, MA
 - **Wanted (kit keeper):** in face mode drop the `.kr-mat2` copy when a source kr-mat / kr-bai row is kept (or keep only the copy), so each loss
   reads once; extend kit-hand-mat-scan to fail on doubled rows.
 
-## K-HINT-KEM (28/11, TMK-WARN-5 for RV-189; BUILT by kit keeper KK73 = review/kk73-hintkem 874cac12, KIT.md §6.2b + census test dev/test/kit-hint-kem.js; review RV-190; merged into review/tmk-warn-r4 by TMK-WARN-6)
+## K-HINT-KEM (28/11, TMK-WARN-5 for RV-189; BUILT by kit keeper KK73 = review/kk73-hintkem 874cac12 (+ LIVE merge 44cfa57d), KIT.md §6.2b + census test dev/test/kit-hint-kem.js; review RV-190; merged into review/tmk-warn-r4 by TMK-WARN-6)
 - **Fault:** a ROLLED hidden-outcome card (every PEND / event choice, hideOut → kitHideOut keeps only Tốn + the hint) reads its plaques from the
   hint in jopic kitOptFinal: part 1 = Thành, EVERYTHING else = Bại. The hint's «nhưng …» part is what comes WITH the deed (jk2b kitHint puts the
   kèm / side losses there; on a rolled card nothing else), so an either-way loss read as a failure and the success looked free (RV-189: the
