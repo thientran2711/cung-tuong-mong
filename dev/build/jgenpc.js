@@ -124,7 +124,7 @@ function nApply(v,g,res){const id=g.b+"_"+(res.i+1),sum=C(g).e[res.i][5];const o
   /* the one treasure, a real object in HER chest (law 6c; cannot be sold, given or lost) */
   const kk=GB().kimsach;if(IT[kk]){v.inv=v.inv||[];invAdd(v,{k:kk,from:"ge",ti:res.ti,d:S.turn,nt:true})}
   try{if(typeof dhInc==="function")dhInc(v,K().key(g.b,res.i,res.sh))}catch(e){}
-  if(NB().leave.includes(sum)&&!v.queen){v.alive=false;v.left=sum;if(sum==="NUN")v.nun=1;g.left=1}
+  if(NB().leave.includes(sum)&&!v.queen){v.alive=false;dieMk(v,sum==="NUN"?"nun":"left");v.left=sum;if(sum==="NUN")v.nun=1;g.left=1}
   /* GE10: her help on this road (no betrayal) is remembered */
   try{const H=v.nr&&Array.isArray(v.nr.hp)?v.nr.hp:[];if(H.some(x=>x[1]>0)&&!H.some(x=>x[1]<0)&&!v.nr.geRw){v.nr.geRw=1;const R=GB().help.rw;apply(R);res.help=fmt(R)}}catch(e){console.error(e)}
   log(`<b class="g">Thiên hạ truyền tin · Đại kết cục:</b> ${esc(v.name)} đã thành “${esc(res.ti)}”${out.length?` (${out.join(", ")})`:""}.${res.help?` Nhờ ngươi từng giúp một tay, nàng nhớ ơn: ${res.help}.`:""}`)}

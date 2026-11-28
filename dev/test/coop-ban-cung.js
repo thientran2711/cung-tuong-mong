@@ -106,6 +106,10 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  /* COOP_SWAP=1 (review/coop-thin-a): roles swapped — the iPad hosts (seat a), the Fold joins (seat b) */
  const FOLD=['fold',[686,880,2.2]],IPAD=['ipad',[1180,820,2]];const [VA,VB]=process.env.COOP_SWAP?[IPAD,FOLD]:[FOLD,IPAD];
  const A=await mk(b,VA[0],VA[1]),B=await mk(b,VB[0],VB[1]);ALL.push(A,B);
+ /* the friend's person in this world: a consort = a rival (coop); a friend on a cung nữ life (friendSrv, jcoopworld placeFriend) = a servant in her
+    mistress's staff, not a rival — the product puts her there on both builds (proof: d-worklist-land.md LR4), so the lookup reads both */
+ for(const o of [A,B])await o.ctx.addInitScript(()=>{window.coopFr=()=>{const R=typeof rivals!=='undefined'?rivals:[];const v=R.find(x=>x&&x.coop);if(v)return v;
+  for(const m of R)for(const x of (m&&m.staff)||[])if(x&&x.coop)return x;return null}});
  /* COOP_MLINE: the guest must be a consort with her own maids (a random cung nữ start has none, the mline check would be void) */
  if(+process.env.COOP_MLINE)await B.ctx.addInitScript(()=>{window.__forceOrigin='thd'});
  /* COOP_A_ORIGIN / COOP_B_ORIGIN=<ORIGINS k> (e.g. cn = cung nữ): pin a seat's thân phận (the random draw makes some paths rare) */
@@ -129,11 +133,18 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  /* ---- ban cung: same odds on both seats ---- */
  /* the friend becomes a person in each world at the first week merge (coop-e2e «after week 1») */
  {const wk=(await C(A)).week;await weekBoth(A,B,0);for(const o of [A,B]){const r=await untilC(o,x=>__co().week===x+1,wk,90000);ok(r,'week 1: '+o.name+' advanced')}await clear(A);await clear(B)}
- const tab=async o=>{await clear(o);return o.p.evaluate(()=>{const T=p=>PALN.map((_,i)=>bcOdds(p,i,0));const fr=rivals.find(v=>v.coop);return{seat:__co().seat,me:T(S),fr:fr?T(fr):null,meName:S.name,frName:fr&&fr.name}})};
+ const tab=async o=>{await clear(o);return o.p.evaluate(()=>{const T=p=>PALN.map((_,i)=>bcOdds(p,i,0));const fr=coopFr();return{seat:__co().seat,me:T(S),fr:fr?T(fr):null,meName:S.name,frName:fr&&fr.name,frSrv:!!(fr&&!rivals.includes(fr)),meSrv:typeof isSrv==='function'&&!!isSrv()}})};
  const ta=await tab(A),tb=await tab(B);
- ok(ta.fr&&tb.fr,'each seat sees the friend as a person',{a:ta.frName,b:tb.frName});
- ok(JSON.stringify(ta.me)===JSON.stringify(tb.fr),'host person: same odds on both seats',{A:ta.me,B:tb.fr});
- ok(JSON.stringify(tb.me)===JSON.stringify(ta.fr),'guest person: same odds on both seats',{B:tb.me,A:ta.fr});
+ ok(ta.fr&&tb.fr,'each seat sees the friend as a person',{a:ta.frName,b:tb.frName,aSrv:ta.frSrv,bSrv:tb.frSrv});
+ /* a person on a cung nữ life has no Ban cung (a consort's decree, jbancung bcGrant): her seat-mate must see her as a servant instead */
+ if(ta.meSrv)ok(tb.frSrv,'host person is a cung nữ: the guest seat sees her as a servant (no Ban cung odds)',{B:tb.frName});else ok(JSON.stringify(ta.me)===JSON.stringify(tb.fr),'host person: same odds on both seats',{A:ta.me,B:tb.fr});
+ if(tb.meSrv)ok(ta.frSrv,'guest person is a cung nữ: the host seat sees her as a servant (no Ban cung odds)',{A:ta.frName});else ok(JSON.stringify(tb.me)===JSON.stringify(ta.fr),'guest person: same odds on both seats',{B:tb.me,A:ta.fr});
+ /* palace distance (jpdist, review/palace-distance): where each person lives → the same far / night add / far-visit bonus / visit-odds words on both seats */
+ const ptab=async o=>{await clear(o);return o.p.evaluate(()=>{if(typeof pdFar!=='function')return null;const T=p=>({far:+pdFar(p).toFixed(6),add:pdNightAdd(p),bon:pdVisBonus(pdFar(p)),w:PALN.map((_,i)=>word(pdVisOdds(p,i)))});const fr=coopFr();return{me:T(S),fr:fr?T(fr):null,ix:PALN.map((_,i)=>+pdFarIx(i).toFixed(6))}})};
+ const pa=await ptab(A),pb=await ptab(B);
+ ok(pa&&pb&&JSON.stringify(pa.ix)===JSON.stringify(pb.ix),'palace distance: same far table on both seats',{A:pa&&pa.ix,B:pb&&pb.ix});
+ ok(pa&&pb&&pa.fr&&pb.fr&&JSON.stringify(pa.me)===JSON.stringify(pb.fr),'palace distance: host person same on both seats',{A:pa&&pa.me,B:pb&&pb.fr});
+ ok(pa&&pb&&pa.fr&&pb.fr&&JSON.stringify(pb.me)===JSON.stringify(pa.fr),'palace distance: guest person same on both seats',{B:pb&&pb.me,A:pa&&pa.fr});
  for(const [o,vp] of [[A,'fold host'],[B,'ipad guest']]){await clear(o);
   const r=await o.p.evaluate(()=>{const keep={rank:S.rank,pal:S.pal,palCer:S.palCer};const occ=bcOcc(S);const f=PALN.findIndex((_,i)=>!occ[i]);S.rank=4;S.pal=f;S.palCer=1;Q.length=0;palCeremony();const d=Q[Q.length-1];
    const L=(d&&d.opts||[]).filter(c=>/^Xin /.test(c.n)&&!c.off).map(c=>{const i=PALN.indexOf(c.n.slice(4));return [c.n,c.x.split(' · ')[0],word(bcOdds(S,i,f))]});
