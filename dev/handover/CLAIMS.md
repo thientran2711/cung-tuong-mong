@@ -728,3 +728,4 @@ FLIGHT2-S20D life (seat s20 session_01UV1SzihQX2u9C61CBLqzhV, ctx 28 %; iPad 118
 TUANTANG-WARN (MAIN 183 00:38Z: tuẫn táng / game-imposed deaths with no warning + no road; whole family; opus, BIG) | review/tuantang-warn | (opening, Foreman C ROOT 4-1) | RUNNING | 28/11 00:42Z (Foreman C ROOT 4-1)
 TUANTANG-WARN (session id for the 00:42Z claim) | review/tuantang-warn | session_01PEhRbxieBKhF66jW9SU6j4 | RUNNING | 28/11 00:39Z (Foreman C ROOT 4-1)
 SAVE-REWIND-2 (MAIN 183 order 00:38Z; rewinds still on LIVE; check rv6 cure, else root + family) | review/save-rewind-2 | session_01N1tNP6K6GumrbBF8d7DJtm (Foreman B ROOT 3 child 1) | RUNNING | 28/11 00:55Z
+E-GAIN4 (opus BIG; MAIN 179 ~17:00Z orders (a)–(d) + KK60 §104.2d (e), after e-gain3-live LIVE 18003079; briefs/E-GAIN4.md) review/e-gain4 | reports/e-gain4.md | session_01DgYSWkfJaoCNrHwituB9Pa | RUNNING | 28/11 00:55Z (Foreman E child7)
