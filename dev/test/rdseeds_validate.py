@@ -2,14 +2,15 @@
 """ORDER THIN P8 validator: composed origin roads (API P8 in dev/handover/reports/thin.md «## API P8»).
 usage: python3 dev/test/rdseeds_validate.py [files…] [--min] [--origins tt,dtq] [--quiet]
   no files = every dev/handover/content/thin/rdseeds_*.md (and dev/test/rdc-fixture.jsonl is NOT read unless named).
-Checks every row: schema, laws 2/3 (every option Σgain steps == Σloss steps == BAL.road.c.st, gain ≥1, loss ≥1), climax 2 hi + 2 lo with ≥3 stats,
+Checks every row: schema, laws 2/3 (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z: exactly 3 options NHẸ · VỪA · NẶNG, option i Σgain steps == Σloss steps ==
+BAL.road.c.tier[i] = 1 / 2 / 3, gain ≥1, loss ≥1; om = old 4-way index → kept way), climax risks lo … hi (NHẸ lo, NẶNG hi) with ≥2 stats (3 advised),
 endings (win gain-only Σ3, lose loss-only Σ3, mid 1 + 1), speakers / needs / tokens per origin, VANPHONG words (no digits, no %, no odds words),
 no copy of an old road hồi title, unique ids, premise ids not taken by the game. --min adds the per-origin pool minimums.
 Errors (E) must be 0; warnings (W) are advice. The numbers below mirror BAL.road.c (jbalroad.js); rdc-play.js checks they match."""
 import json, re, sys, glob, os
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 ORIGINS = ['tt', 'dtq', 'muoi', 'thd', 'cn', 'cnv', 'td', 'ch', 'nc', 'bd', 'pf']
-ST = 2                                   # BAL.road.c.st
+TIER = [1, 2, 3]                         # BAL.road.c.tier (NHẸ · VỪA · NẶNG steps; the old equal-value st = 2 is gone, law 2)
 EST = {'win': 3, 'lose': 3, 'mid': 1}    # BAL.road.c.Est
 STATS = ['sung', 'danh', 'bac', 'suc', 'mat', 'th', 'hh', 'duc', 'tamco']
 XSTATS = ['danh', 'sung', 'tamco', 'duc', 'mat', 'th', 'hh']   # BAL.road.c.xs
@@ -104,7 +105,10 @@ def check_hoi(v, rid, o, h, clim, titles):
     ok = STATS + ['sc'] + ['rel.' + r for r in roles] + (['tin'] if o == 'cnv' else [])
     oks = [k for k in ok if k != 'sc']
     O = h.get('opts')
-    if not isinstance(O, list) or len(O) != 4: v.e(rid, 'opts must be exactly 4 options'); return roles
+    if not isinstance(O, list) or len(O) != 3: v.e(rid, 'opts must be exactly 3 options (NHẸ · VỪA · NẶNG, law 2)'); return roles
+    om = h.get('om')
+    if om is not None and (not isinstance(om, list) or len(om) != 4 or not all(isinstance(x, int) and 0 <= x < 3 for x in om) or sorted(set(om)) != [0, 1, 2]):
+        v.e(rid, f'om {om}: must map the 4 old ways onto the 3 kept ways (0..2, each kept way once or more)')
     for i, op in enumerate(O):
         lab = f'opt{i+1}'
         if not op.get('n'): v.e(rid, f'{lab}: n missing')
@@ -113,7 +117,7 @@ def check_hoi(v, rid, o, h, clim, titles):
         if not op.get('rt'): v.e(rid, f'{lab}: rt missing')
         g = steps(v, rid, f'{lab} gain', op.get('gain'), ok, True)
         l = steps(v, rid, f'{lab} loss', op.get('loss'), oks, False)
-        if g != ST or l != ST: v.e(rid, f'{lab}: Σgain {g} / Σloss {l} must both be {ST} (laws 2/3)')
+        if g != TIER[i] or l != TIER[i]: v.e(rid, f'{lab}: Σgain {g} / Σloss {l} must both be {TIER[i]} (tier {["NHẸ", "VỪA", "NẶNG"][i]}, laws 2/3)')
         # thin-p8 r2: an option about Thái hậu (only) must not GAIN Hoàng hậu's liking, and the reverse (a loss may be a snub of the other one)
         ot = ' '.join([op.get('n') or '', op.get('rt') or '', op.get('rf') or ''])
         TH = 'Thái hậu' in ot; HH = 'Hoàng hậu' in ot or '{hh}' in ot; G = op.get('gain') or {}
@@ -123,10 +127,11 @@ def check_hoi(v, rid, o, h, clim, titles):
             v.e(rid, f'{lab}: «{k}» is both gained and lost')
     if clim:
         R = [op.get('risk') for op in O]; S_ = [op.get('stat') for op in O]
-        if sorted(R) != ['hi', 'hi', 'lo', 'lo']: v.e(rid, f'climax risks {R}: need exactly 2 hi + 2 lo')
+        if R[0] != 'lo' or R[-1] != 'hi' or R != sorted(R, key=lambda x: x == 'hi'): v.e(rid, f'climax risks {R}: NHẸ must be lo, NẶNG hi, no hi before a lo (law 2)')
         for i, s in enumerate(S_):
             if s not in XSTATS: v.e(rid, f'opt{i+1}: stat «{s}» not one of {" ".join(XSTATS)}')
-        if len(set(S_)) < 3: v.e(rid, f'climax stats {S_}: need ≥3 different')
+        if len(set(S_)) < 2: v.e(rid, f'climax stats {S_}: need ≥2 different')
+        elif len(set(S_)) < 3: v.w(rid, f'climax stats {S_}: 3 different advised')
         # law 6b / thin-p8 r2 review: the roll may ride on Thái hậu's (th) / Hoàng hậu's (hh) liking only when she is in the option or the scene
         sc = ' '.join([h.get('h') or '', h.get('t') or ''])
         for i, op in enumerate(O):

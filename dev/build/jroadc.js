@@ -10,7 +10,10 @@
    reload plays the same road; a road that is not the life's road (NPC roads, scans) reads a fixed default composition. One road never shows a
    part twice; across lives parts are drawn fresh-first through P0 jnorep (family "rdc:<origin>", key = part id; × BAL.road.c.seen per past life).
    Numbers (law 4): a part counts STEPS; one step = BAL.road.c.fx[key] (options) / Efx[key] (endings); climax odds = BAL.road.c.xo[risk][band] + the
-   stat term BAL.road.c.xs[stat] (+ Lợi thế, j67). Laws 2/3: every option Σgain steps == Σloss steps == BAL.road.c.st (validator rdseeds_validate.py).
+   stat term BAL.road.c.xs[stat] (+ Lợi thế, j67). Laws 2/3 (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z; E-TIER-B13): every hồi has 3 options
+   NHẸ · VỪA · NẶNG, option i Σgain steps == Σloss steps == BAL.road.c.tier[i] (validator rdseeds_validate.py); a climax's NHẸ is a «lo» risk, its
+   NẶNG a «hi» one. Old saves (4 ways): a hồi row keeps om = old way index → kept way (the dropped way → the kept way most like it); rdcOm maps a
+   saved pledge (S.pl67.i) / helper refusal (A.hpNo.i) once on load, and a saved story card (PEND.j67 p.o odds) is re-read when its length differs.
    Kit only: every screen is the j67 story card (kit event frame), nothing new is drawn. Old saves: no old road changes; a life on an old road never
    reads this file. */
 const RDC={P:{},road:{},def:{},cache:{},ids:{}};
@@ -34,7 +37,7 @@ function rdcOpt(o,clim,band){const C=rdcB(),c={},w={},rel=[];let sc=0;
 function rdcPeople(h){const s=rdcTexts(h).join(" "),R=[];if(h.w==="th"||s.includes("Thái hậu"))R.push("th");if(h.w==="hh"||s.includes("{hh}")||s.includes("Hoàng hậu"))R.push("hh");return R}
 function rdcPeopleOk(h){try{for(const k of rdcPeople(h)){if(k==="th"&&S.thDead)return false;if(k==="hh"&&!qOn())return false}}catch(e){}return true}
 /* one hồi row → a j67 beat (a climax is never skipped — j67 would end the chapter without one — so its people are checked when the road is composed) */
-function rdcBeat(h,clim,band){const B={h:h.h,w:h.w||"me",t:h.t,o:(h.opts||[]).map(o=>rdcOpt(o,clim,band))};
+function rdcBeat(h,clim,band){const B={h:h.h,w:h.w||"me",t:h.t,o:(h.opts||[]).map(o=>rdcOpt(o,clim,band))};if(h.om)B.om=h.om;
  const need=(h.need||[]).slice();for(const k of rdcRoles(...rdcTexts(h)).concat(clim?[]:rdcPeople(h)))if(!need.includes(k))need.push(k);if(need.length)B.need=need;
  if(h.after==="win")B.if=RDW(1);else if(h.after==="lose")B.if=RDW(0);return B}
 /* the 3 endings (steps × Efx; win +, lose −, mid by its sign) */
@@ -98,6 +101,16 @@ function rdcLoad(rows){const out={prem:0,roads:0,skip:[]};
 /* a composed chapter that opens marks its parts in P0 (fresh-first in later lives) */
 (function(){const n0=newThread67;newThread67=function(id){const A=n0.apply(this,arguments);try{const a=ARC67[id];
  if(A&&a&&a.rdc&&a.o==="rd"&&rdOn()&&a.road===S.st.f14.rd&&typeof nrMark==="function"){const o=RDC.road[a.road];for(const p of rdcChap(a.road,a.rn).parts)nrMark(rdcFam(o),p)}}catch(e){console.error(e)}return A}})();
+/* old saves (E-TIER-B13): a life saved while a composed hồi still had 4 ways keeps old indices in S.pl67.i (bạc pledge) and A.hpNo.i (helper
+   refusals); map them once through the beat's om (the dropped way → its merged sibling). S.rcT marks a save already on the tier rule. */
+function rdcOm(){try{if(!S||S.rcT)return;const map=(A,bid,i)=>{const b=A&&bid?beatDef67(A,bid):null;if(!b||!b.om)return i;return b.om[i]!=null?b.om[i]:i-(b.om.length-3)/* a way other modules add after the row's (help-ask) moves up */};
+  const P=S.pl67;if(P){const A=th67(P.t);if(A){const b=beatDef67(A,P.b);if(b&&b.om&&P.pp&&P.pp.o&&P.pp.o.length!==opts67(A,b).length){P.i=map(A,P.b,P.i);P.pp.o=opts67(A,b).map(o=>oOf67(A,o,b))}}}
+  for(const A of [S.st&&S.st.M].concat(S.st&&S.st.X||[])){if(!A||!A.hpNo||!A.hpNo.i)continue;const b=beatDef67(A,A.hpNo.b);if(b&&b.om)A.hpNo.i=[...new Set(A.hpNo.i.map(i=>map(A,A.hpNo.b,i)))]}
+ }catch(e){console.error("rdcOm",e)}try{if(S)S.rcT=1}catch(e){}}
+(function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);rdcOm();return r}})();
+(function(){if(typeof a67init!=="function")return;const i0=a67init;a67init=function(){const r=i0.apply(this,arguments);try{if(S)S.rcT=1}catch(e){}return r}})();
+/* a saved story card (Q → deserQ → PEND.j67) holds the odds by option index: when the beat now has a different number of options, read them anew */
+(function(){const p0=PEND.j67;PEND.j67=function(p){try{if(p&&Array.isArray(p.o)){const A=th67(p.t);const b=A&&A.cur===p.b?beatDef67(A,p.b):null;if(b){const O=opts67(A,b);if(O.length!==p.o.length)p.o=O.map(o=>oOf67(A,o,b))}}}catch(e){}return p0.apply(this,arguments)}})();
 /* counts for tests / measures */
 function rdcCount(){const R={};for(const [road,o] of Object.entries(RDC.road)){R[o]=R[o]||{prem:0,roads:0};R[o].prem++;if(RDC.def[road])R[o].roads++}return R}
 window.rdcLoad=rdcLoad;window.rdcCompose=rdcCompose;window.rdcChap=rdcChap;window.rdcCount=rdcCount;window.RDC=RDC;

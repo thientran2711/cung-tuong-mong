@@ -391,12 +391,13 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  ke14:[{danh:5},{th:5,danh:3},{danh:5},{th:4,danh:3},{danh:8},{danh:6,th:4}]
 }}});
 /* ORDER THIN P8 (jroadc.js, composed origin roads 4 → 8 per origin; API P8 in dev/handover/reports/thin.md). Seeds count STEPS; the numbers live here (law 4).
-   st = steps per option (Σgain == Σloss == st, laws 2/3); fx[key] = one option step (sc = Lợi thế points, rel = thiện cảm of a cast consort; tin = her
+   tier = steps per option by tier (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z: 3 options NHẸ · VỪA · NẶNG, option i Σgain == Σloss == tier[i], Tốn and
+   Được rise together; law 3 every option gains; canon overwrite of the old equal-value st = 2 × 4 options, E-TIER-B13); fx[key] = one option step (sc = Lợi thế points, rel = thiện cảm of a cast consort; tin = her
    mistress's trust, cnv only); Est = ending steps (win gain-only, lose loss-only, mid 1 + 1); Efx[key] = one ending step;
    xo[risk][band] = climax base odds (band a = chapters .5–.7, b = .8–.10, f = .11 → lower each band: law 5 harder as she climbs; lo = win or MIDDLE,
    hi = win or LOSE, so lo starts lower: law 2); xs[stat] = the rdOdds term of the stat that carries the roll (["d",div] = S[stat]/div, ["m",k] = S[stat]×k);
    own = weight of a part tagged rd to this road; seen = weight of a part a past life met (× per life, P0 fresh-first first); band = chapter → band. */
-BAL.road.c={st:2,
+BAL.road.c={tier:[1,2,3],
  fx:{sung:3,danh:2,bac:30,suc:3,mat:1,th:3,hh:3,duc:2,tamco:1,tin:5,sc:1,rel:6},
  Est:{win:3,lose:3,mid:1},
  Efx:{sung:3,danh:3,bac:40,suc:4,mat:1,th:3,hh:3,duc:3,tamco:1,tin:6,rel:10},

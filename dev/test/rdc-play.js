@@ -4,7 +4,7 @@
    the only fresh premise; same bot as dev/test/road-full.js) and plays every due hồi (life 1: first option, later lives: random) and checks:
    - chapters 4..11 = the premise then <road>_5 … <road>_11 in order, the frame reaches 14, the origin ending is told by the road's .11;
    - the composition (S.st.f14.rc) uses each part once in the road; each chapter's title / climax / endings are its clim row's;
-   - every hồi card: 4 options (j67 may add none), no {placeholder} left, cổ trang (no digit / %);
+   - every hồi card: 3 options NHẸ · VỪA · NẶNG (law 2, E-TIER-B13; j67 may add none), no {placeholder} left, cổ trang (no digit / %);
    - numbers: every option of every played hồi = its steps × BAL.road.c.fx (cost when picked, gain when it holds), climax odds terms from BAL;
    - the road's rival is the same person while alive; each opened chapter marks its parts in P0 (family rdc:<origin>);
    - reload: the composition survives a JSON round trip of S and rebuilds the same chapters; validator numbers = BAL.road.c; 0 page errors. */
@@ -42,13 +42,13 @@ let fail=0,pass=0;const ok=(c,m,x)=>{if(!c){fail++;console.log('FAIL '+m+(x!==un
         /* the card as she sees it */
         const pp={t:thKey67(A),a:A.a,b:A.cur,o:O.map(o=>oOf67(A,o,bd))};const card=PEND.j67(pp);
         const txt=card?card.t+' '+card.o.map(x=>x.n+' '+x.j67).join(' '):'';
-        const words=card?(card.t.replace(/<[^>]+>/g,'').replace(/Chương \d+|hồi \d+\/\d+|Hồi \d+\/\d+/g,'')+' '+card.o.slice(0,4).map(x=>x.n).join(' ')):'';/* the game's own extra options (jstory «lo liệu trong N ngày», items) are not P8 text */
-        /* other modules may add their own option after the 4 (e.g. an item); the first 4 must be the row's */
-        cards.push({a:A.a,b:A.cur,n:card?card.o.length:0,own4:card?card.o.slice(0,4).length===4&&O.slice(0,4).every(o=>o.n&&!o.__x):false,left:(txt.replace(/<[^>]+>/g,'').match(/\{[A-Za-z0-9]+\}/g)||[]),dig:/[0-9%]/.test(words),dw:(words.match(/.{0,30}[0-9%].{0,20}/)||[''])[0]});
+        const words=card?(card.t.replace(/<[^>]+>/g,'').replace(/Chương \d+|hồi \d+\/\d+|Hồi \d+\/\d+/g,'')+' '+card.o.slice(0,3).map(x=>x.n).join(' ')):'';/* the game's own extra options (jstory «lo liệu trong N ngày», items) are not P8 text */
+        /* other modules may add their own option after the 3 (e.g. an item); the first 3 must be the row's */
+        cards.push({a:A.a,b:A.cur,n:card?card.o.length:0,own3:card?card.o.slice(0,3).length===3&&O.slice(0,3).every(o=>o.n&&!o.__x):false,left:(txt.replace(/<[^>]+>/g,'').match(/\{[A-Za-z0-9]+\}/g)||[]),dig:/[0-9%]/.test(words),dw:(words.match(/.{0,30}[0-9%].{0,20}/)||[''])[0]});
         /* numbers = steps × BAL */
         let row=null;if(a.o==='rd'){const ch=rdcChap(a.road,a.rn);const i={s1:0,s2:1,c1:2,c2:3,t1:4,x1:5}[A.cur];row=RDC.ids[ch.parts[i]]}
         else{const P=RDC.ids[A.a];const m=/^([sctx])(\d)$/.exec(A.cur);row=P&&m?P[m[1]][+m[2]-1]:null}
-        if(row){O.slice(0,4).forEach((o,i)=>{const e=exp(row,row.opts[i],A.cur==='x1');num.push({b:A.a+':'+A.cur+':'+i,got:[o.c,o.w,o.sc],exp:e,ok:same(o.c,e.c)&&same(o.w,e.w)&&(o.sc||0)===e.sc&&(A.cur[0]!=='x'||(Array.isArray(o.e)&&typeof o.o==='function'))})})}}
+        if(row){O.slice(0,3).forEach((o,i)=>{const e=exp(row,row.opts[i],A.cur==='x1');num.push({b:A.a+':'+A.cur+':'+i,got:[o.c,o.w,o.sc],exp:e,ok:same(o.c,e.c)&&same(o.w,e.w)&&(o.sc||0)===e.sc&&(A.cur[0]!=='x'||(Array.isArray(o.e)&&typeof o.o==='function'))})})}}
        const i=pick==='rand'?Math.floor(Math.random()*O.length):0;const o=O[i];
        /* the option's cost is the dil fx: pay it as the card would */
        try{if(o&&o.c)ap67(o.c)}catch(e){}
@@ -66,8 +66,8 @@ let fail=0,pass=0;const ok=(c,m,x)=>{if(!c){fail++;console.log('FAIL '+m+(x!==un
     return{k,road:S.st.f14.road,rd:S.st.f14.rd||'',rc0:!!rc0,parts,uniq:new Set(parts).size,titles,seq,vs,ends,cards,num,marks,reload:before===after&&!!before,all:!!S.st.ch.all,n:S.st.ch.n,fin:S.st.ch.fin||'',months:mon,err}}},ROWS)};
  await boot();
  const L0=await p.evaluate(()=>window.__load);console.log('load',JSON.stringify(L0));
- const bal=await p.evaluate(()=>({st:BAL.road.c.st,Est:BAL.road.c.Est,xs:Object.keys(BAL.road.c.xs).sort()}));
- ok(bal.st===2&&bal.Est.win===3&&bal.Est.lose===3&&bal.Est.mid===1&&bal.xs.join()==='danh,duc,hh,mat,sung,tamco,th','validator constants = BAL.road.c',bal);
+ const bal=await p.evaluate(()=>({tier:BAL.road.c.tier,Est:BAL.road.c.Est,xs:Object.keys(BAL.road.c.xs).sort()}));
+ ok(JSON.stringify(bal.tier)==='[1,2,3]'&&bal.Est.win===3&&bal.Est.lose===3&&bal.Est.mid===1&&bal.xs.join()==='danh,duc,hh,mat,sung,tamco,th','validator constants = BAL.road.c',bal);
  const want=ROWS.filter(r=>r.type==='prem').map(r=>r.id).filter(r=>!ONLY||ONLY.split(',').includes(r));
  const roads=await p.evaluate(W=>W.filter(r=>RDC.def[r]&&rdFull(r)),want);console.log('composed roads:',roads.join(' ')||'(none)');
  ok(roads.length>0,'at least one composed road registered',want);
@@ -85,10 +85,10 @@ let fail=0,pass=0;const ok=(c,m,x)=>{if(!c){fail++;console.log('FAIL '+m+(x!==un
    ok(!!R.fin&&R.ends.some(e=>e.startsWith(rd+'_11=')),`${rd} L${L+1}: origin ending told by the road finale`,[R.fin,R.ends.slice(-2)]);
    ok(R.parts.length===42&&R.uniq===42,`${rd} L${L+1}: 7 chapters × 6 parts, each part once in the road`,[R.parts.length,R.uniq]);
    ok(R.titles.length===7&&R.titles.every(x=>x[0]&&x[1]),`${rd} L${L+1}: chapter title + endings = its climax row`,R.titles);
-   ok(R.cards.length>=20&&R.cards.every(c=>c.n>=4&&c.own4),`${rd} L${L+1}: ${R.cards.length} hồi cards, each with the row's 4 options`,R.cards.filter(c=>c.n<4).slice(0,3));
+   ok(R.cards.length>=20&&R.cards.every(c=>c.n>=3&&c.own3),`${rd} L${L+1}: ${R.cards.length} hồi cards, each with the row's 3 options`,R.cards.filter(c=>c.n<3).slice(0,3));
    ok(R.cards.every(c=>!c.left.length),`${rd} L${L+1}: no placeholder left`,R.cards.filter(c=>c.left.length).slice(0,3));
    ok(R.cards.every(c=>!c.dig),`${rd} L${L+1}: no digit / % in a card`,R.cards.filter(c=>c.dig).slice(0,3));
-   ok(R.num.length>=80&&R.num.every(x=>x.ok),`${rd} L${L+1}: ${R.num.length} options = steps × BAL.road.c`,R.num.filter(x=>!x.ok).slice(0,4));
+   ok(R.num.length>=60&&R.num.every(x=>x.ok),`${rd} L${L+1}: ${R.num.length} options = steps × BAL.road.c`,R.num.filter(x=>!x.ok).slice(0,4));
    ok(R.marks.length>=36&&R.marks.every(x=>x[1]),`${rd} L${L+1}: opened chapters mark ${R.marks.length} parts in P0 rdc:${k}`,R.marks.filter(x=>!x[1]).slice(0,4));
    ok(R.reload,`${rd} L${L+1}: composition survives a reload (JSON round trip)`);
    let bad=[],last=null;for(const x of R.vs){if(!x.a.startsWith(rd))continue;if(last&&x.v!==last.v&&last.alive)bad.push([last.a,last.v,x.a,x.v]);last=x}
