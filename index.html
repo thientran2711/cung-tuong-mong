@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"69a431b8+","t":"2026-11-28T11:51Z","c":"K-RING-WHY rv185: index.html/sw.js rebuilt","b":"96cf0ee7c4c7","h":[{"s":"72883778","t":"2026-11-28T11:07Z","c":"Đã thi từ thẻ Hành sự thì không còn bị gọi thi lần nữa; việc kẻ hầu làm hỏng ghi rõ cái mất ở hàng Bại; ghét giận giữa người với người lên …"},{"s":"7be54246","t":"2026-11-28T09:17Z","c":"Oán ghen lên chậm và có chừng; sáu tài có trần mềm; Hoàng thượng có thể nhường ngôi, bị phế hay bị lật đổ; thư nhà, quà nhà vào sổ đồ; việc…"},{"s":"2f9b0689+","t":"2026-11-28T08:21Z","c":"K-TAG-WRAP r2 (RV-180 kk66-tagwrap FAIL §2): kit-std-scan X18 accepts the ring host's kit ✕ for a ring pane; X20 = «Xem đủ trong Sổ ghi» on…"},{"s":"166bd0a3","t":"2026-11-28T07:32Z","c":"Ở nhà không còn lẫn chuyện trong cung; tin báo gọn hơn; người hầu hết phận thì không còn được ghi công."},{"s":"8a171afc+","t":"2026-11-28T04:14Z","c":"KK66 report: figure-over-plaque repro + handover KK66 -> KK67"},{"s":"9483e103+","t":"2026-11-27T23:23Z","c":"review save-pid-cards rv6: save-evc-onscreen test setup waits for the card to be painted (LIVE jverdict RF.held defers showModal behind a h…"},{"s":"5fb13d60+","t":"2026-11-27T21:15Z","c":"Thẻ kết quả nằm gọn trong khung, hình bay và cánh hoa không còn đè lên hộp thoại; bàn cờ trò chơi nhỏ đổi áo theo mùa."},{"s":"24beb1a4","t":"2026-11-27T19:22Z","c":"RV live-bugs-2711: rebuild index.html/sw.js on LIVE 772bee4f; assets.json = LIVE"},{"s":"6529ee43+","t":"2026-11-27T15:42Z","c":"rv26 merge: save stack (sổ compact, unseen lists, generators, inv-stack) + save-rewind test on LIVE 772bee4f (lc31-goal); source hunks asse…"},{"s":"d9ca7892+","t":"2026-11-27T12:32Z","c":"Dòng mục tiêu chạm được: xem cách làm rồi «Đi tới» tận nơi; đến một nơi hay một điện trên Dư đồ, nàng ở lại đúng chỗ, không còn bị đưa ngượ…"}]};
+window.CTM_BI=null;
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -86951,7 +86951,7 @@ function selxMiniFav(mark){for(const [t,f] of BAL.selx.fav.mini)if(mark>=t)retur
 /* answer mark of a test from the reaction (the same for her and for a girl): + = hit, − = miss, none = middle */
 function selxMark(react){const M=BAL.selx.npcMatch;return react==="+"?M.hit:react==="−"?M.miss:M.none}
 /* a tú nữ's own marks (law 1: the same tests, her own skill and nết): mini = her art level mark; dd/hx = how her nết's way of answering fits the royal */
-function selxNpcMarks(v,t){t=t||{};const lv=(()=>{try{return t.art&&typeof kg82LvFor==="function"?kg82LvFor(v,t.art):0}catch(e){return 0}})();
+function selxNpcMarks(v,t){t=t||{};const lv=(()=>{try{const k=t.art&&(typeof entKind==="function"&&entKind(t.art)||t.art);return k&&typeof kg82LvFor==="function"?kg82LvFor(v,k):0}catch(e){return 0}})();/* D-BANHOA-SOLO (law 1): the board is a PLAIN art name on every road (S.selx.art «cam» / «vu» …) while kg82LvFor reads a KIND («dan» / «mua»): read through entKind, else every girl stood at level 0 on Cầm / Kỳ / Vũ / Nấu */
  const NM=BAL.selx.npcMini;const MK=BAL.selx.mark;const mini=Math.max(MK.lo,Math.min(MK.hi,Math.round(NM.base+lv*NM.lv+R(2*NM.r+1)-NM.r)));/* law 4: numbers from BAL */const pickBy=(e,rf)=>{if(!e||!e.options)return"";const net=(()=>{try{return netOf(v)||[]}catch(x){return[]}})().join(" ");
   const ST={khiem:/Khiêm nhường|Kín đáo|An phận|Điềm tĩnh/,manh:/Kiêu ngạo|Nóng nảy|Tham vọng/,dido:/Nhiều chuyện|Ham vui|Xảo quyệt/,that:/Thật thà|Thanh liêm|Trọng nghĩa/,
    giuyen:/Điềm tĩnh|Kín đáo|Lạnh lùng/,tuxu:/Nóng nảy|Ân cần|Rộng lượng/,caunguoi:/Khiêm nhường|An phận/,nhan:/Thật thà|Thanh liêm/};
@@ -87035,7 +87035,12 @@ function selxHtMe(L,marks){const sc=Math.round(selxScore(S,marks));const place=1
 function selxOddsP(raw,art){try{const Z=S&&S.selx2;if(!Z)return null;const girls=Z.days&&typeof selxAll==="function"?selxAll():(Z.girls&&Z.girls.length?Z.girls:null);if(!girls)return null;
  const ht=selxHoaThan(),N=BAL.odds.simN,kept=BAL.selx.yard.kept;const mk=Object.assign({},Z.mk||{},{mini:raw});const t={art:art||(S.selx&&S.selx.art)||(()=>{try{return entKind(entBest())}catch(e){return""}})()};/* the board every girl is judged on = selxSelDo's own t */
  const r0=Math.random;let q=((S.turn||0)*7919+(raw|0)*104729+girls.length*31+(S.sac|0))>>>0;Math.random=()=>{q=(Math.imul(q,1664525)+1013904223)>>>0;return q/4294967296};
- let ok=0;try{for(let i=0;i<N;i++){if(ht){const L=selxContest(girls,null);if(selxHtMe(L,mk).step>=0)ok++}else{const L=selxContest(girls,{marks:mk,t});const me=L.find(x=>x.v===S);if(me&&me.place<=kept)ok++}}}finally{Math.random=r0}
+ /* D-BANHOA-SOLO (law 7, ONE CORE with the result): on the 3-day road every sim judges the girls on the real tests (jselxday selxDaysT: the set ones, else drawn as
+    selxTest draws them) and, before the hall's first look (selxImpRun), everyone's first impression is read now by the same rule (selxImpAll, a pure read) —
+    so the told chance is the chance of the contest she will really meet; the girls' marks are put back after (no save change). */
+ const dz=!!(Z.days&&typeof selxDaysT==="function");const imp0=dz&&!Z.impDone&&typeof selxImpAll==="function";const keep=[];
+ if(imp0){try{if(mk.imp==null)mk.imp=selxImpAll(S).mk;for(const v of girls){keep.push([v,v.__impMk]);if(v.__impMk==null)v.__impMk=selxImpAll(v).mk}}catch(e){console.error("selxOddsP imp",e)}}
+ let ok=0;try{for(let i=0;i<N;i++){if(ht){const L=selxContest(girls,null);if(selxHtMe(L,mk).step>=0)ok++}else{const tt=dz?selxDaysT(t.art,true):t;const L=selxContest(girls,{marks:mk,t:tt});const me=L.find(x=>x.v===S);if(me&&me.place<=kept)ok++}}}finally{Math.random=r0;for(const [v,x] of keep){if(x==null)delete v.__impMk;else v.__impMk=x}}
  return Math.round(ok*100/N)}catch(e){console.error("selxOddsP",e);return null}}
 /* the loss words of the selection (VANPHONG cổ trang, no numbers): what «hỏng» means on her road */
 function selxLossW(){if(selxHoaThan())return "bị phong thấp hơn hòa ước một bậc";const n=BAL.selx.yard.kept;return `không lọt vào ${typeof selxNumW==="function"?selxNumW(n):n} người đứng đầu thì bị ban hoa, kiếp này dừng`}
@@ -87512,9 +87517,20 @@ function selxMini(){const d=mkP("kc2Sel",{});if(!d){S.selx2.mk=Object.assign(S.s
  const o=(d.o||[]).slice();const c=o.findIndex(x=>/^Cúi đầu chờ xét/.test(x.n||""));if(c>0)o.unshift(o.splice(c,1)[0]);
  Q.unshift({t:"Hoàng thượng",h:selxHead()+d.t,opts:selxBare(o),who:d.who,pid:"kc2Sel",pp:{}})}
 function selxMiniDone(raw){const Z=S.selx2;Z.mk=Object.assign(Z.mk||{},{mini:raw});Z.fav=Z.fav||{};Z.fav.E=(Z.fav.E||0)+selxMiniFav(raw);selxSpend(BAL.selx.beat.test);selxTest("H","hanhxu",selxContestRun)/* SELSCENE-13: no show here — every caller (jkc2 kc2SelPlay fin / chooseM) shows the next card once */}
+/* D-BANHOA-SOLO (law 7 + law 1): the tests every girl answers in the contest = {art, dd, hx, rdd, rhx} (selxNpcMarks t). A test already set (Z.tests) is used;
+   with draw, a test not yet set is drawn the way selxTest will draw it (same asker: dd = Thái hậu, hx = Hoàng hậu or the first royal; selxTestPick) — the odds
+   (selxOddsP, on its private generator) then judge the girls on real tests, as the result does; before this they met no test (middle mark) and the told chance
+   of «Cúi đầu chờ xét» read ≈ .48 while the true rate was ≈ .30 (dev/measure/selx-fair.js 60 lives, LIVE 8a1a71de). */
+/* the board kind every girl is judged on when she offers none (bow): her own best kind — the kind her own «Cúi đầu» mark is read on (jentry entSkipRaw) */
+function selxArtAll(){try{return entKind(entBest())}catch(e){return""}}
+function selxDaysT(art,draw){const Z=S.selx2;const RY=selxRoyals();const ask={doidap:"T",hanhxu:"H"};const T={};
+ for(const type of ["doidap","hanhxu"]){const z=Z.tests&&Z.tests[type];let e=null,k=null;
+  if(z){e=SELX_TESTS.find(x=>x.id===z.id)||null;k=z.k}else if(draw){const ry=RY.find(x=>x[0]===ask[type])||RY[0];if(ry){k=ry[0];e=selxTestPick(type,k)||null}}
+  const tok=(RY.find(x=>x[0]===k)||[])[2];T[type]={e:e?Object.assign({},e,{__k:k}):e,tok}}
+ return{art:art||"",dd:T.doidap.e,hx:T.hanhxu.e,rdd:o=>selxReactR(o,T.doidap.tok),rhx:o=>selxReactR(o,T.hanhxu.tok)}}
 /* THE CONTEST on the 3 marks (jselx selxContest, the same formula and the same royal reaction for every girl) */
 function selxContestRun(){const Z=S.selx2;const X=S.selx;const T=k=>SELX_TESTS.find(x=>x.id===(Z.tests&&Z.tests[k]&&Z.tests[k].id));const tok=k=>(selxRoyals().find(x=>x[0]===(Z.tests&&Z.tests[k]&&Z.tests[k].k))||[])[2];
- const K=k=>Z.tests&&Z.tests[k]&&Z.tests[k].k;const TK=k=>{const e=T(k);return e?Object.assign({},e,{__k:K(k)}):e};const t={art:X.art||"",dd:TK("doidap"),hx:TK("hanhxu"),rdd:o=>selxReactR(o,tok("doidap")),rhx:o=>selxReactR(o,tok("hanhxu"))};
+ const K=k=>Z.tests&&Z.tests[k]&&Z.tests[k].k;const t=selxDaysT(X.art||selxArtAll(),false)/* D-BANHOA-SOLO: ONE builder of the girls' tests, shared with the odds (jselx selxOddsP); a bow («Cúi đầu chờ xét», no board of her own) judges every girl on her best board kind, as the direct road and the odds do (law 1, ONE CORE) */;
  const L=selxRoomCap(selxContest(selxAll(),{marks:Z.mk||{},t}));const me=L.find(x=>x.v===S);X.sc=me.sc;X.kept=me.kept;X.step=me.step;X.place=me.place;
  Z.pod=L.map(x=>({id:x.v===S?"me":x.v.id,sc:x.sc,place:x.place,kept:x.kept}));Z.cut=selxCut(L);/* D-SELX-FAIR: her place / score / cut, read by the kept card + the ban hoa ending */Z.keptV=L.filter(x=>x.kept&&x.v!==S).map(x=>x.v);Z.keptIds=Z.keptV.map(v=>v.id);
  /* law 1 scan row 20: each girl's answers move HER thiện cảm with the asking royal the same way as hers (selxFav on the same reaction; the mini-game → Hoàng thượng) */
@@ -110406,7 +110422,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="96cf0ee7c4c7";window.CTM_BUILD=BUILD;
+const BUILD="fcc53f70a54d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

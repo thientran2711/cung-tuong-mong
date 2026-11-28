@@ -31,7 +31,7 @@ function selxMiniFav(mark){for(const [t,f] of BAL.selx.fav.mini)if(mark>=t)retur
 /* answer mark of a test from the reaction (the same for her and for a girl): + = hit, − = miss, none = middle */
 function selxMark(react){const M=BAL.selx.npcMatch;return react==="+"?M.hit:react==="−"?M.miss:M.none}
 /* a tú nữ's own marks (law 1: the same tests, her own skill and nết): mini = her art level mark; dd/hx = how her nết's way of answering fits the royal */
-function selxNpcMarks(v,t){t=t||{};const lv=(()=>{try{return t.art&&typeof kg82LvFor==="function"?kg82LvFor(v,t.art):0}catch(e){return 0}})();
+function selxNpcMarks(v,t){t=t||{};const lv=(()=>{try{const k=t.art&&(typeof entKind==="function"&&entKind(t.art)||t.art);return k&&typeof kg82LvFor==="function"?kg82LvFor(v,k):0}catch(e){return 0}})();/* D-BANHOA-SOLO (law 1): the board is a PLAIN art name on every road (S.selx.art «cam» / «vu» …) while kg82LvFor reads a KIND («dan» / «mua»): read through entKind, else every girl stood at level 0 on Cầm / Kỳ / Vũ / Nấu */
  const NM=BAL.selx.npcMini;const MK=BAL.selx.mark;const mini=Math.max(MK.lo,Math.min(MK.hi,Math.round(NM.base+lv*NM.lv+R(2*NM.r+1)-NM.r)));/* law 4: numbers from BAL */const pickBy=(e,rf)=>{if(!e||!e.options)return"";const net=(()=>{try{return netOf(v)||[]}catch(x){return[]}})().join(" ");
   const ST={khiem:/Khiêm nhường|Kín đáo|An phận|Điềm tĩnh/,manh:/Kiêu ngạo|Nóng nảy|Tham vọng/,dido:/Nhiều chuyện|Ham vui|Xảo quyệt/,that:/Thật thà|Thanh liêm|Trọng nghĩa/,
    giuyen:/Điềm tĩnh|Kín đáo|Lạnh lùng/,tuxu:/Nóng nảy|Ân cần|Rộng lượng/,caunguoi:/Khiêm nhường|An phận/,nhan:/Thật thà|Thanh liêm/};
@@ -115,7 +115,12 @@ function selxHtMe(L,marks){const sc=Math.round(selxScore(S,marks));const place=1
 function selxOddsP(raw,art){try{const Z=S&&S.selx2;if(!Z)return null;const girls=Z.days&&typeof selxAll==="function"?selxAll():(Z.girls&&Z.girls.length?Z.girls:null);if(!girls)return null;
  const ht=selxHoaThan(),N=BAL.odds.simN,kept=BAL.selx.yard.kept;const mk=Object.assign({},Z.mk||{},{mini:raw});const t={art:art||(S.selx&&S.selx.art)||(()=>{try{return entKind(entBest())}catch(e){return""}})()};/* the board every girl is judged on = selxSelDo's own t */
  const r0=Math.random;let q=((S.turn||0)*7919+(raw|0)*104729+girls.length*31+(S.sac|0))>>>0;Math.random=()=>{q=(Math.imul(q,1664525)+1013904223)>>>0;return q/4294967296};
- let ok=0;try{for(let i=0;i<N;i++){if(ht){const L=selxContest(girls,null);if(selxHtMe(L,mk).step>=0)ok++}else{const L=selxContest(girls,{marks:mk,t});const me=L.find(x=>x.v===S);if(me&&me.place<=kept)ok++}}}finally{Math.random=r0}
+ /* D-BANHOA-SOLO (law 7, ONE CORE with the result): on the 3-day road every sim judges the girls on the real tests (jselxday selxDaysT: the set ones, else drawn as
+    selxTest draws them) and, before the hall's first look (selxImpRun), everyone's first impression is read now by the same rule (selxImpAll, a pure read) —
+    so the told chance is the chance of the contest she will really meet; the girls' marks are put back after (no save change). */
+ const dz=!!(Z.days&&typeof selxDaysT==="function");const imp0=dz&&!Z.impDone&&typeof selxImpAll==="function";const keep=[];
+ if(imp0){try{if(mk.imp==null)mk.imp=selxImpAll(S).mk;for(const v of girls){keep.push([v,v.__impMk]);if(v.__impMk==null)v.__impMk=selxImpAll(v).mk}}catch(e){console.error("selxOddsP imp",e)}}
+ let ok=0;try{for(let i=0;i<N;i++){if(ht){const L=selxContest(girls,null);if(selxHtMe(L,mk).step>=0)ok++}else{const tt=dz?selxDaysT(t.art,true):t;const L=selxContest(girls,{marks:mk,t:tt});const me=L.find(x=>x.v===S);if(me&&me.place<=kept)ok++}}}finally{Math.random=r0;for(const [v,x] of keep){if(x==null)delete v.__impMk;else v.__impMk=x}}
  return Math.round(ok*100/N)}catch(e){console.error("selxOddsP",e);return null}}
 /* the loss words of the selection (VANPHONG cổ trang, no numbers): what «hỏng» means on her road */
 function selxLossW(){if(selxHoaThan())return "bị phong thấp hơn hòa ước một bậc";const n=BAL.selx.yard.kept;return `không lọt vào ${typeof selxNumW==="function"?selxNumW(n):n} người đứng đầu thì bị ban hoa, kiếp này dừng`}

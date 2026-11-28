@@ -255,9 +255,20 @@ function selxMini(){const d=mkP("kc2Sel",{});if(!d){S.selx2.mk=Object.assign(S.s
  const o=(d.o||[]).slice();const c=o.findIndex(x=>/^Cúi đầu chờ xét/.test(x.n||""));if(c>0)o.unshift(o.splice(c,1)[0]);
  Q.unshift({t:"Hoàng thượng",h:selxHead()+d.t,opts:selxBare(o),who:d.who,pid:"kc2Sel",pp:{}})}
 function selxMiniDone(raw){const Z=S.selx2;Z.mk=Object.assign(Z.mk||{},{mini:raw});Z.fav=Z.fav||{};Z.fav.E=(Z.fav.E||0)+selxMiniFav(raw);selxSpend(BAL.selx.beat.test);selxTest("H","hanhxu",selxContestRun)/* SELSCENE-13: no show here — every caller (jkc2 kc2SelPlay fin / chooseM) shows the next card once */}
+/* D-BANHOA-SOLO (law 7 + law 1): the tests every girl answers in the contest = {art, dd, hx, rdd, rhx} (selxNpcMarks t). A test already set (Z.tests) is used;
+   with draw, a test not yet set is drawn the way selxTest will draw it (same asker: dd = Thái hậu, hx = Hoàng hậu or the first royal; selxTestPick) — the odds
+   (selxOddsP, on its private generator) then judge the girls on real tests, as the result does; before this they met no test (middle mark) and the told chance
+   of «Cúi đầu chờ xét» read ≈ .48 while the true rate was ≈ .30 (dev/measure/selx-fair.js 60 lives, LIVE 8a1a71de). */
+/* the board kind every girl is judged on when she offers none (bow): her own best kind — the kind her own «Cúi đầu» mark is read on (jentry entSkipRaw) */
+function selxArtAll(){try{return entKind(entBest())}catch(e){return""}}
+function selxDaysT(art,draw){const Z=S.selx2;const RY=selxRoyals();const ask={doidap:"T",hanhxu:"H"};const T={};
+ for(const type of ["doidap","hanhxu"]){const z=Z.tests&&Z.tests[type];let e=null,k=null;
+  if(z){e=SELX_TESTS.find(x=>x.id===z.id)||null;k=z.k}else if(draw){const ry=RY.find(x=>x[0]===ask[type])||RY[0];if(ry){k=ry[0];e=selxTestPick(type,k)||null}}
+  const tok=(RY.find(x=>x[0]===k)||[])[2];T[type]={e:e?Object.assign({},e,{__k:k}):e,tok}}
+ return{art:art||"",dd:T.doidap.e,hx:T.hanhxu.e,rdd:o=>selxReactR(o,T.doidap.tok),rhx:o=>selxReactR(o,T.hanhxu.tok)}}
 /* THE CONTEST on the 3 marks (jselx selxContest, the same formula and the same royal reaction for every girl) */
 function selxContestRun(){const Z=S.selx2;const X=S.selx;const T=k=>SELX_TESTS.find(x=>x.id===(Z.tests&&Z.tests[k]&&Z.tests[k].id));const tok=k=>(selxRoyals().find(x=>x[0]===(Z.tests&&Z.tests[k]&&Z.tests[k].k))||[])[2];
- const K=k=>Z.tests&&Z.tests[k]&&Z.tests[k].k;const TK=k=>{const e=T(k);return e?Object.assign({},e,{__k:K(k)}):e};const t={art:X.art||"",dd:TK("doidap"),hx:TK("hanhxu"),rdd:o=>selxReactR(o,tok("doidap")),rhx:o=>selxReactR(o,tok("hanhxu"))};
+ const K=k=>Z.tests&&Z.tests[k]&&Z.tests[k].k;const t=selxDaysT(X.art||selxArtAll(),false)/* D-BANHOA-SOLO: ONE builder of the girls' tests, shared with the odds (jselx selxOddsP); a bow («Cúi đầu chờ xét», no board of her own) judges every girl on her best board kind, as the direct road and the odds do (law 1, ONE CORE) */;
  const L=selxRoomCap(selxContest(selxAll(),{marks:Z.mk||{},t}));const me=L.find(x=>x.v===S);X.sc=me.sc;X.kept=me.kept;X.step=me.step;X.place=me.place;
  Z.pod=L.map(x=>({id:x.v===S?"me":x.v.id,sc:x.sc,place:x.place,kept:x.kept}));Z.cut=selxCut(L);/* D-SELX-FAIR: her place / score / cut, read by the kept card + the ban hoa ending */Z.keptV=L.filter(x=>x.kept&&x.v!==S).map(x=>x.v);Z.keptIds=Z.keptV.map(v=>v.id);
  /* law 1 scan row 20: each girl's answers move HER thiện cảm with the asking royal the same way as hers (selxFav on the same reaction; the mini-game → Hoàng thượng) */
