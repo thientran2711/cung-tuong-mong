@@ -1,0 +1,108 @@
+RESUME flight2-s16c from 2026-11-27T22:32:55.874Z buổi 2238
+BUILD PIN: could not serve 26414b85697a locally — the gate below still stops on a mismatch
+page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:8704/
+Call log:
+[2m  - navigating to "http://127.0.0.1:8704/", waiting until "load"[22m
+
+    at boot (/home/user/wt/rt/dev/test/robot-rt.js:265:28)
+    at async Object.play (/home/user/wt/rt/dev/test/robot-rt.js:277:27)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:1045:9 {
+  log: [
+    '  - navigating to "http://127.0.0.1:8704/", waiting until "load"'
+  ],
+  name: 'Error'
+}
+RESUME flight2-s16c from 2026-11-27T22:32:55.874Z buổi 2238
+page.goto: Target page, context or browser has been closed
+    at boot (/home/user/wt/rt/dev/test/robot-rt.js:265:28)
+    at async Object.play (/home/user/wt/rt/dev/test/robot-rt.js:277:27)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:1045:9 {
+  log: []
+}
+RESUME flight2-s16c from 2026-11-27T22:32:55.874Z buổi 2238
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 429 (Too Many Requests) — /hello
+RESUME: save restored on http://127.0.0.1:8704 (4604950 of 4604950 chars, 29 keys)
+RESUME: hclh-save-v2-1 content identical (hash ckpt 95e765a4 · page 95e765a4, clock ckpt 16.187.2.0 · page 16.187.2.0)
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+CP buổi 2239 year 16 save 4607280 chars
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-act-gian.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/binh.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/binh.webp
+BUG game item pick grid «Biếu quà làm lành» re-opened 3× by «Đồ trong rươngTốnmón đồ 1 (rẻ nhất bán đ» with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi
+BOARD mua 29 moves 6/10 raw 10.00 (27 s, area 1, bold)
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD mua 29 moves 6/10 raw 10.00 (26 s, area 1, bold)
+BOARD mua 28 moves 6/10 raw 10.00 (27 s, area 1, bold)
+BOARD hat 152 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 154 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD mua 24 moves 4/10 raw 8.00 (27 s, area 3, bold)
+BOARD mua 28 moves 6/10 raw 10.00 (27 s, area 1, bold)
+BOARD hoa 2 moves 0/10 raw 0.00 (97 s, area 0, bold)
+BOARD mua 24 moves 4/10 raw 8.00 (26 s, area 3, bold)
+BOARD mua 29 moves 6/10 raw 10.00 (29 s, area 1, bold)
+CP buổi 2289 year 16 save 4700667 chars
+BOARD ve 1 moves 2/10 raw 0.00 (97 s, area 25, bold)
+PAGE CONSOLE error ×100: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+BOARD hat 214 moves 5/10 raw 0.00 (22 s, area 0, bold)
+STATUS flight2-s16c · buổi 2328 · year 17 · rank 0 · bugs 32 · stuck 0 · dead buttons 2
+CP buổi 2339 year 17 save 4796827 chars
+BOARD hat 217 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD mua 29 moves 6/10 raw 10.00 (28 s, area 0, bold)
+BOARD mua 24 moves 4/10 raw 8.00 (28 s, area 3, bold)
+BOARD mua 29 moves 6/10 raw 10.00 (27 s, area 0, bold)
+BOARD hat 204 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD mua 24 moves 4/10 raw 8.00 (26 s, area 3, bold)
+BOARD mua 28 moves 6/10 raw 10.00 (27 s, area 1, bold)
+CP buổi 2389 year 17 save 4902540 chars
+BOARD hat 208 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 200 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 146 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD mua 24 moves 4/10 raw 8.00 (28 s, area 3, bold)
+BOARD ve 1 moves 3/10 raw 0.00 (97 s, area 49, bold)
+BOARD mua 28 moves 6/10 raw 10.00 (26 s, area 1, bold)
+BOARD hat 128 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD mua 29 moves 6/10 raw 10.00 (27 s, area 1, bold)
+BOARD mua 28 moves 6/10 raw 10.00 (28 s, area 1, bold)
+BOARD hat 191 moves 5/10 raw 0.00 (22 s, area 0, bold)
+STATUS flight2-s16c · buổi 2428 · year 17 · rank 0 · bugs 32 · stuck 0 · dead buttons 2
+BOARD mua 24 moves 4/10 raw 8.00 (26 s, area 3, bold)
+BOARD hat 191 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD mua 29 moves 6/10 raw 10.00 (28 s, area 1, bold)
+CP buổi 2439 year 18 save 5008061 chars
+BOARD doden 11 moves 9/10 raw 10.00 (5 s, area 0, bold)
+BOARD mua 29 moves 6/10 raw 10.00 (27 s, area 0, bold)
+BOARD mua 24 moves 4/10 raw 8.00 (28 s, area 3, bold)
+BOARD hat 171 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD mua 29 moves 6/10 raw 10.00 (28 s, area 1, bold)
+BOARD mua 24 moves 4/10 raw 8.00 (28 s, area 3, bold)
+BOARD mua 29 moves 6/10 raw 10.00 (26 s, area 0, bold)
+BOARD hat 190 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD tho 0 moves 4/10 raw 0.00 (76 s, area 45, bold)
+CP buổi 2489 year 18 save 5094034 chars
+BOARD hat 149 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 125 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD mua 29 moves 6/10 raw 10.00 (28 s, area 0, bold)
+BOARD mua 24 moves 4/10 raw 8.00 (27 s, area 3, bold)
+BOARD mua 24 moves 4/10 raw 8.00 (26 s, area 3, bold)
+STATUS flight2-s16c · buổi 2521 · year 18 · rank 0 · bugs 32 · stuck 0 · dead buttons 2
+BOARD hoa 2 moves 2/10 raw 0.00 (98 s, area 0, bold)
+BOARD mua 29 moves 6/10 raw 10.00 (28 s, area 0, bold)
+BOARD hat 211 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 196 moves 5/10 raw 0.00 (22 s, area 0, bold)
+CP buổi 2539 year 18 save 5165534 chars
+BOARD hat 177 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD mua 24 moves 4/10 raw 8.00 (28 s, area 3, bold)
+BOARD mua 28 moves 6/10 raw 10.00 (27 s, area 1, bold)
+BOARD mua 17 moves 1/10 raw 6.00 (27 s, area 3, bold)
+BOARD mua 29 moves 7/10 raw 10.00 (27 s, area 0, bold)
+PAGE CONSOLE error: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5227112 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BUG game QuotaExceededError: the game save no longer fits localStorage (j6 save() swallows it: every later save is lost)
+PAGE CONSOLE error ×2: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5227019 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+PAGE CONSOLE error ×3: [rt] localStorage.setItem failed: QuotaExceededError key hclh-save-v2-1 (5240239 chars): Failed to execute 'setItem' on 'Storage': Setting the value of 'hclh-save-v2-1' exceeded the quota.
+BOARD #kg82 43 moves ? (4 s, area 0, bold)
+page.waitForTimeout: Target page, context or browser has been closed
+    at Object.play (/home/user/wt/rt/dev/test/robot-rt.js:327:69)
+    at async /home/user/wt/rt/dev/test/robot-rt.js:1045:9 {
+  log: []
+}

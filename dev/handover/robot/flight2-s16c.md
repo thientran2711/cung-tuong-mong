@@ -1,0 +1,47 @@
+# flight2-s16c (real-tap harness f65d019b, ipad)
+
+| life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick | promotion roads seen / taken |
+|---|---|---|---|---|---|---|---|---|---|
+| flight2-s16c | HARNESS |  | 2570 |  | 2 | 0 | 34 | — | 251 / 87 (decree 239, select 12) |
+
+## Dead buttons
+
+- #modal «Biếu quà làm lành» «kip Thường Áo lụa thêu hoa nhỏ Mặc» covered by outside viewport · dead-ipad-1795772011618.png
+- #modal «Biếu quà làm lành» «kip Thường Trâm ngọc bích Cài tóc:» covered by outside viewport · dead-ipad-1795772068433.png
+
+## Bugs
+
+- [harness] ×1 NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): picker stalled 81 steps, no close / next → later visits unstuck at once by taps
+- [harness] ×1 picker stalled 81 steps / 60 s on .kmov «» without a real tap (area 82; last refused tap: gone «Ta biết rồi») → tapped «Ta biết rồi»
+- [game] ×1 SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)
+- [game] ×90 item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)
+- [note] ×1 item pick grid: no item can be given now (294 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Hoàng th») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (310 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (326 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (324 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (336 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (348 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (400 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (438 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (504 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (570 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (588 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (666 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (738 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (754 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (796 items, every confirm disabled or greyed; card says «Thường Trâm hoa lụa Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Nội») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (812 items, every confirm disabled or greyed; card says «Thường Trâm hoa lụa Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Nội») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (884 items, every confirm disabled or greyed; card says «Thường Trâm hoa lụa Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Nội») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (914 items, every confirm disabled or greyed; card says «Thường Trâm hoa lụa Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Nội») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (990 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (1064 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (1158 items, every confirm disabled or greyed; card says «Thường Trâm hoa lụa Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Nội») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (1310 items, every confirm disabled or greyed; card says «Thường Trâm hoa lụa Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Nội») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (1462 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH đồ trong r») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (1690 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH đồ trong r») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (2056 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH phần thưởn») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (2302 items, every confirm disabled or greyed; card says «Thường Nến mỡ dê Nến PHẨM Thường LOẠI Nến! Nến mỡ dê TỐN không ĐƯỢC không CẦN món còn nhẹ, chưa đủ lễ (nàng ta coi như 1 bạc, cần 12) GHI CH») on «Biếu quà làm lành» → ✕
+- [note] ×1 item pick grid: no item can be given now (2682 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
+- [game] ×20 item pick grid «Biếu quà làm lành» re-opened 3× by «Đồ trong rươngTốnmón đồ 1 (rẻ nhất bán đ» with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi
+- [game] ×11 QuotaExceededError: the game save no longer fits localStorage (j6 save() swallows it: every later save is lost)
+- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed
