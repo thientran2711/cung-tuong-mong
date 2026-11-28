@@ -815,3 +815,4 @@ ALLOT-PACE-3 | review/allot-pace-r3-rv187 114c19da | session_01PEhRbuUnuv3S5Duzh
 B-ROW4 r2 (successor of 2GvCVsyL; side-line scenes review/sideline-dlg-4 re-merge LIVE + finish gates) | review/sideline-dlg-4 | session_01N1tNP5BGCjSbd18PTpVBvk (opus) | RUNNING | 28/11 13:48Z (Foreman B ROOT 3 child 3)
 E-TIER-B13d (fix 5 RV3B FAIL items on batch 3b e3c1f982) | review/e-tier-b13 (after e3c1f982) | (opening) | RUNNING | 28/11 13:58Z (Foreman E C12)
 ILLNESS-CURE-4 | review/illness-cure 3c69ad1e | session_01PEhRbwXRToECD9cRMDDoUq | RV READY → RV-191; worker ARCHIVED (past roll; handover fd758853, successor on FAIL) | 28/11 14:10Z Foreman C
+B-ROW9 r2 FIXER (rv FAIL 4 items, reports/row9-net.md «## REVIEW») | review/row9-net-r2 → r3 | PENDING | RUNNING | 28/11 14:10Z (Foreman B ROOT 3 child 3)
