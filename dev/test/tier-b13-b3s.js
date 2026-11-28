@@ -8,7 +8,9 @@ const {chromium}=require('playwright');const D=require('./lib/device');const pat
 let fail=0;const ok=(c,m,x)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m+(x!==undefined&&!c?' '+JSON.stringify(x).slice(0,600):''))};
 (async()=>{const srv=await D.serveRoot(ROOT);const b=await chromium.launch();const ctx=await D.newDeviceContext(b,'fold',{deviceScaleFactor:1});const p=await ctx.newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.route(/\.(webp|png|jpe?g|mp3|ogg|m4a|mp4|webm)(\?|$)/i,r=>r.abort());const g=await D.openHost(p,srv.url,{timeout:120000});await g.waitForFunction(()=>typeof start==='function'&&document.getElementById('title')&&window.__ctmBuilt===1,null,{timeout:120000});
- const se=await g.evaluate(()=>{try{SLOT=9;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}window.__forceOrigin='tt';start();['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;return typeof S}catch(e){return 'err '+e.message}});ok(se==='object','a life starts ('+se+')');
+ let se2=null;const se=await g.evaluate(()=>{try{SLOT=9;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}window.__forceOrigin='tt';start();['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;return typeof S}catch(e){return 'err '+e.message}});
+ if(se!=='object'){await g.waitForFunction(()=>typeof S==='object'&&S&&S.origin,null,{timeout:60000}).catch(()=>{});se2=await g.evaluate(()=>{['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;return typeof S}).catch(e=>'err '+e.message)}
+ ok((se2||se)==='object','a life starts ('+(se2||se)+')');
  /* (1) the selection card, per origin and per art spread */
  const R=await g.evaluate(()=>{const out=[];const o0=S.origin,a0=S.arts,s0=S.selx,s2=S.selx2;
   const cases=[['cnv',{kim:1,theu:4}],['cnv',{kim:4,theu:1}],['nc',{mua:5,cam:1}],['nc',{mua:0,cam:5}],['bd',{mua:1,ban:5}],['cn',{huong:3}],['tt',{cam:2,mua:5,ky:1}],['tt',{cam:5,mua:1}],['dtq',{}]];
