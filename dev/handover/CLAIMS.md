@@ -727,4 +727,4 @@ COOP-REBIRTH-RESYNC r2 (successor fixer, gates + SSK; rollover of 4AAwyivs) | re
 FLIGHT2-S20D life (seat s20 session_01UV1SzihQX2u9C61CBLqzhV, ctx 28 %; iPad 1180x820 greedy, seed 2026112566, LIVE 5fb13d60, pin=1 fresh profile, harness f65d019b, pick «Tĩnh dưỡng|Truyền thái y») | dev/handover/robot/flight2-s20d.* | session_01UV1SzihQX2u9C61CBLqzhV | CLAIMED | 2026-11-28T00:07Z (FOREMAN F ROOT 7 c1)
 TUANTANG-WARN (MAIN 183 00:38Z: tuẫn táng / game-imposed deaths with no warning + no road; whole family; opus, BIG) | review/tuantang-warn | (opening, Foreman C ROOT 4-1) | RUNNING | 28/11 00:42Z (Foreman C ROOT 4-1)
 TUANTANG-WARN (session id for the 00:42Z claim) | review/tuantang-warn | session_01PEhRbxieBKhF66jW9SU6j4 | RUNNING | 28/11 00:39Z (Foreman C ROOT 4-1)
-SAVE-REWIND-2 (MAIN 183 order 00:38Z; rewinds still on LIVE; check rv6 cure, else root + family) | review/save-rewind-2 | (opening, Foreman B ROOT 3 child 1) | RUNNING | 28/11 00:55Z
+SAVE-REWIND-2 (MAIN 183 order 00:38Z; rewinds still on LIVE; check rv6 cure, else root + family) | review/save-rewind-2 | session_01N1tNP6K6GumrbBF8d7DJtm (Foreman B ROOT 3 child 1) | RUNNING | 28/11 00:55Z
