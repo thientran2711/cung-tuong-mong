@@ -12,10 +12,11 @@
    KIT §101 (owner 25/11 ~21:55Z): on a HAND the press lifts the card and a real tap on its green ✓ chooses (realtap choose); the pressed node must still be in the page.
    usage: node dev/test/press-keep.js <page url>   exit 1 on any failure */
 const {chromium}=require('playwright');const RT=require('./realtap.js');const [,,URL]=process.argv;
+const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
 const DEVS={fold:[755,1000],ipad:[1180,820]};
 (async()=>{const b=await chromium.launch();let fails=0;const say=(ok,dev,what,why)=>{if(!ok)fails++;console.log(`${ok?'PASS':'FAIL'} · ${dev} · ${what}${why?' · '+why:''}`)};
 for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];
- const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',serviceWorkers:'block'});const p=await ctx.newPage();
+ const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',serviceWorkers:'block'});await keepNotesSeen(ctx);const p=await ctx.newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.route(/\.(mp3|ogg|m4a|mp4|webm)(\?|$)/i,r=>r.abort());
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:120000});await p.waitForTimeout(1500);
  /* harness setup only (no press): a fresh consort life on the home screen */

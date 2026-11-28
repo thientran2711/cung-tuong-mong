@@ -57,9 +57,9 @@ function kfkLoad(names){names=(Array.isArray(names)?names:[names]).filter(n=>KFK
 const KFK_CAP=()=>kitView().pages===1?140:240;  /* hard cap of live particles on the ONE Pixi layer (owner perf budget 22:35Z) */
 function kfkSp(kind,x,y,v,tint,sc,blend,frame){const P=window.PIXI,K=KFK_SP[kind],fr=KFK.tex[kind];if(!P||!K||!fr||!KFX.root)return null;if(KFX.parts.length>=KFK_CAP())return null;
  let s=KFK.pool.pop();if(!s){s=new P.Sprite(fr[0]);s.anchor.set(.5);KFK.made++}
- s.texture=fr[frame!=null?frame%fr.length:Math.floor(Math.random()*fr.length)];s.x=x;s.y=y;s.rotation=Math.random()*6.28;s.visible=true;
+ s.texture=fr[frame!=null?frame%fr.length:Math.floor(Math.random()*fr.length)];s.x=x;s.y=y;s.__pt=!!KFK.pt;s.__pic=!!KFK.inpic;/* §57.1c: a point effect (kitFxBurst / jfx kfPx) — kfTick hides it where it sits on an open dialog */s.rotation=Math.random()*6.28;s.visible=true;
  s.tint=K.t&&tint!=null?tint:0xffffff;s.blendMode=blend||K.b||"normal";const k=(sc||1)*K.d/K.s*(typeof KFK_U!=="undefined"&&KFK_U.test(kind)?kfUnit():1);s.scale.set(k);
- s.v=Object.assign({vx:0,vy:0,g:0,drag:1,life:60,max:60,spin:0,grow:0,a0:1,fade:"out",sway:0,ph:Math.random()*6.28,sc:k},v);s.v.max=s.v.life;
+ s.v=Object.assign({vx:0,vy:0,g:0,drag:1,life:60,max:60,spin:0,grow:0,a0:1,fade:"out",sway:0,ph:Math.random()*6.28,sc:k},v);s.v.max=s.v.life;if(!s.__pic&&!s.v.clip){const DB=kfkDlgBox();if(DB){const hw=Math.abs(s.width||0)*.5,hh=Math.abs(s.height||0)*.5;if(x+hw>DB.left&&x-hw<DB.right&&y+hh>DB.top&&y-hh<DB.bottom)s.alpha=0}}/* §57.1c: hidden from its first frame (kfTick keeps it so) */
  if(s.v.grow)s.v.grow*=K.d/K.s;s.alpha=s.v.fade==="in"||s.v.fade==="inout"?0:s.v.a0;KFX.root.addChild(s);KFX.parts.push(s);return s}
 function kfkFree(s){try{s.parent&&s.parent.removeChild(s);s.v=null;if(KFK.pool.length<400){s.visible=false;KFK.pool.push(s)}else s.destroy();KFK.freed++}catch(e){}}
 function kfkAt(at){if(at==null)return{x:innerWidth/2,y:innerHeight*.42};if(at.getBoundingClientRect){const r=at.getBoundingClientRect();return{x:r.left+r.width/2,y:r.top+r.height/2,r}}return at}
@@ -77,11 +77,30 @@ function kfkMove(name,p,i,n,o){const m=o.motion||KFK_MOVE[name]||"burst",W=inner
  if(m==="flash")return{x:p.x,y:p.y,v:{life:o.life||55,grow:o.grow!=null?o.grow:.012,a0:o.a0!=null?o.a0:.95,fade:"inout"}};
  if(m==="bloom")return{x:p.x+kR(-50,50),y:p.y+kR(-40,40),v:{life:o.life||kR(70,95),grow:kR(.006,.012),a0:kR(.55,.8),fade:"inout",vy:name==="smoke"?-kR(.5,1.1):0}};
  const a=o.up?kR(-Math.PI*.95,-Math.PI*.05):kR(0,Math.PI*2),v=kR(3,8)*sp;return{x:p.x,y:p.y,v:{vx:Math.cos(a)*v,vy:Math.sin(a)*v-1.5,g:.08,drag:.95,life:o.life||kR(60,100),spin:kR(-.12,.12),sway:.4,fade:"out"},rot:name==="streak"?a:null}}
+/* KIT §57.1c (MAIN 177 ruling 27/11, Fold «Đại kết cục»: the ending's gold burst sat over the title and the first line): while the kit dialog
+   (#modal .dlg) is open, a burst NEVER lands on its text. A burst aimed into / across the dialog box moves just ABOVE the dialog top (sparks fly up,
+   shorter life), its size capped to the room above; no room (< 24 px reach) = no burst. A burst on a picture inside the dialog (event picture, art
+   strip, portrait frame) that stays inside that picture is left alone; a burst with no point (at = null) and falling kinds (petals, leaves, coins: screen-wide weather, KIT §68) are left alone. */
+const KFK_DLGPIC=".k3ev,.k3mpic,.kdlgart,.ksart,.kszfs,.md,.pcp";
+function kfkDlgBox(){try{const d=document.querySelector("#modal:not([hidden]) .dlg");if(!d||!d.getClientRects().length)return null;const r=d.getBoundingClientRect();return r.width>40&&r.height>40?r:null}catch(e){return null}}
+/* kfkDlgPt(p,R0): the shared test — p {x,y[,r]} with reach R0 px. Returns p unchanged (dialog closed / clear of it / inside a dialog picture),
+   {x,y,k} = the point moved above the dialog with size ratio k (≤ 1), or null = no room: no effect. Used by kitFxBurst and jfx kfPx. */
+function kfkDlgPt(p,R0){KFK.pic=0;const d=kfkDlgBox();if(!d||!p)return p;const r=p.r;const L=r?Math.min(p.x-R0,r.left):p.x-R0,Rt=r?Math.max(p.x+R0,r.right):p.x+R0,T=r?Math.min(p.y-R0,r.top):p.y-R0,B=r?Math.max(p.y+R0,r.bottom):p.y+R0;
+ if(!(Rt>d.left&&L<d.right&&B>d.top&&T<d.bottom))return p;
+ try{const e=document.elementFromPoint(p.x,p.y),pic=e&&e.closest&&e.closest(KFK_DLGPIC);if(pic&&pic.closest("#modal")){const q=pic.getBoundingClientRect();if(L>=q.left&&Rt<=q.right&&T>=q.top&&B<=q.bottom){KFK.pic=1;return p}}}catch(e){}/* KFK.pic: aimed inside a dialog picture on purpose — kfTick leaves it */
+ const R=Math.min(R0,d.top/1.4);if(R<24)return null;return{x:Math.max(d.left+R,Math.min(d.right-R,p.x)),y:d.top-R-2,k:R/R0}}
+function kfkDlgKeep(name,at,o){if(at==null||/^(fall|rain)$/.test(KFK_MOVE[name]))return{at,o};const sc=o.scale!=null?o.scale:1,mv=KFK_MOVE[name];
+ /* reach: a light grows while it lives (flash: grow × life), a burst flies ~110 px */
+ const R0=mv==="burst"?110*sc:((KFK_SP[name].d||KFK_SP[name].s||100)*sc)/2*(mv==="flash"?1+(o.grow!=null?o.grow:.012)*(o.life||55)*.6:1);
+ const p=kfkAt(at),q=kfkDlgPt(p,R0);if(q===p)return{at,o};if(!q){kfkLog("burst-off-dlg:"+name);return null}
+ kfkLog("burst-above-dlg:"+name);return{at:{x:q.x,y:q.y},o:Object.assign({},o,{scale:sc*q.k},mv==="burst"?{up:1,life:o.life||45}:{})}}
 function kitFxBurst(name,at,n,o){o=o||{};if(!KFK_SP[name]||!kfOn()||kfStill())return Promise.resolve(0);kfkLog("burst:"+name);
+ KFK.pic=0;{const k=kfkDlgKeep(name,at,o);if(!k)return Promise.resolve(0);at=k.at;o=k.o}const inPic=KFK.pic;
  if(KFK_LSP[name]){/* light sprites: KIT §68.7 — over a person the burst becomes a rim light on that person */const p0=kfkAt(at),d0=(KFK_SP[name].d||100)*(o.scale||1),gb={x:p0.x-d0/2,y:p0.y-d0/2,w:d0,h:d0};if(p0.r){gb.x=Math.min(gb.x,p0.r.left);gb.y=Math.min(gb.y,p0.r.top);gb.w=Math.max(gb.x+gb.w,p0.r.right)-gb.x;gb.h=Math.max(gb.y+gb.h,p0.r.bottom)-gb.y}
   const rim=kfkRimFor(gb,name,{opacity:(o.a0!=null?o.a0:.8)-.3,dur:(o.life||60)*30,r:Math.max(8,Math.min(22,d0/12))});if(rim)return Promise.resolve(1)}
  return kfkLoad([name]).then(()=>{const p=kfkAt(at),N=kfBudget(n||12);let k=0;
-  for(let i=0;i<N;i++){const m=kfkMove(name,p,i,N,o);const s=kfkSp(name,m.x,m.y,m.v,o.tint,(o.scale!=null?o.scale:/^(petal-|osmanthus$)/.test(name)?.65:1)*kR(.75,1.25),o.blend);if(s){k++;if(m.rot!=null)s.rotation=m.rot;if(m.v.coin)s.v.coin=1}}
+  KFK.inpic=!!inPic;KFK.pt=!inPic&&!/^(fall|rain)$/.test(KFK_MOVE[name])&&at!=null;try{
+  for(let i=0;i<N;i++){const m=kfkMove(name,p,i,N,o);const s=kfkSp(name,m.x,m.y,m.v,o.tint,(o.scale!=null?o.scale:/^(petal-|osmanthus$)/.test(name)?.65:1)*kR(.75,1.25),o.blend);if(s){k++;if(m.rot!=null)s.rotation=m.rot;if(m.v.coin)s.v.coin=1}}}finally{KFK.pt=0;KFK.inpic=0}
   kfWake();return k}).catch(()=>0)}
 /* ---------- 1b. PERSON-SAFE LIGHT (owner 16/11 21:25Z, KIT §68.7) ----------
    Light / glow NEVER lies over a person or a face. Wherever a light, a glow sprite or a light sheet would reach a person (stage figure, her figure,

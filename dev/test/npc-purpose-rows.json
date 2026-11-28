@@ -3146,7 +3146,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "gossip deed: whom it is about",
-"done": "const x=npwPick(liveRivals(true).filter(y=>y!==a&&y!==t),y=>Math.max(0,hostility(a,y)-BAL.ag.why.min));"
+"done": "const x=npwPick(twGossipFoes(a,t),y=>Math.max(0,hostility(a,y)-BAL.ag.why.min));"
 },
 {
 "f": "jworld.js",
