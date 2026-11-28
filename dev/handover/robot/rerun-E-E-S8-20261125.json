@@ -713,6 +713,41 @@
    "bot": "",
    "review": "see the E-S6 rerun file",
    "moments": ""
+  },
+  {
+   "life": "E-S8-bd_san-R7-lazy4",
+   "origin": "bd",
+   "road": "bd_san",
+   "dev": "ipad",
+   "bot": "quiet",
+   "seed": 185211650,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "f65d019b"
+   },
+   "ending": "Lãnh cung — Phát điên trong lãnh cung (age 26 y8; mixed build 5fb13d60+→9483e103+, LIVE moved)",
+   "age": 26,
+   "buoi": 1037,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_san-R7-lazy4-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_san-R7-lazy4-moments.md"
+  },
+  {
+   "life": "ES8-bd_san-R7-cautious3-h",
+   "note": "run by E-S5, counted once in E-S8 (C11 10:10Z)",
+   "valid": "EXTRA",
+   "dev": "ipad",
+   "road": "bd_san",
+   "seed": 304984224,
+   "ending": "see rerun-E-ES8h-S5runner-*",
+   "age": null,
+   "buoi": null,
+   "origin": "bd",
+   "bot": "cautious",
+   "review": "see rerun-E-ES8h-S5runner-*",
+   "moments": ""
   }
  ],
  "parked": [
