@@ -101,7 +101,7 @@ function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w
   return `${by} dâng ${wn} lên Hoàng thượng${ev.notes.length?" ("+ev.notes.join("; ")+")":""}. ${a===S?fmt(ev.fx):"Sủng +"+ev.fx.sung}. `}
  if(r==="th"){ap(a,ev.fx);if(a!==S)newsAdd(a,"gift",`${by} dâng ${wn} tự tay làm lên Thái hậu.`);return `${by} dâng ${wn} lên Thái hậu${ev.notes.length?" ("+ev.notes.join("; ")+")":""}. ${a===S?fmt(ev.fx):""}`}
  if(r==="maid"){ap(a,ev.fx);return `${by} tặng ${a.maid.name} ${wn}. Thiện cảm ${a.maid.name} +${ev.fx.maid}. `}
- const ent=Object.assign({},e,{wk:Object.assign({},w,{from:key(a)})});const keepGain=()=>{relAdd(a,r,ev.rel);if(ev.fx.hh)ap(a,{hh:ev.fx.hh})};
+ const ent=Object.assign({},e,{wk:Object.assign({},w,{from:key(a)})});const keepGain=()=>{keepGain.d=affGot(r,a,()=>{relAdd(a,r,ev.rel);if(ev.fx.hh)ap(a,{hh:ev.fx.hh})})/* the real rise incl. S.hh (= the queen's thiện cảm), printed below (law 4) */};keepGain.d=ev.rel;
  if(r===S){keepGain();pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");newsAdd(a,"gift",`${by} tặng ngươi ${wn} tự tay làm.`,true);return `${by} sai người mang ${wn} sang tặng ngươi. `}
  /* d19-gift-npc (law 1 + 11): a work given to an NPC gets HER answer too, as every item (jrcv rcvGiftIn: Nhận / Trả lại quà / Xét nghiệm, the
     OD 18/11 ~21:15Z receiver choice) — before, a work skipped it, so an NPC could never send a work back. A work sent back goes home to the
@@ -110,7 +110,7 @@ function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w
  if(ans==="back"){if(typeof giveTo==="function")giveTo.out="back";return `${r.name} trả lại ${wn} cho ${NM(a)}. `}
  if(ans&&!["take","check"].includes(ans)){if(typeof giveTo==="function")giveTo.out="found";return ans}
  keepGain();invAdd(r,ent);if(a!==S)newsAdd(a,"gift",`${by} tặng ${rkName(r)} ${r.name} ${wn} tự tay làm.`);
- return `${by} tặng ${rkName(r)} ${r.name} ${wn}${ev.notes.length?" ("+ev.notes.join("; ")+")":""}: ${pvQuy(r,ev.rel,"thiện cảm")}. `}
+ return `${by} tặng ${rkName(r)} ${r.name} ${wn}${ev.notes.length?" ("+ev.notes.join("; ")+")":""}: thiện cảm ${keepGain.d<0?"":"+"}${keepGain.d}. `}
 (function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];if(e&&e.wk)return wkGive(a,r,ix)||"";return g0.apply(this,arguments)}})();
 /* sell outside the palace: silver, risk of Danh if found out (same odds for every consort) */
 function wkSellVal(w){return 0}/* replaced by jecon (BAL.craftSell) */
