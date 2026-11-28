@@ -43,7 +43,7 @@ function j95kh(){return Math.max(0,Math.min(J95.KH-1,typeof used==="number"?used
 function j95key(){return wk()+"-"+(S.buoi||0)}
 function j95z(){const z=S.j95=S.j95||{};for(const k of ["obs","me","meK","it","hold","seen","told","plant"])z[k]=z[k]||{};z.sec=z.sec||[];z.clue=z.clue||[];return z}
 function j95pn(k){try{return k?placeName(k):"—"}catch(e){return String(k)}}
-function j95rk(p){try{return p===S?(typeof isSrv==="function"&&isSrv()?srvTitle():S.rank>=7?"Hoàng hậu":meRankN()):p.out?"Phế phi":p.queen?"Hoàng hậu":RANKS[p.rank].n}catch(e){return""}}
+function j95rk(p){try{return p===S?(typeof isSrv==="function"&&isSrv()?srvTitle():outTitleN(S)||(S.rank>=7?"Hoàng hậu":meRankN())):p.out?outTitleN(p):p.queen?"Hoàng hậu":RANKS[p.rank].n}catch(e){return""}}
 function j95acc(p,k){if(!k)return false;try{return palaceOf(p)===k||accessOf(p,k).ok}catch(e){return true}}
 function j95bl(c){return J95.B4[c].toLowerCase()}
 
@@ -387,7 +387,7 @@ function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)
   else if(id==="c:ksp"&&!V.people.some(p=>p.kind==="ksp")){V.people.push({kind:"ksp",name:"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});ch=true}}
  /* lãnh cung: every fallen consort the record puts here (no limit), nobody invented */
  if(k==="lc"&&here("c:ly")&&!V.people.some(p=>p.lid==="c:ly")&&typeof lyEntry==="function"){const q=lyEntry(S.out?"Phế phi · cùng cảnh ngộ":"Phế phi");if(q){V.people.push(q);ch=true}}
- if(k==="lc"){for(const v of rivals){if(!v.alive||!v.out||!here("v"+v.id)||V.people.some(p=>p.ref===v))continue;V.people.push({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:S.out?"Phế phi · cùng cảnh ngộ":"Phế phi"});ch=true}
+ if(k==="lc"){for(const v of rivals){if(!v.alive||!v.out||!here("v"+v.id)||V.people.some(p=>p.ref===v))continue;V.people.push({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:S.out?`${outTitleN(v)} · cùng cảnh ngộ`:outTitleN(v)});ch=true}
   if(ch&&!V.people.length)V.msg="Lãnh cung vắng lặng, chỉ có gió lùa qua song cửa mục.";else if(ch&&!S.out)V.msg=`Ở đây có ${V.people.length} người.`}
  /* the Kính sự phòng eunuch is not the Tổng quản */
  const kc=S.court&&S.court.ksp;if(kc&&kc.name)for(const p of V.people)if(p.kind==="ksp"&&p.name!==kc.name){p.name=kc.name;p.info="Kính sự phòng · Giữ thẻ bài các phi tần";ch=true}
@@ -634,7 +634,7 @@ function j95ledObj(id){const who=(S.roster.who||{})[id]||[];const c=id[0];try{
    return{kind:"srv",sk:"sv",ref:s,sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:`${typeof srkName==="function"?srkName(s):(s.role==="maid"?"Cung nữ":"Thái giám")} · ${o===m?"cùng cung":o?"người của "+o.name:"Nội vụ phủ"}`}}}
   else if(c==="m"&&id[1]!=="m"){const x=manById(id);if(x&&x.alive){x.seen=bkey();return{kind:"srv",sk:"man",ref:x,mid:x.id,name:x.name.split(" ").slice(-2).join(" "),ini:x.name.split(" ").pop()[0],col:"#6a8aa0",info:`${x.role} · ${netTxt(x)} · ${tinhW(x.tinh)}`}}return null}
   else if(id.indexOf("q:")===0){const h=(trS().H||{})[id.slice(2)];return h?{kind:"min",ref:h,name:h.name,ini:"Quan",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${S.roster.P[id][j95kh()][0]==="thu"?"vào chầu":"dự yến"}`}:null}}
- if(c==="v"){const v=RV(+id.slice(1));if(!v||!v.alive)return null;if(v.out)return{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"};return v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v)}
+ if(c==="v"){const v=RV(+id.slice(1));if(!v||!v.alive)return null;if(v.out)return{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:outTitleN(v)||"Phế phi"};return v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v)}
  if(id==="emp")return{kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`niên hiệu ${empEra()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
  if(id==="th")return S.thDead?null:{kind:"th",name:"Thái hậu",ini:"Từ",col:"#c9a0e0",info:"Thái hậu"};
  if(id==="mm:me")return S.maid?{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`${kitMaidTitle()} · thiện cảm ${S.maid.loyal}`}:null;
