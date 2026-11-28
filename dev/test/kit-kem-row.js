@@ -4,7 +4,7 @@
    - every Kèm / Được / Mất line is its own row (distinct tops), the name «<Tên>:» on the same row as its value;
    - no line starts with «một vị» (capital at the start of a row).
    usage: node dev/test/kit-kem-row.js <index.html> [shotdir]   Exit 1 on a FAIL. Shots never go in git. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;
 (async()=>{const b=await chromium.launch();const html=fs.readFileSync(SRC);let fails=0;const chk=(n,ok,i)=>{if(!ok){fails++;console.log('FAIL',n,i||'')}else console.log('ok  ',n)};if(OUT)fs.mkdirSync(OUT,{recursive:true});
 for(const [W,H] of [[755,1000],[1180,820]]){const dev=W<H?'fold':'ipad';const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
  await ctx.addInitScript(()=>{let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});

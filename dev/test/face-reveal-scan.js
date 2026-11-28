@@ -5,7 +5,7 @@
    whether each was a stranger before, whether the dialog drew a grey silhouette, and whether the person is known afterwards.
    usage: node dev/test/face-reveal-scan.js <page url> [steps=12] [lives seeds=2] > out.json
    Output: {sites:{<file:line>:{n,title,shown,strangerShown,greyDialogs,revealedAfter,notRevealed}}, totals, errs} */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,URL,ST,NS]=process.argv;const STEPS=+ST||12;const NSEED=+NS||2;
 const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
 /* map a line of the built page to its module file (dev/build/assemble.py order) */

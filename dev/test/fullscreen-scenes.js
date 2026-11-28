@@ -7,7 +7,7 @@
    caption above the button (no overlap); the button closes the scene (newday: then() runs); the room's lean-in seal clone (span.kemo-big) is hidden while the
    scene is open and back after; no horizontal overflow; no page errors.
    usage: node dev/test/fullscreen-scenes.js [outdir|-] [url] [WxH@dpr,…]       (shots go OUTSIDE the repo) */
-const path=require('path');const fs=require('fs');const {chromium}=require('playwright');
+const path=require('path');const fs=require('fs');const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const A=process.argv.slice(2);const OUT=A[0]&&A[0]!=='-'?A[0]:null;const URL=A[1]&&A[1]!=='-'?A[1]:'file://'+path.resolve(__dirname,'../../index.html');
 const SIZES=(A[2]||'755x1000@1,1180x820@1').split(',').map(s=>{const m=s.match(/(\d+)x(\d+)@(\d+)/);return {w:+m[1],h:+m[2],d:+m[3]}});
 if(OUT)fs.mkdirSync(OUT,{recursive:true});

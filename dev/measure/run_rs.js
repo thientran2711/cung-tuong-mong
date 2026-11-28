@@ -3,7 +3,7 @@
    Crash fix (17/11, successor): images are SERVED as a 1x1 png, never disabled. With --blink-settings=imagesEnabled=false every <img> stays
    "pending" forever, Blink keeps it alive as a pending activity and with it the whole detached dialog tree (3.5 M nodes after ~11 months
    -> "Target crashed"). Audio/video are still aborted. Each life stops at lifeMonths (10 game years) so 150 lives per side fit in a day. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,URL,target,OUT,CAP='3000',PER='4',LM='120']=process.argv;const PX=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=','base64');
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage']});const t0=Date.now();let acc=[];
  while(acc.length<+target&&Date.now()-t0<+CAP*1e3){const ctx=await b.newContext({viewport:{width:390,height:844},reducedMotion:'reduce',serviceWorkers:'block'});

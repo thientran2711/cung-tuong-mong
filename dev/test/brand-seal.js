@@ -2,7 +2,7 @@
    usage: node dev/test/brand-seal.js <page: index.html> <W>x<H>@dpr <outdir> <tag> [chip]
    Starts a life, shows the top bar, optionally the "Có bản mới" chip, shoots the bar and prints JSON: the seal's box, the gaps (px) to the
    quẻ line, the chip and every other part of the bar (negative = overlap), page errors, horizontal overflow. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,PAGE,SZ,OUT,TAG,CHIP]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 const ROOT=path.resolve(__dirname,'../..');
 const MIME={html:'text/html',js:'text/javascript',json:'application/json',webp:'image/webp',png:'image/png',jpg:'image/jpeg',css:'text/css',webmanifest:'application/manifest+json'};

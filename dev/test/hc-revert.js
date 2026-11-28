@@ -1,7 +1,7 @@
 /* review/hc-portrait-revert: card frame = standard frame. usage: node dev/test/hc-revert.js <url> <WxH> <outdir> [shot=1]
    Per Hậu cung sub-tab: aspect (w/h) of the frame image (img.kfr) in the card cell, header avatar and roster strip (all must be 550/1037 +-2%),
    gap name bottom -> first frame art row (KIT_FRW top, px), roster label (.kpstrip text) top vs pane bar bottom. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,SZ,OUT,SHOT]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,reducedMotion:'reduce',userAgent:W<1100?'Mozilla/5.0 (iPad; CPU OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1':undefined});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});

@@ -5,7 +5,7 @@
      C  a new co-op life put into a world whose servants hold the same sids (attach → lifeRekey): her clashing people get fresh sids above every
         sid anyone holds, links between her own people (af, lover) follow, world sids never change.
    usage: python3 dev/build/assemble.py && node dev/test/sid-unique.js [index.html] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html';
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m,x)=>{if(!c){bad++;console.log('FAIL',m,x!==undefined?JSON.stringify(x):'')}else console.log('ok',m)};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});

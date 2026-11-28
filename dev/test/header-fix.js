@@ -1,6 +1,6 @@
 /* KIT 31.19 top bar probe (review/header-fix): serves a local index.html under the live origin (images from the live site), worst-case strings, measures box overlaps, lines per item, clipping, page errors.
    usage: node dev/test/header-fix.js <index.html> WxH@dpr out.jpg [long|srv|typ]   (OPTB=1 = option B preview CSS) */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,IDX,SZ,OUT,LONG,DUMP]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',serviceWorkers:'block'});

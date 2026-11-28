@@ -2,7 +2,7 @@
    usage: node dev/test/hau-cung-ui.js <url of a build page> <W>x<H>@dpr <outdir> <tag> [steps,comma]
    steps: port rel staff court men rv book chip curl   (default: all)
    Prints JSON: per step overflowX, clipped text, text under the download chip; port = portrait box rect for 10 people (first frame -> settled). */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG,ONLY]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});

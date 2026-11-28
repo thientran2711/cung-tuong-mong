@@ -2,7 +2,7 @@
    Context A (dpr 1, recordVideo size = viewport so the game FILLS the frame): ONE natural full-screen take of SECS s -> <outdir>/full-<WxH>.mp4.
    Context B (dpr 2, no recording): per feeling (gian, buon, vui) one forced lean (grow -> hold -> shrink), clip screenshots of the big seal around its box (~8 fps, timed)
    assembled by ffmpeg into <outdir>/close-<key>-<WxH>.mp4 (720x720, H.264). Writes <outdir>/log-<WxH>.json (lean timings). */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const cp=require('child_process');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');const cp=require('child_process');
 const [,,SZ,OUT]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});const SECS=+process.env.SECS||34;
 const ROOT=path.resolve(__dirname,'../..');const MIME={html:'text/html;charset=utf-8',js:'text/javascript;charset=utf-8',json:'application/json',webp:'image/webp',png:'image/png',css:'text/css'};
 async function open(b,dpr,rec){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:dpr,reducedMotion:'no-preference',serviceWorkers:'block',...(rec?{recordVideo:{dir:OUT+'/rec-'+SZ,size:{width:W,height:H}}}:{})});

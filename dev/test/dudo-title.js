@@ -1,6 +1,6 @@
 /* dudo-title: on the Dư đồ map AND the palace detail map, the map title (cartouche / "Name · N bóng") never overlaps the -/+ zoom + back + Ra vào + Danh sách buttons (KIT map tools row), at every priority size.
    usage: node dev/test/dudo-title.js URL shotdir|- [WxH@dpr,..]   (env DESK=1: non-mobile context) */
-const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
 const [,,PAGEURL,DIR,SIZES]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});let bad=0;
  for(const sz of (SIZES||'755x1000@2,412x1058@2,1180x820@2,1366x1024@2').split(',')){const [WH,DPR]=sz.split('@');const [W,H]=WH.split('x').map(Number);const errs=[];

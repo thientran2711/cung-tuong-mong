@@ -1,7 +1,7 @@
 /* dtv-paint (OB-PHU3, owner OD 25/11 ~23:15Z: no stand-in picture reachable): Dưỡng Tú viện (place key dtv) in every season x buổi shows ITS OWN painting
    (img/duong-tu-vien-<xuan|ha|thu|dong>-<sang|trua|chieu>.webp by day, img/duong-tu-vien.webp at night), never the cung-nhan stand-in, and every file answers 200 on the CDN.
    usage: node dev/test/dtv-paint.js <url> [WxH] ; exit 1 on a stand-in / missing file */
-const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
 const [,,URL_,SZ]=process.argv;const sl=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const [W,H]=(SZ||'1180x820').split('x').map(Number);let fail=0;const errs=[];
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
