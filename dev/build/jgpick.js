@@ -69,7 +69,18 @@ function kipRowsFit(M,w,g0){const t=[...g0.querySelectorAll(".kipc")];if(!t.leng
  const pg=w.querySelector(".kippg"),go=w.querySelector(":scope>.kipgo"),ph=(pg?pg.getBoundingClientRect().height+(parseFloat(getComputedStyle(pg).marginTop)||0)+2:0)+(go&&getComputedStyle(go).position==="sticky"?go.getBoundingClientRect().height:0);/* the sticky confirm stands under the row too */
  const raw=pitch>0?Math.floor((bot-Math.max(gt,b.top)-ph+gap)/pitch):1;/* the page's rows: whole rows from where the grid stands in view (a page never has a row hidden under the pager) */
  const rawBox=sc===g0.closest(".opts")||pitch<=0?raw:Math.floor((bot-Math.max(b.top,gt-Math.max(0,sc.scrollHeight-sc.clientHeight-sc.scrollTop))-ph+gap)/pitch);/* a whole column that scrolls (person dialog .kdpall / .kdper): she scrolls the row up — short only if the BOX cannot hold row + pager + confirm */
+ if(raw<1&&rawBox>=1&&sc!==g0.closest(".opts"))kipLiftSoon(M);
  w.classList.toggle("kipshort",Math.max(raw,rawBox)<1);/* K-PICK-SHORT (a): the frame steps down first (jk4 kitDlgText: no big picture, text cap); only a box that still cannot hold one row + the pager puts the pager under the row (fallback (d), never over a tile) */return pitch>0?Math.max(1,raw):0}
+/* K-PICK-TOP (r7, law 11 «the pager never over a tile»): a whole column (person dialog .kdpall) that CAN hold row + pager + confirm but does not on
+   this view (the grid stands low under the person banner; since K-PICK-PAGER-GO the pager rides --kipgoh above the confirm) scrolls up by exactly
+   the shortfall, so the first row of the page stands whole above the sticky pager + confirm (LIVE 22afefb4 + branch: Fold «Cài đồ» 8 px, iPad 6 px
+   under the pager). Read again after the layout settles (banner picture / fit passes move the grid after the first fit); never scrolls down. */
+function kipLift(M){try{const w=M&&M.querySelector(".kipw"),g0=w&&w.querySelector(".kipg"),pg=w&&w.querySelector(":scope>.kippg");if(!g0||!pg||w.classList.contains("kipshort"))return;
+ let sc=g0.parentElement;while(sc&&sc!==M&&!(/(auto|scroll)/.test(getComputedStyle(sc).overflowY)&&sc.scrollHeight>sc.clientHeight+2))sc=sc.parentElement;if(!sc||sc===M||sc===g0.closest(".opts"))return;
+ const t=[...g0.querySelectorAll(".kipc")];if(!t.length)return;const t0=Math.min(...t.map(x=>x.getBoundingClientRect().top)),row=t.filter(x=>Math.abs(x.getBoundingClientRect().top-t0)<3);
+ const rb=Math.max(...row.map(x=>x.getBoundingClientRect().bottom)),need=Math.ceil(rb-pg.getBoundingClientRect().top+2);
+ if(need>0&&t0-need>=sc.getBoundingClientRect().top)sc.scrollTop+=need}catch(e){}}
+function kipLiftSoon(M){const m=typeof Q!=="undefined"?Q[0]:null;kipLift(M);[120,400,1000,2000].forEach(ms=>setTimeout(()=>{if(typeof Q!=="undefined"&&Q[0]===m)kipLift(M)},ms))}
 function kipPg(m,L,sel){const per=kipPer(m),pages=Math.max(1,Math.ceil(L.length/per));let pg=KIP_PG.get(m);
  if(pg==null){const at=sel!=null?L.findIndex(x=>x[1]===sel):0;pg=Math.floor(Math.max(0,at)/per)}pg=Math.min(Math.max(0,pg|0),pages-1);KIP_PG.set(m,pg);return{per,pages,pg}}
 function kipSelect(M,m,i){const ops=M.querySelector(".opts");if(!ops||!ops.querySelector(`:scope>.opt[data-m="${i}"]`)){KIP_SEL.set(m,i);kipRedraw();return}
