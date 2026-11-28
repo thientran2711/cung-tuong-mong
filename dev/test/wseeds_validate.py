@@ -5,7 +5,7 @@ usage: python3 dev/test/wseeds_validate.py [files…] [--min] [--kinds a,b]
   kind of jworld2.js, for the kinds in --kinds (default all 27); ids unique across files.
 Checks: id unique (wc-<k>-…), type wc, k one of the 27 kinds, sub tags allowed for k, scope allowed for k (house only for kinds with {X}),
 tag K|D + src, tone, tier, roles A/B (kind, nết/lòng only for rv/sv, names in BAL.net F/M), news 1 sentence + text, object null or
-{name,owner A|B|X|me|kho,clue,trace} (law 6c), exactly 4 stances {text,npc,gain,loss[,trace]} with Σgain == Σloss == tier steps (s1 m2 l3), gain ≥1
+{name,owner A|B|X|me|kho,clue,trace} (law 6c), exactly 3 stances NHẸ · VỪA · NẶNG {text,npc,gain,loss[,trace]} with stance i Σgain == Σloss == BAL.wc.tier[i] steps, om = {removed: kept sibling}, gain ≥1
 and loss ≥1 (laws 2/3), keys = her stats + rel.A/rel.B (rel.B only with B; no rel for emp/th; no 'an' in loss), no key both sides, npc tag known,
 ≥2 different npc tags; outcomes for the same 4 ids; placeholders {A}{B}{X}{M}{O}{S} only ({X} only for kinds with a person); VANPHONG scan;
 spread warnings (scopes per kind, object share)."""
@@ -25,7 +25,8 @@ SCOPES={"all","house","hi","lo","near","kids","srv"}
 NPC={"help","harm","social","bribe","flee","art","pray","court","scheme"}
 TONES={"tense","sad","petty","funny","tender","warm","cruel"}
 KIND={"rv","sv","maid","emp","th","doc","eun","kid"};MANRW={"sứ thần","họa sư","nhạc sư","thái y"};NETK={"rv","sv"}
-STAT={"sung","danh","bac","suc","mat","th","hh","duc","tamco","an"};TIER={"s":1,"m":2,"l":3}
+STAT={"sung","danh","bac","suc","mat","th","hh","duc","tamco","an"};TIERS={"s","m","l"}
+TIER=[int(x) for x in re.search(r"BAL\.wc=\{[^\n]*?tier:\[([\d,]+)\]",bal).group(1).split(",")]  # BAL.wc.tier: way i Σgain == Σloss == TIER[i] (law 2 TIERED CHOICES NHẸ · VỪA · NẶNG, owner OD 27/11 ~00:46Z)
 NEEDS={"rank_min","rank_max","nights_min","month","not_confined","kids_min"}
 PH={"A","B","X","M","O","S"}
 BAD=re.compile(r"%|\d|\b(OK|game|turn|round|slot|lượt|(?<!tấm )ván(?! gỗ| cầu| thuyền)|level|quest|item)\b|Chắc chắn|Nắm chắc|Rất chắc|Khó lường|Mong manh|Tùy duyên|Có cơ|Rất vững",re.I)
@@ -79,7 +80,7 @@ for r in rows:
     if not r.get("src"):err(f"{i} src (basis, law 8)")
     if r.get("tone") not in TONES:err(f"{i} tone '{r.get('tone')}'")
     t=r.get("tier")
-    if t not in TIER:err(f"{i} tier s|m|l");t="m"
+    if t not in TIERS:err(f"{i} tier s|m|l");t="m"
     sub=r.get("sub")
     if sub is not None:
         if not isinstance(sub,list) or not sub:err(f"{i} sub must be a non-empty list or omitted")
@@ -125,9 +126,11 @@ for r in rows:
     used=set(re.findall(r'\{([A-Z])\}',json.dumps(r,ensure_ascii=False)))
     if "X" in used and k not in XK:err(f"{i} {{X}} used but kind {k} has no person")
     ST=r.get("stances")
-    if not isinstance(ST,dict) or len(ST)!=4:err(f"{i} exactly 4 stances");ST=ST if isinstance(ST,dict) else {}
+    if not isinstance(ST,dict) or len(ST)!=len(TIER):err(f"{i} exactly {len(TIER)} stances (NHẸ · VỪA · NẶNG)");ST=ST if isinstance(ST,dict) else {}
+    om=r.get("om")
+    if not isinstance(om,dict) or len(om)!=1 or any(k in ST or v not in ST for k,v in om.items()):err(f"{i} om must be {{removed stance id: kept sibling id}}")
     tags=set()
-    for sid,st in ST.items():
+    for ti,(sid,st) in enumerate(ST.items()):
         if not isinstance(st,dict):err(f"{i}.{sid} stance must be an object");continue
         lb=st.get("text","");phs(i,lb,allowed,f"{sid}.text")
         if isinstance(lb,str) and len(lb.split())>8+lb.count("{"):wrn(f"{i}.{sid} label longer than 8 words")
@@ -148,7 +151,7 @@ for r in rows:
         for kk in set(g)&set(l):err(f"{i}.{sid} '{kk}' on both sides")
         sg=sum(v for v in g.values() if isinstance(v,int));sl=sum(v for v in l.values() if isinstance(v,int))
         if sg<1 or sl<1:err(f"{i}.{sid} gain ≥1 and loss ≥1 (laws 2/3)")
-        if sg!=TIER[t] or sl!=TIER[t]:err(f"{i}.{sid} Σgain {sg} / Σloss {sl} must both be {TIER[t]} (tier {t}, law 2)")
+        if ti<len(TIER) and (sg!=TIER[ti] or sl!=TIER[ti]):err(f"{i}.{sid} Σgain {sg} / Σloss {sl} must both be {TIER[ti]} (way {ti+1} of NHẸ · VỪA · NẶNG, law 2)")
         if "trace" in st:
             if not ob:err(f"{i}.{sid} trace without object")
             else:phs(i,st["trace"],allowed,f"{sid}.trace")
@@ -160,7 +163,7 @@ for r in rows:
     nd=r.get("needs") or {}
     for x in nd:
         if x not in NEEDS:err(f"{i} needs.{x} unknown")
-    for x in set(r)-{"id","type","k","tag","src","tone","tier","sub","scope","roles","news","text","object","stances","outcomes","needs"}:wrn(f"{i} extra field '{x}' (ignored)")
+    for x in set(r)-{"id","type","k","tag","src","tone","tier","sub","scope","roles","news","text","object","stances","outcomes","om","needs"}:wrn(f"{i} extra field '{x}' (ignored)")
 for k in sorted(CHK):
     n=per.get(k,0)
     if MIN and n<KMIN[k]:err(f"kind {k}: {n} seeds < {KMIN[k]}")

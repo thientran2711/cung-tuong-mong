@@ -2,8 +2,8 @@
    For each seed: opens a REAL window of its kind (worldStart, the seed's own real cause tag), with only that seed in the kind's pool, and checks:
    the seed is drawn (w.x.wc) and marked in P0 (wc:<k>), its people are living real people inside the scope with the wanted nết (a seed whose
    nết / scope no person has in this one test world is FORCED by giving the roster that nết / place / rank / child, reported as forced), the NPC
-   round records only the 4 stance ids for people of the scope (≤ BAL.wc.npcMax) and moves their stats the way of the stance, her card comes
-   after the kind's card with 4 options, every placeholder filled, choosing (the real chooseM path, stance i%4) is built from exactly
+   round records only the 3 stance ids for people of the scope (≤ BAL.wc.npcMax) and moves their stats the way of the stance, her card comes
+   after the kind's card with 3 options NHẸ · VỪA · NẶNG, every placeholder filled, choosing (the real chooseM path, stance i%3) is built from exactly
    steps × BAL.wc.fx and moves every stat the right way, the object trace is kept (law 6c), the end text says who chose what, the seed is not drawn
    again in the same life, and every built JWSEEDS seed registers. 0 page errors. */
 const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
@@ -57,10 +57,10 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
    if(sd.scope!=="srv")r.roundOk=r.roundOk&&Object.values(RR).every(Lp=>Lp.every(id=>{const v=liveRivals(true).find(x=>x.id===id);return v&&SL.includes(v)}));
    r.roundAny=SL.filter(v=>(!A||v!==A.o)&&(!B||v!==B.o)).length===0||nN>0;
    /* her card: the kind's card first, then the composed one */
-   Q.length=0;S.wwSeen={};let m0=null;try{m0=E[sd.k].card(w)}catch(e){}const m=(()=>{X_.flush();return Q.find(q=>q&&q.opts&&q.opts.length&&q.wwin&&/<p>/.test(q.h||"")&&q.opts.length===4&&Object.values(sd.stances).every((st,j)=>q.opts[j]))})();
+   Q.length=0;S.wwSeen={};let m0=null;try{m0=E[sd.k].card(w)}catch(e){}const m=(()=>{X_.flush();return Q.find(q=>q&&q.opts&&q.opts.length&&q.wwin&&/<p>/.test(q.h||"")&&q.opts.length===BAL.wc.tier.length&&Object.values(sd.stances).every((st,j)=>q.opts[j]))})();
    r.card=!!m;if(!m){X_.WC[sd.k]=keep;tr6=tr0;continue}
    const all=m.h+" "+m.opts.map(o=>o.n+" "+o.x).join(" ");r.unfilled=/\{[A-Za-z]+\}/.test(all);r.text=plain(m.h).replace(/\s+/g,' ').trim().slice(0,150);
-   const k=i++%4;const sid=ids[k],st=sd.stances[sid];const tier=sd.tier||"m",F=BAL.wc.fx[tier];
+   const k=i++%BAL.wc.tier.length;const sid=ids[k],st=sd.stances[sid];const tier=sd.tier||"m",F=BAL.wc.fx[tier];
    S.an=50;for(const a of [A,B])if(a&&a.o&&typeof a.o==='object'){if(a.k==='sv'||a.k==='maid')a.o.loyal=50;if(a.k==='kid')a.o.fond=50}
    const s0=snap(),ra=relV(A),rb=relV(B);const rec={};const ap0=apply;apply=function(o){for(const[kk,v]of Object.entries(o||{}))if(typeof v==='number')rec[kk]=(rec[kk]||0)+v;return ap0.apply(this,arguments)};
    const obN=(S.wc.ob||[]).length;const RL=[];const ra0=relAdd;relAdd=function(x,y,n){for(const a of [A,B])if(a&&a.o&&(x===a.o||y===a.o))RL.push([a,n]);return ra0.apply(this,arguments)};Q.length=0;Q.push(m);showModal();try{chooseM(k)}finally{apply=ap0;relAdd=ra0}
@@ -79,8 +79,8 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
   if(r.err){ok(false,t+' threw '+r.err);continue}if(r.skip){console.log('skip '+t+': '+r.skip);continue}
   ok(r.reg,t+' registers');ok(r.open,t+' a real '+r.k+' window opens');if(!r.open)continue;ok(r.drawn,t+' drawn for the window (cast inside the scope)'+(r.dbg?' '+r.dbg:''));if(!r.drawn)continue;
   ok(r.mark,t+' P0 marks wc:'+r.k);ok(r.alive&&r.net&&r.inScope,t+' people alive, distinct, wanted nết, inside the scope');
-  ok(r.roundOk&&r.roundAny,t+` NPC round: ${r.nN} people of the scope chose one of the 4 stances`);ok(r.card,t+' her card after the kind card');if(!r.card)continue;
-  ok(!r.unfilled,t+' 4 options, placeholders filled: '+r.text);ok(!r.num.length,t+' numbers = steps × BAL.wc.fx '+r.num.join(', '));
+  ok(r.roundOk&&r.roundAny,t+` NPC round: ${r.nN} people of the scope chose one of the 3 tiers`);ok(r.card,t+' her card after the kind card');if(!r.card)continue;
+  ok(!r.unfilled,t+' 3 options NHẸ · VỪA · NẶNG (BAL.wc.tier), placeholders filled: '+r.text);ok(!r.num.length,t+' numbers = steps × BAL.wc.fx '+r.num.join(', '));
   ok(r.objOk,t+' object traced: '+r.trace);ok(r.endOk,t+' end text says who chose what:'+r.endTxt);ok(r.rest,t+' not drawn again this life')}
  ok(!(R.shadow||[]).length,`fixture rows not shadowed by a different built seed of the same id (law 11 / thin-p6 r2): ${(R.shadow||[]).join(", ")||"none"}`);
  ok(R.builtN<0||R.built>=R.builtN,`built JWSEEDS register (${R.built}/${R.builtN})`);ok(errs.length===0,'0 page errors '+(errs[0]||''));

@@ -1,12 +1,12 @@
 /* ================= jworldc: COMPOSED WORLD REACTIONS (ORDER THIN P6, owner OD 23/11 ~22:50Z; EVCAT §3 P6) =================
    Seeds (data JWSEEDS in jwsd.js, built from dev/handover/content/thin/wseeds*.md by dev/build/jwsd_build.py; schema reports/thin.md «## API P6»):
-   one seed = cause (the REAL cause tag `sub` of a window of kind k) × scope (who in the palace is hit and reacts) × reaction (4 equal-value stances).
+   one seed = cause (the REAL cause tag `sub` of a window of kind k) × scope (who in the palace is hit and reacts) × reaction (3 stances NHẸ · VỪA · NẶNG, law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z).
    The window itself is untouched (jworld/jworld2: real cause, length, effects on everyone through the gates); when a window of kind k opens (host),
    one fitting seed is drawn through the shared no-repeat memory jnorep (family "wc:<k>", fresh-first across lives, never twice in one life), its
-   people are cast from the live roster INSIDE the scope, every NPC of the scope chooses one of the SAME 4 stances by mindPick (law 1 two-way: the
+   people are cast from the live roster INSIDE the scope, every NPC of the scope chooses one of the SAME 3 stances by mindPick (law 1 two-way: the
    same step effects on her own stats), and she gets the scene as a second CENTER card of that window (after the kind's own card; one per player).
-   The end card adds who chose what. Numbers (law 4): one step = BAL.wc.fx[tier][key]; nothing typed here. Laws 2/3: Σgain == Σloss == tier steps
-   per stance (validator dev/test/wseeds_validate.py). Objects stay traceable (law 6c): S.wc.ob {sid,name,owner,trace,turn}.
+   The end card adds who chose what. Numbers (law 4): one step = BAL.wc.fx[tier][key]; nothing typed here. Laws 2/3: stance i Σgain == Σloss == BAL.wc.tier[i]
+   steps, Tốn and Được rise together (validator dev/test/wseeds_validate.py); om = {merged stance: kept sibling} (old saves, wcOm). Objects stay traceable (law 6c): S.wc.ob {sid,name,owner,trace,turn}.
    The draw (w.x.wc) lives in the shared window record S.wwin (host rolls, as every window field); her choice and traces are personal (S.wc). */
 (function(){
 const WX=window.WORLD_X;if(!WX)return;
@@ -68,7 +68,7 @@ function wcDraw(w){if(!BAL.wc||!Bc().on||!host())return null;const L=(WC[w.k]||[
 function stepV(tier,k){const F=Bc().fx[tier]||Bc().fx.m;return F[k]||0}
 function val(m,tier,sign){const fx={};let A=0,B=0;for(const[k,n]of Object.entries(m||{})){
  if(STAT.includes(k))fx[k]=(fx[k]||0)+n*stepV(tier,k)*sign;else if(k==="rel.A")A+=n*stepV(tier,"rel")*sign;else if(k==="rel.B")B+=n*stepV(tier,"rel")*sign}return{fx,A,B}}
-/* the NPC round: every NPC of the scope picks one of the same 4 stances (mindPick by the stance's npc tag), same steps on her own stats */
+/* the NPC round: every NPC of the scope picks one of the same 3 tiers (mindPick by the stance's npc tag), same steps on her own stats */
 function wcRound(sd,w,c){const tier=sd.tier||"m",r=c.r={};const X=wcActors(sd,w,c)||{};const oA=X.A&&X.A.o,oB=X.B&&X.B.o;
  const xo=wcXo(w);const sl=(wcScope(sd,w)||[]).filter(v=>v!==oA&&v!==oB&&v!==S&&v!==xo);/* the window's own person is its subject, not a bystander */for(let i=sl.length-1;i>0;i--){const j=R(i+1);[sl[i],sl[j]]=[sl[j],sl[i]]}
  const srv=sd.scope==="srv";const E=Object.entries(sd.stances||{});
@@ -89,8 +89,11 @@ function wcCard(w){const c=w.x&&w.x.wc;if(!c)return null;const sd=WCI[c.id];if(!
  if(typeof isSrv==="function"&&isSrv())return null;if(S.out||S.dead)return null;const X=wcActors(sd,w,c);if(!X)return null;
  let nm="";try{nm=window.worldName(w)}catch(e){}
  return{t:nm||"Thế sự trong cung",who:X.A?X.A.f:pEmp(),wwin:1,h:`<p>${fill(sd.news,sd,X)}</p><p>${fill(sd.text,sd,X)}</p>`,opts:wcOpts(sd,w,X)}}
+/* old saves (E-TIER-B14): a window drawn before the tier convert holds NPC choices under a stance id that was merged into its sibling → read the sibling */
+function wcOm(sd,k){return sd.stances[k]?k:(sd.om&&sd.om[k]&&sd.stances[sd.om[k]]?sd.om[k]:null)}
 function wcEnd(w){const c=w.x&&w.x.wc;if(!c||!c.r)return"";const sd=WCI[c.id];if(!sd)return"";const X=wcActors(sd,w,c)||{};
- const P=[];for(const[k,L]of Object.entries(c.r)){const st=sd.stances[k];if(!st||!L||!L.length)continue;
+ const RR={};for(const[k0,L]of Object.entries(c.r)){const k=wcOm(sd,k0);if(k&&L)RR[k]=(RR[k]||[]).concat(L)}
+ const P=[];for(const[k,L]of Object.entries(RR)){const st=sd.stances[k];if(!st||!L||!L.length)continue;
   const N=L.map(x=>sd.scope==="srv"?x:(()=>{const p=byPid(x);return p&&p!==S?p.name:null})()).filter(Boolean);if(N.length)P.push(`${N.join(", ")}: «${fill(st.text,sd,X)}»`)}
  return P.length?` Trong cung khi ấy — ${P.join("; ")}.`:""}
 /* wire every kind (EVD is the ONE registry of jworld/jworld2) */
@@ -111,5 +114,5 @@ const WCS={draw:0,show:0};window.WCS=WCS;
 function wcReg(sd){if(!sd||sd.type!=="wc"||!sd.id||WCI[sd.id]||!EVD[sd.k])return false;WCI[sd.id]=sd;(WC[sd.k]=WC[sd.k]||[]).push(sd);return true}
 try{const L=(typeof JWSEEDS!=="undefined"&&Array.isArray(JWSEEDS))?JWSEEDS:[];for(const sd of L)wcReg(sd);for(const k in EVD)wcWrap(k)}catch(e){console.error("jworldc",e)}
 window.wcCount=function(){const by={};for(const k in WC)by[k]=WC[k].length;return{seeds:Object.keys(WCI).length,kinds:by}};
-window.WC_X={wcReg,val,wcActors,wcSub,wcXo,wcScope,wcCast,wcDraw,wcRound,wcCard,wcEnd,flush,WC,PEND};
+window.WC_X={wcOm,wcReg,val,wcActors,wcSub,wcXo,wcScope,wcCast,wcDraw,wcRound,wcCard,wcEnd,flush,WC,PEND};
 })();
