@@ -2,3 +2,4 @@
 | life | seed | harness | ending | age | buổi | taps | verdict | bugs | review |
 |---|---|---|---|---|---|---|---|---|---|
 | ES8-bd_tuyet-greedy4-h | 3029570759 | f65d019b pin=0 (LIVE 86170222adab) | Lãnh cung — Phát điên trong lãnh cung (rank 2→0 in y1, y3) | 22 | 308 | 9060 | VALID | 3 (gift picker ×2, dead «Để sau») | review/ES8-bd_tuyet-greedy4-h-review.md |
+| ES8-bd_tuyet-random5-h | 902785299 | f65d019b pin=0 (~9 resumes; LIVE ca4a1689 last) | Hồng nhan bạc mệnh — tuẫn táng by Tân Thái hậu y12 | 30 | 1667 | 4299 | VALID (flag mixed build) | 5 (SAVE REWIND ×3, softlock Sang ngày mới, gift picker old build, dead Phật đường) | review/ES8-bd_tuyet-random5-h-review.md |
