@@ -64,3 +64,37 @@ Shots (looked at 3×): Fold 755x1000 + iPad 1180x820, Sổ ghi with «Thái hậ
 
 ## Handover
 Done in this session; no successor needed. If re-merged: take LIVE's side, re-run `python3 dev/measure/th-scan.py dev/build` (must be 0) + net-build + row9-net.
+
+## REVIEW (B BIG RV row9-net, session_01N1tNP46D5E3FcBCW5Ao87E, 28/11) — **FAIL** (4 items)
+PRIORITY #1 CHECK: brief b-row9-net-review.md + this report read in full; OD/ledger/claims per brief line; git grep main 5fc4bc79 + review/row9-net 840732e0 (netTh("th") 0 on LIVE). KIT CHECK: reuses log() (kit Sổ ghi row) only; no new UI part.
+Re-gated on **review/row9-net-r2 cfa630d1** = 840732e0 merged onto LIVE 5fc4bc79 (pushed). Conflicts: only dev/site/CHANGE.txt (branch line kept) + built index.html / sw.js (rebuilt). Sources auto-merged.
+
+### Passed
+| gate | LIVE 5fc4bc79 | r2 cfa630d1 |
+|---|---|---|
+| th-scan (merged with newest LIVE) | 65 | **0** (the 4 «LIVE-added» gates are in the list and converted) |
+| net-scan-rv | – | **0** |
+| row9-net.js | **FAIL** 5/10 | **PASS 73/73 ×3** |
+| MUTATE (built file: jtsb tsbProtector back to `>=40`) | – | **FAIL** «regard 33: Từ ái stands up… (false/false)» |
+| net-build | – | PASS 203/203 |
+| stat-pace (dev/index.html) | – | PASS (47 days, cap 3, over 0) |
+| one-core guard / text / text-rule / bind | – | PASS ×4 (inline 2761 < 3592; 1597 prints, 0 mismatches) |
+| quickcheck ALONE (`bash dev/tools/quickcheck.sh`) | – | CORE GATES PASS · hooks 17 incl. **q-softlock PASS**, button-crawl, dialog-fixed, kit-std-scan 6 (baseline 28), rules-one-source old save loads; step 2 (quickcheck.js perf/oldsave) not reached in my 1700 s cap |
+| wording (law 7) | – | OK: 5 «than» + 3 «ghet» lines cổ trang, no number/% in her words; the Sổ ghi row adds the standard apply suffix «Thái hậu → ta: thiện cảm a → b» like every row |
+| law 9 | – | line uses the shared log() row, same as every Sổ ghi row (Fold 755x1000 + iPad 1180x820 looked at 3×; no overflow, no page errors) |
+Not run (FAIL already decided): oldsave-r1, coop-e2e (worker: same FAIL on LIVE, owned by COOP r4).
+
+### FAIL items (for the worker; base = review/row9-net-r2 cfa630d1)
+1. **Difficulty «Dễ» lost an easing (law 4/14 regression).** dev/build/jdiff.js:18 `de.bal.hhTh:[1,-5]` still targets the deleted BAL.hhTh; diffApply skips non-numbers, so Dễ no longer lowers the Hoàng hậu Thái hậu need. Move the knob onto the new rule (one BAL knob read by hhNeed / promoReqP / the j6 gloss / candOK together) and test Dễ vs Vừa.
+2. **Deleted BAL keys still read by tests (brief check 2: dev/build + dev/test).** PASS on LIVE, FAIL/crash on r2: `title-bal.js` + `title-parity.js` (BAL.dh.cond.th.v → «Cannot read properties of undefined (reading 'v')»), `npc-purpose-g1d.test.js` (BAL.ag.why.job.th → «FAIL 3a Thái hậu errand»), `ag-all.test.js` F5 (BAL.ag.th.fondTh). Point them at netTh("th",..); row9-net check (6) must scan dev/test + dev/measure + dev/tools too. (Docs ACT_AUDIT.md / BALANCE_REPORT.md mention hhTh — history, leave.)
+3. **netAt makes the Hoàng hậu seat without a son unreachable for 2 archetypes (brief check 4).** Measured on r2 (scratch reach.js: best case 3 un-repeated +10 gifts every week for 2 years through the real trThDeed saturation + the real monthly cooling; plateau = highest regard she can hold):
+| archetype | plateau | hhNeed no son (LIVE 80) | + Hiếu thảo (LIVE 70) | g2pet.kyTh (LIVE 85) |
+|---|---|---|---|---|
+| Từ ái | 97 | 70 | 60 | 75 |
+| Nghiêm khắc | 88 | 80 | 70 | 85 |
+| Đa nghi | 85 | **88 ✗** | 78 | **93 ✗** |
+| Quyền uy | 92 | **95 ✗** | 85 | **100 ✗** |
+| Sùng Phật | 95 | 80 | 70 | 85 |
+   Above the plateau only one-off events help (paced to dm.min), so the road is effectively closed. Fix: a mark above than2 may move with her nết but never above what that archetype can hold (e.g. cap netAt at the archetype's gift plateau minus a margin, one BAL key), + a row9-net check «every netAt mark ≤ plateau for all 5 archetypes».
+4. **Law 11 family not complete: the Hoàng hậu's regard gates are still typed / BAL copies** (she holds a pool nết via queenP(); row 9 = «every NPC's nết must change her thresholds»): j19:102 `S.hh>20 / <-20`, j2:171 `S.hh<BAL.ag.cx.hhShield.min`, j25:129 + j8:585 `p.hh<=-40`, j8:496 `p.hh>BAL.hiOppHh`, j8:586 `p.hh>=50`, jagacts:75/76 `BAL.ag.hh.confHh / rewardHh`, jpet:140 `p.hh>=60`, jreign:143 `S.hh>=15`, jbal qBlockHh −40 (≈11 sites). Same treatment as th: `netTh(queenP(),key)` (base when no Hoàng hậu), an hh-scan like th-scan = 0, before/after table. (Emperor Sủng stays with row 7 favK — not counted.)
+Nit (not blocking): netThCross has no hysteresis — regard wobbling around her «than» level (gift up / monthly cooling down) can repeat the warm line; consider a gap before re-arming.
