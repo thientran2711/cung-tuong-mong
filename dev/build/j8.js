@@ -117,15 +117,17 @@ function dieKOf(t){t=String(t||"");if(!t)return"age";
 function dieMk(p,k){try{if(p&&p.dieK==null)p.dieK=DIE_K.includes(k)?k:dieKOf(k)}catch(e){}return p}
 window.dieKOf=dieKOf;window.dieMk=dieMk;
 /* tier (MAIN 118 06:16Z P1; OD 24/11 ~07:55Z severity): "nghich" = treason-tier crimes (gián điệp, hại Hoàng hậu / hoàng tự, vu cổ) — BAL.crime row:
-   no first-year mercy; the nhân từ Emperor spares the life only as phế làm thứ dân (out of the palace = the life ends; NPC removed with a fate line). Same for everyone (law 1). */
+   no first-year mercy; the nhân từ Emperor spares the life only as phế vị + lãnh cung chung thân (PUNISH-TIER OD 26/11 ~20:35Z, newer). Same for everyone (law 1). */
 function deathSentence(p,why,tier){if(typeof p==="string"){tier=why;why=p;p=S}const CR=(BAL.crime&&BAL.crime[tier])||BAL.crime.thuong;
   if(CR.first&&S.turn<BAL.eff.j8.mercyTurn&&!p.mercy){p.mercy=1;ap(p,{danh:BAL.eff.j8.danhDeathSentence,sung:BAL.eff.j8.sungDeathSentence});const r0=rkOf(p);if(r0>0&&!punTwice(p)){seatPut(p,punDown(p));punMark(p,r0)}p.confined=Math.max(p.confined||0,BAL.eff.j8.mercyConfine);log(`<span class="r">${p===S?"Ngươi":p.name}: ${why.replace(/^Bị /,"suýt bị ")}. Niệm tình mới vào cung, Hoàng thượng tha tội chết: giáng một bậc, cấm túc ${BAL.eff.j8.mercyConfine} tháng, Danh ${balSg(BAL.eff.j8.danhDeathSentence)}, ${sgOf(p,BAL.eff.j8.sungDeathSentence)}. Lần sau sẽ không tha.</span>`);if(p===S)punNote({kind:rkOf(S)<r0?"giang":"camtuc",why,from:r0,to:S.rank,m:BAL.eff.j8.mercyConfine});return}
-  if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return CR.mercy==="dan"?dsDan(p,why):cold(`${why}. Hoàng thượng nhân từ tha tội chết, đày ngươi vào lãnh cung`);dieMk(S,"crime");return die(why)}
-  if(has("nhantu")&&npcWhy("empMercy",{p})){if(CR.mercy==="dan")return dsDan(p,why);p.out=true;p.coldR=coldRankIn(p)/* rank before the fall (jpun; reads rank, not out) */;p.coldWk=punNow();if(p.queen){p.queen=false;p.rank=6}log(`<span class="r">${p.name}: ${String(why).replace(/^Bị (ban rượu độc|ban chết) vì /,"")}. Hoàng thượng nhân từ, đày vào lãnh cung.</span>`);return}
+  /* PUNISH-TIER (OD 26/11 ~20:35Z rec 1, newer than the 24/11 ~07:55Z severity ladder E74 used): a death sentence spared — «nghịch» or not — = phế vị + lãnh cung
+     chung thân (jpun punCold "phe"), her and an NPC alike; the old treason mercy «phế làm thứ dân» (dsDan) is void (clash table: dev/handover/reports/punish-tier.md PUNISH-TIER-9) */
+  if(p===S){if(has("nhantu")&&npcWhy("empMercy",{p}))return cold(`${why}. Hoàng thượng nhân từ tha tội chết, phế vị, đày ngươi vào lãnh cung chung thân`,null,"phe");dieMk(S,"crime");return die(why)}
+  if(has("nhantu")&&npcWhy("empMercy",{p})){punCold(p,"phe",`${String(why).replace(/^Bị (ban rượu độc|ban chết) vì /,"")}; Hoàng thượng nhân từ tha tội chết`);return}
   p.alive=false;dieMk(p,"crime");if(p.queen)p.queen=false;log(`<span class="r">${p.name} bị ban chết: ${String(why).replace(/^Bị (ban rượu độc|ban chết) vì /,"")}.</span>`)}
 /* ONE crime tier (E74, law 11): is this proven deed (kind k: an ACT / plot kind or "spy" / "vuco") against t a «nghịch» crime? BAL.crime.nghichK / queenK */
 function crimeTier(k,t){const C=BAL.crime;if((C.nghichK||[]).includes(k))return"nghich";if(t&&(C.queenK||[]).includes(k)&&(t.queen||(typeof queenP==="function"&&queenP()===t)))return"nghich";return""}
-/* the one road for a proven deed of kind k: «nghịch» → deathSentence (no first-year mercy; nhân từ → thứ dân), otherwise the old punish(sev). Everyone the same. */
+/* the one road for a proven deed of kind k: «nghịch» → deathSentence (no first-year mercy; nhân từ → phế vị + lãnh cung chung thân), otherwise the old punish(sev). Everyone the same. */
 function convict(a,why,k,t,sev){/* a co-op friend's entry here is a mirror of a player seat (never an NPC death on this device, as npcMonthly skips v.coop) */if(crimeTier(k,t)==="nghich"&&!(a&&a!==S&&a.coop))return deathSentence(a,`Bị ban chết vì ${why}`,"nghich");return punish(a,why,sev)}
 /* THẤT SỦNG (MAIN 118 06:16Z P3; OD 24/11 ~07:55Z): no fault ⇒ no punishment. A forgotten low consort (Sủng ≤ BAL.thatS.sung, Danh ≤ BAL.danhG.forget,
    rank ≤ BAL.thatS.rank) is NOT sent to lãnh cung (was: j3 sent her, player only, to lãnh cung for it): he stops turning her tablet (nightCh 0), her Sủng
@@ -145,18 +147,13 @@ function tsRecallCh(p){const C=BAL.thatS.recall,me=p===S;const dn=(me?S.danh:p.d
  return Math.max(0,Math.min(C.max,Math.round(C.base+dn/C.danhD+Math.max(0,dc)/C.ducD+k*C.kid)))}
 /* co-op: the friend's entry (v.coop) is ruled by her own device's tsMonth(S), as npcMonthly skips it */
 function tsMonthAll(){let ev="";try{ev+=tsMonth(S);for(const v of rivals)if(v&&v!==S&&!v.coop&&v.alive&&!v.out)tsMonth(v)}catch(e){console.error("tsMonth",e)}return ev}
-/* treason-tier mercy: giam vào ngục, rồi phế làm thứ dân, đuổi ra khỏi cung (her life ends: jleave «Về sau» dan; an NPC leaves the roster) */
-function dsDan(p,why){let w=String(why).replace(/^Bị (ban rượu độc|ban chết) vì /,"");w=w.charAt(0).toLowerCase()+w.slice(1);
-  if(p===S){dieMk(S,"left");/* rank-pace death mark: thứ dân = a life that left the palace, never a death (no truy phong) */over("Phế làm thứ dân",`${why.replace(/^Bị /,"Suýt bị ")}. Hoàng thượng nhân từ tha tội chết: giam vào ngục, rồi phế làm thứ dân, đuổi ra khỏi cung.`,`Phế làm thứ dân vì ${w}`,true);return}
-  p.alive=false;dieMk(p,"left");p.dan=1;if(p.queen)p.queen=false;const t=`${p.name}: ${w}. Hoàng thượng nhân từ tha tội chết, phế làm thứ dân, đuổi ra khỏi cung.`;log(`<span class="r">${t}</span>`);try{newsAdd(p,"demote",t,true)}catch(e){}}
 /* a proven crime (accusation with evidence) */
 /* punish-reason (D1): ONE punishment = lãnh cung OR one rank down (never two ranks, never two punishments the same day: punTwice → cấm túc);
    her notice names who accused, why and which evidence (jpun punNote) */
-function fall(p,why,by){const a=punWho(by);if(p===S){if(S.out||S.dead)return;if(a)S.framedBy=key(a);if(punTwice(S)&&!(S.rank>=5)){punLight(S,why,a);return}if(S.rank>=5||R(2)){cold(`Ngươi ${why}`,a);return}const r0=S.rank;S.rank=punDown(S);punMark(S,r0);apply({sung:-BAL.pun.fallSung});log(`<span class="r">Ngươi ${why}, bị giáng xuống ${meRankN()}.</span>`);punNote({kind:"giang",why,by:a,from:r0,to:S.rank});return}
- if(p.out||p.alive===false)return;if(a&&a!==p)p.coldBy=key(a);if(punTwice(p)&&!(p.queen||p.rank>=5)){punLight(p,why,a);return}
- if(p.queen||p.rank>=5){p.coldR=coldRankIn(p);if(p.queen){p.queen=false;p.rank=6}p.out=true;p.coldWk=punNow();log(`<span class="g">${p.name} ${why}, bị phế vào lãnh cung.</span>`)}
- else if(R(2)){p.coldR=coldRankIn(p);p.out=true;p.coldWk=punNow();log(`<span class="g">${p.name} ${why}, bị đày vào lãnh cung.</span>`)}
- else{const r0=rkOf(p);p.rank=punDown(p);punMark(p,r0);p.sung=cl(p.sung-BAL.pun.fallSung,0,100);log(`<span class="g">${p.name} ${why}, bị giáng xuống ${RANKS[p.rank].n}.</span>`)}}
+/* PUNISH-TIER (OD 26/11 ~20:35Z, canon over ~19:50Z): a proven crime of weight x — nhẹ = minor punishment · vừa (default) = giáng 1 bậc, Sủng −BAL.pun.fallSung ·
+   nặng = giáng + lãnh cung · tử tội = ban chết or commuted phế vị + lãnh cung chung thân (jpun punTier, the same for every rank) — was a coin toss lãnh cung OR giáng */
+function fall(p,why,by,x){x=x||"vua";const a=punWho(by);if(p===S){if(S.out||S.dead)return;if(a)S.framedBy=key(a)}else{if(p.out||p.alive===false)return;if(a&&a!==p)p.coldBy=key(a)}
+ const pt=PUNT;PUNT={x};try{if(x==="vua"){if(p===S)apply({sung:-BAL.pun.fallSung});else p.sung=cl(p.sung-BAL.pun.fallSung,0,100)}punTier(p,x,p===S?`Ngươi ${why}`:why,a)}finally{PUNT=pt}}
 /* a fabricated charge that sticks */
 function framed(p,why){if(ACTX.a&&ACTX.a!==p)p.framedBy=key(ACTX.a);const d=Math.round(BAL.eff.j8.framedDanh*(DG()?1.3:1));ap(p,{danh:-d,sung:-BAL.eff.j8.framedSung});punish(p,why,2);return d}
 /* the target's people notice first: same detection for everyone */
@@ -601,7 +598,7 @@ function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(BAL.btn.empAct.k)||
  if(k==="judge"){if(!chOK(S,v))return;r=judge(S,v)}
  else if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return;if(evG(S,v)<1&&!vpItems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);ilSeize(v,v.inv[j],"conf");relAdd(S,v,-BAL.tw.g.conf[0]);v.hh-=BAL.tw.g.conf[1];r=`Ngươi tịch thu ${n} của ${v.name}.`}
  else if(k==="reward"){if(S.bac<-BAL.tw.reward.bac)return;apply(BAL.tw.reward);relAdd(S,v,BAL.tw.g.reward[0]);spAdd(v,"hh",BAL.tw.g.reward[1]);ap(v,{danh:BAL.tw.g.reward[2]});r=`Ngươi ban thưởng cho ${v.name}.`}
- else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out&&!roomFor("consort"))return;if(v.out&&!coldStayOk(v)){log(`${v.name} mới vào lãnh cung, còn ${coldDaysLeft(v)} ngày nữa mới được ân xá.`);return}if(v.out)coldFree(v);v.confined=0;relAdd(S,v,BAL.eff.j8.empAct_2);apply({duc:BAL.ag.hh.pardonDuc});r=`Ngươi ân xá cho ${v.name}.`}
+ else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out&&!roomFor("consort"))return;if(v.out&&!coldStayOk(v)){log(typeof coldLife==="function"&&coldLife(v)?`${v.name} bị giam lãnh cung chung thân, chỉ minh oan mới ra.`/* RV-163K: chung thân (punish-tier phe) */:`${v.name} mới vào lãnh cung, còn ${coldDaysLeft(v)} ngày nữa mới được ân xá.`);return}if(v.out)coldFree(v);v.confined=0;relAdd(S,v,BAL.eff.j8.empAct_2);apply({duc:BAL.ag.hh.pardonDuc});r=`Ngươi ân xá cho ${v.name}.`}
  else return;spend(BAL.btn.empAct.k);log(r);render()}
 function giftTargets(){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,(v.queen?"Hoàng hậu ":"")+v.name]));return L}
 PEND.giftpick=p=>{const e=S.inv[p.ix!=null?p.ix:-1];const L=p.v!=null?[[p.v,(RV(p.v)||{}).name]]:giftTargets();

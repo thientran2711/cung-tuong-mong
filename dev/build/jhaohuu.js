@@ -22,7 +22,7 @@ const met=e=>{try{return typeof isKnown61==="function"?isKnown61(e):true}catch(x
 const named=e=>{try{return typeof k61Named==="function"?k61Named(e):true}catch(x){return true}};
 const isRival=e=>typeof rivals!=="undefined"&&rivals.includes(e);
 const mistress=e=>{try{return (rivals||[]).find(v=>(v.staff||[]).includes(e))||null}catch(x){return null}};
-function rankWord(e){try{if(e.out)return"Phế phi";if(e.queen)return RANKS[7].n;return RANKS[Math.max(0,Math.min(7,e.rank||0))].n}catch(x){return""}}
+function rankWord(e){try{if(e.out)return outTitleN(e);if(e.queen)return RANKS[7].n;return RANKS[Math.max(0,Math.min(7,e.rank||0))].n}catch(x){return""}}
 function palWord(e){try{if(e.out)return"Lãnh cung";const k=typeof palaceOf==="function"?palaceOf(e):null;return k&&typeof palName==="function"?palName(k):""}catch(x){return""}}
 function placeWord(e){try{const k=(S.where||{})[e.id];if(!k)return"";if(typeof palaceOf==="function"&&k===palaceOf(e))return"ở cung của nàng";if(k==="home")return"ở cung của ngươi";return typeof placeName==="function"?placeName(k):""}catch(x){return""}}
 function kidsWord(e){const L=(e.kids||[]).filter(k=>k&&k.alive!==false);if(!L.length)return"chưa có";const m=L.filter(k=>k.sex==="m").length,f=L.length-m;

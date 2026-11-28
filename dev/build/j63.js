@@ -157,7 +157,7 @@ function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the 
  else{M=kaModel(bodyHTML);R=kaRows(M);odds=kaOdds(M)}
  extraTime.reverse().forEach(x=>R.ton.unshift({h:x,c:"t"}));R.why=R.why.map(x=>({h:kaWhyCut(x.h),c:"r"}));{const wt=R.why.map(x=>kaPlain(x.h).toLowerCase());R.note=R.note.filter(x=>!wt.some(w=>w.includes(kaPlain(x.h).toLowerCase())))}if(R.ton.length>1)R.ton=R.ton.filter(x=>!/^không(\s|$)/i.test(kaPlain(x.h)));
  let needs=null;try{needs=b.dataset.kneed?JSON.parse(decodeURIComponent(b.dataset.kneed)):null}catch(e){}
- if(needs&&needs.length){const kn=t=>kaPlain(t).replace(/^[✓✗]\s*/,"").toLowerCase().replace(/^cần\s+/,"").replace(/\s*\(có [^)]*\)$/,"").trim();const un=needs.filter(n=>!n.ok).map(n=>kn(n.t));const gen=/^(chưa đủ điều kiện|hết khắc|sức dưới 20|chỉ buổi|đã qua|đang cấm túc|đã làm trong buổi|đã mất|ở lãnh cung)/i;
+ if(needs&&needs.length){const kn=t=>kaPlain(t).replace(/^[✓✗]\s*/,"").toLowerCase().replace(/^cần\s+/,"").replace(/\s*\(có [^)]*\)$/,"").trim();const un=needs.filter(n=>!n.ok).map(n=>kn(n.t));const gen=/^(chưa đủ điều kiện|hết khắc|sức dưới 20|chỉ buổi|đã qua|đang cấm túc|đã làm trong buổi|đã mất|đã khuất|ở lãnh cung)/i;
   const extra=R.why.filter(w=>{const x=kn(w.h);if(w.c==="g")return false;if(un.length&&gen.test(x))return false;return !un.some(u=>u.includes(x)||x.includes(u))});
   R.why=[...needs.filter(n=>!n.ok).map(n=>({h:n.t,c:"r"})),...extra.map(w=>({h:w.h,c:"r"})),...needs.filter(n=>n.ok).map(n=>({h:n.t,c:"g"}))]}
  /* owner 09:40Z (KIT 31.11): never the same fact twice. A Cần item that is only "afford the cost" (Bạc) goes: the Tốn line already
@@ -379,7 +379,7 @@ function kaAimPart(k,nm,a,b){return `<span class="ef ${b<a?"r":"g"}">${nm} ${kaN
 /* the target's own change since the act began: stats, rank, cấm túc, phế, mất (status words VANPHONG) */
 function kaAimStat(x){const v=x.v,b=x.b0||{},P=[];for(const [k,nm] of KA_AIMK){if(b[k]==null||typeof v[k]!=="number")continue;const a=Math.round(b[k]),n=Math.round(v[k]);if(a!==n)P.push(kaAimPart(k,nm,a,n))}
  if(typeof rivals==="undefined"||!rivals.includes(v))return P;/* rank / cấm túc / phế: consorts only (a servant's rank is another ladder) */
- if(b.alive&&v.alive===false)P.push('<span class="ef r">đã mất</span>');else if(!b.out&&v.out)P.push('<span class="ef r">bị phế, ra khỏi cung</span>');
+ if(b.alive&&v.alive===false)P.push('<span class="ef r">đã khuất</span>');else if(!b.out&&v.out)P.push('<span class="ef r">bị phế, ra khỏi cung</span>');
  else{if(b.rank!=null&&v.rank!=null&&v.rank!==b.rank&&typeof RANKS!=="undefined"&&RANKS[v.rank])P.push(`<span class="ef ${v.rank<b.rank?"r":"g"}">${v.rank<b.rank?"bị giáng xuống":"được thăng"} ${RANKS[v.rank].n}</span>`);
   if(!b.confined&&(v.confined||0)>0)P.push('<span class="ef r">bị cấm túc</span>')}
  return P}
@@ -489,11 +489,11 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead||window.__kNav)r
  const ok=okHint===true?true:okHint===false?false:av;const SL=kitResultSeal(ok),seal=SL.t;void failTxt;void netBad;
  /* ODDS CAP: a soft failure changes nothing but still shows its one BẠI line (j63 oddsSoft) */
  if(okHint===false&&window.__oddsSoft&&!sen)sen=window.__oddsSoft;window.__oddsSoft="";
- if(!G.length&&!B.length&&!sen&&!sen0&&!(K&&(K.length||K.more))/* KK42: a K.more-only Kèm still makes the card */&&!(K&&K.tgt&&K.tgt.length)&&!(K&&K.by&&K.by.length))return;if(window.__bot)return;
+ if(!G.length&&!B.length&&!sen&&!sen0&&!(K&&(K.length||K.more))/* KK42: a K.more-only Kèm still makes the card */&&!(K&&K.tgt&&K.tgt.length)&&!(K&&K.by&&K.by.length)&&!(K&&K.lo&&K.lo.length))return;if(window.__bot)return;
  let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
  t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};
- const rows=[];if(K.tgt&&K.tgt.length)rows.push({k:"tgt",label:"Người ấy",items:K.tgt});if(K.by&&K.by.length)rows.push({k:"by",label:"Ai làm",items:K.by});if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!G.length&&!B.length&&!(K&&(K.length||K.more))/* KK42: a K.more-only Kèm still makes the card */)rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
+ const rows=[];if(K.tgt&&K.tgt.length)rows.push({k:"tgt",label:"Người ấy",items:K.tgt});if(K.by&&K.by.length)rows.push({k:"by",label:"Ai làm",items:K.by});if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(K.lo&&K.lo.length)rows.push({k:"lo",label:"Ẩn lộ",items:K.lo});/* REAL-PROOF-2 (OD 27/11 ~00:15Z, jcover): ONE exposure line after her bad deed, the same kit row */if(!G.length&&!B.length&&!(K&&(K.length||K.more))/* KK42: a K.more-only Kèm still makes the card */)rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
  window.__kaKnAt=Object.assign({},S.known||{});/* W10b: the familiarity this card reflects (kaWalkKn names what rises after it) */
  window.kaLastResult={title,ok,seal,sentence:sen,fold:K.fold||null,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)})),kem:(K||[]).filter(x=>Math.round(x.d)).map(x=>`${x.v&&x.v.name||""}: ${x.k} ${kaN(Math.round(x.d))}`)};/* kem: the Kèm line as data (scans) */
  const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${typeof kitLineCap==="function"?kitLineCap(x):x}</span>`).join("")}</span></span>`;/* KK41: each result line starts its row with a capital */
@@ -505,6 +505,8 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead||window.__kNav)r
 .rtoast.karesult .rt{display:flex;flex-direction:column;gap:4px;font-size:.84rem}
 .rtoast.karesult .kat{display:flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid #e6d3ac}
 .rtoast.karesult .seal{font-size:.9rem;padding:3px 8px;flex:0 0 auto}
+/* K-TAG-WRAP (KK66, rule X23): a result seal word (THÀNH · BẠI · KẾT QUẢ · BỎ DỞ · CẤM · XONG) never breaks over two lines — every toast seal and the ring result card .kri-res */
+.rtoast .seal,.karesult .seal{white-space:nowrap}
 .rtoast.karesult .kan{font-weight:700;color:var(--ink);overflow-wrap:anywhere}
 .rtoast.karesult .ksen{color:var(--ink);line-height:1.35}
 .rtoast.karesult .kb{grid-template-columns:3.4rem minmax(0,1fr);font-size:.8rem;line-height:1.4}

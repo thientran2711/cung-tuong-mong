@@ -184,7 +184,7 @@ ev("rvquarrel",()=>liveRivals(false).length>=2,()=>rvPair("rvFeud"),p=>{const a=
 ev("rvmusk",()=>liveRivals(false).length>=2,()=>{const t=rvPair("rvHarm");if(!t)return null;t.o=od(BAL.odb.j7.odO_16+RV(t.a).ev*10+S.danh/5);return t},p=>{const a=RV(p.a),b=RV(p.b);if(!a||!b)return null;return{who:pv(b),
  t:`${S.maid.name} thì thầm: ${a.name}${rvY(p,", vốn ")}, trộn xạ hương vào túi thơm tặng ${b.name}, mong nàng không bao giờ có con.`,o:[
  {n:`Cảnh báo ${b.name}`,fx:{duc:3},x:`${b.name} thiện cảm +30 · ${a.name} thù -20`,go:()=>{spAdd(b,"rel",30);a.rel-=20}},
- {n:"Tố lên Hoàng thượng",fx:{},x:`${word(p.o)} · thành: ${a.name} thất thế · hỏng: Danh ${balSg(BAL.eff.j7.danhGo_7)}`,go:()=>{if(roll(p.o))fall(a,"bị tố trộn xạ hương hại phi tần");else apply({danh:BAL.eff.j7.danhGo_7})}},
+ {n:"Tố lên Hoàng thượng",fx:{},x:`${word(p.o)} · thành: ${a.name} thất thế · hỏng: Danh ${balSg(BAL.eff.j7.danhGo_7)}`,go:()=>{if(roll(p.o))fall(a,"bị tố trộn xạ hương hại phi tần",null,"nang");else apply({danh:BAL.eff.j7.danhGo_7})}},
  {n:"Làm ngơ",fx:{tamco:1,duc:-3}}]}});
 ev("rvbribe",()=>liveRivals(false).length>=2,()=>rvPair("rvHarm"),p=>{const a=RV(p.a),b=RV(p.b);if(!a||!b)return null;return{who:pEunCourt("ksp"),
  t:`${a.name}${rvY(p,", vốn ")}, đút lót Kính sự phòng giấu thẻ bài của ${b.name}. Tổng quản thái giám đánh tiếng: ngươi muốn chen một chân không?`,o:[
