@@ -790,3 +790,4 @@ Review of review/f-tdworks 4c976d25 (F-TDWORKS-RV, SMALL) | review/f-tdworks-rv 
 E-GAIN4C (re-merge e-gain4b d1afe230 onto LIVE aecbc267, FIX LIST reviews/e-gain4b-review.md) | review/e-gain4c | session_01DgYSWmbTSBmW1pv5dm9cfk | RUNNING | 28/11 10:30Z (Foreman E C11)
 B-ROW12-LEAVE r2 FIXER (rv 2Dw6kcWd FAIL list: 14 unwarned punish roads + law-1 her accusation/Xử tội prepare + NPC settlement + law-2 Nặng tier) | review/row12-leave-r2 from 4480ae6e | FOREMAN B ROOT3 child2 / worker session_01N1tNP4252yURGUqLCgK7NK | RUNNING | 28/11 10:23Z
 Robot life flight2-s20h iPad greedy seed 2026112575 on LIVE aecbc267 | review/flight2-s20 | session_01UV1SzmJHZJCos5yepcVo5k (s20 #2, Foreman F ROOT 8 c1) | RUNNING | 28/11 10:31Z
+E-TITLES-LRM6 (re-merge titles ed000505 onto LIVE aecbc267) | review/titles-daycard-lrm6-rv | session_01DgYSWp3B4Fsnu2qAfJPDdN | RUNNING | 28/11 11:08Z (Foreman E C11)
