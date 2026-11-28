@@ -1,5 +1,5 @@
 /* kit-std-scan.js — KIT STANDARD SCAN (owner OD 27/11 ~04:33Z + ~04:39Z): every machine-checkable line of dev/kit/KIT_CHECKLIST.md on the LIVE screens.
-   Rule ids X01..X21 = the checklist's «Scan rule ids». Devices: Fold 755x1000 + iPad 1180x820 (law 12). Scenes: every tab (panel + stage + cards, nav cards, pickers),
+   Rule ids X01..X22 = the checklist's «Scan rule ids». Devices: Fold 755x1000 + iPad 1180x820 (law 12). Scenes: every tab (panel + stage + cards, nav cards, pickers),
    Bàn bài hand (kitHand, resting + enlarged card), thẻ lụa plaques (kitPick, resting + lifted), a real act → result card, kit notice chip, person dialog.
    usage: node dev/test/kit-std-scan.js <index.html> [outdir]      env: REPORT_ONLY=1 (always exit 0; prints the count), ONLY=hand,pick,tabs,result,notice,person, SZ='[[755,1000]]', RULES=X01,X03 (only these), SUBS=0 (gate mode: no sub-tab sweep, ~half the time)
    prints one line per finding:  FAIL <dev> <scene> <Xnn> <what>   and a table «rule | count» + «KIT-STD-SCAN FAIL n / PASS».  Exit 1 on any FAIL unless REPORT_ONLY.
@@ -8,7 +8,7 @@ const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=requi
 const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
 const SRC=path.resolve(process.argv[2]||'index.html'),OUT=process.argv[3]||'';
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
-const ONLY=(process.env.ONLY||'tabs,pick,ring,result,notice,nav,person,hand').split(',');
+const ONLY=(process.env.ONLY||'tabs,pick,ring,ringres,result,notice,nav,person,hand').split(',');
 const RULES=process.env.RULES?new Set(process.env.RULES.split(',')):null;
 /* ---------- the in-page checker (runs inside the game; returns [{id,sel,msg}]) ---------- */
 const SCAN=function(rootSel){
@@ -99,12 +99,24 @@ const SCAN=function(rootSel){
  /* X21 green ✓ top-right on the lifted plaque / enlarged card */
  pl.forEach(z=>{const k=z.parentElement&&z.parentElement.querySelector('.khok:not([hidden])')||document.querySelector('.khconf:not([hidden]) .khok:not([hidden])');if(!k)return;/* RV-171: the ✓/✕ pair rides the LIFTED CARD (KK56 c5746a2a, never the info plate) → measure against that card when there is one */const L=(z.parentElement&&z.parentElement.querySelector('.opts.khand>button.klift'))||document.querySelector('#modal .opts.khand>button.klift');const K=k.getBoundingClientRect();const Zs=[z.getBoundingClientRect()].concat(L?[L.getBoundingClientRect()]:[]);/* R13 enlarged card (.khbig: ONE ✓ inside its own corner) or KK56 pair on the lifted card: the ✓ must sit on the top-right corner of ONE of them */const Z=Zs.find(Z=>{const kx=(K.left+K.right)/2,ky=(K.top+K.bottom)/2;return !(kx<Z.right-Z.width*.35||kx>Z.right+K.width*.6||ky<Z.top-K.height*.6||ky>Z.top+Z.height*.2)})||Zs[Zs.length-1];if(tx(k)!=='✓')add('X21',k,'confirm is «'+tx(k)+'», must be the small ✓');const c=col(k);const bg=rgb(getComputedStyle(k).backgroundColor);if(!isGreen(c)&&!isGreen(bg))add('X21',k,'✓ is not green (text rgb('+c.map(Math.round)+') bg rgb('+bg.map(Math.round)+'))');const kx=(K.left+K.right)/2,ky=(K.top+K.bottom)/2;/* corner sticker: the ✓ centre sits on the card's top-right corner (it may overhang by up to ~half its size) */if(kx<Z.right-Z.width*.35||kx>Z.right+K.width*.6||ky<Z.top-K.height*.6||ky>Z.top+Z.height*.2)add('X21',k,'✓ not in the TOP-RIGHT corner of the card')});
  uniq.filter(e=>e.matches&&e.matches('.kpk-n.kpk-up')).forEach(n=>{const k=[...document.querySelectorAll('.kpk .khconf button.khok')].find(vis);if(!k){add('X21',n,'lifted plaque has no green ✓ tick');return}const c=col(k),bg=rgb(getComputedStyle(k).backgroundColor);if(!isGreen(c)&&!isGreen(bg))add('X21',k,'plaque ✓ not green (text rgb('+c.map(Math.round)+') bg rgb('+bg.map(Math.round)+'))');if(tx(k)!=='✓')add('X21',k,'plaque confirm is «'+tx(k)+'»');const Z=n.querySelector('.kpk-b').getBoundingClientRect(),K=k.getBoundingClientRect();if(K.top>Z.top+Z.height*.35||K.right<Z.right-Z.width*.3||K.right>Z.right+Z.width*.15)add('X21',k,'plaque ✓ not in the TOP-RIGHT corner of the plaque')});
+ /* X22 (KK65, MAIN 185 order 28/11; laws 9 + 10 + 11): a TAG label — result seal THÀNH / BẠI / KẾT QUẢ, kit chips, tags, pills, badges, or any short
+    label (≤ 3 words, ≤ 18 letters) on its own coloured / bordered box — stays on ONE line; a tag broken in two («KẾT / QUẢ» on Fold) is a FAULT */
+ const TAGSEL='.seal,.kseal,.kpseal,.kchip,.kmchip,.kgchip,.ktag,.kptag,.kpill,.kbadge';
+ const boxed=e=>{const cs=getComputedStyle(e);const bg=cs.backgroundColor,bi=cs.backgroundImage;const hasBg=(bg&&!/rgba\(0, 0, 0, 0\)|transparent/.test(bg))||(bi&&bi!=='none');const hasBd=['Top','Right','Bottom','Left'].some(k=>parseFloat(cs['border'+k+'Width'])>0&&!/rgba\(0, 0, 0, 0\)|transparent/.test(cs['border'+k+'Color']));return hasBg||hasBd};
+ /* lines of the label's own TEXT (text nodes only — an icon / count child stacked by design is not a broken tag) */
+ const lines=e=>{const tops=[];const w=document.createTreeWalker(e,NodeFilter.SHOW_TEXT);let n;while((n=w.nextNode())){if(!n.nodeValue.trim())continue;const r=document.createRange();r.selectNodeContents(n);[...r.getClientRects()].forEach(q=>{if(q.width<2||q.height<4)return;if(!tops.some(t=>Math.abs(t-q.top)<4))tops.push(q.top)})}return tops.length};
+ const ownText=e=>[...e.childNodes].some(c=>c.nodeType===3&&c.nodeValue.trim());
+ uniq.filter(e=>e.matches&&!e.closest('#kitpg,.kitpg')).forEach(e=>{const t=tx(e);if(!t)return;const named=e.matches(TAGSEL);
+  if(!named){if(!ownText(e)||t.length>18||t.split(' ').length>3||e.children.length>2||!boxed(e))return;const cs=getComputedStyle(e);if(!/inline|flex|grid|block/.test(cs.display)||e.getBoundingClientRect().width>innerWidth*0.5)return;
+   if(e.closest(CHOICE)&&e.matches('button,.kopt,.kfoc-b'))return/* a button is not a tag (button sizes are law 10, not this rule) */}
+  else if(t.length>24)return;
+  const n=lines(e);if(n>1)add('X22',e,`tag «${t.slice(0,24)}» breaks onto ${n} lines (w ${Math.round(e.getBoundingClientRect().width)})`)});
  return out};
 /* ---------- the runner ---------- */
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);
  if(OUT)fs.mkdirSync(OUT,{recursive:true});const all=[];const per={};const log=(dev,scene,f)=>{if(RULES&&!RULES.has(f.id))return;const k=dev+'|'+scene+'|'+f.id+'|'+f.sel+'|'+f.msg;if(per[k])return;per[k]=1;all.push({dev,scene,...f});console.log(`FAIL ${dev} ${scene} ${f.id} ${f.sel} — ${f.msg}`)};
  const probes=[];
- for(const [W,H] of SZ){const dev=W<H?'fold':'ipad';const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await keepNotesSeen(ctx);
+ for(const [W,H] of SZ){const dev=W<H?(W===755?'fold':'w'+W):'ipad';/* KK65: a 2nd narrow width (904 cover) is named by its width */const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await keepNotesSeen(ctx);
   await ctx.addInitScript(()=>{window.__bot=1;let s=777;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
   const p=await ctx.newPage();p.setDefaultTimeout(180000);const errs=[];p.on('pageerror',e=>{if(!/Unexpected token '<'/.test(String(e)))errs.push(String(e).slice(0,160))});
@@ -133,6 +145,17 @@ const SCAN=function(rootSel){
   /* notice chip */
   if(ONLY.includes('notice')){await clear();await p.evaluate(()=>{if(typeof kitNotice==='function')kitNotice({id:'kstd',line:'Có tin báo thử',text:'Có tin báo thử: một tin ngắn để kiểm bộ báo tin.',kind:'info'})});await p.waitForTimeout(900);await scan('notice:chip','#kntchip,header.hud #kntbox');await p.evaluate(()=>{const b=document.getElementById('kntbox');if(b)b.click()});await p.waitForTimeout(900);await scan('notice:panel','#modal .dlg');await shot('notice')}
   /* people ring → focus → real act plaques (kitRing over kitPick, KIT §104) */
+  /* KK65 ringres: the ITEM ring's result card (.kri-res, narrower than #rtoast on Fold) — «Tặng quà» to a rival, front piece, its act, then scan the pane */
+  if(ONLY.includes('ringres')){await clear();const ok=await p.evaluate(()=>{try{const L=(typeof liveRivals==='function'?liveRivals(true):rivals.filter(x=>x.alive!==false&&!x.out)),v=L.find(x=>x.queen)||L[0];if(!v||typeof mkP!=='function')return false;S.met=S.met||{};S.met[v.id]=S.met[v.id]||1;window.together=()=>true;/* hand to hand (this start has no maid to send) */window.__rrBot=window.__bot;window.__bot=0;window.__kriOff=0;/* the item ring is off for robots (kriOn) — on for this scene only */pushDil(mkP('giftpick',{v:v.id}),'Tặng quà');showModal();render();return true}catch(e){return false}});
+   if(ok){await p.waitForTimeout(1800);const ctr=sel=>p.evaluate(sel=>{const e=document.querySelector(sel);if(!e)return null;const r=e.getBoundingClientRect();return [r.left+r.width/2,r.top+r.height/2]},sel);
+    if(process.env.RRDBG)console.log('RRDBG open',JSON.stringify(await p.evaluate(()=>({cur:!!(window.kitRingItem&&kitRingItem.cur),kri:document.querySelectorAll('.kri').length,front:!!document.querySelector('.kri-t.kri-front'),q:Q.length,mh:document.getElementById('modal').hidden,t:(Q[0]||{}).t}))));
+    let c=await ctr('.kri-t.kri-front');if(c){await p.touchscreen.tap(c[0],c[1]);await p.waitForTimeout(1800)}
+    c=await ctr('.kri-pane [data-kria]');if(c){await p.touchscreen.tap(c[0],c[1]);await p.waitForTimeout(2400)}
+    const has=await p.evaluate(()=>!!document.querySelector('.kri-pane .kri-res'));if(has){await scan('ringres','.kri-pane');await shot('ringres');
+     /* every seal word kitResultSeal can print, measured in the SAME real seal element at the real width (THÀNH / BẠI / KẾT QUẢ / BỎ DỞ) */
+     for(const ok of [false,null,'soft']){const w=await p.evaluate(ok=>{const b=document.querySelector('.kri-pane .kri-res .seal');if(!b||typeof kitResultSeal!=='function')return null;const t=kitResultSeal(ok).t;b.textContent=t;return t},ok);if(w){await p.waitForTimeout(150);await scan('ringres:'+w,'.kri-pane')}}
+     await shot('ringres-seal')}else{console.log(`INFO ${dev} ringres: no ring result card (scene skipped)`);await shot('ringres-none')}await p.evaluate(()=>{try{if(window.kitRingItem&&kitRingItem.cur)kitRingItem.close(true)}catch(e){}document.querySelectorAll('.kri').forEach(e=>e.remove());if('__rrBot' in window)window.__bot=window.__rrBot});await p.waitForTimeout(600)}
+   else console.log(`INFO ${dev} ringres: gift ring not available (scene skipped)`)}
   if(ONLY.includes('ring')){await clear();const ok=await p.evaluate(()=>{try{if(!window.kitRing||!kitRing.open||!S.visit)return false;const ppl=(S.visit.people||[]).filter(x=>x);if(!ppl.length)return false;kitRing.open({people:ppl,idx:ppl.map((_,i)=>i),mode:'person'});return true}catch(e){return false}});
    if(ok){await p.waitForTimeout(1500);await scan('ring:rest','#stage .kpk-n,#stage [class*=kring]');await p.evaluate(()=>{try{kitRing.focus()}catch(e){}});await p.waitForTimeout(2200);await p.evaluate(()=>{const n=document.querySelector('.kpk-n .kpk-b');if(n)n.click()});await p.waitForTimeout(700);await scan('ring:focus','#stage .kpk-n,#stage [class*=kring]');await shot('ring');await p.evaluate(()=>{try{kitRing.close()}catch(e){}})}else probes.push(dev+' ring: kitRing / visit people not available (scene skipped)')}
   /* «Cách làm» nav panel (KIT §6.2l / §6.2m) */
