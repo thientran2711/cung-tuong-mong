@@ -3,7 +3,7 @@
    For each size: opens every item picker of the family (giftpick to a person, giftto Hoàng thượng / Thái hậu, plantpick),
    measures (grid present, tiles = items, row alignment, no overflow, no clipped text), taps a tile (selected + detail + confirm),
    confirms a gift (kitFxGift log), checks Gọn (no fx) and tap-to-skip. Prints one JSON line per size. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,OUT,SIZES,SHOTS]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const L=(SIZES||'755x1000@2,1000x755@1,1180x820@1,1366x1024@1,844x390@2,390x844@2').split(',');
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});

@@ -1,7 +1,7 @@
 /* review/kit-info-fixed (KIT §6.3h, owner #86 option A): the person info block (.pc .pcf rows) has a FIXED height: every row is ONE line, a long value («Dạo này» story) is a one-line headline + a kit «!» that opens the full text;
    the action list stays right under the block (first act fully inside the panel, no scrolling). Injects a very long «Dạo này» text into each person card and checks: block height unchanged, rows one line, «!» present + popup has the whole text.
    usage: node dev/test/kit-info-fixed.js <url> [WxH,...] [tab,...] */
-const {chromium}=require('playwright');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const [,,URL,SIZES,TABS]=process.argv;
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const wh of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=wh.split('x').map(Number);

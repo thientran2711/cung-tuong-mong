@@ -2,7 +2,7 @@
    (kitBookFigCol → the book's own relayout) and must keep the reader on the same fact, and must NOT dispatch a window resize.
    usage: node dev/test/book-relayout.js <build url | page.html> <outdir>   (env FIG, N facts, SZ=[[W,H],…], TURNS = pages to turn first)
    The figure's download is HELD until the reader has turned TURNS pages, then released. Exit 1 on failure. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const FIG=process.env.FIG||'fig-thaihau-h1-a51.webp',N=+(process.env.N||14),TURNS=+(process.env.TURNS||1);
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1000,755],[1180,820],[1366,1024]];const isFile=!/^https?:/.test(SRC);
 (async()=>{const b=await chromium.launch();let bad=0;

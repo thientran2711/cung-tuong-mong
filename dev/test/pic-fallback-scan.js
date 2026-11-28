@@ -5,7 +5,7 @@
        the old catch-all "Có người đến" room (j24:co-nguoi-den) / Triều chính / a broken key ("img/act--.webp")
      · own dialog banners img/ev-<key>.webp shown (kitEvBanner)
    usage: node dev/test/pic-fallback-scan.js <build url> [steps=6] → JSON summary; exit 1 when a Triều chính stand-in or a broken key is seen */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,URL,ST]=process.argv;const N=+ST||6;
 const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});

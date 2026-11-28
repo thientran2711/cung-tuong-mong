@@ -1,6 +1,6 @@
 /* crest sheet: every consort rank frame (+ servant, maid) through pcPort at one cell width — checks crest attachment (KIT §36.4).
    usage: node dev/test/crest-sheet.js <url> <W>x<H>@dpr <out.jpg> <cellW> */
-const {chromium}=require('playwright');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const [,,BASE,SZ,OUT,CW]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+DPR,reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});

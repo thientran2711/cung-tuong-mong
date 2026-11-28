@@ -3,7 +3,7 @@
    Test: for each card, aim at the card CENTRE as she saw it before the re-lay, wait until the cards actually move, then put the finger down at the OLD centre (≤ 80 ms after the move, a human's best reaction)
    with a real touch (hold 120 ms). PASS = the click lands on the card she aimed at (index in .opts), FAIL = another card, the gap or nothing.
    usage: node dev/test/ksz-late-tap-real.js <url|-> <outdir> [WxH@dpr,...]  (IMG_DELAY ms, default 900)  Exit 1 on any miss. */
-const path=require('path');const fs=require('fs');const {chromium}=require('playwright');
+const path=require('path');const fs=require('fs');const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const URL=process.argv[2]&&process.argv[2]!=='-'?process.argv[2]:'file://'+path.resolve(__dirname,'../../index.html');const OUT=process.argv[3]||'/tmp/ksz-late-tap-real';
 const SIZES=(process.argv[4]||'755x1000@2,1180x820@2').split(',').map(s=>{const m=s.match(/(\d+)x(\d+)@(\d+)/);return{w:+m[1],h:+m[2],d:+m[3]}});const DEL=+process.env.IMG_DELAY||900;
 fs.mkdirSync(OUT,{recursive:true});let bad=0,n=0;

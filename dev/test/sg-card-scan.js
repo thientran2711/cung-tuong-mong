@@ -10,7 +10,7 @@
    was not drawn). FAIL on any SG-family row. Options that differ even with no trait are another fault (listed, not this family).
    Also the STATIC family list (every literal «Sủng ±N» text of the build) is printed with --static.
    usage: node dev/test/sg-card-scan.js <url | worktree dir (served from disk via coop-serve, no http server)> [--table] [--static]      exit 1 when any SG-family row is left */
-const {chromium}=require('playwright');const ARG=process.argv[2]||'.';const LOCAL=!/^https?:/.test(ARG);const URL=LOCAL?'http://ctm.local/':ARG;
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const ARG=process.argv[2]||'.';const LOCAL=!/^https?:/.test(ARG);const URL=LOCAL?'http://ctm.local/':ARG;
 /* serve a built worktree from disk inside Playwright (no local http server; the root index.html the site build writes) */
 const serveDir=async(ctx,root)=>{const fs=require('fs'),path=require('path');root=path.resolve(root);const M={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.css':'text/css','.svg':'image/svg+xml','.mp3':'audio/mpeg'};
  await ctx.route('http://ctm.local/**',route=>{let q=decodeURIComponent(new (require("url").URL)(route.request().url()).pathname);if(q.endsWith('/'))q+='index.html';const f=path.join(root,q);

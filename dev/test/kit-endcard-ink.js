@@ -1,7 +1,7 @@
 /* kit-endcard-ink.js — KK29 KIT BUG #4 (robot, B1 report d-robot-bugs): on a mourning ending the death-ink banner («Hồng nhan bạc mệnh · Mở Sổ luân hồi») drew over the «Kiếp này» card rows.
    RULE: the banner never covers rows: while the ink scene plays the ending card is held back (visibility hidden) and shows when the scene goes; at no moment are both visible with the banner box on card rows.
    Mourning endings: bệnh (thọ 19), + a second cause. Fold 755x1000 + iPad 1180x820. usage: node dev/test/kit-endcard-ink.js <index.html> [outdir]  Exit 1 on a FAIL. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const R=[];
  for(const [W,H] of SZ){for(const [cause,txt] of [['bệnh','Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 19 tuổi'],['độc','Chén trà có độc, ngươi không qua khỏi']]){
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});

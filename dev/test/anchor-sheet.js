@@ -1,5 +1,5 @@
 /* contact sheet: every consort/player face picture with its brow / cheek / lip anchors drawn through the SAME transform the minigame uses (toilGeom + toilIdeal) */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,URL,DIR,FILTER,PAGE]=process.argv;fs.mkdirSync(DIR,{recursive:true});
 const LOCALFIT=async c=>{await c.route(/img\/(mk-fit\/[a-z0-9-]+|toil-fit2)\.json/,r=>{const m=/img\/(mk-fit\/[a-z0-9-]+|toil-fit2)\.json/.exec(r.request().url());const fs=require('fs');try{r.fulfill({status:200,contentType:'application/json',headers:{'access-control-allow-origin':'*'},body:fs.readFileSync('/home/user/wt/toil-reveal-fix/img/'+m[1]+'.json')})}catch(e){r.continue()}})};
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:900,height:900},serviceWorkers:'block'});await LOCALFIT(ctx);const p=await ctx.newPage();p.setDefaultTimeout(600000);

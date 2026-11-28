@@ -3,7 +3,7 @@
    Per case x viewport: skull->feet px, painted box, cut px (painted box outside the frame / any clipping ancestor), text lines under the figure; exit 1 on a cut,
    a squeeze, or a body that differs by more than 1 % between people of the same frame kind and size.
    usage: node dev/test/fullbody-frames-scan.js <index.html> [outdir]   env SZ=[[W,H],..] SHOTS=1 KINDS=news,choice,pdlg,idcard CASES=name,name C3HT=<json> */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 const C3=n=>['c03-t'+n,'img/_review/consort-tiers/c03/b8/c03_a18_t'+n+'.png'];
 const C3HT=process.env.C3HT?JSON.parse(fs.readFileSync(process.env.C3HT)):{};

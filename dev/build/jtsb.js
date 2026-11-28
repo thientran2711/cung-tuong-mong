@@ -24,7 +24,7 @@ function tsbLedger(e){if(!S)return;S.tsbLog=S.tsbLog||[];S.tsbLog.unshift(Object
 function tsbShow(){try{if(!tsbBot()&&$("modal").hidden)showModal()}catch(e){}}
 /* one event card (saveable through PEND): full act-card rows on every option (owner 07:15Z), people on the picture, rows layout */
 function tsbCard(pid,pp,title){const d=mkP(pid,pp);if(!d)return false;Q.push({t:title||d.title||"Việc trong cung",h:d.t,opts:d.o,stage:d.stage,headArt:d.headArt,who:d.who&&typeof pv==="function"?pv(d.who):undefined,optLayout:"rows",showOut:true,pid:d.pid,pp:d.pp});tsbShow();return true}
-(function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^tsb/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows";q.showOut=true;if(d.title)q.t=d.title;if(d.who&&typeof pv==="function")q.who=pv(d.who)/* reload keeps the speaker face */}}})}catch(e){}return out}})();
+(function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^tsb/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows";q.showOut=true;if(d.title&&!q.__ts)q.t=d.title/* save-pid-cards: the title she saw stays (j3 x) */;if(d.who&&typeof pv==="function")q.who=pv(d.who)/* reload keeps the speaker face */}}})}catch(e){}return out}})();
 /* the Cần row on dialog options: opt.need=[{t,ok}] -> data-kneed (j63 kaNorm1 reads it) */
 function tsbNeedMark(){try{const m=Q[0];if(!m||!m.opts||!m.opts.some(o=>o&&o.need))return;document.querySelectorAll("#modal .opts button[data-m]").forEach(b=>{if(b.dataset.ka==="1")return;const o=m.opts[+b.dataset.m];if(!o||!o.need||!o.need.length)return;b.dataset.kneed=encodeURIComponent(JSON.stringify(o.need));if(o.need.some(n=>!n.ok))b.disabled=true})}catch(e){}}
 (function(){const f0=kitFix;kitFix=function(root){tsbNeedMark();return f0.apply(this,arguments)}})();
@@ -129,8 +129,8 @@ PEND.tsbOmen=pp=>{if(!S)return null;const a=byKey(pp.a);if(!a)return null;const 
  o.push({n:"Soát quanh cung",fx:{},x:`${word(ob)} · tốn: 1 khắc · Sức ${balSg(BAL.eff.jtsb.sucGo)} · thành: bắt được dấu vết, mưu bị phá, chứng cứ ${balSg(BAL.eff.jtsb.evGo)} về kẻ chủ mưu · hỏng: không thấy gì, mưu vẫn còn`,need:[tsbNeedKhac(1)],go:()=>{tsbKh(1);apply({suc:BAL.eff.jtsb.sucGo});if(roll(ob)){S.tsbTh=(S.tsbTh||[]).filter(x=>!(x.a===pp.a&&x.k===pp.k&&x.t==="me"));/*evok: plot deed at plan time*/evA(S,a,BAL.eff.jtsb.evGo);try{k61Know(a,"",true,2)}catch(e){}noteAdd(a.id,fire?"sai người định phóng hỏa kho đồ của ngươi (ngươi bắt được dấu vết)":"sai người định thả thú dữ vào cung ngươi (ngươi bắt được dấu vết)");log(`<span class="g">Ngươi cho soát quanh cung, bắt được kẻ lạ: hắn khai là người của ${a.name}. Mưu bị phá. Chứng cứ ${balSg(BAL.eff.jtsb.evGo)}.</span>`)}else log("Ngươi cho soát quanh cung nhưng không thấy gì.")}});
  if(mm)o.push({n:`Giao cho ${mm.name} canh chừng`,fx:{},x:`${word(oddsCl(mm.loyal))} · thành: như canh giữ cửa cung, không tốn bạc · hỏng: ${mm.name} lơ là, cung vẫn hở`,need:[{t:`kẻ hầu tin cẩn (${mm.name}, Thiện cảm ${mm.loyal})`,ok:true}],go:()=>{if(roll(mm.loyal)){S.tsbGuard=tsbWk()+2;log(`${mm.name} thức canh quanh cung cho ngươi.`)}else log(`${mm.name} hứa canh chừng nhưng ngủ quên.`)}});
  if(fire)o.push({cap:1,n:"Chuyển đồ quý sang chỗ khác",fx:{},x:`${capW()} · tốn: 1 khắc · thành: đồ quý được giữ an toàn nếu kho có cháy trong 2 tuần`,need:[tsbNeedKhac(1)],go:()=>{tsbKh(1);S.tsbSafe=tsbWk()+2;log("Ngươi cho chuyển đồ quý khỏi kho.")}});
- o.push({n:"Bỏ qua",fx:{},x:`kèm: nếu có mưu thật, nó vẫn đến`});
- return{t:`<p>${sign} ${who}</p>`,o,headArt:tsbFitArt("chuyen-la"),title:"Điềm lạ quanh cung"}};
+ o.push({n:"Thôi",fx:{}});/* the kit ✕ (owner 26/11 ~22:43Z: no close-only card); its risk line moves into the story */
+ return{t:`<p>${sign} ${who}</p><p>Để mặc thì nếu có mưu thật, nó vẫn đến.</p>`,o,headArt:tsbFitArt("chuyen-la"),title:"Điềm lạ quanh cung"}};
 
 /* the bully card (Giao / Không giao + more after the first time), both kinds: batnat (rank) and uyhiep (evidence, j78) */
 PEND.tsbBul=pp=>{if(!S)return null;const a=RV(pp.a);if(!a||!a.alive)return null;const ev=pp.k==="uyhiep";const e=pp.ix>=0?S.inv[pp.ix]:null;const want=e&&!e.h?e:null;const g=tsbBulPay(a,S);
@@ -194,8 +194,8 @@ PEND.tsbFireW=()=>{const W=S&&S.tsbFW;if(!W)return null;const hau=W.cause==="hau
  O.push({cap:1,n:"Dặn giữ đèn nến cẩn thận",fx:{},x:`${capW()} · tốn: 1 khắc · thành: hiểm họa cháy giảm hẳn`,need:[tsbNeedKhac(1)],go:()=>{tsbKh(1);if(S.tsbFW)S.tsbFW.heed=1;log("Ngươi dặn kẻ hầu giữ đèn nến cẩn thận, đêm nào cũng soát.")}});
  if(hau)O.push({n:`Phạt ${W.who||"kẻ hầu"}`,fx:{},x:`thành: hiểm họa cháy giảm hẳn · kẻ hầu khác giữ kỷ cương · Mất: ${W.who||"kẻ ấy"} Thiện cảm -${balAb(BAL.eff.jtsb.loyalGo)}`,go:()=>{if(S.tsbFW)S.tsbFW.heed=1;const s=(S.staff||[]).find(x=>x.name===W.who)||(S.maid&&S.maid.name===W.who?S.maid:null);if(s)s.loyal=cl((s.loyal||0)-BAL.eff.jtsb.loyalGo,0,100);log(`Ngươi phạt ${W.who||"kẻ hầu"} vì lơ là đèn nến.`)}});
  O.push({cap:1,n:"Cất đồ quý sang chỗ khác",fx:{},x:`${capW()} · tốn: 1 khắc · thành: đồ quý được giữ an toàn nếu có cháy trong 3 tuần · kèm: hiểm họa cháy vẫn còn`,need:[tsbNeedKhac(1)],go:()=>{tsbKh(1);S.tsbSafe=tsbWk()+3;log("Ngươi cho cất đồ quý sang gian khác.")}});
- O.push({n:"Bỏ qua",fx:{},x:`kèm: có thể cháy mất một món đồ (vải vóc, thư từ, hương liệu, lễ vật bằng gỗ, giấy)`});
- return{t:`<p>${t}</p>`,o:O,headArt:tsbFitArt("hoa-hoan"),title:"Đèn nến trong cung"}};
+ O.push({n:"Thôi",fx:{}});/* the kit ✕ (owner 26/11 ~22:43Z); its risk line moves into the story */
+ return{t:`<p>${t}</p><p>Để mặc thì có thể cháy mất một món đồ (vải vóc, thư từ, hương liệu, lễ vật bằng gỗ, giấy).</p>`,o:O,headArt:tsbFitArt("hoa-hoan"),title:"Đèn nến trong cung"}};
 
 /* Tư trang: "Thú nuôi" (jpet petHTML) + "Sổ đồ mất" */
 function tsbPetHTML(){if(!S||!tsbOn())return"";let h="";/* the pet strip now sits in the bag block (jinv kitInvGrid below:, review/tutrang-layout) */

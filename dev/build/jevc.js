@@ -35,7 +35,8 @@ function evcKeep(k,n){const R=BAL.evc.res;let keep=0;if(R&&typeof R==="object")f
 let EVCW=[];
 function evcHoldable(m){return !!(m&&typeof m==="object"&&!m.must&&!m.kend&&!evcToday(m)&&!m.forced&&m.kind!=="news"&&m.cls!=="end")}
 function evcRoom(k){const B=BAL.evc,z=evcZ();let t=0;for(const j in z.n)t+=z.n[j];return t+evcKeep(k,z.n)<B.cap&&(z.n[k]||0)<(B.q[k]==null?B.cap:B.q[k])}
-function evcPaint(){if(!evcOn())return;for(let g=0;g<30&&Q.length;g++){const m=Q[0],k=evcKind(m);if(!k||k==="fest"||evcToday(m))return;
+let EVCLD=0;/* save-pid-cards rv (LAW 6c + LAW 11, same family as j68 evl): set while a sổ is loaded, see the ser / deser wrap below */
+function evcPaint(){if(!evcOn()||EVCLD)return;for(let g=0;g<30&&Q.length;g++){const m=Q[0],k=evcKind(m);if(!k||k==="fest"||evcToday(m))return;
   if(k!=="harm"&&evcHoldable(m)&&!evcRoom(k)){Q.shift();EVCW.push({m,at:wk(),k});continue}evcSeen(m);return}}
 function evcRelease(){if(!evcOn()||!EVCW.length||Q.length||S.mg)return;const now=wk();
  EVCW=EVCW.filter(w=>{if(now-w.at>BAL.evc.wait){try{if(typeof evDropInfo==="function")evDropInfo(w.m)}catch(e){}return false}return true});
@@ -65,5 +66,12 @@ function evcSeen(m){try{if(!evcOn()||!m||evcToday(m))return;const k=evcKind(m);i
  /* EVCW is SAVED with the life (BIG review 6): each held card in the save form of Q (j3 serM: a carried generator card {rk,ra}, a pid card,
     a notice) and rebuilt the same way on load (rcpMk / deserQ); a card that cannot be made again is dropped as Q drops it */
  if(typeof ser==="function"&&typeof serM==="function"){const s1=ser;ser=function(){const d=s1.apply(this,arguments);try{if(d&&EVCW.length)d.W=EVCW.map(w=>{const e=serM(w.m,{});return e?{e,at:w.at,k:w.k}:null}).filter(Boolean)}catch(e){}return d}}
+ /* save-pid-cards rv (LAW 6c + LAW 11): the big card ON SCREEN was counted for today (m.evcN, page memory: a generator card {rk,ra} or a notice
+    does not keep it in the sổ) → after a TRUE reload the paint gate saw it as a NEW big card of a full day and moved it off her screen into EVCW
+    (a later day; dropped after BAL.evc.wait days). ONE rule for every card kind: the sổ writes the on-screen card's day mark (evn); a load never
+    paints the gate while it rebuilds, and gives that same card its mark back (same title, same kind) → it stays where she saw it. */
+ if(typeof ser==="function"){const s2=ser;ser=function(){const d=s2.apply(this,arguments);try{if(d&&typeof d==="object"){delete d.evn;const m=Q[0];if(m&&evcToday(m))d.evn={t:m.t||null,k:evcKind(m),n:m.evcN}}}catch(e){console.error("evn ser",e)}return d}}
+ if(typeof deser==="function"){const d2=deser;deser=function(d){EVCLD=1;let r;try{r=d2.apply(this,arguments)}finally{EVCLD=0}
+  try{const l=d&&d.evn,m=Q[0];if(l&&m&&!m.evcN&&(m.t||null)===l.t&&evcKind(m)===l.k)m.evcN=l.n}catch(e){console.error("evn deser",e)}return r}}
  if(typeof deser==="function"){const d1=deser;deser=function(d){const r=d1.apply(this,arguments);EVCW=[];try{for(const x of (d&&d.W)||[]){let m=null;try{m=x.e.rk?rcpMk(x.e):(deserQ([x.e])[0]||null)}catch(e){m=null}if(m)EVCW.push({m,at:x.at,k:x.k})}}catch(e){}return r}}
 })();
