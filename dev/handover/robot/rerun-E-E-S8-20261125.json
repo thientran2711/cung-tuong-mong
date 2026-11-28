@@ -458,6 +458,26 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover1-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover1-moments.md"
+  },
+  {
+   "life": "E-S8-bd_san-R7-greedy5",
+   "origin": "bd",
+   "road": "bd_san",
+   "dev": "ipad",
+   "bot": "bold",
+   "seed": 2950391099,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "f65d019b"
+   },
+   "ending": "Hồng nhan bạc mệnh — Kiết lỵ nguy kịch, không qua khỏi (age 19 y1; clean LIVE 5fb13d60+)",
+   "age": 19,
+   "buoi": 88,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_san-R7-greedy5-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_san-R7-greedy5-moments.md"
   }
  ],
  "parked": [
