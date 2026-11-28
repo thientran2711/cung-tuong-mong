@@ -61,11 +61,12 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(
      tier door (its d.x, jone doorFold, and the pop-up button's printed text), states dau / cao / toi × khắc spent 0 / 3: a tier with no way that can run
      says why — never «—». Counted only where ONE.tierRows says a tier is locked; ≥ 1 locked deck tier and ≥ 1 locked pop-up tier must be read. */
   {let nD=0,nP=0;const bad=[];
-   for(const sc of ["dau","cao","toi"]){AA.scen(sc);
-    for(const u of [0,3]){AA.restore();used=u;tab="act";AA.hide();render();await sl(120);
+   /* the world is drawn: a pop-up tier is not always locked by itself, so the second pass empties her purse (a bạc way locks «không đủ bạc») */
+   for(const sc of ["dau","cao","toi","hh"])for(const z of [0,1]){if(nD&&nP&&z)continue;AA.scen(sc);const Z=()=>{if(z)S.bac=0};
+    for(const u of [0,3]){AA.restore();Z();used=u;tab="act";AA.hide();render();await sl(120);
      for(const b of document.querySelectorAll("#panel button[data-ddoor]")){let lk=0;try{const r=ONE.deckRow(b);if(r&&ONE.mode(r.k)==="tier")lk=ONE.tierRows(Object.assign({},r,{n:b.dataset.ddoor}),ONE.deckM(b),"me").filter(x=>x.off||!x.m).length}catch(e){}
       if(!lk)continue;nD++;const t=T((b.querySelector(".klead")||b.querySelector("p")||{}).textContent);if(!t||DASH.test(t))bad.push(`deck ${sc} k${u} «${b.dataset.ddoor}»: «${t}»`)}
-     for(const sf of AA.surfaces().filter(x=>x.place)){AA.restore();used=u;AA.show(sf);const P=curPeople();
+     for(const sf of AA.surfaces().filter(x=>x.place)){AA.restore();Z();used=u;AA.show(sf);const P=curPeople();
       for(let i=0;i<P.length;i++){const pp=P[i];let A=[];try{A=talkOpts(pp)}catch(e){}for(const a of A){if(!a||a.one!=="tier")continue;let lk=0;try{const r=DOOR.byK(a.door);const {L}=ONE.members(doorPP(pp,i,r.k),r);lk=ONE.tierRows(r,L,"x").filter(x=>x.off).length}catch(e){}
         if(!lk)continue;nP++;const t=T(a.x);if(DASH.test(t))bad.push(`pop ${sc} k${u} ${sf.id} ${pp.kind} «${T(a.n)}» d.x «${t.slice(0,90)}»`)}
        if(nP&&nP<40&&A.some(a=>a&&a.one==="tier")){AA.show(Object.assign({},sf,{pop:i}));await sl(10);for(const b of document.querySelectorAll("#popw button")){const t=T(b.textContent);if(DASH.test(t))bad.push(`pop-btn ${sc} k${u} ${sf.id} «${t.slice(0,90)}»`)}AA.show(sf)}}}}}
