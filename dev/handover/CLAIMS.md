@@ -740,3 +740,4 @@ FLIGHT2-COOP room e (A-COOP #4, opus, successor of A-COOP #3 session_01UV1Szgdgj
 BIG RV save-fail-warn 371c5d7f (opus) | review/save-fail-warn | session_01N1tNP6WtgdQU1y5GyDeSjU (Foreman B ROOT 3 child 1) | RUNNING | 28/11 02:55Z
 ILLNESS-CURE r3 | review/illness-cure | session_01PEhRbxGXnzfsq379bwXJWA | RUNNING | 2026-11-28T03:28Z (Foreman C 4-1-1-1; successor of 01PEhRbvzcp527pLLt31A9W4)
 TUANTANG-WARN r2 | review/tuantang-warn-r2 | session_01PEhRbvy9zz1EkUmZvqgn6T | RUNNING | 2026-11-28T03:48Z (Foreman C 4-1-1-1)
+LIFE flight2-s18f Fold greedy seed 2026112570 (LIVE 18003079 + harness 795f87ec) | review/flight2-s18 | session_01UV1SzkN5yFQCY6DquQK6Xm (s18 #2, Foreman F ROOT7 c5) | RUNNING | 28/11 05:06Z
