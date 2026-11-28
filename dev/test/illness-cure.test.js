@@ -158,14 +158,14 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
    BAL.illCure.npc=100;
    for(const k of Object.keys(by)){if(["emp","thaihau","consort","player","cold"].includes(k))continue;const x=by[k][0];
     let v=null,vb=0,vs=0;if(k==="kid"){v=KIT_FACEFX.owner(x);if(!v||v===S)continue;vb=v.bac;vs=v.suc;v.bac=500;v.suc=80}
-    const ill0=x.ill;x.ill={k:"lao",st:2,known:true};const n0=IC.staff;IC.staffRoad(x,k,x.ill);out.kinds[k]=IC.staff-n0;x.ill=ill0;if(v){v.bac=vb;v.suc=vs}}
+    const ill0=x.ill;x.ill={k:"lao",st:2,known:true};const n0=IC.staff;for(let t=0;t<12&&IC.staff===n0;t++){x.ill={k:"lao",st:2,known:true};IC.staffRoad(x,k,x.ill)}/* roll(100) is capped by BAL.odds.hi: retry */out.kinds[k]=IC.staff-n0;x.ill=ill0;if(v){v.bac=vb;v.suc=vs}}
    for(const k of BAL.staffRoad.srv){const x=(by[k==="mama"?"maid":k]||[])[0];if(!x)continue;const b0=x.bac;x.bac=999;const w=IC.staffWay(x,k)[0];out.ways[k]=w;if(w==="ty")out.srvTy++;if(w==="cau")out.srvCau++;x.bac=b0}
    {const x=(by.man||by.guard||by.physician||[])[0];if(x){const b0=x.bac;x.bac=999;const [w,c]=IC.staffWay(x,KIT_FACEFX.kind(x));out.courtTy={w,c:c.bac};x.bac=b0}}
    BAL.illCure.npc=0;{const x=(by.maid||[])[0];if(x){x.ill={k:"lao",st:2,known:true};const n0=IC.staff;for(let i=0;i<50;i++)IC.staffRoad(x,"maid",x.ill);out.off=IC.staff-n0;x.ill=null}}
    BAL.illCure.npc=100;
    /* NPC mother pays her kid road and the child gains */
    {const v=(rivals||[]).find(r=>r.alive!==false&&!r.out);if(v){v.kids=v.kids||[];let k=v.kids.find(c=>c.alive);if(!k){k={name:"Tiểu Ngọc",sex:"f",age:2,hp:100,alive:true,mom:v.id};v.kids.push(k)}
-     const b0=v.bac,s0=v.sung;v.bac=500;k.hp=40;k.ill={k:"lao",st:2,known:true};IC.staffRoad(k,"kid",k.ill);out.mom={bac:500-v.bac,hp:k.hp,ill:!!illOf(k)};k.ill=null;v.bac=b0;v.sung=s0}}
+     const b0=v.bac,s0=v.sung;v.bac=500;k.hp=40;const m0=IC.staff;for(let t=0;t<12&&IC.staff===m0;t++){k.ill={k:"lao",st:2,known:true};IC.staffRoad(k,"kid",k.ill)}out.mom={bac:500-v.bac,hp:k.hp,ill:!!illOf(k)};k.ill=null;v.bac=b0;v.sung=s0}}
    BAL.illCure.npc=npc0;
    /* a child ốm regains hpKidsMonth + heal a month (no hit this month) */
    {const K=BAL.kidIll,c0=JSON.stringify(K.ch),w0=K.worse;K.ch.young=0;K.ch.old=0;K.worse=0;S.kids=S.kids||[];const k={name:"Tiểu Lan",sex:"f",age:2,hp:30,alive:true,kIll:{t:-1,n:"sốt cao co giật"}};S.kids.push(k);
