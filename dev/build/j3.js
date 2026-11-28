@@ -240,7 +240,7 @@ function emperorDies(ev){if(ev)log(ev);let h=S.heir&&S.heir.k.alive?S.heir:null;
   if(roll(o))return over("Thái phi",pre+`${h.k.name} lên ngôi. Tân Thái hậu ${v.name} xét lại chuyện cũ (cơ may: ${word(o)}) rồi tha cho ngươi${pz?"; những việc ngươi lo liệu trước đã có người nhớ":""}, cho dời đến Thọ Khang cung.`,"Thành Thái phi",true);
   return die(`${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (cơ may: ${word(o)})${pz?", những việc ngươi lo liệu trước không đủ xoay chuyển":""}, ban lụa trắng, ép ngươi tuẫn táng theo tiên đế`)}
 /* the new Thái hậu's mercy base (one formula: j3 on the day + jttw warnings) */
-function j3SpareB(v){return BAL.odb.j3.odO+S.duc/2+v.rel/2}
+function j3SpareB(v,d){return BAL.odb.j3.odO+(d==null?S.duc:d)/2+v.rel/2}/* d = the Đức of the one at risk (her by default; jttw npcRiskA passes the NPC's, law 1 mirror) */
 function record(fate){const p=store.get("cung-kiep")||[];const e={n:S.name,o:S.origin.n,r:typeof lifeTopRank==="function"?lifeTopRank(S).n:RANKS[S.rank].n,age:S.age,f:fate+(S.st.tag?" · "+S.st.tag:"")};
   if(S.recorded&&p.length)p[0]=e;else p.unshift(e);S.recorded=true;store.set("cung-kiep",p.slice(0,12))}
 function die(why){over("Hồng nhan bạc mệnh",why+".",why)}
