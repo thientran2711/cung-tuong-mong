@@ -15,7 +15,7 @@ const KA_TIME=/^(?:[●○]+\s*)?(?:chờ\s+)?\d+(?:\s*[-–]\s*\d+)?\s*(khắc|
 const KA_STAT=/^(Bạc|Hồi môn|Sức|Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Ân tình|Thai)\s*-\s?\d/;
 const kaPlain=h=>String(h||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* sentiment of one value for her: g gain, r loss, n neutral word */
-const kaWord=h=>String(h).replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1");
+const kaWord=h=>String(h).replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${spSee("oan",+n)}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1");
 function kaSent(h,old){const s=kMk(kaPlain(h));if(!s)return"n";if(old!=="g"&&old!=="r"){const lo=s.match(/^(Áp lực hôn sự|Lời đồn)\s*([+−-])\s?\d/);if(lo)return lo[2]==="+"?"r":"g"}/* kit-cost-rows-home: pressure / rumour — less is better (j1 KLOW) */if(old==="g"||old==="r")return old; /* kit-rows-b KP12: the writer's explicit class g/r beats the word-meaning colouring */let c="n";try{c=kcls(String(h).replace(/<b>[^<]*<\/b>/g,"x"))}catch(e){} /* an unclassed <b>item name</b> never colours the row (e.g. "Son phần giáng") */
  /* sign wins: a value whose only number is negative is a loss for her (unless it is harm to a rival or less hostility) */
  if(c!=="r"&&/[-−]\s?\d/.test(s)&&!/\+\s?\d/.test(s)&&!/(^|\s)(nàng|con nàng|của nàng|hắn)(\s|$)/.test(s)&&!/(ghen|oán|thù|nghi)\s*[-−]/.test(s))c="r";return c}
@@ -41,7 +41,7 @@ function kaModel(html){const t=document.createElement("template");t.innerHTML=St
   afterOdds=false;push(n.outerHTML,"n")}};
  walk(t.content.childNodes);return M}
 /* read a raw line 'word · tốn: … · thành: … · hỏng: … · note' (segments keep whether they continue a label) */
-function kaModelStr(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1").trim();
+function kaModelStr(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${spSee("oan",+n)}`).replace(/thân -(\d+)/g,"quý ngươi -$1").replace(/thân \+(\d+)/g,"quý ngươi +$1").trim();
  const M={odds:"",oddsX:"",items:[]};let lab="",bl="";const segs=kSplitTop(str,/ · /y);
  for(const s0 of segs){const plain=kaPlain(s0);if(!plain)continue;
   if(!M.odds&&KA_ODDS.test(plain)){M.odds=plain;continue}

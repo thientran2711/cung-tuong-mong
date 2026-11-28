@@ -21,6 +21,9 @@ Object.assign(BAL,{promo:{
     Owner final OD 18/11 ~02:15Z + ~02:50Z (review/staff-cap-apply): Đáp ứng 1+0 · Thường tại 2+0 · Quý nhân 2+0 · Tần 2+1 ·
     Phi 3+1 · Quý phi 3+2 · Hoàng quý phi 4+2 · Hoàng hậu 5+2. Eunuchs start at Tần. */
  cap:[[1,0],[2,0],[2,0],[2,1],[3,1],[3,2],[4,2],[5,2]],
+ /* gap[r] = months a consort at rank r waits since her last decree before the next (j8 promoGap; was typed r<3?3:3+(r-2)*2 = [3,3,3,5,7,9,11,13]).
+    PACE-SPEED (owner OD 26/11 ~19:10Z (A): shorter at the seat-free low ranks ≤ Quý nhân; (D): the high ranks harder): */
+ gap:[2,2,3,4,6,8,10,12],/* high ranks [5,7,9,11] → [4,6,8,10] (MAIN 164 ruling 26/11 ~22:25Z: the gap was the #2 stall) */
  /* Nữ đế (j99succ path "c"): harem style, mostly cung nữ (owner OD 18/11 ~02:05Z + ~02:50Z: 5 + 3) */
  capNd:[5,3],
  /* Thái hậu's household (jstaff: her named women Giáo tập ma ma, Chưởng sự cô cô, Quản sự ma ma while the queen seat is empty) */

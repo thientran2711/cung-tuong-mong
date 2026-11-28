@@ -11,7 +11,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
 (async()=>{await new Promise(r=>srv.listen(0,'127.0.0.1',r));const b=await chromium.launch();const ctx=await D.newDeviceContext(b,'fold',{deviceScaleFactor:1,reducedMotion:'reduce'});
  await ctx.route(u=>!/^http:\/\/127\.0\.0\.1[:/]/.test(u.href)&&/^https?:/.test(u.href),r=>r.abort());const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));const cerr=[];p.on('console',m=>{if(m.type()==='error')cerr.push(m.text().slice(0,400))});
  const g=await D.openHost(p,'http://127.0.0.1:'+srv.address().port+'/',{timeout:120000});await g.waitForFunction(()=>window.__ctmBuilt===1&&typeof start==='function',null,{timeout:120000});
- const R=await g.evaluate(FIX=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start();['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});
+ const R=await g.evaluate(FIX=>{window.__sqoff=1;/* sideq-trim: content test, any asker */window.__forceOrigin='thd';/* a consort life: a random «cung nữ» start (cnv) is a servant life where Việc nhờ are off (q72On), ~1 run in 20 stuck at step 0 (SIDEQ-RACE) */SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start();['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});
   window.__bot=1;window.quiet=1;const out={built:Object.values(j72cCount()).reduce((a,b)=>a+b,0),builtN:(typeof J72SEEDS!=='undefined'?J72SEEDS.length:-1),seeds:[]};
   S.rank=Math.max(S.rank,3);S.bac=Math.max(S.bac||0,999);
   /* make every live consort carry every nết the fixture names, so the cast is real for the test; Thái hậu ill etc. only when a seed needs it */

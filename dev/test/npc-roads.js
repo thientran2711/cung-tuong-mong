@@ -43,11 +43,11 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||3,MON=+NM||240;
   chk(`life ${L+1}: long life walks some NPC road to its end`,MON<200||R.R.some(x=>x.x&&x.alive),R.R.map(x=>[x.r,x.l.length]))}
  await open();
  /* one help quest played to the end, each kind: title names person + road + chapter; ok → hb>0; bad → hb<0 */
- const H=await p.evaluate(()=>{quiet=true;window.__forceOrigin='muoi';start();quiet=false;Q.length=0;const out=[];
+ const H=await p.evaluate(()=>{window.__sqoff=1;/* sideq-trim: content test of the help quests, any asker (the rank gate has its own test, sideq-optscan) */quiet=true;window.__forceOrigin='muoi';start();quiet=false;Q.length=0;const out=[];
   const kinds=Object.keys(T72I).filter(t=>/^nr_/.test(t));for(const tid of kinds)for(const oi of [0,2]){
    const L=liveRivals(false);const v=L[0],w=L[1];if(!v||!w)return{err:'no rivals'};v.nr=null;nrInit(v);v.nr.c=w.id;S.bac=999;S.suc=90;used=0;
    const x=q72Make(T72I[tid],q72A('rv',v.id));if(!x)return{err:'make '+tid};x.bk='rv';x.bi=w.id;x.p={nr:v.nr.r,nn:v.nr.n};const q=q72();q.a.push(x);const X=q72X(x);
-   const title=plain(q72Title(X));let tries=0;while(q.a.includes(x)&&tries++<12){used=0;S.suc=90;q72Do(x.u,oi)}
+   const title=plain(q72Title(X));let tries=0;while(q.a.includes(x)&&tries++<12){used=0;S.suc=90;Q.length=0;/* an NPC popup (jagent) must not block the step */q72Do(x.u,oi)}
    out.push({tid,oi,title,hb:v.nr.hb,hs:v.nr.hs,done:!q.a.includes(x),hist:q.h[0]&&q.h[0].res})}
   /* gain-and-loss scan (OD:L582/L266): every option costs something and names a real loss; no option without effect */
   const scan=[];for(const tid of kinds)for(const st of T72I[tid].s)for(const o of(st.ch||[])){const c=Object.keys(o.c||{}).filter(k=>o.c[k]);const loss=Object.keys(o.l||{}).length||o.lx||o.to==='bad';if(!c.length||!loss)scan.push(tid+' «'+o.n+'»')}

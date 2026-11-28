@@ -28,7 +28,7 @@ Object.assign(BAL,{stip:{
 /* ---------- the items (art: dev/art/ITEM_ART.md §3, 16 icons gpt-2-6) ---------- */
 (function(){const N={
  vaibong:{n:"Vải bông",kd:"Vải vóc",d:`May áo thường: Sắc ${balSg(BAL.itFx.vaibong.dr)} trong 3 tháng · tặng, bán được`,pr:8,rk:0,dr:BAL.itFx.vaibong.dr,tg:["rv"]},
- vaitho:{n:"Vải thô (hàng kém)",kd:"Vải vóc",d:`Hàng kém Nội vụ phủ phát: may áo cho cung nữ thân tín, thiện cảm ${balSg(BAL.eff.jstip.maidUse)}`,pr:2,use:{maid:BAL.eff.jstip.maidUse},tg:[]},
+ vaitho:{n:"Vải thô (hàng kém)",kd:"Vải vóc",d:`Hàng kém Nội vụ phủ phát: may áo cho cung nữ thân tín, thiện cảm ${balSg(spSee("rel",BAL.eff.jstip.maidUse))}`,pr:2,use:{maid:BAL.eff.jstip.maidUse},tg:[]},
  tragoi:{n:"Trà Long Tĩnh",kd:"Trà",d:`Pha mời phi tần đến chơi: {host} · uống: Sức ${balSg(BAL.eff.jstip.sucUse)} · tặng được`,pr:6,use:{suc:BAL.eff.jstip.sucUse},host:3,tg:["rv","th"]},
  trahop:{n:"Trà Quân Sơn ngân châm",kd:"Trà",d:`Trà thượng hạng: mời khách {host} · uống: Sức ${balSg(BAL.eff.jstip.sucUse_2)}, Đức ${balSg(BAL.eff.jstip.ducUse)} · tặng Thái hậu, Hoàng thượng`,pr:25,use:{suc:BAL.eff.jstip.sucUse_2,duc:BAL.eff.jstip.ducUse},host:5,gv:4,tg:["rv","th","emp","hh"]},
  tramoc:{n:"Trà mốc (hàng kém)",kd:"Trà",d:`Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê ({host}) · uống: Sức ${balSg(BAL.eff.jstip.sucUse_3)}`,pr:0,use:{suc:BAL.eff.jstip.sucUse_3},host:-2,tg:[]},

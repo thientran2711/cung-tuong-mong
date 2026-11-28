@@ -32,10 +32,10 @@ function thcSet(p,s,o){/* o.paid: the uniform was already paid by the caller's o
  if(s&&cur===s)return "";
  if(s&&(thcWhyNot(p,s,o)||thcRef(p,s)==null))return "";/* r1: an ineligible pick (state moved since the card was drawn, e.g. a co-op intent landing late) changes nothing — never steps the current one down */
  if(cur){/* the one stepping down: her lòng drops, the others' envy eases */cur.loyal=cl((cur.loyal||0)+B.drop.loy,0,100);for(const e of H)if(e.s!==cur&&e.s!==s)e.s.loyal=cl((e.s.loyal||0)+B.drop.calm,0,100);delete p.thc;
-  r=me?`${cur.name} thôi làm cung nữ thân cận: nàng: thiện cảm ${balSg(B.drop.loy)}; cung nữ khác: thiện cảm ${balSg(B.drop.calm)}.`:`${p.name} cho ${cur.name} thôi làm cung nữ thân cận.`}
+  r=me?`${cur.name} thôi làm cung nữ thân cận: nàng: thiện cảm ${balSg(spSee("rel",B.drop.loy))}; cung nữ khác: thiện cảm ${balSg(spSee("rel",B.drop.calm))}.`:`${p.name} cho ${cur.name} thôi làm cung nữ thân cận.`}
  if(s){const id=thcRef(p,s);if(!(o&&o.paid))thcPay(p,{bac:-B.pick.bac});s.loyal=cl((s.loyal||0)+B.pick.loy,0,100);
   for(const e of H)if(e.s!==s&&e.s!==cur)e.s.loyal=cl((e.s.loyal||0)-B.pick.envy,0,100);p.thc=id;s.thcAt=S?S.turn||0:0;
-  const t=me?`Chọn ${s.name} làm cung nữ thân cận, may y phục thân cận riêng của cung ngươi (Bạc ${balSg(-B.pick.bac)}): nàng: thiện cảm ${balSg(B.pick.loy)}; cung nữ khác ghen: thiện cảm ${balSg(-B.pick.envy)}.`
+  const t=me?`Chọn ${s.name} làm cung nữ thân cận, may y phục thân cận riêng của cung ngươi (Bạc ${balSg(-B.pick.bac)}): nàng: thiện cảm ${balSg(spSee("rel",B.pick.loy))}; cung nữ khác ghen: thiện cảm ${balSg(spSee("rel",-B.pick.envy))}.`
    :`${p===S.thO?"Thái hậu":p.name} chọn ${s.name} làm cung nữ thân cận.`;r=r?r+" "+t:t}
  try{if(typeof J95S==="object")J95S.last=null}catch(e){}/* the record re-reads the close one */
  return r}
@@ -45,9 +45,9 @@ function thcPick(k,on){if(!S||S.dead||(typeof Q!=="undefined"&&Q.length))return 
 /* the kit person-card group (j15 pcard groups) for one of her maids */
 function thcGroups(s){try{if(!S||!s||S.dead)return[];const p=S;const isM=s===p.maid;if(!isM&&s.role!=="maid")return[];if(typeof isSrv==="function"&&isSrv())return[];
  const B=thcB(),k=isM?"m:"+s.name:s.sid,cur=thcOf(p);const ka=`data-thcp="${k}"`;
- if(cur===s)return [["Thân cận",[pbtn(`${ka} data-thcon="0"`,"Thôi làm cung nữ thân cận",`nàng: thiện cảm ${balSg(B.drop.loy)} · cung nữ khác: thiện cảm ${balSg(B.drop.calm)}`,"")]]];
+ if(cur===s)return [["Thân cận",[pbtn(`${ka} data-thcon="0"`,"Thôi làm cung nữ thân cận",`nàng: thiện cảm ${balSg(spSee("rel",B.drop.loy))} · cung nữ khác: thiện cảm ${balSg(spSee("rel",B.drop.calm))}`,"")]]];
  const why=thcWhyNot(p,s);
- return [["Thân cận",[pbtn(`${ka} data-thcon="1"`,"Chọn làm cung nữ thân cận",`Bạc ${balSg(-B.pick.bac)} · nàng: thiện cảm ${balSg(B.pick.loy)} · cung nữ khác ghen: thiện cảm ${balSg(-B.pick.envy)}${cur?` · thay ${cur.name}`:""}`,why)]]]}catch(e){return[]}}
+ return [["Thân cận",[pbtn(`${ka} data-thcon="1"`,"Chọn làm cung nữ thân cận",`tốn: Bạc ${balSg(-B.pick.bac)} · thành: <span class="g">nàng thành cung nữ thân cận của ngươi</span> · nàng: thiện cảm ${balSg(spSee("rel",B.pick.loy))} · cung nữ khác ghen: thiện cảm ${balSg(spSee("rel",-B.pick.envy))}${cur?` · thay ${cur.name}`:""}`,why)]]]}catch(e){return[]}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("button[data-thcp]");if(!b||b.disabled)return;const k0=b.dataset.thcp;const k=/^m:/.test(k0)?k0:+k0;
  thcPick(k,b.dataset.thcon==="1"?1:0)});
 /* NPC masters (every living consort, Hoàng hậu, Thái hậu): once a month by their own reasons — the most loyal trusted maid at npc.p odds when none;

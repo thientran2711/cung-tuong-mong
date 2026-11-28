@@ -163,7 +163,7 @@ function moodMonth(){const E=S.emp;let L=[[0,"Được mùa khắp nơi, Hoàng 
 PEND.vase=p=>({who:pMaid(),t:`${S.maid.name} lỡ tay đánh vỡ chén ngọc Hoàng hậu ban. Thái giám Càn Ninh cung đến bắt người.${p&&p.y?`<br>Hoàng hậu ${p.y}, chẳng chịu bỏ qua.`:""}`,o:[
     {n:"Nhận tội thay nàng",fx:{...BAL.cv.vase.take}},{n:"Để nàng chịu đòn",fx:{...BAL.cv.vase.leave},x:"thành: Hoàng hậu không trách đến ngươi · kèm: nàng bị đánh hai mươi trượng"}]});
 PEND.coldletter=p=>{const f=RV(p.f),v=p.v==null?null:RV(p.v);if(!f)return null;return{who:pv(f),t:`${f.name} từ lãnh cung lén gửi thư, xin chút bạc chạy thuốc${p.y?` (nàng ${p.y})`:""}.`,o:[
-    {n:"Giúp nàng",fx:{bac:-BAL.cv.coldAid,duc:BAL.cv.coldL.duc},x:v?`${v.name} nghe chuyện, mến ngươi hơn (thiện cảm ${balSg(BAL.cv.coldL.rel)})`:"",go:()=>{if(v)spAdd(v,"rel",BAL.cv.coldL.rel)}},{n:"Làm ngơ",fx:{...BAL.cv.coldL.ign},x:`thành: giữ lại ${BAL.cv.coldAid} lượng bạc`}]}};
+    {n:"Giúp nàng",fx:{bac:-BAL.cv.coldAid,duc:BAL.cv.coldL.duc},x:v?`${v.name} nghe chuyện, mến ngươi hơn (thiện cảm ${balSg(spSee("rel",BAL.cv.coldL.rel))})`:"",go:()=>{if(v)spAdd(v,"rel",BAL.cv.coldL.rel)}},{n:"Làm ngơ",fx:{...BAL.cv.coldL.ign},x:`thành: giữ lại ${BAL.cv.coldAid} lượng bạc`}]}};
 PEND.embezzle=p=>{const q=rivals[0];return{who:pEunOf(q),t:`Một thái giám lén mang đến sổ sách chứng Hoàng hậu ${q.name} biển thủ bạc nội khố, đòi 80 lượng.${p&&p.y?`<br>(Hoàng hậu ${p.y}.)`:""}`,o:[
     {n:"Mua lấy",fx:{bac:-80},x:`chứng cứ Hoàng hậu ${balSg(BAL.eff.j3.evGo)}`,go:()=>{evStory(q,BAL.eff.j3.evGo,"biển thủ bạc nội khố")}},{n:"Đuổi hắn đi",fx:{}}]}};
 PEND.tuyen=p=>({who:pEmp(),t:"Hoàng thượng hỏi ý ngươi: năm nay nên tuyển thêm tú nữ hay không."+(p&&p.y?`<br>(Ngài thấy ${p.y}.)`:""),o:[
@@ -191,7 +191,7 @@ function makeDil(){if(!npwOn())return null;const D=BAL.ag.why.dil,O=[];
 /* the turn */
 function endTurn(){
   if(S.dead||Q.length||S.mg)return;S.buoi=0;const qStart=Q.length;let ev=resolveTonight();const lsB=typeof lsSnap==="function"?lsSnap():null;
-  S.sung=cl(S.sung-((has("lanhlung")&&S.tuan===1)||(S.rank>=7&&S.tuan!==0)?0:1),0,100);
+  S.sung=cl(S.sung-((has("lanhlung")&&S.tuan===1)||(S.rank>=7&&S.tuan!==0)?0:BAL.fade.sung.wk),0,100);/* BAL.fade.sung.wk 0: the monthly neglect fade (jstatpace spFadeMonth) replaces the weekly −1 (owner OD 26/11 ~23:47Z) */
   const rg=nightRg();S.suc=cl(S.suc+rg,0,sucCap(S));if(worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,sucCap(v)));if(S.tablet)S.tablet--;if(worldOn())liveRivals(true).forEach(v=>{if(v.tablet)v.tablet--});/* NPC ticks: host only (worldOn, jcoopworld) */
   if(lsB)lsNote(lsB,{sung:"ân sủng nhạt dần",suc:"nghỉ ngơi qua tuần"},true)/* Sức: dropped again when folded into j76 "Ngủ một đêm: Sức +N", which already counts this +4 */;
   ev+=rivalsTurn();if(S.dead)return;
@@ -220,7 +220,7 @@ function monthTick(){let ev="";
   if(S.month>12){S.month=1;S.year++;S.age++;S.emp.age++;if(typeof ageYear==="function")ageYear();allKids().forEach(([k])=>{if(k.alive)k.age++});
     if(S.heir&&!S.heir.v&&S.heir.k.alive){apply({danh:BAL.eff.j3.danhMonthTick});ev+=`Ngươi là mẹ Thái tử, danh vọng thêm cao. Danh ${balSg(BAL.eff.j3.danhMonthTick)}. `}
     if(S.age>BAL.age.sacFrom){S.sac=Math.max(BAL.age.sacMin,S.sac-BAL.age.sacLoss);ev+=`Năm mới, ngươi ${S.age} tuổi; nhan sắc phai dần (Sắc ${S.sac}). `}}
-  if(S.age>=40&&S.rank<7&&!mySons().length){over("Lãnh cung","Tuổi xuân qua đi, sống cô quạnh nơi thâm cung.","Tuổi xuân qua đi",true);return ev}
+  /* owner OD 26/11 ~21:30Z «Đời tôi chỉ kết thúc khi hoàng thượng đưa ra quyết định, hoặc đời ổng kết thế nào hoặc tôi quyết định thôi» + ~21:40Z «Giữ bệnh, độc, ám sát»: the age-40 «Tuổi xuân qua đi» end is removed (no age-based end for her; old saves: no forced end). Illness / poison / assassination stay. */
   if(typeof mortEmpDue==="function"?mortEmpDue():S.year>12&&roll((S.year-12)*1.5+Math.max(0,S.emp.age-50)*.5)){emperorDies(ev);return ev}
   ev+=moodMonth();
   if(S.month===1)ev+=festival("Yến tiệc đầu xuân","sac","Sắc và điệu múa");
