@@ -195,7 +195,7 @@ function endTurn(){
   const rg=nightRg();S.suc=cl(S.suc+rg,0,sucCap(S));if(worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,sucCap(v)));if(S.tablet)S.tablet--;if(worldOn())liveRivals(true).forEach(v=>{if(v.tablet)v.tablet--});/* NPC ticks: host only (worldOn, jcoopworld) */
   if(lsB)lsNote(lsB,{sung:"ân sủng nhạt dần",suc:"nghỉ ngơi qua tuần"},true)/* Sức: dropped again when folded into j76 "Ngủ một đêm: Sức +N", which already counts this +4 */;
   ev+=rivalsTurn();if(S.dead)return;
-  if(S.suc<=0)return die("Bệnh nặng, không qua khỏi");
+  if(typeof kietDue==="function")kietDue();if(S.suc<=0&&!(typeof kietSave==="function"&&kietSave()))return die("Bệnh nặng, không qua khỏi");/* tuantang-warn r2 Q3: «Sắp kiệt sức» first (jsign) */
   if(S.tuan===2){ev+=monthTick();if(S.dead)return}else S.tuan++;
   if(Q.length===qStart&&wk()>=(S.dilW||0)){const d=makeDil();if(d){pushDil(d);S.dilW=wk()+BAL.ag.why.dil.gap}}/* npc-purpose G1: no weekly die; a card when someone has a reason (makeDil → npwPick), at most every dil.gap tuần */
   rollWx();S.place="home";placeWhere();if(S.out)coldVisit();else S.visit={k:"home",people:homePeople(),talked:false};used=0;popIdx=null;popMsg="";
@@ -236,9 +236,11 @@ function emperorDies(ev){if(ev)log(ev);let h=S.heir&&S.heir.k.alive?S.heir:null;
   const v=h.v,live=v.alive&&!v.out;
   if(S.rank>=7)return over("Mẫu hậu Hoàng thái hậu",pre+`${h.k.name}, con của ${v.name}, lên ngôi. Ngươi là đích mẫu, được tôn làm Mẫu hậu Hoàng thái hậu${live?`; nhưng ${v.name} cũng được tôn Thánh mẫu, cùng ngươi chia đôi hậu cung`:""}.`,"Thành Thái hậu (đích mẫu)",true);
   if(!live)return over("Thái phi",pre+`${h.k.name} lên ngôi. Mẹ ruột tân đế đã không còn, không ai truy cứu chuyện cũ. Ngươi thành Thái phi.`,"Thành Thái phi",true);
-  const o=od(BAL.odb.j3.odO+S.duc/2+v.rel/2);
-  if(roll(o))return over("Thái phi",pre+`${h.k.name} lên ngôi. Tân Thái hậu ${v.name} xét lại chuyện cũ (cơ may: ${word(o)}) rồi tha cho ngươi, cho dời đến Thọ Khang cung.`,"Thành Thái phi",true);
-  return die(`${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (cơ may: ${word(o)}), ban lụa trắng, ép ngươi tuẫn táng theo tiên đế`)}
+  const pz=typeof ttwPz==="function"?ttwPz():0;const o=od(j3SpareB(v)+pz);/* TUANTANG-WARN: + the roads she took (jttw) */
+  if(roll(o))return over("Thái phi",pre+`${h.k.name} lên ngôi. Tân Thái hậu ${v.name} xét lại chuyện cũ (cơ may: ${word(o)}) rồi tha cho ngươi${pz?"; những việc ngươi lo liệu trước đã có người nhớ":""}, cho dời đến Thọ Khang cung.`,"Thành Thái phi",true);
+  return die(`${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (cơ may: ${word(o)})${pz?", những việc ngươi lo liệu trước không đủ xoay chuyển":""}, ban lụa trắng, ép ngươi tuẫn táng theo tiên đế`)}
+/* the new Thái hậu's mercy base (one formula: j3 on the day + jttw warnings) */
+function j3SpareB(v){return BAL.odb.j3.odO+S.duc/2+v.rel/2}
 function record(fate){const p=store.get("cung-kiep")||[];const e={n:S.name,o:S.origin.n,r:typeof lifeTopRank==="function"?lifeTopRank(S).n:RANKS[S.rank].n,age:S.age,f:fate+(S.st.tag?" · "+S.st.tag:"")};
   if(S.recorded&&p.length)p[0]=e;else p.unshift(e);S.recorded=true;store.set("cung-kiep",p.slice(0,12))}
 function die(why){over("Hồng nhan bạc mệnh",why+".",why)}
