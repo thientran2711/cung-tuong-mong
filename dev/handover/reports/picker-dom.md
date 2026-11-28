@@ -225,3 +225,12 @@ r6 TODO (in order):
 4. Videos (GRID=1 and ring) → img/_review/picker-dom/, cdn_sync, curl 206, look.
 5. «SẴN SÀNG KIỂM <sha>» here + FOREMAN_D_STATUS.md; send_message the sha to KK63 session_01Rc5AsJdLpzqwAuGx1Gycwg (KIT OK), Foreman D session_01D3E3NWw6WAa9Cp9Qzux6pF and BIG rv session_01D3E3NYyRD1VLRz6WpXYyyZ. If LIVE moves, merge it first.
 Tools (container-local, lost on rollover; recreate if needed): timeline probe tl.js (= picker-dom-frames.js logic + kitDlgText instrumentation), LIVE tree = sparse worktree of origin/main + assemble.py.
+
+## r6 — worker session_01D3E3NbX23GuX6C2mFqFqxL (depth 7, START_CTX ~3 % (get_session reads 0; own estimate)) — WIP
+PRIORITY #1 CHECK: KK63 K-PICK-SHORT RULING (a) (FOREMAN_D_STATUS 27/11 23:45Z) + Foreman D order 28/11 03:03Z | main LIVE 18003079 (in branch) | review/picker-dom · trial review/picker-dom-kk63 · review/kk63 8df18700 | claims PICKER-DOM (Foreman D NWw6WAa9; BIG rv now session_01D3E3NaYpAhzstiZfX5vPJ8; KK63 Rc5AsJdL)
+KIT CHECK: reuses kitRingItem §104.4, kipList / kipSelect (28.13i), §23 pager, kitItem qty, kitLockWhy, jk4 kitDlgText (.kdtx), jksize live frame; dev/kit/KIT_CHECKLIST.md.
+- BUILT K-PICK-SHORT (a) @d1410753: jk4 `kitOptNeed` (row + pager + sticky confirm) → `kitDlgText` step 1 = no big scene picture (`.kpsubj.kpiart` / `.kdlgart` hidden, `.dlg.kdnopic`), step 2 = text cap leaves the box row + pager; jksize live frame (`.k3ev`) via `kitPickStep3` after every lay + after the §56.6 picture step; stepped state kept per dialog + screen size (KIT_PSTEP; first try flip-flopped 21 repicks — fixed); scroll cue «Kéo xuống» lifted above the sticky confirm + pager, full width (`kipCueLift`; it covered «Chọn» on Fold LIVE too). KIT.md 28.13i line + KIT_REQUESTS K-PICK-SHORT row rewritten in place.
+- Scan dev/test/pick-short-scan.js (Fold + iPad; s7 chest 5 / full + y05; 8 pickers): LIVE 18003079 FAIL 17/38 → branch PASS 38/38 (Dâng quà vua / Thái hậu stepped everywhere; Biếu quà iPad stepped; others = LIVE's frame).
+- 4e6182a9: kipRowsFit kept LIVE-position rule (a whole-column «gtop» try made plantpick draw 2 rows with the pager over row 2 → reverted); frames gate: stepped frame allowed only where LIVE's row is not whole + clear of sticky bars.
+- Trial merge review/picker-dom-kk63 3097d975 (on d1410753; redo on final sha): jkring-item = kk62 trial resolution (both sides unchanged), jk4 + KK61 --kdroom on every cap, jgpick KK62 --kipgoh + cue lift.
+- NEXT: frames gate (running), picker-dom.js, ring, kit-std, quickcheck, coop-e2e, trial redo + kit-pick-go, videos, SSK.
