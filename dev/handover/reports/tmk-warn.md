@@ -218,3 +218,25 @@ Probe of every talk option in 9 places over 4 days (witness stub on): a red loss
 «Cài người vào cung khác» (Bạc −−, jagacts2 plantSrv / j10), «Phạt vô cớ» (thiện cảm −−−, Đức −−, kẻ hầu khác thiện cảm −−; jhouse.js:46),
 «Đề bạt lên …» (lót tay thì Bạc −−; jaudit.js:59), «Mua chuộc» NPC servant (Bạc −−; jagacts2 bribeSrv / j29). Same X01 class; the gate scan
 does not reach them today. Owner of those files / KK to move them (Kèm/Tốn by when the loss lands).
+
+### HANDOVER TMK-WARN-4 → TMK-WARN-5 (28/11 ~12:00Z; rolled by CONTEXT 26.4 % ≥ START ~2 % + 25 %; MAIN 189 opens the successor)
+- STATE: review/tmk-warn-r4 **1042c551** (pushed; everything above). RV-189 session_01Rc5AsKweT3LtMsrkLNmDbV = **FAIL, 1 item**
+  (reports/rv-189.md aecafb98 on the handover branch). Gates all PASS there (X01 0 Fold + iPad, tests green).
+- FAIL ITEM: the OPENED «Xử nhân chứng» door card (3 tier plaques; PEND.door, jcover.js just after the DOOR.add line) reads each row from
+  **covHint(x,id)** → o.hint (jk2b kitHint «được; nhưng …; hỏng thì …»), NOT from x. Today every tier's Đức sits in BẠI there: nhẹ/nặng Đức lands
+  either way (deed hook on deedAdd, before the roll branch), vừa Đức + bạc land only on success. Same on LIVE, but it is the wit door's own card.
+- TODO (in order):
+  1. Rewrite covHint (no numbers changed; use the same covB() / covWitBac / covTier values as covWitOpts): either-way Đức → the Kèm part;
+     vừa: Đức + Bạc (covWitBac) with the success; Bại = only what failure adds (nhẹ: X càng ghét ta; vừa: X từ chối, không mất bạc;
+     nặng: Danh (covB().danh[covTier("wkill")]), X biết kẻ chủ mưu). Check how kitHint/jdoor plaques split «được; nhưng …; hỏng thì …» into rows
+     (jk2b kitHint ~l.304, jdoor DOOR.rowsJ2) — the plaque rows must show Thành green only, Kèm the either-way Đức, Bại the failure.
+  2. Add a test (e.g. dev/test/tmk-warn-witcard.js, or a block in tmk-warn.test.js) that opens PEND.door({k:"wit",…}) for a witness (stub
+     covSaw=()=>[1] as my probes did) and reads the plaque rows of all 3 tiers: no red in Thành, Đức in Kèm (nhẹ/nặng), Bạc+Đức with success (vừa).
+  3. Merge LIVE **7d7c6886** (RV-189: built files only), rebuild with `bash dev/site/build_site.sh`.
+  4. Rerun: kit-std-scan gate mode Fold + iPad (`SZ='[[1180,820]]' SUBS=0 REPORT_ONLY=1`; baseline = LIVE's count), tmk-warn.test, tmk-warn-scan,
+     tai-mat-know, webkit-syntax, kit-hand-dupmat, MODGATE, 0 LIVE deletions.
+  5. Stills Fold 755x1000 + iPad 1180x820 of the OPENED wit door card (3 plaques), LOOK at them. RV READY <sha> → RV-189; one line → MAIN 189.
+- Helper probes (scratch, gone with my container; easy to rebuild): boot like dev/test/kit-std-scan.js runner, `covSaw=()=>[1]`, click the maid
+  token, buttons matching /(Đe dọa bịt miệng|Mua chuộc nhân chứng|Thủ tiêu nhân chứng)/; take card via kitHandLift on the hand button
+  (kit-hand-rows.js clicks a hidden kopt and never opens it).
+- Takeover prompt MUST copy the ROLLOVER lines verbatim (owner OD:L1217) and the LINEAGE line («first STATUS line states depth …»).
