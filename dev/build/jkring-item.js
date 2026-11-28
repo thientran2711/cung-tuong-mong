@@ -183,6 +183,12 @@ function kriPending(r,away0,promise){try{if(!r||typeof r!=="object"||!Array.isAr
  r.ok=null;const du=r.rows.find(x=>x.k==="duoc");if(du&&!(du.items||[]).length&&promise.length)du.items=promise.map(x=>r.who?x.replace(/^nàng → ta/,kriE(r.who)+" → ta"):x);
  const W=N.map(a=>`${kriE(a.nm)} đã ${/^đi /.test(a.lbl||"")?kriE(a.lbl):"đi "+kriE(a.lbl||"làm việc")}, về ${typeof ptWhen==="function"?ptWhen(a.due):"sau"}; phần Được đến khi việc xong.`);
  let no=r.rows.find(x=>x.k==="note");if(!no){no={k:"note",label:"Ghi chú",items:[]};r.rows.push(no)}no.items=W.concat((no.items||[]).filter(x=>!/^Tặng quà:/.test(x)))}catch(e){console.error("kri pending",e)}return r}
+/* K-GIFT-OUT (KK64): the piece's own name (the ring tile name, as the log lines name it; escaped like kriLogSince lines) and the act's real outcome:
+   take → THÀNH · sent (to her: she answers later) → KẾT QUẢ · back / refused / found / caught → BẠI; plantpick: plantItem.out ok / caught;
+   tsgiftpick also fails when the receiver keeps her heart closed (the same outcomes); no outcome recorded (a work piece wkGive, an act that is not a gift) → the old reading of its OWN lines */
+function kriBaseName(it){try{if(it&&it.name)return kriE(String(it.name).replace(/<[^>]+>/g,"").trim());/* the ring tile name = the piece's own name (a handmade work: its title, never the kind «Tác phẩm tự tay») */const e=it&&it.ref&&it.ref.e;return e?kriE(((typeof itm==="function"?itm(e.k):IT[e.k])||{}).n||""):""}catch(x){return""}}
+function kriGiftOk(pid,L){const o=pid==="plantpick"?(typeof plantItem==="function"?plantItem.out:null):(typeof giveTo==="function"?giveTo.out:null);
+ if(o==="take"||o==="ok")return true;if(o==="sent")return null;if(o)return false;return !L.some(x=>/phát hiện|trả lại|từ chối|không nhận|— bại —|không thành|bị bắt/.test(x))}
 function kriLogMark(){try{return S.logSeq||0}catch(e){return 0}}
 function kriLogSince(n){try{const nw=Math.min(6,(S.logSeq||0)-n);if(nw<=0)return[];const P=typeof plain==="function"?plain:(x=>String(x).replace(/<[^>]+>/g,""));
   return S.logs.slice(0,nw).reverse().map(x=>kriE(P(String(x).replace(/<span class="ld">[^<]*<\/span>/,"")).trim())).filter(Boolean)}catch(e){return[]}}
@@ -221,9 +227,11 @@ function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kip
    return L.filter(([c])=>S.inv[c.ik]).map(([c,i])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);const s=sg(c);return{id:i,src:I.src,name:I.name,grade:I.grade,qty:s?QN.get(s)||1:1,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}})},
   /* info = the item's kit detail + the option's own kit card (odds · Tốn · Được · Mất · Kèm) — the same display copy as the old grid detail (kipDetail) */
   info:it=>{try{kipSelect(M,m,it.i);const d=M.querySelector(".kipd");if(d){const c=d.cloneNode(true);c.querySelectorAll(".kipgo").forEach(x=>x.remove());c.classList.remove("kipd");return c.innerHTML}}catch(e){}return""},
-  acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{if(!Q[0]||Q[0].pid!==m.pid)return"close";/* the picker is no longer the open dialog */const b=optB(it.i);if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark();window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
+  acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{if(!Q[0]||Q[0].pid!==m.pid)return"close";/* the picker is no longer the open dialog */const b=optB(it.i);if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark(),bn=kriBaseName(it);giveTo.out=null;if(typeof plantItem==="function")plantItem.out=null;window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
    M.classList.remove("kri-hide");KRI_DLG=null;/* a follow-up dialog of the act → the ring steps aside for it */if(Q.length&&!$("modal").hidden){return"close"}
-   const L=kriLogSince(l0),bad=L.some(x=>/phát hiện|trả lại|từ chối|không nhận|— bại —|không thành/.test(x))/* KIT-KRI-XL: a gift whose roll failed («— bại —», «Lễ làm lành không thành») is never sealed THÀNH */;return{ok:!bad,who,title:`${verb} ${it.name}${who?" · "+who:""}`,rows:kriDiffRows(a,V,who).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}],
+   /* K-GIFT-OUT (KK64, KIT-KRI-XL leftover 2): the seal comes from what really became of the piece (giveTo.out / plantItem.out), never from log words —
+      a world line written in the same tick («… phát hiện …», «… không thành …» of someone else) sealed a kept gift BẠI. Ghi chú = only the lines about THIS piece. */
+   const L=kriLogSince(l0).filter(x=>!bn||x.includes(bn)),ok=kriGiftOk(m.pid,L);return{ok,who,title:`${verb} ${it.name}${who?" · "+who:""}`,rows:kriDiffRows(a,V,who).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}],
   onClose:()=>{M.classList.remove("kri-hide");if(KRI_DLG===m&&Q[0]===m&&!M.hidden){KRI_DLG=null;const x=M.querySelector(".kit-x");if(x)x.click();else if(typeof closeModal==="function")closeModal()}KRI_DLG=null}})}
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{if(kriOn())kriGiftOpen()}catch(e){console.error("kri gift",e)}return r}})();
 /* the carried-gift flight of the old grid points at a hidden dialog: with the ring its result shows in place instead */
