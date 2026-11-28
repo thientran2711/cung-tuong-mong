@@ -110,3 +110,33 @@ Static v2 MERGE (9 rows): 8 KEEP with reason + d_thi FOLD — marked in reports/
 
 FOR MAIN (via FOREMAN E): (1) B18 (Hắt nước / Hắt trà / Quạt mực / Tát / Phạt quỳ in-person group, jdf.js), B19 (Cầu tự j2.js:48 + Bài thuốc dễ thụ thai j2.js:182), B34 (Hầu việc door, 9 tasks, jdoor5.js:14), B39 (Chăm sóc j25.js:49 + Về tẩm cung thăm con j15.js:62) are STILL separate on LIVE aecbc267 → DOOR-ONETAP / KIT-STAGE owner. (2) Law 4: all 91 E68 c6 events (incl. C57 sickServant) and j71 newyear «Lễ mọn» (bac −10) / «Tự tay làm» (Sức −10) carry typed numbers, not BAL keys — a family job for the one-core owner (law 11), not a spot fix here.
 Next (batch 3b, separate RV, only if context allows): C45 night prep, C46 night talk, C48 pmLad/FX7, C53 vlget — first git grep origin/review/* night branches for the same lines.
+
+## BATCH 3b — C45 / C46 / C48 / C53 (E-TIER-B13c) → review/e-tier-b13 e3c1f982 (new commits after 31f91836, which is under E-TIER-B13-RV3)
+PRIORITY #1 CHECK ('PEND.prep|night1|vnight|pmLad|j71x|vlget'): OD 27/11 ~00:46Z–~01:14Z read verbatim | LIVE aecbc267 → 7d7c6886 | review/*: 76 night/visit/veil/contest branches fetched (depth 1) — the 28/11 tips (kk70-handdupmat, kit-screenveil-rv179/lrm6) hold the SAME lines as LIVE for PEND.prep / night1 / vnight / pmLad / vlget; older tips are stale → no conflict | claims: E-TIER-B13c.
+KIT CHECK: kit event frame + kit option cards (kitRiskOpt odds word) only; no UI part added.
+Rulings: FOREMAN E C11 10:25Z (3b scope, new keys under BAL.tier.*) + 11:43Z (C45 option-1 shape, jewellery = a state added on every tier; C46 / C48 / C53 agreed).
+Commits: 1e88084d (C46 + C48 + gate tier-b13-b3b + emotion-acts-2 follows the one-tap card) · e3c1f982 (C45 + BAL.tier.prep + NPC parity).
+| set | before | after | numbers |
+|---|---|---|---|
+| C46 night talk j8 PEND.night1 (+ jvisit vnight) | 4 free topics (Bàn thơ văn · Bàn chuyện thiên hạ · Rót rượu · Lặng lẽ xoa vai), fit by his traits | ONE «Hầu chuyện»: the topic with the best grade od (read after jemoact / jwhyn / j75 wrappers, installed last on the next tick; a locked topic is never picked), odds word = that topic's, log «Hầu chuyện: <topic>.» | unchanged (night q + fit + mood + luck). NPC nights unchanged: she could always read the fit and pick the best |
+| C48 feast contest invitation j71 PEND.j71x (Yến tiệc đầu xuân / Thi tài Thất tịch) | Ghi tên dâng <art> ×3 · (mời thầy kèm, bạc) · Không dự | ONE «Ghi tên dâng <best art>» (better fxOdds7, tie fxBest7) · «… mời thầy kèm» (only when it lifts the word, as before) · Không dự | unchanged. pmLad (Bảng tài nghệ) is already a view card on LIVE — nothing to do |
+| C45 night prep j75 PEND.prep | 5 ways: Tắm (bạc 15, q3) · Điểm trang (bạc 5, q2) · Đeo trang sức (free, 1+jb) · Tập trước <art> (Sức 5, odds) · Để mộc (Sức +, q1) — typed 15 / 5 / 5 | NHẸ Để mộc (Sức +, q1) · VỪA Điểm trang (bạc 5, q2) + its Sức road Tập trước <art> (Sức 5, odds) · NẶNG Tắm (bạc 15, q3); worn jewellery = a state: +jb on EVERY way, shown on each («trang sức đang đeo: được ưa +jb»), over-rank risk on each | NEW-KEY BAL.tier.prep {bac:[0,5,15], q:[1,2,3], suc:5} (jbal.js) — rationale: one ladder for her card and every NPC night (law 1/4); a player without jewellery gets the old q exactly [1,2,2+lv,3] |
+| C45 NPC parity j75 rivalNight | q=1 / bạc npcMat 15 → q3 / Sức 5 art roll | same BAL.tier.prep ladder; + the jewellery that NPC really wears (wearBonus(v) reads her own chest, law 6c) | — |
+| C53 vlget | — | KEEP: Tự kết (Sức, craft) · NVP (bạc, sure, right grade) · Mua lén (cheap, Danh risk) · «Xin <X> ban» (person list) = different costs and results; vlnvp = catalogue (KEEP-CHOICE) | — |
+TICKET (law 6c, for MAIN/D): NPC jewellery exists only as far as an NPC's own `inv` holds worn pieces (wearBonus(v)); consorts with no `inv` get jb 0. If NPC wardrobes are thin, NPC nights stay slightly behind a jewellery-wearing player — a world-data gap, not built here.
+### Proof (3b)
+| check | result |
+|---|---|
+| tier-b13-b3b.js (new) | ALL PASS: night talk ×6 trait/mood cases → ONE «Hầu chuyện» = best fit, visit night the same, tap → night2 + log names the topic; j71x 3 arts → ONE + Không dự (≤3 ways); prep 5 → 4 ways, costs from BAL.tier.prep, q = old [1,2,2+lv,3] without jewellery, +3 on every way with Sắc+6 jewellery |
+| one-core-guard / one-core-text / time-spill | PASS (inline 3054 ≤ baseline 3592, fails 0) |
+| emotion-acts-2.js | pillow / plock now check the one-tap card; plock PASS; pillow / punish / oldsave / 1 more FAIL on the batch-3 base too (pre-existing, not this change) |
+| law 12 shots Fold + iPad (outside git) | night1: one «Hầu chuyện» · Rất vững · Tốn không; j71x: «Ghi tên dâng hát» · Mong manh + «Không dự»; looked 3× |
+| quickcheck e3c1f982 vs LIVE 7d7c6886 | see the FOR FOREMAN E line (running at handover) |
+
+## Handover 3 — ROLLOVER (E-TIER-B13c, context ≈ START 3 % + 25 %, 28/11 ~12:20Z)
+State: batch 3 = RV READY 31f91836 (E-TIER-B13-RV3 reviewing). Batch 3b C45/C46/C48/C53 DONE on e3c1f982 (not yet sent RV READY — successor sends it with the law-11 group or alone, as FOREMAN E says).
+Successor (same branch, new commits only, never rebase/force; base e3c1f982; branch is based on LIVE aecbc267 — LIVE is now 7d7c6886: merge LIVE in only if the foreman/reviewer asks):
+1. If E-TIER-B13-RV3 FAILs batch 3 → fix that first (new commits).
+2. LAW-11 GROUP (C11 12:53Z ruling, MAIN gave no owner): j7c.js (header :3 «4 stances of equal gain/loss steps», BAL.j7c.fx), j68c.js (:3/:8 «4 equal-value stances, Σgain == Σloss == tier steps», validator dev/test/j68seeds_validate.py), j71c.js (FV7 variants), j72c.js (:6 «Σgain == Σloss … same total as its siblings», validator dev/test/j72seeds_validate.py), jworldc.js (:3 «4 equal-value stances»). Convert each to ≤3 tiers NHẸ·VỪA·NẶNG exactly like batch 1 (dev/tools/rdseeds_tier.py: drop the stance / most-alike way, order by cost kind, steps 1/2/3 so Tốn and Được rise together, om map for old saves, validator to 3 tiers), new BAL keys only where needed, law 3 (each way keeps a gain), law 7.
+3. Proofs as batch 1/3 (audit before→after, only-listed-sets robot, quickcheck, oldsave, kit-std-scan, shots) → «RV READY BIG review/e-tier-b13 <sha> (batch 3b)».
+Helpers (this container only, rebuild from the branch): /home/user/wt/etb13c-work (shot scripts _rdcshots-tmp.js / shot3b2.js, tierscan before/after).
