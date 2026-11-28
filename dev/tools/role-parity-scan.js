@@ -97,6 +97,8 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
  const richK=a=>{if(a===S){S.kh=0;try{used=0}catch(e){}}};
  const rich=a=>{Object.assign(a,{bac:5000,suc:100,danh:90,duc:90,tamco:80,sung:60,th:70,hh:60,tai:80,sac:80});a.arts=a.arts||{};for(const k of ["cam","ky","thi","hoa","vu","y"])a.arts[k]=Math.max(a.arts[k]||0,80);
   if(a.st&&typeof a.st==="object")Object.assign(a.st,{bac:5000,suc:100,danh:90,duc:90,tamco:80});a.fakeIll=0;a.pray=0;a.fert=0;a.tablet=0;a.confined=0;if(a===S){S.kh=0;try{used=0}catch(e){}}};
+ /* review/oan-pace-2: a world SETUP (oanAdd 40–80 at once, liking ±50…) is written with the paces off — stat-pace BAL.stp and the oán / ghét / ghen pace BAL.oanPace would hold one buổi's setup back (the incident no-stack store is not part of snapW), so a state-gated act looked P-ONLY; the paces themselves are tested in stat-pace.js / oan-pace.js; the heat gate still applies when the acts are probed */
+ const RAWP=f=>{const s0=BAL.stp&&BAL.stp.on,o0=BAL.oanPace&&BAL.oanPace.on;if(s0)BAL.stp.on=0;if(o0)BAL.oanPace.on=0;try{return f()}finally{if(s0)BAL.stp.on=s0;if(o0)BAL.oanPace.on=o0}};
  const VAR=[
   ["base",a=>{}],
   ["tired",a=>{a.suc=20;a.bac=30;if(a.st&&typeof a.st==="object")Object.assign(a.st,{suc:20,bac:30})}],
@@ -242,7 +244,7 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
     neither she nor her born-Đáp-ứng clone holds in those worlds (up N-ONLY + PROMO-npc rows, red on LIVE d74f86a5 by the shifted draw only) */
  const snapW=()=>JSON.stringify({sv:allServ().map(x=>({sid:x.sid,loyal:x.loyal,tin:x.tin,af:x.af})),facs:S.facs||[],menW:S.menW||null,S:{malice:S.malice,hh:S.hh,cutPay:S.cutPay,rank:S.rank,preg:S.preg,hidden:S.hidden,kids:S.kids,inv:S.inv,confined:S.confined},R:rivals.map(v=>({id:v.id,rank:v.rank,queen:v.queen,confined:v.confined,suc:v.suc,sung:v.sung,preg:v.preg,hidden:v.hidden,kids:v.kids,inv:v.inv,ev:v.ev,evm:v.evm||{},malice:v.malice,hh:v.hh,cutPay:v.cutPay}))});
  const restoreW=j=>{while(UNDO.length)try{UNDO.pop()()}catch(e){}const o=JSON.parse(j);for(const x of o.sv||[]){const s=servById(x.sid);if(s)Object.assign(s,x)}S.facs=o.facs||[];S.menW=o.menW||{};Object.assign(S,o.S);for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
- const npcOpts=(role,v,grps,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{AG.sc={}}catch(e){}try{rich(v);f(v)}catch(e){E("var "+vn,e)}
+ const npcOpts=(role,v,grps,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{AG.sc={}}catch(e){}try{rich(v);RAWP(()=>f(v))}catch(e){E("var "+vn,e)}
    for(let t=0;t<TRIES;t++){try{for(const o of agOptsG(v,Object.assign({},N0),null)||[])(addN(role,o.k,"agOptsG"),addT(role,o.k,v,o.t))}catch(e){E("agOptsG",e)}
     /* part 2: her own real needs too (agNeeds: a full Đức / Danh weighs its cost little), not only the flat all-needs world N0 */
     let NR=null;try{NR=Object.assign({},N0,(g0(v)==="maid"||g0(v)==="srv")&&typeof asNeeds==="function"?asNeeds(v):agNeeds(v))}catch(e){}/* B4: a maid's own needs = asNeeds (agNeeds throws on a staff: the #real pass never ran for maids) */if(NR)for(const g of grps)for(const k in AGREG[g]||{}){try{for(const o of AGREG[g][k](v,Object.assign({},NR),null)||[])if(o&&o.k)(addN(role,o.k,g+"."+k+"#real"),addT(role,o.k,v,o.t))}catch(e){}}
@@ -346,7 +348,7 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
      forced for this read only, her drawn errand cleared before and restored after (the card was there only when the seeded draw came up) */
   else{const E0=SRVA.errand.offer,R0=S.srv&&S.srv.err;try{SRVA.errand.offer=100;if(S.srv)S.srv.err=null;for(const c of srvCards()||[])addP(role,c.n,"srvCards")}catch(e){E("srvCards",e)}finally{SRVA.errand.offer=E0;if(S.srv)S.srv.err=R0}try{/* Hậu cung › Đồng liêu = the shared pager (j42 srvStaffTabHTML, one card at a time, its groups = kit sub-tabs): tabAll walks every card and every group, like the consort's Cung nhân tab */for(const h of tabAll("srvStaffTabHTML"))for(const n of lab(h))addP(role,n,"srvStaff")}catch(e){E("srvStaff",e)}}
   if(!isSrv())gates(role,S)};
- const playerLabels=(role,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{rich(S);f(S)}catch(e){E("pvar "+vn,e)}playerOnce(role);restoreW(W);if(W2)mRest(W2)}};
+ const playerLabels=(role,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{rich(S);RAWP(()=>f(S))}catch(e){E("pvar "+vn,e)}playerOnce(role);restoreW(W);if(W2)mRest(W2)}};
  if(phase==="consort"){
   const v=liveRivals(true).find(x=>!x.queen&&!x.out&&!x.confined);window.__rpV=v;
   for(let r=0;r<=6;r++){v.rank=r;v.queen=false;npcOpts("t"+(r+1),v,["consort"])}

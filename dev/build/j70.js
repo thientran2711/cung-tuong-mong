@@ -124,7 +124,7 @@ function canNew70(aKey,tKey){if(aKey!=="me"&&cnt70(p=>p.a===aKey))return false;i
 function methFor70(k){const L=Object.keys(M70).filter(m=>M70[m].k===k);return L.length?pick(L):null}
 /* an NPC picks a route by price, wit (the clever avoid loud routes) and who can be bought */
 function pickRoute70(a,t,M){const tc=tc70(a);const L=M.R.filter(r=>{if(a!==S&&r.bac&&(a.bac||0)<r.bac)return false;if(r.acc==="tsv"&&!((t.staff||[]).length))return false;return true});if(!L.length)return null;
- const w=L.map(r=>[r,Math.max(.2,(tc>=BAL.wit.hi?10-r.vis:5)+(r.acc&&traitsOf(a).includes("Xảo quyệt")?3:0))]);let s=Math.random()*w.reduce((x,y)=>x+y[1],0),i=0;while(s>w[i][1]&&i<w.length-1){s-=w[i][1];i++}return w[i][0]}
+ const w=L.map(r=>[r,Math.max(.2,(tc>=BAL.tcw.hi?10-r.vis:5)+(r.acc&&traitsOf(a).includes("Xảo quyệt")?3:0))]);let s=Math.random()*w.reduce((x,y)=>x+y[1],0),i=0;while(s>w[i][1]&&i<w.length-1){s-=w[i][1];i++}return w[i][0]}
 /* AG-ALL-2d4 (OD 17/11 ~17:10Z (1), bạc only on success, whole family): a route whose bạc BUYS a person — a servant of the target (acc "tsv"),
    or the bribe schemes "Mua người trong cung nàng" / "Rút thẻ bài", or a route marked win:1 whose bạc buys a person's word or betrayal (Trả bạc
    cho các ma ma già, Tung tin qua thái giám, Mua lời khai, Mua chuộc thầy dạy; review ag-all-2 r2) — pays only when that person takes it: tsv at
@@ -132,7 +132,7 @@ function pickRoute70(a,t,M){const tc=tc70(a);const L=M.R.filter(r=>{if(a!==S&&r.
    (materials, hired watchers) and is paid at the start. */
 function payWin70(M,r){return !!(r&&r.bac&&(r.acc==="tsv"||r.win||M&&(M.k==="bribe"||M.k==="block")))}
 function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return null;const r=rid?M.R.find(x=>x.id===rid):pickRoute70(a,t,M);if(!r)return null;
- const tc=tc70(a);const p={id:++z.n,a:a===S?"me":a.id,t:t===S?"me":t.id,m,r:r.id,mo:mo||"band",st:"prep",pg:0,need:r.need+(a!==S&&tc>=BAL.wit.hi?1:0),born:wk(),g:0,kn:0,kt:[],err:(opt&&opt.err)||0,cool:0,wt:0};
+ const tc=tc70(a);const p={id:++z.n,a:a===S?"me":a.id,t:t===S?"me":t.id,m,r:r.id,mo:mo||"band",st:"prep",pg:0,need:r.need+(a!==S&&tc>=BAL.tcw.hi?1:0),born:wk(),g:0,kn:0,kt:[],err:(opt&&opt.err)||0,cool:0,wt:0};
  if(opt&&opt.fac)p.fac=1;if(M.k==="kpoison"||M.k==="pond"||M.k==="kframe"||M.k==="ksab"){const k=tKid70(p);if(k)p.kid=k.name}
  if(a!==S&&r.bac&&!payWin70(M,r))ap(a,{bac:-r.bac});if(payWin70(M,r)&&r.acc!=="tsv")p.payW=r.bac;
  z.pl.push(p);z.types[m+":"+r.id]=(z.types[m+":"+r.id]||0)+1;try{if(typeof evHistMark==="function")evHistMark("j70:"+m+":"+r.id)}catch(e){}
@@ -140,7 +140,7 @@ function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return n
  if(r.acc==="tsv"){const L=(t.staff||[]).filter(s=>s.spyFor!==p.a);const s=L.sort((x,y)=>(x.loyal+nq(x,"loyal",BAL.net.k.firmLoyal))-(y.loyal+nq(y,"loyal",BAL.net.k.firmLoyal)))[0];
   if(s){p.acc=s.sid;/* 2f2: the approached servant CHOOSES by tmOdds (traits, lòng, what she wants); a refusal is told as before */const ao=typeof tmOdds==="function"?tmOdds(a,s):(s.loyal+nq(s,"loyal",BAL.net.k.firmLoyal)+nq(s,"greed",BAL.net.k.firmGreed)>=60?25:100),aok=ao>=100||agTry(ao);
    if(!aok&&agSoft(ao)){/* review ag-all-2 r2 C5: a capped miss is soft (OD ~17:35Z): nobody hears, nothing changes, the plot just ends */p.end="refused";p.sv=s.sid;if(a===S)agSoftTxt(S,`Mua chuộc ${s.name}`);else if(a.plan&&a.plan.j70===p.id)a.plan=null;return p}
-   if(!aok){p.end="refused";p.sv=s.sid;evA(t,a,BAL.eff.j70.evNewPlot70);s.loyal=cl(s.loyal+BAL.eff.j70.loyalNewPlot70,0,100);try{mindLog(a,"_abandon")}catch(e){}
+   if(!aok){p.end="refused";p.sv=s.sid;evA(t,a,BAL.eff.j70.evNewPlot70);/* TAI-MAT-KNOW: the refusing servant tells = the master LEARNS who */typeof spyLearn==="function"&&spyLearn(t,a);s.loyal=cl(s.loyal+BAL.eff.j70.loyalNewPlot70,0,100);try{mindLog(a,"_abandon")}catch(e){}
     if(t===S){p.kn=1;p.kt.push(tellOf70(p,0));p.pend="serv"}else if(a===S){p.pend="ownfail"}
     if(a!==S&&a.plan&&a.plan.j70===p.id)a.plan=null;return p}
    s.spyFor=s.spyFor||p.a;try{if(typeof svTouch==="function")svTouch(a,s,"plot")/* servant-trust: the approached servant took it — her mistress may come to know (jsvt) */}catch(e){}p.bonus=(p.bonus||0)+8;if(r.bac)ap(a,{bac:-Math.min(r.bac,Math.max(0,a.bac||0))})/* she took it: now the bạc is paid */}}
@@ -170,11 +170,11 @@ let jointScheme0=null;
 /* ---------- detection (same shape for everyone) ---------- */
 function spyIn70(watcher,a){if(a===S)return(S.staff||[]).some(s=>s.spyFor===key(watcher));return(a.staff||[]).some(s=>s.spyFor===(watcher===S?"me":key(watcher)))}
 function seeP70(p,step){const a=pa70(p),t=pt70(p),r=pr70(p);const tc=tc70(a);let c;
- if(t===S||(a!==S&&t!==S)){/* her eyes */c=10+eyes(S)*6+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*6+(tc<BAL.wit.mid?12:0)-(tc>=BAL.wit.top?8:0)+(r?r.vis:0)+(spyIn70(S,a)?30:0)+(r&&r.pl&&S.place===r.pl?15:0)-nq(a,"hide",BAL.net.k.hide);
+ if(t===S||(a!==S&&t!==S)){/* her eyes */c=10+eyes(S)*6+(S.staff||[]).filter(s=>netIs(s,"sharp")||netIs(s,"talk")).length*6+(tc<BAL.tcw.mid?12:0)-(tc>=BAL.tcw.top?8:0)+(r?r.vis:0)+(spyIn70(S,a)?30:0)+(r&&r.pl&&S.place===r.pl?15:0)-nq(a,"hide",BAL.net.k.hide);
   if(t===S)c+=(S.maid&&S.maid.loyal>=BAL.loy.trust?10:0);else c*=J70CFG.npcSeen}
  return oddsCl(Math.min(Math.round(c),85))}
 /* an NPC target (also when she is the plotter) notices with its own people */
-function npcSee70(p){const a=pa70(p),t=pt70(p),r=pr70(p);if(t===S)return 0;const tc=tc70(a);return oddsCl(Math.min(80,Math.round(8+tc70(t)/4+(t.maid&&t.maid.loyal>=BAL.loy.trust?8:0)+(r?r.vis:0)+(spyIn70(t,a)?30:0)+(tc<BAL.wit.mid?12:0)-(tc>=BAL.wit.top?8:0))))}
+function npcSee70(p){const a=pa70(p),t=pt70(p),r=pr70(p);if(t===S)return 0;const tc=tc70(a);return oddsCl(Math.min(80,Math.round(8+tc70(t)/4+(t.maid&&t.maid.loyal>=BAL.loy.trust?8:0)+(r?r.vis:0)+(spyIn70(t,a)?30:0)+(tc<BAL.tcw.mid?12:0)-(tc>=BAL.tcw.top?8:0))))}
 
 /* ---------- the weekly step ---------- */
 function abandon70(p,why){p.end=why||"cool";const a=pa70(p);if(a&&a!==S&&a.plan&&a.plan.j70===p.id)a.plan=null;try{if(a&&a!==S)mindLog(a,"_abandon")}catch(e){}
@@ -459,7 +459,7 @@ function thrOpts70(v){const o=[];const mat=eyes(S);
  if(accOK(S,v)){const c=ch70(`Tố giác ${title70(v)}`,{p:actOdds(S,v,"accuse"),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>log(runAct(S,v,"accuse")||"Ngươi tố giác.");o.push(c)}
  if(!S.thDead)o.push(ch70("Xin Thái hậu che chở",{c:{bac:-20},p:oddsCl(30+(S.th||0)/2),wt:[G70("3 tuần tới kẻ hại ngươi khó ra tay gấp đôi")],lt:[R70(`Thái hậu với ngươi ${balSg(BAL.eff.j70.thShield)}`)],ok:()=>{S.guardWarn=Math.max(S.guardWarn||0,3);return "Thái hậu sai thị vệ để mắt đến cung ngươi."},no:()=>{apply({th:BAL.eff.j70.thShield});return "Thái hậu không muốn dính vào chuyện hậu cung."}}));
  const al=liveRivals(true).filter(x=>x!==v&&aff(x,S)>=netTh(x,"than")&&!x.confined).sort((a,b)=>aff(b,S)-aff(a,S))[0];
- if(al)o.push(ch70(`Nhờ ${title70(al)} để ý giúp`,{wt:[G70(`6 tuần: người của ${al.name} báo khi thấy mưu nhắm vào ngươi`)],k:[R70(`${al.name} thiện cảm ${balSg(BAL.eff.j70.ok_3)} (ngươi mắc nợ ân)`)],ok:()=>{j70().allyW={id:al.id,until:wk()+6};relAdd(S,al,BAL.eff.j70.ok_3);return `${al.name} hứa để mắt giúp ngươi.`}}));
+ if(al)o.push(ch70(`Nhờ ${title70(al)} để ý giúp`,{wt:[G70(`6 tuần: người của ${al.name} báo khi thấy mưu nhắm vào ngươi`)],k:[R70(`${al.name} thiện cảm ${balSg(spSee("rel",BAL.eff.j70.ok_3))} (ngươi mắc nợ ân)`)],ok:()=>{j70().allyW={id:al.id,until:wk()+6};relAdd(S,al,BAL.eff.j70.ok_3);return `${al.name} hứa để mắt giúp ngươi.`}}));
  o.push(ch70(`Tránh mặt ${v.name}`,{c:{danh:-1},wt:[G70("6 tuần không ở chung chỗ: mưu tay đôi của nàng khó thành")],k:[R70("người ta bảo ngươi nhút nhát")],ok:()=>{const z=j70();z.avoid=z.avoid||{};z.avoid[v.id]=wk()+6;return `Ngươi tránh những chỗ ${v.name} hay lui tới.`}}));
  if(ACT.frame&&!(typeof sameHouse==="function"&&sameHouse(S,v)))o.push(Object.assign(ch70("Ra tay trước",{wt:[G70("mở mưu kế nhắm vào nàng (chọn cách ở bước sau)")],k:[R70("lộ thì nàng nắm chứng cứ về ngươi")]}),{go:()=>{Q.unshift(start70(v,"frame"))}}));
  o.push(ch70("Để sau",{wt:[G70("giữ yên mọi bề, chẳng đắc tội thêm ai")],k:[R70("nàng vẫn rình rập")],ok:()=>"Ngươi tạm gác."}));return o}
