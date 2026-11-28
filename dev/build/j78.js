@@ -71,22 +71,27 @@ function j78proof(v){/* what a new piece proves: the most telling real thing not
  const bad=(v.inv||[]).filter(e=>e.t||(IT[e.k]&&(itm(e.k).il||itm(e.k).mat)));if(bad.length&&!have.has("items"))return{proves:`${j78Who(v)} giấu trong rương ${bad.map(iname).join(", ")}`,ref:"items"};
  const vp=vpItems(v);if(vp.length&&!have.has("vp"))return{proves:`${j78Who(v)} dùng đồ quá phẩm: ${vp.map(e=>itm(e.k).n).join(", ")}`,ref:"vp"};
  if(dd.length)return mk(dd[0]);
- const O=others(v).filter(x=>x===S||x.alive&&!x.out).map(x=>[x,hostility(v,x)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);
- const h=O.find(x=>!have.has("talk:"+key(x[0])));if(h)return{proves:`lời ${j78who(v)} nói xấu ${j78who(h[0])} sau lưng`,ref:"talk:"+key(h[0]),aim:key(h[0])};
- const t0=O.length?O[0][0]:(queenP()&&queenP()!==v?queenP():S);const c=(S.evd[v.id]||[]).filter(e=>e.ref&&e.ref.indexOf("talk:"+key(t0))===0).length;return{proves:`lời ${j78who(v)} nói xấu ${j78who(t0)} sau lưng, lần thứ ${c+1} có người nghe thấy`,ref:"talk:"+key(t0)+":"+c,aim:key(t0)}}
-function j78mkEvd(v,ctx){const c=ctx||{};const p=c.proves?{proves:c.proves,ref:c.ref||null,aim:c.aim}:j78proof(v);
+ /* REAL-PROOF (owner 27/11 ~00:10Z, law 6a): a piece exists only for a real thing — a real deed in her ledger (jtruth deedsOf: the deeds the evidence cap
+    is made of), else talk her Tai mắt TRULY overheard (a «để bụng» fact learned about v, S.intel), once per person; never an invented «nói xấu … lần thứ N» */
+ try{const W=deedsOf(v).filter(d=>d&&d.x);const tr=d=>"td:"+(d.at==null?"o":d.at+":"+d.k+":"+(d.t||""));const w=W.slice().reverse().find(d=>!have.has(tr(d)));if(w)return{proves:`${j78Who(v)} ${w.x}`,ref:tr(w),aim:w.t};
+  if(W.length){const d=W[W.length-1];return{proves:`${j78Who(v)} ${d.x}`,ref:tr(d)+":"+(S.evd[v.id]||[]).length,aim:d.t}}}catch(e){}
+ const heard=(S.intel&&S.intel[v.id]||[]).some(x=>x.kind==="hate"&&/để bụng/.test(x.txt||""));
+ if(heard){const O=others(v).filter(x=>x===S||x.alive&&!x.out).map(x=>[x,hostility(v,x)]).filter(x=>x[1]>0).sort((a,b)=>b[1]-a[1]);const h=O.find(x=>!have.has("talk:"+key(x[0])));
+  if(h)return{proves:`lời ${j78who(v)} nói xấu ${j78who(h[0])} sau lưng, tai mắt nghe được`,ref:"talk:"+key(h[0]),aim:key(h[0])}}
+ return null}
+function j78mkEvd(v,ctx){const c=ctx||{};const p=c.proves?{proves:c.proves,ref:c.ref||null,aim:c.aim}:j78proof(v);if(!p)return null;/* REAL-PROOF: nothing real behind it → no record */
  return {n:++J78.seq,w:c.legacy?null:wk(),when:c.legacy?"":j78when(),how:c.how||"Tai mắt của ngươi",proves:p.proves,ref:p.ref,aim:p.aim||null}}
 /* keep S.evd in step with the counters; announce new pieces with what they prove and what they allow now */
 function evdSync(ctx){if(!S||!rivals)return;S.evd=S.evd||{};const legacy=!S.evdV;const fresh=[];
  for(const v of rivals){const L=S.evd[v.id]=S.evd[v.id]||[];const n=Math.max(0,v.ev||0);if(L.length>n)L.splice(0,L.length-n);
   while(L.length<n){let c=ctx||J78.ctx;if(legacy)c={legacy:1,how:"Đã có từ trước khi sổ chứng cứ được lập"};else if(!c){c={how:"Tai mắt của ngươi"}/* owner 16:55Z: never the text of whatever log line last named her (a gift is not evidence) */}
-   const e=j78mkEvd(v,c);L.push(e);if(!legacy)fresh.push([v,e])}}
+   const e=j78mkEvd(v,c);if(!e)break;L.push(e);if(!legacy)fresh.push([v,e])}}
  S.evdV=1;J78.lseq=S.logSeq||0;if(fresh.length&&!S.dead){const by={};for(const [v,e] of fresh)(by[v.id]=by[v.id]||[v,[]])[1].push(e);for(const id in by){const [v,E]=by[id];log(j78gainTxt(v,E))}J78.lseq=S.logSeq||0}}
 function j78gainTxt(v,E){const A=evidenceActs(v);const tw=whyTime(BAL.time.cost.harm);const ok=A.filter(a=>!a.why||a.why===tw).map(a=>`${a.n} (${a.gain[0]||""})`);const need=A.filter(a=>a.why&&/chứng cứ/.test(a.why)).map(a=>`${a.n}: ${a.why}`);
  /* owner 11/15 16:55Z: the line says where the evidence came from (who found what, by which road), one source per piece, never another
     event's text and never the card's help ("Dùng được ở thẻ nàng …"); no double full stop */
  const cut=s=>String(s||"").replace(/<[^>]+>/g,"").replace(/[\s.。!?;,]+$/,"");const lc=s=>{s=cut(s);return s?s.charAt(0).toLowerCase()+s.slice(1):""};
- return `<b>Ngươi có thêm chứng cứ về ${j78who(v)}</b>: `+E.map(e=>`${cut(e.proves)}${e.how?` (nguồn: ${lc(e.how)})`:""}`).join("; ")+"."}
+ return `<b>Ngươi có thêm chứng cứ về ${j78who(v)}</b>: `+pieceFold(E,e=>cut(e.proves)+"|"+lc(e.how)).map(([e,n])=>`${pieceN(cut(e.proves),n)}${e.how?` (nguồn: ${lc(e.how)})`:""}`).join("; ")+"."/* RV-163D §1 fold */}
 /* every gain of evidence gets its context */
 (function(){const e0=evA;evA=function(h,t,n){if(h===S&&t&&t!==S&&n>0&&!J78.ctx){const c=J78.cur;let ctx=null;
   if(c&&c.a===t&&c.t===S)ctx={how:`Người của ngươi bắt quả tang ${j78who(t)}`,proves:`${j78Who(t)} định ${j78act(c.k,S)}`,aim:"me"};
@@ -127,8 +132,8 @@ overhear=function(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(he
 (function(){const d0=doAct;doAct=function(i,k){const v=rivals[i];if(!v||k!=="spy")return d0.apply(this,arguments);const e0=v.ev||0;const n0=S.logSeq||0;J78.ctx={how:"Ngươi sai người dò la"};let r;try{r=d0.apply(this,arguments)}finally{J78.ctx=null}
   try{if((v.ev||0)>e0){const m=v.affair&&manById(v.affair);const L=(S.evd||{})[v.id]||[];if(m&&S.logs.slice(0,(S.logSeq||0)-n0).some(x=>x.includes("lén gặp"))){L.slice(-2).forEach(e=>{e.proves=`${j78Who(v)} lén lút tư thông với ${m.name}`;e.ref="affair";e.how="Tai mắt bắt gặp tận mắt"})}
    const f=intelLearn(v,1,{by:"Tai mắt",how:"Dò la"});if(f){log(`Dò la ${j78who(v)}: ${f} ${J78_WHERE}`);try{kitKnow({key:"intel:"+v.id,pri:2,text:`Dò la ${j78who(v)}: ${String(f).replace(/<[^>]+>/g,"")}`})}catch(e){}render()}}}catch(e){}return r}})();
-(function(){const f0=ACT.spy.f;ACT.spy.f=function(a,t){const r=f0.apply(this,arguments);if(a===S&&/bị phát hiện/.test(r||""))return r+`(Người của ${j78who(t)} bắt gặp kẻ rình rập: nàng quý ngươi ${balSg(BAL.eff.j8.f)}, ${pvOan(t,Math.abs(BAL.eff.j8.f)*BAL.relOan.hurt,"oán ngươi")}.) `;return r}})();
-(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="chest"&&p.ref){const v=p.ref;const i=A.findIndex(a=>a.n==="Lục rương tìm chứng cứ");if(i>=0){const r0=A[i].run;A[i]=Object.assign({},A[i],{x:evSg(BAL.ag.ev.one),risk:`cung nhân của ${j78who(v)} bắt gặp: nàng quý ngươi ${balSg(-BAL.ag.cx2.chest.rel)}, ${pvOan(v,BAL.ag.cx2.chest.rel*BAL.relOan.hurt,"oán ngươi")}, ngươi bị cấm túc vì lục lọi cung phi tần`,run:()=>{const r=r0();return /bắt gặp/.test(r)?`Cung nhân của ${j78who(v)} bắt gặp ngươi lục rương: nàng quý ngươi ${balSg(-BAL.ag.cx2.chest.rel)}, ${pvOan(v,BAL.ag.cx2.chest.rel*BAL.relOan.hurt,"oán ngươi")}; ngươi bị phạt vì lục lọi cung phi tần.`:r}})}}}catch(e){}return A}})();
+(function(){const f0=ACT.spy.f;ACT.spy.f=function(a,t){const r=f0.apply(this,arguments);if(a===S&&/bị phát hiện/.test(r||""))return r+`(Người của ${j78who(t)} bắt gặp kẻ rình rập: nàng quý ngươi ${balSg(spSee("rel",BAL.eff.j8.f))}, ${pvOan(t,Math.abs(BAL.eff.j8.f)*BAL.relOan.hurt,"oán ngươi")}.) `;return r}})();
+(function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="chest"&&p.ref){const v=p.ref;const i=A.findIndex(a=>a.n==="Lục rương tìm chứng cứ");if(i>=0){const r0=A[i].run;A[i]=Object.assign({},A[i],{x:evSg(BAL.ag.ev.one),risk:`cung nhân của ${j78who(v)} bắt gặp: nàng quý ngươi ${balSg(spSee("rel",-BAL.ag.cx2.chest.rel))}, ${pvOan(v,BAL.ag.cx2.chest.rel*BAL.relOan.hurt,"oán ngươi")}, ngươi bị cấm túc vì lục lọi cung phi tần`,run:()=>{const r=r0();return /bắt gặp/.test(r)?`Cung nhân của ${j78who(v)} bắt gặp ngươi lục rương: nàng quý ngươi ${balSg(spSee("rel",-BAL.ag.cx2.chest.rel))}, ${pvOan(v,BAL.ag.cx2.chest.rel*BAL.relOan.hurt,"oán ngươi")}; ngươi bị phạt vì lục lọi cung phi tần.`:r}})}}}catch(e){}return A}})();
 /* scouting where she is: the place is a fact too */
 (function(){const s0=scout;scout=function(id){const v=rivals.find(x=>x.id===id);const b=v&&locKnown(v);const r=s0.apply(this,arguments);try{if(v&&!b&&locKnown(v))intelAdd(v,{k:"where",kind:"where",txt:`Buổi này ${j78who(v)} ở ${placeName(whereOf(v))}.`},{by:"Tai mắt",how:"Sai tai mắt dò nơi ở"})}catch(e){}return r}})();
 /* a visit card with a result shows the result, not "already talked" on top of it */
@@ -159,8 +164,8 @@ const J78NOSEND=["trinhth","trinhhh","banphe","tieuhuy"];for(const k of J78NOSEN
 Object.assign(ACTDOM,{trinhth:"Danh",trinhhh:"Danh",uyhiep:"Mưu kế",banphe:"Mưu kế",tieuhuy:"Giao thiệp"});
 /* the act card lines read the target being shown (true numbers per target) */
 function j78out(k,a,t){const n=evG(a,t);const q=queenP();const m=punishMonths();const W=t?j78who(t):"nàng";
- if(k==="trinhth")return[`${W} ${sgOf(t,BAL.eff.j78.sungF)} · Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth)}`,`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth_2)}`];
- if(k==="trinhhh"){const c=t&&chReady(a,t);return[`<span class="g">${c?`${W} ${chPunTxt(t,c)}`:`${W} chịu phạt theo tội`}</span>`/* E-GAIN3b law 3: the punishment is her gain (explicit green, kit KP12) */,`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`]}
+ if(k==="trinhth")return[`${W} ${sgOf(t,BAL.eff.j78.sungF)} · Thái hậu quý ngươi ${balSg(spSee("rel",BAL.eff.j78.trinhth))}`,`Thái hậu quý ngươi ${balSg(spSee("rel",BAL.eff.j78.trinhth_2))}`];
+ if(k==="trinhhh"){const c=t&&chReady(a,t);return[`<span class="g">${c?`${W} ${chPunTxt(t,c)}`:`${W} chịu phạt theo tội`}</span>`/* E-GAIN3b law 3: the punishment is her gain (explicit green, kit KP12) */,`Hoàng hậu thiện cảm ${balSg(spSee("rel",BAL.eff.j78.f_3))}`]}
  if(k==="uyhiep")return[`Bạc +${t?j78pay(t):0} · kèm: ${pvOan(t,BAL.eff.j78.f_4,`${W} oán ngươi`)}`,`Danh ${balSg(BAL.eff.j78.danhUyhiep)} · ${pvOan(t,BAL.eff.j78.f_5,`${W} oán ngươi`)}`];
  if(k==="banphe"){const b=t&&j78buyer(a,t);return[`Bạc +${BAL.eff.j78.bacBanphe*n} · ${b?j78who(b):"người mua"} ${pvQuy(b||null,BAL.eff.j78.f_6,"thiện cảm")} · ${b?j78who(b):"người mua"} nắm ${n>0?n+" ":""}chứng cứ về ${W} · kèm: ${pvOan(t,BAL.eff.j78.f_7,`${W} oán ngươi`)}`,""]}
  if(k==="tieuhuy")return[`${W} ${pvQuy(t,j78thAff(n),"quý ngươi")} · ${W} oán ngươi -${j78thOan(n)} · Đức ${balSg(BAL.eff.j78.ducTieuhuy)}`,""];
@@ -174,12 +179,13 @@ function j78out(k,a,t){const n=evG(a,t);const q=queenP();const m=punishMonths();
   if(v&&typeof CH_USE==="object"&&CH_USE[k]){const x=chUseTxt(k,S,v);if(x)c=[c,x].filter(Boolean).join(", ");return a0.call(this,k,w,c)}/* STEP 4 rv F3: the charge's pieces (jcharge chUseTxt), same as the evidence card */
   if(v&&use){const n=evG(S,v);const u=use==="all"?n:use;if(u>0)c=[c,`Chứng cứ -${u}`].filter(Boolean).join(", ")}return a0.call(this,k,w,c)}})();
 /* one obvious group on her card: "Dùng chứng cứ" (accusing with real proof is not "harming") */
-const J78EVK=["accuse","tocao","expose","trinhth","trinhhh","uyhiep","banphe","tieuhuy"];
-(function(){for(const g of RVGRP)g[1]=g[1].filter(k=>!J78EVK.includes(k));RVGRP.splice(1,0,["Dùng chứng cứ",J78EVK.slice()])})();
+/* split-merge B1/B2: the group holds ONE accusation (accuse, routed by chTo) + the two trades; the folded roads leave every group */
+const J78EVK=["accuse","uyhiep","banphe"],J78FOLD=["tocao","expose","trinhth","trinhhh","tieuhuy"];
+(function(){for(const g of RVGRP)g[1]=g[1].filter(k=>!J78EVK.includes(k)&&!J78FOLD.includes(k));RVGRP.splice(1,0,["Dùng chứng cứ",J78EVK.slice()])})();
 /* the same acts for every consort: NPCs holding evidence use them too (light weights) */
-BANDS[1][2].push("uyhiep","banphe");BANDS[2][2].push("trinhth","trinhhh");
+BANDS[1][2].push("uyhiep","banphe");/* split-merge B1: no trinhth / trinhhh of their own — an NPC's «accuse» takes the same listener road as hers (chTo) */
 (function(){const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const b=bandVT(v,t);if(b&&evG(v,t)>=1){const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);
-  for(const [k,w] of [["uyhiep",1],["banphe",1],["trinhth",2],["trinhhh",2]]){if(!allow.includes(k))continue;let ok=false;try{ok=ACT[k].ok(v,t)}catch(e){}if(ok)O.push([k,w*persW(v,k)])}}}catch(e){}return O}})();
+  for(const [k,w] of [["uyhiep",1],["banphe",1]]){if(!allow.includes(k))continue;let ok=false;try{ok=ACT[k].ok(v,t)}catch(e){}if(ok)O.push([k,w*persW(v,k)])}}}catch(e){}return O}})();
 Object.assign(TELLS,{trinhhh:"sai người chép lại sổ sách, lời khai cung nhân"});
 
 /* ---------- 5. API for the kit ---------- */
@@ -187,22 +193,26 @@ function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=riva
  const odds=k=>{let o=null;try{o=actOdds(S,p,k)}catch(e){}return o==null?"":word(oddsCl(o))};/* actOdds (j9): the odds evidenceDo's roll uses (one path) */
  const add=(k,o)=>{const a=ACT[k];if(!a)return;let ok=false;try{ok=a.ok(S,p)}catch(e){}R0.push(Object.assign({k,n:a.n,odds:"",why:"",cost:[],gain:[],fail:[],risk:[],go:()=>evidenceDo(p.id,k)},o(ok)))};
  const nf=(need)=>`cần ${need} chứng cứ, đang có ${n}`;
- const busy=()=>!p.alive?"nàng đã mất":p.out?"nàng ở lãnh cung":sameHouse(S,p)?houseLine(p,"ngươi").replace(/^./,c=>c.toLowerCase()):t2||"";
- add("accuse",ok=>{const need=accNeed(p);const tr=rkOf(p);const fall=p.queen||tr>=5?`${W} bị phế vào lãnh cung`:`${W} bị đày lãnh cung hoặc giáng xuống ${RANKS[Math.max(0,tr-2)].n}`;
-  return{odds:odds("accuse"),why:busy()||(!chOK(S,p)?chNeedTxt(S,p):rkOf(p)>=7&&S.rank<3?"tố Hoàng hậu cần phẩm Tần trở lên":""),cost:[`${hkK("accuse")} khắc`,chUseTxt("accuse",S,p)||"chứng cứ của tội ấy"],gain:[chWinTxt("accuse",S,p,W)||fall,`Danh ${balSg(BAL.eff.j8.accuseDanh)}`],fail:[`Danh ${balSg(BAL.eff.j8.accuseFailDanh)}`,`${W} quý ngươi ${balSg(BAL.eff.j8.f_6)}`,`${pvOan(p,Math.abs(BAL.eff.j8.f_6)*BAL.relOan.hurt,`${W} oán ngươi`)}`].concat(tr>=7?["phạm thượng: bị giáng một bậc hoặc cấm túc"]:[]),risk:tr>=7?["thắng: 12 tháng không được tranh ghế Hoàng hậu"]:[]}});
- add("tocao",ok=>{const cr=realCrime(p);return{odds:odds("tocao"),why:busy()||(!cr?"nàng không có tội thật nào (vượt phẩm, đồ cấm, từng bày mưu)":!chTocao(S,p)?chNeedTxt(S,p):""),cost:[`${hkK("tocao")} khắc`,chUseTxt("tocao",S,p)||"chứng cứ của một tội"],gain:[chWinTxt("tocao",S,p,W)||`${W} chịu phạt theo tội`/* STEP 4 O2 family: j30 tocao spends the pieces of that charge and punishes by it (chPunish), never «giáng» by the total */,`Danh ${balSg(BAL.eff.j30.danhTocao)}`],fail:[`Danh ${balSg(BAL.eff.j30.danhF)}`]}});
- add("expose",ok=>({odds:odds("expose"),why:busy()||(!hasScandal(p)?"nàng không có chuyện tư tình bị lộ":!chOK(S,p,"tt")?chNeedTxt(S,p,"tt"):""),cost:[`${hkK("expose")} khắc`,chUseTxt("expose",S,p)||`Chứng cứ ${balSg(-chHave(S,p,"tt"))} (tội tư thông)`],gain:[`${W} bị ban chết hoặc vào lãnh cung`],fail:["ngươi bị tội vu khống: vào lãnh cung hoặc giáng một bậc"]}));
- add("trinhth",ok=>({odds:odds("trinhth"),why:busy()||(n<1?nf(1):S.thDead?"Thái hậu đã băng hà":rkOf(p)>=7?"Thái hậu không xét tội Hoàng hậu":""),cost:[`${hkK("trinhth")} khắc`,`Đức ${balSg(BAL.eff.j78.ducTrinhth)}`,`Chứng cứ ${balSg(BAL.eff.j78.evF)}`],gain:[`${W} ${sgOf(p,BAL.eff.j78.sungF)}`,`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth)}`],fail:[`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth_2)}`],risk:[`${W} quý ngươi ${balSg(BAL.eff.j78.f)}`]}));
- add("trinhhh",ok=>{const q=queenP();return{odds:q&&q!==S&&q!==p?odds("trinhhh"):"",why:busy()||(!q?"chưa có Hoàng hậu":q===S?"ngươi là Hoàng hậu: dùng Xử tội":q===p?"không trình Hoàng hậu tội của chính nàng":!chOK(S,p)?chNeedTxt(S,p):""),cost:[`${hkK("trinhhh")} khắc`,chUseTxt("trinhhh",S,p)||"chứng cứ của tội ấy"],gain:[chWinTxt("trinhhh",S,p,W)||`${W} chịu phạt theo tội`],fail:[`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`],risk:[`${W} quý ngươi ${balSg(BAL.eff.j78.f_2)}`]}});
+ const busy=()=>!p.alive?"nàng đã khuất":p.out?"nàng ở lãnh cung":sameHouse(S,p)?houseLine(p,"ngươi").replace(/^./,c=>c.toLowerCase()):t2||"";
+ /* split-merge B1 (owner 26/11 ~21:00Z «hạn chế tách 1 việc», 27/11 ~00:46Z / ~01:00Z): ONE «Tố giác» — the pieces held pick the charge (chReady), the listener is
+    the highest one who can judge it (chTo: a Hoàng hậu above the accused, else Hoàng thượng; she as Hoàng hậu = Xử tội). «Tố tội thật», «Bóc chuyện tư tình» and
+    «Trình Thái hậu» are no longer separate roads (the same charge, the same punishment by its weight); B2: «Trả chứng cứ lấy lòng» folded away (Uy hiếp / Bán kept). */
+ const to=S.rank>=7?"judge":chTo(S,p);
+ if(to==="accuse")add("accuse",ok=>{const need=accNeed(p);const tr=rkOf(p);const fall=p.queen||tr>=5?`${W} bị phế vào lãnh cung`:`${W} bị đày lãnh cung hoặc giáng xuống ${RANKS[Math.max(0,tr-2)].n}`;
+  return{odds:odds("accuse"),why:busy()||(!chOK(S,p)?chNeedTxt(S,p):rkOf(p)>=7&&S.rank<3?"tố Hoàng hậu cần phẩm Tần trở lên":""),cost:[`${hkK("accuse")} khắc`,chUseTxt("accuse",S,p)||"chứng cứ của tội ấy"],gain:[chWinTxt("accuse",S,p,W)||fall,`Danh ${balSg(BAL.eff.j8.accuseDanh)}`],fail:[`Danh ${balSg(chFailDanh())}`,`${W} quý ngươi ${balSg(spSee("rel",BAL.eff.j8.f_6))}`,`${pvOan(p,Math.abs(BAL.eff.j8.f_6)*BAL.relOan.hurt,`${W} oán ngươi`)}`].concat(chFailPun(p)?[chFailPun(p)]:[])/* PUNISH-TIER (C): one helper with the act */,risk:tr>=7?["thắng: 12 tháng không được tranh ghế Hoàng hậu"]:[]}});
+ if(to==="trinhhh")add("trinhhh",ok=>{const q=queenP();return{odds:q&&q!==S&&q!==p?odds("trinhhh"):"",why:busy()||(!q?"chưa có Hoàng hậu":q===S?"ngươi là Hoàng hậu: dùng Xử tội":q===p?"không trình Hoàng hậu tội của chính nàng":!chOK(S,p)?chNeedTxt(S,p):""),cost:[`${hkK("trinhhh")} khắc`,chUseTxt("trinhhh",S,p)||"chứng cứ của tội ấy"],gain:[chWinTxt("trinhhh",S,p,W)||`${W} chịu phạt theo tội`],fail:[`Hoàng hậu thiện cảm ${balSg(spSee("rel",BAL.eff.j78.f_3))}`],risk:[`${W} quý ngươi ${balSg(spSee("rel",BAL.eff.j78.f_2))}`]}});
  add("uyhiep",ok=>{const g=j78pay(p);return{odds:odds("uyhiep"),why:busy()||(n<1?nf(1):g<10?"nàng không còn đủ 10 lượng":""),cost:[`${hkK("uyhiep")} khắc`,`Chứng cứ ${balSg(BAL.eff.j78.evF_3)} (trả lại khi nàng chịu chi)`],gain:[`Bạc +${g}`],fail:[`Danh ${balSg(BAL.eff.j78.danhUyhiep)}`,`${pvOan(p,BAL.eff.j78.f_5,`${W} oán ngươi`)}`],risk:[`${pvOan(p,BAL.eff.j78.f_4,`${W} oán ngươi`)}`].concat(together(S,p)?[]:[/* previews: runAct (sent servant confesses) */`sai người đi: kẻ đi bị bắt, khai ra ngươi (${W} nắm ${balAb(BAL.eff.j9.evN)} chứng cứ): ${chanceW(confessRisk(bestSent(S)))}`])}});
  add("banphe",ok=>{const b=j78buyer(S,p);return{why:busy()||(n<1?nf(1):!b?"không ai đủ ghét nàng để mua":""),cost:[`${hkK("banphe")} khắc`,`Chứng cứ -${n} (dùng hết)`],gain:[`Bạc +${BAL.eff.j78.bacBanphe*n}`].concat(b?[`${j78who(b)} ${pvQuy(b,BAL.eff.j78.f_6,"thiện cảm")}`,`${j78who(b)} nắm ${n} chứng cứ về ${W}`]:[]),risk:[`${pvOan(p,BAL.eff.j78.f_7,`${W} oán ngươi`)}`],buyer:b?j78Ref(b):null}});
- add("tieuhuy",ok=>({why:busy()||(n<1?nf(1):""),cost:[`${hkK("tieuhuy")} khắc`,`Chứng cứ -${n} (dùng hết)`],gain:[`${W} ${pvQuy(p,j78thAff(n),"quý ngươi")}`,`${W} oán ngươi -${j78thOan(n)}`,`Đức ${balSg(BAL.eff.j78.ducTieuhuy)}`]}));
- if(S.rank>=7)R0.push({k:"judge",n:"Xử tội",odds:"",why:busy()||(!chOK(S,p)?chNeedTxt(S,p):""),cost:[`${BAL.btn.empAct.k} khắc`,chUseTxt("judge",S,p)||"chứng cứ của tội ấy"],gain:[chWinTxt("judge",S,p,W)||`${W} chịu phạt theo tội`],fail:[],risk:[`${W} quý ngươi ${balSg(BAL.eff.j8.judge)}`,`${pvOan(p,Math.abs(BAL.eff.j8.judge)*BAL.relOan.hurt,`${W} oán ngươi`)}`],go:()=>evidenceDo(p.id,"judge")});
+ if(S.rank>=7)R0.push({k:"judge",n:"Xử tội",odds:"",why:busy()||(!chOK(S,p)?chNeedTxt(S,p):""),cost:[`${BAL.btn.empAct.k} khắc`,chUseTxt("judge",S,p)||"chứng cứ của tội ấy"],gain:[chWinTxt("judge",S,p,W)||`${W} chịu phạt theo tội`],fail:[],risk:[`${W} quý ngươi ${balSg(spSee("rel",BAL.eff.j8.judge))}`,`${pvOan(p,Math.abs(BAL.eff.j8.judge)*BAL.relOan.hurt,`${W} oán ngươi`)}`],go:()=>evidenceDo(p.id,"judge")});
+ for(const a of R0)if(a.k==="accuse"||a.k==="trinhhh"){a.n=ACT.accuse.n;a.cost=a.cost.concat([a.k==="trinhhh"?"tâu Hoàng hậu":"tâu Hoàng thượng"])}
  /* one kit price line per act, ready for pbtn/kitParse */
  for(const a of R0)a.line=[a.odds,a.cost.length?"tốn: "+a.cost.join(", "):"",a.gain.length?"thành: "+a.gain.join(" · "):"",a.odds&&a.fail&&a.fail.length?"hỏng: "+a.fail.join(" · "):"",a.risk&&a.risk.length?"kèm: "+a.risk.join(" · "):""].filter(Boolean).join(" · ");
  return R0}
 function evidenceOf(p){if(!S||!p||p===S)return null;evdSync();const L=((S.evd||{})[p.id]||[]).slice().reverse();
- return {who:j78Ref(p),count:evG(S,p),items:L.map(e=>({proves:e.proves,how:e.how,when:e.when||"trước khi có sổ",week:e.w,aim:e.aim?j78Ref(byKey(e.aim)):null})),acts:evidenceActs(p)}}
+ return {who:j78Ref(p),count:evG(S,p),items:pieceFold(L,e=>e.proves).map(([e,n])=>({proves:pieceN(e.proves,n),how:e.how,when:e.when||"trước khi có sổ",week:e.w,aim:e.aim?j78Ref(byKey(e.aim)):null})),acts:evidenceActs(p)}}
+/* law 6a/6c (RV-163D §1): the pieces of ONE deed that read the same fold into ONE row «… (N món)» — never a counter of identical lines; same fold in her notice (jcharge punEvTxt) */
+function pieceFold(L,f){const M=new Map();for(const e of L||[]){const k=f?f(e):e;if(M.has(k))M.get(k)[1]++;else M.set(k,[e,1])}return [...M.values()]}
+function pieceN(t,n){return n>1?`${t} (${n} món)`:t}
 /* run an evidence act from the evidence card (closes that card first) */
 function evidenceDo(id,k){const v=RV(id);if(!v||!S||S.dead)return;if(Q.length&&Q[0]&&Q[0].evd){Q.shift();showModal()}if(Q.length)return;const i=rivals.indexOf(v);
  if(k==="kt"){S.ktPick=v.id;if(S.place==="tn"){render();return}goTo("tn");return}

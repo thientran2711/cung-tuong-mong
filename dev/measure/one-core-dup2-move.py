@@ -22,8 +22,8 @@ WIT={'30':'lo','35':'mid','60':'hi','70':'top'}
 WRX=r'(\btc\s*(?:>=|<)\s*)(30|35|60|70)\b'
 for fl in "j40:19 j40:20 j40:49 j40:52 j40:54 j43:43 j43:55 j51:35 j51:36 j70:127 j70:129 j70:165 j70:169".split():
  f,l=fl.split(':');rule(f+'.js',int(l),WRX,('wit',WIT))
-rule('j40.js',19,r'\(tc-30\)/35','(tc-BAL.wit.lo)/BAL.wit.mid',1)
-rule('j51.js',35,r'\(tc-30\)/35','(tc-BAL.wit.lo)/BAL.wit.mid',1)
+rule('j40.js',19,r'\(tc-30\)/35','(tc-BAL.tcw.lo)/BAL.tcw.mid',1)
+rule('j51.js',35,r'\(tc-30\)/35','(tc-BAL.tcw.lo)/BAL.tcw.mid',1)
 # --- Đức tiers
 rule('j3.js',109,r'S\.duc>=60\)','S.duc>=BAL.ducLv.up)',1);rule('j3.js',109,r'S\.duc<20\)','S.duc<BAL.ducLv.down)',1)
 rule('j8.js',443,r'v\.duc>=60\)','v.duc>=BAL.ducLv.up)',1);rule('j8.js',443,r'v\.duc<20\)','v.duc<BAL.ducLv.down)',1)
