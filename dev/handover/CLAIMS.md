@@ -808,3 +808,4 @@ E-GAIN4D (finish e-gain4c: merge LIVE 7d7c6886 + unrun gates + shots) | review/e
 E-TIER-B13-RV3B (BIG review row 42 batch 3b delta 31f91836..e3c1f982) | review/e-tier-b13-rv3b-m | (opening) | RUNNING | 28/11 13:15Z (Foreman E C12)
 E-TIER-B14b (successor: merge LIVE 8a1a71de, Q1 follow-up, Q4 twin hook, gates, RV READY part 1; part 2 j70c+jkyc) | review/e-tier-b14 (after b959b5e8) | (opening) | RUNNING | 28/11 12:50Z (Foreman E C12)
 D-BANHOA-SOLO (solo «Ban hoa» at Điện tuyển b1, 5/7 lives on LIVE; F c2 12:01–12:23Z) | review/d-banhoa-solo | FOREMAN D ROOT session_01964izEUYzmixcs6Yg5ZXsE / worker session_01964izESVUdBrhPCNtLwaHf | RUNNING | 28/11 12:50Z
+B-ROW9-RV (BIG review of review/row9-net 840732e0) | review/row9-net(-r2) | PENDING | RUNNING | 28/11 13:22Z (Foreman B ROOT 3 child 3)
