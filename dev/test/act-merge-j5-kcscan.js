@@ -8,7 +8,7 @@ async function skip(p){for(let i=0;i<6;i++){const n=await p.evaluate(()=>{const 
 async function settle(p,max=25){for(let i=0;i<max;i++){const n=await p.evaluate(()=>{const vis=e=>e&&e.isConnected&&!e.hidden&&getComputedStyle(e).display!=='none';
   const k=document.getElementById('kload');if(k){k.remove();return 'kload'}const r=document.getElementById('kroul');if(vis(r)){const x=[...r.querySelectorAll('button')].find(y=>/Bỏ qua/.test(y.textContent));if(x){x.click();return 'kroul'}}
   const L=document.getElementById('klife');if(vis(L)){const x=[...L.querySelectorAll('button')].find(y=>/Tiếp/.test(y.textContent));if(x){x.click();return 'klife'}}
-  const m=document.getElementById('modal');if(vis(m)){const B=[...m.querySelectorAll('button')].filter(b=>!b.disabled&&b.offsetParent);const x=B.find(b=>/^(Tiếp|Đáp ứng|Đã rõ|Được|Vâng|Bắt đầu|Đóng|Xong)/.test(b.textContent.trim()))||B.find(b=>b.matches('.opts button, .opt'))||B[B.length-1];if(x){x.click();return 'modal:'+x.textContent.trim().slice(0,30)}}
+  const m=document.getElementById('modal');if(vis(m)){const B=[...m.querySelectorAll('button')].filter(b=>!b.disabled&&b.offsetParent);const x=B.find(b=>/^(Tiếp|Đáp ứng|Đã rõ|Được|Vâng|Bắt đầu|Đóng|Xong)/.test(b.textContent.trim()))||B.find(b=>b.matches('.opts button, .opt, button.kpk-b'/* K-OPTS-READER: + kitPick plaques */))||B[B.length-1];if(x){__koptGo(x);return 'modal:'+x.textContent.trim().slice(0,30)}}
   return 0});if(!n)return;await sleep(900)}}
 async function kcStart(p,og){for(let tr=0;tr<4;tr++){
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}});
@@ -17,7 +17,7 @@ async function kcStart(p,og){for(let tr=0;tr<4;tr++){
   await p.evaluate(()=>{const b=document.querySelector('#modal [data-kcp="nha"]');if(b)b.click()});await sleep(700);for(let i=0;i<40&&await p.evaluate(()=>!!document.getElementById('kroul'));i++)await sleep(500);
   await p.evaluate(()=>{const b=document.querySelector('#modal button[data-nl="ok"]');if(b)b.click()});await sleep(1500);
   if(await p.evaluate(()=>{try{return isKc()}catch(e){return false}})){await settle(p);return true}}return false}
-(async()=>{const {chromium}=require("playwright");const b=await chromium.launch();const p=await(await b.newContext({viewport:{width:755,height:1000},serviceWorkers:"block"})).newPage();
+(async()=>{const {chromium}=require("playwright");const b=await chromium.launch();const p=await(await b.newContext({viewport:{width:755,height:1000},serviceWorkers:"block"})).newPage();await require("./lib/kopts").install(p);
 const perr=[];p.on("pageerror",e=>perr.push(e.message.slice(0,200)));
 await p.goto(URL,{waitUntil:"load",timeout:0});await p.waitForFunction(()=>typeof start==="function",null,{timeout:0});await sleep(2500);
 const OG=await p.evaluate(()=>[...new Set(["dtq","cnv","ch","thd","td",...Object.keys(typeof KC2K==="object"?KC2K:{})])]);let fails=0;

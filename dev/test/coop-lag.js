@@ -28,7 +28,7 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
  /* the card-flip scene waits for its kit end button (KIT 81): hidden like coop-e2e does */
  await ctx.addInitScript(()=>{document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='#kcfl,.kcfl{display:none!important}';document.head.appendChild(s)})});
  if(AS){await ctx.addInitScript(AS.FRAMES);await AS.install(ctx,mk.pre)}
- const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(180000);const o={name,ctx,p,errs:[]};p.on('pageerror',e=>o.errs.push(e.message.slice(0,160)));
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(180000);const o={name,ctx,p,errs:[]};p.on('pageerror',e=>o.errs.push(e.message.slice(0,160)));
  o.cdp=await ctx.newCDPSession(p);return o}
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
   return [...document.querySelectorAll('button,a,[role=button]')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()))||null},re.source);
@@ -37,7 +37,7 @@ async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms)
 const CLEAR1=()=>{const c=(window.__co2||(()=>({})))();if(c.frozen||c.waiting)return'coop';if(typeof S!=='undefined'&&S&&S.mg){try{S.mg=null;render()}catch(e){}return'mg'}
  const ov=[...document.querySelectorAll('button')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('#panel,#tabs,#hud,#modal')&&x.closest('[class^=km],[class*=" km"]')&&/^(Nhận|Đã hiểu|Tạ ơn|Lĩnh chỉ|Tuân chỉ)$/.test(x.textContent.trim()));if(ov){ov.click();return'x'}
  const m=document.getElementById('modal');if(!m||m.hidden)return'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null&&!x.dataset.kcp);
- const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||m.querySelector('.opts button:not([disabled])')||all.pop();if(b){b.click();return'x'}return''};
+ const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||(__koptsOn(m)[0]||null)||all.pop();if(b){__koptGo(b);return'x'}return''};
 async function clear(o){for(let i=0;i<25;i++){const s=await require('./lib/coop-clear.js').first(o,CLEAR1).catch(()=>'');if(s!=='x'&&s!=='mg')return s;await sleep(200)}}
 async function press(o,k0){for(let t=0;t<80;t++){await require('./lib/coop-clear.js').lifeWait(o,clear);await clear(o);const r=await o.p.evaluate(k0=>{if(window.COOPW&&(COOPW.bend||COOPW.pend||__co2().waiting))return'end';
   const b=document.getElementById('next');if(!b||b.disabled)return'';b.click();return'pressed'},k0).catch(()=>'');if(r)return Date.now();await sleep(250)}return 0}

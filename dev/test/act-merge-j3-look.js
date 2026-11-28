@@ -7,7 +7,7 @@ const CLEAN=`window.DRclean=()=>{if(!document.getElementById('drcss')){const st=
 const DEV={fold:{width:755,height:1000,mob:true},ipad:{width:1180,height:820,mob:false}};
 (async()=>{const b=await chromium.launch();const facts={};
  for(const [dn,D] of Object.entries(DEV)){const ctx=await b.newContext({viewport:{width:D.width,height:D.height},deviceScaleFactor:1,hasTouch:D.mob,reducedMotion:'reduce',serviceWorkers:'block',recordVideo:{dir:OUT,size:{width:D.width,height:D.height}}});
-  const p=await ctx.newPage();const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
+  const p=await ctx.newPage();await require('./lib/kopts').install(p);const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'load',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(2500);
   await p.evaluate(LIB);await p.evaluate(CLEAN);
   await p.evaluate(()=>{AA.scen('cao');S.bac=Math.max(S.bac,300);S.suc=Math.max(S.suc,90);deal();AA.hide();tab="act";try{K3SH.home=false}catch(e){}render();try{k3Shell()}catch(e){}DRclean()});
@@ -20,9 +20,9 @@ const DEV={fold:{width:755,height:1000,mob:true},ipad:{width:1180,height:820,mob
   await p.waitForTimeout(600);if(!r){facts[dn]={err:"no door "+DOOR,list};await ctx.close();continue}
   await p.screenshot({path:`${OUT}/${dn}-2-door.png`});
   await p.mouse.click(r.x,r.y);await p.waitForTimeout(1200);
-  const dlg=await p.evaluate(()=>{const m=document.getElementById('modal');return {open:!m.hidden,t:Q[0]&&Q[0].t,who:!!(Q[0]&&Q[0].who),opts:[...m.querySelectorAll('.opts button.opt')].map(o=>({n:(o.querySelector('.kan')||o).textContent.replace(/\s+/g," ").trim().slice(0,40),off:o.disabled||o.classList.contains('kdis')}))}});
+  const dlg=await p.evaluate(()=>{const m=document.getElementById('modal');return {open:!m.hidden,t:Q[0]&&Q[0].t,who:!!(Q[0]&&Q[0].who),opts:__kopts(m).map(o=>({n:(o.querySelector('.kan')||o).textContent.replace(/\s+/g," ").trim().slice(0,40),off:o.disabled||o.classList.contains('kdis')}))}});
   await p.screenshot({path:`${OUT}/${dn}-3-dialog.png`});
-  const o=await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button.opt')].find(x=>!x.disabled&&!x.classList.contains('kdis'));if(!b)return null;b.scrollIntoView({block:"center"});const q=b.getBoundingClientRect();return {x:q.x+q.width/2,y:q.y+q.height/2,n:(b.querySelector('.kan')||b).textContent.trim().slice(0,40),u:used}});
+  const o=await p.evaluate(()=>{const b=__kopts().find(x=>!x.disabled&&!x.classList.contains('kdis'));if(!b)return null;b.scrollIntoView({block:"center"});const q=b.getBoundingClientRect();return {x:q.x+q.width/2,y:q.y+q.height/2,n:(b.querySelector('.kan')||b).textContent.trim().slice(0,40),u:used}});
   if(o){await p.mouse.click(o.x,o.y);await p.waitForTimeout(1800)}
   const after=await p.evaluate(()=>({used,toast:((document.getElementById('rtoast')||{}).innerText||"").replace(/\s+/g," ").slice(0,200),q:Q.map(m=>m.t)}));
   await p.screenshot({path:`${OUT}/${dn}-4-result.png`});

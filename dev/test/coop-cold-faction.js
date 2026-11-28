@@ -13,7 +13,7 @@ const REALL=require('./lib/coop-real.js');async function mk(b,name,vp){const ctx
   await serve(ctx);await REALL.origin(ctx,name==='host'?'a':'b');await ctx.addInitScript(u=>{window.COOP_URL=u;
     window.__co=()=>{const c=window.COOP;if(!c)return{};const s=c.state||{};return{code:c.code||'',seat:c.seat,week:c.week||0,online:c.online||{},ended:c.ended||{},
       frozen:!!c.frozen,waiting:!!(window.COOPW&&COOPW.on&&(COOPW.sent===(s.week||0)||(c.seat&&(c.ended||{})[c.seat]))),world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.base)}}},WURL);
-  const o={ctx,name,errs:[]};const p=await ctx.newPage();p.setDefaultTimeout(30000);
+  const o={ctx,name,errs:[]};const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(30000);
   p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return o}
 const ALL=[];
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
@@ -28,7 +28,7 @@ async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/
    const bk=[...document.querySelectorAll('.kbk-bar button')].find(x=>x.offsetParent!==null&&/^Lui$/.test(x.textContent.trim()));if(bk){bk.click();return'x'}
    const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';
    try{const t=(m.querySelector('h2,h3,.kmt,.kmtitle')||{}).textContent||'';(window.__seen=window.__seen||[]).push(t.trim()+' | '+m.textContent.replace(/\s+/g,' ').slice(0,300))}catch(e){}
-   const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||m.querySelector('.opts button:not([disabled])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'});
+   const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||(__koptsOn(m)[0]||null)||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){__koptGo(b);return'x'}return'stuck'});
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 /* r1 fix 6: a seat that already pressed for this step (buổi ended = bend, night-ready by the night gate or its night with the Emperor, week end out) counts as pressed */

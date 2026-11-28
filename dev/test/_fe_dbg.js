@@ -18,7 +18,7 @@ const [,,URL,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@1').split('@');const
    if(st==='in')break;await p.waitForTimeout(250)}
   await p.waitForTimeout(800)};
  const closeCards=async()=>{for(let i=0;i<25;i++){const n=await p.evaluate(()=>{const m=document.getElementById('modal');if(!m||m.hidden)return 0;
-     const ksp=(typeof Q!=='undefined'&&Q[0]&&Q[0].pid==='ksp');if(ksp)return -1;const bt=m.querySelector('.opts button:not([disabled]),button.kbtn:not([disabled]),button:not([disabled])');if(bt){bt.click();return 1}return 0});
+     const ksp=(typeof Q!=='undefined'&&Q[0]&&Q[0].pid==='ksp');if(ksp)return -1;const bt=__koptsOn(m)[0]/* K-OPTS-READER: choices first (#mb .opts + plaques) */||m.querySelector('button.kbtn:not([disabled]),button:not([disabled])');if(bt){__koptGo(bt);return 1}return 0});
    if(n<=0)break;await p.waitForTimeout(300)}};
  const state=()=>p.evaluate(()=>({kcf:document.querySelectorAll('.kmov.kcf').length,push:(window.__cfdbg||[]).filter(x=>/^push/.test(x)).length,
    ksp:(typeof Q!=='undefined'?Q:[]).some(e=>e&&e.pid==='ksp'),buoi:S.buoi||0,today:!!(typeof wk==='function'&&((S.nightWhy&&S.nightWhy.wk===wk())||S.nfF===wk())),tonight:S.tonight?(S.tonight==='me'?'me':'npc'):null,srv:typeof isSrv==='function'&&isSrv()}));

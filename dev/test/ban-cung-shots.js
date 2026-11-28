@@ -11,7 +11,7 @@ const DEVS=A.filter(a=>D.DEVICES[a]);const NET=!A.includes('--no-net');let bad=0
  for(const dev of (DEVS.length?DEVS:['fold','ipadAir'])){const dd=D.DEVICES[dev];const tag=dd.w+'x'+dd.h;
   const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:2,reducedMotion:'reduce'});await ctx.addInitScript(()=>{window.COOP_URL='http://127.0.0.1:9/'});
   if(!NET)await ctx.route(u=>!/^http:\/\/127\.0\.0\.1[:/]/.test(u.href)&&/^https?:/.test(u.href),r=>r.abort());
-  const pg=await ctx.newPage();const errs=[];pg.on('pageerror',e=>errs.push(e.message));
+  const pg=await ctx.newPage();await require('./lib/kopts').install(pg);const errs=[];pg.on('pageerror',e=>errs.push(e.message));
   const g=await D.openHost(pg,srv.url);await g.waitForFunction(()=>typeof start==='function'&&document.getElementById('title'),null,{timeout:120000});
   await g.waitForFunction(()=>!document.getElementById('kload'),null,{timeout:NET?60000:5000}).catch(()=>{});await g.evaluate(()=>{const k=document.getElementById('kload');if(k)k.remove()});
   const shot=async n=>{await pg.waitForTimeout(500);if(n!=='0-title')await g.evaluate(()=>{document.querySelectorAll('.kmov,.kmfls').forEach(e=>e.remove());['kroul','kroulw','dawn','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()})});await pg.screenshot({path:`${OUT}/${tag}-${n}.jpg`,type:'jpeg',quality:70});
@@ -24,8 +24,8 @@ const DEVS=A.filter(a=>D.DEVICES[a]);const NET=!A.includes('--no-net');let bad=0
     if(cs.position==='fixed'&&cs.display!=='none'&&r.width*r.height>=innerWidth*innerHeight*.8){const bt=e.querySelector('button.kbtn,button');if(bt&&!e.__qcPressed){e.__qcPressed=1;bt.click()}else e.remove()}}try{for(let j=0;j<8&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}}catch(e){}return !Q.length&&(window.__qcN=(window.__qcN||0)+1)>12},null,{timeout:60000,polling:150}).catch(()=>{});
   await g.evaluate(()=>{S.rank=4;S.sung=60;S.pal=null;S.palCer=0;palFix();Q.length=0;palCeremony();render();showModal()});await pg.waitForTimeout(1500);
   await shot('ban-cung');
-  await g.evaluate(()=>{const L=[...document.querySelectorAll('#modal .opts button')];const x=L[L.length-1];if(x)x.scrollIntoView({block:'end'})});await shot('ban-cung-lock');
-  if(process.env.BC_DBG)console.log(await g.evaluate(()=>[...document.querySelectorAll('#modal .opts button')].pop().outerHTML.slice(0,3000)));
+  await g.evaluate(()=>{const L=__kopts();const x=L[L.length-1];if(x)x.scrollIntoView({block:'end'})});await shot('ban-cung-lock');
+  if(process.env.BC_DBG)console.log(await g.evaluate(()=>__kopts().pop().outerHTML.slice(0,3000)));
   if(errs.length){bad++;console.log(`FAIL ${tag}: ${errs.length} page errors: ${errs[0]}`)}
   console.log(`${tag}: 2 shots -> ${OUT}`);await ctx.close()}
  await b.close();srv.close();console.log(bad?`SHOTS FAIL ${bad}`:'SHOTS OK');process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(1)});

@@ -41,7 +41,7 @@ AT.save=()=>{AT.base={j:JSON.stringify(ser()),PG:JSON.parse(JSON.stringify(PG||{
 AT.restore=(s0)=>{AT.hide();const d=JSON.parse(AT.base.j);quiet=true;deser(d);used=d.used||0;AT.reseed(s0||7);try{deal()}catch(e){}quiet=false;S.visit=null;S.place="home";popIdx=null;popMsg="";
  for(const k in PG)delete PG[k];Object.assign(PG,AT.base.PG);AT.reseed((s0||7)+1)};
 const panelBtns=()=>[...document.querySelectorAll("#panel button.ka, #panel .pcb button, #panel .rbtn button, #panel button.card")];
-const popBtns=()=>[...document.querySelectorAll("#popw button.opt, #popw .opts button, #popw button.ka")].filter(b=>!/^✕/.test(T(b).trim()));
+const popBtns=()=>__kopts(document.getElementById("popw"),"button.opt, button.ka")/* K-OPTS-READER: + person-card plaques (§98.20) */.filter(b=>!/^✕/.test(T(b).trim()));
 AT.surfaces=()=>{const L=[{id:"act",tab:"act"}];
  rivals.forEach((v,i)=>{if(v.alive&&(i<4||v.queen))L.push({id:"rv:"+i,tab:"rv",pg:["rv",i]})});
  const nS=(S.staff||[]).length+1;for(let i=0;i<Math.min(nS,4);i++)L.push({id:"staff:"+i,tab:"staff",pg:["staff",i]});
@@ -65,7 +65,7 @@ const rows=b=>{const R={};b.querySelectorAll(".kr").forEach(r=>{const k=[...r.cl
 AT.tl=b=>{try{const k=b.querySelector(".kan");if(!k)return{l:0,ic:false};const cs=getComputedStyle(k);const lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.3;const tops=new Set();const wk=document.createTreeWalker(k,NodeFilter.SHOW_TEXT,{acceptNode:n=>n.parentElement.closest('.md,.klab,em')?NodeFilter.FILTER_REJECT:NodeFilter.FILTER_ACCEPT});let n0;while(n0=wk.nextNode()){if(!n0.textContent.trim())continue;const r=document.createRange();r.selectNodeContents(n0);for(const q of r.getClientRects())if(q.width>1)tops.add(Math.round(q.top/4))}return{l:tops.size,ic:!!k.querySelector(".md,.ic,img,canvas"),w:Math.round(k.getBoundingClientRect().width)}}catch(e){return{l:0,ic:false}}};
 AT.card=b=>{const t=AT.tl(b);return{name:T(b.querySelector(".kan")||b).replace(/\s+/g," ").trim().slice(0,80),rows:rows(b),dis:b.disabled,tl:t.l,tic:t.ic,tw:t.w}};
 AT.read=(sf)=>AT.btns(sf).filter(b=>b.querySelector(".kb")).map(AT.card);
-AT.modalOpts=()=>{const m=document.getElementById("modal");if(!m||m.hidden)return null;return{title:T(document.getElementById("mt")).trim().slice(0,80),opts:[...m.querySelectorAll(".opts button, .opt")].filter(b=>b.querySelector(".kb")).map(AT.card)}};
+AT.modalOpts=()=>{const m=document.getElementById("modal");if(!m||m.hidden)return null;return{title:T(document.getElementById("mt")).trim().slice(0,80),opts:__kopts(m,".opt").filter(b=>b.querySelector(".kb")).map(AT.card)}};
 AT.open=async(sf,j)=>{AT.restore();AT.show(sf);const b=AT.btns(sf)[j];if(!b||b.disabled)return null;try{b.click()}catch(e){return null}await new Promise(r=>setTimeout(r,40));try{render()}catch(e){}return AT.modalOpts()};
 /* the material step of every work kind (Tài nghệ: Học / Tự luyện -> pick a work -> material) */
 AT.wkMats=()=>{const out=[];if(typeof wkrMat!=="function"||typeof WKR==="undefined")return out;for(const kind of Object.keys(WKR)){const r=WKR[kind][0];if(!r)continue;AT.restore();

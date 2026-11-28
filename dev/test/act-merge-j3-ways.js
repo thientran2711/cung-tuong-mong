@@ -5,7 +5,7 @@
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const src=fs.readFileSync(path.join(__dirname,'act-audit.js'),'utf8');const LIB=src.match(/const LIB=String\.raw`([\s\S]*?)`;\n\(async/)[1];
 const URL=process.argv[2]||'file://'+path.resolve(__dirname,'../../index.html');
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1180,height:820},reducedMotion:'reduce',serviceWorkers:'block'});const p=await ctx.newPage();
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1180,height:820},reducedMotion:'reduce',serviceWorkers:'block'});const p=await ctx.newPage();await require('./lib/kopts').install(p);
  const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'load',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(2500);await p.evaluate(LIB);
  const ST={"base":"","ill":"S.ill={k:Object.keys(ILL)[0],st:2,at:wk()};S.arts.y=5","pregnant":"S.preg=2;S.hidden=true;S.fake=0","art":"for(const a of ['cam','vu','ky','hoa','y'])S.arts[a]=20","evening":"S.buoi=3"};
@@ -18,7 +18,7 @@ const URL=process.argv[2]||'file://'+path.resolve(__dirname,'../../index.html');
     const r=await p.evaluate(async([d,j,f,viaDoor])=>{AA.restore(42);AA.show(AA.surfaces().find(s=>s.id==="act"));AA.hide();render();/* arrival events of the restore cleared in BOTH paths; ONE synchronous task: no background timer can step in */const name=deck[d.I[j]].n;const pre=AA.snap(),u0=used;AA.force=f;const a0=act;act=function(){AA.reseed(99);act=a0;return a0.apply(this,arguments)};/* same RNG stream from the act on: showing a dialog draws randoms (voice, seals) */
      if(!viaDoor){act(d.I[j]);if(Q.length)showModal()/* the result card shows, as after a real tap */}else{const b=document.querySelector(`#panel button[data-ddoor="${d.k}"]`);if(!b)return{err:"no door"};if(b.disabled)return{off:1,name};b.click();
       if(!Q[0]||!(Q[0].opts||[]).some(o=>o&&o.ddoor))return{err:"door dialog not queued: Q="+Q.map(m=>m.t).join("/")+" dis="+b.disabled+" hsi="+b.dataset.ddi+" vs "+d.I.join(",")};const c=Q[0].opts[j];if(!c)return{err:"no way "+j};if(c.off){AA.force=null;Q.length=0;return{off:1,name}}
-      const m=document.getElementById("modal");const o=!m.hidden&&[...m.querySelectorAll('.opts button.opt')].find(x=>+x.dataset.m===j);if(o){o.click();window.__j3real=(window.__j3real||0)+1}else{chooseM(j);window.__j3cm=(window.__j3cm||0)+1}await new Promise(r=>setTimeout(r,0))/* the way runs in its own task */}
+      const m=document.getElementById("modal");const o=!m.hidden&&__kopts(m).find(x=>+x.dataset.m===j);if(o){__koptGo(o);window.__j3real=(window.__j3real||0)+1}else{chooseM(j);window.__j3cm=(window.__j3cm||0)+1}await new Promise(r=>setTimeout(r,0))/* the way runs in its own task */}
      AA.force=null;if(act!==a0)act=a0;const s0=AA.diff(pre,AA.snap());delete s0.logs;const s={};for(const k in s0){const [x,y]=s0[k];s[k]=typeof x==='number'&&typeof y==='number'?y-x:s0[k]};return {name,pre:JSON.stringify(pre),used:used-u0,j:JSON.stringify(s),q:Q.map(m=>m.t).join("/"),toast:((document.getElementById("rtoast")||{}).innerText||"").slice(0,300)}},[d,j,f,viaDoor]);
     return r};
    const A=await run(false),A2=await run(false),B=await run(process.env.J3AA?false:true);n++;

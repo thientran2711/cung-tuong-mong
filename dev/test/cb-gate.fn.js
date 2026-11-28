@@ -1,6 +1,6 @@
 /* SCAN 1 — every khắc/buổi-gated way in: for each buổi × khắc left × place (incl. her CURRENT palace with a chủ vị she has not greeted),
    a way that is not offered must say why on the card. Also deck cards: a disabled card must carry a reason. */
-(()=>{const rows=[];const bad=[];const modal=()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;return{t:document.getElementById('mt').textContent,body:M.innerText.replace(/\s+/g,' '),opts:[...M.querySelectorAll('#mb .opts > button')].map(x=>x.innerText.replace(/\s+/g,' ').trim())}};
+(()=>{const rows=[];const bad=[];const modal=()=>{const M=document.getElementById('modal');if(!M||M.hidden)return null;return{t:document.getElementById('mt').textContent,body:M.innerText.replace(/\s+/g,' '),opts:(typeof __kopts==='function'?__kopts():[...document.querySelectorAll('#mb .opts > button, #modal button.kpk-b')])/* K-OPTS-READER (dev/test/lib/kopts.js; inline fallback when pasted without it) */.map(x=>x.innerText.replace(/\s+/g,' ').trim())}};
  const clr=()=>{Q.length=0;const md=document.getElementById('modal');md.hidden=true};
  for(const b of [0,1,2,3])for(const u of [0,1,2,3]){
   for(const k of places().map(x=>x.k)){if(k==="home")continue;

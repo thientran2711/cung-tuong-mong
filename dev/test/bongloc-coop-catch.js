@@ -18,7 +18,7 @@ async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:
     s.send=d=>setTimeout(()=>{try{if(s.readyState===1)snd(d)}catch(e){}},L);let h=null;Object.defineProperty(s,'onmessage',{configurable:true,get(){return h},set(f){h=f}});
     W.prototype.addEventListener.call(s,'message',e=>setTimeout(()=>{try{h&&h.call(s,e)}catch(x){console.error(x)}},L));return s};
    P.prototype=W.prototype;for(const k of ['CONNECTING','OPEN','CLOSING','CLOSED'])P[k]=W[k];window.WebSocket=P},+process.env.LAG);
-  const p=await ctx.newPage();p.setDefaultTimeout(90000);const o={name,ctx,p,errs:[]};
+  const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(90000);const o={name,ctx,p,errs:[]};
   p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|fonts\.gstatic|CORS/.test(m.text()))o.errs.push('console: '+m.text().slice(0,300))});return o}
 const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(src=>{const R=new RegExp(src);
   const b=[...document.querySelectorAll('button')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()));if(b){b.click();return true}return false},re.source);if(r)return true;await sleep(250)}return false};
@@ -58,7 +58,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    Object.assign(BAL.stip,JSON.parse(B0));
    const kem=S.inv.filter(e=>/hàng kém/.test((IT[e.k]||{}).n||"")).length;
    if(c){const i=Q.indexOf(c);Q.splice(0,i);try{render();showModal()}catch(e){}}
-   const vis=[...document.querySelectorAll('#modal:not([hidden]) #mb .opts > *')].filter(x=>x.offsetParent).map(x=>x.textContent.trim().slice(0,40));
+   const vis=__kopts(document.querySelector('#modal:not([hidden])')).filter(x=>__koptSeen(x)).map(x=>__koptText(x).slice(0,40));
    return{me:S.name,seat:COOP.seat,opts:c?(c.opts||[]).map(x=>x.n):[],vis,said:c?/không có việc gì để chọn/.test(c.h):false,bac:S.bac,kem,tip:BAL.stip.tip[Math.min(7,rkOf(S))]}},want);
  const pick=async(o)=>{await o.p.evaluate(()=>{const j=Q.findIndex(q=>(q.opts||[]).some(x=>/^Lót tay/.test(x.n)));if(j>0)Q.unshift(...Q.splice(j,1));try{showModal()}catch(e){}const i=Q[0]&&Q[0].opts?Q[0].opts.findIndex(x=>/^Lót tay/.test(x.n)):-1;if(i>=0)chooseM(i)});await sleep(1500);if(await o.p.evaluate(()=>COOP.seat!=='a'))await until(o,()=>!(COOPW.thin&&COOPW.thin.F&&COOPW.thin.F.pend),null,20000);await sync();
    return o.p.evaluate(()=>({bac:S.bac,kem:S.inv.filter(e=>/hàng kém/.test((IT[e.k]||{}).n||"")).length,tip:stipSt(S).tip===S.turn}))};

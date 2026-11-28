@@ -13,8 +13,8 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',VID,LAB='br
  const shot=async n=>{if(VID)await p.screenshot({path:`${VID}/${LAB}-${W}-${n}.png`})};
  async function drain(max=10){const seen=[];for(let i=0;i<max;i++){const q=await p.evaluate(()=>Q.length);if(!q)break;
    const info=await p.evaluate(()=>{showModal();const M=document.getElementById('modal');return {t:Q[0]&&Q[0].t||'',body:M.innerText.replace(/\s+/g,' ').slice(0,900)}});seen.push(info);await sleep(900);
-   const btn=await p.$('#modal:not([hidden]) #mr .kbtn')||await p.$('#modal:not([hidden]) #mr button')||await p.$('#modal:not([hidden]) .kpopts button, #modal:not([hidden]) .opts button');
-   if(btn){await btn.click({timeout:3000}).catch(async()=>{await p.evaluate(()=>closeModal())})}else await p.evaluate(()=>closeModal());await sleep(400)}return seen}
+   const btn=await p.$('#modal:not([hidden]) #mr .kbtn')||await p.$('#modal:not([hidden]) #mr button')||await p.$('#modal:not([hidden]) .kpopts button, #modal:not([hidden]) .opts button, #modal:not([hidden]) button.kpk-b'/* K-OPTS-READER: + kitPick plaques */);
+   if(btn){await KO.tap(p,btn,{timeout:3000}).catch(async()=>{await p.evaluate(()=>closeModal())})}else await p.evaluate(()=>closeModal());await sleep(400)}return seen}
  /* setup (same on LIVE): v really poisoned w (one deed); she is Tần with Tâm cơ 40; v Tâm cơ 40, Quý nhân */
  const su=await p.evaluate(()=>{window.__r0=Math.random;S.rank=3;const L0=(typeof spyList==='function'?spyList():liveRivals(true)).filter(x=>!x.queen&&!x.out);const L=L0.filter(x=>!sameHouse(S,x)&&x.rank<5);const v=L[0],w=L[1];
   for(const x of [v,w,S]){x.wrongs=[];x.dw=0;x.schemes=0;x.dws=0;x.dkeys=[];if(x!==S){x.scandal=0;x.affair=null;x.plan=null;x.inv=[];x.dress=null}}

@@ -38,7 +38,7 @@ AA.restore=(s0)=>{AA.force=null;AA.hide();const d=JSON.parse(AA.base.j);quiet=tr
  for(const k in PG)delete PG[k];Object.assign(PG,AA.base.PG);AA.reseed((s0||7)+1)};
 /* ---- surfaces: how to make a group of buttons visible ---- */
 const panelBtns=()=>[...document.querySelectorAll("#panel button.ka, #panel .pcb button, #panel .rbtn button, #panel button.card")];
-const popBtns=()=>[...document.querySelectorAll("#popw button.opt, #popw .opts button, #popw button.ka")].filter(b=>!/^✕/.test(T(b)));
+const popBtns=()=>__kopts(document.getElementById("popw"),"button.opt, button.ka")/* K-OPTS-READER: + person-card plaques (§98.20) */.filter(b=>!/^✕/.test(T(b)));
 AA.surfaces=()=>{const L=[{id:"act",tab:"act"}];
  rivals.forEach((v,i)=>{if(v.alive&&(i<3||v.queen))L.push({id:"rv:"+((v.queen?"HH ":"")+v.name),tab:"rv",pg:["rv",i]})});
  const nS=(S.staff||[]).length+1;for(let i=0;i<Math.min(nS,4);i++)L.push({id:"staff:"+i,tab:"staff",pg:["staff",i]});
@@ -54,13 +54,13 @@ const rowsOf=b=>{const r={};for(const k of ["why","ton","duoc","mat","kem","note
  const od=b.querySelector(".kodm");r.odds=od?(od.getAttribute("title")||T(od)).replace(/ —.*$/,""):"";r.name=T(b.querySelector(".kan"))||T(b).slice(0,60);r.dis=b.disabled||b.classList.contains("kdis");r.text=T(b).slice(0,400);r.kneed=b.dataset.kneed||"";return r};
 AA.rowsOf=rowsOf;
 const resultNow=()=>{const t=document.getElementById("rtoast");const m=document.getElementById("modal");const lr=window.kaLastResult||null;
- return{toast:t&&t.classList.contains("on")?T(t).slice(0,500):"",kres:lr?JSON.parse(JSON.stringify(lr)):null,modal:m&&!m.hidden?{title:T(document.getElementById("mt")),opts:[...m.querySelectorAll(".opts button, .opt")].map(b=>rowsOf(b))}:null,
+ return{toast:t&&t.classList.contains("on")?T(t).slice(0,500):"",kres:lr?JSON.parse(JSON.stringify(lr)):null,modal:m&&!m.hidden?{title:T(document.getElementById("mt")),opts:__kopts(m,".opt").map(b=>rowsOf(b))}:null,
   pop:popIdx!=null?T(document.getElementById("popw")).slice(0,300):"",popMsg:String(popMsg||"").replace(/<[^>]+>/g,"")}};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 /* tap button j of surface sf (and option k of the dialog it opens), with every roll forced to f (true/false/null) */
 AA.run=async(sf,j,f,k)=>{AA.restore();AA.show(sf);let B=AA.btns(sf);let b=B[j];if(!b)return{err:"no button"};const card=rowsOf(b);
  window.kaLastResult=null;const e0=AA.errs.length;let pre=null,post=null;
- if(k!=null){AA.force=null;b.click();await sleep(30);render();const m=document.getElementById("modal");const O=m&&!m.hidden?[...m.querySelectorAll(".opts button, .opt")]:[];const o=O[k];if(!o)return{err:"no option",card};
+ if(k!=null){AA.force=null;b.click();await sleep(30);render();const m=document.getElementById("modal");const O=m&&!m.hidden?__kopts(m,".opt"):[];const o=O[k];if(!o)return{err:"no option",card};
   const oc=rowsOf(o);{const t=document.getElementById("rtoast");if(t){t.classList.remove("on");t.innerHTML=""}}popMsg="";pre=AA.snap();window.kaLastResult=null;AA.force=f;try{o.click()}catch(e){AA.errs.push("click "+e.message)}await sleep(60);AA.force=null;post=AA.snap();const res=resultNow();
   return{card:oc,parent:card.name,pre,d:AA.diff(pre,post),res,errs:AA.errs.slice(e0)}}
  pre=AA.snap();AA.force=f;try{b.click()}catch(e){AA.errs.push("click "+e.message)}await sleep(60);AA.force=null;post=AA.snap();const res=resultNow();

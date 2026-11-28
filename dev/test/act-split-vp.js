@@ -25,7 +25,7 @@ const VPS=(SIZES||"755x1000@2,1000x755@1,1180x820@2,1366x1024@2,844x390@2,390x84
   if(OUT){try{await p.waitForFunction(()=>{const i=document.querySelector('.mapimg');return i&&i.complete&&i.naturalWidth>0},null,{timeout:30000})}catch(e){}await sleep(1500);await p.screenshot({path:`${OUT}/fmap-${sz}.jpg`,type:'jpeg',quality:45})}
   /* 2. arrive: the light acts in the kit dialog */
   const d=await p.evaluate(clr0=>{used=0;goTo("vuon");render();/* other dialogs of the moment may come first: close them until the festival one is on top */for(let i=0;i<6&&Q.length&&!/Nguyên tiêu/.test(Q[0].t||"");i++)Q.shift();try{showModal()}catch(e){}const md=document.getElementById("modal");if(!md||md.hidden)return{shown:0,Q:Q.map(x=>x.t)};const box=md.querySelector(".dlg,.dbox,.kpanel")||md;const r=box.getBoundingClientRect();
-   const O=[...md.querySelectorAll(".opts button,.opt")].map(x=>x.textContent.replace(/\s+/g," ").trim().slice(0,40));return{shown:1,t:(document.getElementById("mt")||{}).textContent,O,in:r.left>=-1&&r.right<=innerWidth+1&&r.top>=-1,hs:document.documentElement.scrollWidth>innerWidth+1}},clr);
+   const O=__kopts(md,".opt").map(x=>__koptText(x).replace(/\s+/g," ").trim().slice(0,40));return{shown:1,t:(document.getElementById("mt")||{}).textContent,O,in:r.left>=-1&&r.right<=innerWidth+1&&r.top>=-1,hs:document.documentElement.scrollWidth>innerWidth+1}},clr);
   ck(sz,'arrival: festival light acts shown in the kit dialog, inside the screen',d.shown&&d.O.length>=2&&d.in&&!d.hs&&d.O.some(x=>/đố đèn|Dạo đèn/.test(x)),d);
   if(OUT){await sleep(1200);await p.screenshot({path:`${OUT}/fdlg-${sz}.jpg`,type:'jpeg',quality:45})}
   /* 3. night: the locked-place card with "Lẻn vào" + the night line */

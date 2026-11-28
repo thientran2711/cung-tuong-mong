@@ -17,7 +17,7 @@ const notes=[];const note=(o,m)=>{const s=(o?o.name+': ':'')+m;if(!notes.include
 async function mk(b,name,v){const ctx=await b.newContext({viewport:{width:v[0],height:v[1]},deviceScaleFactor:v[2],hasTouch:true,isMobile:v[0]<1100,reducedMotion:'reduce'});
  if(SITE===BASE)await serve(ctx);await ctx.addInitScript(u=>{window.COOP_URL=u},WURL);
  await ctx.grantPermissions(['clipboard-read','clipboard-write']).catch(()=>{});
- const o={ctx,name,errs:[],n:0};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);
+ const o={ctx,name,errs:[],n:0};o.page=async()=>{const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(30000);
   p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 /* audit: horizontal overflow, cut text (ellipsis / clipped), tap targets under 40 px, Hán characters, "%" in visible text */
 async function audit(o,tag){const r=await o.p.evaluate(()=>{const out={ov:document.documentElement.scrollWidth>innerWidth+1,cut:[],small:[],han:[],pct:[]};
@@ -43,7 +43,7 @@ async function clear(o,n=30){for(let i=0;i<n;i++){if(await require('./lib/coop-c
   if(/^(Đợi bạn|Mời bạn|Nhập mã|Chơi cùng bạn)$/.test(v.modal.trim()))return'wait';
   const key=v.modal.trim();if(!seenT.has(o.name+key)){seenT.add(o.name+key);await shot(o,'dlg-'+key.replace(/[^\p{L}\d]+/gu,'_').slice(0,24))}
   const ok=await o.p.evaluate(()=>{const m=document.getElementById('modal');const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null&&!x.dataset.coop);
-   const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return true}return false});
+   const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||(__koptsOn(m,':not([data-kcp])')[0]||null)||m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){__koptGo(b);return true}return false});
   if(!ok)return'stuck';await sleep(300)}return'many'}
 const friend=o=>o.p.evaluate(()=>{const f=(rivals||[]).find(v=>v.coop)||(rivals||[]).flatMap(v=>v.staff||[]).find(x=>x.coop);if(!f)return null;
  return{name:f.name,id:f.id,st:typeof k61St==='function'?k61St(f):null,at:S.where&&S.where[f.id],me:S.place||'home'}});
