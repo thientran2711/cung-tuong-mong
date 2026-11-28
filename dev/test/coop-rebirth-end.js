@@ -66,7 +66,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const t0=Date.now();let x3=null;while(Date.now()-t0<120000){await clear(X);await clear(Y);x3=await me(X);if(x3.n&&!x3.dead&&!x3.inLife&&x3.life>x0.life)break;await sleep(700)}
   ok(x3&&x3.n&&!x3.dead&&!x3.inLife&&x3.life>x0.life,tag+': a NEW kiếp in the same room (Luân hồi, life counts on)',{x0:{n:x0.n,life:x0.life},x3});
   ok(await both(60000),tag+': both in the game again');
-  let seen=false;{const t1=Date.now();while(Date.now()-t1<40000&&!seen){await clear(X);await clear(Y);const xn=await X.p.evaluate(()=>S&&!S.dead&&!COOPW.inLife?S.name:null).catch(()=>null);/* her new life can itself end at its first selection (tú nữ road, ban hoa): follow her CURRENT life */seen=!!xn&&await Y.p.evaluate(n=>{const f=COOPW.friend&&COOPW.friend();return !!f&&f.name===n},xn);if(!seen)await sleep(700)}}ok(seen,tag+': '+Y.name+' sees the friend\'s new life',await me(Y))}
+  let seen=false;{const t1=Date.now();while(Date.now()-t1<40000&&!seen){await clear(X);await clear(Y);const xn=await X.p.evaluate(()=>S&&!S.dead&&!COOPW.inLife?S.name:null).catch(()=>null);/* her new life can itself end at its first selection (tú nữ road, ban hoa): follow her CURRENT life */seen=!!xn&&await Y.p.evaluate(n=>{const f=COOPW.friend&&COOPW.friend();if(f&&f.name===n)return true;/* a new life as a palace servant sits in her mistress's staff (jcoopworld placeFriend friendSrv), not among the consorts */return (rivals||[]).some(v=>v&&!v.coop&&(v.staff||[]).some(x=>x&&x.coop&&x.name===n))},xn);if(!seen)await sleep(700)}}ok(seen,tag+': '+Y.name+' sees the friend\'s new life',await me(Y))}
  /* the room is not blocked: one more week for both */
  {const D=o=>o.p.evaluate(()=>({w:COOP.state.week,pend:!!COOPW.pend}));const w0=(await D(A)).w;
   const t0=Date.now();let okW=false;while(Date.now()-t0<240000){await clear(A);await clear(B);for(const o of [A,B])await o.p.evaluate(()=>{const n=document.getElementById('next');if(n&&!n.disabled)n.click()}).catch(()=>{});
@@ -84,6 +84,15 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   await B.p.evaluate(()=>{COOPW.whereKey='missed'});/* she holds no «where» of this tối */
   t0=Date.now();let okN=false;while(Date.now()-t0<120000){await clear(A);await clear(B);await press(A);await B.p.evaluate(()=>{try{COOPW.nCheck()}catch(e){}});const a=await D(A),c=await D(B);if(a.w>w0&&c.w>w0){okN=true;break}await sleep(700)}
   ok(okN,'N1: guest without the tối «where», host ends first → her night runs, the week merges',okN?undefined:[await D(A),await D(B)])}
+ /* N2 (coop-e2e SWAP1 on LIVE f7ea14b7, week 1: guest pend:true, sent -1, Q 0, no modal, not frozen, > 90 s): her week end is held by a
+    gate (here a card in Q) that then clears with NO event (the card is dropped, no closeModal / render) → before: nothing retried, the seat
+    waited for ever; now the heartbeat retries: her end goes out within a few seconds */
+ {const D=o=>o.p.evaluate(()=>({w:COOP.state.week,b:S.buoi||0,pend:!!COOPW.pend,sent:COOPW.sent,wk:typeof wk==='function'?wk():null,ended:COOP.state.ended,Q:Q.length,tr:COOPW.tr.slice(-10)})).catch(e=>e.message);
+  await sleep(1500);const h=await B.p.evaluate(()=>{Q.push({t:'N2 thẻ thử'});COOPW.pend=true;try{render()}catch(e){}return{pend:COOPW.pend,sent:COOPW.sent,Q:Q.length}});
+  await sleep(1500);const held=await D(B);ok(held.pend&&held.sent!==held.wk,'N2: a card in Q holds her week end',held);
+  await B.p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true});/* dropped silently: no closeModal, no render */
+  const t0=Date.now();let gone=null;while(Date.now()-t0<12000){gone=await D(B);if(gone.sent===gone.wk||(gone.ended&&gone.ended.b))break;await sleep(400)}
+  ok(gone&&(gone.sent===gone.wk||(gone.ended&&gone.ended.b)),'N2: the gate clears with no event → her week end still goes out (heartbeat)',[h,gone])}
  for(const o of [A,B])ok(!o.errs.length,o.name+': no page errors',o.errs.slice(0,5));
  const bad=res.filter(r=>!r[0]);console.log(`\n${res.length-bad.length}/${res.length} passed`);fs.writeFileSync(OUT+'/result.txt',res.map(r=>(r[0]?'ok  ':'FAIL')+' '+r[1]).join('\n')+'\n');
  await b.close();process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});

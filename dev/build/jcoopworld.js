@@ -814,6 +814,11 @@ function resAck(id){const i=CW.rq.findIndex(x=>x.id===id);if(i>=0){CW.rq.splice(
 function rqFlush(all){if(!CW.on)return;const n=Date.now(),k=RQK();CW.rq=CW.rq.filter(x=>n-(x.t0||0)<1800000);for(const x of CW.rq)if((!x.rk||x.rk===k)&&(all||n-(x.at||0)>5000))rqSend(x)}
 COOP.on("peer",on=>{if(on)setTimeout(()=>rqFlush(true),600)});COOP.on("room",()=>{rqLoad();setTimeout(()=>rqFlush(true),900)});
 setInterval(()=>{try{if(CW.on&&CW.rq.length)rqFlush(false)}catch(e){}},2500);
+/* review/coop-rebirth-resync (coop-e2e SWAP1 on LIVE f7ea14b7, week 1: guest pend:true, sent -1, Q 0, no modal, not frozen, > 90 s): every
+   pending step (her week end CW.pend, a held buổi CW.pendBuoi, a wanted step CW.wantB, her night CW.nrdy / CW.ngoW) is retried only when an
+   event calls soonEnd (render, closeModal, status, an ack); a gate that clears with no event (a card dropped from Q, a mini-game closed, a
+   res ack lost) left the seat waiting for ever. One heartbeat retries them all (soonEnd keeps its own guards; tryEnd re-checks every gate). */
+setInterval(()=>{try{if(CW.on&&S)soonEnd()}catch(e){}},2500);
 const rsSeen=id=>seenIds.has("r"+id)||(!!S&&Array.isArray(S.coopRs)&&S.coopRs.includes(id));
 function onRes(m){if(!CW.on||m.from===CW.seat||!S)return;if(rsSeen(m.id)){COOP.send({t:"actr",id:m.id,ok:true,ack:1});return}seenIds.add("r"+m.id);
  S.coopRs=(S.coopRs||[]).concat([m.id]).slice(-80);
@@ -856,7 +861,7 @@ COOP.on("act",onAct);COOP.on("res",onRes);COOP.on("actr",onActr);
 /* my acts on her not yet acknowledged (10 s at most: she may have dropped; the freeze covers that) */
 function resWait(){const n=Date.now();for(const id in CW.rpend)if(n-CW.rpend[id]>10000)delete CW.rpend[id];return Object.keys(CW.rpend).length>0}
 let tryT=0;function tryEnd(){tryT=0;if(CW.on&&CW.pend&&resWait()){tryT=setTimeout(tryEnd,400);return}if(CW.on&&CW.pendBuoi&&S&&!Q.length&&!S.mg){onBuoi(CW.pendBuoi);return}
- if(CW.on&&CW.wantB&&S){if(CW.wantB!==bkey()||S.dead||CW.bend||CW.pend||nReady())CW.wantB=null;else if(!Q.length&&!S.mg&&!whereWait()&&!waiting()&&!frozen()&&CW.base){T("wantB go "+CW.wantB);CW.wantB=null;nextBuoi();return}}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd()}
+ if(CW.on&&CW.wantB&&S){if(CW.wantB!==bkey()||S.dead||CW.bend||CW.pend||nReady())CW.wantB=null;else if(!Q.length&&!S.mg&&!whereWait()&&!waiting()&&!frozen()&&CW.base){T("wantB go "+CW.wantB);CW.wantB=null;nextBuoi();return}}nCheck();if(CW.on&&S&&CW.pend&&!Q.length&&!S.mg&&!S.dead&&!frozen())sendEnd();else if(CW.on&&S&&CW.pend){/* debug: name the gate a held week end waits on (once per change) */const g="endHold "+(Q.length?"Q"+Q.length:"")+(S.mg?"mg":"")+(S.dead?"dead":"")+(frozen()?"frozen":"");if(CW.endHoldT!==g){CW.endHoldT=g;T(g)}}}
 function soonEnd(){if(CW.on&&(CW.pend||CW.pendBuoi||CW.wantB||CW.ngoW===wk()||CW.nrdy===wk())&&!tryT)tryT=setTimeout(tryEnd,0)}
 
 /* ---------- receiving ---------- */
