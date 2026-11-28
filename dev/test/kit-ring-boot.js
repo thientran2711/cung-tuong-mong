@@ -1,3 +1,4 @@
+require('./lib/bigpage');/* HARNESS-BIGPAGE (KK63): page bodies > 4 MB never go through route.fulfill */
 /* RING-BUILD shared boot: a real life, inside the palace, at Ngự hoa viên with 6 real consorts (fixture: their day-plan rows S.roster put them in the garden in 3 real groups,
    the same rows the NPC day plan writes: [place, kind, with, why]). Used by dev/test/kit-ring.js and the review recorder. */
 module.exports=async function boot(p,o){o=o||{};

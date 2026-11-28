@@ -317,12 +317,12 @@ function kitDlgFit(){try{const M=document.getElementById("modal");if(!M||M.hidde
    options keep at least min(their content, 42 % of the body); a longer text is capped to the rest and scrolls inside itself (.kdtx, soft top
    shadow once scrolled). Person dialogs (kdper) scroll their whole right column instead (kitDpAll / .kdpall) and do not use the cap. */
 function kitDlgText(d,mb,o){try{const kb=mb.querySelector(":scope > .kpb"),tx=kb&&kb.querySelector(":scope > .kpmain");if(!kb||!tx)return;
- d.classList.remove("kdtx");kb.style.removeProperty("max-height");tx.classList.remove("kdsh");
+ d.classList.remove("kdtx");kb.style.removeProperty("max-height");kb.style.removeProperty("--kdroom");tx.classList.remove("kdsh");
  if(d.classList.contains("kdper"))return;
  const cs=getComputedStyle(mb),pad=(parseFloat(cs.paddingTop)||0)+(parseFloat(cs.paddingBottom)||0),gap=parseFloat(cs.rowGap)||0;
  const inner=mb.clientHeight-pad,optNat=Math.min(o.scrollHeight,Math.max(96,Math.round(inner*.42)));
  const room=Math.max(72,Math.floor(inner-optNat-gap)),nat=kb.scrollHeight;
- if(nat>room+1){d.classList.add("kdtx");kb.style.maxHeight=room+"px"}
+ if(nat>room+1){d.classList.add("kdtx");kb.style.maxHeight=room+"px";kb.style.setProperty("--kdroom",room+"px")}/* K-PICK-FOLD-BAND (KK61): the cap in px for the stacked band (jkslide kv1 .kdtx: band ≤ 42 % of it) — a % of its own grid row was circular */
  if(!tx.dataset.kdsh){tx.dataset.kdsh=1;tx.addEventListener("scroll",()=>tx.classList.toggle("kdsh",tx.scrollTop>2),{passive:true})}}catch(e){console.error("kitDlgText",e)}}
 window.kitDlgFit=kitDlgFit;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitDlgFit();requestAnimationFrame(kitDlgFit)}catch(e){}return r};
@@ -1079,7 +1079,7 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
  ${B} small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
  ${B} small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
  ${B} small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
- ${B} small.kb>.kr>.krv>.ksep{display:none!important}
+ ${B} small.kb>.kr>.krv>.ksep{display:inline-block!important;margin:0!important;opacity:.55;flex:none!important}/* R12 (MAIN 174 LOOK B, law 11): KIT §5 rows «values in one row are separated by .ksep ·» — hidden here, two results ran on as one phrase («tiến bộ một đến ba phần ra một món vật cầu phúc») */
 
 `}
 window.kitCompactCSS=kitCompactCSS;

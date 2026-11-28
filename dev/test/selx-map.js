@@ -1,7 +1,7 @@
 /* review/selection-scene (SELSCENE-6): Dưỡng Tú viện on the Dư đồ level 2 (OD 24/11 ~05:35Z / ~08:20Z) — the free card offers «Ra Dư đồ» instead of «Sang …»,
    the map opens on the jpm courtyard level with 4 parts (3 sở + Tiền sảnh) and people counts, «Sang buổi» stays shut, a part tap walks there (BAL.walk.near khắc)
    and brings back her free card there, the deferred cards come back after; «Ra Dư đồ» raises no result card.  usage: node dev/test/selx-map.js [index.html] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html';
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html';
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m,x)=>{if(!c){bad++;console.log('FAIL',m,x!==undefined?JSON.stringify(x).slice(0,600):'')}else console.log('ok',m)};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});
  await ctx.route('http://localhost:8813/**',r=>{const u=new URL(r.request().url());const f=path.join(ROOT,decodeURIComponent(u.pathname));if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});return r.fulfill({status:200,contentType:f.endsWith('.html')?'text/html; charset=utf-8':'application/octet-stream',body:fs.readFileSync(f)})});

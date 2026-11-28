@@ -1,6 +1,6 @@
 /* map-full: Dư đồ full screen (KIT §85.6). Scan: map width / page width = 100 % and map height = page height at every size, on the palace map and the courtyard level;
    tools row + side columns are overlays (inside the map box). usage: node dev/test/map-full.js <url> <shotdir|-> [WxH,..] [cache] ; localhost urls bypass the proxy */
-const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.argv[5]||process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.argv[5]||process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
 const [,,URL_,DIR,SIZES]=process.argv;const sl=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});let bad=0;
 for(const sz of (SIZES||'755x1000,1180x820,1366x1024,412x1058,390x844').split(',')){const [W,H]=sz.split('x').map(Number);const errs=[];

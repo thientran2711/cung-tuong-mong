@@ -4,7 +4,7 @@
    usage: node dev/test/pcard-fill.js <build url> <outdir> [WxH@dpr,...]   → JSON per size + shots <outdir>/<WxH>-<case>.jpg
    cases: rv0 (Hoàng hậu card: left key block + right info panel in the sticky), rv1 (phi tần), court0 (Hoàng thượng), court1 (Thái hậu), pop (stage pop-up, acts + blocks stacked),
           popdone (pop-up after the visit's one talk: Việc nhanh act cards), stranger (Người lạ: no fill), me (her own card: no fill) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const R={};
  for(const sz of (SIZES||"755x1000@1,1000x755@1,1180x820@1,1366x1024@1,844x390@1").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const res={},errs=[];
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+dpr,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});

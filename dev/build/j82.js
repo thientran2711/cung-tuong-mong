@@ -102,7 +102,7 @@ const KG82_RW=/^(Hồi|Câu|Môn|Vòng|Lượt|Bước)\s+(.+)$/,KG82_PLACE=/^(N
 /* KIT-MGBG: the DOM boards that take the painted board backdrop slot (kitGameFrame .kgbox-bg, key mg-<kind>-bg) */
 const KG82_BOARDBG=new Set(["thu_tam","thu_choi","tuoi","co7"]);window.KG82_BOARDBG=KG82_BOARDBG;
 const KG82_MGBG=new Proxy({},{get:(o,k)=>typeof k==="string"?`img/mgbg-${(typeof KG82_BOARDOF!=="undefined"&&KG82_BOARDOF[k])||k}.webp`:undefined});/* review/art-slots: a kind played on another kind's board (kinh, may → ve) takes that board's figure backdrop too */window.KG82_MGBG=KG82_MGBG;
-function kg82Pic(kind){KG82.picKind=kind;/* the kind being opened: kg82Open hands it to the frame for the figure-column backdrop */if(["duho","den","may"].includes(kind)||KG82_BOARDBG.has(kind))return "";const s=`img/kit/mg-${kg82BgName(kind)}.webp`;
+function kg82Pic(kind){KG82.picKind=kind;if(!kind)return"";/* the kind being opened: kg82Open hands it to the frame for the figure-column backdrop */if(["duho","den","may"].includes(kind)||KG82_BOARDBG.has(kind))return "";const s=`img/kit/mg-${kg82BgName(kind)}.webp`;
  try{if(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&!KIT_CDNHAVE.has(s.replace(/^.*?(?=img\/)/,""))){if(typeof kitPhNote==="function")kitPhNote("mg",kg82BgName(kind),"light",(KG82_KIND[kind]||{}).t||kind);return ""}}catch(e){}return s}
 function kg82Frame(o){KG82.rlock=o.round||"";const hud=[["score","Phần","0/10"],["round",o.round||"Hồi",o.roundV||"–"],["time","Còn","–"]];
  if(kg82Kit())return kitGameFrame({art:o.art,title:o.title,how:o.how,hud,id:"kg82box",pic:o.pic,fig:o.fig!==false,seal:o.seal,kind:o.kind||KG82.picKind});
@@ -177,14 +177,14 @@ function kg82SkinOn(d,kind,sk){const s=kitMgSkin(kind,sk);KG82.skin=s;if(d){d.da
 function kitMgPal(){const d=document.getElementById("kg82"),cs=d?getComputedStyle(d):null,v=(k,f)=>{const x=cs&&cs.getPropertyValue(k).trim();return x||f};
  return{pal:(d&&d.dataset.mgpal)||"son",a:v("--mgp-a","#b0402c"),b:v("--mgp-b","#8a2a1e"),ink:v("--mgp-ink","#fff8e6"),rim:v("--mgp-rim","#6e1d12")}}
 Object.assign(window,{kitMgSkinAdd,kitMgSkinList,kitMgSkin,kg82SkinSrc,kg82SkinOn,kitMgPal});
-function kg82Img(n){const id=KG82.skin&&KG82.skin.id||"",k=id?n+"@"+id:n;let i=KG82_IMG[k];if(!i){i=new Image();i.decoding="async";const d=`img/kit/mg-${n}.webp`,s=id?kg82SkinSrc(n,id):d;
+function kg82Img(n){if(!n){/* no picture name (no kind): an empty image — never a request for «mg-.webp» (kg82Ok = false → the kit silk) */return KG82_IMG[""]||(KG82_IMG[""]=new Image())}const id=KG82.skin&&KG82.skin.id||"",k=id?n+"@"+id:n;let i=KG82_IMG[k];if(!i){i=new Image();i.decoding="async";const d=`img/kit/mg-${n}.webp`,s=id?kg82SkinSrc(n,id):d;
   if(s!==d)i.onerror=()=>{i.onerror=null;i.src=d};i.src=s;KG82_IMG[k]=i}return i}
 function kg82Ok(n){const i=kg82Img(n);return i.complete&&i.naturalWidth>0}
 /* contest board vs lesson room: KG82.ctx "thi" (startContest) | "hoc" (lessons, practice, works) */
 const KG82_HOC=["dan","co","tho","ve","mua","huong","theu","banh"];
 /* KIT MG-SKIN board-of: a kind with no board painting of its own (kinh = chép kinh, may = may áo) is played on another kind's board; its skins ARE that board's skins (one table, read by kg82BgName + kitMgSkinList + kitMgSkin; KIT REQUEST «kinh / may board slot», Foreman F) */
 const KG82_BOARDOF={kinh:"ve",may:"ve"};window.KG82_BOARDOF=KG82_BOARDOF;
-function kg82BgName(kind){kind=KG82_BOARDOF[kind]||kind;return KG82.ctx==="hoc"&&KG82_HOC.includes(kind)?`${kind}-bg-hoc`:`${kind}-bg`}
+function kg82BgName(kind){if(!kind)return"";/* KIT-KRI-XL (F 404 img/kit/mg-undefined-bg.webp): a frame opened with no kind (the scheme games sgPlay, kg82Veil) has NO board painting — never «undefined-bg» */kind=KG82_BOARDOF[kind]||kind;return KG82.ctx==="hoc"&&KG82_HOC.includes(kind)?`${kind}-bg-hoc`:`${kind}-bg`}
 /* cover-fit the board painting; ay = vertical anchor (1 = keep the bottom, where the play surface is); veil = soft wash for legibility */
 const KG82_BGC={};
 function kg82Bg(g,W,H,kind,veil,ay){const n=kg82BgName(kind),im=kg82Img(n);
@@ -558,15 +558,15 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
    the result rows instead of "Màn chơi" + note. The skip button is always the KIT §13.6 quick option (o.quick). Absent → unchanged. */
 function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),EG=o.eng&&typeof o.eng==="object"&&KG82_ENG[o.eng.e]?o.eng:null,K=EG?Object.assign({},KG82_KIND[kind],EG):KG82_KIND[kind];/* o.eng = {e, n, t, how, timed} (jpmc 7×7 Cờ): another engine + its rules text on this kind's numbers (talent, hand, tier) */KG82.ctx="hoc";kg82Preload(kind);try{mgSet(kind,{occ:o.occ||"hoc",rank:o.rank})}catch(e){KG82.lv=0}
  const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how,pic:kg82Pic(EG&&EG.e==="gomoku"&&KG82_KIND.co7?"co7":kind)/* KIT-MGBG fix 2: the pm Cờ (art "co" + eng gomoku, the same 7×7 board as Thử tay co7) frames as kind co7 so the real game gets the same backdrop; plain "co" (Ăn quân, another board) keeps its own picture */});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
- const QK=o.quick||{n:"Bỏ qua",sub:"kết quả thường"};/* KIT §13.6: the caller names its quick option (o.quick: kitQuick fields; roll:1 = the BAL.skip.od roll) */
+ const QK=o.quick===false?null:(o.quick||{n:"Bỏ qua",sub:"kết quả thường"});/* quick:false = the caller has NO quick card (its «not playing» = losing; the kg82 ✕ gives up, owner 26/11 ~22:43Z) *//* KIT §13.6: the caller names its quick option (o.quick: kitQuick fields; roll:1 = the BAL.skip.od roll) */
  const done=(raw,skipped,ok)=>{KG82.phase="result";const qRow=skipped&&o.quick&&o.quick.sub==null?[QK.n,QK.roll?`${ok?"thành":"hỏng"}: ${ok?QK.win:QK.lose}`:`${QK.win}`,"t"]:null;
   const html=kg82Rows([qRow||["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"]].concat(o.note?[["Ghi chú",o.note,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
   kg82ShowRes(o.resRows?kg82Rows(o.resRows(raw,skipped))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`:html,qRow?(QK.roll?!!ok:null):raw>=5);kg82Set("score",qRow?"–":`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,ok};
   $("kg82ok").onclick=()=>{kg82Close();try{if(o.onDone)o.onDone(raw,{skipped,ok})}catch(e){console.error(e)}}};
  KG82.phase="intro";if(o.rows)box.classList.add("kgintro");
- box.innerHTML=(o.rows?kgBangRows(o.rowsHead||"Phần của ngươi",o.rows,o.rows.slice(0,2)):"")+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">${o.go||"Bắt đầu"}</button>${kitQuick(QK)}</div>`;
+ box.innerHTML=(o.rows?kgBangRows(o.rowsHead||"Phần của ngươi",o.rows,o.rows.slice(0,2)):"")+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">${o.go||"Bắt đầu"}</button>${QK?kitQuick(QK):""}</div>`;
  kgReady(box,EG?{kind,ev:o.ev,n:K.n,t:K.t,how:K.how,e:K.e,timed:K.timed!==false,tutor:KG82_ENG[K.e]}:{kind,ev:o.ev});/* KIT §13.7 */
- $("kg82go").onclick=()=>{if(EG)KG82.engX=K.e;if(o.onGo)try{o.onGo()}catch(e){console.error(e)}kg82Play(kind,raw=>done(raw,false))};$("kg82skip").onclick=()=>QK.roll?done(0,true,kitQuickRoll()):done(kitSkipCap(o.quick&&o.quick.raw!=null?o.quick.raw:o.quick&&o.quick.sub==null?0:BAL.skip.raw),true)}/* o.quick.raw (jpma pmQuick): the caller's one value, the same number its sub text prints */
+ $("kg82go").onclick=()=>{if(EG)KG82.engX=K.e;if(o.onGo)try{o.onGo()}catch(e){console.error(e)}kg82Play(kind,raw=>done(raw,false))};if($("kg82skip"))$("kg82skip").onclick=()=>QK.roll?done(0,true,kitQuickRoll()):done(kitSkipCap(o.quick&&o.quick.raw!=null?o.quick.raw:o.quick&&o.quick.sub==null?0:BAL.skip.raw),true)}/* o.quick.raw (jpma pmQuick): the caller's one value, the same number its sub text prints */
 window.startContest=startContest;window.playArt=playArt;
 
 /* =============== KIT §13.7 RULES SCREEN «Sẵn sàng» + GUIDED TUTORIAL «Hướng dẫn» (owner OD 20/11 ~00:20Z, review/mg-ready-guide) ===============

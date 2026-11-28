@@ -1,6 +1,6 @@
 /* review/kit-badge (KIT §77b kitStBadge, K-BADGE-HAOHUU): badge markup + look on a .krailb (compact 32 px and 44 px): ok green ✓, busy grey …, pause amber ⏸, none = no badge; .koff greys the picture, not the badge; the badge sits inside the 1.5 px ring at the bottom-right corner and never takes the tap.
    usage: node dev/test/kit-badge.js <url> <outdir>   (outdir is ONE directory, NOT the size list) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const [W,H] of [[755,1000],[1180,820]]){const ctx=await b.newContext({viewport:{width:W,height:H},serviceWorkers:'block'});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof kitStBadge==='function',null,{timeout:240000});await p.waitForTimeout(1500);

@@ -1,7 +1,7 @@
 /* review/stage-rightcol (owner 18/11 ~20:55Z): stage right column = «Cung nhân · N» + «Chí tôn · 3» group folds (kitGroupFold) + Ân sủng + Nguy hiểm chung;
    place name = plain 2-line text on the picture; the "+N people" chip corner stays free.
    usage: node dev/test/stage-rightcol.js <outdir>   (reads ./index.html built by dev/site/build_site.sh; prints PASS/FAIL per device x household x fold state; shots .jpg to <outdir>) */
-const {chromium}=require('playwright');const fs=require('fs');const OUT=process.argv[2]||'/tmp/rc-shots';fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const OUT=process.argv[2]||'/tmp/rc-shots';fs.mkdirSync(OUT,{recursive:true});
 const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.readFileSync(process.env.INDEX||'index.html','utf8');
 const DEV=[['fold',755,1000],['phone',412,1058],['ipad',1180,820]].filter(d=>!process.env.DEVS||process.env.DEVS.split(',').includes(d[0]));const HH=[['h1',0,0,['home','vuon']],['h6',5,6,['home','vuon']],['h1',0,0,['map']],['h6',5,6,['map']]];const FOLD=[['closed',null],['cn','cn'],['ct','ct']];
 const PLACES=(process.env.PLACES||'home,vuon,map').split(',');

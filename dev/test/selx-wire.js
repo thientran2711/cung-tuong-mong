@@ -5,7 +5,7 @@
    (selxBanHoa: life over, alive, origin epilogue). The selection card / Tiền truyện use the new words (no «phong tới» ceiling words).
    A save made before (S.selx without S.selx2) keeps the old ceiling rule [ceiling−2, ceiling]. Hòa thân home road (kc2EnterNc, S.kc.selx2) → selxRank.
    usage: node dev/test/selx-wire.js [index.html]  (serves dev/ through a Playwright route; run python3 dev/build/assemble.py first) */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html';
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m)=>{if(!c){bad++;console.log('FAIL',m)}else console.log('ok',m)};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});

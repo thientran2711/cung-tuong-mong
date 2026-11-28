@@ -1,7 +1,7 @@
 /* Parallel bot balance run: P pages in ONE browser, pictures/sound blocked, seeded Math.random per page (reproducible).
    usage: node dev/measure/run_par.js <root/<file>|url> <mode sens|rand> <lives total> <out.json> [inpage file=inpage6.js] [pages=4] [seed=1]
    Each page plays lives until the total is reached; out.json = all lives (an7.py format). Then: python3 dev/measure/an7.py out.json */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,URL,mode,target,OUT,INP,PG,SD]=process.argv;const P=+PG||4,seed0=+SD||1,T=+target;
 const R=path.resolve(__dirname,'../..');
 (async()=>{const b=await chromium.launch({args:['--js-flags=--max-old-space-size=1024']});const all={};let done=0;const t0=Date.now();

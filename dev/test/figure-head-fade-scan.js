@@ -1,7 +1,7 @@
 /* figure-head-fade-scan.js — owner 18/11 ~09:25Z (fullbody-frame S3): (1) the scroll fade / «Kéo xuống» belongs ONLY to the scrolling column: the figure's own COLUMN rect (painted figure ∩ figure column) is pixel-identical with the cues hidden (the scrolling text column may still run over a robe that spreads under it, owner: «row đè lên cái hình thôi»);
    (2) the person's HEAD sits at the horizontal centre of the figure column (head-centre offset px; only a figure that would pass the frame's own left edge may be off-centre, by exactly that much).
    Frames: centre pop-up news/notice (M/L/XL), choice, coach (kitPersonDlg), Nội vụ phủ shop, identity card. usage: node dev/test/figure-head-fade-scan.js <index.html> [outdir]  env SZ CASES SHOTS=1 */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 let CASES=[['hoang-hau','img/fig-thaihau-1.webp'],['hh-c09','img/fig-consort-c09-t8-a26.webp'],['hh-h3-a36','img/fig-thaihau-h3-a36.webp'],['hh-h1-a51','img/fig-thaihau-h1-a51.webp'],['hh-h2-a18','img/fig-thaihau-h2-a18.webp'],['widest-robe','img/fig-maid-m48-t8-a51.webp'],['crown-tallest','img/fig-maid-m50-t8-a18.webp'],['man','img/fig-man-bacdich-1-a36.webp'],['old-maid-wide','img/fig-maid-m50-t6-a51.webp'],['SELF','SELF']];
 if(process.env.CASES)CASES=CASES.filter(c=>process.env.CASES.split(',').includes(c[0]));

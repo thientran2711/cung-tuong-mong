@@ -1,6 +1,6 @@
 /* buoi-art: every season + festival band skin and the 4 buổi icons are wired (BTR_ART/BTR_ICON), served, painted, 0 page errors.
    usage: node dev/test/buoi-art.js http://localhost:<port>/index.html <outdir> */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});const FX=path.resolve(__dirname,'../../img/fx');
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 const SEA=['xuan','ha','thu','dong'],FST=['newyear','nguyentieu','thanhminh','doanngo','phoenix','thattich','trungthu','trungcuu','dongchi','giaothua','vulan','vantho','lapbat'];
