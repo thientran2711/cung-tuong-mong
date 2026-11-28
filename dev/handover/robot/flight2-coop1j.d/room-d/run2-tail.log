@@ -1,0 +1,60 @@
+TAP .dlg «Có người đến» «Kể thật những gì mình biếtTốnkhôngĐượcTh › ✓»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Chọn chính mình»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Quẻ Thượng thượng (Con cái)»
+TAP .dlg «Quẻ Thượng thượng · Con cái» «Gieo lạiTốnBạc 10·1 khắcĐượckhông»
+TAP .dlg «Gieo lại quẻ» «Lui»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sổ ghi»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «mai nở trong tuyết»
+TAP page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 1 ngườ» «Sẵn sàng»
+TAP info #kpop
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc74Tài45Tâm cơ94Đức15Danh2Sủng0»
+TAP page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngnhẹ: Nghỉ ngơi »
+TAP .dlg «Nghỉ ngơi» «Nghỉ ngơi một lát · nhẹTốnkhôngĐượcbớt Buồn támGợi»
+TAP .dlg «Nghỉ ngơi» «Nghỉ ngơi một lát · nhẹTốnkhôngĐượcbớt B › ✓»
+TAP .dlg «Sắc» «Lui»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Con gái Đại tướng quân 0/16»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lôi Sương Hoa: Đang làm việc»
+TAP .dlg «Tâm trạng · Đáp ứng Lôi Sương Hoa» «Lui»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Túi đồThú cưngThư nhàViệcTất cả 405Trang sức 5Y ph»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»
+TAP page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ» «Tất cả 10/20Nghỉ ngơi 1/3Giao thiệp 3/4Học tập · T»
+TAP info #rtoast.on
+TAP page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Túi đồThú cưngThư nhàViệcTất cả 405Trang sức 5Y ph»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tự chọn đồRất vữngTốn0 khắcThànhthay ngay bộ ta ch»
+TAP page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngnhẹ: Nghỉ ngơi »
+TAP .dlg «Nghỉ ngơi» «Nghỉ ngơi một lát · nhẹTốnkhôngĐượckhông được mất »
+TAP .dlg «Nghỉ ngơi» «Nghỉ ngơi một lát · nhẹTốnkhôngĐượckhông › ✓»
+TAP info #rtoast.on
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sẵn sàng»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Buổi tối, còn 4 khắc»
+TAP .dlg «tối · còn» «Lui»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Phế phiTần Hân Duyệt»
+TAP .kfoc «Hỏi chuyện cũ · Vững · Tốn 1 khắc»
+TAP .kfoc «Sẵn sàngbắt đầu chơi»
+TAP .kfoc «Bỏ qua · kết quả thường»
+NOW page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » hit 1 idle 0 buổi 680 areaTaps 970
+TAP page «Vĩnh Hòa cung · Hòa Chương hiên · Ở đây còn 2 ngườ» «Sẵn sàng»
+TAP .kmov «Ta biết rồi»
+TAP .kmov «Ta biết rồi»
+TAP .kmov «Ta biết rồi»
+TAP .dlg «Kính sự phòng» «Chặn ngự giáHiểmTốnkhôngĐượcdựa vào nhan sắc, ân s»
+TAP .dlg «Kính sự phòng» «Chặn ngự giáHiểmTốnkhôngĐượcdựa vào nhan › ✓»
+TAP .kmov «Ta biết rồi»
+TAP info #rtoast.kres-hold .kres-next
+NOW #kg82 «» hit 4 idle 0 buổi 681 areaTaps 1205
+TAP #kg82 «Sẵn sàngtừ lúc này mới tính giờ»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lôi Sương Hoa: Đã sẵn sàng»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Sắc74Tài45Tâm cơ94Đức15Danh2Sủng0»
+TAP .dlg «Sắc» «Lui»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tài nghệ»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Giao tình»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tư trang»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Lôi Sương Hoa: Đã sẵn sàng»
+TAP page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Mệnh truyện»
+SEAT LIFE DONE guest k1 HARNESS
+SEAT LIFE DONE host k1 HARNESS
+ROOM DONE flight2-coop1j-d · guest k1 HARNESS · host k1 HARNESS
