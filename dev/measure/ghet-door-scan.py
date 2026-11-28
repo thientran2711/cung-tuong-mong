@@ -57,6 +57,27 @@ for f in sorted(glob.glob(os.path.join(d,'j*.js'))):
             w=(obj+'.'+fld+op+rhs)
             if kind=='FALL' and (b,w) in KNOWN:kind='known'
             rows.append((b,n,kind,w[:120]))
+# D-ROW37 rv: a liking fall written through spAdd(x,"rel",n<0) gets stat-pace only and skips the ghét pace (opDn) = the same leak
+SPR=re.compile(r'spAdd\(([^,()]{1,30}),\s*"rel",\s*([^)]{1,60})\)')
+def balv(expr):
+    if re.fullmatch(r'-\s*[\w.]+',expr):return -1
+    m=re.fullmatch(r'BAL((?:\.\w+)+)',expr)
+    if not m:return 0
+    k=m.group(1).split('.')[-2:]
+    for bf in ('jbal.js','jbal2.js','jbaleff.js'):
+        t=open(os.path.join(d,bf),encoding='utf-8').read()
+        mm=re.search(r'\b'+k[0]+r':\{[^{}]*?\b'+k[1]+r':(-?\d+)',t)
+        if mm:return int(mm.group(1))
+    return 0
+for f in sorted(glob.glob(os.path.join(d,'j*.js'))):
+    b=os.path.basename(f)
+    if b in SKIP or b=='jstatpace.js' or b.startswith('jcoop'):continue
+    for n,l in enumerate(open(f,encoding='utf-8'),1):
+        for m in SPR.finditer(l):
+            v=m.group(2).strip()
+            if re.fullmatch(r'-?\d+',v):kind='FALL' if int(v)<0 else 'rise'
+            else:kind='FALL' if balv(v)<0 else ('rise' if balv(v)>0 else 'sp-var')
+            rows.append((b,n,kind,('spAdd '+m.group(0))[:120]))
 from collections import Counter
 C=Counter(r[2] for r in rows)
 print('| file:line | kind | write |\n|---|---|---|')

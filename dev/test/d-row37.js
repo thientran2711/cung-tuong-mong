@@ -23,7 +23,7 @@ const PAGE=process.argv[2]||'dev/index.html';let pass=0,fail=0;const ok=(c,m)=>{
  ok(A.two<=Math.max(A.one,A.side)+0.01,`A2 a second cause in the same buổi does not stack: ${A.two} ≤ max(${A.one}, ${A.side})`);
  ok(A.raw===A.tell,`A3 rollback BAL.oanPace.on=0 (+ stat-pace off) = the raw old size ${A.raw}`);
  /* (B) trung y: ask once per buổi */
- const B=await p.evaluate(async()=>{window.__accStay=1;window.__accSilent=1;const r={};const w=wdOf(S);if(w.y)w.y={k:w.y.k,from:'base'};render();r.ty=tyOn(S);
+ const B=await p.evaluate(async()=>{window.__accStay=1;window.__accSilent=1;const r={};const w=wdOf(S);w.y=null;/* rv: put her in trung y for sure (the old line kept her dressed when the seeded start had a robe → flaky B0..B5) */render();r.ty=tyOn(S);
   const K=['vuon','ngu','tyv','thu','nvp','ycv','bh'].filter(k=>{try{return accessOf(S,k).ok}catch(e){return false}});r.K=K;S.buoi=0;S.tyWent=null;
   const home=()=>{Q.length=0;document.getElementById('modal').hidden=true;S.place='home';S.visit={k:'home',people:homePeople(),talked:false,tk:{}};S.out=null};
   home();goTo(K[0]);r.card1=(Q[0]||{}).t||null;const o=(Q[0]&&Q[0].opts||[]).find(x=>x.n==='Vẫn đi');if(o){Q.shift();o.go()}await new Promise(z=>setTimeout(z,50));r.at1=S.place;
