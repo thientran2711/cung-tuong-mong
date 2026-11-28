@@ -5,7 +5,9 @@ Checks per seed: id unique, type j72, kind, tag K|D + src, tone, tier; req/other
 need known; title + ask (in quotes); object null or {name,owner A|B|me|kho,clue,trace_ok,trace_no[,it = real IT key]} (law 6c); 1–3 steps of go/wait/pick with real
 place keys, known skill, odds de|vua|kho, fail retry|end|bad; pick = 2–3 options, each Σgain == Σloss ≥1 and the same total for all (laws 2/3);
 ok.gain ≥1, no.loss ≥1, keys = her stats + rel/relb (relb only with other); placeholders {A}{B}{M}{O}{S}{goi}{Goi}{xung}{Xung} only, {B} needs other, {O} needs object;
-VANPHONG word scan (no %, no digits, no odds words, no modern words); no title equal to one of the 110 old templates."""
+VANPHONG word scan (no %, no digits, no odds words, no modern words); no title equal to one of the 110 old templates;
+dh = "good / bad" title pair (TITLES2, owner OD 23/11 ~22:55Z «EACH việc nhờ chain», law 11): two different names, each 1–4 words, no placeholder, no digit/%,
+unique over every seed and every name in dev/build/jdh3n.js (the full clash scan vs every DH_CAT / j8 / arc name = dev/test/titles2-scan.js)."""
 import json,re,sys,os
 ROOT=os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 B=lambda f:open(os.path.join(ROOT,'dev/build',f),encoding='utf8').read()
@@ -15,6 +17,7 @@ for blk in m.groups():NET|=set(re.findall(r'"([^"]+)"',blk))
 ITK=set()  # candidate IT keys (static scan of every build file; the in-game test dev/test/j72c-play.js checks IT[key] for real)
 for f in os.listdir(os.path.join(ROOT,'dev/build')):
     if f.endswith('.js'):ITK|=set(re.findall(r'\b([a-zA-Z0-9_]+):\{n:"',B(f)))
+DHN=set(x.strip().lower() for v in re.findall(r':"([^"]+)"',B('jdh3n.js')) for p in v.split(';') for x in p.split('/'))
 OLD=set(re.findall(r'\bT7\("[^"]+","[a-z]+",\{[^\n]*?\bt:"([^"]+)"',B('j72.js')))
 KINDS={"craft","social","court","fam"};TONES={"tense","sad","petty","funny","tender","warm","cruel"}
 WHO={"rv","hh","fallen","sv","rsv","ak","off","fam","emp","th","doc","eun","maid"};NETK={"rv","fallen","sv","rsv","man"};MANRW={"sứ thần","họa sư","nhạc sư","thái y"}
@@ -69,7 +72,7 @@ def keys(i,where,d,has_b,need_one=True):
         else:err(f"{i} {where} bad key {k}")
         t+=n
     return t
-ids=set();per={k:0 for k in KINDS}
+ids=set();per={k:0 for k in KINDS};DHS={}
 for r in rows:
     i=r.get("id","?")
     if i in ids:err(i+" dup id")
@@ -86,6 +89,17 @@ for r in rows:
         if not hb:err(i+" need feud requires other")
     if not r.get("title"):err(i+" title")
     elif r["title"] in OLD:err(i+" title copies an old template: "+r["title"])
+    dh=r.get("dh")
+    P=[x.strip() for x in dh.split("/")] if isinstance(dh,str) else []
+    if len(P)!=2 or not all(P):err(i+" dh must be \"good/bad\" (TITLES2: each việc nhờ chain needs its own good + bad title)")
+    else:
+        if P[0].lower()==P[1].lower():err(i+" dh good == bad")
+        for x in P:
+            if not 1<=len(x.split())<=4:err(f"{i} dh «{x}» must be 1–4 words")
+            if re.search(r"[{}%\d]",x):err(f"{i} dh «{x}» placeholder/digit/%")
+            if x.lower() in DHN:err(f"{i} dh «{x}» already a jdh3n title name")
+            if x.lower() in DHS:err(f"{i} dh «{x}» duplicates {DHS[x.lower()]}")
+            DHS[x.lower()]=i
     ask=r.get("ask","")
     if not ask or not re.match(r'^[“"]',ask):err(i+" ask must be A's words in “ ”")
     o=r.get("object","MISSING");ho=isinstance(o,dict)
