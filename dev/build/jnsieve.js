@@ -60,7 +60,7 @@ if(typeof kitKnow==="function"){const k0=kitKnow;kitKnow=function(o){try{if(on()
    if(drop){NSV.stat.knowDrop++;if(!NSV.mute){tally("so");if(!/(biết nết|lộ nết|có nết)/.test(t))try{recDrop(t)}catch(e){}}note("know:"+key.split(":")[0],t);return}}}catch(e){}return k0.apply(this,arguments)}}
 
 /* ---------- 3. the morning card, sentence by sentence ---------- */
-const SENT=/(?<=[.!?…])\s+(?=[^\s.,;:!?…)\]»”])/u;
+const SENT=kRx("(?<=[.!?…])\\s+(?=[^\\s.,;:!?…)\\]»”])","u");
 function sieveHtml(inner){const S0=String(inner).split(SENT);const out=[];let lastKept=true,dropped=0;
  for(const s of S0){const t=txtOf(s);if(!t){continue}
   if(/^(Lý do|Vì sao|Kết quả|Người được sai)/.test(t)){if(lastKept)out.push(s);else dropped++;continue}
@@ -143,11 +143,11 @@ if(typeof runAct==="function"){const ra0=runAct;runAct=function(a,t,k){const r=r
     let rec=null;try{rec=(causeQuery({by:a,to:t,limit:1})||[])[0]||null}catch(e){}
     if(!rec||rec.w!==(typeof nowW==="function"?nowW():rec.w)||rec.a!==k)rec={by:String(a.id),to:String(t.id),a:k,n:ACT[k]?ACT[k].n:k,y:{k:"net",x:""},r:/không thành|bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(txtOf(r))?"fail":"ok"};
     /* failed or not = the act's OWN first sentence (a later «… sai đi bị bắt, khai ra chủ» is about the servant, the deed itself may have landed) */
-    const first=txtOf(r).split(/(?<=[.!?…;])\s+/)[0]||"";rec=Object.assign({},rec,{r:/không thành|phát giác|bị lộ|bị bắt|chặn kịp|từ chối|không ai tin|đã bị cắt/.test(first)?"fail":"ok"});
+    const first=txtOf(r).split(kRx("(?<=[.!?…;])\\s+"))[0]||"";rec=Object.assign({},rec,{r:/không thành|phát giác|bị lộ|bị bắt|chặn kịp|từ chối|không ai tin|đã bị cắt/.test(first)?"fail":"ok"});
     const line=recSentence(rec,a,t,k);
     let sent="";const res0=txtOf(r).replace(/\s*\((?:([^()]*?) )?sai ([^()]*) đi\)/g,(m,x,y)=>{sent=y;return""}).replace(/\s*\(tại [^()]*\)/g,"").trim();
     /* the result without the act told again: «A định hủy dung B nhưng không thành, bị lộ dấu vết.» → «bị lộ dấu vết.» */
-    const res=res0.split(/(?<=[.!?…])\s+/).map(x=>{if(!(x.includes(a.name)&&x.includes(t.name)))return x;const m=x.match(/nhưng không thành,\s*(.+)$/);return m?m[1]:(/^\S+( \S+)* (định|bày mưu)/.test(x)&&/không thành/.test(x)?"":x)}).filter(Boolean).join(" ").trim();
+    const res=res0.split(kRx("(?<=[.!?…])\\s+")).map(x=>{if(!(x.includes(a.name)&&x.includes(t.name)))return x;const m=x.match(/nhưng không thành,\s*(.+)$/);return m?m[1]:(/^\S+( \S+)* (định|bày mưu)/.test(x)&&/không thành/.test(x)?"":x)}).filter(Boolean).join(" ").trim();
     const big=bigK(k);
     const T2=`${line}${sent?` Người được sai: ${sent}.`:""}${res?` Kết quả: ${res[0].toUpperCase()+res.slice(1)}`:""}`;const I2=[a.id,t.id];try{for(const v of rivals||[])if(v&&v.name&&v.id!=null&&!I2.includes(v.id)&&T2.includes(v.name))I2.push(v.id)}catch(e){}/* RV: a third consort named in the cause / result is masked too (law 6, known names) */
     const R=recPush({t:T2,ids:I2,big,k});

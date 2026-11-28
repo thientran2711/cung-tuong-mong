@@ -77,7 +77,7 @@ function ptVoice(L,m){try{if(!m||!m.name)return L;const nm=String(m.name),I=(m.r
  return (L||[]).map(l=>{let s=String(l==null?"":l);
   s=s.replace(new RegExp(`(^|[.!?:]\\s+)${tit}${esc(nm)}(?![\\p{L}\\p{M}])\\s*`,"gu"),(x,a)=>`${a}${I} `);
   s=s.replace(new RegExp(`${tit}${esc(nm)}(?![\\p{L}\\p{M}])`,"gu"),I.toLowerCase());
-  s=s.replace(/(?<![\p{L}\p{M}])ta chưa quen/gu,"chủ tử chưa quen").replace(/(?<![\p{L}\p{M}])(với|của|về|cho) (ta|ngươi)(?![\p{L}\p{M}])/gu,"$1 chủ tử").replace(/(?<![\p{L}\p{M}])ngươi(?![\p{L}\p{M}])/gu,"chủ tử");
+  s=s.replace(kRx("(?<![\\p{L}\\p{M}])ta chưa quen","gu"),"chủ tử chưa quen").replace(kRx("(?<![\\p{L}\\p{M}])(với|của|về|cho) (ta|ngươi)(?![\\p{L}\\p{M}])","gu"),"$1 chủ tử").replace(kRx("(?<![\\p{L}\\p{M}])ngươi(?![\\p{L}\\p{M}])","gu"),"chủ tử");
   return s.replace(/\s+/g," ").trim()}).filter(Boolean)}catch(e){return L}}
 window.ptVoice=ptVoice;
 /* E90r: the rows of one report for kitFacts — each sentence its own row, gains row under the head, the result as the kit status chip (✓ / ✗, kitChip "ok"/"no") on the LAST sentence's row (never an orphan «Việc thành.» row that kitFacts files under a wrong group) */
