@@ -755,3 +755,4 @@ D-MAID-ROAD (MAIN 181 22:45Z ORDER: bottom maid «no road up» COVERED/GAP on ra
 WORKLIST row 36 Wording/hint batch (F-WORD36: odds wording 43, WORDING-GAIN 53, closing-chip 39, buy-where 41, OB-VERDICT-3 42, kit-bac-progress 36, kit-name-stranger 22) | review/f-word36* | (session pending, Foreman F ROOT 8) | CLAIMED | 28/11 07:32Z
 WORKLIST row 36 F-WORD36 | review/f-word36* | session_01UV1SzhBbNMEZ8pDWiqdaFJ (sonnet, Foreman F ROOT 8) | RUNNING | 28/11 07:27Z
 ALLOT-PACE-3 (finish allot-pace-r2 gates, successor of ALLOT-PACE-2) | review/allot-pace-r2 | session_01PEhRbuUnuv3S5Duzh9rAtx | RUNNING | 28/11 07:33Z Foreman C
+REVIEW review/f-word36-bac b130a911 (row 36 kit-bac-progress) | dev/handover/reports/f-word36.md | session_01UV1SzkyYwDbvP1FwpiC8ox (sonnet F-WORD36-RV, Foreman F ROOT 8) | RUNNING | 28/11 07:34Z
