@@ -1,9 +1,182 @@
 [
-{"role":"up","key":"cx3:def_canh","side":"P-ONLY"},
-{"role":"up","key":"cx3:def_giuchung","side":"P-ONLY"},
-{"role":"up","key":"cx3:def_theodoi","side":"P-ONLY"},
-{"role":"up","key":"cx3:def_thudoc","side":"P-ONLY"},
-{"role":"up","key":"cx3:staffHoi","side":"P-ONLY"},
-{"role":"up","key":"cx4:rougeBorrow","side":"N-ONLY"},
-{"role":"up","key":"cx:buy","side":"P-ONLY","note":"up column, one-world promotion probe (B4 move): no gift-worthy shop item for the risen NPC in the maid-page world — probe world (B4)"}
+{
+"role": "up",
+"key": "cx3:def_canh",
+"side": "P-ONLY"
+},
+{
+"role": "up",
+"key": "cx3:def_giuchung",
+"side": "P-ONLY"
+},
+{
+"role": "up",
+"key": "cx3:def_theodoi",
+"side": "P-ONLY"
+},
+{
+"role": "up",
+"key": "cx3:def_thudoc",
+"side": "P-ONLY"
+},
+{
+"role": "up",
+"key": "cx3:staffHoi",
+"side": "P-ONLY"
+},
+{
+"role": "up",
+"key": "cx4:rougeBorrow",
+"side": "N-ONLY"
+},
+{
+"role": "up",
+"key": "cx:buy",
+"side": "P-ONLY",
+"note": "up column, one-world promotion probe (B4 move): no gift-worthy shop item for the risen NPC in the maid-page world — probe world (B4)"
+},
+{
+"role": "t1",
+"key": "cx3:hire",
+"side": "P-ONLY",
+"note": "P-ONLY: ONE pool rule (j29 npool: her hireCard and NPC p3HireRole); the new life's pool is empty until the first month — staff-room world now refills it (expected to close; trim when gone), row11-law1 r2"
+},
+{
+"role": "t2",
+"key": "cx3:hire",
+"side": "P-ONLY",
+"note": "P-ONLY: ONE pool rule (j29 npool: her hireCard and NPC p3HireRole); the new life's pool is empty until the first month — staff-room world now refills it (expected to close; trim when gone), row11-law1 r2"
+},
+{
+"role": "t3",
+"key": "cx3:hire",
+"side": "P-ONLY",
+"note": "P-ONLY: ONE pool rule (j29 npool: her hireCard and NPC p3HireRole); the new life's pool is empty until the first month — staff-room world now refills it (expected to close; trim when gone), row11-law1 r2"
+},
+{
+"role": "t4",
+"key": "cx3:hire",
+"side": "P-ONLY",
+"note": "P-ONLY: ONE pool rule (j29 npool: her hireCard and NPC p3HireRole); the new life's pool is empty until the first month — staff-room world now refills it (expected to close; trim when gone), row11-law1 r2"
+},
+{
+"role": "t5",
+"key": "cx3:hire",
+"side": "P-ONLY",
+"note": "P-ONLY: ONE pool rule (j29 npool: her hireCard and NPC p3HireRole); the new life's pool is empty until the first month — staff-room world now refills it (expected to close; trim when gone), row11-law1 r2"
+},
+{
+"role": "t6",
+"key": "cx3:hire",
+"side": "P-ONLY",
+"note": "P-ONLY: ONE pool rule (j29 npool: her hireCard and NPC p3HireRole); the new life's pool is empty until the first month — staff-room world now refills it (expected to close; trim when gone), row11-law1 r2"
+},
+{
+"role": "t7",
+"key": "cx3:hire",
+"side": "P-ONLY",
+"note": "P-ONLY: ONE pool rule (j29 npool: her hireCard and NPC p3HireRole); the new life's pool is empty until the first month — staff-room world now refills it (expected to close; trim when gone), row11-law1 r2"
+},
+{
+"role": "hh",
+"key": "cx3:hire",
+"side": "P-ONLY",
+"note": "P-ONLY: ONE pool rule (j29 npool: her hireCard and NPC p3HireRole); the new life's pool is empty until the first month — staff-room world now refills it (expected to close; trim when gone), row11-law1 r2"
+},
+{
+"role": "up",
+"key": "cx3:invite2",
+"side": "P-ONLY",
+"note": "up P-ONLY: one-world promotion column (B4 kind) — TO VERIFY, row11-law1 r2"
+},
+{
+"role": "maid",
+"key": "cx3:staffHoi",
+"side": "P-ONLY",
+"note": "maid P-ONLY: «Hỏi chuyện» on a palace ELDER (jstaff giaoBtns) in her maid life read as a consort key; NPC maids hold no elder talk — TO VERIFY real vs label, row11-law1 r2"
+},
+{
+"role": "maid",
+"key": "cx3:tyGift",
+"side": "P-ONLY",
+"note": "maid P-ONLY: «Biếu» an ELDER (jstaff giaoBtns) in her maid life read as the consort's Thái y gift; NPC maids hold no elder gift — TO VERIFY real vs label, row11-law1 r2"
+},
+{
+"role": "t1",
+"key": "cx4:illCho",
+"side": "P-ONLY",
+"note": "P-ONLY: «Chợ đen ở cửa Thần Vũ» way inside the «Mua đồ» door; the probe now skips greyed ways (need unmet) — expected to close, row11-law1 r2"
+},
+{
+"role": "t2",
+"key": "cx4:illCho",
+"side": "P-ONLY",
+"note": "P-ONLY: «Chợ đen ở cửa Thần Vũ» way inside the «Mua đồ» door; the probe now skips greyed ways (need unmet) — expected to close, row11-law1 r2"
+},
+{
+"role": "t3",
+"key": "cx4:illCho",
+"side": "P-ONLY",
+"note": "P-ONLY: «Chợ đen ở cửa Thần Vũ» way inside the «Mua đồ» door; the probe now skips greyed ways (need unmet) — expected to close, row11-law1 r2"
+},
+{
+"role": "t4",
+"key": "cx4:illCho",
+"side": "P-ONLY",
+"note": "P-ONLY: «Chợ đen ở cửa Thần Vũ» way inside the «Mua đồ» door; the probe now skips greyed ways (need unmet) — expected to close, row11-law1 r2"
+},
+{
+"role": "t5",
+"key": "cx4:illCho",
+"side": "P-ONLY",
+"note": "P-ONLY: «Chợ đen ở cửa Thần Vũ» way inside the «Mua đồ» door; the probe now skips greyed ways (need unmet) — expected to close, row11-law1 r2"
+},
+{
+"role": "t6",
+"key": "cx4:illCho",
+"side": "P-ONLY",
+"note": "P-ONLY: «Chợ đen ở cửa Thần Vũ» way inside the «Mua đồ» door; the probe now skips greyed ways (need unmet) — expected to close, row11-law1 r2"
+},
+{
+"role": "t7",
+"key": "cx4:illCho",
+"side": "P-ONLY",
+"note": "P-ONLY: «Chợ đen ở cửa Thần Vũ» way inside the «Mua đồ» door; the probe now skips greyed ways (need unmet) — expected to close, row11-law1 r2"
+},
+{
+"role": "hh",
+"key": "cx4:illCho",
+"side": "P-ONLY",
+"note": "P-ONLY: «Chợ đen ở cửa Thần Vũ» way inside the «Mua đồ» door; the probe now skips greyed ways (need unmet) — expected to close, row11-law1 r2"
+},
+{
+"role": "up",
+"key": "cx4:illCho",
+"side": "P-ONLY",
+"note": "P-ONLY: «Chợ đen ở cửa Thần Vũ» way inside the «Mua đồ» door; the probe now skips greyed ways (need unmet) — expected to close, row11-law1 r2"
+},
+{
+"role": "up",
+"key": "cx4:kidGuard",
+"side": "P-ONLY",
+"note": "up P-ONLY: one-world promotion column (the risen maid has no child in the maid-page world) — probe world, row11-law1 r2"
+},
+{
+"role": "maid",
+"key": "cx:tqGift",
+"side": "P-ONLY",
+"note": "maid P-ONLY: same «Biếu» elder button read as the consort's thái giám gift — TO VERIFY, row11-law1 r2"
+},
+{
+"role": "hh",
+"key": "drop",
+"side": "N-ONLY",
+"note": "hh N-ONLY: the NPC Hoàng hậu holds «Lạnh nhạt» (TW drop, one rule j28/jtwoway); her hh column misses it — TO VERIFY (her Hoàng hậu talk list / rank respect), row11-law1 r2"
+},
+{
+"role": "maid",
+"key": "maid:beside",
+"side": "N-ONLY",
+"note": "maid N-ONLY «Hầu bên cạnh chủ» (j42 srvTalk while her master is away, srvMisHome): probe world — her master is home in every maid world — TO VERIFY, row11-law1 r2"
+}
 ]

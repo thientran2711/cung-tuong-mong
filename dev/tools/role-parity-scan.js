@@ -141,7 +141,9 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
   /* row11-law1 r2: a FEUD among the others (each holds oán 60 on a third person, never the doer) — «Hòa giải» (TW mediate: the target holds a grudge on
      someone; j28 SOC.mediate now the same rule) is judged by its rule for both doers */
   ["feud",a=>{const L=others(a);for(let i=0;i<L.length;i++){const t=L[i],x=L[(i+1)%L.length];if(!t||!x||x===t||x===a)continue;const R=t===S?(S.ro=S.ro||{}):(t.ro=t.ro||{});const o0=R[x.id];UNDO.push(()=>{R[x.id]=o0});R[x.id]=60}}],
-  ["staff-room",a=>{const s0=a.staff;UNDO.push(()=>{a.staff=s0});a.staff=(a.staff||[]).filter(s=>s&&s.role!=="maid"&&s.role!=="eunuch")}],
+  ["staff-room",a=>{const s0=a.staff;UNDO.push(()=>{a.staff=s0});a.staff=(a.staff||[]).filter(s=>s&&s.role!=="maid"&&s.role!=="eunuch");
+   /* and Nội vụ phủ holds candidates this month (j29 npool, refilled monthly by refillPool): her hireCard and the NPC p3HireRole take from the SAME pool —
+      a new life's pool is empty until the first month, so only her (unlocked) button showed */try{const P=npool();const P0={maid:P.maid.slice(),eunuch:P.eunuch.slice()};UNDO.push(()=>{P.maid=P0.maid;P.eunuch=P0.eunuch});if(!P.maid.length||!P.eunuch.length)refillPool()}catch(e){}}],
   ["rival-down",a=>{for(const t of others(a))if(t!==S){t.confined=2}}],
   /* part 2: her rouge boxes ran out (jration): both doers miss every part, so the borrow / beg / steal roads open for her and for an NPC */
   ["rouge",a=>{try{for(const part of BAL.ration.parts)for(const e of lxBoxes(a,part))a.inv.splice(a.inv.indexOf(e),1)}catch(e){}}],
@@ -336,7 +338,7 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
    /* row11-law1 r2 (door era, law 11): the ways that live INSIDE a door card, not on a tab: «Mua đồ» (j83 illDoor → DOOR.card rows: Nhờ thái giám mua đồ ·
       Sai cung nữ … · Hối lộ người ở Thái y viện · Chợ đen …) read by catching DOOR.card; the môn frame (R11 jtabs ktTnPop: Tự học · Học với thầy · Học với
       Thái hậu … live in the frame, ktArtSkills.raw = the list before the fold) read from the raw skill acts */
-   try{const C0=DOOR.card;DOOR.card=(t,h,rows)=>{for(const r of rows||[])addP(role,r&&r.n,"doorcard")};try{if(typeof illDoor==="function")illDoor()}finally{DOOR.card=C0}}catch(e){E("illDoor",e)}
+   try{const C0=DOOR.card;DOOR.card=(t,h,rows)=>{for(const r of rows||[])if(r&&!r.off)addP(role,r.n,"doorcard")}/* a greyed way (off: its need unmet) is no act now, as a disabled button */;try{if(typeof illDoor==="function")illDoor()}finally{DOOR.card=C0}}catch(e){E("illDoor",e)}
    try{const f=typeof ktArtSkills==="function"?(ktArtSkills.raw||ktArtSkills):null;for(const s of (f?f():[])||[])for(const h of s.acts||[])for(const n of lab(h))addP(role,n,"artRaw")}catch(e){E("artRaw",e)}
    /* B3: the item-detail menu (jinv kinvOpen: Dùng / Bán / Nghiệm độc / Tặng …) opens per item in a kit modal — read each item's buttons */
    try{const M0=window.kitModal;let mh="";window.kitModal=o=>{mh+=(o&&o.html)||""};try{for(const it of kinvItems()||[]){mh="";try{kinvOpen(it)}catch(e){}for(const n of lab(mh))addP(role,n,"kinvOpen")}}finally{window.kitModal=M0}}catch(e){E("kinvOpen",e)}}
