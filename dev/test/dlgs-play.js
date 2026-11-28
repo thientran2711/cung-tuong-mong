@@ -120,7 +120,7 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
     const w=o.who[i];const want=w==null?"":w===0?o.L:o.R;
     /* LIVE KIT §7.4b (25/11+): a title never keeps «???» — a person she has not met by name is titled by the name veil (k61Scrub) itself, e.g. «Quý phi» */
     const vt=want?await g.evaluate(n=>{try{if(typeof k61Scrub!=='function'||!S||!S.known)return n;let x=k61Scrub(n,true,'',n);if(typeof kitTitleClean==='function')x=kitTitleClean(x,true);return x}catch(e){return n}},want):'';
-    ok(s.title===want||(!!want&&s.title.endsWith(" "+want))||(!!vt&&s.title===vt)||(w!=null&&/\?\?\?/.test(s.title)),`${dev} ${id} line ${i+1}: box title = the speaker «${s.title}» want «${want}»`);
+    ok(s.title===want||(!!want&&s.title.endsWith(" "+want))||(!!vt&&s.title.toLowerCase()===vt.toLowerCase())/* the page pass writes a servant title lower-case («cung nữ», j61 t2) */||(w!=null&&/\?\?\?/.test(s.title)),`${dev} ${id} line ${i+1}: box title = the speaker «${s.title}» want «${want}»`);
     ok(!/\{[^}]*\}/.test(s.text)&&s.text.length>3,`${dev} ${id} line ${i+1}: text resolved «${s.text.slice(0,50)}»`);
     /* the box shows the resolved line as it is (the page-wide screen-word pass once rewrote lone typed words: «nàng ta ta», «ngươi»→«ta») */
     {const nz=x=>String(x).replace(/\s+/g," ").trim();ok(nz(s.text)===nz(o.txt[i]),`${dev} ${id} line ${i+1}: box text = the resolved line «${nz(s.text).slice(0,60)}» vs «${nz(o.txt[i]).slice(0,60)}»`)}
