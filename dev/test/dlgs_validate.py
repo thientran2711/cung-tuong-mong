@@ -203,7 +203,7 @@ def check(r,where):
         if wh not in (L,Rr,'nar'):E.append(f'{uid} line {i+1}: who "{wh}" must be L, R or nar')
         if not t.strip():E.append(f'{uid} line {i+1}: empty');continue
         if len(t)>MAXCH:E.append(f'{uid} line {i+1}: {len(t)} chars > {MAXCH}')
-        if re.search(r'\d|%',t):E.append(f'{uid} line {i+1}: digit or % (law 7)')
+        if re.search(r'\d|%',re.sub(r'\{\w+\}','',t)):E.append(f'{uid} line {i+1}: digit or % (law 7)')
         for o in ODDS:
             if re.search(r'(?<!\w)'+re.escape(o)+r'(?!\w)',t):E.append(f'{uid} line {i+1}: odds word «{o}» (law 7)')
         for p in re.findall(r'\{([^}]*)\}',t):
@@ -217,6 +217,8 @@ def check(r,where):
         if wh=='me' and L!='M' and re.search(r'(?<!\w)ngài(?!\s+ấy)(?!\w)',lo):E.append(f'FLAT {uid} line {i+1}: «ngài» to the person she speaks to — use {{goi}}')
         if re.search(r'(^|[.!?…»:]\s+|«)\{(xung|goi)\}',t):E.append(f'{uid} line {i+1}: lowercase {{xung}}/{{goi}} opens a sentence — write {{Xung}}/{{Goi}} (lead #4 law-11 scan: 13 lines)')
         if wh=='nar' and TOK.search(t):E.append(f'{uid} line {i+1}: {{xung}}/{{goi}} in a narration line — nobody speaks it, the scene would not resolve (dropped in game): name the person or say «nàng»')
+        if u.get('fam')=='rd' and 'dad' in (L,Rr) and TOK.search(t):E.append(f'{uid} line {i+1}: a father-daughter scene types «cha / con», never {{xung}}/{{goi}} (the address core would make him «vi thần» to her rank; RD RULE 3)')
+        if u.get('fam')=='rd' and re.search(r'truyện xuất thân|kết cục truyện|(?<![\wÀ-ỹ])[Cc]hương (?:này|sau|trước|truyện)',t):E.append(f'{uid} line {i+1}: game words in a person\'s mouth («truyện xuất thân», «chương …») — say it in the world of the story')
         if x.get('focus') and wh=='nar':E.append(f'{uid} line {i+1}: focus on narration')
         if set(x)-{'who','text','focus'}:E.append(f'{uid} line {i+1}: unknown keys {sorted(set(x)-{"who","text","focus"})}')
     for i,why in pron_err(u,d):E.append(f'{uid} line {i+1}: typed «ta»/«ngươi» — {why}: write {{xung}}/{{goi}} (review r1 F1, the address core decides)')
