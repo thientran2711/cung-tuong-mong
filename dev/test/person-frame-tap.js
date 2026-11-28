@@ -5,7 +5,7 @@
    A. REAL TAP on the kitFocus «Luật chơi» card «Sẵn sàng» (the only F.intro host = jdfv dfTap, every on-figure game; visitor / stage / NPC encounter all
       open the same kitFocus): elementFromPoint at the button centre must be the button, a touchscreen tap must start the game. Plus a hit scan of every
       «Sẵn sàng» (.kgr-go) on screen.  B. MUSIC keeps playing: track error, missed hand-off (ended), outside pause, stalled clock, tab hidden → visible. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const BAD=[];(async()=>{const b=await chromium.launch({args:['--autoplay-policy=no-user-gesture-required']});let bad=0;
  for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});

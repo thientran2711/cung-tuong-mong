@@ -4,7 +4,7 @@
    (static list, one per line), resolves each with the game's own kitActArt (incl. jph §59 placeholder + CDN check) and groups by picture.
    A picture shown by 2+ different act names = COLLISION (placeholder ph-p-* counts too: every act on it shares it).
    usage: [ACTS_FILE=patched.json] node dev/test/pic-dupes.js <build url> <out.json> [extra-names.txt] */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,OUT,EXTRA]=process.argv;const extra=EXTRA?fs.readFileSync(EXTRA,'utf8').split('\n').map(s=>s.trim()).filter(Boolean):[];
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const ctx=await b.newContext({viewport:{width:1180,height:820},reducedMotion:'reduce',serviceWorkers:'block'});

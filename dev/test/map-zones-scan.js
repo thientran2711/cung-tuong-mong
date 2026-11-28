@@ -3,7 +3,7 @@
    (1) zone members hidden under a visible zone tag; zone total = Σ members (countAt); (2) zone tap → zoom view: members visible, fog present;
    (4) no tag across the visible edge at open (left = right of the rail, right = card column on landscape). Also: Dưỡng Tú viện is a place.
    usage: node dev/test/map-zones-scan.js <url> <shotdir|-> [WxH,..] ; exit 1 on any failure */
-const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
 const [,,URL_,DIR,SIZES]=process.argv;const sl=t=>new Promise(r=>setTimeout(r,t));if(DIR&&DIR!=='-')fs.mkdirSync(DIR,{recursive:true});
 const MEAS=()=>{const sc=document.querySelector('.game.maptab .mapsc');if(!sc)return{err:'no map'};const w=sc.querySelector('.mapw'),cs=getComputedStyle(w),sr=sc.getBoundingClientRect(),port=sc.clientHeight>sc.clientWidth;
  const VL=sr.left+(parseFloat(cs.marginLeft)||0),VR=sr.right-(port?0:(parseFloat(cs.marginRight)||0));const bad={long:[],cut:[]};const tags=[];

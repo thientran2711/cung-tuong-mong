@@ -8,7 +8,7 @@
       ctm-assets after prune = old keys minus those whose hash changed / path removed (no wipe), no page errors.
    3. reload once more offline: NEW build from the shell cache, title up.
    usage: node dev/test/upgrade-sw.js --old /home/user/cung-tuong-mong [--new <this root>] [--device fold]   exit 1 on any failed check */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');const D=require('./lib/device');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path'),http=require('http');const D=require('./lib/device');
 const A=process.argv.slice(2);const opt=(k,d)=>{const i=A.indexOf('--'+k);return i<0?d:A[i+1]};
 const SLOW=A.includes('--slow');let DELAY=0;  /* --slow: in phase 2 the NEW index.html answers after 7 s, so the old worker gives the host its SAVED (old) copy after 4 s; the iframe must get that same build (risk 4) */
 const OLD=path.resolve(opt('old','/home/user/cung-tuong-mong')),NEW=path.resolve(opt('new',path.join(__dirname,'../..'))),DEV=opt('device','fold');

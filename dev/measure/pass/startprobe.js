@@ -1,4 +1,4 @@
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 (async()=>{const b=await chromium.launch();for(const f of process.argv.slice(2)){const ctx=await b.newContext({serviceWorkers:'block'});
  await ctx.route(/\.(webp|png|jpe?g|mp3|ogg|m4a)(\?|$)/i,r=>r.abort());
  await ctx.route('http://ts.local/**',r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:fs.readFileSync(path.resolve(f))}));

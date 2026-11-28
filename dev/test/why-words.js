@@ -2,7 +2,7 @@
    subjects Thái hậu / Hoàng thượng / a named consort / a masked «Một vị …») run through the on-screen word fixer j84 VP.fix → never a doubled
    phrase («thiện cảm thiện cảm +3»: the j84 «với ta +N → thiện cảm» rule hit the line that already says «thiện cảm với ta»), and the stat word
    stays. usage: node dev/test/why-words.js <index.html>  exit 1 on FAIL */
-const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const SRC=path.resolve(process.argv[2]);
 (async()=>{const b=await chromium.launch();const p=await b.newPage();await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
  await p.goto('file://'+SRC,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>window.VP&&typeof whyText==='function'&&typeof WHY_STAT==='object',null,{timeout:240000});
  const r=await p.evaluate(()=>{const DUP=/(?<![\p{L}])(\p{L}+ \p{L}+) \1(?![\p{L}])/u;const W=["Quý phi Diêu Uyển Thanh","Phi Mã Hàm Yên","Đáp ứng Tô Tuyết Kiến"/* names that trip VP QUICK → every rule runs */,"Thái hậu","Hoàng thượng","Một vị Quý nhân","Đêm thị tẩm"];const out=[];

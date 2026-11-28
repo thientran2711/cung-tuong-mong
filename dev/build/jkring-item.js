@@ -42,6 +42,8 @@ function kriIp(){return document.documentElement.classList.contains("kv2")}
 .kri-gr{display:inline-block;padding:0 6px;border-radius:6px;background:#fffaf0;color:var(--gc);font-weight:700;text-shadow:none;margin-right:4px}
 .kri-name small{font-size:.78rem;color:#fff3dc;text-shadow:0 1px 2px #000a}
 .kri-hint{position:absolute;z-index:46;left:50%;transform:translateX(-50%);font-size:.8rem;color:#fff3dc;text-shadow:0 1px 2px #000a;pointer-events:none;white-space:nowrap}
+/* K-RING-SUBLINE (KK62): the hint is the LAST child of the name block — it follows the real text height by layout, never by a measured top (a JS top missed late height changes: Fold cover Dâng quà front 11, 11 px over). min-height = the old +58 px floor + the hint line */
+.kri-name{min-height:76px}.kri-name>.kri-hint{position:static;transform:none;margin-top:auto;padding-top:4px}
 .kri-big{position:absolute;z-index:50;left:0;top:0;transform-origin:50% 50%;will-change:transform,opacity;pointer-events:none}
 .kri-glow{position:absolute;z-index:49;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(255,226,150,.9),rgba(255,226,150,.35) 45%,rgba(255,226,150,0) 70%);will-change:opacity,transform;opacity:0}
 .kri-pane{position:absolute;z-index:55;display:flex;flex-direction:column;gap:8px;min-height:0;will-change:transform,opacity}
@@ -91,7 +93,7 @@ function kriBuild(R,bloom){const g=R.geo();R.items=kriItems(R);if(R.ring)R.ring.
  const ab=R.ip?46:42,ay=g.cy-ab/2;R.arL=mk("‹",`left:${Math.max(6,g.cx-g.Rx-g.tw*.55-ab)}px;top:${ay}px;width:${ab}px;height:${ab}px;min-height:${ab}px`,()=>kriTurnBy(R,-1),"Quay trái");
  R.arR=mk("›",`left:${Math.min(R.w-ab-6,g.cx+g.Rx+g.tw*.55)}px;top:${ay}px;width:${ab}px;height:${ab}px;min-height:${ab}px`,()=>kriTurnBy(R,1),"Quay phải");
  const nm=document.createElement("div");nm.className="kri-name";nm.style.top=(g.cy+g.tw*.95)+"px";R.L.appendChild(nm);R.nameEl=nm;
- const hi=document.createElement("div");hi.className="kri-hint";hi.style.top=(g.cy+g.tw*.95+58)+"px";hi.textContent="Vuốt để xoay · chạm món sáng để xem";R.L.appendChild(hi);R.hint=hi;
+ const hi=document.createElement("div");hi.className="kri-hint";hi.textContent="Vuốt để xoay · chạm món sáng để xem";nm.appendChild(hi);R.hint=hi;
  kriPlace(R);
  if(bloom&&!kriCalm()){const N=R.tiles.length;R.tiles.forEach((t,i)=>{const fin=t.style.transform,op=t.style.opacity;t.animate([{transform:`translate(${-g.tw/2}px,${-g.tw*.6}px) scale(.1)`,opacity:0},{transform:fin,opacity:op}],{duration:KIT_RINGI.openMs,delay:i*KIT_RINGI.stagger,easing:"cubic-bezier(.2,1.25,.4,1)"})});
   [R.arL,R.arR,nm,hi].forEach(b=>b.animate([{opacity:0},{opacity:1}],{duration:260,delay:280,fill:"backwards"}))}}
@@ -102,7 +104,9 @@ function kriPlace(R){const N=R.tiles.length;if(!N)return;const g=R.geo();let fi=
  if(R.nameEl&&R.__nf!==fi){R.__nf=fi;const it=R.items[fi];const G=typeof KIT_GRADE!=="undefined"?KIT_GRADE[Math.max(0,Math.min(4,it.grade|0))]:null;
   R.nameEl.innerHTML=`<b>${kriE(it.name)}</b><small>${G&&G.n?`<span class="kri-gr" style="--gc:${G.c||"#888"}">${kriE(G.n)}</span> `:""}${kriE(it.sub||"")}</small>`;
   /* K-RING-SUBLINE (KK61): the hint goes under the name block's REAL height (a sub line that wraps to 2–3 lines on Fold overlapped the fixed +58 px hint) */
-  if(R.hint){const t0=parseFloat(R.nameEl.style.top)||0;R.hint.style.top=Math.max(t0+58,t0+R.nameEl.offsetHeight+6)+"px"}}}
+  kriHintAt(R)}}
+/* K-RING-SUBLINE (KK61 → KK62): the name block is refilled on every front change; the hint goes back in as its last child (layout keeps it under the text) */
+function kriHintAt(R){try{if(R.hint&&R.nameEl&&R.hint.parentNode!==R.nameEl||R.hint&&R.nameEl&&R.nameEl.lastChild!==R.hint)R.nameEl.appendChild(R.hint)}catch(e){}}
 /* ---------- spin: swipe with inertia, ‹ ›, tap a side item, tap the bright item ---------- */
 function kriBand(R){const L=R.L;let x0=0,y0=0,last=0,lt=0,drag=0,moved=0;
  const step=()=>{const g=R.geo(),N=Math.max(3,Math.min(KRING_MATH.seats,R.tiles.length));return g.Rx*2*Math.PI/N*.75};
@@ -117,8 +121,10 @@ function kriFling(R,v){if(kriCalm())return kriTween(R,Math.round(R.rot),0);R.v=v
 function kriTurnBy(R,d){if(R.st!=="ring"||!R.tiles.length)return;return kriTween(R,Math.round(R.rot)+d,KRING_MATH.stepMs)}
 function kriTurnTo(R,i){const N=R.tiles.length;if(!N)return;const d=KRING_MATH.short(i,R.rot,N);return kriTween(R,R.rot+d,Math.min(700,220+Math.abs(d)*90))}
 /* ---------- focus: the bright item zooms big to the LEFT, info + buttons drop on the RIGHT ---------- */
-async function kriFocus(R){if(R.st!=="ring"||R.busy||!R.tiles.length)return;R.busy=1;const N=R.tiles.length,fi=KRING_MATH.front(R.rot,N);await kriTween(R,Math.round(R.rot),120);
- const it=R.items[fi],t=R.tiles[fi],g=R.geo(),calm=kriCalm();R.st="focus";R.fi=fi;
+async function kriFocus(R){if(R.st!=="ring"||R.busy||!R.tiles.length)return;R.busy=1;await kriTween(R,Math.round(R.rot),120);
+ /* KIT-KRI-XL (Foreman F «kriFocus TypeError reading 'tile'», 2/13 lives): the front index is read AFTER the snap — the list may have been rebuilt meanwhile (kriBack / kriRefresh / a tab: an item given or sold away), and an old index past the new end gave it = undefined */
+ if(kitRingItem.cur!==R||R.st!=="ring"||!R.tiles.length){R.busy=0;return}const N=R.tiles.length,fi=KRING_MATH.front(R.rot,N);
+ const it=R.items[fi],t=R.tiles[fi];if(!it||!t){R.busy=0;return}const g=R.geo(),calm=kriCalm();R.st="focus";R.fi=fi;
  const sc0=1.12,bigS=KIT_RINGI.big[R.K];const colW=R.ip?R.w*.42:R.w*.44,lx=colW/2,ly=Math.max(g.top0+g.tw*bigS*.62,R.H*.44);
  const big=document.createElement("div");big.className="kri-big";big.style.width=g.tw+"px";big.innerHTML=it.tile?(it.tileBig||it.tile):typeof kitItem==="function"?kitItem({src:it.src512||it.src,name:it.name,grade:it.grade,qty:it.qty>1?it.qty:0,lux:it.lux,mark:it.mark,size:"md"}):"";
  R.L.appendChild(big);R.big=big;const gl=document.createElement("div");gl.className="kri-glow";const gs=g.tw*bigS*1.5;gl.style.cssText=`width:${gs}px;height:${gs}px;left:${lx-gs/2}px;top:${ly-gs/2}px`;R.L.insertBefore(gl,big);R.glow=gl;
@@ -152,7 +158,7 @@ function kriResHTML(r){const SL=typeof kitResultSeal==="function"?kitResultSeal(
  const rows=(r.rows||[]).filter(Boolean).map(x=>({k:x.k||"note",label:x.label||"",items:(x.items&&x.items.length)?x.items:['<span class="ef n">không</span>']}));
  if(!rows.length)rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
  return `<div class="karesult kri-res ${SL.cls}"><div class="rt"><span class="kat"><b class="seal">${SL.t}</b><span class="kan">${kriE(r.title||"")}</span></span>${r.sen?`<span class="ksen">${r.sen}</span>`:""}<span class="kb">${rows.map(x=>`<span class="kr kr-${x.k}"><span class="krl">${x.label}</span><span class="krv">${x.items.map((v,j)=>`${j?'<span class="ksep">·</span>':""}<span class="kitem">${/^<span class="ef /.test(v)?v:`<span class="ef ${x.k==="duoc"?"g":x.k==="mat"?"r":"n"}">${v}</span>`}</span>`).join("")}</span></span>`).join("")}</span></div></div>`}
-async function kriAct(R,i){const a=R.acts&&R.acts[i];if(!a||a.off||R.busy)return;R.busy=1;const it=R.items[R.fi];let r=null;
+async function kriAct(R,i){const a=R.acts&&R.acts[i];if(!a||a.off||R.busy||R.st!=="focus")return;const it=R.items[R.fi];if(!it)return;/* KIT-KRI-XL: same guard as kriFocus */R.busy=1;let r=null;
  const logs0=kriLogMark(),away0=kriAway(),promise=kriPromise(R);try{r=await a.fn(it,R.q)}catch(e){console.error("kri act",e)}R.busy=0;
  if(!kitRingItem.cur||kitRingItem.cur!==R)return;/* the act closed the ring (a dialog of its own opened) */
  if(r==="close"){kitRingItem.close();return}
@@ -177,18 +183,32 @@ function kriPending(r,away0,promise){try{if(!r||typeof r!=="object"||!Array.isAr
  r.ok=null;const du=r.rows.find(x=>x.k==="duoc");if(du&&!(du.items||[]).length&&promise.length)du.items=promise.map(x=>r.who?x.replace(/^nàng → ta/,kriE(r.who)+" → ta"):x);
  const W=N.map(a=>`${kriE(a.nm)} đã ${/^đi /.test(a.lbl||"")?kriE(a.lbl):"đi "+kriE(a.lbl||"làm việc")}, về ${typeof ptWhen==="function"?ptWhen(a.due):"sau"}; phần Được đến khi việc xong.`);
  let no=r.rows.find(x=>x.k==="note");if(!no){no={k:"note",label:"Ghi chú",items:[]};r.rows.push(no)}no.items=W.concat((no.items||[]).filter(x=>!/^Tặng quà:/.test(x)))}catch(e){console.error("kri pending",e)}return r}
+/* K-GIFT-OUT (KK64): the piece's own name (the ring tile name, as the log lines name it; escaped like kriLogSince lines) and the act's real outcome:
+   take → THÀNH · sent (to her: she answers later) → KẾT QUẢ · back / refused / found / caught → BẠI; plantpick: plantItem.out ok / caught;
+   tsgiftpick also fails when the receiver keeps her heart closed (the same outcomes); no outcome recorded (a work piece wkGive, an act that is not a gift) → the old reading of its OWN lines */
+function kriBaseName(it){try{if(it&&it.name)return kriE(String(it.name).replace(/<[^>]+>/g,"").trim());/* the ring tile name = the piece's own name (a handmade work: its title, never the kind «Tác phẩm tự tay») */const e=it&&it.ref&&it.ref.e;return e?kriE(((typeof itm==="function"?itm(e.k):IT[e.k])||{}).n||""):""}catch(x){return""}}
+/* K-GIFT-NOTE (KK65, RV-178 nit a): the game's choice log (j3 logChoice) folds every line of the tick into ONE «Title: choice — s1. s2. summary.» line,
+   so a world sentence written in the same tick («… phát hiện … không thành») rode inside the piece's own line. Ghi chú keeps, from each line that
+   names the piece, only the sentences that name the piece or the receiver (the stat summary is already the rows above); a line left with no such
+   sentence is dropped (the title already names the act). */
+function kriNoteLines(L,bn,who){if(!bn)return L;const w=who?kriE(who):"";const out=[];
+ for(const x of L){if(!x.includes(bn))continue;const i=x.indexOf(" — ");if(i<0){out.push(x);continue}
+  const keep=x.slice(i+3).split(kRx("(?<=[.!?…»”])\\s+")).filter(t=>t.includes(bn)||(w&&t.includes(w)));if(keep.length)out.push(x.slice(0,i)+" — "+keep.join(" "))}
+ return out}
+function kriGiftOk(pid,L){const o=pid==="plantpick"?(typeof plantItem==="function"?plantItem.out:null):(typeof giveTo==="function"?giveTo.out:null);
+ if(o==="take"||o==="ok")return true;if(o==="sent")return null;if(o)return false;return !L.some(x=>/phát hiện|trả lại|từ chối|không nhận|— bại —|không thành|bị bắt/.test(x))}
 function kriLogMark(){try{return S.logSeq||0}catch(e){return 0}}
 function kriLogSince(n){try{const nw=Math.min(6,(S.logSeq||0)-n);if(nw<=0)return[];const P=typeof plain==="function"?plain:(x=>String(x).replace(/<[^>]+>/g,""));
   return S.logs.slice(0,nw).reverse().map(x=>kriE(P(String(x).replace(/<span class="ld">[^<]*<\/span>/,"")).trim())).filter(Boolean)}catch(e){return[]}}
-function kriBack(R,quick){if(R.st!=="focus")return;R.st="ring";const calm=kriCalm()||quick,D=calm?0:380,g=R.geo();const t=R.tiles[R.fi];
+function kriBack(R,quick){if(R.st!=="focus")return;R.st="ring";R.busy=1;/* KIT-KRI-XL: no focus / act until the ring is rebuilt (done) — a tap in the back animation used the old list */const calm=kriCalm()||quick,D=calm?0:380,g=R.geo();const t=R.tiles[R.fi];
  if(R.pane){const p=R.pane;R.pane=null;if(D)p.animate([{opacity:1,transform:"none"},{opacity:0,transform:"translateY(-24px)"}],{duration:D*.7,fill:"forwards"}).onfinish=()=>p.remove();else p.remove()}
  if(R.glow){const gl=R.glow;R.glow=null;if(D)gl.animate([{opacity:1},{opacity:0}],{duration:D,fill:"forwards"}).onfinish=()=>gl.remove();else gl.remove()}
  /* the list may have changed (sold / given / bought): rebuild the ring, keep the front near the same place */
  const big=R.big;R.big=null;const keep=R.items[R.fi]&&R.items[R.fi].id;
- const done=()=>{if(big)big.remove();const old=R.rot;kriBuild(R,false);const j=R.items.findIndex(x=>x.id===keep);R.rot=j>=0?j:Math.min(Math.round(old),Math.max(0,R.items.length-1));kriPlace(R);
+ const done=()=>{R.busy=0;if(big)big.remove();const old=R.rot;kriBuild(R,false);const j=R.items.findIndex(x=>x.id===keep);R.rot=j>=0?j:Math.min(Math.round(old),Math.max(0,R.items.length-1));kriPlace(R);
   if(!calm)[R.ring,R.arL,R.arR,R.nameEl,R.hint].forEach(e=>e&&e.animate([{opacity:0},{opacity:1}],{duration:260,fill:"backwards"}))};
  if(big&&D){const to=`translate(${g.cx-g.tw/2}px,${g.cy-g.tw*.6}px) scale(1.12)`;big.animate([{transform:big.style.transform,opacity:1},{transform:to,opacity:.2}],{duration:D,easing:"cubic-bezier(.3,.6,.3,1)",fill:"forwards"}).onfinish=done}else done();if(t)t.style.visibility=""}
-function kriRefresh(R){if(R.st==="focus"){const it=R.items[R.fi];kriPane(R,it)}else{const old=R.rot;kriBuild(R,false);R.rot=Math.min(old,Math.max(0,R.items.length-1));kriPlace(R)}}
+function kriRefresh(R){if(R.st==="focus"){const it=R.items[R.fi];if(!it){kriBack(R,true);return}/* KIT-KRI-XL: the focused item left the list */kriPane(R,it)}else{const old=R.rot;kriBuild(R,false);R.rot=Math.min(old,Math.max(0,R.items.length-1));kriPlace(R)}}
 try{window.kitRingItem=kitRingItem;window.KRING_MATH=KRING_MATH}catch(e){}
 /* ======================= WIRING: every item / treasure picker → kitRingItem (KK44 NEW-KIT FAMILY SCAN §5) ======================= */
 function kriOn(){try{return !window.__bot&&!window.__kriOff&&typeof kitScene==="object"&&!!document.querySelector("header.hud")&&!(typeof S!=="undefined"&&S&&S.dead)}catch(e){return false}}
@@ -203,15 +223,23 @@ function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kip
  const ops=M.querySelector(".opts");const L=m.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]&&ops&&ops.querySelector(`.opt[data-m="${i}"]`));
  L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));M.classList.add("kri-hide");
  const verb=(typeof KIP_VERB!=="undefined"&&KIP_VERB[m.pid])||"Chọn";let V=m.pp&&m.pp.v;try{if(V!=null&&typeof V!=="object")V=(typeof byKey==="function"&&byKey(V))||liveRivals(true).find(x=>x.id===V)||null}catch(e){V=null}
- const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?V.name:""):m.pid==="giftto"?((M.querySelector(".kptitle")||{}).textContent||""):"";
- const why=(c,i)=>{const b=ops.querySelector(`.opt[data-m="${i}"]`);return c.kgwhy||(b&&b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):kipLocked(c)?"Thiếu bạc":"")};
- kitRingItem.open({key:"gift:"+m.pid,title:(M.querySelector(".kptitle")||{}).textContent||verb,sub:who?`${verb} cho ${kriE(who)}`:"",bg:kriBg(),
-  items:()=>L.filter(([c])=>S.inv[c.ik]).map(([c,i])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);return{id:i,src:I.src,name:I.name,grade:I.grade,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}}),
+ const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?V.name:""):m.pid==="giftto"?(m.pp&&m.pp.t==="emp"?"Hoàng thượng":m.pp&&m.pp.t==="th"?"Thái hậu":""):"";/* KK62 (RV-176 §7 c): Dâng quà names the receiver from its own pp.t (jgift «Dâng quà lên Hoàng thượng / Thái hậu»), never the dialog title («Dâng cho Dâng quà») */
+ /* KIT-KRI-XL (E-S5 kipgo-ui3 «re-opened, no gift»): the dialog's option buttons are looked up LIVE — an opener (jts tsOpener) or any re-render shows the SAME dialog again with NEW .opts nodes, and the ring's «Chọn» clicked the stale detached button: no chooseM, the picker stayed queued and re-opened forever */
+ const optB=i=>{const M2=$("modal"),o2=M2&&M2.querySelector(".opts");return(o2&&o2.querySelector(`.opt[data-m="${i}"]`))||null};
+ const why=(c,i)=>{const b=optB(i);return c.kgwhy||(b&&b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):kipLocked(c)?"Thiếu bạc":"")};
+ kitRingItem.open({key:"gift:"+m.pid,title:(M.querySelector(".kptitle")||{}).textContent||verb,sub:who?`${verb} ${m.pid==="plantpick"?"của":"cho"} ${kriE(who)}`:""/* KK62: «Cài vào rương của <người>» (planting goes INTO her chest), every other verb «… cho <người>»; no name known = no line (never the dialog title) */,bg:kriBg(),
+  items:()=>{/* K-RING-QTY (KK61, RV-176 nit, law 6c): the grid folds same-kind same-offer twins into ONE tile ×N (jgpick inv-stack) and removes their cards —
+    the ring shows the same count on that tile (kit stack badge), so no piece of her chest is out of sight */
+   const sg=c=>{const e=S.inv[c.ik];return typeof invCan==="function"&&invCan(e)?[invSig(e),kipLocked(c),c.n||"",c.x||""].join("#"):null};const QN=new Map(),SEEN=new Set();
+   m.opts.forEach(c=>{if(!c||c.ik==null||!S.inv[c.ik])return;const s=sg(c);if(!s)return;QN.set(s,QN.has(s)?QN.get(s)+1:1+(typeof invMoreOnce==="function"?invMoreOnce(S,S.inv[c.ik],SEEN):0))});
+   return L.filter(([c])=>S.inv[c.ik]).map(([c,i])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);const s=sg(c);return{id:i,src:I.src,name:I.name,grade:I.grade,qty:s?QN.get(s)||1:1,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}})},
   /* info = the item's kit detail + the option's own kit card (odds · Tốn · Được · Mất · Kèm) — the same display copy as the old grid detail (kipDetail) */
   info:it=>{try{kipSelect(M,m,it.i);const d=M.querySelector(".kipd");if(d){const c=d.cloneNode(true);c.querySelectorAll(".kipgo").forEach(x=>x.remove());c.classList.remove("kipd");return c.innerHTML}}catch(e){}return""},
-  acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{const b=ops.querySelector(`.opt[data-m="${it.i}"]`);if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark();window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
+  acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{if(!Q[0]||Q[0].pid!==m.pid)return"close";/* the picker is no longer the open dialog */const b=optB(it.i);if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark(),bn=kriBaseName(it);giveTo.out=null;if(typeof plantItem==="function")plantItem.out=null;window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
    M.classList.remove("kri-hide");KRI_DLG=null;/* a follow-up dialog of the act → the ring steps aside for it */if(Q.length&&!$("modal").hidden){return"close"}
-   const L=kriLogSince(l0),bad=L.some(x=>/phát hiện|trả lại|từ chối|không nhận/.test(x));return{ok:!bad,who,title:`${verb} ${it.name}${who?" · "+who:""}`,rows:kriDiffRows(a,V,who).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}],
+   /* K-GIFT-OUT (KK64, KIT-KRI-XL leftover 2): the seal comes from what really became of the piece (giveTo.out / plantItem.out), never from log words —
+      a world line written in the same tick («… phát hiện …», «… không thành …» of someone else) sealed a kept gift BẠI. Ghi chú = only the lines about THIS piece. */
+   const L0=kriLogSince(l0).filter(x=>!bn||x.includes(bn)),ok=kriGiftOk(m.pid,L0),L=kriNoteLines(L0,bn,who);return{ok,who,title:`${verb} ${it.name}${who?" · "+who:""}`,rows:kriDiffRows(a,V,who).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}],
   onClose:()=>{M.classList.remove("kri-hide");if(KRI_DLG===m&&Q[0]===m&&!M.hidden){KRI_DLG=null;const x=M.querySelector(".kit-x");if(x)x.click();else if(typeof closeModal==="function")closeModal()}KRI_DLG=null}})}
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{if(kriOn())kriGiftOpen()}catch(e){console.error("kri gift",e)}return r}})();
 /* the carried-gift flight of the old grid points at a hidden dialog: with the ring its result shows in place instead */

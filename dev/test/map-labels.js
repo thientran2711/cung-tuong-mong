@@ -3,7 +3,7 @@
    clipped by the map viewport, overlaps a neighbour label, or is cut by its own box (scrollWidth > clientWidth).
    usage: node dev/test/map-labels.js <dev/index.html> <OUT> [WxH,WxH,..]   → <OUT>/table.json, <OUT>/<vp>-z<z>.jpg (map only), prints a table
    Pictures come from the CDN through Playwright (cached in .ahcache/img). */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const WT=path.resolve(__dirname,'../..')+'/';
 const [,,HTML0,OUT,VPS='755x1000,1180x820,1366x1024,844x390,390x844,1000x755']=process.argv;const HTML=path.resolve(HTML0);
 const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=WT+'.ahcache/img/';

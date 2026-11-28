@@ -1,6 +1,6 @@
 /* usage: node dev/test/actwire-look.js 755x1000 <outdir> lo,gian,vui  (needs dev/art/actwire_stage.py run first: clips served from local img/kit/emo-anim) */
 /* ACTWIRE look: Thái hậu with an active act → her seal = emo-th-act-<k>; forced lean plays out/loop/back (clips served from the local staged files). */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const cp=require('child_process');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');const cp=require('child_process');
 const [,,SZ,OUT,KEYS]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 const ROOT=require('path').resolve(__dirname,'../..');const MIME={html:'text/html;charset=utf-8',js:'text/javascript;charset=utf-8',json:'application/json',webp:'image/webp',png:'image/png'};
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:2,reducedMotion:'no-preference',serviceWorkers:'block'});

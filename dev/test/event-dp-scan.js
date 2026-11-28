@@ -6,7 +6,7 @@
    Per dialog: layout (kdper = 32.7/50), ONE person in the column, banner (event picture) in the right column, chip ABOVE the head, painted
    figure / column, dialog height vs its content (empty px under the options), plain "thiện cảm" words outside kit rows.
    usage: node dev/test/event-dp-scan.js <url> <outdir> <tag> [WxH@dpr,...] [save.json]   (images from git objects of IMGREV, default 3e212597e) */
-const {chromium}=require('playwright');const fs=require('fs');const {execFileSync}=require('child_process');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const {execFileSync}=require('child_process');
 const [,,URL,OUT,TAG,SIZES,SAVE]=process.argv;fs.mkdirSync(OUT,{recursive:true});const IMGREV=process.env.IMGREV||'3e212597e';
 const CT={webp:'image/webp',png:'image/png',jpg:'image/jpeg',json:'application/json'};const sleep=t=>new Promise(r=>setTimeout(r,t));
 const blob=(rev,f)=>execFileSync('git',['cat-file','blob',rev+':'+f],{cwd:__dirname,maxBuffer:64<<20,stdio:['ignore','pipe','ignore']});

@@ -1,7 +1,7 @@
 /* review/thancan LOOK shots: her Cung nhân tab, the person card of a trusted maid with the kit group «Thân cận» open
    («Chọn làm cung nữ thân cận» + gain/loss), then the same card after the tap («Thôi làm cung nữ thân cận», title «Cung nữ thân cận»).
    usage: CTM_CURL_CDN=1 node dev/test/thancan-shots.js <url-or-file> <outdir> [WxH,...]   (dpr 2; default Fold 755x1000 + iPad 1180x820) */
-const {chromium}=require('playwright');const fs=require('fs');const cp=require('child_process');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const cp=require('child_process');const path=require('path');
 const [,,U,OUT,SIZES]=process.argv;const URL=/^(https?|file):/.test(U)?U:'file://'+path.resolve(U);fs.mkdirSync(OUT,{recursive:true});const cdn={};
 (async()=>{const b=await chromium.launch();
  for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);

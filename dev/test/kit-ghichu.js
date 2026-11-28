@@ -1,6 +1,6 @@
 /* review/kit-ghichu-bang (KIT §62.1): a «Ghi chú» row is never drawn — its text sits behind a kit round «!» at the end of the row above it; tap → kit popup titled «Ghi chú» with that text.
    usage: node dev/test/kit-ghichu.js <url> [WxH,...]   (renders kitRows into a probe div; no game start) */
-const {chromium}=require('playwright');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const [,,URL,SIZES]=process.argv;
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const wh of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=wh.split('x').map(Number);

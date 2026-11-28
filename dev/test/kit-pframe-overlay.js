@@ -3,7 +3,7 @@
    band bottom (opening bottom + band) + ONE gap (KIT_PFO.gap, same for every frame), no empty band; the column ends at the rows' bottom (or the tassel's, if lower).
    usage: node dev/test/kit-pframe-overlay.js <url> <outdir> [WxH,...] [scene,...]   (shots of each scene; JSON rows per card)
    scenes: tab-court (Hậu cung › Chí tôn) tab-rv tab-staff tab-men tab-kin pop-maid pop-elder */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,URL,OUT,SIZES,SCN]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const SCENES={'pop-maid':"popKind('maid')",'pop-elder':"popKind('elder')",'tab-rv':"tabGo('rv')",'tab-court':"tabGo('court')",'tab-staff':"tabGo('staff')",'tab-men':"tabGo('men')",'tab-kin':"tabGo('kid')"};
 (async()=>{const b=await chromium.launch();let bad=0;const ALL={};

@@ -4,14 +4,14 @@
    across lines, facts per page (≥ 2 except the last), figure height / picture height (≥ 0.85), figure scaled (must not), page-1 heading
    shows the name, and on the page in view: face + torso (head centre ± 12 % of figure height) clear of the text (≥ 0 px), body never past the page's left
    edge (trainPastLeft = outer train/sleeve beyond it, allowed). Exit 1 on any failure. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const FIGS=(process.env.FIGS||'fig-thaihau-h1-a51.webp,fig-thaihau-h3-a51.webp,fig-thaihau-h2-a51.webp,fig-maid-m33-t7-a18.webp,fig-consort-c10-t8-a18.webp').split(',');
 const N=+(process.env.N||14);const NORMAL='fig-consort-c01-t1-a18.webp';   /* reference: a normal standing figure — text may never be narrower than on its page */const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1000,755],[1180,820],[1366,1024]];
 const isFile=!/^https?:/.test(SRC);
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});let bad=0;
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});
   await ctx.addInitScript(()=>{window.__bot=1});
-  if(isFile)await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:fs.readFileSync(SRC),contentType:'text/html; charset=utf-8'}));
+  if(isFile)await ctx.route('http://ctm.test/**',r=>r.fulfill({status:404,body:''}));/* rv-plr4 r8 (law 11): only the page gets the 20 MB html; every other ctm.test asset 404 — answering each mp3/vendor request with the whole page broke the Playwright pipe once the page passed ~20.6 MB */await ctx.route(/^http:\/\/ctm\.test\/index\.html([?#].*)?$/,r=>r.fulfill({status:200,body:fs.readFileSync(SRC),contentType:'text/html; charset=utf-8'}));
   const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,120)));
   await p.goto(isFile?'http://ctm.test/index.html':SRC+'index.html',{waitUntil:'domcontentloaded',timeout:120000});
   await p.waitForFunction(()=>typeof start==='function'&&typeof kitBook==='function',null,{timeout:120000});

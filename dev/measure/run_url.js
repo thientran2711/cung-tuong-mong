@@ -1,7 +1,7 @@
 /* bot balance run against a served build (no scratchpad paths).
    usage: node dev/measure/run_url.js <url> <mode sens|rand> <lives> <out.json> [inpage file, default inpage5.js]
    then: python3 dev/measure/an7.py <out.json> */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,URL,mode,target,OUT,INP]=process.argv;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
  /* URL "root/<file>" = serve the repo root from disk through the browser (no separate server) */

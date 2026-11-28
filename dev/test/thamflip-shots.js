@@ -1,5 +1,5 @@
 /* cfglow2-r2: whole-frame glow check. usage: node dev/test/cfglow2-r2.js <url> <outdir> 755x1000,1180x820 [dpr] */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,OUT,VPS,DPR,SH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));const ALL=SH==='all';
 const SHOT=async(p,o)=>{for(let i=0;i<3;i++){try{await p.screenshot(Object.assign({timeout:150000,type:'jpeg',quality:62},o));return}catch(e){console.error('shot retry',o.path)}}};

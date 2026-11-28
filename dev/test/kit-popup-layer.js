@@ -1,7 +1,7 @@
 /* review/kit-ghichu-sections r2 (rv FAIL): the ONE kit popup layer (#kpop) is above every picture, incl. the big emotion avatar (.kemo-big, z-index 9990/9991).
    Scenes: the real art-rule modal (v85Table('cam')) «Năm bậc !» popup, a kitNoteBang popup, a kitTapWord popup, a kitFactTap popup — each with a synthetic .kemo-big (z 9991) laid over the popup rectangle:
    the topmost element at the popup's centre and 4 corners must belong to #kpop. usage: node dev/test/kit-popup-layer.js <url> [WxH,...] */
-const {chromium}=require('playwright');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const [,,URL,SIZES]=process.argv;
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const wh of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=wh.split('x').map(Number);

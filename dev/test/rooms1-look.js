@@ -2,7 +2,7 @@
    (S.hall + goTo -> placeOf/kpmRoomImg -> residenceArt -> stage), on 755x1000@2 and 1180x820@2.
    NEW=<dir> serves <dir>/<key>-ha-sang.webp in place of the CDN file (pre-swap look); without NEW the live CDN file is used.
    usage: [NEW=dir] node dev/test/rooms1-look.js file://$PWD/index.html <outdir> */
-const {chromium}=require('playwright');const fs=require('fs');const {execFile}=require('child_process');const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const {execFile}=require('child_process');const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const T=[['canh-phuc',0,'chinh'],['canh-phuc',0,'tay'],['chung-tu',2,'dong'],['chung-tu',2,'chinh'],['dien-huy',5,'dong'],['dien-huy',5,'chinh'],['dien-huy',5,'tay'],
  ['ham-an',3,'dong'],['ham-an',3,'chinh'],['khai-tuong',1,'tay'],['thua-minh',4,'dong'],['thua-minh',4,'chinh'],['thua-minh',4,'tay'],['truong-xuan',7,'dong'],['truong-xuan',7,'chinh'],['vinh-hoa',6,'chinh']];
 const key=(s,p)=>s+'-cung'+(p==='chinh'?'':p==='dong'?'-dong-phoi':'-tay-phoi');

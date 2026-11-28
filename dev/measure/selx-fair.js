@@ -5,7 +5,7 @@
              best = «Xuất sắc» (word[3]) + the valued answers. A fair contest: the base rate of a girl is yard.kept / yard.n (owner OD 24/11 ~06:15Z top 4 of 12);
              a careless life may be cut, a girl who plays the board well should be kept as a norm, and high Tài must help.
    usage: node dev/measure/selx-fair.js [N lives per profile] [index.html] [out.json] ['{"w":{...}}' = a trial BAL.selx override, tuning only]   (serves dev/ through a Playwright route) */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'..');const N=+process.argv[2]||40;const PAGE=process.argv[3]||'index.html';
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});
  await ctx.route('http://localhost:8813/**',r=>{const u=new URL(r.request().url());const f=path.join(ROOT,decodeURIComponent(u.pathname));if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});return r.fulfill({status:200,contentType:f.endsWith('.html')?'text/html; charset=utf-8':'application/octet-stream',body:fs.readFileSync(f)})});

@@ -2,7 +2,7 @@
    usage: node dev/test/emo-seal-persist.js <W>x<H>@dpr <outdir> [dev/index.html]
    For each view (room stage, place stage, event dialog) counts the visible seals, taps EACH seal in turn, closes the box (Đã rõ / ✕ / backdrop), waits, and asserts the
    seal count (and the tapped seal itself) is unchanged. Exit code 1 on any mismatch. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,SZ,OUT,PAGE]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 const ROOT=path.resolve(__dirname,'../..');const MIME={html:'text/html;charset=utf-8',js:'text/javascript;charset=utf-8',json:'application/json',webp:'image/webp',png:'image/png',css:'text/css'};
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',serviceWorkers:'block'});

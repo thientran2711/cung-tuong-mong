@@ -99,7 +99,7 @@ function kitDecor(f){f=f||{};let r=f.__kr||(f.__kp?personRoleRank(f.__kp):null);
  W("pServ0",s=>s);W("pServ",s=>s);W("kidFace0",k=>k,"prince");W("kidFace",k=>k,"prince");W("pEunCourt",k=>S.court&&S.court[k],"eunuch");W("pMan",m=>m,"man");W("pMin",h=>h,"official");
  W("h54Face",s=>s,"man");W("pMsg",()=>(S.court&&S.court.tq)||null,"eunuch")})();
 /* person -> face object through the same constructors */
-function kitFace(p){try{if(!p)return{src:"",ini:"?"};if(p===S)return pMe();if(p===S.emp)return pEmp();if(p===S.thO)return pTH();if(p===S.maid)return pMaid();
+function kitFace(p){try{if(typeof kitFigWho==="function")p=kitFigWho(p);/* K-SRV-OWNFIG (KK63): servant-shaped Emperor / Thái y → the real person */if(!p)return{src:"",ini:"?"};if(p===S)return pMe();if(p.kind==="ty"&&!p.ref&&p.id==="ty"&&typeof pDoc==="function")return pDoc();if(p===S.emp)return pEmp();if(p===S.thO)return pTH();if(p===S.maid)return pMaid();
  if(p.kind&&typeof pFaceOf==="function"&&!p.name)return pFaceOf(p);if(rivals.includes(p))return pv(p);if(allKids().some(([k])=>k===p))return kidFace(p);
  if(p.role==="maid"||p.role==="eunuch")return pServ(p);if(S.court){const k=Object.keys(S.court).find(x=>S.court[x]===p);if(k)return k==="ty"?pDoc():pEunCourt(k)}
  if((S.men||[]).includes(p))return pMan(p);if(typeof pMin==="function"&&typeof CLANS!=="undefined"&&p.c&&CLANS.includes(p.c))return pMin(p);if(typeof h54Face==="function"&&(p.off||p.house))return h54Face(p)}catch(e){}

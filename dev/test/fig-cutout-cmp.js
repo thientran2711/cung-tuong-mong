@@ -1,5 +1,5 @@
 // node cmp.js <url> <WxH> <outdir> fig1,fig2,...  — identity card big figure, DPR 2: crops of the upper body under several filters
-const {chromium}=require('playwright');const sleep=t=>new Promise(r=>setTimeout(r,t));const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const sleep=t=>new Promise(r=>setTimeout(r,t));const fs=require('fs');
 const [,,URL0,SZ,OUT,FIGS]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:2,hasTouch:true,serviceWorkers:'block'});

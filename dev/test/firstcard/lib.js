@@ -1,5 +1,5 @@
 /* FIRSTCARD (review/firstcard): shared page opener for the firstcard tests — serves <WT>/dev (default: this worktree) at http://localhost:8813 */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('../lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const WT=process.env.WT||path.resolve(__dirname,'../../..');const ROOT=path.join(WT,'dev');
 async function open(vp,opt){opt=opt||{};const b=opt.browser||await chromium.launch();
  const ctx=await b.newContext(Object.assign({viewport:vp||{width:755,height:1000},deviceScaleFactor:1,serviceWorkers:'block'},opt.ctx||{}));

@@ -4,7 +4,7 @@
    her cost lands once on her side; báo lùi halves her NEXT flip on the host; giấu shows "không báo" in the host's book; then an OLD guest
    (origin/main build, never relays) in her cycle tuần: the week still merges. usage: build .tmp/old.html (origin/main) first;
    python3 dev/build/assemble.py && node dev/test/coop-cyc.js [outdir] [workerURL]. A = host 755x1000@2, B = guest 1180x820@2. */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const BASE='http://ctm.local/';let HTML=path.join(ROOT,'.tmp/old.html');
 const MIME={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.mp3':'audio/mpeg','.css':'text/css','.webmanifest':'application/manifest+json','.svg':'image/svg+xml'};
 async function serve(ctx){ctx.__html=ctx.__html||path.join(ROOT,'dev/index.html');await ctx.route(BASE+'**',async route=>{const u=new URL(route.request().url());let p=decodeURIComponent(u.pathname);

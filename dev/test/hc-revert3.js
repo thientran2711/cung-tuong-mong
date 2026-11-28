@@ -1,5 +1,5 @@
 /* review/hc-portrait-revert-r1: Người lạ card (strip click) screenshot + aspect. usage: node dev/test/hc-revert3.js <url> <WxH> <out.jpg> */
-const {chromium}=require('playwright');const [,,BASE,SZ,OUT]=process.argv;const [W,H]=SZ.split('x').map(Number);
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const [,,BASE,SZ,OUT]=process.argv;const [W,H]=SZ.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click())},300)});
  const p=await ctx.newPage();p.setDefaultTimeout(60000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

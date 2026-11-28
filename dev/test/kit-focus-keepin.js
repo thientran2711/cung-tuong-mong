@@ -1,7 +1,7 @@
 /* KK60 kit-focus-keepin (KIT §92.7, G1 BIG #21 «Chọn làm cung nữ thân cận» cut on Fold): real dfOpen on every stage person + figure-width sweep (SWEEP=1 default list, or SWL='[null,[x,w],..]');
    every .kfoc-b, its column and its «!» must lie inside the focus layer AND the screen; title text never runs out of the plaque. FAILS on bd1bf3d0 (Fold sweep: left column -17..73 / -167..-77).
    usage: SWEEP=1 node dev/test/kit-focus-keepin.js <file:///…/index.html> <outdir> [WxH,...]   (SHOT=1 stills of faults, SHOTALL=1 stills of person 0, DSF=2) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES,PLACES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT,SIZES,PLACES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();let tot=0;
  for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(process.env.DSF||1),hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});

@@ -6,7 +6,7 @@
      HIDDEN visible elements in the panel with a pointer cursor but NO visible text, no aria-label/title and no picture (an unlabelled tap zone),
            and whole-card tap zones (.kskill / .kcard with a pointer cursor) — listed for the table.
    usage: node dev/test/info-tap-audit.js [index.html|URL] [out.json] [WxH,...] [maxPerScreen=10]   → prints a markdown table, exit 1 on FAIL */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const RT=require('./realtap.js');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');const RT=require('./realtap.js');
 const A=process.argv.slice(2);const U0=A[0]||path.resolve(__dirname,'../../index.html');const URL=/^(https?|file):/.test(U0)?U0:'file://'+path.resolve(U0);
 const OUTJ=A[1]||'/tmp/info-tap-audit.json';const SIZES=(A[2]||'755x1000,1180x820').split(',');const MAXN=+(A[3]||10);
 const SETUP=()=>{try{window.__kbootHostDrop&&window.__kbootHostDrop()}catch(e){}document.querySelectorAll('#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov').forEach(e=>e.remove());

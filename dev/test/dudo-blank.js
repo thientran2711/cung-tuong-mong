@@ -1,6 +1,6 @@
 /* dudo-blank: the Dư đồ map must PAINT (spots visible, art loaded, canvas/stage non-zero) within N s of opening, at every priority size.
    usage: node dev/test/dudo-blank.js <page URL> <shotdir|-> [WxH@dpr,..] [maxSeconds] */
-const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
 const [,,PAGEURL,DIR,SIZES,MAXS]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));const MAX=+(MAXS||8);
 (async()=>{const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});let bad=0;
  for(const sz of (SIZES||'755x1000@2,412x1058@2,1180x820@2,1366x1024@2').split(',')){const [WH,DPR]=sz.split('@');const [W,H]=WH.split('x').map(Number);const errs=[];

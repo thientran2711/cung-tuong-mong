@@ -4,11 +4,11 @@
    - every Kèm / Được / Mất line is its own row (distinct tops), the name «<Tên>:» on the same row as its value;
    - no line starts with «một vị» (capital at the start of a row).
    usage: node dev/test/kit-kem-row.js <index.html> [shotdir]   Exit 1 on a FAIL. Shots never go in git. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;
 (async()=>{const b=await chromium.launch();const html=fs.readFileSync(SRC);let fails=0;const chk=(n,ok,i)=>{if(!ok){fails++;console.log('FAIL',n,i||'')}else console.log('ok  ',n)};if(OUT)fs.mkdirSync(OUT,{recursive:true});
 for(const [W,H] of [[755,1000],[1180,820]]){const dev=W<H?'fold':'ipad';const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
  await ctx.addInitScript(()=>{let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
- await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+ await ctx.route('http://ctm.test/**',r=>r.fulfill({status:404,body:''}));/* rv-plr4 r8 (law 11): only the page gets the 20 MB html; every other ctm.test asset 404 — answering each mp3/vendor request with the whole page broke the Playwright pipe once the page passed ~20.6 MB */await ctx.route(/^http:\/\/ctm\.test\/index\.html([?#].*)?$/,r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>{if(!/Unexpected token '<'/.test(String(e)))errs.push(String(e).slice(0,200))});
  await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
  await p.waitForFunction(()=>typeof start==='function'&&typeof kitNightEnd==='function',null,{timeout:120000});

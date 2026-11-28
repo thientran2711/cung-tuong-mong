@@ -1,7 +1,7 @@
 /* review/mem-upgrade: per-person fade, LIFELONG memories, memory-driven behaviour, CAUSE ledger (dev/build/jmem.js, BAL.mem / BAL.hook).
    usage: node dev/test/mem-upgrade.js <build url> <outdir> [WxH@dpr,...]   → JSON checks + card shot per size; exit 1 on a failed check.
    Serve dev/ with a UTF-8 charset header (see dev/PROGRESS_memories.md). */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const R={};let fail=0;
  for(const sz of (SIZES||"755x1000@1").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const errs=[];
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+dpr,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});

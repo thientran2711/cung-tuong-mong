@@ -77,7 +77,7 @@ const KIT_OPT_RULES=[
  [/(nhận lỗi|nhận tội|tạ lỗi|tạ tội|xin lỗi|cúi đầu đi qua|nhún nhường|hạ mình|^nhịn)/i,"cui-dau-nhan-loi-h"],
  [/(quỳ xin|khóc lóc xin|xin tha|van xin|dập đầu|xin bà cứu)/i,"quy-xin-tha-h"],
  [/^(thưa|bẩm|kể thật|giải thích|phân trần|thanh minh|biện bạch|tự thú)/i,"opt-thua-trinh"],
- [/^(vâng|vâng chỉ|tuân|nhận lời|nhận\b|nhận ngay|đồng ý|tạ ơn|chu toàn lễ nghĩa|giao$)/i,"cui-dau-tuan-lenh-h"],
+ [/^(vâng|vâng chỉ|tuân|cúi đầu (vâng|dạ|tuân|nghe)|nhận lời|nhận\b|nhận ngay|đồng ý|tạ ơn|chu toàn lễ nghĩa|giao$)/i,"cui-dau-tuan-lenh-h"],
  /* — gifts / silver — */
  [/(lì xì)/i,"li-xi-h"],
  [/(đút bạc|đưa bạc|bỏ bạc mua|lo lót|hối lộ|mua chuộc|bịt miệng|im miệng)/i,"dut-bac-rut-loi-h"],
@@ -120,6 +120,8 @@ const KIT_OPT_RULES=[
  [/(cầu|hương án|cúng|đèn hoa đăng|giữ chay)/i,"cung-duong-dau-den-h"],
  [/(thái y|thuốc|bắt mạch)/i,"thai-y-khac-bat-mach-h"],
  [/(con ôn bài|kèm .*con|cho con|dạy con|chăm|nhận nuôi)/i,"day-con-hoc"],
+ /* KIT-STAGE-R5 (KK46 review F1, law 11 whole family): every «Cúi đầu …» option without a more specific group above (vâng dạ, im lặng, lui, thưa tên …) = the bowing picture, never the stand-in */
+ [/^cúi đầu/i,"cui-dau-tuan-lenh-h"],
  /* r1: "chàng" alone (any line about him) is the LAST resort — petitions / help for him hit their own group first */
  [/(chàng)/i,"hen-gap"],
 ];
@@ -295,6 +297,7 @@ let KIT_OPT_UNI=0;function kitOptUnify(b){if(KIT_OPT_UNI)return;const c=b&&b.par
 function kitOptUnify0(c){if(KIT_OPT_UNI)return;try{KIT_OPT_UNI=1;const sib=[...c.children].filter(x=>x.matches&&x.matches("button.ka")&&x.matches(KIT_OPT_SEL));if(!sib.some(x=>x.querySelector(":scope > .kaart")))return;
  sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;if(x.__kouS&&x.__kouS===kitOptUnSig(x))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);kitOptCompactRows(x);kitOptFinal(x);x.__kouS=kitOptUnSig(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
 function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.classList.contains("kcard")||b.closest(".pc")||b.classList.contains("kbare"))return;/* KIT §93.7 bare selection card: no rows */
+
  {const k1=b.querySelector("small.kb");if(b.__kofSig&&k1&&b.__kofSig===kitOptSig(b,k1))return}/* idempotent: our own DOM edits must not re-trigger the observers that call us */
  b.querySelectorAll(".kfill,.kobang,.kdup").forEach(e=>e.remove());b.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
  const body=b.querySelector(":scope > .kabody")||b;let kb=body.querySelector(":scope > small.kb, :scope > .kb");if(!kb){kb=document.createElement("small");kb.className="kb";body.appendChild(kb)}
@@ -308,7 +311,7 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  const free=false;/* KK56 (KIT-STD-AUDIT F7, OD 26/11 ~17:55Z KEEP ALL rows): a NAVIGATION option (nav:1) shows its Tốn / Được rows through the same kit rows (kaRows) like every card; the §6.2m no-row nav card is retired *//* OD 26/11 ~17:55Z (canon overwrite of tinbao-words): KEEP ALL result rows — «Tốn: không», «Được: không» stay on every card, nothing hidden; the .kfree no-row card is retired */
  /* LAW 3 (review/odds-meter-back): a card with NO roll (no odds of its own; a no-roll option carries no odds word at all, owner 26/11 ~18:25Z) cannot fail — its
     «mất: …» (parsed as a Bại row beside Thành) is a CERTAIN loss and stands in Tốn like a Mất row, never folded behind «!» */
- const sure=!b.querySelector(".kat .kodds");if(sure)mats=mats.concat(R("bai"));
+ const sure=!b.querySelector(".kat .kodds,:scope > .kaart .kodb");if(sure)mats=mats.concat(R("bai"));
  /* OD 21/11 ~05:0xZ (#72): the LOSS has its own «Mất» row (Tốn = the price, Được = the gain, Mất = what can be lost), never folded into Tốn */
  const loss=[];if(!ton){ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n kdup";e.textContent="không";ton.querySelector(".krv").appendChild(e)}
  mats.forEach(m=>chipsOf(m).forEach(c=>loss.push(dupOf(c))));
@@ -316,13 +319,13 @@ function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.c
  else{gain=row("kr-duoc kfill","Được",[]);
   /* LAW 3 (no hidden gain / loss): an option whose value is worded only as a GỢI Ý («được lòng bề trên», «giữ trọn khắc và Sức buổi này; nhưng mất lòng bề trên») shows that wording in Được (the part before «nhưng») and Tốn (the part after it) instead of «không» */
   const hr=R("hint")[0],ht=hr?(hr.querySelector(".krv")||hr).textContent.split(/\s*;\s*/).map(x=>x.trim()).filter(x=>x&&!KA_ODDS.test(x)).join("; "):"";/* KK53 ROOT of the doubled odds clause («…; Tùy duyên; Tùy duyên» on a card): the hint string is «gain; ODDS WORD; nhưng loss» (jk2b kitHint, jroad ro.hint) and the odds word already stands in the card's own meter (.kodds) — a whole clause that IS an odds-ladder word never goes into the Được / Tốn copy, so no re-run can repeat it */const cp=(t,c)=>{const e=document.createElement("span");e.className="ef "+c+" kdup";e.textContent=t;return e};
-  if(ht&&!/^(không|chưa rõ|không được mất gì)\.?$/i.test(ht)){/* only the EMPTY hints; «không dính vào thù oán …; nhưng …» is a real gain + loss (review/odds-meter-back) */const parts=ht.split(/\s*;\s*nhưng\s+|\s+nhưng\s+/),g0=parts[0].trim(),l0=parts.slice(1).join("; ").trim();gain.querySelector(".krv").appendChild(cp(g0,"g"));
-   if(l0)loss.push(cp(l0,"r"))}
+  if(ht&&!/^(không|chưa rõ|không được mất gì)\.?$/i.test(ht)){/* only the EMPTY hints; «không dính vào thù oán …; nhưng …» is a real gain + loss (review/odds-meter-back) */const parts=ht.split(/\s*;\s*nhưng\s+|\s+nhưng\s+/),gl=parts[0].trim().split(/\s*;\s*(?=hỏng thì\s)/),g0=gl[0].trim(),l0=gl.slice(1).concat(parts.slice(1)).join("; ").trim();/* KK56-R10 (MAIN LOOK 27/11, KIT §224 kaRows): a loss clause («hỏng thì …») NEVER sits in Được: split by meaning, the Thành/Được part green, the «hỏng thì …» part red in its own Mất row */gain.querySelector(".krv").appendChild(cp(g0,"g"));
+   if(l0)loss.push(cp(l0.replace(/(^|;\s*)hỏng thì\s+/g,"$1"),"r"))/* the Bại / Mất label says it: never «hỏng thì …» inside a row (OD 27/11 ~05:27Z) */}
   else{const e=document.createElement("span");e.className="ef n kdup";e.textContent="không";gain.querySelector(".krv").appendChild(e);try{(window.__kitNoGain=window.__kitNoGain||[]).push((b.querySelector(".kan,b")||b).textContent.trim().slice(0,60))}catch(x){}/* KK54 (law 3 census, MAIN 171): every card whose Được falls back to «không» is listed here (test hook, no effect) */}}
  const matRow=loss.length?row("kr-mat2 kdup","Mất",loss):null;if(matRow)kb.appendChild(matRow);const keep=new Set([ton,gain,matRow]);const dis=b.classList.contains("kdis");
  let extra=false;[...kb.children].forEach(r=>{if(keep.has(r)||r.classList.contains("kdup0"))return;r.classList.add("kofold");if(!(r.classList.contains("kr-mat")||(sure&&r.classList.contains("kr-bai"))||gains.includes(r)))extra=true});
  /* order: Tốn · Được · the folded rest; the Được slot is ALWAYS labelled Được (a rolled card's Thành row, Được ngay …) */
- {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}gain.classList.toggle("kwinrow",!sure&&gain.classList.contains("kr-thanh"))/* K-WIN-PAY (KIT_REQUESTS 21/11 econ-tamco F1): on a rolled card the Được slot IS the Thành row, so a red item there (a price paid only when it works, §88 THÀNH Mất) reads «… khi thành» */;kb.insertBefore(ton,kb.firstChild);ton.after(gain);if(matRow)gain.after(matRow);
+ {const l=gain.querySelector(":scope > .krl");if(l)l.textContent=sure?"Được":"Thành";/* OD 27/11 ~05:27Z (owner approved 05:29Z): a card with ODDS reads «Thành:» (green) + «Bại:» (red) on its own line; only a SURE card reads «Được:» / «Mất:» — kaRows labels, as the act cards */if(!sure){gain.classList.remove("kr-duoc");gain.classList.add("kr-thanh");if(matRow){matRow.classList.remove("kr-mat2");matRow.classList.add("kr-bai");const ml=matRow.querySelector(":scope > .krl");if(ml)ml.textContent="Bại"}}}gain.classList.toggle("kwinrow",!sure&&gain.classList.contains("kr-thanh"))/* K-WIN-PAY (KIT_REQUESTS 21/11 econ-tamco F1): on a rolled card the Được slot IS the Thành row, so a red item there (a price paid only when it works, §88 THÀNH Mất) reads «… khi thành» */;kb.insertBefore(ton,kb.firstChild);ton.after(gain);if(matRow)gain.after(matRow);
  if(free){ton.remove();gain.remove();if(!b.classList.contains("kfree"))b.classList.add("kfree")}else if(b.classList.contains("kfree"))b.classList.remove("kfree");
  const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
  if(b.dataset.knav==="1")extra=false;/* §6.2m a nav card has nothing to explain */if(extra&&![...b.querySelectorAll(".kofold")].some(r=>{const v=r.querySelector(":scope > .krv")||r;return (v.textContent||"").replace(/\s+/g,"").length>0}))extra=false;/* KIT §6.2 «!» only when something real is folded behind it (MAIN 161: a lone «!» with nothing to show, whole family) */if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";b.appendChild(m)}
@@ -395,7 +398,7 @@ function kitOptTier(g){try{if(g.classList.contains("khand"))return;/* KIT §101:
  const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>{b.style.removeProperty("min-height");const a=b.querySelector(":scope > .kaart");if(a)a.style.removeProperty("height")});void g.offsetHeight;bs.forEach(b=>{if(typeof kitOdFit1==="function")kitOdFit1(b)});/* KIT §6.2b-1: the meter stacks by the TITLE ROOM (j79 kitOdFit1), one rule for every card */void g.offsetHeight};
  const band=t=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");void g.offsetHeight;const kh=Math.max(0,...bs.map(b=>{const k=b.querySelector(".kat");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kat-h",kh+"px");void g.offsetHeight;
   const mb=Math.max(0,...bs.map(b=>{const k=b.querySelector(":scope > .kabody");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kbtop",Math.max(0,Math.floor((KIT_OPT.tiers[t].h-mb-14)/2))+"px");void g.offsetHeight};
- const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]&&!(typeof KIT_ODFIT!=="undefined"&&b.__kodRoom<KIT_ODFIT.min)&&!kitBareNarrow(b)&&!(lay==="2"&&kitOptNarrow(b)));/* KIT §6.2b-1: a layout that leaves a title less than KIT_ODFIT.min em beside its meter does not fit (2 columns → 1 column) */(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
+ const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]&&!(typeof KIT_ODFIT!=="undefined"&&b.__kodRoom<KIT_ODFIT.min)&&!kitBareNarrow(b)&&!(lay==="2"&&kitOptNarrow(b)));/* §6.2h: 2 columns only when no card text stacks *//* KIT §6.2b-1: a layout that leaves a title less than KIT_ODFIT.min em beside its meter does not fit (2 columns → 1 column) */(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
  const one=!!(g.closest&&g.closest("#modal.kgoalhow,.kgoalhow"));/* KK54 (RV-165 §6.2l, law 10): the «Cách làm» nav cards (Đi tới / Xem Dư đồ) are ONE long row each, never two columns */const seq=bs.length>=2&&!one?[["2","S"],["1","M"],["1","L"]]:[["1","M"],["1","L"]];let pick=seq[seq.length-1],last=null,settled=false;
  /* KIT §98.13 (fitfast r2): the pick is a pure function of the list width, the viewport and what the cards SAY (class + text), so a card shape seen before is laid out ONCE: try its remembered tier first (same fit test); it only wins when it fits AND is where the trial loop stopped before (every tier before it in the sequence was rejected for the same inputs) — a miss or a failed check runs the full loop exactly as before */
  const mk=kitOptMemoKey(g,bs),hit=mk&&KOT_MEMO.get(mk);
@@ -415,10 +418,20 @@ function kitOptTier(g){try{if(g.classList.contains("khand"))return;/* KIT §101:
  g.__kotW=Math.round(g.clientWidth);g.__kotSig=kitOptTierSig(g,bs);if(again&&typeof kitOdRefit==="function")kitOdRefit(bs);/* KIT §6.2b-1: the trial layouts moved every title row; fit the meters on the final one (when the last trial was the picked layout the meters were just fitted on it: no refit) */return pick.join("")}catch(e){g.__kotBusy=0;console.error("kitOptTier",e)}}
 window.kitOptTier=kitOptTier;window.kitOptCards=kitOptCards;
 /* "!" on a card: the full card (every row, lead text) in an overlay; tap anywhere closes; the option is NOT chosen */
+/* KIT §6.2o K-HAND-MAT (KK63, TMK-WARN F seat s21e, laws 3 + 9 + 11): ONE copy builder for every read-only copy of an option card — the hand plate
+   (jkhand kitHandPlate) and the «!» overlay (kitOptInfo). The copy shows the card's SOURCE rows (folded ones unfolded; kitOptFinal's own .kdup / .kfill
+   copies dropped so nothing prints twice). ROOT of the lost Mất rows: the copy is a disabled button (it must not be pressed), and the locked-card rule
+   (j63 «button.ka:disabled .kr-mat / .kr-kem / .kr-bai {display:none}») hid EVERY Mất / Kèm / Bại row on it — the player read only Được on a card
+   whose model held 5 Mất rows («Nhận bạc, làm tai mắt»). Now the copy is .kopinfo (exempt from that rule) and only a copy of a LOCKED card
+   (disabled / .kdis) carries .khlock, which keeps the locked look. A no-roll card's Bại row is a certain loss: it is labelled Mất, as on the card. */
+function kitOptCopy(b,face){const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(face?".kaart,.kobang":".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());/* face = the hand's enlarged card (jkhand kitHandBigBuild, KIT §101.10 «info on the FRONT»): it keeps the card face's own Tốn / Được rows (.kfill / .kdup) and shows the hint only when no row says it; every source row (Được, Mất, Kèm, Bại) is kept either way */c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
+ c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *")&&!(r.querySelector(".krv")||{}).textContent)r.remove()});
+ if(!b.querySelector(".kat .kodds"))c.querySelectorAll(".kr-bai > .krl").forEach(l=>{l.textContent="Mất"});
+ ["--kx","--ky","--kr","--k3s","min-height"].forEach(p=>c.style.removeProperty(p));c.classList.remove("kopt","kart","klift","kfdown");c.classList.add("kopinfo");if(b.disabled||b.classList.contains("kdis"))c.classList.add("khlock");
+ c.disabled=true;c.type="button";c.removeAttribute("data-m");c.removeAttribute("data-khi");return c}
+window.kitOptCopy=kitOptCopy;
 function kitOptInfo(b){try{let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
- const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
- c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *"))r.remove()});
- c.classList.remove("kopt","kart");c.classList.add("kopinfo");c.disabled=true;c.style.removeProperty("min-height");c.type="button";z.innerHTML="";z.appendChild(c);z.insertAdjacentHTML("beforeend",kitOvX("kpinfo"));z.hidden=false}catch(e){console.error(e)}}
+ const c=kitOptCopy(b);z.innerHTML="";z.appendChild(c);z.insertAdjacentHTML("beforeend",kitOvX("kpinfo"));z.hidden=false}catch(e){console.error(e)}}
 window.kitOptInfo=kitOptInfo;
 document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kobang");if(!m)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitOptInfo(m.parentElement)}catch(x){}},true);
 
@@ -485,7 +498,7 @@ ${O}.kofit2>.kaart{margin-inline:auto 0}`).join("\n");document.head.appendChild(
 /* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
  `<div class="opts kitpg-opts">`+
- [["Cúi đầu nhận lỗi","tốn: 1 khắc"],["Thưa rằng do Hoàng thượng định","tốn: 1 khắc"],["Dâng lễ vật xin bỏ qua",`tốn: Bạc -${BAL.kitpage.demo.gift.bac}, ${BAL.kitpage.demo.k} khắc`]]
+ [["Cúi đầu nhận lỗi","tốn: "+BAL.time.cost.talk+" khắc"],["Thưa rằng do Hoàng thượng định","tốn: "+BAL.time.cost.talk+" khắc"],["Dâng lễ vật xin bỏ qua",`tốn: Bạc -${BAL.kitpage.demo.gift.bac}, ${BAL.kitpage.demo.k} khắc`]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
 /* kit sample page (§6.2b FINAL): no cost / no gain → grey "không" rows, long note behind "!", every card one size */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Thẻ lựa chọn: một cỡ, chỉ Tốn và Được (còn lại sau dấu !)",html:()=>
@@ -515,7 +528,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2d",title:"Th�
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: ảnh vuông + Tốn/Được, ô thông tin full-width dưới",html:()=>
  `<div class="pc"><div class="pcr"><div class="pcb">`+
- [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6 · ghi chú: chỉ làm được khi nàng ta ở nhà"],["Sai đi dò la","Tùy duyên · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5 · cần: đã gặp mặt"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
+ [["Tâm sự","tốn: "+BAL.time.cost.talk+" khắc · được: thiện cảm +6 · ghi chú: chỉ làm được khi nàng ta ở nhà"],["Sai đi dò la","Tùy duyên · tốn: "+BAL.time.cost.talkAct+" khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5 · cần: đã gặp mặt"],["Nghe ngóng chung","tốn: "+BAL.time.cost.talk+" khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
   .map(([n,x],i)=>pbtn(`data-kitsample="pc${i}"`,n,typeof kitParse==="function"?kitParse(x):x,"")).join("")+`</div></div></div>`})}catch(e){}
 /* GOAL / TASK cards (owner 16/11 21:10Z, chapter goal list "Đi làm: Học một môn tài nghệ" had no picture): an "Đi làm: <việc>" option is matched on the
    task itself (prefix dropped), and when nothing names a picture it shows the task's act / act-category picture (kitActArt) — every goal card has one. */

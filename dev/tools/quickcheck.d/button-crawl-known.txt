@@ -1,2 +1,3 @@
 # known, already-filed button faults: «regex<TAB>owner / request». A row here is printed as KNOWN by the gate, not failed. Remove the line when the fix lands.
 Mục tiêu chương.*(Mục tiêu|Danh hiệu|Thiên mệnh).*dead button	K-KDTX-BAND (dev/kit/KIT_REQUESTS.md 25/11) — kit keeper
+Đông sở.*Ra Dư đồ.*(did not take the lift|did not lift)	ring-build owner (BIG #18 §5: jselxsc.js:177 capture listener runs before the jkhand two-tap gate — «Ra Dư đồ» is a one-tap card dressed as a hand card)

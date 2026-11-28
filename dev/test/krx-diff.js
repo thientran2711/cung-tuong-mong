@@ -3,7 +3,7 @@
       edge cases): replace("[$&]"), replace(fn with groups), split, test, match — native RegExp vs kRxEmu, in one Chromium page;
    2) VP.fix over the corpus in a native boot vs an "old Safari" boot (RegExp throws on lookbehind).
    usage: node dev/test/krx-diff.js <baseURL>   (exit 1 on any difference) */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');let acorn;try{acorn=require('acorn')}catch(e){acorn=require('/opt/node-tools/node_modules/acorn')}
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');let acorn;try{acorn=require('acorn')}catch(e){acorn=require('/opt/node-tools/node_modules/acorn')}
 const BASE=process.argv[2];const B=path.join(__dirname,'../build');
 const set=new Set();
 for(const f of fs.readdirSync(B).filter(f=>/^j.*\.js$/.test(f))){let toks;try{toks=[...acorn.tokenizer(fs.readFileSync(B+'/'+f,'utf8'),{ecmaVersion:'latest'})]}catch(e){continue}

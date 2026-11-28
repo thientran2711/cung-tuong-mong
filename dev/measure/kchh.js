@@ -2,7 +2,7 @@
 // The inpage6 palace bot (sensible) plays every life; with "nha" each life first plays the home road with inkc.js (sensible)
 // and the palace bot takes over at the palace entry (lives that end outside are counted as not reaching HH).
 // Output: dev/measure/kchh-<path>.json + a summary (HH %, death before HH %, entry rank, stats at entry, palace months).
-const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const path=require('path');const fs=require('fs');
 const ROOT=path.resolve(__dirname,'../..');const GAME='http://game.local/'+(process.env.GF||'index.html');/* r2: the built site (index.html); images are not loaded */const M=__dirname;
 const PATHK=process.argv[2]||'cung',N=+process.argv[3]||5,ORIG=(process.argv[4]||'tt,dtq,muoi,thd,ch,td').split(','),CAP=(+process.argv[5]||3000)*1e3;
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const c=await b.newContext({viewport:{width:390,height:844}});

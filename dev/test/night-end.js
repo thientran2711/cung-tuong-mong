@@ -1,6 +1,6 @@
 /* review/night-end (KIT §62): lonely night + dawn beats in the week panel, the night card after her bedding night; overflow + errors.
    usage: node dev/test/night-end.js <url> <outdir> 755x1000,1000x755,1180x820,1366x1024,844x390 */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,OUT,VPS]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 const SHOT=async(p,o)=>{for(let i=0;i<3;i++){try{await p.screenshot(Object.assign({timeout:150000},o));return}catch(e){console.error('shot retry',o.path)}}};

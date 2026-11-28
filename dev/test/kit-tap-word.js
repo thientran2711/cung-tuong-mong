@@ -1,6 +1,6 @@
 /* review/kit-tap-word (KIT §73.2): kitTapWord / kitTraitWords — dotted underline word, tap → kit popup with ONLY that word's meaning (word as title); one word per trait from ETRAITS.
    usage: node dev/test/kit-tap-word.js <url> [WxH,...]   (renders into a probe div; no game start needed) */
-const {chromium}=require('playwright');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const [,,URL,SIZES]=process.argv;
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const wh of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=wh.split('x').map(Number);

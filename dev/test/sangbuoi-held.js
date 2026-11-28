@@ -24,7 +24,7 @@
    K  (Q-SOFTLOCK b) a left-over #kmrew host (not on screen) blocks the scene queue; 8 cards wait, khắc spent → cards, scene, the buổi turns.
    L  (Q-SOFTLOCK c, F s9e Q=0) the kmFree activity gate trusted a ghost #ov (L1) / a left-over DF.play (L2) → scene queue blocked, turn held → cards, scene, the buổi turns.
    usage: node dev/test/sangbuoi-held.js file:///…/index.html [shotDir] */
-const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.split(',').includes(v[0]+'x'+v[1]));/* VP=1180x820: one device */
 (async()=>{const b=await chromium.launch();let fails=0;const rows=[];
  for(const [W,H,DS] of VP){

@@ -5,7 +5,7 @@
    onClose for an answered dialog, nothing left in Q; (d) two dialogs with a different body are NOT folded (both show, one after the other);
    (e) a dialog under ANOTHER dialog's twin: only identical copies fold.
    usage: node dev/test/dlg-twin.js <index.html> [WxH]   exit 1 on any FAIL */
-const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const [W,H]=(process.argv[3]||'755x1000').split('x').map(Number);
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const SRC=path.resolve(process.argv[2]);const [W,H]=(process.argv[3]||'755x1000').split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},serviceWorkers:'block',reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{let s=11;Math.random=()=>{s=(s*16807)%2147483647;return (s-1)/2147483646}});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));

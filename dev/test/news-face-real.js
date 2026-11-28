@@ -1,3 +1,4 @@
+require('./lib/bigpage');/* HARNESS-BIGPAGE (KK63): page bodies > 4 MB never go through route.fulfill */
 /* review/kit-fig2 — owner 11/15 17:04Z: "Tin trong cung" / Sổ tuần (Tuần lục) row avatars must be the REAL person (her own included).
    Real-save check, no synthetic reference:
    1. page A: a simple driver plays (first choice in dialogs, visits a rival's palace each week) until week >= MINW with 3+ rank levels -> ser().

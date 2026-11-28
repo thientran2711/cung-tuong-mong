@@ -1,5 +1,6 @@
 /* review/tainghe-info (owner OD 25/11 ~23:48Z, k18 shot: «NĂM BẬC» rows drawn over each other; «Bấm vào dung nghi thì không ra gì hết»;
    «không biết bấm vô cái gì mở ra cái khung này»). REAL taps (dev/test/realtap.js), Fold 755x1000 + iPad 1180x820, every Tài nghệ sub-tab:
+   R11 (owner 27/11 ~06:33Z, KIT §21e): the tab holds ONLY square cells (.ktn-cell); a real tap on a cell opens the môn frame; T1–T5 run on the skill card IN that frame.
    T1 every skill card (.kskill art-/vir-/wk-) has ONE visible labelled info target = its name (.kskn, «ⓘ name»)
    T2 no hidden tap zone: no element carrying data-v85tab without visible text; the «Bậc l/max» steps are not a button
    T3 real tap on the name → the rule popup of THAT skill opens (title holds the name)
@@ -7,7 +8,7 @@
       every kit row (.kr) — label/value do not intersect
    T5 real tap on the popup ✕ closes it, the tab is still Tài nghệ
    usage: node dev/test/tainghe-info.js [index.html|URL] [outdir] [WxH,...]  (VIDEO=1 records a .webm per device into outdir) */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const cp=require('child_process');const cdn={};const RT=require('./realtap.js');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');const cp=require('child_process');const cdn={};const RT=require('./realtap.js');
 const A=process.argv.slice(2);const URL0=A[0]||path.resolve(__dirname,'../../index.html');const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const OUT=A[1]||'/tmp/tainghe-info';fs.mkdirSync(OUT,{recursive:true});const SIZES=(A[2]||'755x1000,1180x820').split(',');
 const SETUP=()=>{try{window.__kbootHostDrop&&window.__kbootHostDrop()}catch(e){}document.querySelectorAll('#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov').forEach(e=>e.remove());
@@ -43,16 +44,18 @@ const CLEAN=()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,
    if(!st){const mm=await p.evaluate(()=>{const M=document.getElementById('modal');return M&&!M.hidden?{q:Q.length,qt:(Q[0]&&(Q[0].t||Q[0].__ks))||'',txt:(M.innerText||'').replace(/\s+/g,' ').slice(0,140),cls:(M.querySelector('.dlg')||{}).className||''}:null});bad++;rows.push([wh,sv,'-','sub-tab tap','FAIL '+JSON.stringify(mm)]);continue}
    await p.waitForTimeout(700);
    const g=await p.evaluate(()=>{const vis=e=>{const r=e.getBoundingClientRect();return r.width>0&&r.height>0};
-    const cards=[...document.querySelectorAll('#panel .kskill')].filter(c=>/^(art|vir|wk)-/.test(c.dataset.skill||'')&&c.querySelector('.ksteps')&&vis(c));
-    const noName=cards.filter(c=>!c.querySelector('.kskn')).map(c=>c.dataset.skill);
+    const cells=[...document.querySelectorAll('#panel .ktn-cell')].filter(vis);const loose=[...document.querySelectorAll('#panel .kskill,#panel button.ka')].filter(vis).length;
+    const sq=cells.every(c=>{const r=c.getBoundingClientRect();return Math.abs(r.width-r.height)<=2});
     const hidden=[...document.querySelectorAll('#panel [data-v85tab]')].filter(e=>vis(e)&&!(e.innerText||'').replace(/[\sⓘ]/g,'')).map(e=>e.className);
-    const stepBtn=document.querySelectorAll('#panel button.ksteps').length;
-    return {skills:cards.map(c=>c.dataset.skill),noName,hidden,stepBtn}});
-   const ok12=!g.noName.length&&!g.hidden.length&&!g.stepBtn;if(!ok12)bad++;
-   rows.push([wh,sv,`${g.skills.length} cards`,`T1 no-name ${g.noName.length} · T2 hidden ${g.hidden.length} step-buttons ${g.stepBtn}`,ok12?'PASS':'FAIL']);
+    return {skills:cells.map(c=>c.dataset.tnmon),loose,sq,hidden,stepBtn:document.querySelectorAll('#panel button.ksteps').length}});
+   const ok12=g.skills.length&&!g.loose&&g.sq&&!g.hidden.length&&!g.stepBtn;if(!ok12)bad++;
+   rows.push([wh,sv,`${g.skills.length} cells`,`T0 only cells (loose ${g.loose}) square ${g.sq} · T2 hidden ${g.hidden.length} step-buttons ${g.stepBtn}`,ok12?'PASS':'FAIL']);
    for(const sk of g.skills){
     await p.evaluate(CLEAN);
-    const sel=`#panel .kskill[data-skill="${sk}"] .kskn`;const nm=await p.evaluate(s=>{const e=document.querySelector(s);return e?e.innerText.replace(/ⓘ/g,'').replace(/\s+/g,' ').trim():''},sel);
+    if(!await rt.tap(`#panel .ktn-cell[data-tnmon="${sk}"]`,{screen:'art/'+sv,label:'cell '+sk})){bad++;rows.push([wh,sv,sk,'cell tap','FAIL']);continue}await p.waitForTimeout(900);
+    const fr=await p.evaluate(()=>{const M=document.getElementById('modal');const c=M&&!M.hidden&&M.querySelector('.ktn-pop .kskill');return c?{name:!!c.querySelector('.kskn'),acts:M.querySelectorAll('.ktn-pop button.ka').length}:null});
+    if(!fr||!fr.name){bad++;rows.push([wh,sv,sk,`frame ${fr?'no name target':'did not open'}`,'FAIL']);continue}
+    const sel=`#modal .ktn-pop .kskill .kskn`;const nm=await p.evaluate(s=>{const e=document.querySelector(s);return e?e.innerText.replace(/ⓘ/g,'').replace(/\s+/g,' ').trim():''},sel);
     if(!nm){bad++;rows.push([wh,sv,sk,'T3 no name target','FAIL']);continue}
     let t=await rt.tap(sel,{screen:'art/'+sv,label:nm});await p.waitForTimeout(process.env.VIDEO?1800:900);
     const q=await p.evaluate(POPQ,nm);

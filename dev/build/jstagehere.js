@@ -91,9 +91,17 @@ function actMove(k){try{if(!k||!S||S.dead||S.out||S.confined||S.place===k)return
  if(typeof accGrant==="function")accGrant(S,k);const u=used,q=window.__accSilent;window.__accSilent=1;try{used=0;goTo(k)}finally{used=u;window.__accSilent=q}
  return S.place===k}catch(e){return false}}
 window.actMove=actMove;
-if(typeof act==="function"){const a0=act;act=function(i){const a=typeof deck!=="undefined"&&deck?deck[i]:null;const was=!!(a&&a.done),k=actPlace(a);const r=a0.apply(this,arguments);
- try{if(k&&a&&a.done&&!was){if(Q.length)window.__actPend={k,bk:typeof bkey==="function"?bkey():""};/* goTo waits while the result card is up */
-  else if(actMove(k)&&typeof render==="function")render()}}catch(e){}return r}}
+/* W10b (LAW 11): name the familiarity steps that rose since kn0 (j63 kaWalkKn, the card's own KREG rows) */
+function actKn(kn0,n){try{if(typeof kaWalkKn==="function")kaWalkKn(kn0,n)}catch(e){}}
+window.actKn=actKn;
+/* W10b: knA = S.known before the act; kn0 = what its card reflects (j63 __kaKnAt) or knA when no card was built; the steps that rose after
+   (j61 audience names, the walk's arrival) are named by kaWalkKn: at once when a dialog keeps the walk waiting, else with the walk */
+if(typeof act==="function"){const a0=act;act=function(i){const a=typeof deck!=="undefined"&&deck?deck[i]:null;const was=!!(a&&a.done),k=actPlace(a);
+ let knA=null;try{knA=Object.assign({},(S&&S.known)||{});window.__kaKnAt=null}catch(e){}const r=a0.apply(this,arguments);
+ try{if(a&&a.done&&!was){const sync=!!window.__kaKnAt,nameIt=()=>actKn(window.__kaKnAt||knA,a.n);/* a card built on a timer (jhouse hsvDone) comes first: name one tick later */
+  const kn=()=>{if(sync)nameIt();else setTimeout(nameIt,0)};
+  if(!k||Q.length){kn();if(k)window.__actPend={k,n:a.n,bk:typeof bkey==="function"?bkey():""}/* goTo waits while the result card is up */}
+  else{const m=actMove(k);kn();if(m&&typeof render==="function")render()}}}catch(e){}return r}}
 /* STAYING AFTER CLOSING (r2 (d) → home-way → PLACE-CLOSE, owner OD 26/11 ~14:00Z, canon overwrite): the buổi turn that finds her still inside a
    place now closed to her (accessOf says no; not her own palace) punishes NOTHING: it opens the GRACE (S.plGrace) — khắc 1..BAL.placeClose.grace
    of the new buổi, and at least to the end of a talk that spilled over the buổi line (+ BAL.placeClose.leave khắc for the walk out). The chip is red.
@@ -140,5 +148,5 @@ if(typeof render==="function"){const rn0=render;render=function(){const r=rn0.ap
 if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=pcBk(),T0=window.__pcT;window.__pcT={k,bk0};let r;try{r=nb0.apply(this,arguments)}finally{window.__pcT=T0}try{pcTurn(k,bk0,1)}catch(e){}return r}}
 /* the pending trip runs when the act's cards are closed, in the same buổi (a day/buổi turn in between cancels it: she is elsewhere by then) */
 window.actPendRun=function(){return actPendRun()};
-function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;if(actMove(P.k))setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
+function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;const kn0=Object.assign({},S.known||{});const m=actMove(P.k);actKn(kn0,P.n);if(m)setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
 }catch(e){console.error("jstagehere",e)}})();

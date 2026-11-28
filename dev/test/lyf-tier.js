@@ -1,7 +1,7 @@
 /* review/lyf-tier: S.lyF (the fallen Lý object) must never make S look like her. usage: node dev/test/lyf-tier.js [oldRoot] [outdir]
    For rank 0..7: S's figure (figFor S "por"/"fig"/"stage"-kind) must be her rank tier, figTierOf(S)=S.rank, figRoles(S)=player/heroine, f88Wear(S) not forced;
    the fallen Lý (lyFallen()) keeps tier -1 / role fallen|consort. Also a kind:"fallen" person. oldRoot = main checkout (shows the bug: before). */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const NEWR=path.resolve(__dirname,'../..');const OLDR=process.argv[2]?path.resolve(process.argv[2]):null;
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();

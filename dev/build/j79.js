@@ -19,7 +19,7 @@ function kitMaidTitle(m,lower){let t="Cung nữ thân tín";try{m=m||(S&&S.maid)
 function kitRtOf(t,col){try{return typeof kitRankTone==="function"?kitRankTone(t,col):""}catch(e){return""}}
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
  const d=kitDecor(kitFace(p));return d.col||KIT_ROLE.slate}catch(e){return KIT_ROLE.slate}}
-function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(S.out?"Phế phi":RANKS[S.rank].n)}">${S.out?"Phế phi":RANKS[S.rank].n}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
+function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(outTitleN(S)||meRankN())}">${outTitleN(S)||meRankN()}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
  const t=o.noTitle?"":kitTitleOf(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Tào Đức Hải" in a stored log */
  return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti" style="--rt:${kitRtOf(t,kitPersonCol(p))}">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
 /* KIT 9 (owner 11/15 "Cung nữ Cung nữ thân tín …", "Tổng quản thái giám Tổng quản Tào Đức Hải"): ONE rule for every title + name builder —
@@ -151,7 +151,7 @@ function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(htm
    /* review night-end-r2: HER name (kitTitle "") after a rank in the text ("Thánh chỉ: Thường tại X …", "Đêm qua Đáp ứng X hầu giá") — kitName(named)
       draws her current rank itself, so the rank in the text is dropped (it doubled: "Thường tại Thường tại X") */
    else if(p===S&&/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Phế phi) $/.test(pre))pre=pre.replace(/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Phế phi) $/,"");
-   const rest=s.slice(i+n.length);const tr=p===S&&S?(S.out?"Phế phi":RANKS[S.rank].n):t;/* her own rank is drawn by kitName(named) */
+   const rest=s.slice(i+n.length);const tr=p===S&&S?(outTitleN(S)||meRankN()):t;/* her own rank is drawn by kitName(named) */
    const own=!!t&&(KP_TITLE_RX.test(pre)||kpTitleTail(pre,t))||!!tr&&/^\s*(?:được\s+)?(?:tấn phong|sắc phong|phong|thăng|làm|lên|thành)\s/.test(rest)&&rest.includes(tr);/* KIT 48.3 (owner 15/11 s8): the text's own title before the name goes INSIDE the name block, in its rank tone (it stayed plain ink) */
    const tm=KP_TITLE_RX.exec(pre);if(tm&&p!==S){const k=kitName(p,{noTitle:true,pre});const j=k.indexOf(">");if(j>0&&/^<b class="kname/.test(k)){const tt=tm[1];const col=typeof kitPersonCol==="function"?kitPersonCol(p):"";
     return pre.slice(0,pre.length-tm[0].length)+k.slice(0,j+1)+`<span class="kti" style="--rt:${typeof kitRankTone==="function"?kitRankTone(tt,col):""}">${tt}</span> `+k.slice(j+1)+s.slice(i+n.length)}}
@@ -828,7 +828,7 @@ function kitTiles(list){return `<div class="kstgrid">${list.map(([l,v,c])=>kitSt
 /* review/newgame-ui: the opening "Nhập cung" card that names its stage (j2: stage + headArt) is an EVENT panel (KIT 32.2 frame), not a scene panel */
 function kpIsScene(m){return !!(m&&(m.nl||/\bnlcard\b/.test(m.cls||"")||(/^Nhập cung/.test(String(m.t||""))&&!m.stage)||(m.kit&&m.kit.scene)))}
 function kpIdentity(M,m){const dlg=M.querySelector(".dlg"),mb=$("mb");const o=S.origin,srv=typeof isSrv==="function"&&isSrv();
- const pos=srv||o.k==="cnv"?"Cung nữ":RANKS[S.rank].n;const pts=typeof pdGet==="function"?pdGet():0;
+ const pos=srv||o.k==="cnv"?"Cung nữ":meRankN();const pts=typeof pdGet==="function"?pdGet():0;
  const opts=mb.querySelector(".nlopts");if(opts)opts.remove();
  const name=`<b class="kname kmy" style="--rc:${srv?kitServCol("maid",1):RCOL[cl(S.rank||0,0,7)]}"><span class="kti" style="--rt:${kitRtOf(pos)}">${pos}</span> ${S.name}</b>`;
  const tiles=[["Tài",S.tai],["Sắc",S.sac],["Tâm cơ",S.tamco],["Đức",S.duc],["Danh",S.danh],["Thái hậu ưa",S.th],["Bạc",S.bac],["Hoàng thượng",`${S.emp.era} · ${S.emp.age} tuổi`]];
@@ -1368,7 +1368,9 @@ html body #tabs.tabs button.kghide{display:none!important}
    grid of act cells, each cell a kpanec (§43 compact acts under 640 px). levels:[text per level] still works: the next level's text becomes the "Bậc n mở" line.
    kitSkillCard({kind, k, name, kicker, level, max, word:"Bậc", prog:[cur,need] | prog:cur+need:n, bar:false, desc, next, levels, acts:[pbtn…], img, stepsAttr, can}) */
 function kitSkillArt(kind,k,name){const key=`${kind}-${k}`;const have=(KIT_INFOM.have||[]);const ah=(KIT_ACTS.have||[]);
- return have.includes(key)?`img/${key}.webp`:ah.includes("act-cat-hoc-tap")?"img/act-cat-hoc-tap.webp":""}
+ /* R11: the môn painting (art-<k> / vir-<k>.webp, on the CDN) is used when the offline set (assets.json) or the CDN index lists it — INFO.json never listed them, so every môn showed the generic «học tập» book (whole family: every kitSkillArt caller). The lookup key is built in parts: the build's cdn() rewrites every literal image path. */
+ const rel=["img",key+".webp"].join("/");const own=have.includes(key)||(typeof kitAssetHas==="function"&&kitAssetHas(rel)===true)||(typeof KIT_CDNHAVE!=="undefined"&&KIT_CDNHAVE&&KIT_CDNHAVE.has(rel));
+ return own?`img/${key}.webp`:ah.includes("act-cat-hoc-tap")?"img/act-cat-hoc-tap.webp":""}
 function kitSteps(l,max,attr,word){max=max||5;word=word||"Bậc";const seg=Array.from({length:max},(_,i)=>`<i class="${i<l?"on":""}"></i>`).join("");
  return `<${attr?"button type=\"button\"":"span"} class="ksteps" ${attr||""} aria-label="${word} ${l} trên ${max}"><span class="kstepd">${seg}</span><b>${word} ${l}/${max}</b></${attr?"button":"span"}>`}
 function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${kitNeed(cur,need)}</b></div>`}
@@ -1415,7 +1417,7 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
  const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;
  const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
  const next=o.next!=null?o.next:((o.levels||[])[l]||"");
- const bar=o.bar===false||!max?"":l<max?(need?kitBar("Tiến bộ",cur,need):""):`<span class="kchip g">${artNm(5)}</span>`;
+ const bar=o.bar===false||!max?"":l<max?(need?kitBar(o.barLabel||"Tiến bộ",cur,need):""):`<span class="kchip g">${artNm(5)}</span>`;
  const acts=(o.acts||[]).filter(Boolean);
  /* chapter-card (owner 21/11 marks #26/#27): o.big = the BIG card of the Mệnh truyện sub-tabs: the picture at the big Hành sự act-card size (3:4, --kbw),
    title/steps/o.body (kit rows) in the column right of it. No big picture = the small one, as before. */
@@ -1423,6 +1425,15 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
   `<div class="kskinfo">${o.kicker?`<small class="kskk">${o.kicker}</small>`:""}<div class="kskh">${kitSkillName(o)}${max?kitSteps(l,max,"",o.word):""}</div>${o.desc?`<div class="kskdo">${o.desc}</div>`:""}${bar}`+
   `${max&&l<max&&next?`<span class="kskx"><span class="kchip n">${o.word||"Bậc"} ${l+1} mở</span> ${next}</span>`:""}${o.body||""}</div></div>`+
   `${acts.length?`<div class="kskacts pcb">${acts.map(a=>`<div class="kpanec">${a}</div>`).join("")}</div>`:""}${o.note?`<div class="kpnote">${o.note}</div>`:""}</div>`}
+/* KIT §21e kitSkillCell (owner 27/11 ~06:33Z, verbatim in KIT.md §21e; reuses KK24 kit-tntile §21e): ONE square cell per môn = the môn picture + name + bậc
+   (kicker word + kitSteps dots «Bậc l/5»); NOTHING else on the tab (no Học / Các lối rows, no bar, no desc). o = a kitSkillCard object; key = data-tnmon.
+   The cells sit in a `.kskills.ktn-grid` (law 10: 2 columns on every device; one cell side for the whole Tài nghệ tab = --ktnc, set by the caller from the room
+   the tab has so the tallest sub-tab (3 rows) fits without scrolling). Tap → the caller opens ONE kit frame for that môn (kitSkillCard with its acts). */
+function kitSkillCell(o,key){o=o||{};const l=o.level||0,max=o.max!=null?o.max:5;const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
+ return `<button type="button" class="ktn-cell${o.can===false?" kdone":""}" data-tnmon="${key}" aria-label="${String(o.name||"").replace(/"/g,"&quot;")}">`+
+  `${kitSceneArt(img,o.name||"",{shape:"wide",cap:false,cls:"ktnc-art"})}<span class="ktnc-t"><b class="ktnc-n">${o.name||""}</b>`+
+  `${max?kitSteps(l,max,"",o.word):""}${max&&l<max&&need?kitBar("Tiến độ",cur,need):""}</span></button>`}/* owner 27/11 ~07:10Z: no rank word (it repeats the bậc); «Bậc n/5» dots + the «Tiến độ» bar with its points */
+window.kitSkillCell=kitSkillCell;
 /* kitEmpty(title,lines,o) = THE empty state (owner 21/11 "Nhìn cái trang cho nó đỡ trống"; the form of «Ta chưa có con»): the topic's painted picture LEFT
    (o.art = an img path, else kitInfoArt(o.topic||title), else the kit's neutral tile), the title «Ta chưa có …» / «Chưa có …», 2–3 short hint bullets
    (how to get it; `lines` = string | array), optional act cards o.acts (HTML of pbtn). Every tab / sub-tab / panel that can be empty uses it; no other empty frame. */
@@ -1468,6 +1479,18 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .kstepd{display:inline-flex;gap:3px}.kstepd i{width:14px;height:8px;border-radius:4px;background:var(--k-hair,#e6d3ac);box-shadow:inset 0 0 0 1px #5a3a2018}.kstepd i.on{background:var(--gold,#b8862b)}
 .ksteps b{font-size:.78rem;color:var(--dim);font-weight:600;white-space:nowrap}
 .kskacts.pcb{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px}.kskacts.pcb{grid-auto-rows:1fr!important}html body .pcb:has(> button.ka){display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:1fr!important}/* a person panel list that was a flex column: same one-column grid, equal rows */.kskacts.pcb>.kpanec{display:flex;flex-direction:column;min-height:0}.kskacts.pcb>.kpanec>button{flex:1 1 auto}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
+/* KIT §21e kitSkillCell: square cells, 2 columns, one side --ktnc (caller), picture fills the top, name + bậc under it; the môn frame (.ktn-pop) = the full skill card + its acts */
+.kskills.ktn-grid{display:grid;grid-template-columns:repeat(2,var(--ktnc,minmax(0,1fr)));grid-auto-rows:var(--ktnc,auto);gap:var(--ktng,10px);justify-content:center;align-content:start}
+.ktn-cell{all:unset;box-sizing:border-box;display:flex;flex-direction:column;min-width:0;min-height:0;aspect-ratio:1/1;width:100%;cursor:pointer;overflow:hidden;border-radius:var(--k-r,12px);background:var(--k-card,#fffaf0);border:1px solid var(--k-line,#d9c08f);box-shadow:var(--k-sh,0 2px 6px #5a3a2026)}
+.ktn-cell:focus-visible{outline:3px solid var(--gold,#b8862b);outline-offset:2px}.ktn-cell:active{filter:brightness(.97)}
+.ktn-cell>.ksart.ktnc-art{flex:1 1 auto;min-height:0;width:100%;height:auto;margin:0;border-radius:0;aspect-ratio:auto}.ktn-cell>.ksart.ktnc-art img{width:100%;height:100%;object-fit:cover}
+.ktn-cell>.ktnc-t{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 6px 8px;text-align:center;min-width:0}
+.ktnc-n{font-size:1rem;line-height:1.2;color:var(--ink,#3a2614);overflow-wrap:anywhere}.ktnc-k{font-size:.8rem;color:var(--dim)}.ktn-cell .ksteps{justify-content:center}.ktn-cell .kskp{width:100%;box-sizing:border-box;font-size:.8rem;margin:0}
+.ktn-cell.kdone{opacity:.85}
+.ktn-pop .kskk{display:none}
+.dlg:has(.ktn-pop) .k3body>.k3main,.dlg:has(.ktn-pop) .k3body>.kpsubj,.dlg .kpb:has(.ktn-pop)>.kpsubj{display:none!important}.dlg:has(.ktn-pop) .k3right{flex:1 1 100%;width:100%}.dlg .kpb.kphas:has(.ktn-pop){grid-template-columns:minmax(0,1fr)!important}
+html body #modal:has(.ktn-pop){--kph:min(calc(100dvh - 24px),920px)}html.kv2 body #modal:has(.ktn-pop){--kpw:min(900px,calc(100vw - 28px))}
+.ktn-pop{container-type:inline-size}.ktn-pop .kskacts>.kpanec{min-width:0}.ktn-pop .kskacts>.kpanec>button.ka{width:100%;height:auto;margin:0}/* equal width + height of every act card = KIT §6.2n ONE SET = ONE SIZE (KK56 rule above; R11 one-line interim rule removed) */@container (min-width:600px){.ktn-pop .kskacts.pcb{grid-template-columns:repeat(2,minmax(0,1fr))!important}}/* iPad: 2 columns (MAIN 174 LOOK B PASS), Fold: 1 column */
 `;document.head.appendChild(st)})();
 /* ---- PERSON STATS (owner 11/14): every consort shows the SAME stat set as the player, as kit tiles: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ.
    A value shows only once known, else "chưa rõ". Hook for the reveal stages (j61/j85 Đức, tai mắt/intel): window.kitStatKnown(v, key) -> true|false.

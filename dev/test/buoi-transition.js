@@ -1,6 +1,6 @@
 /* KIT §74 buổi transition (jbuoi): plays on every buổi change, 4 buổi + dawn variant, tap skip, Gọn = fade only, never blocks input, cleans up, 0 page errors.
    usage: node dev/test/buoi-transition.js http://localhost:<port>/index.html <outdir> [shots]   (local img/fx/buoi-* served from <worktree>/img/fx when CDN lacks them) */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const [,,URL,OUT,SHOTS]=process.argv;fs.mkdirSync(OUT,{recursive:true});const FX=path.resolve(__dirname,'../../img/fx');
 const VP=[[755,1000,2,'fold'],[1000,755,2,'fold-land'],[1180,820,2,'ipad'],[1366,1024,2,'ipad-pro'],[844,390,3,'phone-land'],[390,844,3,'phone']];
 const sleep=t=>new Promise(r=>setTimeout(r,t));

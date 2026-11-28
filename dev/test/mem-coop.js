@@ -2,7 +2,7 @@
    act on the same NPC in one week; canonical C of both sides is merged with the PROTOCOL.md §4 merge3 rule (re-implemented here);
    both sides rebuilt from the merged C must see the same NPC memories, each from her own point of view ("me" = herself).
    usage: node dev/test/mem-coop.js <build url>  (serve dev/ with a UTF-8 charset header) */
-const {chromium}=require('playwright');const [,,URL]=process.argv;
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.COOPW&&COOPW.toCanon,null,{timeout:90000});await p.waitForTimeout(2000);
  const R=await p.evaluate(()=>{const C={};const ok=(k,v,i)=>{C[k]={ok:!!v,info:i===undefined?null:i}};const J=x=>JSON.parse(JSON.stringify(x));

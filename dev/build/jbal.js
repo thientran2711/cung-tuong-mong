@@ -1,9 +1,9 @@
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
-const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line stays on screen; stage-here r4 (owner OD 18/11 ~22:10Z "5 giây hay là 10 giây"): THE ms every notice chip (kitNotice, KIT §42.2) stays up */noticeMax:20,/* stage-here r4: notices kept in the top-bar «!» box list (oldest dropped) */allyRel:35,/* the "người quen cũ" ally of a new life: her Thiện cảm toward the player at the start (j2 allyBond; co-op part B rebase) */ghenNew:15,/* a new face: an NPC's Ghen toward her starts at R(ghenNew) (j1 newRival, j1 ghenNew0; co-op part B rebase) */wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
+const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line stays on screen; stage-here r4 (owner OD 18/11 ~22:10Z "5 giây hay là 10 giây"): THE ms every notice chip (kitNotice, KIT §42.2) stays up */noticeMax:20,/* stage-here r4: notices kept in the top-bar «!» box list (oldest dropped) */allyRel:35,/* the "người quen cũ" ally of a new life: her Thiện cảm toward the player at the start (j2 allyBond; co-op part B rebase) */ghenNew:4/* review/oan-pace-ghen: a newcomer starts near 0 jealousy (was 15; MAIN 161 scope «newcomer ~0») */,/* a new face: an NPC's Ghen toward her starts at R(ghenNew) (j1 newRival, j1 ghenNew0; co-op part B rebase) */wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
  /* night-balance-bundle (D #15/#16 ruling 21/11): the Hoàng hậu gate keeps LIVE values (hhThNoSon 80 / Hiếu 70, outQ 60, RANKS HH Danh 78). balance-2 had lowered them while Danh was scarce; with the §7 Danh re-tune Danh m36 is at LIVE level and HH reach was already above LIVE (knobbot k3/k4 vs LIVE 94cbe0cd). */
  /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,/* home road hazards (OUTSIDE_PLAN §12, GAP OR11; Vừa values; jdiff Dễ/Khó scale them like hz): kcSch = weight (100 = as shipped) of the hostile-kin schemes at home (stepmother, rival sister, assassin, the pestering suitor); kcRumFade = how much the city gossip about her (S.kld) fades each month; kcMatch = % of the monthly push toward a forced match (S.kap; 100 = as shipped; the sensible bot never loses to a forced match, so Vừa keeps it, GAP OR12) */kcSch:100,kcRumFade:2,kcMatch:100,/* kcRareX = the hidden roll (×100) of an outside rare ending once its gate is met (× its own weight and R97CFG.p; was a typed .12 in kcRare; value as shipped: the sensible bot meets no rare gate, so a bigger roll moved nothing, GAP OR12) */kcRareX:12,/* kcSelMax = the best chance (%) the court keeps a girl at Điện tuyển (was KC.selMax 80 in jkc; value as shipped, bot-checked for OUTSIDE_PLAN §12, GAP OR12) */kcSelMax:80,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:60,/* diff-remeasure 16/11: 55 → 60 (Vừa HH 45 % → ~32 % with the fixed bot; 65 measured 26 %) */birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
- hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
+ hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,/* qBlock.ease: the Hoàng hậu block eases by ease per month once she has waited after months since her last decree (MAIN 164 ruling 26/11 ~22:25Z, PACE-SPEED: it was a long stall at Quý nhân) */qBlock:{after:6,ease:5},hiOppHh:-30,hiOppTh:30,hiOppFac:180,
  /* handmade works (j83), by material 0 thường / 1 tốt / 2 quý: matQ = phần added to the score; cap = highest tier it can reach (only quý makes a
     Tuyệt phẩm); val = gift value added (Sủng / Thái hậu / thiện cảm); sell = share of the material's silver paid back when sold (1: a sale never loses the material's price); tinh = extra
     chân tình for a quý work given to a sincere person. Value check: dev/test/paid-tiers.js */
@@ -326,7 +326,9 @@ Object.assign(BAL,{confess:{base:70,sungDiv:4,thDiv:5},
  /* BUTTON ACTS that roll at the odds cap (j63 capAt): k = khắc, suc = Sức each one costs. The handler, its hint and its soft-fail gate read
     the SAME key (one core); a soft fail spends of it only BAL.odds.softFail.spend (khắc + Sức), never the bạc. */
  /* the road with a man (j22 manCards, her and an NPC consort alike): Sắc / Tâm cơ divisors of «Liếc mắt» / «Trao khăn tay»; a tryst within seenW tuần may leave proof with a hostile woman whose tai mắt dig it up (npcWhy trystKnow, her and an NPC alike) */manRd:{sacD:5,tcD:5,seenW:3},
- btn:{courtHoi:{k:2},kidTeach:{k:2},kidCare:{k:2},kidGuard:{k:2,mo:2,blk:50},cnv:{k:1},h54Thu:{k:1},wkShow:{k:2},h54Day:{k:2,suc:5},kidHeal:{k:2,suc:10},htAsk:{k:1},loSneak:{k:1}},/* Thú tội tư thông (a chance, the Emperor's mercy): base + Sủng/sungDiv + Thái hậu/thDiv; hỏng: bị ban chết */
+ btn:{courtHoi:{k:2},kidTeach:{k:2},kidCare:{k:2},kidGuard:{k:2,mo:2,blk:50},cnv:{k:1},h54Thu:{k:1},wkShow:{k:2},h54Day:{k:2,suc:5},kidHeal:{k:2,suc:10},htAsk:{k:1},loSneak:{k:1},
+  /* d-followups-1 (law 4, one core): the khắc of every act whose card used to TYPE it («2 khắc»); card text, can() and spend() all read these */
+  svHoi:{k:2},svSearch:{k:2},svPlant:{k:2},svLook:{k:1},svMua:{k:2},svDoa:{k:2},fac:{k:2},kidAct:{k:2},accAsk:{k:1},h54Noi:{k:2},h54Ban:{k:2},empAct:{k:2},itemUse:{k:2},inspect:{k:2},kidTut:{k:1},kidFav:{k:2},q72:{k:1},wkGive:{k:2},wkSell:{k:1},econSell:{k:1},dbsv:{k:1},virLes:{k:2},pkBan:{k:2},wear:{k:1},loAct:{k:1},men:{ask:1,bao:1,ccti:2,giau:1,nghe:1},petShop:{k:1},rcpRead:{k:1},rcpTy:{k:1},rcpSpy:{k:2},tsb:{k:1,th:2},veilCraft:{k:2},veil:{k:1},wdTrade:{k:1},groom:{k:1},accSneak:{k:1},accLead:{k:1}},/* Thú tội tư thông (a chance, the Emperor's mercy): base + Sủng/sungDiv + Thái hậu/thDiv; hỏng: bị ban chết */
  odds:{cut:[18,31,44,57,70,83]/* 7 EQUAL bands (owner 23/11 ~21:15Z): Mong manh 5–17 · Hiểm 18–30 · Khó lường 31–43 · Tùy duyên 44–56 · Có cơ 57–69 · Vững 70–82 · Rất vững 83–95 (was 31/46/56/66/81/91) */,lo:5,hi:95,weak:{suc:30,pen:15}/* odA (j9): the doer's Sức below suc → every act's odds −pen; the poison card "Vì sao" prints this same key */,simN:200,softFail:{spend:["suc"]}}});
 function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
 /* ONE CORE number formatters for player texts (review/one-core-dup r2, OD:L1267 "text prints the constant"): balSg(n) = the signed amount as the
@@ -340,7 +342,9 @@ function balAb(n){return String(Math.abs(n))}
 /* a printed count as a word («một chứng cứ»): balWord(balAb(BAL…)) — the number word of VP.num (j84, loads later; called only when the text is built) */
 function balWord(n){try{return window.VP&&VP.num?VP.num(+n):String(n)}catch(e){return String(n)}}
 /* balOan(n,"hurt"|"doer"|"mend"): the oán a relAdd amount n makes (relAdd gives the hurt one |n|×hurt, the doer |n|×doer, a kind act takes |n|×mend off), as the texts show it */
-function balOan(n,m){return String(Math.round(Math.abs(n)*BAL.relOan[m]))}
+function balOan(n,m){const x=Math.round(Math.abs(n)*BAL.relOan[m]);try{return String(typeof spSee==="function"?spSee("oan",x):x)}catch(e){return String(x)}}
+/* review/oan-pace-2 (RV-163B F1, ONE preview rule): the SHOWN size of an oán rise / a fall of liking = what really lands = stat-pace spSee
+   (jstatpace: the BAL.stp.band size band + slow near the ceiling); balOan only turns a relAdd amount into its oán (BAL.relOan) and asks spSee */
 /* ONE CORE age bands (owner 24/11 ~00:25Z "Cập nhật tuổi game là 18, 28, 39, 51, 64": 18–27 / 28–38 / 39–50 / 51–63 / 64+, for everyone,
    every rank/role; review/ageband): ageMin = the first band and the youngest adult (owner OD:L104 18+; jage lifts every adult below it);
    band i starts at ageBand[i-1] (band 0 at ageMin). ageArt[i] = the file tag of band i's painted art on the CDN (img/*-a18.webp …): a tag is
@@ -374,7 +378,7 @@ if(typeof BAND4N!=="undefined"){BAND4N.length=0;for(let i=0;i<=BAL.ageBand.lengt
             (j68g), card = Hoàng thượng row of the people strip (jk2b), kc = consort lists (jkc). */
 Object.assign(BAL,{quyLv:[-30,-10,10,30,60],
  loy:{trust:70,close:60,firm:55,mid:50,warn:45,low:40,bad:35,out:30,deep:75,top:80},
- wit:{lo:30,mid:35,hi:60,top:70},
+ tcw:{lo:30,mid:35,hi:60,top:70},/* split-merge P7: Tâm cơ cleverness marks (was BAL.wit — «wit» now only means witness: BAL.ag.wit, BAL.charge.wit) */
  ducLv:{up:60,down:20,staffUp:70,staffDown:25,word:[20,40,60,80]},
  sungLv:{emp:[25,45,70],th:[30,55],kinh:[15,35,60],card:[10,30,60],kc:[30,60]}});
 function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3:v<q[4]?4:5}
@@ -401,10 +405,32 @@ function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3
              liked (rel ≥ BAL.net.th.than), base otherwise, + pct × the jealousy itself (a quiet season takes about a third off), × the same nết; her own jealousy (v.pg) keeps its −1 a tuần. npc = share of a jealousy
              caused by ANOTHER consort that becomes a grudge toward that consort (j1 ghenUp; it no longer raises the score toward her). dm = a jealousy RISE
              toward her × max(min, 1 − (ghen/100)^pow) (j1 ghenUp: slows near the top, like BAL.stp.dm for the other stats; carry v.gUc).
+             alone / deep (review/oan-pace, owner OD 26/11 ~18:40Z «giảm quá chậm»): the fade of one day × (1 + alone.k × the days she was left alone past
+             quiet, at most alone.max) — faster the longer nothing new feeds it; × deep.k when the grudge is at band deep.lv or more (BAL.oanLv[deep.lv − 1],
+             «Oán sâu»): a deep grudge cools slower.
+   oanPace = OÁN PACE (review/oan-pace-2, joanpace; owner OD 26/11 ~18:40Z «điểm oán nó tăng quá nhanh … giảm quá chậm»; no cap on events or choices).
+             ONE cap per stat (MAIN 163 ruling on RV-163B F1): the size of ONE cause is stat-pace's band (BAL.stp.band.oan / rel, jstatpace spG);
+             oanPace adds only: the same incident (one pair, one buổi) never stacks — the biggest cause counts; day = the most one person's oán toward
+             one person rises in one day (wk, counted in cause size); act = the grudge heat (max of oán, Ghen × net.heat.ghenK toward her, dislike ×
+             net.heat.affK) a hostile choice (j95 H95: schemes and quarrels) needs, unless an outside reason (j95except) pushes; vent = revenge
+             satisfies: an act against a person spends share of the doer's oán toward that person (at least min). Same rules for her (law 1).
+             ghet = the same no-stack / day for «ghét» (a fall of thiện cảm, j9 affAdd n < 0); a rise of liking is never held here. fade (review/
+             oan-pace-2, owner OD 26/11 ~18:40Z «điểm ghét … giảm quá chậm»): a dislike toward her / of hers (thiện cảm < 0) eases back toward 0 every
+             day by (base + pct × |thiện cảm|) × the holder's nết (forgive) × the same «left alone» speed-up as oán (BAL.oanCool.quiet / alone, from the
+             last fall through affAdd) × BAL.oanCool.deep.k when |thiện cảm| ≥ deep (deep dislike eases slower); never past 0.
+             rum = a rumour that she harmed someone (j95b j95bSeed): the believer's oán oa + the teller's sway, liking −af (then paced as above).
+             ghen = the same split for GHEN (review/oan-pace-2, MAIN 161 scope 18:58Z + relative-favour rec 19:20Z; joanpace opGhenIn / opGfK / opGvent):
+             the size band of ONE cause = BAL.stp.band.ghen (the stat-pace table: above band[1] only BAL.stp.over of the rest counts, never above
+             band[2]; j1 ghenN shows it); day = the most one consort's jealousy of her rises in a day; same incident never stacks; rel = the jealousy grows from her
+             favour RELATIVE to the jealous one's: a rise × clamp(1 + (her Sủng − that consort's Sủng) ÷ span, min, max), the daily fade ×
+             clamp(1 − gap ÷ span, fmin, fmax); deep = at ghen ≥ deep the fade × BAL.oanCool.deep.k (deep jealousy cools slower); the fade also
+             × (1 + BAL.oanCool.alone.k × the days with no new cause past BAL.oanCool.quiet, at most alone.max; her looks, a standing cause, do not
+             count); vent = acting against her spends share of that jealousy (at least min). Two-way (law 1): HER jealousy of a consort (v.pg, pgUp /
+             pgCool) follows the same band, day, rel (gap = that consort's Sủng − hers), deep, alone and vent.
    tsDanger= "Nguy hiểm chung" (jts): hot ≥ 30 shown red, act ≥ 35 the NPC acts on it, calm < 10 shown green.
    (the youngest adult = BAL.ageMin, with the age bands above) */
 Object.assign(BAL,{tinhLv:{known:10,warm:30,prince:40,close:50,ally:60,love:70},tinLv:{lo:30,hi:60,watch:60,send:40},rareLv:[6,9],
- sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,oanCool:{on:1,quiet:2,season:9,me:1,floor:{mem:1,keep:2},ghen:{base:1,than:3,pct:.03,npc:.5,dm:{pow:3,min:.15}}},oanMend:{o:50,kf:40,deep:.4,gift:{bac:60,r:30,danh:-1},go:{fav:10,danh:-1,stand:.3},ag:2},anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
+ sucLv:{word:[30,50,70],ask:[30,60]},oanFade:2,oanCool:{on:1,quiet:2,season:9,me:1,alone:{k:.1,max:10},deep:{k:.5,lv:3},floor:{mem:1,keep:2},ghen:{base:1,than:3,pct:.03,npc:.5,dm:{pow:3,min:.15}}},oanPace:{on:1,day:16,act:25,vent:{share:.35,min:3},rum:{oa:18,af:12},ghet:{day:16,fade:{base:.5,pct:.03,deep:50}},ghen:{day:9,rel:{span:40,min:.25,max:1,fmin:.75,fmax:2},deep:60,vent:{share:.35,min:3}}},oanMend:{o:50,kf:40,deep:.4,gift:{bac:60,r:30,danh:-1},go:{fav:10,danh:-1,stand:.3},ag:2},anFade:{base:4,night:2,min:1,wk:3}/* Ân tình fades each month (j8 anMonth): base − night × nights in the last wk weeks, at least min (glossed in jpoison) */,tsDanger:{hot:30,act:35,calm:10},tsGuard:{wk:2,sung:2,tin:2}/* «Đóng cửa giữ mình» (jts tsOptGuard, NPC tsNpcDanger): weeks kept in; cost Sủng −sung for a consort, Chủ tin −tin for a cung nữ (her Sủng bar, j42 srvHud) — the same act, equal value (law 2) */});
 /* part 3 (review/one-core-dup2): single-copy cut ladders that were typed in their module, now named here (values unchanged):
    rhythm = rhythm game hits for grade 2 / 3 (j5) · facRel = faction standing ±: thân / thù (j10) · tuanDays = day of month → tuần
    (j31) · clanRel = clan relation ±: Đồng minh / Đối đầu (j55) · form = sports form words (j71) · virCong = công virtue level for
@@ -470,6 +496,9 @@ Object.assign(BAL.cv,{glance:{warm:10,cold:-5}/* j24 «Một ánh mắt» (fired
 BAL.srvRk={tam:1,nhi:2,dai:3,cs:4,nq:5,mama:6,tier:[0,1,1,2,3,4]};
 BAL.srvWage=[1,3,4,5,8,12];
 /* r2 sg-card: the monthly thơ (j3 artMonth, applied as is, not through sg) — was typed in j3 + 3 rule texts (j1 ARTS.u, j23, j85) */
+/* KIT §97 kitScreenVeil (jscrv.js, owner bug OD 24/11 ~10:20Z): cap = safety ms before the view shows anyway (MAIN 118: 10 s, a half-painted
+   reveal is what she hates); word = ms of plain veil before the line fades in; fade = reveal ms; pre = room pictures prefetched on idle */
+BAL.kscrv={cap:10000,word:220,fade:160,pre:6,keep:300,late:30000,after:1500};/* late = ms the cap's late guard keeps hiding undecoded pictures of that view (RV-174 FAIL-1); after = ms of the light guard after a normal reveal (new / changed <img> hidden until decoded, LRM4) */
 BAL.tho={lv:3,sung:1,lv5:5,sung5:2};
 /* typed-stat-bal (law 4 ONE CORE, OD:L1267): the item effects of the j8 IT table — w = worn bonus (wearBonus), use = one use (useItem), dr = the Sắc of
    a dress sewn from the fabric (3 months). IT reads them from here (linked below: j8 loads before BAL); the item texts print them ({n:itFx.k.w.sac}).

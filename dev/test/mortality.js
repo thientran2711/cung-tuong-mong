@@ -1,7 +1,7 @@
 /* review/mortality smoke + fast month-loop check (no UI). usage: node dev/test/mortality.js [months=240] [lives=3]
    Serves the repo's dev/index.html from disk; starts a new life; checks every person got a lifespan; runs monthTick() directly
    (dialog queue cleared) and prints deaths by cause; then forces each Emperor-fate branch and an old save without S.mort. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const R=path.resolve(__dirname,'../..');const MONTHS=+process.argv[2]||240,LIVES=+process.argv[3]||3;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1000,height:755},reducedMotion:'reduce'});
  await ctx.route('http://ts.local/**',r=>{const u=decodeURIComponent(new URL(r.request().url()).pathname);const f=R+u;if(!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});

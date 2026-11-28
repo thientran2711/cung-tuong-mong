@@ -6,7 +6,7 @@
    5 OLD SAVE (a life saved by the base build) loads and the panel opens.
    No server: files are served from disk through page.route.
    usage: node dev/test/ob-oan.js <newRoot> <oldRoot|-> <shotDir|-> [WxH@dpr ...]  → exit 1 on FAIL */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const [,,NEW,OLD0,SHOT0,...SZ]=process.argv;const OLD=OLD0&&OLD0!=='-'?OLD0:null;const SHOT=SHOT0&&SHOT0!=='-'?SHOT0:null;const SIZES=SZ.length?SZ:['755x1000@1','1180x820@1'];
 const MIME={'.html':'text/html','.js':'text/javascript','.json':'application/json','.css':'text/css','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.webmanifest':'application/json','.mp3':'audio/mpeg','.ogg':'audio/ogg','.woff2':'font/woff2'};
 const serve=async(ctx,root)=>{await ctx.route(/^https?:/,r=>{const u=new URL(r.request().url());if(u.hostname!=='ctm.local')return r.abort();

@@ -1,7 +1,7 @@
 /* review/kit-win-pay (K-WIN-PAY, KIT_REQUESTS 21/11 econ-tamco F1): on the §6.2b option card (Tốn + Được only) a ROLLED option whose price is paid only when it
    works («thành: Danh +2, Bạc -30») shows that red item as «Bạc -30 khi thành» in the Được slot; a sure option (no roll) and green items carry no tag; Fold 755x1000 + iPad 1180x820.
    usage: node dev/test/kit-win-pay.js <url> <outdir> */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const [W,H] of [[755,1000],[1180,820]]){const ctx=await b.newContext({viewport:{width:W,height:H},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(240000);
   await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:240000});await p.waitForTimeout(1500);

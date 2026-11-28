@@ -1,5 +1,5 @@
 /* ui-fixes-1 #4: count frames where a VISIBLE falling sprite (alpha>.05) overlaps a stage info chip (#sc-t, .k3c, .k3p, .krailb). usage: node dev/test/ui-fixes-1-petals.js <device> [seconds=25] */
-const {chromium}=require('playwright');const D=require('./lib/device');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const D=require('./lib/device');
 const [,,DEV='ipadAir',SEC='25']=process.argv;
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const ctx=await D.newDeviceContext(b,DEV);await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});

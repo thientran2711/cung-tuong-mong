@@ -1,7 +1,7 @@
 /* look-fx-mirror shots (R9g): Điểm trang close-up. usage node dev/test/look-fx-mirror.js <device> <outdir> [fig=c01]; same harness set-up as look-fx-wire.js; drives the real flow toilOpen -> toilDressDone -> toilFinish('quick') and shoots the round bronze-mirror face zoom (kitFaceZoom) of each mark lv1-3. Original header:  usage node dev/test/look-fx-wire.js <device: fold|ipadAir> <outdir> [figs=c01,c30]
    HOST mode (built root index.html via rot.js). For c01 + c30 (por + fig forced onto the player) and every face mark x lv1/2/3:
    stage figure (full body, fig-fit rows) | big portrait | mirror zoom (por rows). One png per look/fig/lv into outdir (+ a 3x crop of the stage face). */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const D=require('./lib/device');const fs=require('fs');
 (async()=>{const dev=process.argv[2]||'fold',out=process.argv[3]||'/tmp/lfw-shots',FIGS=(process.argv[4]||'c01,c30').split(',');fs.mkdirSync(out,{recursive:true});
  const srv=await D.serveRoot();const b=await chromium.launch({args:['--disable-dev-shm-usage'],proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});
  const ctx=await D.newDeviceContext(b,dev);

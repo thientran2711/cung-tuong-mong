@@ -1,7 +1,7 @@
 /* review/kit-chip-pause (K-CHIP-PAUSE, MAIN 92): no ⏸ font glyph in any kit chip text — the pause sign is the .kpzb two CSS bars (3 x 10 px, same as the §77b badge).
    Renders kitCoopFriend (hold + clock pz) and kitCoopFriendPanel on Fold 755x1000 + iPad 1180x820; checks: no ⏸ text node in the chip/panel/whole HUD, 2 bars 3x10, chip text not cut, shot of the chip.
    usage: node dev/test/kit-chip-pause.js <url> <outdir> */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const [W,H] of [[755,1000],[1180,820]]){const ctx=await b.newContext({viewport:{width:W,height:H},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(240000);
   await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof kitCoopFriend==='function'&&typeof kitCoopFriendPanel==='function',null,{timeout:240000});

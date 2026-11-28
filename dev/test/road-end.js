@@ -9,7 +9,7 @@
 const {chromium}=require('playwright');
 const [,,URL,NL]=process.argv;const NLIV=+NL||2;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JSON.stringify(x).slice(0,900))};
- const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
+ const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();await p.addInitScript(require('./lib/qdrain').init);/* headless loop: __bot + answer the night choice (lib/qdrain.js, NPCROADS-RED) */p.setDefaultTimeout(0);
  p.on('pageerror',e=>errs.push(e.message.slice(0,300)));await p.goto(URL,{waitUntil:'load',timeout:0});
  await p.waitForFunction(()=>typeof start==='function'&&typeof eg12==='function',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{document.getElementById('title').hidden=true;
@@ -30,7 +30,7 @@ const [,,URL,NL]=process.argv;const NLIV=+NL||2;
     const A=S.st.M;try{if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const bd=beatDef67(A,A.cur);const O=opts67(A,bd);if(!O.length)throw new Error('no option '+A.a+' '+A.cur);
       const i=pick==='rand'?Math.floor(Math.random()*O.length):0;const o=O[i];res67(thKey67(A),A.cur,i,o&&o.o!=null?oOf67(A,o,bd):100);if(A.done)ends.push(A.a+'='+A.end)}}catch(e){err=err||('beat '+e.message+' '+(e.stack||'').split('\n')[1])}
     if(S.st.ms&&++stuck>2){if(S.st.ms.id==='len14'&&S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('bot')}else S.st.ms.force14=1}
-    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0}
+    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0}
    const s=mySons()[0];
    return{k,cs,eg,plan0,seq,ends,all:!!c.all,n:c.n,heir:!!(S.heir&&S.heir.k&&S.heir.k===s),months:mon,err}};
   window.__old=()=>{quiet=true;window.__forceOrigin='tt';start();quiet=false;Q.length=0;delete S.st.f14.eg;const P=S.st.ch.plan;

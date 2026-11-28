@@ -2,7 +2,7 @@
    usage: node dev/test/mortality-ui.js <outdir>  — sizes 755x1000 1000x755 1180x820 1366x1024 844x390 (+390x844 rotate prompt).
    For each size: card "Giữ mẹ hay giữ con" (her hard birth, giữ mẹ) and the end card "Xuất gia" (Emperor dies, childless low rank).
    FAIL on page errors, horizontal overflow, text outside the screen, '%' in the card. One small JPEG per card per size. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const R=path.resolve(__dirname,'../..');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');const R=path.resolve(__dirname,'../..');
 const OUT=process.argv[2]||R+'/.tmp/ui';fs.mkdirSync(OUT,{recursive:true});
 const SIZES=process.env.SIZES?JSON.parse(process.env.SIZES):[[755,1000],[1000,755],[1180,820],[1366,1024],[844,390],[390,844]];const DSF=+process.env.DSF||1;
 (async()=>{const b=await chromium.launch();let fails=0;

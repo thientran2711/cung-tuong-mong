@@ -35,7 +35,9 @@ const J4DOOR={};/* key -> door ROWS (data only), filled while a tab is drawn */
    J4DOOR[dk]=W.map(w=>j4Row(w,w.go));
    const dg=j4Gain(W);/* LAW 3 (E-GAIN3): Được = what the ways teach (jdoor doorGain) */
    s.acts=[pbtn(`data-learndoor="${dk}"`,"Học",`chọn cách học: ${ways.map(c=>c.n.replace(/^Học với /,"học với ").replace(/^Tự học/,"tự học")).join(" / ")}${dg?" · "+dg:""}`,j4Why(W)),...keep]}
-  }catch(e){console.error("j4 hoc",e)}return L}})();
+  }catch(e){console.error("j4 hoc",e)}return L};
+ /* R11 (owner 27/11 ~06:33Z): the môn FRAME (jtabs ktTnPop, KIT §21e) is itself the one door of that môn — it lists the ways (Tự học / Học với thầy / Học với Thái hậu …) as their own act cards with Tốn / Được, never a «Học» door that opens a second chooser. raw = the list before this fold. */
+ ktArtSkills.raw=s0})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-learndoor]");if(!b||b.disabled)return;e.stopPropagation();
  const dk=b.dataset.learndoor,W=J4DOOR[dk];if(!W)return;const vir=dk[0]==="v",k=dk.slice(2),nm=vir?((VIR.find(x=>x.k===k)||{}).n||""):((ARTS.find(x=>x.k===k)||{}).n||"");
  j4Card(`Học ${nm}`,`Chọn cách học ${nm}.`,W)},true);

@@ -11,7 +11,7 @@
    (nopx = reduced motion, no Pixi: fast; without it Pixi draws the backdrop (WebGL devices) — slow in headless, pick states with
    PCSTATES=<se>-<buổi 0..3>-<weather 0..3>,…)
    Pictures come from the CDN through Playwright (cached in .ahcache/img). */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const WT=path.resolve(__dirname,'../..')+'/';
 const [,,HTML0,OUT,SZ='1180x820',SH='0/1',ONLY='',NOPX='']=process.argv;const HTML=path.resolve(HTML0);
 const [W,H]=SZ.split('x').map(Number);const [si,sn]=SH.split('/').map(Number);

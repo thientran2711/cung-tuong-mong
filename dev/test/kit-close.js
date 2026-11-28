@@ -4,7 +4,7 @@
    "Sang ngày mới" at night; an old save loads.
    usage: node dev/test/kit-close.js <url of a build page> <outdir> [WxH@dpr,…] [oldsave.json]
    (default 755x1000@2,1000x755@2,1180x820@2,844x390@3). Images missing from a sparse checkout are fetched from the live site. */
-const {chromium}=require('playwright');const fs=require('fs');const https=require('https');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const https=require('https');
 /* start() may finish after the loading screen: wait for the life, and start again while it is a servant life */
 async function kcWait(p){for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});await new Promise(r=>setTimeout(r,1500));
  /* r6: the life can be replaced after the loading screen; check again after it settles, and never test a servant life (no Tư trang tab) */

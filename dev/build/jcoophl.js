@@ -38,7 +38,7 @@ const HOUSE=["resHead","resHall","pal","palLone","palWait"],HSET=new Set(HOUSE);
    (NOADD = "the host's value"), the guest still in her tối of day n jumped to day n+1 → jnf asked the host's word for a day the host had not
    flipped yet (host reply: d is not a past day, no LAST) → both seats «Chờ hảo hữu…» for ever. Never diffed (fromC), never applied (an older host). */
 const CLOCK=new Set(["year","month","tuan","turn"]);
-const VIEW=new Set(["rel","oan","ghen","ev","rl","ro","gp","ep","evm"]);/* viewer rows: per player, never a world fact */
+const VIEW=new Set(["rel","oan","ghen","ev","rl","ro","gp","ep","evm","evR"]);/* viewer rows: per player, never a world fact */
 const plain=o=>!!o&&typeof o==="object"&&!Array.isArray(o);
 const isNum=x=>typeof x==="number"&&isFinite(x);
 const idOf=e=>plain(e)?(e.id!=null?"i"+e.id:e.sid!=null?"s"+e.sid:null):null;

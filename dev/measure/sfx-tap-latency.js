@@ -4,7 +4,7 @@
    Per tap we record the pointerdown time and the start of every tap sound (WebAudio source.start or <audio> 'playing'); latency = first sound − tap.
    usage: node dev/measure/sfx-tap-latency.js <repo root> [WxH=755x1000] [cpu=1] [audioDelayMs=150] [before index.html]
    prints JSON: per tap {i, gapMs, lat (ms, null = silent), n (sounds started), drops}; summary {first, rapid, silent}. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,ROOT,SZ='755x1000',CPU='1',AD='150',IDX='']=process.argv;/* IDX = another built index.html (the BEFORE build) */const [W,H]=SZ.split('x').map(Number);
 const MIME={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.mp3':'audio/mpeg','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.woff2':'font/woff2','.webmanifest':'application/manifest+json'};
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:true,deviceScaleFactor:1,serviceWorkers:'block'});

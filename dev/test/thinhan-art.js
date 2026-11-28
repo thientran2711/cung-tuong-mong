@@ -1,3 +1,4 @@
+require('./lib/bigpage');/* HARNESS-BIGPAGE (KK63): page bodies > 4 MB never go through route.fulfill */
 /* review/thinhan-art: "Thỉnh an Thái hậu / Hoàng hậu" act cards show the new standing-curtsy picture (img/act-thinh-an-v2.webp on the CDN).
    usage: node dev/test/thinhan-art.js <URL> <W>x<H>@dpr <outdir> [before <old ACTS.json>]   ("before" serves the old manifest = old kneeling picture)
    Prints one JSON line: Lễ nghi greeting cards found with their picture, page errors. */

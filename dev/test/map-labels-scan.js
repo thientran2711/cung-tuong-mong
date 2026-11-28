@@ -2,7 +2,7 @@
    Per place: tag present, visible (not display:none / zero size), not overlapped by another visible tag, inside the map. Day + night.
    r2 (OD L1416 + 19:05/19:10/19:15Z): per place on the UNION box (.mlab+.mmeta): visible, inside the map, no union-box overlap, no leader dot in/beside another tag, no leader line through another tag, no leader crossing; grey (.mgrey) == unreachable (accState why / empty palace), empty palace shows «cung trống», every grey place with st.kind still opens its dialog with «Lẻn vào».
    usage: [DSF=2] node dev/test/map-labels-scan.js <url> <shotdir|-> [WxH,..] [ranks e.g. -,3,6 (- = keep)] ; exit 1 on any failure */
-const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
 const [,,URL_,DIR,SIZES,RK]=process.argv;const DSF=+(process.env.DSF||1);const sl=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});let bad=0;
 for(const sz of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=sz.split('x').map(Number);const errs=[];

@@ -1,7 +1,7 @@
 /* KIT §53.d (KK59 + RV-175 FAIL-1 KK60): the odds word inside every kit button kind × enabled/disabled × 7 words must be readable on the button's own face:
    on every DARK face (luminance < .2) contrast(word colour, face colour) ≥ 3 (light faces keep the kit ladder colours, not judged here) (face = the button's background-color or the first gradient stop, after its own filter is ignored: grayscale keeps luminance).
    FAILS on bd1bf3d0 (disabled dark .kbtn: ladder word red/green on red). usage: node dev/test/kit-odds-dark.js <file:///…/index.html> <outdir> [WxH,...] (stills DSF=2) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(process.env.DSF||1),hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});

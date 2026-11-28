@@ -3,7 +3,7 @@
    dialog shows), then the dialog's own ✕ / close is REAL-tapped ONCE (mouse at its centre, hit-checked). PASS = the dialog with that title is gone
    (or another dialog took its place); FAIL = the same title is still up (a queued second copy = «the ✕ did nothing»). Also a nested card close
    («Lui» on a shop item card) must close only its card. usage: node dev/test/dead-close-scan.js <index.html> [WxH,...]  exit 1 on any FAIL */
-const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');
 const TABS=process.env.TABS?process.env.TABS.split(','):['act','go','court','rel','kid','inv','art','story'];
 (async()=>{const b=await chromium.launch();let fails=0,tot=0;
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);

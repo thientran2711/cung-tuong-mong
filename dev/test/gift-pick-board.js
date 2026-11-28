@@ -1,7 +1,7 @@
 /* review/gift-pick: storyboard of the gift moment (KIT §68 kitFxGiftCarry) — each phase drawn with the real kitFxObj pictures at the
    positions kitFxGiftCarry uses, one screenshot per phase (the loaded test box is too slow for a live video).
    usage: node dev/test/gift-pick-board.js <url> <outdir> [WxH] [fxdir: local copies of img/fx/*.webp to serve instead of the CDN] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const [,,BASE,OUT,SZ,FX]=process.argv;const [W,H]=(SZ||'1180x820').split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');const [,,BASE,OUT,SZ,FX]=process.argv;const [W,H]=(SZ||'1180x820').split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const p=await b.newPage({viewport:{width:W,height:H}});await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
  if(FX)await p.route('**/img/fx/*.webp',r=>{const f=path.join(FX,path.basename(new URL(r.request().url()).pathname));fs.existsSync(f)?r.fulfill({path:f,contentType:'image/webp',headers:{'access-control-allow-origin':'*'}}):r.continue()});

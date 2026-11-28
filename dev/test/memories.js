@@ -3,7 +3,7 @@
    checks: add (deed, cap, reinforce, two-way via runAct), fade (monthly, keep floor), recall (line, odds modifier, talk options, invoke → nợ ân),
            hooks (add / query / mirror / resolve kept+broken / due tick / secret from note / hookUse), old save (no mem/hooks → loads, save/load round trip),
            person card blocks "Kỷ niệm" + "Ân oán chưa dứt" (kitRows) at each size, no page errors, no horizontal overflow. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const R={};let fail=0;
  for(const sz of (SIZES||"755x1000@1,1180x820@1").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const errs=[];
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+dpr,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});

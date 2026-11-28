@@ -2,7 +2,7 @@
    usage: node dev/test/seal-say.js <W>x<H>@dpr <outdir> [dev/index.html]
    Starts a life, sets known moods on the people, shoots the room stage, a place view and an event dialog, and checks per figure: seal inside the stage/dialog,
    seal not over the face (head centre), seal size within min..max and ~ body height, seal beside (not above) the head. Prints a JSON table. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,SZ,OUT,PAGE]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 const ROOT=path.resolve(__dirname,'../..');const MIME={html:'text/html;charset=utf-8',js:'text/javascript;charset=utf-8',json:'application/json',webp:'image/webp',png:'image/png',css:'text/css'};
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),reducedMotion:process.env.MOTION?'no-preference':'reduce',serviceWorkers:'block'});

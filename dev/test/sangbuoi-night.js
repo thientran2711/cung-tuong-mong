@@ -1,7 +1,7 @@
 /* r3 tool (scratch promoted): node dev/test/sangbuoi-night.js http://127.0.0.1:PORT/index.html <outdir>   env VP=755x1000,1180x820 STUCK=1 LIVES=N — real taps to buổi tối; shoots the real flip, «Tin trong cung», after the «Sang ngày mới» tap; STUCK=1 counts a stale-disabled «Sang buổi» with Q 0 (traces the button's disabled writes + Q removals). Shots never go in git. */
 /* r3 scratch: REAL night pair. Real taps only on #next / buttons; shoot the real jflip scene (.kmov.kcf), the real «Tin trong cung» card,
    the screen before the «Sang ngày mới» tap and after it. One fresh context per device; each device starts its own life (start()). */
-const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const [,,URL,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VP=(process.env.VP||'755x1000,1180x820').split(',').map(v=>v.split('x').map(Number));
 (async()=>{const b=await chromium.launch();const log=[];
  for(const [W,H] of VP){let got={};let nights=0,stuck=0;for(let life=0;life<(+process.env.LIVES||6)&&(process.env.STUCK||!(got.flip&&got.news&&got.after));life++){got={};

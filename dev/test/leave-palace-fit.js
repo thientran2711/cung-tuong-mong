@@ -1,0 +1,9 @@
+/* leave-palace FIT (law 10: the end card never scrolls/clips): 24 Trả thẻ bài endings (gả / dạy chữ / xuất gia / ✦ hòa thân) with «Về sau» on Fold 755x1000 + iPad 1180x820;
+   the .k3right column and #mb must hold the whole text. usage: node dev/test/leave-palace-fit.js [index.html] → exit 1 on overflow */
+const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();
+for(const [dev,w,h] of [["fold",755,1000],["ipad",1180,820]]){const p=await (await b.newContext({viewport:{width:w,height:h},serviceWorkers:'block'})).newPage();
+await p.goto('file://'+require('path').resolve(process.argv[2]||require('path').join(__dirname,'../../index.html')));await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
+await p.evaluate(async()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;for(let i=0;i<200;i++){quiet=true;start();quiet=false;if(!S.srv&&!isSrv()&&kcOk(S.origin.k)){if(!S.kc)kcInit();break}}if(!S.kc){S.srv=null;S.origin=ORIGINS.find(x=>kcOk(x.k));kcInit()}window.__snap=JSON.stringify(ser())});
+const bad=[];let n=0;for(let i=0;i<24;i++){await p.evaluate(i=>{for(const c of ['kmrew','kmov','kfxk','kemo-big','kfxcv','kroul','klife','curtain'])document.querySelectorAll('body > .'+c+', body > #'+c).forEach(e=>e.remove());deser(JSON.parse(window.__snap));Q.length=0;S.dead=false;S.lvEp=null;S.tai=70;S.kc.suit=[];S.kc.trv=0;const d=kcTraveD();const k=i%4;if(k===3){kcEnd("kcR5")}else d.o[k].go();showModal();render()},i);
+ await p.waitForTimeout(900);const r=await p.evaluate(()=>{const R=document.querySelector('#modal .k3right'),mb=document.getElementById('mb');return{f:S.fate,r:R?R.scrollHeight-R.clientHeight:null,mb:mb?mb.scrollHeight-mb.clientHeight:null,len:S.lvEp&&S.lvEp.txt.length}});n++;if((r.r||0)>2||(r.mb||0)>2)bad.push(r)}
+console.log(dev,n,'overflow',bad.length,JSON.stringify(bad.slice(0,4)));if(bad.length)process.exitCode=1;await p.close()}await b.close()})();

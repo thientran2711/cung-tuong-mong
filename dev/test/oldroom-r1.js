@@ -3,7 +3,7 @@
    A = host 755x1000@2, B = guest 1180x820@2. Dice forced (success, undetected) where the case needs it.
    Checks per act: the act is OFFERED on her entry (ACT.ok), my gain lands on my side, her loss lands on HER own S through `res.fam`,
    her note / Đồ thất lạc case, and after the week merge her entry on my side == her own S (bag keys, children). */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const BASE='http://ctm.local/';let HTML=path.join(ROOT,'.tmp/old.html');
 const MIME={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.mp3':'audio/mpeg','.css':'text/css','.webmanifest':'application/manifest+json','.svg':'image/svg+xml'};
 async function serve(ctx){await ctx.route(BASE+'**',async route=>{const u=new URL(route.request().url());let p=decodeURIComponent(u.pathname);

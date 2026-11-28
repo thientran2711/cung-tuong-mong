@@ -4,7 +4,7 @@
    1180x820@2 + 1366x1024@2 (iPad), 412x1058@2 (cover), 390x844@3 reports: figure column width / page, figure left gap to the page's left edge,
    text column width, relation table cut at the right (scrollWidth/rect past the text column), relation table with a header band or a card
    background (must be none 'on paper'), broken words. Exit 1 when a page has a table cut / band / card. Images come from the live site. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const OUT=process.argv[2]||'/home/user/wt/sdf-shots';const SHOTS=process.argv[3]==='shots';fs.mkdirSync(OUT,{recursive:true});
 const LIVE='https://thientran2711.github.io/cung-tuong-mong/';const HTML=fs.readFileSync(path.join(__dirname,'..','index.html'));
 const VPS=[[755,1000,2],[1180,820,2],[1366,1024,2],[412,1058,2],[390,844,3]];

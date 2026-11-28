@@ -8,7 +8,7 @@
      world    — she is kept out of the way (no death for her: S.tho far, die() muted) to read every OTHER group for Y years.
    Deaths are counted per group and cause: lifespan / accident / plot (jmort ledger S.mort.dl) and illness / childbirth / punishment / other
    (people who died that month and are not in the ledger, classified from the month's text). Her ending = over() title + fate. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const R=path.resolve(__dirname,'../..');const CH=+process.env.CHUNK||5;const LIVES=+process.argv[2]||20,YEARS=+process.argv[3]||5,OUT=process.argv[4];
 const MERGE=process.argv[2]==="--merge";
 (async()=>{if(MERGE){const all={};for(const f of process.argv.slice(3)){const d=JSON.parse(fs.readFileSync(f,'utf8'));for(const k in d)if(k!=="pageErrors"){all[k]=all[k]||{lives:[],deaths:[],errs:[]};for(const x of ["lives","deaths","errs"])all[k][x].push(...d[k][x])}}

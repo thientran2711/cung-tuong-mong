@@ -7,7 +7,7 @@
    the monthly report pop-up (4 options, flip deferred, đúng / sớm / giấu / lùi effects, mama check, forgery evidence, mừng hụt, default). UI per size: the book panel opens, no page / panel h-overflow,
    no clipped text; 390x844 = rotate prompt.
    usage: node dev/test/cycle.js <index.html> [outdir] [WxH@dpr ...] */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const a=process.argv.slice(2);const IDX=a[0];const OUT=a[1]&&!/^\d+x/.test(a[1])?a[1]:null;
 let SIZES=a.filter(x=>/^\d+x\d+@/.test(x));if(!SIZES.length)SIZES=['755x1000@2','1000x755@2','1180x820@2','1366x1024@2','844x390@3','390x844@3'];
 const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.readFileSync(IDX,'utf8');

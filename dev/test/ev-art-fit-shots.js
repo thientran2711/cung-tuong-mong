@@ -1,7 +1,7 @@
 /* review/ev-art-fit: screenshots of the owner's cases at the three test sizes — VIỆC "Lời cảnh báo" (maid warns; was the gift box),
    VIỆC "Có người đến" (mocking visit; was the gift box) and BÁO "Hảo hữu vào cung" (co-op notice; had no picture). One fresh page per case.
    usage: [EVJSON=1] node dev/test/ev-art-fit-shots.js <build url> <outdir>   (EVJSON=1: img/EVENTS.json and img/ev-*.webp served from disk) */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const LOC=f=>{const p=path.join('img',f);return fs.existsSync(p)?fs.readFileSync(p):null};
 const CASES=[["warn",()=>{const v=liveRivals(true)[0];Q.push({ev:1,t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: “Dạo này người các cung nhìn tiểu chủ không thiện ý. Nô tỳ nghe bên ${v.name} hỏi giờ giấc cung ta.”</p>`,opts:[{n:"Đóng cửa giữ mình",fx:{sung:-2}},{n:"Ghi nhớ, cứ như thường",fx:{}}]})}],

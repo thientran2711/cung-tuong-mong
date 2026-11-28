@@ -8,7 +8,7 @@
    E-GAIN4B adds (review/e-gain4 FIX LIST): (b2) the PRINTED tier summaries in real locked states, (f) the willingness word never in Được / Thành,
        (g) the dress-verdict gain in Được / Thành on every card kind (plain / door / tier / one-tap), (d2) the «Dò la» one-tap pin — each proven by a SOURCE
        mutant (dev/build reverted + rebuilt; see dev/handover/reports/e-gain4.md, E-GAIN4B section).
-   usage: node dev/test/e-gain4-unit.js <url> [WxH@dpr] → exit 1 on any failed case.  Env mutants (each must exit 1): MUTANT=a|b|c|d. */
+   usage: node dev/test/e-gain4-unit.js <url> [WxH@dpr] → exit 1 on any failed case.  Env mutants (each must exit 1): MUTANT=a|b|d; (c) / (g) / (d2) / (b2) / (f) by SOURCE mutant (E-GAIN4C: c = jtoil kem → risk, the pre-ACT-MOVE-6 line). */
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,URL,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@1').split('@');const [W,H]=WH.split('x').map(Number);
 const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(src.indexOf('String.raw`')+11,src.indexOf('})();`;')+5);
@@ -19,7 +19,6 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(
  const R=await p.evaluate(async(MU)=>{const F=[],OK=[];const T=h=>String(h==null?"":h).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();const chk=(c,m)=>(c?OK:F).push(m);
   if(MU==='a')KIT_ACT_CATS.unshift(["trung-phat",/đổi người/i],["di-lai",/vào |ra /i],["hau-ha",/người hầu/i]);
   if(MU==='b'&&window.ONE)ONE.lockW=()=>"—";
-  if(MU==='c'&&window.TOILV)TOILV.split=0;
   if(MU==='d'){if(typeof rcvHelpX==="function")window.rcvHelpX=()=>({x:"nàng có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách",risk:""})}
   /* (a) */
   const CN=c=>(KIT_CAT[c]||[c])[0];
@@ -42,15 +41,27 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(
      Lr=talkOpts(P[i]).filter(Boolean);break}}finally{window.toilRival=tr0;window.toilOn=to0}
    chk(Lr.length>0,`c: a rival pop-up found (${Lr.length} options)`);
    const bad=Lr.filter(a=>/quý ta \+/.test(T(a.risk)));chk(!bad.length,`c: options with the praise on the Bại side ${bad.length} (${bad.slice(0,3).map(a=>T(a.n)).join(", ")})`);
-   const good=Lr.filter(a=>/quý ta \+/.test(T(a.x)));chk(good.length>0,`c: options with the praise on the Được side ${good.length}`);
-   const dup=Lr.filter(a=>(T(a.x).match(/chuộng giản dị: quý ta \+/g)||[]).length>1);chk(!dup.length,`c: options with the praise twice ${dup.length} (${dup.slice(0,3).map(a=>T(a.n)).join(", ")})`)}
+   /* E-GAIN4C: the kept design = LIVE ACT-MOVE-6 — jtoil writes the verdict on «kem» (it comes either way), j25 optLine appends «kèm: …», the kit puts a green piece in Được.
+      Read the PRINTED card (optLine → kit rows), not the raw x. */
+   const PR=a=>{const d=document.createElement("div");try{d.innerHTML=optLine(a)}catch(e){}const G=q=>[...d.querySelectorAll(q)].map(e=>T(e.textContent)).join(" | ");return{du:G(".kr-thanh .ef, .kr-duoc .ef"),bad:G(".kr-bai .ef, .kr-mat .ef, .kr-note .ef")}};
+   const good=Lr.filter(a=>/quý ta \+/.test(PR(a).du));chk(good.length>0,`c: options with the praise on the Được side ${good.length}`);
+   const lossP=Lr.filter(a=>/quý ta \+/.test(PR(a).bad));chk(!lossP.length,`c: options with the praise printed in Bại / Mất / Ghi chú ${lossP.length} (${lossP.slice(0,3).map(a=>T(a.n)).join(", ")})`);
+   const dup=Lr.filter(a=>(PR(a).du.match(/chuộng giản dị: quý ta \+/g)||[]).length>1);chk(!dup.length,`c: options with the praise twice ${dup.length} (${dup.slice(0,3).map(a=>T(a.n)).join(", ")})`);
+   /* E-GAIN4C: a LOSS verdict («nàng ta ghen +N») is printed in Kèm — never in Được / Thành, never in Bại (it comes either way) */
+   {let Lg=[];try{window.toilOn=()=>true;window.toilRival=(v,d)=>d?null:{txt:"dung nhan ta tuyệt sắc: nàng ta ghen +"+BAL.toil.ghenTuyet,aff:0,g:BAL.toil.ghenTuyet};AA.restore();
+     for(const sf of AA.surfaces().filter(s=>s.place)){AA.restore();AA.show(sf);const P=curPeople();const i=P.findIndex(x=>x.kind==="rival"&&x.ref);if(i<0)continue;Lg=talkOpts(P[i]).filter(Boolean);break}}finally{window.toilRival=tr0;window.toilOn=to0}
+    const rowG=a=>{const d=document.createElement("div");try{d.innerHTML=optLine(a)}catch(e){}const G=q=>[...d.querySelectorAll(q)].map(e=>T(e.textContent)).join(" | ");return{kem:G(".kr-kem .ef"),wrong:G(".kr-thanh .ef, .kr-duoc .ef, .kr-bai .ef, .kr-mat .ef")}};
+    const inK=Lg.filter(a=>/nàng ta ghen \+/.test(rowG(a).kem)),wr=Lg.filter(a=>/nàng ta ghen \+/.test(rowG(a).wrong));
+    chk(Lg.length>0&&inK.length>0&&!wr.length,`c: jealousy verdict in Kèm on ${inK.length} of ${Lg.length} options, in Được / Bại on ${wr.length} (${wr.slice(0,3).map(a=>T(a.n)).join(", ")})`)}}
   /* (d) */
   {let n=0,bad=[],help=null;/* same world as (c): a second AA.scen builds another world */for(const dt of [0,1,2])for(const sf of AA.surfaces().filter(s=>s.place)){AA.restore();S.turn=(S.turn||0)+dt;AA.show(sf);const P=curPeople();
     P.forEach((pp,i)=>{if(pp.kind!=="rival"&&pp.kind!=="hh")return;let A=[];try{A=talkOpts(pp)}catch(e){return}
      for(const a of A){if(!a)continue;if(a.n==="Nhờ giúp đỡ"&&!help)help=Object.assign({},a,{who:pp.kind+":"+pp.name+"@"+sf.id+" d"+dt});if(a.one!=="one"||a.lock)continue;n++;
-      let full="";try{full=optLine(a)}catch(e){}const gl=T(doorGain([String(a.x||"")]));const fl=T(full);
-      /* the button line must name a gain; a line whose only «thành» piece is a price («Bạc −») is the fault */
-      const th=(/thành: ([^·]*)/.exec(fl)||[])[1]||"";if(!gl||(th&&/^[^,]*: ?Bạc [-−]/.test(th.trim())&&!/\+/.test(th)))bad.push(`${T(a.n)} @${sf.id} d${dt}: «${fl.slice(0,110)}»`)}})}
+      let full="";try{full=optLine(a)}catch(e){}const fl=T(full);
+      /* E-GAIN4C: the PRINTED card (optLine → kit rows) must name a gain in Thành / Được, never only a price («Bạc −») — LIVE ACT-MOVE-6 copies k / tgt so an act member
+         prints its AOUT result line (the raw x may be only the price; what she sees is the kit card) */
+      const dv=document.createElement("div");dv.innerHTML=full;const th=[...dv.querySelectorAll(".kr-thanh .ef, .kr-duoc .ef")].map(e=>T(e.textContent)).filter(Boolean);
+      if(!th.length||th.every(t=>/^([^:]*: ?)?Bạc [-−]/.test(t)))bad.push(`${T(a.n)} @${sf.id} d${dt}: «${fl.slice(0,110)}»`)}})}
    chk(n>0,`d: one-tap doors read ${n}`);chk(!bad.length,`d: one-tap doors without a gain ${bad.length}${bad.length?": "+[...new Set(bad)].slice(0,4).join(" | "):""}`);
    const X=BAL.ag.cx2.help,R2=BAL.rcv.help;let ln="";try{const d=document.createElement("div");d.innerHTML=optLine(help);const g=k=>[...d.querySelectorAll(".kr-"+k+" .ef")].map(e=>T(e.textContent)).join(", ");ln={th:g("thanh")+g("duoc"),bai:g("bai")+g("mat")}}catch(e){}
    /* the kit card of the option (optLine → kit rows; magnitudes show as marks «Bạc ++»): Thành / Được names the bạc + chứng cứ she gets (the numbers are BAL.ag.cx2.help.bac / BAL.ag.ev.one in jrcv rcvHelpX), Bại / Mất the Danh she loses when told on */
@@ -91,7 +102,7 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(
    try{window.toilOn=()=>true;window.toilRival=(v,d)=>d?null:{txt:"nàng ta chuộng giản dị: quý ta +"+BAL.toil.praisePlain,aff:BAL.toil.praisePlain,g:0};
     for(const sc of ["hh","cao","toi","hau","con"]){if(K.plain&&K.door&&K.tier&&K.one)break;AA.scen(sc);
     for(const sf of AA.surfaces().filter(x=>x.place)){AA.restore();AA.show(sf);const P=curPeople();for(let i=0;i<P.length;i++){const pp=P[i];if(pp.kind!=="rival"||!pp.ref)continue;let A=[];try{A=talkOpts(pp)}catch(e){}
-      for(const a of A){if(!a)continue;let carry=/quý ta \+/.test(T(a.x));if(!carry&&a.door)try{const r=DOOR.byK(a.door);const {L}=ONE.members(doorPP(pp,i,r.k),r);carry=L.some(m=>m&&m.a&&/quý ta \+/.test(T(m.a.x)))}catch(e){}if(!carry)continue;
+      for(const a of A){if(!a)continue;const XK=o=>T(o.x)+" "+T(o.kem)+" "+T(o.kemG)/* E-GAIN4C: the verdict rides on the side fields «kemG» (gain) / «kem» (loss), LIVE ACT-MOVE-6 carrier */;let carry=/quý ta \+/.test(XK(a));if(!carry&&a.door)try{const r=DOOR.byK(a.door);const {L}=ONE.members(doorPP(pp,i,r.k),r);carry=L.some(m=>m&&m.a&&/quý ta \+/.test(XK(m.a)))}catch(e){}if(!carry)continue;
        const kd=a.one==="tier"?"tier":a.one==="one"?"one":a.door?"door":"plain";K[kd]++;const d=document.createElement("div");d.innerHTML=optLine(a);const G=s2=>[...d.querySelectorAll(s2)].map(e=>T(e.textContent)).join(" | ");
        const ok=/quý ta \+/.test(G(".kr-thanh .ef, .kr-duoc .ef")),wrong=/quý ta \+/.test(G(".kr-note .ef, .kr-bai .ef, .kr-mat .ef, .kr-kem .ef"))||[...d.querySelectorAll("[data-kfx]")].some(e=>/quý ta \+/.test(e.dataset.kfx||""));
        if(!ok||wrong)bad.push(`${kd} «${T(a.n)}» ${pp.name}@${sf.id}: Được «${G(".kr-thanh .ef, .kr-duoc .ef").slice(0,70)}» Ghi chú «${G(".kr-note .ef").slice(0,70)}»`)}}}}}finally{window.toilRival=tr0;window.toilOn=to0}

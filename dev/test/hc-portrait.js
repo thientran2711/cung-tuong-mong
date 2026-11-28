@@ -1,7 +1,7 @@
 /* review/hc-portrait: Hậu cung person panel portrait box — gap name→frame, frame width vs column, chips on screen.
    usage: [LOCAL_W=<dir with frame-*-w.webp before CDN upload>] node dev/test/hc-portrait.js <url> <W>x<H> <outdir> <tag> [known=0|1] [shots=1]
    Prints JSON per sub-tab: col (left column rect), name bottom, frame art visible rect (opaque bbox of img.kfr), window rect, chips bottom vs viewport. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG,KNOWN,SHOTS]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});

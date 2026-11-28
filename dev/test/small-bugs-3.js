@@ -1,3 +1,4 @@
+require('./lib/bigpage');/* HARNESS-BIGPAGE (KK63): page bodies > 4 MB never go through route.fulfill */
 /* review/small-bugs-3 — eight small faults, each checked as a WHOLE CLASS (LUẬT SỬA CẢ NHÓM).
    usage: node dev/test/small-bugs-3.js <page URL> <WxH@dpr> [shot dir]     (page = doctype + charset + dev/index.html, direct mode)
    env CACHE=<dir> caches CDN pictures.

@@ -3,7 +3,7 @@
    FEATURES: avatars (<img> inside the text column, .pframe, .md avatar chips), pictures, the figure, the seal, chips, rows - counted by kind - and the texts. A dialog that has
    a feature (or a text line) on the iPad that the Fold drops (or the reverse) is a FAIL: a device may change the LAYOUT, never the CONTENT.
    usage: node dev/test/phone-drop-scan.js <index.html> [turns]   Exit 1 on any difference. */
-const {chromium}=require('playwright');const fs=require('fs');const IDX=process.argv[2];const TURNS=+(process.argv[3]||0);/* 0 = the forced dialogs only (identical on both devices); played turns diverge between devices (timing), so they are off by default */
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const IDX=process.argv[2];const TURNS=+(process.argv[3]||0);/* 0 = the forced dialogs only (identical on both devices); played turns diverge between devices (timing), so they are off by default */
 const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.readFileSync(IDX,'utf8');
 const SZ=[['755x1000@2',755,1000],['1180x820@2',1180,820]];
 const SEED=`(()=>{let s=12345;Math.random=()=>{s=(s*1664525+1013904223)>>>0;return s/4294967296}})()`;

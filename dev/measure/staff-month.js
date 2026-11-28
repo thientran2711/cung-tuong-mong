@@ -3,7 +3,7 @@
 // Once a year her rank is moved at random (up AND down, sometimes the cold palace) to exercise every row of the table; NPCs live their own
 // month (promotions, demotions, deaths, plants, buy-overs). After EVERY month: every household (hers + every live NPC consort) vs capOf:
 // maids incl. the personal maid <= cap[0], eunuchs <= cap[1]. Prints max per rank, over-cap count, servants in the palace, early deaths.
-const {chromium}=require('playwright');const path=require('path'),fs=require('fs');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const path=require('path'),fs=require('fs');
 const ROOT=path.resolve(__dirname,'../..');const GF=process.argv[2]||'dev/index.html',LIVES=+process.argv[3]||36,YEARS=+process.argv[4]||12;
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const ctx=await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
  await ctx.route('http://ts.local/**',r=>{const u=decodeURIComponent(new URL(r.request().url()).pathname);if(/\.(webp|png|jpg|mp3|ogg)$/.test(u))return r.abort();const f=path.join(ROOT,u);if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});r.fulfill({status:200,body:fs.readFileSync(f),contentType:/\.html$/.test(f)?'text/html; charset=utf-8':'text/javascript; charset=utf-8'})});

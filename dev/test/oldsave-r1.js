@@ -1,7 +1,7 @@
 /* reviewer r1 (review/coop-b1b5-r1): an OLD solo save (origin/main build in .tmp/old.html: items, a pet, children) loads in the NEW build
    at 755x1000@2, 1180x820@2, 1366x1024@2: no page errors, pets keep stage, Tư trang + Hành sự render, no horizontal overflow.
    usage: node dev/test/oldsave-r1.js [outdir] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const OUT=path.resolve(process.argv[2]||path.join(ROOT,'.tmp/oldsave'));fs.mkdirSync(OUT,{recursive:true});
 const MIME={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.mp3':'audio/mpeg','.css':'text/css','.webmanifest':'application/manifest+json','.svg':'image/svg+xml'};
 let HTML=path.join(ROOT,'.tmp/old.html');const BASE='http://ctm.local/';

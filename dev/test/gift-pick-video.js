@@ -1,6 +1,6 @@
 /* review/gift-pick: records the gift moment (real "Tặng quà" confirm → accepted; then a refused silk gift) as a video, for frame review.
    usage: node dev/test/gift-pick-video.js <url> <outdir> [WxH]   → <outdir>/*.webm (extract frames with ffmpeg) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,BASE,OUT,SZ]=process.argv;const [W,H]=(SZ||'1180x820').split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,BASE,OUT,SZ]=process.argv;const [W,H]=(SZ||'1180x820').split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',recordVideo:{dir:OUT,size:{width:W,height:H}}});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));

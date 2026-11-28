@@ -8,7 +8,7 @@
    usage: node dev/test/ageband-unit.js            (this build)
           INDEX=/path/live-index.html node dev/test/ageband-unit.js   (same checks on another build, e.g. LIVE main: every case must FAIL there)
    Case 4 (no blank) is a guard that holds on LIVE too; every other case FAILs on LIVE 4a8c627b. Exit 1 on any FAIL. */
-const {chromium}=require('playwright');const fs=require('fs'),http=require('http'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),http=require('http'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const INDEX=process.env.INDEX||'';const FIGDIR=process.env.FIGDIR||'';
 const CDN='https://ctm-img.victoria-tntt.workers.dev/img/';
 const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.css':'text/css'};

@@ -4,7 +4,7 @@
    from the state: khắc used, bạc, Sức, items held (inv / tư trang counts), log lines. FAIL = the double tap spent MORE than the single tap (a second action ran).
    usage: node dev/test/double-tap-scan.js <index.html> [WxH,...]   env BUSY=ms (the 1st tap's work outlasts the double-tap window) CPU=n (slow device) TABS=a,b  MAXB=n (buttons per tab, default 30)  MAXO=n (options per dialog, default 8)
    exit 1 on any FAIL */
-const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000').split(',');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000').split(',');
 const TABS=process.env.TABS?process.env.TABS.split(','):['act','go','court','rel','kid','inv','art','story'];const MAXB=+process.env.MAXB||30,MAXO=+process.env.MAXO||8;
 (async()=>{const b=await chromium.launch();let fails=0,tot=0;const FL=[];
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);

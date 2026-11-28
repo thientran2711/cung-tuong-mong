@@ -4,7 +4,7 @@
    4 overdue waits a month                      5 'lệch sổ' → rival with motive → blood test on her child (rtNgSet); NPC twin, truth rule
    6 miscarriage causes table                   7 thuốc thúc sinh card + birth looks full-term   8 old save (no kh fields) loads
    usage: node dev/test/suc-khoe.js <index.html> */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const IDX=process.argv[2];const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.readFileSync(IDX,'utf8');
 (async()=>{const b=await chromium.launch();const errs=[];
  const ctx=await b.newContext({viewport:{width:1180,height:820},deviceScaleFactor:1,reducedMotion:'reduce',serviceWorkers:'block'});

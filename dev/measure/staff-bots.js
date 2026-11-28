@@ -3,7 +3,7 @@
 // (outermost nextBuoi = after the game's own trims, what the next stage shows) every household — hers and every live NPC consort's — against the ONE table: maids (incl. the personal maid) <= cap[0], eunuchs <= cap[1].
 // Works on the old build too (it has no hhHas: the probe counts the same way, personal maid = +1). Prints per-rank max maids/eunuchs seen,
 // over-cap counts, HH reach %, early death (dead before 5 palace years) %, servant-road lives.
-const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const path=require('path');const fs=require('fs');
 const ROOT=path.resolve(__dirname,'../..');const GF=process.argv[2]||'dev/index.html';const GAME='http://game.local/'+GF;const M=__dirname;
 const N=+process.argv[3]||4,ORIG=(process.argv[4]||'tt,dtq,muoi,cn,nc,td,ch,thd').split(','),OUTF=process.argv[5]||null,CAP=(+process.argv[6]||3000)*1e3;
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const c=await b.newContext({viewport:{width:390,height:844}});

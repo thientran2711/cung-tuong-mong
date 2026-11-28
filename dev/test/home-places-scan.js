@@ -1,7 +1,7 @@
 /* home-places-scan (law 6 real world, OB-PHU3): the home «Danh sách» place list (map list view, home «Dư đồ» both sub-tabs) lists ONLY the places of the road she is on.
    For every home origin: each [data-kcgo] key must carry that road's own prefix (base khuê các road: kc_; kind roads: kc2Pre()), never another road's (dn_ Nhà tranh / Ruộng nhà,
    nn_/nb_/np_ Thọ Xương cung …). usage: node dev/test/home-places-scan.js <url> [WxH] ; exit 1 on a foreign place */
-const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
 const [,,URL_,SZ]=process.argv;const sl=t=>new Promise(r=>setTimeout(r,t));const ORG=(process.env.ORIGINS||'tt,dtq,muoi,nc,td,ch,thd,cnv').split(',');
 (async()=>{const b=await chromium.launch();const [W,H]=(SZ||'1180x820').split('x').map(Number);let fail=0;
  for(const o of ORG){const errs=[];const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});

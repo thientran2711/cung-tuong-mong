@@ -45,7 +45,7 @@ function open(o){if(CUR)CUR.destroy();const A=area(),K=KIT_FOC,m=kv(),src=(o.fig
  const body=typeof kitFigBody==="function"&&src?kitFigBody(src,()=>{if(CUR===F&&F.open)layout(F)}):null;F.body=body;
  layout(F);build(F);
  F.q(".kfoc-x").addEventListener("click",()=>{if(F.playing){const ob=F.playO&&F.playO.onBack;if(ob){try{ob()}catch(e){}}if(F.playing)F.endPlay()}else F.close()});
- el.addEventListener("click",e=>{const b=e.target.closest(".kfoc-b");if(!b)return;const a=F.cur[+b.dataset.i];if(!a)return;
+ el.addEventListener("click",e=>{const b=e.target.closest(".kfoc-b");if(!b)return;if(b.closest(".kpk")){/* §98.11: a plaque — kitPick owns real taps (lift, ✓); a robot / keyboard click acts at once (unless kitPick just picked it) */if(e.detail!==0||F.__kpkT&&performance.now()-F.__kpkT<60)return;const a0=F.cur[+b.dataset.id];if(!a0||a0.off)return;try{F.kp&&F.kp.destroy();F.kp=null}catch(x){}if(F.pick){const f=F.pick;F.pick=null;f(a0.id);return}if(o.onAct)o.onAct(a0.id);return}const a=F.cur[+b.dataset.i];if(!a)return;
   if(e.target.closest(".kfoc-i")){e.stopPropagation();const sub=[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).join(" · ");const head=b.classList.contains("kfoc-clamp")?`<div class="kpopt">${esc(a.n)}</div>${sub?`<p>${esc(sub)}</p>`:""}`:"";try{kpPop(b,head+(a.off&&a.why?`<div class="kpopt">${esc(a.why)}</div>`:"")+(a.info||""),{})}catch(x){}return}
   if(a.off){try{kpPop(b,`<div class="kpopt">${esc(a.why||"Chưa làm được")}</div>`,{})}catch(x){}return}
   if(F.pick){const f=F.pick;F.pick=null;f(a.id);return}
@@ -82,7 +82,19 @@ function build(F){const G=F.groups,g=G.find(x=>x.k===F.group)||G[0];F.cur=g?g.ac
  F.tabs.innerHTML=G.length>1?G.map(x=>`<button type="button" class="pct${x.k===(g&&g.k)?" on":""}" data-k="${esc(x.k)}">${esc(x.n)}${x.tot!=null?` ${x.can!=null?x.can+"/":""}${x.tot}`:""}</button>`).join(""):"";
  F.tabs.onclick=e=>{const b=e.target.closest(".pct");if(b&&b.dataset.k!==F.group)setGroup(F,b.dataset.k)};
  fill(F,F.cur)}
-function fill(F,list){const L=[],R=[];list.forEach((a,i)=>(i%2?R:L).push(btnHTML(a,i)));F.cl.innerHTML=L.join("");F.cr.innerHTML=R.join("");clampMark(F)}
+function fill(F,list){if(fillPick(F,list))return;const L=[],R=[];list.forEach((a,i)=>(i%2?R:L).push(btnHTML(a,i)));F.cl.innerHTML=L.join("");F.cr.innerHTML=R.join("");clampMark(F)}
+/* KIT §98.11 FOCUS ACTS = THẺ GỖ TREO (KIT-STAGE-R3; OD 26/11 ~19:00Z the new kit replaces every old frame of the same kind; ~18:55Z «bên phải là sẽ thả xuống mấy cái nút giao tiếp»;
+   KIT §98 replace order (1) + (3), KK44 rows jdfv kitFocus acts / F.choices): the focus view's acts and the NPC-initiated choices hang as kitPick plaques on the
+   signpost RIGHT of the person (side "r"; kitPick picks the left only when the right cannot hold them), never the old left/right button fan. The plaque IS the same
+   kit act button (kitFocus.btn); the group tabs stay the focus view's tabs above the head; ✓ = the same act path (onAct / F.pick); a robot / keyboard click
+   (detail 0) on a plaque runs the act at once as before. KIT_FOC.pick=false = the old fan (kit page sample only). */
+function fillPick(F,list){try{if(KIT_FOC.pick===false||typeof kitPick==="undefined"||!F.open)return false;F.cl.innerHTML="";F.cr.innerHTML="";
+ const acts=list.map((a,i)=>({id:String(i),n:a.n,pic:a.pic,word:a.word,ton:a.ton,off:!!a.off,why:a.why||"",info:a.info||""}));const go=(k=0)=>{if(!F.open||F.cur!==list)return;
+  const r=F.img.getBoundingClientRect(),h=F.el.getBoundingClientRect();if(!r.width||!r.height||F.opening){if(k<40)setTimeout(()=>go(k+1),100);return}const A={x:r.left-h.left+r.width*.18,y:r.top-h.top,w:r.width*.64,h:r.height};
+  try{F.kp&&F.kp.destroy()}catch(e){}F.kp=kitPick.open({host:F.el,anchor:A,side:"r",acts,dismiss:false,onPick:id=>{const a=F.cur[+id];if(!a)return;F.__kpkT=performance.now();if(F.pick){const f=F.pick;F.pick=null;f(a.id);return}if(F.o.onAct)F.o.onAct(a.id)},
+   onOff:a=>{try{const b=F.el.querySelector(`.kpk .kfoc-b[data-id="${a.id}"]`);kpPop(b,`<div class="kpopt">${esc(a.why||"Chưa làm được")}</div>`,{})}catch(x){}}})};
+ requestAnimationFrame(()=>go(0));return true}catch(e){console.error("kitFocus pick",e);return false}}
+function pickOff(F){try{if(F.kp){F.kp.destroy();F.kp=null}}catch(e){}}
 /* text never cut: title max 2 lines (clamp) + the sub-line «odds word · Tốn N khắc» whose two parts never break inside (nowrap spans), so on a narrow column it takes 2 lines and the price is never cut; a clamped button gets the «!» so the full name + sub-line show in the popover (aria/title carry it too) */
 function clampMark(F){F.el.querySelectorAll(".kfoc-b:not(.kfoc-skip)").forEach(b=>{const t=b.querySelector("b"),s=b.querySelector("small");b.classList.remove("kfoc-sub3");if(s&&s.scrollHeight>s.clientHeight+1)b.classList.add("kfoc-sub3")/* a sub-line of 3 lines (2 costs on a narrow column): title gives up its 2nd line, the price is never cut */;const cut=(t&&t.scrollHeight>t.clientHeight+1)||(s&&s.scrollWidth>s.clientWidth+1);
   b.classList.toggle("kfoc-clamp",!!cut);if(cut&&!b.querySelector(".kfoc-i")){b.classList.add("kfoc-hasi");b.insertAdjacentHTML("beforeend",`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết" title="Chi tiết">!</span>`)}})}
@@ -106,7 +118,7 @@ function setGroup(F,k){if(!F.open||k===F.group)return;const K=KIT_FOC;F.group=k;
  if(still()){swap();return}
  const bs=[...F.el.querySelectorAll(".kfoc-b")];bs.forEach(b=>wa(F,b,[{opacity:1},{opacity:0,transform:"scale(.9)"}],{duration:K.foldOpenMs}));setTimeout(()=>{if(F.open)swap()},K.foldOpenMs)}
 function fan2(F){const K=KIT_FOC;if(still())return;[...F.el.querySelectorAll(".kfoc-b")].forEach((b,n)=>wa(F,b,[{opacity:0,transform:"scale(.9)"},{opacity:1,transform:"none"}],{duration:K.fanMs,delay:n*K.fanStagger*.5}))}
-function say(F,L,oo){const box=F.q(".kfoc-say");const lines=(L||[]).slice();let i=0;F.cl.classList.add("kfoc-fold");F.cr.classList.add("kfoc-fold");F.plate.hidden=true;
+function say(F,L,oo){pickOff(F);const box=F.q(".kfoc-say");const lines=(L||[]).slice();let i=0;F.cl.classList.add("kfoc-fold");F.cr.classList.add("kfoc-fold");F.plate.hidden=true;
  const show=()=>{const l=lines[i];if(!l){box.hidden=true;F.plate.hidden=false;F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");sayLift(F,0);if(oo.onDone)oo.onDone();return}
   const face=l.face&&typeof kitFaceH==="function"?kitFaceH(l.face,"xs"):"";const last=i===lines.length-1;
   box.innerHTML=`<span class="kfoc-sayf">${face}</span><span class="kfoc-sayn">${esc(l.who||"")}</span><p>${esc(l.text)}</p><button type="button" class="kfoc-next">${last?"Tiếp ▸":"Tiếp ▸"}</button>`;box.hidden=false;
@@ -117,7 +129,7 @@ function say(F,L,oo){const box=F.q(".kfoc-say");const lines=(L||[]).slice();let 
 function sayLift(F,on){const box=F.q(".kfoc-say");let dy=0;if(on&&!box.hidden){const bt=box.offsetTop,feet=F.geo.floor+4;dy=Math.max(0,Math.min(feet-bt,F.geo.top+F.geo.ih*(F.body?F.body.t:.02)-4))}
   F.tabs.style.visibility=dy?"hidden":"";F.img.style.translate=dy?`0 ${-dy}px`:"";F.lift=dy}
 function choices(F,L,cb){sayLift(F,0);const box=F.q(".kfoc-say");box.hidden=true;F.plate.hidden=false;F.cur=L;F.pick=cb;fill(F,L);F.cl.classList.remove("kfoc-fold");F.cr.classList.remove("kfoc-fold");fan2(F)}
-function playOn(F,oo){F.playing=true;F.playO=oo;const sw=F.q(".kfoc-skipw");sw.innerHTML="";sw.hidden=true;
+function playOn(F,oo){pickOff(F);F.playing=true;F.playO=oo;const sw=F.q(".kfoc-skipw");sw.innerHTML="";sw.hidden=true;
   if(oo.skip){const k=oo.skip;sw.innerHTML=`<button type="button" class="kfoc-b kfoc-skip" aria-label="${esc([k.n,k.sub].filter(Boolean).join(" · "))}"><span class="kfoc-t"><b>${esc(k.n||"Làm luôn")}</b>${k.sub?`<small>${esc(k.sub)}</small>`:""}</span></button>`;sw.hidden=false;
    sw.firstChild.onclick=e=>{e.stopPropagation();try{if(k.onSkip)k.onSkip()}catch(x){}}}
 F.cl.classList.add("kfoc-fold");F.cr.classList.add("kfoc-fold");F.tabs.hidden=true;F.plate.hidden=true;const pl=F.q(".kfoc-play");pl.hidden=false;pl.innerHTML="";document.documentElement.classList.add("kfoc-playing");
@@ -139,14 +151,14 @@ function react(F,r){r=r||{};try{if(r.seal&&typeof kitEmoSeal==="object"&&kitEmoS
  (r.deltas||[]).forEach((d,i)=>{const s=document.createElement("span");s.className="kfoc-delta";s.innerHTML=typeof chip==="function"?chip(esc(d.t||d),d.cls||""):esc(d.t||d);const g=F.geo;s.style.left=(g.cx+(i-(r.deltas.length-1)/2)*70)+"px";s.style.top=(g.top+g.ih*.45)+"px";F.el.appendChild(s);
   if(still()||!s.animate){setTimeout(()=>s.remove(),KIT_FOC.reactMs);return}
   const a=s.animate([{opacity:0,transform:"translate(-50%,0)"},{opacity:1,transform:"translate(-50%,-18px)",offset:.2},{opacity:1,transform:"translate(-50%,-46px)",offset:.75},{opacity:0,transform:"translate(-50%,-60px)"}],{duration:KIT_FOC.reactMs,delay:i*120});a.onfinish=()=>s.remove()})}
-function close(F){if(!F.open)return;const K=KIT_FOC;F.open=false;F.skipOpen();F.el.classList.add("kfoc-closing");/* robot M1 25/11 (DEAD BUTTON, Hành sự cards covered by .kfoc-veil/.kfoc-fig for ~0.8 s after ✕): the layer is only the closing animation now — taps go through to what is under it at once *//* OD 25/11 ~04:15Z «a frame must always be closable»: the focus ✕ also dismisses a ma ma tip (kitTip) shown over it */try{if(typeof window.kitTipOff==="function")window.kitTipOff()}catch(e){}
+function close(F){if(!F.open)return;pickOff(F);const K=KIT_FOC;F.open=false;F.skipOpen();F.el.classList.add("kfoc-closing");/* robot M1 25/11 (DEAD BUTTON, Hành sự cards covered by .kfoc-veil/.kfoc-fig for ~0.8 s after ✕): the layer is only the closing animation now — taps go through to what is under it at once *//* OD 25/11 ~04:15Z «a frame must always be closable»: the focus ✕ also dismisses a ma ma tip (kitTip) shown over it */try{if(typeof window.kitTipOff==="function")window.kitTipOff()}catch(e){}
  if(still()){const a=wa(F,F.el,[{opacity:1},{opacity:0}],{duration:K.fadeMs});if(a)a.onfinish=()=>destroy(F,1);else destroy(F,1);return}
  [...F.el.querySelectorAll(".kfoc-b")].forEach(b=>wa(F,b,[{opacity:1},{opacity:0,transform:"scale(.85)"}],{duration:K.foldCloseMs}));wa(F,F.tabs,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});wa(F,F.plate,[{opacity:1},{opacity:0}],{duration:K.foldCloseMs});
  const d=feetDelta(F);F.img.style.transformOrigin="50% 100%";
  if(d){const T=(n,up)=>`translate(${d.dx*n}px,${d.dy*n-(up||0)}px) scale(${1+(d.s-1)*n})`;wa(F,F.img,[{transform:T(0),offset:0},{transform:T(.25,8),offset:.25},{transform:T(.5),offset:.5},{transform:T(.75,8),offset:.75},{transform:T(1),offset:1}],{duration:K.closeMs,delay:K.foldCloseMs*.5,easing:"cubic-bezier(.2,.7,.2,1)"})}
  wa(F,F.q(".kfoc-veil"),[{opacity:1},{opacity:0}],{duration:K.veilOutMs,delay:Math.max(0,K.closeMs-K.veilOutMs)});
  setTimeout(()=>destroy(F,1),K.closeMs+K.foldCloseMs*.5+40)}
-function destroy(F,fromClose){if(!F||F.gone)return;F.gone=true;if(F.playing)document.documentElement.classList.remove("kfoc-playing");F.open=false;[...F.anims].forEach(a=>{try{a.cancel()}catch(e){}});F.el.remove();try{if(F.tok)F.tok.style.visibility=F.tokVis||""}catch(e){}if(CUR===F)CUR=null;try{if(F.o.onClose)F.o.onClose()}catch(e){}}
+function destroy(F,fromClose){if(!F||F.gone)return;pickOff(F);F.gone=true;if(F.playing)document.documentElement.classList.remove("kfoc-playing");F.open=false;[...F.anims].forEach(a=>{try{a.cancel()}catch(e){}});F.el.remove();try{if(F.tok)F.tok.style.visibility=F.tokVis||""}catch(e){}if(CUR===F)CUR=null;try{if(F.o.onClose)F.o.onClose()}catch(e){}}
 window.kitFocus={open,btn:btnHTML,sub:subHTML,current:()=>CUR,reposition:()=>{if(CUR&&CUR.open){CUR.A=area();const A=CUR.A;CUR.el.style.cssText=`left:${A.left}px;top:${A.top}px;width:${A.w}px;height:${A.h}px`;layout(CUR)}}};
 try{addEventListener("resize",()=>kitFocus.reposition())}catch(e){}
 

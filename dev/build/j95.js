@@ -41,9 +41,9 @@ function j95cs(){return j95nB()>=4?[0,1,2,3]:[0,2,3]}
 function j95c(b){b=b==null?(S.buoi||0):b;return j95nB()>=4?Math.min(3,b):[0,2,3][Math.min(2,b)]}
 function j95kh(){return Math.max(0,Math.min(J95.KH-1,typeof used==="number"?used:0))}
 function j95key(){return wk()+"-"+(S.buoi||0)}
-function j95z(){const z=S.j95=S.j95||{};for(const k of ["obs","me","meK","it","wit","owe","hold","seen","told","plant"])z[k]=z[k]||{};z.sec=z.sec||[];z.clue=z.clue||[];return z}
+function j95z(){const z=S.j95=S.j95||{};for(const k of ["obs","me","meK","it","hold","seen","told","plant"])z[k]=z[k]||{};z.sec=z.sec||[];z.clue=z.clue||[];return z}
 function j95pn(k){try{return k?placeName(k):"—"}catch(e){return String(k)}}
-function j95rk(p){try{return p===S?(typeof isSrv==="function"&&isSrv()?srvTitle():S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):p.out?"Phế phi":p.queen?"Hoàng hậu":RANKS[p.rank].n}catch(e){return""}}
+function j95rk(p){try{return p===S?(typeof isSrv==="function"&&isSrv()?srvTitle():outTitleN(S)||(S.rank>=7?"Hoàng hậu":meRankN())):p.out?outTitleN(p):p.queen?"Hoàng hậu":RANKS[p.rank].n}catch(e){return""}}
 function j95acc(p,k){if(!k)return false;try{return palaceOf(p)===k||accessOf(p,k).ok}catch(e){return true}}
 function j95bl(c){return J95.B4[c].toLowerCase()}
 
@@ -79,15 +79,17 @@ function j95except(a,t){/* a recorded reason to act against her own affection */
  for(const h of liveRivals(true)){if(h===a||h===t)continue;if(chOK(h,a)&&hostility(h,t)>=netTh(h,"host"))return `bị khống chế: ${h.name} nắm thóp bằng chứng cứ, ép ra tay`}
  const f=facOf(a);const L=f&&facLeader(f);if(L&&L!==a&&L!==t&&L!==S&&hostility(L,t)>=netThK(L,"host","hostHi")&&aff(a,L)>=netTh(a,"than"))return `vâng lệnh chủ phe ${L.name}`;
  const r=a.j95rum&&a.j95rum[key(t)];if(r&&wk()-r.w<=8)return `nghe tin đồn (${r.txt}) nên hiểu lầm`}catch(e){}return ""}
-function motiveOK(a,t,kind){if(!a||!t||a===S||a===t)return{ok:true,why:a===S?"người chơi tự chọn":""};
- if(typeof a!=="object"||a.rel==null)return{ok:true,why:""};
+/* temper-perception (OD 25/11 ~08:05Z, design (d) OPTION A): her own gây sự cards pass the SAME gate (me = 1, jtperc motiveMe); other callers keep
+   "người chơi tự chọn" for her. Every doer's motive adds her heavy angry / jealous mood (jtperc tpMoodM, BAL.tp.moodM). */
+function motiveOK(a,t,kind,me){if(!a||!t||a===t||(a===S&&!me))return{ok:true,why:a===S?"người chơi tự chọn":""};
+ if(a!==S&&(typeof a!=="object"||a.rel==null))return{ok:true,why:""};
  const af=aff(a,t),oa=oan(a,t),gh=t===S?(a.ghen||0):Math.max(0,Math.round(((t.sung||0)-(a.sung||0))/2));
  let ef=false;try{const f=facOf(a),g=facOf(t);ef=!!(f&&g&&f!==g)}catch(e){}
- if(H95.has(kind)){const ex=j95except(a,t);const mot=Math.max(oa,gh,-af)+(ef?10:0)+(nv(a,"motive"));
+ if(H95.has(kind)){const ex=j95except(a,t);const md=typeof tpMoodM==="function"?tpMoodM(a,kind):0;const mot=Math.max(oa,gh,-af)+(ef?10:0)+(nv(a,"motive"))+md;
   if(af>=40&&!ex)return{ok:false,why:`thiện cảm ${af} với ${t===S?"ngươi":t.name}`};
   if(mot<30&&!ex)return{ok:false,why:`động cơ yếu (oán ${oa}, ghen ${gh}, thiện cảm ${af})`};
   if(ex)return{ok:true,why:ex,ex:1};
-  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(hasT(a,"Xảo quyệt"))parts.push("tính xảo quyệt");
+  const parts=[];if(oa>=20)parts.push(`oán ${oa}`);if(gh>=20)parts.push(`ghen ${gh}`);if(af<=-20)parts.push(`ghét (thiện cảm ${af})`);if(ef)parts.push("khác phe");if(md)parts.push("lòng đang bức bối");if(hasT(a,"Xảo quyệt"))parts.push("tính xảo quyệt");
   return{ok:true,why:parts.join(", ")||`động cơ ${mot}`}}
  if(F95.has(kind)){let fr=false;try{fr=!!(facOf(a)&&facOf(a)===facOf(t))}catch(e){}if(af<-20&&oa>=40&&!fr)return{ok:false,why:`ghét ${t===S?"ngươi":t.name} (thiện cảm ${af}, oán ${oa})`};
   return{ok:true,why:fr?"cùng phe":af>=10?`thiện cảm ${af}`:"lấy lòng vì lợi"}}
@@ -385,7 +387,7 @@ function j95stage(R,kh){const V=S.visit;if(!V||!V.people||V.k!==S.place||S.dead)
   else if(id==="c:ksp"&&!V.people.some(p=>p.kind==="ksp")){V.people.push({kind:"ksp",name:"Tổng quản",ini:"Hoạn",col:"#b9a48a",info:"Giữ thẻ bài các phi tần"});ch=true}}
  /* lãnh cung: every fallen consort the record puts here (no limit), nobody invented */
  if(k==="lc"&&here("c:ly")&&!V.people.some(p=>p.lid==="c:ly")&&typeof lyEntry==="function"){const q=lyEntry(S.out?"Phế phi · cùng cảnh ngộ":"Phế phi");if(q){V.people.push(q);ch=true}}
- if(k==="lc"){for(const v of rivals){if(!v.alive||!v.out||!here("v"+v.id)||V.people.some(p=>p.ref===v))continue;V.people.push({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:S.out?"Phế phi · cùng cảnh ngộ":"Phế phi"});ch=true}
+ if(k==="lc"){for(const v of rivals){if(!v.alive||!v.out||!here("v"+v.id)||V.people.some(p=>p.ref===v))continue;V.people.push({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:S.out?`${outTitleN(v)} · cùng cảnh ngộ`:outTitleN(v)});ch=true}
   if(ch&&!V.people.length)V.msg="Lãnh cung vắng lặng, chỉ có gió lùa qua song cửa mục.";else if(ch&&!S.out)V.msg=`Ở đây có ${V.people.length} người.`}
  /* the Kính sự phòng eunuch is not the Tổng quản */
  const kc=S.court&&S.court.ksp;if(kc&&kc.name)for(const p of V.people)if(p.kind==="ksp"&&p.name!==kc.name){p.name=kc.name;p.info="Kính sự phòng · Giữ thẻ bài các phi tần";ch=true}
@@ -417,18 +419,17 @@ function j95caught(s){const v=RV(+s.a.slice(1));if(!v||!v.alive)return;const m=s
  noteAdd(v.id,`chính ngươi bắt gặp nàng ${what} ở ${W}`);
  if(s.kind==="tryst"){v.scandal=1;try{intelAdd(v,{k:"affair",kind:"secret",txt:`${v.name} ${what}.`},{by:"Chính ngươi",how:`Bắt gặp ở ${W}`})}catch(e){}}
  j95ctx({how:`Ngươi tận mắt bắt gặp ở ${W}`,proves:s.kind==="tryst"?`${v.name} ${what}`:undefined},()=>evA(S,v,BAL.eff.j95.evJ95caught));
- if(out==="rev"){z.wit[v.id]={w:wk(),k:s.kind};const g=motiveOK(v,S,"harm");
-  if(g.ok&&(v.malice||0)>=55){oanAdd(v,S,BAL.eff.j95.j95caught);affAdd(v,S,BAL.eff.j95.j95caught_2);noteAdd(v.id,"biết ngươi đã thấy chuyện kín của nàng; phải đề phòng nàng diệt khẩu")}
-  else{v.j95bribe=wk()}}
- j95CaughtCard(v,s,out,what);
- if(out==="rev"&&v.j95bribe===wk())j95BribeCard(v,Math.min(60,Math.max(10,Math.floor((v.bac||0)/3))))}
+ /* split-merge A1/A2: no bribe card and no separate «z.wit» tag — the rival's grudge carries the threat; her silence is the ONE «Lặng im» road */
+ if(out==="rev"){const g=motiveOK(v,S,"harm");if(g.ok&&(v.malice||0)>=55){oanAdd(v,S,BAL.eff.j95.j95caught);affAdd(v,S,BAL.eff.j95.j95caught_2);noteAdd(v.id,"biết ngươi đã thấy chuyện kín của nàng; phải đề phòng nàng diệt khẩu")}}
+ j95CaughtCard(v,s,out,what)}
+/* (split-merge A1/A2: j95BribeCard is no longer dealt; its generator stays registered so a «Lời nhờ cậy» already in an old save's sổ still loads) */
 /* save-unseen-lists r4 (LAW 11 / 6c): «Bắt gặp» and «Lời nhờ cậy» (made where she stands, also at the first khắc of a new buổi) are BUILT by
    registered generators from the consort (id), the secret record (plain data; the man found again by id), the roll's outcome and the bribe; every
    effect (notes, evidence, grudge, the bribe mark) happens before, once — written into the sổ and made again on load */
 const j95CaughtCard=rcpReg("j95Caught",(v,s,out,what)=>{if(!v||!s)return null;const m=s.kind==="tryst"?manById(s.b):null;const W=s.spot;
  const c={t:out==="rev"?"Bắt gặp, và bị thấy":"Bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy rõ ${v.name} ${what}.</p>${out==="rev"?`<p class="r">Nàng ngẩng lên, bắt gặp ánh mắt ngươi. Nàng biết ngươi đã thấy.</p>`:""}`,opts:j95catchOpts(v,m,s,out)};Q.push(c);return c});
 const j95BribeCard=rcpReg("j95Bribe",(v,g)=>{if(!v)return null;const c={t:"Lời nhờ cậy",who:pv(v),h:`<p>Tối ấy cung nữ của ${v.name} lén mang sang một hộp gấm, trong có ${g} lượng bạc: “Chủ tử nhà nô tỳ xin ${kSay({srv:"f"},S,"{goi}")} coi như chưa thấy gì.”</p>`,
-  opts:[{n:"Nhận lễ, giữ im lặng",fx:{},x:`thành: Bạc +${g} · nàng quý ngươi ${balSg(BAL.eff.j95.j95bribeTake)} · nàng nợ ngươi một ân tình · kèm: nhận lễ là đã hứa giữ kín`,go:()=>j95bribeTake(v,g)},{n:"Trả lại hộp gấm",fx:{},x:`thành: không mắc nợ nàng · kèm: nàng oán ngươi ${balSg(BAL.eff.j95.go)}`,go:()=>{oanAdd(v,S,BAL.eff.j95.go);log(`Ngươi trả lại lễ của ${v.name}.`)}}]};Q.push(c);return c});
+  opts:[{n:"Nhận lễ, giữ im lặng",fx:{},x:`thành: Bạc +${g} · nàng ${pvQuy(v,BAL.eff.j95.j95bribeTake,"quý ngươi")} · nàng nợ ngươi một ân tình · kèm: nhận lễ là đã hứa giữ kín`,go:()=>j95bribeTake(v,g)},{n:"Trả lại hộp gấm",fx:{},x:`thành: không mắc nợ nàng · kèm: nàng ${pvOan(v,BAL.eff.j95.go,"oán ngươi")}`,go:()=>{oanAdd(v,S,BAL.eff.j95.go);log(`Ngươi trả lại lễ của ${v.name}.`)}}]};Q.push(c);return c});
 function j95bribeTake(v,g){const n=Math.min(g,Math.floor(v.bac||0));v.bac=Math.max(0,(v.bac||0)-n);apply({bac:n});relAdd(v,S,BAL.eff.j95.j95bribeTake);j95z().owe[v.id]=(j95z().owe[v.id]||0)+1;log(`Nhận ${n} lượng bạc của ${v.name}, hứa giữ kín.`)}
 /* port 16/11 (owner 11/15 07:15Z): every option shows its whole Tốn / Được / Mất and the odds word, split by " · " for the kit rows (jmen format) */
 /* STEP 4 rv F2: caught in the act (her own eyes) — the pieces of the matching charge (tryst → tư thông, else mưu hại) weigh the odds and are spent, never the total */
@@ -436,25 +437,31 @@ function j95chg(s){return s&&s.kind==="tryst"?"tt":"mh"}
 function j95accO(v,to,s){const pr=chHave(S,v,j95chg(s));const q=queenP();return to==="emp"?oddsCl(Math.min(20+pr*BAL.m95.accPer+(S.sung||0)/5,90)):S.rank>=7?oddsCl(40+pr*BAL.m95.accPer):oddsCl(Math.min(25+pr*BAL.m95.accPer+(q?aff(q,S)/4:0),90))}
 function j95catchOpts(v,m,s,out){const O=[];const q=queenP();const love=s.kind==="tryst";const pr=chHave(S,v,j95chg(s));
  const win=love?`nàng bị xét tội tư thông, ban chết${m?` · (${m.name} bị xử trảm)`:""} · Danh +${BAL.m95.accWin.danh}`:`nàng bị xét tội chuẩn bị mưu hại, cấm túc hay giáng phẩm · Danh +${BAL.m95.accWin.danh}`;
- const lose=`bị coi là vu cáo: Danh -${BAL.tw.g.accFail[0]}, ngươi bị cấm túc, nàng oán ngươi +${BAL.tw.g.accFail[1]}, nàng quý ngươi -${BAL.tw.g.accFail[2]}`;const why=`(chứng cứ tội ${chName(j95chg(s)).toLowerCase()} ngươi đang nắm: ${pr}; tận mắt bắt gặp)`;
- if(q&&q!==S&&q!==v)O.push({n:"Tố giác lên Hoàng hậu",fx:{},x:`${word(j95accO(v,"hh",s))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose} · ${why}`,go:()=>j95accuse(v,m,s,"hh")});
- if(S.rank>=7)O.push({n:"Xử tội theo luật cung",fx:{},x:`${word(j95accO(v,"hh",s))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose} · ${why}`,go:()=>j95accuse(v,m,s,"hh")});
- O.push({n:"Tố giác lên Hoàng thượng",fx:{},x:`${word(j95accO(v,"emp",s))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lose.replace("bị cấm túc","bị cấm túc hay giáng phẩm")} · ${why} · (Sủng càng cao Hoàng thượng càng tin)`,go:()=>j95accuse(v,m,s,"emp")});
+ const lose=`bị coi là vu cáo: Danh -${BAL.tw.g.accFail[0]}, ngươi bị cấm túc, ${pvOan(v,BAL.tw.g.accFail[1],"nàng oán ngươi")}, nàng quý ngươi ${balSg(spSee("rel",-BAL.tw.g.accFail[2]))}`;const why=`(chứng cứ tội ${chName(j95chg(s)).toLowerCase()} ngươi đang nắm: ${pr}; tận mắt bắt gặp)`;
+ /* split-merge B3/P6 (owner 26/11 ~21:00Z «hạn chế tách 1 việc», 27/11 ~00:46Z): ONE «Tố giác» — the listener is the highest one who can judge her
+    (she as Hoàng hậu: luật cung; a Hoàng hậu above the accused: Hoàng hậu; else Hoàng thượng); gated on the charge's real pieces + witnesses (chReady, chNeedTxt) */
+ const to=j95to(v),c=j95chg(s),rd=chReady(S,v,c);const lw=to==="emp"?lose.replace("bị cấm túc","bị cấm túc hay giáng phẩm"):lose;
+ O.push({n:"Tố giác",fx:{},x:`${word(j95accO(v,to,s))} · tốn: ${BAL.m95.k} khắc · thành: ${win} · hỏng: ${lw} · ${why} · ${j95toN(to)}${to==="emp"?" (Sủng càng cao Hoàng thượng càng tin)":""}`,off:rd?undefined:{why:chNeedTxt(S,v,c)},go:()=>j95accuse(v,m,s,to)});
  O.push({n:"Giữ làm con bài khống chế",fx:{},x:`thành: chứng cứ về nàng ${balSg(BAL.eff.j95.evJ95hold)} · giữ kín, chờ lúc dùng`,go:()=>j95hold(v)});
  const risk=(v.malice||0)>=70?25:0;
- O.push({n:"Lặng im, đổi lấy ân tình",fx:{},x:`${risk?word(100-risk)+" · ":""}tốn: ${BAL.m95.k} khắc (gặp riêng nàng) · thành: nàng quý ngươi ${balSg(BAL.eff.j95.j95silent_2)} · nàng bớt oán ngươi 10 · nàng nợ ngươi một ân tình${risk?` · hỏng: nàng vẫn coi ngươi là mối nguy, oán ngươi ${balSg(BAL.eff.j95.j95silent)}`:""}`,go:()=>j95silent(v)});
- O.push({n:"Giả như không thấy",fx:{},x:"thành: không dính vào chuyện",go:()=>log("Ngươi lặng lẽ quay đi như không thấy gì.")});return O}
+ O.push({n:"Lặng im, đổi lấy ân tình",fx:{},x:`${risk?word(100-risk)+" · ":""}tốn: ${BAL.m95.k} khắc (gặp riêng nàng) · thành: nàng ${pvQuy(v,BAL.eff.j95.j95silent_2,"quý ngươi")} · nàng bớt oán ngươi ${balAb(BAL.eff.j95.j95silent_3)} · nàng nợ ngươi một ân tình${risk?` · hỏng: nàng vẫn coi ngươi là mối nguy, ${pvOan(v,BAL.eff.j95.j95silent,"oán ngươi")}`:""}`,go:()=>j95silent(v)});
+ return O}
+/* the listener of her «Tố giác» (B3): she as Hoàng hậu judges by palace law; a Hoàng hậu above the accused hears it; else Hoàng thượng */
+function j95to(v){const q=queenP();return S.rank>=7||(q&&q!==S&&q!==v)?"hh":"emp"}
+function j95toN(to){return to==="emp"?"tâu Hoàng thượng":S.rank>=7?"xử theo luật cung":"tâu Hoàng hậu"}
+/* split-merge P2: «nàng nợ ngươi một ân tình» goes into the ONE nợ ân ledger (j72 q72DebtAdd: >0 they owe her, <0 she owes them) */
+function j95owe(v,n){try{const A=q72A("rv",v.id);if(A)q72DebtAdd(A,n)}catch(e){}}
 function j95accuse(v,m,s,to){if(typeof can==="function"&&can(BAL.m95.k))spend(BAL.m95.k);const c=j95chg(s),pr=chHave(S,v,c);const q=queenP();
  const o=j95accO(v,to,s);
  if(j95dice(o)){evA(S,v,-pr,c);apply({danh:BAL.m95.accWin.danh});const what=s.kind==="tryst"?`tư thông${m?" với "+m.name:""}`:"chuẩn bị mưu hại";log(`<span class="r">${v.name} bị xét tội ${what}.</span>`);
-  if(s.kind==="tryst"){if(m){m.alive=false;v.affair=null;log(`<span class="r">${m.name} bị xử trảm.</span>`)}deathSentence(v,`tư thông${m?" với "+m.name:""}`)}else punish(v,"chuẩn bị mưu hại",2);
+  if(s.kind==="tryst"){ttNpcExposed(v,m)}else punish(v,"chuẩn bị mưu hại",2);
   Q.push({t:"Tố giác",who:pv(v),h:`<p>Chứng cứ đủ, ${v.name} bị xét tội ${what}.</p><p class="g">Danh +${BAL.m95.accWin.danh}</p>`})}
- else{apply({danh:-BAL.tw.g.accFail[0]});oanAdd(v,S,BAL.tw.g.accFail[1]);affAdd(v,S,-BAL.tw.g.accFail[2]);punish(S,"vu cáo phi tần không đủ chứng cứ",to==="emp"?2:1);Q.push({t:"Tố giác",who:pv(v),h:`<p>${to==="emp"?"Hoàng thượng":"Hoàng hậu"} cho rằng chứng cứ chưa đủ, ngươi bị coi là vu cáo.</p><p class="r">Danh -${BAL.tw.g.accFail[0]} · ${v.name} oán ngươi +${BAL.tw.g.accFail[1]}</p>`})}
+ else{apply({danh:-BAL.tw.g.accFail[0]});oanAdd(v,S,BAL.tw.g.accFail[1]);affAdd(v,S,-BAL.tw.g.accFail[2]);punish(S,"vu cáo phi tần không đủ chứng cứ",to==="emp"?2:1);Q.push({t:"Tố giác",who:pv(v),h:`<p>${to==="emp"?"Hoàng thượng":"Hoàng hậu"} cho rằng chứng cứ chưa đủ, ngươi bị coi là vu cáo.</p><p class="r">Danh -${BAL.tw.g.accFail[0]} · ${pvOan(v,BAL.tw.g.accFail[1],`${v.name} oán ngươi`)}</p>`})}
  showModal()}
 function j95hold(v){const z=j95z();z.hold[v.id]=wk();j95ctx({how:"Ngươi giữ kín chuyện tận mắt thấy làm con bài",proves:`${v.name} có chuyện kín bị ngươi bắt gặp`},()=>evA(S,v,BAL.eff.j95.evJ95hold));log(`Ngươi giữ kín chuyện của ${v.name}, chờ lúc dùng.`)}
-function j95silent(v){if(typeof can==="function"&&can(BAL.m95.k))spend(BAL.m95.k);const z=j95z();
+function j95silent(v){if(typeof can==="function"&&can(BAL.m95.k))spend(BAL.m95.k);
  if((v.malice||0)>=70&&npwPick(["refuse","owe"],x=>x==="refuse"?hostility(v,S):Math.max(0,aff(v,S))+BAL.ag.why.min)==="refuse"&&motiveOK(v,S,"harm").ok)/* G3: a spiteful one breaks the promise when her grudge outweighs her regard */{oanAdd(v,S,BAL.eff.j95.j95silent);noteAdd(v.id,"nhận lời hứa im lặng nhưng vẫn coi ngươi là mối nguy");log(`${v.name} gật đầu, ánh mắt lạnh tanh.`);return}
- relAdd(v,S,BAL.eff.j95.j95silent_2);oanAdd(v,S,BAL.eff.j95.j95silent_3);z.owe[v.id]=(z.owe[v.id]||0)+1;log(`${v.name} nợ ngươi một ân tình vì giữ kín chuyện.`)}
+ relAdd(v,S,BAL.eff.j95.j95silent_2);oanAdd(v,S,BAL.eff.j95.j95silent_3);j95owe(v,1);log(`${v.name} nợ ngươi một ân tình vì giữ kín chuyện.`)}
 /* two-way: NPCs present where she meets her lover may catch HER, same odds, same choices (decided by their real feelings) */
 function j95npcCatch(m){const R=S.roster;if(!R)return;const kh=j95kh();const k=S.place;
  for(const v of liveRivals(true)){const e=R.P["v"+v.id];if(!e||e[kh][0]!==k)continue;const out=j95catchRoll(v,S);if(out==="flee"){if(j95dice(BAL.odb.j95.dcJ95npcCatch))evA(v,S,BAL.eff.j95.evJ95npcCatch);continue}
@@ -462,7 +469,7 @@ function j95npcCatch(m){const R=S.roster;if(!R)return;const kh=j95kh();const k=S
   if(out==="rev")Q.push({t:"Có người thấy",who:pv(v),h:`<p>Lúc trở ra, ngươi thấy bóng ${v.name} khuất sau cửa. Nàng đã thấy ngươi đi cùng ${m.name}.</p>`});
   const hard=motiveOK(v,S,"expose");
   if(hard.ok&&hostility(v,S)>=netTh(v,"host")&&chOK(v,S,"tt")&&npwPick(["tell","hold"],x=>x==="tell"?hostility(v,S):Math.max(0,100-hostility(v,S)))==="tell"){/* G3: she accuses when her grudge outweighs keeping the card for later */const o=oddsCl(Math.min(25+chHave(v,S,"tt")*BAL.m95.accPer,90))/* rv F2 two-way: the tư thông pieces she (an NPC) holds on her */;if(j95dice(o)){affairExposed(m,`${v.name} tố giác:`);return}/* two-way law: a failed accusation costs the accuser what it costs her (Danh -8, resentment +25, regard -20, punishment) */ap(v,{danh:-BAL.tw.g.accFail[0]});oanAdd(S,v,BAL.tw.g.accFail[1]);affAdd(S,v,-BAL.tw.g.accFail[2]);punish(v,"vu cáo người khác tư thông",1)}
-  else if(aff(v,S)>=netTh(v,"than")){j95z().owe["by:"+v.id]=wk()}}}
+  else if(aff(v,S)>=netTh(v,"than")){j95owe(v,-1)/* P2: she kept quiet for her → she owes her (j72 ledger) */}}}
 
 /* ---------------- 8. DATA FOR THE KIT: habits she knows ---------------- */
 function habitsKnown(p){if(!S||!p||p===S)return[];const z=j95z();const O=z.obs[p.id]||{};const R=[];
@@ -627,7 +634,7 @@ function j95ledObj(id){const who=(S.roster.who||{})[id]||[];const c=id[0];try{
    return{kind:"srv",sk:"sv",ref:s,sid:s.sid,name:s.name,ini:String(s.name).split(" ").pop()[0],col:"#b9a48a",info:`${typeof srkName==="function"?srkName(s):(s.role==="maid"?"Cung nữ":"Thái giám")} · ${o===m?"cùng cung":o?"người của "+o.name:"Nội vụ phủ"}`}}}
   else if(c==="m"&&id[1]!=="m"){const x=manById(id);if(x&&x.alive){x.seen=bkey();return{kind:"srv",sk:"man",ref:x,mid:x.id,name:x.name.split(" ").slice(-2).join(" "),ini:x.name.split(" ").pop()[0],col:"#6a8aa0",info:`${x.role} · ${netTxt(x)} · ${tinhW(x.tinh)}`}}return null}
   else if(id.indexOf("q:")===0){const h=(trS().H||{})[id.slice(2)];return h?{kind:"min",ref:h,name:h.name,ini:"Quan",col:"#7a6a50",info:`${TDOFF[h.c]||"Quan"} · ${S.roster.P[id][j95kh()][0]==="thu"?"vào chầu":"dự yến"}`}:null}}
- if(c==="v"){const v=RV(+id.slice(1));if(!v||!v.alive)return null;if(v.out)return{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:"Phế phi"};return v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v)}
+ if(c==="v"){const v=RV(+id.slice(1));if(!v||!v.alive)return null;if(v.out)return{kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:outTitleN(v)||"Phế phi"};return v.queen&&qOn()?{...rp(v),kind:"hh",name:`Hoàng hậu ${v.name}`,ini:"鳳"}:rp(v)}
  if(id==="emp")return{kind:"emp",name:"Hoàng thượng",ini:"帝",col:"#f0d070",info:`niên hiệu ${empEra()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
  if(id==="th")return S.thDead?null:{kind:"th",name:"Thái hậu",ini:"Từ",col:"#c9a0e0",info:"Thái hậu"};
  if(id==="mm:me")return S.maid?{kind:"maid",name:S.maid.name,ini:S.maid.name.split(" ").pop()[0],col:"#b9a48a",info:`${kitMaidTitle()} · thiện cảm ${S.maid.loyal}`}:null;

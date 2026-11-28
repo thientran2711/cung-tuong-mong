@@ -7,7 +7,7 @@
      synth  = window.__bellCtx (bell, kg82Pluck fallback, Sổ tuần knock) is the unlocked context (else its first sound is made in a suspended context)
      first  = the very first touch of the session lands on a mini-game: its stroke sound plays (after the unlock) instead of being dropped
    usage: node dev/test/sfx-instant-scan.js <root> [index.html override] [WxH=755x1000]   → JSON; exit 1 when a check fails (after build only) */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,ROOT,IDX,SZ='755x1000']=process.argv;const [W,H]=SZ.split('x').map(Number);
 const MIME={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.mp3':'audio/mpeg','.webp':'image/webp','.png':'image/png','.svg':'image/svg+xml','.woff2':'font/woff2'};
 async function page(b){const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:true,deviceScaleFactor:1,serviceWorkers:'block'});

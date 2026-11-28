@@ -76,10 +76,10 @@ function kc2P(k){return kc2Pre()+k}
 function kc2Mine(k){return String(k).startsWith(kc2Pre())}
 
 /* ---------- words per kind: the home numbers reuse the jkc keys (kgt main bar, kap pressure, khm promised goods, kld rumour) ---------- */
-const KC2W={dan:{kgt:"Tiếng trong xóm",kap:"Nợ nhà",khm:"Của dành dụm",kty:"Ngày tuyển",rw:"Thôn nữ",road:"Thôn quê",tabs:{act:"Nhà tranh",rv:"Gia đình",staff:"Xóm làng",kid:"Tin tức"},
+const KC2W={dan:{kgt:"Tiếng trong xóm",kap:"Nợ nhà",khm:"Của dành dụm",kty:"Ngày tuyển",road:"Thôn quê",tabs:{act:"Nhà tranh",rv:"Gia đình",staff:"Xóm làng",kid:"Tin tức"},
   hx:{kgt:"Tiếng trong xóm (0–100): xóm giềng nói về ngươi thế nào. Ngày tuyển, lý trưởng và ma ma đều hỏi đến.",kap:`Nợ nhà (0–100): nợ cha mẹ vay của nhà lý trưởng, mỗi tháng lãi một ít. Tới ${BAL.kc2.st.dan.siet} chủ nợ đến siết.`,
    khm:"Của dành dụm: bạc ngươi để riêng, phòng ngày đi xa.",kty:"Ngày tuyển cung nữ: Nội vụ phủ về huyện chọn người. Khéo tay, lễ nghi và tiếng trong xóm quyết định ngươi về hầu cung nào."}},
- nc:{kgt:"Hòa ước",kap:"Phe chủ chiến",khm:"Hồi môn",kty:"Ngày lên đường",rw:"Công chúa",road:"Cố quốc",tabs:{act:"Tẩm cung",rv:"Vương tộc",staff:"Triều đình",kid:"Thư từ"},
+ nc:{kgt:"Hòa ước",kap:"Phe chủ chiến",khm:"Hồi môn",kty:"Ngày lên đường",road:"Cố quốc",tabs:{act:"Tẩm cung",rv:"Vương tộc",staff:"Triều đình",kid:"Thư từ"},
   hx:{kgt:"Hòa ước (0–100): thế đứng của ngươi trong hòa ước. Cao thì sang Đại Hy như một tân nương được trọng; thấp thì như một con tin.",kap:`Phe chủ chiến (0–100): những người muốn xé hòa ước. Mỗi tháng một mạnh; tới ${BAL.kc2.st.nc.pha} họ ra tay.`,
    khm:"Hồi môn: bạc và lễ vật cố quốc gửi theo ngươi sang Đại Hy.",kty:"Ngày lên đường: hòa ước ký xong thì ngươi theo sứ đoàn sang Đại Hy. Lễ ra mắt ở Đại Hy quyết định phẩm vị."}}};
 function kc2Wd(){return KC2W[kc2D()]||null}
@@ -93,9 +93,9 @@ function kc2Words(){try{const W=(S&&S.kc&&S.kc.kd)?KC2W[S.kc.kd]:(typeof NLP!=="
 
 /* ---------- title words: at home she is a Thôn nữ / a Công chúa, never a palace rank, never "Tiểu thư" ---------- */
 (function(){const t0=kcTitle;kcTitle=function(){const d=kc2D();if(d==="dan")return `Thôn nữ ${S.kc&&S.kc.vil?S.kc.vil:"họ "+tdSur(S.name)}`;if(d==="nc")return kc2L().title;return t0.apply(this,arguments)}})();
-(function(){const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);try{if(kc2On())f.rw=kc2Wd().rw}catch(e){}return f}})();
-(function(){const r0=rkOfFace;rkOfFace=function(kind,o){if(o===S&&kc2On())return["c0",kc2Wd().rw];return r0.apply(this,arguments)}})();
-(function(){const r0=rkName;rkName=function(p){if(p===S&&kc2On())return kc2Wd().rw;return r0.apply(this,arguments)}})();
+(function(){const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);try{if(isKc())f.rw=meRankN()}catch(e){}return f}})();
+(function(){const r0=rkOfFace;rkOfFace=function(kind,o){if(o===S&&kc2On())return["c0",meRankN()];if(o===S&&isKc()){const g=r0.apply(this,arguments);return Array.isArray(g)?[g[0],meRankN()]:g}return r0.apply(this,arguments)}})();
+(function(){const r0=rkName;rkName=function(p){if(p===S&&isKc())return meRankN();return r0.apply(this,arguments)}})();
 /* KIT name caption (kitName, KIT §48) of her own figure: at home (every home road, the tiểu thư ones too) the title is her home word, never the palace rank RANKS[S.rank] */
 (function(){if(typeof kitName!=="function")return;const n0=kitName;kitName=function(p,o){try{if(p===S&&o&&o.named&&!o.noTitle&&isKc()){const t=rkName(S);return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}"><span class="kti" style="--rt:${kitRtOf(t)}">${t}</span> ${S.name}</b>`}}catch(e){}return n0.apply(this,arguments)}})();
 
@@ -267,7 +267,7 @@ function kc2Month(){S.turn++;const K=S.kc;const d=K.kd;
  const n=S.turn-K.t0;const beat={4:0,10:1,16:2}[n];if(beat!=null&&!S.dead)pushDil(mkP("kcE",{e:(d==="dan"?"d_c":"n_c")+beat}),kc2ChT());
   if(S.turn>=K.due&&!K.sent&&!S.dead){K.sent=1;pushDil(mkP("kcE",{e:d==="dan"?"d_tuyen":"n_send"}),d==="dan"?"Ngày tuyển cung nữ":"Hòa ước ký xong")}
  S.month++;S.tuan=0;if(S.month>12){S.month=1;S.year++;S.age++;try{S.emp.age++;ageYear()}catch(e){}try{allKids().forEach(([kk])=>{if(kk.alive)kk.age++})}catch(e){}for(const m of K.fam)m.age++}
- if(S.suc<=BAL.kc2.kc2Month_min_suc&&isKc())kcDie(d==="dan"?"Lao lực mà chết trước ngày tuyển":"Kiệt sức mà chết trước ngày hòa thân")}
+ if(typeof kietDue==="function")kietDue();if(S.suc<=BAL.kc2.kc2Month_min_suc&&isKc()&&!(typeof kietSave==="function"&&kietSave()))kcDie(d==="dan"?"Lao lực mà chết trước ngày tuyển":"Kiệt sức mà chết trước ngày hòa thân")}
 function kc2ChT(){return S.kc.kd==="dan"?"Lệnh tuyển cung nữ":"Hòa ước"}
 /* the jkc tuyển tú never starts on these roads */
 (function(){const s0=kcSoTuyen;kcSoTuyen=function(){if(S&&S.kc&&S.kc.kd)return;return s0.apply(this,arguments)}})();

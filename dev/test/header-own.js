@@ -1,7 +1,7 @@
 /* review/header-own (D9, OD L607): the top bar keeps ONLY her own info; other people's info (Hoàng thượng, Thái hậu, Hoàng hậu, Cung nữ…) lives on the stage plaques (.k3c) and person cards.
    usage: node dev/test/header-own.js <index.html> <outdir> <WxH@dpr,...> [oldsave.json]   (serves a local index.html under the live origin, like header-danh.js)
    Per size: visible header text (must hold no other person), #emp hidden, plaques reachable in 1 tap and open a card with the person's numbers, overflow, page errors. Exit 1 on any FAIL. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,IDX,OUT,SIZES,OLD]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';
 const html=fs.readFileSync(IDX,'utf8');let FAIL=0;

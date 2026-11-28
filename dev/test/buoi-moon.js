@@ -1,5 +1,5 @@
 /* buoi-art moon: tối band shows the phase sprite by tuần (0 crescent, 1 full, 2 halfL); moon-band festivals show none and hide the orb moon; other buổi untouched. usage: node dev/test/buoi-moon.js <url> <outdir> */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});const FX=path.resolve(__dirname,'../../img/fx');const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();let fail=0;
  for(const [W,H,tag] of [[755,1000,'fold'],[1180,820,'ipad']]){const c=await b.newContext({serviceWorkers:'block',viewport:{width:W,height:H},deviceScaleFactor:1});const p=await c.newPage();const errs=[];

@@ -3,7 +3,7 @@
    (4) a kitPanel title; each title must read her dress title only («… Đáp ứng»), and a name tag (.kname) inside a title keeps «???».
    Also family scan: every title node on screen after 40 days of quick play (endTurn) is checked for the same words.
    usage: node dev/test/kit-title-name.js <index.html> [WxH,...] [shotdir]   exit 1 on FAIL */
-const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');const SHOT=process.argv[4]||'';
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');const SHOT=process.argv[4]||'';
 const BAD=/\?\?\?|(^|[^\p{L}])một vị|(^|[^\p{L}])một người|chưa quen biết|undefined|\bnull\b|NaN/iu;
 (async()=>{const b=await chromium.launch();let fails=0;const chk=(n,ok,v)=>{console.log((ok?'ok  ':'FAIL')+' '+n+' '+JSON.stringify(v));if(!ok)fails++};
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const p=await b.newPage({viewport:{width:W,height:H}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,140)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));

@@ -2,7 +2,7 @@
    Hooks kitDayName / kitChapterTitle set → «Ngày 1 — <name>» + «Chương 1 — <name>» appear on a NEW life (week 0); card fully inside the screen, tap closes;
    hooks absent → «Ngày N» only, no chapter line; later days (N > KIT_DAYT.opening) = the cổ trang date; a day change (dawn) shows it; a dead life / bot run shows nothing; no «%»; no page errors.
    usage: node dev/test/kit-daytitle.js <outdir> [WxH,...]   shots: <outdir>/kdt-<step>-<dev>.png */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const [,,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');const [,,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const ROOT=path.resolve(__dirname,'../..');const MT={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml'};
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m)=>{if(!c){bad++;console.log('FAIL',m)}else console.log('ok',m)};
  for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);const dev=W<1000?'fold':'ipad';

@@ -2,7 +2,7 @@
    Tuần lục book files it (her own "Việc của ngươi" vs that person's page vs world) and whether the printed text is broken ("( , )", "()"),
    and whether a number that is NOT hers is shown on her page. usage: node dev/test/emotion-acts-lines.js <build url>   (SEEN=1: every person counts as known)
    FAIL when a printed line is broken, or a line about someone else (no "ngươi" in it) is filed on her own page "Việc của ngươi". */
-const {chromium}=require('playwright');const [,,URL]=process.argv;
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block',reducedMotion:'reduce'});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof eaDo==='function'&&typeof wkBookData==='function',null,{timeout:120000});await p.waitForTimeout(2000);

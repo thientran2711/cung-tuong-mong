@@ -3,7 +3,7 @@
    toil / title / hd / face = real-tap recordings of the toilette dress chest, the Danh hiệu panel, the hoa điền step, the new-game face picker + a JSON line (ring opened, old picker hidden, result).
    check = open every wired picker, measure (ring present, front bright, tiles in view, no page errors, pane in view after focus, act gives result rows), JSON line.
    gift / shop = real touch taps / swipes recorded to <outdir>/<scene>-<WxH>.webm (owner look gate videos). */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,OUT,SC,WH]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const [W,H]=(WH||'755x1000').split('x').map(Number);const rec=SC!=='check';

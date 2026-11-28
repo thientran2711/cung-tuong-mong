@@ -5,7 +5,7 @@
    - the card fits the screen without scroll AND has no empty band at its bottom (owner OD 26/11 ~22:07Z (1): height = its content)
    - a REAL tap on the link opens the Sổ ghi tab · 0 page errors.
    (Row cap, nothing-lost-in-Sổ-ghi, search: one-sieve.test.js.)  usage: node dev/test/result-sieve-card.js <index.html> [WxH,...]  exit 1 on FAIL */
-const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');
 (async()=>{const b=await chromium.launch();let fails=0;const chk=(n,ok,v)=>{console.log((ok?'ok  ':'FAIL')+' '+n+' '+JSON.stringify(v===undefined?'':v).slice(0,300));if(!ok)fails++};
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const p=await b.newPage({viewport:{width:W,height:H}});const errs=[];p.on('pageerror',e=>{if(!/Unexpected token '<'/.test(e.message))errs.push(e.message.slice(0,140))});await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
   await p.goto('file://'+SRC,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof resultShow==='function',null,{timeout:240000});await p.waitForTimeout(1200);

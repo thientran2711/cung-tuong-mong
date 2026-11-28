@@ -187,7 +187,7 @@ function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")
  const worn=wornKey(S)===key;
  return kitPanel({kind:"reward",title:up?"Danh hiệu lên bậc":"Danh hiệu mới",sub:o.when,dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo",esc(chTxt(key,S.dh[key].i)||o.fx||"chỉ để làm đẹp")],["Xem lại","Nhiệm vụ › Danh hiệu"]]}],
-  opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Để sau",fx:{},x:"",go:()=>{}}]})}
+  opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Thôi",fx:{},x:"",go:()=>{}}]})}
 /* save-unseen-lists r2 (rv r2 FIX 1): «Danh hiệu mới / lên bậc» is carried by its key (j3 rcpReg) and made again on load; the title itself was
    granted before the card (dhInc), the remake only rebuilds the panel (no second log line, no second grant) */
 dhNotice=rcpReg("dhNotice",dhNotice);

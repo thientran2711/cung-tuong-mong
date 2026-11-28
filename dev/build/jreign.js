@@ -84,9 +84,9 @@ const RGBT={};
 function rgSideNow(){const s=S.reign.side;return s&&s!=="ngoai"?s:null}
 function rgJoinOpts(firstTime){const O=[];const fam=rgFam();const sd=S.reign.side;
  const fl=s=>fam?(fam===s?"phụ thân cùng phe":"trái ý phụ thân"):"";
- if(sd!=="emp")O.push({n:"Theo Hoàng thượng",s:"emp",join:"emp",w:{sung:firstTime?4:2},wx:["Hoàng thượng tin ngươi hơn",fl("emp"),"Thái hậu và nhà Tể tướng để ý ngươi"].filter(Boolean).join(", ")});
- if(sd!=="th"&&!S.thDead)O.push({n:"Theo Thái hậu",s:"th",join:"th",w:{th:firstTime?6:3},wx:["Thái hậu che chở ngươi",fl("th"),"nhà Tể tướng và phe bệ hạ để ý ngươi"].filter(Boolean).join(", ")});
- if(sd!=="quyen")O.push({n:rgDadQ()?"Theo phụ thân (Tể tướng)":`Theo ${rgQN()}`,s:"quyen",join:"quyen",w:{bac:firstTime?30:15},wx:["nhà Tể tướng hậu thuẫn ngươi bằng bạc và tin tức",fl("quyen"),"Hoàng thượng và Thái hậu để ý ngươi"].filter(Boolean).join(", ")});
+ if(sd!=="emp")O.push({n:"Theo Hoàng thượng",s:"emp",join:"emp",grp:1,w:{sung:firstTime?4:2},wx:["Hoàng thượng tin ngươi hơn",fl("emp"),"Thái hậu và nhà Tể tướng để ý ngươi"].filter(Boolean).join(", ")});
+ if(sd!=="th"&&!S.thDead)O.push({n:"Theo Thái hậu",s:"th",join:"th",grp:1,w:{th:firstTime?6:3},wx:["Thái hậu che chở ngươi",fl("th"),"nhà Tể tướng và phe bệ hạ để ý ngươi"].filter(Boolean).join(", ")});
+ if(sd!=="quyen")O.push({n:rgDadQ()?"Theo phụ thân (Tể tướng)":`Theo ${rgQN()}`,s:"quyen",join:"quyen",grp:1,w:{bac:firstTime?30:15},wx:["nhà Tể tướng hậu thuẫn ngươi bằng bạc và tin tức",fl("quyen"),"Hoàng thượng và Thái hậu để ý ngươi"].filter(Boolean).join(", ")});
  return O}
 RGBT.c1a={w:"emp",t:"Đêm khuya ở Cần Chính điện, Hoàng thượng gác bút. Chồng tấu chương trước mặt ngài, bản nào cũng đã có lời phê sẵn của {q}. Ngài thở dài: “Trẫm ngồi trên ngai vàng, mà tấu chương nào cũng phải để Tể tướng phê trước. Việc gì trẫm muốn làm, Tể tướng đã quyết thay trẫm rồi.” Rồi ngài quay sang ngươi: “{Goi} thấy trẫm nên làm thế nào?” Ngươi nên đáp ra sao?",
  o:[{n:"Khuyên ngài nhẫn nại chờ thời",w:{...BAL.cv.reign.nhan},pw:1,s:"emp",wx:"Hoàng thượng thấy ngươi hiểu chuyện"},
@@ -202,7 +202,7 @@ function rgLine(o){const od=rgOd(o),c=rgCost(o.c);const cost=fmt(c);const win=[f
  return `${word(od)} · ${cost?"tốn: "+cost+" · ":""}thành: ${win||"qua được"} · hỏng: ${lose||"không mất gì thêm"}`}
 PEND.rg=pp=>{try{if(!rgOn())return null;const b=rgBeatDef(pp.b);if(!b)return null;const O=rgOpts(b);if(!O.length)return null;
  const t=typeof b.t==="function"?b.t():b.t;const wk_=typeof b.w==="function"?b.w():b.w;
- const d={who:rgWho(wk_)||pMe(),t:rgTok(t,null,wk_),o:O.map((o,i)=>{const od=rgOd(o);return{n:rgTok(o.n),fx:rgCost(o.c),j67:rgLine(o),rgS:o.s||o.join||"",go:()=>rgRes(pp.b,i,od)}})};
+ const d={who:rgWho(wk_)||pMe(),t:rgTok(t,null,wk_),o:O.map((o,i)=>{const od=rgOd(o);return{n:rgTok(o.n),fx:rgCost(o.c),j67:rgLine(o),rgS:o.s||o.join||"",grp:o.grp?1:0,go:()=>rgRes(pp.b,i,od)}})};
  if(b.faces){const F=[["emp","Hoàng thượng"],["th","Thái hậu"],["q",(rgQH()||{name:"Tể tướng"}).name]].map(([k,n])=>[rgWho(k),n]).filter(x=>x[0]);if(F.length>=2)d.faces=F}
  return d}catch(e){console.error(e);return null}};
 function rgFire(id){const d=mkP("rg",{b:id});if(!d)return false;const m={t:rgTitle(id),h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp};if(d.faces)m.faces=d.faces;Q.push(m);try{evBusyMark()}catch(e){}return true}

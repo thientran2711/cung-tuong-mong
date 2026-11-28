@@ -16,9 +16,9 @@
    - Motion (transform / opacity only, kitHandStill = none): the picture settles, the speaker walks in from the left, she from the right, the
      speech box drops in, then kitHand deals.
    Data / taps are unchanged: the same #modal, the same buttons, the same choose path (chooseM). Numbers: geometry knobs only (KIT_STAGE). */
-const KIT_STAGE={pad:8,fig:[.98,.98]/* figure height share of the room [fold,ipad] */,feetIn:.30/* share of the hand height the feet may stand behind the cards */,
+const KIT_STAGE={pickCol:.42/* §102.3 iPad: place lines column share */,pickBand:.34/* §102.3 Fold: place lines band height share */,pickGap:14,pad:8,fig:[.98,.98]/* figure height share of the room [fold,ipad] */,feetIn:.30/* share of the hand height the feet may stand behind the cards */,
  faceK:.19/* the face band = top share of the painted figure */,midMin:420/* px between the figures for the speech box beside them (else it goes under the faces) */,
- boxMaxW:[720,760],plateW:560,sayW:460/* iPad speech bubble */,sayPer:3/* thẻ gỗ per page (RD5 rec «≤3 thẻ mỗi trang») */,fold:"foot"/* one-page (Fold) speech place: "foot" = a slim subtitle band over the figures' lower half, just above the hand | "top" = a slim band under the title plaque, the figures stand below it (owner 25/11 ~21:50Z «chỉ là hình nhân vật xuất hiện cùng với những cái thông tin»; MAIN 146 picks; html[data-kstfold] overrides for the review pair) */,talkIds:["adStroll","rcvHelp","thbirthday","cmTt","cmTd","vnight"]/* §102.2 the events that are a CONVERSATION (a person speaks to her; MAIN 148 25/11 ~23:45Z): their Q item pid = talk:1 */,bodyK:.45/* the speech never covers the top half of a painted figure (one page) */,topCap:.30/* "top": the band takes at most this share of the layer */,inMs:[620,520,300],veil:"linear-gradient(to bottom,rgba(20,12,8,0) 55%,rgba(20,12,8,.34) 100%)"};
+ boxMaxW:[720,760],plateW:560,sayW:460/* iPad speech bubble */,fold:"foot"/* one-page (Fold) speech place: "foot" = a slim subtitle band over the figures' lower half, just above the hand | "top" = a slim band under the title plaque, the figures stand below it (owner 25/11 ~21:50Z «chỉ là hình nhân vật xuất hiện cùng với những cái thông tin»; MAIN 146 picks; html[data-kstfold] overrides for the review pair) */,talkIds:["adStroll","rcvHelp","thbirthday","cmTt","cmTd","vnight"]/* §102.2 the events that are a CONVERSATION (a person speaks to her; MAIN 148 25/11 ~23:45Z): their Q item pid = talk:1 */,bodyK:.45/* the speech never covers the top half of a painted figure (one page) */,topCap:.30/* "top": the band takes at most this share of the layer */,inMs:[620,520,300],veil:"linear-gradient(to bottom,rgba(20,12,8,0) 55%,rgba(20,12,8,.34) 100%)"};
 (function(){try{const st=document.createElement("style");st.id="kit-stage";st.textContent=`
 html body #modal.kstg{background:transparent!important}
 html body #modal#modal#modal#modal#modal.kstg .dlg.kstage{position:fixed!important;left:var(--kstL)!important;top:var(--kstT)!important;width:var(--kstW)!important;height:var(--kstH)!important;max-width:none!important;max-height:none!important;min-height:0!important;
@@ -92,11 +92,18 @@ function kstgFigs(dl,mb){try{const m=typeof Q!=="undefined"&&Q&&Q[0]||null;let w
  const old=mb.querySelector(".kszfig");
  let src="";try{if(who&&who!==S&&typeof kitFigOf==="function")src=kitFigOf(who)}catch(e){}if(!src){const im=old&&old.querySelector("img");src=im&&(im.getAttribute("src")||"")||""}
  const tg=old&&old.querySelector(".kt3");kstgFig(mb,"kstg-sp",who===S?"":src,own||(tg?tg.innerHTML:""));
- let me="";try{me=typeof kitFigOf==="function"?kitFigOf(S):(typeof figFor==="function"?figFor(S):"")}catch(e){}
- /* RING-BUILD (owner OD 26/11 ~18:55Z «Mình chỉ cần một người đứng ở đó lúc đó là được rồi. 2 người xuất hiện chỉ khi nào mà đó là cuộc hội thoại giữa 2 người»): ONE person on the stage — HER figure joins the speaker only on a two-person DIALOGUE frame (§102.2 kstgTalkWants); a card frame with a speaker shows the speaker alone; a frame with no other speaker keeps only HER */
- const spk=mb.querySelector(":scope>.kstg-sp img"),spSrc=spk&&spk.getAttribute("src");let two=true;try{two=kstgTalkWants(dl)}catch(e){}const isMe=!!spSrc&&!!me&&spSrc.replace(/^.*img\//,"")===String(me).replace(/^.*img\//,"");if(two||!spSrc||isMe)kstgFig(mb,"kstg-me",me,"");else{const o=mb.querySelector(":scope>.kstg-me");if(o)o.remove()}
+ let me="",me2skip=0;try{me=typeof kitFigOf==="function"?kitFigOf(S):(typeof figFor==="function"?figFor(S):"")}catch(e){}{const pk0=kstgPickWants();let sp0=mb.querySelector(":scope>.kstg-sp");const sq=s=>String(s||"").replace(/^.*img\//,"");if(sp0&&me&&sq((sp0.querySelector("img")||{}).getAttribute&&sp0.querySelector("img").getAttribute("src"))===sq(me)){sp0.remove();sp0=null}/* KK36 dedupe first: a «speaker» that is HER is no speaker */if(pk0||(!kstgTalkWants(dl)&&sp0))me2skip=1}if(!me2skip)kstgFig(mb,"kstg-me",me,"");
  /* KK36 (STG scan: 12 story frames tt1–3, td1, nc1, ge1, prep, phoenix, thInv, vl* had HER on both sides): a frame with no other speaker keeps only HER figure */
- const sp=mb.querySelector(":scope>.kstg-sp"),spi=sp&&sp.querySelector("img"),strip=s=>String(s||"").replace(/^.*img\//,"");if(sp&&spi&&me&&strip(spi.getAttribute("src"))===strip(me))sp.remove()}catch(e){console.error("kstgFigs",e)}}
+ const sp=mb.querySelector(":scope>.kstg-sp"),spi=sp&&sp.querySelector("img"),strip=s=>String(s||"").replace(/^.*img\//,"");if(sp&&spi&&me&&strip(spi.getAttribute("src"))===strip(me))sp.remove();
+ /* §102.7 ONE FIGURE (owner OD 26/11 ~18:55Z «Mình chỉ cần một người đứng ở đó lúc đó là được rồi. 2 người xuất hiện chỉ khi nào mà đó là cuộc hội thoại giữa 2 người»):
+    only a DIALOGUE (§102.2, kstgTalkWants) has two figures; any other stage keeps ONE — the speaker when there is one (her figure never walks in), else her.
+    A thẻ gỗ place card (§102.3, kind "pick") has no figure at all: the place painting + its signpost. */
+ const two=kstgTalkWants(dl),pk=kstgPickWants(),sp2=mb.querySelector(":scope>.kstg-sp"),me2=mb.querySelector(":scope>.kstg-me");
+ /* §102.7 NO FIGURE ON AN EVENT STAGE (owner OD 26/11 ~22:07Z, verbatim: "những cái khung sự kiện thế này là mình bỏ cái hình nhân vật luôn, mình chỉ để cái nền của sự kiện cho nó đẹp thôi, rồi sau đó hiện mấy cái lá bài và cái khung thông tin ở trên"; CANON OVERWRITE of «one figure»):
+    a Bàn bài / thẻ gỗ event stage = the event background + the cards + the info box; figures stand only in a DIALOGUE (§102.2, two people talking). */
+ if(!two){if(sp2)sp2.remove();if(me2)me2.remove()}}catch(e){console.error("kstgFigs",e)}}
+/* §102.3 kind "pick" (KIT §101.9 kitKind): the frame's choices are THẺ GỖ TREO on the stage, never a hand */
+function kstgPickWants(){try{return typeof kitKind==="function"&&typeof Q!=="undefined"&&kitKind(Q[0])==="pick"}catch(e){return false}}
 /* the painted part of a figure picture (opaque box, §93.2 kscnOpaque) — cached per picture */
 const KST_OB=new Map();function kstgOb(im){try{const k=im&&(im.currentSrc||im.src);if(!k)return null;if(KST_OB.has(k))return KST_OB.get(k);if(!im.complete||!im.naturalWidth)return null;const o=typeof kscnOpaque==="function"?kscnOpaque(im):{l:0,r:1,t:0,b:1};KST_OB.set(k,o);return o}catch(e){return null}}
 /* turn the dialog into the stage (classes + background + her figure); idempotent */
@@ -150,24 +157,27 @@ function kstgIn(dl){try{const still=typeof kitHandStill==="function"&&kitHandSti
   const sp=mb.querySelector(":scope>.kstg-sp"),me=mb.querySelector(":scope>.kstg-me");
   if(sp)sp.animate([{transform:"translateX(-36%)"},{transform:"none"}],{duration:a,easing:E,fill:"backwards"});
   if(me)me.animate([{transform:"translateX(30%)"},{transform:"none"}],{duration:b,delay:160,easing:E,fill:"backwards"})})}catch(e){}}
-/* the details plate on the stage: above the lifted card, never over a face */
+/* the ENLARGED card on the stage (KIT §101.10 no flip, one part with the hand): in the centre under the faces band; the story box ends above it */
 function kstgPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg.kstage");if(!dl)return;const z=dl.querySelector(":scope>.khplate");if(!z||z.hidden)return;
- const W=dl.clientWidth,D=dl.getBoundingClientRect(),B=b.getBoundingClientRect(),G=g.getBoundingClientRect();const lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0;
- const bottom=Math.min(G.top+lift+2,B.top-6)-D.top-(b.disabled?0:Math.round(((typeof KIT_HAND!=="undefined"&&KIT_HAND.confPx)||44)*.6));const top0=(dl.__kstFace||0)+4;const w=Math.min(KIT_STAGE.plateW,W-16);let x=Math.round(Math.max(8,Math.min(W-8-w,B.left-D.left+B.width/2-w/2)));
- z.style.left=x+"px";z.style.width=w+"px";z.style.bottom=Math.round(D.height-bottom)+"px";z.style.maxHeight=Math.max(80,Math.round(bottom-top0))+"px";z.style.top="auto";
- /* the story box beside the faces (iPad) never runs under the plate: it ends above the plate's top and shows its LAST lines (MAIN 147 look: the plate covered the last story line; KK34) */
- const pm=dl.querySelector(".kpmain:not(.kstg-foot):not(.ksay)");if(pm&&dl.__kstBox){const pt=bottom-z.offsetHeight-8,bh=Math.max(60,Math.round(pt-dl.__kstBox.by));if(dl.__kstBox.by+pm.offsetHeight>pt){pm.style.setProperty("--bhL",bh+"px");requestAnimationFrame(()=>{pm.scrollTop=pm.scrollHeight})}else pm.style.removeProperty("--bhL")}}catch(e){console.error("kstgPlate",e)}}
+ const D=dl.getBoundingClientRect();const top0=D.top+(dl.__kstFace||0)+4;if(typeof kitHandBigPlace==="function")kitHandBigPlace(b,z,dl,top0,D.left+8,D.right-8);
+ /* the story box beside the faces (iPad) never runs under the enlarged card: it ends above its top and shows its LAST lines (MAIN 147 look; KK34) */
+ const pm=dl.querySelector(".kpmain:not(.kstg-foot):not(.ksay)");if(pm&&dl.__kstBox&&z.__khRect){const pt=z.__khRect.t-8,bh=Math.max(60,Math.round(pt-dl.__kstBox.by));if(dl.__kstBox.by+pm.offsetHeight>pt){pm.style.setProperty("--bhL",bh+"px");requestAnimationFrame(()=>{pm.scrollTop=pm.scrollHeight})}else pm.style.removeProperty("--bhL")}}catch(e){console.error("kstgPlate",e)}}
 (function(){if(typeof kitHandLay!=="function")return;const L0=kitHandLay;
  kitHandLay=function(g,quiet){let dl=null;try{dl=g&&g.closest&&g.closest(".dlg");if(dl&&kitHandWants(g))kstgOn(dl,g)}catch(e){}
   const r=L0.call(this,g,dl&&dl.classList.contains("kstage")?true:quiet);/* the stage owns the frame: the frame-fit passes (kszEvLaw10 / kszTextFirst3) do not run on it */
   try{if(dl&&dl.classList.contains("kstage")){if(!kstgWants(dl)){kstgOff(dl)}else{kstgPlace(dl);const L=g.querySelector(":scope>button.klift");if(L)kstgPlate(L)}}}catch(e){}return r};window.kitHandLay=kitHandLay;
  if(typeof kitHandPlate==="function"){const P0=kitHandPlate;kitHandPlate=function(b){const r=P0.apply(this,arguments);kstgPlate(b);return r};window.kitHandPlate=kitHandPlate}})();
-function kstgOff(dl){try{dl.classList.remove("kstage","kstalk");if(dl.__kstT){try{dl.__kstT.P&&dl.__kstT.P.destroy()}catch(e){}dl.__kstT=null}/* KK35: a talk's thẻ gỗ never outlive the stage */["--kstL","--kstT","--kstW","--kstH"].forEach(p=>dl.style.removeProperty(p));dl.querySelectorAll(":scope>.kstg-bg,:scope>.kstg-veil,:scope>#mb>.kstg-fig").forEach(e=>e.remove());
- const M=document.getElementById("modal");if(M)M.classList.remove("kstg");document.body.classList.remove("kscn-on")}catch(e){}}
+/* COOP-QCARD (RV-173, law 11): body.kscn-on has TWO owners — this stage (a #modal dialog drawn as a stage) and the kit scene layer (kitScene, jkitsel
+   §93: the selection days, the ring screens). The stage dropped it whenever #modal was hidden or repainted, even while a kit scene was still playing:
+   the mood seal (.kemo-big) popped over the scene and every check that reads «a scene is up» (body.kscn-on) saw none. The stage now lets it go only
+   when no kit scene is open. */
+function kstgScnOff(){try{if(typeof kitScene==="object"&&kitScene&&kitScene.cur)return;document.body.classList.remove("kscn-on")}catch(e){}}
+function kstgOff(dl){try{dl.classList.remove("kstage","kstalk","kspick");if(dl.__kstT){try{dl.__kstT.P&&dl.__kstT.P.destroy()}catch(e){}dl.__kstT=null}/* KK35: a talk's thẻ gỗ never outlive the stage */["--kstL","--kstT","--kstW","--kstH"].forEach(p=>dl.style.removeProperty(p));dl.querySelectorAll(":scope>.kstg-bg,:scope>.kstg-veil,:scope>#mb>.kstg-fig").forEach(e=>e.remove());
+ const M=document.getElementById("modal");if(M)M.classList.remove("kstg");kstgScnOff()}catch(e){}}
 /* a closed / replaced dialog leaves no stage classes behind (the next frame decides again) */
-(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){try{const M=document.getElementById("modal");if(M){if(M.hidden)M.__kstFresh=1;M.classList.remove("kstg");document.body.classList.remove("kscn-on")}}catch(e){}return s0.apply(this,arguments)};window.showModal=showModal;
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){try{const M=document.getElementById("modal");if(M){if(M.hidden)M.__kstFresh=1;M.classList.remove("kstg");kstgScnOff()}}catch(e){}return s0.apply(this,arguments)};window.showModal=showModal;
  let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(()=>{document.querySelectorAll("#modal .dlg.kstage").forEach(dl=>{kstgOn(dl);const g=dl.querySelector(".opts.khand");if(g){g.__khSig="";kitHandLay(g,true)}})},140)})})();
-(function(){const M=document.getElementById("modal");if(!M||typeof MutationObserver!=="function")return;new MutationObserver(()=>{if(M.hidden){M.classList.remove("kstg");document.body.classList.remove("kscn-on")}}).observe(M,{attributes:true,attributeFilter:["hidden"]})})();
+(function(){const M=document.getElementById("modal");if(!M||typeof MutationObserver!=="function")return;new MutationObserver(()=>{if(M.hidden){M.classList.remove("kstg");kstgScnOff()}}).observe(M,{attributes:true,attributeFilter:["hidden"]})})();
 /* ===== §102.2 DIALOGUE ON THE STAGE (owner 25/11 ~22:00Z «làm luôn cái khung sự kiện đối thoại. Là đối thoại xong rồi có các cái option chọn bằng cái thẻ gỗ»;
    24/11 ~15:15Z: odds choices = cards (đỏ đen), a talk between people = the conversation look: speaker left, her answers right).
    ONE rule: a stage frame whose choices carry NO odds (no kit odds meter on any card; Q item talk:1 / talk:0 overrides) is a DIALOGUE:
@@ -178,37 +188,46 @@ function kstgOff(dl){try{dl.classList.remove("kstage","kstalk");if(dl.__kstT){tr
      tap = lift + line, green ✓ = choose (the frame's own card is chosen: same chooseM path), ✕ = put back.
    The hand cards stay in the DOM (hidden) as the data + choose path; nothing else changes. */
 function kstgTalkWants(dl,g){try{const m=typeof Q!=="undefined"&&Q[0];if(m&&m.talk===0)return false;if(m&&(m.talk===1||KIT_STAGE.talkIds.includes(m.pid)))return true;
- return false/* only the events MAIN marked (KIT_STAGE.talkIds / Q item talk:1): a card frame with no odds word (no-roll options: no odds word, FIRSTCARD-3 ODDS WORD RULE) stays a hand (KK34) */}catch(e){return false}}
-function kstgTalkOn(dl,g){try{if(!dl.classList.contains("kstage"))return false;const on=kstgTalkWants(dl,g);dl.classList.toggle("kstalk",on);if(!on){if(dl.__kstT){try{dl.__kstT.P&&dl.__kstT.P.destroy()}catch(e){}dl.__kstT=null}return false}
+ return false/* only the events MAIN marked (KIT_STAGE.talkIds / Q item talk:1): a card frame with no odds word (certain outcomes, KIT_ODDS_SURE off) stays a hand (KK34) */}catch(e){return false}}
+function kstgTalkOn(dl,g){try{if(!dl.classList.contains("kstage"))return false;const pk=kstgPickWants(),on=pk||kstgTalkWants(dl,g);dl.classList.toggle("kstalk",on);dl.classList.toggle("kspick",pk&&on);if(!on){if(dl.__kstT){try{dl.__kstT.P&&dl.__kstT.P.destroy()}catch(e){}dl.__kstT=null}return false}
  /* the talk state lives on the Q item (a re-render of the frame makes a new .dlg: the line she reached and the open plaques stay) */
  const m=typeof Q!=="undefined"&&Q[0]||null;if(m){if(!m.__kstT)m.__kstT={i:0,asked:false,P:null};if(dl.__kstT!==m.__kstT){const o=dl.__kstT;dl.__kstT=m.__kstT;if(o&&o.P&&o!==m.__kstT)try{o.P.destroy()}catch(e){}if(dl.__kstT.P&&dl.__kstT.P.host!==dl){try{dl.__kstT.P.destroy()}catch(e){}dl.__kstT.P=null;dl.__kstT.sig=""}}}else if(!dl.__kstT)dl.__kstT={i:0,asked:false,P:null};
- if(!dl.__kstL){dl.__kstL=1;dl.addEventListener("click",e=>{try{const t=e.target;if(!dl.__kstT||!dl.classList.contains("kstalk"))return;if(t.closest(".kpk,.khconf,.kph,.kseal,button"))return;kstgTalkNext(dl)}catch(x){}})}
+ if(!dl.__kstL){dl.__kstL=1;dl.addEventListener("click",e=>{try{const t=e.target;if(!dl.__kstT||!dl.classList.contains("kstalk"))return;if(t.closest(".kpk,.khconf,.kph,.kseal,button"))return;if(dl.classList.contains("kspick"))return;kstgTalkNext(dl)}catch(x){}})}
+ if(pk&&dl.__kstT)dl.__kstT.asked=true;/* §102.3: the plaques hang at once (no lines to step through) */
  return true}catch(e){return false}}
 function kstgLines(dl){return[...dl.querySelectorAll(".kpmain .kfacts>.kfact")].filter(x=>(x.textContent||"").trim())}
 function kstgTalkShow(dl){const T=dl.__kstT,L=kstgLines(dl);if(!T||!L.length)return;T.i=Math.min(T.i,L.length-1);L.forEach((x,k)=>x.classList.toggle("kson",k===T.i));
  const pm=dl.querySelector(".kpmain");if(pm){const me=L[T.i].classList.contains("kfme");pm.classList.toggle("ksay-me",me);pm.classList.toggle("ksay-sp",!me);pm.classList.toggle("ksay-more",T.i<L.length-1||!T.asked)}}
 function kstgTalkNext(dl){const T=dl.__kstT,L=kstgLines(dl);if(!T||!L.length)return;if(T.i<L.length-1)T.i++;else{if(!T.asked){T.asked=true;kstgTalkPlace(dl);return}T.i=0}
  kstgTalkShow(dl);kstgTalkPlace(dl);const pm=dl.querySelector(".kpmain");if(pm&&!(typeof kitHandStill==="function"&&kitHandStill()))pm.animate([{opacity:.2,transform:"translateY(4px)"},{opacity:1,transform:"none"}],{duration:180,easing:"ease-out"})}
-function kstgTalkPlace(dl,c){try{const T=dl.__kstT;if(!T)return;const pm=dl.querySelector(".kpmain");if(!pm)return;c=c||dl.__kstC;if(!c)return;dl.__kstC=c;const K=KIT_STAGE,{W,H,ip}=c;
+function kstgTalkPlace(dl,c){try{if(dl.classList.contains("kspick"))return kstgPickPlace(dl,c);const T=dl.__kstT;if(!T)return;const pm=dl.querySelector(".kpmain");if(!pm)return;c=c||dl.__kstC;if(!c)return;dl.__kstC=c;const K=KIT_STAGE,{W,H,ip}=c;
  kstgTalkShow(dl);pm.classList.add("ksay");pm.classList.remove("kstg-foot","kstg-top");
  /* bubble geometry: Fold = foot subtitle, iPad = between the figures beside the faces */
  let bw,bx,by;const side=!!(ip&&c.midR-c.midL>=K.midMin);pm.classList.toggle("ksay-side",side);if(side){bw=Math.min(K.sayW,c.midR-c.midL);bx=Math.round(c.midL+(c.midR-c.midL-bw)/2);pm.style.setProperty("--bw",bw+"px");pm.style.setProperty("--bh",Math.round(H*.36)+"px");pm.style.setProperty("--bx",bx+"px");by=Math.round(c.faceBot-12);pm.style.setProperty("--by",by+"px")}
  else{bw=Math.min(K.boxMaxW[ip],W-2*K.pad-8);bx=Math.round((W-bw)/2);pm.style.setProperty("--bw",bw+"px");pm.style.setProperty("--bh",Math.round(H*.24)+"px");pm.style.setProperty("--bx",bx+"px");const h=pm.offsetHeight;by=H-10-h;pm.style.setProperty("--by",by+"px")}
  const tail=pm.classList.contains("ksay-me")?(c.me?.6:.5):.22;pm.style.setProperty("--ktail",Math.round(bw*(pm.classList.contains("ksay-me")?.78:.16))+"px");
  if(T.asked)kstgTalkAsk(dl,{bx,by,bw,bh:pm.offsetHeight,ip,W,H})}catch(e){console.error("kstgTalkPlace",e)}}
-function kstgTalkAsk(dl,B){try{if(typeof kitPick==="undefined")return;const T=dl.__kstT,g=dl.querySelector(".opts.khand");if(!g)return;const bs=kitHandCards(g);
+function kstgTalkAsk(dl,B,A0){try{if(typeof kitPick==="undefined")return;const T=dl.__kstT,g=dl.querySelector(".opts.khand");if(!g)return;const bs=kitHandCards(g);
  const me=dl.querySelector("#mb>.kstg-me"),im=me&&me.querySelector("img");const D=dl.getBoundingClientRect();let A;
- if(me){const r=me.getBoundingClientRect(),ob=kstgOb(im)||{l:.1,r:.9,t:.02,b:1};A={x:r.left-D.left+ob.l*r.width,y:r.top-D.top+ob.t*r.height,w:(ob.r-ob.l)*r.width,h:(ob.b-ob.t)*r.height}}else A={x:B.W*.62,y:B.H*.15,w:B.W*.3,h:B.H*.7};
- if(!B.ip){A.h=Math.max(120,Math.min(A.h,B.by-8-A.y))}/* Fold: the plaques hang above the foot subtitle */
+ if(A0)A=A0;else if(me){const r=me.getBoundingClientRect(),ob=kstgOb(im)||{l:.1,r:.9,t:.02,b:1};A={x:r.left-D.left+ob.l*r.width,y:r.top-D.top+ob.t*r.height,w:(ob.r-ob.l)*r.width,h:(ob.b-ob.t)*r.height}}else A={x:B.W*.62,y:B.H*.15,w:B.W*.3,h:B.H*.7};
+ if(!B.ip&&!A0){A.h=Math.max(120,Math.min(A.h,B.by-8-A.y))}/* Fold: the plaques hang above the foot subtitle */
  const acts=bs.map((b,i)=>{const kan=b.querySelector(".kan");const kc=kan?kan.cloneNode(true):null;if(kc)kc.querySelectorAll(".kodds,.khnx,small,.kb,.kwhy,.md,img,.kitmk").forEach(e=>e.remove());const n=((kc&&kc.textContent)||"").replace(/\s+/g," ").trim()||kitOptPlain(b.textContent);const im2=b.querySelector(".kaart img");const ton=b.querySelector(".kr-ton .krv");const why=b.querySelector(".kwhy");
-  const ow=b.querySelector(".kodds .kow,.kodds b,.kodds");const wd=((b.querySelector(".kodds")||{}).textContent||"").match(new RegExp(KIT_ODDS.slice().sort((x,y)=>y.length-x.length).join("|")));/* the odds word only on a real roll (a no-roll answer has no .kodds, FIRSTCARD-3 ODDS WORD RULE) */return {id:String(i),n,word:wd?wd[0]:"",pic:im2&&(im2.getAttribute("src")||""),ton:ton&&!/^(không|—|-)?$/i.test(ton.textContent.trim())?ton.textContent.trim():"",off:!!b.disabled,why:why&&why.textContent.trim()||""}});
- const per=K_SAYPER(),groups=[];for(let i=0;i<acts.length;i+=per)groups.push({k:"p"+(i/per),n:acts.length>per?`Đáp · ${i/per+1}`:"",acts:acts.slice(i,i+per)});
+  const ow=b.querySelector(".kodds .kow,.kodds b,.kodds");const wd=((b.querySelector(".kodds")||{}).textContent||"").match(new RegExp(KIT_ODDS.slice().sort((x,y)=>y.length-x.length).join("|")));/* the odds word only on a real roll (a certain answer has no .kodds, KIT_ODDS_SURE off) */return {id:String(i),n,word:wd?wd[0]:"",pic:im2&&(im2.getAttribute("src")||""),ton:ton&&!/^(không|—|-)?$/i.test(ton.textContent.trim())?ton.textContent.trim():"",off:!!b.disabled,why:why&&why.textContent.trim()||""}});
+ const pk=!!A0,per=Math.max(acts.length,1)/* owner 26/11 ~21:25Z + MAIN 164 ruling: NO paging of thẻ gỗ either — every answer (≤ 7, KIT_HAND.max, cut at the source) hangs at once */,groups=[];for(let i=0;i<acts.length;i+=per)groups.push({k:"p"+(i/per),n:acts.length>per?`${pk?"Việc":"Đáp"} · ${i/per+1}`:"",acts:acts.slice(i,i+per)});
  const sig=acts.map(a=>a.n).join("|")+"|"+Math.round(A.x)+","+Math.round(A.y)+","+Math.round(A.h);if(T.P&&T.P.open&&T.sig===sig)return;const grp=T.P&&T.P.group;try{T.P&&T.P.destroy()}catch(e){}T.sig=sig;
  const sp=dl.querySelector("#mb>.kstg-sp");const av=[];if(sp){const r=sp.getBoundingClientRect();av.push({x:r.left-D.left,y:r.top-D.top,w:r.width,h:r.height})}
- T.P=kitPick.open({host:dl,anchor:A,side:"l",groups,group:grp||groups[0].k,dismiss:false,avoid:av,noLap:false,
+ T.P=kitPick.open({host:dl,anchor:A,side:pk?"r":"l",groups,group:grp||groups[0].k,dismiss:false,avoid:av,noLap:false,
   onPick:(id)=>{const b=bs[+id];if(!b||b.disabled)return;const P=T.P;T.P=null;try{P.destroy()}catch(e){}b.click()},
   onOff:(a)=>{}})}catch(e){console.error("kstgTalkAsk",e)}}
-function K_SAYPER(){return KIT_STAGE.sayPer}
+/* §102.3 THẺ GỖ AT THE PLACE (kind "pick": the place card KIT 32.8 — Đi tới / Xin bái kiến / Xin yết kiến / Lẻn vào / greeting / last walk; OD 26/11 ~19:00Z, KK44 row «place card»):
+   the place painting fills the stage (kstgPic = the card's place picture), no figure (§102.7), the place lines (Chủ vị · Đường đi · Còn · Bóng người · Giờ + the card's own lines)
+   in the light story box — iPad: a left column; Fold: a band under the title plaque — and the card's choices hang as THẺ GỖ TREO (kitPick §98.1) on a signpost beside the box
+   (iPad: right of the column; Fold: under the band), at most KIT_PLAQUE.max per page («Việc · 1/2»); ✓ = the card's own button is chosen (same chooseM path). */
+function kstgPickPlace(dl,c){try{const T=dl.__kstT,pm=dl.querySelector(".kpmain");if(!T||!pm||!c)return;dl.__kstC=c;const K=KIT_STAGE,{W,H,ip,T0}=c;pm.classList.remove("ksay","kstg-foot","kstg-top","ksay-me","ksay-sp","ksay-more","ksay-side");
+ const set=(bx,by,bw,bh)=>{pm.style.setProperty("--bx",bx+"px");pm.style.setProperty("--by",by+"px");pm.style.setProperty("--bw",bw+"px");pm.style.setProperty("--bh",bh+"px");dl.__kstBox={bx,by,bw,bh}};
+ let A;if(ip){const bw=Math.min(K.boxMaxW[ip],Math.round(W*K.pickCol)),bx=K.pad+4,by=T0+10;set(bx,by,bw,H-by-K.pad);A={x:bx+bw+K.pickGap,y:by,w:8,h:H-by-K.pad*2}}
+ else{const bw=Math.min(K.boxMaxW[ip],W-2*K.pad-8),bx=Math.round((W-bw)/2),by=T0+4;set(bx,by,bw,Math.round(H*K.pickBand));const bb=by+Math.min(Math.round(H*K.pickBand),pm.offsetHeight)+K.pickGap;A={x:K.pad+4,y:bb,w:8,h:Math.max(140,H-bb-K.pad*2)}}
+ if(T.asked)kstgTalkAsk(dl,{ip,W,H,by:H},A)}catch(e){console.error("kstgPickPlace",e)}}
 (function(){try{const st=document.createElement("style");st.id="kit-stage-talk";const P="html body #modal#modal#modal#modal#modal.kstg .dlg.kstage.kstalk";st.textContent=`
 ${P} .opts.khand{visibility:hidden!important;pointer-events:none!important}
 ${P}>.khplate,${P}>.khconf{display:none!important}
@@ -222,7 +241,7 @@ ${P} .kpmain.ksay.ksay-side.ksay-me::before{left:auto;right:-10px;border-left:0;
 ${P} .kpmain.ksay.ksay-more::after{content:"▸";position:absolute;right:10px;bottom:2px;font-size:.9rem;color:#9a6a1c;animation:kstg-blink 1.1s ease-in-out infinite alternate}
 @keyframes kstg-blink{from{opacity:.35}to{opacity:1}}
 ${P} .kpk{z-index:9}`;document.head.appendChild(st)}catch(e){}})();
-try{window.KIT_STAGE=KIT_STAGE;window.kstgOn=kstgOn;window.kstgPlace=kstgPlace;window.kstgWants=kstgWants}catch(e){}
+try{window.KIT_STAGE=KIT_STAGE;window.kstgOn=kstgOn;window.kstgPlace=kstgPlace;window.kstgWants=kstgWants;window.kstgPickWants=kstgPickWants}catch(e){}
 /* KIT §102.6 ROOM PICTURE NEVER EMPTY (KK38, MAIN 153 / RV-OB-NGOAICUNG 26/11 06:17Z: iPad Khuê phòng from buổi chiều showed a FLAT GREY box while the next room
    picture loaded). Whole family = the one room backdrop #scimg (renderStage is its only writer; the Pixi copy in j11 keeps its old sprite until the new one is drawn)
    + the event / scene pictures (§102 a: the place painting lies under them). Here: when #scimg gets a picture that is not decoded yet, the PREVIOUS painting stays
@@ -236,3 +255,7 @@ try{window.KIT_STAGE=KIT_STAGE;window.kstgOn=kstgOn;window.kstgPlace=kstgPlace;w
   pend={u,prev};lay();
   const done=()=>{if(!pend||pend.u!==u)return;pend=null;if(url(im.style.backgroundImage)===u)im.style.backgroundImage=`url("${u}")`};
   (I.decode?I.decode():Promise.reject()).then(done,()=>{if(I.complete)done();else{I.onload=done;I.onerror=done}})}).observe(im,{attributes:true,attributeFilter:["style"]})}catch(e){console.error("kstgScimgKeep",e)}})();
+
+/* KIT §95.4 K-SRV-OWNFIG (KK63, RV-177 FAIL-1 nhv-areas): figFor maps a servant-shaped Emperor / Thái y to the real person (kitFigWho, j28) before any
+   implementation sees it — a late wrapper because j39 / j88 replace figFor's whole body after j28. */
+(function(){if(typeof figFor!=="function"||typeof kitFigWho!=="function")return;const f0=figFor;figFor=function(p,kind){try{const q=kitFigWho(p);if(q!==p){p=q&&typeof S!=="undefined"&&S&&q===S.emp?{kind:"emp"}:q}}catch(e){}return f0.call(this,p,kind)};window.figFor=figFor})();

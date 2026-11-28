@@ -2,13 +2,13 @@
    (kitBookFigCol → the book's own relayout) and must keep the reader on the same fact, and must NOT dispatch a window resize.
    usage: node dev/test/book-relayout.js <build url | page.html> <outdir>   (env FIG, N facts, SZ=[[W,H],…], TURNS = pages to turn first)
    The figure's download is HELD until the reader has turned TURNS pages, then released. Exit 1 on failure. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const FIG=process.env.FIG||'fig-thaihau-h1-a51.webp',N=+(process.env.N||14),TURNS=+(process.env.TURNS||1);
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1000,755],[1180,820],[1366,1024]];const isFile=!/^https?:/.test(SRC);
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
   await ctx.addInitScript(()=>{window.__bot=1;window.__resizes=0;const a0=window.dispatchEvent.bind(window);window.dispatchEvent=function(e){if(e&&e.type==='resize')window.__resizes++;return a0(e)}});
-  if(isFile)await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:fs.readFileSync(SRC),contentType:'text/html; charset=utf-8'}));
+  if(isFile)await ctx.route('http://ctm.test/**',r=>r.fulfill({status:404,body:''}));/* rv-plr4 r8 (law 11): only the page gets the 20 MB html; every other ctm.test asset 404 — answering each mp3/vendor request with the whole page broke the Playwright pipe once the page passed ~20.6 MB */await ctx.route(/^http:\/\/ctm\.test\/index\.html([?#].*)?$/,r=>r.fulfill({status:200,body:fs.readFileSync(SRC),contentType:'text/html; charset=utf-8'}));
   let release;const gate=new Promise(r=>release=r);let held=0;
   await ctx.route('**/img/'+FIG+'*',async r=>{held++;await gate;r.continue()});
   const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,120)));

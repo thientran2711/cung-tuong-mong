@@ -32,7 +32,7 @@ const isGainTxt=t=>/\+\s*\d|\+$|\+\s*\(/.test(t)&&!/(ghen|oán|nghi|giận|ghét
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(LIB);await p.evaluate(PROBE);
  if(process.env.MUTANT==='b')await p.evaluate(()=>{if(window.ONE)ONE.lockW=()=>"—"});
- if(process.env.MUTANT==='c')await p.evaluate(()=>{if(window.TOILV)TOILV.split=0});
+ /* E-GAIN4C: (c) is proven by a SOURCE mutant (jtoil verdict back on «risk», the pre-ACT-MOVE-6 line), no env mutant */
  const ALL=[];const DT=(process.env.DRAWS||'0,1,2').split(',').map(Number);
  for(const sc of (SC||'dau,toi,cao,con,hau,hh').split(',')){await p.evaluate(n=>AA.scen(n),sc);const SF=await p.evaluate(()=>AA.surfaces().filter(s=>s.tab==="act"));
   for(const dt of DT)for(const sf of SF){let subs=[sf];if(sf.place){const n=await p.evaluate(s=>{AA.restore();AA.show(s);return S.visit&&S.visit.people?S.visit.people.length:0},sf);subs=[];for(let i=0;i<n;i++)subs.push(Object.assign({},sf,{pop:i}))}

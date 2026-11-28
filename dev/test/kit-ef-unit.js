@@ -7,7 +7,7 @@
    for every visible .kef1: getComputedStyle(white-space)==nowrap AND its client rects sit on ONE line (one rect, or several fragments with the same bottom when the item holds an inline tap word
    like «<span class=krel>Thiện cảm</span> của cung nữ +3» — a fragment there is not a line break). Fold 755x1000 + iPad 1180x820.
    usage: node dev/test/kit-ef-unit.js <url> <outdir>   (writes <outdir>/<W>-opt.png, <W>-act.png for the visual check) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 const STAT='/^(?:[\\p{L}][\\p{L} ]{0,22}(?: ?[+\\-−] ?| )\\d+(?: ?khắc)?|\\d+ ?khắc|[\\p{L}][\\p{L} ]{0,22} \\d+ ?→ ?\\d+(?: ?\\([+\\-−]\\d+\\))?)$/u';
 /* a unit = .kef1 OR a stat text (so the same check measures LIVE, which has no .kef1, for the before/after table) */
 const CHECK=`(root=>{const o={n:0,bad:[],sung:0};const RX=${STAT};root.querySelectorAll('.kr .krv .ef').forEach(e=>{if(!e.getClientRects().length||!e.offsetParent)return;const t0=e.textContent.trim();if(!e.classList.contains('kef1')&&!(t0.length<=28&&RX.test(t0)))return;o.n++;const t=e.textContent.trim();if(/^Sủng [+\\-−]/.test(t))o.sung++;

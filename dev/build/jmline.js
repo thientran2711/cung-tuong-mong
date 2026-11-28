@@ -113,7 +113,7 @@ function mlMonth(){if(!mlOn())return"";let ev="";const G=mlGuest();try{for(const
 function mlHitBtns(s,v,t2){try{if(!mlOn()||!s||s.role!=="maid"||!v||v===S||(typeof isSrv==="function"&&isSrv()))return[];const B=mlB(),K=BAL.ag.stf2.hit.k;
  const why=mlGuest()?"việc trong thế giới chung do chủ phòng định":!can(K)?(t2||"hết khắc"):"";
  return [pbtn(`data-mlh="beat" data-sid="${s.sid}"`,"Bắt quỳ, vả miệng",`tốn: ${K} khắc · thành: ${s.name} bị đánh, ${v.name} oán ngươi · kèm: ${v.name} nắm chứng cứ: ${chanceW(B.hitEv)}`,why),
-  pbtn(`data-mlh="frame" data-sid="${s.sid}"`,"Vu tội",`${word(100-B.hitCatch)} · tốn: ${K} khắc · thành: nàng ${s.name} chịu phạt quỳ, lòng nàng với chủ -${B.frameLoy} · hỏng: bị tra ra, ngươi mất Đức, Danh, ${v.name} nắm chứng cứ`/* E-GAIN4 (d) law 3: the harm to HER target is her gain — the kit reads «nàng … −N» as a gain (KIT 6 kcls); «bị phạt» read as a loss (Kèm) and Thành stood empty */,why)]}catch(e){return[]}}
+  pbtn(`data-mlh="frame" data-sid="${s.sid}"`,"Vu tội",`${word(100-B.hitCatch)} · tốn: ${K} khắc · thành: <span class="g">${s.name} bị phạt quỳ</span>, <span class="g">lòng ${s.name} với ${v.name} -${B.frameLoy}</span>, <span class="g">${s.name} bị đuổi khỏi cung ${v.name}: ${chanceW(B.frameOut)}</span> · hỏng: bị tra ra, ngươi mất Đức, Danh; ${v.name} nắm chứng cứ`,why)]}catch(e){return[]}}
 function mlHitMe(k,sid){const s=servById(sid);const t=s&&ownerOf(s);if(!s||!t||t===S||S.dead||Q.length||mlGuest())return"";const K=BAL.ag.stf2.hit.k;if(!can(K))return"";spend(K);
  const r=mlHitDo(S,t,s,k);if(r)log(r);return r}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-mlh]");if(!b||b.disabled||!S||S.dead||Q.length)return;e.stopPropagation();e.preventDefault();

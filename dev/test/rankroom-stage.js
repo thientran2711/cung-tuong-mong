@@ -1,7 +1,7 @@
 /* C8-RANKROOM: rank rooms on the stage. usage: node dev/test/rankroom-stage.js <device: fold|ipadAir> <outdir>   (needs `bash dev/site/build_site.sh` first
    and the rooms staged: python3 dev/art/place-rank/rank_rooms_wire.py --all-rooms --stage; stage pictures are served from ./img, no CDN upload)
    Prints the resolution table (palace x rank x part x night -> picture key) and shots <outdir>/<device>-<pal>-<rank>-<day|night>.jpg */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const D=require('./lib/device');const fs=require('fs');const path=require('path');
 const [,,DEV='fold',OUT='/tmp/rankroom-shots']=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const srv=await D.serveRoot();const px=process.env.HTTPS_PROXY;
  const b=await chromium.launch(Object.assign({args:['--disable-dev-shm-usage']},px?{proxy:{server:px,bypass:'localhost,127.0.0.1'}}:{}));

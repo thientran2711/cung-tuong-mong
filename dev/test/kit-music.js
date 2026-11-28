@@ -2,7 +2,7 @@
    (1) base rotation: different tabs / buoi give different keys, same tab+buoi stable; (2) card categories -> keys (joy, mourning, romance, thitam, tension alternate, banquet, conferral, contest);
    (3) endings (grand / rare / death), lanh cung, festival day (own track), kg82 open = contest; (4) new key URL = IMG_BASE+audio/bgm-<k>.mp3, old six local;
    (5) a missing file falls back along KMUS_FB (never silence); (6) hold rule: base does not return before BAL.kmus.holdMs.  usage: node dev/test/kit-music.js */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const MT={'.html':'text/html; charset=utf-8','.js':'application/javascript','.json':'application/json','.css':'text/css','.webp':'image/webp','.png':'image/png','.mp3':'audio/mpeg'};
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m)=>{if(!c){bad++;console.log('FAIL',m)}else console.log('ok',m)};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});

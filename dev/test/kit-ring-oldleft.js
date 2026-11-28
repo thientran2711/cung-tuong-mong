@@ -1,5 +1,5 @@
 /* MOTION-BUILD «Vòng bảo vật»: law 11 family scan (old item pickers left on screen = 0). */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,OUT,WH,MODE]=process.argv;const SC='check';fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const [W,H]=(WH||'755x1000').split('x').map(Number);const rec=SC!=='check';

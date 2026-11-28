@@ -2,7 +2,7 @@
    tap a shelf -> drawer with only that group's pieces; tap piece -> kit item card -> Trưng bày -> placed + drawer closes; tap placed -> Cất xuống; read-only has no drawer.
    HOST mode (built root index.html through rot.js, the real design canvas; dev/test/README.md). Fixture mode (no jshelf API needed). CDN pictures via curl (sandbox).
    usage: node dev/test/display-room.js <url> <outdir|-> [device,...]  (default fold,ipadAir,ipadPro,foldLand)  -> JSON per device; exit 1 on FAIL */
-const {chromium}=require('playwright');const D=require('./lib/device');const {execFileSync}=require('child_process');const [,,URL,OUT,SZ]=process.argv;const devs=(SZ||'fold,ipadAir,ipadPro,foldLand').split(',');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const D=require('./lib/device');const {execFileSync}=require('child_process');const [,,URL,OUT,SZ]=process.argv;const devs=(SZ||'fold,ipadAir,ipadPro,foldLand').split(',');
 const cdn={};const {execFile}=require('child_process');const pcurl=u=>new Promise(res=>execFile('curl',['-sSf','-m','30',u],{encoding:'buffer',maxBuffer:60e6},(e,o)=>res(e?null:o)));
 async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.dev/,async r=>{const u=r.request().url();if(!(u in cdn))cdn[u]=pcurl(u);const body=await cdn[u];if(!body)return r.abort();r.fulfill({status:200,body,contentType:u.endsWith('.json')?'application/json':'image/webp',headers:{'access-control-allow-origin':'*'}})})}
 (async()=>{const b=await chromium.launch();let bad=0;const all={};

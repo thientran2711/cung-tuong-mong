@@ -75,6 +75,16 @@ window.CTM_WAIT=window.CTM_WAIT||{
  newOpened:"Đã mở bản mới",
  newOpenedRoom:"Đã mở bản mới · vào lại phòng",
  newTogether:"Hai người cùng mở bản mới, đang vào lại phòng",
+ /* screen-change veil (jscrv.js, KIT §97; owner OD 24/11 ~10:20Z): the whole view stays covered until its pictures are in */
+ veilHome:"Đang về cung…",
+ veilDien:"Đang vào điện…",
+ veilCung:"Đang sang cung…",
+ veilRoom:"Đang vào phòng…",
+ veilVuon:"Đang ra vườn…",
+ veilEvent:"Đang bày tranh…",
+ veilBoard:"Đang bày bàn…",
+ veilBook:"Đang mở sổ…",
+ veilScene:"Đang bày cảnh…",
  /* Luân hồi (jk2b.js) */
  rebirth:"Tranh luân hồi đang trải các thân phận…",
  /* ghi sổ (j16.js) */

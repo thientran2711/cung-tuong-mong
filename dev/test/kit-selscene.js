@@ -6,7 +6,7 @@
    (2) solo pair (no messenger): one box.  (3) kitNameTag stage 1 placeholder / family hint / stage 2 real name.  (4) kitNewsRankRow face + name/placeholder + rank chip.
    (5) kitEdict({fromWord:"Tú nữ"}) old-rank chip text.  Shots: <outdir>/kitsel-<case>-<dev>.png
    usage: node dev/test/kit-selscene.js <outdir> [WxH,...] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const [,,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');const [,,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const ROOT=path.resolve(__dirname,'../..');const MT={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.mp3':'audio/mpeg','.webmanifest':'application/manifest+json','.woff2':'font/woff2'};
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m)=>{if(!c){bad++;console.log('FAIL',m)}else console.log('ok',m)};
  for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);const dev=W<1000?'fold':'ipad';

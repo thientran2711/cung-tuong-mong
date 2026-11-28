@@ -1,6 +1,6 @@
 /* map-labels-2.js — audit Dư đồ labels vs painted buildings. usage: node dev/test/map-labels-2.js <index.html> <OUT> [WxH,..]
    Per viewport: whole map (all zoom levels needed to see it) screenshot with label table (name, key, box centre, label centre, lock reason). Reuses the CDN cache of map-labels.js. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const WT=path.resolve(__dirname,'../..')+'/';
 const [,,HTML0,OUT,VPS='755x1000,1180x820',OLD0]=process.argv;let HTML=path.resolve(HTML0);const OLD=OLD0?path.resolve(OLD0):null; /* OLD = a build before the change: its save must load in HTML */
 const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=WT+'.ahcache/img/';

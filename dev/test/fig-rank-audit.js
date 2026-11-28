@@ -4,7 +4,7 @@
    or the CDN https://ctm-img.victoria-tntt.workers.dev/img/)
    verdict per cell: exact | above (nearest tier above, exact art missing = listed) | none (no picture; placeholder) | LOWER (must be 0) | MAIDART (must be 0).
    Exit 1 when LOWER or MAIDART > 0. Prints the missing-art block (identity × tier) for the ART REQUEST. */
-const {chromium}=require('playwright');const fs=require('fs'),http=require('http'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),http=require('http'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||'';
 const FIGDIR=process.env.FIGDIR||'';const CDN='https://ctm-img.victoria-tntt.workers.dev/img/';
 const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.css':'text/css'};

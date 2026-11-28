@@ -1,7 +1,7 @@
 /* OB-PHU3 FULL VIDEO (one device per run, real recording of the built game): Dư đồ map wait + zones, Dưỡng Tú viện painted (4 seasons), Tài nghệ without person info,
    Phi tần with «Bảng tài nghệ hậu cung», person-name link (act card → people tab), home Tài nghệ / Gia tộc, home place list (only the road's own places).
    usage: [DEV=fold|ipadAir] node dev/test/ob-phu3-video.js <out.mp4>  (built root) */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs'),path=require('path'),os=require('os'),cp=require('child_process');const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const D=require('./lib/device');const fs=require('fs'),path=require('path'),os=require('os'),cp=require('child_process');const sleep=t=>new Promise(r=>setTimeout(r,t));
 const OUT=process.argv[2]||'ob-phu3.mp4';const DEV=process.env.DEV||'fold';const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';
 (async()=>{const srv=await D.serveRoot(path.resolve(__dirname,'../..'));const dir=fs.mkdtempSync(path.join(os.tmpdir(),'obv-'));const b=await chromium.launch();const d=D.DEVICES[DEV];
  const ctx=await D.newDeviceContext(b,DEV,{recordVideo:{dir,size:{width:d.w,height:d.h}}});let slow=false;

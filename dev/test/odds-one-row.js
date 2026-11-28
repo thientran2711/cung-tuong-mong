@@ -3,7 +3,7 @@
    (word box vertically inside the bar's row, to the right of it; the word is one line) — option dialogs (4 odds words Liều…Nắm chắc, narrow columns), Hành sự act cards, person-card act, staff, rv, and the tapped popover.
    Prints a table "meters / word below the bar / word wrapped / title on own row (kodrow, counted)". Exit 1 on any word below the bar or wrapped.
    usage: node dev/test/odds-one-row.js <url> <outdir>   (DEVS=755x1000,1180x820,390x844 default) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 const CHECK=`(root=>{const o={n:0,below:[],wrap:[],row:0,stk:0,h:[]};root.querySelectorAll('button.ka').forEach(b=>{if(b.querySelector('.kodm')&&b.getClientRects().length)o.h.push(Math.round(b.getBoundingClientRect().height))});root.querySelectorAll('.kodm').forEach(m=>{if(!m.getClientRects().length||m.offsetWidth===0)return;const bar=m.querySelector('.kseg'),w=m.querySelector('b');if(!bar||!w||!w.textContent.trim())return;
   const cs=getComputedStyle(m);if(cs.visibility==='hidden')return;o.n++;const B=bar.getBoundingClientRect(),W=w.getBoundingClientRect();const tag='«'+w.textContent.trim()+'» in '+(m.closest('button.ka')?'card':(m.closest('#kpop')?'popover':m.parentElement.className||m.parentElement.tagName));
   if(W.top>=B.bottom-2||W.left<B.left+B.width-2&&W.top>B.top+B.height/2)o.below.push(tag+' word below the bar');

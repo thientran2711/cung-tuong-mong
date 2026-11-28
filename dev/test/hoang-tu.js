@@ -3,7 +3,7 @@
    nokid = fresh life, no children; kids = her children (4, 9, 15-son, 17-daughter) + rivals' children (princes 16/19, princesses 14/18);
    old = load a save made by the "before" page (_ht0.html, scenario kids, 4th arg path) into this page.
    Prints JSON: per tab overflowX, clipped text, empty panel, '???' or 'undefined' text; page errors. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,PAGE,SZ,OUT,TAG,SC,SAVE]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 const ROOT=path.resolve(__dirname,'../..');
 const MIME={html:'text/html',js:'text/javascript',json:'application/json',webp:'image/webp',png:'image/png',jpg:'image/jpeg',css:'text/css',mp3:'audio/mpeg',ogg:'audio/ogg',woff2:'font/woff2'};

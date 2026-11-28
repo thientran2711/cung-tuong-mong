@@ -112,16 +112,16 @@ function qLine(q){return `${q.name} · ${q.age} tuổi · con gái ${q.off} · p
 PEND.htban=pp=>{const k=S.kids.find(x=>x.name===pp.k&&pkHome(x));if(!k||k.pB)return null;const C=(pp.c||[]).map(qnById).filter(q=>q&&!q.taken);C.forEach(htKnow);
  const rows=C.map(q=>`<div class="h54c">${mdH(qnFace(q),"sm")}<span>${qLine(q)}</span></div>`).join("");const O=[];
  for(const q of C){const d=HT.dow[q.tier],b=pkBack(k,q),o=pkO(S,k,q),R2=q.tier<=1?pkRivals(S,k):[];const hi=R2.filter(m=>rkOf(m)>rkOf(S));
-  O.push({n:`Xin chỉ ban hôn: ${q.name}${S.bac<d?` (thiếu bạc: cần ${d})`:""}`,fx:{bac:-d},x:[word(o),`thành: hứa hôn; nhà ${q.off} chống lưng ngươi và con +${b} (thế lực phe, tranh ghế, thứ tự kế vị của con), các phi tần phe ${q.house} thiện cảm +${HT.clanRel}`,
+  O.push({n:`Xin chỉ ban hôn: ${q.name}${S.bac<d?` (thiếu bạc: cần ${d})`:""}`,fx:{bac:-d},x:[word(o),`thành: hứa hôn; nhà ${q.off} chống lưng ngươi và con +${b} (thế lực phe, tranh ghế, thứ tự kế vị của con), các phi tần phe ${q.house} ${pvQuy(null,HT.clanRel,"thiện cảm")}`,
    `hỏng: Hoàng thượng chưa chuẩn, ${sgStat(HT.fail.sung)}, lễ vật mất`,hi.length?`kèm: ${kitNameList(hi)} cũng nhắm mối này cho con mình (khó hơn)`:"",R2.length?`kèm: ${R2.length} phi tần có con trai đến tuổi ghen (thiện cảm ${HT.envy})`:""].filter(Boolean).join(" · "),
    go:()=>{if(roll(o))log(pkBetroth(k,S,q));else{apply(HT.fail);log(`Hoàng thượng chưa chuẩn mối ${q.name} cho ${k.name}.`)}}})}
  O.push({n:"Chưa bàn vội",fx:{},x:`con ở cạnh ngươi thêm · kèm: phi tần khác có thể hỏi trước các mối tốt`,go:()=>log(`Ngươi chưa vội bàn hôn sự cho ${k.name}.`)});
  return{who:kidFace(k),t:`Bàn hôn sự cho ${k.name}, ${k.age} tuổi${k.age<BAL.age.wed?" (hứa hôn trước, cưới khi tròn "+(BAL.age.wed)+")":""}. Các mối hỏi được (tùy phẩm vị ngươi, lòng thương của Hoàng thượng, tài của con${k.heir?", ngôi Thái tử":""}):<div class="h54cl">${rows||'<p class="past">Chưa có mối nào.</p>'}</div>`,o:O}};
-function pkBtn(k){const t2=whyTime(2);if(!k.alive||k.sex!=="m")return"";if(k.pW)return"";const q=k.pB&&qnById(k.pB.q);
- return pbtn(`data-ht="ban" data-kn="${k.name}"`,"Bàn hôn sự",`tốn: 2 khắc · thành: xem các mối, xin chỉ ban hôn cho con`,k.pB?`đã hứa hôn với ${q?q.name:"quý nữ"}`:k.age<BAL.age.betroth?"con chưa đủ "+(BAL.age.betroth)+" tuổi":t2||(S.pkBan!=null&&S.turn-S.pkBan<HT.cd?`vừa bàn xong (lại được sau ${HT.cd-(S.turn-S.pkBan)} tháng)`:""))}
-function askBtn(x,kind){if(htKn(x))return"";const t1=whyTime(1);return pbtn(`data-ht="ask" data-hk="${kind}" data-hid="${x.id}"${capAt(BAL.btn.htAsk,BAL.bacFee.htAsk)}`,"Dò hỏi gia thế",`${capW()} · tốn: ${BAL.btn.htAsk.k} khắc, Bạc -${BAL.bacFee.htAsk} · thành: biết tên, mặt, Sắc, Tài của ${kind==="q"?"nàng":"chàng"}`,t1||(S.bac<BAL.bacFee.htAsk?"thiếu bạc (cần "+BAL.bacFee.htAsk+")":""))}
+function pkBtn(k){const t2=whyTime(BAL.btn.pkBan.k);if(!k.alive||k.sex!=="m")return"";if(k.pW)return"";const q=k.pB&&qnById(k.pB.q);
+ return pbtn(`data-ht="ban" data-kn="${k.name}"`,"Bàn hôn sự",`tốn: ${BAL.btn.pkBan.k} khắc · thành: xem các mối, xin chỉ ban hôn cho con`,k.pB?`đã hứa hôn với ${q?q.name:"quý nữ"}`:k.age<BAL.age.betroth?"con chưa đủ "+(BAL.age.betroth)+" tuổi":t2||(S.pkBan!=null&&S.turn-S.pkBan<HT.cd?`vừa bàn xong (lại được sau ${HT.cd-(S.turn-S.pkBan)} tháng)`:""))}
+function askBtn(x,kind){if(htKn(x))return"";const t1=whyTime(1);return pbtn(`data-ht="ask" data-hk="${kind}" data-hid="${x.id}"${capAt(BAL.btn.htAsk,BAL.bacFee.htAsk)}`,"Dò hỏi gia thế",`${capW()} · tốn: ${BAL.btn.htAsk.k} khắc, Bạc -${BAL.bacFee.htAsk} · thành: biết rõ ${kind==="q"?"nàng":"chàng"} (tên, mặt, Sắc, Tài)`,t1||(S.bac<BAL.bacFee.htAsk?"thiếu bạc (cần "+BAL.bacFee.htAsk+")":""))}
 function htAct(a,b){if(!S||S.dead||Q.length)return;const r0=rsnap();
- if(a==="ban"){const k=S.kids.find(x=>x.name===b.dataset.kn&&pkHome(x));if(!k||k.pB||k.age<BAL.age.betroth||!can(2)||(S.pkBan!=null&&S.turn-S.pkBan<HT.cd))return;spend(2);S.pkBan=S.turn;qnPoolUp();
+ if(a==="ban"){const k=S.kids.find(x=>x.name===b.dataset.kn&&pkHome(x));if(!k||k.pB||k.age<BAL.age.betroth||!can(BAL.btn.pkBan.k)||(S.pkBan!=null&&S.turn-S.pkBan<HT.cd))return;spend(BAL.btn.pkBan.k);S.pkBan=S.turn;qnPoolUp();
   pushDil(mkP("htban",{k:k.name,c:pkCands(S,k).map(q=>q.id)}),"Bàn hôn sự");render();return}
  if(a==="ask"){const x=b.dataset.hk==="q"?qnById(+b.dataset.hid):h54Son(+b.dataset.hid);if(!x||htKn(x)||!can(BAL.btn.htAsk.k)||S.bac<BAL.bacFee.htAsk)return;spend(BAL.btn.htAsk.k);apply({bac:-BAL.bacFee.htAsk});htKnow(x);
   const n=bestSent&&bestSent(S);log(`${n?n.name+" dò hỏi":"Ngươi dò hỏi"} gia thế: ${b.dataset.hk==="q"?qLine(x):h54SonLine(x)}.`);resultShow("Dò hỏi gia thế",r0,"sure");render();return}
@@ -193,19 +193,19 @@ try{Object.assign(KIT_GLOSS,{"Hiền tài":"Tài học của hoàng tự, suy ra
  "Nhà chồng chống lưng":"Nhà phò mã đứng sau người mẹ của công chúa: cộng vào thế lực phe và tranh ghế."})}catch(e){}
 
 /* 1. Con của ngươi */
-function kidTab(){const K=S.kids;if(!K.length)return htEmpty("img/act-cat-cham-con.webp","Ngươi chưa có con",[
+function kidTab(){const dd=k=>typeof dthIs==="function"&&dthIs(k),K=S.kids.filter(k=>!dd(k)).concat(S.kids.filter(dd)),nD=K.filter(dd).length,n0=K.length-nD;/* the dead stay, own group after the living (owner 27/11 ~05:10Z) */if(!K.length)return htEmpty("img/act-cat-cham-con.webp","Ngươi chưa có con",[
   "Con chỉ đến sau những đêm thị tẩm: được Hoàng thượng lật thẻ càng nhiều, càng dễ có tin vui.",
   "Có thai thì giữ gìn Sức, nhờ thái y an thai; kẻ ghen có thể hại thai.",
   "Con sinh ra hiện ở đây: dạy dỗ, chăm con, bàn hôn sự; con trai được xét vào hàng kế vị."]);
  const hl=S.heir&&S.heir.k?(S.heir.v?`Thái tử: ${S.heir.k.name}, con của ${S.heir.v.name}.`:`<span class="g">Con ngươi, ${S.heir.k.name}, là Thái tử.</span>`):"Chưa lập Thái tử.";
- return `<div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+pager("kid",K.map(k=>({p:k,f:kidFace(k),name:sname(k),dim:!k.alive})),i=>kidCard(K[i]))}
+ return `<div class="ph"><span>${hl}</span><span>${ic("con",14)}${mySons().length} hoàng tử · ${myDaus().length} công chúa</span></div>`+pager("kid",K.map((k,i)=>({p:k,f:kidFace(k),name:sname(k),dim:!k.alive,sep:nD&&i===n0?"Đã khuất":""})),i=>kidCard(K[i])).replace(/(<span class="pcount">[^<]*)/,nD?`$1 · Đã khuất: ${nD}`:"$1")}
 /* 2. Kế vị */
 function kvReasons(x,i,o){const L=[];const k=x.k;
  if(k.heir)L.push("Đã được lập làm Thái tử: đứng đầu hàng kế vị.");
  if(x.dich)L.push(`Đích tử (con Hoàng hậu): lệ lập đích đứng trước mọi hoàng tử khác.`);
  if(x.truong)L.push("Trưởng tử: lớn tuổi nhất trong các hoàng tử.");
  if(!x.dich&&!x.truong&&!k.heir){if(!hienShown(k))L.push(`Còn nhỏ: chỉ xét đích, trưởng và lòng thương của Hoàng thượng (lòng thương: ${x.v?fondWord(k):k.fond}).`);
-  else L.push(x.v?`Lập hiền: Hiền tài ${hienWord(k)} (lời đồn), lòng thương: ${fondWord(k)}, mẹ là ${rkName(x.v)}.`:`Lập hiền: Hiền tài ${ktHien(k)}, Hoàng thượng thương ${k.fond}, mẹ là ${RANKS[S.rank].n}.`)}
+  else L.push(x.v?`Lập hiền: Hiền tài ${hienWord(k)} (lời đồn), lòng thương: ${fondWord(k)}, mẹ là ${rkName(x.v)}.`:`Lập hiền: Hiền tài ${ktHien(k)}, Hoàng thượng thương ${k.fond}, mẹ là ${meRankN()}.`)}
  const b=pkBackOf(k);if(b)L.push(`Nhà vợ chống lưng +${b}.`);
  if(k.age<6)L.push("Chưa đủ 6 tuổi: chưa được xét lập Thái tử.");
  const prev=o[i-1];if(prev&&!k.heir)L.push(`Đứng sau ${prev.k.name}${prev.k.heir?" (Thái tử)":prev.dich&&!x.dich?" (đích tử)":""}.`);return L}

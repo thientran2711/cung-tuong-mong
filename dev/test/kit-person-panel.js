@@ -4,7 +4,7 @@
    kpp (built), tabs (must be exactly Thông tin + Giao tình), visible act buttons (must be 0: info only), the card buttons (≤ 2, titles Tìm gặp / Ghé cung,
    whole), repeated label in «Thông tin» (one fact once), portrait width + share of screen height, boxes that scroll, name cut, page errors. On LIVE (no kpp) it only measures (before column).
    Exit 1 on: a built card with a tab set ≠ [Thông tin, Giao tình], a visible act button, > 2 card buttons or one not whole, a scrolling card or tab, a repeated label in «Thông tin», a cut name. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG,SHOTS]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300);window.kitRoulette=function(){}});
