@@ -1,7 +1,7 @@
 # Review ES8-bd_tuyet-random4-h — E-S8 row run by E-S3 (origin bd / road bd_tuyet, iPad, bot rand, seed 2859551964)
 Harness real-tap f65d019b. Long life with 2 resumes onto real github.io (22:56Z, 01:03Z) and 3 «unstick reload» fallbacks to local recorded builds (0b372aa14258, 86170222adab, 0b37…). VALID, flag «mixed build» (robot-audit MIXED-BUILD).
 ## 1 Summary
-Heroine Liêu Ý Hoan (Công chúa Ba Tư hòa thân) · 20 years, age 37 · max rank Thường tại · 2906 buổi · 16 256 real taps · 0 sons, 1 daughter · ending «Thái phi — Thành Thái phi»: Hoàng thượng Vĩnh An băng hà y12-of-card, Tân Thái hậu Diêu Doanh Nguyệt xét lại chuyện cũ (cơ may: Hiểm) và tha, dời đến Thọ Khang cung (a SURVIVED ending, not a death) · bugs 13, stuck 0, dead buttons 2.
+Heroine Liêu Ý Hoan (Công chúa Ba Tư hòa thân) · 20 years, age 37 · max rank Thường tại · 2906 buổi · 16 256 real taps · 0 sons, 1 daughter · ending «Thái phi — Thành Thái phi»: Hoàng thượng niên hiệu Vĩnh An băng hà ở năm thứ 20 (thọ 43), Tân Thái hậu Diêu Doanh Nguyệt xét lại chuyện cũ (cơ may: Hiểm) và tha, dời đến Thọ Khang cung (a SURVIVED ending, not a death) · bugs 13, stuck 0, dead buttons 2.
 ## 2 Findings (facts)
 - End card «Tà dương cung cũ» (life summary + «Chuyển kiếp») is clean — no «Bổng lộc» popup over it.
 - Real SAVE REWIND ×4 (b367→364 ×2, b378→376 ×2, b460→459, b1191→1190: 1–3 buổi lost each), all in the old-build segments.
