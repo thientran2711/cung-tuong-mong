@@ -781,3 +781,4 @@ WORKLIST row 42 batch 2 FLAT retune BAL only (F-TIER-B2) | review/f-tier-b2 | se
 WORKLIST row 42 batch 5 exit marks + jkc.js:427/598 finds (F-TIER-B5) | review/f-tier-b5 | session_01UV1SzkPgUHohAF6MkZ1naG (opus, Foreman F ROOT 8) | RUNNING | 28/11 09:29Z
 Tứ đức works cards dead code jtds → show in Tác phẩm (F-TDWORKS) | review/f-tdworks | session_01UV1SzhMfM4JhXR6d5DQ3qV (sonnet, Foreman F ROOT 8) | RUNNING | 28/11 09:29Z
 B-ROW12-LEAVE BIG RV | review/row12-leave 4480ae6e | FOREMAN B ROOT3 child2 / rv session_01N1tNP2Dw6kcWdsVjWrLddR | RUNNING | 28/11 09:37Z
+B-COOP-REBIRTH-RESYNC r3 (successor of 2Y1YMPHD: room-e lãnh cung week-end hang PLAY-STOPPER + family + items 4/5 + finish r2 gates) | review/coop-rebirth-resync 752a40b8 | FOREMAN B ROOT3 child2 / worker <opening> | RUNNING | 28/11 09:44Z
