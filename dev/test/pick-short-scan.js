@@ -24,6 +24,7 @@ const SAVES=[['s7 chest 5',5],['s7 chest full',0],['y05',-1]];const ONLY=(proces
  for(const [sv,N] of SAVES){if(!on(1,sv))continue;const ctx=await b.newContext({viewport:{width:vw,height:vh},reducedMotion:'reduce'});await serve(ctx,ROOT);await ctx.addInitScript(()=>{window.__kriOff=1});
   const p=await ctx.newPage();try{await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:300000});await p.waitForFunction(()=>typeof deser==='function'&&window.COOPW,null,{timeout:300000});
   await p.addStyleTag({content:'#klife{display:none!important}'});
+  if(process.env.PSS_NOSTEP)await p.evaluate(()=>{window.__kon=kitOptNeed;window.kitOptNeed=()=>0});/* diagnostics: the frame the branch would draw WITHOUT the K-PICK-SHORT step */
   await p.evaluate(([s7,y5,N])=>{try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}let d;if(N>=0){for(const k in s7)localStorage.setItem(k,s7[k]);d=loadSlot(1);SLOT=1}else{localStorage.setItem(SK(3),y5);SLOT=3;d=loadSlot(3)}
    quiet=true;d.tab='act';deser(d);quiet=false;document.getElementById('title').hidden=true;while(Q.length)Q.shift();try{deal();if(S.mg)S.mg=null;S.tutTour=1;coachOff&&coachOff()}catch(e){}try{render()}catch(e){}if(N>0)S.inv=S.inv.slice(0,N)},[S7,Y05,N]);
   await p.waitForFunction(()=>{try{return !!kitEvArt(Object.assign({kind:'choice'},mkP('giftto',{t:'emp'})))}catch(e){return false}},null,{timeout:90000,polling:1000}).catch(()=>{});
@@ -58,7 +59,8 @@ const SAVES=[['s7 chest 5',5],['s7 chest full',0],['y05',-1]];const ONLY=(proces
     {const nx=M.querySelector('.kipw>.kippg [data-kippg="1"]:not([disabled])');if(nx){nx.click();await w(900);if(M.querySelector('.kipw'))P.push(...(await paint()).map(x=>'p2 '+x))}}
     const paintOver=[...new Set(P)].join(',');
     const pass=over===0&&!paintOver&&((rowIn&&pgIn&&goIn)||!pic);
-    return{pass,paint:paintOver||0,box:Math.round(bot-top),need,pic,row:rowTxt,over,step:d.classList.contains('kdnopic'),short:!!M.querySelector('.kipw.kipshort'),
+    const dbg=window.__kon?(()=>{const o3=M.querySelector('#mb>.opts')||o,w3=o3.querySelector(':scope>.kipw'),g3=w3&&w3.querySelector('.kipg');return{kon:window.__kon(o3),oc:o3.clientHeight,gt:g3?Math.round(R(g3).top-R(o3).top):null,tile:Math.round(R(t[0]).height),pg:pg?Math.round(R(pg).height):0,go:go?Math.round(R(go).height):0,pb:getComputedStyle(o3).paddingBottom}})():undefined;
+    return{pass,paint:paintOver||0,dbg,box:Math.round(bot-top),need,pic,row:rowTxt,over,step:d.classList.contains('kdnopic'),short:!!M.querySelector('.kipw.kipshort'),
      frame:[...d.classList].filter(c=>!/^(kfit|kv\d|kpanel|kipdlg|kpsc)$/.test(c)).sort().join(' ')}},[n,pid,kind]).catch(e=>({err:String(e)}));
    out.push(Object.assign({dv,save:sv,n},r));console.error(dv,sv,n,JSON.stringify(r))}}catch(e){console.error('ERR',dv,sv,String(e));out.push({dv,save:sv,n:'*',err:String(e)})}finally{await ctx.close()}}}
  await b.close();console.log(JSON.stringify(out))})();
