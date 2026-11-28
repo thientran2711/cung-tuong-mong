@@ -104,10 +104,11 @@ function newTok(s,[x,y],p,halved){const t=s.slice(x,y),C=lit(twice(p.c,halved)),
  if(t[0]==='{'){const e=close(s,x);const it=parts(s,x,e);const seen={};let out=it.map(([a,b])=>{const kv=s.slice(a,b),k=(kv.match(/^(\w+)\s*:/)||[])[1];
    if(k==='c'){seen.c=1;return 'c:'+C}if(k==='w'){seen.w=1;return 'w:'+Wt}if(k==='l'){seen.l=1;return 'l:'+L}return kv});
   if(!seen.c)out.unshift('c:'+C);if(!seen.w)out.splice(1,0,'w:'+Wt);if(!seen.l&&hasL)out.push('l:'+L);return '{'+out.join(',')+'}'}
- const m=t.match(/^(\w+)\(/);if(!m)return null;const o=x+m[0].length-1,e=close(s,o),A=parts(s,o,e).map(([a,b])=>s.slice(a,b));
+ const m=t.match(/^([\w.]+)\(/);if(!m)return null;const o=x+m[0].length-1,e=close(s,o),A=parts(s,o,e).map(([a,b])=>s.slice(a,b));
  if(/^(bdG|pfG)$/.test(m[1])){const [a,b]=parts(s,o,e)[0];const inner=newTok(s,[a,b],p,halved);return inner&&m[1]+'('+inner+','+A.slice(1).join(',')+')'}
  if(/^(bdR|pfR)$/.test(m[1])&&A.length>=3){A[1]=Wt;A[2]=hasL?L:'{}';A[3]=C;return m[1]+'('+A.join(',')+')'}/* (stat, w, l, c, base) */
  if(/^(bdS|pfS)$/.test(m[1])&&A.length===2&&!hasL)return m[1]+'('+C+','+Wt+')';/* (c, w) */
+ if(m[1]==='Object.assign')return 'Object.assign('+A[0]+',{c:'+C+',w:'+Wt+(hasL?',l:'+L:'')+'})';/* a rerun on a retuned rulebook */
  return 'Object.assign('+t+',{c:'+C+',w:'+Wt+(hasL?',l:'+L:'')+'})'}
 for(const q of plan){const s=SRC[q.h.f],it=q.h.items;for(const p of q.P){
   if(p.i<it.length){const t=newTok(s,it[p.i],p,q.halved);if(t==null){q.ok=false;q.err='token '+s.slice(...it[p.i]).slice(0,30);continue}edits.push({f:q.h.f,a:it[p.i][0],b:it[p.i][1],t})}
