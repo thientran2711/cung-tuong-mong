@@ -405,7 +405,7 @@ Rules
 One short sentence of what happened, from the log of this act, rival names with their rank title ("Hoàng hậu Liễu Họa Mi").
 Được  Sủng 8→17 (+9) · Ân tình 0→5 (+5) · Thái hậu: quý ngươi hơn (0→8, +8)                 green
 Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơn (thiện cảm −15), ghen +25, oán +20   red, person name in ink
-                                                     Xem đầy đủ ở Nhật ký   (link: opens the Nhật ký tab)
+                                                     Xem đủ trong Sổ ghi   (link: opens the Sổ ghi tab; §7.4a — on a card with a Kèm row)
 ```
 - SEAL (owner 11/15, replaces the old "outcome for her" guess): THÀNH / BẠI come ONLY from the act's own roll (`resultShow(title,
   before, true|false)`); an act without a roll ("sure", null) gets NO stamp: the neutral grey seal "KẾT QUẢ" (`.sure`). KIT PART

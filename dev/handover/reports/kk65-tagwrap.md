@@ -1,4 +1,4 @@
-# KK65 — review/kk65-tagwrap (base review/lc34-ui6 62b08228) — K-TAG-WRAP (MAIN 185 order 28/11 ~03:04Z) — WIP, NOT RV READY
+# KK65 — review/kk65-tagwrap (base review/lc34-ui6 62b08228) — K-TAG-WRAP (MAIN 185 order 28/11 ~03:04Z) — r2 by KK68 on review/kk68-tagwrap (base RV-180 trial review/kk66-rv180 9560b2a7) — RV READY (history below kept)
 PRIORITY #1 CHECK: OD n/a (MAIN 185 order: Fold «KẾT QUẢ» tag wrap, whole family, scan Fold 755 + cover 904) | main LIVE 18003079 | review/* lc34-ui6 62b08228 | claims KK65 → KK66
 KIT CHECK: reuses kitResultSeal / .seal (j63), kitChip .kchip (j79), kit-std-scan harness.
 Done (commit on this branch): dev/test/kit-std-scan.js
@@ -35,3 +35,22 @@ Open queue: (1) finish K-TAG-WRAP; (2) RV-178 verdict on kk65-ui5; (3) picker-do
 Worktrees: /home/user/wt/kk65w (tagwrap, build published), /home/user/wt/kk65v (kk65-ui5), /home/user/wt/kk65n (kk65-noise); save fixture /home/user/wt/y05.json
 (= handover branch dev/handover/robot/nc-B-tuc/saves/20261124-0057-035.json).
 Rollover lines (verbatim canon): "Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop." "Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker)."
+
+## KK68 r2 — RV-180 §2 FAIL answered (review/kk68-tagwrap, base review/kk66-rv180 9560b2a7: RV-180's X22→X23 rename + X01..X23 table taken as is)
+PRIORITY #1 CHECK: OD 24/11 ~21:57Z (OD:2419 «long detail lives only in Sổ ghi («Xem đầy đủ trong Sổ ghi»)») | main LIVE 5ad52416 | review/* kk66-rv180 9560b2a7 | claims KK68
+KIT CHECK: reuses kitResultCard / resultShow «Xem đủ trong Sổ ghi» (.kalog, KIT §7.4a), kit ring ✕ (jkring-item header kitXHTML data-kri="x", jkring .kring-x). No game code changed.
+Finding 2 (hook 96 red: X18 8, X20 4 on scene ringres):
+- X18 «info panel without the kit ✕» on div.kri-pane = SCANNER SCOPE MISS: a kit ring pane (.kri item ring / .kring people ring) has no ✕ of its own; the ring host's kit ✕
+  closes it (seen top-right of the stage on Fold + iPad). X18 now accepts a visible kit ✕ of the panel's ring host (.kri,.kring). Panels outside a ring: unchanged.
+- X20 «result card without Xem đầy đủ ở Nhật ký» = STALE RULE: the kit link is «Xem đủ trong Sổ ghi» (KIT §7.4 / §7.4a; j63 resultShow, jkitsel kitResultCard) and the
+  owner ruling puts it where detail is folded away; kitResultCard prints it only with a Kèm row. The old regex /Xem đầy đủ/ matched NO kit card — it never fired before only
+  because the «result» scene is itself vacuous (its act tap lands on no result card: fold-result shot shows the act list; that read is «.opts button» = K-OPTS-READER family,
+  review/kk68-optsreader half B). X20 now: a card WITH a Kèm row (.kr-kem) must carry «Xem (đầy )?đủ trong Sổ ghi». Canon overwrite in place (law 14): KIT_CHECKLIST F1 +
+  KIT.md §7 card diagram now read «Xem đủ trong Sổ ghi» (on a card with a Kèm row).
+AFTER: ONLY=ringres Fold + iPad: 13 FAIL → PASS. G4 hook 96 (dev/tools/quickcheck.d/96-kit-std-scan.sh, SUBS=0, Fold + iPad): «kit-std-scan total 6 (baseline 28) {X06 4, X08 2}» rc 0
+= the base's 6, X18 0, X20 0, X23 0.
+Side note (iPad placeholder figure over the ring pane): NOT reproduced here — iPad ringres shows no receiver figure; elementsFromPoint over the pane (incl. pointer-events:none
+layers) finds nothing above it on iPad; #modal z 42 < ring .kri z 57, and a dialog forced open over the ring result stays under it. On Fold the only layer above the pane is the
+legit «Nhận» item-return reveal (BẠI gift → the skirt back to Tư trang). Need RV-180's steps / shot to chase further.
+Side catch for MAIN (not this unit): the iPad ring result ĐƯỢC row lists «Hoàng hậu → ta: thiện cảm +6 · Lữ Mạn Nhu → ta: thiện cảm +6» — Hoàng hậu IS Lữ Mạn Nhu: one change shown
+twice (kriDiffRows, jkring-item.js) — a law-11 family check of result rows by rank title + name.

@@ -90,7 +90,7 @@ HOW TO USE (law 9 / 11 / 15; OD 27/11 ~04:39Z order 4)
 ## F. RESULT CARD · NAV CARDS · STAGE PLAQUES · HAND
 | id | rule (verbatim) | source | check |
 |---|---|---|---|
-| F1 | Result card parts: seal THÀNH (green) | BẠI (red) | KẾT QUẢ (grey, no roll), act name, one short sentence, rows Được (green) / Mất (red) / Kèm collapsed line, every line "value · reason", "Xem đầy đủ ở Nhật ký". "Same `.kb` row grid and colours as the act card" | KIT §7 | scan:X20 |
+| F1 | Result card parts: seal THÀNH (green) | BẠI (red) | KẾT QUẢ (grey, no roll), act name, one short sentence, rows Được (green) / Mất (red) / Kèm collapsed line, every line "value · reason", «Xem đủ trong Sổ ghi» (KIT §7.4a; on every card that folds detail away = has a Kèm row; owner OD 24/11 ~21:57Z: long detail lives only in Sổ ghi). "Same `.kb` row grid and colours as the act card" | KIT §7 | scan:X20 |
 | F2 | "SEAL … comes ONLY from the act's own roll … an act without a roll ("sure", null) gets NO stamp: the neutral grey seal "KẾT QUẢ"" | KIT §7 | scan:X20 |
 | F3 | "(thẻ lụa) every plaque … ivory/cream silk-paper face (same tone as the kit panels and act cards), thin pale-gold border … Done ONCE in the kit plaque part (kitPick/§98 family)" | OD 26/11 ~05:55Z (KK53) | review |
 | F4 | A plaque / hand card FRONT shows: name · picture · Tốn exact / Được–Mất marks · odds word — built by the kit row part (A7, A8, B2). "NO FLIP anywhere." | OD 26/11 ~23:58Z | scan:X03 |
