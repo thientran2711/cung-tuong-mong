@@ -9,7 +9,7 @@ KIT CHECK: reuses the j67 story card (kit event frame), kit option cards, oddsCh
 (885292b2 = the last commit on review/e-tier-b13-rv-m: LIVE aecbc267 + 6738c302, built files rebuilt, + 2 reviewer test-only fixes below.)
 
 ## (0) Merge
-- 6738c302 onto LIVE c03d6ee7 → a378a05e, then onto LIVE aecbc267 → 890614d6 (+ the test fixes). Both times ONLY index.html + sw.js conflicted (built files) → rebuilt by dev/site/build_site.sh; assets.json = LIVE (no diff). No source conflict: LIVE changed j67 / jroad / jroad8 / jbal* lines this branch does not touch.
+- 6738c302 onto LIVE c03d6ee7 → a378a05e, then onto LIVE aecbc267 → 890614d6 (+ the test fixes), then onto LIVE 7d7c6886 → 202e5a3b (LIVE delta touches no road / story file; old-save gates re-run vs 7d7c6886: ALL PASS). Both times ONLY index.html + sw.js conflicted (built files) → rebuilt by dev/site/build_site.sh; assets.json = LIVE (no diff). No source conflict: LIVE changed j67 / jroad / jroad8 / jbal* lines this branch does not touch.
 - Reviewer commits on the branch (test-only, no game code):
   1. dev/test/tier-b13-oldsave-all.js — NEW gate (see (1) mutants): pledge AND refusal saved on EVERY old way 0..3 of 5 hồi on the LIVE build, loaded in the new build, checked BY NAME.
   2. dev/test/rdc-play.js rival check — a rival who died / left between two recorded hồi is a legal recast (rdCast, ROAD_MAP §5), not a fault (see (1) rdc-play).
