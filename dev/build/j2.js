@@ -112,6 +112,9 @@ function runOpt(a){if(!canPay(a))return null;window.__oddsSoft="";const capd=odd
   if(ok){if(a.go)a.go()}else if(a.fail)a.fail();
   return ok}
 function cardCost(a){return a.k||(a.c&&a.c.suc<=-20?4:a.c&&(a.c.suc||a.c.bac||a.c.duc)?2:1)}
+/* K-GROUP-COST (RV-188 note a, laws 2/4): a door group card (jdoor DOOR.deck fold) carries its members' cost span: k = the cheapest usable way, kHi = the dearest way it lists;
+   the card prints «1–4 khắc», never only the cheapest way while a dearer one sits inside */
+function cardCostW(a){const k=cardCost(a);return a&&typeof a.kHi==="number"&&a.kHi>k?`${k}–${a.kHi}`:String(k)}
 function act(i){const a=deck[i];if(!a||(a.b!=null&&(S.buoi||0)!==a.b)||!can(cardCost(a))||a.done||S.dead||Q.length||!canPay(a))return;a.done=1;spend(cardCost(a));runOpt(a);render()}
 
 /* places */
