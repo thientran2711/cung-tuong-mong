@@ -414,11 +414,10 @@ function cnvFestOpts(a,m){const X=BAL.ag.par3.cnv.fest;const o=odA(a,X.pour.o+(a
     return `${a.name}, cung nữ của ${m?NM(m):"một cung"}, rót rượu gần ngự tọa, được Hoàng thượng để mắt`}},
   {id:"stand",n:"Đứng sau hầu chủ",tag:"work",fx:{tin:X.stand.tin},x:""}]}
 /* bị nắm thóp (her affair seen, S.srv.leak; an NPC servant whose đối thực is known: j10 threatServ) — v = the one who threatens, m = her master */
-function cnvBlackOpts(a,v,m){const X=BAL.ag.par3.cnv.black;const o=cnvOd(X.ignore.o);const bac=a===S?S.bac:(a.bac||0);
+function cnvBlackOpts(a,v,m){const X=BAL.ag.par3.cnv.black;const o=cnvOd(X.ignore.o);
  return [{id:"obey",n:"Nghe lời, làm tai mắt",tag:"work",fx:{},x:a===S?`thành tai mắt của ${v.name} (không bạc) · kèm: ${cnvSpyX(m||{},1)}`:"",
    go:()=>{oanAdd(a,v,BAL.relMS.threat);if(a===S){S.srv.spyFor=v.id;S.srv.leak=null;try{if(typeof svTouch==="function"){const x=svTouch(v,S,"threat");if(x)log(x)}}catch(e){}/* servant-trust: her master may come to know (law 1) */return""}a.spyFor=key(v);return `${a.name} sợ hãi, thành tai mắt của ${NM(v)}`}},
-  {id:"pay",n:"Đút bạc bịt miệng",tag:"bribe",fx:{bac:-X.pay},lock:a!==S&&bac<X.pay,x:"lần này thôi; tin đồn bớt",
-   go:()=>{if(v===S)apply({bac:X.pay});else ap(v,{bac:X.pay});if(a===S){S.srv.leak=null;S.srv.rumor=0;return""}return `${a.name} đút ${X.pay} lạng bạc bịt miệng ${NM(v)}`}},
+  /* split-merge A4 (owner 26/11 ~21:35Z): no «Đút bạc bịt miệng» — a witness is not bought off here; two roads (obey / mặc kệ), same for an NPC maid */
   {id:"ignore",n:"Mặc kệ",tag:"flee",o,fx:{},w:{},l:{},x:`${word(o)} · thành: nàng không nói · hỏng: nàng mách ${m?m.name:"quản sự"}, bị lục rương`,
    go:ok=>{if(a===S){if(!ok){const mm=manById(S.srv.lover)||srvMen().filter(x=>x.tinh>=BAL.tinhLv.warm)[0];if(mm)srvAffairCaught(mm,`${v.name} sai người mách chuyện tư tình của ngươi.`)}else S.srv.leak=null;return""}
     if(ok)return `${a.name} mặc kệ lời dọa của ${NM(v)}; không ai nói ra`;if(m){m.knowDT=(m.knowDT||[]).concat([a.sid,a.lover]);stfAp(a,{tin:-X.caught.tin});if(roll(cnvOd(X.caught.tgk))&&typeof asOut==="function")asOut(a,"tgk")}

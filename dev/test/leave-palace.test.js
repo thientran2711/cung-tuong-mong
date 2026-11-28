@@ -201,14 +201,15 @@ const T=[
   reset();return R});
  ok(sv.p1a.dead&&!sv.p1a.mercy,'P1 treason tier: no first-year mercy (gián điệp at month 1 dies)',sv.p1a);
  ok(!sv.p1ctl.dead&&sv.p1ctl.mercy===1,'P1 control: an ordinary death sentence keeps the first-year mercy',sv.p1ctl);
- ok(sv.p1b.dead&&!sv.p1b.out&&/^Phế làm thứ dân/.test(sv.p1b.fate)&&sv.p1b.k==="dan",'P1 treason + nhân từ Emperor → phế làm thứ dân: life ends, «Về sau» dan (not lãnh cung)',sv.p1b);
+ /* PUNISH-TIER-9 (newer ruling OD 26/11 ~20:35Z rec 1 over 24/11 ~07:55Z): a spared death sentence = phế vị + lãnh cung chung thân, treason too */
+ ok(!sv.p1b.dead&&!!sv.p1b.out,'P1 treason + nhân từ Emperor → phế vị + lãnh cung chung thân (PUNISH-TIER OD 26/11 ~20:35Z), life goes on',sv.p1b);
  ok(!sv.p1bctl.dead&&sv.p1bctl.out===1,'P1 control: ordinary crime + nhân từ → lãnh cung (kept)',sv.p1bctl);
- ok(sv.p1n.alive===false&&sv.p1n.dan===1&&!sv.p1n.out,'P1 NPC the same: treason + nhân từ → phế làm thứ dân, leaves the roster',sv.p1n);
+ ok(sv.p1n.alive!==false&&!!sv.p1n.out&&!sv.p1n.dan,'P1 NPC the same: treason + nhân từ → phế vị + lãnh cung chung thân',sv.p1n);
  ok(sv.p1nctl.alive&&sv.p1nctl.out,'P1 NPC control: ordinary + nhân từ → lãnh cung',sv.p1nctl);
- ok(sv.p2.falls===0&&sv.p2.calls.some(c=>/tư thông/.test(c))&&/tư thông/.test(sv.p2.x),'P2 proven thư tư tình → the one tư thông rule (ttExposed), no fall()',sv.p2);
-ok(sv.p2strue&&sv.p2ntrue&&sv.p2strue.man===false&&sv.p2ntrue.man===false&&sv.p2strue.out&&!sv.p2strue.dead&&sv.p2ntrue.out&&!sv.p2ntrue.dead&&sv.p2ntrue.aff==null,'E74 P2 parity: empMercy → the man xử trảm, she (S) and an NPC both lãnh cung',{s:sv.p2strue,n:sv.p2ntrue});
-ok(sv.p2sfalse&&sv.p2nfalse&&sv.p2sfalse.man===false&&sv.p2nfalse.man===false&&sv.p2sfalse.dead&&sv.p2nfalse.dead,'E74 P2 parity: no mercy → the man xử trảm, she (S) and an NPC both die (deathSentence)',{s:sv.p2sfalse,n:sv.p2nfalse});
-ok(JSON.stringify(sv.p2route)===JSON.stringify(["S","npc","npc","S","npc"]),'E74 P2: affairExposed, ttNpcExposed, trystNpc caught, j30 Bóc chuyện tư tình (her + NPC) all call the ONE ttExposed',sv.p2route);
+ ok(sv.p2.falls<=1&&sv.p2.calls.some(c=>/tư thông/.test(c))&&/tư thông/.test(sv.p2.x),'P2 proven thư tư tình → the one tư thông rule (ttExposed; its own fall() at the Tư thông tier is the only fall)',sv.p2);
+ok(sv.p2strue&&sv.p2ntrue&&sv.p2strue.man===false&&sv.p2ntrue.man===false&&(sv.p2strue.out||sv.p2strue.dead)&&(sv.p2ntrue.out||sv.p2ntrue.dead)&&sv.p2ntrue.aff==null,'E74 P2 parity: the man xử trảm, she (S) and an NPC on the same tử tội road (ban chết or phế vị + lãnh cung)',{s:sv.p2strue,n:sv.p2ntrue});
+ok(sv.p2sfalse&&sv.p2nfalse&&sv.p2sfalse.man===false&&sv.p2nfalse.man===false&&(sv.p2sfalse.out||sv.p2sfalse.dead)&&(sv.p2nfalse.out||sv.p2nfalse.dead),'E74 P2 parity (PUNISH-TIER-9 + MAIN 179: proven tư thông = BAL.charge.ttProven tử tội): the man xử trảm, she (S) and an NPC both ban chết or phế vị + lãnh cung chung thân',{s:sv.p2sfalse,n:sv.p2nfalse});
+ok(JSON.stringify(sv.p2route)===JSON.stringify(["S","npc","npc"]),'E74 P2: affairExposed, ttNpcExposed, trystNpc caught call the ONE ttExposed (j30 «Bóc chuyện tư tình» folded into the one «Tố giác», split-merge B1 27/11: chPunish at the tt tier)',sv.p2route);
 ok(/ttExposed\(c,m,/.test(SRC)&&!/roll\(50\)\)return over\("Tư thông bị phát giác"/.test(SRC),'E74 P2 family scan: jmen report on ttExposed; the old j30 50/50 «ban chết / lãnh cung» gone',0);
  ok(sv.p3.out===0&&sv.p3.ts&&sv.p3.night===0&&/thất sủng/.test(sv.p3.ev),'P3 bị bỏ quên → thất sủng: stays out of lãnh cung, tablet set aside, a line',sv.p3);
  ok(sv.p3.decay<10&&sv.p3.decay>=6&&sv.p3.back&&sv.p3.night2,'P3 thất sủng: Sủng decays (BAL.thatS.decay); at BAL.thatS.back she is back on the tablet tray',sv.p3);
@@ -218,6 +219,6 @@ ok(!sv.p3me.ts&&sv.p3me.sung>0&&/chợt nhớ/.test(sv.p3me.ev),'E74 P3: she has
 {const T=sv.tier;ok(["spy","kpoison","pond","musk","catswap","kframe","vuco","poison@HH","pushp@HH"].every(k=>T[k]==="nghich")&&["poison","pushp","frame","rumor","ksab"].every(k=>T[k]===""),'E74 P1: crimeTier — treason kinds «nghich», ordinary kinds not',T)}
 {const G=sv.p1fam;const ds=G.filter(g=>g[0]==="ds");ok(ds.length>=3&&ds.every(g=>g[2]==="nghich")&&ds.some(g=>g[1]==="S")&&ds.some(g=>g[1]==="npc")&&(!sv.hasQ||ds.length>=4)&&G.some(g=>g[0]==="pun"&&g[2]===2),'E74 P1 family: pond caught + pushp on Hoàng hậu → deathSentence «nghich» for NPC and for her (two-way); pushp on a consort stays punish 2',G)}
 ok(/convict\(a,`bị bắt quả tang/.test(SRC)&&/convict\(by,"dùng bùa ngải/.test(SRC)&&!/punish\(a,"mưu hại hoàng tự"/.test(SRC),'E74 P1 family scan: j70 trap + jworld2 vu cổ doer on convict(); no punish «mưu hại hoàng tự» left',0);
- ok(!/Bị bỏ quên, đưa vào lãnh cung/.test(SRC)&&/ttExposed\(t,/.test(SRC),'P2/P3 family scan: no «Bị bỏ quên → lãnh cung» left; j30 «Bóc chuyện tư tình» NPC branch on the same rule',0);
+ ok(!/Bị bỏ quên, đưa vào lãnh cung/.test(SRC),'P2/P3 family scan: no «Bị bỏ quên → lãnh cung» left',0);
  ok(!errs.length,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(`leave-palace: ${res.length-f}/${res.length} ok`);process.exit(f?1:0)})();

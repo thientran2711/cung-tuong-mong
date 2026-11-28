@@ -219,7 +219,6 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .pface span{font-size:.66rem;color:var(--dim);max-width:62px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .pface .md.sm{width:28px;height:28px;font-size:.8rem;box-shadow:0 0 0 1px #fff}
 .pface.on{border-color:var(--gold);background:var(--panel2)}.pface.on span{color:var(--ink);font-weight:600}
-.pface.dim{opacity:.45}
 .psep{flex:0 0 auto;font-size:.62rem;color:var(--gold);writing-mode:vertical-rl;transform:rotate(180deg);border-left:1px solid var(--line);padding:0 2px;max-height:42px;overflow:hidden}
 .parr{flex:0 0 auto;width:30px;min-height:44px;border:1px solid var(--line);border-radius:6px;background:var(--k-card,#fffaf0);color:var(--gold);font-size:1.3rem;cursor:pointer;line-height:1}
 .pcount{flex:0 0 auto;font-size:.7rem;color:var(--dim)}
@@ -228,7 +227,6 @@ body[data-buoi="1"] .panel{background:color-mix(in srgb,var(--panel) 95%,#ffb050
 .pcp{position:relative;flex:0 0 auto;width:min(100%,var(--pfw,100%));align-self:center;aspect-ratio:3/4;max-height:58%;min-height:90px;border-radius:10px;overflow:hidden;border:3px solid var(--c,var(--trim));box-shadow:0 0 0 1px #fff,0 0 0 2px var(--trim),0 3px 10px #5a3a2044;background:radial-gradient(circle at 50% 35%,#b0584a,#5a1e16);display:grid;place-items:center;color:#fff8e8;font-family:var(--display);font-size:2.6rem}
 .pcp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 12%;display:block}
 .pcs{position:absolute;left:0;right:0;bottom:0;background:#2a1a12cc;color:#f3e6cf;font-style:normal;font-size:.72rem;text-align:center;padding:2px;font-family:inherit}
-.pc.out .pcp{filter:grayscale(.8)}
 .pcname{font-family:var(--display);font-size:1rem;line-height:1.2;color:var(--ink)}
 .pcrk{font-size:.78rem;color:var(--gold);display:flex;align-items:center;gap:3px;flex-wrap:wrap}
 .pcinfo{display:flex;flex-direction:column;font-size:.76rem;color:var(--dim);gap:1px}.pcinfo b{color:var(--ink)}
@@ -423,9 +421,9 @@ body[data-sea] .curtain{background:linear-gradient(var(--sa2),#f5ecdc)}body[data
 /* full-body figures */
 .stage{container-type:size}
 .tok.fig{min-width:0}
-.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 6px #0006);transform-origin:50% 100%}
+.tok.fig .figimg{display:block;height:58cqh;max-height:420px;width:auto;object-fit:contain;filter:url(#kfa) var(--klf,brightness(1)) var(--kst,) drop-shadow(0 6px 6px #0006);transform-origin:50% 100%}
 .tok.fig:hover .figimg{transform:translateY(-3px)}
-#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 8px 8px #0006);pointer-events:none}
+#mefig{position:absolute;left:50%;bottom:4cqh;height:80cqh;max-height:640px;width:auto;transform:translateX(-50%);transform-origin:50% 100%;z-index:0;filter:url(#kfa) var(--klf,brightness(1)) var(--kst,) drop-shadow(0 8px 8px #0006);pointer-events:none}
 .stage.hasme .tokens{justify-content:flex-end}
 /* review/face-sharp (owner 15/11): no idle sway on people pictures; an animated transform/filter re-samples the face every frame (hazy face) */
 @keyframes figidle{0%,100%{scale:1 1}50%{scale:1 1.012}}

@@ -272,27 +272,38 @@ function kitReward(o){if(kmLifeOver())return null;/* END CARD HOLD: under a livi
  /* KIT §70: an item of the box (not the silver) is tappable: kitItemCard with the shared item detail */
  const kt=x=>x.k?` data-kid="${kmEsc(x.k)}" role="button" tabindex="0"`:"";if(coins)seq.push({n:`Bạc +${coins}`,img:`${KM_DIR}mo-ingot-silver.webp`,g:0,gn:"Bạc",coin:1});
  const info=x=>({name:x.n,src:x.img,src512:x.img,grade:x.g,gname:x.gn||KG[x.g].n,col:x.coin?"#c9a46a":KG[x.g].c,sub:""});
- const tile=(x,i)=>`<span class="kmsh" style="--i:${i}"${kt(x)}>${kitItem({src:x.img,name:"",grade:x.g,gname:x.gn||"",size:"sm",tip:x.n}).replace('<span class="kitn"></span>','')}</span>`;
- const rows=seq.map(x=>`<div class="kmrow"${kt(x)}>${typeof kitGradeChip==="function"?kitGradeChip(x.g,{name:x.gn,size:"sm",col:x.coin?"#c9a46a":""}):""}<b${x.coin?' class="g"':""}>${kmEsc(x.n)}</b>${x.d?`<small>${kmEsc(x.d)}</small>`:""}</div>`).join("");
+ /* owner 27/11 ~05:10Z: NO list frame under the chest — the items that flew out settle as kit item tiles (kitItem sm: icon + name) in neat rows, ×N when the same thing came twice, paged when many; tap = kitItemCard */
+ const tile=(x,i,n)=>`<span class="kmsh" style="--i:${i}"${kt(x)}>${kitItem({src:x.img,name:kmEsc(x.n),grade:x.g,gname:x.gn||"",size:"sm",tip:x.n})}${n>1?`<i class="kmx">×${n}</i>`:""}</span>`;
+ const grp=()=>{const M=new Map();for(const x of seq){const k=(x.k||x.n)+"|"+x.g+(x.coin?"c":"");if(M.has(k))M.get(k).n++;else M.set(k,{x,n:1})}return[...M.values()]};
  const html=`<div class="kmrew kmrew-${kind}${seq.length>6?" km-long":""}"><div class="kmrew-h"><b>${kmEsc(o.title||B[2])}</b>${o.from?`<small>${kmEsc(o.from)}</small>`:""}</div>
   <div class="kmbox"><i class="kmlight km-loop"></i><img class="kmbox-c km-loop" src="${KM_DIR}${B[0]}.webp" alt="" draggable="false"><img class="kmbox-o" src="${KM_DIR}${B[1]}.webp" alt="" draggable="false"><i class="kmlight kmlight-f km-loop"></i><div class="kmcoins">${coins?Array.from({length:Math.min(9,3+Math.round(coins/10))},(_,i)=>`<img src="${KM_DIR}mo-coin-silver.webp" alt="" style="--i:${i}">`).join(""):""}</div><div class="kmspot" style="--kshelf:${RV.shelf||380}ms"></div></div>
-  <div class="kmshelf"></div><div class="kmtap km-loop">Chạm để mở</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
+  <div class="kmshelf"></div><div class="kmtap km-loop">Chạm để mở</div><div class="kmlist kmlist-t"><div class="kmpg"></div><button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
  kmPush(done=>{if(kmLifeOver()){done();return}/* KK31 56.31c: a reward queued before a dead life's ending card is dropped when its turn comes */const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";st.ov.__kmClose=st.close;let step=0;
   const spot=root.querySelector(".kmspot"),shelf=root.querySelector(".kmshelf");const T=[];const later=(ms,f)=>T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms));
-  /* kit-rows-b KP15: the shelf shows at most KMCAP icons + one «+N» chip (22 items = 3 rows of icons covered the list and the Nhận button); the full list below holds every item */const KMCAP=8,more=n=>`<span class="kmsh kmsh-more" style="--i:${KMCAP}">+${n}</span>`;const shelfAll=()=>seq.slice(0,seq.length>KMCAP+1?KMCAP:seq.length).map(tile).join("")+(seq.length>KMCAP+1?more(seq.length-KMCAP):"");
-  const shelfAdd=(x,i)=>{if(seq.length<=KMCAP+1)return shelf.insertAdjacentHTML("beforeend",tile(x,i));if(i<KMCAP)shelf.insertAdjacentHTML("beforeend",tile(x,i));else{const m=shelf.querySelector(".kmsh-more");if(m)m.textContent="+"+(seq.length-KMCAP);else shelf.insertAdjacentHTML("beforeend",more(i+1-KMCAP))}};
-  const fin=()=>{T.forEach(clearTimeout);T.length=0;step=2;spot.innerHTML="";shelf.innerHTML=shelfAll();root.classList.add("km-done","km-fast");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}};
-  const one=i=>{if(step!==1)return;if(i>=seq.length){later(RV.list||350,()=>{step=2;root.classList.add("km-done");try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}});return}
+  /* the shelf shows at most PAGE tiles while the items fly out one by one (+ one «+N» chip); when the last one has landed (or she skipped) it is rebuilt from the merged list, PAGE per page with ‹ › (BAL.reveal.page) */
+  const PAGE=RV.page||12,more=n=>`<span class="kmsh kmsh-more" style="--i:${PAGE}">+${n}</span>`;let pg=0;
+  const shelfAdd=(x,i)=>{if(seq.length<=PAGE+1)return shelf.insertAdjacentHTML("beforeend",tile(x,i,1));if(i<PAGE)shelf.insertAdjacentHTML("beforeend",tile(x,i,1));else{const m=shelf.querySelector(".kmsh-more");if(m)m.textContent="+"+(i+1-PAGE);else shelf.insertAdjacentHTML("beforeend",more(i+1-PAGE))}};
+  const pgBar=root.querySelector(".kmpg");
+  const settle=()=>{const G=grp(),np=Math.max(1,Math.ceil(G.length/PAGE));pg=Math.max(0,Math.min(np-1,pg));
+   shelf.innerHTML=G.slice(pg*PAGE,pg*PAGE+PAGE).map((g,j)=>tile(g.x,j,g.n)).join("");
+   pgBar.innerHTML=np>1?`<button type="button" class="kbtn kmpb" data-kmpg="-1" ${pg?"":"disabled"} aria-label="Trang trước">‹</button><span>${pg+1}/${np}</span><button type="button" class="kbtn kmpb" data-kmpg="1" ${pg<np-1?"":"disabled"} aria-label="Trang sau">›</button>`:""};
+  pgBar.addEventListener("click",e=>{const b=e.target.closest("[data-kmpg]");if(!b||b.disabled)return;e.stopPropagation();pg+=+b.dataset.kmpg;settle()});
+  const fin=()=>{T.forEach(clearTimeout);T.length=0;step=2;spot.innerHTML="";root.classList.add("km-done","km-fast");settle();try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}};
+  /* pacing (root cause of the owner's «nhảy một loạt», 27/11): ~3.8 s per item × a monthly allotment of 10+ items made her tap, and a tap used to show EVERYTHING at once + the list.
+     Now: the whole fly-out fits BAL.reveal.total (per-item time shrinks, never below minScale), and a tap speeds the rest up but they still come out ONE BY ONE (BAL.reveal.fast) */
+  const per=(RV.rise||550)+(RV.hold||1300)+(RV.shelf||380),pace0=parseFloat(getComputedStyle(root).getPropertyValue("--pace"))||1;let sc=Math.max(RV.minScale||.3,Math.min(1,(RV.total||8000)/Math.max(1,seq.length*per))),cur=0,quick=false;
+  const setSc=v=>{sc=v;spot.style.setProperty("--pace",String(pace0*sc))};setSc(sc);
+  const one=i=>{if(step!==1)return;cur=i;if(i>=seq.length){later((RV.list||350)*sc,()=>{step=2;root.classList.add("km-done");settle();try{window.__kmRev=(window.__kmRev||0)+1}catch(e){}});return}
    const x=seq[i];spot.innerHTML=kitRevealHTML(info(x),{noSub:true});root.dataset.kmi=String(i);
    try{if(typeof kitSfx==="function")kitSfx(x.coin?"coinBounce":x.g>=3?"itemRare":"itemPop",{rate:1+Math.min(i,5)*.05});else if(typeof sfx==="function")sfx(x.coin?"sfx-coin":"sfx-open")}catch(e){}
-   if(x.g>=2){const r=spot.getBoundingClientRect();later((RV.rise||550)*.7,()=>kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,x.g>=4?34:x.g>=3?26:16,x.g>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4",KG[x.g].c,"#f6ead6"],x.g>=3?170:130))}
-   later((RV.rise||550)+(RV.hold||1300),()=>{const p=spot.firstElementChild;if(p)p.classList.add("krev-out");
-    later(RV.shelf||380,()=>{spot.innerHTML="";shelfAdd(x,i);one(i+1)})})};
+   if(x.g>=2){const r=spot.getBoundingClientRect();later((RV.rise||550)*sc*.7,()=>kmSpark(st.ov,r.left+r.width/2,r.top+r.height*.4,x.g>=4?34:x.g>=3?26:16,x.g>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4",KG[x.g].c,"#f6ead6"],x.g>=3?170:130))}
+   later(((RV.rise||550)+(RV.hold||1300))*sc,()=>{const p=spot.firstElementChild;if(p)p.classList.add("krev-out");
+    later((RV.shelf||380)*sc,()=>{spot.innerHTML="";shelfAdd(x,i);one(i+1)})})};
   const open=()=>{if(step)return;step=1;if(kmReduced()){root.classList.add("km-open");fin();return}root.classList.add("km-shake");
    later(RV.shake||420,()=>{root.classList.remove("km-shake");root.classList.add("km-open");
     const b=root.querySelector(".kmbox").getBoundingClientRect();const best=seq.length?Math.max(...seq.map(x=>x.g)):0;kmSpark(st.ov,b.left+b.width/2,b.top+b.height*.45,best>=4?40:24,best>=4?["#f0d070","#fff3c4","#e0a526"]:["#fff3c4","#f6ead6","#e0c080"],best>=3?190:140);
     later(RV.pause||700,()=>one(0))})};
-  st.ov.addEventListener("click",e=>{if(e.target.closest("[data-km-close]")){T.forEach(clearTimeout);return}if(step===0)open();else if(step===1)fin()},true);
+  st.ov.addEventListener("click",e=>{if(e.target.closest("[data-km-close]")){T.forEach(clearTimeout);return}if(step===0)open();else if(step===1){if(quick)fin();else{quick=true;T.forEach(clearTimeout);T.length=0;spot.innerHTML="";setSc(RV.fast||.12);one(cur)}}},true);
   if(kmReduced())open()})}
 function kitFlyItem(k){if(kmReduced()||!k)return;const src=kmItemImg(k);const tb=document.querySelector('[data-tab="inv"]');if(!src||!tb)return;const r=tb.getBoundingClientRect();
  const im=document.createElement("img");im.className="kmfly";im.src=src;im.alt="";const x0=innerWidth/2,y0=innerHeight*.45;im.style.left=x0+"px";im.style.top=y0+"px";document.body.appendChild(im);
@@ -582,6 +593,11 @@ body:has(.kmov.km-inkov:not(.km-out)) :is(#modal.end,#modal.kes){visibility:hidd
 /* ONE paper card for the motion screens: the reward list and the person reveal (KIT §65.2) share this frame */
 .kmlist,.kprev-card,.ktrv-card{width:100%;max-width:440px;background:#fffaf0f4;border:1px solid var(--gold);border-radius:var(--k-rad,8px);padding:8px 10px;box-shadow:0 0 0 3px #f6ead6,0 10px 26px #0008;box-sizing:border-box}
 .kmlist{display:none;flex-direction:column;gap:5px}
+/* owner 27/11 ~05:10Z: the reward chest has NO list frame: the shelf of kit item tiles IS the result; pager + Nhận sit under it */
+.kmrew .kmshelf{gap:8px 6px;max-width:min(94vw,560px)}.kmrew .kmsh{position:relative;width:84px}
+.kmrew .kmsh .kitn{color:#f6e3b4;text-shadow:0 1px 3px #000}.kmsh>.kmx{position:absolute;right:12px;top:0;font:700 .7rem/1 var(--kit-font,inherit);font-style:normal;color:#fff3c4;background:#2a1a12d0;border-radius:999px;padding:2px 6px;pointer-events:none}
+.kmrew .kmlist.kmlist-t{background:none;border:0;box-shadow:none;padding:0;max-width:none;align-items:center}
+.kmpg{display:flex;align-items:center;justify-content:center;gap:10px;color:#f6e3b4;font-size:.85rem}.kmpg:empty{display:none}.kmpb{min-width:44px}
 .km-done .kmlist{display:flex;animation:kmUp2 calc(.3s*var(--pace)) var(--km-ease) both}
 .kmrow{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:8px;align-items:baseline;padding:3px 0;border-bottom:1px dotted var(--k-hair,#e6d3ac)}
 .kmrow small{grid-column:2;font-size:.76rem;color:var(--dim)}.kmrow b{font-size:.9rem}
