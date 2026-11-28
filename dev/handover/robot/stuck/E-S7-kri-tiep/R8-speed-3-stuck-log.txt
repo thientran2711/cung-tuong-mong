@@ -1,0 +1,18 @@
+STATUS R8-speed-3 · buổi 177 · year 2 · rank 0 · bugs 2 · stuck 0 · dead buttons 0
+STATUS R8-speed-3 · buổi 435 · year 4 · rank 0 · bugs 2 · stuck 0 · dead buttons 0
+BUG stuck no progress 15 min on page «Ngọc Thanh các · Ở đây còn 1 người.»
+BUG SAVE REWIND: reload went back from b438 (clock 4.37.0.1) to the stored b436 (clock 4.36.2.3) (2 buổi lost)
+BUG game SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)
+BUG SAVE REWIND: reload went back from b438 (clock 4.37.0.1) to the stored b436 (clock 4.36.2.3) (2 buổi lost)
+STATUS R8-speed-3 · buổi 462 · year 4 · rank 0 · bugs 5 · stuck 2 · dead buttons 0
+BUG stuck no progress 15 min on page «Ngọc Thanh các · Ở đây còn 2 người.»
+STATUS R8-speed-3 · buổi 524 · year 4 · rank 0 · bugs 7 · stuck 5 · dead buttons 1
+BUG SAVE REWIND: reload went back from b524 (clock 4.44.1.1) to the stored b523 (clock 4.44.1.0) (1 buổi lost)
+BUG stuck no progress 15 min on page «Ngọc Thanh các · Ở đây còn 3 người.»
+STATUS R8-speed-3 · buổi 562 · year 4 · rank 0 · bugs 8 · stuck 8 · dead buttons 1
+STATUS R8-speed-3 · buổi 781 · year 6 · rank 0 · bugs 8 · stuck 8 · dead buttons 1
+BUG stuck no progress 15 min on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng»
+BUG stuck no progress 15 min on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 5 ng»
+BUG SAVE REWIND: reload went back from b849 (clock 6.72.0.0) to the stored b848 (clock 6.71.2.3) (1 buổi lost)
+STATUS R8-speed-3 · buổi 857 · year 6 · rank 0 · bugs 10 · stuck 10 · dead buttons 1
+BUG stuck no progress 15 min on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 3 ng»
