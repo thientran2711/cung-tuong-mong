@@ -17,7 +17,7 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(
   if(MU==='a')KIT_ACT_CATS.unshift(["trung-phat",/đổi người/i],["di-lai",/vào |ra /i],["hau-ha",/người hầu/i]);
   if(MU==='b'&&window.ONE)ONE.lockW=()=>"—";
   if(MU==='c'&&window.TOILV)TOILV.split=0;
-  if(MU==='d'){if(typeof rcvHelpX==="function")window.rcvHelpX=()=>"nàng có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách";window.doorGain0=doorGain}
+  if(MU==='d'){if(typeof rcvHelpX==="function")window.rcvHelpX=()=>({x:"nàng có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách",risk:""})}
   /* (a) */
   const CN=c=>(KIT_CAT[c]||[c])[0];
   for(const n of ["Đổi người chạy việc","Đổi người nếm món","Đổi người nấu, giăng bẫy","Đổi người đưa thư"]){const c=kitActCat(n);chk(c!=="trung-phat"&&c!=="buon-ban",`a: «${n}» tab ${CN(c)}`)}
@@ -40,13 +40,14 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(
   /* (d) */
   {let n=0,bad=[],help=null;/* same cao world as (c): a second AA.scen builds another world */for(const dt of [0,1,2])for(const sf of AA.surfaces().filter(s=>s.place)){AA.restore();S.turn=(S.turn||0)+dt;AA.show(sf);const P=curPeople();
     P.forEach((pp,i)=>{if(pp.kind!=="rival"&&pp.kind!=="hh")return;let A=[];try{A=talkOpts(pp)}catch(e){return}
-     for(const a of A){if(!a)continue;if(a.n==="Nhờ giúp đỡ"&&!help)help=a;if(a.one!=="one"||a.lock)continue;n++;
+     for(const a of A){if(!a)continue;if(a.n==="Nhờ giúp đỡ"&&!help)help=Object.assign({},a,{who:pp.kind+":"+pp.name+"@"+sf.id+" d"+dt});if(a.one!=="one"||a.lock)continue;n++;
       let full="";try{full=optLine(a)}catch(e){}const gl=T(doorGain([String(a.x||"")]));const fl=T(full);
       /* the button line must name a gain; a line whose only «thành» piece is a price («Bạc −») is the fault */
       const th=(/thành: ([^·]*)/.exec(fl)||[])[1]||"";if(!gl||(th&&/^[^,]*: ?Bạc [-−]/.test(th.trim())&&!/\+/.test(th)))bad.push(`${T(a.n)} @${sf.id} d${dt}: «${fl.slice(0,110)}»`)}})}
    chk(n>0,`d: one-tap doors read ${n}`);chk(!bad.length,`d: one-tap doors without a gain ${bad.length}${bad.length?": "+[...new Set(bad)].slice(0,4).join(" | "):""}`);
-   const hx=help?T(help.x):"";const X=BAL.ag.cx2.help,R2=BAL.rcv.help;
-   chk(help&&/được:/.test(hx)&&hx.includes("Bạc +"+X.bac)&&/mất:/.test(hx)&&hx.includes("Danh -"+R2.danh),`d: «Nhờ giúp đỡ» line «${hx.slice(0,160)}»`)}
+   const X=BAL.ag.cx2.help,R2=BAL.rcv.help;let ln="";try{const d=document.createElement("div");d.innerHTML=optLine(help);const g=k=>[...d.querySelectorAll(".kr-"+k+" .ef")].map(e=>T(e.textContent)).join(", ");ln={th:g("thanh")+g("duoc"),bai:g("bai")+g("mat")}}catch(e){}
+   /* the kit card of the option (optLine → kit rows; magnitudes show as marks «Bạc ++»): Thành / Được names the bạc + chứng cứ she gets (the numbers are BAL.ag.cx2.help.bac / BAL.ag.ev.one in jrcv rcvHelpX), Bại / Mất the Danh she loses when told on */
+   chk(help&&ln&&/Bạc \+/.test(ln.th)&&/chứng cứ \+/.test(ln.th)&&!/Danh/.test(ln.th)&&/Danh [-−]/.test(ln.bai)&&!/Bạc \+/.test(ln.bai),`d: «Nhờ giúp đỡ» card Thành «${ln&&ln.th.slice(0,120)}» Bại «${ln&&ln.bai.slice(0,90)}» (x «${help?T(help.x).slice(0,140):""}» risk «${help?T(help.risk):""}» who ${help&&help.who})`)}
   return{F,OK}},MU);
  for(const m of R.OK)console.log('  ok   '+m);for(const m of R.F)console.log('  FAIL '+m);
  console.log('E-GAIN4 unit: '+R.OK.length+' ok, '+R.F.length+' fail, page errors '+perr.length);perr.slice(0,3).forEach(e=>console.log('  PERR '+e));

@@ -44,8 +44,9 @@ function rcvHelpOpts(p,t){const X=BAL.ag.cx2.help,R=BAL.rcv.help,H=BAL.road.hp,q
    else a tale about someone guilty = evidence) and what she LOSES when the receiver refuses / tells on her (slot 2 / 3) — read from the same constants
    rcvHelpOpts pays (BAL.ag.cx2.help, BAL.rcv.help, BAL.ag.ev.one); no number typed. Before: «<word> · nàng có thể giúp …» only (Tốn + Ghi chú, no Được). */
 function rcvHelpX(p,t){const X=BAL.ag.cx2.help,R=BAL.rcv.help,half=Math.round(X.bac*R.half),me=p===S,nm=me?"ngươi":p.name;
- return `được: <span class="g">nàng giúp hết lòng: Bạc ${balSg(X.bac)}, hoặc kể cho ${nm} một chuyện về kẻ có tội: ${evSg(BAL.ag.ev.one)}; làm qua loa: Bạc ${balSg(half)}</span>`+
-  ` · mất: nàng từ chối: hai bên quý nhau ${balSg(-X.fail)}; nàng đem chuyện đi mách: ${nm} mang tiếng, Danh ${balSg(-R.danh)}`}
+ /* in the option's own fields (optLine: x pieces = Thành / Được, risk = Bại): what the answer gives her, and what it costs her when the answer is no */
+ return{x:`nàng giúp hết lòng: Bạc ${balSg(X.bac)}, hoặc ${evSg(BAL.ag.ev.one)} về kẻ khác · làm qua loa: Bạc ${balSg(half)}`,
+  risk:`nàng từ chối: hai bên quý nhau ${balSg(-X.fail)}, nàng đem chuyện đi mách: Danh ${balSg(-R.danh)}`}}
 window.rcvHelpX=rcvHelpX;
 /* the asker's side (her j9 card and cx2:help): the receiver NPC answers now; when the receiver is HER, her card comes (PEND.rcvHelp) */
 /* HER card: ONE notice path. With parallel-time's receiver notice (jptime ptOrdAdd: S.ordQ + «信» icon, answered from the panel when her act ends,
