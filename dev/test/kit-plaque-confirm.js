@@ -5,7 +5,7 @@
    (3) the lifted (widened) plaque never goes left of postBox.x0;  (4) it never covers its own name / odds / cost line or any other plaque;
    (5) it is inside the stage;  (6) «Chọn» chooses (one board);  (7) kitNameTagFit on a DETACHED root returns 0 and never sets a 0 px plate height.
    usage: node dev/test/kit-plaque-confirm.js <index.html> [WxH,...] [shotdir]   exit 1 on FAIL */
-const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');const SHOT=process.argv[4]||'';
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');const SHOT=process.argv[4]||'';
 (async()=>{const b=await chromium.launch();let fails=0;const chk=(n,ok,v)=>{console.log((ok?'ok  ':'FAIL')+' '+n+' '+JSON.stringify(v));if(!ok)fails++};
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const p=await b.newPage({viewport:{width:W,height:H},deviceScaleFactor:+process.env.DSF||1});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,140)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
   await p.goto('file://'+SRC,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.kitPick,null,{timeout:240000});await p.waitForTimeout(1200);

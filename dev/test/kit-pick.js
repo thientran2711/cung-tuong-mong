@@ -4,7 +4,7 @@
    reduced motion = none, kitFocus.btn is the kit button. kitDim: figure only, opaque (computed opacity 1, filter brightness+saturate from BAL.kdim, background untouched), off removes it.
    Place title vs head-count chip (jplst): for long titles × a 3-digit count the title never touches the rail chip.
    usage: node dev/test/kit-pick.js <url> <outdir> [WxH,...]   (url = file:///…/index.html) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});let bad=0;
  for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(process.env.DSF||1),hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});

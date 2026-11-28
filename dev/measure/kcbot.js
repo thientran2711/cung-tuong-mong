@@ -1,7 +1,7 @@
 // Outside route (jkc) balance bot: node dev/measure/kcbot.js <livesPerOrigin> [sens|rand] [origins comma list] [diff]
 // Plays the home road from the identity card to the palace entry (or an ending outside), many lives, and prints the outcome
 // table against OUTSIDE_PLAN §12: enter palace / married outside / death outside / rare. Serves the built site at the repo root (GF=<file> to change).
-const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const path=require('path');const fs=require('fs');
 const ROOT=path.resolve(__dirname,'../..');const GAME='http://game.local/'+(process.env.GF||'index.html');/* r2: the built site (index.html); images are not loaded */
 const MT={html:'text/html',js:'text/javascript',json:'application/json',webp:'image/webp',png:'image/png',jpg:'image/jpeg',css:'text/css'};
 const N=+process.argv[2]||10,POL=process.argv[3]||'sens',ORIG=(process.argv[4]||'tt,dtq,muoi,thd,ch,td').split(','),DIFF=process.argv[5]||'vua';

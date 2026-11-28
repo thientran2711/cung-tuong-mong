@@ -2,7 +2,7 @@
    khăn che mặt, y phục) and one bag item; prints the box, the tile size vs. the bag-grid tile, act-card heights (content vs. box), close
    words, and shoots each. usage: node dev/test/slot-card.js <build page url> <outdir> <tag> [WxH@dpr,…]
    (default 755x1000@2,1000x755@2,1180x820@2). Images missing from a sparse checkout come from the live site. */
-const {chromium}=require('playwright');const fs=require('fs');const https=require('https');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const https=require('https');
 /* start() may finish after the loading screen: wait for the life, and start again while it is a servant life */
 async function kcWait(p){for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>typeof isSrv==="function"&&isSrv())))return;await p.evaluate(()=>{S=null;try{nlNew()}catch(e){}start()})}}
 const [,,PAGE,OUT,TAG,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});

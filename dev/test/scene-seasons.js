@@ -1,5 +1,5 @@
 /* node run.js WxH@dpr OUTDIR : each season x each buoi, every scene; checks chosen bg + feet on floor + no page errors */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();
 const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+DPR,hasTouch:W<1100});const p=await ctx.newPage();

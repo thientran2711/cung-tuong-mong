@@ -4,7 +4,7 @@
    Each month: one rival, one servant, one court post holder and one palace man are given a lifespan ending now (jmort's own death path,
    mortMonth), sometimes a rival is sent to / freed from Trường Môn viện, Lý dies in month 9 (branch only: main has no Lý death);
    then she walks to every Dư đồ place and the stage + map count are checked. Prints one JSON summary line. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const R=path.resolve(process.argv[2]||'.');const LIVES=+(process.argv[3]||3),MON=+(process.argv[4]||18);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1000,height:755}});
  await ctx.route('http://ts.local/**',r=>{const u=decodeURIComponent(new URL(r.request().url()).pathname);const f=R+u;if(!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});r.fulfill({status:200,contentType:/\.html$/.test(f)?'text/html; charset=utf-8':'application/octet-stream',body:fs.readFileSync(f)})});

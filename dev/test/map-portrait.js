@@ -6,7 +6,7 @@
    per weather; 0 label overlaps.
    kv2 (iPad landscape): UNCHANGED - the side column is still a narrow column (#kshR not a grid), map margins 56 / column+8.
    usage: node dev/test/map-portrait.js <page URL> <shotdir|-> [WxH,..] */
-const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
 const [,,PAGEURL,DIR,SIZES]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const WX=[['rain',{n:'mưa phùn',k:'rain',f:1},0],['sun',{n:'nắng vàng',k:'sun',f:0},0],['snowh',{n:'tuyết dày',k:'snowh',f:4},0],['dust night',{n:'trời quang',k:'dust',f:0},3]];
 (async()=>{const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});let bad=0;

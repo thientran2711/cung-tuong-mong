@@ -5,7 +5,7 @@
      B  the same with a stale registry entry (KREG) only: a key a registered person holds is never issued again;
      C  the guest seat (COOPW.seat "b") issues its own namespace («x<n>b»), so the host's keys that the merged world carries never meet hers.
    usage: python3 dev/build/assemble.py && node dev/test/k61-key-life.js [index.html] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html';
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m,x)=>{if(!c){bad++;console.log('FAIL',m,x!==undefined?JSON.stringify(x):'')}else console.log('ok',m)};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});

@@ -1,6 +1,6 @@
 /* (copy of dev/handover/reports/lc19-tools/hit-overlap.js @33d0f021, box() reads the r4 measured hit vars) LC19 gate: kit info-target hit areas (::after >= 44x44, tainghe r3b) — on Fold + iPad, every bottom tab + sub-tab:
    (A) pairs of visible info targets whose hit boxes intersect; (B) a hit box covering another tap control where the tap lands on the info target. expect 0/0 */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');
 const U0=process.argv[2];const URL='file://'+path.resolve(U0);
 const SETUP=()=>{try{window.__kbootHostDrop&&window.__kbootHostDrop()}catch(e){}document.querySelectorAll('#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov').forEach(e=>e.remove());
  SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}

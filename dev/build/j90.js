@@ -16,9 +16,9 @@
    Tranh ghế result (j34), hoàng tự exams (j53 .ktlist), công chúa dâng nghệ (j54 .h54list). */
 KP_SEAL.honor="VINH DANH";
 const KPOD_WORD=["Nhất","Nhì","Tam"];
-function kitFigOf(p){try{if(!p)return"";if(S&&p.kind==="th"&&!p.ref&&p!==S.thO&&!S.thDead)p=S.thO=S.thO||{};else if(S&&p.kind==="emp"&&!p.ref&&p!==S.emp)p=S.emp;if(!kitIsKnown(p)){return KIT_DIR+`unknown-fig-${kitSilG(p)}.webp`}
+function kitFigOf(p){try{if(typeof kitFigWho==="function")p=kitFigWho(p);/* K-SRV-OWNFIG (KK63) */if(!p)return"";if(S&&p.kind==="th"&&!p.ref&&p!==S.thO&&!S.thDead)p=S.thO=S.thO||{};else if(S&&p.kind==="emp"&&!p.ref&&p!==S.emp)p=S.emp;if(!kitIsKnown(p)){return KIT_DIR+`unknown-fig-${kitSilG(p)}.webp`}
  if(typeof allKids==="function"&&allKids().some(([k])=>k===p))return typeof kidFigSrc==="function"?kidFigSrc(p):"";
- if(typeof figFor!=="function")return"";const f=figFor(p===S?S:S&&p===S.emp?{kind:"emp"}:S&&p===S.thO?{kind:"th"}:{ref:p})||"";return f||kitSilFig(p)}catch(e){return""}}
+ if(typeof figFor!=="function")return"";const f=figFor(p===S?S:S&&p===S.emp?{kind:"emp"}:S&&p===S.thO?{kind:"th"}:p.kind==="ty"&&!p.ref?p/* K-SRV-OWNFIG: the Thái y draws as physician, never as a consort ref */:{ref:p})||"";return f||kitSilFig(p)}catch(e){return""}}
 /* D50 review/dlg-fig-ph: a person with no full-body art (story NPC, deposed consort, staff record, child without a ref ...) never leaves an empty frame:
    the kit silhouette unknown-fig-f|m|k by role/sex (same fallback chain as the week book j87 and the §59 placeholder rules). Art still missing is listed by dev/test/dlg-fig-scan.js. */
 function kitSilFig(p){try{if(!p||typeof p!=="object")return"";return KIT_DIR+`unknown-fig-${kitSilG(p)}.webp`}catch(e){return""}}

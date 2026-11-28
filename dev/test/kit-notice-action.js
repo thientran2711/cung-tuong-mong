@@ -1,7 +1,7 @@
 /* kit-notice-action.js — KK29 SOFTLOCK (F BIG REVIEWER #5, bc-stack-review): a «Tin báo» panel with MANY notices (25 / 60) PLUS one ACTION notice (go → «Để ta xem» / «Để sau», v3 figure-left frame)
    must keep «Để ta xem / Để sau» IN VIEW and tappable (the notice list scrolls inside the frame, the options never leave the screen), and a real tap on «Để sau» closes it. Whole family: N = 1, 6, 25, 60 notices
    with / without the action; Fold 755x1000 + iPad 1180x820. usage: node dev/test/kit-notice-action.js <index.html> [outdir]  Exit 1 on a FAIL. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const R=[];
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
