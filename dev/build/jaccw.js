@@ -183,7 +183,7 @@ function awCoreCard(id){const R=(S.accw||{})[id];if(!S||!R||R.k!=="core"||S.dead
   go:()=>{if(!(S.accw||{})[id]){awPay(S,-Sh.bac);return}ap(P.to,{bac:Sh.bac});if(!roll(awShieldO(al,S,P))){log(`${P.n} nhận lễ của ngươi nhưng không ra mặt; việc vẫn tới ngày xét.`);return}
    delete S.accw[id];let k=0;if(al){k=awAll(al,S);if(k)evA(al,S,-k);ap(al,{danh:-Sh.foeDanh});try{oanAdd(al,S,Sh.oan)}catch(e){}}log(`${P.n} gác việc ấy lại${al?`; mọi chứng cứ ${al.name} nắm về ngươi bị đốt, ${al.name} Danh ${balSg(-Sh.foeDanh)}`:""}.`)}});
  /* rv FAIL 4: a held core with no way out gets one plain acknowledge option (the standard dialog's «Cúi đầu …» kind, as j42 cnvName), never the empty fallback */
- if(!O.length)O.push({n:srv?"Cúi đầu chờ ngày ấy":"Cúi đầu chờ ngày xét",fx:{},go:()=>{}});
+ if(!O.length)O.push({n:srv?"Cúi đầu chờ ngày ấy":"Cúi đầu chờ ngày xét",fx:{},j67:"được: biết trước ngày ấy, kịp thu xếp việc riêng",go:()=>{}});
  if(srv){const w=String(R.why||"");return {who:undefined,t:`<p>Tin dữ: ${w.charAt(0).toUpperCase()+w.slice(1)}.</p><p>Trong ${n} buổi tới, ngươi ${pen}.${L?"":" Không có đường lui; chỉ còn chờ ngày ấy."}</p>`,o:O}}
  const cn=c&&!/tội /.test(R.why)?`, tội <b>${chName(c).toLowerCase()}</b>`:"";
  return {who:al?pv(al):undefined,t:`<p>Cung Chính ti báo tin: ${al?`${al.name} đã đứng ra tố ngươi: `:""}${awSay(R.why,n,cn)}.</p><p>Nếu tội thành, ngươi ${pen}. Không làm gì thì chờ ngày xét.</p>`,o:O}}
