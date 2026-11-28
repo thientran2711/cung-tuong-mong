@@ -775,4 +775,4 @@ B-RDW-D R9 pf+arcs+R10 bd (row 4 road-dialogue writers; lead 6X94bVbz) | content
 B-ROW26-TALK BIG RV | review/row26-talk e70e9e38 | FOREMAN B ROOT3 child2 / rv session_01N1tNP2KKJkkwauJFWVHcCs | RUNNING | 28/11 08:32Z
 ILLNESS-CURE-4 (r5: staff cure road law 1 + kidIll + re-merge a96564ad) | review/illness-cure | session_01PEhRbwXRToECD9cRMDDoUq | RUNNING | 28/11 08:33Z Foreman C
 B-RDW-E R10 bd (row 4 road-dialogue writer; lead 6X94bVbz; moved from RDW-D) | content on handover branch → review/road-dialogue | FOREMAN B ROOT3 child2 / worker session_01N1tNP4A1XWXb4BgegX4WBF | CANCELLED (bd already done by RDW-D; ARCHIVED unused) | 28/11 08:40Z
-B-ROW11-LAW1 r2 (successor of 2pyGSYRn: role-parity-scan door era + open.json re-baseline + family fixes) | review/row11-law1 3b667243 | FOREMAN B ROOT3 child2 / worker <opening> | RUNNING | 28/11 08:48Z
+B-ROW11-LAW1 r2 (successor of 2pyGSYRn: role-parity-scan door era + open.json re-baseline + family fixes) | review/row11-law1 3b667243 | FOREMAN B ROOT3 child2 / worker session_01N1tNP445am54Wo5eKGK7pA | RUNNING | 28/11 08:48Z
