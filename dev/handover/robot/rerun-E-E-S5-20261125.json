@@ -10,7 +10,7 @@
  ],
  "note": "flagged lives left #kg82 mini-game boards unplayed per audit (mg quit); verdict INVALID under Foreman E rule 26/11 until F posts the board-play PASS; audit script verdict stays VALID",
  "game": "LIVE github.io",
- "finished": 40,
+ "finished": 38,
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -14221,895 +14221,6 @@
    "mgReady": null
   },
   {
-   "life": "E-S5-R5-greedy-5",
-   "dev": "fold",
-   "bot": "bold",
-   "seed": 1250053385,
-   "origin": "pf",
-   "road": "pt_su",
-   "ending": "HARNESS",
-   "type": "harness",
-   "death": null,
-   "age": null,
-   "buoi": 2326,
-   "harness": {
-    "kind": "realtap",
-    "sha": "496b6b66",
-    "realtap": true,
-    "jsClicks": 0,
-    "deadButtons": 0,
-    "cap": null,
-    "stuck": 4,
-    "unstick": [
-     {
-      "at": 3134,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Tin báo"
-     },
-     {
-      "at": 5902,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Tin báo"
-     },
-     {
-      "at": 827,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 1141,
-      "lvl": 3,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 2354,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 2604,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 2941,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 3182,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 3464,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 3779,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 4158,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 4475,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 4780,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 5075,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 5657,
-      "lvl": 1,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 38,
-      "lvl": 1,
-      "layer": "#kload",
-      "title": ""
-     },
-     {
-      "at": 1109,
-      "lvl": 3,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 1242,
-      "lvl": 1,
-      "layer": "#kload",
-      "title": ""
-     },
-     {
-      "at": 2235,
-      "lvl": 3,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 2367,
-      "lvl": 1,
-      "layer": "#kload",
-      "title": ""
-     },
-     {
-      "at": 3408,
-      "lvl": 3,
-      "layer": ".dlg",
-      "title": "Biếu quà làm lành"
-     },
-     {
-      "at": 3586,
-      "lvl": 1,
-      "layer": "#kload",
-      "title": ""
-     },
-     {
-      "at": 24,
-      "lvl": 1,
-      "layer": "#kload",
-      "title": ""
-     },
-     {
-      "at": 4301,
-      "lvl": 3,
-      "layer": ".kmov",
-      "title": ""
-     },
-     {
-      "at": 4332,
-      "lvl": 1,
-      "layer": "#kload",
-      "title": ""
-     },
-     {
-      "at": 4432,
-      "lvl": 3,
-      "layer": ".kmov",
-      "title": ""
-     },
-     {
-      "at": 4462,
-      "lvl": 1,
-      "layer": "#kload",
-      "title": ""
-     },
-     {
-      "at": 4480,
-      "lvl": 2,
-      "layer": ".kmov",
-      "title": ""
-     },
-     {
-      "at": 4638,
-      "lvl": 2,
-      "layer": ".kmov",
-      "title": ""
-     },
-     {
-      "at": 24,
-      "lvl": 1,
-      "layer": "#kload",
-      "title": ""
-     },
-     {
-      "at": 1159,
-      "lvl": 1,
-      "layer": "#kg82",
-      "title": "",
-      "skipped": "mini-game board: no back"
-     }
-    ],
-    "slice": null,
-    "areaTaps": 5163,
-    "dlgScroll": 503,
-    "scrolls": 840,
-    "infoTaps": 2349,
-    "dlgClose": 1351,
-    "nextNoTurn": 66,
-    "kfocVisits": 180,
-    "crashes": 1,
-    "taps0": 0,
-    "resumed": [
-     {
-      "at": "2026-11-26T01:29:31.634Z",
-      "buoi": 291,
-      "from": "2026-11-26T01:18:32.246Z"
-     },
-     {
-      "at": "2026-11-26T01:55:05.491Z",
-      "buoi": 341,
-      "from": "2026-11-26T01:52:54.051Z"
-     },
-     {
-      "at": "2026-11-26T03:54:05.363Z",
-      "buoi": 843,
-      "from": "2026-11-26T03:53:12.759Z"
-     },
-     {
-      "at": "2026-11-26T05:53:20.378Z",
-      "buoi": 1476,
-      "from": "2026-11-26T05:52:36.527Z"
-     },
-     {
-      "at": "2026-11-26T07:39:50.119Z",
-      "buoi": 1852,
-      "from": "2026-11-26T07:39:11.197Z"
-     },
-     {
-      "at": "2026-11-26T07:55:27.076Z",
-      "buoi": 1858,
-      "from": "2026-11-26T07:51:26.761Z"
-     },
-     {
-      "at": "2026-11-26T08:39:33.050Z",
-      "buoi": 1876,
-      "from": "2026-11-26T08:37:04.321Z"
-     },
-     {
-      "at": "2026-11-26T09:55:51.917Z",
-      "buoi": 1907,
-      "from": "2026-11-26T09:53:10.202Z"
-     },
-     {
-      "at": "2026-11-26T11:56:38.385Z",
-      "buoi": 2132,
-      "from": "2026-11-26T11:55:10.061Z"
-     },
-     {
-      "at": "2026-11-26T13:43:00.793Z",
-      "buoi": 2174,
-      "from": "2026-11-26T13:39:49.160Z"
-     },
-     {
-      "at": "2026-11-26T15:22:00.265Z",
-      "buoi": 2213,
-      "from": "2026-11-26T15:19:35.458Z"
-     },
-     {
-      "at": "2026-11-26T17:20:29.017Z",
-      "buoi": 2229,
-      "from": "2026-11-26T17:00:52.801Z"
-     },
-     {
-      "at": "2026-11-27T21:24:41.332Z",
-      "buoi": 2233,
-      "from": "2026-11-26T18:33:48.731Z"
-     },
-     {
-      "at": "2026-11-27T22:55:23.278Z",
-      "buoi": 2323,
-      "from": "2026-11-27T22:54:24.815Z"
-     }
-    ],
-    "build": {
-     "s": "3762da08+",
-     "b": "fa8da73cecdc",
-     "t": "2026-11-25T19:34Z"
-    },
-    "mgDragSkip": 7,
-    "mgReady": 42,
-    "backdropTaps": 4,
-    "bareBlocked": 2,
-    "mgQuickSkipped": 116,
-    "mgBackWhy": [
-     {
-      "at": 486,
-      "buoi": 2136,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại",
-       "✕",
-       "✕"
-      ]
-     },
-     {
-      "at": 1051,
-      "buoi": 2137,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 1650,
-      "buoi": 2141,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 2622,
-      "buoi": 2149,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 3174,
-      "buoi": 2153,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 3640,
-      "buoi": 2157,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 3862,
-      "buoi": 2161,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 2096,
-      "buoi": 2190,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 3113,
-      "buoi": 2194,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 3574,
-      "buoi": 2202,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 5395,
-      "buoi": 2210,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 5631,
-      "buoi": 2213,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại",
-       "✕",
-       "✕"
-      ]
-     },
-     {
-      "at": 2120,
-      "buoi": 2215,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 2711,
-      "buoi": 2219,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 5142,
-      "buoi": 2227,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 621,
-      "buoi": 2235,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 1201,
-      "buoi": 2243,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 1304,
-      "buoi": 2247,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 1759,
-      "buoi": 2255,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 2391,
-      "buoi": 2259,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 2957,
-      "buoi": 2267,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 3542,
-      "buoi": 2275,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 3753,
-      "buoi": 2278,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại",
-       "✕",
-       "✕"
-      ]
-     },
-     {
-      "at": 3812,
-      "buoi": 2279,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 4376,
-      "buoi": 2284,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 5344,
-      "buoi": 2320,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 454,
-      "buoi": 2325,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     }
-    ],
-    "mgMiss": 299,
-    "mgPeekTaps": 1217,
-    "boardTaps": 1217,
-    "builds": [
-     {
-      "s": "1dcb373e+",
-      "b": "5ab5b80e406e",
-      "where": "start"
-     }
-    ],
-    "build0": {
-     "s": "1dcb373e+",
-     "b": "5ab5b80e406e",
-     "t": "2026-11-26T10:49Z",
-     "at": "2026-11-26T15:22:02.212Z"
-    },
-    "pinFail": {
-     "b": "5ab5b80e406e",
-     "t": "2026-11-26T10:49Z",
-     "code": 128
-    },
-    "resumeRestore": [
-     {
-      "at": "2026-11-26T15:23:56.388Z",
-      "origin": "https://thientran2711.github.io",
-      "from": null,
-      "want": 3973051,
-      "got": 3973051,
-      "keys": 10
-     },
-     {
-      "at": "2026-11-26T17:20:41.031Z",
-      "origin": "http://127.0.0.1:8729",
-      "from": "https://thientran2711.github.io",
-      "want": 3970185,
-      "got": 3970185,
-      "keys": 31
-     },
-     {
-      "at": "2026-11-27T21:24:47.623Z",
-      "origin": "http://127.0.0.1:8729",
-      "from": "http://127.0.0.1:8729",
-      "want": 3978745,
-      "got": 3978745,
-      "keys": 31
-     },
-     {
-      "at": "2026-11-27T22:55:29.570Z",
-      "origin": "http://127.0.0.1:8729",
-      "from": "http://127.0.0.1:8729",
-      "want": 4227762,
-      "got": 4227762,
-      "keys": 32
-     }
-    ],
-    "kipScroll": 408,
-    "kipPick": 372,
-    "mgBackN": 15,
-    "pinUrl": "http://127.0.0.1:8729/",
-    "kloadEnter": 8,
-    "consoleErrN": 2389,
-    "resumeHash": [
-     {
-      "k": "hclh-save-v2-1",
-      "ckpt": "4ef5594f",
-      "page": "4ef5594f",
-      "same": true,
-      "ckClk": "16.193.1.2",
-      "pageClk": "16.193.1.2"
-     },
-     {
-      "k": "hclh-save-v2-1",
-      "ckpt": "c2615453",
-      "page": "c2615453",
-      "same": true,
-      "ckClk": "16.201.1.2",
-      "pageClk": "16.201.1.2"
-     }
-    ],
-    "ident": {
-     "name": "Chân Thanh Từ",
-     "org": "Công chúa Phù Tang hòa thân",
-     "born": -17,
-     "at": 2233
-    },
-    "kipLoopBan": 9,
-    "kipBanSkip": 52,
-    "boards": [
-     {
-      "at": 621,
-      "buoi": 2235,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 29,
-      "area": 1,
-      "s": 29,
-      "res": "8/10 raw 10.00",
-      "raw": 10
-     },
-     {
-      "at": 1201,
-      "buoi": 2243,
-      "kind": "hat",
-      "layer": "#kg82",
-      "moves": 111,
-      "area": 0,
-      "s": 22,
-      "res": "6/10 raw 0.00",
-      "raw": 0
-     },
-     {
-      "at": 1304,
-      "buoi": 2247,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 29,
-      "area": 0,
-      "s": 29,
-      "res": "8/10 raw 10.00",
-      "raw": 10
-     },
-     {
-      "at": 1759,
-      "buoi": 2255,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 24,
-      "area": 3,
-      "s": 28,
-      "res": "6/10 raw 8.00",
-      "raw": 8
-     },
-     {
-      "at": 2391,
-      "buoi": 2259,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 29,
-      "area": 1,
-      "s": 29,
-      "res": "8/10 raw 10.00",
-      "raw": 10
-     },
-     {
-      "at": 2957,
-      "buoi": 2267,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 29,
-      "area": 1,
-      "s": 27,
-      "res": "8/10 raw 10.00",
-      "raw": 10
-     },
-     {
-      "at": 3542,
-      "buoi": 2275,
-      "kind": "hat",
-      "layer": "#kg82",
-      "moves": 166,
-      "area": 0,
-      "s": 22,
-      "res": "6/10 raw 0.00",
-      "raw": 0
-     },
-     {
-      "at": 3750,
-      "buoi": 2278,
-      "kind": "hat",
-      "layer": "#kg82",
-      "moves": 121,
-      "area": 0,
-      "s": 22,
-      "res": "6/10 raw 0.00",
-      "raw": 0
-     },
-     {
-      "at": 3812,
-      "buoi": 2279,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 29,
-      "area": 0,
-      "s": 29,
-      "res": "8/10 raw 10.00",
-      "raw": 10
-     },
-     {
-      "at": 4376,
-      "buoi": 2284,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 28,
-      "area": 1,
-      "s": 28,
-      "res": "8/10 raw 10.00",
-      "raw": 10
-     },
-     {
-      "at": 5344,
-      "buoi": 2320,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 29,
-      "area": 0,
-      "s": 29,
-      "res": "8/10 raw 10.00",
-      "raw": 10
-     },
-     {
-      "at": 453,
-      "buoi": 2325,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 29,
-      "area": 1,
-      "s": 30,
-      "res": "8/10 raw 10.00",
-      "raw": 10
-     }
-    ],
-    "boardN": 12,
-    "skipLayerTaps": 60,
-    "bareCovered": 14,
-    "bareCoveredBy": {
-     "div.kcf-cards over button.tok.fig.bob": 1,
-     "not on the layer scanned": 10,
-     "div.kcf-cards over button.k3r.kasr": 1,
-     "div.kcf-cards over img#mefig.j59sz.kfxon": 1,
-     "img.kfr over button.k3r.hot": 1
-    },
-    "skipCoverTaps": 2,
-    "skipTaps": 13,
-    "stallForce": 1,
-    "deadEndUnstick": 4,
-    "noExit": [
-     {
-      "k": "nx|.kmov|",
-      "at": 4637,
-      "buoi": 2300,
-      "screen": ".kmov «»",
-      "selector": "div.kmov.kcf.km-full",
-      "why": "no close / next after scrolling to its end",
-      "shot": "/home/user/wt/es5-out/shots-E-S5-R5-greedy-5/noclose-1795819317865.png",
-      "buttons": [
-       "✕",
-       "✕",
-       "✕",
-       "✕",
-       "✕",
-       "✕",
-       "✕",
-       "✕"
-      ]
-     }
-    ],
-    "noExitFast": 8,
-    "mgUnstickSkip": 1
-   },
-   "bugs": [
-    {
-     "type": "crash",
-     "n": 1,
-     "msg": "tab crashed (Page crashed) at buổi 293"
-    },
-    {
-     "type": "harness",
-     "n": 1,
-     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Cung nữ thân tín tam đẳng Tạ Tú Châu»"
-    },
-    {
-     "type": "game",
-     "n": 27,
-     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)"
-    },
-    {
-     "type": "stuck",
-     "n": 4,
-     "msg": "no progress 15 min on .dlg «Biếu quà làm lành»"
-    },
-    {
-     "type": "game",
-     "n": 9,
-     "msg": "item pick grid «Biếu quà làm lành» re-opened 3× by «Đồ trong rươngTốnmón đồ −1 (rẻ nhất bán » with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi"
-    },
-    {
-     "type": "harness",
-     "n": 1,
-     "msg": "picker stalled 11 steps / 8 s on .kmov «» without a real tap (area 12; last refused tap: gone «Ta biết rồi») → tapped «Ta biết rồi»"
-    },
-    {
-     "type": "harness",
-     "n": 1,
-     "msg": "NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): no close / next after scrolling to its end → later visits unstuck at once by taps"
-    },
-    {
-     "type": "game",
-     "n": 1,
-     "msg": "dialog scrolled to the end has no close / next button: .kmov «»"
-    },
-    {
-     "type": "harness",
-     "n": 1,
-     "msg": "runner error: page.evaluateHandle: Target page, context or browser has been closed"
-    }
-   ],
-   "exitPick": null,
-   "mgDragSkip": 7,
-   "mgReady": 42
-  },
-  {
    "life": "E-S5-R5-lazy-1",
    "dev": "ipad",
    "bot": "quiet",
@@ -28441,2928 +27552,6 @@
    "mgReady": 13
   },
   {
-   "life": "E-S5-R5-speed-1",
-   "dev": "fold",
-   "bot": "bold",
-   "seed": 2289644890,
-   "origin": "pf",
-   "road": "pt_su",
-   "ending": "HARNESS",
-   "type": "harness",
-   "death": null,
-   "age": null,
-   "buoi": 92,
-   "harness": {
-    "kind": "realtap",
-    "sha": "f65d019b",
-    "realtap": true,
-    "jsClicks": 0,
-    "deadButtons": 0,
-    "cap": null,
-    "stuck": 7,
-    "unstick": [
-     {
-      "at": 1305,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1316,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1327,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1338,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1349,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1360,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1371,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1383,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1394,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1405,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1416,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1427,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1439,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1450,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1461,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1472,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1483,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1495,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1506,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1517,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1528,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1540,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1551,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1562,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1573,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1584,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1595,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1607,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1618,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1629,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1640,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1651,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1663,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1674,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1685,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1696,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1707,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1718,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1730,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1741,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1752,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1763,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1774,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1786,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1797,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1808,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1820,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1831,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1842,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1854,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1865,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1876,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1887,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1898,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1910,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1921,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1932,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1943,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1954,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1965,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1976,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1988,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 1999,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2010,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2021,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2032,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2044,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2055,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2066,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2077,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2088,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2100,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2111,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2122,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2133,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2144,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2155,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2167,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2178,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2189,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 2194,
-      "lvl": 3,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 3243,
-      "lvl": 3,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 3 người."
-     },
-     {
-      "at": 3499,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3510,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3521,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3532,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3544,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3555,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3566,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3577,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3588,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3600,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3611,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3622,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3633,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3644,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3655,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3667,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3678,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3689,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3700,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3711,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3722,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3734,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3745,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3756,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3767,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3778,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3789,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3801,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3812,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3823,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3834,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3845,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3856,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3868,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3879,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3890,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3901,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3913,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3924,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3935,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3946,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3957,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3968,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3979,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 3990,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4002,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4013,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4024,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4035,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4046,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4057,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4069,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4080,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4091,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4102,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4113,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4125,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4136,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4147,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4158,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4169,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4181,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4192,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4203,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4214,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4225,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4236,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4247,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4259,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4270,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4281,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4292,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4303,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4314,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4326,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4337,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4348,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4359,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4370,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4382,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4387,
-      "lvl": 3,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 2 người."
-     },
-     {
-      "at": 4462,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4473,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4484,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4495,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4507,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4518,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4529,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4540,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4551,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4562,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4573,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4585,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4596,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4607,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4618,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4630,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4641,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4652,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4663,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4674,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4686,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4697,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4708,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4719,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4730,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4741,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4752,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4763,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4774,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4786,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4797,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4808,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4819,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4830,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4841,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4853,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4864,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4875,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4886,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4897,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4908,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4919,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4930,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4941,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4952,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4963,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4974,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4985,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 4996,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5008,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5019,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5030,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5041,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5052,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5063,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5074,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5085,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5096,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5107,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5119,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5130,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5141,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5152,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5163,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5174,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5185,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5196,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5208,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5219,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5230,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5241,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5252,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5264,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5275,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5286,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5297,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5309,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5320,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5331,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5342,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5348,
-      "lvl": 3,
-      "layer": "page",
-      "title": "Ngọc Thanh các · Ở đây còn 4 người."
-     },
-     {
-      "at": 5994,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6005,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6017,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6028,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6039,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6050,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6061,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6073,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6084,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6095,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6107,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6118,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6129,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6140,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6151,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6163,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6174,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6185,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6197,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6208,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6219,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6230,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6242,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6253,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6265,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6276,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6287,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6298,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6309,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6321,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6332,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6343,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6355,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6366,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6377,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6388,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6400,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6411,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6422,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6433,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6444,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6456,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6467,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6478,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6489,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6501,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6512,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6523,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6534,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6545,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6558,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6569,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6580,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6591,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6602,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6614,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6625,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6636,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6648,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6659,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6670,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6681,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6693,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6704,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6715,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6726,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6738,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6749,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6760,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6771,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6782,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6794,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6805,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6816,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6827,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6838,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6850,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6862,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6873,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 6883,
-      "lvl": 3,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 7200,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 968,
-      "lvl": 3,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1038,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1050,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1061,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1072,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1083,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 178,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 190,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 201,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 212,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 224,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 236,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 247,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 258,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 270,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 281,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 293,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 304,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 315,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 327,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 338,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 349,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 360,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 372,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 383,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 394,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 405,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 417,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 428,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 439,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 450,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 461,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 473,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 484,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 495,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 506,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 517,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 529,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 540,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 551,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 563,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 574,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 585,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 597,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 608,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 619,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 631,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 642,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 653,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 664,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 676,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 687,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 698,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 709,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 720,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 732,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 743,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 754,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 765,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 777,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 788,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 799,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 810,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 822,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 833,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 844,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 855,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 867,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 878,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 889,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 900,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 912,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 923,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 934,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 945,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 957,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 968,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 979,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 990,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1002,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1013,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1024,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1035,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1046,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1058,
-      "lvl": 1,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     },
-     {
-      "at": 1065,
-      "lvl": 3,
-      "layer": "page",
-      "title": "Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng"
-     }
-    ],
-    "slice": null,
-    "mgBackN": 7,
-    "mgBackQuitN": 0,
-    "builds": [
-     {
-      "s": "cf61b8e4",
-      "b": "1b04f52f65fd",
-      "where": "start"
-     },
-     {
-      "s": "28d8bd1e",
-      "b": "c701d39f1073",
-      "where": "unstick reload"
-     }
-    ],
-    "build0": {
-     "s": "cf61b8e4",
-     "b": "1b04f52f65fd",
-     "t": "2026-11-27T10:29Z",
-     "at": "2026-11-27T12:01:29.443Z"
-    },
-    "build": {
-     "s": "cf61b8e4",
-     "b": "1b04f52f65fd",
-     "t": "2026-11-27T10:29Z"
-    },
-    "areaTaps": 615,
-    "consoleErrN": 79,
-    "ident": {
-     "name": "Lưu Nhược Lan",
-     "org": "Công chúa Phù Tang hòa thân",
-     "born": -19,
-     "at": 1
-    },
-    "backdropTaps": 2,
-    "skipLayerTaps": 55,
-    "infoTaps": 113,
-    "dlgScroll": 3,
-    "scrolls": 4,
-    "dlgClose": 40,
-    "mgQuickSkipped": 11,
-    "mgReady": 7,
-    "mgMiss": 102,
-    "boards": [
-     {
-      "at": 344,
-      "buoi": 8,
-      "kind": "hat",
-      "layer": "#kg82",
-      "moves": 152,
-      "area": 0,
-      "s": 22,
-      "res": "0/10 raw 0.00",
-      "raw": 0
-     },
-     {
-      "at": 447,
-      "buoi": 12,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 29,
-      "area": 0,
-      "s": 26,
-      "res": "10/10 raw 10.00",
-      "raw": 10
-     },
-     {
-      "at": 724,
-      "buoi": 20,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 29,
-      "area": 0,
-      "s": 27,
-      "res": "9/10 raw 10.00",
-      "raw": 10
-     },
-     {
-      "at": 883,
-      "buoi": 24,
-      "kind": "hat",
-      "layer": "#kg82",
-      "moves": 154,
-      "area": 0,
-      "s": 22,
-      "res": "1/10 raw 0.00",
-      "raw": 0
-     },
-     {
-      "at": 5704,
-      "buoi": 69,
-      "kind": "mua",
-      "layer": "#kg82",
-      "moves": 29,
-      "area": 0,
-      "s": 27,
-      "res": "9/10 raw 10.00",
-      "raw": 10
-     },
-     {
-      "at": 5749,
-      "buoi": 72,
-      "kind": "co",
-      "layer": "#kg82",
-      "moves": 5,
-      "area": 0,
-      "s": 6,
-      "res": "10/10 raw 10.00",
-      "raw": 10
-     },
-     {
-      "at": 143,
-      "buoi": 87,
-      "kind": "hat",
-      "layer": "#kg82",
-      "moves": 80,
-      "area": 0,
-      "s": 22,
-      "res": "2/10 raw 0.00",
-      "raw": 0
-     }
-    ],
-    "boardN": 7,
-    "mgPeekTaps": 478,
-    "boardTaps": 478,
-    "mgBackWhy": [
-     {
-      "at": 344,
-      "buoi": 8,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 447,
-      "buoi": 12,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 724,
-      "buoi": 20,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 883,
-      "buoi": 24,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 5704,
-      "buoi": 69,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 5758,
-      "buoi": 72,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại",
-       "✕",
-       "✕"
-      ]
-     },
-     {
-      "at": 144,
-      "buoi": 87,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     }
-    ],
-    "dressPut": 7,
-    "bareBlocked": 8,
-    "bareBlockedWhy": [
-     {
-      "at": 945,
-      "buoi": 26,
-      "screen": ".kscn «»",
-      "x": 378,
-      "y": 538,
-      "ev": "mousedown",
-      "hit": "span.kobang",
-      "tgt": "span.kobang",
-      "dt": 47,
-      "top0": "div.kri-t.kri-front"
-     },
-     {
-      "at": 1072,
-      "buoi": 34,
-      "screen": ".kscn «»",
-      "x": 378,
-      "y": 538,
-      "ev": "mousedown",
-      "hit": "button.opt.ka.kodw",
-      "tgt": "span.krl",
-      "dt": 31,
-      "top0": "div.kri-t.kri-front"
-     },
-     {
-      "at": 1268,
-      "buoi": 42,
-      "screen": ".kscn «»",
-      "x": 378,
-      "y": 538,
-      "ev": "mousedown",
-      "hit": "button.opt.ka.kodw",
-      "tgt": "span.krl",
-      "dt": 48,
-      "top0": "div.kri-t.kri-front"
-     },
-     {
-      "at": 3372,
-      "buoi": 49,
-      "screen": ".kscn «»",
-      "x": 378,
-      "y": 538,
-      "ev": "mousedown",
-      "hit": "button.opt.ka.kodw",
-      "tgt": "span.krl",
-      "dt": 56,
-      "top0": "div.kri-t.kri-front"
-     },
-     {
-      "at": 3457,
-      "buoi": 52,
-      "screen": ".kscn «»",
-      "x": 378,
-      "y": 538,
-      "ev": "mousedown",
-      "hit": "button.opt.ka.kodw",
-      "tgt": "span.krl",
-      "dt": 23,
-      "top0": "div.kri-t.kri-front"
-     },
-     {
-      "at": 5913,
-      "buoi": 78,
-      "screen": ".kscn «»",
-      "x": 378,
-      "y": 538,
-      "ev": "mousedown",
-      "hit": "button.opt.ka.kodw",
-      "tgt": "span.krl",
-      "dt": 39,
-      "top0": "div.kri-t.kri-front"
-     },
-     {
-      "at": 5956,
-      "buoi": 79,
-      "screen": ".kscn «»",
-      "x": 378,
-      "y": 538,
-      "ev": "mousedown",
-      "hit": "button.opt.ka.kodw",
-      "tgt": "span.krl",
-      "dt": 49,
-      "top0": "div.kri-t.kri-front"
-     },
-     {
-      "at": 97,
-      "buoi": 87,
-      "screen": ".kscn «»",
-      "x": 378,
-      "y": 538,
-      "ev": "mousedown",
-      "hit": "button.opt.ka.kodw",
-      "tgt": "span.krl",
-      "dt": 154,
-      "top0": "div.kri-t.kri-front"
-     }
-    ],
-    "kipScroll": 88,
-    "kipLoopBan": 5,
-    "kipBanSkip": 16458,
-    "pinUrl": "http://127.0.0.1:8763/",
-    "autoServe": [
-     {
-      "at": "2026-11-27T12:39:21.068Z",
-      "where": "unstick reload",
-      "from": "c701d39f1073",
-      "to": "http://127.0.0.1:8763/",
-      "carried": 16
-     }
-    ],
-    "bareCovered": 15,
-    "bareCoveredBy": {
-     "not on the layer scanned": 15
-    },
-    "skipCoverTaps": 3,
-    "taps0": 0,
-    "resumed": [
-     {
-      "at": "2026-11-27T21:25:01.218Z",
-      "buoi": 80,
-      "from": "2026-11-27T14:11:03.214Z"
-     },
-     {
-      "at": "2026-11-27T22:55:05.885Z",
-      "buoi": 84,
-      "from": "2026-11-27T21:43:11.813Z"
-     }
-    ],
-    "resumeRestore": [
-     {
-      "at": "2026-11-27T21:25:07.096Z",
-      "origin": "http://127.0.0.1:8763",
-      "from": "http://127.0.0.1:8763",
-      "want": 704458,
-      "got": 704458,
-      "keys": 18
-     },
-     {
-      "at": "2026-11-27T22:55:12.241Z",
-      "origin": "http://127.0.0.1:8763",
-      "from": "http://127.0.0.1:8763",
-      "want": 698160,
-      "got": 698160,
-      "keys": 18
-     }
-    ],
-    "resumeHash": [
-     {
-      "k": "hclh-save-v2-1",
-      "ckpt": "5f9fbecc",
-      "page": "5f9fbecc",
-      "same": true,
-      "ckClk": "1.6.1.2",
-      "pageClk": "1.6.1.2"
-     },
-     {
-      "k": "hclh-save-v2-1",
-      "ckpt": "45b26a9e",
-      "page": "45b26a9e",
-      "same": true,
-      "ckClk": "1.6.2.1",
-      "pageClk": "1.6.2.1"
-     }
-    ],
-    "saveRewind": [
-     {
-      "at": 1074,
-      "buoi": 89,
-      "from": 88,
-      "fromClk": "1.7.0.0",
-      "to": 87,
-      "toClk": "1.6.2.3",
-      "lost": 1
-     }
-    ]
-   },
-   "bugs": [
-    {
-     "type": "harness",
-     "n": 1,
-     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «!»"
-    },
-    {
-     "type": "game",
-     "n": 11,
-     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls ()"
-    },
-    {
-     "type": "harness",
-     "n": 7,
-     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Lụa Hàng Châu Rất vững TỐN 2 khắc, lụa Hàng Châu 1»"
-    },
-    {
-     "type": "game",
-     "n": 4,
-     "msg": "item pick grid «» re-opened 3× by «Tiếp ▸» with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi"
-    },
-    {
-     "type": "stuck",
-     "n": 2,
-     "msg": "no progress 15 min on page «Ngọc Thanh các · Ở đây còn 3 người.»"
-    },
-    {
-     "type": "stuck",
-     "n": 1,
-     "msg": "no progress 15 min on page «Ngọc Thanh các · Ở đây còn 2 người.»"
-    },
-    {
-     "type": "stuck",
-     "n": 1,
-     "msg": "no progress 15 min on page «Ngọc Thanh các · Ở đây còn 4 người.»"
-    },
-    {
-     "type": "game",
-     "n": 1,
-     "msg": "item pick grid «» re-opened 3× by «Chọn lá này» with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi"
-    },
-    {
-     "type": "stuck",
-     "n": 3,
-     "msg": "no progress 15 min on page «Trường Xuân cung · Vĩnh Xuân hiên · Ở đây còn 1 ng»"
-    },
-    {
-     "type": "harness",
-     "n": 1,
-     "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed"
-    }
-   ],
-   "exitPick": null,
-   "mgDragSkip": null,
-   "mgReady": 7
-  },
-  {
    "life": "E-S5-R5-speed-2",
    "dev": "ipad",
    "bot": "bold",
@@ -32114,11 +28303,11 @@
    "seed": 1590092324,
    "origin": "pf",
    "road": "pt_su",
-   "ending": "HARNESS",
-   "type": "harness",
-   "death": null,
-   "age": null,
-   "buoi": 615,
+   "ending": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "death": true,
+   "age": 25,
+   "buoi": 976,
    "harness": {
     "kind": "realtap",
     "sha": "f65d019b",
@@ -35991,10 +32180,142 @@
       "lvl": 3,
       "layer": "page",
       "title": "Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 68,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Hội phối đồ · Cổ phong"
+     },
+     {
+      "at": 82,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Hội phối đồ · Cổ phong"
+     },
+     {
+      "at": 94,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Hội phối đồ · Cổ phong"
+     },
+     {
+      "at": 218,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phòng bị"
+     },
+     {
+      "at": 222,
+      "lvl": 3,
+      "layer": ".dlg",
+      "title": "Phòng bị"
+     },
+     {
+      "at": 2165,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 2380,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Khải Tường cung · Tĩnh Nghi trai · Ở đây còn 1 ngư"
+     },
+     {
+      "at": 3277,
+      "lvl": 1,
+      "layer": ".mspot",
+      "title": ""
+     },
+     {
+      "at": 3943,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phòng bị"
+     },
+     {
+      "at": 3944,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phòng bị"
+     },
+     {
+      "at": 3945,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phòng bị"
+     },
+     {
+      "at": 3946,
+      "lvl": 2,
+      "layer": ".dlg",
+      "title": "Phòng bị"
+     },
+     {
+      "at": 7011,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 7087,
+      "lvl": 2,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 7087,
+      "lvl": 2,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 7088,
+      "lvl": 2,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 7089,
+      "lvl": 2,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 7089,
+      "lvl": 2,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 7090,
+      "lvl": 2,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 7090,
+      "lvl": 3,
+      "layer": "#kload",
+      "title": ""
+     },
+     {
+      "at": 7264,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Ngọc Thanh các · Ở đây còn 1 người."
+     },
+     {
+      "at": 9744,
+      "lvl": 3,
+      "layer": "page",
+      "title": "Vĩnh Hòa cung · Tư Tĩnh trai · Ở đây còn 1 người."
      }
     ],
     "slice": null,
-    "mgBackN": 57,
+    "mgBackN": 68,
     "mgBackQuitN": 0,
     "builds": [
      {
@@ -36006,35 +32327,44 @@
       "s": "d9ca7892+",
       "b": "86170222adab",
       "where": "unstick reload"
+     },
+     {
+      "s": "8a171afc+",
+      "b": "08960515ebeb",
+      "where": "start"
+     },
+     {
+      "s": "166bd0a3",
+      "b": "ab73feec1114",
+      "where": "reload"
+     },
+     {
+      "s": "7be54246",
+      "b": "1ac67ee47871",
+      "where": "unstick reload"
      }
     ],
-    "build0": {
-     "s": "520c85b0",
-     "b": "fdc4fec0cd62",
-     "t": "2026-11-27T12:31Z",
-     "at": "2026-11-27T14:37:42.330Z"
-    },
     "build": {
      "s": "520c85b0",
      "b": "fdc4fec0cd62",
      "t": "2026-11-27T12:31Z"
     },
-    "areaTaps": 4749,
-    "consoleErrN": 297,
+    "areaTaps": 5575,
+    "consoleErrN": 684,
     "ident": {
      "name": "Độc Cô Lang Hoa",
      "org": "Công chúa Phù Tang hòa thân",
      "born": -18,
      "at": 1
     },
-    "skipLayerTaps": 289,
-    "infoTaps": 408,
-    "dlgScroll": 14,
-    "scrolls": 47,
-    "dlgClose": 302,
-    "mgQuickSkipped": 65,
-    "mgReady": 59,
-    "mgMiss": 1002,
+    "skipLayerTaps": 388,
+    "infoTaps": 715,
+    "dlgScroll": 34,
+    "scrolls": 169,
+    "dlgClose": 453,
+    "mgQuickSkipped": 108,
+    "mgReady": 72,
+    "mgMiss": 1152,
     "boards": [
      {
       "at": 227,
@@ -36672,126 +33002,133 @@
       "s": 29,
       "res": "8/10 raw 10.00",
       "raw": 10
+     },
+     {
+      "at": 413,
+      "buoi": 627,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 78,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 879,
+      "buoi": 643,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 139,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1073,
+      "buoi": 651,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 140,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1534,
+      "buoi": 667,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 92,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1664,
+      "buoi": 671,
+      "kind": "hat",
+      "layer": "#kg82",
+      "moves": 70,
+      "area": 0,
+      "s": 22,
+      "res": "6/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 1828,
+      "buoi": 674,
+      "kind": "dauho",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 54,
+      "s": 98,
+      "res": "2/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 3860,
+      "buoi": 751,
+      "kind": "hoa",
+      "layer": "#kg82",
+      "moves": 2,
+      "area": 0,
+      "s": 98,
+      "res": "0/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 4641,
+      "buoi": 775,
+      "kind": "banh",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 29,
+      "s": 57,
+      "res": "2/10 raw 2.00",
+      "raw": 2
+     },
+     {
+      "at": 6626,
+      "buoi": 839,
+      "kind": "hoa",
+      "layer": "#kg82",
+      "moves": 2,
+      "area": 0,
+      "s": 98,
+      "res": "2/10 raw 0.00",
+      "raw": 0
+     },
+     {
+      "at": 6885,
+      "buoi": 850,
+      "kind": "doden",
+      "layer": "#kg82",
+      "moves": 11,
+      "area": 0,
+      "s": 8,
+      "res": "10/10 raw 10.00",
+      "raw": 10
+     },
+     {
+      "at": 9392,
+      "buoi": 944,
+      "kind": "tho",
+      "layer": "#kg82",
+      "moves": 0,
+      "area": 38,
+      "s": 77,
+      "res": "2/10 raw 0.00",
+      "raw": 0
      }
     ],
-    "boardN": 58,
-    "mgPeekTaps": 4031,
-    "boardTaps": 4031,
+    "boardN": 69,
+    "mgPeekTaps": 4565,
+    "boardTaps": 4565,
     "mgBackWhy": [
-     {
-      "at": 3383,
-      "buoi": 95,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 3579,
-      "buoi": 98,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại",
-       "✕",
-       "✕"
-      ]
-     },
-     {
-      "at": 3635,
-      "buoi": 99,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 4688,
-      "buoi": 103,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 4802,
-      "buoi": 109,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 5662,
-      "buoi": 183,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 5825,
-      "buoi": 187,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 5970,
-      "buoi": 191,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 6112,
-      "buoi": 195,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
-     {
-      "at": 6431,
-      "buoi": 206,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại",
-       "✕",
-       "✕"
-      ]
-     },
-     {
-      "at": 6506,
-      "buoi": 207,
-      "ph": "result",
-      "res": true,
-      "long": false,
-      "btns": [
-       "Quay lại"
-      ]
-     },
      {
       "at": 6650,
       "buoi": 211,
@@ -37085,20 +33422,144 @@
       "btns": [
        "Quay lại"
       ]
+     },
+     {
+      "at": 413,
+      "buoi": 627,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 879,
+      "buoi": 643,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1073,
+      "buoi": 651,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1534,
+      "buoi": 667,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1664,
+      "buoi": 671,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại"
+      ]
+     },
+     {
+      "at": 1848,
+      "buoi": 674,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕"
+      ]
+     },
+     {
+      "at": 3885,
+      "buoi": 751,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕"
+      ]
+     },
+     {
+      "at": 4666,
+      "buoi": 775,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕"
+      ]
+     },
+     {
+      "at": 6647,
+      "buoi": 839,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕"
+      ]
+     },
+     {
+      "at": 6911,
+      "buoi": 850,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕"
+      ]
+     },
+     {
+      "at": 9415,
+      "buoi": 944,
+      "ph": "result",
+      "res": true,
+      "long": false,
+      "btns": [
+       "Quay lại",
+       "✕",
+       "✕"
+      ]
      }
     ],
-    "bareCovered": 75,
+    "bareCovered": 151,
     "bareCoveredBy": {
-     "not on the layer scanned": 70,
+     "not on the layer scanned": 144,
      "div.kbk-cv over button.tok.fig.bob": 3,
      "div.kne.kne-beat over div.kmrow": 1,
-     "div.kne.kne-beat over button.tok.fig.bob": 1
+     "div.kne.kne-beat over button.tok.fig.bob": 1,
+     "top changed div.kscrv-l → div.kbk-cv": 1,
+     "div.kne.kne-beat over button.mspot.mzone.mzme": 1
     },
-    "skipCoverTaps": 9,
-    "dressPut": 6,
+    "skipCoverTaps": 22,
+    "dressPut": 29,
     "cardWay": 4,
-    "backdropTaps": 6,
-    "deadEndUnstick": 3,
+    "backdropTaps": 27,
+    "deadEndUnstick": 6,
     "noExit": [
      {
       "k": "nx|.dlg|Phòng bị",
@@ -37115,9 +33576,19 @@
        "Chọn lá này",
        "Đặt lại"
       ]
+     },
+     {
+      "k": "nx|#kload|",
+      "at": 7083,
+      "buoi": 855,
+      "screen": "#kload «»",
+      "selector": "div.dlg.kpanel.kpsc",
+      "why": "no button at all for 31 s (taps on the scene / backdrop did not close it)",
+      "shot": "/home/user/wt/es5-out/shots-E-S5-R5-speed-3/noexit-1795861671923.png",
+      "buttons": []
      }
     ],
-    "noExitFast": 1293,
+    "noExitFast": 1502,
     "saveRewind": [
      {
       "at": 2254,
@@ -37156,7 +33627,6 @@
       "lost": 1
      }
     ],
-    "pinUrl": "http://127.0.0.1:8725/",
     "autoServe": [
      {
       "at": "2026-11-27T15:17:53.032Z",
@@ -37164,13 +33634,27 @@
       "from": "86170222adab",
       "to": "http://127.0.0.1:8725/",
       "carried": 18
+     },
+     {
+      "at": "2026-11-28T08:23:56.545Z",
+      "where": "reload",
+      "from": "ab73feec1114",
+      "to": "http://127.0.0.1:8942/",
+      "carried": 28
+     },
+     {
+      "at": "2026-11-28T10:26:50.207Z",
+      "where": "unstick reload",
+      "from": "1ac67ee47871",
+      "to": "http://127.0.0.1:8892/",
+      "carried": 29
      }
     ],
     "kipScroll": 88,
-    "kfocVisits": 24,
+    "kfocVisits": 29,
     "kipLoopBan": 8,
     "kipBanSkip": 15563,
-    "bareBlocked": 10,
+    "bareBlocked": 16,
     "bareBlockedWhy": [
      {
       "at": 5571,
@@ -37291,10 +33775,46 @@
       "tgt": "small.kb",
       "dt": 72,
       "top0": "div.kri-t.kri-front"
+     },
+     {
+      "at": 56,
+      "buoi": 621,
+      "screen": ".dlg «Hội phối đồ · Cổ phong»",
+      "x": 372,
+      "y": 765,
+      "ev": "touchstart",
+      "hit": "button.opt.ka.kart",
+      "tgt": "img",
+      "dt": 421,
+      "top0": "div.opts.kpopts.khand"
+     },
+     {
+      "at": 592,
+      "buoi": 634,
+      "screen": "#kveil «»",
+      "x": 317,
+      "y": 574,
+      "ev": "touchstart",
+      "hit": "button.opt.ka.kart",
+      "tgt": "button.opt.ka.kart",
+      "dt": 28,
+      "top0": "div#mb.body"
+     },
+     {
+      "at": 4525,
+      "buoi": 773,
+      "screen": "#kmrew «»",
+      "x": 378,
+      "y": 500,
+      "ev": "touchstart",
+      "hit": "div.kmrow",
+      "tgt": "small",
+      "dt": 77,
+      "top0": "div.kmlist"
      }
     ],
     "boardOver": 1,
-    "closeOwnLayer": 1,
+    "closeOwnLayer": 2,
     "taps0": 0,
     "resumed": [
      {
@@ -37306,6 +33826,26 @@
       "at": "2026-11-27T22:55:54.478Z",
       "buoi": 607,
       "from": "2026-11-27T22:54:45.943Z"
+     },
+     {
+      "at": "2026-11-28T07:55:53.516Z",
+      "buoi": 615,
+      "from": "2026-11-27T23:16:01.838Z"
+     },
+     {
+      "at": "2026-11-28T08:23:12.753Z",
+      "buoi": 616,
+      "from": "2026-11-28T07:56:07.887Z"
+     },
+     {
+      "at": "2026-11-28T08:25:28.957Z",
+      "buoi": 617,
+      "from": "2026-11-28T08:24:05.423Z"
+     },
+     {
+      "at": "2026-11-28T08:29:48.894Z",
+      "buoi": 620,
+      "from": "2026-11-28T08:27:07.676Z"
      }
     ],
     "resumeRestore": [
@@ -37324,6 +33864,38 @@
       "want": 1731131,
       "got": 1731131,
       "keys": 27
+     },
+     {
+      "at": "2026-11-28T07:56:04.620Z",
+      "origin": "https://thientran2711.github.io",
+      "from": "http://127.0.0.1:8725",
+      "want": 1763386,
+      "got": 1763386,
+      "keys": 28
+     },
+     {
+      "at": "2026-11-28T08:24:01.525Z",
+      "origin": "http://127.0.0.1:8942",
+      "from": "https://thientran2711.github.io",
+      "want": 197331,
+      "got": 197331,
+      "keys": 28
+     },
+     {
+      "at": "2026-11-28T08:25:37.937Z",
+      "origin": "https://thientran2711.github.io",
+      "from": "http://127.0.0.1:8942",
+      "want": 197333,
+      "got": 197333,
+      "keys": 28
+     },
+     {
+      "at": "2026-11-28T08:29:57.430Z",
+      "origin": "https://thientran2711.github.io",
+      "from": "https://thientran2711.github.io",
+      "want": 188759,
+      "got": 188759,
+      "keys": 28
      }
     ],
     "resumeHash": [
@@ -37342,8 +33914,91 @@
       "same": true,
       "ckClk": "5.51.2.0",
       "pageClk": "5.51.2.0"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "78c94e5d",
+      "page": "78c94e5d",
+      "same": true,
+      "ckClk": "5.52.0.3",
+      "pageClk": "5.52.0.3"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "29186ff8",
+      "page": "29186ff8",
+      "same": true,
+      "ckClk": "?",
+      "pageClk": "?"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "9e4e878c",
+      "page": "9e4e878c",
+      "same": true,
+      "ckClk": "?",
+      "pageClk": "?"
+     },
+     {
+      "k": "hclh-save-v2-1",
+      "ckpt": "63d2d811",
+      "page": "63d2d811",
+      "same": true,
+      "ckClk": "?",
+      "pageClk": "?"
      }
-    ]
+    ],
+    "saveStale": [
+     {
+      "at": 14,
+      "stored": null,
+      "storedClk": "unreadable",
+      "live": 616,
+      "liveClk": "5.52.0.3",
+      "chars": 197331,
+      "err": null
+     },
+     {
+      "at": 3113,
+      "stored": null,
+      "storedClk": "unreadable",
+      "live": 721,
+      "liveClk": "5.60.2.1",
+      "chars": 212118,
+      "err": null
+     },
+     {
+      "at": 6004,
+      "stored": null,
+      "storedClk": "unreadable",
+      "live": 821,
+      "liveClk": "6.69.0.1",
+      "chars": 223692,
+      "err": null
+     },
+     {
+      "at": 8716,
+      "stored": null,
+      "storedClk": "unreadable",
+      "live": 921,
+      "liveClk": "7.77.1.0",
+      "chars": 228549,
+      "err": null
+     }
+    ],
+    "build0": {
+     "s": "166bd0a3",
+     "b": "ab73feec1114",
+     "t": "2026-11-28T07:32Z",
+     "at": "2026-11-28T08:25:32.070Z"
+    },
+    "kipGo": 1,
+    "nocloseRetract": 3,
+    "nextNoTurn": 15,
+    "loops": 5,
+    "noHitScroll": 1,
+    "pinUrl": "http://127.0.0.1:8892/",
+    "taps": 5485
    },
    "bugs": [
     {
@@ -37427,14 +34082,44 @@
      "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Vòng ngọc khảm vàng Rất vững TỐN 2 khắc, vòng ngọc»"
     },
     {
+     "type": "game",
+     "n": 4,
+     "msg": "SAVE STALE: the stored save stopped following the live game (no setItem error seen)"
+    },
+    {
      "type": "harness",
      "n": 1,
-     "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed"
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Tự tay phối đồ TốnSức 5»"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Đi làm: Đi thỉnh an Hoàng hậu sáng mai TỐN không Đ»"
+    },
+    {
+     "type": "game",
+     "n": 4,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Có người đến)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Nghe đồn)"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Thường Phấn gạo Hộp phấn mắt dùng khi điểm trang: »"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "NO-EXIT DIALOG #kload «» (div.dlg.kpanel.kpsc): no button at all for 31 s (taps on the scene / backdrop did not close it) → later visits unstuck at once by taps"
     }
    ],
    "exitPick": null,
    "mgDragSkip": null,
-   "mgReady": 59
+   "mgReady": 72
   }
  ],
  "parked_stuck_gamebug": [
