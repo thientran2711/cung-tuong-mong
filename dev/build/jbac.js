@@ -37,6 +37,9 @@ function bacFairList(L){const F=BAL.bacFair,vb=bacV1("bac");const free=L.filter(
   return[n,s2]})}
 (function(){if(typeof E68==="undefined"||typeof c6!=="function")return;
  for(const ev of E68){const o0=ev.o;if(typeof o0!=="function")continue;
+  /* E-TIER-B14 (Foreman E C11 ruling Q2): composed j68c cards (ev.cs) are TIERED (law 2 NHẸ · VỪA · NẶNG, BAL.j68c.tier) — the old 15/11 equal-value
+     re-pricing would pull a bạc tier back to equal; it stays only on the 90 hand-written cards (row 42 backlog: tier review of those). */
+  if(ev.cs)continue;
   ev.o=function(X){if(window.__bacFairOff)return o0.apply(this,arguments);const real=c6;let L=null;
    try{c6=(n,s)=>({__bac6:1,n,s});L=o0.apply(this,arguments)}catch(e){c6=real;return o0.apply(this,arguments)}finally{c6=real}
    if(!Array.isArray(L))return L;try{const P=L.filter(x=>x&&x.__bac6).map(x=>[x.n,x.s]);const F=bacFairList(P);let i=0;
