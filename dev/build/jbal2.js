@@ -2570,3 +2570,10 @@ BAL.sideq={band:[0,0,0,1,1,2,2,2],
  who:{maid:[0,2],sv:[0,2],kid:[0,2],fam:[0,2],emp:[0,2],rsv:[0,0],eun:[0,1],ksp:[0,1],doc:[0,1],fallen:[0,1],ly:[0,1],
   hh:[1,2],th:[1,2],ak:[1,2],off:[2,2],"man:sứ thần":[1,2],man:[0,1]},
  rvDn:2,rvUp:2,know:"quen",knowSt:2,offKnow:0,open:[2,2,2],mo:2,gapW:2,dlMax:2,stepMax:3,lateR:-2};
+/* D-ROW37 (OB 55 «điểm ghét, điểm oán tăng quá nhanh», law 11 + law 4): the liking falls toward HER that were typed straight into v.rel
+   (outside j9 affAdd, so outside the ghét pace joanpace opDn + stat-pace) now go through affAdd with these sizes (old typed numbers kept):
+   frame = an accuser who sets out to frame her (j4 accuse); retort = «Đáp trả sắc sảo» (j4 poet quarrel); poetWin = the loser of the poem contest (j4);
+   giftFail = the sender of a tainted gift when she cannot clear herself (j7); tell = «Mật báo Hoàng hậu» on a consort (j7); cookFail = the poisoner
+   not found (j7); side = the one she did not stand with in a quarrel (j7 «Báo cho» / «Đứng về phía»), warn = the one she warned against (j7 «Cảnh báo»);
+   favour = the daily small dislike of a consort she out-favours (j8 rivalsTurn); maidMock = a consort hurt by her maid's act for her (jagacts3 X.rel stays). */
+BAL.ghetHit={frame:10,retort:20,poetWin:10,giftFail:20,tell:30,cookFail:10,side:15,warn:20,favour:1};
