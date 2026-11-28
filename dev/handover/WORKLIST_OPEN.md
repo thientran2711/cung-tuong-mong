@@ -1,4 +1,5 @@
-# ~86% xong · còn 40 việc không tính hình nhân vật (LIVE f7ea14b7)
+# ~86% xong · còn 40 việc không tính hình nhân vật (LIVE 5ad52416)
+Recount MAIN 186 28/11 05:15Z: 5ad52416 webkit-lb (Safari<16.4 boot play-stopper, all lookbehind → kRx + hard gates) → LIVE; no worklist row → 40 open, ~86 %.
 Recount MAIN 186 28/11 04:55Z (owner asked «đếm việc»): rows 31/40/41 already LIVE → struck; duplicate row 5 line removed; row 5 + 12 partly (title-parity, end-maxrank LIVE) → still 40 open (the 40 already counted them out), ~86 %. Row 30 Tốn no-minus: KK56 d95b4db4 «tốn piece always a cost» is LIVE — verify then strike.
 Recount MAIN 186 28/11 04:40Z: f7ea14b7 lc34-savepid (Foreman B save-pid-cards rv6: save keeps pid on cards) → LIVE; no worklist row → 40 open, ~86 %.
 Recount MAIN 183 28/11 00:18Z: 18003079 lc33-eg3 (Foreman E e-gain3: gain rows, egain3c parity) → LIVE; no worklist row → 40 open, ~86 %.
