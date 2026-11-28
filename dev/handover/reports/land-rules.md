@@ -1,0 +1,28 @@
+# LAND-RULES (LR-RULES) — session_01Rc5AsLZqoDGFA7Am7fEtqW, opened by MAIN CHÍNH 186 (session_01Rc5AsNNdRG9GqK1FC4jasv) 28/11 05:37Z; rules track, in parallel with LC35 (UI track).
+PRIORITY #1 CHECK: OD (GROUP LANDING OD 27/11 ~06:38Z; owner 05:42Z «mở thêm người ghép») | main LIVE 5ad52416 | review/lc34-rules-r1 cc86c635 (RESOLVER), review/lc34-b3a ce616a3d, review/webkit-lb-rv179 935c008b (LC35 ui6 head) | claims LC34 handover (land-chain-34.md), LC35 land-chain-35.md.
+Protocol with LC35: before READY TO PUSH each messages the other «READY <sha> sent»; second lander FF-rebases on the new LIVE.
+
+## LOG
+- 05:40Z read 18 laws + START_CORE + START_WORKER + LC34 handover. Agreed protocol with LC35.
+- 05:43Z **time-spill-guard bisect** (RV-163M saw FAIL 7 on lc34-b3a 5f6fdda8). Parallel runs (8 at once) are load-flaky (even f7ea14b7 FAIL 20) → serial runs only:
+  | sha | unit | time-spill |
+  |---|---|---|
+  | 5ad52416 | LIVE | PASS 0 |
+  | f7ea14b7 | old LIVE (savepid) | PASS 0 |
+  | cdebf129 | + kk63-rv178 | PASS 0 |
+  | 736118ff | + kit-kri-xl-rv178 | PASS 0 |
+  | f839ea6b | + robot-realtap r22c | PASS 0 |
+  | 39296539 | + kk64-ui4 | PASS 0 |
+  | c711f8e1 | + kk64-kri-ui4 | PASS 0 |
+  | **62b08228** | **+ kit-stage-r17 5e119942** | **FAIL 7** |
+  | 5e119942 | r17 alone | FAIL 7 |
+  | c5f97e24 / cb28854b (ui6) / ce616a3d (b3a) | later | FAIL 7 |
+  Rows: gate greeting walk 1+1 offered; place dc b0/b2 ask+sneak offered; place kn b2 ask+sneak offered. Root: r17 hangs card acts as kitPick plaques outside `#mb .opts`; time-spill-guard.js body() reads only '#mb .opts button' → acts visible in the card text («Xin bái kiến · Lẻn vào», «Bái kiến … rồi vào») not found. = harness gap (law 11 family: every check reading '#mb .opts'), not a b3a fault. Culprit owner KIT-STAGE-R16 session_01Rc5AsMH9EMwkQZMHfyL2VU is INACTIVE → sent to MAIN for a fixer. Told LC35 (r17 is in their ui6 935c008b).
+- 05:44Z review/lc34-rules-r1 cc86c635 is on f7ea14b7 (not LIVE). Staged local review/lr-rules = cc86c635 + LC35 ui6 head 935c008b (= ui6 + webkit-lb LIVE): quickcheck.d/README union (noise-hygiene + webkit-syntax/boot lines), built files to rebuild.
+- 05:50Z MAIN 186 + LC35 + RV-163M: resolver RESOLVED PASS rules-r1 cc86c635; my bisect is the only blocker; MAIN: fix it myself or open a fixer (no queueing).
+- 05:55Z probe (instrumented guard copy) on ui6: on r17 «Xin bái kiến / Lẻn vào» = enabled button.kfoc-b.kpk-b (parent .kpk-n < .kpk.kpk-kv1) INSIDE #modal → harness-only. FIX **review/tsg-kpk 09e10cd3** (pushed) = LC35 ui6 head 935c008b + 1 line dev/test/time-spill-guard.js selector + '#modal button.kpk-b'; time-spill PASS; built files = 935c008b (stamp only). Needs RV PASS (asked MAIN). LAW 11 family filed to MAIN (not blocking): ~40+ dev/test files read only '.opts button' (scan: git grep -n "\.opts\( >\)\? button" dev/test dev/tools).
+- 05:55Z q-softlock quiet serial run 1: LIVE 5ad52416 0 · c711f8e1 0 · 62b08228 0 → RV-163M's FAIL 4 was load (inside a 1542 s gate run); run 2 pending.
+- 05:58Z review/lr-rules (local) 7f2215a4 (merge 935c008b) → 4cef360a (+ tsg-kpk). LIVE 5ad52416 ancestor ✓ · 0 deletions vs LIVE ✓ · webkit-syntax parse hits 0 (484 modules) ✓ · changed j*.js parse ✓. Rebuild + quickcheck --runs 3 next (after q-softlock run 2, one browser job at a time).
+- 05:51Z MAIN 186 + LC35: single fix = my tsg-kpk 09e10cd3 (LC35 383849d2 dropped); RV-180 reviews it; LC35 lands ui6 with it. Family (.opts readers) → KK67 (MAIN).
+- 06:00Z q-softlock quiet ×2 interleaved: LIVE 0/0 · c711f8e1 0/0 · 62b08228 0/0 → no unit adds rows; RV-163M FAIL 4 = load / known LIVE G4 pattern.
+- 06:02Z **review/lr-rules caa95310 PUSHED** = 4cef360a + rebuild (assets.json = 935c008b). quickcheck --runs 3 ALONE (CTM_LIVE_REF=5ad52416) running, log /home/user/wt/lr-rules-qc.log. READY TO PUSH only after: RV-180 PASS on 09e10cd3, ui6 LIVE (LC35), my gate PASS. rules-r1 resolution = resolver RESOLVED PASS (MAIN 186 05:46Z).
