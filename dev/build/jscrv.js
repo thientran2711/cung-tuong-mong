@@ -83,7 +83,9 @@ function scrvHideLate(root,light){scrvLateStop();root=root||document.body;if(lig
  const mo=new MutationObserver(R=>{if(!SCRV_LATE)return;for(const r of R){if(r.type==="childList")r.addedNodes.forEach(scrvLateScan);
   else if(r.target.nodeType===1){const el=r.target;if(SCRV_LATE.light&&el.tagName!=="IMG")continue;if(el.tagName==="IMG"){if(r.attributeName==="src"||r.attributeName==="srcset")scrvLateImg(el);else if(r.attributeName==="style"&&el.__scrvH&&el.style.visibility!=="hidden"&&!(el.complete&&el.naturalWidth))el.style.visibility="hidden"/* LRM4: a layout that rewrites the picture's style (j59 room figures: cssText / visibility="") must not unhide a picture still decoding */}else if(!el.__scrvB)scrvLateBg(el)}}});
  mo.observe(root,{childList:true,subtree:true,attributes:true,attributeFilter:["src","srcset","style","class"]});
- SCRV_LATE={mo,key:SCRV_KEY,light:light?1:0,t:setTimeout(scrvLateStop,light?KIT_SCRV.after:(KIT_SCRV.late||30000))}}
+ SCRV_LATE={mo,key:SCRV_KEY,light:light?1:0,t:setTimeout(scrvLateStop,light?KIT_SCRV.after:(KIT_SCRV.late||30000))};
+ /* LRM5: a frame sweep while the guard lives — any <img> not yet decoded that the observer did not hide (Fold cold Đức Thọ: a room figure showed undecoded with the light guard up and no hide mark) is hidden before the next paint */
+ const L=SCRV_LATE;const sweep=()=>{if(SCRV_LATE!==L)return;try{for(const im of document.images)if(!im.__scrvH&&!(im.complete&&im.naturalWidth))scrvLateImg(im)}catch(e){}requestAnimationFrame(sweep)};requestAnimationFrame(sweep)}
 /* wait (scan again after each wait: pictures set a frame later are caught) until all decoded or the cap */
 async function scrvWaitAll(root,t0,P){const raf=()=>new Promise(r=>requestAnimationFrame(()=>r()));
  for(let k=0;k<12;k++){const left=KIT_SCRV.cap-(performance.now()-t0);if(left<=0){scrvHideLate(root);return "cap"}
