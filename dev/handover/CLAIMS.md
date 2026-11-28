@@ -813,3 +813,4 @@ Review of review/f-tier-b5 (F-TIER-B5-RV, BIG) | review/f-tier-b5-rv 5cceaebe | 
 E-TIER-B14c (successor: remaining gates on review/e-tier-b14 bf360722 → RV READY part 1; then part 2 j70c + jkyc) | review/e-tier-b14 (after bf360722) | (opening) | RUNNING | 28/11 13:33Z (Foreman E C12)
 ALLOT-PACE-3 | review/allot-pace-r3-rv187 114c19da | session_01PEhRbuUnuv3S5Duzh9rAtx | DONE (RV-187 PASS → LAND READY, archived) | 28/11 13:40Z Foreman C
 B-ROW4 r2 (successor of 2GvCVsyL; side-line scenes review/sideline-dlg-4 re-merge LIVE + finish gates) | review/sideline-dlg-4 | session_01N1tNP5BGCjSbd18PTpVBvk (opus) | RUNNING | 28/11 13:48Z (Foreman B ROOT 3 child 3)
+E-TIER-B13d (fix 5 RV3B FAIL items on batch 3b e3c1f982) | review/e-tier-b13 (after e3c1f982) | (opening) | RUNNING | 28/11 13:58Z (Foreman E C12)
