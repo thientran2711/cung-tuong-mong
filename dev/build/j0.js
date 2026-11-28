@@ -15,7 +15,8 @@ function kitOddsIdx(w){return KIT_ODDS.indexOf(kitOddsCanon(String(w).trim()))}
    Where the browser supports lookbehind kRx returns the native RegExp (identical behaviour). Elsewhere:
    - lookbehinds only at the START of the pattern → an object with exec / test / [Symbol.replace|split|match] that runs the rest of the pattern
      and keeps a match only when the text before it passes each lookbehind (tested as (?:X)$ on the text before the match);
-   - lookbehinds elsewhere → the same pattern with them removed (close enough for those rare word checks). */
+   - lookbehinds at the start of a top-level | alternative → the same, per alternative (an empty marker group tells which one matched, KK66);
+   - lookbehinds elsewhere → the same pattern with them removed (close enough for those rare word checks). Gates: quickcheck.d/30-webkit-syntax + 31-webkit-boot. */
 const KRX_LB=(()=>{try{return new RegExp("(?<=a)b").test("ab")}catch(e){return false}})();
 function kRxStrip(p){let out="",st=[],cls=false;const inLB=()=>st.includes(true);
  for(let i=0;i<p.length;i++){const c=p[i];
@@ -27,18 +28,30 @@ function kRxStrip(p){let out="",st=[],cls=false;const inLB=()=>st.includes(true)
   if(!inLB())out+=c}
  return out}
 function kRx(src,flags){return KRX_LB?new RegExp(src,flags||""):kRxEmu(src,flags)}
+function kRxAlts(p){const out=[];let d=0,cls=false,at=0;/* split a pattern at its top-level | */
+ for(let i=0;i<p.length;i++){const c=p[i];if(c==="\\"){i++;continue}if(cls){if(c==="]")cls=false;continue}
+  if(c==="[")cls=true;else if(c==="(")d++;else if(c===")")d--;else if(c==="|"&&d===0){out.push(p.slice(at,i));at=i+1}}
+ out.push(p.slice(at));return out}
 function kRxEmu(src,flags){flags=flags||"";
- const lbs=[];let rest=src,m;
- while((m=/^\(\?<([=!])/.exec(rest))){let d=0,i=0,cls=false;for(;i<rest.length;i++){const c=rest[i];if(c==="\\"){i++;continue}if(cls){if(c==="]")cls=false;continue}if(c==="[")cls=true;else if(c==="(")d++;else if(c===")"&&--d===0)break}
-  lbs.push({neg:m[1]==="!",re:new RegExp("(?:"+rest.slice(4,i)+")$",flags.replace(/[gy]/g,""))});rest=rest.slice(i+1)}
- if(/\(\?<[=!]/.test(rest))rest=kRxStrip(rest);
- if(!lbs.length)return new RegExp(rest,flags);
- const G=flags.includes("g"),core=new RegExp(rest,flags.replace(/[gy]/g,"")+"g");
- const ok=(s,i)=>{const pre=s.slice(0,i);return lbs.every(l=>l.re.test(pre)!==l.neg)};
+ /* each top-level alternative: its LEADING lookbehinds are checked on the text before the match (tested as (?:X)$); an empty marker group ()
+    put where they stood tells which alternative matched; marker groups are taken out of every match handed back. Lookbehinds anywhere else
+    (or a pattern with a numbered back-reference, whose numbers the markers would shift) → removed (close enough for those rare word checks). */
+ const fl=flags.replace(/[gy]/g,"");let alts=kRxAlts(src).map(a=>{const lbs=[];let rest=a,m;
+  while((m=/^\(\?<([=!])/.exec(rest))){let d=0,i=0,cls=false;for(;i<rest.length;i++){const c=rest[i];if(c==="\\"){i++;continue}if(cls){if(c==="]")cls=false;continue}if(c==="[")cls=true;else if(c==="(")d++;else if(c===")"&&--d===0)break}
+   lbs.push({neg:m[1]==="!",re:new RegExp("(?:"+rest.slice(4,i)+")$",fl)});rest=rest.slice(i+1)}
+  return{lbs,rest}});
+ if(/\\[1-9]/.test(src)||alts.some(x=>/\(\?<[=!]/.test(x.rest)))alts=[{lbs:[],rest:kRxStrip(src)}];
+ if(!alts.some(x=>x.lbs.length))return new RegExp(alts.map(x=>x.rest).join("|"),flags);
+ const caps=t=>{let n=0,cls=false;for(let i=0;i<t.length;i++){const c=t[i];if(c==="\\"){i++;continue}if(cls){if(c==="]")cls=false;continue}if(c==="[")cls=true;else if(c==="("&&(t[i+1]!=="?"||(t[i+2]==="<"&&t[i+3]!=="="&&t[i+3]!=="!")))n++}return n};
+ let srcC="",ng=0;const mk=[];alts.forEach((x,k)=>{if(k)srcC+="|";if(x.lbs.length){ng++;mk.push({g:ng,lbs:x.lbs});srcC+="()"}srcC+=x.rest;ng+=caps(x.rest)});
+ const MK=new Set(mk.map(x=>x.g));
+ const G=flags.includes("g"),core=new RegExp(srcC,fl+"g");
+ const ok=(s,x)=>{const pre=s.slice(0,x.index);return mk.every(q=>x[q.g]===undefined||q.lbs.every(l=>l.re.test(pre)!==l.neg))};
+ const clean=x=>{const a=[x[0]];for(let i=1;i<x.length;i++)if(!MK.has(i))a.push(x[i]);a.index=x.index;a.input=x.input;a.groups=x.groups;return a};
  const R={source:src,flags,global:G,lastIndex:0,
-  exec(s){s=String(s);core.lastIndex=G?R.lastIndex:0;let x;while((x=core.exec(s))){if(ok(s,x.index)){if(G)R.lastIndex=core.lastIndex;return x}core.lastIndex=x.index+1}if(G)R.lastIndex=0;return null},
+  exec(s){s=String(s);core.lastIndex=G?R.lastIndex:0;let x;while((x=core.exec(s))){if(ok(s,x)){if(G)R.lastIndex=core.lastIndex;return clean(x)}core.lastIndex=x.index+1}if(G)R.lastIndex=0;return null},
   test(s){return !!R.exec(s)},
-  all(s){const L=[];core.lastIndex=0;let x;while((x=core.exec(s))){if(ok(s,x.index)){L.push(x);if(!x[0].length)core.lastIndex++}else core.lastIndex=x.index+1}return L},
+  all(s){const L=[];core.lastIndex=0;let x;while((x=core.exec(s))){if(ok(s,x)){L.push(clean(x));if(!x[0].length)core.lastIndex++}else core.lastIndex=x.index+1}return L},
   [Symbol.replace](s,rep){s=String(s);const L=G?R.all(s):[R.exec(s)].filter(Boolean);if(!G)R.lastIndex=0;let out="",at=0;
    for(const x of L){const g=x.slice(1);let r;
     if(typeof rep==="function")r=String(rep(x[0],...g,x.index,s));
