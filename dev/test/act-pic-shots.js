@@ -1,7 +1,7 @@
 /* act-pic-shots.js (review/act-pic-match): full-screen shots of the Hành sự list, every tab, on the priority devices (Fold 755x1000@2, iPad 1180x820@2).
    Real pictures from the CDN. ACTS_FILE=<local ACTS.json> tests a manifest before it goes live.
    usage: [ACTS_FILE=x.json] node dev/test/act-pic-shots.js <build url> <outdir> [WxH@dpr,...]  -> <outdir>/<WxH>-<tab>.jpg, prints tabs + page errors + horizontal overflow */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SZ]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT,SZ]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  for(const v of (SZ||"755x1000@2,1180x820@2").split(",")){const [sz,d]=v.split("@");const [W,H]=sz.split("x").map(Number);const errs=[];
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,hasTouch:true,isMobile:W<1000,serviceWorkers:'block',reducedMotion:'reduce'});

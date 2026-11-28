@@ -1,5 +1,5 @@
 /* shared boot for SELSCENE-2 mock: serve the worktree, start a new life, clear queue */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('../lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=require('path').resolve(__dirname,'../../..');
 const MT={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml','.mp3':'audio/mpeg','.webmanifest':'application/manifest+json','.woff2':'font/woff2'};
 async function boot(b,W,H,o={}){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',recordVideo:o.video?{dir:o.video,size:{width:W,height:H}}:undefined});

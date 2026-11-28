@@ -2,7 +2,7 @@
    (static: pushDil(...,"pid") + mkP("pid")) with its class: ROUTINE / ACT-PICKER / SELECTION / DANGER, and (b) really shows a card of each kind and counts the wash (.kmalarm) and the heartbeat.
    FAIL: a danger card with no wash, or a not-danger card (act picker, selx*, kc2Sel, nodanger:1) with a wash.
    usage: node dev/test/kit-alarm-scan.js <index.html> <all.js>   Exit 1 on a FAIL. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,ALL]=process.argv;
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,ALL]=process.argv;
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1});
  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));

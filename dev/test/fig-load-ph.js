@@ -3,7 +3,7 @@
    back 1.5 s (route), the place stage + a person dialog (kitModal subject) + the Hậu cung tab are sampled every 80 ms: FAIL = any <img> whose own src is a
    person picture (fig-/por-, not unknown-) shows an unknown-* background, or the identity-card stand-in (img.kidfig2) paints the silhouette picture.
    Also: kitModal warms its subject's figure (request seen before the dialog paints). usage: node dev/test/fig-load-ph.js <index.html> [WxH,...]  exit 1 on FAIL */
-const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');
 const PNG=Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=','base64');
 (async()=>{const b=await chromium.launch();let fails=0;const chk=(n,ok,v)=>{console.log((ok?'ok  ':'FAIL')+' '+n+' '+JSON.stringify(v));if(!ok)fails++};
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const p=await b.newPage({viewport:{width:W,height:H}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,140)));

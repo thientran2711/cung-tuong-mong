@@ -1,7 +1,7 @@
 /* r3 tool: node dev/test/sangbuoi-save-replay.js http://127.0.0.1:PORT/index.html <dump.json with .ls> <outdir>   env VP — loads a robot save through the title with real taps, plays like a player, logs Q / modal / «Sang buổi». */
 /* r3 scratch: the s6d REAL SAVE (button-crawl report: after the dawn «Tiếp theo» the news card is never shown, #next greyed).
    Load its localStorage on the origin, reload, real-tap the title's continue, then play like a player (real taps) and log each step. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,DUMP,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,DUMP,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const LS=JSON.parse(fs.readFileSync(DUMP,'utf8')).ls;
 (async()=>{const b=await chromium.launch();for(const [W,H] of (process.env.VP||'755x1000,1180x820').split(',').map(v=>v.split('x').map(Number))){
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});

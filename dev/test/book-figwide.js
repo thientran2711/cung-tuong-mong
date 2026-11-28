@@ -4,7 +4,7 @@
    across lines, facts per page (≥ 2 except the last), figure height / picture height (≥ 0.85), figure scaled (must not), page-1 heading
    shows the name, and on the page in view: face + torso (head centre ± 12 % of figure height) clear of the text (≥ 0 px), body never past the page's left
    edge (trainPastLeft = outer train/sleeve beyond it, allowed). Exit 1 on any failure. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const FIGS=(process.env.FIGS||'fig-thaihau-h1-a51.webp,fig-thaihau-h3-a51.webp,fig-thaihau-h2-a51.webp,fig-maid-m33-t7-a18.webp,fig-consort-c10-t8-a18.webp').split(',');
 const N=+(process.env.N||14);const NORMAL='fig-consort-c01-t1-a18.webp';   /* reference: a normal standing figure — text may never be narrower than on its page */const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1000,755],[1180,820],[1366,1024]];
 const isFile=!/^https?:/.test(SRC);

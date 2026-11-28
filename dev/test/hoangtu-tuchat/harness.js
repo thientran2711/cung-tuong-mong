@@ -1,5 +1,5 @@
 /* shared harness: serves the worktree's dev/index.html as http://ht.local/, images from the CDN through curl (cached) */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const cp=require('child_process');
+const {chromium}=(require('../lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');const cp=require('child_process');
 const WT=require('path').resolve(__dirname,'../../..');const CACHE=process.env.CTM_CACHE||require('os').tmpdir()+'/ctm-imgcache';fs.mkdirSync(CACHE,{recursive:true});
 const SKIPIMG=!!process.env.SKIPIMG;const CDN='https://ctm-img.victoria-tntt.workers.dev/';
 const MIME={html:'text/html; charset=utf-8',js:'text/javascript; charset=utf-8',json:'application/json',webp:'image/webp',png:'image/png',jpg:'image/jpeg',css:'text/css',mp3:'audio/mpeg',ogg:'audio/ogg'};

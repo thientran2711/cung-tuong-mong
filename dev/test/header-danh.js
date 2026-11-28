@@ -4,7 +4,7 @@
    Per size prints JSON: group order, label/number line tops of every cell + the time block (spread must be <= 1 px), bars,
    cell tooltips, overlaps of the quẻ line / time block with every cell, seal vs quẻ line, header-fix box checks, page errors.
    Quẻ texts tried: "Quẻ Thượng thượng (Danh)" (reviewer note, 1000x755) and the longest "Quẻ Thượng thượng (Giao thiệp)". */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,IDX,OUT,SIZES,OLD]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';
 const html=fs.readFileSync(IDX,'utf8');

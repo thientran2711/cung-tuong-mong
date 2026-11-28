@@ -6,7 +6,7 @@
    the 3 tests + the contest decide kept / ban hoa (score untouched by the dramas), the edict gives origin ±1 (cap Tần) and the news card,
    ban hoa (forced low marks) ends the life, no digits in the scene text (VANPHONG), no page errors.
    usage: node dev/test/selx-days.js [index.html]  (serves dev/ through a Playwright route; run python3 dev/build/assemble.py first) */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html';
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m,x)=>{if(!c){bad++;console.log('FAIL',m,x!==undefined?JSON.stringify(x).slice(0,600):'')}else console.log('ok',m)};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});

@@ -1,6 +1,6 @@
 /* review/selection-scene (SELSCENE-3): THE CONTEST measure (OD 24/11 ~06:15Z). Fresh lives per origin: her place among BAL.selx.yard.n girls
    and her step, at mini-game marks 3 / 5 / 8 (đối đáp / hành xử middle until the scene lands); the tú nữ score spread. usage: node dev/measure/selx-contest.js [N] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const ROOT=path.resolve(__dirname,'..');const N=+process.argv[2]||40;
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');const ROOT=path.resolve(__dirname,'..');const N=+process.argv[2]||40;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});
  await ctx.route('http://localhost:8813/**',r=>{const u=new URL(r.request().url());const f=path.join(ROOT,decodeURIComponent(u.pathname));if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});return r.fulfill({status:200,contentType:f.endsWith('.html')?'text/html; charset=utf-8':'application/octet-stream',body:fs.readFileSync(f)})});
  const p=await ctx.newPage();p.setDefaultTimeout(600000);await p.goto('http://localhost:8813/index.html',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof selxContest==='function'&&typeof start==='function');
