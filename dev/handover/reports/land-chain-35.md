@@ -42,3 +42,6 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 08:17Z container RESTARTED (uptime 1 min) — all background runs lost; seq.sh relaunched (next-dead ×2 ui2 + LIVE → dayq test → dayq qc → u3 on ui4). (Earlier log times after 08:10 were estimates; real clock 08:17.)
 - RV-182 FAIL giftback delta 4d59d326 (evidence leak / Mất on dressing) → keep 991a1b72 in ui4.
 - 08:20Z LR-RULES READY a96564ad (lr-rules-r2, FF of 22afefb4). merge-tree a96564ad × ui2 b1a0d4e9: 3 REAL conflicts j8:343 / j83:113 / jemoact:444 (rules pvQuy word vs ringdup r2 real +N). Sent to MAIN 188 for ruling/resolver (suggest KK68). Not resolving myself.
+- 08:20Z MAIN 188 PUSHED LIVE = a96564ad (lr-rules-r2; ROLLBACK 22afefb4).
+- Restack without ringdup (conflict pending ruling): review/lc35-ui5 c03d6ee7 = a96564ad + tagwrap 4e12f54e + coop-qcard 87dcdfbb (jkstage = RV-182-passed 5f3ad071 resolution, byte-identical); rebuilt; assets = LIVE; 0 del; MODGATE 494 ⊇ 494; webkit 0; unions checked. ringdup 9c7ea0de + giftback 991a1b72 wait for the j8/j83/jemoact ruling.
+- dayq restaged review/lc35-dayq e70cf6af (on a96564ad; j93 union ok; MODGATE PASS). seq2.sh: ui5 tests + quickcheck → dayq test + quickcheck. (ui2 next-dead run hit TimeoutError — ui2 shelved.)
