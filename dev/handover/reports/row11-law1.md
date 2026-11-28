@@ -300,3 +300,29 @@ ONE helper (opus, BIG, harness family): bring dev/tools/role-parity-scan.js to t
 | maid | maid:tellMis | ✓ | — | — | — (self) | SAME |
 | maid | maid:tonic | ✓ | — | — | — (self) | SAME |
 | maid | maid:watch | ✓ | — | — | — (self) | SAME |
+
+# ROUND 2 — door era (B WORKER ROW 11 r2 = session_01N1tNP445am54Wo5eKGK7pA, depth 3, START_CTX ~5 %)
+PRIORITY #1 CHECK ('law-1|two-way|hai chiều'): OD 71 | ledger 3 | claims 8 (B-ROW11-LAW1 r2 = me) | main 15 | review/* 3 (review/row11-law1 = lr-rules-r2 a96564ad + tools; LIVE 225c5c08 contained, checked at --deepen 200).
+Branch **review/row11-law1 2c6b14a9d55d2fa15726f566571d11539012cfb6** (on 3b667243).
+
+## What changed
+TOOLS (law 11, harness family «door era»):
+1. role-parity-scan.js: her side reads the OLD card unfolded (ACT-MOVE AMV.card off + jdf DOORC.raw); REACH CHECK: every old card member a:/e: must sit in BAL.df person / palace / either / personE (the stage pop-up lists) → lost = 0 (no act was dropped by ACT-MOVE); door-card ways («Mua đồ» illDoor via DOOR.card, greyed ways skipped); the môn frame (ktArtSkills.raw); KEYLAB «Dâng lễ vật»=cx:gift, «Mua đồ»=cx:buy, «Thêm thái giám» / «Nội vụ phủ: thêm …»=cx3:hire; worlds (same for both doers): pets, staff-room + Nội vụ phủ pool, mend (deep grudge + go-between), feud, no child for a maid doer; opt.only debug subset.
+2. role-parity-exempt.json: «Hỏi lén» (svtMonth = same svTalk), «Đề bạt lên …» (monthly npcWhy dbPromo = same dbDo), harm:road (night flip stealPass = same stealNight), «ⓘ Bảng tài nghệ» (view).
+3. law1-dir-scan.js: worlds need (target ill + carrying, third-party grudge, rank flip, moderate grudge, Empress seat = target, servant, pet, disfavour + jewel), facF / facH (target leads a faction), jail, deep; the MEETING road (jgreet gmOpts → talk topics / warn / provoke toward her); the NPC Hoàng hậu always a doer. New dev/tools/law1-dir-exempt.json (cross-life maid rows).
+GAME (law 1, family «an NPC's target list drops HER», scan: grep target filters `!==S` in jag*.js → 12 hits, 3 were target lists of a two-way act):
+| act | before | after |
+|---|---|---|
+| cx3:tell «Kể tội … với Thái hậu» (jagacts3) | NPC target list `t!==S` | her too (same gate as her j78 button: not Hoàng hậu, proof held); she pays Sủng through apply + log |
+| cx3:petcare «Giúp chăm thú nuôi» (jagacts3 p3PetFr) | `t!==S` | her pet too (ACT.petcare gate unchanged) |
+| Hòa giải (j28 SOC.mediate) | only «t's grudge against HER» | the TW rule (twFoeOf: any grudge t holds, hers included) = her button's rule |
+| the other 9 hits | doer lists (who acts), the maid's own master list, par3talk (her road = jgreet, proven), mendGoOf go-between, jagwhy* | no change (not a target of a two-way act) |
+
+## Results (review/row11-law1 2c6b14a9)
+- law1-dir-scan: direction gaps **27 → 2** (between-person acts 88): `follow` NOHER (rank-flip world still not read — TO VERIFY), `hh:conf` NONPC (NPC Empress never confiscates from an NPC in the probe — TO VERIFY). Exempt: 4 cross-life maid rows (maid:accuse = OPEN: an NPC maid never brings an accusation to HER as Hoàng hậu, `hh!==S` in jagstaff — needs a receiver card, feature freeze → for Foreman B).
+- role-parity rows vs the open list: **164 → 24** (scan3); listed in role-parity-open.json with notes; OPEN_MAX 7 → 31 (a raise, FOR THE REVIEWER; the 164 came with the rules bundle, not this branch). FAM_OPEN trimmed to the co-op row.
+- dev/test/law1-r2.test.js: before-build (3b667243 = LIVE rules for these lines) **5 FAIL**, fix **ALL PASS** (mutation = the before build).
+- Final runs (role-parity / law1-audit / law1-gifts / law1-r2): see the STATUS line.
+
+## HANDOVER (worker rollover at ~30 %)
+Worktree /home/user/wt/r11, scratch /home/user/wt/r11tools (scan3.json, dir3.md). Next: verify the open notes (drop hh, maid:beside, maid elder Biếu / Hỏi chuyện vs NPC maids, up invite2 / kidGuard, follow, hh:conf), close or fix by family; then BIG rv.
