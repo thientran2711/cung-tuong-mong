@@ -86,3 +86,10 @@ Branch `review/tmk-warn` (base review/tmk-oanpace-fix b96bb0d5 — LC33 asked fo
   closes (no crash event, no navigation, no window.close) on the first tab click. Proof: replacing jmcwarn.js by a same-size COMMENT file
   closes it too; removing the file passes. LIVE 20.59 MB / base 20.64 MB under, this branch 20.65 MB over → every branch hits it as the page
   grows. Fix: the scan opens file://SRC (local copy /tmp only; owner of kit-std-scan to change it).
+- QUICKCHECK a4e79f76 vs LIVE 5fb13d60 (1689 s): robot part PASS — open 2128 ms, old save ok, perf median new/live render 277/330, tab
+  438/620, buổi 1431/1771 ms, tasks>200 27/36. CORE GATES FAIL, all three not from this branch:
+  · G2 rules-one-source «old save NO SAVE»: the LIVE 5fb13d60 save does not load in the older 3b-line code — base b96bb0d5 gives the SAME
+    «NO SAVE» (run by hand, same script); clears on the re-merge onto the 3b restack (on LIVE).
+  · G4 96-kit-std-scan: the route.fulfill big-page close (above); KK63 HARNESS-BIGPAGE 29cbe6a4 fixes the harness; file:// run = base.
+  · G4 96-noise-hygiene: TEXT-HYGIENE static «new 7» leaks all in jkitpage.js / jmapz.js / jnotice.js (not touched here); NOISE-DAY advisory.
+- RE-RUN after the 3b re-merge: quickcheck (with kk63 harness), coop-e2e, tmk-warn.test, tmk-warn-scan, kit-hand-mat-scan fold+ipadAir.
