@@ -151,3 +151,24 @@ Root (kit, law 9 → not patched here): jopic kitOptCopy(b, face=1) keeps every 
 text in any hand plate, every PEND dialog, consort + servant passes): base fcbc1992 **0**, branch **1** (cnvBribeOpts take) — no base hand card
 has a Mất row; tmk-warn's take card is the first (the watch line moved from «kèm:» to «mất:», TMK-WARN-2). Any future sure card with a Mất
 (or sure-Bại) row in a hand will double the same way. Filed in dev/kit/KIT_REQUESTS.md (K-HAND-DUPMAT) for the kit keeper.
+
+### r3 → **review/tmk-warn-r3** (MAIN 189 order 09:05Z: 1a6a1aed VOID; restack onto rules tip review/rules-prefail-r3-rv184 c76b6499 on LIVE a96564ad + MODGATE)
+- dad2189a = merge c76b6499 into tmk-warn-r2 83485abe (2 parents). Conflicts: assemble.py (= rules tip list + jmcwarn after jcharge), j42
+  cnvBlackOpts (rules tip version without «Đút bạc bịt miệng», split-merge A4, + the tmk-warn obey line «mất: cnvSpyX(m,1,v)»), built files rebuilt.
+  **MODGATE 514 ⊇ LIVE 508, 0 missing** · 0 LIVE deletions · every merge 2 parents · assets.json = LIVE.
+- bc245222 = the tai-mat-know cap flake (MAIN 188 order 07:48Z, left open by TMK-WARN-2), see below.
+- On bc245222: tmk-warn.test 17/17 · MUTATE nowarn / notext / nocut exit 1 · tmk-warn-scan 0 gaps / 26 sites · tai-mat-know 24/24 in 12/12 runs.
+- quickcheck vs LIVE a96564ad: **all core gates PASS except G1 one-core-text-rule**: DIFF jph.js:173 (title)=72 and jkpick.js:141 (title)=8. The
+  SAME 2 DIFFs on base c76b6499 (`OC_BUILD=<c76 dev/build> node dev/test/one-core-text-rule.js`); LIVE a96564ad PASS → it comes from the rules
+  tip, not from tmk-warn (we touch neither file). Browser part: open 1734 ms · old save ok · time-spill PASS. kit-std-scan 7 (baseline 28), none on
+  a tmk-warn card. Q-SOFTLOCK PASS.
+
+### tai-mat-know cap flake — decided canon side: the RULES are right, the TEST harness was wrong (test-only fix, bc245222)
+- Canon chain for one spy learning (jagknow spyLearn, its own cause in opOwn): nết multiplies first (j28 oanAdd wrapper, persF «slight» 0.49–2.1)
+  → oanPace caps the day per holder (joanpace opStep, BAL.oanPace.day 16) → stat-pace bands the rise, slows it as the oán climbs and stops it at
+  the rank top (jstatpace spG / spTop — ONE cap per stat, MAIN 163); a fall of liking below 0 is paced too (SP_SIGN). Probe over 80 rivals ×
+  8 games: no rival ever lands above BAL.oanPace.day (the old «nết ×2.1 → 16.8 > 16» cannot happen on this base: 16.8 is banded to 10).
+- The test measured L[1], a RANDOM rival with old oán / old dislike / any nết, against fixed numbers → it failed ~1 run in 6 in three shapes:
+  oán +6 not +8 (old oán slows the rise), aff −1 not −tm.oan (old dislike paces the fall), or the 2nd learning 0 (a ×2.1 holder hits the rank top
+  with the first). Fix: TK.fresh(w) before the measured step (oán 0, liking 0, no opz / opa / spc); the own-cause check accepts «the first learning
+  reached spTop» (read from the game, nothing typed). The check still bites: a folded own cause lands 0 far below the top (run sample end 16, top 80).
