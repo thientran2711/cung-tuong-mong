@@ -179,7 +179,7 @@ function ptNoSentWhy(){try{const L=(S.staff||[]).filter(s=>s&&!s.spyFor);if(!L.l
  if(typeof tinOf==="function"&&!L.some(s=>tinOf(s)>=BAL.tinLv.send))return"chưa có người hầu nào đủ tin để sai đi";}catch(e){}return ptNoRunner()}
 /* ---- busy servants are never picked to be sent (her runner, NPC mistresses too: two-way) ---- */
 (function(){try{if(typeof bestSent!=="function")return;const b0=bestSent;bestSent=function(p){const r=b0.apply(this,arguments);try{if(!ptOn()||!r||!p)return r;if(!ptBusy(ptPid(r,p)))return r;
-  const L=(p.staff||[]).filter(s=>s&&s!==r&&!s.spyFor&&!ptBusy(ptPid(s,p)));if(!L.length)return null;return L.sort((a,b)=>(b.loyal||0)-(a.loyal||0))[0]}catch(e){return r}}}catch(e){ptErr("bestSent",e)}})();
+  const L=(p.staff||[]).filter(s=>s&&s!==r&&!s.spyFor&&!ptBusy(ptPid(s,p))&&(typeof tinOf!=="function"||tinOf(s)>=BAL.tinLv.send)/* servant-trust: the Chủ tin gate */);if(!L.length)return null;return L.sort((a,b)=>(b.loyal||0)-(a.loyal||0))[0]}catch(e){return r}}}catch(e){ptErr("bestSent",e)}})();
 /* ---- 1. Sai đi dò la (her maid / any servant of her household; Hành sự card, maid pop-up, Cung nhân) ---- */
 (function(){try{if(typeof spyMaidRun!=="function")return;const s0=spyMaidRun;spyMaidRun=function(t,ag){if(!ptOn()||PT.landing||!t)return s0.apply(this,arguments);
   const m=ag||S.maid;const id=ptPid(m);const fz=typeof ACTFZ!=="undefined"&&ACTFZ?ACTFZ.o:null;

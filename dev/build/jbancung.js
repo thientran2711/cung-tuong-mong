@@ -71,13 +71,16 @@ palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.p
    the grant (S.pal, S.palCer) is made before, once — written into the sổ and made again on load */
 const bcCard=rcpReg("banCung",from=>{if(!S||from==null||!PALN[from])return null;const B=BAL.banCung;
  const st=i=>bcDanh(i)-bcDanh(from);
- const opts=[{n:`Nhận ${PALN[from]}`,fx:{duc:B.ok.ducTake},x:"tạ ơn, dọn sang",go:()=>log(`Dọn sang ${PALN[from]}.`)}];
+ /* palace distance (jpdist, OD 24/11 ~08:45Z): how often he comes to each palace, the odds word + why */
+ const pdTxt=i=>{try{return typeof pdCardTxt==="function"?` · ${pdCardTxt(S,i)}`:""}catch(e){return ""}};
+ const opts=[{n:`Nhận ${PALN[from]}`,fx:{duc:B.ok.ducTake},x:`tạ ơn, dọn sang${pdTxt(from)}`,go:()=>log(`Dọn sang ${PALN[from]}.`)}];
  for(const c of bcChoices(S,from)){const i=c.i;
   if(c.locked){opts.push(kitOff({n:`Xin ${PALN[i]}`,fx:{},x:`dời sang ${PALN[i]}`,go:()=>{}},bcWhy(i),kitWhenRank()));continue}
   const s=st(i),up=Math.max(0,s),top=bcWanters(S,i)[0];
   const gain=`, ${bcGainTxt(bcGain(i,from))}`;
   const loss=`${sgStat(-(B.fail.sung+B.fail.sungStep*up))}, Danh ${balSg(-(B.fail.danh+B.fail.danhStep*up))}${top&&up>0?`, ${top.name} sinh oán`:""}`;
-  opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}`,go:()=>{bcAsk(S,i,from)}})}
+  opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}${pdTxt(i)}`,go:()=>{bcAsk(S,i,from)}})}
+ try{if(typeof pdHint==="function"){pdHint(opts[0],S,from);for(const o of opts)if(o!==opts[0]&&!o.off){const i=PALN.findIndex(n=>o.n===`Xin ${n}`);if(i>=0)pdHint(o,S,i)}}}catch(e){}
  Q.push({ev:1,kind:"group"/* KIT §101.9: choose a palace = vòng nhóm (RING-BUILD) */,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${meRankN()} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});return Q[Q.length-1]});
 /* NPC parity (law 1): a consort newly made chủ vị holds HER card (host only in co-op: one roll for the world).
    law1-audit (OD 24/11 ~08:35Z): the NPC used to have only the «ask UP» road; her card also has «Nhận <cung>» (Đức +ok.ducTake) and the humble ask

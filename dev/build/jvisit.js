@@ -49,7 +49,7 @@ window.visGo=function(p){const w=day();
  log(`Đêm nay Hoàng thượng ngự giá đến cung ${p.name}, nghỉ lại đến sáng.`);return"npc"};
 window.visRoll=function(){if(!host()||!empOk())return"";if(window.agDOn&&agDOn())return"";const L=[];if(meOk())L.push(S);
  if(cw()){const f=(rivals||[]).find(v=>v&&v.coop&&v.alive!==false&&!v.out);if(f)L.push(f)}
- L.sort(()=>Math.random()-.5);for(const p of L){if(!roll(visCh(p)))continue;return visGo(p)}return""};
+ L.sort(()=>Math.random()-.5);for(const p of L){if(!roll(window.visCh(p)))continue/* jpdist wraps window.visCh (palace distance) */;return visGo(p)}return""};
 /* after the tablet flip of each day (j8 flip, wrapped by j55 / j75) */
 (function(){const f0=flip;flip=function(){const r=f0.apply(this,arguments);try{const n=S&&S.visNpc;if(n&&n.w===day()&&S.tonight!=="me"){const v=(rivals||[]).find(x=>x&&x.id===n.id&&x.alive&&!x.out);if(v)S.tonight=v}}catch(e){}try{if(S&&!S.dead)visRoll()}catch(e){console.error("visit",e)}return r}})();
 /* co-op: the seat the host chose plays its card when the merged world arrives; the other seat reads the news */
