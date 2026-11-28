@@ -21,6 +21,11 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ok=(c,m)=>{console
  for(const f of fs.readdirSync(dir).filter(f=>/^j.*\.js$/.test(f)&&f!=='all.js')){const L=fs.readFileSync(path.join(dir,f),'utf8').split('\n');L.forEach((l,i)=>{if(/w1\s*=\s*w\s*\+\s*BAL\.ex\.win/.test(l))rows.push({f,l:i+1,ask:/exAsk\(/.test(L.slice(i,i+2).join(' '))})})}
  console.log('opener scan:');for(const r of rows)console.log(`  ${r.f}:${r.l}  exAsk ${r.ask?'yes':'NO'}`);
  ok(rows.length>=2&&rows.every(r=>r.ask),`(0) every exam window opener calls exAsk (${rows.length} sites)`)}
+/* (17b) d-maid-road rv, law 11 whole family: no maid act card (j42 srvCards, with a fail:) keeps its fail text as «hỏng:» inside x
+   (the kit row sorter puts it in THÀNH / KÈM); the fail text goes in lx (kit failTxt → the BẠI block) */
+{const src=fs.readFileSync(path.join(__dirname,'..','build','j42.js'),'utf8');const bad=[];
+ const at=[...src.matchAll(/\{n:(`[^`]*`|"[^"]*"),t:/g)];at.forEach((m,i)=>{const c=src.slice(m.index,i+1<at.length?at[i+1].index:src.length),f=c.indexOf('fail:');if(f>0&&/[,{]\s*x:(`[^`]*hỏng:|"[^"]*hỏng:)/.test(c.slice(0,f)))bad.push(m[1])});
+ console.log('maid card fail-text scan: '+(bad.length?bad.join(', '):'none'));ok(!bad.length,`(17b) every maid act card with a fail prints it in lx / BẠI, not «hỏng:» in x (${bad.length} left)`)}
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?.*)?$/,r=>r.abort());
  await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
@@ -72,13 +77,13 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ok=(c,m)=>{console
   /* (16) old save: NaN rung */
   if(srvLife()){S.srv.lau=0;S.srv.rk=NaN;S.srv.rk0=2;const d=JSON.parse(JSON.stringify(ser()));try{quiet=true;deser(d);quiet=false;deal();render();out.old={rk:S.srv.rk,ex:JSON.stringify(S.srv.ex)}}catch(e){out.old={err:e.message}}}
   /* (17) Tân Giả khố rest card prints its fail loss (an extra week) */
-  if(srvLife()){srvLaundry('t',6);const c=srvCards().find(a=>a&&a.n==='Nghỉ tay một lát');out.rest=c&&c.x}
+  if(srvLife()){srvLaundry('t',6);const c=srvCards().find(a=>a&&a.n==='Nghỉ tay một lát');out.rest=c&&c.lx;out.restX=c&&c.x;try{tab='act';render();const el=[...document.querySelectorAll('.kr-bai')].find(e=>/thêm một tuần phạt/.test(e.textContent));out.restBai=!!el&&!!el.closest('*')&&/Nghỉ tay một lát/.test((el.closest('.act,.kcard,[class*=card],button')||document.body).textContent);out.restKem=[...document.querySelectorAll('.kr-kem,.kr-thanh')].some(e=>/thêm một tuần phạt/.test(e.textContent))}catch(e){out.restErr=e.message}}
   window.__exAuto=0;return out});
  console.log(JSON.stringify(M));
  ok(M.life&&M.steps&&M.steps.length&&M.steps.every(x=>x.card&&x.to===x.from+1)&&M.top===M.steps[M.steps.length-1].to&&M.top>=4,`(13) every maid rung step is a road (card + pass → next rung): ${M.steps&&M.steps.map(x=>x.from+'→'+x.to).join(' ')}${M.err?' ERR '+M.err:''}`);
  ok(M.dbl&&M.dbl.card&&M.dbl.deck&&!M.dbl.left&&M.dbl.sits===1&&M.dbl.fin&&M.dbl.rk===2,`(14) maid double door: 1 exam, queued card gone, rung ${M.dbl&&M.dbl.rk} is a number`);
  ok(M.cdbl&&M.cdbl.card&&M.cdbl.deck&&!M.cdbl.left&&M.cdbl.sits===1,`(15) consort double door: 1 exam (${M.cdbl&&M.cdbl.sits}), queued card gone`);
- ok(M.rest&&/thêm một tuần phạt/.test(M.rest)&&!/%/.test(M.rest),`(17) Tân Giả khố «Nghỉ tay» card shows its loss: ${M.rest}`);
+ ok(M.rest&&/thêm một tuần phạt/.test(M.rest)&&!/%/.test(M.rest)&&!M.restX&&M.restBai&&!M.restKem,`(17) Tân Giả khố «Nghỉ tay» card shows its loss in the BẠI row (lx «${M.rest}», bai ${M.restBai}, not in Thành/Kèm ${!M.restKem})`);
  ok(M.old&&M.old.rk===2&&M.old.ex==='{}',`(16) old save with a NaN maid rung mends to rung ${M.old&&M.old.rk}`);
 
  ok(R.ord.t==="Khảo hạch tấn phong"&&R.ord.n.join('/')==='Thi ngay/Để sau'&&R.ord.deck,'(1) ordinary (kỳ) window → kit card «Thi ngay / Để sau» + Hành sự card');
