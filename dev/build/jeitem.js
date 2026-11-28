@@ -26,7 +26,8 @@ Object.assign(BAL,{eit:{
  reG:{base:50,rk:5,sung:.2,tip:25,cause:15},   /* owner 16/11 s9: re-issue after a RANDOM 1–3 weeks weighted by how Nội vụ phủ regards her (eitRegard 0..100) */
  cool:{bangda:[5,1],bangvun:[2,0]},  /* Sức from one block of ice: [in mùa Hạ, other seasons] (Băng đá, Băng vụn) */
  kcSac:1,                             /* Sắc of a worn girlhood jewel (Ngọc bội khuê các, Vòng bạc hoa mai) */
- re:{tip:[6,8,10,12,15,18,22,26],base:50,rk:5,sungDiv:5,suc:6,altPen:10,maidAdj:5,maidFail:3,famSuc:2,famWk:1,famOk:75,famPoor:40,famCut:30}}});
+ re:{waitDanh:[1,1,1,2,2,3,3,4],/* DRESS-FIX (owner OD 26/11 ~18:50Z (6)): the maid road costs the WAIT (jptime «clothes», 2 khắc) + Danh by rank (she stands in her trung y, people stare) — the equal of the silver tip */
+  tip:[6,8,10,12,15,18,22,26],base:50,rk:5,sungDiv:5,suc:6,altPen:10,maidAdj:5,maidFail:3,famSuc:2,famWk:1,famOk:75,famPoor:40,famCut:30}}});
 /* ---------- items: ice (art img/item-bangda.webp, img/item-bangvun.webp, gpt-2-6, dev/art/ITEM_ART.md §6) + the girlhood pieces of jkc ---------- */
 (function(){const N={
  bangda:{n:"Băng đá",kd:"Băng",d:`Mùa hạ giải nhiệt: Sức +${BAL.eit.cool.bangda[0]} · mùa khác Sức +${BAL.eit.cool.bangda[1]} · để qua tháng thì tan`,pr:4,cool:BAL.eit.cool.bangda,tg:[]},
@@ -121,9 +122,9 @@ function eitReWk(p){const g=eitRegard(p);return 1+(roll(BAL.odb.jeitem.rbEitReWk
 (function(){if(typeof tyLost!=="function")return;const l0=tyLost;tyLost=function(p,why){const r=l0.apply(this,arguments);try{if(p)p.tyNvp=wk()+eitReWk(p)}catch(e){}return r};window.tyLost=tyLost})();
 function eitReNeed(){try{return !!(S&&!S.dead&&!S.out&&typeof tyOn==="function"&&tyOn(S)&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
 function eitReOdds(){const R=BAL.eit.re,r=Math.max(0,Math.min(7,rkOf(S)|0));const bribe=oddsCl(R.base+r*R.rk+Math.round((S.sung||0)/R.sungDiv));
- const m=S.maid&&!S.maid.spyFor?S.maid:null;const alt=eitAlt(R.tip[r],r);const maid=m?oddsCl(bribe-alt.pen+cl(Math.round(((m.loyal||0)-50)/10)+Math.floor(eyes(S)/2),-R.maidAdj,R.maidAdj)):0;
+ const m=S.maid&&!S.maid.spyFor?S.maid:null;const alt=eitAlt(R.tip[r],r);const maid=m?oddsCl(bribe+cl(Math.round(((m.loyal||0)-50)/10)+Math.floor(eyes(S)/2),-R.maidAdj,R.maidAdj)):0;/* DRESS-FIX: the wait + Danh is the price; no extra odds penalty */
  const home=S.origin&&BAL.home?(BAL.home[S.origin.k]||0):0;const fam=S.origin?oddsCl((home>0?R.famOk:R.famPoor)-(S.homeCut?R.famCut:0)):0;
- return{bribe,maid,fam,tip:R.tip[r],m,suc:alt.suc}}
+ return{bribe,maid,fam,tip:R.tip[r],m,suc:alt.suc,danh:R.waitDanh[r]}}
 /* the road without silver is priced like the silver at her rank (balance-pass rule: jstory altCost / BAL.bacTuan / BAL.altK when present,
    else the same numbers here): Sức + lower odds, floors R.suc / R.altPen */
 function eitAlt(bac,r){const R=BAL.eit.re;try{if(typeof altCost==="function")return altCost(bac,r,R.suc,R.altPen)}catch(e){}
@@ -136,7 +137,7 @@ function eitIssue(src,giver){const k=typeof earnPlainY==="function"?earnPlainY(S
 function eitReOpts(withWait){const R=BAL.eit.re,o=eitReOdds();const O=[];const wkL=Math.max(0,(S.tyNvp!=null?S.tyNvp:wk()+eitReWk(S))-wk());
  O.push(kitOffIf({n:"Lót tay Nội vụ phủ cấp ngay",fx:{},x:`${word(o.bribe)} · thành: có y phục mặc ngay, Bạc -${o.tip} · hỏng: không mất bạc, vẫn phải đợi`,/* review ag-all-2 r2 A5: bạc only when the thái giám takes it */
   go:()=>{if(roll(o.bribe)){const n=eitIssue("nvp","Nội vụ phủ");if(n)apply({bac:-o.tip});log(n?`Thái giám Nội vụ phủ nhận bạc, mang ${n} tới ngay.`:"Nội vụ phủ không còn áo đúng phẩm.")}else log(`<span class="r">Thái giám Nội vụ phủ không dám nhận bạc, bảo đợi kho.</span>`)}},(S.bac||0)>=o.tip,`cần ${o.tip} bạc`));
- if(o.m)O.push({n:`Sai ${o.m.name} đến Nội vụ phủ xin`,fx:{suc:-o.suc},x:`${word(o.maid)} · tốn: Sức -${o.suc} · thành: có y phục mặc ngay · hỏng: ${o.m.name} bị mắng đuổi về, thiện cảm của ${o.m.name} với ngươi -${R.maidFail}, vẫn phải đợi`,
+ if(o.m)O.push({n:`Sai ${o.m.name} đến Nội vụ phủ xin`,fx:{danh:-o.danh},x:`${word(o.maid)} · tốn: Danh -${o.danh} (mặc trung y ngồi đợi, người qua lại nhìn) · thành: có y phục mặc ngay · hỏng: ${o.m.name} bị mắng đuổi về, thiện cảm của ${o.m.name} với ngươi -${R.maidFail}, vẫn phải đợi`,
   go:()=>{if(roll(o.maid)){const n=eitIssue("nvp","Nội vụ phủ");log(n?`${o.m.name} khéo nói, Nội vụ phủ đưa ${n} về.`:"Nội vụ phủ không còn áo đúng phẩm.")}else{o.m.loyal=cl((o.m.loyal||0)-R.maidFail,0,100);log(`<span class="r">${o.m.name} bị thái giám Nội vụ phủ mắng đuổi về.</span> Thiện cảm của ${o.m.name} với ngươi -${R.maidFail}.`)}}});
  if(S.origin&&!S.tyFam)O.push({n:"Viết thư xin nhà gửi áo",fx:{suc:-R.famSuc},x:`${word(o.fam)} · tốn: Sức -${R.famSuc} · thành: ${R.famWk} tuần nữa nhà gửi y phục vào · hỏng: nhà không gửi được`,
   go:()=>{S.tyFam={w:wk()+R.famWk,ok:roll(o.fam)?1:0};log("Ngươi viết thư nhờ người đưa về nhà xin gửi áo vào cung.")}});
@@ -168,8 +169,8 @@ function girlChest(p,o){o=o||{};p=p||S;const L=[];const who=o.who||"Mẫu thân"
  /* o.wear (the home road, jkc kcChest): she wears all of it; else (palace road) the court issue stays worn and the robe + hairpin go in the bag */
  try{if(WD_ITEMS.tramngoc){const e={k:"tramngoc",from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else invAdd(p,e);L.push(e)}
   const yk=(o.wear&&typeof wdDefault==="function"?wdDefault(p,"y"):null)||wdPickAt(1,"y",0);if(yk&&WD_ITEMS[yk]){const e={k:yk,from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else invAdd(p,e);L.push(e)}}catch(e){console.error("girlChest wd",e)}
- for(const k of ["vongbackc","ngocboikc","tuithom"]){if(!IT[k])continue;const sl=itm(k).sl;if(o.wear)p.inv.forEach(x=>{if(x&&x.w&&IT[x.k]&&itm(x.k).sl===sl)delete x.w});
-  const busy=p.inv.some(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl===sl);const e={k,from:"kc",giver:who};if(!busy)e.w=1;invAdd(p,e);L.push(e)}
+ for(const k of ["vongbackc","ngocboikc","tuithom"]){if(!IT[k])continue;const sl=itm(k).sl;if(o.wear)p.inv.forEach(x=>{if(x&&x.w&&IT[x.k]&&itm(x.k).sl&&wearGrp(itm(x.k).sl)===wearGrp(sl))delete x.w});
+  const busy=p.inv.some(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl&&wearGrp(itm(x.k).sl)===wearGrp(sl));/* DRESS-FIX: Túi thơm shares the Đeo eo slot */const e={k,from:"kc",giver:who};if(!busy)e.w=1;invAdd(p,e);L.push(e)}
  if(IT.khantay){const e={k:"khantay",from:"kc",giver:who,d:S.turn||0};invAdd(p,e);L.push(e)}
  p.girl=L.map(e=>e.k);return{who,L}}
 function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof kitReward!=="function")return;

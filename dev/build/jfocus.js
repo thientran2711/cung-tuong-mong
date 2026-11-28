@@ -91,8 +91,7 @@ function fill(F,list){if(fillPick(F,list))return;const L=[],R=[];list.forEach((a
 function fillPick(F,list){try{if(KIT_FOC.pick===false||typeof kitPick==="undefined"||!F.open)return false;F.cl.innerHTML="";F.cr.innerHTML="";
  const acts=list.map((a,i)=>({id:String(i),n:a.n,pic:a.pic,word:a.word,ton:a.ton,off:!!a.off,why:a.why||"",info:a.info||""}));const go=(k=0)=>{if(!F.open||F.cur!==list)return;
   const r=F.img.getBoundingClientRect(),h=F.el.getBoundingClientRect();if(!r.width||!r.height||F.opening){if(k<40)setTimeout(()=>go(k+1),100);return}const A={x:r.left-h.left+r.width*.18,y:r.top-h.top,w:r.width*.64,h:r.height};
-  try{F.kp&&F.kp.destroy()}catch(e){}F.kp=kitPick.open({host:F.el,anchor:A,side:"r",acts,dismiss:false,onPick:id=>{const a=F.cur[+id];if(!a)return;F.__kpkT=performance.now();if(F.pick){const f=F.pick;F.pick=null;f(a.id);return}if(F.o.onAct)F.o.onAct(a.id)},
-   onOff:a=>{try{const b=F.el.querySelector(`.kpk .kfoc-b[data-id="${a.id}"]`);kpPop(b,`<div class="kpopt">${esc(a.why||"Chưa làm được")}</div>`,{})}catch(x){}}})};
+  try{F.kp&&F.kp.destroy()}catch(e){}F.kp=kitPick.open({host:F.el,anchor:A,side:"r",acts,dismiss:false,onPick:id=>{const a=F.cur[+id];if(!a)return;F.__kpkT=performance.now();if(F.pick){const f=F.pick;F.pick=null;f(a.id);return}if(F.o.onAct)F.o.onAct(a.id)}/* a closed plaque's reason: kitPick itself (§98.1d), no host onOff */})};
  requestAnimationFrame(()=>go(0));return true}catch(e){console.error("kitFocus pick",e);return false}}
 function pickOff(F){try{if(F.kp){F.kp.destroy();F.kp=null}}catch(e){}}
 /* text never cut: title max 2 lines (clamp) + the sub-line «odds word · Tốn N khắc» whose two parts never break inside (nowrap spans), so on a narrow column it takes 2 lines and the price is never cut; a clamped button gets the «!» so the full name + sub-line show in the popover (aria/title carry it too) */

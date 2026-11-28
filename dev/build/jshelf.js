@@ -193,18 +193,18 @@ function shelfPiece(e){if(!e)return 0;let v=0;try{if(e.k==="tp"){const a=itemArt
 /* the DWELLING score: sum of the displayed pieces vs the rank allowance × allowF (never shown to anyone: owner (d); the player learns it from consequences) */
 /* one group's share of the room: best piece full, the next ones BAL.shelf.wt (sorted high → low) */
 function shelfGrpLux(p,g){const W=BAL.shelf.wt;return shelfIn(p,g).map(x=>shelfPiece(x[1])).sort((a,b)=>b-a).reduce((s,v,i)=>s+v*(W[i]!=null?W[i]:0),0)}
-function shelfLux(p){const L=shelfList(p);const sc=Math.round(BAL.shelf.groups.reduce((s,x)=>s+shelfGrpLux(p,x[0]),0));let bud=1;try{bud=Math.max(1,Math.round(luxAllow(p)*BAL.shelf.allowF))}catch(e){}
+function shelfLux(p){const L=shelfList(p);const sc=Math.round(BAL.shelf.groups.reduce((s,x)=>s+shelfGrpLux(p,x[0]),0));let bud=1;try{bud=Math.max(1,Math.round((typeof luxAllowShelf==="function"?luxAllowShelf:luxAllow)(p)*BAL.shelf.allowF))}catch(e){}
  const B=BAL.shelf;const lv=sc<bud*B.plainF?0:sc<=bud?1:sc<=bud*B.lv3?2:3;return{sc,bud,lv,name:SHELF_LV[lv],n:L.length,wither:L.some(shelfBad),vr:L.filter(e=>shelfOver(p,e)).length}}
 function shelfSig(p){return shelfList(p).map(e=>(e.k==="tp"&&e.wk?"tp-"+e.wk.kind+(e.wk.ti|0):e.k)+(shelfBad(e)?"~":"")).sort().join("|")}
 window.shelfOf=shelfOf;window.shelfPut=shelfPut;window.shelfTake=shelfTake;window.shelfLux=shelfLux;window.shelfList=shelfList;
 
 /* ---------- NPC shelves: seeded once by rank, arranged weekly from their own chest (same data, same rule) ---------- */
 function shelfPool(p,src){const B=BAL.shelf.it,r=rkOf(p)|0;return Object.keys(B).filter(k=>IT[k]&&!B[k].imp&&!B[k].dead&&(B[k].rk|0)<=r&&/[mpv]/.test(src||B[k].src||""))}
-function shelfSeed(p){const B=BAL.shelf,n=B.npc.seed[Math.max(0,Math.min(7,rkOf(p)|0))]|0;if(!n)return;let bud=1;try{bud=luxAllow(p)*B.allowF}catch(e){}
+function shelfSeed(p){const B=BAL.shelf,n=B.npc.seed[Math.max(0,Math.min(7,rkOf(p)|0))]|0;if(!n)return;let bud=1;try{bud=(typeof luxAllowShelf==="function"?luxAllowShelf:luxAllow)(p)*B.allowF}catch(e){}
  const z=p.shelf;const pool=shelfPool(p);let left=bud*B.npc.capF;
  for(const k of shuf(pool.slice())){if(Object.keys(z.g).length>=n)break;const g=shelfGrp(k);const sl=shelfSlots(g).find(s=>!z.g[s]);if(!sl)continue;const v=luxPiece(k);if(v>left)continue;
   const e={k,from:"me"};if(B.it[k].care){e.pc=B.plant.start;e.pz=0}e.shw=wk();z.g[sl]=e;left-=v}}
-function shelfArrange(p){const B=BAL.shelf,z=shelfOf(p);let bud=1;try{bud=luxAllow(p)*B.allowF}catch(e){}
+function shelfArrange(p){const B=BAL.shelf,z=shelfOf(p);let bud=1;try{bud=(typeof luxAllowShelf==="function"?luxAllowShelf:luxAllow)(p)*B.allowF}catch(e){}
  const ta=shelfTaste(p),cap=bud*(B.npc.capF+ta*B.taste.npcCapK);
  /* try each chest piece in its slot (free, or replacing the group's least piece); keep it only if the room gains and stays within her cap, else undo */
  for(let i=(p.inv||[]).length-1;i>=0;i--){const e=p.inv[i];if(shelfWhyNot(p,e)||e.t)continue;if(shelfOver(p,e)&&e.from!=="emp"&&ta<=0)continue;
