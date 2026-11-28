@@ -355,6 +355,16 @@ PEND.night1=p=>{const E=S.emp,mood=BAL.night.mood[E.mood],go=b=>()=>{let s=p.q+b
  {n:"Bàn chuyện thiên hạ",fx:{},od:(has("chamchinh")?3:-1),x:nx(has("chamchinh")?3:-1,has("chamchinh")?"ngài chăm chính sự, rất hợp":"ngài không thích phi tần bàn việc nước",p),go:go(has("chamchinh")?3:-1)},
  {n:"Rót rượu, nũng nịu",fx:{},od:(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0),x:nx(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,has("datinh")||has("mesac")?"ngài đa tình, rất hợp":has("lanhlung")?"ngài lạnh lùng, dễ chán":"",p),go:go(has("datinh")||has("mesac")?3:has("lanhlung")?-1:0)},
  {n:"Lặng lẽ xoa vai, nghe ngài kể",fx:{},od:(E.mood>=2?2:1),x:nx(E.mood>=2?2:1,E.mood>=2?"ngài đang phiền, rất hợp":"an toàn",p),go:go(E.mood>=2?2:1)}]}};
+/* E-TIER-B13 batch 3b (C46; law 2 same-result merge + owner OD 27/11 ~01:00Z / ~01:03Z, the one-tap model): the four talk topics all give
+   «được ưa đêm nay» by how well they suit him, so the night talk is ONE «Hầu chuyện»: the game takes the topic that suits him best (the same
+   grade od the card showed, after every module's own night1 wrapper — jemoact mood band, jwhyn, j75 — so it is installed last, on the next tick),
+   its odds word is the card's, and the result line names the real topic. A topic she cannot take (eaLock) is never picked. Same for the visit
+   night (jvisit vnight reads PEND.night1). NPC nights (j75 rivalNight) are unchanged: before, she could always read the fit and pick the best. */
+setTimeout(()=>{if(typeof PEND!=="object"||typeof PEND.night1!=="function")return;const n1=PEND.night1;PEND.night1=function(pp){const d=n1.apply(this,arguments);
+ try{if(!d||!Array.isArray(d.o)||d.o.length<2)return d;const L=d.o.filter(o=>o&&!o.eaLock&&!o.off&&typeof o.go==="function");if(!L.length)return d;
+  let b=L[0];for(const o of L)if((o.od||0)>(b.od||0))b=o;const topic=b.n,g0=b.go;
+  d.o=[Object.assign({},b,{n:"Hầu chuyện",x:`${String(b.x||"")} · hợp ý ngài nhất: ${topic}`,talk:topic,go:function(){try{log(`Hầu chuyện: ${topic}.`)}catch(e){}return g0.apply(this,arguments)}})]}
+ catch(e){console.error("night talk (one tap)",e)}return d}},0);
 /* the night talk's line: how well it suits him -> ladder word; the night is graded, never empty */
 /* review/emperor-visit-r1 (gain-and-loss OD:L908, one core OD:L1267): the night's gains come from ONE place, nightGain(s) (BAL.night),
    used by nightFx (her), rivalNight (NPCs, j75) and every line that shows them. nx() shows the real best / worst night of this talk:
