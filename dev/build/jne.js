@@ -215,7 +215,7 @@ function morningAfter(){const M=S&&S.neMorn;if(!M||S.dead)return;if(M.d===wk())r
    applied BEFORE the card (and is in the same write), the remake only rebuilds it (no second Danh) */
 const neMornCard=rcpReg("neMorn",(tier,v,named)=>{const A=BAL.nightEnd.after;
  if(tier==="warm"){let who;try{who=typeof pEunCourt==="function"?pEunCourt("ksp"):undefined}catch(e){}
-  return {t:"Kính sự phòng ghi sổ",who,art:"img/act-tong-quan-ksp-dem-chuyen.webp",hideOut:true,h:`<p>Sáng sớm, tổng quản Kính sự phòng đến cung ngươi, mở sổ ghi: “Đêm qua ${RANKS[S.rank]?RANKS[S.rank].n+" ":""}${S.name} hầu giá, Hoàng thượng rất vừa ý.”</p><p>Chưa đến giờ thỉnh an, cung nữ các cung đã xì xào bàn tán.</p><p class="past">Danh +${A.warmDanh}.</p>`,
+  return {t:"Kính sự phòng ghi sổ",who,art:"img/act-tong-quan-ksp-dem-chuyen.webp",hideOut:true,h:`<p>Sáng sớm, tổng quản Kính sự phòng đến cung ngươi, mở sổ ghi: “Đêm qua ${(meRankN()?meRankN()+" ":"")}${S.name} hầu giá, Hoàng thượng rất vừa ý.”</p><p>Chưa đến giờ thỉnh an, cung nữ các cung đã xì xào bàn tán.</p><p class="past">Danh +${A.warmDanh}.</p>`,
    opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]}}
  const nm=named&&v?whoOf(v.id,v.name):"một vị phi tần ngươi chưa quen";let who;try{who=named&&typeof pv==="function"?pv(v):undefined}catch(e){}
 return {t:"Lời ra tiếng vào",who,art:"img/ev-toil-rival-tease.webp",hideOut:true,h:`<p>${nm.charAt(0).toUpperCase()+nm.slice(1)} che miệng cười khi gặp ngươi lúc thỉnh an: “Nghe nói đêm qua ${v?kSay(v,S,"{goi}",{m:"cool"}):"muội muội"} hầu giá, mà Hoàng thượng chẳng mấy vui lòng?”</p><p>Mấy phi tần khác liếc nhau, khẽ cười.</p><p class="past">Danh ${A.coldDanh}.</p>`,
