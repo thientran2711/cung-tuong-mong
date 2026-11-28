@@ -773,3 +773,4 @@ B-RDW-B R4 cnv+R5 nc+R6 td (row 4 road-dialogue writers; lead 6X94bVbz) | conten
 B-RDW-C R7 ch+R8 thd (row 4 road-dialogue writers; lead 6X94bVbz) | content on handover branch → review/road-dialogue | FOREMAN B ROOT3 child2 / worker session_01N1tNP5unp7XKs9SvrxrGPy | RUNNING | 28/11 08:21Z
 B-RDW-D R9 pf+arcs+R10 bd (row 4 road-dialogue writers; lead 6X94bVbz) | content on handover branch → review/road-dialogue | FOREMAN B ROOT3 child2 / worker session_01N1tNP3ksEX5jCyKC35RTiW | RUNNING | 28/11 08:21Z
 B-ROW26-TALK BIG RV | review/row26-talk e70e9e38 | FOREMAN B ROOT3 child2 / rv session_01N1tNP2KKJkkwauJFWVHcCs | RUNNING | 28/11 08:32Z
+ILLNESS-CURE-4 (r5: staff cure road law 1 + kidIll + re-merge a96564ad) | review/illness-cure | session_01PEhRbwXRToECD9cRMDDoUq | RUNNING | 28/11 08:33Z Foreman C
