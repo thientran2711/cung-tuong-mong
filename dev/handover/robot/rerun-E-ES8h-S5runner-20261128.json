@@ -4,6 +4,75 @@
  "road": "bd_san",
  "lives": [
   {
+   "life": "ES8-bd_san-R7-cautious3-h",
+   "dev": "ipad",
+   "bot": "cautious",
+   "seed": 304984224,
+   "ending": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Tuổi trời đã tận, trọng bệnh không qua khỏi, thọ 30 tuổi",
+   "age": 30,
+   "year": 11,
+   "rank": 0,
+   "buoi": 1589,
+   "harness": "f65d019b",
+   "builds": [
+    {
+     "s": "5fb13d60+",
+     "b": "8af7b3429f38",
+     "where": "start"
+    },
+    {
+     "s": "8a171afc+",
+     "b": "08960515ebeb",
+     "where": "unstick reload"
+    }
+   ],
+   "bugs": [
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Việc của kẻ hầu)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Kẻ hầu xin)"
+    },
+    {
+     "type": "game",
+     "n": 16,
+     "msg": "SAVE STALE: the stored save stopped following the live game (no setItem error seen)"
+    },
+    {
+     "type": "game",
+     "n": 2,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Có người đến)"
+    },
+    {
+     "type": "harness",
+     "n": 1,
+     "msg": "picker stalled 11 steps / 8 s on .kmov «» without a real tap (area 12; last refused tap: zero «Báo lùi vài hômVữngTốnkh») → tapped «Ta biết rồi»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Nghe đồn)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls ()"
+    },
+    {
+     "type": "dead",
+     "n": 1,
+     "msg": "close button has no effect: .dlg «Danh hiệu lên bậc» «Để sau»"
+    }
+   ],
+   "flags": []
+  },
+  {
    "life": "ES8-bd_san-R7-lover1-h",
    "dev": "ipad",
    "bot": "sens",
