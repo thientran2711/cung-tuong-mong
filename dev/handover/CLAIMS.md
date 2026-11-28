@@ -742,3 +742,4 @@ ILLNESS-CURE r3 | review/illness-cure | session_01PEhRbxGXnzfsq379bwXJWA | RUNNI
 TUANTANG-WARN r2 | review/tuantang-warn-r2 | session_01PEhRbvy9zz1EkUmZvqgn6T | RUNNING | 2026-11-28T03:48Z (Foreman C 4-1-1-1)
 LIFE flight2-s18f Fold greedy seed 2026112570 (LIVE 18003079 + harness 795f87ec) | review/flight2-s18 | session_01UV1SzkN5yFQCY6DquQK6Xm (s18 #2, Foreman F ROOT7 c5) | RUNNING | 28/11 05:06Z
 ILLNESS-CURE r4 | review/illness-cure | session_01PEhRbtbBbshrnnUWtz5oyX | RUNNING | 2026-11-28T05:29Z (Foreman C 4-1-1-1; successor of 01PEhRbxGXnzfsq379bwXJWA)
+E-GAIN4-RV BIG review (opus) of review/e-gain4 2e5a4006 (+ merge onto LIVE f7ea14b7 → review/e-gain4-rv-m) | briefs/E-GAIN4-RV.md | session_01DgYSWoUKNUCW56nNphgiiR (Foreman E C9) | RUNNING | 28/11 05:32Z
