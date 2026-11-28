@@ -144,7 +144,7 @@ async function runPicker(p, dev, name, rows) {
   const rt = RT.make(p, { dev, touch: true, shots: OUT });
   await clean(p); await p.evaluate(() => { window.__kriOff = 0 });
   await p.evaluate(`(()=>{const f=${PICKERS[name].toString()};try{if(window.DQ)DQ.user=(DQ.user||0)+1;f();showModal()}finally{if(window.DQ)DQ.user--}})()`);
-  let st = null; for (let k = 0; k < 12; k++) { await p.waitForTimeout(500); await p.evaluate(() => document.querySelectorAll('.kfgain').forEach(e => e.remove())); st = await p.evaluate(READ); if (st.up && await p.$('#modal .kipc') && await veilGone(p)) break }
+  let st = null; for (let k = 0; k < 60; k++) { await p.waitForTimeout(500); if (k && k % 4 === 0 && st && !st.up) await p.evaluate(() => { try { if (Q.length && document.getElementById('modal').hidden) showModal() } catch (e) {} });/* r7: the previous case's gift moment / result toast holds the queue a few s (iPad grid_dangtha SKIP «did not open», q=1) — wait up to 30 s, re-ask showModal */ await p.evaluate(() => document.querySelectorAll('.kfgain').forEach(e => e.remove())); st = await p.evaluate(READ); if (st.up && await p.$('#modal .kipc') && await veilGone(p)) break }
   const n = await p.$$eval('#modal .kipc', L => L.length);
   /* K-PICK-FOLD-BAND (KK61): (a) no empty band between the dialog picture and its text, (b) the prompt line is on screen (not under the options) */
   await unveil(p);
