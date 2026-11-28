@@ -11,7 +11,11 @@ Object.assign(BAL,{illCure:{way:{rest:20,self:30,vien:40,ty:55,cau:55},tyBac:40,
  /* r3 (MAIN 185 Q3): CHILD ILLNESS with a sign. hit = the sudden illness (lo + R(r), halved by a thái y tâm phúc) at ch % a month (young = under youngAge, storm = × per storm);
     the first hit on a well child leaves her ốm (k.kIll) at Sức khỏe ≥ floor (never kills); while ốm, worse % a month (not the month she fell ill) brings the next hit, which can kill;
     Sức khỏe ≥ well = khỏi. feverFail = the fever event's «Tự bốc thuốc» failing. watch = «Thức trông <con>» (home deck, nhẹ, Sức). Roads: BAL.ag.cx2.kidMed (bạc) / kidAsk (Sủng) / kidHeal (Y thuật) / kidWatch. */
- kidIll:{hit:{lo:30,r:40},ch:{young:3,old:1.5,youngAge:3,storm:.5},floor:10,worse:30,well:60,feverFail:25}});
+ kidIll:{hit:{lo:30,r:40},ch:{young:3,old:1.5,youngAge:3,storm:.5},floor:10,worse:6,well:60,feverFail:25,
+  /* r5 (Foreman E E-ILL-RATE: child deaths LIVE 0.19 → 0.48 /yr): worse 30 → 6 and heal = Sức khỏe regained a month while ốm (on top of BAL.eff.j8.hpKidsMonth), so a struck child with no road dies no more often than on LIVE (measure: dev/tools/kid-illness-scan.js + E sim) */
+  heal:8},
+ /* r5 (law 1, E-ILL-RATE P2): staff / courtiers / children ill (jface fxIllMonth) take a road at BAL.illCure.npc % a month from nặng, the same odds (BAL.illCure.way) as consorts; servants (cung nữ · thái giám · ma ma) go to Thái y viện (vien, Sức) or rest, never summon a thái y (as her cung nữ life) */
+ staffRoad:{srv:["maid","eunuch","mama","steward"]}});
 /* ONE DIM for the people who are NOT chosen (KIT §98 kitDim; owner 24/11 ~09:05Z / ~15:30Z): brightness + saturation on the FIGURE only, opaque, never the background; ms = cross-fade */
 BAL.kdim={b:.7,s:.75,ms:220};
 /* RING-BUILD (KIT §104 kitRing, owner OD 26/11 ~18:55Z «những người còn lại là tối»): the ring dims every slot that is not in front harder than kitDim (static filter on a copy, opacity cross-fade) */

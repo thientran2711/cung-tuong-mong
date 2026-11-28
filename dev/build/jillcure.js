@@ -123,4 +123,21 @@ if(typeof illMonthP==="function"){const p0=illMonthP;illMonthP=function(p){let e
    const t=treat(p,w);IC.npc++;(IC.npcW=IC.npcW||{})[w]=(IC.npcW[w]||0)+1;
    if(known&&!illOf(p))ev+=`${p.name} ${w==="ty"?"truyền thái y":w==="cau"?"được ngự y chữa":w==="vien"?"xin thuốc Thái y viện":"tĩnh dưỡng"}, khỏi ${String(nm).split(" · ")[0].toLowerCase()}. `}}catch(e){console.error("ill npc",e)}
  ev+=p0.apply(this,arguments);fit(p);return ev};window.illMonthP=illMonthP}
+/* r5 (law 1, Foreman E E-ILL-RATE P2): everyone else who falls ill (jface fxIllMonth: cung nữ · thái giám · ma ma · thái y · thị vệ · quan · hoàng tử / công chúa · children)
+   takes a road too, at BAL.illCure.npc % a month from nặng, on the same odds (treat, BAL.illCure.way). Servants have the servant's roads (as her cung nữ life):
+   Thái y viện xin thuốc (Sức) or rest — no thái y summons, no Sủng plea. Courtiers with bạc may summon a thái y (ty, bạc). A sick child of an NPC mother:
+   the mother takes her kid road (BAL.ag.cx2 kidMed bạc · kidAsk Sủng · kidWatch Sức, her own prices); her child (p === S's) keeps her own card + roads. */
+const staffWay=(p,kd)=>{const B=BAL.illCure,srv=(BAL.staffRoad.srv||[]).includes(kd);if(!srv&&(p.bac||0)>=B.tyBac)return["ty",{bac:-B.tyBac}];
+ if(!p.confined&&!p.out&&(typeof p.suc!=="number"||p.suc+B.vien.c.suc>=0))return["vien",typeof p.suc==="number"?B.vien.c:{}];return["rest",{}]};
+IC.staffWay=staffWay;
+const momWay=v=>{const X=BAL.ag.cx2;const can=c=>(typeof agcCan!=="function"||agcCan(v,c))&&!(c.sung<0&&(v.sung||0)+c.sung<0);
+ if(can(X.kidMed.c))return["kidMed","vien"];if(!v.out&&can(X.kidAsk.c))return["kidAsk","cau"];if(can(X.kidWatch.c))return["kidWatch","rest"];return null};
+IC.momWay=momWay;
+IC.staffRoad=function(p,kd,i){try{if(!p||p===S||!i||i.mort||i.st<2||p.coop)return;if(typeof worldOn==="function"&&!worldOn())return;if(!roll(BAL.illCure.npc))return;
+  const nm=typeof fxName==="function"?fxName(p):p.name,dn=ILL[i.k].n.toLowerCase(),seen=typeof fxSeen==="function"&&fxSeen(p);
+  if(kd==="kid"){const v=KIT_FACEFX.owner(p);if(!v||v===S||v.alive===false||v.coop||typeof kidCure!=="function")return;const m=momWay(v);if(!m)return;const X=BAL.ag.cx2[m[0]];
+   if(typeof agcPay==="function")agcPay(v,X.c);kidCure(p,X.up,m[1]);IC.staff++;(IC.staffW=IC.staffW||{})["kid:"+m[0]]=(IC.staffW["kid:"+m[0]]||0)+1;if(seen&&!illOf(p))log(`${v.name} chạy chữa cho ${nm}, khỏi ${dn}.`);return}
+  const [w,c]=staffWay(p,kd);if(Object.keys(c).length)ap(p,c);treat(p,w);IC.staff++;(IC.staffW=IC.staffW||{})[w]=(IC.staffW[w]||0)+1;
+  if(seen&&!illOf(p))log(`${nm} ${w==="ty"?"mời thái y":w==="vien"?"sang Thái y viện xin thuốc":"tĩnh dưỡng"}, khỏi ${dn}.`)}catch(e){console.error("ill staff",e)}};
+IC.staff=0;
 })();

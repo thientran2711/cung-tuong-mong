@@ -238,6 +238,7 @@ function fxIllMonth(p){if(!p||!KIT_FACEFX.live(p))return;const kd=KIT_FACEFX.kin
  if(!i){const sea=SEASON[S.month-1];const weak=kd==="kid"?(p.hp||100)<50:false;const base=1.5+(weak?4:0)+(S.storms||0)*1.5;const L=Object.entries(ILL).filter(([k,d])=>d.sea&&d.sea.includes(sea));
   if(roll(base+(L.length?3:0))){const k=L.length&&roll(70)?pick(L)[0]:pick(["lao","matngu","phonghan"]);if(k==="longthe"||k==="docman"||k==="hausan"||k==="daumua")return;p.ill={k,st:1,known:fxSeen(p)};if(fxSeen(p))log(`${nm} mắc ${ILL[k].n.toLowerCase()}.`)}
   else{const o=KIT_FACEFX.owner(p),mates=KIT_FACEFX.everyone().filter(x=>x!==p&&KIT_FACEFX.owner(x)===o);const near=mates.find(x=>illOf(x)&&ILL[x.ill.k].cont);if(near&&roll(8)){p.ill={k:near.ill.k,st:1,known:fxSeen(p)};if(fxSeen(p))log(`${nm} nhiễm ${ILL[near.ill.k].n.toLowerCase()}.`)}}return}
+ if(window.IC&&IC.staffRoad){IC.staffRoad(p,kd,i);if(!illOf(p))return}/* ILLNESS-CURE r5 (law 1): the same NPC cure road as consorts (jillcure) */
  const d=ILL[i.k];if(kd==="kid"&&typeof p.hp==="number")p.hp-=5*i.st;const c=careOdds(p);
  if(roll(BAL.odb.jface.rbFxIllMonth+c-(d.slow?BAL.illCure.slow:0))){p.ill=null;if(fxSeen(p))log(`${nm} đã khỏi ${d.n.toLowerCase()}.`);return}
  if(i.st<3&&roll(BAL.odb.jface.rbFxIllMonth_2-c/2)){i.st++;if(fxSeen(p))log(`${nm}: ${d.n.toLowerCase()} trở ${STG[i.st]}.`);return}

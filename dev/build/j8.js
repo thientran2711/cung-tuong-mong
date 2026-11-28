@@ -528,7 +528,7 @@ function kidIllHit(p,k,d,sk){if(!k||!k.alive)return"";const me=p===S;
 /* a medicine road for a child (Xin thuốc / Cầu xin ngự y / Chữa bệnh / Thức trông, hers and the NPC mothers'): Sức khỏe up; an illness of the ILL book (jface) gets the same cure roll as hers (j13 treat, BAL.illCure.way) */
 function kidCure(k,up,way){if(!k)return"";k.hp=Math.min(100,k.hp+up);let t="";if(typeof illOf==="function"&&illOf(k)&&typeof treat==="function")t=treat(k,way||"vien");if(k.kIll&&k.hp>=BAL.kidIll.well)k.kIll=null;return t}
 function kidsMonth(){let ev="";const K=BAL.kidIll;const moms=[[S,S.kids]].concat(worldOn()?rivals.map(v=>[v,v.kids]):[]);/* NPC kids: host only */
- for(const [p,ks] of moms)for(const k of ks)if(k.alive){k.hp=Math.min(100,k.hp+BAL.eff.j8.hpKidsMonth);
+ for(const [p,ks] of moms)for(const k of ks)if(k.alive){k.hp=Math.min(100,k.hp+BAL.eff.j8.hpKidsMonth+(k.kIll?K.heal||0:0));
   if(k.kIll&&k.hp>=K.well){k.kIll=null;if(p===S)ev+=`${k.name} đã khỏi bệnh. `;continue}
   if(k.kIll){if(k.kIll.t!==S.turn&&roll(K.worse))ev+=kidIllHit(p,k,kidIllDmg(p),k.kIll.n);continue}
   if(roll((k.age<K.ch.youngAge?K.ch.young:K.ch.old)*(1+(S.storms||0)*K.ch.storm)))ev+=kidIllHit(p,k,kidIllDmg(p),pick(["lên đậu mùa","sốt cao co giật","mắc kiết lỵ","nhiễm phong hàn nặng"]))}

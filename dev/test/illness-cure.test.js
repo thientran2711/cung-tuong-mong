@@ -18,9 +18,12 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
   ok(!/\d+ ?%/.test(t),`${name} no % on the card (law 7)`);
   ok(/Tĩnh dưỡng · nhẹ|Tự bốc thuốc · nhẹ/.test(t)&&/Sang Thái y viện xin thuốc · vừa/.test(t)&&/Truyền thái y · nặng/.test(t)&&/Cầu xin ngự y · nặng/.test(t),`${name} every tier is a CURE road (no pulse-only road while ill)`);
   await p.screenshot({path:`${OUT}/${name}-1-ill-card.png`});
-  /* the flipped back of the nặng card: Tốn / Được (law 3) + an odds word (law 7) */
-  const nk=p.locator('#modal button.ka',{hasText:'· nặng'}).first();const flipped=await nk.count();if(flipped)await nk.click();await p.waitForTimeout(1100);
-  t=await card(p);const back=await p.evaluate(()=>!!S.ill);ok(flipped&&back&&/Tốn/i.test(t)&&/(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững)/.test(t),`${name} nặng card back (real tap = flip, not run) shows Tốn + odds word: ${t.slice(-300)}`);
+  /* LIVE R11 (owner 27/11 ~06:42Z, DOOR.card tabdoor): a door opened from a tab is the LIVE list frame, not a Bàn bài hand — the nặng row shows Tốn + an odds word on its FRONT and ONE tap runs it
+     (r5: was «real tap = flip» under the old hand; Truyền thái y on LIVE = a summons, jptime ptSummonThy) */
+  ok(/Truyền thái y · nặng \| (Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững) \| TỐN/i.test(t)&&/Cầu xin ngự y · nặng \| (Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững) \| TỐN/i.test(t),`${name} nặng rows show the odds word + Tốn on the front: ${t.slice(-300)}`);
+  const nk=p.locator('#modal button.ka',{hasText:'Truyền thái y · nặng'}).first();const flipped=await nk.count();if(flipped)await nk.click();await p.waitForTimeout(1100);
+  const ran=await p.evaluate(()=>{const r={busy:typeof ptBusy==="function"&&ptBusy(ptDocId()),ill:!!S.ill};try{S.away=[]}catch(e){}return r});
+  ok(flipped&&ran.busy&&ran.ill,`${name} one tap on «Truyền thái y · nặng» runs it (the thái y is summoned, LIVE jptime) ${JSON.stringify(ran)}`);
   await p.screenshot({path:`${OUT}/${name}-2-nang-back.png`});
   await p.evaluate(()=>{Q.length=0;try{$("modal").hidden=true}catch(e){}render()});await p.waitForTimeout(400);
   /* (2) law 2: the bạc road always has its matching road in the SAME tier, both shown side by side (each its own Tốn / odds); the one she cannot pay is greyed with the reason */
@@ -144,4 +147,35 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
   ok(sv.chip&&/Tĩnh dưỡng · nhẹ/.test(sv.tap),`${name} r4 cung nữ: her illness chip is shown and opens the card ${sv.tap.slice(0,160)}`);
   ok(sv.rest&&sv.cards.includes("Sang Thái y viện xin thuốc")&&!sv.cards.includes("Truyền thái y")&&!sv.cards.includes("Cầu xin ngự y"),`${name} r4 cung nữ deck: Tĩnh dưỡng + Sang Thái y viện xin thuốc, no thái y summons / Sủng plea ${JSON.stringify(sv.cards.filter(n=>/thuốc|dưỡng|thái y|ngự y/.test(n)))}`);
   ok(!errs.length,`${name} r4 cung nữ no page errors ${errs.slice(0,3)}`);await p.close()}
+ /* ---------- r5 (Foreman E E-ILL-RATE, law 1 + law 11): every NPC group that falls ill (jface fxIllMonth) takes a road on the same BAL odds; child illness no deadlier than LIVE ---------- */
+ {const p=await b.newPage({viewport:{width:755,height:1000},deviceScaleFactor:1});const errs=[];p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&/ill staff/.test(m.text()))errs.push(m.text())});
+  await p.route(u=>/^https?:/.test(u.href)&&!/cdn|r2.dev|workers.dev|pages.dev/.test(u.host),r=>r.abort());await p.goto('file://'+path.join(ROOT,'index.html'));await p.waitForTimeout(2500);
+  const r5=await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;try{$("modal").hidden=true}catch(e){}
+   const out={kinds:{},ways:{},srvTy:0,srvCau:0,courtTy:null,off:null,kid:{},mom:null,bal:{worse:BAL.kidIll.worse,heal:BAL.kidIll.heal}};const npc0=BAL.illCure.npc;
+   const ppl=KIT_FACEFX.everyone().filter(x=>x&&x!==S&&KIT_FACEFX.live(x));const by={};for(const x of ppl){const k=KIT_FACEFX.kind(x);(by[k]=by[k]||[]).push(x)}
+   BAL.illCure.npc=100;
+   for(const k of Object.keys(by)){if(["emp","thaihau","consort","player","cold"].includes(k))continue;const x=by[k][0];
+    let v=null,vb=0,vs=0;if(k==="kid"){v=KIT_FACEFX.owner(x);if(!v||v===S)continue;vb=v.bac;vs=v.suc;v.bac=500;v.suc=80}
+    const ill0=x.ill;x.ill={k:"lao",st:2,known:true};const n0=IC.staff;IC.staffRoad(x,k,x.ill);out.kinds[k]=IC.staff-n0;x.ill=ill0;if(v){v.bac=vb;v.suc=vs}}
+   for(const k of BAL.staffRoad.srv){const x=(by[k==="mama"?"maid":k]||[])[0];if(!x)continue;const b0=x.bac;x.bac=999;const w=IC.staffWay(x,k)[0];out.ways[k]=w;if(w==="ty")out.srvTy++;if(w==="cau")out.srvCau++;x.bac=b0}
+   {const x=(by.man||by.guard||by.physician||[])[0];if(x){const b0=x.bac;x.bac=999;const [w,c]=IC.staffWay(x,KIT_FACEFX.kind(x));out.courtTy={w,c:c.bac};x.bac=b0}}
+   BAL.illCure.npc=0;{const x=(by.maid||[])[0];if(x){x.ill={k:"lao",st:2,known:true};const n0=IC.staff;for(let i=0;i<50;i++)IC.staffRoad(x,"maid",x.ill);out.off=IC.staff-n0;x.ill=null}}
+   BAL.illCure.npc=100;
+   /* NPC mother pays her kid road and the child gains */
+   {const v=(rivals||[]).find(r=>r.alive!==false&&!r.out);if(v){v.kids=v.kids||[];let k=v.kids.find(c=>c.alive);if(!k){k={name:"Tiểu Ngọc",sex:"f",age:2,hp:100,alive:true,mom:v.id};v.kids.push(k)}
+     const b0=v.bac,s0=v.sung;v.bac=500;k.hp=40;k.ill={k:"lao",st:2,known:true};IC.staffRoad(k,"kid",k.ill);out.mom={bac:500-v.bac,hp:k.hp,ill:!!illOf(k)};k.ill=null;v.bac=b0;v.sung=s0}}
+   BAL.illCure.npc=npc0;
+   /* a child ốm regains hpKidsMonth + heal a month (no hit this month) */
+   {const K=BAL.kidIll,c0=JSON.stringify(K.ch),w0=K.worse;K.ch.young=0;K.ch.old=0;K.worse=0;S.kids=S.kids||[];const k={name:"Tiểu Lan",sex:"f",age:2,hp:30,alive:true,kIll:{t:-1,n:"sốt cao co giật"}};S.kids.push(k);
+    kidsMonth();out.kid={hp:k.hp,want:Math.min(100,30+BAL.eff.j8.hpKidsMonth+K.heal)};S.kids.splice(S.kids.indexOf(k),1);K.ch=JSON.parse(c0);K.worse=w0}
+   return out});
+  const nk=Object.keys(r5.kinds);
+  ok(nk.length>=4&&nk.every(k=>r5.kinds[k]===1),`r5 every NPC group that falls ill takes a road at BAL.illCure.npc (law 1): ${JSON.stringify(r5.kinds)}`);
+  ok(['maid','eunuch'].every(k=>r5.kinds[k]===1),`r5 cung nữ + thái giám have the road ${JSON.stringify(r5.kinds)}`);
+  ok(!r5.srvTy&&!r5.srvCau&&Object.keys(r5.ways).length>=2,`r5 servants never summon a thái y / plead with Sủng, even with bạc (her cung nữ roads) ${JSON.stringify(r5.ways)}`);
+  ok(r5.courtTy&&r5.courtTy.w==="ty"&&r5.courtTy.c===-40,`r5 a courtier with bạc summons a thái y at the same price (BAL.illCure.tyBac) ${JSON.stringify(r5.courtTy)}`);
+  ok(r5.off===0,`r5 the staff road follows the BAL key (npc 0 → no road) ${r5.off}`);
+  ok(r5.mom&&r5.mom.bac>0&&r5.mom.hp>40,`r5 an NPC mother pays her kid road (BAL.ag.cx2) and her child gains ${JSON.stringify(r5.mom)}`);
+  ok(r5.bal.worse<30&&r5.bal.heal>0&&r5.kid.hp===r5.kid.want,`r5 a child ốm regains hpKidsMonth + BAL.kidIll.heal a month; worse lowered ${JSON.stringify(r5)}`);
+  ok(!errs.length,`r5 no page errors ${errs.slice(0,3)}`);await p.close()}
  await b.close();console.log(fails?`FAILS ${fails}`:'ALL OK');process.exit(fails?1:0)})();
