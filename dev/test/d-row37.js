@@ -14,11 +14,12 @@ const PAGE=process.argv[2]||'dev/index.html';let pass=0,fail=0;const ok=(c,m)=>{
  /* (A) the ghét door */
  const A=await p.evaluate(()=>{const v=liveRivals(true).find(x=>x&&!x.queen)||liveRivals(true)[0];const r={};const G=BAL.ghetHit||{tell:30,side:15};
   const fresh=()=>{v.rel=0;v.opa={};v.agw={};S.buoi=((S.buoi||0)+1)%4;if(S.buoi===0)S.tuan=(S.tuan+1)%3};
-  fresh();affAdd(v,S,-G.tell);r.one=-aff(v,S);affAdd(v,S,-G.side);r.two=-aff(v,S);
+  fresh();r.see=typeof opDnSee==='function'?opDnSee(v,S,G.tell):Math.abs(+spSee('rel',-G.tell,v));affAdd(v,S,-G.tell);r.one=-aff(v,S);affAdd(v,S,-G.side);r.two=-aff(v,S);
   fresh();const on=BAL.oanPace.on,sp=BAL.stp&&BAL.stp.on;BAL.oanPace.on=0;if(BAL.stp)BAL.stp.on=0;affAdd(v,S,-G.tell);r.raw=-aff(v,S);BAL.oanPace.on=on;if(BAL.stp)BAL.stp.on=sp;
   r.tell=G.tell;r.side=G.side;r.keys=BAL.ghetHit?Object.keys(G).length:0;return r});
  ok(A.keys===9,'A0 BAL.ghetHit holds the 9 sizes ('+A.keys+')');
  ok(A.one>0&&A.one<=A.tell,`A1 «Mật báo» size goes through the door: ${A.one} (BAL ${A.tell})`);
+ ok(Math.abs(A.see-A.one)<=0.5,`A4 the card prints what lands: shown ${A.see}, landed ${A.one}`);
  ok(A.two<=Math.max(A.one,A.side)+0.01,`A2 a second cause in the same buổi does not stack: ${A.two} ≤ max(${A.one}, ${A.side})`);
  ok(A.raw===A.tell,`A3 rollback BAL.oanPace.on=0 (+ stat-pace off) = the raw old size ${A.raw}`);
  /* (B) trung y: ask once per buổi */

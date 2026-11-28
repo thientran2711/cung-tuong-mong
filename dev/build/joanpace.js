@@ -25,6 +25,11 @@ function opNow(){try{return[wk(),bq()]}catch(e){return[0,0]}}
 function opUp(x,y,n){return opStep(x,y,n,"opz",BAL.oanPace)}
 /* the same pace for «ghét»: a fall of liking (thiện cảm, j9 affAdd n < 0) — one bounded step per cause / incident, capped per day (BAL.oanPace.ghet) */
 function opDn(x,y,n){try{if(opOn()&&n>0&&x&&typeof x==="object"){const k=opKey(y);if(k!=null){x.agw=x.agw&&typeof x.agw==="object"?x.agw:{};x.agw[k]=opNow()[0]}}}catch(e){}return opStep(x,y,n,"opa",BAL.oanPace.ghet)}/* + stamps the day of the last fall (x.agw) for the ghét fade below */
+/* D-ROW37 (law 4: a card prints what really lands): the PREVIEW of a liking fall n (> 0) of x toward y — the same incident fold + daily cap as opDn
+   (read only, no store write), then stat-pace (spSee). Returns the positive fall that lands now. */
+function opDnSee(x,y,n){try{let a=n;if(opOn()&&x&&typeof x==="object"){const k=opKey(y);if(k!=null){const [w,b]=opNow();const z=x.opa&&typeof x.opa==="object"?x.opa:{};
+ const e=Array.isArray(z[k])&&z[k][0]>=w?z[k]:[w,0,b,0];const f=e[2]===b?e[3]:0;a=Math.min(Math.max(0,n-f),Math.max(0,BAL.oanPace.ghet.day-e[1]))}}
+ if(!(a>0))return 0;return Math.abs(+(typeof spSee==="function"?spSee("rel",-a,x):-a))}catch(e){return n}}
 /* OWN CAUSE (MAIN 179 ruling on TAI-MAT-KNOW × oan-pace): the bound is per CAUSE. A road that is its own cause (a spy found, a refused bribe
    told — jagknow spyLearn) runs inside opOwn: it is NOT folded into another cause of the same incident (buổi); only the daily cap holds it. */
 let OP_OWN=0;function opOwn(f){OP_OWN++;try{return f()}finally{OP_OWN--}}
