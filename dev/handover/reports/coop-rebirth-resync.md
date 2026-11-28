@@ -79,3 +79,51 @@ NEW ORDER (Foreman B 09:42Z, from MAIN 189, verbatim in FOREMAN_B_STATUS / MAIN_
 Leads (not proven): lãnh cung week path = jkc.js:314–318 (endTurn → COOPW.weekEnd when isKc(); COOPW.altTurn = kcEndTurn). Guest #next lock = jcoopworld lockNext:356 (`waiting()||frozen()||pend||!base||bend||eR (CW.eWait: jcoopthine:84 + jcoopthinf:93 F.pend)||nReady()||whereWait()||pendBuoi||gap`) → first dump which term is true on a lãnh cung guest after the host's end (the endHold trace + a lock-reason trace would name it). The «còn 1» clock stop suggests her last khắc is capped by the room clock / host hour (thin E/F) once the host has ended — same idea as whereWait: when nOtherEnded() her own tối must be able to finish. Repro: coop-rebirth-end style pair (local Worker), put the guest in lãnh cung (find how tests do it: git grep -n "kc\|lanhcung" dev/test | grep -i coop), host ends first → guest must end (no-fix FAIL / fix PASS / MUTATE FAIL).
 Then: coop-e2e SWAP0 + SWAP1 ×3 (each ~10–70 min; run each in its OWN background call — the tool kills a call at 2 h; never two browsers), coop-rebirth-end, ≥6 LIVE samples (LIVE worktree + this branch's coop-e2e.js + lib/coop-clear.js), coop-qcard (now on LIVE c03d6ee7), dayq-hold-coop, oldsave-r1, quickcheck ALONE → SSK to Foreman B session_01N1tNP4FQic23a4wJXFSmP4.
 Notes: dev/index.html is gitignored (built by assemble.py); local Worker `cd coop/worker && npm install && npx wrangler dev --local --port 8799`; coop-e2e «buổi lengths» median ~360 s on some runs = room clock 5 min + pause, not a game stall (timeouts 0).
+
+## r3 (B FIXER COOP-REBIRTH-RESYNC r3, session_01N1tNP2oQWGfQiP1xarkywv, depth 3, START_CTX ~3 %, 28/11 09:45Z–)
+PRIORITY #1 CHECK ('coop hang room e|coop1j|whereWait|COOP HANG 772bee4f|lockNext|nfFin|dateFix'): OD row 19 | main LIVE c03d6ee7 | review/* this branch + review/flight2-coop d41e7776 (evidence) | claims B-COOP-REBIRTH-RESYNC r3 = me. KIT CHECK: no UI part touched; one existing player word reused («hết khắc buổi này», j15 whyTime), no new word.
+Branch review/coop-rebirth-resync **c48d44c7** (pushed) = 752a40b8 + merge LIVE c03d6ee7 (257bebf3, clean) + the r3 fix. Test file updated after it (harness only, see «Open»).
+
+### ROOM E ROOT (from the room-e checkpoints on review/flight2-coop: dev/handover/robot/flight2-coop1j.d/room-e/{guest,host}-final.ckpt.json, seat copy «ctm-coop-wk» decoded with j6 slotDec)
+- Guest seat copy: room week 306, buổi 3, nrdy 306, sent 305, pend false, whereKey 306:3 (she HAD the where → not r1's whereWait), S.turn 105 tuần 2 → **jnf day 317**, S.nfC 317, **S.nfW 317 (waiting for the host's word of day 317)**, nfFin 311.
+- Host seat copy (new life k4 after the in-room «Chuyển kiếp»): sent 306, S.turn 105 tuần 0 → **day 315**, nfFin/nfLast 314 (he ended day 314).
+- So ONE room week held TWO seat calendars (jnf/jnight/night gate read the day as S.turn*3+S.tuan). jnf guest endTurn (`else if(S.nfFin!==d){S.nfW=d;ask();hold();…}`) waits for the host's word of HER day; the host's reply(d) answers only today or a past day (again(d<day())) → day 317 > his 315 → no answer, ever. Her night never ran → no end → server ended {a:true,b:false} for ever.
+- «còn 1» (item 4) = the same state: jnf hold() puts used 4 back to 3 (so j6 does not turn the day while the night waits) → every act («Nghỉ ngơi», «Che chở») ran again for free at «còn 1», the clock never moved (and each auto-turn went back into the same wait).
+- Repro on LIVE c03d6ee7 (new test case D1: guest's calendar one tuần off the room's, both ready at tối, host ends) = **FAIL: the week never merges in 150 s** (guest nf x «wait», «Chờ hảo hữu…»). Plain lãnh cung (L1) and host-reborn-at-tối (K1) do NOT hang by themselves: the calendar is the trigger, lãnh cung was the bystander.
+- Where the drift came from in room e is not proven (candidates: a life built on CW.dying = the world at a death inside her own night / month tick — host-k3 «Phát điên trong lãnh cung» is a month-tick death; a restored seat copy / rewind). The fix closes it at the two places it matters, whatever the source.
+
+### FIX (c48d44c7)
+1. jcoopworld **dateFix** (ONE ROOM CALENDAR): before her night (nightReady, nCheck's night run) her year/month/tuần/turn = the merged world's date CW.base.W.S (never while her night / end runs or is out, never in selection days / thin E); attach (a new life put into the room) takes the merged week's date, not CW.dying's.
+2. jnf **frEnded → finOut**: a guest waiting for the host's night word stops waiting once his WEEK END is out (his end is his last word; who held tonight comes with the merged week, B2 S.tn). LAW 1: the host's wait for her choice ends (Thôi) once her week end is out (step).
+3. jnf **nfDayHeld** (item 4): while the night holds her spent day (S.nfC = today, waiting for the word / a held choice, no card open) can() is false and whyTime says «hết khắc buổi này» → no free last khắc.
+
+### LAW 11 table (every guest place/state at the host's week end; + LAW 1 host side) — dev/test/coop-hang-e.js cases
+| case | state of the late seat | how | LIVE c03d6ee7 | fix |
+|---|---|---|---|---|
+| D1 | guest, calendar off by 1 tuần (room e) | ready, host ends | FAIL (never merges) | PASS (merge + one calendar) |
+| D2 | host, calendar off (law 1) | guest ends first | PASS (host waits ≤ waitMs 90 s) | PASS |
+| M1 | guest lãnh cung, host's night words all lost | ready, host ends | (run pending) | PASS merge; «ended first ≤60 s» strict check FAIL = host's designed ≤90 s wait for her choice → check widened to 150 s |
+| L1 | guest lãnh cung | ready, host ends | – | PASS |
+| K1 | guest lãnh cung, host dies + reborn in room at tối | host ends | – | PASS |
+| F1 | guest lãnh cung, host's own night played early (S.nfN, no fin) | ready, host ends | – | PASS (host's again() fallback) |
+| L3/L4/L5/S1/W1/R1/H1/H2/HK/K2/F2/FH | clock run out / rejoin (5) / dialog open / sick / away / plain rejoin / host lãnh cung / host clock / host reborn | | full run in progress at handover (old harness hit «Việc khó xử» kopt cards: fixed in the test after) | |
+
+### Item (5) co-op reload «SAVE REWIND» — analysis, not fixed yet
+- Guest b1227→b1223: harness clock 9.104.0.0 → 9.103.2.0 = her LOCAL next day (after her own night, before the merge) went back to the room's week start on reload; host b8→b2: clock 9.105.1.0 → 9.105.0.0 = same shape (the host's local post-end day). A seat's local day after her night is not real until the merge (fromCanon on onWeek replaces it), so the reload restores the room week — the harness reads it as a rewind. Open question for the successor: does the replayed night after such a reload give anything twice before the merge overwrites it (law 6c)? Cases L4/R1 («(5) the reload keeps her tối») gate the at-tối reload.
+
+### Gates / results so far
+- coop-hang-e (fix c48d44c7 + test fixes): D1 PASS, D2 PASS, M1/F1 PASS (merge), K1/L1 PASS (earlier runs). LIVE: D1 FAIL.
+- NOT done yet: MUTATE (dateFix → return false; frEnded → return false: expect D1 / M1 FAIL), full coop-hang-e SWAP0 + SWAP1, coop-rebirth-end, coop-e2e SWAP0/1 ×3 (+ MAIN 189 09:46Z: make coop-e2e green on LIVE as proof; r2's SWAP1 135/0 on 752a40b8 — result lost, re-run), coop-qcard, dayq-hold-coop, oldsave-r1, quickcheck ALONE.
+
+## HANDOVER (28/11 ~11:15Z, ctx ≈ START_CTX 3 % + 25 % → roll) — for the successor B fixer (opened by Foreman B)
+Branch review/coop-rebirth-resync **d1ae72a3** (pushed) = c48d44c7 fix + test harness fix. A full coop-hang-e run on the fix (all 18 cases) was started at ~11:10Z in my container (result dies with it): re-run it.
+TODO, in order (ONE browser test process at a time; local Worker `cd coop/worker && npm install && npx wrangler dev --local --port 8799`; `python3 dev/build/assemble.py` after every build change; LIVE worktree for CTM_ROOT):
+1. `node dev/test/coop-hang-e.js <out> http://127.0.0.1:8799` on the fix (SWAP0) and `COOP_SWAP=1` (SWAP1); LIVE = `CTM_ROOT=<LIVE worktree> …` (expect D1 FAIL, M1 FAIL). `CASES=D1,M1` picks cases. Any «both at tối» FAIL with a card in the dump (btn list) = harness (a card the bot does not close): extend clear(), not the game.
+2. MUTATE: dev/build/jcoopworld.js dateFix → first line `return false` → D1 FAIL «friend ended first» (host waits); dev/build/jnf.js frEnded → `return false` → M1 FAIL (week never merges). Re-assemble after each.
+3. Item (5) (see §r3 analysis): decide with L4 / R1 whether a reload at tối / after her night gives anything twice before the merge; if a real double → fix (law 6c) + test.
+4. r2 gates still owed: coop-rebirth-end.js, coop-e2e SWAP0 + SWAP1 ×3 (each in its OWN background call, ~25–70 min; never two browsers) + MAIN 189 09:46Z «make coop-e2e green on LIVE as proof» (LIVE worktree + this branch's coop-e2e.js + lib/coop-clear.js), coop-qcard.js, dayq-hold-coop.js, oldsave-r1, quickcheck ALONE.
+5. SSK «SẴN SÀNG KIỂM review/coop-rebirth-resync <full sha> (BIG co-op)» at END of FOREMAN_B_STATUS.md + send_message Foreman B session_01N1tNP4FQic23a4wJXFSmP4 (BIG rv → LC35 ALONE).
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
