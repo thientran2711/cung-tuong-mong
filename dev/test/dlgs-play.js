@@ -9,7 +9,7 @@ const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||fs.mkdtemp
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});
 let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)console.log((c?'ok   ':'FAIL ')+m)};
 (async()=>{await new Promise(r=>srv.listen(0,'127.0.0.1',r));const b=await chromium.launch();
- for(const dev of DEVS){const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:1});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ for(const dev of DEVS){const ctx=await D.newDeviceContext(b,dev,{deviceScaleFactor:1});/* LIVE since 25/11 (law 11, test drift): the jdayq day-queue holds a card the GAME posts (no player tap) while a view / dawn is up, and the stat-pace rule (BAL.stp) + daily big-event cap (BAL.evc) drop forced cards — this test forces one card per unit, as a player tap would (DQ.user, as dead-card.js / receiver-choice do); the queue's own release of a held card is the game path: showModal again → the scene plays then */await ctx.addInitScript(()=>addEventListener('DOMContentLoaded',()=>{try{BAL.stp.on=0;BAL.evc.on=0}catch(e){}try{KIT_RING.min=1e9/* LIVE place ring (jkring, its own test kit-ring.js): a random life standing in a busy place opened it over this test's scene */}catch(e){}setInterval(()=>{try{if(typeof DQ!=='undefined'&&!(DQ.user>0))DQ.user=1}catch(e){}},100)}));const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await D.openDirect(p,'http://127.0.0.1:'+srv.address().port+'/',{timeout:180000});const g=p;await g.waitForFunction(()=>window.__ctmBuilt===1&&typeof start==='function'&&typeof dlgsResolve==='function',null,{timeout:180000});
   /* a fresh life: run at the start and again every 15 units / at each family change, so one long life's drift (rank, staff, kids, deaths) never decides whether a unit can be cast */
   /* the page can reload under the test (a service-worker update): wait for the game again and retry */
@@ -118,7 +118,9 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
      return{title:t?t.textContent.trim():"",text:bx?bx.querySelector('.kdv-line').textContent:"",lit:L.dataset.klit,dim:[...L.querySelectorAll('.kscn-fig')].map(f=>f.classList.contains('kscn-dim')),inside:!!r&&r.top>=lr.top-1&&r.bottom<=lr.bottom+1&&r.left>=lr.left-1&&r.right<=lr.right+1,
       over:!!bx&&bx.scrollHeight<=bx.clientHeight+2,veil:(()=>{try{const x=bx.querySelector('.kdv-line').textContent;return typeof k61Scrub!=="function"||!S.known||k61Scrub(x,true,"",x)===x}catch(e){return true}})()}});
     const w=o.who[i];const want=w==null?"":w===0?o.L:o.R;
-    ok(s.title===want||(!!want&&s.title.endsWith(" "+want))||(w!=null&&/\?\?\?/.test(s.title)),`${dev} ${id} line ${i+1}: box title = the speaker «${s.title}» want «${want}»`);
+    /* LIVE KIT §7.4b (25/11+): a title never keeps «???» — a person she has not met by name is titled by the name veil (k61Scrub) itself, e.g. «Quý phi» */
+    const vt=want?await g.evaluate(n=>{try{if(typeof k61Scrub!=='function'||!S||!S.known)return n;let x=k61Scrub(n,true,'',n);if(typeof kitTitleClean==='function')x=kitTitleClean(x,true);return x}catch(e){return n}},want):'';
+    ok(s.title===want||(!!want&&s.title.endsWith(" "+want))||(!!vt&&s.title===vt)||(w!=null&&/\?\?\?/.test(s.title)),`${dev} ${id} line ${i+1}: box title = the speaker «${s.title}» want «${want}»`);
     ok(!/\{[^}]*\}/.test(s.text)&&s.text.length>3,`${dev} ${id} line ${i+1}: text resolved «${s.text.slice(0,50)}»`);
     /* the box shows the resolved line as it is (the page-wide screen-word pass once rewrote lone typed words: «nàng ta ta», «ngươi»→«ta») */
     {const nz=x=>String(x).replace(/\s+/g," ").trim();ok(nz(s.text)===nz(o.txt[i]),`${dev} ${id} line ${i+1}: box text = the resolved line «${nz(s.text).slice(0,60)}» vs «${nz(o.txt[i]).slice(0,60)}»`)}
@@ -135,13 +137,13 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
    /* LIVE jdayq: a game kit motion scene that came up meanwhile (the test's own rank set-up → «Phẩm phục» reward chest #kmrew, an edict «Tiếp theo»; a loaded box) is an ACTIVITY that holds the card until she ends it (by design) — end it as if she finished it, then judge the card */
    await g.evaluate(()=>{const k=[...document.querySelectorAll('.kmov,#kmrew')].filter(e=>!e.closest('.kscn'));if(!k.length)return;k.forEach(e=>e.remove());try{kmBusy=false;KMQ.length=0}catch(e){}}).catch(()=>{});
    await g.waitForFunction(()=>!$('modal').hidden||!Q.length,null,{timeout:3000}).catch(()=>{});
-   const e=await g.evaluate(()=>{const M=$("modal");return{q:Q.map(x=>x.pid||x.t).slice(0,4),scene:!!document.querySelector('.kscn'),modal:!M.hidden,t:Q[0]&&Q[0].t,dlg:!!(Q[0]&&Q[0].dlg&&Q[0].dlg.done),opts:M.querySelectorAll('.opt').length,playing:DLGS.playing}});
+   const e=await g.evaluate(()=>{const M=$("modal");return{q:Q.map(x=>x.pid||x.t).slice(0,4),scene:!!document.querySelector('.kscn:not(.kring)')/* LIVE KIT ring (jkring, .kscn.kring) is the room behind a card, not this scene */,modal:!M.hidden,t:Q[0]&&Q[0].t,dlg:!!(Q[0]&&Q[0].dlg&&Q[0].dlg.done),opts:M.querySelectorAll('.opt').length,playing:DLGS.playing}});
    /* a fail: how long the scene stays (ms until DLGS.playing clears, ≤15 s) and the layer's fade-out state — tells a slow fade from a stuck one */
    if(e.playing||e.scene){const t0=Date.now();e.anim=await g.evaluate(()=>{const L=document.querySelector('.kscn');return L?L.getAnimations().map(a=>a.playState+":"+Math.round(a.currentTime)):null});
     await g.waitForFunction(()=>!DLGS.playing,null,{timeout:15000,polling:100}).catch(()=>{});e.stuckMs=Date.now()-t0}
    ok(!e.scene&&e.modal&&e.dlg&&e.opts>=2&&!e.playing,`${dev} ${id}: after the last line the card shows with its choices ${JSON.stringify(e)}`);
    if(k<NSHOT)await p.screenshot({path:path.join(OUT,`dlgs-${k}-card-${dev}.png`)});
-   await g.evaluate(()=>{showModal()});await g.waitForTimeout(200);const again=await g.evaluate(()=>!!document.querySelector('.kscn'));ok(!again,`${dev} ${id}: the scene never plays twice`);
+   await g.evaluate(()=>{showModal()});await g.waitForTimeout(200);const again=await g.evaluate(()=>!!document.querySelector('.kscn:not(.kring)'));ok(!again,`${dev} ${id}: the scene never plays twice`);
    await g.evaluate(()=>{Q.length=0;showModal()});k++}
   ok(errs.length===0,`${dev} no page errors ${JSON.stringify(errs.slice(0,3))}`);await ctx.close()}
  await b.close();srv.close();console.log(`shots: ${OUT}`);console.log(fail?`FAILED ${fail} (pass ${pass})`:`ALL PASS ${pass}`);process.exit(fail?1:0)})();
