@@ -767,3 +767,4 @@ WORKLIST row 36 F-WORD36 | review/f-word36-bac-rv2 3f3eb243 | session_01UV1SzhBb
 E-TIER-B13 (opus BIG) row 42 convert batches 1 (composed roads 3 tiers, BAL.road.c.tier) + 3 (MERGE look-alikes) of reports/tier-audit.md §5 | review/e-tier-b13 | session_01DgYSWkbLTwZBwq2854wSdA (Foreman E C9) | RUNNING | 28/11 07:56Z
 B-ROW4-ROAD-DIALOGUE (WORKLIST row 4 main roads, E70; helper of B ROWS 4+22 2GvCVsyL) | review/road-dialogue | FOREMAN B ROOT3 child2 session_01N1tNP4FQic23a4wJXFSmP4 / worker session_01N1tNP6X94bVbzA5TSJzzxJ | RUNNING | 28/11 07:56Z
 E-PARK-AUDIT (WORKLIST row 21 per-row check) | handover reports/e-park-audit.md | session_01DgYSWpkFqvqQTHbRiHJZjE | RUNNING | 28/11 08:03Z (Foreman E C10)
+E-ILL-RATE (MAIN 185 order: NPC + heroine illness death-rate table, LIVE vs review/illness-cure) | handover reports/e-ill-rate.md | session_01DgYSWpaN2twGb24ZSi3S5p | RUNNING | 28/11 08:04Z (Foreman E C10)
