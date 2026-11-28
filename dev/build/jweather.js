@@ -73,8 +73,8 @@ function wxClrName(){const c=S&&S.wx&&S.wx.clr;return c!=null&&typeof BUOI!=="un
 /* WHOLE WORDS ONLY, names left out (night-final #2, 20/11): a bare substring test made «hái» match inside «Thái hậu / Thái y» (260 indoor options
    counted as outdoor) and «tuyết» match a consort called «… Tuyết Dao» in «Tranh sủng (Tối nay thẻ bài của … được lật)». wxActName drops the
    «(…)» context tail and every capitalised word after the first (people and places: Thái hậu, Dưỡng Tâm điện, Tuyết Dao); wxRe matches whole syllables. */
-const wxRe=w=>new RegExp(`(?<![\\p{L}])(?:${w})(?![\\p{L}])`,"iu");
-function wxActName(n){return String(n||"").replace(/\s*\([^)]*\)/g,"").replace(/(?<=\S)(\s+)\p{Lu}[^\s,.;:!?·]*/gu,"$1")}
+const wxRe=w=>kRx(`(?<![\\p{L}])(?:${w})(?![\\p{L}])`,"iu");
+function wxActName(n){return String(n||"").replace(/\s*\([^)]*\)/g,"").replace(kRx("(?<=\\S)(\\s+)\\p{Lu}[^\\s,.;:!?·]*","gu"),"$1")}
 const WX_OUT=wxRe("dạo|ngắm|hái|vườn|hoa viên|hồ sen|săn|ngự giá|quỳ ngoài|quỳ trước|đứng ngoài|ngoài sân|ngoài điện|thả diều|đạp thanh|câu cá|tuyết|đón gió");
 /* acts that are indoor work even when she stands in the garden (the place fallback skips them) */
 const WX_IN=wxRe("điểm trang|nghỉ ngơi|ngủ|tắm|học|luyện|đọc|thêu|viết|chép|đàn|vẽ|nấu|sổ sách|thuốc|dưỡng|thiền|tụng|cầu phúc|trang điểm");

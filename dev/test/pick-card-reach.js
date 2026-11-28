@@ -6,7 +6,7 @@
    usage: node dev/test/pick-card-reach.js <index.html> [WxH,...]   exit 1 on CUT / DEAD / STOLE */
 const {chromium}=require('playwright');const path=require('path');const A=process.argv.slice(2);const SRC=path.resolve(A[0]);const SIZES=(A[1]||'755x1000,1180x820').split(',');
 const FR=[
- {id:'c2a',pre:()=>{Q.length=0;if(rgFire('c2a')){Q.length=0;return true}window.__nlInner=1;start();window.__nlInner=0;Q.length=0;return false},open:()=>{Q.length=0;rgFire('c2a');Q.length=1;showModal()}},/* «Phụ tuyến · Tân quân lập uy · Chương 2» (item 5, FOREMAN E 05:35Z) */
+ {id:'c2a',pre:()=>{Q.length=0;if((()=>{try{S.evc=null;EVCW.length=0}catch(e){}/* clean day: LIVE jevc daily cap */return rgFire('c1b')})()/*c2a = a side choice = vòng nhóm (KIT §101.9)*/){Q.length=0;return true}window.__nlInner=1;start();window.__nlInner=0;Q.length=0;return false},open:()=>{Q.length=0;(()=>{try{S.evc=null;EVCW.length=0}catch(e){}/* clean day: LIVE jevc daily cap */return rgFire('c1b')})()/*c2a = a side choice = vòng nhóm (KIT §101.9)*/;Q.length=1;showModal()}},/* «Phụ tuyến · Tân quân lập uy · Chương 2» (item 5, FOREMAN E 05:35Z) */
  {id:'spy',open:()=>{spyPick(0)}},
  {id:'spy-ag',open:()=>{const ag=(S.srv&&S.srv.list||[]).find(x=>x&&x.name);spyPick(0,ag||undefined)}},
 ];

@@ -1,7 +1,7 @@
 /* fullbody-frame-scan.js — owner 18/11 ~06:45Z/06:55Z (full-body frame redo): on a Tuần lục person page the whole painted figure must sit INSIDE the figure frame
    (aspect kept, nothing cut). Measures frame / painted figure / text column per case and viewport; exit 1 on any cut or squeeze.
    usage: node dev/test/fullbody-frame-scan.js <index.html> <outdir>   env SZ=[[W,H],..] SHOTS=1 CASES=name,name */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 const C3=n=>['c03-t'+n,'img/_review/consort-tiers/c03/b8/c03_a18_t'+n+'.png'];
 const C3HT=process.env.C3HT?JSON.parse(require('fs').readFileSync(process.env.C3HT)):{};/* skull tops of the c03 review canvases (not in img/fig-ht.json yet): MediaPipe, headtop.py method */

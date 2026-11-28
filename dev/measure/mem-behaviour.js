@@ -1,7 +1,7 @@
 /* review/mem-upgrade measure: does behaviour change with memory? Same controlled cases on two builds (before = main, after = this branch),
    then a natural run (sensible bot dev/measure/inpage4.js, seeded) on each build: memories formed, lifelong ones, cause records by family.
    usage: node dev/measure/mem-behaviour.js <urlBefore> <urlAfter> [botSteps=6]   → JSON to stdout */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,A,B,NS]=process.argv;const STEPS=+NS||6;const INP=fs.readFileSync(path.join(__dirname,'inpage4.js'),'utf8');
 const CASES=()=>{const out={};const L=liveRivals(true).filter(v=>!v.queen);const v=L[0];const R0=Math.random;
  const fresh=x=>{x.mem={};x.cz={};x.oan=0;x.rel=0;x.ghen=0;x.slightAt=null;x.blamed={};for(const k in x.ro)x.ro[k]=0;for(const k in x.rl)x.rl[k]=0;try{delete S.mem[x.id+"|me"]}catch(e){}};

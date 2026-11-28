@@ -1,5 +1,5 @@
 /* review/pcard-fill shots: node dev/test/pcard-shot.js <url> <WxH> <outdir> [tab=rv|court|men|staff]... */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,SZ,OUT,...TABS]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,reducedMotion:'reduce'});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});

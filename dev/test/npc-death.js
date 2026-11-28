@@ -7,7 +7,7 @@
    5 a servant beaten to death outside jmort (servCaught) is retired too (whole family).
    6 co-op world keys carry lyF / fdead / fidDead / dnames.
    7 screenshots of Trường Môn viện (Lý + a fallen rival) at 755x1000@2 and 1180x820@2 → outdir. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const NEWR=path.resolve(__dirname,'../..');const OLDR=process.argv[2]?path.resolve(process.argv[2]):null;const OUT=path.resolve(process.argv[3]||path.join(NEWR,'.m/shots'));fs.mkdirSync(OUT,{recursive:true});
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();

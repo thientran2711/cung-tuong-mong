@@ -77,7 +77,7 @@ PEND.succ0=function(){const E=S.succ,son=succSon();if(!E||!son)return null;const
  const o=[
   {n:`Để ${sn} lên ngôi, làm ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}`,fx:{},x:`thành: ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}, an hưởng ở Từ Ninh cung`,need:[],go:()=>succBegin("a")},
   {n:"Buông rèm nhiếp chính",fx:{},x:`${word(pb)} · tốn: ${fmt(BAL.eff.j99succ.costB)} · thành: buông rèm nghe chính đến khi tân đế ${BAL.age.reign} tuổi, Danh ${balSg(BAL.eff.j99succ.danhB)} · hỏng: đại thần không phục, Danh ${balSg(BAL.eff.j99succ.danhBFail)}, chỉ làm Hoàng thái hậu · kèm: tân đế lớn lên sinh oán vì ngươi giữ quyền`,need:nb,go:()=>succTry("b")},
-  {n:"Tự lên ngôi Nữ đế",fx:{},x:`${word(pc)} · tốn: ${fmt(BAL.eff.j99succ.costC)} · thành: lên ngôi Nữ đế, đổi niên hiệu · hỏng: binh biến bại lộ, bị phế, ban chết · kèm: vương gia, đại thần dễ khởi binh, thích khách rình rập`,need:nc,go:()=>succTry("c")}];
+  {n:"Tự lên ngôi Nữ đế",fx:{},x:`${word(pc)} · tốn: ${fmt(BAL.eff.j99succ.costC)} · thành: lên ngôi Nữ đế, đổi niên hiệu · hỏng: binh biến bại lộ, bị phế, ban chết · kèm: vương gia và đại thần dễ khởi binh, thích khách rình rập`,need:nc,go:()=>succTry("c")}];
  return{t,o,who:Object.assign(pMe(),{rw:E.dm?"Hoàng hậu · đích mẫu":RANKS[S.rank].n}),cls:"succ"}};
 function succCanPick(p){const son=succSon();return !succNeeds(p,son,succSup()).some(n=>!n.ok)}
 function succTry(p){if(!succCanPick(p))return succResume();

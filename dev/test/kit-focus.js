@@ -4,7 +4,7 @@
    no clipped text (b/small never cut), columns scroll INSIDE, ONE button size per mode (64 Fold / 72 iPad), plate under the feet, say box + choices + play layer + hud + react + group switch + close, reduced motion = no walk (animations 0),
    motion ON (KIT_FOC.motion=true): the walk runs (figure animation exists) and tap skips it; kitIdle classes on stage figures; kitMoodSay one bubble beside the head.
    usage: node dev/test/kit-focus.js <url> <outdir> [WxH,...] */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});let bad=0;
  for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});

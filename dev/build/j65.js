@@ -182,7 +182,7 @@ function onePop(h,ttl,b){if(!h)return h;const seg=h.split("<br>");if(seg.length<
    drop a sentence line one already says, the bare title / Thành / Hỏng, and "X a → b" items whose label line one already moved. Every action. */
 function popDedup(t,first,ttl){const F=T(first).replace(/\s+/g," ");const lab=x=>{const m=x.match(/^(.+?) -?\d+ → -?\d+(?: \([^)]*\))?$/);return m?m[1]:null};
  const has=l=>{const al=S&&S.maid&&l==="Thiện cảm "+S.maid.name?"Thiện cảm của cung nữ":l;return F.includes(l+" ")||F.includes(al+" ")};
- const keep=[];for(const s0 of String(t).split(/(?<=[.!?])\s+/)){const s=s0.trim().replace(/[.!?]+$/,"").trim();if(!s)continue;
+ const keep=[];for(const s0 of String(t).split(kRx("(?<=[.!?])\\s+"))){const s=s0.trim().replace(/[.!?]+$/,"").trim();if(!s)continue;
   if(s===ttl||/^(Thành|Hỏng|Bại|thành|hỏng|bại)$/.test(s)||F.includes(s))continue;
   const it=s.split("·").map(x=>x.trim()).filter(Boolean);if(it.length&&it.every(lab)){const k=it.filter(x=>!has(lab(x)));if(k.length)keep.push(k.join(" · ")+".");continue}
   keep.push(s0.trim())}

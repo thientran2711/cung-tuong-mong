@@ -1,3 +1,4 @@
+require('./lib/bigpage');/* HARNESS-BIGPAGE (KK63): page bodies > 4 MB never go through route.fulfill */
 /* review/small-bugs-2 — five small bugs, each checked as a WHOLE CLASS (LUẬT SỬA CẢ NHÓM).
    usage: node dev/test/small-bugs-2.js <page URL> <WxH@dpr> [oldPageURL] [shot dir]
    1 ROAD   on the cung nữ road and in lãnh cung, no consort-only goal/hint (lập Hoàng hậu, mẹ Thái tử, thăng bậc, thị tẩm, bổng lộc, sắc phong…)

@@ -10,7 +10,7 @@
            window.__accStay was 1 inside goTo during the tap (j41: she stays where she is, no access check / etiquette on a plain turn),
            the tap ran the chain once (base j9 entered exactly once), no page errors.
    usage: node dev/test/sangbuoi-wrap.js http://127.0.0.1:PORT/index.html   (served from the worktree root; BEFORE=<file> serves that html instead) */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const [,,URL]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');const [,,URL]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const R=path.resolve(__dirname,'../..'),B=R+'/dev/build/';
 /* ---- wrapper map from dev/build in assemble order ---- */
 const asm=fs.readFileSync(B+'assemble.py','utf8');const list=JSON.parse(asm.match(/for f in (\[[^\]]+\])\)/)[1].replace(/'/g,'"'));

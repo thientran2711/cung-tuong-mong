@@ -25,7 +25,7 @@ const G=[
  ['Chăm thú cưng: cho ăn / tắm / chơi (jpetcare)','jpetcare.js',/function petcGameBox/,/id:"kpcquick",n:"Chăm nhanh"/,'roll «Chăm nhanh»','thành: BAL.skip.care of the gain · hỏng: nothing (+ «Giao … chăm»)'],
  ['Chăm cây: tưới (jshelf)','jshelf.js',/kshpgame/,/id:"kshpquick",n:"Chăm nhanh"/,'roll «Chăm nhanh»','thành: BAL.skip.care of the gain · hỏng: nothing (+ «Giao … chăm»)'],
  ['Hội thi / thi tài (j82 startContest)','j82.js',/function startContest/,/n:"Để tài nghệ quyết định"/,'own: peer','her median, capped at BAL.skip.cap (Khá)'],
- ['Tự luyện / lesson frame default (j82 playArt)','j82.js',/function playArt/,/\$\{kitQuick\(QK\)\}/,'per caller','the caller\'s quick (o.quick), mark capped'],
+ ['Tự luyện / lesson frame default (j82 playArt)','j82.js',/function playArt/,/kitQuick\(QK\)/,'per caller','the caller\'s quick (o.quick), mark capped'],
  ['Tuyển chọn entry round (jentry)','jentry.js',/kg82go/,/n:"Để tài nghệ quyết định"/,'own: peer','her median, capped at BAL.skip.cap (Khá)'],
  ['Khảo hạch thăng phẩm (jexam, jnwq games)','jexam.js',/kg82go/,/n:"Để tài nghệ quyết định"/,'own: peer','her median per round, capped at BAL.skip.cap'],
  ['Phúc tuyển / tuyển chọn at home (jkc, jkc2 playArt)','jkc2.js',/playArt\(\{art,title,note/,/n:"Để tài nghệ quyết định"/,'own: peer','her median, capped at BAL.skip.cap'],

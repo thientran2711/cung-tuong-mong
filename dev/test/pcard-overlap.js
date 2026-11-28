@@ -3,7 +3,7 @@
    card (#mb and the act list) measures each VISIBLE info target (.kgl / .kfx / .khap / .kskn / .ladi — its own box AND its r4 hit layer) against each VISIBLE
    action button (button / [data-kmemp] / .pbtn …): a point inside both where elementFromPoint lands on the info target = a STEAL (the button loses the tap).
    PASS = 0 steals. usage: node dev/test/pcard-overlap.js [index.html] [WxH,...]  (env MAX=n people per kind, default 4) */
-const {chromium}=require('playwright');const path=require('path');const A=process.argv.slice(2);const SRC=path.resolve(A[0]||path.join(__dirname,'../../index.html'));const SIZES=(A[1]||'755x1000,1180x820').split(',');const MAX=+(process.env.MAX||4);
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const A=process.argv.slice(2);const SRC=path.resolve(A[0]||path.join(__dirname,'../../index.html'));const SIZES=(A[1]||'755x1000,1180x820').split(',');const MAX=+(process.env.MAX||4);
 (async()=>{const b=await chromium.launch();let bad=0;const out=[];
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});

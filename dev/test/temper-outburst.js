@@ -10,7 +10,7 @@
     cap    — G1 / G2: Danh spent to the yearly cap → no option that costs Danh; Phạm thượng inside phamCd → not offered.
     old    — an old save (S.ea without eaC, NPCs without eaC) opens the choice with no error.
    Checks per case: no page error, no horizontal overflow, the case's expectation (ok). Shots to <outdir> (never git). Exit 1 on any failure. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const RT=require('./realtap.js');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');const RT=require('./realtap.js');
 const [,,URL0,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 (async()=>{const b=await chromium.launch();let bad=0;const all={};
  for(const sz of (SIZES||"755x1000@2,1180x820@2,390x844@3").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const res={},errs=[];

@@ -6,7 +6,7 @@
    (4) out.json lists pages in fixed order. Pages k get seed seed+k*101 (+att*7001 for a crashed page's replacement).
    usage: node dev/measure/run_rep.js <root/<file>|url> <mode sens|rand> <lives total> <out.json> [inpage file=inpage6.js] [pages=4] [seed=1]
    Each page plays lives until the total is reached; out.json = all lives (an7.py format). Then: python3 dev/measure/an7.py out.json */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,URL,mode,target,OUT,INP,PG,SD]=process.argv;const P=+PG||4,seed0=+SD||1,T=+target,QU=Math.ceil(T/P);
 const crypto=require('crypto');const VC=fs.readFileSync(path.join(__dirname,'vclock.js'),'utf8');
 const R=path.resolve(__dirname,'../..');

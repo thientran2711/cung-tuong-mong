@@ -22,13 +22,18 @@ const kMk=s=>String(s).replace(/(^|[\s:(])([+−])(\2{0,2})(?=$|[\s,;.)·:])/g,(
    fx (w / l / c) already names the stat, the number printed from BAL wins and the typed mark is dropped here (never two sources). */
 const WG_STAT={"Danh":"danh","Sủng":"sung","Đức":"duc","Sức":"suc","Bạc":"bac","Tâm cơ":"tamco","Tai mắt":"mat","Tài":"tai","Sắc":"sac"};
 function wgDrop(t,...fx){t=String(t||"");if(!t||!/[+−]/.test(t))return t;const has=k=>fx.some(o=>o&&typeof o==="object"&&o[k]);
- return t.split(/(?<=[,;]) /).filter(i=>{const m=i.replace(/[,;]\s*$/,"").match(/^(?:[^:,;]+: )?(Danh|Sủng|Đức|Sức|Bạc|Tâm cơ|Tai mắt|Tài|Sắc) [+−]{1,3}$/);return !(m&&has(WG_STAT[m[1]]))}).join(" ").replace(/[,;]\s*$/,"")}
+ return t.split(kRx("(?<=[,;]) ")).filter(i=>{const m=i.replace(/[,;]\s*$/,"").match(/^(?:[^:,;]+: )?(Danh|Sủng|Đức|Sức|Bạc|Tâm cơ|Tai mắt|Tài|Sắc) [+−]{1,3}$/);return !(m&&has(WG_STAT[m[1]]))}).join(" ").replace(/[,;]\s*$/,"")}
 function kcls(t){const s=kMk(t.replace(/<[^>]+>/g,"").trim());if(!s)return"n";if(/bớt (ghen|thù|oán)|hết (ghen|thù)/i.test(s))return"g";if(KNEU.test(s))return"n";if(KHOST.test(s))return"r";
  if(/(quý|thiện cảm|tin|mến|nể|kính) ngươi\s*[-−]\s?\d|thiện cảm\s*[-−]\s?\d/i.test(s))return"r";/* KK56 (E-GAIN3b #3): HER regard for the player dropping is a loss for the player, never a green gain, even with «nàng» in it */
  if(/(\bnàng\b|con nàng|của nàng)/i.test(s)&&(/-\s?\d|sảy|chết|mất|phế|bị phạt|tịch thu|sa sút|không được lật thẻ|rơi/i.test(s)))return"g";
  if(KRED.test(s))return"r";if(KGOOD.test(s))return"g";if(/-\s?\d/.test(s))return"r";return"n"}
 /* one effect token -> coloured span; fmt() spans keep their colour */
-function eff(t){t=String(t).trim();if(!t)return"";if(/^<span class="(g|r)">/.test(t)&&/<\/span>$/.test(t)&&(t.match(/<span/g)||[]).length===1)return t.replace(/^<span class="(g|r)">/,'<span class="ef $1">');
+/* R13 (MAIN 175 LOOK R12, whole family of stat marks): «Sủng +», «thiện cảm --», «Danh ++» never break between the word and its mark (a «+» alone on a line); the pair is one nowrap span, textContent unchanged */
+function kNwMk(h){return String(h).replace(/(^|>)([^<]+)/g,(m,a,t)=>a+t.replace(/([^\s<>]+) ([+−-]{1,3})(?![\w+−-])/g,'<span class="knw">$1 $2</span>'))}
+/* the same wrap on chips that were built by DOM code (the hand card's copied rows .kdup): every .ef text leaf in root */
+function kNwMkDom(root){try{(root||document).querySelectorAll(".ef").forEach(e=>{if(e.children.length||e.querySelector(".knw"))return;const t=e.textContent;if(!/[^\s] [+−-]{1,3}(?![\w+−-])/.test(t))return;e.innerHTML=kNwMk(t.replace(/&/g,"&amp;").replace(/</g,"&lt;"))})}catch(x){console.error("kNwMkDom",x)}}
+function eff(t){return kNwMk(eff0(t))}
+function eff0(t){t=String(t).trim();if(!t)return"";if(/^<span class="(g|r)">/.test(t)&&/<\/span>$/.test(t)&&(t.match(/<span/g)||[]).length===1)return t.replace(/^<span class="(g|r)">/,'<span class="ef $1">');
  if(/^<b class="r">/.test(t))return `<span class="ef r">${t.replace(/<[^>]+>/g,"")}</span>`;return `<span class="ef ${kcls(t)}">${t}</span>`}
 function effList(x,def){const parts=[].concat(x).filter(Boolean).join(" · ");if(!parts)return eff("không");return kSplitTop(parts,/ · |, /y).filter(s=>s.trim()).map(s=>{let h=eff(s);if(def&&/class="ef n"/.test(h)&&!KNEU.test(s.replace(/<[^>]+>/g,"").trim()))h=h.replace('class="ef n"',`class="ef ${def}"`);return h}).join('<span class="ksep">·</span>')}
 function oddsChip(w){if(!w)return"";w=kitOddsNorm(w);/* no odds word = no roll (ODDS CAP: the ladder has no "sure" word) */const m=String(w).match(ODDW);const k=m?m[1]:w;const lv=KIT_ODDS.indexOf(kitOddsCanon(k))<0?undefined:KIT_ODDS.indexOf(kitOddsCanon(k));const rest=String(w).replace(k,"").replace(/^\s*·\s*/,"");

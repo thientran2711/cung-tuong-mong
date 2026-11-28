@@ -5,7 +5,7 @@
    give the same text as with native lookbehind; (3) a page whose game script did not finish (window.__ctmBuilt removed) must show the
    failure card ("Cửa cung chưa mở được" + "Mở lại" + "Quét lối cũ rồi mở lại") instead of the skeleton.
    usage: node dev/test/webkit-boot.js <baseURL> [outdir]   (one browser, closed at the end; exit 1 on a failure) */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,OUT='/tmp']=process.argv;
 const OLD=()=>{const N=RegExp;const W=function RegExp(p,f){const s=p instanceof N?p.source:String(p);if(/\(\?<[=!]/.test(s))throw new SyntaxError("Invalid regular expression: invalid group specifier name");return new N(p,f)};
  W.prototype=N.prototype;Object.setPrototypeOf(W,N);window.RegExp=W};
@@ -13,7 +13,7 @@ const SAMPLE=["Nàng quý ngươi hơn","Bấm vào đây, lượt 3","T3/2 thư
 (async()=>{const b=await chromium.launch();let fails=0;const res={};
  async function run(name,{old,broken}){const ctx=await b.newContext({viewport:{width:1180,height:820}});const p=await ctx.newPage();const errs=[];
   p.on('pageerror',e=>errs.push(e.message));if(old)await p.addInitScript(OLD);
-  if(broken)await p.route(/\/(\?.*)?$/,async r=>{const resp=await r.fetch();const t=(await resp.text()).replace("window.__ctmBuilt=1;","");await r.fulfill({response:resp,body:t})});
+  if(broken)await p.route(/\/([^\/?]*\.html)?(\?.*)?$/,async r=>{const resp=await r.fetch();const t=(await resp.text()).replace("window.__ctmBuilt=1;","");await r.fulfill({response:resp,body:t})});
   await p.goto(BASE+"?khost=0&kboot=1",{waitUntil:'commit',timeout:120000});
   const st=await p.waitForFunction(()=>window.__kbootDone||document.querySelector("#kboot.fail")?1:0,null,{timeout:150000,polling:300}).then(()=>1,()=>0);
   await p.waitForTimeout(1200);
