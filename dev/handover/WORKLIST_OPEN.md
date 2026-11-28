@@ -1,4 +1,5 @@
-# ~86% xong · còn 38 việc không tính hình nhân vật (LIVE a96564ad)
+# ~86% xong · còn 37 việc không tính hình nhân vật (LIVE a96564ad)
+Recount MAIN 188 28/11 08:38Z: row 22 THIN P4/P6/P8 already LIVE (B verified) → struck → 37 open, ~86 %.
 Recount MAIN 188 28/11 08:21Z: a96564ad lr-rules-r2 (rules-r1 = lc34-b3a + B f14role-inherit + D rank-pace + f14role-rows + tuantang-warn) → LIVE; no row closed (rules work, parts of 4/11/12) → 38 open, ~86 %.
 Recount MAIN 187 28/11 07:36Z: 22afefb4 lc35-ui (ui6 incl. kk66-ui5 + webkit-lb + tsg-kpk time-spill fix + kit-screenveil + kk67 figplaque) → LIVE; row 23 screen veil closed → 38 open, ~86 %.
 Recount MAIN 186 28/11 05:20Z: row 30 Tốn no-minus verified LIVE (d95b4db4) → struck → 39 open, ~86 %.
@@ -38,7 +39,7 @@ State: LIVE = on main · partly = some pieces LIVE · open.
 | ~~18~~ | ~~Dư đồ slow open~~ | LC10 | LIVE ac4790f0 |
 | 19 | coop-thin-g world sync + coop1i week-end deadlock | B, F | partly: coop-clear 7abb60cc, rebirth-stuck 5e013076 LIVE; deadlock open |
 | 21 | Parking-lot rows not built | E | open |
-| 22 | THIN P4/P6/P8 roads | B | partly: P8 LIVE 2fd303aa |
+| ~~22~~ | ~~THIN P4/P6/P8 roads~~ | B | LIVE (P4 03b47224, P6 fd85907a, P8 2fd303aa all ⊂ 22afefb4; B verified 07:57Z) |
 | ~~23~~ | ~~Screen-change veil (kit-screenveil-r1)~~ | VEIL-1 | LIVE 22afefb4 (kit-screenveil-rv179 2ea6d28f) |
 | 24 | «Vòng người» ring + ring >7 board (ring-build-7) | RING-BUILD-7 | open: Fold figure ~320px, plaque ✓/✕ via KK51 |
 | 25 | Game-feel / event animation mocks | MOTION | open: MOCK READY, waits sếp |
