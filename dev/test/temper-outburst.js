@@ -1,6 +1,6 @@
 /* review/temper-outburst (OD 25/11 ~05:45Z (1) + ~08:05Z «Bộc phát theo tính cách là phải làm»; temper-design (b) + (e) G1 / G2), REAL TAPS (dev/test/realtap.js).
    usage: node dev/test/temper-outburst.js <build url|file> <outdir> [WxH@dpr,...]   (default: Fold 755x1000@2, iPad 1180x820@2, phone 390x844@3)
-   Set-up (state only) by page.evaluate; every CHOICE is made by a real finger tap on the option row (rt.tap), never .click() / a game call.
+   Set-up (state only) by page.evaluate; every CHOICE is made by real finger taps on the option card (rt.choose: lift → ✓), never .click() / a game call.
    cases:
     hot    — a hot her (Kiêu ngạo), furious: jemoact eaMeOut → kit event frame with 2..BAL.ea.pick.n options, NO «Tiếp tục» / «Nhịn», every row shows
              its gain and loss (Được / Tốn / Mất / Kèm); tap «Đập đồ» → Bạc −fx.bac, Danh −fx.danh exactly as shown, tâm trạng +pick.vent (asserted: Δ ≥ vent − 1, real feelings set — review N2), the dialog closes.
@@ -30,7 +30,7 @@ const [,,URL0,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const U
    const over=[...d.querySelectorAll('*')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>dr.right+1}).map(e=>e.className||e.tagName).slice(0,4);
    const opts=[...d.querySelectorAll('.opts > button')].filter(b=>b.offsetParent).map(b=>({t:b.textContent.replace(/\s+/g," ").trim(),rows:[...b.querySelectorAll('.krl')].map(x=>x.textContent.trim())}));
    return{modal:true,title:(d.querySelector('.kph,h3,h2')||{}).textContent||"",hscroll:document.documentElement.scrollWidth>innerWidth+1,over,opts,close:!!d.querySelector('.x,.kx,[aria-label="Đóng"]')}});
-  const tapOpt=async(re,screen)=>{const loc=p.locator('#modal .dlg .opts > button').filter({hasText:re}).first();return rt.tap(loc,{screen,label:String(re),wait:6000})};
+  const tapOpt=async(re,screen)=>{const loc=p.locator('#modal .dlg .opts > button').filter({hasText:re}).first();return rt.choose(loc,{screen,label:String(re),wait:6000})};/* STALE-TESTS-7: the event frame is a HAND (.opts.khand, KIT §101/§102.2): a tap lifts the card, its ✓ chooses — rt.choose, the ONE helper (realtap.js) */
   const st=()=>p.evaluate(()=>({bac:S.bac,danh:S.danh,suc:S.suc,duc:S.duc,mood:(typeof moodBar==="function"?moodBar(S):S.mood&&S.mood.v),log:(S.log||[]).slice(-3).map(x=>String(x.t||x).replace(/<[^>]+>/g,"")).join(" | ")}));
   const shot=n=>p.screenshot({path:`${OUT}/${wh}-${n}.jpg`,type:'jpeg',quality:60});
   const noHold=o=>!o.some(x=>/^(Tiếp tục|Nhịn|Bỏ qua|Thôi)/.test(x.t));
