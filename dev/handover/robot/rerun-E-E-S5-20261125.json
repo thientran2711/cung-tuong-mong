@@ -10,11 +10,7 @@
  ],
  "note": "flagged lives left #kg82 mini-game boards unplayed per audit (mg quit); verdict INVALID under Foreman E rule 26/11 until F posts the board-play PASS; audit script verdict stays VALID",
  "game": "LIVE github.io",
-<<<<<<< HEAD
  "finished": 39,
-=======
- "finished": 38,
->>>>>>> e655ad96c (F c1: s18f evidence)
  "lives": [
   {
    "life": "E-S5-R5-cautious-1",
@@ -14225,7 +14221,6 @@
    "mgReady": null
   },
   {
-<<<<<<< HEAD
    "life": "E-S5-R5-greedy-5",
    "dev": "fold",
    "bot": "bold",
@@ -15555,8 +15550,6 @@
    "mgReady": 57
   },
   {
-=======
->>>>>>> e655ad96c (F c1: s18f evidence)
    "life": "E-S5-R5-lazy-1",
    "dev": "ipad",
    "bot": "quiet",
