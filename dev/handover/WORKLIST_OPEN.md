@@ -1,4 +1,5 @@
-# ~86% xong · còn 40 việc không tính hình nhân vật (LIVE 5ad52416)
+# ~86% xong · còn 39 việc không tính hình nhân vật (LIVE 5ad52416)
+Recount MAIN 186 28/11 05:20Z: row 30 Tốn no-minus verified LIVE (d95b4db4) → struck → 39 open, ~86 %.
 Recount MAIN 186 28/11 05:15Z: 5ad52416 webkit-lb (Safari<16.4 boot play-stopper, all lookbehind → kRx + hard gates) → LIVE; no worklist row → 40 open, ~86 %.
 Recount MAIN 186 28/11 04:55Z (owner asked «đếm việc»): rows 31/40/41 already LIVE → struck; duplicate row 5 line removed; row 5 + 12 partly (title-parity, end-maxrank LIVE) → still 40 open (the 40 already counted them out), ~86 %. Row 30 Tốn no-minus: KK56 d95b4db4 «tốn piece always a cost» is LIVE — verify then strike.
 Recount MAIN 186 28/11 04:40Z: f7ea14b7 lc34-savepid (Foreman B save-pid-cards rv6: save keeps pid on cards) → LIVE; no worklist row → 40 open, ~86 %.
@@ -43,7 +44,7 @@ State: LIVE = on main · partly = some pieces LIVE · open.
 | 27 | PACE-SPEED-2: 6-stat soft ceiling (next bar+8 / 100), Sủng monthly fade, Sắc −1/yr from 28, result-card line | PACE-SPEED-2 | open (owner OK 26/11 23:50Z) |
 | 28 | Bàn bài no-flip, Game-of-Dice style (KK51 → KIT-STAGE-R7) + VIDEO Fold+iPad owed to sếp | KK51, R7 | open |
 | 29 | HUD Sắc phong slot (HUD-SACPHONG, kitHudSlot 470d4ece) | HUD-SACPHONG | open |
-| 30 | Tốn no-minus | — | RV PASS, in land queue |
+| ~~30~~ | ~~Tốn no-minus~~ | KK56 | LIVE d95b4db4 (tốn piece always a cost) |
 | ~~31~~ | ~~B save stack (silent save loss + reload rewind) — PLAY-STOPPER~~ | B | CLOSED: rv26 bd47c753 LIVE 27/11 ~19:24Z |
 | ~~33~~ | ~~mg-trim-r6 group: Trang điểm một chạm, Học nhanh, Chăm nhanh (OB 14/21/27) + srv-rank, parity-facfix, help-housemate, selx-fair~~ | D lead | LIVE d9ca7892 (Bundle 2: srv-rank, help-housemate, selx-fair; mg-trim 0b43ee55, parity-facfix 066d9af0) |
 | 34 | DRESS-FIX: Trang điểm chọn áo/hoa, ô gộp, xa xỉ, thay đồ ngang giá, NPC-driven lột đồ (OB 48–52, 56) | DRESS-FIX | open |
