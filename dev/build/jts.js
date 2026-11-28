@@ -250,16 +250,23 @@ function tsGiftWorth(e,v,a){a=a||S;if(tsGiftNo(e))return{ok:false,why:"",q:-1,ba
 function tsGiftPieces(a,v,kind){return (a.inv||[]).map((e,i)=>({e,i})).filter(({e})=>!tsGiftNo(e)&&(kind==null||(kind==="wk")===!!e.wk)).map(o=>Object.assign(o,{w:tsGiftWorth(o.e,v,a)}))
  .sort((x,y)=>(y.w.ok-x.w.ok)||(x.w.bac-y.w.bac))}
 /* what the gift eases: ghen (aimed only at her) and oán toward the giver */
-function tsGiftEase(a,v){const G=BAL.tsGift;if(a===S)v.ghen=cl((v.ghen||0)-G.ghen,0,100);oanAdd(v,a,-G.oan)}
-function tsGiftEaseTxt(a,v){const G=BAL.tsGift;return a===S?`${v.name} bớt ghen ${G.ghen}, bớt oán ${G.oan}`:`${v.name} bớt oán ${G.oan}`}
+/* d19-gift-npc (OPEN «bớt oán 5 has no effect», law 4 + 3): the line names what REALLY eases — at most BAL.tsGift.ghen / .oan, never more
+   than she still holds (a grudge already at 0 cannot ease 5). tsGiftEase returns the real amounts; the card's preview reads the same cap. */
+function tsGiftEaseN(a,v){const G=BAL.tsGift;return{gh:a===S?Math.min(G.ghen,Math.max(0,v.ghen||0)):0,oa:Math.min(G.oan,Math.max(0,oan(v,a)))}}
+function tsGiftEase(a,v){const g0=v.ghen||0,o0=oan(v,a);const N=tsGiftEaseN(a,v);if(a===S)v.ghen=cl(g0-N.gh,0,100);if(N.oa)oanAdd(v,a,-N.oa);return{gh:g0-(v.ghen||0),oa:o0-oan(v,a)}}
+function tsGiftEaseTxt(a,v,N){N=N||tsGiftEaseN(a,v);const P=[];if(a===S&&N.gh>0)P.push(`bớt ghen ${N.gh}`);if(N.oa>0)P.push(`bớt oán ${N.oa}`);
+ return P.length?`${v.name} ${P.join(", ")}`:`${v.name} vốn đã nguôi lòng, chỉ thêm thiện cảm`}
 /* road 1: bạc (her or any consort; her bạc is taken by the option's fx) */
-function tsGiftBac(a,L){const G=BAL.tsGift;if(a!==S)ap(a,{bac:-L.length*G.bac});for(const v of L){tsGiftEase(a,v);relAdd(a,v,G.aff)}}
+function tsGiftBac(a,L){const G=BAL.tsGift;if(a!==S)ap(a,{bac:-L.length*G.bac});return L.map(v=>{const N=tsGiftEase(a,v);relAdd(a,v,G.aff);return N})}
 /* roads 2 and 3: one piece (her or any consort) */
-function tsGiftPiece(a,v,i){const e=a.inv[i];const w=tsGiftWorth(e,v,a);if(!w.ok)return"";const nm=giftName(e);giveTo.out=null;const r=giveTo(a,v,i);if(!r)return"";
+function tsGiftPiece(a,v,i){const e=a.inv[i];const w=tsGiftWorth(e,v,a);if(!w.ok)return"";const nm=giftName(e);const same=()=>(a.inv||[]).filter(x=>x&&x.k===e.k&&!x.h&&(e.wk?x.wk&&x.wk.n===e.wk.n:!x.wk)).length,c0=same();giveTo.out=null;const r=giveTo(a,v,i);
+ const home=(a.inv||[]).includes(e)||same()>=c0;if(!r)return"";
  /* review r1: she may refuse it (jdis: a piece she does not like stays in the chest) → nothing eased, nothing lost (no free peace).
     K-GIFT-OUT (KK64, KIT-KRI-XL leftover 3): «kept» reads giveTo.out — jrcv «back» hands the giver a COPY of the piece (never the same object, so the old
-    «a.inv.includes(e)» test never saw it and the peace came free); jdis «refused» keeps the very piece. «found» / «caught» (the taint was seen): the piece is gone, nothing eased (lost). */
- const o=giveTo.out;if(o==="back"||o==="refused"||(a.inv||[]).includes(e))return{r,nm,bac:w.bac,kept:true};if(o==="found"||o==="caught")return{r,nm,bac:w.bac,lost:true};tsGiftEase(a,v);return{r,nm,bac:w.bac}}
+    «a.inv.includes(e)» test never saw it and the peace came free); jdis «refused» keeps the very piece. «found» / «caught» (the taint was seen): the piece is gone, nothing eased (lost).
+    d19-gift-npc: a work goes through the same receiver choice (j83 wkGive sets giveTo.out «back» / «found»); «home» = the piece, or a piece of the same kind
+    (same item key / same work), is back in her chest — a second guard beside giveTo.out. */
+ const o=giveTo.out;if(o==="back"||o==="refused"||home)return{r,nm,bac:w.bac,kept:true};if(o==="found"||o==="caught")return{r,nm,bac:w.bac,lost:true};const N=tsGiftEase(a,v);return{r,nm,bac:w.bac,N}}
 /* the act card (one card, in the panel and in the warning) */
 function tsOptGifts(D){const L=tsGiftL(D);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac,x=L[0];
  const nW=tsGiftPieces(S,x.v,"wk").filter(o=>o.w.ok).length,nI=tsGiftPieces(S,x.v,"it").filter(o=>o.w.ok).length;
@@ -282,14 +289,15 @@ PEND.tsgiftpick=p=>{const v=RV(p.v);if(!v)return null;const G=BAL.tsGift;const A
   return{cap:0,n:giftName(e),ik:i,fx:{},x:w.ok?`${capW()} · tốn: ${G.khac} khắc, ${giftName(e)} −1 (bán được ${w.bac} bạc; nàng coi như ${w.wb} bạc) · thành: ${tsGiftEaseTxt(S,v)}${gain?", "+gain:""}${w.note?" · kèm: "+w.note:""}`:"",need:w.ok?[]:[{t:(w.why||"không biếu được")+(w.q>=0?` (nàng coi như ${w.wb} bạc, cần ${G.bac})`:""),ok:false}],tsDis:!w.ok,
    go:()=>{if(!w.ok)return;tsGiftPieceGo(v,i)}}}).concat([{n:"Thôi",fx:{}}])}};
 /* her two roads as ONE function each (the card's choice ends here; coop-thin F3: a co-op guest's choice becomes an intent here) */
-function tsGiftBacGo(L){const c=L.length*BAL.tsGift.bac;tsGiftBac(S,L);log(`Ngươi sai người mang quà sang ${kitNameList(L)}, lời lẽ mềm mỏng. Được: ${L.map(y=>tsGiftEaseTxt(S,y)).join("; ")}. Mất: ${c} bạc.`)}
-function tsGiftPieceGo(v,i){const G=BAL.tsGift;const R=tsGiftPiece(S,v,i);if(!R)return;spend(G.khac);/* khắc only when the piece really went (review r1) */if(R.kept){log(`${R.r}Lễ làm lành không thành, lòng nàng chưa dịu.`);return}if(R.lost){log(`${R.r}Lễ làm lành không thành, lòng nàng chưa dịu. Mất: ${R.nm}.`);return}log(`${R.r}Lời lẽ mềm mỏng, lòng nàng dịu đi. Được: ${tsGiftEaseTxt(S,v)}. Mất: ${R.nm} (bán được ${R.bac} bạc).`)}
+function tsGiftBacGo(L){const c=L.length*BAL.tsGift.bac;const N=tsGiftBac(S,L);log(`Ngươi sai người mang quà sang ${kitNameList(L)}, lời lẽ mềm mỏng. Được: ${L.map((y,i)=>tsGiftEaseTxt(S,y,N[i])).join("; ")}. Mất: ${c} bạc.`)}
+function tsGiftPieceGo(v,i){const G=BAL.tsGift;const R=tsGiftPiece(S,v,i);if(!R)return;spend(G.khac);/* khắc only when the piece really went (review r1) */if(R.kept){log(`${R.r}Lễ làm lành không thành, lòng nàng chưa dịu.`);return}if(R.lost){log(`${R.r}Lễ làm lành không thành, lòng nàng chưa dịu. Mất: ${R.nm}.`);return}log(`${R.r}Lời lẽ mềm mỏng, lòng nàng dịu đi. Được: ${tsGiftEaseTxt(S,v,R.N)}. Mất: ${R.nm} (bán được ${R.bac} bạc).`)}
 /* both are pickers she opened herself: full act cards (Được / Mất), not hidden event outcomes (jk2b KIT_ACT_PIDS, as jpoison) */
 try{KIT_ACT_PIDS.add("tsgift");KIT_ACT_PIDS.add("tsgiftpick")}catch(e){}
 /* NPC side, the same rule: the cheapest road that is enough (a piece worth less bạc than her bạc share, else bạc, else nothing) */
 function tsNpcGift(a,D){const L=tsGiftL(D);if(!L.length)return"";const G=BAL.tsGift,v=L[0].v;const A=tsGiftPieces(a,v,null).filter(o=>o.w.ok&&o.w.bac<=G.bac*L.length);
- if(A.length){const R=tsGiftPiece(a,v,A[0].i);if(R&&!R.kept)return R.r}
- if((a.bac||0)>=L.length*G.bac){tsGiftBac(a,L.map(x=>x.v));return `${rkName(a)} ${a.name} sai người mang quà sang ${kitNameList(L.map(x=>x.v))}.`}return""}
+ /* d19-gift-npc: a piece sent back (or refused) stays hers and eases nothing; she then tries the bạc road as before, and the news keeps the refusal */
+ let pre="";if(A.length){const R=tsGiftPiece(a,v,A[0].i);if(R&&!R.kept)return R.r;if(R&&R.kept)pre=R.r}
+ if((a.bac||0)>=L.length*G.bac){tsGiftBac(a,L.map(x=>x.v));return `${pre}${rkName(a)} ${a.name} sai người mang quà sang ${kitNameList(L.map(x=>x.v))}.`}return pre.trim()}
 /* the guard: same rule for everyone (a target who keeps to herself is harder to reach) */
 (function(){if(typeof npcAct!=="function")return;const n0=npcAct;npcAct=function(v,t){try{const g=t===S?tsS().guard:t&&t.tsGuard;if(g>wk()&&roll(50))return""}catch(e){}return n0.apply(this,arguments)}})();
 /* NPC side: a consort whom many want to harm closes her doors / sends gifts, by her own nature (same costs) */
