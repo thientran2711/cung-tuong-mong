@@ -749,3 +749,4 @@ LIFE flight2-s20f iPad greedy seed 2026112572 (LIVE 5ad52416 + harness 795f87ec)
 LIFE flight2-s20g iPad greedy seed 2026112573 (LIVE 5ad52416 + harness 795f87ec) | review/flight2-s20 | session_01UV1SzmJHZJCos5yepcVo5k (s20 #2, Foreman F ROOT7 c6) | RUNNING | 28/11 06:33Z
 D-GIFTIN-LIKE (d19 rv note: NPC→player PEND.giftin pre-adds giver liking before her answer; law 1 mirror + law 11 scan) | review/d-giftin-like | FOREMAN D ROOT session_01964izEUYzmixcs6Yg5ZXsE / worker (opening) | RUNNING | 28/11 07:12Z
 D-MAID-ROAD (MAIN 181 22:45Z ORDER: bottom maid «no road up» COVERED/GAP on rank-pace-rv2) | review/d-maid-road | FOREMAN D ROOT session_01964izEUYzmixcs6Yg5ZXsE / worker (opening) | RUNNING | 28/11 07:12Z
+E-GAIN4B (opus) fix 3 FAIL items of review/e-gain4 from review/e-gain4-rv-m cb84eec4 → review/e-gain4b | briefs/E-GAIN4B.md | session_01DgYSWkaniqei11DuQ25PBJ (Foreman E C9) | RUNNING | 28/11 07:06Z
