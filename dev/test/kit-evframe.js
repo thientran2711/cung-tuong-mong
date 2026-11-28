@@ -2,7 +2,7 @@
    WITH a choice: speaker LEFT full body (not clipped), her figure RIGHT, smaller and WHOLE (r2: never cropped), story box RIGHT-top, choice box BELOW over the left figure (x left of the story box), tail on the right.
    WITHOUT a choice (two other people talking): BOTH full body, one each side (never clipped), ONE box between, top. No page errors.
    usage: node dev/test/kit-evframe.js <outdir> [WxH,...]   shots: <outdir>/kef-<case>-<dev>.png */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const [,,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');const [,,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const ROOT=path.resolve(__dirname,'../..');const MT={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml'};
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m)=>{if(!c){bad++;console.log('FAIL',m)}else console.log('ok',m)};
  for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);const dev=W<1000?'fold':'ipad';

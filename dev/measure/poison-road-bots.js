@@ -4,7 +4,7 @@
    hate / harsh / vg — a scheming player: the road's gate is held open (hate: Sủng/Ân tình low · harsh: strict Thái hậu who dislikes her ·
      vg: tình ý with the Vương gia), she gets one poison + one dish a year (as if bought) and tries as soon as she holds them. Per life: tries, hits,
      caught, exposed later, the ending. Counters come from the game itself (S.pq.n). */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const R=path.resolve(__dirname,'../..');const LIVES=+process.argv[2]||60,YEARS=+process.argv[3]||8,OUT=process.argv[4];const CH=+process.env.CHUNK||10;
 (async()=>{const b=await chromium.launch({args:['--js-flags=--max-old-space-size=900','--disable-gpu']});const ctx=await b.newContext({viewport:{width:1000,height:755},reducedMotion:'reduce'});
  await ctx.route(/^https?:\/\/(?!ts\.local)/,r=>/image|media|font/.test(r.request().resourceType())?r.abort():r.continue());

@@ -2,7 +2,7 @@
    usage: node dev/test/ts-a.js <baseURL> <W>x<H>@dpr <outdir> <tag> [smoke]
    Needs a static server on the repo root (python3 -m http.server). reducedMotion on (machine is slow).
    Prints JSON: per step {k, overflowX, cut (text cut by its box), errs}. */
-const {chromium}=require('playwright');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const [,,BASE,SZ,OUT,TAG,MODE]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const fs=require('fs');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',hasTouch:true,isMobile:W<1100});

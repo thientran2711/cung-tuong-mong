@@ -6,7 +6,7 @@
        (old save) opens the ONE kit confirm (kitConfirm «Bỏ ngang kiếp này?»), «Thôi» keeps the life.
    (4) every visible «!» carries a name (aria-label or title on it or its button).
    usage: node dev/test/ob-m3ui.js <index.html> <old-save.json> [shotdir]   env SZ=[[W,H],..] VIDEO=dir   Exit 1 on a FAIL. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,SAVE,OUT]=process.argv;
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,SAVE,OUT]=process.argv;
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const br=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const R=[];
  const save=SAVE?JSON.parse(fs.readFileSync(SAVE,'utf8')):null;

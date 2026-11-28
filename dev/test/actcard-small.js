@@ -1,6 +1,6 @@
 /* review/actcard-small: small act card = 3:4 portrait picture; tap picture -> kitActZoom; "!" on cards without odds; equal heights per grid row in Tài nghệ.
    usage: node dev/test/actcard-small.js <url> <outdir> [WxH@dpr,...] */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 /* sandbox: Chromium cannot reach the CDN directly; CTM_CURL_CDN=1 fetches CDN files with curl (proxy + CA configured) so real pictures show */
 const {execFileSync}=require('child_process');const cdnCache={};

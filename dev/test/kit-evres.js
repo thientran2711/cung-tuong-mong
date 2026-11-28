@@ -1,6 +1,6 @@
 /* kit-evres.js (KK54; RV-166 note on kit-k44-parts KIT §7.4): the result card WITH a picture (#rtoast.kevres) sizes to its content — no gap row, picture beside the text, card inside the screen and not over the HUD rows. Fold 755x1000 + iPad 1180x820 (+ any WxH list); still of each to <shotdir>.
    usage: node dev/test/kit-evres.js <index.html> [WxH,...] [shotdir]   exit 1 on FAIL */
-const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');const SHOT=process.argv[4]||'';
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');const SHOT=process.argv[4]||'';
 (async()=>{const b=await chromium.launch();let fails=0;const chk=(n,ok,v)=>{console.log((ok?'ok  ':'FAIL')+' '+n+' '+JSON.stringify(v));if(!ok)fails++};
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const p=await b.newPage({viewport:{width:W,height:H},deviceScaleFactor:+process.env.DSF||1});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,140)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
   await p.goto('file://'+SRC,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof resultShow==='function',null,{timeout:240000});await p.waitForTimeout(1200);

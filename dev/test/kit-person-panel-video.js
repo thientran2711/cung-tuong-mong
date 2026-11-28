@@ -1,6 +1,6 @@
 /* KIT §6.4b person INFO panel — short video per device: open Hậu cung → Phi tần → tap a person → Thông tin → Giao tình → tap «Tìm gặp» (result / walk) → back → tap «Ghé cung» (walk to her palace on Dư đồ).
    usage: node dev/test/kit-person-panel-video.js <url> <W>x<H> <outdir> <tag>   → <outdir>/<tag>.webm (convert with ffmpeg) */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,recordVideo:{dir:OUT+'/raw-'+TAG,size:{width:W,height:H}}});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300);window.kitRoulette=function(){}});

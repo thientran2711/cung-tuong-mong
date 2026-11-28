@@ -1,6 +1,6 @@
 /* map-wait (KIT §85.11, MAIN 149 26/11): on a slow picture the Dư đồ shows the kit wait cue and NO tag / mark / board boxes until the painting + mark loaded;
    then every tag shows. Map pictures are delayed by DELAY ms (default 3000). usage: node dev/test/map-wait.js <url> <shotdir|-> [WxH,..] ; exit 1 on failure */
-const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';
 const [,,URL_,DIR,SIZES]=process.argv;const DELAY=+(process.env.DELAY||3000);const sl=t=>new Promise(r=>setTimeout(r,t));if(DIR&&DIR!=='-')fs.mkdirSync(DIR,{recursive:true});
 (async()=>{const b=await chromium.launch();let fail=0;
 for(const sz of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=sz.split('x').map(Number);

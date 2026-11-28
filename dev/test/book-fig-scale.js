@@ -2,7 +2,7 @@
    usage: node dev/test/book-fig-scale.js <page.html | url> <outdir>   (env SZ=[[W,H],..]  SHOTS=1)
    Cases: Tuần lục person page with (a) Thái hậu (wide), (b) a normal consort, (c) the unknown silhouette (f), kitBookPic with 1 real + 2 silhouettes.
    Prints per case: figure box h, body px (head top..feet), foot gap to the column floor, aspect error. Exit 1 when body heights of one viewport differ > 3 % (same fac) or aspect off > 1 %. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1000,755],[1180,820],[1366,1024],[844,390]];const isFile=!/^https?:/.test(SRC);
 const CASES0=[['thaihau','fig-thaihau-h1-a51.webp'],['consort','fig-consort-c01-t1-a18.webp'],['silF','SIL:f']];
 const CASES=process.env.CASES?CASES0.filter(c=>process.env.CASES.split(',').includes(c[0])):CASES0;

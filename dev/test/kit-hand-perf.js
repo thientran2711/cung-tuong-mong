@@ -2,7 +2,7 @@
    a card LIFTS and the chosen card FLIES, on the real «Tân quân lập uy · Chương 2» frame, Fold 755x1000 + iPad 1180x820, CPU 1x and 4x (CDP throttle, a weaker phone).
    Long frame = delta > 50 ms (3 missed frames). PASS when no long frame in the animation windows at 1x and at most 1 at 4x.
    usage: node dev/test/kit-hand-perf.js <index.html> */
-const {chromium}=require('playwright');let KIT_FLY=300;const KH={dealMs:420,dealStep:70,flyMs:260};/* the fly (KIT_HAND.flyMs 260) — the game's own result / board render after the choice is not the hand's animation */const fs=require('fs');const [,,SRC]=process.argv;const SZ=[[755,1000],[1180,820]];
+const {chromium}=(require('./lib/bigpage'),require('playwright'));let KIT_FLY=300;const KH={dealMs:420,dealStep:70,flyMs:260};/* the fly (KIT_HAND.flyMs 260) — the game's own result / board render after the choice is not the hand's animation */const fs=require('fs');const [,,SRC]=process.argv;const SZ=[[755,1000],[1180,820]];
 (async()=>{const b=await chromium.launch();const html=fs.readFileSync(SRC);let fails=0;
  for(const [W,H] of SZ)for(const cpu of [1,4]){const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot=1});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));const p=await ctx.newPage();await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});

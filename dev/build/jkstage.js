@@ -250,3 +250,7 @@ try{window.KIT_STAGE=KIT_STAGE;window.kstgOn=kstgOn;window.kstgPlace=kstgPlace;w
   pend={u,prev};lay();
   const done=()=>{if(!pend||pend.u!==u)return;pend=null;if(url(im.style.backgroundImage)===u)im.style.backgroundImage=`url("${u}")`};
   (I.decode?I.decode():Promise.reject()).then(done,()=>{if(I.complete)done();else{I.onload=done;I.onerror=done}})}).observe(im,{attributes:true,attributeFilter:["style"]})}catch(e){console.error("kstgScimgKeep",e)}})();
+
+/* KIT §95.4 K-SRV-OWNFIG (KK63, RV-177 FAIL-1 nhv-areas): figFor maps a servant-shaped Emperor / Thái y to the real person (kitFigWho, j28) before any
+   implementation sees it — a late wrapper because j39 / j88 replace figFor's whole body after j28. */
+(function(){if(typeof figFor!=="function"||typeof kitFigWho!=="function")return;const f0=figFor;figFor=function(p,kind){try{const q=kitFigWho(p);if(q!==p){p=q&&typeof S!=="undefined"&&S&&q===S.emp?{kind:"emp"}:q}}catch(e){}return f0.call(this,p,kind)};window.figFor=figFor})();

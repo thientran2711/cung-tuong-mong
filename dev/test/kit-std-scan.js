@@ -4,7 +4,7 @@
    usage: node dev/test/kit-std-scan.js <index.html> [outdir]      env: REPORT_ONLY=1 (always exit 0; prints the count), ONLY=hand,pick,tabs,result,notice,person, SZ='[[755,1000]]', RULES=X01,X03 (only these), SUBS=0 (gate mode: no sub-tab sweep, ~half the time)
    prints one line per finding:  FAIL <dev> <scene> <Xnn> <what>   and a table «rule | count» + «KIT-STD-SCAN FAIL n / PASS».  Exit 1 on any FAIL unless REPORT_ONLY.
    A finding is per element (selector + text excerpt) so KK54 / RV-166 can fix the part, not the screen. Shots (outdir) never go in git. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
 const SRC=path.resolve(process.argv[2]||'index.html'),OUT=process.argv[3]||'';
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];

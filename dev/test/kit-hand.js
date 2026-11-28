@@ -8,7 +8,7 @@
    - a LOCKED card: real tap lifts it, the plate shows its why, a second tap chooses nothing;
    - keyboard Enter on a focused card chooses at once (robot / keyboard path unchanged).
    usage: node dev/test/kit-hand.js <index.html> [outdir]   Exit 1 on a FAIL. Shots (outdir) never go in git. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);let fails=0;const log=s=>console.log(s);
  if(OUT)fs.mkdirSync(OUT,{recursive:true});
  for(const [W,H] of SZ){const dev=W<H?'fold':'ipad';const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1});

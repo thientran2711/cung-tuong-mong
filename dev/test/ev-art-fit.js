@@ -5,7 +5,7 @@
    (window.__evFitWhy from jevfit.js: own / fit:<rule> / kbk / placeholder).
    usage: node dev/test/ev-art-fit.js <build url> <out.json> [botSteps=8] [seeds=3]
    FAIL (exit 1) when a dialog shows the visitor picture (khach-den) while its fit rule is not a visit, or shows a placeholder. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,URL,OUT,ST,SD,PH]=process.argv;const N=+ST||8,SEEDS=+SD||3,PHASE=PH||'all';
 const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
 const LOCALEV=process.env.EVJSON?fs.readFileSync(process.env.EVJSON):null;/* EVJSON=img/EVENTS.json: test a manifest before it is on the CDN */

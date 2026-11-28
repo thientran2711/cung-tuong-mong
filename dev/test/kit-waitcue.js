@@ -1,6 +1,6 @@
 /* kit-waitcue.js — KK29 item 5: the visitor-face wait of jdfv reads its limit from BAL (BAL.df.faceWaitMs, no typed 4000) and shows the kit wait cue (kitWaitCue, .kwcue) — never a silent frozen screen.
    usage: node dev/test/kit-waitcue.js <index.html> <dev/build/jdfv.js>   Exit 1 on a FAIL. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,JD]=process.argv;
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,JD]=process.argv;
 (async()=>{const R=[];const src=fs.readFileSync(JD,'utf8');R.push(['no typed 4000 in jdfv',!/>\s*4000\b/.test(src)]);R.push(['jdfv reads BAL.df.faceWaitMs',/BAL\.df\.faceWaitMs/.test(src)]);R.push(['jdfv calls kitWaitCue',/kitWaitCue\(\)/.test(src)]);
  const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);
  for(const [W,H] of [[755,1000],[1180,820]]){const ctx=await b.newContext({viewport:{width:W,height:H},serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));

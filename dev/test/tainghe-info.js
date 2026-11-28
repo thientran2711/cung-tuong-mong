@@ -8,7 +8,7 @@
       every kit row (.kr) — label/value do not intersect
    T5 real tap on the popup ✕ closes it, the tab is still Tài nghệ
    usage: node dev/test/tainghe-info.js [index.html|URL] [outdir] [WxH,...]  (VIDEO=1 records a .webm per device into outdir) */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const cp=require('child_process');const cdn={};const RT=require('./realtap.js');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');const cp=require('child_process');const cdn={};const RT=require('./realtap.js');
 const A=process.argv.slice(2);const URL0=A[0]||path.resolve(__dirname,'../../index.html');const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const OUT=A[1]||'/tmp/tainghe-info';fs.mkdirSync(OUT,{recursive:true});const SIZES=(A[2]||'755x1000,1180x820').split(',');
 const SETUP=()=>{try{window.__kbootHostDrop&&window.__kbootHostDrop()}catch(e){}document.querySelectorAll('#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov').forEach(e=>e.remove());

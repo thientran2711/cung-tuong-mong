@@ -5,7 +5,7 @@
      STOLE  = something else answered (kit popup #kpop, an emotion tip, a picture viewer, a ladder) and the card did nothing
      DEAD   = nothing happened.  Also CUT = the card is not fully visible inside the dialog (needs a scroll) at open.
    usage: node dev/test/opt-centre-tap.js <index.html> [WxH,...]   env ONLY=regex (frame ids) MAXF=n (frames, default all)   exit 1 on STOLE/DEAD */
-const {chromium}=require('playwright');const path=require('path');const A=process.argv.slice(2);const SRC=path.resolve(A[0]);const SIZES=(A[1]||'755x1000,1180x820').split(',');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const A=process.argv.slice(2);const SRC=path.resolve(A[0]);const SIZES=(A[1]||'755x1000,1180x820').split(',');
 (async()=>{const b=await chromium.launch();const rows=[];let bad=0;const tot={};
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const dev=W<H?'fold':'ipad';
   const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});

@@ -9,7 +9,7 @@
    Scenes: (A) two REAL option dialogs (Q + showModal), 4 options each, every odds word Liều … Nắm chắc, long and short titles, option column auto/560/460/380/320/280 px;
            (B) Hành sự act tab, pop-maid person card, tab staff, tab rv.
    usage: [REP=5] [DEVS=412x1058,390x844] node dev/test/kit-opt-title-wrap.js <url> <outdir>   (writes <outdir>/<W>-opt.png, <W>-opt320.png) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 const CHECK=`(root=>{const o={n:0,bad:[],minRoom:1e9,maxLines:0};const cv=document.createElement('canvas').getContext('2d');
  root.querySelectorAll('button.ka').forEach(b=>{const kat=b.querySelector('.kat');if(!kat)return;const od=kat.querySelector(':scope>.kodds');const kan=kat.querySelector(':scope>.kan');if(!od||!kan||!od.textContent.trim()||!b.getClientRects().length||!b.offsetParent)return;
   const t=kan.textContent.replace(/\\s+/g,' ').trim();if(!t)return;o.n++;const cs=getComputedStyle(kan);const fs=parseFloat(cs.fontSize);cv.font=cs.fontWeight+' '+cs.fontSize+' '+cs.fontFamily;const nat=cv.measureText(t).width;

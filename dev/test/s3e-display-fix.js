@@ -3,7 +3,7 @@
    (b) Dư đồ under cấm túc / lãnh cung: her own state shows ONCE (her spot), not on every place (plan map + list);
    (c) «Thuở thanh mai» «Đến bến sông»: the meter word = the real survival roll (BAL.odb.jkc.rlKcElope), hỏng names the drowning; ok=false drowns, ok=true lives.
    usage: node dev/test/s3e-display-fix.js <index.html> [WxH] [shotdir] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const WT=path.resolve(__dirname,'../..')+'/';const [,,HTML0='dev/index.html',SZ='1180x820',OUT='']=process.argv;const HTML=path.resolve(HTML0);const [W,H]=SZ.split('x').map(Number);
 const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=WT+'.ahcache/img/';fs.mkdirSync(CACHE,{recursive:true});if(OUT)fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY}:undefined});

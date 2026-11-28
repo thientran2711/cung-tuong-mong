@@ -1,7 +1,7 @@
 /* people-tab-scan (owner 25/11 ~23:00Z: person info ONLY in the people tab; action tabs hold only actions): for every tab of the home road (khuê các) and the
    palace, count what of a PERSON is drawn in #panel: kit person cards (.pcard), portrait pager strips (.pgwrap .pager / .kc3pgw). The people tab (home «Gia tộc» rv,
    palace «Hậu cung» rv) may hold them; every other tab must show 0. usage: node dev/test/people-tab-scan.js <url> [WxH] ; exit 1 on a person card in an action tab */
-const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
 const [,,URL_,SZ]=process.argv;const sl=t=>new Promise(r=>setTimeout(r,t));/* action tabs (hold only actions); the person tabs (Phi tần rv, Nam nhân men, Cung nhân staff on the palace road, Hoàng tự kid/kin, Phe phái fac, Kế vị kvo, Hôn sự hon, Quý tộc qt) are not checked */
 const ACTION={home:['act','go','court','rel','staff','inv','art','story'],palace:['act','go','court','rel','inv','art','story']};
 (async()=>{const b=await chromium.launch();const [W,H]=(SZ||'1180x820').split('x').map(Number);let fail=0;
