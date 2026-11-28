@@ -136,18 +136,18 @@ overhear=function(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(he
 
 /* ---------- 4. evidence acts: ordinary two-way acts ---------- */
 function j78buyer(a,t){const L=others(t).filter(x=>x!==a&&(x===S||x.alive&&!x.out)&&(!facOf(t)||facOf(x)!==facOf(t)));if(!L.length)return null;return L.map(x=>[x,hostility(x,t)]).sort((p,q)=>q[1]-p[1])[0][0]}
-function j78pay(t){return Math.min(60,Math.max(0,Math.floor(t===S?S.bac:(t.bac||0))))}
+function j78pay(t){return Math.min(BAL.eff.j78.payCap,Math.max(0,Math.floor(t===S?S.bac:(t.bac||0))))}
 function j78thFav(a){/* two-way: an NPC brings her own Thái hậu regard, as the player does */return a===S?S.th:(a&&a.th)||0}
 A("trinhth","Trình Thái hậu",{c:{duc:BAL.eff.j78.ducTrinhth},ok:(a,t)=>evG(a,t)>=1&&!S.thDead&&rkOf(t)<7,o:(a,t)=>odA(a,40+evG(a,t)*10+j78thFav(a)/5),
  f:(a,t)=>{ap(a,{duc:BAL.eff.j78.ducTrinhth});const o=odA(a,40+evG(a,t)*10+j78thFav(a)/5);/* the card's odds, read before the evidence is spent */evA(a,t,BAL.eff.j78.evF);if(aRoll(o,a)){ap(t,{sung:BAL.eff.j78.sungF});affAdd(t,a,BAL.eff.j78.f);if(a===S)apply({th:BAL.eff.j78.trinhth});return `${j78Who(a)} trình chứng cứ lên Thái hậu: ${j78who(t)} bị quở trách (${sgOf(t,BAL.eff.j78.sungF)}). `}
   if(a===S)apply({th:BAL.eff.j78.trinhth_2});return `Thái hậu gạt chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}});
 A("trinhhh","Trình Hoàng hậu",{c:{},ok:(a,t)=>{const q=queenP();return chOK(a,t)&&q&&q!==a&&q!==t},o:(a,t)=>{const q=queenP();return q?oddsCl(chTrinhO(a,t,q)):5},
  f:(a,t)=>{const q=queenP();const o=oddsCl(chTrinhO(a,t,q));evA(a,t,BAL.eff.j78.evF_2);if(aRoll(o,a)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.j78.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.j78.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}});
-A("uyhiep","Uy hiếp đòi bạc",{c:{},ok:(a,t)=>evG(a,t)>=1&&j78pay(t)>=10,o:(a,t)=>odA(a,45+evG(a,t)*8-witOf(t)/5),
+A("uyhiep","Uy hiếp đòi bạc",{c:{},ok:(a,t)=>evG(a,t)>=1&&j78pay(t)>=BAL.eff.j78.uyhiepMin,o:(a,t)=>odA(a,45+evG(a,t)*8-witOf(t)/5),
  f:(a,t)=>{const o=odA(a,45+evG(a,t)*8-witOf(t)/5);const g=j78pay(t);if(aRoll(o,a)){evA(a,t,BAL.eff.j78.evF_3);ap(t,{bac:-g});ap(a,{bac:g});oanAdd(t,a,BAL.eff.j78.f_4);return `${j78Who(t)} sợ chuyện lộ, đưa ${j78who(a)} ${g} lượng bạc để chuộc lại ${balWord(balAb(BAL.eff.j78.evF_3))} chứng cứ. `}
   oanAdd(t,a,BAL.eff.j78.f_5);ap(a,{danh:BAL.eff.j78.danhUyhiep});return `${j78Who(t)} không chịu đưa bạc cho ${j78who(a)}, còn rêu rao bị uy hiếp. `}});
 A("banphe","Bán cho phe khác",{c:{},ok:(a,t)=>evG(a,t)>=1&&!!j78buyer(a,t),o:null,
- f:(a,t)=>{const b=j78buyer(a,t);const n=evG(a,t);if(!b)return"";evA(a,t,BAL.evWipe);evA(b,t,n);ap(a,{bac:15*n});relAdd(a,b,BAL.eff.j78.f_6);oanAdd(t,a,BAL.eff.j78.f_7);return `${j78Who(a)} bán ${n} chứng cứ về ${j78who(t)} cho ${j78who(b)} lấy ${15*n} lượng bạc. `}});
+ f:(a,t)=>{const b=j78buyer(a,t);const n=evG(a,t);if(!b)return"";evA(a,t,BAL.evWipe);evA(b,t,n);ap(a,{bac:BAL.eff.j78.bacBanphe*n});relAdd(a,b,BAL.eff.j78.f_6);oanAdd(t,a,BAL.eff.j78.f_7);return `${j78Who(a)} bán ${n} chứng cứ về ${j78who(t)} cho ${j78who(b)} lấy ${BAL.eff.j78.bacBanphe*n} lượng bạc. `}});
 /* «Trả chứng cứ lấy lòng»: her regard / grudge change for n returned pieces (BAL.eff.j78.tieuhuy: per piece, capped) — rule and card */
 function j78thAff(n){const T=BAL.eff.j78.tieuhuy;return Math.min(T.cap,T.aff*n)}
 function j78thOan(n){const T=BAL.eff.j78.tieuhuy;return Math.min(T.cap,T.oan*n)}
@@ -160,9 +160,9 @@ Object.assign(ACTDOM,{trinhth:"Danh",trinhhh:"Danh",uyhiep:"Mưu kế",banphe:"M
 /* the act card lines read the target being shown (true numbers per target) */
 function j78out(k,a,t){const n=evG(a,t);const q=queenP();const m=punishMonths();const W=t?j78who(t):"nàng";
  if(k==="trinhth")return[`${W} ${sgOf(t,BAL.eff.j78.sungF)} · Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth)}`,`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth_2)}`];
- if(k==="trinhhh"){const c=t&&chReady(a,t);return[c?`${W} ${chPunTxt(t,c)}`:`${W} chịu phạt theo tội`,`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`]}
+ if(k==="trinhhh"){const c=t&&chReady(a,t);return[`<span class="g">${c?`${W} ${chPunTxt(t,c)}`:`${W} chịu phạt theo tội`}</span>`/* E-GAIN3b law 3: the punishment is her gain (explicit green, kit KP12) */,`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`]}
  if(k==="uyhiep")return[`Bạc +${t?j78pay(t):0} · kèm: ${pvOan(t,BAL.eff.j78.f_4,`${W} oán ngươi`)}`,`Danh ${balSg(BAL.eff.j78.danhUyhiep)} · ${pvOan(t,BAL.eff.j78.f_5,`${W} oán ngươi`)}`];
- if(k==="banphe"){const b=t&&j78buyer(a,t);return[`Bạc +${15*n} · ${b?j78who(b):"người mua"} ${pvQuy(b||null,BAL.eff.j78.f_6,"thiện cảm")} · ${b?j78who(b):"người mua"} nắm ${n>0?n+" ":""}chứng cứ về ${W} · kèm: ${pvOan(t,BAL.eff.j78.f_7,`${W} oán ngươi`)}`,""]}
+ if(k==="banphe"){const b=t&&j78buyer(a,t);return[`Bạc +${BAL.eff.j78.bacBanphe*n} · ${b?j78who(b):"người mua"} ${pvQuy(b||null,BAL.eff.j78.f_6,"thiện cảm")} · ${b?j78who(b):"người mua"} nắm ${n>0?n+" ":""}chứng cứ về ${W} · kèm: ${pvOan(t,BAL.eff.j78.f_7,`${W} oán ngươi`)}`,""]}
  if(k==="tieuhuy")return[`${W} ${pvQuy(t,j78thAff(n),"quý ngươi")} · ${W} oán ngươi -${j78thOan(n)} · Đức ${balSg(BAL.eff.j78.ducTieuhuy)}`,""];
  return null}
 ["trinhth","trinhhh","uyhiep","banphe","tieuhuy"].forEach(k=>{try{Object.defineProperty(AOUT,k,{configurable:true,enumerable:true,get(){const t=J78.cardV;const o=j78out(k,S,t);return o}})}catch(e){}});
@@ -195,7 +195,7 @@ function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=riva
  add("trinhth",ok=>({odds:odds("trinhth"),why:busy()||(n<1?nf(1):S.thDead?"Thái hậu đã băng hà":rkOf(p)>=7?"Thái hậu không xét tội Hoàng hậu":""),cost:[`${hkK("trinhth")} khắc`,`Đức ${balSg(BAL.eff.j78.ducTrinhth)}`,`Chứng cứ ${balSg(BAL.eff.j78.evF)}`],gain:[`${W} ${sgOf(p,BAL.eff.j78.sungF)}`,`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth)}`],fail:[`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth_2)}`],risk:[`${W} quý ngươi ${balSg(BAL.eff.j78.f)}`]}));
  add("trinhhh",ok=>{const q=queenP();return{odds:q&&q!==S&&q!==p?odds("trinhhh"):"",why:busy()||(!q?"chưa có Hoàng hậu":q===S?"ngươi là Hoàng hậu: dùng Xử tội":q===p?"không trình Hoàng hậu tội của chính nàng":!chOK(S,p)?chNeedTxt(S,p):""),cost:[`${hkK("trinhhh")} khắc`,chUseTxt("trinhhh",S,p)||"chứng cứ của tội ấy"],gain:[chWinTxt("trinhhh",S,p,W)||`${W} chịu phạt theo tội`],fail:[`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`],risk:[`${W} quý ngươi ${balSg(BAL.eff.j78.f_2)}`]}});
  add("uyhiep",ok=>{const g=j78pay(p);return{odds:odds("uyhiep"),why:busy()||(n<1?nf(1):g<10?"nàng không còn đủ 10 lượng":""),cost:[`${hkK("uyhiep")} khắc`,`Chứng cứ ${balSg(BAL.eff.j78.evF_3)} (trả lại khi nàng chịu chi)`],gain:[`Bạc +${g}`],fail:[`Danh ${balSg(BAL.eff.j78.danhUyhiep)}`,`${pvOan(p,BAL.eff.j78.f_5,`${W} oán ngươi`)}`],risk:[`${pvOan(p,BAL.eff.j78.f_4,`${W} oán ngươi`)}`].concat(together(S,p)?[]:[/* previews: runAct (sent servant confesses) */`sai người đi: kẻ đi bị bắt, khai ra ngươi (${W} nắm ${balAb(BAL.eff.j9.evN)} chứng cứ): ${chanceW(confessRisk(bestSent(S)))}`])}});
- add("banphe",ok=>{const b=j78buyer(S,p);return{why:busy()||(n<1?nf(1):!b?"không ai đủ ghét nàng để mua":""),cost:[`${hkK("banphe")} khắc`,`Chứng cứ -${n} (dùng hết)`],gain:[`Bạc +${15*n}`].concat(b?[`${j78who(b)} ${pvQuy(b,BAL.eff.j78.f_6,"thiện cảm")}`,`${j78who(b)} nắm ${n} chứng cứ về ${W}`]:[]),risk:[`${pvOan(p,BAL.eff.j78.f_7,`${W} oán ngươi`)}`],buyer:b?j78Ref(b):null}});
+ add("banphe",ok=>{const b=j78buyer(S,p);return{why:busy()||(n<1?nf(1):!b?"không ai đủ ghét nàng để mua":""),cost:[`${hkK("banphe")} khắc`,`Chứng cứ -${n} (dùng hết)`],gain:[`Bạc +${BAL.eff.j78.bacBanphe*n}`].concat(b?[`${j78who(b)} ${pvQuy(b,BAL.eff.j78.f_6,"thiện cảm")}`,`${j78who(b)} nắm ${n} chứng cứ về ${W}`]:[]),risk:[`${pvOan(p,BAL.eff.j78.f_7,`${W} oán ngươi`)}`],buyer:b?j78Ref(b):null}});
  add("tieuhuy",ok=>({why:busy()||(n<1?nf(1):""),cost:[`${hkK("tieuhuy")} khắc`,`Chứng cứ -${n} (dùng hết)`],gain:[`${W} ${pvQuy(p,j78thAff(n),"quý ngươi")}`,`${W} oán ngươi -${j78thOan(n)}`,`Đức ${balSg(BAL.eff.j78.ducTieuhuy)}`]}));
  if(S.rank>=7)R0.push({k:"judge",n:"Xử tội",odds:"",why:busy()||(!chOK(S,p)?chNeedTxt(S,p):""),cost:[`${BAL.btn.empAct.k} khắc`,chUseTxt("judge",S,p)||"chứng cứ của tội ấy"],gain:[chWinTxt("judge",S,p,W)||`${W} chịu phạt theo tội`],fail:[],risk:[`${W} quý ngươi ${balSg(BAL.eff.j8.judge)}`,`${pvOan(p,Math.abs(BAL.eff.j8.judge)*BAL.relOan.hurt,`${W} oán ngươi`)}`],go:()=>evidenceDo(p.id,"judge")});
  /* one kit price line per act, ready for pbtn/kitParse */
@@ -208,3 +208,11 @@ function evidenceDo(id,k){const v=RV(id);if(!v||!S||S.dead)return;if(Q.length&&Q
  if(k==="kt"){S.ktPick=v.id;if(S.place==="tn"){render();return}goTo("tn");return}
  if(k==="judge"){empAct(i,"judge");return}doAct(i,k)}
 function evidenceHeldOnMe(){return liveRivals(true).filter(v=>(v.evm&&v.evm.me)>0).map(v=>({who:j78Ref(v),count:v.evm.me}))}
+/* E-GAIN3c (C), law 3/11: the REAL reason a disabled evidence act shows (rvGroups j15 took its `x` «cần chứng cứ» when LACK had no entry, also when
+   evidence was not what she lacked). Each text reads the act's own ok() code above, condition by condition ("" = met). */
+if(typeof LACK==="object"){const noEv=t=>evG(S,t)>=1?"":"chưa có chứng cứ nào về nàng";Object.assign(LACK,{
+ trinhth:t=>noEv(t)||(S.thDead?"Thái hậu đã băng hà":"")||(rkOf(t)>=7?"nàng ở ngôi Hoàng hậu, không trình Thái hậu được":""),
+ trinhhh:t=>{const q=queenP();if(!q)return"trong cung chưa có Hoàng hậu";if(q===S)return"ngươi là Hoàng hậu: dùng «Xử tội»";if(q===t)return"nàng chính là Hoàng hậu";return chOK(S,t)?"":chNeedTxt(S,t)},
+ uyhiep:t=>noEv(t)||(j78pay(t)>=BAL.eff.j78.uyhiepMin?"":"nàng không đủ bạc để nộp"),
+ banphe:t=>noEv(t)||(j78buyer(S,t)?"":"không phe nào muốn mua chứng cứ về nàng"),
+ tieuhuy:t=>noEv(t)})}

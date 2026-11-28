@@ -1664,7 +1664,7 @@ BAL.memWake={min:20,ann:30,cap:4,cd:6,s:{k:.6,min:18,max:60},dur:{base:4,k:.12,l
    fear = lòng her SENT servant (bestSent) loses when an approach fails (×timid for a timid one); 17:00Z "lòng của cung nữ đó còn trừ". */
 /* 2f3 balance: one real Tai mắt = w points of the old 0–10 eyes stat in every formula / gate that reads it (j1 eyes); cap = the old cap */
 BAL.ag.eye={w:3,cap:10};
-BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTimid:1.5,tamcoMid:50,tamcoDiv:5,
+BAL.ag.bt={dread:{w:8,d:15}/* E-GAIN3c law 3 (BIG): «Phạt vô cớ» = răn đe — for w weeks every servant of that master (her or an NPC, law 1) fears the master: −d on the tm / sell odds core (btTerms «sợ chủ»), so another palace finds them hard to buy; the punished one still bears the grudge (svSell) */,off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTimid:1.5,tamcoMid:50,tamcoDiv:5,
  tm:{base:{tham:55,lanh:35,chuyen:30,nhat:15,trung:5,_:30},tr:{"Thanh liêm":-15},loy:[[25,10],[50,0],[70,-10],[85,-25],[101,-45]],v:{"Trung":-10,"Nghĩa":-5,"Liêm":-10}},
  /* sell base (review ag-all-2 r2 C6, OD 17/11 ~17:00Z (3)): only the greedy (tham) offer on their own; any other nết stays ≤ 0 with the low-lòng band and an angry mood
     (−15 + 10 + 5), so a non-greedy servant offers only once her master offended a chữ she holds (off, 17:20Z (2)) */

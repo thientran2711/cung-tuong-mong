@@ -213,7 +213,7 @@ A("thaopet","Hại thú nuôi của nàng",{c:{bac:-BAL.actBac.thaopet},ok:(a,t)
  f:(a,t)=>{const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return actNone(a);/* fix-kframe-heir: no pet left → no cost */ap(a,{bac:-BAL.actBac.thaopet});const T=petT(P);const c=caught(a,t,false,`sai người hại ${T.n.replace(/^./,c=>c.toLowerCase())} của ${NM(t)}`);if(c)return c;const o=petHarmO(a,t);
   if(!aRoll(o,a)){const e=roll(40);if(e)/*evok: pet harm act (runAct deed)*/evA(t,a,BAL.eff.jpet.evF);return `Kẻ lạ lảng vảng bên chuồng thú của ${NM(t)} bị kẻ hầu chặn lại${e?`; hắn khai là người của ${NM(a)} (chứng cứ ${balSg(BAL.eff.jpet.evF)})`:""}. `}
   const fly=/hoami|sao|vet|uyenuong|camke|phuong|thanhlong|bachloc|kylan|cuuvi|hac|thienma/.test(P.t);const n=petLose(t,j,fly?"bị thả đi (chưa rõ ai làm)":"bị hại (chưa rõ ai làm)");
-  if(T.tr>=3&&roll(25)){/* a rare animal the court knows: the loss is noticed */if(t===S)apply({danh:-1})}
+  if(T.tr>=3&&roll(BAL.rl.jpet.rareP)){/* a rare animal the court knows: the loss is noticed */if(t===S)apply({danh:BAL.rl.jpet.danhRare})}
   return `<span class="r">${tsbCap(n)} của ${NM(t)} ${fly?"sổ lồng bay mất, tìm không thấy":"bỗng lăn ra bỏ ăn rồi chết, không rõ vì sao"}.</span> `}});
 AOUT.thaopet=["nàng mất con thú quý nhất",`kẻ hầu bắt gặp: nàng có thể nắm ${balAb(BAL.eff.jpet.evF)} chứng cứ`];
 try{ACTDOM.thaopet="Mưu kế"}catch(e){}
