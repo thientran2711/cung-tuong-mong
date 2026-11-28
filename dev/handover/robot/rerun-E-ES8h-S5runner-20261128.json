@@ -4,6 +4,82 @@
  "road": "bd_san",
  "lives": [
   {
+   "life": "ES8-bd_san-R7-lover1-h",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 4258461793,
+   "ending": "Hồng nhan bạc mệnh",
+   "type": "death",
+   "fate": "Sốt rét nguy kịch, không qua khỏi",
+   "age": 27,
+   "year": 9,
+   "rank": 0,
+   "buoi": 1418,
+   "harness": "f65d019b",
+   "builds": [
+    {
+     "s": "5fb13d60+",
+     "b": "8af7b3429f38",
+     "where": "start"
+    },
+    {
+     "s": "9483e103+",
+     "b": "2bf58283d119",
+     "where": "unstick reload"
+    }
+   ],
+   "bugs": [
+    {
+     "type": "game",
+     "n": 14,
+     "msg": "SAVE STALE: the stored save stopped following the live game (no setItem error seen)"
+    },
+    {
+     "type": "game",
+     "n": 4,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Nghe đồn)"
+    },
+    {
+     "type": "game",
+     "n": 2,
+     "msg": "SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Việc của kẻ hầu)"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Một ánh mắt)"
+    },
+    {
+     "type": "game",
+     "n": 5,
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Có người đến)"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on .dlg «»"
+    },
+    {
+     "type": "stuck",
+     "n": 1,
+     "msg": "no-clock loop: 150 taps without a clock step on page «Khải Tường cung · Nhã Vận hiên · Ở đây còn 1 người»"
+    },
+    {
+     "type": "game",
+     "n": 1,
+     "msg": "softlock: «Chờ tin» disabled with no dialog on screen (dialog queue Q=6: Thiên mệnh / Xét phẩm cuối tháng · Thường tại / Tin chờ người sai đi / Lịch tháng / Tin báo / Có người đến)"
+    }
+   ],
+   "flags": [
+    "profile reuse"
+   ]
+  },
+  {
    "life": "ES8-bd_san-R7-scholar3-h",
    "dev": "ipad",
    "bot": "sens",
