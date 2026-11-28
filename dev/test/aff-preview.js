@@ -110,6 +110,18 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
   if(typeof window.eaDo==="function"){const t=liveRivals(true).find(x=>x!==q&&!x.out);if(t){const b0=oan(t,S);let ret="";try{const k0=typeof trKnown==="function"?trKnown:null;if(k0)trKnown=()=>[];try{S.danh=Math.max(S.danh||0,60);const e0=S.emo;S.emo=Object.assign({},e0||{},{t:key(t)})/* her target (jemoact eaTarget reads p.emo.t) */;try{ret=window.eaDo(S,{k:"kexau",n:"Kể xấu"})}finally{S.emo=e0}}finally{if(k0)trKnown=k0}}catch(e){ret="error "+e.message}
    const txt=String(ret&&ret.res?ret.res.join(" · "):typeof ret==="object"?JSON.stringify(ret):ret).replace(/<[^>]+>/g,"");const m=txt.match(/oán ngươi ([+-−]?\d+)( đến [+-]?\d+)?/);const real=Math.round(oan(t,S)-b0);
    out.push({name:`POST jemoact kexau ${t.name} oán (result line)`,preview:m?+m[1].replace("−","-"):null,real,sg:m?m[0]:txt.slice(0,120),ok:!!m&&!m[2]&&+m[1].replace("−","-")===real,sideOk:true,inRange:true})}}
+  // PVQUY-POST-3 item E (MAIN 189): result lines on RAW writes (servant / court thiện cảm, no pace) print the applied number — near the clamp the raw constant would lie
+  {const eRow=(nm,get,act,re)=>{let b0=null,txt="",real=null;try{b0=get();txt=String(act()||"").replace(/<[^>]+>/g,"");real=Math.round(get()-b0)}catch(e){txt="error "+e.message}
+    if(!txt){out.push({name:`POST ${nm}: not reached (info)`,preview:null,real:null,sg:"",ok:true,sideOk:true,inRange:true,info:1});return}
+    const m=txt.match(re);out.push({name:`POST ${nm} (result line)`,preview:m?+m[1].replace("−","-"):null,real,sg:m?m[0]:txt.slice(0,120),ok:!!m&&+m[1].replace("−","-")===real,sideOk:true,inRange:true})};
+   if(!(S.staff||[]).some(x=>x&&!x.spyFor)&&typeof mkServ==="function"){try{const n=mkServ("cung nữ");if(n){S.staff=S.staff||[];S.staff.push(n)}}catch(e){}}/* a fresh life may hold no servant yet: one from the game's own maker (test setup) */
+   const sv=(S.staff||[]).find(x=>x&&!x.spyFor);
+   if(sv&&typeof servDo==="function"){sv.loyal=98;S.bac=Math.max(S.bac||0,500);eRow("j10 servDo thưởng (loyal 98)",()=>+sv.loyal||0,()=>servDo(S,"thuong",sv),/Thưởng [^:]+: thiện cảm ([+-−]?\d+)/);
+    sv.loyal=40;eRow("j10 servDo thưởng (loyal 40)",()=>+sv.loyal||0,()=>servDo(S,"thuong",sv),/Thưởng [^:]+: thiện cảm ([+-−]?\d+)/)}
+   else out.push({name:"POST j10 servDo: no servant (info)",preview:null,real:null,sg:"",ok:true,sideOk:true,inRange:true,info:1});
+   if(typeof courtGive==="function"&&S.court){const k=Object.keys(S.court).find(k=>S.court[k]&&S.court[k].af);if(k){S.bac=Math.max(S.bac||0,500);eRow("j10 courtGive "+k,()=>S.court[k].af.me||0,()=>courtGive(S,k),/quý ngươi ([+-−]?\d+)/)}}
+   if(typeof thcSet==="function"){const c=(S.staff||[]).filter(x=>x&&!x.spyFor);const t=c.find(x=>x!==(typeof thcOf==="function"?thcOf(S):null));if(t){t.loyal=Math.max(+t.loyal||0,95);S.bac=Math.max(S.bac||0,500);
+     eRow("jtc thcSet pick (loyal ≥95)",()=>+t.loyal||0,()=>thcSet(S,t,{paid:1}),/Chọn [^:]+: nàng: thiện cảm ([+-−]?\d+)/)}}}
   // GAP (info, not a fail): the same relAdd card+act with the emotion hook ON — how often the first leg's emotion moves the second leg
   if(EMO0){emoEv=EMO0;let n=0,d=0;const ex=[];for(const v of liveRivals(true).filter(x=>x!==q&&!x.out).slice(0,8)){for(const k of [6,10]){const pv=affPreview(v,S,k);const real=affGot(v,S,()=>relAdd(S,v,k));n++;if(pv!==real){d++;if(ex.length<3)ex.push(`${v.name} +${k}: card ${pv} real ${real}`)}}}
    out.push({name:`GAP (info) relAdd with emotion ON: ${d}/${n} differ${ex.length?" · "+ex.join(" · "):""}`,preview:null,real:null,sg:"",ok:true,sideOk:true,inRange:true,info:1})}
