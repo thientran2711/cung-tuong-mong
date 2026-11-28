@@ -49,7 +49,7 @@ function npcAct(v,t){const b=bandVT(v,t);if(!b)return"";const allow=BANDS.slice(
  if(k==="plant")return runAct(v,t,"plant",v.inv.findIndex(e=>e.t||(IT[e.k]||{}).il));return runAct(v,t,k)}
 /* reactions: Oán from a slight scales with the victim's traits; forgiveness (monthly fade) too; trust gains from her too */
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){if(n>0&&x&&x!==S)n*=persF(x,"slight",1);return o0.call(this,x,y,n)}})();
-(function(){const a0=affAdd;affAdd=function(x,y,n){/* AG-ALL-2 G12 (one rule both ways): her trust trait slows how fast she warms to ANYONE, the player or an NPC */if(n>0&&x&&x!==S&&y&&y!==x)n*=persF(x,"trust",1);return a0.call(this,x,y,Math.round(n))}})();
+(function(){const a0=affAdd;affAdd=function(x,y,n){/* AG-ALL-2 G12 (one rule both ways): her trust trait slows how fast she warms to ANYONE, the player or an NPC */if(n>0&&x&&x!==S&&y&&y!==x)n*=AFF_DRY&&AFF_DRY.trust!=null?AFF_DRY.trust:persF(x,"trust",1);/* AFF_DRY.trust: a preview with her nết not all known tries the lowest / highest trust (jaudit aaMulRange) */return a0.call(this,x,y,Math.round(n))}})();
 /* review/pace-all PART B (owner OD 26/11 ~08:25Z «làm cách nào để giảm bớt oán … Điểm thì nó tăng cao chót vót mà không biết làm cách nào để cho nó giảm»):
    OÁN COOL-DOWN = the ONE fade of every grudge (canon overwrite: it replaces the old flat «BAL.oanFade a month»; oanMonth keeps its monthly hooks).
    Each tuần (rivalsTurn), a grudge nothing new fed for BAL.oanCool.quiet tuần fades by (the width of its oán band, BAL.oanLv) ÷ BAL.oanCool.season

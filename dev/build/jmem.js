@@ -363,9 +363,9 @@ if(typeof talkOpts==="function"){const t0=talkOpts;talkOpts=function(p){const A=
  const sec=hookQuery({k:"secret",by:"me",on:v,mir:false}).find(h=>h.str==="strong");
  if(sec&&!A.some(a=>a&&a.n==="Lấy chuyện riêng ép nàng")){const H=BH();const o=od(H.pressBase+S.tamco/H.tcDiv);
   A.push({n:"Lấy chuyện riêng ép nàng",o,x:`nàng nợ ngươi một ân, ${pvOan(v,H.useOan,"oán ngươi")} · nàng ra tay trước: ${chanceW(H.strikeCh+(sec.uses+1)*H.useStep)} · bí mật bị hủy: ${chanceW(H.lostCh+(sec.uses+1)*H.useStep)}`,
-   run:()=>{if(!roll(o)){relAdd(S,v,-H.failRel);return `${v.name} cười nhạt, không chịu khuất phục. Nàng quý ngươi -${H.failRel}.`}
-    try{const Aq=q72A("rv",v.id);if(Aq)q72DebtAdd(Aq,1)}catch(e){}const u=hookUse(sec.id)||{};memAdd(v,S,"pressed",{quiet:1});
-    return `${v.name} tái mặt, đành nhận lời. Nàng nợ ngươi một ân, ${pvOan(v,H.useOan,"oán ngươi")}.${u.strike?` Nhưng nàng cũng lén nắm lại chứng cứ của ngươi.`:""}${u.lost?" Sau đó nàng tìm cách xóa sạch dấu vết: bí mật không còn dùng được.":""}`}})}}catch(e){console.error("mem talk",e)}return A}}
+   run:()=>{if(!roll(o)){const d=affGot(v,S,()=>relAdd(S,v,-H.failRel));return `${v.name} cười nhạt, không chịu khuất phục. Nàng quý ngươi ${balSg(d)}.`}
+    try{const Aq=q72A("rv",v.id);if(Aq)q72DebtAdd(Aq,1)}catch(e){}let u={};const dO=oanGot(v,S,()=>{u=hookUse(sec.id)||{};memAdd(v,S,"pressed",{quiet:1})})/* PVQUY-POST-2: the real oán (hookUse runs the oanAdd) */;
+    return `${v.name} tái mặt, đành nhận lời. Nàng nợ ngươi một ân, oán ngươi ${balSg(dO)}.${u.strike?` Nhưng nàng cũng lén nắm lại chứng cứ của ngươi.`:""}${u.lost?" Sau đó nàng tìm cách xóa sạch dấu vết: bí mật không còn dùng được.":""}`}})}}catch(e){console.error("mem talk",e)}return A}}
 if(typeof talk==="function"){const k0=talk;talk=function(oi){let p=null,a=null;try{p=curPeople()[popIdx];a=p&&talkOpts(p)[oi]}catch(e){}const s0=S&&S.logSeq||0;const m0=typeof popMsg==="string"?popMsg:"";let Y=null;
  try{if(a&&p&&p.ref&&p.ref!==S){const d=TALK2DEED[a.n];Y=causeWhy(S,p.ref,(d?MEM_DEEDS[d][0]<0:a.n==="Lấy chuyện riêng ép nàng")?-1:1)}}catch(e){}
  const r=sup(()=>k0.apply(this,arguments));

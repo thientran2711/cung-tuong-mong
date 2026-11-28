@@ -67,7 +67,7 @@ PEND.empnight=function(p){p=p||{};const V=B(),d=p0.call(this,Object.assign({o:od
  /* the roads that send him away give up her tablet night too (said on the card) */
  if(mine)for(const o of d.o){if(/^Thắp đèn hầu rượu/.test(o.n||""))continue;o.x=(o.x?o.x+" · ":"")+"kèm: nhường đêm thẻ bài hôm nay";const g0=o.go;o.go=function(){S.tonight=null;return g0?g0.apply(this,arguments):undefined}}
  const a=d.o.find(o=>/^Thắp đèn hầu rượu/.test(o.n||""));
- if(a){a.x=`ngài nghỉ lại cung ngươi đến sáng · thành: đêm thị tẩm, thêm Sủng +${V.sung}, Danh +${V.danh} · kèm: phi tần ghen +${ghenN(V.ghen)}${lost?`, ${lost.name} ghen +${V.lostGhen}, quý ngươi -${V.lostRel}`:""}${q&&q!==S?`, Hoàng hậu quý ngươi -${V.hh}`:""}${T.p?` · kèm: Thái hậu phật ý vì ngài bỏ lệ Kính sự phòng, Thái hậu quý ngươi -${T.loss}: ${chanceW(T.p)}`:""}`;
+ if(a){a.x=`ngài nghỉ lại cung ngươi đến sáng · thành: đêm thị tẩm, thêm Sủng +${V.sung}, Danh +${V.danh} · kèm: phi tần ghen +${ghenN(V.ghen)}${lost?`, ${lost.name} ghen +${V.lostGhen}, quý ngươi ${affSg(lost,S,-V.lostRel)}`:""}${q&&q!==S?`, Hoàng hậu quý ngươi ${balSg(spSee("hh",-V.hh))}`:""}${T.p?` · kèm: Thái hậu phật ý vì ngài bỏ lệ Kính sự phòng, Thái hậu quý ngươi -${T.loss}: ${chanceW(T.p)}`:""}`;
   a.hint=lv=>`ngài nghỉ lại cung ta, được sủng ái và danh tiếng hơn đêm thường; nhưng phi tần ghen${lv>=1?(lost?`, ${lost.name} mất đêm mà oán`:"")+(T.p?", Thái hậu có thể phật ý":""):""}`;a.risk="có rủi ro";
   /* r1: keep the locks other modules put on this road (jcycle: her monthly days) — the cycle test caught them dropped */
   {const lk0=a.lk;a.lk=()=>{const n=ntOther();if(n)return `Đêm nay Hoàng thượng đã ở cung ${n.who==="me"?"ngươi":n.nm}`;return typeof lk0==="function"?lk0():(lk0||"")}}
@@ -85,8 +85,8 @@ PEND.vnight=function(p){const d=PEND.night1({q:(p&&p.q)||B().q,vp:0});if(!d)retu
  if(vis)try{S.visNight=null;visAfter()}catch(e){console.error("visit after",e)}return r}})();
 function visAfter(){const V=B();const L=[sgStat(V.sung),`Danh +${V.danh}`];apply({sung:V.sung,danh:V.danh});ghenAll(V.ghen,"Hoàng thượng ngự giá đến cung ngươi");const P=[`Hậu cung hay tin ngài nghỉ lại cung ngươi: phi tần ghen +${ghenN(V.ghen)}.`];
  const lost=S.visLost!=null?(rivals||[]).find(x=>x&&x.id===S.visLost&&x.alive):null;S.visLost=null;
- if(lost){ghenUp(lost,V.lostGhen,"mất đêm thẻ bài vì Hoàng thượng ngự giá đến cung ngươi",S);relAdd(S,lost,-V.lostRel);P.push(`${lost.name} mất đêm thẻ bài đã lật: ghen +${V.lostGhen}, quý ngươi -${V.lostRel}.`)}
- if(S.visQ){S.visQ=0;apply({hh:-V.hh});P.push(`Hoàng hậu phật ý: quý ngươi -${V.hh}.`)}
+ if(lost){ghenUp(lost,V.lostGhen,"mất đêm thẻ bài vì Hoàng thượng ngự giá đến cung ngươi",S);const d=affGot(lost,S,()=>relAdd(S,lost,-V.lostRel));P.push(`${lost.name} mất đêm thẻ bài đã lật: ghen +${V.lostGhen}, quý ngươi ${balSg(d)}.`)}
+ if(S.visQ){S.visQ=0;const dq=affGot(queenP(),S,()=>apply({hh:-V.hh}));P.push(`Hoàng hậu phật ý: quý ngươi ${balSg(dq)}.`)}
  const T=thDispl();/* NPC-PURPOSE G3: the news reaches her through someone — the one who lost the night or another who resents the player (npcTell); nobody → she does not hear */
   const tl=T.p?npcTell(S,{from:(lost?[lost]:[]).concat(liveRivals(true).filter(x=>x!==lost)),to:S.thO||{}}):null;
   if(tl&&roll(T.p)){apply({th:-T.loss});P.push(`Thái hậu nghe ${npwNm(tl.who)} kể, phật ý vì ngài bỏ lệ Kính sự phòng: Thái hậu quý ngươi -${T.loss}.`);try{trongLearn("th",DEED.empvisit,"Ngự giá lâm cung")}catch(e){}}

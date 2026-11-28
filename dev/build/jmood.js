@@ -56,7 +56,7 @@ window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;wi
   const row=`<div class="kpopx"><span class="ef ${m>0?"g":"r"}">Tâm trạng ngươi: ${mbBand().name.toLowerCase()}: ${whyStep(m)}</span></div>`;
   h=h.replace(/<div class="kpopx"><span class="ef n">Cơ may của việc này không đổi theo tư chất[^<]*<\/span><\/div>/,"");const i=h.indexOf("</div>");return i<0?h+row:h.slice(0,i+6)+row+h.slice(i+6)}catch(e){}return h}})();
 /* thiện cảm toward her: gains scaled by her mood (people warm to a bright face, keep away from a dark one) */
-(function(){if(typeof affAdd!=="function")return;const a0=affAdd;affAdd=function(x,y,n){try{if(y===S&&x&&x!==S&&n>0&&mbOn()){const k=mbAffK();if(k){const n2=Math.max(0,Math.round(n*(1+k)));if(n2!==n){MOOD_N.aff+=n2-n;n=n2;arguments[2]=n}}}}catch(e){}return a0.apply(this,arguments)}})();
+(function(){if(typeof affAdd!=="function")return;const a0=affAdd;affAdd=function(x,y,n){try{if(y===S&&x&&x!==S&&n>0&&mbOn()){const k=mbAffK();if(k){const n2=Math.max(0,Math.round(n*(1+k)));if(n2!==n){if(!AFF_DRY)MOOD_N.aff+=n2-n;n=n2;arguments[2]=n}}}}catch(e){}return a0.apply(this,arguments)}})();
 /* a joyful mood shows: rivals grow more jealous of her (the loss side of a high mood) */
 /* ONE CORE (OD:L1267): the factor lives in ghenN (j1), so every text that prints ghenN(n) shows what ghenAll really adds; ghenAll only counts it */
 (function(){if(typeof ghenN!=="function"||typeof ghenAll!=="function")return;const n0=ghenN,g0=ghenAll;const mk=n=>{try{if(n>0&&mbOn()&&mbBand().i>=2)return Math.round(n*(1+B().ghen))}catch(e){}return n};
@@ -119,10 +119,10 @@ function mbComfort(){const M=mbS(),C=B().comfort,W=mbW();const bi=mbBand().i;if(
 const mbComfortCard=rcpReg("mbComfort",v=>{const C=B().comfort;const maid=v?null:S.maid;if(!v&&!maid)return null;
  const nm=v?v.name:maid.name,who=v?pv(v):pMaid(),them=v?"nàng ta":"nàng";const band=mbBand().name.toLowerCase();
  const big=C.big,small=C.small;
- const o1={n:`Giãi bày tâm sự với ${nm}`,risk:"an toàn",hint:`lòng nhẹ đi nhiều, được lòng ${nm}; nhưng mất một khắc buổi này`,x:`tâm trạng +${big}, ${nm} ${v?pvQuy(v,C.affUp,"thiện cảm"):`thiện cảm +${C.affUp}`} ·
+ const o1={n:`Giãi bày tâm sự với ${nm}`,risk:"an toàn",hint:`lòng nhẹ đi nhiều, được lòng ${nm}; nhưng mất một khắc buổi này`,x:`tâm trạng +${big}, ${nm} ${v?pvQuy(v,C.affUp,"thiện cảm"):`thiện cảm ${v?affSg(v,S,C.affUp):"+"+C.affUp}`} ·
  kèm: mất ${C.k} khắc buổi này`,fx:{},
   go:()=>{mbAdd(big,`${nm} đến an ủi`,"comfort");try{if(v)affAdd(v,S,C.affUp);else maid.loyal=cl2((maid.loyal||0)+C.affUp,0,100)}catch(e){}try{spend(C.k)}catch(e){}log(`${nm} ngồi nghe ngươi giãi bày tâm sự; lòng ngươi nhẹ đi nhiều.`)}};
- const o2={n:"Gượng cười, cảm tạ",risk:"an toàn",hint:`lòng nhẹ đi chút ít${v?", giữ được thể diện":""}; nhưng ${nm} thấy ngươi giữ khoảng cách`,x:`tâm trạng +${small}${v?" (giữ thể diện)":""} · kèm: ${nm} thiện cảm −${C.affDown} (thấy ngươi giữ khoảng cách)`,fx:v?{danh:C.danh}:{},
+ const o2={n:"Gượng cười, cảm tạ",risk:"an toàn",hint:`lòng nhẹ đi chút ít${v?", giữ được thể diện":""}; nhưng ${nm} thấy ngươi giữ khoảng cách`,x:`tâm trạng +${small}${v?" (giữ thể diện)":""} · kèm: ${nm} thiện cảm ${v?affSg(v,S,-C.affDown).replace("-","−"):"−"+C.affDown} (thấy ngươi giữ khoảng cách)`,fx:v?{danh:C.danh}:{},
   go:()=>{mbAdd(small,`${nm} đến thăm`,"comfort");try{if(v)affAdd(v,S,-C.affDown);else maid.loyal=cl2((maid.loyal||0)-C.affDown,0,100)}catch(e){}log(`Ngươi gượng cười cảm tạ ${nm}, không nói ra nỗi lòng.`)}};
  const m={ev:1,t:"Có người đến an ủi",who,art:"img/act-sang-tham-hoi.webp",h:`<p>Mấy hôm nay ngươi ${band}, ${nm} biết chuyện, mang chút quà sang thăm, hỏi han ân cần.</p><p>Ngươi có muốn nói thật lòng với ${them}?</p>`,opts:[o1,o2]};Q.push(m);return m});
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w0=mbW();const r=e0.apply(this,arguments);try{if(S&&!S.dead&&mbW()!==w0)mbWeek()}catch(e){console.error(e)}return r}})();

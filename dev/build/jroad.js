@@ -230,6 +230,6 @@ setTimeout(()=>{
   if(line)log(`${head}${kw}. ${line}`);
   if(k===0)return done(r0.apply(this,arguments));
   if(k===1)return done(r0.call(this,tk,bid,i,odds>=100?100-B.half:Math.max(B.min,odds-B.half)));
-  const r=r0.call(this,tk,bid,i,0);try{const fx={duc:-B.sab.duc};ap67(fx);let ex=fmt(fx);const v=rv67(A,"v");if(v&&v!==P.p){oanAdd(v,S,B.sab.oan);ex+=` · ${pvOan(v,B.sab.oan,`${v.name} oán ta`)}`}log(`${head}${kw}: ${ex}`)}catch(e){console.error(e)}
+  const r=r0.call(this,tk,bid,i,0);try{const fx={duc:-B.sab.duc};ap67(fx);let ex=fmt(fx);const v=rv67(A,"v");if(v&&v!==P.p){const dO=oanGot(v,S,()=>oanAdd(v,S,B.sab.oan));ex+=` · ${v.name} oán ta ${balSg(dO)}`}log(`${head}${kw}: ${ex}`)}catch(e){console.error(e)}
   return done(r)}}catch(e){console.error(e)}},0);
 window.rdHpWho=rdHpWho;window.rdHpW=rdHpW;window.rdHpWord=rdHpWord;window.rdHpTag=rdHpTag;window.rdHpLine=rdHpLine;window.rdHpLab=rdHpLab;

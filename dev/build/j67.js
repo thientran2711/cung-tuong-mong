@@ -195,7 +195,7 @@ if(typeof srvRoadHTML==="function")(function(){const r0=srvRoadHTML;srvRoadHTML=
 /* ---------- shared outcome helpers (only existing systems) ---------- */
 function e67heir(n){const s=son67();if(s){s.fond=cl((s.fond||0)+n,0,100);return `Hoàng thượng thương ${s.name} hơn (+${n}).`}const W=BAL.arc.e67.heirNo;apply(W);return `Chưa có hoàng tử: Danh +${W.danh}.`}
 function e67drop(v,why){if(!rvOk67(v)||v.queen||v.rank<=0||punTwice(v))return"";{const r0=v.rank;v.rank=punDown(v);punMark(v,r0)}return `${v.name} ${why}, bị giáng xuống ${RANKS[v.rank].n}.`}
-function e67ally(v,n){if(!rvOk67(v))return"";relAdd(S,v,n||30);return `${v.name} thành người một phe với ngươi (${pvQuy(v,n||30,"thiện cảm")}).`}
+function e67ally(v,n){if(!rvOk67(v))return"";const d=affGot(v,S,()=>relAdd(S,v,n||30))/* PVQUY-POST: the real rise */;return `${v.name} thành người một phe với ngươi (thiện cảm ${balSg(d)}).`}
 function e67foe(v,n){if(!rvOk67(v))return"";n=Math.round((n||15)/2);oanAdd(v,S,n);return `${v.name} oán ngươi thêm.`}
 function e67pun(v,n){if(!rvOk67(v))return"";v.sung=Math.max(0,(v.sung||0)-n);return `${v.name}: Sủng -${n}.`}
 function e67demote(){const W=BAL.arc.e67.demote;apply(W);return `Hoàng thượng lạnh nhạt thêm: ${sgStat(W.sung)}.`}
