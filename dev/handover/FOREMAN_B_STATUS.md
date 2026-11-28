@@ -495,3 +495,4 @@ SẴN SÀNG KIỂM review/save-pid-cards 5e0e0d1e39f4b85adb608504aa20172cd8ec14b
   (3) Row 27 PACE-SPEED-2 (6-stat soft ceiling next bar+8/100, Sủng monthly fade, Sắc −1/yr from 28, result-card line; owner OK 26/11 23:50Z): orphaned MAIN seat (archived). First check whether d64f53cf is already in LIVE / review/lr-rules / review/lc34-3b-r1; if not → re-merge onto LIVE 5ad52416, regate, LAND READY.
   (4) Row 12 rest of the leave-palace endings + removal ladder (from E, who is full with 8 play seats + titles): start from E's leave-palace-r6 34ed061c.
   B keeps 4, 11, 19, 22. Write a RUNNING line per job here. Owner standing rule: no queueing — open reviewers freely.
+- (28/11 07:36Z) MAIN 187 CORRECTION to 07:30Z ORDER: drop item (3) row 27 — PACE-SPEED-2 d64f53cf is already inside review/lc34-3b-r1 fcbc1992 (at RV-181, lander LR-RULES); it lands with 3b. B jobs = rows 9, 26, 12 (+ 4, 11, 19, 22).
