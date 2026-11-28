@@ -73,27 +73,32 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(
   /* (f) fix item 2 — the receiver's willingness word (rcvWord, BAL.road.hp.word) is never a piece of Được / Thành; it shows as the Ghi chú note.
      «Nhờ giúp đỡ» (j9) of every consort at every place, and «Lập phe cùng» / «Mời» (j10 faction panel), read as the kit draws them. */
   {const WD=Object.values(BAL.road.hp.word);const isW=t=>WD.some(w=>new RegExp('(^|[,·:] ?)'+w+'($|[,·)])').test(t));const rowsOf=h=>{const d=document.createElement("div");d.innerHTML=h;const g=k=>[...d.querySelectorAll(".kr-"+k+" .ef")].map(e=>T(e.textContent));return{th:[...g("thanh"),...g("duoc")],note:[...g("note"),...[...d.querySelectorAll("[data-kfx]")].map(e=>e.dataset.kfx)]}};
-   let nH=0,nN=0;const bad=[];AA.scen("hh");
+   let nH=0,nN=0,nF=0;const bad=[];/* the world is drawn: try states in turn until both card kinds were read */
+   for(const sc of ["hh","cao","toi","hau","con"]){if(nH&&nF)break;AA.scen(sc);
    for(const sf of AA.surfaces().filter(x=>x.place)){AA.restore();AA.show(sf);for(const pp of curPeople()){if(pp.kind!=="rival"&&pp.kind!=="hh")continue;let A=[];try{A=talkOpts(pp)}catch(e){}
      for(const a of A){if(!a||a.n!=="Nhờ giúp đỡ")continue;nH++;const R=rowsOf(optLine(a));const w=R.th.filter(isW);if(w.length)bad.push(`«Nhờ giúp đỡ» ${pp.name}@${sf.id} Thành «${w.join(", ")}»`);if(R.note.some(t=>WD.some(x=>t.includes(x))))nN++}}}
-   AA.restore();/* a consort close enough to found a faction with (j10 facFrOk: she likes her ≥ netTh «than») so the «Lập phe cùng» card is drawn */{const v=liveRivals(true).find(x=>!facOf(x)&&!sameHouse(S,x));if(v&&!facFrOk(S,v))affAdd(v,S,netTh(v,"than")+5-aff(v,S))}tab="fac";AA.hide();render();await sl(60);let nF=0;
+   AA.restore();/* a consort close enough to found a faction with (j10 facFrOk: she likes her ≥ netTh «than») so the «Lập phe cùng» card is drawn */{const v=liveRivals(true).find(x=>!facOf(x)&&!sameHouse(S,x));if(v&&!facFrOk(S,v))affAdd(v,S,netTh(v,"than")+5-aff(v,S))}tab="fac";AA.hide();render();await sl(60);
    for(const b of document.querySelectorAll('#panel button[data-fa="lap"], #panel button[data-fa="moi"]')){nF++;const R={th:[...b.querySelectorAll(".kr-thanh .ef, .kr-duoc .ef")].map(e=>T(e.textContent)),note:[...b.querySelectorAll(".kr-note .ef")].map(e=>T(e.textContent))};const w=R.th.filter(isW);
-    if(w.length)bad.push(`«${T((b.querySelector(".kan")||b).textContent).slice(0,30)}» Được «${w.join(", ")}»`);if(!R.th.length)bad.push(`«${T((b.querySelector(".kan")||b).textContent).slice(0,30)}» no Được`);if(R.note.some(t=>WD.some(x=>t.includes(x))))nN++}
+    if(w.length)bad.push(`«${T((b.querySelector(".kan")||b).textContent).slice(0,30)}» Được «${w.join(", ")}»`);if(!R.th.length)bad.push(`«${T((b.querySelector(".kan")||b).textContent).slice(0,30)}» no Được`);if(R.note.some(t=>WD.some(x=>t.includes(x))))nN++}}
+   /* «Mượn son phấn» (jration lxBorrowCard): her asking card names the lender's word — built for a live consort, read as the kit draws it */
+   let nB=0;try{for(const v of liveRivals(true).slice(0,3)){const c=lxBorrowCard(S,v);if(!c)continue;nB++;const R=rowsOf(optLine(c));const w=R.th.filter(isW);if(w.length)bad.push(`«Mượn son phấn» ${v.name} Thành «${w.join(", ")}»`);if(R.note.some(t=>WD.some(x=>t.includes(x))))nN++}}catch(e){bad.push("Mượn son phấn: "+e.message)}
+   chk(nB>0,`f: «Mượn son phấn» cards read ${nB}`);
    chk(nH>0&&nF>0,`f: cards read — «Nhờ giúp đỡ» ${nH}, faction «Lập phe cùng / Mời» ${nF}; the word shown as Ghi chú on ${nN}`);chk(!bad.length&&nN>0,`f: willingness word in Được / Thành ${bad.length}${bad.length?": "+[...new Set(bad)].slice(0,4).join(" | "):""}`)}
   /* (g) fix item 3 — the dress-verdict GAIN on every pop-up card KIND that carries it: a plain talk card, a door card («chọn một trong N việc (…)» + its gains),
      a tier door, a one-tap door: in Thành / Được, never in Ghi chú (row or «!») nor Bại / Mất / Kèm. Verdict stubbed on (as in (c)), every consort, state hh. */
   {const tr0=window.toilRival,to0=window.toilOn;const K={plain:0,door:0,tier:0,one:0};const bad=[];
-   try{window.toilOn=()=>true;window.toilRival=(v,d)=>d?null:{txt:"nàng ta chuộng giản dị: quý ta +"+BAL.toil.praisePlain,aff:BAL.toil.praisePlain,g:0};AA.scen("hh");
+   try{window.toilOn=()=>true;window.toilRival=(v,d)=>d?null:{txt:"nàng ta chuộng giản dị: quý ta +"+BAL.toil.praisePlain,aff:BAL.toil.praisePlain,g:0};
+    for(const sc of ["hh","cao","toi","hau","con"]){if(K.plain&&K.door&&K.tier&&K.one)break;AA.scen(sc);
     for(const sf of AA.surfaces().filter(x=>x.place)){AA.restore();AA.show(sf);const P=curPeople();for(let i=0;i<P.length;i++){const pp=P[i];if(pp.kind!=="rival"||!pp.ref)continue;let A=[];try{A=talkOpts(pp)}catch(e){}
       for(const a of A){if(!a)continue;let carry=/quý ta \+/.test(T(a.x));if(!carry&&a.door)try{const r=DOOR.byK(a.door);const {L}=ONE.members(doorPP(pp,i,r.k),r);carry=L.some(m=>m&&m.a&&/quý ta \+/.test(T(m.a.x)))}catch(e){}if(!carry)continue;
        const kd=a.one==="tier"?"tier":a.one==="one"?"one":a.door?"door":"plain";K[kd]++;const d=document.createElement("div");d.innerHTML=optLine(a);const G=s2=>[...d.querySelectorAll(s2)].map(e=>T(e.textContent)).join(" | ");
        const ok=/quý ta \+/.test(G(".kr-thanh .ef, .kr-duoc .ef")),wrong=/quý ta \+/.test(G(".kr-note .ef, .kr-bai .ef, .kr-mat .ef, .kr-kem .ef"))||[...d.querySelectorAll("[data-kfx]")].some(e=>/quý ta \+/.test(e.dataset.kfx||""));
-       if(!ok||wrong)bad.push(`${kd} «${T(a.n)}» ${pp.name}@${sf.id}: Được «${G(".kr-thanh .ef, .kr-duoc .ef").slice(0,70)}» Ghi chú «${G(".kr-note .ef").slice(0,70)}»`)}}}}finally{window.toilRival=tr0;window.toilOn=to0}
+       if(!ok||wrong)bad.push(`${kd} «${T(a.n)}» ${pp.name}@${sf.id}: Được «${G(".kr-thanh .ef, .kr-duoc .ef").slice(0,70)}» Ghi chú «${G(".kr-note .ef").slice(0,70)}»`)}}}}}finally{window.toilRival=tr0;window.toilOn=to0}
    chk(K.plain>0&&K.door>0&&K.tier>0&&K.one>0,`g: card kinds carrying the verdict read — plain ${K.plain}, door ${K.door}, tier ${K.tier}, one-tap ${K.one}`);chk(!bad.length,`g: verdict not in Được / Thành (or also in Ghi chú / a loss row) ${bad.length}${bad.length?": "+[...new Set(bad)].slice(0,4).join(" | "):""}`)}
   /* (d2) the reviewer's pin — a «Dò la» one-tap door on a consort (state cao, 3 draws): its printed Thành names its gain (chứng cứ +), never only its price (Bạc −) */
-  {let n=0;const bad=[];AA.scen("cao");for(const dt of [0,1,2])for(const sf of AA.surfaces().filter(x=>x.place)){AA.restore();S.turn=(S.turn||0)+dt;AA.show(sf);for(const pp of curPeople()){if(pp.kind!=="rival"&&pp.kind!=="hh")continue;let A=[];try{A=talkOpts(pp)}catch(e){}
+  {let n=0;const bad=[];for(const sc of ["cao","hh","toi"]){if(n)break;AA.scen(sc);for(const dt of [0,1,2])for(const sf of AA.surfaces().filter(x=>x.place)){AA.restore();S.turn=(S.turn||0)+dt;AA.show(sf);for(const pp of curPeople()){if(pp.kind!=="rival"&&pp.kind!=="hh")continue;let A=[];try{A=talkOpts(pp)}catch(e){}
     for(const a of A){if(!a||a.one!=="one"||a.lock||!/^Dò la/.test(T(a.n)))continue;n++;const d=document.createElement("div");d.innerHTML=optLine(a);const th=[...d.querySelectorAll(".kr-thanh .ef, .kr-duoc .ef")].map(e=>T(e.textContent)).join(", ");
-     if(!/chứng cứ \+/.test(th)||/Bạc [-−]/.test(th))bad.push(`«${T(a.n)}» ${pp.name}@${sf.id} d${dt}: Thành «${th.slice(0,80)}»`)}}}
+     if(!/chứng cứ \+/.test(th)||/Bạc [-−]/.test(th))bad.push(`«${T(a.n)}» ${pp.name}@${sf.id} d${dt}: Thành «${th.slice(0,80)}»`)}}}}
    chk(n>0,`d2: «Dò la» one-tap doors read ${n}`);chk(!bad.length,`d2: «Dò la» one-tap Thành without its gain ${bad.length}${bad.length?": "+[...new Set(bad)].slice(0,3).join(" | "):""}`)}
   return{F,OK}},MU);
  for(const m of R.OK)console.log('  ok   '+m);for(const m of R.F)console.log('  FAIL '+m);
