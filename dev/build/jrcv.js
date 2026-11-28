@@ -111,7 +111,7 @@ RCVK.ally={t:"Lời kết giao",act:"xin kết giao với",kind:"help",
  line:p=>`<p>${p.name} sai người mang ${BAL.actBac.ally} lượng bạc làm lễ sang: “Nương nương nhà ta muốn kết tình tỷ muội.”</p><p class="past">Kết giao là đứng về phía nàng: kẻ đối đầu của nàng sẽ ghét ngươi. Ngươi có thể nhận lời, nhận nửa lễ mà giữ khoảng cách, trả lễ từ chối, hoặc đem chuyện đi mách.</p>`,
  opts:(p,t)=>{const g=BAL.actBac.ally,H=BAL.rcv.help.half,hl=Math.round(g*H),me=t===S,keep=()=>rcvAp(t,{bac:g}),A=BAL.rcv.ally,F=BAL.eff.j8.f_2,fo=rcvFoe(p,t),fh=Math.round(F*H),dh=Math.round(A.danh*H);
   const foeAdd=n=>{if(fo)affAdd(fo,t,n)};return[
-  rcvYesO(p,t,0,{n:"Nhận lời kết giao",fx:{danh:-A.danh},g:`lễ ${g} lượng, ${pvQuy(t,F,"thiện cảm")}${me?"":`, bớt ghen ${BAL.rcv.prop.ghen}`}`,c:[`kết bè: Danh ${balSg(-A.danh)}`,rcvFoeX(fo,t,-F)].filter(Boolean).join(", "),go:()=>{keep();relAdd(p,t,F);foeAdd(-F);if(!me)t.ghen=cl((t.ghen||0)-BAL.rcv.prop.ghen,0,100);return `${NMc(p)} kết giao với ${NM(t)}: <span class="g">thành</span>`}}),
+  rcvYesO(p,t,0,{n:"Nhận lời kết giao",fx:{danh:-A.danh},g:`lễ ${g} lượng, thiện cảm ${affSg(p,t,F)}${me?"":`, bớt ghen ${BAL.rcv.prop.ghen}`}`,c:[`kết bè: Danh ${balSg(-A.danh)}`,rcvFoeX(fo,t,-F)].filter(Boolean).join(", "),go:()=>{keep();relAdd(p,t,F);foeAdd(-F);if(!me)t.ghen=cl((t.ghen||0)-BAL.rcv.prop.ghen,0,100);return `${NMc(p)} kết giao với ${NM(t)}: <span class="g">thành</span>`}}),
   rcvYesO(p,t,1,{n:"Nhận nửa lễ, giữ khoảng cách",fx:dh?{danh:-dh}:{},g:`lễ ${hl} lượng (trả lại ${g-hl})`,c:[dh?`Danh ${balSg(-dh)}`:"",rcvFoeX(fo,t,-fh)].filter(Boolean).join(", "),go:()=>{rcvAp(t,{bac:hl});rcvAp(p,{bac:g-hl});foeAdd(-fh);return `${me?"Ngươi":t.name} nhận nửa lễ của ${NM(p)} nhưng giữ khoảng cách`}}),
   rcvNoO(p,t,{g:[`không dính bè phái, Danh ${balSg(A.danh)}`,rcvFoeX(fo,t,fh)].filter(Boolean).join(", "),fx:{danh:A.danh},go:()=>{rcvAp(p,{bac:g});foeAdd(fh)},r:`${me?"Ngươi":t.name} trả lễ, khéo từ chối kết giao với ${NM(p)}`}),
   rcvSabO(p,t,{g:`giữ lễ ${g} lượng`,go:keep,r:tq=>`${me?"Ngươi":t.name} nhận lễ của ${NM(p)} rồi đem chuyện đi kể${tq?" với "+rcvQn(tq):""}`})]}};
@@ -145,8 +145,8 @@ RCVK.facInvite={t:"Lời mời vào phe",act:"mời vào phe",kind:"help",ok:(p,
 RCVK.call={t:"Có khách đến chơi",act:"ghé chơi cung",kind:"help",
  line:p=>`<p>${p.name} ghé chơi, đang đứng ngoài cửa cung chờ người thông báo.</p>`,
  opts:(p,t)=>{const me=t===S,g=BAL.tw.g.call,gh=Math.round(g*BAL.rcv.help.half),see=(h)=>{try{shelfSee(p,t,"ghé chơi");if(h&&t!==S)shelfSee(t,p,"ghé chơi")}catch(e){}};return[
-  rcvYesO(p,t,0,{n:"Tiếp đón nồng hậu",g:`${pvQuy(t,g,"thiện cảm")}`,go:()=>{relAdd(p,t,g);see(1);return `${NMc(p)} ghé chơi cung ${NM(t)}, được tiếp đón nồng hậu`}}),
-  rcvYesO(p,t,1,{n:"Tiếp qua loa",g:`${pvQuy(t,gh,"thiện cảm")}`,go:()=>{relAdd(p,t,gh);see(0);return `${NMc(p)} ghé chơi cung ${NM(t)}, được tiếp qua loa`}}),
+  rcvYesO(p,t,0,{n:"Tiếp đón nồng hậu",g:`thiện cảm ${affSg(p,t,g)}`,go:()=>{relAdd(p,t,g);see(1);return `${NMc(p)} ghé chơi cung ${NM(t)}, được tiếp đón nồng hậu`}}),
+  rcvYesO(p,t,1,{n:"Tiếp qua loa",g:`thiện cảm ${affSg(p,t,gh)}`,go:()=>{relAdd(p,t,gh);see(0);return `${NMc(p)} ghé chơi cung ${NM(t)}, được tiếp qua loa`}}),
   rcvNoO(p,t,{g:`giữ thể diện, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},r:`${me?"Ngươi":t.name} cáo bận, không tiếp ${NM(p)}`}),
   rcvSabO(p,t,{n:"Tiếp rồi đem chuyện đi kể",g:"nghe được chuyện của khách",r:tq=>`${me?"Ngươi":t.name} tiếp ${NM(p)} rồi đem chuyện đi kể${tq?" với "+rcvQn(tq):""}`})]}};
 /* Hòa giải (TW mediate): the receiver holds oán against x; the mediator asks her to let it go (oán − BAL.tw.g.mediate); x = key of the foe */
@@ -251,8 +251,8 @@ function rcvInvAt(h,g){try{const k=h===S?"home":palaceOf(h);if(g!==S){S.where[g.
 RCVK.invite={t:"Lời mời sang chơi",act:"mời sang cung chơi",kind:"help",ok:(p,t)=>!!p&&!!t&&t.alive!==false&&!t.out&&!t.confined,
  line:p=>`<p>${p.name} sai người sang mời: “Nương nương nhà ta pha trà chờ, mời người sang cung chơi buổi này.”</p>`,
  opts:(p,t)=>{const me=t===S,g=BAL.tw.g.call,gh=Math.round(g*BAL.rcv.help.half);return[
-  rcvYesO(p,t,0,{n:"Nhận lời, sang chơi",g:`${pvQuy(t,g,"thiện cảm")}`,go:()=>{relAdd(p,t,g);rcvInvAt(p,t);t.__invC=1;return `${me?"Ngươi":t.name} nhận lời, sang cung ${NM(p)} chơi`}}),
-  rcvYesO(p,t,1,{n:"Ghé qua cho có",g:`${pvQuy(t,gh,"thiện cảm")}`,go:()=>{relAdd(p,t,gh);rcvInvAt(p,t);t.__invC=1;return `${me?"Ngươi":t.name} ghé qua cung ${NM(p)} cho có`}}),
+  rcvYesO(p,t,0,{n:"Nhận lời, sang chơi",g:`thiện cảm ${affSg(p,t,g)}`,go:()=>{relAdd(p,t,g);rcvInvAt(p,t);t.__invC=1;return `${me?"Ngươi":t.name} nhận lời, sang cung ${NM(p)} chơi`}}),
+  rcvYesO(p,t,1,{n:"Ghé qua cho có",g:`thiện cảm ${affSg(p,t,gh)}`,go:()=>{relAdd(p,t,gh);rcvInvAt(p,t);t.__invC=1;return `${me?"Ngươi":t.name} ghé qua cung ${NM(p)} cho có`}}),
   rcvNoO(p,t,{g:`giữ buổi cho mình, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},r:`${me?"Ngươi":t.name} cáo bận, không sang cung ${NM(p)}`}),
   rcvSabO(p,t,{g:"nghe được chuyện của chủ nhà",r:tq=>`${me?"Ngươi":t.name} nhận lời rồi đem chuyện cung ${NM(p)} đi kể${tq?" với "+rcvQn(tq):""}`,go:()=>{rcvInvAt(p,t);t.__invC=1}})]}};
 function rcvInviteGo(h,g){if(!g||g===S)return false;delete g.__invC;const r=rcvAsk("invite",h,g);if(r)try{log(r.trim())}catch(e){}const c=!!g.__invC;delete g.__invC;return c}

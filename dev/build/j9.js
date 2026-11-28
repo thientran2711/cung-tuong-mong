@@ -31,7 +31,21 @@ function msOanAdd(x,y,n){const c=v=>cl(Math.round(v),0,100);if(relMS(x)){if(y===
 /* range on read (review/net-build step 0): every writer of .rel / .rl / .ro / .oan is clamped here too, BAL.linkRange */
 function relCl(v,R){return typeof v==="number"&&isFinite(v)?Math.max(R[0],Math.min(R[1],v)):0}
 function aff(x,y){if(x===y)return 0;if(relMS(x)||relMS(y))return msAff(x,y);const R=BAL.linkRange.rl;if(x===S)return relCl(S.rl[y.id],R);if(y===S)return relCl(x.rel,R);return relCl(x.rl[y.id],R)}
-function affAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msAffAdd(x,y,n);const R=BAL.linkRange.rl;/* ONE CORE (rv coop-flakes) */const pg=(now)=>typeof spG==="function"?spG("rel",x,now||0,n,spRk(y),"rel:"+(y===S?"me":y.id)):n;/* stat-pace: a rise of thiện cảm, ceiling at the rank of the one liked (jstatpace) */if(x===S){S.rl[y.id]=cl((S.rl[y.id]||0)+pg(S.rl[y.id]),R[0],R[1]);return}if(y===S){x.rel=cl(x.rel+pg(x.rel),R[0],R[1]);return}x.rl[y.id]=cl((x.rl[y.id]||0)+pg(x.rl[y.id]),R[0],R[1])}
+/* AFF-PREVIEW (MAIN ruling 28/11, law 4 / law 7 «a preview is a promise»): AFF_DRY set ⇒ the whole affAdd chain runs (trust trait j28, titles jdh, feelings jfeel,
+   mood jmood, onlookers jtrong, stat pace) but the core only RECORDS the change in AFF_DRY.d and writes nothing (pace carry peeked, not moved); side-effect wrappers
+   (jemo, jnet, jwhyn, jint, jmood's counter) stand aside. affPreview(x,y,n) = the rise of x's thiện cảm for y that affAdd(x,y,n) would really give now. */
+var AFF_DRY=null;
+function affAdd(x,y,n){if(!x||!y||x===y)return;const D=AFF_DRY;if(relMS(x)||relMS(y)){if(!D||D.live){if(D){const b=msAff(x,y);msAffAdd(x,y,n);const a=msAff(x,y);D.undo.push([null,null,x,null,null,()=>{if(msAff(x,y)!==b)msAffAdd(x,y,b-msAff(x,y))}]);return}return msAffAdd(x,y,n)}/* plain clamped add: run it, read, add the change back */const b=msAff(x,y);msAffAdd(x,y,n);const a=msAff(x,y);if(a!==b)msAffAdd(x,y,b-a);D.d=a-b;return}
+ const R=BAL.linkRange.rl;/* ONE CORE (rv coop-flakes) */const pk=D&&!D.live?1:0,pg=(now)=>typeof spG==="function"?spG("rel",x,now||0,n,spRk(y),"rel:"+(y===S?"me":y.id),pk):n;/* stat-pace: a rise of thiện cảm, ceiling at the rank of the one liked (jstatpace) */
+ const M=x===S?S.rl:y===S?null:x.rl,now=M?(M[y.id]||0):x.rel,sp0=D&&D.live?JSON.stringify(x.spc||null):null,nv=cl(now+pg(now),R[0],R[1]);if(D&&!D.live){D.d=nv-(now||0);return}if(D)D.undo.push([M,y.id,x,now,sp0]);if(M)M[y.id]=nv;else x.rel=nv}
+function affPreview(x,y,n,tr){if(!n||!x||!y||x===y||typeof x!=="object"||typeof y!=="object")return Math.round(n||0);const o=AFF_DRY,D={d:0,trust:tr};AFF_DRY=D;try{affAdd(x,y,n)}catch(e){console.error("affPreview",e)}finally{AFF_DRY=o}return Math.round(D.d)}
+/* several steps on ONE bond (the queen's gift: her liking + the hh step, j8 giveTo): run them for real with the side-effect wrappers standing aside,
+   read the change, put every touched cell (and its pace carry) back — the same number the act gives, steps compounding as they will */
+function affPreviewRun(x,y,fn){const o=AFF_DRY,D={live:1,undo:[]};let b=0,a=0;try{b=aff(x,y)}catch(e){}AFF_DRY=D;try{fn();try{a=aff(x,y)}catch(e){a=b}}catch(e){console.error("affPreviewRun",e);a=b}
+ finally{AFF_DRY=o;for(let i=D.undo.length-1;i>=0;i--){const [M,k,h,old,sp,f]=D.undo[i];if(f){f();continue}if(M)M[k]=old;else h.rel=old;if(sp==="null")delete h.spc;else h.spc=JSON.parse(sp)}}return Math.round(a-b)}
+/* the signed preview word for a card line («thiện cảm +6»), the balSg form of affPreview */
+/* her nết not all known (the honest-range rule, jaudit aaMulRange): a rise shows «+a đến +b» = the same chain with the lowest / highest trust she could have */
+function affSg(x,y,n){const a=affPreview(x,y,n);try{if(n>0&&typeof x==="object"&&x&&x!==S&&x!==y&&typeof aaMulRange==="function"){const r=aaMulRange(x,"trust");if(r[0]!==r[1]){const lo=affPreview(x,y,n,r[0]),hi=affPreview(x,y,n,r[1]);if(lo!==hi)return `${balSg(Math.min(lo,hi))} đến ${balSg(Math.max(lo,hi))}`}}}catch(e){}return balSg(a)}
 function oan(x,y){if(!x||!y||x===y)return 0;if(relMS(x)||relMS(y))return msOan(x,y);const R=BAL.linkRange.ro;if(x===S)return relCl(S.ro[y.id],R);if(y===S)return relCl(x.oan,R);return relCl(x.ro[y.id],R)}
 function oanAdd(x,y,n){if(!x||!y||x===y)return;if(relMS(x)||relMS(y))return msOanAdd(x,y,n);const R=BAL.linkRange.ro,c=v=>cl(Math.round(v),R[0],R[1]);const pg=(now)=>typeof spG==="function"?spG("oan",x,now||0,n,spRk(y),"oan:"+(y===S?"me":y.id)):n;/* stat-pace: a rise of oán (jstatpace) */if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+pg(S.ro[y.id]));return}if(y===S){x.oan=c((x.oan||0)+pg(x.oan));return}x.ro[y.id]=c((x.ro[y.id]||0)+pg(x.ro[y.id]))}
 /* every man and servant who can hold a relation (the oán fade, the old-save fill, the Ân oán groups) */
@@ -46,6 +60,9 @@ function relMSMig(){if(!S||S.relMSv)return;S.relMSv=1;const B=BAL.relMS;
 (function(){const n0=normAll;normAll=function(){const r=n0.apply(this,arguments);try{relMSMig()}catch(e){console.error('relMSMig',e)}return r}})();
 function rel(x,y){return aff(x,y)}
 /* a deed between a and t: both affections move; a harm leaves the victim with Oán (and a little on the doer) */
+/* ONE NUMBER (MAIN 186 ruling 28/11 ~06:44Z, law 4): the affAdd wrappers (trust trait j28, titles jdh, feelings jfeel, mood jmood, stat pace) rescale a rise, so a line written
+   AFTER a change prints what really moved: affGot(x,y,fn) = the change of x's thiện cảm for y while fn runs (rounded). */
+function affGot(x,y,fn){let b=0;try{b=aff(x,y)}catch(e){}try{fn()}catch(e){console.error("affGot",e)}let a=b;try{a=aff(x,y)}catch(e){}return Math.round(a-b)}
 function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);const k=BAL.relOan;if(n<0){oanAdd(y,x,-n*k.hurt);oanAdd(x,y,-n*k.doer)}else{oanAdd(y,x,-n*k.mend)}}
 function hostility(v,t){return oan(v,t)+Math.max(0,-aff(v,t))/2+(t===S?v.ghen/2:Math.max(0,(t.sung-v.sung)/3))+(rkOf(t)>=rkOf(v)?8:0)}
 
