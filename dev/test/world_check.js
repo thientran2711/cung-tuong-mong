@@ -12,8 +12,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1180,height:820}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  const fresh=()=>p.evaluate(()=>{for(let i=0;i<12;i++){localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv())&&!S.out)break}/* a consort life (a maid start has no consort options; same loop as world_check2) */window.__bot=1;quiet=true;Q.length=0;try{deal()}catch(e){}
-  for(const v of rivals)v.preg=0;S.preg=0;S.sung=Math.max(S.sung,60);return 1});
- const step=()=>p.evaluate(()=>{Q.length=0;S.mg=0;const t=wk();endTurn();Q.length=0;return wk()!==t});
+  for(const v of rivals)v.preg=0;S.preg=0;S.sung=Math.max(S.sung,60);
+  /* STALE-TESTS-7: one tuần the way a player plays it. Since jnf (the night flip choice) endTurn first turns the card and HOLDS the day on the
+     «Kính sự phòng» choice (pid nfch) until she answers; the old harness cleared Q and the day never turned (no tick → no window ever opened).
+     She answers «Thôi» by the card's own option (chooseM, the drain of ledger.js / coop-night0.js); every other card before the turn is dropped
+     as before; the cards the turn itself pushes stay in Q for the checks. */
+  window.__wcWeek=()=>{const t=wk();for(let i=0;i<8&&wk()===t&&!S.dead;i++){for(let n=0;n<40&&Q.length;n++){const m=Q[0];if(m&&m.pid==="nfch"&&m.opts){const j=m.opts.findIndex(o=>o.n==="Thôi");try{chooseM(j<0?m.opts.length-1:j)}catch(e){Q.shift()}if(Q[0]===m)Q.shift()}else Q.shift()}S.mg=0;endTurn()}return wk()!==t};return 1});
+ const step=()=>p.evaluate(()=>{const r=__wcWeek();Q.length=0;return r});
  await fresh();
  /* 1 */
  const r1=await p.evaluate(()=>{const a=worldStart("sao","thử");const q=(S.wwin.q||[]).length;return{a:!!a,q}});await p.evaluate(()=>{S.tuan=1});await step();
@@ -41,21 +46,21 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r4.open&&r4.me===r4.meW&&r4.npc===r4.npcW,'thiên tai: the same pay cut for her and an NPC (BAL.world.dis.payCut)',r4);
  /* 5 */
  await fresh();await p.evaluate(()=>{S.tuan=1;Q.length=0;const T=trS();if(T)T.bien=90;worldQueue("su","thử")});
- const r5=await p.evaluate(()=>{Q.length=0;S.mg=0;const t=wk();endTurn();const c=Q.find(m=>m&&m.t==="Sứ đoàn vào triều");const opts=c&&c.opts?c.opts.map(o=>o.n):[];
+ const r5=await p.evaluate(()=>{__wcWeek();const c=Q.find(m=>m&&m.t==="Sứ đoàn vào triều");const opts=c&&c.opts?c.opts.map(o=>o.n):[];
   S.buoi=0;S.adHap=null;S.place="home";const hap=adHapNow().some(x=>x.id==="world");const n0=(S.logs||[]).filter(l=>/Sứ đoàn vào triều/.test(l)).length;
-  Q.length=0;S.mg=0;endTurn();const e=Q.find(m=>m&&/Sứ đoàn/.test(m.h||"")&&m!==c);Q.length=0;S.mg=0;endTurn();const again=Q.some(m=>m&&/Sứ đoàn đã lên đường/.test(m.h||""));
+  Q.length=0;__wcWeek();const e=Q.find(m=>m&&/Sứ đoàn/.test(m.h||"")&&m!==c);Q.length=0;__wcWeek();const again=Q.some(m=>m&&/Sứ đoàn đã lên đường/.test(m.h||""));
   return{start:!!c,opts,hap,log:n0,end:!!e,again}});
  ok(r5.start&&r5.opts.length>=1,'center pop-up at the start, with her own options',r5);ok(r5.end&&!r5.again,'center pop-up at the end, once',r5);
  ok(!r5.hap,'no world-event "!" on the Dư đồ (owner OD 17/11 ~14:30Z)',r5);ok(r5.log>=1,'a Tuần lục line',r5);
  const r5b=await p.evaluate(()=>{const v=liveRivals(true).find(x=>rkOf(x)>=BAL.world.su.rank)||liveRivals(true)[0];v.rank=Math.max(v.rank,BAL.world.su.rank);
-  S.wwin.L=[];S.wwin.q=[{k:"su",cause:"thử",o:{}}];S.wwin.last={};const T=trS();if(T)T.bien=90;Q.length=0;S.mg=0;endTurn();Q.length=0;const P=worldPlanW(v);return{force:P.force||[],why:P.why||""}});
+  S.wwin.L=[];S.wwin.q=[{k:"su",cause:"thử",o:{}}];S.wwin.last={};const T=trS();if(T)T.bien=90;Q.length=0;__wcWeek();Q.length=0;const P=worldPlanW(v);return{force:P.force||[],why:P.why||""}});
  ok(r5b.force.some(f=>f.pl==="thu"&&f.b===1),'AG-ALL hook: worldPlanW(p).force duty slot (Dự yến tiếp sứ) + why',r5b);
  /* 6 */
  const r6=await p.evaluate(()=>{const L=freshEvents().map(e=>e.id);const ks=new Set();const T=trS();for(let i=0;i<300;i++){T.bien=50;T.kho=50;moodMonth();ks.add(S.wMM&&S.wMM.k)}
   return{comet:L.includes("comet"),ks:[...ks].sort()}});
  ok(!r6.comet,'the j7 comet is out of the weekly random pool',r6);ok(['cong','giac','han','lut','mua','tham'].every(k=>r6.ks.includes(k)),'the j55 court roll text is read for every kind',r6);
  /* 7 */
- await fresh();const r7=await p.evaluate(()=>{delete S.wwin;delete S.wwSeen;let e=null;try{Q.length=0;S.mg=0;endTurn();Q.length=0}catch(x){e=x.message}
+ await fresh();const r7=await p.evaluate(()=>{delete S.wwin;delete S.wwSeen;let e=null;try{Q.length=0;__wcWeek();Q.length=0}catch(x){e=x.message}
   return{e,has:!!S.wwin,key:window.COOPW&&COOPW.X?COOPW.X.W_KEYS.includes("wwin"):null}});
  ok(!r7.e&&r7.has,'old save without S.wwin plays a tuần',r7);ok(r7.key===true,'co-op: wwin is a world key',r7);
  const r8=await p.evaluate(()=>({err:WW.err}));ok(r8.err===0,'no jworld errors',r8);

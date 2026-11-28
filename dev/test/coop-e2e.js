@@ -33,7 +33,7 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
       const X=COOPW.X,J=X.J;const d=ser();const sS=d.S;const pid=((COOPW.base&&COOPW.base.P&&COOPW.base.P[COOP.state.you])||{}).pid;
       const W={};for(const k of X.W_KEYS)if(k in sS){const v=J(sS[k]);if(k==='cm'&&v)for(const f of X.CM_P)delete v[f];if(k==='men'&&Array.isArray(v))for(const x of v)if(x)for(const f of X.MEN_P)delete x[f];W[k]=v}
       if(W.emp)delete W.emp.known;delete W.tn;
-      const R=d.R.filter(r=>!r.coop).map(r=>{for(const f of ['rel','oan','ghen','ev','rl','ro','gp','ep','evm'])delete r[f];if(r.staff)r.staff=r.staff.filter(s=>!s.coop);return X.mapMe(r,true,pid)});
+      const R=d.R.filter(r=>!r.coop).map(r=>{for(const f of ['rel','oan','ghen','ev','rl','ro','gp','ep','evm','evR'])delete r[f];if(r.staff)r.staff=r.staff.filter(s=>!s.coop);return X.mapMe(r,true,pid)});
       X.mapMe(W,true,pid);const out={};const fl=(v,p)=>{if(v&&typeof v==='object'){const ks=Object.keys(v);if(!ks.length)out[p]=Array.isArray(v)?'[]':'{}';for(const k of ks)fl(v[k],p+'.'+(Array.isArray(v)&&v[k]&&(v[k].id!=null||v[k].sid!=null)?'#'+(v[k].id!=null?v[k].id:'s'+v[k].sid):k))}else out[p]=v};
       fl(W,'S');R.forEach(r=>fl(r,'R#'+r.id));return out};
    const t=setInterval(()=>{if(window.__ctmBuilt!==1||typeof COOP!=='object'||!COOP.on)return;clearInterval(t);COOP.on('week',m=>{try{window.__wAtMerge={wk:m&&m.week,w:window.__wFlat()}}catch(e){window.__wAtMerge={wk:m&&m.week,err:e.message}}})},100)});

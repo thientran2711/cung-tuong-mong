@@ -27,7 +27,7 @@ function k3DucNeed(){try{return S.rank<7&&S.duc<hhNeed(S).duc&&!(window.kitRoad&
 window.k3DucNeed=k3DucNeed;
 function k3Hud(){try{if(!S)return;const d=$$("me-d");if(d){const t=k3Date();if(d.textContent!==t)d.textContent=t}
  /* lãnh cung: the rank chip says what the figure label says (rkOfFace "Phế phi · lãnh cung"), not her old rank (review fold-layout) */
- if(S.out){const r=$$("me-r"),w="Phế phi · lãnh cung";if(r&&r.textContent.trim()!==w)r.textContent=w}
+ if(S.out){const r=$$("me-r"),w=rkOfFace("consort",S)[1]/* RV-184 F1: kept title or «Phế phi» (outTitleN) */;if(r&&r.textContent.trim()!==w)r.textContent=w}
  /* her Tư chất: the kit stat cells in the top bar's kitStatRow (jk4) */
  k3TopRow();try{window.kitHxRoad&&kitHxRoad()}catch(e){}if(typeof kitStatSet!=="function")return;/* NO "!" badge on top-bar stat cells (owner 17/11 08:00Z): the Đức goal (lập Hoàng hậu) lives in the tooltip + the tap popup (k3DucNeed) */const dw=k3DucNeed();
  [["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["duc","Đức"]].forEach(([k,l])=>{const c=$$("hud-"+k);if(c)kitStatSet(c,S[k],{title:`${l} ${S[k]}${k==="duc"&&dw?" · "+dw:""} · chạm để xem đủ`})});
