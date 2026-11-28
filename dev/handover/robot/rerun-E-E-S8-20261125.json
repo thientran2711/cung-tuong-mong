@@ -748,6 +748,26 @@
    "bot": "cautious",
    "review": "see rerun-E-ES8h-S5runner-*",
    "moments": ""
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-lazy5",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "quiet",
+   "seed": 2502085558,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "f65d019b"
+   },
+   "ending": "Hồng nhan bạc mệnh — Hoàng thượng băng hà y11, tuẫn táng (age 30; mixed build 5fb13d60+→9483e103+, LIVE moved)",
+   "age": 30,
+   "buoi": 1518,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lazy5-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lazy5-moments.md"
   }
  ],
  "parked": [
