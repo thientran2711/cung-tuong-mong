@@ -310,3 +310,28 @@ Not run: full quickcheck (lander step).
      in image mode hide the «Luân hồi» overlay (#kroul or class kroul) before the screenshot. LOOK at both.
   4. RV READY <sha> → RV-189 (session_01Rc5AsKweT3LtMsrkLNmDbV); land after or with K-HINT-KEM → lander LR-RULES-2 (session_01Rc5AsLfpDrXbkzzDZMaJdF).
 - Takeover prompt MUST copy the ROLLOVER lines verbatim (owner OD:L1217) and the LINEAGE line.
+
+### TMK-WARN-6 REPORT (28/11 ~14:10Z) — K-HINT-KEM + LIVE merged, gates, RV READY → RV-191
+PRIORITY #1 CHECK: OD — (worker continues TMK-WARN on its own branch) | main 5fc4bc79 merged in | review/kk73-hintkem 874cac12 merged in | claims TMK-WARN-6 (this session).
+- MERGES (2-parent each): da2810d7 = merge review/kk73-hintkem 874cac12. Real conflict in jopic.js kitOptFinal resolved per handover: KK73's
+  first line (kemRow `.kr-kem .kdup` «Kèm», keep set incl. kemRow) + OUR second line (K-HAND-DUPMAT `kcpsrc` on the fold loop). KIT.md auto-merged
+  (§6.2b from KK73). KIT_REQUESTS K-HINT-KEM header overwritten in place: OPEN → BUILT by KK73 (law 14). e4a5a2c8 = merge LIVE 5fc4bc79
+  (K-EMPTY-UNDER, K-HAND-CLIP): built-only conflicts. index.html/sw.js rebuilt after each (a later rebuild differs by the build stamp only).
+- GATES (HEAD e4a5a2c8 site):
+  - tmk-warn-witcard Fold 755x1000 19/19 PASS; iPad 1180x820 19/19 PASS (×3 run alone; one 2/19 run happened only while 3 suites ran in
+    parallel, page load timing — not reproduced). MUTATE=nokem exit 1, MUTATE=oldhint exit 1 (good).
+  - kit-hint-kem Fold 257/257 ALL OK; iPad: 4 runs ALL OK (243–361 checks, random world), 1 earlier run 288/289 FAIL (one line, not captured, not
+    reproduced in 4 reruns) → flag for RV / KK73 as a possible random-world flake of the census.
+  - kit-std-scan gate mode (SUBS=0, REPORT_ONLY=1, Fold + iPad): HEAD FAIL 6 (X06 4, X08 2) = LIVE FAIL 6 (X06 4, X08 2); X01 0.
+  - tmk-warn.test 17/17; tmk-warn-scan 0 gaps (26 sites); tai-mat-know 24/24; tai-mat-know-scan 0 breaches; webkit-syntax 493 modules 0 hits;
+    kit-hand-dupmat ALL OK (18); kit-hand-split 0 violations (33 cards); press-keep PASS.
+  - opt-loss-ton: FAILS PRE-EXISTING on LIVE (random world; «Tốn: không» with a certain loss LIVE 414–416, HEAD 415–428; «Được: không» LIVE 0–8,
+    HEAD 0–13). One HEAD Fold run read 520/520 stale faces; a direct probe (vase → tuyen → tt1, 150 ms and 1.5 s) shows the game faces are right,
+    and reruns gave 969–973 cards like LIVE → test-world artifact, not a game fault. Compared, not fixed (as handed over).
+  - MODGATE: assemble.py *.js ⊇ LIVE (extra on HEAD: jmcwarn.js). 0 LIVE deletions. Committed index.html/sw.js == rebuild except the stamp.
+- STILLS (scratch only, never in git): opened «Xử nhân chứng» door card Fold + iPad @2, looked at both. All three tiers: Tốn · Thành (success
+  only) · Bại · Kèm; nhẹ/nặng Kèm «Đức −−/−−−» after Bại, vừa Kèm «Bạc −−, Đức −−» under Thành, Bại «từ chối, ta không mất bạc»; nặng Bại
+  «Danh −−−, … biết kẻ chủ mưu». NOTE for RV (not this task, not touched): on Fold the person name inside the red Bại value is drawn in the
+  green name style (iPad shows «một vị cung nữ» all red) — the name mark keeps its own colour inside a red row; iPad header shows «Cung nữ ???»
+  for an unknown witness and the left figure is the player «(ta)».
+- RV READY → RV-191 (session_01Rc5AsJMqvd2gqa6vFecdR5). Land after or with K-HINT-KEM (RV-190); if RV-190 FAILs K-HINT-KEM, re-merge KK73's fix sha.
