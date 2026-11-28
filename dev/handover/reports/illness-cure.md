@@ -1,13 +1,6 @@
 # ILLNESS-CURE — worker report (review/illness-cure)
 
-## HANDOVER (worker rollover 28/11 ~03:30Z: context 41 % ≥ START_CTX 5 % + 25 %; depth 2) — r3 NOT started
-ORDER r3 (Foreman C 4-1-1-1, MAIN 185 OD 28/11 02:20Z): on top of 261d91f1 (SUPERSEDED for RV-163M) on review/illness-cure:
-- Q1: CAP Sức by illness stage (BAL key, e.g. BAL.illCure.sucCap {1:…,2:…,3:…}; hook = sucCap() in dev/build/jkh.js:26 — wrap it in jillcure.js: Math.min(cap, BAL stage cap) when illOf(p) && !p.ill.mort; NPCs same (law 1)). Update the danger line («Sức còn đầy…» sentence no longer true → say the cap). Test + MUTATE.
-- Q3: child illness: dev/build/j8.js kidsMonth (sudden hp hit 30+R(40), can kill at once, no sign) → add a warning stage (e.g. first hit cannot take hp ≤ 0 unless the kid was already «ốm nặng»; kid gets a sick flag + a card) and a NON-bạc road matching «Xin thuốc cho <con>» (bạc 30, j2.js:183 / BAL.ag.cx2.kidMed) — the existing non-bạc «Chữa bệnh cho con» needs Y thuật ≥ 4 (BAL.ag.cx2.kidHeal.y), so add e.g. «Thức trông con» / «Cầu xin ngự y cho con» (Sức / Sủng, BAL). NPC mothers same (jagacts2 kidMed / kidHeal agRunReg). Also j13 epidemic kid hit (hpEpidemic) and j7 kidHurt, j8:160 kpoison (poison = other worker? check TUANTANG-WARN scope). Scan table every child illness path.
-- Q4 OK as is. Q5 not ours (Foreman E robot).
-STATE: worktree /home/user/wt/illness-cure (branch review/illness-cure, HEAD 261d91f1, pushed). Base build worktree /home/user/wt/ic-base (5fb13d60) for before/after. Scan tool dev/tools/illness-road-scan.js <dir> <out.md>. Test dev/test/illness-cure.test.js [outdir] (no arg = /tmp/illness-cure). Other tests take NO out-dir arg (door-onetap.js, ptime2.test.js, next-dead.js needs http URL: python3 -m http.server). quickcheck: bash dev/tools/quickcheck.sh HEAD (~25 min; ptime2 §15–19, act-merge-j1, P9, next-dead are flaky/pre-existing — see Tests).
-Docs push: shallow history — reset to FETCH_HEAD, copy file, commit, push (never rebase).
-
+## STATUS 28/11 ~04:45Z: r3 DONE by ILLNESS-CURE-2 (session_01PEhRbxGXnzfsq379bwXJWA, depth 4) — RV READY (BIG) review/illness-cure c1c5cb0e; see section r3 at the end.
 
 ## r2 (Foreman C 4-1-1, Q2 = law 2): RV READY (BIG) 261d91f1 on 5fb13d60
 - nặng tier shows BOTH «Truyền thái y» (bạc) and «Cầu xin ngự y» (Sủng) side by side, each with its own Tốn / odds, greyed with the reason when she cannot pay (jone tierRows `both`; hs-thaiy both=[nặng] while ill). Card = 4 plaques (nhẹ · vừa · nặng · nặng).
@@ -67,3 +60,84 @@ Q2. Inside the nặng tier the ONE pick shows ONE road (bạc or Sủng, whichev
 Q3. Kid illness (kidsMonth): a sudden hit can kill at once (no warning); the non-bạc kid road needs Y thuật ≥ 4 («Chữa bệnh cho con»); for others only «Xin thuốc cho con» (bạc 30). Add a non-bạc kid road + a warning? Out of this order's ILL family; not built.
 Q4. The pulse roads (Mời thái y / Sang Thái y viện xin bắt mạch) leave the door while she is ill (the cure card is the one matter). They stay on the physician's card (Hậu cung › Cung nhân). OK?
 Q5. NPC cure chance BAL.illCure.npc = 60 %/month for a nặng+ NPC: fewer NPC illness deaths than before. Robot table needed?
+
+## r3 (Foreman C 4-1-1-1, MAIN 185 OD 28/11 02:20Z: Q1 + Q3; Q4 OK as is; Q5 = Foreman E) — RV READY (BIG) c1c5cb0e on 261d91f1
+Session ILLNESS-CURE-2 session_01PEhRbxGXnzfsq379bwXJWA, depth 4, START_CTX ~5 %.
+PRIORITY #1 CHECK ('sucCap|Sức tối đa|kidsMonth|kidMed|Xin thuốc cho|Cầu xin ngự y cho|kidHurt|hpEpidemic'): OD 28/11 02:20Z MAIN 185 rulings | main: jkh.js sucCap (the one Sức clamp), j8 kidsMonth, j2 «Xin thuốc cho <con>» (Thái y viện) + «Chữa bệnh cho con» (Y ≥ 4), jact «Tự bốc thuốc cho con», jagacts2 cx2 kidMed / kidHeal, j13 epidemic, j7 princefever / kidHurt, jface fxIllMonth (child ILL book) — no Sức-by-illness cap, no non-bạc kid road for a mother without Y thuật | review/*: review/illness-cure 261d91f1 (built on) | claims ILLNESS-CURE (this item).
+KIT CHECK: reuses the kit Q notice (her child's card, same as the r1 «no deck road» card), talkOpts rows (Thái y viện), deck cards (home deck), HXNOW rows (Sức help), DOOR.card (illness card). No new UI part.
+
+### Q1 — Sức tối đa capped by illness stage
+- BAL.illCure.sucCap {nhẹ 85 · nặng 60 · nguy kịch 35} (jbal2). jillcure wraps sucCap (jkh) → every Sức clamp in the game reads it (j1 apply / statSet, j8 ap, j3 / j76 / j42 regen, pets, maids …); fitted at once on catchIll, after each illMonthP (stage up / cured), and on render (old saves).
+- Everyone ill (she, NPC consorts, co-op) — law 1. Not for the jmort «mort» decline (own words).
+- Words: the danger line now says «Còn bệnh thì Sức tối đa chỉ N. Nghỉ ngơi không giữ được mạng; phải chạy chữa.» (the old «Sức còn đầy…» sentence is gone); the Sức help row «Sức tối đa N · vì lao phổi · nặng». HUD reads 60/60 on a nặng Lao phổi (shot).
+- Note for MAIN: at nặng (60) she loses the jmort care source «Sức ≥ careSuc 70» while ill — real, small; numbers are ours to tune.
+
+### Q3 — child illness: a sign before it can kill + non-bạc roads (laws 1, 2, 4, 7, 11)
+- ONE rule j8 kidIllHit (BAL.kidIll {hit lo 30 r 40, ch young 3 / old 1.5 / storm .5, floor 10, worse 30, well 60, feverFail 25}): the first illness hit on a well child never kills — she is left ốm (k.kIll), Sức khỏe ≥ floor, and her mother gets the sign; only an already-ốm child can die, from the next hit (worse % a month, never the month she fell ill). Sức khỏe ≥ well = khỏi.
+- Paths routed through it: j8 kidsMonth (sudden illness), j13 epidemic (đậu mùa), j7 kidHurt (fever event «Tự bốc thuốc» fails; its «hỏng: Sức khỏe -25» now prints BAL.kidIll.feverFail). jface ILL-book child: death only from nguy kịch already (unchanged), now + her card on each stage up. j8 kpoison = a scheme (poison family), not an illness — out of scope.
+- The sign (her own child): the card «<con> lâm bệnh» opens by itself once (alarm, like hers): Sức khỏe con, «Không chữa, mỗi tháng bệnh trở nặng: <word>; Sức khỏe con như lúc này thì mỗi tháng không qua khỏi: <word>», «Sức khỏe con lên 60 là khỏi», and the roads with Tốn. Words only, no %.
+- Roads (law 2): Thái y viện «Xin thuốc cho <con>» (bạc 30) now has its matching non-bạc road «Cầu xin ngự y cho <con>» (Sủng 4, the same +25; greyed «Chưa đủ Sủng để cầu xin»); home deck «Thức trông <con>» (nhẹ, Sức 10, +10) for any mother of a sick child; «Chữa bệnh cho con» / «Tự bốc thuốc cho con» (Y thuật) unchanged. Every child medicine road also gives an ILL-book child the cure roll (kidCure → j13 treat, BAL.illCure.way).
+- NPC mothers (law 1): jagacts2 cx2 kidAsk (Thái y viện, Sủng) / kidWatch (self, Sức) at the same BAL.ag.cx2 prices; kidMed / kidHeal run kidCure too; their children follow the same kidIllHit rule.
+- Law 4 family: the typed nguy kịch death 25 (j13, jbal2 illDie, jface, jillcure) → BAL.illCure.die3; jface slow 15 → BAL.illCure.slow; kidsMonth 30+R(40) / 3 / 1.5 / .5 → BAL.kidIll.
+
+### Scan (dev/tools/kid-illness-scan.js, before 261d91f1 / after)
+**BEFORE (261d91f1)**
+#### Child-illness paths
+| Path | first hit kills (trials) | sign before death |
+|---|---|---|
+| j8 kidsMonth — sudden illness (đậu mùa / sốt / kiết lỵ / phong hàn) | 63/100 | log line only |
+| j13 epidemic — đậu mùa in her cung | 60/60 | — |
+| j7 princefever — «Tự bốc thuốc» fails | 100/100 | — |
+| jface fxIllMonth — child with an ILL illness | 0/100 (nhẹ) | stages nhẹ → nặng → nguy kịch + log |
+| j8 kpoison — «Hạ độc con nàng» (a scheme, poison family — not an illness) | (out of scope) | — |
+
+#### Roads for her sick child
+- Thái y viện: Xin thuốc cho <con> (bạc)
+- home deck: —
+- NPC mother (jagacts2 AGC2): kidHeal (Sức) · kidMed (bạc)
+
+#### Q1 Sức tối đa by illness stage (Lao phổi; her Sức set to 99 first)
+base cap (well): 100
+| stage | her Sức tối đa | her Sức after render | NPC Sức tối đa |
+|---|---|---|---|
+| nhẹ | 100 | 99 | 100 |
+| nặng | 100 | 99 | 100 |
+| nguy kịch | 100 | 99 | 100 |
+
+page errors: 0
+
+**AFTER**
+#### Child-illness paths
+| Path | first hit kills (trials) | sign before death |
+|---|---|---|
+| j8 kidsMonth — sudden illness (đậu mùa / sốt / kiết lỵ / phong hàn) | 0/100 | card (opens by itself) |
+| j13 epidemic — đậu mùa in her cung | 0/60 | card (opens by itself) |
+| j7 princefever — «Tự bốc thuốc» fails | 0/100 | card (opens by itself) |
+| jface fxIllMonth — child with an ILL illness | 0/100 (nhẹ) | stages nhẹ → nặng → nguy kịch + log + card on each stage up |
+| j8 kpoison — «Hạ độc con nàng» (a scheme, poison family — not an illness) | (out of scope) | — |
+
+#### Roads for her sick child
+- Thái y viện: Xin thuốc cho <con> (bạc) · Cầu xin ngự y cho <con> (Sủng)
+- home deck: Thức trông <con> (Sức)
+- NPC mother (jagacts2 AGC2): kidHeal (Sức) · kidMed (bạc) · kidAsk (Sủng) · kidWatch (Sức)
+
+#### Q1 Sức tối đa by illness stage (Lao phổi; her Sức set to 99 first)
+base cap (well): 100
+| stage | her Sức tối đa | her Sức after render | NPC Sức tối đa |
+|---|---|---|---|
+| nhẹ | 85 | 85 | 85 |
+| nặng | 60 | 60 | 60 |
+| nguy kịch | 35 | 35 | 35 |
+
+page errors: 0
+
+
+### Tests
+- dev/test/illness-cure.test.js (Fold 755x1000 + iPad 1180x820): ALL OK, incl. r3: Q1 cap by stage (her + NPC, lifts when cured, follows the BAL key, HUD + Sức row), Q3 first hit never kills (300 trials, any size), already-ốm child can die, epidemic / fever / kidsMonth / ILL-book child all give the sign, NPC child same, Thái y viện bạc + Sủng roads same gain + greyed reason, home «Thức trông», NPC kidAsk pays Sủng, the child card opens once with roads + odds words, no %.
+- MUTATE (built page): cap off → 9 FAIL · no sign → 9 · no kid Sủng road → 4 · no kid card → 3 · epidemic old path → 3 · NPC kidAsk off → 9 · no Thức trông → 3; clean → 0.
+- one-core-guard / one-core-text / one-core-bind / one-core-text-rule: PASS.
+- ag-all.test: 6 FAIL — the SAME 6 on base 261d91f1 (day plan / perf p95 / Emperor plan) → pre-existing.
+- door-onetap: run 1 FAIL 2 («door word worse than best: hau», «tier row ran nothing: P9» — random-state flakes), rerun PASS; base PASS.
+- kit-std-scan (REPORT_ONLY, Fold + iPad): X02 20 · X06 12 · X08 6 — identical on base (pre-existing); 0 page errors.
+- quickcheck c1c5cb0e: QUICKCHECK PASS (open 2165 ms, old save loads + plays a buổi, perf new/live render 283/301, tab 469/472, buổi 1582/3211, tasks>200 29/31) · TIME-SPILL PASS · CORE GATES FAIL only G4 94-q-softlock: iPad person tap covered by div.kring-band (realtap DEAD BUTTON) → the view never opens; flaky on BOTH: branch reruns 4 / 0 fails, base 261d91f1 reruns 7 / 0 fails.
+- Shots (outside git, /home/user/wt/ic-shots): fold/ipad 1 ill card (HUD Sức 60/60, «Còn bệnh thì Sức tối đa chỉ 60»), 2 nặng back, 3 child card «<con> lâm bệnh».
