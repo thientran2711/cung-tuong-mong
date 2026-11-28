@@ -48,7 +48,7 @@ function altOf67(A,bid,o,named){const base=typeof o.o==="function"?o.o:(o.o==nul
   w:o.w,sc:o.sc,f:o.f,wx:o.wx,l:Object.assign({},o.l||{},{danh:((o.l||{}).danh||0)-2}),lx:[o.lx,"người được nhờ lỡ việc"].filter(Boolean).join(", "),
   rt:o.rt,rf:o.rf||"Người được nhờ làm hỏng việc.",e:o.e,to:o.to,tf:o.tf,go:o.go,need:o.need}}
 /* ONE bạc twin (law 2 «a bạc road always has another road of matching tier», owner OD 27/11 ~00:46Z; Foreman E C11 ruling Q4 (a), 28/11 12:28Z):
-   EVERY way that costs Bạc gets its twin «… (không dùng bạc)»: the same way and the same result, the Bạc paid instead as Sức by the ONE bạc→Sức
+   EVERY way that costs Bạc gets its twin «…, không dùng bạc»: the same way and the same result, the Bạc paid instead as Sức by the ONE bạc→Sức
    rule above (altCost: BAL.bacTuan + BAL.altK at her rank, floor BAL.alt67Suc) — the non-bạc road of THAT tier, never a 4th tier.
    j67 hồi: one twin per bạc way (altOf67, appended after the hồi's ways so a kept way's index S.pl67.i never moves; a hồi with hand-written
    ALT67 routes keeps them as the twins of its first bạc ways). Composed cards j7c / j68c / j71c / jworldc: twin6 builds the c6 way and its
@@ -56,7 +56,7 @@ function altOf67(A,bid,o,named){const base=typeof o.o==="function"?o.o:(o.o==nul
    BAL.twin.on = the hook switch (the scan dev/test/bac-twin-scan.js: every bạc way has its twin; its mutant MUT=twinoff must FAIL). */
 BAL.twin={on:true};
 function twinOn(){return !!(BAL.twin&&BAL.twin.on)}
-function twinN(n){return `${n} (không dùng bạc)`}
+function twinN(n){return `${n}, không dùng bạc`}/* no brackets: the kit plaque drops a «(…)» tail */
 function twinSuc(bac,rk){return altCost(bac,rk==null?(S&&S.rank):rk,BAL.alt67Suc,0).suc}
 function twinC(c,rk){const x=Object.assign({},c);const b=x.bac;delete x.bac;x.suc=(x.suc||0)-twinSuc(b,rk);return x}
 function twinsLast(A){return A.map(x=>x[0]).concat(A.flatMap(x=>x.slice(1)))}

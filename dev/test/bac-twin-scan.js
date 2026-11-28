@@ -1,7 +1,7 @@
 /* E-TIER-B14b bạc-twin gate (law 2 «a bạc road always has another road of matching tier», owner OD 27/11 ~00:46Z; Foreman E C11 ruling Q4 (a)):
    ONE jstory hook (twin6 / altOf67 / twinNpc). On the built game (index.html) every card of the families is made from a real roster and checked:
    - j7c (every J7SEEDS seed), j68c (every composed E68 card), j71c (every festival comp), jworldc (every WC seed): each way that costs Bạc has its
-     twin «<way> (không dùng bạc)» on the SAME card: no Bạc in its cost, more Sức than the bạc way (the Bạc priced by altCost), the same Được line;
+     twin «<way>, không dùng bạc» (jstory twinN) on the SAME card: no Bạc in its cost, more Sức than the bạc way (the Bạc priced by altCost), the same Được line;
      the card keeps BAL.<fam>.tier.length real ways (twins are not a 4th tier);
    - j67 (every ARC67 hồi, wrapped opts67): a hồi with k bạc ways carries ≥ k routes «không dùng bạc» (alt67), each without Bạc; the kept ways
      come first in their own order (S.pl67.i of a kept way never moves);
@@ -22,7 +22,7 @@ let fail=0;const ok=(c,m,x)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'
   const out={card:{},bad:[],j67:{hoi:0,bac:0,ok:0},npc:null,err:[]};const T=f=>out.card[f]=out.card[f]||{cards:0,bacWays:0,twins:0};
   const sucOf=o=>(o.fx||{}).suc||0;const wOf=o=>String(o.x||'').split(' · kèm')[0];
   const chk=(fam,id,opts,tiers)=>{const t=T(fam);t.cards++;const real=opts.filter(o=>!o.twin);if(real.length!==tiers)out.bad.push([fam,id,'real ways '+real.length]);
-   for(const o of real){if(!((o.fx||{}).bac<0))continue;t.bacWays++;const n0=o.n.replace(/ \(mệt\)$/,'');const tw=opts.find(x=>x.twin&&x.n.replace(/ \(mệt\)$/,'')===n0+' (không dùng bạc)');
+   for(const o of real){if(!((o.fx||{}).bac<0))continue;t.bacWays++;const n0=o.n.replace(/ \(mệt\)$/,'');const tw=opts.find(x=>x.twin&&x.n.replace(/ \(mệt\)$/,'')===twinN(n0));
     if(!tw){out.bad.push([fam,id,'no twin «'+n0+'»']);continue}
     if((tw.fx||{}).bac)out.bad.push([fam,id,'twin pays bạc «'+n0+'»']);else if(!(sucOf(tw)<sucOf(o)))out.bad.push([fam,id,'twin Sức not dearer «'+n0+'»']);
     else if(wOf(tw)!==wOf(o))out.bad.push([fam,id,'twin result differs «'+n0+'»',wOf(o),wOf(tw)]);else t.twins++}};
