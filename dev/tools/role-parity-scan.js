@@ -50,6 +50,11 @@ const ROLE_N={maid:"cung nữ",t1:"Đáp ứng",t2:"Thường tại",t3:"Quý nh
 
 /* ---------------- in-page probes ---------------- */
 function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4,5,6,7];const res={P:{},N:{},T:{},err:[],cov:{}};
+ /* row11-law1 (harness gap, law 11): ACT-MERGE doors (jdoor J1–J4: «one feature = one button») fold her acts into door buttons («Giao hảo», «Hãm hại»,
+    «Hạ uy thế» …) whose members sit inside the door card; the probe read only the door names (≈ 340 false P-ONLY / N-ONLY rows on the rules bundle).
+    A door is presentation only (each member runs through the same talk() path), so her side is read UNFOLDED: DOOR.raw (talkOpts raw list) and
+    DOOR.fold = identity (deck / tab doors), restored when the probe ends */
+ try{if(window.DOOR){DOOR.raw=(DOOR.raw||0)+1;const F0=DOOR.fold;if(typeof F0==="function"){DOOR.fold=l=>l;res.__F0=F0}}}catch(e){}
  /* one seeded dice for both sides: each probe starts from the same seed, so a random pick never makes a one-sided row */
  const R0=Math.random;let seed=1;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};const SEED=n=>{seed=n||1;Math.random=rnd};
  const E=(w,e)=>{if(res.err.length<30)res.err.push(w+": "+(e&&e.message||e))};
@@ -334,7 +339,7 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
    npcOpts("up",n,["consort"]);npcOpts("t1born",b,["consort"]);rivals.splice(rivals.indexOf(b),1)}catch(e){E("upNpc",e)}}
  const LT={};for(const k in TW)LT[k]=[TW[k].n];for(const k in ACT)if(ACT[k]&&ACT[k].n)LT["harm:"+k]=[ACT[k].n];
  for(const k in (window.AGC2BTN||{}))LT["cx2:"+k]=[AGC2BTN[k]];for(const k in (window.AGC3BTN||{}))LT["cx3:"+k]=[AGC3BTN[k]];for(const k in (window.AGC4BTN||{}))LT["cx4:"+k]=[AGC4BTN[k]];
- res.LT=LT;Math.random=R0;return res}
+ res.LT=LT;Math.random=R0;try{if(window.DOOR){DOOR.raw--;if(res.__F0){DOOR.fold=res.__F0;delete res.__F0}}}catch(e){}return res}
 
 async function scan(html,opt){opt=opt||{};const {chromium}=require('playwright');const URL=/^(https?|file):/.test(html)?html:'file://'+path.resolve(html);
  const b=await chromium.launch();const out={P:{},N:{},err:[],pageErr:[]};
