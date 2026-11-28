@@ -51,3 +51,5 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 08:40Z ui8 staged review/lc35-ui8 a50895cb = ui7 + f-word36 8843322a (j23 resolved: LIVE BAL.artLes.k gate + F crsAfterW log tail); RV-182 delta asked.
 - 08:36Z MAIN = MAIN CHÍNH 189 session_01Rc5AsKLcnai97YwjFT5YMc (parent 188, verified).
 - 08:38Z LESSON: quickcheck compares vs local origin/main — FETCH main after every push before a quickcheck (ui5 run started vs stale 5ad52416 → killed, rerun vs a96564ad; oldsave-r1 needs .tmp/old.html = LIVE index.html).
+- 08:40Z RV-182 LAND ui7 5b597911 (3 hunks correct); d8fcdb8c already stacked → ui7 head b9404150 (only built conflicts on top).
+- DAYQ-NOTURN r3 = ac81eb77 (on 22afefb4) → restaged review/lc35-dayq de049947 on LIVE a96564ad (MODGATE PASS; union ok). Waits RV-163M. dayq test+qc in seq2 after ui5 (worktree lc35-dq now = de049947).
