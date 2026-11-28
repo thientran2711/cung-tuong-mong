@@ -1,0 +1,8 @@
+GAME BUILD {"s":"5fb13d60+","b":"8af7b3429f38","t":"2026-11-27T21:15Z"}
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/binh.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/binh.webp
+BOARD ban 0 moves 3/10 raw 0.83 (16 s, area 6, cautious)
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Việc của kẻ hầu)
+LIFE IDENTITY CHANGE at buổi 8 (name Sử Lạc Yên → Đoan Mộc Hương Ngưng; clock 1.0.1.1) — a different life is on the page; hard stop, this life is VOID (never counted)
+BUG harness LIFE IDENTITY CHANGE at buổi 8 (name Sử Lạc Yên → Đoan Mộc Hương Ngưng; clock 1.0.1.1) — a different life is on the page; hard stop, this life is VOID (never counted)
+LIFE VOID ES8-bd_san-R7-cautious3-h (identity change) · buổi 8
