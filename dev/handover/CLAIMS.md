@@ -768,3 +768,7 @@ E-TIER-B13 (opus BIG) row 42 convert batches 1 (composed roads 3 tiers, BAL.road
 B-ROW4-ROAD-DIALOGUE (WORKLIST row 4 main roads, E70; helper of B ROWS 4+22 2GvCVsyL) | review/road-dialogue | FOREMAN B ROOT3 child2 session_01N1tNP4FQic23a4wJXFSmP4 / worker session_01N1tNP6X94bVbzA5TSJzzxJ | RUNNING | 28/11 07:56Z
 E-PARK-AUDIT (WORKLIST row 21 per-row check) | handover reports/e-park-audit.md | session_01DgYSWpkFqvqQTHbRiHJZjE | DONE 28/11 08:20Z (reports/e-park-audit.md) | 28/11 08:03Z (Foreman E C10)
 E-ILL-RATE (MAIN 185 order: NPC + heroine illness death-rate table, LIVE vs review/illness-cure) | handover reports/e-ill-rate.md | session_01DgYSWpaN2twGb24ZSi3S5p | RUNNING | 28/11 08:04Z (Foreman E C10)
+B-RDW-A R1 dtq+R2 muoi+R3 cn (row 4 road-dialogue writers; lead 6X94bVbz) | content on handover branch → review/road-dialogue | FOREMAN B ROOT3 child2 / worker <opening> | RUNNING | 28/11 08:21Z
+B-RDW-B R4 cnv+R5 nc+R6 td (row 4 road-dialogue writers; lead 6X94bVbz) | content on handover branch → review/road-dialogue | FOREMAN B ROOT3 child2 / worker <opening> | RUNNING | 28/11 08:21Z
+B-RDW-C R7 ch+R8 thd (row 4 road-dialogue writers; lead 6X94bVbz) | content on handover branch → review/road-dialogue | FOREMAN B ROOT3 child2 / worker <opening> | RUNNING | 28/11 08:21Z
+B-RDW-D R9 pf+arcs+R10 bd (row 4 road-dialogue writers; lead 6X94bVbz) | content on handover branch → review/road-dialogue | FOREMAN B ROOT3 child2 / worker <opening> | RUNNING | 28/11 08:21Z
