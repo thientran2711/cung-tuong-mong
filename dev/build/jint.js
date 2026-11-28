@@ -20,4 +20,4 @@ window.intAll=intAll;
  W("nextBuoi",a0=>function(){const r=a0.apply(this,arguments);intAll();return r});
  W("deser",a0=>function(){const r=a0.apply(this,arguments);intAll();return r});
  /* log wording: "thù -N" → "oán ngươi +N" (sign as she reads it: more oán toward her) */
- W("log",a0=>function(t){if(typeof t==="string"&&/thù -\d/.test(t))arguments[0]=t.replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${n}`);return a0.apply(this,arguments)})})();
+ W("log",a0=>function(t){if(typeof t==="string"&&/thù -\d/.test(t))arguments[0]=t.replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ngươi +${spSee("oan",+n)}`);return a0.apply(this,arguments)})})();
