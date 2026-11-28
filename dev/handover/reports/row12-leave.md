@@ -95,7 +95,6 @@ KIT CHECK: reuses pushDil/PEND standard dialog + j67 «tốn · thành · hỏng
 - accw.test.js (Fold 755x1000) on 4480ae6e: 22/22 ok, 0 page errors (×1; confirms the 4-act hook works as claimed).
 - Not run after the FAIL was clear (device shots, accw ×3/MUTATE/base, punish-*, leave-palace, oldsave-r1): the worker's numbers stand as theirs, not re-proved here; the r2 rv must run them all.
 Shots: none taken (nothing uploaded, nothing to wipe).
-<<<<<<< HEAD
 
 ## r2 (B FIXER ROW 12 leave r2, session_01N1tNP4252yURGUqLCgK7NK, opus; START_CTX ~5 %) — 11/28/2026
 PRIORITY #1 CHECK ('row12|accw|warning before punishment|OD L2531|PUNISH-TIER'): OD L2531 (25/11 ~23:33Z) + row 12 WORKLIST_OPEN | main LIVE aecbc267 (lr-rules-r3 = psl4 57f6e2c4 + rules chain: RV-184 one-core scanner fix 617ea888 + stale-tests-8 chReady perf fix abda1390) | review/* review/row12-leave 4480ae6e → review/row12-leave-r2 | claims B-ROW12-LEAVE r2 FIXER = this session.
@@ -186,5 +185,3 @@ Ancestry: aecbc267 IS an ancestor of 0654c1cc (so psl4 57f6e2c4 content is insid
 | own shots Fold 755x1000 + iPad 1180x820 (scratch, not uploaded; looked at 3×) | fall card (3 tiers, Tùy duyên / Vững, Bạc 20 / 150) OK, no overflow, 0 page errors; punTier card «tội nang» (FAIL 3); srvLaundry card empty-option box (FAIL 4) |
 Not run after the FAIL was clear (the r3 rv runs them all on the final sha): accw ×3 / MUTATE / LIVE, punish-tier, punish-wit, charge-smoke/taps, dup-piece-scan, leave-palace, one-core-guard, q-softlock alone, oldsave-r1, quickcheck ALONE, «Phế» seal on cấm túc nhẹ on LIVE (item 10, unverified). r3 must also merge LIVE 8a30664e (built files only conflict).
 Shots: scratch only, deleted with this verdict (nothing on the CDN, nothing to wipe).
-=======
->>>>>>> e655ad96c (F c1: s18f evidence)
