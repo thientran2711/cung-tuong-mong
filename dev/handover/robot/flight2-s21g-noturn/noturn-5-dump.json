@@ -1,0 +1,496 @@
+{
+ "at": "2026-11-28T00:38:41.170Z",
+ "url": "http://127.0.0.1:8803/",
+ "S": {
+  "name": "Thượng Quan Hàn Yên",
+  "year": 2,
+  "turn": 14,
+  "tuan": 1,
+  "buoi": 3,
+  "dead": false,
+  "rank": 1,
+  "place": "home"
+ },
+ "top": null,
+ "qs": {
+  "Q": [
+   "Một ánh mắt"
+  ],
+  "DQ": {
+   "want": null,
+   "t": 0,
+   "mt": 427169,
+   "newsHold": 0,
+   "fo": {},
+   "stat": {
+    "held": 5,
+    "ran": 5,
+    "dropped": 0,
+    "modalHeld": 402,
+    "newsFirst": 0,
+    "kmHeld": 79,
+    "actHeld": 47,
+    "pulled": 8,
+    "actKm": 0,
+    "painted": 38,
+    "tapPaint": 2,
+    "netArm": 53,
+    "rearm": 198,
+    "newsLet": 0,
+    "newsPass": 1,
+    "tapRe": 0,
+    "afterPaint": 35,
+    "staleNext": 3,
+    "mineTap": 73,
+    "woke": 4,
+    "mineFront": 2
+   },
+   "park": null,
+   "tw": 1795826314791,
+   "pdT": 1795826319563,
+   "tapEv": {
+    "isTrusted": true,
+    "__h2in": false
+   },
+   "tapIn": false,
+   "tapT": {},
+   "preQ": {},
+   "actTap": false,
+   "user": 0,
+   "kz": 0,
+   "wk": {
+    "m": {
+     "ev": 1,
+     "t": "Một ánh mắt",
+     "who": {
+      "rk": "off",
+      "rw": "Vương gia",
+      "src": "https://ctm-img.victoria-tntt.workers.dev/img/por-man-vuonggia-2-a26.webp",
+      "hue": 0,
+      "ini": "C",
+      "col": "#6a8aa0",
+      "__kp": {
+       "id": "m2",
+       "role": "Vương gia",
+       "rw": "vương gia",
+       "haunts": [
+        "vuon",
+        "tn"
+       ],
+       "age": 28,
+       "name": "Vương gia Quách Phụng Chi",
+       "loyal": 42,
+       "af": 0,
+       "tinh": 0,
+       "letters": 0,
+       "trysts": 0,
+       "alive": true,
+       "knowsMe": [],
+       "likeV": 7,
+       "net": [
+        "Nhiều chuyện",
+        "Thực dụng",
+        "Ham vui"
+       ],
+       "mlike": "art:vu",
+       "dis": [
+        "art:hoa",
+        "art:thi"
+       ],
+       "tho": 46,
+       "thoM": 12,
+       "thoO": 3,
+       "fc": "face-emperor-5",
+       "fk": "emp0",
+       "fcKeep": 1,
+       "fid": "man:vuonggia-2",
+       "tin": 44,
+       "eaX": {
+        "k": null,
+        "n": 0
+       },
+       "nr": {
+        "o": "vg",
+        "r": "vg_dat",
+        "n": 6,
+        "k": -1,
+        "t": 15,
+        "h": 6,
+        "hs": 0,
+        "hb": 0,
+        "c": "m0",
+        "e": "mất mùa",
+        "x": 0,
+        "l": [
+         [
+          4,
+          1
+         ],
+         [
+          5,
+          -1
+         ]
+        ],
+        "cn": "Thị vệ Yến Diệc Thần",
+        "rc": "",
+        "hp": []
+       },
+       "__feelMig": 1,
+       "ill": {
+        "k": "phonghan",
+        "st": 1,
+        "known": true
+       }
+      },
+      "__kr": {
+       "role": "royal",
+       "rank": null,
+       "origin": null,
+       "sex": "m",
+       "kid": false
+      },
+      "kk": "nm2"
+     },
+     "h": "<p>Vương gia Quách Phụng Chi đem lòng thương ngươi, lén gửi qua cung nữ một bài thơ chép tay.</p>",
+     "opts": [
+      {
+       "n": "Giữ bài thơ, đáp lại",
+       "fx": {},
+       "x": "hắn tình ý +10 · bài thơ là tang vật nếu bị lục"
+      },
+      {
+       "n": "Đốt đi, làm ngơ",
+       "fx": {
+        "duc": 1
+       },
+       "x": "không để lại tang vật · hắn tình ý -5"
+      }
+     ],
+     "rk": "ap.manPoem",
+     "ra": [
+      {
+       "kind": "manPoem",
+       "who": {
+        "@p": "m2"
+       },
+       "tgt": {
+        "@p": "me"
+       },
+       "why": "tính đa tình, mến ngươi",
+       "place": null,
+       "flag": null,
+       "s": 30
+      }
+     ],
+     "__sp13": {
+      "b0": 168
+     },
+     "__sp13c": 168,
+     "__kw": 1,
+     "__held": 1,
+     "__sg": "Một ánh mắt||<p>Vương gia Quách Phụng Chi đem lòng thương ngươi, lén gửi qua cung nữ một bài thơ chép tay.</p>|null|Giữ bài thơ, đáp lại/Đốt đi, làm ngơ|",
+     "evcN": 44
+    },
+    "at": 1795826316470,
+    "n": 2
+   },
+   "ra": 6,
+   "bz": 0,
+   "kg": 0,
+   "ka": 0,
+   "mine": {
+    "t": "Kính sự phòng báo tin",
+    "h": "<p>Tối nay Hoàng thượng lật thẻ bài của ngươi.</p>",
+    "opts": [
+     {
+      "n": "Tắm gội chờ giá",
+      "fx": {},
+      "x": "thành: được thị tẩm, gần Hoàng thượng đêm nay"
+     },
+     {
+      "n": "Tiến cử Chi Nhi hầu thay",
+      "fx": {},
+      "x": "thành: Chi Nhi hầu thay đêm nay, được sủng hạnh, rồi được phong Đáp ứng, trở mặt với ngươi · kèm: mất Chi Nhi, cung nữ mới lòng 45"
+     },
+     {
+      "n": "Cáo bệnh (Tối nay Hoàng thượng lật thẻ bài của ngươi)",
+      "fx": {
+       "sung": -2,
+       "suc": 6
+      },
+      "x": "thành: nghỉ trọn một đêm cho lại sức · kèm: nhường đêm, Ân tình -2"
+     }
+    ],
+    "who": {
+     "rk": "emp",
+     "rw": "Hoàng thượng",
+     "w": [
+      "e"
+     ],
+     "src": "https://ctm-img.victoria-tntt.workers.dev/img/por-emperor-a18-1.webp",
+     "hue": 0,
+     "ini": "Đế",
+     "col": "#f0d070",
+     "__kp": {
+      "era": "Thừa Bình",
+      "age": 22,
+      "reignY": 1,
+      "traits": [
+       "nongnay",
+       "hieuthao"
+      ],
+      "mood": 3,
+      "likes": {
+       "flower": "hoa cúc",
+       "music": "khúc Xuân giang hoa nguyệt",
+       "dish": "gà hấp lá sen",
+       "dress": "y phục thanh nhã",
+       "mk": "son phấn tông hồng tím",
+       "mkLv": "dung nhan Đoan trang"
+      },
+      "known": {},
+      "face": 1,
+      "fc": "face-emperor-1",
+      "fk": "emp0",
+      "fcKeep": 1,
+      "dis": [
+       "flower:hoa sen"
+      ],
+      "figV0": "Thừa Bình",
+      "fert": 0.7352971769636497,
+      "rcpSeed": 465139905,
+      "fid": "emperor:e1",
+      "__feelMig": 1,
+      "tho": 67,
+      "thoM": 12,
+      "thoO": 2,
+      "__emoMood": 3,
+      "eaX": {
+       "k": null,
+       "n": 0
+      },
+      "ea": {
+       "m": 14,
+       "f": "nau",
+       "d": "ky"
+      },
+      "met": {
+       "24": [
+        [
+         43,
+         "cam",
+         1
+        ]
+       ],
+       "26": [
+        [
+         42,
+         "cam",
+         0
+        ],
+        [
+         43,
+         "cam",
+         1
+        ]
+       ],
+       "s48": [
+        [
+         42,
+         "tea",
+         1
+        ]
+       ]
+      },
+      "emo": {
+       "k": "gian",
+       "v": 35,
+       "why": "phật ý Điền Thư Dao",
+       "t": "7",
+       "e": null,
+       "c": "pub",
+       "w": 44,
+       "mk": 1
+      },
+      "emoFond": {
+       "k": "7",
+       "w": 42
+      },
+      "mk": [
+       {
+        "n": 1,
+        "kd": "e:phật ý Điền Thư Dao",
+        "k": "gian",
+        "s": 35,
+        "why": "phật ý Điền Thư Dao",
+        "e": null,
+        "c": "pub",
+        "t": "7",
+        "k0": 704,
+        "k1": 712,
+        "w": 44,
+        "at": 704
+       }
+      ],
+      "__mkL": {
+       "k": "gian",
+       "v": 35
+      },
+      "__mkAt": 700,
+      "eaQ": 12,
+      "eaQx": 0.7,
+      "emoH": [
+       {
+        "k": "gian",
+        "v": 35,
+        "why": "phật ý Điền Thư Dao",
+        "w": 44,
+        "c": "pub"
+       },
+       {
+        "k": "gian",
+        "v": 35,
+        "why": "phật ý Tào Nghi Tu",
+        "w": 41,
+        "c": "pub"
+       },
+       {
+        "k": "gian",
+        "v": 35,
+        "why": "phật ý Tăng Mạn Nhu",
+        "w": 40,
+        "c": "pub"
+       },
+       {
+        "k": "gian",
+        "v": 35,
+        "why": "phật ý Phú Sát Nhạn Hồi",
+        "w": 41,
+        "c": "pub"
+       }
+      ],
+      "cz": {
+       "c5.27": {
+        "w": 17,
+        "dt": "T7/1 hạ tuần",
+        "q": 27,
+        "by": "20",
+        "to": "emp",
+        "a": "gift",
+        "s": 1,
+        "y": {
+         "k": "net",
+         "x": "Kín đáo"
+        },
+        "n": "tặng quà",
+        "d": "gift",
+        "x": "Đệm gấm"
+       },
+       "c8.51": {
+        "w": 26,
+        "dt": "T10/1 hạ tuần",
+        "q": 51,
+        "by": "2",
+        "to": "emp",
+        "a": "gift",
+        "s": 1,
+        "y": {
+         "k": "net",
+         "x": "Lạnh lùng"
+        },
+        "n": "tặng quà",
+        "d": "gift",
+        "x": "Trà Quân Sơn ngân châm"
+       }
+      },
+      "mem": {},
+      "fi": null
+     },
+     "__kr": {
+      "role": "emp",
+      "rank": null,
+      "origin": null,
+      "sex": "m",
+      "kid": false
+     },
+     "kk": "emp"
+    },
+    "pid": "ksp",
+    "pp": {
+     "nd": 40
+    },
+    "__sg": "Kính sự phòng báo tin||<p>Tối nay Hoàng thượng lật thẻ bài của ngươi.</p>|null|Tắm gội chờ giá/Tiến cử Chi Nhi hầu thay/Cáo bệnh|",
+    "__el": 1,
+    "__kw": 1,
+    "hideOut": true,
+    "__seen": 1,
+    "__k61": 1,
+    "__pres": {
+     "cat": "ksp",
+     "grp": "",
+     "story": ""
+    },
+    "__b95": 1
+   }
+  },
+  "used": 0,
+  "buoi": 3,
+  "mg": null,
+  "modalHidden": true,
+  "next": {
+   "disabled": false,
+   "text": "Sang ngày mới"
+  },
+  "dqActEl": null,
+  "dqDawn": false,
+  "dqFreeScreen": true,
+  "build": {
+   "b": "0b372aa14258",
+   "bi": {
+    "s": "ca4a1689",
+    "b": "0b372aa14258",
+    "t": "2026-11-27T21:07Z"
+   }
+  }
+ },
+ "coop": {
+  "CW": null,
+  "room": null,
+  "seat": {
+   "url": "https://ctm-coop.victoria-tntt.workers.dev",
+   "name": "",
+   "pid": "44f02a3fbd1d425bbaeb0bac",
+   "state": {
+    "status": "off",
+    "room": "",
+    "you": "",
+    "seats": null,
+    "week": 0,
+    "ended": {
+     "a": false,
+     "b": false
+    },
+    "C": null,
+    "mine": null,
+    "msv": 0,
+    "peerOnline": false,
+    "bothIn": false,
+    "playing": false
+   },
+   "code": "",
+   "seat": null,
+   "week": 0,
+   "online": {
+    "a": false,
+    "b": false
+   },
+   "ended": {
+    "a": false,
+    "b": false
+   },
+   "frozen": false,
+   "waiting": false
+  }
+ },
+ "Q": 1
+}

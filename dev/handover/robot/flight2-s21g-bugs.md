@@ -10,3 +10,5 @@ Class guess: dialog queued while a right-panel tab/overlay was open is held (DQ.
 ## Other
 - SAVE STALE rows: harness CTMZ unreadable (HARNESS FIXER #24 item viii), not a game bug.
 - Dead buttons 0, stuck 0 so far.
+## Update 00:5x: more noturn rows
+- noturn-4 / noturn-5: same signature (3 dead «Sang ngày mới» taps, queue Q=1). noturn-5 Q = «Một ánh mắt» (ckpt clock at 3441), year 2 (21 tuổi, Thượng tại, Khải Tường cung). See the dumps for state S and queue; "ls" stripped.
