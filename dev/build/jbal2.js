@@ -568,8 +568,9 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
    j68 event is held at day start (was a hard-coded roll(50) in j68 evGate: half of them came at dawn). jdayq: poll = ms between looks while a turn / card is held; mineLook = ms after her tap inside a person view during which a NEW queued card is hers and painted on top (E96 dialog-order); stale = ms a busy motion queue with no scene on screen may hold the turn; wake = ms a card may wait in Q with nothing on screen before the safety net shows it (button-crawl-fix-5 dqWake; SANGBUOI-HELD r3 folded its r2 net into it: one net); rearm = how many more looks (x poll ms, ~3 min) the held-card painter takes while an inner gate keeps swallowing its paint (review/sangbuoi-held-fix). */
 Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000,mineLook:400}});
 /* F10 renderer-mem (26/11), BAL.kobs = the kit's DOM observers. The «Kéo xuống» scroll cue (jksize kitScrollCues). short = a scroller under this many px gets the slim strip below it
-   (was a typed 260); hyst = a scroller keeps its short/tall look until its own height moves by more than this (its own cue never flips it). */
-Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3}});/* KK53 v2 (OD 27/11 ~03:17Z): the SMALL «Chọn» chip inside a lifted kitPick plaque's bottom-right corner (jkpick conf): w × h px */
+   (was a typed 260); hyst = a scroller keeps its short/tall look until its own height moves by more than this (its own cue never flips it).
+   K-CUE-FOOT (KK64, KIT §56.33): footTtl = ms the cue keeps its column's sticky-footer list; footZone = a stuck footer counts when its top is below this share of the column height. */
+Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3,footTtl:400,footZone:.3}});/* KK53 v2 (OD 27/11 ~03:17Z): the SMALL «Chọn» chip inside a lifted kitPick plaque's bottom-right corner (jkpick conf): w × h px */
 Object.assign(BAL,{kpkgo:{w:24,h:24}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
    act: cost = what one try costs (feign: Đức, road: Sức); failSung = Sủng lost on a failed try; rel = thiện cảm lost both ways on a win
