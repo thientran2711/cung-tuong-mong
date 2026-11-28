@@ -164,7 +164,7 @@ DOOR.road=function(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeo
    const host=P;/* one door per key on the panel: the kit panes wrap cards one by one (kpanec), so siblings are not a list; the door stands where its first way stood */let hm=grp.get(host);if(!hm){hm=new Map();grp.set(host,hm)}if(!hm.has(k))hm.set(k,{k,r,mem:[]});hm.get(k).mem.push(b)}
   for(const hm of grp.values())for(const g of hm.values()){if(g.mem.length<2)continue;
    const W=g.mem.map(b=>({i:+b.dataset.i,dis:!!(b.disabled||b.classList.contains("kdis"))}));const ok=W.filter(w=>!w.dis);const lead=deck[(ok[0]||W[0]).i];DART[g.k]=lead.n;
-   const o={n:g.k,t:g.r.h||"",k:Math.min(...(ok.length?ok:W).map(w=>cardCost(deck[w.i]))),c:{},w:{},x:W.map(w=>String(deck[w.i].n).split(", ")[0]).join(" · "),dom:lead.dom,lock:!ok.length};
+   /* K-GROUP-COST: k = the cheapest usable way (what she can do now), kHi = the dearest way the card lists (its Thành names every way) */const KW=(ok.length?ok:W).map(w=>cardCost(deck[w.i])),KA=W.map(w=>cardCost(deck[w.i]));const o={n:g.k,t:g.r.h||"",k:Math.min(...KW),kHi:Math.max(...KA),c:{},w:{},x:W.map(w=>String(deck[w.i].n).split(", ")[0]).join(" · "),dom:lead.dom,lock:!ok.length};
    try{const Ro=ok.map(w=>deck[w.i]).filter(a=>a.o!=null&&a.o<100);if(ok.length&&Ro.length===ok.length)o.o=Math.max(...Ro.map(a=>a.o))}catch(e){}/* every usable way rolls: the best way's odds; a sure way keeps the sure look */
    const tp=document.createElement("template");tp.innerHTML=cardH(o,W[0].i).trim();const b=tp.content.querySelector("button");if(!b)continue;
    b.removeAttribute("data-i");b.dataset.ddoor=g.k;b.dataset.ddh=g.r.h||"";b.dataset.ddi=W.map(w=>w.i).join(",");b.dataset.ddx=W.map(w=>w.dis?0:1).join(",");
@@ -212,7 +212,7 @@ DOOR.road=function(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeo
   acts:{a:["ksab","musk","kframe","kpoison","catswap","pond"]},
   chT:["t:Đẩy con nàng xuống hồ"]},
  {k:"P10",n:"Lấy của",cat:"hai-nguoi",kinds:["card"],rep:"Sai người lấy trộm đồ",h:"Chọn mức và cách lấy của nàng.",re:/^$/,
-  acts:{a:["batnat","laydo","laydol","petsteal","thaopet","phonghoa"]},chT:[]},
+  acts:{a:["batnat","laydo","laydol","tyrob","petsteal","thaopet","phonghoa"]},chT:[]},
  {k:"P11",n:"Tố cáo",cat:"muu-ke",kinds:["rival","hh","card"],rep:"Tố giác",h:"Chọn tội để tố.",re:/^(Tố xa xỉ|Hặc ăn mặc sai phẩm)$/,
   acts:{a:["accuse","xx","vp"]}},/* split-merge B1: ONE «Tố giác» (accuse; listener by chTo) + the two visible-fault reports */
  {k:"P12",n:"Mặc cả chứng cứ",cat:"muu-ke",kinds:["card"],rep:"Uy hiếp đòi bạc",h:"Chọn cách dùng chứng cứ đang nắm.",re:/^$/,acts:{a:["uyhiep","banphe"]}},/* split-merge B2: «Trả chứng cứ lấy lòng» folded away */

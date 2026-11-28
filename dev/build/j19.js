@@ -51,7 +51,7 @@ function kemCol(h){return String(h).replace(/<span class="ef ([gn])">([\s\S]*?)<
 /* the act card */
 function cardH(a,i){const poor=!a.lock&&!canPay(a),o=oddsOf(a),capd=oddsCapped(a),sft=capd||agSoft(o+lotB(S,a.dom));/* AG soft fail at the cap: one rule with runOpt */const dis=!can(cardCost(a))||a.done||poor||a.lock||S.dead||(a.b!=null&&(S.buoi||0)!==a.b);const rolled=o<100&&!a.lock;
  const ow=rolled?(capd?capW():word(optOdds(a))+lotTag(a.dom,o)):"";
- return `<button class="card kcard" data-i="${i}" ${dis?"disabled":""}><h4>${a.n}</h4><span class="ktime">${pips(cardCost(a))} ${cardCost(a)} khắc${a.b!=null?` · Chỉ ${BUOI[a.b].toLowerCase()}`:""}</span><p>${a.t||""}</p><span class="krow">${oddsChip(ow)}</span>
+ return `<button class="card kcard" data-i="${i}" ${dis?"disabled":""}><h4>${a.n}</h4><span class="ktime">${pips(cardCost(a))} ${cardCostW(a)} khắc${a.b!=null?` · Chỉ ${BUOI[a.b].toLowerCase()}`:""}</span><p>${a.t||""}</p><span class="krow">${oddsChip(ow)}</span>
  <span class="kgrid"><span class="kl">Tốn</span><span>${effList([fmt(a.c)||"không",ducWarnTxt(a.c)])}</span><span class="kl">Thành</span><span>${effList([fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]],"g")}</span>${/ · kèm: /.test(a.x||"")?`<span class="kl">Kèm</span><span>${kemCol(effList(String(a.x).split(/ · kèm: /)[1],"r"))}</span>`:""}${rolled?`<span class="kl">Bại</span><span>${effList(sft?kitSoftW(a.c):payWinFail(a,failTxt(a))||"không mất gì","r")}</span>`:""}</span></button>`}
 /* route the older line builders through the kit */
 function ducWarnTxt(c){const d=c&&c.duc;if(!d||d>=0||!S||S.rank>=7)return"";const after=S.duc+d,nd=hhNeed(S).duc;return after<nd?`Đức ${S.duc} → ${after}`:""}/* owner 07:05Z: the card shows only "Đức a → b"; the threshold lives in the top-bar Đức chip (jk3), read from BAL */
@@ -65,7 +65,7 @@ function pframe(f,col){return `<div class="pfwrap">${pcPort(f||{},col||(f&&f.col
 function pframeArt(src){return `<div class="pcp pfr art"${src?` style="background-image:url(${src})"`:""}></div>`}
 /* ===== RESULT FEEDBACK after every act and choice: seal THÀNH / BẠI, the real deltas, one WHY line ===== */
 const RKEYS=[["sung","Sủng"],["danh","Danh"],["suc","Sức"],["bac","Bạc"],["duc","Đức"],["th","Thái hậu quý ngươi"],["hh","Hoàng hậu quý ngươi"],["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["mat","Tai mắt"],["an","Ân tình"]];
-function rsnap(){if(!S)return null;const o={};RKEYS.forEach(([k])=>o[k]=S[k]||0);o.maid=S.maid?S.maid.loyal:0;o.seq=S.logSeq||0;o.rank=S.rank;return o}
+function rsnap(){if(!S)return null;const o={};RKEYS.forEach(([k])=>o[k]=S[k]||0);o.maid=S.maid?S.maid.loyal:0;o.seq=S.logSeq||0;o.rank=S.rank;o.inv=typeof kitOwned==="function"?kitOwned():(S.inv||[]).slice()/* KIT §54.2: what she owns (bag ∪ worn) for the act card's item rows (j63, kitInvDelta) */;return o}
 const FAILRE=/(hỏng|không thành|bị phát hiện|bị lộ|lạnh nhạt|không ai tin|từ chối|không động lòng|chưa chuẩn|bỏ qua|bị đuổi|phải lui|không biết gì mới|chỉ cười|bị bắt|thất bại)/i;
 function resultShow(title,before,okHint){if(!S||!before||S.dead)return;const d=RKEYS.map(([k,n])=>[n,(S[k]||0)-before[k]]).filter(x=>x[1]);if(S.maid&&S.maid.loyal!==before.maid)d.push(["Thiện cảm của cung nữ",S.maid.loyal-before.maid]);
  const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const L=S.logs.slice(0,n).map(plain).reverse();const why=L.join(" ").replace(/\s+/g," ").trim();
