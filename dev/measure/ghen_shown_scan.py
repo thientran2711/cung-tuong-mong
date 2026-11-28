@@ -21,8 +21,17 @@ for f in files:
   for i,l in enumerate(read('dev/build/'+f).split('\n'),1):
     if l.lstrip().startswith(('/*','*','//')):
       continue
+    # rules-prefail: p3GhenAll(p, n, why) (jagacts3, law 1 her and every NPC) = ghenAll(n, why) when p is her — the applied key is its 2nd argument
+    for m in re.finditer(r'p3GhenAll\(\w+,\s*([^,()]+)',l):calls.append((f,i,m.group(1).strip(),'call-OK'))
     for m in CALL.finditer(l):
       a=m.group(1)
+      # rules-prefail: ghenAll(n, why) — the applied key is the FIRST argument (a «why» text was added later; it made every key read as unapplied)
+      d=0;cut=len(a)
+      for j,ch in enumerate(a):
+        if ch in '([{':d+=1
+        elif ch in ')]}':d-=1
+        elif ch==',' and d==0:cut=j;break
+      a=a[:cut].strip()
       if f=='j1.js' and a=='n':continue
       calls.append((f,i,a,'call-TYPED' if re.fullmatch(r'\d+',a) else 'call-OK'))
     for m in TXT.finditer(l):
