@@ -1,0 +1,23 @@
+GAME BUILD {"s":"5fb13d60+","b":"8af7b3429f38","t":"2026-11-27T21:15Z"}
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /cung-tuong-mong/img/kit/ico-download.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /cung-tuong-mong/img/kit/ico-download.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /cung-tuong-mong/img/kit/ico-download.webp
+BOARD mua 29 moves 10/10 raw 10.00 (29 s, area 1, bold)
+CP buổi 10 year 1 save 41817 chars
+BOARD mua 29 moves 10/10 raw 10.00 (28 s, area 1, bold)
+CP buổi 20 year 1 save 63224 chars
+BOARD hat 153 moves 2/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 174 moves 3/10 raw 0.00 (22 s, area 0, bold)
+CP buổi 30 year 1 save 68005 chars
+BUG SAVE STALE stored b<1 live b30 chars 68005 (stored clock unreadable, live 1.2.1.1)
+BUG game SAVE STALE: the stored save stopped following the live game (no setItem error seen)
+BOARD mua 29 moves 10/10 raw 10.00 (31 s, area 1, bold)
+BOARD mua 29 moves 10/10 raw 10.00 (29 s, area 1, bold)
+CP buổi 40 year 1 save 76209 chars
+BOARD hat 140 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BUG game item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls ()
+BOARD hat 129 moves 6/10 raw 0.00 (22 s, area 0, bold)
+CP buổi 50 year 1 save 82403 chars
+BOARD kim 0 moves 0/10 raw 0.00 (97 s, area 54, bold)
+CP buổi 60 year 1 save 86520 chars
+LIFE DONE REPRO-A2 SLICE age ? · buổi 62 · taps 1886 · dead buttons 0 · stuck 0 · bugs 2

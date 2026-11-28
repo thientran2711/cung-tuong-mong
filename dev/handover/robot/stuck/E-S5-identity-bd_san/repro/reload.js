@@ -17,5 +17,13 @@ const { chromium } = require('playwright'); const path = require('path');
   await p.waitForTimeout(3000);
   const st = await p.evaluate(() => { try { const s = window.S || (typeof S !== 'undefined' ? S : null); return s ? { name: s.name, org: s.org, y: s.y, age: s.age, t: s.t, clock: [s.y, s.t, s.w, s.b].join('.') } : null } catch (e) { return String(e) } });
   console.log('STATE after continue:', JSON.stringify(st)); await p.screenshot({ path: path.join(out, 'reload-after.png') });
+  // in-page location.reload() case: while in the life, plain reload, then what does the title offer?
+  const before = await ls(); console.log('LS before in-page reload:', JSON.stringify(before.filter ? before.filter(x => /save/.test(x[0])) : before));
+  await p.evaluate(() => location.reload()).catch(() => {}); await p.waitForTimeout(7000);
+  console.log('LS after in-page reload:', JSON.stringify((await ls()).filter ? (await ls()).filter(x => /save/.test(x[0])) : 'n/a'));
+  console.log('TITLE buttons after in-page reload:', JSON.stringify((await btns()).slice(17, 25))); await p.screenshot({ path: path.join(out, 'inpage-title.png') });
+  await p.evaluate(() => { const els = [...document.querySelectorAll('button,.opt,[role=button]')].filter(e => e.offsetParent); const pk = els.find(e => /chơi một mình/i.test(e.innerText)); if (pk) pk.click() }).catch(() => {}); await p.waitForTimeout(2500);
+  await p.evaluate(() => { const els = [...document.querySelectorAll('button,.opt,[role=button]')].filter(e => e.offsetParent); const pk = els.find(e => /tiếp tục kiếp này/i.test(e.innerText)); if (pk) pk.click() }).catch(() => {}); await p.waitForTimeout(4000);
+  console.log('STATE after in-page reload + continue:', JSON.stringify(await p.evaluate(() => { try { const s = window.S || (typeof S !== 'undefined' ? S : null); return s ? { name: s.name, age: s.age } : null } catch (e) { return String(e) } })));
   await ctx.close();
 })();
