@@ -284,7 +284,7 @@ function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)
   const ct=Object.keys(c).map(f=>`${(typeof NAMES==="object"&&NAMES[f])||(typeof HXN==="object"&&HXN[f])||f} ${c[f]}`).join(", ");
   O.push({n:J.n,r:"join",fx:{},x:`${word(oj)} · tốn: ${ct?ct+", ":""}${kh} khắc · cùng nàng · ${J.x()}`,go:()=>{if(!agSpendKh()){agLand(p);return}const r=twDo(S,p.k==="thHH"?queenP():t,p.k);if(r)log(`${r}.`);agLand(p)}})}/* her deed: the twDo wrapper lets the others there see it */
  O.push({n:"Thôi, lui về cung",r:"leave",fx:{},x:(()=>{let th=0,wb="";try{if(S.place!=="home"&&!S.out){th=travel(S.place,"home");wb=walkBlock("home",th)}}catch(e){}return `tốn: ${th} khắc đi đường · thành: ${wb?`chỉ tránh mặt, chưa về được cung (${wb})`:"ngươi lui về cung"}, nàng không thấy ngươi`})(),/* shown = charged (walk-cost r3): the walk home walkGo pays, spill included */go:()=>{agLand(p);try{if(S.place!=="home"&&!S.out)walkGo("home")}catch(e){}}});
- O.push({n:"Mặc kệ",r:"ignore",fx:{},x:"thành: không dính vào chuyện",go:()=>{agLand(p);log(`Ngươi mặc kệ ${v.name}.`)}});
+ O.push({n:"Mặc kệ",r:"ignore",fx:{suc:BAL.cv.rest}/* E-GAIN3-LIVE-2 law 3: the «Mặc kệ» family (j4 / j7 / j95b): she keeps her strength — a real gain, never an empty Được */,x:"giữ sức, không dính vào chuyện",go:()=>{agLand(p);log(`Ngươi mặc kệ ${v.name}.`)}});
  /* no khắc left in the day (j76 can, spill allowed): the kit GREYED OPTION (KIT §84 kitOff, jgrey) — one form with every other locked option */
  if(lock)O.forEach(c=>{if(c.r==="hear"||c.r==="join")kitOff(c,lock,"")});
  return O}
