@@ -1,4 +1,20 @@
 # ALLOT-PACE — allot-season made to fit pace-speed (worker for Foreman C ROOT 4, 27/11)
+
+## ★ HANDOVER ALLOT-PACE-2 → successor (28/11 ~07:35Z; context 40 % > START_CTX 6 % + 25 %) — Foreman C ROOT 4-1-1-1-1 session_01PEhRbwetRyRvTwxH84sUAe opens it
+PRIORITY #1 CHECK: Foreman C GO 07:25Z (base review/lc34-3b-r1-rv 2849705d = lr-rules caa95310 on LIVE 5ad52416 + tmk-oanpace-fix-rv 4206db2c + RV-181 pvOan) | main LIVE 5ad52416 | review/allot-pace-r2 0eab2be1 (PUSHED) | claims ALLOT-PACE → successor.
+DONE: branch review/allot-pace-r2 @ 0eab2be1 on 2849705d = 6 cherry-picks + build:
+- 230fd0d3 (cce32a0e allot-season back): conflicts resolved by hand — assemble.py = 3b list + jseason.js after jeitem.js; j20 blCard = 3b line (payCutTxt law 4) with `stipRankTxt(i)` (fallback BLG[i]); jinv = 3b lines (BAL.btn.itemUse.k / BAL.time.cost.give) + allot-season ssSewTxt «May áo» text + «Ban cho kẻ hầu» button; jstip = 3b E-FIX-3 counted stock line kept, NPC old trim guarded `!(BAL.stip.keep&&BAL.stip.keep.on)` (allot-season ceiling).
+- 371d95b1 (44f3b311): jallot = 3b `ilUsedUp(e,p)` kept + paced `got` measurement.
+- cfacceed (3fcab9fa), f56802bc (12a8cf67), 72e7a0fd (694836de), d14c1063 (c35ab5ce): clean.
+- aeeff8d6 DROPPED: 3b already has the same kit-std-scan route fix (rv-plr4 r8).
+- 0eab2be1 build (build_site.sh). webkit-syntax: 488 modules, parse-level hits 0 (only the known jkring-item string info line). No lookbehind added (0 in the diff).
+TESTS so far on 0eab2be1: pace-speed PASS · reignend PASS · balance-core PASS · npc-harm-heat ALL PASS. Running when I stopped (rerun to be sure): door-onetap, kit-std-scan (REPORT_ONLY), role-parity, quickcheck.
+TODO (successor, serial, never two Chromium suites at once; outputs under your scratchpad):
+1. node dev/test/monthly-allotment.js <worktree> <outdir>   and   node dev/test/allot-season.js <worktree> <outdir>   (BOTH need an outdir — my first run lacked it).
+2. node dev/test/door-onetap.js (F section must be ok; random law-6c / tap fails seen on LIVE too) · REPORT_ONLY=1 node dev/test/kit-std-scan.js (expect the 3b baseline count; compare with 2849705d if it differs) · node dev/test/role-parity.test.js <worktree>/index.html (20–40 min; FAIL 1 gap list is pre-existing) .
+3. CTM_LIVE_REF=origin/main bash dev/tools/quickcheck.sh HEAD --runs 3 (vs LIVE 5ad52416; old save load). Fresh worktree: run python3 dev/build/assemble.py first.
+4. Write results here, then the line «RV READY (BIG) review/allot-pace-r2 <sha> on 2849705d» at the end of dev/handover/FOREMAN_C_STATUS.md + send_message the CURRENT Foreman C.
+
 depth 1 · START_CTX ~4 % of 1M window
 
 PRIORITY #1 CHECK: OD allot-season (sếp 06:36Z 27/11), PACE-SPEED-3 (sếp FINAL 26/11 ~23:24Z), makeup-set (OD 25/11 ~23:20Z «greyed, never hidden») | main 772bee4f: no allot-season | review/* review/allot-season-rv163g 72a6e1c8, review/pace-speed-rv163e d64f53cf, review/lc31-b3b 07f7cd16 (base; no land-chain-32.md yet) | claims none.
