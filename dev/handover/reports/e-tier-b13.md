@@ -77,3 +77,36 @@ Successor (same branch, new commits only, never rebase/force; base 5ad3b22e):
 3. B/C rows (B18, B19, B34, B39, C41, C45, C46, C48, C51, C53, C57 sickServant): check LIVE aecbc267 first (DOOR-ONETAP row 41 may have done some). Several are designs with NEW-KEY BAL.tier.* (C45 prep, B34 srvwork) and auto best-art picks (C41, C48, d_thi) — if a row needs a ruling (e.g. which art counts as «best»), ask the foreman, do not guess.
 4. Then proof list + «RV READY BIG review/e-tier-b13 <sha> (batch 3)».
 Work files (this container only): /home/user/wt/etb13-work (before/after-arc.tsv, mdump.js/json/txt, fold.js/json, balrow.js, tools/b3road.py, same3.py, old.html).
+
+## BATCH 3 — part 2 + proofs (E-TIER-B13c) → RV READY BIG review/e-tier-b13 31f91836 (batch 3)
+depth 3 · START_CTX ≈ 3 % (1M window; get_session read 0, own estimate) · E-TIER-B13c session_01DgYSWphk3eKShyjK8Smmnf, child of FOREMAN E C11
+PRIORITY #1 CHECK ('kc2Sel|d_thi|best art|sickServant|newyear gift|Hầu việc|Cầu tự'): OD 27/11 ~00:46Z–~01:14Z + ~02:40Z read verbatim | main LIVE aecbc267: kc2Sel shows 2 art ways, d_thi 2 art ways, B18/B19/B34/B39 still separate acts | review/*: door-onetap(-hs), kit-stage-r10…r17 own act/door merges (not touched); night-* branches active (C45/C46 not touched) | claims: E-TIER-B13c (CLAIMS 28/11 10:12Z).
+KIT CHECK: reuses the kit event frame + kit option cards (kitRiskOpt odds word) only; no UI part added or changed. kit-std-scan total 6 (baseline 28) {X06 4, X08 2} = unchanged.
+Commits (new, FF on 5ad3b22e): b825dc11 (folds + gate) · b1b24b5d (static decisions) · 909f9e96 (B/C decisions) · 0fb02ae3 (build) · 31f91836 (gate wait fix).
+
+Rulings used (FOREMAN E C11, 28/11 10:17Z): (A) «best» = the art with the higher odds for her (the same selxOddsP / entOdds the card shows), tie → her higher art level, then list order. (B) B18/B19/B34/B39 = act/door merges → DOOR-ONETAP / KIT-STAGE, not touched. (C) C51 KEEP, C57 KEEP (already NHẸ·VỪA·NẶNG + a wicked way), C53 vlnvp KEEP-CHOICE; C45/C46/C48/C53-vlget = designs with new BAL.tier keys → «batch 3b», not in batch 3.
+
+### Folded (part 2)
+| set | before | after | how |
+|---|---|---|---|
+| C41 Lễ ra mắt (jkc2 PEND.kc2Sel, every origin) | Dâng <art 1> · Dâng <art 2> · Cúi đầu chờ xét | Dâng <her best art> · Cúi đầu chờ xét | kc2SelArts → kc2Best(list, kc2SelP); kc2SelP = the odds the card shows |
+| jkc2 d_thi Ngày tuyển cung nữ | Làm bài khéo tay · Thêu một mảnh khăn · Cúi đầu chờ ma ma xét | the better of the two + Cúi đầu | kc2Best(list, kc2ExP); same BAL cost BAL.kc2.d_thi_o_suc |
+Old saves: both cards are rebuilt from PEND / KCE on show (no option index is stored), so a pending card just shows one way fewer.
+Static v2 MERGE (9 rows): 8 KEEP with reason + d_thi FOLD — marked in reports/tier-audit/static.tsv column «b3» and in review branch dev/handover/reports/e-tier-b13-b3-static.tsv. B/C rows: review branch dev/handover/reports/e-tier-b13-b3-bc.tsv.
+
+### Proof (batch 3, part 1 + part 2)
+| check | result |
+|---|---|
+| quickcheck part 1 (5ad3b22e vs LIVE aecbc267) | **PASS** · open · old save ok · perf new/live render 241/275 · tab 488/547 · buổi 1430/1730 ms · core gates PASS |
+| quickcheck tip (0fb02ae3 vs LIVE) | step 2 **PASS** (open 2164 ms · old save ok · perf render 275/313 · tab 554/587 · buổi 2547/2532 ms); core gates: all PASS except G4 button-crawl = crawler hit its 600 s cap under the gate load («page closed», 105 taps PASS, 0 dead) → **rerun alone on the same build: BUTTON CRAWL GATE PASS (106 taps, 0 faults)** |
+| one-core-guard / rules-one-source / kit-conform / time-spill | PASS (inside both quickcheck runs) |
+| kit-std-scan | total 6 (baseline 28) {X06 4, X08 2} — same as batch 1 |
+| static scan tierscan.js 5ad3b22e → tip | only change: jkc2 d_thi (look-alike group gone; it is now one spread way, so the literal scan counts 1 set fewer); every other set identical |
+| tier-b13-b3s.js (new) | ALL PASS: kc2Sel for cnv/nc/bd/cn/generic origins at several art spreads → 1 art way = best fit + «Cúi đầu chờ xét»; d_thi → 1 art way + «Cúi đầu chờ ma ma xét»; 0 page errors |
+| tier-b13-b3.js (part 1 gate) on tip | ALL PASS |
+| tier-b13-oldsave.js vs LIVE aecbc267 | ALL PASS |
+| rdc-play (RDC_STOP12) tt_ruong (rdseeds_a), nc_kinh (rdseeds_d) | ALL PASS (17 each) |
+| law 12 shots Fold 755×1000@2 + iPad 1180×820@2 (outside git) | tt_tranh_9 s1 (Thưa thật mọi chuyện · Tùy duyên / Lảng đi), td_song_9 x1 (Tên mới, sạch sẽ · Hiểm / Giữ tên Tiêu Thạch), nc_tuc_11 x1 (Quỳ xin … phong tục cố hương · Khó lường / Quỳ tạ …): 2 ways each, folded way gone, odds word on the risky way, no cut text / overflow; looked 3× (card art blank only because the shot script blocks the CDN) |
+
+FOR MAIN (via FOREMAN E): (1) B18 (Hắt nước / Hắt trà / Quạt mực / Tát / Phạt quỳ in-person group, jdf.js), B19 (Cầu tự j2.js:48 + Bài thuốc dễ thụ thai j2.js:182), B34 (Hầu việc door, 9 tasks, jdoor5.js:14), B39 (Chăm sóc j25.js:49 + Về tẩm cung thăm con j15.js:62) are STILL separate on LIVE aecbc267 → DOOR-ONETAP / KIT-STAGE owner. (2) Law 4: all 91 E68 c6 events (incl. C57 sickServant) and j71 newyear «Lễ mọn» (bac −10) / «Tự tay làm» (Sức −10) carry typed numbers, not BAL keys — a family job for the one-core owner (law 11), not a spot fix here.
+Next (batch 3b, separate RV, only if context allows): C45 night prep, C46 night talk, C48 pmLad/FX7, C53 vlget — first git grep origin/review/* night branches for the same lines.
