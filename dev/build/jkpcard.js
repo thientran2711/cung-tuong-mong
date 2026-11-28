@@ -36,8 +36,7 @@ function hang(pc,k=0){if(!pc.isConnected)return;try{if(pc.__kp){pc.__kp.destroy(
  const hr=host.getBoundingClientRect();if(!hr.width){if(k<30)setTimeout(()=>hang(pc,k+1),100);return}
  const A={x:-12,y:-need*.4,w:12,h:need*1.4};cur=pc;
  pc.__kp=kitPick.open({host,anchor:A,side:"r",acts,dismiss:false,noLap:true,
-  onPick:id=>{const b=btns[+id];if(!b||!b.isConnected||b.disabled)return;b.click()},
-  onOff:a=>{try{const pb=host.querySelector(`.kpk .kfoc-b[data-id="${a.id}"]`);if(typeof kpPop==="function")kpPop(pb,`<div class="kpopt">${(a.why||"Chưa làm được").replace(/</g,"&lt;")}</div>`,{})}catch(x){}}})}
+  onPick:id=>{const b=btns[+id];if(!b||!b.isConnected||b.disabled)return;b.click()}/* a closed plaque's reason: kitPick itself (§98.1d) */})}
 /* KIT §98.21 ENTRY-LINE BUTTONS = THẺ GỖ (KK44 §2 row j6 #sc-t buttons / jplst .kmnote.kmslot «… vừa rời đi [Theo đến]», j21 goSee / follow lines):
    j6 renderStage puts the buttons of the visit line (S.visit.msg) / place text after the title in #sc-t, which jplst hides (the line itself is the toast) — so those
    buttons were never on screen (found by KIT-STAGE-R4, Fold + iPad: «Theo đến» invisible). They now hang as plaques on the stage, top middle, away from the

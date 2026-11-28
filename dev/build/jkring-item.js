@@ -168,11 +168,18 @@ async function kriAct(R,i){const a=R.acts&&R.acts[i];if(!a||a.off||R.busy||R.st!
  if(R.big&&!kriCalm())R.big.animate([{transform:R.big.style.transform},{transform:R.big.style.transform+" scale(1.08)"},{transform:R.big.style.transform}],{duration:420,easing:"ease-out"});
  kriPane(R,it,r);try{render()}catch(e){}}
 /* the act's real changes as kit result rows: her stats (j1 NAMES), the person's thiện cảm (aff), items in / out of Tư trang */
-function kriSnap(v){const s={};try{for(const k in NAMES)if(typeof S[k]==="number")s[k]=S[k];if(v){s.__aff=typeof aff==="function"?aff(v,S):null}s.__inv=(S.inv||[]).slice()}catch(e){}return s}
-function kriDiffRows(a,v,who){const b=kriSnap(v),D=[],M=[];try{for(const k in a){if(k.startsWith("__"))continue;const d=Math.round((b[k]||0)-(a[k]||0));if(!d)continue;(d>0?D:M).push(`${NAMES[k]||k} ${d>0?"+":""}${d}`)}
- if(a.__aff!=null&&b.__aff!=null){const d=Math.round(b.__aff-a.__aff);if(d)(d>0?D:M).push(`${kriE(who||"Người nhận")} → ta: thiện cảm ${d>0?"+":""}${d}`)}
+function kriSnap(v){const s={};try{for(const k in NAMES)if(typeof S[k]==="number")s[k]=S[k];if(v){s.__aff=typeof aff==="function"?aff(v,S):null}s.__inv=typeof kitOwned==="function"?kitOwned():(S.inv||[]).slice()/* KIT §54.2: bag ∪ worn */}catch(e){}return s}
+/* ONE ROW PER PERSON (MAIN 186 order 28/11 ~06:35Z; iPad ring gift to the queen read «Hoàng hậu → ta: thiện cảm +6 · Lữ Mạn Nhu → ta: thiện cảm +6»):
+   her S.hh («Hoàng hậu → ta») / S.th («Thái hậu → ta») IS the receiver's thiện cảm when the receiver is the queen / Thái hậu — one change, ONE row, named by
+   the receiver (who). Same rule as the act result card (j63 kaResultRows: the queen's person row skips "hh"). */
+function kriSame(v){const k=new Set();try{if(!v)return k;if(typeof queenP==="function"&&queenP()===v)k.add("hh");if(typeof emoByKey==="function"&&emoByKey("th")===v)k.add("th")}catch(e){}return k}
+function kriDiffRows(a,v,who){const b=kriSnap(v),D=[],M=[];try{const one=a.__aff!=null&&b.__aff!=null?kriSame(v):new Set();let dSame=0;
+ for(const k in a){if(k.startsWith("__"))continue;const d=Math.round((b[k]||0)-(a[k]||0));if(!d)continue;if(one.has(k)){dSame=dSame||d;continue}(d>0?D:M).push(`${NAMES[k]||k} ${d>0?"+":""}${d}`)}
+ if(a.__aff!=null&&b.__aff!=null){const d=Math.round(b.__aff-a.__aff)||dSame;if(d)(d>0?D:M).push(`${kriE(who||"Người nhận")} → ta: thiện cảm ${d>0?"+":""}${d}`)}
  const nm=e=>{try{return typeof giftName==="function"?giftName(e):(IT[e.k]||{}).n||e.k}catch(x){return e.k}};
- a.__inv.filter(e=>!b.__inv.includes(e)).forEach(e=>M.push(kriE(nm(e))));b.__inv.filter(e=>!a.__inv.includes(e)).forEach(e=>D.push(kriE(nm(e))+" vào Tư trang"))}catch(e){}
+ /* KIT §54.2 kitInvDelta = the ONE item delta (the act result card reads the same); a piece sent back in this step (HOME AGAIN) is neither row */
+ const DL=typeof kitInvDelta==="function"?kitInvDelta(a.__inv,b.__inv):{gone:a.__inv.filter(e=>!b.__inv.includes(e)),add:b.__inv.filter(e=>!a.__inv.includes(e))};
+ DL.gone.forEach(e=>M.push(kriE(nm(e))));DL.add.forEach(e=>D.push(kriE(nm(e))+" vào Tư trang"))}catch(e){}
  return[{k:"duoc",label:"Được",items:D},{k:"mat",label:"Mất",items:M}]}
 /* SENT-OFF ACTS (MAIN look note 26/11: «THÀNH · Được: không» while the card promised thiện cảm): an act that sends someone on an errand (jptime ptSend:
    gifts carried by a servant, …) has no result yet. The seal is KẾT QUẢ (not THÀNH), Được = the card's own Được row (what the errand brings when it lands),
@@ -223,7 +230,7 @@ function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kip
  const ops=M.querySelector(".opts");const L=m.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]&&ops&&ops.querySelector(`.opt[data-m="${i}"]`));
  L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));M.classList.add("kri-hide");
  const verb=(typeof KIP_VERB!=="undefined"&&KIP_VERB[m.pid])||"Chọn";let V=m.pp&&m.pp.v;try{if(V!=null&&typeof V!=="object")V=(typeof byKey==="function"&&byKey(V))||liveRivals(true).find(x=>x.id===V)||null}catch(e){V=null}
- const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?V.name:""):m.pid==="giftto"?(m.pp&&m.pp.t==="emp"?"Hoàng thượng":m.pp&&m.pp.t==="th"?"Thái hậu":""):"";/* KK62 (RV-176 §7 c): Dâng quà names the receiver from its own pp.t (jgift «Dâng quà lên Hoàng thượng / Thái hậu»), never the dialog title («Dâng cho Dâng quà») */
+ const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?(typeof rkName==="function"&&V!==S?rkName(V)+" ":"")+V.name/* MAIN 186 ruling 28/11 ~06:44Z: rank title + name, as the card's title and Ghi chú */:""):m.pid==="giftto"?(m.pp&&m.pp.t==="emp"?"Hoàng thượng":m.pp&&m.pp.t==="th"?"Thái hậu":""):"";/* KK62 (RV-176 §7 c): Dâng quà names the receiver from its own pp.t (jgift «Dâng quà lên Hoàng thượng / Thái hậu»), never the dialog title («Dâng cho Dâng quà») */
  /* KIT-KRI-XL (E-S5 kipgo-ui3 «re-opened, no gift»): the dialog's option buttons are looked up LIVE — an opener (jts tsOpener) or any re-render shows the SAME dialog again with NEW .opts nodes, and the ring's «Chọn» clicked the stale detached button: no chooseM, the picker stayed queued and re-opened forever */
  const optB=i=>{const M2=$("modal"),o2=M2&&M2.querySelector(".opts");return(o2&&o2.querySelector(`.opt[data-m="${i}"]`))||null};
  const why=(c,i)=>{const b=optB(i);return c.kgwhy||(b&&b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):kipLocked(c)?"Thiếu bạc":"")};
@@ -314,25 +321,33 @@ window.addEventListener("click",ev=>{const c=ev.target.closest&&ev.target.closes
  if(i<0||!(typeof tsbPets==="function")||i>=tsbPets(S).length)return;try{if(kriPetOpen(i)){ev.stopImmediatePropagation();ev.preventDefault()}}catch(e){console.error("kri pet",e)}},true);
 /* ---- (4) toilette dress (#kg82 «Rương trang phục», jtoil toilDressUI): tap a chest piece or a worn slot → the ring on the same tabs, focused on it;
    acts = Cài / Mặc / Đeo (wear at once + saved, owner E95) or Tháo — the toilette's own toilAct; closing the ring redraws the toilette (live figure preview) ---- */
+/* K-WEAR-ROW (KK70 28/11, RV-185 find, laws 3 + 4): putting a piece on / taking it off moves no stat at once (its effect counts on her looks, not in S), so the
+   result read «Được: không · Mất: không» while the card said «Được cài: Sắc +3». The pane names the piece's OWN effect line — the card's Được row (jwdinv
+   wdItemLists D[0], one source) — in Được when worn, in Mất when taken off, FIRST in that row (other real results of the same tap stay: the «wear» quest step's Bạc, the swapped piece); a plain piece («không thêm») adds nothing. */
+function kriWearFx(g){try{if(typeof wdItemLists!=="function"||typeof wdEntryOf!=="function")return"";const L=wdItemLists(wdEntryOf(g));const d=L&&L.D&&L.D[0]||"";return /không thêm/.test(d)?"":d}catch(e){return""}}
+function kriWearRows(rows,fx,off){try{if(!fx)return rows;const r=rows.find(x=>x.k===(off?"mat":"duoc"));const t=kriE(fx);if(r&&!r.items.includes(t))r.items.unshift(t)}catch(e){}return rows}
+window.kriWearRows=kriWearRows;
 function kriToilOpen(x0){if(typeof toilAct!=="function"||typeof TOIL==="undefined"||!TOIL.st||TOIL.st.dv)return false;const reg=()=>(typeof KINV!=="undefined"&&KINV.reg.toil)||null;if(!reg())return false;
- const verb=g=>{const sl=typeof toilSlotOf==="function"?toilSlotOf(g.k):null;return sl==="tram"||sl==="hair"?"Cài":sl==="y"?"Mặc":"Đeo"};
+ const verb=g=>{const sl=typeof toilSlotOf==="function"?toilSlotOf(g.k):null;return sl==="tram"||sl==="hair"?"Cài":sl==="y"?"Mặc":sl==="hd"?"Dán":"Đeo"};
+ /* dress-fix: a hoa điền is not «worn» from the chest — it is the one picked for today (TOIL.st.hdk, slot «Hoa điền»); its act is «Dán» / «Tháo» */
+ const isOn=g=>!!g.wdSlot||!!g.w||(typeof toilSlotOf==="function"&&toilSlotOf(g.k)==="hd"&&typeof toilHdK==="function"&&toilHdK()===g.k);
  const tabs=[{k:"all",label:"Tất cả"}].concat(reg().tabs||[]);let tab=(typeof KINV!=="undefined"&&KINV.cur.toil)||"all";if(!tabs.some(t=>t.k===tab)||(x0&&tab!=="all"&&x0.cat!==tab))tab="all";
  /* the toilette overlay (#kg82, above the stage) steps aside while the ring is open; closing the ring brings it back redrawn */
  const K82=document.getElementById("kg82");
  const R=kitRingItem.open({key:"inv:toil",title:"Rương trang phục",bg:kriBg(),tabs,tab,onTab:k=>{tab=k;try{KINV.cur.toil=k}catch(e){}},
   items:t=>((reg()||{}).items||[]).filter(x=>x&&x.g&&((t||tab)==="all"||x.cat===(t||tab))).map(x=>({id:typeof kinlId==="function"?kinlId(x):x.name,src:x.src,src512:x.src512,name:x.name,grade:x.grade,lux:x.lux,mark:x.mark,sub:x.onText||x.sub||"",x})),
   info:it=>{try{const r=kitItemRef({g:it.x.g});return r&&typeof kinlDetail==="function"?kinlDetail(r,{key:"kri"}):""}catch(e){return""}},
-  acts:it=>{const g=it.x.g,worn=!!g.wdSlot||!!g.w,sl=typeof toilSlotOf==="function"?toilSlotOf(g.k):null;
-   return[{n:worn?"Tháo":verb(g),main:1,off:worn&&sl==="y"?"Y phục chỉ thay: chọn bộ khác":"",fn:()=>{const s=kriSnap(null),l0=kriLogMark();
+  acts:it=>{const g=it.x.g,worn=isOn(g),sl=typeof toilSlotOf==="function"?toilSlotOf(g.k):null;
+   return[{n:worn?"Tháo":verb(g),main:1,off:worn&&sl==="y"?"Y phục chỉ thay: chọn bộ khác":"",fn:()=>{const s=kriSnap(null),l0=kriLogMark();const fx=kriWearFx(g);
     TOIL.st.sel={k:g.k,wdSlot:g.wdSlot||null,w:!!g.w};window.__kriAct=1;try{toilAct(worn?"off":"wear")}finally{window.__kriAct=0}
     /* putting a piece on / taking it off moves it between the slot and the chest; it is not a new item (no «Rương đồ / Vừa vào Tư trang» box, j93 kmDiff) */
     try{if(typeof kmSnap==="function"&&KMS===S)KMSNAP=kmSnap()}catch(e){}
-    const L=kriLogSince(l0);return{ok:true,title:`${worn?"Tháo":verb(g)} · ${it.name}`,rows:kriDiffRows(s,null).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}]},
+    const L=kriLogSince(l0);return{ok:true,title:`${worn?"Tháo":verb(g)} · ${it.name}`,rows:kriWearRows(kriDiffRows(s,null),fx,worn).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}]},
   empty:"Ngăn này chưa có món nào.",onClose:()=>{if(K82)K82.classList.remove("kri-hide");try{if(TOIL.st&&!TOIL.st.dv)toilDressUI()}catch(e){console.error("kri toil",e)}}});
  if(!R)return false;if(K82)K82.classList.add("kri-hide");if(x0){const C=kitRingItem.cur;const i=C.items.findIndex(y=>y.x===x0||(y.x.g&&x0.g&&y.x.g.k===x0.g.k&&!!y.x.g.w===!!x0.g.w&&!!y.x.g.wdSlot===!!x0.g.wdSlot));if(i>=0){C.rot=i;kriPlace(C);setTimeout(()=>kriFocus(C),kriCalm()?0:180)}}return true}
 window.addEventListener("click",ev=>{if(!kriOn()||window.__kriAct)return;const t=ev.target.closest&&ev.target.closest('#kg82 [data-kinvkey="toil"][data-kinvi], #kg82 [data-keqk="toil"][data-keqi]');if(!t)return;
  try{let x=null;if(t.dataset.kinvi!=null){const o=KINV.reg.toil;x=o&&o.items&&o.items[+t.dataset.kinvi]}else{const o=KEQ.reg.toil;const sl=o&&o.slots&&o.slots[+t.dataset.keqi];if(!sl||!sl.item)return;
-   const L=(KINV.reg.toil||{}).items||[];x=L.find(y=>y.g&&(y.g.wdSlot===sl.k||(y.g.w&&typeof toilSlotOf==="function"&&toilSlotOf(y.g.k)===sl.k)))||null;if(x)try{KINV.cur.toil=x.cat}catch(e){}}
+   const L=(KINV.reg.toil||{}).items||[];x=L.find(y=>y.g&&(y.g.wdSlot===sl.k||(y.g.w&&typeof toilSlotOf==="function"&&toilSlotOf(y.g.k)===sl.k)||(sl.k==="hd"&&typeof toilHdK==="function"&&y.g.k===toilHdK())))||null;if(x)try{KINV.cur.toil=x.cat}catch(e){}}
   if(x&&kriToilOpen(x)){ev.stopImmediatePropagation();ev.preventDefault()}}catch(e){console.error("kri toil",e)}},true);
 /* ---- (11) titles (Danh hiệu panel, jdh dhPanel): «Đeo «…»» / «Đổi phần thưởng «…»» → the ring of her earned titles (tile = the kit title plate kitTitlePlate);
    acts = the title's bonus choices = the options of the title's own dhPick panel (run by their own go), «Tháo» on the worn one ---- */
@@ -358,7 +373,7 @@ window.addEventListener("click",ev=>{if(!kriOn()||window.__kriAct)return;const b
  const k=kriDhKeys().find(k=>dhObj(S,k).name===m[1]);if(k==null)return;try{if(kriDhOpen(k)){ev.stopImmediatePropagation();ev.preventDefault()}}catch(e){console.error("kri dh",e)}},true);
 /* ---- (13) hoa điền (toilette makeup step, jhd hdStep): the owned hoa điền on the ring; «Dán» = the step's own [data-hdk] button (→ the drag board),
    «Không dán» = its «Không dán»; ✕ leaves the step's buttons as they were ---- */
-if(typeof hdStep==="function"){const h0=hdStep;hdStep=function(ctx){const r=h0.apply(this,arguments);try{if(r&&kriOn()&&ctx&&ctx.box)kriHdOpen(ctx.box)}catch(e){console.error("kri hd",e)}return r}}
+if(typeof hdStep==="function"){const h0=hdStep;hdStep=function(ctx){const r=h0.apply(this,arguments);try{if(r&&kriOn()&&ctx&&ctx.box&&ctx.box.querySelector("[data-hdk]"))kriHdOpen(ctx.box)/* dress-fix: the hoa điền picked in the dress picker goes straight to the drag board — no chooser ring (only when the step shows a choice) */}catch(e){console.error("kri hd",e)}return r}}
 function kriHdOpen(box){const btn=k=>box.querySelector(`[data-hdk="${k}"]`);const K82=document.getElementById("kg82");
  /* the toilette overlay steps aside while the ring is open (an act returns "close" → it comes back for the drag board / the next step) */
  const R=kitRingItem.open({onClose:()=>{if(K82)K82.classList.remove("kri-hide")},key:"hd",title:"Hoa điền",sub:"Chọn một hoa điền để dán",bg:kriBg(),

@@ -17,7 +17,11 @@ const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|
    (A LABELLED x — «được: / thành: / kèm: …» — never reaches here: ACT-MOVE-6 passes it whole, the path above; one design, law 14.) */
 const J25NOTE=s=>/^\([^()]*\)$/.test(String(s).replace(/<[^>]+>/g,"").trim());
 function j25Gain(G){const G1=G.filter(s=>!J25NOTE(s)),G2=G.filter(J25NOTE);return [G1.length?"thành: "+G1.join(", "):"",...G2]}
-optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=talkK(a);
+/* K-KHAC-COST (KK70, law 4): this line serves talk options AND deck cards (Hành sự, doors' members via jdoor/jone); a deck card costs cardCost (j2, what act() spends),
+   a talk option talkK. A deck card = a member of deck, or a copy that carries its khắc as a number in k (talk options keep k for the AOUT key). */
+function optK(a){try{if(a&&(typeof a.k==="number"||(typeof deck!=="undefined"&&Array.isArray(deck)&&deck.includes(a))))return cardCost(a)}catch(e){}return talkK(a)}
+window.optK=optK;
+optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=optK(a);
  /* ACT-MOVE-6 + E-GAIN4C: a side effect that comes either way (jtoil look reaction): her gain «kemG» as «được:», a loss «kem» as «kèm:» — both BEFORE the
     failure segment (the kit hangs a «kèm:» on the block before it: written after «hỏng:» the praise sat in Bại) */
  const kx=l=>{const ins=(a.kemG?" · được: "+a.kemG:"")+(a.kem?" · kèm: "+a.kem:"");if(!ins)return l;const m=/ · (hỏng|bại)\s*:/i.exec(l);return m?l.slice(0,m.index)+ins+l.slice(m.index):l+ins};
