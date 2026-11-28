@@ -3,7 +3,7 @@
 usage: python3 dev/test/j72seeds_validate.py [files…] [--min N] [--kinds craft,social]   (no file = every dev/handover/content/thin/j72seeds*.md; --min N = at least N seeds for EACH kind in --kinds, default all 4; ids unique across files)
 Checks per seed: id unique, type j72, kind, tag K|D + src, tone, tier; req/other who-kind, nết/lòng only for rv/fallen/sv/rsv/man and names in BAL.net F/M,
 need known; title + ask (in quotes); object null or {name,owner A|B|me|kho,clue,trace_ok,trace_no[,it = real IT key]} (law 6c); 1–3 steps of go/wait/pick with real
-place keys, known skill, odds de|vua|kho, fail retry|end|bad; pick = 2–3 options, each Σgain == Σloss ≥1 and the same total for all (laws 2/3);
+place keys, known skill, odds de|vua|kho, fail retry|end|bad; pick = 2–3 options NHẸ · VỪA (· NẶNG), option i Σgain == Σloss == BAL.j72c.tier[i] (laws 2/3);
 ok.gain ≥1, no.loss ≥1, keys = her stats + rel/relb (relb only with other); placeholders {A}{B}{M}{O}{S}{goi}{Goi}{xung}{Xung} only, {B} needs other, {O} needs object;
 VANPHONG word scan (no %, no digits, no odds words, no modern words); no title equal to one of the 110 old templates."""
 import json,re,sys,os
@@ -12,6 +12,7 @@ B=lambda f:open(os.path.join(ROOT,'dev/build',f),encoding='utf8').read()
 bal=B('jbal2.js');NET=set()
 m=re.search(r'BAL\.net=\{.*?\n\s*F:\{(.*?)\},\s*\n\s*M:\{(.*?)\},',bal,re.S)
 for blk in m.groups():NET|=set(re.findall(r'"([^"]+)"',blk))
+TIER=[int(x) for x in re.search(r"BAL\.j72c=\{[^\n]*?tier:\[([\d,]+)\]",bal).group(1).split(",")]  # BAL.j72c.tier: pick way i Σgain == Σloss == TIER[i] (law 2 TIERED CHOICES NHẸ · VỪA · NẶNG, owner OD 27/11 ~00:46Z)
 ITK=set()  # candidate IT keys (static scan of every build file; the in-game test dev/test/j72c-play.js checks IT[key] for real)
 for f in os.listdir(os.path.join(ROOT,'dev/build')):
     if f.endswith('.js'):ITK|=set(re.findall(r'\b([a-zA-Z0-9_]+):\{n:"',B(f)))
@@ -116,7 +117,6 @@ for r in rows:
         elif t=="pick":
             ops=s.get("opts") or []
             if not 2<=len(ops)<=3:err(w+" pick needs 2–3 opts")
-            tot=set()
             for m2,op in enumerate(ops):
                 ww=f"{w}.opt{m2+1}";texts.append(op.get("n",""))
                 if not op.get("n"):err(ww+" n")
@@ -127,9 +127,7 @@ for r in rows:
                 if op.get("fail","retry") not in FAIL:err(ww+" fail")
                 g=keys(i,ww+".gain",op.get("gain") or {},hb);l=keys(i,ww+".loss",op.get("loss") or {},hb)
                 if set(op.get("gain") or {})&set(op.get("loss") or {}):err(ww+" same key in gain and loss")
-                if g!=l:err(f"{ww} gain {g} != loss {l} (law 2)")
-                tot.add(g)
-            if len(tot)>1:err(w+" options not equal value "+str(sorted(tot)))
+                if m2<len(TIER) and (g!=TIER[m2] or l!=TIER[m2]):err(f"{ww} Σgain {g} / Σloss {l} must both be {TIER[m2]} (way {m2+1} of NHẸ · VỪA · NẶNG, law 2)")
         else:err(f"{w} t must be go|wait|pick")
     if st and all(s.get("t")=="wait" for s in st):err(i+" only wait steps")
     ok=r.get("ok") or {};no=r.get("no") or {}

@@ -3,7 +3,8 @@
    REAL roster × a real object × obstacle steps (1–3) × an optional hidden twist. At load every seed becomes ONE more T72 template ("c:"+id), so the whole
    j72 runtime (offer, steps, tab, nợ ân, ticks, saves) plays it unchanged; the 110 old templates stay as they are.
    Numbers (law 4): every gain/loss step = BAL.j72c.fx[tier][key]; odds/khắc/wait/deadline from BAL.j72c; nothing typed here.
-   Choices (laws 2/3): every option of a pick step has Σgain == Σloss steps and the same total as its siblings (validator dev/test/j72seeds_validate.py).
+   Choices (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z; law 3): a pick step = 2–3 ways NHẸ · VỪA (· NẶNG), way i Σgain == Σloss == BAL.j72c.tier[i] steps,
+   Tốn and Được rise together (validator dev/test/j72seeds_validate.py).
    Draw: the shared no-repeat memory (jnorep) family "j72:<kind>" (T.hk = raw key "j72:<kind>:<id>"): once per life, last 5 lives avoided (q72Cands fresh-first).
    GROUNDING GATE (j68h rule): a seed is offered only when the requester (and B) are living real people with the wanted nết, its need holds on the live
    world, every {placeholder} has a person, and the object owner is a cast person, her or the store. Objects stay traceable (law 6c): S.q72c.ob keeps
