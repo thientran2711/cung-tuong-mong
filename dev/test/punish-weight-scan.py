@@ -37,7 +37,7 @@ for f in sorted(glob.glob('dev/build/j*.js')):
             else: continue
             why=next((x for x in parts if x[:1] in '"`' or x.startswith('q72Txt')),'?')[:60]
             key=sev if sev in('0','1','2') else ('1' if sev=='1(default)' else 'BAL/expr')
-            if key=='BAL/expr' and not re.search(r'BAL|\.sev|Sev|pun|sev|n>=|to===|formal|WD\.|B\.vp|N\.acc',sev): bad.append(f'{f}:{n} sev {sev}')
+            if key=='BAL/expr' and not re.search(r'BAL|\.sev|Sev|pun|sev|n>=|to===|formal|WD\.|B\.vp|N\.acc',sev) and not (f.endswith('jstagehere.js') and sev=='sv'): bad.append(f'{f}:{n} sev {sev}')  # sv = BAL place-close sev (checked below)
             rows.append((f.split('/')[-1]+':'+str(n),why,sev,BEFORE.get(key,'by '+sev),AFTER.get(key,'by '+sev+' (same tiers)')))
         for m in re.finditer(r'(\w+)\.confined=Math\.max\([^;]*?,([^)]*)\)',l):
             direct.append((f.split('/')[-1]+':'+str(n),m.group(1),m.group(2)))
@@ -51,7 +51,11 @@ for w in ['làm phiền lúc thánh thượng nổi giận','ăn mặc vượt p
     for r in hit:
         if r[2] not in ('0','B.vpConf'): bad.append(f'{r[0]} «{w}» is sev {r[2]}, want 0 (NHẸ)')
 if not re.search(r'vpConf:0',open('dev/build/jshelf.js',encoding='utf-8').read()): bad.append('jshelf BAL vpConf is not 0 (NHẸ)')
-if not ov or ov[0][2]!='0': bad.append('overstay (jstagehere stayRoll) is not sev 0 (NHẸ)')
+# rules-prefail (law 4): the overstay weight is read from BAL — place-close sev (jbal, owner OD 26/11 ~14:00Z, = 0) into the local sv, with a guard that
+# drops any weight that would confine back to 0 («NEVER cấm túc for overstaying»); a typed 0 is no longer required
+_js=open('dev/build/jstagehere.js',encoding='utf-8').read();_bal=open('dev/build/jbal.js',encoding='utf-8').read()
+_ovBal=bool(re.search(r'let sv=PC\(\)\.sev;try\{if\(typeof punishMonths==="function"&&punishMonths\(sv\)>0\)sv=0\}catch\(e\)\{sv=0\}',_js)) and bool(re.search(r'sev:0\}/\* PLACE-CLOSE',_bal))
+if not ov or not (ov[0][2]=='0' or (ov[0][2]=='sv' and _ovBal)): bad.append('overstay (jstagehere stayRoll) is not sev 0 (NHẸ)')
 if md:
     print('| source | why | sev | before | after |\n|---|---|---|---|---|')
     for r in rows: print('| '+' | '.join(x.replace('|','/') for x in r)+' |')

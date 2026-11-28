@@ -53,7 +53,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   return{before,after,cleared,cm,code}});
  ok(!r3.skip&&r3.before===false&&r3.after===true&&r3.cleared===false&&r3.code==="sold",'sell-out: hidden until discovered, shown after, gone when she is no longer sold',r3);
  ok(!r3.cm||(r3.cm.b===false&&r3.cm.a===true&&r3.cm.kind==="ownMaid"),'sell-out: the confidant maid too',r3.cm);
- const src=fs.readFileSync(path.join(__dirname,'..','build','j68f.js'),'utf8').split('knSoldFound(').length-1+['j10.js','j14.js','jeitem.js','j72.js'].reduce((n,f)=>n+(fs.readFileSync(path.join(__dirname,'..','build',f),'utf8').split('knSoldFound(').length-1),0);
+ const src=fs.readFileSync(path.join(__dirname,'..','build','j68f.js'),'utf8').split('spyFound(s)').length-1/* TAI-MAT-KNOW: j68f records the discovery through spyFound (knSoldFound + who bought him) */+['j10.js','j14.js','jeitem.js','j72.js'].reduce((n,f)=>n+(fs.readFileSync(path.join(__dirname,'..','build',f),'utf8').split('knSoldFound(').length-1),0);
  ok(src>=7,'every discovery site records the discovery (j68f ×3, j10 Tra khảo, j14 tra xét, jeitem Tra khảo, j72 Giữ lại)',src);
  /* bot run: every non-public item resolves to a real person */
  const r4=await p.evaluate((DAYS)=>{const out={items:0,bad:[],kinds:{}};const seen=new Set();tmPlace(S,6);

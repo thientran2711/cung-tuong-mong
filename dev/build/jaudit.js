@@ -83,11 +83,14 @@ function aaSay(lab,r){const s=n=>(n>0?"+":"")+n;return r.a===r.b?`${lab} ${s(r.a
    yours → her "Ta → nàng: thiện cảm"; the grudge stays "oán". Cards: "thiện cảm +10", "oán ta +8". */
 const KIT_REL={aff:"thiện cảm",affThem:"Nàng → ta: thiện cảm",affMe:"Ta → nàng: thiện cảm",oan:"oán ta",unknown:"chưa rõ nàng nghĩ gì"};window.KIT_REL=KIT_REL;
 /* review/net-ghen (law 11 family): lab = the words before the number at the call site («nàng oán ngươi», «thiện cảm») — the number is ALWAYS this preview */
-function pvQuy(t,n,lab){if(!t&&n>0)return pvQuyAny(n,lab);return aaSay(lab||KIT_REL.aff,aaNum(n,t,"trust"))}
-function pvOan(t,n,lab){if(n<0)return lab?`${lab} ${balSg(Math.round(n))}`:`bớt oán ta ${Math.round(-n)}`;if(!t)return pvOanAny(n,lab);const r=aaNum(n,t,"slight");r.a=Math.max(1,Math.round(r.a));r.b=Math.max(r.a,Math.round(r.b));return aaSay(lab||KIT_REL.oan,r)}
+/* lc34-3b-r1 (law 4 + law 11): every pv* preview prints the PACED number (jstatpace spSee: what the rise really adds now, after the nết factor),
+   so a card that reads pvQuy / pvOan says the same number as the result chip — ONE place for the pace view instead of a spSee wrap per call site */
+function aaSee(k,r,t){try{const w=t&&t!==S?t:null;if(r.a)r.a=spSee(k,r.a,w);if(r.b)r.b=spSee(k,r.b,w)}catch(e){}return r}
+function pvQuy(t,n,lab){if(!t&&n>0)return pvQuyAny(n,lab);return aaSay(lab||KIT_REL.aff,aaSee("rel",aaNum(n,t,"trust"),t))}
+function pvOan(t,n,lab){if(n<0)return lab?`${lab} ${balSg(Math.round(n))}`:`bớt oán ta ${Math.round(-n)}`/* RV-181: a FALL of oán is not paced (SP_SIGN has no oan; oanAdd applies it whole) → print it whole, not through spSee (which paces a rise: band oan [4,8,12] cut a fall > 8) */;if(!t)return pvOanAny(n,lab);const r=aaNum(n,t,"slight");r.a=Math.max(1,Math.round(r.a));r.b=Math.max(r.a,Math.round(r.b));aaSee("oan",r,t);r.b=Math.max(r.a,r.b);return aaSay(lab||KIT_REL.oan,r)}
 /* relAdd's own oán (j9: a fall → oán ×BAL.relOan.hurt, a rise → bớt ×mend) — law 4: the BAL keys, never typed .6 / .3 */
 /* NB-b: oán over several cases (tiers / win-or-caught): L = [[chunk, chunk…] per case] — each chunk is one oanAdd (× nết slight, rounded), no target → every nết */
-function pvOanSet(t,L,lab){const [a,b]=t&&t!==S?aaMulRange(t,"slight"):aaAnyRange("slight");const s=(c,f)=>c.reduce((z,n)=>z+(n>0?Math.round(n*f):0),0);const lo=Math.max(1,Math.min(...L.map(c=>s(c,a)))),hi=Math.max(lo,...L.map(c=>s(c,b)));return aaSay(lab||KIT_REL.oan,{a:lo,b:hi})}
+function pvOanSet(t,L,lab){const [a,b]=t&&t!==S?aaMulRange(t,"slight"):aaAnyRange("slight");const s=(c,f)=>c.reduce((z,n)=>z+(n>0?Math.round(n*f):0),0);const lo=Math.max(1,Math.min(...L.map(c=>s(c,a)))),hi=Math.max(lo,...L.map(c=>s(c,b)));const r=aaSee("oan",{a:lo,b:hi},t);r.b=Math.max(r.a,r.b);return aaSay(lab||KIT_REL.oan,r)}
 /* Tát (jface): thiện cảm both ways B.rel[sev], her oán = relAdd ×hurt + B.oan[sev]; tier 1..3 is chosen in the slap game → the range over the tiers */
 function tatRelTxt(t){const B=BAL.slap,k=BAL.relOan.hurt,S3=[1,2,3];const R=S3.map(s=>B.rel[s]);return `${aaSay(KIT_REL.aff,{a:Math.max(...R),b:Math.min(...R)})}, ${pvOanSet(t,S3.map(s=>[-B.rel[s]*k,B.oan[s]||0]),"nàng oán ngươi")}`}
 function pvRel(t,n){const k=BAL.relOan;return n<0?`${pvQuy(t,n)}, ${pvOan(t,-n*k.hurt)}`:`${pvQuy(t,n)}, ${pvOan(t,-n*k.mend)}`}
@@ -116,7 +119,7 @@ try{wrapR("k61Ask",()=>"Hỏi người hầu: đó là ai?");wrapR("invAct",a=>a
 function aaHealthO(v){return oddsCl(Math.round(45+aff(v,S)/2-((typeof traitsOf==="function"&&traitsOf(v).includes("Kín đáo"))?15:0)))}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{const v=p&&p.ref;if(!v||!(p.kind==="rival"||p.kind==="hh"))return A;
  const i=A.findIndex(a=>a&&a.n==="Hỏi han sức khỏe");if(i<0)return A;const n=(S.chat&&S.chat[v.id])?1:2;const ill=illOf(v)&&!illKnown(v);
- A[i]=Object.assign({},A[i],{x:`${pvQuy(v,n)}${ill?` · nàng có thể kể bệnh của mình: ${word(aaHealthO(v))}`:" · biết nàng khỏe hay yếu"}`,run:()=>{chatMark(v);affAdd(v,S,n);
+ A[i]=Object.assign({},A[i],{x:`${pvQuy(v,n)}${ill?` · nàng có thể kể bệnh của mình: ${chanceW(aaHealthO(v))}`:" · biết nàng khỏe hay yếu"}`,run:()=>{chatMark(v);affAdd(v,S,n);
   let t=`${v.name} cảm động vì được hỏi han.`;const I=illOf(v);if(I&&!illKnown(v)){if(roll(aaHealthO(v))){I.known=true;t+=` Nàng kể đang mắc ${illName(v)}.`}else t+=" Nàng chỉ cười, giấu chuyện bệnh tật."}else if(I)t+=` Nàng vẫn đang ${illName(v)}.`;else t+=` Nàng khỏe mạnh (Sức ${v.suc>=BAL.sucLv.ask[1]?"tốt":v.suc>=BAL.sucLv.ask[0]?"vừa":"yếu"}).`;return t}});return A}catch(e){console.error(e);return A}}})();
 
 /* 9. "ban chết" on cards = what deathSentence (j8) really does; the odds word is the real one (it was forced to "Liều") */
@@ -269,9 +272,9 @@ odT=function(a,base){return odA(a,base+(a.tamco||0)/4)};
 /* 19. an oán preview when the target is not chosen yet (j55 "Dò la nhà ngoại": relAdd −8 + oán +8 → oán ≈ 12.8 × her nết) */
 /* review/net-ghen: the factor range over ANY person (one nết from each group BAL.net.F, as traitsOf gives): [Π min, Π max] of PERS[x][f] */
 function aaAnyRange(f){let lo=1,hi=1;for(const g in BAL.net.F){const vs=BAL.net.F[g].map(x=>PERS[x]&&PERS[x][f]!=null?PERS[x][f]:1);lo*=Math.min(...vs);hi*=Math.max(...vs)}return[lo,hi]}
-function pvOanAny(n,lab){const L=lab||"oán ta";try{const [a,b]=aaAnyRange("slight");const lo=Math.max(1,Math.round(n*a)),hi=Math.max(lo,Math.round(n*b));return lo===hi?`${L} +${lo}`:`${L} +${lo} đến +${hi}`}catch(e){return `${L} +${Math.round(n)}`}}
+function pvOanAny(n,lab){const L=lab||"oán ta";try{const [a,b]=aaAnyRange("slight");const lo=Math.max(1,Math.round(n*a)),hi=Math.max(lo,Math.round(n*b));return lo===hi?`${L} +${spSee("oan",lo)}`:`${L} +${spSee("oan",lo)} đến +${spSee("oan",hi)}`}catch(e){return `${L} +${spSee("oan",Math.round(n))}`}}
 /* review/net-ghen: the thiện cảm twin of pvOanAny — a rise toward her from a person not chosen yet (a static outcome line): the honest range over every nết trust */
-function pvQuyAny(n,lab){const L=lab||KIT_REL.aff;if(!(n>0))return `${L} ${balSg(Math.round(n))}`;try{const [a,b]=aaAnyRange("trust");const lo=Math.round(n*a),hi=Math.max(lo,Math.round(n*b));return lo===hi?`${L} +${lo}`:`${L} +${lo} đến +${hi}`}catch(e){return `${L} +${Math.round(n)}`}}
+function pvQuyAny(n,lab){const L=lab||KIT_REL.aff;if(!(n>0))return `${L} ${balSg(Math.round(n))}`;try{const [a,b]=aaAnyRange("trust");const lo=Math.round(n*a),hi=Math.max(lo,Math.round(n*b));return lo===hi?`${L} +${spSee("rel",lo)}`:`${L} +${spSee("rel",lo)} đến +${spSee("rel",hi)}`}catch(e){return `${L} +${spSee("rel",Math.round(n))}`}}
 
 /* 20. "bị phạt" on cards = what punish() (j8) does, by weight (BAL.punW, review/home-way): nhẹ (sev 0) khất bổng / cảnh cáo; vừa (sev 1)
    cấm túc BAL.punW.mid.m; nặng (sev 2) cấm túc BAL.punW.heavy.m or one rank lost (chance BAL.punW.heavy.demo) */
