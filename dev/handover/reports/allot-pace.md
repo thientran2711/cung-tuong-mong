@@ -1,5 +1,24 @@
 # ALLOT-PACE — allot-season made to fit pace-speed (worker for Foreman C ROOT 4, 27/11)
 
+## ★ r3 gates — ALLOT-PACE-3 (session_01PEhRbuUnuv3S5Duzh9rAtx, depth 5, START_CTX ~4 %) 28/11 ~10:20Z
+PRIORITY #1 CHECK: Foreman C BASE CHANGE 08:23Z/08:30Z (3b 2849705d FAILED G1 law 4 → base review/lc34-3b-r2-rv184 2d9f07c7 on LIVE a96564ad; 1a6a1aed/b3bc99f3/f857c7f3 VOID) | main LIVE a96564ad at order time (aecbc267 now) | review/allot-pace-r2 0eab2be1 (superseded) → **review/allot-pace-r3 @8752fc49** | claims ALLOT-PACE-3.
+BRANCH review/allot-pace-r3 = 2d9f07c7 + the same 6 picks as r2 (6d646253 152d4b0d c77569dc 23027243 026f6e76 a186a088) + 868b74e9 build + 8752fc49 role-parity-scan fix (test tool only).
+- Only conflict: assemble.py → base list + jseason.js after jeitem.js. j20/jinv/jstip/jseason/monthly-allotment diffs byte-identical to r2's resolution (base did not touch them).
+- Module list 491 ⊇ LIVE a96564ad's 487 (jkring-item.js + ../../rank/worker/src/score.js present; extras jsideq jreignend jseason joanpace). webkit-syntax: parse hits 0. assets.json unchanged.
+GATES on r3 (Fold 755x1000@2 + iPad 1180x820@2 where sized):
+| gate | r3 | note |
+|---|---|---|
+| monthly-allotment | ALL PASS | r2 run FAIL 5 was harness: start() sometimes locks to a maid life for the whole page (seen on base 3b 2849705d too, 1 of 8 loads) → 400× start loop (19 min) probes a servant. Not this branch |
+| allot-season | ALL PASS | |
+| door-onetap | PASS (F ok) | r2 run had one random law-6c «never picked» |
+| kit-std-scan REPORT_ONLY | 16 (X06 ladder word on court plaques, X08 chapter title ellipsis) | IDENTICAL line-for-line to base 2d9f07c7 (16) → baseline |
+| pace-speed / reignend | PASS / PASS | |
+| balance-core | 39 PASS 0 FAIL | |
+| npc-harm-heat | H3 flaky | H3 «pace off reopened 0/1» flips on BOTH: base 2d9f07c7 failed 2/4 runs, r3 1/4 → pre-existing flaky check, not this branch |
+| role-parity.test | FAIL 1 only (pre-existing gap list, unchanged) | FAIL 2 PROMO onlyBorn «cx:mendGo» FIXED in 8752fc49 (below) |
+| quickcheck vs LIVE a96564ad --runs 3 | QUICKCHECK PASS | core gates PASS (hooks 17), time-spill PASS, open 1808 ms, old save ok, perf new/live render 254/260 tab 509/479 buổi 1852/1449 tasks>200 31/30 |
+role-parity FAIL 2 (law 11, same family as f56802bc «drop»): probe-only. The VAR runs (social oanAdd/affAdd/relAdd, liked) are not undone by snapW; the risen maid is probed FIRST, so her runs raise her regard of the twin clone (affAdd(n,b)); the clone, probed second, then finds the risen maid as her go-between (jmend mendGoOf: aff(m,a) ≥ quen) → mendGo for born only. Fix: every person's relation stores (rl ro aff opz rel oan) put back before the second doer; and the clone copy made generic (every per-person store keyed by the risen maid's id — joanpace's daily cap holder.opz[id] was missing). Game rule unchanged (law 1 holds). After: NPC promo {risen:[],born:[]}.
+
 ## ★ HANDOVER ALLOT-PACE-2 → successor (28/11 ~07:35Z; context 40 % > START_CTX 6 % + 25 %) — Foreman C ROOT 4-1-1-1-1 session_01PEhRbwetRyRvTwxH84sUAe opens it
 PRIORITY #1 CHECK: Foreman C GO 07:25Z (base review/lc34-3b-r1-rv 2849705d = lr-rules caa95310 on LIVE 5ad52416 + tmk-oanpace-fix-rv 4206db2c + RV-181 pvOan) | main LIVE 5ad52416 | review/allot-pace-r2 0eab2be1 (PUSHED) | claims ALLOT-PACE → successor.
 DONE: branch review/allot-pace-r2 @ 0eab2be1 on 2849705d = 6 cherry-picks + build:
