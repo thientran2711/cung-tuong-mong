@@ -25,3 +25,13 @@ Cấm túc (m-new-275-292) → Bị soát phòng (m-new-276-293) → Bị thu hi
 - Also seen after resume: LATE BUTTON .kmov «Ta biết rồi» 10.4 s after open (game).
 - noturn-13/14 added by buổi ~1559 (year 11); NO-TURN shots on disk: 14.
 - noturn-15/16 added by buổi ~2053; NO-TURN shots on disk: 16.
+## FINAL (LIFE DONE)
+Ending: "Lãnh cung — Tuổi xuân qua đi" (card «Xuân tàn lãnh cung»), age 40, year 21, buổi 2897, rank 0 (Phế phi · lãnh cung), 16542 real taps, build b=0b372aa14258 (LIVE 5fb13d60) all life (runner+server died once ~04:34-05:34Z, resumed from ckpt on the same pinned build, save identical hash ee575583).
+Bugs (9 rows): 
+- SAVE STALE (28×): harness: CTMZ unreadable (HARNESS FIXER #24 item viii), not a game bug.
+- «Sang ngày mới» NO-TURN: 3 dead taps, buổi 3, 1 queued dialog never opens (rows: Thái hậu triệu, Nghe đồn ×9, Kẻ hầu xin, Một ánh mắt ×3, Có người đến ×4 = 18 shots in flight2-s21g-noturn/) — routed to DAYQ-NOTURN.
+- «Chờ tin» softlock: disabled button, Q=10, no dialog, 150 taps no-clock loop (y10 in Lãnh cung, loop-13/14); self-cleared, play continued.
+- LATE BUTTON «Ta biết rồi» 10.4 s after a .kmov opened.
+Illness log: NO personal-illness dialog, no danger word, no cure road (Tĩnh dưỡng | Truyền thái y) was ever offered in 21 years. Only HUD signs: "Tâm bệnh · nhẹ" with Sức cap 88/98 (y6, Lãnh cung) and later Sức 88/99, 96/99, 93/92 (end) flickers; mood Hờn tủi / Phiên muộn. Pick never exercised. Finding: illness/Sức-cap loss shown on HUD only, no dialog or cure road.
+Lãnh cung: 4+ stays (first y3 22 tuổi after Cấm túc → soát phòng → thu hiệu ban, card reason "Bị bỏ quên"); life ended in Lãnh cung at 40.
+Promotion roads: 319 seen / 235 picked (314 decree + 5 select); never rose above Đáp ứng / Thượng tại; rank 0 at end.
