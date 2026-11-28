@@ -42,3 +42,30 @@ Shots (scratch, not in git): /home/user/wt/r26-shots/{fold,ipad}-{1-card,2-after
 G1 one-core guard/bind/khắc/text/textrule PASS · G2 rules-one-source PASS (old save loads) · G3 kit-conform no FAIL, floats none · G4: webkit-boot, odds-cap, coop-one-world, mk-layer 0 bad, manifest-guard, npc-purpose-scan, dialog-fixed, dead-card, button-crawl (0 sure faults), look-dedupe, press-keep all PASS · q-softlock: 4 FAIL inside the gate run («person view never opened») → rerun standalone: LIVE 22afefb4 18/18 PASS, base a96564ad 18/18 PASS, **row26-talk 18/18 PASS** (the gate-run FAIL = the known «person view» tap flake, not this change; reviewer may rerun G4-94 alone).
 
 SẴN SÀNG KIỂM review/row26-talk e70e9e387c84847f958e232c8e3a1a7819b4b42e (BIG; on lr-rules-r2 a96564ad ⊃ LIVE 22afefb4).
+
+## REVIEW (B BIG RV row26-talk, session_01N1tNP2KKJkkwauJFWVHcCs, opus, fresh; depth 3; START_CTX ~3 %; 28/11)
+PRIORITY #1 CHECK ('row26|svTouch|jsvt|jgreet|xin theo ngươi'): OD row 26 | LIVE now a96564ad (= lr-rules-r2, so row26-talk is a plain delta on LIVE) | review/row26-talk e70e9e38 | claims B-ROW26 2KcAtN7j.
+VERDICT: **PASS on review/row26-talk-r2 8f62a546a0a18d9c520d220180f1b53c3d9aed18** (= e70e9e38 + reviewer small fixes). e70e9e38 alone would PASS except one LAW 11 family gap, fixed in r2.
+(1) Source delta vs a96564ad: jtsb.js 2 hunks (svTouch moved from the approach2 arrival wrapper into «Thu làm tai mắt» go(), mv = s) — correct; index.html/sw.js = rebuild only (4 build lines). OK.
+(2) LAW 11 family (all 20 svTouch call sites, grep 'svTouch(' dev/build): the SAME card has a fallback in j24 svDefect (used when jtsb cannot find the victim): it still called svTouch(S,s,"tm") without mv → after-line «ngươi tìm gặp X» though X came to her, and kind "tm" ≠ the jtsb card's "bribe". j24 svSell (her servant sells her out to v) also lacked mv = the servant who went. **Fixed in r2**: j24:34 svTouch(S,s,"bribe",undefined,s); j24:96 svTouch(v,g,"tm",undefined,g). Every other site: on success/acceptance (j10, j42:346/382/419, j70, jagknow, jky, jsvt internals) — no arrival-time call, mover correct.
+| | svTouch sites | arrival-time | wrong/missing mover on the defect/sell family | svt-scan UNWIRED |
+|---|---|---|---|---|
+| LIVE a96564ad | 20 | 1 (jtsb approach2) | 3 (jtsb, j24:34, j24:96) | 1 |
+| e70e9e38 | 20 | 0 | 2 (j24:34, j24:96) | 0 |
+| r2 8f62a546 | 20 | 0 | 0 | 0 |
+(3) Law 1 two-way: svTouch/svTalk same rule her ↔ NPC ↔ NPC (servant-trust (5) PASS). Law 6b: the card's servant is a real staff member (rcpDec resolves s204 in the real-tap run). Law 4: svTouch numbers from BAL.svt; card cost BAL.eff.jtsb.bacFx (j24 fallback fx bac:-20 literal is pre-existing, not this diff). Law 7: words, no %, no «ngươi tìm gặp» (real-tap PASS).
+(4) Test edits honest: `fell()` matches jstatpace header (thiện cảm paced on both sides of 0, OD 26/11 ~04:20Z) — exact while ≥ 0, a paced share ≤ n past 0; housemate exclusion = svTouch exempt same house by design. greet_check «words» = jgreet header rule (24/11: story text, never «Ta đã biết… Vì sao…»). The worker's new «card arriving: no change» check did NOT exercise the arrival wrapper (it built tsbApCard directly → PASSed on LIVE too); r2 adds a check that the approach2 wrapper calls no svTouch + the j24 fallback wiring check.
+TESTS (reviewer, own runs):
+| test | LIVE a96564ad | e70e9e38 | r2 |
+|---|---|---|---|
+| servant-trust.js (r2 test) | 104/108 FAIL (4: arrival wrapper, j24 fallback, accept svTouch, after-line) | — | 108/108 ×3 PASS |
+| servant-trust.js (e70 test) | 100/101 own test; 104/106 MUTATE | 106/106 ×3 | — |
+| svt-scan.py | 1 UNWIRED | 0 | 0 (69 sites) |
+| greet_check.js | words PASS (new rule); AG-MEET her 0/80 FAIL ×2 | — | same: AG-MEET her 0/80 (meet 8) FAIL ×2, all else PASS |
+| dev/test/row26-defect-tap.js (NEW, real taps, real approach chain approachOne, y05 save; Fold 755x1000 + iPad 1180x820, both buttons) | FAIL 6 (svTouch on ARRIVAL ×4, «Đuổi về» touch 1 ×2) | — | 16/16 PASS ×2, 0 dead taps, 0 page errors |
+| q-softlock.js alone | — | — | 18/18 PASS |
+| oldsave-r1.js (old = origin/main) | — | — | 16/16 PASS |
+| quickcheck.sh HEAD 11be590b | — | — | FAIL: (a) G4-94 q-softlock inside the gate run (alone 18/18 = the known person-view tap flake), (b) time-spill guard «greet inside offered null» — FLAKE ON LIVE TOO: base a96564ad 3/10 FAIL, e70 2/4, r2 2/4, same line, SEED=7 yet timing-dependent. Not this change. All other gates PASS (G1–G3, G4 webkit/odds/coop/mk/manifest/npc-purpose/dialog/dead-card/button-crawl/look-dedupe/press-keep/kit-std/noise). |
+Shots looked at 3× (scratch, not in git): /home/user/wt/r26-shots/{fold,ipad}-{duoi,thu}-{1-card,2-after}.png — kit thẻ gỗ hand «Thu làm tai mắt / Tốn Bạc 20» «Đuổi về / Tốn không»; after: kit KẾT QUẢ «Được Tai mắt +1 · Mất Bạc −20» / «ta không được gì, cũng không mất gì».
+TICKETS (not blockers, all pre-existing on LIVE): T1 greet_check AG-MEET: NPCs approach her 0× in 80 buổi (LIVE same) — AG-MEET owner. T2 time-spill guard runtime «greet inside» flake ~30 % on LIVE (test harness timing; owner time-spill). T3 «Đuổi về» result says «không mất gì» while the top bar shows «Bạc −6» (LIVE identical, same −6 on «Thu» = 20+6): an unexplained −6 bạc on answering the card (law 3 / law 7 wording) — find its source. T4 j24 svDefect fallback fx bac:-20 literal (law 4), dead path while jtsb finds the victim.
+LAND READY review/row26-talk-r2 8f62a546a0a18d9c520d220180f1b53c3d9aed18 (BIG; rules; on LIVE a96564ad; Worker deploy: no).
