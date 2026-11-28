@@ -2375,4 +2375,4 @@ BAL.area={on:1,
  route:["ngudao","vuonhoa","thuyta","dinhco"],bold:{sac:75},grpMax:2,span:4.2,folU:.7,extraName:"Lối đi",extraHs:{x:.26,y:.62,w:.14,h:.2},moveKh:0,
  fol:["follow","ag_follow"],folEmp:["attend","escort","guard"],
  art:{map:"img/pl2/ngu-hoa-vien-{s}-{b}.webp",mapHave:"*",area:{ngudao:"img/nhv/ngu-dao-{s}-{b}.webp",vuonhoa:"img/nhv/vuon-hoa-{s}-{b}.webp",thuyta:"img/nhv/thuy-ta-{s}-{b}.webp",dinhco:"img/nhv/dinh-co-{s}-{b}.webp",nonbo:"img/nhv/non-bo-{s}-{b}.webp"},areaHave:"*",x:.5},
- feet:.9,figH:.5,folS:.66,folGap:.05,zoom:{kv1:1,kv2:1.45},enterMs:560,walkMs:700,stepK:1.12,stepY:.045,spot:{kv1:.2,kv2:.28},band:{kv1:292,kv2:300},folMin:.5,folBack:.02};
+ feet:.9,figH:.5,folS:.66,folGap:.05,zoom:{kv1:1,kv2:1.45},enterMs:560,walkMs:700,stepK:1.12,stepY:.045,spot:{kv1:.2,kv2:.28},band:{kv1:292,kv2:300},folMin:.5,folBack:.02,/* LRM6 bystanders yield to the plaque post (jnhv yieldFaces): face box = share of the figure box — x = side margin each side, y0..y1 = top..bottom of the face from the figure top */face:{x:.3,y0:.03,y1:.2}};

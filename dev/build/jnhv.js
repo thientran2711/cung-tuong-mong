@@ -133,9 +133,10 @@ function geo(){const s=st(),r=s.getBoundingClientRect(),B=AB();const q=x=>{const
 function figRoleOf(p){const t=((p.info||"")+" "+(p.role||"")+" "+(p.name||"")).toLowerCase();if(/thị vệ|thi ve|thống lĩnh/.test(t))return{kind:"man"};
  if(/thái giám|công công|tổng quản|(^|\s)tiểu .+ tử\b|(^|\s)lão .+ tử\b|\stử$/.test(t)||/ Tử$/.test(p.name||""))return{kind:"maid",ref:{role:"eunuch",name:p.name,id:"n:"+p.name}};
  return{kind:"maid",ref:{role:"maid",name:p.name,id:"n:"+p.name}}}
-/* LRM4: the servant-path place list (j95) carries the Emperor as {kind:"srv",sk:"emp"} and the Thái y as {kind:"srv",sk:"ty"} with no ref → read sk, never the maid fallback */
+/* LRM4: the servant-path place list (j95) carries the Emperor as {kind:"srv",sk:"emp"} and the Thái y as {kind:"srv",sk:"ty"} with no ref → nhvKind reads sk (entryOfP, silhouette sex).
+   The FIGURE comes from the kit (LRM6, RV-177 FAIL-1 law 9/11): figFor carries KIT §95.4 K-SRV-OWNFIG (kitFigWho, j28 + jkstage wrapper), so the srv-shaped person goes to figFor as he is */
 function nhvKind(p){return p&&p.kind==="srv"&&(p.sk==="emp"||p.sk==="ty")?p.sk:p&&p.kind}
-function figSrc(p){let src="";const ek=nhvKind(p);try{const own=ek==="emp"||ek==="th"||ek==="ty";const who=own?(p.kind===ek?p:{kind:ek,name:p.name,id:ek}):p.ref;if(who)src=figFor(who)}catch(e){}
+function figSrc(p){let src="";const ek=nhvKind(p);try{const who=ek==="emp"||ek==="th"||ek==="ty"?p:p.ref;if(who)src=figFor(who)}catch(e){}
  if(!src){try{src=figFor(Object.assign({name:p.name},figRoleOf(p)))}catch(e){}}
  let kn=true;try{kn=j59known(p)!==false}catch(e){}
  if(src)return{src,sil:0,unk:!kn};
@@ -166,7 +167,7 @@ function layout(re){if(!CUR||!L)return;const D0=geo();if(D0.H<80||D0.W<80){/* th
  G.forEach(g=>{const cx=x+g.wU*fh/2;g.cx=cx;g.top=1e9;g.P.forEach(p=>{const m=p.m,h=fh*p.s,w=h*m.w0,mx=cx+(p.ux-g.cU)*fh;m.x=mx-w/2;m.y=D.feet-h;m.w=w;m.h=h;m.z=p.z;m.g=g;
    const t=`translate(${m.x}px,${m.y}px)`;Object.assign(m.el.style,{width:w+"px",height:h+"px",zIndex:String(10+p.z)});if(!(SELM===m||(SEL===g&&SELM)))m.el.style.transform=t;m.el.__t=t;m.img.style.transform=p.flip?"scaleX(-1)":"";g.top=Math.min(g.top,m.y)});
   x+=g.wU*fh+gap;capPut(g)});
- bgPut();tagsFix()}
+ bgPut();/* LRM6: a re-layout (resize) put the bystanders back on their slots — while the board is up they yield again */G.forEach(g=>g.P.forEach(p=>{if(p.m)p.m.yd=null}));if(KP&&SELM&&liveM(SELM)){try{yieldFaces(SELM)}catch(e){}}tagsFix()}
 function tamPut(){try{if(!L)return;let e=L.querySelector(".nhv-tam");if(CUR&&CUR.tam&&typeof kitTam==="function"){if(!e){e=document.createElement("div");e.className="nhv-tam";e.innerHTML=kitTam(true);L.appendChild(e)}}else if(e)e.remove()}catch(x){}}
 function bgPut(){if(!BG||!CUR)return;const D=CUR.D,painted=!!areaArt(CUR.a.k),a=painted?{x:(AB().art||{}).x==null?.5:AB().art.x}:CUR.a,z=painted?1:((AB().zoom||{})[kv()]||1);let bw=Math.max(D.W*z,D.H*16/9),bh=bw*9/16;if(bh<D.H){bh=D.H;bw=D.H*16/9}
  BG.style.width=bw+"px";BG.style.height=bh+"px";BG.style.transform=`translate(${-(bw-D.W)*(a.x==null?.5:a.x)}px,${-(bh-D.H)}px)`}
@@ -212,7 +213,7 @@ function liveM(m){return !!(m&&m.g&&m.el&&CUR&&CUR.G&&CUR.G.includes(m.g))}
 function figsNot(g){if(!CUR||!CUR.G)return[];return CUR.G.filter(x=>x!==g).flatMap(x=>x.P.map(p=>p.m.el))}
 function pickGroup(g){if(!g||!CUR||!CUR.G||!CUR.G.includes(g)){SEL=SELM=null;return}closePk();if(SELM){if(liveM(SELM))back(SELM,true);else SELM=null}SEL=g;try{kitDim.on(()=>figsNot(g))}catch(e){}CUR.G.forEach(x=>{if(x.capEl)an(x.capEl,[{opacity:x===g?1:.45}],{duration:260})});tagsFix()}
 function unsel(){closePk();if(SELM){if(liveM(SELM))back(SELM);else SELM=null}SEL=null;try{kitDim.off()}catch(e){}if(CUR)CUR.G.forEach(x=>{if(x.capEl)an(x.capEl,[{opacity:1}],{duration:240})});tagsFix()}
-function back(m,quick){if(!liveM(m)){if(SELM===m||!liveM(SELM))SELM=null;return}const g=m.g;SELM=null;an(m.el,[{transform:m.el.__t}],{duration:quick?200:420});g.P.forEach(p=>{if(p.m!==m)an(p.m.el,[{transform:p.m.el.__t}],{duration:quick?200:360})});m.el.style.zIndex=String(10+m.z);
+function back(m,quick){if(!liveM(m)){if(SELM===m||!liveM(SELM))SELM=null;return}const g=m.g;try{unyield(quick)}catch(e){}SELM=null;an(m.el,[{transform:m.el.__t}],{duration:quick?200:420});g.P.forEach(p=>{if(p.m!==m)an(p.m.el,[{transform:p.m.el.__t}],{duration:quick?200:360})});m.el.style.zIndex=String(10+m.z);
  CUR.G.forEach(x=>{if(x.capEl)x.capEl.style.visibility=""});tagsFix()}
 /* step out: she walks to the talk spot (speaker-left rule); her followers stand beside her on the left with a gap, the plaque band keeps her right side free */
 async function stepOut(m){if(!liveM(m))return;const g=m.g;if(SEL!==g)pickGroup(g);if(!liveM(m))return;if(SELM&&SELM!==m){if(liveM(SELM))back(SELM,true);else SELM=null}SELM=m;const B=AB(),D=CUR.D,k=B.stepK||1.12,gp=(B.folGap||.05)*CUR.fh;
@@ -236,12 +237,34 @@ async function stepOut(m){if(!liveM(m))return;const g=m.g;if(SEL!==g)pickGroup(g
  await wait(still()?30:(B.walkMs||700)+40);tagsFix()}
 /* THẺ GỖ TREO = kit §98.1 kitPick, fed by the real act list of this person (jdfv dfData) */
 function closePk(now){const k=KP;KP=null;if(!k)return;try{now?k.destroy():k.close()}catch(e){}}
+/* BYSTANDERS YIELD TO THE POST (LRM6; MAIN 182 + RV-177 §1 observation, law 11 every area × both devices): the ONE plaque post never yields (KIT §98.1 «the figure / cluster
+   stays LEFT of kitPick.postBox») — so while the thẻ gỗ is up, every other person whose FACE sits under the board (rail, tabs, plaques, post) steps aside: left until the face
+   clears the band's left edge (her painted body never off the stage), then, if still under it, a step back (smaller, feet kept) until the face is below / left of the board.
+   Face box = BAL.area.face share of the figure box (law 4). Undone when she goes back / the board's person changes; re-applied after a re-layout while the board is up. */
+/* the board's box = the kit's own band box (kitPick.postBox: final place, never mid drop-in) for the shown group's plaque count, plus whatever of the board is on the stage now */
+function pkRects(n){if(!L)return[];const h=L.getBoundingClientRect(),o=[];try{const B=kitPick.postBox(L,n);o.push({l:B.x0,r:B.x1,t:B.top-8,b:B.bottom})}catch(e){}
+ L.querySelectorAll(".kpk-n,.kpk-post,.kpk-rail,.kpk-tabs").forEach(e=>{const r=e.getBoundingClientRect();if(r.width>1&&r.height>1)o.push({l:r.left-h.left,r:r.right-h.left,t:r.top-h.top,b:r.bottom-h.top})});return o}
+function faceOf(q,dx,s,ax){const F=AB().face||{x:.3,y0:.03,y1:.2},w=q.w*s,h=q.h*s,x=ax==null?q.x+dx+(q.w-w)/2:ax+(q.x+dx-ax)*s,y=q.y+q.h-h;return{l:x+w*F.x,r:x+w*(1-F.x),t:y+h*F.y0,b:y+h*F.y1}}
+function unyield(quick){if(!CUR)return;CUR.G.forEach(g=>g.P.forEach(p=>{const q=p.m;if(!q||!q.yd)return;q.yd=null;if(SELM&&q.g===SELM.g)return;an(q.el,[{transform:q.el.__t}],{duration:quick||still()?1:320})}))}/* one keyframe = from where the figure stands now (no jump back to the slot) */
+/* a group yields AS ONE (LRM6 r2: a master stepping aside alone left her own follower standing in front of her — her tap point covered): same shift for every member,
+   then, if a face is still under the board, the whole group steps back together (scaled about its left feet point, so the row keeps its order and gaps) */
+function yieldFaces(m,n){if(!CUR||!liveM(m)||!KP||!AB().face)return;/* BAL.area.face null = off (the plate-edge-scan BEFORE column: NOYIELD=1) */n=n||KP.__n||1;KP.__n=n;const R=pkRects(n);if(!R.length)return;
+ const hit=f=>R.some(r=>f.l<r.r-1&&f.r>r.l+1&&f.t<r.b-1&&f.b>r.t+1);const bx0=Math.min(...R.map(r=>r.l)),bt=Math.min(...R.map(r=>r.t)),bb=Math.max(...R.map(r=>r.b));
+ CUR.G.forEach(g=>{if(g===m.g)return;const Q=g.P.map(p=>p.m).filter(Boolean);if(!Q.length)return;
+  const back0=()=>Q.forEach(q=>{if(q.yd){q.yd=null;an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}});
+  if(!Q.some(q=>hit(faceOf(q,0,1)))){back0();return}
+  const vIn=f=>f.b>bt+1&&f.t<bb-1,left=Math.min(...Q.map(q=>q.x+q.w*.22));
+  /* left first: every face that is level with the board ends left of its left edge (4 px gap); the group's painted left edge stays on the stage (6 px) */
+  let dx=Math.min(0,...Q.map(q=>{const f=faceOf(q,0,1);return vIn(f)?bx0-4-f.r:0}));dx=Math.max(dx,6-left);let s=1;const ax=left+dx;
+  const any=(d,sc)=>Q.some(q=>hit(faceOf(q,d,sc,ax)));while(any(dx,s)&&s>.56)s-=.04;
+  Q.forEach(q=>{q.yd={dx,s};const T=ax+(q.x+dx-ax)*s-q.w*(1-s)/2;const to=`translate(${T}px,${q.y}px) scale(${s.toFixed(3)})`;an(q.el,[{transform:to}],{duration:still()?1:420})})})}
 function openPk(m){closePk(true);if(!CUR||!liveM(m)||typeof kitPick==="undefined")return;let G=[];try{G=dfData(m.i)}catch(e){}
  /* names she has not learnt (the kit shows them as «???» on a button): those acts are not offered by that name */let unk=[];try{unk=(rivals||[]).filter(v=>typeof k61Named==="function"&&!k61Named(v)).map(v=>v.name).filter(Boolean)}catch(e){}
  G=(G||[]).map(g=>Object.assign({},g,{acts:(g.acts||[]).filter(a=>a&&a.n&&!/\?\?\?/.test(a.n+" "+(a.word||""))&&!unk.some(n=>String(a.n).includes(n)))})).filter(g=>g.acts.length);/* an act naming someone she has not learnt is not offered by that name (MAIN 127 FAIL 4, ring4 rule) */if(!G.length)return;
  const others=[...L.querySelectorAll(".nhv-f")].filter(e=>e!==m.el&&e.offsetParent!==null).map(e=>kitPick.rect(e,L));
  KP=kitPick.open({host:L,anchor:kitPick.rect(m.el,L),avoid:others,side:"r",groups:G,dismiss:false,
-  onPick:id=>runAct(m,id),onOff:a=>{try{if(a&&a.why&&typeof kitMoodSay==="function"){const b=kitMoodSay(m.img,a.why,{hold:2600});if(b&&b.classList)b.classList.add("nhv-say")}}catch(e){}}})}
+  onPick:id=>runAct(m,id),onOff:a=>{try{if(a&&a.why&&typeof kitMoodSay==="function"){const b=kitMoodSay(m.img,a.why,{hold:2600});if(b&&b.classList)b.classList.add("nhv-say")}}catch(e){}}});
+ /* LRM6: bystanders whose face is under the board step aside (band box = kitPick.postBox for the first group's plaque count, the group the board opens on) */try{if(KP)yieldFaces(m,(G[0].acts||[]).length)}catch(e){console.error("nhv yield",e)}}
 /* the act runs through the game's own person flow (kitFocus + dfTap: rules card, on-figure game, result toast, log) on the stepped-out figure; when it is done the plaques hang again */
 function runAct(m,id){closePk(true);const p=curPeople()[m.i];if(!p||typeof kitFocus==="undefined"||typeof dfTap!=="function")return;
  const tk={};DF.tk=tk;DF.encM=null;DF.p=p;DF.i=m.i;popIdx=m.i;popMsg="";window.__nhvAct=1;
@@ -285,6 +308,6 @@ function holdOn(srcIn,readyFn){holdOff();try{const hud=document.querySelector("h
 })();
 /* the area scene owns the people of its place: no place ring (kitRing, jkring.js wants()) opens over it — the ring layer (z 57, whole stage) would cover the plaques (RV-172 FAIL-1) */
 function owns(){try{const h=S&&S.hall;return !!(document.documentElement.classList.contains("nhvon")||(h&&h.part&&areaByK(h.part)))}catch(e){return false}}
-window.NHV={owns,plan,entries,count,areaArt,areaOfP,hall,on,mount,unmount,layout,pickGroup,stepOut,openPk,unsel,get cur(){return CUR},get kp(){return KP}};
+window.NHV={owns,plan,entries,count,areaArt,areaOfP,hall,on,mount,unmount,layout,pickGroup,stepOut,openPk,unsel,figSrc,tagsFix,get cur(){return CUR},get kp(){return KP}};
 try{if(window.KIT_SAMPLES)KIT_SAMPLES.push({id:"§76.nhv",title:"kitPalaceMap · Ngự hoa viên",html:()=>kitPalaceMap({slot:SLOT,k:K})})}catch(e){}
 }catch(e){console.error("jnhv",e)}})();
