@@ -37,7 +37,15 @@ function rdFx(id,def){const F=BAL.road.fx&&BAL.road.fx[id];if(!F)return;
     if(e.fx)d.fx=e.fx;for(const k of ["k","sc"])if(e[k]!=null)d[k]=e[k];if(e.g&&d.go){const f=d.go,G=e.g;d.go=A=>f(A,G)}}continue}
   const O=def.B&&def.B[bk]&&def.B[bk].o;if(!Array.isArray(O))continue;
   F[bk].forEach((x,i)=>{const o=O[i];if(!x||!o)return;for(const k of ["c","w","l"])if(x[k])o[k]=x[k];if(x.sc!=null)o.sc=x.sc;if(x.o){const q=x.o;o.o=A=>rdOdds(q,A)}
-   if(x.g&&o.go){const f=o.go,G=x.g;o.go=(A,ok)=>f(A,ok,G)}})}}
+   if(x.g&&o.go){const f=o.go,G=x.g;o.go=(A,ok)=>f(A,ok,G)}
+   if(x.oa&&o.alt&&!o.alt.on)rdAlt(o,x.o||[100],x.oa)})}}
+/* E-TIER-B13 batch 3 (law 2 same-result merge, owner 27/11 ~01:00Z/~01:03Z): a way folded into its sibling leaves its text on the kept way
+   (alt {n, rt, rf}) and its odds in the BAL row (oa). One tap: the odds are her best fit of the two methods, and the result names the method
+   that was used («<alt.n>. <its rt/rf>») when the folded one fit her better. */
+function rdAlt(o,q,qa){const al=o.alt,r0=o.rt,f0=o.rf;al.on=1;const bt=A=>rdOdds(qa,A)>rdOdds(q,A);
+ const say=(t,A)=>{const s=typeof t==="function"?t(A):t||"";if(typeof arcReveal67==="function")arcReveal67(s,A);return s};
+ o.o=A=>Math.max(rdOdds(q,A),rdOdds(qa,A));
+ o.rt=A=>bt(A)?al.n+". "+say(al.rt,A):say(r0,A);o.rf=A=>bt(A)?al.n+". "+say(al.rf||f0,A):say(f0,A)}
 /* the rare finale choice of a road (RD97L): its numbers live in BAL.road.rare[a] (p, np, sc, c, fx, g = its go amounts read as G; bar = the floor its x condition reads
    and its x text prints through RR(a).bar) */
 const RR=a=>BAL.road.rare[a];

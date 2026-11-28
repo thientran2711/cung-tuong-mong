@@ -233,9 +233,8 @@ rdDef("thd_tho",11,{t:"Tài nữ",w:"emp",sj:"danh hiệu Tài nữ sau cùng",c
   {n:"Giữ cha ở lại đến ngày ban chiếu",wx:"cha thấy con được phong",lx:"tốn bạc giữ cha ở trọ; cha ngại ở lâu",rt:"Cha ở lại, ngày nào cũng ngồi trước cửa viện."},
   {n:"Để cha về",wx:"cha giữ được cái thanh",lx:"tiễn cha ra cổng, Sức −; cha không thấy ngày ấy",rt:"Ngươi tiễn cha bằng một bài thơ."},
   {n:"Xin Hoàng thượng gặp cha",f:"meet",wx:"thầy đồ quê được vào chầu",lx:"ngài thấy ngươi đòi hỏi, Hoàng thượng phật ý",rt:"Hoàng thượng hỏi cha về sách, cha đáp không run một chữ.",rf:"Ngài bảo không có lệ ấy."}]},
- x1:{h:"Chiếu Ngự tuyển",w:"emp",t:"Hoàng thượng cầm chiếu, hỏi ngươi lần cuối: “Danh Tài nữ, nàng muốn gì đi kèm?”",o:[
-  {n:"Xin chỉ danh, không xin gì thêm",e:["win","mid"],rt:"Chiếu ban: ngươi là Tài nữ của Đại Hy.",rf:"Chiếu ban danh hiệu cho người khác, ngươi được một dòng khen."},
-  {n:"Xin ban chữ cho trường làng của cha",e:["win","mid"],lx:"danh của ngươi nhường chỗ cho tên cha",rt:"Chiếu ban danh Tài nữ, kèm biển ngự bút cho trường làng.",rf:"Ngài ban biển cho trường, danh hiệu để sau."},
+ x1:{h:"Chiếu Ngự tuyển",w:"emp",t:"Hoàng thượng cầm chiếu, hỏi ngươi lần cuối: “Danh Tài nữ, nàng muốn gì đi kèm?”",om3:"001",o:[
+  {alt:{n:"Xin ban chữ cho trường làng của cha",rt:"Chiếu ban danh Tài nữ, kèm biển ngự bút cho trường làng.",rf:"Ngài ban biển cho trường, danh hiệu để sau."},n:"Xin chỉ danh, không xin gì thêm",e:["win","mid"],rt:"Chiếu ban: ngươi là Tài nữ của Đại Hy.",rf:"Chiếu ban danh hiệu cho người khác, ngươi được một dòng khen."},
   {n:"Xin xóa hẳn tiếng đạo thơ cho cả {v}",e:["win","lose"],rt:"Hoàng thượng khen: “Tài mà độ lượng.” Chiếu ban danh Tài nữ.",rf:"Ngài thấy ngươi bao che kẻ vu. Chiếu gác lại."}]}},
  E:{win:{tag:"Tài nữ của Đại Hy",w:"emp",gi:["nghien","emp"],t:"Chiếu ban: ngươi là Tài nữ của Đại Hy. Tập Ngự tuyển in tên ngươi và tên người thầy đồ đã dạy ngươi chữ. Ở trường làng, trò nhỏ đọc thơ ngươi mỗi sáng."},
   mid:{tag:"Thơ có tên, danh hiệu không",t:"Thơ ngươi có trong tập Ngự tuyển, người đọc nhớ. Danh Tài nữ về tay người khác, nhưng không ai còn gọi ngươi là kẻ chép thơ."},

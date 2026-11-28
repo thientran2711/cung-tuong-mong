@@ -13,6 +13,7 @@ const D_=BAL.road.bd.def;
    one-core-guard reads every Object.assign(BAL…,{key}) as one flat key space */
 const bdR=(st,w,l,c,b)=>({c:c||D_.c,o:[b||D_.b,["d",st,D_.d],["-m","rank",BAL.road.bd.rk]],w,l,sc:D_.sc});/* risky: odds on one stat */
 const bdS=(c,w)=>({c,w});/* sure: a cost and a smaller gain */
+const bdA=(x,y)=>Object.assign(x,{oa:y.o});/* E-TIER-B13 batch 3: way y folded into way x (same result) — x keeps y's odds as its best-fit alternative (oa) */
 const bdX=(b,st,f,c)=>({c:c||D_.cx,o:[b,["d",st,D_.d],["f",f,D_.f,0],["-m","rank",BAL.road.bd.rk]]});/* climax: base + stat + the chapter's flag */
 const bdE=(w,l)=>({win:{fx:w,k:1},mid:{fx:D_.mid,k:0},lose:{fx:l,k:-1}});
 const bdG=(o,g)=>Object.assign(o,{g});
@@ -71,7 +72,7 @@ Object.assign(BAL.road.fx,{
   E:bdE({sung:4,tamco:3},{sung:-4,danh:-2})},
  bd_san_11:{s1:[bdS({suc:-2},{sung:3}),bdS({tamco:-1},{duc:2,danh:1}),bdR("tamco",{mat:1,tamco:1},{suc:-2},{suc:-1})],
   s2:[bdR("sung",{sung:3},{danh:-2},{suc:-1}),bdS({bac:-30},{mat:1}),bdS({tamco:-1},{mat:1})],
-  c1:[bdR("danh",{mat:1,danh:2},{danh:-2},{suc:-1}),bdS({tamco:-1},{mat:1}),bdR("suc",{mat:1,danh:2},{suc:-3},{suc:-1})],
+  c1:[bdA(bdR("danh",{mat:1,danh:2},{danh:-2},{suc:-1}),bdR("suc",{mat:1,danh:2},{suc:-3},{suc:-1})),bdS({tamco:-1},{mat:1})],
   c2:[bdG(bdR("duc",{duc:2},{sung:-1},{tamco:-1}),[3,-2]),bdS({duc:-1},{tamco:2}),bdG(bdS({danh:-1},{sung:2}),[2])],
   t1:[bdS({suc:-1},{sung:3}),bdS({sung:-1},{duc:3}),bdS({tamco:-1},{tamco:3})],
   x1:[bdX(40,"suc","guard"),bdX(35,"tamco","scout",{suc:-2}),bdX(50,"duc","share",{danh:-2})],

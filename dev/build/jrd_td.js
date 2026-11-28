@@ -722,9 +722,8 @@ rdDef("td_song",9,{t:"Đổi tên",w:"eun",sj:"tờ hộ tịch của em",cast(A
   {n:"Lo cho người quê đứng ra nhận",wx:"có người làm chứng quê",lx:"người nhận bị hỏi vặn",rt:"Một lão nông nhận em là cháu.",rf:"Lão nông khai lắp bắp."},
   {n:()=>TDSW()?"Bảo em xin ra trận lập công":"Bảo em xin theo đoàn tải lương ra tiền tuyến",f:"brave",wx:"người có công thì ít ai tra",lx:()=>TDSW()?"em vừa lành vết thương":"tay em còn yếu, đường tải lương có giặc",rt:()=>TDSW()?"Em ra trận, về với một đầu giặc.":"Em giữ trọn kho lương giữa trận, có tên trong sổ công.",rf:()=>TDSW()?"Em bị giữ lại hỏi trước khi ra trận.":"Em bị giữ lại hỏi trước khi theo đoàn."},
   {n:"Để Nội vụ phủ giải thích",if:A=>A.f.paper,wx:"sổ Nội vụ phủ khớp",lx:"thư lại nắm thêm một bí mật",rt:"Thư lại đưa sổ ra, mọi dòng đều khớp."}]},
- x1:{h:"Tờ giấy đóng ấn",w:"emp",t:"Sổ đinh cuối năm đóng lại. Tên nào trong sổ thì thành người thật. Em sẽ đứng dưới cái tên nào?",o:[
-  {n:"Tên mới, sạch sẽ",e:["win","lose"],rt:"Tên mới của em được đóng ấn Hộ bộ. Tiểu Thạch không còn trên đời.",rf:"Thư lại bị bắt vì chép sổ sai, tên em bị khoanh lại."},
-  {n:"Họ cha, nhờ công trận",e:["win","lose"],rt:"Hoàng thượng phê: “Lính có công, cho về họ cũ.” Em mang lại họ cha.",rf:"Hoàng thượng bác: “Án tiên đế, không bàn.”"},
+ x1:{h:"Tờ giấy đóng ấn",w:"emp",t:"Sổ đinh cuối năm đóng lại. Tên nào trong sổ thì thành người thật. Em sẽ đứng dưới cái tên nào?",om3:"001",o:[
+  {alt:{n:"Họ cha, nhờ công trận",rt:"Hoàng thượng phê: “Lính có công, cho về họ cũ.” Em mang lại họ cha.",rf:"Hoàng thượng bác: “Án tiên đế, không bàn.”"},n:"Tên mới, sạch sẽ",e:["win","lose"],rt:"Tên mới của em được đóng ấn Hộ bộ. Tiểu Thạch không còn trên đời.",rf:"Thư lại bị bắt vì chép sổ sai, tên em bị khoanh lại."},
   {n:"Giữ tên Tiểu Thạch",e:"mid",lx:"cái tên đã bị nhiều người nhắc",rt:"Em vẫn là Tiểu Thạch, như mọi năm."}]}},
  E:{win:{tag:"Em có một cái tên đứng được",w:"emp",t:"Dù là tên mới hay họ cha, cái tên ấy có ấn Hộ bộ. Từ nay muốn tra em, phải tra qua một tờ giấy thật."},
   mid:{tag:"Vẫn là Tiểu Thạch",t:"Em giữ cái tên cũ. Không ai tra thêm, nhưng ai muốn tìm thì vẫn tìm được."},

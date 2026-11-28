@@ -310,10 +310,9 @@ rdDef("bd_san",11,{t:"Vi trường năm sau",w:"emp",sj:"cuộc săn thu năm sa
   {n:"Xin xuống xe, cưỡi Ngọc Câu",f:"guard",wx:"ngươi ở gần ngự giá",lx:"trái lệnh",rt:"Hoàng thượng thấy ngươi lên ngựa, chỉ cười.",rf:"Thái bộc giữ ngươi lại trong xe."},
   {n:"Bảo Bạc Đồ theo sát ngự mã",f:"scout",wx:"có người mình gần ngài",lx:"Bạc Đồ không có quyền",rt:"Bạc Đồ dắt Ngọc Câu đi sát cấm quân."},
   {n:"Vén rèm, đếm thị vệ",f:"share",wx:"biết ai thừa ra",lx:"người ta thấy ngươi tò mò",rt:"Thị vệ đếm được thừa ra hai người."}]},
- c1:{h:"Người lạ mặc áo thị vệ",w:"maid",t:"Bạc Đồ nói khẽ: hai người lạ mặc áo thị vệ, đeo cung dài, đứng ở mé rừng phía tây. Thống lĩnh cấm quân không biết họ.",o:[
-  {n:"Báo ngay Thống lĩnh cấm quân",wx:"cấm quân đề phòng",lx:"lỡ là người thật thì mang tiếng",rt:"Cấm quân dàn hàng ở mé rừng tây.",rf:"Thống lĩnh bảo: người của Nội vụ phủ, không có gì."},
-  {n:"Bảo Bạc Đồ theo dõi, không động",wx:"không đánh động",lx:"chậm một bước",rt:"Bạc Đồ nấp sau gốc phong, mắt không rời hai người."},
-  {n:"Tự phi ngựa đến hỏi thẻ bài",wx:"biết ngay thật giả",lx:"ngươi một mình gần kẻ có cung",rt:"Hai người không có thẻ, lùi vào rừng.",rf:"Hai người chìa thẻ ra, là thẻ thật của Nội vụ phủ."}]},
+ c1:{h:"Người lạ mặc áo thị vệ",w:"maid",t:"Bạc Đồ nói khẽ: hai người lạ mặc áo thị vệ, đeo cung dài, đứng ở mé rừng phía tây. Thống lĩnh cấm quân không biết họ.",om3:"010",o:[
+  {alt:{n:"Tự phi ngựa đến hỏi thẻ bài",rt:"Hai người không có thẻ, lùi vào rừng.",rf:"Hai người chìa thẻ ra, là thẻ thật của Nội vụ phủ."},n:"Báo ngay Thống lĩnh cấm quân",wx:"cấm quân đề phòng",lx:"lỡ là người thật thì mang tiếng",rt:"Cấm quân dàn hàng ở mé rừng tây.",rf:"Thống lĩnh bảo: người của Nội vụ phủ, không có gì."},
+  {n:"Bảo Bạc Đồ theo dõi, không động",wx:"không đánh động",lx:"chậm một bước",rt:"Bạc Đồ nấp sau gốc phong, mắt không rời hai người."}]},
  c2:{h:"{v} đổi chỗ xe",w:"v",need:["v"],t:"{v} xin Thái bộc cho xe mình đi lên gần ngự giá, sát chỗ con đường vào rừng phong.",o:[
   {n:"Nhắc {v} chỗ ấy không yên",wx:"cứu {v} nếu có chuyện",lx:"{v} cho là ngươi ghen",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"{v} nghe, cho xe lùi lại.",rf:"{v} không nghe."},
   {n:"Để mặc {v}",wx:"không dính vào",lx:"nếu có chuyện, xe {v} ở đầu",rt:"Xe {v} đi sát ngự giá."},

@@ -564,8 +564,7 @@ rdDef("ch_benh",10,{t:"Hồi phục hay băng hà",w:"th",sj:"đêm quyết đ�
   {n:"Cho vào, nhưng không cho đụng chén",wx:"không mất mặt ai",lx:"{v} thấy bị nghi",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} ngồi một lát rồi về."},
   {n:"Từ chối ở cửa",wx:"Đức Thọ cung kín",lx:"{v} nói ngươi giữ bà làm của riêng",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} đặt bát canh ở cửa."},
   {n:"Mời {v} cùng hầu một đêm",wx:"{v} thấy được lòng ngươi",lx:"có chuyện thì {v} đổ cho ngươi",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} ngồi đến sáng, mắt đỏ.",rf:"{v} ngủ quên, sáng ra kể khắp nơi là ngươi ép."}]},
- c3:{h:"Hoàng thượng đến",w:"emp",t:A=>S.thDead?"Hoàng thượng quỳ trước linh cữu mẹ suốt đêm. Ngài hỏi ngươi: “Những ngày cuối, mẫu hậu nói gì?”":"Hoàng thượng đến, ngồi bên giường mẹ. Ngài hỏi ngươi: “Mẫu hậu có qua được không?”",o:[
-  {n:"Thưa thật",wx:"ngài tin ngươi",lx:"lời thật đau",rt:"Hoàng thượng nắm tay ngươi."},
+ c3:{h:"Hoàng thượng đến",w:"emp",t:A=>S.thDead?"Hoàng thượng quỳ trước linh cữu mẹ suốt đêm. Ngài hỏi ngươi: “Những ngày cuối, mẫu hậu nói gì?”":"Hoàng thượng đến, ngồi bên giường mẹ. Ngài hỏi ngươi: “Mẫu hậu có qua được không?”",om3:"001",o:[
   {n:"Thưa cho ngài yên lòng",wx:"ngài nhẹ lòng",lx:"nếu sai thì thành dối",rt:"Hoàng thượng gật đầu."},
   {n:"Kể chuyện chén thuốc",wx:"ngài nổi giận thay mẹ",lx:"ngài thấy lúc này không nên",rt:"Hoàng thượng cho tra lại Ngự dược phòng ngay đêm ấy.",rf:"Hoàng thượng bảo: “Để sau.”"}]},
  t1:{h:"Cô mẫu dặn lại",w:"th",need:["th"],t:"Nửa đêm, Thái hậu tỉnh: “Nếu ai gia không qua, con lo cho người của ai gia.”",o:[

@@ -435,10 +435,9 @@ rdDef("tt_oan",11,{t:"Rửa sạch tiếng nhà",w:"dad",sj:"tiếng tăm của 
   {n:"Đưa mảnh giấy cho Hoàng thượng",wx:"kẻ đứng trên phải trả lời",lx:"đụng đến hoàng thân",rt:"Hoàng thượng đọc, im lặng, rồi cất vào tay áo.",rf:"Hoàng thượng nói: “Nàng có biết đây là ai không?”"},
   {n:"Gặp {v}, nói ngươi biết",wx:"{v} sợ",lx:"{v} báo cho Thân vương",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} tái mặt.",rf:"{v} đi báo ngay."},
   {n:"Giữ kín cả đời",wx:"an toàn",lx:"kẻ đứng trên không bị gì, tiếng nhà vẫn còn vết",rt:"Ngươi cất mảnh giấy vào đáy rương."}]},
- c2:{h:"Người cũ của cha",w:"dad",t:"Những môn sinh từng bỏ cha giờ xin quay lại.",o:[
+ c2:{h:"Người cũ của cha",w:"dad",t:"Những môn sinh từng bỏ cha giờ xin quay lại.",om3:"011",o:[
   {n:"Khuyên cha nhận lại",wx:"phủ đông người",lx:"người hai lòng vào phủ, tin nhà lại lọt",go:(_A,_ok,G)=>e67dad(G[0]),rt:"Phủ đông khách trở lại."},
-  {n:"Khuyên cha chỉ nhận người ở lại lúc khó",wx:"phủ trong sạch",lx:"ít người, phủ không còn đông thế",rt:"Cha chọn bốn người."},
-  {n:"Không xen vào",wx:"giữ tay sạch",lx:"không dặn dò gì, phủ quên ý ngươi",rt:"Ngươi để cha tự quyết."}]},
+  {n:"Khuyên cha chỉ nhận người ở lại lúc khó",wx:"phủ trong sạch",lx:"ít người, phủ không còn đông thế",rt:"Cha chọn bốn người."}]},
  t1:{h:"Tờ chiếu",w:"emp",t:"Hoàng thượng cho soạn một tờ chiếu nói về vụ án. Lời lẽ trong chiếu có thể rửa sạch, hoặc chỉ khép lại.",o:[
   {n:"Xin chiếu nói rõ cha bị oan",wx:"tiếng nhà sạch",lx:"Hoàng thượng không muốn làm lớn",rt:"Chiếu nói rõ: Tể tướng bị vu.",rf:"Chiếu chỉ nói: án đã xong."},
   {n:"Để chiếu khép lại êm",wx:"triều yên",lx:"tiếng nhà chưa sạch",rt:"Chiếu khép lại êm."},
@@ -591,9 +590,8 @@ rdDef("tt_tranh",8,{t:"Cha ngã bệnh",w:"dad",sj:"bệnh của cha và gia ấ
 rdDef("tt_tranh",9,{t:"Gia ấn phủ Tể tướng",w:"emp",sj:"cuộc tranh gia ấn phủ Tể tướng",cast(A){return rdCast(A,["v"])},
  g:"Chuyện ai giữ gia ấn phủ Tể tướng lọt ra triều. Hoàng thượng để ý: phủ Tể tướng nghiêng về ai, triều nghiêng theo đó.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Hoàng thượng hỏi",w:"emp",if:RDW(1),t:"Hoàng thượng hỏi như đùa: “Nghe nói nàng sắp làm Tể tướng?”",o:[
-  {n:"Đáp đùa lại",wx:"ngài cười",lx:"ngài không cười",rt:"Ngài cười: “Nàng mà làm Tể tướng thì trẫm khỏi lo.”",rf:"Ngài im lặng."},
-  {n:"Thưa thật mọi chuyện",wx:"ngài tin",lx:"ngài lo, thấy phủ Tể tướng quá gần hậu cung",rt:"Ngài nghe, gật đầu.",rf:"Ngài nhíu mày."},
+ B:{s1:{h:"Hoàng thượng hỏi",w:"emp",if:RDW(1),t:"Hoàng thượng hỏi như đùa: “Nghe nói nàng sắp làm Tể tướng?”",om3:"001",o:[
+  {alt:{n:"Đáp đùa lại",rt:"Ngài cười: “Nàng mà làm Tể tướng thì trẫm khỏi lo.”",rf:"Ngài im lặng."},n:"Thưa thật mọi chuyện",wx:"ngài tin",lx:"ngài lo, thấy phủ Tể tướng quá gần hậu cung",rt:"Ngài nghe, gật đầu.",rf:"Ngài nhíu mày."},
   {n:"Lảng đi",wx:"không lộ",lx:"ngài nghi ngươi giấu",rt:"Ngươi nói sang chuyện khác."}]},
  s2:{h:"Hoàng thượng không hỏi",w:"emp",if:RDW(0),t:"Hoàng thượng không hỏi gì, nhưng ngài ghé cung {v} nhiều hơn.",o:[
   {n:"Gửi canh",wx:"ngài nhớ",lx:"canh nguội",rt:"Ngài ghé.",rf:"Ngài không ghé."},

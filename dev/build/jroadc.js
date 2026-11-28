@@ -102,13 +102,17 @@ function rdcLoad(rows){const out={prem:0,roads:0,skip:[]};
 (function(){const n0=newThread67;newThread67=function(id){const A=n0.apply(this,arguments);try{const a=ARC67[id];
  if(A&&a&&a.rdc&&a.o==="rd"&&rdOn()&&a.road===S.st.f14.rd&&typeof nrMark==="function"){const o=RDC.road[a.road];for(const p of rdcChap(a.road,a.rn).parts)nrMark(rdcFam(o),p)}}catch(e){console.error(e)}return A}})();
 /* old saves (E-TIER-B13): a life saved while a composed hồi still had 4 ways keeps old indices in S.pl67.i (bạc pledge) and A.hpNo.i (helper
-   refusals); map them once through the beat's om (the dropped way → its merged sibling). S.rcT marks a save already on the tier rule. */
-function rdcOm(){try{if(!S||S.rcT)return;const map=(A,bid,i)=>{const b=A&&bid?beatDef67(A,bid):null;if(!b||!b.om)return i;return b.om[i]!=null?b.om[i]:i-(b.om.length-3)/* a way other modules add after the row's (help-ask) moves up */};
-  const P=S.pl67;if(P){const A=th67(P.t);if(A){const b=beatDef67(A,P.b);if(b&&b.om&&P.pp&&P.pp.o&&P.pp.o.length!==opts67(A,b).length){P.i=map(A,P.b,P.i);P.pp.o=opts67(A,b).map(o=>oOf67(A,o,b))}}}
-  for(const A of [S.st&&S.st.M].concat(S.st&&S.st.X||[])){if(!A||!A.hpNo||!A.hpNo.i)continue;const b=beatDef67(A,A.hpNo.b);if(b&&b.om)A.hpNo.i=[...new Set(A.hpNo.i.map(i=>map(A,A.hpNo.b,i)))]}
- }catch(e){console.error("rdcOm",e)}try{if(S)S.rcT=1}catch(e){}}
+   refusals); map them once through the beat's old-way map (the dropped way → its merged sibling). S.rcT = the tier version the save is on:
+   1 = batch 1 (composed hồi 4 → 3 ways, map om), 2 = batch 3 (look-alike ways of the hand-written road hồi folded, map om3). */
+const RCT=2;
+function rdcMap(b,v){if(!b)return null;if(b.om3&&v<2)return String(b.om3).split("").map(Number);if(b.om&&v<1)return Array.isArray(b.om)?b.om:String(b.om).split("").map(Number);return null}
+function rdcOm(){try{if(!S||(S.rcT||0)>=RCT)return;const v=S.rcT||0;
+  const map=(m,i)=>m[i]!=null?m[i]:i-(m.length-(Math.max(...m)+1))/* a way other modules add after the row's (help-ask) moves up */;
+  const P=S.pl67;if(P){const A=th67(P.t);if(A){const b=beatDef67(A,P.b),m=rdcMap(b,v);if(m&&P.pp&&P.pp.o&&P.pp.o.length!==opts67(A,b).length){P.i=map(m,P.i);P.pp.o=opts67(A,b).map(o=>oOf67(A,o,b))}}}
+  for(const A of [S.st&&S.st.M].concat(S.st&&S.st.X||[])){if(!A||!A.hpNo||!A.hpNo.i)continue;const m=rdcMap(beatDef67(A,A.hpNo.b),v);if(m)A.hpNo.i=[...new Set(A.hpNo.i.map(i=>map(m,i)))]}
+ }catch(e){console.error("rdcOm",e)}try{if(S)S.rcT=RCT}catch(e){}}
 (function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);rdcOm();return r}})();
-(function(){if(typeof a67init!=="function")return;const i0=a67init;a67init=function(){const r=i0.apply(this,arguments);try{if(S)S.rcT=1}catch(e){}return r}})();
+(function(){if(typeof a67init!=="function")return;const i0=a67init;a67init=function(){const r=i0.apply(this,arguments);try{if(S)S.rcT=RCT}catch(e){}return r}})();
 /* a saved story card (Q → deserQ → PEND.j67) holds the odds by option index: when the beat now has a different number of options, read them anew */
 (function(){const p0=PEND.j67;PEND.j67=function(p){try{if(p&&Array.isArray(p.o)){const A=th67(p.t);const b=A&&A.cur===p.b?beatDef67(A,p.b):null;if(b){const O=opts67(A,b);if(O.length!==p.o.length)p.o=O.map(o=>oOf67(A,o,b))}}}catch(e){}return p0.apply(this,arguments)}})();
 /* counts for tests / measures */

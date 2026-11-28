@@ -243,10 +243,9 @@ rdDef("dtq_bien",11,{t:"Khải hoàn hay bại trận",w:"dad",sj:"ngày cha tr�
   {n:"Tha cho {v}, không truy",wx:"{v} nợ ngươi một mạng",lx:"kẻ từng hại cha thoát",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} khóc, lạy ngươi ba lạy."},
   {n:"Đưa chứng cứ cũ lên Hoàng thượng",wx:"nhà {v} chịu tội",lx:"bị cho là đánh kẻ ngã",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Cha {v} bị cách chức.",rf:"Hoàng thượng nói: “Thôi, trận đã xong.”"},
   {n:"Đòi {v} một lời hứa",wx:"{v} hứa đứng về phía ngươi",lx:"{v} hứa rồi trở mặt",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"{v} thề trước tượng Phật.",rf:"{v} gật đầu, rồi đêm ấy sai người báo hết về phủ cha nàng."}]},
- c3:{h:"Huynh trưởng ở lại",w:"maid",if:()=>rdEnd(10)!=="lose",t:"Huynh trưởng xin ở lại biên ải, không về kinh nhận thưởng. Thư huynh: “Muội nói giúp huynh một lời với cha.”",o:[
+ c3:{h:"Huynh trưởng ở lại",w:"maid",if:()=>rdEnd(10)!=="lose",t:"Huynh trưởng xin ở lại biên ải, không về kinh nhận thưởng. Thư huynh: “Muội nói giúp huynh một lời với cha.”",om3:"010",o:[
   {n:"Khuyên cha để huynh ở lại",wx:"nhà ngươi còn người giữ ải",lx:"vua thấy nhà ngươi vẫn bám quân",rt:"Cha gật: “Nó giống cha hồi trẻ.”"},
-  {n:"Khuyên huynh về kinh",wx:"vua yên lòng",lx:"ải mất một tướng giỏi",go:(_A,_ok,G)=>e67bien(G[0]),rt:"Huynh về kinh, ngồi im suốt bữa tiệc mừng."},
-  {n:"Xin Hoàng thượng phong huynh chức nhỏ ở ải",wx:"huynh có danh phận riêng",lx:"ngài thấy ngươi xin cho nhà",rt:"Huynh nhận chức Phó tổng binh.",rf:"Hoàng thượng nói: “Để sau.”"}]},
+  {n:"Khuyên huynh về kinh",wx:"vua yên lòng",lx:"ải mất một tướng giỏi",go:(_A,_ok,G)=>e67bien(G[0]),rt:"Huynh về kinh, ngồi im suốt bữa tiệc mừng."}]},
  c4:{h:"Vết tên của huynh",w:"maid",if:()=>rdEnd(10)==="lose",t:"Huynh trưởng nằm dưỡng thương ở phủ, vết tên chưa liền miệng. Ngự sử nói: người cầm tiền quân để quân lui cũng phải chịu tội.",o:[
   {n:"Gửi Thái y giỏi nhất đến phủ",wx:"huynh qua cơn nguy",lx:"tốn bạc, Ngự sử vẫn chờ",rt:"Thái y ở lại phủ ba đêm. Huynh tỉnh, đòi giấy viết thư cho cha."},
   {n:"Xin Hoàng thượng miễn xét huynh",wx:"huynh khỏi bị xét",lx:"ngài thấy ngươi xin cho nhà",rt:"Hoàng thượng phê: người bị thương vì nước, miễn xét.",rf:"Hoàng thượng nói: “Thua là thua.”"},
