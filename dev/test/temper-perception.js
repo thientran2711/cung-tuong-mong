@@ -43,9 +43,15 @@ const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sl
    res[nm].sel=await p.evaluate(()=>String(getSelection()).length);await p.evaluate(()=>getSelection().removeAllRanges());await p.screenshot({path:`${OUT}/${wh}-${nm}.jpg`,type:'jpeg',quality:55})};
   /* go to the rival's palace (state), then a REAL tap on her figure opens the person card; returns the card's «Khiêu khích» button text */
   /* the rival comes to HER palace (state: her row of the ONE record says so); a REAL tap on her figure opens the person card */
+  /* STALE-TESTS-8: a ring left open by an earlier step (kitRing auto-opens on a crowded place, jkring goTo wire) stays up when the harness moves her by state;
+     a player never meets that: with a ring up the bottom bar does not switch (probe: tab stays «act», LIVE a96564ad the same) and home has no ring (wants()).
+     She closes it the way a player does — real taps on its ✕ (a focused ring steps back first) — before the next step. */
+  const ringX=async()=>{const t=[];for(let k=0;k<4;k++){const on=await p.evaluate(()=>typeof kitRing==='object'&&!!kitRing.cur);if(!on)break;
+    const x=p.locator('.kring-x button').first();if(!(await x.count()))break;t.push(await rt.tap(x,{screen:'ring',label:'✕'}));await sleep(700)}
+   return {left:await p.evaluate(()=>typeof kitRing==='object'&&!!kitRing.cur),t}};
   const openRival=async()=>{const i=await p.evaluate(()=>{const v=window.__tv;Q.length=0;const R=agRec();if(R&&R.P["v"+v.id])for(let q=0;q<J95.KH;q++)R.P["v"+v.id][q]=["home","visit","me","sang chơi"];
     S.where=S.where||{};S.where[v.id]="home";popIdx=null;goTo("home");Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();return curPeople().findIndex(x=>x.ref===v&&x.kind==="rival")});
-   if(i<0)return {i};await sleep(800);
+   if(i<0)return {i};await sleep(800);const rx=await ringX();if(rx.left)return {i,ringStuck:rx};
    /* STALE-TESTS-7: the people of a place stand in the RING (jkring kitRing «Vòng người», KIT §104, owner OD 26/11 ~18:55Z): the band over the stage turns the ring
       (a swipe there no longer pages #tokens), the FRONT slot is bright, tap it = focus → her plaques drop. A player turns the ring with the real ‹ › arrows until
       she is in front, then taps her figure (a real tap at the painted figure: ring slots take no pointer events, the ring layer hit-tests the point). */
@@ -81,6 +87,7 @@ const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sl
   const rowInfo=()=>p.evaluate(()=>{const M=document.getElementById('modal');const b=M&&!M.hidden&&[...M.querySelectorAll('.dlg .opts > button')].find(x=>/^\s*Khiêu khích/.test(x.textContent));
    if(!b)return null;return {t:b.textContent.replace(/\s+/g," ").trim(),cls:b.className,dis:!!b.disabled,off:b.matches('.kitoff,.kfoc-off,[aria-disabled="true"]')||!!b.disabled}});
   const tabTo=async()=>{/* the act may sit in another group tab of the card: tap the tab that holds it */
+   /* STALE-TESTS-8: the plaques drop in after the tap (kpk animation): wait for them first */for(let w=0;w<16&&!(await kbInfo());w++)await sleep(200);
    if(await kbInfo())return;
    const n=await p.evaluate(()=>document.querySelectorAll('.kfoc-tabs .pct').length);for(let j=0;j<n;j++){await rt.tap(`.kfoc-tabs .pct:nth-child(${j+1})`,{screen:'card',label:'tab'});await sleep(400);
     if(await kbInfo())return}};
@@ -130,12 +137,12 @@ const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sl
    /* the player's road to a consort's facts: «Hậu cung» (bottom bar) → tap her row → the person card with the «Tính nết» row; every step a real tap, the label must be VISIBLE */
    const VIS=`(re)=>[...document.querySelectorAll('button,[data-o],[data-see],[data-pc],[data-p],.kbtn,.row,li,a,figure,.kport,.kpc')].filter(e=>{const r=e.getBoundingClientRect();if(r.width<2||r.height<2||r.bottom<0||r.top>innerHeight)return false;const t=document.elementFromPoint(Math.min(innerWidth-1,Math.max(0,r.x+r.width/2)),Math.min(innerHeight-1,Math.max(0,r.y+r.height/2)));return (t===e||e.contains(t))&&re.test(e.textContent)}).sort((x,y)=>x.textContent.length-y.textContent.length)[0]||null`;
    const tapTxt=async(src,label)=>{const h=await p.evaluateHandle(`(${VIS})(${src})`);const el=h.asElement();if(!el)return false;const ok=await rt.tap(el,{screen:'nav',label});await sleep(1200);return ok};
-   const steps=[];steps.push(await tapTxt('/^\\s*Hậu cung\\s*$/','Hậu cung'));steps.push(await tapTxt('/^\\s*Phi tần\\s*$/','Phi tần'));
+   await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true});const rx=await ringX();const steps=[];steps.push(await tapTxt('/^\\s*Hậu cung\\s*$/','Hậu cung'));steps.push(await tapTxt('/^\\s*Phi tần\\s*$/','Phi tần'));
    const nm=await p.evaluate(()=>window.__tv.name.split(/\s+/).slice(-2).join(' '));/* the portrait row captions the given name *//* a long row pages with ‹ › (iPad): she taps › until the portrait is in view */
    let got=false;for(let k=0;k<12&&!got;k++){const h=await p.evaluateHandle(`(${VIS})(new RegExp(${JSON.stringify(nm)}))`);if(h.asElement()){got=true;break}if(!await tapTxt('/^\\s*[›>❯]\\s*$/','›'))break}
    steps.push(await tapTxt(`new RegExp(${JSON.stringify(nm)})`,nm));
    const txt=await p.evaluate(()=>{const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;while(n=w.nextNode()){if(/Khẩu xà tâm Phật/.test(n.nodeValue)){const r=n.parentElement.getBoundingClientRect();if(r.width>1&&r.bottom>0&&r.top<innerHeight)return true}}return false});
-   const o={tap:steps.every(Boolean),steps};
+   const o={tap:steps.every(Boolean),steps,rx};
    await p.evaluate(()=>{window.memList=window.__m0});await done('label',{lab:r.lab,tap:o.tap,steps:o.steps,txt,ok:r.lab==="good"&&o.tap&&txt})}
   /* npcMood */
   await fresh();{const r=await p.evaluate(()=>{/* a pair whose motive is short of the gate at oán 25 without mood (no scheming trait, same side): the mood term alone must open it */const L=liveRivals(false).filter(x=>!x.queen);let a=null,t=null,g0=null;for(const x of L){for(const y of L){if(x===y)continue;x.rl[y.id]=0;x.ro[y.id]=25;x.emo=null;const g=motiveOK(x,y,"provoke");if(!g.ok&&/động cơ yếu/.test(g.why)){a=x;t=y;g0=g;break}}if(a)break}if(!a)return {ok:false,why:"no pair"};
