@@ -109,11 +109,17 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
  const vk=S.visit&&S.visit.k;if(d.v<3||!vk||vk==="home"||placeOf(vk).k!==vk||!Array.isArray(S.visit.people)){S.visit={k:"home",people:homePeople(),talked:false};S.place="home"}else S.place=vk;
  if(d.v<3)S.mg=null;if(d.v<5){used=0;S.buoi=0}try{srvLad6()}catch(e){console.error(e)}/* maid-ladder-6: 5-rung save → 6 rungs (j14) */normAll();Q=deserQ(d.P||[])}
 let SAVE_N=0;/* save-unseen-lists: counts the writes that really reached the slot (a wrapper that holds or drops a save never moves it: jqsave marks a buổi as written only when this moved) */
-function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else{slotPut(SK(SLOT),JSON.stringify(ser()));SAVE_N++}localStorage.setItem("hclh-slot",String(SLOT))}catch(e){if(!S.dead)saveBlocked()}}
+function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else{slotPut(SK(SLOT),JSON.stringify(ser()));SAVE_N++;saveOk()}localStorage.setItem("hclh-slot",String(SLOT))}catch(e){if(!S.dead)saveBlocked()}}
 /* robot10 E-FIX-3: a save the browser refuses (storage full / blocked) was dropped silently — her progress stopped being kept. ONE notice for
    EVERY save writer (j6 save, jcloud writeSlot, co-op jcoopworld snapSave, jcoopthine guest copy; j16 Sổ › Ghi vào ô prints the same words): the kit notice, once */
-function saveBlocked(){try{if(typeof window.kitNotice==="function"&&typeof CTM_WAIT==="object"&&CTM_WAIT.saveBlocked)window.kitNotice({id:"saveBlocked",line:CTM_WAIT.saveBlocked,sticky:true})}catch(z){}}
-window.saveBlocked=saveBlocked;
+/* save-fail-warn (MAIN 182, Foreman E 23:00Z: QuotaExceeded x540, «no warning»): the notice was told ONCE — kitNotice drops a repeat of the same
+   line, so after its first chip (a few seconds, or less: the next notice of the step took the chip) every later refused write was silent. Now the
+   chip is HELD (kit §42.2a hold: it stays under the top bar, other chips come and go and it comes back) and told again at every NEW buổi while
+   the writes keep failing; dropped (+ one write without it, so the sổ never keeps a stale «Không ghi được sổ») once a write reaches her slot again. */
+let SB_K=null;const sbKey=()=>{try{return S&&typeof S==="object"?[S.year,S.month,S.tuan,S.buoi||0,S.name].join("."):"title"}catch(e){return ""}};
+function saveBlocked(){try{if(typeof window.kitNotice==="function"&&typeof CTM_WAIT==="object"&&CTM_WAIT.saveBlocked){const k=sbKey(),again=SB_K!==null&&k!==SB_K;SB_K=k;window.kitNotice({id:"saveBlocked",line:CTM_WAIT.saveBlocked,sticky:true,hold:true,again})}}catch(z){}}
+function saveOk(){if(SB_K===null)return;SB_K=null;try{if(typeof window.kitNoticeDrop==="function"&&typeof window.kitNoticeList==="function"&&window.kitNoticeList().some(x=>x.id==="saveBlocked")){window.kitNoticeDrop("saveBlocked");setTimeout(()=>{try{save()}catch(e){}},0)}}catch(z){}}
+window.saveBlocked=saveBlocked;window.saveOk=saveOk;
 function loadSlot(n){try{const d=JSON.parse(slotGet(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}
 function showTitle(){const T=$("title");const L=[1,2,3].map(n=>{const d=loadSlot(n);

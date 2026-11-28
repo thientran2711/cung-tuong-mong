@@ -85,7 +85,8 @@ const NIGHTS=["Rèm the buông xuống, nến đỏ cháy đến canh tư. Sáng
 
 const R=n=>Math.floor(Math.random()*n), pick=a=>a[R(a.length)];
 const $=id=>document.getElementById(id);
-const store={get(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const store={get(k){try{return JSON.parse(localStorage.getItem(k)||"null")}catch(e){return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){/* save-fail-warn: a refused write of a store that carries her progress across lives (luân hồi, next life, life log) is told like a slot save */if(STORE_LIFE.test(k)&&typeof window.saveBlocked==="function")window.saveBlocked()}}};
+const STORE_LIFE=/^(cung-luanhoi|cung-kiep|ctm-nextlife)$/;
 let S,rivals,used=0,deck=[],tab="act",Q=[],rid=0,quiet=true,popIdx=null,popMsg="";
 /* time: 3 buổi a tuần, 4 khắc a buổi; 'used' = khắc spent this buổi */
 const BUOI=["Buổi sáng","Buổi chiều","Buổi tối"];let advLock=false;

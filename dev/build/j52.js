@@ -16,7 +16,7 @@ const PD_V={promo:5,kid:5,year:3,fest:2,tg:8,hh:25,tz:15};
 const PD_END={"Hoàng thái hậu":40,"Mẫu hậu Hoàng thái hậu":30,"Thái phi":15};
 const PD_GOOD=["Xuất giá","Được ban hôn","Vào vương phủ","Thành thân","Ma ma","Xuất cung","Được Vương gia che chở","Xuất gia"];
 function pdGet(){try{const v=Math.floor(+localStorage.getItem(PD_KEY));return isFinite(v)&&v>0?v:0}catch(e){return 0}}
-function pdSet(n){try{localStorage.setItem(PD_KEY,String(Math.max(0,Math.floor(n))))}catch(e){}}
+function pdSet(n){try{localStorage.setItem(PD_KEY,String(Math.max(0,Math.floor(n))))}catch(e){/* save-fail-warn: phúc duyên carried to the next life, refused → told */if(typeof saveBlocked==="function")saveBlocked()}}
 function nlSeed(){try{const a=new Uint32Array(1);crypto.getRandomValues(a);if(a[0])return a[0]}catch(e){}return (Math.floor(Math.random()*4294967295)>>>0)||1}
 function nlNew(){const d={seed:nlSeed(),at:Date.now()};store.set(NL_KEY,d);return d}
 function nlGet(){const d=store.get(NL_KEY);return d&&typeof d.seed==="number"&&d.seed>0?d:nlNew()}
