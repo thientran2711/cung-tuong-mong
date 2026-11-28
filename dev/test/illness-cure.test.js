@@ -11,10 +11,10 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
   /* (1) the robot case: Lao phổi · nặng, Sức high; her status chip → the illness card with 3 cure tiers + the danger line (never a bare «Lui») */
   await p.evaluate(()=>{S.ill={k:"lao",st:2,known:true};S.suc=93;S.bac=Math.max(S.bac,60);S.sung=Math.max(S.sung,20);Q.length=0;render()});await p.waitForTimeout(700);
   const chip=await p.evaluate(()=>{const b=document.querySelector('#hud2 [data-hx="ill"]');if(!b)return false;b.click();return true});await p.waitForTimeout(900);
-  let t=await card(p);
+  let t=await card(p);const BAL_CAP2=await p.evaluate(()=>BAL.illCure.sucCap[2]);
   ok(chip,`${name} status chip «Lao phổi · nặng» present`);
   ok(/Bắt mạch, chữa bệnh/.test(t)&&/· nhẹ/.test(t)&&/· vừa/.test(t)&&/· nặng/.test(t),`${name} chip opens the tier card nhẹ·vừa·nặng: ${t.slice(0,260)}`);
-  ok(/Lao phổi · nặng\./.test(t)&&/không qua khỏi: khả năng/.test(t)&&/Sức còn đầy/.test(t),`${name} card shows the honest danger line in words`);
+  ok(/Lao phổi · nặng\./.test(t)&&/không qua khỏi: khả năng/.test(t)&&new RegExp('Sức tối đa chỉ '+BAL_CAP2).test(t),`${name} card shows the honest danger line in words + the Sức cap`);
   ok(!/\d+ ?%/.test(t),`${name} no % on the card (law 7)`);
   ok(/Tĩnh dưỡng · nhẹ|Tự bốc thuốc · nhẹ/.test(t)&&/Sang Thái y viện xin thuốc · vừa/.test(t)&&/Truyền thái y · nặng/.test(t)&&/Cầu xin ngự y · nặng/.test(t),`${name} every tier is a CURE road (no pulse-only road while ill)`);
   await p.screenshot({path:`${OUT}/${name}-1-ill-card.png`});
@@ -52,9 +52,65 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
    await p.evaluate(()=>{Q.length=0;try{$("modal").hidden=true}catch(e){}});
    /* (7) NPCs take the same roads at the same prices (law 1) */
    const npc=await p.evaluate(()=>{const v=liveRivals(true).find(x=>!x.coop&&x.alive!==false);if(!v)return null;const k0=BAL.illCure.npc;BAL.illCure.npc=100;const out={};
-    try{v.ill={k:"lao",st:2,known:true};v.bac=100;v.sung=50;let b0=v.bac;illMonthP(v);out.ty=b0-v.bac===BAL.illCure.tyBac;
+    try{out.ty=false;for(let n=0;n<8&&!out.ty;n++){v.ill={k:"lao",st:2,known:true};v.bac=100;v.sung=50;const b0=v.bac,n0=IC.npc;illMonthP(v);out.ty=IC.npc>n0&&b0-v.bac===BAL.illCure.tyBac}/* roll(100) is capped at BAL.odds.hi: retry */
      v.ill={k:"lao",st:2,known:true};v.bac=0;v.sung=50;v.out=false;illMonthP(v);out.cau=IC.bestWay(v)[0]==="cau"&&(IC.npcW||{}).cau>=1;
      v.ill={k:"lao",st:1,known:true};const n0=IC.npc;illMonthP(v);out.lightSkip=IC.npc===n0}finally{BAL.illCure.npc=k0;v.ill=null}return out});
    ok(npc&&npc.ty&&npc.cau&&npc.lightSkip,`NPC roads: bạc → thái y, no bạc → cầu xin, nhẹ → none ${JSON.stringify(npc)}`)}
+  /* ---------- r3 (MAIN 185) ---------- */
+  /* Q1: the illness caps Sức tối đa by stage (BAL.illCure.sucCap), she and NPCs alike (law 1); the HUD Sức follows at once; cured = the cap lifts */
+  const q1=await p.evaluate(()=>{const C=BAL.illCure.sucCap,o={me:[],npc:[]};const v=liveRivals(true).find(x=>!x.coop&&x.alive!==false);
+   S.ill=null;const base=sucCap(S);for(const st of [1,2,3]){S.ill={k:"lao",st,known:true};S.suc=99;render();const want=Math.min(base,C[st]);o.me.push(sucCap(S)===want&&S.suc===want);if(v){v.ill={k:"lao",st,known:true};v.suc=99;illMonthP===illMonthP;IC.fit(v);o.npc.push(sucCap(v)===C[st]&&v.suc<=C[st])}}
+   S.ill=null;o.well=sucCap(S)===base;if(v)v.ill=null;
+   S.ill={k:"lao",st:1,known:true};S.suc=99;S.ill.st=2;render();o.hud=S.suc===Math.min(base,C[2])&&sucCap(S)===Math.min(base,C[2]);
+   const hx=HXNOW.suc();o.hx=JSON.stringify(hx);o.hxOk=hx.some(r=>r[0]==="Sức tối đa"&&/vì lao phổi/.test(r[1]));
+   /* a typed cap would break when BAL changes (law 4): change the BAL key, the cap follows */
+   const c0=C[2];C[2]=50;o.bal=sucCap(S)===50;C[2]=c0;S.ill=null;render();return o}).catch(e=>({me:[],err:String(e).slice(0,160)}));
+  ok(q1.me.every(Boolean)&&q1.well&&q1.bal,`${name} Q1 her Sức tối đa = BAL.illCure.sucCap by stage, lifts when cured, reads BAL ${JSON.stringify(q1)}`);
+  ok(!q1.npc.length||q1.npc.every(Boolean),`${name} Q1 NPC Sức capped the same (law 1) ${JSON.stringify(q1.npc)}`);
+  ok(q1.hud&&q1.hxOk,`${name} Q1 the Sức shown follows the cap and says why ${q1.hx}`);
+  /* Q3: a child illness gives a sign before it can kill — the first hit never kills (any size), she gets the card; only an already-sick child can die */
+  const q3=await p.evaluate(()=>{const o={};const K=BAL.kidIll;const mk=(nm,age)=>({name:nm,sex:"m",age:age||2,hp:100,tal:50,fond:50,alive:true});
+   const k=mk("Thử Nhi");S.kids.push(k);let dead=0,floor=1,flag=1;
+   for(let n=0;n<300;n++){k.alive=true;k.hp=1+(n%100);k.kIll=null;const h0=k.hp;kidIllHit(S,k,999,"sốt cao co giật");if(!k.alive)dead++;if(k.hp!==Math.min(h0,K.floor))floor=0;if(!k.kIll)flag=0}
+   o.firstNoKill=dead===0&&floor&&flag;
+   /* a child with an illness of the ILL book (jface): the card the month her stage goes up */
+   {k.alive=true;k.hp=100;k.kIll=null;k.ill={k:"lao",st:1,known:true};delete S.kidAlarm;const f0=fxIllMonth,d0=die;const sv=consorts().map(c=>[c,c.ill]);
+    try{fxIllMonth=q=>{if(q===k&&k.ill)k.ill.st=2};die=()=>{};illMonth()}finally{fxIllMonth=f0;die=d0;for(const [c,i] of sv)c.ill=i}o.illBook=S.kidAlarm===k.name;k.ill=null;delete S.kidAlarm}k.alive=true;k.hp=20;k.kIll={t:-5,n:"sốt cao co giật"};kidIllHit(S,k,999,"sốt cao co giật");o.secondKills=!k.alive;
+   /* every child-illness path runs that rule: the đậu mùa epidemic (j13) and the fever event's failed «Tự bốc thuốc» (j7 kidHurt) */
+   const r0=window.roll;k.alive=true;k.hp=5;k.kIll=null;S.kidAlarm=null;
+   const C0=consorts().map(c=>[c,c.ill,c.confined,(c.staff||[]).slice()]);try{window.roll=()=>true;roll=window.roll;for(let n=0;n<80&&!k.kIll&&k.alive;n++){k.hp=5;epidemic()}}finally{window.roll=r0;roll=r0;for(const [c,i,f,st] of C0){c.ill=i;c.confined=f;if(c.staff)c.staff=st}}o.epid=k.alive&&!!k.kIll;
+   k.hp=5;k.kIll=null;kidHurt(k,999);o.fever=k.alive&&!!k.kIll;
+   /* kidsMonth: no second hit in the month she fell ill; later months BAL.kidIll.worse */
+   const w0=K.worse;K.worse=100;k.alive=true;k.hp=5;k.kIll={t:S.turn,n:"x"};const t0=S.turn;kidsMonth();o.sameMonth=k.alive;
+   for(let n=1;n<=6&&k.alive;n++){S.turn=t0+n;k.hp=5;kidsMonth()}o.nextMonth=!k.alive;S.turn=t0;K.worse=w0;
+   /* the same rule for NPC mothers' children (law 1) */
+   const v=liveRivals(true).find(x=>!x.coop&&x.alive!==false);if(v){v.kids=v.kids||[];const nk=mk("Thử Tôn");v.kids.push(nk);kidIllHit(v,nk,999,"x");o.npc=nk.alive&&!!nk.kIll;v.kids.splice(v.kids.indexOf(nk),1)}
+   S.kids.splice(S.kids.indexOf(k),1);return o}).catch(e=>({err:String(e).slice(0,160)}));
+  ok(q3.firstNoKill&&q3.secondKills,`${name} Q3 first child-illness hit never kills (sign), an already-sick child can die ${JSON.stringify(q3)}`);
+  ok(q3.epid&&q3.fever&&q3.sameMonth&&q3.nextMonth&&q3.illBook,`${name} Q3 every child path (epidemic, fever, kidsMonth) gives the sign first ${JSON.stringify(q3)}`);
+  ok(q3.npc!==false,`${name} Q3 NPC children the same (law 1)`);
+  /* Q3 roads (law 2): at Thái y viện the bạc road «Xin thuốc cho <con>» has its matching non-bạc road «Cầu xin ngự y cho <con>» (Sủng, the same gain); at home «Thức trông <con>» (Sức) */
+  const rd=await p.evaluate(()=>{const X=BAL.ag.cx2,o={};const k={name:"Thử Nhi",sex:"m",age:2,hp:30,tal:50,fond:50,alive:true,kIll:{t:-1,n:"sốt cao co giật"}};S.kids.push(k);
+   const kn0=K61RAW;K61RAW=true;S.sung=30;S.bac=100;const L=talkOpts({kind:"ty"});const a=L.find(x=>x.n==="Xin thuốc cho "+k.name),b=L.find(x=>x.n==="Cầu xin ngự y cho "+k.name);
+   o.both=!!(a&&b);o.cost=!!(a&&b&&a.c.bac===X.kidMed.c.bac&&b.c.sung===X.kidAsk.c.sung&&!b.c.bac&&a.x===b.x&&!b.lock);
+   S.sung=0;const b2=talkOpts({kind:"ty"}).find(x=>x.n==="Cầu xin ngự y cho "+k.name);o.lockNoSung=!!(b2&&b2.lock&&/Sủng/.test(b2.t||""));S.sung=30;
+   const h0=k.hp;if(b)b.go();o.gain=k.hp===Math.min(100,h0+X.kidAsk.up);
+   k.hp=30;deal();const w=deck.find(x=>x&&x.n==="Thức trông "+k.name);o.watch=!!(w&&w.c.suc===X.kidWatch.c.suc&&!w.c.bac);
+   k.hp=55;w&&w.go();o.wellAt=k.hp>=BAL.kidIll.well?!k.kIll:true;
+   /* the NPC mother has the same roads (law 1): registered deeds + the player's button names */
+   o.npc=typeof AGRUN==="object"&&!!AGRUN["cx2:kidAsk"]&&!!AGRUN["cx2:kidWatch"]&&AGC2BTN.kidAsk==="Cầu xin ngự y cho"&&AGC2BTN.kidWatch==="Thức trông";
+   const v=liveRivals(true).find(x=>!x.coop&&x.alive!==false&&!x.out);if(v){v.kids=v.kids||[];const nk={name:"Thử Tôn",sex:"f",age:2,hp:30,tal:50,fond:50,alive:true,kIll:{t:-1,n:"x"}};nk.hp=1;v.kids.push(nk);
+    v.bac=0;v.sung=40;const s0=v.sung;AGRUN["cx2:kidAsk"](v);o.npcAsk=nk.hp===1+X.kidAsk.up&&v.sung===s0+X.kidAsk.c.sung;v.kids.splice(v.kids.indexOf(nk),1)}
+   K61RAW=kn0;S.kids.splice(S.kids.indexOf(k),1);deal();return o}).catch(e=>{try{K61RAW=false}catch(x){}return{err:String(e).slice(0,160)}});
+  ok(rd.both&&rd.cost&&rd.lockNoSung&&rd.gain,`${name} Q3 Thái y viện: Xin thuốc (bạc) + Cầu xin ngự y (Sủng) for the child, same gain; greyed with reason without Sủng ${JSON.stringify(rd)}`);
+  ok(rd.watch&&rd.wellAt,`${name} Q3 home deck: Thức trông <con> (Sức, no bạc) ${JSON.stringify(rd)}`);
+  ok(rd.npc&&rd.npcAsk!==false,`${name} Q3 NPC mothers: Cầu xin ngự y cho con / Thức trông con at the same prices ${JSON.stringify(rd)}`);
+  /* Q3 sign: her child falls ill → the card opens by itself (words only, the roads named), once */
+  const kc=await p.evaluate(async()=>{const k={name:"Thử Nhi",sex:"m",age:2,hp:90,tal:50,fond:50,alive:true};S.kids.push(k);Q.length=0;try{$("modal").hidden=true}catch(e){}
+   kidIllHit(S,k,50,"sốt cao co giật");render();await new Promise(r=>setTimeout(r,900));const m=document.querySelector('#modal');const t=m&&!m.hidden?m.innerText:"";
+   return{t,left:!!S.kidAlarm}}).catch(e=>({t:"",err:String(e).slice(0,160)}));
+  ok(/Thử Nhi lâm bệnh/.test(kc.t)&&/Đường chữa/.test(kc.t)&&/Cầu xin ngự y cho Thử Nhi/.test(kc.t)&&/không qua khỏi: khả năng/.test(kc.t)&&!/\d+ ?%/.test(kc.t)&&!kc.left,`${name} Q3 the child card opens once, roads + odds in words, no % ${kc.t.replace(/\n+/g,' | ').slice(0,400)}`);
+  await p.screenshot({path:`${OUT}/${name}-3-kid-card.png`});
+  await p.evaluate(()=>{Q.length=0;try{$("modal").hidden=true}catch(e){}const i=S.kids.findIndex(k=>k.name==="Thử Nhi");if(i>=0)S.kids.splice(i,1);render()});
   ok(!errs.length,`${name} no page errors ${errs.slice(0,3)}`);await p.close()}
  await b.close();console.log(fails?`FAILS ${fails}`:'ALL OK');process.exit(fails?1:0)})();

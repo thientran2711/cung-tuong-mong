@@ -5,7 +5,13 @@ Object.assign(BAL,{illAdd:1,illDie:2});
    vien Sang Thái y viện xin thuốc (vừa) · ty Truyền thái y (nặng, bạc) · cau Cầu xin ngự y (nặng, the non-bạc road of the same tier: Sủng spent on asking Hoàng thượng);
    tyBac = the silver of Truyền thái y (was a typed 40) · vien / cau = price {stat: −n} and k khắc · slow = the cure malus of a slow illness (Lao phổi; was a typed 15) ·
    npc = % of months a sick NPC (nặng or worse) takes the best road she can pay (law 1: the same roads, the same prices) */
-Object.assign(BAL,{illCure:{way:{rest:20,self:30,vien:40,ty:55,cau:55},tyBac:40,vien:{c:{suc:-8},k:2},cau:{c:{sung:-4},k:2},slow:15,npc:60}});
+Object.assign(BAL,{illCure:{way:{rest:20,self:30,vien:40,ty:55,cau:55},tyBac:40,vien:{c:{suc:-8},k:2},cau:{c:{sung:-4},k:2},slow:15,npc:60,
+ /* r3 (MAIN 185 Q1): Sức tối đa by illness stage (nhẹ · nặng · nguy kịch) for everyone ill (not the jmort «mort» decline); die3 = the nguy kịch death roll × ILL.die (j13 / jface / the danger line) */
+ sucCap:{1:85,2:60,3:35},die3:25},
+ /* r3 (MAIN 185 Q3): CHILD ILLNESS with a sign. hit = the sudden illness (lo + R(r), halved by a thái y tâm phúc) at ch % a month (young = under youngAge, storm = × per storm);
+    the first hit on a well child leaves her ốm (k.kIll) at Sức khỏe ≥ floor (never kills); while ốm, worse % a month (not the month she fell ill) brings the next hit, which can kill;
+    Sức khỏe ≥ well = khỏi. feverFail = the fever event's «Tự bốc thuốc» failing. watch = «Thức trông <con>» (home deck, nhẹ, Sức). Roads: BAL.ag.cx2.kidMed (bạc) / kidAsk (Sủng) / kidHeal (Y thuật) / kidWatch. */
+ kidIll:{hit:{lo:30,r:40},ch:{young:3,old:1.5,youngAge:3,storm:.5},floor:10,worse:30,well:60,feverFail:25}});
 /* ONE DIM for the people who are NOT chosen (KIT §98 kitDim; owner 24/11 ~09:05Z / ~15:30Z): brightness + saturation on the FIGURE only, opaque, never the background; ms = cross-fade */
 BAL.kdim={b:.7,s:.75,ms:220};
 /* RING-BUILD (KIT §104 kitRing, owner OD 26/11 ~18:55Z «những người còn lại là tối»): the ring dims every slot that is not in front harder than kitDim (static filter on a copy, opacity cross-fade) */
@@ -44,7 +50,7 @@ BAL.nwq={shift:0,free:2,hint:.5,auto:.25,miss:.8,xaMiss:.9,xaFloor:0,peek:8,idle
 (function(){const i0=illMonthP;illMonthP=function(p){const st0=((p&&typeof illOf==="function"&&illOf(p))||{}).st||0;let ev=i0.apply(this,arguments);
  try{if(!p||p.dead||p.alive===false||(p===S&&S.dead))return ev;const i=illOf(p);
   if(!i){if(BAL.illAdd&&roll(BAL.illAdd)){const sea=SEASON[S.month-1];const L=Object.entries(ILL).filter(([k,d])=>d.sea&&d.sea.includes(sea));ev+=catchIll(p,L.length&&roll(60)?pick(L)[0]:pick(["lao","phonghan","sotret"]))}}
-  else{const d=ILL[i.k];if(i.st===3&&st0===3/* ILLNESS-CURE: only an illness that was already nguy kịch at the month start (the month it turns nguy kịch she gets her card + a month to act, as j13) */&&d.die&&BAL.illDie&&roll(25*d.die*BAL.illDie)){if(p===S){die(`${d.n} nguy kịch, không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;ev+=`<span class="r">${p.name} mất vì ${d.n.toLowerCase()}.</span> `}}}catch(e){}
+  else{const d=ILL[i.k];if(i.st===3&&st0===3/* ILLNESS-CURE: only an illness that was already nguy kịch at the month start (the month it turns nguy kịch she gets her card + a month to act, as j13) */&&d.die&&BAL.illDie&&roll(BAL.illCure.die3*d.die*BAL.illDie)){if(p===S){die(`${d.n} nguy kịch, không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;ev+=`<span class="r">${p.name} mất vì ${d.n.toLowerCase()}.</span> `}}}catch(e){}
  return ev}})();
 /* contests (j71) score every entrant's skill part with the j82/j91 rule: the mini-game raw (0–10) rolled by her/his own art level (kg82NpcRaw), scaled to J71.luck;
    she still plays herself when she chooses to (her.score). The odds words use the same distribution. One two-way rule for every contest table. */
@@ -1247,7 +1253,7 @@ Object.assign(BAL.ag.day,{intentW:3});/* the 2nd goal of the day = BAL.ag.why.g3
            stat divisors / multipliers of the old literals, w gain, l loss, c cost; g = the need points an NPC's deed serves (BAL.ag.unit = one whole need).
            flat Tâng bốc, true Nói thật lòng (nt = + if he is Nhân từ, disc = % he lets slip what he likes), show Phô tài (k × best art weight), favor Xin ân điển
            (min Sủng, angry = % punished when he is furious), court Bàn chuyện triều chính, vent Trút giận (pg = her womb gauge, rel), chest Lục rương, fert Bài
-           thuốc dễ thụ thai (m tháng), doctor Mời thái y tâm phúc, kidMed Xin thuốc cho con (hp below, up), likes Hỏi sở thích Hoàng thượng, old Hỏi chuyện cũ (lãnh
+           thuốc dễ thụ thai (m tháng), doctor Mời thái y tâm phúc, kidMed Xin thuốc cho con (hp below, up), kidAsk Cầu xin ngự y cho con (the Sủng road of the kidMed tier, ILLNESS-CURE r3), kidWatch Thức trông con (nhẹ, Sức), likes Hỏi sở thích Hoàng thượng, old Hỏi chuyện cũ (lãnh
            cung), nurse Hầu thuốc Hoàng thượng (best = % he bestows), help Nhờ giúp đỡ (aff needed, p % she lends bac, fail = quý lost), kidGreet Đưa con thỉnh an
            (fond), kidHeal Chữa bệnh cho con (y = Y thuật needed, hp, up); bac = the silver need of a consort (goal, weight), kidCare = the need of a mother with a sick child.
    emp3    the Emperor's own evening visit (Ngự giá lâm cung) and day tea: desire × Σ visCh/100 = his wish to visit tonight (5 keeps HER old daily rate: her share
@@ -1259,7 +1265,7 @@ BAL.ag.cx2={flat:{get o(){return BAL.odb.j2.odO_12},sd:5,w:{"sung":3},l:{"sung":
  court:{get o(){return BAL.odb.j2.odO_16},td:2,thi:3,w:{"sung":4,"danh":3},l:{"sung":-2},g:{"sung":4,"danh":3}},vent:{pg:50,c:{"duc":-3},get rel(){return -BAL.eff.j2.go_3},g:{spite:5}},chest:{get o(){return BAL.odb.j2.odO_21},mat:5,get rel(){return -BAL.eff.j2.run},g:{spite:3,safe:3}},
  fert:{c:{"bac":-40},m:3,g:{kid:4}},doctor:{c:{"bac":-50},g:{safe:2,kid:3}},kidMed:{c:{"bac":-30},hp:80,get up(){return BAL.eff.j2.hpGo_2},g:{kid:4}},likes:{c:{"bac":-15},get o(){return BAL.odb.j2.odO_5},g:{"sung":2}},
  old:{get o(){return BAL.odb.j2.odO_22},td:5,g:{spite:3,safe:2}},nurse:{c:{"suc":-10},get o(){return BAL.odb.j20.odO},y:5,w:{"sung":4,"an":2},l:{"suc":-5},best:40,g:{"sung":5}},help:{p:50,get bac(){return BAL.bacFee.lend},get fail(){return -BAL.eff.j9.run_5},g:{bac:4,safe:2}},
- kidGreet:{c:{"suc":-5},get o(){return BAL.odb.j2.odO_11},sd:10,w:{"sung":2},get fond(){return BAL.eff.j2.fondGo},g:{"sung":2,kid:2}},kidHeal:{c:{"suc":-10},y:4,hp:70,get up(){return BAL.eff.j2.hpGo},g:{kid:5}},bac:{goal:120,w:.6},kidCare:.8};
+ kidGreet:{c:{"suc":-5},get o(){return BAL.odb.j2.odO_11},sd:10,w:{"sung":2},get fond(){return BAL.eff.j2.fondGo},g:{"sung":2,kid:2}},kidHeal:{c:{"suc":-10},y:4,hp:70,get up(){return BAL.eff.j2.hpGo},g:{kid:5}},kidAsk:{c:{"sung":-4},hp:80,get up(){return BAL.ag.cx2.kidMed.up},g:{kid:4}},kidWatch:{c:{"suc":-10},hp:80,up:10,g:{kid:3}},bac:{goal:120,w:.6},kidCare:.8};
 BAL.ag.emp3={desire:5,visB:[3],tea:.4,teaB:[1,2],teaGap:6};
 BAL.ag.give={b:1,ref:40,div:60,anDiv:200,lo:.4,hi:2,tr:{datinh:1.2,lanhlung:.7},th:{ref:40,div:60,lo:.4,hi:2}};
 /* AG-ALL-2 consort ↔ servants (jagacts2): maidTalk = Tâm sự with her confidant maid (below = her lòng under which she bothers), maidSpy = Sai đi dò la

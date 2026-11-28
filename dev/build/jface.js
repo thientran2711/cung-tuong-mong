@@ -235,9 +235,9 @@ function fxIllMonth(p){if(!p||!KIT_FACEFX.live(p))return;const kd=KIT_FACEFX.kin
   if(roll(base+(L.length?3:0))){const k=L.length&&roll(70)?pick(L)[0]:pick(["lao","matngu","phonghan"]);if(k==="longthe"||k==="docman"||k==="hausan"||k==="daumua")return;p.ill={k,st:1,known:fxSeen(p)};if(fxSeen(p))log(`${nm} mắc ${ILL[k].n.toLowerCase()}.`)}
   else{const o=KIT_FACEFX.owner(p),mates=KIT_FACEFX.everyone().filter(x=>x!==p&&KIT_FACEFX.owner(x)===o);const near=mates.find(x=>illOf(x)&&ILL[x.ill.k].cont);if(near&&roll(8)){p.ill={k:near.ill.k,st:1,known:fxSeen(p)};if(fxSeen(p))log(`${nm} nhiễm ${ILL[near.ill.k].n.toLowerCase()}.`)}}return}
  const d=ILL[i.k];if(kd==="kid"&&typeof p.hp==="number")p.hp-=5*i.st;const c=careOdds(p);
- if(roll(BAL.odb.jface.rbFxIllMonth+c-(d.slow?15:0))){p.ill=null;if(fxSeen(p))log(`${nm} đã khỏi ${d.n.toLowerCase()}.`);return}
+ if(roll(BAL.odb.jface.rbFxIllMonth+c-(d.slow?BAL.illCure.slow:0))){p.ill=null;if(fxSeen(p))log(`${nm} đã khỏi ${d.n.toLowerCase()}.`);return}
  if(i.st<3&&roll(BAL.odb.jface.rbFxIllMonth_2-c/2)){i.st++;if(fxSeen(p))log(`${nm}: ${d.n.toLowerCase()} trở ${STG[i.st]}.`);return}
- if(i.st===3&&d.die&&roll(25*d.die)){
+ if(i.st===3&&d.die&&roll(BAL.illCure.die3*d.die)){
   if(kd==="kid"){if(typeof kidDie==="function"){const mom=KIT_FACEFX.owner(p);const t=kidDie(p,"mất vì "+d.n.toLowerCase(),mom===S);if(t)log(t)}}
   else if(p!==S.maid&&!(S.court&&Object.values(S.court).includes(p))){const ow=typeof ownerOf==="function"?ownerOf(p):null;if(ow&&ow.staff){ow.staff.splice(ow.staff.indexOf(p),1);if(fxSeen(p))log(`${nm} mất vì ${d.n.toLowerCase()}.`)}}}}
 (function(){if(typeof illMonth!=="function")return;const i0=illMonth;illMonth=function(){const r=i0.apply(this,arguments);try{for(const p of KIT_FACEFX.everyone())fxIllMonth(p)}catch(e){console.error(e)}return r}})();

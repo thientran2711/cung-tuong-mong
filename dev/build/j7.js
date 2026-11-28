@@ -11,7 +11,7 @@ const rvPair=k=>{const X=rvWhy(k);return X&&X.tgt?{a:X.who.id,b:X.tgt.id,y:X.why
 const rvOmen=p=>{const a=p&&p.a!=null&&RV(p.a);return a?`<br>Trong cung xì xào: ${a.name} ${p.y}, đã lót tay Khâm Thiên giám.`:""};
 const rvY=(p,s)=>p&&p.y?(s||", ")+p.y:"";
 const mon=m=>S.month===m;
-const kidHurt=(k,n)=>{k.hp=Math.max(0,k.hp-n);if(k.hp<=0)log(kidDie(k,"không qua khỏi cơn bệnh",true))};
+const kidHurt=(k,n)=>{const t=kidIllHit(S,k,n,"sốt cao co giật");if(t)log(t)};/* ILLNESS-CURE r3: the one child-illness rule (j8 kidIllHit: a sign before death) */
 /* harem cap (BAL.harem.cap): the room is checked again when she is chosen, not only when the event was queued (tuyển tú may fill the harem meanwhile) */
 const newGirl=rel=>{if(!roomFor("consort"))return null;const n=newRival(1+R(2));Object.assign(n,drawFace());n.rel=rel;rivals.push(n);return n};
 
@@ -82,7 +82,7 @@ ev("princefever",()=>S.kids.some(k=>k.alive&&k.age<10)&&(mon(1)||mon(8)),()=>({k
  t:`Đêm yến tiệc, ${k.name} sốt cao co giật. Tiếng nhạc bên Thái Hòa điện vẫn vọng sang.`,o:[
  {n:"Bỏ yến, thức trắng bên con",fx:{suc:-20,sung:-3},x:`Sức khỏe ${k.name} ${balSg(BAL.eff.j7.hpGo)}`,go:()=>{k.hp=Math.min(100,k.hp+BAL.eff.j7.hpGo)}},
  {n:"Mời thái y, vẫn dự yến",fx:{bac:-30,sung:3},x:`Sức khỏe ${k.name} ${balSg(BAL.eff.j7.hpGo_2)}`,go:()=>{k.hp=Math.min(100,k.hp+BAL.eff.j7.hpGo_2)}},
- {n:"Tự bốc thuốc",fx:{},x:`${word(p.o)} · thành: Sức khỏe ${balSg(BAL.eff.j7.hpGo_3)} · hỏng: Sức khỏe -25`,go:()=>{if(roll(p.o))k.hp=Math.min(100,k.hp+BAL.eff.j7.hpGo_3);else kidHurt(k,25)}}]}});
+ {n:"Tự bốc thuốc",fx:{},x:`${word(p.o)} · thành: Sức khỏe ${balSg(BAL.eff.j7.hpGo_3)} · hỏng: Sức khỏe ${balSg(-BAL.kidIll.feverFail)}`,go:()=>{if(roll(p.o))k.hp=Math.min(100,k.hp+BAL.eff.j7.hpGo_3);else kidHurt(k,BAL.kidIll.feverFail)}}]}});
 ev("foreignwed",()=>myDaus().some(k=>k.age>=BAL.age.wed),()=>{const d=myDaus().filter(k=>k.age>=BAL.age.wed)[0];return d?{k:d.name,o:od(BAL.odb.j7.odO_7+S.sung/3+mm())}:null},p=>{const k=KID(p.k);if(!k)return null;return{who:pEmp(),
  t:`Sứ thần Bắc Địch dâng ngựa quý, cầu hôn ${k.name}. Triều thần đều nói: một nàng công chúa đổi mười năm yên biên ải.`,o:[
  {n:"Thuận theo đại cục",fx:{danh:10,th:5,suc:-15},x:`${k.name} xuất giá phương bắc`,go:()=>{k.alive=false;k.wed=1;log(`${k.name} khóc từ biệt mẫu thân, theo đoàn sứ lên phương bắc.`)}},

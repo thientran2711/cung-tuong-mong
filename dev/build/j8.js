@@ -463,10 +463,20 @@ function maidMonthP(p){if(!p.maid)p.maid=maidMk(p);const m=p.maid;m.loyal=cl(m.l
  if(me){S.maid=newMaid(nmNew("maid"),BAL.cmaid.newLoy);return ev+`Nội vụ phủ đưa cung nữ ${S.maid.name} đến hầu thay (thiện cảm ${S.maid.loyal}). `}
  p.maid={name:nmNew("maid"),loyal:40};return eyes(S)>=3?ev:""}
 function maidMonth(){return maidMonthP(S)}
-function kidsMonth(){let ev="";const moms=[[S,S.kids]].concat(worldOn()?rivals.map(v=>[v,v.kids]):[]);/* NPC kids: host only */
+/* CHILD ILLNESS WITH A SIGN (ILLNESS-CURE r3, MAIN 185 Q3; numbers BAL.kidIll, law 4): the first illness hit on a well child never kills — she is left ốm
+   (k.kIll, Sức khỏe ≥ BAL.kidIll.floor) and her mother gets the sign (her own child: the card, jillcure); only a child already ốm can die of the next hit
+   (BAL.kidIll.worse a month, never the month she fell ill). Every child-illness path runs here: kidsMonth, the đậu mùa epidemic (j13), the fever event (j7 kidHurt). */
+function kidIllDmg(p){const H=BAL.kidIll.hit;const d=H.lo+R(H.r);const doc=p===S?S.doctor:(p&&p.alive!==false&&!p.out&&p.doctor);return doc?Math.round(d/2):d}
+function kidIllHit(p,k,d,sk){if(!k||!k.alive)return"";const me=p===S;
+ if(!k.kIll){k.hp=Math.max(Math.min(k.hp,BAL.kidIll.floor),k.hp-d);k.kIll={t:S.turn,n:sk};if(me)S.kidAlarm=k.name;return me?`<span class="r">${k.name} ${sk}.</span> Sức khỏe còn ${k.hp}. `:""}
+ k.hp-=d;k.kIll.n=sk;if(k.hp<=0){k.kIll=null;return kidDie(k,`${sk} rồi không qua khỏi`,me)}if(me)S.kidAlarm=k.name;return me?`<span class="r">${k.name} ${sk}, bệnh trở nặng.</span> Sức khỏe còn ${k.hp}. `:""}
+/* a medicine road for a child (Xin thuốc / Cầu xin ngự y / Chữa bệnh / Thức trông, hers and the NPC mothers'): Sức khỏe up; an illness of the ILL book (jface) gets the same cure roll as hers (j13 treat, BAL.illCure.way) */
+function kidCure(k,up,way){if(!k)return"";k.hp=Math.min(100,k.hp+up);let t="";if(typeof illOf==="function"&&illOf(k)&&typeof treat==="function")t=treat(k,way||"vien");if(k.kIll&&k.hp>=BAL.kidIll.well)k.kIll=null;return t}
+function kidsMonth(){let ev="";const K=BAL.kidIll;const moms=[[S,S.kids]].concat(worldOn()?rivals.map(v=>[v,v.kids]):[]);/* NPC kids: host only */
  for(const [p,ks] of moms)for(const k of ks)if(k.alive){k.hp=Math.min(100,k.hp+BAL.eff.j8.hpKidsMonth);
-  if(roll((k.age<3?3:1.5)*(1+(S.storms||0)*.5))){let d=30+R(40);const doc=p===S?S.doctor:(p.alive&&!p.out&&p.doctor);if(doc)d=Math.round(d/2);k.hp-=d;const sk=pick(["lên đậu mùa","sốt cao co giật","mắc kiết lỵ","nhiễm phong hàn nặng"]);
-   if(p===S)ev+=k.hp<=0?kidDie(k,`${sk} rồi không qua khỏi`,true):`<span class="r">${k.name} ${sk}.</span> Sức khỏe còn ${k.hp}. `;else if(k.hp<=0)ev+=kidDie(k,`${sk} rồi không qua khỏi`,false)}}
+  if(k.kIll&&k.hp>=K.well){k.kIll=null;if(p===S)ev+=`${k.name} đã khỏi bệnh. `;continue}
+  if(k.kIll){if(k.kIll.t!==S.turn&&roll(K.worse))ev+=kidIllHit(p,k,kidIllDmg(p),k.kIll.n);continue}
+  if(roll((k.age<K.ch.youngAge?K.ch.young:K.ch.old)*(1+(S.storms||0)*K.ch.storm)))ev+=kidIllHit(p,k,kidIllDmg(p),pick(["lên đậu mùa","sốt cao co giật","mắc kiết lỵ","nhiễm phong hàn nặng"]))}
  return ev}
 /* rival AI: the same acts as the player, picked by want */
 function pickTarget(v){const L=others(v);if(!L.length)return null;const w=L.map(t=>1+hostility(v,t));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}return L[i]}

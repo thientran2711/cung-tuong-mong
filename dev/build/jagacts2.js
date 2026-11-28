@@ -32,13 +32,15 @@ const AGC2={
  kidGreet:{act:"đưa con đến thỉnh an Hoàng thượng",tag:"greet",at:"emp",ok:v=>kidsOf(v).length>0},
  kidHeal:{act:"tự bốc thuốc chữa bệnh cho con",tag:"help",at:"self",ok:v=>(v.arts&&v.arts.y||0)>=BAL.ag.cx2.kidHeal.y&&!!ag2Sick(v,BAL.ag.cx2.kidHeal.hp)},
  kidMed:{act:"xin thuốc cho con ở Thái y viện",tag:"help",at:"tyv",ok:v=>!!ag2Sick(v,BAL.ag.cx2.kidMed.hp)},
+ kidAsk:{act:"cầu xin ngự y xem bệnh cho con",tag:"help",at:"tyv",ok:v=>!v.out&&!!ag2Sick(v,BAL.ag.cx2.kidAsk.hp)},
+ kidWatch:{act:"thức trông con ốm",tag:"help",at:"self",ok:v=>{const k=ag2Sick(v,BAL.ag.cx2.kidWatch.hp);return !!(k&&(k.kIll||illOf(k)))}},
  fert:{act:"xin bài thuốc dễ thụ thai",tag:"self",at:"tyv",ok:v=>!v.fert&&!v.preg&&!sonsOf(v).length},
  doctor:{act:"mời thái y tâm phúc",tag:"self",at:"tyv",ok:v=>!v.doctor},
  likes:{act:"hỏi Kính sự phòng sở thích của Hoàng thượng",tag:"scheme",at:"ksp",ok:v=>!(v.eK&&v.eK.flower)||(typeof eaOpen==="function"&&eaOpen(v))},
  old:{act:"hỏi chuyện cũ phế phi ở lãnh cung",tag:"scheme",at:"lc"}};
 /* the player's button each deed is (j2 talkOpts / deck, j9 topicOpts, j20) — checked by dev/test/ag-all.test.js (no NPC-only hidden act) */
 const AGC2BTN={maidTalk:"Tâm sự",maidSpy:"Sai đi dò la",bribeSrv:"Mua chuộc",plantSrv:"Cài người vào cung khác",flat:"Tâng bốc",true:"Nói thật lòng",show:"Phô tài",favor:"Xin ân điển",court:"Bàn chuyện triều chính",nurse:"Hầu thuốc Hoàng thượng",kidGreet:"Đưa con đến thỉnh an Hoàng thượng",
- kidHeal:"Chữa bệnh cho con",kidMed:"Xin thuốc cho",fert:"Bài thuốc dễ thụ thai",doctor:"Mời làm thái y tâm phúc",likes:"Hỏi sở thích Hoàng thượng",old:"Hỏi chuyện cũ",vent:"Trút giận",chest:"Lục rương tìm chứng cứ",help:"Nhờ giúp đỡ"};
+ kidHeal:"Chữa bệnh cho con",kidMed:"Xin thuốc cho",kidAsk:"Cầu xin ngự y cho",kidWatch:"Thức trông",fert:"Bài thuốc dễ thụ thai",doctor:"Mời làm thái y tâm phúc",likes:"Hỏi sở thích Hoàng thượng",old:"Hỏi chuyện cũ",vent:"Trút giận",chest:"Lục rương tìm chứng cứ",help:"Nhờ giúp đỡ"};
 function ag2At(A,v,kh){if(A.at==="emp")return agEmpAt(kh);if(A.at==="self")return palaceOf(v);return A.at}
 function ag2Pay(v,c){if(!agcCan(v,c))return false;agcPay(v,c);return true}
 agReg("consort","cx2",(v,N,need)=>{const O=[];const X=BAL.ag.cx2;if(v===S||v.out||v.confined)return O;
@@ -85,8 +87,11 @@ agRunReg("cx2:nurse",v=>{if(!(S.emp&&S.emp.ill))return"";const ok=ag2Roll(v,"nur
  return ag2Res(v,"nurse",ok,ok?`${v.name} sang Dưỡng Hòa điện sắc thuốc, hầu bên giường Hoàng thượng`:`${v.name} hầu thuốc Hoàng thượng đến kiệt sức`)});
 agRunReg("cx2:kidGreet",v=>{const k=ag2Kid(v,(a,b)=>a.fond-b.fond);if(!k)return"";const ok=ag2Roll(v,"kidGreet");if(ok==null)return"";if(ok)k.fond=cl((k.fond||0)+BAL.ag.cx2.kidGreet.fond,0,100);
  return ag2Res(v,"kidGreet",ok,`${v.name} dắt ${k.name} đến thỉnh an Hoàng thượng`)});
-agRunReg("cx2:kidHeal",v=>{const X=BAL.ag.cx2.kidHeal;const k=ag2Sick(v,X.hp);if(!k||!ag2Pay(v,X.c))return"";k.hp=Math.min(100,k.hp+X.up);return ag2Res(v,"kidHeal",1,`${v.name} tự bốc thuốc chữa bệnh cho ${k.name}`)});
-agRunReg("cx2:kidMed",v=>{const X=BAL.ag.cx2.kidMed;const k=ag2Sick(v,X.hp);if(!k||!ag2Pay(v,X.c))return"";k.hp=Math.min(100,k.hp+X.up);return ag2Res(v,"kidMed",1,`${v.name} đến Thái y viện xin thuốc cho ${k.name}`)});
+agRunReg("cx2:kidHeal",v=>{const X=BAL.ag.cx2.kidHeal;const k=ag2Sick(v,X.hp);if(!k||!ag2Pay(v,X.c))return"";kidCure(k,X.up,"self");return ag2Res(v,"kidHeal",1,`${v.name} tự bốc thuốc chữa bệnh cho ${k.name}`)});
+agRunReg("cx2:kidMed",v=>{const X=BAL.ag.cx2.kidMed;const k=ag2Sick(v,X.hp);if(!k||!ag2Pay(v,X.c))return"";kidCure(k,X.up,"vien");return ag2Res(v,"kidMed",1,`${v.name} đến Thái y viện xin thuốc cho ${k.name}`)});
+/* ILLNESS-CURE r3 (MAIN 185 Q3, law 1): the NPC mother has the same two non-bạc child roads as the player (Cầu xin ngự y cho con: Sủng; Thức trông con: Sức) */
+agRunReg("cx2:kidAsk",v=>{const X=BAL.ag.cx2.kidAsk;const k=ag2Sick(v,X.hp);if(!k||v.out||!ag2Pay(v,X.c))return"";kidCure(k,X.up,"cau");return ag2Res(v,"kidAsk",1,`${v.name} dâng thư cầu ngự y xem bệnh cho ${k.name}`)});
+agRunReg("cx2:kidWatch",v=>{const X=BAL.ag.cx2.kidWatch;const k=ag2Sick(v,X.hp);if(!k||!(k.kIll||illOf(k))||!ag2Pay(v,X.c))return"";kidCure(k,X.up,"rest");return ag2Res(v,"kidWatch",1,`${v.name} thức trông ${k.name} suốt đêm`)});
 agRunReg("cx2:fert",v=>{const X=BAL.ag.cx2.fert;if(v.fert||!ag2Pay(v,X.c))return"";v.fert=X.m;return ag2Res(v,"fert",1,`${v.name} đến Thái y viện xin bài thuốc dễ thụ thai`)});
 agRunReg("cx2:doctor",v=>{const X=BAL.ag.cx2.doctor;if(v.doctor||!ag2Pay(v,X.c))return"";v.doctor=1;return ag2Res(v,"doctor",1,`${v.name} mời được một thái y làm tâm phúc`)});
 agRunReg("cx2:likes",v=>{const X=BAL.ag.cx2.likes;if(!agcCan(v,X.c))return"";const lo=odA(v,X.o),ok=agTry(lo);if(!ok&&agSoft(lo)){ag2Soft(X.c);return ag2Res(v,"likes",0,"")}agcPay(v,X.c);if(ok){const u=Object.keys(LIKES).filter(k=>!(v.eK||{})[k]);const k=u.includes("flower")?"flower":u.length?pick(u):null;/* OD03 two-way: her discover() rule (jbalcore eaAsk) — the month art at BAL.steal.ea.disc, else a like; sure when no like is left */let e=false;try{if(typeof eaAsk==="function")e=eaAsk(v,!k)}catch(x){}if(!e&&k)(v.eK=v.eK||{})[k]=1}
