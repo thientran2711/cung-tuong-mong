@@ -532,6 +532,8 @@ html body .kbtn,html body .kbtn *{word-break:normal!important;overflow-wrap:norm
 .kseg{display:inline-flex;gap:1.5px;padding:2px;border-radius:4px;background:#efe3cc;border:1px solid #d9c49a}
 .kseg i{display:block;width:5px;height:9px;border-radius:1.5px;background:var(--k-card,#fffaf0);box-shadow:inset 0 0 0 1px #d9c49a}
 .kodm.oc{background:none!important;border:0!important;padding:0!important;margin:0}
+/* KIT §53.d (KK59; KIT_REQUESTS 27/11 DOOR-ONETAP, MAIN 178 ruling): the meter inside a DARK button (primary .kbtn, kdanger, the dialog's main) = LIGHT variant — the ladder word in the button's own light ink, the 7-step track keeps its light plate (filled steps stay the ladder colours); a light button (.alt, the green .kcol-act .kdone, the grey disabled kdanger; a .kdone elsewhere is a dark red .kbtn) keeps the ladder colour word. RV-175 FAIL-1 (KK60): a DISABLED dark .kbtn stays dark red (or a dark grey under the .kshc / .kri-acts grayscale filter) → it takes the light word too; only .kdanger:disabled turns light grey (#d8cdbd) and keeps the ladder colour */
+.kbtn:not(.alt):not(.kcol-act .kdone):not(.kdanger:disabled) .kodm b,.dlg.kpanel #mr .main .kodm b{color:#fff8e6!important;text-shadow:0 1px 1px #0007}
 button.ka .kodds .kodm{flex-direction:row}
 .hc.khc{display:inline-flex;align-items:center;gap:4px}.hc.khc .kodm b{font-size:.68rem}
 .kpop{position:fixed;z-index:9995;/* above the big emotion avatar (.kemo-big, 9990/9991) — rv kit-ghichu-sections: a kit popup is never covered by a picture */background:var(--k-card);border:1px solid var(--gold);border-radius:var(--k-rad);box-shadow:0 0 0 3px #f6ead6,0 10px 30px #2a1a1250;padding:8px 10px;font-size:.82rem;color:var(--ink);/* m-fix-2: a tip never covers its own dialog (robot s5d: a 40-line «Ghi chú» filled the Fold): at most half the screen, scrolls inside */max-height:calc(50*var(--kvh,1dvh) - 16px);overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box}
@@ -1039,7 +1041,7 @@ button.ka.kodrow .kat>.kodds.kodds{margin-left:auto!important}`;document.head.ap
 if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}const md=road?"road":"feign";const M=(BAL.steal.m||{})[md]||{};const w=M.win&&Object.keys(M.win).length?` · thêm ${fmt(M.win)}`:"";const NG=nightGain(0),BN=BAL.night;/* each choice shows its OWN prize and its own trace (night-final: Chặn ngự giá showed Tranh sủng's numbers) */
  return `thị tẩm đêm nay: ${sgStat(NG.sung)}, Ân tình +${NG.an} trở lên${w}${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(BN.bestow+BN.bestowS*BN.stealS)} · kèm: ${stealKem(v,md)}`}}
 /* wording guide fixes in merged copies */
-(function(){const fix=root=>{try{root.querySelectorAll&&root.querySelectorAll(".kalog").forEach(e=>{if(/Nhật ký/.test(e.textContent))e.textContent="Xem đầy đủ trong Sổ ghi"})}catch(e){}};new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.classList&&n.classList.contains("kalog"))fix(n.parentNode);else fix(n)}})}).observe(document.documentElement,{childList:true,subtree:true})})();
+(function(){const fix=root=>{try{root.querySelectorAll&&root.querySelectorAll(".kalog").forEach(e=>{if(/Nhật ký/.test(e.textContent))e.textContent="Xem đủ trong Sổ ghi"})}catch(e){}};new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.classList&&n.classList.contains("kalog"))fix(n.parentNode);else fix(n)}})}).observe(document.documentElement,{childList:true,subtree:true})})();
 /* Tài nghệ rows "Bậc 3: Mở «…»": wrap, never cut */
 (function(){const st=document.createElement("style");st.id="kp-art-wrap";st.textContent=`.art .pcb button,.art .ams,.art .ams span,.art .lv,.art .pcrow span,.art .pcrow b{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important}`;document.head.appendChild(st)})();
 
@@ -1143,6 +1145,7 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
  if(!src){src=ph;if((tries||0)<75)setTimeout(()=>{if(!M.hidden&&M.classList.contains("kpscene")&&$("mb").querySelector(".kpid"))kpIdFig(M,(tries||0)+1)},400)}
  if(!im){im=document.createElement("img");im.className="kidfig2";im.alt="";im.decoding="async";M.prepend(im)}
  if(!im.dataset.kerr){im.dataset.kerr=1;im.addEventListener("error",()=>{const s0=im.getAttribute("src")||"";if(/\/tn\//.test(s0))return;if(im.dataset.kerr==="1"){im.dataset.kerr="2";setTimeout(()=>{if(im.isConnected)im.src=s0+(s0.includes("?")?"&":"?")+"r=1"},600)}})}
+ im.classList.toggle("kphsil",src===ph);/* KK45: the stand-in keeps the silhouette's LAYOUT only; it paints as the §59.1 neutral ground (jph img.kphsil), never as the stranger lady */
  M.classList.add("kpfig");const id=$("mb").querySelector(".kpid");if(id)id.classList.add("kpidf");
  /* review/newgame-ui (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … 1 lúc sau mới thấy hình"):
     1) ONE standard figure tier: every face is drawn with the same BODY height (head top → feet, kitFigBody, as KIT 33.6) on the same floor
@@ -1368,12 +1371,14 @@ function kitSkillArt(kind,k,name){const key=`${kind}-${k}`;const have=(KIT_INFOM
  return have.includes(key)?`img/${key}.webp`:ah.includes("act-cat-hoc-tap")?"img/act-cat-hoc-tap.webp":""}
 function kitSteps(l,max,attr,word){max=max||5;word=word||"Bậc";const seg=Array.from({length:max},(_,i)=>`<i class="${i<l?"on":""}"></i>`).join("");
  return `<${attr?"button type=\"button\"":"span"} class="ksteps" ${attr||""} aria-label="${word} ${l} trên ${max}"><span class="kstepd">${seg}</span><b>${word} ${l}/${max}</b></${attr?"button":"span"}>`}
-function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${cur}/${need}</b></div>`}
+function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${kitNeed(cur,need)}</b></div>`}
 /* tainghe-info (owner OD 25/11 ~23:48Z «Bấm vào dung nghi thì không ra gì hết … không biết bấm vô cái gì mở ra cái khung này»): the card's info
    opens from ONE visible labelled target = the NAME, drawn as the kit info link (ⓘ + dotted underline, the §kitInfo look of «ⓘ Cách học»).
    o.info (or the old o.stepsAttr) = the attribute that opens it (e.g. data-v85tab="cam"). The «Bậc l/max» steps are never a hidden button. */
 function kitSkillName(o){const a=o.info||o.stepsAttr||"";const n=o.name||"";if(!a||!n)return `<b>${n}</b>`;
  return `<button type="button" class="kskn" ${a} aria-label="Xem luật ${kpPlain?kpPlain(n):n}"><i class="kskni" aria-hidden="true">ⓘ</i><b>${n}</b></button>`}
+/* kit-need (s3e-display-fix, robot «Công lao 11/10»): ONE rule for every «have/need» text — the have shown never passes its need (a met need reads need/need) */
+function kitNeed(cur,need){cur=Math.floor(+cur||0);need=+need||0;return `${need>0?Math.min(cur,need):cur}/${need}`}
 /* kitHitGrow(root): see the CSS note «tainghe-info r4». Run debounced on DOM changes + resize. */
 function kitHitGrow(root){try{const MIN=44,T=".kgl,.kskn,button.ladi,.khap:not([role=img])";
  const vis=r=>r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth;

@@ -26,9 +26,25 @@ function kmEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;"
 
 /* ---------- queue: one big moment at a time, after blocking screens ---------- */
 const KMQ=[];let kmBusy=false;
-function kmFree(){const d=document.getElementById("dawn");if(d&&!d.hidden&&d.classList.contains("on"))return false;
+function kmFree(job){const d=document.getElementById("dawn");if(!(job&&job.kend)&&kitEndUp())return false;/* END CARD HOLD (MAIN 179, law 11 with RANK SCREEN FIRST): while an end card is up (the life end, or a living ending card such as «Đại kết cục» drawn .kes), no kit scene opens over it — it waits; a dead life drops them (kmLifeOver) */
+ if(d&&!d.hidden&&d.classList.contains("on"))return false;
  if(document.getElementById("kpodov")||document.querySelector('[id^="kroul"],.kroul-ov'))return false;if(document.getElementById("kmrew"))return false;return true}
-function kmPush(fn){if(kmLifeOver()&&!(fn&&fn.kend))return;KMQ.push(fn);kmPump()}
+function kmPush(fn){if(kmLifeOver()&&!(fn&&fn.kend))return;KMQ.push(fn);if(fn&&(fn.kend||fn.krank))kmPump();else{clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,0)}}
+/* RANK SCREEN FIRST (MAIN 179 rule, DLG-DEAD-BTN-2, Foreman F s2h FLIGHT2-S2H on LIVE 772bee4f: the «Bổng lộc tháng chín» chest sat over the board while
+   the HUD already read «Lãnh cung», the «Lãnh cung» card only after it). ONE rule for the kit queue: a reward / notice scene never covers a
+   rank-change screen — it waits until that screen has been shown and closed. Rank-change screens = the kit rank scenes kitEdict / kitGloom
+   (jobs marked krank, played ahead of every other queued scene) and the rank cards in Q (kmRankCard: «Lãnh cung», «Rời lãnh cung»,
+   «Bị giáng phẩm», «Tấn phong» … carry rk:1). (1) kmPush starts a non-rank scene one task later, so a pay-out made earlier in the same month
+   roll (monthPay runs before cold() / promote()) sees the rank change; (2) kmRankWait(): a rank change in the state not yet drawn (kmDiff
+   snapshot) is drawn now, and while a rank scene is queued / on screen or a rank card is still in Q, the other scenes wait (kmPump). The life
+   end card stays above everything (E98 kmLifeOver / kitEndClear, KK29 kitEndUp: a dead life's scenes are dropped, not queued). */
+function kmPushRank(fn){fn.krank=1;kmPush(fn)}
+function kmRankCard(m){return !!(m&&(m.rk||(m.kit&&m.kit.rk)))}
+function kmRankWait(){try{if(typeof S==="undefined"||!S||S.dead||(typeof CW!=="undefined"&&CW&&CW.ctx))return false;
+ if(KMQ.some(f=>f&&f.krank)||document.querySelector(".kmov.km-edict:not(.km-out),.kmov.km-gloom:not(.km-out)"))return true;
+ if(kmOn()&&KMS===S&&KMSNAP){const b=kmSnap();if(b.rank!==KMSNAP.rank||b.out!==KMSNAP.out||b.srv!==KMSNAP.srv){kmDiff();if(KMQ.some(f=>f&&f.krank))return true}}
+ return typeof Q!=="undefined"&&Array.isArray(Q)&&Q.some(kmRankCard)}catch(e){return false}}
+window.kmRankWait=kmRankWait;window.kmRankCard=kmRankCard;
 /* E98 END CARD ON TOP (FIX-THE-WHOLE-GROUP, robots E-S2 8/8 + E-S3 4 lives: «Bổng lộc tháng …» chest over the life end card): once a life has ENDED
    (S.dead, over()), no kit scene of that life plays any more — a dead life gets no pay, no chest, no edict, no bloom. ONE rule: kmLifeOver().
    kmPush drops new scenes, kmPump drops queued ones, and kitEndClear() (called by the over() hook below at the moment of death) voids the scene
@@ -53,8 +69,11 @@ function kmReset(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
  try{if(typeof kitPodiumClose==="function")kitPodiumClose(true)}catch(e){}
  try{if(typeof btrKill==="function")btrKill()}catch(e){}
  try{document.querySelectorAll(".kmov,#kmrew,.kmfly,.kmalarm").forEach(e=>e.remove())}catch(e){}}
-function kmPump(){if(kmLifeOver())for(let i=KMQ.length-1;i>=0;i--)if(!(KMQ[i]&&KMQ[i].kend))KMQ.splice(i,1);if(kmBusy||!KMQ.length)return;if(!kmFree()){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,250);return}
- kmBusy=true;const fn=KMQ.shift();let done=false;const g=kmGen;const fin=()=>{if(done||g!==kmGen)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,600000);
+function kmPump(){if(kmLifeOver())for(let i=KMQ.length-1;i>=0;i--)if(!(KMQ[i]&&KMQ[i].kend))KMQ.splice(i,1);if(kmBusy||!KMQ.length)return;
+ let qi=KMQ.findIndex(f=>f&&(f.kend||f.krank));/* RANK SCREEN FIRST: the ending's entrance / a rank scene goes ahead of every queued reward or notice */
+ if(!kmFree(KMQ[qi<0?0:qi])||(qi<0&&kmRankWait())){clearTimeout(kmPump.t);kmPump.t=setTimeout(kmPump,250);return}
+ if(qi<0)qi=KMQ.findIndex(f=>f&&(f.kend||f.krank));if(qi<0)qi=0;/* kmRankWait may have drawn a pending rank change (kmDiff) into the queue */
+ kmBusy=true;const fn=KMQ.splice(qi,1)[0];let done=false;const g=kmGen;const fin=()=>{if(done||g!==kmGen)return;done=true;clearTimeout(sf);kmBusy=false;setTimeout(kmPump,80)};const sf=setTimeout(fin,600000);
  try{fn(fin)}catch(e){console.error(e);fin()}}
 
 /* ---------- KIT 81 · SCENE-END BUTTON label (owner OD:L1261) ----------
@@ -196,7 +215,7 @@ function kitEdict(o){o=o||{};const p=o.who||S,to=o.to!=null?o.to:S.rank,from=o.f
  const line=to>=7?`Lập ${kmEsc(nm)} làm Hoàng hậu, chủ lục cung.`:`Tấn phong ${kmEsc(nm)} làm ${kmRankName(to)}.`;
  const html=`<div class="kmedict" style="--rc:${col}"><div class="kmscroll"><img class="kmsc-c" src="${KM_DIR}mo-edict-closed.webp" alt="" draggable="false"><div class="kmsc-o"><img src="${KM_DIR}mo-edict-open.webp" alt="" draggable="false"><div class="kmsc-t"><b>Thánh chỉ</b><span>${line}</span><small>Khâm thử</small></div></div></div>
   <div class="kmpromo">${kmFrameSwap(p,from,to)}<div class="kmchip-row"><span class="kmchip kmchip-old">${o.fromWord?kmEsc(o.fromWord):from<0?"Cung nữ":kmRankName(from)}</span><span class="kmarrow">→</span><span class="kmchip kmchip-new">${kmRankName(to)}</span></div></div></div>`;
- kmPush(done=>{const st=kmStage("km-edict",html,{dur:2000,hold:2200,onEnd:done});
+ kmPushRank(done=>{const st=kmStage("km-edict",html,{dur:2000,hold:2200,onEnd:done});
   /* §66.1 the light gold glow on the new frame = KIT §68 painted art: the gold glow still (kitFxBurst "glowburst") + the painted gold light clip (screen blend on the dark stage) */
   st.later(1450,()=>{try{const f=st.ov.querySelector(".kmpromo .kmfr");if(!f)return;if(typeof kitFxBurst==="function")kitFxBurst("glowburst",f,1,{scale:.8,a0:.85});
    if(typeof kitFxLight==="function")kitFxLight("glow-gold",f,{dur:1900,fade:600,scale:1.5,opacity:.85})}catch(e){}});
@@ -212,7 +231,7 @@ function kmRankDownHTML(p,from,to){if(from==null||from<0)return"";const cold=to=
 function kitGloom(o){o=o||{};const leaves=Array.from({length:14},(_,i)=>`<img class="kmleaf" src="${KM_DIR}mo-leaf-dry.webp" alt="" style="--x:${(i*53)%100}%;--d:${(i%7)*.16*BAL.pace}s;--s:${.55+((i*37)%50)/100};--r:${(i*71)%360}deg;--w:${((i%5)-2)*18}px">`).join("");
  let rd="";try{rd=kmRankDownHTML(o.who||S,o.from,o.to)}catch(e){rd=""}
  const html=`<div class="kmgloom"><div class="kmdark"></div><div class="kmleaves">${leaves}</div><div class="kmgbox">${rd}<div class="kmgcap"><b>${kmEsc(o.title||"Bị giáng phẩm")}</b>${o.sub?`<small>${kmEsc(o.sub)}</small>`:""}</div></div></div>`;
- kmPush(done=>{const st=kmStage("km-gloom",html,{dur:rd?2600:2000,hold:1500,onEnd:done});
+ kmPushRank(done=>{const st=kmStage("km-gloom",html,{dur:rd?2600:2000,hold:1500,onEnd:done});
   if(rd)st.later(1250,()=>{try{const c=st.ov.querySelector(".kmcrack");if(c&&typeof kitFxBurst==="function")kitFxBurst("jade",c,8,{scale:.8})}catch(e){}})})}
 
 /* ================= 5 QUA BUỔI / QUA TUẦN ================= */
@@ -241,11 +260,12 @@ const KM_BOX={tray:["mo-tray","mo-tray-open","Mâm thưởng"],chest:["mo-chest"
    grade colour, and settles on the shelf under the box; the silver comes last; then the list (grade chip · name · note) + Nhận.
    Tap during the reveal = skip to the end. Timings BAL.reveal (jbal2). Items arrive lowest grade first, the best one last. */
 /* KK29 (MAIN 141, E-S5 «reward popup over the ending screen»): while the ENDING card (#modal.end / .kes) is on screen, nothing opens over it: a reward box is not shown (the item is already in her chest, the log keeps the line). ONE rule: kitEndUp(). */
-function kitEndUp(){try{const M=document.getElementById("modal");return !!(M&&!M.hidden&&(M.classList.contains("end")||M.classList.contains("kes")))}catch(e){return false}}
+function kitEndUp(){try{const M=document.getElementById("modal");if(!M||M.hidden)return false;if(M.classList.contains("kes"))return true;/* RANK SCREEN FIRST: «Lãnh cung» is a kit notice drawn with cls "end" (dark frame) — it is a rank screen, not the life end: a reward fired under it waits (kmRankWait), it is not dropped */
+ return M.classList.contains("end")&&(kmLifeOver()||!!(typeof Q!=="undefined"&&Q[0]&&Q[0].kend))}catch(e){return false}}
 window.kitEndUp=kitEndUp;
 /* KK31 56.31c (MAIN 144, D F8 «Bổng lộc tháng chín» box over the «Kiếp này» card): a reward box ALREADY open when the ending card comes up is closed at once (its items are in her chest already, the log keeps the line); one watcher on #modal for every reward box. */
 (function(){const go=()=>{const M=document.getElementById("modal");if(!M){setTimeout(go,500);return}new MutationObserver(()=>{if(!kitEndUp())return;const r=document.getElementById("kmrew");if(r&&r.__kmClose)try{r.__kmClose()}catch(e){r.remove()}}).observe(M,{attributes:true,attributeFilter:["class","hidden"]})};go()})();
-function kitReward(o){if(kitEndUp())return null;o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
+function kitReward(o){if(kmLifeOver())return null;/* END CARD HOLD: under a living end card (.kes «Đại kết cục») the box is queued (kmFree), not dropped */o=o||{};const kind=KM_BOX[o.kind]?o.kind:"chest";const B=KM_BOX[kind];const RV=(typeof BAL==="object"&&BAL.reveal)||{};
  const KG=typeof KIT_GRADE!=="undefined"?KIT_GRADE:[{n:"Thường",c:"#9a8a78"}];const gOf=t=>Math.max(0,Math.min(4,t|0));
  const items=(o.items||[]).map(x=>Object.assign({tier:0},x)).sort((a,b)=>a.tier-b.tier);const coins=o.bac||0;
  const seq=items.map(x=>({n:x.n,d:x.d,img:x.img,g:gOf(x.tier),gn:x.gn||"",k:x.k&&typeof kitItemRef==="function"&&kitItemRef({k:x.k})?x.k:""}));
@@ -257,7 +277,7 @@ function kitReward(o){if(kitEndUp())return null;o=o||{};const kind=KM_BOX[o.kind
  const html=`<div class="kmrew kmrew-${kind}${seq.length>6?" km-long":""}"><div class="kmrew-h"><b>${kmEsc(o.title||B[2])}</b>${o.from?`<small>${kmEsc(o.from)}</small>`:""}</div>
   <div class="kmbox"><i class="kmlight km-loop"></i><img class="kmbox-c km-loop" src="${KM_DIR}${B[0]}.webp" alt="" draggable="false"><img class="kmbox-o" src="${KM_DIR}${B[1]}.webp" alt="" draggable="false"><i class="kmlight kmlight-f km-loop"></i><div class="kmcoins">${coins?Array.from({length:Math.min(9,3+Math.round(coins/10))},(_,i)=>`<img src="${KM_DIR}mo-coin-silver.webp" alt="" style="--i:${i}">`).join(""):""}</div><div class="kmspot" style="--kshelf:${RV.shelf||380}ms"></div></div>
   <div class="kmshelf"></div><div class="kmtap km-loop">Chạm để mở</div><div class="kmlist">${rows}<button class="kbtn kmtake" data-km-close>Nhận</button></div></div>`;
- kmPush(done=>{if(kitEndUp()){done();return}/* KK31 56.31c: a reward queued before the ending card is dropped when its turn comes after it */const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";st.ov.__kmClose=st.close;let step=0;
+ kmPush(done=>{if(kmLifeOver()){done();return}/* KK31 56.31c: a reward queued before a dead life's ending card is dropped when its turn comes */const st=kmStage("km-reward",html,{manual:true,dur:60000,onEnd:done});const root=st.ov.querySelector(".kmrew");st.ov.id="kmrew";st.ov.__kmClose=st.close;let step=0;
   const spot=root.querySelector(".kmspot"),shelf=root.querySelector(".kmshelf");const T=[];const later=(ms,f)=>T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms));
   /* kit-rows-b KP15: the shelf shows at most KMCAP icons + one «+N» chip (22 items = 3 rows of icons covered the list and the Nhận button); the full list below holds every item */const KMCAP=8,more=n=>`<span class="kmsh kmsh-more" style="--i:${KMCAP}">+${n}</span>`;const shelfAll=()=>seq.slice(0,seq.length>KMCAP+1?KMCAP:seq.length).map(tile).join("")+(seq.length>KMCAP+1?more(seq.length-KMCAP):"");
   const shelfAdd=(x,i)=>{if(seq.length<=KMCAP+1)return shelf.insertAdjacentHTML("beforeend",tile(x,i));if(i<KMCAP)shelf.insertAdjacentHTML("beforeend",tile(x,i));else{const m=shelf.querySelector(".kmsh-more");if(m)m.textContent="+"+(seq.length-KMCAP);else shelf.insertAdjacentHTML("beforeend",more(i+1-KMCAP))}};
@@ -279,7 +299,7 @@ function kitFlyItem(k){if(kmReduced()||!k)return;const src=kmItemImg(k);const tb
  im.animate([{transform:"translate(-50%,-50%) scale(.4)",opacity:0},{transform:"translate(-50%,-80%) scale(1.15)",opacity:1,offset:.3},{transform:`translate(${r.left+r.width/2-x0-24}px,${r.top+r.height/2-y0-24}px) scale(.35)`,opacity:.2}],{duration:900,easing:"cubic-bezier(.4,.1,.3,1)",fill:"forwards"}).onfinish=()=>{im.remove();tb.classList.remove("km-pulse");void tb.offsetWidth;tb.classList.add("km-pulse")}}
 
 /* ================= extra conventions: danger pulse, news chime ================= */
-function kitAlarm(){if(kmReduced())return;const d=document.createElement("div");d.className="kmalarm";document.body.appendChild(d);setTimeout(()=>d.remove(),kitPace(1700))}
+function kitAlarm(){if(kmReduced()||kitEndUp())return;/* END CARD HOLD: no red danger pulse over an end card */const d=document.createElement("div");d.className="kmalarm";document.body.appendChild(d);setTimeout(()=>d.remove(),kitPace(1700))}
 
 /* ================= 9 THỜI TIẾT: chip + real effects ================= */
 const KM_WX={"hoa đào bay":"hoadao","mưa phùn":"muaphun","sương sớm":"suongsom","trời quang":"troiquang","nắng gắt":"nanggat","ve kêu râm ran":"vekeu","giông tố":"giong","đom đóm":"domdom",

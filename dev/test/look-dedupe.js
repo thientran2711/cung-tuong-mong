@@ -6,6 +6,7 @@
    4) the real poisoned save shape (BGMQ: 1998× empty Tâm trạng + Kỳ ngộ + empty «Xong việc») loads as Kỳ ngộ only; repeats dropped
    usage: node dev/test/look-dedupe.js [index.html | http URL] */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');
+const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
 const RT=require('./realtap.js');
 const GAME=process.argv[2]||path.join(__dirname,'../../index.html');const DEVS={fold:[755,1000],ipad:[1180,820]};
 function serve(file){const root=path.dirname(path.resolve(file)),idx=path.basename(file);const T={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.css':'text/css'};
@@ -14,7 +15,7 @@ const POISON=[];for(let i=0;i<1998;i++)POISON.push({t:'Tâm trạng · Cung nữ
 POISON.splice(7,0,{t:'Kỳ ngộ',h:'<p>Danh +2; Tố Nguyệt thiện cảm +34</p>'},{t:'Xong việc: Đi một nơi trong cung',h:'',btn:'Đã hiểu'},{t:'Kỳ ngộ',h:'<p>Danh +2; Tố Nguyệt thiện cảm +34</p>'});
 let fails=0;const ok=(c,msg)=>{console.log((c?'PASS ':'FAIL ')+msg);if(!c)fails++};
 (async()=>{const URL=/^https?:/.test(GAME)?GAME:await serve(GAME);const b=await chromium.launch();
- for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',serviceWorkers:'block'});
+ for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',serviceWorkers:'block'});await keepNotesSeen(ctx);
   const p=await ctx.newPage();await p.route(/\.(mp3|ogg|m4a|mp4|webm|wav)(\?|$)/,r=>r.abort());const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof start==='function'&&typeof showTitle==='function',null,{timeout:180000});await p.waitForTimeout(1500);
   /* harness setup only (not a press): a fresh solo life on its home screen */
