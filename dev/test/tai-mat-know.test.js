@@ -79,11 +79,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 2b svtouch-spylearn (MAIN 187, law 11): a WITNESS (jsvt svTouch «seen») telling the master her servant was turned = the ONE learn rule spyLearn
     (learn oán + m.spyKn); a plain talk seen stays a suspicion (thiện cảm only, no learn oán) */
  const r2b=await p.evaluate(()=>{const o={};const L=TK.R();const v=L[0];if(!v)return {skip:1};const s0=window.svtSeen;window.svtSeen=()=>({how:"near"});window.__svtOff=0;
-  try{const run=kind=>{TK.day(v);const s=TK.free(v);s.svtK=null;const b0=TK.rel(v,S),k0=(v.spyKn||{})[key(S)];const n0=(KN.stat.spyLearn||0);svTouch(S,s,kind);const b1=TK.rel(v,S);
-    return {d:{aff:b1.aff-b0.aff,oan:b1.oan-b0.oan},learn:(KN.stat.spyLearn||0)-n0,kn:(v.spyKn||{})[key(S)]!=null&&k0==null||(v.spyKn||{})[key(S)]!==k0}};
+  try{const run=kind=>{TK.day(v);const s=TK.free(v);s.svtK=null;const b0=TK.rel(v,S),k0=(v.spyKn||{})[key(S)];const n0=(KN.stat.spyLearn||0);const tx=String(svTouch(S,s,kind)||"");const b1=TK.rel(v,S);
+    return {d:{aff:b1.aff-b0.aff,oan:b1.oan-b0.oan},learn:(KN.stat.spyLearn||0)-n0,knows:/đã biết chuyện/.test(tx),kn:(v.spyKn||{})[key(S)]!=null&&k0==null||(v.spyKn||{})[key(S)]!==k0}};
    o.tm=run("tm");o.bribe=run("bribe");o.talk=run("talk")}finally{window.svtSeen=s0}return o});
- ok(r2b.skip||(r2b.tm.learn===1&&r2b.tm.d.oan>0&&r2b.tm.d.aff<0&&r2b.bribe.learn===1),'svTouch seen on a turn (tm / bribe) = spyLearn: learn oán + thiện cảm down',r2b);
- ok(r2b.skip||(r2b.talk.learn===0&&r2b.talk.d.oan===0),'svTouch seen on a plain talk: suspicion only (no learn, no oán)',r2b.talk);
+ ok(r2b.skip||(r2b.tm.learn===1&&r2b.tm.d.oan>0&&r2b.tm.d.aff<0&&r2b.bribe.learn===1&&r2b.tm.knows&&r2b.bribe.knows),'svTouch seen on a turn (tm / bribe) = spyLearn: learn oán + thiện cảm down; the after-line says the master KNOWS («đã biết chuyện»)',r2b);
+ ok(r2b.skip||(r2b.talk.learn===0&&r2b.talk.d.oan===0&&!r2b.talk.knows),'svTouch seen on a plain talk: suspicion only (no learn, no oán, the line says «sinh nghi», not «đã biết chuyện»)',r2b.talk);
  /* 3 HER OWN turned servant */
  const r3=await p.evaluate(()=>{const o={};const L=TK.R();const v=L[0];const s=TK.ensureMine();s.spyFor=null;S.tmSold=null;
   for(const x of allServ())if(x.spyFor==="me")x.spyFor=null;
