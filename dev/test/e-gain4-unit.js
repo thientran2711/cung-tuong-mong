@@ -33,7 +33,7 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(
   /* (c) */
   {const tr0=window.toilRival,to0=window.toilOn;let Lr=[];try{window.toilOn=()=>true;window.toilRival=(v,d)=>d?null:{txt:"nàng ta chuộng giản dị: quý ta +"+BAL.toil.praisePlain,aff:BAL.toil.praisePlain,g:0};
     /* a world with a consort met at some place (AA.scen worlds are drawn: try states in turn) */
-    const has=()=>AA.surfaces().filter(s=>s.place).some(sf=>{AA.restore();AA.show(sf);return curPeople().some(x=>x.kind==="rival"&&x.ref)});
+    const has=()=>AA.surfaces().filter(s=>s.place).some(sf=>{AA.restore();AA.show(sf);return curPeople().some(x=>x.kind==="rival"&&x.ref&&talkOpts(x).some(a=>a&&a.one==="one"&&!a.lock))});/* (d) needs a one-tap door too */
     for(const n of ["cao","hh","toi","dau","con","hau","cao","hh"]){AA.scen(n);if(has())break}
     AA.restore();for(const sf of AA.surfaces().filter(s=>s.place)){AA.restore();AA.show(sf);const P=curPeople();const i=P.findIndex(x=>x.kind==="rival"&&x.ref);if(i<0)continue;
      Lr=talkOpts(P[i]).filter(Boolean);break}}finally{window.toilRival=tr0;window.toilOn=to0}
