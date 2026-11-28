@@ -8,7 +8,7 @@ const VPS=(SIZES||"755x1000@2,1000x755@1,1180x820@2,1366x1024@2,844x390@2,390x84
  for(const sz0 of VPS){const [sz,dpr]=sz0.split("@");const [W,H]=sz.split("x").map(Number);const errs=[];
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(dpr||1),hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
   await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
-  const p=await ctx.newPage();p.setDefaultTimeout(120000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+  const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(120000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'load',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(3000);
   await p.addStyleTag({content:'#kroul,.kroul,.krbox,.kcf-w,.kmov.kcf{display:none!important}'});
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv())&&!S.out)break}});
