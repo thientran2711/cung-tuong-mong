@@ -32,7 +32,7 @@ function ssCeil(p,G,SK){let qb=0;const L=[];const have={};
  for(const g of G||[]){if(g.lost||!g.E||!g.E.length)continue;const f=ssFam(g.k);if(!f||ssCap(f)===Infinity)continue;
   if(have[f]==null)have[f]=ssStock(p,f)-g.E.filter(e=>p.inv.includes(e)).length;/* stock before this issue */
   const keep=[];let n=0,v=0;for(const e of g.E){if(have[f]<ssCap(f)){keep.push(e);have[f]++;continue}
-   const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1);n++;v+=ssVal(p,e)}
+   const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1);/* RV-187 (law 6c): an NPC candle / hair oil the issue took out of the Nội vụ phủ COUNTED stock (jstip ilStockTake) goes back there — never issued, never lost */if(e.stk&&typeof ilStock==="function")ilStock(e,1,p);n++;v+=ssVal(p,e)}
   if(n){g.E=keep;g.n=keep.length;g.qbN=n;g.qbV=v;qb+=v;L.push(stipNm(g.k,n).replace(/^\d+ \S+ /,""))}}
  if(qb&&SK)qb=Math.floor(qb*(1-BAL.stip.cutSmall));
  if(qb){ap(p,{bac:qb});const st=stipSt(p);st.qb=(st.qb||0)+qb;st.qbM={turn:S.turn,v:qb,L}}

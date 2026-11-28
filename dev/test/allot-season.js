@@ -40,6 +40,11 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
     for(let m=1;m<=12;m++){S.month=m;S.turn++;v.stip.tip=S.turn;stipGoods(v,null)}
     const sv=f=>v.inv.filter(e=>fam(e.k)===f&&!e.h&&!e.w&&(e.u==null||e.u>0)).length;o.npcCap=sv("tra")<=B.keep.tra&&sv("vai")<=B.keep.vai&&sv("nen")<=B.keep.nen;o.npcQb=(v.stip.qb||0)>0;
     const gift={k:"huongtram",from:"noivu",d:S.turn};v.inv.push(gift);stipGoods(v,null);o.npcNoTrim=v.inv.includes(gift);
+    /* RV-187 (law 6c): an NPC candle the issue takes out of the Nội vụ phủ COUNTED stock (jstip ilStockTake) and the ceiling refuses goes back to that stock */
+    {const I=ilS();I.stock=I.stock||{};const ck=(stipList(rkOf(v),false,false,false,false).find(([k])=>alOf(k)&&alOf(k).kind==="nen")||[])[0];/* the candle grade her rank is issued */
+     I.stock[ck]=(I.stock[ck]||0)+6;v.inv=v.inv.filter(e=>fam(e.k)!=="nen");for(let i=0;i<B.keep.nen;i++)v.inv.push({k:ck,from:"noivu",d:S.turn});
+     const st0=v.staff;v.staff=[];/* her servants' surplus also returns to the stock: kept out so the count is the ceiling's alone */const s0=I.stock[ck];S.month=5;S.turn++;v.stip.tip=S.turn;const Gk=stipGoods(v,null);v.staff=st0;const gl=Gk.find(g=>fam(g.k)==="nen"&&g.qbN>0);o.npcStockBackS={s0,s1:I.stock[ck]||0,qbN:gl&&gl.qbN};
+     o.npcStockBack=!!ck&&!!gl&&(I.stock[ck]||0)===s0}
     /* 3. stale tea */
     const tea={k:"trahop",from:"noivu",d:S.turn-B.teaAge};S.inv=S.inv.filter(e=>fam(e.k)!=="tra");S.inv.push(tea);const Gt=goods(5);o.stale=tea.k==="tramoc"&&Gt.stale===1&&/trà để lâu đã mốc/.test(stipGoodsTxt(Gt));
     const fresh={k:"tragoi",from:"noivu",d:S.turn};S.inv.push(fresh);goods(6);o.freshKept=fresh.k==="tragoi";
@@ -54,7 +59,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
     /* one core: the new BAL keys exist */
     o.bal=B.cloth&&B.keep&&B.teaAge>0&&B.ban&&B.keep.on===true;
     return o});
-   ok("consort life (not the servant road)",r.srv===false);for(const k of ["noMonthCloth","seasonCloth","coldCloth","tea1","rankTxt","blCard","issueSeason","noIssueMid","teaCap","vaiCap","nenCap","dauCap","lxCap","qb","qbTxtOk","noVanish","qbSkim","npcCap","npcQb","npcNoTrim","stale","freshKept","sea","fit","fitWear","sewTxtOk","ban","banNotMoc","bal"])ok(k,!!r[k],k==="rankTxt"?r.rankTxtS:k==="qbTxtOk"?r.qbTxt:k==="sewTxtOk"?r.sewTxt:undefined);
+   ok("consort life (not the servant road)",r.srv===false);for(const k of ["noMonthCloth","seasonCloth","coldCloth","tea1","rankTxt","blCard","issueSeason","noIssueMid","teaCap","vaiCap","nenCap","dauCap","lxCap","qb","qbTxtOk","noVanish","qbSkim","npcCap","npcStockBack","npcQb","npcNoTrim","stale","freshKept","sea","fit","fitWear","sewTxtOk","ban","banNotMoc","bal"])ok(k,!!r[k],k==="rankTxt"?r.rankTxtS:k==="qbTxtOk"?r.qbTxt:k==="sewTxtOk"?r.sewTxt:undefined);
    /* old save (a save written before this branch: monthly cloth heaps, no e.d on tea) loads and plays a month */
    const os=await p.evaluate(()=>{try{S.inv=S.inv.filter(e=>ssFam(e.k)!=="vai"&&ssFam(e.k)!=="tra");for(let i=0;i<9;i++)S.inv.push({k:"luahang",from:"noivu"},{k:"trahop",from:"noivu"});
      const raw=JSON.stringify(S);S=JSON.parse(raw);S.month=2;S.turn++;const G=stipGoods(S,null);const n=S.inv.filter(e=>e.k==="luahang").length;return{ok:n===9&&S.inv.filter(e=>e.k==="trahop"&&e.d!=null).length>=9&&!G.some(g=>g.k==="trahop"&&g.E.length),n}}catch(e){return{ok:false,err:String(e)}}});
