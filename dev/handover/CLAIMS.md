@@ -799,3 +799,4 @@ B-ROW12-RV2 (BIG review of review/row12-leave-r2 0654c1cc) | review/row12-leave-
 Robot life flight2-s21h iPad speed seed 2026112576 on LIVE origin/main | review/flight2-s21 | session_01UV1SzgkGcHw51mKk4RevBb (sonnet seat s21 #3, Foreman F ROOT 8 c1) | RUNNING | 28/11 11:39Z
 E-TIER-B13-RV3 (BIG review batch 3 review/e-tier-b13 31f91836) | review/e-tier-b13-rv3-m; reviews/e-tier-b13-b3-review.md | session_01DgYSWmzMbP76MBo6heawEB | RUNNING | 28/11 11:42Z (Foreman E C11)
 B-COOP-REBIRTH-RESYNC r4 (successor of r3 2oQWGfQi; room-e co-op hang PLAY-STOPPER + owed gates) | review/coop-rebirth-resync d1ae72a3 | session_01N1tNP4FALSWeNShvYrJzZK (opus) | RUNNING | 28/11 11:44Z (Foreman B ROOT 3 child 3)
+Robot life flight2-s2k Fold cautious seed 2026112577 on LIVE origin/main | review/flight2-s2j (or s2k branch per seat) | session_01UV1SzgzrhdKkkkfVybpEZe (s2e #2 seat, Foreman F ROOT 8 c1) | RUNNING | 28/11 11:55Z
