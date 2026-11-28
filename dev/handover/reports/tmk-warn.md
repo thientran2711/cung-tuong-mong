@@ -172,3 +172,49 @@ has a Mất row; tmk-warn's take card is the first (the watch line moved from «
   oán +6 not +8 (old oán slows the rise), aff −1 not −tm.oan (old dislike paces the fall), or the 2nd learning 0 (a ×2.1 holder hits the rank top
   with the first). Fix: TK.fresh(w) before the measured step (oán 0, liking 0, no opz / opa / spc); the own-cause check accepts «the first learning
   reached spTop» (read from the game, nothing typed). The check still bites: a folded own cause lands 0 far below the top (run sample end 16, top 80).
+
+## TMK-WARN-4 (28/11; depth 3; worker for MAIN 189; START_CTX ~2 % of 1M, own estimate → roll at ~27 %, ceiling 60 %)
+Order: RV-186 PASS withdrawn (X01 kit-std-scan via the jcover wit door). Base review/tmk-warn-r3 009a472e → **review/tmk-warn-r4**.
+LIVE moved during the session: origin/main = **8a30664e** (RV-163M dayq-noturn r3, ON aecbc267) → r4 is merged onto 8a30664e (aecbc267 inside).
+
+### Commits
+- 60cd8f8e merge LIVE 8a30664e into r3 009a472e (conflicts: index.html + sw.js only → rebuilt; assets.json = LIVE).
+- 6e7f09e9 + 1f29f025 the fix (dev/build/jcover.js covWitOpts only).
+- ada6bac0 merge review/kk71-handdupmat-r2 **7e0cc8ed** (K-HAND-DUPMAT, landing condition; built files only conflicted → rebuilt).
+
+### X01 cause + fix (law 11, whole wit group, no number changed)
+The plain x «<result> · Đức −−» became `thành: <result>, Đức −−` in j25 optLine → a red loss in the green Thành row. ALL THREE tiers had it
+(probe on r3+LIVE: nhẹ «Đức −−», vừa «Bạc −−» + «Đức −−», nặng «Đức −−−» in Thành). The scan only reached nặng (her maid as witness).
+Now every tier writes a LABELLED x (j25 passes a labelled x whole):
+- nhẹ / nặng: the deed's Đức is taken on success AND failure (jcover deed hook on deedAdd, which runs before the roll's branch) → ONE `kèm:` at the
+  end of x (the ACT-MOVE-6 either-way idiom of o.kem; kept inside x because the folded door row carries only x — o.kem vanished there; written once
+  because the kit drops a repeated chip and a doubled kèm left an EMPTY Kèm row — seen in my first Fold still, fixed).
+- vừa: bạc (o.w, applied on success) + Đức (deedAdd only on success) → Kèm under Thành; Bại «X từ chối, ta không mất bạc».
+- side gain: nặng's Bại now names its real loss «Danh −−−, X biết kẻ chủ mưu» (before: «có hậu quả · xem kết quả» or an empty «Tốn công» row).
+Card now (Fold + iPad stills, LOOKED): Tốn 2 khắc · Thành «Mộc Cận không còn trên đời» (green) · Bại «Danh −−− · Mộc Cận biết kẻ chủ mưu» · Kèm «Đức −−−» · Ghi chú.
+Door card hint (covHint prose) unchanged.
+
+### Gates on r4 1f29f025 (index.html = my rebuild)
+| gate | result |
+|---|---|
+| 96-kit-std-scan gate mode iPad SZ='[[1180,820]]' SUBS=0 | 3 (X06 ×2 «Mong manh», X08 chapter line) = **LIVE 8a30664e identical 3**; **X01 0** (r3+LIVE: 1) |
+| same, Fold [[755,1000]] | 3 = LIVE 3; X01 0; page errors 0 |
+| tmk-warn.test | 17/17 |
+| tmk-warn-scan dev/build | 0 gaps / 26 sites |
+| tai-mat-know.test | 24/24 ×4 |
+| webkit-syntax | 493 modules, 0 hits |
+| kit-hand-dupmat (KK71) | ALL OK (18) |
+| MODGATE | 0 missing vs aecbc267 and vs LIVE 8a30664e; adds jmcwarn.js only |
+| LIVE deletions | 0 · merges 2 parents |
+Not run: full quickcheck (the lander's step).
+
+### Stills LOOKED (scratch only, not committed)
+- wit card «Xử nhân chứng» (nặng row) Fold 755x1000@2 + iPad 1180x820@2: as above, Thành green only.
+- take card «Nhận bạc, làm tai mắt» enlarged (kitHandLift on the hand card; kit-hand-rows clicks a hidden kopt and never opens it) Fold + iPad:
+  Tốn không · Được Bạc ++ · mỗi tháng Bạc + · Mất (4 lines, ONCE) · Ghi chú. The double Mất is gone with KK71.
+
+### SEPARATE ITEM FOR MAIN (not folded — other families' files, all on LIVE 8a30664e already)
+Probe of every talk option in 9 places over 4 days (witness stub on): a red loss in a rolled card's Thành row also in
+«Cài người vào cung khác» (Bạc −−, jagacts2 plantSrv / j10), «Phạt vô cớ» (thiện cảm −−−, Đức −−, kẻ hầu khác thiện cảm −−; jhouse.js:46),
+«Đề bạt lên …» (lót tay thì Bạc −−; jaudit.js:59), «Mua chuộc» NPC servant (Bạc −−; jagacts2 bribeSrv / j29). Same X01 class; the gate scan
+does not reach them today. Owner of those files / KK to move them (Kèm/Tốn by when the loss lands).
