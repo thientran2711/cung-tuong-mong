@@ -13,7 +13,7 @@ const SAMPLE=["Nàng quý ngươi hơn","Bấm vào đây, lượt 3","T3/2 thư
 (async()=>{const b=await chromium.launch();let fails=0;const res={};
  async function run(name,{old,broken}){const ctx=await b.newContext({viewport:{width:1180,height:820}});const p=await ctx.newPage();const errs=[];
   p.on('pageerror',e=>errs.push(e.message));if(old)await p.addInitScript(OLD);
-  if(broken)await p.route(/\/(\?.*)?$/,async r=>{const resp=await r.fetch();const t=(await resp.text()).replace("window.__ctmBuilt=1;","");await r.fulfill({response:resp,body:t})});
+  if(broken)await p.route(/\/([^\/?]*\.html)?(\?.*)?$/,async r=>{const resp=await r.fetch();const t=(await resp.text()).replace("window.__ctmBuilt=1;","");await r.fulfill({response:resp,body:t})});
   await p.goto(BASE+"?khost=0&kboot=1",{waitUntil:'commit',timeout:120000});
   const st=await p.waitForFunction(()=>window.__kbootDone||document.querySelector("#kboot.fail")?1:0,null,{timeout:150000,polling:300}).then(()=>1,()=>0);
   await p.waitForTimeout(1200);
