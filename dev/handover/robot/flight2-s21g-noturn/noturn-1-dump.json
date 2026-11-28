@@ -1,0 +1,366 @@
+{
+ "at": "2026-11-27T23:46:52.212Z",
+ "url": "http://127.0.0.1:8803/",
+ "S": {
+  "name": "Thượng Quan Hàn Yên",
+  "year": 1,
+  "turn": 1,
+  "tuan": 2,
+  "buoi": 3,
+  "dead": false,
+  "rank": 1,
+  "place": "home"
+ },
+ "top": null,
+ "qs": {
+  "Q": [
+   "Thái hậu triệu"
+  ],
+  "DQ": {
+   "want": null,
+   "t": 0,
+   "mt": 35545,
+   "newsHold": 0,
+   "fo": null,
+   "stat": {
+    "held": 0,
+    "ran": 0,
+    "dropped": 0,
+    "modalHeld": 46,
+    "newsFirst": 0,
+    "kmHeld": 0,
+    "actHeld": 10,
+    "pulled": 6,
+    "actKm": 0,
+    "painted": 6,
+    "tapPaint": 2,
+    "netArm": 22,
+    "rearm": 204,
+    "newsLet": 0,
+    "newsPass": 0,
+    "tapRe": 0,
+    "afterPaint": 4,
+    "staleNext": 0,
+    "mineTap": 48,
+    "woke": 12,
+    "mineFront": 1
+   },
+   "park": null,
+   "tw": 1795823206248,
+   "pdT": 1795823210600,
+   "kz": 0,
+   "wk": {
+    "m": {
+     "ev": 1,
+     "t": "Thái hậu triệu",
+     "who": {
+      "rk": "th",
+      "rw": "Thái hậu",
+      "w": [
+       "t"
+      ],
+      "src": "https://ctm-img.victoria-tntt.workers.dev/img/por-consort-c05-th-a51.webp",
+      "hue": 0,
+      "ini": "Từ",
+      "col": "#c9a0e0",
+      "__kp": {
+       "staff": [
+        {
+         "sid": 22,
+         "eid": "gt",
+         "n": 0,
+         "name": "Tống Quế Chi",
+         "call": "Tống ma ma",
+         "role": "maid",
+         "rk": 4,
+         "age": 50,
+         "retire": 63,
+         "tr": "trung",
+         "loyal": 81,
+         "spyFor": null,
+         "lover": null,
+         "af": {},
+         "face": -1,
+         "fc": "face-mama-8",
+         "fk": "mama",
+         "fid": "mama:k01",
+         "elder": 1,
+         "since": 1,
+         "tin": 53,
+         "fcKeep": 1,
+         "mlike": "kd:Lễ vật",
+         "dis": [
+          "art:vu"
+         ],
+         "org": "gia đình bao y kỳ tịch",
+         "net": [
+          "Điềm tĩnh",
+          "Trọng nghĩa",
+          "Mê tín"
+         ],
+         "imp": "ít nói, cúi đầu",
+         "__feelMig": 1,
+         "kn": 1,
+         "trong": [
+          "Nghĩa",
+          "Khiêm"
+         ]
+        },
+        {
+         "sid": 23,
+         "eid": "tn",
+         "n": 0,
+         "name": "Hà Tú Dung",
+         "call": "Hà cô cô",
+         "role": "maid",
+         "rk": 4,
+         "age": 46,
+         "retire": 64,
+         "tr": "lanh",
+         "loyal": 70,
+         "spyFor": null,
+         "lover": null,
+         "af": {},
+         "face": -1,
+         "fc": "face-mama-4",
+         "fk": "mama",
+         "fid": "mama:k02",
+         "elder": 1,
+         "since": 1,
+         "tin": 50,
+         "fcKeep": 1,
+         "mlike": "art:cam",
+         "dis": [
+          "art:theu",
+          "kd:Hương liệu"
+         ],
+         "org": "con nhà nông ở Giang Nam",
+         "net": [
+          "Lạnh lùng",
+          "Thật thà",
+          "Tham vọng"
+         ],
+         "imp": "mắt sáng, nhanh nhẹn",
+         "__feelMig": 1,
+         "kn": 1
+        }
+       ],
+       "age": 58,
+       "fc": "face-thaihau-4",
+       "fk": "th1",
+       "fcKeep": 1,
+       "arch": "phat",
+       "fid": "consort:c05",
+       "dis": [
+        "kd:Trang sức"
+       ],
+       "mlike": "art:theu",
+       "__feelMig": 1,
+       "tho": 79,
+       "thoM": 8,
+       "thoO": 3,
+       "__emoLv": 1,
+       "eaX": {
+        "k": null,
+        "n": 0
+       }
+      },
+      "__kr": {
+       "role": "thaihau",
+       "rank": null,
+       "origin": null,
+       "sex": "f",
+       "kid": false
+      },
+      "kk": "th"
+     },
+     "h": "<p>Thái hậu muốn có người hầu chuyện, Đức Thọ cung cho người sang mời ngươi.</p>",
+     "opts": [
+      {
+       "n": "Đến ngay",
+       "fx": {},
+       "x": "tốn: 2 khắc · Sức -5 · thành: Thái hậu với ngươi +3"
+      },
+      {
+       "n": "Cáo bệnh",
+       "fx": {},
+       "x": "thành: giữ trọn khắc và Sức buổi này · Mất: Thái hậu với ngươi -3"
+      }
+     ],
+     "rk": "tsbAp",
+     "ra": [
+      "th",
+      "<p>Thái hậu muốn có người hầu chuyện, Đức Thọ cung cho người sang mời ngươi.</p>"
+     ],
+     "optLayout": "rows",
+     "__sp13": {
+      "b0": 20
+     },
+     "__sp13c": 20,
+     "__kw": 1,
+     "__held": 1,
+     "__sg": "Thái hậu triệu||<p>Thái hậu muốn có người hầu chuyện, Đức Thọ cung cho người sang mời ngươi.</p>|null|Đến ngay/Cáo bệnh|"
+    },
+    "at": 1795823207155,
+    "n": 2
+   },
+   "tapEv": {
+    "isTrusted": true,
+    "__h2in": false
+   },
+   "tapIn": false,
+   "tapT": {},
+   "preQ": {},
+   "actTap": false,
+   "user": 0,
+   "ra": 6,
+   "kg": 0,
+   "ka": 0,
+   "bz": 0,
+   "mine": {
+    "t": "Tin mua được",
+    "who": {
+     "src": "https://ctm-img.victoria-tntt.workers.dev/img/por-maid-m44-a18.webp",
+     "hue": 0,
+     "ini": "T",
+     "col": "#b9a48a",
+     "__kp": {
+      "fc": "face-maid-25",
+      "fk": "maid",
+      "sid": 2,
+      "name": "Phỉ Thúy",
+      "role": "maid",
+      "face": 1,
+      "age": 20,
+      "loyal": 54,
+      "spyFor": 6,
+      "lover": null,
+      "af": {
+       "1": 30,
+       "13": 30
+      },
+      "org": "mồ côi, được Nội vụ phủ nuôi",
+      "net": [
+       "Điềm tĩnh",
+       "Thực dụng",
+       "Vì mình"
+      ],
+      "imp": "mắt hay liếc đồ quý",
+      "kn": 1,
+      "tin": 52,
+      "fcKeep": 1,
+      "trong": [
+       "Kiệm",
+       "Nhân"
+      ],
+      "mlike": "kd:Lễ vật",
+      "dis": [
+       "art:thi"
+      ],
+      "rk": 1,
+      "fid": "maid:m44",
+      "__feelMig": 1,
+      "tho": 51,
+      "thoM": 10,
+      "thoO": 6,
+      "sac": 47,
+      "tai": 6,
+      "duc": 34,
+      "tamco": 21,
+      "danh": 4,
+      "suc": 46,
+      "bac": 22,
+      "mp": 4,
+      "mt": {},
+      "khScar": 0,
+      "khTmp": 0,
+      "khSw": {
+       "b": 0
+      },
+      "eaX": {
+       "k": null,
+       "n": 0
+      }
+     },
+     "__kr": {
+      "role": "maid",
+      "rank": 1,
+      "origin": null,
+      "sex": "f",
+      "kid": false
+     },
+     "kk": "s2",
+     "rk": "sv1",
+     "rw": "Cung nữ tam đẳng"
+    },
+    "h": "<p>Hoàng hậu Lữ Ngưng Sương đang chạnh lòng, vì Phú Sát Nhạn Hồi múa được Hoàng thượng khen.</p>",
+    "__sg": "Tin mua được||<p>Hoàng hậu Lữ Ngưng Sương đang chạnh lòng, vì Phú Sát Nhạn Hồi múa được Hoàng thượng khen.</p>|null||",
+    "__c95": 1,
+    "__el": 1,
+    "__kw": 1,
+    "__seen": 1,
+    "__k61": 1,
+    "__b95": 1
+   }
+  },
+  "used": 0,
+  "buoi": 3,
+  "mg": null,
+  "modalHidden": true,
+  "next": {
+   "disabled": false,
+   "text": "Sang ngày mới"
+  },
+  "dqActEl": null,
+  "dqDawn": false,
+  "dqFreeScreen": true,
+  "build": {
+   "b": "0b372aa14258",
+   "bi": {
+    "s": "ca4a1689",
+    "b": "0b372aa14258",
+    "t": "2026-11-27T21:07Z"
+   }
+  }
+ },
+ "coop": {
+  "CW": null,
+  "room": null,
+  "seat": {
+   "url": "https://ctm-coop.victoria-tntt.workers.dev",
+   "name": "",
+   "pid": "44f02a3fbd1d425bbaeb0bac",
+   "state": {
+    "status": "off",
+    "room": "",
+    "you": "",
+    "seats": null,
+    "week": 0,
+    "ended": {
+     "a": false,
+     "b": false
+    },
+    "C": null,
+    "mine": null,
+    "msv": 0,
+    "peerOnline": false,
+    "bothIn": false,
+    "playing": false
+   },
+   "code": "",
+   "seat": null,
+   "week": 0,
+   "online": {
+    "a": false,
+    "b": false
+   },
+   "ended": {
+    "a": false,
+    "b": false
+   },
+   "frozen": false,
+   "waiting": false
+  }
+ },
+ "Q": 1
+}
