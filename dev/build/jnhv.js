@@ -165,7 +165,7 @@ function layout(re){if(!CUR||!L)return;const D0=geo();if(D0.H<80||D0.W<80){/* th
  const span=D.x1-D.x0,need=G.reduce((s,g)=>s+g.wU,0);let fh=D.fh;const gapMin=12;if(need*fh+gapMin*(G.length+1)>span)fh=Math.max(D.H*.34,(span-gapMin*(G.length+1))/need);CUR.fh=fh;
  const gap=(span-need*fh)/(G.length+1);let x=D.x0+gap;
  G.forEach(g=>{const cx=x+g.wU*fh/2;g.cx=cx;g.top=1e9;g.P.forEach(p=>{const m=p.m,h=fh*p.s,w=h*m.w0,mx=cx+(p.ux-g.cU)*fh;m.x=mx-w/2;m.y=D.feet-h;m.w=w;m.h=h;m.z=p.z;m.g=g;
-   const t=`translate(${m.x}px,${m.y}px)`;Object.assign(m.el.style,{width:w+"px",height:h+"px",zIndex:String(10+p.z)});if(!(SELM===m||(SEL===g&&SELM)))m.el.style.transform=t;m.el.__t=t;m.img.style.transform=p.flip?"scaleX(-1)":"";g.top=Math.min(g.top,m.y)});
+   const t=`translate(${m.x}px,${m.y}px)`;Object.assign(m.el.style,{width:w+"px",height:h+"px",zIndex:String(10+p.z)});if(!(SELM===m||(SEL===g&&SELM))){m.el.style.transform=t;plateS(m,1)}m.el.__t=t;m.img.style.transform=p.flip?"scaleX(-1)":"";g.top=Math.min(g.top,m.y)});
   x+=g.wU*fh+gap;capPut(g)});
  bgPut();/* LRM6: a re-layout (resize) put the bystanders back on their slots — while the board is up they yield again */G.forEach(g=>g.P.forEach(p=>{if(p.m)p.m.yd=null}));if(KP&&SELM&&liveM(SELM)){try{yieldFaces(SELM)}catch(e){}}tagsFix()}
 function tamPut(){try{if(!L)return;let e=L.querySelector(".nhv-tam");if(CUR&&CUR.tam&&typeof kitTam==="function"){if(!e){e=document.createElement("div");e.className="nhv-tam";e.innerHTML=kitTam(true);L.appendChild(e)}}else if(e)e.remove()}catch(x){}}
@@ -177,7 +177,7 @@ function capPut(g){if(!g.cap)return;if(!g.capEl||!g.capEl.isConnected){g.capEl=d
 function tagsFix(){try{if(!CUR)return;/* MAIN 127 FAIL 4: whatever wrote a plate, an unlearnt name reads «Người lạ», never «???» */L&&L.querySelectorAll(".nhv-tag .j59n,.nhv-tag .j59t").forEach(e=>{if(e.textContent.indexOf("???")>=0)e.textContent=e.textContent.replace(/\?\?\?/g,"Người lạ")});const F=CUR.G.flatMap(g=>g.P.map(p=>p.m)).filter(m=>m.tg);const pr=m=>(m===SELM?0:SEL&&m.g===SEL?1:2);F.sort((x,y)=>pr(x)-pr(y));const keep=[];
  const caps=CUR.G.map(g=>g.capEl&&g.capEl.style.visibility!=="hidden"&&g.capEl.getBoundingClientRect()).filter(Boolean);
  const stB=(document.getElementById("stage")||L).getBoundingClientRect();
- F.forEach(m=>{m.tg.style.visibility="";/* RV-163J FAIL-1: a plate never runs off the stage edge (kit 93.5b kitTagKeepIn) */try{if(typeof kitTagKeepIn==="function")kitTagKeepIn(m.tg,stB)}catch(x){}const r=m.tg.getBoundingClientRect();const hit=keep.some(k=>!(r.right<k.left-2||r.left>k.right+2||r.bottom<k.top-2||r.top>k.bottom+2));if(hit)m.tg.style.visibility="hidden";else keep.push(r)})}catch(e){}}
+ F.forEach(m=>{m.tg.style.visibility="";/* RV-163J FAIL-1: a plate never runs off the stage edge (kit 93.5b kitTagKeepIn) */try{if(typeof kitTagKeepIn==="function"){const d=kitTagKeepIn(m.tg,stB);/* ONE PLATE SIZE (LRM6): a counter-scaled plate (own scale 1/s inside a figure scaled s) — the kit measures its total scale (1) but the translate moves ×s on screen → ×own (KIT REQUEST K-TAG-OWNSCALE) */const own=parseFloat(m.tg.style.scale)||1;if(d&&own!==1)m.tg.style.translate=(d*own).toFixed(1)+"px 0"}}catch(x){}const r=m.tg.getBoundingClientRect();const hit=keep.some(k=>!(r.right<k.left-2||r.left>k.right+2||r.bottom<k.top-2||r.top>k.bottom+2));if(hit)m.tg.style.visibility="hidden";else keep.push(r)})}catch(e){}}
 function css(){if(document.getElementById("nhv-css"))return;const c=document.createElement("style");c.id="nhv-css";c.textContent=`
 html.nhvon #stage #tokens,html.nhvon #stage #mefig,html.nhvon #stage .kmemark,html.nhvon #stage #j59metag,html.nhvon #stage .j59more,html.nhvon #stage .kspet,html.nhvon #stage .j59chip{visibility:hidden!important}
 html.kv1.nhvon #stage .kshR{display:none!important}/* phone: the area needs the whole stage width (ring4 mock, reviewed) */
@@ -187,7 +187,7 @@ html.nhvon .kfoc-mood:not(.nhv-say),html.nhvon #stage .khead.ksay{display:none!i
 #nhv .nhv-f{position:absolute;left:0;top:0;transform-origin:50% 100%;cursor:pointer;contain:layout}
 #nhv .nhv-f>img.nhv-unk{filter:blur(1.6px) saturate(.55) brightness(.97)}/* a stranger: her own painting, softened — never a grey shape */
 #nhv .nhv-f>img{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;object-fit:contain;object-position:50% 100%}
-#nhv .nhv-tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:-6px;z-index:2;white-space:nowrap;pointer-events:none}
+#nhv .nhv-tag{position:absolute;left:50%;top:100%;transform:translateX(-50%);transform-origin:0 0;transition:scale .42s cubic-bezier(.2,.7,.2,1);margin-top:-6px;z-index:2;white-space:nowrap;pointer-events:none}html.kf-still #nhv .nhv-tag{transition:none}@media (prefers-reduced-motion:reduce){#nhv .nhv-tag{transition:none}}
 #nhv .nhv-tam{position:absolute;left:8px;bottom:6px;z-index:41;pointer-events:none}
 #nhv .nhv-cap{position:absolute;transform:translate(-50%,-100%);white-space:nowrap;z-index:40;pointer-events:none}
 #nhv .nhv-cap .kchip{font-size:13px;padding:3px 10px;box-shadow:0 2px 8px #0005}
@@ -213,8 +213,11 @@ function liveM(m){return !!(m&&m.g&&m.el&&CUR&&CUR.G&&CUR.G.includes(m.g))}
 function figsNot(g){if(!CUR||!CUR.G)return[];return CUR.G.filter(x=>x!==g).flatMap(x=>x.P.map(p=>p.m.el))}
 function pickGroup(g){if(!g||!CUR||!CUR.G||!CUR.G.includes(g)){SEL=SELM=null;return}closePk();if(SELM){if(liveM(SELM))back(SELM,true);else SELM=null}SEL=g;try{kitDim.on(()=>figsNot(g))}catch(e){}CUR.G.forEach(x=>{if(x.capEl)an(x.capEl,[{opacity:x===g?1:.45}],{duration:260})});tagsFix()}
 function unsel(){closePk();if(SELM){if(liveM(SELM))back(SELM);else SELM=null}SEL=null;try{kitDim.off()}catch(e){}if(CUR)CUR.G.forEach(x=>{if(x.capEl)an(x.capEl,[{opacity:1}],{duration:240})});tagsFix()}
-function back(m,quick){if(!liveM(m)){if(SELM===m||!liveM(SELM))SELM=null;return}const g=m.g;try{unyield(quick)}catch(e){}SELM=null;an(m.el,[{transform:m.el.__t}],{duration:quick?200:420});g.P.forEach(p=>{if(p.m!==m)an(p.m.el,[{transform:p.m.el.__t}],{duration:quick?200:360})});m.el.style.zIndex=String(10+m.z);
+function back(m,quick){if(!liveM(m)){if(SELM===m||!liveM(SELM))SELM=null;return}const g=m.g;try{unyield(quick)}catch(e){}SELM=null;g.P.forEach(p=>plateS(p.m,1));an(m.el,[{transform:m.el.__t}],{duration:quick?200:420});g.P.forEach(p=>{if(p.m!==m)an(p.m.el,[{transform:p.m.el.__t}],{duration:quick?200:360})});m.el.style.zIndex=String(10+m.z);
  CUR.G.forEach(x=>{if(x.capEl)x.capEl.style.visibility=""});tagsFix()}
+/* ONE PLATE SIZE (MAIN 186 ruling, law 10): a figure may step forward (×stepK), step back as a follower (sF) or yield (s), but her name plate keeps the
+   standard size — the plate is counter-scaled (CSS scale 1/s about its top centre, which sits on the figure's scaling origin) */
+function plateS(q,s){if(q&&q.tg)q.tg.style.scale=Math.abs(s-1)<.001?"":(1/s).toFixed(4)}
 /* step out: she walks to the talk spot (speaker-left rule); her followers stand beside her on the left with a gap, the plaque band keeps her right side free */
 async function stepOut(m){if(!liveM(m))return;const g=m.g;if(SEL!==g)pickGroup(g);if(!liveM(m))return;if(SELM&&SELM!==m){if(liveM(SELM))back(SELM,true);else SELM=null}SELM=m;const B=AB(),D=CUR.D,k=B.stepK||1.12,gp=(B.folGap||.05)*CUR.fh;
  /* her followers stand BEHIND-beside her on the left, in one row with a gap (never on her shoulder, never on each other — MAIN 127 FAIL 3); a smaller scale = further back.
@@ -229,10 +232,10 @@ async function stepOut(m){if(!liveM(m))return;const g=m.g;if(SEL!==g)pickGroup(g
   /* still short: the floor row may pass under the left icon rail (it hangs high on the wall) to the stage edge; only then it shrinks */
   const L=fw*sF+gp*fo.length>tx-D.x0-4?6:D.x0;room=tx-L-4-gp*fo.length;if(fw*sF>room)sF=Math.max(.2,room/fw)}
  const ty=Math.min(D.H-m.h*k-40,m.y+(B.stepY||.045)*D.H);
- const to=`translate(${tx+(m.w*(k-1))/2}px,${ty+m.h*(k-1)}px) scale(${k})`;m.el.style.zIndex="30";m.fx={x:tx,y:ty,w:W,h:m.h*k};
+ const to=`translate(${tx+(m.w*(k-1))/2}px,${ty+m.h*(k-1)}px) scale(${k})`;m.el.style.zIndex="30";plateS(m,k);m.fx={x:tx,y:ty,w:W,h:m.h*k};
  CUR.G.forEach(x=>{if(x.capEl)x.capEl.style.visibility="hidden"});
  const mid=`translate(${(m.x+tx)/2}px,${(m.y+ty)/2-8}px) scale(${(1+k)/2})`;an(m.el,[{transform:m.el.__t},{transform:mid,offset:.5},{transform:to}],{duration:still()?1:(B.walkMs||700)});
- const feet=ty+m.h*k-(B.folBack||.02)*D.H;let x=tx-gp;fo.forEach(q=>{const w=q.w*sF;x-=w;const cx=x+w/2;x-=gp;const t3=`translate(${cx-q.w/2}px,${feet-q.h}px) scale(${sF.toFixed(3)})`;q.fx={x:cx-q.w*sF/2,w:q.w*sF};/* LRM6 r3: her followers' FINAL box (yieldFaces reads it, never a mid-walk rect) */q.el.style.zIndex="29";
+ const feet=ty+m.h*k-(B.folBack||.02)*D.H;let x=tx-gp;fo.forEach(q=>{const w=q.w*sF;x-=w;const cx=x+w/2;x-=gp;const t3=`translate(${cx-q.w/2}px,${feet-q.h}px) scale(${sF.toFixed(3)})`;q.fx={x:cx-q.w*sF/2,w:q.w*sF};plateS(q,sF);/* LRM6 r3: her followers' FINAL box (yieldFaces reads it, never a mid-walk rect) */q.el.style.zIndex="29";
   an(q.el,[{transform:q.el.__t},{transform:t3}],{duration:still()?1:520})});
  await wait(still()?30:(B.walkMs||700)+40);tagsFix()}
 /* THẺ GỖ TREO = kit §98.1 kitPick, fed by the real act list of this person (jdfv dfData) */
@@ -245,7 +248,7 @@ function closePk(now){const k=KP;KP=null;if(!k)return;try{now?k.destroy():k.clos
 function pkRects(n){if(!L)return[];const h=L.getBoundingClientRect(),o=[];try{const B=kitPick.postBox(L,n);o.push({l:B.x0,r:B.x1,t:B.top-8,b:B.bottom})}catch(e){}
  L.querySelectorAll(".kpk-n,.kpk-post,.kpk-rail,.kpk-tabs").forEach(e=>{const r=e.getBoundingClientRect();if(r.width>1&&r.height>1)o.push({l:r.left-h.left,r:r.right-h.left,t:r.top-h.top,b:r.bottom-h.top})});return o}
 function faceOf(q,dx,s,ax){const F=AB().face||{x:.3,y0:.03,y1:.2},w=q.w*s,h=q.h*s,x=ax==null?q.x+dx+(q.w-w)/2:ax+(q.x+dx-ax)*s,y=q.y+q.h-h;return{l:x+w*F.x,r:x+w*(1-F.x),t:y+h*F.y0,b:y+h*F.y1}}
-function unyield(quick){if(!CUR)return;CUR.G.forEach(g=>g.P.forEach(p=>{const q=p.m;if(!q||!q.yd)return;q.yd=null;if(SELM&&q.g===SELM.g)return;an(q.el,[{transform:q.el.__t}],{duration:quick||still()?1:320})}))}/* one keyframe = from where the figure stands now (no jump back to the slot) */
+function unyield(quick){if(!CUR)return;CUR.G.forEach(g=>g.P.forEach(p=>{const q=p.m;if(!q||!q.yd)return;q.yd=null;if(SELM&&q.g===SELM.g)return;plateS(q,1);an(q.el,[{transform:q.el.__t}],{duration:quick||still()?1:320})}))}/* one keyframe = from where the figure stands now (no jump back to the slot) */
 /* a group yields AS ONE (LRM6 r2: a master stepping aside alone left her own follower standing in front of her — her tap point covered) and people never cross
    (area-test «people never overlap»: painted body = figure box minus ~22 % each side): the group goes to the free floor LEFT of the board nearest its own place — between the
    speaker + her followers, the groups that stay, the groups that already moved and the stage edge — at full size if it fits, else a step back (smaller, scaled about its
@@ -257,7 +260,7 @@ function yieldFaces(m,n){if(!CUR||!liveM(m)||!KP||!AB().face)return;/* BAL.area.
     (the follower stood at her old slot in the rect → a bystander yielded onto her, Fold loidi0 27 px) */
  m.g.P.forEach(p=>{const q=p.m;if(!q)return;const f=q===m?m.fx:q.fx;if(f&&f.w>2)occ.push(body(f.x,f.w));else{const r=q.el.getBoundingClientRect();if(r.width>2)occ.push(body(r.left-hr.left,r.width))}});
  CUR.G.forEach(g=>{if(g===m.g)return;const Q=g.P.map(p=>p.m).filter(Boolean);if(!Q.length)return;
-  if(Q.some(q=>hit(faceOf(q,0,1))))Y.push(Q);else{Q.forEach(q=>{occ.push(body(q.x,q.w));if(q.yd){q.yd=null;an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}})}});
+  if(Q.some(q=>hit(faceOf(q,0,1))))Y.push(Q);else{Q.forEach(q=>{occ.push(body(q.x,q.w));if(q.yd){q.yd=null;plateS(q,1);an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}})}});
  /* nearest the board first (it has the least way to go) */Y.sort((a,b)=>Math.max(...b.map(q=>q.x))-Math.max(...a.map(q=>q.x)));
  Y.forEach(Q=>{const l0=Math.min(...Q.map(q=>q.x+q.w*.22)),r0=Math.max(...Q.map(q=>q.x+q.w*.78)),Wg=r0-l0;let pl=null,s=1;
   for(s=1;s>=sMin-1e-6&&pl==null;s=+(s-.05).toFixed(2)){const w=Wg*s;const O=occ.filter(o=>o.r>6&&o.l<lim).sort((a,b)=>a.l-b.l);let a=6;const gaps=[];O.forEach(o=>{if(o.l-3>a)gaps.push([a,o.l-3]);a=Math.max(a,o.r+3)});if(lim>a)gaps.push([a,lim]);
@@ -265,7 +268,7 @@ function yieldFaces(m,n){if(!CUR||!liveM(m)||!KP||!AB().face)return;/* BAL.area.
   let up=(1-s)*(AB().faceRise||0)*CUR.D.H;/* further back = smaller AND standing higher on the floor (BAL.area.faceRise), never a doll on the front line */
   if(pl==null){/* no free floor: step back in place, faces clear of the board */s=1;while(Q.some(q=>hit(faceOf(q,0,s,l0)))&&s>sMin)s-=.04;pl=l0;up=0}
   occ.push({l:pl,r:pl+Wg*s});
-  Q.forEach(q=>{const bl=pl+(q.x+q.w*.22-l0)*s,vl=bl-q.w*s*.22,T=vl-q.w*(1-s)/2;q.yd={T,s};const to=`translate(${T}px,${q.y-up}px) scale(${s.toFixed(3)})`;an(q.el,[{transform:to}],{duration:still()?1:420})})})}
+  Q.forEach(q=>{const bl=pl+(q.x+q.w*.22-l0)*s,vl=bl-q.w*s*.22,T=vl-q.w*(1-s)/2;q.yd={T,s};plateS(q,s);const to=`translate(${T}px,${q.y-up}px) scale(${s.toFixed(3)})`;an(q.el,[{transform:to}],{duration:still()?1:420})})})}
 function openPk(m){closePk(true);if(!CUR||!liveM(m)||typeof kitPick==="undefined")return;let G=[];try{G=dfData(m.i)}catch(e){}
  /* names she has not learnt (the kit shows them as «???» on a button): those acts are not offered by that name */let unk=[];try{unk=(rivals||[]).filter(v=>typeof k61Named==="function"&&!k61Named(v)).map(v=>v.name).filter(Boolean)}catch(e){}
  G=(G||[]).map(g=>Object.assign({},g,{acts:(g.acts||[]).filter(a=>a&&a.n&&!/\?\?\?/.test(a.n+" "+(a.word||""))&&!unk.some(n=>String(a.n).includes(n)))})).filter(g=>g.acts.length);/* an act naming someone she has not learnt is not offered by that name (MAIN 127 FAIL 4, ring4 rule) */if(!G.length)return;
