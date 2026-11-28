@@ -54,8 +54,11 @@ const [,,BASE,SZ,OUT,TAG,NOSHOT]=process.argv;const [WH,DPR]=SZ.split('@');const
  R.lv=await p.evaluate(()=>{S.vir.hanh=0;S.virp.hanh=0;S.rcpL.phucthien=["s1"];const out=[];for(let i=0;i<5;i++){addVir(S,"hanh",S.vir.hanh+2);out.push(S.vir.hanh+":"+rcpKnown().phucthien.join(","))}return out});
  /* 7. Tác phẩm tab: course cards */
  await p.evaluate(()=>{S.vir.cong=5;tab="art";KTSUB.art="wk";render()});await p.waitForTimeout(1000);
- R.wk=Object.assign(await meas(),await p.evaluate(()=>({cards:["cong","dung","ngon","hanh"].filter(k=>document.querySelector(`#panel [data-skill="wk-${k}"]`)).length,prac:!!document.querySelector('#panel [data-tdsprac="cong"]')})));
- await p.evaluate(()=>{const c=document.querySelector('#panel [data-skill="wk-cong"]');if(c)c.scrollIntoView({block:'start'})});await shot('works');
+ /* R11 (F-TDWORKS): the four Tứ đức works are kit cells on the Tác phẩm tab (same .ktn-cell as the art works); the môn frame carries «Tự học, làm đồ» */
+ R.wk=Object.assign(await meas(),await p.evaluate(()=>{const cells=["cong","dung","ngon","hanh"].filter(k=>document.querySelector(`#panel .ktn-cell[data-tnmon="wk:wk:${k}"]`)).length;const art=document.querySelectorAll('#panel .ktn-cell[data-tnmon^="wk:wk:"]').length;return{cards:cells,cellsAll:art}}));
+ /* the frame of that cell carries «Tự học, làm đồ» (data-tdsprac) at bậc 5: read from the same list the cells and the frame are built from */
+ R.wk.prac=await p.evaluate(()=>{const o=ktWorksList().find(x=>x.k==="cong");return !!(o&&o.acts.some(h=>/data-tdsprac="cong"/.test(h))&&/Tự học, làm đồ/.test(o.acts.join("")))});
+ await p.evaluate(()=>{const c=document.querySelector('#panel .ktn-cell[data-tnmon="wk:wk:cong"]');if(c)c.scrollIntoView({block:'start'})});await shot('works');
  /* 8. practice at bậc 5 */
  R.prac=await p.evaluate(()=>{const n0=S.inv.length;tdsPractice("cong");const t=[...document.querySelectorAll('#modal .kshgo')].find(b=>!b.disabled);if(!t)return{none:1};t.click();chooseM(0);return{added:S.inv.length-n0,kind:S.inv[S.inv.length-1].wk.kind}});
  await close();await fresh();
