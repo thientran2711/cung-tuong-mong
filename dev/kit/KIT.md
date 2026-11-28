@@ -1639,6 +1639,8 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   badge of the pick box — every other part of the box (`.kipw > :not(.kipgo):not(.kippg)`: tile grid, detail card; `.opts.kiphas > :not(.kipw):not(.kscue)`: other option
   cards) is its own stacking context (`isolation:isolate`), so a chip's z-index (kitItem grade chip `.kgchip-fr` z3, stack / lock badges) stays inside it.
   Scan: `dev/test/pick-short-scan.js` «paint» column (every box element overlapping the confirm / pager hit-tested with pointer-events on: first view, scrolled, page 2).
+  A whole column that scrolls (person dialog `.kdpall`) and CAN hold row + pager + confirm but does not on this view scrolls up by exactly the shortfall
+  (`kipLift`, re-read after the layout settles, never scrolls down): the first row of the page never stands under the sticky pager (LIVE Fold «Cài đồ» 8 px, iPad 6 px).
   Confirm clicks the real option button, so chooseM and every wrapper (cost, j25 visit ticket, §64 item-event hooks) run unchanged.
   Above the card: the KIT §70 item detail strip (`kitItemDetail({e},{cls:"kidet-strip",noLux:true})`, jitd). Close = the kit ✕ (32.10), no Thôi row.
 - PAGES (K-LIST-PAGE, picker-dom 26/11, MAIN 164 play-stopper: a year-18 chest drew 36k–63k nodes, iPad tab crash): the grid shows ONE
