@@ -22,6 +22,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   hi:()=>{Math.random=()=>0.999},lo:()=>{Math.random=()=>0.0001},back:()=>{Math.random=window.__R0},
   logsSince:n=>S.logs.slice(0,Math.max(0,S.logs.length-n)),
   day:x=>{if(x){delete x.opz;delete x.opa}},/* a fresh day of the oán pace for that holder (joanpace opz / opa) */
+  fresh:x=>{if(x){delete x.opz;delete x.opa;delete x.spc;x.oan=0;x.rel=0}},/* TMK-WARN-3 (cap flake, law 4): a clean relation toward HER before a measured step — oán 0, liking 0, no oán-pace day, no stat-pace carry; else the random rival's
+     old oán (stat-pace slows a rise as it climbs, stops it at the rank top) and old dislike (a fall below 0 is paced too) moved the measured numbers ~1 run in 6 */
   ensureMine:()=>{if(!(S.staff||[]).some(x=>x.sid!=null))S.staff=(S.staff||[]).concat([mkServ("maid")]);return (S.staff||[]).find(x=>x.sid!=null)}}});
  /* 1 RECRUIT roads */
  /* lc34-3b-r1: these are the NO-knowledge roads, so the servant-trust witness roll (jsvt svTouch «seen» = the master learns through a real witness,
@@ -63,8 +65,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* c. her own servant bought by w: Hỏi thẳng / Theo dõi (spyFound) */
   {TK.day(S);const s=TK.ensureMine();s.spyFor=key(w);S.tmSold=null;const b0=TK.rel(S,w);const bb=spyFound(s);o.found={who:bb===w,sold:knSoldK(s),d:d(b0,TK.rel(S,w))};s.spyFor=null}
   /* d. plant refused at the gate */
-  {TK.day(w);const b0=TK.rel(w,S);spyLearn(w,S);o.direct=d(b0,TK.rel(w,S));
-   /* oan-pace: each learning is its own cause (lands in the same buổi), the daily cap still holds */const b1=TK.rel(w,S);spyLearn(w,S);spyLearn(w,S);spyLearn(w,S);o.cap={add:TK.rel(w,S).oan-b1.oan,first:o.direct.oan,day:BAL.oanPace&&BAL.oanPace.day};
+  {TK.fresh(w);const b0=TK.rel(w,S);spyLearn(w,S);o.direct=d(b0,TK.rel(w,S));
+   /* oan-pace: each learning is its own cause (lands in the same buổi), the daily cap still holds */const b1=TK.rel(w,S);spyLearn(w,S);spyLearn(w,S);spyLearn(w,S);o.cap={add:TK.rel(w,S).oan-b1.oan,first:o.direct.oan,day:BAL.oanPace&&BAL.oanPace.day,end:oan(w,S),top:typeof spTop==="function"?spTop("oan",spRk(S)):null,nf:typeof persF==="function"?persF(w,"slight",1):1};
    /* an ordinary cause after an own cause in the same buổi is NOT folded under the own cause (e[3] stays the ordinary fold) */TK.day(w);spyLearn(w,S);const b2=TK.rel(w,S);const n0=BAL.ag.know.tm.learn.oan;oanAdd(w,S,n0);o.after={add:TK.rel(w,S).oan-b2.oan,n:n0}}
   /* e. Mua chuộc refused and told (servant's own «Từ chối, bẩm chủ») */
   {TK.day(v);const s=TK.free(v);const b0=TK.rel(v,S);cnvBribeOpts(s,S,v,BAL.coopBribe.pay).find(x=>x.id==="tell").go();o.cnvTell=d(b0,TK.rel(v,S))}
@@ -73,7 +75,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r2.npcSearch.gone&&r2.npcSearch.d.oan>0,'an NPC\'s Tra xét finds her spy → that master resents her',r2.npcSearch);
  ok(r2.found.who&&r2.found.sold&&r2.found.d.oan>0,'her two-faced servant found (spyFound): recorded, she learns who bought him, oán toward him',r2.found);
  ok(r2.direct.oan>0&&r2.direct.aff===-r2.aff,'spyLearn: oán + BAL learn.oan, thiện cảm − BAL tm.oan',Object.assign({},r2.direct,{K:r2.K}));
- ok(r2.cap&&r2.cap.add>0&&(r2.cap.day==null||r2.cap.first+r2.cap.add<=r2.cap.day),'oan-pace × spy learning: a second learning in the same buổi still lands (own cause), the daily cap holds',r2.cap);
+ /* TMK-WARN-3: a nết-heavy holder (persF up to ×2.1) can reach stat-pace's rank top (spTop) with the first learning — then nothing more lands by canon (one cap per stat, MAIN 163); the own-cause claim is checked below the top */
+ ok(r2.cap&&(r2.cap.add>0||(r2.cap.top!=null&&r2.cap.end>=r2.cap.top))&&(r2.cap.day==null||r2.cap.first+r2.cap.add<=r2.cap.day),'oan-pace × spy learning: a second learning in the same buổi still lands (own cause) unless the first reached the rank top, the daily cap holds',r2.cap);
  ok(r2.after&&r2.after.add>0,'oan-pace × spy learning: an ordinary cause later in the same buổi still lands (an own cause does not raise the incident fold)',r2.after);
  ok(r2.cnvTell.oan>0,'Mua chuộc refused and told: the master resents the briber',r2.cnvTell);
  /* 2b svtouch-spylearn (MAIN 187, law 11): a WITNESS (jsvt svTouch «seen») telling the master her servant was turned = the ONE learn rule spyLearn
