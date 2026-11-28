@@ -783,3 +783,4 @@ Tứ đức works cards dead code jtds → show in Tác phẩm (F-TDWORKS) | rev
 B-ROW12-LEAVE BIG RV | review/row12-leave 4480ae6e | FOREMAN B ROOT3 child2 / rv session_01N1tNP2Dw6kcWdsVjWrLddR | RUNNING | 28/11 09:37Z
 B-COOP-REBIRTH-RESYNC r3 (successor of 2Y1YMPHD: room-e lãnh cung week-end hang PLAY-STOPPER + family + items 4/5 + finish r2 gates) | review/coop-rebirth-resync 752a40b8 | FOREMAN B ROOT3 child2 / worker session_01N1tNP2oQWGfQiP1xarkywv | RUNNING | 28/11 09:44Z
 D-FAMILY-GIFT (parking lot 26/11(c) gifts to family; ORDER MAIN 189 08:36Z; with row 10) | review/d-family-gift | FOREMAN D ROOT session_01964izEUYzmixcs6Yg5ZXsE / worker session_01964izCqcy28euSanyuhN8A | RUNNING | 28/11 09:55Z
+E-TIER-B13-RV (BIG review review/e-tier-b13 @6738c302 batch 1) | review/e-tier-b13-rv-m | session_01DgYSWptGZG8FdKXhToAAqr | RUNNING | 28/11 09:51Z (Foreman E C10)
