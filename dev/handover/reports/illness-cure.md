@@ -268,3 +268,34 @@ Lives A 180 · B 180 · seeded years A 517 · B 525 · 0 page errors · 0 job er
 - one-core-guard / -text / -bind / -text-rule: PASS. webkit-syntax 0. door-onetap: PASS.
 - quickcheck d43a2e39's code (a8a5b924) vs LIVE a96564ad --runs 3: QUICKCHECK PASS (open 2055 ms, old save loads + plays a buổi, 0 errors; perf median new/live render 262/290, tab 465/577, buổi 2034/1499, tasks>200 30/35) · TIME-SPILL PASS · CORE GATES FAIL only G4 94-q-softlock = the known flake (r3 / r4: fails on LIVE too); my standalone rerun crashed (browser closed), not reproduced further.
 - Shots (outside git, /home/user/wt/ic5-shots5, looked at): Fold + iPad «Công chúa Tiểu Ngọc lâm bệnh» card with the new words (trở nặng: khả năng rất thấp), roads + Tốn, no %.
+
+### r5b ORDER ADD (Foreman C 09:31Z: MAIN 189 08:39Z + BIG RV-183 08:55Z FAIL + RV-186) — RV READY (BIG, DELTA on 3185acbb) 8379d6c7 on LIVE aecbc267 (⊇ c03d6ee7)
+- (a) FOLDED review/illness-cure-rv183 c140662a (commit 8729f96c: merge; jone memberHint/costRead = no cost read as a gain on the plaque, F1 law 3/4; «both» rows carry c/hint). illness-cure.test keeps RV-183's plaque check (no tap: Tốn + odds word + real gain «khỏi bệnh», never «Bạc + / Sủng + / Sức +» for its own cost) AND the LIVE R11 one-tap row. Plaque now reads «THÀNH | khỏi bệnh: khả năng cao, chưa khỏi thì bệnh đỡ một bậc …».
+- (d) Merged NEWEST LIVE main **aecbc267** (lr-rules-r3 landed after c03d6ee7; c03d6ee7 is its ancestor): 2-parent merge de43b432, 0 LIVE deletions (git diff --diff-filter=D origin/main HEAD = empty), assemble.py quoted *.js = LIVE 513 + jillcure (⊇ LIVE), webkit-syntax 493 modules · 0 hits.
+- (e) MAIN 189 ruling kept: BAL.illCure.die3 = 25, no rank-scaled death (P1 not built).
+- Test hardening: r5 rows retry roll(100) (capped by BAL.odds.hi; one-off «royal 0» flake) + NEW row «the monthly fxIllMonth roll itself takes the servant's road» (the earlier MUTATE «hook off» passed through a direct-call row only).
+- (b)+(c) re-measured on this build. E's sim (same seeds, idle, 15 × 3 years × 12 origins), A = LIVE aecbc267, B = 8379d6c7:
+| phi tần | A | 8.41 | 0.205 | 2.4 % | 32.4 % | 32.3 % | 0 |
+| phi tần | B | 8.59 | 0.027 | 0.3 % | 37.8 % | 51.2 % | 0 |
+| cung nữ | A | 7.32 | 0.136 | 1.9 % | 27.9 % | 27.9 % | 317 |
+| cung nữ | B | 7.37 | 0.089 | 1.2 % | 33.4 % | 46.8 % | 296 |
+| thái giám | A | 7.55 | 0.089 | 1.2 % | 28.1 % | 27.5 % | 46 |
+| thái giám | B | 7.80 | 0.021 | 0.3 % | 34.1 % | 45.0 % | 36 |
+| children | A | 2.35 | 0.056 | 2.4 % | 28.4 % | 27.9 % | 14 · all child deaths 95 (0.18/yr) |
+| children | B | 2.40 | 0.009 | 0.4 % | 33.9 % | 45.2 % | 13 · all child deaths 51 (0.10/yr) |
+| thái y | A | 2.07 | 0.000 | 0.0 % | 29.7 % | 28.3 % | 0 |
+| thái y | B | 2.03 | 0.000 | 0.0 % | 33.5 % | 46.3 % | 2 |
+| thị vệ | A | 3.91 | 0.006 | 0.1 % | 29.4 % | 30.3 % | 14 |
+| thị vệ | B | 4.09 | 0.000 | 0.0 % | 33.7 % | 46.4 % | 7 |
+| royal (prince/princess) | A | 1.02 | 0.000 | 0.0 % | 29.9 % | 30.3 % | 4 |
+| royal (prince/princess) | B | 1.01 | 0.000 | 0.0 % | 34.1 % | 46.8 % | 2 |
+| men (officials) | A | 2.87 | 0.000 | 0.0 % | 29.4 % | 29.1 % | 21 |
+| men (officials) | B | 2.95 | 0.004 | 0.1 % | 32.9 % | 44.2 % | 13 |
+| Thái hậu | A | 0.19 | 0.010 | 5.2 % | 26.9 % | — | — |
+| Thái hậu | B | 0.17 | 0.009 | 5.6 % | 28.9 % | — | — |
+| HEROINE | A | 0.98 | 0.010 | 1.0 % | 29.8 % | 30.5 % | — |
+| HEROINE | B | 1.10 | 0.019 | 1.7 % | 30.7 % | 28.4 % | — |
+Lives A 180 · B 180 · seeded years A 516 · B 527 · 0 errors. Children all deaths **0.18 → 0.10 /yr** (≤ LIVE). Cung nữ 1.9 → 1.2 %/case, thái giám 1.2 → 0.3 %, all NPC 1.4 → 0.4 %. Heroine idle 1.0 → 1.7 % per case = 5 vs 10 deaths in ~520 cases, idle policy (no road taken; E run 2 had A 4.2 → B 2.6) — noise, flagged for RV.
+- npc-ill-road-scan (LIVE aecbc267 → 8379d6c7): road taken 0 → 350–365 of 600 in every group (servants vien; NPC mother kidMed), cure that month 14–18 % → 32–38 %; NPC mother's child (no road, 36 mo) died young 5.9 → 2.4 %, old 1.2 → 0.8 %.
+- Gates on 8379d6c7: illness-cure ALL OK ×3 · MUTATE staff hook off 2 · kid heal off 2 · servants summon 2 · mother road off 3 · worse 30 → 2 FAIL (clean 0) · one-core-guard / -text / -bind / -text-rule PASS · webkit-syntax 0 · door-onetap PASS · illness-sign-scan 117 / 0 gaps · illness-road-scan 0 errors · kid-illness-scan first hit kills 0 on every path.
+- quickcheck 8379d6c7 vs LIVE aecbc267 --runs 3: QUICKCHECK PASS (open 2956 ms, old save loads + plays a buổi, perf median new/live render 332/295, tab 584/573, buổi 1623/1694, tasks>200 29/36) · TIME-SPILL PASS · CORE GATES FAIL only G4 94-q-softlock (8). Standalone q-softlock (same box, alternating): LIVE aecbc267 0 · 1 · 1 · 0 · 0 · **4** · 0 FAIL; branch 4 · 4 · 4 · 1 · 5 · 4 · 0 · 0 · 0 · 1 FAIL. Same failure on both (fold / iPad person tap → «DEAD BUTTON» under div.kring-band, the view never opens in the 1.4 s wait → the test card shows) = the known q-softlock timing flake; a build without jillcure gave 0 · 0 (2 runs only). Bisect by mutation: render wrapper off still 4. Not a code path of the illness work that I can find; flagged for RV-186 / MAIN with the numbers.
