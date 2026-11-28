@@ -150,3 +150,63 @@ Shots (law 12, Fold 755×1000 + iPad 1180×820, looked 3×, scratch only /home/u
 
 
 HANDOVER: nothing open. Tools /home/user/wt/eg4b-tools (ev.js probe, shots.js, gates.sh / gates2.sh queues, mut.py = the four source mutants, units.sh), shots /home/user/wt/eg4b-shots, worktree /home/user/wt/eg4b. Context at finish ≈ 28 % (START ≈5 %), under the +25 % line plus push + report.
+
+---
+
+# E-GAIN4C — re-merge review/e-gain4b onto LIVE aecbc267, one design per family (worker report)
+
+PRIORITY #1 CHECK ('e-gain4|kemG|ACT-MOVE-6|toilGainP'): OD 0 new | main LIVE **aecbc267** (incl. ACT-MOVE-6 db0b3f84 + rules bundles) | review/* e-gain4b d1afe230 (base), e-gain4-rv-m cb84eec4 | claims E-GAIN4C = this (CLAIMS 28/11 10:30Z).
+KIT CHECK: reuses kaRows / kcls (j63, untouched), j25 optLine (game-side line writer), jone door fold, jdoor doorGain, the kit Ghi chú note row. No kit module edited (j19 / j63 / j79 / jk2b / jkpick untouched), no CSS / part → no KIT REQUEST. kit-std-scan: NOT RUN (see handover).
+Worker: E-GAIN4C session_01DgYSWmbTSBmW1pv5dm9cfk, **depth 3** (get_session lineage.depth), START_CTX ≈3 % (used_tokens reads 0; own estimate). Coordinator FOREMAN E C11 session_01DgYSWnTLKESBZ9JC7oK5Xh.
+
+Branch **review/e-gain4c** head **012cb189** = merge of d1afe230 + origin/main aecbc267 (parents d1afe230, aecbc267). Diff vs LIVE: dev/build/{j9,j10,j15,j25,j83,jdoor,jone,jrcv,jtoil}.js + 5 tests + built index.html / sw.js (assets.json = LIVE). jmline / jration = LIVE byte for byte.
+
+## Per family (law 14 — one design; proof = unit / scans on the MERGE, LIVE-first build first)
+I first built the merge with every conflict hunk = LIVE (E-GAIN4's non-conflicting hunks kept) and ran e-gain4-unit: **23 ok / 3 fail** (c, d, g). Then per family:
+
+| family | LIVE on the merge | kept |
+|---|---|---|
+| jmline «Vu tội» | Thành green spans (bị phạt quỳ, lòng −N, bị đuổi: chance) — meets law 3 | **LIVE**; E-GAIN4 line dropped |
+| j15 «Mua chuộc» | Thành «<tên> thành tai mắt», Bạc paid on success, hỏng «có thể mách chủ» — meets law 3 | **LIVE**; E-GAIN4 line + the «hắn» fix dropped (LIVE prints the name) |
+| jration «Mượn son phấn» | kit: Thành = the share, willingness word → Ghi chú (kitParse proof) — meets law 3 + item 2 | **LIVE**; E-GAIN4B line dropped |
+| jone one-tap («Dò la» …) | LIVE copies k / tgt → the AOUT line prints «Thành chứng cứ + · Tâm cơ ++» (unit d2 ok on LIVE-first build) | **LIVE** (+ kem / kemG copy); E-GAIN4 (d) doorGain block dropped. Unit (d) re-pointed to the PRINTED card (it read the raw x). |
+| j10 faction panel | LIVE rewrite still leads Được with the bare willingness word and types `can(2)` / `spend(-2)` | **LIVE rewrite** + E-GAIN4B note «(ý nàng: …)» after the gain + can / spend / text from `BAL.btn.fac.k` (law 4; the panel had 2 keys, now 1) |
+| jtoil dress verdict | LIVE `kem` carrier + j25 appends «kèm: …» at the END. **FAILS on the merge**: the kit hangs a trailing «kèm:» on the block before it, so on every ROLLED card the praise sits in **Bại** (kitParse proof: «Vững · … · hỏng: không được gì · kèm: …quý ta +1» → Bại; also on plain LIVE: row-law3 LIVE iPad cao «Thỉnh an Bại: … Đức +», «Bại: Hoàng hậu thiện cảm ++»); door / tier / one-tap cards lose the verdict entirely (kem not carried) | **ONE design = LIVE's carrier, split per KIT 6**: jtoil writes her gain on `kemG`, the loss on `kem` (toilGainP); j25 optLine prints «được: kemG · kèm: kem» **before** «hỏng:» on all 3 paths; jone: door / tier cards carry their talk members' kemG / kem once, one-tap = the picked way's own. E-GAIN4's TOILV split → x / risk and E-GAIN4B toilG removed. |
+| j25 j25Gain | LIVE's labelled pass-through already handles labelled x | narrowed to whole «(…)» notes only (the labelled half was dead on LIVE) |
+Kept from E-GAIN4/4B unchanged (LIVE has no version): tab data lines + P13r cat (a), lockW / tierW (b), j9 / j83 / jrcv rcvWordN (item 2), jrcv rcvHelpX (d), jdoor «(A, B)» note (item 3), gain-empty §104.2d skip.
+
+## Tests adapted (each still exits 1 on its SOURCE mutant — dev/build reverted, rebuilt, /home/user/wt/eg4c-tools/mut.py)
+- e-gain4-unit (c): reads the printed card (praise in Được / Thành, never Bại / Mất / Ghi chú) + NEW jealousy check (ghen + → Kèm, never Được / Bại); (d): printed Thành / Được of every one-tap door, never only a price; (g): verdict carried on x / kem / kemG; env MUTANT=c removed (source mutant).
+- e-gain4b-scan: TOILMISS «carries the verdict» reads x or kemG. row-law3-scan: env mutant c removed.
+
+## Gates on 012cb189 (Fold 755×1000, iPad 1180×820)
+| gate | result |
+|---|---|
+| e-gain4-unit Fold / iPad | **28 ok / 0 fail** both (LIVE-first merge build: 23 / 3) |
+| unit SOURCE mutants b2 / f / c / g / d2 | exit **1 / 1 / 1 / 1 / 1** (b2: 74 «—» summaries; f: 3 word-in-Thành; c: praise in Bại; g: 10 verdict-not-in-Được; d2: «Dò la: Bạc −−») |
+| e-gain4b-scan Fold / iPad (6 states, verdict stubbed) | WORD 0 · TOILNOTE 0 · TOILMISS 0 — 1771 / 2035 cards |
+| e-gain4b-scan SOURCE mutants g / f (hh, cao) | exit **1** (TOILMISS 5) / exit **1** (WORD 2) |
+| row-law3-scan Fold per state | dau 446 · toi 656 · cao 661 · con 808 · hau 411 → **0/0/0**; hh **PLUS 1** «Hãm hại › Hạ độc · nặng … Bị phạt +» = LIVE-own (below) |
+| row-law3-scan iPad per state | dau 339 · toi 915 · con 549 → 0/0/0; cao / hau / hh **PLUS 1** = the same «Hạ độc · nặng» line, LIVE-own |
+| row-law3-scan **LIVE aecbc267** iPad cao | PLUS **3**: the same «Hạ độc · nặng … Bị phạt +» + 2× «Thỉnh an» verdict in Bại (fixed on the merge) |
+| gain-empty Fold | 1342 cards, **0 empty** |
+| door-loss Fold | 535 ways, 0 bad |
+| door-row-hint Fold | **exit 1**: «P5 › Dò la» one-tap row hint «chẳng được gì; nhưng Chứng cứ −» vs line «chứng cứ +, Tâm cơ ++» — **LIVE aecbc267 the same rows** (LIVE-own since ACT-MOVE-6's k / tgt copy; E-GAIN4's dropped (d) block used to mask it) → QUESTION below |
+| webkit-syntax | 492 modules, parse-level 0 |
+| time-spill-guard static | PASS |
+| page errors | 0 in every run |
+| poptab-scan Fold | 1226 cards, **0 wrong-tab** |
+| iPad gain-empty / door-row-hint / door-loss / poptab | running at hand-over |
+| quickcheck · q-softlock A/B ×2 · act-audit · kit-std-scan · door-row-hint MUTANT | **NOT RUN** (rollover) |
+| law-12 shots | **incomplete**: on this LIVE the consort pop-up is the kitPick plaque board (§98): a plaque shows name + cost only (tap = lift + ✓), so the card rows are not on screen there; the deck shot did not land on the «Nghỉ ngơi» tab. Script /home/user/wt/eg4c-tools/shots2.js (device lib, overlay skip, real tap). |
+
+## QUESTION for FOREMAN E (design, not guessed)
+«Dò la» one-tap door: LIVE ACT-MOVE-6 copies k / tgt so the card prints the AOUT line (Thành chứng cứ +), but the kit row hint (jk2b kitHint, read by door-row-hint) says «chẳng được gì; nhưng Chứng cứ −». Fix in (a) jone (re-add E-GAIN4's doorGain d.x next to LIVE's k / tgt — two writers for one card, law 14 risk) or (b) the kit hint reader (KIT REQUEST to the kit keeper)? Same on LIVE, so not merge-born.
+
+## LIVE-own (for Foreman E)
+- «Hãm hại › Hạ độc · nặng» Bại ends «… Bị phạt +» (jaudit aaDeathTxt line + jk2b «Bị phạt» tag read as plus) → row-law3 PLUS in every state where drawn, LIVE the same.
+- kit kcls reads the frown verdict «nàng ta quý ta −N» as a gain («nàng … −N» = harm to a rival) → printed in Được / green Kèm. Wording or kcls fix; not touched.
+
+## HANDOVER (worker roll at ≈START_CTX + 25 %; the coordinator opens the successor)
+Open: (1) answer the QUESTION, then door-row-hint Fold + iPad + MUTANT=1; (2) iPad gain-empty / door-loss / poptab (re-run: this container's lane files /home/user/wt/eg4c-out/{fold,ipad}/sum.txt die with it); (3) quickcheck vs aecbc267, q-softlock A/B ×2 (HTTP), act-audit cao Fold, kit-std-scan REPORT_ONLY SUBS=0 Fold + iPad (= LIVE); (4) law-12 shots of the 3 items (pop-up plaque board shows no rows — shoot the hand / hint the owner sees, deck «Nghỉ ngơi» tab with 3 khắc spent). Then «RV READY BIG (delta) review/e-gain4c <sha>».
+Tools: mut.py (5 source mutants), mutrun.sh, mutscan.sh, lane.sh, probe.js / kp.js (kitParse of any line), shots2.js — under /home/user/wt/eg4c-tools (copy them out if the container is reused).
