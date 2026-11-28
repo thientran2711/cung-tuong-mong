@@ -1,0 +1,486 @@
+{
+ "at": "2026-11-28T02:03:06.028Z",
+ "url": "http://127.0.0.1:8803/",
+ "S": {
+  "name": "Thượng Quan Hàn Yên",
+  "year": 4,
+  "turn": 46,
+  "tuan": 1,
+  "buoi": 3,
+  "dead": false,
+  "rank": 0,
+  "place": "home"
+ },
+ "top": null,
+ "qs": {
+  "Q": [
+   "Một ánh mắt"
+  ],
+  "DQ": {
+   "want": null,
+   "t": 0,
+   "mt": 471339,
+   "newsHold": 0,
+   "fo": {},
+   "stat": {
+    "held": 3,
+    "ran": 3,
+    "dropped": 0,
+    "modalHeld": 1190,
+    "newsFirst": 3,
+    "kmHeld": 235,
+    "actHeld": 45,
+    "pulled": 4,
+    "actKm": 0,
+    "painted": 91,
+    "tapPaint": 2,
+    "netArm": 47,
+    "rearm": 140,
+    "newsLet": 0,
+    "newsPass": 3,
+    "tapRe": 0,
+    "afterPaint": 76,
+    "staleNext": 6,
+    "mineTap": 56,
+    "woke": 4,
+    "mineFront": 2,
+    "park": 4,
+    "unpark": 4
+   },
+   "park": null,
+   "tw": 1795831378454,
+   "pdT": 1795831384383,
+   "tapEv": {
+    "isTrusted": true,
+    "__h2in": false
+   },
+   "tapIn": false,
+   "tapT": {},
+   "preQ": {},
+   "actTap": false,
+   "user": 0,
+   "kz": 0,
+   "wk": {
+    "m": {
+     "ev": 1,
+     "t": "Một ánh mắt",
+     "who": {
+      "rk": "off",
+      "rw": "Vương gia",
+      "src": "https://ctm-img.victoria-tntt.workers.dev/img/por-man-vuonggia-2-a26.webp",
+      "hue": 0,
+      "ini": "C",
+      "col": "#6a8aa0",
+      "__kp": {
+       "id": "m2",
+       "role": "Vương gia",
+       "rw": "vương gia",
+       "haunts": [
+        "vuon",
+        "tn"
+       ],
+       "age": 30,
+       "name": "Vương gia Quách Phụng Chi",
+       "loyal": 39,
+       "af": 0,
+       "tinh": 13,
+       "letters": 1,
+       "trysts": 0,
+       "alive": true,
+       "knowsMe": [],
+       "likeV": 7,
+       "net": [
+        "Nhiều chuyện",
+        "Thực dụng",
+        "Ham vui"
+       ],
+       "mlike": "art:vu",
+       "dis": [
+        "art:hoa",
+        "art:thi"
+       ],
+       "tho": 46,
+       "thoM": 12,
+       "thoO": 3,
+       "fc": "face-emperor-5",
+       "fk": "emp0",
+       "fcKeep": 1,
+       "fid": "man:vuonggia-2",
+       "tin": 44,
+       "eaX": {
+        "k": null,
+        "n": 0
+       },
+       "nr": {
+        "o": "vg",
+        "r": "vg_dat",
+        "n": 0,
+        "k": -1,
+        "t": 46,
+        "h": 6,
+        "hs": -1,
+        "hb": 0,
+        "c": "m3",
+        "e": "đất phong lụn bại",
+        "x": 1,
+        "l": [
+         [
+          4,
+          1
+         ],
+         [
+          5,
+          -1
+         ],
+         [
+          6,
+          -1
+         ],
+         [
+          7,
+          1
+         ],
+         [
+          8,
+          1
+         ],
+         [
+          9,
+          1
+         ],
+         [
+          10,
+          -1
+         ],
+         [
+          11,
+          -1
+         ]
+        ],
+        "cn": "Nhạc sư Từ Tư Viễn",
+        "rc": "",
+        "hp": []
+       },
+       "__feelMig": 1,
+       "ill": null,
+       "emo": null,
+       "emoH": [
+        {
+         "k": "vui",
+         "v": 25,
+         "why": "lòng hướng về ngươi",
+         "w": 61,
+         "c": "sec"
+        }
+       ],
+       "__mkL": null,
+       "mk": [],
+       "__mkAt": 2236
+      },
+      "__kr": {
+       "role": "royal",
+       "rank": null,
+       "origin": null,
+       "sex": "m",
+       "kid": false
+      },
+      "kk": "nm2"
+     },
+     "h": "<p>Vương gia Quách Phụng Chi đem lòng thương ngươi, lén gửi qua cung nữ một bài thơ chép tay.</p>",
+     "opts": [
+      {
+       "n": "Giữ bài thơ, đáp lại",
+       "fx": {},
+       "x": "hắn tình ý +10 · bài thơ là tang vật nếu bị lục"
+      },
+      {
+       "n": "Đốt đi, làm ngơ",
+       "fx": {
+        "duc": 1
+       },
+       "x": "không để lại tang vật · hắn tình ý -5"
+      }
+     ],
+     "rk": "ap.manPoem",
+     "ra": [
+      {
+       "kind": "manPoem",
+       "who": {
+        "@p": "m2"
+       },
+       "tgt": {
+        "@p": "me"
+       },
+       "why": "đem lòng thương ngươi",
+       "place": null,
+       "flag": null,
+       "s": 43
+      }
+     ],
+     "__sp13": {
+      "b0": 556
+     },
+     "__sp13c": 556,
+     "evId": "j24:mot-anh-mat",
+     "__kw": 1,
+     "__held": 1,
+     "__sg": "Một ánh mắt||<p>Vương gia Quách Phụng Chi đem lòng thương ngươi, lén gửi qua cung nữ một bài thơ chép tay.</p>|null|Giữ bài thơ, đáp lại/Đốt đi, làm ngơ|",
+     "evcN": 140
+    },
+    "at": 1795831381214,
+    "n": 2
+   },
+   "bz": 0,
+   "ra": 6,
+   "kg": 0,
+   "ka": 0,
+   "mine": {
+    "t": "Tin mua được",
+    "who": {
+     "src": "https://ctm-img.victoria-tntt.workers.dev/img/por-maid-m09-a18.webp",
+     "hue": 0,
+     "ini": "L",
+     "col": "#b9a48a",
+     "__kp": {
+      "fc": "face-woman-mid-5",
+      "fk": "maid",
+      "sid": 217,
+      "name": "Hách Ngân Linh",
+      "role": "maid",
+      "face": 25,
+      "hue": 0,
+      "age": 22,
+      "loyal": 0,
+      "spyFor": 20,
+      "lover": null,
+      "af": {
+       "6": 56,
+       "179": -8
+      },
+      "org": "mồ côi, được Nội vụ phủ nuôi",
+      "net": [
+       "Điềm tĩnh",
+       "Ham lợi",
+       "Tham vọng"
+      ],
+      "imp": "khéo nói, nhanh tay",
+      "kn": 1,
+      "sac": 59,
+      "tai": 25,
+      "duc": 32,
+      "tamco": 18,
+      "danh": 0,
+      "suc": 68,
+      "bac": 37,
+      "mp": 21,
+      "rk": 3,
+      "nr": {
+       "o": "cnv",
+       "r": "cnv_chu",
+       "n": 5,
+       "k": -1,
+       "t": 49,
+       "h": 10,
+       "hs": 0,
+       "hb": 0,
+       "c": 179,
+       "e": "Bị trả về Nội vụ phủ",
+       "x": 0,
+       "l": [
+        [
+         4,
+         -1
+        ]
+       ],
+       "cn": "Vu Băng Nhi",
+       "rc": "",
+       "hp": []
+      },
+      "tin": 100,
+      "__feelMig": 1,
+      "__mkAt": 2204,
+      "trong": [
+       "Cần",
+       "Lễ"
+      ],
+      "fid": "maid:m09",
+      "mlike": "kd:Lễ vật",
+      "dis": [
+       "art:cam"
+      ],
+      "khScar": 0,
+      "khTmp": 0,
+      "khSw": {
+       "b": 0
+      },
+      "fcKeep": 1,
+      "eaX": {
+       "k": null,
+       "n": 0
+      },
+      "mt": {
+       "m3": 2.5
+      },
+      "emo": null,
+      "emoH": [
+       {
+        "k": "so",
+        "v": 30,
+        "why": "chủ nhân đang nổi giận",
+        "w": 137,
+        "c": "sec"
+       },
+       {
+        "k": "choang",
+        "v": 40,
+        "why": "bị Hạ Phỉ Thúy tát",
+        "w": 137,
+        "c": "pub",
+        "e": "dazed"
+       }
+      ],
+      "__mkL": null,
+      "mk": [],
+      "inv": [
+       {
+        "k": "vaibong",
+        "from": "noivu",
+        "d": 46
+       },
+       {
+        "k": "aldau0",
+        "from": "noivu",
+        "d": 46,
+        "u": 6
+       },
+       {
+        "k": "tragoi",
+        "from": "noivu",
+        "d": 46
+       },
+       {
+        "k": "thanden",
+        "from": "noivu",
+        "d": 46
+       }
+      ],
+      "tho": 27,
+      "thoM": 6,
+      "thoO": 4,
+      "mgH": {
+       "null": 11
+      },
+      "mgHv": {
+       "null": "n/7/1.5"
+      },
+      "exCd": 0,
+      "trouble": 125,
+      "pen": null,
+      "seek": null,
+      "pilN": 2,
+      "lvCd": 48,
+      "proud": 0,
+      "slap": {
+       "sev": 1,
+       "until": 139,
+       "by": 24,
+       "at": 137
+      },
+      "seekCd": 51,
+      "spc": {
+       "sung": -0.2
+      },
+      "sung": 3,
+      "trM": {
+       "k": 24,
+       "o": {
+        "Lễ": -0.935
+       },
+       "w": 137
+      },
+      "intel": [],
+      "pilDet": 52,
+      "pilOk": 0
+     },
+     "__kr": {
+      "role": "maid",
+      "rank": 3,
+      "origin": null,
+      "sex": "f",
+      "kid": false
+     },
+     "kk": "s217",
+     "rk": "sv3",
+     "rw": "Cung nữ nhất đẳng"
+    },
+    "h": "<p>Đức quý nhân Hạ Phỉ Thúy đang nắm 2 chứng cứ về ngươi.</p>",
+    "__sg": "Tin mua được||<p>Đức quý nhân Hạ Phỉ Thúy đang nắm 2 chứng cứ về ngươi.</p>|null||",
+    "__c95": 1,
+    "__el": 1,
+    "__kw": 1,
+    "__seen": 1,
+    "__k61": 1,
+    "__b95": 1
+   }
+  },
+  "used": 0,
+  "buoi": 3,
+  "mg": null,
+  "modalHidden": true,
+  "next": {
+   "disabled": false,
+   "text": "Sang ngày mới"
+  },
+  "dqActEl": null,
+  "dqDawn": false,
+  "dqFreeScreen": true,
+  "build": {
+   "b": "0b372aa14258",
+   "bi": {
+    "s": "ca4a1689",
+    "b": "0b372aa14258",
+    "t": "2026-11-27T21:07Z"
+   }
+  }
+ },
+ "coop": {
+  "CW": null,
+  "room": null,
+  "seat": {
+   "url": "https://ctm-coop.victoria-tntt.workers.dev",
+   "name": "",
+   "pid": "44f02a3fbd1d425bbaeb0bac",
+   "state": {
+    "status": "off",
+    "room": "",
+    "you": "",
+    "seats": null,
+    "week": 0,
+    "ended": {
+     "a": false,
+     "b": false
+    },
+    "C": null,
+    "mine": null,
+    "msv": 0,
+    "peerOnline": false,
+    "bothIn": false,
+    "playing": false
+   },
+   "code": "",
+   "seat": null,
+   "week": 0,
+   "online": {
+    "a": false,
+    "b": false
+   },
+   "ended": {
+    "a": false,
+    "b": false
+   },
+   "frozen": false,
+   "waiting": false
+  }
+ },
+ "Q": 1
+}
