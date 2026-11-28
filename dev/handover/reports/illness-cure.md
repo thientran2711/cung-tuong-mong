@@ -150,3 +150,48 @@ page errors: 0
 - kit-std-scan (REPORT_ONLY, Fold + iPad): X02 20 · X06 12 · X08 6 — identical on base (pre-existing); 0 page errors.
 - quickcheck c1c5cb0e: QUICKCHECK PASS (open 2165 ms, old save loads + plays a buổi, perf new/live render 283/301, tab 469/472, buổi 1582/3211, tasks>200 29/31) · TIME-SPILL PASS · CORE GATES FAIL only G4 94-q-softlock: iPad person tap covered by div.kring-band (realtap DEAD BUTTON) → the view never opens; flaky on BOTH: branch reruns 4 / 0 fails, base 261d91f1 reruns 7 / 0 fails.
 - Shots (outside git, /home/user/wt/ic-shots): fold/ipad 1 ill card (HUD Sức 60/60, «Còn bệnh thì Sức tối đa chỉ 60»), 2 nặng back, 3 child card «<con> lâm bệnh».
+
+
+## r4 (Foreman C 4-1-1-1, MAIN 186 04:36Z + Foreman E) — RV READY (BIG) 3185acbb on LIVE 5ad52416
+Session ILLNESS-CURE-3 session_01PEhRbtbBbshrnnUWtz5oyX, depth 4, START_CTX ~3 %.
+PRIORITY #1 CHECK ('catchIll|illAlarm|srvCards|srvHud2|srvIllWorld|Tâm bệnh'): OD 28/11 02:20Z MAIN 185 rulings + MAIN 186 order | main 5ad52416: j13 catchIll (10+ callers: j13 month, jemoact mood, jmort grief/age, jkh, jweather, jworld, jworld2), j42 srvCards / srvHud2 / srvIllWorld (her own illness left out of the month roll in a maid life), no fall-ill card | review/illness-cure c1c5cb0e (built on) | claims ILLNESS-CURE (this item).
+KIT CHECK: reuses DOOR.card + kitHand (the same illness tier card), the hud2 «ill» chip builder (c() in srvHud2 = the consort chip; k3 top bar reads it), deck cards (illCards), optLine kit line (main E-GAIN3-LIVE). No new UI part.
+
+### (3) Merge LIVE 5ad52416 (commit ea3bed19)
+- Conflicts: index.html / sw.js (rebuilt) and jone deckM / deckTap: main (E-GAIN3-LIVE) now gives the member line via optLine and rows {c, hint}; taken as main. Main also defines a second DOOR.lineOf (string → string) AFTER my r1 export, so my DOOR.lineOf(a) callers got "[object Object]": my export removed; jillcure now builds its rows exactly like main's deckTap (optLine, c, hint); illness-cure.test reads optLine too.
+
+### (1) MILD illness is never HUD-only (commit 3185acbb)
+Repro on the branch: the chip path was fine (39/39), but (a) NO card opened when she FELL ill — the alarm fired only at nặng / nguy kịch, so a mild illness (Tâm bệnh never reaches a death roll) lived on the HUD only; (b) a CUNG NỮ had no illness chip at all (j42 srvHud2 rebuilds hud2 without «ill»), no cure road (srvCards holds none → bare notice) and false words (month odds, while j42 srvIllWorld keeps her out of the month roll: her illness never heals nor worsens by itself). Lead (e) checked: law 2 binds a bạc road to a matching road; nhẹ / vừa have no bạc road, nặng shows both (r2) — no change.
+Fix (jillcure + one line j42):
+- catchIll wrap: the moment SHE falls ill (any illness, every path), illAlarm → the illness card opens by itself once when the screen is free (danger words + tier roads).
+- cung nữ: chip «<bệnh> · <stage>» in srvHud2 (same chip, top bar reads it); srvCards + illDeck give her the servant's real roads: Tĩnh dưỡng (nhẹ) · Tự bốc thuốc (nhẹ, Y thuật) · Sang Thái y viện xin thuốc (vừa, Sức) — no thái y summons, no Sủng plea, no bạc road (law 2 n/a); her danger line says the truth: «Thân cung nữ không ai lo thuốc thang: bệnh không tự khỏi, cũng không tự nặng thêm. … Phải tự chạy chữa.»
+
+Family scan (law 11) — NEW dev/tools/illness-sign-scan.js: 13 illnesses × 3 stages × 3 lives (Hành sự / lãnh cung / cung nữ) = 117 cases; L = LIVE 5ad52416, B = branch before r4 (ea3bed19), A = after (3185acbb):
+| Life | Stage | shown L/B→A | card opens by itself L/B→A | chip tap → roads L/B→A | danger words L/B→A |
+|---|---|---|---|---|---|
+| hs | nhẹ | 13/13 → 13 (of 13) | 0/0 → 13 (of 13) | 0/13 → 13 (of 13) | 0/13 → 13 (of 13) |
+| hs | nặng | 13/13 → 13 (of 13) | 0/13 → 13 (of 13) | 0/13 → 13 (of 13) | 0/13 → 13 (of 13) |
+| hs | nguy kịch | 13/13 → 13 (of 13) | 0/13 → 13 (of 13) | 0/13 → 13 (of 13) | 0/13 → 13 (of 13) |
+| cold | nhẹ | 13/13 → 13 (of 13) | 0/0 → 13 (of 13) | 0/13 → 13 (of 13) | 0/13 → 13 (of 13) |
+| cold | nặng | 13/13 → 13 (of 13) | 0/13 → 13 (of 13) | 0/13 → 13 (of 13) | 0/13 → 13 (of 13) |
+| cold | nguy kịch | 13/13 → 13 (of 13) | 0/13 → 13 (of 13) | 0/13 → 13 (of 13) | 0/13 → 13 (of 13) |
+| srv | nhẹ | 0/0 → 13 (of 13) | 0/0 → 13 (of 13) | 0/0 → 13 (of 13) | 0/0 → 13 (of 13) |
+| srv | nặng | 0/0 → 13 (of 13) | n/a/n/a → n/a (of 13) | 0/0 → 13 (of 13) | 0/0 → 13 (of 13) |
+| srv | nguy kịch | 0/0 → 13 (of 13) | n/a/n/a → n/a (of 13) | 0/0 → 13 (of 13) | 0/0 → 13 (of 13) |
+
+Summary: LIVE gaps 117/117 · before 65/117 · after 0/117 (no % anywhere; law 2 bạc ⇒ non-bạc in the same tier: 0 breaks). Cung nữ nặng / nguy kịch sign = n/a: her illness never moves up (srvIllWorld).
+
+### (2) Year-1 deaths (Foreman E b88 Kiết lỵ / b120 Lao phổi, age 18–19, no cure taken)
+Numbers on the branch (page sim, real j13 illMonthP + jbal2 + jmort rolls, treat(), 3000 trials, rank-1 start: bạc 160, Sủng 8, Sức 80, age 19):
+- Payable roads for that start: Truyền thái y (bạc 40, khỏi 55) · Cầu xin ngự y (Sủng 4, 55) · Sang Thái y viện xin thuốc (Sức 8, 40) · Tĩnh dưỡng (free, 20). With bạc 0 and Sủng < 4 she still has Tĩnh dưỡng + xin thuốc.
+- Untreated monthly (BAL): Lao phổi khỏi 15 · trở nặng 30 · nguy kịch death 53 (j13 die3 25 × jbal2 illDie 2 × jmort); Kiết lỵ 30 · 25 · 28.
+- Caught at nhẹ, death within 12 months: Lao phổi no cure 34.8 % · ONE free Tĩnh dưỡng a month 2.2 % · two 0.3 %; Kiết lỵ 9.4 % · 0.7 % · 0.1 %.
+- Warnings before a death can roll: card when she falls ill (NEW r4) → card at nặng → card at nguy kịch + one full month with no death roll (r1) = at least 3 cards and ~3 months (≈ 36 buổi) to act.
+Answer: on LIVE those heroines got no card at all; on this branch a rank-1 heroine with little bạc gets the card + words + a free road from the first day, so an early death now needs her to ignore three cards. I did NOT change the death numbers (law 16; OD:L2670 illness still kills). If MAIN wants law 5 softer at the start anyway, the one knob is BAL.illCure.die3 (or a rank factor on it) — for MAIN to rule.
+
+### Tests
+- illness-cure.test (Fold 755x1000 + iPad 1180x820): ALL OK ×3 incl. r4: mild Tâm bệnh fall-ill card (danger words + 4 tier roads, no %), opens once, the visible chip opens it, every illness at nhẹ gives the card; cung nữ: card by itself + true line + Sức cap, chip shown + opens, deck after a fresh deal = Tĩnh dưỡng + xin thuốc (no thái y / cầu xin). Test-only: the NPC «cầu xin» row now retries like the bạc row (roll(100) is capped — it flaked once).
+- MUTATE (built page): fall-ill alarm off → 6 FAIL · cung nữ cards off → 2 · cung nữ chip off → 2 · cung nữ true line off → 2 · clean → 0.
+- webkit-syntax: 477 modules, 0 parse-level hits. one-core-guard / -text / -bind / -text-rule: PASS. door-onetap: PASS.
+- quickcheck 3185acbb vs LIVE 5ad52416: QUICKCHECK PASS (open 2316 ms, old save loads + plays a buổi, 0 errors; perf median new/live render 270/295, tab 563/544, buổi 2424/2988, tasks>200 33/35) · TIME-SPILL PASS · CORE GATES FAIL only G4 94-q-softlock = the known flake: alone on the branch 1 FAIL (iPad «view parked by a tab change»), LIVE 5ad52416 run at the same time 4 FAIL.
+- Shots (outside git, /home/user/wt/ic4-shots, looked at): Fold + iPad — hs fall-ill card «Tâm bệnh · nhẹ» (4 roads, HUD Sức 80/85), cung nữ HUD chip «Lao phổi · nhẹ», cung nữ fall-ill card (2 roads + true line).
