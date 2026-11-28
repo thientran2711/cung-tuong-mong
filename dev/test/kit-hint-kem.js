@@ -5,9 +5,9 @@
    Walks: every place × every person there × every door kind (DOOR.T, PEND.door) + every PEND card that builds with no params; lists each
    rolled option whose kitHint carries «nhưng»; opens each such card (doorOpen / pushDil) and reads the visible plaque rows in the DOM.
    Census table on stdout (CENSUS lines), plus the kit hook window.__kitKem (every Kèm row kitOptFinal made).
-   usage: node dev/test/kit-hint-kem.js [site index.html (root, built)] [WxH]     KMUT=1 → the Kèm chips are put back into Bại after the kit ran (the pre-fix look) → must FAIL */
+   usage: node dev/test/kit-hint-kem.js [site index.html (root, built)] [WxH]     KMUT=1 → the Kèm chips are put back into Bại after the kit ran (the pre-fix look) → must FAIL; KMUT=flat → jk2b kitRowsLine off (the pre-K-DOLA-HINT flattened hint) → must FAIL */
 const {chromium}=require('playwright');const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-const A=process.argv[2]||require('path').join(__dirname,'..','..','index.html');const URL=/^(file|https?):/.test(A)?A:'file://'+require('path').resolve(A);const KMUT=process.env.KMUT==="1";
+const A=process.argv[2]||require('path').join(__dirname,'..','..','index.html');const URL=/^(file|https?):/.test(A)?A:'file://'+require('path').resolve(A);const KMUT=process.env.KMUT==="1",KFLAT=process.env.KMUT==="flat";
 const [W,H]=(process.argv[3]||'755x1000').split('x').map(Number);
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:W,height:H}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());
@@ -15,11 +15,12 @@ const [W,H]=(process.argv[3]||'755x1000').split('x').map(Number);
  const BOOT=async()=>{
  await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;start();quiet=false});
  for(let k=0;k<12;k++){const n=await p.evaluate(()=>{const M=document.getElementById('modal');if(M.hidden||!Q.length)return 0;const B=[...M.querySelectorAll('button')].filter(b=>/Nhận thân phận|Vào cung ngay|Tiếp|Đóng|Thôi|Được/.test(b.textContent));if(B[0]){B[0].click();return 1}return 2});if(!n)break;await sleep(700)}
+ if(KFLAT)await p.evaluate(()=>{kitRowsLine=r=>r});
  };await BOOT();
  /* 1. data census: which (card source, option) is rolled + carries «nhưng» in its hint */
- const LIST=PH=>p.evaluate(PH=>{const out=[];const NH=/(^|;\s*|\s)nhưng\s/;const hintOf=o=>{try{return String(kitHint(o,null).hint||"")}catch(e){return""}};
+ const LIST=PH=>p.evaluate(PH=>{const out=[];const rowsX=window.__rowsX=window.__rowsX||[];const NH=/(^|;\s*|\s)nhưng\s/;const hintOf=o=>{try{return String(kitHint(o,null).hint||"")}catch(e){return""}};
   const rolled=o=>{try{return !!(kitOptModel(o).odds)}catch(e){return false}};
-  const scan=(src,d,open)=>{if(!d||!Array.isArray(d.o))return;const hit=d.o.filter(o=>o&&o.n&&!/^Thôi/.test(o.n)&&NH.test(hintOf(o))/* rolled or not is read on the card itself (.kodds): a door option's odds sit in its built x */).map(o=>({n:String(o.n).slice(0,40),h:hintOf(o).slice(0,140)}));if(hit.length)out.push({src,hit,open})};
+  const scan=(src,d,open)=>{if(!d||!Array.isArray(d.o))return;d.o.forEach(o=>{try{if(o&&/class="kb/.test(String(typeof dilLineRaw==="function"?dilLineRaw(o):o.x)))rowsX.push(`${src} | ${String(o.n).slice(0,40)} | ${hintOf(o).slice(0,120)}`)}catch(e){}});const hit=d.o.filter(o=>o&&o.n&&!/^Thôi/.test(o.n)&&NH.test(hintOf(o))/* rolled or not is read on the card itself (.kodds): a door option's odds sit in its built x */).map(o=>({n:String(o.n).slice(0,40),h:hintOf(o).slice(0,140)}));if(hit.length)out.push({src,hit,open})};
   try{Q.length=0;document.getElementById('modal').hidden=true;if(typeof covSaw==="function")covSaw=()=>["x"]/* her maid saw a deed: the «Xử nhân chứng» door is in the census (as tmk-warn-witcard) */}catch(e){}
   if(PH==="door"){let PL=[];const seen=new Set();try{PL=(places()||[]).map(x=>x.k)}catch(e){}
   for(const pl of ["home"].concat(PL)){try{goTo(pl);render()}catch(e){continue}const P=(typeof curPeople==="function"&&curPeople())||[];
@@ -27,8 +28,8 @@ const [W,H]=(process.argv[3]||'755x1000').split('x').map(Number);
   try{goTo("home");render()}catch(e){}}
   else for(const k of Object.keys(PEND)){if(k==="door")continue;let d=null;try{d=PEND[k]({})}catch(e){}scan(`PEND.${k}`,d,{pend:k})}
   return out},PH);
- const L=[];const known=[];const skip=[];let cards=0,kemRows=0;const out=[];const ok=(c,m)=>out.push([!!c,m]);
- for(const PH of ["door","pend"]){let LL=await LIST(PH);for(let t=0;PH==="door"&&!LL.length&&t<6;t++){await BOOT();LL=await LIST(PH)}/* a life whose first screens are not the palace yet: boot again (as tmk-warn-witcard) */L.push(...LL);
+ const L=[];const skip=[];let cards=0,kemRows=0;const out=[];const ok=(c,m)=>out.push([!!c,m]);
+ for(const PH of ["door","pend"]){let LL=await LIST(PH);const hasWit=X=>X.some(x=>/^door wit /.test(x.src));for(let t=0;PH==="door"&&!hasWit(LL)&&t<8;t++){await BOOT();await p.evaluate(()=>{window.__rowsX=[]});LL=await LIST(PH)}/* a life with no witness door yet (or not in the palace yet): boot again (as tmk-warn-witcard) — the wit tiers are the known members of the group */L.push(...LL);
  for(const s of LL)for(const h of s.hit)console.log(`CENSUS ${s.src} | ${h.n} | ${h.h}`);
  /* 2. open each card and read the visible plaque rows */
  for(const s of LL){
@@ -49,12 +50,12 @@ const [W,H]=(process.argv[3]||'755x1000').split('x').map(Number);
    return res});
   if(!R){skip.push(s.src);console.log(`SKIP ${s.src}: no modal after doorOpen / pushDil (opens a scene, or needs params) — listed, not read`);continue}
   for(const c of R){cards++;if(c.kem!=null)kemRows++;
-   if(/(Tốn|Thành|Bại|Kèm)\S/.test(c.thanh+c.kem)){known.push(`${s.src} «${c.t}»`);console.log(`KNOWN K-DOLA-HINT ${s.src} «${c.t}»: the hint is the whole card flattened (row labels glued: «${(c.kem||'').slice(0,70)}») — hint SOURCE fault, on LIVE before this kit part (was in Thành + Bại)`)}
+   ok(!/(Tốn|Thành|Bại|Kèm|Gợi ý)[^\s:·,;)]/.test(c.thanh+" "+(c.kem||"")+" "+c.bai),`${s.src} «${c.t}»: no glued row label in Thành / Kèm / Bại (K-DOLA-HINT: a prebuilt kit card in o.x is read back by jk2b kitRowsLine, never flattened) «${(c.thanh+" | "+(c.kem||"")).slice(0,90)}»`);
    ok(c.kem!=null&&c.kemRed&&c.parts.every(x=>c.kem.includes(x)),`${s.src} «${c.t}»: Kèm «${c.kem}» holds the «nhưng» part «${c.parts.join("; ")}»`);
    ok(!c.parts.some(x=>c.bai.includes(x)),`${s.src} «${c.t}»: Bại «${c.bai}» = only «hỏng thì …»`);
    ok(!c.parts.some(x=>c.thanh.includes(x)),`${s.src} «${c.t}»: Thành «${c.thanh}» holds no «nhưng» part`)}
   await p.evaluate(()=>{try{Q.length=0;document.getElementById('modal').hidden=true}catch(e){}})}}
- const hook=await p.evaluate(()=>(window.__kitKem||[]).length);
+ const hook=await p.evaluate(()=>(window.__kitKem||[]).length);const RX=await p.evaluate(()=>[...new Set(window.__rowsX||[])]);RX.forEach(x=>{console.log(`CENSUS-ROWSX ${x}`);const h=x.split(" | ").slice(2).join(" | ");ok(h&&!/(Tốn|Thành|Bại|Kèm|Ghi chú|Gợi ý)[^\s:·,;)]|^(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững)\S/.test(h),`prebuilt-card option ${x.split(" | ").slice(0,2).join(" | ")}: kitHint «${h.slice(0,80)}» has no glued row label (K-DOLA-HINT)`)});
  ok(cards>0,`census found ${L.length} card sources, ${cards} rolled hint-mode «nhưng» cards opened, ${kemRows} with a Kèm row, kit hook __kitKem ${hook}`);
  let f=0;for(const [c,m] of out){if(!c||process.env.V)console.log((c?'PASS ':'FAIL ')+m);if(!c)f++}if(errs.length){console.log('PAGE ERRORS',errs.slice(0,5));f++}
- console.log(`KIT-HINT-KEM ${W}x${H}${KMUT?" (KMUT)":""}: ${out.length-f}/${out.length}${f?' FAIL':' ALL OK'} · sources ${L.length} · cards ${cards} · Kèm ${kemRows} · skipped ${skip.length}${known.length?` · KNOWN K-DOLA-HINT ${known.length}`:""}`);await b.close();process.exit(f?1:0)})();
+ console.log(`KIT-HINT-KEM ${W}x${H}${KMUT?" (KMUT)":KFLAT?" (KMUT=flat)":""}: ${out.length-f}/${out.length}${f?' FAIL':' ALL OK'} · sources ${L.length} · cards ${cards} · Kèm ${kemRows} · skipped ${skip.length} · prebuilt-card lines ${RX.length}`);await b.close();process.exit(f?1:0)})();

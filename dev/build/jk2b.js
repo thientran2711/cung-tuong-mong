@@ -214,7 +214,20 @@ function kitNumVi(n){const D=["không","một","hai","ba","bốn","năm","sáu",
  const two=x=>{if(x<10)return D[x];const t=Math.floor(x/10),u=x%10;const a=t===1?"mười":D[t]+" mươi";return u===0?a:a+" "+(u===1&&t>1?"mốt":u===5?"lăm":u===4&&t>1?"tư":D[u])};
  if(n<100)return two(n);const h=Math.floor(n/100),r=n%100;return D[h]+" trăm"+(r===0?"":r<10?" lẻ "+D[r]:" "+two(r))}
 /* the option's raw kit line (the same text its act card would read), split into labelled items */
-function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):(o&&o.w&&typeof optLine==="function"&&Object.keys(o.w).length)?optLine(o)/* KK56 (E-GAIN3b #5): a talk option with gains in `w` reads the line its act card draws */:typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){raw=String(o&&o.x||"")}if(typeof sgTxt==="function")raw=sgTxt(raw);/* SG-CARD: the hint reads the same Sủng the card draws */
+/* K-DOLA-HINT (kit keeper KK73 28/11, MAIN 189 ruling; laws 3 / 11): an option whose line (o.x) is a PREBUILT kit card — odds meter
+   (.kodds) + rows (.kb > .kr: Tốn / Thành / Được / Bại / Mất / Kèm / Ghi chú …), e.g. the «Sai đi dò la» spy door (jwhy) — was split on « · »
+   and flattened by kaPlain: the hint read «VữngTốnmột khắc…Thành nhắm…Bại…Kèm…» (glued labels in Thành / Bại / Kèm). The rows are read back
+   into the line grammar the model parses («Tùy duyên · thành: … · hỏng: … · kèm: …»); notes / reasons / needs and the Tốn price
+   (the card shows its own price; a hint tells outcomes) are dropped; any plain text after the card is kept. A line with no kit rows is returned unchanged. */
+const KIT_ROWS_LAB={"thành":"thành","được":"thành","thắng":"thành","được ngay":"ngay","ngay":"ngay","bại":"hỏng","mất":"hỏng","hỏng":"hỏng","kèm":"kèm"};
+function kitRowsLine(raw){try{raw=String(raw||"");if(!/class="(kb|kr\b|kodds)/.test(raw)||typeof document==="undefined")return raw;
+ const t=document.createElement("template");t.innerHTML=raw;const seg=[];
+ const od=t.content.querySelector(".kodds b,.kodds [title]");if(od){const w=(od.textContent||od.getAttribute("title")||"").trim();if(w)seg.push(w)}
+ t.content.querySelectorAll(".kr").forEach(r=>{const l=((r.querySelector(":scope > .krl")||{}).textContent||"").trim().toLowerCase();const lab=KIT_ROWS_LAB[l];if(!lab)return;
+  const v=[...r.querySelectorAll(":scope > .krv .ef, :scope > .krv .kwhy")].map(e=>e.textContent.replace(/\s+/g," ").trim()).filter(Boolean);if(v.length)seg.push(lab+": "+v.join("; "))});
+ t.content.querySelectorAll(".kodds,.kb").forEach(e=>e.remove());const rest=(t.content.textContent||"").replace(/^\s*·\s*|\s*·\s*$/g,"").trim();if(rest)seg.push(rest);
+ return seg.join(" · ")}catch(e){return raw}}
+function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):(o&&o.w&&typeof optLine==="function"&&Object.keys(o.w).length)?optLine(o)/* KK56 (E-GAIN3b #5): a talk option with gains in `w` reads the line its act card draws */:typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){raw=String(o&&o.x||"")}raw=kitRowsLine(raw);if(typeof sgTxt==="function")raw=sgTxt(raw);/* SG-CARD: the hint reads the same Sủng the card draws */
  raw=raw.replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ta +${spSee("oan",+n)}`);
  const M={odds:"",items:[],notes:[]};let lab="";
  for(const s0 of raw.split(/ · (?![^<]*>)/)){const s=kaPlain(s0);if(!s)continue;
