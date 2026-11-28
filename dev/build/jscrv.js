@@ -123,7 +123,8 @@ function scrvDest(a,b){const f=(s,c)=>{const m=(s||"").match(new RegExp("\\|"+c+
  if((f(b,"g")&&f(a,"g")!==f(b,"g"))||(f(b,"v")&&f(a,"v")!==f(b,"v")))return "board";if(f(b,"q")&&f(a,"q")!==f(b,"q"))return "event";return "scene"}
 let SCRV_KEY="";function scrvKeyNow(){SCRV_KEY=scrvKey()}
 function scrvCheck(){if(SCRV_HOLD)return;const k=scrvKey();if(k===SCRV_KEY)return;const old=SCRV_KEY;SCRV_KEY=k;if(SCRV_LATE&&SCRV_LATE.key!==k)scrvLateStop();/* the late guard belongs to the view it was raised in */if(scrvBlocked()||!old)return;const dest=scrvDest(old,k);
- kitScreenVeilUntil(document.body,dest).then(v=>{if(v)return;/* nothing pending now: pictures that a module sets a few frames later (RV-171 FAIL-2, warm tab «act») are caught by two rescans */
+ kitScreenVeilUntil(document.body,dest).then(v=>{if(v)return;/* nothing pending now: pictures that a module sets a few frames later (RV-171 FAIL-2, warm tab «act») are caught by two rescans; LRM5: until a rescan veils them the light guard hides each one the moment it is attached (Fold cold tab «act»: card art showed undecoded for one frame, 46 ms before the 50 ms rescan) */
+  if(KIT_SCRV.after&&!SCRV_LATE)scrvHideLate(document.body,1);
   for(const ms of [50,160,360])setTimeout(()=>{if(SCRV_RUN||SCRV_KEY!==k||scrvBlocked())return;if(scrvPend(document.body).length)kitScreenVeilUntil(document.body,dest)},ms)})}
 (function(){try{const st=document.createElement("style");st.id="kit-scrv";st.textContent=
 `.kscrv{position:fixed;inset:0;z-index:9790;/* above the kit chips + toasts (.ktbt 9760): RV-171 FAIL-3 */display:flex;align-items:center;justify-content:center;background:var(--k-card,#fffaf0);opacity:1;transition:opacity ${KIT_SCRV.fade}ms ease;pointer-events:auto;touch-action:none}

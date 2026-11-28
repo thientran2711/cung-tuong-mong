@@ -20,13 +20,13 @@ const SAMPLER=()=>{window.__VS=(function(){const R={on:false,frames:[]};const do
   return {left:L,top:T,width:Rr-L,height:B-T}};/* clipped by a scrolling box = not seen */
  const covered=r=>{const x=Math.min(innerWidth-1,Math.max(0,r.left+r.width/2)),y=Math.min(innerHeight-1,Math.max(0,r.top+r.height/2));const t=document.elementFromPoint(x,y);return !!(t&&t.closest&&t.closest('#kveil,#kload,#klife'))};
  function snap(){const bad=[];
-  for(const im of document.images){const s=im.getAttribute('src');if(!s||/^(data|blob):/.test(s))continue;if(im.complete&&im.naturalWidth)continue;if(im.complete&&!im.naturalWidth&&done.has(abs(s)))continue;const r=vis(im);if(!r||covered(r))continue;bad.push('img:'+s.split('/').pop().slice(0,40))}
+  for(const im of document.images){const s=im.getAttribute('src');if(!s||/^(data|blob):/.test(s))continue;if(im.complete&&im.naturalWidth)continue;if(im.complete&&!im.naturalWidth&&done.has(abs(s)))continue;const r=vis(im);if(!r||covered(r))continue;bad.push('img:'+s.split('/').pop().slice(0,40));/* LRM5 diagnosis of a bad picture: the late-guard state at that frame */try{if(!R.why)R.why=[];if(R.why.length<4)R.why.push({src:s.split('/').pop().slice(0,40),t:Math.round(performance.now()),h:im.__scrvH?1:0,sv:im.style.visibility,late:typeof SCRV_LATE==='undefined'?'?':(SCRV_LATE?(SCRV_LATE.light?'light':'full'):'none'),run:typeof SCRV_RUN==='undefined'?'?':!!SCRV_RUN,keyEq:typeof scrvKey==='function'?scrvKey()===SCRV_KEY:'?',key:typeof scrvKey==='function'?scrvKey().slice(0,90):'',last:typeof KIT_SCRV!=='undefined'&&KIT_SCRV.stat.last?KIT_SCRV.stat.last.why+'@'+KIT_SCRV.stat.last.ms:'',par:(im.parentElement&&String(im.parentElement.className).slice(0,30))||''})}catch(e){}}
   for(const el of document.querySelectorAll('body *')){const bg=getComputedStyle(el).backgroundImage;if(!bg||bg==='none'||bg.indexOf('url(')<0)continue;
    const us=[...bg.matchAll(/url\("?([^")]+)"?\)/g)].map(m=>m[1]).filter(u=>!/^(data|blob):/.test(u));const miss=us.filter(u=>!done.has(abs(u)));if(!miss.length)continue;const r=vis(el);if(!r||covered(r))continue;bad.push('bg:'+miss[0].split('/').pop().slice(0,40))}
   const top=document.elementFromPoint(innerWidth/2,innerHeight/2);const veil=!!(top&&top.closest&&top.closest('#kveil'));
   return {t:Math.round(performance.now()),n:bad.length,bad:[...new Set(bad)].slice(0,6),veil,word:veil?(document.querySelector('#kveil .kscrv-l')||{}).textContent:''}}
  function loop(){if(!R.on)return;R.frames.push(snap());requestAnimationFrame(loop)}
- R.start=()=>{R.frames=[];R.on=true;requestAnimationFrame(loop)};R.stop=()=>{R.on=false;return R.frames};R.snap=snap;return R})()};
+ R.start=()=>{R.frames=[];R.why=[];R.on=true;requestAnimationFrame(loop)};R.stop=()=>{R.on=false;return R.frames};R.snap=snap;return R})()};
 async function context(b,dev,vdir){const ctx=await D.newDeviceContext(b,dev,{recordVideo:{dir:vdir,size:{width:D.DEVICES[dev].w,height:D.DEVICES[dev].h}}});
  await ctx.addInitScript(SAMPLER);
  await ctx.route(BASE+'**',rt=>{let p=decodeURIComponent(new URL(rt.request().url()).pathname);if(p.endsWith('/'))p+='index.html';const f=path.join(ROOT,p.replace(/^\/+/,''));
@@ -64,7 +64,7 @@ const STEPS=[
     for(;;){await sleep(250);const v=await g.evaluate(()=>!!(document.getElementById('kveil')&&!document.getElementById('kveil').hidden)).catch(()=>false);if(!v&&Date.now()-t0>1800)break;if(Date.now()-t0>15000)break}
     await sleep(500);const F=await g.evaluate(()=>__VS.stop());const st=await g.evaluate(()=>typeof KIT_SCRV!=='undefined'?Object.assign({},KIT_SCRV.stat.last,{log:(KIT_SCRV.stat.log||[]).slice(-4)}):null);
     const badF=F.filter(f=>f.n>0);const veilF=F.filter(f=>f.veil);const words=[...new Set(veilF.map(f=>f.word).filter(Boolean))];
-    const row={dev,mode,step:name,kind,ran:ok,frames:F.length,bad:badF.length,veilFrames:veilF.length,veilMs:st&&st.ms||0,dests:st&&st.log?st.log.join('>'):'',word:words.join(' / '),firstBad:badF[0]?badF[0].bad.join(' '):''};R.push(row);if(badF.length)fail++;
+    const row={dev,mode,step:name,kind,ran:ok,frames:F.length,bad:badF.length,veilFrames:veilF.length,veilMs:st&&st.ms||0,dests:st&&st.log?st.log.join('>'):'',word:words.join(' / '),firstBad:badF[0]?badF[0].bad.join(' '):''};if(badF.length){row.why=await g.evaluate(()=>__VS.why).catch(()=>null);row.veilEnd=veilF.length?veilF[veilF.length-1].t:0;row.badT=badF.map(f=>f.t)}R.push(row);if(badF.length)fail++;
     console.log(JSON.stringify(row))}}
   if(process.env.MEM){/* decoded-picture memory after the warm steps: renderer RSS (all renderers of this run; run this test ALONE) + JS heap + kept pictures */
    try{const c=await ctx.newCDPSession(p);await c.send('HeapProfiler.collectGarbage')}catch(e){}await sleep(1500);
