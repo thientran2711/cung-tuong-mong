@@ -13,10 +13,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   window.__T={R(){return liveRivals(true).filter(v=>v.alive&&!v.out)},clr(p){p.mk=[];p.emo=null;p.__mkL=null},gh(p){return (p.mk||[]).filter(m=>m.k==="ghen"&&m.e==="ghenUp")}}});
  /* 1 */
  /* review/pace-all: a rise toward her slows near the top (BAL.oanCool.ghen.dm, j1 ghenUp; fractions carry in v.gUc) — expected values read that rule */
- const r1=await p.evaluate(()=>{const M=BAL.oanCool.ghen.dm,F=(g,n)=>Math.floor(n*Math.max(M.min,1-Math.pow(g/100,M.pow)));window.__F=F;const [v,y]=__T.R();__T.clr(v);v.ghen=20;v.gUc=0;const d=ghenUp(v,10,"thấy ngươi được tấn phong",S);const dx=F(20,10);const vg=v.ghen;const c=__T.gh(v)[0];const left=c&&c.k1-c.k0;
+ const r1=await p.evaluate(()=>{const M=BAL.oanCool.ghen.dm,GP=BAL.oanPace&&BAL.oanPace.on&&BAL.oanPace.ghen,F=(g,n,b)=>Math.round((GP&&!b?opBand(n,BAL.stp.band.ghen):n)*Math.max(M.min,1-Math.pow(g/100,M.pow)));/* review/oan-pace-2: + the ghen size band (BAL.oanPace.ghen.band; ghenAll bands once in ghenN) and rounding (j1 ghenUp); each check = a fresh incident, same favour as hers */const fresh=()=>{S.bqN=(S.bqN||0)+1;__T.R().forEach(x=>{x.opg={};x.sung=S.sung})};window.__F=F;window.__fresh=fresh;const [v,y]=__T.R();__T.clr(v);fresh();v.ghen=20;v.gUc=0;const d=ghenUp(v,10,"thấy ngươi được tấn phong",S);const dx=F(20,10);const vg=v.ghen;const c=__T.gh(v)[0];const left=c&&c.k1-c.k0;
   const ex={why:c&&c.why,t:c&&c.t,left,dur:BAL.mood2.dur.e.ghenUp,s:c&&c.s,name:EMO.ghen,seal:emoGet(v).k};
-  __T.R().forEach(__T.clr);__T.R().forEach(x=>x.gUc=0);const g0=__T.R().map(x=>x.ghen||0);ghenAll(BAL.ghen.rankUp,"ngươi được tấn phong");const all=__T.R().every((x,i)=>(x.ghen||0)===Math.min(100,g0[i]+F(g0[i],ghenN(BAL.ghen.rankUp)))||g0[i]>=100||F(g0[i],ghenN(BAL.ghen.rankUp))===0)&&__T.R().filter(x=>(x.ghen||0)<100).every(x=>__T.gh(x).length===1);
-  __T.clr(y);const o=apHostOpts(y)[0];o.go();const site=__T.gh(y)[0];
+  __T.R().forEach(__T.clr);__T.R().forEach(x=>x.gUc=0);fresh();const g0=__T.R().map(x=>x.ghen||0);ghenAll(BAL.ghen.rankUp,"ngươi được tấn phong");const all=__T.R().every((x,i)=>(x.ghen||0)===Math.min(100,g0[i]+F(g0[i],ghenN(BAL.ghen.rankUp),1))||g0[i]>=100||F(g0[i],ghenN(BAL.ghen.rankUp),1)===0)&&__T.R().filter(x=>(x.ghen||0)<100).every(x=>__T.gh(x).length===1);
+  __T.clr(y);fresh();const o=apHostOpts(y)[0];o.go();const site=__T.gh(y)[0];
   __T.clr(y);const g1=y.ghen||0;p3GhenAll(v,BAL.ghen.dance,`${v.name} múa được Hoàng thượng khen`);const p3=__T.gh(y)[0];
   return {d,dx,v:vg,ex,all,site:site&&{why:site.why,t:site.t},p3:p3&&{why:p3.why,t:p3.t},vk:emoKey(v)}});
  ok(r1.d===r1.dx&&r1.dx>0&&r1.v===20+r1.dx&&r1.ex.why==="thấy ngươi được tấn phong"&&r1.ex.t==="me"&&r1.ex.left===r1.ex.dur&&r1.ex.seal==="ghen",'ghenUp: score +10 × the near-top slowdown (BAL.oanCool.ghen.dm) and a Chạnh lòng cause (true why, aimed at her, BAL timer)',r1.ex);
@@ -25,8 +25,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r1.site&&r1.site.t==="me"&&/nhịn/.test(r1.site.why),'a routed site (j24 Nhịn): feeling with its own why',r1.site);
  ok(r1.p3&&r1.p3.t===r1.vk,'an NPC cause (p3GhenAll): the feeling aims at that NPC',r1.p3);
  /* 2 */
- const r2=await p.evaluate(()=>{const F=window.__F;const [v]=__T.R();__T.clr(v);v.ghen=40;v.gUc=0;ghenUp(v,10,"thử",S);const e1=40+F(40,10);const g1=v.ghen;for(const m of v.mk)m.k1=mkNow();mkSync(v);const g2=v.ghen,seal=emoGet(v).k;
-  v.gUc=0;const e3=g2+F(g2,5)-20;ghenUp(v,5,"thử lần hai",S);v.ghen=cl(v.ghen-20,0,100);const still=__T.gh(v).length;return {g1,g2,e1,e3,seal,still,g3:v.ghen}});
+ const r2=await p.evaluate(()=>{const F=window.__F;const [v]=__T.R();__T.clr(v);window.__fresh();v.ghen=40;v.gUc=0;ghenUp(v,10,"thử",S);const e1=40+F(40,10);const g1=v.ghen;for(const m of v.mk)m.k1=mkNow();mkSync(v);const g2=v.ghen,seal=emoGet(v).k;
+  v.gUc=0;window.__fresh();const e3=g2+F(g2,5)-20;ghenUp(v,5,"thử lần hai",S);v.ghen=cl(v.ghen-20,0,100);const still=__T.gh(v).length;return {g1,g2,e1,e3,seal,still,g3:v.ghen}});
  ok(r2.g1===r2.e1&&r2.g2===r2.e1&&r2.seal==="binh",'the feeling ending never lowers the score',r2);
  ok(r2.still===1&&r2.g3===r2.e3,'lowering the score never touches the feeling',r2);
  /* 4 bar */

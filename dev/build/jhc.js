@@ -73,7 +73,7 @@ const capL=s=>s==="ta"?"Ta":s;
 /* KIT §49.3 relPerson(k): ONE helper — the person object, the face drawn from THAT object, the name, the rank, the colour. Strangers
    (not met: knows(v) false — the same test that writes "Ta chưa gặp …") get the shared grey silhouette (kitStrangerOf, j61), the name stays. */
 function relPerson(k){
- if(k==="me"){const f=pMe();return{k,p:S,f,name:"Ta",rank:S.out?"Phế phi":(typeof isSrv==="function"&&isSrv())?srvRkN()/* cung nữ road (maid-8tabs) */:meRankN(),col:fcol(f),pid:"me"}}
+ if(k==="me"){const f=pMe();return{k,p:S,f,name:"Ta",rank:S.out?outTitleN(S):(typeof isSrv==="function"&&isSrv())?srvRkN()/* cung nữ road (maid-8tabs) */:meRankN(),col:fcol(f),pid:"me"}}
  if(k==="emp"){const f=pEmp();return{k,p:"emp",f,name:"Hoàng thượng",rank:"",col:fcol(f),pid:"emp"}}
  if(k==="th"){const f=pTH();return{k,p:"th",f,name:"Thái hậu",rank:"",col:fcol(f),pid:"th"}}
  if(typeof k==="string"){const o=relMSOf(k);if(!o)return null;const f=relMSFace(o),pid=typeof kOf61==="function"?kOf61(o):k;
@@ -207,8 +207,9 @@ window.menUnique=menUnique;
 if(typeof menInit==="function"){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);menUnique();return r}}
 function menMet(m){try{if(S.known&&typeof k61St==="function")return k61St(m)>=1;if(S.menMet&&S.menMet[m.id])return true;if(m.af||m.tinh||m.letters||m.trysts)return true;if(typeof k61St==="function"&&k61St(m)>=1)return true;if(m.seen)return true}catch(e){}return false}
 window.menTabHTML=function(){try{menInit()}catch(e){}menUnique();const M=(S.men||[]).filter(m=>m.alive&&menMet(m));
- if(!M.length)return `<div class="pgwrap">`+kitEmpty("Ta chưa gặp nam nhân nào ngoài Hoàng thượng",["Nam nhân (thị vệ, thái y, vương gia, nhạc sư…) chỉ hiện ở đây sau khi ta gặp mặt họ.","Đến nơi họ hay lui tới (Dư đồ) để gặp."],{art:"img/act-hen-gap.webp"})+`</div>`;
- return `<div class="pgwrap">`+pager("men",M.map(m=>({p:m,f:pMan(m),name:m.name.split(" ").slice(-2).join(" ")})),i=>manCard(M[i]))+`</div>`};
+ if(!M.length&&!(S.men||[]).some(m=>typeof dthIs==="function"&&dthIs(m)&&menMet(m)))return `<div class="pgwrap">`+kitEmpty("Ta chưa gặp nam nhân nào ngoài Hoàng thượng",["Nam nhân (thị vệ, thái y, vương gia, nhạc sư…) chỉ hiện ở đây sau khi ta gặp mặt họ.","Đến nơi họ hay lui tới (Dư đồ) để gặp."],{art:"img/act-hen-gap.webp"})+`</div>`;
+ const D=(S.men||[]).filter(m=>typeof dthIs==="function"&&dthIs(m)&&menMet(m));/* the dead stay in the list, own group after the living (owner 27/11 ~05:10Z) */const MD=M.concat(D);
+ return `<div class="pgwrap">`+pager("men",MD.map((m,i)=>({p:m,f:pMan(m),name:m.name.split(" ").slice(-2).join(" "),sep:D.length&&i===M.length?"Đã khuất":""})),i=>manCard(MD[i])).replace(/(<span class="pcount">[^<]*)/,D.length?`$1 · Đã khuất: ${D.length}`:"$1")+`</div>`};
 /* the men leave the Phi tần strip (j22 appended them) */
 /* (j22 no longer appends them: source edit) */
 /* a man's card with no act says why (j22 manCard "empty" text, source edit) */

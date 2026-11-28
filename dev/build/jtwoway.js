@@ -27,7 +27,7 @@ Object.assign(BAL,{tw:{
  accBestow:40,            /* Tố giác thành: chance of a reward from the throne (was 100 for NPCs, 40 for her) */
  /* gains (one source, read by both sides and by the option text) */
  g:{help:10,helpOan:5,apol:15,thTH:[8,2,1,-2],thHH:[4,2,1,-3,5],thTHo:75,thHHo:70,prayO:50,pray:2,ksp:2,ill:3,illWk:2,illCatch:15,illDanh:6,confM:[2,3,1]/* = BAL.punW.heavy.m (one array) */,preg:[6,5,-5],ann:[6,5,6],
-    provoke:[1,-15,10,9],humil:[10,2],visit:[5,3],mediate:10,flaunt:2,flauntDanh:1/* E-GAIN3b law 3: Khoe quà ngự ban = the whole palace sees the throne's favour: Danh + for the doer (both sides, law 1) */,test:[3,-6,55],drop:20,follow:6,gossip:1,praiseO:60,warn:10,admon:5,admonCd:6,
+    provoke:[1,-15,10,9],humil:[10,2],visit:[5,3],mediate:10,flaunt:2,flauntDanh:1/* E-GAIN3b law 3: Khoe quà ngự ban = the whole palace sees the throne's favour: Danh + for the doer (both sides, law 1) */,test:[3,-6,55],drop:20,coldRisk:2/* ACT-MOVE-6 F2 (MAIN 174 ruling): Lạnh nhạt with a truly fallen friend — each one who holds oán toward the fallen one lowers her oán toward the doer by this (her Nguy hiểm chung falls; both sides, law 1) */,follow:6,gossip:1,praiseO:60,warn:10,admon:5,admonCd:6,
     accFail:[8,25,20],vu:[10,5,4],ky:[3,1],conf:[20,15],reward:[20,10,3],
     /* pillow slander at night (her night2 option and an NPC's night, two-way row 24, AG2): odds = o[0] + Ân tình / o[1] + night score × o[2]
        − o[3] when he is Đa nghi; thành: the target's Sủng −hit, liking −rel; hỏng: Đa nghi → the speaker's Sủng −dg[0], Danh −dg[1], else Sủng −fail */
@@ -68,7 +68,9 @@ TWD("mediate",{n:"Hòa giải",req:(a,t)=>!!t&&!!twFoeOf(a,t),run:(a,t)=>{const 
 TWD("humil",{n:"Hạ nhục",req:(a,t)=>!!t&&rkOf(a)>=rkOf(t),run:(a,t)=>{const g=G().humil;oanAdd(t,a,g[0]);twAp(t,{danh:-g[1]});return `${twNm(a)} hạ nhục ${NM(t)} trước mặt cung nhân`}});
 TWD("flaunt",{n:"Khoe quà ngự ban",req:a=>(a.sung||0)>=40,run:a=>{twAp(a,{danh:G().flauntDanh});liveRivals(true).forEach(x=>{if(x!==a)ghenUp(x,G().flaunt,`thấy ${twNm(a)} khoe quà ngự ban`,a)});return `${twNm(a)} đi khắp cung khoe quà ngự ban`}});
 TWD("test",{n:"Thử lòng",req:(a,t)=>!!t&&aff(a,t)>=0,o:()=>G().test[2],run:(a,t,ok)=>{affAdd(a,t,ok?G().test[0]:G().test[1]);return `${twNm(a)} thử lòng ${NM(t)}: ${ok?"tin thêm một chút":"càng ngờ vực"}`}});
-TWD("drop",{n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=netTh(a,"than")&&((t.sung||0)<25||!!t.confined),run:(a,t)=>{affAdd(a,t,-G().drop);return `${twNm(a)} lạnh nhạt với ${NM(t)} lúc sa cơ`}});
+function twFallen(t){return !!t&&(!!t.out||!!t.confined||(t.sung||0)<25)}/* sa cơ: lãnh cung / cấm túc / out of favour (the old req) */
+function twColdFoes(a,t){return liveRivals(true).filter(x=>x!==a&&x!==t&&oan(x,t)>0&&oan(x,a)>0)}
+TWD("drop",{n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=netTh(a,"than")&&twFallen(t)&&twColdFoes(a,t).length>0/* law 3: offered only when the step-away really lowers someone's oán */,run:(a,t)=>{affAdd(a,t,-G().drop);/* ACT-MOVE-6 F2: those who resent the fallen one see the doer step away: their oán toward the doer −coldRisk (law 1: any doer) */for(const x of twColdFoes(a,t))oanAdd(x,a,-G().coldRisk);return `${twNm(a)} lạnh nhạt với ${NM(t)} lúc sa cơ`}});
 TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&rkOf(t)>rkOf(a)+1,run:(a,t)=>{relAdd(a,t,G().follow);return `${twNm(a)} nép theo ${NM(t)}`}});
 /* E-GAIN3c law 3: «Rỉ tai» gains only by the foe it hurts — with no foe (nobody the teller resents above BAL.ag.why.min) it gave nothing: offered only when a foe exists (her and an NPC: one req, law 1) */
 function twGossipFoes(a,t){return liveRivals(true).filter(y=>y!==a&&y!==t&&hostility(a,y)>BAL.ag.why.min)}
@@ -103,16 +105,16 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
   const add=(k,x)=>{const D=TW[k];if(!D||(D.req&&!D.req(S,k==="mediate"?v:v)))return;const c=twCost(k);
    A.push({n:D.n,tw:k,c:Object.keys(c).length?c:undefined,o:D.o?D.o(S,v):100,x,run:()=>{chatMark(v);return twDo(S,v,k,true)+"."}})};
   const g=G();
+  /* ACT-MOVE-6 law 3 (RV-163G F1): a deed that hurts another is HER gain — written green (explicit class beats word colour), her own loss on «kèm:» */
   add("visit",`nàng ${pvQuy(v,g.visit[0],"quý ngươi")} · Sức nàng +${g.visit[1]}`);
   {const x=twFoeOf(S,v);if(x)add("mediate",`nàng bớt oán ${x.name} ${g.mediate}`)}
-  add("humil",`${pvOanAny(g.humil[0],"nàng oán ngươi")} · Danh nàng -${g.humil[1]}`);
+  add("humil",`thành: <span class="g">Danh nàng -${g.humil[1]}</span> · kèm: ${pvOanAny(g.humil[0],"nàng oán ngươi")}`);
   add("test",`thành: ngươi tin nàng hơn +${g.test[0]} · hỏng: ngờ vực ${g.test[1]}`);
-  add("drop",`ngươi lạnh với nàng -${g.drop}`);
+  add("drop",`thành: <span class="g">kẻ ghét nàng bớt oán ngươi ${g.coldRisk}</span> · kèm: <span class="r">ngươi lạnh với nàng -${g.drop}</span>`);
   add("follow",`nàng ${pvQuy(v,g.follow,"quý ngươi")}`);
-
-  add("gossip",`<span class="g">kẻ ngươi ghét bị bàn tán: Danh nàng ta -${g.gossip}</span>`)/* E-GAIN3c: the foe's loss is her gain (explicit green, kit KP12) */;
-  add("admon",`Sủng nàng -${g.admon} · hai tuần ngài để ý người khác`);
-  add("flaunt",`Danh +${g.flauntDanh} · mọi phi tần ghen +${g.flaunt}`)}catch(e){console.error(e)}return A}})();
+  add("gossip",`thành: <span class="g">phi tần ngươi ghét Danh -${g.gossip}</span> · không có ai để nói thì chỉ là chuyện phiếm`)/* E-GAIN3c: the foe's loss is her gain (explicit green, kit KP12) */;
+  add("admon",`thành: <span class="g">Sủng nàng -${g.admon}</span> · <span class="g">hai tuần ngài để ý người khác</span>`);
+  add("flaunt",`thành: Danh +${g.flauntDanh} · kèm: <span class="r">mọi phi tần khác ghen +${g.flaunt}</span>`)}catch(e){console.error(e)}return A}})();
 /* her Thái hậu / Hoàng hậu greetings: the same BAL.tw cost (gains stay in her card's w/l, which read the same numbers) */
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&(p.kind==="th"||p.kind==="hh")){const g=G();for(const a of A){
   if(p.kind==="th"&&a.n==="Thỉnh an, chép kinh"){a.c=twCost("thTH");a.o=od(g.thTHo);a.w={th:g.thTH[0],danh:g.thTH[1],duc:g.thTH[2]};a.l={th:g.thTH[3]}}

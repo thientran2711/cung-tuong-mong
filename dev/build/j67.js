@@ -905,7 +905,7 @@ ARC67.td_an=arcFx("td_an",{o:"td",t:"Lật lại án cũ",w:"foe",sj:"án mưu p
   {n:"Dâng sớ, đưa nhân chứng ra",e:["win","lose"],rt:"Án cũ được lật. Cả nhà ngươi được truy phong, {foed} bị xử.",rf:"Hoàng thượng nổi giận vì ngươi lật án tiên đế."},
   {n:"Chỉ xin truy phong cho cha, không đòi trị tội ai",e:["mid","lose"],rt:"Cha ngươi được truy phục danh dự.",rf:"Hoàng thượng không muốn nhắc chuyện cũ."},
   {n:"Gác lại, sống tiếp",e:"mid",lx:"mối thù chưa trả",rt:"Ngươi cất tờ sớ."}]}},
- E:{win:{tag:"Đã báo thù",w:"emp",t:"Án cũ được lật. Nhà ngươi được rửa oan, {foed} bị xử trảm, {foe} bị đày vào lãnh cung. Hoàng thượng thương ngươi chịu khổ.",go:()=>{S.avenged=true;const e=foe67();if(e){e.out=true;return `${e.name} bị phế vào lãnh cung.`}return""}},
+ E:{win:{tag:"Đã báo thù",w:"emp",t:"Án cũ được lật. Nhà ngươi được rửa oan, {foed} bị xử trảm, {foe} bị đày vào lãnh cung. Hoàng thượng thương ngươi chịu khổ.",go:()=>{S.avenged=true;const e=foe67();if(e){punCold(e,"phe","bị liên lụy án nhà",null,true);return `${e.name} bị phế vào lãnh cung.`}return""}},
   mid:{tag:"Cha được truy phong",t:"Cha ngươi được truy phục danh dự, nhưng kẻ thù vẫn ung dung. Ngươi nhẹ lòng được một nửa."},
   lose:{tag:"Lật án bất thành",t:"Hoàng thượng thu hủy chứng cứ, cấm nhắc chuyện cũ. {foe} cười trên nỗi đau của ngươi.",go:()=>{const W=BAL.arc.e67.away;apply(W);return `Hoàng thượng không ghé một thời gian: ${sgStat(W.sung)}.`}}}});
 ARC67.td_ke=arcFx("td_ke",{o:"td",t:"Kẻ đứng sau màn",w:"maid",sj:"kẻ thật sự hại nhà ngươi",g:"Càng lần theo án cũ, ngươi càng thấy {foed} chỉ là con dao. Bàn tay cầm dao ở cao hơn. Tìm ra hắn, rồi chọn: trả thù kẻ nào, và trả bằng cách nào.",
@@ -991,7 +991,7 @@ ARC67.td_tha=arcFx("td_tha",{o:"td",t:"Thù hay tha",w:"foe",sj:"mối thù vớ
   {n:"Tố cả cha lẫn con",e:["win2","lose"],rt:"{foed} bị xử, {foe} bị phế.",rf:"Chứng cứ không đủ, ngươi mang tiếng thù dai."},
   {n:"Buông bỏ",e:"mid",lx:"thù không trả",rt:"Ngươi đốt hết thư từ."}]}},
  E:{win:{tag:"Cởi nút thắt",w:"foe",t:"Kẻ thù tự thú, nhà ngươi được rửa oan; {foe} thành người chị em hiếm hoi trong cung. Cả cung nể ngươi độ lượng.",go:(_A,_ok,G)=>{S.avenged=true;const e=foe67();if(e){e.enemy=false;return e67ally(e,G[0])}return""}},
-  win2:{tag:"Thù trả đủ",t:"Cả cha lẫn con đều ngã. Mối thù đã trả, nhưng cũng có người nói ngươi lạnh lùng.",go:()=>{S.avenged=true;const e=foe67();if(e){e.out=true;return `${e.name} bị phế vào lãnh cung.`}return""}},
+  win2:{tag:"Thù trả đủ",t:"Cả cha lẫn con đều ngã. Mối thù đã trả, nhưng cũng có người nói ngươi lạnh lùng.",go:()=>{S.avenged=true;const e=foe67();if(e){punCold(e,"phe","bị liên lụy án nhà",null,true);return `${e.name} bị phế vào lãnh cung.`}return""}},
   mid:{tag:"Buông bỏ thù xưa",t:"Ngươi chọn buông bỏ. Lòng nhẹ đi, nhưng nhà ngươi vẫn mang tiếng tội thần."},
   lose:{tag:"Mang tiếng thù dai",t:"Ngươi tố mà không thành, cả cung cho rằng ngươi thù dai, Hoàng thượng lạnh nhạt.",go:(_A,_ok,G)=>e67foe(foe67(),G[0])}}});
 /* ================= CHÁU GÁI THÁI HẬU ================= */

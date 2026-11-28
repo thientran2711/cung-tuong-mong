@@ -11,7 +11,9 @@ const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: 
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
- await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<40&&isSrv();i++)start();/* F3: a consort start (a servant start hides the Dư đồ '!' by design) */window.__nlInner=0;window.__bot=1;window.__agAll=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
+ await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<40&&isSrv();i++)start();/* F3: a consort start (a servant start hides the Dư đồ '!' by design) */window.__nlInner=0;window.__bot=1;window.__agAll=1;quiet=false;/* STALE-TESTS-7: since jnf the last buổi's «Sang ngày mới» first turns the night card and HOLDS the day on the «Kính sự phòng» choice (pid nfch) until she
+   answers; clearing Q left the day held for ever (day plan drawn 0×, no Emperor evening). She answers «Thôi» by the card's own option (chooseM, the drain of
+   ledger.js / coop-night0.js); every other card is dropped as before. */window.__agQ=()=>{for(let n=0;n<40&&Q.length;n++){const m=Q[0];if(m&&m.pid==="nfch"&&m.opts){const j=m.opts.findIndex(o=>o.n==="Thôi");try{chooseM(j<0?m.opts.length-1:j)}catch(e){Q.shift()}if(Q[0]===m)Q.shift()}else Q.shift()}};Q.length=0;try{deal()}catch(e){}render()});
  /* make one NPC the Empress so her acts can be chosen (the seat may be empty at the start) */
  await p.evaluate(()=>{if(!queenP()){const v=liveRivals(true).find(x=>!x.out);v.queen=true;v.rank=7}});
  const r=await p.evaluate(async(DAYS)=>{let D0={P:{}};const out={draws:[],follow:0,diff:0,by:{},byG:{consort:{},hh:{},th:{},maid:{},srv:{}},days:0};const by0=Object.assign({},AG.stat.by);
@@ -21,7 +23,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    for(let bb=0;bb<4;bb++){placeWhere();agFlush();const R=S.roster;const D=agDz();
     D0=D;for(const id in D.P){const s=D.P[id][S.buoi||0];if(!s)continue;if(s.k){const g=grpOf(id);out.byG[g]=out.byG[g]||{};out.byG[g][s.k]=(out.byG[g][s.k]||0)+1}
      if(/^v/.test(id)&&R&&R.P[id]){const v=RV(+id.slice(1));if(v&&!v.out&&!v.confined){if(R.P[id][0][0]===s.pl)out.follow++;else out.diff++}}}
-    Q.length=0;S.mg=0;try{nextBuoi()}catch(e){out.nb=e.message}Q.length=0}
+    __agQ();S.mg=0;try{nextBuoi()}catch(e){out.nb=e.message}__agQ()}
+   /* STALE-TESTS-7: her answer to the night choice lets the held day turn: one more «Sang ngày mới» (at most a few) until the day really turns */{const w0=wk();for(let n=0;n<4&&wk()===w0;n++){__agQ();S.mg=0;try{nextBuoi()}catch(e){out.nb=e.message}__agQ()}}
    out.draws.push(AGD.stat.draw-d0);out.days++}
   if(AGD.q)agDaySlice(1);/* the later buổi of the day plan are drawn in slices over the next frames */const D=agDz();out.cover={emp:!!D.P.emp,th:S.thDead||!!D.P.th,consorts:liveRivals(true).filter(v=>v.alive&&!v.out).every(v=>D.P["v"+v.id]&&D.P["v"+v.id][S.buoi||0]&&D.I["v"+v.id]&&D.I["v"+v.id].g.length>=1)};
   for(const k in AG.stat.by)out.by[k]=AG.stat.by[k]-(by0[k]||0);out.ms=AGD.ms.slice();out.errs=AGD.errs.concat(AG.errs).slice(0,5);return out},DAYS);
@@ -71,12 +74,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r7=await p.evaluate(async()=>{const o={};const L=liveRivals(true).filter(v=>v.alive&&!v.out);for(const v of L){v.sung=75;v.an=40;v.preg=0;v.confined=0}S.sung=75;
   const tea0=BAL.ag.emp3.tea,des0=BAL.ag.emp3.desire;BAL.ag.emp3.tea=4;BAL.ag.emp3.desire=des0*4;/* the mechanism, not the rate: a stronger wish for tea AND for the evening visit so 14 days surely hold one (review ag-all-2 r2 fix2: his desire is × tsMoodW, which sits at .25 for whole fortnights in a bad mood; measured at sung 75, default BAL: 1–5 visits per 14 days, 6–15 per 42 days, i.e. a 0 in one 14-day window is the real rate, not a fault) */const vs0=AG2.stat.visit,te0=AG2.stat.tea;const ks={};let npcNight=0,roll0=0;const vr=visRoll;
   for(let d=0;d<14;d++){for(let bb=0;bb<4;bb++){placeWhere();agFlush();const D=agDz();const s=D.P.emp&&D.P.emp[S.buoi||0];if(s&&s.k)ks[s.k]=(ks[s.k]||0)+1;
-    if(S.visNpc&&S.visNpc.w===wk()&&S.tonight&&S.tonight.id===S.visNpc.id)npcNight++;Q.length=0;S.mg=0;try{nextBuoi()}catch(e){o.nb=e.message}Q.length=0}}
+    if(S.visNpc&&S.visNpc.w===wk()&&S.tonight&&S.tonight.id===S.visNpc.id)npcNight++;__agQ();S.mg=0;try{nextBuoi()}catch(e){o.nb=e.message}__agQ()}
+   {const w0=wk();for(let n=0;n<4&&wk()===w0;n++){__agQ();S.mg=0;try{nextBuoi()}catch(e){o.nb=e.message}__agQ()}}}
   BAL.ag.emp3.tea=tea0;BAL.ag.emp3.desire=des0;o.ks=ks;o.visit=AG2.stat.visit-vs0;o.tea=AG2.stat.tea-te0;o.npcNight=npcNight;o.rollOff=visRoll()==="";
   /* bestowal: his regard decides at the site's own %; off → the plain roll */
   const lo=L[0],hi=L[1]||L[0];lo.sung=5;lo.an=0;hi.sung=95;hi.an=80;let a=0,c=0;for(let i=0;i<3000;i++){if(empGive(lo,30,"t"))a++;if(empGive(hi,30,"t"))c++}o.give={lo:a/30,hi:c/30};
   /* the player's card reads the same table */
-  const A=talkOpts({kind:"emp"});const f=A.find(x=>x.n==="Tâng bốc");o.card=f&&f.w.sung===BAL.ag.cx2.flat.w.sung&&f.o===od(cx2O(S,"flat"));
+  /* STALE-TESTS-7: since act-merge (jdoor, OD 26/11 ~07:25Z) «Tâng bốc» is a way inside the door «Hầu chuyện»: read the raw ways (doorRaw = the list the door folds) */const A=typeof doorRaw==="function"?doorRaw({kind:"emp"}):talkOpts({kind:"emp"});const f=A.find(x=>x.n==="Tâng bốc");o.card=f&&f.w.sung===BAL.ag.cx2.flat.w.sung&&f.o===od(cx2O(S,"flat"));
   o.npcO=L.map(v=>AGREG.consort.cx2(v,agNeedsC(v),null).map(x=>x.k)).flat();return o});
  console.log('AG-ALL-2 Emperor plan slots over 14 days: '+JSON.stringify(r7.ks)+' visits '+r7.visit+' (NPC nights '+r7.npcNight+') tea '+r7.tea);
  ok(r7.visit>0&&(r7.ks["emp:visit"]||0)>0,'AG-ALL-2: Ngự giá lâm cung is the Emperor\'s own evening plan (NPC consorts too)',{v:r7.visit,ks:r7.ks});

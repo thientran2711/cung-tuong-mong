@@ -11,7 +11,7 @@ const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: 
 const [,,URL,NL,ONLY]=process.argv;/* ONLY = comma list of roads to walk (default: every full road) */const NLIV=+NL||3;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JSON.stringify(x).slice(0,900))};
  let p;/* boot(): a fresh context = a fresh world (the world and its children carry over from life to life in one storage) */
- const boot=async()=>{if(p)await p.context().close();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});p=await ctx.newPage();p.setDefaultTimeout(0);
+ const boot=async()=>{if(p)await p.context().close();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});p=await ctx.newPage();await p.addInitScript(require('./lib/qdrain').init);/* headless loop: __bot + answer the night choice (lib/qdrain.js, NPCROADS-RED) */p.setDefaultTimeout(0);
  p.on('pageerror',e=>errs.push(e.message.slice(0,300)));await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
  await p.waitForFunction(()=>typeof start==='function'&&typeof ROAD14==='object',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(()=>{document.getElementById('title').hidden=true;
@@ -27,7 +27,7 @@ const [,,URL,NL,ONLY]=process.argv;/* ONLY = comma list of roads to walk (defaul
      if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const bd=beatDef67(A,A.cur);const O=opts67(A,bd);const i=pick==='rand'?Math.floor(Math.random()*O.length):0;
       const o=O[i];res67(thKey67(A),A.cur,i,o&&o.o!=null?oOf67(A,o,bd):100);if(A.done)ends.push(A.a+'='+A.end)}}catch(e){err=err||('beat '+e.message+' '+(e.stack||'').split('\n')[1])}
     if(S.st.ms&&++stuck>2){if(S.st.ms.id==='len14'&&S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('bot')}else S.st.ms.force14=1}
-    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0}
+    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0}
    return{k,gate:arcOk67(ARC67[road]),road:S.st.f14.road,rd:S.st.f14.rd||'',plan:S.st.ch.plan.join(','),seq,vs,ends,tm:(S.st.X||[]).filter(t=>ARC67[t.a]&&ARC67[t.a].o==='tm').map(t=>t.a+(t.done?'=done':'')).join(' '),tmq:(S.st.f14.tmq||[]).join(' '),all:!!S.st.ch.all,n:S.st.ch.n,fin:S.st.ch.fin||'',months:mon,err}};
   const md0=msDone67;msDone67=function(m){return m.force14?true:md0.apply(this,arguments)}});};await boot();
  const roads=(await p.evaluate(()=>Object.keys(ROAD14).filter(r=>rdFull(r)))).filter(r=>!ONLY||ONLY.split(',').includes(r));console.log('full roads:',roads.join(' ')||'(none)');

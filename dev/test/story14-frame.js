@@ -8,7 +8,7 @@ const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: 
 const [,,URL,MAIN,NS]=process.argv;const N=+NS||40;
 const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c&&x!==undefined)console.error('FAIL',n,JSON.stringify(x).slice(0,600))};
- const boot=async(url,init)=>{const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});if(init)await ctx.addInitScript(init);const p=await ctx.newPage();p.setDefaultTimeout(0);
+ const boot=async(url,init)=>{const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});if(init)await ctx.addInitScript(init);const p=await ctx.newPage();await p.addInitScript(require('./lib/qdrain').init);/* headless loop: __bot + answer the night choice (lib/qdrain.js, NPCROADS-RED) */p.setDefaultTimeout(0);
   p.on('pageerror',e=>errs.push(url.slice(-14)+': '+e.message.slice(0,200)));await p.goto(url,{waitUntil:'domcontentloaded',timeout:0});
   await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1200);return p};
  /* ---- 1) bot lives ---- */
@@ -34,7 +34,7 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
  chk('bot save round trip',!R.x.saveFail.length,R.x.saveFail);
  /* fast story bot: every origin, one life each, months pass, each due hồi is played with a random option, a milestone stuck 30 months is
     closed by the test (the game has no time limit on Tranh ngôi Trung cung / Mẫu nghi): the frame must walk 1..14 */
- await p.evaluate(()=>{window.__bot=null;start=window.__startPre;/* r1 item 8: the sensible bot's start() cycles 8 origins and overrides __forceOrigin (never cnv); the checks below start each origin themselves */window.__H14=[];const hk=v=>{if(v&&!window.__H14.some(h=>h.id===v.id))window.__H14.push({id:v.id,me:aff(S,v),her:aff(v,S),oan:oan(v,S)})};
+ await p.evaluate(()=>{window.__bot=1;start=window.__startPre;/* NPCROADS-RED family: back to the plain headless flag (jdayq off), not null */ /* r1 item 8: the sensible bot's start() cycles 8 origins and overrides __forceOrigin (never cnv); the checks below start each origin themselves */window.__H14=[];const hk=v=>{if(v&&!window.__H14.some(h=>h.id===v.id))window.__H14.push({id:v.id,me:aff(S,v),her:aff(v,S),oan:oan(v,S)})};
   const c0=castRv67;castRv67=function(A,k){const r=c0.apply(this,arguments);try{if(A.host14&&A.host14[k]!=null)hk(RV(A.host14[k]))}catch(e){}return r};
   const n0=newThread67;newThread67=function(){const A=n0.apply(this,arguments);try{if(A&&A.host14)for(const k in A.host14)hk(RV(A.host14[k]))}catch(e){}return A};
   const md0=msDone67;window.__md0=md0;msDone67=function(m){return m.force14?true:md0.apply(this,arguments)};
@@ -47,7 +47,7 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
      if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const b=beatDef67(A,A.cur);const O=opts67(A,b);const i=pick==='rand'?Math.floor(Math.random()*O.length):0;
       const o=O[i];if(o&&o.o!=null)ctx.push(A.a+':'+A.cur+':'+oOf67(A,o,b));res67(thKey67(A),A.cur,i,o&&o.o!=null?oOf67(A,o,b):100);if(A.done)ends.push(A.a+'='+A.end)}}catch(e){err=err||('beat '+e.message)}
     if(S.st.ms&&++stuck>30){if(S.st.ms.id==='len14'&&S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('bot')}else S.st.ms.force14=1}if(S.st.ms&&S.st.ms.force14){S.dead=false;try{msCheck67()}catch(e){err=err||('close '+e.message)}}/* a life that keeps dying skips a67Month: the test closes its stuck chapter itself *//* cnv: the consort chapters open when she is really raised */
-    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}if((S.age||0)>40)S.age=40;/* the story bot keeps her alive: a dead month skips a67Month, so a long life (Thanh mai chapters) never closed its last chapter */try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
+    const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}if((S.age||0)>40)S.age=40;/* the story bot keeps her alive: a dead month skips a67Month, so a long life (Thanh mai chapters) never closed its last chapter */try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0;
     if(S.turn===t){if(++window.__stall>5){err=err||('time stopped at month '+S.turn+' buổi '+S.buoi+' '+JSON.stringify({mg:!!S.mg,out:S.out,dead:S.dead,place:S.place,exam:!!S.exam,kc:!!S.kc,wait:S.wait,night:S.night,ms:S.st.ms&&S.st.ms.id,M:S.st.M&&S.st.M.a}).slice(0,300));break}}else window.__stall=0}
    return {k:S.origin.k,want:k,road:S.st.f14&&S.st.f14.road,seq,ends,ctx,host,all:!!S.st.ch.all,n:S.st.ch.n,fin:S.st.ch.fin||'',months:mon,err}}});
  const FB=[];for(const k of ['tt','dtq','muoi','cn','nc','td','ch','thd','cnv'].concat(await p.evaluate(()=>typeof ORIGIN_BR==='object'?Object.keys(ORIGIN_BR):[])))FB.push(await p.evaluate(k=>window.__fast(k,'rand',99),k));
@@ -58,7 +58,10 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
  chk('the rolled road opens chapter 4',FB.every(r=>r.seq[3]&&r.seq[3].split(':')[1].startsWith(r.road+'/')),FB.map(r=>r.road+' '+r.seq[3]));
  const H=await p.evaluate(()=>window.__H14);chk('OD:L1247 hostile cast people hate her for real (thiện cảm < 0 both ways, oán > 0)',H.length>0&&H.every(h=>h.her<0&&h.me<0&&h.oan>0),H.slice(0,6));
  /* OD:L1253: one fixed choice path (always the first option), many lives of one origin → outcomes spread */
- const SP=[];for(let n=0;n<14;n++)SP.push(await p.evaluate(()=>window.__fast('tt',0,8)));
+ /* ROAD-TESTS-QDRAIN 27/11: tt has more roads now (composed roads), so 14 lives gave each arc only 3 plays and the 4+ rule had nothing to judge.
+    Same rule, more samples: at least 14 lives, then on until 4 arcs have 6+ plays (cap 40). */
+ const SP=[];const plays={};const enough=()=>Object.values(plays).filter(v=>v>=6).length>=4;/* 6 plays: with only 4 an arc can end one way by plain chance (seen 3/10 in one run) */
+ for(let n=0;n<40&&(n<14||!enough());n++){const r=await p.evaluate(()=>window.__fast('tt',0,8));SP.push(r);r.ends.forEach(x=>{const a=x.split('=')[0];plays[a]=(plays[a]||0)+1})}console.log('L1253 lives:',SP.length);
  const E={},C={};SP.forEach(r=>{r.ends.forEach(x=>{const [a,e]=x.split('=');(E[a]=E[a]||[]).push(e)});r.ctx.forEach(x=>{const q=x.split(':');const key=q[0]+':'+q[1];(C[key]=C[key]||new Set()).add(q[2])})});
  const tab=Object.entries(E).filter(([a,L])=>L.length>=3).map(([a,L])=>{const cnt={};L.forEach(e=>cnt[e]=(cnt[e]||0)+1);return [a,L.length,cnt,Math.max(...Object.values(cnt))/L.length]});
  console.log('L1253 spread (arc, plays, endings, top share):',JSON.stringify(tab));const ctxVar=Object.values(C).filter(s=>s.size>1).length,ctxN=Object.keys(C).length;console.log('same option, different odds across lives:',ctxVar+'/'+ctxN);
@@ -84,7 +87,7 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
  /* ---- r1 item 1: home road («Ở nhà chờ tuyển tú», jkc): chapter 1 waits at home, restarts at palace entry with its full time ---- */
  const home=[];for(const rk of [0,1,2]){home.push(await p.evaluate(rk=>{quiet=true;localStorage.clear();window.__forceOrigin='tt';start();if(!S.kc&&kcOk(S.origin.k))kcInit();/* = the new-life accept with «Ở nhà chờ tuyển tú» (jkc nlAccept) */quiet=false;Q.length=0;
    const o={rk,origin:S.origin.k,home:!!(S.kc&&!S.kc.inPal),ms0:S.st.ms&&S.st.ms.id,han0:msHan67(S.st.ms)[1]};
-   for(let i=0;i<3;i++){const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){o.err=e.message;break}}}Q.length=0;
+   for(let i=0;i<3;i++){const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){o.err=e.message;break}}}Q.length=0;
    o.homeMs=S.st.ms&&S.st.ms.id;o.homeN=S.st.ch.n;S.turn+=20;kcEnter(rk);Q.length=0;o.entryRank=S.rank;try{a67Month()}catch(e){o.err=e.message}Q.length=0;
    const m=S.st.ms;o.ms=m&&m.id;o.n=S.st.ch.n;o.left=m?m.t0+BAL.st14.lim.nhap-S.turn:null;o.lim=BAL.st14.lim.nhap;o.r0=m&&m.r0;o.past=S.st.ch.past.map(x=>x.ms+':'+x.tag).join(',');o.han=msHan67(m)[1];
    const inv0=(S.inv||[]).length,d0=S.danh;S.rank=Math.min(6,S.rank+1);__tq14All();msCheck67();Q.length=0;const last=S.st.ch.past.slice(-1)[0];o.real=last&&last.ms==='nhap14'&&last.k===1&&!last.late;o.rew=(S.inv||[]).length-inv0;o.danh=S.danh-d0;return o},rk))}
@@ -94,7 +97,7 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
  const cv=await p.evaluate(()=>{quiet=true;localStorage.clear();window.__forceOrigin='cnv';start();quiet=false;Q.length=0;const o={origin:S.origin.k,srv:isSrv()};const G=BAL.st14.goal;
   o.s1=MS67.nhap14.steps(S.st.ms).map(x=>x[0]).join(' | ');o.d1a=msDone67(S.st.ms);S.tin=G.tin;__tq14All();o.d1b=msDone67(S.st.ms);
   const fake={id:'sung14',t0:S.turn,r0:S.rank};o.s2=MS67.sung14.steps(fake).map(x=>x[0]).join(' | ');o.t2=MS67.sung14.t();o.d2a=msDone67(fake);S.nt=G.nt;o.d2b=msDone67(fake);
-  const c=S.st.ch,j=c.plan.indexOf('ms:len14');o.hasLen=j>0;
+  const c=S.st.ch;let j=c.plan.indexOf('ms:len14');/* ROAD-TESTS-QDRAIN 27/11: since road B3 (jrd_cnv header) ms:len14 is no longer a middle chapter; the chapter-12 slot «end:12» becomes ms:len14 for a maid when it opens (jend14 eg12). Without this, j=-1 set ch.i=-2 and chAdvance67 read plan[-1] (THROW). */if(j<0)j=c.plan.indexOf('end:12');o.hasLen=j>0;o.slot=c.plan[j];
   const snap=JSON.stringify({c,ms:S.st.ms,M:S.st.M,srv:S.srv});
   const at=(risen)=>{const B=JSON.parse(snap);S.st.ch=B.c;S.st.ms=null;S.st.M=null;S.srv=B.srv;S.srv.risen=risen?1:0;S.st.ch.i=j-1;S.st.ch.n=8;chAdvance67(null);Q.length=0;return{ms:S.st.ms&&S.st.ms.id,arc:S.st.M&&S.st.M.a,n:S.st.ch.n}};
   o.notRisen=at(false);o.risen=at(true);
@@ -105,8 +108,8 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
  chk('r1 item 2: «Từ kẻ hầu thành tiểu chủ» runs only when not raised; raised → a shared arc in its place, no free reward',cv.hasLen&&cv.notRisen.ms==='len14'&&cv.risen.ms!=='len14'&&!!cv.risen.arc&&cv.risen.n===9,cv);
  /* ---- r1 item 6: Thanh mai trúc mã life: the frame stays 14 everywhere (c.max, STORY n, printed labels) ---- */
  const tm=await p.evaluate(()=>{quiet=true;localStorage.clear();localStorage.setItem('ctm-tm96','1');window.__forceOrigin='thd';start();localStorage.removeItem('ctm-tm96');quiet=false;Q.length=0;
-  const o={origin:S.origin.k,tm:!!S.tm96,max:S.st.ch.max,n:STORY[S.origin.k]&&STORY[S.origin.k].n,len:S.st.ch.plan.filter(x=>x!=='fin').length,plan:S.st.ch.plan.join(',')};
-  for(let i=0;i<12;i++){const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){o.err=e.message;break}}}Q.length=0;
+  const o={origin:S.origin.k,tm:!!S.tm96,max:S.st.ch.max,n:STORY[S.origin.k]&&STORY[S.origin.k].n,len:S.st.ch.plan.filter(x=>x!=='fin'&&!(typeof rdOn==='function'&&rdOn()&&/^st:tm96[abc]$/.test(x))).length,/* ROAD-TESTS-QDRAIN 27/11: in a full-road life jroad moves st:tm96a/b/c out of the plan to the side line (phụ tuyến, S.st.f14.tmq) at the next chAdvance67 (ROAD_MAP §2), so they are not numbered chapters */plan:S.st.ch.plan.join(',')};
+  for(let i=0;i<12;i++){const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){o.err=e.message;break}}}Q.length=0;
   o.max2=S.st.ch.max;const txt=[String(panel67()),String(ktStoryHTML()),JSON.stringify(typeof chapModel==='function'?chapModel():{})].join(' ').replace(/<[^>]+>/g,' ');o.bad=(txt.match(/Chương \d+\/(\d+)/g)||[]).filter(x=>!/\/14$/.test(x));return o});
  console.log('tm96:',JSON.stringify(tm));
  chk('r1 item 6: Thanh mai trúc mã life: max 14 at start and after 12 months, no «/15» anywhere',tm.origin==='thd'&&tm.tm&&tm.max===14&&tm.n===14&&tm.len===14&&tm.max2===14&&!tm.bad.length&&!tm.err,tm);
@@ -135,12 +138,12 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
    await q.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='dtq';document.getElementById('title').hidden=true;start()});
    /* the first start() of a page finishes after the Luân hồi roulette (S is set a moment later) */
    await q.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin&&S.st,null,{timeout:60000});
-   const s=await q.evaluate(()=>{for(let i=0;i<8;i++){Q.length=0;used=0;if(S.dead){S.dead=false;S.suc=60}nextBuoi()}Q.length=0;if(typeof S==='undefined'||!S)return{retry:1};
+   const s=await q.evaluate(()=>{for(let i=0;i<8;i++){__qDrain();used=0;if(S.dead){S.dead=false;S.suc=60}nextBuoi()}Q.length=0;if(typeof S==='undefined'||!S)return{retry:1};
     return{save:JSON.stringify(ser()),f14:!!S.st.f14,v2:S.st.v2,plan:S.st.ch&&S.st.ch.plan.join(',')}});await q.context().close();if(s.retry&&(tries||0)<3)return mk(url,pre,(tries||0)+1);return s};
  const olds=[];if(MAIN)olds.push(['main build',await mk(MAIN)]);olds.push(['frame off',await mk(URL,()=>{window.F14_ON=false})]);
  const q=await boot(URL);
  for(const [nm,o] of olds){const r=await q.evaluate(s=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;Q.length=0;deser(JSON.parse(s));const plan=S.st.ch&&S.st.ch.plan.join(',');
-    const n0=S.st.ch&&S.st.ch.n;for(let i=0;i<60;i++){Q.length=0;used=0;try{nextBuoi()}catch(e){return{err:e.message}}}Q.length=0;tab='story';render();const st=(document.getElementById('panel')||{}).textContent||'';tab='act';render();
+    const n0=S.st.ch&&S.st.ch.n;for(let i=0;i<60;i++){__qDrain();used=0;try{nextBuoi()}catch(e){return{err:e.message}}}Q.length=0;tab='story';render();const st=(document.getElementById('panel')||{}).textContent||'';tab='act';render();
     return{q14:!!(S.st.ms&&S.st.ms.q14),f14:!!S.st.f14,v2:S.st.v2,same:plan===(S.st.ch&&S.st.ch.plan.join(',')),plan,n0,n:S.st.ch&&S.st.ch.n,max:S.st.ch&&S.st.ch.max,tab14:/\/14 ·/.test(st)}},o.save);
   console.log(nm,JSON.stringify(r));/* main got the 14-chapter frame (c053ee92): a main-build save keeps whatever frame it had; a tutorial chapter it started has no quests (jtq14) */
   chk(`old save (${nm}) loads, keeps its old frame, plays on`,!r.err&&r.f14===!!o.f14&&r.tab14===r.f14&&r.n>=r.n0&&!r.q14&&(nm!=='frame off'||!r.f14),r)}

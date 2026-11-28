@@ -18,7 +18,7 @@ const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: 
  await g.waitForFunction(()=>typeof start==='function'&&typeof nrAskPick==='function'&&window.NRASK,null,{timeout:0});await g.waitForTimeout(1500);
  const FS=require('fs'),PA=require('path');const BD=PA.join(__dirname,'..','build');const NRF=FS.readdirSync(BD).filter(f=>/^jnrask.*\.js$/.test(f)).sort();
  for(const f of NRF)await g.addScriptTag({content:FS.readFileSync(PA.join(BD,f),'utf8')});console.log('jnrask files scanned:',NRF.join(' '));
- const R=await g.evaluate(()=>{const out={};document.getElementById('title').hidden=true;quiet=true;window.__forceOrigin='thd';start();quiet=false;Q.length=0;
+ const R=await g.evaluate(()=>{window.__sqoff=1;/* sideq-trim: content test, any asker (the rank gate has its own test) */const out={};document.getElementById('title').hidden=true;quiet=true;window.__forceOrigin='thd';start();quiet=false;Q.length=0;
   const roads=Object.keys(ROAD14).concat(Object.keys(NRM));
   /* 1. kinds */
   const seen={};for(const r of roads)for(let n=BAL.road.first;n<=BAL.road.last;n++){const A=nrCh(r,n);if(!A)continue;for(let t=0;t<6;t++){const k=nrKind(A);seen[k]=(seen[k]||0)+1}}
@@ -54,11 +54,11 @@ const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: 
   /* 5. old save: nr_* quest without p.av and an old nr_bac one: open, render stock, play to the end */
   const old=[];for(const tid of ['nr_emp','nr_bac']){clear();const x=mk(tid,undefined,id0,false);if(!x){old.push([tid,'make']);continue}delete x.p.av;
    const s=JSON.parse(JSON.stringify(x));q.a.push(s);const r=render(s);if(r.ask||/[{}]/.test(r.h))old.push([tid,'not stock',r.h]);
-   let t=0;S.bac=9999;S.suc=95;while(q.a.includes(s)&&t++<12){used=0;S.suc=95;q72Do(s.u,0)}if(q.a.includes(s))old.push([tid,'did not end'])}
+   let t=0;S.bac=9999;S.suc=95;while(q.a.includes(s)&&t++<12){used=0;S.suc=95;Q.length=0;/* an NPC popup that landed while khắc passed (jagent) would block the step */q72Do(s.u,0)}if(q.a.includes(s))old.push([tid,'did not end'])}
   out.old=old;
   /* 6. played to the end with an ask: option 0 → hb>0 or honest fail; betrayal (option 2) → hb<0 */
   const play=[];for(const oi of [0,2]){clear();const a=[].concat(NRASK[id0])[0];const x=mk('nr_'+a.k,0,id0,false);v.nr.hb=0;q.a.push(x);let t=0;
-   while(q.a.includes(x)&&t++<12){used=0;S.suc=95;S.bac=9999;q72Do(x.u,oi)}const hist=q.h[0]&&q.h[0].res;play.push({oi,hb:v.nr.hb,hist,done:!q.a.includes(x)})}
+   while(q.a.includes(x)&&t++<12){used=0;S.suc=95;S.bac=9999;Q.length=0;q72Do(x.u,oi)}const hist=q.h[0]&&q.h[0].res;play.push({oi,hb:v.nr.hb,hist,done:!q.a.includes(x)})}
   out.play=play;
   /* 7. no asker is sent to herself (NRSELF, whole family): for every chapter of every road, each self role, many draws → never its own kind;
      and the live offer of a queen consort never queues nr_hh */

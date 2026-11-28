@@ -62,7 +62,7 @@ function kidLifeMonth(){if(!S||S.dead)return"";const B=kmB(),far=[];let ev="";
  if(far.length)ev+=`Lâu không gặp, ${far.join(", ")} với ngươi xa cách: Mẫu tử ${balSg(B.estr)}. `;return ev}
 /* the children tab: her wards («Con nuôi») */
 function kmWardCard(k,mo){return pcard({tabKey:"kidward",f:kidFace(k),name:k.name,rank:`${ic("con",16)}${k.sex==="m"?"Hoàng tử":"Công chúa"} · con nuôi`,
- lines:[tuoi(k.age),`Mẹ ruột: <b>${mo?mo.name:"—"}</b>${mo&&mo.alive?" (ở lãnh cung)":" (đã mất)"}`,`Sức khỏe <b>${k.hp}</b>`,`Tài <b>${k.tal}</b>`,sbar("Mẫu tử",k.fM==null?kmB().hm0[0]:k.fM,"h54m")],
+ lines:[tuoi(k.age),`Mẹ ruột: <b>${mo?mo.name:"—"}</b>${mo&&mo.alive?" (ở lãnh cung)":" (đã khuất)"}`,`Sức khỏe <b>${k.hp}</b>`,`Tài <b>${k.tal}</b>`,sbar("Mẫu tử",k.fM==null?kmB().hm0[0]:k.fM,"h54m")],
  chips:[k.heir?chip("Thái tử","ok"):"",chip("Ở cung ngươi","ok")]})}
 (function(){try{
  /* her sons get the same Mẫu tử bar as the princesses (j54 h54Lines draws it for daughters) */

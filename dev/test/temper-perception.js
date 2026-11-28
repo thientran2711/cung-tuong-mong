@@ -46,6 +46,16 @@ const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sl
   const openRival=async()=>{const i=await p.evaluate(()=>{const v=window.__tv;Q.length=0;const R=agRec();if(R&&R.P["v"+v.id])for(let q=0;q<J95.KH;q++)R.P["v"+v.id][q]=["home","visit","me","sang chơi"];
     S.where=S.where||{};S.where[v.id]="home";popIdx=null;goTo("home");Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();return curPeople().findIndex(x=>x.ref===v&&x.kind==="rival")});
    if(i<0)return {i};await sleep(800);
+   /* STALE-TESTS-7: the people of a place stand in the RING (jkring kitRing «Vòng người», KIT §104, owner OD 26/11 ~18:55Z): the band over the stage turns the ring
+      (a swipe there no longer pages #tokens), the FRONT slot is bright, tap it = focus → her plaques drop. A player turns the ring with the real ‹ › arrows until
+      she is in front, then taps her figure (a real tap at the painted figure: ring slots take no pointer events, the ring layer hit-tests the point). */
+   for(let w=0;w<20&&!(await p.$('.kring-s'));w++)await sleep(250);
+   if(await p.$('.kring-s')){const turns=[];for(let k=0;k<14;k++){const g=await p.evaluate(i=>{const L=[...document.querySelectorAll('.kring-s')];const j=L.findIndex(s=>s.__g&&s.__g.members.some(m=>m.i===i));const f=L.findIndex(s=>s.classList.contains('kring-front'));
+      const s=L[j];const r=s&&s.getBoundingClientRect();return {n:L.length,j,f,x:r?r.left+r.width/2:0,y:r?r.top+r.height*.45:0}},i);turns.push(g.j+'/'+g.f+'/'+g.n);
+     if(g.j<0)break;if(g.j===g.f){await sleep(500);if(rt.touch)await p.touchscreen.tap(g.x,g.y);else await p.mouse.click(g.x,g.y);await sleep(1200);
+      const pl=await p.evaluate(()=>!!document.querySelector('.kpk .kfoc-b'));return {i,ring:1,turns,tap:pl,btn:null}}
+     const ar=p.locator('button.kring-ar').filter({hasText:'›'}).first();if(!await rt.tap(ar,{screen:'ring',label:'›'}))break;await sleep(700)}
+    return {i,ring:1,turns,tap:false,btn:null}}
    /* swipe stage (KIT 33.9): a person off the view is reached the way a player does it — a real swipe across the stage (pointer drag), never a jump */
    let sw=0;const pgs=[];for(;sw<8;sw++){const g=await p.evaluate(i=>{const t=document.querySelector(`#tokens .tok[data-p="${i}"]`),st=document.getElementById('stage');const r=t&&t.getBoundingClientRect(),q=st.getBoundingClientRect();
      const pg=(st.dataset.j59pg||'0,1').split(',').map(Number),hid=!r||r.width<1;return {vis:!hid&&r.right>q.left+4&&r.left<q.right-4,pg,dir:hid?(pg[0]<pg[1]-1?1:-1):(r.left>=q.right-4?1:-1),x0:q.left+q.width*.62,x1:q.left+q.width*.08,y:q.top+q.height*.6}},i);pgs.push(g.pg.join('/')+(g.vis?'v':'')+g.dir+(g.vis?'':'@'+(await p.evaluate(([x,y])=>{const e=document.elementFromPoint(x,y);const c=e&&e.closest('.kshL,.kshR,.kchip,#tomap');return e?(e.tagName+'.'+String(e.className).slice(0,24)+(c?'!EXCL':'')):'-'},[g.dir>0?g.x0:g.x1,g.y]))));if(g.vis)break;
@@ -61,36 +71,51 @@ const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sl
   const KB=`(()=>{const v=[...document.querySelectorAll('.kfoc-b,.opt[data-o]')].filter(x=>/Khiêu khích/.test(x.textContent)&&x.getBoundingClientRect().width>1);return v[0]||null})()`;
   const kbInfo=()=>p.evaluate(`(()=>{const b=${KB};return b?{t:b.textContent.replace(/\\s+/g," ").trim(),cls:b.className,dis:!!b.disabled}:null})()`);
   const kbTap=async()=>{const h=await p.evaluateHandle(KB);const el=h.asElement();if(!el)return false;return rt.tap(el,{screen:'card',label:'Khiêu khích'})};
+  /* STALE-TESTS-7: since act-merge (jdoor, owner OD 26/11 ~07:25Z) «Khiêu khích» is a member way of the door «Khiêu khích» (P6, with «Khoe quà ngự ban»):
+     the person card shows the DOOR as a plaque (kitPick, KIT §98: tap = lift, «Chọn» = pick) → the door's choice card → one row per way, each with its
+     own lock / reason (the Option A gate of jtperc sits on the way, inside the door). Every step a real tap. */
+  const PKOK='.kpk .khconf:not([hidden])>.khok';
+  const doorOpenTap=async()=>{if(!await kbTap())return false;for(let i=0;i<10&&!(await p.$(PKOK));i++)await sleep(150);if(!(await p.$(PKOK)))return false;
+   const ok=await rt.tap(PKOK,{screen:'card',label:'Chọn (Khiêu khích)'});for(let i=0;i<12;i++){if(await p.evaluate(()=>{const M=document.getElementById('modal');return !!(M&&!M.hidden&&M.querySelector('.dlg .opts > button'))}))break;await sleep(250)}return ok};
+  const ROW=()=>p.locator('#modal .dlg .opts > button').filter({hasText:/Khiêu khích/}).first();
+  const rowInfo=()=>p.evaluate(()=>{const M=document.getElementById('modal');const b=M&&!M.hidden&&[...M.querySelectorAll('.dlg .opts > button')].find(x=>/^\s*Khiêu khích/.test(x.textContent));
+   if(!b)return null;return {t:b.textContent.replace(/\s+/g," ").trim(),cls:b.className,dis:!!b.disabled,off:b.matches('.kitoff,.kfoc-off,[aria-disabled="true"]')||!!b.disabled}});
   const tabTo=async()=>{/* the act may sit in another group tab of the card: tap the tab that holds it */
    if(await kbInfo())return;
    const n=await p.evaluate(()=>document.querySelectorAll('.kfoc-tabs .pct').length);for(let j=0;j<n;j++){await rt.tap(`.kfoc-tabs .pct:nth-child(${j+1})`,{screen:'card',label:'tab'});await sleep(400);
     if(await kbInfo())return}};
-  const setup=()=>p.evaluate(()=>{const v=liveRivals(false).find(x=>!x.queen&&!sameHouse(S,x)&&!x.confined);window.__tv=v;try{k61Meet(v,"thử",3)}catch(e){}/* she has met her (state) — a stranger's card asks «Chưa biết người này là ai» first */S.ro[v.id]=0;S.rl[v.id]=0;v.rel=0;v.oan=0;S.sung=Math.max(S.sung,v.sung);for(const f of liveRivals(true))if(f.ag)f.ag.vent={};return !!v});
-  /* gateNo: the visible focus button is greyed (kfoc-off); her real tap only pops the reason «chưa có cớ»; nothing changes */
-  await fresh();await setup();{const o=await openRival();await tabTo();const B=await p.evaluate(()=>{const b=[...document.querySelectorAll('.opt[data-o]')].find(x=>/Khiêu khích/.test(x.textContent));return b?b.textContent.replace(/\s+/g," ").trim():""});
-   const K=await kbInfo();const r0=await p.evaluate(()=>[window.__tv.rel,S.ro[window.__tv.id]||0,(S.tp&&S.tp.n)||0]);const tapped=K?await kbTap():false;await sleep(900);
+  const setup=()=>p.evaluate(()=>{const L=liveRivals(false).filter(x=>!x.queen&&!sameHouse(S,x)&&!x.confined);/* STALE-TESTS-7: not above her rank (else the rank lock «phận dưới không dám khiêu khích bậc trên» closes the way, whatever the reason) */const v=L.find(x=>rkOf(x)<=rkOf(S))||L[0];if(rkOf(v)>rkOf(S))v.rank=S.rank;window.__tv=v;try{k61Meet(v,"thử",3)}catch(e){}/* she has met her (state) — a stranger's card asks «Chưa biết người này là ai» first */S.ro[v.id]=0;S.rl[v.id]=0;v.rel=0;v.oan=0;S.sung=Math.max(S.sung,v.sung);for(const f of liveRivals(true))if(f.ag)f.ag.vent={};return !!v});
+  /* gateNo: no reason → inside the door the «Khiêu khích» way is closed with «chưa có cớ»; her real tap on it changes nothing */
+  await fresh();await setup();{const o=await openRival();await tabTo();const K=await kbInfo();const r0=await p.evaluate(()=>[window.__tv.rel,S.ro[window.__tv.id]||0,(S.tp&&S.tp.n)||0]);
+   /* the way itself (read only): inside the door «Khiêu khích» the way «Khiêu khích» is closed «chưa có cớ» */
+   const way=await p.evaluate(()=>{const v=window.__tv;const P=curPeople().find(x=>x.ref===v&&x.kind==="rival");const d=P&&talkOpts(P).find(a=>a&&a.door&&a.m&&a.m.some(x=>x.tw==="provoke"));const w=d&&d.m.find(x=>x.tw==="provoke");return w?{lock:!!w.lock,t:w.t||"",doorLock:!!d.lock}:null});
+   let door=false,RI=null,tapped=false;
+   if(K&&/kfoc-off|kitoff/.test(K.cls)){/* every way of the door is closed (the other way has its own reason): the plaque is greyed; her real tap only pops a reason */tapped=await kbTap()}
+   else{door=K?await doorOpenTap():false;RI=await rowInfo();tapped=RI?await rt.tap(ROW(),{screen:'door',label:'Khiêu khích (closed)'}):false}
+   const B=RI?RI.t:(way?way.t:"");await sleep(900);
    const pop=await p.evaluate(()=>{const e=document.querySelector('#kpop');const r=e&&e.getBoundingClientRect();return e&&!e.hidden&&r.width>1&&getComputedStyle(e).visibility!=='hidden'&&getComputedStyle(e).display!=='none'?e.textContent.replace(/\s+/g," ").trim().slice(0,120):""});
-   const r1=await p.evaluate(()=>[window.__tv.rel,S.ro[window.__tv.id]||0,(S.tp&&S.tp.n)||0]);await done('gateNo',{o,B,K,tapped,pop,r0,r1,ok:/chưa có cớ/.test(B)&&!!K&&/kfoc-off/.test(K.cls)&&/chưa có cớ/.test(pop)&&String(r0)===String(r1)})}
+   const r1=await p.evaluate(()=>[window.__tv.rel,S.ro[window.__tv.id]||0,(S.tp&&S.tp.n)||0]);
+   await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true});
+   await done('gateNo',{o,K,way,door,RI,B,tapped,pop,r0,r1,ok:!!K&&tapped&&!!way&&way.lock&&/chưa có cớ/.test(way.t)&&(RI?RI.off&&/chưa có cớ/.test(RI.t):!!pop)&&String(r0)===String(r1)})}
   /* gateYes: after a grudge the button is open; the data row names the reason «cớ: oán 45»; her real tap lands */
   await fresh();await setup();{await p.evaluate(()=>{S.ro[window.__tv.id]=45;/* one onlooker for sure: another consort's row of the ONE record puts her at her palace this khắc */const v=window.__tv,R=agRec(),kh=j95kh();const w=liveRivals(false).find(x=>x!==v&&!x.confined&&R&&R.P['v'+x.id]);if(w){R.P['v'+w.id][kh]=['home','visit','me','thử'];/* …and gone the next khắc: the deed (1 khắc) is judged by who stood there when it STARTED */if(R.P['v'+w.id].length>kh+1)R.P['v'+w.id][kh+1]=['tp_away','đi','','thử'];window.__tw=w}});const o=await openRival();await tabTo();
-   const B=await p.evaluate(()=>{const b=[...document.querySelectorAll('.opt[data-o]')].find(x=>/Khiêu khích/.test(x.textContent));return b?{t:b.textContent.replace(/\s+/g," ").trim(),o:b.dataset.o}:null});
-   const K=await kbInfo();
+   const K=await kbInfo();const door=K?await doorOpenTap():false;const B=await rowInfo();/* the open way names its reason «cớ: oán 45» on its row */
    const pre=await p.evaluate(()=>{const v=window.__tv,R=agRec(),kh=j95kh(),pl=tpWhere(S);const at=R?Object.keys(R.P).filter(id=>R.P[id][kh]&&j95at(R.P[id][kh][0],pl)&&id!=="me"&&id!=="v"+v.id&&(id==="emp"||id==="th"||/^v\d+$/.test(id))):[];const at1=R?Object.keys(R.P).filter(id=>R.P[id][kh+1]&&j95at(R.P[id][kh+1][0],pl)):[];const atAll=R?Object.keys(R.P).filter(id=>R.P[id][kh]&&j95at(R.P[id][kh][0],pl)):[];return {rel:v.rel,at,at1,atAll,kh,pl,n:(S.tp&&S.tp.n)||0}});
-   const tapped=K&&!/kfoc-off/.test(K.cls)?await kbTap():false;await sleep(1500);
+   const tapped=B&&!B.off?await rt.choose(ROW(),{screen:'door',label:'Khiêu khích'}):false;await sleep(1500);
    /* the act opens its mini-game (KIT focus play): she takes «Bỏ qua · kết quả thường» with a real tap, as a player may */
    const skips=[];for(let k=0;k<6;k++){const h=await p.evaluateHandle(()=>[...document.querySelectorAll('.kfoc-skip,button')].find(b=>/^\s*Bỏ qua/.test(b.textContent)&&b.getBoundingClientRect().width>1)||null);const el=h.asElement();if(!el)break;
     skips.push(await rt.tap(el,{screen:'play',label:'Bỏ qua'}));await sleep(1500)}
    /* a follow-up screen of the act (result / confirm) is read, not tapped through: the act has landed on the tap */
    const post=await p.evaluate(()=>{const v=window.__tv,q=(S.tp&&S.tp.q)||[];const it=q[q.length-1];const L=(S.logs||[]).slice(0,6).join(" ").replace(/<[^>]+>/g,"");return {rel:v.rel,it:it&&{d:it.d,x:it.x,v:it.v,j:Object.keys(it.j)},log:/Người chứng kiến/.test(L),logs:L.slice(0,300)}});
    /* every eye-witness the record put there judged it; the doer and the victim never judge it (later hearsay judges may add on) */const sameSet=!!post.it&&pre.at.length>0&&pre.at.every(id=>post.it.j.includes(id))&&!post.it.j.includes('me')&&!post.it.j.includes('v'+post.it.v);
-   await done('gateYes',{o,B:B&&B.t,K,tapped,skips,pre,post,ok:!!B&&/cớ: oán 45/.test(B.t)&&tapped&&post.rel<pre.rel&&!!post.it&&post.it.d==="provoke"&&sameSet&&post.log})}
+   await done('gateYes',{o,B:B&&B.t,K,door,tapped,skips,pre,post,ok:!!B&&/cớ: oán 45/.test(B.t)&&tapped&&post.rel<pre.rel&&!!post.it&&post.it.d==="provoke"&&sameSet&&post.log})}
   /* eaHook: an outburst lands in the rule as an outburst; the consorts that stand at her place judge it */
   await fresh();{const r=await p.evaluate(()=>{const v=liveRivals(true)[0];const R=agRec(),kh=j95kh();const pl=tpWhere(S);if(R&&R.P["v"+v.id])R.P["v"+v.id][kh]=[pl,"visit","me","thử"];
     const a0=v.rel;const row=EA_REACT.find(x=>x.k==="mang"&&x.who==="c");const o=window.eaDo(S,row);const q=S.tp.q,it=q[q.length-1];return {o:!!o,it:it&&{d:it.d,o:it.o,j:Object.keys(it.j)},seen:it&&!!it.j["v"+v.id],a0,a1:v.rel,rec:!!R}});
    await done('eaHook',Object.assign(r,{ok:r.o&&r.it&&r.it.d==="mang"&&r.it.o===1&&(r.rec?r.seen:true)}))}
   /* math on one onlooker */
   await fresh();{const r=await p.evaluate(()=>{const P=BAL.tp;const [X,O]=liveRivals(false).filter(x=>!x.queen);const it=d=>({id:999,x:String(X.id),v:null,d,o:1,wk:wk(),j:{}});
-    const run=(d,how,setup)=>{S.tp=null;const s0={r:O.rl[X.id]||0};O.rl[X.id]=0;O.trong=setup.tr||["Cần","Trí"];if(setup.close)O.rl[X.id]=netTh(O,"than");const b=O.rl[X.id];
+    const run=(d,how,setup)=>{S.tp=null;const s0={r:O.rl[X.id]||0};O.rl[X.id]=0;/* STALE-TESTS-7: each run starts with a clean oán-pace store too (joanpace (b') ghét: O.opa = one bounded step per cause per buổi + day cap) — else run 2.. land inside run 1's spent buổi cap */O.opa={};delete O.agw;O.trong=setup.tr||["Cần","Trí"];if(setup.close)O.rl[X.id]=netTh(O,"than");const b=O.rl[X.id];
      const m0=window.memList;if(setup.kind)window.memList=(h,a)=>h===O&&a===X?[{s:1,w:wk(),n:1,g:20}]:m0(h,a);const m1=window.moodCauseKnownBy;if(setup.reason)window.moodCauseKnownBy=()=>"thử";
      S.tp=null;tpS().r={};const st=tpS();let v=0;for(let i=0;i<10;i++){v+=tpJudge(O,Object.assign(it(d),{id:999+i}),how)}window.memList=m0;window.moodCauseKnownBy=m1;const out=O.rl[X.id]-b;O.rl[X.id]=s0.r;return out};
     const base=run("mang","eye",{}),nhan=run("mang","eye",{tr:["Nhân","Trí"]}),kind=run("mang","eye",{kind:1}),rs=run("mang","eye",{reason:1}),hear=run("mang","hear",{}),ap=run("pham","eye",{tr:["Tín","Cần"],reason:1}),apNo=run("pham","eye",{tr:["Tín","Cần"]});
