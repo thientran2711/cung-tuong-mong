@@ -24,7 +24,9 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   day:x=>{if(x){delete x.opz;delete x.opa}},/* a fresh day of the oán pace for that holder (joanpace opz / opa) */
   ensureMine:()=>{if(!(S.staff||[]).some(x=>x.sid!=null))S.staff=(S.staff||[]).concat([mkServ("maid")]);return (S.staff||[]).find(x=>x.sid!=null)}}});
  /* 1 RECRUIT roads */
- const r1=await p.evaluate(()=>{const o={};const L=TK.R();const v=L[0],w=L[1]||L[0];const T=BAL.ag.know.tm;
+ /* lc34-3b-r1: these are the NO-knowledge roads, so the servant-trust witness roll (jsvt svTouch «seen» = the master learns through a real witness,
+    its own rule and tests) is held off here; with it on, a random witness made «same» fail ~1 run in 2 on the merged build */
+ const r1=await p.evaluate(()=>{window.__svtOff=1;const o={};const L=TK.R();const v=L[0],w=L[1]||L[0];const T=BAL.ag.know.tm;
   const same=(a,b)=>a.aff===b.aff&&a.oan===b.oan;const nameOan=(n0,who)=>TK.logsSince(n0).some(x=>x.includes(who.name)&&/oán/.test(x));
   /* a. kỳ ngộ (the owner's case): every option whose special is a spy carries no oán cost (jky runOpt C.oan → «X để bụng oán»), and the spy special itself leaves the master's feeling alone */
   {const E=BAL.kyngo.E||{};const bad=[];let n=0;for(const id in E){for(const O of (E[id].o||[]).concat(E[id].plain?[E[id].plain]:[])){if(O&&O.s==="spy"){n++;if(O.c&&O.c.oan)bad.push(id)}}}
@@ -43,8 +45,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   if(L.length>1){const s=TK.free(w);const b0=TK.rel(w,v);s.spyFor=null;TK.lo();let got=null;try{got=tmAsk(v,s,0)}finally{TK.back()}o.npc={spy:s.spyFor===key(v),same:same(b0,TK.rel(w,v))};s.spyFor=null}
   /* g. Dọa tố (threatServ) taken */
   {const s=TK.free(v);const b0=TK.rel(v,S);TK.lo();let r="";try{r=threatServ(S,s)}catch(e){r="ERR "+e.message}finally{TK.back()}o.threat={spy:s.spyFor==="me",same:same(b0,TK.rel(v,S)),r};s.spyFor=null}
-  return o});
- ok(r1.ky.n>0&&r1.ky.bad.length===0&&!(r1.ky.cost&&r1.ky.cost.oan)&&r1.ky.spy==="me"&&r1.ky.same&&!/oán/.test(r1.ky.out),'kỳ ngộ «Giữ nàng ta làm tai mắt»: a spy, NO oán of her master, no «để bụng oán» line (the owner\'s case)',r1.ky);
+  window.__svtOff=0;return o});
+ ok(r1.ky.n>0&&r1.ky.bad.length===0&&!(r1.ky.cost&&r1.ky.cost.oan)&&r1.ky.spy==="me"&&r1.ky.same&&!/(^|[^A-Za-zÀ-ỹ])oán/.test(r1.ky.out)/* a name like «Hoán Bích» holds the letters «oán» */,'kỳ ngộ «Giữ nàng ta làm tai mắt»: a spy, NO oán of her master, no «để bụng oán» line (the owner\'s case)',r1.ky);
  ok(r1.defCard&&r1.def&&r1.def.spy==="me"&&r1.def.same&&r1.def.ev===0&&r1.def.bac===r1.def.want,'defecting maid «Thu làm tai mắt» (leak missed): spy, master\'s feeling unchanged, price = BAL.ag.know.tm.def.bac',r1.def||r1.defCard);
  ok(r1.vol.spy==="me"&&r1.vol.same,'volunteer «Nhận làm tai mắt»: master\'s feeling unchanged',r1.vol);
  ok(r1.take.spy==="me"&&r1.take.same,'Mua chuộc taken: master\'s feeling unchanged',r1.take);
