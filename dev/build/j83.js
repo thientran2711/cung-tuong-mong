@@ -95,7 +95,7 @@ function wkEval0(a,w,r){const notes=[];let v=WVAL[w.ti];
   v=Math.min(WCAP,v);const fx={};if(r.queen&&a===S)fx.hh=v;return{ok:true,fx,rel:v+2,v,notes}}
  return{ok:false,why:""}}
 /* give a work: two-way, same function for her and for every consort */
-function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w=e.wk;const ev=wkEval(a,w,r);if(!ev.ok)return"";a.inv.splice(ix,1);
+function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w=e.wk;const ev=wkEval(a,w,r);if(!ev.ok)return"";a.inv.splice(ix,1);if(typeof giveTo==="function")giveTo.out=r===S?"sent":"take";/* K-GIFT-OUT (KK64): a work piece is always taken (no hand-back road) */
  const by=a===S?"Ngươi":`${rkName(a)} ${a.name}`,wn=`${w.n} (${WTIER[w.ti]})`;
  if(r==="emp"){S.wkE=wkEmpLog();S.wkE.push({w:wk(),by:key(a),kind:w.kind});ap(a,ev.fx);if(a!==S)newsAdd(a,"gift",`${by} dâng ${wn} tự tay làm lên Hoàng thượng.`);
   return `${by} dâng ${wn} lên Hoàng thượng${ev.notes.length?" ("+ev.notes.join("; ")+")":""}. ${a===S?fmt(ev.fx):"Sủng +"+ev.fx.sung}. `}
