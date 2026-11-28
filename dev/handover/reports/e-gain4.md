@@ -76,3 +76,77 @@ Base = LIVE 18003079. LIVE has since moved to **f7ea14b7** (lc34-savepid, save f
 
 ## HANDOVER (worker roll: context ≈ START_CTX + 30 %, past the +25 % line; only push + report remained, so I finished)
 Nothing open in this unit. If a reviewer asks for more: tools in /home/user/wt/eg4-tools (ev.js probe, shots.js, gates.sh queue runner, r3.sh), shots in /home/user/wt/eg4-shots, worktree /home/user/wt/eg4 (branch review/e-gain4). Tests run on http (python3 -m http.server from /home/user/wt) or file:// (all except q-softlock).
+
+---
+
+# E-GAIN4B — fix the 3 FAIL items of review/e-gain4 (worker report)
+
+PRIORITY #1 CHECK ('e-gain4|rcvWord|dress-verdict|lockW'): OD 0 | claims E-GAIN4 (archived), E-GAIN4-RV session_01DgYSWoUKNUCW56nNphgiiR FAIL (3 fixes), E-GAIN4B (this) | main LIVE **5ad52416** (unchanged; no merge needed) | review/* e-gain4 2e5a4006, e-gain4-rv-m cb84eec4 (base) | archive 0.
+KIT CHECK: reuses kaRows / kcls rows (j63, untouched), j25 optLine (game-side line writer, KIT.md «game side j2/j17/j19/j25/j70»), jdoor doorFold line, jone tier summary, the Ghi chú note row («(…)» value → Ghi chú, KIT 6). No kit module edited (j19 / j63 / j79 / jk2b / jkring untouched), no CSS / frame / part → no KIT REQUEST. kit-std-scan: see table.
+Worker: E-GAIN4B session_01DgYSWkaniqei11DuQ25PBJ, **depth 1** (get_session lineage.depth), START_CTX ≈5 % (used_tokens read 0; own estimate). Opened by FOREMAN E C9; reports to C10 session_01DgYSWp6UVPu114RgZTqHMq (C9 → C10 notice 28/11 07:59Z).
+
+Branch **review/e-gain4b**, base review/e-gain4-rv-m cb84eec4 (= LIVE 5ad52416 merge + reviewer fixes). Head **d1afe230** (code = cc7b2ceb; d1afe230 only lengthens a unit wait). Files: dev/build/{j25,jdoor,jone,jrcv,j9,j10,j83,jration}.js, dev/test/{e-gain4-unit (4 new cases), e-gain4b-scan (new)}.js, index.html + sw.js (built; assets.json = LIVE). No BAL key added; no number typed (law 4).
+
+## Fix item 1 — (b) had no failing test
+New unit case **b2** reads the PRINTED tier summaries in REAL locked states: every Hành sự deck tier card (`.klead` / `p`, jone deckPaint) and every pop-up tier door (`d.x`, jone doorFold, + the pop-up button text), states dau / cao / toi / hh × khắc spent 0 / 3 × (second pass) empty purse; counts only tiers ONE.tierRows says are locked (≥ 1 deck AND ≥ 1 pop-up must be read) and FAILs on any «—».
+SOURCE mutant (jone doorFold `${x.t} —` + deckPaint `"—"` restored, rebuilt): unit **exit 1** — «nhẹ: Nghỉ ngơi một lát · vừa: —» (deck) + «nhẹ — · vừa — · nặng —» (pop-up), 86 lines. Branch: deck 8–18 / pop-up 6–56 locked tiers read, 0 «—».
+
+## Fix item 2 — the willingness word (rcvWord) shown as a gain
+Whole group = every line that prints rcvWord (static grep: 9 sites), each read as the kit draws it:
+
+| card (file) | before (head cb84eec4) | after |
+|---|---|---|
+| Nhờ giúp đỡ (j9) | Thành «…, làm qua loa: Bạc ++, **Lắm lời**, …» | Thành = gains only · Ghi chú «(ý nàng ta: Lắm lời)» |
+| Lập phe cùng (j10) | Được «lập phe với …, có phe thì được che chở (…) **Sẵn lòng**» | Được = the gain · Ghi chú «(ý nàng ta: Sẵn lòng)» |
+| Mời (j10, in a faction) | word first («Không ưa · được: …») | gain first · Ghi chú note |
+| Đồ cấm from an ally (j83 illAsk) | Được «**Sẵn lòng** · nàng có thể đưa…» | Ghi chú «(ý nàng: …)» |
+| Mượn son phấn (jration) | Thành «được chia nửa hộp … , **Miễn cưỡng**, nàng cũng có thể từ chối …» | Được «được chia nửa hộp … (hoặc chút ít cho có)» · Ghi chú «(ý nàng: Miễn cưỡng — nàng cũng có thể từ chối hoặc đem chuyện ngươi hết son phấn đi kể)» |
+| Mời đến cung ta (j21), Kết giao xw (j8/j6), Nhờ ơn rút thẻ bài (jecon), Gửi thư xin vào phe (j14) | already Ghi chú | unchanged |
+
+Helper: jrcv `rcvWordN(t,a,nm)` = «(ý <nàng>: <word>)», one «(…)» value → kit Ghi chú. Scan e-gain4b-scan WORD (every surface, 6 states): head **4** (Nhờ giúp đỡ ×3, Mượn son phấn) → branch **0** Fold + iPad. Unit case **f** (Nhờ giúp đỡ at every place, «Lập phe cùng» panel, «Mượn son phấn»): SOURCE mutant (j9/j10/j83/jration back to the bare word) **exit 1** (8 cards).
+
+## Fix item 3 — the dress-verdict gain in Ghi chú
+Root cause (law 11, the whole family): **j25 optLine** joined every x piece of a talk option into ONE «thành:» segment with «, ». A door's line «chọn một trong N việc: A, B · được: X; Y» became «thành: chọn…: A, B, được: X; Y», and the kit (kaModelStr: «; » split, a «nàng» clause kept whole) read «chọn…: A, B, được: X» as ONE neutral note → the door's FIRST gain sat in Ghi chú (the dress verdict when present, else the door's own first gain, e.g. «nàng bị phế hoặc giáng» / «nàng bị quở…»); a door without a «nàng» gain instead split its way NAMES into Được («Tố xa xỉ»); «Mặc cả chứng cứ» printed a literal «được: Bạc +++».
+Fixes: (1) j25 `j25Gain`: a piece its writer LABELLED («được: / thành: / tốn: / hỏng: / bại: / mất: / kèm:») or wrote as a whole note «(…)» keeps its own « · » segment; (2) jdoor: the way list is one note «chọn một trong N việc (A, B)»; (3) jone tier summary: the tier line replaced jdoor's line and DROPPED the verdict → `toilG(L)` re-says the verdict pieces the talk members carry as «được: …» (a door of in-person acts only carries none — the verdict rides on talk options only, jtoil).
+
+| card kind (rival pop-up, verdict on) | head | branch |
+|---|---|---|
+| door «Tố cáo», «Dò la» (jdoor) | Ghi chú «chọn một trong 2 việc: …, được: nàng ta chuộng giản dị: quý ta +» | Được «nàng ta chuộng giản dị: quý ta + · nàng bị phế hoặc giáng · Danh ++» · Ghi chú «chọn một trong 2 việc (Hặc ăn mặc sai phẩm, Tố xa xỉ)» |
+| tier «Giao hảo / Khiêu khích / Hạ uy thế / Hãm hại» (jone) | verdict nowhere | Được «nhẹ … · vừa … · nặng … · nàng ta chuộng giản dị: quý ta +» |
+| one-tap «Dò la» | Được «Dò la: chứng cứ +, …» | same (kept) |
+| plain «Trò chuyện / Nhờ giúp đỡ» | Được | Được (kept) |
+| one-tap act door «Ban thưởng» (no verdict) | Được «Ban thưởng, tốn: Bạc 30, thành: …» (price glued into Được) | Tốn «Bạc 30» · Được «thiện cảm +++ …» (way name still leads — LIVE-own family, below) |
+
+Scan e-gain4b-scan: TOILNOTE head **2** → **0**, TOILMISS head **4** → **0** (Fold 1739 / iPad 1701 cards). Unit case **g** (every card kind: plain / door / tier / one-tap): SOURCE mutant (j25 join, jdoor «: A, B», jone toilG removed) **exit 1** (10 cards).
+Reviewer's extra pin **d2** («Dò la» one-tap Thành names chứng cứ +, never only Bạc −): SOURCE mutant (jone one-tap block removed) **exit 1**.
+
+## Gates (final build = head; each source mutant built from the head with only its fix reverted)
+| gate | head cb84eec4 (before) | branch |
+|---|---|---|
+| e-gain4-unit Fold / iPad | 23 ok / 3 fail (f, g; b2 passes — fix was in) | **26 / 0** Fold ×3, iPad ×1 |
+| unit source mutants b / f / g / d2 | — | exit **1 / 1 / 1 / 1** |
+| e-gain4b-scan Fold, 6 states (verdict stubbed on) | WORD 4 · TOILNOTE 2 · TOILMISS 4 (1893 cards) | **0 / 0 / 0** Fold 1739 · iPad 1701 |
+| row-law3-scan Fold, per state | (reviewer: cap hit) | dau 345 · toi 656 · cao 670 · con 514 · hau 454 · hh 721 cards — DASH / PLUS / NODUOC **0** each; re-run on the final build dau 803 / hh 456 cards **0** |
+| row-law3-scan iPad, per state | — | dau / cao / con / hau / hh **0**; toi **NODUOC 1** «Cài người vào cung khác» picker row = LIVE-own (below; line not touched) |
+| gain-empty Fold / iPad (with §104.2d skip) | — | 1162 / 1256 cards, **0 empty** |
+| door-row-hint Fold / iPad / MUTANT=1 | 0 bad | **0 bad** (8136 rows) / **0 bad** (8802) / **exit 1** |
+| door-loss Fold / iPad | — | 433 ways 0 bad / 561 ways 0 bad |
+| poptab-scan Fold / iPad | — | 0 wrong (890 cards; final build 819) / 0 wrong (875) |
+| act-audit cao Fold | — | done **errs=0** (486 s) |
+| quickcheck (build-own · core gates incl. G4 q-softlock · time-spill · old save from LIVE 5ad52416 · perf) | — | **PASS** 1375 s: core gates PASS, time-spill PASS, open 1844 ms, **old save ok** (load + buổi, 0 errors), perf new/live render 249/244, tab 481/427, buổi 1430/1619, tasks>200 25/30 |
+| q-softlock A/B (HTTP, 2 runs each) | LIVE 5ad52416: run1 **FAIL (4)** (LIVE-own flake, as RV-173 / E-GAIN4 recorded) · run2 PASS | **PASS · PASS** |
+| kit-std-scan REPORT_ONLY SUBS=0 Fold + iPad | LIVE 28 FAIL in 3 rules (X02 20 · X06 4 · X08 4) | **= LIVE** 28 in 3 rules, per rule identical → nothing branch-born |
+| time-spill-guard | — | PASS static + runtime |
+| page errors | 0 | 0 in every run |
+Note: the first iPad lane ran on the build before the last jration commit; its door-row-hint flagged that build's «Mượn son phấn» row hint (fixed in cc7b2ceb, re-run 0 bad); its other rows are unaffected (only the jration line changed).
+
+Shots (law 12, Fold 755×1000 + iPad 1180×820, looked 3×, scratch only /home/user/wt/eg4b-shots, not in git): Nhờ giúp đỡ (Thành gains, Ghi chú «(ý nàng ta: …)») both; Tố cáo (Được verdict + gains, Ghi chú «chọn một trong 2 việc (…)») both; Giao hảo / Khiêu khích tier (verdict in Được) both; deck «Nghỉ ngơi — nhẹ: Nghỉ ngơi một lát · vừa: chỉ buổi tối» iPad; «Lập phe cùng» card (Được + Ghi chú) Fold.
+
+## Not in this unit (LIVE-own, for Foreman E)
+- «Cài người vào cung khác» (j10 PEND.plantsv): when no servant is free, parallel time replaces the option's line with «không còn ai rảnh để sai (người hầu đang đi việc)» but the option stays ENABLED with no Được (row-law3 iPad toi NODUOC). Should be locked with that reason.
+- One-tap ACT doors («Ban thưởng», P13r) lead their Được with the way NAME («Ban thưởng · thiện cảm +++…»); tier doors print tier words as Được (same «names as gains» family the E-GAIN4 report noted).
+- jk2b kitHint reads a willingness word as «thiện cảm +» when it builds a hint from a rendered line (kit internal — KIT REQUEST material if the kit keeper wants it).
+- j83 illAsk: «đưa: có <item> (…)» (her gain) lands in Kèm (red) — the line has no «thành:».
+
+
+HANDOVER: nothing open. Tools /home/user/wt/eg4b-tools (ev.js probe, shots.js, gates.sh / gates2.sh queues, mut.py = the four source mutants, units.sh), shots /home/user/wt/eg4b-shots, worktree /home/user/wt/eg4b. Context at finish ≈ 28 % (START ≈5 %), under the +25 % line plus push + report.
