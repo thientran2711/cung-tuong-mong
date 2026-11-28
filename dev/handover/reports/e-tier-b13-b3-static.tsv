@@ -1,0 +1,11 @@
+file	line	key	title	v2	b3	reason
+jkc.js	412	hoa	Hội ngắm mẫu đơn	MERGE	KEEP	already a ladder: Ở nhà (0) · Đi, chỉ ngắm hoa (Sức 10, Danh +1) · Đi, đánh đàn góp vui (Sức 15 + festival round) — cost and result rise together
+jkc.js	544	(kcPhucD)	Phúc tuyển	MERGE	KEEP	«Dâng <art>» plays the mini-game; «Để tài nghệ quyết định» = the kit skip of the same game (fixed entSkipRaw mark) — play vs skip, not two methods; the art is already auto her best (kcBestArt)
+jkc2.js	300	d_lu	Nước lên	MERGE	KEEP	3 different story results: risky rice rescue (kap −, cha liking) · khung cửi kept (kim +1, nợ +) · help Xuân Đào (her liking, kgt +, nợ +)
+jkc2.js	379	d_thi	Ngày tuyển cung nữ	MERGE	FOLD	Làm bài khéo tay = Thêu một mảnh khăn (same cost BAL.kc2.d_thi_o_suc, same exam result kc2Exam) → ONE way, her best fit (kc2Best: better odds, tie → higher art level); «Cúi đầu chờ ma ma xét» stays (no exam, capped)
+jkc3a.js	10	kc_dtq c1	Người lính cũ	MERGE	KEEP	bạc way (Gom bạc chuộc, bạc 40, sure, Đức +2) + non-bạc way (Tự cải trang, Sức 20, odds, Lợi thế) of the same tier — law 2 «a bạc road always has another road of matching tier»
+jkc3a.js	116	kc_ch c3	Lá thư cũ của tổ mẫu	MERGE	KEEP	BAL.kc3.fx.kc_ch.c3: Đọc kỹ rồi giữ (Sức 5, Tâm cơ +2, tổ mẫu −6) vs Đọc rồi đốt (free, Đức +2, tổ mẫu +4) — results differ
+jkc3a.js	148	kc_td c3	Em trai út	MERGE	KEEP	bạc way (Gửi bạc nhà thế giao, bạc 30, sure) + non-bạc way (Tự dạy em, Sức 15, odds) of the same tier — law 2 last clause
+jthaiy.js	153	thNausea	Trong người khác lạ	MERGE	KEEP	bạc way (Mời thái y) + Sức way (Sang Thái y viện) of the same tier — law 2 last clause
+jworld2.js	45	fx	Đại thọ / world gift	MERGE	KEEP	already a ladder: Dâng quà quý (bạc big, liking big) · Quà vừa phải (bạc mid, liking mid) · Cáo bệnh (Sức +, she holds a grudge)
+jkc2.js	530	kc2Sel (C41)	Lễ ra mắt	MERGE (C41)	FOLD	Dâng <art 1> = Dâng <art 2> (same cost, same selection result) → ONE «Dâng <art>», her best fit (kc2Best: selxOddsP / entOdds, tie → higher art level); «Cúi đầu chờ xét» stays
