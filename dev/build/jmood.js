@@ -119,7 +119,8 @@ function mbComfort(){const M=mbS(),C=B().comfort,W=mbW();const bi=mbBand().i;if(
 const mbComfortCard=rcpReg("mbComfort",v=>{const C=B().comfort;const maid=v?null:S.maid;if(!v&&!maid)return null;
  const nm=v?v.name:maid.name,who=v?pv(v):pMaid(),them=v?"nàng ta":"nàng";const band=mbBand().name.toLowerCase();
  const big=C.big,small=C.small;
- const o1={n:`Giãi bày tâm sự với ${nm}`,risk:"an toàn",hint:`lòng nhẹ đi nhiều, được lòng ${nm}; nhưng mất một khắc buổi này`,x:`tâm trạng +${big}, ${nm} thiện cảm +${C.affUp} · kèm: mất ${C.k} khắc buổi này`,fx:{},
+ const o1={n:`Giãi bày tâm sự với ${nm}`,risk:"an toàn",hint:`lòng nhẹ đi nhiều, được lòng ${nm}; nhưng mất một khắc buổi này`,x:`tâm trạng +${big}, ${nm} ${v?pvQuy(v,C.affUp,"thiện cảm"):`thiện cảm +${C.affUp}`} ·
+ kèm: mất ${C.k} khắc buổi này`,fx:{},
   go:()=>{mbAdd(big,`${nm} đến an ủi`,"comfort");try{if(v)affAdd(v,S,C.affUp);else maid.loyal=cl2((maid.loyal||0)+C.affUp,0,100)}catch(e){}try{spend(C.k)}catch(e){}log(`${nm} ngồi nghe ngươi giãi bày tâm sự; lòng ngươi nhẹ đi nhiều.`)}};
  const o2={n:"Gượng cười, cảm tạ",risk:"an toàn",hint:`lòng nhẹ đi chút ít${v?", giữ được thể diện":""}; nhưng ${nm} thấy ngươi giữ khoảng cách`,x:`tâm trạng +${small}${v?" (giữ thể diện)":""} · kèm: ${nm} thiện cảm −${C.affDown} (thấy ngươi giữ khoảng cách)`,fx:v?{danh:C.danh}:{},
   go:()=>{mbAdd(small,`${nm} đến thăm`,"comfort");try{if(v)affAdd(v,S,-C.affDown);else maid.loyal=cl2((maid.loyal||0)-C.affDown,0,100)}catch(e){}log(`Ngươi gượng cười cảm tạ ${nm}, không nói ra nỗi lòng.`)}};

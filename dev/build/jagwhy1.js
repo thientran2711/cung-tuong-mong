@@ -57,7 +57,7 @@ npwReg("omen",{grp:"consort",who:()=>liveRivals(true),why(a,c){return npw1Best(a
    apFriend  a consort who likes her (aff ≥ ap.fr, motiveOK visit): borrow when short of silver (bac < ap.poor), offer sisterhood when fond
              (aff ≥ ap.ally, no faction), bring a gift when fond (aff ≥ ap.gift), else chat · apTaunt a consort with a motive (provoke)
    apSorry   a consort who wronged her and is not scheming (oán ≥ ap.sorry, not Xảo quyệt, not hating her) · empTea the Emperor (Sủng ≥ tea.minSung)
-   thCall    the Thái hậu when she favours her (Thái hậu ≥ ap.th) · svAsk a loyal servant (lòng ≥ loy.mid) · maidWarn her loyal maid, about the
+   thCall    the Thái hậu when she favours her (Thái hậu ≥ netTh("th","quen")) · svAsk a loyal servant (lòng ≥ loy.mid) · maidWarn her loyal maid, about the
              most dangerous consort · manPoem a man with a pull toward her: tình ý, met her (m.seen), or a romantic nature · svDefect a maid unhappy with her mistress (lòng < loy.bad)
    repay     a debtor repays when she has the silver (bac ≥ ap.repay) · svSell a servant with a grudge sells news to the consort most set against her
    svCause   a servant's own nature shows (SCAUSE by nết), one servant a tuần, each every cd.svCause tuần */
@@ -81,7 +81,7 @@ npwReg("svCause",{grp:"srv",who:()=>(S.staff||[]).filter(s=>!s.cause),why(s){ret
 /* ---- G1 part 4: life events (j68 actors / tick / visit swap, j68e/f/h) and favours (j72 NPC↔NPC, Thái hậu / Hoàng hậu errands, debts). BAL.ag.why.{e68,fav,job,q72} ----
    npcFavor   a consort asks a friend (aff ≥ fav.aff) for help only with a NEED of her own (fav.w by need: short of silver, ill, an errand to do, cold
               Thái hậu, a rival to watch, with child, a lover's letters, a maid's fault, a weak art, homesick when unfavoured); the helper fits the need
-   ladyJob    the Thái hậu / Hoàng hậu give an errand to the consort they trust (Thái hậu: regard ≥ job.th; Hoàng hậu: liking ≥ job.aff); the task
+   ladyJob    the Thái hậu / Hoàng hậu give an errand to the consort they trust (Thái hậu: regard ≥ netTh("th","than"); Hoàng hậu: liking ≥ job.aff); the task
               follows the palace (someone ill → visit her; a gifted one → the banquet; else copying sutras / embroidery)
    q72Collect one she owes comes to collect when there is a matching need now (a valid request of that kind), the bigger the debt the sooner */
 function npw1Fr(a,L,f){return npwPick(L.filter(b=>b!==a&&aff(a,b)>=netTh(a,"quen")&&(!f||f(b))),b=>netTh(a,"quen")+aff(a,b))}

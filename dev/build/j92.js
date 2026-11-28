@@ -373,8 +373,15 @@ function wdSell(p,ix){const e=p.inv[ix];if(!e||e.h||!wdItem(e))return"";if(wdIsN
 function wdPawn(p,ix){const e=p.inv[ix];if(!e||e.h||!wdItem(e))return"";if(wdIsNt(e))return"";const ag=wdAgent(p);if(!ag)return"";
  p.inv.splice(ix,1);const pr=wdPrice(e),g=Math.max(1,Math.round(pr*WD.pawnPct/100)),back=Math.round(pr*WD.redeemPct/100);p.wdPawn=p.wdPawn||[];p.wdPawn.push({e,g,back,due:wk()+WD.pawnWeeks,ag:ag.name});ap(p,{bac:g});
  let r=`${wdNmC(p)} sai ${ag.name} mang ${wdItem(e).n} đi cầm: Bạc +${g}; chuộc lại ${back} bạc trong ${WD.pawnWeeks} tuần. `;
- if(roll(wdLeak(p,ag,true))){ap(p,{danh:-WD.sellDanh});r+=`<span class="r">Chuyện lộ ra: ${wdNm(p)} túng thiếu phải cầm đồ.</span> Danh -${WD.sellDanh}. `}return r}
+ if(roll(wdLeak(p,ag,true))){ap(p,{danh:-WD.sellDanh});r+=`<span class="r">Chuyện lộ ra: ${wdNm(p)} túng thiếu phải cầm đồ.</span> Danh -${WD.sellDanh}. `;if(p!==S)try{newsAdd(p,"wd",`${wdNmC(p)} túng thiếu, sai người mang đồ đi cầm.`)}catch(x){}}return r}
 function wdRedeem(p,i){const P=(p.wdPawn||[])[i];if(!P||p.bac<P.back)return"";ap(p,{bac:-P.back});p.wdPawn.splice(i,1);invAdd(p,P.e);return `${wdNmC(p)} chuộc lại ${wdItem(P.e).n}: Bạc -${P.back}. `}
+/* law1-audit (OD 24/11 ~08:35Z): an NPC short of silver holds HER two roads — «Bán lén» or «Cầm cố» (same wdSell / wdPawn, same prices, same
+   leak) — and picks by nết (BAL.net.n.wdPawn: a nết that wants the piece back pawns); she redeems when her silver stays above the «poor» line
+   after paying (BAL.ag.why.wd.poor, the line that made her pawn); an unredeemed piece is lost at the due tuần for everyone (wdPawnMonth). */
+function wdNpcPawn(v,ix){let pw=0;try{pw=nv(v,"wdPawn")}catch(e){}return pw?wdPawn(v,ix):wdSell(v,ix)}
+function wdNpcRedeem(v){if(!v||v===S||v.coop||!(v.wdPawn||[]).length)return"";if(typeof worldOn==="function"&&!worldOn())return"";/* co-op: NPCs are the host's */
+ let r="";const poor=BAL.ag.why.wd.poor;
+ for(let i=v.wdPawn.length-1;i>=0;i--){const P=v.wdPawn[i];if(P&&wk()<=P.due&&(v.bac||0)-P.back>=poor)r+=wdRedeem(v,i)}return r}
 function wdPawnMonth(p){if(!p.wdPawn||!p.wdPawn.length)return"";let r="";p.wdPawn=p.wdPawn.filter(P=>{if(wk()<=P.due)return true;if(p===S)r+=`${wdItem(P.e).n} cầm cố đã quá hạn, mất hẳn. `;return false});return r}
 
 /* ---------- ngự tứ lost or broken = bất kính (the same risk for everyone holding one) ---------- */
@@ -413,9 +420,11 @@ function wdMonth(pre){let ev="";S.wdk=S.wdk||{};
  for(const p of consorts()){if(p!==S){wdNpcInit(p);wdNpcDress(p)}const st=wdStatus(p);
   if(st==="over"){if(npcWhy("wdNotice",{p})){ap(p,{sung:WD.overSung});if(p===S)log(`Hoàng thượng để mắt tới y phục rực rỡ của ngươi. ${sgStat(WD.overSung)}.`)}/* rivals' jealousy: the approved luxury law (jinv luxMonth) */}
   if(!p.confined)ev+=wdRemark(p,st)} /* npc-purpose: wdRemark asks npcWhy("wdRemark") — a remark only from one with a reason */
- ev+=wdTaimat();ev+=wdPawnMonth(S);for(const p of consorts())wdNtMonth(p);
- /* NPCs short of silver sell quietly too */
- for(const o of npcWhyAll("wdPawn")){const v=o.who;const i=(v.inv||[]).findIndex(e=>e&&!e.h&&wdItem(e)&&!wdIsNt(e));if(i>=0)wdSell(v,i)}
+ ev+=wdTaimat();const wOn=typeof worldOn!=="function"||worldOn();/* law1-audit r1: an NPC's pawn expires / is chosen only in the world pass (co-op: the host's; the guest's world frame never routes an NPC piece into her ledger) */
+ for(const p of consorts())if(!p.coop&&(p===S||wOn))ev+=wdPawnMonth(p);for(const p of consorts())wdNtMonth(p);
+ /* NPCs: redeem what they can afford, then the ones short of silver sell or pawn (law1-audit: her two roads, by nết) */
+ for(const v of liveRivals(true))wdNpcRedeem(v);
+ if(wOn)for(const o of npcWhyAll("wdPawn")){const v=o.who;const i=(v.inv||[]).findIndex(e=>e&&!e.h&&wdItem(e)&&!wdIsNt(e));if(i>=0)wdNpcPawn(v,i)}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){let pre=null;try{const q=queenP();pre={th:!!S.thDead,q:q&&q!==S?q.id:null,P:wdPOf(S)}}catch(e){}
  const r=m0.apply(this,arguments);let add="";try{if(pre&&S&&!S.dead)add=wdMonth(pre)}catch(e){console.error(e)}return (r||"")+add}})();
@@ -427,11 +436,11 @@ function wdMonth(pre){let ev="";S.wdk=S.wdk||{};
 function wdUnknownN(){let n=0;const w=wdOf(S);for(const sl of ["tram","y"])if(w[sl]&&w[sl].from!=="base"&&!wdKnowsE(w[sl]))n++;(S.inv||[]).forEach(e=>{if(e&&!e.h&&wdItem(e)&&!wdKnowsE(e)&&!e.nvp)n++});return n}
 function wdAutoOdds(){const n=wdUnknownN();return n===0?91:n<=1?70:n<=3?55:40}
 function wdAutoUI(){if(!S||S.dead)return;const b=wdCur(S);wdAutoFor(S,0);const t=wdItemsTxt(S);log(b===wdCur(S)?`Tự chọn đồ: ngươi giữ nguyên ${t}.`:`Tự chọn đồ: ngươi thay ${t}.`);render()}
-function wdWearUI(ix){if(!can(1))return;const n=wdWear(S,ix);if(!n)return;spend(1);log(`Ngươi thay ${n}.`);render()}
+function wdWearUI(ix){if(!can(BAL.btn.wear.k))return;const n=wdWear(S,ix);if(!n)return;spend(BAL.btn.wear.k);log(`Ngươi thay ${n}.`);render()}
 function wdOffUI(sl){const w=wdOf(S);const e=w[sl];if(!e)return;const n=wdItem(e).n;wdTakeOff(S,sl);if(sl==="y"){const k=wdDefault(S,"y");if(k)w.y={k,from:"base"}}log(`Ngươi tháo ${n}.`);render()}
-function wdSellUI(ix){if(!can(1))return;const r=wdSell(S,ix);if(!r)return;spend(1);log(r);render()}
-function wdPawnUI(ix){if(!can(1))return;const r=wdPawn(S,ix);if(!r)return;spend(1);log(r);render()}
-function wdRedeemUI(i){if(!can(1))return;const r=wdRedeem(S,i);if(!r)return;spend(1);log(r);render()}
+function wdSellUI(ix){if(!can(BAL.btn.wdTrade.k))return;const r=wdSell(S,ix);if(!r)return;spend(BAL.btn.wdTrade.k);log(r);render()}
+function wdPawnUI(ix){if(!can(BAL.btn.wdTrade.k))return;const r=wdPawn(S,ix);if(!r)return;spend(BAL.btn.wdTrade.k);log(r);render()}
+function wdRedeemUI(i){if(!can(BAL.btn.wdTrade.k))return;const r=wdRedeem(S,i);if(!r)return;spend(BAL.btn.wdTrade.k);log(r);render()}
 if(typeof wrapR==="function"){wrapR("wdAutoUI",()=>"Tự chọn đồ");wrapR("wdWearUI",()=>"Thay y phục");wrapR("wdSellUI",()=>"Bán lén");wrapR("wdPawnUI",()=>"Cầm cố");wrapR("wdRedeemUI",()=>"Chuộc lại")}
 
 /* ---------- CHẢI CHUỐT: ~10 s mini-game in the kit game frame (j82 overlay); two of the three needle marks in the green = Vừa vặn (review/mg-snap) ---------- */
@@ -463,10 +472,10 @@ function kg92Groom(box,env){const C=kg82Canvas(box,.62,320),{g,W,H}=C;const w=(e
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf);document.removeEventListener("keydown",kd)}}
 try{KG82_ENG.groom=kg92Groom;KG82_KIND.chai={e:"groom",n:"Chải chuốt",t:"Điểm trang trước gương",how:"Kim đưa qua đưa lại: chạm khi kim vào dải xanh. Ba lần."}}catch(e){}
 function wdGroomApply(p,zone){const tgt=Math.min(8,wdPOf(p))+(zone==="ok"?0:zone==="over"?1.5:-2.25);wdApply(p,wdBest(p,tgt,e=>wdP(e,p)))}
-function wdGroomUI(){if(!S||S.dead||!can(1))return;const w=wdGroomW(S);const m=wdMama(S);
+function wdGroomUI(){if(!S||S.dead||!can(BAL.btn.groom.k))return;const w=wdGroomW(S);const m=wdMama(S);
  const how=`Kim lướt qua lại trên thước. Chạm ba lần: cài trâm, chọn áo, điểm trang (trong ${WD.groomSec} giây). Hai trong ba lần dừng ở vùng giữa là đúng phẩm; lệch phải là vượt phẩm, lệch trái là quá giản dị; hết giờ mà chưa chạm là quá giản dị. Vùng giữa rộng theo Tài, khéo tay${m?`, có ${m.name} tinh ý giúp`:", ma ma tinh ý"}.`;
  const d=kg82Open({art:"Chải chuốt",title:"Điểm trang trước gương",how});if(!d){wdAutoUI();return}const box=kg82Box();
- const done=zone=>{spend(1);wdGroomApply(S,zone);const t=wdItemsTxt(S);log(`Ngươi chải chuốt, ${zone==="ok"?"ăn vận vừa vặn":zone==="over"?"ăn vận lộng lẫy":"ăn vận giản dị"}: ${t}.`);
+ const done=zone=>{spend(BAL.btn.groom.k);wdGroomApply(S,zone);const t=wdItemsTxt(S);log(`Ngươi chải chuốt, ${zone==="ok"?"ăn vận vừa vặn":zone==="over"?"ăn vận lộng lẫy":"ăn vận giản dị"}: ${t}.`);
   const html=kg82Rows([["Trâm cài",wdItem(wdOf(S).tram)?wdItem(wdOf(S).tram).n:"không cài","t"],["Y phục",wdItem(wdOf(S).y)?wdItem(wdOf(S).y).n:"thường phục","t"],["Kim dừng",zone==="ok"?"vùng giữa":zone==="over"?"lệch về phía lộng lẫy":"lệch về phía giản dị","n"]])+`<div class="kg82act"><button class="${kg82Btn()}" id="kg92ok">Đã hiểu</button></div>`;
   kg82ShowRes(html,zone==="ok");$("kg92ok").onclick=()=>{kg82Close();render()}};
  KG82.phase="intro";box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg92go">Bắt đầu</button>${kitQuick({id:"kg92skip",n:"Bỏ qua",sub:`tính như Tự chọn đồ`})}</div>`;
@@ -491,4 +500,4 @@ document.addEventListener("click",ev=>{const b=ev.target.closest("[data-wd]");if
 (function(){if(typeof pcard!=="function")return;const p0=pcard;pcard=function(o){try{if(S&&o&&o.name){const nm=String(o.name).replace(/<[^>]*>/g,"");const p=nm===S.name?S:rivals.find(v=>v.name===nm);
   if(p&&(p===S||(typeof knows!=="function"||knows(p)))){const sl=wdSlots(p);const C=sl.map(x=>chip(`${x.slot==="tram"?"Trâm":"Y phục"}: ${x.name}${x.empty?"":" · "+x.gradeName}`,x.nt?"ok":""));
    if(sl[0].label)C.push(chip(sl[0].label,sl[0].labelKey==="ok"?"ok":"hot"));o=Object.assign({},o,{chips:(o.chips||[]).concat(C)})}}}catch(e){}return p0.call(this,o)}})();
-window.wdAutoUI=wdAutoUI;window.wdGroomUI=wdGroomUI;window.wdSell=wdSell;window.wdPawn=wdPawn;window.wdRedeem=wdRedeem;window.wdWear=wdWear;window.wdTakeOff=wdTakeOff;
+window.wdAutoUI=wdAutoUI;window.wdGroomUI=wdGroomUI;window.wdSell=wdSell;window.wdPawn=wdPawn;window.wdRedeem=wdRedeem;window.wdNpcPawn=wdNpcPawn;window.wdNpcRedeem=wdNpcRedeem;window.wdWear=wdWear;window.wdTakeOff=wdTakeOff;

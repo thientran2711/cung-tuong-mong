@@ -15,6 +15,7 @@ KEEP = {  # (file, rhs-prefix) -> why
  ('jtrong.js', '0'): 'sign',
  ('j8.js', 'tn'): 'tn = hhNeed(p).th = netTh("th","than2") / netAt("th","than2",..) (jbal hhNeed)',
  ('jpet.js', 'K'): 'K = netAt("th","than2",B.kyTh) one line above',
+ ('jpromob.js', 'ct'): 'ct = pbThCut() = netTh("th","than2")',
 }
 HOLD = {'S', 'p', 'v', 'x', 'o', 'a', 'b', 'q', 'w', 'r', 'me', 't', 'y', 'c'}
 rows = []; keep = 0

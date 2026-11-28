@@ -4,7 +4,7 @@
    - Kiếp dở dang: chết hay bỏ ngang (Kiếp mới / ghi đè sổ đang sống) trước mốc. Mất Phúc duyên kết cục và mọi Phúc duyên đã tích
      trong kiếp đó, trừ thêm KIEP.pen (không xuống dưới 0); kiếp sau không được đổi thân phận (khóa trên bản gieo sẵn "ctm-nextlife").
      Thẻ kết kiếp và Sổ luân hồi ghi "Kiếp dở dang: …". Chết vì bị hại ngoài ý muốn cũng tính (không phân biệt được).
-   - Trước khi bỏ ngang, hoặc chọn một lựa chọn có chữ chết/tự vẫn khi chưa trọn kiếp: cảnh báo một lần mỗi kiếp.
+   - Trước khi bỏ ngang (nút Kiếp mới trên sổ đang sống, việc của hệ thống): bấm hai lần. Trong game không hỏi lại sau khi chọn (sếp 24/11 ~08:40Z).
    - Cung nữ (cnv): mốc giữa chặng là thành tựu thật: lên Chưởng sự cô cô, được sủng hạnh, lên Phi lần đầu; mỗi mốc +Phúc duyên và ghi Sổ luân hồi. */
 const KIEP={mo:12,rk:2,pen:30,ms:{cs:10,sh:15,phi:10}};
 const KP_RULE="Kiếp chỉ tính là trọn khi sống đủ một năm trong cung hoặc được thăng tới Quý nhân (cung nữ: lên Chưởng sự hay được sủng hạnh). Chết hay bỏ ngang trước đó là kiếp dở dang: mất Phúc duyên của kiếp ấy, trừ thêm "+KIEP.pen+", kiếp sau không được đổi thân phận.";
