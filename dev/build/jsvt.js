@@ -86,9 +86,9 @@ function svtPeer(a,x,kind,ok,at){if(!SVT.on()||!a||!x||a===x)return"";let o=null
  svtNpcGreet(a,o,at);let r=svtEtq(a,o,x,at);if(!ok)return r;r+=svTouch(a,x,kind,at,a);if(kind==="chat")r+=svTouch(x,a,kind,at,a)/* she talked back: her own master may hear of it too; a is still the one who came (mv) */;return r}
 /* review talk-others-people B1 (law 16): a named woman of another house (s.eid) keeps the elder talk gain inside the merged talk — the ONE jstaff elderTalkGain */
 /* lc34-3b-r1 (law 3, ACT-MOVE-6 law-3 scan): the gain of «Hỏi chuyện» / «Hỏi lén» on another house's servant, shown on every button of the family
-   (j15 cards, j10 staff list) — the same gain both ways (svTalk: a nết of her master; a Thái hậu servant: elderTalkGain thiện cảm BAL.eff.jstaff.meAct).
+   (j15 cards, j10 staff list) — the same gain both ways (svTalk: a nết of her master; a Thái hậu servant: elderTalkGain, her regard rises — no number printed here: rules-one-source wants a printed key read by the same option).
    The suspicion that may follow is never warned before (OD 24/11 ~08:08Z). */
-function svtGainX(s){try{if(s&&s.eid)return `thành: <span class="g">${s.name} thiện cảm ${balSg(BAL.eff.jstaff.meAct)}, kể chuyện trong cung Thái hậu</span>`;let m=null;try{m=ownerOf(s)}catch(e){}
+function svtGainX(s){try{if(s&&s.eid)return `thành: <span class="g">${s.name} thêm thân với ngươi, kể chuyện trong cung Thái hậu</span>`;let m=null;try{m=ownerOf(s)}catch(e){}
  return `thành: <span class="g">biết thêm một nết của ${m&&m!==S?m.name:"chủ nàng"}</span> (nếu ${s&&s.name?s.name:"nàng"} chịu nói)`}catch(e){return""}}
 function svtElderGain(s){try{if(s&&s.eid&&typeof elderTalkGain==="function")return elderTalkGain(s)+" "}catch(e){}return""}
 /* review talk-others-people N1 (D 25/11: the Thái hậu's household named women ARE others' people, law 11 whole group): the same #26 path for her talk —
