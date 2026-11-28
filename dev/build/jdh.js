@@ -39,9 +39,11 @@ for(const k in WORK)DH["m_"+k]={n:WORK[k][0],g:"nghe",u:"tác phẩm",how:n=>`${
 /* TITLE-BAL condition titles (owner OD 26/11 ~18:20Z rec (3), approved ~18:50Z (8)): a feat under hardship, a person's lasting favour */
 DH.c_han={n:"Sen nở trong bùn",g:"thi",how:()=>`Đứng đầu một hội thi khi còn ở phẩm ${RANKS[BAL.dh.cond.han.rank].n} trở xuống, hay đang bị cấm túc, đày lãnh cung`};
 DH.c_th={n:"Thái hậu ưu ái",g:"an",u:"tháng liền",how:n=>`Được Thái hậu quý mến (từ ${BAL.dh.cond.th.v} trở lên) ${n} tháng liền`};
-const GROUPS=[["tm","Thiên mệnh"],["kc","Khuê các"],["thi","Hội thi"],["nghe","Tài nghệ"],["ngay","Ngày thường"],["an","Ân sủng"]];/* "kc" = jkcg «Khuê các» (OUTSIDE_PLAN §11): like tm, listed only once earned */
+const GROUPS=[["tm","Thiên mệnh"],["kc","Khuê các"],["dt","Danh tiếng"],["cp","Chính truyện"],["pt","Phụ tuyến"],["thi","Hội thi"],["nghe","Tài nghệ"],["ngay","Ngày thường"],["an","Ân sủng"]];/* "kc" = jkcg «Khuê các» (OUTSIDE_PLAN §11): like tm, listed only once earned */
 /* «Thiên mệnh» (jge.js, grand endings): one title per grand-ending shading, earned only by reaching it — never listed as "still to earn", never counted in the totals until earned */
-const dhTot=()=>Object.keys(DH).filter(k=>(DH[k].g!=="tm"&&DH[k].g!=="kc")||((S&&S.dh||{})[k]&&S.dh[k].i>=0)).length;
+/* TITLES2 (jdh3): «Danh tiếng» (reputation, gán by public opinion, never worn), «Chính truyện» (road chapters), «Phụ tuyến» (side lines) are listed only once held, like tm / kc */
+const ONCE=new Set(["tm","kc","dt","cp","pt"]);const wearOK=k=>!(DH[k]&&DH[k].rep);
+const dhTot=()=>Object.keys(DH).filter(k=>!ONCE.has(DH[k].g)||((S&&S.dh||{})[k]&&S.dh[k].i>=0)).length;
 window.DH_CAT=DH;
 /* her acts that count (runOpt names; only when the act succeeds) */
 const ACTK=[[/^Thỉnh an/,"a_thinh"],[/^Đọc (sách|binh thư)/,"a_doc"],[/^(Điểm trang|Dưỡng nhan)/,"a_nhan"]];
@@ -82,17 +84,26 @@ function chTxt(key,i){const L=choices(key,i);if(L.length<2)return "";const N=L.m
 /* the title object handed to the kit (KIT §82: {id,name,tier,when,how,fx}) */
 function dhObj(p,key){const d=DH[key],e=p&&(p.dh||{})[key];if(!d||!e||e.i==null||e.i<0)return null;const i=e.i,N=need(key);
  const nx=N[i+1]!=null?` · đủ ${N[i+1]} ${d.u||"lần"}: lên bậc ${KIT_TIER_NAME[Math.min(7,tierOf(key,i+1))]}`:"";
- return {id:`dh-${key}@${pidOf(p)}`,key,name:d.n,tier:tierOf(key,i),when:(e.at&&e.at[i])||"",how:`Đạt được khi ${d.how(N[i]).replace(/^./,c=>c.toLowerCase())}${nx}`,fx:fxTxt(key,i,p),src:"play"}}
+ return {id:`dh-${key}@${pidOf(p)}`,key,name:d.n,tier:tierOf(key,i),sh:d.sh||"",when:(e.at&&e.at[i])||"",how:d.rep?d.how(p):`Đạt được khi ${d.how(N[i]).replace(/^./,c=>c.toLowerCase())}${nx}`,fx:d.fx?d.fx(p):fxTxt(key,i,p),src:"play"}}
 window.dhObj=dhObj;
 function keyOfWorn(w){return typeof w==="string"&&/^dh-/.test(w)?w.slice(3).split("@")[0]:null}
 /* ---------- sync: open steps, notice for her, NPCs wear their best ---------- */
 function seedOld(p){/* old saves: her past contest places from the Sổ ân thưởng list (S.honors) */
  if(p!==S||!Array.isArray(S.honors)||!S.honors.length)return;const D=bag(p);const rev={};try{for(const k in CU_KHOI)rev[CU_KHOI[k]]=k}catch(e){}
  for(const h of S.honors){(D.podium=D.podium||{n:0}).n++;if(h.p===1){const k=rev[String(h.t||"").split(" · ")[0]];if(k&&DH["w_"+k])(D["w_"+k]=D["w_"+k]||{n:0}).n++}}}
+/* E62 perf (TITLES2 r2): the catalogue holds ~2 100 keys now and dhSync runs every buổi for her and each month for every NPC. A STORED-count key the
+   person has never stepped on (no D[key]) has count 0, so it can only open when its first need is ≤ 0. Index: walk only the ALWAYS keys (derived counts
+   nights / kids / meta / l_*, or first need ≤ 0) + the person's own keys, in catalogue order — the same result as walking all of DH. The index is built
+   on first use (every catalogue file has loaded by then) and rebuilt when BAL.dh.T is replaced or a held key is not in it yet (a late catalogue entry). */
+let DHX=null;
+function dhIdx(f){const T0=T();if(DHX&&DHX.t===T0&&!f)return DHX;const ord=new Map(),al=[];let i=0;
+ for(const k in DH){ord.set(k,i++);const N=need(k);if(k==="nights"||k==="kids"||k==="meta"||k.startsWith("l_")||(N&&N[0]<=0))al.push(k)}return DHX={t:T0,ord,al,as:new Set(al)}}
+function dhKeys(D){let X=dhIdx();const L=X.al.slice();for(const k in D){if(!X.ord.has(k)){if(!DH[k])continue;X=dhIdx(1);return dhKeys(D)}if(!X.as.has(k))L.push(k)}
+ return L.length>X.al.length?L.sort((a,b)=>X.ord.get(a)-X.ord.get(b)):L}
 function dhSync(p,quiet){if(!p||typeof p!=="object")return [];const first=!p.dh;if(first){bag(p);seedOld(p);quiet=true}const D=bag(p),got=[];
  if(p.dhV!==2){/* TITLE-BAL old saves: «Sớm viếng chiều thăm» counted tries and the works counted every try; their counts restart under the new rule
    (streak / quality). A step already earned stays hers (steps only go up). */if(!first)for(const k of ["a_thinh"].concat(Object.keys(WORK).map(x=>"m_"+x)))if(D[k]){if(k!=="a_thinh"&&D[k].raw==null)D[k].raw=D[k].n||0;D[k].n=0}p.dhV=2}
- for(const key in DH){const c=count(p,key),i=stepOf(key,c);if(i<0&&!D[key])continue;const e=D[key]||(D[key]={n:0});
+ for(const key of dhKeys(D)){const c=count(p,key),i=stepOf(key,c);if(i<0&&!D[key])continue;const e=D[key]||(D[key]={n:0});
   if(!key.startsWith("l_")&&key!=="meta"&&key!=="nights"&&key!=="kids")e.n=Math.max(e.n||0,c);
   if(i>(e.i==null?-1:e.i)){e.at=e.at||[];for(let j=(e.i==null?0:e.i+1);j<=i;j++)e.at[j]=when();e.i=i;got.push(key)}}
  if(got.length){if(p===S){if(!quiet)got.forEach(k=>dhNoteGate(k))}else if(!p.coop)dhAutoWear(p)}
@@ -103,15 +114,15 @@ function earned(p){const D=(p&&p.dh)||{};return Object.keys(DH).filter(k=>D[k]&&
 /* NPCs: wear the highest title, pick the bonus by need (no heir yet → conception; low Sủng / Danh → that; else the first) */
 function npcPick(p,key){const e=p.dh[key],L=choices(key,e.i);const pr=[];if(!p.preg&&(p.kids||[]).length<2)pr.push("thai");if((p.sung||0)<50)pr.push("gSung","sung");
  if((p.danh||0)<50)pr.push("gDanh","danh");if(p.maid&&(p.maid.loyal||0)<BAL.loy.mid)pr.push("gTrung");e.pick=pr.find(t=>L.includes(t))||L[0]}
-function dhAutoWear(p){const L=earned(p).map(k=>dhObj(p,k)).filter(Boolean).sort((a,b)=>b.tier-a.tier);if(L.length){npcPick(p,L[0].key);dhWear(p,L[0].key,true)}}
+function dhAutoWear(p){const L=earned(p).filter(wearOK).map(k=>dhObj(p,k)).filter(Boolean).sort((a,b)=>b.tier-a.tier);if(L.length){npcPick(p,L[0].key);dhWear(p,L[0].key,true)}}
 /* ---------- wearing: one title at a time; its stat only while worn ---------- */
 function wornKey(p){return keyOfWorn(p===S?S.titleWorn:p.titleWorn)}
-function dhWear(p,key,quiet){if(!p)return;if(key&&(!dhObj(p,key)||(p.dh[key]||{}).conf))return;const v=key?"dh-"+key:null;if(p===S)S.titleWorn=v;else p.titleWorn=v;dhApplyFx(p);
+function dhWear(p,key,quiet){if(!p)return;if(key&&(!wearOK(key)||!dhObj(p,key)||(p.dh[key]||{}).conf))return;const v=key?"dh-"+key:null;if(p===S)S.titleWorn=v;else p.titleWorn=v;dhApplyFx(p);
  if(p===S&&!quiet&&typeof log==="function")log(key?`Ngươi đeo danh hiệu «${DH[key].n}».`:"Ngươi tháo danh hiệu xuống.")}
 window.dhWear=dhWear;
 function wornFx(p){const k=p&&wornKey(p);if(!k)return null;const e=(p.dh||{})[k];return e&&e.i>=0?fxOf(k,e.i,p):null}
 /* the value of bonus type t the person's worn title gives now (0 if none) — every hook reads this */
-function dhB(p,t){try{if(!p||p.coop)return 0;const f=wornFx(p);return f&&f[0]===t?f[1]:0}catch(e){return 0}}
+function dhB(p,t){try{if(!p||p.coop)return 0;const f=wornFx(p);return (f&&f[0]===t?f[1]:0)+(typeof window.dhRepB==="function"?window.dhRepB(p,t):0)/* + the held reputation titles (jdh3, additive kinds only) */}catch(e){return 0}}
 window.dhB=dhB;
 function dhApplyFx(p){if(!p||p.coop)return;const f=wornFx(p),want={};if(f&&FLAT.includes(f[0])&&f[0]!=="sac")want[f[0]]=f[1];const on=p.dhOn||{};let ch=false;
  for(const s of new Set(Object.keys(on).concat(Object.keys(want)))){const d=(want[s]||0)-(on[s]||0);if(!d)continue;const before=p[s]||0,after=Math.max(0,Math.min(100,before+d));p[s]=after;
@@ -124,12 +135,13 @@ const fr=(n,d)=>{if(!(n>0)||!d)return 0;const x=n/d;return Math.floor(x)+(Math.r
 /* her Sủng / Danh / bạc / Thái hậu + Hoàng hậu / cung nữ gains: apply (j1, every change of her stats). Sủng is raised here BEFORE j1 runs it through sg
    (review/title-sys-r1: not inside sg, because sg also prints the previews (fmt, wkGainTxt) and a roll there made the shown number jump and differ from the real one) */
 const GAINK=[["danh","gDanh"],["bac","gBac"],["th","gTren"],["hh","gTren"],["maid","gTrung"]];
-function addGains(p,o,keys){if(!o||typeof o!=="object")return o;let c=null;for(const [k,t] of keys){const v=o[k];if(!(v>0))continue;const d=dhB(p,t);if(!d)continue;const x=fr(v,d);if(x){c=c||Object.assign({},o);c[k]=v+x}}return c||o}
+function addGains(p,o,keys){if(!o||typeof o!=="object")return o;let c=null;for(const [k,t] of keys){const v=o[k];if(!v)continue;let x=0;if(v>0){const d=dhB(p,t);if(d)x=fr(v,d)}
+  try{if(typeof window.dhRepG==="function")x+=window.dhRepG(p,k,v)}catch(e){}/* the held reputation titles (jdh3): a share more / less of this gain, or of a Danh loss */if(x){c=c||Object.assign({},o);c[k]=v+x}}return c||o}
 (function(){if(typeof apply!=="function")return;const a0=apply;apply=function(o){try{if(S&&!S.dead)o=addGains(S,o,[["sung","gSung"]].concat(GAINK))}catch(e){}return a0.call(this,o)}})();
 /* NPC gains: ap (j8, every change of an NPC's stats; her branch goes through apply above) */
 (function(){if(typeof ap!=="function")return;const a0=ap;ap=function(p,o){try{if(p&&p!==S)o=addGains(p,o,[["sung","gSung"]].concat(GAINK))}catch(e){}return a0.call(this,p,o)}})();
 /* liking from consorts: affAdd (j9, every thiện cảm change); x (her or a consort) likes y (the wearer) more */
-(function(){if(typeof affAdd!=="function")return;const a0=affAdd;affAdd=function(x,y,n){try{if(n>0&&x&&y&&x!==y&&(x===S||(typeof rivals==="object"&&rivals.includes(x)))){const d=dhB(y,"gHau");if(d)n=n+fr(n,d)}}catch(e){}return a0.call(this,x,y,n)}})();
+(function(){if(typeof affAdd!=="function")return;const a0=affAdd;affAdd=function(x,y,n){try{if(n>0&&x&&y&&x!==y&&(x===S||(typeof rivals==="object"&&rivals.includes(x)))){const d=dhB(y,"gHau");if(d)n=n+fr(n,d);if(typeof window.dhRepG==="function")n=n+window.dhRepG(y,"hau",n)}}catch(e){}return a0.call(this,x,y,n)}})();
 /* LUCK (Phúc khí): lotB (j13, the one odds modifier of every rolled act, hers and NPCs'); never conception; the Quẻ tag stays the quẻ only */
 let NOLUCK=0;(window.THIN_REG=window.THIN_REG||[]).push(["NOLUCK",()=>NOLUCK,v=>{NOLUCK=v}]);/* per-player state for the co-op host (jcoopthin TH.reg) */
 (function(){if(typeof lotB!=="function")return;const l0=lotB;lotB=function(p,dom){const r=l0.apply(this,arguments);try{if(!NOLUCK&&dom!=="Con cái")return r+dhB(p,"phuc")}catch(e){}return r};
@@ -178,16 +190,26 @@ window.dhStreak=dhStreak;window.dhThMonth=dhThMonth;
 /* TITLE-BAL pacing (rec (5) «never several titles popping in the same buổi»): at most BAL.dh.note.per new-title panels a buổi; the rest wait
    in S.dhPend and come one by one on the next buổi (the title itself is already hers; only the panel waits). */
 const bKey=()=>`${S.turn||0}.${S.tuan||0}.${S.buoi||0}`;
+/* E-TITLES3 F1 (RV-163H §2c F1, law 11 whole family): this is the ONE gate of EVERY title panel in the game. Plain keys = a jdh title (dhNotice);
+   "<kind>:<arg>" keys = another title family's panel, shown by DH_NOTE[kind] (jdh3 "rp:<id>" = a reputation title «Tiếng thơm / Tiếng xấu»,
+   jdh2 "hieu:<why>" = the Emperor's «Sắc phong ban hiệu»). A show function returns false when its title is gone by then (lost while waiting):
+   that key takes no slot and the next waiting one comes instead. */
+window.DH_NOTE=window.DH_NOTE||{};
+function dhNoteShow(key){const m=/^([a-z]+):(.*)$/.exec(String(key));if(m){const f=DH_NOTE[m[1]];return typeof f==="function"?f(m[2])!==false:false}
+ if(!S.dh||!S.dh[key]||!(S.dh[key].i>=0))return false;dhNotice(key);return true}
 function dhNoteGate(key){if(S.dhNB&&S.dhNB.k===bKey()&&S.dhNB.n>=BAL.dh.note.per){S.dhPend=S.dhPend||[];if(!S.dhPend.includes(key))S.dhPend.push(key);return}
- if(!S.dhNB||S.dhNB.k!==bKey())S.dhNB={k:bKey(),n:0};S.dhNB.n++;dhNotice(key)}
-(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&S.dhPend&&S.dhPend.length&&(!S.dhNB||S.dhNB.k!==bKey())){const k=S.dhPend.shift();if(!S.dhPend.length)delete S.dhPend;dhNoteGate(k);if(Q.length&&typeof showModal==="function"&&$("modal").hidden&&!window.__bot)showModal()}}catch(e){console.error("dh pend",e)}return r}})();
+ if(!dhNoteShow(key))return;if(!S.dhNB||S.dhNB.k!==bKey())S.dhNB={k:bKey(),n:0};S.dhNB.n++}
+window.dhNoteGate=dhNoteGate;
+(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&S.dhPend&&S.dhPend.length&&(!S.dhNB||S.dhNB.k!==bKey())){
+  while(S.dhPend&&S.dhPend.length&&(!S.dhNB||S.dhNB.k!==bKey())){const k=S.dhPend.shift();if(!S.dhPend.length)delete S.dhPend;dhNoteGate(k)}
+  if(Q.length&&typeof showModal==="function"&&$("modal").hidden&&!window.__bot)showModal()}}catch(e){console.error("dh pend",e)}return r}})();
 /* ---------- her new title: a kit reward panel, wear it now or later ---------- */
 function dhNotice(key){const o=dhObj(S,key);if(!o||typeof kitPanel!=="function")return;const up=(S.dh[key].i||0)>0;
  if(typeof log==="function"&&!RCPRE)log(up?`Danh hiệu «${o.name}» lên bậc ${KIT_TIER_NAME[Math.min(7,o.tier)]}.`:`Ngươi được danh hiệu «${o.name}».`);
  const worn=wornKey(S)===key;
  return kitPanel({kind:"reward",title:up?"Danh hiệu lên bậc":"Danh hiệu mới",sub:o.when,dh:1,
   sections:[{h:"",html:`<div class="kt3">${kitTitlePlate(o)}</div>`},{h:"",rows:[["Cách có",esc(o.how)],["Khi đeo",esc(chTxt(key,S.dh[key].i)||o.fx||"chỉ để làm đẹp")],["Xem lại","Nhiệm vụ › Danh hiệu"]]}],
-  opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(key)},{n:"Thôi",fx:{},x:"",go:()=>{}}]})}
+  opts:worn?[{n:"Đã hiểu",fx:{},x:"",go:()=>dhApplyFx(S)}]:[{n:"Đeo ngay",fx:{},x:chTxt(key,S.dh[key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>setTimeout(()=>{dhPick(key);if(Q.length&&$("modal").hidden)showModal()},0)/* E-TITLES3: after the choose pass closed this card (else the «Đeo «…»» panel waited in Q behind a hidden modal) */},{n:"Thôi",fx:{},x:"",go:()=>{}}]})}
 /* save-unseen-lists r2 (rv r2 FIX 1): «Danh hiệu mới / lên bậc» is carried by its key (j3 rcpReg) and made again on load; the title itself was
    granted before the card (dhInc), the remake only rebuilds the panel (no second log line, no second grant) */
 dhNotice=rcpReg("dhNotice",dhNotice);
@@ -226,11 +248,11 @@ function tabsHTML(cur){const n=earned(S).length;const L=[];if(typeof kitGoalNow=
 function dhPanel(){if(!S)return;dhSync(S,true);DHTAB="dh";const wk=wornKey(S),E=earned(S);const sec=[];const tb=tabsHTML("dh");if(tb)sec.push({h:"",html:tb});
  const wo=wk&&dhObj(S,wk);sec.push({h:"Danh hiệu trên đầu",rows:[wo?[kitTitlePlate(wo),[esc(wo.fx||"chỉ để làm đẹp")],"t"]:["Trên đầu","chưa mang danh hiệu nào"]]});
  try{if(typeof window.dh2Secs==="function")for(const x of window.dh2Secs())sec.push(x)}catch(e){console.error("dh2Secs",e)}/* phase 2 (jdh2): hiệu ban + đường sám hối */
- for(const [g,gl] of GROUPS){const keys=Object.keys(DH).filter(k=>DH[k].g===g);const got=keys.filter(k=>E.includes(k)).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier);
-  const rest=g==="tm"||g==="kc"?[]:keys.filter(k=>!E.includes(k));const rows=got.map(o=>[kitTitlePlate(o),[esc(DH[o.key].how(need(o.key)[S.dh[o.key].i])),esc(o.key===wk?o.fx:(chTxt(o.key,S.dh[o.key].i)||o.fx)||"chỉ để làm đẹp")],"t"]);
+ for(const [g,gl] of GROUPS){const keys=Object.keys(DH).filter(k=>DH[k].g===g&&(!DH[k].old||E.includes(k)));/* old = kept for old saves only (jdh3 FIX r1): counted only when held */const got=keys.filter(k=>E.includes(k)).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier);
+  const rest=ONCE.has(g)?[]:keys.filter(k=>!E.includes(k));const rows=got.map(o=>[kitTitlePlate(o),[esc(DH[o.key].how(need(o.key)[S.dh[o.key].i])),esc(o.key===wk?o.fx:(chTxt(o.key,S.dh[o.key].i)||o.fx)||"chỉ để làm đẹp")],"t"]);
   rest.forEach(k=>{const N=need(k),c=count(S,k);rows.push([esc(DH[k].n),[esc(DH[k].how(N[0])),`đã ${Math.min(c,N[0])}/${N[0]}`],"n"])});
   if(rows.length)sec.push({h:`${gl} · ${got.length}/${keys.length}`,rows})}
- const opts=E.filter(k=>k!==wk).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier).map(o=>({n:`Đeo «${o.name}»`,fx:{},x:chTxt(o.key,S.dh[o.key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(o.key,1)}));
+ const opts=E.filter(k=>k!==wk&&wearOK(k)).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier).map(o=>({n:`Đeo «${o.name}»`,fx:{},x:chTxt(o.key,S.dh[o.key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(o.key,1)}));
  if(wk&&wo&&choices(wk,S.dh[wk].i).length>1)opts.unshift({n:`Đổi phần thưởng «${wo.name}»`,fx:{},x:chTxt(wk,S.dh[wk].i),go:()=>dhPick(wk,1)});
  if(wk)opts.push({n:"Tháo danh hiệu",fx:{},x:wo&&wo.fx?"mất: "+wo.fx.replace(/ \(khi đeo\)$/,""):"bỏ tấm danh hiệu trên đầu",go:()=>{dhWear(S,null);dhPanel()}});
  opts.push({n:"Đóng",fx:{},nav:1,go:()=>{}});
