@@ -204,6 +204,17 @@ BAL.mort.ttw={on:1,warnO:83,cd:{sign:3,quiet:12},cap:40,npcP:50,
   bac:{c:{bac:-60},p:55,pz:12,rel:10,frel:3,th:5,l:{danh:-2},fw:{duc:1}},
   sl:{c:{suc:-18},p:55,pz:12,rel:10,frel:3,th:5,l:{sung:-3},fw:{duc:1}},
   nang:{c:{sung:-15},p:75,pz:20,rel:4,frel:1,th:2,w:{duc:3,suc:10},l:{danh:-3},fw:{suc:10}}}};
+/* TUANTANG-WARN r2 (MAIN 185 rulings 28/11 02:20Z; jmort + jsign.js). Q2 sign: mo = months of warning before a sudden lifespan death (thoO 0),
+   acc = months between an accident's sign and the accident; road = her card on an accident sign (NHẸ nhe gain-only · VỪA bac (Bạc) = sl (Sức));
+   p = odds the sign is heeded (the accident does not come), fw = what a road that did not help still gives (law 3); npcP = % an NPC heeds the sign
+   on the same odds (law 1). */
+BAL.mort.sign={mo:1,acc:1,npcP:50,road:{nhe:{c:{},p:50,fw:{duc:1}},bac:{c:{bac:-40},p:72,fw:{duc:1}},sl:{c:{suc:-12},p:72,fw:{duc:1}}}};
+/* Q3 «Sắp kiệt sức» (jsign.js): warn = Sức at/below which the card comes (once per fall; again after Sức climbs above reset);
+   floor = the Sức she is left with when a Sức-0 blow comes before any warning (the warning comes then; the next Sức 0 kills);
+   road (law 2: NHẸ nhe gain-only · VỪA bac (Bạc) = sl (Danh) · NẶNG nang (Danh)): c Tốn, p odds, w Sức on success, fw on failure (law 3);
+   npcP = % an NPC at the line takes a road (law 1). */
+BAL.kiet={on:1,warn:15,reset:30,floor:1,npcP:50,road:{nhe:{c:{},p:70,w:{suc:10},fw:{suc:4}},bac:{c:{bac:-30},p:65,w:{suc:22},fw:{suc:4}},
+ sl:{c:{danh:-4},p:65,w:{suc:22},fw:{suc:4}},nang:{c:{danh:-10},p:75,w:{suc:34},fw:{suc:6}}}};
 /* D49 collection milestones (jcol): [items, Phúc duyên once per life (OD L46: ~+5/+10/+20/+35), danh hiệu (VANPHONG cổ trang)]; keep = lives remembered in the once-only ledger */
 BAL.col={ms:[[20,5,"Tích bảo"],[50,10,"Tàng bảo"],[100,20,"Bách bảo"],[200,35,"Vạn bảo các chủ"]],keep:80};
 /* TÂN QUÂN LẬP UY (jreign, owner 16/11 D5): the Emperor's side story + her faction road. Months from the accession: at[c] opens chapter c+1;

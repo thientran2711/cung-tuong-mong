@@ -187,7 +187,7 @@ function endTurn(){
   const rg=nightRg();S.suc=cl(S.suc+rg,0,sucCap(S));if(worldOn())liveRivals(true).forEach(v=>v.suc=cl(v.suc+rg,0,sucCap(v)));if(S.tablet)S.tablet--;if(worldOn())liveRivals(true).forEach(v=>{if(v.tablet)v.tablet--});/* NPC ticks: host only (worldOn, jcoopworld) */
   if(lsB)lsNote(lsB,{sung:"ân sủng nhạt dần",suc:"nghỉ ngơi qua tuần"},true)/* Sức: dropped again when folded into j76 "Ngủ một đêm: Sức +N", which already counts this +4 */;
   ev+=rivalsTurn();if(S.dead)return;
-  if(S.suc<=0)return die("Bệnh nặng, không qua khỏi");
+  if(typeof kietDue==="function")kietDue();if(S.suc<=0&&!(typeof kietSave==="function"&&kietSave()))return die("Bệnh nặng, không qua khỏi");/* tuantang-warn r2 Q3: «Sắp kiệt sức» first (jsign) */
   if(S.tuan===2){ev+=monthTick();if(S.dead)return}else S.tuan++;
   if(Q.length===qStart&&wk()>=(S.dilW||0)){const d=makeDil();if(d){pushDil(d);S.dilW=wk()+BAL.ag.why.dil.gap}}/* npc-purpose G1: no weekly die; a card when someone has a reason (makeDil → npwPick), at most every dil.gap tuần */
   rollWx();S.place="home";placeWhere();if(S.out)coldVisit();else S.visit={k:"home",people:homePeople(),talked:false};used=0;popIdx=null;popMsg="";

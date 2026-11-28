@@ -356,7 +356,7 @@ function kcMonth(){S.turn++;const k=S.origin.k;
  if(S.year===KC.ty&&S.month===KC.tm-1&&S.tuan===2&&!S.kc.so)kcSoTuyen();
  S.month++;S.tuan=0;if(S.month>12){S.month=1;S.year++;S.age++;try{S.emp.age++;ageYear()}catch(e){}try{allKids().forEach(([kk])=>{if(kk.alive)kk.age++})}catch(e){}for(const m of S.kc.fam)m.age++}
  if(isKc()&&S.year===KC.ty&&S.month===KC.tm-1&&!S.kc.so)kcSoTuyen();
- if(S.suc<=0&&isKc())kcDie("Lao lực mà chết trước kỳ tuyển tú")}
+ if(typeof kietDue==="function")kietDue();if(S.suc<=0&&isKc()&&!(typeof kietSave==="function"&&kietSave()))kcDie("Lao lực mà chết trước kỳ tuyển tú")}
 const KCSUIT=[["Thế tử hầu phủ","hau",80],["con trai Thượng thư bộ Hộ","quan",65],["Thám hoa khoa này","than",55],["đại thương Giang Nam","thuong",45],["lão Thị lang góa vợ","lao",30]];let kcSO=null;
 function kcSuitReach(x){return x[2]<=S.kgt+BAL.ag.why.kcSuit.reach}
 /* npc-purpose G2: the house that seeks her = the highest one her standing reaches (its own ambition), not a die */
