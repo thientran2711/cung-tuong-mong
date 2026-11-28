@@ -56,3 +56,42 @@ SẴN SÀNG KIỂM review/row12-leave 4480ae6ea012610e7ac8c4dc235563fceec089ed (
 
 ## HANDOVER
 Worktrees /home/user/wt/r12 (branch), /home/user/wt/r12ho (handover). Shot script /home/user/wt/r12-shots/shot.js. Nothing open beyond the BIG rv.
+
+## REVIEW (B BIG RV row12-leave, session_01N1tNP2Dw6kcWdsVjWrLddR, opus, FRESH; depth 3; START_CTX ~4 %) — 11/28/2026
+PRIORITY #1 CHECK ('row12|leave-palace|accw|warning before punishment|PUNISH-TIER'): OD L2531 (25/11 ~23:33Z) + PUNISH-TIER L2641–L2668 | main LIVE now c03d6ee7 (lc35-ui5 on a96564ad; branch merges with main only in built files + KIT_REQUESTS.md, lander's job) | review/* leave-palace-r6, row12-leave 4480ae6e on psl4-f1 57f6e2c4 | claims B-ROW12 356pGppK.
+KIT CHECK: reuses pushDil/PEND standard dialog + j67 «tốn · thành · hỏng» line + pv() figure + oddsCl words — no new part (static read; device shots not taken, see verdict).
+
+**VERDICT: FAIL review/row12-leave 4480ae6ea012610e7ac8c4dc235563fceec089ed** (no r2: the gaps are design-size, not small fixes).
+
+### What is sound (keep it)
+- jaccw hook on ACT.accuse/tocao/expose f() + j8 judge(): prepares once, fires once. j40 plan runner clears v.plan before mindRun and npcAct is blocked while a plan is held, so no double-apply and no skip on the due buổi; awDel on every way out clears record + plan. Save/reload: S.accw + NPC .plan live in the save; PEND.accw rebuilds from the record; old save (no S.accw) reads null. Death/leave of either side: awLive / awOn guard both.
+- Her card money: chooseM applies fx once, then go(); a refused settlement hands the bạc back (awPay(S,-pr) → +pr); a taken settlement moves pr to the accuser (law 6c OK). Numbers all from BAL.accw (law 4). Wording cổ trang, odds as words, no % (law 7). Kit dialog only (law 9).
+
+### FAIL list (numbered, for the worker)
+1. **LAW 11 / L2531 family incomplete** — the owner's rule is «a punishment never falls without a prior visible warning … every forced move». The branch covers 4 acts + judge; a full scan of every punishment call site (punTier / chPunish* / fall / punish / demote / cold / deathSentence, ~100 sites, table below) finds these roads that still land on HER the same moment with NO prior card or notice:
+   | # | path | penalty | warned? |
+   |---|---|---|---|
+   | a | j30.js:16 demoteReview — Sủng under the rank floor 2 months | giáng | NO (month 1 only lowS+1, silent; floor shown nowhere) |
+   | b | j30.js:17 demote after long illness | giáng | NO |
+   | c | ACT xinhh «Xin Hoàng hậu giáng» by an NPC (RVGRP «Hại nặng» / BANDS[2]) → jaudit.js:267 → jrcv.js:218 rcvJudge (card only when q===S) → demote | giáng | NO |
+   | d | j8.js:582 monthly Cung Chính ti raid → search() → fall / punish(p,…,2) (j8:361/364/365; only bùa opens the vuoan card) | giáng / lãnh cung | NO |
+   | e | j92.js:298→295/297, jshelf.js:303/311, jdress.js:96 NPC «Hặc ăn mặc sai phẩm» / vượt phẩm / xa xỉ | khất bổng, thu đồ, cấm túc (quốc tang) | NO (passive dress hint only) |
+   | f | jmen.js:260→213/209, jroute.js:122-124 a witness reports her with a man / tryst at once | tư thông: tử tội / cấm túc | NO |
+   | g | j8.js:512 bribed maid sells her schemes | punish(…,2) | NO |
+   | h | jagstaff.js:123 her own servant accuses her to the Hoàng hậu → fall(m) | giáng + Sủng | NO (the report's «servant accusations open her card» is not true for this road) |
+   | i | j10.js:177/178/167 faction: hợp mưu on her / failed joint scheme / co-member sells out | fall / punish | NO |
+   | j | j8.js:205 kframe (son framed for trù ẻo) — only a mindTell roll (≤80 %) | punish | chance only |
+   | k | jtsb.js:103 she bullies twice, victim reports to the Hoàng hậu | chPunish uh | NO (her card never names the report) |
+   | l | j14.js:29 lãnh cung minh oan exposes her as the framer · j8.js:471 birth omen «yêu vật» | fall / punish(2) | NO |
+   | m | jaccw.js:88 NPC Hoàng hậu judge() when chReady() is null → j0 → j8:228 punish(p,…,n>=3?2:1) | punish | NO (fallback bypasses the warning) |
+   | n | servant life: jcharge.js:206 «Bị đuổi khỏi cung», j42.js:589 chest search | đuổi / chết | NO |
+   Warned (OK, no change): her own choice cards with «hỏng/lộ: bị phạt / phản tọa / ban chết» (j2, j7, j13, j22, j4, j41/j77, j55, jreign, j92:392, jemoact, j95, jroute, jcharge:165, j9/j8 her acts); defence cards before the verdict: vu oan jtruth vuoan, giahoa wdframe, rtBm blackmail, rcpacc, jworld2 vu cổ; prior notices: jlost hearing, jstagehere closing, quốc tang notice (j92:414), cn2 story; NPC-only / coop-only / reignend p===S skip.
+   Fix (one rule, law 11): ONE shared «warned before it falls» step in front of the penalty core for every NPC/system-initiated road on her (a–n), either the jaccw prepare (2 buổi + «Sắp bị …» dialog with the Nhẹ·Vừa·Nặng ways out) or, for the monthly/system checks (a, b, d, e), a kit notice one step ahead (e.g. demoteReview month 1 «Sủng dưới mức … thêm một tháng sẽ bị giáng»). Add a scan test that fails when a punishment core call reachable for S has no preceding warning hook.
+2. **LAW 1 two-way / brief check (4)** — her own accusation (accuse/tocao/expose, and her Xử tội as Hoàng hậu: judge wrap skips q===S) runs at once, while an NPC's is prepared 2 buổi; the NPC target can only confess / seek a patron (no «Dàn xếp» offer to her). Make her accusation ride the same 2-buổi prepare, the NPC target answering with the same list incl. a settlement offer she can take or refuse (her dialog).
+3. **LAW 2 (soft, fix with 1)** — Vừa «Dàn xếp» and Nặng «Cầu che chở» give the same kind of result (evA(a,t,-n,c) in both: «trả lại» = «đốt» in code); Nặng adds only foe Danh −3 / oán, costs 150 non-refundable vs ≤120 refundable, and its base odds (shield.base 40) are BELOW Vừa (settle.base 45). Make Nặng's result truly bigger (e.g. the accuser loses ALL her pieces on her, or is phản tọa-lite) and its base odds not below Vừa. Also the Thái hậu gift goes to no one (bạc vanishes; law 6c-adjacent: record it as a real gift/ledger).
+
+### Tests run (this box, quiet, ONE browser process at a time)
+- quickcheck ALONE 4480ae6e vs live c03d6ee7: **FAIL** (2231 s total, quiet box). Core gate G1 one-core-text-rule DIFF ×2 jph.js:173 / jkpick.js:141 (files this branch does not touch: psl4/LIVE side) · time-spill PASS · open 2343 ms 0 errors · old save from live loads + plays a buổi OK · perf (median of 3 new/live) render 372/308 ms, tab 709/699, buổi 2295/2058, **longTasks>200ms 62/37 (limit 56) FAIL** — not attributed (base psl4 also differs from live c03d6ee7); the r2 rv must A/B perf psl4 57f6e2c4 vs branch.
+- accw.test.js (Fold 755x1000) on 4480ae6e: 22/22 ok, 0 page errors (×1; confirms the 4-act hook works as claimed).
+- Not run after the FAIL was clear (device shots, accw ×3/MUTATE/base, punish-*, leave-palace, oldsave-r1): the worker's numbers stand as theirs, not re-proved here; the r2 rv must run them all.
+Shots: none taken (nothing uploaded, nothing to wipe).
