@@ -219,7 +219,7 @@ function menReport(by,m,c,y,formal){const at=placeName(y.k);const nm=m.name;cons
 /* by hides m (and c): a debt and evidence; found → by is punished */
 function menHide(by,m,c,y,eyes){menStat(by===S?"hideMe":"hideNpc");const risk=cl(Math.round(10+eyes*5-(by.tamco||0)/10),4,60);
  if(c&&c!==by){const prev=J78.ctx;if(by===S)J78.ctx={how:"Ngươi giấu giúp, nên biết rõ chuyện",proves:menTrue(m,c,y).replace(/\.$/,"")};try{evA(by,c,y.r==="tryst"?BAL.eff.jmen.evMenHide[0]:BAL.eff.jmen.evMenHide[1])}finally{J78.ctx=prev}affAdd(c,by,BAL.eff.jmen.menHide);oanAdd(c,by,BAL.eff.jmen.menHide_2)}
- if(roll(risk)){ap(by,{danh:BAL.eff.jmen.danhHide});punish(by,"che giấu nam nhân lẻn vào hậu cung",1);m.ban=wk()+MEN.banS;return false}
+ if(roll(risk)){punPlus(by,{danh:BAL.eff.jmen.danhHide},()=>punish(by,"che giấu nam nhân lẻn vào hậu cung",1));m.ban=wk()+MEN.banS;return false}
  if(by===S){m.af=(m.af||0)+BAL.eff.jmen.hideMan;m.debt=(m.debt||0)+1;S.menSec=S.menSec||{};S.menSec[m.id]={r:y.r,v:y.v||null,k:y.k,w:wk(),hid:1}}return true}
 
 /* the player's choice */

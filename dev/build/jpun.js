@@ -19,6 +19,10 @@ function punTwice(p){return p&&p.punWk!=null&&punNow()-p.punWk<BAL.pun.gapDays}
 /* the rank p held before a demotion today (lãnh cung after it keeps that rank as the one to be restored), else her rank now */
 function punFromToday(p){return punTwice(p)&&p.punFrom!=null?p.punFrom:rkOf(p)}
 /* the light road when a second rank punishment would fall the same day: cấm túc instead (never a second rank) */
+/* punPlus(p,fx,f): a side penalty (Danh / Sủng …) that belongs to the punishment f() brings on p — ONE penalty (row 12 r3, law 11 «no penalty split»):
+   the jaccw gate holds fx together with the core when it holds the core, and pays it just before the core when it falls now. Fallback: fx, then f(). */
+function punPlus(p,fx,f){if(p&&fx)ap(p,fx);return f()}
+function punHeldLast(){return false}
 function punLight(p,why,by){const m=typeof punishMonths==="function"?punishMonths():1;p.confined=Math.max(p.confined||0,m);
  const t=`${NMc(p)} vừa chịu phạt hôm nay; lần này chỉ bị cấm túc ${m} tháng vì ${punPlain(why)}.`;
  if(p===S){log(`<span class="r">${t}</span>`);punNote({kind:"camtuc",why,by,m})}else log(t);return t}

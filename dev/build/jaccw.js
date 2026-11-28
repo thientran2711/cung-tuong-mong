@@ -104,66 +104,96 @@ if(typeof judge==="function"){const j0=judge;judge=function(q,p){if(AWRUN||windo
   let c=null;try{c=chReady(q,p)}catch(e){}if(!c&&q!==S)return j0.apply(this,arguments)/* an NPC queen with no charge: j8 judge() punishes by punish(), which the core gate below holds and warns */;
   awStart(q,p,"judge",c||null);return q===S?`Ngươi truyền Cung Chính ti lập án ${p.name}; ${W().due} buổi nữa sẽ xử. `:""}}
 /* ================= THE CORE GATE (every other punishment road) ================= */
-const CORE=["punish","fall","demote","chPunishX","deathSentence","cold","punTier","srvAffairCaught","chSrvEnd","srvLaundry","srvKill"];const SRVF=["srvAffairCaught","chSrvEnd","srvLaundry","srvKill"];const CORE0={};
+/* r3 (rv FAIL 1, law 11 «no penalty split»): chPunish and framed are cores too — they are the OUTERMOST penalty entries (chPunish's jcharge wrap
+   pays the Ức hiếp bồi thường / expels the bought servants, framed takes Danh / Sủng) before the inner chPunishX / punish: held at the entry,
+   the whole penalty waits and falls together, with its notice rows. srvBeat = the master's trượng (r3 FAIL 2). */
+const CORE=["punish","fall","demote","chPunishX","chPunish","framed","deathSentence","cold","punTier","srvAffairCaught","chSrvEnd","srvLaundry","srvKill","srvBeat"];const SRVF=["srvAffairCaught","chSrvEnd","srvLaundry","srvKill","srvBeat"];const CORE0={};
 /* the target of a core call (arguments as each core takes them) */
 function awTgt(fn,A){if(fn==="punish"||fn==="deathSentence")return typeof A[0]==="string"?S:A[0];if(fn==="cold"||SRVF.includes(fn))return S;return A[0]}
 /* the accuser: an explicit «by», the doer of the running act (ACTX), the charge context (CHX) — never her */
 function awBy(fn,A){const npc=x=>x&&typeof x==="object"&&x!==S&&x.id!=null&&x.alive!==false&&!x.coop&&(rivals||[]).includes(x)?x:null;let by=null;
- if(fn==="fall")by=A[2];else if(fn==="chPunishX")by=A[3];else if(fn==="punTier")by=A[3];else if(fn==="cold")by=A[1];
+ if(fn==="fall")by=A[2];else if(fn==="chPunishX"||fn==="chPunish")by=A[3];else if(fn==="punTier")by=A[3];else if(fn==="cold")by=A[1];
  if(typeof by==="string")by=byKey(by);return npc(by)||(typeof ACTX!=="undefined"&&ACTX?npc(ACTX.a):null)||(typeof CHX!=="undefined"&&CHX&&CHX.t===S?npc(CHX.a):null)}
 function awNeed(fn,A){if(window.__awoff||AWRUN||AWIN||AWOKN||!S||S.dead||!awWorld())return false;if(awTgt(fn,A)!==S)return false;
  if(!SRVF.includes(fn)&&fn!=="deathSentence"&&S.out)return false/* already in lãnh cung: the cores refuse it themselves */;
- const c=awCtx();if(c==="her")return false;if(c==="w"||c==="npc")return true;
+ const c=awCtx();if(c==="her")return false;
+ /* framed with a framer named (ACTX.a): jtruth opens her «Bị vu oan» defence card first — that card IS the warning */
+ if(fn==="framed"&&typeof ACTX!=="undefined"&&ACTX&&ACTX.a&&ACTX.a!==S&&!window.__truthAuto)return false;
+ if(c==="w"||c==="npc")return true;
  if(typeof ACTX!=="undefined"&&ACTX&&ACTX.a===S)return false;return !!awBy(fn,A)}
 /* plain arguments for the save (people as keys, a man by id) */
 function awSer(x){if(x&&typeof x==="object"){if(x===S)return {__k:"me"};if(x.id!=null&&(rivals||[]).includes(x))return {__k:x.id};if(x.id!=null&&(S.men||[]).includes(x))return {__m:x.id};try{return JSON.parse(JSON.stringify(x))}catch(e){return null}}return x===undefined?null:x}
 function awDes(x){if(x&&typeof x==="object"){if(x.__k!=null)return byKey(x.__k);if(x.__m!=null)return (S.men||[]).find(m=>m.id===x.__m)||null}return x===null?undefined:x}
 /* the matter in words: «bị …» = what is done to her (said as is), anything else = the offence («sắp bị xét tội …») */
 function awPlainWhy(w){w=String(w==null?"":w).replace(/<[^>]+>/g,"").trim();w=w.replace(/^Ngươi\s+/,"").replace(/^Bị (?:ban (?:chết|rượu độc)|đày vào lãnh cung)\s*(?:vì\s+)?/i,"").replace(/\s*\(tội [^)]*\)\s*$/,"");return w?w.charAt(0).toLowerCase()+w.slice(1):"phạm cung quy"}
-function awSay(why,n){return /^bị /.test(why)?`ngươi ${why}. Trong ${n} buổi tới Cung Chính ti sẽ xét`:`ngươi sắp bị xét tội <b>${why}</b>, trong ${n} buổi tới`}
-function awWhy(fn,A){if(fn==="punish"||fn==="deathSentence")return awPlainWhy(typeof A[0]==="string"?A[0]:A[1]);if(fn==="cold")return awPlainWhy(A[0]);if(fn==="chPunishX")return awPlainWhy(A[2]);
- if(fn==="srvAffairCaught")return "tư tình khi đang là cung nữ";if(fn==="srvLaundry"||fn==="srvKill")return awPlainWhy(A[0]).replace(/[.;,]+$/,"");if(fn==="chSrvEnd")return "nhận bạc mua chuộc, làm tai mắt cho người";return awPlainWhy(A[1])}
+function awSay(why,n,cn){cn=cn||"";return /^bị /.test(why)?`ngươi ${why}${cn}. Trong ${n} buổi tới Cung Chính ti sẽ xét`:`ngươi sắp bị xét tội <b>${why}</b>${cn}, trong ${n} buổi tới`}
+/* r3 (rv FAIL 3): each core's reason argument by its own signature — punTier(p,x,why,by) has it at A[2] (A[1] is the tier key) */
+const AWWHY={punish:A=>typeof A[0]==="string"?A[0]:A[1],deathSentence:A=>typeof A[0]==="string"?A[0]:A[1],cold:A=>A[0],chPunishX:A=>A[2],chPunish:A=>A[2],punTier:A=>A[2],fall:A=>A[1],demote:A=>A[1],framed:A=>A[1]};
+/* the servant cores say a whole sentence (what the master does to her), not an offence: «Tin dữ: <sentence>.» (rv FAIL 4) */
+function awSrvWhy(fn,A){if(fn==="srvAffairCaught")return "chuyện tư tình của ngươi khi đang là cung nữ bị phát giác";if(fn==="chSrvEnd")return "chuyện ngươi nhận bạc mua chuộc, làm tai mắt cho người bị phơi ra";
+ return String(A[0]==null?"":A[0]).replace(/<[^>]+>/g,"").trim().replace(/[.;,]+$/,"")}
+function awWhy(fn,A){if(SRVF.includes(fn))return awSrvWhy(fn,A);return awPlainWhy((AWWHY[fn]||(X=>X[1]))(A))}
 /* the penalty words and the one-step-lighter penalty of a held core (both read the core's own rule texts) */
 function awSev(A){const s=typeof A[0]==="string"?A[1]:A[2];return s==null?1:s}
 function awPen(fn,A){try{if(fn==="punish")return aaPunishTxt(awSev(A)).replace(/^bị phạt: /,"bị ");if(fn==="fall")return punTierTxt(S,A[3]||"vua");if(fn==="punTier")return punTierTxt(S,A[1]);
- if(fn==="chPunishX")return awPunTxt(S,A[1],A[4]);if(fn==="demote")return "bị giáng một bậc";if(fn==="deathSentence")return punTierTxt(S,"tu");if(fn==="cold")return A[2]==="phe"?punTierTxt(S,"tu"):"bị đày vào lãnh cung";
- if(fn==="srvAffairCaught")return "bị trị tội tư tình: đòn roi, có khi bị đuổi khỏi cung";if(fn==="srvLaundry")return `bị đày xuống Tân giả khố ${A[1]|0} tuần`;if(fn==="srvKill")return "bị đánh chết";if(fn==="chSrvEnd")return "bị đuổi khỏi cung"}catch(e){}return "bị trị tội"}
+ if(fn==="chPunishX")return awPunTxt(S,A[1],A[4]);if(fn==="chPunish")return awChTxt(A[1],A[4]);
+ if(fn==="framed")return `${aaPunishTxt(2).replace(/^bị phạt: /,"bị ")}; Danh và Sủng cùng sụt`;
+ if(fn==="srvBeat")return `bị đánh ${A[1]|0} trượng; Sức cạn thì mất mạng`;if(fn==="demote")return "bị giáng một bậc";if(fn==="deathSentence")return punTierTxt(S,"tu");if(fn==="cold")return A[2]==="phe"?punTierTxt(S,"tu"):"bị đày vào lãnh cung";
+ if(fn==="srvAffairCaught")return "bị trị tội tư tình: đòn roi, có khi bị đuổi khỏi cung";if(fn==="srvLaundry")return `bị đày xuống Tân giả khố ${A[1]|0} tuần`;if(fn==="srvKill")return "mất mạng";if(fn==="chSrvEnd")return "bị đuổi khỏi cung"}catch(e){}return "bị trị tội"}
+/* chPunish's penalty words: the weight's words + its extras (bồi bạc / người hầu bị đuổi), as jcharge chPunTxt says them */
+function awChTxt(c,x){const r=awPunTxt(S,c,x||chTier(S,c));return c==="uh"?`${r}, bồi bạc cho người bị hại`:c==="mc"?`${r}, người hầu bị mua bị đuổi khỏi cung`:r}
 function awLite(fn,A){const st=x=>{const y=punStep(x,-1);return y!==x?y:null};const w=typeof A[0]==="string"?A[0]:A[1];
  if(fn==="punish"){const s=awSev(A);return s>=1?{fn:"punish",A:[S,w,s-1]}:null}
  if(fn==="fall"){const y=st(A[3]||"vua");return y?{fn:"fall",A:[S,A[1],A[2],y]}:null}if(fn==="punTier"){const y=st(A[1]);return y?{fn:"punTier",A:[S,y].concat(A.slice(2))}:null}
  if(fn==="chPunishX"){const y=st(A[4]);return y?{fn:"chPunishX",A:[S,A[1],`${A[2]} (nhận tội trước, giảm một bậc)`,A[3],y,A[5]]}:null}
+ if(fn==="chPunish"){const y=st(A[4]||chTier(S,A[1]));return y?{fn:"chPunish",A:[S,A[1],`${A[2]} (nhận tội trước, giảm một bậc)`,A[3],y]}:null}/* extras kept: the lighter weight goes through the same entry */
+ if(fn==="framed")return {fn:"punish",A:[S,w,1]};
+ if(fn==="srvBeat"){const k=Math.max(1,Math.round((A[1]|0)/W().srvLite));return k<(A[1]|0)?{fn:"srvBeat",A:[A[0],k,A[2]]}:null}
+ if(fn==="srvLaundry"){const k=Math.max(1,Math.ceil((A[1]|0)/W().srvLite));return k<(A[1]|0)?{fn:"srvLaundry",A:[A[0],k]}:null}
  if(fn==="demote")return {fn:"punish",A:[S,A[1],1]};if(fn==="deathSentence")return {fn:"fall",A:[S,w,null,"nang"]};
  if(fn==="cold")return {fn:"fall",A:[S,A[0],A[1],A[2]==="phe"?"nang":"vua"]};if(fn==="srvKill")return {fn:"srvLaundry",A:[A[0],BAL.ag.why.srv.pun.lauWk]};return null}
+/* punPlus (jpun fallback): the side penalty fx of the core f() calls on p — ONE penalty: held into the core's record with it, or paid just before
+   the core when it falls now (order as before), or paid after f() when no core was reached (r3, law 11 «no penalty split»: j8 search / birth omen /
+   vượt phẩm, j92 / jdress / jshelf hặc ăn mặc, j13 giả bệnh, j4 story, jmen, jreign wrote Danh / Sủng before the gated core) */
+let PFX=null,PFXH=false;
+punPlus=function(p,fx,f){const px=PFX,me={p,fx,done:false,held:false};PFX=me;let r;try{r=f()}finally{PFX=px;if(!me.done&&p&&fx)ap(p,fx)}PFXH=me.held;return r};
+punHeldLast=function(){return PFXH};
+function awPfxPay(t){if(PFX&&!PFX.done&&PFX.p===t){PFX.done=true;if(PFX.fx)ap(t,PFX.fx)}}
+function awFxTxt(fx){if(!fx)return "";const W2=[];for(const k in fx){const v=fx[k];if(!v)continue;W2.push(k==="sung"&&typeof sgStat==="function"?sgStat(v):k==="danh"?`Danh ${balSg(v)}`:"")}return W2.filter(Boolean).join(" · ")}
 function awCall(fn,A){return awRun(()=>window[fn].apply(null,A))}/* the whole wrapped chain (every module's side of the penalty), the gate passing (AWRUN) */
 /* hold: the record + her dialog; the same matter twice (same core + same words) is one record, never two penalties */
 function awHold(fn,A){S.accw=S.accw||{};const by=awBy(fn,A);const ser=A.map(awSer);const sig=fn+"|"+JSON.stringify(ser);
- for(const id in S.accw){const R=S.accw[id];if(R&&R.k==="core"&&R.sig===sig)return}
+ for(const id in S.accw){const R=S.accw[id];if(R&&R.k==="core"&&R.sig===sig){if(PFX&&!PFX.done&&PFX.p===S){PFX.done=true;PFX.held=true}return}}
  const id="core"+(S.awN=(S.awN||0)+1);let cx=null;try{if(typeof CHX!=="undefined"&&CHX&&CHX.t===S)cx={a:CHX.a?key(CHX.a):null,c:CHX.c,n:CHX.n}}catch(e){}let pt=null;try{if(typeof PUNT!=="undefined"&&PUNT)pt=JSON.parse(JSON.stringify(PUNT))}catch(e){}
- S.accw[id]={k:"core",fn,A:ser,sig,a:by?key(by):null,why:awWhy(fn,A),due:bq()+W().due,cx,pt};
+ let fx=null;if(PFX&&!PFX.done&&PFX.p===S){fx=PFX.fx;PFX.done=true;PFX.held=true}
+ S.accw[id]={k:"core",fn,A:ser,sig,a:by?key(by):null,why:awWhy(fn,A),due:bq()+W().due,cx,pt,fx};
  try{pushDil(mkP("accw",{id}),"Sắp bị trị tội")}catch(e){console.error("accw hold",e)}}
 function awFire(id){const R=(S.accw||{})[id];if(!R)return "";delete S.accw[id];if(!S||S.dead)return "";const A=R.A.map(awDes);let r="";
  const px=typeof CHX!=="undefined"?CHX:null,pp=typeof PUNT!=="undefined"?PUNT:null;
- try{if(R.cx&&typeof CHX!=="undefined")CHX={a:R.cx.a?byKey(R.cx.a):null,t:S,c:R.cx.c,n:R.cx.n};if(R.pt&&typeof PUNT!=="undefined")PUNT=R.pt;r=awCall(R.fn,A)}catch(e){console.error("accw fire",e)}
+ try{if(R.cx&&typeof CHX!=="undefined")CHX={a:R.cx.a?byKey(R.cx.a):null,t:S,c:R.cx.c,n:R.cx.n};if(R.pt&&typeof PUNT!=="undefined")PUNT=R.pt;const ta=window.__truthAuto;if(R.fn==="framed")window.__truthAuto=1;try{r=awCall(R.fn,A)}finally{window.__truthAuto=ta}if(R.fx&&!S.dead)ap(S,R.fx)/* its side penalty falls with it */}catch(e){console.error("accw fire",e)}
  finally{try{if(typeof CHX!=="undefined")CHX=px}catch(e){}try{if(typeof PUNT!=="undefined")PUNT=pp}catch(e){}}return typeof r==="string"?r:""}
 /* her card for a held core */
 function awCoreCard(id){const R=(S.accw||{})[id];if(!S||!R||R.k!=="core"||S.dead)return null;const A=R.A.map(awDes),a=R.a?byKey(R.a):null,al=a&&a!==S&&awLive(a)?a:null;const srv=SRVF.includes(R.fn);
- const n=Math.max(1,R.due-bq()),pen=awPen(R.fn,A),L=awLite(R.fn,A),c=R.cx&&R.cx.c||(R.fn==="chPunishX"?A[1]:null),pr=al?(c?awSettle(al,S,c):W().settle.bac):0,P=srv?null:awPat(al,S),Sh=W().shield;const O=[];
- if(L)O.push({n:"Nhẹ · Nhận tội trước",fx:{},j67:`tốn: chịu phạt ngay · được: ngươi ${awPen(L.fn,L.A)} thay vì ${pen}, việc khép lại`,go:()=>{if(!(S.accw||{})[id])return;delete S.accw[id];const r=awCall(L.fn,L.A);if(typeof r==="string"&&r)log(r)}});
+ const n=Math.max(1,R.due-bq()),fxw=awFxTxt(R.fx),pen=awPen(R.fn,A)+(fxw?`; ${fxw}`:""),L=awLite(R.fn,A),c=R.cx&&R.cx.c||(R.fn==="chPunishX"||R.fn==="chPunish"?A[1]:null),pr=al?(c?awSettle(al,S,c):W().settle.bac):0,P=srv?null:awPat(al,S),Sh=W().shield;const O=[];
+ if(L)O.push({n:srv?"Nhẹ · Quỳ xin giảm tội":"Nhẹ · Nhận tội trước",fx:{},j67:`tốn: chịu phạt ngay · được: ngươi ${awPen(L.fn,L.A)}${fxw?`; ${fxw}`:""} thay vì ${pen}, việc khép lại`,go:()=>{if(!(S.accw||{})[id])return;delete S.accw[id];const r=awCall(L.fn,L.A);if(R.fx&&!S.dead)ap(S,R.fx);if(typeof r==="string"&&r)log(r)}});
  if(al&&!srv&&S.bac>=pr)O.push({n:`Vừa · Dàn xếp với ${al.name}`,fx:{bac:-pr},p:awSettleO(al,S),ton:{bac:-pr},j67:`tốn: Bạc ${balSg(-pr)} · thành: nàng rút lời tố${c?`, trả lại chứng cứ tội ${chName(c).toLowerCase()}`:""}, việc bỏ · hỏng: nàng không nhận, bạc trả lại, vẫn xét`,
   go:()=>{if(!(S.accw||{})[id]){awPay(S,-pr);return}if(!roll(awSettleO(al,S))){awPay(S,-pr);try{oanAdd(S,al,W().settle.oan)}catch(e){}log(`${al.name} không nhận bạc dàn xếp của ngươi; việc vẫn tới ngày xét.`);return}
    delete S.accw[id];ap(al,{bac:pr});const k=c?awN(al,S,c):0;if(k)evA(al,S,-k,c);log(`${al.name} nhận ${pr} lượng bạc, rút lời tố${k?`, trả lại ${k} chứng cứ`:""}; việc bỏ.`)}});
  if(P&&S.bac>=Sh.bac)O.push({n:`Nặng · Cầu ${P.n} che chở`,fx:{bac:-Sh.bac},p:awShieldO(al,S,P),ton:{bac:-Sh.bac},j67:`tốn: Bạc ${balSg(-Sh.bac)} (lễ dâng ${P.n}) · thành: việc bị gác${al?`, mọi chứng cứ ${al.name} nắm về ngươi bị đốt, Danh nàng ${balSg(-Sh.foeDanh)}`:""} · hỏng: vẫn bị xét`,
   go:()=>{if(!(S.accw||{})[id]){awPay(S,-Sh.bac);return}ap(P.to,{bac:Sh.bac});if(!roll(awShieldO(al,S,P))){log(`${P.n} nhận lễ của ngươi nhưng không ra mặt; việc vẫn tới ngày xét.`);return}
    delete S.accw[id];let k=0;if(al){k=awAll(al,S);if(k)evA(al,S,-k);ap(al,{danh:-Sh.foeDanh});try{oanAdd(al,S,Sh.oan)}catch(e){}}log(`${P.n} gác việc ấy lại${al?`; mọi chứng cứ ${al.name} nắm về ngươi bị đốt, ${al.name} Danh ${balSg(-Sh.foeDanh)}`:""}.`)}});
- const cn=c?`, tội <b>${chName(c).toLowerCase()}</b>`:"";
- return {who:al?pv(al):undefined,t:`<p>Cung Chính ti báo tin: ${al?`${al.name} đã đứng ra tố ngươi: `:""}${awSay(R.why,n)}${cn}.</p><p>Nếu tội thành, ngươi ${pen}. Không làm gì thì chờ ngày xét.</p>`,o:O}}
+ /* rv FAIL 4: a held core with no way out gets one plain acknowledge option (the standard dialog's «Cúi đầu …» kind, as j42 cnvName), never the empty fallback */
+ if(!O.length)O.push({n:srv?"Cúi đầu chờ ngày ấy":"Cúi đầu chờ ngày xét",fx:{},go:()=>{}});
+ if(srv){const w=String(R.why||"");return {who:undefined,t:`<p>Tin dữ: ${w.charAt(0).toUpperCase()+w.slice(1)}.</p><p>Trong ${n} buổi tới, ngươi ${pen}.${L?"":" Không có đường lui; chỉ còn chờ ngày ấy."}</p>`,o:O}}
+ const cn=c&&!/tội /.test(R.why)?`, tội <b>${chName(c).toLowerCase()}</b>`:"";
+ return {who:al?pv(al):undefined,t:`<p>Cung Chính ti báo tin: ${al?`${al.name} đã đứng ra tố ngươi: `:""}${awSay(R.why,n,cn)}.</p><p>Nếu tội thành, ngươi ${pen}. Không làm gì thì chờ ngày xét.</p>`,o:O}}
 /* the wrap: outermost (this file is assembled last); an inner core called by an outer one is part of the same penalty (AWIN) */
 /* contexts: her taps / her acts / the world turn / a witness road inside her own action */
 const CTXF=[["chooseM","her"],["nextBuoi","w"],["endTurn","w"],["menReport","npc"],["rtReport","npc"],["runAct",null]];
 /* (re)wrap: some modules wrap these again from a load timer (j95 stage sync: setTimeout); re-wrapping keeps the gate outermost (an inner
    second gate sees AWIN and lets the outer one decide; a context pushed twice is the same context) */
 function awWrapAll(){for(const fn of CORE){const g=window[fn];if(typeof g!=="function"||g.__aw)continue;if(!CORE0[fn])CORE0[fn]=g;const f0=g;
-  window[fn]=function(){const A=Array.prototype.slice.call(arguments);if(!AWIN&&awNeed(fn,A)){awHold(fn,A);return fn==="demote"?"":undefined}AWIN++;try{return f0.apply(this,arguments)}finally{AWIN--}};window[fn].__aw=1}
+  window[fn]=function(){const A=Array.prototype.slice.call(arguments);if(!AWIN&&awNeed(fn,A)){awHold(fn,A);PFXH=true;return fn==="demote"?"":fn==="framed"?-1/* as jtruth's «card opened»: the caller says «found in her room», no numbers */:undefined}if(!AWIN)try{awPfxPay(awTgt(fn,A))}catch(e){}AWIN++;try{return f0.apply(this,arguments)}finally{AWIN--}};window[fn].__aw=1}
  for(const [fn,c] of CTXF){const g=window[fn];if(typeof g!=="function"||g.__awc)continue;const f0=g;
   window[fn]=c?function(){return awInCtx(c,f0,this,arguments)}:function(a){return awInCtx(a===S?"her":"npc",f0,this,arguments)};window[fn].__awc=c||"act"}}
 awWrapAll();setTimeout(awWrapAll,0);setTimeout(awWrapAll,400);

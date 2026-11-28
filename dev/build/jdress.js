@@ -73,7 +73,7 @@ function dsSpyX(A){return Array.isArray(A)?A.map(o=>o&&o.n==="Sai đi dò la"&&o
  const nm=J.map(k=>itm(k).n).join(", ");
  try{a.vpA92=wk();t.vpT92=wk()}catch(e){}
  if(!roll(oVP(a))){ap(a,{danh:BAL.eff.j92.danhWdAccuse_2});relAdd(a,t,BAL.eff.j92.wdAccuse_2);return `${A0} tố ${T0} vượt phẩm (${nm}), ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?`Danh ${balSg(BAL.eff.j92.danhWdAccuse_2)}. `:""}`}
- relAdd(a,t,BAL.eff.j92.wdAccuse_3);ap(a,{danh:BAL.eff.j92.danhWdAccuseA});dropJ();ap(t,{danh:BAL.eff.j92.danhWdAccuse_3});/* the SAME keys as a Vượt phẩm outfit (j92 wdAccuse) */punish(t,"ăn mặc vượt phẩm",0/* NHẸ: sếp OD 26/11 ~05:55Z · review/home-way */);
+ relAdd(a,t,BAL.eff.j92.wdAccuse_3);ap(a,{danh:BAL.eff.j92.danhWdAccuseA});dropJ();/* the SAME keys as a Vượt phẩm outfit (j92 wdAccuse) */punPlus(t,{danh:BAL.eff.j92.danhWdAccuse_3},()=>punish(t,"ăn mặc vượt phẩm",0/* NHẸ: sếp OD 26/11 ~05:55Z · review/home-way */));
  return `${A0} tố ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${nm} bị tịch thu. ${wdNmC(t)} Danh ${balSg(BAL.eff.j92.danhWdAccuse_3)}. `};window.wdAccuse=wdAccuse})();
 
 /* ---------- TỐ XA XỈ (act xx) ---------- */

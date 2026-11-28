@@ -298,7 +298,7 @@ function srvMonth(){let ev="";S.turn++;const rk=S.srv.rk;apply({bac:CNV_WAGE[rk]
   const mm2=srvM();const d=(mm2.schemes||0)-(S.srv.msch||0);S.srv.msch=mm2.schemes||0;if(d>0&&roll(BAL.odb.j42.rlSrvMonth)){S.srv.sec++;log(`Ngươi để ý thấy ${mm2.name} đang bày mưu hại người. (Biết chuyện của chủ: ${S.srv.sec})`)}
   const wt=(S.srv.spyFor!=null||S.srv.betray)&&npcWhy("srvWatch",{m:mm2});/* npc-purpose G2a: she only finds out when she distrusts her maid and watches (low Chủ tin, a close nết); roll = does she find it */if(S.srv.spyFor!=null){const v=RV(S.srv.spyFor);if(!v||!v.alive||v.out)S.srv.spyFor=null;else{apply({bac:BAL.ag.why.srv.pun.spyPay});if(d>0)evA(v,mm2,BAL.eff.j42.evSrvMonth);
    if(wt&&roll(nv(mm2,"spyFind"))){S.srv.spyFor=null;/* TAI-MAT-KNOW: the master caught her maid = she LEARNS who bought her */typeof spyLearn==="function"&&spyLearn(mm2,v);if(npwPick(["kill","lau"],k=>srvPunW(mm2,k))==="kill"){srvKill(`Bị ${mm2.name} phát hiện làm tai mắt cho ${v.name}, sai đánh chết`);return ev}srvLaundry(`${mm2.name} phát hiện ngươi làm tai mắt cho ${v.name}.`,BAL.ag.why.srv.pun.lauWk);S.tin=BAL.ag.why.srv.pun.tin}}}
-  if(isSrv()&&S.srv.betray&&wt&&roll(nv(mm2,"betrayFind"))){S.srv.betray=null;if(npwPick(["kill","lau"],k=>srvPunW(mm2,k))==="kill"){die(`${mm2.name} biết ngươi phản chủ, sai người dìm ngươi xuống giếng sau Ngự hoa viên`);return ev}srvLaundry(`${mm2.name} biết ngươi mật báo chuyện của nàng.`,BAL.ag.why.srv.pun.betrayWk);S.tin=BAL.ag.why.srv.pun.tin}
+  if(isSrv()&&S.srv.betray&&wt&&roll(nv(mm2,"betrayFind"))){S.srv.betray=null;if(npwPick(["kill","lau"],k=>srvPunW(mm2,k))==="kill"){srvKill(`${mm2.name} biết ngươi phản chủ, sai người dìm ngươi xuống giếng sau Ngự hoa viên`);return ev}srvLaundry(`${mm2.name} biết ngươi mật báo chuyện của nàng.`,BAL.ag.why.srv.pun.betrayWk);S.tin=BAL.ag.why.srv.pun.tin}
   if(isSrv()&&!S.srv.lau&&S.srv.rk>=BAL.srvRk.dai&&S.age>=BAL.ageMin&&S.danh>=BAL.danhG.srvWed&&npcWhy("srvWed",{m:mm2},()=>roll(BAL.odb.j42.rbSrvMonth_2+S.danh/15)))/* npc-purpose G2a: a mistress who trusts her marries her off */pushDil(mkP("cnvWed",{w:R(WEDW.length)}),"Ban gả")}
  S.nt=Math.max(0,S.nt-BAL.ag.maid.decay);
  S.month++;S.tuan=0;
@@ -319,6 +319,11 @@ function srvReassign(why,to){const old=S.srv.mid;const L=liveRivals(true).filter
  if(!quiet)Q.push({t:"Đổi chủ",who:pv(n),h:`<p>${why}</p><p>Từ nay ngươi là <b>${srvTitle()}</b>. Tính nàng: ${netTxt(n)}.</p>`})}
 /* a master has her servant beaten to death (row 12 r2: a named punishment core, so the jaccw gate warns before it falls) */
 function srvKill(why){return die(why)}
+/* a master has her servant beaten n trượng (row 12 r3: a named punishment core, gated + warned like srvLaundry; was inline in srvMoodEvent).
+   Sức − (BAL.accw.beat: d + R(r) for n trượng, scaled by n); Sức cạn = death under the rod (Kiệt save first) */
+function srvBeat(why,n,mid){if(!isSrv()||S.dead)return;const m=RV(mid)||srvM();if(!m||m.alive===false)return;const B=BAL.accw.beat;n=Math.max(1,n|0);const d=Math.max(1,Math.round((B.d+R(B.r))*n/B.n));apply({suc:-d});
+ log(`<span class="r">${m.name} sai thái giám đánh ngươi ${n} trượng.</span> Sức -${d}.`);Q.push({t:"Bị đánh đòn",cls:"end",who:pv(m),h:`<p>${why} ${n} trượng.</p><p class="r">Sức -${d}</p>`});
+ if(S.suc<=0&&!(typeof kietSave==="function"&&kietSave()))die(`Bị ${m.name} sai đánh trượng đến chết`)}
 function srvLaundry(why,weeks){if(!isSrv())return;if(S.srv.lau<=0)S.srv.rk0=Math.max(1,S.srv.rk);S.srv.rk=0;S.srv.lau=weeks;S.srv.lw=0;S.place="tgk";S.visit=srvVisitOf("tgk");S.srv.sent=null;S.srv.spyFor=null;
  log(`<span class="r">${why} Ngươi bị đày xuống Tân Giả khố ${weeks} tuần.</span>`);
  Q.push({t:"Tân Giả khố",cls:"end",who:pMe(),h:`<p>${why}</p><p>Ngươi bị đày xuống <b>Tân Giả khố</b> giặt đồ ${weeks} tuần. Việc nặng, cơm hẩm; Sức cạn thì nguy đến tính mạng.</p>`,btn:"Cúi đầu"});if(!quiet)deal()}
@@ -326,8 +331,7 @@ function srvFromLaundry(){S.srv.lau=0;S.srv.rk=Math.max(1,(S.srv.rk0||1)-1);srvR
 function srvMoodEvent(){const m=srvM();const good=(S.tin-20)/100+(nv(m,"srvGood"))-(nv(m,"srvBad"));
  const k=npwPick(["rew","angry"],x=>x==="rew"?good*100:(1-good)*100,{all:1});/* npc-purpose G2a: reward or anger by her trust and nết (both are her real mood: weighted, the old odds — rates review: near-best made reward vanish) */if(k==="rew"){const g=3+rkOf(m);apply({bac:g,tin:BAL.eff.j42.tinSrvMoodEvent});log(`${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.`);Q.push({t:"Chủ thưởng",who:pv(m),h:`<p>${m.name} vui lòng, thưởng ngươi ${g} lạng bạc.</p><p class="g">Bạc +${g} · Chủ tin ${balSg(BAL.eff.j42.tinSrvMoodEvent)}</p>`});return}
  const how=npwPick(["out","beat","scold"],x=>srvAngryW(m,x)),BL=BAL.ag.why.srv.lau;if(how==="out"){srvLaundry(`${m.name} chán ghét ngươi, sai người giải xuống Nội vụ phủ.`,BL.base+Math.min(BL.max,Math.max(0,Math.round((BAL.srvx.tinOut-S.tin)/BL.div))));return}
- if(how==="beat"){const d=20+R(15);apply({suc:-d});log(`<span class="r">${m.name} sai thái giám đánh ngươi hai mươi trượng.</span> Sức -${d}.`);
-  Q.push({t:"Bị đánh đòn",cls:"end",who:pv(m),h:`<p>${m.name} nổi giận, sai thái giám đánh ngươi hai mươi trượng.</p><p class="r">Sức -${d}</p>`});if(S.suc<=0&&!(typeof kietSave==="function"&&kietSave()))die(`Bị ${m.name} sai đánh trượng đến chết`);return}
+ if(how==="beat"){srvBeat(`${m.name} nổi giận, sai thái giám đánh ngươi`,BAL.accw.beat.n,m.id);return}
  pushDil(mkP("cnvScold",{}),`${m.name} quở mắng`)}
 function ordOdds(k){const o=od(k==="spy"?45+S.tamco/5+S.tai/10:k==="plant"?30+S.tamco/4+S.srv.rk*3:25+S.tamco/4+S.srv.rk*3);return ORDHALF?oddsCl(o-ORDHALF):o}
 function srvOrder(){const m=srvM();const t=srvW(()=>pickTarget(m));if(!t||t===S||!t.alive)return;const mal=m.malice||40;

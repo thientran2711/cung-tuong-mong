@@ -300,7 +300,7 @@ function shelfVpAccuse(a,t){const B=BAL.shelf.acc;let judge="";try{judge=judgeNa
  if(!roll(oVP(a))){ap(a,{danh:B.waveDanhA});relAdd(a,t,B.rel);return `${A0} tố ${T0} bày đồ vượt phẩm, ${judge} bỏ qua${own.length?"":", vì là đồ ngự ban"}. ${a===S?"Danh "+B.waveDanhA+". ":""}`}
  relAdd(a,t,B.rel);ap(a,{danh:B.danhA});const back=ngu.map(g=>shelfTake(t,g)).filter(Boolean);let gone=[];
  if(own.length){const E=own.map(g=>z.g[g]);gone=E.map(shelfNm);for(const g of own)shelfTake(t,g);try{ilFilter(t,e=>!E.includes(e),"conf")}catch(x){t.inv=(t.inv||[]).filter(e=>!E.includes(e))}
-  ap(t,{danh:BAL.eff.j8.danhVpAccuse});try{punish(t,"vượt phẩm",B.vpConf)}catch(x){}}else ap(t,{danh:B.vpDanhT});
+  try{punPlus(t,{danh:BAL.eff.j8.danhVpAccuse},()=>punish(t,"vượt phẩm",B.vpConf))}catch(x){}}else ap(t,{danh:B.vpDanhT});
  return `${A0} tố ${T0} bày đồ vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${back.length?`${judge} dạy đồ ngự ban quá phẩm thì cất giữ, không bày ra: ${back.join(", ")} phải cất vào rương. `:""}${gone.length?`${gone.join(", ")} bị tịch thu. `:""}${NMc(t)} Danh ${own.length?balSg(BAL.eff.j8.danhVpAccuse):B.vpDanhT}. `}
 window.shelfVpAccuse=shelfVpAccuse;
 /* hook the two acts (load order free: jdress may be assembled before OR after this file, and its A("xx") replaces ACT.xx) — run now, after every module, and before each week */

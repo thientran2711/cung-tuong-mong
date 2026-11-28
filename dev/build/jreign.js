@@ -257,7 +257,7 @@ function rgMine(){const r=rgMe(),W=rgW();if(!W||!W.out||r.res)return"";const o=W
  else{r.res="lose";
   if(s==="emp"){apply({sung:-Bg.loseSung,th:-Bg.loseTh});t="Phe bệ hạ thua, nhà Tể tướng và Thái hậu đều để ý ngươi."}
   else if(s==="th"){apply({th:-Math.round(Bg.loseTh/2),danh:-Bg.loseDanh,sung:-Math.round(Bg.loseSung/2)});t="Thái hậu thất thế, người theo bà cũng bị gạt ra."}
-  else{apply({danh:-Bg.loseDanh,sung:-Bg.loseSung});try{punish(S,"là người của phe Tể tướng",1)}catch(e){}t="Nhà Tể tướng thất thế, ngươi bị liên lụy."}}
+  else{try{punPlus(S,{danh:-Bg.loseDanh,sung:-Bg.loseSung},()=>punish(S,"là người của phe Tể tướng",1))}catch(e){}t="Nhà Tể tướng thất thế, ngươi bị liên lụy."}}
  const f=rgFam();if(f&&f!==o){const h=rgFamH();if(h)tdPowAdd(h.c,BAL.eff.jreign.rgMine_2)}
  return t}
 (function(){if(typeof exGw!=="function")return;const g0=exGw;exGw=function(e){return e&&e.gw==="rg"?"công phò tá bệ hạ thân chính":g0.apply(this,arguments)}})();

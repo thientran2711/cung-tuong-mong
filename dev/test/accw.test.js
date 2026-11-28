@@ -67,14 +67,38 @@ const A=process.argv[2]||path.join(__dirname,'..','..','index.html');const URL=/
    ok(rj===""&&Rj&&Rj.k==="judge"&&S.rank===rk2&&!S.out&&dj&&/sắp xử ngươi/.test(dj.t),`Hoàng hậu «Xử tội» on her: prepared, no penalty yet, dialog «${dj&&String(dj.t).replace(/<[^>]+>/g," ").slice(0,90)}»`);
    Rj.due=bq();fix(0,()=>rivalsBuoi());ok(!awRec(q,S)&&(S.rank<rk2||!!S.out),`… on its day the queen judges (rank ${rk2}→${S.rank}, lãnh cung ${!!S.out})`);S.out=0}
   /* ---- D: THE CORE GATE (every other road: law 11 family) ---- */
-  S.accw={};[v,S].forEach(clean);S.out=0;S.dead=false;S.rank=Math.max(S.rank,3);S.bac=500;Q.length=0;const st2=()=>({rank:S.rank,conf:S.confined||0,out:!!S.out,dead:!!S.dead,cut:S.cutPay||0});
+  S.accw={};[v,S].forEach(clean);S.out=0;S.dead=false;S.rank=Math.max(S.rank,3);S.bac=500;Q.length=0;const st2=()=>({rank:S.rank,conf:S.confined||0,out:!!S.out,dead:!!S.dead,cut:S.cutPay||0,danh:S.danh,sung:S.sung,bac:S.bac,suc:S.suc});
+  /* r3 (rv FAIL 3/4): every held card — the matter has no raw key, no «xét tội <a whole sentence>», no empty-option fallback, at least one option */
+  const cardOk=d=>{const t=d?String(d.t).replace(/<[^>]+>/g," "):"";return !!d&&d.o&&d.o.length>0&&!/tội\s+(nhe|vua|nang|tu)\b/.test(t)&&!/undefined|null|NaN|\[object/.test(t)&&!/không còn việc để chọn/.test(t)&&!/xét tội\s+(bị|ngươi|[A-ZĐ])/.test(t)};
   const cores=()=>Object.entries(S.accw||{}).filter(([k,R])=>R.k==="core");
   ok(typeof awInW==="function"&&punish.__aw&&fall.__aw&&demote.__aw&&chPunishX.__aw&&deathSentence.__aw&&cold.__aw&&punTier.__aw,"every punishment core carries the gate wrap");
   ok(chooseM.__awc==="her"&&nextBuoi.__awc==="w"&&endTurn.__awc==="w"&&(typeof menReport!=="function"||menReport.__awc==="npc")&&(typeof rtReport!=="function"||rtReport.__awc==="npc")&&runAct.__awc,`road contexts: her taps / the world turn / witness roads / acts (${[chooseM.__awc,nextBuoi.__awc,endTurn.__awc,typeof menReport,typeof menReport==="function"&&menReport.__awc,typeof rtReport,typeof rtReport==="function"&&rtReport.__awc,runAct.__awc].join(",")})`);
   const tries=[["punish",()=>punish(S,"bị cung nữ tố giác mưu kế",2)],["fall",()=>fall(S,"bị tố giác, chứng cứ rành rành")],["demote",()=>demote(S,"bị Hoàng hậu tâu giáng")],["chPunishX",()=>chPunishX(S,"mh","bị tố",null,"nang",false)],
-   ["deathSentence",()=>deathSentence(S,"Bị ban chết vì tư thông","thuong")],["cold",()=>cold("Bị đày vào lãnh cung")],["punTier",()=>punTier(S,"nang","Ngươi bị xét tội",null)]];
+   ["deathSentence",()=>deathSentence(S,"Bị ban chết vì tư thông","thuong")],["cold",()=>cold("Bị đày vào lãnh cung")],["punTier",()=>punTier(S,"nang","tàng trữ độc vật",null)],
+   ["chPunish",()=>chPunish(S,"mh","bị tố mưu hại",null)],["framed",()=>{const X1=ACTX;ACTX={a:null,pen:0};try{return framed(S,"tàng trữ bùa chú")}finally{ACTX=X1}}]];
   for(const [n,f] of tries){S.accw={};Q.length=0;const s0=st2();awInW(f);const s1=st2();const C=cores();const d=C.length?PEND.accw({id:C[0][0]}):null;const tx=d?String(d.t).replace(/<[^>]+>/g," "):"";
-   ok(JSON.stringify(s0)===JSON.stringify(s1)&&C.length===1&&Q.some(x=>x.pid==="accw"&&x.t==="Sắp bị trị tội")&&/(trong|Trong) \d+ buổi tới/.test(tx)&&/Nếu tội thành, ngươi/.test(tx),`world road → ${n}(): nothing falls now, held + her dialog «${tx.slice(0,150)}»`)}
+   ok(JSON.stringify(s0)===JSON.stringify(s1)&&C.length===1&&Q.some(x=>x.pid==="accw"&&x.t==="Sắp bị trị tội")&&/(trong|Trong) \d+ buổi tới/.test(tx)&&/Nếu tội thành, ngươi/.test(tx)&&cardOk(d),`world road → ${n}(): nothing falls now (rank/cấm túc/Danh/Sủng/bạc/Sức unchanged), held + her dialog «${tx.slice(0,150)}» · ${d&&d.o.map(x=>x.n).join(" | ")}`)}
+  /* rv FAIL 3: punTier's matter is its reason (A[2]), never the tier key */
+  {S.accw={};awInW(()=>punTier(S,"nang","tàng trữ độc vật",null));const C3=cores();const t3=C3.length?String(PEND.accw({id:C3[0][0]}).t).replace(/<[^>]+>/g," "):"";ok(/tàng trữ độc vật/.test(t3)&&!/tội\s+nang/.test(t3),`punTier held: the matter is the reason «${t3.slice(0,90)}»`);S.accw={}}
+  /* rv FAIL 1: a chPunish with extras (Ức hiếp: bồi thường) on HER from an NPC: the WHOLE penalty waits (no bạc paid yet), then falls with its rows */
+  {S.accw={};clean(S);clean(w);deedAdd(S,"trip",w,1,"ngáng chân "+w.name);S.bac=500;const b0=S.bac,wb0=w.bac|0;Q.length=0;const X2=ACTX;ACTX={a:v,pen:0};try{chPunish(S,"uh","bị tố giác",v)}finally{ACTX=X2}const C1=cores();
+   ok(C1.length===1&&C1[0][1].fn==="chPunish"&&S.bac===b0&&(w.bac|0)===wb0,`chPunish «Ức hiếp» from ${v.name}: held whole (record ${C1.map(x=>x[1].fn)}, bạc ${S.bac-b0}, victim ${(w.bac|0)-wb0})`);
+   const dc=C1.length&&PEND.accw({id:C1[0][0]});ok(cardOk(dc)&&/bồi bạc cho người bị hại/.test(String(dc.t)),`… its card names the bồi thường with the penalty «${dc&&String(dc.t).replace(/<[^>]+>/g," ").slice(0,160)}»`);
+   C1[0][1].due=bq();fix(0,()=>rivalsBuoi());const nt=Q.map(m=>String(m.h||"")+JSON.stringify(m.sections||m.kit||"")).join(" ");ok(!cores().length&&S.bac<b0&&(w.bac|0)>wb0&&/Bồi thường/.test(nt),`… on its day it falls together: bạc ${b0}→${S.bac}, victim +${(w.bac|0)-wb0}, notice row «Bồi thường»`)}
+  /* rv FAIL 1: framed (no framer named) on HER: Danh / Sủng wait with the punishment */
+  {S.accw={};clean(S);S.rank=3;S.danh=60;S.sung=60;const X3=ACTX;ACTX={a:null,pen:0};let d=null;try{d=awInW(()=>framed(S,"tàng trữ bùa chú"))}finally{ACTX=X3}const C2=cores();ok(C2.length===1&&C2[0][1].fn==="framed"&&S.danh===60&&S.sung===60,`framed (world, no framer): held whole (Danh ${S.danh}, Sủng ${S.sung}, record ${C2.map(x=>x[1].fn)})`);
+   C2[0][1].due=bq();fix(0,()=>rivalsBuoi());ok(!cores().length&&S.danh<60&&S.sung<60,`… falls on its day: Danh 60→${S.danh}, Sủng 60→${S.sung}`)}
+  /* r3 family (law 11 «no penalty split»): a side penalty written with the core (punPlus: j8 search / birth omen / vượt phẩm, j92 / jdress / jshelf, j13, j4, jmen, jreign) waits with it */
+  {S.accw={};clean(S);S.rank=3;S.danh=60;awInW(()=>punPlus(S,{danh:-10},()=>punish(S,"tàng trữ độc vật",2)));const C5=cores();const d5=C5.length&&PEND.accw({id:C5[0][0]});
+   ok(C5.length===1&&S.danh===60&&C5[0][1].fx&&C5[0][1].fx.danh===-10&&punHeldLast()&&/Danh -10/.test(String(d5&&d5.t)),`punPlus on a world road: Danh waits with the held punish (Danh ${S.danh}, record fx ${JSON.stringify(C5[0]&&C5[0][1].fx)}, card names it)`);
+   C5[0][1].due=bq();fix(0,()=>rivalsBuoi());ok(!cores().length&&S.danh===50,`… falls together on its day (Danh 60→${S.danh})`);
+   S.danh=60;awInHer(()=>punPlus(S,{danh:-10},()=>punish(S,"tàng trữ độc vật",1)));ok(!cores().length&&S.danh===50&&!punHeldLast(),`… her own road: both fall at once (Danh 60→${S.danh})`);
+   const wd=w.danh;awInW(()=>punPlus(w,{danh:-10},()=>punish(w,"x",1)));ok(w.danh===wd-10,`… an NPC victim: paid at once (Danh ${wd}→${w.danh})`)}
+  /* rv FAIL 2/4: the servant cores (held, never fired here — she is not a servant): «Tin dữ: …» + a real option, no empty fallback */
+  for(const [n,f] of [["srvLaundry",()=>srvLaundry(`${v.name} chán ghét ngươi, sai người giải xuống Nội vụ phủ.`,3)],["srvBeat",()=>srvBeat(`${v.name} nổi giận, sai thái giám đánh ngươi`,BAL.accw.beat.n,v.id)],
+     ["srvKill",()=>srvKill(`${v.name} biết ngươi phản chủ, sai người dìm ngươi xuống giếng sau Ngự hoa viên`)],["chSrvEnd",()=>chSrvEnd({g:v.name,a:"",ev:"",x:"x"})],["srvAffairCaught",()=>srvAffairCaught()]]){
+   S.accw={};const s0=st2();awInW(f);const C4=cores();const d4=C4.length?PEND.accw({id:C4[0][0]}):null;const t4=d4?String(d4.t).replace(/<[^>]+>/g," "):"";
+   ok(C4.length===1&&JSON.stringify(st2())===JSON.stringify(s0)&&cardOk(d4)&&/^\s*Tin dữ: [A-ZĐÂ]/.test(t4)&&!/xét tội/.test(t4),`servant core ${n}: held, card «${t4.slice(0,140)}» · ${d4&&d4.o.map(x=>x.n).join(" | ")}`);S.accw={}}
   /* due: it falls once, exactly as the core would have */
   S.accw={};clean(S);S.rank=3;awInW(()=>punish(S,"tàng trữ độc vật",2));let C=cores();const s2=st2();C[0][1].due=bq();fix(0,()=>rivalsBuoi());const s3=st2();
   ok(!cores().length&&(s3.rank<s2.rank||s3.conf>s2.conf),`on its day the held punish() falls (rank ${s2.rank}→${s3.rank}, cấm túc ${s2.conf}→${s3.conf})`);const s4=st2();fix(0,()=>rivalsBuoi());ok(JSON.stringify(st2())===JSON.stringify(s4),"… once (the next buổi adds nothing)");

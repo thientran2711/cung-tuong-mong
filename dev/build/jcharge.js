@@ -152,7 +152,7 @@ accNeed=function(t,h){h=h||S;const c=(h&&t&&h!==t&&chChase(h,t))||"vp";return ch
 function chPunTxt(t,c){const C=chC(c);if(!C)return"bị phạt";const x=chTier(t,c);const m=typeof punishMonths==="function"?punishMonths():1;
  if(x==="nhe")return C.lite==="bong"?`bị phạt bổng ${BAL.charge.fine} lượng`:`bị cấm túc ${m} tháng`;return punTierTxt(t,x)}
 /* PUNISH-TIER: the one penalty of a proven charge = its WEIGHT (chTier) — jpun punTier, the same for every rank (vừa = giáng + lãnh cung, nặng = ban chết) */
-function chPunish(t,c,why,by){return chPunishX(t,c,why,by,chTier(t,c),false)}
+function chPunish(t,c,why,by,x){return chPunishX(t,c,why,by,x||chTier(t,c),false)}/* x (optional): a set weight — row 12 r3: the jaccw «Nhẹ · Nhận tội trước» of a held chPunish (one step lighter, its extras kept) */
 /* x = the weight; back = PHẢN TỌA on the accuser (no seizure of her things: the pieces were about the other one) */
 function chPunishX(t,c,why,by,x,back){const C=chC(c);if(!C||!t)return;let W=back?why:`${why} (tội ${chName(c).toLowerCase()})`;const a=typeof punWho==="function"?punWho(by):by;
  /* REPEAT (BAL.charge.rep): the n-th nhẹ conviction within win wk() counts as vừa (her and an NPC) */

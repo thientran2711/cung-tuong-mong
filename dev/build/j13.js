@@ -28,7 +28,7 @@ function illMonth(){let ev="";for(const p of consorts())ev+=illMonthP(p);ev+=epi
  if(S.emp.age>50&&!illOf(S.emp)&&roll(3)){S.emp.ill={k:"longthe",st:1,known:true};S.emp.mood=2;ev+="Long thể bất an, Hoàng thượng ít vào hậu cung. "}
  else if(illOf(S.emp)){if(roll(35)){S.emp.ill=null;ev+="Long thể đã an. "}else if(S.emp.ill.st<3&&roll(30))S.emp.ill.st++}
  if(!S.thDead){if(!S.thIll&&roll(2))S.thIll={k:pick(["phonghan","lao"]),st:1,known:true};else if(S.thIll){if(roll(30))S.thIll=null;else if(S.thIll.st<3)S.thIll.st++;else if(roll(20)){S.thDead=true;S.th=0;ev+="<b>Thái hậu băng hà vì bệnh.</b> "}}}}
- for(const p of consorts())if(p.fakeIll){p.fakeIll--;if(roll(BAL.tw.g.illCatch)){p.fakeIll=0;ap(p,{danh:-BAL.tw.g.illDanh});punish(p,"giả bệnh khi quân",1);if(p===S)ev+=`<span class="r">Thái y khác bắt mạch: ngươi giả bệnh.</span> `}}
+ for(const p of consorts())if(p.fakeIll){p.fakeIll--;if(roll(BAL.tw.g.illCatch)){p.fakeIll=0;punPlus(p,{danh:-BAL.tw.g.illDanh},()=>punish(p,"giả bệnh khi quân",1));if(p===S)ev+=`<span class="r">Thái y khác bắt mạch: ngươi giả bệnh.</span> `}}
  return ev}
 /* Giả bệnh: chance the Thái y finds her out over the whole span (BAL.tw.g.illCatch each month, BAL.tw.g.illWk months; same roll as illMonth) */
 function fakeIllRisk(){const c=BAL.tw.g.illCatch/100;return Math.round(100*(1-Math.pow(1-c,BAL.tw.g.illWk)))}
