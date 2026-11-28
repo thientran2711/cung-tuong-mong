@@ -53,3 +53,9 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 08:38Z LESSON: quickcheck compares vs local origin/main — FETCH main after every push before a quickcheck (ui5 run started vs stale 5ad52416 → killed, rerun vs a96564ad; oldsave-r1 needs .tmp/old.html = LIVE index.html).
 - 08:40Z RV-182 LAND ui7 5b597911 (3 hunks correct); d8fcdb8c already stacked → ui7 head b9404150 (only built conflicts on top).
 - DAYQ-NOTURN r3 = ac81eb77 (on 22afefb4) → restaged review/lc35-dayq de049947 on LIVE a96564ad (MODGATE PASS; union ok). Waits RV-163M. dayq test+qc in seq2 after ui5 (worktree lc35-dq now = de049947).
+- 08:39Z RV-182 rolled; UI reviewer = RV-185 session_01Rc5AsK4sVjLnHkNTJxZv5B (has ui7 b9404150 + ui8 a50895cb).
+- 08:40Z RV-163M: dayq r3 final test as its own merge onto a96564ad = review/dayq-noturn-rvm 92800662 (local until PASS); old 66395ab2-based stagings must NOT land. Will land RV-163M's sha ALONE. (My de049947 = same r3 merge; will gate RV's sha.)
+- 08:46Z RV-185 LAND ui7 b9404150.
+- 08:51Z PVQUY-POST worker session_01Rc5AsKSwHpCTAoJbZFz95n: review/pvquy-post 4256fe5f (on a96564ad, incl. aff-preview 27a36750) — RV READY, waits RV-183 PASS; lands as own unit.
+- 08:54Z RV-185 LAND ui8 a50895cb (j23 hunk correct; live path driven). Follow-up for F: dev/test/bac-progress.js stale selectors (.kskill→.ktn-cell, data-skill→data-tnmon) — not a gate; routed via MAIN.
+- 09:05Z ui5 c03d6ee7 quickcheck vs a96564ad: PASS (core 17 hooks, time-spill, perf ok). **READY TO PUSH c03d6ee7 sent to MAIN 189.** ui8 a50895cb tests (u8.sh) running.
