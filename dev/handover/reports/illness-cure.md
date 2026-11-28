@@ -1,5 +1,14 @@
 # ILLNESS-CURE — worker report (review/illness-cure)
 
+## HANDOVER (worker rollover 28/11 ~03:30Z: context 41 % ≥ START_CTX 5 % + 25 %; depth 2) — r3 NOT started
+ORDER r3 (Foreman C 4-1-1-1, MAIN 185 OD 28/11 02:20Z): on top of 261d91f1 (SUPERSEDED for RV-163M) on review/illness-cure:
+- Q1: CAP Sức by illness stage (BAL key, e.g. BAL.illCure.sucCap {1:…,2:…,3:…}; hook = sucCap() in dev/build/jkh.js:26 — wrap it in jillcure.js: Math.min(cap, BAL stage cap) when illOf(p) && !p.ill.mort; NPCs same (law 1)). Update the danger line («Sức còn đầy…» sentence no longer true → say the cap). Test + MUTATE.
+- Q3: child illness: dev/build/j8.js kidsMonth (sudden hp hit 30+R(40), can kill at once, no sign) → add a warning stage (e.g. first hit cannot take hp ≤ 0 unless the kid was already «ốm nặng»; kid gets a sick flag + a card) and a NON-bạc road matching «Xin thuốc cho <con>» (bạc 30, j2.js:183 / BAL.ag.cx2.kidMed) — the existing non-bạc «Chữa bệnh cho con» needs Y thuật ≥ 4 (BAL.ag.cx2.kidHeal.y), so add e.g. «Thức trông con» / «Cầu xin ngự y cho con» (Sức / Sủng, BAL). NPC mothers same (jagacts2 kidMed / kidHeal agRunReg). Also j13 epidemic kid hit (hpEpidemic) and j7 kidHurt, j8:160 kpoison (poison = other worker? check TUANTANG-WARN scope). Scan table every child illness path.
+- Q4 OK as is. Q5 not ours (Foreman E robot).
+STATE: worktree /home/user/wt/illness-cure (branch review/illness-cure, HEAD 261d91f1, pushed). Base build worktree /home/user/wt/ic-base (5fb13d60) for before/after. Scan tool dev/tools/illness-road-scan.js <dir> <out.md>. Test dev/test/illness-cure.test.js [outdir] (no arg = /tmp/illness-cure). Other tests take NO out-dir arg (door-onetap.js, ptime2.test.js, next-dead.js needs http URL: python3 -m http.server). quickcheck: bash dev/tools/quickcheck.sh HEAD (~25 min; ptime2 §15–19, act-merge-j1, P9, next-dead are flaky/pre-existing — see Tests).
+Docs push: shallow history — reset to FETCH_HEAD, copy file, commit, push (never rebase).
+
+
 ## r2 (Foreman C 4-1-1, Q2 = law 2): RV READY (BIG) 261d91f1 on 5fb13d60
 - nặng tier shows BOTH «Truyền thái y» (bạc) and «Cầu xin ngự y» (Sủng) side by side, each with its own Tốn / odds, greyed with the reason when she cannot pay (jone tierRows `both`; hs-thaiy both=[nặng] while ill). Card = 4 plaques (nhẹ · vừa · nặng · nặng).
 - illness-cure.test: ALL OK Fold + iPad (asserts both shown + greying); MUTATE both off → 10 FAIL.
