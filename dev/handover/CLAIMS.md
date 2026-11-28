@@ -806,3 +806,4 @@ B-ROW12 r3 FIXER (rv r2 FAIL 4 items, reports/row12-leave.md «## REVIEW r2») |
 E-TIER-B14 (row 42 law-11 group j7c/j68c/j71c/j72c/jworldc old 4 equal-value stances → 3 tiers) | review/e-tier-b14 | session_01DgYSWpXzA57rdEzNDHjVYQ | RUNNING | 28/11 12:15Z (Foreman E C11)
 E-GAIN4D (finish e-gain4c: merge LIVE 7d7c6886 + unrun gates + shots) | review/e-gain4c (after 012cb189) | session_01DgYSWnu1ts4by24nsYc7eM | RUNNING | 28/11 12:40Z (Foreman E C11)
 E-TIER-B13-RV3B (BIG review row 42 batch 3b delta 31f91836..e3c1f982) | review/e-tier-b13-rv3b-m | (opening) | RUNNING | 28/11 13:15Z (Foreman E C12)
+E-TIER-B14b (successor: merge LIVE 8a1a71de, Q1 follow-up, Q4 twin hook, gates, RV READY part 1; part 2 j70c+jkyc) | review/e-tier-b14 (after b959b5e8) | (opening) | RUNNING | 28/11 12:50Z (Foreman E C12)
