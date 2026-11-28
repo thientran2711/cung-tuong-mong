@@ -788,4 +788,4 @@ E-TIER-B13b (row 42 batch 3 MERGE, successor of E-TIER-B13) | review/e-tier-b13 
 E-TIER-B13c (row 42 batch 3 rest, successor of E-TIER-B13b) | review/e-tier-b13 (after 5ad3b22e) | session_01DgYSWphk3eKShyjK8Smmnf | RUNNING | 28/11 10:12Z (Foreman E C11)
 Review of review/f-tdworks 4c976d25 (F-TDWORKS-RV, SMALL) | review/f-tdworks-rv | session_01UV1SzgqpyJ3h1hwnqA3BBz (sonnet, Foreman F ROOT 8 c1) | RUNNING | 28/11 10:18Z
 E-GAIN4C (re-merge e-gain4b d1afe230 onto LIVE aecbc267, FIX LIST reviews/e-gain4b-review.md) | review/e-gain4c | session_01DgYSWmbTSBmW1pv5dm9cfk | RUNNING | 28/11 10:30Z (Foreman E C11)
-B-ROW12-LEAVE r2 FIXER (rv 2Dw6kcWd FAIL list: 14 unwarned punish roads + law-1 her accusation/Xử tội prepare + NPC settlement + law-2 Nặng tier) | review/row12-leave-r2 from 4480ae6e | FOREMAN B ROOT3 child2 / worker <opening> | RUNNING | 28/11 10:23Z
+B-ROW12-LEAVE r2 FIXER (rv 2Dw6kcWd FAIL list: 14 unwarned punish roads + law-1 her accusation/Xử tội prepare + NPC settlement + law-2 Nặng tier) | review/row12-leave-r2 from 4480ae6e | FOREMAN B ROOT3 child2 / worker session_01N1tNP4252yURGUqLCgK7NK | RUNNING | 28/11 10:23Z
