@@ -84,7 +84,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   __F.clean(v);v.fcd={};window.moodBar=q=>q===v?-5:mp(q);emoSet(v,"buon",90,"thử");feelActTick(v);o.noBar=!v.fa;
   __F.clean(v);v.fcd={};window.moodBar=q=>q===v?-90:mp(q);emoSet(v,"buon",30,"thử");feelActTick(v);o.light=!v.fa;
   /* timer + cooldown */
-  __F.clean(v);v.fcd={};emoSet(v,"buon",90,"thử");feelActTick(v);o.fa=v.fa&&{k:v.fa.k,d:v.fa.k1-v.fa.k0};o.cd=(v.fcd.buon||0)-mkNow();o.khK=A.kh.khoc;o.cdK=A.cd.def;
+  __F.clean(v);v.fcd={};emoSet(v,"buon",90,"thử");feelActTick(v);o.fa=v.fa&&{k:v.fa.k,f:v.fa.f,d:v.fa.k1-v.fa.k0};o.cd=(v.fcd.buon||0)-mkNow();/* STALE-TESTS-7: since TEMPER-OUTBURST (OD 25/11 ~05:45Z) an NPC consort picks ONE of eaOpts by temper (npwPick) — not always «khóc»: the timer is the picked act's own (feelActDur) */o.khK=v.fa?feelActDur(v.fa.k):A.kh.khoc;o.opts=(window.eaOpts?window.eaOpts(v,"buon"):[]).map(r=>r.k);o.cdK=A.cd.def;
   const k1=v.fa&&v.fa.k1;v.fa.k1=mkNow();o.ends=feelActNow(v)===null;feelActTick(v);o.cdBlocks=!v.fa;
   window.moodBar=mp;A.o=o0;v.bac=t0;window.eaTemper=et;
   /* her: at most meWk a tuần */
@@ -98,7 +98,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r8.cover.length===0&&r8.uniq===17&&r8.react.length===0,'17 acts, one per feeling, every one in the ONE reaction table',r8);
  ok(Object.values(r8.ran).filter(Boolean).length===17&&Object.keys(r8.fail).length===0&&Object.entries(r8.ran).every(([k,x])=>!x||x[1]==="act-"+k),'every feeling fires its own act with face act-<feeling> (heavy + bar)',r8.ran);
  ok(r8.noBar&&r8.light,'gate: heavy level AND bar past the line (neither alone)',{b:r8.noBar,l:r8.light});
- ok(r8.fa&&r8.fa.k==="khoc"&&r8.fa.d===r8.khK&&r8.cd===r8.cdK&&r8.ends&&r8.cdBlocks,'khắc timer (khóc 1) ends, cooldown blocks a new act',r8);
+ ok(r8.fa&&r8.fa.f==="buon"&&r8.opts.includes(r8.fa.k)&&r8.fa.d===r8.khK&&r8.cd===r8.cdK&&r8.ends&&r8.cdBlocks,'khắc timer (the picked act\'s own) ends, cooldown blocks a new act',r8);
  ok(r8.me<=r8.meWk&&r8.me>=1,'her acts ≤ meWk a tuần',[r8.me,r8.meWk]);
  ok(r8.emp&&r8.emp[1]==="act-gian",'NPC parity: the Emperor acts with his own reaction, same act face',r8.emp);
  ok(r8.guest,'co-op guest writes no NPC act (host-only)');
@@ -115,7 +115,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* review r1: Hờn dỗi at the Emperor (the common sulk) → "bỏ về" costs Sủng; no thiện cảm row keyed "undefined", his rel stays a number */
  const r10=await p.evaluate(()=>{const R0=window.roll,FB=window.feelBar;const out=[];try{window.roll=()=>true;
   for(const v of [S,__F.R()[0]]){__F.clean(v);v.fcd={};if(v===S)S.fa2={w:-1,n:0};emoSet(v,"hon",95,"bị Hoàng thượng quở",emoKey(S.emp));window.feelBar=q=>q===v?-95:FB(q);
-   if(v===S)S.sung=Math.max(S.sung||0,20);else v.sung=Math.max(v.sung||0,20);const s0=v===S?S.sung:v.sung;feelActTick(v);window.feelBar=FB;out.push({act:v.fa&&v.fa.k,dSung:(v===S?S.sung:v.sung)-s0,bad:("undefined" in (S.rl||{}))||("undefined" in (v.rl||{}))||("undefined" in (S.ro||{})),empRel:S.emp.rel})}}
+   if(v===S)S.sung=Math.max(S.sung||0,20);else v.sung=Math.max(v.sung||0,20);const s0=v===S?S.sung:v.sung;feelActTick(v);/* STALE-TESTS-7: an NPC picks among eaOpts by temper (npwPick; her bot frame too): «bỏ về» is one of them — let them pick again until she takes it (the rule under test: bỏ về costs Sủng) */for(let t=0;t<40&&!(v.fa&&v.fa.k==="bove");t++){v.fa=null;v.fcd={};if(v===S){S.fa2={w:-1,n:0};Q.length=0;if(S.sung<s0)S.sung=s0}else if(v.sung<s0)v.sung=s0;feelActTick(v)}window.feelBar=FB;out.push({act:v.fa&&v.fa.k,dSung:(v===S?S.sung:v.sung)-s0,bad:("undefined" in (S.rl||{}))||("undefined" in (v.rl||{}))||("undefined" in (S.ro||{})),empRel:S.emp.rel})}}
   finally{window.roll=R0;window.feelBar=FB}return out});
  ok(r10.every(x=>x.act==="bove"&&x.dSung<0&&!x.bad&&(x.empRel===undefined||typeof x.empRel==="number"&&!isNaN(x.empRel))),'hờn at the Emperor: bỏ về costs Sủng, no "undefined" relation key',r10);
  ok(errs.length===0,'no page errors',errs.slice(0,5));
