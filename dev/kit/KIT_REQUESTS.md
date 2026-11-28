@@ -514,3 +514,14 @@ K-DEAD-PORTRAIT = already built: §84b .kst-dead (review/owner-ui-a 9724b12d, MA
 
 ## 27/11 TMK-WARN (F seat s21e, MAIN 181/182) — K-HAND-MAT: kit hand plate drops the option's Mất rows (law 3 + 9 + 11)
 - **K-HAND-MAT (BUILT KK63 on review/kk63, KIT §6.2o):** root = the hand plate and the «!» overlay are DISABLED copies of the card, and the locked-card CSS (j63 `button.ka:disabled .kr-mat/.kr-kem/.kr-bai` + `.kr.kb-b`) hid every Mất / Kèm / Bại row on them. Fix in the kit part: one copy builder `kitOptCopy` (jopic) for both copies, the hide rules skip `.kopinfo` unless the copy is of a locked card (`.khlock`). Family scan `dev/test/kit-hand-mat-scan.js`: before Fold lost «!» 43 / plate 24 rows on 35 cards → after 0 / 0 (Fold + iPad).
+
+## 28/11 TMK-WARN-3 (MAIN 188) — K-HAND-DUPMAT: the hand plate shows a card's Mất row twice (law 3 + 9 + 11)
+- **Seen:** servant bribe take card «Nhận bạc, làm tai mắt» (review/tmk-warn-r2 7ba5cb7d, `node dev/test/kit-hand-rows.js index.html <out>`),
+  Fold 755x1000 and iPad 1180x820: the enlarged hand card lists the whole Mất block twice.
+- **Root:** dev/build/jopic.js kitOptCopy(b, face=1) (used by jkhand kitHandBigBuild) keeps `.kdup` rows on purpose (face Tốn / Được copies),
+  but the face fold (jopic ~:325) builds `kr-mat2 kdup` = a whole copy of the source `kr-mat` (and, on a sure card, `kr-bai`) rows; the plate
+  removes `.kofold`, so the source row AND its copy both show.
+- **Family:** every SURE card with a Mất (or sure-Bại) row inside a kit hand. Today 1 card (base fcbc1992: 0); the scan = kit-hand-mat-scan
+  plus a «same visible row text twice in one plate» count (TMK-WARN-3 scratch probe; worth adding to kit-hand-mat-scan as `dup`).
+- **Wanted (kit keeper):** in face mode drop the `.kr-mat2` copy when a source kr-mat / kr-bai row is kept (or keep only the copy), so each loss
+  reads once; extend kit-hand-mat-scan to fail on doubled rows.
