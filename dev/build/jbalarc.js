@@ -201,9 +201,9 @@ Object.assign(BAL,{rl:{j85:{hanhDucMonth:1,ducTf:1,ducStaff:1},
  j92:{danhWdFrameResolve:-10,danhWdFrameResolve_2:-10},
  jinv:{danhTop:-1},
  jmen:{danhTop_2:-3},
- jpet:{danhPetMonthOf:-1,danhPetMonthOf_2:-1,sucAsthma:-2/* Sức a week for an asthmatic owner of a shedding pet */,followN:1/* stat a following pet gives (+ PET.sacX) */},
+ jpet:{rareP:25/* E-GAIN3c law 4: «Hại thú nuôi» a rare animal (tier ≥ 3): chance the court notices */,danhRare:-1/* … her Danh then (was typed) */,danhPetMonthOf:-1,danhPetMonthOf_2:-1,sucAsthma:-2/* Sức a week for an asthmatic owner of a shedding pet */,followN:1/* stat a following pet gives (+ PET.sacX) */},
  jstip:{sacUse:3},
- jface:{penQuy:-8/* «Phạt quỳ» Sức the knelt one loses */}}});
+ jface:{penQuy:-8/* «Phạt quỳ» Sức the knelt one loses */,danhQuy:1/* E-GAIN3c law 4: Danh the punisher gains when the knelt one had schemed (was typed) */}}});
 /* typed-stat-bal review (law 4 + law 11): the stat words «Ân tình» / «Tâm cơ» were missing from typed-stat-text — the same family, same values */
 Object.assign(BAL.eff.j8,{anGoMaid:1/* «Xin tha cho cung nữ bị phạt»: Ân tình */,anLean:2/* «Im lặng, tựa vai ngài»: Ân tình */});
 Object.assign(BAL.eff.j31,{anGo_4:2/* «Thức đón giao thừa bên ngài» win: Ân tình */});

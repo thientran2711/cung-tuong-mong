@@ -1622,8 +1622,8 @@ One dialog for giving any chest item (bought goods and handmade works; chest "T�
 ### 28.13i ITEM PICK GRID — every "choose an item to give / offer / plant / use on someone" dialog (owner 15/11 session 8, review/gift-pick) — `dev/build/jgpick.js` (last module)
 Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo như kiểu ô tư trang á. Xếp hàng ngang để chọn rồi có animation khi tặng."
 - Trigger: a dialog (Q item) whose options carry `ik` = the S.inv index of the item. No other flag; a new picker only sets `ik` on its options.
-- Grid = the 28.13e tile grid (`.kshg`, here `.kipg`, columns `minmax(96px,1fr)`, 84 px under 600 px wide; max height min(46vh, 420 px),
-  scrolls) of PICK tiles `.kshc.kshpick.kipc`: picture = kitItem "slot" in the item's grade frame (`giftArt` / j98 itemArt, the Tư trang
+- Grid = the 28.13e tile grid (`.kshg`, here `.kipg`, columns `minmax(96px,1fr)`, 84 px under 600 px wide; in pages of whole rows (see PAGES:
+  no max height, no inner scroll)) of PICK tiles `.kshc.kshpick.kipc`: picture = kitItem "slot" in the item's grade frame (`giftArt` / j98 itemArt, the Tư trang
   picture) · name in its KIT_GRADE colour (2 lines) · what it is (IT.d, or the work tier) · (grade = the chip on the picture). No button row. Taint = corner tag
   "đã tẩm". ONLY pieces she can give in that dialog are tiles (K-PICK-LIVE, D-LIVEBUGS3, KK56 sign-off 27/11): a piece the rule refuses (not enough lễ, she will not take it, Thái hậu / Hoàng thượng refuse, no servant can be sent) is NOT a tile; the dialog text gets ONE `p.past` line «Còn N món khác trong rương <why>.» (count + the one or two most common reasons). No tile left = the text line(s) + the kit ✕ only. A pickable tile short of bạc at the moment stays greyed (`.kshno`), selectable to read why. Scan: dev/test/gift-dead-scan.js.
   Doable tiles first, then the dialog's own order. Horizontal rows that wrap (the Tư trang look).
@@ -1637,6 +1637,35 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   (`bottom: --kipgoh + 2px`, `--kipgoh` = the confirm's real height set on `.kipw` by the kipDetail wrapper) — never under it (both sticky at bottom:0 hid ‹ trang N/M › by 41 px).
   Confirm clicks the real option button, so chooseM and every wrapper (cost, j25 visit ticket, §64 item-event hooks) run unchanged.
   Above the card: the KIT §70 item detail strip (`kitItemDetail({e},{cls:"kidet-strip",noLux:true})`, jitd). Close = the kit ✕ (32.10), no Thôi row.
+- PAGES (K-LIST-PAGE, picker-dom 26/11, MAIN 164 play-stopper: a year-18 chest drew 36k–63k nodes, iPad tab crash): the grid shows ONE
+  PAGE = the whole rows that fit the box the dialog gives the grid (≥ 1, `BAL.kip.rows` (2) the cap; measured per dialog, only ever lowered so pages never
+  flip) × the columns the grid shows in that dialog at that width — no inner scroll, no half row (§23). The §23 pager row stays in view: sticky at the
+  bottom of the box that scrolls the page; it never covers a tile. K-PICK-SHORT (KK63 ruling (a), 27/11 23:45Z): a box that cannot hold ONE whole row + pager (+ the sticky confirm) steps the frame
+  DOWN until it does: step 1 = no big scene picture for that card (`.kpsubj.kpiart` / `.kdlgart` band / the live frame's `.k3ev` hidden, `.dlg.kdnopic`),
+  step 2 = the text cap (`.kdtx`) leaves the box row + pager. One shared rule in the frame fit (jk4 `kitOptNeed` + `kitDlgText`; the jksize live frame runs
+  `kitPickStep3` after every lay); a dialog once stepped at a screen size stays stepped on every page (no flip). A frame whose box already holds row + pager
+  keeps LIVE's frame. Only when even the stepped frame cannot, the pager sits under the row (`.kipw.kipshort`, never over a tile). The box's scroll cue
+  «Kéo xuống» stands above the sticky confirm + pager (`kipCueLift`). Scan: `dev/test/pick-short-scan.js` (box ≥ row + pager OR no big picture, Fold + iPad). The
+  columns are read once the grid's size has stayed still `BAL.kip.settle` ms (resolved px tracks only; a mid-fit size never counts), kept per
+  dialog kind and width; a different count draws the page again (first tile in view kept in view). The grid keeps the FULL width of the
+  option box: the §23 kit pager buttons sit in ONE row under it (`.kippg`: ‹ `.kpkpg` · `.kpkpn` «trang N/M» · › `.kpkpg`; no count; no row
+  on a single page). The dialog keeps ONE frame on every page, the frame LIVE gives it: every fit pass that picks a frame by the number of
+  option buttons reads `kszOptN3` (jksize: `kitFrameLive3` pick-list rule `KIT_SIZE.v3.live.maxOpts`, the Fold XL step-down and the iPad
+  grow `stepOpts`; jkhand `kitHandWants`, the §101 hand range `KIT_HAND.min–max`), and a paged picker counts ALL its options except «Thôi» (drawn as the kit ✕, never a button) = the buttons LIVE draws. Measured on F's s7 save (box px / kit tile `--kshsz`):
+  Fold 755x1000 Tặng quà 3, Dâng quà 5, Cài đồ 4, Biếu quà 4 columns; iPad 1180x820 3, 5, 3, 3 (same box widths; the iPad tile is 96 px,
+  the Fold tile 84 px, so a 376 px box holds 4 on Fold, 3 on iPad). The page that holds the chosen tile opens first. The dialog (j3
+  `showModal`, `m.kipOnly`) draws the option cards of THAT page + the chosen one; a page turn (or a card not drawn yet) runs `showModal`
+  again, so every decorator that wraps the draw (giftto lock / `.kgiftno` + chip, hideOut, eaLockWhy …) dresses every card the same way.
+  Test: `node dev/test/picker-dom.js` (DOM < 2,000 per picker on F's s7 save; every page whole rows, no inner scroll, every column the tile
+  size allows; every tile reached; a locked + an open card per picker = the full-draw card: classes, disabled, data-*, text, chip; the
+  dialog frame classes = LIVE's for 5 / 6 / 7 / 30-item chests, page 1 and page 2; confirm gives one piece); scan `node dev/test/picker-dom-scan.js`.
+  RING FACE (§104.4, LIVE jkring-item `kriGiftOpen`): the ring of a paged picker lists the chest from `kipList(m)` = ALL its options, doable first
+  (never only the drawn page's cards, law 6c); an item whose card is not drawn takes its lock from the kit rule (`kitLockWhy`: kitOff · bạc · lock ·
+  khắc · unmet Cần · lk) in the drawn card's words (its unmet Cần row first, bạc / lock = «Thiếu bạc»); its act draws that card through the real
+  `showModal` path (`kipSelect`) and clicks the real option; a redraw keeps `#modal` hidden behind the ring (`kri-hide` put back). Ring test:
+  `node dev/test/picker-dom-ring.js <root>` (ring = the whole kipList — no item cap since K-RING-ALL (KK59, §104.4 RING) —, lock = `kitTakeable`,
+  same reason as drawn, act on an undrawn item gives one piece (counted with `invCount`: a stacked piece comes from her stack), the next dialog
+  in Q survives the ring close).
 - Phone landscape (height ≤ 500): grid and detail side by side.
 - Users: giftpick (Hậu cung act "Tặng quà", now with the gift card's own line `giftEval`: odds · tốn · thành · kèm), giftto (Dâng quà
   Hoàng thượng / Thái hậu), plantpick (Cài đồ vào rương). Scan: `node dev/test/gift-pick-scan.js` (every option list built from S.inv).
@@ -5178,7 +5207,7 @@ Part of the ONE new animation kit (vòng người · vòng nhóm · vòng bảo 
 - FOCUS: tap the bright item → it zooms big to the LEFT (warm glow), the ring folds down; the kit pane (`.dlg.kpanel.kri-pane`) DROPS on the RIGHT: kit info (kinlDetail / kitItemDetail / the caller's spec) + the caller's buttons (+ −/+ when an act has q.max>1) + «‹ Vòng».
 - RESULT IN PLACE: the act's result = kit result rows (seal THÀNH / BẠI / KẾT QUẢ; Được / Mất / Ghi chú; an empty row shows «không», kept) + «Xem món khác». `kriDiffRows` = her stats (j1 NAMES), person → ta thiện cảm, items in/out of Tư trang. An act that opens its own dialog closes the ring.
 - Motion: transform + opacity only (no animated filter / layout); reduced motion / Gọn = no tweening; bots keep the old UI. Scene layer = kitScene §93 (bg = the stage she stands on).
-- WIRED (KK44 scan §5): jgpick giftpick/giftto/plantpick (the dialog stays the engine) · kitShop buy + sell (nvp, pet shop, all wrappers) · Tư trang bag family via kinlPick (items, wardrobe, works, recipe books, Trưng bày) · veil chest · pets · toilette dress (#kg82) · titles (Danh hiệu) · hoa điền · face on the new-game card (a card holding a kit picker never becomes a §102 stage, so «Dung mạo» stays tappable). Kit page sample «§104».
+- WIRED (KK44 scan §5): jgpick giftpick/giftto/plantpick (the dialog stays the engine; a PAGED picker's ring lists every option via `kipList`, §28.13i RING FACE) · kitShop buy + sell (nvp, pet shop, all wrappers) · Tư trang bag family via kinlPick (items, wardrobe, works, recipe books, Trưng bày) · veil chest · pets · toilette dress (#kg82) · titles (Danh hiệu) · hoa điền · face on the new-game card (a card holding a kit picker never becomes a §102 stage, so «Dung mạo» stays tappable). Kit page sample «§104».
 
 ## §93.8 ODDS ON THE PICTURE — kitOddsBadge (owner 27/11 ~06:10Z; scope owner ~06:45Z + ~07:12Z; KK56)
 OPT-IN, EVENT lá bài ONLY. The kit odds part (kitOdds: 7-segment bar + the whole ladder word, law 7) as a badge `.kodb` centred on the top edge of the card PICTURE on a light kit plate, on the Bàn bài hand (small cards + the enlarged card) and nowhere else: tabs, frames, popups, plaques and môn cells keep the odds on their own row exactly as LIVE (small pictures cannot hold it). Nothing calls it by itself (no observer, not kitOptFinal): the hand calls `kitOddsBadgeHand(handEl)` / `kitOddsBadge(card)` / `kitOddsBadgeOn(pictureEl, word)` / `kitOddsBadgeHTML(word)` explicitly. A sure card gets none. Narrow picture (~85-95 px): the bar wraps above the word, the word is never cut (font clamp(.56rem, .12 x --kas, .95rem)). Test: dev/test/badge-scope.js (no .kodb outside .khand on tabs / frames, Fold + iPad; all 7 words whole on a 90 px card).

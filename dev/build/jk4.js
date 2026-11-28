@@ -303,7 +303,7 @@ function kitThCardHTML(){try{const R=(typeof kitCourtRows==="function"?kitCourtR
    Fold / phones calc(24*var(--kvh,1vh))); if the fixed part still takes more than 55 % of the dialog, the picture is compressed first (down to calc(14*var(--kvh,1vh))),
    figures scale with it. Dialogs without .opts (Đã rõ cards, person cards, Luân hồi / identity panels .kpscopts) are unchanged. */
 function kitDlgFit(){try{const M=document.getElementById("modal");if(!M||M.hidden)return;const d=M.querySelector(".dlg"),mb=document.getElementById("mb");
- const o=mb&&mb.querySelector(":scope > .opts");if(!d||!o){if(d)d.classList.remove("kdscroll");return}
+ const o=mb&&mb.querySelector(":scope > .opts");if(!d||!o){if(d){d.classList.remove("kdscroll");kitPickStep3(d)}return}
  d.classList.add("kdscroll");d.style.removeProperty("--kdpic");o.classList.remove("kdsh");
  const fixedH=()=>{let h=0;[...d.children].forEach(c=>{if(c!==mb&&c.offsetParent)h+=c.offsetHeight});[...mb.children].forEach(c=>{if(c!==o&&c.offsetParent)h+=c.offsetHeight});return h};
  const D=d.clientHeight||innerHeight;let vh=28;/* KIT §0: same in the page and the spread */
@@ -316,13 +316,43 @@ function kitDlgFit(){try{const M=document.getElementById("modal");if(!M||M.hidde
    the options list (.opts, §32.5) and the story text (.kpb > .kpmain). The text keeps its natural height (fixed, fully visible) as long as the
    options keep at least min(their content, 42 % of the body); a longer text is capped to the rest and scrolls inside itself (.kdtx, soft top
    shadow once scrolled). Person dialogs (kdper) scroll their whole right column instead (kitDpAll / .kdpall) and do not use the cap. */
-function kitDlgText(d,mb,o){try{const kb=mb.querySelector(":scope > .kpb"),tx=kb&&kb.querySelector(":scope > .kpmain");if(!kb||!tx)return;
+/* K-PICK-SHORT (KIT §28.13i + law 10 «a big scene picture only when the content fits without scrolling»; KK63 ruling (a), 27/11 23:45Z):
+   a §28.13i paged pick grid in the option box declares what the box must hold = ONE whole row of tiles + its §23 pager (+ the sticky
+   confirm «kipgo», which stands under them); kitOptNeed gives that height (0 = no pick grid). kitDlgText then steps the frame DOWN until
+   the box holds it: step 1 = no big scene picture for that card (the event picture .kpsubj.kpiart / the picture band .kdlgart is hidden,
+   the card is text only: .dlg.kdnopic), step 2 = the text cap leaves the box at least that height (.kdtx). Only if even that frame cannot
+   hold row + pager, jgpick's fallback .kipw.kipshort puts the pager under the row (never over a tile). A frame whose box already holds
+   row + pager is unchanged (LIVE's frame). Every pick grid in a picture frame uses this one rule (giftpick, giftto «Dâng quà», plantpick
+   «Cài đồ», tsgiftpick, wkgive …: every dialog with item options, jgpick kipOn). */
+function kitOptNeed(o){try{const w=o&&o.querySelector(":scope > .kipw"),t=w&&w.querySelector(".kipg > .kipc");if(!t)return 0;
+ const ob=o.getBoundingClientRect(),gt=w.querySelector(".kipg").getBoundingClientRect().top-ob.top+o.scrollTop,cs=getComputedStyle(o),pb=parseFloat(cs.paddingBottom)||0;
+ const blk=e=>{if(!e||!e.offsetParent)return 0;const s=getComputedStyle(e);return e.getBoundingClientRect().height+(parseFloat(s.marginTop)||0)+(parseFloat(s.marginBottom)||0)};
+ const pg=w.querySelector(":scope > .kippg"),go=w.querySelector(":scope > .kipgo"),goS=go&&getComputedStyle(go).position==="sticky";
+ return Math.ceil(Math.max(0,gt)+t.getBoundingClientRect().height+blk(pg)+(goS?blk(go):0)+pb+4)}catch(e){return 0}}
+/* the same step 1 in the jksize live frame (.ksz3: picture band .k3ev on top of the right column, the option box .k3right > .opts under it) */
+/* once a dialog stepped down at this screen size it stays stepped (every page turn / re-lay of the same dialog draws the same frame: no flip) */
+const KIT_PSTEP=new WeakMap();function kitPstepOn(){try{const m=typeof Q!=="undefined"?Q[0]:null;return !!m&&KIT_PSTEP.get(m)===innerWidth+"x"+innerHeight}catch(e){return false}}
+function kitPstepSet(){try{const m=typeof Q!=="undefined"?Q[0]:null;if(m)KIT_PSTEP.set(m,innerWidth+"x"+innerHeight)}catch(e){}}
+function kitPickStep3(d){try{const R=d.querySelector(".k3right");if(!R)return;const ev=R.querySelector(":scope > .k3ev"),off=()=>{if(ev){ev.hidden=true;ev.dataset.kdnp=1;d.classList.add("kdnopic")}};
+ if(kitPstepOn())return off();R.querySelectorAll(":scope > .k3ev[data-kdnp]").forEach(x=>{x.hidden=false;delete x.dataset.kdnp});d.classList.remove("kdnopic");
+ const o=R.querySelector(":scope > .opts"),need=kitOptNeed(o);if(!need||o.clientHeight>=need||!ev)return;off();kitPstepSet()}catch(e){console.error("kitPickStep3",e)}}
+function kitDlgText(d,mb,o){try{const kb=mb.querySelector(":scope > .kpb"),tx=kb&&kb.querySelector(":scope > .kpmain");
+ d.classList.remove("kdnopic");mb.querySelectorAll(":scope > .kdlgart[data-kdnp], :scope > .kpb > .kpsubj[data-kdnp]").forEach(x=>{x.hidden=false;delete x.dataset.kdnp});
+ if(kb&&kb.dataset.kdnp){kb.classList.add(...kb.dataset.kdnp.split(" ").filter(Boolean));delete kb.dataset.kdnp}
+ if(!kb||!tx)return;
  d.classList.remove("kdtx");kb.style.removeProperty("max-height");kb.style.removeProperty("--kdroom");tx.classList.remove("kdsh");
  if(d.classList.contains("kdper"))return;
  const cs=getComputedStyle(mb),pad=(parseFloat(cs.paddingTop)||0)+(parseFloat(cs.paddingBottom)||0),gap=parseFloat(cs.rowGap)||0;
  const inner=mb.clientHeight-pad,optNat=Math.min(o.scrollHeight,Math.max(96,Math.round(inner*.42)));
  const room=Math.max(72,Math.floor(inner-optNat-gap)),nat=kb.scrollHeight;
  if(nat>room+1){d.classList.add("kdtx");kb.style.maxHeight=room+"px";kb.style.setProperty("--kdroom",room+"px")}/* K-PICK-FOLD-BAND (KK61): the cap in px for the stacked band (jkslide kv1 .kdtx: band ≤ 42 % of it) — a % of its own grid row was circular */
+ const need=kitOptNeed(o);if(need&&(kitPstepOn()||o.clientHeight<need)){/* K-PICK-SHORT: this frame's box cannot hold one row + the pager → step down */kitPstepSet();
+  const pics=[...mb.querySelectorAll(":scope > .kdlgart:not(.kesband), :scope > .kpb > .kpsubj.kpiart")];/* step 1: no big scene picture for this card */
+  if(pics.length){pics.forEach(x=>{x.hidden=true;x.dataset.kdnp=1});const c=["kphas","kpinfo"].filter(k=>kb.classList.contains(k));if(c.length){kb.dataset.kdnp=c.join(" ");kb.classList.remove(...c)}d.classList.add("kdnopic")}
+  d.classList.remove("kdtx");kb.style.removeProperty("max-height");kb.style.removeProperty("--kdroom");
+  const n2=kb.scrollHeight,r2=Math.max(72,Math.floor(inner-Math.min(o.scrollHeight,Math.max(96,Math.round(inner*.42),need))-gap));/* step 2: the text cap leaves the box row + pager */
+  if(n2>r2+1){d.classList.add("kdtx");kb.style.maxHeight=r2+"px";kb.style.setProperty("--kdroom",r2+"px")}
+  const def=need-o.clientHeight;if(def>0&&kb.offsetHeight>72){const r3=Math.max(72,Math.floor(kb.offsetHeight-def));d.classList.add("kdtx");kb.style.maxHeight=r3+"px";kb.style.setProperty("--kdroom",r3+"px")}/* the body's own margins: the cap gives the box what is still missing (text ≥ 72 px) */}
  if(!tx.dataset.kdsh){tx.dataset.kdsh=1;tx.addEventListener("scroll",()=>tx.classList.toggle("kdsh",tx.scrollTop>2),{passive:true})}}catch(e){console.error("kitDlgText",e)}}
 window.kitDlgFit=kitDlgFit;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitDlgFit();requestAnimationFrame(kitDlgFit)}catch(e){}return r};
@@ -338,6 +368,7 @@ window.kitDlgFit=kitDlgFit;
 .modal .dlg.kdscroll>#mb>.opts.kdsh{box-shadow:inset 0 10px 8px -8px rgba(58,32,16,.28)}
 .modal .dlg.kdscroll>#mb>.kpb{flex:0 0 auto!important;min-height:auto}/* kit-kpb (18/11): the intro / facts / item card keeps its FULL height (never shrinks under the option list); a long intro is capped by kitDlgText (.kdtx) and scrolls inside itself, only .opts takes the rest */
 .modal .dlg.kdscroll.kdtx>#mb>.kpb{overflow:hidden;display:flex;flex-direction:column}
+.modal .dlg.kdnopic>#mb>.kdlgart[data-kdnp],.modal .dlg.kdnopic>#mb>.kpb>.kpsubj[data-kdnp],.modal .dlg.kdnopic .k3right>.k3ev[data-kdnp]{display:none!important}/* K-PICK-SHORT step 1: no big scene picture for a card whose pick grid needs the room */
 .modal .dlg.kdscroll.kdtx>#mb>.kpb.kphas{display:grid;grid-template-rows:minmax(0,1fr)}
 .modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain{min-height:0;overflow-y:auto;overscroll-behavior:contain;transition:box-shadow .2s;flex:1 1 auto}
 .modal .dlg.kdscroll.kdtx>#mb>.kpb>.kpmain.kdsh{box-shadow:inset 0 10px 8px -8px rgba(58,32,16,.28)}

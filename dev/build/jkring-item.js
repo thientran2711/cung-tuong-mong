@@ -203,21 +203,28 @@ function kriBg(){try{const c=[...document.querySelectorAll("#stage, #stage *")].
 /* ---- (1) jgpick family: giftpick / giftto / plantpick (+ wkgive when it carries items): the #modal dialog stays the engine (every wrapper, cost, odds, item hook);
         the ring is its face. Act = the dialog's own option (chooseM). ---- */
 let KRI_DLG=null;
-function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kipOn!=="function"||!kipOn(m)||KRI_DLG===m)return;KRI_DLG=m;
- const ops=M.querySelector(".opts");const L=m.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]&&ops&&ops.querySelector(`.opt[data-m="${i}"]`));
- L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));M.classList.add("kri-hide");
+function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kipOn!=="function"||!kipOn(m))return;
+ /* picker-dom (K-LIST-PAGE): a page turn / a card drawn for the ring redraws the dialog (j3 resets #modal's class) → it stays hidden behind its ring */
+ if(KRI_DLG===m){M.classList.add("kri-hide");return}KRI_DLG=m;
+ /* the ring lists EVERY piece of the chest (kipList: all options, doable first), not only the cards of the drawn page (law 6c: no item vanishes) */
+ const ops=()=>M.querySelector(".opts")||M;const bt=i=>ops().querySelector(`:scope>.opt[data-m="${i}"]`);
+ const L=kipList(m).map(x=>[x[0],x[1],x[2]]);M.classList.add("kri-hide");
  const verb=(typeof KIP_VERB!=="undefined"&&KIP_VERB[m.pid])||"Chọn";let V=m.pp&&m.pp.v;try{if(V!=null&&typeof V!=="object")V=(typeof byKey==="function"&&byKey(V))||liveRivals(true).find(x=>x.id===V)||null}catch(e){V=null}
  const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?V.name:""):m.pid==="giftto"?(m.pp&&m.pp.t==="emp"?"Hoàng thượng":m.pp&&m.pp.t==="th"?"Thái hậu":""):"";/* KK62 (RV-176 §7 c): Dâng quà names the receiver from its own pp.t (jgift «Dâng quà lên Hoàng thượng / Thái hậu»), never the dialog title («Dâng cho Dâng quà») */
- const why=(c,i)=>{const b=ops.querySelector(`.opt[data-m="${i}"]`);return c.kgwhy||(b&&b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):kipLocked(c)?"Thiếu bạc":"")};
+ const why=(c,i)=>{const b=bt(i);if(c.kgwhy)return c.kgwhy;if(b)return b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):kipLocked(c)?"Thiếu bạc":"";
+  /* a card not drawn (another page): the same reason j3 gives it when drawn (c.off from kitOff / kitOffBac) */
+  const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;if(poor&&!c.off&&typeof kitOffBac==="function")kitOffBac(c,-c.fx.bac);
+  /* every hold-back the kit knows (jnolock kitLockWhy: kitOff · bạc · lock · khắc · unmet Cần · lk · temper) → its words */
+  const k=typeof kitLockWhy==="function"?kitLockWhy(c,m):c.off?(c.off.why||"off"):kipLocked(c)?"bac":"";if(!k)return"";
+  /* the same words the drawn card shows: its unmet Cần row first (j63 kr-why), then bạc / lock = «Thiếu bạc» (as the drawn path above) */
+  const n=Array.isArray(c.need)&&c.need.find(n=>n&&!n.ok);if(n&&n.t)return n.t;if(k==="bac"||k==="lock")return c.off&&c.off.why||"Thiếu bạc";
+  return /^(off|time|none|need)$/.test(k)?"Chưa được":k};
  kitRingItem.open({key:"gift:"+m.pid,title:(M.querySelector(".kptitle")||{}).textContent||verb,sub:who?`${verb} ${m.pid==="plantpick"?"của":"cho"} ${kriE(who)}`:""/* KK62: «Cài vào rương của <người>» (planting goes INTO her chest), every other verb «… cho <người>»; no name known = no line (never the dialog title) */,bg:kriBg(),
-  items:()=>{/* K-RING-QTY (KK61, RV-176 nit, law 6c): the grid folds same-kind same-offer twins into ONE tile ×N (jgpick inv-stack) and removes their cards —
-    the ring shows the same count on that tile (kit stack badge), so no piece of her chest is out of sight */
-   const sg=c=>{const e=S.inv[c.ik];return typeof invCan==="function"&&invCan(e)?[invSig(e),kipLocked(c),c.n||"",c.x||""].join("#"):null};const QN=new Map(),SEEN=new Set();
-   m.opts.forEach(c=>{if(!c||c.ik==null||!S.inv[c.ik])return;const s=sg(c);if(!s)return;QN.set(s,QN.has(s)?QN.get(s)+1:1+(typeof invMoreOnce==="function"?invMoreOnce(S,S.inv[c.ik],SEEN):0))});
-   return L.filter(([c])=>S.inv[c.ik]).map(([c,i])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);const s=sg(c);return{id:i,src:I.src,name:I.name,grade:I.grade,qty:s?QN.get(s)||1:1,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}})},
+  /* K-RING-QTY (KK61/KK62, law 6c): a stacked tile shows its ×N — the count kipList gives that tile (jgpick inv-stack: real pieces + her stack, the same count the grid tile shows) */
+  items:()=>L.filter(([c])=>S.inv[c.ik]).map(([c,i,q])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);return{id:i,src:I.src,name:I.name,grade:I.grade,qty:q||1,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}}),
   /* info = the item's kit detail + the option's own kit card (odds · Tốn · Được · Mất · Kèm) — the same display copy as the old grid detail (kipDetail) */
   info:it=>{try{kipSelect(M,m,it.i);const d=M.querySelector(".kipd");if(d){const c=d.cloneNode(true);c.querySelectorAll(".kipgo").forEach(x=>x.remove());c.classList.remove("kipd");return c.innerHTML}}catch(e){}return""},
-  acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{const b=ops.querySelector(`.opt[data-m="${it.i}"]`);if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark();window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
+  acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{let b=bt(it.i);if(!b){kipSelect(M,m,it.i);b=bt(it.i)}/* not on the drawn page → draw it (the real dialog path), then click the real option */if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark();window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
    M.classList.remove("kri-hide");KRI_DLG=null;/* a follow-up dialog of the act → the ring steps aside for it */if(Q.length&&!$("modal").hidden){return"close"}
    const L=kriLogSince(l0),bad=L.some(x=>/phát hiện|trả lại|từ chối|không nhận/.test(x));return{ok:!bad,who,title:`${verb} ${it.name}${who?" · "+who:""}`,rows:kriDiffRows(a,V,who).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}],
   onClose:()=>{M.classList.remove("kri-hide");if(KRI_DLG===m&&Q[0]===m&&!M.hidden){KRI_DLG=null;const x=M.querySelector(".kit-x");if(x)x.click();else if(typeof closeModal==="function")closeModal()}KRI_DLG=null}})}
