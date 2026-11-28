@@ -63,3 +63,5 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 09:33Z container RESTARTED again — runs lost; u8 relaunched (dayq test dropped: RV-163M tests its own sha; my dayq test N1 PASS Fold before the cut). RV-185 LAND dress-fix-df fbab05b4 → stack as ui9 on ui8.
 - 09:37Z ui9 staged 6ef1f5a0 = ui8 a50895cb + dress-fix-df fbab05b4 (built conflicts only; MODGATE PASS; webkit 0; assets = LIVE). RV-185 already trial-merged the same onto a50895cb.
 - 09:40Z ui9 = 114a52ef (+ dress-fix-look cf0599d6 test-only, clean merge). ui9 tests after u8 QC.
+- 09:52Z pvquy-post-r2 LAND READY 6a023c51 (BIG RV-186; branch head moved to 97bd0858 = MAIN 189 rulings C/D — NOT reviewed in this LAND, used 6a023c51). ui10 = fcad89d4 = ui9 + 6a023c51 (j8/j83/jemoact → ui8 form per RV-186; MODGATE PASS; webkit 0).
+- 09:55Z RV-186 PASS delta 97bd0858 → ui10 = c395461a = ui9 + 97bd0858 (3 hunks → ui8 form; only those 3 lines of the branch absent; MODGATE PASS). MAIN: READY ui8, then ui9+ui10 one push.
