@@ -76,8 +76,8 @@ function k3crewChip(f,name,loy,tip,lab,cls){const n=+loy;return `<button type="b
 function k3crewList(){if(!S)return"";let h="";
  if(typeof isSrv==="function"&&isSrv()){try{srvColleagues().forEach((s,j)=>{const a=S.srv.af[s.sid]|0;let f="";try{f=mdH(pServ(s),"xs")}catch(e){}
    h+=k3crewChip(f,typeof shortN==="function"?shortN(s.name):s.name,a,srkName(s),"Thiện cảm",a>=BAL.srvx.friendAf?"g":a<0?"r":"n").replace('data-k3go="staff"',`data-k3go="staff" data-k3pi="${j}"`)})}catch(e){}return h}
- if(S.maid){let f="";try{f=mdH(pMaid(),"xs")}catch(e){}h+=k3crewChip(f,S.maid.name,S.maid.loyal|0,"Cung nữ thân tín")}
- (S.staff||[]).forEach(s=>{if(!s||s===S.maid)return;let f="";try{f=mdH(pServ(s),"xs")}catch(e){}h+=k3crewChip(f,typeof shortN==="function"?shortN(s.name):s.name,s.loyal|0,s.role==="eunuch"?"Thái giám":"Cung nữ")});
+ if(S.maid){let f="";try{f=mdH(pMaid(),"xs")}catch(e){}h+=k3crewChip(f,S.maid.name,S.maid.loyal|0,typeof kitMaidTitle==="function"?kitMaidTitle():"Cung nữ thân tín")}
+ (S.staff||[]).forEach(s=>{if(!s||s===S.maid)return;let f="";try{f=mdH(pServ(s),"xs")}catch(e){}h+=k3crewChip(f,typeof shortN==="function"?shortN(s.name):s.name,s.loyal|0,(typeof placeW==="function"&&road8()==="kc"&&placeW("sv_"+s.role))||(s.role==="eunuch"?"Thái giám":"Cung nữ"))});
  return h}
 function k3crewN(){return kgfCount("cn")}
 function k3crew(){return kitGroupFold("cn",kgfLab("cn"),kgfCount("cn"),k3crewList())}
@@ -113,7 +113,7 @@ function kgfTags(d){try{document.querySelectorAll(".mspot[data-kgft]").forEach(t
  if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{go();setTimeout(go,350)}catch(e){}return r}}})();
 function kgfRail(){try{if(kgfRail.done||typeof kitStageRail!=="object")return;kgfRail.done=1;
  /* one rail item per label of the ONE label table (jroad8 ROAD8_LAB; the kit rail prints a fixed label): it shows on the road whose word it is */
- ["cn","ct"].forEach((k,o)=>{const T0=window.ROAD8_LAB||{"":{}};const labs=[...new Set(Object.keys(T0).map(r=>(T0[r]||{})[k]||(T0[""]||{})[k]||kgfLab(k)))];
+ ["cn","ct"].forEach((k,o)=>{const T0=window.ROAD8_LAB||{"":{}};const labs=[...new Set(Object.keys(T0).map(r=>typeof placeW==="function"?placeW(k,r):(T0[r]||{})[k]||(T0[""]||{})[k]||kgfLab(k)))];
   labs.forEach((lab,j)=>kitStageRail.add({id:"kgf-"+k+(j?"-"+j:""),order:61+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfLab(k)===lab&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))})}catch(e){}}
 /* a tap on a person IN the open fold goes to that person's card: the fold shuts first (no repaint), so the tab click it sends is not taken as a «tap outside» (maid-8tabs:
    the Cung nhân / Đồng liêu chips and the court rows — Hoàng hậu, her chủ — only closed the fold) */

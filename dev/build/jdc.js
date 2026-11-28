@@ -67,7 +67,7 @@ function dcHerOn(){try{return !!(S&&!S.dead&&!S.out&&!S.confined&&!(typeof isSrv
 function dcRefused(p){if(!dcOn())return false;const f=dcFestNow();if(!f)return false;if(p===S)return dcHerOut();const st=dcStat(p,f.k);return!!(st&&st.refused)}
 function dcCutPhan(p){if(!dcOn()||!p)return 0;const f=dcFestNow();if(!f)return 0;const st=dcStat(p,f.k);return st?st.cutPhan:0}
 function dcName(v){if(!v)return"";if(v===S)return"ngươi";const t=v.queen?"Hoàng hậu":(typeof RANKS!=="undefined"&&RANKS[v.rank]?RANKS[v.rank].n:"");return (t?t+" ":"")+v.name}
-function dcRankN(p){try{return p===S?(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):(p.queen?"Hoàng hậu":RANKS[p.rank].n)}catch(e){return""}}
+function dcRankN(p){try{return p===S?(S.rank>=7?"Hoàng hậu":meRankN()):(p.queen?"Hoàng hậu":RANKS[p.rank].n)}catch(e){return""}}
 function dcFamList(L){return L.map(dcFamN).filter(Boolean).join(", ")}
 /* ---------- borrow: the piece really moves (law 6c) ---------- */
 /* co-op: a player's world id (PROTOCOL §3: host 901, guest 902), the same table as jcoopworld me() */
@@ -248,7 +248,7 @@ function dcNpcDress(v){/* an NPC changes into a robe of the season: one from her
   if(!nw)return;const old=w.y;if(old)invAdd(v,old);delete nw.w;w.y=nw}catch(e){console.error("dcNpcDress",e)}}
 function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefined"?rivals:[];
  if(dcWorld()){const bad=[];for(const v of R){if(!v||!v.alive||v.out||v.coop)continue;dcNpcDress(v);if(dcSeasonDue(v)){const c=dcSeasonCost(v);const fx={};if(c.danh)fx.danh=-c.danh;if(c.th)fx.th=-c.th;if(Object.keys(fx).length){ap(v,fx);bad.push(v)}}}
-  if(bad.length)try{log(`Trong cung chê ${bad.slice(0,3).map(dcName).join(", ")}${bad.length>3?" và mấy người nữa":""} mặc áo trái mùa.`)}catch(e){}
+  if(bad.length&&!(typeof isKc==="function"&&isKc()))try{log(`Trong cung chê ${bad.slice(0,3).map(dcName).join(", ")}${bad.length>3?" và mấy người nữa":""} mặc áo trái mùa.`)}catch(e){}
   const f=dcFestNow();if(f&&S.dcNk!==dcKey(f)){S.dcNk=dcKey(f);S.dcNp={k:f.k,n:f.name};const out=[];
    for(const v of R){if(!v||!v.alive||v.out||v.confined||v.coop)continue;dcNpcFest(v,f.k);const st=dcStat(v,f.k);if(st&&st.refused)out.push(v)}
    if(out.length)try{log(`${f.name}: ${out.map(dcName).join(", ")} bị chặn ngoài cửa vì y phục không hợp lễ.`)}catch(e){}}}

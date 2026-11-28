@@ -90,7 +90,7 @@ function lsSync(label,why){try{if(!S||!Array.isArray(S.logs))return;if(!LG||LG.s
   const tkK=new Set(Object.keys(ATT));for(const D of TICK.values())for(const k in D)if(D[k])tkK.add(k);
   const tk=tickFlush(label,(S.logSeq||0)-LG.seq);
   /* a net-zero change is skipped (a token about someone else), unless a known code path moved that number */
-  const n=(S.logSeq||0)-LG.seq;const parts=lsFix(lsLines(n),LG.v,tkK).filter(p=>p.a!==p.b&&(LG.v[p.k]!==p.b||tkK.has(p.k)));
+  const n=(S.logSeq||0)-LG.seq;const parts=lsFix(lsLines(n),LG.v,tkK).filter(p=>p.a!==p.b&&(LG.v[p.k]!==p.b||tkK.has(p.k)))/* OB-NGOAICUNG r5 (MAIN 159, law 6+11): at home (before the palace) she has no palace favour — Sủng / Thái hậu / Hoàng hậu numbers moved by the palace world or by the home start (Sủng 8 → 0) are no line of her Sổ ghi and so no Tuần lục page */.filter(p=>!(/^(sung|th|hh)$/.test(p.k)&&typeof road8==="function"&&road8()==="kc"));
   let did=tk;if(parts.length){const pw=popWhy();for(const p of parts)if(!(w[p.k]&&w[p.k].length))w[p.k]=[pw||defWhy(p)];
    const P=parts.map(p=>partH(p,w)).join(", ");
    /* fewer lines (reviewer r1): the parts join this action's own newest line when it wrote one; a line only when it wrote none */
