@@ -29,6 +29,7 @@ const [W,H]=(process.argv[3]||'755x1000').split('x').map(Number);
   else for(const k of Object.keys(PEND)){if(k==="door")continue;let d=null;try{d=PEND[k]({})}catch(e){}scan(`PEND.${k}`,d,{pend:k})}
   return out},PH);
  const L=[];const skip=[];let cards=0,kemRows=0;const out=[];const ok=(c,m)=>out.push([!!c,m]);
+ for(let life=0;life<4&&(life===0||cards===0);life++){if(life){console.log(`RETRY life ${life+1}: the last life had 0 rolled hint-mode «nhưng» cards (vacuous) → fresh boot`);await BOOT();await p.evaluate(()=>{window.__rowsX=[]})}/* KK74: a random life can hold no rolled hint card at all → re-boot, never pass or fail on an empty census */
  for(const PH of ["door","pend"]){let LL=await LIST(PH);const hasWit=X=>X.some(x=>/^door wit /.test(x.src));for(let t=0;PH==="door"&&!hasWit(LL)&&t<8;t++){await BOOT();await p.evaluate(()=>{window.__rowsX=[]});LL=await LIST(PH)}/* a life with no witness door yet (or not in the palace yet): boot again (as tmk-warn-witcard) — the wit tiers are the known members of the group */L.push(...LL);
  for(const s of LL)for(const h of s.hit)console.log(`CENSUS ${s.src} | ${h.n} | ${h.h}`);
  /* 2. open each card and read the visible plaque rows */
@@ -54,7 +55,7 @@ const [W,H]=(process.argv[3]||'755x1000').split('x').map(Number);
    ok(c.kem!=null&&c.kemRed&&c.parts.every(x=>c.kem.includes(x)),`${s.src} «${c.t}»: Kèm «${c.kem}» holds the «nhưng» part «${c.parts.join("; ")}»`);
    ok(!c.parts.some(x=>c.bai.includes(x)),`${s.src} «${c.t}»: Bại «${c.bai}» = only «hỏng thì …»`);
    ok(!c.parts.some(x=>c.thanh.includes(x)),`${s.src} «${c.t}»: Thành «${c.thanh}» holds no «nhưng» part`)}
-  await p.evaluate(()=>{try{Q.length=0;document.getElementById('modal').hidden=true}catch(e){}})}}
+  await p.evaluate(()=>{try{Q.length=0;document.getElementById('modal').hidden=true}catch(e){}})}}}
  const hook=await p.evaluate(()=>(window.__kitKem||[]).length);const RX=await p.evaluate(()=>[...new Set(window.__rowsX||[])]);RX.forEach(x=>{console.log(`CENSUS-ROWSX ${x}`);const h=x.split(" | ").slice(2).join(" | ");ok(h&&!/(Tốn|Thành|Bại|Kèm|Ghi chú|Gợi ý)[^\s:·,;)]|^(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững)\S/.test(h),`prebuilt-card option ${x.split(" | ").slice(0,2).join(" | ")}: kitHint «${h.slice(0,80)}» has no glued row label (K-DOLA-HINT)`)});
  ok(cards>0,`census found ${L.length} card sources, ${cards} rolled hint-mode «nhưng» cards opened, ${kemRows} with a Kèm row, kit hook __kitKem ${hook}`);
  let f=0;for(const [c,m] of out){if(!c||process.env.V)console.log((c?'PASS ':'FAIL ')+m);if(!c)f++}if(errs.length){console.log('PAGE ERRORS',errs.slice(0,5));f++}
