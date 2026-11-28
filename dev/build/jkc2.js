@@ -380,8 +380,7 @@ Object.assign(KCE,{
   return{who:pMe(),t:`<p>Thái giám và ma ma Nội vụ phủ về huyện đường. Con gái các xã xếp hàng trước cổng, mỗi người một bọc áo. Xuân Đào đứng ngay sau lưng ngươi.</p>`,o:[
    kc2H(kcO("Vào trình diện",{},()=>pushDil(mkP("kcE",{e:"d_thi"}),"Ngày tuyển cung nữ")),"ma ma xem dung mạo, khéo tay, lễ nghi; tiếng trong xóm và lời lý trưởng cũng được hỏi","an toàn")]}}},
  d_thi:{t:"Ngày tuyển cung nữ",b:()=>({who:pMe(),t:`<p>Ma ma Nội vụ phủ nhìn ngươi từ đầu đến chân, rồi chỉ vào một rổ kim chỉ và một chiếc ghế: ngươi chọn cách nào để tỏ mình?</p>`,o:[
-   kc2ExRisk(kc2H(kcO("Làm bài khéo tay",{suc:BAL.kc2.d_thi_o_suc},()=>kc2Exam("kim")),`chơi màn Khéo tay; khéo tay ở nhà (${S.kc.kim}/5) cộng thêm`,"có rủi ro"),"kim"),
-   kc2ExRisk(kc2H(kcO("Thêu một mảnh khăn",{suc:BAL.kc2.d_thi_o_suc},()=>kc2Exam("theu")),`chơi màn Thêu; khéo tay ở nhà (${S.kc.kim}/5) cộng thêm`,"có rủi ro"),"theu"),
+   ...kc2Best([["kim","Làm bài khéo tay","Khéo tay"],["theu","Thêu một mảnh khăn","Thêu"]],a=>kc2ExP(a)).map(([a,n,m])=>kc2ExRisk(kc2H(kcO(n,{suc:BAL.kc2.d_thi_o_suc},()=>kc2Exam(a)),`chơi màn ${m}; khéo tay ở nhà (${S.kc.kim}/5) cộng thêm`,"có rủi ro"),a)),
    kc2ExRisk(kc2H(kcO("Cúi đầu chờ ma ma xét",{suc:BAL.kc2.d_thi_o_suc},()=>kc2Exam("")),`không thi; tính theo tài nghệ, cao nhất là ${typeof mgWord==="function"?mgWord(BAL.skip.cap):"Khá"}`,"an toàn"),"")]})},
  n_send:{t:"Hòa ước ký xong",b:()=>{const L=kc2L();const c=kcR("cha");return{who:kcFace(c||S.kc.fam[0]),t:`<p>Hòa ước đã ký. Sáng nay kiệu hoa đỏ dừng trước cổng ${L.court}; ${kc2Br()==="pf"?L.tx.gifts:kc2Br()==="bd"?bdTxt("ba trăm con ngựa","những xe bạc, thảm và lưu ly"):"xe lễ vật"} xếp hàng sau sứ đoàn Đại Hy. ${L.mom} đứng ở bậc thềm, không khóc trước mặt ai.</p>`+
    kitRows([[NAMES.kgt,S.kgt,"t"],["Lễ nghi Đại Hy",`${S.kc.le}/5`,"t"],[NAMES.khm,kitChip("Bạc",S.khm,"n"),"t"]]),o:[
@@ -394,6 +393,10 @@ Object.assign(KCE,{
    the lowest result at her own level (jentry entOdds, the ONE score rule kc2Score uses) + the loss (kit kitRiskOpt) */
 function kc2SwapP(mu,c){return BAL.kc2.xinDeDiThay_rb+nv(mu,"kc2MuSwap")+c.af/4-nv(c,"kc2KhanSwap")}
 function kc2FightP(suc){return BAL.kc2.tuMinhChongTra_rb+suc/3+(kc2Br()==="bd"?BAL.kc2.st.nc.bdRoll:0)}
+/* E-TIER-B13 batch 3 (law 2 same-result merge, owner OD 27/11 ~01:03Z «auto best fit»): two arts that give the same exam result are ONE way —
+   the art with the better odds for her (the same odds the card shows; tie → her higher art level), so she never picks between look-alikes */
+function kc2Best(L,p){let b=null,bp=-1,bl=-1;for(const x of L){let q=-1;try{q=p(x[0])}catch(e){}q=q==null?-1:q;const l=(S.arts||{})[x[0]]||0;if(q>bp||(q===bp&&l>bl)){b=x;bp=q;bl=l}}return b?[b]:L.slice(0,1)}
+function kc2ExP(art){const dan=S.kc.kd==="dan";return entOdds(dan?"dan":"nc",entSkipRaw(),art,1)}
 function kc2ExRisk(o,art){try{const K=S.kc;const dan=K.kd==="dan";return kitRiskOpt(o,entOdds(dan?"dan":"nc",entSkipRaw(),art,1),dan?"phải giặt đồ ở Tân Giả khố trước":`bị phong thấp hơn hòa ước ${K.selx2?"một":"hai"} bậc`)}catch(e){console.error("kc2ExRisk",e);return o}}
 function kc2Exam(art){const K=S.kc;if(!isKc()||K.ex&&K.ex.done)return;K.ex={art,play:1};
  const fin=raw=>{if(!S.kc||K.ex.done)return;K.ex.done=1;K.ex.raw=raw;try{kc2Enter(raw)}catch(e){console.error("kc2Enter",e)}try{showModal();render()}catch(e){}};
@@ -517,11 +520,12 @@ const KC2ART={d_benh:"img/ev-benh-tat.webp",d_lu:"img/ev-lu-lut.webp",d_thue:"im
 const KC2DART={cnv:[["kim","Làm bài khéo tay"],["theu","Thêu một mảnh khăn"]],nc:[["mua","Dâng điệu múa cố quốc"],["cam","Dâng khúc đàn cố quốc"]],bd:[["mua","Dâng điệu múa thảo nguyên"],["ban","Bắn cung trước điện"]],
  cn:[["huong","Pha một chén trà dâng lên"]]};
 if(typeof bdTxtProp==="function")bdTxtProp(KC2DART.bd[0],1,KC2DART.bd[0][1],"Dâng điệu múa Ba Tư");/* Ba Tư for new bd lives (jrd_bd bdTxt) */
-function kc2SelArts(){const k=S.origin.k;if(KC2DART[k])return KC2DART[k];const L=entArts().slice(0,2);return (L.length?L:[["cam",0,"Cầm"]]).map(([a,,n])=>[a,`Dâng ${n}`])}
+function kc2SelArts(){const k=S.origin.k;const L=KC2DART[k]||(()=>{const E=entArts().slice(0,2);return (E.length?E:[["cam",0,"Cầm"]]).map(([a,,n])=>[a,`Dâng ${n}`])})();return kc2Best(L,kc2SelP)}/* E-TIER-B13 batch 3: ONE «Dâng <art>» (her best fit, kc2Best) */
 function kc2SelOn(){return !!(S&&S.origin&&(S.origin.k==="cnv"?!!S.srv:true))}/* entry-exam: every origin meets the selection (ceiling Đáp ứng: gain / loss only, BAL.entry.fx) */
 /* FIRSTCARD (MAIN 153, law 7): every option of the selection card carries its TRUE odds (kit kitRiskOpt): the chance of the good outcome at her own
    level (the «không thi» mark entSkipRaw = what a played round of her level gives) — tú nữ: kept, not ban hoa (jselx selxOddsP, the same contest);
    a princess: not a step under the treaty rank; a cung nữ / an old save: not the lowest placement (jentry entOdds, the same score rule) — and its loss. */
+function kc2SelP(art){const SK=entSkipRaw();const srv=S.origin.k==="cnv";if(S.selx2&&!srv&&typeof selxOddsP==="function"){const p=selxOddsP(SK,art);if(p!=null)return p}return entOdds("dir",SK,art||entBest(),1)}
 function kc2SelRisk(o,art){try{const SK=entSkipRaw();const srv=S.origin.k==="cnv";
  if(S.selx2&&!srv&&typeof selxOddsP==="function"){const p=selxOddsP(SK,art);if(p!=null)return kitRiskOpt(o,p,selxLossW(),!selxHoaThan())}
  return kitRiskOpt(o,entOdds("dir",SK,art||entBest(),1),srv?"phải giặt đồ ở Tân Giả khố trước":"bị phong thấp hơn thân phận hai bậc")}catch(e){console.error("kc2SelRisk",e);return o}}
