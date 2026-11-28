@@ -1,4 +1,5 @@
-# ~86% xong · còn 40 việc không tính hình nhân vật (LIVE 8330e8b8)
+# ~86% xong · còn 40 việc không tính hình nhân vật (LIVE 18003079)
+Recount MAIN 183 28/11 00:18Z: 18003079 lc33-eg3 (Foreman E e-gain3: gain rows, egain3c parity) → LIVE; no worklist row → 40 open, ~86 %.
 Recount LC32 27/11 ~20:25Z: 8330e8b8 live-bugs-2711 (gift dead tiles, «sx is not defined», co-op Ban hoa quit) → LIVE; rows 10/19 touched, none closed → 40 open, ~86 %.
 Recount LC32 27/11 ~19:40Z: bd47c753 B save stack rv26 (QuotaExceeded silent save loss + reload rewind cured) → LIVE → row 31 closed → 40 open, ~86 %.
 Recount LC31 27/11 ~15:20Z (landers recount after each LIVE push): f28d28b9 lc29-ui (rows 14/35/36 partly), 5cee92bb kg82-phase play-stopper, d9ca7892 Bundle 2 (row 33 srv-rank + help-housemate + selx-fair → LIVE, row closed), 772bee4f goal-links + arrive-walk LIVE bug fix → 41 open, ~85 %.
