@@ -217,8 +217,7 @@ function kstgTalkAsk(dl,B,A0){try{if(typeof kitPick==="undefined")return;const T
  const sig=acts.map(a=>a.n).join("|")+"|"+Math.round(A.x)+","+Math.round(A.y)+","+Math.round(A.h);if(T.P&&T.P.open&&T.sig===sig)return;const grp=T.P&&T.P.group;try{T.P&&T.P.destroy()}catch(e){}T.sig=sig;
  const sp=dl.querySelector("#mb>.kstg-sp");const av=[];if(sp){const r=sp.getBoundingClientRect();av.push({x:r.left-D.left,y:r.top-D.top,w:r.width,h:r.height})}
  T.P=kitPick.open({host:dl,anchor:A,side:pk?"r":"l",groups,group:grp||groups[0].k,dismiss:false,avoid:av,noLap:false,
-  onPick:(id)=>{const b=bs[+id];if(!b||b.disabled)return;const P=T.P;T.P=null;try{P.destroy()}catch(e){}b.click()},
-  onOff:(a)=>{}})}catch(e){console.error("kstgTalkAsk",e)}}
+  onPick:(id)=>{const b=bs[+id];if(!b||b.disabled)return;const P=T.P;T.P=null;try{P.destroy()}catch(e){}b.click()}/* a closed answer's reason: kitPick itself (§98.1d) */})}catch(e){console.error("kstgTalkAsk",e)}}
 /* §102.3 THẺ GỖ AT THE PLACE (kind "pick": the place card KIT 32.8 — Đi tới / Xin bái kiến / Xin yết kiến / Lẻn vào / greeting / last walk; OD 26/11 ~19:00Z, KK44 row «place card»):
    the place painting fills the stage (kstgPic = the card's place picture), no figure (§102.7), the place lines (Chủ vị · Đường đi · Còn · Bóng người · Giờ + the card's own lines)
    in the light story box — iPad: a left column; Fold: a band under the title plaque — and the card's choices hang as THẺ GỖ TREO (kitPick §98.1) on a signpost beside the box

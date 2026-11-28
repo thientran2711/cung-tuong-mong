@@ -12,7 +12,11 @@ const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|
   if(a.n==="Khiêu khích"){a.risk=a.x;a.x=""}
   return a})}})();
 /* the talk line: cost in khắc, gains green, risks and failure red, needs as disabled reasons */
-optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=talkK(a);
+/* K-KHAC-COST (KK70, law 4): this line serves talk options AND deck cards (Hành sự, doors' members via jdoor/jone); a deck card costs cardCost (j2, what act() spends),
+   a talk option talkK. A deck card = a member of deck, or a copy that carries its khắc as a number in k (talk options keep k for the AOUT key). */
+function optK(a){try{if(a&&(typeof a.k==="number"||(typeof deck!=="undefined"&&Array.isArray(deck)&&deck.includes(a))))return cardCost(a)}catch(e){}return talkK(a)}
+window.optK=optK;
+optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=optK(a);
  const kx=a.kem?" · kèm: "+a.kem:"";/* ACT-MOVE-6: a side effect that comes either way (jtoil look reaction) */
  if(a.k&&AOUT[a.k]){return kitParse(actLineRaw(a.k,rolled?word(o):"",[`${tc} khắc`,fmt(a.c||{})].filter(Boolean).join(", "))+kx)}/* ACT-MOVE-6: kit rows like every other path (was the raw line: an empty card body where the frame does not re-parse) */
  /* ACT-MOVE-6 law 3: an x that already carries its own kit labels (odds word · thành: … · hỏng: …, e.g. jration «Lấy trộm son phấn») is passed whole — never nested inside one «thành:» row */
