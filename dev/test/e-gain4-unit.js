@@ -39,7 +39,8 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(
      Lr=talkOpts(P[i]).filter(Boolean);break}}finally{window.toilRival=tr0;window.toilOn=to0}
    chk(Lr.length>0,`c: a rival pop-up found (${Lr.length} options)`);
    const bad=Lr.filter(a=>/quý ta \+/.test(T(a.risk)));chk(!bad.length,`c: options with the praise on the Bại side ${bad.length} (${bad.slice(0,3).map(a=>T(a.n)).join(", ")})`);
-   const good=Lr.filter(a=>/quý ta \+/.test(T(a.x)));chk(good.length>0,`c: options with the praise on the Được side ${good.length}`)}
+   const good=Lr.filter(a=>/quý ta \+/.test(T(a.x)));chk(good.length>0,`c: options with the praise on the Được side ${good.length}`);
+   const dup=Lr.filter(a=>(T(a.x).match(/chuộng giản dị: quý ta \+/g)||[]).length>1);chk(!dup.length,`c: options with the praise twice ${dup.length} (${dup.slice(0,3).map(a=>T(a.n)).join(", ")})`)}
   /* (d) */
   {let n=0,bad=[],help=null;/* same world as (c): a second AA.scen builds another world */for(const dt of [0,1,2])for(const sf of AA.surfaces().filter(s=>s.place)){AA.restore();S.turn=(S.turn||0)+dt;AA.show(sf);const P=curPeople();
     P.forEach((pp,i)=>{if(pp.kind!=="rival"&&pp.kind!=="hh")return;let A=[];try{A=talkOpts(pp)}catch(e){return}

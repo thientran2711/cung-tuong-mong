@@ -171,9 +171,12 @@ function memo(k,f){k=k+"#"+stamp();if(MC.c.has(k))return MC.c.get(k);const r=f()
    if(m.a){/* the option fields the kit line reads (optLine: odds · tốn · được · hỏng) = the picked member's own */for(const f of ["o","oi","inner","c","w","l","lx","act","pk"])if(m.a[f]!=null)d[f]=m.a[f];d.x=[nm,m.a.x].filter(Boolean).join(": ");
     /* E-GAIN4 (d), law 3 — the jdoor E-GAIN3b rule on the one-tap button: a picked talk way whose raw x names no gain (its x is only its price:
        «Dò la: Bạc −17», its «thành: chứng cứ +1, Tâm cơ +2» sits in its own full line) carries the gain of that own line (doorGain), so Thành is never the price */
-    try{const dg=typeof doorGain==="function"?doorGain([String(m.x||"")]):"";if(dg&&txt(dg)!==txt(doorGain([String(m.a.x||"")]))){
-     /* the raw pieces that only repeat its price (already in Tốn from c) or a gain already named are dropped; any other raw piece (a wait, a note) stays after the gain */
-     const ct=txt(typeof fmt==="function"?fmt(m.a.c||{}):""),gt=txt(dg);const keep=String(m.a.x||"").split(" · ").filter(q=>txt(q)&&!(ct&&ct.includes(txt(q)))&&!gt.includes(txt(q)));
+    try{const RP=String(m.a.x||"").split(" · "),rider=q=>typeof TOILV==="object"&&TOILV&&TOILV.gain(txt(q));/* the dress verdict (jtoil) rides on every option: not the way's own gain */
+     const dg=typeof doorGain==="function"?doorGain([String(m.x||"")]):"";if(dg&&!doorGain([RP.filter(q=>!rider(q)).join(" · ")])){
+     /* the raw pieces that only repeat its price (already in Tốn from c) or a gain already named (compared without digits: doorGain prints marks) are dropped;
+        any other raw piece (a wait, a note) stays after the gain */
+     const nd=q=>txt(q).replace(/\d+/g,"").replace(/[+]+/g,"+").replace(/[-−]+/g,"−");const ct=nd(typeof fmt==="function"?fmt(m.a.c||{}):""),gt=nd(dg);
+     const keep=RP.filter(q=>txt(q)&&!(ct&&ct.includes(nd(q)))&&!gt.includes(nd(q)));
      d.x=[`${nm}: ${dg.replace(/^được:\s*/,"")}`,...keep].join(" · ")}}catch(e){}}
    else{d.o=oddsM(m);const ln=txt(m.x).replace(/^(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững) · /,"");d.x=`${nm} · ${ln}`}
    d.open=()=>{if(!goOne(doorPP(p,curPeople().indexOf(p),r.k),r))doorOpen(p,r.k)}}}

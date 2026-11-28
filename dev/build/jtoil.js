@@ -267,7 +267,8 @@ if(typeof leAttire==="function"){const la0=leAttire;
    /* E-GAIN4 (c), law 3 / KIT 6 kaRows: her verdict on the look comes with the talk whatever its roll; a GAIN piece («nàng ta chuộng giản dị: quý ta +N»,
       «nàng ta bớt ghen (Ghen -N)») goes to Được (the option's x), only the LOSS pieces (frown, ghen +) stay on the risk (Mất / Bại) side */
    const PC=String(e.txt||"").split(" · ").filter(Boolean),gx=TOILV.split?PC.filter(TOILV.gain):[],rx=PC.filter(t=>!gx.includes(t));
-   return A.map(a=>{if(!a)return a;const o=Object.assign({},a,{risk:[a.risk,...rx].filter(Boolean).join(" · ")||undefined});if(gx.length)o.x=[a.x,...gx].filter(Boolean).join(" · ");const r0=o.run,g0=o.go,f0=o.fail;
+   return A.map(a=>{if(!a)return a;const has=(f,t)=>String(f||"").replace(/<[^>]+>/g,"").includes(t);/* a one-tap door (jone) already carries its picked way's line, verdict included: never twice */
+    const o=Object.assign({},a,{risk:[a.risk,...rx.filter(t=>!has(a.risk,t))].filter(Boolean).join(" · ")||undefined});const g2=gx.filter(t=>!has(a.x,t));if(g2.length)o.x=[a.x,...g2].filter(Boolean).join(" · ");const r0=o.run,g0=o.go,f0=o.fail;
     if(r0)o.run=function(){toilRival(v,true);return r0.apply(this,arguments)};else{o.go=function(){toilRival(v,true);return g0?g0.apply(this,arguments):undefined};o.fail=function(){toilRival(v,true);return f0?f0.apply(this,arguments):undefined}}return o})}
  }catch(e){console.error("toil talkOpts",e)}return A}})();
 function toilLook(){const rec=toilToday(S);const mk=toilMk(rec);const dr=toilDress(S,toilFOf(null));return{mk,dv:dr.v,showy:dr.style==="showy",plain:dr.style==="plain"}}
