@@ -1,0 +1,133 @@
+05:49:50 START {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 99, "year": 6, "age": 24}
+05:51:10 CHANGE {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 99, "year": 6, "age": 24} -> {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 91, "year": 6, "age": 24}
+05:52:11 CHANGE {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 91, "year": 6, "age": 24} -> {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 99, "year": 6, "age": 24}
+05:53:51 CHANGE {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 99, "year": 6, "age": 24} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 89, "year": 6, "age": 24}
+05:55:12 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 89, "year": 6, "age": 24} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 100, "year": 6, "age": 24}
+05:58:54 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 98, "year": 6, "age": 24} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 92, "year": 6, "age": 24}
+06:00:15 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 92, "year": 6, "age": 24} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 100, "year": 6, "age": 24}
+06:05:37 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 100, "year": 6, "age": 24} -> {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 99, "year": 6, "age": 24}
+06:08:38 CHANGE {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 99, "year": 6, "age": 24} -> {"ill": {"k": "tambenh", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 94, "year": 6, "age": 24}
+06:12:20 CHANGE {"ill": {"k": "tambenh", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 98, "year": 6, "age": 24} -> {"ill": {"k": "tambenh", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 88, "year": 6, "age": 24}
+06:13:21 CHANGE {"ill": {"k": "tambenh", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 88, "year": 6, "age": 24} -> {"ill": {"k": "tambenh", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 96, "year": 6, "age": 24}
+06:19:24 CHANGE {"ill": {"k": "tambenh", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 95, "year": 6, "age": 24} -> {"ill": {"k": "tambenh", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 75, "year": 7, "age": 25}
+06:21:04 CHANGE {"ill": {"k": "tambenh", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 75, "year": 7, "age": 25} -> {"ill": {"k": "tambenh", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 88, "year": 7, "age": 25}
+06:23:05 CHANGE {"ill": {"k": "tambenh", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 88, "year": 7, "age": 25} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 78, "year": 7, "age": 25}
+06:24:46 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 78, "year": 7, "age": 25} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 93, "year": 7, "age": 25}
+06:38:13 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 95, "year": 7, "age": 25} -> {"ill": {"k": "matngu", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 95, "year": 7, "age": 25}
+06:40:34 START {"ill": {"k": "matngu", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 95, "year": 7, "age": 25}
+06:40:51 START {"ill": {"k": "matngu", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 95, "year": 7, "age": 25}
+06:42:12 CHANGE {"ill": {"k": "matngu", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 95, "year": 7, "age": 25} -> {"ill": {"k": "matngu", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 88, "year": 7, "age": 25}
+ALERT
+06:42:19 START {"ill": {"k": "matngu", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 88, "year": 7, "age": 25}
+06:42:30 START {"ill": {"k": "matngu", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 88, "year": 7, "age": 25}
+06:42:48 START {"ill": {"k": "matngu", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 88, "year": 7, "age": 25}
+06:43:48 CHANGE {"ill": {"k": "matngu", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 88, "year": 7, "age": 25} -> {"ill": {"k": "matngu", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 93, "year": 7, "age": 25}
+06:45:09 CHANGE {"ill": {"k": "matngu", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 93, "year": 7, "age": 25} -> {"ill": {"k": "matngu", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 83, "year": 7, "age": 25}
+06:46:09 CHANGE {"ill": {"k": "matngu", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 83, "year": 7, "age": 25} -> {"ill": {"k": "matngu", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 92, "year": 7, "age": 25}
+06:47:10 CHANGE {"ill": {"k": "matngu", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 92, "year": 7, "age": 25} -> {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 82, "year": 7, "age": 25}
+06:49:11 CHANGE {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 85, "year": 7, "age": 25} -> {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 90, "year": 7, "age": 25}
+06:52:32 CHANGE {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 89, "year": 7, "age": 25} -> {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 74, "year": 7, "age": 25}
+06:53:13 CHANGE {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 74, "year": 7, "age": 25} -> {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 87, "year": 7, "age": 25}
+06:53:53 CHANGE {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 87, "year": 7, "age": 25} -> {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 72, "year": 7, "age": 25}
+06:55:14 CHANGE {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 72, "year": 7, "age": 25} -> {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 85, "year": 7, "age": 25}
+06:56:54 CHANGE {"ill": {"k": "matngu", "st": 3, "known": true}, "doctor": 0, "pray": 0, "suc": 85, "year": 7, "age": 25} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 70, "year": 8, "age": 26}
+06:58:15 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 70, "year": 8, "age": 26} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 86, "year": 8, "age": 26}
+07:02:37 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 86, "year": 8, "age": 26} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 80, "year": 8, "age": 26}
+07:10:21 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 78, "year": 8, "age": 26} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 83, "year": 8, "age": 26}
+07:14:43 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 84, "year": 8, "age": 26} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 79, "year": 8, "age": 26}
+07:16:24 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 79, "year": 8, "age": 26} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 84, "year": 8, "age": 26}
+07:20:46 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 80, "year": 8, "age": 26} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 85, "year": 8, "age": 26}
+07:30:30 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 87, "year": 8, "age": 26} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 77, "year": 8, "age": 26}
+07:31:51 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 77, "year": 8, "age": 26} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 82, "year": 8, "age": 26}
+07:33:15 START {"ill": null, "doctor": 0, "pray": 0, "suc": 87, "year": 8, "age": 26}
+07:55:25 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 90, "year": 9, "age": 27} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 83, "year": 9, "age": 27}
+07:56:05 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 83, "year": 9, "age": 27} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 91, "year": 9, "age": 27}
+08:08:31 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 93, "year": 9, "age": 27} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 83, "year": 9, "age": 27}
+08:09:51 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 83, "year": 9, "age": 27} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 92, "year": 9, "age": 27}
+08:10:52 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 92, "year": 9, "age": 27} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 87, "year": 9, "age": 27}
+08:11:52 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 87, "year": 9, "age": 27} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 92, "year": 9, "age": 27}
+08:12:33 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 92, "year": 9, "age": 27} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 82, "year": 9, "age": 27}
+08:13:33 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 82, "year": 9, "age": 27} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 91, "year": 9, "age": 27}
+08:15:14 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 91, "year": 9, "age": 27} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 86, "year": 9, "age": 27}
+08:16:55 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 90, "year": 9, "age": 27} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 85, "year": 10, "age": 28}
+08:18:16 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 85, "year": 10, "age": 28} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 90, "year": 10, "age": 28}
+08:19:56 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 90, "year": 10, "age": 28} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 85, "year": 10, "age": 28}
+08:21:57 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 89, "year": 10, "age": 28} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 84, "year": 10, "age": 28}
+08:23:45 START {"ill": null, "doctor": 0, "pray": 0, "suc": 80, "year": 10, "age": 28}
+08:24:05 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 80, "year": 10, "age": 28} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 90, "year": 10, "age": 28}
+08:39:53 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 92, "year": 10, "age": 28} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 81, "year": 10, "age": 28}
+08:41:54 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 81, "year": 10, "age": 28} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 92, "year": 10, "age": 28}
+08:53:19 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 89, "year": 10, "age": 28} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 94, "year": 10, "age": 28}
+09:05:25 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 96, "year": 11, "age": 29} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 95, "year": 11, "age": 29}
+09:07:06 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 95, "year": 11, "age": 29} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 90, "year": 11, "age": 29}
+09:08:27 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 90, "year": 11, "age": 29} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 85, "year": 11, "age": 29}
+09:09:07 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 85, "year": 11, "age": 29} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 90, "year": 11, "age": 29}
+09:10:48 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 90, "year": 11, "age": 29} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 95, "year": 11, "age": 29}
+09:13:57 START {"ill": null, "doctor": 0, "pray": 0, "suc": 95, "year": 11, "age": 29}
+09:26:44 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 98, "year": 11, "age": 29} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 74, "year": 11, "age": 29}
+09:27:24 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 74, "year": 11, "age": 29} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 92, "year": 11, "age": 29}
+09:29:25 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 93, "year": 11, "age": 29} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 99, "year": 11, "age": 29}
+09:33:07 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 99, "year": 11, "age": 29} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 89, "year": 11, "age": 29}
+09:33:47 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 89, "year": 11, "age": 29} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 99, "year": 11, "age": 29}
+09:35:08 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 99, "year": 11, "age": 29} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 67, "year": 12, "age": 30}
+09:36:09 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 67, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 85, "year": 12, "age": 30}
+09:36:49 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 85, "year": 12, "age": 30} -> {"ill": {"k": "thuydau", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 92, "year": 12, "age": 30}
+09:37:49 CHANGE {"ill": {"k": "thuydau", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 92, "year": 12, "age": 30} -> {"ill": {"k": "thuydau", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 98, "year": 12, "age": 30}
+09:39:10 CHANGE {"ill": {"k": "thuydau", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 98, "year": 12, "age": 30} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 87, "year": 12, "age": 30}
+09:40:31 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 87, "year": 12, "age": 30} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 97, "year": 12, "age": 30}
+09:41:31 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 97, "year": 12, "age": 30} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 81, "year": 12, "age": 30}
+09:42:12 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 81, "year": 12, "age": 30} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 86, "year": 12, "age": 30}
+09:42:32 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 86, "year": 12, "age": 30} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 96, "year": 12, "age": 30}
+09:44:53 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 95, "year": 12, "age": 30} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 79, "year": 12, "age": 30}
+09:45:13 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 79, "year": 12, "age": 30} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 93, "year": 12, "age": 30}
+09:45:54 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 93, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 77, "year": 12, "age": 30}
+09:46:54 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 77, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 94, "year": 12, "age": 30}
+09:48:15 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 94, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 88, "year": 12, "age": 30}
+09:48:35 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 88, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 95, "year": 12, "age": 30}
+09:49:36 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 95, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 89, "year": 12, "age": 30}
+09:49:56 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 89, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 95, "year": 12, "age": 30}
+09:53:18 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 96, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 84, "year": 12, "age": 30}
+09:53:58 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 84, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 96, "year": 12, "age": 30}
+09:54:18 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 96, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 84, "year": 12, "age": 30}
+09:55:18 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 84, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 97, "year": 12, "age": 30}
+09:56:19 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 97, "year": 12, "age": 30} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 85, "year": 13, "age": 31}
+09:56:59 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 85, "year": 13, "age": 31} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 97, "year": 13, "age": 31}
+09:57:40 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 97, "year": 13, "age": 31} -> {"ill": {"k": "thuydau", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 90, "year": 13, "age": 31}
+09:58:20 CHANGE {"ill": {"k": "thuydau", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 90, "year": 13, "age": 31} -> {"ill": {"k": "thuydau", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 96, "year": 13, "age": 31}
+10:01:22 CHANGE {"ill": {"k": "thuydau", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 96, "year": 13, "age": 31} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 85, "year": 13, "age": 31}
+10:02:22 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 85, "year": 13, "age": 31} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 79, "year": 13, "age": 31}
+10:03:02 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 79, "year": 13, "age": 31} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 93, "year": 13, "age": 31}
+10:04:10 START {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 93, "year": 13, "age": 31}
+10:04:30 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 93, "year": 13, "age": 31} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 77, "year": 13, "age": 31}
+10:05:11 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 77, "year": 13, "age": 31} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 92, "year": 13, "age": 31}
+10:05:51 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 92, "year": 13, "age": 31} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 76, "year": 13, "age": 31}
+10:06:31 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 76, "year": 13, "age": 31} -> {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 91, "year": 13, "age": 31}
+10:07:32 CHANGE {"ill": {"k": "thuydau", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 91, "year": 13, "age": 31} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 92, "year": 13, "age": 31}
+10:08:53 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 92, "year": 13, "age": 31} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 86, "year": 13, "age": 31}
+10:09:13 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 86, "year": 13, "age": 31} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 92, "year": 13, "age": 31}
+10:09:53 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 92, "year": 13, "age": 31} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 86, "year": 13, "age": 31}
+10:10:33 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 86, "year": 13, "age": 31} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 93, "year": 13, "age": 31}
+10:11:54 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 93, "year": 13, "age": 31} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 81, "year": 13, "age": 31}
+10:12:14 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 81, "year": 13, "age": 31} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 93, "year": 13, "age": 31}
+10:13:15 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 93, "year": 13, "age": 31} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 81, "year": 13, "age": 31}
+10:13:35 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 81, "year": 13, "age": 31} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 94, "year": 13, "age": 31}
+10:52:15 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 98, "year": 14, "age": 32} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 88, "year": 14, "age": 32}
+10:53:56 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 88, "year": 14, "age": 32} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 98, "year": 15, "age": 33}
+10:54:25 START {"ill": null, "doctor": 0, "pray": 0, "suc": 98, "year": 15, "age": 33}
+10:58:07 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 96, "year": 15, "age": 33} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 91, "year": 15, "age": 33}
+10:59:07 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 91, "year": 15, "age": 33} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 96, "year": 15, "age": 33}
+11:04:51 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 96, "year": 15, "age": 33} -> {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 96, "year": 15, "age": 33}
+11:07:52 CHANGE {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 96, "year": 15, "age": 33} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 91, "year": 15, "age": 33}
+11:09:54 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 90, "year": 15, "age": 33} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 96, "year": 15, "age": 33}
+11:10:34 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 96, "year": 15, "age": 33} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 90, "year": 15, "age": 33}
+11:11:14 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 90, "year": 15, "age": 33} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 96, "year": 15, "age": 33}
+11:16:17 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 96, "year": 15, "age": 33} -> {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 93, "year": 15, "age": 33}
+11:28:24 CHANGE {"ill": {"k": "tambenh", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 95, "year": 15, "age": 33} -> {"ill": {"k": "tambenh", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 93, "year": 15, "age": 33}
+11:31:46 CHANGE {"ill": {"k": "tambenh", "st": 2, "known": true}, "doctor": 0, "pray": 0, "suc": 93, "year": 15, "age": 33} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 86, "year": 16, "age": 34}
+11:32:47 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 86, "year": 16, "age": 34} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 92, "year": 16, "age": 34}
+11:42:12 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 95, "year": 16, "age": 34} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 88, "year": 16, "age": 34}
+11:43:33 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 88, "year": 16, "age": 34} -> {"ill": null, "doctor": 0, "pray": 0, "suc": 95, "year": 16, "age": 34}
+11:44:41 START {"ill": null, "doctor": 0, "pray": 0, "suc": 95, "year": 16, "age": 34}
+11:45:02 CHANGE {"ill": null, "doctor": 0, "pray": 0, "suc": 95, "year": 16, "age": 34} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 95, "year": 16, "age": 34}
+11:47:43 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 93, "year": 16, "age": 34} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 86, "year": 16, "age": 34}
+11:48:44 CHANGE {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 86, "year": 16, "age": 34} -> {"ill": {"k": "phonghan", "st": 1, "known": true}, "doctor": 0, "pray": 0, "suc": 92, "year": 16, "age": 34}
