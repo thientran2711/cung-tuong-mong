@@ -55,3 +55,8 @@ Previews of the 4 j7 sites now print `-opDnSee(v,S,…)`, the amount that really
 ## Notes for Foreman D
 - The text hygiene the worker found (choice lines with the card body glued in brackets, j3 logChoice) is real and still open. It belongs to the KK / qc-noise owner.
 - Shots were deleted from scratch with this verdict; none are in git.
+
+## R3 restack (Foreman D order 28/11 09:47Z): **PASS f867bb26** = review/d-row37-oan-noise-r3 (FF from review/lr-rules-r3 aecbc267, which contains LIVE c03d6ee7 + 3b fix 2d9f07c7)
+- Merge 19dc854d → aecbc267. Hand hunks: j7.js rvmusk: «Cảnh báo» keeps D-ROW37 (affAdd BAL.ghetHit.warn + opDnSee) and «Tố lên Hoàng thượng» keeps punish-tier `fall(a,…,null,"nang")`; jbal2.js: the PUNISH-TIER block and the BAL.ghetHit block are both kept. index.html rebuilt; it matches the committed file apart from the CTM_BI build line. sw.js V by hand (CDN host blocked), PRE kept, assets.json unchanged.
+- Gates on f867bb26: d-row37 ALL PASS 13 · oan-pace ALL PASS 33 · ghet-door-scan 0 FALL / 0 RAISE-OAN (no new direct falls came in from r3) · one-core guard + bind PASS · undef-scan PASS (378 names).
+- quickcheck part 2 vs LIVE c03d6ee7: open 2361 ms, 0 errors, **old save from LIVE ok, plays a buổi**. **Perf gate FAIL by a hair:** tasks>200 in a day life 74/73/76 > ceiling 72; worst task median 3967 vs limit 3930. **The same gate on bare aecbc267 (no D-ROW37) also FAILs:** 73 > 72, one run 4180 ms worst task. The live runs on this box swing 30–68 tasks. So this is box load and/or the r3 bundle, not this branch (its delta is 9 logic lines + one BAL table). The perf gate should be re-run on a quiet box at landing.
