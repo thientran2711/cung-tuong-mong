@@ -95,16 +95,21 @@ function wkEval0(a,w,r){const notes=[];let v=WVAL[w.ti];
   v=Math.min(WCAP,v);const fx={};if(r.queen&&a===S)fx.hh=v;return{ok:true,fx,rel:v+2,v,notes}}
  return{ok:false,why:""}}
 /* give a work: two-way, same function for her and for every consort */
-function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w=e.wk;const ev=wkEval(a,w,r);if(!ev.ok)return"";a.inv.splice(ix,1);if(typeof giveTo==="function")giveTo.out=r===S?"sent":"take";/* K-GIFT-OUT (KK64): a work piece is always taken (no hand-back road) */
+function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w=e.wk;const ev=wkEval(a,w,r);if(!ev.ok)return"";a.inv.splice(ix,1);if(typeof giveTo==="function")giveTo.out=r===S?"sent":"take";/* K-GIFT-OUT (KK64): «sent» to her, else «take» — overwritten below by the receiver choice («back» / «found», d19-gift-npc) */
  const by=a===S?"Ngươi":`${rkName(a)} ${a.name}`,wn=`${w.n} (${WTIER[w.ti]})`;
  if(r==="emp"){S.wkE=wkEmpLog();S.wkE.push({w:wk(),by:key(a),kind:w.kind});ap(a,ev.fx);if(a!==S)newsAdd(a,"gift",`${by} dâng ${wn} tự tay làm lên Hoàng thượng.`);
   return `${by} dâng ${wn} lên Hoàng thượng${ev.notes.length?" ("+ev.notes.join("; ")+")":""}. ${a===S?fmt(ev.fx):"Sủng +"+ev.fx.sung}. `}
  if(r==="th"){ap(a,ev.fx);if(a!==S)newsAdd(a,"gift",`${by} dâng ${wn} tự tay làm lên Thái hậu.`);return `${by} dâng ${wn} lên Thái hậu${ev.notes.length?" ("+ev.notes.join("; ")+")":""}. ${a===S?fmt(ev.fx):""}`}
  if(r==="maid"){ap(a,ev.fx);return `${by} tặng ${a.maid.name} ${wn}. Thiện cảm ${a.maid.name} +${ev.fx.maid}. `}
- relAdd(a,r,ev.rel);if(ev.fx.hh)ap(a,{hh:ev.fx.hh});
- const ent=Object.assign({},e,{wk:Object.assign({},w,{from:key(a)})});
- if(r===S){pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");newsAdd(a,"gift",`${by} tặng ngươi ${wn} tự tay làm.`,true);return `${by} sai người mang ${wn} sang tặng ngươi. `}
- invAdd(r,ent);if(a!==S)newsAdd(a,"gift",`${by} tặng ${rkName(r)} ${r.name} ${wn} tự tay làm.`);
+ const ent=Object.assign({},e,{wk:Object.assign({},w,{from:key(a)})});const keepGain=()=>{relAdd(a,r,ev.rel);if(ev.fx.hh)ap(a,{hh:ev.fx.hh})};
+ if(r===S){keepGain();pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");newsAdd(a,"gift",`${by} tặng ngươi ${wn} tự tay làm.`,true);return `${by} sai người mang ${wn} sang tặng ngươi. `}
+ /* d19-gift-npc (law 1 + 11): a work given to an NPC gets HER answer too, as every item (jrcv rcvGiftIn: Nhận / Trả lại quà / Xét nghiệm, the
+    OD 18/11 ~21:15Z receiver choice) — before, a work skipped it, so an NPC could never send a work back. A work sent back goes home to the
+    giver's chest (rcvGiftIn copies the original piece back, law 6c) and buys no liking (law 3). */
+ const ans=typeof rcvGiftIn==="function"?rcvGiftIn(a,r,Object.assign({},e)):null;
+ if(ans==="back"){if(typeof giveTo==="function")giveTo.out="back";return `${r.name} trả lại ${wn} cho ${NM(a)}. `}
+ if(ans&&!["take","check"].includes(ans)){if(typeof giveTo==="function")giveTo.out="found";return ans}
+ keepGain();invAdd(r,ent);if(a!==S)newsAdd(a,"gift",`${by} tặng ${rkName(r)} ${r.name} ${wn} tự tay làm.`);
  return `${by} tặng ${rkName(r)} ${r.name} ${wn}${ev.notes.length?" ("+ev.notes.join("; ")+")":""}: thiện cảm +${ev.rel}. `}
 (function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];if(e&&e.wk)return wkGive(a,r,ix)||"";return g0.apply(this,arguments)}})();
 /* sell outside the palace: silver, risk of Danh if found out (same odds for every consort) */
