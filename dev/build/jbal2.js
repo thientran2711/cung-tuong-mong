@@ -197,13 +197,13 @@ BAL.mort={on:1,playerFloorYears:0,
 /* TUANTANG-WARN (MAIN 183, 28/11; jttw.js): signs + tiered roads before a tuẫn táng. warnO = warn while her chance to be spared is below
    this (odds %, the «Rất vững» cut BAL.odds.cut[5]: any real risk warns); cd.sign / cd.quiet = months between «Lời đồn hậu sự» cards while the Emperor shows a sign / not; cap = the most the
    roads can protect (j3 odds base points, and the % a jmort hit is averted) so the end can still happen; npcP = % an NPC consort at risk takes
-   a road per beat (law 1). road: c = Tốn, p = odds, pz = protection on success, rel = tie with the heir's mother (path A), th = Thái hậu (path B),
+   a road per beat (law 1). road: c = Tốn, p = odds, pz = protection on success, rel = tie with the heir's mother (path A; frel on a failed road), th = Thái hậu (path B),
    w = extra gain on success, l = loss on failure, fw = what a failure still gives (law 3). NHẸ nhe · VỪA bac (Bạc) = sl (Sức) · NẶNG nang (Sủng). */
 BAL.mort.ttw={on:1,warnO:83,cd:{sign:3,quiet:12},cap:40,npcP:50,
- road:{nhe:{c:{suc:-8},p:65,pz:6,rel:6,th:3,fw:{duc:1}},
-  bac:{c:{bac:-60},p:55,pz:12,rel:10,th:5,l:{danh:-2},fw:{duc:1}},
-  sl:{c:{suc:-18},p:55,pz:12,rel:10,th:5,l:{sung:-3},fw:{duc:1}},
-  nang:{c:{sung:-15},p:75,pz:20,rel:4,th:2,w:{duc:3,suc:10},l:{danh:-3},fw:{suc:10}}}};
+ road:{nhe:{c:{suc:-8},p:65,pz:6,rel:6,frel:2,th:3,fw:{duc:1}},
+  bac:{c:{bac:-60},p:55,pz:12,rel:10,frel:3,th:5,l:{danh:-2},fw:{duc:1}},
+  sl:{c:{suc:-18},p:55,pz:12,rel:10,frel:3,th:5,l:{sung:-3},fw:{duc:1}},
+  nang:{c:{sung:-15},p:75,pz:20,rel:4,frel:1,th:2,w:{duc:3,suc:10},l:{danh:-3},fw:{suc:10}}}};
 /* D49 collection milestones (jcol): [items, Phúc duyên once per life (OD L46: ~+5/+10/+20/+35), danh hiệu (VANPHONG cổ trang)]; keep = lives remembered in the once-only ledger */
 BAL.col={ms:[[20,5,"Tích bảo"],[50,10,"Tàng bảo"],[100,20,"Bách bảo"],[200,35,"Vạn bảo các chủ"]],keep:80};
 /* TÂN QUÂN LẬP UY (jreign, owner 16/11 D5): the Emperor's side story + her faction road. Months from the accession: at[c] opens chapter c+1;

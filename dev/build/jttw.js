@@ -40,7 +40,7 @@ window.ttwRisk=function(){if(ttwOff())return null;const B=T(),pz=ttwSt().pz;
  try{const m=S.vgAlly&&typeof manById==="function"&&manById(S.vgAlly);if(m&&m.tinh>=BAL.tinhLv.ally&&S.rank<7)return null}catch(e){}/* j24: a Vương gia ally takes her out */
  if(S.rank>=7)return null;const h=ttwHeir();if(h&&!h.v)return null;/* her own son → Hoàng thái hậu */
  let k="fav",v=null,spare=1;
- if(h&&h.v&&h.v.alive&&!h.v.out){v=h.v;k="th";let b=BAL.odb.j3.odO+(S.duc||0)/2+(v.rel||0)/2+pz;try{if(succNpcClaims(v,h.k))b-=12}catch(e){}spare=od(b)/100}
+ if(h&&h.v&&h.v.alive&&!h.v.out){v=h.v;k="th";let b=j3SpareB(v)+pz;try{if(succNpcClaims(v,h.k))b-=12}catch(e){}spare=od(b)/100}
  const f=favHit(pz);spare*=1-f;if(k==="fav"&&!f)return null;
  const o=oddsCl(Math.round(spare*100));return{k,v,h,o,f:f>0}};
 window.ttwPz=function(){return S&&S.ttw&&!ttwOffSoft()?S.ttw.pz||0:0};
@@ -75,12 +75,12 @@ PEND.ttw=pp=>{try{const r=ttwRisk();if(!r)return null;const O=ttwRoads(r);
  const o=O.map(x=>{const fx=ttwCost(x.c);const y={n:x.n,fx,j67:ttwLine(x,r),go:()=>ttwGo(x.id)};
   if(fx.bac&&(S.bac||0)<-fx.bac)y.need=[{t:`✗ Bạc ${-fx.bac} (có ${S.bac||0})`,ok:false}];return y});o.push({n:"Để sau",fx:{}});
  return{t:ttwText(r),o,who:pMe()}}catch(e){console.error(e);return null}};
-function ttwFire(){const d=mkP("ttw",{});if(!d)return false;Q.push({t:"Lời đồn hậu sự",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp});try{evBusyMark()}catch(e){}return true}
+function ttwFire(){const d=mkP("ttw",{});if(!d)return false;Q.push({t:"Lời đồn hậu sự",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,must:1});/* must: the event gate (j68 evGate) may hold or DROP optional cards; a life-or-death warning is never dropped */try{evBusyMark()}catch(e){}return true}
 function ttwGo(id){const r=ttwRisk();if(!r)return;const B=T(),R=B.road[id],st=ttwSt();const o=ttwRoads(r).find(x=>x.id===id);if(!o)return;
  {const c=ttwCost(o.c);if(c.bac&&(S.bac||0)<-c.bac)return}
  const p=odA(S,o.p);const before=rsnap();apply(ttwCost(o.c));const ok=roll(p);st.n++;(st.done=st.done||{})[id]=(st.done[id]||0)+1;
  if(ok){st.pz=Math.min(B.cap,st.pz+R.pz);apply(ttwWin(id,r));if(r.k==="th"&&R.rel)try{relAdd(r.v,S,R.rel)}catch(e){}}
- else{apply(R.l||{});apply(R.fw||{});if(r.k==="th"&&R.rel)try{relAdd(r.v,S,Math.round(R.rel/3))}catch(e){}}
+ else{apply(R.l||{});apply(R.fw||{});if(r.k==="th"&&R.rel)try{relAdd(r.v,S,R.frel)}catch(e){}}
  log(`Lời đồn hậu sự: ${o.n}. ${ok?"Thành.":"Không thành."}`);if(!window.__bot)try{resultShow(`Lời đồn hậu sự: ${o.n}`,before,ok)}catch(e){}}
 /* NPC consorts at risk B take a road too (law 1) */
 function ttwNpc(){const B=T(),F=BAL.mort.fate;try{for(const v of liveRivals(false)){if((v.kids||[]).some(k=>k.alive)||(v.sung||0)<F.tuanSung)continue;if(!roll(B.npcP))continue;

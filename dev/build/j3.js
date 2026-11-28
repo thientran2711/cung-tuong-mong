@@ -228,9 +228,11 @@ function emperorDies(ev){if(ev)log(ev);let h=S.heir&&S.heir.k.alive?S.heir:null;
   const v=h.v,live=v.alive&&!v.out;
   if(S.rank>=7)return over("Mẫu hậu Hoàng thái hậu",pre+`${h.k.name}, con của ${v.name}, lên ngôi. Ngươi là đích mẫu, được tôn làm Mẫu hậu Hoàng thái hậu${live?`; nhưng ${v.name} cũng được tôn Thánh mẫu, cùng ngươi chia đôi hậu cung`:""}.`,"Thành Thái hậu (đích mẫu)",true);
   if(!live)return over("Thái phi",pre+`${h.k.name} lên ngôi. Mẹ ruột tân đế đã không còn, không ai truy cứu chuyện cũ. Ngươi thành Thái phi.`,"Thành Thái phi",true);
-  const pz=typeof ttwPz==="function"?ttwPz():0;const o=od(BAL.odb.j3.odO+S.duc/2+v.rel/2+pz);/* TUANTANG-WARN: + the roads she took (jttw) */
+  const pz=typeof ttwPz==="function"?ttwPz():0;const o=od(j3SpareB(v)+pz);/* TUANTANG-WARN: + the roads she took (jttw) */
   if(roll(o))return over("Thái phi",pre+`${h.k.name} lên ngôi. Tân Thái hậu ${v.name} xét lại chuyện cũ (cơ may: ${word(o)}) rồi tha cho ngươi${pz?"; những việc ngươi lo liệu trước đã có người nhớ":""}, cho dời đến Thọ Khang cung.`,"Thành Thái phi",true);
   return die(`${pre}Tân Thái hậu ${v.name} xét lại chuyện cũ (cơ may: ${word(o)})${pz?", những việc ngươi lo liệu trước không đủ xoay chuyển":""}, ban lụa trắng, ép ngươi tuẫn táng theo tiên đế`)}
+/* the new Thái hậu's mercy base (one formula: j3 on the day + jttw warnings) */
+function j3SpareB(v){return BAL.odb.j3.odO+S.duc/2+v.rel/2}
 function record(fate){const p=store.get("cung-kiep")||[];const e={n:S.name,o:S.origin.n,r:typeof lifeTopRank==="function"?lifeTopRank(S).n:RANKS[S.rank].n,age:S.age,f:fate+(S.st.tag?" · "+S.st.tag:"")};
   if(S.recorded&&p.length)p[0]=e;else p.unshift(e);S.recorded=true;store.set("cung-kiep",p.slice(0,12))}
 function die(why){over("Hồng nhan bạc mệnh",why+".",why)}
