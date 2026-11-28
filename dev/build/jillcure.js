@@ -8,6 +8,9 @@
    r3 (MAIN 185): Q1 the illness caps Sức tối đa by stage (BAL.illCure.sucCap, everyone); Q3 a child illness gives a sign before it can kill
    (j8 kidIllHit, BAL.kidIll): her child's card «<con> lâm bệnh» opens by itself with the odds and the roads in words (bạc «Xin thuốc» · Sủng
    «Cầu xin ngự y» · Sức «Thức trông»); NPC mothers take the same roads (jagacts2 kidAsk / kidWatch). Scan: dev/tools/kid-illness-scan.js.
+   r4 (MAIN 186, Foreman F s21g): a MILD illness was HUD-only — the card now opens by itself the moment she falls ill (every catchIll path,
+   any illness, nhẹ included); a cung nữ had no illness chip (j42 srvHud2), no road and false month odds → chip + Tĩnh dưỡng / Tự bốc thuốc /
+   Sang Thái y viện xin thuốc + the true line (her illness neither heals nor worsens by itself). Scan: dev/tools/illness-sign-scan.js.
    Numbers: BAL.illCure (jbal2), BAL.kidIll, BAL.ag.cx2, BAL.odb.j13, BAL.illDie, BAL.mort (law 4). Words: chanceW (kèm risk words, j1). */
 (function(){if(typeof illOf!=="function"||typeof ILL!=="object")return;
 const IC={opened:0,alarm:0,npc:0};window.IC=IC;
@@ -19,7 +22,10 @@ IC.sucCap=illSucCap;
 if(typeof sucCap==="function"){const s0=sucCap;sucCap=function(p){const c=s0.apply(this,arguments);try{return Math.min(c,illSucCap(p))}catch(e){return c}};window.sucCap=sucCap}
 const fit=p=>{try{if(p&&typeof p.suc==="number"){const c=sucCap(p);if(p.suc>c)p.suc=c}}catch(e){}};IC.fit=fit;
 /* the cap bites the moment the illness comes or worsens (not only at the next Sức change) */
-if(typeof catchIll==="function"){const c0=catchIll;catchIll=function(p){const r=c0.apply(this,arguments);fit(p);return r};window.catchIll=catchIll}
+/* r4 (MAIN 186, Foreman F s21g «Tâm bệnh · nhẹ» on the HUD only): the moment SHE falls ill — any illness, any path (j13 month, jemoact mood,
+   jmort grief / age, jkh, jweather, jworld …, all through catchIll) — her card opens by itself once (illAlarm, when the screen is free), mild included */
+if(typeof catchIll==="function"){const c0=catchIll;catchIll=function(p){const had=!!illOf(p);const r=c0.apply(this,arguments);fit(p);
+ try{if(p===S&&!had&&!S.dead&&illOf(S)){S.illAlarm=1;IC.alarm++;IC.fell=(IC.fell||0)+1}}catch(e){}return r};window.catchIll=catchIll}
 /* the Sức tối đa row of the Sức help panel says why it is low */
 try{if(typeof HXNOW==="object"&&typeof HXNOW.suc==="function"){const h0=HXNOW.suc;HXNOW.suc=function(){const R=h0.apply(this,arguments);try{if(R&&S&&illSucCap(S)<100){const r=R.find(x=>x[0]==="Sức tối đa");if(r)r[1]=`${r[1]} · vì ${illName(S).toLowerCase()}`}}catch(e){}return R}}}catch(e){}
 /* the real monthly odds of an untreated illness (the same rolls as j13 illMonthP + jbal2 + jmort) */
@@ -36,6 +42,8 @@ function illDanger(p){const i=illOf(p);if(!i)return"";const d=ILL[i.k];
  if(i.mort)return `${illName(p)}. Thái y nói mạch yếu dần; thuốc thang chỉ giữ được thêm ít lâu.`;
  const o=illMonthOdds(p);if(!o)return"";const P=[`${illName(p)}.`];
  const cap=illSucCap(p),capW=cap<100?`Còn bệnh thì Sức tối đa chỉ ${cap}.`:"";
+ /* r4: a cung nữ is left out of the monthly illness roll (j42 srvIllWorld): her illness neither heals nor worsens by itself — say so, not month odds */
+ try{if(p===S&&typeof isSrv==="function"&&isSrv()){P.push(`Thân cung nữ không ai lo thuốc thang: bệnh không tự khỏi, cũng không tự nặng thêm.`);if(capW)P.push(capW);P.push(`Phải tự chạy chữa.`);return P.join(" ")}}catch(e){}
  if(!o.deadly){P.push(`Bệnh này không nguy đến tính mạng, nhưng còn bệnh thì mỗi tháng hao Sức. Không chữa, mỗi tháng tự khỏi: ${chanceW(o.cure)}.`);if(capW)P.push(capW);return P.join(" ")}
  if(i.st<3)P.push(`Không chữa, mỗi tháng tự khỏi: ${chanceW(o.cure)} · trở ${STG[i.st+1]}: ${chanceW(o.worse)}.`);
  P.push(i.st>=3?`Mỗi tháng không qua khỏi: ${chanceW(o.die3)}.`:`Đến lúc nguy kịch, mỗi tháng không qua khỏi: ${chanceW(o.die3)}.`);
@@ -46,14 +54,20 @@ const DOOR_K="hs-thaiy";
 const doorRow=()=>{try{return typeof DOOR==="object"&&DOOR?((DOOR.D||[]).find(r=>r.k===DOOR_K)||(DOOR.byK&&DOOR.byK(DOOR_K))||null):null}catch(e){return null}};
 /* the door card line: while she is ill, the danger line stands where «Chọn mức.» stood (the same card from the Hành sự door) */
 if(typeof DOOR==="object"&&DOOR&&DOOR.card){const c0=DOOR.card;DOOR.card=function(t,h,rows,who){try{const r=doorRow();if(r&&t===r.n&&S&&illOf(S))h=`${illDanger(S)} Chọn mức.`}catch(e){}return c0.call(this,t,h,rows,who)}}
-/* the cure cards stand in the deck as soon as she falls ill (a mid-buổi illness waited for the next deal before) */
-function illDeck(){if(!S||!illOf(S)||!Array.isArray(deck)||typeof illCards!=="function")return;try{for(const c of illCards())if(c&&!deck.some(a=>a&&a.n===c.n))deck.push(c)}catch(e){console.error("illDeck",e)}}
+/* the cure cards stand in the deck as soon as she falls ill (a mid-buổi illness waited for the next deal before).
+   r4 (law 11, life family): a cung nữ (isSrv) had NO cure road (srvCards holds none → a bare notice). She has the roads a servant really has:
+   Tĩnh dưỡng (nhẹ, no cost) · Tự bốc thuốc (nhẹ, Y thuật) · Sang Thái y viện xin thuốc (vừa, Sức) — no bạc road, so law 2 needs no match;
+   she cannot summon a thái y nor plead with Sủng (no consort rank). Same BAL.illCure odds as hers (law 4). */
+const SRV_WAYS=/^(Tĩnh dưỡng|Tự bốc thuốc|Sang Thái y viện xin thuốc)$/;
+function illList(){const L=illCards();try{if(typeof isSrv==="function"&&isSrv())return L.filter(c=>c&&SRV_WAYS.test(c.n))}catch(e){}return L}
+IC.srvWays=SRV_WAYS;
+if(typeof srvCards==="function"){const s0=srvCards;srvCards=function(){const X=s0.apply(this,arguments);try{if(S&&illOf(S)&&Array.isArray(X))for(const c of illList())if(c&&!X.some(a=>a&&a.n===c.n)){c.dom="";X.push(c)}}catch(e){console.error("srv ill cards",e)}return X};window.srvCards=srvCards}
+function illDeck(){if(!S||!illOf(S)||!Array.isArray(deck)||typeof illCards!=="function")return;try{for(const c of illList())if(c&&!deck.some(a=>a&&a.n===c.n))deck.push(c)}catch(e){console.error("illDeck",e)}}
 IC.deck=illDeck;
 /* ONE illness card: the door's tier rows (ONE.tierRows: nhẹ · vừa · nặng, one way per tier by the ONE pick) over the deck cards; every row runs act(i) */
 function illOpen(){if(!S||S.dead||!illOf(S)||(typeof Q!=="undefined"&&Q.length))return false;IC.opened++;
  const r=doorRow();
- const srv=typeof isSrv==="function"&&isSrv();
- if(r&&!srv&&typeof ONE==="object"&&ONE&&ONE.tierRows){illDeck();
+ if(r&&typeof ONE==="object"&&ONE&&ONE.tierRows){illDeck();
   const L=[];deck.forEach((a,i)=>{if(!a||!r.re||!r.re.test(String(a.n||"")))return;let why="";try{why=String(cardWhy(a)||"")}catch(e){}
    let k=1;try{k=cardCost(a)}catch(e){}const ok=!a.done&&!a.lock&&!why&&can(k)&&(typeof canPay!=="function"||canPay(a));
    if(!ok)why=why||(a.lock&&a.t)||(typeof canPay==="function"&&!canPay(a)?"không đủ bạc":"")||(typeof whyTime==="function"?whyTime(k):"")||"chưa làm được lúc này";

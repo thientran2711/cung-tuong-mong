@@ -53,7 +53,7 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
    /* (7) NPCs take the same roads at the same prices (law 1) */
    const npc=await p.evaluate(()=>{const v=liveRivals(true).find(x=>!x.coop&&x.alive!==false);if(!v)return null;const k0=BAL.illCure.npc;BAL.illCure.npc=100;const out={};
     try{out.ty=false;for(let n=0;n<8&&!out.ty;n++){v.ill={k:"lao",st:2,known:true};v.bac=100;v.sung=50;const b0=v.bac,n0=IC.npc;illMonthP(v);out.ty=IC.npc>n0&&b0-v.bac===BAL.illCure.tyBac}/* roll(100) is capped at BAL.odds.hi: retry */
-     v.ill={k:"lao",st:2,known:true};v.bac=0;v.sung=50;v.out=false;illMonthP(v);out.cau=IC.bestWay(v)[0]==="cau"&&(IC.npcW||{}).cau>=1;
+     out.cau=false;for(let n=0;n<8&&!out.cau;n++){v.ill={k:"lao",st:2,known:true};v.bac=0;v.sung=50;v.out=false;illMonthP(v);out.cau=IC.bestWay(v)[0]==="cau"&&(IC.npcW||{}).cau>=1}/* same retry as the bạc row (roll cap) */
      v.ill={k:"lao",st:1,known:true};const n0=IC.npc;illMonthP(v);out.lightSkip=IC.npc===n0}finally{BAL.illCure.npc=k0;v.ill=null}return out});
    ok(npc&&npc.ty&&npc.cau&&npc.lightSkip,`NPC roads: bạc → thái y, no bạc → cầu xin, nhẹ → none ${JSON.stringify(npc)}`)}
   /* ---------- r3 (MAIN 185) ---------- */
@@ -112,5 +112,36 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
   ok(/Thử Nhi lâm bệnh/.test(kc.t)&&/Đường chữa/.test(kc.t)&&/Cầu xin ngự y cho Thử Nhi/.test(kc.t)&&/không qua khỏi: khả năng/.test(kc.t)&&!/\d+ ?%/.test(kc.t)&&!kc.left,`${name} Q3 the child card opens once, roads + odds in words, no % ${kc.t.replace(/\n+/g,' | ').slice(0,400)}`);
   await p.screenshot({path:`${OUT}/${name}-3-kid-card.png`});
   await p.evaluate(()=>{Q.length=0;try{$("modal").hidden=true}catch(e){}const i=S.kids.findIndex(k=>k.name==="Thử Nhi");if(i>=0)S.kids.splice(i,1);render()});
+  /* ---------- r4 (MAIN 186, Foreman F s21g): a MILD illness («Tâm bệnh · nhẹ») is never HUD-only ---------- */
+  /* she falls ill (the real catchIll, as every game path) → her card opens by itself once: danger words + the tier roads, no % */
+  const mild=await p.evaluate(async()=>{S.ill=null;delete S.illAlarm;Q.length=0;try{$("modal").hidden=true}catch(e){}render();catchIll(S,"tambenh");render();await new Promise(r=>setTimeout(r,900));
+   const m=document.querySelector('#modal');const t=m&&!m.hidden?m.innerText.replace(/\s+/g," "):"";const left=!!S.illAlarm;Q.length=0;try{m.hidden=true}catch(e){}render();await new Promise(r=>setTimeout(r,300));
+   const again=(()=>{const mm=document.querySelector('#modal');return !!(mm&&!mm.hidden)})();return{t,left,again}});
+  ok(/Tâm bệnh · nhẹ\./.test(mild.t)&&/Bệnh này không nguy đến tính mạng/.test(mild.t)&&/tự khỏi: khả năng/.test(mild.t)&&/Tĩnh dưỡng · nhẹ/.test(mild.t)&&/xin thuốc · vừa/.test(mild.t)&&/Truyền thái y · nặng/.test(mild.t)&&/Cầu xin ngự y · nặng/.test(mild.t)&&!/\d+ ?%/.test(mild.t),`${name} r4 mild Tâm bệnh: the card opens by itself with danger words + the tier roads, no % ${mild.t.slice(0,300)}`);
+  ok(!mild.left&&!mild.again,`${name} r4 the fall-ill card opens once (not again on the next render)`);
+  /* the visible chip of a mild illness (top bar) opens the same card */
+  const mtap=await p.evaluate(async()=>{const c=[...document.querySelectorAll('[data-k3="ill"],[data-hx="ill"]')].find(e=>e.offsetParent);if(!c)return"no visible chip";c.click();await new Promise(r=>setTimeout(r,500));
+   const m=document.querySelector('#modal');const t=m&&!m.hidden?m.innerText.replace(/\s+/g," "):"nothing";Q.length=0;try{m.hidden=true}catch(e){}S.ill=null;render();return t});
+  ok(/Tâm bệnh · nhẹ\./.test(mtap)&&/Tĩnh dưỡng · nhẹ/.test(mtap)&&/Cầu xin ngự y · nặng/.test(mtap),`${name} r4 the visible «Tâm bệnh · nhẹ» chip opens the card with roads: ${mtap.slice(0,200)}`);
+  /* every path she falls ill by goes through catchIll: an illness of any kind at nhẹ gives the card (one per kind) */
+  const kinds=await p.evaluate(async()=>{const bad=[];for(const k of Object.keys(ILL)){S.ill=null;delete S.illAlarm;Q.length=0;try{$("modal").hidden=true}catch(e){}catchIll(S,k);render();await new Promise(r=>setTimeout(r,120));
+    const m=document.querySelector('#modal');const t=m&&!m.hidden?m.innerText:"";if(!/· nhẹ/.test(t)||!/Chọn mức/.test(t))bad.push(k)}Q.length=0;try{$("modal").hidden=true}catch(e){}S.ill=null;render();return bad});
+  ok(!kinds.length,`${name} r4 every illness at nhẹ opens the card when she falls ill: missing ${kinds.join(",")}`);
   ok(!errs.length,`${name} no page errors ${errs.slice(0,3)}`);await p.close()}
+ /* ---------- r4 (law 11, life family): a CUNG NỮ falls ill → her chip shows, the card opens by itself, and she has the roads a servant really has ---------- */
+ for(const [name,w,h] of [['fold',755,1000],['ipad',1180,820]]){const p=await b.newPage({viewport:{width:w,height:h},deviceScaleFactor:1});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+  await p.route(u=>/^https?:/.test(u.href)&&!/cdn|r2.dev|workers.dev|pages.dev/.test(u.host),r=>r.abort());await p.goto('file://'+path.join(ROOT,'index.html'));await p.waitForTimeout(2500);
+  const sv=await p.evaluate(async()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<300&&!isSrv();i++)start();window.__nlInner=0;quiet=false;Q.length=0;try{$("modal").hidden=true}catch(e){}
+   if(!isSrv())return{srv:false};S.ill=null;render();catchIll(S,"lao");deal();render();await new Promise(r=>setTimeout(r,900));const m=document.querySelector('#modal');const sign=m&&!m.hidden?m.innerText.replace(/\s+/g," "):"";
+   Q.length=0;try{m.hidden=true}catch(e){}render();await new Promise(r=>setTimeout(r,300));const c=[...document.querySelectorAll('[data-k3="ill"],[data-hx="ill"]')].find(e=>e.offsetParent);let tap="";
+   if(c){c.click();await new Promise(r=>setTimeout(r,500));const mm=document.querySelector('#modal');tap=mm&&!mm.hidden?mm.innerText.replace(/\s+/g," "):""}
+   Q.length=0;try{$("modal").hidden=true}catch(e){}deal();/* a fresh deal (next buổi), not the cards the open card pushed */const cards=deck.map(a=>a.n);
+   /* a road really runs: Tĩnh dưỡng is a deck card of hers */const i=deck.findIndex(a=>a.n==="Tĩnh dưỡng");
+   S.ill=null;render();return{srv:true,sign,chip:!!c,tap,cards,rest:i>=0}});
+  if(!sv.srv){ok(false,`${name} r4 cung nữ life: no cung nữ start in 300 tries`);await p.close();continue}
+  await p.screenshot({path:`${OUT}/${name}-4-srv.png`});
+  ok(/Lao phổi · nhẹ\./.test(sv.sign)&&/Tĩnh dưỡng · nhẹ/.test(sv.sign)&&/xin thuốc · vừa/.test(sv.sign)&&/bệnh không tự khỏi/.test(sv.sign)&&/Sức tối đa chỉ/.test(sv.sign)&&!/\d+ ?%/.test(sv.sign),`${name} r4 cung nữ falls ill: the card opens by itself, roads + danger words ${sv.sign.slice(0,260)}`);
+  ok(sv.chip&&/Tĩnh dưỡng · nhẹ/.test(sv.tap),`${name} r4 cung nữ: her illness chip is shown and opens the card ${sv.tap.slice(0,160)}`);
+  ok(sv.rest&&sv.cards.includes("Sang Thái y viện xin thuốc")&&!sv.cards.includes("Truyền thái y")&&!sv.cards.includes("Cầu xin ngự y"),`${name} r4 cung nữ deck: Tĩnh dưỡng + Sang Thái y viện xin thuốc, no thái y summons / Sủng plea ${JSON.stringify(sv.cards.filter(n=>/thuốc|dưỡng|thái y|ngự y/.test(n)))}`);
+  ok(!errs.length,`${name} r4 cung nữ no page errors ${errs.slice(0,3)}`);await p.close()}
  await b.close();console.log(fails?`FAILS ${fails}`:'ALL OK');process.exit(fails?1:0)})();
