@@ -382,7 +382,7 @@ function tmRefuse(p,s){const o=ownerOf(s);if(!o||!npcWhy("tmTell",{s,o},()=>roll
  if(o===S&&p!==S)knBao(s,S,`${p.name} vừa sai người tới mua chuộc {xung} làm tai mắt, {xung} không nhận`,knPal(p));return"tell"}
 /* one try: the recruiter turns to the most promising person (by the same odds); that person decides */
 function tmTry(p,why){const C=tmCands(p);if(!C.length)return null;let best=null,bo=-1;for(const s of C){const o=tmOdds(p,s);if(o>bo){bo=o;best=s}}
- KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(agTry(bo)){best.spyFor=key(p);affAdd(best,p,BAL.relMS.bribe);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
+ KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(agTry(bo)){best.spyFor=key(p);try{if(typeof svTouch==="function"){const x=svTouch(p,best,"tm");if(x&&(p===S||ownerOf(best)===S))log(x)}}catch(e){}/* servant-trust (jsvt) */affAdd(best,p,BAL.relMS.bribe);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
  if(agSoft(bo)){if(p===S&&!quiet)try{agSoftTxt(S,"Cài tai mắt")}catch(e){}return null}
  const t=tmRefuse(p,best);if(p===S&&!quiet)try{log(`Ngỏ ý với ${best.name} (người hầu cung ${NM(ownerOf(best))}), nàng không nhận${t?" và còn bẩm lại với chủ":""}.`)}catch(e){}return null}
 function tmLose(p,n){const L=taiMatRaw(p).sort((a,b)=>tmOdds(p,a)-tmOdds(p,b));for(let i=0;i<n&&i<L.length;i++)L[i].spyFor=null}
@@ -491,7 +491,7 @@ function knSellNpcBuy(x,s,n){const P=knSB();const price=knSellPrice(n.val,s);if(
 /* refused: the seller tries another buyer with the same news (not the one who refused) */
 function knSellNpc(s,n,skip){for(const x of liveRivals(true)){if(x===skip||x===ownerOf(s)||!x.alive||x.out)continue;const N=knSellNews(x,s).filter(q=>q.id===n.id);if(N.length&&knSellNpcBuy(x,s,N[0]))return x}return null}
 /* once per buổi per buyer: BAL.ag.sell.o % that a seller comes (her: only when the day still has the khắc; not as a maid) */
-function knSellTick(){if(!knOn()||!S||S.dead||S.out)return;const T=knTb();const key=agKey();if(T.sl===key)return;T.sl=key;const P=knSB();/* ag2-perf F1: one memo of the owners' facts for this pass (j95 J78MEMO); a sale drops it (knSellGive) */window.J78MEMO=new Map();try{knSellTick0(P)}finally{window.J78MEMO=null}}
+function knSellTick(){if(!knOn()||!S||S.dead||S.out||(typeof isKc==="function"&&isKc()))return;/* no palace servant reaches her at home (review/ob-ngoaicung) */const T=knTb();const key=agKey();if(T.sl===key)return;T.sl=key;const P=knSB();/* ag2-perf F1: one memo of the owners' facts for this pass (j95 J78MEMO); a sale drops it (knSellGive) */window.J78MEMO=new Map();try{knSellTick0(P)}finally{window.J78MEMO=null}}
 function knSellTick0(P){
  try{if(!(typeof isSrv==="function"&&isSrv())&&dayFit(P.kh)&&roll(agOdd(P.o))){const r=knSellPick(S,npcWhy("knSell",{x:S}));if(r){KN.stat.offer=(KN.stat.offer||0)+1;Q.push(knSellCard(r.s,r.n))}}}catch(e){agErr("knSell",e)}
  for(const x of liveRivals(true)){if(!x.alive||x.out||x.confined)continue;try{if(!roll(agOdd(P.o)))continue;/* npc-purpose G2a: roll = the buổi gives a chance to meet; WHO comes is a seller with a goal */const r=knSellPick(x,npcWhy("knSell",{x}));if(r)knSellNpcBuy(x,r.s,r.n)}catch(e){agErr("knSellNpc",e)}}}

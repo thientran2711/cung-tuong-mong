@@ -133,9 +133,9 @@ function kitItemLists(k,o){o=o||{};const it=IT[k];if(!it)return null;const a=typ
 function kitItemRows(k,o){const L=kitItemLists(k,o);if(!L)return"";const G=(L.lux?[`xa xỉ ${L.lux}`]:[]).concat(L.G,L.slot?[L.slot]:[]);
  return kitRows([["Phẩm",`<span class="ef n" style="color:${L.gr.c};font-weight:700">${L.gr.n}</span>`],["Được",L.D,"g"],["Mất",L.M,"r"],["Ghi chú",G,"n"]])}
 function kitItemHint(sl){return sl==="hair"?"cài trâm, bộ diêu: thêm Sắc, có món thêm Danh":sl==="wrist"?"đeo vòng: thêm Sắc, Danh":sl==="waist"?"đeo ngọc bội ngự ban: thêm Danh":sl==="scent"?"đeo túi thơm: thêm Sắc":sl==="ear"?"đeo hoa tai: thêm Sắc, có món thêm Danh":sl==="shoe"?"đi giày thêu: thêm Sắc, có món thêm Danh":sl==="veil"?"che vết hủy dung hay mẩn ngứa":sl==="dress"?"may áo từ vải: thêm Sắc trong 3 tháng":""}
-function kinvOpenWork(x){const g=x.g,w=g.wk,i=g.i,A=typeof ARTS!=="undefined"?ARTS.find(a=>a.k===w.a):null;const t2=typeof whyTime==="function"?whyTime(2):"",t1=typeof whyTime==="function"?whyTime(1):"";
- const B=[pbtn(`data-wk="give" data-ix="${i}"`,"Dâng, tặng","tốn: 2 khắc · thành: chọn người, xem được bao nhiêu",t2),pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`tốn: 1 khắc · thành: Bạc +${typeof wkSellVal==="function"?wkSellVal(w):""}`,t1)];
- if(!w.show&&w.p==null)B.push(pbtn(`data-wk="show" data-ix="${i}"`,"Bày ở yến tiệc",`tốn: 2 khắc · thành: Danh +${typeof WSHOW!=="undefined"?WSHOW[w.ti|0]:""}`,t2));
+function kinvOpenWork(x){const g=x.g,w=g.wk,i=g.i,A=typeof ARTS!=="undefined"?ARTS.find(a=>a.k===w.a):null;const t2=typeof whyTime==="function"?whyTime(BAL.btn.wkGive.k):"",t1=typeof whyTime==="function"?whyTime(BAL.btn.wkSell.k):"";
+ const B=[pbtn(`data-wk="give" data-ix="${i}"`,"Dâng, tặng",`tốn: ${BAL.btn.wkGive.k} khắc · thành: chọn người, xem được bao nhiêu`,t2),pbtn(`data-wk="sell" data-ix="${i}"`,"Bán ra ngoài cung",`tốn: ${BAL.btn.wkSell.k} khắc · thành: Bạc +${typeof wkSellVal==="function"?wkSellVal(w):""}`,t1)];
+ if(!w.show&&w.p==null)B.push(pbtn(`data-wk="show" data-ix="${i}"`,"Bày ở yến tiệc",`tốn: ${BAL.btn.wkShow.k} khắc · thành: Danh +${typeof WSHOW!=="undefined"?WSHOW[w.ti|0]:""}`,t2));
  const F=[`${w.bn==="ngươi"?"Tự tay ngươi làm":"Của "+w.bn}${w.d?" · "+w.d:""}.`];if(w.p!=null)F.push("Phải dâng trong tuần này.");if(w.show)F.push("Đã bày ở yến tiệc.");
  kitModal({kind:"info",title:w.n,sub:`Tác phẩm tự tay · ${x.gname}`,
   itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg"}).replace('<span class="kitn"></span>',''),
@@ -143,12 +143,14 @@ function kinvOpenWork(x){const g=x.g,w=g.wk,i=g.i,A=typeof ARTS!=="undefined"?AR
 function kinvOpen(x){if(x&&x.g&&x.g.wk)return kinvOpenWork(x);const g=x.g,it=itm(g.k),i=g.i;const over=it.rk&&it.rk>S.rank;const B=[];
  if(it.sl)B.push(pbtn(`data-kinvact="wear" data-ix="${i}"`,g.w?"Tháo":"Đeo",g.w?"thành: cất vào rương":`thành: ${kinvPlain(it.w)}${over?" · kèm: vượt phẩm, dễ bị tố":""}`,""));
  if(it.dr)B.push(pbtn(`data-kinvact="use" data-ix="${i}"`,"May áo",`thành: Sắc +${it.dr} trong 3 tháng${over?" · kèm: vượt phẩm, dễ bị tố":""}`,""));
- if(it.use||it.evi||g.k==="botngua")B.push(pbtn(`data-kinvact="use" data-ix="${i}"`,"Dùng",g.k==="botngua"?`tốn: 2 khắc · thành: chọn một phi tần, nàng Danh ${balSg(BAL.eff.j8.danhUseItem)} · kèm: bị khám ra là có tội`:it.evi?`thành: chọn người, chứng cứ +${it.evi}`:`thành: ${kinvPlain(it.use)}`,g.k==="botngua"?whyTime(2):""));
- if(g.k!=="ngocboi"||g.t)B.push(pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",whyTime(2)));
+ if(it.use||it.evi||g.k==="botngua")B.push(pbtn(`data-kinvact="use" data-ix="${i}"`,"Dùng",g.k==="botngua"?`tốn: ${BAL.btn.itemUse.k} khắc · thành: chọn một phi tần, nàng Danh ${balSg(BAL.eff.j8.danhUseItem)} · kèm: bị khám ra là có tội`:it.evi?`thành: chọn người, chứng cứ +${it.evi}`:`thành: ${kinvPlain(it.use)}`,g.k==="botngua"?whyTime(BAL.btn.itemUse.k):""));
+ if(g.k!=="ngocboi"||g.t)B.push(pbtn(`data-kinvact="gift" data-ix="${i}"`,"Tặng",`tốn: ${BAL.time.cost.give} khắc · thành: chọn người nhận`,whyTime(BAL.time.cost.give)));
  if(it.pr)B.push(pbtn(`data-kinvact="sell" data-ix="${i}"`,"Bán",`thành: Bạc +${Math.floor(it.pr/2)}`,""));
  if(typeof TAINT==="object"&&Object.values(TAINT).some(T=>T.on.includes(g.k))&&!g.t)B.push(pbtn(`data-kinvact="taint" data-ix="${i}"`,"Tẩm",`thành: chọn cách tẩm, giữ làm mưu kế · kèm: Đức ${balSg(BAL.eff.j8.taintDuc)}`,""));
+ /* jscent (review/scent): her signature scent is picked from the box itself (kit pbtn, same row as Đeo / Tẩm) */
+ if(it.sc&&typeof scName==="function"){const on=S.sc===it.sc&&!S.scOff;B.push(pbtn(`data-kinvact="scent" data-ix="${i}"`,on?"Thôi xông":"Xông làm hương riêng",on?`thành: giữ lại các hộp hương, thôi đốt mỗi tháng · kèm: cung ngươi không còn hương riêng, thôi ${kinvPlain(BAL.scent.list[it.sc].g)} mỗi tháng`:`thành: ${kinvPlain(BAL.scent.list[it.sc].g)} mỗi tháng · kèm: đốt một hộp mỗi tháng và hương vương trên long bào để người khác ngửi ra`,""))}
  if(g.from&&g.from!=="me"&&g.from!=="emp"&&g.from!=="th")B.push(pbtn(`data-kinvact="test" data-ix="${i}"`,"Nghiệm độc","tốn: Bạc -"+BAL.bacFee.itTest+" · thành: Thái y xem đồ có bị tẩm không",S.bac<BAL.bacFee.itTest?"thiếu bạc (cần "+BAL.bacFee.itTest+")":""));
- const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.w)F.push("Ngươi đang mặc.");
+ const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.w)F.push("Ngươi đang mặc.");if(it.sc&&S.sc===it.sc&&!S.scOff)F.push(`Ngươi đang xông ${scName(it.sc)} làm hương riêng.`);
  /* origin (kinvFrom) is the "Lai lịch" row of the item detail (KIT §70) */
  kitModal({kind:"info",title:it.n,sub:`${it.kd} · ${KIT_GRADE[x.grade|0].n}`,
   itemPic:kitItem({src:x.src512||x.src,name:"",grade:x.grade,size:"lg",qty:g.n,lux:x.lux}).replace('<span class="kitn"></span>',''),

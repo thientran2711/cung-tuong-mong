@@ -10,7 +10,7 @@ function wkSummary(){const s=S.wkSnap||wkSnap();const n=Math.max(0,Math.min(S.lo
  const groups=[["Thăng giáng",pick(/tấn phong|sắc phong|lập .* Hoàng hậu|bị giáng|bị phế|lãnh cung|cấm túc/i,3)],["Sinh tử",pick(/sinh hạ|sinh đôi|băng hà|qua đời|chết|sảy thai|khó sinh/i,3)],
   ["Kẻ nhắm vào ngươi",pick(/ngươi.*(bị|trúng)|định .*(ngươi|của ngươi)|tố giác ngươi|vu .*ngươi|nhắm vào ngươi/i,3)],["Ban thưởng, đồ vật",pick(/ban thưởng|ban cho|nhận được|được tặng|mua /i,2)]];
  const used=new Set(groups.flatMap(g=>g[1]));const other=L.filter(x=>!used.has(x)).slice(0,3);if(other.length)groups.push(["Chuyện khác",other]);
- return{D,groups,rank:S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):"",kids:S.kids.length-s.kids}}
+ return{D,groups,rank:S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":meRankN()):"",kids:S.kids.length-s.kids}}
 function bell(){if(typeof auOk!=="function"||!auOk())return;try{const C=window.__bellCtx||(window.__bellCtx=new (window.AudioContext||window.webkitAudioContext)());const t=C.currentTime;
  [[392,.22,4.5],[784,.08,3],[1176,.05,2],[523,.06,3.5]].forEach(([f,g,d])=>{const o=C.createOscillator(),v=C.createGain();o.type="sine";o.frequency.value=f;v.gain.setValueAtTime(0,t);v.gain.linearRampToValueAtTime(g*OPT.sfx,t+.02);v.gain.exponentialRampToValueAtTime(.0001,t+d);o.connect(v).connect(C.destination);o.start(t);o.stop(t+d+.1)})}catch(e){}}
 function reducedMotion(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}

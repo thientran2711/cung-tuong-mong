@@ -20,6 +20,9 @@ if [ ! -f "$GB" ]; then FAILS+=("G1 no frozen list dev/test/one-core-baseline.js
   # review/one-core-dup r2: a player text may not TYPE an amount that is a BAL.eff / BAL.road / BAL.arc value read beside it (no baseline: always 0)
   if ! OC_BUILD=$WT/dev/build node "$KIT/dev/test/one-core-text.js" > "$OUT/g1-text.txt" 2>&1; then
     head -14 "$OUT/g1-text.txt"; FAILS+=("G1 one-core-text ($OUT/g1-text.txt)"); fi
+  # d-followups-1 (law 4): no player text TYPES a khắc amount («2 khắc», `${tc+1} khắc`): it prints the BAL constant the rule spends (no baseline: always 0)
+  if [ -f "$KIT/dev/test/one-core-khac.js" ] && ! OC_BUILD=$WT/dev/build node "$KIT/dev/test/one-core-khac.js" > "$OUT/g1-khac.txt" 2>&1; then
+    head -14 "$OUT/g1-khac.txt"; FAILS+=("G1 one-core-khac ($OUT/g1-khac.txt)"); fi
   # review/one-core-dup2 r3: a text that PRINTS a BAL amount prints the key the rule of its own option reads (never another rule's key with the same number)
   if [ -f "$KIT/dev/test/one-core-bind.js" ] && ! OC_BUILD=$WT/dev/build node "$KIT/dev/test/one-core-bind.js" > "$OUT/g1-bind.txt" 2>&1; then
     head -14 "$OUT/g1-bind.txt"; FAILS+=("G1 one-core-bind ($OUT/g1-bind.txt)"); fi
