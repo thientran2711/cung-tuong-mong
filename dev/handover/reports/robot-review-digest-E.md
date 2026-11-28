@@ -77,3 +77,6 @@ Recurring themes (lives hit): (1) «Để sau» / close on title dialogs («Danh
 Bugs: see rerun-E-E-S5-20261125.md (fast-laned each family once).
 Suggestions (parking lot, feature freeze): fix «Để sau»; fold repeated tấn phong cards into one news line after the first few; explain a demotion in one line; warn a few buổi before a forced tuẫn táng; give Lãnh cung a goal.
 Still open at this write: skilled-3, speed-3 running; greedy-5, speed-1 held (picker fix); speed-4/5 owned by E-S2 (speed-4-h valid there).
+
+### E-S5 FINAL (28/11): 35 lives finished (valid 34 + speed-4-h by E-S2 = 35 counted by Foreman E)
+Last life skilled-3: Lãnh cung «Tuổi xuân qua đi», age 40, 3733 buổi — decided at year 2 (rank 1→0), then 20 years of the same dialogs; scores pacing 3, story 4, rewards 3. New themes from the last 4 lives: (8) save QuotaExceeded at ~5.2 MB with no player warning (cured on LIVE by the packed save; the missing warning is filed for MAIN); (9) gift picker «Biếu quà làm lành» / «Đồ trong rương» resolves to «ta không được gì, cũng không mất gì» and re-opens — 3 lives parked (greedy-5, speed-1, speed-3), evidence in robot/stuck/E-S5-kipgo-ui3/README.md; (10) a 20-year cold-palace life is playable end to end but has no goal.
