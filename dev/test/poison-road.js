@@ -2,7 +2,7 @@
    Each motive road + the caught / success / inquest paths, NPC two-way, co-op gate, the her-card rows, old save (no S.pq).
    Odds are forced (success = pqOdds result set to 0 / 100, BAL.odds.hi lifted; BAL.pq clamps caught.lo/hi, inq.lo/hi, vg.lo/hi) so every path is deterministic.
    usage: node dev/test/poison-road.js   → exit 1 on any failed check */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const R=path.resolve(__dirname,'../..');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');const R=path.resolve(__dirname,'../..');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1000,height:755},reducedMotion:'reduce'});
  await ctx.route(/^https?:\/\/(?!ts\.local)/,r=>/image|media|font/.test(r.request().resourceType())?r.abort():r.continue());
  await ctx.route('http://ts.local/**',r=>{const f=R+decodeURIComponent(new URL(r.request().url()).pathname);if(!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});

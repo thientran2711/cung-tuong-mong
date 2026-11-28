@@ -1,6 +1,6 @@
 /* review/kit-rel2-span (KIT §49.1): a kitRel2 with ONE direction fills the whole row (no empty half); two directions stay two equal columns.
    usage: node dev/test/kit-rel2-span.js <url> [WxH,...]   (no game start needed: the part is rendered into a probe div) */
-const {chromium}=require('playwright');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const [,,URL,SIZES]=process.argv;
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const wh of (SIZES||'755x1000,1180x820,390x844').split(',')){const [W,H]=wh.split('x').map(Number);

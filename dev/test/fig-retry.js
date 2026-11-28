@@ -4,7 +4,7 @@
    solo: one player. coop: host (seat a) + guest (seat b) against the live Worker (COOP_URL env or the default), BOTH seats get the blocked reads.
    Blocked reads per manifest (then it passes):  FIGURES.json  abort, 503, truncated JSON  |  FIGURES-others.json  abort, abort  |  FIGURES-servants.json  abort.
    Checks per player: KCDN.mretries >= 6 (the loader retried), FIGS filled, Thái hậu + heroine full-body files really found (kitFigOf), the picture loads. */
-const {chromium}=require('playwright');const path=require('path');const {serve,BASE}=require('./coop-serve.js');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const {serve,BASE}=require('./coop-serve.js');
 const SZ=process.argv[2]||'755x1000@2',MODE=process.argv[3]||'both',ROOT=process.argv[4]||null;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const WURL=process.env.COOP_URL||'https://ctm-coop.victoria-tntt.workers.dev';const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 let bad=0;const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};

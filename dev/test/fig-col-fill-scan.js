@@ -4,11 +4,11 @@
    the Nội vụ phủ shop, the identity card. Per frame x viewport: body box (the frame body the column stands in), figure painted box (kitFigBody t..b), fill = painted height / body
    height, top gap = painted top − (name tag bottom), bottom gap = body floor − feet. FAIL (exit 1, identity card excluded: KIT 56.11 book size, printed only) when bottom gap > 8 % of the body height or fill < .70 (the "small and high" bug).
    usage: node dev/test/fig-col-fill-scan.js <index.html> [out.json] [shotdir]   env SZ=[[W,H],..] */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT,SHOT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT,SHOT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const ROWS=[];if(SHOT)fs.mkdirSync(SHOT,{recursive:true});
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
-  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:404,body:''}));/* rv-plr4 r8 (law 11): only the page gets the 20 MB html; every other ctm.test asset 404 — answering each mp3/vendor request with the whole page broke the Playwright pipe once the page passed ~20.6 MB */await ctx.route(/^http:\/\/ctm\.test\/index\.html([?#].*)?$/,r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
   const p=await ctx.newPage();p.on('pageerror',()=>{});await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof kitPersonDlg==='function',null,{timeout:120000});
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}document.getElementById('modal').hidden=true;window.__snap=JSON.stringify(ser())});await sleep(2500);

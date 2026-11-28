@@ -45,7 +45,7 @@ function palCeremony(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const occ={};[
  palCerCard(free);log(`Được ban ${PALN[S.pal]}.`)}
 /* save-unseen-lists r4 (LAW 11 / 6c): «Ban cung» is BUILT by a registered generator from the free palaces (indexes); the grant (S.pal, S.palCer) is
    made before, once — written into the sổ and made again on load */
-const palCerCard=rcpReg("palCer",free=>{if(!S||S.pal==null)return null;const m={ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[S.pal]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p>`,
+const palCerCard=rcpReg("palCer",free=>{if(!S||S.pal==null)return null;const m={ev:1,kind:"group"/* KIT §101.9: choose a palace = vòng nhóm (RING-BUILD) */,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${meRankN()} ${S.name} được ban <b>${PALN[S.pal]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p>`,
   opts:[{n:`Nhận ${PALN[S.pal]}`,fx:{},x:"tạ ơn, dọn sang",go:()=>log(`Dọn sang ${PALN[S.pal]}.`)}].concat(free.slice(0,3).map(i=>({n:`Xin ${PALN[i]}`,fx:{},x:"tâu xin cung khác còn trống",go:()=>{S.pal=i;log(`Tâu xin, được dời sang ${PALN[i]}.`)}})))};Q.push(m);return m});
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){palFix();palCeremony();tuyenTu();if(Q.length&&$("modal").hidden)showModal()}}catch(e){}return r}})();
 /* TUYỂN TÚ: every third spring, 3-5 young consorts enter at Đáp ứng / Thường tại; living consorts (her too) capped at BAL.harem.cap */

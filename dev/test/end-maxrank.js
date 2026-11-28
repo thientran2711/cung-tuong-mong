@@ -9,7 +9,7 @@
       never-risen maid (best post held, «không» children) · maid in Tân Giả khố · risen maid (Đáp ứng) · demoted consort (keeps the best) · Hoàng hậu ·
       old save from LIVE (risen maid ckpt, if given) — for each: the end-card row, the portrait caption, Sổ luân hồi r, cung-kiep r, whether the board got it.
    usage: python3 dev/build/assemble.py && node dev/test/end-maxrank.js [devRoot] [--ckpt=<rerun ckpt json>] [--md] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ARG=process.argv.slice(2);const ROOT=path.resolve(ARG.find(a=>!a.startsWith('--'))||path.resolve(__dirname,'..'));
 const CK=(ARG.find(a=>a.startsWith('--ckpt='))||'').slice(7);const MD=ARG.includes('--md');
 let bad=0;const ok=(c,m,x)=>{if(!c){bad++;console.log('FAIL',m,x!==undefined?JSON.stringify(x).slice(0,900):'')}else console.log('ok  ',m)};

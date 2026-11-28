@@ -136,10 +136,11 @@ function pmDuelOpts(p,t,x){const st=pmStakeOf(p,t,x.s),o=pmOdds(t,p,x.kind),me=t
  const w=me?pmWalk(p):{tc:0,why:""};
  const O=[{i:0,id:"full",n:"Nhận lời thách đấu",fx:{},x:`${pmWord(o)}${w.tc?` · tốn: ${pmWalkTx(w)}`:""} · thành: lấy ${pmPut(st,p,p)} của ${nm(p)} · hỏng: mất ${pmPut(st,t,p)} của ${me?"ngươi":"mình"}`,need:w.why?[{t:w.why,ok:false}]:undefined,tsDis:!!w.why,lk:()=>!st||!st.ok||!!w.why,
   go:()=>({ok:1,r:pmRun(p,t,x)})}];
- if(rk(p)>rk(t))O.push({i:1,id:"half",n:"Nhường bề trên",fx:{},x:`được: ${nm(p)} quý ${me?"ngươi":t.name} +${pmYieldAff(p,t,x)}, bớt oán ${B().duel.yieldOan} · mất: ${st&&st.s==="item"?"nộp "+what:what}`,lk:()=>!st||!st.ok,go:()=>({ok:1,r:pmYield(p,t,x)})});
+ if(rk(p)>rk(t))O.push({i:1,id:"half",n:"Nhường bề trên",fx:{},x:`được: ${nm(p)} ${pvQuy(p,pmYieldAff(p,t,x),"quý "+(me?"ngươi":t.name))},
+ bớt oán ${B().duel.yieldOan} · mất: ${st&&st.s==="item"?"nộp "+what:what}`,lk:()=>!st||!st.ok,go:()=>({ok:1,r:pmYield(p,t,x)})});
  O.push(pmNoO(p,t,x));return O}
 /* co-op (foreman E #14 ruling (3)): the friend's ask card offers «Nhường bề trên» when the asker outranks the reader — the same answer and preview as pmDuelOpts */
-function pmCoopYield(p,t){if(!p||!t||rk(p)<=rk(t))return null;return{n:"Nhường bề trên",x:`được: ${nm(p)} quý ngươi +${pmYieldAff(p,t)}, bớt oán ${B().duel.yieldOan} · mất: món cược của ngươi`}}
+function pmCoopYield(p,t){if(!p||!t||rk(p)<=rk(t))return null;return{n:"Nhường bề trên",x:`được: ${nm(p)} ${pvQuy(p,pmYieldAff(p,t),"quý ngươi")}, bớt oán ${B().duel.yieldOan} · mất: món cược của ngươi`}}
 /* her card logs the answer as it comes back (PEND.rcvAsk): one full stop, the same as every pm line (fix 6b) */
 function pmDot(t,O){if(t!==S)return O;return O.map(o=>Object.assign({},o,{go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;const d=s?pmEnd(s)+".":"";return r&&typeof r==="object"?Object.assign({},r,{r:d}):d}}))}
 /* co-op (review r1 fix 1 + 2): the friend's ask card = the SAME card an NPC's ask gives (RCVK line + pmPlayOpts / pmDuelOpts previews: game, stake of each
@@ -417,10 +418,13 @@ function pmLadLine(p){const L=[];for(const k of B().lad.arts){const q=pmLadPos(p
 function pmLadHTML(kind){const L=pmLad(kind),T=B().lad.top;
  const rows=L.map((p,i)=>{const tal=pmTal(p,kind);return{who:p,auto:false,text:`<span class="kgrow"><span><b class="kgpl">${i+1}.</b> ${kg82Name(p,p.name)}</span><b>${tal}</b></span><small>tài nghệ ${tal}${T[i]?` · mỗi tháng Danh +${T[i]}`:""}</small>`}});
  return `<p>Thứ bậc ${pmKindN(kind)} trong hậu cung. Chỉ đổi khi thắng nhau thật: người dưới thắng người trên thì lên thay chỗ ấy. Ngươi đứng thứ ${pmLadPos(S,kind)} / ${L.length}.</p>`+kg82Facts(rows)}
-PEND.pmLad=pp=>{const v=pp&&pp.v!=null?RV(pp.v):null;
- return{who:v?pv(v):null,t:`<p>Bảng tài nghệ hậu cung: xem thứ bậc của môn nào?</p><p class="past">Ba người đầu mỗi môn được thêm Danh mỗi tháng; ai đứng dưới có thể thách người trên để giành chỗ.</p>`,
-  o:B().lad.arts.map(k=>{const L=pmLad(k),top=L[0];return{n:pmKindN(k),fx:{},x:`ngươi thứ ${pmLadPos(S,k)} / ${L.length}${v?` · ${v.name} thứ ${pmLadPos(v,k)}`:""}${top?` · đứng đầu: ${top===S?"ngươi":top.name}`:""}`,
-   go:()=>{pushModal({t:`Bảng tài nghệ · ${pmKindN(k)}`,who:top?pv(top):null,h:pmLadHTML(k)});/* the figure = the art's leader */try{showModal()}catch(e){}}}}).concat([{n:"Thôi",fx:{}}])}};
+/* «Bảng tài nghệ hậu cung» is a VIEW (MAIN 164 ruling 26/11 ~22:04Z on owner 21:25Z «maximum 7 lá»): ONE kit info panel — every board in one look
+   (her place, the leader, the top names who earn Danh), no option cards (it was 8 boards + «Thôi» = 9 cards). Read-only: the challenge stays on the person card. */
+PEND.pmLad=pp=>{const v=pp&&pp.v!=null?RV(pp.v):null,T=B().lad.top;
+ const rows=B().lad.arts.map(k=>{const L=pmLad(k),top=L[0],tops=L.slice(0,T.length).map(p=>p===S?"ngươi":kg82Name(p,p.name)).join(", ");
+  return{who:top||null,auto:false,text:`<span class="kgrow"><span><b>${pmKindN(k)}</b></span><b>ngươi thứ ${pmLadPos(S,k)} / ${L.length}</b></span><small>${tops?`đứng đầu: ${tops}`:"chưa ai xếp hạng"}${v?` · ${v.name} thứ ${pmLadPos(v,k)}`:""}</small>`}});
+ return{who:v?pv(v):null,kind:"list",kit:{kind:"info"},t:`<p>Bảng tài nghệ hậu cung: thứ bậc từng môn.</p><p class="past">Ba người đầu mỗi môn được thêm Danh mỗi tháng (${T.map(n=>"+"+n).join(" / ")}); ai đứng dưới có thể thách người trên để giành chỗ.</p>`+kg82Facts(rows),
+  o:[{n:"Đã xem",fx:{}}]}};
 /* the entry = a VIEW, not an act toward a person (role-parity): one button at the end of her «Tài nghệ» tab (j83 artTabHTML) */
 function pmLadBtn(){if(isSrvSafe()||S.dead)return"";const l=pmLadLine(S);return pbtn(`data-pmlad="-1"`,"Bảng tài nghệ hậu cung",`xem thứ bậc từng môn${l?` · ngươi: ${l}`:""} · không tốn khắc`,"")}
 /* PEOPLE TAB ONLY (owner 25/11 ~23:00Z k7): the ranking of consorts is person info → under Phi tần (the people tab of the palace road), never in the Tài nghệ action tab; not on the home road (no hậu cung there) */

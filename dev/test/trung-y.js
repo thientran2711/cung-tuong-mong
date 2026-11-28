@@ -2,7 +2,7 @@
    going out → "Mất" on the place card and Danh lost; the robbery event; an old save loads.
    usage: node dev/test/trung-y.js <site url (dev/index.html)> <W>x<H>@dpr <outdir> <tag> [old-save.json] [local trung y dir]
    [local dir]: img/FIGURES-ty.json + fig/por-*-ty* served from this folder (art not yet on the CDN) */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,URL,SZ,OUT,TAG,OLD,LOC]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',serviceWorkers:'block'});
  if(LOC)await ctx.route(/img\/(FIGURES-ty\.json|(fig|por)-[a-z]+-[a-z]\d+-ty\d-a\d+\.webp)(\?.*)?$/,async r=>{const n=r.request().url().split('?')[0].split('/').pop();const f=path.join(LOC,n);

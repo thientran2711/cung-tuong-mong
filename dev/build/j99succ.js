@@ -39,7 +39,7 @@ function succNeeds(p,son,U){const N=[];if(p==="a")return N;const cold=!!S.out;
  if(p==="b"){N.push(succNeed(`Tân đế dưới ${BAL.succN.bAge} tuổi (${son?son.age:0} tuổi)`,son&&son.age<BAL.succN.bAge));N.push(succNeed(`Danh từ ${BAL.succN.bDanh} (có ${S.danh||0})`,(S.danh||0)>=BAL.succN.bDanh));
   N.push(succNeed(`Tâm cơ từ ${BAL.succN.bTam} (có ${S.tamco||0})`,(S.tamco||0)>=BAL.succN.bTam));N.push(succNeed(`Một nhà quyền thần đứng sau ngươi (có ${U.houses.length})`,U.houses.length>=1));
   N.push(succNeed(`Bạc ${BAL.succN.bBac} (có ${S.bac||0})`,(S.bac||0)>=BAL.succN.bBac));if(cold)N.push(succNeed("Không ở lãnh cung",false))}
- if(p==="c"){N.push(succNeed(`Phẩm ${RANKS[BAL.succN.cRank].n} trở lên (đang ${RANKS[S.rank].n})`,S.rank>=BAL.succN.cRank&&!cold));N.push(succNeed(`Danh từ ${BAL.succN.cDanh} (có ${S.danh||0})`,(S.danh||0)>=BAL.succN.cDanh));
+ if(p==="c"){N.push(succNeed(`Phẩm ${RANKS[BAL.succN.cRank].n} trở lên (đang ${meRankN()})`,S.rank>=BAL.succN.cRank&&!cold));N.push(succNeed(`Danh từ ${BAL.succN.cDanh} (có ${S.danh||0})`,(S.danh||0)>=BAL.succN.cDanh));
   N.push(succNeed(`Tâm cơ từ ${BAL.succN.cTam} (có ${S.tamco||0})`,(S.tamco||0)>=BAL.succN.cTam));N.push(succNeed(`Hai nhà quyền thần đứng sau ngươi (có ${U.houses.length})`,U.houses.length>=2));
   N.push(succNeed(U.mil?`Binh quyền: ${[U.milArmy?"nhà Đại tướng quân":"",U.milGuard?"cấm quân":""].filter(Boolean).join(", ")}`:"Binh quyền: nhà Đại tướng quân hoặc cấm quân theo ngươi",U.mil));
   N.push(succNeed(S.thDead?"Thái hậu không phản đối (đã băng hà)":`Thái hậu không phản đối (Thái hậu với ngươi từ ${BAL.succN.cTh}, có ${S.th||0})`,U.thOK));
@@ -77,8 +77,8 @@ PEND.succ0=function(){const E=S.succ,son=succSon();if(!E||!son)return null;const
  const o=[
   {n:`Để ${sn} lên ngôi, làm ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}`,fx:{},x:`thành: ${E.dm?"Mẫu hậu Hoàng thái hậu":"Hoàng thái hậu"}, an hưởng ở Từ Ninh cung`,need:[],go:()=>succBegin("a")},
   {n:"Buông rèm nhiếp chính",fx:{},x:`${word(pb)} · tốn: ${fmt(BAL.eff.j99succ.costB)} · thành: buông rèm nghe chính đến khi tân đế ${BAL.age.reign} tuổi, Danh ${balSg(BAL.eff.j99succ.danhB)} · hỏng: đại thần không phục, Danh ${balSg(BAL.eff.j99succ.danhBFail)}, chỉ làm Hoàng thái hậu · kèm: tân đế lớn lên sinh oán vì ngươi giữ quyền`,need:nb,go:()=>succTry("b")},
-  {n:"Tự lên ngôi Nữ đế",fx:{},x:`${word(pc)} · tốn: ${fmt(BAL.eff.j99succ.costC)} · thành: lên ngôi Nữ đế, đổi niên hiệu · hỏng: binh biến bại lộ, bị phế, ban chết · kèm: vương gia, đại thần dễ khởi binh, thích khách rình rập`,need:nc,go:()=>succTry("c")}];
- return{t,o,who:Object.assign(pMe(),{rw:E.dm?"Hoàng hậu · đích mẫu":RANKS[S.rank].n}),cls:"succ"}};
+  {n:"Tự lên ngôi Nữ đế",fx:{},x:`${word(pc)} · tốn: ${fmt(BAL.eff.j99succ.costC)} · thành: lên ngôi Nữ đế, đổi niên hiệu · hỏng: binh biến bại lộ, bị phế, ban chết · kèm: vương gia và đại thần dễ khởi binh, thích khách rình rập`,need:nc,go:()=>succTry("c")}];
+ return{t,o,who:Object.assign(pMe(),{rw:E.dm?"Hoàng hậu · đích mẫu":meRankN()}),cls:"succ"}};
 function succCanPick(p){const son=succSon();return !succNeeds(p,son,succSup()).some(n=>!n.ok)}
 function succTry(p){if(!succCanPick(p))return succResume();
  const son=succSon(),o=succOdds(p,son);if(p==="b"){apply(Object.assign({},BAL.eff.j99succ.costB));if(roll(o)){apply({danh:BAL.eff.j99succ.danhB});log(`<b class="g">Ngươi buông rèm nhiếp chính cho tân đế ${succSN(son)} (${word(o)}): thành.</b>`);return succBegin("b")}
@@ -112,7 +112,7 @@ function succCH(){const E=S.succ,son=succSon(),sn=succSN(son),foe=E.foe!=null?ri
       {n:"Để Hoàng đế tự quyết",e:{hoa:2,q:-1},txt:"Ngươi để Hoàng đế tự quyết chuyện họ ngoại."}]},
   {t:"Chuyện cũ hậu cung",h:`<p>${foe?`${fN}, người từng ghét ngươi nhất, nay là Thái phi ở Thọ Khang cung.`:"Những người từng hại ngươi nay đều là Thái phi ở Thọ Khang cung."} Có kẻ dâng tờ khai cũ lên Từ Ninh cung.</p><p>Tân đế nói: “Mẫu hậu định đoạt.”</p>`,
    o:[{n:`Tha cho ${foe?fN:"họ"}, cho xuất gia`,e:{tam:1,hoa:1},s:{duc:3},txt:`Ngươi tha cho ${foe?fN:"các Thái phi"}, cho xuất gia.`,end:()=>succEndA()},
-      {n:`Ép ${foe?fN:"họ"} tuẫn táng theo tiên đế`,e:{q:1,an:2,hoa:-2},s:{duc:-6},txt:`Ngươi ban lụa trắng cho ${foe?fN:"các Thái phi"}.`,do:()=>{if(foe){foe.alive=false}},end:()=>succEndA()},
+      {n:`Ép ${foe?fN:"họ"} tuẫn táng theo tiên đế`,e:{q:1,an:2,hoa:-2},s:{duc:-6},txt:`Ngươi ban lụa trắng cho ${foe?fN:"các Thái phi"}.`,do:()=>{if(foe){if(typeof ttwNpcSpared==="function"&&ttwNpcSpared(foe)){foe.out=true;log(`${fN} đã sớm lo liệu: triều thần dâng sớ can, nàng được miễn chết, phải cạo tóc vào chùa.`)}else{foe.alive=false;dieMk(foe,"crime")/* rv r2 law 1: the mirror of j3 «xét lại chuyện cũ … ban lụa trắng, ép ngươi tuẫn táng» (her: crime) */}}},end:()=>succEndA()},/* TUANTANG-WARN two-way: the foe's own roads (jttw) */
       {n:"Giao cho Hoàng đế xét xử",e:{hoa:1},txt:"Ngươi giao chuyện cũ cho Hoàng đế xét.",end:()=>succEndA()},
       {n:"✦ Tự tay dạy hoàng trưởng tôn đọc sách",rare:1,c:{suc:-5},txt:"Ngươi tự tay dạy hoàng trưởng tôn đọc sách.",end:"a_rare"}]}];
  const B=[

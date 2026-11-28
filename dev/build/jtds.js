@@ -76,18 +76,18 @@ Object.defineProperty(BAL.rcp,"tFavor",{configurable:true,enumerable:true,get(){
 const TDV={pend:null,tch:null,go:0,fin:0,hit:null,raw:null,skip:0};window.TDV=TDV;
 /* Tứ đức teacher fee: 0 while a consort teaches this lesson */
 (function(){const c0=virCost;virCost=function(l,p){if(TDV.tch&&(!p||p===S)&&(TDV.go||TDV.fin||(window.TDS&&TDS.busy)))return 0;return c0.apply(this,arguments)}})();
-function tdsTchCons(k){const l=virLv(S,k);return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&v.vir&&(((v.vir[k]||0)>l)||(v.vir[k]||0)>=4)&&(rel(v,S)||0)>=BAL.rcp.tRel)
+function tdsTchCons(k){const l=virLv(S,k);if(typeof rcpConsTeach==="function"&&!rcpConsTeach())return[];return liveRivals(true).filter(v=>v.alive&&!v.out&&!v.confined&&v.vir&&(((v.vir[k]||0)>l)||(v.vir[k]||0)>=4)&&(rel(v,S)||0)>=BAL.rcp.tRel)
  .sort((a,b)=>(b.vir[k]||0)-(a.vir[k]||0)).slice(0,3)}
 function tdsOK(k,mode){if(!S||S.dead||Q.length||S.mg)return false;const l=virLv(S,k);if(mode==="prac")return l>=5&&can(BAL.tds.pracK)&&S.suc>=BAL.tds.pracMin;if(l>=5)return false;
  if(mode==="self")return can(BAL.td.k)&&S.suc>=BAL.td.selfMin;return can(BAL.td.k)&&S.suc>=BAL.td.mMin}
 function tdsReset(){TDV.pend=null;TDV.tch=null;TDV.hit=null;TDV.raw=null;TDV.skip=0;RCPT.k=null;RCPT.t=null}
 function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S),fav=rcpFavorOf(S),O=[];const t2=whyTime(BAL.td.k);
- O.push(kitOffBac({n:"Ma ma giáo tập",fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} · thành: tiến bộ ${crsGainW("teacher",virLv(S,k),1)}, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}},fee));
+ const vt=typeof placeW==="function"&&placeW("t_vir")||"Ma ma giáo tập";O.push(kitOffBac({n:vt,fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} · thành: tiến bộ ${crsGainW("teacher",virLv(S,k),1)}, dạy được mọi lối, ra một món`,go:()=>{TDV.tch=null;RCPT.k=k;RCPT.t="nq";then()}},fee));
  for(const v of tdsTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${V.n} bậc ${v.vir[k]})`,fx:{},x:`tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc} · thành: tiến bộ ${crsGainW("teacher",virLv(S,k),1)}, dạy các lối nàng ta biết, ra một món · kèm: nợ nàng ta một ân, thiện cảm -${fav}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,
   go:()=>{TDV.tch=String(v.id);RCPT.k=k;RCPT.t=String(v.id);then()}});
- if(!O.length){log(`Chưa có ai dạy ${V.n}: ma ma cần ${fee} bạc, chưa có phi tần giỏi ${V.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
+ if(!O.length){log(`Chưa có ai dạy ${V.n}: ${vt.toLowerCase()} cần ${fee} bạc${tdsTchCons(k).length||typeof rcpConsTeach!=="function"||rcpConsTeach()?`, chưa có phi tần giỏi ${V.n} quý ta (thiện cảm ${BAL.rcp.tRel})`:""}.`);return}
  O.push({n:"Thôi",fx:{},go:()=>tdsReset()});
- Q.push({act:1,t:`Học ${V.n} (${V.full}): ai dạy?`,who:pMe(),h:`<p>Có thầy dạy thì tiến nhanh hơn tự học, và mở được lối mới (tự học chỉ lên bậc; bậc 2, 4, 5 tự mở thêm một lối).</p><p class="past">Ma ma giáo tập nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}). Phi tần giỏi ${V.n} dạy không lấy bạc, nhưng ta nợ nàng ta một ân (thiện cảm -${fav}).${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
+ Q.push({act:1,t:`Học ${V.n} (${V.full}): ai dạy?`,who:pMe(),h:`<p>Có thầy dạy thì tiến nhanh hơn tự học, và mở được lối mới (tự học chỉ lên bậc; bậc 2, 4, 5 tự mở thêm một lối).</p><p class="past">${vt} nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}).${typeof rcpConsTeach!=="function"||rcpConsTeach()?` Phi tần giỏi ${V.n} dạy không lấy bạc, nhưng ta nợ nàng ta một ân (thiện cảm -${fav}).`:""}${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
 /* the lesson dialog in front: what to make (jwkr grid; teacher mode lets a new lối be picked) */
 (function(){const l0=lessonVir;const W=function(k,mode){if(TDV.go||!tdsIsVir(k)||(mode!=="self"&&mode!=="master")||!tdsOK(k,mode)||typeof wkAsk!=="function")return l0.apply(this,arguments);
   tdsReset();const ask=()=>wkAsk(k,mode==="master"?"teacher":"self",()=>{});if(mode==="master")tdsTchAsk(k,ask);else ask()};
@@ -132,9 +132,9 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 /* ---------- Tài nghệ › Tứ đức cards: real costs, "ra một món", the lối list ---------- */
 (function(){if(typeof ktArtSkills!=="function")return;const s0=ktArtSkills;ktArtSkills=function(){const L=s0.apply(this,arguments);try{const t2=whyTime(BAL.td.k);for(const s of L){if(s.kind!=="vir"||!TDS_KIND[s.k])continue;const k=s.k,l=virLv(S,k),kind=TDS_KIND[k],W=WK[kind].w.toLowerCase();
   const fee=virCost(l,S),fav=rcpFavorOf(S),game=s.acts.some(h=>/trò nhỏ/.test(h))?"chơi một trò nhỏ · ":"";
-  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.selfSuc} · thành: tiến bộ ${crsGainW("self",l,1)}, ra một món ${W}`,t2||(S.suc<BAL.td.selfMin?`Sức dưới ${BAL.td.selfMin}`:""))
-   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} (ma ma) hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n}) · thành: tiến bộ ${crsGainW("teacher",l,1)}, mở được lối mới, ra một món ${W}`,t2||(S.suc<BAL.td.mMin?`Sức dưới ${BAL.td.mMin}`:"")):h);
-  s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học, lối chưa học và cách học`,""))}}catch(e){console.error("tds skills",e)}return L}})();
+  s.acts=s.acts.map(h=>/data-mode="self"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="self"`,"Tự học",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.selfSuc} · thành: tiến bộ ${crsGainW("self",l,1)}, ra một món ${W.replace(/, /g," hay ")}`,t2||(S.suc<BAL.td.selfMin?`Sức dưới ${BAL.td.selfMin}`:""))
+   :/data-mode="master"/.test(h)?pbtn(`data-vlearn="${k}" data-mode="master"`,"Học với thầy",`${game}tốn: ${BAL.td.k} khắc, Sức -${BAL.td.mSuc}, Bạc -${fee} (${(typeof placeW==="function"&&placeW("t_vir")||"ma ma").toLowerCase()})${typeof rcpConsTeach!=="function"||rcpConsTeach()?` hoặc nợ một ân, thiện cảm -${fav} (phi tần giỏi ${VIR.find(x=>x.k===k).n})`:""} · thành: tiến bộ ${crsGainW("teacher",l,1)}, mở được lối mới, ra một món ${W.replace(/, /g," hay ")}`,t2||(S.suc<BAL.td.mMin?`Sức dưới ${BAL.td.mMin}`:"")):h);
+  s.acts.push(pbtn(`data-rcpls="${k}"`,"Các lối, sách phổ",`thành: xem lối đã học và lối chưa học · biết cách học từng lối`,""))}}catch(e){console.error("tds skills",e)}return L}})();
 /* the lối list of a course: lối opened by level are named with their level */
 (function(){const o0=rcpListOpen;rcpListOpen=function(k){if(!TDS_KIND[k])return o0.apply(this,arguments);const V=VIR.find(x=>x.k===k),kind=TDS_KIND[k],R=[];
  RCP_ST[kind].forEach((s,i)=>{const kn=rcpKnows(S,kind,s[0]);const rs=s[2].map(r=>wkrOf(kind,r)).filter(Boolean).map(r=>!kn&&rcpHasR(S,kind,r.id)?`${r.n} (đã học món này)`:r.n).join(", ");

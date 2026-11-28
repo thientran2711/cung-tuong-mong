@@ -71,18 +71,28 @@ palCeremony=function(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const from=S.p
    the grant (S.pal, S.palCer) is made before, once — written into the sổ and made again on load */
 const bcCard=rcpReg("banCung",from=>{if(!S||from==null||!PALN[from])return null;const B=BAL.banCung;
  const st=i=>bcDanh(i)-bcDanh(from);
- const opts=[{n:`Nhận ${PALN[from]}`,fx:{duc:B.ok.ducTake},x:"tạ ơn, dọn sang",go:()=>log(`Dọn sang ${PALN[from]}.`)}];
+ /* palace distance (jpdist, OD 24/11 ~08:45Z): how often he comes to each palace, the odds word + why */
+ const pdTxt=i=>{try{return typeof pdCardTxt==="function"?` · ${pdCardTxt(S,i)}`:""}catch(e){return ""}};
+ const opts=[{n:`Nhận ${PALN[from]}`,fx:{duc:B.ok.ducTake},x:`tạ ơn, dọn sang${pdTxt(from)}`,go:()=>log(`Dọn sang ${PALN[from]}.`)}];
  for(const c of bcChoices(S,from)){const i=c.i;
   if(c.locked){opts.push(kitOff({n:`Xin ${PALN[i]}`,fx:{},x:`dời sang ${PALN[i]}`,go:()=>{}},bcWhy(i),kitWhenRank()));continue}
   const s=st(i),up=Math.max(0,s),top=bcWanters(S,i)[0];
   const gain=`, ${bcGainTxt(bcGain(i,from))}`;
   const loss=`${sgStat(-(B.fail.sung+B.fail.sungStep*up))}, Danh ${balSg(-(B.fail.danh+B.fail.danhStep*up))}${top&&up>0?`, ${top.name} sinh oán`:""}`;
-  opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}`,go:()=>{bcAsk(S,i,from)}})}
- Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});return Q[Q.length-1]});
-/* NPC parity (law 1): a consort newly made chủ vị may petition the same way (host only in co-op: one roll for the world) */
+  opts.push({n:`Xin ${PALN[i]}`,fx:{},x:`${word(c.odds)} · thành: dời sang ${PALN[i]}${gain} · hỏng: ${loss}${pdTxt(i)}`,go:()=>{bcAsk(S,i,from)}})}
+ try{if(typeof pdHint==="function"){pdHint(opts[0],S,from);for(const o of opts)if(o!==opts[0]&&!o.off){const i=PALN.findIndex(n=>o.n===`Xin ${n}`);if(i>=0)pdHint(o,S,i)}}}catch(e){}
+ Q.push({ev:1,kind:"group"/* KIT §101.9: choose a palace = vòng nhóm (RING-BUILD) */,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${meRankN()} ${S.name} được ban <b>${PALN[from]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p><p>Cung càng gần ngự tẩm, càng danh giá, càng nhiều người muốn; tâu xin quá phận thì khó được chuẩn.</p>`,opts});return Q[Q.length-1]});
+/* NPC parity (law 1): a consort newly made chủ vị holds HER card (host only in co-op: one roll for the world).
+   law1-audit (OD 24/11 ~08:35Z): the NPC used to have only the «ask UP» road; her card also has «Nhận <cung>» (Đức +ok.ducTake) and the humble ask
+   (a palace of lower / same standing, not nearer: Đức +ok.ducHumble on success). Now the NPC picks among the SAME three roads by her nết:
+   a humble nết (BAL.net.n.bcHumble) asks the humble palace when its odds word reaches npcLv; any other nết asks UP when its odds word reaches npcLv;
+   otherwise she takes the decree (Đức +ok.ducTake, the gain her «Nhận» gives). Same odds, gains and losses (bcAsk / bcGain), one rule. */
 function bcNpcAsk(v){const B=BAL.banCung,from=v.pal;if(from==null)return;
- const C=bcChoices(v,from).filter(c=>!c.locked&&bcDanh(c.i)>bcDanh(from)&&oddsLv(c.odds)>=B.npcLv);if(!C.length)return;
- bcAsk(v,C[0].i,from)}
+ const C=bcChoices(v,from).filter(c=>!c.locked&&oddsLv(c.odds)>=B.npcLv);
+ const gOf=c=>bcGain(c.i,from),humble=C.filter(c=>gOf(c).duc!=null),up=C.filter(c=>gOf(c).danh!=null);/* up = a higher palace or the same standing nearer the Emperor (her card's Danh roads) */
+ let hum=0;try{hum=nv(v,"bcHumble")}catch(e){}
+ const pickC=hum?humble[0]:up[0];if(pickC)return bcAsk(v,pickC.i,from);
+ v.duc=cl((v.duc||0)+B.ok.ducTake,0,100);return false}
 (function(){const f0=palFix;palFix=function(){const pre={};try{for(const v of rivals||[])pre[v.id]=v.pal}catch(e){}const r=f0.apply(this,arguments);
  try{const cw=!!(window.COOPW&&COOPW.on),hostOK=!cw||COOPW.seat==="a";if(hostOK&&S&&rivals)for(const v of rivals)if(!v.coop&&pre[v.id]==null&&v.pal!=null&&!v.palLone&&palHeadOK(v))bcNpcAsk(v)}catch(e){console.error(e)}
  return r}})();

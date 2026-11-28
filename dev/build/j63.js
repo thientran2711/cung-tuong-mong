@@ -200,6 +200,7 @@ kaMO.observe(document.documentElement,{childList:true,subtree:true,attributes:tr
 (function(){const st=document.createElement("style");st.id="ka-css";st.textContent=`
 button.ka{display:flex!important;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:3px;text-align:left;background:var(--k-card,#fffaf0);border:1px solid var(--line);border-radius:8px;padding:6px 9px 7px!important;color:var(--ink);font-family:inherit;font-size:.82rem;line-height:1.3;min-height:0;height:auto!important;max-height:none!important;overflow:visible!important;white-space:normal!important;box-shadow:inset 0 0 0 1px #fff8,0 1px 0 #d9c49a55}
 button.ka:hover:not(:disabled){border-color:var(--gold)}
+.knw{white-space:nowrap}
 button.ka .kat{display:flex;align-items:flex-start;gap:6px;justify-content:space-between;padding-bottom:3px;border-bottom:1px solid #e6d3ac}
 button.ka .kan{flex:1 1 auto;min-width:0;display:block;font-weight:700;color:var(--ink);overflow-wrap:anywhere}
 button.ka .kan .md{display:inline-flex!important;position:static!important;margin:0 4px 0 0!important;vertical-align:middle}button.ka .kan .ic{vertical-align:middle}button.ka .kan .md.xs{width:22px!important;height:22px!important}button.ka .kan .ic{flex:0 0 auto}
@@ -236,14 +237,14 @@ button.ka .kr-note .krv .ef{color:var(--dim);font-weight:400}
 button.ka.kdis,button.ka:disabled{opacity:1!important;background:#eee7da!important;border-color:#d4c8b2;cursor:default;filter:none}
 button.ka.kdis .kan,button.ka:disabled .kan{color:#7d7263}
 button.ka.kdis .kodds,button.ka:disabled .kodds{filter:grayscale(1);opacity:.7}
-button.ka.kdis .kr-mat,button.ka.kdis .kr-kem,button.ka.kdis .kr-bai,button.ka:disabled .kr-mat,button.ka:disabled .kr-kem,button.ka:disabled .kr-bai{display:none}
+button.ka.kdis:not(.kopinfo) .kr-mat,button.ka.kdis:not(.kopinfo) .kr-kem,button.ka.kdis:not(.kopinfo) .kr-bai,button.ka:disabled:not(.kopinfo) .kr-mat,button.ka:disabled:not(.kopinfo) .kr-kem,button.ka:disabled:not(.kopinfo) .kr-bai,button.ka.kopinfo.khlock .kr-mat,button.ka.kopinfo.khlock .kr-kem,button.ka.kopinfo.khlock .kr-bai{display:none}/* KIT §6.2o K-HAND-MAT (KK63): a read-only COPY (.kopinfo: hand plate, «!» overlay) is a disabled button only so it cannot be pressed — it shows every Mất / Kèm / Bại row unless it copies a locked card (.khlock) */
 /* kit-thanh-bai: the THÀNH / BẠI block heads (full grid row) and their rows; a disabled card shows no BẠI block (same rule as its hidden Mất / Kèm) */
 /* r4: no head rows — the row label itself is THÀNH (green) / BẠI (red); label column LEFT, value RIGHT at every size */
 .kb .kr-thanh .krl{color:var(--good);font-weight:800}.kb .kr-bai .krl{color:var(--bad);font-weight:800}
 .kb .kr-none.kr-thanh .krl{color:var(--good)}.kb .kr-none.kr-bai .krl{color:var(--bad)}
 .kb .kr-duoc.kb-a .krl{white-space:normal;line-height:1.1}
 .kb .kr-none .ef{color:var(--dim);font-weight:400;font-style:italic}
-button.ka.kdis .kr.kb-b,button.ka:disabled .kr.kb-b{display:none}
+button.ka.kdis:not(.kopinfo) .kr.kb-b,button.ka:disabled:not(.kopinfo) .kr.kb-b,button.ka.kopinfo.khlock .kr.kb-b{display:none}/* K-HAND-MAT (KK63): same exemption for the read-only copy */
 button.ka.kdis .krv .ef.g,button.ka.kdis .krv .ef.r,button.ka.kdis .krv .ef.t{opacity:.75}
 button.ka.kcard{border-radius:8px}
 button.ka.kcard .kan{font-family:var(--title,inherit);font-size:calc(var(--kfs,.82rem) + .12rem)}
@@ -305,6 +306,58 @@ function kaWhyWho(C,v,named,title){try{const nm=v&&v.name;const subj=named&&nm?n
  }catch(e){}
  return ""}
 function kaWhyHtml(r){return r?`<span class="kwy"> · ${r}</span>`:""}
+/* NB2 (W8, LAW 11 whole family): a result card names EVERY real change of the tap, not only hers + the consorts' — every servant's
+   thiện cảm (own staff: loyal; others, the named elders and the Thái hậu household: af.me = aff(c,S)), the court (S.court af.me),
+   the familiarity step she reached (S.known, K61STN word) and what she learned (kaLearn(text): an act that hands her news/knowledge
+   says so once, listed under Được). rsnap keeps plain numbers only (co-op / saves never carry object references). */
+function kaSrvList(){const L=[];try{L.push(...allServ())}catch(e){}try{if(S.thO&&S.thO.staff)for(const x of S.thO.staff)if(!L.includes(x))L.push(x)}catch(e){}return L.filter(x=>x&&x.sid!=null&&x!==S.maid)}
+function kaSrvV(st){let v=(st.af&&st.af.me)||0;try{if(typeof ownerOf==="function"&&ownerOf(st)===S&&typeof st.loyal==="number")v+=st.loyal}catch(e){}return v}
+window.__kaLearnN=window.__kaLearnN||0;window.__kaLearn=window.__kaLearn||[];
+function kaLearn(t){if(!t)return;window.__kaLearnN++;window.__kaLearn.push({n:window.__kaLearnN,t:String(t)});if(window.__kaLearn.length>12)window.__kaLearn.shift()}
+window.kaLearn=kaLearn;
+(function(){const rs=rsnap;rsnap=function(){const b=rs.apply(this,arguments);if(b&&S)try{const o={};for(const st of kaSrvList())o[st.sid]=kaSrvV(st);b.srv=o;
+ const c={};for(const k in (S.court||{})){const x=S.court[k];if(x&&x.af)c[k]=x.af.me||0}b.court=c;b.kn=Object.assign({},S.known||{});b.learn=window.__kaLearnN;/* W9: evidence held AGAINST her (evG(holder,S), j8 evm) by every consort / servant */const ev={};for(const h of kaEvHolders())ev[kaEvKey(h)]=evG(h,S);b.evOn=ev}catch(e){}return b}})();
+/* W9 (LAW 11, real tap: Tung tin đồn failed → «nàng ta nắm 1 chứng cứ» applied, card silent): a person who now holds MORE / less evidence
+   against her (evG(h,S)) is a real change of the tap → «<tên>: nắm chứng cứ về ta ±N» (Mất when it rises). Plain numbers by key only. */
+function kaEvHolders(){const L=[].concat(typeof rivals!=="undefined"?rivals:[]);for(const x of kaSrvList())if(!L.includes(x))L.push(x);return L.filter(h=>h&&h!==S)}
+function kaEvKey(h){return rivals.includes(h)?"r"+h.id:"s"+h.sid}
+function kaKnRows(kn0){const per=[];if(kn0&&S&&S.known&&typeof K61STN!=="undefined"&&typeof KREG!=="undefined"){const SV=kaSrvList();
+  for(const k in S.known){const a=+kn0[k]||0,n=+S.known[k]||0;if(!(n>a)||!K61STN[n]||k==="me")continue;const p=KREG[k];if(!p||p===S)continue;
+   const rv=rivals.includes(p),nd=kaNamed(p);let who;
+   if(SV.includes(p))who=nd?(p.call||p.name):"một cung nhân";
+   else if(rv)who=nd?kaWho(p):String(typeof whyWho==="function"?whyWho(p):"Một vị phi tần").replace(/^M/,"m");
+   else{try{who=nd&&typeof k61Title==="function"?k61Title(p):typeof k61Desc==="function"?k61Desc(p):""}catch(e){who=""}if(!who)who=nd?(p.name||"người ấy"):"một người lạ"}
+   per.push([who,[K61STN[n].toLowerCase()],[],""])}}return per}
+function kaMorePeople(before,per,G){const per0=per;per={push(e){const x=per0.find(y=>y[0]===e[0]);if(x){x[1]=x[1].concat(e[1]);x[2]=x[2].concat(e[2])}else per0.push(e)}};/* one row per person */
+ if(before.srv){for(const st of kaSrvList()){const b=before.srv[st.sid];if(b==null)continue;const d=Math.round(kaSrvV(st)-b);if(!d)continue;
+  const named=kaNamed(st);const who=named?(st.call||st.name):"một cung nhân";const tt=Math.round(kaSrvV(st));/* merge lr4: totals like the LIVE consort rows (kaNT) */per.push([who,d>0?[`thiện cảm ${kaNT(d,tt)}`]:[],d<0?[`thiện cảm ${kaNT(d,tt)}`]:[],""])}}
+ if(before.court)for(const k in (S.court||{})){const x=S.court[k],b=before.court[k];if(!x||!x.af||b==null)continue;const d=Math.round((x.af.me||0)-b);if(d)per.push([x.name,d>0?[`thiện cảm ${kaNT(d,x.af.me||0)}`]:[],d<0?[`thiện cảm ${kaNT(d,x.af.me||0)}`]:[],""])}
+ /* W9 (LAW 11): EVERY person whose familiarity step rose (S.known key → the person, KREG of j61): consorts, servants, and also the men,
+    the Thái y, the court officials (rc-scan: Thái y viện / Biếu quà, gửi thư were not named). Same who-words as the rows above so one person = one row. */
+ if(before.kn)for(const e of kaKnRows(before.kn))per.push(e);
+ if(before.evOn){for(const h of kaEvHolders()){const b=before.evOn[kaEvKey(h)];if(b==null)continue;const d=Math.round(evG(h,S)-b);if(!d)continue;const rv=rivals.includes(h),nd=kaNamed(h);
+  const who=rv?(nd?kaWho(h):String(typeof whyWho==="function"?whyWho(h):"Một vị phi tần").replace(/^M/,"m")):(nd?(h.call||h.name):"một cung nhân");const t=`nắm chứng cứ về ta ${kaN(d)}`;per.push([who,d<0?[t]:[],d>0?[t]:[],""])}}
+ if(before.learn!=null)for(const x of (window.__kaLearn||[]))if(x.n>before.learn)G.push(`<span class="ef g">${x.t}</span>`)}
+/* W10b (LAW 11 «shown == applied», act walk family): S.known can rise AFTER an act's result card was built: (1) j61's morning-audience
+   wrapper (Thỉnh an Hoàng hậu / Thái hậu: k61Know of the people named) runs after the base act; (2) jstagehere actMove walks her into the
+   act's place (goTo) and the people met on arrival are known (Múa / Để ý một nam nhân → the man there). resultShow keeps the S.known its
+   card reflects (window.__kaKnAt); the jstagehere act wrapper passes that as kn0. kaWalkKn(kn0,title) names every familiarity step that rose since kn0 with the SAME rows as the card (kaKnRows, KREG + K61STN):
+   the act's card still up → the rows join its «Được» line (one person = one row); the card already closed → the kit result card (§93.8
+   kitResultCard) shows them under the act's title. No number of its own. Returns 0 nothing rose / 1 merged / 2 own card. */
+function kaWalkKn(kn0,title){try{if(!kn0||!S||S.dead)return 0;const per=kaKnRows(kn0);if(!per.length)return 0;
+ const t=document.getElementById("rtoast"),L=window.kaLastResult;
+ if(t&&t.classList.contains("on")&&L&&Array.isArray(L.rows)){let r=L.rows.find(x=>x.k==="duoc");if(!r){L.rows=L.rows.filter(x=>x.k!=="note");r={k:"duoc",label:"Được",items:[]};L.rows.unshift(r)}
+  const kb=t.querySelector(".kb");if(kb){const nt=kb.querySelector(".kr-note");if(nt)nt.remove()}
+  let d=kb&&kb.querySelector(".kr-duoc .krv");if(kb&&!d){kb.insertAdjacentHTML("afterbegin",`<span class="kr kr-duoc"><span class="krl">Được</span><span class="krv"></span></span>`);d=kb.querySelector(".kr-duoc .krv")}
+  for(const [who,gp] of per){const w=gp.join(", "),pw=kaPlain(who)+":";const i=r.items.findIndex(x=>String(x).startsWith(pw+" "));
+   if(i>=0)r.items[i]+=", "+w;else r.items.push(`${pw} ${w}`);
+   const el=d&&[...d.querySelectorAll(".kitem")].find(x=>{const h=x.querySelector(".ef.t");return h&&h.textContent.trim()===pw});
+   if(el){const g=el.querySelector(".ef.g");if(g)g.textContent+=", "+w;else el.insertAdjacentHTML("beforeend",` <span class="ef g">${w}</span>`)}
+   else if(d)d.insertAdjacentHTML("beforeend",`<span class="kitem"><span class="ef t">${who}:</span> <span class="ef g">${w}</span></span>`)}
+  window.__kaKnAt=Object.assign({},S.known||{});clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),9000);return 1}
+ if(window.__bot||typeof kitResultCard!=="function")return 0;
+ kitResultCard({title:title||"",ok:null,rows:[{k:"duoc",label:"Được",items:per.map(([who,gp])=>`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>`)}]});window.__kaKnAt=Object.assign({},S.known||{});return 2}catch(e){console.error("kaWalkKn",e);return 0}}
+window.kaWalkKn=kaWalkKn;
 /* KIT PART kitAim (KIT 7.3, owner OD 26/11 ~08:30Z «nói xấu xong ... không biết được là có nói xấu thành công hay không»): the ACT PAYLOAD
    of a result card. An act aimed at a person registers kaAim(v, {ok, n, sen, by, later}) when it starts (jverdict hooks runAct / talk / pillowDo /
    gifts / servant + court acts); v's numbers are taken THEN (b0). The card of that span reads it: the seal from the act's own roll
@@ -342,12 +395,13 @@ function kaResultRows(before,title,ok){const G=[],B=[];const K=[];const skip=new
   if(g!==b.g)K.push({v,k:"ghen",d:g-b.g,t:g});
   if(o!==b.o)K.push({v,k:"oán",d:o-b.o,t:o});
   if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaNT(e-b.e,e)}`);
-  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title),v,(da||(m-b.m)||(e-b.e))]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.b.push(v);U.d.set(v,da||(m-b.m));U.t=U.t||new Map();U.t.set(v,da?hi:m)}}}
+  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title),v,(da||(m-b.m)||(e-b.e))]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(thiện cảm|ta quý)/.test(t)))U.b.push(v);U.d.set(v,da||(m-b.m));U.t=U.t||new Map();U.t.set(v,da?hi:m);/* NB2 W8: a stranger's chứng cứ is a real change too (was dropped) */const ep=gp.filter(t=>/^chứng cứ/.test(t)),eb=bp.filter(t=>/^chứng cứ/.test(t));if(ep.length||eb.length)per.push([String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m"),ep,eb,"",v,(e-b.e)])}}}
  {/* strangers: ONE line per person with the signed number, «một vị <tước>: thiện cảm +6» (owner 22:14Z + BIG rv N2) */const lo=v=>String(typeof whyWho==="function"?whyWho(v):"Một vị phi tần").replace(/^M/,"m");const tt=v=>U.t&&U.t.get(v);for(const v of U.g)per.push([lo(v),[`thiện cảm ${kaNT(U.d.get(v)||1,tt(v))}`],[],"",v,U.d.get(v)||1]);for(const v of U.b)per.push([lo(v),[],[`thiện cảm ${kaNT(U.d.get(v)||-1,tt(v))}`],"",v,U.d.get(v)||-1])}
  for(const [k,nm] of RKEYS){if(skip.has(k))continue;const now=S[k]||0,d=now-(before[k]||0);if(!d)continue;
   if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`thiện cảm ${kaNT(d,now)}`]:[],d<0?[`thiện cảm ${kaNT(d,now)}`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
   {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${kaN(d)}</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
  if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">${S.maid.name}: thiện cảm ${kaNT(d,S.maid.loyal)}</span>`+kaWhyHtml(kaWhyStat(WC,"Thiện cảm",d,title,"maid")))}
+ try{kaMorePeople(before,per,G)}catch(e){console.error(e)}
  /* ONE SIEVE (jnsieve nsCard, owner OD 26/11 ~06:50Z (B)): other people's rows that do not touch her fold into ONE «Trong cung: …» line + the Sổ ghi */
  const SV=typeof nsCard==="function"?nsCard(per,K,WC,title,[...TG.keys()]):null;if(SV){per.length=0;per.push(...SV.keep);K.length=0;K.push(...SV.kem);K.more=SV.more;K.fold=SV.fold;K.sum=SV.sum}
  for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
@@ -398,6 +452,18 @@ document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.targ
  if(roll(BAL.odds.hi))return;e.stopImmediatePropagation();e.preventDefault();const k=+b.dataset.cap||0;if(k&&can(k))spend(k);
  const kn=b.querySelector(".kan");const n=String(kn?kn.textContent:(b.childNodes[0]&&b.childNodes[0].nodeType===3?b.childNodes[0].textContent:"")).trim();
  let bf=null;try{bf=rsnap()}catch(x){}oddsSoft(n,{suc:-(+b.dataset.capsuc||0),bac:-(+b.dataset.capbac||0)});try{if(bf)resultShow(n,bf,false)}catch(x){}render()},true);
+/* KNOW IN THE RESULT CARD (LAW 11 family, ROOT D 25/11, review/talk-others-people): what she LEARNS is a gain. Every learned fact passes
+   noteAdd (j21: «every line written in her Sổ is something she learned»), kitKnow (jnotice KNOW-NOTICE) and intelAdd (j78 tin / secrets), also when the act's own card
+   already told it (shown) — so the result card lists those lines under «Được» and never says «ta không được gì» after a talk taught a nết,
+   a secret or a tin. rsnap() marks where the act starts (before.kak); one line per key, the richer text (higher pri) wins. */
+const KAK={L:[],base:0,on:0};
+function kaKnowHook(){if(KAK.on)return;KAK.on=1;const add=(k,p,t)=>{KAK.L.push({k,p,t});if(KAK.L.length>400){KAK.L.splice(0,200);KAK.base+=200}};
+ if(typeof noteAdd==="function"){const n0=noteAdd;noteAdd=function(id,t){const r=n0.apply(this,arguments);try{let v=null;try{v=typeof RV==="function"&&id!=null?RV(+id):null}catch(e){}
+  add("n:"+id,-1,`Sổ ghi thêm${v&&typeof knowWho==="function"?" về "+knowWho(v):""}: ${String(t).replace(/<[^>]+>/g,"")}`)}catch(e){}return r}}
+ if(typeof intelAdd==="function"){const i0=intelAdd;intelAdd=function(v,f){const r=i0.apply(this,arguments);try{if(v&&v!==S&&f&&f.txt)add("i:"+v.id+":"+f.k,1,String(f.txt).replace(/<[^>]+>/g,""))}catch(e){}return r}}/* tin / secrets (j78 S.intel) */
+ if(typeof kitKnow==="function"){const k0=kitKnow;kitKnow=function(o){const r=k0.apply(this,arguments);try{if(o&&o.text)add(String(o.key||o.text),o.pri|0,String(o.text).replace(/<[^>]+>/g,""))}catch(e){}return r}}}
+function kaKnowSince(n){if(n==null)return[];const m=new Map();for(const x of KAK.L.slice(Math.max(0,n-KAK.base))){const e=m.get(x.k);if(!e||x.p>=e.p)m.set(x.k,x)}const T=[...m.values()].map(x=>x.t);return T.filter((t,i)=>!T.some((u,j)=>j!==i&&u!==t&&t.includes(u)))/* a Sổ line that repeats an intel fact gives way to the fact */}
+(function(){const r0=rsnap;rsnap=function(){kaKnowHook();const b=r0.apply(this,arguments);if(b)b.kak=KAK.base+KAK.L.length;return b}})();/* key «kak»: «kn» is the net-ghen-2 familiarity snapshot (S.known, line ~259) — one key per meaning (stack d-worklist-land) */
 /* KIT PART kitResultSeal(ok) (KIT 7): the result seal — true → THÀNH (.ok), false → BẠI (.bad), no roll → "KẾT QUẢ" (.sure, the kit's grey seal, no stamp) */
 function kitResultSeal(ok){return ok===true?{cls:"ok",t:"THÀNH"}:ok===false?{cls:"bad",t:"BẠI"}:ok==="soft"?{cls:"sure",t:"BỎ DỞ"}/* KIT 7.3: a capped act that slipped — nothing done, nothing lost but the effort */:{cls:"sure",t:"KẾT QUẢ"}}
 /* KIT 7 (MAIN 162 LOOK on OB-VERDICT-3, whole family): the sentence under the title never repeats the title. A Sổ ghi choice line
@@ -410,7 +476,7 @@ function kaSenDeTitle(sen,title){try{if(!sen)return sen;const t=kaPlain(title||"
 window.kaSenDeTitle=kaSenDeTitle;
 resultShow=function(title,before,okHint){if(!S||!before||S.dead||window.__kNav)return;/* §6.2m a nav option shows no result card (kit-k44-parts) */
  /* KAWHY-VERDICT: the reasons follow the card's final verdict (own roll, else the carried act's kaAim); kaAimVerdict reads only — the aims are closed below by kaAimUse */
- const ok0=okHint===true?true:okHint===false?false:(()=>{try{return kaAimVerdict(before).ok}catch(e){return null}})();const [G,B,K]=kaResultRows(before,title,ok0);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}const sen0=sen;/* the card still shows when its only sentence repeated the title (OD ~17:55Z: «không» rows kept — Ghi chú «ta không được gì») */sen=kaSenDeTitle(sen,title);
+ const ok0=okHint===true?true:okHint===false?false:(()=>{try{return kaAimVerdict(before).ok}catch(e){return null}})();const [G,B,K]=kaResultRows(before,title,ok0);try{for(const t of kaKnowSince(before.kak))G.push(`<span class="ef g">${t}</span>`)}catch(e){}/* knowledge learned by the act (KAK) is a gain */const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}const sen0=sen;/* the card still shows when its only sentence repeated the title (OD ~17:55Z: «không» rows kept — Ghi chú «ta không được gì») */sen=kaSenDeTitle(sen,title);
  const why=S.logs.slice(0,Math.min(n,S.logs.length)).map(plain).join(" ");
  /* the seal follows the outcome FOR HER (net real changes + what the log says), not which branch fired */
  const failTxt=/chặn kịp|phát giác|bị lộ|bị bắt|không thành|hỏng|từ chối|không ai tin|trách ngươi|quở|bị phạt|mắng|thư giả|vu khống|thất bại|không dò ra|không biết gì|cũng không biết|không thấy gì|không tìm ra|chưa duyệt/i.test(why);/* act audit: a failed search/scout read THÀNH */
@@ -428,7 +494,8 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead||window.__kNav)r
  t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
   if(e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};
  const rows=[];if(K.tgt&&K.tgt.length)rows.push({k:"tgt",label:"Người ấy",items:K.tgt});if(K.by&&K.by.length)rows.push({k:"by",label:"Ai làm",items:K.by});if(G.length)rows.push({k:"duoc",label:"Được",items:G});if(B.length)rows.push({k:"mat",label:"Mất",items:B});if(!G.length&&!B.length&&!(K&&(K.length||K.more))/* KK42: a K.more-only Kèm still makes the card */)rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
- window.kaLastResult={title,ok,seal,sentence:sen,fold:K.fold||null,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)}))};
+ window.__kaKnAt=Object.assign({},S.known||{});/* W10b: the familiarity this card reflects (kaWalkKn names what rises after it) */
+ window.kaLastResult={title,ok,seal,sentence:sen,fold:K.fold||null,rows:rows.map(r=>({k:r.k,label:r.label,items:r.items.map(kaPlain)})),kem:(K||[]).filter(x=>Math.round(x.d)).map(x=>`${x.v&&x.v.name||""}: ${x.k} ${kaN(Math.round(x.d))}`)};/* kem: the Kèm line as data (scans) */
  const row=r=>`<span class="kr kr-${r.k}"><span class="krl">${r.label}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${typeof kitLineCap==="function"?kitLineCap(x):x}</span>`).join("")}</span></span>`;/* KK41: each result line starts its row with a capital */
  t.className="rtoast karesult "+SL.cls;
  t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${seal}</b><span class="kan">${title||""}</span></span>${sen?`<span class="ksen">${sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${kitKemRow(K)}</span><span class="kalog" role="button" tabindex="0">Xem đủ trong Sổ ghi</span></div>`;

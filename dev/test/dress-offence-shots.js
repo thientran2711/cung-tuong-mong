@@ -1,7 +1,7 @@
 /* review/dress-offence shots: the person card (Phi tần tab) of a consort the player has SEEN — 7-cell wear row (6 slots + follow pet),
    red "Vượt phẩm" corner tag, "Xa xỉ N / M" label — the Hại nặng group with Tố vượt phẩm / Tố xa xỉ, then the Tố xa xỉ result.
    usage: CTM_CURL_CDN=1 node dev/test/dress-offence-shots.js <url-or-file> <outdir> [WxH,...]   (dpr 2) */
-const {chromium}=require('playwright');const fs=require('fs');const cp=require('child_process');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const cp=require('child_process');const path=require('path');
 const [,,U,OUT,SIZES]=process.argv;const URL=/^(https?|file):/.test(U)?U:'file://'+path.resolve(U);fs.mkdirSync(OUT,{recursive:true});const cdn={};
 (async()=>{const b=await chromium.launch();
  for(const wh of (SIZES||"755x1000,1180x820").split(",")){const [W,H]=wh.split("x").map(Number);

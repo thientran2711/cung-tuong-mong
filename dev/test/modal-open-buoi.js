@@ -9,7 +9,7 @@
    Part B (orphan): the old harness setup (Q emptied after start(), nextBuoi ×5): at buổi 3 the flip scene must PLAY (on screen), never wait
    unseen with NLP set.
    usage: node dev/test/modal-open-buoi.js file:///…/index.html [WxH] [lives] [buổi steps=6] */
-const {chromium}=require('playwright');const [,,URL,WH,N,NB]=process.argv;
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const [,,URL,WH,N,NB]=process.argv;
 (async()=>{const b=await chromium.launch();const [W,H]=(WH||"755x1000").split("x").map(Number);let fails=0;const STEPS=+NB||6;
  const mk=async()=>{const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
   await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});

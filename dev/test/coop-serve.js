@@ -1,3 +1,4 @@
+require('./lib/bigpage');/* HARNESS-BIGPAGE (KK63): page bodies > 4 MB never go through route.fulfill */
 /* Serve the repo from disk inside Playwright (no local http server): route http://ctm.local/* to files.
    dev/index.html gets the same charset/viewport wrapper the site adds. */
 const fs=require('fs'),path=require('path');
