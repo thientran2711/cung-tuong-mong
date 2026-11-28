@@ -48,3 +48,37 @@ GATES (Fold 755x1000 + iPad 1180x820):
 | quickcheck ALONE | 9f0bd3ed: PASS (core gates + open + old save + perf buổi 1672/1538 ms) | d9ca7892 ALONE: FAIL (q-softlock 1 + button-crawl) |
 Notes: two earlier quickcheck runs on d144959a failed only G4 94-q-softlock iPad (4) and once perf buổi 3056 ms; q-softlock run alone = r2 PASS / LIVE FAIL 8, perf re-measured alone 2× PASS → flaky, not this change. Tip for testers: python http.server serves .html without charset → «Invalid or unexpected token»; serve with charset=utf-8 (dialog-order probes need an http base).
 SSK: review/coop-qcard-r2 9f0bd3ed9ede42b66b02cc28ed5a7fff00ea8ba2 (BIG co-op + kit layer; on LIVE 772bee4f).
+
+## REVIEW (B BIG RV session_01N1tNP3dpp4iidDjc1TafiE, 28/11 ~07:25Z) — PASS on review/coop-qcard-r3 87dcdfbbf09e68c8369c8694a5aa2c8dafd56ee7
+PRIORITY #1 CHECK: read the brief b-coop-qcard-r2-review.md, this report, KIT.md §7.4/§93.1, KIT_REQUESTS K-RES-OVER-SCN (SIGNED KK60), FOREMAN_B_STATUS; git diff LIVE..r2 on jverdict/jkstage/jkitsel/coop-clear; LIVE deltas bd47c753→18003079→f7ea14b7→5ad52416 grepped for kscn/rtoast/karesult/KIT_SCN/RF (18003079: kitRtoastStage = position only, noFx = no hold for a no-change result; no z change). Reused coop-qcard.js / coop-qcard-scan.py (extended, not copied).
+KIT CHECK: no new part, no private CSS; one kit z rule `.rtoast.karesult{z-index:KIT_SCN.z+1}` for every result card; `REPORT_ONLY=1 node dev/test/kit-std-scan.js` = FAIL 38 (3 rules) on r3 AND on LIVE (same count, pre-existing).
+
+### Finding (fixed by me on r3, 0aaa6784) — KIT 7.4 regression in r1/r2
+jverdict dog() «covered() 2 looks → release()» dropped the HELD result card whenever a layer she closes herself sat over it — the item reveal «Nhận» (`.kmov.kfgain`, z 9100, kmPush does not wait for the held card). r2 6f2196ed: after «Nhận» no result card, the next card opened (lost 8 looks, held:false). LIVE keeps it held. Fix: covered() removed, dog() back to the plain «not visible / no UI → release»; the scene case is cured by the z rule alone. Added coop-qcard.js (E) (gift card → kitGain reveal over the held card → «Nhận» → card still held + top «KẾT QUẢ» → «Tiếp ▸» → next card) and a coop-qcard-scan.py F-HOLD row (UNSAFE if `function covered()` in jverdict; jverdict F-HOLD safe only by CARD_OVER).
+
+### Checks
+| # | check | result |
+|---|---|---|
+| 1 | source hunks vs LIVE; ONE z rule, no per-screen override; KK60 layer table (card over scene + focus; under dialog / ☰ / #kpop) | PASS — scan F-Z unsafe 0; ☰ #modal.kptitle 55 < 58 but showModal is blocked while held (pre-existing RF wrapper); #kpop 9995, .kmov 9100, #kpodov 9000 above |
+| 2 | LAW 11: plain / kitResultCard / held, solo + co-op | PASS — coop-qcard (D) all three over an open scene; same code both seats |
+| 3 | body.kscn-on two owners (kitScene + .kstg) | PASS — read every kitScene open/close path (jselxsc, jkring, jkring-item): none leaves kitScene.cur without its layer; coop-qcard (B) 0 looks without it (LIVE 46) |
+| 4 | co-op SWAP0/SWAP1, solo unchanged, nothing twice/lost | PASS — SWAP0 143/143 (87dcdfbb), 143/143 (856e330a); SWAP1 143/143 + 142/140 with only the «same world» row; (E) Bạc 210→215 once; name lists «no full name held twice» ok |
+| 5 | SWAP1 «same world» S.wxDay A/B on LIVE | PRE-EXISTING test timing — traced (WXDBG): both seats at week N buổi 1 khắc 4; host S.wxDay.at=4, guest 0 = her host-only copy waits for the next merge by design (jwxk l.11/115, jcoopworld HOST_ONLY); the check reads live S after the host moved a buổi. LIVE shows it too (fixer LIVE run 142; my LIVE f7ea14b7 SWAP0 run S.wxDay.at A=12 B=0; LIVE bd47c753 SWAP1 runs: same-world diffs + week stall). Ticket for the test owner: compare against COOPW.base at the merge, or skip host-only keys once the host has moved |
+| 6 | Fold 755x1000 + iPad 1180x820 «Tiếp ▸» tappable over the roll-call scene | PASS — my shots coop-qcard-held-scene-fold/ipad + E-fold/ipad (looked 3×: card «KẾT QUẢ … Tiếp ▸» over Giáo tập ma ma; after «Nhận» card with «Bạc +5»); fixer CDN r2-* looked at (fix over scene; LIVE iPad hidden) |
+
+### Tests (r3; outside-git shots /home/user/wt/rvshots)
+| test | r3 | before / LIVE |
+|---|---|---|
+| node dev/test/coop-qcard.js | PASS Fold+iPad (856e330a, 3714d82a, 87dcdfbb) | r2 6f2196ed FAIL 2 (E); LIVE bd47c753 FAIL 6 (A covered 22, B 46, D under kscn-veil) |
+| COOP_QCARD_MUT=1 coop-qcard.js | FAIL 4 / FAIL 2 (mutation caught) | — |
+| python3 dev/measure/coop-qcard-scan.py | F-HOLD 8 unsafe 0, F-SCN 2 unsafe 0, F-Z unsafe 0 | r2 F-HOLD unsafe 1 (dog covered); LIVE 1 / 4 / 3 |
+| kit-stage.js | KIT-STAGE PASS | — |
+| dialog-order held/next probes + scan 755x1000, 1180x820 | nextVisible true; SUMMARY TOP 77/DIRECT 101, TOP 75/DIRECT 100; pageErrors 0 | — |
+| ob-verdict-3.test.js | 34/35 | LIVE 34/35, identical FAIL list (md5 228169bb) |
+| coop-e2e SWAP0 / SWAP1 | 143/143 / see row 5 | LIVE f7ea14b7 SWAP0 139/143 (same world) |
+| oldsave-r1.js | 16/16 | — |
+| goal-links.js 755x1000,1180x820 | flaky on BOTH: the jnotes «Điều mới trong cung» pop-up races the companion list; with ctm-notes-seen preset r3 8/8, LIVE 4/4 | ticket for the test owner: preset ctm-notes-seen |
+| kit-std-scan REPORT_ONLY | FAIL 38 (3 rules) | LIVE 38 |
+| quickcheck.sh HEAD ALONE | QUICKCHECK PASS · core gates PASS (87dcdfbb) | one earlier G4 next-dead fail inside quickcheck; next-dead.js alone PASS on r3 and LIVE |
+
+Merges: LIVE 18003079 (KIT_REQUESTS both entries kept), f7ea14b7; merge-tree onto LIVE 5ad52416 = index.html/sw.js only. Worker deploy: no.
