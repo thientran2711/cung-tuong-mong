@@ -166,12 +166,13 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    {n:"Thỉnh an, chép kinh",lock:(S.buoi||0)!==0,t:"chỉ buổi sáng",c:{suc:-5},o:od(BAL.odb.j2.odO_6),w:{th:8,danh:2,duc:1},l:{th:-2}},
    {n:"Xin Thái hậu đỡ lời",o:od(BAL.ag.cx.thHelp.o+S.th/BAL.ag.cx.thHelp.div),lock:S.th<BAL.ag.cx.thHelp.min,t:`cần Thái hậu ${BAL.ag.cx.thHelp.min}`,w:{...BAL.ag.cx.thHelp.w},x:"Hoàng hậu nể mặt",l:{...BAL.ag.cx.thHelp.l}},
    P3C.tell(S,t)]}
- if(p.kind==="hh"){return topicOpts(v).filter(a=>["Hỏi han sức khỏe","Tạ lỗi","Nhún nhường","Hậu lễ tạ tội","Nhờ người đứng giữa","Chia sẻ bí mật"].includes(a.n)).concat([
+ if(p.kind==="hh"){return topicOpts(v).filter(a=>["Hỏi han sức khỏe","Tạ lỗi","Nhún nhường","Hậu lễ tạ tội","Nhờ người đứng giữa","Chia sẻ bí mật","Nhờ giúp đỡ"].includes(a.n)).concat([
    {n:"Thỉnh an",lock:(S.buoi||0)!==0,t:"chỉ buổi sáng",c:{suc:-5},o:od(BAL.odb.j2.odO_19),w:{hh:4,danh:2,duc:1},l:{hh:-3},go:()=>{v.ghen=cl(v.ghen-5,0,100)}},
    {n:"Xin Hoàng hậu che chở",lock:S.hh<BAL.ag.cx.hhShield.min,t:`cần Hoàng hậu ${BAL.ag.cx.hhShield.min}`,o:od(BAL.ag.cx.hhShield.o+S.hh/BAL.ag.cx.hhShield.div),w:{...BAL.ag.cx.hhShield.w},x:`${BAL.ag.cx.hhShield.sh} tháng phi tần khó hại ngươi`,l:{...BAL.ag.cx.hhShield.l},go:()=>S.shield=BAL.ag.cx.hhShield.sh},
    {n:"Khiêu khích",lock:typeof mockOK==="function"&&!mockOK(S,v)/* rank respect, two-way (law 1): she does not openly mock a higher rank either (RV-NEWS-SIEVE-2) */,t:"phận dưới không dám khiêu khích bậc trên",o:100,w:{danh:2,hh:-15},x:`Hoàng hậu ghen +15, oán ngươi ${balSg(BAL.eff.j2.go)}`,go:()=>{ghenUp(v,15,"bị ngươi khiêu khích",S);oanAdd(v,S,BAL.eff.j2.go)}}])}
  if(p.kind==="rival"){const A=topicOpts(v);
-  if(!sameHouse(S,v)){A.push({n:"Tặng quà",o:100,x:"chọn món trong rương",open:()=>{if(S.inv.some(e=>!e.h))pushDil(mkP("giftpick",{v:v.id}),"Tặng quà")}});
+  if(!sameHouse(S,v)){/* E-GAIN3c law 3: the hub way says what opening it gets her = the regard the best gift in her chest gives (giftVal, the same number the pick rows show, j25); an empty chest opens nothing → locked with its reason */const gv=(()=>{let m=0;try{for(const e of S.inv||[])if(e&&!e.h){const g=giftRel(Object.assign({k:e.k},IT[e.k]),v);if(g>m)m=g}/* E-GAIN3-LIVE (E-GAIN3c-RV 2): the gift rows' own number (j8 giftRel = giveTo) */}catch(e){}return m})();
+   A.push(Object.assign({n:"Tặng quà",o:100,x:gv>0?`chọn món trong rương · nàng quý ngươi +${gv} (món quý nhất)`:"chọn món trong rương",open:()=>{if(S.inv.some(e=>!e.h))pushDil(mkP("giftpick",{v:v.id}),"Tặng quà")}},S.inv.some(e=>!e.h)?{}:{lock:true,t:"rương trống"}));
    const PK=BAL.talk.provoke;A.push({n:"Khiêu khích",lock:typeof mockOK==="function"&&!mockOK(S,v)/* rank respect, two-way (law 1) */,t:"phận dưới không dám khiêu khích bậc trên",o:100,w:{danh:PK.danh},x:`nàng quý ngươi -${PK.rel}, oán ngươi +${Math.round(PK.rel*BAL.relOan.hurt)}, ghen +${PK.ghen}`,go:()=>{relAdd(S,v,-PK.rel);ghenUp(v,PK.ghen,"bị ngươi khiêu khích",S)}});
    if(v.pg>=BAL.ag.cx2.vent.pg)A.push({n:"Trút giận",o:100,w:{...BAL.ag.cx2.vent.c},x:"hả cơn ghen; nàng oán",go:()=>{v.pg=0;relAdd(S,v,-BAL.ag.cx2.vent.rel)}});
    A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(BAL.ag.wit.hear+eyes(S)*BAL.ag.wit.mat),x:evSg(BAL.eff.j9.evOverhear),run:()=>overhear(S.place)})}
@@ -185,7 +186,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
  if(p.kind==="ksp"){const A=[{n:"Đút lót lật thẻ",c:{bac:-30},o:100,inner:1,lock:S.tablet>0,t:`đang có hiệu lực ${S.tablet} tuần`,x:`2 tuần tới dễ được lật thẻ: ${chanceW(nightCh())} → dễ hơn một bậc`,go:()=>S.tablet=2}];
   if(Object.keys(LIKES).some(k=>!K[k])||(typeof disUnk==="function"&&disUnk("emp"))||(typeof eaOpen==="function"&&eaOpen(S)))A.push({n:"Hỏi sở thích Hoàng thượng",c:{...BAL.ag.cx2.likes.c},o:od(BAL.ag.cx2.likes.o),x:"biết thêm một điều ngài thích hay không ưa",go:()=>discover()});
   A.push({n:"Xem sổ thị tẩm",o:100,fix:1,x:"biết ai đang được sủng",go:()=>log("Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights} lần`)+`; ngươi ${S.nights} lần.`)});return A}
- if(p.kind==="peddler")return S.shop.slice(0,6).map(k=>({n:`Mua ${itm(k).n}`,c:{bac:-itm(k).pr},o:100,fix:1,x:itm(k).d,go:()=>S.inv.push({k})}));
+ if(p.kind==="peddler")return S.shop.slice(0,6).map(k=>({n:`Mua ${itm(k).n}`,c:{bac:-itm(k).pr},o:100,fix:1,x:itm(k).d,go:()=>invAdd(S,{k})}));
  if(p.kind==="fallen")return[
    {n:"Đưa cơm áo",c:{bac:-20},o:100,w:{duc:4}},
    {n:"Hỏi chuyện cũ",o:od(cx2O(S,"old")),x:`${evSg(BAL.ag.ev.one)} về một phi tần từng làm điều sai`,go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&chSearch(S,null,()=>evA(S,x,BAL.ag.ev.one)))log(`Phế phi kể chuyện xấu của ${x.name}: ${evSg(BAL.ag.ev.one)}.`);else if(x&&chMissed())log(`Phế phi kể chuyện cũ của ${x.name}. ${chMissTxt(x)}`);else log("Phế phi chỉ kể chuyện cũ vô hại, không có gì làm chứng cứ.")}}];
@@ -215,3 +216,6 @@ function hireMaster(){if(S.bac<BAL.bacFee.master||S.master||S.dead)return;apply(
 /* what a won night is worth, in numbers: a full thị tẩm (Sủng, Ân tình, a chance of a child and of a gift); the cost to the rival on a red 'kèm' line */
 function stealX(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}const M=BAL.steal.m[road?"road":"feign"];const w=M&&M.win&&Object.keys(M.win).length?` · ${fmt(M.win)}`:"";return `${sgRange(nightG(0),nightG(10))} · Ân tình +${nightA(0)} đến +${nightA(5)}${w}${S.preg?"":` · thai: ${chanceW(c)}`} · có thể được thưởng · kèm: ${stealKem(v,road?"road":"feign")}`}
 function stealKem(v,mode){const B=BAL.steal,M=(B.m&&B.m[mode==="road"?"road":"feign"])||{};const rel=M.rel==null?B.rel:M.rel,gh=M.ghen==null?B.ghen:M.ghen;const h=BAL.relOan.hurt;let o=Math.round(rel*h);try{o=Math.round(rel*h*persF(v,"slight",1))}catch(e){}return `${v.name} ghen +${gh}, quý ngươi -${rel}, oán ngươi +${o}${M.hh?`, Hoàng hậu quý ngươi -${M.hh}`:""}`}
+/* save-unseen-lists (review r2 of save-year-rollback, item 4; same family as j6 «Tiếp tục» / j42 srvInit): start() sets quiet=true while it builds the
+   life and false at its end; a throw in any step between left quiet on = no save for the whole life. quiet is always released when start returns. */
+{const s0=start;start=function(){try{return s0.apply(this,arguments)}finally{quiet=false}}}

@@ -6,6 +6,7 @@
    4) the real poisoned save shape (BGMQ: 1998× empty Tâm trạng + Kỳ ngộ + empty «Xong việc») loads as Kỳ ngộ only; repeats dropped
    usage: node dev/test/look-dedupe.js [index.html | http URL] */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');
+const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
 const RT=require('./realtap.js');
 const GAME=process.argv[2]||path.join(__dirname,'../../index.html');const DEVS={fold:[755,1000],ipad:[1180,820]};
 function serve(file){const root=path.dirname(path.resolve(file)),idx=path.basename(file);const T={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.css':'text/css'};
@@ -14,12 +15,14 @@ const POISON=[];for(let i=0;i<1998;i++)POISON.push({t:'Tâm trạng · Cung nữ
 POISON.splice(7,0,{t:'Kỳ ngộ',h:'<p>Danh +2; Tố Nguyệt thiện cảm +34</p>'},{t:'Xong việc: Đi một nơi trong cung',h:'',btn:'Đã hiểu'},{t:'Kỳ ngộ',h:'<p>Danh +2; Tố Nguyệt thiện cảm +34</p>'});
 let fails=0;const ok=(c,msg)=>{console.log((c?'PASS ':'FAIL ')+msg);if(!c)fails++};
 (async()=>{const URL=/^https?:/.test(GAME)?GAME:await serve(GAME);const b=await chromium.launch();
- for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',serviceWorkers:'block'});
+ for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];const ctx=await b.newContext({viewport:{width:w,height:h},hasTouch:true,isMobile:dev==='fold',serviceWorkers:'block'});await keepNotesSeen(ctx);
   const p=await ctx.newPage();await p.route(/\.(mp3|ogg|m4a|mp4|webm|wav)(\?|$)/,r=>r.abort());const errs=[];p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:180000});await p.waitForFunction(()=>typeof start==='function'&&typeof showTitle==='function',null,{timeout:180000});await p.waitForTimeout(1500);
   /* harness setup only (not a press): a fresh solo life on its home screen */
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;try{REC.tour='done';REC.asked=1;saveRec()}catch(e){}
-   for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}try{S.tutTour=1;coachOff&&coachOff()}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render()});
+   for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}/* save-unseen-lists r3: «Nhận thân phận» as a player (as save-boundary-reload newLife) — the identity card is unseen and comes back from the sổ while NLP is open *//* look-dedupe fix rv22: accepting a tú nữ life starts the 3 selection days (jselxday nlAccept wrap), whose day card selxRefill puts back after every render — the
+      look-ups below would meet «Ngày thứ nhất — Nhập cung» instead of the home screen (LC26 hold: FAIL 6 on rv21 AND on LIVE with this harness). Harness setup: this life is past its selection. */
+   try{if(typeof nlAccept==='function')nlAccept(false)}catch(e){}try{if(S.selx2&&S.selx2.days){S.selx2.days=0;S.selx2.done=1}}catch(e){}try{S.tutTour=1;coachOff&&coachOff()}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());render()});
   for(let i=0;i<8;i++){await p.waitForTimeout(800);await p.evaluate(()=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife,.kroul,#dawn').forEach(e=>e.remove());if(Q.length||!document.getElementById('modal').hidden){Q.length=0;document.getElementById('modal').hidden=true;render()}})}
   /* KK36 (look-dedupe flake, kit-stage 1/4): portrait preloads (PORK / kidPre onload → kitRenderSoon 250 → render) can land after the setup and
      rebuild the home row, so a seal handle taken earlier is detached («gone»). Harness setup only: wait until the page is quiet (no render for
@@ -42,9 +45,17 @@ let fails=0;const ok=(c,msg)=>{console.log((c?'PASS ':'FAIL ')+msg);if(!c)fails+
   const ch=await rt.tap(close,{label:'✕',screen:'Tâm trạng'});await p.waitForTimeout(600);
   st=await p.evaluate(()=>({q:Q.length,t:JSON.stringify(Q.map(m=>m.t)),hid:document.getElementById('modal').hidden}));ok(ch&&st.q===0&&st.hid,`${dev}: ONE real tap on its ✕ closes it (tap ${ch}, Q ${st.q} ${st.t}, modal hidden ${st.hid})`);
   /* 3) a kit notice comes back whole */
-  st=await p.evaluate(()=>{kitModal({kind:'info',title:'Thử sổ',sub:'phụ',subject:S,sections:[{h:'Mục',rows:[['Điều','giá trị thử 123']]}],btn:'Đã rõ'});const L=serQ();const e=L.find(x=>x.t==='Thử sổ');
-   Q.length=0;Q=deserQ(JSON.parse(JSON.stringify(L)));showModal();return{e:!!(e&&e.kit),q:Q.length,body:(document.querySelector('#modal .dlg')||{}).innerText||''}});
-  ok(st.e&&st.q===1&&/giá trị thử 123/.test(st.body),`${dev}: a kit notice is saved with its kit spec and comes back with its body`);
+  /* rv22: the save round trip runs on its own queue (whatever else is waiting stays aside), every notice shape a restore reads: a kit notice about her,
+     a kit notice about another person (@p id), a plain text notice; each must come back once, with its body. LD_MUTATE=kit drops the kit spec on save (must FAIL). */
+  st=await p.evaluate(MU=>{const Q0=Q;Q=[];if(MU==='kit'){window.__kq0=kqKit;kqKit=()=>undefined}const v=rivals.find(x=>x.alive&&x.id!=null);const out=[];
+   try{kitModal({kind:'info',title:'Thử sổ',sub:'phụ',subject:S,sections:[{h:'Mục',rows:[['Điều','giá trị thử 123']]}],btn:'Đã rõ'});
+    if(v)kitModal({kind:'info',title:'Thử sổ hai',sub:'phụ',subject:v,sections:[{h:'Mục',rows:[['Người',v.name],['Điều','giá trị thử 456']]}],btn:'Đã rõ'});
+    pushModal({t:'Thử tin',h:'<p>giá trị thử 789</p>',btn:'Đã rõ'});
+    const L=serQ();const kits=L.filter(x=>x.kit).map(x=>x.t);Q=deserQ(JSON.parse(JSON.stringify(L)));
+    for(const want of [['Thử sổ','giá trị thử 123'],v?['Thử sổ hai','giá trị thử 456']:null,['Thử tin','giá trị thử 789']].filter(Boolean)){const m=Q.find(x=>x.t===want[0]);let body='';
+     if(m){Q=[m].concat(Q.filter(x=>x!==m));showModal();body=(document.querySelector('#modal .dlg')||{}).innerText||''}out.push({t:want[0],n:Q.filter(x=>x.t===want[0]).length,body:new RegExp(want[1],'i').test(body)})}
+    return{kits,out,v:!!v}}finally{if(MU==='kit')kqKit=window.__kq0;Q=Q0;document.getElementById('modal').hidden=true;render()}},process.env.LD_MUTATE||'');
+  ok(st.kits.includes('Thử sổ')&&(!st.v||st.kits.includes('Thử sổ hai'))&&st.out.every(o=>o.n===1&&o.body),`${dev}: kit notices (her + another person) and a text notice are saved with their spec and come back once with their body ${JSON.stringify(st)}`);
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});
   /* 4) the real poisoned save shape */
   st=await p.evaluate(L=>{const out=deserQ(L);return out.map(m=>m.t)},POISON);
@@ -52,5 +63,11 @@ let fails=0;const ok=(c,msg)=>{console.log((c?'PASS ':'FAIL ')+msg);if(!c)fails+
   /* full save → load round trip with the look-up open */
   st=await p.evaluate(()=>{emoBox('me');const d=ser();const n=(d.P||[]).length;Q.length=0;deser(JSON.parse(JSON.stringify(d)));return{n,q:Q.length}});
   ok(st.n===0&&st.q===0,`${dev}: save + load with «Tâm trạng» open → nothing comes back (P ${st.n}, Q ${st.q})`);
+  /* rv22 save-restore with the new-life panel still open (save-unseen-lists): her identity card «Thân phận kiếp này» is unseen → it comes back from the save
+     exactly once, the look-up never (LIVE lost it: base FAIL) */
+  st=await p.evaluate(()=>{Q.length=0;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}const nlp=typeof NLP!=='undefined'&&!!NLP;Q.length=0;document.getElementById('modal').hidden=true;render();
+   emoBox('me');const d=ser();Q.length=0;deser(JSON.parse(JSON.stringify(d)));const t=Q.map(m=>m.t);try{if(typeof nlAccept==='function'&&nlp){nlAccept(false);if(S.selx2&&S.selx2.days){S.selx2.days=0;S.selx2.done=1}}}catch(e){}
+   Q.length=0;document.getElementById('modal').hidden=true;render();return{nlp,t}});
+  ok(!st.nlp||(st.t.filter(x=>x==='Thân phận kiếp này').length===1&&!st.t.some(x=>/^Tâm trạng · /.test(x))),`${dev}: save + load with the new-life panel open → her identity card back once, no look-up ${JSON.stringify(st)}`);
   ok(errs.length===0,`${dev}: no page errors ${JSON.stringify(errs.slice(0,3))}`);await ctx.close()}
  await b.close();console.log(fails?`LOOK-DEDUPE FAIL ${fails}`:'LOOK-DEDUPE PASS');process.exit(fails?1:0)})();

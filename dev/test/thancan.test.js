@@ -15,7 +15,7 @@
 const {chromium}=require('playwright');const path=require('path');
 const [,,F,L0]=process.argv;const LIVES=+L0||2;
 (async()=>{const b=await chromium.launch();const fails=[];const notes=[];
-for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(u=>/^https?:/.test(u.href),r=>r.abort());
  await p.addInitScript(s=>{let x=s;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648}},seed);
  await p.goto('file://'+path.resolve(F),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
@@ -71,7 +71,7 @@ for(let seed=1;seed<=LIVES;seed++){const p=await b.newPage();const errs=[];p.on(
    const on=figFor(s7);if(!/fake-tc\.webp/.test(on))bad.push("T7 uniform not worn: "+on);thcPick(s7.sid,0);const off=figFor(s7);if(/fake-tc/.test(off))bad.push("T7 uniform worn after dismiss: "+off);
    L.splice(L.length-2,2)}else note.push("T7 figure part skipped (no identity)");
   /* T8 old save */
-  save();const raw=JSON.parse(localStorage.getItem(SK(SLOT)));delete raw.S.thcV;delete raw.S.thc;if(raw.R)for(const v of raw.R){delete v.thc;delete v.thcV}localStorage.setItem(SK(SLOT),JSON.stringify(raw));
+  save();const raw=JSON.parse((window.slotGet?slotGet(SK(SLOT)):localStorage.getItem(SK(SLOT))));delete raw.S.thcV;delete raw.S.thc;if(raw.R)for(const v of raw.R){delete v.thc;delete v.thcV}localStorage.setItem(SK(SLOT),JSON.stringify(raw));
   return{bad,note,slot:SLOT}});
  fails.push(...r.bad.map(x=>`seed ${seed}: ${x}`));notes.push(...r.note.map(x=>`seed ${seed}: ${x}`));
  const r8=await p.evaluate(slot=>{const bad=[];try{deser(loadSlot(slot))}catch(e){bad.push("T8 load threw "+e.message)}

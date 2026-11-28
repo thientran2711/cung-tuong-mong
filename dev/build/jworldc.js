@@ -99,8 +99,10 @@ function wcWrap(k){const E=EVD[k];if(!E||E.__wc)return;E.__wc=1;
  const s0=E.start;E.start=function(w){let t="",er=null;try{t=s0?s0.apply(this,arguments):""}catch(e){er=e}try{if(BAL.wc&&Bc().on&&host()){const c=wcDraw(w);if(c){w.x.wc=c;wcRound(WCI[c.id],w,c);WCS.draw++}}}catch(e){wErr("wc start "+k,e)}if(er)throw er;return t};
  const e0=E.end;E.end=function(w){const t=e0?e0.apply(this,arguments):"";let x="";try{x=wcEnd(w)}catch(e){wErr("wc end "+k,e)}return (t||"")+x};
  const c0=E.card;E.card=function(w){const m=c0?c0.apply(this,arguments):null;try{if(w&&w.x&&w.x.wc)PEND.push(w)}catch(e){}return m}}
+/* save-unseen-lists r2 (rv r2 FIX 1, LAW 11): the composed world card is carried by its window id (j3 rcpReg), remade from the live window on load */
+const wcCardK=rcpReg("wc",id=>{let w=null;try{w=(window.worldWin()||[]).find(x=>x.id===id)}catch(e){}return w?wcCard(w):null});
 function flush(){if(!PEND.length||!S||S.dead)return;const j=wc();let n=0;for(const w of PEND.splice(0)){if(j.sh[w.id])continue;j.sh[w.id]=1;
- let m=null;try{m=wcCard(w)}catch(e){wErr("wc card",e)}if(m){Q.push(m);n++;WCS.show++;try{nrMark("wc:"+w.k,w.x.wc.id)}catch(e){}}}
+ let m=null;try{m=wcCardK(w.id)}catch(e){wErr("wc card",e)}if(m){Q.push(m);n++;WCS.show++;try{nrMark("wc:"+w.k,w.x.wc.id)}catch(e){}}}
  try{const lo=((S.wwin&&S.wwin.seq)||0)-20;for(const i in j.sh)if(+i<lo)delete j.sh[i];for(const i in j.ch)if(+i<lo)delete j.ch[i]}catch(e){}
  if(n&&$("modal").hidden)showModal()}
 const WCS={draw:0,show:0};window.WCS=WCS;

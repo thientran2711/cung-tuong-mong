@@ -21,10 +21,10 @@ function kipItem(e){const a=typeof giftArt==="function"?giftArt(e):{src:"",grade
  const use=e&&e.wk?(typeof WTIER!=="undefined"?WTIER[e.wk.ti]:""):String(it.d||"").replace(/\s*·\s*(Thường|Tinh phẩm|Trân phẩm|Tuyệt phẩm|Ngự tứ)\s*$/,"");/* reviewer r1: IT.d ends with the grade word, already on the tile's grade line (was shown twice) */
  return{src:a.src||(typeof kitItemSrc==="function"?kitItemSrc(e.k):""),grade:g,gname:a.gradeName||G.n||"",col:G.c||"",name,kind,use,silk:it.kd==="Vải vóc"||/lụa|gấm|vải|sa\b/i.test(name)}}
 function kipLocked(c){return !!(c&&(c.lock||(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)))}
-function kipTile(c,i,on){const e=S.inv[c.ik],I=kipItem(e),lock=kipLocked(c);
+function kipTile(c,i,on,q){const e=S.inv[c.ik],I=kipItem(e),lock=kipLocked(c);
  const mark=e&&e.t?["đã tẩm","r"]:null;
  return `<div class="kshc kshpick kipc${lock?" kshno":""}${on?" on":""}" role="radio" aria-checked="${on?"true":"false"}" data-kip="${i}">`+
-  `<button type="button" class="kshpic" data-kip="${i}" aria-label="${kipE(I.name)}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot",tip:I.name,mark})}</button>`+
+  `<button type="button" class="kshpic" data-kip="${i}" aria-label="${kipE(I.name)}">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot",tip:I.name,mark,qty:q>1?q:undefined})}</button>`+
   `<span class="kshn"${I.col?` style="color:${I.col}"`:""} title="${kipE(I.name)}">${kipE(I.name)}</span>`+
   `<span class="kshe" title="${kipE(I.use)}">${kipE(I.use)}</span></div>`}
 /* the detail: the option's own decorated kit card (a display copy: name, odds, Tốn / Được / Mất / Kèm or the reason) + the confirm button.
@@ -44,9 +44,13 @@ function kipBuild(){const m=Q[0],M=$("modal");if(!M||M.hidden||!kipOn(m))return;
  const L=m.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]&&ops.querySelector(`.opt[data-m="${i}"]`));
  /* doable first (kitDoableFirst rule), then the dialog's own order */
  L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));
+ /* inv-stack (jstack): pieces of one kind-and-source with the same offer = ONE tile with the kit stack badge ×N (kitItem qty) —
+    the real pieces in the chest + the ones in her stack; the tile picks the first real piece */
+ {const D=new Map(),SEEN=new Set(),L2=[];for(const x of L){const e=S.inv[x[0].ik];const s=typeof invCan==="function"&&invCan(e)?[invSig(e),kipLocked(x[0]),x[0].n||"",x[0].x||""].join("#"):null;
+   if(s&&D.has(s)){D.get(s)[2]++;const dup=ops.querySelector(`.opt[data-m="${x[1]}"]`);if(dup)dup.remove();/* the hidden twin card goes (its tile is the first one) */continue}const o=[x[0],x[1],1+(s&&typeof invMoreOnce==="function"?invMoreOnce(S,e,SEEN):0)];if(s)D.set(s,o);L2.push(o)}L.length=0;L.push(...L2)}
  let sel=KIP_SEL.get(m);if(sel==null||!L.some(x=>x[1]===sel)){const f=L.find(x=>x[0].kgbest&&!kipLocked(x[0]))||L.find(x=>!kipLocked(x[0]));sel=f?f[1]:null}/* kgbest: the dialog's preselected item (giftto: the one he values most) */
  const w=document.createElement("div");w.className="kipw kshop";
- w.innerHTML=`<div class="kshg kipg" role="radiogroup" aria-label="Chọn món">${L.map(([c,i])=>kipTile(c,i,i===sel)).join("")}</div><div class="kipd" aria-live="polite"></div>`;
+ w.innerHTML=`<div class="kshg kipg" role="radiogroup" aria-label="Chọn món">${L.map(([c,i,q])=>kipTile(c,i,i===sel,q)).join("")}</div><div class="kipd" aria-live="polite"></div>`;
  ops.prepend(w);w.style.setProperty("grid-column","1 / -1","important");ops.classList.add("kiphas");  /* inside the option box: the grid takes the options' own place in every dialog layout (person dialog 32.7 too) */M.querySelector(".dlg").classList.add("kipdlg");
  if(sel!=null)kipSelect(M,m,sel);else kipDetail(M,m,-1)
  /* the gift moment's two pictures load when a gift picker opens (on demand, ~60 KB; sw.js caches them) */
@@ -57,6 +61,11 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
  if(t.dataset.kipgo!=null){if(t.disabled)return;const i=+t.dataset.kipgo,b=M.querySelector(`.opts>.opt[data-m="${i}"]`);if(!b||b.disabled)return;
   KIP_GO={pid:m.pid,pp:m.pp,c:m.opts[i],from:(M.querySelector(`.kipc[data-kip="${i}"] .kitem`)||t).getBoundingClientRect(),to:kipTarget(M)};b.click();return}
  kipSelect(M,m,+t.dataset.kip)},true);
+/* K-PICK-GO-REACH (KIT §28.13i, KK61): the confirm «kipgo» is the LAST child of the whole picker (.kipw), never inside the detail: sticky to
+   the bottom of the dialog's scroller (#mb) while any part of the picker is in view = reachable with no scroll (inside .kipd its sticky could
+   never rise above the detail: 187–254 px below the box on Fold + iPad, Dâng quà dead). Every kipDetail draw moves its button out. */
+(function(){const k0=kipDetail;kipDetail=function(M){try{M&&M.querySelectorAll(".kipw>.kipgo").forEach(x=>x.remove())}catch(e){}const r=k0.apply(this,arguments);
+ try{const d=M&&M.querySelector(".kipd"),g=d&&d.querySelector(":scope>.kipgo");if(g)d.after(g)}catch(e){console.error("kipgo",e)}return r}})();
 /* ---------- the gift moment ---------- */
 let KIP_GO=null;
 /* where the person is: the open person card's portrait in the panel, else the dialog's own figure, else the upper middle */
@@ -100,12 +109,12 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 .kshc.kipc.on>.kshpic{filter:var(--k-glow);transform:scale(1.06)}
 .kipd{display:flex;flex-direction:column;gap:6px;min-width:0}
 .kipd>.opt.kipcard{pointer-events:none;margin:0;width:100%}
-.kipd>.kipgo{align-self:stretch;min-height:40px}
-.kipd>.kipgo:disabled{filter:grayscale(1);opacity:.55}
-/* reviewer r1: with the §70 strip the confirm stays in view — strip | card + confirm side by side on landscape screens, and the confirm
-   sticks to the bottom of the scrolling option box everywhere */
-.kipd>.kipgo{position:sticky;bottom:0;z-index:2}
-/* kv3:.kv2 */:where(.kv2) .kipd.kipd2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:10px}:where(.kv2) .kipd2>.kidet{grid-column:1;grid-row:1/span 2}:where(.kv2) .kipd2>.kipcard,:where(.kv2) .kipd2>.kipgo{grid-column:2}:where(.kv2) .kipd2>.kipgo{align-self:start;max-height:48px}
+.kipw>.kipgo{align-self:stretch;min-height:40px}
+.kipw>.kipgo:disabled{filter:grayscale(1);opacity:.55}
+/* reviewer r1: with the §70 strip, strip | card side by side on landscape screens. K-PICK-GO-REACH (KK61): the confirm sticks to the bottom
+   of the dialog's scroller while the picker is in view (child of .kipw, so the sticky can rise over the grid + detail) */
+.kipw>.kipgo{position:sticky;bottom:0;z-index:2}
+/* kv3:.kv2 */:where(.kv2) .kipd.kipd2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:10px}:where(.kv2) .kipd2>.kidet{grid-column:1;grid-row:1/span 2}:where(.kv2) .kipd2>.kipcard{grid-column:2}
 
 /* kv3:.kv1 */:where(.kv1) .kipg{--kshsz:84px}
 `;document.head.appendChild(st)})();

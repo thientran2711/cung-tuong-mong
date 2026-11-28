@@ -42,14 +42,25 @@ function spOpen(s){if(!S||!s||ownerOf(s)!==S)return;const nx=SRK[s.role][srk(s)+
    tsOpt({n:fv.k==="hh"?"Xin Hoàng hậu chuẩn":"Xin Thái hậu chuẩn",odds:od,fx:{[fv.k]:-fv.n},need:[{t:`${fv.lbl} ${fv.n} (có ${fv.val})`,ok:fv.ok}],duoc,mat:["lời xin mất",`thiện cảm -${BAL.dbFail}`],kem,go:go("fav")})]});
  showModal()}
 /* moving a servant to another mistress (NPC side and "Cho đi"): a higher palace with room, else back to Nội vụ phủ */
-function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const c=capOf(v),h=hhHas(v),i=s.role==="maid"?0:1;return h[i]<c[i]})());
+function spGoTo(o,s){const L=liveRivals(true).filter(v=>v!==o&&!v.coop/* review/srv-rank rv#1: never the co-op friend's proxy */&&rkOf(v)>rkOf(o)&&!v.out&&(()=>{const c=capOf(v),h=hhHas(v),i=s.role==="maid"?0:1;return h[i]<c[i]})());
  return L.length?L.sort((a,b)=>rkOf(b)-rkOf(a))[0]:null}
 function spMove(o,s,v){const i=(o.staff||[]).indexOf(s);if(i>=0)o.staff.splice(i,1);s.proud=0;if(v){v.staff=v.staff||[];s.rk=Math.min(srk(s),srkMax(v,s));v.staff.push(s)}}
 /* AG-ALL-2 G6 / G10 (ONE CORE): a servant asks her master o to let her go — the three answers, built once: the player consort's card (spLeaveCard),
    an NPC master's choice (spAsk → mindPick, BAL.ag.stf2.lvW × her nết), and the maid player's own "Xin chủ cho đi hầu cung khác" (s = S). */
 function spLvS(s){return s===S?{role:"maid",rk:S.srv.rk}:s}
+/* review/srv-rank: ONE rule for her and every NPC servant — she has OUTGROWN her house (BAL.srvCap): at her master's cap (srkMax) with full
+   Công lao, and a higher palace with room (spGoTo) exists → the ask to serve elsewhere is open whatever her trust (it was locked for a trusted
+   servant, so a good maid under a low master stood still for years) */
+function spOutgrown(o,s){try{const B=BAL.srvCap;if(!B||!B.open||!o||!s)return false;const x=spLvS(s),rk=srk(x),mp=s===S?(S.srv&&S.srv.mp)||0:s.mp||0;
+ return rk>=srkMax(o,x)&&mp>=srvMpNeed(rk)&&!!spUpTo(o,s)}catch(e){return false}}
+/* where an outgrown servant can go: the highest palace above her master whose cap is above her rung; the maid player is not a seat of the
+   household table (hhHas), an NPC servant needs a free seat there or the Nội vụ phủ swap — that house's lowest servant of her kind, below her
+   rung, takes the seat she leaves (the household table BAL.promo.cap holds on both sides) */
+function spSwapOf(v,x){return ((v&&v.staff)||[]).filter(y=>y&&y.role===x.role&&!y.coop&&srk(y)<srk(x)).sort((a,b)=>srk(a)-srk(b))[0]||null}
+function spUpTo(o,s){const x=spLvS(s),i=x.role==="maid"?0:1;return liveRivals(true).filter(v=>v!==o&&!v.coop&&!v.out&&rkOf(v)>rkOf(o)&&srkMax(v,x)>srk(x)&&(s===S||hhHas(v)[i]<capOf(v)[i]||!!spSwapOf(v,x))).sort((a,b)=>rkOf(b)-rkOf(a))[0]||null}
+function spLvTrust(s){return s===S?(S.tin||0):(s.loyal||0)}
 function spLvLoy(s,n){if(s===S)apply({tin:n});else s.loyal=cl(s.loyal+n,0,100)}
-function spLeaveOpts(o,s){const B=BAL.sp,x=spLvS(s),v=spGoTo(o,x);const me=o===S,rk=srk(x);const keep=Math.max(B.keepMin,Math.round(dbCost({role:x.role,rk:rk-1})*B.keepMul));
+function spLeaveOpts(o,s){const B=BAL.sp,x=spLvS(s),v=spOutgrown(o,s)?spUpTo(o,s):spGoTo(o,x);/* review/srv-rank: an outgrown servant goes up */const me=o===S,rk=srk(x);const keep=Math.max(B.keepMin,Math.round(dbCost({role:x.role,rk:rk-1})*B.keepMul));
  const others=(o.staff||[]).filter(y=>y!==s);const nm=s===S?"ngươi":s.name;
  return [
   {id:"keep",n:"Tăng tiền thưởng, giữ lại",tag:"reward",keep,v,lock:(me?S.bac:(o.bac||0))<keep,go:()=>{if(me)apply({bac:-keep});else ap(o,{bac:-keep});spLvLoy(s,B.keepGain);
@@ -57,22 +68,26 @@ function spLeaveOpts(o,s){const B=BAL.sp,x=spLvS(s),v=spGoTo(o,x);const me=o===S
   {id:"demote",n:"Giáng một bậc, giữ kỷ cương",tag:"punish",v,lock:rk<1,go:()=>{others.forEach(y=>y.loyal=cl(y.loyal+B.demoteOthers,0,100));spLvLoy(s,-B.demoteLoy);
     if(s===S){S.srv.rk=Math.max(0,S.srv.rk-1);return `${o.name} không cho đi, giáng ngươi xuống ${SRK.maid[S.srv.rk]}. Chủ tin -${B.demoteLoy}.`}s.rk=rk-1;s.proud=0;return me?`Ngươi giáng ${s.name} xuống ${srkName(s)}.`:""}},
   {id:"let",n:"Cho đi",tag:"work",v,go:()=>{others.forEach(y=>y.loyal=cl(y.loyal+B.letOthers,0,100));if(v&&typeof evA==="function")evA(v,o,BAL.ag.ev.one);
-    if(s===S){srvReassign(`${o.name} cho ngươi đi${v?"":"; Nội vụ phủ chia ngươi về cung khác"}.`,v||undefined);return""}spMove(o,s,v);return me?`${s.name} rời cung ngươi${v?`, sang hầu ${tsNm(v)}`:", về Nội vụ phủ"}.`:""}}]}
+    if(s===S){srvReassign(`${o.name} cho ngươi đi${v?"":"; Nội vụ phủ chia ngươi về cung khác"}.`,v||undefined);return""}const sw=v&&hhHas(v)[x.role==="maid"?0:1]>=capOf(v)[x.role==="maid"?0:1]?spSwapOf(v,x):null;spMove(o,s,v);if(sw)spMove(v,sw,o);/* review/srv-rank: the Nội vụ phủ swap keeps both houses inside the table */return me?`${s.name} rời cung ngươi${v?`, sang hầu ${tsNm(v)}`:", về Nội vụ phủ"}${sw?`; ${sw.name} bên ấy sang hầu ngươi thay`:""}.`:""}}]}
 /* s asks o: o = the player → her card; an NPC master → her own choice (loop on), else the old move (a higher palace with room, else nothing) */
 function spAsk(o,s){if(!o||!s)return"";if(s===S)S.srv.lvCd=S.turn+BAL.ag.stf2.leave.cd;else s.lvCd=S.turn+BAL.ag.stf2.leave.cd;
  if(o===S){if(!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))spLeaveCard(s);return""}
- if(!(window.agOn&&agOn()&&typeof mindPick==="function")&&s!==S){const v=spGoTo(o,s);if(v)spMove(o,s,v);return""}
- const W=BAL.ag.stf2.lvW,O=spLeaveOpts(o,s).filter(x=>!x.lock);const mw=t=>{try{return typeof agMW==="function"?agMW(o,t):1}catch(e){return 1}};
+ if(!(window.agOn&&agOn()&&typeof mindPick==="function")&&s!==S){const og=spOutgrown(o,s),v=og?spUpTo(o,s):spGoTo(o,s);if(v){const i=s.role==="maid"?0:1,sw=og&&hhHas(v)[i]>=capOf(v)[i]?spSwapOf(v,s):null;spMove(o,s,v);if(sw)spMove(v,sw,o)}return""}/* review/srv-rank rv#4: the loop-off path follows the same one rule */
+ const W=Object.assign({},BAL.ag.stf2.lvW),O=spLeaveOpts(o,s).filter(x=>!x.lock);
+ if(spOutgrown(o,s)&&spLvTrust(s)>=BAL.sp.leaveLoyal){W.let=(W.let||0)*BAL.srvCap.letW;W.demote=(W.demote||0)*BAL.srvCap.demW}/* review/srv-rank: a trusted servant who outgrew the house is let go more often, punished less */const mw=t=>{try{return typeof agMW==="function"?agMW(o,t):1}catch(e){return 1}};
  const c=mindPick(O.map(x=>[x,(W[x.id]||0)*mw(x.tag)]),o)||O[O.length-1];try{const N=window.__stf2N=window.__stf2N||{};N["leave_"+c.id]=(N["leave_"+c.id]||0)+1}catch(e){}return c.go()||""}
 function spLeaveCard(s){const B=BAL.sp;const O=spLeaveOpts(S,s);const [K,D,L]=O;const v=K.v,keep=K.keep;
- tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
+ return tsPanel({t:"Kẻ hầu xin đi",who:pServ(s),h:`<p>${s.name} thưa rằng ${v?`bên ${tsNm(v)} muốn có ${s.role==="maid"?"nàng":"hắn"} sang hầu`:"muốn xin về Nội vụ phủ"}, xin ${tsGoi()} cho đi.</p>`,
   opts:[tsOpt({n:K.n,fx:{},need:[tsNeedBac(keep)],duoc:[`thiện cảm +${B.keepGain}`,"giữ người, giữ chức"],mat:[`mất ${keep} bạc`],kem:[`kiêu thêm ${B.keepMo} tháng`],go:()=>{const r=K.go();if(r)log(r)}}),
    tsOpt({n:D.n,duoc:["hết kiêu",`kẻ hầu khác thiện cảm +${B.demoteOthers}`],mat:[`${s.name} xuống ${SRK[s.role][srk(s)-1]}`,`thiện cảm -${B.demoteLoy}`],kem:[`thiện cảm dưới ${BAL.loy.out} thì có khi bán mình cho cung khác`],go:()=>{const r=D.go();if(r)log(r)}}),
-   tsOpt({n:L.n,duoc:[`kẻ hầu khác thiện cảm +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm ${balAb(BAL.ag.ev.one)} chứng cứ)`]:[],go:()=>{const r=L.go();if(r)log(r)}})]})}
+   tsOpt({n:L.n,duoc:[`kẻ hầu khác thiện cảm +${B.letOthers}`,"bớt một miệng ăn"],mat:[`mất ${s.name}`],kem:v?[`${s.name} mang chuyện cung ngươi sang bên ${tsNm(v)} (người ấy nắm thêm ${balAb(BAL.ag.ev.one)} chứng cứ)`].concat((()=>{const i=s.role==="maid"?0:1,sw=hhHas(v)[i]>=capOf(v)[i]?spSwapOf(v,s):null;return sw?[`${sw.name} bên ấy sang hầu ngươi thay`]:[]})()):[],go:()=>{const r=L.go();if(r)log(r)}})]})}
+/* save-unseen-lists r4 (LAW 11 / 6c): «Kẻ hầu xin đi» (made at the month step) is a registered generator (the servant as id): it only builds the card
+   from the live household (spLeaveOpts is deterministic; the leave cooldown is set before, in spAsk) — written into the sổ and made again on load */
+spLeaveCard=rcpReg("spLeave",spLeaveCard);
 /* monthly: pride runs its course for every household (hers and the NPCs'), after the merit promotions */
 function spMonth(){let ev="";const B=BAL.sp;for(const o of consorts()){if(!o||o.dead||(o!==S&&!o.alive))continue;for(const s of (o.staff||[]).slice()){if(!s.proud||s.coop)continue;
  if(s.proud<=S.turn){s.proud=0;if(o===S)ev+=`${s.name} đã bớt kiêu. `;continue}
  s.loyal=cl(s.loyal-B.proudLoy,0,100);(o.staff||[]).forEach(x=>{if(x!==s)x.loyal=cl(x.loyal-B.bully,0,100)});
  if(s.loyal<B.leaveLoyal&&ag2Ch(s,B.leaveCh*(window.agSelf&&agSelf(o)?1+(B.leaveLoyal-s.loyal)/B.leaveLoyal:1))){const r=spAsk(o,s);if(r&&o!==S&&typeof mlSee==="function"&&mlSee(o))ev+=r}}}return ev}
 (function(){if(typeof servRanks!=="function")return;const r0=servRanks;servRanks=function(){const ev=r0.apply(this,arguments);let e2="";try{e2=spMonth()}catch(e){console.error(e)}return (ev||"")+e2}})();
-window.spFav=spFav;window.spOpen=spOpen;window.spMonth=spMonth;window.spAfter=spAfter;window.spKemTxt=spKemTxt;window.spPayFav=spPayFav;window.spLeaveCard=spLeaveCard;window.spLeaveOpts=spLeaveOpts;window.spAsk=spAsk;
+window.spFav=spFav;window.spOpen=spOpen;window.spMonth=spMonth;window.spAfter=spAfter;window.spKemTxt=spKemTxt;window.spPayFav=spPayFav;window.spLeaveCard=spLeaveCard;window.spLeaveOpts=spLeaveOpts;window.spAsk=spAsk;window.spOutgrown=spOutgrown;window.spUpTo=spUpTo;

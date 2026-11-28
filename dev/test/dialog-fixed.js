@@ -7,6 +7,7 @@
    (f) the left figure: the SAME size and the SAME position in every dialog of the same frame size (data-ksz) on one device.
    usage: node dev/test/dialog-fixed.js <url|-> <outdir> [WxH@dpr,...]   (shots go outside the repo). Exit 1 on any FAIL. */
 const path=require('path');const fs=require('fs');const {chromium}=require('playwright');
+const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
 const URL=process.argv[2]&&process.argv[2]!=='-'?process.argv[2]:'file://'+path.resolve(__dirname,'../../index.html');const OUT=process.argv[3]||'/tmp/dialog-fixed';
 const SIZES=(process.argv[4]||'755x1000@2,1180x820@2').split(',').map(s=>{const m=s.match(/(\d+)x(\d+)@(\d+)/);return{w:+m[1],h:+m[2],d:+m[3]}});
 fs.mkdirSync(OUT,{recursive:true});let bad=0;const chk=(n,c,x)=>{if(c){console.log('ok  ',n)}else{bad++;console.log('FAIL',n,JSON.stringify(x).slice(0,500))}};
@@ -17,14 +18,18 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
  const sealN=d.querySelectorAll(':scope>.kseal-ev').length,seal=d.querySelector(':scope>.kseal-ev');const D=R(d);const kph=d.querySelector('.kph');
  return{ksz:d.dataset.ksz||'',stage:d.classList.contains('kstage'),D,fig:fig?R(fig):null,tag:tag?R(tag):null,ev:ev?R(ev):null,kol:opts?(opts.dataset.kol||'')+(opts.dataset.kot||''):'',khand:!!(opts&&opts.classList.contains('khand')),oc,sealN,seal:seal?{...R(seal),c:seal.dataset.c}:null,kph:kph?R(kph):null,title:((d.querySelector('.kph')||{}).textContent||'').trim().slice(0,30)}})()`;
 (async()=>{const b=await chromium.launch();
- for(const z of SIZES){const tag=`${z.w}x${z.h}`;const ctx=await b.newContext({viewport:{width:z.w,height:z.h},deviceScaleFactor:z.d,serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
+ for(const z of SIZES){const tag=`${z.w}x${z.h}`;const ctx=await b.newContext({viewport:{width:z.w,height:z.h},deviceScaleFactor:z.d,serviceWorkers:'block'});await keepNotesSeen(ctx);const p=await ctx.newPage();p.setDefaultTimeout(0);
   const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,300)));
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof geS==='function',null,{timeout:0});await p.waitForTimeout(2500);
   await p.evaluate(async()=>{localStorage.removeItem('ctm-ge');const road='tt_co',k='tt';quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
    localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1');window.__forceOrigin=k;document.getElementById('title').hidden=true;const kl=document.getElementById('kload');if(kl)kl.remove();window.__nlInner=1;start();window.__nlInner=0;
    await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin&&S.st&&S.st.f14)||++n>150)r();else setTimeout(t,100)};t()});Q.length=0;
    const s=geS();s.pull=[2,9,0,1];s.st=['o','o','x','o'];s.cx[2]=8;S.duc=62;S.sung=64;S.st.ch.all=1;S.st.f14.ends[11]='win';render();await new Promise(r=>setTimeout(r,2500));try{kmReset()}catch(e){}Q.length=0;geAsk();showModal()});
-  const R=[];const settle=async()=>{await p.waitForTimeout(700);await p.waitForFunction(()=>!(window.KLIFE&&KLIFE.on),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(1200);await p.evaluate(()=>{try{kmReset()}catch(e){}});await p.waitForTimeout(500)};
+  const R=[];const settle=async()=>{await p.waitForTimeout(700);await p.waitForFunction(()=>!(window.KLIFE&&KLIFE.on),null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(1200);await p.evaluate(()=>{try{kmReset()}catch(e){}});await p.waitForTimeout(500);/* KIT §101 hand: the cards are measured when the deal-in has SETTLED (no .khpre, no running card animation) — under load the deal starts after the fixed waits and the cards were still flying in from the deck (RV-168, LC28 ring-build flake) */await p.waitForFunction(()=>{const g=document.querySelector('#modal .khand');if(!g)return true;if(g.classList.contains('khpre'))return false;return [...g.children].every(b=>b.getAnimations().length===0)},null,{timeout:15000}).catch(()=>{});await p.waitForTimeout(150);
+   /* ENTRANCE SETTLED (OWNER-UI-C, MAIN 174, ending dialog «3-dai-ket-cuc» G4 flake): the ending dialog opens ~2.7 s after the choice (kit stage first), i.e. AFTER the fixed waits above, and was measured inside its `kesRise .62s` entrance (scale .97 -> 1: 545x747 = .97 of 562x770, seal 33 = 34 x .97, figure 219x634). Wait until the dialog is open, not .klifewait, has no running finite animation, and its rect is identical in 2 samples 150 ms apart. */
+   await p.waitForFunction(()=>{const m=document.getElementById('modal');if(!m||m.hidden)return false;const d=m.querySelector('.dlg');if(!d)return false;const r=d.getBoundingClientRect();if(r.width<10)return false;if(m.classList.contains('klifewait'))return false;
+    if(d.getAnimations({subtree:true}).some(a=>a.playState==='running'&&a.effect&&a.effect.getComputedTiming().iterations!==Infinity))return false;
+    const k=[r.x,r.y,r.width,r.height].map(Math.round).join();if(window.__dlgK!==k){window.__dlgK=k;return false}return true},null,{timeout:10000,polling:150}).catch(()=>{});await p.waitForTimeout(150)};
   const grab=async(name)=>{await settle();const m=await p.evaluate(MEAS);if(!m){chk(`${tag} ${name}: dialog open`,false,null);return}m.name=name;R.push(m);await p.screenshot({path:`${OUT}/${tag}-${name}.png`});
    /* (a)(b)(c) option cards */
    if(m.oc.length){chk(`${tag} ${name}: odds on the title row (${m.oc.filter(c=>c.hasOdd).length}/${m.oc.length} cards have odds)`,m.oc.every(c=>!c.hasOdd||c.odd||c.kodrow),m.oc.map(c=>c.odd));

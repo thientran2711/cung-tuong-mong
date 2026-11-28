@@ -207,14 +207,14 @@ function dcGateItem(f,st){const D=BAL.dc;const opts=[];const need=st.missing.len
  const own=dcOwnFit(S,need,"tram");const ownF=new Set(own.map(c=>c.f));
  /* own trâm first; borrowing only for a needed colour her chest cannot cover (law 2: never a dominated road) */
  for(const c of own.filter((c,i)=>own.findIndex(x=>x.f===c.f)===i).slice(0,D.chg.max))opts.push({n:`Cài ${c.w.n} (${dcFamN(c.f)}) của mình`,fx:{},x:`tốn: ${D.chg.khac} khắc · thành: có màu ${dcFamN(c.f)} cho lễ`,
-  go:()=>{const w=wdOf(S);const i=S.inv.indexOf(c.e);if(i>=0){S.inv.splice(i,1);if(w.tram)S.inv.push(w.tram);delete c.e.w;w.tram=c.e;spend(D.chg.khac);dcHer().ch="chg"}dcEnter(f)}});
+  go:()=>{const w=wdOf(S);const i=S.inv.indexOf(c.e);if(i>=0){S.inv.splice(i,1);if(w.tram)invAdd(S,w.tram);delete c.e.w;w.tram=c.e;spend(D.chg.khac);dcHer().ch="chg"}dcEnter(f)}});
  const lack=need.filter(x=>!ownF.has(x));
  if(lack.length)for(const L of dcLenders(S,lack))opts.push({n:`Mượn ${L.w.n} (${dcFamN(L.f)}) của ${dcName(L.v)}`,fx:{},x:`tốn: ${D.bor.khac} khắc · thành: có màu ${dcFamN(L.f)} cho lễ, qua tuần sau trả · kèm: ${dcRelW(L.v,-D.bor.use)}`,
   go:()=>{if(dcBorrow(S,L.v,L.e)){spend(D.bor.khac);dcHer().ch="bor";try{log(`Mượn ${L.w.n} của ${dcName(L.v)} để dự ${f.name}; qua tuần sau phải trả.`)}catch(e){}dcEnter(f);return}
    /* r3 review (fix-the-group of r2 item 3 on her side): the gate is built in endTurn, the NPCs' own festival loans run right after it (dcWeek) — when
       one of them took this very piece, the road is gone: say so and open the gate again with the roads still there (before: nothing happened, she
       went in lacking the colour, no word) */
-   try{log(`${L.w.n} của ${dcName(L.v)} đã có người mượn trước.`)}catch(e){}const st2=dcStat(S,f.k);if(st2&&(st2.miss||st2.refused))Q.unshift(dcGateItem(f,st2));else dcEnter(f)}});
+   try{log(`${L.w.n} của ${dcName(L.v)} đã có người mượn trước.`)}catch(e){}const st2=dcStat(S,f.k);if(st2&&(st2.miss||st2.refused))Q.unshift(dcGateK(f.k));else dcEnter(f)}});
  const buy=lack.length?dcBuyFit(S,lack):null;/* offered only when she has the silver (a road she can take) */
  if(buy&&S.bac>=buy.pr)opts.push({n:`Sai người mua ${buy.w.n} (${dcFamN(buy.f)}) ở Nội vụ phủ`,fx:{},x:`tốn: ${D.buy.khac} khắc, Bạc -${buy.pr} · thành: có màu ${dcFamN(buy.f)} cho lễ, trâm giữ lại trong rương`,
   go:()=>{if(dcBuy(S,buy)){spend(D.buy.khac);dcHer().ch="chg";try{log(`Mua ${buy.w.n} ở Nội vụ phủ để dự ${f.name}.`)}catch(e){}}dcEnter(f)}});
@@ -222,15 +222,18 @@ function dcGateItem(f,st){const D=BAL.dc;const opts=[];const need=st.missing.len
  opts.push({n:"Cáo lỗi, về cung nghỉ",fx:{},x:"thành: về cung nghỉ, không dự lễ",go:()=>dcOut(f)});
  const it={t:`Y phục dự ${f.name}`,h:dcFacts(st,f).map(s=>`<p>${s}</p>`).join(""),opts,ev:"dc",evId:"dc:"+f.k,must:1};
  DC_CUR=it;return it}
+/* save-unseen-lists r2 (rv r2 FIX 1): «Y phục dự <tết>» is carried by the festival key (j3 rcpReg) and made again from the live chest on load;
+   no festival today or nothing missing any more → no card (the gate lapses) */
+const dcGateK=rcpReg("dcGate",k=>{const f=dcFestNow();if(!f||f.k!==k)return null;const st=dcStat(S,k);if(!st||(!st.miss&&!st.refused))return null;return dcGateItem(f,st)});
 /* called by jdc0 inside the endTurn chain, after the new tuần began and before the festival events are queued */
 function dcTurn(){if(!S)return;try{dcMigTs()}catch(e){console.error("dcMigTs",e)}if(!dcOn()){/* r4b: loans come home whatever the dress-code switch (the Hội phối đồ lends through the same book) */try{dcReturn()}catch(e){console.error("dcReturn",e)}return}/* loans come home even in a tuần she dies (the NPCs' loans, and hers into her effects): law 6c */if(!S.dead)try{dcNpcSettle()}catch(e){console.error("dcNpcSettle",e)}/* mocked as they went in, before the pieces go back */try{dcReturn()}catch(e){console.error("dcReturn",e)}if(S.dead)return;
  const f=dcFestNow();if(!f||!dcHerOn())return;const F=dcHer();const key=dcKey(f);if(F.key===key)return;
  const st=dcStat(S,f.k);S.dcF={key,ch:null};if(!st||(!st.miss&&!st.refused)){S.dcF.ch="ok";return}
- Q.push(dcGateItem(f,st))}
+ Q.push(dcGateK(f.k))}
 /* ---------- NPC side + her season (outer endTurn wrapper) ---------- */
 /* NPC roads at a festival = hers (law 1): her own trâm of a missing colour first, else borrow from a consort who likes her (same dcBorrow / dcReturn) */
 function dcNpcFest(v,k){try{const st=dcStat(v,k);if(!st||(!st.miss&&!st.refused)||!st.missing.length)return;const own=dcOwnFit(v,st.missing,"tram")[0];const w=wdOf(v);
- if(own){const inv=dcInv(v);inv.splice(inv.indexOf(own.e),1);if(w.tram)inv.push(w.tram);delete own.e.w;w.tram=own.e;return}
+ if(own){const inv=dcInv(v);inv.splice(inv.indexOf(own.e),1);if(w.tram)invAdd(v,w.tram);delete own.e.w;w.tram=own.e;return}
  const L=dcLenders(v,st.missing)[0];if(L){dcBorrow(v,L.v,L.e);return}dcBuy(v,dcBuyFit(v,st.missing))}catch(e){console.error("dcNpcFest",e)}}
 /* after the festival tuần (next endTurn, before pieces go back): the NPCs who went in short of colours are mocked (Danh), once */
 function dcNpcSettle(){if(!dcWorld())return;const P=S.dcNp;if(!P||!P.k||P.done)return;P.done=1;const cut=[];
@@ -242,7 +245,7 @@ function dcNpcDress(v){/* an NPC changes into a robe of the season: one from her
  try{if(!dcOffSeason(v))return;if(dcH(`${v.id}|${S.year}|${dcSeason()}`)%100<BAL.dc.season.npcMiss)return;const w=wdOf(v);const P=Math.min(8,wdPOf(v));const sn=dcSeason();
   const inv=dcInv(v);const i=inv.findIndex(e=>e&&!e.h&&!e.bor&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==="y"&&WD_ITEMS[e.k].P<=P&&dcYSeasons(e.k).includes(sn));
   let nw=null;if(i>=0)nw=inv.splice(i,1)[0];else for(const q of [P,P-1]){const L=wdPool("y",Math.max(0,q),true).filter(k=>dcYSeasons(k).includes(sn));if(L.length){nw={k:L[dcH(v.id+"|"+S.year)%L.length],src:"cap",nvp:1};break}}
-  if(!nw)return;const old=w.y;if(old)inv.push(old);delete nw.w;w.y=nw}catch(e){console.error("dcNpcDress",e)}}
+  if(!nw)return;const old=w.y;if(old)invAdd(v,old);delete nw.w;w.y=nw}catch(e){console.error("dcNpcDress",e)}}
 function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefined"?rivals:[];
  if(dcWorld()){const bad=[];for(const v of R){if(!v||!v.alive||v.out||v.coop)continue;dcNpcDress(v);if(dcSeasonDue(v)){const c=dcSeasonCost(v);const fx={};if(c.danh)fx.danh=-c.danh;if(c.th)fx.th=-c.th;if(Object.keys(fx).length){ap(v,fx);bad.push(v)}}}
   if(bad.length)try{log(`Trong cung chê ${bad.slice(0,3).map(dcName).join(", ")}${bad.length>3?" và mấy người nữa":""} mặc áo trái mùa.`)}catch(e){}
@@ -262,10 +265,14 @@ function dcWeek(){if(!dcOn()||!S||S.dead)return;const R=typeof rivals!=="undefin
  /* two-way borrow: a consort who lacks a colour asks to borrow her trâm (her seat; the piece moves for real) */
  const f=dcFestNow();if(f&&dcHerOn()&&dcLend()&&S.dcAk!==dcKey(f)){S.dcAk=dcKey(f);
   for(const v of R){if(!v||!v.alive||v.out||v.coop||aff(v,S)<netTh(v,"than"))continue;const st=dcStat(v,f.k);if(!st||(!st.miss&&!st.refused)||!st.missing.length)continue;
-   const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)continue;
-   Q.push({t:`${dcName(v)} xin mượn trâm`,who:v,ev:"dc",evId:"dc:ask",h:`<p>${v.name} thiếu màu ${dcFamList(st.missing)} cho ${f.name}, sai cung nữ sang xin mượn ${c.w.n} của ngươi, qua tuần sau trả.</p>`,
+   const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)continue;dcAskCard(v);break}}}
+/* save-unseen-lists r4 (LAW 11 / 6c): «<tên> xin mượn trâm» (made at the turn of the tuần) is BUILT by a registered generator from the asker (id):
+   the festival, what she lacks and the piece in her chest are found again from the live state (the piece is never a copy: dcBorrow moves the real
+   one); the ask mark (S.dcAk) is set before, once — written into the sổ and made again on load */
+const dcAskCard=rcpReg("dcAsk",v=>{const f=dcFestNow();if(!f||!v||!v.alive)return null;const st=dcStat(v,f.k);if(!st||!st.missing||!st.missing.length)return null;const c=dcOwnFit(S,st.missing,"tram")[0];if(!c)return null;
+   const m={t:`${dcName(v)} xin mượn trâm`,who:v,ev:"dc",evId:"dc:ask",h:`<p>${v.name} thiếu màu ${dcFamList(st.missing)} cho ${f.name}, sai cung nữ sang xin mượn ${c.w.n} của ngươi, qua tuần sau trả.</p>`,
     opts:[{n:`Cho mượn ${c.w.n}`,fx:{},x:`tốn: ${c.w.n} rời rương đến tuần sau · thành: ${dcRelW(v,BAL.dc.bor.thanks)}`,go:()=>{if(dcBorrow(v,S,c.e)){try{log(`Cho ${dcName(v)} mượn ${c.w.n} dự ${f.name}.`)}catch(e){}}else try{log(`${c.w.n} không còn trong rương, không cho ${dcName(v)} mượn được.`)}catch(e){}}},
-     {n:"Khéo từ chối",fx:{},x:`thành: ${c.w.n} vẫn ở trong rương`,go:()=>{try{log(`Từ chối cho ${dcName(v)} mượn trâm.`)}catch(e){}}}]});break}}}
+     {n:"Khéo từ chối",fx:{},x:`thành: ${c.w.n} vẫn ở trong rương`,go:()=>{try{log(`Từ chối cho ${dcName(v)} mượn trâm.`)}catch(e){}}}]};Q.push(m);return m});
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{dcWeek()}catch(e){console.error("dcWeek",e)}return r}})();
 /* ---------- the shared contest formula and the guest list (j71) ---------- */
 (function(){if(typeof SC7!=="object")return;for(const kd of Object.keys(SC7)){const o=SC7[kd];if(!o||typeof o.f!=="function"||o.f.__dc)continue;const f0=o.f;

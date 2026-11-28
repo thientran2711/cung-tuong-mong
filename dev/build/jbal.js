@@ -191,7 +191,6 @@ Object.assign(BAL,{
  house:{ /* jhouse.js: acts on a household servant's stage card */
   k:1,              /* khắc each stage act takes (Thưởng/Phạt/Tha/Che chở/Tra khảo/Xem người/Tiến cử/Đổi người/Giao việc phòng bị) */
   thuongBac:10,     /* Thưởng: bạc paid, and bạc needed */
-  phatDuc:3,        /* Phạt vô cớ: Đức -N (card text) */
   cheDanh:2,        /* Che chở (servant accused): Danh -N */
   tra:{base:55,tcDiv:4,loyal:25},   /* Tra khảo a planted spy (a chance, owner 17:00Z): odds he names his master = base + her Tâm cơ/tcDiv − loyal when loyal by nature; hỏng: he holds his tongue, stays */
   che:{base:45,danhDiv:4,rank:4,failLoy:8}, /* Che chở before Thận Hình ti (a chance): base + her Danh/danhDiv + rank×rank; hỏng: the Danh is spent, he is grateful (lòng +failLoy) */
@@ -234,7 +233,7 @@ Object.assign(BAL,{
       accWin:{danh:4}}, /* an accusation that holds: her Danh (a failed one: BAL.tw.g.accFail) */
  m95b:{k:1,             /* khắc to clear a rumour face to face, or to trace who spread it */
       trace:{bac:-10}}, /* silver to have the rumour traced */
- kitpage:{demo:{age:19,k:1,grey:{need:40,have:3,k:2,suc:10},/* §84 greyed-option sample (jgrey) */mapK:2,/* §85 Dư đồ sample khắc (jmapc) */tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1},study:{k:2,suc:15,bac:15},/* jksize sheet study cards */ask:{danh:5,sung:10,an:2},/* jkitpage night-ask sample */ev:{need:1,have:0}/* jgrey §84 need[] sample */,aim:{sung0:34,sung:-10,loyal:-5},kem:{g:8,o:-3,tc1:6,tc2:2,sung:3,tc3:-4,suc:-10}/* §53 kitKemRow + night-card person rows sample (jkitpage kitPgKem) *//* KIT 7.3 «Người ấy» sample (jkitpage kitPgWhy) */},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
+ kitpage:{demo:{age:19,k:1,grey:{need:40,have:3,k:2,suc:10},/* §84 greyed-option sample (jgrey) */mapK:2,/* §85 Dư đồ sample khắc (jmapc) */tomb:{suc:10,duc:3},gift:{bac:20,hh:4,danh:2,th:1},study:{k:2,suc:15,bac:15},/* jksize sheet study cards */ask:{danh:5,sung:10,an:2},/* jkitpage night-ask sample */ev:{need:1,have:0}/* jgrey §84 need[] sample */,aim:{sung0:34,sung:-10,loyal:-5},kem:{g:8,o:-3,tc1:6,tc2:2,sung:3,tc3:-4,suc:-10},res:{duc:2,suc:-5,tc1:5,tc1t:44,tc2:-1,tc2t:30,o1:2,o1t:14,tcS:-4,tcN:10,oS:1,oN:9}/* KIT §7.4a result-card fold sample (jkitpage) *//* §53 kitKemRow + night-card person rows sample (jkitpage kitPgKem) *//* KIT 7.3 «Người ấy» sample (jkitpage kitPgWhy) */},/* kit sample page demo option texts (jopic §6.2b) and slot age (j74) */
       wk:2,         /* kit sample page: the demo "· 2 tuần trước" age of a mood cause */
       listen:{duc:1},  /* kit sample page: the demo option "Nghe hết rồi mới định" gain */
       clock:{left:22000,len:30000}},  /* kit sample page: the timed-choice demo chip (§69 + §32.5c): 22 s left of 30 s */
@@ -244,7 +243,6 @@ Object.assign(BAL,{
  mortx:{youngAge:6},    /* a child younger than this dies of pox / fever / plague in the death line, older of "lâm bệnh" (jmort) */
  ly:{npcAge:{tgk:36,ttp:36}},        /* fixed ages of the Tân Giả khố steward and the Thượng thư phòng tutor (jly NPCFIX) */
  cmaidx:{age:16,ageR:7},             /* close-maid candidates offered to pick: age = age + R(ageR) */
- audit:{loan:30},       /* bạc a friendly consort lends on "Nhờ giúp đỡ" (jaudit; j9's base option types the same 30) */
  m90:{kidAge:14},       /* an unknown person younger than this shows the child silhouette (j90) */
  m72:{bdOk:{danh:3}}    /* quest fam_bd (Bắc Địch father: open a horse market): Danh on success */
 });
@@ -447,6 +445,8 @@ Object.assign(BAL,{
       NPC-side prices (the check and the charge read one key): ksp = an NPC bribes Kính sự phòng (j28) · midwife = a rival bribes the midwife (j32) ·
       backer = a court backer (j34) · npcMat = an NPC buys craft material (j75) · giu = an NPC bribes past «giữ» (j8 + j75, one rule in two modules) */
  actBac:{spy:15,ally:30,bribe:40,block:40,musk:30,catswap:50,lygian:20,slowpoison:40,xinhh:30,huydung:30,giahoa:40,thathu:40,phonghoa:30,thaopet:10},
+ actDuc:{poison:10,musk:8,trip:4,huydung:8,thathu:6,phonghoa:8},
+   /* E-GAIN3c law 4: the Đức each harm act costs its doer (ACT[k].c shows it, its f charges it: one key; values unchanged, were typed in j8 / j9 / j70 / jtsb) */
    /* base bạc of each scheme act (ACT[k].c, its ok and its f charge); jecon raises it by the target's rank / guards, and the lock words print that real price (actBac(k,a,t)) */
 });
 /* evWipe: the chứng cứ amount that clears every piece one person holds against another (evA(a,t,BAL.evWipe): a pardon, a death, a plot undone); review/one-core-dup3 */

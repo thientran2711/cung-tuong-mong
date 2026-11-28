@@ -214,7 +214,7 @@ function kitNumVi(n){const D=["không","một","hai","ba","bốn","năm","sáu",
  const two=x=>{if(x<10)return D[x];const t=Math.floor(x/10),u=x%10;const a=t===1?"mười":D[t]+" mươi";return u===0?a:a+" "+(u===1&&t>1?"mốt":u===5?"lăm":u===4&&t>1?"tư":D[u])};
  if(n<100)return two(n);const h=Math.floor(n/100),r=n%100;return D[h]+" trăm"+(r===0?"":r<10?" lẻ "+D[r]:" "+two(r))}
 /* the option's raw kit line (the same text its act card would read), split into labelled items */
-function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){raw=String(o&&o.x||"")}if(typeof sgTxt==="function")raw=sgTxt(raw);/* SG-CARD: the hint reads the same Sủng the card draws */
+function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):(o&&o.w&&typeof optLine==="function"&&Object.keys(o.w).length)?optLine(o)/* KK56 (E-GAIN3b #5): a talk option with gains in `w` reads the line its act card draws */:typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){raw=String(o&&o.x||"")}if(typeof sgTxt==="function")raw=sgTxt(raw);/* SG-CARD: the hint reads the same Sủng the card draws */
  raw=raw.replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ta +${n}`);
  const M={odds:"",items:[],notes:[]};let lab="";
  for(const s0 of raw.split(/ · (?![^<]*>)/)){const s=kaPlain(s0);if(!s)continue;
@@ -229,6 +229,7 @@ function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dil
  return M}
 /* her side of a phrase: +1 good for her, -1 bad, 0 neutral (the kit colour rule kcls/kaSent + story words) */
 function kitHintSign(p,l){if(/^(không (mất|được|tốn)[^,]*gì|không được không mất)/i.test(p))return 0;
+ if(((/^(một phi tần khác|một người khác|phi tần khác)\s/i.test(p)&&/[-−]\s?\d/.test(p))||/^(Danh|Đức|Sủng|Sức|Tài|Sắc) nàng\s*[-−]\s?\d/i.test(p))&&!/(quý|thiện cảm|tin|mến) ngươi/i.test(p))return 1;/* KK56 (E-GAIN3b #4): a stat drop of ANOTHER consort is a gain for her */
  if(/^(Áp lực hôn sự|Lời đồn)\s*\+\s?\d/.test(p))return -1;if(/^(Áp lực hôn sự|Lời đồn)\s*[-−]\s?\d/.test(p))return 1;/* kit-cost-rows-home: less pressure / rumour is good */
 
  if(l==="kèm"&&!/\+\s?\d/.test(p)&&!/bớt (ghen|oán)/.test(p))return -1;/* a side effect is a risk unless it is a plain gain */
@@ -245,7 +246,7 @@ const KIT_HINT_MAG=[[/Áp lực hôn sự|Lời đồn|Gia thanh|thế lực nh�
 /* the marks of a change: n = the amount in the phrase (null = none named), sgn = +1 / −1 the stat's OWN direction, lv = clarity */
 function kitMk(sgn,p,lv){const n=(String(p).match(/[+−-]\s?(\d+)/)||[])[1];let m=1;if(n&&lv>=1){const v=+n;const g=(KIT_HINT_MAG.find(r=>r[0].test(p))||[0,"cc"])[1];const big=BAL.mark.cut.big[g];m=v>=big*BAL.mark.cut.hi?3:v<=Math.max(1,Math.floor(big*BAL.mark.cut.lo))?1:2}return (sgn>0?"+":"−").repeat(m)}
 /* THE ONE CHOICE FORMATTER (owner OD 26/11 ~21:55Z, law 4 + 11): every CHOICE surface says a stat change as marks «Danh ++» / «Sủng −» (table BAL.mark.cut, kitMk); the TỐN row (row==='ton') and counts with a unit (khắc, người…) keep their exact number; the result card + Sổ ghi never call it. Idempotent (marks hold no digit). Text in, text out (HTML spans pass through). */
-const MARK_NUM=/([+\-−])\s?(\d+)(?:(?: đến |\.\.)[+\-−]?\s?(\d+))?(?![\d.]|\s?%)/g;
+const MARK_NUM=/([+\-−])\s?(\d+)(?:,\d+)?(?:(?: đến |\.\.)[+\-−]?\s?(\d+))?(?![\d.]|,\d|\s?%)/g;/* KK56 (E-GAIN3b #2): a Vietnamese decimal comma belongs to the number («+1,1» reads as +1, never «+,1») */
 const MARK_UNIT=/^\s?(khắc|lượng|người|việc|món|lần|ngày|tuần|tháng|năm|tuổi|buổi|lá|thẻ|cái|vị)(?![\p{L}])/u;
 function markTxt(h,row){h=String(h==null?"":h);if(row==="ton")return h.replace(/([\p{L}])\s[-−]\s?(?=\d)/gu,"$1 ");/* TỐN row = what she PAYS: the exact amount, no minus sign («Bạc 3», owner OD 26/11 ~22:02Z «Tốn: Bạc 20 · Sức 5 · 1 khắc») */if(/\d\s?→\s?\d/.test(h))h=h.replace(/([\p{L}][\p{L} ]*?) (\d+)\s?→\s?(\d+)(?:\s?\(([+\-−]\d+)\))?/gu,(m,L,a,b,d)=>+a===+b?m:L+" "+(+b>+a?"+":"-")+Math.abs(+b-+a));/* «Đức 40 → 38» = a change of −2 */
  if(!/[+\-−]\s?\d/.test(h))return h;
@@ -511,7 +512,7 @@ window.KIT_CREST={ar:{"consort-0":.329,"consort-1":.337,"consort-2":.538,"consor
  key:function(frame){const m=/frame-([a-z0-9-]+)\.webp/.exec(frame||"");if(!m)return null;let k=m[1];if(/^eunuch-[012]$/.test(k))k="eunuch";return this.ar[k]?k:null},
  html:function(frame){const k=this.key(frame);if(!k)return"";const w=this.w[k]||this.W,h=w*this.ar[k],by=this.bar[k]!=null?this.bar[k]:this.bar[k.replace(/-\d$/,"")]!=null?this.bar[k.replace(/-\d$/,"")]:this.BAR,top=by-this.base[k]*h;
   return `<img class="kcrest" src="img/kit/crest-${k}.webp" alt="" aria-hidden="true" style="--cl:${((550-w)/2/550*100).toFixed(3)}%;--ct:${(top/1037*100).toFixed(3)}%;--cw:${(w/550*100).toFixed(3)}%;--ch:${(h/1037*100).toFixed(3)}%" onerror="this.remove()">`}};
-(function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{const m=/<img class="kfr" src="([^"]+)"/.exec(h);if(m&&!/kcrest/.test(h)){const c=KIT_CREST.html(m[1]);if(c)h=h.replace(/(<img class="kfr"[^>]*>)/,`$1${c}`)}}catch(e){}return h}})();
+(function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{const m=/<img class="kfr" src="([^"]+)"/.exec(h);if(m&&!/kcrest/.test(h)&&!(typeof kitNoCrest==="function"&&kitNoCrest(f))){const c=KIT_CREST.html(m[1]);if(c)h=h.replace(/(<img class="kfr"[^>]*>)/,`$1${c}`)}}catch(e){}return h}})();
 /* the small frame = the same pcPort cell, smaller */
 (function(){const m0=mdH;mdH=function(p,cls){const h0=m0.apply(this,arguments);try{if(!p||!/class="md[^"]*\bkit\b/.test(h0))return h0;const big=pcPort(p,p.col);const a=big.indexOf('<span class="kin">');if(a<0)return h0;
   let depth=0,i=a,end=-1;const re=/<\/?span\b[^>]*>/g;re.lastIndex=a;let mm;while((mm=re.exec(big))){if(mm[0][1]==="/"){depth--;if(depth===0){end=mm.index+mm[0].length;break}}else depth++}if(end<0)return h0;
@@ -537,7 +538,7 @@ span.md.kfc .kin>img.kpor{left:14.655%!important;top:24.733%!important;width:70.
 span.md.kfc .kin>img.kpor:not([src*="face-"]):not([src*="unknown"]){left:9.707%!important;top:17.475%!important;width:80.588%!important;height:56.285%!important;clip-path:inset(5% 6.14% 7.28% 6.14%)}
 span.md.kfc .kin>img.kcrest{left:var(--cl)!important;top:var(--ct)!important;width:var(--cw)!important;height:var(--ch)!important;object-fit:fill!important;z-index:3}
 span.md.kfc .kin>img.kpor[src*="face-"],span.md.kfc .kin>img.kpor[src*="unknown"]{top:20.289%!important;height:49.373%!important}
-span.md.kfc .kin>img.kfr{left:0!important;top:0!important;width:100%!important;height:100%!important;object-fit:fill!important;z-index:2}
+span.md.kfc .kin>img.kfr{left:0!important;top:0!important;width:100%!important;height:100%!important;object-fit:fill!important;z-index:2;pointer-events:none}
 span.md.kfc .kin>img.kgem{left:73.564%!important;top:64.609%!important;width:18.327%!important;height:auto!important;aspect-ratio:1;z-index:3}
 span.md.kfc .kin>img.kemb,span.md.kfc .kin>.klab{display:none!important}
 span.md.kfc.xs .kin>img.kgem,span.md.kfc.sm .kin>img.kgem{display:none!important}
@@ -620,14 +621,20 @@ function kitEvArt(m){try{if(!m||typeof evArtOf!=="function")return null;let src=
 /* the result card right after an event choice shows the same picture, small, left of the rows */
 /* KK54 (RV-166 note on kit-k44-parts; law 11 = every result card): the result card (#rtoast, base CSS bottom:72px) stands ON the tab bar, never over it — on a two-row tab bar (Fold) 72 px is too low. One kit rule: bottom = the tab bar's top + 8 px, re-run on resize; the card is a fixed box on the design canvas, so the screen offset is calibrated (style px ≠ screen px, KIT §0). */
 function kitRtoastClear(t){try{t=t||document.getElementById("rtoast");if(!t)return;const tb=document.getElementById("tabs");t.style.bottom="";if(!tb||!tb.getClientRects().length)return;const r=tb.getBoundingClientRect();if(r.top<innerHeight*.5)return;const q=t.getBoundingClientRect(),gap=r.top-8-q.bottom;if(gap>=0)return;/* already clear: base CSS stays */const cur=parseFloat(getComputedStyle(t).bottom)||72,k=(t.offsetHeight&&q.height?q.height/t.offsetHeight:1)||1;t.style.bottom=Math.round(cur-gap/k)+"px"}catch(e){}}
-window.kitRtoastClear=kitRtoastClear;addEventListener("resize",()=>{try{kitRtoastClear()}catch(e){}});
-(function(){if(typeof runOpt!=="function"&&typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(){const r=r0.apply(this,arguments);try{kitRtoastClear($("rtoast"))}catch(e){}try{const a=window.__kitLastEvArt;window.__kitLastEvArt=null;const t=$("rtoast");if(a&&t&&!t.querySelector(".kpev")){t.classList.add("kevres");t.insertAdjacentHTML("afterbegin",`<div class="kpev kpevr">${kitSceneArt(a.src,a.lab,{shape:"tall",cap:false})}</div>`)}else if(t&&!a){t.classList.remove("kevres");const o=t.querySelector(".kpevr");if(o)o.remove()}}catch(e){}return r}})();
+/* KK54b (MAIN 177 LOOK on kit-resfold-r3, law 10, law 11 = every result card / toast): #rtoast is a fixed box centred on the whole design canvas; on a two-pane layout (iPad: stage left, side panel right) that straddles the stage edge and covers the panel's lines and chips.
+   ONE kit rule: the card (result card, event-result card, CẤM / srv toast — every #rtoast) is centred on the STAGE box and never wider than it. Fold (stage = full width) is unchanged. The canvas is scaled, so style px = screen px / k (KIT §0). Re-run whenever the card turns on and on resize. */
+function kitRtoastStage(t){try{t=t||document.getElementById("rtoast");if(!t)return;const st=document.getElementById("stage");t.style.left="";t.style.removeProperty("max-width");if(!st||!t.getClientRects().length)return;const sr=st.getBoundingClientRect();if(sr.width<80)return;let q=t.getBoundingClientRect();const k=(t.offsetWidth&&q.width?q.width/t.offsetWidth:1)||1;if(q.width>sr.width-8){t.style.maxWidth=Math.floor((sr.width-8)/k)+"px";q=t.getBoundingClientRect()}const dx=(sr.left+sr.width/2)-(q.left+q.width/2);if(Math.abs(dx)<1.5)return;t.style.left=Math.round((parseFloat(getComputedStyle(t).left)||0)+dx/k)+"px"}catch(e){}}
+window.kitRtoastStage=kitRtoastStage;
+(function(){try{const go=()=>{const f=m=>{for(const r of m){const t=r.target;if(t&&t.id==="rtoast"&&t.classList.contains("on")&&t.__kRsOn!==1){t.__kRsOn=1;kitRtoastStage(t);kitRtoastClear(t)}else if(t&&t.id==="rtoast"&&!t.classList.contains("on"))t.__kRsOn=0}};new MutationObserver(f).observe(document.body,{subtree:true,attributes:true,attributeFilter:["class"]})};if(document.body)go();else addEventListener("DOMContentLoaded",go)}catch(e){}})();
+window.kitRtoastClear=kitRtoastClear;addEventListener("resize",()=>{try{kitRtoastStage();kitRtoastClear()}catch(e){}});
+(function(){if(typeof runOpt!=="function"&&typeof resultShow!=="function")return;const r0=resultShow;resultShow=function(){const r=r0.apply(this,arguments);try{kitRtoastStage($("rtoast"));kitRtoastClear($("rtoast"))}catch(e){}try{const a=window.__kitLastEvArt;window.__kitLastEvArt=null;const t=$("rtoast");if(a&&t&&!t.querySelector(".kpev")){t.classList.add("kevres");t.insertAdjacentHTML("afterbegin",`<div class="kpev kpevr">${kitSceneArt(a.src,a.lab,{shape:"tall",cap:false})}</div>`)}else if(t&&!a){t.classList.remove("kevres");const o=t.querySelector(".kpevr");if(o)o.remove()}kitRtoastStage(t);kitRtoastClear(t)}catch(e){}return r}})();
 (function(){const c0=closeModal;closeModal=function(){const m=Q[0];const r=c0.apply(this,arguments);try{if(!(m&&kitIsEventChoice(m)))window.__kitLastEvArt=null}catch(e){}return r}})();
 (function(){const st=document.createElement("style");st.id="k2b-evart";st.textContent=`
 #rtoast.kevres{display:grid!important;grid-template-columns:84px minmax(0,1fr);column-gap:10px;row-gap:0!important;grid-auto-rows:min-content;align-items:start}/* KIT §7.4 size to content (MAIN 162: an empty band under «Tiếp ▸»): the picture spans 9 grid rows, so the base card gap made 8 empty row gaps (≈ 89 px) — no row gap, rows as tall as their content */
 #rtoast.kevres>:not(.kpevr){grid-column:2}
 #rtoast.kevres>:not(.kpevr)+:not(.kpevr){margin-top:10px}
-#rtoast.kevres>.kpevr{grid-column:1;grid-row:1/span 9;width:84px;height:124px}
+/* KIT §7.4c (owner OD 26/11 ~22:07Z (1) «khung kết quả … phía dưới còn trống quá nhiều»): the card height = its content — the picture follows the rows' height (stretch, 72–124 px), it never holds the card taller than its rows */
+#rtoast.kevres>.kpevr{grid-column:1;grid-row:1;width:84px;height:auto;min-height:72px;max-height:124px;align-self:stretch;overflow:hidden}
 #rtoast.kevres>.kpevr>.ksart,.kpsubj.kpev>.ksart{width:100%;height:100%;aspect-ratio:auto}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
 `;document.head.appendChild(st)})();
@@ -1206,8 +1213,25 @@ const KIT_PFO={gap:10,dflt:762,band:{cold:762,"consort-0":749,"consort-1":749,"c
   const h=kin.offsetHeight||pcp.offsetHeight;if(!h)return;const k=h/1037,top=kin===pcp?0:kin.offsetTop;
   const want=top+this.of(pcp)*k+this.gap;let mb=Math.round(want-pcp.offsetHeight);const set=v=>{if(pcp.__kpfoMb!==v){pcp.__kpfoMb=v;pcp.style.setProperty("margin-bottom",v+"px","important")}};set(mb);pcp.classList.add("kpfo");
   /* the column's own row-gap and empty rows also push: correct once on the first visible row after the frame, so its top is EXACTLY band + gap */
-  const pt=pcp.getBoundingClientRect().top;let first=null;for(const c of L.children){if(c===pcp||!c.offsetHeight||c.offsetTop<pcp.offsetTop+pcp.offsetHeight*.5)continue;const t=c.getBoundingClientRect().top;if(first==null||t<first)first=t}
-  if(first!=null){const d=Math.round(first-pt-want);if(d)set(mb-d)}}catch(e){}}};
+  const pt=pcp.getBoundingClientRect().top;let first=null;for(const c of L.children){if(c===pcp||!c.offsetHeight||c.offsetTop<pcp.offsetTop+pcp.offsetHeight*.5)continue;const t=c.getBoundingClientRect().top-(c.classList.contains("kplscr")?parseFloat(c.style.marginTop)||0:0)/* its own clear-tassel margin (below) is not a column gap */;if(first==null||t<first)first=t}
+  if(first!=null){const d=Math.round(first-pt-want);if(d)set(mb-d)}
+  /* KK42 (MAIN 158 LOOK nit «Hoa▪tai», law 11): a card's SCROLLING text area (.kplscr, KIT §6.4) starts UNDER the pendant + tassel (kitPcClearTassel rule) in EVERY
+     person card — it only ran for cards with a fixed height (--kpcmax), so the identity card's item grid lay under her frame's tassel */
+  KIT_PFO.clear(pc)}catch(e){}},
+ /* THE clear-tassel rule (one part; jk4 kitPcClearTassel calls it; KK42, MAIN 158 LOOK 26/11, law 10 «content fits without scrolling where it can»):
+    (1) SIDE: a person card whose right column (.pcr) has room under its own content takes the item grid (.kwear) there (.kpside), so it shows whole at scroll 0;
+    (2) the text area (.kplscr) left under the frame starts so that nothing READS over the tassel: a tile grid first → the tassel tip hides behind the first
+        tile row's PICTURE (never its label); text rows first → the text starts 4 px under the tip (KIT_FRW opaque bottom). */
+ clear:function(pc){try{const L=pc&&pc.querySelector(":scope > .pcl"),pcp=L&&L.querySelector(":scope > .pcp"),sc=L&&L.querySelector(":scope > .kplscr");if(!pcp||!sc)return;
+  KIT_PFO.side(pc,sc);
+  const kin=pcp.querySelector(".kin")||pcp;const k=(kin.offsetHeight||pcp.offsetHeight)/1037;const im=pcp.querySelector(".kin img.kfr");
+  const F=im&&typeof kitFrw==="function"?kitFrw(im.getAttribute("src")):null;const tip=kin.getBoundingClientRect().top+(F?F[1][2]:1037)*k;
+  const m0=parseFloat(sc.style.marginTop)||0;const top0=sc.getBoundingClientRect().top-m0;let want=tip+4;
+  const first=[...sc.children].find(c=>c.offsetHeight);const pic=first&&first.matches(".kwear")&&first.querySelector(".kitem>.kitb");if(pic)want=tip-Math.max(0,pic.offsetHeight-8);
+  sc.style.marginTop=Math.max(0,Math.round(want-top0))+"px"}catch(e){}},
+ side:function(pc,sc){try{if(!pc.classList.contains("kpwide"))return;const R=pc.querySelector(":scope > .pcr");const W=sc.querySelector(":scope > .kwear");if(!R||!W||R.querySelector(":scope > .kpside"))return;
+  const room=pc.getBoundingClientRect().bottom-R.getBoundingClientRect().bottom-2/* .kpside margin-top */;if(room<60)return;const box=document.createElement("div");box.className="kpside";R.appendChild(box);box.appendChild(W);
+  if(box.offsetHeight>room){sc.prepend(W);box.remove()}}catch(e){}}};
 window.KIT_PFO=KIT_PFO;
 /* the ONE person-info component: every person card / sheet on every device goes through kitPcFix → kitPersonChips */
 window.kitPersonChips=kitPcGrid;
@@ -1225,6 +1249,7 @@ html body .pc.kpwide[data-k2]>.pcl>.pcp.kit.kit{width:var(--kpcw)!important;marg
 /* §4.1c frame column: the frame is centred on the column (overflows both sides equally); the rows after it sit ABOVE the pendant + tassel in the NORMAL kit text (owner 21/11 ~19:25Z: no halo / glow / outline) */
 html body .pc[data-k2]>.pcl>.pcp.kit.kit.kpfo,html body .pc>.pcl>.pcp.kit.kit.kpfo{align-self:center!important;justify-self:center!important;margin-left:0!important;margin-right:0!important;flex-shrink:0}/* auto side margins would pin an overflowing frame to the left */
 .pc>.pcl>.pcp.kit.kpfo~:is(.pcrows,.kpkey,.kpgrid,.kpfacts,.kwear){position:relative;z-index:2}
+.pc.kpwide>.pcr>.kpside{margin-top:2px}.pc.kpwide>.pcr>.kpside>.kwear{display:flex;flex-wrap:wrap;gap:4px;justify-content:flex-start;width:auto;margin:0}.pc.kpwide>.pcr>.kpside>.kwear>.kitem{width:calc(var(--isz) + 10px)}.pc.kpwide>.pcr>.kpside>.kwear>.kitem>.kitb{width:var(--isz);align-self:center}.pc.kpwide>.pcr>.kpside>.kwear>.kwearl{flex:0 1 auto;width:auto;max-width:100%;align-self:center;margin:0}/* the wear status («Xa xỉ 48») takes the free end of the last row *//* KK42: the item grid in the right column when it fits there (KIT_PFO.side) */
 .pc.kpwide[data-k2]>.pcl>.kwear,.pc.kpwide[data-k2]>.pcl>.kpgrid,.pc.kpwide[data-k2]>.pcl>.kpfacts{order:2!important}
 .pc.kpwide[data-k2]>.pcl>.kwear{width:auto}
 .pc.kpnar[data-k2]>.pcl>.kpkey{grid-area:key;margin:6px 0 0;flex-direction:row;flex-wrap:wrap;align-items:center;gap:4px 12px}

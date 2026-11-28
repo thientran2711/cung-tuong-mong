@@ -695,7 +695,11 @@ Object.assign(BAL.mgTier.occ,{tuyen:[1,0]});
    lodge = the tú nữ lodging (OD 24/11 ~08:20Z FINAL: «Dưỡng Tú viện», a viện not a cung — selection-time lodging ONLY, not in PAL / seats, PAL_GONE untouched;
    x/y = its Dư đồ spot; so = its 3 sở (level 2), one room each of room.perRoom girls on beds of room.perBed; sanh = the shared Tiền sảnh where the ma ma teaches). */
 Object.assign(BAL,{selx:{intake:{min:3,max:5},yard:{n:12,perRound:4,kept:4},coop:{npcKept:3},room:{perRoom:4,perBed:2},
- w:{sac:.15,duc:.15,tai:.1,mini:1.5,dd:.75,hx:.75,imp:.45,base:20},noise:3,placeStep:[1,0,0,-1],cap:3,npcRank:[[0,60],[1,40]],npcAge:[BAL.ageMin,3],npcMini:{base:3,lv:1.4,r:1},hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
+ /* D-SELX-FAIR (26/11, measured dev/measure/selx-tune.js + selx-fair.js; law 1): w.duc .15 → .05 (her fresh Đức is 30 at every start while the girls are
+    drawn on the consort scale, ≈ 48: at .15 that gap alone put an average player under the base rate of yard.kept / yard.n), w.tai .1 → .15 (talent counts like
+    Sắc), w.mini 1.5 → 2 and w.dd / w.hx .75 → 1 (the three tests decide more than the luck, keeping the accepted ratio mini ½ · đối đáp ¼ · hành xử ¼, OD 23/11 ~23:47Z (c)); the same formula for every girl. Kept-rate «Cúi đầu» .18 → .45 · board «Giỏi» .42 → .83
+    · «Giỏi» + the valued answers .78 → .99, rising with Tài. */
+ w:{sac:.15,duc:.05,tai:.15,mini:2,dd:1,hx:1,imp:.45,base:20},noise:3,placeStep:[1,0,0,-1],cap:3,npcRank:[[0,60],[1,40]],npcAge:[BAL.ageMin,3],npcMini:{base:3,lv:1.4,r:1},hoaThan:["nc","bd","pf"],hoaThanCap:4,hoaThanSac:70,
  fav:{plus:3,minus:-3,mini:[[8,4],[5,2],[0,-2]]},days:3,lodge:{n:"Dưỡng Tú viện",x:.303,y:.338,so:[["dong","Đông sở"],["tay","Tây sở"],["bac","Bắc sở"]],sanh:["sanh","Tiền sảnh"]},npcMatch:{hit:8,miss:3,none:5},
  /* THE 3 DAYS (SELSCENE-4, jselxday; OD 24/11 ~07:05Z / ~08:20Z): beat = khắc of each fixed beat (gate + roll-call, rooms, dress, the yard buổi, each test, day-3 teaching;
     yardDrama = yard khắc spent before the yard drama); lesson = the Tiền sảnh drill (k = khắc of effort kỹ / vừa / qua loa; mark 0..10 = base + duc·Đức + eff·effort ± r,
@@ -932,7 +936,7 @@ BAL.srvRisk={vuon:28,thu:34,tyv:20,tn:40,home:18,def:26,fr:4,tc:10,min:6,max:92}
 BAL.caught={fac:4};/* j8 caughtOdds (clamped by the ONE odds cap, oddsCl) */
 BAL.srvGrant={tin:55,get base(){return BAL.odb.j42.rbTop_2},bond:3,stayLoy:5};BAL.srvMpN=[6,8,10,12,14,16,18];/* review/pace-all: Công lao a servant needs at each rank (srvMpNeed; her and every NPC servant, law 1), rising (law 5); with the whole-number merits
    (BAL.eff.j42 merit* 1 / 2, errand / order 3; BAL.ag … listen / watch 1, scout 2) one ordinary chore moves 1/6 … 1/16 of a rank step (was 0.25–0.5 of (rank+1)×5: 1/20 … 1/100,
-   and the shown «Công lao n/need» did not move for 2–4 chores). Canon overwrite of the old BAL.srvMp = 5 (need = (rank+1) × 5). */BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
+   and the shown «Công lao n/need» did not move for 2–4 chores). Canon overwrite of the old BAL.srvMp = 5 (need = (rank+1) × 5). *//* review/srv-rank (Foreman F s11b: srv.rk flat at 4 ~400 buổi): srvCap = a servant (her or any NPC) at her master's cap (srkMax) with full Công lao and a higher palace with room has OUTGROWN the house: open = she may ask «Xin chủ cho đi hầu cung khác» whatever her trust; u = an NPC servant's weight for that ask; letW / demW = the master's answer weights (× BAL.ag.stf2.lvW) when the servant who asks is trusted (Chủ tin / loyalty >= BAL.sp.leaveLoyal) */BAL.srvCap={open:1,u:.2,letW:2,demW:.5};BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
 BAL.ag.staff={st:{duc:[10,40],tamco:[10,40],danh:[0,10],suc:[60,90],bac:[0,20]},goal:{tin:70,suc:60,bac:40,sac:60,tai:40,duc:40,friend:2},
  nw:{tin:1.2,mp:1,suc:1.2,bac:.6,self:.4,ally:.5,sung:1,love:.3,spite:.4},greed:2,mpS:4,sc:{af:.3,tinh:.3,spite:.3,sung:.25},
  riskD:3,caughtTin:20,caughtSuc:20,vowTinh:20,dt:40,expel:30,exile:35,vowW:.5,outW:.3,monthSuc:10,secSee:30,hit:1,uMul:3,peerGap:40,nvpAf:5,askAf:2};
@@ -1106,6 +1110,12 @@ Object.assign(BAL.kc2,{kcCard:{"vietNhatKyGiau_od":78,"chaiChuotThuY_od":70,"thi
    dienSel = the tiểu thư Điện tuyển keep chance (kcDienSel): base + (score − KC.cut[0])·k, floor lo (cap BAL.kcSelMax), 0 below cut[0] − gap; noise = ± of the score;
    kcCard.quyXinChaWant = the plea bonus when she wants the tuyển tú (kcQuyP). */
 Object.assign(BAL.kc2,{ill:{suc:35,low:20,dieLo:40,dieHi:8},dienSel:{base:45,k:1.2,lo:20,gap:15,noise:4}});BAL.kc2.kcCard.quyXinChaWant=15;
+/* D-SELX-FAIR (law 4): soNeed = how many of the five Sơ tuyển points (dung mạo, khí sắc, tiếng tăm, gia thế, lễ vật; KC.so) pass her (was the typed «sc>=3» in jkc kcSoOk) */
+BAL.kc2.soNeed=3;
+/* KC-ODDS-CHIP (27/11, law 4/7): the numbers of the two hand-rolled contests, moved from literals to BAL (values unchanged) so the roll and the odds word read ONE place.
+   fest = kcFest (khuê các festivals: score = art·BAL.art.score + Tài/3 + Sắc/6 + R(span); score ≥ top first, ≥ ok praised, below = loses 1 Danh);
+   hoi = jkc2 n_hoi (dance / polo / water rite: raw = Vũ·vu + Sắc/sac + (bd: Sức/suc) + R(span); raw ≥ ok = the envoy remembers her). */
+BAL.kc2.fest={top:60,ok:40,span:30,tai:3,sac:6};BAL.kc2.hoi={ok:55,span:30,vu:12,sac:3,suc:4};
 
 /* ONE CORE (owner OD:L1267; review/show-why, from review-trait-pool-r1 follow-up): every number chosen by a nết test lives here.
    BAL.net.k: quality-keyed sizes for nq(p,quality,n) / netIs (servant + agent qualities). BAL.net.n: nết-keyed tables read by
@@ -1616,7 +1626,7 @@ BAL.memWake={min:20,ann:30,cap:4,cd:6,s:{k:.6,min:18,max:60},dur:{base:4,k:.12,l
    fear = lòng her SENT servant (bestSent) loses when an approach fails (×timid for a timid one); 17:00Z "lòng của cung nữ đó còn trừ". */
 /* 2f3 balance: one real Tai mắt = w points of the old 0–10 eyes stat in every formula / gate that reads it (j1 eyes); cap = the old cap */
 BAL.ag.eye={w:3,cap:10};
-BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTimid:1.5,tamcoMid:50,tamcoDiv:5,
+BAL.ag.bt={dread:{w:8,d:15}/* E-GAIN3c law 3 (BIG): «Phạt vô cớ» = răn đe — for w weeks every servant of that master (her or an NPC, law 1) fears the master: −d on the tm / sell odds core (btTerms «sợ chủ»), so another palace finds them hard to buy; the punished one still bears the grudge (svSell) */,off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTimid:1.5,tamcoMid:50,tamcoDiv:5,
  tm:{base:{tham:55,lanh:35,chuyen:30,nhat:15,trung:5,_:30},tr:{"Thanh liêm":-15},loy:[[25,10],[50,0],[70,-10],[85,-25],[101,-45]],v:{"Trung":-10,"Nghĩa":-5,"Liêm":-10}},
  /* sell base (review ag-all-2 r2 C6, OD 17/11 ~17:00Z (3)): only the greedy (tham) offer on their own; any other nết stays ≤ 0 with the low-lòng band and an angry mood
     (−15 + 10 + 5), so a non-greedy servant offers only once her master offended a chữ she holds (off, 17:20Z (2)) */
@@ -2057,7 +2067,7 @@ BAL.dc={on:1,
    title = «Khuê các» titles: tier, rare tier, quyRank (Quý nhân), carry (worn again in later lives); TITLE-BAL: ONE entry title only — Quý nhân+ → «Khuê tú danh môn»,
    else «Trâm hoa ngự ban» only with home Danh ≥ tuyenDanh (never just for walking in). */
 BAL.kcg={fest:{top:8,ok:5,danh:[4,2,1],skip:5,bot:[3,6],sisP:50,sis:[3,1]},vpSac:80,vpRare:.4,
- carry:{cap:0,ldOld:40,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
+ carry:{cap:0,ldOld:40,rel:{af:.5,me:.5,oan:1}/* ob-phu: sister / khuê hữu who pass tuyển tú → consort: share of af (them→her), me (her→them), Oán carried (af .5 = the old typed /2) */,dad:{mid:50,k:.3},danhK:.6,danhMax:30,bacMax:400,sung:[8,5]},
  home:{p:8,mid:50,khac:1,pk:.2,giftShare:30,writeO:70,giftO:60,k:.3,writeBac:15,writeAf:4,lostDanh:1,askAf:1,know:2,keep:12,gifts:["tuithom","luahang","huongtram","khantay"]},
  ld:{p:6,own:{danh:4,duc:2},witBac:10,witO:55,witFoe:4,witOan:6,witLose:6,wait:{danh:2,tamco:1}},
  title:{tier:4,rare:6,quyRank:2,carry:1,tuyenDanh:30}};
@@ -2227,11 +2237,12 @@ BAL.news={on:1,netOpen:1,sumTop:6,sumMin:5,sumOwnMin:5,recMax:300,bigBand:2,keep
  /* ONE SIEVE (owner OD 26/11 ~06:50Z (B), jnsieve nsSieve): on a result card a person row of someone else (not her act's target, not her household,
     not Thái hậu / Hoàng hậu) shows only when the span's own log names that person about HER, or the change is at least `big`; at most `rowMax`
     such rows; Kèm (ghen / oán of others) lists at most `kemMax` people who pass the same sieve, one per line; every other person change is only counted («… và N người khác») and fully recorded in the Sổ ghi. */
- card:{big:5,rowMax:3,kemMax:4},
+ card:{big:5,rowMax:3,kemMax:4,keep:3/* KIT §7.4a: at most 3 named people on a result card (owner 26/11 ~20:45Z) */},
  /* Sổ ghi kinds (the kind tabs of the Sổ ghi, nsKind): her own lines, the harem record, big harm, rumours heard */
  logTabs:[["all","Tất cả"],["me","Việc của ta"],["hc","Chuyện hậu cung"],["big","Mưu hại"]]};
 /* KIT §95 kitDialogue (owner OD 24/11 ~04:45Z/~04:50Z): typewriter speed + spotlight dimming. LAW 4: the kit reads these, it types no number of its own. */
 BAL.kdlg={msWord:110,dim:.5,dimSat:.75,focusScale:1.5,focusBlur:14};
+BAL.kdlg.tapArm=320;BAL.kdlg.tapNear=40;/* px: the 2nd tap lands within this distance of the 1st *//* KIT §6.2j (KK44, MAIN 160 «double tap spends twice»): ms after a NEW dialog paints during which a real tap inside it is not taken (the 2nd tap of a double tap that opened it) */
 /* review/net-build (owner OD 24/11 ~06:00Z / ~06:40Z, MAIN 119 order; design dev/handover/reports/net-thresholds.md §3): NẾT THRESHOLDS — ONE CORE (law 4).
    Every relation LEVEL the game tests ("quen", "thân", "ghét", "oán to act"…) is ONE base number here, and each person's nết shifts it:
    netTh(p,key) (jnet.js) = th[key] + Σ over p's 3 nết of BAL.net.T[t].th[key] (a key a nết lacks = thFrom[key] = [source key, × share]), clamped to thClamp[key].

@@ -6,9 +6,10 @@
      class static blocks, #private in — Safari 16.4 / 15
    Runtime APIs (Array.at, findLast, structuredClone, Object.hasOwn, toSorted, groupBy) are listed too (they throw only where called).
    Fix: write kRx("pattern","flags") (j0) instead of a lookbehind literal.
-   usage: node dev/test/webkit-syntax.js            (exit 1 when a parse-level hit exists) */
+   usage: node dev/test/webkit-syntax.js [buildDir]  (exit 1 when a parse-level hit exists; default buildDir = ../build next to this script)
+   HARD GATE: dev/tools/quickcheck.d/30-webkit-syntax.sh runs it on every go-live check (KK66 webkit-lb, 28/11). */
 const fs=require('fs'),path=require('path');let acorn;try{acorn=require('acorn')}catch(e){acorn=require('/opt/node-tools/node_modules/acorn')}
-const B=path.join(__dirname,'../build');const asm=fs.readFileSync(B+'/assemble.py','utf8');
+const B=path.resolve(process.argv[2]||process.env.WK_BUILD||path.join(__dirname,'../build'));const asm=fs.readFileSync(B+'/assemble.py','utf8');
 const files=JSON.parse(asm.match(/for f in (\[[^\]]+\])/)[1].replace(/'/g,'"'));
 const out=[];let parse=0;
 for(const f of files){const src=fs.readFileSync(B+'/'+f,'utf8');let toks;

@@ -14,6 +14,11 @@
        same door, and AGC3DOOR[key] = the door an NPC act sits in (role-parity / ag-par3 scans read the same names as before).
    Other jobs (J2 harm doors, J3 Hành sự) may add rows with DOOR.add({k,n,kinds,re,h}); ONE engine for every door. ===================================== */
 const DOOR={raw:0,T:[]};window.DOOR=DOOR;
+/* E-GAIN3-LIVE law 3 + law 11: ONE reading of «her regard / trust for someone» for every door gain filter (doorGain TG + filter, DOOR.TGT, the
+   door-row-hint test): every pronoun form the game prints — «quý / tin / thương / nể / mến / kính» + «ngươi / ta / bổn cung / nàng», and «thiện cảm».
+   Before only «quý ngươi / tin ngươi» were known, so LIVE's «nàng quý ta −−» (Bàn tán về <X>, the kit's ngươi→ta pass) read as Được. */
+DOOR.REG=/(?:quý|tin|thương|nể|mến|kính)\s+(?:ngươi|ta|bổn cung|nàng)(?![\p{L}\d])|thiện cảm|quý nhau/u;
+DOOR.HOST=/oán|ghen|thù|nghi|nắm|biết|đoán|khai/;/* hostility / knowledge words: never a harm that is her gain */
 DOOR.add=function(r){if(r&&r.k&&r.re&&!DOOR.T.some(x=>x.k===r.k))DOOR.T.push(r);return DOOR};
 /* the doors of the talk side (J1). n = the button; h = the line on top of the choice card; rep = the member whose picture / category the door shows */
 [{k:"talk",n:"Trò chuyện",kinds:["rival","hh"],rep:"Hỏi han sức khỏe",h:"Chọn chuyện để nói với nàng.",
@@ -45,8 +50,9 @@ function doorFold(p,A){if(!p||!Array.isArray(A)||!A.length)return A;
     open:()=>doorOpen(p,r.k)};Object.defineProperty(d,"m",{value:M,enumerable:false});/* its members (tests, DOOR.flat) */
    const XM=r.acts&&typeof DOOR.more==="function"?DOOR.more(p,r):[];/* J2 ext (c) */
    if(!free.length&&!XM.some(x=>!x.off)){d.lock=true;d.t=M[0].t||(XM[0]&&XM[0].why)||"chưa làm được"}
+   {const OL=x=>{if(!x||doorGain([x.x]))return x&&x.x;try{return optLine(x)}catch(e){return x.x}};/* E-GAIN3b: a way whose x names no gain (its gain sits in w / its «thành:»: Khiêu khích Danh +, Vu oan) is read from its OWN full line (optLine, the line its option card shows in doorOpen) */const dg=doorGain(free.concat(M.filter(x=>x.lock)).map(OL).concat(XM.filter(x=>!x.off).concat(XM.filter(x=>x.off)).map(x=>x.x)));if(dg)d.x+=" · "+dg}/* LAW 3 (E-GAIN3): the door's Được = its ways' main gains */
    made[r.k]=d;out.push(d)}});
- /* J2 ext (c): a door made only of her in-person acts (no talk member), at the end */for(const r of DOOR.T)if(r.acts&&!made[r.k]&&!cnt[r.k]&&(!r.kinds||r.kinds.includes(p.kind))&&xn(r)>=2){const XM=DOOR.more(p,r);const d={n:r.n,door:r.k,o:100,fix:1,x:"chọn mức và cách",open:()=>doorOpen(p,r.k)};if(!XM.some(x=>!x.off)){d.lock=true;d.t=(XM[0]&&XM[0].why)||"chưa làm được"}made[r.k]=d;out.push(d)}
+ /* J2 ext (c): a door made only of her in-person acts (no talk member), at the end */for(const r of DOOR.T)if(r.acts&&!made[r.k]&&!cnt[r.k]&&(!r.kinds||r.kinds.includes(p.kind))&&xn(r)>=2){const XM=DOOR.more(p,r);const d={n:r.n,door:r.k,o:100,fix:1,x:"chọn mức và cách",open:()=>doorOpen(p,r.k)};{const dg=doorGain(XM.filter(x=>!x.off).concat(XM.filter(x=>x.off)).map(x=>x.x));if(dg)d.x+=" · "+dg}/* LAW 3 (E-GAIN3) */if(!XM.some(x=>!x.off)){d.lock=true;d.t=(XM[0]&&XM[0].why)||"chưa làm được"}made[r.k]=d;out.push(d)}
  A.forEach((a,j)=>{out[-1-j]=a});return out}
 window.doorFold=doorFold;
 /* (1) the outermost talkOpts wrapper */
@@ -64,11 +70,24 @@ window.doorOpen=doorOpen;
 (function(){const t0=talk;talk=function(oi){try{if(typeof oi==="number"&&oi>=0&&popIdx!=null&&S&&S.visit&&!S.dead&&!Q.length){const p=curPeople()[popIdx];const a=p&&talkOpts(p)[oi];
   if(a&&a.door){if(a.lock||(S.visit.tk||{})[popIdx]||S.visit.talked===true)return;a.open();render();return}}}catch(e){console.error("jdoor talk",e)}return t0.apply(this,arguments)}})();
 /* the choice card: one row per member, its own line and its own reason when it cannot be done now */
+/* E-GAIN3c law 3 + law 11: the «Gợi ý» of EVERY door way row (both door paths: the talk door below and the J2 door, E-GAIN3b moved only the J2 one).
+   The kit hint (kitHint, read-only) of the way itself; when that says «chẳng được gì / không được mất gì», the hint of its full line; when that too says
+   nothing gained but the way's OWN line shows a real gain (doorGain: the card's green «Được»), that gain leads the hint and the kit's «nhưng …» part stays.
+   Before: the talk-door rows had no hint → the kit read their marks line → «chẳng được gì» for Nương theo, Rỉ tai, Nghe ngóng chung, Phạt vô cớ, Đổi người. */
+function doorHint(a,x){/* E-GAIN3-LIVE (E-GAIN3c-RV 6): no `a.hint` short-circuit — a way's own hint goes through the gate below (DOOR.rowHint → DOOR.hintGain) like every row */return lv=>{const NO=/^(chẳng được gì|không được mất gì)/;
+  /* 1. the E-GAIN3b-FIX gate (DOOR.rowHint: the row's own line first; the way's own hint only when it names a REAL gain — never a need text, a tip, a stat she pays) */
+  let h0="";try{h0=typeof DOOR==="object"&&DOOR.rowHint?DOOR.rowHint(a,x,lv):kitHint({x,o:a.o,c:a.c},null,lv).hint}catch(e){}if(h0&&!NO.test(h0))return h0;
+  /* 2. nothing gained by the kit's reading, but the way's OWN line shows a green gain (doorGain = the card's «Được»): that gain leads */
+  let g="";try{const d=document.createElement("div");d.innerHTML=doorGain([a.x||"",x||""].filter(Boolean),2).replace(/^được:\s*/,"");g=d.textContent.replace(/\s+/g," ").trim()}catch(e){}
+  if(!g)return h0;/* the «nhưng …» part: the kit hint of the way WITHOUT its green gain pieces (else the kit's misread of the gain itself lands there) */
+  let h3="";try{h3=kitHint({x:String(a.x||"").replace(/<span class="g">[\s\S]*?<\/span>/g,""),o:a.o,c:a.c,risk:a.risk},null,lv).hint}catch(e){}
+  const rest=String(h3||"").replace(NO,"").replace(/^;\s*/,"");return rest?`${g}; ${rest}`:g}}
+window.doorHint=doorHint;
 PEND.door=pp=>{pp.i=doorIdx(pp);const p=curPeople()[pp.i];const r=DOOR.byK(pp.k);if(!p||!r||!S.visit)return null;let A;try{A=doorRaw(p)}catch(e){return null}
  const o=[];A.forEach((a,j)=>{if(!a||a.k61||a.door||DOOR.of(a.n,p.kind)!==r)return;const tc=talkK(a);const poor=!!(a.c&&a.c.bac&&S.bac+a.c.bac<0);
   const why=a.lock?doorTxt(a.t)||"chưa làm được":poor?"không đủ bạc":!can(tc)?(doorTxt(typeof whyTime==="function"?whyTime(tc):"")||"hết khắc buổi này"):"";
   let x="";try{x=optLine(a)}catch(e){}const tw=typeof r.tier==="function"?r.tier(a):"";/* KIT §7.1 (J0): a tier sits in the option TITLE «<việc> · nặng» */
-  const row={n:tw?`${a.n} · ${tw}`:a.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,go:()=>doorPick(pp,j,a.n)};if(why)row.off={why};o.push(row)});
+  const row={n:tw?`${a.n} · ${tw}`:a.n,x:x||"chọn rồi xem kết quả ở bước sau",ton:tc?{khac:-tc}:null,hint:doorHint(a,x),go:()=>doorPick(pp,j,a.n)};if(why)row.off={why};o.push(row)});
  if(!o.length)return null;o.push({n:"Thôi"});
  const nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";
  const w=doorWho(p);let who=null;try{who=w&&typeof WHO==="function"?WHO(w):null}catch(e){}
@@ -215,13 +234,47 @@ DOOR.rowsJ2=function(r,M,v){const out=[];const seen=new Set();const seed=[S.turn
  for(const g of r.roll||[]){const L=M.filter(m=>g.includes(m.id));if(!L.length)continue;L.forEach(m=>seen.add(m.id));const one=DOOR.pickRoll(L,seed+":"+g[0]);if(one)out.push(one)}
  for(const m of M)if(!seen.has(m.id)&&!(r.hide||[]).includes(m.id))out.push(m);
  const T=(r.tiers||{}),ti=m=>{const t=T[m.id];return t?DOOR.TIER.indexOf(t):-1};
- return out.map((m,j)=>({m,j})).sort((a,b)=>(ti(a.m)-ti(b.m))||(a.j-b.j)).map(({m})=>{const t=T[m.id];const row={n:t?`${m.n} · ${t}`:m.n,x:m.x||"chọn rồi xem kết quả ở bước sau",go:m.go};if(m.off)row.off={why:m.why||"chưa làm được"};return row})};
+ return out.map((m,j)=>({m,j})).sort((a,b)=>(ti(a.m)-ti(b.m))||(a.j-b.j)).map(({m})=>{const t=T[m.id];const row={n:t?`${m.n} · ${t}`:m.n,x:m.x||"chọn rồi xem kết quả ở bước sau",go:m.go};if(m.hint)row.hint=m.hint;if(m.c)Object.defineProperty(row,"__c",{value:m.c,enumerable:false});/* the way's price (tests: a stat she pays is no gain) */if(m.off)row.off={why:m.why||"chưa làm được"};return row})};
+/* E-GAIN3b-FIX (law 3, reviewer FAIL 1): the hint of a pop-up door-dialog row. FIRST the row's own line (kitHint of {n, x = optLine}: what the row
+   always showed); only when that says nothing gained («chẳng được gì» / «không được mất gì» / empty: Khoe quà ngự ban, Khiêu khích, Vu oan, Dò la) the
+   way's own hint (its fx / BAL numbers / a.hint), or the hint of its full data, and ONLY when it names a REAL gain (DOOR.hintGain). A need text
+   («cần nguyên cớ …»), a tip («có … thì khỏi …») or a stat she PAYS («Danh» of Hạ nhục) is never shown as a gain. */
+DOOR.HINT_NO=/^(chẳng được gì|không được mất gì)/;
+DOOR.HINT_STAT={"Sủng":"sung","Danh":"danh","Đức":"duc","Bạc":"bac","Sức":"suc","Tâm cơ":"tamco"};
+DOOR.hintGain=function(h,c){const g=String(h||"").split("; ")[0];if(!g||DOOR.HINT_NO.test(g))return false;
+ return g.split(/,\s+/).some(p=>{p=p.trim();if(/^cần\b|^có .* thì\b|\bthì khỏi\b/.test(p))return false;
+  const m=p.match(/^(\S+(?: \S+)?)\s(\+{1,3})$/);if(m&&!/\snàng$/.test(m[1])){const k=DOOR.HINT_STAT[m[1]];return !(k&&c&&(c[k]||0)<0)}/* «Danh +» she pays for = no gain */
+  return /(^|\s)nàng(\s|$)/.test(p)&&!DOOR.REG.test(p)&&!DOOR.HOST.test(p)&&/(−|mất|trúng|ngã|bị|giảm|quở|phạt|quỳ|bẽ)/.test(p)})};/* E-GAIN3-LIVE: «nàng quý ta −» is her regard falling, never a harm to the target; a harm to the target («Danh nàng −−», «nàng bị quở …») */
+/* a row line that is already kit HTML (optLine of a way drawn as rows: «Hạ nhục», «Nghe lén câu chuyện») read as a labelled text line, so the hint
+   never glues the row heads («Danh nàng −−Bạichỉ uổng công…»). The Tốn row is left out (the hint names the price beyond Tốn); a Mất / Bại / Kèm piece
+   whose subject is the TARGET and that harms her («Danh nàng −−») is the gain (same reading as doorGain). */
+DOOR.TGT=p=>/^(\S+ )?nàng\s/.test(p)&&!DOOR.HOST.test(p)&&!DOOR.REG.test(p)&&!/quý/.test(p)&&/(−|mất|trúng|ngã|bị|giảm|quở|phạt|quỳ|bẽ)/.test(p);
+DOOR.lineOf=function(x){x=String(x||"");const at=x.search(/<span class="kb"/);if(at<0||!/class="kr[ "]/.test(x))return x;
+ const d=document.createElement("div");d.innerHTML=x.slice(at);const T=e=>e.textContent.replace(/\s+/g," ").trim();const B={thành:[],hỏng:[],kèm:[]};
+ const pre=x.slice(0,at).replace(/<[^>]*>/g,"").replace(/[\s·]+$/,"").trim();const od=pre||T(d.querySelector(".kodds")||document.createElement("i"));
+ d.querySelectorAll(".kr").forEach(r=>{const l=T(r.querySelector(".krl")||r).toLowerCase();const k=/^(thành|được|thắng)/.test(l)?"thành":/^(bại|mất|hỏng)/.test(l)?"hỏng":/^kèm/.test(l)?"kèm":null;if(!k)return;
+  if(/^bại/.test(l)&&!od)return;/* a «Bại» with no odds word cannot be read as a roll: the hint leaves it out (as the row's line always did) */
+  [...r.querySelectorAll(".krv .ef")].map(T).join(", ").split(/,\s+/).filter(Boolean).forEach(p=>{let z=k;if(k!=="thành"&&DOOR.TGT(p))z="thành";else if(k==="thành"&&od&&!DOOR.TGT(p)){try{if(kitHintSign(p,"thành")<0)z="kèm"}catch(e){}}B[z].push(p)})});/* a price inside a rolled «Thành» («thiện cảm −−−» of Khiêu khích) stays named in the hint («nhưng …») */
+ return [od].concat(Object.keys(B).filter(k=>B[k].length).map(k=>k+": "+B[k].join("; "))).filter(Boolean).join(" · ")};/* «; » keeps each kit piece its own item (marks hold no digit) */
+DOOR.rowHint=function(a,x,lv){x=DOOR.lineOf(x);let h0="";try{h0=kitHint({n:a.n,x},null,lv).hint}catch(e){}if(h0&&!DOOR.HINT_NO.test(h0))return h0;
+ for(const f of [()=>kitHint(a,null,lv).hint,()=>kitHint({x,o:a.o,c:a.c},null,lv).hint]){let h="";try{h=f()}catch(e){}if(DOOR.hintGain(h,a.c))return h}return h0};
 (function(){const P0=PEND.door;PEND.door=pp=>{const r=DOOR.byK(pp&&pp.k);if(!r||!r.acts)return P0(pp);let M=[],v=null,who=null,nm="";
  if(pp.r!=null){v=typeof rivals!=="undefined"?rivals[pp.r]:null;if(!v||typeof DOOR.cardM!=="function")return null;M=DOOR.cardM(pp.r,r);nm=v.name;try{who=typeof WHO==="function"?WHO(["r",v.id]):null}catch(e){}}
  else{if(pp.kind!=null)pp.i=doorIdx(pp);const p=curPeople()[pp.i];if(!p||!S.visit)return null;v=p.ref;let A=[];try{A=doorRaw(p)}catch(e){return null}
   A.forEach((a,j)=>{if(!a||a.k61||a.door||DOOR.of(a.n,p.kind)!==r)return;const tc=talkK(a);const poor=!!(a.c&&a.c.bac&&S.bac+a.c.bac<0);
    const why=a.lock?doorTxt(a.t)||"chưa làm được":poor?"không đủ bạc":!can(tc)?(doorTxt(typeof whyTime==="function"?whyTime(tc):"")||"hết khắc buổi này"):"";
-   let x="";try{x=optLine(a)}catch(e){}M.push({id:"t:"+doorTxt(a.n),n:a.n,x,off:!!why,why,go:()=>doorPick(pp,j,a.n)})});
+   let x="";try{x=optLine(a)}catch(e){}M.push({id:"t:"+doorTxt(a.n),n:a.n,x,c:a.c,hint:doorHint(a,x)/* E-GAIN3b-FIX law 3 (DOOR.rowHint: base hint first, the way's own hint only when it names a real gain) + E-GAIN3c doorHint (both door paths) */,off:!!why,why,go:()=>doorPick(pp,j,a.n)})});
   if(typeof DOOR.more==="function")M=M.concat(DOOR.more(p,r));nm=(typeof k61Named!=="function"||!p.ref||k61Named(p.ref))?(p.name||""):"";
   const w=doorWho(p);try{who=w&&typeof WHO==="function"?WHO(w):null}catch(e){}}
  const o=DOOR.rowsJ2(r,M,v);if(!o.length)return null;o.push({n:"Thôi"});return{t:`${r.h}${nm?` <b>${nm}</b>`:""}`,o,who}}})();
+/* LAW 3 «Được» of a DOOR card (E-GAIN3, MAIN 171 / KK54 census): a door card (the ways sit inside its dialog) shows what opening it gets her = the
+   MAIN gain of each way, read from that way's OWN line (the same kit parse its option card uses, so every number is the way's BAL number, law 4).
+   lines = the ways' lines, usable ways first; returns «được: <g>a</g>; <g>b</g>» (at most `max` gains, one per way, deduplicated) or "".
+   A one-word piece of a split list («Văn» of «Văn, Đức, Võ tăng …») is not a gain by itself; a band mark keeps no decimal tail («++,5» → «++»). Each way gives its FIRST gain (a way whose first gain is already listed adds nothing). Skipped: a risk («có thể …», «khả năng …», KA_RISK), a line that says nothing (KA_NOTHING), the shared runner side gain «Chủ tin với …», a paid «Chứng cứ n», «… không đổi». */
+function doorGain(lines,max){max=max||3;const seen=new Set(),G=[];const E=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+ for(const x of lines||[]){if(!x||G.length>=max)continue;let h="";try{h=kitParse(String(x))}catch(e){continue}const d=document.createElement("div");d.innerHTML=h;
+  const TG=e=>{const t=e.textContent.replace(/\s+/g," ").trim();return /^(nàng|Sắc nàng|Danh nàng|Sủng nàng|Sức nàng)\s/.test(t)&&!DOOR.HOST.test(t)&&!DOOR.REG.test(t)};/* E-GAIN3b: a door built from card buttons reads their plain text (no writer class): a «thành» / «kèm» piece whose subject is the TARGET («nàng quỳ phạt: Sức −−») and that is no hostility / risk is her gain */const c=[...d.querySelectorAll(".kr-duoc .ef, .kr-thanh .ef.g")].concat([...d.querySelectorAll(".kr-thanh .ef:not(.g), .kr-kem .ef")].filter(TG))/* E-GAIN3b: in a rolled «Thành» row only the green pieces are her gain (a red «thiện cảm −−−» there is a loss) */.map(e=>e.textContent.replace(/\s+/g," ").trim().split(/\s+—\s+|\s*\(/)[0].replace(/([+−-]+),\d+/g,"$1").replace(/[\s,;:·]+$/,"")).map(t=>{/* E-GAIN3b: a piece «Danh +, thiện cảm −−−, oán ta ++» keeps only its leading gains (the kit sentence colour, j63 kaSent, read-only) */if(typeof kaSent!=="function"||!/,\s/.test(t))return t;const F=t.split(/,\s+/);if(/(^|\s)nàng(\s|$)/.test(F[0]))return t;/* a list about HER (the target: «nàng bị quở: Đức −−, Danh −−») is all gain */let n=0;while(n<F.length&&kaSent(F[n])!=="r")n++;return n&&n<F.length?F.slice(0,n).join(", "):t})
+   .filter(t=>t&&/\S\s+\S/.test(t)&&!(typeof KA_NOTHING!=="undefined"&&KA_NOTHING.test(t))&&!/^không( |$)/i.test(t)&&!/^Chủ tin với /.test(t)&&!new RegExp("(?:"+DOOR.REG.source+")\\s*[−-]","u").test(t)&&!/(?:oán|ghét|thù|ghen)\s+(?:ngươi|ta|bổn cung)\s*\+/u.test(t)/* E-GAIN3-LIVE: every pronoun form (DOOR.REG); «oán ta +» is a loss too *//* E-GAIN3b: «nàng quý ngươi −−» is her LOSS (the kit colours it green: KIT REQUEST 27/11 E-GAIN3b #3) */&&!/^Chứng cứ \d/.test(t)&&!/không đổi/.test(t)&&!/(^|\s)(có thể|khả năng)(\s|$)/.test(t)&&!(typeof KA_RISK!=="undefined"&&KA_RISK.test(t)));
+  const t=c[0];if(t&&!seen.has(t)){seen.add(t);G.push(t)}}
+ return G.length?"được: "+G.map(t=>`<span class="g">${E(t)}</span>`).join("; "):""}
+window.doorGain=doorGain;

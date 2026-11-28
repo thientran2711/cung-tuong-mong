@@ -4,7 +4,7 @@ const HARMK={"Dò la":"spy","Tung tin đồn":"rumor","Bỏ độc vào trà nà
 AOUT.trip=["nàng vấp ngã: Danh nàng -3 (có thai: có thể động thai)","bị thấy: nàng oán ngươi"];AOUT.pushp=["nàng rơi xuống hồ sen, Sức nàng giảm mạnh","bị lộ: bị phạt, nàng oán"];
 const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|phật ý|bị khám|tội|ban chết|sẽ)/;
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);const v=p&&p.ref;return A.map(a=>{a=Object.assign({},a);if(HARMK[a.n])a.k=HARMK[a.n];
-  if(a.n==="Nhờ giúp đỡ"&&v&&aff(v,S)<netTh(v,"than")){a.lock=true;a.t=`cần nàng quý ngươi 30 (đang ${aff(v,S)})`}
+  if(a.n==="Nhờ giúp đỡ"&&v&&aff(v,S)<netTh(v,"than")){a.lock=true;a.t=`cần nàng quý ngươi ${netTh(v,"than")} (${knows(v)?"đang "+aff(v,S):(typeof KIT_REL==="object"&&KIT_REL.unknown)||"chưa rõ"})`}
   if(a.n==="Cảnh báo nàng"&&/không có căn cứ/.test(a.x||"")){a.lock=true;a.t="chưa biết ai đang hại nàng"}
   if(a.open&&!S.inv.some(e=>!e.h)){a.lock=true;a.t="rương trống"}
   if(/^Bàn tán về/.test(a.n)&&/mách lại/.test(a.x||"")){a.x="";a.x=`nàng quý ngươi ${balSg(-BAL.talk.gossip.miss)}`;a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} oán ngươi ${balSg(BAL.talk.gossip.tellOan)}: ${chanceW(BAL.talk.gossip.tell)}`}
@@ -42,8 +42,8 @@ function xgConfirm(go){Q.unshift({act:1,t:"Xuất gia?",h:"<p>Cạo tóc đi tu 
 /* no faking illness from lãnh cung; no deck card that cannot help */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(S&&S.out)deck=deck.filter(a=>a.n!=="Giả bệnh")}})();
 /* map tiles: every disabled tile says why */
-(function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);const why=S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (còn ${S.confined} tháng)`:"";if(why)h=h.replace(/<span class="mband">/g,`<span class="mband"><span class="mchip">${why}</span>`);
- h=h.replace(new RegExp(`(data-go="${S.place}"[^>]*>(?:(?!</button>).)*?<span class="mband">)`,"s"),`$1<span class="mchip">đang ở đây</span>`);return h}})();
+(function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);const why=mapSelfWhy();/* map-self-why: her own state only on HER tile (j27) */
+ h=h.replace(new RegExp(`(data-go="${S.place}"[^>]*>(?:(?!</button>).)*?<span class="mband">)`,"s"),`$1<span class="mchip">${why||"đang ở đây"}</span>`);return h}})();
 /* kids: acts on the card, and a guard over them (two-way: rivals harm kids, she can protect them) */
 function kidActs(k){if(!k.alive)return[];const t2=whyTime(2);return [pbtn(`data-kid="teach" data-kn="${k.name}"${capAt(BAL.btn.kidTeach)}`,"Dạy học",`${capW()} · tốn: ${BAL.btn.kidTeach.k} khắc · thành: Tài con +${4+Math.round(S.tai/20)}`,t2||(k.age<3?"con còn quá nhỏ":"")),
  pbtn(`data-kid="care" data-kn="${k.name}"${capAt(BAL.btn.kidCare,BAL.bacFee.kidCare)}`,"Chăm sóc",`${capW()} · tốn: ${BAL.btn.kidCare.k} khắc, Bạc -${BAL.bacFee.kidCare} · thành: Sức khỏe con +10`,t2||(S.bac<BAL.bacFee.kidCare?"thiếu bạc (cần "+BAL.bacFee.kidCare+")":k.hp>=100?"con đang khỏe":"")),
@@ -90,7 +90,10 @@ Object.assign(ITIMG,{tramngoc:"tram-phuong",vongvang:"vong-ngoc",gamvang:"gam-to
 /* each rival palace looks a little different (tint of the shared hall art by owner rank) */
 (function(){const r0=renderStage;renderStage=function(){r0.apply(this,arguments);try{const st=$("stage");const k=S.place;st.classList.remove("rp0","rp1","rp2","rp3","day","night");if(k&&k[0]==="r"){const v=RV(+k.slice(1));if(v)st.classList.add("rp"+(v.rank>=5?3:v.rank>=3?2:v.rank>=1?1:0))}st.classList.add((S.buoi||0)===B4L?"night":"day")}catch(e){}}})();
 /* a faction may ask her to join (two-way) */
-(function(){const a1=approachOne;approachOne=function(){if(!facOf(S)&&(S.facs||[]).length&&roll(BAL.cv.facAsk)){const oa=npcWhy("facAsk",{minAff:0});/* npc-purpose G2: the leader who most needs her (liking, a shared foe, a thin faction) */const l=oa&&oa.who,f=l&&facOf(l);if(l&&f&&l!==S)return{ev:1,t:"Có người đến",who:pv(l),h:`<p>${l.name}, người đứng đầu ${f.name}, mời ngươi vào phe (${oa.why}).</p>`,opts:[{n:"Nhận lời vào phe",fx:{},x:`nàng quý ngươi ${balSg(BAL.eff.j25.go)} · kẻ thù của phe oán ngươi`,go:()=>{f.m.push(key(S));relAdd(S,l,BAL.eff.j25.go)}},{n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:`giữ sức, không dính vào phe ai · nàng quý ngươi ${balSg(BAL.eff.j25.go_2)}`,go:()=>relAdd(S,l,BAL.eff.j25.go_2)}]}}return a1.apply(this,arguments)}})();
+(function(){const a1=approachOne;approachOne=function(){if(!facOf(S)&&(S.facs||[]).length&&roll(BAL.cv.facAsk)){const oa=npcWhy("facAsk",{minAff:0});/* npc-purpose G2: the leader who most needs her (liking, a shared foe, a thin faction) */const l=oa&&oa.who,f=l&&facOf(l);if(l&&f&&l!==S){const m=facAskCard(l,String(oa.why||""));if(m)return m}}return a1.apply(this,arguments)}})();
+/* save-unseen-lists r4 (LAW 11 / 6c): the faction invitation «Có người đến» (an approach, made at the step) is BUILT by a registered generator from the
+   leader (id) and the reason; her faction is found again from the live state — written into the sổ and made again on load */
+const facAskCard=rcpReg("facAsk",(l,why)=>{const f=l&&facOf(l);if(!f||l===S||facOf(S))return null;return{ev:1,t:"Có người đến",who:pv(l),h:`<p>${l.name}, người đứng đầu ${f.name}, mời ngươi vào phe (${why}).</p>`,opts:[{n:"Nhận lời vào phe",fx:{},x:`nàng quý ngươi ${balSg(BAL.eff.j25.go)} · kẻ thù của phe oán ngươi`,go:()=>{f.m.push(key(S));relAdd(S,l,BAL.eff.j25.go)}},{n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:`giữ sức, không dính vào phe ai · nàng quý ngươi ${balSg(BAL.eff.j25.go_2)}`,go:()=>relAdd(S,l,BAL.eff.j25.go_2)}]}});
 /* card sub-tabs: one group at a time, remembered per role */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-pct]");if(!b)return;e.stopPropagation();e.preventDefault();window.__pcTab=window.__pcTab||{};window.__pcTab[b.dataset.role]=b.dataset.pct;const c=b.closest(".pcr");c.querySelectorAll(".pct").forEach(x=>x.classList.toggle("on",x===b));c.querySelectorAll(".pcg").forEach(g=>g.classList.toggle("on",g.dataset.g===b.dataset.pct))},true);
 /* consort faces by DRESS TIER (picked by rank), reviewed by eye: only serene, slim, adult, approved-style faces; stern, plump, sad or childlike ones are left out */

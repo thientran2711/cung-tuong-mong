@@ -8,7 +8,7 @@
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const {spawnSync}=require('child_process');
 const [,,BASE,OUT,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{fs.mkdirSync(OUT,{recursive:true});const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+DPR||1,hasTouch:true,isMobile:W<1100});
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate((process_env_O)=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;if(process_env_O)window.__forceOrigin=process_env_O;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;showModal();render()},process.env.ORIGIN||'');await p.waitForTimeout(400);
  const rep=[];

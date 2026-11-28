@@ -68,8 +68,8 @@ let top0=(hd&&hd.getClientRects().length?hd.getBoundingClientRect().bottom:D.top
    One part for every hand (and the same rule for the thẻ gỗ picker kitPick). Size = KIT_HAND.confPx (kit tap size), above the card art. */
 function kitHandConf(b){try{const g=b&&b.parentElement,dl=g&&g.closest(".dlg");if(!dl)return;let c=dl.querySelector(":scope>.khconf");
  if(!b.classList.contains("klift")||b.disabled){if(c)c.hidden=true;return}
- if(!c){c=document.createElement("div");c.className="khconf";c.innerHTML=`<button type="button" class="khok" aria-label="Chọn lá này">✓</button><button type="button" class="khx" aria-label="Đặt lại">✕</button>`;dl.appendChild(c)}
- c.hidden=false;const D=dl.getBoundingClientRect(),B=b.getBoundingClientRect(),s=KIT_HAND.confPx,gap=6,w=2*s+gap;
+ if(!c){c=document.createElement("div");c.className="khconf";c.innerHTML=`<button type="button" class="khok" aria-label="Chọn lá này">✓</button><button type="button" class="khx" aria-label="Đặt lại">✕</button>`;/* KK56 (X21, owner OD 27/11 ~04:00Z): the green ✓ is the TOP-RIGHT corner button of the lifted / enlarged card (row-reverse: ✕ sits to its left) */dl.appendChild(c)}
+ c.hidden=false;const D=dl.getBoundingClientRect(),B=b.getBoundingClientRect()/* the pair rides the LIFTED CARD's top edge, never the info plate (RV-169: it covered the GỢI Ý text) */,s=KIT_HAND.confPx,gap=6,w=2*s+gap;
  let x=Math.round(B.right-D.left-w+s*.35),y=Math.round(B.top-D.top-s*.55);x=Math.max(4,Math.min(D.width-w-4,x));y=Math.max(4,y);
  c.style.left=x+"px";c.style.top=y+"px";c.style.setProperty("--khcs",s+"px")}catch(e){console.error("kitHandConf",e)}}
 function kitHandConfOff(g){const dl=g&&g.closest&&g.closest(".dlg"),c=dl&&dl.querySelector(":scope>.khconf");if(c)c.hidden=true}
@@ -100,12 +100,17 @@ function kitHand(M){try{M=M||document.getElementById("modal");if(!M||M.hidden)re
   if(!g.__khMO&&typeof MutationObserver==="function"){g.__khMO=new MutationObserver(()=>{try{g.__khMO.disconnect();kitHandCards(g).forEach(kitHandShort)}finally{g.__khMO.observe(g,{subtree:true,childList:true,characterData:true})}});g.__khMO.observe(g,{subtree:true,childList:true,characterData:true})}
   if(!g.__khRO&&typeof ResizeObserver==="function"){g.__khRO=new ResizeObserver(()=>{if(!g.isConnected||g.__khBusy)return;cancelAnimationFrame(g.__khRaf);g.__khRaf=requestAnimationFrame(()=>kitHandLay(g))});g.__khRO.observe(g)}});
  /* KK35: a REUSED dialog whose new card is no hand (a notice after a hand frame) keeps no hand / stage classes, figures or scene (the next frame decides again) */
- M.querySelectorAll(".dlg.khdlg,.dlg.kstage").forEach(dl=>{if(dl.querySelector(".opts.khand"))return;dl.classList.remove("khdlg");if(dl.classList.contains("kstage")&&typeof kstgOff==="function")kstgOff(dl)})}catch(e){console.error("kitHand",e)}}
+ M.querySelectorAll(".dlg.khdlg,.dlg.kstage").forEach(dl=>{if(dl.querySelector(".opts.khand"))return;dl.classList.remove("khdlg");if(dl.classList.contains("kstage")&&typeof kstgOff==="function")kstgOff(dl)});
+ /* DLG-DEAD-BTN (law 11, Foreman F «Tin báo» «Để sau» / «Chọn lá này» dead on LIVE): the lift plate + ✓/✕ pair live on the REUSED .dlg; a card lifted on one
+    queue card, then that card replaced by the next one (news / timer / one-copy panel), left them up on the new card with NO lifted card — ✓ and ✕ did nothing
+    and the plate covered the hand (and hid the stage text). A frame drawn with no lifted card shows no plate and no pair. */
+ kitHandStale(M)}catch(e){console.error("kitHand",e)}}
+function kitHandStale(M){try{(M||document).querySelectorAll("#modal .dlg").forEach(dl=>{if(dl.querySelector(".opts.khand>button.klift"))return;dl.querySelectorAll(":scope>.khplate:not([hidden]),:scope>.khconf:not([hidden])").forEach(x=>x.hidden=true)})}catch(e){console.error("kitHandStale",e)}}
 window.kitHand=kitHand;window.kitHandWants=kitHandWants;window.kitHandLay=kitHandLay;window.KIT_HAND=KIT_HAND;
 (function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=document.getElementById("modal");if(M&&!M.hidden){kitHand(M);requestAnimationFrame(()=>kitHand(M))}}catch(e){console.error("kitHand",e)}return r}})();
 /* the two-tap gate (capture, before #modal onclick): a REAL tap (detail ≥ 1) on a resting card lifts it; on the lifted card it chooses (with the fly); a tap elsewhere in the frame drops the lifted card */
 document.addEventListener("click",e=>{try{const t=e.target;if(!t||!t.closest)return;
- const cf=t.closest("#modal .dlg>.khconf>button");/* the hand's own ✓/✕ (a kitPick .kpk-conf inside the stage is its own part) */if(cf){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const dl=cf.closest(".dlg"),L=dl&&dl.querySelector(".opts.khand>button.klift");if(!L)return;
+ const cf=t.closest("#modal .dlg>.khconf>button");/* the hand's own ✓/✕ (a kitPick .kpk-conf inside the stage is its own part) */if(cf){e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();const dl=cf.closest(".dlg"),L=dl&&dl.querySelector(".opts.khand>button.klift");if(!L){kitHandStale(dl&&dl.parentElement);return}/* a pair with no lifted card under it: it goes, never a dead ✓ */
   if(cf.classList.contains("khok"))kitHandChoose(L);else kitHandDrop(L.parentElement);return}
  const b=t.closest("#modal .opts.khand > button.kopt");
  if(!b){const g=t.closest("#modal .opts.khand");if(g){/* a tap that landed on the list box: a locked card under the finger (browsers that swallow events on disabled buttons) */const hit=kitHandCards(g).find(x=>{const r=x.getBoundingClientRect();return x.disabled&&e.clientX>=r.left&&e.clientX<=r.right&&e.clientY>=r.top&&e.clientY<=r.bottom});if(hit){e.stopPropagation();kitHandLift(hit);return}}
@@ -133,7 +138,7 @@ html body #modal#modal#modal#modal .opts.khand>button.kopt:disabled.klift{filter
 html body #modal#modal#modal#modal .opts.khand.khpre>button.kopt{opacity:0}
 html body #modal#modal#modal#modal .dlg:not(.khmeas) .k3right>.opts.khand,html body #modal#modal#modal#modal .dlg:not(.khmeas) #mb>.opts.khand{position:sticky!important;bottom:0;z-index:2;background:var(--k-card,#fffaf0)}/* the hand never scrolls out of view: a long story scrolls under it */
 html body #modal#modal#modal#modal .k3right>.opts.khand{margin-top:auto!important}
-#modal .dlg>.khconf,.khconf{position:absolute;z-index:8;display:flex;gap:6px;pointer-events:auto}
+#modal .dlg>.khconf,.khconf{position:absolute;z-index:8;display:flex;flex-direction:row-reverse;gap:6px;pointer-events:auto}
 .khconf[hidden]{display:none!important}
 #modal .dlg>.khconf>button,.khconf>button{width:var(--khcs,44px);height:var(--khcs,44px);min-width:0;min-height:0;padding:0;margin:0;border-radius:50%;display:grid;place-items:center;font-size:calc(var(--khcs,44px)*.5);font-weight:800;line-height:1;cursor:pointer;box-shadow:0 3px 10px #0005;border:2px solid #fffaf0}
 #modal .dlg>.khconf>.khok .kmk,.khconf>.khok .kmk{background:#fff!important;color:#fff!important;width:.95em;height:.95em;margin:0!important;vertical-align:0}

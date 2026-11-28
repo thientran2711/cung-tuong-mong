@@ -14,7 +14,7 @@ function clipCheck(sel){return `(()=>{const bad=[];document.querySelectorAll(${J
   const cs=getComputedStyle(e);if((cs.overflow==='hidden'||cs.textOverflow==='ellipsis')&&(e.scrollWidth>e.clientWidth+1||e.scrollHeight>e.clientHeight+2)&&e.textContent.trim())bad.push(e.className+': '+e.textContent.trim().slice(0,40))}));return bad})()`}
 (async()=>{const b=await chromium.launch();const R={};
  for(const [W,H] of [[755,1000],[1180,820]]){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:2,hasTouch:true,isMobile:W<1100});
-  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));const r=R[W]={};
+  const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));const r=R[W]={};
   await p.goto(BASE+PAGE,{waitUntil:'domcontentloaded'});await skipLoader(p);await sleep(1500);
   /* old save: a life started on the build being tested, written to a slot, read back */
   await p.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render()});await sleep(1500);
@@ -46,7 +46,7 @@ function clipCheck(sel){return `(()=>{const bad=[];document.querySelectorAll(${J
   r.night=await p.evaluate(()=>{const m=document.getElementById('modal');return m&&!m.hidden?m.innerText:''});
   await p.screenshot({path:`${OUT}/${TAG}-dem-thi-tam-${W}x${H}.png`,animations:'disabled',timeout:120000});
   /* old save reads back */
-  r.save=await p.evaluate(()=>{Q.length=0;quiet=false;S.dead=false;save();const raw=localStorage.getItem(SK(3));const ok=!!raw;try{loadSlot(3)}catch(e){return 'load error '+e.message}render();return ok?'ok':'no save'});
+  r.save=await p.evaluate(()=>{Q.length=0;quiet=false;S.dead=false;save();const raw=(window.slotGet?slotGet(SK(3)):localStorage.getItem(SK(3)));const ok=!!raw;try{loadSlot(3)}catch(e){return 'load error '+e.message}render();return ok?'ok':'no save'});
   r.bad=[...badLines(r.cards.join('\n')),...badLines(r.actText),...badLines(r.result),...badLines(r.prep),...badLines(r.night),...badLines(r.hud.join('\n'))];
   r.hasLieu=/Liều/.test(r.cards.join(' ')+r.hud.join(' '));r.errs=errs;await ctx.close()}
  /* static: the built page, every template "<label>: ${word(" left would be a side chance on the ladder */

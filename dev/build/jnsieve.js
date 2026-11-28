@@ -60,7 +60,7 @@ if(typeof kitKnow==="function"){const k0=kitKnow;kitKnow=function(o){try{if(on()
    if(drop){NSV.stat.knowDrop++;if(!NSV.mute){tally("so");if(!/(biết nết|lộ nết|có nết)/.test(t))try{recDrop(t)}catch(e){}}note("know:"+key.split(":")[0],t);return}}}catch(e){}return k0.apply(this,arguments)}}
 
 /* ---------- 3. the morning card, sentence by sentence ---------- */
-const SENT=/(?<=[.!?…])\s+(?=[^\s.,;:!?…)\]»”])/u;
+const SENT=kRx("(?<=[.!?…])\\s+(?=[^\\s.,;:!?…)\\]»”])","u");
 function sieveHtml(inner){const S0=String(inner).split(SENT);const out=[];let lastKept=true,dropped=0;
  for(const s of S0){const t=txtOf(s);if(!t){continue}
   if(/^(Lý do|Vì sao|Kết quả|Người được sai)/.test(t)){if(lastKept)out.push(s);else dropped++;continue}
@@ -143,11 +143,11 @@ if(typeof runAct==="function"){const ra0=runAct;runAct=function(a,t,k){const r=r
     let rec=null;try{rec=(causeQuery({by:a,to:t,limit:1})||[])[0]||null}catch(e){}
     if(!rec||rec.w!==(typeof nowW==="function"?nowW():rec.w)||rec.a!==k)rec={by:String(a.id),to:String(t.id),a:k,n:ACT[k]?ACT[k].n:k,y:{k:"net",x:""},r:/không thành|bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(txtOf(r))?"fail":"ok"};
     /* failed or not = the act's OWN first sentence (a later «… sai đi bị bắt, khai ra chủ» is about the servant, the deed itself may have landed) */
-    const first=txtOf(r).split(/(?<=[.!?…;])\s+/)[0]||"";rec=Object.assign({},rec,{r:/không thành|phát giác|bị lộ|bị bắt|chặn kịp|từ chối|không ai tin|đã bị cắt/.test(first)?"fail":"ok"});
+    const first=txtOf(r).split(kRx("(?<=[.!?…;])\\s+"))[0]||"";rec=Object.assign({},rec,{r:/không thành|phát giác|bị lộ|bị bắt|chặn kịp|từ chối|không ai tin|đã bị cắt/.test(first)?"fail":"ok"});
     const line=recSentence(rec,a,t,k);
     let sent="";const res0=txtOf(r).replace(/\s*\((?:([^()]*?) )?sai ([^()]*) đi\)/g,(m,x,y)=>{sent=y;return""}).replace(/\s*\(tại [^()]*\)/g,"").trim();
     /* the result without the act told again: «A định hủy dung B nhưng không thành, bị lộ dấu vết.» → «bị lộ dấu vết.» */
-    const res=res0.split(/(?<=[.!?…])\s+/).map(x=>{if(!(x.includes(a.name)&&x.includes(t.name)))return x;const m=x.match(/nhưng không thành,\s*(.+)$/);return m?m[1]:(/^\S+( \S+)* (định|bày mưu)/.test(x)&&/không thành/.test(x)?"":x)}).filter(Boolean).join(" ").trim();
+    const res=res0.split(kRx("(?<=[.!?…])\\s+")).map(x=>{if(!(x.includes(a.name)&&x.includes(t.name)))return x;const m=x.match(/nhưng không thành,\s*(.+)$/);return m?m[1]:(/^\S+( \S+)* (định|bày mưu)/.test(x)&&/không thành/.test(x)?"":x)}).filter(Boolean).join(" ").trim();
     const big=bigK(k);
     const T2=`${line}${sent?` Người được sai: ${sent}.`:""}${res?` Kết quả: ${res[0].toUpperCase()+res.slice(1)}`:""}`;const I2=[a.id,t.id];try{for(const v of rivals||[])if(v&&v.name&&v.id!=null&&!I2.includes(v.id)&&T2.includes(v.name))I2.push(v.id)}catch(e){}/* RV: a third consort named in the cause / result is masked too (law 6, known names) */
     const R=recPush({t:T2,ids:I2,big,k});
@@ -241,16 +241,31 @@ function nsSieve(o){try{if(!o)return true;if(!on())return true;
    Keeps the rows nsSieve passes (at most BAL.news.card.rowMax of other people, largest change first); every other change becomes ONE summary
    line «Trong cung: 5 người ghen thêm, 2 người bớt quý ta» (names behind the tap, kit .kkem) and ONE Sổ ghi record with every name and number. */
 function nsCard(per,K,why,title,tgt){const B=(on()&&BAL.news.card)||null;if(!B)return null;try{
- const keep=[],fold=[],rest=[];const isP=x=>x&&x[4]&&typeof x[4]==="object"&&x[4]!==S&&!nsHouse(x[4]);
+ /* KIT §7.4a THE ONE FOLD (owner OD 26/11 ~20:45Z «khung kết quả quá nhiều thông tin»; MAIN 164 ruling: this sieve is the only fold rule):
+    the card keeps HER rows + at most B.keep NAMED people (her chosen targets count first, then people named in the card title / reasons, then the
+    biggest change); every other person (all nameless «một vị …» people too) is folded into ONE summary line per group and stat
+    «Hậu cung: thiện cảm −4 (10 người) · oán +1 (9 người)» (K.sum, drawn by kitKemRow) + «Xem đủ trong Sổ ghi»; ONE Sổ ghi record (below) keeps every name. */
+ const keep=[],fold=[],rest=[];const isP=x=>x&&x[4]&&typeof x[4]==="object"&&x[4]!==S&&!nsHouse(x[4]);const T=tgt||[];
+ /* a person named in the card title / reasons («Yến tiệc mời <X>») is part of her choice: she passes the sieve and ranks first */
+ const ctx=[title].concat(why||[]).map(txtOf).join(" ");const inCh=v=>v&&v.name&&ctx.includes(v.name)?1:0;
  for(const x of per){if(!isP(x)){keep.push(x);continue}const ev=(x[1].concat(x[2])).some(t=>/chứng cứ/.test(t));
-  if(nsSieve({v:x[4],d:x[5],why,tgt,ev}))rest.push(x);else fold.push(x)}
- rest.sort((a,b)=>Math.abs(b[5]||0)-Math.abs(a[5]||0));for(const x of rest.splice(B.rowMax))fold.push(x);keep.push(...rest);
+  if(inCh(x[4])||nsSieve({v:x[4],d:x[5],why,tgt,ev}))rest.push(x);else fold.push(x)}
+ rest.sort((a,b)=>inCh(b[4])-inCh(a[4])||Math.abs(b[5]||0)-Math.abs(a[5]||0));for(const x of rest.splice(B.rowMax))fold.push(x);
  const Kk=(K||[]).filter(x=>Math.round(x.d));const kem=[],kf=[];
- for(const x of Kk)(nsSieve({v:x.v,d:x.d,why,tgt})?kem:kf).push(x);kem.sort((a,b)=>Math.abs(b.d)-Math.abs(a.d));for(const x of kem.splice(B.kemMax))kf.push(x);
+ for(const x of Kk)(inCh(x.v)||nsSieve({v:x.v,d:x.d,why,tgt})?kem:kf).push(x);kem.sort((a,b)=>inCh(b.v)-inCh(a.v)||Math.abs(b.d)-Math.abs(a.d));for(const x of kem.splice(B.kemMax))kf.push(x);
+ {/* the named cap: one slot per PERSON (a person row and her Kèm items share it); a nameless person never keeps a slot */
+  const nm=v=>{try{return typeof kaNamed==="function"?kaNamed(v):true}catch(e){return true}};
+  const P=new Map();const sc=(v,d)=>{if(!P.has(v))P.set(v,{v,d:0});P.get(v).d+=Math.abs(d||0)};
+  for(const x of rest)sc(x[4],x[5]);for(const x of kem)sc(x.v,x.d);
+  const room=Math.max(0,(B.keep!=null?B.keep:3)-T.length-keep.length);
+  const win=new Set([...P.values()].filter(p=>nm(p.v)).sort((a,b)=>inCh(b.v)-inCh(a.v)||b.d-a.d).slice(0,room).map(p=>p.v));
+  for(let i=rest.length-1;i>=0;i--)if(!win.has(rest[i][4]))fold.push(...rest.splice(i,1));
+  for(let i=kem.length-1;i>=0;i--)if(!win.has(kem[i].v))kf.push(...kem.splice(i,1))}
+ keep.push(...rest);
  const byV=new Map();const add=(v,w)=>{if(!byV.has(v))byV.set(v,[]);byV.get(v).push(w)};
  for(const x of fold){if(x[1].length)add(x[4],x[1].join(", "));if(x[2].length)add(x[4],x[2].join(", "))}
  for(const x of kf)add(x.v,`${x.k} ${typeof kaNT==="function"?kaNT(Math.round(x.d),x.t):kaN(Math.round(x.d))}`);
- if(!byV.size)return {keep,kem,more:0,fold:[]};
+ if(!byV.size)return {keep,kem,more:0,fold:[],sum:[]};
  /* the Sổ ghi keeps every name and number (maskNames at show time: a stranger stays «một vị …») */
  /* MAIN 158 26/11 (law 11): the record is shown through the kit kitKemRow one-per-line form (recMerge), so it also stores the items:
     K = [{id,k,d,t}] (a folded row part «thiện cảm +3 (20)» → k «thiện cảm», d 3, t 20; a Kèm item as it is); lead = the card title */
@@ -259,7 +274,12 @@ function nsCard(per,K,why,title,tgt){const B=(on()&&BAL.news.card)||null;if(!B)r
  for(const x of kf)KI.push({id:x.v.id,k:x.k,d:Math.round(x.d),t:x.t!=null?x.t:null});
  try{const r0=recPush({t:`${title?txtOf(title)+" — ":""}kèm theo trong cung: ${[...byV].map(([v,W])=>`${v.name} ${W.map(txtOf).join(", ")}`).join("; ")}.`,ids:[...byV.keys()].map(v=>v.id)});if(r0){r0.kem=1/* a card's folded changes (not an NPC act: no k) */;if(KI.length){r0.K=KI;r0.L=title?txtOf(title):""}}}catch(e){}
  NSV.stat.cardFold=(NSV.stat.cardFold||0)+byV.size;
- const kv=new Set(kem.map(x=>x.v));return {keep,kem,more:[...byV.keys()].filter(v=>!kv.has(v)).length,fold:[...byV.keys()].map(v=>v.name)}}catch(e){console.error("nsCard",e);return null}}
+ /* K.sum: [[group, [[stat, net, people]]]] — «Hậu cung» = the consorts, «Người khác» = anyone else; net change per stat, people counted once per stat */
+ const G=new Map();const R=typeof rivals!=="undefined"?rivals:[];
+ for(const it of KI){const v=persOf(it.id)||[...byV.keys()].find(w=>w.id===it.id);const g=v&&R.includes(v)?"Hậu cung":"Người khác";if(!G.has(g))G.set(g,new Map());const M=G.get(g);
+  if(!M.has(it.k))M.set(it.k,{d:0,n:new Set()});const s=M.get(it.k);s.d+=it.d;s.n.add(it.id)}
+ const sum=[...G].sort((a,b)=>(b[0]==="Hậu cung")-(a[0]==="Hậu cung")).map(([g,M])=>[g,[...M].map(([k,s])=>[k,s.d,s.n.size])]);
+ const kv=new Set(kem.map(x=>x.v));return {keep,kem,more:[...byV.keys()].filter(v=>!kv.has(v)).length,fold:[...byV.keys()].map(v=>v.name),sum}}catch(e){console.error("nsCard",e);return null}}
 /* «VÌ SAO» (kitWhy, j63 kaWhyCl): the reasons of a card come from the span's log clauses; a clause that is other people's business only never
    becomes a reason on her card (it stays in the Sổ ghi) */
 if(typeof kaWhyCl==="function"){const w0=kaWhyCl;kaWhyCl=function(){const L=w0.apply(this,arguments);try{if(on()&&Array.isArray(L)){const F=L.filter(c=>!nsNpcLine(c));F.side=L.side;return F}/* keep the kwside set (KAWHY-VERDICT: a side clause is never a cause) */}catch(e){}return L}}

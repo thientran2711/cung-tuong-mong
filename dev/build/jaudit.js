@@ -15,14 +15,14 @@
 
 /* 2. NO SILENT RANDOM TARGET for her acts (owner 08:45Z). The person an act lands on is named on the card ("về: …"):
    - Phế phi "Hỏi chuyện cũ": she tells of the consort with the most real deeds (j78deeds), else the one most hostile to her (was: pick()).
-   - "Nhờ giúp đỡ": the consort she would tell about is the one she likes least (was: the first in the list, unnamed). */
+   (- "Nhờ giúp đỡ": moved to the one rule helpAsk, jrcv — help-housemate.) */
 function aaFallenT(){const L=liveRivals(true);if(!L.length)return null;const d=v=>typeof j78deeds==="function"?j78deeds(v).length:0;
  return L.slice().sort((x,y)=>(d(y)-d(x))||(danger(y,S)-danger(x,S))||(x.id-y.id))[0]}
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{
  if(p&&p.kind==="fallen"){const i=A.findIndex(a=>a.n==="Hỏi chuyện cũ");const x=aaFallenT();if(i>=0&&x){const nm=(x.queen?"Hoàng hậu ":RANKS[x.rank].n+" ")+x.name;
   A[i]=Object.assign({},A[i],{x:`về: ${nm} · biết 1 điều thật về nàng · chứng cứ ${balSg(BAL.eff.jaudit.evN)} nếu nàng từng làm điều sai`,go:()=>{let f="";try{f=typeof intelLearn==="function"?intelLearn(x,1,{by:"Phế phi",how:"Hỏi chuyện cũ"}):""}catch(e){}const n=evA(S,x,BAL.eff.jaudit.evN);try{evdSync()}catch(e){}log(`Phế phi kể chuyện của ${nm}: ${f||"một chuyện cũ"}${n?` Chứng cứ ${balSg(BAL.eff.jaudit.evN)}.`:" Không có gì làm chứng cứ."}`)}})}}
- if(p&&(p.kind==="rival"||p.kind==="hh")&&p.ref){const v=p.ref;const i=A.findIndex(a=>a.n==="Nhờ giúp đỡ");if(i>=0){const x=liveRivals(true).filter(y=>y!==v).sort((a,b)=>aff(v,a)-aff(v,b))[0];
-  if(x)A[i]=Object.assign({},A[i],A[i].lock&&/cần thiện cảm 30/.test(A[i].t||"")&&!knows(v)?{t:`cần thiện cảm 30 (${KIT_REL.unknown})`}:{},{x:`nàng cho mượn Bạc +${BAL.audit.loan} hoặc kể chuyện về ${x.name} (chứng cứ ${balSg(BAL.eff.jaudit.evRun)} nếu ${x.name} từng làm điều sai)`,run:()=>{chatMark(v);if(aff(v,S)>=netTh(v,"than")){if(roll(50)&&v.bac>=BAL.audit.loan){ap(v,{bac:-BAL.audit.loan});apply({bac:BAL.audit.loan});return `${v.name} cho ngươi mượn ${BAL.audit.loan} lượng.`}return evA(S,x,BAL.eff.jaudit.evRun)?`${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ ${balSg(BAL.eff.jaudit.evRun)}.`:`${v.name} kể chuyện về ${x.name}: không có gì sai trái, chỉ biết ${harmTxt(x)}.`}affAdd(v,S,BAL.eff.jaudit.run);return `${v.name} khéo từ chối. Thiện cảm ${balSg(BAL.eff.jaudit.run)}.`}})}}}catch(e){console.error(e)}return A}})();
+ /* «Nhờ giúp đỡ» is NOT rewritten here any more (help-housemate, law 1): her talk card runs the ONE rule helpAsk (j9 topicOpts → jrcv), the same 4 receiver answers as an NPC cx2:help; the old loan/tell copy (BAL.audit.loan, a 50/50 roll) is gone */
+}catch(e){console.error(e)}return A}})();
 
 /* 3. HIDDEN RISK of sending a servant (act audit): when she is not with the target, a consort act is done by her best servant
    (runAct → bestSent). For harm acts he may be caught (confessRisk): he confesses (the target holds 1 more chứng cứ against her)
@@ -172,7 +172,7 @@ window.kitThey=kitThey;
   return Object.assign({},h,{k:key,c,tgt:v,run:()=>{if(c)apply(Object.fromEntries(Object.entries(c).map(([a,b])=>[a,-b])));return h.run()}})})}})();
 (function(){if(typeof optLine!=="function")return;const o0=optLine;optLine=function(a){if(!a||!a.tgt||typeof J78!=="object")return o0.apply(this,arguments);const pv=J78.cardV;J78.cardV=a.tgt;try{return o0.apply(this,arguments)}finally{J78.cardV=pv}}})();
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{const v=p&&p.ref;if(!v||p.kind!=="rival")return A;const i=A.findIndex(a=>a&&a.n==="Khiêu khích");
- if(i>=0)A[i]=Object.assign({},A[i],{x:`${pvRel(v,-15)}, nàng ta ghen +10`})}catch(e){}return A}})();
+ if(i>=0)A[i]=Object.assign({},A[i],{x:`${pvRel(v,-BAL.talk.provoke.rel)}, nàng ta ghen +${BAL.talk.provoke.ghen}`/* E-GAIN3b law 4: the numbers the act applies (j2 PK = BAL.talk.provoke), were typed 15 / 10 */})}catch(e){}return A}})();
 
 /* 15. her own Sủng on act-card outcome texts goes through sg() like the real change (j1 apply: Hoàng thượng nóng nảy ×1.3,
    lạnh lùng ×0.7 on gains) — "Sủng -8" on a static outcome text is drawn as the real −10 */

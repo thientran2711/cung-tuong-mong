@@ -185,9 +185,9 @@ function shelfWhyNot(p,e){if(!e||!IT[e.k])return"không có món này";const g=s
 function shelfSlotFor(p,g){const z=shelfOf(p),S0=shelfSlots(g),fr=S0.find(s=>!z.g[s]);if(fr)return fr;return S0.slice().sort((a,b)=>shelfPiece(z.g[a])-shelfPiece(z.g[b]))[0]}
 function shelfPut(p,ix,slot){const e=(p.inv||[])[ix];const why=shelfWhyNot(p,e);if(why)return{ok:false,why};const z=shelfOf(p),g=shelfGrpE(e);
  const s=slot&&shelfSlotG(slot)===g&&shelfSlots(g).includes(slot)?slot:shelfSlotFor(p,g),old=z.g[s];
- p.inv.splice(ix,1);if(old)p.inv.push(old);if(shelfIsPlant(e)&&e.pc==null){e.pc=BAL.shelf.plant.start;e.pz=0}e.shw=wk();z.g[s]=e;if(old)shelfSetSync(p);return{ok:true,g,slot:s,old:old?shelfNm(old):"",n:shelfNm(e)}}
+ p.inv.splice(ix,1);if(old)invAdd(p,old);if(shelfIsPlant(e)&&e.pc==null){e.pc=BAL.shelf.plant.start;e.pz=0}e.shw=wk();z.g[s]=e;if(old)shelfSetSync(p);return{ok:true,g,slot:s,old:old?shelfNm(old):"",n:shelfNm(e)}}
 function shelfNm(e){if(!e)return"";if(e.k==="tp"&&e.wk)return e.wk.n||itm("tp").n;return itm(e.k).n}
-function shelfTake(p,g){const z=shelfOf(p),e=z.g[g];if(!e)return"";delete z.g[g];p.inv=p.inv||[];p.inv.push(e);shelfSetSync(p);return shelfNm(e)}
+function shelfTake(p,g){const z=shelfOf(p),e=z.g[g];if(!e)return"";delete z.g[g];p.inv=p.inv||[];invAdd(p,e);shelfSetSync(p);return shelfNm(e)}
 /* the one luxury number of a displayed piece: table / IT pieces = jlux luxPiece; her handmade work = the kit grade of its bậc (LUX_V); a living piece in bad care counts witherLux */
 function shelfPiece(e){if(!e)return 0;let v=0;try{if(e.k==="tp"){const a=itemArt(e);v=LUX_V[a?a.grade|0:0]}else v=luxPiece(e.k)}catch(x){v=0}if(shelfBad(e))v=Math.round(v*BAL.shelf.plant.witherLux);return v}
 /* the DWELLING score: sum of the displayed pieces vs the rank allowance × allowF (never shown to anyone: owner (d); the player learns it from consequences) */
@@ -346,8 +346,12 @@ function shelfPlantWeek(p){const P=BAL.shelf.plant,z=shelfOf(p),me=p===S;const s
   if(was&&e.pc<P.wither)out.push(["wither",g])}
  if(me&&out.length&&!(typeof tsbBot==="function"&&tsbBot()))for(const [w,g,n0,W0] of out){if(w==="spent"){log(`${n0} bày trong phòng đã tàn.`);continue}
   if(w==="dead"){log(`<span class="r">${n0} bày trong phòng bị bỏ bê lâu ngày, ${W0.died}.</span>`);continue}
-  const e=z.g[g],W=shelfWord(e),n=shelfNm(e);Q.push({t:`${n} ${W.bad}`,who:typeof pMe==="function"?pMe():null,h:`<p>${n} bày trong phòng ${W.bad}${s?`: ${s.name} chăm chưa khéo`:", không ai chăm"}. Để lâu thì ${W.died}; khách đến thấy cũng chê.</p>`,
-   opts:[{n:"Tự tay chăm",fx:{},x:`tốn: ${P.khacSelf} khắc · thành: ${W.fresh}`,go:()=>setTimeout(()=>{try{shelfPlantOpen(g)}catch(e){}},60)},{n:"Để người hầu lo",fx:{},x:s?`${s.name} chăm tiếp, khéo vụng tùy lòng`:`không ai chăm: ${W.bad} thêm`}]})}return out}
+  shelfWitherCard(g)}return out}
+/* save-unseen-lists r4 (LAW 11 / 6c): «<cây> héo» (made at the turn of the tuần) is BUILT by a registered generator from the shelf slot (g); the
+   decay is applied before, once — written into the sổ and made again on load */
+const shelfWitherCard=rcpReg("shelfWither",g=>{const P=BAL.shelf.plant,z=shelfOf(S),s=shelfSrvBest(S);const e=z&&z.g&&z.g[g];if(!e)return null;const W=shelfWord(e),n=shelfNm(e);
+  const c={t:`${n} ${W.bad}`,who:typeof pMe==="function"?pMe():null,h:`<p>${n} bày trong phòng ${W.bad}${s?`: ${s.name} chăm chưa khéo`:", không ai chăm"}. Để lâu thì ${W.died}; khách đến thấy cũng chê.</p>`,
+   opts:[{n:"Tự tay chăm",fx:{},x:`tốn: ${P.khacSelf} khắc · thành: ${W.fresh}`,go:()=>setTimeout(()=>{try{shelfPlantOpen(g)}catch(e){}},60)},{n:"Để người hầu lo",fx:{},x:s?`${s.name} chăm tiếp, khéo vụng tùy lòng`:`không ai chăm: ${W.bad} thêm`}]};Q.push(c);return c});
 function shelfMood(p){if(typeof emoSet!=="function")return;const x=Object.assign({},shelfLux(p)),M=BAL.shelf.mood;if(p!==S&&shelfTaste(p)<0&&x.lv>=2)x.lv=1;/* a frugal owner takes no joy in show */
  if(x.wither)emoSet(p,"buon",M.wither,"cây cảnh, chim cá trong phòng bỏ bê");else if(x.lv>=2)emoSet(p,"vui",M.lux,"phòng ốc bày biện lộng lẫy");else if(x.lv===1)emoSet(p,"vui",M.fit,"phòng ốc bày biện vừa ý")}
 function shelfRumour(){const B=BAL.shelf.rum;const P=[S].concat(liveRivals(true)).filter(p=>p&&p.alive!==false&&!p.out);let heardMe=0;

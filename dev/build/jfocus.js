@@ -12,7 +12,7 @@
 (function(){try{
 const KIT_FOC=window.KIT_FOC=window.KIT_FOC||{
  veilMs:360,walkMs:700,tabsAt:600,tabsMs:200,fanMs:220,fanStagger:40,foldOpenMs:120,foldCloseMs:160,closeMs:600,veilOutMs:300,fadeMs:150,reactMs:1600,sayRiseMs:220,
- col:{kv1:236,kv2:300},btnH:{kv1:64,kv2:72},pic:{kv1:56,kv2:64},floorPad:{kv1:64,kv2:56},tabH:34,tabGap:8,headGap:8,colGap:12,
+ col:{kv1:236,kv2:300},colMin:{kv1:150,kv2:170},slimW:{kv1:190,kv2:210},btnH:{kv1:64,kv2:72},pic:{kv1:56,kv2:64},floorPad:{kv1:64,kv2:56},tabH:34,tabGap:8,headGap:8,colGap:12,
  motion:null /* test hook: true = ignore reduced motion */,
  idle:{breath:[3.6,4.4],breathKid:[2.8,3.2],sway:[7,9],turnEvery:[9000,15000],turnGapMs:4000,turnMs:1200,sayMs:3500,sayFadeMs:300,sayMax:22}};
 const kv=()=>document.documentElement.classList.contains("kv2")?"kv2":"kv1";
@@ -29,7 +29,7 @@ function subParts(a){const t=a.ton?String(a.ton).split(/\s*·\s*/).filter(Boolea
 /* KK54 (OWNER 27/11 ~04:33Z/04:39Z: «được là xanh lá, mất là đỏ … quên hết kit chuẩn»; KIT §224 kaRows + §312 kcls + kit odds part): the sub-line of EVERY plaque / focus button is built by this ONE kit function — the odds word is the kit ODDS part (word + bar, kitOdds), each cost part is a kit .ef chip coloured by meaning: a time cost («2 khắc») = .t (ink, like the Tốn row), any other cost (bạc, Đức -2 …) = .r (red); a gain part = .g (green). Never plain one-colour text. */
 function subHTML(a){const P=subParts(a);let od=false,n=0;return P.map((x,i)=>{if(i===0&&a.word&&typeof kitOdds==="function"&&typeof kitOddsLv==="function"&&kitOddsLv(a.word)>=0){od=true;return `<span class="kfoc-od">${kitOdds(a.word)}</span> `}const t=String(x).replace(/^Tốn\s+/,""),time=typeof KA_TIME!=="undefined"&&KA_TIME.test(t),g=typeof a.gain==="string"&&a.gain===x;/* the separator dot travels WITH the part that follows it (a wrapped line never ends in «·») */return `${n++?" ":""}<span class="ef ${g?"g":time?"t":"r"}">${n>1?'<i class="ksepd">· </i>':""}${esc(x)}</span>`}).join("")}
 function btnHTML(a,i){const sub=[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).join(" · ");
- const full=[a.n,sub].filter(Boolean).join(" · ");return `<button type="button" class="kfoc-b${a.off?" kfoc-off kitoff":""}${(a.info||a.off&&a.why)?" kfoc-hasi":""}" data-i="${i}" data-id="${esc(a.id)}" aria-label="${esc(full)}" title="${esc(full)}">${picHTML(a)}<span class="kfoc-t"><b>${esc(a.n)}</b>${sub?`<small>${subHTML(a)}</small>`:""}</span>${(a.info||a.off&&a.why)?`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết">!</span>`:""}</button>`}
+ const full=[a.n,sub].filter(Boolean).join(" · ");return `<button type="button" class="kfoc-b${a.off?" kfoc-off kitoff":""}${(a.info||a.off&&a.why)?" kfoc-hasi":""}" data-i="${i}" data-id="${esc(a.id)}" aria-label="${esc(full)}" title="${esc(full)}">${picHTML(a)}<span class="kfoc-t"><b>${esc(a.n)}</b>${sub?`<small>${subHTML(a)}</small>`:""}</span>${(a.info||a.off&&a.why)?`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết" title="Chi tiết">!</span>`:""}</button>`}
 function fac(F){try{if(typeof j59fac==="function")return j59fac(F.src,F.p)||1}catch(e){}return 1}
 function open(o){if(CUR)CUR.destroy();const A=area(),K=KIT_FOC,m=kv(),src=(o.fig&&(o.fig.currentSrc||o.fig.src))||(typeof o.fig==="string"?o.fig:"")||"";
  const F={o,A,m,src,p:o.p,groups:o.groups||[],group:o.group||(o.groups&&o.groups[0]&&o.groups[0].k),anims:[],open:true,playing:false};CUR=F;
@@ -63,14 +63,17 @@ function layout(F){const K=KIT_FOC,A=F.A,m=F.m,v=F.body||{t:.02,b:.99,ar:.42,ht:
  if(sr){ih=sr.height;iw=sr.width;cx=sr.left+sr.width/2-A.left;top=sr.top-A.top;floor=top+v.b*ih;F.copy=true}
  else{const std=typeof KIT_FIG==='object'?Math.min(KIT_FIG.h*A.h,KIT_FIG.maxPx):Z.h,H=std*fac(F);ih=H/Math.max(.2,(v.b-v.t));iw=ih*(v.ar||.42);cx=A.w/2;floor=A.h-K.floorPad[m];top=floor-v.b*ih;F.copy=false}
  const half=Math.max(Z.cw,iw*Math.max(.3,(v.r||1)-(v.l||0)))/2,minRoom=200;/* both button columns need room: the spot only moves when a column would drop under minRoom (edge person) */
- if(cx-half-K.colGap-4<minRoom)cx=minRoom+half+K.colGap+4;if(A.w-cx-half-K.colGap-4<minRoom)cx=A.w-minRoom-half-K.colGap-4;
+ /* KK60 (G1 BIG #21, law 11): when the screen cannot give BOTH sides minRoom (wide figure on Fold), the figure centres instead of the right clamp winning and pushing the left column off-screen */
+ if(A.w-2*(half+K.colGap+4)<2*minRoom)cx=A.w/2;else{if(cx-half-K.colGap-4<minRoom)cx=minRoom+half+K.colGap+4;if(A.w-cx-half-K.colGap-4<minRoom)cx=A.w-minRoom-half-K.colGap-4}
  const ht=(typeof kitFigTop==="function"?kitFigTop(v):v.t);const need=K.tabH+K.headGap+44;let head=top+ht*ih;if(head<need){top+=need-head;floor+=need-head;head=need}
  F.geo={cx,floor,ih,iw,top,head,cw:Z.cw,H:ih*(v.b-v.t)};
  const s=F.img.style;s.left=(cx-iw/2)+"px";s.top=top+"px";s.width=iw+"px";s.height=ih+"px";
  const tb=F.tabs.style;tb.left="0";tb.right="0";tb.bottom=(A.h-(head-K.headGap))+"px";
  const availL=cx-half-K.colGap-4,availR=A.w-cx-half-K.colGap-4;
- for(const [side,c] of [["l",F.cl],["r",F.cr]]){const cw=Math.min(K.col[m],Math.max(90,side==="l"?availL:availR)),cs=c.style;cs.width=cw+"px";cs.top=Math.max(0,head+4)+"px";cs.height=Math.max(60,floor-head-4)+"px";
-  if(side==="l")cs.left=(cx-half-K.colGap-cw)+"px";else cs.left=(cx+half+K.colGap)+"px"}
+ /* KK60 (G1 BIG #21): a column NEVER leaves the focus layer — width ≥ colMin (title 2 lines + «!» popover), ≤ half the layer; when the side room is smaller it steps over the figure's side edge (inside 4px of the layer edge) instead of being cut; plaque + «!» stay on screen (kit §92.1g) */
+ const cMax=Math.floor(A.w/2-4-K.colGap/2);
+ for(const [side,c] of [["l",F.cl],["r",F.cr]]){const room=side==="l"?availL:availR,cw=Math.min(K.col[m],cMax,Math.max(K.colMin[m],room)),cs=c.style;cs.width=cw+"px";c.classList.toggle("kfoc-slim",cw<K.slimW[m])/* narrow column: no act picture, the name + price get the room (as kpk-slim; a price is never cut) */;cs.top=Math.max(0,head+4)+"px";cs.height=Math.max(60,floor-head-4)+"px";
+  if(side==="l")cs.left=Math.max(4,cx-half-K.colGap-cw)+"px";else cs.left=Math.min(A.w-4-cw,cx+half+K.colGap)+"px"}
  F.plate.style.top=(floor+6)+"px";F.plate.style.left=cx+"px";
  const pl=F.q(".kfoc-play").style;pl.left=Math.max(0,cx-iw/2-40)+"px";pl.width=(iw+80)+"px";pl.top=top+"px";pl.height=ih+"px";
  el_btn(F);if(F.cur)clampMark(F)}
@@ -82,7 +85,7 @@ function build(F){const G=F.groups,g=G.find(x=>x.k===F.group)||G[0];F.cur=g?g.ac
 function fill(F,list){const L=[],R=[];list.forEach((a,i)=>(i%2?R:L).push(btnHTML(a,i)));F.cl.innerHTML=L.join("");F.cr.innerHTML=R.join("");clampMark(F)}
 /* text never cut: title max 2 lines (clamp) + the sub-line «odds word · Tốn N khắc» whose two parts never break inside (nowrap spans), so on a narrow column it takes 2 lines and the price is never cut; a clamped button gets the «!» so the full name + sub-line show in the popover (aria/title carry it too) */
 function clampMark(F){F.el.querySelectorAll(".kfoc-b:not(.kfoc-skip)").forEach(b=>{const t=b.querySelector("b"),s=b.querySelector("small");b.classList.remove("kfoc-sub3");if(s&&s.scrollHeight>s.clientHeight+1)b.classList.add("kfoc-sub3")/* a sub-line of 3 lines (2 costs on a narrow column): title gives up its 2nd line, the price is never cut */;const cut=(t&&t.scrollHeight>t.clientHeight+1)||(s&&s.scrollWidth>s.clientWidth+1);
-  b.classList.toggle("kfoc-clamp",!!cut);if(cut&&!b.querySelector(".kfoc-i")){b.classList.add("kfoc-hasi");b.insertAdjacentHTML("beforeend",`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết">!</span>`)}})}
+  b.classList.toggle("kfoc-clamp",!!cut);if(cut&&!b.querySelector(".kfoc-i")){b.classList.add("kfoc-hasi");b.insertAdjacentHTML("beforeend",`<span class="khap kfoc-i" role="button" tabindex="0" aria-label="Chi tiết" title="Chi tiết">!</span>`)}})}
 /* replace the groups (caller's live counts); keeps the current group if it still exists; no fold animation; during choices/play the acts wait until play/choices end */
 function setGroups(F,G){F.groups=G||[];if(!F.groups.find(x=>x.k===F.group))F.group=F.groups[0]&&F.groups[0].k;if(F.pick||F.playing){F.saved=1;return}build(F)}
 function wa(F,el,kf,opt){if(!el.animate)return null;const a=el.animate(kf,Object.assign({fill:"both"},opt));F.anims.push(a);a.onfinish=()=>{const i=F.anims.indexOf(a);if(i>=0)F.anims.splice(i,1)};return a}
@@ -184,6 +187,7 @@ html.kf-still .kfoc-veil{-webkit-backdrop-filter:none;backdrop-filter:none;backg
 .kfoc-tabs .pct{height:${KIT_FOC.tabH}px;white-space:nowrap}
 .kfoc-col{position:absolute;box-sizing:border-box;padding:9px 7px 4px 5px;display:flex;flex-direction:column;gap:8px;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;z-index:3;scrollbar-width:none}.kfoc-col::-webkit-scrollbar{display:none}
 .kfoc-col.kfoc-fold{display:none}
+.kfoc-col.kfoc-slim .kfoc-pic{display:none}.kfoc-col.kfoc-slim .kfoc-b{padding-left:9px}
 .kfoc-b{position:relative;flex:none;display:flex;align-items:center;gap:8px;width:100%;height:var(--kfh,64px);min-height:var(--kfh,64px);box-sizing:border-box;padding:2px 8px 2px 4px;border-radius:10px;border:1px solid var(--gold,#b8892b);background:var(--k-card,#fffaf0);color:var(--ink,#3a2418);text-align:left;font:inherit;cursor:pointer;box-shadow:inset 0 0 0 2px var(--k-card,#fffaf0),0 2px 6px rgba(0,0,0,.25)}
 .kfoc-pic{flex:none;width:var(--kfp,56px);height:var(--kfp,56px);border-radius:8px;object-fit:cover;display:block;background:#efe3c8;overflow:hidden}
 .kfoc-ph{background:repeating-linear-gradient(45deg,#efe3c8,#efe3c8 6px,#e8d9b8 6px,#e8d9b8 12px)}

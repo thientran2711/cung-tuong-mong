@@ -36,7 +36,7 @@ function tyLost(p,why){if(!p)return;p.tyNvp=wk()+BAL.ty.reissueWk;p.tyWhy=why||p
 /* the player takes the robe off (only in her own palace): into the chest, she is in trung y */
 (function(){if(typeof wdOffUI!=="function")return;const f0=wdOffUI;wdOffUI=function(sl){if(sl!=="y")return f0.apply(this,arguments);
   if(!S||S.dead)return;if(S.place!=="home"){log("Chỉ cởi y phục trong tẩm cung của mình.");render();return}
-  const w=wdOf(S);const e=w.y;if(!e)return;const n=wdItem(e)?wdItem(e).n:"y phục";if(e.from!=="base"){S.inv=S.inv||[];S.inv.push(e)}w.y=null;
+  const w=wdOf(S);const e=w.y;if(!e)return;const n=wdItem(e)?wdItem(e).n:"y phục";if(e.from!=="base"){S.inv=S.inv||[];invAdd(S,e)}w.y=null;
   log(`Ngươi cởi ${n}, mặc trung y nghỉ trong tẩm cung.`);render()};window.wdOffUI=wdOffUI})();
 /* jearn removed the "Tháo" button for the robe; the item panel gets "Cởi y phục" back */
 (function(){if(typeof wdActBtns!=="function")return;const a0=wdActBtns;wdActBtns=function(e,g){const B=a0.apply(this,arguments);try{
@@ -112,7 +112,7 @@ function tyRob(k){const T=BAL.ty;const w=wdOf(S);const e=w.y;if(!e||!wdItem(e))r
 function tyWeek(){const T=BAL.ty;let ev="";try{
  if(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv())&&!(S.tyOmen&&S.tyOmen.until>=wk())){const o=npcWhy("tyPlot",{t:S},()=>roll(T.plotCh));/* npc-purpose G2: the plotter = the enemy whose grudge pushes her most; plotCh = the success (cd stamped only when she acts) */if(o){const v=o.who;tyOmenSet(v)}}
  /* Nội vụ phủ issues a plain robe of her rank (a chest) */
- if(S&&!S.dead&&S.tyNvp!=null&&wk()>=S.tyNvp){S.tyNvp=null;const w=wdOf(S);if(!w.y){const k=typeof earnPlainY==="function"?earnPlainY(S):null;if(k&&WD_ITEMS[k]){S.inv=S.inv||[];S.inv.push({k,src:"nvp",nvp:1,giver:"Nội vụ phủ",d:typeof wdWhen==="function"?wdWhen():""});try{earnK(S,k)}catch(e){}
+ if(S&&!S.dead&&S.tyNvp!=null&&wk()>=S.tyNvp){S.tyNvp=null;const w=wdOf(S);if(!w.y){const k=typeof earnPlainY==="function"?earnPlainY(S):null;if(k&&WD_ITEMS[k]){S.inv=S.inv||[];invAdd(S,{k,src:"nvp",nvp:1,giver:"Nội vụ phủ",d:typeof wdWhen==="function"?wdWhen():""});try{earnK(S,k)}catch(e){}
    log(`Nội vụ phủ đưa tới ${WD_ITEMS[k].n}, cất trong Tư trang.`);try{kitReward({kind:"gift",title:"Nội vụ phủ cấp y phục",from:"Nội vụ phủ",items:[{n:WD_ITEMS[k].n,d:"Y phục · mặc trong Tư trang",img:WD_ITEMS[k].icon,tier:WD_ITEMS[k].g|0}]})}catch(e){}}}}
  /* NPCs: the same rule as data */
  for(const v of liveRivals(true)){if(v.out)continue;try{const w=wdOf(v);

@@ -19,7 +19,7 @@ function mdH(p,cls){return `<span class="md ${cls||""}${kitRkCls(p)}" style="--c
 function newMaid(name,loyal,age){return{name,loyal,age:age||16+R(7),fc:""}}
 
 /* modal queue */
-function pushModal(m){Q.push(m);}
+function pushModal(m){Q.push(m);return m}/* save-unseen-lists r4: hands the card back (a registered generator returns it) */
 /* DIALOG-ORDER r2: the ONE tap hook of the queue rule (jdayq dqTap: a card nobody can see never makes her tap dead; what her tap opens goes to the
    FRONT). Registered HERE, before every other module, on window capture: it runs before any handler of her tap reads Q */
 try{["pointerdown","pointerup","click","keydown","touchstart"].forEach(k=>window.addEventListener(k,e=>{try{if(window.dqTap)window.dqTap(k,e)}catch(x){}},true))}catch(e){}
@@ -35,18 +35,23 @@ const isMenuCard=m=>!!(m&&/\bkptitle\b/.test(m.cls||""));
    it lands in (a save, the co-op week merge that rebuilds S / rivals from JSON, the AFK carry). A person who no longer exists → the card
    LAPSES (no effect, one short log line), never a road whose effect is lost. A choice card with no generator also lapses with the log line
    where the merge / carry would drop it (serQ({lap:1})). The person lookup is the shared one (jemo emoKey / emoByKey). */
-const QRC={};let RCPRE=0;
-function rcpP(x){try{if(!x||typeof x!=="object"||typeof emoKey!=="function")return null;if(!(x===S||(S&&x===S.emp)||(S&&x===S.thO)||x.id!=null||x.sid!=null))return null;
+const QRC={};let RCPRE=0;const RCP_MAX=4000;/* the carried args of one card (chars) */
+/* save-unseen-lists r3: a confidant maid has no id / sid — carried as «maid» (hers) or «maid:<rival id>»; any other person with no key is never
+   copied into ra (a copy is a stranger after a load): rcpEnc throws → the card stays a code card, counted as such */
+function rcpMaid(x){if(!S||!x)return null;if(x===S.maid)return"maid";for(const v of (typeof rivals!=="undefined"&&rivals)||[])if(v&&v.maid===x&&v.id!=null)return"maid:"+v.id;return null}
+function rcpByKey(k){const q=String(k);if(q==="maid")return S.maid||null;if(/^maid:/.test(q))return((typeof rivals!=="undefined"&&rivals||[]).find(v=>String(v.id)===q.slice(5))||{}).maid||null;return typeof emoByKey==="function"?emoByKey(q):null}
+function rcpPerson(x){return typeof x.name==="string"&&("loyal" in x||"net" in x||"role" in x)}
+function rcpP(x){try{if(!x||typeof x!=="object"||typeof emoKey!=="function")return null;const mk=rcpMaid(x);if(mk)return mk;if(!(x===S||(S&&x===S.emp)||(S&&x===S.thO)||x.id!=null||x.sid!=null))return null;
  const k=emoKey(x);if(!k||/^x\d/.test(k))return null;return emoByKey(k)===x?k:null}catch(e){return null}}
 function rcpEnc(x,d){d=d||0;if(d>4)throw 0;if(x==null||typeof x==="number"||typeof x==="string"||typeof x==="boolean")return x;if(typeof x==="function")throw 0;
  const k=rcpP(x);if(k!=null)return {"@p":k};if(Array.isArray(x))return x.map(y=>rcpEnc(y,d+1));
- if(Object.getPrototypeOf(x)!==Object.prototype)throw 0;const o={};for(const i in x)o[i]=rcpEnc(x[i],d+1);return o}
+ if(Object.getPrototypeOf(x)!==Object.prototype||rcpPerson(x))throw 0;const o={};for(const i in x)o[i]=rcpEnc(x[i],d+1);return o}
 function rcpDec(x){if(x==null||typeof x!=="object")return x;if(Array.isArray(x))return x.map(rcpDec);
- if("@p" in x){const p=typeof emoByKey==="function"?emoByKey(String(x["@p"])):null;if(!p||p.alive===false||p.dead)throw 0;return p}const o={};for(const i in x)o[i]=rcpDec(x[i]);return o}
+ if("@p" in x){const p=rcpByKey(x["@p"]);if(!p||p.alive===false||p.dead)throw 0;return p}const o={};for(const i in x)o[i]=rcpDec(x[i]);return o}
 /* wrap a card generator: every choice card it returns carries rk (kind) + ra (its arguments, people as ids); RCPRE = 1 while a card is made again */
-function rcpReg(k,fn){QRC[k]=fn;return function(){const m=fn.apply(this,arguments);try{if(m&&m.opts&&m.opts.length&&!m.pid&&!RCPRE){const a=rcpEnc([...arguments]);const j=JSON.stringify(a);if(j.length<4000){m.rk=k;m.ra=a}}}catch(e){}return m}}
+function rcpReg(k,fn){QRC[k]=fn;return function(){const m=fn.apply(this,arguments);try{if(m&&m.opts&&m.opts.length&&!m.pid&&!RCPRE){const a=rcpEnc([...arguments]);const j=JSON.stringify(a);if(j.length<RCP_MAX){m.rk=k;m.ra=a}else m.__rkLen=j.length}}catch(e){/* save r6: its arguments are not data (code / a non-person object): mark it, the probe names the generator */try{if(m&&typeof m==="object")m.__rkErr=k}catch(x){}}return m}}
 const QRCF=[];const rcpF=(e,w)=>{QRCF.push([e&&e.rk,w,typeof day==="function"?day():0]);if(QRCF.length>20)QRCF.shift();return null};window.__rcpFail=QRCF;/* debug: why a card could not be made again */
-function rcpMk(e){const fn=QRC[e&&e.rk];if(!fn)return rcpF(e,"no generator");let a;try{a=rcpDec(e.ra||[])}catch(x){return rcpF(e,"person gone "+JSON.stringify(e.ra).slice(0,80))}RCPRE=1;let m=null;try{m=fn.apply(null,a)}catch(x){m=null;rcpF(e,"threw "+(x&&x.message))}finally{RCPRE=0}
+function rcpMk(e){const fn=QRC[e&&e.rk];if(!fn)return rcpF(e,"no generator");let a;try{a=rcpDec(e.ra||[])}catch(x){return rcpF(e,"person gone "+JSON.stringify(e.ra).slice(0,80))}RCPRE=1;let m=null;const Q0=typeof Q!=="undefined"?Q:null,had=new Set(Q0||[]);try{m=fn.apply(null,a)}catch(x){m=null;rcpF(e,"threw "+(x&&x.message))}finally{RCPRE=0;/* save-unseen-lists r2: a generator that queues its own card (kitPanel) hands it back here, never a second copy in Q */try{if(m&&Q0&&Q===Q0&&!had.has(m)){const i=Q.indexOf(m);if(i>=0)Q.splice(i,1)}}catch(x){}}
  if(!m||!m.opts||!m.opts.length)return rcpF(e,"no choice now");m.rk=e.rk;m.ra=e.ra;if(e.t)m.t=e.t;if(e.cls&&!m.cls)m.cls=e.cls;return m}
 const rcpLapse=t=>{try{log(`«${String(t||"Việc khó xử").replace(/</g,"&lt;")}»: việc đã qua, không còn kịp đáp.`)}catch(e){}};
 /* one card in its save form: pid → {pid,pp,t}; a carried generator card → {rk,ra,t,cls}; a notice → its text; a choice with no route → lap (opt.lap) or nothing */
@@ -61,11 +66,19 @@ function kqEnc(x,d){d=d||0;if(d>7)throw 0;if(x==null||typeof x==="number"||typeo
  const k=rcpP(x);if(k!=null)return {"@p":k};if(Array.isArray(x))return x.map(y=>{const v=kqEnc(y,d+1);return v===undefined?null:v});
  if(Object.getPrototypeOf(x)!==Object.prototype)throw 0;const o={};for(const i in x){if(i==="onClose"||i==="opts")continue;const v=kqEnc(x[i],d+1);if(v!==undefined)o[i]=v}return o}
 function kqKit(m){try{if(!m||!m.kit||m.h||m.opts||isLookCard(m))return undefined;const o=kqEnc(m.kit);const j=JSON.stringify(o);return j&&j.length<24000?o:undefined}catch(e){return undefined}}
-function kqDec(x){if(x==null||typeof x!=="object")return x;if(Array.isArray(x))return x.map(kqDec);if("@p" in x){const p=typeof emoByKey==="function"?emoByKey(String(x["@p"])):null;return p&&p.alive!==false&&!p.dead?p:null}
+function kqDec(x){if(x==null||typeof x!=="object")return x;if(Array.isArray(x))return x.map(kqDec);if("@p" in x){const p=rcpByKey(x["@p"]);return p&&p.alive!==false&&!p.dead?p:null}
  const o={};for(const i in x)o[i]=kqDec(x[i]);return o}
-function serM(m,opt){return isMenuCard(m)||isLookCard(m)?null:m.pid?{pid:m.pid,pp:m.pp,t:m.t}:m.rk?{rk:m.rk,ra:m.ra,t:m.t,cls:m.cls}:m.opts?(opt&&opt.lap?{lap:1,t:m.t}:null):(k=>k?{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w,kit:k}:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w})(kqKit(m))}
+/* save-pid-cards (LAW 6c + LAW 11, every pid kind; reports/save-pid-cards.md): a pid card was written as {pid,pp,t} only, so whatever its maker or
+   a wrapper put on the card AFTER mkP (q72o chips qtags «Tra xét · Hạn 4 tuần», pushDil's event picture art, the pacing flag opt, the tsb title
+   given by tsbCard's caller…) was lost on a reload: the card came back changed. ONE rule: the card's own plain-data fields (no code, no people,
+   ≤ PIDX_MAX chars each; never h / opts / who: those are made again by mkP against the loaded world) ride along as x and come back where the
+   rebuilt card has no such field; with x, the title she saw is kept (q.__ts: the per-kind deserQ wrappers never retitle it). Old saves (no x) as before. */
+const PIDX_MAX=1500,PIDX_SKIP=new Set(["pid","pp","t","h","opts","who","w","thin"]);
+function pidX(m){const x={};let n=0;for(const k in m){if(PIDX_SKIP.has(k)||k[0]==="_"||k[0]==="$")continue;const v=m[k];if(v==null||typeof v==="function")continue;
+  let j;try{j=JSON.stringify(v)}catch(e){continue}if(j==null||j.length>PIDX_MAX||/"(?:alive|rel|sid)":/.test(j))continue;x[k]=JSON.parse(j);n++}return n?x:1}
+function serM(m,opt){return isMenuCard(m)||isLookCard(m)?null:m.pid?{pid:m.pid,pp:m.pp,t:m.t,x:pidX(m)}:m.rk?{rk:m.rk,ra:m.ra,t:m.t,cls:m.cls}:m.opts?(opt&&opt.lap?{lap:1,t:m.t}:null):(k=>k?{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w,kit:k}:{t:m.t,h:m.h,cls:m.cls,btn:m.btn,w:m.who&&m.who.w})(kqKit(m))}
 function serQ(opt){return Q.map(m=>serM(m,opt)).filter(Boolean)}
-function deserQ(L){const out=[],seen=new Set();for(const e of L||[]){try{if(e.lap){rcpLapse(e.t);continue}if(e.rk){const m=rcpMk(e);if(m)out.push(m);else rcpLapse(e.t);continue}if(e.pid){const d=mkP(e.pid,e.pp);if(d)out.push({t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}else if(e.kit){const sp=kqDec(e.kit);if(sp&&typeof sp==="object"){const sub=sp.subject;if(sub==null)delete sp.subject;out.push({t:e.t||sp.title||"",h:"",kit:sp,btn:e.btn||sp.btn,cls:e.cls,who:sub?(sub.src!==undefined?sub:(typeof kitFace==="function"?kitFace(sub):null)):WHO(e.w)})}}
+function deserQ(L){const out=[],seen=new Set();for(const e of L||[]){try{if(e.lap){rcpLapse(e.t);continue}if(e.rk){const m=rcpMk(e);if(m)out.push(m);else rcpLapse(e.t);continue}if(e.pid){const d=mkP(e.pid,e.pp);if(d){const q={t:e.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls};if(d.art)q.art=d.art;/* as pushDil */if(e.x){q.__ts=1;if(typeof e.x==="object")for(const k in e.x)if(q[k]==null)q[k]=e.x[k]}out.push(q)}}else if(e.kit){const sp=kqDec(e.kit);if(sp&&typeof sp==="object"){const sub=sp.subject;if(sub==null)delete sp.subject;out.push({t:e.t||sp.title||"",h:"",kit:sp,btn:e.btn||sp.btn,cls:e.cls,who:sub?(sub.src!==undefined?sub:(typeof kitFace==="function"?kitFace(sub):null)):WHO(e.w)})}}
   else if(!isMenuCard(e)){if(!String(e.h||"").replace(/<[^>]*>/g,"").trim()&&!/\bpcm\b/.test(e.cls||""))continue;/* (3) an empty notice (an old look-up panel or kit card saved without its body) */
    const sig=JSON.stringify([e.t,e.h,e.cls,e.btn]);if(seen.has(sig))continue;seen.add(sig);out.push({t:e.t,h:e.h,cls:e.cls,btn:e.btn,who:WHO(e.w)})}}catch(x){}}return out}
 /* KIT 32.10: a dialog option that only closes ("Thôi" / "Lui" / "Đóng" / "Đã hiểu", no effect) is never drawn as a button: the dialog
@@ -74,13 +87,50 @@ function deserQ(L){const out=[],seen=new Set();for(const e of L||[]){try{if(e.la
 const KIT_CLOSE_W=/^(?:✕\s*)?(?:‹\s*)?(Thôi|Lui|Đóng|Đã hiểu|Đã rõ|OK|Xong)$/;
 function kitCloseTxt(h){return String(h==null?"":h).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim()}
 function kitCancelIx(m){if(!m||!m.opts||m.mustChoose)return -1;return m.opts.findIndex(c=>c&&KIT_CLOSE_W.test(kitCloseTxt(c.n))&&(!c.fx||Object.keys(c.fx).every(k=>!c.fx[k])))}
+/* KIT §6.2i ONE COPY OF A DIALOG (KK44, owner ruling 26/11 ~17:55Z via MAIN 161: fix the dead-close family at the ROOT): every dialog in the game becomes
+   visible through showModal, so the one-copy guard runs at its ONE outer entry (jnolock, the outermost showModal wrapper, calls kitDlgFold before any
+   inner wrapper rewrites the front card), not in each opener. An IDENTICAL waiting copy of the dialog in front (same title, class,
+   body, kit spec and option names — a fast double tap on its opener queued two) is folded into the front one as a twin (m.__tw) instead of waiting behind it
+   (the old symptom: the first ✕ «did nothing», the same dialog came straight back). A twin is never dropped silently: it RESOLVES WITH its kept twin
+   (kitDlgTwinsDone, from closeModal and chooseM) the same way: closed with ✕ / «Đã rõ» → its own onClose runs too (a flow that waits on that dialog still
+   hears back); answered with an option → like the kept one, no onClose, and the option's effects never run a second time (one tap = one spend). The co-op thin cards and the life card (m.nl) are never folded (own queues). */
+function kitDlgSig(m){try{return m?String(m.t||"")+"|"+(m.cls||"")+"|"+(typeof m.h==="string"?m.h:"")+"|"+JSON.stringify(m.kit||null)+"|"+(m.opts?m.opts.map(o=>o&&o.n).join("/"):"")+"|"+(m.btn||""):""}catch(e){return null}}
+/* the signature is taken the first time the guard sees a card (still as its opener queued it; inner wrappers later rewrite the front card) */
+function kitDlgSg(m){if(m.__sg==null)m.__sg=kitDlgSig(m);return m.__sg}
+function kitDlgFold(){kitDlgArm();try{const m=Q[0];if(!m||m.thin||m.nl)return;kitDlgSg(m);if(Q.length<2)return;let g=null;for(let i=Q.length-1;i>=1;i--){const q=Q[i];if(!q||q===m||q.thin||q.nl||(q.t||"")!==(m.t||""))continue;if(g===null)g=kitDlgSg(m);if(!g||kitDlgSg(q)!==g)continue;Q.splice(i,1);(m.__tw=m.__tw||[]).push(q)}}catch(e){console.error("kitDlgFold",e)}}
+function kitDlgTwinsDone(m,picked){const T=m&&m.__tw;if(!T||!T.length)return;m.__tw=null;for(const t of T){try{if(!picked&&t.onClose&&t.onClose!==m.onClose)t.onClose()}catch(e){console.error("kitDlgTwin onClose",e)}try{kitDlgTwinsDone(t,picked)}catch(e){}}}
+/* KIT §6.2j ONE TAP = ONE ACTION (KK44, MAIN 160/161 double-tap family, law 11): the second tap of a fast double tap lands on whatever the first tap opened —
+   a confirm / buy / give / option card under the finger — and spent a second action. When a NEW dialog comes to the front (kitDlgFold, the ONE outer
+   showModal entry) a real (trusted) tap inside #modal is not taken when it is the 2nd tap of a double tap: the tap before it, at the same spot (BAL.kdlg.tapNear px) and within BAL.kdlg.tapArm ms, opened this dialog. A single fast tap on a just-opened dialog is taken. Scripted clicks
+   (robots, tests, co-op relays) are never held. Test: dev/test/double-tap-scan.js. */
+let kDlgFront=null,kDlgAt=0;
+function kitDlgArm(){try{const m=Q[0];if(m&&m!==kDlgFront){kDlgFront=m;kDlgAt=performance.now()}}catch(e){}}
+let kTapLast=null;/* what a tap can spend (khắc / Bạc / Sức / items): read when each tap lands */
+const KTAP_HELD=["inv","items","tt","tutrang","cloth","gifts","pets"];/* every list of things she holds (a buy / give / pet adds or takes one) */
+function kTapDig(){try{const n=x=>Array.isArray(x)?x.length:(x&&typeof x==="object"?Object.keys(x).length:0);return [typeof used!=="undefined"?used:0,S?S.bac:0,S?S.suc:0,S?KTAP_HELD.reduce((a,k)=>a+n(S[k]),0):0].join(",")}catch(e){return""}}
+document.addEventListener("click",e=>{try{if(!e.isTrusted)return;const now=performance.now(),L=kTapLast;const el=e.target&&e.target.closest?e.target.closest("button,[role=button],[data-ka]"):null;kTapLast={t:now,ts:e.timeStamp,x:e.clientX,y:e.clientY,el,dg:kTapDig()};
+ /* only the SECOND tap of a double tap (same spot, within tapArm ms), and only when the first one DID something: it opened the dialog now in front, or
+    its button is gone (the screen was redrawn after the act — the 2nd tap would run the act again on the new copy). A stepper / toggle that stays is untouched. */
+ /* RV-163C F1 (double-tap-scan «Y dược · Hỏi thái y»: khắc +1, Bạc −4 twice on a busy phone): the window is the time between her two FINGER taps (e.timeStamp =
+    when the tap happened), not between the moments the game got round to them — the 1st tap's own work (spend, redraw) can outlast tapArm, and the 2nd tap,
+    queued behind it, used to be read as a new tap. Either measure under tapArm = the same double tap. */
+ const arm=(BAL.kdlg&&BAL.kdlg.tapArm)||0;const gap=L?Math.min(now-L.t,(e.timeStamp&&L.ts)?e.timeStamp-L.ts:Infinity):Infinity;if(!L||gap>=arm||Math.hypot(e.clientX-L.x,e.clientY-L.y)>((BAL.kdlg&&BAL.kdlg.tapNear)||0))return;
+ const M=$("modal");const inDlg=!!(M&&!M.hidden&&e.target&&e.target.closest&&e.target.closest("#modal"));
+ const opened=inDlg&&kDlgFront&&kDlgAt>=L.t,redrawn=!!(L.el&&!L.el.isConnected&&el);
+ /* RV-163C F1 family (BUSY scan: «Soát đồ» khắc 2→4 on a busy phone): the 1st tap already SPENT (khắc / Bạc / Sức / items changed since it landed) but the
+    screen is not redrawn yet — the 2nd tap would hit the same live button and spend again. A stepper / toggle spends nothing and stays untouched. */
+ const spent=!!(L.dg&&el&&el===L.el&&kTapDig()!==L.dg);
+ if(!opened&&!redrawn&&!spent)return;e.stopImmediatePropagation();e.preventDefault()}catch(x){}},true);
 function showModal(){const M=$("modal");if(!Q.length){M.hidden=true;return}const m=Q[0];
   M.className="modal "+(m.cls||"");$("mt").textContent=/pcm/.test(m.cls||"")?"":m.t;$("mt").hidden=/pcm/.test(m.cls||"");try{const ar=evArt();M.querySelector(".dlg").style.setProperty("--dart",ar&&(m.who||/pcm/.test(m.cls||""))?`url(${ar})`:"none")}catch(e){}
   const wh=m.who||null;const art=!m.who&&m.opts&&!m.faces?evArt():"";$("mb").innerHTML=(m.faces?`<div class="faces">${m.faces.map(f=>`<figure>${pframe(Object.assign({},f[0],{rw:""}))}<figcaption>${typeof kitNameRank==="function"?kitNameRank(f[0].rw||"",f[0].rw===f[1]?"":f[1],f[0].col):`<b>${f[1]}</b>${f[0].rw?`<small>${f[0].rw}</small>`:""}`}</figcaption></figure>`).join("")}</div>`:"")+(m.faces||/pcm/.test(m.cls||"")?m.h:`<div class="spk">${wh?pframe(wh):pframeArt(art||evArt())}<div class="spkt">${m.h}</div></div>`)+(m.opts?`<div class="opts">${m.opts.map((c,i)=>{if(i===kitCancelIx(m))return "";const poor=c.fx&&c.fx.bac&&S.bac+c.fx.bac<0;if(poor&&!c.off&&typeof kitOffBac==="function")kitOffBac(c,-c.fx.bac);return `<button class="opt" data-m="${i}"${c.nav?' data-knav="1"':""} ${poor||c.off?"disabled":""}${typeof kitOffAttr==="function"?kitOffAttr(c):""}>${c.n}<small>${dilLine(c)}</small></button>`}).join("")}</div>`:"");
-  $("mr").innerHTML=m.opts?"":`<button class="main" id="mclose">${m.btn||"Đã rõ"}</button>`;
-  kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
-function closeModal(){const m=Q.shift();if(m&&m.onClose){if(m.nl&&window.renderHold)renderHold(m.onClose,m,[],false);else m.onClose()}if(!S.dead||Q.length)showModal();if(m&&m.entI&&!m.onClose&&Q.length&&!S.dead)return;if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* an origin story panel (jentry/joi entI: text + picture, no effect, no onClose) followed by another card: the board did not change, no redraw *//* the life card (m.nl): its nlAccept chain renders once, here (jrbatch); another card follows: the board under it is drawn at the end of this task (jrbatch renderSoon) */
-function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(!c){chooseBad(i,m);return}if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();
+  /* empty-modal (MAIN 167, WORKLIST row 38: «Hội phối đồ: báo đề» empty list, stuck on Fold): a card whose option list is EMPTY or ALL locked
+     shows THE kit empty state (kitEmpty) and the plain close «Đã rõ» — never a dialog with nothing to press */
+  const live=kitModalLive(m);
+  $("mr").innerHTML=m.opts&&live?"":`<button class="main" id="mclose">${m.btn||"Đã rõ"}</button>`;
+  M.__m=m;kitFix(M);M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}
+function closeModal(){const m=Q.shift();if(m&&m.onClose){if(m.nl&&window.renderHold)renderHold(m.onClose,m,[],false);else m.onClose()}kitDlgTwinsDone(m);if(!S.dead||Q.length)showModal();if(m&&m.entI&&!m.onClose&&Q.length&&!S.dead)return;if(Q.length&&!S.dead&&window.renderSoon)renderSoon();else render()}/* an origin story panel (jentry/joi entI: text + picture, no effect, no onClose) followed by another card: the board did not change, no redraw *//* the life card (m.nl): its nlAccept chain renders once, here (jrbatch); another card follows: the board under it is drawn at the end of this task (jrbatch renderSoon) */
+function chooseM(i){const m=Q[0];if(!m||!m.opts)return;const c=m.opts[i];if(!c){chooseBad(i,m);return}if(c.off||c.fx&&c.fx.bac&&S.bac+c.fx.bac<0)return;Q.shift();kitDlgTwinsDone(m,true);
   /* KIT §6.2m nav: a pure NAVIGATION option (Đi tới / Xem Dư đồ / Đi làm …) changes nothing by itself: no effects, no log line, no result card */
   if(c.nav){window.__kNav=(window.__kNav||0)+1;try{if(c.go)c.go()}catch(e){console.error("nav option",e)}setTimeout(()=>{window.__kNav=Math.max(0,(window.__kNav||1)-1)},0);showModal();render();return}
   const b0=snapReal(),s0=S.logSeq||0;
@@ -194,3 +244,10 @@ function record(fate){const p=store.get("cung-kiep")||[];const e={n:S.name,o:S.o
 function die(why){over("Hồng nhan bạc mệnh",why+".",why)}
 /* the base night rest of everyone (endTurn; AG3: the maid road's week too, j42 srvEndTurn) */
 function nightRg(){return harsh()?1:4}
+
+/* empty-modal (MAIN 167): the ONE queue dialog always follows the queue — if any code took the shown card out of Q (spread, splice, Q=[]), the next
+   render shows Q[0] or closes the dialog; a stale card over an empty queue (no way out) cannot stay. Wrapped after every module has loaded. */
+function kitModalLive(m){if(!m||!m.opts)return true;const ci=kitCancelIx(m);return m.opts.some((c,i)=>c&&i!==ci&&!c.off&&!(c.fx&&c.fx.bac&&S.bac+c.fx.bac<0))}
+setTimeout(()=>{try{/* the empty state goes in AFTER every dialog wrapper has drawn (kit dialog frames rebuild the body) */const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const M=document.getElementById("modal"),m=Q[0];
+  if(M&&!M.hidden&&m&&!kitModalLive(m)&&!M.querySelector(".kempty")&&typeof kitEmpty==="function"){const host=M.querySelector(".opts")||document.getElementById("mb");if(host)host.insertAdjacentHTML("beforeend",kitEmpty("Lúc này không còn việc để chọn",["Đóng thẻ này; khi đủ điều kiện, việc sẽ mở lại."],{topic:m.t,noart:true}))}}catch(e){}return r};window.showModal=showModal}catch(e){console.error("modal empty",e)}
+ try{if(typeof render!=="function")return;const r0=render;render=function(){const r=r0.apply(this,arguments);try{const M=document.getElementById("modal");if(M&&!M.hidden&&M.__m&&M.__m!==Q[0])showModal()}catch(e){}return r};window.render=render}catch(e){console.error("modal sync",e)}},0);

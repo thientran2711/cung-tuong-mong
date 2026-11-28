@@ -23,7 +23,13 @@
    Tai mắt news (jagknow tinBaoOn), the flip note (j93 kitFlipNote), the «CẤM» place line (j42 srvToast). Errands («cung nữ về báo tin») call
    kitNotice directly. NOT notices (own owner rulings, unchanged): the act result card #rtoast (jksize: routine acts keep the small result card),
    the tutorial coach kitTip, the co-op clock #kctm/#kctmf (status, 16/11 ruling).
-   State: in memory only (the list of this session); S.closeSeen keeps the closing chip once per buổi. Old saves: nothing new stored. */
+   State: NT.list rides in the sổ (save-unseen-lists, MAIN 140 25/11 ~13:10Z «anything the player has not seen yet must survive save/load (and
+   co-op snap)»): ser() writes it as the top-level field nt (one compact row per notice, text left out when it equals the line; at most
+   BAL.noticeMax rows, the same cap as the box), deser() puts it back — the slot, the co-op seat snap (CW.snap = ser()) and every other ser/deser
+   round trip carry it. A notice's action (go) is code: it is written as g:1 and made again on load from its id (ntGo: errand / Tai mắt / receiver /
+   parallel-time lands + orders); an action of an id no rule knows is kept as it was when the notice is still in memory (co-op round trips), else
+   the notice comes back without its button (still readable). The list belongs to ONE life (lifeStore: a new life / a loaded slot / the title start
+   empty; the sổ's list is put back only into an empty list, so an in-session ser → deser round trip keeps the live one). S.closeSeen keeps the closing chip once per buổi. Old saves (no nt): the list starts empty, as before. */
 (function(){try{
 const NT=window.NT={list:[],seq:0,chips:0,shown:[],log:[]};
 const $=id=>document.getElementById(id);
@@ -45,6 +51,16 @@ function kitNoUnkT(s){if(typeof s!=="string")return s;if(s.indexOf("chưa quen b
 function kitNoUnk(s){if(typeof s!=="string"||(s.indexOf("???")<0&&s.indexOf("chưa quen biết")<0))return s;if(s.indexOf("<")<0)return kitNoUnkT(s);
  const P=/class="[^"]*\b(?:kname2?|kti|krname|kptag|ktag|kpname|kprank)\b/;let prot=null,depth=0;return s.split(/(<[^>]+>)/).map(x=>{if(x.charAt(0)==="<"){const m=/^<(\/?)([a-zA-Z0-9]+)/.exec(x);if(m){if(prot===null&&!m[1]&&P.test(x)&&!/\/>$/.test(x)){prot=m[2].toLowerCase();depth=1}else if(prot!==null&&m[2].toLowerCase()===prot){depth+=m[1]?-1:1;if(depth<=0)prot=null}}return x}return prot!==null?x:kitNoUnkT(x)}).join("")}
 window.kitNoUnk=kitNoUnk;
+/* KIT §7.4b TITLE NAME RULE (KK47, MAIN LOOK FAIL «Yến tiệc mời Đáp ứng ???»): a TITLE (result card .kan, dialog / panel h1–h4, toast head, kit page title)
+   never prints «???», «một vị …», «một người …», «chưa quen biết», «undefined» / «null» / «NaN». A person she has not met by name reads by the TITLE the dress shows
+   only («Yến tiệc mời Đáp ứng», «Bái kiến Tần»); a bare unknown person drops out of the title. Name tags / chips inside a title (.kname …) keep their «???» tag (OD:L673).
+   ONE function; the name-mask DOM pass (j61 k61Node) runs it on every title text node after the mask. */
+const KIT_TTL_SEL="h1,h2,h3,h4,.kan,.rtoast .rt > b,.kptitle,[data-kttl]";window.KIT_TTL_SEL=KIT_TTL_SEL;
+function kitTitleClean(s,lead){if(typeof s!=="string"||!s)return s;const s0=s;
+ s=s.replace(/(^|[^\p{L}])(?:một vị|một người)(\s+chưa quen biết)?(?=$|[^\p{L}])\s*/giu,"$1").replace(/\s+chưa quen biết(?=$|[^\p{L}])/giu,"").replace(/\s*\?\?\?/g,"").replace(/(^|\s)(?:undefined|null|NaN)(?=$|[\s,.;:·)])/g,"$1");
+ if(s===s0)return s;s=s.replace(/[ \t]{2,}/g," ").replace(/\s+([,.;:)])/g,"$1").replace(/[ \t]+·\s*$/,"").replace(/\(\s*\)/g,"");if(lead)s=s.replace(/^(\s*)(\p{Ll})/u,(m,a,b)=>a+b.toUpperCase());return s}
+window.kitTitleClean=kitTitleClean;
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§7.4b",title:"kitTitleClean · tiêu đề không bao giờ có «???» / «một vị»",where:"mọi tiêu đề: thẻ kết quả, khung hội thoại, bảng, tin báo",html:()=>kitFacts(["Yến tiệc mời Đáp ứng ???","Bái kiến một vị Tần chưa quen biết","Đề bạt undefined"].map(x=>`${x} → <b>${kitTitleClean(x,true)}</b>`),{group:false})})}catch(e){}
 (function(){const st=document.createElement("style");st.id="knt-css";st.textContent=".kntg{display:block;margin:1px 0 0;font-size:.92em}.kntrh{list-style:none;margin-left:-.2em}";document.head.appendChild(st)})();
 /* option / act cards (kaNorm1, j63) + the card detail parser (kitParse, j19): prose text nodes lose «???» too; the stranger NAME chips (.kname / .kti / name tags) keep the j61 mask (owner flight bug 24/11, law 11) */
 window.kitNoUnkDom=function(root,qq){try{if(!root||(root.textContent.indexOf("???")<0&&root.textContent.indexOf("chưa quen biết")<0))return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const L=[];let n;while(n=w.nextNode()){if(((qq&&n.nodeValue.indexOf("???")>=0)||n.nodeValue.indexOf("chưa quen biết")>=0)&&!(n.parentElement&&n.parentElement.closest(".kname,.kti,.krname,.kptag,.ktag,.kan,.kpname,.kprank,.kname2")))L.push(n)}L.forEach(t=>{t.nodeValue=qq?kitNoUnk(t.nodeValue):kitNoUnk(t.nodeValue.replace(/\?\?\?/g,"\u0001")).replace(/\u0001/g,"???")})}catch(e){}};
@@ -58,7 +74,7 @@ try{const r0=render;render=window.render=function(){const r=r0.apply(this,argume
    said twice («X trở về. X trở về: …»), no raw «có nết Nhiều chuyện». Test: node dev/test/tinbao-words/scan.js (static + kitSayLine cases). */
 function kitSayLine(x){if(typeof x!=="string"||!x)return x;let s=x.replace(/\s+/g," ").trim();
  /* a sentence that is only the head of the next one is said once («X nghe ngóng trở về · thành. X nghe ngóng trở về: …») */
- {const Q=s.split(/(?<=[.!?])\s+/);for(let i=Q.length-2;i>=0;i--){const h=Q[i].replace(/ · (?:thành|hỏng)\b/,"").replace(/[.!?:,\s]+$/,"");if(h.length>6&&Q[i+1].indexOf(h)===0)Q.splice(i,1)}s=Q.join(" ")}
+ {const Q=s.split(kRx("(?<=[.!?])\\s+"));for(let i=Q.length-2;i>=0;i--){const h=Q[i].replace(/ · (?:thành|hỏng)\b/,"").replace(/[.!?:,\s]+$/,"");if(h.length>6&&Q[i+1].indexOf(h)===0)Q.splice(i,1)}s=Q.join(" ")}
  /* an old «Sổ ghi thêm về X: …» head (stored notices, other builders) → one sentence about X (j21 noteSay) */
  s=s.replace(/^Sổ ghi thêm về ([^:]{2,60}): (.+)$/u,(m,w,r)=>{try{if(typeof noteSay==="function")return noteSay({name:w},r)}catch(e){}return `Về ${w}, ${r}`});
  s=s.replace(/ · thành\b(\.?)/g,", việc đã thành$1").replace(/ · hỏng\b(\.?)/g,", việc không thành$1");
@@ -68,10 +84,10 @@ function kitSayLine(x){if(typeof x!=="string"||!x)return x;let s=x.replace(/\s+/
  s=s.replace(/\bcó nết (\p{Lu}[\p{L}\p{M}]*(?: [\p{L}\p{M}]+)?)(?=[.,;]|$)/gu,(m,t)=>"vốn tính "+t.toLowerCase());
  /* «a: b: c» chain → the first colon stays, later ones in the same sentence become commas */
  /* «X trở về: X nghe ngóng được …» — the part after the colon names the same subject again → that part alone */
- s=s.split(/(?<=[.!?])\s+/).map(q=>{const i=q.indexOf(": ");if(i<0)return q;const w=q.slice(0,i).split(" ").slice(0,2).join(" ");return w.length>3&&/^\p{Lu}/u.test(w)&&q.slice(i+2).indexOf(w+" ")===0?q.slice(i+2):q}).join(" ");
+ s=s.split(kRx("(?<=[.!?])\\s+")).map(q=>{const i=q.indexOf(": ");if(i<0)return q;const w=q.slice(0,i).split(" ").slice(0,2).join(" ");return w.length>3&&/^\p{Lu}/u.test(w)&&q.slice(i+2).indexOf(w+" ")===0?q.slice(i+2):q}).join(" ");
  /* the same «title + name» printed again in one notice → the bare name after the first (title once; owner: «tên đầy đủ một lần») */
- {const seen=new Set();s=s.replace(/(?<![\p{L}\p{M}])((?:Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|(?:\p{Lu}[\p{Ll}\p{M}]+ )?(?:phi|tần)|Phi|Tần) )(\p{Lu}[\p{Ll}\p{M}]+(?: \p{Lu}[\p{Ll}\p{M}]+){1,2})(?![\p{L}\p{M}])/gu,(m,t,n)=>{if(seen.has(n))return n;seen.add(n);return m})}
- s=s.split(/(?<=[.!?])\s+/).map(q=>{let n=0;return q.replace(/: (Một|Nàng|Ngươi|Ta|Hắn|Y)?(?=\s|$)?/g,(m,w,i)=>{const pre=q.slice(0,i);if((pre.match(/\(/g)||[]).length>(pre.match(/\)/g)||[]).length)return m;/* a colon inside «(…)» is not part of the chain */return ++n===1?m:", "+(w?w.toLowerCase():"")})}).join(" ");
+ {const seen=new Set();s=s.replace(kRx("(?<![\\p{L}\\p{M}])((?:Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|(?:\\p{Lu}[\\p{Ll}\\p{M}]+ )?(?:phi|tần)|Phi|Tần) )(\\p{Lu}[\\p{Ll}\\p{M}]+(?: \\p{Lu}[\\p{Ll}\\p{M}]+){1,2})(?![\\p{L}\\p{M}])","gu"),(m,t,n)=>{if(seen.has(n))return n;seen.add(n);return m})}
+ s=s.split(kRx("(?<=[.!?])\\s+")).map(q=>{let n=0;return q.replace(/: (Một|Nàng|Ngươi|Ta|Hắn|Y)?(?=\s|$)?/g,(m,w,i)=>{const pre=q.slice(0,i);if((pre.match(/\(/g)||[]).length>(pre.match(/\)/g)||[]).length)return m;/* a colon inside «(…)» is not part of the chain */return ++n===1?m:", "+(w?w.toLowerCase():"")})}).join(" ");
  return s}
 window.kitSayLine=kitSayLine;
 function kitNotice(spec){try{if(spec==null)return null;if(typeof spec!=="object")spec={line:String(spec)};if(spec.line)spec.line=kitSayLine(kitNoUnk(spec.line));if(spec.text)spec.text=kitSayLine(kitNoUnk(spec.text));if(Array.isArray(spec.items))spec.items=spec.items.map(x=>kitSayLine(kitNoUnk(x)));
@@ -167,7 +183,7 @@ function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const
  /* owner 24/11 flight bug #8: ONE NEWS = ONE ROW. Every notice is its own row of the kit bullet list (ul.kbl, KIT 31.14); a notice that carries several facts (kitKnow batch: x.items) gives one row per fact — never one wall of text joined with « · » */
  const rows=[];for(const x of L){const seen=!one&&x.seen?" <small>(đã xem)</small>":"";const A=x.items&&x.items.length?x.items:[x.text];const nR=A.filter(t=>/^Nghe nói /.test(t)).length;if(nR>=2&&!rows.some(r=>/kntrh/.test(r)))rows.push('<li class="kntrh"><b>Nghe nói:</b></li>');A.forEach((t,i)=>rows.push(`<li>${ntRow(t,nR>=2)}${i===A.length-1?seen:""}</li>`))}
  const html=`<ul class="kbl kntl">${rows.join("")}</ul>`;
- const go=L.find(x=>typeof x.go==="function");const opts=go?[{n:go.goLabel||"Để ta xem",fx:{},go:()=>{try{go.go()}catch(e){}boxPaint()}},{n:"Để sau",fx:{},go:()=>{boxPaint()}}]:undefined;/* review r4: a kit panel with options has no ✕ (jksize) — «Để sau» always lets her close it without being sent to Dư đồ */
+ const go=L.find(x=>typeof x.go==="function");const opts=go?[{n:go.goLabel||"Để ta xem",fx:{},go:()=>{try{go.go()}catch(e){}boxPaint()}},{n:"Đóng",fx:{},go:()=>{boxPaint()}}]:undefined;/* KK56 (KIT-STD-AUDIT X18 / OD 26/11 ~22:43Z: no card that only closes): the close-only option is named «Đóng», so the kit (j3 kitCancelIx) draws it as the frame ✕, never as a card; ✕ still lets her close it without being sent to Dư đồ */
  const m=kitPanel({kind:"notice",view:1/* button-crawl-fix-5: one «Tin báo» in Q, never saved */,title:"Tin báo",sub:one&&rows.length<2?"":(U.length||(one&&rows.length>1)?`${rows.length} tin mới`:"Đã xem hết"),sections:[{html}],opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m){picSwap(document,lead);try{kitNoUnkDom(document.querySelector("#modal .kntl")||document.getElementById("modal"),true)}catch(e){}}},t);NT.open=m;
  for(const x of L)x.seen=true;const c=$("kntchip");if(c)chipHide(c);setTimeout(boxPaint,0);return m}catch(e){console.error("kitNoticeOpen",e);return null}}
 /* the panel's picture = the notice's own (the kit info panel puts kitInfoArt("Tin báo") there; a notice with a picture swaps it in the same kit frame) */
@@ -233,6 +249,28 @@ function kitKnowFlush(){try{if(KB.t){clearTimeout(KB.t);KB.t=0}const L=[...KB.m.
 function kitKnowMany(list){try{for(const x of list||[])kitKnow(x);return kitKnowFlush()}catch(e){console.error("kitKnowMany",e);return null}}
 try{const l0=log;log=window.log=function(h){return l0.call(this,kitNoUnk(h))}}catch(e){}
 setTimeout(()=>{try{const sm=showModal;showModal=window.showModal=function(){try{const m=typeof Q!=="undefined"?Q[0]:null;if(m){if(typeof m.h==="string")m.h=kitNoUnk(m.h)}}catch(e){}return sm.apply(this,arguments)}}catch(e){}},0);
+/* ---------- the list in the sổ (save-unseen-lists) ---------- */
+function ntGo(id){id=String(id||"");try{
+ if(id.indexOf("errand:")===0&&typeof errOpen==="function")return ()=>errOpen();
+ if(id.indexOf("tb:")===0)return ()=>{try{tinBaoSeen(id.slice(3))}catch(e){}goDuDo()};
+ if(id.indexOf("rcv:")===0&&typeof rcvOpen==="function")return ()=>rcvOpen(id);
+ if(id.indexOf("pt:back:")===0&&typeof ptOpenTin==="function")return ptOpenTin;
+ if(id.indexOf("pt:ord:")===0&&typeof ptOrdQ==="function"){const oid=id.slice(7);return ()=>{const x=ptOrdQ().find(z=>String(z.id)===oid);if(x&&typeof ptOrdOpen==="function")setTimeout(()=>ptOrdOpen(x),0)}}}catch(e){}return null}
+function ntSer(){return NT.list.slice(0,cap()).map(x=>{const o={id:x.id,line:x.line};if(x.text&&x.text!==x.line)o.text=x.text;if(x.items&&x.items.length)o.items=x.items;
+ if(x.pic)o.pic=x.pic;if(x.kind)o.kind=x.kind;if(x.sticky)o.sticky=1;if(x.seen)o.seen=1;if(typeof x.go==="function"){o.g=1;if(x.goLabel)o.goLabel=x.goLabel}if(x.t)o.t=x.t;return o})}
+function ntDeser(L){const old=new Map(NT.list.map(x=>[x.id,x]));NT.list=L.filter(o=>o&&o.id!=null&&o.line).slice(0,cap()).map(o=>{const p=old.get(String(o.id));
+ return {id:String(o.id),line:String(o.line),text:String(o.text||o.line),items:Array.isArray(o.items)?o.items.map(String):null,pic:o.pic||"",kind:o.kind||"",sticky:!!o.sticky,seen:!!o.seen,
+  go:o.g?((p&&typeof p.go==="function"?p.go:null)||ntGo(o.id)):null,goLabel:o.goLabel||"",t:+o.t||0}});NT.pend=null;const c=$("kntchip");if(c)chipHide(c)}
+try{if(typeof lifeStore==="function")lifeStore("NT.list notices (Tin báo) of that life",()=>{NT.list=[];NT.pend=null;KB.m.clear()})}catch(e){}
+try{const s0=ser;ser=function(){const d=s0.apply(this,arguments);try{if(d&&typeof d==="object")d.nt=ntSer()}catch(e){console.error("nt ser",e)}return d}}catch(e){}
+try{const d0=deser;deser=function(d){const n0=NT.list.length;const r=d0.apply(this,arguments);try{if(!n0&&d&&Array.isArray(d.nt)&&d.nt.length)ntDeser(d.nt)}catch(e){console.error("nt deser",e)}return r}}catch(e){}/* only into an EMPTY list (a slot load / a fresh page: kmReset emptied it): an in-session rebuild (co-op relens, week merge: ser() → deser() of the same page) keeps the live list and its chip */
+/* rv4 (BIG rv save-unseen-lists, LAW 11 Tin báo family): a notice that arrives AFTER the act's own save (kitKnow batches with setTimeout 0, any
+   later timer / async reply) sat outside the sổ until the next render — a true reload in that window lost the line (video iPad: «know:» notice).
+   ONE rule for every notice: when the list changed after the last write that reached the slot, one more save runs at the end of the tick. */
+let NTV=0,NTW=0,NTT=0;
+{const k0=kitNotice;kitNotice=function(){const n=NT.list.length,top=NT.list[0];const r=k0.apply(this,arguments);
+  try{if(NT.list.length!==n||NT.list[0]!==top){NTV++;if(!NTT)NTT=setTimeout(()=>{NTT=0;try{if(NTV!==NTW&&S&&!S.dead&&!quiet)save()}catch(e){}},0)}}catch(e){}return r}}
+try{const sv0=save;save=function(){const n0=typeof SAVE_N!=="undefined"?SAVE_N:null,v=NTV;const r=sv0.apply(this,arguments);if(n0==null||SAVE_N!==n0)NTW=v;return r}}catch(e){}
 Object.assign(window,{kitNotice,kitNoticeDrop,kitNoticeSeen,kitNoticeList,kitNoticeOpen,kitNoticeBox:boxPaint,kitKnow,kitKnowFlush,kitKnowMany});
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.3",title:"kitKnow · «Ta biết thêm N điều» (one kitNotice kind know; same chip, box and Tin báo panel as §42.2)",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><span class="ktbt" style="position:static;transform:none;white-space:nowrap"><i class="khap" style="margin:0">!</i><span>Ta biết thêm 3 điều</span></span><button type="button" class="btn" onclick="kitKnowMany([{key:'a',text:'Ngươi biết tên: đó là Lệ tần Mai thị.'},{key:'b',text:'Ngươi đã thấy mặt một phi tần áo bậc Tần; chưa biết tên.'},{key:'c',text:'Quý phi Đào Cẩm Tâm nay được tấn phong Hoàng quý phi.'}]);kitNoticeOpen()">Mở khung Tin báo</button></div>`})}catch(e){}

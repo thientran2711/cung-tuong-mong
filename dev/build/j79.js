@@ -64,7 +64,7 @@ function kitChips(list){return `<span class="kchips">${(list||[]).map(x=>Array.i
 /* kitRows([[label, value(html|array of chips/values), cls]]) cls: g|r|n|t (value colour), "need" for a Cần row of chips */
 /* KIT §62.1 NO VISIBLE «Ghi chú» ROW (owner 21/11 ~04:30Z, repeat of OD L1867): a row labelled «Ghi chú» is not drawn; its text goes behind a kit round «!» (.khap.kgnb) at the end of the row it explains (the row just above it),
    tap → the kit pop-up titled «Ghi chú». A Ghi chú with no row above it (first row) stays as a row. Every kitRows caller (dialog info frames, item cards, results, books) gets it from here — no caller changes. */
-function kitNoteBang(text,title){const t=title||"Ghi chú";return `<span class="khap kgl kfx kgnb" role="button" tabindex="0" aria-label="${kpEsc(t)}" data-kfxt="${kpEsc(t)}" data-kfx="${kpEsc(String(text))}">!</span>`}/* title optional (mini-game intro «Phần của ngươi» …): the ONE «!» part */
+function kitNoteBang(text,title){const t=title||"Ghi chú";return `<span class="khap kgl kfx kgnb" role="button" tabindex="0" aria-label="${kpEsc(t)}" title="${kpEsc(t)}" data-kfxt="${kpEsc(t)}" data-kfx="${kpEsc(String(text))}">!</span>`}/* title optional (mini-game intro «Phần của ngươi» …): the ONE «!» part */
 /* a line that starts a row starts with a capital (owner 24/11: «Một vị Phi …», never «một vị …» at the start of a line) */
 function kitLineCap(x){return String(x).replace(/^(\s*<span class="ef t">)m(ột )/,"$1M$2")}
 const KIT_PLINE=/^\s*<span class="ef t">[^<]{1,80}:<\/span>/;
@@ -316,7 +316,7 @@ function kitHxRoad(){try{if(typeof HX!=="object")return;const r=kitRoad();if(r==
 window.kitHxRoad=kitHxRoad;
 /* ---------- popover (odds ladder, glossary): never a modal, never covers the scene for long; any tap closes ---------- */
 function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!p){p=document.createElement("div");p.id="kpop";p.className="kpop";document.body.appendChild(p)}
- p.innerHTML=html;p.hidden=false;const r=anchor.getBoundingClientRect();
+ p.innerHTML=html+(typeof kitXHTML==="function"?kitXHTML('data-kitx="kpop"',"Đóng").replace('class="kit-x"','class="kit-x kxpop"'):"");p.hidden=false;const r=anchor.getBoundingClientRect();/* OB-M3UI: the kit ✕ in its corner (also Esc / Back, jk4 kitTopClose); any tap still closes */
  /* o.inside (act-dedupe UI): the pop-up sits ON the tapped card (never below it), so it cannot cover the next card in the list/grid */
  let W=o.inside?Math.max(120,Math.min(300,r.width-8,innerWidth-24)):Math.min(300,innerWidth-24);p.style.width=W+"px";
  /* LINE BREAKS AT THE RIGHT PLACE (KIT §5): the ladder's rows (bar · word · meaning) never wrap while the screen has room — the pop-up widens to its longest row (owner 23/11) */
@@ -324,9 +324,11 @@ function kpPop(anchor,html,o){o=o||{};let p=document.getElementById("kpop");if(!
  let x=Math.max(o.inside?4:12,Math.min(innerWidth-W-(o.inside?4:12),r.left+r.width/2-W/2));p.style.left=x+"px";p.style.top="0px";const h=p.offsetHeight;
  if(o.inside){const vt=Math.max(r.top,8),vb=Math.min(r.bottom,innerHeight-8);/* the visible part of the card */let y=vt+Math.max(4,(vb-vt-h)/2);if(h>r.height-8)y=r.top+4;p.style.top=Math.max(4,y)+"px";return}
  let y=r.bottom+6;if(y+h>innerHeight-8)y=Math.max(8,r.top-h-6);p.style.top=y+"px"}
-document.addEventListener("click",e=>{const p=document.getElementById("kpop");let od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");/* OWNER-ish rule (MAIN 136 25/11, robot M2/M3 + KIT BUG #2a): a tap ANYWHERE on an option card chooses it — the odds meter / a glossary word inside the card must not steal the tap; the explanation stays on the kit help («!» / legend) */if((od||gl)&&e.target.closest("button.opt,button.kopt,.opts>button,.kpopts>button,.k3btns>button,.kfoc-b,#mr>button,.kszopts>button")&&!e.target.closest(".kopinfo")){od=null;gl=null}/* inside the «!» card overlay (.kopinfo, disabled copy) the meter still opens the ladder: that is where the explanation lives */
+/* OB-M3UI (robot M3 26/11, fault 1 «option-card tap → odds legend soft-lock», whole family): ONE list of option-card shapes whose tap always CHOOSES — dialog options, scene options (.kscn-box), bare scene options (kitBareOpt .kbare); jwhy reads the same list */
+const KIT_OPT_TAP="button.opt,button.kopt,.opts>button,.kpopts>button,.k3btns>button,.kfoc-b,#mr>button,.kszopts>button,.kscn-box .opts>button,button.kbare";window.KIT_OPT_TAP=KIT_OPT_TAP;
+document.addEventListener("click",e=>{const p=document.getElementById("kpop");let od=e.target.closest(".kodm"),gl=e.target.closest(".kgl");/* OWNER-ish rule (MAIN 136 25/11, robot M2/M3 + KIT BUG #2a): a tap ANYWHERE on an option card chooses it — the odds meter / a glossary word inside the card must not steal the tap; the explanation stays on the kit help («!» / legend) */if((od||gl)&&e.target.closest(KIT_OPT_TAP)&&!e.target.closest(".kopinfo")){od=null;gl=null}/* inside the «!» card overlay (.kopinfo, disabled copy) the meter still opens the ladder: that is where the explanation lives */
  if(od||gl){e.stopPropagation();e.preventDefault();if(od)kpPop(od,kitOddsLadder(+od.dataset.kodds));else if(gl.dataset.kfx!=null)kpPop(gl,kitFactTipHtml(gl));else kpPop(gl,kitGlossPopHtml(gl.dataset.kgl));return}
- if(p&&!p.hidden)p.hidden=true},true);
+ if(p&&!p.hidden){p.hidden=true;if(e.target.closest&&e.target.closest("#kpop")){e.stopPropagation();e.preventDefault()}}},true);/* OB-M3UI: a tap ON the pop-up (its ✕ included) only closes it; it never reaches what lies under it */
 /* the HUD standing chances (Có thai, Lật thẻ) read on the chance scale Rất thấp…Rất cao (j64 + chanceLvl in j1), never the act ladder */
 
 /* ---------- the PANEL ---------- */
@@ -530,6 +532,8 @@ html body .kbtn,html body .kbtn *{word-break:normal!important;overflow-wrap:norm
 .kseg{display:inline-flex;gap:1.5px;padding:2px;border-radius:4px;background:#efe3cc;border:1px solid #d9c49a}
 .kseg i{display:block;width:5px;height:9px;border-radius:1.5px;background:var(--k-card,#fffaf0);box-shadow:inset 0 0 0 1px #d9c49a}
 .kodm.oc{background:none!important;border:0!important;padding:0!important;margin:0}
+/* KIT §53.d (KK59; KIT_REQUESTS 27/11 DOOR-ONETAP, MAIN 178 ruling): the meter inside a DARK button (primary .kbtn, kdanger, the dialog's main) = LIGHT variant — the ladder word in the button's own light ink, the 7-step track keeps its light plate (filled steps stay the ladder colours); a light button (.alt, the green .kcol-act .kdone, the grey disabled kdanger; a .kdone elsewhere is a dark red .kbtn) keeps the ladder colour word. RV-175 FAIL-1 (KK60): a DISABLED dark .kbtn stays dark red (or a dark grey under the .kshc / .kri-acts grayscale filter) → it takes the light word too; only .kdanger:disabled turns light grey (#d8cdbd) and keeps the ladder colour */
+.kbtn:not(.alt):not(.kcol-act .kdone):not(.kdanger:disabled) .kodm b,.dlg.kpanel #mr .main .kodm b{color:#fff8e6!important;text-shadow:0 1px 1px #0007}
 button.ka .kodds .kodm{flex-direction:row}
 .hc.khc{display:inline-flex;align-items:center;gap:4px}.hc.khc .kodm b{font-size:.68rem}
 .kpop{position:fixed;z-index:9995;/* above the big emotion avatar (.kemo-big, 9990/9991) — rv kit-ghichu-sections: a kit popup is never covered by a picture */background:var(--k-card);border:1px solid var(--gold);border-radius:var(--k-rad);box-shadow:0 0 0 3px #f6ead6,0 10px 30px #2a1a1250;padding:8px 10px;font-size:.82rem;color:var(--ink);/* m-fix-2: a tip never covers its own dialog (robot s5d: a 40-line «Ghi chú» filled the Fold): at most half the screen, scrolls inside */max-height:calc(50*var(--kvh,1dvh) - 16px);overflow-y:auto;overscroll-behavior:contain;box-sizing:border-box}
@@ -903,8 +907,8 @@ button.ka.kcard.kart>.kabody{display:flex;flex-direction:column;gap:3px;flex:1 1
 .kaart img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .kaph{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-family:var(--display);font-size:.7rem;font-weight:700;color:#7a5a2a;padding:4px;line-height:1.15}
 button.ka.kdis .kaart{filter:grayscale(.7);opacity:.8}
-/* equal height per ROW, fitted to that row's content (no empty space from a tall card elsewhere) */
-.cards:has(> button.ka),.pcb:has(> button.ka),.opts:has(> button.ka),.rbtn:has(> button.ka),.kpacts{grid-auto-rows:auto!important;align-items:stretch!important}
+/* ONE SET = ONE SIZE (owner OD 27/11 ~07:20Z, repeats OD L1354 (4) + L1867; canon overwrite of «equal height per ROW»): every act card / choice button of ONE container is the SAME width AND the SAME height across ALL rows — the tallest card sets the height, content top-aligned, long content scrolls inside */
+.cards:has(> button.ka),.pcb:has(> button.ka),.opts:has(> button.ka),.rbtn:has(> button.ka),.kpacts,.kskills.ktn-grid{grid-auto-rows:1fr!important;align-items:stretch!important}
 /* columns follow the space the grid really has (the panel is half the screen in landscape): at most 3, each at least 280px */
 .cards:has(> button.ka){grid-template-columns:repeat(auto-fill,minmax(max(280px,31%),1fr))!important}
 /* kv: dropped @media (max-width:599px) (one page = spread page, KIT §0) */
@@ -1037,7 +1041,7 @@ button.ka.kodrow .kat>.kodds.kodds{margin-left:auto!important}`;document.head.ap
 if(typeof stealX==="function"){stealX=function(v,road){let c=0;try{c=conceiveCh(S)}catch(e){}const md=road?"road":"feign";const M=(BAL.steal.m||{})[md]||{};const w=M.win&&Object.keys(M.win).length?` · thêm ${fmt(M.win)}`:"";const NG=nightGain(0),BN=BAL.night;/* each choice shows its OWN prize and its own trace (night-final: Chặn ngự giá showed Tranh sủng's numbers) */
  return `thị tẩm đêm nay: ${sgStat(NG.sung)}, Ân tình +${NG.an} trở lên${w}${S.preg?"":` · có thai: ${chanceW(c)}`} · ban thưởng: ${chanceW(BN.bestow+BN.bestowS*BN.stealS)} · kèm: ${stealKem(v,md)}`}}
 /* wording guide fixes in merged copies */
-(function(){const fix=root=>{try{root.querySelectorAll&&root.querySelectorAll(".kalog").forEach(e=>{if(/Nhật ký/.test(e.textContent))e.textContent="Xem đầy đủ trong Sổ ghi"})}catch(e){}};new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.classList&&n.classList.contains("kalog"))fix(n.parentNode);else fix(n)}})}).observe(document.documentElement,{childList:true,subtree:true})})();
+(function(){const fix=root=>{try{root.querySelectorAll&&root.querySelectorAll(".kalog").forEach(e=>{if(/Nhật ký/.test(e.textContent))e.textContent="Xem đủ trong Sổ ghi"})}catch(e){}};new MutationObserver(ms=>{for(const m of ms)m.addedNodes.forEach(n=>{if(n.nodeType===1){if(n.classList&&n.classList.contains("kalog"))fix(n.parentNode);else fix(n)}})}).observe(document.documentElement,{childList:true,subtree:true})})();
 /* Tài nghệ rows "Bậc 3: Mở «…»": wrap, never cut */
 (function(){const st=document.createElement("style");st.id="kp-art-wrap";st.textContent=`.art .pcb button,.art .ams,.art .ams span,.art .lv,.art .pcrow span,.art .pcrow b{white-space:normal!important;overflow:visible!important;text-overflow:clip!important;-webkit-line-clamp:unset!important}`;document.head.appendChild(st)})();
 
@@ -1141,6 +1145,7 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
  if(!src){src=ph;if((tries||0)<75)setTimeout(()=>{if(!M.hidden&&M.classList.contains("kpscene")&&$("mb").querySelector(".kpid"))kpIdFig(M,(tries||0)+1)},400)}
  if(!im){im=document.createElement("img");im.className="kidfig2";im.alt="";im.decoding="async";M.prepend(im)}
  if(!im.dataset.kerr){im.dataset.kerr=1;im.addEventListener("error",()=>{const s0=im.getAttribute("src")||"";if(/\/tn\//.test(s0))return;if(im.dataset.kerr==="1"){im.dataset.kerr="2";setTimeout(()=>{if(im.isConnected)im.src=s0+(s0.includes("?")?"&":"?")+"r=1"},600)}})}
+ im.classList.toggle("kphsil",src===ph);/* KK45: the stand-in keeps the silhouette's LAYOUT only; it paints as the §59.1 neutral ground (jph img.kphsil), never as the stranger lady */
  M.classList.add("kpfig");const id=$("mb").querySelector(".kpid");if(id)id.classList.add("kpidf");
  /* review/newgame-ui (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … 1 lúc sau mới thấy hình"):
     1) ONE standard figure tier: every face is drawn with the same BODY height (head top → feet, kitFigBody, as KIT 33.6) on the same floor
@@ -1366,12 +1371,46 @@ function kitSkillArt(kind,k,name){const key=`${kind}-${k}`;const have=(KIT_INFOM
  return have.includes(key)?`img/${key}.webp`:ah.includes("act-cat-hoc-tap")?"img/act-cat-hoc-tap.webp":""}
 function kitSteps(l,max,attr,word){max=max||5;word=word||"Bậc";const seg=Array.from({length:max},(_,i)=>`<i class="${i<l?"on":""}"></i>`).join("");
  return `<${attr?"button type=\"button\"":"span"} class="ksteps" ${attr||""} aria-label="${word} ${l} trên ${max}"><span class="kstepd">${seg}</span><b>${word} ${l}/${max}</b></${attr?"button":"span"}>`}
-function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${cur}/${need}</b></div>`}
+function kitBar(label,cur,need){return `<div class="kskp"><span>${label}</span><span class="kskb"><u style="width:${need?Math.min(100,Math.round(cur/need*100)):0}%"></u></span><b>${kitNeed(cur,need)}</b></div>`}
 /* tainghe-info (owner OD 25/11 ~23:48Z «Bấm vào dung nghi thì không ra gì hết … không biết bấm vô cái gì mở ra cái khung này»): the card's info
    opens from ONE visible labelled target = the NAME, drawn as the kit info link (ⓘ + dotted underline, the §kitInfo look of «ⓘ Cách học»).
    o.info (or the old o.stepsAttr) = the attribute that opens it (e.g. data-v85tab="cam"). The «Bậc l/max» steps are never a hidden button. */
 function kitSkillName(o){const a=o.info||o.stepsAttr||"";const n=o.name||"";if(!a||!n)return `<b>${n}</b>`;
  return `<button type="button" class="kskn" ${a} aria-label="Xem luật ${kpPlain?kpPlain(n):n}"><i class="kskni" aria-hidden="true">ⓘ</i><b>${n}</b></button>`}
+/* kit-need (s3e-display-fix, robot «Công lao 11/10»): ONE rule for every «have/need» text — the have shown never passes its need (a met need reads need/need) */
+function kitNeed(cur,need){cur=Math.floor(+cur||0);need=+need||0;return `${need>0?Math.min(cur,need):cur}/${need}`}
+/* kitHitGrow(root): see the CSS note «tainghe-info r4». Run debounced on DOM changes + resize. */
+function kitHitGrow(root){try{const MIN=44,T=".kgl,.kskn,button.ladi,.khap:not([role=img])";
+ const vis=r=>r.width>0&&r.height>0&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth;
+ const tg=[...(root||document).querySelectorAll(T)].filter(e=>e.getClientRects().length===1&&vis(e.getBoundingClientRect()));if(!tg.length)return;
+ const CT=[...document.querySelectorAll("button,a[href],[role=button],[onclick],input,select,textarea,.pc,.tok,"+T)].map(e=>({e,r:e.getBoundingClientRect()})).filter(o=>vis(o.r));
+ for(const e of tg){const r=e.getBoundingClientRect();const ex=Math.max(0,(MIN-r.width)/2),ey=Math.max(0,(MIN-r.height)/2);let t=ey,b=ey,l=ex,rr=ex;
+  /* a box it may not leave: the nearest sticky / fixed bar or clip box */
+  let lim={l:-1e9,t:-1e9,r:1e9,b:1e9};for(let a=e.parentElement;a&&a!==document.body;a=a.parentElement){const cs=getComputedStyle(a);if(/sticky|fixed/.test(cs.position)||/(hidden|clip|auto|scroll)/.test(cs.overflowX+cs.overflowY)){const q=a.getBoundingClientRect();lim={l:Math.max(lim.l,q.left),t:Math.max(lim.t,q.top),r:Math.min(lim.r,q.right),b:Math.min(lim.b,q.bottom)};if(/sticky|fixed/.test(cs.position))break}}
+  /* and the largest box around it that holds NO other tap control (its row, its card head …): growing past it could reach a control later (scroll, re-draw) */
+  {const CSEL="button,a[href],[role=button],[onclick],input,select,textarea,.pc,.tok,"+T;let box=null;
+   for(let a=e.parentElement;a&&a!==document.body&&a!==document.documentElement;a=a.parentElement){if(a.matches(CSEL)){box=box||{l:r.left,t:r.top,r:r.right,b:r.bottom};break}
+    if([...a.querySelectorAll(CSEL)].some(c=>c!==e&&!e.contains(c)&&c.getClientRects().length))break;const q=a.getBoundingClientRect();box={l:q.left,t:q.top,r:q.right,b:q.bottom}}
+   if(box)lim={l:Math.max(lim.l,box.l),t:Math.max(lim.t,box.t),r:Math.min(lim.r,box.r),b:Math.min(lim.b,box.b)};else lim={l:r.left,t:r.top,r:r.right,b:r.bottom}}
+  t=Math.max(0,Math.min(t,r.top-lim.t));b=Math.max(0,Math.min(b,lim.b-r.bottom));l=Math.max(0,Math.min(l,r.left-lim.l));rr=Math.max(0,Math.min(rr,lim.r-r.right));
+  let SB=null;for(let a=e.parentElement;a&&a!==document.body;a=a.parentElement)if(/sticky|fixed/.test(getComputedStyle(a).position)){SB=a;break}/* in a sticky / fixed bar: content passing under the bar is not a neighbour (the bar covers it); growth stays inside the bar (lim) */
+  for(const o of CT){if(o.e===e||e.contains(o.e))continue;if(SB&&!SB.contains(o.e)&&!o.e.contains(SB))continue;const q=o.r;
+   if(o.e.contains(e)){/* inside a control (a «!» on a card, «ⓘ» in an act button): its whole area is that control */t=b=l=rr=0;break}
+   const hx=q.right>r.left-l&&q.left<r.right+rr,vy=q.bottom>r.top-t&&q.top<r.bottom+b;
+   if(hx&&q.bottom<=r.top+.5)t=Math.min(t,Math.max(0,r.top-q.bottom-1));if(hx&&q.top>=r.bottom-.5)b=Math.min(b,Math.max(0,q.top-r.bottom-1));
+   if(vy&&q.right<=r.left+.5)l=Math.min(l,Math.max(0,r.left-q.right-1));if(vy&&q.left>=r.right-.5)rr=Math.min(rr,Math.max(0,q.left-r.right-1));
+   if(!(q.right<=r.left+.5||q.left>=r.right-.5||q.bottom<=r.top+.5||q.top>=r.bottom-.5)){t=b=l=rr=0;break}}
+  /* corners: a control diagonal to it that the grown box would reach → pull back the smaller side */
+  for(const o of CT){if(o.e===e||e.contains(o.e)||o.e.contains(e))continue;if(SB&&!SB.contains(o.e))continue;const q=o.r;const g={l:r.left-l,t:r.top-t,r:r.right+rr,b:r.bottom+b};
+   if(q.right<=g.l||q.left>=g.r||q.bottom<=g.t||q.top>=g.b)continue;
+   const dv=q.bottom<=r.top+.5?["t",r.top-q.bottom]:q.top>=r.bottom-.5?["b",q.top-r.bottom]:null,dh=q.right<=r.left+.5?["l",r.left-q.right]:q.left>=r.right-.5?["r",q.left-r.right]:null;
+   const cut=dv&&dh?(dv[1]>=dh[1]?dv:dh):dv||dh;if(!cut)continue;const v=Math.max(0,cut[1]-1);/* r5 (KK37): 1 px gap to a neighbour — exact-edge clamps touched it after sub-pixel rounding (LC19 hit-overlap: header «!» took 1 point of the mood bar) */if(cut[0]==="t")t=Math.min(t,v);else if(cut[0]==="b")b=Math.min(b,v);else if(cut[0]==="l")l=Math.min(l,v);else rr=Math.min(rr,v)}
+  const f=x=>Math.max(0,Math.floor(x))+"px";const sig=[t,b,l,rr].map(f).join(" ");/* no room at all → the part stays exactly as before (static, no hit layer) */if(sig==="0px 0px 0px 0px"){if(e.dataset.khg!=null){delete e.dataset.khg;["--kht","--khb","--khl","--khr"].forEach(k=>e.style.removeProperty(k))}continue}if(e.dataset.khg===sig)continue;e.dataset.khg=sig;
+  e.style.setProperty("--kht",f(t));e.style.setProperty("--khb",f(b));e.style.setProperty("--khl",f(l));e.style.setProperty("--khr",f(rr))}}catch(x){console.error("kitHitGrow",x)}}
+window.kitHitGrow=kitHitGrow;
+(function(){let tm=0;/* throttle, not debounce: a steady stream of DOM changes (timers, chips) must not starve it */const go=()=>{if(tm)return;tm=setTimeout(()=>{tm=0;kitHitGrow(document)},120)};
+ try{new MutationObserver(m=>{const only=x=>x.nodeType===1&&x.classList&&x.classList.contains("kgnb");/* kitInfoOneLine re-draws its row «!» every pass: that alone moves nothing */if(m.some(x=>x.attributeName==="hidden"||(x.type==="childList"&&![...x.addedNodes,...x.removedNodes].every(only))))go()}).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["hidden"]})}catch(e){}
+ addEventListener("resize",go);addEventListener("scroll",go,true);addEventListener("load",go)})();
 function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.levels||[]).length||5);
  const pr=Array.isArray(o.prog)?o.prog:[o.prog||0,o.need||0];const [cur,need]=pr;
  const img=o.img!=null?o.img:(o.k?kitSkillArt(o.kind||"art",o.k,o.name):"");
@@ -1389,14 +1428,18 @@ function kitSkillCard(o){o=o||{};const l=o.level||0,max=o.max!=null?o.max:((o.le
    (how to get it; `lines` = string | array), optional act cards o.acts (HTML of pbtn). Every tab / sub-tab / panel that can be empty uses it; no other empty frame. */
 function kitEmpty(title,lines,o){o=o||{};const ls=(Array.isArray(lines)?lines:[lines]).filter(Boolean);
  const a=o.art!=null?{src:o.art}:(typeof kitInfoArt==="function"?kitInfoArt(o.topic||title):{src:""});
- return `<div class="kempty" data-empty="${String(o.topic||title).replace(/[^\wÀ-ỹ ]/g,"").slice(0,40)}"><div class="kempty-art">${kitArtFrame(a&&a.src||"","")}</div><div class="kempty-b"><b class="kempty-t">${title}</b>${ls.length?`<ul class="kempty-l">${ls.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}${o.acts?`<div class="pcb">${o.acts}</div>`:""}</div></div>`}
+ return `<div class="kempty-w"><div class="kempty${o.noart?" kempty-noart":""}" data-empty="${String(o.topic||title).replace(/[^\wÀ-ỹ ]/g,"").slice(0,40)}">${o.noart?"":`<div class="kempty-art">${kitArtFrame(a&&a.src||"","")}</div>`}<div class="kempty-b"><b class="kempty-t">${title}</b>${ls.length?`<ul class="kempty-l">${ls.map(x=>`<li>${x}</li>`).join("")}</ul>`:""}${o.acts?`<div class="pcb">${o.acts}</div>`:""}</div></div></div>`}
 /* kitEmptyTab(title,lines,o,actsHtml) = THE empty-tab layout (owner 21/11 #30): the big kitEmpty card ON TOP, the tab's act card(s) BELOW it (like Thú cưng «Nhờ thái giám…») */
 function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<div class="pcb ktacts"><div class="kpanec">${acts}</div></div>`:"")}
 (function(){const st=document.createElement("style");st.id="kit2-empty";st.textContent=`
 .kempty{display:grid;grid-template-columns:minmax(110px,170px) minmax(0,1fr);gap:12px 16px;align-items:center;padding:12px;margin:4px 0 8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:var(--k-rad,8px);background:var(--k-card,#fffaf0)}
 .kempty-art{min-width:0}.kempty-b{min-width:0;display:flex;flex-direction:column;gap:6px}.kempty-t{font-size:1rem;color:var(--k-seal,#9a2c1c)}
 .kempty-l{margin:0;padding:0 0 0 1.05em;display:flex;flex-direction:column;gap:4px;font-size:.86rem}.kempty-l li{line-height:1.35}
+/* the card is its OWN size host (RV-172 FAIL-1, law 10): .kempty-w is the container, so the narrow switch fires in EVERY host (queue dialog ~312 px, panels, pop-ups), not only where an ancestor happened to be a container */
+.kempty-w{container-type:inline-size;display:block;min-width:0}
 @container (max-width:420px){.kempty{grid-template-columns:1fr;justify-items:center}.kempty-art{width:min(170px,60%)}.kempty-b{width:100%}}
+/* o.noart: the host already shows the topic picture (e.g. the queue dialog's left slot) — text only, one column */
+.kempty-noart{grid-template-columns:1fr!important;justify-items:stretch!important}
 `;document.head.appendChild(st)})();
 (function(){const st=document.createElement("style");st.id="kit2-skill";st.textContent=`
 .kskills{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:10px}
@@ -1413,11 +1456,18 @@ function kitEmptyTab(title,lines,o,acts){return kitEmpty(title,lines,o)+(acts?`<
 .kskdo{font-size:.82rem;color:var(--dim);line-height:1.35}.kskx{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:.8rem}
 .kskp{display:grid;grid-template-columns:auto 1fr auto;gap:8px;align-items:center;font-size:.78rem;color:var(--k-lab)}.kskp b{color:var(--ink)}
 .kskb{height:8px;border-radius:5px;background:#eadfca;overflow:hidden}.kskb u{display:block;height:100%;background:linear-gradient(90deg,#c9a24a,#8f5f0c)}
+/* tainghe-info r4 (LC18 tap-size note + LC19/MAIN 150 overlap FAIL of r3): every kit info target (.kgl dotted word / «ⓘ» link, .khap «!», .kskn skill
+   name, .ladi link) keeps its look; its HIT area grows toward 44 x 44 px ONLY INTO EMPTY SPACE: kitHitGrow (JS, below) measures the free room on each side
+   (never over another tap control, never out of its sticky bar / clip box / the control it sits in) and sets --kht/--khb/--khl/--khr on an invisible ::after.
+   :where() = no specificity, so a part already positioned keeps its position. Tests: info-tap-audit.js (hit ≥ 44 or stops at a neighbour/clip),
+   hit-overlap-lc19.js (0 overlap, 0 steal). */
+:where(.kgl,.kskn,button.ladi,.khap)[data-khg]{position:relative}html.khg-off :where(.kgl,.kskn,button.ladi,.khap)[data-khg]::after{display:none}/* test hook: hit layers off (hit-overlap compares with/without) */
+:where(.kgl,.kskn,button.ladi,.khap)[data-khg]::after{content:"";position:absolute;top:calc(-1*var(--kht,0px));bottom:calc(-1*var(--khb,0px));left:calc(-1*var(--khl,0px));right:calc(-1*var(--khr,0px));background:transparent;z-index:1}
 .kskn{display:inline-flex;align-items:baseline;gap:.3em;border:0;background:none;padding:2px 0;margin:0;font:inherit;color:var(--gold);cursor:pointer;text-align:left;min-height:32px}.kskn>b{border-bottom:1px dotted currentColor}.kskni{font-style:normal;font-size:.9rem;font-weight:600}
 .ksteps{display:inline-flex;align-items:center;gap:6px;border:0;background:none;padding:0;font:inherit;color:inherit;cursor:default}button.ksteps{cursor:pointer}
 .kstepd{display:inline-flex;gap:3px}.kstepd i{width:14px;height:8px;border-radius:4px;background:var(--k-hair,#e6d3ac);box-shadow:inset 0 0 0 1px #5a3a2018}.kstepd i.on{background:var(--gold,#b8862b)}
 .ksteps b{font-size:.78rem;color:var(--dim);font-weight:600;white-space:nowrap}
-.kskacts.pcb{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
+.kskacts.pcb{display:grid!important;grid-template-columns:minmax(0,1fr)!important;gap:8px}.kskacts.pcb{grid-auto-rows:1fr!important}html body .pcb:has(> button.ka){display:grid!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:1fr!important}/* a person panel list that was a flex column: same one-column grid, equal rows */.kskacts.pcb>.kpanec{display:flex;flex-direction:column;min-height:0}.kskacts.pcb>.kpanec>button{flex:1 1 auto}/* KIT §6.3g: one act card per line (was an auto-fit 2-column grid: cards of different heights, tiny pictures) */
 `;document.head.appendChild(st)})();
 /* ---- PERSON STATS (owner 11/14): every consort shows the SAME stat set as the player, as kit tiles: Sủng · Đức · Danh · Sắc · Tài · Tâm cơ.
    A value shows only once known, else "chưa rõ". Hook for the reveal stages (j61/j85 Đức, tai mắt/intel): window.kitStatKnown(v, key) -> true|false.

@@ -707,7 +707,9 @@ img/kit/tok-m2.webp
 img/kit/tok-m3.webp
 img/kit/tok-m4.webp
 img/kit/tok-unknown.webp
+img/kit/unknown-e.webp
 img/kit/unknown-f.webp
+img/kit/unknown-fig-e.webp
 img/kit/unknown-fig-f.webp
 img/kit/unknown-fig-k.webp
 img/kit/unknown-fig-m.webp

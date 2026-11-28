@@ -15,13 +15,21 @@ const KIT_SQOPT={pic:64,narrow:56};/* KIT §6.2c: the ONE square option picture 
    (93.6) kitNewsRankRow(p,{rank,how,ph}) / kitNewsRankList(rows) → the sắc phong news row: kit face + name (or placeholder) + new rank chip + how known.
    kitEdict({fromWord}) (j93) prints the given «from» word on the old-rank chip (a tú nữ: «Tú nữ»). */
 const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16,48,.45)",night:"brightness(.62) saturate(.85)",intro:1300,toBlur:700,
- fold:{fh:.80,msgrX:.19,meX:.30,boxX:.43,boxW:.555,soloFh:.97,soloX:.22},ipad:{fh:.86,msgrX:.115,meX:.27,boxX:.41,boxW:.575,soloFh:.97,soloX:.20},gap:8,tail:13};
+ fold:{fh:.80,mfh:.94,hfh:.62,msgrX:.22,meX:.82,cX:.02,cW:.60,cTop:.42,nmX:.2,nbW:.42,boxX:.43,boxW:.555,soloFh:.97,soloX:.22},ipad:{fh:.86,mfh:.98,hfh:.64,msgrX:.17,meX:.84,cX:.02,cW:.64,cTop:.40,nmX:.15,nbW:.40,boxX:.41,boxW:.575,soloFh:.97,soloX:.20},gap:8,tail:13};
+/* KIT §24b BUỔI VEIL (owner 26/11 ~18:45Z «màn hình mờ theo buổi: sáng mờ sáng, trưa mờ trưa, chiều mờ chiều, tối như cũ»): ONE token family. Every dimmed backdrop of the game (#modal = dialogs, visitor «giá đáo» scene,
+   loading veil, event cards over the stage; .kscn-veil; .kidfl; #kpodov; #krkov; #kpzoom; .ktut-dim) paints `background:var(--kveil, <its own dark colour>)`. --kveil is set on body[data-buoi] (j12 sets it on every stage render);
+   all 4 buổi (incl. tối) set it, ONE alpha per buổi for every layer (owner 26/11 20:05Z: lighter, .34 / .30 / .34 / .32); the var(--kveil,<dark>) fallback only shows before body[data-buoi] exists. The ceremonial day curtain #kdaytc keeps its dark ground (its words sit directly on it). */
+window.KIT_BVEIL={0:"rgba(255,228,200,.34)",/* sáng: pale warm-gold / rose morning mist */1:"rgba(255,251,236,.30)",/* trưa: bright clear warm-white haze */2:"rgba(226,132,52,.34)",/* chiều: amber / orange sunset haze */3:"rgba(42,26,18,.32)"/* tối: the old dark brown, one step lighter (owner 26/11 20:05Z «đang đục quá»); was .33–.80 per layer, so .32 is lighter on every layer */};
+(function(){try{const st=document.createElement("style");st.id="kveil-css";st.textContent=Object.keys(KIT_BVEIL).map(b=>`body[data-buoi="${b}"]{--kveil:${KIT_BVEIL[b]}}`).join("");document.head.appendChild(st)}catch(e){}})();
+/* the buổi mark also on the title / loading screen and any screen before the stage renders: follow S.buoi on every render */
+(function(){try{const r0=window.render||(typeof render==="function"?render:null);if(!r0||r0.__kveil)return;const w=function(){const r=r0.apply(this,arguments);try{if(typeof S!=="undefined"&&S&&typeof S.buoi==="number"&&document.body.dataset.buoi!==String(S.buoi))document.body.dataset.buoi=S.buoi}catch(e){}return r};w.__kveil=1;render=w}catch(e){}})();
+
 (function(){try{const st=document.createElement("style");st.id="kscn-css";st.textContent=`
 .kscn{position:fixed;z-index:${KIT_SCN.z};overflow:hidden;border-radius:var(--k-rad,12px);background:#2a1a12}
 .kscn-bg{position:absolute;inset:-14px;background-size:cover;background-position:center;filter:blur(${KIT_SCN.blur}px)}
-.kscn-veil{position:absolute;inset:0;background:${KIT_SCN.veil}}
+.kscn-veil{position:absolute;inset:0;background:var(--kveil,${KIT_SCN.veil})}
 .kscn.kscn-night .kscn-bg{filter:blur(${KIT_SCN.blur}px) ${KIT_SCN.night}}
-.kscn.kscn-night .kscn-veil{background:${KIT_SCN.veilNight}}
+.kscn.kscn-night .kscn-veil{background:var(--kveil,${KIT_SCN.veilNight})}
 .kscn.kscn-clear .kscn-bg{filter:none}.kscn.kscn-clear .kscn-veil{opacity:0}
 .kscn-fig{position:absolute;display:block;max-width:none;max-height:none;pointer-events:none}
 .kscn .dlg.kscn-box{position:absolute;z-index:4;max-width:none;max-height:none;margin:0;display:flex;flex-direction:column;overflow:visible;text-align:left;animation:none;box-shadow:0 6px 22px rgba(0,0,0,.38)}
@@ -34,6 +42,9 @@ const KIT_SCN={z:57,edge:4,blur:6,veil:"rgba(20,12,8,.45)",veilNight:"rgba(10,16
 .kscn-box.kscn-tl:before,.kscn-box.kscn-tl:after{content:"";position:absolute;width:0;height:0;border-style:solid;border-color:transparent}
 .kscn-box.kscn-tl:before{left:-${KIT_SCN.tail}px;top:var(--kty,40px);border-width:11px ${KIT_SCN.tail}px 11px 0;border-right-color:var(--gold,#b8901f)}
 .kscn-box.kscn-tl:after{left:-${KIT_SCN.tail-2}px;top:calc(var(--kty,40px) + 1px);border-width:10px ${KIT_SCN.tail-1}px 10px 0;border-right-color:#fbf1e6}
+.kscn-box.kscn-tr:before,.kscn-box.kscn-tr:after{content:"";position:absolute;width:0;height:0;border-style:solid;border-color:transparent}
+.kscn-box.kscn-tr:before{right:-${KIT_SCN.tail}px;top:var(--kty,40px);border-width:11px 0 11px ${KIT_SCN.tail}px;border-left-color:var(--gold,#b8901f)}
+.kscn-box.kscn-tr:after{right:-${KIT_SCN.tail-2}px;top:calc(var(--kty,40px) + 1px);border-width:10px 0 10px ${KIT_SCN.tail-1}px;border-left-color:#fbf1e6}
 .kpl .kplt .kscn-rk{margin-left:6px}
 body.kscn-on .kemo-big{visibility:hidden!important}
 button.ka.kbare .kat{margin:auto 0}button.ka.kbare .kabody{display:flex;flex-direction:column;justify-content:center}
@@ -71,14 +82,21 @@ const kitScene={
  async pair(L,o){const ip=document.documentElement.classList.contains("kv2"),K=ip?KIT_SCN.ipad:KIT_SCN.fold,w=L.g.w,H=L.g.H,gap=KIT_SCN.gap,X=Math.round(w*K.boxX),BW=Math.round(w*K.boxW);
   if(!o.msgr){const fh=Math.round(H*K.soloFh);await kitScene.fig(L,o.me,{cx:w*K.soloX,top:H-fh,fh,z:3});
    return{box:kitDlgBox(L,o.choiceTitle||o.storyTitle,[...(o.story||[]),...(o.choice||[])],{x:X,y:gap,w:BW,h:H-2*gap},{y:Math.round(H*.20)},{kind:o.kind,seal:o.seal})}}
-  const fh=Math.round(H*K.fh);await kitScene.fig(L,o.msgr,{cx:w*K.msgrX,top:0,fh,z:2});await kitScene.fig(L,o.me,{cx:w*K.meX,top:H-fh,fh,z:3});
-  const sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:X,y:gap,w:BW},{y:ip?52:62},{kind:o.kind,seal:o.seal});const sh=Math.ceil(sb.getBoundingClientRect().height),top=gap+sh+12;
-  const cb=kitDlgBox(L,o.choiceTitle,o.choice||[],{x:X,y:top,w:BW,h:H-top-gap},{y:Math.max(26,Math.round(H*(ip?.30:.36))-top)},{kind:o.kind,seal:o.seal,noSeal:true});return{story:sb,choice:cb}},
+  /* LAYOUT A (owner OD 24/11 ~04:35Z, restating ~20:20Z/~20:22Z/~20:27Z): the speaker stands LEFT, FULL BODY, big; his story box on the RIGHT; the choice box BELOW lies over the left figure; THEN her own figure on the
+     RIGHT, small (smaller scale than his, WHOLE, never cropped by the layer); never two figures stacked on the left. NO choice (two others talking): both FULL BODY, one on each side, the box between. */
+  const msg=o.msgr,hasCh=(o.choice||[]).length>0;
+  if(!hasCh){const fh=Math.round(H*K.fh);await kitScene.fig(L,msg,{cx:w*K.nmX,top:H-fh,fh,z:2});const f2=await kitScene.fig(L,o.me,{cx:w*(1-K.nmX),top:H-fh,fh,z:2});
+   const bw=Math.round(w*K.nbW),sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:Math.round((w-bw)/2),y:gap,w:bw},null,{kind:o.kind,seal:o.seal});return{story:sb}}
+  const mfh=Math.round(H*K.mfh);await kitScene.fig(L,msg,{cx:w*K.msgrX,top:H-mfh,fh:mfh,z:2});
+  const sb=kitDlgBox(L,o.storyTitle,o.story||[],{x:X,y:gap,w:BW},{y:ip?52:62},{kind:o.kind,seal:o.seal});const sh=Math.ceil(sb.getBoundingClientRect().height);
+  const hfh=Math.round(H*K.hfh),f2=await kitScene.fig(L,o.me,{cx:w*K.meX,top:H-hfh,fh:hfh,z:3});f2.dataset.half="1";f2.__half=1;/* her figure: WHOLE (feet on the floor band, never cropped by the layer: owner OD 23/11 ~20:27Z «no figure is ever clipped») at a clearly SMALLER scale than the speaker (hfh .62 / .64 H vs mfh .94 / .98 H, <= .7 of his height: OD 24/11 ~04:35Z «half body, small»); the boxes may lie over a figure in front of it, never the frame */
+  const cy=Math.max(gap+sh+12,Math.round(H*K.cTop)),cw=Math.round(w*K.cW);
+  const cb=kitDlgBox(L,o.choiceTitle,o.choice||[],{x:Math.round(w*K.cX),y:cy,w:cw,h:H-cy-gap},{y:26,side:"r"},{kind:o.kind,seal:o.seal,noSeal:true});return{story:sb,choice:cb}},
  close(now,cb){const C=kitScene.cur;kitScene.cur=null;if(!C){cb&&cb();return}const L=C.L;const off=()=>document.body.classList.remove("kscn-on");if(now||kscnCalm()){L.remove();off();cb&&cb();return}
   L.boxes.forEach(b=>b.animate([{opacity:1},{opacity:0,transform:"translateX(30px)"}],{duration:260,fill:"both"}));L.figs.forEach(f=>f.animate([{opacity:1},{opacity:0,transform:"translateX(-50px)"}],{duration:380,delay:120,fill:"both"}));
   L.animate([{opacity:1},{opacity:0}],{duration:420,delay:260,fill:"both"}).onfinish=()=>{L.remove();off();cb&&cb()}}};
 /* 93.3 the layout A dialogue box. nodes = DOM nodes or html strings; the node with class «opts» (or a list of kit option buttons wrapped by the caller) is the ONLY scroller */
-function kitDlgBox(L,title,nodes,pos,tail,ho){ho=ho||{};pos=pos||{};const b=document.createElement("div");b.className="dlg kpanel kscn-box"+(tail?" kscn-tl":"");
+function kitDlgBox(L,title,nodes,pos,tail,ho){ho=ho||{};pos=pos||{};const b=document.createElement("div");b.className="dlg kpanel kscn-box"+(tail?(tail.side==="r"?" kscn-tr":" kscn-tl"):"");
  b.innerHTML=typeof kpHeader==="function"?kpHeader(ho.kind||"choice",title||"","",ho.seal):`<div class="kph"><span class="kpht"><span class="kptitle">${title||""}</span></span></div>`;if(ho.noSeal)b.querySelectorAll(".kpseal").forEach(e=>e.remove());
  const c=document.createElement("div");c.className="kscn-col";(nodes||[]).forEach(n=>{if(n==null)return;if(typeof n==="string"){const t=document.createElement("div");t.innerHTML=n;while(t.firstChild)c.appendChild(t.firstChild)}else c.appendChild(n)});b.appendChild(c);
  b.style.cssText=`left:${pos.x||0}px;top:${pos.y||0}px;width:${pos.w||300}px;height:${pos.h?pos.h+"px":"auto"}`;if(tail)b.style.setProperty("--kty",(tail.y||40)+"px");
@@ -157,8 +175,8 @@ function kitResultCard(o){o=o||{};let t=document.getElementById("rtoast");if(!t)
  const SL=typeof kitResultSeal==="function"?kitResultSeal(o.ok==null?null:!!o.ok):{cls:"sure",t:"KẾT QUẢ"};const rows=(o.rows||[]).filter(r=>r&&r.items&&r.items.length);
  if(!rows.length)rows.push({k:"note",label:"Ghi chú",items:['<span class="ef n">ta không được gì, cũng không mất gì</span>']});
  const row=r=>`<span class="kr kr-${r.k||"note"}"><span class="krl">${r.label||""}</span><span class="krv">${r.items.map(x=>`<span class="kitem">${x}</span>`).join("")}</span></span>`;
- t.className="rtoast karesult "+SL.cls;t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${SL.t}</b><span class="kan">${o.title||""}</span></span>${o.sen?`<span class="ksen">${o.sen}</span>`:""}<span class="kb">${rows.map(row).join("")}</span></div>`;
- t.onclick=()=>t.classList.remove("on");void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),o.ms||9000);
+ t.className="rtoast karesult "+SL.cls;t.innerHTML=`<div class="rt"><span class="kat"><b class="seal">${SL.t}</b><span class="kan">${o.title||""}</span></span>${o.sen?`<span class="ksen">${o.sen}</span>`:""}<span class="kb">${rows.map(row).join("")}${o.kem&&typeof kitKemRow==="function"?kitKemRow(o.kem)/* KIT §7.4a: the ONE fold (kaResultRows K: ≤3 named + «Hậu cung: …» line) */:""}</span>${o.kem&&(o.kem.length||o.kem.more)?`<span class="kalog" role="button" tabindex="0">Xem đủ trong Sổ ghi</span>`:""}</div>`;
+ t.onclick=e=>{if(e&&e.target&&e.target.closest&&e.target.closest(".kalog")){const tb=document.querySelector('[data-tab="log"]');if(tb)tb.click();else{try{tab="log";renderPanel()}catch(x){}}}t.classList.remove("on")};void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(()=>t.classList.remove("on"),o.ms||9000);
  window.kaLastResult={title:o.title,ok:o.ok,seal:SL.t,sentence:o.sen||"",rows};return t}
 try{if(typeof KIT_SAMPLES!=="undefined"){
  KIT_SAMPLES.push({id:"§93.5",title:"kitNameTag · thẻ tên người chỉ biết mặt / chỉ biết nhà",where:"cảnh tuyển tú (sân chờ, hàng tú nữ, lượt 1–2), mọi chỗ cần tên người chưa rõ",html:()=>{const v=(typeof rivals!=="undefined"&&rivals[0])||{name:"Tô Uyển Nhi"};

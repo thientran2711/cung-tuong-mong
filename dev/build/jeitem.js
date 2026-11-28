@@ -54,11 +54,11 @@ function eitPilfer(p,G){if(p===S)EIT_PIL=null;try{if(!p||p.dead||p.out||!G||!G.l
  /* the dearest piece that really arrived this month */
  let best=null;for(const g of G)for(const e of (g.E||[])){const v=(IT[e.k]&&itm(e.k).pr)||0;if(!best||v>best.v)best={g,e,v}}if(!best)return null;
  const i=p.inv.indexOf(best.e);if(i>=0)p.inv.splice(i,1);best.g.E.splice(best.g.E.indexOf(best.e),1);best.g.n=Math.max(0,best.g.n-1);if(!best.g.n)best.g.lost=true;best.g.pil=1;
- hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};if(window.agOn&&agOn()&&hit!==p.maid){const v=best.v;X.sold=()=>eitPilSell(hit,v)}/* AG-ALL-2 G6: she sells it, as the maid player does (when unnoticed, or let off with it) */
+ hit.pilN=(hit.pilN||0)+1;const X={p,s:hit,k:best.e.k,g:best.g};if(window.agOn&&agOn()&&hit!==p.maid){const v=best.v;X.sold=()=>eitPilSell(hit,v);X.v=v}/* AG-ALL-2 G6: she sells it, as the maid player does (when unnoticed, or let off with it) */
  if(p!==S){eitPilNpc(X);return X}
  const P=BAL.eit.pil;const see=oddsCl(P.see+eyes(S)*P.seeMat+(S.maid&&S.maid!==hit&&(S.maid.loyal||0)>=BAL.loy.trust?P.seeMaid:0));
  if(roll(see))EIT_PIL=X;else if(X.sold)X.sold();return X}catch(e){console.error("eitPilfer",e);return null}}
-function eitPilBack(X){const p=X.p||S;const e={k:X.k,from:"noivu",d:S.turn};p.inv=p.inv||[];p.inv.push(e);if(X.g){X.g.E.push(e);X.g.n++;X.g.lost=false}}
+function eitPilBack(X){const p=X.p||S;const e={k:X.k,from:"noivu",d:S.turn};p.inv=p.inv||[];invAdd(p,e);if(X.g){X.g.E.push(e);X.g.n++;X.g.lost=false}}
 function eitIsMaid(s){return s===S.maid}
 /* how likely her master notices a pilfered piece (the NPC rule; the maid player's "Lén giữ đồ" card reads it as 100 − this) */
 function eitPilSee(p){const P=BAL.eit.pil;return oddsCl(P.see+((p&&p.tamco)|0)/4)}
@@ -87,6 +87,9 @@ function eitPilEvent(X){const s=X.s;const it=IT[X.k]||{n:X.k};const nm=it.n.repl
  const h=`<p>Kiểm lại đồ Nội vụ phủ phát, thiếu một ${STIP_UNIT[X.k]||"món"} ${nm.toLowerCase()}. Hỏi ra mới biết ${role} ${s.name} lén giữ lấy.</p>${kitRows([["Mất",`1 ${STIP_UNIT[X.k]||"món"} ${nm.toLowerCase()}`,"r"],["Gợi ý",`<span class="ef i">thiện cảm của ${s.name} với ngươi ${s.loyal|0}${s.spyFor?", có điều khả nghi":""}${s.pilN>1?`, đã ${s.pilN} lần`:""}.</span>`]])}`;
  const O=eitPilOpts(Object.assign({p:S},X)).map(o=>({n:o.n,fx:{},x:o.x,go:()=>{const r=o.go();if(r)log(r)}}));
  return{ev:1,t:"Kẻ hầu ăn bớt",who,h,opts:O}}
+/* save-unseen-lists r2 (rv r2 FIX 1, LAW 11): «Kẻ hầu ăn bớt» is carried as data (j3 rcpReg: the servant as an id, the piece kind, its price when
+   she would sell it); the piece itself left the chest before the card (eitPilfer) — the remake only rebuilds the answers, it never takes it twice */
+const eitPilCard=rcpReg("eitPil",(s,k,v)=>{if(!s||s.dead||s.alive===false)return null;const X={s,k};if(v!=null)X.sold=()=>eitPilSell(s,v);return eitPilEvent(X)});
 /* an NPC master who notices (eitPilSee) CHOOSES among the same four options (agent: punish / reward weights of her nết, a harsh nết ×harsh;
    BAL.ag.stf2.pilW); loop off → the old rule (harsh, else npcPun %) */
 function eitPilJudge(X){const p=X.p,P=BAL.eit.pil;const harsh=netRx(p,/Xảo quyệt|Kiêu ngạo|Thù dai|Kín đáo/);
@@ -108,7 +111,7 @@ function eitPilTake(ok){const m=srvM();const b=eitPilPick(m);if(!m||!b)return"";
  if(ok){const g=eitPilSell(S,b.v);return `Ngươi lén giữ ${nm} của ${m.name}, nhờ thái giám mang ra ngoài bán${g?`: Bạc +${g}`:""}.`}
  const X={p:m,s:S,k:b.e.k,g:null,sold:()=>eitPilSell(S,b.v)};return eitPilJudge(X)||""}
 (function(){if(typeof stipGoods!=="function")return;const g0=stipGoods;stipGoods=function(p,SK){const G=g0.apply(this,arguments);eitPilfer(p,G);return G};window.stipGoods=stipGoods})();
-(function(){if(typeof stipShow!=="function")return;const s0=stipShow;stipShow=function(){const r=s0.apply(this,arguments);try{if(EIT_PIL&&EIT_PIL.p===S)Q.push(eitPilEvent(EIT_PIL))}catch(e){console.error("eit pil ev",e)}EIT_PIL=null;return r};window.stipShow=stipShow})();
+(function(){if(typeof stipShow!=="function")return;const s0=stipShow;stipShow=function(){const r=s0.apply(this,arguments);try{if(EIT_PIL&&EIT_PIL.p===S)Q.push(eitPilCard(EIT_PIL.s,EIT_PIL.k,EIT_PIL.sold?EIT_PIL.v:null))}catch(e){console.error("eit pil ev",e)}EIT_PIL=null;return r};window.stipShow=stipShow})();
 
 /* ---------- 3. XIN CẤP LẠI Y PHỤC ---------- */
 /* how Nội vụ phủ regards her (0..100): rank, Sủng, a recent tip (jstip st.tip) up; every skim cause (thất sủng, a fault, a superior's grudge,
@@ -128,7 +131,7 @@ function eitAlt(bac,r){const R=BAL.eit.re;try{if(typeof altCost==="function")ret
  const T=BAL.bacTuan,K=BAL.altK;/* jstory (loads earlier) */const k=Math.abs(bac||0)*16/T[Math.max(0,Math.min(T.length-1,r|0))];
  return{suc:Math.max(R.suc,Math.min(K.sucMax,Math.round(k*K.suc))),pen:Math.max(R.altPen,Math.min(K.penMax,Math.round(k*K.pen)))}}
 function eitIssue(src,giver){const k=typeof earnPlainY==="function"?earnPlainY(S):null;if(!k||!WD_ITEMS[k])return null;const e={k,src,nvp:src==="nvp"?1:0,giver,d:typeof wdWhen==="function"?wdWhen():""};
- try{earnK(S,k)}catch(x){}if(!(wdOf(S)||{}).y){try{wdWearEntry(S,e)}catch(x){S.inv.push(e)}}else S.inv.push(e);S.tyNvp=null;
+ try{earnK(S,k)}catch(x){}if(!(wdOf(S)||{}).y){try{wdWearEntry(S,e)}catch(x){invAdd(S,e)}}else invAdd(S,e);S.tyNvp=null;
  try{if(typeof kitReward==="function"&&!window.__bot)kitReward({kind:"gift",title:src==="nha"?"Nhà gửi y phục":"Nội vụ phủ cấp y phục",from:giver,items:[{n:WD_ITEMS[k].n,d:"Y phục · đã mặc",img:WD_ITEMS[k].icon,tier:WD_ITEMS[k].g|0}]})}catch(x){}
  return WD_ITEMS[k].n}
 function eitReOpts(withWait){const R=BAL.eit.re,o=eitReOdds();const O=[];const wkL=Math.max(0,(S.tyNvp!=null?S.tyNvp:wk()+eitReWk(S))-wk());
@@ -144,13 +147,16 @@ function eitReDialog(){return{ev:1,t:"Xin cấp lại y phục",who:typeof pEunC
 /* the robbery card offers the roads at once (it said "Nội vụ phủ sẽ cấp lại áo sau N tuần") */
 (function(){if(typeof tyRob!=="function")return;const r0=tyRob;tyRob=function(){const r=r0.apply(this,arguments);try{if(r){const m=Q.find(x=>x&&x.t==="Bị giật y phục giữa đường");if(m){
   m.h=m.h.replace(/<p>Nội vụ phủ sẽ cấp lại áo sau \d+ tuần; muốn sớm hơn thì mặc áo khác trong Tư trang\.<\/p>/,`<p>Muốn có áo sớm, phải xin Nội vụ phủ hay nhờ nhà; trong Tư trang có áo khác thì mặc được ngay.</p>`);
-  m.opts=eitReOpts(true)}}}catch(e){console.error("eit rob",e)}return r};window.tyRob=tyRob})();
+  /* save r5 (LAW 11, unseen-card family): the card's options run code (eitReOpts), so it is made by a registered generator (rk) — the sổ carries it and a
+     load makes it again from (title, body); before, the robbery card was LOST-AT-WRITE (probe iPad seed 1, rv9) and a true reload dropped it */
+  const c=eitRobCard(m.t,m.h);if(c){m.opts=c.opts;if(c.rk){m.rk=c.rk;m.ra=c.ra}}else m.opts=eitReOpts(true)}}}catch(e){console.error("eit rob",e)}return r};window.tyRob=tyRob})();
+const eitRobCard=rcpReg("eitRob",(t,h)=>typeof t==="string"&&typeof h==="string"?{t,kind:"notice",act:1,h,opts:eitReOpts(true)}:null);
 /* the family's robe arrives */
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{eitWeek()}catch(e){console.error("eitWeek",e)}return r};window.endTurn=endTurn})();
 function eitWeek(){if(!S||S.dead)return;
  if(S.tyFam&&wk()>=S.tyFam.w){const F=S.tyFam;S.tyFam=null;if(F.ok){const nm=eitIssue("nha",S.origin?`Nhà ${S.origin.n||""}`.trim():"Nhà");if(nm)log(`Nhà gửi vào cung ${nm}.`)}else log("Thư nhà đến: nhà không gửi được áo vào cung.")}
  /* NPCs: every consort keeps one girlhood robe in her chest (fallback outfit) */
- for(const v of liveRivals(true)){if(!v||v.girl||v.out)continue;v.girl=1;try{const k=typeof wdPickAt==="function"?wdPickAt(1,"y",0):null;if(k&&WD_ITEMS[k]){v.inv=v.inv||[];v.inv.push({k,from:"kc",src:"kc"})}}catch(e){}}}
+ for(const v of liveRivals(true)){if(!v||v.girl||v.out)continue;v.girl=1;try{const k=typeof wdPickAt==="function"?wdPickAt(1,"y",0):null;if(k&&WD_ITEMS[k]){v.inv=v.inv||[];invAdd(v,{k,from:"kc",src:"kc"})}}catch(e){}}}
 /* Tư trang → Việc: "Xin cấp lại y phục" while she is in trung y */
 (function(){if(typeof invHTML!=="function")return;const h0=invHTML;invHTML=function(){let h=h0.apply(this,arguments);try{if(!eitReNeed())return h;
   const b=pbtn(`data-eitre="1"`,"Xin cấp lại y phục",`thành: lót tay, sai cung nữ đi xin hay viết thư về nhà`,Q.length?"đang có việc":"");
@@ -161,11 +167,11 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 function girlChest(p,o){o=o||{};p=p||S;const L=[];const who=o.who||"Mẫu thân";p.inv=p.inv||[];
  try{wdOf(p)}catch(e){}/* jearn: the court's starting kit first */
  /* o.wear (the home road, jkc kcChest): she wears all of it; else (palace road) the court issue stays worn and the robe + hairpin go in the bag */
- try{if(WD_ITEMS.tramngoc){const e={k:"tramngoc",from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else p.inv.push(e);L.push(e)}
-  const yk=(o.wear&&typeof wdDefault==="function"?wdDefault(p,"y"):null)||wdPickAt(1,"y",0);if(yk&&WD_ITEMS[yk]){const e={k:yk,from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else p.inv.push(e);L.push(e)}}catch(e){console.error("girlChest wd",e)}
+ try{if(WD_ITEMS.tramngoc){const e={k:"tramngoc",from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else invAdd(p,e);L.push(e)}
+  const yk=(o.wear&&typeof wdDefault==="function"?wdDefault(p,"y"):null)||wdPickAt(1,"y",0);if(yk&&WD_ITEMS[yk]){const e={k:yk,from:"kc",src:"kc",giver:who,d:typeof wdWhen==="function"?wdWhen():""};if(o.wear)wdWearEntry(p,e);else invAdd(p,e);L.push(e)}}catch(e){console.error("girlChest wd",e)}
  for(const k of ["vongbackc","ngocboikc","tuithom"]){if(!IT[k])continue;const sl=itm(k).sl;if(o.wear)p.inv.forEach(x=>{if(x&&x.w&&IT[x.k]&&itm(x.k).sl&&wearGrp(itm(x.k).sl)===wearGrp(sl))delete x.w});
-  const busy=p.inv.some(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl&&wearGrp(itm(x.k).sl)===wearGrp(sl));/* DRESS-FIX: Túi thơm shares the Đeo eo slot */const e={k,from:"kc",giver:who};if(!busy)e.w=1;p.inv.push(e);L.push(e)}
- if(IT.khantay){const e={k:"khantay",from:"kc",giver:who,d:S.turn||0};p.inv.push(e);L.push(e)}
+  const busy=p.inv.some(x=>x&&x.w&&!x.h&&IT[x.k]&&itm(x.k).sl&&wearGrp(itm(x.k).sl)===wearGrp(sl));/* DRESS-FIX: Túi thơm shares the Đeo eo slot */const e={k,from:"kc",giver:who};if(!busy)e.w=1;invAdd(p,e);L.push(e)}
+ if(IT.khantay){const e={k:"khantay",from:"kc",giver:who,d:S.turn||0};invAdd(p,e);L.push(e)}
  p.girl=L.map(e=>e.k);return{who,L}}
 function girlChestShow(c){if(!c||!c.L.length||window.__bot)return;try{if(typeof kitReward!=="function")return;
  const it=e=>{if(WD_ITEMS[e.k]&&!IT[e.k]){const w=WD_ITEMS[e.k];return{n:w.n,d:w.sl==="y"?"Y phục · cất trong Tư trang":"Cài tóc · cất trong Tư trang",img:w.icon,tier:w.g|0}}
