@@ -3672,6 +3672,7 @@ Registry: §54 = game-feel parts (coordinator). Samples on the kit page (#kit): 
   names the item (tịch thu · cướp · trộm · đòi / bắt nạt · soát / vứt · mất → lose; bán / cầm → sell; tặng / dâng → give; uống / dùng / đeo… →
   use), else fade. Silver: S.bac below the snapshot → coins out (purchases: kitGain reveal + coins out); sales → coins in.
   Entries ever seen (bag or worn) never re-reveal (taking a garment off, a veil off, redeeming a pawn = no kitGain).
+  HOME AGAIN (KK69, RV-182 iPad ring repro): a piece that leaves S.inv and comes back in the SAME step (a gift sent back «Trả lại quà» — jrcv `back` re-adds a copy —, a co-op gift returned, any give-then-return) is neither a gain nor a loss: kmDiff pairs it by the item-ledger id `iu` when both carry one (the same piece, law 6c), else by the same key, and fires no kitGain reveal and no kitLose for it (the act's own result card already says «về Tư trang»). Hook `KFX.back` = pairs seen. Test `dev/test/kit/gift-back.js`.
 - Off: "Cảnh động" off / reduced motion → no flights, the card still shows, chip/frames static; bots / quiet → nothing. Test `dev/test/item-lose.js`.
 
 ## 55. KHẢO HẠCH TẤN PHONG — promotion exam (owner 15/11 17:20Z, review/promo-exam · `dev/build/jexam.js`)
