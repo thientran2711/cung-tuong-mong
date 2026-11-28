@@ -815,10 +815,10 @@ function rqFlush(all){if(!CW.on)return;const n=Date.now(),k=RQK();CW.rq=CW.rq.fi
 COOP.on("peer",on=>{if(on)setTimeout(()=>rqFlush(true),600)});COOP.on("room",()=>{rqLoad();setTimeout(()=>rqFlush(true),900)});
 setInterval(()=>{try{if(CW.on&&CW.rq.length)rqFlush(false)}catch(e){}},2500);
 /* review/coop-rebirth-resync (coop-e2e SWAP1 on LIVE f7ea14b7, week 1: guest pend:true, sent -1, Q 0, no modal, not frozen, > 90 s): every
-   pending step (her week end CW.pend, a held buổi CW.pendBuoi, a wanted step CW.wantB, her night CW.nrdy / CW.ngoW) is retried only when an
+   pending step (her week end CW.pend, a held buổi CW.pendBuoi, a wanted step CW.wantB) is retried only when an
    event calls soonEnd (render, closeModal, status, an ack); a gate that clears with no event (a card dropped from Q, a mini-game closed, a
    res ack lost) left the seat waiting for ever. One heartbeat retries them all (soonEnd keeps its own guards; tryEnd re-checks every gate). */
-setInterval(()=>{try{if(CW.on&&S)soonEnd()}catch(e){}},2500);
+setInterval(()=>{try{if(CW.on&&S&&(CW.pend||CW.pendBuoi||CW.wantB))soonEnd()}catch(e){}},2500);/* not the night flags: nCheck would re-enter an open night choice / game every beat (her night runs on its own events) */
 const rsSeen=id=>seenIds.has("r"+id)||(!!S&&Array.isArray(S.coopRs)&&S.coopRs.includes(id));
 function onRes(m){if(!CW.on||m.from===CW.seat||!S)return;if(rsSeen(m.id)){COOP.send({t:"actr",id:m.id,ok:true,ack:1});return}seenIds.add("r"+m.id);
  S.coopRs=(S.coopRs||[]).concat([m.id]).slice(-80);
