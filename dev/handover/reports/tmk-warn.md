@@ -338,3 +338,12 @@ PRIORITY #1 CHECK: OD — (worker continues TMK-WARN on its own branch) | main 5
   for an unknown witness and the left figure is the player «(ta)».
 - 44cfa57d (KK73 UPDATE 13:32Z): merged too after the gates (2-parent); its jopic.js / KIT.md equal HEAD's, dev/build unchanged vs the gated e4a5a2c8 → gates stand.
 - RV READY → RV-191 (session_01Rc5AsJMqvd2gqa6vFecdR5). Land after or with K-HINT-KEM (RV-190); if RV-190 FAILs K-HINT-KEM, re-merge KK73's fix sha.
+- UPDATE ~14:25Z (MAIN 189): LIVE moved to 42b55b80 → merged (96637881, 2-parent). Real conflict in KIT.md §6.2b: kept KK73's K-HINT-KEM ROWS
+  line (= 44cfa57d's) + LIVE's new K-GROUP-COST line (LIVE's ROWS line was unchanged from base). index.html/sw.js rebuilt.
+  Gates re-run on 96637881: witcard Fold 19/19 + iPad 19/19, nokem exit 1; kit-std-scan HEAD 6 (X06 4, X08 2) = LIVE 6; tmk-warn.test 17/17;
+  tmk-warn-scan 0; tai-mat-know 24/24 + scan 0; webkit-syntax 0; kit-hand-dupmat 18 OK; kit-hand-split 0; press-keep PASS; kit-hint-kem Fold
+  300/300. kit-hint-kem iPad: random-world FAIL caught = «door P10 … «Ép nộp của · nhẹ»: Bại «Danh −, oán +» = only «hỏng thì …»». Cause = the
+  census check `parts.some(x=>bai.includes(x))` is a substring test: batnat's hint has «oán» in BOTH the «nhưng» part (success: «nàng oán ngươi»)
+  and the «hỏng thì» part (refusal: «Danh −, nàng oán»; jtsb AOUT.batnat), so the same chip legitimately sits in Kèm and Bại → census false
+  positive, not a kit fault. Census test = kit keeper's file (K-HINT-KEM, KK73) → reported to KK73 + RV-191, not edited here. The other «cards 0»
+  iPad run = a world with no rolled hint card → only the «at least one card» line failed.
