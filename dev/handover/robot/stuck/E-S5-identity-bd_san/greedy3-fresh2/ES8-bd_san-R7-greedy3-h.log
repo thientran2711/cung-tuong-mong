@@ -1,0 +1,30 @@
+GAME BUILD {"s":"5fb13d60+","b":"8af7b3429f38","t":"2026-11-27T21:15Z"}
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/binh.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/binh.webp
+BOARD hat 128 moves 2/10 raw 0.00 (22 s, area 0, bold)
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-tutin.webp
+BOARD hat 108 moves 3/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 140 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 133 moves 5/10 raw 0.00 (22 s, area 0, bold)
+BOARD mua 29 moves 10/10 raw 10.00 (29 s, area 0, bold)
+BOARD hat 125 moves 6/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 120 moves 6/10 raw 0.00 (22 s, area 0, bold)
+BOARD mua 20 moves 7/10 raw 6.67 (30 s, area 3, bold)
+BOARD hat 134 moves 7/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 111 moves 7/10 raw 0.00 (21 s, area 0, bold)
+EXIT ROAD (only option — real ending) «Rộng lượng đề xuất cung đẹpTốnSức 12ĐượcDanh +++, Đức ++MấtSủng −−, Tâm cơ −−−Gợi ýDanh ++»
+CP buổi 50 year 1 save 83770 chars
+BUG SAVE STALE stored b<1 live b50 chars 78617 (stored clock unreadable, live 1.4.0.1)
+BUG game SAVE STALE: the stored save stopped following the live game (no setItem error seen)
+BOARD tho 0 moves 0/10 raw 0.00 (83 s, area 44, bold)
+BOARD hat 183 moves 7/10 raw 0.00 (22 s, area 0, bold)
+BOARD doden 14 moves 9/10 raw 10.00 (5 s, area 0, bold)
+BOARD hat 162 moves 7/10 raw 0.00 (22 s, area 0, bold)
+BUG game item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls ()
+BOARD hat 109 moves 8/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 129 moves 8/10 raw 0.00 (22 s, area 0, bold)
+BOARD hat 121 moves 8/10 raw 0.00 (22 s, area 0, bold)
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Kẻ hầu xin)
+LIFE IDENTITY CHANGE at buổi 80 (name Điền Tịnh Sơ → Thiệu Tuyết Kiến, birth year -17 → -18; clock 1.0.0.0) — a different life is on the page; hard stop, this life is VOID (never counted)
+BUG harness LIFE IDENTITY CHANGE at buổi 80 (name Điền Tịnh Sơ → Thiệu Tuyết Kiến, birth year -17 → -18; clock 1.0.0.0) — a different life is on the page; hard stop, this life is VOID (never counted)
+LIFE VOID ES8-bd_san-R7-greedy3-h (identity change) · buổi 80
