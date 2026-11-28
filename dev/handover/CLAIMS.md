@@ -802,3 +802,4 @@ B-COOP-REBIRTH-RESYNC r4 (successor of r3 2oQWGfQi; room-e co-op hang PLAY-STOPP
 Robot life flight2-s2k Fold cautious seed 2026112577 on LIVE origin/main | review/flight2-s2j (or s2k branch per seat) | session_01UV1SzgzrhdKkkkfVybpEZe (s2e #2 seat, Foreman F ROOT 8 c1) | RUNNING | 28/11 11:55Z
 Robot life flight2-s2l Fold greedy seed 2026112578 on LIVE origin/main | review/flight2-s2 | session_01UV1SzjQERdD2dGp3iaAv58 (sonnet seat s2 #3, Foreman F ROOT 8 c1) | RUNNING | 28/11 12:00Z
 Robot life flight2-s2k Fold cautious seed 2026112577 | — | session_01UV1SzgzrhdKkkkfVybpEZe | DONE (Ban hoa b1, VALID, 09b74f78) | 28/11 11:59Z
+B-ROW12 r3 FIXER (rv r2 FAIL 4 items, reports/row12-leave.md «## REVIEW r2») | review/row12-leave-r3 | PENDING | RUNNING | 28/11 12:08Z (Foreman B ROOT 3 child 3)
