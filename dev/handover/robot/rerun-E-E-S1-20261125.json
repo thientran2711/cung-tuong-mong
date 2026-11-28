@@ -2625,5 +2625,53 @@
     }
    ]
   }
- ]
+ ],
+ "finalHandover": {
+  "date": "2026-11-28",
+  "runner": "E-S1 (session_01DgYSWpfx9EuQ7nBDWNiLL4)",
+  "ownValid": 25,
+  "ownTotal": 27,
+  "forES7": [
+   "ES7-R8-speed-4-h",
+   "ES7-R8-speed-5-h"
+  ],
+  "notValidFBlocked": [
+   {
+    "row": "speed 2305435383",
+    "dev": "ipad 1180x820",
+    "origin": "thd",
+    "road": "thd_tho",
+    "botHarness": "bold (persona speed)",
+    "life": "E-S1-R1-speed-3-2305435383",
+    "reason": "debut board «ve» / «kim» left at 0–2 of 10 moves after 97 s, then «Quay lại» → Ban hoa (b1) or Điện tuyển/Trả thẻ bài → «Nữ phu tử» (b282) = ending follows the unplayed trial → INVALID by Foreman E rule",
+    "runs": [
+     "run1 2df8f5fa ipad, board 1 move → Ban hoa b1",
+     "run2 2df8f5fa unclear board → INVALID",
+     "run3 f65d019b?/97e55a457 LIVE fb660cb78eec: ve 2/10 → Ban hoa b1",
+     "run4 f65d019b, LIVE ef5d32d4ff1e (s 066d9af0+) pin=0: dan 1/10 + kim 2/10 raw 0.00 (97 s, 58 area taps) → Nữ phu tử age 20 y3 b282"
+    ]
+   },
+   {
+    "row": "random 3683447523",
+    "dev": "fold",
+    "origin": "thd",
+    "road": "thd_tho",
+    "botHarness": "rand (persona random)",
+    "life": "E-S1-R1-random-5-3683447523",
+    "reason": "same family: kim 2/10 (97 s) → Điện tuyển → Trả thẻ bài → «Nữ phu tử» b280 (97e55a457); ve 2/10 (97 s, 19 area taps) → Ban hoa b1 (f65d019b)",
+    "runs": [
+     "run1 8ea10d7e fold unclear board → INVALID",
+     "run2 97e55a457, LIVE fb660cb78eec pin=0: dan 0/10 + kim 2/10 raw 0.00 → Nữ phu tử age 20 y3 b280",
+     "run3 f65d019b, LIVE ef5d32d4ff1e pin=0: ve 2/10 raw 0.00 (97 s) → Ban hoa age 18 y1 b1"
+    ]
+   }
+  ],
+  "howToRerun": "Wait for F «HARNESS READY» for the kim/ve board-input fix (harness sha on review/robot-realtap, >= the one that plays ve/kim). In a fresh worktree of that sha: DELETE <out>/profile-<life> first, then (iPad) node dev/test/robot-rt.js https://thientran2711.github.io/cung-tuong-mong/ <out> dev=ipad origin=thd road=thd_tho bot=bold seed=2305435383 life=E-S1-R1-speed-3-2305435383 pin=0 ; (Fold) ... dev=fold origin=thd road=thd_tho bot=rand seed=3683447523 life=E-S1-R1-random-5-3683447523 pin=0 ; start detached (setsid nohup), keep one Monitor armed; the life is valid only if the debut boards «ve»/«kim» are really played (moves 10/10 or a real result) and the life then goes to a real end. Evidence of the failed runs: runner out dir invalid-trial-unplayed/* (logs, json, shots; not in git).",
+  "builds": [
+   "LIVE fb660cb78eec (97e55a457 era)",
+   "LIVE ef5d32d4ff1e (s 066d9af0+) with f65d019b",
+   "earlier 5ab5b80e406e etc."
+  ],
+  "alsoNote": "greedy 1522350896 (fold) is DONE (valid, 25th): Lãnh cung age 40 b3154; gift picker fixed on ui3/kri-xl; end card clean on LIVE s=7be54246."
+ }
 }
