@@ -37,3 +37,4 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 08:00Z RV-182 LAND kk69-giftback 991a1b72 (on ui2). Staged review/lc35-ui4 353f8cee = ui3 5f3ad071 + 991a1b72 (rebuilt, KIT.md union ok, 0 del, webkit 0).
 - u3 tests retargeted to ui4 353f8cee (superset of ui3).
 - 08:15Z ui2 b1a0d4e9 quickcheck (alone): CORE GATES FAIL = G4 94-q-softlock (known-LIVE 4 iPad rows) + G4 95-next-dead FIX-6 FAIL 2 (iPad B «S.mg with no mini-game → healed»; B's coop-qcard report notes next-dead flaking inside quickcheck, PASS alone). TIME-SPILL PASS. Serial seq.sh: dayq test → next-dead ×2 on ui2 + ×1 LIVE 22afefb4 → dayq quickcheck → u3 (ui4 tests).
+- 08:25Z MAIN 188 asks: giftback delta 4d59d326 (at RV-182) → swap in when PASS; bisect kit-std-scan 16 vs baseline 6 (KK69) — my hook-96 runs show 6 on 22afefb4 tree and ui2 (scan mode differs; asked KK69's command); MODGATE (assemble modules ⊇ LIVE, scratch modgate.sh) added: all staged units 484 ⊇ 484.

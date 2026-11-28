@@ -5,7 +5,7 @@ for i in 1 2 3 4 5; do
  flock /home/user/wt/fetch.lock git -C /home/user/cung-tuong-mong fetch -q --depth=30 origin +refs/heads/$HB:refs/remotes/origin/handover || { sleep 5; continue; }
  if [ ! -d $W ]; then git -C /home/user/cung-tuong-mong worktree add -q --no-checkout --detach $W origin/handover; git -C $W sparse-checkout set --no-cone '/dev/handover/'; fi
  cd $W; git checkout -q --detach origin/handover -f
- cp $S/lc35.md dev/handover/reports/land-chain-35.md; mkdir -p dev/handover/reports/lc35-tools; cp $S/hpush.sh dev/handover/reports/lc35-tools/
+ cp $S/lc35.md dev/handover/reports/land-chain-35.md; mkdir -p dev/handover/reports/lc35-tools; cp $S/hpush.sh $S/modgate.sh $S/ui.sh $S/u3.sh $S/seq.sh dev/handover/reports/lc35-tools/
  git add dev/handover/reports/land-chain-35.md dev/handover/reports/lc35-tools
  git -c user.name=LC35 -c user.email=noreply@anthropic.com commit -q --no-verify -m "LC35: $1
 
