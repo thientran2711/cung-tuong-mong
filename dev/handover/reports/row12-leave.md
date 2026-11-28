@@ -95,3 +95,57 @@ KIT CHECK: reuses pushDil/PEND standard dialog + j67 «tốn · thành · hỏng
 - accw.test.js (Fold 755x1000) on 4480ae6e: 22/22 ok, 0 page errors (×1; confirms the 4-act hook works as claimed).
 - Not run after the FAIL was clear (device shots, accw ×3/MUTATE/base, punish-*, leave-palace, oldsave-r1): the worker's numbers stand as theirs, not re-proved here; the r2 rv must run them all.
 Shots: none taken (nothing uploaded, nothing to wipe).
+
+## r2 (B FIXER ROW 12 leave r2, session_01N1tNP4252yURGUqLCgK7NK, opus; START_CTX ~5 %) — 11/28/2026
+PRIORITY #1 CHECK ('row12|accw|warning before punishment|OD L2531|PUNISH-TIER'): OD L2531 (25/11 ~23:33Z) + row 12 WORKLIST_OPEN | main LIVE aecbc267 (lr-rules-r3 = psl4 57f6e2c4 + rules chain: RV-184 one-core scanner fix 617ea888 + stale-tests-8 chReady perf fix abda1390) | review/* review/row12-leave 4480ae6e → review/row12-leave-r2 | claims B-ROW12-LEAVE r2 FIXER = this session.
+KIT CHECK: reuses pushDil / PEND standard dialog + j67 «tốn · thành · hỏng» line + Tốn row from ton:{bac} + pv() figure + oddsCl words + kitNotice (the month-ahead warning) — no new kit part.
+Base: review/row12-leave 4480ae6e + merge LIVE aecbc267 (psl4 57f6e2c4 no longer moving; LIVE already holds psl4 + the rules chain) — only index.html / sw.js conflicted (rebuilt).
+
+### What changed (rv FAIL list 1–3 + quickcheck)
+1. **LAW 11 / OD L2531 — ONE warn-then-punish path for the whole family** (dev/build/jaccw.js, now assembled LAST so its wrap is outermost; also re-wraps after the j95 load timer):
+   - every punishment core is wrapped: punish · fall · demote · chPunishX (chPunish / chConfess / chLie / chBack fall through it) · deathSentence · cold · punTier · srvAffairCaught · chSrvEnd · srvLaundry · **srvKill** (new named core in j42 for «sai đánh chết», was a bare die()).
+   - the gate holds a core that would land on HER when the road is not her own choice: world turn (nextBuoi / endTurn context: monthly checks, raid, servant-life search, faction, birth omen …), an NPC doer (runAct of an NPC / a «by» / ACTX / CHX accuser), or a witness road inside her action (menReport / rtReport). Her own card tap (chooseM) and her own act (runAct a===S) fall at once — the card already named the risk.
+   - held = a plain record in S.accw (core name + serialised args + CHX/PUNT snapshot) + her kit dialog «Sắp bị trị tội»: who brought it, the matter, the penalty if it sticks (the core's own rule words: aaPunishTxt / punTierTxt / chPunTxt), when (BAL.accw.due buổi); on that buổi the held core runs exactly as it would have (whole wrapped chain, gate passing). Same matter twice = one record; two matters = two.
+   - three tiers: Nhẹ «Nhận tội trước» (the same penalty one step lighter now) · Vừa «Dàn xếp với A» (only with an NPC accuser; bạc to A, paid only if A takes it, refund on refusal; A hands back that charge's pieces) · Nặng «Cầu P che chở» (gift to the Hoàng hậu or into the Thái hậu's household S.thO; success = case shelved AND the accuser loses EVERY piece she holds on her + Danh − + oán).
+   - monthly checks warn a month ahead (j30 demoteReview): Sủng under the floor → kit notice «Sủng của ngươi (n) dưới mức f của …; thêm một tháng như vậy sẽ bị giáng một bậc», long illness → «… tháng sau nếu Sức khỏe còn dưới 35 …» (BAL.accw.sickSuc); the next month's fall is then already warned (awOk). An old save already mid-count without the notice → held + warned by the gate.
+   - already-warned world road: place-close overstay (plaque notice) runs inside awOk.
+2. **LAW 1 + brief check 4** — her Tố giác / Tố tội thật / Bóc chuyện tư tình and her «Xử tội» as Hoàng hậu (also with no charge) now PREPARE 2 buổi like an NPC's; the NPC target answers the same list: confess (lighter now), seek a patron (her pieces burnt, her Danh −), **offer HER a settlement** (new dialog «Xin dàn xếp»: «Nhận bạc, bỏ vụ tố» / «Không nhận, cứ tố»), or wait; on the due buổi her act runs by itself (due runner).
+3. **LAW 2 / 6c** — Nặng is a different, bigger kind (all the accuser's pieces on her burnt, not one charge's) and dearer (150 vs ≤120); odds base Nặng 60 > Vừa 45 (a band apart: Có cơ vs Tùy duyên); the Thái hậu gift goes into S.thO.bac (a real owner), the Hoàng hậu's into her purse.
+4. quickcheck G1 DIFF ×2 (jph:173 / jkpick:141) was the psl4/LIVE side — fixed upstream by RV-184 617ea888, now in LIVE aecbc267. Perf: see quickcheck below (branch vs LIVE aecbc267, which = psl4 + the rules chain incl. the chReady perf fix).
+
+### LAW 11 family — before / after (the reviewer's roads a–n)
+| # | road | r1 4480ae6e | r2 |
+|---|---|---|---|
+| a | j30 demoteReview low Sủng | silent month 1, demoted month 2 | month 1 kit notice (awPre); month 2 falls warned; unwarned → held + dialog |
+| b | j30 long-illness demote | none | month-ahead notice (sick===1); then falls warned |
+| c | NPC «Xin Hoàng hậu giáng» → rcvJudge → demote | none | demote held (NPC doer, runAct npc ctx) + dialog |
+| d | j8 monthly raid → search → fall / punish | none | held (world ctx) + dialog |
+| e | j92 / jshelf / jdress hặc ăn mặc · vượt phẩm · xa xỉ | none | punish held (NPC act) + dialog |
+| f | jmen menReport / jroute rtReport witness | none | menReport / rtReport run in npc ctx → held + dialog |
+| g | j8:512 bribed maid sells her schemes | none | punish held (world ctx) |
+| h | jagstaff accuse (her servant → Hoàng hậu) | none | fall held (ACTX = the queen / world ctx) |
+| i | j10 faction hợp mưu / sell-out | none | fall / punish held |
+| j | j8 kframe (son framed) | chance tell only | punish held (NPC act) |
+| k | jtsb bully report to the Hoàng hậu | none | chPunish held (NPC doer / CHX accuser) |
+| l | j14 minh oan exposes her · j8 birth omen | none | fall / punish held |
+| m | jaccw judge() fallback (no charge) | punished at once | j8 judge punish held by the gate (NPC queen); her own Xử tội prepared |
+| n | jcharge chSrvEnd · j42 chest search / pregnancy (srvAffairCaught) · j42 «sai đánh chết» | none | chSrvEnd / srvAffairCaught / srvLaundry / srvKill held + dialog |
+Scan (dev/test/accw-scan.js, guard): **169 core call sites → all through the wrapped cores (gate)**; **47 direct punishment writes** (confined= / rank=punDown / seatPut / S.out= / die(«… đánh chết») / over(«Bị đuổi»)) → 47 reasoned (inside a core, a release/pardon, her own card, NPC-only, quarantine, view trick), **0 unknown**; jaccw.js last module; every core wrapped. A new direct write → FAIL. `node dev/test/accw-scan.js --table` prints the full per-site tables.
+Not punishments (not gated, by design): deaths by murder / illness / childbirth (die() from poison, sickness …), Danh / Sủng hits of rumours, quarantine (j13 epidemic). NPC victims of world / NPC roads fall at once (no player to warn; NPC acts on NPCs prepare at act level as in r1).
+
+### Tests (this box, ONE browser process at a time)
+| test | result |
+|---|---|
+| accw.test.js (Fold 755x1000) | branch **57/57 ×3** · LIVE aecbc267 **FAIL 2/9** (no dialog) · MUTATE (BAL.accw renamed → jaccw off) **FAIL 2/9** |
+| accw-scan.js | PASS (169 → gate, 47/47 reasoned, 0 unknown) |
+| punish-tier Fold + iPad · punish-wit · charge-smoke · charge-taps · dup-piece-scan | ALL PASS |
+| charge-followups · charge-trinh-punish | PASS with __awoff=1 (they test the penalty notice rows; without it they FAIL only because the penalty is now held — the held dialog text shows in the FAIL line) — same honest rule as r1's 6 penalty-core tests |
+| leave-palace.test | 135/135 |
+| one-core-guard | PASS |
+| q-softlock (alone) | PASS |
+| oldsave-r1 (LIVE aecbc267 save → branch) | 16 ok / 0 FAIL |
+| save mid-wait | accw.test: real save() → deser(loadSlot) with a held record: record + her card back, then falls once on its day |
+| quickcheck ALONE 0654c1cc vs LIVE aecbc267 (quiet box) | **PASS** 2174 s · core gates PASS (one-core-guard G1: 0 DIFF — the jph/jkpick rows are gone with RV-184 in LIVE · rules-one-source · kit-conform · coop-one-world · 17 hooks incl. q-softlock) · time-spill PASS · open 2180 ms 0 errors · old save from LIVE loads + plays a buổi · perf median of 3 new/live: render 325/314 ms, tab 612/621, buổi 1889/1761, **longTasks>200ms 47/48** (limit 56) — the r1 62/37 was the psl4 base vs c03d6ee7, gone on LIVE aecbc267 (stale-tests-8 chReady fix); this branch adds none |
+Shots (scratch /home/user/wt/r12r2-shots, not uploaded; Fold 755x1000@2 + iPad 1180x820@2; looked at: core dialog ×3 (one full-size Fold pass), act dialog ×2, tiers / offer / notice ×1): «Sắp bị trị tội» (accuser named, matter, penalty, 2 buổi; Nhẹ Tốn không / Vừa Tùy duyên–Khó lường Tốn Bạc 20 / Nặng Có cơ Tốn Bạc 150), Nhẹ tapped → kit punishment notice «Cấm túc · mức tội nhẹ · giáng phẩm không», Vừa → bạc 500→480 no penalty, Nặng → 500→350 no penalty, «Sắp bị tố giác» act dialog (Bạc 60 / 150), «Xin dàn xếp» (her accusation, 60 lượng offered), month-ahead Sủng kit notice; no overflow, 0 page errors.
+
+SẴN SÀNG KIỂM review/row12-leave-r2 0654c1cc932f69783c2b32523f47307125e081b9 (BIG; on LIVE aecbc267).
