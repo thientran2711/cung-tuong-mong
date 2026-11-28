@@ -13,7 +13,11 @@
    Mourning clothes in quốc tang stay a Nội vụ phủ issue to everyone. Old saves: worn base items become real starting-kit
    items (same item, nothing visible changes). */
 function earnK(p,k){if(!k)return;if(p===S){S.wdk=S.wdk||{};S.wdk[k]=1}else{p.wdk=p.wdk||{};p.wdk[k]=1}}
-function earnPlainY(p){const P=Math.min(8,wdPOf(p));let L=WD_LIST.filter(r=>r[1]==="y"&&r[3]===P&&r[4]===0&&!WD_SRVONLY.includes(r[0])).map(r=>r[0]);if(!L.length)L=wdPool("y",P,true);return L.length?L[wdHash(wdKey(p)+"y0")%L.length]:null}
+function earnPlainY(p){const P=Math.min(8,wdPOf(p));let L=WD_LIST.filter(r=>r[1]==="y"&&r[3]===P&&r[4]===0&&!WD_SRVONLY.includes(r[0])).map(r=>r[0]);if(!L.length)L=wdPool("y",P,true);
+ /* DRESS-FIX (owner OD 26/11 ~18:50Z (5) «4–5 bộ giống nhau»): never a copy of a robe she already owns (chest or worn); only when she owns them all, the stable pick */
+ try{const own=new Set((p.inv||[]).filter(e=>e&&!e.h).map(e=>e.k));const w=p.wd||{};if(w.y)own.add(w.y.k);const F=L.filter(k=>!own.has(k));if(F.length)L=F;
+  else{const G=wdPool("y",P,true).filter(k=>!own.has(k)&&!WD_SRVONLY.includes(k));if(G.length)L=G;else if((p.inv||[]).some(e=>e&&!e.h&&WD_ITEMS[e.k]&&WD_ITEMS[e.k].sl==="y"))return null/* every robe of her phẩm is already hers and one sits in her chest: nothing to issue, she wears her own */}}catch(e){}
+ return L.length?L[wdHash(wdKey(p)+"y0"+((p.tyRobbed|0)||""))%L.length]:null}
 function earnFromChest(p,sl){const P=Math.min(8,wdPOf(p));const L=(p.inv||[]).filter(e=>e&&!e.h&&wdItem(e)&&wdItem(e).sl===sl&&e.k!=="y_tang"&&wdBelPE(p,e,p)<=P);
  if(!L.length)return null;L.sort((a,b)=>wdBelPE(p,b,p)-wdBelPE(p,a,p));const e=L[0];p.inv.splice(p.inv.indexOf(e),1);return e}
 (function(){if(typeof wdOf!=="function")return;const o0=wdOf;wdOf=function(p){const w=o0.apply(this,arguments);if(!w||!p)return w;try{

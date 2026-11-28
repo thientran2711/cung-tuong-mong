@@ -111,7 +111,7 @@ try{for(const L of [DIRTY,RT_HARM,EMO_HARM,WHY_NOSEND])if(L&&!L.includes("xx"))L
 try{if(ORD70&&ORD70.giuchung&&!ORD70.giuchung.acts.includes("xx"))ORD70.giuchung.acts.push("xx")}catch(e){}
 
 /* ---------- K1 wear row: 8 wear slots (+ Hoa tai, Giày: GAP IT03) + the follow pet (KIT §28.14, kitItem cells; marks only when seen) ---------- */
-const DS_SLOTS=[["tram","Cài tóc"],["ear","Hoa tai"],["wrist","Đeo tay"],["waist","Đeo eo"],["scent","Túi thơm"],["veil","Khăn che mặt"],["y","Y phục"],["shoe","Giày"],["pet","Theo hầu"]];
+const DS_SLOTS=[["tram","Cài tóc"],["ear","Hoa tai"],["wrist","Đeo tay"],["waist","Đeo eo"],["veil","Khăn che mặt"],["y","Y phục"],["shoe","Giày"],["pet","Theo hầu"]];
 function dsGrade(k){try{const a=typeof itemArt==="function"?itemArt(k):null;return a?a.grade|0:0}catch(e){return 0}}
 /* the 7 cells of p as data: {slot,label,empty,k,name,grade,src,lux,over} */
 function dressSlots(p){const out=[];let w={};try{w=wdOf(p)}catch(e){}
@@ -119,7 +119,7 @@ function dressSlots(p){const out=[];let w={};try{w=wdOf(p)}catch(e){}
   try{if(sl==="tram"||sl==="y"){const e=w[sl],it=wdItem(e);if(it)c={slot:sl,label,k:it.k,name:it.n,grade:it.g,src:kitItemSrc(it.k,it.icon),lux:luxPiece(it.k),over:wdP(e,p)>wdPOf(p)&&!(it.nt&&e.own===wdKey(p)),pKnown:wdKnowsE(e)}}
    else if(sl==="veil"){if(typeof veilOn==="function"&&veilOn(p))c={slot:sl,label,name:"Khăn che mặt",grade:veilGrade(p),src:veilSrc(p),lux:0}}
    else if(sl==="pet"){const P=p.petOn!=null&&typeof tsbPets==="function"?tsbPets(p)[p.petOn]:null;if(P){const T=petT(P);c={slot:sl,label,k:P.t,name:T.n,grade:Math.min(4,T.tr|0),src:petPSrc(P,false),lux:petLux(P.t)}}}
-   else{const e=(p.inv||[]).find(e=>e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl===sl);if(e)c={slot:sl,label,k:e.k,name:itm(e.k).n,grade:dsGrade(e.k),src:(typeof keqArt==="function"?keqArt(e.k):"")||kitItemSrc(e.k),lux:luxPiece(e.k),over:itm(e.k).rk>rkOf(p),pKnown:true}}}catch(e){}
+   else{const e=(p.inv||[]).find(e=>e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).sl&&wearGrp(itm(e.k).sl)===sl);/* DRESS-FIX: Túi thơm is worn in the Đeo eo slot */if(e)c={slot:sl,label,k:e.k,name:itm(e.k).n,grade:dsGrade(e.k),src:(typeof keqArt==="function"?keqArt(e.k):"")||kitItemSrc(e.k),lux:luxPiece(e.k),over:itm(e.k).rk>rkOf(p),pKnown:true}}}catch(e){}
   out.push(c)}
  return out}
 window.dressSlots=dressSlots;

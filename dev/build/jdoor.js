@@ -212,7 +212,7 @@ DOOR.road=function(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeo
   acts:{a:["ksab","musk","kframe","kpoison","catswap","pond"]},
   tiers:{"a:ksab":"nhẹ","a:musk":"vừa","a:kframe":"vừa","a:kpoison":"nặng","a:catswap":"nặng","a:pond":"nặng","t:Đẩy con nàng xuống hồ":"nặng"}},
  {k:"P10",n:"Lấy của",cat:"hai-nguoi",kinds:["card"],rep:"Sai người lấy trộm đồ",h:"Chọn mức và cách lấy của nàng.",re:/^$/,
-  acts:{a:["batnat","laydo","laydol","petsteal","thaopet","phonghoa"]},tiers:{"a:batnat":"nhẹ","a:laydo":"vừa","a:laydol":"vừa","a:petsteal":"vừa","a:thaopet":"vừa","a:phonghoa":"nặng"}},
+  acts:{a:["batnat","laydo","laydol","tyrob","petsteal","thaopet","phonghoa"]},tiers:{"a:batnat":"nhẹ","a:laydo":"vừa","a:laydol":"vừa","a:tyrob":"vừa","a:petsteal":"vừa","a:thaopet":"vừa","a:phonghoa":"nặng"}},
  {k:"P11",n:"Tố cáo",cat:"muu-ke",kinds:["rival","hh","card"],rep:"Tố giác",h:"Chọn tội để tố, và tâu với ai.",re:/^(Tố xa xỉ|Hặc ăn mặc sai phẩm)$/,
   acts:{a:["accuse","tocao","expose","xx","vp","trinhhh","trinhth"]}},
  {k:"P12",n:"Mặc cả chứng cứ",cat:"muu-ke",kinds:["card"],rep:"Uy hiếp đòi bạc",h:"Chọn cách dùng chứng cứ đang nắm.",re:/^$/,acts:{a:["uyhiep","banphe","tieuhuy"]}},
