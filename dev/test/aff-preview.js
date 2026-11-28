@@ -56,6 +56,17 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
    if(c){const m=String(c.x).replace(/<[^>]+>/g,"").match(/thiện cảm ([+-]?\d+)/);const b0=v.rel||0;c.go();const real=Math.round((v.rel||0)-b0);
     out.push({name:`card spAdd rel «Đứng ra nói đỡ» ${v.name}`,base:BAL.eff.j7.comet.rel,preview:m?+m[1]:null,real,sg:m?m[0]:String(c.x),ok:!!m&&+m[1]===real,sideOk:true,inRange:true})}
    else out.push({name:"card spAdd rel: comet card not built",preview:null,real:null,sg:"",ok:false,sideOk:true,inRange:true})}}
+  // PVQUY-POST-2 ruling D: the typed spAdd-rel cards now print the paced rise — rvquarrel «Đứng ra can ngăn» (two rows) and pact «Kết minh»
+  {const a=L[2]||L[0],b=L[3]||L[1];a.rel=88;b.rel=40;/* one near the ceiling: the pace bites */const E=EVI.rvquarrel;let o=null;try{o=E&&E.b({a:a.id,b:b.id,y:""})}catch(e){}const c=o&&o.o&&o.o.find(z=>z.n==="Đứng ra can ngăn");
+   if(c){const t=String(c.x).replace(/<[^>]+>/g,"");const sh=[a,b].map(x=>{const m=t.match(new RegExp(x.name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+" thiện cảm ([+-]?\\d+)"));return m?+m[1]:null});const b0=[a.rel,b.rel];c.go();
+    [a,b].forEach((x,i)=>{const real=Math.round(x.rel-b0[i]);out.push({name:`card spAdd rel «Đứng ra can ngăn» ${x.name} (row per person)`,base:5,preview:sh[i],real,sg:t,ok:sh[i]===real,sideOk:true,inRange:true})})}
+   else out.push({name:"card rvquarrel not built",preview:null,real:null,sg:"",ok:false,sideOk:true,inRange:true});
+   const P=EVI.pact,v=L[4]||L[0];v.rel=80;let po=null;try{po=P&&P.b({v:v.id,y:""})}catch(e){}const pc=po&&po.o&&po.o.find(z=>z.n==="Kết minh");
+   if(pc){const m=String(pc.x).replace(/<[^>]+>/g,"").match(/thiện cảm ([+-]?\d+)/);const r0=v.rel;try{pc.go()}catch(e){}const real=Math.round(v.rel-r0);out.push({name:`card spAdd rel «Kết minh» ${v.name}`,base:25,preview:m?+m[1]:null,real,sg:m?m[0]:"",ok:!!m&&+m[1]===real,sideOk:true,inRange:true})}
+   else out.push({name:"card pact «Kết minh» not built (no queen?)",preview:null,real:null,sg:"",ok:!(typeof qOn==="function"&&qOn()),sideOk:true,inRange:true})}
+  // PVQUY-POST-2 ruling C: jky non-consort target (servant row r.af[me], an official with a number r.af) — the card gain jkyAfGain = relTo's real change
+  {const J=window.__jkyAf;if(J){const sv=(S.staff||[])[0]||{name:"cung nữ",loyal:50};const T=[];sv.af={me:95};T.push(["servant row",{kind:"sv",ref:sv}]);T.push(["official number",{kind:"off",ref:{name:"quan",af:97}}]);T.push(["no one",{kind:"x",ref:null}]);
+   for(const [nm,W] of T){const n=8;const card=J.G(S,W,n);const b0=J.V(S,W);J.T(S,W,n);const real=b0==null?0:Math.round(J.V(S,W)-b0);out.push({name:`jky card ${nm} +${n} (near the clamp)`,base:n,preview:card,real,sg:String(card),ok:card===real,sideOk:true,inRange:true})}}else out.push({name:"jky hook missing",preview:null,real:null,sg:"",ok:false,sideOk:true,inRange:true})}
   // GIFT CARD (jgift giftEval → j8 giveTo): the queen (two steps on one bond) and a consort
   for(const t of [q&&q!==S?q:null,L[5]||L[0]].filter(Boolean)){try{const k=Object.keys(IT).find(k=>IT[k]&&giftVal({k},t)>0&&!IT[k].sl)||"tuithom";invAdd(S,{k});const ix=S.inv.length-1,e=S.inv[ix];
    const ev=(()=>{const r1=Math.random;Math.random=()=>0.99;try{return giftEval(e,t)}finally{Math.random=r1}})();/* the same draw giveTo runs under */const m=String(ev&&ev.x||"").replace(/<[^>]+>/g,"").match(/nàng quý ngươi ([+-]?\d+)(?! đến)/);if(!m){out.push({name:`gift card ${t.name}: no number (${String(ev&&ev.x).slice(0,60)})`,preview:null,real:null,sg:"",ok:true,sideOk:true,inRange:true});continue}
