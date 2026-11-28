@@ -51,3 +51,6 @@ Stills looked at (Fold + iPad, own eyes): end «Đại kết cục» both device
 
 ## HANDOVER
 Ready for RV-178 (re-review the r17 delta: jkhand/jopic `face` + BigBuild, jksize CSS drop, KIT §56.25 merge, jactj4 / KIT_REQUESTS merge, 2 test-only files). Worktrees: /home/user/wt/r17 (branch), /home/user/wt/live (LIVE 18003079), /home/user/wt/r16, /home/user/wt/r15 (reference). Nothing pushed to main; no PR.
+
+## ADDENDUM — restack on LC34 ui5 (MAIN 185 order) → review/kit-stage-r17-ui5
+review/kit-stage-r17-ui5 = review/lc34-ui5 c711f8e1 + merge review/kit-stage-r17 5e119942 (merge-tree: only KIT_REQUESTS.md (kept both) + built index.html / sw.js (rebuilt) conflicted; jksize / jts / j8 / jtsb / KIT.md auto-merged). Gate: is-ancestor of c711f8e1 and 5e119942 OK, 0 deletions vs ui5, assets.json = ui5. Own runs on that build (Fold + iPad): kit-hand PASS, kit-hand-mat-scan fold 61 dialogs / ipadAir 60 dialogs 0 lost, badge-hand PASS, dialog-fixed all pass, xl-one-size all pass, emo-over-text all pass, one-core PASS. kit-dlg-avatar failed once «ipad D: 3 label/toast frames» when run right after emo-over-text and passed twice alone (same flake as on r17). Full coregates / quickcheck not re-run on the restack (r17 build passed both).
