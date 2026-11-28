@@ -67,7 +67,7 @@ for(const [dn,W,H] of [['fold',755,1000],['ipad',1180,820]].filter(x=>!process.e
  ok(!badP.length,`${dn}: every badge inside its picture and its card (${badP.length} bad)`);
  ok(!badC.length,`${dn}: no badge word clipped by an ancestor box (${badC.length} bad)`);
  ok(!badA.length,`${dn}: the word keeps >= 2 px air to the badge edge (${badA.length} bad)`);
- bigs.forEach(x=>{const miss=(x.sl||[]).filter(l=>l!=='Gợi ý'&&!x.rows.some(r=>r.lab===l));if(miss.length)x.bad.push('missingRow:'+miss.join('/'))});
+ bigs.forEach(x=>{const miss=(x.sl||[]).filter(l=>l!=='Gợi ý'&&!x.rows.some(r=>r.lab===l||(l==='Bại'&&r.lab==='Mất')));/* kit-stage-r17: KIT §6.2o K-HAND-MAT — the ONE card copy (kitOptCopy) labels a no-roll card's Bại row «Mất» (a certain loss, as on the card) */if(miss.length)x.bad.push('missingRow:'+miss.join('/'))});
  const wordDiff=bigs.filter(x=>x.real&&x.sw&&x.bw&&x.sw!==x.bw);wordDiff.slice(0,4).forEach(x=>console.log('  worddiff',x.ev,x.sw,'->',x.bw));
  ok(!wordDiff.length,`${dn}: the enlarged card shows the same odds word as its small card (law 4) (${wordDiff.length} bad)`);
  const bigBad=bigs.filter(x=>x.bad.length),bigOrph=bigs.filter(x=>x.orph.length),bigNoRow=bigs.filter(x=>!x.rows.length);
