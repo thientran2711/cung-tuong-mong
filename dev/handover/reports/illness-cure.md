@@ -195,3 +195,76 @@ Answer: on LIVE those heroines got no card at all; on this branch a rank-1 heroi
 - webkit-syntax: 477 modules, 0 parse-level hits. one-core-guard / -text / -bind / -text-rule: PASS. door-onetap: PASS.
 - quickcheck 3185acbb vs LIVE 5ad52416: QUICKCHECK PASS (open 2316 ms, old save loads + plays a buổi, 0 errors; perf median new/live render 270/295, tab 563/544, buổi 2424/2988, tasks>200 33/35) · TIME-SPILL PASS · CORE GATES FAIL only G4 94-q-softlock = the known flake: alone on the branch 1 FAIL (iPad «view parked by a tab change»), LIVE 5ad52416 run at the same time 4 FAIL.
 - Shots (outside git, /home/user/wt/ic4-shots, looked at): Fold + iPad — hs fall-ill card «Tâm bệnh · nhẹ» (4 roads, HUD Sức 80/85), cung nữ HUD chip «Lao phổi · nhẹ», cung nữ fall-ill card (2 roads + true line).
+
+## r5 (Foreman C ROOT 4-1-1-1-1, Foreman E E-ILL-RATE findings, MAIN_STATUS 28/11 08:33Z) — RV READY (BIG, DELTA on 3185acbb) d43a2e39 on LIVE a96564ad
+Session ILLNESS-CURE-4 session_01PEhRbwXRToECD9cRMDDoUq, depth 5, START_CTX ~3 %.
+PRIORITY #1 CHECK ('fxIllMonth|staffRoad|kidIll|kidsMonth|kidAsk|kidWatch|illCure.npc'): OD:L2666/L2670 (illness still kills), MAIN 185 02:20Z Q1/Q3 | main a96564ad: jface fxIllMonth (staff / courtiers / children, no road), j8 kidsMonth (LIVE rule), jagacts2 cx2 kidMed / kidHeal (buổi), no BAL.illCure | review/*: review/illness-cure 3185acbb (built on), review/e-ill-rate 29b0ac00 (E's sim, reused unchanged + a MOMS copy) | claims ILLNESS-CURE-3 → ILLNESS-CURE-4.
+KIT CHECK: no new UI part. Only new player text = log lines in the same log (staff cured); the child card is r3's kit Q notice (words read BAL).
+P1 (rank-scaled die) and P4 (npc 60 → 75) left alone as ordered (BAL.illCure.die3 = open MAIN ruling).
+
+### (3) Merge LIVE a96564ad (commit 513e2b4b)
+- Conflicts: assemble.py (module list = LIVE's 11 new modules + jillcure → list ⊇ LIVE), j13 / jbal2 / jmort death rolls (kept the r1 one-month rule + BAL.illCure.die3, took main's new dieMk(p,"ill") death mark), index.html / sw.js rebuilt. webkit-syntax: 488 modules, 0 parse-level hits.
+- Test change from LIVE (not mine): LIVE R11 (owner 27/11 ~06:42Z, jdoor DOOR.card tabdoor) makes a tab door the LIVE list frame, not a Bàn bài hand (no flip), and Truyền thái y is now a summons (jptime). The r1 «real tap = flip» row is now «nặng rows show odds word + Tốn on the FRONT» + «one tap runs it (thái y summoned)».
+
+### (1) Law 1: the same cure road for every NPC group that falls ill (commit a8a5b924)
+- jface fxIllMonth (everyone not a consort: cung nữ · thái giám · ma ma · thái y · thị vệ · quan · hoàng tử / công chúa · children) now calls IC.staffRoad (jillcure) before the month's own rolls: from nặng, at BAL.illCure.npc % a month (the consorts' key), treat() on BAL.illCure.way (same odds).
+- Which road (real life, as her cung nữ life r4): servants (BAL.staffRoad.srv = maid · eunuch · mama · steward) go to Thái y viện (vien, Sức 8 when they track Sức) or rest — never summon a thái y, never plead with Sủng, even with bạc; a courtier with bạc may summon a thái y (ty, bạc 40); a child of an NPC mother: the mother takes her kid road at her own prices (BAL.ag.cx2 kidMed bạc · kidAsk Sủng · kidWatch Sức) → kidCure. Her own child keeps her card + roads (no auto road for the player).
+- Emperor / Thái hậu (not in fxIllMonth) unchanged: the Emperor's illness never kills (j13), the Thái hậu's death is her jmort lifespan (thIllKeep) — QUESTION for MAIN if they should get the road too (law 16, not decided by me).
+
+Family scan (law 11) — NEW dev/tools/npc-ill-road-scan.js (real fxIllMonth, Lao phổi · nặng, 600 months per group); before = LIVE a96564ad (r4 3185acbb identical: 0 roads), after = d43a2e39:
+| group | road taken LIVE → r5 | road | cured that month LIVE → r5 |
+|---|---|---|---|
+| cung nữ (maid) | 0 → 350 | vien | 17 % → 33 % |
+| thái giám (eunuch) | 0 → 370 | vien | 14 % → 38 % |
+| thái y (physician) | 0 → 345 | vien | 13 % → 32 % |
+| thị vệ (guard) | 0 → 365 | vien | 13 % → 36 % |
+| quan (man) | 0 → 365 | vien | 15 % → 36 % |
+| hoàng tử / công chúa (royal) | 0 → 365 | vien | 16 % → 37 % |
+| child of an NPC mother (kid) | 0 → 373 | mother kidMed | 14 % → 38 % |
+
+### (2) Child deaths back under LIVE (BAL only, law 4)
+- Root (E): after the r3 first hit the child stays ốm until Sức khỏe ≥ 60 with +4 a month, and worse = 30 % a month brings a second hit that usually kills.
+- Fix: BAL.kidIll.worse 30 → 6 and NEW BAL.kidIll.heal 8 (Sức khỏe regained a month while ốm, on top of BAL.eff.j8.hpKidsMonth; j8 kidsMonth reads it). The r3 rule stays: the first hit never kills, she gets the sign, only an ốm child can die. E's P3 (worse 12) measured too high: 18 % of young children dead in 36 months vs LIVE 5.5 % (my Monte Carlo of the kidsMonth rule), so worse 6 + heal 8 was picked (young 2.4 %, old 1.1 %).
+- Scan (npc-ill-road-scan child rows: an NPC mother's child, no road, 36 months, 1500 lives):
+| child | LIVE a96564ad died | r4 3185acbb died | r5 died |
+|---|---|---|---|
+| young (under 3) | 5.1 % | 34.8 % | 2.3 % |
+| old (3+) | 0.9 % | 18.4 % | 0.9 % |
+
+### E's sim rerun (review/e-ill-rate dev/test/ill-rate-sim.js unchanged, same seeds 15 × 3 years × 12 origins, idle, = E run 2). A = LIVE a96564ad, B = review/illness-cure a8a5b924 (r5)
+| phi tần | A | 5.68 | 0.209 | 3.7 % | 31.8 % | 31.7 % | 0 |
+| phi tần | B | 5.97 | 0.036 | 0.6 % | 36.8 % | 52.6 % | 0 |
+| cung nữ | A | 7.98 | 0.174 | 2.2 % | 27.6 % | 26.9 % | 379 |
+| cung nữ | B | 8.02 | 0.055 | 0.7 % | 32.0 % | 43.1 % | 340 |
+| thái giám | A | 8.11 | 0.106 | 1.3 % | 28.7 % | 29.3 % | 42 |
+| thái giám | B | 8.30 | 0.025 | 0.3 % | 33.6 % | 45.4 % | 37 |
+| children | A | 2.42 | 0.062 | 2.6 % | 29.1 % | 28.9 % | 15 · all child deaths 99 (0.19/yr) |
+| children | B | 2.38 | 0.006 | 0.2 % | 33.1 % | 42.7 % | 8 · all child deaths 57 (0.11/yr) |
+| thái y | A | 2.00 | 0.002 | 0.1 % | 29.2 % | 28.1 % | 3 |
+| thái y | B | 2.03 | 0.000 | 0.0 % | 33.9 % | 45.7 % | 2 |
+| thị vệ | A | 3.96 | 0.000 | 0.0 % | 28.8 % | 28.4 % | 7 |
+| thị vệ | B | 4.06 | 0.002 | 0.0 % | 33.3 % | 44.3 % | 5 |
+| royal (prince/princess) | A | 1.00 | 0.000 | 0.0 % | 28.9 % | 28.4 % | 1 |
+| royal (prince/princess) | B | 1.03 | 0.002 | 0.2 % | 34.3 % | 44.0 % | 1 |
+| men (officials) | A | 2.90 | 0.002 | 0.1 % | 28.6 % | 29.2 % | 16 |
+| men (officials) | B | 3.02 | 0.000 | 0.0 % | 33.8 % | 44.9 % | 15 |
+| Emperor | A | 0.00 | 0.000 | — | — | — | 0 |
+| Emperor | B | 0.00 | 0.000 | — | — | — | 0 |
+| Thái hậu | A | 0.17 | 0.006 | 3.4 % | 31.6 % | — | — |
+| Thái hậu | B | 0.19 | 0.008 | 4.1 % | 30.1 % | — | — |
+| HEROINE | A | 0.95 | 0.031 | 3.2 % | 29.5 % | 27.5 % | — |
+| HEROINE | B | 0.97 | 0.021 | 2.2 % | 32.8 % | 34.7 % | — |
+| **all NPC (no Emperor / Thái hậu)** | A | | | **1.6 %** | | 28.9 % | |
+| **all NPC (no Emperor / Thái hậu)** | B | | | **0.4 %** | | 45.5 % | |
+Lives A 180 · B 180 · seeded years A 517 · B 525 · 0 page errors · 0 job errors.
+- Servants now move like consorts: cung nữ death per case 2.2 % → 0.7 %, thái giám 1.3 % → 0.3 %, nặng+ cure per month ~27–29 % → ~43–46 % (consorts 53 %); all NPC 1.6 % → 0.4 %.
+- Children: all child deaths 0.19 → **0.11 /yr** (≤ LIVE; r4 was 0.48). With the NPC mothers' buổi kid roads modelled (dev/test/ill-rate-sim-moms.js MOMS=1, one try a month at BAL.illCure.npc): 0.15 → **0.09 /yr**, cung nữ 2.5 % → 0.9 %.
+- Thái hậu 3.4 → 4.1 % per case = n ≈ 90 cases, ±; unchanged code (see question above). Heroine idle 3.2 % → 2.2 %.
+
+### Tests
+- illness-cure.test (Fold 755x1000 + iPad 1180x820): ALL OK ×3, incl. r5: every fxIllMonth group takes a road at the BAL key; cung nữ + thái giám have it; servants never ty / cầu xin even with bạc; a courtier with bạc summons at BAL.illCure.tyBac; npc 0 → no road; an NPC mother pays her kid road and the child gains; an ốm child regains hpKidsMonth + heal.
+- MUTATE (built page): staff road off → 3 FAIL · kid heal off → 2 · servants may summon → 3 · NPC mother kid road off → 4 · worse back to 30 → 3 · clean → 0.
+- Scans: illness-road-scan 0 page errors (every illness × stage: card + 4 roads) · illness-sign-scan SUMMARY 117 cases, gaps 0 · kid-illness-scan first hit kills 0/100 on every path, roads unchanged, Q1 caps 85/60/35.
+- one-core-guard / -text / -bind / -text-rule: PASS. webkit-syntax 0. door-onetap: PASS.
+- quickcheck d43a2e39's code (a8a5b924) vs LIVE a96564ad --runs 3: QUICKCHECK PASS (open 2055 ms, old save loads + plays a buổi, 0 errors; perf median new/live render 262/290, tab 465/577, buổi 2034/1499, tasks>200 30/35) · TIME-SPILL PASS · CORE GATES FAIL only G4 94-q-softlock = the known flake (r3 / r4: fails on LIVE too); my standalone rerun crashed (browser closed), not reproduced further.
+- Shots (outside git, /home/user/wt/ic5-shots5, looked at): Fold + iPad «Công chúa Tiểu Ngọc lâm bệnh» card with the new words (trở nặng: khả năng rất thấp), roads + Tốn, no %.
