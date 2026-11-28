@@ -256,21 +256,30 @@ function unyield(quick){if(!CUR)return;CUR.G.forEach(g=>g.P.forEach(p=>{const q=
 function yieldFaces(m,n){if(!CUR||!liveM(m)||!KP||!AB().face)return;/* BAL.area.face null = off (the plate-edge-scan BEFORE column: NOYIELD=1) */n=n||KP.__n||1;KP.__n=n;const R=pkRects(n);if(!R.length)return;
  const hit=f=>R.some(r=>f.l<r.r-1&&f.r>r.l+1&&f.t<r.b-1&&f.b>r.t+1);const bx0=Math.min(...R.map(r=>r.l)),lim=bx0-4,sMin=AB().faceMin||.45,hr=L.getBoundingClientRect();
  const body=(l,w)=>({l:l+w*.22,r:l+w*.78}),occ=[],Y=[];
+ /* LRM7: a person's floor span = her body OR her name plate, whichever is wider (the plate keeps one screen size, law 10) — a group packed by bodies alone put the Emperor's plate under the speaker's follower (Fold Đình cờ) */
+ let PW=1;/* 1 = plate-aware spans; 0 = bodies only (second try when no floor fits the plates) */const he=(q,s)=>Math.max(q.w*.28*s,PW?((q.tg&&q.tg.offsetWidth)||0)/2:0),span=(q,s)=>{const c=q.x+q.w/2;return{l:c-he(q,s),r:c+he(q,s)}};
  /* LRM6 r3 (RV-179 FAIL-1): the speaker + her followers count at their FINAL step-out boxes (m.fx / q.fx set by stepOut), never a rect read while they still walk
     (the follower stood at her old slot in the rect → a bystander yielded onto her, Fold loidi0 27 px) */
  m.g.P.forEach(p=>{const q=p.m;if(!q)return;const f=q===m?m.fx:q.fx;if(f&&f.w>2)occ.push(body(f.x,f.w));else{const r=q.el.getBoundingClientRect();if(r.width>2)occ.push(body(r.left-hr.left,r.width))}});
- const spk=occ.slice();CUR.G.forEach(g=>{if(g===m.g)return;const Q=g.P.map(p=>p.m).filter(Boolean);if(!Q.length)return;
+ const spk=occ.slice(),ovS=q=>{const b=span(q,1);return spk.some(o=>Math.min(b.r,o.r)-Math.max(b.l,o.l)>2)};CUR.G.forEach(g=>{if(g===m.g)return;const Q=g.P.map(p=>p.m).filter(Boolean);if(!Q.length)return;
   /* a group yields when a face is under the board OR (law 11, people never cross) a body of hers stands where the speaker's followers row now stands (LRM5 stepOut puts that row
      at the floor's left end, over a bystander left in place — Fold Ngự đạo) */
-  if(Q.some(q=>hit(faceOf(q,0,1)))||Q.some(q=>{const b=body(q.x,q.w);return spk.some(o=>Math.min(b.r,o.r)-Math.max(b.l,o.l)>2)}))Y.push(Q);else{Q.forEach(q=>{occ.push(body(q.x,q.w));if(q.yd){q.yd=null;plateS(q,1);an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}})}});
- /* nearest the board first (it has the least way to go) */Y.sort((a,b)=>Math.max(...b.map(q=>q.x))-Math.max(...a.map(q=>q.x)));
- Y.forEach(Q=>{const l0=Math.min(...Q.map(q=>q.x+q.w*.22)),r0=Math.max(...Q.map(q=>q.x+q.w*.78)),Wg=r0-l0;let pl=null,s=1;
-  for(s=1;s>=sMin-1e-6&&pl==null;s=+(s-.05).toFixed(2)){const w=Wg*s;const O=occ.filter(o=>o.r>6&&o.l<lim).sort((a,b)=>a.l-b.l);let a=6;const gaps=[];O.forEach(o=>{if(o.l-3>a)gaps.push([a,o.l-3]);a=Math.max(a,o.r+3)});if(lim>a)gaps.push([a,lim]);
-   for(let i=gaps.length-1;i>=0;i--){const [gl,gr]=gaps[i];if(gr-gl>=w){const rr=Math.min(gr,Math.max(r0,gl+w));pl=rr-w;break}}if(pl!=null)break}
+  const fh=Q.some(q=>hit(faceOf(q,0,1)));if(fh||Q.some(q=>ovS(q))){Q.fh=fh;Y.push(Q)}else{Q.forEach(q=>{occ.push(span(q,1));if(q.yd){q.yd=null;plateS(q,1);an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}})}});
+ /* nearest the board first (it has the least way to go) */Y.sort((a,b)=>(b.fh?1:0)-(a.fh?1:0)||Math.max(...b.map(q=>q.x))-Math.max(...a.map(q=>q.x)));/* LRM7: face-hit groups take the free floor FIRST, overlap-only groups after (an overlap-only group took the only gap → Fold Đình cờ Emperor stayed behind the board) */
+ const place=Q=>{const l0=Math.min(...Q.map(q=>q.x+q.w*.22)),r0=Math.max(...Q.map(q=>q.x+q.w*.78)),Wg=r0-l0;let pl=null,s=1;
+  const ext=s=>{const c=Q.map(q=>(q.x+q.w/2-l0)*s);return{a:Math.min(...Q.map((q,i)=>c[i]-he(q,s))),b:Math.max(...Q.map((q,i)=>c[i]+he(q,s)))}},R0=Math.max(...Q.map(q=>span(q,1).r));let E=ext(1);
+  for(PW=1;PW>=0&&pl==null;PW--)/* LRM7: plates clear first; if no free floor fits them at any size, bodies only (faces clear of the board come before a plate edge) */for(s=1;s>=sMin-1e-6&&pl==null;s=+(s-.05).toFixed(2)){E=ext(s);const w=E.b-E.a;const O=occ.filter(o=>o.r>6&&o.l<lim).sort((a,b)=>a.l-b.l);let a=6;const gaps=[];O.forEach(o=>{if(o.l-3>a)gaps.push([a,o.l-3]);a=Math.max(a,o.r+3)});if(lim>a)gaps.push([a,lim]);
+   for(let i=gaps.length-1;i>=0;i--){const [gl,gr]=gaps[i];if(gr-gl>=w){const rr=Math.min(gr,Math.max(R0,gl+w));pl=rr-E.b;break}}if(pl!=null)break}PW=1;
   let up=(1-s)*(AB().faceRise||0)*CUR.D.H;/* further back = smaller AND standing higher on the floor (BAL.area.faceRise), never a doll on the front line */
-  if(pl==null){/* no free floor: step back in place, faces clear of the board */s=1;while(Q.some(q=>hit(faceOf(q,0,s,l0)))&&s>sMin)s-=.04;pl=l0;up=0}
-  occ.push({l:pl,r:pl+Wg*s});
-  Q.forEach(q=>{const bl=pl+(q.x+q.w*.22-l0)*s,vl=bl-q.w*s*.22,T=vl-q.w*(1-s)/2;q.yd={T,s};plateS(q,s);const to=`translate(${T}px,${q.y-up}px) scale(${s.toFixed(3)})`;an(q.el,[{transform:to}],{duration:still()?1:420})})})}
+  if(pl==null&&Q.length>1){/* LRM7: the whole group fits no free floor (Fold Thủy tạ: 84.5 px wanted, 83 px gap) → each person finds her own place (a face-hit or crossing one moves, the others stay) */
+   Q.forEach(q=>{const one=[q];one.fh=hit(faceOf(q,0,1));if(one.fh||ovS(q))place(one);else{occ.push(span(q,1));if(q.yd){q.yd=null;plateS(q,1);an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}}});return}
+  if(pl==null){if(!Q.fh){/* LRM7: overlap-only and no free floor → stays where she stands (no move) */Q.forEach(q=>{occ.push(span(q,1));if(q.yd){q.yd=null;plateS(q,1);an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}});return}
+   /* LRM7: no free floor for a face-hit group → each figure steps back about her OWN feet (the same box faceOf(q,0,s) the face check reads), faces clear of the board */
+   s=1;while(Q.some(q=>hit(faceOf(q,0,s)))&&s>sMin+1e-6)s=+(s-.04).toFixed(2);
+   Q.forEach(q=>{const w=q.w*s;occ.push(body(q.x+(q.w-w)/2,w));q.yd={T:q.x,s};plateS(q,s);an(q.el,[{transform:`translate(${q.x}px,${q.y}px) scale(${s.toFixed(3)})`}],{duration:still()?1:420})});return}
+  occ.push({l:pl+E.a,r:pl+E.b});
+  Q.forEach(q=>{const bl=pl+(q.x+q.w*.22-l0)*s,vl=bl-q.w*s*.22,T=vl-q.w*(1-s)/2;q.yd={T,s};plateS(q,s);const to=`translate(${T}px,${q.y-up}px) scale(${s.toFixed(3)})`;an(q.el,[{transform:to}],{duration:still()?1:420})})};
+ Y.forEach(place)}
 function openPk(m){closePk(true);if(!CUR||!liveM(m)||typeof kitPick==="undefined")return;let G=[];try{G=dfData(m.i)}catch(e){}
  /* names she has not learnt (the kit shows them as «???» on a button): those acts are not offered by that name */let unk=[];try{unk=(rivals||[]).filter(v=>typeof k61Named==="function"&&!k61Named(v)).map(v=>v.name).filter(Boolean)}catch(e){}
  G=(G||[]).map(g=>Object.assign({},g,{acts:(g.acts||[]).filter(a=>a&&a.n&&!/\?\?\?/.test(a.n+" "+(a.word||""))&&!unk.some(n=>String(a.n).includes(n)))})).filter(g=>g.acts.length);/* an act naming someone she has not learnt is not offered by that name (MAIN 127 FAIL 4, ring4 rule) */if(!G.length)return;
