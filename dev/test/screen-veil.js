@@ -3,7 +3,7 @@
    then WARM (same browser, every change again), and samples EVERY animation frame of the new view:
      bad frame = a visible picture of the view (<img> >= 24 px, or a CSS background picture) that is not loaded yet and is NOT under the veil (#kveil)
      (the §59.1 stand-ins «Đang thỉnh tranh…» / silhouettes count as bad: they are exactly the half-painted view she hates).
-   usage: node dev/test/screen-veil.js <outdir> [devices=fold,ipadAir] [root=repo root] [mbps=1.5] [lat=300]
+   usage: [STEP=<part of a step name>] [SHOT=1] node dev/test/screen-veil.js <outdir> [devices=fold,ipadAir] [root=repo root] [mbps=1.5] [lat=300]
    Pages are served from disk by a Playwright route (no local server). Videos (webm → mp4 + 2× copy) go to <outdir> (never into git, OD:L203).
    FAIL (exit 1) when any step shows a bad frame. Also prints the veil time per step and the line shown. */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),{execFileSync}=require('child_process');const D=require('./lib/device');
@@ -59,12 +59,13 @@ const STEPS=[
  for(const dev of DEVS.split(',')){const vdir=path.join(OUT,'v-'+dev);fs.mkdirSync(vdir,{recursive:true});const {ctx,L}=await context(b,dev,vdir);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   const g=await boot(p);if(process.env.KEEP!=null)await g.evaluate(k=>{KIT_SCRV.keep=k;while(SCRV_KEEP.size>k)SCRV_KEEP.delete(SCRV_KEEP.keys().next().value)},+process.env.KEEP);/* memory measure (RV-174): KEEP=<n> overrides BAL.kscrv.keep */
   for(const mode of ['cold','warm']){L.on=mode==='cold';
-   for(const [name,kind,fn] of STEPS){await g.evaluate(CLEAN).catch(()=>{});await sleep(400);await g.evaluate(()=>{try{KIT_SCRV.stat.last=null;KIT_SCRV.stat.log=[]}catch(e){}__VS.start()});
+   for(const [name,kind,fn] of STEPS){if(process.env.STEP&&name.indexOf(process.env.STEP)<0)continue;/* LRM6: STEP=<part of a step name> runs only those steps; SHOT=1 saves a still 3 s after each step */await g.evaluate(CLEAN).catch(()=>{});await sleep(400);await g.evaluate(()=>{try{KIT_SCRV.stat.last=null;KIT_SCRV.stat.log=[]}catch(e){}__VS.start()});
     const t0=Date.now();let ok=true;try{await g.evaluate(`(${fn.toString()})()`)}catch(e){ok=false}
     for(;;){await sleep(250);const v=await g.evaluate(()=>!!(document.getElementById('kveil')&&!document.getElementById('kveil').hidden)).catch(()=>false);if(!v&&Date.now()-t0>1800)break;if(Date.now()-t0>15000)break}
     await sleep(500);const F=await g.evaluate(()=>__VS.stop());const st=await g.evaluate(()=>typeof KIT_SCRV!=='undefined'?Object.assign({},KIT_SCRV.stat.last,{log:(KIT_SCRV.stat.log||[]).slice(-4)}):null);
     const badF=F.filter(f=>f.n>0);const veilF=F.filter(f=>f.veil);const words=[...new Set(veilF.map(f=>f.word).filter(Boolean))];
     const row={dev,mode,step:name,kind,ran:ok,frames:F.length,bad:badF.length,veilFrames:veilF.length,veilMs:st&&st.ms||0,dests:st&&st.log?st.log.join('>'):'',word:words.join(' / '),firstBad:badF[0]?badF[0].bad.join(' '):''};if(badF.length){row.why=await g.evaluate(()=>__VS.why).catch(()=>null);row.veilEnd=veilF.length?veilF[veilF.length-1].t:0;row.badT=badF.map(f=>f.t)}R.push(row);if(badF.length)fail++;
+    if(process.env.SHOT){await sleep(3000);await p.screenshot({path:path.join(OUT,`${dev}-${mode}-${name.replace(/[^\w]+/g,'_').slice(0,40)}.png`)}).catch(()=>{})}
     console.log(JSON.stringify(row))}}
   if(process.env.MEM){/* decoded-picture memory after the warm steps: renderer RSS (all renderers of this run; run this test ALONE) + JS heap + kept pictures */
    try{const c=await ctx.newCDPSession(p);await c.send('HeapProfiler.collectGarbage')}catch(e){}await sleep(1500);
