@@ -74,7 +74,11 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
   await g.evaluate(()=>{try{Q.length=0;const V=rivals.filter(x=>x.alive!==false&&!x.out&&!x.queen&&!traitsOf(x).includes("Kiêu ngạo")).slice(0,3);V.forEach(v=>{v.ghen=40});S.bac=60;
    S.inv.push({k:"tp",wk:{kind:"theu",a:"hoa",ti:2,q:6,n:"Khăn thêu uyên ương",m:1,bn:"ngươi",d:"x",lv:2}});S.inv.push({k:"tp",wk:{kind:"theu",a:"hoa",ti:0,q:1,n:"Khăn thêu tạm",m:0,bn:"ngươi",d:"x"}});
    pushDil(mkP("tsgift",{L:V.map(v=>v.id)}),"Biếu quà làm lành");showModal()}catch(e){console.error(e)}});
-  await p.waitForTimeout(900);await p.screenshot({path:`${out}/${dev}-d19-roads.png`});
+  await p.waitForTimeout(900);
+  /* d19-gift-npc: a fresh life's «Nhận thân phận» card (j52 nlCard, pushed late by nlBegin) can land over the dialog — drop it and show ours again */
+  for(let k=0;k<3;k++){const ok=await g.evaluate(()=>/Lễ bạc/.test((document.querySelector('#modal')||{}).textContent||""));if(ok)break;
+   await g.evaluate(()=>{try{NLP=null;Q.length=0;const m=document.getElementById('modal');if(m){m.hidden=true;m.className='modal'}const V=rivals.filter(x=>x.alive!==false&&!x.out&&!x.queen&&!traitsOf(x).includes("Kiêu ngạo")).slice(0,3);pushDil(mkP("tsgift",{L:V.map(v=>v.id)}),"Biếu quà làm lành");showModal()}catch(e){console.error(e)}});await p.waitForTimeout(900)}
+  await p.screenshot({path:`${out}/${dev}-d19-roads.png`});
   r.cardsDom=await g.evaluate(()=>[...document.querySelectorAll('#modal .opts > button')].map(b=>({t:(b.textContent||"").replace(/\s+/g," ").trim().slice(0,160),dis:b.disabled,w:b.scrollWidth>b.clientWidth+2})));
   await g.evaluate(()=>{try{Q.length=0;const v=rivals.filter(x=>x.alive!==false&&!x.out&&!x.queen&&!traitsOf(x).includes("Kiêu ngạo"))[0];pushDil(mkP("tsgiftpick",{v:v.id,k:"wk"}),"Biếu quà làm lành");showModal()}catch(e){console.error(e)}});
   await p.waitForTimeout(900);await p.screenshot({path:`${out}/${dev}-d19-pick.png`});
