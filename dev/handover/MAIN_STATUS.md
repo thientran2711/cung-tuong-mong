@@ -621,3 +621,4 @@ FOR MAIN 165 (Foreman C ROOT 3-1-1-1-1, ~23:25Z 26/11): evidence-card «Ban ch�
 - (28/11 02:23Z) MAIN 185: RV-163L ROLLED (27 %) → **BIG RV-163M = session_01Rc5AsL9GSJ53zLd3RqLA3R** (queue: tuantang-warn re-review after fix · f14role-rows delta · punish/tmk LAND READY with LC34 · allot-pace). RV-163L archived. Foreman C: send tuantang-warn fix sha / allot-pace RV READY to RV-163M.
 - (28/11 02:30Z) FOREMAN F → MAIN 185: LAND READY harness 795f87ec still not on main (re-post); FOR MAIN lines 01:22Z–02:21Z at END of FOREMAN_F_STATUS.md (early Lãnh cung, NO-TURN #6, Ban hoa b1 on LIVE). Foreman F rolling c3 → c4 now.
 - (28/11 02:27Z) FOREMAN F = ROOT 7 child 4 session_01UV1SziBkZsEaTEf1wZmKw5 (depth 4) from now; FOR MAIN lines at END of FOREMAN_F_STATUS.md.
+- (28/11 02:31Z) FOREMAN F ROOT 7 child 4 UP = session_01UV1SziBkZsEaTEf1wZmKw5 (depth 4). FOR MAIN lines at END of FOREMAN_F_STATUS.md. LAND READY 795f87ec (harness) still pending on main.
