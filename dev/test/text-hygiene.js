@@ -56,7 +56,13 @@ const STATIC_RULES = ['dup', 'bracket', 'leak', 'pct'];
 function statics() { const hits = [], files = fs.readdirSync(BUILD).filter(f => /^j.*\.js$/.test(f)).sort(); let n = 0;
   const req = m => { try { return require(m) } catch (e) { return require('/opt/node-tools/node_modules/' + m) } }; const acorn = req('acorn'), walk = req('acorn-walk');
   for (const f of files) { const src = fs.readFileSync(path.join(BUILD, f), 'utf8'); let ast; try { ast = acorn.parse(src, { ecmaVersion: 'latest', locations: true }) } catch (e) { hits.push({ rule: 'parse', hit: e.message, file: f, text: '' }); continue }
-    const T = []; walk.full(ast, nd => { if (nd.type === 'Literal' && typeof nd.value === 'string') T.push([nd.value, nd.loc.start.line]);
+    /* DEV-ONLY builders are not player text (KK65 G4): the kit sample page (KIT_SAMPLES.push({...}), dev/kit page only) and the lifeStore(label, fn)
+       label (an internal id). Literals inside those ranges are skipped. */
+    const DEV = []; walk.full(ast, nd => { if (nd.type !== 'CallExpression') return; const c = nd.callee;
+      if (c.type === 'MemberExpression' && c.object.type === 'Identifier' && c.object.name === 'KIT_SAMPLES' && c.property.name === 'push') DEV.push([nd.start, nd.end]);
+      else if (c.type === 'Identifier' && c.name === 'lifeStore' && nd.arguments[0]) DEV.push([nd.arguments[0].start, nd.arguments[0].end]) });
+    const isDev = nd => DEV.some(([a, b]) => nd.start >= a && nd.end <= b);
+    const T = []; walk.full(ast, nd => { if ((nd.type === 'Literal' || nd.type === 'TemplateLiteral') && DEV.length && isDev(nd)) return; if (nd.type === 'Literal' && typeof nd.value === 'string') T.push([nd.value, nd.loc.start.line]);
       else if (nd.type === 'TemplateLiteral') T.push([nd.quasis.map(q => q.value.cooked == null ? q.value.raw : q.value.cooked).join('§'), nd.loc.start.line]) });
     for (let [t, ln] of T) { if (!VNL.test(t) || t.length > 3000 || /\(\?[:<=!]|\\p\{|\[\^/.test(t) || /^\s*\/\*|[{;]\s*[a-z-]+\s*:[^/]/.test(t)) continue; /* a regex source is not player text */
       t = t.replace(/<\/?(div|p|li|h\d|small|br|figcaption|header|footer|section|td|tr)\b[^>]*>/gi, '\n').replace(/<[^>]*>/g, ' ').replace(/\{[A-Za-z_$][\w$.:]*\}/g, '§'); /* {foe} / {n:art.stUp}: fill-in slots of a line pool (kLine) */
