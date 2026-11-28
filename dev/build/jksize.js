@@ -796,6 +796,12 @@ setTimeout(()=>{if(typeof showModal!=="function")return;const s0=showModal;showM
 addEventListener("resize",()=>{const d=document.querySelector("#modal .dlg.kszlive");if(d)kszLiveRepick3(d)});
 /* KK31: a web font that arrives after the frame was laid changes every text height (the text-first fit is measured in px): the open live frame is laid again */try{if(document.fonts&&document.fonts.addEventListener)document.fonts.addEventListener("loadingdone",()=>{const d=document.querySelector("#modal:not([hidden]) .dlg.kszlive");if(d)kszLiveRepick3(d)})}catch(e){}
 /* the older fit passes (rAF / resize) leave a live v3 frame alone: one layout owner per frame */
+/* K-PICK-SHORT (KK63 ruling (a), law 10): the live frame is the layout owner of its dialog, so the step-down of a §28.13i pick grid's frame runs
+   here, after every lay of the frame and after the §56.6 picture step (kszPicStep3, which only goes down to the strip while the options scroll — a paged grid always scrolls): a box that cannot hold one row + the §23 pager (+ the sticky confirm) gets no big scene picture
+   (.k3right > .k3ev hidden, .kdnopic; jk4 kitPickStep3 = the same rule as kitDlgText's step 1). Frames whose box holds it are unchanged. */
+(function(){const f0=kitFrameLive3;kitFrameLive3=function(){const r=f0.apply(this,arguments);try{const d=document.querySelector("#modal .dlg.kszlive");if(d)kitPickStep3(d)}catch(e){}return r};
+ const r0=kszRepRun3;kszRepRun3=function(d){const r=r0.apply(this,arguments);try{if(d&&d.classList.contains("kszlive"))kitPickStep3(d)}catch(e){}return r};
+ const p0=kszPicStep3;kszPicStep3=function(d){const r=p0.apply(this,arguments);try{if(d&&d.classList.contains("kszlive"))kitPickStep3(d)}catch(e){}return r}/* the 56.6 picture step settles 180 ms later (its 2nd pass): decided again after it */})();
 ["kitDlgFit","kitDpFit","kitDpApply","kitCompactFit","kitOnePic","kitSlotFit"].forEach(n=>{try{const f=window[n];if(typeof f!=="function")return;const g=function(){const d=document.querySelector("#modal .dlg");if(d&&d.__ksz3)return;return f.apply(this,arguments)};window[n]=g;eval(n+"=g")}catch(e){}});
 /* focal point on EVERY event picture outside the v3 frames too (owner 16/11 19:54Z, whole group): kitSceneArt — the one picture part — starts its
    cover crop on the subject box (object-position = the box centre); v3 frames then run the exact fit (kitPicFocus). */

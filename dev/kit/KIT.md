@@ -1638,8 +1638,12 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
 - PAGES (K-LIST-PAGE, picker-dom 26/11, MAIN 164 play-stopper: a year-18 chest drew 36k–63k nodes, iPad tab crash): the grid shows ONE
   PAGE = the whole rows that fit the box the dialog gives the grid (≥ 1, `BAL.kip.rows` (2) the cap; measured per dialog, only ever lowered so pages never
   flip) × the columns the grid shows in that dialog at that width — no inner scroll, no half row (§23). The §23 pager row stays in view: sticky at the
-  bottom of the box that scrolls the page; it never covers a tile. K-PICK-SHORT (KK63 ruling (a), 27/11 23:45Z): a box that cannot hold ONE whole row + pager steps the frame's scene picture / text cap
-  DOWN (no `kdtx` big picture; next smaller frame) until it does; only when even the smallest frame cannot, the pager sits under the row (`.kipw.kipshort`). (Step-down: picker-dom r6, not built yet.) The
+  bottom of the box that scrolls the page; it never covers a tile. K-PICK-SHORT (KK63 ruling (a), 27/11 23:45Z): a box that cannot hold ONE whole row + pager (+ the sticky confirm) steps the frame
+  DOWN until it does: step 1 = no big scene picture for that card (`.kpsubj.kpiart` / `.kdlgart` band / the live frame's `.k3ev` hidden, `.dlg.kdnopic`),
+  step 2 = the text cap (`.kdtx`) leaves the box row + pager. One shared rule in the frame fit (jk4 `kitOptNeed` + `kitDlgText`; the jksize live frame runs
+  `kitPickStep3` after every lay); a dialog once stepped at a screen size stays stepped on every page (no flip). A frame whose box already holds row + pager
+  keeps LIVE's frame. Only when even the stepped frame cannot, the pager sits under the row (`.kipw.kipshort`, never over a tile). The box's scroll cue
+  «Kéo xuống» stands above the sticky confirm + pager (`kipCueLift`). Scan: `dev/test/pick-short-scan.js` (box ≥ row + pager OR no big picture, Fold + iPad). The
   columns are read once the grid's size has stayed still `BAL.kip.settle` ms (resolved px tracks only; a mid-fit size never counts), kept per
   dialog kind and width; a different count draws the page again (first tile in view kept in view). The grid keeps the FULL width of the
   option box: the §23 kit pager buttons sit in ONE row under it (`.kippg`: ‹ `.kpkpg` · `.kpkpn` «trang N/M» · › `.kpkpg`; no count; no row

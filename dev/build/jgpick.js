@@ -66,8 +66,9 @@ function kipRowsFit(M,w,g0){const t=[...g0.querySelectorAll(".kipc")];if(!t.leng
  while(sc&&sc!==M&&!(/(auto|scroll)/.test(getComputedStyle(sc).overflowY)&&sc.scrollHeight>sc.clientHeight+2))sc=sc.parentElement;if(!sc||sc===M)return 0;/* nothing scrolls = everything is in view */
  const b=sc.getBoundingClientRect(),bot=Math.min(b.top+sc.clientHeight,innerHeight),gt=g0.getBoundingClientRect().top,cs=getComputedStyle(g0),gap=parseFloat(cs.rowGap)||0;
  const tops=[...new Set(t.map(x=>Math.round(x.getBoundingClientRect().top)))].sort((a,b)=>a-b),pitch=tops.length>1?tops[1]-tops[0]:t[0].getBoundingClientRect().height+gap;
- const pg=w.querySelector(".kippg"),ph=pg?pg.getBoundingClientRect().height+(parseFloat(getComputedStyle(pg).marginTop)||0)+2:0;
- const raw=pitch>0?Math.floor((bot-Math.max(gt,b.top)-ph+gap)/pitch):1;w.classList.toggle("kipshort",raw<1);/* not even one row + the pager fits: the pager never covers the row (K-PICK-SHORT) */return pitch>0?Math.max(1,raw):0}
+ const pg=w.querySelector(".kippg"),go=w.querySelector(":scope>.kipgo"),ph=(pg?pg.getBoundingClientRect().height+(parseFloat(getComputedStyle(pg).marginTop)||0)+2:0)+(go&&getComputedStyle(go).position==="sticky"?go.getBoundingClientRect().height:0);/* the sticky confirm stands under the row too */
+ const gtop=sc===g0.closest(".opts")?Math.max(gt,b.top):Math.max(b.top,gt-Math.max(0,sc.scrollHeight-sc.clientHeight-sc.scrollTop));/* a whole column that scrolls (person dialog .kdpall): she scrolls the grid up to the box top */
+ const raw=pitch>0?Math.floor((bot-gtop-ph+gap)/pitch):1;w.classList.toggle("kipshort",raw<1);kipCueLift(M);/* K-PICK-SHORT (a): the frame steps down first (jk4 kitDlgText: no big picture, text cap); only a box that still cannot hold one row + the pager puts the pager under the row (fallback (d), never over a tile) */return pitch>0?Math.max(1,raw):0}
 function kipPg(m,L,sel){const per=kipPer(m),pages=Math.max(1,Math.ceil(L.length/per));let pg=KIP_PG.get(m);
  if(pg==null){const at=sel!=null?L.findIndex(x=>x[1]===sel):0;pg=Math.floor(Math.max(0,at)/per)}pg=Math.min(Math.max(0,pg|0),pages-1);KIP_PG.set(m,pg);return{per,pages,pg}}
 function kipSelect(M,m,i){const ops=M.querySelector(".opts");if(!ops||!ops.querySelector(`:scope>.opt[data-m="${i}"]`)){KIP_SEL.set(m,i);kipRedraw();return}
@@ -111,6 +112,11 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
    never rise above the detail: 187–254 px below the box on Fold + iPad, Dâng quà dead). Every kipDetail draw moves its button out. */
 (function(){const k0=kipDetail;kipDetail=function(M){try{M&&M.querySelectorAll(".kipw>.kipgo").forEach(x=>x.remove())}catch(e){}const r=k0.apply(this,arguments);
  try{const d=M&&M.querySelector(".kipd"),g=d&&d.querySelector(":scope>.kipgo");if(g)d.after(g)}catch(e){console.error("kipgo",e)}return r}})();
+/* K-PICK-SHORT (law 11: nothing covers the confirm): the frame's scroll cue «Kéo xuống» inside a pick box (.opts.kiphas > .kscue, jksize) sits ABOVE
+   the sticky confirm (+ the sticky pager) and spans the whole box (in a grid box it took one column): its fade never covers «Dâng / Chọn» */
+function kipCueLift(M){try{const w=M&&M.querySelector(".kipw"),o=w&&w.closest(".opts");if(!o)return;const st=e=>e&&getComputedStyle(e).position==="sticky"?e.offsetHeight:0;
+ o.style.setProperty("--kipcue",(st(w.querySelector(":scope>.kipgo"))+st(w.querySelector(":scope>.kippg"))+4)+"px")}catch(e){}}
+(function(){const k0=kipDetail;kipDetail=function(M){const r=k0.apply(this,arguments);kipCueLift(M);return r}})();
 /* ---------- the gift moment ---------- */
 let KIP_GO=null;
 /* where the person is: the open person card's portrait in the panel, else the dialog's own figure, else the upper middle */
@@ -153,7 +159,7 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 .kipw.has .kshc.kipc:not(.on){opacity:.75}
 .kshc.kipc.on>.kshpic{filter:var(--k-glow);transform:scale(1.06)}
 .kipw:has(>.kippg)>.kipg{max-height:none!important;overflow:visible!important}/* a page = whole rows (BAL.kip.rows): no inner scroll, no half row (KIT §23) */
-.kipw>.kippg{display:flex;align-items:center;justify-content:center;gap:10px;margin:4px 0 2px;position:sticky;bottom:0;z-index:2;background:var(--k-card,#fffaf0);box-shadow:0 -6px 8px -6px rgba(0,0,0,.18)}.kipw.kipshort>.kippg{position:static;box-shadow:none}/* rv R4 FAIL 2: the §23 pager stays in view at the bottom of the box that scrolls the page; it never covers a tile (rv R5 FAIL 2): a box shorter than ONE row + pager (.kipshort) puts the pager under the row — OPEN, frame ruling K-PICK-SHORT (KK / MAIN) */.kipw>.kippg>.kpkpg{width:44px}
+.kipw>.kippg{display:flex;align-items:center;justify-content:center;gap:10px;margin:4px 0 2px;position:sticky;bottom:0;z-index:2;background:var(--k-card,#fffaf0);box-shadow:0 -6px 8px -6px rgba(0,0,0,.18)}.kipw.kipshort>.kippg{position:static;box-shadow:none}/* rv R4 FAIL 2: the §23 pager stays in view at the bottom of the box that scrolls the page; it never covers a tile (rv R5 FAIL 2): a box shorter than ONE row + pager after the frame stepped down (jk4 kitDlgText, K-PICK-SHORT (a)) puts the pager under the row = fallback (d) */.kipw>.kippg>.kpkpg{width:44px}
 .kipd{display:flex;flex-direction:column;gap:6px;min-width:0}
 .kipd>.opt.kipcard{pointer-events:none;margin:0;width:100%}
 .kipw>.kipgo{align-self:stretch;min-height:40px}
@@ -161,6 +167,7 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 /* reviewer r1: with the §70 strip, strip | card side by side on landscape screens. K-PICK-GO-REACH (KK61): the confirm sticks to the bottom
    of the dialog's scroller while the picker is in view (child of .kipw, so the sticky can rise over the grid + detail) */
 .kipw>.kipgo{position:sticky;bottom:0;z-index:2}
+#modal .opts.kiphas>.kscue:not(.sib){grid-column:1/-1;bottom:var(--kipcue,0px)}/* K-PICK-SHORT: the box's scroll cue stands above the sticky confirm + pager (kipCueLift) */
 /* kv3:.kv2 */:where(.kv2) .kipd.kipd2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:10px}:where(.kv2) .kipd2>.kidet{grid-column:1;grid-row:1/span 2}:where(.kv2) .kipd2>.kipcard{grid-column:2}
 
 /* kv3:.kv1 */:where(.kv1) .kipg{--kshsz:84px}
