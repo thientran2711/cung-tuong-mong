@@ -77,7 +77,7 @@ Object.assign(BAL,{shelf:{
  allowF:1,          /* dwelling allowance = her rank allowance (jinv luxAllow) × allowF */
  plainF:.15,lv3:1.5,/* sc below plainF × allowance = đơn sơ; above allowance = xa hoa; above lv3 × allowance = quá xa xỉ */
  /* what a visitor's eye does (once per visitor and owner every see.cdW tuần) */
- see:{cdW:4,supAff:[0,0,-4,-8],ghen:[0,0,3,6],npcOanK:.5,fitAff:2,nguGhen:2,witherAff:-2,seenW:12},
+ see:{cdW:4,supAff:[0,0,-4,-8],ghen:[0,0,3,6],/* NPC↔NPC jealousy → oán × BAL.oanCool.ghen.npc (review/net-ghen: the one rule, was npcOanK .5 here) */fitAff:2,nguGhen:2,witherAff:-2,seenW:12},
  /* EACH person's own taste for luxury (owner OD 17/11 ~19:50Z: "mỗi người sẽ có một cái độ thích và ghét xa xỉ khác nhau"): taste −1 (hates show) … +1 (loves it)
     = Σ nết weights (tr, the one trait pool) + trọng weights (jtrong) + a once-per-life personal lean (S.ctxSeed hash, ± spread), clamped.
     The viewer judges a room against HER OWN line: allowance × (1 + taste × k) — a frugal eye calls a lawful (even ngự ban) room "quá xa xỉ", a lover of show admires
@@ -236,9 +236,10 @@ window.shelfLook=shelfLook;window.shelfSeen=shelfSeen;window.shelfNow=shelfNow;
 function shelfReact(obs,t){if(!obs||!t||obs===t||obs===S)return"";const B=BAL.shelf.see;obs.shR=obs.shR||{};const k=wdKey(t);if(obs.shR[k]!=null&&wk()-obs.shR[k]<B.cdW)return"";obs.shR[k]=wk();
  const x=shelfLux(t);if(!x.n)return"";const pl=shelfLvFor(obs,t),ta=shelfTaste(obs);const sup=obs.queen||rkOf(obs)>rkOf(t);let m=1;try{m=tv(LUX_TR,obs)||1}catch(e){}
  /* by HER OWN eye (taste): too lavish → a superior frowns, a peer envies; to her liking → admired, a lover of show admires more */
- if(pl>=2){if(sup)affAdd(obs,t,B.supAff[pl]);else{const n=Math.round(B.ghen[pl]*m);if(t===S)obs.ghen=cl((obs.ghen||0)+n,0,100);else oanAdd(obs,t,n*B.npcOanK)}}
+ /* W10 (RV4 N2, one raise rule): every jealousy rise goes through j1 ghenUp — t = her → obs.ghen + the Chạnh lòng feeling; t = an NPC → obs's oán toward t × BAL.oanCool.ghen.npc */
+ if(pl>=2){if(sup)affAdd(obs,t,B.supAff[pl]);else ghenUp(obs,Math.round(B.ghen[pl]*m),`thấy ${t===S?"ngươi":t.name} bày đồ xa hoa`,t)}
  else if(pl===1)affAdd(obs,t,B.fitAff+Math.round(Math.max(0,ta)*BAL.shelf.taste.likeAff*(x.lv>=2?1:.5)));
- if(!sup&&shelfList(t).some(e=>e.from==="emp"||e.from==="th")){if(t===S)obs.ghen=cl((obs.ghen||0)+B.nguGhen,0,100);else oanAdd(obs,t,B.nguGhen*B.npcOanK)}
+ if(!sup&&shelfList(t).some(e=>e.from==="emp"||e.from==="th"))ghenUp(obs,B.nguGhen,`thấy ${t===S?"ngươi":t.name} bày đồ ngự ban`,t)
  if(x.wither)affAdd(obs,t,B.witherAff);return SHELF_LV[pl]}
 window.shelfReact=shelfReact;
 function shelfSee(obs,t,by){const r=shelfLook(obs,t,by,true);if(r)shelfReact(obs,t);return r}
@@ -259,7 +260,7 @@ function shelfSpyTxt(a,t,by){const r=shelfSee(a,t,by);if(!r||a!==S)return"";retu
  if(typeof AGSOC==="object"){AGSOC.call=["call","social","ally",g=>({ally:g.call})];AGACTW.call="ghé chơi"}}catch(e){console.error("shelf call",e)}})();
 /* two-way (OD:L1386): the deed NPCs do to her is also hers — "Ghé chơi" in her talk list (jtwoway topicOpts), same deed, same gain, both see the rooms */
 (function(){if(typeof topicOpts!=="function")return;const t0=topicOpts;topicOpts=function(v){const A=t0.apply(this,arguments);try{const D=TW.call;
- if(S&&v&&D&&!(typeof sameHouse==="function"&&sameHouse(S,v))&&D.req(S,v)&&!A.some(a=>a.n===D.n))A.push({n:D.n,o:100,x:`nàng quý ngươi +${BAL.tw.g.call} · hai bên thấy phòng ốc của nhau`,run:()=>{try{chatMark(v)}catch(e){}return twDo(S,v,"call",true)+"."}})}catch(e){console.error("shelf talk",e)}return A};window.topicOpts=topicOpts})();
+ if(S&&v&&D&&!(typeof sameHouse==="function"&&sameHouse(S,v))&&D.req(S,v)&&!A.some(a=>a.n===D.n))A.push({n:D.n,o:100,x:`nàng ${pvQuy(v,BAL.tw.g.call,"quý ngươi")} · hai bên thấy phòng ốc của nhau`,run:()=>{try{chatMark(v)}catch(e){}return twDo(S,v,"call",true)+"."}})}catch(e){console.error("shelf talk",e)}return A};window.topicOpts=topicOpts})();
 /* the visit happens AT the target's palace (her room / theirs), not wherever she is that khắc */
 (function(){if(typeof agOpts!=="function")return;const o0=agOpts;agOpts=function(){const O=o0.apply(this,arguments);try{for(const o of O)if(o.k==="call")o.at=(kh,vv,tt)=>tt?palaceOf(tt):null}catch(e){}return O}})();
 /* daily life: a consort who keeps her schedule this buổi may drop in on someone (her room weighs more: the player's palace is where life is seen)

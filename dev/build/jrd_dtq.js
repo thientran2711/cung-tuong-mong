@@ -176,7 +176,7 @@ rdDef("dtq_bien",9,{t:"Lời can gián",w:"emp",sj:"chuyện Hoàng thượng đ
   {n:"Biếu lễ, nhờ ông đặt thư lên án lúc khuya",f:"thu",wx:"thư đến tay ngài đúng lúc",lx:"lễ mất trắng nếu ông không đặt",rt:"Tổng quản gật: “Nô tài biết giờ nào ngài dễ đọc.”",rf:"Tổng quản nhận lễ, thư vẫn nằm dưới chồng tấu."},
   {n:"Tặng chút quà, cảm tạ lời khuyên",wx:"Tổng quản quý ngươi",lx:"tốn quà, bỏ một đường đưa thư",rt:"Tổng quản cúi đầu tiễn ngươi."},
   {n:"Hỏi ông ai muốn vua ra ải",wx:"biết phe xúi giục",lx:"Tổng quản cảnh giác, giữ khoảng cách với ngươi",rt:"Tổng quản khẽ nói: người Binh bộ ra vào Dưỡng Tâm điện nhiều hơn trước.",rf:"Tổng quản cười: “Nô tài chỉ biết hầu trà.”"}]},
- t1:{h:"Bậc của ngươi",w:"emp",t:()=>`Lệ cung: phi tần từ bậc ${RANKS[Math.min(DTQBN_SPK(),RANKS.length-1)].n} trở lên mới được dâng thư lên ngự án. Ngươi đang ở bậc ${RANKS[Math.min(S.rank,RANKS.length-1)].n}.`,o:[
+ t1:{h:"Bậc của ngươi",w:"emp",t:()=>`Lệ cung: phi tần từ bậc ${RANKS[Math.min(DTQBN_SPK(),RANKS.length-1)].n} trở lên mới được dâng thư lên ngự án. Ngươi đang ở bậc ${meRankN()}.`,o:[
   {n:"Dâng thư can lên ngự án",if:()=>S.rank>=DTQBN_SPK(),f:"thu",wx:"lời ngươi đến tay ngài đúng lệ",lx:"ngài đọc trong cơn bực",rt:"Hoàng thượng đọc thư hai lần, đặt dưới chặn giấy.",rf:"Hoàng thượng đọc lướt, gạt sang bên."},
   {n:"Nhờ Hoàng hậu chuyển lời",need:["hh"],f:"thu",wx:"lời ngươi đi qua Trung cung",lx:"Hoàng hậu biết ngươi nợ nàng",rt:"Hoàng hậu nói với ngài đúng ý ngươi.",rf:"Hoàng hậu chuyển lời, nhưng bớt đi một nửa."},
   {n:"Thêu một tấm bản đồ ải bắc",wx:"ngài thấy ải hiểm thế nào",lx:"tốn công, ngài có xem hay không chưa biết",rt:"Tấm bản đồ treo trong thư phòng, ngài đứng nhìn rất lâu."},

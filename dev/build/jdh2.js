@@ -43,7 +43,7 @@ const rkNm=p=>{try{return rkName(p)}catch(e){return ""}};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 /* ---------- the item ledger (jil) or its record shape ---------- */
 function box(){if(!S.il||typeof S.il!=="object")S.il={};const L=S.il;L.box=L.box||[];L.log=L.log||[];return L.box}
-function lgr(e,f,t,how){try{if(typeof ilLog==="function")return ilLog(e,f,t,how)}catch(x){}try{const L=S.il;L.log.push([wk(),e.dhid||0,e.k,f||"",t||"",how||""]);if(L.log.length>600)L.log.splice(0,L.log.length-600)}catch(x){}}
+window.lgr=lgr;function lgr(e,f,t,how){try{if(typeof ilLog==="function")return ilLog(e,f,t,how)}catch(x){}try{const L=S.il;L.log.push([wk(),e.dhid||0,e.k,f||"",t||"",how||""]);if(L.log.length>600)L.log.splice(0,L.log.length-600)}catch(x){}}
 function toStore(p,e,why,o){o=o||{};const x={e,at:"nvp",why,own:o.own||pk(p),w:wk(),by:"",rel:1e9,dh:1};if(o.back)x.back=o.back;box().push(x);lgr(e,o.from||pk(p),"nvp",why==="conf"?"bị tịch thu":"Nội vụ phủ nhặt được");return x}
 function fromStore(x,p,how){const L=box(),i=L.indexOf(x);if(i<0||!p)return false;L.splice(i,1);p.inv=p.inv||[];invAdd(p,x.e);lgr(x.e,"nvp",pk(p),how||"về");return true}
 /* ---------- where a piece is ---------- */

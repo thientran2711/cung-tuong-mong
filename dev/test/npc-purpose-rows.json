@@ -371,7 +371,7 @@
 "group": "G1",
 "event": "death→lãnh cung; midwife plant; maid bought by rival",
 "fp": "  if(has(\"nhantu\")&&roll(30)){p.out=true;if(p.queen)p.queen=",
-"done": "if(has(\"nhantu\")&&npcWhy(\"empMercy\",{p})){p.out=true;"
+"done": "if(has(\"nhantu\")&&npcWhy(\"empMercy\",{p})){punCold(p,\"phe\","
 },
 {
 "f": "j8.js",
@@ -3442,7 +3442,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "affair exposed: death or lãnh cung (roll 50)",
-"done": "if(npcWhy(\"empMercy\",{p:S}))cold("
+"out": "PUNISH-TIER-9 (OD 26/11 ~19:50Z / ~20:35Z, the CRIME decides): a proven tư thông takes the fixed tử tội road (BAL.charge.ttProven, fall(); the spare roll is BAL.charge.tu.spare from Sủng + who pleads) for her and every NPC — no NPC choice and no roll left on this line"
 }
 ]
 }
