@@ -280,22 +280,24 @@ function taintItem(p,ix,tk){const e=p.inv[ix],T=TAINT[tk];if(!e||!T||!T.on.inclu
 /* receiving: people's tastes */
 function giftVal(it,r){const base=it.gv||Math.round(it.pr/12)+2;/* items without a tg list (jeitem home pieces) like no one (title-sys2 fix: the gift bag threw) */if(!Array.isArray(it.tg))it=Object.assign({},it,{tg:[]});const like=r==="emp"?(it.tg.includes("emp")||((it.k==="nghien"||it.k==="dancoc")&&(has("trongtai")||has("chamchinh")))):r==="th"?it.tg.includes("th"):r&&r.queen?it.tg.includes("hh"):it.tg.includes("rv");return like?base:Math.round(base/3)}
 function giftRel(it,r){return giftVal(it,r)+BAL.eff.j8.giftRelPlus}/* ONE gift regard number (law 4) */
-function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint=e.t?1:0;const it=itm(e.k);a.inv.splice(ix,1);e.w=0;const g=giftVal(Object.assign({k:e.k},it),r);
- if(r==="emp"){ap(a,{sung:Math.max(1,Math.round(g/2))});if(e.t==="gia"||e.t==="trom"){ap(a,{sung:-20});punish(a,"dâng đồ ngự dụng giả mạo",2)}return `${NMc(a)} dâng ${it.n} lên Hoàng thượng. ${sgOf(a,Math.max(1,Math.round(g/2)))}. `}
- if(r==="th"){ap(a,{th:g});return `${NMc(a)} dâng ${it.n} lên Thái hậu. Thái hậu +${g}. `}
+/* K-GIFT-OUT (KK64, KIT-KRI-XL leftovers 2+3): giveTo.out = what really became of the piece — take (kept by the receiver) · sent (to her, she answers in «Quà tặng») · back (handed back to the giver) · found (Thái y check found the taint) · caught (taint seen / fake ngự dụng punished). The result seal and «Lễ làm lành» read THIS, never the log lines. */
+function giveTo(a,r,ix){giveTo.out=null;const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint=e.t?1:0;const it=itm(e.k);a.inv.splice(ix,1);e.w=0;const g=giftVal(Object.assign({k:e.k},it),r);
+ if(r==="emp"){ap(a,{sung:Math.max(1,Math.round(g/2))});giveTo.out="take";if(e.t==="gia"||e.t==="trom"){ap(a,{sung:-20});punish(a,"dâng đồ ngự dụng giả mạo",2);giveTo.out="caught"}return `${NMc(a)} dâng ${it.n} lên Hoàng thượng. ${sgOf(a,Math.max(1,Math.round(g/2)))}. `}
+ if(r==="th"){ap(a,{th:g});giveTo.out="take";return `${NMc(a)} dâng ${it.n} lên Thái hậu. Thái hậu +${g}. `}
  const gr=giftRel(Object.assign({k:e.k},it),r);/* ONE reader (law 4) */relAdd(a,r,gr);if(r.queen||(r===S&&S.rank>=7))ap(a,{hh:g});
  const ent={k:e.k,from:key(a)};if(e.iu)ent.iu=e.iu;/* the same piece (item ledger jil) */if(e.t){ent.t=e.t;ent.by=e.by}
- if(r===S){pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");return `${a.name} sai người mang ${it.n} sang tặng ngươi. `}
+ if(r===S){giveTo.out="sent";pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");return `${a.name} sai người mang ${it.n} sang tặng ngươi. `}
  /* RECEIVER CHOICE (jrcv rcvGiftIn, OD 18/11 ~21:15Z law 1): the NPC answers with HER giftin answers, the same numbers */
  const ans=typeof rcvGiftIn==="function"?rcvGiftIn(a,r,ent):null;
- if(ans==="back")return `${r.name} trả lại ${it.n} cho ${NM(a)}. `;
- if(ans&&!["take","check"].includes(ans))return ans;/* «found»: the line comes from jrcv (where the rule reads evGo) */
- invAdd(r,ent);if(ans!=="check"&&e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,BAL.eff.j8.evGiveTo);relAdd(a,r,BAL.eff.j8.giveTo);return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ. `}
+ if(ans==="back"){giveTo.out="back";return `${r.name} trả lại ${it.n} cho ${NM(a)}. `}
+ if(ans&&!["take","check"].includes(ans)){giveTo.out="found";return ans}/* «found»: the line comes from jrcv (where the rule reads evGo) */
+ invAdd(r,ent);if(ans!=="check"&&e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,BAL.eff.j8.evGiveTo);relAdd(a,r,BAL.eff.j8.giveTo);giveTo.out="caught";return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ. `}
  if(itm(e.k).sl&&(IT[e.k]||{}).rk>rkOf(r)&&(hasT(r,"Kiêu ngạo")||hasT(r,"Tham vọng")||roll(25)))wear(r,r.inv.length-1);
+giveTo.out="take";
  return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm +${gr}. `}
-function plantItem(a,t,ix){const e=a.inv[ix];if(!e||e.h)return"";if(typeof ilUid==="function")ilUid(e);a.inv.splice(ix,1);e.w=0;a.schemes=(a.schemes||0)+1;
- if(!aRoll(oPlant(a,t),a)){/*evok: plant act (runAct deed)*/evA(t,a,BAL.eff.j8.evPlantItem);relAdd(a,t,BAL.eff.j8.plantItem);if(typeof ilGone==="function")ilGone(a,e,"evid");return `<span class="r">Kẻ lẻn vào cung ${NM(t)} cài ${iname(e)} bị bắt, khai ra ${NM(a)}.</span> ${NMc(t)} nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ. `}
- invAdd(t,{k:e.k,t:e.t,by:key(a),h:1,iu:e.iu});/* the same piece (item ledger jil) */return `${NMc(a)} lén cài ${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""} vào rương ${NM(t)}. `}
+function plantItem(a,t,ix){plantItem.out=null;const e=a.inv[ix];if(!e||e.h)return"";/* K-GIFT-OUT: plantItem.out = ok · caught */if(typeof ilUid==="function")ilUid(e);a.inv.splice(ix,1);e.w=0;a.schemes=(a.schemes||0)+1;
+ if(!aRoll(oPlant(a,t),a)){/*evok: plant act (runAct deed)*/evA(t,a,BAL.eff.j8.evPlantItem);relAdd(a,t,BAL.eff.j8.plantItem);if(typeof ilGone==="function")ilGone(a,e,"evid");plantItem.out="caught";return `<span class="r">Kẻ lẻn vào cung ${NM(t)} cài ${iname(e)} bị bắt, khai ra ${NM(a)}.</span> ${NMc(t)} nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ. `}
+ invAdd(t,{k:e.k,t:e.t,by:key(a),h:1,iu:e.iu});/* the same piece (item ledger jil) */plantItem.out="ok";return `${NMc(a)} lén cài ${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""} vào rương ${NM(t)}. `}
 /* a taint working on its holder */
 function taintHit(p,e,used){const t=e.t;if(!t)return"";let r="";
  if(t==="xa"&&p.preg&&!p.fake&&(used||roll(BAL.odb.j8.taintXa))){p.preg=0;p.hidden=false;ap(p,{suc:BAL.eff.j8.taintXaSuc});r=`<span class="r">${NMc(p)} động thai, sảy mất đứa bé.</span> `}
