@@ -1,4 +1,5 @@
-/* TMK-WARN-5 (RV-189 FAIL item; laws 3 / 4 / 11): the OPENED «Xử nhân chứng» door card (jdoor doorOpen → PEND.door k:"wit", jone tier plaques,
+/* ACCEPTANCE TEST FOR K-HINT-KEM (kit keeper, KIT_REQUESTS): it FAILS until the kit split «nhưng …» → Kèm on a rolled hint card lands; covHint is ready.
+   TMK-WARN-5 (RV-189 FAIL item; laws 3 / 4 / 11): the OPENED «Xử nhân chứng» door card (jdoor doorOpen → PEND.door k:"wit", jone tier plaques,
    hidden-outcome card: the kit reads each plaque from the row's hint, jcover covHint → jopic kitOptFinal) shows, on all three tiers, Thành = the
    success only (no loss in it), Bại = only what failure adds, Kèm = what comes with the deed: nhẹ / nặng the deed's Đức (either way, written after
    Bại), vừa the bạc + Đức paid only when she accepts (written under Thành). Every number = the BAL value through the kit marks (no typed number).

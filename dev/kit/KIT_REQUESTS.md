@@ -526,12 +526,12 @@ K-DEAD-PORTRAIT = already built: §84b .kst-dead (review/owner-ui-a 9724b12d, MA
 - **Wanted (kit keeper):** in face mode drop the `.kr-mat2` copy when a source kr-mat / kr-bai row is kept (or keep only the copy), so each loss
   reads once; extend kit-hand-mat-scan to fail on doubled rows.
 
-## K-HINT-KEM (28/11, TMK-WARN-5 for RV-189; BUILT on review/tmk-warn-r4 by the worker — kit keeper to confirm, law 9)
+## K-HINT-KEM (28/11, TMK-WARN-5 for RV-189; OPEN — kit keeper builds it, law 9 / OD:L1103; the worker's draft was taken off review/tmk-warn-r4 per RV-189 FAIL-HOLD, draft = commit 4838f246 jopic hunk)
 - **Fault:** a ROLLED hidden-outcome card (every PEND / event choice, hideOut → kitHideOut keeps only Tốn + the hint) reads its plaques from the
   hint in jopic kitOptFinal: part 1 = Thành, EVERYTHING else = Bại. The hint's «nhưng …» part is what comes WITH the deed (jk2b kitHint puts the
   kèm / side losses there; on a rolled card nothing else), so an either-way loss read as a failure and the success looked free (RV-189: the
   «Xử nhân chứng» door card showed the deed's Đức in Bại on all three tiers).
-- **Built (jopic kitOptFinal, hint branch only):** on a rolled card the «nhưng …» clauses go to their own red row `.kr-kem .kdup` «Kèm» (kept on
+- **Wanted (jopic kitOptFinal, hint branch only; draft in 4838f246):** on a rolled card the «nhưng …» clauses go to their own red row `.kr-kem .kdup` «Kèm» (kept on
   the face), under Thành when the hint writes it before «hỏng thì», under Bại when after; Bại keeps only «hỏng thì …». A SURE card is unchanged
-  (its «nhưng …» is the sure loss in Mất). KIT.md §6.2b ROWS updated in place. Test: dev/test/tmk-warn-witcard.js (MUTATE=nokem must fail).
+  (its «nhưng …» is the sure loss in Mất); KIT.md §6.2b ROWS to be updated in place by the kit keeper. Test: dev/test/tmk-warn-witcard.js (MUTATE=nokem must fail).
 - **Kit keeper:** confirm or move it; whole group = every rolled hint-mode card whose hint carries «nhưng …».

@@ -284,3 +284,11 @@ Not run: full quickcheck (lander step).
 ### Handover (if a TMK-WARN-6 is needed)
 - STATE: review/tmk-warn-r4 at the tip pushed with this report; RV READY sent to RV-189. If RV / kit keeper reject the kit split: the fallback is a
   KIT REQUEST only (covHint cannot reach a Kèm plaque without it).
+
+### TMK-WARN-5 r2 — RV-189 FAIL-HOLD on kit (law 9 / OD:L1103; rv-189.md 4c67eccf) obeyed
+- Dropped from review/tmk-warn-r4: the jopic kitOptFinal hunk and the KIT.md §6.2b line (reverse of my own hunks only — kk71's jopic change kept;
+  jopic.js = e1f6b6f1). KIT_REQUESTS «K-HINT-KEM» now OPEN for the kit keeper (my draft = commit 4838f246, jopic hunk). covHint kept (RV: content right).
+- dev/test/tmk-warn-witcard.js kept as the ACCEPTANCE TEST of K-HINT-KEM: FAILS today (Đức back in Bại, no Kèm row), must pass once the kit lands.
+- Stills removed from git (the build refuses shots in git: «shots go to scratch, never git»); they were in review-sheets/tmk-warn-5 at 39dc6cae.
+- Re-run on the r2 build: tmk-warn.test 17/17 · kit-hand-dupmat ALL OK · webkit 0 · witcard FAIL (expected, waits for the kit).
+- NEXT (TMK-WARN-6 or me): when the kit keeper's K-HINT-KEM branch exists → merge it, rebuild, witcard Fold + iPad 19/19, stills, RV READY → RV-189.
