@@ -2211,6 +2211,197 @@
      "buoi": null
     }
    ]
+  },
+  {
+   "id": "E-S1-R1-greedy-5-1522350896",
+   "origin": "thd",
+   "road": "thd_tho",
+   "round": "R1",
+   "bot": "greedy",
+   "botHarness": "bold",
+   "kiep": 5,
+   "seed": 1522350896,
+   "dev": "fold",
+   "harness": {
+    "kind": "realtap",
+    "realtap": true,
+    "jsClicks": 0,
+    "cap": null,
+    "sha": "89f5b956 → … → f65d019b",
+    "deadButtons": 1,
+    "stuck": 2
+   },
+   "live": "Build 5ab5b80e406e → LIVE 24beb1a4 → ca4a1689 → 166bd0a3 → 7be54246 (mixed ×3)",
+   "end": "Lãnh cung",
+   "type": "end",
+   "fate": "Tuổi xuân qua đi",
+   "death": false,
+   "age": 40,
+   "year": 23,
+   "rank": 0,
+   "buoi": 3154,
+   "steps": 87935,
+   "taps": 11799,
+   "exitPick": null,
+   "bugCounts": {
+    "note": 1,
+    "game": 11,
+    "crash": 1,
+    "dead": 1,
+    "stuck": 2,
+    "harness": 7
+   },
+   "valid": "VALID",
+   "flags": [
+    "mixed build (gift-picker fix resume)",
+    "mixed build (ui3 resume)",
+    "mixed build (kri-xl resume)",
+    "LIVE update 7be54246 at the end"
+   ],
+   "reviewFiles": [
+    "review/rerun-E-S1-E-S1-R1-greedy-5-1522350896-moments.md",
+    "review/rerun-E-S1-E-S1-R1-greedy-5-1522350896-review.md"
+   ],
+   "bugs": [
+    {
+     "type": "crash",
+     "msg": "tab crashed (Page crashed) at buổi 703",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)",
+     "n": 3,
+     "buoi": null
+    },
+    {
+     "type": "note",
+     "msg": "item pick grid: no item can be given now (932 items, every confirm disabled or greyed; card says «Thường Trâm hoa lụa Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Nội») on «Biếu quà làm lành» → ✕",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls ()",
+     "n": 18,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "item pick grid «» re-opened 3× by «Tiếp ▸» with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi",
+     "n": 2,
+     "buoi": null
+    },
+    {
+     "type": "stuck",
+     "msg": "no progress 15 min on page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 1 người»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "stuck",
+     "msg": "no progress 15 min on page «Dực Khôn cung · Hòa Sướng hiên · Ở đây còn 2 người»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "item pick grid «» re-opened 3× by «Chọn lá này» with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi",
+     "n": 8,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Lụa Hàng Châu Rất vững TỐN 2 khắc, lụa Hàng Châu 1»",
+     "n": 6,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «Túi hương long diên Rất vững TỐN 2 khắc, Túi hương»",
+     "n": 3,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «!»",
+     "n": 2,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "SAVE STALE: the stored save stopped following the live game (no setItem error seen)",
+     "n": 23,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Có người đến)",
+     "n": 14,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "NO-EXIT DIALOG .dlg «Tết Đoan ngọ · Thi đối câu ngày Đoan ngọ» (div.dlg.kpsc.kpanel): no close / next after scrolling to its end → later visits unstuck at once by taps",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "dialog scrolled to the end has no close / next button: .dlg «Tết Đoan ngọ · Thi đối câu ngày Đoan ngọ»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Chờ tin» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Có người đến)",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "NO-EXIT DIALOG .dlg «Phòng bị» (div.dlg.kpsc.kstage): no close / next after scrolling to its end → later visits unstuck at once by taps",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "dialog scrolled to the end has no close / next button: .dlg «Phòng bị»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "picker stalled 11 steps / 8 s on .kmov «» without a real tap (area 12; last refused tap: gone «Ta biết rồi») → tapped «Ta biết rồi»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "harness",
+     "msg": "NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): no close / next after scrolling to its end → later visits unstuck at once by taps",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "dialog scrolled to the end has no close / next button: .kmov «»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "dead",
+     "msg": "close button has no effect: .dlg «Danh hiệu mới» «Để sau»",
+     "n": 1,
+     "buoi": null
+    },
+    {
+     "type": "game",
+     "msg": "softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=1: Nghe đồn)",
+     "n": 1,
+     "buoi": null
+    }
+   ]
   }
  ],
  "parked": [
