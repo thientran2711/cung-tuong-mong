@@ -137,11 +137,14 @@ const PICKERS = {
   pick_tangqua: () => { const V = rivals.filter(x => x.alive !== false && !x.out)[0]; const d = mkP('giftpick', { v: V.id }); pushModal({ t: d.t0 || 'Tặng quà', h: d.t, opts: d.o, pid: d.pid, pp: d.pp, who: d.who }) },
   pick_dangqua: () => { const d = mkP('giftto', { t: 'emp' }); pushModal({ t: 'Dâng quà', h: d.t, opts: d.o, pid: d.pid, pp: d.pp, who: d.who }) },
 };
+/* LIVE §97 kitScreenVeil (jscrv, «Đang bày tranh…»): a dialog that opens with pictures not yet decoded is veiled until they are; the harness waits
+   for the veil to lift (up to 20 s) before it probes or taps — a tap on the veil is not a dead tile (r7: iPad «Dâng quà» tile 0 «unreachable» = the veil) */
+async function veilGone(p) { for (let k = 0; k < 40; k++) { const v = await p.evaluate(() => [...document.querySelectorAll('.kscrv')].some(e => { const cs = getComputedStyle(e); return cs.display !== 'none' && +cs.opacity > 0.05 && e.getClientRects().length })); if (!v) return true; await p.waitForTimeout(500) } return false }
 async function runPicker(p, dev, name, rows) {
   const rt = RT.make(p, { dev, touch: true, shots: OUT });
   await clean(p); await p.evaluate(() => { window.__kriOff = 0 });
   await p.evaluate(`(()=>{const f=${PICKERS[name].toString()};try{if(window.DQ)DQ.user=(DQ.user||0)+1;f();showModal()}finally{if(window.DQ)DQ.user--}})()`);
-  let st = null; for (let k = 0; k < 12; k++) { await p.waitForTimeout(500); await p.evaluate(() => document.querySelectorAll('.kfgain').forEach(e => e.remove())); st = await p.evaluate(READ); if (st.up && await p.$('#modal .kipc')) break }
+  let st = null; for (let k = 0; k < 12; k++) { await p.waitForTimeout(500); await p.evaluate(() => document.querySelectorAll('.kfgain').forEach(e => e.remove())); st = await p.evaluate(READ); if (st.up && await p.$('#modal .kipc') && await veilGone(p)) break }
   const n = await p.$$eval('#modal .kipc', L => L.length);
   /* K-PICK-FOLD-BAND (KK61): (a) no empty band between the dialog picture and its text, (b) the prompt line is on screen (not under the options) */
   await unveil(p);

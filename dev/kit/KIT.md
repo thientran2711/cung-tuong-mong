@@ -1635,6 +1635,10 @@ Owner: "Khung tặng quà tôi muốn hiện hình món đồ luôn, xếp theo 
   device, every picker of the family; at the end of the scroll it rests in its own slot under the card (nothing stays covered). Never inside `.kipd`.
   K-PICK-PAGER-GO (KK62, 27/11): when the grid is paged (§23 pager `.kippg`, K-LIST-PAGE, also sticky) the pager sticks right ABOVE the confirm
   (`bottom: --kipgoh + 2px`, `--kipgoh` = the confirm's real height set on `.kipw` by the kipDetail wrapper) — never under it (both sticky at bottom:0 hid ‹ trang N/M › by 41 px).
+  K-PICK-TOP (picker-dom r7, rv R6 FAIL 2, law 11 «nothing covers the confirm»): the sticky confirm `.kipgo` and the sticky pager `.kippg` stand above EVERY chip /
+  badge of the pick box — every other part of the box (`.kipw > :not(.kipgo):not(.kippg)`: tile grid, detail card; `.opts.kiphas > :not(.kipw):not(.kscue)`: other option
+  cards) is its own stacking context (`isolation:isolate`), so a chip's z-index (kitItem grade chip `.kgchip-fr` z3, stack / lock badges) stays inside it.
+  Scan: `dev/test/pick-short-scan.js` «paint» column (every box element overlapping the confirm / pager hit-tested with pointer-events on: first view, scrolled, page 2).
   Confirm clicks the real option button, so chooseM and every wrapper (cost, j25 visit ticket, §64 item-event hooks) run unchanged.
   Above the card: the KIT §70 item detail strip (`kitItemDetail({e},{cls:"kidet-strip",noLux:true})`, jitd). Close = the kit ✕ (32.10), no Thôi row.
 - PAGES (K-LIST-PAGE, picker-dom 26/11, MAIN 164 play-stopper: a year-18 chest drew 36k–63k nodes, iPad tab crash): the grid shows ONE
