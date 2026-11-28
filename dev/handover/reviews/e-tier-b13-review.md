@@ -5,8 +5,8 @@ Reviewer E-TIER-B13-RV (session_01DgYSWptGZG8FdKXhToAAqr, depth 2, START_CTX ≈
 PRIORITY #1 CHECK ('road.c.tier|road.c.st|rdseeds_tier|jrdcsd|equal-value'): OD 27/11 ~00:46Z law 2 canon overwrite (read verbatim ~00:36Z–~01:14Z) | main LIVE aecbc267: no BAL.road.c.tier, jroadc «Σgain == Σloss == BAL.road.c.st» | review/* e-tier-b13 6738c302 (this) | claims E-TIER-B13 (worker), no other reviewer.
 KIT CHECK: reuses the j67 story card (kit event frame), kit option cards, oddsChip odds words — no UI part added or changed (data / rules only). dev/kit/KIT_CHECKLIST.md: no line touched. kit-std-scan (Fold + iPad, merge a378a05e): total 6 (baseline 28) {X06 4, X08 2} = the worker's number, no UI change.
 
-## VERDICT: PASS — LAND READY BIG review/e-tier-b13-rv-m <SHA>
-(<SHA> = the last commit on review/e-tier-b13-rv-m: LIVE aecbc267 + 6738c302, built files rebuilt, + 2 reviewer test-only fixes below.)
+## VERDICT: PASS — LAND READY BIG review/e-tier-b13-rv-m = the branch tip (the commit holding this file; 885292b2 = the last code / test commit, same tree minus this note)
+(885292b2 = the last commit on review/e-tier-b13-rv-m: LIVE aecbc267 + 6738c302, built files rebuilt, + 2 reviewer test-only fixes below.)
 
 ## (0) Merge
 - 6738c302 onto LIVE c03d6ee7 → a378a05e, then onto LIVE aecbc267 → 890614d6 (+ the test fixes). Both times ONLY index.html + sw.js conflicted (built files) → rebuilt by dev/site/build_site.sh; assets.json = LIVE (no diff). No source conflict: LIVE changed j67 / jroad / jroad8 / jbal* lines this branch does not touch.
