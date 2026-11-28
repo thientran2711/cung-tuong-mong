@@ -88,3 +88,38 @@ Only built files conflicted (index.html, sw.js → LIVE, then build_site.sh; ass
 ## Handover / open items
 - FOR MAIN: rows for the 70 roads/premises with no reviewed F14ROLE row (413 roles) — content review role by role; until then story14-frame item 3 FAILs and those roads' rivals are never «hostile».
 - review/sideq-road-fold (harness fix for road-full / story14-frame / road-saves …) should land so these bots play on LIVE.
+
+## REVIEW — B BIG RV f14role-inherit (session_01N1tNP5nUH1msGiPcxxchEz, opus, fresh), 28/11
+PRIORITY #1 CHECK ('f14role|cnvstall|cnv_chu|inherit'): OD 0 | ledger 0 | MAIN_STATUS:302 MAIN 178 ruling «B F14ROLE road ch .5–.11 inherit nearest earlier row (.4 cast)» | main jst14.js F14ROLE (own-row only) | review/* review/f14role-inherit (this) + review/sideq-road-fold-r2 (harness: road-full / road-saves / story14-frame qdrain lines, REUSED as scratch copies, not committed) | claims B F14ROLE-CNV (fixer archived).
+KIT CHECK: n/a — no UI / kit / CSS change; the only player-visible path touched is the existing rdFinale result card (jroad fb path), wording unchanged.
+Branch: review/f14role-inherit-r2 = 6b00d4f0 + merge LIVE 5fb13d60 + merge LIVE 18003079 (both: only index.html / sw.js conflicted → --theirs, build_site.sh, assets.json = LIVE). Source diff vs LIVE = jst14.js + jroad.js only (+ 2 new tests, story14-frame item-3 line, report).
+
+### Checks
+1. Source hunks vs LIVE — f14Row = the ruling exactly: own row first; else only a REAL road chapter (ARC67[id].o==="rd" + road + rn>0) walks <road>_<rn-1> … <road>_<BAL.road.first>, then <road> (= .4 cast); anything else null. st_dong / st_con / s_* (o≠"rd") resolve only their own row (test check 4). Composed roads (rdcRoad → rdDef) carry o:"rd" + road too. No `<road>_<n>` own row exists today, so «own row wins» is proven by the synthetic check 3. PASS.
+2. f14Carried — judged a NEEDED part of the same fault (law 11), NOT a new rule (laws 16/18 OK): assembly order j67 → jst14 (87) → jroad (91), so jst14's newThread67 hook sees the carried person rdCast put in A.act; with the inherited row (no f14Carried) the SAME rival is hated again every road chapter — measured: MUTATE=carry → tt_co .5/.6/.7 each n=1 (hate stacks −thiện cảm/+oán per chapter). With it: hate once when the person is first cast into a hostile role (as LIVE does at .4), a recast (new person) hated once. This keeps LIVE's meaning (hate on cast) and only stops a side effect the ruling itself would create. Not escalated.
+3. cnv_chu stall fix — family covered: road-cut (every full road, 92; 4 bd skipped = premise not rollable fresh) PASS at cuts 7 / 10 / 11; my added probe «origin ending told EXACTLY once» (rdFinale + chFinale67 counted) 88/88 at each cut — no double ending (law 6c). Cut 5 with the test closing len14 at once: the 8 maid roads reach 13 (pool of 7 maid premises spent) — a TEST artifact: len14 has no time limit and 13–14 open once she is raised (jend14 header); same probe with a real srvRise at len14 → 8/8 roads 14/14, ending once (41/41). No typed number (BAL.road.first/last, law 4). PASS.
+4. Old saves mid-road: road-saves (sideq qdrain copy) tt,cnv: fix 3/5 = LIVE 3/5, same 2 rows (old MAIN fixture + td phase-1 premise, item A parked by MAIN 178); full-road mid-road tt + cnv PASS both. oldsave-r1 16/16. quickcheck «old LIVE save loads + plays a buổi» ok. PASS.
+5. story14-frame (sideq qdrain copy + this branch's item-3 line): fix 25/27 — FAILs = item 3 (413 roles with no row anywhere on 70 roads/premises — content, FOR MAIN, not this ruling) + old save (main build) fixture (item A). The fixer's third FAIL (OD:L1247 empty sample) now PASSES (pt_su life: st_con rival hostile, me −26 / her −43 / oán 10). LIVE: see table.
+6. Wording: no player-visible string added or changed (diff = code + comments). PASS.
+
+### Tests (one browser at a time; build = root index.html of r2; LIVE = origin/main 18003079 index.html)
+| gate | r2 | LIVE | note |
+|---|---|---|---|
+| f14role-inherit.js | PASS 6/6 | FAIL 4/6 | MUTATE=1 FAIL 4/6 · MUTATE=carry FAIL 1/6 |
+| road-cut.js cut 7 | PASS 273/273 (+ once-probe 361/361) | FAIL 241/273 | MUTATE=fill FAIL 257/273 · MUTATE=eg12 FAIL 265/273; cuts 10/11 PASS 361/361 |
+| road-full cnv_chu seeded ×8 (qdrain copy + seeded Math.random) | 5 seeds 9/9; seed 22 natural cut ch.11 + seed 16 natural cut ch.6 → 14/14, ending told (the 2 «road in order / finale from .11» FAILs = by design for a cut road); seed 21: road ran in full, stuck at ch.12 len14 400 m (harness: she is dead at every month end, risen=1, force14 set — the bot's revive cannot finish the milestone) | seed 21 LIVE 9/9 (world diverges between builds) | seed 21 not caused by this diff: cnv_chu has no F14ROLE row (inherit inert), road ran in full (fill / eg12 / fallback paths not hit) — noted, not blocking |
+| road-full tt_co · nc_gian (seed 31) | 9/9 · 9/9 | — | |
+| road-saves tt,cnv | 3/5 | 3/5 | same 2 rows |
+| oldsave-r1 | 16/16 | — | |
+| quickcheck ALONE | open 1866 ms · old save ok · perf new/live render 272/278, tab 428/408, buổi 1448/1398 PASS; CORE GATES FAIL G4 94-q-softlock (4) | CORE GATES FAIL G4 94-q-softlock (1) on LIVE 18003079 | flaky person-view gate, present on LIVE (fixer saw LIVE 5); diff does not touch jdayq / person views → not this change | |
+| story14-frame | 25/27 | 25/27 (same 2 FAIL rows; item 3 misses 551 roles on LIVE vs 413 on r2) | the L1247 «hostile cast people hate her» row PASSES on both in this seed | |
+
+### Laws touched
+law 4 ONE CORE PASS (BAL.road.first/last read, no typed number) · law 6 REAL people: hate is real and once per person (f14Carried), ending told exactly once (6c) PASS · law 11 FIX WHOLE GROUP: 92 roads × cut points + maid/consort table PASS · law 13 PRIORITY #1 line present (fixer report + this review) PASS · laws 14/16/18: f14Carried is not a new rule (see check 2) PASS · law 7 / VANPHONG: no wording change PASS · KIT laws 9/10: no UI change.
+
+### Open (not blocking, FOR MAIN)
+- 413 roles on 70 roads/premises have NO reviewed F14ROLE row anywhere (content review role by role); story14-frame item 3 stays FAIL until then (LIVE 551 → r2 413).
+- road-full harness: a maid who dies every month end after she is raised at ch.12 (seed 21, r2 build) never finishes len14 under the bot's revive — harness limit, not this diff (no row on cnv_chu, road ran in full).
+- review/sideq-road-fold-r2 test-file lines (qdrain in road-full / road-saves / story14-frame) are still not on LIVE; this review used scratch copies of them.
+
+VERDICT: PASS — LAND READY review/f14role-inherit-r2 (sha below; ancestor = LIVE 18003079, FF).
