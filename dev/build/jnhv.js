@@ -275,7 +275,8 @@ function yieldFaces(m,n){if(!CUR||!liveM(m)||!KP||!AB().face)return;/* BAL.area.
    Q.forEach(q=>{const one=[q];one.fh=hit(faceOf(q,0,1));if(one.fh||ovS(q))place(one);else{occ.push(span(q,1));if(q.yd){q.yd=null;plateS(q,1);an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}}});return}
   if(pl==null){if(!Q.fh){/* LRM7: overlap-only and no free floor → stays where she stands (no move) */Q.forEach(q=>{occ.push(span(q,1));if(q.yd){q.yd=null;plateS(q,1);an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}});return}
    /* LRM7: no free floor for a face-hit group → each figure steps back about her OWN feet (the same box faceOf(q,0,s) the face check reads), faces clear of the board */
-   s=1;while(Q.some(q=>hit(faceOf(q,0,s)))&&s>sMin+1e-6)s=+(s-.04).toFixed(2);
+   const crossAt=s=>Q.some(q=>{const w=q.w*s,b=body(q.x+(q.w-w)/2,w);return occ.some(o=>Math.min(b.r,o.r)-Math.max(b.l,o.l)>1)});/* LRM7: also smaller until her body crosses no one already placed (people never cross) */
+   s=1;while((Q.some(q=>hit(faceOf(q,0,s)))||crossAt(s))&&s>sMin+1e-6)s=+(s-.04).toFixed(2);
    Q.forEach(q=>{const w=q.w*s;occ.push(body(q.x+(q.w-w)/2,w));q.yd={T:q.x,s};plateS(q,s);an(q.el,[{transform:`translate(${q.x}px,${q.y}px) scale(${s.toFixed(3)})`}],{duration:still()?1:420})});return}
   occ.push({l:pl+E.a,r:pl+E.b});
   Q.forEach(q=>{const bl=pl+(q.x+q.w*.22-l0)*s,vl=bl-q.w*s*.22,T=vl-q.w*(1-s)/2;q.yd={T,s};plateS(q,s);const to=`translate(${T}px,${q.y-up}px) scale(${s.toFixed(3)})`;an(q.el,[{transform:to}],{duration:still()?1:420})})};
