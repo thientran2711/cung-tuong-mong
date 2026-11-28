@@ -150,7 +150,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
    (sl.length?kitSlide("story-now",sl,{cur:sl.length-1,tocTitle:"Mục lục chương",tocAll:ktChapToc(),tocMore:nx?[["next",`Còn ${F?"":"khoảng "}${nx} chương nữa`,"chưa tới"]]:[]}):card)}
  else if(sub.cur==="rank"){
   if(S.rank>=7)h+=kitEmpty("Ta là Hoàng hậu, không còn bậc để lên",["Đưa con mình lên ngôi để thành Hoàng thái hậu."],{topic:"Sắc phong"});
-  else if(S.out)h+=kitEmpty("Ta đang ở lãnh cung, chưa bàn chuyện sắc phong",[`Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).`],{topic:"Sắc phong"});
+  else if(S.out)h+=kitEmpty("Ta đang ở lãnh cung, chưa bàn chuyện sắc phong",[`Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldFrom!=null?S.coldFrom:(S.coldRank||0)))].n}; được tha thì về phẩm ${coldTitleTxt(S)}; ghế đã đủ người thì thấp hơn một bậc.`]/* PUNISH-TIER rule (4) */,{topic:"Sắc phong"});
   else{const R=promoReq();const ok=R.filter(x=>x[0]).length;
    h+=kitSlide("story-rank",[{kicker:"Điều kiện sắc phong",title:RANKS[S.rank+1].n,sub:`Đạt ${ok}/${R.length}`,img:kitInfoArt("sắc phong").src||art,tap:"chapRankOpen",
     body:`<div class="ktop">${kitInfo("Ngôi Hoàng hậu")} <span class="kchip ${S.duc>=hhNeed(S).duc?"g":"r"}">Đức <b>${kitNeed(S.duc,hhNeed(S).duc)}</b></span> ${typeof exChips==="function"?`${kitInfo("Khảo hạch tấn phong")} ${exChips()}`:`<span class="kchip n">đủ điều kiện: cuối tháng có thánh chỉ</span>`}</div>`}]);

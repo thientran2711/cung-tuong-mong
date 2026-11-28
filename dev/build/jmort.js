@@ -67,12 +67,12 @@ function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S.emp){S.mort.empDue=why||(p.thoO?"Ngài lâm trọng bệnh đã lâu, thuốc thang vô hiệu":p.sgn?"Ngài đột ngột lâm bệnh nặng, chưa đầy một tháng đã băng":"Ngài trúng phong đột ngột giữa đêm");return ""}
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
  if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||p.nbWhy||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<BAL.mortx.youngAge?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
- if(rivals.includes(p)){p.alive=false;dieMk(p,why||"age");if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
+ if(rivals.includes(p)){p.alive=false;try{dthStamp(p,why,"lâm trọng bệnh qua đời")}catch(e){};dieMk(p,why||"age");if(p.queen){p.queen=false;if(S.vacSince==null)S.vacSince=S.turn}return `<span class="r">${p.name} ${why||"lâm trọng bệnh qua đời"}, ${p.age} tuổi.</span> `}
  if(p===S.maid){const o=S.maid.name;S.maid=newMaid(nmNew("maid"),M.maidLoy);if(typeof npcRoleGone==="function")npcRoleGone("maid");return `<span class="r">Cung nữ thân cận ${o} ${why||"lâm bệnh qua đời"}.</span> Nội vụ phủ đưa ${S.maid.name} đến hầu thay. `}
- for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
+ for(const q of [S].concat(rivals))if(q&&q.staff&&q.staff.includes(p)){q.staff.splice(q.staff.indexOf(p),1);try{if(q===S){p.alive=false;dthStamp(p,why,"");(S.dstaff=S.dstaff||[]).push(p)}}catch(e){}/* her dead servant stays on record (owner 27/11 ~05:10Z): S.dstaff, shown as «Đã khuất» in Cung nhân */try{fillStaff(q,true)}catch(e){}return q===S?`Người hầu ${p.name||""} trong cung ngươi ${why||"qua đời"}. `:""}
  const C=S.court||{};for(const k in C)if(C[k]===p){const o=p.name;const pre=OFFICIAL[k]||"Quan";p.af={};p.gen=(p.gen||0)+1;p.pn=nmNew(k==="ty"?"doc":k==="ped"?"eun":"eunE");p.name=p.pn;delete p.fid;delete p.fcKeep;if(typeof npcRoleGone==="function")npcRoleGone({tq:"eun",ty:"doc",ksp:"ksp"}[k]||k);p.age=k==="ped"?M.repl.young[0]+R(M.repl.young[1]):M.repl.adult[0]+R(M.repl.adult[1]);delete p.tho;delete p.fc;delete p.fk;assign(p,K);
   return `${o} ${why||"qua đời"}; ${p.pn?pre+" "+p.name:p.name} lên thay. `}
- if((S.men||[]).includes(p)){p.alive=false;dieMk(p,why||"age");return ""}
+ if((S.men||[]).includes(p)){p.alive=false;try{dthStamp(p,why,"bị trị tội")}catch(e){};dieMk(p,why||"age");return ""}
  return ev}
 /* the omen illness on people who show illness (her, consorts, the Thái hậu, the Emperor) */
 function omen(p,ml){const st=ml<=M.omenSt[0]?3:ml<=M.omenSt[1]?2:1,k=ageOf(p)>=M.oldAge?"laobenh":"trongbenh";let ev="";

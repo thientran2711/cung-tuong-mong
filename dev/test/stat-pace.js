@@ -20,26 +20,36 @@ const [,,PAGE,DAYS]=process.argv;const ND=+DAYS||45;
   ok(spG("danh",{},0,2,7)===2,"a small rise far from the ceiling is kept whole");
   /* (2) ceiling by rank; the road up never closes; above-ceiling values are kept (no rise, no drop) */
   for(let r=0;r<7;r++)ok(B.ceil[r]>RANKS[r+1].s&&B.ceil[r]>RANKS[r+1].d,`ceiling rank ${r} ${B.ceil[r]} > next rank needs Sủng ${RANKS[r+1].s} / Danh ${RANKS[r+1].d}`);
-  ok(spG("sung",{},spTop("sung",0),5,0)===0&&spG("sung",{},spTop("sung",0)+20,5,0)===0,"at / above the hard top (max of rank ceiling, floor) a rise adds nothing");
-  {const q={};let s=0;for(let i=0;i<10;i++)s+=spG("duc",q,B.ceil[0]+1,5,0);ok(s>0&&s<=Math.ceil(10*5*B.dm.min),`above the rank ceiling (under the floor) a rise goes on at the slow share: 10 × +5 → ${s}`)}
+  ok(spG("th",{},spTop("th",0),5,0)===0&&spG("th",{},spTop("th",0)+20,5,0)===0,"thiện cảm: at / above the hard top (max of rank ceiling, floor) a rise adds nothing");
+  /* ONE SOFT CEILING for the six (owner OD 26/11 ~23:55Z, CANON OVERWRITE of the hard stop): at / above the ceiling a rise goes on at the slow share, never 0 below 100 */
+  for(const k of B.soft){const c=Math.min(spCeil(0,k),95);const q={};let s=0;for(let i=0;i<10;i++)s+=spG(k,q,c+1,5,0);ok(s>0&&s<=Math.ceil(10*5*(spAbs(k)?spAbs(k).min:B.dm.min)),`${k}: at / above its ceiling (or 95 for the 100-ceiling stats) ${c} a rise goes on at the slow share: 10 × +5 → ${s}`)}
+  ok(spCeil(0,"duc")===Math.max(B.ceil[0],B.floor.duc),`Đức ceiling = rank ceiling, never below the hiền đức floor (${spCeil(0,"duc")})`);
   /* (2b) BIG review 1: every stat gate stays reachable at EVERY rank (full list: dev/measure/statpace-gates.py) */
   {const tc=Math.max(...Object.values(BAL.net.thClamp).map(x=>x[1]).filter(x=>x>3));
    const G=[["duc",BAL.route.anDuc,"Ẩn dật route.anDuc"],["duc",BAL.route.tuDuc,"xuất gia route.tuDuc"],["duc",BAL.route.guiltDuc,"route.guiltDuc"],["duc",BAL.ducLv.up,"Đức → Thái hậu ducLv.up"],["duc",BAL.ducLv.word[3],"hiền đức"],
     ["danh",BAL.danhG.kcVihanh,"Khách lạ ở chùa danhG.kcVihanh"],["danh",BAL.succN.rareCDanh,"succN.rareCDanh"],["sung",BAL.sinhThanSung,"sinh thần"],["sung",BAL.sungLv.emp[2],"sungLv.emp"],
     ["th",(()=>{S.thO=S.thO||{};const a0=S.thO.arch;let m=0;for(const k of Object.keys(TH_ARCH)){S.thO.arch=k;m=Math.max(m,netTh("th","than2"))}S.thO.arch=a0;return m})(),"Thái hậu than2, the slowest archetype (ROW 9; was hhTh / road ch_co trust)"],["hh",BAL.ag.hh.rewardHh,"ag.hh.rewardHh"],["rel",tc,"net thClamp top"],["oan",tc,"net thClamp top"]];
-   for(const [k,g,n] of G){const bad=[];for(let r=0;r<8;r++)if(spTop(k,r)<g)bad.push(r);ok(g>0&&!bad.length,`gate ${n} ${k} ≥ ${g}: reachable at every rank${bad.length?" — shut at "+bad:""}`)}}
+   /* PACE-SPEED (owner OD 26/11 ~19:10Z (A)): a bar-tied stat (BAL.stp.bar: Sủng, Danh) stays near the NEXT rank's bar, so its high gates open
+      as she climbs (law 5): such a gate must open at the top rank and, once open at a rank, stay open at every higher rank (never shut for good) */
+   for(const [k,g,n] of G){const bad=[];for(let r=0;r<8;r++)if(spTop(k,r)<g)bad.push(r);
+    if(B.bar&&B.bar[k]){const pre=bad.every((r,i)=>r===i);ok(g>0&&!bad.includes(7)&&pre,`gate ${n} ${k} ≥ ${g}: bar-tied, opens from rank ${bad.length}${pre?"":" — NOT a prefix: "+bad}`)}
+    else ok(g>0&&!bad.length,`gate ${n} ${k} ≥ ${g}: reachable at every rank${bad.length?" — shut at "+bad:""}`)}}
+  /* PACE-SPEED (A): bar-tied ceilings = the next rank's bar + margin; a long run of rises at a rank never passes ceiling + x */
+  if(B.bar)for(const k in B.bar){const b=B.bar[k];for(let r=0;r<7;r++){const nx=RANKS[r+1][b.f],c=spCeil(r,k);ok(c===Math.min(b.top,nx+b.m)&&c>nx,`${k} rank ${r}: ceiling ${c} = next bar ${nx} + ${b.m}`);
+    const q={};let v=0,n=0;while(v<c&&n<300){v+=spG(k,q,v,8,r);n++}const q2={};let w=0;for(let i=0;i<10;i++)w+=spG(k,q2,c,8,r);
+    ok(v>=nx&&n<300&&w>0&&w<=10,`${k} rank ${r}: +8 rises reach the ceiling ${c} after ${n}; above it 10 × +8 add only ${w} (soft, bar ${nx})`)}}
   for(let r=1;r<8;r++)ok(B.ceil[r]>=B.ceil[r-1],`ceiling rises with rank (${B.ceil[r-1]} → ${B.ceil[r]})`);
   /* (3) diminishing returns: the same rise adds less near the top */
   const lo=spG("danh",{},5,5,2),hi=spG("danh",{},55,5,2);ok(hi<lo,`Danh +5 at 5 → ${lo}, at 55 → ${hi}`);
   /* (4) carry: 20 × +1 at 70 % of the ceiling adds about 20 × (1 − .49) */
-  {const q={};let s=0,c=Math.round(B.ceil[3]*.7);for(let i=0;i<20;i++)s+=spG("duc",q,c,1,3);const f=Math.max(B.dm.min,1-Math.pow(c/B.ceil[3],B.dm.pow));ok(Math.abs(s-20*f)<=1,`carry: 20 × +1 near the top adds ${s} (expected ≈ ${(20*f).toFixed(1)})`)}
+  {const C3=spCeil(3,"duc");const q={};let s=0,c=Math.round(C3*.7);for(let i=0;i<20;i++)s+=spG("duc",q,c,1,3);const f=Math.max(B.dm.min,1-Math.pow(c/C3,B.dm.pow));ok(Math.abs(s-20*f)<=1,`carry: 20 × +1 near the top adds ${s} (expected ≈ ${(20*f).toFixed(1)})`)}
   /* (5) the funnels: her apply, an NPC ap, affAdd / oanAdd toward her, a raw spAdd — all slowed the same way (law 1) */
   const v=liveRivals(false)[0];S.rank=0;S.sung=S.ceilT=0;S.sung=10;apply({sung:30});ok(S.sung<=10+B.band.sung[2],`apply Sủng +30 at 10 → ${S.sung}`);
   v.rank=0;v.sung=10;delete v.spc;ap(v,{sung:30});ok(v.sung<=10+B.band.sung[2],`NPC ap Sủng +30 at 10 → ${v.sung} (same rule)`);
   v.rel=0;affAdd(v,S,40);ok(v.rel>0&&v.rel<=B.band.rel[2],`affAdd thiện cảm +40 toward her → ${v.rel}`);
   v.oan=0;oanAdd(v,S,48);ok(v.oan>0&&v.oan<=B.band.oan[2],`oanAdd oán +48 toward her → ${v.oan}`);
   v.rel=0;spAdd(v,"rel",25);ok(v.rel>0&&v.rel<=B.band.rel[2],`raw v.rel += 25 (spAdd) → ${v.rel}`);
-  S.danh=spTop("danh",0)+5;apply({danh:5});ok(S.danh===spTop("danh",0)+5,`old save above the top kept: Danh ${S.danh}`);
+  {S.rank=0;const c=spCeil(0,"danh");S.danh=c+20;delete S.spc;apply({danh:5});ok(S.danh>=c+20&&S.danh<=c+21,`old save above the ceiling kept, rises only at the slow share: Danh ${c+20} +5 → ${S.danh}`);S.danh=100;apply({danh:5});ok(S.danh===100,"100 stays 100")}
   /* (5b) BIG review 3: a regard ROW (co-op friend S.rl[pid], jts tsLeNpc) goes through the same rule */
   {S.rl=S.rl||{};S.rl.__t=0;spRow(S,"rl","__t",40,0);ok(S.rl.__t>0&&S.rl.__t<=B.band.rel[2],`spRow her row +40 → ${S.rl.__t}`);S.ro=S.ro||{};S.ro.__t=0;spRow(S,"ro","__t",40,0);ok(S.ro.__t>0&&S.ro.__t<=B.band.oan[2],`spRow oán row +40 → ${S.ro.__t}`);delete S.rl.__t;delete S.ro.__t}
   /* (6) the cap ledger */

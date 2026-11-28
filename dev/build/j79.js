@@ -19,7 +19,7 @@ function kitMaidTitle(m,lower){let t="Cung nữ thân tín";try{m=m||(S&&S.maid)
 function kitRtOf(t,col){try{return typeof kitRankTone==="function"?kitRankTone(t,col):""}catch(e){return""}}
 function kitPersonCol(p){try{if(typeof rivals!=="undefined"&&rivals.includes(p))return p.out?KIT_COLD_COL:RCOL[p.queen?7:cl(p.rank||0,0,7)];if(p===S)return S.out?KIT_COLD_COL:RCOL[cl(S.rank||0,0,7)];
  const d=kitDecor(kitFace(p));return d.col||KIT_ROLE.slate}catch(e){return KIT_ROLE.slate}}
-function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(S.out?"Phế phi":meRankN())}">${S.out?"Phế phi":meRankN()}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
+function kitName(p,o){o=o||{};if(!p)return"";if(p===S&&o.named){const srv=typeof isSrv==="function"&&isSrv();return `<b class="kname kmy" style="--rc:${kitPersonCol(S)}">${srv||o.noTitle?"":`<span class="kti" style="--rt:${kitRtOf(outTitleN(S)||meRankN())}">${outTitleN(S)||meRankN()}</span> `}${S.name}</b>`}if(p===S)return `<b class="kname kme" style="--rc:${kitPersonCol(S)}">${o.cap?"Ngươi":"ngươi"}</b>`;
  const t=o.noTitle?"":kitTitleOf(p);let nm=S&&p===S.emp?"":S&&(p===S.thO||p.kind==="th")?"":(p.name||"");if(t&&nm)nm=kitTitledName(t,nm);else if(o.pre&&nm)nm=kitTitledName(String(o.pre).trim().split(" ").slice(-5).join(" "),nm);/* old saves: "Tổng quản thái giám Tổng quản Tào Đức Hải" in a stored log */
  return `<b class="kname" style="--rc:${kitPersonCol(p)}">${t?`<span class="kti" style="--rt:${kitRtOf(t,kitPersonCol(p))}">${t}</span>${nm?" ":""}`:""}${nm}</b>`}
 /* KIT 9 (owner 11/15 "Cung nữ Cung nữ thân tín …", "Tổng quản thái giám Tổng quản Tào Đức Hải"): ONE rule for every title + name builder —
@@ -151,7 +151,7 @@ function kpPeopleIn(html,people){const who=[];let h=html;const plain=kpPlain(htm
    /* review night-end-r2: HER name (kitTitle "") after a rank in the text ("Thánh chỉ: Thường tại X …", "Đêm qua Đáp ứng X hầu giá") — kitName(named)
       draws her current rank itself, so the rank in the text is dropped (it doubled: "Thường tại Thường tại X") */
    else if(p===S&&/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Phế phi) $/.test(pre))pre=pre.replace(/(Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng|Phế phi) $/,"");
-   const rest=s.slice(i+n.length);const tr=p===S&&S?(S.out?"Phế phi":meRankN()):t;/* her own rank is drawn by kitName(named) */
+   const rest=s.slice(i+n.length);const tr=p===S&&S?(outTitleN(S)||meRankN()):t;/* her own rank is drawn by kitName(named) */
    const own=!!t&&(KP_TITLE_RX.test(pre)||kpTitleTail(pre,t))||!!tr&&/^\s*(?:được\s+)?(?:tấn phong|sắc phong|phong|thăng|làm|lên|thành)\s/.test(rest)&&rest.includes(tr);/* KIT 48.3 (owner 15/11 s8): the text's own title before the name goes INSIDE the name block, in its rank tone (it stayed plain ink) */
    const tm=KP_TITLE_RX.exec(pre);if(tm&&p!==S){const k=kitName(p,{noTitle:true,pre});const j=k.indexOf(">");if(j>0&&/^<b class="kname/.test(k)){const tt=tm[1];const col=typeof kitPersonCol==="function"?kitPersonCol(p):"";
     return pre.slice(0,pre.length-tm[0].length)+k.slice(0,j+1)+`<span class="kti" style="--rt:${typeof kitRankTone==="function"?kitRankTone(tt,col):""}">${tt}</span> `+k.slice(j+1)+s.slice(i+n.length)}}

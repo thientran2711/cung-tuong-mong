@@ -51,7 +51,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   const gone=[["qBlockTh",BAL.qBlockTh],["hiOppTh",BAL.hiOppTh],["hhTh",BAL.hhTh],["ag.th.fondTh",BAL.ag.th.fondTh],["ag.th.mercyTh",BAL.ag.th.mercyTh],["ag.cx.thHelp.min",BAL.ag.cx.thHelp.min],
    ["succN.cTh",BAL.succN.cTh],["succN.thB",BAL.succN.thB],["succN.thOpp",BAL.succN.thOpp],["ag.why.ap.th",BAL.ag.why.ap.th],["ag.why.fav.th",BAL.ag.why.fav.th],["ag.why.fav.thLow",BAL.ag.why.fav.thLow],
    ["ag.why.job.th",BAL.ag.why.job.th],["ag.why.g2b.guard.th",BAL.ag.why.g2b.guard.th],["ag.why.g2rcp.thHi",BAL.ag.why.g2rcp.thHi],["dh.cond.th",BAL.dh.cond.th],["staff.say.tn",BAL.staff.say.tn],
-   ["road.ch_co",BAL.road.ch_co],["road.ch_benh",BAL.road.ch_benh]];
+   ["road.ch_co",BAL.road.ch_co],["road.ch_benh",BAL.road.ch_benh],["charge.tu.spare.thMin",BAL.charge.tu.spare.thMin],["promoR.sp.th.cut",BAL.promoR.sp.th.cut],["stp.fate.tuanTh",(BAL.mort&&BAL.mort.fate||{}).tuanTh]];
   for(const [k,x] of gone)ok(x===undefined,'BAL.'+k+' deleted in place');
   // (7) play
   S.thDead=false;for(let i=0;i<8;i++){try{endTurn()}catch(e){ok(false,'endTurn '+i+': '+e.message);break}}ok(true,'8 weeks played');

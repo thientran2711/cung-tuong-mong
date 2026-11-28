@@ -95,7 +95,7 @@ function q72Odds(b,sk,X){return odA(S,b+q72Sk(sk,X))}
 /* ---------- a live quest ---------- */
 function q72X(x){const T=T72I[x.tid];if(!T)return null;const A=q72A(x.rk,x.ri);if(!A)return null;let B=null;if(x.bk){B=q72A(x.bk,x.bi);if(!B)return null}return{T,A,B,q:x,p:x.p||{}}}
 function q72Txt(t,X){if(typeof t==="function"){try{t=t(X)}catch(e){t=""}}const sea=SEASON[S.month-1];
- return String(t||"").replace(/\{A\}/g,X.A?X.A.n:"").replace(/\{B\}/g,X.B?X.B.n:"").replace(/\{M\}/g,S.maid?S.maid.name:"cung nữ").replace(/\{S\}/g,sea.toLowerCase()).replace(/\{E\}/g,"Hoàng thượng").replace(/\{Nc\}/g,"{Goi}").replace(/\{N\}/g,"{goi}").replace(/\{(?:[Gg]oi|[Xx]ung)\}/g,m=>{/* palace voice: the one address core (jvoice) — the requester A speaks to her */const sp=kSpk(X.A)||{srv:"f"};return kSay(sp,S,m)})}
+ return String(t||"").replace(/\{A\}/g,X.A?(X.A.k==="fam"?q72Short(X.A):X.A.n):"").replace(/\{B\}/g,X.B?X.B.n:"").replace(/\{M\}/g,S.maid?S.maid.name:"cung nữ").replace(/\{S\}/g,sea.toLowerCase()).replace(/\{E\}/g,"Hoàng thượng").replace(/\{Nc\}/g,"{Goi}").replace(/\{N\}/g,"{goi}").replace(/\{(?:[Gg]oi|[Xx]ung)\}/g,m=>{/* palace voice: the one address core (jvoice) — the requester A speaks to her */const sp=kSpk(X.A)||{srv:"f"};return kSay(sp,S,m)})}
 function q72StepPl(st,X){if(st&&st.plf){try{return st.plf(X)}catch(e){return null}}if(!st||!st.pl)return null;if(st.pl==="A")return q72Home(X.A);if(st.pl==="B")return q72Home(X.B);return st.pl}
 function q72Title(X){return q72Txt(X.T.t,X)}
 /* tokens of an outcome (for offer lines and the list) */
@@ -146,13 +146,13 @@ function q72Offer(x,how){const q=q72();q.mo[S.turn]=(q.mo[S.turn]||0)+1;q.n.off+
  {const X=q72X(x);Q.push({t:"Việc nhờ",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,qtags:X?[KIND72[X.T.kind],`Hạn ${X.T.dl||6} tuần`]:null})}return true}
 PEND.q72o=pp=>{try{const x=pp.x;const X=q72X(x);if(!X)return null;const T=X.T;const ok=q72OutTok(q72OkDef(X),X,"ok"),no=q72OutTok(q72NoDef(X),X,"no"),bad=T.bad?q72OutTok(T.bad,X,"bad"):[];
   const owe=q72Debt(X.A)<0;const dec=Math.min(-2,-(T.dec||3)*(owe?2:1));const est=q72Est(X);
-  const pre=pp.how==="ask"?`<p class="past">Ngươi hỏi han, ${X.A.n} ngỏ lời.</p>`:pp.how==="fu"?`<p class="past">Lại là ${X.A.n}: chuyện lần trước còn tiếp.</p>`:"";
+  const pre=pp.how==="ask"?`<p class="past">Ngươi hỏi han, ${q72Short(X.A)} ngỏ lời.</p>`:pp.how==="fu"?`<p class="past">Lại là ${q72Short(X.A)}: chuyện lần trước còn tiếp.</p>`:"";
   const tr=T.tr?`<p class="past">${q72Txt(T.tr,X)}</p>`:"";
   const h=`${pre}<p>${q72Lead(X,q72Txt(T.h,X))}</p>${tr}${q72InfoRows(X)}${owe?`<p class="r">Ngươi đang nợ ${q72Short(X.A)} một ân: từ chối lần này mếch lòng gấp đôi.</p>`:""}`;
   const accX=`${est>=95?"":word(est)+" · "}thành: ${ok.join(", ")||"êm chuyện"} · hỏng: ${no.join(", ")}${bad.length?` · kèm: nếu bại lộ: ${bad.join(", ")}`:""}`;
-  const decX=`giữ sức, không mắc thêm ân tình · tốn: ${[q72Tok(X.A,dec)||R72(`${X.A.n} phật ý`)].concat(owe?[R72("nợ ân vẫn còn")]:[]).join(", ")}`;
-  const o=[{n:"Nhận lời",fx:{},x:accX,go:()=>{const q=q72();if(q.a.length>=Q72CFG.max){log("Ngươi đang bận quá nhiều việc, đành khất.");return}x.t0=wk();x.dl=wk()+(T.dl||6);q.a.push(x);q.n.acc++;if(T.acc)try{T.acc(X)}catch(e){}q72Enter(x,X);log(`Ngươi nhận lời ${X.A.n}: ${q72Title(X)}. Hạn ${T.dl||6} tuần. ${T.acc?q72Txt(T.accX||"",X):""}`)}},
-   {n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:decX,go:()=>{const q=q72();q.n.dec++;q72Rel(X.A,dec);log(`Ngươi khéo khước từ ${X.A.n} (${q72Title(X)}). ${plain(q72Tok(X.A,dec))}.`)}}];
+  const decL=[q72Tok(X.A,dec)].filter(Boolean).concat(owe?[R72("nợ ân vẫn còn")]:[]);const decX=`giữ sức, không mắc thêm ân tình${decL.length?` · tốn: ${decL.join(", ")}`:""}`;/* sideq-trim: the loss is the asker's real regard (q72Rel); family-by-letter and princes have none → no invented «… phật ý» */
+  const o=[{n:"Nhận lời",fx:{},x:accX,go:()=>{const q=q72();if(q.a.length>=Q72CFG.max){log("Ngươi đang bận quá nhiều việc, đành khất.");return}x.t0=wk();x.dl=wk()+(T.dl||6);q.a.push(x);q.n.acc++;if(T.acc)try{T.acc(X)}catch(e){}q72Enter(x,X);log(`Ngươi nhận lời ${q72Short(X.A)}: ${q72Title(X)}. Hạn ${T.dl||6} tuần. ${T.acc?q72Txt(T.accX||"",X):""}`)}},
+   {n:"Khéo từ chối",fx:{suc:BAL.cv.rest},x:decX,go:()=>{const q=q72();q.n.dec++;q72Rel(X.A,dec);log(`Ngươi khéo khước từ ${q72Short(X.A)} (${q72Title(X)}). ${q72Tok(X.A,dec)?plain(q72Tok(X.A,dec))+".":""}`)}}];
   return{who:X.A.f,t:h,o}}catch(e){console.error(e);return null}};
 function q72Enter(x,X){const st=X.T.s[x.st];if(st&&st.w)x.wt=wk()+st.w}
 
@@ -169,12 +169,12 @@ function q72End(x,res,X,late){const q=q72();const i=q.a.indexOf(x);if(i>=0)q.a.s
  if(res==="ok"&&o.ch&&T72I[o.ch])q.ch.push({tid:o.ch,at:wk()+4+R(5),rk:x.rk,ri:x.ri,bk:x.bk,bi:x.bi,p:x.p});
  q.n[res]=(q.n[res]||0)+1;
  const tok=q72OutTok(o,X,res==="ok"?"ok":"no").map(plain).join(", ");
- const head=res==="ok"?`Xong việc ${X.A.n} nhờ (${q72Title(X)})`:res==="bad"?`<span class="r">Bại lộ:</span> việc ${X.A.n} nhờ (${q72Title(X)})`:`<span class="r">${late?"Lỡ hẹn":"Không thành"}:</span> việc ${X.A.n} nhờ (${q72Title(X)})`;
+ const head=res==="ok"?`Xong việc ${q72Short(X.A)} nhờ (${q72Title(X)})`:res==="bad"?`<span class="r">Bại lộ:</span> việc ${q72Short(X.A)} nhờ (${q72Title(X)})`:`<span class="r">${late?"Lỡ hẹn":"Không thành"}:</span> việc ${q72Short(X.A)} nhờ (${q72Title(X)})`;
  let end=q72Txt(res==="ok"?T.okT:res==="bad"?T.badT:T.noT,X);
  if(!end&&res!=="bad"){const l=q72Tone(X,res==="ok"?"askOk":"askNo",res==="ok"?"q72:ok":"q72:no");if(l)end=`${X.A.n} ${l}${/[.”]$/.test(l)?"":"."}`}
  log(`${head}. ${end?end+" ":""}${tok?tok+".":""} ${ev}`.trim());
  q.h.unshift({tid:x.tid,res,w:wk(),t:q72Title(X),n:X.A.n,pn:q72PgN(X.A),f:X.A.f,lg:x.log.slice(-4),end,tok});if(q.h.length>12)q.h.length=12;
- if(late&&!window.__bot&&!quiet)Q.push({t:"Lỡ hẹn",btn:"Đã hiểu",who:X.A.f,h:`<p>Đã quá hạn việc ${X.A.n} nhờ: <b>${q72Title(X)}</b>.</p>${end?`<p>${end}</p>`:""}<p>${q72OutTok(o,X,"no").join(" · ")||"Không mất gì."}</p>`});
+ if(late&&!window.__bot&&!quiet)Q.push({t:"Lỡ hẹn",btn:"Đã hiểu",who:X.A.f,h:`<p>Đã quá hạn việc ${q72Short(X.A)} nhờ: <b>${q72Title(X)}</b>.</p>${end?`<p>${end}</p>`:""}<p>${q72OutTok(o,X,"no").join(" · ")||"Không mất gì."}</p>`});
  return ev}
 /* one step act from the list: do-step (place, khắc, odds) or a branch option */
 function q72Why(x,X,st,o){if(S.dead)return"đã hết kiếp";if(Q.length)return"đang có việc chờ";if(S.out)return"đang ở lãnh cung";
@@ -398,12 +398,12 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
  T7("tai_mat","inv",{r:"maid",rf:()=>liveRivals(true).some(v=>(v.evm&&v.evm.me)>0),p:()=>{const s=(S.staff||[]).find(z=>z.spyFor!=null);return s?{sid:s.sid,sn:s.name,who:s.spyFor}:{sid:null}},
   t:"Tìm kẻ làm lọt chuyện trong cung ngươi",h:"“{Nc}, có người đang nắm chuyện riêng của cung mình. Chắc có kẻ làm tai mắt cho ai đó. Để nô tỳ cùng {N} dò xét.”",dl:5,tr:"Quả có phi tần đang nắm Chứng cứ về ngươi.",
   s:[G("home","Dò xét kẻ hầu","mat",45,2),C(X=>X.p.sid!=null?`Ngươi biết sự thật: ${X.p.sn} làm tai mắt cho ${(()=>{const v=byKey(X.p.who);return v&&v!==S?v.name:"người ngoài"})()}`:"Ngươi biết sự thật: kẻ hầu của ngươi không ai làm tai mắt; chuyện lọt ra từ chỗ khác",
-   O(X=>X.p.sid!=null?`Gọi ${X.p.sn} ra răn đe, bắt thôi`:"Khen {A} cẩn thận",{fn:X=>{if(X.p.sid==null){S.maid.loyal=cl(S.maid.loyal+BAL.eff.j72.loyalFn_2,0,100);return `Thiện cảm ${S.maid.name} ${balSg(BAL.eff.j72.loyalFn_2)}.`}const s=servById(X.p.sid);if(s&&ownerOf(s)===S){s.spyFor=null;s.loyal=cl((s.loyal||0)-BAL.eff.j72.loyalFn_3,0,100);return `${s.name} thôi làm tai mắt, thiện cảm với ngươi -${balAb(BAL.eff.j72.loyalFn_3)}.`}return""}}),
+   O(X=>X.p.sid!=null?`Gọi ${X.p.sn} ra răn đe, bắt thôi`:"Khen {A} cẩn thận",{fn:X=>{if(X.p.sid==null){S.maid.loyal=cl(S.maid.loyal+BAL.eff.j72.loyalFn_2,0,100);return `Thiện cảm ${S.maid.name} ${balSg(BAL.eff.j72.loyalFn_2)}.`}const s=servById(X.p.sid);if(s&&ownerOf(s)===S){/* TAI-MAT-KNOW: Dò xét found him = she LEARNS who bought him */typeof spyFound==="function"&&spyFound(s);s.spyFor=null;s.loyal=cl((s.loyal||0)-BAL.eff.j72.loyalFn_3,0,100);return `${s.name} thôi làm tai mắt, thiện cảm với ngươi -${balAb(BAL.eff.j72.loyalFn_3)}.`}return""}}),
    O(X=>X.p.sid!=null?`Giữ ${X.p.sn} lại, giữ miệng trước mặt hắn`:"Để yên",{w:{tamco:1},fn:X=>{const s=X.p.sid!=null?servById(X.p.sid):null;if(s&&ownerOf(s)===S)typeof knSoldFound==="function"&&knSoldFound(s);return""}}))],ok:{r:8},no:{r:-3}});
  T7("bac_mat","inv",{r:"sv",rf:s=>(S.staff||[]).some(z=>netIs(z,"greed")&&z!==s),p:X=>{const s=(S.staff||[]).find(z=>netIs(z,"greed")&&z.sid!==X.A.id);return{cul:s.sid,cn:s.name}},t:"Tìm số bạc lương {A} bị mất",
   h:"“Số bạc dành dụm cả năm của nô tỳ để dưới gối, giờ mất sạch. {Nc} làm chủ cho nô tỳ.”",dl:4,
   s:[G("home","Tra hỏi trong cung","mat",50,2),C(X=>`Ngươi biết sự thật: ${X.p.cn} lấy bạc`,
-   O(X=>`Bắt ${X.p.cn} trả lại, phạt nhẹ`,{fn:X=>{const s=servById(X.p.cul);if(s&&ownerOf(s)===S){s.loyal=cl((s.loyal||0)+BAL.eff.j72.bacMat,0,100);return `${s.name} trả bạc, thiện cảm với ngươi ${balSg(BAL.eff.j72.bacMat)}.`}return""}}),
+   O(X=>`Bắt ${X.p.cn} trả lại, phạt nhẹ`,{fn:X=>{const s=servById(X.p.cul);if(s&&ownerOf(s)===S){s.loyal=cl((s.loyal||0)+BAL.eff.j72.bacMat,0,100);return `${s.name} trả bạc, thiện cảm với ngươi ${balSg(spSee("rel",BAL.eff.j72.bacMat))}.`}return""}}),
    O("Bù bạc cho {A} từ tiền riêng, nhắc khéo kẻ lấy",{c:{bac:-20},r:6,w:{duc:2}}))],ok:{r:10},no:{r:-5}});
  T7("hang_lau","risk",{r:"sve",rf:s=>netIs(s,"greed"),t:"Giấu hàng {A} mang lậu vào cung",h:"“Nô tài tham chút lời, mang ít lụa lậu vào bán. Xin {N} cho cất tạm trong kho cung mình mấy hôm.”",dl:3,
   s:[W("Cất hàng trong kho",1),C("Hàng lậu",O("Để hắn bán xong, chia ít lời",{p:65,w:{bac:20},lto:"bad"}),O("Bắt mang đi, răn đe",{r:-6,w:{duc:2},to:"ok"}))],ok:{r:10},no:{r:-4},bad:{fx:{danh:-4,bac:-20},pun:"chứa hàng lậu trong cung"},badT:"Nội vụ phủ khám kho, thấy hàng lậu."});
@@ -462,7 +462,7 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("tn","Chuyển lời Hoàng hậu","tai",60,1)],ok:{r:8,fn:X=>{ap(X.A.o,{th:BAL.eff.j72.hhTh});return `Thái hậu bớt giận Hoàng hậu (${balSg(BAL.eff.j72.hhTh)}).`},x:`Thái hậu với Hoàng hậu ${balSg(BAL.eff.j72.hhTh)}`},no:{r:-4}});
  T7("th_nhac_hh","pro",{r:"th",rf:()=>{const q=qn();return !!q&&(q.staff||[]).some(s=>s.spyFor!=null&&s.spyFor!==key(q))},p:()=>{const q=qn();const s=q.staff.find(s=>s.spyFor!=null&&s.spyFor!==key(q));return{sid:s.sid,sn:s.name}},t:"Nhắc Hoàng hậu: có người hầu không thật thà",
   h:"“Ai gia biết một người hầu bên Hoàng hậu làm tai mắt cho kẻ khác. {Goi} khéo léo nhắc nàng, đừng để nàng biết ai gia bảo.”",tr:"Điều Thái hậu nói là thật.",dl:3,
-  s:[G("kn","Nhắc khéo Hoàng hậu","tai",55,1)],ok:{r:6,fx:{hh:5},fn:X=>{const s=servById(X.p.sid);if(s){s.spyFor=null;return `${s.name} bị Hoàng hậu cắt việc, thôi làm tai mắt.`}return""},x:"kẻ làm tai mắt bên Hoàng hậu bị cắt việc"},no:{r:-3}});
+  s:[G("kn","Nhắc khéo Hoàng hậu","tai",55,1)],ok:{r:6,fx:{hh:5},fn:X=>{const s=servById(X.p.sid);if(s){/* TAI-MAT-KNOW: told = the Hoàng hậu LEARNS who bought her servant */typeof spyFound==="function"&&spyFound(s);s.spyFor=null;return `${s.name} bị Hoàng hậu cắt việc, thôi làm tai mắt.`}return""},x:"kẻ làm tai mắt bên Hoàng hậu bị cắt việc"},no:{r:-3}});
  T7("th_tram","trade",{r:"th",rf:()=>!!qn()&&S.th>=netTh("th","than"),acc:X=>{apply({danh:BAL.eff.j72.danhAcc});q72DebtAdd(X.A,-1)},accX:`Danh ${balSg(BAL.eff.j72.danhAcc)}; ngươi nợ Thái hậu một ân.`,p:()=>({a:aff(qn(),S),hh:qn().th||0}),t:"Đổi ơn: trâm của Thái hậu, đôi mắt ngươi ở Càn Ninh cung",
   h:"“Cây trâm phượng này ai gia ban cho {goi}. {Goi} hay sang Càn Ninh cung, để ý xem Hoàng hậu dạo này thế nào, rồi kể ai gia nghe.”",tr:`Nhận lời: ngay Danh ${balSg(BAL.eff.j72.danhAcc)}, ngươi nợ Thái hậu một ân.`,dl:5,
   s:[G("kn","Thỉnh an Hoàng hậu, để ý","mat",55,1),Object.assign(C(X=>`Ngươi biết sự thật: Hoàng hậu ${X.p.a>=10?"đối đãi ngươi tử tế":X.p.a<=-10?"lạnh nhạt với ngươi":"giữ khoảng cách với mọi người"}`,O("Kể thật với Thái hậu",{})),{pl:"tn"})],ok:{r:6,d:1},no:{r:-10}});
@@ -522,9 +522,9 @@ window.q72Bot=function(){if(!S||S.dead||Q.length||!q72On())return false;const q=
   s:[G("home","Mua chỉ đỏ","",100,1,{bac:-8}),G("home","Thắt nút cùng {A}","tai",75,1)],ok:{r:10},no:{r:-2}});
  T7("giau_cn","pro",{r:"rsv",rf:(s,z)=>(s.loyal||50)<BAL.loy.warn&&trs(z.own).some(t=>t==="Xảo quyệt"||t==="Kiêu ngạo"),t:"Cứu {A} khỏi chủ cũ",
   h:X=>`“{Nc} cứu nô tỳ! ${X.A.own.name} hễ giận là đánh, lưng nô tỳ chưa lành vết cũ. Cho nô tỳ trốn tạm vài hôm.”`,dl:5,
-  s:[W("Giấu {A} trong cung",1),C("Đưa {A} đi đâu",O("Xin Tổng quản cho nàng về hầu cung ngươi",{t:()=>capOk(),tw:"cung ngươi đã đủ người hầu",c:{bac:-20},p:55,sk:"danh",lto:"bad",fn:(X,x,ok)=>{if(!ok)return"";const s=X.A.o,ow=X.A.own;const i=(ow.staff||[]).indexOf(s);if(i>=0)ow.staff.splice(i,1);s.spyFor=null;s.loyal=60;S.staff.push(s);relAdd(S,ow,BAL.eff.j72.fn_8);return `${s.name} về hầu cung ngươi (thiện cảm 60); ${ow.name} mất thiện cảm ${balSg(BAL.eff.j72.fn_8)}.`}}),
+  s:[W("Giấu {A} trong cung",1),C("Đưa {A} đi đâu",O("Xin Tổng quản cho nàng về hầu cung ngươi",{t:()=>capOk(),tw:"cung ngươi đã đủ người hầu",c:{bac:-20},p:55,sk:"danh",lto:"bad",fn:(X,x,ok)=>{if(!ok)return"";const s=X.A.o,ow=X.A.own;const i=(ow.staff||[]).indexOf(s);if(i>=0)ow.staff.splice(i,1);s.spyFor=null;s.loyal=60;S.staff.push(s);relAdd(S,ow,BAL.eff.j72.fn_8);return `${s.name} về hầu cung ngươi (thiện cảm 60); ${ow.name} mất thiện cảm ${balSg(spSee("rel",BAL.eff.j72.fn_8))}.`}}),
    O("Trả về chủ cũ, xin chủ nương tay",{p:60,sk:"danh",lto:"fail",fn:X=>{relAdd(S,X.A.own,BAL.eff.j72.fn_9);X.A.o.loyal=cl((X.A.o.loyal||40)+BAL.eff.j72.loyalFn_5,0,100);return `${X.A.own.name} nương tay; thiện cảm ${X.A.n} với chủ ${balSg(BAL.eff.j72.loyalFn_5)}.`}}))],
-  ok:{fx:{duc:4},r:15},no:{r:-8},bad:{fx:{danh:-3},r:-5,fn:X=>{relAdd(S,X.A.own,BAL.eff.j72.fn_10);return `${X.A.own.name} biết ngươi giấu người của nàng.`},x:`chủ cũ của nàng mất thiện cảm ${balSg(BAL.eff.j72.fn_10)}`},badT:"Chủ cũ biết chuyện, làm ầm lên."});
+  ok:{fx:{duc:4},r:15},no:{r:-8},bad:{fx:{danh:-3},r:-5,fn:X=>{relAdd(S,X.A.own,BAL.eff.j72.fn_10);return `${X.A.own.name} biết ngươi giấu người của nàng.`},x:`chủ cũ của nàng mất thiện cảm ${balSg(spSee("rel",BAL.eff.j72.fn_10))}`},badT:"Chủ cũ biết chuyện, làm ầm lên."});
 
  /* ===== the calendar's real festivals and seasons ===== */
  T7("th_thanhminh","craft",{r:"th",w:fest(2,3),t:"Chép kinh cho lễ tảo mộ Thanh minh",h:"“Thanh minh sắp tới, ai gia muốn một bộ kinh Kim Cang chép tay đặt trước lăng tiên đế. Nét chữ phải ngay ngắn, lòng phải thành.”",dl:5,
