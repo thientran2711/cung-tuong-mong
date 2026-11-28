@@ -119,8 +119,9 @@ def pv_callers_post(files,name):
     return hits
 FILES=[(f,open(f,encoding='utf-8').read()) for f in sorted(glob.glob(os.path.join(D,'j*.js'))) if os.path.basename(f) not in SKIP]
 pv=[];post=0
+# PVQUY-POST-2 (RV-186 item 4, law 11 whole group): pvOan / pvOanSet are the same PREDICTION family for oán — a POST site prints the real change (oanGot)
 for f,s in FILES:
-  for m in re.finditer(r'\bpvQuy\(',s):
+  for m in re.finditer(r'\b(?:pvQuy|pvOan|pvOanSet)\(',s):
     if s[max(0,m.start()-9):m.start()]=='function ': continue
     srt,why=pv_sort(s,m.start())
     k,name,_=_ctx(s,m.start())

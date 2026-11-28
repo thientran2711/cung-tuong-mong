@@ -95,6 +95,10 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
    // j8 giveTo: the keep line vs her real change
    {const t=P[0];if(t){const k=Object.keys(IT).find(k=>IT[k]&&giftVal({k},t)>0&&!IT[k].sl)||"tuithom";invAdd(S,{k});const ix=S.inv.length-1;const rf=typeof rcvGiftIn==="function"?rcvGiftIn:null;
     try{rcvGiftIn=()=>"take";postRow("j8 giveTo",t.name,t,S,()=>giveTo(S,t,ix),/thiện cảm ([+-−]?\d+)( đến [+-]?\d+)?/)}finally{if(rf)rcvGiftIn=rf}}}}
+  // PVQUY-POST-2 (RV-186 item 4): an oán RESULT line prints the real change (oanGot), never pvOan — jemoact «kexau» (Kể xấu): her oán row vs the line
+  if(typeof window.eaDo==="function"){const t=liveRivals(true).find(x=>x!==q&&!x.out);if(t){const b0=oan(t,S);let ret="";try{const k0=typeof trKnown==="function"?trKnown:null;if(k0)trKnown=()=>[];try{S.danh=Math.max(S.danh||0,60);const e0=S.emo;S.emo=Object.assign({},e0||{},{t:key(t)})/* her target (jemoact eaTarget reads p.emo.t) */;try{ret=window.eaDo(S,{k:"kexau",n:"Kể xấu"})}finally{S.emo=e0}}finally{if(k0)trKnown=k0}}catch(e){ret="error "+e.message}
+   const txt=String(ret&&ret.res?ret.res.join(" · "):typeof ret==="object"?JSON.stringify(ret):ret).replace(/<[^>]+>/g,"");const m=txt.match(/oán ngươi ([+-−]?\d+)( đến [+-]?\d+)?/);const real=Math.round(oan(t,S)-b0);
+   out.push({name:`POST jemoact kexau ${t.name} oán (result line)`,preview:m?+m[1].replace("−","-"):null,real,sg:m?m[0]:txt.slice(0,120),ok:!!m&&!m[2]&&+m[1].replace("−","-")===real,sideOk:true,inRange:true})}}
   // GAP (info, not a fail): the same relAdd card+act with the emotion hook ON — how often the first leg's emotion moves the second leg
   if(EMO0){emoEv=EMO0;let n=0,d=0;const ex=[];for(const v of liveRivals(true).filter(x=>x!==q&&!x.out).slice(0,8)){for(const k of [6,10]){const pv=affPreview(v,S,k);const real=affGot(v,S,()=>relAdd(S,v,k));n++;if(pv!==real){d++;if(ex.length<3)ex.push(`${v.name} +${k}: card ${pv} real ${real}`)}}}
    out.push({name:`GAP (info) relAdd with emotion ON: ${d}/${n} differ${ex.length?" · "+ex.join(" · "):""}`,preview:null,real:null,sg:"",ok:true,sideOk:true,inRange:true,info:1})}

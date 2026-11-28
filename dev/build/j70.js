@@ -361,7 +361,7 @@ function ordMonth70(){const L=ords70();for(const o of L.slice()){const O=ORD70[o
   if(O.lo)s.loyal=cl((s.loyal||0)+O.lo,0,100);
   if(o.k==="theodoi"){const v=RV(o.tgt);if(!v||!v.alive||v.out){L.splice(L.indexOf(o),1);continue}
    if(traitor70(s)){if(s.spyFor===key(v)&&roll(30))log(`${s.name} theo dõi ${title70(v)} nhưng chẳng mang về tin gì.`);continue}
-   if(roll(BAL.def70.caught)){oanAdd(v,S,BAL.eff.j70.ordMonth70);s.loyal=cl((s.loyal||0)-BAL.eff.j70.loyalOrdMonth70,0,100);log(`${R70("Bị lộ:")} ${s.name} bám theo ${title70(v)} bị người bên ấy bắt gặp. ${pvOan(v,BAL.eff.j70.ordMonth70,`${v.name} oán ngươi`)}, thiện cảm ${s.name} -${balAb(BAL.eff.j70.loyalOrdMonth70)}.`)}
+   if(roll(BAL.def70.caught)){const dO=oanGot(v,S,()=>oanAdd(v,S,BAL.eff.j70.ordMonth70));s.loyal=cl((s.loyal||0)-BAL.eff.j70.loyalOrdMonth70,0,100);log(`${R70("Bị lộ:")} ${s.name} bám theo ${title70(v)} bị người bên ấy bắt gặp. ${v.name} oán ngươi ${balSg(dO)}, thiện cảm ${s.name} -${balAb(BAL.eff.j70.loyalOrdMonth70)}.`)}
    else if(roll(BAL.def70.ev)){if(!chSearch(S,s,()=>evA(S,v,BAL.eff.j70.evOrdMonth70))){if(chMissed())log(`${s.name} theo dõi ${title70(v)}. ${chMissTxt(v)}`);continue}noteAdd(v.id,`${s.name} theo dõi, lấy được ${balAb(BAL.eff.j70.evOrdMonth70)} chứng cứ (nay ${evG(S,v)})`);log(`${s.name} theo dõi ${title70(v)}: thêm ${balAb(BAL.eff.j70.evOrdMonth70)} chứng cứ (nay ${evG(S,v)}).`)}}}}
 /* the same monthly price / lòng / watcher evidence for an NPC consort's orders (she pays bạc, the servant's lòng moves, a watcher may be caught or bring evidence) */
 function ordMonth70npc(p){const L=ords70Of(p);for(const o of L.slice()){const O=ORD70[o.k],s=sv70(o.sid,p);if(!O||!s)continue;

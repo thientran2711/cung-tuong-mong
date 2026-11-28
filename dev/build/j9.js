@@ -62,6 +62,8 @@ function rel(x,y){return aff(x,y)}
 /* a deed between a and t: both affections move; a harm leaves the victim with Oán (and a little on the doer) */
 /* ONE NUMBER (MAIN 186 ruling 28/11 ~06:44Z, law 4): the affAdd wrappers (trust trait j28, titles jdh, feelings jfeel, mood jmood, stat pace) rescale a rise, so a line written
    AFTER a change prints what really moved: affGot(x,y,fn) = the change of x's thiện cảm for y while fn runs (rounded). */
+/* PVQUY-POST-2 (law 4, law 11 the oán twin of affGot): the REAL change of x's oán toward y made by fn — a result line prints this, never pvOan (a prediction) */
+function oanGot(x,y,fn){let b=0;try{b=oan(x,y)}catch(e){}try{fn()}catch(e){console.error("oanGot",e)}let a=b;try{a=oan(x,y)}catch(e){}return Math.round(a-b)}
 function affGot(x,y,fn){let b=0;try{b=aff(x,y)}catch(e){}try{fn()}catch(e){console.error("affGot",e)}let a=b;try{a=aff(x,y)}catch(e){}return Math.round(a-b)}
 function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);const k=BAL.relOan;if(n<0){oanAdd(y,x,-n*k.hurt);oanAdd(x,y,-n*k.doer)}else{oanAdd(y,x,-n*k.mend)}}
 function hostility(v,t){return oan(v,t)+Math.max(0,-aff(v,t))/2+(t===S?v.ghen/2:Math.max(0,(t.sung-v.sung)/3))+(rkOf(t)>=rkOf(v)?8:0)}
