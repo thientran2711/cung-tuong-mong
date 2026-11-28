@@ -45,8 +45,8 @@ const PREM=ROWS.find(r=>r.id==='tt_ruong');
   const want=(PREM&&C.a==='tt_ruong'?(C.b==='x1'?PREM.x[0]:PREM.s[0]):null);
   const row=(C.b==='x1'?PREM.x[0]:PREM.s[0]).opts.map(x=>x.n),gone=o.names.slice(0,4).find(n=>!row.includes(n.replace(/<[^>]+>/g,'')));
   ok(ld.ok&&ld.name===o.name&&ld.a===C.a&&ld.rcT===1&&JSON.stringify(ld.cardN)===JSON.stringify(row)&&!ld.cardN.includes(gone),`slot ${C.s} (${C.a}:${C.b}) loads: the saved card shows the row's 3 ways NHẸ · VỪA · NẶNG (${ld.cardN.join(' | ')}), the removed way «${gone}» is gone`,ld);
-  ok(ld.om&&ld.pl===ld.om[3]&&ld.ppo>=3&&ld.ppo<o.pp&&JSON.stringify(ld.hp)===JSON.stringify([ld.om[3]]),`slot ${C.s}: pledge / refusal on the removed 4th way → merged sibling ${ld.om&&ld.om[3]} (om ${JSON.stringify(ld.om)})`,ld);
-  if(want)ok(JSON.stringify(want.om)===JSON.stringify(ld.om),`slot ${C.s}: om = the writer row's om`,{want:want.om,got:ld.om});
+  ok(Array.isArray(ld.om)&&ld.pl===ld.om[3]&&ld.ppo>=3&&ld.ppo<o.pp&&JSON.stringify(ld.hp)===JSON.stringify([ld.om[3]]),`slot ${C.s}: pledge / refusal on the removed 4th way → merged sibling ${ld.om&&ld.om[3]} (om ${JSON.stringify(ld.om)})`,ld);
+  if(want)ok(want.om===ld.om.join(""),`slot ${C.s}: om = the writer row's om`,{want:want.om,got:ld.om});
   ok(ld.chose===1&&ld.after,`slot ${C.s}: the NẶNG way can be chosen on the loaded card`,ld);
   if(C.b==='x1')ok(ld.odds.every(w=>/Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững/.test(w)),`slot ${C.s}: climax odds words read anew (${ld.odds.join(' / ')})`,ld)}
  const st=await g.evaluate(()=>{const bad=[];let n=0;for(const road of Object.keys(RDC.def)){for(const id of [road].concat([5,6,7,8,9,10,11].map(k=>road+'_'+k))){const a=ARC67[id];if(!a)continue;

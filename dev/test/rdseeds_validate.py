@@ -3,7 +3,7 @@
 usage: python3 dev/test/rdseeds_validate.py [files…] [--min] [--origins tt,dtq] [--quiet]
   no files = every dev/handover/content/thin/rdseeds_*.md (and dev/test/rdc-fixture.jsonl is NOT read unless named).
 Checks every row: schema, laws 2/3 (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z: exactly 3 options NHẸ · VỪA · NẶNG, option i Σgain steps == Σloss steps ==
-BAL.road.c.tier[i] = 1 / 2 / 3, gain ≥1, loss ≥1; om = old 4-way index → kept way), climax risks lo … hi (NHẸ lo, NẶNG hi) with ≥2 stats (3 advised),
+BAL.road.c.tier[i] = 1 / 2 / 3, gain ≥1, loss ≥1; om = old 4-way index → kept way, a 4-digit string), climax risks lo … hi (NHẸ lo, NẶNG hi) with ≥2 stats (3 advised),
 endings (win gain-only Σ3, lose loss-only Σ3, mid 1 + 1), speakers / needs / tokens per origin, VANPHONG words (no digits, no %, no odds words),
 no copy of an old road hồi title, unique ids, premise ids not taken by the game. --min adds the per-origin pool minimums.
 Errors (E) must be 0; warnings (W) are advice. The numbers below mirror BAL.road.c (jbalroad.js); rdc-play.js checks they match."""
@@ -107,7 +107,7 @@ def check_hoi(v, rid, o, h, clim, titles):
     O = h.get('opts')
     if not isinstance(O, list) or len(O) != 3: v.e(rid, 'opts must be exactly 3 options (NHẸ · VỪA · NẶNG, law 2)'); return roles
     om = h.get('om')
-    if om is not None and (not isinstance(om, list) or len(om) != 4 or not all(isinstance(x, int) and 0 <= x < 3 for x in om) or sorted(set(om)) != [0, 1, 2]):
+    if om is not None and (not isinstance(om, str) or not re.fullmatch(r'[012]{4}', om) or sorted(set(om)) != ['0', '1', '2']):
         v.e(rid, f'om {om}: must map the 4 old ways onto the 3 kept ways (0..2, each kept way once or more)')
     for i, op in enumerate(O):
         lab = f'opt{i+1}'

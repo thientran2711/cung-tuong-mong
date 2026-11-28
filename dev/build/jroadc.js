@@ -12,7 +12,7 @@
    Numbers (law 4): a part counts STEPS; one step = BAL.road.c.fx[key] (options) / Efx[key] (endings); climax odds = BAL.road.c.xo[risk][band] + the
    stat term BAL.road.c.xs[stat] (+ Lợi thế, j67). Laws 2/3 (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z; E-TIER-B13): every hồi has 3 options
    NHẸ · VỪA · NẶNG, option i Σgain steps == Σloss steps == BAL.road.c.tier[i] (validator rdseeds_validate.py); a climax's NHẸ is a «lo» risk, its
-   NẶNG a «hi» one. Old saves (4 ways): a hồi row keeps om = old way index → kept way (the dropped way → the kept way most like it); rdcOm maps a
+   NẶNG a «hi» one. Old saves (4 ways): a hồi row keeps om = old way index → kept way (digit string «0120») (the dropped way → the kept way most like it); rdcOm maps a
    saved pledge (S.pl67.i) / helper refusal (A.hpNo.i) once on load, and a saved story card (PEND.j67 p.o odds) is re-read when its length differs.
    Kit only: every screen is the j67 story card (kit event frame), nothing new is drawn. Old saves: no old road changes; a life on an old road never
    reads this file. */
@@ -37,7 +37,7 @@ function rdcOpt(o,clim,band){const C=rdcB(),c={},w={},rel=[];let sc=0;
 function rdcPeople(h){const s=rdcTexts(h).join(" "),R=[];if(h.w==="th"||s.includes("Thái hậu"))R.push("th");if(h.w==="hh"||s.includes("{hh}")||s.includes("Hoàng hậu"))R.push("hh");return R}
 function rdcPeopleOk(h){try{for(const k of rdcPeople(h)){if(k==="th"&&S.thDead)return false;if(k==="hh"&&!qOn())return false}}catch(e){}return true}
 /* one hồi row → a j67 beat (a climax is never skipped — j67 would end the chapter without one — so its people are checked when the road is composed) */
-function rdcBeat(h,clim,band){const B={h:h.h,w:h.w||"me",t:h.t,o:(h.opts||[]).map(o=>rdcOpt(o,clim,band))};if(h.om)B.om=h.om;
+function rdcBeat(h,clim,band){const B={h:h.h,w:h.w||"me",t:h.t,o:(h.opts||[]).map(o=>rdcOpt(o,clim,band))};if(h.om)B.om=String(h.om).split("").map(Number);
  const need=(h.need||[]).slice();for(const k of rdcRoles(...rdcTexts(h)).concat(clim?[]:rdcPeople(h)))if(!need.includes(k))need.push(k);if(need.length)B.need=need;
  if(h.after==="win")B.if=RDW(1);else if(h.after==="lose")B.if=RDW(0);return B}
 /* the 3 endings (steps × Efx; win +, lose −, mid by its sign) */

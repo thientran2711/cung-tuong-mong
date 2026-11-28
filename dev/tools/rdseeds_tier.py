@@ -13,7 +13,7 @@ Per hồi (rule, the same for every hồi — law 11):
      Which key (and, within the cost-kind order of step 2, which way sits at which tier) is chosen so that on one rough scale (a step × BAL.road.c.fx
      × the audit weights, bạc ×0.1, Sức ×0.5 — dev/handover/reports/tier-audit/classify.js) the cost rises strictly and the gain never falls from
      NHẸ to NẶNG; when no choice does, the writer's first-listed keys are kept.
-  4. om = old index → new index (the dropped way → the kept way most like it), kept on the hồi so an old save's pledge / refusal index maps
+  4. om = old index → new index as a digit string («0120») (the dropped way → the kept way most like it), kept on the hồi so an old save's pledge / refusal index maps
      to the merged sibling (jroadc.js rdcOm).
 """
 import json, glob, os, re, sys
@@ -102,7 +102,7 @@ def convert(h, clim):
     om = [None] * 4
     for k, i in enumerate(keep): om[i] = k
     om[d] = max(range(3), key=lambda k: (like(O[d], O[keep[k]]), -k))
-    h['opts'] = new; h['om'] = om
+    h['opts'] = new; h['om'] = ''.join(str(x) for x in om)   # a digit string, not a number table (one-core guard)
     return True
 
 def hois(r):
