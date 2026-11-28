@@ -382,7 +382,7 @@ function bestow(p,why){if(!p||p.dead||(p!==S&&!p.alive))return;let L=BEST[why]||
 function nightScene(){S.tonight="me";pushFront(mkP("prep"),"Chuẩn bị thị tẩm")}
 function pushFront(d,title){if(!d)return;Q.unshift({t:title||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls})}
 function night(p=S){if(p.preg)return;if(roll(conceiveCh(p))){p.preg=1;p.pregWk=wk();if(p===S){S.hidden=true;log(`<span class="g">Thái y bắt mạch: ngươi đã có thai.</span> Ngươi được giấu thai đến hết tháng thứ 3, hoặc báo tin để được sủng ái.`)}else{p.hidden=p.tamco>=40;if(!p.hidden)ap(p,{sung:6,th:5})}}}
-function giuBlocked(p){return rkOf(p)<=1&&(p.th<0||(has("hieuthao")&&p.th<10))&&roll(30)}
+function giuBlocked(p){return rkOf(p)<=1&&(p.th<0||(has("hieuthao")&&p.th<netTh("th","quen")))&&roll(30)}
 PEND.ksp=()=>({who:pEmp(),t:"<p>Tối nay Hoàng thượng lật thẻ bài của ngươi.</p>",o:[{n:"Tắm gội chờ giá",fx:{},x:"thành: được thị tẩm, gần Hoàng thượng đêm nay",go:nightScene},
  {n:`Tiến cử ${S.maid.name} hầu thay`,fx:{},x:`${roomFor("consort")?`nàng được phong ${RANKS[0].n}: ${chanceW(BAL.rk.maidRise)}, rồi ${S.maid.loyal>=BAL.loy.close?"vẫn là người của ngươi":"trở mặt với ngươi"}`:"không còn ghế để phong: nàng hầu một đêm rồi ra cung"} · kèm: mất ${S.maid.name}, cung nữ mới thiện cảm 45`,go:()=>{log(sendMaid(S))}},
  {n:"Cáo bệnh",fx:{sung:-BAL.cv.decl.sung,suc:BAL.cv.decl.suc},x:`thành: nghỉ trọn một đêm cho lại sức · kèm: nhường đêm, Ân tình -${BAL.cv.decl.an}`,go:()=>{S.an=cl(S.an-BAL.cv.decl.an,0,100);S.tonight=null}}]});
@@ -490,10 +490,10 @@ function promoReqP(p){if(rkOf(p)>=7)return[];const r=rkOf(p),nx=RANKS[r+1],L=[];
     «Cách lần sắc phong trước N tháng» row; that row stays only as the rollback path when the kỳ rule is off (no BAL.promoR / exam system off) */
  if(!pbKyOn())L.push([S.turn-p.lastPromo>=promoGap(r),`Cách lần sắc phong trước ${S.turn-p.lastPromo} tháng (cần ${promoGap(r)})`]);
  const qBlock=qq&&qq!==p;
- if(qBlock&&r+1>=2&&r+1<7){const qb=qBlockAt(p);L.push([p.hh>qb||p.th>=BAL.qBlockTh,`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên ${qb}; hoặc Thái hậu ${BAL.qBlockTh})`])}
+ if(qBlock&&r+1>=2&&r+1<7){const qb=qBlockAt(p);L.push([p.hh>qb||p.th>=netTh("th","than2"),`Hoàng hậu không chặn (Hoàng hậu ${p.hh}, cần trên ${qb}; hoặc Thái hậu ${netTh("th","than2")})`])}
  if(has("hieuthao"))L.push([p.th>=0,`Hoàng thượng hiếu thảo: Thái hậu không được ghét ${me?"ngươi":"nàng"} (Thái hậu quý ${me?"ngươi":"nàng"} ${p.th}, cần từ 0)`]);
  if(r+1===7){const N=hhNeed(p),tn=N.th,nd=N.duc,sn=N.sons;L.push([S.turn>=(p.seatBan||0),p.seatBan>S.turn?`Vừa tố Hoàng hậu, bị nghi tranh ngôi (còn ${p.seatBan-S.turn} tháng)`:"Không bị nghi tranh ngôi"],[!qq,"Ngôi Hoàng hậu bỏ trống"],[p.th>=tn,sn?`Có hoàng tử: Thái hậu quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`:`Chưa có hoàng tử: Thái hậu phải hết lòng, quý ${me?"ngươi":"nàng"} ${p.th} (cần ${tn})`],[p.duc>=nd,`Đức ${p.duc} (cần ${nd}${N.heir?", mẹ Thái tử":""})`])}
- else if(r+1>=5)L.push([p.hh>BAL.hiOppHh||p.th>=BAL.hiOppTh||!qBlock||(facOf(p)&&facStr(facOf(p))>=BAL.hiOppFac),`Hoàng hậu không phản đối, hoặc Thái hậu ${BAL.hiOppTh}, hoặc phe mạnh (thế lực ${BAL.hiOppFac})`]);
+ else if(r+1>=5)L.push([p.hh>BAL.hiOppHh||p.th>=netTh("th","than")||!qBlock||(facOf(p)&&facStr(facOf(p))>=BAL.hiOppFac),`Hoàng hậu không phản đối, hoặc Thái hậu ${netTh("th","than")}, hoặc phe mạnh (thế lực ${BAL.hiOppFac})`]);
  if(typeof pbKyRow==="function"){const k=pbKyRow(p);if(k)L.push(k)}/* promo-build: the ordinary road is looked at only in a kỳ sắc phong (jpromob) */
  if(p.confined)L.push([false,`Đang cấm túc (${p.confined} tháng)`]);return L}
 function promoReq(){return promoReqP(S)}
@@ -581,7 +581,7 @@ function rivalsMonth(){let ev="";
  /* Thái hậu and the Empress reward or punish, by the same rule for every consort */
  const qq=queenP();
  for(const p of consorts()){if(p!==S&&(!p.alive||p.out))continue;
-  if(!S.thDead&&p.th>=BAL.ag.th.fondTh&&!(window.agDOn&&agDOn())&&roll(8)){const k=pick(BAL.ag.th.items);/* one list with the NPC Thái hậu (jagacts th:gift) */invAdd(p,{k,from:"th"});try{if(typeof giftTaste==="function")giftTaste("th",p,{k})}catch(e){}if(p===S)Q.push({t:"Thái hậu ban thưởng",who:pTH(),h:`<p>Đức Thọ cung sai người mang đến <b>${itm(k).n}</b>.</p><p class="past">${itm(k).d}</p>`});else log(`Thái hậu ban ${itm(k).n} cho ${p.name}.`)}
+  if(!S.thDead&&p.th>=netTh("th","than")&&!(window.agDOn&&agDOn())&&roll(8)){const k=pick(BAL.ag.th.items);/* one list with the NPC Thái hậu (jagacts th:gift) */invAdd(p,{k,from:"th"});try{if(typeof giftTaste==="function")giftTaste("th",p,{k})}catch(e){}if(p===S)Q.push({t:"Thái hậu ban thưởng",who:pTH(),h:`<p>Đức Thọ cung sai người mang đến <b>${itm(k).n}</b>.</p><p class="past">${itm(k).d}</p>`});else log(`Thái hậu ban ${itm(k).n} cho ${p.name}.`)}
   if(qq&&qq!==S&&qq!==p&&p.hh<=-40&&!(window.agDOn&&agDOn())&&roll(10)){const i=p.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(i>=0){const n=iname(p.inv[i]);/* two-way: the same act as hers (empAct conf): unfounded = Danh/Thái hậu cost, relation and regard fall */if(evG(qq,p)<1&&!vpItems(p).length)ap(qq,BAL.tw.confNo);relAdd(qq,p,-BAL.tw.g.conf[0]);p.hh-=BAL.tw.g.conf[1];ilSeize(p,p.inv[i],"conf")/* charge-followups (a): to the Nội vụ phủ store */;ev+=p===S?`<span class="r">Hoàng hậu sai người tịch thu ${n} của ngươi, trách ngươi xa xỉ.</span> `:"";if(p!==S)log(`Hoàng hậu tịch thu ${n} của ${p.name}.`)}}
   if(qq&&qq!==S&&qq!==p&&p.hh>=50&&!(window.agDOn&&agDOn())&&roll(6)&&(qq.bac||0)>=-BAL.tw.reward.bac){/* two-way: the same Ban thưởng as hers (empAct reward): her bạc, relation +20, regard +10, Danh +3 */ap(qq,BAL.tw.reward);relAdd(qq,p,BAL.tw.g.reward[0]);spAdd(p,"hh",BAL.tw.g.reward[1]);ap(p,{danh:BAL.tw.g.reward[2]});if(p===S)ev+=`Hoàng hậu ${qq.name} ban thưởng cho ngươi. Danh +${BAL.tw.g.reward[2]}. `}
   if(npcWhy("raid",{p},()=>roll(npw1B("j8").raidGo))){const s=search(p);if(s)ev+=p===S||eyes(S)>=2?s:""}}

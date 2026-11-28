@@ -154,7 +154,7 @@ PEND.tsbBul=pp=>{if(!S)return null;const a=RV(pp.a);if(!a||!a.alive)return null;
  return{t:`<p>${why}</p>${tile}${rep}`,o:O,stage:[a],headArt:tsbFitArt("hoi-lo"),title:ev?"Bị uy hiếp đòi của":"Bị ép nộp của"}};
 function tsbGiveBack(a){const L=(S.tsbLog||[]).filter(x=>x.how==="bị lấy"&&x.who===a.id&&!x.back);for(const x of L){const ix=(a.inv||[]).findIndex(e=>e.tsbFrom==="me"&&tsbItemN(e)===x.what);if(ix>=0){const e=a.inv.splice(ix,1)[0];delete e.tsbFrom;invAdd(S,e);x.back=1;return x.what}
   const m=String(x.what).match(/^(\d+) lượng/);if(m){const g=Math.min(+m[1],a.bac||0);ap(a,{bac:-g});apply({bac:g});x.back=1;return `${g} lượng bạc`}}return""}
-function tsbProtector(a){if(!S.thDead&&(S.th||0)>=40)return{n:"Thái hậu"};const L=liveRivals(true).filter(v=>v!==a&&aff(v,S)>=netTh(v,"than")&&rkOf(v)>rkOf(a));return L.length?{n:tsbNm(L[0]),v:L[0]}:null}
+function tsbProtector(a){if(!S.thDead&&(S.th||0)>=netTh("th","than"))return{n:"Thái hậu"};const L=liveRivals(true).filter(v=>v!==a&&aff(v,S)>=netTh(v,"than")&&rkOf(v)>rkOf(a));return L.length?{n:tsbNm(L[0]),v:L[0]}:null}
 
 /* ---------------- 8. Ấn tượng đầu ---------------- */
 function tsbGrudge(v){/* only TRUE reasons, from the real numbers */const R0=[];const g=v.ghen||0,o=oan(v,S),f=aff(v,S);

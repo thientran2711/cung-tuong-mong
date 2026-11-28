@@ -42,7 +42,7 @@ function ktArtSkills(){const t2=whyTime(BAL.artLes.k),tv2=whyTime(BAL.btn.virLes
  for(const a of ARTS){const l=S.arts[a.k],cost=artFee(l);const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
   const B=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: ${BAL.artLes.k} khắc, Sức -${BAL.artLes.self} · thành: tiến bộ ${crsGainW("self",l)}`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
    pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: ${BAL.artLes.k} khắc, Bạc -${cost}, Sức -${BAL.artLes.tch} · thành: tiến bộ ${crsGainW("teacher",l)}, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: ${BAL.artLes.k} khắc, Sức -${BAL.artLes.th} · thành: tiến bộ ${crsGainW("th",l)}, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: ${BAL.artLes.k} khắc, Sức -${BAL.artLes.th} · thành: tiến bộ ${crsGainW("th",l)}, Thái hậu +3`,t2||(S.th<netTh("th","than")?`cần Thái hậu thương ${netTh("th","than")}`:(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
   const extra=(a.k==="theu"||a.k==="nau")&&typeof artBonus==="function"?` · phẩm đồ tự làm ${artBonus(S,a.k).q}/100`:"";const fx=(typeof ARTFX==="object"&&ARTFX[a.k])||[];
   out.push({g:["cam","ky","thi","hoa"].includes(a.k)?"cktt":"nc",kind:"art",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:crsProg(S.arts,S.artp,a.k),bar:l>=5?false:undefined,desc:((typeof ARTDO==="object"&&ARTDO[a.k])||"")+extra,next:fx[l]?fxItems(fx[l],"n").join(" "):"",acts:B,img,stepsAttr:`data-v85tab="${a.k}"`})}
  return out}
@@ -161,7 +161,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
   h+=R.length?kitSlide("story-past",R,{cur:R.length-1,tocTitle:"Mục lục chương",tocAll:ktChapToc()}):kitEmpty("Ta chưa qua chương nào",["Mỗi chương khép lại sẽ ghi vào đây."],{topic:"Mệnh truyện"})}
  return h}
 KIT_GLOSS["Ngôi Hoàng hậu"]="";
-(function(){const t=()=>{try{KIT_GLOSS["Ngôi Hoàng hậu"]=`Ngôi Hoàng hậu cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${BAL.hhTh} (không con trai: Thái hậu ${has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon}), và Đức ${hhNeed(S).duc} (mẹ Thái tử: ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh). Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ mới được chọn. ${typeof promoRuleTxt==="function"?promoRuleTxt():""}`}catch(e){}};
+(function(){const t=()=>{try{KIT_GLOSS["Ngôi Hoàng hậu"]=`Ngôi Hoàng hậu cần: ngôi bỏ trống, có hoàng tử và Thái hậu ${netTh("th","than2")} (không con trai: Thái hậu ${netAt("th","than2",has("hieuthao")?BAL.hhThNoSonHieu:BAL.hhThNoSon)}), và Đức ${hhNeed(S).duc} (mẹ Thái tử: ${BAL.hhDucHeir}). Khi ngôi trống, Hoàng thượng chọn trong những người đủ điều kiện (nặng ở hoàng tử, Thái hậu, Danh). Đủ điều kiện thì được dự khảo hạch tấn phong; đỗ mới được chọn. ${typeof promoRuleTxt==="function"?promoRuleTxt():""}`}catch(e){}};
  const r0=renderPanel0;renderPanel0=function(){if(S&&tab==="story"&&!(typeof isSrv==="function"&&isSrv())&&S.st&&typeof panel67==="function"){t();const el=$("panel");try{faceInit()}catch(e){}
    try{const s=STORY[S.origin.k];if(s&&s.calc)S.st.step=s.calc()}catch(e){}el.innerHTML=ktStoryHTML();el.dataset.tab=tab;kitFix(el);return}return r0.apply(this,arguments)}})();
 /* ---------- VIỆC NHỜ ---------- */

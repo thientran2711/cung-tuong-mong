@@ -312,7 +312,7 @@ function rcpSpyO(){return oddsCl(Math.round(BAL.rcp.spyO+((S.maid&&S.maid.loyal)
   for(const v of liveRivals(true)){if(!v.alive||v.out||(rel(v,S)||0)<netTh(v,"than"))continue;const L=[];
    for(const kind in RCP_ST){const sc=WK[kind].a===wkBestArt(v)?BAL.ag.why.g2rcp.best:BAL.ag.why.g2rcp.other;RCP_ST[kind].forEach((s,i)=>{if(i&&rcpNpcKnows(v,kind,s[0])&&!rcpKnows(S,kind,s[0]))L.push({k:rcpBookK(kind,s[0],1),s:sc})})}
    if(L.length&&npcWhy("rcpGift",{p:v},()=>roll(BAL.rcp.giftP))){const g=npwPick(L,x=>x.s);pushDil(mkP("giftin",{f:key(v),e:{k:g.k,from:key(v)}}),"Quà tặng");break}}/* npc-purpose G2c: a friend shares what she knows best */
-  if(!S.thDead&&(S.th||0)>=60&&npcWhy("rcpTh",{},()=>roll(BAL.rcp.thGiftP))){const L=[];for(const kind of ["kinh","theu"])RCP_ST[kind].forEach((s,i)=>{if(i&&!rcpKnows(S,kind,s[0]))L.push({k:rcpBookK(kind,s[0],1),s:kind==="kinh"?BAL.ag.why.g2rcp.thKinh:BAL.ag.why.g2rcp.thTheu})});
+  if(!S.thDead&&(S.th||0)>=netTh("th","than2")&&npcWhy("rcpTh",{},()=>roll(BAL.rcp.thGiftP))){const L=[];for(const kind of ["kinh","theu"])RCP_ST[kind].forEach((s,i)=>{if(i&&!rcpKnows(S,kind,s[0]))L.push({k:rcpBookK(kind,s[0],1),s:kind==="kinh"?BAL.ag.why.g2rcp.thKinh:BAL.ag.why.g2rcp.thTheu})});
    if(L.length){const k=npwPick(L,x=>x.s).k;/* npc-purpose G2c: Thái hậu gives from her regard; a sutra first */invAdd(S,{k,from:"th"});log(`<span class="g">Thái hậu ban ta ${itm(k).n}.</span> Cất vào rương.`)}}}}catch(e){console.error("rcp month",e)}return ev}})();
 /* a ma ma of the imperial kitchen / workshops offers to copy out a sub-style (a small story reward with two roads: bạc or Sức) */
 if(typeof ev==="function")ev("rcpMama",()=>S.rank>=0&&!S.out&&["mon","huong","theu","ao"].some(k=>RCP_ST[k].some(s=>!rcpKnows(S,k,s[0]))),

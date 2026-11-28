@@ -214,7 +214,7 @@ function mortFate(o0,h,t,fate,alive){if(!M.on||!S||S.dead)return o0.call(this,h,
  if(h!=="Thái phi")return o0.call(this,h,t,fate,alive);
  const sons=mySons(),daus=myDaus(),F=M.fate;const pre=String(t).match(why?/^.*?băng hà, thọ \d+ tuổi\.(?: [^.]*\.){0,2}/:/^.*?băng hà, thọ \d+ tuổi\.(?: [^.]*\.)?/);const P=pre?pre[0]+" ":"";
  let Q=P;if(!sons.length&&!daus.length&&S.sung>=F.tuanSung&&roll(F.tuanP)){
-  const save=S.duc>=F.tuanDuc?"Ngươi xưa nay nhân đức, triều thần dâng sớ can":(!S.thDead&&S.th>=F.tuanTh)?"Thái hậu đứng ra xin cho ngươi":(typeof ttwSpare==="function"&&ttwSpare())?"Ngươi đã sớm lo liệu, người trong triều đứng ra nói giúp":"";/* TUANTANG-WARN: the roads (jttw) */
+  const save=S.duc>=F.tuanDuc?"Ngươi xưa nay nhân đức, triều thần dâng sớ can":(!S.thDead&&S.th>=netTh("th","than"))?"Thái hậu đứng ra xin cho ngươi":(typeof ttwSpare==="function"&&ttwSpare())?"Ngươi đã sớm lo liệu, người trong triều đứng ra nói giúp":"";/* TUANTANG-WARN: the roads (jttw) */
   if(!save)return o0.call(this,"Tuẫn táng",P+"Di chiếu muốn người được sủng ái theo hầu nơi Hoàng lăng. Ngươi uống chén rượu tiễn biệt, theo tiên đế về chốn suối vàng.","Tuẫn táng theo tiên đế",false);
   Q=P+`Di chiếu muốn người được sủng ái theo hầu nơi Hoàng lăng. ${save}, ngươi được miễn. `;t=P?String(t).replace(P,Q):Q+t}
  if(sons.length)return o0.call(this,"Thái phi",Q+`${sons[0].name} được phong vương, đón mẹ về vương phủ phụng dưỡng. Ngươi thành Thái phi, an hưởng tuổi già bên con cháu.`,"Thái phi theo con ra phủ",true);

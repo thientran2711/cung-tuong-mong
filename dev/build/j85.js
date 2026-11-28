@@ -191,7 +191,7 @@ artTabHTML=function(){vNormAll();const t2=whyTime(BAL.artLes.k),tv2=whyTime(BAL.
  h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=artFee(l);
   const B=l>=5?[`<span class="ef g">${artNm(5)}</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: ${BAL.artLes.k} khắc, Sức ${balSg(-BAL.artLes.self)} · thành: tiến bộ ${crsGainW("self",l)}`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
    pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: ${BAL.artLes.k} khắc, Bạc -${cost}, Sức ${balSg(-BAL.artLes.tch)} · thành: tiến bộ ${crsGainW("teacher",l)}, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: ${BAL.artLes.k} khắc, Sức ${balSg(-BAL.artLes.th)} · thành: tiến bộ ${crsGainW("th",l)}, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: ${BAL.artLes.k} khắc, Sức ${balSg(-BAL.artLes.th)} · thành: tiến bộ ${crsGainW("th",l)}, Thái hậu +3`,t2||(S.th<netTh("th","than")?`cần Thái hậu thương ${netTh("th","than")}`:(S.buoi||0)!==0?"chỉ buổi sáng":""))];
   const extra=(a.k==="theu"||a.k==="nau")?` · phẩm đồ tự làm ${artBonus(S,a.k).q}/100, bậc phẩm ${artBonus(S,a.k).tier}`:"";
   return card(a.n,AIMG[a.k],l,S.artp[a.k],need,(ARTDO[a.k]||"")+extra,ARTFX[a.k]||[],B,a.k)}).join("")+`</div>`;
  return h};

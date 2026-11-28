@@ -22,8 +22,9 @@ const fresh=()=>{try{localStorage.clear()}catch(e){}window.__nlInner=1;for(const
  lg('old loaded '+JSON.stringify(R.old));
  /* 2. the numbers: shown text == checked rule, and equal to the old effective rule, over many states */
  R.rules=await p.evaluate(`(()=>{(${fresh})();const out={bad:[],n:0};
-  const oldEff=(p)=>{const hieu=has("hieuthao"),tn=hieu?40:50,sn=sonsOf(p).length>0,nd=S.heir&&S.heir.k&&S.heir.k.alive&&(S.heir.v===(p===S?null:p))?40:50;
-   return {th:Math.max(sn?tn:tn+30,BAL.hhTh),duc:nd}};
+  /* ROW 9: the Thái hậu part is HER level (her archetype nết): with a son netTh("th","than2"), without netAt("th","than2",BAL.hhThNoSon / hhThNoSonHieu) */
+  const oldEff=(p)=>{const hieu=has("hieuthao"),sn=sonsOf(p).length>0,nd=S.heir&&S.heir.k&&S.heir.k.alive&&(S.heir.v===(p===S?null:p))?40:50;
+   return {th:sn?netTh("th","than2"):netAt("th","than2",hieu?BAL.hhThNoSonHieu:BAL.hhThNoSon),duc:nd}};
   const heirKid=()=>S.kids.find(k=>k.alive&&k.sex==="m");
   for(let i=0;i<200;i++){S.rank=6;S.out=0;S.confined=0;S.th=Math.floor(Math.random()*101);S.duc=Math.floor(Math.random()*101);S.sung=99;S.danh=99;S.lastPromo=-99;
    const wantSon=i%2===0;S.kids=S.kids.filter(k=>false);if(wantSon){S.kids.push({name:"Thử",sex:"m",alive:true,age:3,hp:90,tal:30,fond:50})}

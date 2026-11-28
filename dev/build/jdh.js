@@ -38,7 +38,7 @@ for(const k in MAST)DH["l_"+k]={n:MAST[k],g:"nghe",u:"bậc",how:n=>`${artN(k)} 
 for(const k in WORK)DH["m_"+k]={n:WORK[k][0],g:"nghe",u:"tác phẩm",how:n=>`${WORK[k][1]}: ${n} tác phẩm từ hạng ${WTIER[BAL.dh.q.wk]} trở lên`};/* TITLE-BAL: quality, not tries (BAL.dh.q.wk) */
 /* TITLE-BAL condition titles (owner OD 26/11 ~18:20Z rec (3), approved ~18:50Z (8)): a feat under hardship, a person's lasting favour */
 DH.c_han={n:"Sen nở trong bùn",g:"thi",how:()=>`Đứng đầu một hội thi khi còn ở phẩm ${RANKS[BAL.dh.cond.han.rank].n} trở xuống, hay đang bị cấm túc, đày lãnh cung`};
-DH.c_th={n:"Thái hậu ưu ái",g:"an",u:"tháng liền",how:n=>`Được Thái hậu quý mến (từ ${BAL.dh.cond.th.v} trở lên) ${n} tháng liền`};
+DH.c_th={n:"Thái hậu ưu ái",g:"an",u:"tháng liền",how:n=>`Được Thái hậu quý mến (từ ${netTh("th","than2")} trở lên) ${n} tháng liền`};
 const GROUPS=[["tm","Thiên mệnh"],["kc","Khuê các"],["thi","Hội thi"],["nghe","Tài nghệ"],["ngay","Ngày thường"],["an","Ân sủng"]];/* "kc" = jkcg «Khuê các» (OUTSIDE_PLAN §11): like tm, listed only once earned */
 /* «Thiên mệnh» (jge.js, grand endings): one title per grand-ending shading, earned only by reaching it — never listed as "still to earn", never counted in the totals until earned */
 const dhTot=()=>Object.keys(DH).filter(k=>(DH[k].g!=="tm"&&DH[k].g!=="kc")||((S&&S.dh||{})[k]&&S.dh[k].i>=0)).length;
@@ -162,10 +162,10 @@ let RUMT=null;
 (function(){if(typeof rivalsMonth!=="function")return;const f0=rivalsMonth;rivalsMonth=function(){const r=f0.apply(this,arguments);try{if(npcOK())for(const v of rivals)if(v&&v.alive&&!v.coop){dhThMonth(v);dhSync(v)}}catch(e){console.error("dh",e)}return r}})();
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const t0=S&&S.turn;const r=e0.apply(this,arguments);try{if(S&&!S.dead){if(S.turn!==t0)dhThMonth(S);dhSync(S)}}catch(e){console.error("dh",e)}return r}})();
 /* TITLE-BAL streaks: «Sớm viếng chiều thăm» = days in a row with a Thỉnh an that went well (one per day counts); «Thái hậu ưu ái» = months in a row
-   with Thái hậu's liking ≥ BAL.dh.cond.th.v. e.cur = the streak now, e.n = the best streak (the count the steps read).
+   with Thái hậu's liking ≥ netTh("th","than2") (her nết, ROW 9). e.cur = the streak now, e.n = the best streak (the count the steps read).
    TITLE-PARITY (law 1 two-way, MAIN 166): the SAME counters for her (S) and every NPC consort p (p.th = Thái hậu's liking of that consort). */
 function dhStreak(p){p=p||S;if(!p||p.coop||(p!==S&&!npcOK()))return;const D=bag(p),e=D.a_thinh||(D.a_thinh={n:0});const d=typeof wk==="function"?wk():0;if(e.last===d)return;e.cur=e.last===d-1?(e.cur||0)+1:1;e.last=d;if(e.cur>(e.n||0))e.n=e.cur;dhSync(p)}
-function dhThMonth(p){p=p||S;if(!p||p.coop)return;const D=bag(p),e=D.c_th||(D.c_th={n:0});e.cur=(p.th||0)>=BAL.dh.cond.th.v&&!S.thDead?(e.cur||0)+1:0;if(e.cur>(e.n||0))e.n=e.cur}
+function dhThMonth(p){p=p||S;if(!p||p.coop)return;const D=bag(p),e=D.c_th||(D.c_th={n:0});e.cur=(p.th||0)>=netTh("th","than2")&&!S.thDead?(e.cur||0)+1:0;if(e.cur>(e.n||0))e.n=e.cur}
 /* NPC deeds that are the same deed as her counted acts (TITLE-PARITY): Thỉnh an Thái hậu / Hoàng hậu = the ONE two-way deed table TW (jtwoway twDo → D.run(a,t,ok),
    her talk card included: the same-day rule keeps one count a day); dưỡng nhan / đọc sách of an NPC = the agent deeds cx:face / cx:book (jagacts, the same
    cost / odds as her deck card); a failed deed returns «… nhưng chẳng được gì» and does not count, as her failed card does not. Installed after every module loaded. */

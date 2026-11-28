@@ -8,7 +8,7 @@ const planOnMe6=()=>liveRivals(true).find(v=>v.plan&&v.plan.t===key(S))||null;
 function fact6(x){if(!x)return null;const L=[];const kn=(x.kids||[]).filter(k=>k.alive).length;
  if(x.preg>0&&!x.hidden)L.push(`${x.name} đang có mang tháng thứ ${x.preg}`);if(x.confined>0)L.push(`${x.name} đang bị cấm túc`);
  if(x.sung>=60)L.push(`${x.name} đang được Hoàng thượng sủng ái hơn cả`);else if(x.sung<20)L.push(`${x.name} lâu rồi ít được lật thẻ`);
- if((x.th||0)>=40)L.push(`Thái hậu rất quý ${x.name}`);else if((x.th||0)<=-10)L.push(`Thái hậu không ưa ${x.name}`);
+ if((x.th||0)>=netTh("th","than"))L.push(`Thái hậu rất quý ${x.name}`);else if((x.th||0)<=netTh("th","ky"))L.push(`Thái hậu không ưa ${x.name}`);
  if(kn)L.push(`${x.name} có ${kn} người con`);if((x.ghen||0)>=60)L.push(`${x.name} đang ghen tức với ngươi ra mặt`);
  if((x.bac||0)>=200)L.push(`cung ${x.name} dư dả bạc tiền`);else if((x.bac||0)<20)L.push(`cung ${x.name} đang túng thiếu`);
  return L.length?pick(L):null}
@@ -60,7 +60,7 @@ G6set("rumorEmpLove",{a:["rv","rv"],pp:()=>{const a=rv6();if(a==null)return null
  v:["Người bên cung {B} đồn: Hoàng thượng sắp phong {A} lên một bậc. <i>(Lời đồn.)</i>","{B} kể với các cung: Hoàng thượng đã chán {A}, cả tháng không lật thẻ nàng. <i>(Lời đồn.)</i>","Cung nữ của {B} bảo {A} được Thái hậu chấm làm Hoàng hậu tương lai. <i>(Lời đồn.)</i>","Người của {B} rỉ tai: {A} sắp bị đưa ra lãnh cung vì phạm lỗi. <i>(Lời đồn.)</i>"]});
 G6set("rumorSpy",{pp:()=>{const a=sv6(s=>spyOther6(s)||netIs(s,"talk")||(s.loyal||50)<BAL.loy.low);return a==null||!S.maid?null:{a0:a}},v:E68I.rumorSpy.v.map(t=>t+" <i>(Lời đồn; có thể kiểm chứng.)</i>")});
 G6set("rumorFavor",{vf:()=>S.sung<BAL.sungLv.th[0]?[0,3]:S.sung>=BAL.sungLv.th[1]?[1,2]:[0,1,2,3],v:E68I.rumorFavor.v.map(t=>t+" <i>(Lời đồn.)</i>")});
-G6set("rumorTH",{vf:()=>S.th<10?[0]:S.th>=40?[1,2,3]:[0,1,2,3],v:E68I.rumorTH.v.map(t=>t+" <i>(Lời đồn.)</i>")});
+G6set("rumorTH",{vf:()=>S.th<netTh("th","quen")?[0]:S.th>=netTh("th","than")?[1,2,3]:[0,1,2,3],v:E68I.rumorTH.v.map(t=>t+" <i>(Lời đồn.)</i>")});
 /* --- children: real health and talent --- */
 G6set("kidSick",{pp:()=>{const a=kid6(k=>k.age<=12&&((k.hp||100)<95||harsh()||wet()));return a==null?null:{a0:a,a1:0}}});
 G6set("kidTutor",{vf:p=>{const k=(S.kids||[]).find(x=>x.name===p.a0);const t=k?k.tal||40:40;return t<40?[0,3]:t>=65?[1]:[2,3]}});

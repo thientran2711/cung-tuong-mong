@@ -75,7 +75,7 @@ function pbThK(){if(S.thDead)return null;S.thO=S.thO||{};if(!S.thO.pbK){const P=
 function pbTemper(v,T){if(!v)return null;if(v.trait&&T[v.trait]!=null)return v.trait;for(const n of [].concat(v.net||[]))if(T[n]!=null)return n;return null}
 function pbSungCut(p){const B=BAL.promoR.sp.sung,tr=[].concat((S.emp&&S.emp.traits)||[]);const add=tr.length?tr.reduce((a,t)=>a+(B.add[t]!=null?B.add[t]:B.def),0)/tr.length:B.def;
  return Math.round(RANKS[Math.min(RANKS.length-1,rkOf(p)+1)].s+add)}
-function pbThCut(){const B=BAL.promoR.sp.th;const a=S.thO&&S.thO.arch;return B.cut[a]!=null?B.cut[a]:B.def}
+function pbThCut(){return netTh("th","than2")}/* ROW 9: her archetype nết sets it (BAL.net, one table) */
 function pbHhCut(q){const B=BAL.promoR.sp.hh;const t=pbTemper(q,B.cut);return t?B.cut[t]:B.def}
 function pbHhOf(p){return Math.round(p===S?(S.hh||0):(typeof hhGet==="function"?hhGet(p)/* j24 hhBind: v.hh IS hhGet(v); read it straight so a co-op guest's copy (a plain lens value, host-side) gives the same number (d-followups-1) */:(p.hh||0)))}
 function pbEmpNet(){const tr=[].concat((S.emp&&S.emp.traits)||[]);return tr.map(t=>(typeof ETRAITS!=="undefined"&&ETRAITS[t]?ETRAITS[t][0]:t).toLowerCase()).join(", ")}

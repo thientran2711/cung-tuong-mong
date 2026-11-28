@@ -51,12 +51,12 @@ function coldFacActs(p){const me=p===S,L=BAL.ag.par3.cold.lt,F=BAL.ag.par3.fac,o
 function coldMonth(){let ev="";
  if(S.out){apply({bac:2});const w=SEASON[S.month-1]==="Đông";apply({suc:w?-12:-6});if(w&&roll(8)){apply({suc:BAL.eff.j14.sucColdMonth});ev+=`<span class="r">Đêm đông giá buốt, lãnh cung không than sưởi.</span> Sức ${balSg(BAL.eff.j14.sucColdMonth)}. `}
   if(illOf(S)&&S.ill.k==="tambenh"&&S.ill.st>=3&&roll(30)){over("Lãnh cung","Ngươi u uất thành điên dại, sống nốt quãng đời trong lãnh cung.","Phát điên trong lãnh cung",true);return ev}
-  if(!S.thDead&&S.th>=50&&!(window.agDOn&&agDOn())&&roll(10)){restore(false,"Thái hậu mở lòng từ bi");return ev}
+  if(!S.thDead&&S.th>=netTh("th","than2")&&!(window.agDOn&&agDOn())&&roll(10)){restore(false,"Thái hậu mở lòng từ bi");return ev}
   if((S.month===1||S.month===8)&&roll(25)){restore(false,S.month===1?"Đại xá đầu năm":"Đại xá nhân tiết Vạn thọ");return ev}
   if(typeof kietDue==="function")kietDue();if(S.suc<=0&&!(typeof kietSave==="function"&&kietSave())){die("Chết rét, chết đói trong lãnh cung");return ev}}
  for(const v of rivals){if(!v.alive||!v.out)continue;ap(v,{suc:-4});if(typeof kietNpcDue==="function")kietNpcDue(v);if(v.suc<=0&&!(typeof kietNpcSave==="function"&&kietNpcSave(v))){v.alive=false;dieMk(v,"disgrace");continue}
   if(typeof p3On==="function"&&p3On()){ev+=p3Cold(v);continue}/* AG-ALL-2e: she chooses among her own lãnh cung cards (coldActsOf), not a flat roll */
-  if((roll(3)||(v.th>=50&&roll(5)))&&roomFor("consort")&&coldStayOk(v)/* punish-reason stay */&&twCanPay(v,"cold")&&(twPay(v,"cold"),roll(odA(v,35+eyes(v)*6+(v.tamco||0)/5)))){/* two-way law: her release petition costs Sức (BAL.tw.cold) and rolls her odds; the NPC pays and rolls the same */coldFree(v);v.lastPromo=S.turn;oanAdd(v,S,BAL.ag.par3.cold.oanFree)/* review/oan-pace: through the one oán door (bounded step, BAL.oanPace) and the one number (was a typed 20 = BAL.ag.par3.cold.oanFree) */;ev+=`${v.name} được tha khỏi lãnh cung, phục vị ${RANKS[v.rank].n}. `;if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,BAL.eff.j14.coldMonth)}}}
+  if((roll(3)||(v.th>=netTh("th","than2")&&roll(5)))&&roomFor("consort")&&coldStayOk(v)/* punish-reason stay */&&twCanPay(v,"cold")&&(twPay(v,"cold"),roll(odA(v,35+eyes(v)*6+(v.tamco||0)/5)))){/* two-way law: her release petition costs Sức (BAL.tw.cold) and rolls her odds; the NPC pays and rolls the same */coldFree(v);v.lastPromo=S.turn;oanAdd(v,S,BAL.ag.par3.cold.oanFree)/* review/oan-pace: through the one oán door (bounded step, BAL.oanPace) and the one number (was a typed 20 = BAL.ag.par3.cold.oanFree) */;ev+=`${v.name} được tha khỏi lãnh cung, phục vị ${RANKS[v.rank].n}. `;if(v.coldBy!=null){const b=byKey(v.coldBy);if(b)oanAdd(v,b,BAL.eff.j14.coldMonth)}}}
  return ev}
 
 /* ================= SERVANT RANKS ================= */

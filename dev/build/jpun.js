@@ -110,7 +110,7 @@ function punGiang(p,why,by){if(p===S){if(S.out||S.dead)return;const a=punWho(by)
  log(`<span class="g">${p.name} ${punPlain(why)}, bị giáng xuống ${RANKS[rkOf(p)].n}.</span>`)}
 /* TỬ TỘI commuted: the Emperor spares her life (BAL.charge.tu.spare: Sủng + who pleads — Thái hậu, Hoàng hậu, family) */
 function punTuSpare(p){const B=BAL.charge.tu.spare;let o=B.base+(p.sung||0)/B.sungD;const W=[];
- if((p.th||0)>=B.thMin){o+=B.th;W.push("Thái hậu xin tha")}
+ if((p.th||0)>=netTh("th","than2")){o+=B.th;W.push("Thái hậu xin tha")}
  try{const q=queenP();if(q&&q!==p&&aff(q,p)>=netTh(q,"than")){o+=B.hh;W.push(`Hoàng hậu ${q.name} xin tha`)}}catch(e){}
  if((p.dad||0)>=B.dadMin){o+=B.dad;W.push("nhà mẹ đẻ dâng sớ xin tha")}
  return {o:Math.round(typeof oddsCl==="function"?oddsCl(o):o),why:W}}

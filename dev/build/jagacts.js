@@ -29,7 +29,7 @@ agReg("consort","study",(v,N,need)=>{if(need&&need!=="danh"&&need!=="duc")return
 agRunReg("cx:study",(v)=>{const D=BAL.ag.cx.study;if((v.suc||0)<D.suc)return"";ap(v,{suc:-D.suc});npcStudyDo(v);return `${v.name} chăm chỉ học tập`});
 /* Xin Thái hậu đỡ lời / Xin Hoàng hậu che chở (j2 talkOpts; same odds od(o + regard/div), same gates, same gains) */
 agReg("consort","ask",(v,N,need)=>{const O=[];const X=BAL.ag.cx;
- if(!S.thDead&&(v.th||0)>=X.thHelp.min&&(!need||need==="hh"||need==="danh")){const o=odA(v,X.thHelp.o+(v.th||0)/X.thHelp.div);const u=agcU(v,N,o,{hh:X.thHelp.w.hh,danh:X.thHelp.w.danh},{},"greet",{th:X.thHelp.l.th});if(u>0)O.push({k:"cx:thHelp",t:null,u,tag:"greet",act:"xin Thái hậu đỡ lời",at:(kh)=>{const k=agThAt(kh);return k==="tn"?k:null}})}
+ if(!S.thDead&&(v.th||0)>=netTh("th","than")&&(!need||need==="hh"||need==="danh")){const o=odA(v,X.thHelp.o+(v.th||0)/X.thHelp.div);const u=agcU(v,N,o,{hh:X.thHelp.w.hh,danh:X.thHelp.w.danh},{},"greet",{th:X.thHelp.l.th});if(u>0)O.push({k:"cx:thHelp",t:null,u,tag:"greet",act:"xin Thái hậu đỡ lời",at:(kh)=>{const k=agThAt(kh);return k==="tn"?k:null}})}
  let q=null;try{q=queenP()}catch(e){}
  if(q&&q!==v&&!v.queen&&(v.hh||0)>=X.hhShield.min&&!v.shield&&(!need||need==="safe")){const o=odA(v,X.hhShield.o+(v.hh||0)/X.hhShield.div);const u=agcU(v,N,o,{safe:X.hhShield.g},{},"greet",{hh:X.hhShield.l.hh});if(u>0)O.push({k:"cx:hhShield",t:q,u,tag:"greet",act:"xin Hoàng hậu che chở",at:(kh,vv,t)=>t===S?"home":palaceOf(t)})}
  return O});
@@ -100,14 +100,14 @@ for(const k in AGHH)agRunReg("hh:"+k,(q,t)=>{if(!q||!q.queen||!t)return"";return
 
 /* ---------------- 3. THÁI HẬU: her acts (gift, admonish, release from lãnh cung) chosen by her needs ---------------- */
 agRegNeeds("th",()=>{const T=BAL.ag.th;let fav=null;try{fav=favNow()}catch(e){}let q=null;try{q=queenP()}catch(e){}
- const C=consorts().filter(p=>p===S||p.alive);const fond=C.filter(p=>(p.th||0)>=T.fondTh&&!(p.thGiftWk!=null&&wk()-p.thGiftWk<T.giftCd)).length;
- const mercy=C.some(p=>p.out&&(p.th||0)>=T.mercyTh);
+ const C=consorts().filter(p=>p===S||p.alive);const fond=C.filter(p=>(p.th||0)>=netTh("th","than")&&!(p.thGiftWk!=null&&wk()-p.thGiftWk<T.giftCd)).length;
+ const mercy=C.some(p=>p.out&&(p.th||0)>=netTh("th","than2"));
  return{order:fav&&!(q&&q!==S&&q!==fav.p)?T.w.order:0,fond:fond?T.w.fond:0,mercy:mercy?T.w.mercy:0}});
 agReg("th","acts",(th,N,need)=>{const T=BAL.ag.th;const O=[];const u=(n)=>(N[n]||0)*T.g[n];
- if((!need||need==="fond")&&N.fond){const L=consorts().filter(p=>(p===S||p.alive)&&!p.out&&(p.th||0)>=T.fondTh&&!(p.thGiftWk!=null&&wk()-p.thGiftWk<T.giftCd));
+ if((!need||need==="fond")&&N.fond){const L=consorts().filter(p=>(p===S||p.alive)&&!p.out&&(p.th||0)>=netTh("th","than")&&!(p.thGiftWk!=null&&wk()-p.thGiftWk<T.giftCd));
   const t=L.length?mindPickBy(L,x=>BAL.mind.pick.ag.base+(x.th||0),null):null;if(t)O.push({k:"th:gift",t,u:u("fond"),tag:"help",act:"ban thưởng",at:()=>"tn"})}
  if((!need||need==="order")&&N.order){const f=favNow();if(f&&!(f.p.admonWk!=null&&wk()-f.p.admonWk<BAL.tw.g.admonCd))O.push({k:"th:admon",t:f.p,u:u("order"),tag:"greet",act:"khuyên Hoàng thượng mưa móc đều khắp",at:kh=>agEmpAt(kh)||"dtd"})}
- if((!need||need==="mercy")&&N.mercy){const L=consorts().filter(p=>p.out&&(p.th||0)>=T.mercyTh&&(p===S||p.alive));/* G3: mercy goes to the one she regards most (Thái hậu favour), near-best */const t=npwPick(L,x=>1+Math.max(0,x.th||0));if(t)O.push({k:"th:release",t,u:u("mercy"),tag:"help",act:"mở lòng từ bi, tha khỏi lãnh cung",at:()=>"tn"})}
+ if((!need||need==="mercy")&&N.mercy){const L=consorts().filter(p=>p.out&&(p.th||0)>=netTh("th","than2")&&(p===S||p.alive));/* G3: mercy goes to the one she regards most (Thái hậu favour), near-best */const t=npwPick(L,x=>1+Math.max(0,x.th||0));if(t)O.push({k:"th:release",t,u:u("mercy"),tag:"help",act:"mở lòng từ bi, tha khỏi lãnh cung",at:()=>"tn"})}
  return O});
 agRunReg("th:gift",(th,p)=>{if(!p||S.thDead)return"";/* G3: what the favoured one does not have yet */const k=npwPick(BAL.ag.th.items,x=>100/(1+invCount(p,e=>e&&e.k===x))/* inv-stack: stacked ones count */);invAdd(p,{k,from:"th"});try{if(typeof giftTaste==="function")giftTaste("th",p,{k})}catch(e){}p.thGiftWk=wk();
  if(p===S)Q.push({t:"Thái hậu ban thưởng",who:pTH(),h:`<p>Đức Thọ cung sai người mang đến <b>${itm(k).n}</b>.</p><p class="past">${itm(k).d}</p>`});return `Thái hậu ban ${itm(k).n} cho ${NM(p)}`});

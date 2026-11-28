@@ -47,8 +47,8 @@ function scMonth(){if(!S||S.dead)return;const B=BAL.scent;
   else if(b&&b.t==="doc")log(`<span class="r">Đêm qua ${scName(S.sc)} trong lò nồng gắt lạ, ngươi trằn trọc mất ngủ.</span> ${fmt({suc:B.doc.suc})} · nên kiểm tra đồ.`)}
  if(typeof worldOn==="function"&&!worldOn())return;
  for(const v of liveRivals(true)){scInit(v);if(S.sc&&!S.scOff&&v.sc!==S.sc&&(+v.ghen||0)>=B.copy.ghen&&roll(B.copy.p)){v.sc=S.sc;v.scCopy=1}
-  /* review r1 (law 1, NPC↔NPC): a consort who hates another consort (thiện cảm ≤ −copy.ghen) may copy THAT consort's scent the same way */
-  else if(!v.scCopy){const W=liveRivals(true).filter(w=>w!==v&&scOf(w)&&w.sc!==v.sc&&aff(v,w)<=-B.copy.ghen);if(W.length&&roll(B.copy.p)){const w=pick(W);v.sc=w.sc;v.scCopy=w.id}}
+  /* review r1 (law 1, NPC↔NPC): a consort who hates another consort (thiện cảm ≤ her own netTh «ghet») may copy THAT consort's scent the same way */
+  else if(!v.scCopy){const W=liveRivals(true).filter(w=>w!==v&&scOf(w)&&w.sc!==v.sc&&aff(v,w)<=netTh(v,"ghet"));if(W.length&&roll(B.copy.p)){const w=pick(W);v.sc=w.sc;v.scCopy=w.id}}
   if(scHas(v)<0&&(v.bac||0)>=B.pr+B.keep)buy(v,scBox(v.sc));scBurn(v)}}
 /* the night (j8 night(p), her and NPCs): the Emperor's taste, then the morning tell */
 function scNight(p){p=p||S;const k=scOf(p);if(!k)return;const B=BAL.scent;scEmp();let mod=0;const nm=scName(k);

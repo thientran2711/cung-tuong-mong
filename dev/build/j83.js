@@ -148,7 +148,7 @@ function wkFinishLesson(k,pick,raw,how){const kind=WK[pick.kind]&&WK[pick.kind].
  return r}})();
 /* product dialog in front of every lesson button (and the practice button once an art is mastered) */
 function wkLessonOK(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.length||S.mg)return false;if(mode==="prac")return l>=5&&can(BAL.artLes.pk)&&S.suc>=BAL.sucNeed.wk;if(l>=5)return false;
- if(mode==="self")return can(BAL.artLes.k)&&S.suc>=BAL.sucNeed.self;if(mode==="th")return can(BAL.artLes.k)&&S.th>=40&&(S.buoi||0)===0&&!S.thDead;return can(BAL.artLes.k)&&S.bac>=cost}
+ if(mode==="self")return can(BAL.artLes.k)&&S.suc>=BAL.sucNeed.self;if(mode==="th")return can(BAL.artLes.k)&&S.th>=netTh("th","than")&&(S.buoi||0)===0&&!S.thDead;return can(BAL.artLes.k)&&S.bac>=cost}
 function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode==="teacher"?tchFee(k):0;const O=[];
  for(const kind of wkKindsOf(k)){const K=WK[kind];for(let m=0;m<3;m++)O.push({n:`${K.w} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+wkFinTxt(K):""}`,go:()=>{wkPend={kind,mat:m};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}})}
  O.push({n:"Thôi",fx:{}});
@@ -225,7 +225,7 @@ function wkGrudge(v,t){return t===S?Math.max(v.ghen||0,hostility(v,S)):hostility
 function wkUseOpts(v,w){const B=BAL.ag.why.g2wk,L=[];
  if(w.kind==="mon"&&v.malice>B.malice&&v.inv.some(e=>e.k==="hacdinh"&&!e.h)){const t=npwPick(others(v).filter(t=>t.alive&&!t.out),t=>wkGrudge(v,t)-B.host);if(t)L.push({k:"poison",t,s:wkGrudge(v,t)})}
  if(v.sung<B.sungHi&&wkEval(v,w,"emp").ok)L.push({k:"emp",t:"emp",s:B.emp+(B.sungHi-v.sung)});
- if(!S.thDead&&(v.th||0)<B.thWant&&wkEval(v,w,"th").ok)L.push({k:"th",t:"th",s:B.th+(B.thWant-(v.th||0))/2});
+ if(!S.thDead&&(v.th||0)<netAt("th","than2",B.thWant)&&wkEval(v,w,"th").ok)L.push({k:"th",t:"th",s:B.th+(netAt("th","than2",B.thWant)-(v.th||0))/2});
  const f=npwPick(others(v).filter(t=>t!==v&&(t===S?v.rel>=netTh(v,"quen"):rel(v,t)>0)&&wkEval(v,w,t).ok),t=>1+(t===S?v.rel:rel(v,t)));if(f)L.push({k:"gift",t:f,s:B.gift+(f===S?v.rel:rel(v,f))});
  if(w.ti<=1&&!WK[w.kind].per&&(v.bac||0)<B.poor)L.push({k:"sell",s:B.sell+B.poor-(v.bac||0)});return L}
 (function(){const m0=npcMonthly;npcMonthly=function(v){const b=v&&v.arts?Object.assign({},v.arts):null,bp=v&&v.artp?Object.assign({},v.artp):null;const ev=m0.apply(this,arguments);

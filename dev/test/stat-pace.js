@@ -28,7 +28,7 @@ const [,,PAGE,DAYS]=process.argv;const ND=+DAYS||45;
   {const tc=Math.max(...Object.values(BAL.net.thClamp).map(x=>x[1]).filter(x=>x>3));
    const G=[["duc",BAL.route.anDuc,"Ẩn dật route.anDuc"],["duc",BAL.route.tuDuc,"xuất gia route.tuDuc"],["duc",BAL.route.guiltDuc,"route.guiltDuc"],["duc",BAL.ducLv.up,"Đức → Thái hậu ducLv.up"],["duc",BAL.ducLv.word[3],"hiền đức"],
     ["danh",BAL.danhG.kcVihanh,"Khách lạ ở chùa danhG.kcVihanh"],["danh",BAL.succN.rareCDanh,"succN.rareCDanh"],["sung",BAL.sinhThanSung,"sinh thần"],["sung",BAL.sungLv.emp[2],"sungLv.emp"],
-    ["th",BAL.hhTh,"hhTh"],["th",BAL.road.ch_co.trust,"road ch_co trust"],["hh",BAL.ag.hh.rewardHh,"ag.hh.rewardHh"],["rel",tc,"net thClamp top"],["oan",tc,"net thClamp top"]];
+    ["th",(()=>{S.thO=S.thO||{};const a0=S.thO.arch;let m=0;for(const k of Object.keys(TH_ARCH)){S.thO.arch=k;m=Math.max(m,netTh("th","than2"))}S.thO.arch=a0;return m})(),"Thái hậu than2, the slowest archetype (ROW 9; was hhTh / road ch_co trust)"],["hh",BAL.ag.hh.rewardHh,"ag.hh.rewardHh"],["rel",tc,"net thClamp top"],["oan",tc,"net thClamp top"]];
    /* PACE-SPEED (owner OD 26/11 ~19:10Z (A)): a bar-tied stat (BAL.stp.bar: Sủng, Danh) stays near the NEXT rank's bar, so its high gates open
       as she climbs (law 5): such a gate must open at the top rank and, once open at a rank, stay open at every higher rank (never shut for good) */
    for(const [k,g,n] of G){const bad=[];for(let r=0;r<8;r++)if(spTop(k,r)<g)bad.push(r);

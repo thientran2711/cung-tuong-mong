@@ -3,7 +3,7 @@
      (A) «Tân Thái hậu xét lại chuyện cũ» (j3 emperorDies): the heir is another consort's son, she is below Hoàng hậu → spared at
          od(BAL.odb.j3.odO + Đức/2 + the new Thái hậu's tie to her/2), else lụa trắng.
      (B) «Di chiếu theo hầu nơi Hoàng lăng» (jmort mortFate): childless favourite (Sủng ≥ BAL.mort.fate.tuanSung) → tuanP % unless
-         Đức ≥ tuanDuc or Thái hậu ≥ tuanTh.
+         Đức ≥ tuanDuc or Thái hậu ≥ netTh("th","than") (her nết, ROW 9).
    Now (law 6 real world: the signs exist in the world before; law 2 tiered roads; law 3 every road gains; law 4 BAL.mort.ttw):
    1. SIGNS: each month (after monthTick) ttwRisk() reads the SAME conditions the engine will read on the day; when her chance to be
       spared is below BAL.mort.ttw.warnO a «Lời đồn hậu sự» card comes: at once the first time, then every cd.sign months while the
@@ -35,7 +35,7 @@ function ttwHeir(){let h=S.heir&&S.heir.k&&S.heir.k.alive?S.heir:null;
  return h}
 /* risk B (jmort mortFate): the share of a hit she cannot avert */
 function favHit(pz){const F=BAL.mort.fate;if(mySons().length||myDaus().length||(S.sung||0)<F.tuanSung)return 0;
- if((S.duc||0)>=F.tuanDuc||(!S.thDead&&(S.th||0)>=F.tuanTh))return 0;return F.tuanP/100*(1-Math.min(T().cap,pz)/100)}
+ if((S.duc||0)>=F.tuanDuc||(!S.thDead&&(S.th||0)>=netTh("th","than")))return 0;return F.tuanP/100*(1-Math.min(T().cap,pz)/100)}
 /* what the engine would do today: {k:"th"|"fav", v, h, o (chance spared, 5–95)} or null (no risk) */
 window.ttwRisk=function(){if(ttwOff())return null;const B=T(),pz=ttwSt().pz;
  try{const m=S.vgAlly&&typeof manById==="function"&&manById(S.vgAlly);if(m&&m.tinh>=BAL.tinhLv.ally&&S.rank<7)return null}catch(e){}/* j24: a Vương gia ally takes her out */

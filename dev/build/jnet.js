@@ -61,17 +61,21 @@ function netMigrateAll(){if(!S)return;try{const L=[S].concat(typeof rivals!=="un
 (function(){if(typeof deser!=="function")return;const d0=deser;deser=function(){const r=d0.apply(this,arguments);netMigrateAll();return r}})();
 /* ================= NẾT THRESHOLDS (review/net-build; BAL.net.th — jbal2.js) =================
    netTh(p,key): the relation level of person p for key (base + her 3 nết offsets, clamped). Every relation gate reads this, never a typed number (law 4);
-   same rule for her (S.net) and for everyone else (law 1). Emperor / Thái hậu (no pool nết) → the base. */
+   same rule for her (S.net) and for everyone else (law 1). Thái hậu = holder "th": her ONE pool nết is her archetype's (TH_ARCH[..].trait via
+   traitsOf("th"): Ân cần / Thật thà / Kín đáo / Kiêu ngạo / Mê tín), so a Từ ái Thái hậu warms sooner than a Quyền uy one (ROW 9; every
+   S.th / p.th gate reads netTh("th",key), scan dev/measure/th-scan.py). Emperor (ETRAITS, no pool nết) → the base. */
 /* PERF (net-build-rv fix 4): netTh and the band shifts depend ONLY on the holder's 3 nết, so they are kept per person and recomputed when her nết array
    changes (p.net is only ever replaced, never edited in place: a redraw / migration / a test setting S.net = a new array → a miss). People without
-   a pool nết (Emperor / Thái hậu) are computed each time (base). No behaviour change: same numbers, fewer traitsOf walks. */
+   a p.net array (Emperor; Thái hậu "th", one nết) are computed each time. No behaviour change: same numbers, fewer traitsOf walks. */
 const NET_MEMO=new WeakMap();
 function netMemo(p){if(!p||typeof p!=="object"||!Array.isArray(p.net))return null;let m=NET_MEMO.get(p);if(!m||m.n!==p.net){m={n:p.net,v:{},b:null};NET_MEMO.set(p,m)}return m}
 function netTh(p,key){const m=netMemo(p);if(m&&m.v[key]!==undefined)return m.v[key];const r=netTh0(p,key);const m2=netMemo(p);if(m2)m2.v[key]=r;return r}
-function netTh0(p,key){const N=BAL.net,b=N.th[key];if(b==null)return 0;let o=0;try{const F=N.thFrom[key];for(const t of (p&&typeof p==="object"?traitsOf(p):[])){const R=N.T[t];if(!R||!R.th)continue;
+function netTh0(p,key){const N=BAL.net,b=N.th[key];if(b==null)return 0;let o=0;try{const F=N.thFrom[key];for(const t of (p==="th"||(p&&typeof p==="object")?traitsOf(p):[])){const R=N.T[t];if(!R||!R.th)continue;
   if(R.th[key]!=null)o+=R.th[key];else if(F&&R.th[F[0]]!=null)o+=R.th[F[0]]*F[1]}}catch(e){}const C=N.thClamp[key];return C?Math.max(C[0],Math.min(C[1],Math.round(b+o))):Math.round(b+o)}
 /* a lighter gate: share k (BAL.net.thK[k]) of p's level of key */
 function netThK(p,key,k){return Math.round(netTh(p,key)*BAL.net.thK[k])}
+/* a mark ABOVE the top level (Thái hậu 70 / 80 / 85 — BAL.ag.why.cmood.thHi, hhNeed .th, BAL.ag.why.g2pet.kyTh keep their own key): the same mark moved by p's nết exactly as her «key» level moves, capped at 100 */
+function netAt(p,key,v){return Math.min(100,Math.round(v+netTh(p,key)-BAL.net.th[key]))}
 /* FORGIVENESS (net-build-rv fix 2, law 1): ONE rule for every apology / mediation road — her «Tạ lỗi» / «Nhún nhường» (j9 / jtwoway), the NPC deeds
    (SOC.apologise / SOC.mediate j28, TW apol jtwoway, cx:humble jagacts, «Tạ lỗi, đền bạc» jemoact) and the receiver of a mediation (jrcv RCVK.mediate):
    the wronged one t lets a's wrong go only while t's oán toward a is under t's own «nguoi» level (her = S.net, same function). Told after, in words. */
@@ -102,4 +106,15 @@ function netCross(x,y,b,a){if(!S||!x||!y||x===y||x===S||typeof x!=="object"||typ
  if(!rivals.includes(x))return;S.netX=S.netX||{};const k=x.id+">"+(y===S?"me":y.id),st=a>=th?1:a<=gh?-1:0,o=S.netX[k]||0;if(st===o)return;S.netX[k]=st;
  if(st===1&&y===S&&b<th){const L=NET_TH_LINE.than;newsAdd(x,"netThan",`${x.name} ${tv(L,x,L._)}`,true)}
  else if(st===-1&&b>gh)newsAdd(x,"netGhet",`${x.name} từ nay ghét ${NM(y)} ra mặt`,false)}
+/* ROW 9: the Thái hậu crosses HER OWN levels too (holder "th", her archetype's nết): her regard for the player reaching her «than» level or falling
+   to her «ghet» level is told once per crossing, in her nết's voice, as the player's own log line (she sees it herself). First look = silent baseline. */
+const NET_TH_TH={than:{"Ân cần":"nắm tay ngươi, dặn từ nay có chuyện gì cứ sang Đức Thọ cung mà nói","Thật thà":"nói thẳng trước mặt mọi người: ngươi là đứa biết điều, bà tin ngươi",
+ "Kín đáo":"vốn chẳng tin ai, nay lại kể ngươi nghe một chuyện cũ trong cung","Kiêu ngạo":"vốn khó chiều, nay lại khen ngươi trước mặt các phi tần",
+ "Mê tín":"nói ngươi có phúc tướng, từ nay cho ngươi hầu bên cạnh",_:"từ nay coi ngươi là chỗ thân tình"},
+ ghet:{"Ân cần":"thở dài, từ nay không gọi ngươi sang hầu chuyện nữa","Kiêu ngạo":"từ nay không thèm nhìn ngươi lấy một lần",_:"từ nay lạnh nhạt với ngươi ra mặt"}};
+function netThCross(){if(!S||S.thDead||S.dead)return;const v=S.th||0,th=netTh("th","than"),gh=netTh("th","ghet"),st=v>=th?1:v<=gh?-1:0;S.netX=S.netX||{};
+ const o=S.netX["th>me"];S.netX["th>me"]=st;if(o===undefined||o===st)return;if(st===1){const L=NET_TH_TH.than;log(`Thái hậu ${tv(L,"th",L._)}.`)}
+ else if(st===-1){const L=NET_TH_TH.ghet;log(`Thái hậu ${tv(L,"th",L._)}.`)}}
+(function(){const a0=apply;apply=function(o){const r=a0.apply(this,arguments);try{if(o&&o.th)netThCross()}catch(e){}return r}})();
+(function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{netThCross()}catch(e){}return r}})();
 (function(){const a0=affAdd;affAdd=function(x,y,n){let b=null;try{if(n&&x&&y&&x!==y&&x!==S)b=aff(x,y)}catch(e){}const r=a0.apply(this,arguments);try{if(b!=null)netCross(x,y,b,aff(x,y))}catch(e){}return r}})();

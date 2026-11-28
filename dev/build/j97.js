@@ -71,7 +71,7 @@ const R97L=[
  go:(_A,_ok,G)=>e67bien(G[0]),rw:"nt_haiduong",ti:"Muội muội của Trấn Bắc hầu"},
 /* ===== Nhà buôn muối ===== */
 {a:"muoi_tuoc",tag:"Thương hội mang ấn rồng",w:"th",n:"Xin Thái hậu cho nhà ngươi đứng ra lập thương hội cho triều đình",
- path:["Dâng bạc vào quốc khố","Tặng {v} hũ muối","Xin nhà ngươi gánh hết","Góp một phần","Đưa sổ sách sạch","Xin chờ tước thật"],bad:["Nhận hư hàm","Đưa bạc"],x:[()=>(S.th||0)>=AR("muoi_tuoc").bar,`Thái hậu với ngươi từ ${AR("muoi_tuoc").bar}`],
+ path:["Dâng bạc vào quốc khố","Tặng {v} hũ muối","Xin nhà ngươi gánh hết","Góp một phần","Đưa sổ sách sạch","Xin chờ tước thật"],bad:["Nhận hư hàm","Đưa bạc"],x:[()=>(S.th||0)>=netTh("th","than"),"Thái hậu thân với ngươi"],
  t:"Thái hậu đặt chén trà xuống: “Bạc nhà con, lòng con, ai gia đều thấy.” Thánh chỉ ban xuống: lập Hoàng gia thương hội lo muối, trà, tơ cho nội đình, nhà ngươi đứng tên hội trưởng đời đời. Kẻ từng chê mùi muối nay xếp hàng xin vào hội.",
  rw:"nt_nhuy",ti:"Người lập Hoàng gia thương hội"},
 {a:"muoi_lau",tag:"Phá lưới muối lậu",w:"emp",n:"Dâng sổ tay của quản sự gian kèm danh sách thuyền đêm",
@@ -96,7 +96,7 @@ const R97L=[
  t:"Trong cuộc săn, mãnh hổ lao vào ngự giá; {n1} chắn trước Hoàng thượng mà đỡ một vết vuốt. Ngài hỏi hắn muốn gì, hắn chỉ xin cưới một cung nữ ở quê. Đêm ấy Hoàng thượng nắm tay ngươi: “Người cũ của nàng cũng là trung thần của trẫm.” Thư cũ từ đó không còn ai dám nhắc.",
  rw:"ngocboi",ti:"Người Hoàng thượng tin tuyệt đối"},
 {a:"cn_ban",tag:"Tố Nga khoác áo nữ quan",w:"maid",n:"Xin Thái hậu cho Tố Nga vào Thượng cung cục",
- path:["Lén gửi thuốc và bạc","Đến Tân Giả khố gặp nàng","Biếu chưởng sự","Hứa che chở","Lén mời thái y","Tự bốc thuốc","Nhận là bạn cũ","Xin Tố Nga về hầu"],bad:["Đốt khăn","Chối","Gửi bạc, phó mặc"],x:[()=>!S.thDead&&(S.th||0)>=AR("cn_ban").bar,`Thái hậu còn sống, với ngươi từ ${AR("cn_ban").bar}`],
+ path:["Lén gửi thuốc và bạc","Đến Tân Giả khố gặp nàng","Biếu chưởng sự","Hứa che chở","Lén mời thái y","Tự bốc thuốc","Nhận là bạn cũ","Xin Tố Nga về hầu"],bad:["Đốt khăn","Chối","Gửi bạc, phó mặc"],x:[()=>!S.thDead&&(S.th||0)>=netTh("th","than"),"Thái hậu còn sống, thân với ngươi"],
  t:"Thái hậu nghe xong chuyện cái giếng thì nhắm mắt rất lâu. Tố Nga được minh oan, phong làm chưởng ấn nữ quan Thượng cung cục, coi sổ sách y phục, đồ dùng cả lục cung. Từ nay, cung nào may áo gì, nhận đồ gì, ngươi đều biết trước một ngày.",
  rw:"nt_haiduong",ti:"Ân nhân của Thượng cung cục"},
 {a:"cn_than",tag:"Huyện chúa họ Thẩm",w:"th",n:"Đeo miếng ngọc ra mắt Thái hậu",
@@ -140,7 +140,7 @@ const R97L=[
  go:(_A,_ok,G)=>{const v=foe67();if(v){v.enemy=false;return e67ally(v,G[0])}return""},rw:"bienngu",ti:"Người cởi oan nghiệt"},
 /* ===== Cháu Thái hậu ===== */
 {a:"ch_co",tag:"Nghĩa nữ của Thái hậu",w:"th",need:"th",n:"Quỳ thưa với cô mẫu: con không muốn làm quân cờ, con muốn làm con",
- path:["Thưa khéo: con còn non","Lấy lòng ma ma","Từ chối thẳng","Nhận thuốc rồi lén đổ","Khéo xin tự lo","Ngầm bắt tay Hoàng hậu","con muốn tự đứng được"],bad:["Uống thuốc của cô mẫu"],x:[()=>!S.thDead&&(S.th||0)>=AR("ch_co").bar,`Thái hậu còn sống, với ngươi từ ${AR("ch_co").bar}`],
+ path:["Thưa khéo: con còn non","Lấy lòng ma ma","Từ chối thẳng","Nhận thuốc rồi lén đổ","Khéo xin tự lo","Ngầm bắt tay Hoàng hậu","con muốn tự đứng được"],bad:["Uống thuốc của cô mẫu"],x:[()=>!S.thDead&&(S.th||0)>=netTh("th","than2"),"Thái hậu còn sống, rất quý ngươi"],
  t:"Thái hậu lặng đi, rồi kéo ngươi vào lòng như ngày ngươi còn bé. Hôm sau bà ra ý chỉ: nhận ngươi làm nghĩa nữ, ghi vào ngọc điệp, đổi theo họ của bà. Từ đó ngươi gọi bà là mẫu hậu, và cả hậu cung hiểu Đức Thọ cung chỉ có một người con gái.",
  rw:"nt_dongchau",ti:"Nghĩa nữ của Thái hậu"},
 {a:"ch_benh",tag:"Tạm cầm phượng ấn",w:"th",need:"th",n:"Dâng chén thuốc đã cho lương y thử trước mặt cả cung",

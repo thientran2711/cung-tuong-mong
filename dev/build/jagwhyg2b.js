@@ -24,7 +24,7 @@ npwReg("j70Plot",{grp:"G2",who:c=>c.p?[c.p]:[],why:(v,c)=>{const t=c.t,d=danger(
  const r=c.mo==="ghen"?"ghen vì "+npwNm(t)+" được sủng":c.mo==="nhuc"?"bị nhục, oán "+npwNm(t):c.mo==="ngoi"?"tranh ngôi cho con":"oán "+npwNm(t);return {s:d,t,r}}});
 npwReg("j70Guard",{grp:"G2",who:c=>c.p?[c.p]:[],why:(x,c)=>{const B=npwB().g2b.guard;
  if(x===S.emp)return (S.sung||0)>=B.sung?{s:B.base+(S.sung-B.sung),r:"thương ngươi"}:null;
- return !S.thDead&&(S.th||0)>=B.th?{s:B.base+(S.th-B.th),r:"quý ngươi"}:null}});
+ return !S.thDead&&(S.th||0)>=netTh("th","than2")?{s:B.base+(S.th-netTh("th","than2")),r:"quý ngươi"}:null}});
 npwReg("j70Face",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>{const B=npwB().g2b.face,sc=p.scar;if(!sc)return null;const v=(p.sac||0)*B.sac+sc.sev*B.sev;
  if(c.cure)return sc.sev>=B.cureSev&&(p.bac||0)>=B.cureBac?{s:v,r:"sợ mất nhan sắc, bỏ bạc mua thuốc quý"}:null;return {s:v,r:"lo giữ nhan sắc, mời thái y"}}});
 /* ---- j10 / j25: a faction leader acts from the faction's grudge or its need for an ally ---- */

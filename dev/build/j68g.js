@@ -68,7 +68,7 @@ EV6("servHero","serv",{a:["sv"],pp:()=>{const a=sv6();return a==null?null:{a0:a}
   c6("Tra xem có kẻ gây ra không",{c:{suc:-4},p:od(BAL.odb.j68g.odP_7+eyes(S)*5),w:{mat:1},wt:[G6("biết đó là tai nạn hay có người")],lt:[R6("không lần ra gì")],l:{suc:-2},r:[[X.A,4]],ok:()=>{const v=liveRivals(true).find(v=>v.plan&&v.plan.t===key(S));return v?`Dấu vết dẫn về người của ${v.name}.`:"Tra kỹ: chỉ là tai nạn, không ai bày ra."}})]});
 EV6("rumorTH","rumor",{a:["th"],pp:()=>S.thDead?null:{a0:0},w:C=>1,
  v:["Cung nhân đồn Thái hậu dạo này không ưa ngươi, chê ngươi lười thỉnh an.","Lời đồn: Thái hậu định chọn ngươi trông coi việc tế lễ năm nay.","Người ta bảo Thái hậu khen ngươi trước mặt Hoàng thượng.","Có tin Thái hậu nhắc tên ngươi khi bàn chuyện ghế trống."],
- o:X=>[c6("Hỏi ma ma thân tín của Thái hậu",{pw:1,c:{bac:-15},p:od(BAL.odb.j68g.odP_8+eyes(S)*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("ma ma kín miệng")],l:{bac:-5},ok:()=>`Ma ma nói thật: Thái hậu ${S.th>=50?"rất quý":S.th>=20?"có cảm tình với":S.th>=-10?"không để ý nhiều đến":"không ưa"} ngươi.`}),
+ o:X=>[c6("Hỏi ma ma thân tín của Thái hậu",{pw:1,c:{bac:-15},p:od(BAL.odb.j68g.odP_8+eyes(S)*4),wt:[G6("biết sự thật")],w:{mat:1},lt:[R6("ma ma kín miệng")],l:{bac:-5},ok:()=>`Ma ma nói thật: Thái hậu ${S.th>=netTh("th","than2")?"rất quý":S.th>=netTh("th","than")?"có cảm tình với":S.th>=netTh("th","ky")?"không để ý nhiều đến":"không ưa"} ngươi.`}),
   c6("Sang thỉnh an ngay",{c:{suc:-6},w:{th:3},k:[R6("vẫn chưa rõ thật hư")]}),
   c6("Bỏ ngoài tai",{w:{duc:1},k:[R6("không biết thật hư")]})]});
 EV6("rumorFavor","rumor",{a:["emp"],pp:()=>({a0:0}),w:C=>1,

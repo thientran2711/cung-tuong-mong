@@ -180,7 +180,7 @@ Object.assign(BAL,{dis:{n:[1,2],aff:4,sung:1,refuse:35,refAff:2,refSung:1,talk:2
         emp = his choice, % giữ mẹ = base + sung×(Sủng−50) + th×Thái hậu (×hieuthao if Hiếu thảo) − heirNeed (no living prince) − boy (the Thái y guesses
         a boy: boyGuess % of hard births) + his traits (nhantu, datinh, mesac, lanhlung, chamchinh); 5–95
    fate (Emperor dies, her son not the heir): phiRank+ or a daughter → Thái phi; a son → theo con ra phủ; childless: rank ≤ homeRank, age < homeAge → về quê (homeP %),
-        else xuất gia; childless favourite (Sủng ≥ tuanSung) faces tuẫn táng (tuanP %), averted by Đức ≥ tuanDuc or Thái hậu ≥ tuanTh */
+        else xuất gia; childless favourite (Sủng ≥ tuanSung) faces tuẫn táng (tuanP %), averted by Đức ≥ tuanDuc or Thái hậu ≥ netTh("th","than") (her nết, ROW 9) */
 BAL.mort={on:1,playerFloorYears:0,
  life:{show:0,care:1,careAdd:1,careMax:3,cureTy:40,careYt:1,cureOther:20,cureSuc:5,careSuc:70,careP:12,careLapse:40,careIll:15,floorMe:0,floorEmp:0,minMo:3,
   /* emp = the Emperor's OWN natural-death curve (owner 26/11 ~21:20Z via MAIN 163, replaces the 36/7 «reign ~14 y» curve of the same day): natural
@@ -194,7 +194,7 @@ BAL.mort={on:1,playerFloorYears:0,
  illAge:[35,25,1.5],dieAge:[45,15,25],tired:{from:35,per:5,min:4},griefMo:6,griefIll:12,
  birth:{misX:.62,hardX:2,choiceP:35,hardDie:45,hardSuc:35,barrenP:8,stillP:3,stillSuc:20,stillAge:.5,newbornP:3,
   emp:{base:50,sung:.5,th:.2,heirNeed:15,boyGuess:50,boy:10,nhantu:10,datinh:5,mesac:5,lanhlung:-10,chamchinh:-5,hieuthao:2}},
- fate:{phiRank:4,homeRank:1,homeAge:30,homeP:50,tuanSung:60,tuanP:25,tuanDuc:50,tuanTh:40},
+ fate:{phiRank:4,homeRank:1,homeAge:30,homeP:50,tuanSung:60,tuanP:25,tuanDuc:50},
  /* D4 review/npc-death (owner OD:L641–643): ly = Phế phi họ Tần in Trường Môn viện: age when the game starts, floor = minimum years she lives
     (her rửa oan story needs time), lcShow = fallen consorts shown with her in a visit; dead = faces / figures / names of the dead kept (newest) so
     no new person ever gets them (owner: a NEW person, never the dead person's picture) */
@@ -417,7 +417,7 @@ Object.assign(BAL.mgTier.lev.kim,{folds:[8,4],holes:[2,2],size:[.11,.13],place:[
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
 Object.assign(BAL,{danhG:{srvRise:.2,/* review/balance-2: share of a serving maid's Danh kept when she is raised to Đáp ứng (jagmaid riseCore, every rise) */forget:5,/* promo-root: months after palace entry / leaving lãnh cung before «Bị bỏ quên» can fire */forgetGrace:6,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
  charity:{khac:1,bac:35,duc:3,danh:5},/* "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; two doors: Tài nghệ · Tứ đức button + Hành sự card jact adCharityCard, one lock S.charM). danh-p1 (owner P1 16/11 12:55Z): bac 20→35, danh 1→5 */
- succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
+ succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cBac:300,npcDanh:50,npcTam:35,rareCDanh:80}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
    arrival by source; pickN candidates, the picked one's talent works after pickAlone months, pickKeep % a month her decay is undone;
    kinSave % a "kín miệng" maid refuses a buyer; talents: talBac bạc, talSuc Sức, talSpy % a true fact, while her loyalty ≥ talLoy;
@@ -506,7 +506,7 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
      Hoàng hậu / Thái hậu block rows, cấm túc, lãnh cung still apply). A FAILED or missed special exam USES UP that chance (OD ~09:50Z).
      sung (Hoàng thượng sủng ái): Sủng ≥ RANKS[next].s + the mean add of THIS Emperor's traits (def when a trait is not listed); ≤ 1 per every months,
        ≤ life per life (OD ~09:15Z).
-     th (Thái hậu ân điển): Thái hậu quý ≥ cut[her archetype TH_ARCH] (def), once per life per Thái hậu (life), a new Thái hậu = a new chance.
+     th (Thái hậu ân điển): Thái hậu quý ≥ netTh("th","than2") (her archetype nết, the ONE level table BAL.net — ROW 9), once per life per Thái hậu (life), a new Thái hậu = a new chance.
      hh (Hoàng hậu đề cử): Hoàng hậu quý ≥ cut[the Hoàng hậu's tính tình: her trait, else the first listed of her nết] (def), target rank ≤ maxTo, once per life per Hoàng hậu.
      birth = special exams per birth (later sons and every daughter; the FIRST son = direct, PROMO_SRC.son1).
      cost (law 3): sungGhen = palace ghen at her favour exam (NPC: the others oán sungOan); thSung = Sủng − (Bệ hạ sees a Thái hậu person);
@@ -522,7 +522,7 @@ Object.assign(BAL,{psk:{ghen:10,son1:{hhOan:15,momOan:8},emp:{th:8,oan:10},th:{s
      Emperor's hall) − 1 (−1..1); kind = −2..2 per tính tình (÷2); a reason line names a royal when |x'| ≥ why. */
 Object.assign(BAL,{promoR:{ky:{p:{newyear:85,doanngo:20,vantho:75,thanhtho:55,dongchi:20},gapMin:3,gapMax:8,hold:2},mourn:27,
  sp:{sung:{add:{datinh:4,mesac:6,nongnay:6,nhantu:8,trongtai:8,hieuthao:10,danghi:12,chamchinh:14,lanhlung:16},def:8,every:24,life:2},
-  th:{cut:{tuai:40,phat:45,nghiem:60,quyen:62,danghi:68},def:55,life:1},
+  th:{life:1},
   hh:{cut:{"Ân cần":40,"Khiêm nhường":45,"Điềm tĩnh":50,"Nhiều chuyện":50,"Nóng nảy":55,"Kín đáo":60,"Lạnh lùng":65,"Tham vọng":62,"Xảo quyệt":66,"Kiêu ngạo":70},def:55,maxTo:4,life:1},
   birth:1,cost:{sungGhen:10,sungOan:6,thSung:4,hhOwe:1,hhOan:4,deathHhOan:10,meAff:5,mePassOan:4},meMax:4,meK:1,death:{life:1},tp:{on:1,okK:["ill","birth","age","murder","tuan","other"]/* death kinds (j8 dieMk) that may be examined for truy phong; crime / disgrace / left / unmarked never (fix r1) */}},
  dl:{on:1,minGap:24,bacM:1,ghen:6,oan:3,thTho:[50,60,70,80],empTho:[30,40,50,60],duc:[0,0,10,15,20,30,40,50]},
@@ -872,7 +872,7 @@ BAL.entry.phuc={lv:[11,12,5],sp:4,max:10,duc:[30,30],pow:[40,30],foul:{od:40,oan
    cond = the condition titles: han.rank = «Sen nở trong bùn» (first place at this rank or below, or while punished), th.v = «Thái hậu ưu ái» (her liking ≥ v
    for n months in a row). «Sớm viếng chiều thăm» counts DAYS IN A ROW with a Thỉnh an (a streak), not tries.
    Bonus v per step [s1,s2,s3]: s2 clearly above s1 (the harder bar pays more), s3 ≈ s2 + a little (the top step is mostly beauty: a higher colour tier). */
-BAL.dh={n0:[2,6,12],step:2,artLv:[4,5],q:{wk:2},note:{per:1},cond:{han:{rank:1},th:{v:60}},
+BAL.dh={n0:[2,6,12],step:2,artLv:[4,5],q:{wk:2},note:{per:1},cond:{han:{rank:1}},/* c_th streak: Thái hậu regard ≥ netTh("th","than2") (ROW 9) */
  B:{sac:{v:[1,2,2]},danh:{v:[1,2,2]},sung:{v:[1,2,2]},duc:{v:[1,2,2]},tai:{v:[1,2,2]},tamco:{v:[1,2,2]},
   gSung:{v:[20,12,10]},gDanh:{v:[20,12,10]},gBac:{v:[12,7,6]},gTren:{v:[12,7,6]},gHau:{v:[12,7,6]},gTrung:{v:[10,6,5]},
   phuc:{v:[1,2,3]},thai:{v:[0,1,1]},nghe:{v:[10,20,25]},thi:{v:[1,2,3]},suc:{v:[1,2,2]},don:{v:[4,8,10]}},
@@ -1288,20 +1288,20 @@ BAL.talk={health:4,praise:{o:60,div:5},praiseFail:2,secret:10,secretBond:30,goss
 BAL.ag.day={on:1,replan:{need:25,touch:40},redecideScope:"consort"/* "consort" = cap on consorts; "far" = only far staff (no consort master, not hers) are filtered + capped, consorts and their servants pick every buổi */,redecideCap:0/* ag2-perf A (owner OD L1637): >0 = at most this many consorts pick their buổi deed again per buổi, only those with a cause (jagday agRdcCause); 0 = OFF: every consort picks every buổi (MAIN ROOT-52 18/11: no cap kept NPC deeds >= 95 % of 02466132 — 12/16/24/inf all ~78-85 %, the cause filter itself drops them — so consorts are never capped; 4x per-khắc still below live) */};
 /* AG-ALL part A acts (jagacts.js): cx = the consort cards of j2 the loop lacked — c cost, o odds, w gain (the player's card reads the SAME
    entry), need = what the act serves in BAL.ag.unit points (the agent's utility); maidR.below = her maid's lòng under which a reward is worth it;
-   study = Sức for a lesson, g = points; thHelp / hhShield = Xin Thái hậu đỡ lời / Xin Hoàng hậu che chở (odds o + regard / div, gate min);
+   study = Sức for a lesson, g = points; thHelp / hhShield = Xin Thái hậu đỡ lời / Xin Hoàng hậu che chở (odds o + regard / div; gate = netTh("th","than"), her nết, ROW 9);
    buy.keep = bạc she keeps after a purchase; gift.g / ally.g = points of a gift / Kết giao (ally: cost bạc, friendship rel above).
    hh = the Empress's acts (Xử tội, Tịch thu, Ban thưởng, Ân xá, Khất bổng lộc, Khuyên mưa móc): g = points per act, gates = the old roll's
    gates (confHh, rewardHh, cutRelMax), cutRel relation lost, pardonAff / pardonRel / pardonDuc.
-   th = Thái hậu: w = need weights (order: one consort holds his nights; fond: consorts she favours, th ≥ fondTh, not gifted for giftCd tuần;
-   mercy: a favoured consort in lãnh cung, th ≥ mercyTh), g = utility per need, items = what she gives (the old j8 list) */
+   th = Thái hậu: w = need weights (order: one consort holds his nights; fond: consorts she favours, th ≥ netTh("th","than") (her nết, ROW 9), not gifted for giftCd tuần;
+   mercy: a favoured consort in lãnh cung, th ≥ netTh("th","than2")), g = utility per need, items = what she gives (the old j8 list) */
 Object.assign(BAL.ag,{cx:{face:{c:{"bac":-30},get o(){return BAL.odb.j2.odO_9},w:{"sac":3},need:{"sung":2}},arts:{c:{"suc":-10},o:100,w:{"tai":2},need:{"danh":2}},book:{c:{"suc":-5},o:100,w:{"tamco":2},need:{safe:2}},
   alms:{c:{"bac":-40},get o(){return BAL.odb.j2.odO_8},w:{"danh":7,"mat":1,"duc":3},need:{"danh":5,"duc":3}},sutra:{c:{"bac":-10},o:100,w:{"duc":3},need:{"duc":3}},maidR:{c:{"bac":-20},o:100,w:{"maid":20},need:{safe:3},below:60},
-  rest:{c:{},o:100,w:{"suc":20},need:{rest:6}},study:{"suc":10,g:3},thHelp:{get o(){return BAL.odb.j2.odO_17},div:3,min:30,w:{"danh":4,"hh":5},l:{"th":-5}},hhShield:{get o(){return BAL.odb.j2.odO_20},div:3,min:20,g:6,w:{"hh":3},l:{"hh":-5},sh:2},
+  rest:{c:{},o:100,w:{"suc":20},need:{rest:6}},study:{"suc":10,g:3},thHelp:{get o(){return BAL.odb.j2.odO_17},div:3,w:{"danh":4,"hh":5},l:{"th":-5}},hhShield:{get o(){return BAL.odb.j2.odO_20},div:3,min:20,g:6,w:{"hh":3},l:{"hh":-5},sh:2},
   buy:{keep:20,g:2},gift:{g:4},ally:{"bac":30,g:4}},
  hh:{g:{judge:6,conf:4,reward:4,pardon:4,cutpay:3,admon:5},orderW:.35,orderN:3,confHh:-40,rewardHh:50,cutRel:15,pardonRel:30,pardonDuc:2,kh:2},
- th:{w:{order:1,fond:.6,mercy:.8},g:{order:10,fond:6,mercy:8},fondTh:40,giftCd:6,mercyTh:50,items:["nhansam","yensao","vongngoc","huongtram"]}});
+ th:{w:{order:1,fond:.6,mercy:.8},g:{order:10,fond:6,mercy:8},giftCd:6,items:["nhansam","yensao","vongngoc","huongtram"]}});
 /* AG-ALL r1 F5 weight pass (needs × traits, no dice): spiteD = hostility that makes the spite need whole (agSpN; was a typed 100);
-   hh.orderW / orderN = the Empress's duty need (jagacts agHhCases); th.fondTh 60 → 40 = the Thái hậu's regard at which she favours a consort
+   hh.orderW / orderN = the Empress's duty need (jagacts agHhCases)
    (one number with the old j8 gift gate). Measured with the 60-day bot (report §17). */
 BAL.ag.spiteD=35;BAL.ag.favAsk=40;
 BAL.ag.day.worldPull=2;/* weight of a world window place against her own "no goal" place, per × above 1 (worldPlanW place) */
@@ -1755,16 +1755,16 @@ Object.assign(BAL.ag.why,{dil:{gap:4,world:25,arsonBar:45,omenBar:40,greed:30,gr
  emp:{want:8,k:6},cold:{base:15,aff:.5,duc:.1},love:{base:30,eye:4}}});
 /* npc-purpose G1 part 3 (j24 visitors, jagwhy1): fr / ally / gift = her liking; poor = bac under which a friend borrows; sorry = oán to apologise;
    th = Thái hậu regard to call her; poem = a man's tình ý for the 'đem lòng thương' line (+ poemSeen if he met her, + poemFancy for a romantic nature; only a man with one of those pulls writes; cd.manPoem is palace-wide: the old slot drew 1–3 visitors a tuần (mean 1.75) × 40 % × one card type in ~6 ≈ a poem every ~8–10 tuần (G1 #11: base e16e1d6 59–90 cards per ~700 consort tuần; cd 20 gave ~1 per 24 tuần, 0.32–0.40 of base) → cd 7); repay = silver a debtor needs to repay; max = visitors a tuần (old 1-3, mean 1.75) */
-Object.assign(BAL.ag.why,{ap:{max:2,poor:40,th:10,poem:10,poemSeen:10,poemFancy:10,repay:40}});
+Object.assign(BAL.ag.why,{ap:{max:2,poor:40,poem:10,poemSeen:10,poemFancy:10,repay:40}});
 Object.assign(BAL.ag.why.cd,{apFriend:4,apTaunt:4,apSorry:8,empTea:3,thCall:4,svAsk:6,maidWarn:6,manPoem:7,svDefect:8,repay:2,svSell:12,svCause:8});
 Object.assign(BAL.ag.why.cd,{meHarm:6,thdTaunt:30,meAlly:24,hhCane:8,hhMe:12,hhGreed:24,empAsk:24,coldAsk:12,loveFound:12,arson:24,rvHarm:6,rvFeud:6,omen:36});
 /* npc-purpose G1 part 4 (j68 life events, j72 favours; jagwhy1). e68: gap = tuần between two j68 events (≈ the old 25 %/tuần), visitGap = tuần between two
    j68 situations that take the stock visit slot (old 15 % swap ≈ one per 3 tuần; G1 #7), greed = weight of a greedy servant as the thief. fav: aff = liking to ask / be asked,
-   max = favours a month (old 2 × 55 %), w = weight of each need, jobW = tuần an errand stays to do, thLow / th = cold vs warm Thái hậu regard, host = grudge
+   max = favours a month (old 2 × 55 %), w = weight of each need, jobW = tuần an errand stays to do, cold vs warm Thái hậu regard = under / at netTh("th","than") (her nết, ROW 9), host = grudge
    to want news, tai / taiB = weak art vs a teacher, home = Sủng under which she is homesick. job: th / aff = trust of the Thái hậu / Hoàng hậu, tai = gift for
    the banquet. q72: gap = tuần between two requests to her (≈ the old 30 %/tuần), debt = weight per favour owed */
-Object.assign(BAL.ag.why,{e68:{gap:4,visitGap:3,greed:40},fav:{max:2,jobW:4,thLow:20,th:40,tai:40,taiB:60,home:15,
- w:{poor:60,ill:55,job:50,th:35,spy:40,preg:30,love:45,maid:25,art:20,home:25}},job:{th:20,tai:60},q72:{gap:3,debt:10}});
+Object.assign(BAL.ag.why,{e68:{gap:4,visitGap:3,greed:40},fav:{max:2,jobW:4,tai:40,taiB:60,home:15,
+ w:{poor:60,ill:55,job:50,th:35,spy:40,preg:30,love:45,maid:25,art:20,home:25}},job:{tai:60},q72:{gap:3,debt:10}});
 Object.assign(BAL.ag.why.cd,{npcFavor:6,ladyJob:12,q72Collect:4});
 /* npc-purpose G1 part 5 (jgift NPC day with the Emperor, j92 wardrobe; jagwhy1). seekEmp: (want − Sủng) × k + amb (ambT nết), cd 16 ≈ the old 6 %/tuần each;
    wd: th = Thái hậu's push on a wrong outfit, thOk = her regard to praise, queen = Empress's push, host / fr = grudge to sneer / liking to praise, gap = tuần
@@ -1872,7 +1872,7 @@ Object.assign(BAL.ag.why,{g2b:{
  vo:{w:100,fMul:.25,no:40},       /* j53 martial tutor: yes = ktPT[2] × w (× fMul for a daughter), no = no */
  rev:{base:30,tut:10,quiet:40},   /* j53 tutor's private report to the player: tell = base + tutor tier × tut, quiet = quiet */
  plot:{d:.7},                     /* j70 j70Plot: a plot starts only from a motive: s = danger × d (band ≥ 1 ⇒ s ≥ 21) */
- guard:{sung:70,th:60,base:20},   /* j70 j70Guard: Emperor guards her at Sủng ≥ sung, Thái hậu at regard ≥ th: s = base + excess */
+ guard:{sung:70,base:20},   /* j70 j70Guard: Emperor guards her at Sủng ≥ sung, Thái hậu at regard ≥ netTh("th","than2") (her nết, ROW 9): s = base + excess */
  face:{sac:.4,sev:5,cureSev:2,cureBac:120},  /* j70 j70Face: scarred NPC seeks a physician / buys the cure: s = Sắc × sac + severity × sev; cure needs severity ≥ cureSev, bạc ≥ cureBac */
  joint:{min:25,w:1},              /* j10 facJoint: joint scheme only on a foe the faction's average grudge ≥ min; s = that average × w */
  ask:{size:6,need:6,aff:.6,foe:.6},          /* j10/j25 facAsk: leader invites her: liking × aff + (size − members) × need + shared grudge × foe */
@@ -1889,15 +1889,15 @@ Object.assign(BAL.ag.why.cd,{fxSrvHarm:3,fxRivSrv:3,fxRivSrv2:3,fxSlapBack:1,emo
 Object.assign(BAL.ag.why,{
  fxSrv:{p:8,rivP:6,hot2:25,hostAdd:3,grudge:40,loyW:2,spite:30,penLow:30,timid:30,slapBase:20,timidSl:20},  /* jface: p/rivP = success of the chosen strike (old monthly odds); hot = grudge needed to strike at her servants; hot2 = dislike needed to strike at another consort's servants (fxRivSrv2; the old line had no gate at all); hostAdd = old +3 for a target she hates (≥ hot); servant s = grudge + (disloyal: why.min + (loy.out−loyal)×loyW, so every servant below loy.out has her reason, as in the old 'grudge or loyal < loy.out' gate; G1 #12: without why.min a servant just under loy.out scored < min and servant-on-servant harm fell to 0.3 of base) + spite×netQ; punished consort lies low with penLow + timid×netQ vs her grudge; mistress slaps back: slapBase + spite − timidSl×timid + dislike */
  emo:{goBase:20,angW:1,timid:40,calm:20,ofEmp:30,ofAf:40,ofP:6,manMet:20,manDt:5,kidSib:25,kidPet:25},  /* jemo: sad consort alone (mood v) vs goBase+liking; servant fear = anger×angW + timid×netQ vs calm + loyalty above mid; officials: Emperor's temper ofEmp, patron with af ≥ ofAf, it reaches him this tuần with ofP % (the old weekly 6 %; without it every official turned glad/worried every tuần); men: met/letters manMet+tình, tình moved ≥ manDt; child: siblings ×kidSib, pets ×kidPet */
- cmood:{thHi:70,base:20,kidsFew:2,kidW:25,hhSad:20,hhFav:15,busy:3,busyW:10}  /* jcmood: TH glad when her regard th ≥ thHi; worried while heirs < kidsFew; HH jealous anger = grudge vs hhSad+liking; glad when her favour leads by hhFav; tired when ≥ busy pairs of consorts bear oán ≥ oan */
+ cmood:{thHi:70,base:20,kidsFew:2,kidW:25,hhSad:20,hhFav:15,busy:3,busyW:10}  /* jcmood: TH glad when her regard th ≥ netAt("th","than2",thHi) (thHi moved by her nết, ROW 9); worried while heirs < kidsFew; HH jealous anger = grudge vs hhSad+liking; glad when her favour leads by hhFav; tired when ≥ busy pairs of consorts bear oán ≥ oan */
 });
 Object.assign(BAL.ag.why.cd,{ilBack:2,ilBuy:4,ilConf:2,wkUse:6,rcpAcc:1,rcpGos:3,rcpGift:3,rcpTh:3,petHh:0,petMan:3,thyLeak:2,thyTell:1,thyBribe:3});  /* jil/j83/jrcp/jpet/jthaiy cadence in tuần per person */
 Object.assign(BAL.ag.why,{
  g2lux:{gos:20,praise:20},  /* jinv: the dress gossip needs hostility > gos toward the wearer; the praise needs liking > praise */
  g2il:{back:30,valDiv:10,conf:30,timid:20,spare:20,lack:30,hostW:.5},  /* jil: owner buys back back+value/valDiv; asks back conf+value/valDiv−timid×netQ; buyer needs bạc ≥ price+spare, wants it when she has none (lack) + grudge vs the old owner ×hostW */
- g2wk:{poisonP:15,malice:70,host:50,sungHi:70,emp:30,th:25,thWant:70,gift:20,sell:15,poor:40},  /* j83: her work's use: poison (malice > malice, grudge > host; success poisonP), to the Emperor while Sủng < sungHi (emp + gap), to Thái hậu while her regard < thWant (th + gap/2), a friend (gift + liking; the player needs rel > relMe), sell only while bạc < poor (sell + shortfall) */
- g2rcp:{acc:30,gos:20,emp:60,th:40,best:30,other:10,gift:10,thHi:60,thBase:20,thKinh:20,thTheu:10},  /* jrcp: accuser = the harmed (acc+grudge), Hoàng hậu (acc), a rival with grudge ≥ accHost; maid gossip gos+loyalty above mid, asks about emp/th/others by care; a friend shares her best art (best) over others (other), s = gift+liking; Thái hậu thBase + (th − thHi), sutra thKinh over embroidery thTheu */
- g2pet:{hhP:2.5,manP:5,hac:20,ky:20,kyTh:85,kyRk:4,hhMin:60,base:20,manTinh:50},  /* jpet: hhP/manP = success of the chosen gift (old odds); Thái hậu: hạc (hac) vs kỳ lân when th ≥ kyTh and rank ≥ kyRk (ky + surplus); Hoàng hậu base + (hh − hhMin); a man with tình ≥ manTinh */
+ g2wk:{poisonP:15,malice:70,host:50,sungHi:70,emp:30,th:25,thWant:70,gift:20,sell:15,poor:40},  /* j83: her work's use: poison (malice > malice, grudge > host; success poisonP), to the Emperor while Sủng < sungHi (emp + gap), to Thái hậu while her regard < netAt("th","than2",thWant) (th + gap/2; her nết, ROW 9), a friend (gift + liking; the player needs rel > relMe), sell only while bạc < poor (sell + shortfall) */
+ g2rcp:{acc:30,gos:20,emp:60,th:40,best:30,other:10,gift:10,thBase:20,thKinh:20,thTheu:10},  /* jrcp: accuser = the harmed (acc+grudge), Hoàng hậu (acc), a rival with grudge ≥ accHost; maid gossip gos+loyalty above mid, asks about emp/th/others by care; a friend shares her best art (best) over others (other), s = gift+liking; Thái hậu thBase + (th − netTh("th","than2")) (her nết, ROW 9), sutra thKinh over embroidery thTheu */
+ g2pet:{hhP:2.5,manP:5,hac:20,ky:20,kyTh:85,kyRk:4,hhMin:60,base:20,manTinh:50},  /* jpet: hhP/manP = success of the chosen gift (old odds); Thái hậu: hạc (hac) vs kỳ lân when th ≥ netAt("th","than2",kyTh) and rank ≥ kyRk (ky + surplus); Hoàng hậu base + (hh − hhMin); a man with tình ≥ manTinh */
  g2thy:{leak:20,tell:10}  /* jthaiy: tell = base push of a physician who likes her (s = tell + his liking); the physician leaks when leak + his liking for the briber − his liking for the player > 0 */
 });
 //
@@ -2577,7 +2577,7 @@ BAL.sideq={band:[0,0,0,1,1,2,2,2],
    nhẹ = C[c].lite «bong» phạt bổng (fine, Danh, Đức) / «cam» cấm túc ngắn (punish weight 1), no rank change;
    vừa = giáng 1 bậc (the seat frees); nặng = giáng 1 bậc + lãnh cung (jpun punTier / punCold);
    tu = TỬ TỘI, rare: ban chết, or the Emperor commutes it to phế vị + lãnh cung chung thân (only minh oan opens it) — odds tu.spare:
-   base + Sủng / sungD + who pleads (Thái hậu favour ≥ thMin: th; the Hoàng hậu at «thân»: hh; family dad ≥ dadMin: dad).
+   base + Sủng / sungD + who pleads (Thái hậu favour ≥ netTh("th","than2") — her nết, ROW 9: th; the Hoàng hậu at «thân»: hh; family dad ≥ dadMin: dad).
    tier[x].need = pieces (C[c].need reads it) + rkPlus[the accused's rank group] — a plain count, no kinds of proof (owner ~21:00Z).
    tuDeed = deeds that make their charge TỬ TỘI (khi quân trọng tội: giả thai, tráo hoàng tự); tuTgt = a mưu hại aimed at these (Hoàng thượng).
    rep: a 3rd nhẹ conviction within win wk() (one year = 12 months × 3 tuần) counts as vừa. conf: tự thú lowers the weight by one step, a lie
@@ -2588,7 +2588,7 @@ BAL.charge.tierOrd=["nhe","vua","nang","tu"];
 BAL.charge.tuDeed=["cyfake","catswap"];
 BAL.charge.tuTgt=["emp"];
 BAL.charge.ttProven="tu";/* MAIN 179 ruling 27/11 ~17:56Z: tư thông PROVEN (j22 ttExposed: caught, its letter, the book) = tử tội; suspected (charge road) stays C.tt.tier */
-BAL.charge.tu={spare:{base:10,sungD:4,thMin:60,th:20,hh:15,dadMin:60,dad:10}};
+BAL.charge.tu={spare:{base:10,sungD:4,th:20,hh:15,dadMin:60,dad:10}};
 BAL.charge.rkPlus=[0,0,0,1,1,1,2,2];/* owner 26/11 ~21:00Z: a plain COUNT by the ACCUSED's rank group — ≤ Quý nhân +0 · Tần / Phi / Quý phi +1 · Hoàng quý phi / Hoàng hậu +2 (index 7 = Hoàng hậu); with tier need: nhẹ 1/2/3 · vừa 2/3/4 · nặng 3/4/5 · tử tội 4/5/6 */
 /* PUNISH-TIER-3 WITNESSES (owner OD 26/11 ~21:10Z + ~21:17Z as overwritten ~21:40Z, verbatim on the handover branch): NHÂN CHỨNG is a SEPARATE
    count from CHỨNG CỨ, kept in its own store (holder h → target t → charge c: h.ewc[key(t)][c], jcharge chWit). need[tier] = witnesses a charge of that

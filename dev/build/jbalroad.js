@@ -22,11 +22,11 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  rareK:1,
  /* tt_mat .6: the rank index the pact with the Hoàng hậu holds her under (RANKS[cap].n is printed) */
  cap:{tt_mat:4},
- /* B2 roads (jrd_td.js, jrd_ch.js): td_an rank = the rank index (RANKS[i]) from which her own petition is read; ch_co trust = Thái hậu favour (S.th) from which she treats her as a partner; ch_benh heir = S.th from which the dying
-    Thái hậu hands her people to her; ch_bi shield = months of shelter (S.shield) won by the .11 win */
+ /* B2 roads (jrd_td.js, jrd_ch.js): td_an rank = the rank index (RANKS[i]) from which her own petition is read; ch_co / ch_benh: the Thái hậu favour (S.th) from which she treats her as a partner (netTh("th","than2")) / the dying
+    Thái hậu hands her people to her (netTh("th","than")) — her own nết, ROW 9; ch_bi shield = months of shelter (S.shield) won by the .11 win */
  td_an:{rank:3},
  /* nc roads: months of cấm túc (S.confined) a lost nc_gian / nc_tuc / nc_vuong beat puts her under */
- ncConf:{gian:3,tuc:1,vuong:1},ch_co:{trust:50},ch_benh:{heir:40},ch_bi:{shield:3,conf:1},  /* ch_bi conf = months of cấm túc the Hoàng hậu puts {v} under at ch_bi .6 c2 (printed with kitNumVi) */
+ ncConf:{gian:3,tuc:1,vuong:1},ch_bi:{shield:3,conf:1},  /* ch_bi conf = months of cấm túc the Hoàng hậu puts {v} under at ch_bi .6 c2 (printed with kitNumVi) */
  /* thd_hoc (jrd_thd.js): vlAge = the vỡ lòng age, the youngest pupil of the morning class at Thượng thư phòng (road-history pass 2: «vỡ lòng /
     young boys», princes enter school proper at about BAL.tc.hienAge); a life's children start at BAL.ps.kidAge 1–4 and the road spans
     one or two years, so pupils come from this age (review road-b3-fix-r1 item 1) */
@@ -68,7 +68,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
     key = "<chapter>.<beat>.<option index>.<stat>" | "<chapter>.E.<ending>.<stat>" | "<road>_11.rare.<stat>" */
  chTh:{"ch_co_5.c1.2.th":-4,"ch_co_5.t1.2.th":-2,"ch_co_5.E.win.th":6,"ch_co_6.c1.2.th":3,"ch_co_7.E.lose.th":-4,"ch_co_8.x1.1.th":-6,"ch_co_8.x1.3.th":-10,"ch_co_9.c1.2.th":-4,"ch_co_9.x1.1.th":-10,"ch_co_9.x1.2.th":-4,"ch_co_10.x1.1.th":6,"ch_co_10.x1.2.th":-12,"ch_co_10.x1.2.hh":8,"ch_co_10.E.win.th":8,"ch_co_10.E.lose.th":-6,"ch_co_11.t1.2.th":-6,"ch_co_11.x1.2.th":6,"ch_co_11.E.win.th":12,"ch_co_11.E.lose.th":-12,"ch_co_11.rare.th":15,"ch_benh_5.E.win.th":8,"ch_benh_6.x1.1.hh":5,"ch_benh_6.E.win.th":6,"ch_benh_8.x1.0.th":6,"ch_benh_8.x1.1.th":-4,"ch_benh_8.E.lose.th":-4,"ch_benh_9.E.win.th":6,"ch_benh_10.E.win.th":12,"ch_benh_11.E.win.th":15,"ch_benh_11.rare.th":15,"ch_bi_11.E.win.th":15},
  rare:{
- /* B2 roads (review/road-b2-fix); ch_bi_11 th = the Thái hậu favour floor of its x; ch_benh_11 reads BAL.road.ch_benh.heir */
+ /* B2 roads (review/road-b2-fix); the Thái hậu favour floors of ch_bi_11 / ch_co / ch_benh = netTh("th","than" | "than2") — her nết, ROW 9 */
  nc_gian_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:45,g:[8]},
  nc_su_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:45,g:[8]},
  nc_tuc_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:5,duc:2},bar:50},
@@ -80,7 +80,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  ch_co_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6,tamco:2},bar:40},
  ch_benh_11:{p:.12,np:2,sc:2,c:{suc:-5},fx:{danh:12,sung:5,mat:2}},
  ch_ho_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:12,danh:10,duc:3},g:[40]},
- ch_bi_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:15,danh:10,duc:6},bar:40,th:40},
+ ch_bi_11:{p:.12,np:3,sc:2,c:{suc:-4},fx:{th:15,danh:10,duc:6},bar:40},
  tt_co_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:40,g:[4]}, /* x: duc ≥ bar */
  tt_oan_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:4},bar:45,g:[8]}, /* x: duc ≥ bar */
  tt_tranh_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:3},bar:40,g:[8,8]}, /* x: duc ≥ bar */

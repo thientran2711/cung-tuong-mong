@@ -30,7 +30,7 @@ muoi:{t:"Từ muối lên tước",n:3,goal:"Nhà buôn muối bị coi khinh. D
  acts(){const st=S.st,A=[{n:"Buôn bán lén trong cung",t:"Mua rẻ lụa ngoài cung, bán đắt cho cung nhân.",c:{suc:-5},o:od(BAL.odb.j4.odO_3+S.tamco/5),w:{bac:50},l:{danh:-8},x:`bị bắt ${S.st.caught||0}/3 lần thì ô danh, hỏng tuyến truyện`,
   fail:()=>{st.caught++;punish("buôn lậu trong cung",2);if(st.caught>=3){apply({sung:-10});stEnd(-1,"Buôn lậu bị bắt, ô danh");log(`<span class="r">Bị bắt buôn lậu lần thứ hai. Cả cung khinh rẻ ngươi.</span>`)}}}];
   if(st.don<2)A.push({n:"Dâng bạc vào quốc khố",t:"Lấy danh nghĩa cha, giúp triều đình cứu đói.",c:{bac:-100},o:100,fix:1,w:{danh:3,th:3},x:`lần dâng ${st.don+1}/2`,go:()=>{st.don++;st.step=st.don}});
-  else A.push({n:"Xin phong tước cho cha",t:S.th>=30?"Nhờ Thái hậu nói giúp trước mặt Hoàng thượng.":`Cần Thái hậu ủng hộ 30 (nay ${S.th}).`,c:{suc:-5},o:od(BAL.odb.j4.odO_4+S.danh/4+S.th/5),w:{danh:10},l:{th:-8},lock:S.th<30,x:"cha được phong tước",go:()=>{st.step=3;stEnd(1,"Nhà được phong tước")}});
+  else A.push({n:"Xin phong tước cho cha",t:S.th>=netTh("th","than")?"Nhờ Thái hậu nói giúp trước mặt Hoàng thượng.":`Cần Thái hậu ủng hộ ${netTh("th","than")} (nay ${S.th}).`,c:{suc:-5},o:od(BAL.odb.j4.odO_4+S.danh/4+S.th/5),w:{danh:10},l:{th:-8},lock:S.th<netTh("th","than"),x:"cha được phong tước",go:()=>{st.step=3;stEnd(1,"Nhà được phong tước")}});
   return A}},
 cn:{t:"Từ nô tỳ thành chủ tử",n:3,goal:"Chủ cũ khinh ngươi, một mối tình cũ đe dọa hủy ngươi. Lên tới bậc Phi để rửa sạch thân phận.",
  init(){const v=rivals[1+R(4)];v.oldmis=true;v.rel=-25;S.st.mis=v;S.st.guard="thị vệ "+nmNew("m");S.st.secret=0},

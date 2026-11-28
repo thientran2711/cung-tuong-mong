@@ -18,7 +18,7 @@ function tchFee(k){return artFee(S.arts[k])}
 function tchPaid(k){}
 function lessonMode(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.length||S.mg||l>=5)return;let c;
  if(mode==="self"){if(!can(BAL.artLes.k)||S.suc<BAL.sucNeed.self)return;c={suc:-BAL.artLes.self}}
- else if(mode==="th"){if(!can(BAL.artLes.k)||S.th<40||(S.buoi||0)!==0||S.thDead)return;c={suc:-BAL.artLes.th,th:3}}
+ else if(mode==="th"){if(!can(BAL.artLes.k)||S.th<netTh("th","than")||(S.buoi||0)!==0||S.thDead)return;c={suc:-BAL.artLes.th,th:3}}
  else{if(!can(BAL.artLes.k)||S.bac<cost)return;c={suc:-BAL.artLes.tch,bac:-cost,tch:k}}
  c.khac=BAL.artLes.k;/* KIT §13.9 (j82 kgDefer): the lesson's charge is taken on «Sẵn sàng»; the ✕ before it is a free back */
  const open=()=>{S.mg={k,l,mode};save();render();resumeMG()};if(typeof kgDefer==="function")kgDefer(c,open);else{const f={suc:c.suc};if(c.bac)f.bac=c.bac;if(c.th)f.th=c.th;apply(f);if(c.tch)tchPaid(k);spend(BAL.artLes.k);open()}}
@@ -28,7 +28,7 @@ function artTabHTML(){const nx=ARTS.map(a=>S.arts[a.k]);let h=`<div class="ph"><
  h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=artFee(l),ms=ARTMS[a.k]||[];const t2=whyTime(BAL.artLes.k);
   const B=l>=5?[`<span class="ef g">${artNm(5)}</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: Sức ${balSg(-BAL.artLes.self)} · thành: tiến bộ ${crsGainW("self",l)}`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
    pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: Bạc -${cost}, Sức ${balSg(-BAL.artLes.tch)} · thành: tiến bộ ${crsGainW("teacher",l)}, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: Sức ${balSg(-BAL.artLes.th)} · thành: tiến bộ ${crsGainW("th",l)}, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu → ta: thiện cảm 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))];
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: Sức ${balSg(-BAL.artLes.th)} · thành: tiến bộ ${crsGainW("th",l)}, Thái hậu +3`,t2||(S.th<netTh("th","than")?`cần Thái hậu → ta: thiện cảm ${netTh("th","than")}`:(S.buoi||0)!==0?"chỉ buổi sáng":""))];
   return `<div class="art"><b>${ic(AIMG[a.k],20)}${a.n} · Bậc ${l}/5</b><span class="u">${ARTDO[a.k]||""} · lên bậc: ${a.st==="sac"?"Sắc":"Tài"} ${balSg(BAL.art.stUp)}</span>${l<5?`<span class="lv">Tiến bộ ${kitNeed(S.artp[a.k],need)}</span><div class="mini"><u style="width:${S.artp[a.k]/need*100}%"></u></div>`:""}
   <div class="ams">${ms.map((m,i)=>`<span class="${i<l?"ef g":i===l?"ef nx":"ef n"}" title="${m}">B${i+1}: ${m}</span>`).join("")}</div><div class="pcb">${B.join("")}</div></div>`}).join("")+`</div>`;
  return h}
