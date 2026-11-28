@@ -264,7 +264,10 @@ if(typeof leAttire==="function"){const la0=leAttire;
     return o})}
   /* a consort met in person: her nết decides */
   if(p.kind==="rival"&&p.ref){const v=p.ref,e=toilRival(v,false);if(!e)return A;
-   return A.map(a=>{if(!a)return a;const o=Object.assign({},a,{risk:[a.risk,e.txt].filter(Boolean).join(" · ")});const r0=o.run,g0=o.go,f0=o.fail;
+   /* E-GAIN4 (c), law 3 / KIT 6 kaRows: her verdict on the look comes with the talk whatever its roll; a GAIN piece («nàng ta chuộng giản dị: quý ta +N»,
+      «nàng ta bớt ghen (Ghen -N)») goes to Được (the option's x), only the LOSS pieces (frown, ghen +) stay on the risk (Mất / Bại) side */
+   const PC=String(e.txt||"").split(" · ").filter(Boolean),gx=TOILV.split?PC.filter(TOILV.gain):[],rx=PC.filter(t=>!gx.includes(t));
+   return A.map(a=>{if(!a)return a;const o=Object.assign({},a,{risk:[a.risk,...rx].filter(Boolean).join(" · ")||undefined});if(gx.length)o.x=[a.x,...gx].filter(Boolean).join(" · ");const r0=o.run,g0=o.go,f0=o.fail;
     if(r0)o.run=function(){toilRival(v,true);return r0.apply(this,arguments)};else{o.go=function(){toilRival(v,true);return g0?g0.apply(this,arguments):undefined};o.fail=function(){toilRival(v,true);return f0?f0.apply(this,arguments):undefined}}return o})}
  }catch(e){console.error("toil talkOpts",e)}return A}})();
 function toilLook(){const rec=toilToday(S);const mk=toilMk(rec);const dr=toilDress(S,toilFOf(null));return{mk,dv:dr.v,showy:dr.style==="showy",plain:dr.style==="plain"}}
@@ -277,6 +280,8 @@ function toilSeeRule(v,L,w){const B=BAL.toil;const T=traitsOf(v);const frugal=T.
  const g=Math.round(toilGhenOf(v,L));if(!k&&!g)return null;return{k:k||"ghen",aff,g}}
 /* the look of anyone today in the shape toilSeeRule reads (her: toilLook; the friend / an NPC: their record of the day) */
 function toilLookP(p){if(!p||p===S)return toilLook();const rec=toilFriendRec(p)||toilNpc(p);return{mk:toilMk(rec),dv:rec.dv,showy:rec.style==="showy",plain:rec.style==="plain"}}
+/* E-GAIN4 (c): which piece of a toilRival verdict is HER gain (praise: quý ta +N; tease: bớt ghen) — the rest (frown, ghen +) is a loss. TOILV.split=0 = mutant */
+const TOILV={split:1,gain:t=>/: quý ta \+|bớt ghen/.test(t)};window.TOILV=TOILV;
 function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=toilLook();const e=toilSeeRule(v,L,S);if(!e)return null;
  const g=e.g,aff=e.aff;let txt=e.k==="praise"?`nàng ta chuộng giản dị: quý ta +${aff}`:e.k==="frown"?`ta ăn vận phô trương: nàng ta quý ta ${aff}`:"";
  if(e.k==="tease"){const n=e.n;txt=`thấy ta ${L.dv==="diem"?"ăn vận diêm dúa":"điểm trang "+toilMkW("vung")}, nàng ta bớt ghen (Ghen -${n})`/* toil-looks5 wording (main) */;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}

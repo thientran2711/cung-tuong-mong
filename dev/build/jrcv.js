@@ -40,6 +40,13 @@ function rcvHelpOpts(p,t){const X=BAL.ag.cx2.help,R=BAL.rcv.help,H=BAL.road.hp,q
    go:()=>{if(!rcvSeen(p,t))affAdd(p,t,R.af[1]);if(pay(half))return{ok:1,r:p===S?`${t.name} miễn cưỡng đưa ngươi ${half} lượng.`:`${me?"Ngươi":t.name} đưa ${p.name} ${half} lượng cho có`};return{ok:1,r:p===S?`${t.name} tiếp ngươi qua loa.`:`${me?"Ngươi":t.name} tiếp ${p.name} qua loa`}}},
   rcvNoO(p,t,{g:"giữ bạc",r:p===S?`${t.name} khéo từ chối. Nàng quý ngươi -${X.fail}.`:me?`Ngươi khéo từ chối ${p.name}.`:`${t.name} khéo từ chối lời nhờ của ${p.name}`}),
   rcvSabO(p,t,{g:"giữ bạc",r:tq=>p===S?`${t.name} nhận lời rồi đem chuyện ngươi nhờ đi kể${tq?" với "+rcvQn(tq):""}. Danh ${balSg(-R.danh)}.`:me?`Ngươi đem chuyện ${p.name} nhờ đi kể${tq?" với "+rcvQn(tq):""}.`:`${t.name} đem chuyện ${p.name} nhờ đi kể khắp nơi`})]}
+/* E-GAIN4 (d), law 3 + law 4 — the ASKER's card line («Nhờ giúp đỡ», j9 topicOpts): what the asker GETS when the receiver helps (slot 0 / 1: the bạc she lends,
+   else a tale about someone guilty = evidence) and what she LOSES when the receiver refuses / tells on her (slot 2 / 3) — read from the same constants
+   rcvHelpOpts pays (BAL.ag.cx2.help, BAL.rcv.help, BAL.ag.ev.one); no number typed. Before: «<word> · nàng có thể giúp …» only (Tốn + Ghi chú, no Được). */
+function rcvHelpX(p,t){const X=BAL.ag.cx2.help,R=BAL.rcv.help,half=Math.round(X.bac*R.half),me=p===S,nm=me?"ngươi":p.name;
+ return `được: <span class="g">nàng giúp hết lòng: Bạc ${balSg(X.bac)}, hoặc kể cho ${nm} một chuyện về kẻ có tội: ${evSg(BAL.ag.ev.one)}; làm qua loa: Bạc ${balSg(half)}</span>`+
+  ` · mất: nàng từ chối: hai bên quý nhau ${balSg(-X.fail)}; nàng đem chuyện đi mách: ${nm} mang tiếng, Danh ${balSg(-R.danh)}`}
+window.rcvHelpX=rcvHelpX;
 /* the asker's side (her j9 card and cx2:help): the receiver NPC answers now; when the receiver is HER, her card comes (PEND.rcvHelp) */
 /* HER card: ONE notice path. With parallel-time's receiver notice (jptime ptOrdAdd: S.ordQ + «信» icon, answered from the panel when her act ends,
    unanswered past BAL.ptime.ansK = the option «Từ chối» with its cost) the card waits there; without it, a queued dialog after the current one. */

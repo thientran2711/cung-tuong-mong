@@ -17,7 +17,7 @@ AA.gainOf=b=>{const T=e=>(e&&e.innerText||e&&e.textContent||"").replace(/\s+/g,"
 AA.empty=c=>!c.dis&&!c.gain.length;
 AA.probe=async(s)=>{const sl=ms=>new Promise(r=>setTimeout(r,ms));AA.restore();AA.show(s);const P=s.pop!=null&&S.visit&&S.visit.people[s.pop];const who=P?(P.name||P.kind):"";await sl(40);/* the deck door cards (jdoor) are folded by an observer after render */
  const top=AA.btns(s).map(b=>Object.assign(AA.rowsOf(b),{gain:AA.gainOf(b),cls:b.className,door:b.dataset.door||b.dataset.ill||b.dataset.ddoor||''}));const out=[];
- const NAV=AA.btns(s).map(b=>!!b.closest(".tdseg"));/* a view switch (Phe phái hậu cung / Triều đình seg, j55) opens no act: not an act card */
+ const NAV=AA.btns(s).map(b=>!!b.closest(".tdseg")||!!b.closest("[data-knav]"));/* a view switch (Phe phái hậu cung / Triều đình seg, j55) opens no act: not an act card; KIT §104.2d (KK60): a ring OPENER («Lập phe cùng ai · N ›», «Các phe · N ›», strip «‹ tên · i/n ›», data-knav="ring") is a door, not an act — law 3 is checked on the plaques the ring drops, not on the opener */
  for(let j=0;j<top.length;j++){const c=top[j];if(c.dis||NAV[j])continue;out.push({who,name:c.name,gain:c.gain,ton:c.ton,door:c.door,cls:c.cls,empty:AA.empty(c),lvl:0});
   AA.restore();AA.show(s);await sl(40);const b=AA.btns(s)[j];if(!b)continue;AA.force=null;try{b.click()}catch(e){}await sl(20);try{render()}catch(e){}
   const m=document.getElementById("modal");if(m&&!m.hidden){const O=[...m.querySelectorAll(".opts button.ka, .opts button.opt")];

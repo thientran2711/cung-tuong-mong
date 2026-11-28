@@ -57,7 +57,7 @@ function fix(){
  const so=DOOR.byK("so");if(so)so.re=/^Xem sổ thị tẩm/;
  if(!DOOR.byK("so2"))DOOR.add({k:"so2",n:"Xem sổ nguyệt sự",kinds:["ksp"],rep:"Xem sổ nguyệt sự",h:"Xem sổ nguyệt sự: xem lén, hay lót tay.",re:/^(Xem sổ nguyệt sự|Hầu chuyện, xem lén sổ nguyệt sự)/});
  const p13=DOOR.byK("P13");if(p13){p13.n="Trừng phạt";p13.rep="Xử tội";p13.h="Chọn mức trừng phạt nàng.";p13.acts={e:["judge","conf","cutpay"],a:["takeaway"]}}
- if(!DOOR.byK("P13r"))DOOR.add({k:"P13r",n:"Ban thưởng",cat:"trung-phat",kinds:["rival","hh","chest","card"],rep:"Ban thưởng",h:"Ban thưởng cho nàng.",re:/^$/,acts:{e:["reward"]},one1:1});
+ if(!DOOR.byK("P13r"))DOOR.add({k:"P13r",n:"Ban thưởng",cat:"ban-thuong"/* E-GAIN4 (a): a reward sits under «Ban thưởng», not «Trừng phạt» */,kinds:["rival","hh","chest","card"],rep:"Ban thưởng",h:"Ban thưởng cho nàng.",re:/^$/,acts:{e:["reward"]},one1:1});
  if(!DOOR.byK("P13p"))DOOR.add({k:"P13p",n:"Tha tội",cat:"trung-phat",kinds:["rival","hh","chest","card"],rep:"Tha tội",h:"Tha tội cho nàng.",re:/^$/,acts:{e:["pardon"]},one1:1});
  for(const k of ["s_xin"]){const i=DOOR.T.findIndex(r=>r.k===k);if(i>=0)DOOR.T.splice(i,1)}
  /* deck rows (Hành sự): cut the members that are another matter */
@@ -68,6 +68,11 @@ function fix(){
   else if(r.k==="hs-roicung"){r.re=/^(Nghĩ cách trốn khỏi cung|Dâng biểu xin xuất gia|Xin ban hôn cho |Xin về quê phụng dưỡng cha mẹ)/;r.oneFx=1}}
  DOOR.names=new Set(DOOR.T.map(r=>r.n))}
 ONE.fix=fix;
+/* E-GAIN4 (a), law 11 — the WRONG-TAB family: a pop-up card's tab is kitActCat(name) (j15 groups), whose groups match words ANYWHERE in the name, so a
+   card fell under a tab by a stray word: «Đổi người chạy việc» (picks who runs her errands, jhc PEND.runner) under «Trừng phạt» by «đổi người»
+   (and every «Đổi người nấu / nếm món / đưa thư …» guard choice the same); «Hỏi người hầu: đó là ai?» under «Hầu hạ» by «người hầu»; «Cài người vào
+   cung khác» / «Chưởng sự tra xét cung nữ» under «Đi lại» by «vào » / «ra ». Data lines first in KIT_ACT_CATS (the jcycle / jexam way; kit regexes unchanged). */
+try{if(typeof KIT_ACT_CATS!=="undefined"&&Array.isArray(KIT_ACT_CATS))KIT_ACT_CATS.unshift(["hau-ha",/^đổi người/i],["giao-thiep",/^hỏi người hầu/i],["muu-ke",/^(cài người vào|chưởng sự tra xét)/i])}catch(e){}
 (function(){const d0=DOOR.deck;DOOR.deck=function(r){const x=d0.apply(this,arguments);try{fix()}catch(e){}return x}})();
 fix();
 /* ---------- tiers + odds of a member ---------- */
@@ -127,6 +132,11 @@ ONE.runM=runM;
 function goOne(pp,r,tier){const {p,L}=members(pp,r);if(!p)return false;const T=tier?L.filter(m=>tierOf(r,m)===tier):L;const m=pick(r,T,seedOf(r,who(p),tier));if(!m)return false;runM(r,m,T,tier);return true}
 ONE.go=goOne;
 const wordOf=o=>o>=100?"":(typeof dfWord==="function"?dfWord(o):"");
+/* E-GAIN4 (b), law 3 / VANPHONG: a tier none of whose ways can run now says WHY in the summary line (the lock reason of its first way: cardWhy / a.lock text /
+   «không đủ bạc» / whyTime — the same words its row shows), never a bare «—». The reason's head only (before « — » and any «(…)» count), first letter small. */
+function lockW(why){let w=txt(why).replace(/\s*\([^)]*\)/g,"").split(" — ")[0].replace(/[.;:,\s]+$/,"").trim();if(!w)w="chưa làm được";return w.charAt(0).toLowerCase()+w.slice(1)}
+ONE.lockW=lockW;
+const tierW=(x,f)=>x.m&&!x.off?f(x.m):ONE.lockW(x.off&&x.off.why);ONE.tierW=tierW;
 function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>tierOf(r,m)===t);if(!T.length)continue;const m=pick(r,T,seedOf(r,wh,t));
   const free=T.filter(x=>!x.off);const harm=(M[r.k]||{}).harm;
   let x="",n=`${r.n} · ${t}`;if(m){const ln=String(m.x||"");/* the member's own kit line (optLine HTML: odds · tốn · được · hỏng), unchanged */
@@ -153,12 +163,18 @@ function memo(k,f){k=k+"#"+stamp();if(MC.c.has(k))return MC.c.get(k);const r=f()
    out.push({n:r.n,door:r.k,o:100,fix:1,x:"",open:()=>doorOpen(p,r.k)})}
   for(const d of out){if(!d||!d.door)continue;const r=DOOR.byK(d.door);if(!r)continue;const {L}=memo(["m",p.kind,p.ref&&p.ref.id,p.name,r.k].join("|"),()=>members(pp0(r.k),r));if(!L.length)continue;
    const md=ONE.mode(r.k);if(md==="keep")continue;const tiers=TI.filter(t=>L.some(m=>tierOf(r,m)===t));
-   if(md==="tier"&&tiers.length>=2){const R=tierRows(r,L,who(p));d.x=R.map(x=>`${x.t} ${x.m&&!x.off?wordOf(oddsM(x.m))||txt(x.m.n):"—"}`).join(" · ");d.one="tier";
+   if(md==="tier"&&tiers.length>=2){const R=tierRows(r,L,who(p));d.x=R.map(x=>x.m&&!x.off?`${x.t} ${wordOf(oddsM(x.m))||txt(x.m.n)}`:`${x.t}: ${tierW(x)}`).join(" · ");d.one="tier";
     if(R.every(x=>x.off)){d.lock=true;d.t=R[0].off.why}continue}
    const m=pick(r,L,seedOf(r,who(p)));d.one="one";
    if(!m){d.lock=true;d.t=(L[0]&&L[0].why)||d.t||"chưa làm được";continue}
    d.lock=false;delete d.t;const nm=txt(m.n);
-   if(m.a){/* the option fields the kit line reads (optLine: odds · tốn · được · hỏng) = the picked member's own */for(const f of ["o","oi","inner","c","w","l","lx","act","pk"])if(m.a[f]!=null)d[f]=m.a[f];d.x=[nm,m.a.x].filter(Boolean).join(": ")}
+   if(m.a){/* the option fields the kit line reads (optLine: odds · tốn · được · hỏng) = the picked member's own */for(const f of ["o","oi","inner","c","w","l","lx","act","pk"])if(m.a[f]!=null)d[f]=m.a[f];d.x=[nm,m.a.x].filter(Boolean).join(": ");
+    /* E-GAIN4 (d), law 3 — the jdoor E-GAIN3b rule on the one-tap button: a picked talk way whose raw x names no gain (its x is only its price:
+       «Dò la: Bạc −17», its «thành: chứng cứ +1, Tâm cơ +2» sits in its own full line) carries the gain of that own line (doorGain), so Thành is never the price */
+    try{const dg=typeof doorGain==="function"?doorGain([String(m.x||"")]):"";if(dg&&txt(dg)!==txt(doorGain([String(m.a.x||"")]))){
+     /* the raw pieces that only repeat its price (already in Tốn from c) or a gain already named are dropped; any other raw piece (a wait, a note) stays after the gain */
+     const ct=txt(typeof fmt==="function"?fmt(m.a.c||{}):""),gt=txt(dg);const keep=String(m.a.x||"").split(" · ").filter(q=>txt(q)&&!(ct&&ct.includes(txt(q)))&&!gt.includes(txt(q)));
+     d.x=[`${nm}: ${dg.replace(/^được:\s*/,"")}`,...keep].join(" · ")}}catch(e){}}
    else{d.o=oddsM(m);const ln=txt(m.x).replace(/^(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững) · /,"");d.x=`${nm} · ${ln}`}
    d.open=()=>{if(!goOne(doorPP(p,curPeople().indexOf(p),r.k),r))doorOpen(p,r.k)}}}
  catch(e){console.error("jone fold",e)}finally{ONE.raw=raw0}return out}})();
@@ -196,7 +212,7 @@ window.addEventListener("click",e=>{if(!ONE.on)return;const b=e.target.closest&&
 /* the deck door's small line: the pick (ONE) or the 3 tier words (TIER) */
 function deckPaint(){const P=document.getElementById("panel");if(!P||!Array.isArray(deck))return;for(const b of P.querySelectorAll("button[data-ddoor]")){if(b.dataset.one)continue;b.dataset.one=1;
  try{const r=deckRowR(b);const md=ONE.mode(r.k);if(md==="keep")continue;const L=deckM(b);const p=b.querySelector("p");
-  if(md==="tier"){const R=tierRows(r,L,"me");if(R.length>=2){if(p)p.textContent=R.map(x=>`${x.t}: ${x.m&&!x.off?txt(x.m.n):"—"}`).join(" · ");continue}}
+  if(md==="tier"){const R=tierRows(r,L,"me");if(R.length>=2){if(p)p.textContent=R.map(x=>`${x.t}: ${tierW(x,m=>txt(m.n))}`).join(" · ");continue}}
   const m=pick(r,L,seedOf(r,"me"));if(!m)continue;const i=deck.indexOf(m.a);if(p)p.textContent=txt(m.n);
   /* the pick's own odds chip + Tốn/Thành/Bại grid (the kit card of that way), so the word she sees is the way that will run */
   const tp=document.createElement("template");tp.innerHTML=String(cardH(m.a,i)).trim();const nb=tp.content.querySelector("button");if(!nb)continue;
