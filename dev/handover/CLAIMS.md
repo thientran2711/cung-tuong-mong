@@ -739,3 +739,4 @@ FLIGHT2-S16D life (seat s16 #2 session_01UV1SzkrqrqWTsUfa9zCzKG, sonnet; iPad 11
 FLIGHT2-COOP room e (A-COOP #4, opus, successor of A-COOP #3 session_01UV1SzgdgjR5gc1ScdU43fh; harness review/flight2-coop-r22 5aff9dbb on LIVE 18003079, seed 7105, host=fold guest=ipad pin=1, fresh profiles) | review/flight2-coop dev/handover/robot/flight2-coop1j.md (+ room e section) | A-COOP #4 (id in FOREMAN_F_STATUS) | CLAIMED | 28/11 02:35Z (Foreman F ROOT7 c4)
 BIG RV save-fail-warn 371c5d7f (opus) | review/save-fail-warn | session_01N1tNP6WtgdQU1y5GyDeSjU (Foreman B ROOT 3 child 1) | RUNNING | 28/11 02:55Z
 ILLNESS-CURE r3 | review/illness-cure | session_01PEhRbxGXnzfsq379bwXJWA | RUNNING | 2026-11-28T03:28Z (Foreman C 4-1-1-1; successor of 01PEhRbvzcp527pLLt31A9W4)
+TUANTANG-WARN r2 | review/tuantang-warn-r2 | session_01PEhRbvy9zz1EkUmZvqgn6T | RUNNING | 2026-11-28T03:48Z (Foreman C 4-1-1-1)
