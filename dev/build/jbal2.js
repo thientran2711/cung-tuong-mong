@@ -2617,3 +2617,10 @@ BAL.charge.cover={duc:{nhe:-2,vua:-4,nang:-8,tu:-12},danh:{nhe:-3,vua:-6,nang:-1
 BAL.charge.rep={n:3,win:36};
 BAL.charge.conf={down:1,up:1};
 for(const c in BAL.charge.C)Object.defineProperty(BAL.charge.C[c],"need",{configurable:true,enumerable:true,get(){return BAL.charge.tier[this.tier].need}});
+/* D-ROW37 (OB 55 «điểm ghét, điểm oán tăng quá nhanh», law 11 + law 4): the liking falls toward HER that were typed straight into v.rel
+   (outside j9 affAdd, so outside the ghét pace joanpace opDn + stat-pace) now go through affAdd with these sizes (old typed numbers kept):
+   frame = an accuser who sets out to frame her (j4 accuse); retort = «Đáp trả sắc sảo» (j4 poet quarrel); poetWin = the loser of the poem contest (j4);
+   giftFail = the sender of a tainted gift when she cannot clear herself (j7); tell = «Mật báo Hoàng hậu» on a consort (j7); cookFail = the poisoner
+   not found (j7); side = the one she did not stand with in a quarrel (j7 «Báo cho» / «Đứng về phía»), warn = the one she warned against (j7 «Cảnh báo»);
+   favour = the daily small dislike of a consort she out-favours (j8 rivalsTurn); maidMock = a consort hurt by her maid's act for her (jagacts3 X.rel stays). */
+BAL.ghetHit={frame:10,retort:20,poetWin:10,giftFail:20,tell:30,cookFail:10,side:15,warn:20,favour:1};
