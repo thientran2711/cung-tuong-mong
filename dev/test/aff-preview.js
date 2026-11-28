@@ -18,7 +18,7 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
  if(!F){console.log('AFF-PREVIEW FAIL · game did not load (affPreview missing)');process.exit(1)}
  await F.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;const t=document.getElementById('title');if(t)t.hidden=true;window.__forceOrigin='thd';window.__nlInner=1;start();window.__forceOrigin=0;window.__nlInner=0;quiet=false;Q.length=0});
  await F.waitForFunction(()=>typeof S!=='undefined'&&!!S&&!!S.name,null,{timeout:30000});
- const R=await F.evaluate(()=>{const out=[];const q=queenP();/* PVQUY-POST: jdh's title bonus rounds its fraction with Math.random (fr) — a card and its act could differ by 1 at random (flagged in dev/handover/reports/pvquy-post.md, not this unit); one fixed draw for preview AND act */const RND0=Math.random;Math.random=()=>0;
+ const R=await F.evaluate(()=>{const out=[];const q=queenP();/* PVQUY-POST: jdh's title bonus rounds its fraction with Math.random (fr) — a card and its act could differ by 1 at random (flagged in dev/handover/reports/pvquy-post.md, not this unit); one fixed draw for preview AND act */const RND0=Math.random;Math.random=()=>0;/* PVQUY-POST-2 (RV-186 item 6, test only): relAdd = affAdd(her→v) THEN affAdd(v→her); the first leg can fire a jemo emotion (emoEv) that rescales the second leg, which a preview (AFF_DRY: wrappers stand aside) cannot see → card ≠ act ~1 run in 4. Held still for the card+act pairs so the gate is stable; the gap itself is measured below (GAP rows, info only) and listed for MAIN in reports/pvquy-post.md */const EMO0=typeof emoEv==="function"?emoEv:null;if(EMO0)emoEv=function(){};
   const L=liveRivals(true).filter(x=>x!==q&&!x.out);
   // rescaling states on: feelings (vui) on the liked one, her mood, trust traits, a title, high liking (pace)
   try{if(typeof feelOn==="function"&&feelOn()&&typeof feelSet==="function")feelSet(S,"vui",2)}catch(e){}
@@ -34,9 +34,9 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
   const man=(typeof menAll==="function"?menAll():[]).find(Boolean)||(S.staff||[])[0];if(man)fam('man/servant bond +6',man,S,6,()=>affAdd(man,S,6));
   const snap=()=>{try{return JSON.stringify(S,(k,v)=>k==="__why"?undefined:v)}catch(e){return ""}};
   for(const c of cases){let pv,sideOk=true;const s0=snap(),m0=typeof MOOD_N==="object"?JSON.stringify(MOOD_N):"";
-   const via=c.name.startsWith('apply hh')?spSee("hh",c.n):affPreview(c.x,c.y,c.n);pv=via;
+   const via=c.name.startsWith('apply hh')?spSee("hh",c.n):c.name.startsWith('spAdd rel')?spSee("rel",c.n,c.x)/* PVQUY-POST-2: LIVE spAdd(p,"rel") = the pace alone (MAIN 189 ruling) */:affPreview(c.x,c.y,c.n);pv=via;
    if(snap()!==s0||(typeof MOOD_N==="object"&&JSON.stringify(MOOD_N)!==m0))sideOk=false;
-   const sg=affSg(c.x,c.y,c.n);const s1=snap();if(s1!==s0&&!sideOk===false){sideOk=false}
+   const sg=/^(apply hh|spAdd rel)/.test(c.name)?balSg(pv)/* not an affAdd chain: no nết range */:affSg(c.x,c.y,c.n);const s1=snap();if(s1!==s0&&!sideOk===false){sideOk=false}
    if(!sideOk){try{const A=JSON.parse(s0),B=JSON.parse(snap());const d=[];const walk=(a,b,pth)=>{if(d.length>4)return;if(typeof a!=="object"||typeof b!=="object"||!a||!b){if(JSON.stringify(a)!==JSON.stringify(b))d.push(pth);return}for(const k of new Set([...Object.keys(a),...Object.keys(b)]))walk(a[k],b[k],pth+"."+k)};walk(A,B,"S");c.name+=" diff "+d.join(",")}catch(e){}}
    const real=affGot(c.x,c.y,c.act);let inRange=true;const m=String(sg).match(/^([+-]?\d+) đến ([+-]?\d+)$/);if(m)inRange=real>=+m[1]&&real<=+m[2];
    out.push({name:c.name,base:c.n,preview:pv,real,sg,ok:pv===real,sideOk,inRange})}
@@ -49,10 +49,17 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
    for(const a0 of A0){let a=a0;try{a=(topicOpts(v)||[]).find(z=>z.n===a0.n)||a0}catch(e){}/* the card as shown NOW */if(typeof a.x!=="string"||typeof a.run!=="function"||a.n==="Ghé chơi")continue;/* Ghé chơi: the host answers later (rcvAsk → jrcv cards) */const m=a.x.replace(/<[^>]+>/g,"").match(/nàng quý ngươi ([+-]?\d+)(?! đến)/);if(!m)continue;
     const shown=+m[1];let real=null;const keep=JSON.stringify({bac:S.bac,danh:S.danh,suc:S.suc});try{real=affGot(v,S,()=>{const r0=Math.random;Math.random=()=>0;try{a.run()}finally{Math.random=r0}})}catch(e){}
     out.push({name:`card «${a.n}» ${v.name}`,preview:shown,real,sg:m[0],ok:shown===real,sideOk:true,inRange:true})}}
+  // PVQUY-POST-2 CARDS (law 4, MAIN 189): an apply({hh}) option chip (j1 fmt → spSee hh = apply's pace THEN hhSet→affAdd) and a spAdd-rel card (j7 comet)
+  if(q&&q!==S)for(const n of [6,-4]){const t=String(fmt({hh:n})).replace(/<[^>]+>/g,"");const m=t.match(/([+-−]\d+)/);const real=affGot(q,S,()=>apply({hh:n}));
+   out.push({name:`card apply({hh:${n}}) chip «${t}»`,base:n,preview:m?+m[1].replace("−","-"):null,real,sg:t,ok:!!m&&+m[1].replace("−","-")===real,sideOk:true,inRange:true})}
+  {const E=EVI.comet,v=L[1]||L[0];if(E&&v){let o=null;try{o=E.b({me:false,v:v.id,a:(L[2]||L[0]).id,y:""})}catch(e){}const c=o&&o.o&&o.o.find(z=>z.n==="Đứng ra nói đỡ");
+   if(c){const m=String(c.x).replace(/<[^>]+>/g,"").match(/thiện cảm ([+-]?\d+)/);const b0=v.rel||0;c.go();const real=Math.round((v.rel||0)-b0);
+    out.push({name:`card spAdd rel «Đứng ra nói đỡ» ${v.name}`,base:BAL.eff.j7.comet.rel,preview:m?+m[1]:null,real,sg:m?m[0]:String(c.x),ok:!!m&&+m[1]===real,sideOk:true,inRange:true})}
+   else out.push({name:"card spAdd rel: comet card not built",preview:null,real:null,sg:"",ok:false,sideOk:true,inRange:true})}}
   // GIFT CARD (jgift giftEval → j8 giveTo): the queen (two steps on one bond) and a consort
   for(const t of [q&&q!==S?q:null,L[5]||L[0]].filter(Boolean)){try{const k=Object.keys(IT).find(k=>IT[k]&&giftVal({k},t)>0&&!IT[k].sl)||"tuithom";invAdd(S,{k});const ix=S.inv.length-1,e=S.inv[ix];
    const ev=(()=>{const r1=Math.random;Math.random=()=>0.99;try{return giftEval(e,t)}finally{Math.random=r1}})();/* the same draw giveTo runs under */const m=String(ev&&ev.x||"").replace(/<[^>]+>/g,"").match(/nàng quý ngươi ([+-]?\d+)(?! đến)/);if(!m){out.push({name:`gift card ${t.name}: no number (${String(ev&&ev.x).slice(0,60)})`,preview:null,real:null,sg:"",ok:true,sideOk:true,inRange:true});continue}
-   const r0=Math.random;const rf=typeof rcvGiftIn==="function"?rcvGiftIn:null;Math.random=()=>0.99;let real,ret="";try{real=affGot(t,S,()=>{ret=giveTo(S,t,ix)})}finally{Math.random=r0;if(rf)rcvGiftIn=rf}
+   const r0=Math.random;const rf=typeof rcvGiftIn==="function"?rcvGiftIn:null;Math.random=()=>0.99;if(rf)rcvGiftIn=()=>"take";/* PVQUY-POST-2: she keeps it, so the queen row really runs relAdd + ap(S,{hh}) */let real,ret="";try{real=affGot(t,S,()=>{ret=giveTo(S,t,ix)})}finally{Math.random=r0;if(rf)rcvGiftIn=rf}
    const rl=String(ret).match(/thiện cảm ([+-]?\d+)/);/* the keep line (KK68 keepGain.d); a wrong-taste gift adds its OWN «không ưa» line (jdis), counted apart */if(giveTo.out!=="take"||!rl){out.push({name:`gift card ${t.name}: outcome ${giveTo.out} (no keep line)`,preview:+m[1],real:null,sg:m[0],ok:true,sideOk:true,inRange:true});continue}
    out.push({name:`gift card «Tặng quà» ${t.queen?"queen ":""}${t.name} (result line)`,preview:+m[1],real:+rl[1],sg:m[0],ok:+m[1]===+rl[1],sideOk:true,inRange:true})}catch(err){out.push({name:"gift card error "+err.message,preview:0,real:1,sg:"",ok:false,sideOk:true,inRange:true})}}
   // PVQUY-POST (MAIN 188 ruling, law 4): a line written AFTER the act prints the REAL rise (affGot), never the pvQuy prediction. Each POST site:
@@ -88,6 +95,9 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
    // j8 giveTo: the keep line vs her real change
    {const t=P[0];if(t){const k=Object.keys(IT).find(k=>IT[k]&&giftVal({k},t)>0&&!IT[k].sl)||"tuithom";invAdd(S,{k});const ix=S.inv.length-1;const rf=typeof rcvGiftIn==="function"?rcvGiftIn:null;
     try{rcvGiftIn=()=>"take";postRow("j8 giveTo",t.name,t,S,()=>giveTo(S,t,ix),/thiện cảm ([+-−]?\d+)( đến [+-]?\d+)?/)}finally{if(rf)rcvGiftIn=rf}}}}
+  // GAP (info, not a fail): the same relAdd card+act with the emotion hook ON — how often the first leg's emotion moves the second leg
+  if(EMO0){emoEv=EMO0;let n=0,d=0;const ex=[];for(const v of liveRivals(true).filter(x=>x!==q&&!x.out).slice(0,8)){for(const k of [6,10]){const pv=affPreview(v,S,k);const real=affGot(v,S,()=>relAdd(S,v,k));n++;if(pv!==real){d++;if(ex.length<3)ex.push(`${v.name} +${k}: card ${pv} real ${real}`)}}}
+   out.push({name:`GAP (info) relAdd with emotion ON: ${d}/${n} differ${ex.length?" · "+ex.join(" · "):""}`,preview:null,real:null,sg:"",ok:true,sideOk:true,inRange:true,info:1})}
   Math.random=RND0;return out});
  console.log('| act | before: card showed (raw) | after: card shows | real change | same | preview wrote nothing |');console.log('|---|---|---|---|---|---|');
  for(const r of R){console.log(`| ${r.name} | ${r.base!=null?(r.base>0?'+':'')+r.base:'(raw BAL)'} | ${r.sg} | ${r.real} | ${r.ok?'yes':'NO'} | ${r.sideOk?'yes':'NO'} |`);if(!r.ok)fails.push(r.name);if(!r.sideOk)fails.push(r.name+' (side effect)');if(!r.inRange)fails.push(r.name+' (range)')}

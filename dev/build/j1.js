@@ -170,7 +170,7 @@ function fmt(o){return Object.entries(o||{}).filter(([k,v])=>NAMES[k]&&v).map(([
 function apply(o){const pops=[];
   for(const k in o){let v=o[k];if(!v)continue;
     if(k==="maid"){S.maid.loyal=cl(S.maid.loyal+v,0,100);pops.push([k,v]);continue}
-    if(k==="sung")v=sg(v);/* AFF-PREVIEW: hh is the Empress's own regard — its setter runs affAdd (j24 hhSet), which paces it; pacing here too counted it twice */const hl=k==="hh"&&typeof hhLive==="function"&&hhLive(S);if(!hl&&typeof spG==="function"&&SP_K[k]){v=spG(k,S,S[k],v,spRk(S));if(!v)continue}/* stat-pace: the one rise rule (jstatpace) */if(hl){const b=S.hh;S.hh=b+v;v=Math.round(S.hh-b);if(!v)continue}else S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
+    if(k==="sung")v=sg(v);if(typeof spG==="function"&&SP_K[k]){v=spG(k,S,S[k],v,spRk(S));if(!v)continue}/* stat-pace: the one rise rule (jstatpace) */S[k]=(S[k]||0)+v;if(NAMES[k])pops.push([k,v])}
   for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);S.suc=Math.min(S.suc,sucCap(S));
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);/* 2f2: mat = the real list (jagknow tmInstall), no clamp */
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
