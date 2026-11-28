@@ -2,7 +2,7 @@
    1 table: she greets a consort lower / equal / higher × the consort's Tính tình (Kiêu ngạo / Lạnh lùng / Ân cần) × one-seat title (Hoàng hậu, Hoàng quý phi)
      → who learns whose name = the rule (lower names herself; one seat = known at once; higher/equal give by nết: BAL.net.n.greetName)
    2 two-way: NPC → her and NPC ↔ NPC go through the same greetName with the same answers
-   3 words: every result line carries "Vì sao:", no digits, no %, no "???"
+   3 words: every result line is story text (owner 24/11, jgreet header: narration + her words by rank, never «Ta đã biết… Vì sao…»), no digits, no %, no "???"
    4 herald: o.ann (thỉnh an) names both ways
    5 AG-MEET: over many buổi, consorts present come to someone (her included), not every buổi, not everyone; the card = person-dialog option + replies
    6 perf: gmTick p95 ≤ BAL.ag.perf.p95 ms
@@ -25,10 +25,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    const wantShe=!vHi&&!eq||uqV||BAL.net.n.greetName[c.tt]!==0;const wantV=vHi||uqMe||(BAL.net.n.greetName[c.mt]!==0);
    const ex={...c,vr,me:S.rank,sheKnows,vKnows,wantShe,wantV,why:G.A.w+"/"+G.B.w};out.push(ex);if(sheKnows!==wantShe||vKnows!==wantV)bad.push(ex);lines.push(G.line)}
   v.rank=r0;v.queen=q0;v.net=n0;S.rank=me0;S.net=mn0;
-  const badW=lines.filter(l=>{const t=l.replace(/<[^>]+>/g,"");return !/Vì sao:/.test(t)||/\d|%|\?\?\?/.test(t)});
+  const badW=lines.filter(l=>{const t=l.replace(/<[^>]+>/g,"");return /Vì sao:|Ta đã biết/.test(t)||/\d|%|\?\?\?/.test(t)});
   return{n:out.length,bad,badW:badW.slice(0,3),sample:[lines[0],lines[3],lines[9]].map(x=>x.replace(/<[^>]+>/g,""))}});
  ok(r1.n>=24&&r1.bad.length===0,'table: rank × nết × one-seat → names learnt by the rule',{n:r1.n,bad:r1.bad.slice(0,3)});
- ok(r1.badW.length===0,'words: every line says Vì sao, no digits / % / ???',r1);console.log('   lines:',r1.sample.join(' || '));
+ ok(r1.badW.length===0,'words: story text (no «Vì sao» / «Ta đã biết»), no digits / % / ???',r1);console.log('   lines:',r1.sample.join(' || '));
  /* 2 two-way */
  const r2=await p.evaluate(()=>{const L=liveRivals(true).filter(x=>!x.queen&&!sameHouse(S,x));const v=L[0],w=L[1];const keep=[v.rank,w.rank,v.net.slice(),w.net.slice()];const bad=[];
   for(const tt of ["Kiêu ngạo","Ân cần"])for(const [rv,rw] of [[1,3],[3,3],[4,1]]){v.rank=rv;w.rank=rw;w.net=[tt,keep[3][1],keep[3][2]];v.net=["Ân cần",keep[2][1],keep[2][2]];

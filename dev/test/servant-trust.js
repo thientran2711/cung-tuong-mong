@@ -20,10 +20,12 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   const force=(rf,lk,sn,g)=>{B.npcGreet.min=B.npcGreet.max=g?100:0/* d-followups-1: an NPC greets first only when asked (g) */;B.ref.min=B.ref.max=rf?100:0;B.leak.base=lk?999:-999;for(const k of ['near','eyeB','talk','tell'])B.seen[k]=sn?999:-999;window.eyes=sn?()=>5:()=>0;Math.random=()=>.01};
   const unforce=()=>{Object.assign(B.npcGreet,B0.npcGreet);Object.assign(B.ref,B0.ref);Object.assign(B.leak,B0.leak);Object.assign(B.seen,B0.seen);window.eyes=eyes0;window.npcTell=tell0;window.netIs=net0;Math.random=R0};
   const noNum=t=>!/[0-9%]/.test(String(t).replace(/<[^>]*>/g,''));
+  /* row26: thiện cảm below 0 is paced by stat-pace (jstatpace spG, owner OD 26/11 ~04:20Z: dislike grows the same way as liking) — a fall of n is exact while it stays ≥ 0, a paced share (≥ 1, ≤ n) past 0 */
+  const fell=(a,b,n)=>{a=Math.round(a);b=Math.round(b);if(a-n>=0)return b===a-n;return b<a&&a-b<=n&&b>=-100};
   // (1) tables
   for(const k of ['ref','seen','tin','rel','leak','greet','npc'])ok(B[k]&&typeof B[k]==='object','BAL.svt.'+k);
   for(const k of ['talk','bribe','threat','tm','plot','friend'])ok(B.tin[k]>0&&B.rel[k]>0,'tin/rel per kind: '+k);
-  const V=liveRivals(true).filter(v=>v.staff&&v.staff.length);ok(V.length>=2,'two NPC households with servants ('+V.length+')');
+  const V=liveRivals(true).filter(v=>v.staff&&v.staff.length&&!(typeof sameHouse==='function'&&sameHouse(S,v)))/* row26: never her housemate (same palace = no other house, svTouch exempt by design) */;ok(V.length>=2,'two NPC households with servants ('+V.length+')');
   const v=V[0],u=V[1];const sv=v.staff[0],su=u.staff[0];if(!S.staff.length){const m=mkServ('maid');S.staff.push(m);try{OWN_C.set(m,S)}catch(e){}}const mine=S.staff[0];ok(!!mine,'she has a servant');
   // (2) refusal odds
   const s0={sid:-1,role:'maid',loyal:90,tin:80,trait:null,traits:[]};const s1=Object.assign({},s0,{loyal:10,tin:20});
@@ -36,7 +38,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   // (4) she talks: seen + leak
   v.ev=0;v.schemes=(v.schemes||0)+2;try{deedAdd(v,'mlbeat',u,1,'thử')}catch(e){}sv.svtL=0;sv.svtK=null;force(0,1,1);r=svTalk(S,sv);
   ok(tinOf(sv)===Math.max(0,t0-B.tin.talk),'her talk seen: '+v.name+' trusts '+sv.name+' less ('+t0+'→'+tinOf(sv)+')');
-  ok(Math.round(aff(v,S))===Math.max(-100,Math.round(a0-B.rel.talk)),'… and likes her less');ok(evG(S,v)>e0,'a real secret slipped: chứng cứ +');
+  ok(fell(a0,aff(v,S),B.rel.talk),'… and likes her less');ok(evG(S,v)>e0,'a real secret slipped: chứng cứ +');
   ok(noNum(r.replace(/chứng cứ \+?-?\d+/gi,'')),'after-line in words (only the chứng cứ tag carries the kit number)');
   // no secret → no chứng cứ (law 6a)
   sv.svtK=null;v.affair=null;sv.svtL=v.schemes;sv.svtD=v.dw||0;const e1=evG(S,v);force(0,1,1);svTalk(S,sv);ok(evG(S,v)===e1,'no real secret → no chứng cứ');
@@ -44,10 +46,10 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   const t1=tinOf(sv);force(0,1,1);svTalk(S,sv);ok(tinOf(sv)===t1,'same buổi, same servant: the effect lands once');
   // (5) law 1: an NPC talks to HER servant
   const tm=tinOf(mine),am=aff(S,v);mine.svtK=null;force(0,0,1);r=svTalk(v,mine);
-  ok(tinOf(mine)===Math.max(0,tm-B.tin.talk),'NPC talks to her servant: her Chủ tin drops');ok(Math.round(aff(S,v))===Math.max(-100,Math.round(am-B.rel.talk)),'… her thiện cảm toward that NPC drops');
+  ok(tinOf(mine)===Math.max(0,tm-B.tin.talk),'NPC talks to her servant: her Chủ tin drops');ok(fell(am,aff(S,v),B.rel.talk),'… her thiện cảm toward that NPC drops');
   ok(/bắt đầu nghi/.test(r)&&noNum(r),'she is told after, in words: '+r.slice(0,90));
   // NPC ↔ NPC
-  const tu=tinOf(su),au=aff(u,v);su.svtK=null;force(0,0,1);svTalk(v,su);ok(tinOf(su)===Math.max(0,tu-B.tin.talk)&&Math.round(aff(u,v))===Math.max(-100,Math.round(au-B.rel.talk)),'NPC ↔ NPC: same effect');
+  const tu=tinOf(su),au=aff(u,v);su.svtK=null;force(0,0,1);svTalk(v,su);ok(tinOf(su)===Math.max(0,tu-B.tin.talk)&&fell(au,aff(u,v),B.rel.talk),'NPC ↔ NPC: same effect');
   // not seen: nothing for the master
   const t2=tinOf(su);su.svtK=null;const vv=liveRivals(true).find(x=>x!==u&&x!==v);if(vv){force(0,0,0);svTalk(vv,su);ok(tinOf(su)===t2,'not seen: master knows nothing')}
   // (5b) fix r1 law 6: the WITNESS rule — no witness → never known; each real source alone → known, and the line names the «kẻ»
@@ -64,7 +66,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   ok([...document.scripts].some(s=>/k==="chat"[^\n]*svtPeer\(S,s,"chat",ok\)[^\n]*\n[^\n]*k==="gift"[^\n]*svtPeer/.test(s.textContent)),'her cung-nữ road srvStaffAct reaches svtPeer');
   window.knAt=(id)=>'p_'+id;force(0,0,1);sv.svtK=null;su.svtK=null;const p1=tinOf(sv),p2=tinOf(su),p3=aff(v,u),p4=aff(v,su),p5=aff(u,v);svtPeer(su,sv,'chat',true);
   ok(tinOf(sv)===Math.max(0,p1-B.tin.chat)&&tinOf(su)===Math.max(0,p2-B.tin.chat),'a cross-house chat seen: both masters trust their servant less ('+p1+'→'+tinOf(sv)+', '+p2+'→'+tinOf(su)+')');
-  ok(Math.round(aff(v,u))===Math.max(-100,Math.round(p3-B.rel.chat))&&Math.round(aff(v,su))<Math.round(p4),'… and the master likes the other house + its servant less');
+  ok(fell(p3,aff(v,u),B.rel.chat)&&Math.round(aff(v,su))<Math.round(p4),'… and the master likes the other house + its servant less');
   sv.svtK=null;const p6=tinOf(sv);svtPeer(su,sv,'chat',false);ok(tinOf(sv)===p6,'the colleague turned her cold (no engagement) → no trust effect');
   sv.svtK=null;const p7=tinOf(sv);AS_DO.gift(su,u,{t:sv},true);ok(tinOf(sv)===Math.max(0,p7-B.tin.gift),'jagstaff «Biếu quà» on another house\'s servant: her master may come to know');
   window.knAt=()=>'same';S.svtG=null;const o7=oan(v,su);force(0,0,0);svtPeer(su,sv,'gift',false);ok(oan(v,su)>o7,'a servant who skips greeting the master standing there → bất kính (oán '+o7+'→'+oan(v,su)+')');
@@ -98,6 +100,13 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   // wrapper: a bribe that lands → effect once
   const s3=u.staff[1]||su;s3.spyFor=null;s3.svtK=null;const c0=SVT.stat.touch.bribe||0;const f0=svtWrap(function(a,s){s.spyFor=key(a);return 'x'},'bribe');force(0,0,1);f0(v,s3);ok((SVT.stat.touch.bribe||0)===c0+1,'a bribe that lands calls svTouch once');
   const f1=svtWrap(function(a,s){return 'refused'},'bribe');s3.spyFor=null;s3.svtK=null;f1(v,s3);ok((SVT.stat.touch.bribe||0)===c0+1,'a refused bribe changes nothing');
+  // row26 (law 11): a servant of another house comes to sell out (j24 svDefect → jtsb tsbApCard «sv»): the card arriving changes nothing; «Đuổi về» nothing; «Thu làm tai mắt» → svTouch (her master may come to know), told as «… tìm gặp ngươi»
+  {const s4=v.staff[1]||sv;s4.spyFor=null;s4.svtK=null;force(0,0,1);const t4=tinOf(s4),a4=aff(v,S),k4=SVT.stat.touch.bribe||0;const c4=tsbApCard('sv','<p>'+s4.name+' xin theo ngươi</p>',v,s4);
+   ok(c4&&c4.opts&&c4.opts.length===2,'defect card built');ok(tinOf(s4)===t4&&aff(v,S)===a4&&(SVT.stat.touch.bribe||0)===k4,'the card arriving: no change yet');
+   if(c4.opts[1].go)c4.opts[1].go();ok(tinOf(s4)===t4&&aff(v,S)===a4&&(SVT.stat.touch.bribe||0)===k4,'«Đuổi về»: no change');
+   const L4=[];const lg0=window.log;window.log=x=>{L4.push(String(x))};try{c4.opts[0].go()}finally{window.log=lg0}
+   ok((SVT.stat.touch.bribe||0)===k4+1&&tinOf(s4)===Math.max(0,t4-B.tin.bribe),'«Thu làm tai mắt»: svTouch once, '+v.name+' trusts '+s4.name+' less ('+t4+'→'+tinOf(s4)+')');
+   ok(L4.some(x=>/tìm gặp ngươi|sinh nghi/.test(x))&&!L4.some(x=>/ngươi tìm gặp/.test(x)),'after-line names the one who came: '+(L4.join(' | ').slice(0,140)));unforce();window.knAt=knAt0}
   // (8) real effect
   for(const x of allServ())if(tinOf(x)<B.tin.out)x.tin=50;const p=u,low=p.staff[p.staff.length-1];low.tin=0;low.spyFor=null;const n0=p.staff.length;const oR=B.tin.outRoll,oN=B.npc.talk;B.tin.outRoll=100;B.npc.talk=0;Math.random=()=>0;svtMonth();B.tin.outRoll=oR;B.npc.talk=oN;
   for(const x of allServ())if(x!==low&&tinOf(x)<B.tin.out)x.tin=50;ok(!p.staff.includes(low)&&p.staff.length===n0-1,'NPC master returns the servant she no longer trusts to Nội vụ phủ');
@@ -136,7 +145,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
    ok(oan(wv,S)===o1&&aff(wv,S)===a1,'«Hỏi lén» with her master standing there, not greeted: no bất kính, and unseen = no change');ok(/chịu nói chuyện/.test(r1)&&noNum(r1),'«Hỏi lén»: the same gain as the open talk, in words: '+r1.slice(0,90));
    S.svtG=null;ws.svtK=null;const o2=oan(wv,S);force(0,0,0);svTalk(S,ws);ok(oan(wv,S)>o2,'the open talk in the same spot IS bất kính (oán '+o2+'→'+oan(wv,S)+')');
    window.knAt=(id)=>id==='me'?'home':'away'+id;ws.svtK=null;const t3=tinOf(ws),a3=aff(wv,S);force(0,0,1);const r3=svTalk(S,ws,1);
-   ok(tinOf(ws)===Math.max(0,t3-B.tin.len)&&Math.round(aff(wv,S))===Math.max(-100,Math.round(a3-B.rel.len)),'«Hỏi lén» seen: Chủ tin −'+B.tin.len+', her thiện cảm −'+B.rel.len+' (heavier than open; r3 «'+String(r3).replace(/<[^>]*>/g,'').slice(0,140)+'» got tin '+t3+'→'+tinOf(ws)+', thiện cảm '+Math.round(a3)+'→'+Math.round(aff(wv,S))+')');ok(noNum(r3),'after-line in words: '+r3.replace(/<[^>]*>/g,'').slice(0,110));
+   ok(tinOf(ws)===Math.max(0,t3-B.tin.len)&&fell(a3,aff(wv,S),B.rel.len),'«Hỏi lén» seen: Chủ tin −'+B.tin.len+', her thiện cảm −'+B.rel.len+' (heavier than open; r3 «'+String(r3).replace(/<[^>]*>/g,'').slice(0,140)+'» got tin '+t3+'→'+tinOf(ws)+', thiện cảm '+Math.round(a3)+'→'+Math.round(aff(wv,S))+')');ok(noNum(r3),'after-line in words: '+r3.replace(/<[^>]*>/g,'').slice(0,110));
    ws.svtK=null;const t4=tinOf(ws);force(1,0,1);svTalk(S,ws,1);ok(tinOf(ws)===t4,'«Hỏi lén» refused: nothing changes');
    const net1=window.netIs;window.netIs=(p,k)=>k==='sharp'?true:net1(p,k);const hi=svtLenO(wv);window.netIs=(p,k)=>k==='sharp'?false:net1(p,k);const lo=svtLenO(wv);window.netIs=net1;
    ok(hi>=lo&&hi<=100&&lo>=0,'NPC picks «Hỏi lén» by nết (sharp '+hi+' ≥ plain '+lo+')');
