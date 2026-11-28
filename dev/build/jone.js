@@ -131,10 +131,18 @@ ONE.runM=runM;
 function goOne(pp,r,tier){const {p,L}=members(pp,r);if(!p)return false;const T=tier?L.filter(m=>tierOf(r,m)===tier):L;const m=pick(r,T,seedOf(r,who(p),tier));if(!m)return false;runM(r,m,T,tier);return true}
 ONE.go=goOne;
 const wordOf=o=>o>=100?"":(typeof dfWord==="function"?dfWord(o):"");
+/* E-GAIN3-LIVE law 3: a row that IS one member carries «Gợi ý» (jdoor doorHint, the J2 / talk door rows' own rule): base first (the E-GAIN3b-FIX rule) —
+   the row's own line read by the kit; doorHint only when that says nothing gained. RV-183 (law 4 / 3, family): the kit read of the optLine HTML took a
+   COST for a gain («Truyền thái y» Tốn Bạc 40 → «Thành: Bạc +»; Hối lộ Kính sự phòng, Dưỡng nhan, Sang Thái y viện xin thuốc «Sức +», Cầu xin ngự y «Sủng +»):
+   a base read that only names one of the row's own costs as «+» is not a gain → the doorHint gate (DOOR.hintGain) answers instead. */
+const HINT_ST={bac:"Bạc",suc:"Sức",sung:"Sủng",danh:"Danh",duc:"Đức",sac:"Sắc",tai:"Tài",tamco:"Tâm cơ"};
+function costRead(b,c){const g=String(b||"").split(/[;,]/)[0].trim();if(!c)return false;for(const k in c)if((c[k]||0)<0&&HINT_ST[k]&&new RegExp("^"+HINT_ST[k]+" \\+").test(g))return true;return false}
+function memberHint(m,n,x){const a=m.a||{n:m.n,x:m.x,c:m.c,o:m.o};const dh=typeof doorHint==="function"?doorHint(a,x):null,rn=n,rx=x,c=a.c;/* every row through the gate (E-GAIN3c-RV 6) */
+ return dh?lv=>{let b="";try{b=kitHint({n:rn,x:rx},null,lv).hint}catch(e){}if(b&&!/^(chẳng được gì|không được mất gì)/.test(b)&&!costRead(b,c))return b;try{return dh(lv)}catch(e){return b}}:undefined}
 function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>tierOf(r,m)===t);if(!T.length)continue;
   /* law 2 (owner 27/11 ~00:46Z «a bạc road always has another road of matching tier»): a tier listed in the row's `both` shows EVERY way of that tier side by side
      (each its own Tốn / odds; greyed with the reason when she cannot take it) — never one picked by what she can pay (ILLNESS-CURE: nặng = Truyền thái y + Cầu xin ngự y) */
-  const bo=(M[r.k]||{}).both;if(bo&&bo.includes(t)&&T.length>1&&!(M[r.k]||{}).harm){for(const m of T)rows.push({t,m,T:[m],n:`${txt(m.n)} · ${t}`,x:m.x||"",off:m.off?{why:m.why||"chưa làm được"}:null});continue}
+  const bo=(M[r.k]||{}).both;if(bo&&bo.includes(t)&&T.length>1&&!(M[r.k]||{}).harm){for(const m of T){const n=`${txt(m.n)} · ${t}`,x=String(m.x||"");rows.push({t,m,T:[m],n,x,c:m.a?m.a.c:m.c,hint:x?memberHint(m,n,x):undefined,off:m.off?{why:m.why||"chưa làm được"}:null})}continue}
   const m=pick(r,T,seedOf(r,wh,t));
   const free=T.filter(x=>!x.off);const harm=(M[r.k]||{}).harm;
   let x="",n=`${r.n} · ${t}`;if(m){const ln=String(m.x||"");/* the member's own kit line (optLine HTML: odds · tốn · được · hỏng), unchanged */
@@ -142,9 +150,7 @@ function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>t
   const why0=(T[0]&&T[0].why)||"chưa làm được";
   /* E-GAIN3-LIVE law 3: a row that IS one member carries that member's price + «Gợi ý» (jdoor doorHint, the J2 / talk door rows' own rule): the dialog
      kit reads its Được from the hint; with the line alone a deck row («Nghỉ ngơi một lát · nhẹ») read «chẳng được gì; nhưng Sức −» */
-  let c,hint;if(m&&x===String(m.x||"")&&x){c=m.a?m.a.c:m.c;const dh=typeof doorHint==="function"?doorHint(m.a||{n:m.n,x:m.x,c:m.c,o:m.o},x):null,rn=n,rx=x;/* every row through the gate (E-GAIN3c-RV 6) */
-   /* base first (the E-GAIN3b-FIX rule): the row's own line read by the kit; doorHint only when that says nothing gained */
-   hint=dh?lv=>{let b="";try{b=kitHint({n:rn,x:rx},null,lv).hint}catch(e){}if(b&&!/^(chẳng được gì|không được mất gì)/.test(b))return b;try{return dh(lv)}catch(e){return b}}:undefined}
+  let c,hint;if(m&&x===String(m.x||"")&&x){c=m.a?m.a.c:m.c;hint=memberHint(m,n,x)}
   rows.push({t,m,T,n,x:x||(m?"chọn rồi xem kết quả ở bước sau":`chưa làm được: ${txt(why0)}`),c,hint,off:m?null:{why:why0}})}return rows}
 ONE.tierRows=tierRows;
 /* perf: one paint asks the same person + door many times (render → dfActs → card); the members list is kept for that paint only (state stamp) */

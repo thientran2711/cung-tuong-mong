@@ -18,12 +18,14 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
   ok(!/\d+ ?%/.test(t),`${name} no % on the card (law 7)`);
   ok(/Tĩnh dưỡng · nhẹ|Tự bốc thuốc · nhẹ/.test(t)&&/Sang Thái y viện xin thuốc · vừa/.test(t)&&/Truyền thái y · nặng/.test(t)&&/Cầu xin ngự y · nặng/.test(t),`${name} every tier is a CURE road (no pulse-only road while ill)`);
   await p.screenshot({path:`${OUT}/${name}-1-ill-card.png`});
-  /* LIVE R11 (owner 27/11 ~06:42Z, DOOR.card tabdoor): a door opened from a tab is the LIVE list frame, not a Bàn bài hand — the nặng row shows Tốn + an odds word on its FRONT and ONE tap runs it
-     (r5: was «real tap = flip» under the old hand; Truyền thái y on LIVE = a summons, jptime ptSummonThy) */
-  ok(/Truyền thái y · nặng \| (Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững) \| TỐN/i.test(t)&&/Cầu xin ngự y · nặng \| (Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững) \| TỐN/i.test(t),`${name} nặng rows show the odds word + Tốn on the front: ${t.slice(-300)}`);
-  const nk=p.locator('#modal button.ka',{hasText:'Truyền thái y · nặng'}).first();const flipped=await nk.count();if(flipped)await nk.click();await p.waitForTimeout(1100);
+  /* the nặng plaque (main kit-stage-r17: the card shows each way's Tốn / Thành / odds on its plaque; ONE tap runs it — RV-183 test update, no tap here):
+     Tốn + odds word (law 7) + a REAL gain «khỏi bệnh», never its own cost read as a gain («Bạc +» / «Sủng +», law 3 / 4) */
+  const nk=p.locator('#modal :is(button.ka,button.kpk-b,.kpk)',{hasText:'Truyền thái y'}).first();const flipped=await nk.count();await p.waitForTimeout(600);
+  t=await card(p);const back=await p.evaluate(()=>!!S.ill);ok(flipped&&back&&/Tốn/i.test(t)&&/(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững)/.test(t)&&/Truyền thái y · nặng/.test(t)&&!/Thành:? ?\|? ?(Bạc|Sủng|Sức) \+ \| ! \| (Truyền thái y|Cầu xin)/i.test(t)&&!/(Truyền thái y|Cầu xin ngự y|xin thuốc)[^!]*THÀNH \| (Bạc|Sủng|Sức) \+/.test(t),`${name} nặng plaque shows Tốn + odds word, no cost read as its gain: ${t.slice(-300)}`);
+  /* LIVE R11 (owner 27/11 ~06:42Z, DOOR.card tabdoor): a tab door is the LIVE list frame — ONE tap runs the road (Truyền thái y on LIVE = a summons, jptime) */
+  const nk2=p.locator('#modal button.ka',{hasText:'Truyền thái y · nặng'}).first();const tapped=await nk2.count();if(tapped)await nk2.click();await p.waitForTimeout(1100);
   const ran=await p.evaluate(()=>{const r={busy:typeof ptBusy==="function"&&ptBusy(ptDocId()),ill:!!S.ill};try{S.away=[]}catch(e){}return r});
-  ok(flipped&&ran.busy&&ran.ill,`${name} one tap on «Truyền thái y · nặng» runs it (the thái y is summoned, LIVE jptime) ${JSON.stringify(ran)}`);
+  ok(tapped&&ran.busy&&ran.ill,`${name} one tap on «Truyền thái y · nặng» runs it (the thái y is summoned, LIVE jptime) ${JSON.stringify(ran)}`);
   await p.screenshot({path:`${OUT}/${name}-2-nang-back.png`});
   await p.evaluate(()=>{Q.length=0;try{$("modal").hidden=true}catch(e){}render()});await p.waitForTimeout(400);
   /* (2) law 2: the bạc road always has its matching road in the SAME tier, both shown side by side (each its own Tốn / odds); the one she cannot pay is greyed with the reason */
