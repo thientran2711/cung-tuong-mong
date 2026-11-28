@@ -122,9 +122,12 @@ const COVN={nhe:"Đe dọa bịt miệng",vua:"Mua chuộc nhân chứng",nang:"
 function covWitOpts(p){const id=covWitId(p);if(!id||!covSaw(S,id).length)return[];const B=covB().wit,bac=covWitBac(S,id),wn=covWho(covPerson(id));
  const mk=(x,o)=>Object.assign({n:COVN[x],act:1,o:covWitO(S,id,x),cov:x},o);
  /* the kit option row reads plain phrases (jk2b kitHint): no «label:» inside, the tier sits in the title (DOOR row tier) */
- return[mk("nhe",{c:{suc:-B.nhe.suc},x:`${wn} sợ hãi, câm lặng · Đức ${balSg(covB().duc.nhe)}`,risk:`${wn} không sợ, càng ghét ta`,go:()=>log(covWitDo(S,id,"nhe",true)),fail:()=>log(covWitDo(S,id,"nhe",false))}),
-  mk("vua",{w:{bac:-bac},x:`${wn} nhận ${bac} lượng bạc, câm lặng · Đức ${balSg(covB().duc[covTier("wbribe")])}`,risk:"từ chối thì ta không mất bạc",go:()=>log(covWitDo(S,id,"vua",true)),fail:()=>log(covWitDo(S,id,"vua",false))}),
-  mk("nang",{x:`${wn} không còn trên đời · Đức ${balSg(covB().duc[covTier("wkill")])}`,risk:`Danh ${balSg(covB().danh[covTier("wkill")])}, ${wn} biết kẻ chủ mưu`,go:()=>log(covWitDo(S,id,"nang",true)),fail:()=>log(covWitDo(S,id,"nang",false))})]}
+ /* TMK-WARN-4 (RV-186 X01, law 11 whole group; no number changed): every tier's line is LABELLED (j25 optLine passes a labelled x whole) so a loss
+    never sits in the green Thành row — the Đức of the deed (jcover deed hook: deedAdd runs on success AND failure for nhẹ / nặng) is a Kèm under
+    both Thành and Bại; vừa pays its bạc (o.w, applied on success) and takes its Đức only on success → Kèm under Thành, Bại = she refuses, no bạc lost */
+ return[mk("nhe",{c:{suc:-B.nhe.suc},x:`thành: ${wn} sợ hãi, câm lặng · kèm: Đức ${balSg(covB().duc.nhe)} · hỏng: ${wn} không sợ, càng ghét ta · kèm: Đức ${balSg(covB().duc.nhe)}`,risk:`${wn} không sợ, càng ghét ta`,go:()=>log(covWitDo(S,id,"nhe",true)),fail:()=>log(covWitDo(S,id,"nhe",false))}),
+  mk("vua",{w:{bac:-bac},x:`thành: ${wn} nhận ${bac} lượng bạc, câm lặng · kèm: ${fmt({bac:-bac})}, Đức ${balSg(covB().duc[covTier("wbribe")])} · hỏng: ${wn} từ chối, ta không mất bạc`,risk:"từ chối thì ta không mất bạc",go:()=>log(covWitDo(S,id,"vua",true)),fail:()=>log(covWitDo(S,id,"vua",false))}),
+  mk("nang",{x:`thành: ${wn} không còn trên đời · kèm: Đức ${balSg(covB().duc[covTier("wkill")])} · hỏng: Danh ${balSg(covB().danh[covTier("wkill")])}, ${wn} biết kẻ chủ mưu · kèm: Đức ${balSg(covB().duc[covTier("wkill")])}`,risk:`Danh ${balSg(covB().danh[covTier("wkill")])}, ${wn} biết kẻ chủ mưu`,go:()=>log(covWitDo(S,id,"nang",true)),fail:()=>log(covWitDo(S,id,"nang",false))})]}
 DOOR.add({k:"wit",n:"Xử nhân chứng",kinds:["rival","hh","npc","serv","maid"],rep:null,tier:a=>a&&a.cov&&BAL.charge.tier[a.cov]?BAL.charge.tier[a.cov].n:"",h:"Người này đã trông thấy việc ngươi làm. Chọn cách: nhẹ, vừa hay nặng.",re:/^(Đe dọa bịt miệng|Mua chuộc nhân chứng|Thủ tiêu nhân chứng)$/});
 /* the door card's option rows: the kit reads its words from o.hint (jk2b kitHint «được; nhưng …; hỏng thì …») — the true result of each tier, no guess */
 function covHint(x,id){const wn=covWho(covPerson(id))||"người ấy",V=covB();
