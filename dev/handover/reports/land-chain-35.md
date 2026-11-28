@@ -49,3 +49,5 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 08:35Z RV-182 LAND giftback head d8fcdb8c → ui7 = b9404150 (+ merge d8fcdb8c; MODGATE PASS). Delta verdict pending on b9404150.
 - 08:33Z MAIN 188: add F f-word36-bac-rv 8843322a (row 36) after ui7.
 - 08:40Z ui8 staged review/lc35-ui8 a50895cb = ui7 + f-word36 8843322a (j23 resolved: LIVE BAL.artLes.k gate + F crsAfterW log tail); RV-182 delta asked.
+- 08:36Z MAIN = MAIN CHÍNH 189 session_01Rc5AsKLcnai97YwjFT5YMc (parent 188, verified).
+- 08:38Z LESSON: quickcheck compares vs local origin/main — FETCH main after every push before a quickcheck (ui5 run started vs stale 5ad52416 → killed, rerun vs a96564ad; oldsave-r1 needs .tmp/old.html = LIVE index.html).
