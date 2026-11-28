@@ -48,22 +48,55 @@ function ktArtSkills(){const t2=whyTime(2);const out=[];
  return out}
 function ktArtHTML(){try{vNormAll()}catch(e){}const SK=ktArtSkills();const G=[["duc","Tứ đức"],["cktt","Cầm kỳ thi họa"],["nc","Vũ · Y · Nữ công"]];
  let works="";try{works=ktWorksHTML()}catch(e){works=""}
- const list=G.map(([k,label])=>{const L=SK.filter(s=>s.g===k);const h=L.map(s=>s.acts.join("")).join("");return{k,label,doable:ktDoable(h),total:ktTotal(h)}});
- if(works&&works.replace(/<[^>]+>/g,"").trim())list.push({k:"wk",label:"Tác phẩm",doable:ktDoable(works),total:ktTotal(works)||null,n:null});
+ const list=G.map(([k,label])=>{const L=SK.filter(s=>s.g===k);const h=L.map(s=>s.acts.join("")).join("");return{k,label,n:null}});/* owner/MAIN 27/11 ~07:03Z: «Tứ đức 5/5» over 4 cells read as a count of môn — the cell tabs carry no count */
+ if(works&&works.replace(/<[^>]+>/g,"").trim())list.push({k:"wk",label:"Tác phẩm",n:null});
  /* owner 17/11 07:55Z: NO info band under the tabs. "ⓘ Cách học" (or "ⓘ Tác phẩm") = the tab bar's trailing slot; Tứ đức · Đức chip · ⓘ luật Đức = the Tứ đức section header; only a real status chip (Danh sư) keeps a one-line row */
- const cur0=ktSubGet("art",list);const sub=kitSubTabs("art",list,kitInfo(cur0==="wk"?"Tác phẩm":"Cách học"));let h=sub.html+(S.master?`<div class="ktop"><span class="kchip g">Danh sư còn dạy ${S.master} tháng</span></div>`:"")+(sub.cur==="duc"?kitSecHead(kitInfo("Tứ đức"),`<button class="lnk ladi" data-v85tab="duc">ⓘ luật Đức</button>`):"");
- if(sub.cur==="wk")return h+`<div class="kskills">${works}</div>`;
+ const cur0=ktSubGet("art",list);const sub=kitSubTabs("art",list,kitInfo(cur0==="wk"?"Tác phẩm":"Cách học"));let h=sub.html+(S.master?`<div class="ktop"><span class="kchip g">Danh sư còn dạy ${S.master} tháng</span></div>`:"")+ktTnHead(sub.cur);
+ /* owner 27/11 ~06:33Z (verbatim KIT.md §21e): each sub-tab shows ONLY one square kit cell per môn (picture + name + bậc), 2 columns (5 = 3+2, 4 = 2×2);
+    tap a cell → ONE kit frame for that môn (bậc / tiến bộ, what it gives, Tự học / Học với thầy / Các lối, sách phổ … with their Tốn / Được rows) = ktTnPop */
+ if(sub.cur==="wk")return h+`<div class="kskills ktn-grid">${ktWorksList().map(s=>ktTnCell(s,"wk")).join("")}</div>`;
  const L=SK.filter(s=>s.g===sub.cur).map(s=>Object.assign(s,{can:s.acts.some(a=>!/\sdisabled[\s>]/.test(a.slice(0,a.indexOf(">")+1)))}));
- L.sort((a,b)=>(b.can-a.can)||((a.level>=5)-(b.level>=5)));
- return h+`<div class="kskills">${L.map(kitSkillCard).join("")}</div>`}
+ /* cells keep the môn order (a cell never jumps place when a môn becomes doable) */
+ return h+`<div class="kskills ktn-grid">${L.map(s=>ktTnCell(s,sub.cur)).join("")}</div>`}
+/* ONE cell side for the whole Tài nghệ tab (law 10): the largest square that lets the tallest sub-tab of Tứ đức / Cầm kỳ thi họa / Vũ · Y · Nữ công
+   (3 rows at 2 columns) fit in the room under the tab bar without scrolling, never wider than half the grid. Set as --ktnc on the grid. */
+const KTN_GAP=10;
+/* rows the tallest cell sub-tab needs at 2 columns (Tứ đức 4, Cầm kỳ thi họa 4, Vũ · Y · Nữ công 4 → 2 rows; Tác phẩm may scroll) */
+function ktTnRows(){try{const SK=ktArtSkills();return Math.max(1,...["duc","cktt","nc"].map(g=>Math.ceil(SK.filter(s=>s.g===g).length/2)))}catch(e){return 2}}
+/* the sub-tab head: Tứ đức keeps «ⓘ Tứ đức» + «ⓘ luật Đức»; every sub-tab carries «ⓘ Bảng tài nghệ» (jpma VIEW, was a loose act row under the list) as a link, so the tab holds ONLY the cells */
+function ktTnHead(cur){const lad=typeof pmLadBtn==="function"&&pmLadBtn()?`<button class="lnk ladi" data-pmlad="-1">ⓘ Bảng tài nghệ</button>`:"";
+ const r=(cur==="duc"?`<button class="lnk ladi" data-v85tab="duc">ⓘ luật Đức</button>`:"")+lad;return cur==="duc"||r?kitSecHead(cur==="duc"?kitInfo("Tứ đức"):"",r):""}
+function ktTnFit(){try{const P=document.getElementById("panel");const g=P&&P.querySelector(".ktn-grid");if(!g)return;const gr=g.getBoundingClientRect(),pr=P.getBoundingClientRect();if(!gr.width)return;
+ const ps=getComputedStyle(P);const roomH=Math.min(pr.bottom,innerHeight)-parseFloat(ps.paddingBottom||0)-gr.top-4;const R=ktTnRows();const w=(gr.width-KTN_GAP)/2,h=(roomH-KTN_GAP*(R-1))/R;
+ const side=Math.max(120,Math.floor(Math.min(w,h)));g.style.setProperty("--ktnc",side+"px");g.style.setProperty("--ktng",KTN_GAP+"px")}catch(e){console.error("ktTnFit",e)}}
+window.ktTnFit=ktTnFit;
+(function(){try{let r=0;const go=()=>{if(r)return;r=requestAnimationFrame(()=>{r=0;const P=document.getElementById("panel");const g=P&&P.querySelector(".ktn-grid");if(g&&!g.style.getPropertyValue("--ktnc"))ktTnFit()})};
+ const arm=()=>{const P=document.getElementById("panel");if(!P)return setTimeout(arm,500);new MutationObserver(go).observe(P,{childList:true,subtree:true})};arm();
+ addEventListener("resize",()=>{const g=document.querySelector("#panel .ktn-grid");if(g){g.style.removeProperty("--ktnc");ktTnFit()}})}catch(e){}})();
+function ktTnCell(s,g){return kitSkillCell(s,`${g}:${s.kind}:${s.k}`)}/* the cell = KIT §21e kitSkillCell (j79) */
+function ktTnFind(key){const [g,kind,k]=String(key).split(":");if(g==="wk")return ktWorksList().find(s=>s.k===k);return (typeof ktArtSkills.raw==="function"?ktArtSkills.raw():ktArtSkills()).find(s=>s.kind===kind&&s.k===k)}/* the frame lists every way as its own card (jactj4 raw) */
+/* the môn frame: ONE kit frame (kitModal) holding the kit skill card of that môn WITH its act cards (Tốn / Được rows = the kit act card) */
+function ktTnPop(key){const s=ktTnFind(key);if(!s)return;s.can=undefined;
+ /* owner 27/11 ~07:10Z: the môn name ONCE (the skill card's «ⓘ name» = its rule link), no rank subtitle; the frame title names the group */
+ const grp={duc:"Tứ đức",cktt:"Cầm kỳ thi họa",nc:"Vũ · Y · Nữ công",wk:"Tác phẩm"}[String(key).split(":")[0]]||"Tài nghệ";
+ kitModal({kind:"info",title:grp,sections:[{h:"",html:`<div data-tnpop="${ktEsc(key)}" class="ktn-pop">${kitSkillCard(Object.assign({},s,{kicker:"",barLabel:"Tiến độ"}))}</div>`}],btn:"Thôi"})}
+window.ktTnPop=ktTnPop;
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-tnmon]");
+ if(t&&!e.target.closest("[data-ktsv]")){e.preventDefault();e.stopPropagation();try{ktTnPop(t.dataset.tnmon)}catch(x){console.error(x)}return}
+ /* an act card in the môn frame: every act runner refuses while a frame is open (lessonMode / lessonVir / charity … gate on Q.length), so the frame
+    closes FIRST, then the same act runs once from a detached copy of the button (same data-* → the act's own document handler: cost, mini-game, result) */
+ const a=e.target.closest&&e.target.closest("#modal .ktn-pop button.ka");
+ if(a&&!a.disabled&&!a.__tnReplay){e.preventDefault();e.stopPropagation();const c=document.createElement("button");[...a.attributes].forEach(x=>{if(x.name!=="class"&&x.name!=="id")c.setAttribute(x.name,x.value)});c.type="button";c.style.display="none";
+  try{kitModalClose()}catch(x){}let n=0;const go=()=>{if(Q.length&&n++<40)return setTimeout(go,25);c.__tnReplay=1;document.body.appendChild(c);try{c.click()}catch(x){console.error(x)}finally{c.remove()}};setTimeout(go,0)}},true);
 /* Tác phẩm (j83 works): one skill head per art that makes works = picture, bậc, what it makes as chips, the quality ladder;
    "Tự học, làm tác phẩm" (mastered only) as a compact act. Rules behind the ⓘ "Tác phẩm" gloss (was a paragraph + bare divs). */
-function ktWorksHTML(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return"";const why=whyTime(2)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
+function ktWorksHTML(){return ktWorksList().map(kitSkillCard).join("")}
+function ktWorksList(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return[];const why=whyTime(2)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
  const L=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return null;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
   const acts=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`tốn: Sức -${BAL.artLes.prac}, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
   const kinds=ks.map(k=>`<span class="kchip n">${WK[k].w}${WK[k].per?" · để 1 tuần":""}</span>`).join(" ");
   return{kind:"wk",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:crsProg(S.arts,S.artp,a.k),bar:l>=5?false:undefined,desc:`${kinds} <span class="kchip g">phẩm +${wkLvQ(S,a.k)}</span><br>${wkTierTxt(S,ks[0],0)}`,next:"",acts,img,info:`data-v85tab="${a.k}"`,can:!!(acts.length&&!why)}}).filter(Boolean);
- L.sort((a,b)=>(b.can-a.can)||(b.level-a.level));return L.map(kitSkillCard).join("")}
+ return L}
 KIT_GLOSS["Tác phẩm"]="Mỗi buổi học hay tự học mà tự tay chơi trò tài nghệ thì ra một tác phẩm (Học nhanh: không ra thành phẩm), cất vào rương để dâng, tặng, bán, bày ở yến tiệc. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + chút bậc tài nghệ + vật liệu. Đồ mua bằng bạc vẫn quý hơn. Môn đạt "+BAL.art.nm[5]+" thì tự học là ra tác phẩm ngay.";
 artTabHTML=function(){return ktArtHTML()};
 /* MỤC LỤC CHƯƠNG (owner 24/11 f10-mucluc): EVERY chapter of her road by number + NAME with its state. Past = S.st.ch.past, now = the running chapter (milestone or arc), later = the rest of the plan:
