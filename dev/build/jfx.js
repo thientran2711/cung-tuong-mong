@@ -456,7 +456,12 @@ window.kitGain=kitGain;
   KFX.inDiff=true;let r;try{r=o.apply(this,arguments)}finally{KFX.inDiff=false}
   /* snapshot first (a card opened below may render again) */
   let same=false,d=0,lg=0,seen=null;try{if(S){same=kfS===S;d=(S.bac||0)-kfBac;lg=kfLog;seen=(S.inv||[]).filter(x=>x&&kfSeen.has(x));kfS=S;kfBac=S.bac||0;kfLog=S.logSeq||0;kfMark()}}catch(e){}
-  try{if(before&&same&&S&&!S.dead&&kfOn()){const add=(S.inv||[]).filter(x=>x&&!x.h&&!before.includes(x)&&!seen.includes(x)&&(x.wk||typeof itKnown!=="function"||itKnown(x)))/* an unknown key (old save / other build, j8 itm) is inert: never revealed, never listed */;if(add.length)kgGroups(add);kfLoss(before,d,lg)}}catch(e){console.error(e)}
+  try{if(before&&same&&S&&!S.dead&&kfOn()){const add=(S.inv||[]).filter(x=>x&&!x.h&&!before.includes(x)&&!seen.includes(x)&&(x.wk||typeof itKnown!=="function"||itKnown(x)))/* an unknown key (old save / other build, j8 itm) is inert: never revealed, never listed */;
+   /* KIT §54.2 HOME AGAIN (KK69, RV-180/RV-182 iPad ring: «Trả lại quà» → a «Nhận» reveal of her OWN piece covered the ring result that already says «về Tư trang»):
+      a piece that left S.inv and came back in the SAME step (a gift sent back, a co-op gift returned, any give-then-return) is no gain and no loss —
+      paired by the item ledger id when both carry one (iu = the same piece, law 6c), else by the same key (invAdd may stamp a new iu on a copy); neither the reveal nor the loss toast fires for it. */
+   const back=new Set();try{const gone=before.filter(b=>b&&typeof b==="object"&&!S.inv.includes(b));for(let i=add.length-1;i>=0;i--){const x=add[i];const g=gone.find(b=>!back.has(b)&&(x.iu&&b.iu?x.iu===b.iu:x.k===b.k&&!!x.wk===!!b.wk));if(g){back.add(g);add.splice(i,1);KFX.back=(KFX.back||0)+1}}}catch(e){}
+   if(add.length)kgGroups(add);kfLoss(back.size?before.filter(b=>!back.has(b)):before,d,lg)}}catch(e){console.error(e)}
   return r});
  /* KIT §54.2: who took the item out of her Tư trang. These calls tag each entry they remove; kfLoss (below) reads the tag. */
  const TAG=(n,why,toIx,title)=>W(n,o=>function(p){if(p!==S||!S||!S.inv)return o.apply(this,arguments);const b=S.inv.slice();const r=o.apply(this,arguments);
