@@ -4,7 +4,7 @@
    rule (tsNpcGift); VALUE PARITY TABLE: bạc share vs work vs item for several receivers (tastes, traits) — cost to her in bạc (econPrice, the
    ONE sale API) and what the receiver gets.  Shots (Fold + iPad) of the option cards go OUTSIDE the repo.
    usage: node dev/test/d19-gift.js [outdir]      exit 1 on any FAIL */
-const {chromium}=require('playwright');const D=require('./lib/device');const out=process.argv[2]||'/home/user/wt/d19-shots';require('fs').mkdirSync(out,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const out=process.argv[2]||'/home/user/wt/d19-shots';require('fs').mkdirSync(out,{recursive:true});
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();const R={};const F=[];
  for(const dev of ['fold','ipadAir']){const ctx=await D.newDeviceContext(b,dev);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,200)));
   const g=await D.openHost(p,srv.url);await p.waitForTimeout(2500);const r={};

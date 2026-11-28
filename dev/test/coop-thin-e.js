@@ -6,7 +6,7 @@
    number + a world key put back, her viewer row kept) · E6 host clock: a forced step runs both with her not ready ·
    E7 buổi tối: both ready → the night runs → week merged once · E9 cycle flags = the host's (patch, no do cyb) · E10 night by do tn + the view ·
    E11 her summons = a part-D card built on the host · E12 a world window's end on her household runs on the host · E13 no raw ref left in her S · E14 her ready from behind catches her up (host reload lost E.owe) · E15 vu cổ: her accusation of the caught host hits · E16 her hand of acts after the host's step · E8 no page errors. */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||5);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

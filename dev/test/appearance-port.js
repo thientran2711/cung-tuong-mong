@@ -1,6 +1,6 @@
 /* review/appearance-port: face-condition overlays (ill, poison, slap, rash) + penalty, on the current figure system.
    usage: node dev/test/appearance-port.js <page url> <W>x<H>@dpr [outdir] */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=(SZ||'1180x820@1').split('@');const [W,H]=WH.split('x').map(Number);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=(SZ||'1180x820@1').split('@');const [W,H]=WH.split('x').map(Number);
 if(OUT)fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage']});const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),serviceWorkers:'block',reducedMotion:'reduce',hasTouch:W<1100,isMobile:W<1100});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));const bad=[];p.on('response',r=>{if(r.status()>=400&&/img\//.test(r.url()))bad.push(r.status()+' '+r.url().slice(-60))});

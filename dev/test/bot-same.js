@@ -1,6 +1,6 @@
 /* quick bot check: the sensible bot (dev/measure/inpage4.js) plays N lives with ONE seeded Math.random on two builds;
    a rule change that keeps the numbers must give the same lives. usage: node dev/test/bot-same.js <urlA> <urlB> [steps] [mode] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const [,,A,B,NL,MODE]=process.argv;const N=+NL||12,mode=MODE||'sens';
 const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
 async function run(b,url){const ctx=await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});

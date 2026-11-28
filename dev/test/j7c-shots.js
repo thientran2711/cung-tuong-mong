@@ -1,6 +1,6 @@
 /* ORDER THIN P2 shots: composed intrigue cards on Fold 755x1000@2 + iPad 1180x820@2. node dev/test/j7c-shots.js <outdir> [seedsFile] [id,id,id]
    seedsFile default = the game's own J7SEEDS (j7sd.js); a JSONL file is pushed in first (fixture runs). Shots go OUTSIDE git. */
-const {chromium}=require('playwright');const D=require('./lib/device');const RL=require('./lib/roulette');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const RL=require('./lib/roulette');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const OUT=path.resolve(process.argv[2]||'/tmp/j7c-shots');fs.mkdirSync(OUT,{recursive:true});
 const EXTRA=process.argv[3]&&fs.existsSync(process.argv[3])?fs.readFileSync(process.argv[3],'utf8').split('\n').filter(l=>l.startsWith('{')).map(JSON.parse):[];
 /* the quickcheck new-life / settle / buổi helpers (dev/tools/quickcheck.js:44–52, copied) */

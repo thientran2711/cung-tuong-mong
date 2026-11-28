@@ -3,7 +3,7 @@
    Boot (review/pets-fix, as fix-float's rules-one-source): service workers blocked, window.__nlInner (no Luân hồi #kroul), #kload / .krbox
    removed, proxy from HTTPS_PROXY. The fuller check is dev/test/pets-fix.js.
    (ảnh thú: img/pet-*.webp ở máy — cdn_sync --pull 'img/pet*' nếu chưa có) */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),serviceWorkers:'block',reducedMotion:'reduce',ignoreHTTPSErrors:true});

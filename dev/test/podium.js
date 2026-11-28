@@ -2,7 +2,7 @@
    usage: node dev/test/podium.js <baseURL of built page> <W>x<H>@dpr <outdir> [oldURL]
    Scenes: j82 contest she wins (1 intro, 2 confetti, 3 final, 4 screen 2 = score board), contest she is 4th + a stranger on the dais,
    Tranh ghế result (Q item), hoàng tự exam (.ktlist rows), old save from the main build loads. */
-const {chromium}=require('./lib/pw-roulette');
+const {chromium}=require('./lib/dlgs-off').pw('off',require('./lib/pw-roulette'));/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,BASE,SZ,OUT,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const tag=SZ.replace('@','_');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1)});

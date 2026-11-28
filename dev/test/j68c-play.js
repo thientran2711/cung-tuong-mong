@@ -5,7 +5,7 @@
    choosing (the real chooseM path; stance i%4) is built from exactly steps × BAL.j68c.fx and, on the real path, applies every stat the same way (the game's own price/deed rules may scale the real amount, as for every option) and moves the person's thiện cảm the same way, the object trace is kept
    (law 6c), the seed rests for the rest of the life (cooldown), and every built J68SEEDS comp registers; the 90 old decisions still count 90 / 370.
    0 page errors. */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const FILE=process.argv[2]||path.join(__dirname,'j68c-fixture.jsonl');
 const FIX=fs.readFileSync(FILE,'utf8').split('\n').filter(l=>l.trim().startsWith('{')).map(JSON.parse);
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});

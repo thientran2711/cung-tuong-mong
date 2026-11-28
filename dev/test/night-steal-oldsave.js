@@ -1,7 +1,7 @@
 /* review/night-steal: OLD save (previous main build) → NEW build. Old build plays 3 weeks and saves slot 2; the new build loads it and plays
    6 weeks with the steal pass forced on (every flip tries), checking no page errors and that the night still resolves.
    usage: node dev/test/night-steal-oldsave.js <old index.html> <new index.html> */
-const {chromium}=require('playwright');const path=require('path');const [,,OLD,NEW]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const [,,OLD,NEW]=process.argv;
 (async()=>{const b=await chromium.launch();const c=await b.newContext({viewport:{width:1000,height:755}});const p=await c.newPage();const errs=[];
  p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.route(/\.(webp|png|jpg|jpeg|mp3|ogg|mp4|webm)(\?.*)?$/,r=>r.abort());
  const boot=async u=>{await p.goto('file://'+path.resolve(u),{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:180000});await p.waitForTimeout(2500)};

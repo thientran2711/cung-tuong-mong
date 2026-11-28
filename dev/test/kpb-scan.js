@@ -5,7 +5,7 @@
    FAIL (exit 1) when any case has: .kpb shorter than its content while NOT scrolling inside itself (.kdtx/.kpmain scroll), or any visible intro text overlapping
    the .opts rectangle, or text of the intro out of the dialog.
    usage: node dev/test/kpb-scan.js <page URL (dev/index.html or built root)> <outfile.json> [WxH@dpr,...] [maxPend]   → table per viewport + exit code. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES,MAXP]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT,SIZES,MAXP]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VPS=(SIZES||"755x1000@2,1180x820@2,1366x1024@2,412x1058@2,390x844@3").split(",");
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});const R={};let bad=0;
  for(const sz of VPS){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const errs=[];

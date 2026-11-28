@@ -2,7 +2,7 @@
    win/draw/loss), the finale reward line (every rank tier), the strike-back line (every carrier), the Mệnh truyện «Phụ tuyến» pane and gloss:
    no %, no machine marks (T3/1, {token}, =>, undefined, NaN), no foreign or modern words (VANPHONG §3), no "…" cut text.
    usage: node dev/test/nroadhp-vp.js <url> */
-const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.0.1:8731/index.html';
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const URL=process.argv[2]||'http://127.0.0.1:8731/index.html';
 (async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort());
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof nhHp==='function',null,{timeout:120000});await p.waitForTimeout(1500);

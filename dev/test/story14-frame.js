@@ -4,7 +4,7 @@
    2) old saves: a save from the main build (before this branch) and a save of this build with the frame off load, keep their old frame
       (no S.st.f14) and play on.
    usage: NODE_PATH=$(npm root -g) node dev/test/story14-frame.js <url> <main url> [steps] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const [,,URL,MAIN,NS]=process.argv;const N=+NS||40;
 const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c&&x!==undefined)console.error('FAIL',n,JSON.stringify(x).slice(0,600))};

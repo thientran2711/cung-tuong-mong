@@ -14,7 +14,7 @@
      longTasks200     main-thread tasks >200 ms (PerformanceObserver 'longtask') while playing the <turns> buổi; longTaskMaxMs = the worst one
    Budget file (dev/test/perf-budget.json): {default:{metric:max,...}, <device>:{...}}; any metric over its max = FAIL, exit code 1.
    Needs: google-chrome via playwright, the picture CDN reachable (HTTPS_PROXY is used when set). ONE Chromium at a time. */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const D=require('./lib/device');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');const D=require('./lib/device');
 const A=process.argv.slice(2);const opt=(k,d)=>{const i=A.indexOf('--'+k);return i<0?d:(A[i+1]===undefined||A[i+1].startsWith('--')?true:A[i+1])};
 const DEVS=String(opt('devices','fold,iphone14,ipadAir')).split(',');const TURNS=+opt('turns',10),MBIT=+opt('mbit',20),CPU=+opt('cpu',4),TMO=+opt('timeout',900)*1000;
 const BUDGET=JSON.parse(fs.readFileSync(opt('budget',path.join(__dirname,'perf-budget.json')),'utf8'));const OUT=opt('out',null);const WARM=!A.includes('--no-warm');

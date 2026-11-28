@@ -12,7 +12,7 @@
    palace person; three weeks advance for both (A's week = kcEndTurn through the co-op week path), A's home life (S.kc, family) survives
    every merged week; A enters the palace (kcEnter) → after the next merged week B sees A as a palace person and gets "Hảo hữu nhập cung";
    no page errors. Built from dev/test/coop-e2e.js (same helpers). */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
+const {chromium}=require('../lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
 const {serve,BASE}=require('../coop-serve.js');
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../../shots/coop-kcco'));fs.mkdirSync(OUT,{recursive:true});
 const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';

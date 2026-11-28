@@ -2,7 +2,7 @@
    usage: bash dev/site/build_site.sh && git show origin/main:index.html > /tmp/old.html && node dev/test/norep-oldsave.js /tmp/old.html
    Old build: 3 lives (slots 1–3), each plays a buổi and marks real j68 keys (e68Mark) as the old code does. New build: ctm-nr == ctm-e68h
    (+ "j68:" family), every j68 template's cross-life count is the same as the old e68Past, each save loads + plays a buổi, 0 page errors. */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const OLD=process.argv[2];let VER='old';
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p.startsWith('/__ver/')){VER=p.slice(7);return r.end(VER)}
  if(p==='/'||p==='/index.html'){r.setHeader('Content-Type','text/html; charset=utf-8');return fs.createReadStream(VER==='old'?OLD:path.join(ROOT,'index.html')).pipe(r)}

@@ -4,7 +4,7 @@
    is compared with a brand-new life on a fresh page. Leftover = a store that is non-empty / bigger after the old life than on any fresh start.
    Also: no healing / veil line in the new life's logs, S.vl is never a non-veil object, old saves (voice memory in S.vl) load with no leftover.
    usage: node dev/test/newlife-leak.js [url | path in this worktree, e.g. dev/index.html]   (default: the built index.html) → lines + "FAIL n" */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs'),path=require('path'),http=require('http');
 const ROOT=path.resolve(__dirname,'../..');
 /* top-level declarations of the built game (classic script: readable by name through eval) */
 const SRC=fs.readFileSync(path.join(ROOT,'dev/build/all.js'),'utf8');const NAMES=new Set();

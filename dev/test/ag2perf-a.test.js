@@ -2,7 +2,7 @@
    (slot.rc: day / ill / rain / touch / need / new / done / urge = she picked again; keep = she kept her schedule row, no deed), no re-decider
    without a cause, at most BAL.ag.day.redecideCap re-deciders per buổi, a kept slot has no deed; redecideCap 0 = old path (no rc).
    usage: [CAP=8] node dev/test/ag2perf-a.test.js dev/index.html [N=40] [seed=1]   (the shipped default is 0 = off; the test switches A on with CAP) */
-const {chromium}=require('playwright');const [,,F,N0,SD]=process.argv;const N=+N0||40,SEED=+SD||1;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,F,N0,SD]=process.argv;const N=+N0||40,SEED=+SD||1;
 (async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
 await p.route(u=>/^https?:/.test(u.href),r=>r.abort());
 await p.addInitScript(s=>{let x=s;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648}},SEED);

@@ -4,7 +4,7 @@
    name gives the same words; (b) her accept card for a far asker shows the walk as a plain «N khắc» in TỐN; (c) no «không» cost.
    usage: node dev/test/pm-wordmode.test.js [dev/index.html] → exit 1 on FAIL */
 const path=require('path');const HTML=process.argv[2]||'dev/index.html';
-(async()=>{const {chromium}=require('playwright');const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
+(async()=>{const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  const r=await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;window.kitNotice=undefined;window.ptOn=()=>false;
   const V=liveRivals(true).filter(x=>x!==S&&!x.out&&!x.coop);const far=V.filter(x=>!together(S,x));const rows=[];

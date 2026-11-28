@@ -2,7 +2,7 @@
    PEND.cyrep Kính sự phòng ask) for speakers of different Tính tình, on Fold 755x1000 and iPad 1180x820 (dev/test/lib/device.js, built root index.html).
    (a stranger greet card with one reply — e.g. a Kiêu ngạo higher-rank who does not give her name — closes itself in this harness; its text is checked by voice-trait.js)
    usage: bash dev/site/build_site.sh && node dev/test/voice-trait-shots.js <outdir>   — shots stay OUTSIDE the repo; look at every one. */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs');
 const OUT=process.argv[2]||'/tmp/vt-shots';fs.mkdirSync(OUT,{recursive:true});let bad=0;
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();
  for(const dev of ['fold','ipadAir']){const dd=D.DEVICES[dev];const tag=dd.w+'x'+dd.h;

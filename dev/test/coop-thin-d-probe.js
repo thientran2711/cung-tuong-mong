@@ -8,7 +8,7 @@
    host Fold 686x880 + guest iPad 1180x820 (swap=1: iPad hosts, Fold joins). Needs a Worker with part A (e.g. local `wrangler dev`).
    usage: python3 dev/build/assemble.py && node dev/test/coop-thin-d.js <workerURL> [level=1] [swap=0]   (SHOTS=<dir outside git> for shots)
    Both seats set the test-only flag localStorage ctm-thin-part-4=1 (contract C1: part B not on main yet). */
-const {chromium}=require('playwright');const {cardShot}=require('./coop-thin-d-kit.js');const {serve,BASE}=require('./coop-serve.js');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {cardShot}=require('./coop-thin-d-kit.js');const {serve,BASE}=require('./coop-serve.js');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||0);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+(c?JSON.stringify(x).slice(0,400):JSON.stringify(x.paths?{paths:x.paths,dels:x.dels,err:x.err}:x).slice(0,3000)):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

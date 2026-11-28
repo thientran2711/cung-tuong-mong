@@ -2,7 +2,7 @@
    robe re-issue roads (robbery card + Tư trang → Việc) · NPC fallback robe · old save loads.
    usage: node dev/test/sw-serve.js <port> <repo root>  (other shell);  node dev/test/econ-items.js http://127.0.0.1:<port>/ <outdir> [WxH@dpr,...] [save.json]
    Exit 1 on a miss. Screenshots: chest, pilfer dialog, re-issue dialog per size. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES,SAVE]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT,SIZES,SAVE]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 const clean=p=>p.evaluate(()=>{try{const dw=document.getElementById('dawn');if(dw){dw.classList.remove('on');dw.hidden=true}document.querySelectorAll('[id^=kroul],.kroul-ov,.kroul').forEach(e=>e.remove());KMQ.length=0;document.querySelectorAll('.kmov').forEach(o=>o.remove());kmBusy=false}catch(e){}});
 const dlgCheck=p=>p.evaluate(()=>{const M=document.getElementById('modal');const d=M.querySelector('.dlg');if(M.hidden||!d)return{shown:false};const r=d.getBoundingClientRect();

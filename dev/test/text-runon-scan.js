@@ -3,7 +3,7 @@
    Flagged: RUNON = one block of >= 170 chars that has >= 2 sentence breaks («. » «! » «? » « — » « · ») on the same paragraph, or >= 230 chars with no break at all; ORPHAN = last line of a >= 3-line block is one word.
    Each new flagged text is screenshotted whole-page at once (a dialog is open then). Output: <out>/spots.json + <out>/NN.png; then dev/test/text-scan-pdf.js builds the PDF.
    Changes NO game text or layout. usage: [LIVES=6] [MAXMIN=8] node dev/test/text-runon-scan.js <url> <outdir> */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');
 const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});const LIVES=+(process.env.LIVES||6),MAXMIN=+(process.env.MAXMIN||8);
 const INP=fs.readFileSync(path.join(__dirname,'..','measure','inpage4.js'),'utf8');
 const SCAN=`(()=>{const out=[];const vis=e=>{if(!e.getClientRects().length)return false;const r=e.getBoundingClientRect();if(r.width<40||r.height<8)return false;for(let a=e;a&&a!==document.body;a=a.parentElement){const c=getComputedStyle(a);if(c.display==='none'||c.visibility==='hidden'||+c.opacity===0)return false}return true};

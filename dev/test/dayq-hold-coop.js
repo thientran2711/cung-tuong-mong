@@ -6,7 +6,7 @@
      A1 her «Điểm trang» tap (the card arrives inside the tap's spend) × S1.
    Then one merged week on both seats (the room still turns), 0 page errors.
    usage: python3 dev/build/assemble.py && node dev/test/dayq-hold-coop.js [workerURL] [swap=0] */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const SWAP=+(process.argv[3]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

@@ -88,6 +88,13 @@ for r in rows:
     elif r["title"] in OLD:err(i+" title copies an old template: "+r["title"])
     ask=r.get("ask","")
     if not ask or not re.match(r'^[“"]',ask):err(i+" ask must be A's words in “ ”")
+    # dlg review r1 F1/F2 (law 11): the Hoàng thượng / Thái hậu / Hoàng hậu never types «ta»/«ngươi» (the voice core gives trẫm / ai gia / bổn cung and nàng / ái phi …) nor speaks of her own title
+    _k=(r.get("req") or {}).get("kind")
+    if _k in ("hh","th","emp"):
+        for _m in re.finditer(r'(?<![\wÀ-ỹ])(ta|Ta|ngươi|Ngươi)(?![\wÀ-ỹ])',ask):
+            _pw=re.search(r'([\wÀ-ỹ]+)\s+$',ask[:_m.start()])
+            if not (_pw and _pw.group(1).lower() in ("nàng","hắn","chúng","người","hai","các","nhà","em")):err(i+f" ask: typed «{_m.group(1)}» in the {_k}'s mouth — use {{xung}}/{{goi}}")
+        if re.search({"hh":"Hoàng hậu","th":"Thái hậu","emp":"Hoàng thượng"}[_k],ask):err(i+f" ask: the {_k} speaks of her/his own title in the third person")
     o=r.get("object","MISSING");ho=isinstance(o,dict)
     if o=="MISSING":err(i+" object missing (use null for a pure errand)")
     elif ho:

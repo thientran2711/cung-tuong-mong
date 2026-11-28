@@ -6,7 +6,7 @@
    the khắc spent = travel() (BAL.walk, one core), the host's world where of her = her stored place · P2 visits between the two players both
    directions (visitPal) + the host's stage sees her · P3 talk at a place (popMsg / khắc back) · P4 the greeting gate (local card → accEtqGo
    intent, her result card, none on the host) · P5 decision cards stay local (no intent, nothing written) · P8 no local walk, no page errors · P10 net loss: her walk frame or the host's answer dies on a dead socket → kept pending through the reconnect, sent again, run ONCE (DONE), khắc paid once. */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||7);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

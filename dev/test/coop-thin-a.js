@@ -6,7 +6,7 @@
    thinLevel 1 (needs a Worker with part A, e.g. local `wrangler dev`): also the snap → guest view, delta, a version gap → snapreq, and
      a guest intent "probe" run by the host in her context.
    swap=1: the iPad creates the room (host) and the Fold joins (guest) — the coop-e2e roles swapped. */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||0);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+(c?JSON.stringify(x).slice(0,400):JSON.stringify(x.paths?{paths:x.paths,dels:x.dels,err:x.err}:x).slice(0,3000)):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

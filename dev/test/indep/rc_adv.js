@@ -2,7 +2,7 @@
    usage: node rc_adv.js <url> <out.json>
    Each scenario drives the game through its own functions, then runs __IA.check (ia_hook.js) plus direct asserts.
    A "bad" list per scenario; empty = PASS. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('../lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const [,,URL='http://127.0.0.1:8971/t.html',OUT='rc_adv.json']=process.argv;const HOOK=fs.readFileSync(path.join(__dirname,'ia_hook.js'),'utf8');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000}});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.route(/\.(webp|png|jpg|mp3|ogg|m4a)$/,r=>r.abort());const res={};

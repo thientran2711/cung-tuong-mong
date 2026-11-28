@@ -1,7 +1,7 @@
 /* review/steal-minigame × review/balance-chain night (jnf, OD 16/11 22:45Z FINAL): the rung inside the ONE flip-choice resolve.
    Harness (T.setup / T.only / T.commitA / T.drain) copied from balance-chain dev/test/night-multi.js. Runs only on a build that has jnf
    (main today: prints SKIP). usage: node dev/test/steal-mg-nf.js <url> */
-const {chromium}=require('playwright');const [,,URL]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},reducedMotion:'reduce',serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(2000);

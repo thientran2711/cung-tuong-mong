@@ -2,7 +2,7 @@
    Boot = coop-thin-f1.js (host Fold, guest iPad, live Worker). Each player puts on hoatai + giayhoa through the real wear action (itemAct 'wear' = Tư trang «Đeo»,
    co-op relayed reg8 wear); after one merged week the OTHER phone's friend entry has both pieces worn (p.inv e.w=1) and its person-card wear row (dressSlots) shows them.
    usage: python3 dev/build/assemble.py && node dev/test/wear-slots-coop.js [workerURL]. Exit 1 on a miss. */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||6);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

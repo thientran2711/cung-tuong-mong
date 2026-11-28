@@ -7,7 +7,7 @@
      frac    a number with a decimal part in a stat / relation context
      box     a small avatar (.md.kfc) with a ring / background box behind the frame
    Prints one JSON line {counts, samples}. Exit 0 always (it is a scan: compare before/after). */
-const {chromium}=require('playwright');const [,,URL,SZ]=process.argv;const [W,H]=(SZ||'1180x820').split('x').map(Number);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,SZ]=process.argv;const [W,H]=(SZ||'1180x820').split('x').map(Number);
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:W,height:H},serviceWorkers:'block'})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
  await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;document.getElementById('title').hidden=true;

@@ -3,7 +3,7 @@
    Each buổi: K khắc steps = spend(1) (THE khắc step: j-chain spend(1), one khắc of her time through every wrapper (the khắc clock: views, j95 final, agWatch …) timed one by one), then
    placeWhere + agFlush + nextBuoi timed as the buổi step. Prints medians and means.
    usage: python3 dev/build/assemble.py && [PRE='js run before start'] node dev/test/ag2perf-probe.js dev/index.html <N buổi> <seed> [cpu=4] [khắc per buổi=3] */
-const {chromium}=require('playwright');const [,,F,N0,SD,C0,K0]=process.argv;const N=+N0||40,SEED=+SD||1,CPU=+(C0||4),K=+(K0||3);
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,F,N0,SD,C0,K0]=process.argv;const N=+N0||40,SEED=+SD||1,CPU=+(C0||4),K=+(K0||3);
 (async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
 await p.route(u=>/^https?:/.test(u.href),r=>r.abort());
 await p.addInitScript(s=>{let x=s;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648}},SEED);

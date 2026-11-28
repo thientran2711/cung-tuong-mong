@@ -1,7 +1,7 @@
 /* review/placeholder-pics (KIT §59): at one size — an old save (written by the old build) loads in the new build; the Hành sự deck renders,
    every act card shows a picture (own or placeholder, data-kph); an event dialog with no own picture shows ph-l-*/ph-p-*/ph-w-*; no page errors,
    no horizontal overflow. usage: node dev/test/placeholder-pics.js <old build url> <new build url> <WxH@dpr> [shot.jpg] */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,OLD,NEW,SIZE,SHOT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});const [wh,dpr]=(SIZE||"755x1000@1").split("@");const [W,H]=wh.split("x").map(Number);
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(dpr||1),hasTouch:true,isMobile:W<1000,serviceWorkers:'block',reducedMotion:'reduce'});

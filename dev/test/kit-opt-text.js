@@ -1,7 +1,7 @@
 /* kit-opt-text (review/kit-opt-text, KP14, KIT §13.13) — node dev/test/kit-opt-text.js [dev/index.html]
    Fold 755x1000: an option column narrower than 340 px (class k3tight, set by jk3 kitOptLayout) gives its width to the TEXT: the card picture is 62 px wide, the text column >= 205 px,
    the cards stay in one column. Plays turns (seeded) until such a modal shows. */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000}})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));

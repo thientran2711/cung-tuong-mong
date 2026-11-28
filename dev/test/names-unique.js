@@ -7,7 +7,7 @@
      regMiss  = a held name missing from the registry S.nmReg;
    plus a stress pass of nmNew (2000 names per kind on one save) and an old-save migration case (duplicates + Vietnamese names planted,
    references in texts). Exit 1 on any failure. Prints 10 sample names per role. */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const YEARS=+process.argv[2]||60,LIVES=+process.argv[3]||6;const GAME=process.env.GAME||path.join(__dirname,'..','index.html');
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1180,height:820}})).newPage();p.setDefaultTimeout(3600000);
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.route(u=>!/^file:/.test(String(u)),r=>r.abort());await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());

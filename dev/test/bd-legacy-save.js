@@ -2,7 +2,7 @@
    1) a bd life on the OLD premise bd_hoa (alias chapters = nc_su) saved mid-road (.6 running) loads in a fresh page and plays on to bd_hoa_11;
    2) new bd lives roll ONLY the new roads (bd_san / bd_soi / bd_tuyet / bd_hen that are full), never an old premise.
    usage: node dev/test/bd-legacy-save.js <url of dev/index.html> [new lives=8] */
-const {chromium}=require('playwright');const [,,URL,NL]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,NL]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];let fail=0;const chk=(n,c,x)=>{if(!c)fail++;console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,600))};
  const boot=async()=>{const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
   p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.goto(URL,{timeout:0});

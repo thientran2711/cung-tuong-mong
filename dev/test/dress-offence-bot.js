@@ -3,7 +3,7 @@
    Reported per 100 days (a month = 30 days). No numbers of its own: the odds, motive gate and cooldowns are BAL.lux.xx / WD (jwd92b).
    usage: [FAST=1 [LAVISH=1]] node dev/test/dress-offence-bot.js <url-or-file> [lives=4] [months=12] [seed=1]
    FAST=1: the player only answers dialogs and moves on (Sang buổi) and every NPC plays as an agent; LAVISH=1: she also wears her three most lavish within-rank pieces. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const [,,U,NL,NM,SEED]=process.argv;const URL=/^(https?|file):/.test(U||"")?U:'file://'+path.resolve(U||path.join(__dirname,'..','index.html'));
 const LIVES=+NL||4,MONTHS=+NM||12,seed=+SEED||1,FAST=process.env.FAST==='1',LAVISH=process.env.LAVISH==='1';
 const INP=fs.readFileSync(path.join(__dirname,'..','measure','inpage4.js'),'utf8');

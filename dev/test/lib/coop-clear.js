@@ -17,10 +17,13 @@
         under it → the guest sat on «Chạm để tiếp» for ever (the ending + rebirth wait for the scene to end)
      5. the steal mini-game window kg82 (jsmg, night bundle): «Thôi, không chơi» #kg82skip / the result frame's kit ✕ — was pasted in coop-e2e,
         cn-force, coop-night only; the other bots sat on its intro for ever (x.st "mg": pool-face / room-faces / emo-seat / guest-names r3)
+     0. (first) a SIDE-LINE DIALOGUE SCENE (jdlgs.js, KIT §95 kitDialogue) plays before a side-line card and hides it until read: a player taps
+        the scene (one tap finishes the typing line, the next moves on; after the last line the card shows). While its figures load
+        (DLGS.playing, no DLGS.cur yet) the bot waits. Count: window.__dlgsTapN. The tap is lib/dlgs-off.js TAP (one copy).                       (review/sideline-dlg 24/11: coop-e2e 129/143 before)
    tap(o)  → 'x' when it tapped something, '' otherwise (page closed / navigating = '').
    first(o, fn [, arg]) → 'x' after a tap, else the bot's own step o.p.evaluate(fn, arg).
    Count: window.__kfocN = taps of 3 + 4 (coop-room-faces prints it). */
-const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
+const TAP0=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
  const rs=document.querySelector('#kroul .krskip');if(rs&&rs.offsetParent!==null){rs.click();return'x'}
  /* 1a. the roulette's picture wait (jk2b kitRoulette: ≤ 8 s cover #kroulw «Tranh luân hồi đang trải…», no button on it): a player waits — 'x' keeps
     the bot's clear() polling, so the roulette's «Bỏ qua» is tapped the moment it shows (coop-title-leave guest ☰ race, SANGBUOI r4 25/11) */
@@ -39,6 +42,9 @@ const TAP=()=>{const vis=x=>!!x&&x.offsetParent!==null&&!x.disabled;
     — never under a full-screen scene (a player touches the scene first) */
  if(![...document.querySelectorAll('.kmov')].some(x=>!x.classList.contains('km-out')&&getComputedStyle(x).display!=='none'&&getComputedStyle(x).visibility!=='hidden')){const kg=[...document.querySelectorAll('#kg82skip')].find(x=>x.offsetParent!==null&&!x.disabled&&!x.closest('[hidden]'))||(typeof KG82!=='undefined'&&KG82.phase==='result'?[...document.querySelectorAll('#ov .kit-x[data-kitx=kgback],#ov .kit-x[data-kitx=ov]')].find(x=>x.offsetParent!==null):null);if(kg){kg.click();return'x'}}
  return''};
+/* step 0 is THE shared side-line scene tap of lib/dlgs-off.js (one copy), run first in the same in-page call */
+const DLG=require('./dlgs-off.js');
+const TAP=eval('(()=>('+DLG.TAP+')()||('+TAP0+')())');
 async function tap(o){try{return await o.p.evaluate(TAP)}catch(e){return''}}
 /* a kit selection scene covers the game (body.kscn-on): a player can only touch the scene — the bot's own step (cards, #next, tabs) waits (2b) */
 /* RV-173: body.kscn-on is ALSO set by the kit STAGE dialog (jkstage, Bundle 1: #modal.kstg is the card itself) — only a real scene layer (.kscn) covers the game */

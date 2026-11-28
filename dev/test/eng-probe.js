@@ -1,7 +1,7 @@
 /* eng-probe (review ag-later #2): ENGINE-only cost per buổi. Seeded Math.random, render/showModal stubbed, bot life; N buổi via placeWhere + agFlush + nextBuoi (Q cleared);
    prints ms per buổi + writes CDP inclusive/self ms of the top functions. Compare a branch with live main, alternating runs, same seeds (e.g. 1 2 3, N 80 and 160).
    usage: python3 dev/build/assemble.py && node dev/test/eng-probe.js dev/index.html <N> <seed> <out.json>   (perf rule: > +10 % vs live = FAIL) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,F,N0,SD,OUT]=process.argv;const N=+N0||120,SEED=+SD||1;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const [,,F,N0,SD,OUT]=process.argv;const N=+N0||120,SEED=+SD||1;
 (async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
 await p.route(u=>/^https?:/.test(u.href),r=>r.abort());
 await p.addInitScript(s=>{let x=s;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648}},SEED);

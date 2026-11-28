@@ -3,7 +3,7 @@
    resolves on that seat only (tip paid, goods restored), the other seat untouched, the guest's new bạc held by the host (one world); a month
    without a cut has options or says why. Setup copied from econ-tamco-coop.js.
    usage: python3 dev/build/assemble.py && node dev/test/bongloc-coop.js [workerURL] [level=6]   (SHOTS=<dir outside git>) */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||6);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

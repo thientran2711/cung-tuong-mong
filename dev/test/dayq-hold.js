@@ -11,7 +11,7 @@
    Per case: while the activity is open (0.4 s and 2 s) no card is painted (#modal hidden, no jdfv encounter) and no new scene starts;
    after she finishes it the card is on screen (centre card or the stage scene) / the scene runs. 0 page errors.
    usage: node dev/test/dayq-hold.js <baseURL> <path> [shotDir]   e.g. http://127.0.0.1:8771 dev/index.html /home/user/wt/dayq2-s/hold */
-const {chromium}=require('playwright');const fs=require('fs');const [,,BASE,PATH,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');const fs=require('fs');const [,,BASE,PATH,OUT]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VP=[[755,1000,2],[1180,820,2]];
 const NEWLIFE=`(function(){localStorage.removeItem('hclh-opt');SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){window.__forceOrigin='thd';window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv()))break}
  quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;return S.name})()`;

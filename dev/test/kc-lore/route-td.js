@@ -6,7 +6,7 @@
    Sơ tuyển / Phúc tuyển / Điện tuyển (the court's keep roll forced to "kept" with __kcKeep) -> she is a consort: isKc() false, rank 0..2,
    in consorts(), palace tabs back, her figure is no longer the home dress, carry-over (Danh ≤ 30, Bạc ≤ 400, maid, intel) -> 4 palace
    buổi -> save + reload the slot -> still the same palace life. Prints one JSON report; exit 1 on any fail. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('../lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');
 const A=process.argv.slice(2);const URL=A[0];const OUT=A[1]||'.';fs.mkdirSync(OUT,{recursive:true});
 const opt=k=>{const a=A.find(x=>x.startsWith('--'+k+'='));return a?a.split('=')[1]:null};
 const ORG=opt('origin')||'tt';const SHOTS=opt('shots')||'few';

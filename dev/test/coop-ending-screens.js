@@ -1,7 +1,7 @@
 /* coop-ending-screens (review/ending-screens, KIT §91.6): in a co-op room BOTH seats end their life → each sees ITS OWN full-screen ending screen
    (kes-t-death with her own name), «Chuyển kiếp» works on both, nobody is stuck (both play the next life, the week advances). Live Worker, like coop-e2e.
    usage: python3 dev/build/assemble.py && node dev/test/coop-ending-screens.js */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,300):''))};
 /* clear = coop-e2e clear(): km overlays, «Nhận thân phận», the dialog's main button; it never presses an ending screen (that is the check) */
 const clear=async(p,n=25)=>{for(let i=0;i<n;i++){const r=await p.evaluate(()=>{const ke=[...document.querySelectorAll('.kmov .kmend')].find(x=>x.offsetParent!==null&&!x.disabled);if(ke){ke.click();return'x'}

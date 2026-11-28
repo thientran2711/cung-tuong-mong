@@ -3,7 +3,7 @@
    same dialog BEFORE (kitHint alone) and AFTER (jevb evbDedup). Writes dev/review/hint-dedup.md. Exit 1 if any dialog still has duplicates
    that a clearer level could have told apart.
    usage: NODE_PATH=$(npm root -g) node dev/test/hint-dedup.js <url> [turns=120] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const [,,URL,TN]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');const [,,URL,TN]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(2000);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});

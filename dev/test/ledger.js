@@ -7,7 +7,7 @@
    5 conception = conceiveCh × BAL.nt.concF as a FLOAT while the ledger runs (BAL.nt.on false → the old whole-% chance)
    6 a real day (tối → "Sang ngày mới"): ledger rolled at the commit and settled once; summons odds read BAL.ag.emp.summon (AG2, one core)
    usage: node dev/test/ledger.js <url>   (exit 0 = all pass) */
-const {chromium}=require('playwright');const [,,URL]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},reducedMotion:'reduce',serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof ldRoll==='function',null,{timeout:0});await p.waitForTimeout(1500);

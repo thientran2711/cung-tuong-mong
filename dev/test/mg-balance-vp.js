@@ -2,7 +2,7 @@
    previous main build; no page errors, no horizontal overflow; the intro shows the "Độ khó" tier row (startContest + playArt) and the
    result card. Games are finished by the skilled balance bot under the virtual clock (dev/measure/mg-bots.js).
    usage: node dev/test/mg-balance-vp.js <oldBuildUrl> <newBuildUrl> [sizes comma, default the 6]  */
-const {chromium}=require('playwright');const [,,OLD,NEW,SZS,KS]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,OLD,NEW,SZS,KS]=process.argv;
 const SIZES=(SZS||'755x1000@2,1000x755@1,1180x820@2,1366x1024@2,844x390@2,390x844@2').split(',');
 
 const BOT={rt:40,px:.01,think:250,slip:0,thinkD:300,slipD:0,timing:'dan,ban,duho,hat,den,dauho,banh,td_dung,td_ngon'};

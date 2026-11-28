@@ -5,7 +5,7 @@
    (2) Khó / Dễ / Vừa switch the knobs (base × m + a) and her starting bạc; (3) accepted → kept after render, week end, save + reload;
    (4) an old save without S.diff loads as Vừa with the base knobs; (5) her own card shows the chip "Kiếp này: Khó";
    (6) death: end card row "Độ khó", Khó Phúc duyên ×1.5 line, Sổ luân hồi line; (7) no page errors. */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const args=process.argv.slice(2);const URL0=args[0];const VPS=(args.slice(1).length?args.slice(1):['755x1000','1000x755','1180x820','1366x1024','844x390','390x844']).map(s=>s.split('x').map(Number));
 const SHOT=process.env.SHOT||'';if(SHOT)require('fs').mkdirSync(SHOT,{recursive:true});
 /* same rounding as jdiff: a whole-number base stays whole */

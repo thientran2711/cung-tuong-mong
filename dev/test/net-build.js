@@ -6,7 +6,7 @@
    below band 3; a proud and a gentle holder get different bands for the same danger; (6) static: no typed relation gate left (net-scan);
    net-build-rv fixes: (8) evidence acts open for a slow-«repay» player with 1 proof; (9) one forgiveness rule for every apology road;
    (10) net-scan-rv: 0 relation gates off netTh, no evG gate on a nết level; (11) netTh / band memo = the computed values. */
-const {chromium}=require('playwright');const path=require('path');const {execSync}=require('child_process');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const {execSync}=require('child_process');
 const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
 (async()=>{const b=await chromium.launch();const page=await (await b.newContext({viewport:{width:755,height:1000}})).newPage();const errs=[];
  page.on('pageerror',e=>errs.push(String(e.message).slice(0,160)));page.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|Fetch API cannot load/.test(m.text()))errs.push('console: '+m.text().slice(0,160))});

@@ -8,7 +8,7 @@
    6 no automatic Tai mắt: new game = 0 for everyone (origins / NPC birth give none); the j7 volunteer is a real willing servant
    7 old save: a stored S.mat N → at most N placed real spies, only people whose tmOdds ≥ vol.min (no loyal one auto-turned); NPC stored mat dropped
    usage: node dev/test/ag-taimat2.test.js [dev/index.html] → exit 1 on any FAIL */
-const {chromium}=require('playwright');const path=require('path');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

@@ -10,7 +10,7 @@
    usage: node dev/test/coop-host-lag-scan.js [lives=4] [months=14]
    A LISTER (it finds the family members; it runs no co-op room, so the relay of jcoophl is not in it): exit 0 with the table. The GATE is
    dev/test/coop-e2e.js 'the same world on both seats' (two seats, the LIVE Worker) + COOP_HL_FORCE=1 (forced members (a) and (b)). */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');
 const LIVES=+process.argv[2]||4,MONTHS=+process.argv[3]||14;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000}});await serve(ctx);
  const p=await ctx.newPage();p.setDefaultTimeout(600000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

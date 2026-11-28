@@ -15,7 +15,7 @@
                      ctm-coop.victoria-tntt.workers.dev). Deploy B mid-buổi → both: no reload, chip. Both press Qua buổi (the room's sync
                      point) → both reopen on B and rejoin by themselves: same room, same seat, same week / buổi, same lives, each still
                      sees the other. Then deploy A: host chip → Mở bản mới → guest card → Cùng mở → both on A, same room and buổi. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,BASE,OUT,SC]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 const R={scenario:SC},errs=[],res=[];

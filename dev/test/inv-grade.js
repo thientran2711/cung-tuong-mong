@@ -1,7 +1,7 @@
 /* Tư trang: grade ground+frame on item slots, "Đang mang" equipment slots (kitEquipSlots), act-card rows never clipped (all panel tabs).
    usage: node dev/test/inv-grade.js <baseURL> <W>x<H>@dpr <outdir> <tag> [oldsave.json]
    Writes <tag>-inv-grades, inv-eqpick, inv-worn, inv-item, inv-scrolled (+ oldsave-inv). Prints JSON audit. */
-const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off',require('./lib/pw-roulette'));/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce'});
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message));

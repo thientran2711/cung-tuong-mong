@@ -7,7 +7,7 @@
    sneak), Soát rương (inspect), the robber (ilRob), Kỳ ngộ «Ngọc rơi trên lối» / «Của mình tìm lại» for NPC finders (npcPass) and for her
    (both card roads), a stale Kỳ ngộ card answered after the piece moved on, an owner who dies (census → lostReturn / Nội vụ phủ).
    usage: python3 dev/build/assemble.py && node dev/test/lost-one-home-scan.js [dev/index.html] [tuần=108] [seed]   → exit 1 on FAIL or page error */
-const path=require('path');const {chromium}=require('playwright');
+const path=require('path');const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */
 const HTML=process.argv[2]||'dev/index.html';const NT=+process.argv[3]||108;const SEED=+process.argv[4]||20261121;let fail=0;const ck=(n,c,x)=>{console.log((c?'ok  ':'FAIL')+' '+n+(x!==undefined?' · '+JSON.stringify(x).slice(0,1500):''));if(!c)fail++};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.route(u=>/^https?:/.test(u.href),r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});

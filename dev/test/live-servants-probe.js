@@ -2,7 +2,7 @@
    (a) ONE maid's day (a consort's close maid + one of HER OWN servants): place / act / target / reason per khắc, (b) the record's reasons:
    empty / filler counts by kind, (c) servants: share of khắc away from their palace, retinue sizes by mistress rank, page errors.
    usage: python3 dev/build/assemble.py && [ROAD=maid] node dev/test/live-servants-probe.js <index.html> [N buổi=12] [seed=1] [--json] */
-const {chromium}=require('playwright');const A=process.argv.filter(x=>x!=='--json');const [,,F,N0,SD]=A;const N=+N0||12,SEED=+SD||1,JS=process.argv.includes('--json');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const A=process.argv.filter(x=>x!=='--json');const [,,F,N0,SD]=A;const N=+N0||12,SEED=+SD||1,JS=process.argv.includes('--json');
 (async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
 await p.route(u=>/^https?:/.test(u.href),r=>r.abort());
 await p.addInitScript(s=>{let x=s;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648}},SEED);

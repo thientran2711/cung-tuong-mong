@@ -5,7 +5,7 @@
    The room is a local stub (no Worker): COOPW.on + base + COOP.state open/peer online, seat a (host), COOP.send recorded; after each week end
    the stub "merges" (CW.pend=false). The real two-seat room is coop-steal.js / coop-night.js / coop-e2e.js.
    usage: node dev/test/night-coop-park.js <url>   (exit 0 = all pass) */
-const {chromium}=require('playwright');const [,,URL]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},reducedMotion:'reduce',serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.route(/\.(webp|png|jpg|jpeg|mp3|ogg|mp4|webm)(\?.*)?$/,r=>r.abort());

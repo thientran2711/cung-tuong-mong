@@ -7,7 +7,7 @@
       get no reveal / reward card, and no raw key reaches the page (one behaviour: an unknown key is inert and never shown).
    2) plain soak (no injection) for comparison. Exit 1 on any page error / thrown month.
    usage: python3 dev/build/assemble.py && node dev/test/it-key-guard.js [lives=4] [months=120]   (GAME=path to dev/index.html; ONLYUNK=1: unknown keys only, no junk pieces) */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const GAME=process.env.GAME||path.join(__dirname,'..','index.html');const LIVES=+process.argv[2]||4,T=+process.argv[3]||120;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:1});const p=await ctx.newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.route(u=>!/^file:/.test(String(u)),r=>r.abort());await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());

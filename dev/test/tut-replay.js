@@ -1,6 +1,6 @@
 /* "Xem lại lời dặn" replay stress (jtut): N times from the ☰ menu (title screen over a live kiếp); each time the menu modal must be closed and tour step 1 visible.
    usage: node dev/test/tut-replay.js <baseURL> <W>x<H>@dpr [N=20] ; exit 1 on any miss */
-const {chromium}=require('./lib/pw-roulette');
+const {chromium}=require('./lib/dlgs-off').pw('off',require('./lib/pw-roulette'));/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,BASE,SZ,NN]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const N=+(NN||20);
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),serviceWorkers:'block',reducedMotion:'reduce'});

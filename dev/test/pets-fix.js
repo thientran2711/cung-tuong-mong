@@ -5,7 +5,7 @@
    usage: node dev/test/pets-fix.js <base url dir> <W>x<H>@dpr <outdir> [oldBuildPage]
      (<base>/index.html = this build; oldBuildPage = e.g. main.html, an older build in the same dir: makes a save there, loads it here)
    Boot (fixes the old dev/test/pets.js): service workers blocked, window.__nlInner (no Luân hồi), #kload / .krbox / #kroul removed. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,BASE,SZ,OUT,OLD]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('@');const [W,H]=WH.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 const T0=Date.now(),lg=m=>console.error('['+Math.round((Date.now()-T0)/1000)+'s] '+m);const sleep=t=>new Promise(r=>setTimeout(r,t));
 const prox=process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{};

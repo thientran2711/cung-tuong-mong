@@ -4,7 +4,7 @@
    dialog title "Phụ tuyến · Tân quân lập uy · Chương c · Hồi i/n"; the kit hides outcomes (data-khide); joining / switching sides; the
    Mệnh truyện › Triều cục and › Tâm nguyện panes (kit parts only, no horizontal overflow); the outcome per power band; a pending beat
    survives save/load (serQ/deserQ); old saves (no S.ps) get nothing; a co-op guest never moves the court clock. */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const [,,URL0,VP,SHOT]=process.argv;const [W,H]=(VP||'755x1000').split('x').map(Number);
 const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block'});const p=await ctx.newPage();

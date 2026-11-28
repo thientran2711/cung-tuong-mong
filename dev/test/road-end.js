@@ -6,7 +6,7 @@
    - a won ke14 with no Thái tử and a dear son sets him (setHeir); the plan of an OLD f14 life (no eg flag) is unchanged (ms:hau / ms:ke);
    - no page errors.
    usage: node dev/test/road-end.js <url> [lives per case] */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,NL]=process.argv;const NLIV=+NL||2;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JSON.stringify(x).slice(0,900))};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);

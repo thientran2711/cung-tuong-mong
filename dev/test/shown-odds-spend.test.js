@@ -12,7 +12,7 @@
      scout        j21 scout · kmEmp j21/jgift kmEmpAct (weather moves it)   shown = the button's formula
    rolled = the first roll the act's own code makes (side rolls — caught, refuse, confess, belief, punish — forced to "no").
    usage: node dev/test/shown-odds-spend.test.js [dev/index.html] [seed]   (exit 1 on any mismatch; FAILS on live a2ce736a, PASSES here) */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const URL='file://'+path.resolve(process.argv[2]||path.join(__dirname,'../index.html'));const SEED=+(process.argv[3]||1);/* roster seed (crypto too): the same lives every run; sweep with a 2nd arg */
 (async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  p.setDefaultTimeout(240000);await p.route(/^https?:/,r=>r.abort());

@@ -1,7 +1,7 @@
 /* court-rules test (owner 11/15 05:45Z): 1) Hoàng hậu and Hoàng quý phi live ALONE (nobody's house is theirs) — new game, promotion,
    tuyển tú, old save (moved on load with a log line); 2) Thái hậu 51–62 and ≥ Emperor + 18, old save with 43 lifted, portrait band from her age.
    usage: node dev/test/court-rules.js <url of a build at the site root> <W>x<H>@dpr <outdir> <tag> */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',serviceWorkers:'block'});
  const p=await ctx.newPage();p.setDefaultTimeout(300000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

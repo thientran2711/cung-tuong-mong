@@ -1,5 +1,5 @@
 /* dialog-person-3: open EVERY PEND builder, shoot the frames whose title matches RE (Fold 755x1000 + iPad 1180x820), list titles. usage: node dp3-sweep-look.js <index.html url> <outdir> <RE> [max] */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,RE,MX]=process.argv;fs.mkdirSync(OUT,{recursive:true});const MAX=+(MX||12);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT,RE,MX]=process.argv;fs.mkdirSync(OUT,{recursive:true});const MAX=+(MX||12);
 (async()=>{const b=await chromium.launch();
  for(const [W,H,tag] of [[755,1000,'fold'],[1180,820,'ipad']]){
   const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,reducedMotion:'reduce',serviceWorkers:'block'});

@@ -11,7 +11,7 @@
    title element .kti .krt .knr-r .j59t .pcrk); PLAIN = the title is in the text's ink.
    usage: NODE_PATH=$(npm root -g) node dev/test/rank-colour.js <url> <out.json> [WxH] [tuan=6] [shotdir]
    compare: node dev/test/rank-colour.js before … ; node … after … ; python3 dev/test/rank-colour.py before.json after.json */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SZ='755x1000',TN='6',SHOT='']=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT,SZ='755x1000',TN='6',SHOT='']=process.argv;
 const [W,H]=SZ.split('x').map(Number);const sleep=t=>new Promise(r=>setTimeout(r,t));
 const TITLES="Hoàng quý phi|Hoàng hậu|Quý phi|Quý nhân|Thường tại|Đáp ứng|Phế phi|Phi|Tần|Thái tử|Hoàng tử|Công chúa|Thái y|Thị vệ|Ma ma|Chưởng sự cô cô|Cô cô|[Cc]ung nữ thân tín|[Cc]ung nữ thô sử|[Đđ]ại cung nữ|[Cc]ung nữ|[Tt]iểu thái giám|[Tt]ổng quản thái giám|[Tt]ổng quản|[Tt]hái giám|[Nn]ữ quan|[Nn]hũ mẫu|[Nn]hạc sư|[Hh]ọa sư|[Tt]ể tướng|[Tt]hượng thư|[Tt]hị lang|[Tt]ướng quân|[Cc]ông tử";
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:W,height:H}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

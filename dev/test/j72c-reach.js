@@ -5,7 +5,7 @@
    (2) NO-REPEAT: `runs` × `lives` lives, `offers` offers per kiếp drawn exactly as the game draws (q72Cands → q72Choose → q72Offer, which marks
        jnorep), rank climbing 1→5 and the months turning; % of offers in lives 2..n that repeat a template already offered in an earlier life.
        before = BAL.j72c.on false (110 old only); after = 110 old + composed. */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');const ROOT=process.env.CTM_ROOT||path.resolve(__dirname,'../..');/* CTM_ROOT = another build (e.g. LIVE main) for the before column */
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');const ROOT=process.env.CTM_ROOT||path.resolve(__dirname,'../..');/* CTM_ROOT = another build (e.g. LIVE main) for the before column */
 const OFF=+process.argv[2]||80,LIVES=+process.argv[3]||6,RUNS=+process.argv[4]||10;
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});
 (async()=>{await new Promise(r=>srv.listen(0,'127.0.0.1',r));const b=await chromium.launch();const ctx=await D.newDeviceContext(b,'fold',{deviceScaleFactor:1,reducedMotion:'reduce'});

@@ -7,7 +7,7 @@
    SPREAD_BOT=1 (save-year-rollback r2): window.__bot=1 in every page — the jdayq new-day gate / kit scenes / night holds (built after this test)
    no longer stop the bare nextBuoi() calls below; jspread / jqsave / save() do not read __bot. Without it time can stall at buổi 3 (night).
    usage: node dev/test/spread-e2e.js <baseURL> <newPath> <oldPath>     e.g. http://127.0.0.1:PORT dev/index.html .m/old/dev/index.html */
-const {chromium}=require('playwright');const [,,BASE,NEW,OLD]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,BASE,NEW,OLD]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VP=[[755,1000,2],[1000,755,2],[1180,820,2],[1366,1024,2],[844,390,2],[390,844,3]];
 const PLAY=`(async function(n){const shownK={},bad=[];let forced0=SP13.stat.forced;const cap=BAL.spread.cap;
  /* jdayq / kit scenes: a card may wait in Q under a scene or the dawn host (ONE NEW-DAY ORDER) — then the modal is legitimately hidden */

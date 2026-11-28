@@ -7,7 +7,7 @@
    (C) roster.js on the saves of (B): its answers (table + --who) carry no key.
    RAW = a "group:key" token (maid:sweep, srv:askRew, cx2:vent …), an "ag_" token, or an act word that is a bare ASCII identifier (call, empTea).
    Exit 0 when (A)+(B)+(C) find no RAW. */
-const {chromium}=require('playwright');const path=require('path'),fs=require('fs'),cp=require('child_process'),os=require('os');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path'),fs=require('fs'),cp=require('child_process'),os=require('os');
 const F=process.argv[2]||'dev/index.html',LIVES=+(process.argv[3]||3),NB=+(process.argv[4]||12),JSONOUT=process.argv.includes('--json');
 const ROSTER=path.join(path.dirname(path.resolve(F)),'tools','roster.js');
 (async()=>{const b=await chromium.launch();const out={keys:{n:0,raw:[]},rows:{n:0,raw:{},ex:{}},roster:{n:0,raw:[]}};const TMP=fs.mkdtempSync(path.join(os.tmpdir(),'lsw-'));

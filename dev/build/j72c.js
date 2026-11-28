@@ -78,12 +78,15 @@ function j72cNorm(sd){const ka=J72C_NOREL.has(((sd.req&&sd.req.kind)||"").split(
 /* review thin-p3 r1: a servant seed whose lines say «nô tỳ» is a maid's ask, «nô tài» a eunuch's: cast only that sex (real people, VANPHONG) */
 function j72cSex(sd){const s=j72cTexts(sd).join(" ");return /nô tỳ/i.test(s)?"f":/nô tài/i.test(s)?"m":""}
 function j72cSexOk(o,sx){return !sx||!o||(sx==="f")===(o.role==="maid")}
+/* her grown child (req ak): a seed whose card or scene calls the child a son («con trai», «hoàng tử») or a daughter («con gái», «công chúa», «hoàng nữ») casts only that sex (real people; law 11: every ak seed) */
+function j72cKidSex(sd){let s=j72cTexts(sd).join(" ");try{const sp=typeof dlgsGet==="function"?dlgsGet("j72:"+sd.id):null;if(sp)s+=" "+sp.lines.map(l=>l.text).join(" ")}catch(e){}const f=/con gái|công chúa|hoàng nữ/i.test(s),m=/con trai|hoàng tử/i.test(s);return f&&!m?"f":m&&!f?"m":""}
+function j72cKidOk(o,sd){if(!o||((sd.req&&sd.req.kind)||"").split(":")[0]!=="ak")return true;const x=j72cKidSex(sd);return !x||o.sex===x}
 function j72cReg(sd){if(!sd||!sd.id||T72I["c:"+sd.id])return null;sd=j72cNorm(sd);const tier=sd.tier||"m";let sp=j72cSpec(sd.req);if(!sp)return null;
  const sx=j72cSex(sd);if(sp==="sv"&&sx)sp=sx==="f"?"svm":"sve";
  const ok=j72cVal(sd.ok&&sd.ok.gain,tier,1),okl=j72cVal(sd.ok&&sd.ok.loss,tier,-1),no=j72cVal(sd.no&&sd.no.loss,tier,-1);
  const okfx=Object.assign({},ok.fx);for(const k in okl.fx)okfx[k]=(okfx[k]||0)+okl.fx[k];
  const o=sd.object;const xo=o?[`${j72cTxt(o.name,sd)}: ${j72cTxt(o.trace_ok,sd)}`]:null;
- const T={r:sp,rf:(v,a)=>j72cFit(v,sd.req)&&(sp!=="rsv"||j72cSexOk(v,sx)),t:j72cTxt(sd.title,sd),h:j72cTxt(sd.ask,sd),dl:BAL.j72c.dl[tier],s:j72cSteps(sd),
+ const T={r:sp,rf:(v,a)=>j72cFit(v,sd.req)&&(sp!=="rsv"||j72cSexOk(v,sx))&&j72cKidOk(v,sd),t:j72cTxt(sd.title,sd),h:j72cTxt(sd.ask,sd),dl:BAL.j72c.dl[tier],s:j72cSteps(sd),
   ok:{fx:okfx,r:ok.r+okl.r,rb:ok.rb+okl.rb,x:xo,fn:(X,x)=>{const a=j72cTrace(sd,X,"ok"),b=j72cTwist(sd,X,x);return [a,b].filter(Boolean).join(" ")}},
   no:{fx:no.fx,r:no.r,rb:no.rb,fn:X=>j72cTrace(sd,X,"no")},
   okT:sd.ok&&sd.ok.text?j72cTxt(sd.ok.text,sd):"",noT:sd.no&&sd.no.text?j72cTxt(sd.no.text,sd):"",

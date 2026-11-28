@@ -2,7 +2,7 @@
    person pop-up options, Nội vụ phủ shop) and answers every dialog. Counts DEAD ENDS (khắc left, no usable card, no talk, no walk),
    shared-door double use (one act done twice in one day through its two doors), happenings fired per kind, page errors.
    usage: node dev/test/act-dedupe-bot.js <url> [lives=4] [weeks=8]  → JSON summary + "FAIL n" */
-const {chromium}=require('playwright');const [,,URL,NL,NW]=process.argv;const LIVES=+NL||4,WEEKS=+NW||8;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,URL,NL,NW]=process.argv;const LIVES=+NL||4,WEEKS=+NW||8;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1000,height:755},serviceWorkers:'block'});
  await ctx.addInitScript(()=>{window.__bot={pre:1}});
  const p=await ctx.newPage();p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

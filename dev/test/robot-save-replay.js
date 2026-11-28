@@ -3,7 +3,7 @@
    B = Mưu kế «Hạ độc» on a rival → «Ra tay ngay» → «Làm như thường» (save-B-hadoc-loop.json; that save is from AFTER the loop — she was
        confined later and holds 5 bạc — so this replay lifts the confinement and gives bạc, test only: the card routing is what is checked).
    usage: node dev/test/robot-save-replay.js <url> <save.json> A|B   → prints JSON; exit 1 when the bug shows (A: day not turned; B: loop) */
-const {chromium}=require('playwright');const [,,URL,SAVE,MODE]=process.argv;const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,URL,SAVE,MODE]=process.argv;const fs=require('fs');
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},reducedMotion:'reduce',serviceWorkers:'block'})).newPage();p.setDefaultTimeout(0);
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,150)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof deser==='function',null,{timeout:0});

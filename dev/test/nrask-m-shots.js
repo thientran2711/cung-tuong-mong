@@ -3,7 +3,7 @@
    eunuch (nô tài), his rival as {B} (nrMenRival, as nrMenOffer casts it), on Fold 755x1000@2 and iPad 1180x820@2
    (dev/test/lib/device.js, HOST mode, built root index.html). Checks: card visible, no horizontal overflow, no raw slot «{», no page errors.
    usage: bash dev/site/build_site.sh && node dev/test/nrask-m-shots.js <outdir> [id:i:men|court …]   — shots stay OUTSIDE the repo; look at every one. */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs');
 const OUT=process.argv[2]||'/tmp/nrask-m-shots';fs.mkdirSync(OUT,{recursive:true});let bad=0;
 const PICK=(process.argv.slice(3).length?process.argv.slice(3):['gd_tl_9:1:men','tq_an_7:1:court']).map(s=>{const [id,i,who]=s.split(':');return{id,i:+i||0,who:who||'peer'}});
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();

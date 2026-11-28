@@ -1,7 +1,7 @@
 /* name-mask DOM scan (review/name-mask-r1, extends name-mask-scan.js): after every bot step the WHOLE rendered page (textContent incl. hidden panels,
    title/aria-label/alt/placeholder attributes, document.title) + weekly news card + Sổ tay notes + Sổ ghi are checked for the RAW name of a consort she has not met.
    usage: NODE_PATH=$(npm root -g) node dev/test/name-mask-dom-scan.js <url|file> [WxH] [STEPS]   exit 1 on any hit */
-const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const fs=require('fs');
 const [,,URL0,VP,ST]=process.argv;const [W,H]=(VP||'755x1000').split('x').map(Number);const STEPS=+ST||60;
 const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block'});const p=await ctx.newPage();

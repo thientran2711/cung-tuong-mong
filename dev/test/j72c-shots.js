@@ -1,6 +1,6 @@
 /* ORDER THIN P3 review shots: 3 composed việc nhờ offers (q72Test('c:<id>',1)) on Fold 755x1000@2 and iPad 1180x820@2 + the Nhờ tab with the first one
    accepted at its pick step. node dev/test/j72c-shots.js <outdir> [id,id,id]  (after dev/site/build_site.sh; shots never go to git) */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');const ROOT=path.resolve(__dirname,'../..');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');const ROOT=path.resolve(__dirname,'../..');
 const OUT=process.argv[2]||'/tmp/j72c-shots';const IDS=(process.argv[3]||'j72c-court-005,j72c-craft-042,j72c-fam-001').split(',');fs.mkdirSync(OUT,{recursive:true});
 //const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});
 (async()=>{const b=await chromium.launch();

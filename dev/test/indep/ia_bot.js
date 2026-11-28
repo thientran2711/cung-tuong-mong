@@ -2,7 +2,7 @@
    usage: node ia_bot.js <sens|rand> <lives> <out.json> <originOffset> [gameURL]
    Every origin in turn (9, incl. cnv), 2 game years per life (or death). Checks (ia_hook.js) after every spend / goTo / nextBuoi;
    JSON save round trip at ~4% of those moments and at ~15% of bot steps that stop on a card or a minigame. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('../lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const [,,MODE='sens',LIVES='9',OUT='/dev/stdout',OFF='0',URL='http://127.0.0.1:8971/t.html']=process.argv;
 const MEAS=process.env.MEAS||path.join(__dirname,'..','..','measure');const HOOK=fs.readFileSync(path.join(__dirname,'ia_hook.js'),'utf8');
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage']});const ctx=await b.newContext({viewport:{width:390,height:844}});const p=await ctx.newPage();

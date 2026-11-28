@@ -4,7 +4,7 @@
    Home road (road=nha): panels 1, 2, h3 then the home road's own first card; the reason is checked by forcing the road's entry
    (tiểu thư kcEnter via kcDien, kc2 kc2Enter) — the home years themselves are covered by dev/test/kc-roads/*.
    usage: node flow.js <url> [WxH] [shotdir|-] [origins,comma] [cung|nha] */
-const {chromium}=require('playwright');const URL=process.argv[2];const [W,H]=(process.argv[3]||'755x1000').split('x').map(Number);const SH=process.argv[4]&&process.argv[4]!=='-'?process.argv[4]:'';
+const {chromium}=require('../lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const URL=process.argv[2];const [W,H]=(process.argv[3]||'755x1000').split('x').map(Number);const SH=process.argv[4]&&process.argv[4]!=='-'?process.argv[4]:'';
 const OR=(process.argv[5]||'tt,dtq,muoi,cn,nc,bd,thd,ch,td,cnv').split(',');const ROAD=process.argv[6]||'cung';const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const HEAD={nc:'Lễ ra mắt',bd:'Lễ ra mắt',cn:'Xét phong danh phận',cnv:'Tuyển chọn'};
 /* the kit picture band of a story card: the dialog band #mb > .kdlgart, or (kit-size, jksize §"bốn cỡ") the picture frame .k3mpic / .k3ev

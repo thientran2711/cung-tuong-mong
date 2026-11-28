@@ -6,7 +6,7 @@
    plus the view's horizontal overflow and, for rows/strips, the spread of frame tops in one row (alignment).
    usage: node dev/test/tassel-scan.js <url> <WxH,...> <outdir> [oldsave.json] [shots:1]
    prints JSON per viewport: {view:{n, cut, minShown, win:[min,max], hit, ovf}} and saves a few JPEGs (small). */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,BASE,SZS,OUT,OLD0,SHOTS]=process.argv;const OLD=OLD0&&OLD0!=='-'?OLD0:null;fs.mkdirSync(OUT,{recursive:true});
 const VIEWS=['hdr','rv','rboard','staff','court','court1','kid','rel','men','fac','log','act','inv','story','go','emp','ident','gift','book1','book2','book3','book4','kitpage'];
 function scanFn(view){

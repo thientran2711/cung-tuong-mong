@@ -1,5 +1,5 @@
 /* Guest in her palace disappears from the stage after save + reload (record still has her). usage: node ia_home_visit.js <url> */
-const {chromium}=require('playwright');
+const {chromium}=require('../lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1180,height:820}})).newPage();await p.route(/\.(mp3|ogg)$/,r=>r.abort());
 const U=process.argv[2]||'http://127.0.0.1:8971/t.html';const out=[];
 for(let t=0;t<10&&out.length<4;t++){await p.goto(U);await p.waitForTimeout(1300);

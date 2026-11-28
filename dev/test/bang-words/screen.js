@@ -2,7 +2,7 @@
    premise · Phù Tang pf) through the home phase + palace chapters (beats forced as in caoly-oldsave.js), grabs every line the player can
    read (whole page text after each buổi + the story / act / rel tabs), and flags another land's identity words and any raw {token}.
    usage: node dev/test/bang-words/screen.js [url] [--seeds N] [--months N]   → exit 1 on a hit */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('../lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const arg=(k,d)=>{const i=process.argv.indexOf(k);return i>0?+process.argv[i+1]:d};
 const url=process.argv[2]&&!/^--/.test(process.argv[2])?process.argv[2]:'file://'+path.join(__dirname,'../../../index.html');
 const SEEDS=arg('--seeds',3),MONTHS=arg('--months',45);

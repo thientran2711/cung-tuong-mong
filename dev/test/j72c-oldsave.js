@@ -1,7 +1,7 @@
 /* ORDER THIN P3 review r1 gate: 3 saves from the LIVE build, each holding an OPEN việc nhờ (S.q72), load clean in the new build: the open favour is
    kept and resolves (q72X; q72Bot plays what it can — walking prompts such as «Chọn người theo hầu» stop the bot, as on LIVE), a composed seed (j72c) can be offered in that old life, 0 page errors.
    usage: bash dev/site/build_site.sh && git show origin/main:index.html > /tmp/old.html && node dev/test/j72c-oldsave.js /tmp/old.html */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const OLD=process.argv[2];let VER='old';
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p.startsWith('/__ver/')){VER=p.slice(7);return r.end(VER)}
  if(p==='/'||p==='/index.html'){r.setHeader('Content-Type','text/html; charset=utf-8');return fs.createReadStream(VER==='old'?OLD:path.join(ROOT,'index.html')).pipe(r)}

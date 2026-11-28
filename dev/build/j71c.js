@@ -58,7 +58,7 @@ function compCard(k,c){const sd=CI[c.id];if(!sd)return null;const X={};if(c.b!=n
  const tier=sd.tier||"m";const opts=Object.entries(sd.stances||{}).map(([id,st])=>{const g=val(st.gain,tier,1),l=val(st.loss,tier,-1);const rr=[];if(X.B&&(g.B+l.B))rr.push([X.B,g.B+l.B]);
   return c6(fill(st.text),{c:l.fx,w:g.fx,r:rr,ok:()=>{let tr="";if(o){const j=jc();tr=`${fill(o.name)}: ${fill(st.trace||o.trace)}.`;j.ob.push({sid:sd.id,name:fill(o.name),owner:o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":(X.B?X.B.n:""),trace:fill(st.trace||o.trace),turn:S.turn});if(j.ob.length>Bf().obKeep)j.ob.splice(0,j.ob.length-Bf().obKeep)}
    return [fill((sd.outcomes||{})[id]),tr].filter(Boolean).join(" ")}})});
- return{t:`${fShort7(k)} · Chuyện bên lề hội`,who:X.B?X.B.f:(typeof pMaid==="function"&&S.maid?pMaid():pEmp()),h:`<p>${fill(sd.text)}</p>`,opts}}
+ return{t:`${fShort7(k)} · Chuyện bên lề hội`,who:X.B?X.B.f:(typeof pMaid==="function"&&S.maid?pMaid():pEmp()),h:`<p>${fill(sd.text)}</p>`,opts,dlg:typeof dlgsMk==="function"?dlgsMk("j71:"+sd.id,X,fill,null):null/* sideline-dlg: the opening scene (jdlgs) */}}
 /* save-unseen-lists r2 (rv r2 FIX 1): «<tết> · Chuyện bên lề hội» is carried as data (j3 rcpReg: festival key + {id, b = rival id}) */
 compCard=rcpReg("j71cComp",compCard);
 const PEND7=[];

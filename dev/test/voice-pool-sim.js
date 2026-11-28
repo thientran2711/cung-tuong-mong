@@ -3,7 +3,7 @@
    Situations: Thái hậu / Hoàng hậu / Hoàng thượng / phi tần reactions to her look (toilSay, all looks), the gain/loss line (toilLit), the monthly
    cycle question (PEND.cyrep), staff talk (staffTalkLine, new builds), a rival's dress remark (wdRemark under/over), talk outcome (kOutcome, new).
    usage: node dev/test/voice-pool-sim.js <url> [T]   — run on origin/main's build and on the branch build for the before/after table */
-const {chromium}=require('playwright');const [,,URL,TS]=process.argv;const T=+TS||30;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,URL,TS]=process.argv;const T=+TS||30;
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:1180,height:820}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,150)));
  await p.addInitScript(()=>{window.__bot={pre:1}});await p.goto(URL);await p.waitForFunction(()=>typeof start==='function',null,{timeout:90000});await p.waitForTimeout(800);
  const R=await p.evaluate(T=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;start();quiet=true;

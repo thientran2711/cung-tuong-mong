@@ -2,7 +2,7 @@
    usage: node dev/test/panel-scroll-scan.js <outdir> [device,...] [-|keys]   default fold,ipadAir
    For every tab / sub-tab key (fresh start + forced-empty kids): #panel scrollHeight vs clientHeight, and the extent of its real content (last child bottom).
    FAIL = scrollHeight > clientHeight+1 while the last child's bottom fits inside clientHeight (a pure spacer / padding scroll). Exit 1 on any FAIL. */
-const {chromium}=require('playwright');const fs=require('fs');const D=require('./lib/device');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const D=require('./lib/device');
 const [,,OUT,DEVS]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const devices=(DEVS&&DEVS!=='-'?DEVS:'fold,ipadAir').split(',');const sleep=t=>new Promise(r=>setTimeout(r,t));
 const NOK='for(const v of rivals)v.kids=[];S.kids=[];';

@@ -6,7 +6,7 @@
    steal game (st "mg") · 4 the card dropped from the queue at runtime · 5 a steal game really running is NOT healed away · 6 player mode: the
    choice dialog is on screen again after the reload · 7 20 whole days, a save→reload round trip at every tối press: the day always turns.
    usage: node dev/test/night-softlock.js <url>   (exit 0 = all pass) */
-const {chromium}=require('playwright');const URL=process.argv[2]||('file://'+require('path').resolve(__dirname,'../../index.html'));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const URL=process.argv[2]||('file://'+require('path').resolve(__dirname,'../../index.html'));
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},reducedMotion:'reduce',serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof nfOn==='function',null,{timeout:0});await p.waitForTimeout(2000);

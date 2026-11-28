@@ -1,6 +1,6 @@
 /* opt-greyed: a known option she cannot take (cost/rank/item) is shown GREYED with a reason chip, not tappable; kitTam on stand-in pictures.
    usage: node dev/test/opt-greyed.js <url> <shotdir> [WxH,...]   Exit 1 on failure. */
-const {chromium}=require('playwright');const [,,URL,DIR,SIZES]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,DIR,SIZES]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const sz of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=sz.split('x').map(Number);const errs=[];
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});

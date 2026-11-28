@@ -3,7 +3,7 @@
    first, then host; SWAP=1 = devices swapped. RUNS=<n> repeats (default 5). Paths: walk (goTo), a walk after a buổi change, visit her palace
    (visitPal), return home (both see each other gone). Harness head = coop-places.js.
    usage: python3 dev/build/assemble.py && node dev/test/coop-arrive-see.js <workerURL> [level=9] [swap=0|1] */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||9);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

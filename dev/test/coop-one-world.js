@@ -10,7 +10,7 @@
      6. single player: worldOn() is true when co-op is off.
    usage: node dev/test/coop-one-world.js   (env W = warm-up weeks, RUNS = base weeks, SEED, QC_WT = worktree to test; ~15 s)
    Go-live gate: dev/tools/quickcheck.d/50-coop-one-world.sh (2 seeds). */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const path=require('path');
 /* env QC_WT (go-live gate): test that worktree's build + server merge; default = this repo */
 const ROOT=path.resolve(process.env.QC_WT||path.join(__dirname,'../..'));const {serve,BASE}=require('./coop-serve.js');
 (async()=>{const {merge3}=await import(path.join(ROOT,'coop/worker/src/merge.js'));

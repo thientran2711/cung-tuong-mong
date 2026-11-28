@@ -6,7 +6,9 @@
      const {dismissRoulette,autoDismissRoulette}=require('./lib/roulette');
      await autoDismissRoulette(ctx);   // once per context/page, before page.goto: keeps tapping those buttons in the background
      await dismissRoulette(page);      // right after start(): wait for the overlays, tap, wait until they are gone
-   The loading placeholder #kroulw has no button: it is waited out (the roulette replaces it). */
+   The loading placeholder #kroulw has no button: it is waited out (the roulette replaces it).
+   3) a side-line dialogue scene (jdlgs) is tapped through (autoDismissRoulette adds lib/dlgs-off.js AUTOTAP; passNewLifePopups taps it). */
+const DLG=require('./dlgs-off.js');
 const {keepNotesSeen}=require('./notes-seen');
 const BUSY=()=>!!(document.getElementById('kroul')||document.getElementById('kroulw')||document.querySelector('#kload:not(.out)'));
 async function dismissRoulette(page,opt){
@@ -35,6 +37,9 @@ async function autoDismissRoulette(target){
     setInterval(()=>{document.querySelectorAll('.krskip,#kload [data-kl="go"]').forEach(b=>b.click())},300)});
   /* rv27: a wiped storage keeps the «Điều mới trong cung» record (lib/notes-seen.js) */
   await keepNotesSeen(target);
+  /* a side-line dialogue scene (jdlgs) is tapped through like a player (lib/dlgs-off.js AUTOTAP): a bot that pressed on under it
+     left DLGS.playing on and every later card hidden (review/sideline-dlg F3) */
+  await DLG.autoTap(target);
 }
 /* contest / mini-game result: a podium (#kpodov, tap its "Tiếp") may sit over the result card, and the card has no visible
    "Đã hiểu" button: a player closes it with the kit ✕ (.kit-x[data-kitx=ov]), which presses #kg82ok for them. */
@@ -66,6 +71,8 @@ async function passNewLifePopups(page,opt){
   const o=Object.assign({max:40,pri:['Nhận thân phận','Vào cung ngay','Đã hiểu','Tiếp','Đóng','Lui']},opt||{});
   await dismissRoulette(page);
   for(let i=0;i<o.max;i++){
+    /* a side-line dialogue scene hides the card until read: tap it like a player (lib/dlgs-off.js) */
+    if(await DLG.tap(page)==='x'){await page.waitForTimeout(250);continue}
     const st=await page.evaluate(()=>({q:Q.length,m:!document.getElementById('modal').hidden}));
     if(!st.q&&!st.m)break;
     /* KIT 81 scenes (flip card, edict, bloom...) end with ONE kit button .kmend outside #modal */

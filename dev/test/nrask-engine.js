@@ -9,7 +9,7 @@
    5. old save: a queued/active nr_* quest without p.av (and an old «nr_bac» quest) still opens, renders the stock text and plays to the end.
    6. played to the end: option 0 of an NRASK quest → her chapter bonus hb>0 (or an honest fail); betrayal → hb<0.
    usage: node dev/test/nrask-engine.js      (serves the built repo root; run bash dev/site/build_site.sh first) */
-const {chromium}=require('playwright');const D=require('./lib/device');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();const ok=[];const errs=[];
  const chk=(n,c,x)=>{ok.push([n,!!c]);console.log((c?'PASS ':'FAIL ')+n);if(!c)console.error('   ',JSON.stringify(x).slice(0,1200))};
  const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);

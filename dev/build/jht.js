@@ -16,7 +16,7 @@ const gl=(k,l)=>typeof kitGloss==="function"?kitGloss(k,l):l;
 const HT={dow:[30,20,12],back:[14,9,5],heirB:4,clanRel:8,envy:-6,rivalO:10,fail:{sung:-3},cd:3,trac:3,tracB:3};
 /* ---------- faces: công tử (own manifest) and quý nữ (khuê các) ---------- */
 let CTIX={},KCIX={};
-function ld(u,cb){try{fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{try{cb(typeof figList==="function"?figList(j):(j||[]));if(S&&!S.dead&&typeof tab!=="undefined"&&HTK.includes(tab))render()}catch(e){}})}catch(e){}}
+function ld(u,cb){try{fetch(u,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{try{const L=typeof figList==="function"?figList(j):(j||[]);/* a failed / empty refetch never wipes the last good list (law 11: every timed figure loader) */if(!L.length)return;cb(L);if(S&&!S.dead&&typeof tab!=="undefined"&&HTK.includes(tab))render()}catch(e){}})}catch(e){}}
 function htLoad(){ld("img/FIGURES-congtu.json",L=>{const ix={};L.forEach(f=>{if(f.identity)(ix[f.identity]=ix[f.identity]||[]).push(f)});CTIX=ix});
  ld("img/FIGURES-kc.json",L=>{const ix={};L.filter(f=>String(f.tier)==="kc").forEach(f=>{const k=`${f.role}:${f.identity}`;(ix[k]=ix[k]||[]).push(f)});KCIX=ix})}
 htLoad();setInterval(htLoad,300000);

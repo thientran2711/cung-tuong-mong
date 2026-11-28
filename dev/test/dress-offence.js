@@ -1,7 +1,7 @@
 // review/dress-offence rules test: node dev/test/dress-offence.js [dev/index.html]   (one Chromium, no pictures)
 // Tố xa xỉ (xx, new) and Tố vượt phẩm (vp, jewellery rule now judged) both ways: player→NPC, NPC→player, NPC→NPC;
 // evidence gates (same place, Dò la, maid dò la), false accusation, 7-cell wear row with marks only when seen, BAL allowance, old save.
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
 (async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage','--disable-gpu']});const pg=await b.newPage({viewport:{width:755,height:1000}});
  await pg.route(u=>!/^file:/.test(String(u)),r=>r.abort());await pg.route(/\.(webp|png|jpg|mp3|ogg)$/,r=>r.abort());

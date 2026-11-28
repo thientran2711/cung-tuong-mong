@@ -4,7 +4,7 @@
    Prints every card of the fixed families as name=meter word (° = no p: certain, or no roll of its own). Checks each card: no «Khó lường» text; no meter without a lit step; an option with p → meter step = word(oddsCl(p)) (the same p its roll
    uses); meter step = the odds word of the option's own line (kitOptModel). No page error.
    usage: node dev/test/odds-no-unknown.js <index.html url> <out.json> [WxH,WxH…]  (default 755x1000,1180x820) — exit 1 on a FAIL */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,PAGE,OUT,SZS]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ALL={};let bad=0;
  for(const sz of (SZS||"755x1000,1180x820").split(",")){const [W,H]=sz.split("x").map(Number);

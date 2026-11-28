@@ -5,7 +5,7 @@
    Also the j69 pre-roll freeze: for 3000 seeds, main ow69Pick(seed,true/false) == this build ow69Pick(seed,1/2) (lives pre-rolled on main
    keep the origin they were shown), and a co-op world blob (deser with ok:"bd", jcoopworld path) loads as the bd branch.
    usage: NODE_PATH=$(npm root -g) node dev/test/origin-bd-oldsave.js <this build url> <main build url> */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,MAIN]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,900))};
  const boot=async url=>{const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:1,serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);

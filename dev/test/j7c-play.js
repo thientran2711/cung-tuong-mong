@@ -1,7 +1,7 @@
 /* ORDER THIN P2 browser test: composed intrigue (j7c) on the real game. node dev/test/j7c-play.js   (after dev/site/build_site.sh)
    Loads the 2 valid fixture seeds, checks: grounding (cast = real living people with the nết, placeholders filled), 4 equal-value options,
    choosing applies real changes + keeps the object traceable, jnorep marks family j7, the card rebuilds from saved pp (reload), makeDil offers it. */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const FIX=fs.readFileSync(path.join(__dirname,'j7c-fixture.jsonl'),'utf8').split('\n').filter(l=>l.startsWith('{')).map(JSON.parse).filter(s=>s.id!=='tx-bad');
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});
 let fail=0;const ok=(c,m)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m)};

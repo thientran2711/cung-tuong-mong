@@ -3,7 +3,7 @@
    struck off) but is not PRESENT (cannot lead, meet, be rủ / mời face to face). From inside she acts only by LETTER (j14 coldFacActs, the same cards for
    her deck and an NPC's p3Cold): two roads, the food eunuch (Bạc) or her own kept maid (no bạc, the maid at risk).
    Rows play the game's own functions on both sides. usage: node dev/test/cold-faction.js [dev/index.html] → exit 1 on FAIL */
-const path=require('path');const {chromium}=require('playwright');const HTML=process.argv[2]||'dev/index.html';
+const path=require('path');const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const HTML=process.argv[2]||'dev/index.html';
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(u=>/^https?:/.test(u.href)||/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/.test(u.pathname),r=>r.abort());

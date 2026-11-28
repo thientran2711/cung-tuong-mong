@@ -10,7 +10,7 @@
    7 jmline mlEye: no eye roll with the loop on; BAL.ag.on = 0 → old paths (monthly dice, roll 3)
    8 30 played tuần as a maid and 30 as a consort: 0 throws; co-op guest: amOn false
    usage: node dev/test/agmaid_check.js <page URL or file>   → exit 1 on any FAIL or page error */
-const {chromium}=require('playwright');const [,,URL0]=process.argv;const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL0]=process.argv;const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
 const OW=require('./odds-words.js');/* ladder words from the ONE source j0 */
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));

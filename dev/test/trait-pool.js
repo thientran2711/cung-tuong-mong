@@ -2,7 +2,7 @@
    into their groups, the missing ones drawn), new lives draw 3 nết for everyone (female/male pool by sex), deterministic per person,
    first trọng = the Lòng dạ nết's virtue, every table row has gain + cost, and a bot plays some buổi without page errors.
    usage: node dev/test/trait-pool.js <base.html> [this index.html] */
-const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const fs=require('fs');
 const BASE='file://'+path.resolve(process.argv[2]),NEW='file://'+path.resolve(process.argv[3]||path.join(__dirname,'../index.html'));
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,400):''))};
 async function open(b,url,errs){const p=await b.newPage();p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(120000);await p.route(/^https?:/,r=>r.abort());

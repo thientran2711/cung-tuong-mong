@@ -5,7 +5,7 @@
           (R) result rows: kaResultRows with strangers moved -> ONE aggregate row, no "<tước> ???" rows, no raw names;
           (P) palace names/descriptions (palName/palFn/places) of strangers' palaces.
    usage: NODE_PATH=$(npm root -g) node dev/test/name-mask-scan.js <url|file> [WxH] [MONTHS]   exit 1 on any hit */
-const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const fs=require('fs');
 const [,,URL0,VP,MON]=process.argv;const [W,H]=(VP||'755x1000').split('x').map(Number);const MONTHS=+MON||24;
 const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);let bad=0;const rep=(k,m)=>{console.log(k.padEnd(8),m);if(!/^ok|^info/.test(k))bad++};
 /* (S) static */

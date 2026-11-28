@@ -1,7 +1,7 @@
 /* review/outside-r2: a save made on the published main build loads on this build and plays on; a save made at home (pre-palace road) on
    this build reloads at home. usage: node dev/test/outside/oldsave.js <main build url> <this build url> [WxH@dpr]
    (both urls on the SAME origin so they share localStorage, e.g. http://127.0.0.1:PORT/.port/main.html and http://127.0.0.1:PORT/index.html) */
-const {chromium}=require('playwright');const [OLD,NEW,SZ]=process.argv.slice(2);const [wh,d]=(SZ||'755x1000@1').split('@');const [W,H]=wh.split('x').map(Number);
+const {chromium}=require('../lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [OLD,NEW,SZ]=process.argv.slice(2);const [wh,d]=(SZ||'755x1000@1').split('@');const [W,H]=wh.split('x').map(Number);
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 (async()=>{const b=await chromium.launch();const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(d||1),serviceWorkers:'block'});
  await c.addInitScript(()=>{try{localStorage.setItem('ctm-bgpause','1')}catch(e){}setInterval(()=>{document.querySelectorAll('.krskip').forEach(b=>b.click())},300)});

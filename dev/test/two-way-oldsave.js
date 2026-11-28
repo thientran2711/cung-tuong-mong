@@ -1,7 +1,7 @@
 /* review/two-way-acts: a save made on the main build loads in this build; NPC deeds (SOC, npcMonthly, the new BAL.tw deeds) run for N
    weeks on it and the rival talk list (new player options) builds. usage: node dev/test/two-way-oldsave.js <old.html> <new.html> [weeks]
    (files built with CTM_IMG_BASE= python3 dev/build/assemble.py). Exit 1 on page errors. */
-const {chromium}=require('playwright');const [,,OLD,NEW,WK='40']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,OLD,NEW,WK='40']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 async function boot(p){for(let i=0;i<300;i++){const ok=await p.evaluate(()=>{const g=document.querySelector('#kload [data-kl="go"]');if(g)g.click();return !!document.querySelector('#slots button[data-new]')});if(ok)return;await sleep(200)}}
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext();await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort().catch(()=>{}));
  const errs=[];let p=await ctx.newPage();p.on('pageerror',e=>errs.push('old:'+e.message.slice(0,160)));

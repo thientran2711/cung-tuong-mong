@@ -5,7 +5,7 @@
    2) OR18 the Emperor's road (jnroade.js): after the reign struggle ends (or with no reign), S.emp.nr is one of the 3 new templates,
       its chapters play off-screen, move Biên cương / Kho lúa / the princes, never name an heir; history avoids last life's template.
    usage: NODE_PATH=$(npm root -g) node dev/test/road-triggers.js <url> */
-const {chromium}=require('playwright');const [,,URL]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log((c?'PASS ':'FAIL ')+n+(c?'':' '+JSON.stringify(x).slice(0,700)))};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});
  await ctx.addInitScript(()=>{let s=777;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}});

@@ -1,7 +1,7 @@
 /* ACT SPLIT W2/W3 INVENTORY: festival days, outings and the night (buổi tối). Dumps, per state x festival x buổi: the Hành sự deck,
    every place's person options (talkOpts), the festival dialogs that fire that day (j31 FESTEV light event, j71 fDay7 variants,
    jts đố đèn), the "!" happenings, and the night-only differences. usage: node dev/test/act-split-inv.js <url> <out.json> */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.match(/const LIB=String\.raw`([\s\S]*?)`;\n\(async/)[1];
 const [,,URL,OUT]=process.argv;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1180,height:820},reducedMotion:'reduce',serviceWorkers:'block'});

@@ -6,7 +6,7 @@
    palace entry for the other; each seat's home life survives every merged week (same plan, same roster ids); no page errors.
    usage: python3 dev/build/assemble.py && node dev/test/home-chapters/coop-seats.js [outdir] [workerURL] [--a=tt] [--b=dtq] [--weeks=4]
    Helpers copied from dev/test/kc-roads/coop-together.js (same room flow). */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
+const {chromium}=require('../lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
 const {serve,BASE}=require('../coop-serve.js');
 const OUT=path.resolve(process.argv[2]&&!process.argv[2].startsWith('--')?process.argv[2]:path.join(__dirname,'../../shots/home-chapters-coop'));fs.mkdirSync(OUT,{recursive:true});
 const WURL=(process.argv[3]&&!process.argv[3].startsWith('--'))?process.argv[3]:'https://ctm-coop.victoria-tntt.workers.dev';

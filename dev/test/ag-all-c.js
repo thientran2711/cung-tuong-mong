@@ -8,7 +8,7 @@
    5 bot N buổi: histogram of the harm deeds chosen (harm:*), every key maps to a player act; '!' count per buổi: quiet (0) and busy (≥2) buổi both occur,
      and no dice: adHapRoll gives the same list twice in a row (no re-roll); perf p95 of the agent slices ≤ BAL.ag.perf.p95
    usage: node dev/test/ag-all-c.js <page URL or file> [buổi]   → exit 1 on any FAIL or page error */
-const {chromium}=require('playwright');const [,,URL0,NB]=process.argv;const N=+NB||160;const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL0,NB]=process.argv;const N=+NB||160;const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));p.setDefaultTimeout(600000);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:240000});await p.waitForTimeout(2500);

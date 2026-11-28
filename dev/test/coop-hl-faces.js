@@ -5,7 +5,7 @@
    r2c: a world person given HER portrait (S.pid) before her person reached the host was wiped on her seat by j88 (r5 consort:c19 host / none
    guest, 3/8 rooms on LIVE aee7ff84): now counted (guest-missing after week 1 = bad) and fixed in jcoophl reserveFriend.
    usage: python3 dev/build/assemble.py && N=8 node dev/test/coop-hl-faces.js [workerURL]  → exit 1 if any room is bad */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||9);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

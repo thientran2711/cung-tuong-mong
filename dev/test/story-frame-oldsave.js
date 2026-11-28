@@ -4,7 +4,7 @@
    chương 4 = an origin chapter of bd. Then a second load / more buổi: no second frame, chapter numbers never repeat; no page errors.
    Also a save of another origin with the old v1 storyline keeps its old storyline (only late-registered origins migrate).
    usage: NODE_PATH=$(npm root -g) node dev/test/story-frame-oldsave.js <before url> <after url> */
-const {chromium}=require('playwright');const [,,BEF,AFT]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,BEF,AFT]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];
  const boot=async(url)=>{const p=await (await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'})).newPage();p.on('pageerror',e=>errs.push(url.slice(-12)+': '+e.message.slice(0,160)));
   await p.goto(url,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);return p};

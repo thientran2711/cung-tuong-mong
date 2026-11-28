@@ -5,7 +5,7 @@ const fs=require('fs');
 if(process.argv[2]==='--cmp'){const A=JSON.parse(fs.readFileSync(process.argv[3])),B=JSON.parse(fs.readFileSync(process.argv[4]));let first=-1,nd=0;const n=Math.max(A.h.length,B.h.length);
  for(let i=0;i<n;i++){if(A.h[i]!==B.h[i]){nd++;if(first<0)first=i}}const fin=A.fin===B.fin;console.log(JSON.stringify({buoi:n,diff:nd,first,finalStateSame:fin,rndA:A.rnd,rndB:B.rnd}));
  if(first>=0&&A.keys&&B.keys){const ka=A.keys[first]||{},kb=B.keys[first]||{};const d=Object.keys({...ka,...kb}).filter(k=>ka[k]!==kb[k]);console.log('first diff keys:',d.slice(0,20).join(' '))}process.exit(nd||!fin?1:0)}
-const {chromium}=require('playwright');const [,,F,N0,SD,OUT]=process.argv;const N=+N0||80,SEED=+SD||1;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,F,N0,SD,OUT]=process.argv;const N=+N0||80,SEED=+SD||1;
 (async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
 await p.route(u=>/^https?:/.test(u.href),r=>r.abort());
 await p.addInitScript(s=>{let x=s;window.__rnd=0;window.__reseed=()=>{x=s;window.__rnd=0};Math.random=()=>{window.__rnd++;x=(x*1103515245+12345)%2147483648;return x/2147483648};

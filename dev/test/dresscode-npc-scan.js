@@ -2,7 +2,7 @@
    N years by the game's own endTurn; for each festival day: NPCs turned away / mocked (short of colours) / fit — BEFORE their festival
    roads (stat as they stand) and AFTER (dcNpcFest: own trâm, else borrow from a consort who likes them). Prints a markdown table.
    usage: node dev/test/dresscode-npc-scan.js [dev/index.html] [years=2] */
-const path=require('path');const {chromium}=require('playwright');
+const path=require('path');const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const HTML=process.argv[2]||'dev/index.html',YEARS=+(process.argv[3]||2);
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.route(u=>/^https?:/.test(u.href),r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});

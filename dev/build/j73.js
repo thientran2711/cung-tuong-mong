@@ -11,7 +11,7 @@ const KIDF="img/FIGURES-kids.json";
 let KIDIX={prince:{},princess:{}},KIDSIG="";
 const KIDBANDS=[4,9,14,20];
 function kidBandOf(a){a=+a||0;return a<=6?4:a<=11?9:a<=16?14:20}
-function kidLoad(){try{fetch(KIDF,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j).filter(f=>!/(^|\/)_old\//.test(String(f.file||f.src)));
+function kidLoad(){try{fetch(KIDF,{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j).filter(f=>!/(^|\/)_old\//.test(String(f.file||f.src)));/* a failed / empty refetch (offline, CDN hiccup) never wipes the last good list (law 11: every timed figure loader) */if(!L.length)return;
  const sig=L.length+"|"+L.map(f=>f.file||f.src).join(",").length;if(sig===KIDSIG)return;KIDSIG=sig;
  const ix={prince:{},princess:{}};for(const f of L){const r=norm(f.role);if(!ix[r]||f.identity==null)continue;const b=parseInt(f.ageBand,10);if(isNaN(b))continue;(ix[r][f.identity]=ix[r][f.identity]||{})[b]=f}
  KIDIX=ix;try{if(S&&!S.dead){kidAssignAll();render()}}catch(e){}}).catch(()=>{})}catch(e){}}

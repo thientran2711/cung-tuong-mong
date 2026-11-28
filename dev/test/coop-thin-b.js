@@ -8,7 +8,7 @@
    level 1: the same rebirths through the OLD guest path (the before number of the tripwire).
    TRIP: the guest tripwire (dev/test/coop-thin-trip.js) counts every guest write outside fromCanon during the rebirths only (meter of part B).
    swap=1: the iPad creates the room (host), the Fold joins (guest). Shots: none (no new UI; the card and the wait note are the kit card). */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||2);const SWAP=+(process.argv[4]||0);const ONLY=(process.argv[5]||'').split(',').filter(Boolean);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));

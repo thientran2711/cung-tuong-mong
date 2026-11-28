@@ -16,7 +16,7 @@
    Slow machines: one browser, one page per size, long timeouts, reduced motion, image-complete polls instead of fixed sleeps.
    Writes <outdir>/img-quality.json, screenshots <outdir>/<w>-<screen>.jpg and the table <md path> (default dev/test/IMG_QUALITY.md).
    Exit 1 when anything is flagged or a page error / 404 happened. */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');
 const [,,BASE,OUT,SZS,MD]=process.argv;const MERGE=BASE==='--merge';
 if(!BASE||!OUT){console.error('usage: node dev/test/img-quality.js <baseURL> <outdir> [sizes] [md]');process.exit(2)}
 const SIZES=MERGE?[]:(SZS||'755x1000@2,1180x820@2').split(',').map(s=>{const [wh,d]=s.split('@');const [w,h]=wh.split('x').map(Number);return{w,h,dpr:+(d||1),tag:s}});

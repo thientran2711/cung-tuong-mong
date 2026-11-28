@@ -3,7 +3,7 @@
    object: a card answered after its piece moved on (case closed / held, box piece bought, rare piece sold) or after the world was rebuilt
    (save round-trip, co-op snapshot: the case object replaced) moves nothing, pays nothing and makes no copy; a live card moves the one piece.
    usage: python3 dev/build/assemble.py && node dev/test/ky-keeper-f2.js [dev/index.html]   → ok/FAIL lines, last line PASS / FAIL n */
-const path=require('path');const {chromium}=require('playwright');
+const path=require('path');const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const HTML=process.argv[2]||'dev/index.html';
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

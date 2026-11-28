@@ -10,7 +10,7 @@
        a tap during the animation finishes it at once (#kievcatch gone, no .kievfx left);
      - no page error, no horizontal overflow, options still in cost mode (.kb rows).
    Exit 1 on a miss. Old save (optional 4th arg): loads, opens a gift dialog, same checks. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,BASE,OUT,SZ,SAVE]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,BASE,OUT,SZ,SAVE]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const SIZES=(SZ||'755x1000,1000x755,1180x820,1366x1024,844x390').split(',');
 (async()=>{const b=await chromium.launch();let fails=[];const rows=[];
 for(const sz of SIZES){const [W,H]=sz.split('x').map(Number);const c=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block'});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));await p.addInitScript(()=>{window.__nlInner=1});

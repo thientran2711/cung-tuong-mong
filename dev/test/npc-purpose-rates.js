@@ -13,7 +13,7 @@
      --write-base    with --base: store the base counts in the json (then commit it)
      env RATES_BRUNS=n (default 3): the base build runs n times; counts print against the per-seed mean, and a row (checks 2 and 4) is OUT only when it is out against EVERY base run (the base is not deterministic; one verdict per sha)
    exit 0 = PASS */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const A=process.argv.slice(2);const fl=k=>{const i=A.indexOf(k);if(i<0)return null;const v=A[i+1];A.splice(i,2);return v};
 const writeBase=A.includes('--write-base');if(writeBase)A.splice(A.indexOf('--write-base'),1);const BASE=fl('--base');
 const F=A[0]||'index.html';const WK=+A[1]||200;const NS=+A[2]||12;const JP=path.join(__dirname,'npc-purpose-rates.json');const J=JSON.parse(fs.readFileSync(JP,'utf8'));

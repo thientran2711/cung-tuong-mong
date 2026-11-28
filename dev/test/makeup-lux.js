@@ -3,7 +3,7 @@
    "diêm dúa" = the word for a total far above the occasion (BAL.lux.diem), per-person liked LEVEL (jmkt taste), Hội phối đồ counts the face,
    NPC + co-op friend the same way, an old save holding the dropped level.
    usage: node dev/test/makeup-lux.js <url of dev/index.html> <WxH@dpr> <shotdir>   (prints JSON; exit 1 on a failed check) */
-const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off',require('./lib/pw-roulette'));/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,URL,VP,DIR]=process.argv;const m=/(\d+)x(\d+)@([\d.]+)/.exec(VP||'755x1000@2');const W=+m[1],H=+m[2],DPR=+m[3];const tag=`${W}x${H}`;
 fs.mkdirSync(DIR,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,serviceWorkers:'block'});await ctx.route(u=>/ctmload=1|x-ctm-load/.test(String(u)),r=>r.abort());const p=await ctx.newPage();

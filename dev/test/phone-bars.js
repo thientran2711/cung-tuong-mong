@@ -2,7 +2,7 @@
    usage: node dev/test/phone-bars.js <outdir> [WxH@D ...]   (serves the repo root itself on a free port; img/ → CDN redirect)
    per size: home + hậu cung tab shot (full screen), rects of header.hud / #tabs buttons / #next / #panel, clipped labels, overlaps of tab buttons and stat cells.
    exit 1 on overlap, clipped label or page error. */
-const {chromium}=require('playwright'),http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off'),http=require('http'),fs=require('fs'),path=require('path');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const OUT=process.argv[2]||'/tmp/phone-bars';fs.mkdirSync(OUT,{recursive:true});
 const SIZES=(process.argv.slice(3).length?process.argv.slice(3):['755x1000@2','412x1058@2','390x844@3','1180x820@2','1366x1024@2']).map(s=>{const m=/(\d+)x(\d+)@(\d+)/.exec(s);return[+m[1],+m[2],+m[3]]});
 const REPO=path.resolve(__dirname,'../..'),ROOT=process.env.PB_ROOT||REPO;/* PB_ROOT = a dir with another build's index.html/sw.js/assets.json (e.g. live main) for the before shots */const BASE=(/const IMG_BASE="([^"]*)"/.exec(fs.readFileSync(path.join(REPO,'dev/build/jcdn.js'),'utf8'))||[])[1];

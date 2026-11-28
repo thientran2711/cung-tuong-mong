@@ -2,7 +2,7 @@
    the đề's hidden makeup want (notice row + scouting roads), the contest sitting (real kit mirror, then the contest goes on), the bot contest,
    per-person taste (known → on the card; unknown → one surprise + learned), rivals by the same rule, an old save without the new fields.
    usage: node dev/test/makeup-theme.js <url of dev/index.html> <WxH@dpr> <shotdir>   (prints JSON; exit 1 on a failed check) */
-const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off',require('./lib/pw-roulette'));/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,URL,VP,DIR]=process.argv;const m=/(\d+)x(\d+)@([\d.]+)/.exec(VP||'755x1000@2');const W=+m[1],H=+m[2],DPR=+m[3];const tag=`${W}x${H}`;
 fs.mkdirSync(DIR,{recursive:true});
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,serviceWorkers:'block'});await ctx.route(u=>/ctmload=1|x-ctm-load/.test(String(u)),r=>r.abort());const p=await ctx.newPage();

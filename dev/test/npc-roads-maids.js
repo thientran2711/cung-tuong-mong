@@ -5,7 +5,7 @@
    - a maid's help hồi: title names her + road + chapter, she speaks as «nô tỳ» and calls the player tiểu chủ / nương nương (VANPHONG §2);
      option 0 feeds her chapter (hb>0) or fails honestly, betrayal hb<0; every option has a cost and a real loss;
    - her road line shows on her card in the Kẻ hầu tab; no page errors. usage: node dev/test/npc-roads-maids.js <url> [lives] [months] */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
 (async()=>{const b=await chromium.launch();const errs=[];const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);console.log((c?'ok   ':'FAIL ')+n);if(!c)console.error('  ',JSON.stringify(x).slice(0,900))};
  let ctx=null,p=null;

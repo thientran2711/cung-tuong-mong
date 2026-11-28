@@ -2,7 +2,7 @@
    comes back to her: found at home (her chest) or «nvp» (Nội vụ phủ mends it, then back to her chest after BAL fixW weeks); her Kỳ ngộ
    «Của mình tìm lại» both options (return / keep) → exactly one copy; a stale card moves nothing. No NPC copy on the guest ever gets the piece.
    usage: python3 dev/build/assemble.py && node dev/test/lost-guest-probe.js [dev/index.html]   → exit 1 on FAIL */
-const path=require('path');const {chromium}=require('playwright');
+const path=require('path');const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */
 const HTML=process.argv[2]||'dev/index.html';let fail=0;const ck=(n,c,x)=>{console.log((c?'ok  ':'FAIL')+' '+n+(x!==undefined?' · '+JSON.stringify(x).slice(0,600):''));if(!c)fail++};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.route(u=>/^https?:/.test(u.href),r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});

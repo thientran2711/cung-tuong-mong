@@ -1,7 +1,7 @@
 /* review/newlife-reset: an OLD save written before the fix (kLine's line memory sat in S.vl, the worn-veil field) loads clean:
    S.vl = null (or a real veil), the memory moved to S.vmem, the memory object pushed into her chest is gone, the false healing line is gone,
    a REAL worn veil survives, the save plays a week with no page error.  usage: node dev/test/newlife-oldsave.js [path|url] → lines + "FAIL n" */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');const ROOT=path.resolve(__dirname,'../..');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs'),path=require('path'),http=require('http');const ROOT=path.resolve(__dirname,'../..');
 function serve(){return new Promise(r=>{const s=http.createServer((q,res)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);const f=path.join(ROOT,p);
  if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory()){res.writeHead(404);return res.end()}res.writeHead(200,{'content-type':/\.html$/.test(f)?'text/html; charset=utf-8':/\.js$/.test(f)?'text/javascript':'application/octet-stream'});fs.createReadStream(f).pipe(res)});
  s.listen(0,()=>r({url:`http://127.0.0.1:${s.address().port}/`,close:()=>s.close()}))})}

@@ -7,7 +7,7 @@
      flex  = any other flex row with justify-content:space-between and two text cells, ≥ 2 such rows in one parent
    usage: node dev/test/kit-table.js <url of a build at the site root> <W>x<H>@dpr [outdir for shots] [only steps,comma]
    Prints JSON {size, lists:[{at,kind,rows,spread,oneWord,label}], fails, errs}. Exit 1 when a list fails. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,BASE,SZ,OUT,ONLY]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const SCAN=()=>{const roots=[...document.querySelectorAll('#panel,#modal:not([hidden]),.kbk')].filter(e=>e.offsetParent||e.id==='modal');const out=[];
  const vis=e=>{if(!e)return false;const r=e.getBoundingClientRect();return r.width>0&&r.height>0&&getComputedStyle(e).visibility!=='hidden'};

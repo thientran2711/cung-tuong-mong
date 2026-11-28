@@ -1,6 +1,6 @@
 /* log-sync r1: the week card (dawn wkSummary / Tuần lục wkBookData) must not show the bookkeeping lines (marker class="kls").
    Bots play; at every week change the week's marked lines are compared with the card text. usage: node dev/test/log-sync-week.js <url> [steps] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});p.on('pageerror',e=>console.log('ERR',e.message));
  await p.addInitScript(()=>{let s=4242;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};window.__bot={pre:1}});

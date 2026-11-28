@@ -12,7 +12,7 @@
       an NPC in the garden leaves by odds (BAL.wx.fx.storm.leave), not forced; one turn line, no 'đóng cửa'
    §9 frost: mgTier ease of đàn / thêu lower by BAL.wx.fx.frost.ease[kl], cờ unchanged; intro row says "tay cóng"; kit weather popup rows
    + no page errors. */
-const {chromium}=require('playwright');const [,,URL,SIZE]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,SIZE]=process.argv;
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();let bad=0;const [wh,dpr]=(SIZE||"755x1000@2").split("@");const [W,H]=wh.split("x").map(Number);
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+dpr||1,hasTouch:W<1100,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});

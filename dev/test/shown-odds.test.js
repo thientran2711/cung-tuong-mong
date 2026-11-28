@@ -5,7 +5,7 @@
    shown (what each display path prints) == rolled (the odds of the act's own success roll inside runAct).
    The rolled odds = the first roll(o) call made by ACT[k].f inside runAct (Math.random seeded, state restored after each run).
    usage: node dev/test/shown-odds.test.js [dev/index.html]   (exit 1 on any mismatch) */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const URL='file://'+path.resolve(process.argv[2]||path.join(__dirname,'../index.html'));
 (async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  p.setDefaultTimeout(180000);await p.route(/^https?:/,r=>r.abort());

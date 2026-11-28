@@ -6,7 +6,7 @@
    a tuần she dies with a loan each way, and an old save's "me:<pid>" key. Also: no loan still marked past its tuần, no book line past due,
    no stale dcPrev (her own trâm put aside for a loan, the loan gone) and her off-season cost charged EVERY tuần like the NPCs' (law 1).
    Same boot as dresscode.test.js.   usage: node dev/test/dresscode-loan-scan.js [dev/index.html] [tuần=108]   → exit 1 on FAIL or page error */
-const path=require('path');const {chromium}=require('playwright');
+const path=require('path');const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const HTML=process.argv[2]||'dev/index.html';const NT=+process.argv[3]||108;let fail=0;const ck=(n,c,x)=>{console.log((c?'ok  ':'FAIL')+' '+n+(x!==undefined?' · '+JSON.stringify(x):''));if(!c)fail++};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.on('console',m=>{if(m.type()==='error'&&/^dc|dcReturn|dcLedger|dcTurn|dcWeek/.test(m.text()))errs.push('console: '+m.text().slice(0,200))});
  await p.route(u=>/^https?:/.test(u.href),r=>r.abort());await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});

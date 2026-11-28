@@ -1,7 +1,7 @@
 /* jevb checks: (1) context odds differ across lives / moods for the same option; (2) an event choice moves her mood with a cause, the mood
    seal opens the cause box (kit panel); (3) "trả lại quà ngươi tặng" only with a real gift, which comes back; borrow asks only for owned things.
    usage: NODE_PATH=$(npm root -g) node dev/test/event-context.js <url> [WxH] [shot.png] */
-const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const [W,H]=(VP||'755x1000').split('x').map(Number);
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL,VP,SHOT]=process.argv;const [W,H]=(VP||'755x1000').split('x').map(Number);
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:W,height:H}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(2000);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start()});

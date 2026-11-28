@@ -7,7 +7,7 @@
    Checks: VP.fix, VP.itemLow (j84), k61Scrub (j61, lead/plain both) are idempotent on every string; a live DOM write settles (observer
    rounds stop) within 50 ms for a node holding a mask-like name.
    usage: node dev/test/text-idem-scan.js <baseURL wrapping dev/index.html with utf-8> [moments=12] → JSON, exit 1 on any failure */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [,,BASE,NM]=process.argv;const N=+NM||12;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:1,hasTouch:true,isMobile:true});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));

@@ -1,7 +1,7 @@
 /* review/reign-road-fix scan: opens every reign beat (all sides) and every PEND dialog that builds with no arguments, and checks each kit option
    card (#modal .opts > button.ka, any of k3rows / k3grid): the card's content must not overflow the card (scrollHeight > clientHeight) and the card
    must not be cut by the next card or the dialog. usage: NODE_PATH=$(npm root -g) node dev/test/opt-overflow-scan.js <url|file> [WxH@dpr] [shot-prefix]  (exit 1 on overflow) */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');
 const [,,URL0,VP,SHOT]=process.argv;const [wh,dpr]=(VP||'755x1000@2').split('@');const [W,H]=wh.split('x').map(Number);const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:Math.min(+dpr||1,2),hasTouch:W<1100,isMobile:W<1100,serviceWorkers:'block'});const p=await ctx.newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

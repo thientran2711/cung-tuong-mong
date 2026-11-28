@@ -5,7 +5,7 @@
    never conjured); the card fires through jky's own gate (KY.arrive) as a PEND kyngo card with 2 options (or a read card), every placeholder filled,
    option 1 runs through the real chooseM path to a result card, the seed is then «seen» for this life and marked in P0 family «ky»; plus every built
    KYSEEDS seed registers and the 25 old encounters still register. 0 page errors. */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const FILE=process.argv[2]||path.join(__dirname,'kyc-fixture.jsonl');
 const FIX=fs.readFileSync(FILE,'utf8').split('\n').filter(l=>l.trim().startsWith('{')).map(JSON.parse);
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});

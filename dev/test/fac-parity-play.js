@@ -6,7 +6,7 @@
    Math.random is re-seeded at the top of EVERY act (the old drift2-play rows drew from a sequence that timers between two page.evaluate calls had
    already consumed → the receiver's answer flipped run to run).
    usage: node dev/test/fac-parity-play.js [dev/index.html]  → exit 1 on FAIL */
-const path=require('path');const {chromium}=require('playwright');const HTML=process.argv[2]||'dev/index.html';
+const path=require('path');const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const HTML=process.argv[2]||'dev/index.html';
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(u=>/^https?:/.test(u.href)||/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/.test(u.pathname),r=>r.abort());

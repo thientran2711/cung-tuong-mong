@@ -1,7 +1,7 @@
 /* SFX smoke (review/sfx): at each screen size a new game plays 3 weeks with sound ON (bots off), and an old save loads and plays 1 week.
    Checks: 0 page errors, 0 HTTP >= 400 (audio included), sounds were called (KSFX.log), every called file answered 200, 0 dead files.
    usage: node dev/test/sfx-smoke.js <site url> <oldsave.json> 755x1000 1000x755 1180x820 1366x1024 844x390 390x844 */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const [,,URL,OLD,...SZ]=process.argv;
 (async()=>{const b=await chromium.launch({args:['--autoplay-policy=no-user-gesture-required']});const out=[];
  for(const sz of SZ){const [W,H]=sz.split('x').map(Number);const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});

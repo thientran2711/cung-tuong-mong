@@ -1,7 +1,7 @@
 /* D29 (review/schedules3): a save made on a build WITHOUT j95 (origin/main) loads on this build, the record is built on the first
    render, and 12 buổi play with no page error, no J95/J95B/J95C error and a clean self-check.
    usage: node dev/test/roster_oldsave.js <baseURL> <oldPage> <newPage>   (same origin, pages wrap dev/index.html with <meta charset=utf-8>) */
-const {chromium}=require('playwright');const [,,BASE,OLD,NEW]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,BASE,OLD,NEW]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const out={};
  const ctx=await b.newContext({viewport:{width:755,height:1000}});const p=await ctx.newPage();const e0=[];p.on('pageerror',e=>e0.push(e.message));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.abort());
