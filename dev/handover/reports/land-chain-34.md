@@ -19,3 +19,4 @@ PRIORITY #1 CHECK: OD (GROUP LANDING OD 27/11 ~06:38Z; GO-LIVE OD 26/11 ~04:30Z)
 - 02:03Z MAIN 184: LAND READY kk64-ui4 86dce998 (K-CUE-FOOT) + kk64-kri-ui4 c5243be6 (K-GIFT-OUT), RV-178 §4 PASS; both children of ui4. kk65-noise d1214155 (test-only) coming for b3a.
 - 02:10Z review/lc34-ui5 c711f8e1 = ui4 f839ea6b → 39296539 (+ kk64-ui4, tree == 86dce998 after rebuild) → c711f8e1 (+ kk64-kri-ui4; index/sw rebuilt; KIT.md both lines kept; other files patch == source; 0 deletions; assets = kk63). Sequential 2-parent merges (octopus avoided).
 - 02:12Z review/lc34-b3a RESTACKED (force) eb62bb82 → 7c9f02fd on ui5 c711f8e1 + b4861974 (README union, E75 BUILT, rebuilt, patch == b4861974, 0 deletions).
+- 02:15Z MAIN is now MAIN CHÍNH 185 session_01Rc5AsJaTChyVzvbrK9qyMp (child of 184, verified). kk65-noise d1214155 (RV-178 §5 PASS, test-only: text-hygiene.js + known.json + report) merged clean into lc34-b3a → 7de4f10a.
