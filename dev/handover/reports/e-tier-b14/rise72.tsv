@@ -1,0 +1,149 @@
+j72c-court-025#1	Nói thật, xin tha vì thương tình	{'rel': 1}|{'bac': 1} → {'an': 1}|{'bac': 1}
+j72c-court-025#1	Nói giảm, đổ cho dịch bệnh ngựa	{'danh': 2}|{'an': 2} → {'danh': 2}|{'bac': 2}
+j72c-court-025#1	Xin nhà quan đền bù thay mã phu	{'an': 3}|{'rel': 3} → {'duc': 3}|{'rel': 3}
+j72c-court-026#1	Từ chối, tìm đường chính	{'rel': 1}|{'bac': 1} → {'an': 1}|{'bac': 1}
+j72c-court-026#1	Đưa chút quà nhỏ, đúng lệ	{'danh': 2}|{'an': 2} → {'danh': 2}|{'bac': 2}
+j72c-court-026#1	Mời người ấy uống trà, xin ý	{'an': 3}|{'rel': 3} → {'duc': 3}|{'rel': 3}
+j72c-court-027#1	Câu quen mà ấm	{'an': 1}|{'rel': 1} → {'an': 1}|{'bac': 1}
+j72c-court-028#2	Khuyên mỗi người nhường một ít	{'rel': 1}|{'suc': 1} → {'danh': 1}|{'suc': 1}
+j72c-court-028#2	Dựa vào lời cha, đọc lại di chúc cũ	{'an': 2}|{'rel': 2} → {'an': 2}|{'suc': 2}
+j72c-court-028#2	Xin Thái hậu làm chứng	{'danh': 3}|{'an': 3} → {'rel': 3}|{'suc': 3}
+j72c-court-029#2	Cổ thấp, nhẹ nhàng, dễ viết	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-court-029#2	Cổ cao, kín đáo, nghiêm cẩn	{'rel': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-court-029#2	Cổ thêu chữ chúc thi đỗ	{'an': 3}|{'rel': 3} → {'duc': 3}|{'rel': 3}
+j72c-court-030#1	Từ chối thẳng, giữ chặt thư	{'rel': 1}|{'suc': 1} → {'an': 1}|{'suc': 1}
+j72c-court-030#1	Nói dối, bảo là thư nhà	{'danh': 2}|{'an': 2} → {'danh': 2}|{'suc': 2}
+j72c-court-030#1	Gọi thái giám áp tải đi cùng	{'an': 3}|{'rel': 3} → {'duc': 3}|{'rel': 3}
+j72c-court-033#1	Món cầu kỳ, giữ thể diện	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-court-033#1	Món dân dã, ấm lòng	{'rel': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-court-033#1	Món đơn giản nhưng trình bày khéo	{'an': 3}|{'rel': 3} → {'duc': 3}|{'rel': 3}
+j72c-court-034#1	Xin lão giữ một đoạn cho người con bị bỏ	{'an': 2}|{'rel': 2} → {'an': 2}|{'hh': 2}
+j72c-court-035#1	Cuốn sâu sắc	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-court-035#1	Cuốn dễ đọc	{'rel': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-court-035#1	Cuốn nhỏ gọn	{'an': 3}|{'rel': 3} → {'duc': 3}|{'rel': 3}
+j72c-court-036#1	Món nhẹ, hợp đường xa	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-court-036#1	Món đẹp nhưng nặng, thể diện cho Hoàng thượng	{'rel': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-court-036#1	Chia quà thành nhiều gói nhỏ	{'an': 3}|{'rel': 3} → {'duc': 3}|{'rel': 3}
+j72c-court-040#1	Màu xanh nhạt	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-court-040#1	Màu hồng nhạt	{'rel': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-court-040#1	Màu ngà, hợp cả hai	{'an': 3}|{'rel': 3} → {'duc': 3}|{'rel': 3}
+j72c-court-041#1	Khuyên bỏ đoạn buồn	{'rel': 2}|{'bac': 2} → {'an': 2}|{'bac': 2}
+j72c-court-041#1	Khuyên đổi nhịp để buồn mà không nặng	{'an': 3}|{'rel': 3} → {'duc': 3}|{'rel': 3}
+j72c-court-042#1	Khuyên xin lỗi trước	{'rel': 1}|{'an': 1} → {'mat': 1}|{'an': 1}
+j72c-court-042#1	Đề nghị hai người cùng gảy lại khúc ấy	{'an': 3}|{'rel': 3} → {'duc': 3}|{'rel': 3}
+j72c-court-048#2	Trả trâm cho người có chữ khắc, trách người kia	{'hh': 1}|{'an': 1} → {'mat': 1}|{'an': 1}
+j72c-court-048#2	Chia đôi, giữ trâm làm kỷ niệm chung	{'danh': 2}|{'bac': 2} → {'hh': 2}|{'bac': 2}
+j72c-court-048#2	Bán trâm chia bạc, không ai đòi nữa	{'mat': 3}|{'hh': 3} → {'danh': 3}|{'hh': 3}
+j72c-court-051#1	Khuyên thẳng, kể hậu quả	{'rel': 1}|{'an': 1} → {'mat': 1}|{'an': 1}
+j72c-court-051#1	Báo tổng quản xử	{'mat': 3}|{'rel': 3} → {'duc': 3}|{'rel': 3}
+j72c-court-061#1	Bổ huyết	{'danh': 1}|{'mat': 1} → {'rel': 1}|{'mat': 1}
+j72c-court-061#1	Bổ khí	{'rel': 2}|{'bac': 2} → {'suc': 2}|{'bac': 2}
+j72c-court-061#1	An thần	{'suc': 3}|{'rel': 3} → {'danh': 3}|{'rel': 3}
+j72c-court-063#1	Nói rõ lệnh Hoàng hậu	{'hh': 1}|{'an': 1} → {'mat': 1}|{'an': 1}
+j72c-court-063#1	Nói nhẹ, nhờ họ tự biết	{'danh': 2}|{'bac': 2} → {'hh': 2}|{'bac': 2}
+j72c-court-063#1	Đề nghị đổi sang trò vô hại	{'mat': 3}|{'hh': 3} → {'danh': 3}|{'hh': 3}
+j72c-fam-003#1	Gửi trâm vừa phải	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-003#1	Gửi trâm quý, lòng không nỡ	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-003#1	Mua thêm trâm mới, gửi một cặp	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-005#1	Món có ý nghĩa, giữ làm kỷ niệm	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-005#1	Món thực dụng, dùng lâu	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-005#1	Món lộng lẫy, hợp thể diện	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-007#1	Chọn ngày lễ, nhiều người, dễ lọt	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-007#1	Chọn ngày gần, vú còn khỏe	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-007#1	Xin thêm một ngày, nhờ người quen	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-009#1	Gửi món bền mà xấu	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-009#1	Gửi món dễ vỡ nhưng đẹp	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-009#1	Gửi hai món, dặn chia cho trẻ làng	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-013#1	Đổi bằng món nhỏ	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-013#1	Xin thẳng, hứa không nói ai	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-013#1	Xin cây con thay hạt	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-014#1	Giữ nguyên, dùng ít	{'suc': 3}|{'an': 3} → {'suc': 3}|{'bac': 3}
+j72c-fam-015#1	Nhờ gửi lời nhắn qua người quen	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-015#1	Báo thật, kèm lời an ủi	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-015#1	Xin phép cho họ gặp nhau một lần	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-017#1	Viết lễ nghĩa, đúng phép	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-017#1	Viết gần gũi, kể chuyện cũ	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-017#1	Viết một bài thơ ngắn	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-018#1	Nói chung chung, không lộ gì	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-018#1	Nói thật điều biết, không thêm	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-018#1	Từ chối, nói không biết	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-020#2	Chuyển thư sang nơi khác kín hơn	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-021#1	Chép nhanh, kịp giỗ	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-021#1	Chép chậm, từng chữ	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-021#1	Nhờ cung nữ chép phụ	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-022#1	Mua ở chủ thật, trả giá cao	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-022#1	Mua ở chủ giá tốt, kiểm kỹ	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-022#1	Nhờ cung nữ trả giá	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-024#1	Chép lại một bản giống	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-024#1	Gửi khăn thật	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-024#1	Giữ khăn, gửi thư kể kỷ niệm	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-027#1	Vế nói người, hiền hòa	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-027#1	Vế nói nhà, vững bền	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-027#1	Vế nói đất, nhân từ	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-029#1	Xin phép về thăm một lần	{'suc': 3}|{'an': 3} → {'suc': 3}|{'bac': 3}
+j72c-fam-030#1	Chim bay, hy vọng	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-030#1	Chim đứng, yên tĩnh	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-030#1	Chim hót, vui tai	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-031#1	Xin chép với sự đồng ý của người nấu	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-031#1	Chép từ trí nhớ, thêm bớt vài vị	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-031#1	Chỉ gửi bánh thật, không gửi công thức	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-034#1	Cho nô tỳ tự chọn thời khắc	{'rel': 3}|{'an': 3} → {'rel': 3}|{'bac': 3}
+j72c-fam-035#1	Cho ứng nửa, nửa sau xem	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-035#1	Cho ứng, đòi cam kết	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-035#1	Không ứng, giúp bằng quà nhỏ	{'rel': 3}|{'an': 3} → {'rel': 3}|{'bac': 3}
+j72c-fam-037#1	Nói dần dần, từng chút	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-037#1	Nói thật, an ủi sau	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-037#1	Đọc hết, rồi để nô tỳ ngồi lặng	{'rel': 3}|{'an': 3} → {'rel': 3}|{'bac': 3}
+j72c-fam-038#1	Chọn bánh bền	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-038#1	Chọn bánh đẹp	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-038#1	Chọn trái cây khô, vừa rẻ vừa bền	{'rel': 3}|{'an': 3} → {'rel': 3}|{'bac': 3}
+j72c-fam-039#1	Nói thật với Cung Chính ti, xin giữ riêng	{'rel': 3}|{'an': 3} → {'rel': 3}|{'bac': 3}
+j72c-fam-040#1	Nhờ thái y xem bệnh trước khi quyết	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-040#1	Cho nô tỳ uống thuốc trước	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-040#1	Khuyên nô tỳ nhổ luôn	{'suc': 3}|{'an': 3} → {'suc': 3}|{'bac': 3}
+j72c-fam-041#1	Chia phiên canh, mỗi người một đêm	{'rel': 3}|{'an': 3} → {'rel': 3}|{'suc': 3}
+j72c-fam-044#1	Chờ mùa sau, có ngựa thuần hơn	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-044#1	Xin ngay, nhận trước	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-044#1	Xin ngựa lớn thay, tập trước	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-045#1	Mượn bản chép thay bản gốc	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-045#1	Mượn quyển đầu	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-045#1	Xin cả bộ, hẹn trả sớm	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-048#1	Khuyên nói ít, nghe nhiều	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-048#1	Khuyên khiêm nhường, kín đáo	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-048#1	Khuyên chủ động kết giao	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-049#1	Món đắt mà thể diện	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-049#1	Món rẻ mà ý nghĩa	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-049#1	Món tự làm, tốn công	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-050#1	Trả lời đủ mọi chuyện	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-050#1	Trả lời chuyện gấp trước	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-050#1	Nhờ cung nữ viết thay một phần	{'rel': 3}|{'an': 3} → {'rel': 3}|{'bac': 3}
+j72c-fam-051#1	Chỉ gửi quà của nô tỳ	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-051#1	Thêm món của ngươi, nô tỳ cảm động	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-051#1	Thêm một lá thư của ngươi cho bà	{'rel': 3}|{'an': 3} → {'rel': 3}|{'bac': 3}
+j72c-fam-052#1	Kèm chút bạc phúng viếng	{'rel': 3}|{'an': 3} → {'rel': 3}|{'bac': 3}
+j72c-fam-054#1	Gửi lại, chờ dịp thích hợp	{'relb': 3}|{'an': 3} → {'relb': 3}|{'bac': 3}
+j72c-fam-055#1	Dùng câu hoa mỹ	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-055#1	Giữ câu thật thà	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-055#1	Trộn cả hai	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-056#2	Chuyển hộp sang nhờ Thái hậu giữ	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-058#1	Xin gặp thử trước, rồi tiến cử	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-058#1	Tiến cử, tin lời cha	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-058#1	Từ chối khéo, nhờ nàng thử cung khác	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-059#1	Chỉ báo ngày hợp, mẹ chọn ngay	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-059#1	Báo cả hai ngày cho mẹ	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-059#1	Nhờ thầy viết lá bùa thêm	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-061#1	Gửi kèm một bài thơ	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-061#1	Gửi qua người nhà, nói là tạ ơn	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-061#1	Nhờ người quen thân thầy trao	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-062#1	Chọn tên hiền hòa	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-062#1	Chọn tên mạnh mẽ	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-062#1	Chọn tên cổ kính	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-063#1	Kể chuyện lạ, có thể làm xóm thích	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-063#1	Kể chuyện vô hại	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-063#1	Kể chuyện về bánh trái	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-065#1	Chọn hoa nụ, bền hơn	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-065#1	Chọn hoa nở rộ	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-065#1	Gửi cả hoa và nụ, tỷ tỷ tự chọn	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}
+j72c-fam-066#1	Nhờ thái y xem trước	{'danh': 1}|{'mat': 1} → {'an': 1}|{'mat': 1}
+j72c-fam-066#1	Uống đều vài đêm	{'an': 2}|{'bac': 2} → {'danh': 2}|{'bac': 2}
+j72c-fam-066#1	Đổi cách pha cho vừa miệng	{'duc': 3}|{'an': 3} → {'duc': 3}|{'bac': 3}

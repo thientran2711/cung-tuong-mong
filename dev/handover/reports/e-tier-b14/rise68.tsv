@@ -1,0 +1,21 @@
+j68c-day-042	Nói thật là hơi nồng	{'duc': 1}|{'rel.A': 1} → {'mat': 1}|{'bac': 1}
+j68c-day-042	Gợi ý bớt quế thêm hoa nhài	{'mat': 2}|{'bac': 2} → {'duc': 2}|{'bac': 2}
+j68c-visit-026	Nhận, cắm ngay đầu giường	{'rel.A': 1}|{'suc': 1} → {'mat': 1}|{'suc': 1}
+j68c-visit-026	Đùa rằng nàng nên tự cầu trước	{'mat': 2}|{'rel.A': 2} → {'danh': 2}|{'rel.A': 2}
+j68c-visit-040	Hỏi con muốn thưởng gì	{'mat': 1}|{'rel.A': 1} → {'mat': 1}|{'danh': 1}
+j68c-visit-040	Nhắc con còn phải chăm hơn	{'duc': 2}|{'rel.A': 2} → {'duc': 2}|{'danh': 2}
+j68c-serv-005	Nhận và khen tay khéo của nàng	{'rel.A': 1}|{'bac': 1} → {'tamco': 1}|{'bac': 1}
+j68c-serv-005	Nhận, kín đáo hỏi ai thêu	{'tamco': 3}|{'rel.A': 3} → {'danh': 3}|{'rel.A': 3}
+j68c-serv-009	Ngồi nghe nàng kể chuyện con	{'tamco': 1}|{'rel.A': 1} → {'tamco': 1}|{'danh': 1}
+j68c-serv-009	Nhắc đừng nhìn ra cổng mà lỡ việc	{'duc': 2}|{'rel.A': 2} → {'duc': 2}|{'danh': 2}
+j68c-serv-013	Ghi nhớ, tìm dịp nói riêng	{'tamco': 2}|{'rel.A': 2} → {'duc': 2}|{'suc': 2}
+j68c-serv-024	Lùi lại, giả như không nghe	{'tamco': 1}|{'rel.A': 1} → {'tamco': 1}|{'danh': 1}
+j68c-serv-024	Phạt nhẹ vì dám nhái chủ	{'duc': 2}|{'rel.A': 2} → {'duc': 2}|{'danh': 2}
+j68c-serv-030	Ăn và khen ngon	{'rel.A': 1}|{'bac': 1} → {'tamco': 1}|{'bac': 1}
+j68c-serv-030	Hỏi chuyện quê nàng, nhờ kể thêm	{'tamco': 3}|{'rel.A': 3} → {'duc': 3}|{'rel.A': 3}
+j68c-serv-035	Kể lại chuyện của ngươi cho nàng nghe	{'rel.A': 2}|{'tamco': 2} → {'danh': 2}|{'suc': 2}
+j68c-serv-040	Thưởng bạc cho nàng thật thà	{'rel.A': 1}|{'bac': 1} → {'tamco': 1}|{'bac': 1}
+j68c-serv-040	Nhờ nàng giữ giùm đồ quý	{'tamco': 3}|{'rel.A': 3} → {'duc': 3}|{'rel.A': 3}
+j68c-court-040	Tiễn ông, nhận sổ thuốc giữ hộ	{'rel.A': 1}|{'bac': 1} → {'tamco': 1}|{'bac': 1}
+j68c-court-040	Xin ông ở lại thêm một mùa	{'tamco': 3}|{'rel.A': 3} → {'danh': 3}|{'rel.A': 3}
+j68c-kid-041	Hẹn mai kể tiếp để con mong	{'tamco': 2}|{'rel.A': 2} → {'duc': 2}|{'suc': 2}
