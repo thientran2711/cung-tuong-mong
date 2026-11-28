@@ -20,12 +20,12 @@ AA.probe=async(s)=>{const sl=ms=>new Promise(r=>setTimeout(r,ms));AA.restore();A
  const NAV=AA.btns(s).map(b=>!!b.closest(".tdseg"));/* a view switch (Phe phái hậu cung / Triều đình seg, j55) opens no act: not an act card */
  for(let j=0;j<top.length;j++){const c=top[j];if(c.dis||NAV[j])continue;out.push({who,name:c.name,gain:c.gain,ton:c.ton,door:c.door,cls:c.cls,empty:AA.empty(c),lvl:0});
   AA.restore();AA.show(s);await sl(40);const b=AA.btns(s)[j];if(!b)continue;AA.force=null;try{b.click()}catch(e){}await sl(20);try{render()}catch(e){}
-  const m=document.getElementById("modal");if(m&&!m.hidden){const O=[...m.querySelectorAll(".opts button.ka, .opts button.opt")];
+  const m=document.getElementById("modal");if(m&&!m.hidden){const O=__kopts(m).filter(x=>x.matches(".ka,.opt,.kpk-b"));
    for(const o of O){const r=Object.assign(AA.rowsOf(o),{gain:AA.gainOf(o)});if(r.dis||/^✕/.test(r.name))continue;if(!o.classList.contains("ka"))continue;out.push({who,parent:c.name,title:(document.getElementById("mt")||{}).innerText||"",name:r.name,gain:r.gain,ton:r.ton,empty:AA.empty(r),lvl:1})}}
   AA.hide()}
  return out};`;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',serviceWorkers:'block'});
- const p=await ctx.newPage();p.setDefaultTimeout(0);const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(0);const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
  await p.evaluate(LIB);await p.evaluate(PROBE);
  /* MUTANT=1: blank one producer (the door cards' Được, jdoor doorGain) — the test must then FAIL */

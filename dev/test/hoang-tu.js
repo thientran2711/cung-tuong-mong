@@ -12,7 +12,7 @@ const MIME={html:'text/html',js:'text/javascript',json:'application/json',webp:'
   const f=path.join(ROOT,decodeURIComponent(u.pathname));if(/assets\.json$/.test(f)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});
   r.fulfill({status:200,body:fs.readFileSync(f),headers:{'content-type':MIME[f.split('.').pop()]||'application/octet-stream'}})});
  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
- const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);await require('./lib/veil').guard(p);p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto('http://ht.local/'+PAGE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(3500);
  const clean=()=>p.evaluate(()=>{for(let i=0;i<4;i++)document.querySelectorAll('[data-km-close]').forEach(b=>b.click());Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;const w=document.getElementById('dawn');if(w){w.hidden=true;w.innerHTML='';w.classList.remove('on')}document.body.classList.remove('kbk-open');try{render()}catch(e){}});
  if(SC==='old'){const d=fs.readFileSync(SAVE,'utf8');await p.evaluate(d=>{localStorage.setItem(SK(2),d);showTitle();const b=document.querySelector('[data-load="2"]');if(b)b.click();else{deser(loadSlot(2));SLOT=2}},d);await p.waitForTimeout(3000);await p.evaluate(()=>{document.getElementById('title').hidden=true;try{render()}catch(e){}});await clean()}
@@ -43,7 +43,7 @@ const MIME={html:'text/html',js:'text/javascript',json:'application/json',webp:'
   const ok=await p.evaluate(()=>{S.suc=100;used=0;const k=S.kids.find(x=>x.sex==='m'&&x.age>=16);if(!k)return 'no son';tab='hon';const L=document.querySelectorAll('#panel .pface');render();
    const b=document.querySelector('[data-ht="ban"]:not([disabled])')||(()=>{tab='kid';PG.kid=S.kids.indexOf(k);render();return document.querySelector('[data-ht="ban"]:not([disabled])')})();if(!b)return 'no btn';b.click();return 'ok'});
   await p.waitForTimeout(1500);await shot('banhon');R.banhon=Object.assign({click:ok},await meas());
-  const pick=await p.evaluate(()=>{const o=document.querySelector('#modal button.ka,#modal .opts button,#modal button[data-o]');if(!o)return 'no opt';o.click();return o.textContent.slice(0,60)});
+  const pick=await p.evaluate(()=>{const o=document.querySelector('#modal button.ka')||__kopts()[0]||document.querySelector('#modal button[data-o]');if(!o)return 'no opt';__koptGo(o);return __koptText(o).slice(0,60)});
   await p.waitForTimeout(1500);await clean();await p.evaluate(()=>{tab='qt';render()});await p.waitForTimeout(800);
   R.ask=await p.evaluate(()=>{used=0;const b=document.querySelector('[data-ht="ask"]:not([disabled])');if(!b)return 'no ask';b.click();return 'ok'});await p.waitForTimeout(1200);await clean();await shot('qt-after-ask');
   R.state=await p.evaluate(()=>({sons:S.kids.filter(k=>k.sex==='m').map(k=>[k.name,k.age,pkState(k)]),hon:S.hon,qn:(S.qPool||[]).length,kn:(S.qPool||[]).filter(q=>q.kn).length}));R.pick=pick}

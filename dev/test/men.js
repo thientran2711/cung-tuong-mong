@@ -4,7 +4,7 @@
 const {chromium}=require('./lib/pw-roulette');
 const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce'});
- const p=await ctx.newPage();await require('./lib/veil').guard(p);p.setDefaultTimeout(300000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);await require('./lib/veil').guard(p);p.setDefaultTimeout(300000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  const R={};const ovf=()=>p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
  /* 1. an old save (build without jmen) */
  await p.goto(BASE+'/_old.html',{waitUntil:'domcontentloaded'});await p.waitForTimeout(3500);
@@ -22,7 +22,7 @@ const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=
  await p.waitForTimeout(2500);
  await p.screenshot({path:`${OUT}/${TAG}-card.jpg`,type:'jpeg',quality:85});await p.evaluate(()=>{const o=document.querySelector('#modal .opts');if(o)o.scrollIntoView({block:'start'})});await p.waitForTimeout(800);await p.screenshot({path:`${OUT}/${TAG}-card-opts.jpg`,type:'jpeg',quality:85});
  R.card=await p.evaluate(()=>{const M=document.getElementById('modal');const dlg=M&&M.querySelector('.dlg');const cut=[...(M?M.querySelectorAll('button, .kpb p, .kpsn, figcaption'):[])].filter(e=>e.scrollWidth>e.clientWidth+2&&getComputedStyle(e).overflow!=='visible').map(e=>e.textContent.slice(0,40));
-  return{shown:M&&!M.hidden,title:(document.getElementById('mt')||{}).textContent,figs:M?M.querySelectorAll('.kesf img').length:0,opts:M?[...M.querySelectorAll('.opts button')].map(b=>b.innerText.replace(/\s+/g,' ').slice(0,60)):[],cut,dlgW:dlg?Math.round(dlg.getBoundingClientRect().width):0}});
+  return{shown:M&&!M.hidden,title:(document.getElementById('mt')||{}).textContent,figs:M?M.querySelectorAll('.kesf img').length:0,opts:M?__kopts(M).map(b=>__koptText(b).slice(0,60)):[],cut,dlgW:dlg?Math.round(dlg.getBoundingClientRect().width):0}});
  R.cardOvf=await ovf();
  /* 3. choose "Làm như không thấy" → the stage with the man (and the consort) */
  await p.evaluate(()=>{const i=Q[0]&&Q[0].opts?Q[0].opts.findIndex(o=>/không thấy/.test(o.n)):-1;if(i>=0)chooseM(i)});await p.waitForTimeout(4200);
@@ -35,5 +35,5 @@ const [,,BASE,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=
  R.map=await p.evaluate(()=>[...document.querySelectorAll('.mspot.empty, .mspot.kmen-nt')].map(e=>e.title).filter(t=>/Ngoại triều/.test(t)));R.mapOvf=await ovf();R.kfig=await p.evaluate(()=>[KIT_FIG.fac('img/kit/unknown-fig-m.webp',30),KIT_FIG.fac('img/kit/unknown-fig-f.webp',30),KIT_FIG.fac('img/fig-man-thive-1-a26.webp',30)]);
  await p.evaluate(()=>{const b=document.querySelector('[data-mennt]');if(b)b.click()});await p.waitForTimeout(2000);
  await p.screenshot({path:`${OUT}/${TAG}-ntcard.jpg`,type:'jpeg',quality:82});
- R.nt=await p.evaluate(()=>{const M=document.getElementById('modal');return{shown:M&&!M.hidden,title:(document.getElementById('mt')||{}).textContent,opts:M?[...M.querySelectorAll('.opts button')].map(b=>b.innerText.replace(/\s+/g,' ').slice(0,70)):[]}});
+ R.nt=await p.evaluate(()=>{const M=document.getElementById('modal');return{shown:M&&!M.hidden,title:(document.getElementById('mt')||{}).textContent,opts:M?__kopts(M).map(b=>__koptText(b).slice(0,70)):[]}});
  console.log(JSON.stringify({TAG,R,errs}));await b.close()})().catch(e=>{console.error(e);process.exit(1)});

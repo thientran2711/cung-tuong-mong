@@ -6,7 +6,7 @@
 const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');const SHOT=process.argv[4]||'';
 const BAD=/\?\?\?|(^|[^\p{L}])một vị|(^|[^\p{L}])một người|chưa quen biết|undefined|\bnull\b|NaN/iu;
 (async()=>{const b=await chromium.launch();let fails=0;const chk=(n,ok,v)=>{console.log((ok?'ok  ':'FAIL')+' '+n+' '+JSON.stringify(v));if(!ok)fails++};
- for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const p=await b.newPage({viewport:{width:W,height:H}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,140)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
+ for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const p=await b.newPage({viewport:{width:W,height:H}});await require('./lib/kopts').install(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,140)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
   await p.goto('file://'+SRC,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:240000});await p.waitForTimeout(1200);
   const r=await p.evaluate(async()=>{quiet=true;window.__forceOrigin='tt';document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;await new Promise(r=>setTimeout(r,2500));Q.length=0;document.getElementById('modal').hidden=true;document.body.classList.remove('kdlg-on');
    const sl=ms=>new Promise(r=>setTimeout(r,ms));const un=rivals.find(v=>v&&v.alive&&!v.out&&v.name&&!k61Named(v));if(!un)return {err:'no unmet consort'};
@@ -17,7 +17,7 @@ const BAD=/\?\?\?|(^|[^\p{L}])một vị|(^|[^\p{L}])một người|chưa quen b
    const tag=document.querySelector('#modal .kptitle');if(tag){tag.insertAdjacentHTML('beforeend',' '+kitName(un));await sl(300);out.tag=T('#modal .kptitle .kname')}
    Q.length=0;document.getElementById('modal').hidden=true;document.body.classList.remove('kdlg-on');
    /* family scan: quick days, collect every title text */const seen=new Set(),bad=[];const scan=()=>document.querySelectorAll(window.KIT_TTL_SEL||'h3').forEach(e=>{if(e.closest('.kname,.kti'))return;let t='';e.childNodes.forEach(n=>{if(!(n.nodeType===1&&n.matches('.kname,.kname2,.kti')))t+=n.textContent});t=t.replace(/\s+/g,' ').trim();if(!t||seen.has(t))return;seen.add(t);if(/\?\?\?|(^|[^\p{L}])một vị|(^|[^\p{L}])một người|chưa quen biết|undefined|\bnull\b|NaN/iu.test(t))bad.push(t)});
-   for(let d=0;d<40&&!S.dead;d++){try{endTurn()}catch(e){}await sl(60);scan();let g=0;while(Q.length&&g++<6){try{const q=Q[0];showModal();await sl(80);scan();const bt=document.querySelector('#modal .opts button:not([disabled]),#modal button.kopt:not([disabled]),#modal .act-card:not([disabled])');if(bt)bt.click();else Q.shift();await sl(80);scan()}catch(e){Q.shift()}}}
+   for(let d=0;d<40&&!S.dead;d++){try{endTurn()}catch(e){}await sl(60);scan();let g=0;while(Q.length&&g++<6){try{const q=Q[0];showModal();await sl(80);scan();const bt=__kopts().find(x=>!x.disabled)||document.querySelector('#modal button.kopt:not([disabled]),#modal .act-card:not([disabled])');if(bt)__koptGo(bt);else Q.shift();await sl(80);scan()}catch(e){Q.shift()}}}
    out.scanned=seen.size;out.bad=bad.slice(0,10);return out});
   if(r.err){chk(wh+' setup',false,r);continue}
   chk(wh+' resultShow title',r.res&&!BAD.test(r.res)&&/Yến tiệc mời/.test(r.res),r.res);

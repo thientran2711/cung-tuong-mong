@@ -7,7 +7,7 @@ const [,,PURL,SZ='1180x820',SEC='20',FLAG]=process.argv;
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});
  const [W,H]=SZ.split('x').map(Number);const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:W<1100,isMobile:W<1100,serviceWorkers:'block'});
  await ctx.route('**/*',rt=>{const h=rt.request().headers();if(h['x-ctm-load'])return rt.abort();return rt.fallback()});
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(PURL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:120000});
  await p.evaluate(()=>{window.__lean=0;new MutationObserver(ms=>{for(const m of ms)for(const n of m.addedNodes)if(n.nodeType===1&&(n.matches('.kemo-big')||n.querySelector&&n.querySelector('.kemo-big')))window.__lean++}).observe(document.body,{childList:true,subtree:true})});
  const watch=async(name)=>{await p.evaluate(()=>{window.__lean=0});await sleep(+SEC*1000);const r=await p.evaluate(()=>({lean:window.__lean,seals:document.querySelectorAll('img.kemo').length,np:typeof kesNonPlay==='function'?kesNonPlay(document.querySelector('img.kemo')||document.body):'-'}));return Object.assign({screen:name},r)};
@@ -20,7 +20,7 @@ const [,,PURL,SZ='1180x820',SEC='20',FLAG]=process.argv;
  R.push(await watch('identity card + face picker'));
  await p.evaluate(()=>{const e=document.querySelector('#modal .kpick');if(e)e.scrollIntoView({block:'center'})});R.push(await watch('identity card, face picker in view'));
  await p.evaluate(()=>{const x=document.querySelector('#modal button[data-nl=ok]');x&&x.click()});await sleep(4000);
- for(let i=0;i<12;i++){await p.evaluate(()=>{try{if(typeof closeModal==='function'&&!document.getElementById('modal').hidden){const m=Q[0];if(m&&m.opts&&m.opts.length){const bt=document.querySelector('#modal .opts button:not([disabled])');bt&&bt.click()}else closeModal()}}catch(e){}});await sleep(600)}
+ for(let i=0;i<12;i++){await p.evaluate(()=>{try{if(typeof closeModal==='function'&&!document.getElementById('modal').hidden){const m=Q[0];if(m&&m.opts&&m.opts.length){const bt=__kopts().find(x=>!x.disabled);bt&&__koptGo(bt)}else closeModal()}}catch(e){}});await sleep(600)}
  R.push(await watch('PLAY (control)'));
  console.log(`KIT §38.4 emotion-seal non-play scan @${SZ} (${SEC}s per screen)`);R.forEach(r=>console.log(`  ${r.screen.padEnd(36)} leans ${r.lean} · seals ${r.seals} · nonPlay ${r.np}`));if(errs.length)console.log('ERR',errs.slice(0,4));
  await b.close();if(FLAG==='--fail'&&(R.slice(0,4).some(r=>r.lean)||R[4].np===true))process.exit(1)})();

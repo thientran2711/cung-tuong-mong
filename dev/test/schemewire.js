@@ -2,7 +2,7 @@
    first-time how-to card (S.mgSeen), Gợi ý button, save/load of a pending choice, #ov (the co-op timer's mini-game pause signal) open during a game.
    usage: node dev/test/schemewire.js <baseURL> <W>x<H>@<dpr> */
 const {chromium}=require('playwright');const [,,BASE,SZ]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({serviceWorkers:'block',viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1)});await ctx.addInitScript(()=>{/* merge-train-4: the card-flip scene now waits for its kit end button (KIT 81); hide it like main's tests do */document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='.kcf{display:none!important}';document.head.appendChild(s)})});const p=await ctx.newPage();const errs=[],fails=[],res={};
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({serviceWorkers:'block',viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1)});await ctx.addInitScript(()=>{/* merge-train-4: the card-flip scene now waits for its kit end button (KIT 81); hide it like main's tests do */document.addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='.kcf{display:none!important}';document.head.appendChild(s)})});const p=await ctx.newPage();await require('./lib/kopts').install(p);const errs=[],fails=[],res={};
  p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push(m.text().slice(0,200))});
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='td';document.getElementById('title').hidden=true;start()});
@@ -16,11 +16,11 @@ const {chromium}=require('playwright');const [,,BASE,SZ]=process.argv;const [WH,
  /* 2. Nghe lén choice -> Giao cho người làm pays 1 khắc once, runs the plain overhear */
  const pick=async(q,title)=>{await p.evaluate(([q,t])=>{Q.length=0;const d=mkP('sgpick',q);if(!d)throw new Error('no dialog');pushDil(d,t);showModal()},[q,title]);await p.waitForTimeout(500)};
  await clean();await pick({j:'over'},'Nghe ngóng');
- res.overDlg=await p.evaluate(()=>({n:document.querySelectorAll('#modal .opts button').length,t:$('modal').innerText.slice(0,260)}));
- await p.evaluate(()=>{window.__u0=used});await p.locator('#modal .opts button').nth(1).click();await p.waitForTimeout(800);
+ res.overDlg=await p.evaluate(()=>({n:__kopts().length,t:$('modal').innerText.slice(0,260)}));
+ await p.evaluate(()=>{window.__u0=used});await p.evaluate(()=>__koptGo(__kopts()[1]));await p.waitForTimeout(800);
  res.overSkip=await p.evaluate(()=>({used:used-window.__u0,game:!!$('kg82')}));if(res.overSkip.used!==1)fails.push('over skip: khắc '+res.overSkip.used);
  /* 3. Nghe lén -> play: first-time card, Gợi ý, #ov visible */
- await clean();await pick({j:'over'},'Nghe ngóng');await p.locator('#modal .opts button').nth(0).click();await p.waitForTimeout(900);
+ await clean();await pick({j:'over'},'Nghe ngóng');await p.evaluate(()=>__koptGo(__kopts()[0]));await p.waitForTimeout(900);
  res.game1=await p.evaluate(()=>({kg:!!$('kg82'),first:/cách chơi, lần đầu/i.test($('kg82').innerText),go:$('sggo')&&$('sggo').innerText,ov:(()=>{const o=$('ov');const r=o.getBoundingClientRect();return !o.hidden&&r.width>0&&r.height>0})(),used}));
  if(!res.game1.first)fails.push('first-time card missing');if(!res.game1.ov)fails.push('#ov not visible during game (co-op timer pause)');
  await p.locator("#sggo").click();await p.waitForFunction(()=>$("sghint"),null,{timeout:8000}).catch(()=>{});
@@ -28,13 +28,13 @@ const {chromium}=require('playwright');const [,,BASE,SZ]=process.argv;const [WH,
  await p.locator('#sghint').click();await p.waitForTimeout(400);
  await p.evaluate(()=>{kg82Close()});await p.waitForTimeout(300);
  /* second time: no card */
- await pick({j:'over'},'Nghe ngóng');await p.locator('#modal .opts button').nth(0).click();await p.waitForTimeout(900);
+ await pick({j:'over'},'Nghe ngóng');await p.evaluate(()=>__koptGo(__kopts()[0]));await p.waitForTimeout(900);
  res.game2=await p.evaluate(()=>({first:/cách chơi, lần đầu/i.test($('kg82').innerText)}));if(res.game2.first)fails.push('how-to card shown twice');
  await p.evaluate(()=>{kg82Close()});
  /* 4. servant bribe */
  await clean();
  res.serv=await p.evaluate(()=>{const o=rivals.find(x=>x.alive&&x.staff&&x.staff.length);if(!o)return{none:1};const s=o.staff[0];const d=mkP('sgpick',{j:'serv',sid:s.sid});return{ok:!!d,t:d&&d.o.map(x=>x.n),x:d&&d.o[0].x.slice(0,200),sid:s.sid}});
- if(!res.serv.none){await pick({j:'serv',sid:res.serv.sid},'Mua chuộc');await p.evaluate(()=>{window.__u0=used;window.__b0=S.bac});await p.locator('#modal .opts button').nth(1).click();await p.waitForTimeout(800);
+ if(!res.serv.none){await pick({j:'serv',sid:res.serv.sid},'Mua chuộc');await p.evaluate(()=>{window.__u0=used;window.__b0=S.bac});await p.evaluate(()=>__koptGo(__kopts()[1]));await p.waitForTimeout(800);
   res.servSkip=await p.evaluate(()=>({used:used-window.__u0,bac:window.__b0-S.bac,log:String(S.logs[0]||'').replace(/<[^>]+>/g,'').slice(0,120)}));if(res.servSkip.used!==2)fails.push('serv skip khắc '+res.servSkip.used)}
  /* 5. every new job survives save/load */
  await clean();

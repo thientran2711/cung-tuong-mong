@@ -13,7 +13,7 @@
    usage: node dev/test/dead-card.js <page url> [out.json]   (serve the repo root, e.g. python3 -m http.server) */
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT]=process.argv;
 const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
-(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:900,height:900}});await keepNotesSeen(p);
+(async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:900,height:900}});await require('./lib/kopts').install(p);await keepNotesSeen(p);
  await p.addInitScript(()=>{let s=7*7919+12345;Math.random=()=>{s|=0;s=s+0x6D2B79F5|0;let t=Math.imul(s^s>>>15,1|s);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}});
  await p.route(/\.(webp|png|jpe?g|mp3|ogg|m4a)(\?|$)/i,r=>r.abort());
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(2000);
@@ -36,14 +36,14 @@ const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps
  console.log(JSON.stringify({n:R.n,built:R.built,pend:R.pend,e68:R.e68,ev:R.ev}));for(const r of R.res)console.log(`| ${r.k} | ${r.src} | ${r.ranks} | ${r.why} |`);
  let fail=R.n;
  const P2=await p.evaluate(()=>{window.__e68off=1;const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};const out={};S.bac=2;S.month=12;for(const id of ['j68c-sea-023','j68c-serv-022']){const s=E68I['c:'+id];let d=null;for(let t=0;t<6&&!d;t++){let pp=null;try{pp=s.pp()}catch(e){}if(pp){pp.vi=0;d=mkP('e68c:'+id,pp)}}
-  if(!d){out[id]='not cast';continue}Q.length=0;Q.push({t:'Thời tiết',h:d.t,opts:d.o,pid:d.pid,pp:d.pp});SM();const B=[...document.querySelectorAll('#modal .opts button[data-m]')];out[id]=B.filter(b=>!b.disabled).length+'/'+B.length;Q.length=0;SM()}return out});
+  if(!d){out[id]='not cast';continue}Q.length=0;Q.push({t:'Thời tiết',h:d.t,opts:d.o,pid:d.pid,pp:d.pp});SM();const B=__kopts();out[id]=B.filter(b=>!b.disabled).length+'/'+B.length;Q.length=0;SM()}return out});
  for(const [k,v] of Object.entries(P2)){console.log('part2',k,'pressable',v);if(v!=='not cast'&&/^0\//.test(v))fail++}
  const P3=await p.evaluate(()=>{const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};const out={};
   const card=f=>({t:'Thử',h:'<p>thử</p>',mustChoose:f,opts:[{n:'Trả bạc',fx:{bac:-60}},{n:'Trả bạc nữa',fx:{bac:-60}}]});
-  S.bac=2;S.suc=60;S.danh=30;Q.length=0;Q.push(card(0));SM();{const m=Q[0];const B=[...document.querySelectorAll('#modal .opts button[data-m]')];
+  S.bac=2;S.suc=60;S.danh=30;Q.length=0;Q.push(card(0));SM();{const m=Q[0];const B=__kopts();
    out.a={open:B.filter(b=>!b.disabled&&!b.hidden).length,leave:m.opts.some(c=>c.__nlAdd),paid:m.opts.filter(c=>c.__nl).length}}
   for(const f of [0,1]){S.bac=2;S.suc=1;S.danh=0;Q.length=0;Q.push(card(f));const n0=(window.__deadCards||[]).length;SM();const m=Q[0];const lv=m.opts.find(c=>c.__nlAdd);
-   const B=[...document.querySelectorAll('#modal .opts button[data-m]')];const r={lui:lv?lv.n:null,x:!!kitModalCloser(),open:B.filter(b=>!b.disabled&&!b.hidden).length,net:(window.__deadCards||[]).length-n0};
+   const B=__kopts();const r={lui:lv?lv.n:null,x:!!kitModalCloser(),open:B.filter(b=>!b.disabled&&!b.hidden).length,net:(window.__deadCards||[]).length-n0};
    kitModalClose();r.after=Q.length;r.hidden=document.getElementById('modal').hidden;r.bac=S.bac;out[f?'forced':'open']=r}
   Q.length=0;SM();return out});
  console.log('part3',JSON.stringify(P3));if(!(P3.a.open===2&&!P3.a.leave&&P3.a.paid===2))fail++;
@@ -55,7 +55,7 @@ const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps
  /* Part 5 (flight-choose-guard, law 11): her temper lock (jemoact eaLock) never greys the last option she can really take: a card of one bạc
     road she cannot pay + one temper-locked road keeps the temper road open (before: both greyed = dead card, arm B H77P shape) */
  const P5=await p.evaluate(()=>{const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};S.bac=2;Q.length=0;Q.push({t:'Thử tính khí',h:'<p>thử</p>',opts:[{n:'Trả bạc',fx:{bac:-60}},{n:'Nhịn',fx:{},eaLock:'tính nóng'}]});SM();
-  const B=[...document.querySelectorAll('#modal .opts button[data-m]')];const r={open:B.filter(b=>!b.disabled).length+'/'+B.length,lui:!!document.getElementById('mclose')};Q.length=0;SM();return r});
+  const B=__kopts();const r={open:B.filter(b=>!b.disabled).length+'/'+B.length,lui:!!document.getElementById('mclose')};Q.length=0;SM();return r});
  console.log('part5',JSON.stringify(P5));/* review: the Lui net alone is not the law-2 fix: a road she can take must stay open */if(/^0\//.test(P5.open))fail++;
  /* Part 6 (r4): tsDis + unmet need are hold-backs of the ONE rule (kitLockWhy): the model pass already adds «Lui» (no __nlDom), ✕ closes, nothing paid */
  const P6=await p.evaluate(()=>{const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};S.bac=500;Q.length=0;
@@ -66,7 +66,7 @@ const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps
  /* Part 7 (r4): DOM truth — the model is blinded (kitLockWhy says open) while jts greys the buttons on screen: the drawn card still gets «Lui» (m.__nlDom) and closes */
  const P7=await p.evaluate(()=>{const SM=()=>{const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}};const w0=kitLockWhy;S.bac=500;Q.length=0;let r={};
   try{kitLockWhy=()=>'';Q.push({t:'Thử màn hình',h:'<p>thử</p>',opts:[{n:'Hết khắc',fx:{},tsDis:true,need:[{t:'2 khắc',ok:true}]},{n:'Hết khắc nữa',fx:{},tsDis:true,need:[{t:'3 khắc',ok:true}]}]});SM();
-   const m=Q[0];const lv=m.opts.find(c=>c.__nlAdd);const B=[...document.querySelectorAll('#modal .opts button[data-m]')].filter(b=>!b.hidden);
+   const m=Q[0];const lv=m.opts.find(c=>c.__nlAdd);const B=__kopts().filter(b=>!b.hidden);
    r={lui:lv?lv.n:null,dom:!!m.__nlDom,x:!!kitModalCloser(),open:B.filter(b=>!b.disabled).length+'/'+B.length};kitModalClose();r.after=Q.length}finally{kitLockWhy=w0}Q.length=0;SM();return r});
  console.log('part7',JSON.stringify(P7));if(!(P7.lui==='Lui'&&P7.dom&&P7.x&&P7.after===0))fail++;
  if(OUT)fs.writeFileSync(OUT,JSON.stringify(Object.assign(R,{P2,P3,P4,P5,P6,P7}),null,1));console.log(fail?'DEAD-CARD FAIL '+fail:'DEAD-CARD PASS');await b.close();process.exit(fail?1:0)})();

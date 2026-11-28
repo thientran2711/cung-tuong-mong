@@ -3,7 +3,7 @@
 const {chromium}=require('playwright');
 const [,,URL,SZ,OUT]=process.argv;const [WH]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch({proxy:{server:process.env.HTTPS_PROXY,bypass:'127.0.0.1,localhost'}});const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:2,reducedMotion:'reduce',ignoreHTTPSErrors:true,serviceWorkers:'block'});
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.goto(URL,{waitUntil:'domcontentloaded'});
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.goto(URL,{waitUntil:'domcontentloaded'});
  const fe=await p.waitForSelector('#krotf');const f=await fe.contentFrame();f.page&&0;
  const fr=()=>p.frames().find(x=>/krot=1/.test(x.url()));await p.waitForTimeout(1500);const F=fr();F.on&&0;
  await F.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
@@ -15,6 +15,6 @@ const [,,URL,SZ,OUT]=process.argv;const [WH]=SZ.split('@');const [W,H]=WH.split(
  for(const k of ['info','rule','event','result','news']){await F.evaluate(k=>document.querySelector(`#kitpage [data-kpop="${k}"]`).click(),k);await p.waitForTimeout(2500);
   res[k]=await F.evaluate(()=>{const M=document.getElementById('modal'),d=M.querySelector('.dlg'),pg=document.getElementById('kitpage');const q=d.getBoundingClientRect();return{modal:!M.hidden,kind:d.dataset.kind,pgHidden:pg.hidden,figs:M.querySelectorAll('.kesimg').length,dlg:[q.left|0,q.top|0,q.width|0,q.height|0],inView:q.left>=0&&q.right<=innerWidth+1&&q.top>=0&&q.bottom<=innerHeight+1,hovf:document.documentElement.scrollWidth>innerWidth+1}});
   if(k==='event'&&W===844)await p.screenshot({path:`${OUT}/kitpage-pop-event-${W}x${H}.jpg`,type:'jpeg',quality:70});
-  await F.evaluate(k=>{const o=document.querySelector('#mb .opts button');if(k==='event'&&o)o.click();else closeModal()},k);await p.waitForTimeout(1200);
+  await F.evaluate(k=>{const o=__kopts()[0];if(k==='event'&&o)__koptGo(o);else closeModal()},k);await p.waitForTimeout(1200);
   res[k].after=await F.evaluate(()=>({modal:!document.getElementById('modal').hidden,pg:!document.getElementById('kitpage').hidden,q:Q.length}))}
  console.log(JSON.stringify({W,H,res,errs}));await b.close()})().catch(e=>{console.error(e);process.exit(1)});

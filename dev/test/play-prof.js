@@ -18,7 +18,7 @@ function agg(prof){const N={};for(const n of prof.nodes)N[n.id]=n;const dt={};co
  const tree={k:'root',t:0,c:{}};for(const id in dt){const path=[];let x=+id;while(x!=null){path.push(key(N[x]));x=parent[x]}path.reverse();let nd=tree;nd.t+=dt[id];for(const k of path.slice(1)){nd=nd.c[k]=nd.c[k]||{k,t:0,c:{}};nd.t+=dt[id]}}
  return{callers,tree,all,self:Object.entries(self).sort((a,b)=>b[1]-a[1]),tot:Object.entries(tot).sort((a,b)=>b[1]-a[1]),idle}}
 (async()=>{const srv=await D.serveRoot(ROOT);const b=await chromium.launch({args:require('./lib/playperf').LAUNCH_ARGS});
- const ctx=await D.newDeviceContext(b,DEV,{serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot={pre:1}});const p=await ctx.newPage();
+ const ctx=await D.newDeviceContext(b,DEV,{serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot={pre:1}});const p=await ctx.newPage();await require('./lib/kopts').install(p);
  const cdp=await ctx.newCDPSession(p);const f=await D.openHost(p,srv.url,{timeout:300000});await sleep(1500);
  await require('./lib/playperf').newLife(f);await sleep(2500);await f.evaluate(CLEAR);await cdp.send('Emulation.setCPUThrottlingRate',{rate:CPU});
  await cdp.send('Profiler.enable');await cdp.send('Profiler.setSamplingInterval',{interval:500});
@@ -26,7 +26,7 @@ function agg(prof){const N={};for(const n of prof.nodes)N[n.id]=n;const dt={};co
  const DO={
   next:async()=>{await f.evaluate(CLEAR);await tapEl(()=>{const n=document.getElementById('next');return n&&!n.disabled?n:null});await sleep(3000);await f.evaluate(CLEAR)},
   card:async()=>{await f.evaluate(CLEAR);await f.evaluate(OPENACT);await sleep(800);await tapEl(()=>{const c=[...document.querySelectorAll('button.card.ka:not(:disabled):not(.kdis)')].filter(x=>x.offsetParent!==null&&x.getBoundingClientRect().bottom<innerHeight);return c[Math.floor(Math.random()*c.length)]||null});await sleep(2000);
-   await tapEl(()=>{const m=document.getElementById('modal');if(!m||m.hidden)return null;return [...m.querySelectorAll('.opts button:not([disabled])')].filter(x=>x.offsetParent!==null)[0]||null});await sleep(1500);await f.evaluate(CLEAR)},
+   await tapEl(()=>{const m=document.getElementById('modal');if(!m||m.hidden)return null;return __kopts(m).filter(x=>!x.disabled&&x.offsetParent!==null)[0]||null});await sleep(1500);await f.evaluate(CLEAR)},
   tab:async()=>{for(const k of ['court','rel','inv','art','story','act'])await tapEl(new Function(`return [...document.querySelectorAll('#tabs [data-tab="${k}"]')].find(x=>x.offsetParent!==null)||null`));await sleep(800)},
   idle:async()=>{await sleep(5000)},
   soak:async()=>{const t0=Date.now();while(Date.now()-t0<+opt('soakms',60000)){await f.evaluate(require('./lib/playperf').STEP).catch(()=>{});await sleep(250)}},

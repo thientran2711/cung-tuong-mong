@@ -23,7 +23,7 @@ async function findTap(f,fn,arg){const h=await f.evaluateHandle(fn,arg);const el
  const R={cpu:CPU,minutes:MIN,devices:{}};let fail=[];
  for(const dev of DEVS){L('device',dev);const ctx=await D.newDeviceContext(b,dev,{serviceWorkers:'block'});await ctx.addInitScript(PP.INIT);
   await ctx.addInitScript(()=>{window.__bot={pre:1}});
-  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+  const p=await ctx.newPage();await require('./lib/kopts').install(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   const cdp=await ctx.newCDPSession(p);await cdp.send('Performance.enable');
   const f=await D.openHost(p,srv.url,{timeout:300000});await sleep(1500);
   await cdp.send('Emulation.setCPUThrottlingRate',{rate:CPU});
@@ -43,7 +43,7 @@ async function findTap(f,fn,arg){const h=await f.evaluateHandle(fn,arg);const el
   /* 2. act cards (+ the dialog they open, + closing it) and Sang buổi, for 4 buổi */
   for(let i=0;i<4;i++){await f.evaluate(CLEAR);await sleep(300);if(await f.evaluate(OPENACT))await sleep(1200);
    await tap('actCard',()=>{const c=[...document.querySelectorAll('button.card.ka:not(:disabled):not(.kdis)')].filter(x=>x.offsetParent!==null&&x.getBoundingClientRect().bottom<innerHeight);return c[Math.floor(Math.random()*c.length)]||null},null,1800);
-   await tap('dialogChoice',()=>{const m=document.getElementById('modal');if(!m||m.hidden)return null;const o=[...m.querySelectorAll('.opts button:not([disabled])')].filter(x=>x.offsetParent!==null);return o[0]||[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null).pop()||null},null,1500);
+   await tap('dialogChoice',()=>{const m=document.getElementById('modal');if(!m||m.hidden)return null;const o=__kopts(m).filter(x=>!x.disabled&&x.offsetParent!==null);return o[0]||[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null).pop()||null},null,1500);
    await tap('dialogClose',()=>{const m=document.getElementById('modal');if(!m||m.hidden)return null;return [...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null).pop()||null},null,1200);
    await f.evaluate(CLEAR);await sleep(300);
    /* Sang buổi: tap latency + fps through the transition */

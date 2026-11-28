@@ -6,7 +6,7 @@
    an NPC: one rank, stay gate, one-rank release. Exit 1 on any failed check or page error. */
 const {chromium}=require('playwright');const [,,URL,W='755',H='1000',VID]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:+W,height:+H},serviceWorkers:'block',...(VID?{recordVideo:{dir:VID,size:{width:+W,height:+H}}}:{})});
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});for(let i=0;i<300;i++){if(await p.evaluate(()=>typeof start==='function'&&!!window.__ctmBuilt).catch(()=>false))break;await sleep(300)}
  await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;quiet=false});await sleep(1500);
  const fails=[];const ok=(c,m)=>{if(!c)fails.push(m);console.log((c?'PASS ':'FAIL ')+m)};
@@ -14,7 +14,7 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',VID]=proces
  async function drain(max=12){const seen=[];for(let i=0;i<max;i++){const q=await p.evaluate(()=>Q.length);if(!q)break;
    const info=await p.evaluate(()=>{const M=document.getElementById('modal');showModal();return {t:Q[0]&&Q[0].t||'',body:M.innerText.replace(/\s+/g,' ')}});
    seen.push(info);await sleep(700);
-   const btn=await p.$('#modal:not([hidden]) #mr .kbtn')||await p.$('#modal:not([hidden]) #mr button')||await p.$('#modal:not([hidden]) .kpopts button, #modal:not([hidden]) .opts button');
+   const btn=await p.$('#modal:not([hidden]) #mr .kbtn')||await p.$('#modal:not([hidden]) #mr button')||await p.$('#modal:not([hidden]) .kpopts button')||await p.evaluateHandle(()=>{const m=document.getElementById('modal');return m&&!m.hidden?__kopts()[0]||null:null}).then(h=>h.asElement());
    if(btn){await btn.click({timeout:3000}).catch(async()=>{await p.evaluate(()=>closeModal())})}else await p.evaluate(()=>closeModal());await sleep(400)}return seen}
  await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov').forEach(e=>e.remove());document.querySelectorAll("[class^=km],[id^=kr],.kchest,#kchest").forEach(e=>{if(getComputedStyle(e).position==="fixed")e.remove()});Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;S.buoi=0;used=0;deal();render()});await sleep(500);
  /* setup: she is Quý nhân (2); an accuser who holds 2 true pieces on her (a real deed in the jtruth ledger) */

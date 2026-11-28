@@ -5,7 +5,7 @@
    usage: node dev/test/home-chapters/costrows.js <url> [--list] */
 const {chromium}=require('playwright');const A=process.argv.slice(2),URL=A[0],LIST=A.includes('--list');
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
-(async()=>{const b=await chromium.launch();const c=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await c.newPage();
+(async()=>{const b=await chromium.launch();const c=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await c.newPage();await require('../lib/kopts').install(p);
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));await p.goto(URL,{waitUntil:'domcontentloaded'});await sleep(6000);
  const r=await p.evaluate(()=>{const out=[];const N=s=>String(s||'').replace(/<[^>]+>/g,' ').replace(/[−–]/g,'-').replace(/\s+/g,' ').toLowerCase();
   /* the home-stat family: Gia thanh / Áp lực hôn sự / Hồi môn / Lời đồn (kgt kap khm kld), thế lực nhà, "<người> với ta ±n" — the kit option
@@ -21,7 +21,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
   const life=o=>{for(let i=0;i<80;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!S.srv&&!(typeof isSrv==='function'&&isSrv()))break}S.origin=ORIGINS.find(x=>x.k===o);S.kcPick='nha';Q=[];window.__bot=1;kcInit();delete window.__bot;Q=[];S.tamco=100;/* the sharpest hint level: every part of the card (incl. «hỏng thì …») is on screen */
    for(const id of ['title','curtain','kload','kroul']){const e=document.getElementById(id);if(e){e.hidden=true;e.style.display='none'}}};
   const dlg=(fam,name,push,datas)=>{Q=[];document.getElementById('modal').hidden=true;push();if(!Q.length)return;const q=Q[0];showModal();
-   const B=[...document.querySelectorAll('#modal .opts button, #modal .kpscopts button')].map(x=>{x.dataset.t=x.innerText.replace(/\n/g,' | ');return x});(q.opts||[]).forEach((o,i)=>{const shown=B[i]?B[i].dataset.t:'';const d=datas?datas[i]:{};
+   const B=__kopts().concat([...document.querySelectorAll('#modal .kpscopts button')]).map(x=>{x.dataset.t=x.innerText.replace(/\n/g,' | ');return x});(q.opts||[]).forEach((o,i)=>{const shown=B[i]?B[i].dataset.t:'';const d=datas?datas[i]:{};
     const W=want([o.fx,d&&d.w,d&&d.l],(o.j67||'')+' '+(d&&d.words||''));const M=miss(shown,W);out.push({fam,name,opt:o.n,miss:M,khong:empty(shown,o.j67||''),shown})});document.getElementById('modal').hidden=true;Q=[]};
   for(const o of ['tt','dtq','muoi','thd','ch','td']){life(o);const ids=Object.keys(KCA).filter(id=>id==='kc_'+o||!/^kc_(tt|dtq|muoi|thd|ch|td)$/.test(id));
    for(const id of ids){const a=KCA[id];if(id==='tm96z'&&!S.tm96)continue;for(const bid in a.B){const T=kc3Thread(id);T.cur=bid;S.kc.ar.A=T;const O=kc3Opts(T,a.B[bid]);
