@@ -8,7 +8,8 @@
    Rows: Được = .kr-duoc / .kr-thanh (+ door grid Được / Thành); loss rows = .kr-mat / .kr-bai / .kr-kem (+ grid Bại / Mất / Kèm).
    Reuses the act-audit LIB (states dau/toi/cao/con/hau/hh). No rolls are made.
    usage: node dev/test/row-law3-scan.js <url> [out.json] [WxH@dpr] [scenarios] → exit 1 on any DASH / PLUS / NODUOC or page error.
-   Mutants: MUTANT=b → the jone tier summary prints «—» again; MUTANT=c → jtoil verdict text back on the risk (Bại) side; each must exit 1. */
+   Mutant hooks MUTANT=b (jone summary «—») / MUTANT=c (jtoil verdict back on Bại) depend on the drawn world reaching such a card; the fixed
+   cases that must exit 1 under each mutant are dev/test/e-gain4-unit.js. */
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,URL,OUT,SZ,SC]=process.argv;const [WH,DPR]=(SZ||'755x1000@1').split('@');const [W,H]=WH.split('x').map(Number);
 const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(src.indexOf('String.raw`')+11,src.indexOf('})();`;')+5);

@@ -32,13 +32,16 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(
    const w2=typeof ONE.lockW==="function"?ONE.lockW(""):"—";chk(w2&&w2!=="—",`b: lock reason without text reads «${w2}»`)}
   /* (c) */
   {const tr0=window.toilRival,to0=window.toilOn;let Lr=[];try{window.toilOn=()=>true;window.toilRival=(v,d)=>d?null:{txt:"nàng ta chuộng giản dị: quý ta +"+BAL.toil.praisePlain,aff:BAL.toil.praisePlain,g:0};
-    AA.scen("cao");AA.restore();for(const sf of AA.surfaces().filter(s=>s.place)){AA.restore();AA.show(sf);const P=curPeople();const i=P.findIndex(x=>x.kind==="rival"&&x.ref);if(i<0)continue;
+    /* a world with a consort met at some place (AA.scen worlds are drawn: try states in turn) */
+    const has=()=>AA.surfaces().filter(s=>s.place).some(sf=>{AA.restore();AA.show(sf);return curPeople().some(x=>x.kind==="rival"&&x.ref)});
+    for(const n of ["cao","hh","toi","dau","con","hau","cao","hh"]){AA.scen(n);if(has())break}
+    AA.restore();for(const sf of AA.surfaces().filter(s=>s.place)){AA.restore();AA.show(sf);const P=curPeople();const i=P.findIndex(x=>x.kind==="rival"&&x.ref);if(i<0)continue;
      Lr=talkOpts(P[i]).filter(Boolean);break}}finally{window.toilRival=tr0;window.toilOn=to0}
    chk(Lr.length>0,`c: a rival pop-up found (${Lr.length} options)`);
    const bad=Lr.filter(a=>/quý ta \+/.test(T(a.risk)));chk(!bad.length,`c: options with the praise on the Bại side ${bad.length} (${bad.slice(0,3).map(a=>T(a.n)).join(", ")})`);
    const good=Lr.filter(a=>/quý ta \+/.test(T(a.x)));chk(good.length>0,`c: options with the praise on the Được side ${good.length}`)}
   /* (d) */
-  {let n=0,bad=[],help=null;/* same cao world as (c): a second AA.scen builds another world */for(const dt of [0,1,2])for(const sf of AA.surfaces().filter(s=>s.place)){AA.restore();S.turn=(S.turn||0)+dt;AA.show(sf);const P=curPeople();
+  {let n=0,bad=[],help=null;/* same world as (c): a second AA.scen builds another world */for(const dt of [0,1,2])for(const sf of AA.surfaces().filter(s=>s.place)){AA.restore();S.turn=(S.turn||0)+dt;AA.show(sf);const P=curPeople();
     P.forEach((pp,i)=>{if(pp.kind!=="rival"&&pp.kind!=="hh")return;let A=[];try{A=talkOpts(pp)}catch(e){return}
      for(const a of A){if(!a)continue;if(a.n==="Nhờ giúp đỡ"&&!help)help=Object.assign({},a,{who:pp.kind+":"+pp.name+"@"+sf.id+" d"+dt});if(a.one!=="one"||a.lock)continue;n++;
       let full="";try{full=optLine(a)}catch(e){}const gl=T(doorGain([String(a.x||"")]));const fl=T(full);
