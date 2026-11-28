@@ -69,3 +69,10 @@ Extra rows from MAIN: F rows 4–7 (review/flight2-s21 b3329c3e) all buổi 3 wi
 
 ## Handover state (worker done)
 Done: root, 3-file fix, test, scans, gates above. Open: coop-e2e run (lost twice to restarts). Tools: dev/measure/noturn-hunt.js + sm-trace-build.py reproduce any future «dead Sang buổi» and name the swallowing gate in one run.
+
+## r2 / r3 (RV-163M co-op blocker, 28/11)
+- RV-163M: solo green (Lãnh cung N1, N2, N3 both devices; dayq-break / dayq-hold-coop = LIVE), but coop-e2e hung or failed in week 2 on 66395ab2, while LIVE 18003079 passed «week 2: fold advanced».
+- r2 11fe26bd: jnf cfStuck → dqUi() only; jverdict faded → !COOPW.on. coop-e2e still hung in week 2 (51 ok).
+- Bisect: LIVE j93 + r2 guards → «week 2: fold advanced» ok (73 ok and on) ⇒ my j93 line was the cause; the room's night/week pacing relies on any m.rk card holding kit scenes.
+- r3 ac81eb77 (merged on LIVE 22afefb4): the j93 marker-only read applies only when no co-op room is on (COOPW.on/allow/allowN off) ⇒ ALL three changes are solo-only; co-op = LIVE behaviour. Co-op «Sang ngày mới» still has LIVE's CAP-bounded night hold (out of scope; the bug rows are solo seats).
+- coop-e2e on the new base: plain LIVE 22afefb4 fails «buổi 0:3 advanced for both» ("Chờ hảo hữu…") + «week 1: fold advanced»; r3 fails the same rows ⇒ no worse than LIVE (drift on the new base, its own ticket).
