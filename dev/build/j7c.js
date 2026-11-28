@@ -1,6 +1,7 @@
 /* ================= j7c: COMPOSED PALACE INTRIGUE (ORDER THIN P2, owner OD 23/11 ~22:50Z; EVCAT §3 P2) =================
    A seed (data J7SEEDS in j7sd.js, built from dev/handover/content/thin/j7seeds.md by dev/build/j7sd_build.py) = incident × actors picked by nết
-   from the REAL roster × a real object × place × 4 stances of equal gain/loss steps (laws 2/3). Every step is worth BAL.j7c.fx[tier][key] (law 4).
+   from the REAL roster × a real object × place × 3 stances NHẸ · VỪA · NẶNG (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z: stance i Σgain == Σloss ==
+   BAL.j7c.tier[i] steps, Tốn and Được rise together; law 3 every stance a gain). Every step is worth BAL.j7c.fx[tier][key] (law 4).
    Draw: ONE weekly-card entry "j7c" joins makeDil (j3) at the world weight × BAL.j7c.share; inside, the seed is picked through the shared
    no-repeat memory (jnorep, family "j7": ×BAL.nr.w per past life that met it; the 33 old ev() cards are family "j7" too), never twice in one
    life within BAL.j7c.rest months. GROUNDING GATE (j68h rule: every event comes from the simulated world): a seed is offered only when its
@@ -60,7 +61,7 @@ function j7cOpt(sd,id,X,pp){const st=sd.stances[id],tier=sd.tier||"m";const c={}
 function j7cBuild(pp){j7cSeeds();if(!pp.sid){/* first build: pick the seed through jnorep and save the cast in pp (mkP keeps pp for reload) */
   const R=j7cReady();if(!R.length)return null;const x=nrPick("j7",R,y=>y.sd.id);if(!x)return null;pp.sid=x.sd.id;pp.c=x.C;const j=j7c();j.seen[x.sd.id]=S.turn;j.n++;nrMark("j7",x.sd.id)}
  const sd=J7I[pp.sid];if(!sd)return null;const X=j7cActors(sd,pp.c||{});if(!X||!j7cGround(sd,X))return null;
- const ids=Object.keys(sd.stances||{});if(ids.length!==4)return null;const first=Object.values(X).find(a=>a&&a.f);
+ const ids=Object.keys(sd.stances||{});if(ids.length!==BAL.j7c.tier.length)return null;const first=Object.values(X).find(a=>a&&a.f);
  const ob=sd.incident.object;const clue=ob&&ob.clue?`<br><i>${j7cFill(ob.clue,X)}</i>`:"";
  return{who:first?first.f:null,t:`${sd.place?j7cFill(sd.place,X)+": ":""}${j7cFill(sd.incident.text,X)}${clue}`,o:ids.map(id=>j7cOpt(sd,id,X,pp))}}
 PEND.j7c=pp=>{try{return j7cBuild(pp)}catch(e){console.error(e);return null}};

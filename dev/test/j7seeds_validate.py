@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """ORDER THIN P2 seed validator (like content/selscene/tools/validate_tests.py). usage: python3 dev/test/j7seeds_validate.py <seeds.md|jsonl> [--min N]
 Reads every line starting with '{'. Checks per seed: id unique, type j7, tag K|D + src, tone, tier s|m|l; roles kind + nết/lòng names from BAL.net
-F/M (jbal2.js); incident.text; object null or {name,owner,clue,trace} with owner = a role or 'me' (law 6c); exactly 4 stances with the same ids in
-outcomes; each stance gain+loss non-empty, Σgain == Σloss steps (law 2/3), equal total across the 4 stances (law 2), valid keys, friend.*/proof.* gain only, grudge.* loss only,
+F/M (jbal2.js); incident.text; object null or {name,owner,clue,trace} with owner = a role or 'me' (law 6c); exactly 3 stances NHẸ · VỪA · NẶNG with the same ids in
+outcomes; each stance gain+loss non-empty, stance i Σgain == Σloss == BAL.j7c.tier[i] steps (laws 2/3), om = {removed stance: kept sibling}, valid keys, friend.*/proof.* gain only, grudge.* loss only,
 no key both gain and loss; every {placeholder} is a role or {maid}; needs keys known; VANPHONG word scan (no %, no digits, no modern words)."""
 import json,re,sys,os
 ROOT=os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -10,6 +10,7 @@ bal=open(os.path.join(ROOT,'dev/build/jbal2.js'),encoding='utf8').read()
 NET=set()
 m=re.search(r'BAL\.net=\{.*?\n\s*F:\{(.*?)\},\s*\n\s*M:\{(.*?)\},',bal,re.S)
 for blk in m.groups():NET|=set(re.findall(r'"([^"]+)"',blk))
+TIER=[int(x) for x in re.search(r"BAL\.j7c=\{[^\n]*?tier:\[([\d,]+)\]",bal).group(1).split(",")]  # BAL.j7c.tier: way i Σgain == Σloss == TIER[i] (law 2 TIERED CHOICES NHẸ · VỪA · NẶNG, owner OD 27/11 ~00:46Z)
 KINDS={"rv","sv","man","kid","maid","emp","th","doc","eun"};FIXED={"maid","emp","th","doc","eun"}
 STAT={"sung","danh","bac","suc","mat","th","hh","duc","maid"}
 NEEDS={"rank_min","rank_max","nights_min","month","not_confined","kids_min"}
@@ -52,10 +53,13 @@ for r in rows:
             if not o.get(f):err(f"{i} object.{f}")
         if o.get("owner") not in roles and o.get("owner")!="me":err(f"{i} object owner '{o.get('owner')}' is not a role or me")
     st=r.get("stances") or {};oc=r.get("outcomes") or {}
-    if len(st)!=4:err(i+" needs 4 stances")
+    if len(st)!=len(TIER):err(i+f" needs {len(TIER)} stances (NHẸ · VỪA · NẶNG)")
+    om=r.get("om")
+    if not isinstance(om,dict) or len(om)!=1 or any(k in st or v not in st for k,v in om.items()):err(f"{i} om must be {{removed stance id: kept sibling id}}")
+
     if set(st)-set(oc):err(i+" outcomes missing for "+str(sorted(set(st)-set(oc))))
     tot=set();texts=[inc.get("text","")]+([o.get("name",""),o.get("clue",""),o.get("trace","")] if isinstance(o,dict) else [])
-    for sid,x in st.items():
+    for ti,(sid,x) in enumerate(st.items()):
         g,l=x.get("gain") or {},x.get("loss") or {}
         if not x.get("text"):err(f"{i}.{sid} text")
         if not g or not l:err(f"{i}.{sid} gain/loss empty (law 3)")
@@ -70,9 +74,8 @@ for r in rows:
                 if a=="proof" and b in roles and side=="gain" and (roles[b] or {}).get("kind","rv")=="rv":continue
                 err(f"{i}.{sid} bad {side} key {k}")
         sg,sl=sum(v for v in g.values() if isinstance(v,int)),sum(v for v in l.values() if isinstance(v,int))
-        if sg!=sl:err(f"{i}.{sid} gain {sg} != loss {sl} (law 2)")
+        if ti<len(TIER) and (sg!=TIER[ti] or sl!=TIER[ti]):err(f"{i}.{sid} Σgain {sg} / Σloss {sl} must both be {TIER[ti]} (way {ti+1} of NHẸ · VỪA · NẶNG, law 2)")
         tot.add(sg);texts+= [x.get("text",""),oc.get(sid,"")]
-    if len(tot)>1:err(i+" stances not equal value "+str(tot))
     for t in texts:
         for p in re.findall(r"\{([^}]+)\}",t or ""):
             if p!="maid" and p not in roles:err(f"{i} placeholder {{{p}}} is not a role")

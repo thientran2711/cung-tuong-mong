@@ -2266,10 +2266,11 @@ if(typeof ARTB85!=="undefined")Object.assign(ARTB85,BAL.artB);
    ctm-e68h), w = weight factor per past life that saw a key (×0.5, as j68), cap = keys kept per life (the store is shared by every family). */
 BAL.nr={lives:6,w:.5,cap:1500};
 /* ORDER THIN P6 (jworldc.js composed world reactions, owner OD 23/11 ~22:50Z; reports/thin.md «## API P6»): on = composed scenes live; npcMax = NPCs
-   in a seed's scope who choose a stance (the same 4 as hers, law 1); rankHi = scope "hi" from this rank (Tần) up, "lo" below; seen = draw weight of a
+   in a seed's scope who choose a stance (the same 3 tiers as hers, law 1); rankHi = scope "hi" from this rank (Tần) up, "lo" below; seen = draw weight of a
    seed met in a past life (fresh-first, on top of jnorep ×nr.w); obKeep = object traces kept; fx[tier] = what ONE gain/loss step is worth per key
-   (laws 2/3/4: seeds count steps, numbers live here; rel = thiện cảm of that person); npcCant = weight of a stance an NPC cannot pay (bạc). */
-BAL.wc={on:true,npcMax:8,rankHi:3,seen:.15,obKeep:60,npcCant:.1,
+   (laws 2/3/4: seeds count steps, numbers live here; rel = thiện cảm of that person); npcCant = weight of a stance an NPC cannot pay (bạc);
+   tier = steps per way by tier (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z: 3 ways NHẸ · VỪA · NẶNG, way i Σgain == Σloss == tier[i], Tốn and Được rise together; the seed's s/m/l picks the fx row = the size of ONE step); */
+BAL.wc={on:true,tier:[1,2,3],npcMax:8,rankHi:3,seen:.15,obKeep:60,npcCant:.1,
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}}};
@@ -2277,8 +2278,9 @@ BAL.wc={on:true,npcMax:8,rankHi:3,seen:.15,obKeep:60,npcCant:.1,
    ranges as the 51 hand-written routes); obKeep = object traces kept (S.j70.ob); law 2 (validator): vis lo0/mid1/hi2 + need s0/m1/l2 + bac 0:0/s0/m1/l2 + acc 1 = 2..3 cost points. */
 BAL.j70c={on:true,obKeep:60,vis:{lo:2,mid:5,hi:8},need:{s:2,m:3,l:4},bac:{"0":0,s:20,m:40,l:60}};
 /* ORDER THIN P7 (j71c.js composed festivals): on = composed stages / complications / prizes live; fx[tier] = what ONE gain/loss step of a
-   complication stance is worth (laws 2/3/4: seeds count steps; rel = the rival's thiện cảm); obKeep = object traces kept. */
-BAL.j71c={on:true,obKeep:60,
+   complication stance is worth (laws 2/3/4: seeds count steps; rel = the rival's thiện cảm); obKeep = object traces kept;
+   tier = steps per way by tier (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z: 3 ways NHẸ · VỪA · NẶNG, way i Σgain == Σloss == tier[i], Tốn and Được rise together; the seed's s/m/l picks the fx row = the size of ONE step); */
+BAL.j71c={on:true,tier:[1,2,3],obKeep:60,
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}}};
@@ -2286,8 +2288,9 @@ BAL.j71c={on:true,obKeep:60,
    def for families not listed); seen = extra factor when any past life met the seed (fresh-first; e68Cands' ×nr.w per life still applies);
    cd = per-life cooldown tuần of one seed (999 = once per life); fx[tier] = what ONE gain/loss step is worth per key (laws 2/3/4: seeds count
    steps, numbers live here; rel = thiện cảm / lòng trung / quyến luyến of that person); need = live-state thresholds; obKeep = object traces kept;
-   rumorTag = the hearsay label every composed rumour carries (j68h grounding rule, as the old rumours). */
-BAL.j68c={on:true,w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đồn.)</i>",
+   rumorTag = the hearsay label every composed rumour carries (j68h grounding rule, as the old rumours);
+   tier = steps per way by tier (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z: 3 ways NHẸ · VỪA · NẶNG, way i Σgain == Σloss == tier[i], Tốn and Được rise together; the seed's s/m/l picks the fx row = the size of ONE step); */
+BAL.j68c={on:true,tier:[1,2,3],w:{def:.35},seen:.15,cd:999,obKeep:60,rumorTag:" <i>(Lời đồn.)</i>",
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}},
@@ -2302,8 +2305,9 @@ BAL.nolock={sub:["suc","danh"],of:{suc:1,danh:BAL.j68c.fx.m.danh/BAL.j68c.fx.m.s
 /* ORDER THIN P3 (j72c.js composed việc nhờ): on = composed favours live; share = draw weight of one composed seed vs one of the 110 old T7 (1);
    fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, numbers live here; rel/relb = thiện cảm of A/B,
    an = ân tình); odds = base of a do-step on the j72 ladder (q72Odds adds her skill); khac = khắc of a do-step; wait = tuần of a wait step;
-   dl = deadline tuần; obKeep = object traces kept in S.q72c.ob (oldest dropped); twist = chance a seed's hidden twist is true (fixed when the favour is made); need = live-state thresholds of the needs. */
-BAL.j72c={on:true,share:1,twist:.3,
+   dl = deadline tuần; obKeep = object traces kept in S.q72c.ob (oldest dropped); twist = chance a seed's hidden twist is true (fixed when the favour is made); need = live-state thresholds of the needs;
+   tier = steps per way by tier (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z: ≤3 ways of a pick step NHẸ · VỪA · NẶNG, way i Σgain == Σloss == tier[i], Tốn and Được rise together; the seed's s/m/l picks the fx row = the size of ONE step); */
+BAL.j72c={on:true,tier:[1,2,3],share:1,twist:.3,
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,an:1,rel:4,relb:4},
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,an:2,rel:6,relb:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,an:3,rel:9,relb:9}},
@@ -2319,9 +2323,10 @@ BAL.mgpb={dan:64,co:90,dauho:60,theu:64,mua:64,doi:80,doden:44,tc:100,xa:200,thq
    (BAL.ag.why.dil.world); rest = months before the same seed may return in one life (as the old j7 cards, S.seen ≥ 12);
    fx[tier] = what ONE gain/loss step of a seed is worth per key (laws 2/3/4: seeds count steps, the numbers live here; rel = thiện cảm
    of a cast person, proof = chứng cứ against a cast consort). Tiers s/m/l as yard.md.
+   tier = steps per way by tier (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z: 3 ways NHẸ · VỪA · NẶNG, way i Σgain == Σloss == tier[i], Tốn and Được rise together; the seed's s/m/l picks the fx row = the size of ONE step); 
    review thin-p2 r1: proof on the chứng cứ scale (evStory = a deed of that weight; DEEDW 1–2, a blood-test demand needs BAL.kh.accEv 3; the old j7 cards give
-   evGo 1–2 and only on a won roll) — the first 8/15/25 made every proof stance a full accusation in one tap (law 2 equal value). */
-BAL.j7c={on:true,share:1,rest:12,loose:true,  /* loose: no one fits a role's nết AND lòng → cast someone with any one of them */
+   evGo 1–2 and only on a won roll) — the first 8/15/25 made every proof stance a full accusation in one tap (law 2). */
+BAL.j7c={on:true,tier:[1,2,3],share:1,rest:12,loose:true,  /* loose: no one fits a role's nết AND lòng → cast someone with any one of them */
 
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:2,th:2,hh:2,duc:2,maid:3,rel:4,proof:1},
      m:{sung:4,danh:4,bac:40,suc:10,mat:4,th:4,hh:4,duc:4,maid:6,rel:8,proof:1},

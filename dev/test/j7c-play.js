@@ -1,5 +1,5 @@
 /* ORDER THIN P2 browser test: composed intrigue (j7c) on the real game. node dev/test/j7c-play.js   (after dev/site/build_site.sh)
-   Loads the 2 valid fixture seeds, checks: grounding (cast = real living people with the nết, placeholders filled), 4 equal-value options,
+   Loads the 2 valid fixture seeds, checks: grounding (cast = real living people with the nết, placeholders filled), 3 options NHẸ · VỪA · NẶNG (BAL.j7c.tier),
    choosing applies real changes + keeps the object traceable, jnorep marks family j7, the card rebuilds from saved pp (reload), makeDil offers it. */
 const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const FIX=fs.readFileSync(path.join(__dirname,'j7c-fixture.jsonl'),'utf8').split('\n').filter(l=>l.startsWith('{')).map(JSON.parse).filter(s=>s.id!=='tx-bad');
@@ -9,7 +9,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m)};
  await ctx.route(u=>!/^http:\/\/127\.0\.0\.1[:/]/.test(u.href)&&/^https?:/.test(u.href),r=>r.abort());const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  const g=await D.openHost(p,'http://127.0.0.1:'+srv.address().port+'/',{timeout:120000});await g.waitForFunction(()=>window.__ctmBuilt===1&&typeof start==='function',null,{timeout:120000});
  const r=await g.evaluate(FIX=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}start();['kroul','dawn','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});
-  J7SEEDS.push(...FIX);S.rank=Math.max(S.rank,2);const out={};
+  J7SEEDS.push(...FIX);S.rank=Math.max(S.rank,2);const out={nT:BAL.j7c.tier.length};
   /* give two living consorts the wanted nết so the cast is real */
   const L=liveRivals(false);out.rivals=L.length;
   let R=j7cReady();out.forced=0;/* thin-p6 r2 (law 11, same family as wc/j70c/j71c-play): a fresh random world may hold no consort with the wanted nết -> force it, reported as forced (as wc-play does), instead of failing at random */
@@ -18,11 +18,11 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m)};
   const sd=J7I[d.pp.sid];out.castOk=Object.entries(d.pp.c).every(([role,c])=>{if(c.k!=='rv')return true;const v=RV(c.id);const rr=sd.roles[role];return v&&v.alive!==false&&(j7cFit(v,rr)||(BAL.j7c.loose&&j7cFit(v,rr,true)))});/* review r1: the engine's own rule (nết AND lòng; BAL.j7c.loose = any one listed) — the old check ignored loose and failed at random */
   out.unfilled=/\{[a-z]+\}/.test(d.t+d.o.map(o=>o.n).join());out.marked=nrNow('j7',d.pp.sid);
   const re=mkP("j7c",JSON.parse(JSON.stringify(d.pp)));out.rebuilt=!!re&&re.t===d.t;
-  const before=JSON.stringify([S.danh,S.suc,S.mat,S.duc,S.hh,S.bac,L.map(v=>aff(v,S))]);const ob0=S.j7c.ob.length;d.o[0].go();out.changed=before!==JSON.stringify([S.danh,S.suc,S.mat,S.duc,S.hh,S.bac,L.map(v=>aff(v,S))]);
+  const before=JSON.stringify([S.danh,S.suc,S.mat,S.duc,S.hh,S.bac,L.map(v=>aff(v,S))]);const ob0=S.j7c.ob.length;S.bac=Math.max(S.bac||0,500);/* NHẸ may cost bạc (tier law): she holds it */const before2=JSON.stringify([S.danh,S.suc,S.mat,S.duc,S.hh,S.bac,L.map(v=>aff(v,S))]);/* the real chooser path (pays Tốn, applies Được): NHẸ can be a gain the stat list does not see (chứng cứ) with a bạc cost */Q.unshift({t:d.t,h:d.t,opts:d.o});chooseM(0);out.changed=before2!==JSON.stringify([S.danh,S.suc,S.mat,S.duc,S.hh,S.bac,L.map(v=>aff(v,S))]);
   out.ob=S.j7c.ob.slice(ob0);out.again=j7cReady().map(x=>x.sd.id).includes(d.pp.sid);
   out.dil=(()=>{const s0=BAL.ag.why.dil;return !!j7cDil()||!j7cReady().length})();return out},FIX);
  console.log(JSON.stringify(r,null,1).slice(0,1800));
  ok(r.card,'a composed card is built ('+(r.pp&&r.pp.sid)+')');ok(r.castOk,'cast = living consorts with the wanted nết');ok(!r.unfilled,'every placeholder filled with a real name');
- ok(r.opts&&r.opts.length===4,'4 stances');ok(r.marked,'jnorep marks j7:'+(r.pp&&r.pp.sid));ok(r.rebuilt,'card rebuilds from saved pp (reload)');ok(r.changed,'choice applies real changes');
+ ok(r.opts&&r.opts.length===r.nT,'3 stances NHẸ · VỪA · NẶNG (BAL.j7c.tier)');ok(r.marked,'jnorep marks j7:'+(r.pp&&r.pp.sid));ok(r.rebuilt,'card rebuilds from saved pp (reload)');ok(r.changed,'choice applies real changes');
  ok(!r.again,'same seed rests in this life');ok(errs.length===0,'0 page errors '+(errs[0]||''));
  console.log(fail?`J7C PLAY: ${fail} FAIL`:`J7C PLAY: ALL PASS${r.forced?' (forced nết)':''}`);await b.close();srv.close();process.exit(fail?1:0)})().catch(e=>{console.log('FAIL',e.message);process.exit(1)});
