@@ -240,3 +240,47 @@ does not reach them today. Owner of those files / KK to move them (Kèm/Tốn by
   token, buttons matching /(Đe dọa bịt miệng|Mua chuộc nhân chứng|Thủ tiêu nhân chứng)/; take card via kitHandLift on the hand button
   (kit-hand-rows.js clicks a hidden kopt and never opens it).
 - Takeover prompt MUST copy the ROLLOVER lines verbatim (owner OD:L1217) and the LINEAGE line («first STATUS line states depth …»).
+
+## TMK-WARN-5 (28/11; depth 3; worker for MAIN 189 → MAIN 190; START_CTX ~1 % of 1M → roll at ~26 %, ceiling 60 %)
+PRIORITY #1 CHECK: OD RV-189 FAIL item (rv-189.md aecafb98) | main 7d7c6886 jopic kitOptFinal hint split (KK56-R10) | review/* tmk-warn-r4 1042c551 / e1f6b6f1 | claims TMK-WARN-5 (this)
+Order: RV-189 FAIL — the OPENED «Xử nhân chứng» door card put the deed's Đức in Bại on all 3 tiers.
+
+### Root (two layers)
+- The door card is a hidden-outcome card (jk2b kitIsEventChoice: a PEND item → hideOut → kitHideOut keeps only Tốn + the hint), so its plaques come from
+  jcover **covHint** read by jopic **kitOptFinal**: part 1 = Thành, EVERYTHING else (both «nhưng …» and «hỏng thì …») = Bại. The kit had no Kèm slot
+  in that path, so covHint alone could never place an either-way loss correctly (a reroute through covHint only = Đức in Bại or red in Thành).
+- covHint also typed fixed words «(chút ít)/(nhiều)», not the BAL value.
+
+### Fix (no number changed)
+- jcover covHint: same values as covWitOpts through the kit marks (markTxt of `Đức ${balSg(…)}`): nhẹ «…; hỏng thì X không sợ, càng ghét ta; nhưng Đức −−»,
+  vừa «X nhận N lượng bạc, câm lặng; nhưng Bạc −−, Đức −−; hỏng thì X từ chối, ta không mất bạc», nặng «…; hỏng thì Danh −−−, X biết kẻ chủ mưu; nhưng Đức −−−».
+- jopic kitOptFinal (hint branch, ROLLED card only): «nhưng …» → its own red Kèm row (`.kr-kem .kdup`, kept on the face), under Thành when written before
+  «hỏng thì», under Bại when after; Bại = «hỏng thì …» only. SURE cards unchanged. **This touches a kit part (law 9)** → logged KIT_REQUESTS «K-HINT-KEM»
+  (built by the worker, kit keeper to confirm) + KIT.md §6.2b ROWS updated in place. Whole group (law 11) = every rolled hint card carrying «nhưng …».
+- Test dev/test/tmk-warn-witcard.js: opens the real door card (covSaw stub only) and reads the PLAQUE ROWS in the DOM for all 3 tiers.
+
+### Card now (LOOKED, Fold 755x1000@2 + iPad 1180x820@2 — review-sheets/tmk-warn-5/wit_fold.jpg, wit_ipad.jpg)
+nhẹ: Tốn 2 khắc · Sức 10 | Thành «X sợ hãi, câm lặng» | Bại «X không sợ, càng ghét ta» | Kèm «Đức −−»
+vừa: Tốn 2 khắc | Thành «X nhận 15 lượng bạc, câm lặng» | Kèm «Bạc −−, Đức −−» | Bại «X từ chối, ta không mất bạc»
+nặng: Tốn 2 khắc | Thành «X không còn trên đời» | Bại «Danh −−−, X biết kẻ chủ mưu» | Kèm «Đức −−−»
+Seen, pre-existing (LIVE, not this branch): the hint-made Thành value is dark ink (label green); the witness's rank name inside Bại is painted in the
+rank colour (teal) by the kit name painter.
+
+### Gates on review/tmk-warn-r4 (merge LIVE 7d7c6886 = da985146; index.html/sw.js rebuilt)
+| gate | result |
+|---|---|
+| tmk-warn-witcard (new) Fold / iPad | 19/19 · 19/19; MUTATE=oldhint 13/19 exit 1 · MUTATE=nokem 10/19 exit 1 |
+| kit-std-scan gate SUBS=0 REPORT_ONLY=1 Fold / iPad | 3 / 3 (X06 ×2, X08 ×1) = LIVE 3; **X01 0**; page errors 0 |
+| tmk-warn.test | 17/17 ×2 |
+| tmk-warn-scan dev/build | 0 gaps / 26 sites |
+| tai-mat-know.test | 24/24 ×2 |
+| webkit-syntax | 493 modules, 0 hits |
+| kit-hand-dupmat · kit-hand-split · press-keep | ALL OK (18) · 0 violations / 33 · PASS |
+| opt-loss-ton 755x1000 | FAIL 2 sure cards «Tốn: không» (PEND vase) — **same FAIL on LIVE 7d7c6886** (guardrumour / ghost); sure cards untouched here |
+| MODGATE | 0 missing vs LIVE 7d7c6886 and vs e1f6b6f1; adds jmcwarn.js only |
+| LIVE deletions · merges | 0 · 2 parents |
+Not run: full quickcheck (lander step).
+
+### Handover (if a TMK-WARN-6 is needed)
+- STATE: review/tmk-warn-r4 at the tip pushed with this report; RV READY sent to RV-189. If RV / kit keeper reject the kit split: the fallback is a
+  KIT REQUEST only (covHint cannot reach a Kèm plaque without it).
