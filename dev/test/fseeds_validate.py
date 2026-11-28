@@ -5,7 +5,7 @@ usage: python3 dev/test/fseeds_validate.py [files…] [--min] [--fests a,b]
   ≥4 own comps, ≥3 prizes; and ≥40 composed variants per festival (stage × fitting comp, + prizes on contests); ids unique across files.
 Checks: stage {fest,kind,sub (C: SC7 key, W: WT7 theme, P: emp|th, else ""), title (C), text 1–2 sentences, {A} only and required for G,
 no copy of an old FV7 text}; comp {fest key or *, kinds ⊆ CWGBPR, tag/src, tone, tier, roles only B (rv, nết/lòng in BAL.net), text,
-object null|{name,owner B|me|kho,clue,trace}, exactly 4 stances Σgain == Σloss == tier steps (s1 m2 l3), gain ≥1 loss ≥1, keys her stats + rel.B,
+object null|{name,owner B|me|kho,clue,trace}, exactly 3 stances NHẸ · VỪA · NẶNG stance i Σgain == Σloss == BAL.j71c.tier[i] steps, om = {removed: kept sibling}, gain ≥1 loss ≥1, keys her stats + rel.B,
 no 'an' in loss, no key both sides; outcomes same ids; placeholders {B}{O}{M}{F}{S}}; prize {fest, name, from, trace_me, trace_npc ({W} only),
 it optional = a real IT key (j72_itkeys.md)}; VANPHONG scan (no %, digits, odds words, modern words); traces never «mất»."""
 import json,re,sys,os,glob,difflib
@@ -24,7 +24,8 @@ for mm in re.finditer(r'^([a-z0-9]+):\[(.*)$',body,re.M):
     FEST[mm.group(1)]=mm.group(2).count('["');OLD+=re.findall(r'\["[CWGBPR]","[a-z0-9]*","([^"]+)"',mm.group(2))
 OLDL=[o.lower() for o in OLD]
 TONES={"tense","sad","petty","funny","tender","warm","cruel"};KINDS=set("CWGBPR")
-STAT={"sung","danh","bac","suc","mat","th","hh","duc","tamco","an"};TIER={"s":1,"m":2,"l":3}
+STAT={"sung","danh","bac","suc","mat","th","hh","duc","tamco","an"};TIERS={"s","m","l"}
+TIER=[int(x) for x in re.search(r"BAL\.j71c=\{[^\n]*?tier:\[([\d,]+)\]",bal).group(1).split(",")]  # BAL.j71c.tier: way i Σgain == Σloss == TIER[i] (law 2 TIERED CHOICES NHẸ · VỪA · NẶNG, owner OD 27/11 ~00:46Z)
 NEEDS={"rank_min","rank_max","not_confined","kids_min"}
 BAD=re.compile(r"%|\d|\b(OK|game|turn|round|slot|lượt|(?<!tấm )ván(?! gỗ| cầu| thuyền)|level|quest|item)\b|Chắc chắn|Nắm chắc|Rất chắc|Khó lường|Mong manh|Tùy duyên|Có cơ|Rất vững",re.I)
 A=sys.argv[1:];args=[a for n,a in enumerate(A) if not a.startswith('--') and not (n and A[n-1]=='--fests')]
@@ -93,7 +94,7 @@ for r in rows:
         cok.setdefault(f,[]).append(set(K))
         if r.get("tone") not in TONES:err(f"{i} tone")
         tr=r.get("tier")
-        if tr not in TIER:err(f"{i} tier s|m|l");tr="m"
+        if tr not in TIERS:err(f"{i} tier s|m|l");tr="m"
         R=r.get("roles") or {}
         if not isinstance(R,dict):err(f"{i} roles object");R={}
         for tg,rr in R.items():
@@ -116,8 +117,10 @@ for r in rows:
             phs(i,ob.get("trace",""),allowed,"object.trace");phs(i,ob.get("clue",""),allowed,"object.clue")
         phs(i,r.get("text",""),allowed,"text")
         S_=r.get("stances")
-        if not isinstance(S_,dict) or len(S_)!=4:err(f"{i} exactly 4 stances");S_=S_ if isinstance(S_,dict) else {}
-        for sid,s in S_.items():
+        if not isinstance(S_,dict) or len(S_)!=len(TIER):err(f"{i} exactly {len(TIER)} stances (NHẸ · VỪA · NẶNG)");S_=S_ if isinstance(S_,dict) else {}
+        om=r.get("om")
+        if not isinstance(om,dict) or len(om)!=1 or any(k in S_ or v not in S_ for k,v in om.items()):err(f"{i} om must be {{removed stance id: kept sibling id}}")
+        for ti,(sid,s) in enumerate(S_.items()):
             if not isinstance(s,dict):err(f"{i}.{sid} object");continue
             lb=s.get("text","");phs(i,lb,allowed,f"{sid}.text")
             if isinstance(lb,str) and len(lb.split())>8+lb.count("{"):wrn(f"{i}.{sid} label > 8 words")
@@ -131,7 +134,7 @@ for r in rows:
             for kk in set(g)&set(l):err(f"{i}.{sid} '{kk}' on both sides")
             sg=sum(v for v in g.values() if isinstance(v,int));sl=sum(v for v in l.values() if isinstance(v,int))
             if sg<1 or sl<1:err(f"{i}.{sid} gain ≥1 and loss ≥1 (laws 2/3)")
-            if sg!=TIER[tr] or sl!=TIER[tr]:err(f"{i}.{sid} Σgain {sg} / Σloss {sl} must both be {TIER[tr]} (tier {tr}, law 2)")
+            if ti<len(TIER) and (sg!=TIER[ti] or sl!=TIER[ti]):err(f"{i}.{sid} Σgain {sg} / Σloss {sl} must both be {TIER[ti]} (way {ti+1} of NHẸ · VỪA · NẶNG, law 2)")
             if "trace" in s:
                 if not ob:err(f"{i}.{sid} trace without object")
                 else:phs(i,s["trace"],allowed,f"{sid}.trace")
@@ -141,7 +144,7 @@ for r in rows:
         for sid,o in OC.items():phs(i,o,allowed,f"outcomes.{sid}")
         for x in (r.get("needs") or {}):
             if x not in NEEDS:err(f"{i} needs.{x}")
-        for x in set(r)-{"id","type","fest","kinds","tag","src","tone","tier","roles","text","object","stances","outcomes","needs"}:wrn(f"{i} extra field '{x}'")
+        for x in set(r)-{"id","type","fest","kinds","tag","src","tone","tier","roles","text","object","stances","outcomes","om","needs"}:wrn(f"{i} extra field '{x}'")
     else:
         if not re.match(rf"^fc-{f}-p\d+$",i):err(f"{i} id must be fc-{f}-pNN")
         pz[f]=pz.get(f,0)+1

@@ -3,7 +3,7 @@
    get their FT7 title, the j71 runtime builds its card (fPP7 params; non-C: fMake7 card with {A} = a real consort; C: the invitation names the
    prize when the festival has prizes). PRIZES: the winner takes the real object (she: trace_me + the IT item through goodsGive; an NPC: trace_npc
    names the real winner), recorded once (law 6c). COMPLICATIONS: drawn for a stage of a fitting kind with a real rival B (contest: one of the
-   entrants) by nết (forced when no one in this world has it), 4 options, placeholders filled, choosing (the real chooseM path) is built from
+   entrants) by nết (forced when no one in this world has it), 3 options NHẸ · VỪA · NẶNG, placeholders filled, choosing (the real chooseM path) is built from
    exactly steps × BAL.j71c.fx and moves every stat the right way, object trace kept, P0 mark j71c:c, never drawn twice in a life.
    A whole festival day (plan → fDay7) queues the complication after the day's own card. 0 page errors. */
 const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
@@ -44,10 +44,10 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
    try{const C0=nrStore();if(C0.sets[0])C0.sets[0].delete(nrK('j71c:c',sd.id))}catch(e){}/* the game's own festival days may have drawn it already this life */const own=Object.values(J71C_SEEDS.CI).filter(c=>c.id!==sd.id);own.forEach(c=>{c.__k=c.kinds;c.kinds=[]});/* only this comp can be drawn */
    let c=X_.drawComp(fest,kind,L());if(!c){tr6=v=>ALLN.slice();r.forced=1;out.forced++;c=X_.drawComp(fest,kind,L())}
    own.forEach(c=>{c.kinds=c.__k;delete c.__k});r.drawn=!!c&&c.id===sd.id;if(!r.drawn)r.dbg=JSON.stringify({c,now:nrNow('j71c:c',sd.id),on:BAL.j71c.on,cf:Object.keys(J71C_SEEDS.CI)});if(!r.drawn){tr6=tr0;continue}
-   r.mark=nrNow("j71c:c",sd.id);const card=X_.compCard(fest,c);r.card=!!card&&card.opts.length===4;if(!card){tr6=tr0;continue}
+   r.mark=nrNow("j71c:c",sd.id);const card=X_.compCard(fest,c);r.card=!!card&&card.opts.length===BAL.j71c.tier.length;if(!card){tr6=tr0;continue}
    const B=c.b!=null?A6("rv",c.b):null;r.who=B?B.n:'-';r.fit=!sd.roles||!sd.roles.B||(B&&B.o.alive&&(!(sd.roles.B["nết"]||[]).length||sd.roles.B["nết"].some(x=>tr6(B.o).includes(x))));tr6=tr0;
    const all=card.h+" "+card.opts.map(o=>o.n+" "+o.x).join(" ");r.unfilled=/\{[A-Za-z]+\}/.test(all);r.text=plain(card.h).slice(0,140);
-   const k=n++%4;const sid=Object.keys(sd.stances)[k],st=sd.stances[sid];const tier=sd.tier||"m",F=BAL.j71c.fx[tier];S.an=50;
+   const k=n++%BAL.j71c.tier.length;const sid=Object.keys(sd.stances)[k],st=sd.stances[sid];const tier=sd.tier||"m",F=BAL.j71c.fx[tier];S.an=50;
    const s0=snap(),rb=B?aff(B.o,S):0;const rec={};const ap0=apply;apply=function(o){for(const[kk,v]of Object.entries(o||{}))if(typeof v==='number')rec[kk]=(rec[kk]||0)+v;return ap0.apply(this,arguments)};
    const obL=(S.j71c.ob||[]).slice(-1)[0];const RL=[];const ra0=relAdd;relAdd=function(x,y,n){if(B&&(x===B.o||y===B.o))RL.push(n);return ra0.apply(this,arguments)};Q.length=0;Q.push(card);showModal();try{chooseM(k)}finally{apply=ap0;relAdd=ra0}
    const exp={};for(const[kk,v]of Object.entries(st.gain))exp[kk]=(exp[kk]||0)+v*F[kk==="rel.B"?"rel":kk];for(const[kk,v]of Object.entries(st.loss))exp[kk]=(exp[kk]||0)-v*F[kk==="rel.B"?"rel":kk];

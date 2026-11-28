@@ -5,7 +5,8 @@
      j71:f:<fest>:<i> stay; the whole j71 runtime plays it (fvPick: unused this life, least seen in 5 lives; fPP7 entrants; SC7 one formula).
    - complication: on the festival day, after the festival's own card, one complication card fitting the stage kind (P0 family "j71c:c",
      fresh-first, never twice in a life) with a real rival B cast from the consorts present (contest: from the real entrants; a contest
-     complication only when she entered); 4 equal-value stances, one step = BAL.j71c.fx[tier][key] (laws 2/3/4).
+     complication only when she entered); 3 stances NHẸ · VỪA · NẶNG (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z: stance i Σgain == Σloss ==
+     BAL.j71c.tier[i] steps, Tốn and Được rise together), one step = BAL.j71c.fx[tier][key] (laws 2/3/4).
    - prize: a real object the winner of a contest takes (P0 family "j71c:p:<fest>", fresh-first), named on the invitation; when she wins an IT
      key puts the real item in her chest (goodsGive), when an NPC wins the trace names the real winner (law 6c). The old stat prize stays.
    Personal per seat (S.j71c): never a co-op world key. */
