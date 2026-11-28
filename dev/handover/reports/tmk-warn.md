@@ -93,3 +93,23 @@ Branch `review/tmk-warn` (base review/tmk-oanpace-fix b96bb0d5 — LC33 asked fo
   · G4 96-kit-std-scan: the route.fulfill big-page close (above); KK63 HARNESS-BIGPAGE 29cbe6a4 fixes the harness; file:// run = base.
   · G4 96-noise-hygiene: TEXT-HYGIENE static «new 7» leaks all in jkitpage.js / jmapz.js / jnotice.js (not touched here); NOISE-DAY advisory.
 - RE-RUN after the 3b re-merge: quickcheck (with kk63 harness), coop-e2e, tmk-warn.test, tmk-warn-scan, kit-hand-mat-scan fold+ipadAir.
+
+## HANDOVER TMK-WARN-2 → successor (28/11 ~06:50Z; rolled by context 40 % real ≥ START ~6 % + 25 %; MAIN 186 opens the successor)
+- STATE: review/tmk-warn **b6d6fa4c** = my commits REPLAYED onto the restacked 3b **review/lc34-3b-r1 fcbc1992** (on LIVE 5ad52416; sha from
+  LR-RULES session_01Rc5AsLZqoDGFA7Am7fEtqW). Old history kept at review/tmk-warn-pre3b a1ed2ebd. Replay conflicts resolved by taking the 3b
+  side and re-applying the tmk-warn insertions (assemble.py jmcwarn after jcharge; j15 «Mua chuộc» mcwBuyX; j24 svDefect x; j42 take
+  cnvSpyX(m,0,v) / obey «mất: …,v» / mcwMonth in the servant tick / «Tai mắt cho» held-pieces row; jtsb leak line + mcwBuyX). 3b's svTouch
+  (servant-trust) lines kept.
+- DONE on b6d6fa4c: tmk-warn.test 17/17, MUTATE nowarn/notext/nocut exit 1, tmk-warn-scan 0 gaps / 26 sites, tai-mat-know.test 22/22.
+  The base now carries kk63 (kitOptCopy hand-plate fix) and dev/test/lib/bigpage.js (kit-std-scan big-page fix).
+- TODO (successor), in order:
+  1. `bash dev/tools/quickcheck.sh` on b6d6fa4c (G2 old-save should now PASS — branch is on LIVE; kit-std-scan gate should run with bigpage).
+     Compare any core-gate FAIL with the same gate on fcbc1992 (base) before calling it ours.
+  2. `node dev/test/coop-e2e.js <out>` — earlier 138/143 = pre-existing week-3 stall (base hung at the same week).
+  3. `node dev/test/kit-hand-mat-scan.js . fold` and `… ipadAir` (lost plate 0 expected) + re-shoot the take card plate with
+     `node dev/test/kit-hand-rows.js index.html <out>` and LOOK at both stills (Fold 755x1000, iPad 1180x820): plate = ĐƯỢC · MẤT (watch odds,
+     kill odds, Tân Giả khố, «bị đuổi khỏi cung khi … (mỗi lần … dò, ra một chứng: khả năng …)») · GHI CHÚ.
+  4. RV READY (BIG) → RV-163L session_01Rc5AsL7cUEBT1XLPxhuwSm + MAIN 186 session_01Rc5AsNNdRG9GqK1FC4jasv, citing this report.
+- Rulings on record: chanceW «khả năng …» for side chances is canon (VANPHONG l.66–67; MAIN 182 accepted the pushback). Kit keeper = KK64
+  session_01Rc5AsHuEnQAr94sJGRFNST (noise-hygiene 7 leaks + kit-std-scan harness → KK64).
+- Takeover prompt for the successor MUST copy the three ROLLOVER lines verbatim (owner OD:L1217).
