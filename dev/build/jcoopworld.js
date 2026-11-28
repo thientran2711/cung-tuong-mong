@@ -580,7 +580,10 @@ function petApply(ops,k){const out=[];if(!Array.isArray(ops))return out;
  const add=(t.inv||[]).filter(e=>!inv0.includes(e));const bk=CW.famIn?null:CW.famBk;const back=add.filter(e=>!e.h&&(k==="plant"||!!(bk&&bk.has(e))));/* E44: also any lost-case piece the act handed back to her (lostReturn hook) *//* a stolen thing slipped back to its owner (jlost "Lén trả lại" through Cài đồ) is not a gift */
  const items=add.filter(e=>!e.h&&!back.includes(e)).map(e=>J(e));
  try{let pet=null;if(pa){pet=petDiff(t,L0);for(const x in CW.petAdj)b0[x]=(b0[x]||0)+CW.petAdj[x]}
-  const fam=famDiff(t,k,inv0,K0,add.filter(e=>e.h));for(const e of back)fam.push(famRet(e));sendRes(t,k,b0,r,CW.inv,pet,items,fam)}catch(e){console.error(e)}return r}})();
+  const fam=famDiff(t,k,inv0,K0,add.filter(e=>e.h));for(const e of back)fam.push(famRet(e));sendRes(t,k,b0,r,CW.inv,pet,items,fam)}catch(e){console.error(e)}
+ /* r4 item (5) (law 6c, no double-give): what left me for her is in my seat copy AT ONCE; before, a reload within the 1 s snapshot delay
+    restored the piece in my chest while she already held it (given twice) */
+ if(items.length||CW.inv)try{CW.snapNow()}catch(e){}return r}})();
 /* ---------- B1 (review/coop-b1b5): steal / burn / extort her ITEMS, harm / take her CHILDREN, miscarriage ----------
    The act runs on her entry (bag + children from buildFriend / pos). The loss reaches her as `res.fam` ops, applied to her OWN S:
      {op:"rm", ci, k, how}  an item left her chest (how: "lost" = thất lạc case, as an NPC thief; "burn"; "taken" = named; "gone")
@@ -825,6 +828,8 @@ const rsSeen=id=>seenIds.has("r"+id)||(!!S&&Array.isArray(S.coopRs)&&S.coopRs.in
 function onRes(m){if(!CW.on||m.from===CW.seat||!S)return;if(rsSeen(m.id)){COOP.send({t:"actr",id:m.id,ok:true,ack:1});return}seenIds.add("r"+m.id);
  S.coopRs=(S.coopRs||[]).concat([m.id]).slice(-80);
  try{resApply(m)}catch(e){console.error(e)}
+ /* r4 item (5): what she did to me is in my seat copy before the ack (an ack stops her resends: a reload inside the snapshot delay lost it) */
+ try{if(CW.snapNow&&!S.dead)CW.snapNow()}catch(e){}
  /* I had already ended the week (she acted on me while I waited): my end goes out again with this in it, before the ack she waits for */
  try{if(S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}}catch(e){console.error(e)}
  COOP.send({t:"actr",id:m.id,ok:true,ack:1})}

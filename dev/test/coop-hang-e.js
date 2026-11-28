@@ -69,13 +69,27 @@ const D=o=>o.p.evaluate(()=>({w:COOP.state.week,b:S.buoi||0,used:typeof used==='
  /* one case: X = the late seat (state st), Y = ends first. how: 'rd' = X pressed ready before Y ends, 'idle' = X never pressed (spends her
     khắc after), 'dlg' = a card is open on X when Y ends, 'rejoin' = X reloads after Y ended, 'clock' = the room clock runs out after Y ended */
  const ALL=[['M1','b','cold','nofin'],['D1','b','','drift'],['D2','a','','drift'],['F1','b','cold','nfn'],['F2','b','','nfn'],['FH','a','','nfnG'],['K1','b','cold','reborn'],['K2','b','cold','rdreborn'],['L1','b','cold','rd'],['L3','b','cold','clock'],['L4','b','cold','rejoin'],['L5','b','cold','dlg'],
-  ['S1','b','sick','rd'],['W1','b','away','rd'],['R1','b','','rejoin'],['H1','a','cold','rd'],['H2','a','cold','clock'],['HK','a','cold','reborn']];
+  ['S1','b','sick','rd'],['W1','b','away','rd'],['R1','b','','rejoin'],['H1','a','cold','rd'],['H2','a','cold','clock'],['HK','a','cold','reborn'],
+  /* r4 item (5) (law 6c): the late seat X gives the friend a piece and reloads at once (inside the 1 s snapshot delay): one piece, never two */
+  ['G1','a','','giftrl'],['G2','b','','giftrl']];
  const pick=(process.env.CASES||'').split(',').filter(Boolean);const CASES=pick.length?ALL.filter(c=>pick.includes(c[0])):ALL;
  for(const [tag,seat,st,how] of CASES){let X=seat==='a'?A:B;const Y=seat==='a'?B:A;const name=tag+' ('+(seat==='a'?'host':'guest')+' '+(st||'plain')+', '+how+')';
   for(let i=0;i<3;i++){await clear(A);await clear(B);await sleep(300)}
   if(st){const r=await SET[st](X);console.log(tag,'set',JSON.stringify(r))}
   /* drift (room e: guest day 317, host day 314 → 315 in the same room week 306): the late seat's calendar is one tuần off the room's */
   if(how==='drift')console.log(tag,'drift',JSON.stringify(await X.p.evaluate(()=>{const a=S.turn*3+S.tuan;if(S.tuan<2)S.tuan++;else{S.tuan=0;S.turn++}return{from:a,to:S.turn*3+S.tuan}})));
+  if(how==='giftrl'){const HP=()=>(S.inv||[]).filter(e=>e.k==='tramngoc').length;
+   await X.p.evaluate(()=>{S.inv=S.inv||[];S.inv.push({k:'tramngoc'});render();COOPW.snapNow&&COOPW.snapNow()});await sleep(1500);
+   const x0=await X.p.evaluate(HP),y0=await Y.p.evaluate(HP);
+   const r=await X.p.evaluate(()=>{const f=COOPW.friend();const ix=S.inv.findIndex(e=>e.k==='tramngoc');return String(runAct(S,f,'gift',ix))});ok(/ngỏ ý/.test(r),name+': the gift invite goes out',r);
+   /* the friend accepts (the invite card «Nhận», then her own «Quà tặng» keep) */
+   {const t0=Date.now();while(Date.now()-t0<30000){await tapText(Y,/^Nhận/,800);await clear(Y);if(await Y.p.evaluate(n=>(S.inv||[]).filter(e=>e.k==='tramngoc').length>n,y0))break;await sleep(300)}}
+   const got=await Y.p.evaluate(n=>(S.inv||[]).filter(e=>e.k==='tramngoc').length===n+1,y0);ok(got,name+': the friend holds the piece');
+   /* the giver's page is gone at once (within the snapshot delay) */
+   {const t0=Date.now();while(Date.now()-t0<8000&&await X.p.evaluate(n=>(S.inv||[]).filter(e=>e.k==='tramngoc').length>=n,x0))await sleep(50)}
+   await X.p.close();await sleep(1500);ok(await rejoin(X,seat==='a'),name+': giver back in the room');await sleep(3000);
+   const x1=await X.p.evaluate(HP),y1=await Y.p.evaluate(HP);
+   ok(x1===x0-1&&y1===y0+1,name+': (5) after the reload ONE piece moved: giver '+x0+'→'+x1+', friend '+y0+'→'+y1,{x0,x1,y0,y1})}
   if(!await toNight()){ok(false,name+': both at tối',[await D(A),await D(B)]);continue}
   if(st==='cold')ok((await D(X)).out,name+': in lãnh cung at tối');
   const w0=(await D(A)).w;const u0=(await D(X)).used;
