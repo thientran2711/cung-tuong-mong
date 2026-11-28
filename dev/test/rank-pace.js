@@ -12,6 +12,7 @@
 //   (14) maid double door: sat from the Hành sự card while the «Thi ngay» card is queued → the queued card is gone, the stale card
 //        sits nothing, the rung stays a number (LIVE: exSrvRise(undefined) → NaN); (15) the consort double door the same (no 2nd exam);
 //   (16) old save with a NaN / null maid rung loads mended to a named rung and the road runs.
+//   (17) Tân Giả khố «Nghỉ tay một lát» prints its fail loss «thêm một tuần phạt» (before x:"" hid it; maid-even stuck 69–72/72 months).
 // usage: node dev/test/rank-pace.js [dev/index.html]
 const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
 const HTML=process.argv[2]||'dev/index.html';let fail=0;const ok=(c,m)=>{console.log((c?'PASS ':'FAIL ')+m);if(!c)fail++};
@@ -70,11 +71,14 @@ const HTML=process.argv[2]||'dev/index.html';let fail=0;const ok=(c,m)=>{console
    out.cdbl={card:!!c,deck:!!a,left,sits:window.__exN.sit-n0};window.pbKyAt=ky}
   /* (16) old save: NaN rung */
   if(srvLife()){S.srv.lau=0;S.srv.rk=NaN;S.srv.rk0=2;const d=JSON.parse(JSON.stringify(ser()));try{quiet=true;deser(d);quiet=false;deal();render();out.old={rk:S.srv.rk,ex:JSON.stringify(S.srv.ex)}}catch(e){out.old={err:e.message}}}
+  /* (17) Tân Giả khố rest card prints its fail loss (an extra week) */
+  if(srvLife()){srvLaundry('t',6);const c=srvCards().find(a=>a&&a.n==='Nghỉ tay một lát');out.rest=c&&c.x}
   window.__exAuto=0;return out});
  console.log(JSON.stringify(M));
  ok(M.life&&M.steps&&M.steps.length&&M.steps.every(x=>x.card&&x.to===x.from+1)&&M.top===M.steps[M.steps.length-1].to&&M.top>=4,`(13) every maid rung step is a road (card + pass → next rung): ${M.steps&&M.steps.map(x=>x.from+'→'+x.to).join(' ')}${M.err?' ERR '+M.err:''}`);
  ok(M.dbl&&M.dbl.card&&M.dbl.deck&&!M.dbl.left&&M.dbl.sits===1&&M.dbl.fin&&M.dbl.rk===2,`(14) maid double door: 1 exam, queued card gone, rung ${M.dbl&&M.dbl.rk} is a number`);
  ok(M.cdbl&&M.cdbl.card&&M.cdbl.deck&&!M.cdbl.left&&M.cdbl.sits===1,`(15) consort double door: 1 exam (${M.cdbl&&M.cdbl.sits}), queued card gone`);
+ ok(M.rest&&/thêm một tuần phạt/.test(M.rest)&&!/%/.test(M.rest),`(17) Tân Giả khố «Nghỉ tay» card shows its loss: ${M.rest}`);
  ok(M.old&&M.old.rk===2&&M.old.ex==='{}',`(16) old save with a NaN maid rung mends to rung ${M.old&&M.old.rk}`);
 
  ok(R.ord.t==="Khảo hạch tấn phong"&&R.ord.n.join('/')==='Thi ngay/Để sau'&&R.ord.deck,'(1) ordinary (kỳ) window → kit card «Thi ngay / Để sau» + Hành sự card');

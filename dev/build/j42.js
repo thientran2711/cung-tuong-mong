@@ -218,7 +218,7 @@ function srvCards(){const m=srvM();const X=[];if(!m)return X;const B=bid();const
  const med={n:"Mua thuốc bổ",t:"Mua chén thuốc bổ của tiểu thái giám bán rong.",k:SRVA.med.k,c:SRVA.med.c,o:100,fix:1,w:SRVA.med.w,once:"med"};
  if(S.srv.lau>0){
   X.push({n:"Giặt đồ",t:"Vò từng chậu y phục của cung nhân trong nước lạnh.",k:2,c:{suc:-10},o:100,w:{},x:`6 lần giặt: được về sớm 1 tuần (nay ${S.srv.lw||0}/6)`,rep:1,go:()=>{S.srv.lw=(S.srv.lw||0)+1;if(S.srv.lw>=6){S.srv.lw=0;S.srv.lau=Math.max(1,S.srv.lau-1);log("Quản sự gật đầu: bớt một tuần phạt.")}}});
-  X.push({n:"Nghỉ tay một lát",t:"Ngồi sau chồng chậu, thở một hơi.",k:1,c:{},o:od(BAL.odb.j42.odO),w:{suc:8},l:{suc:-3},x:"",rep:1,fail:()=>{S.srv.lau++;log("Bị quản sự bắt gặp: thêm một tuần phạt.")}});
+  X.push({n:"Nghỉ tay một lát",t:"Ngồi sau chồng chậu, thở một hơi.",k:1,c:{},o:od(BAL.odb.j42.odO),w:{suc:8},l:{suc:-3},x:`hỏng thì thêm một tuần phạt · còn ${S.srv.lau} tuần`/* d-maid-road (law 3 / 6a): the fail's real loss is printed; before x:"" hid it and a resting maid stayed in Tân Giả khố 69–72 of 72 months (robot maid-even) */,rep:1,fail:()=>{S.srv.lau++;log("Bị quản sự bắt gặp: thêm một tuần phạt.")}});
   if(!srvOnce("plea"))X.push({n:"Cầu xin quản sự",t:"Dúi bạc, xin được tha về sớm.",k:1,c:{},o:od(BAL.odb.j42.odO_2+S.danh/2+srvFriendList().length*8),w:{bac:-10},l:{}/* bạc only when the quản sự takes it (canPay keeps the lock) */,x:"được về cuối tuần này",once:"plea",go:()=>{S.srv.lau=1}});
   if(S.suc<SRVA.med.at&&!srvOnce("med"))X.push(med);
   X.forEach(a=>a.dom="");return X}
