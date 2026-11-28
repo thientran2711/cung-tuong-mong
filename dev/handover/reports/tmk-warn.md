@@ -292,3 +292,21 @@ Not run: full quickcheck (lander step).
 - Stills removed from git (the build refuses shots in git: «shots go to scratch, never git»); they were in review-sheets/tmk-warn-5 at 39dc6cae.
 - Re-run on the r2 build: tmk-warn.test 17/17 · kit-hand-dupmat ALL OK · webkit 0 · witcard FAIL (expected, waits for the kit).
 - NEXT (TMK-WARN-6 or me): when the kit keeper's K-HINT-KEM branch exists → merge it, rebuild, witcard Fold + iPad 19/19, stills, RV READY → RV-189.
+
+### HANDOVER TMK-WARN-5 → TMK-WARN-6 (28/11 ~13:30Z; rolled by CONTEXT 26.4 % ≥ START ~1 % + 25 %; MAIN 190 opens the successor)
+- STATE: review/tmk-warn-r4 **dbbd0301** (covHint fixed; my kit hunk reverted per RV-189 FAIL-HOLD; witcard = acceptance test, fails until the kit lands).
+- UNBLOCKED: KK73 (kit keeper, session_01Rc5AsJyYGUg6x9bzKGW7He) built K-HINT-KEM = **review/kk73-hintkem 874cac12** (on LIVE 8a1a71de), RV READY sent
+  to RV-190 (UI/kit). It is my 4838f246 jopic hunk + census hook + KIT.md §6.2b + census test dev/test/kit-hint-kem.js.
+- TODO (in order):
+  1. `git merge --no-ff origin/review/kk73-hintkem` into review/tmk-warn-r4. KK73: one conflict in jopic.js (the matRow/keep line + the fold line):
+     take KK73's first line (kemRow) and OUR second line (K-HAND-DUPMAT kcpsrc); index.html/sw.js → `bash dev/site/build_site.sh`. Check also KIT.md /
+     KIT_REQUESTS (K-HINT-KEM: keep KK73's text, drop my «OPEN» entry wording if both sides). LIVE moved to 8a1a71de: that comes in with kk73 (verify FF).
+  2. Gates: tmk-warn-witcard Fold 755x1000 + iPad 1180x820 = 19/19 (KK73 saw this on a scratch merge), MUTATE=nokem / oldhint exit 1; kit-hint-kem.js;
+     kit-std-scan gate mode Fold + iPad (SZ, SUBS=0, REPORT_ONLY=1; X01 0, total = LIVE's); tmk-warn.test; tmk-warn-scan; tai-mat-know; webkit-syntax;
+     kit-hand-dupmat; kit-hand-split; press-keep (needs a file:// URL); MODGATE (assemble.py quoted *.js ⊇ LIVE); 0 LIVE deletions; 2-parent merges;
+     committed index.html/sw.js == rebuild. opt-loss-ton fails pre-existing on LIVE (sure cards) — compare, don't fix.
+  3. Stills of the OPENED wit door card Fold + iPad @2 to SCRATCH ONLY (shots never in git — build refuses). Probe recipe: boot, click
+     «Nhận thân phận/Vào cung ngay…» until the modal closes, `covSaw=()=>["x"]`, find curPeople() index with PEND.door({i,k:"wit"}) 3 rows, doorOpen(p,"wit");
+     in image mode hide the «Luân hồi» overlay (#kroul or class kroul) before the screenshot. LOOK at both.
+  4. RV READY <sha> → RV-189 (session_01Rc5AsKweT3LtMsrkLNmDbV); land after or with K-HINT-KEM → lander LR-RULES-2 (session_01Rc5AsLfpDrXbkzzDZMaJdF).
+- Takeover prompt MUST copy the ROLLOVER lines verbatim (owner OD:L1217) and the LINEAGE line.
