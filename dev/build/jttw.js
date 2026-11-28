@@ -17,7 +17,8 @@
       BAL.mort.ttw.cap, so the end can still happen (roads raise odds, never guarantee).
    3. ON THE DAY: (A) adds S.ttw.pz to the j3 odds base; (B) a hit is still averted when roll(min(cap, pz)) (jmort save line).
       With no road taken (pz 0) both rolls are exactly as before.
-   4. TWO-WAY (law 1): NPC consorts at risk B take a road too (BAL.mort.ttw.npcP % per beat, v.ttwPz); when she, as the new Thái hậu,
+   4. TWO-WAY (law 1): NPC consorts at risk B take a road too, on their own risk and rhythm (BAL.mort.ttw.npcP % per beat, same odds and
+      costs as hers, v.ttwPz); when she, as the new Thái hậu,
       forces a foe to tuẫn táng (j99succ «Chuyện cũ hậu cung»), the foe's v.ttwPz can save her (triều thần can, she is sent to a temple).
    Off: co-op (the Emperor's death is muted there) and the servant road (no consort). In lãnh cung the signs and roads stay (letters, gifts).
    PEND "ttw" (rebuilt from S on load). Old saves: S.ttw is created on first use. Test: dev/test/tuantang-warn.js. ========================= */
@@ -82,13 +83,20 @@ function ttwGo(id){const r=ttwRisk();if(!r)return;const B=T(),R=B.road[id],st=tt
  if(ok){st.pz=Math.min(B.cap,st.pz+R.pz);apply(ttwWin(id,r));if(r.k==="th"&&R.rel)try{relAdd(r.v,S,R.rel)}catch(e){}}
  else{apply(R.l||{});apply(R.fw||{});if(r.k==="th"&&R.rel)try{relAdd(r.v,S,R.frel)}catch(e){}}
  log(`Lời đồn hậu sự: ${o.n}. ${ok?"Thành.":"Không thành."}`);if(!window.__bot)try{resultShow(`Lời đồn hậu sự: ${o.n}`,before,ok)}catch(e){}}
-/* NPC consorts at risk B take a road too (law 1) */
-function ttwNpc(){const B=T(),F=BAL.mort.fate;try{for(const v of liveRivals(false)){if((v.kids||[]).some(k=>k.alive)||(v.sung||0)<F.tuanSung)continue;if(!roll(B.npcP))continue;
- const id=pick(["nhe","sl","nang"]),R=B.road[id];v.ttwPz=Math.min(B.cap,(v.ttwPz||0)+R.pz);if(R.c.suc)v.suc=Math.max(0,(v.suc||0)+R.c.suc);if(R.c.sung)v.sung=Math.max(0,(v.sung||0)+R.c.sung)}}catch(e){}}
+/* NPC consorts at risk B take a road too (law 1, two-way; RV-163L FAIL-1/2): on their OWN risk (childless, Sủng ≥ tuanSung, no Đức save),
+   on their own rhythm (v.ttwLast, same cd as hers), independent of whether SHE is at risk; the road pays its cost and rolls the SAME BAL odds
+   (odA on the NPC); success adds protection, failure still gives its fw (law 3). Bạc road only when the NPC has the bạc. */
+function npcRisk(v){const F=BAL.mort.fate;return !((v.kids||[]).some(k=>k.alive)||(v.sung||0)<F.tuanSung||(v.duc||0)>=F.tuanDuc)}
+function ttwNpc(){const B=T(),cd=ttwSign()?B.cd.sign:B.cd.quiet;try{for(const v of liveRivals(false)){if(!npcRisk(v))continue;if(mi()-(v.ttwLast==null?-999:v.ttwLast)<cd)continue;v.ttwLast=mi();if(!roll(B.npcP))continue;
+ const ids=["nhe","sl","nang"];{const c=ttwCost(B.road.bac.c);if((v.bac||0)>=-c.bac)ids.push("bac")}const id=pick(ids),R=B.road[id],c=ttwCost(R.c);
+ for(const k in c)if(typeof v[k]==="number")v[k]=Math.max(0,v[k]+c[k]);
+ const ok=roll(odA(v,R.p));v.ttwN=(v.ttwN||0)+1;
+ if(ok)v.ttwPz=Math.min(B.cap,(v.ttwPz||0)+R.pz);else for(const k in (R.fw||{}))if(typeof v[k]==="number")v[k]+=R.fw[k]}}catch(e){console.error(e)}}
+window.ttwNpcTick=ttwNpc;
 window.ttwNpcSpared=function(v){return !!(v&&v.ttwPz>0&&roll(Math.min(T().cap,v.ttwPz)))};
 /* the monthly beat */
-window.ttwMonth=function(){if(ttwOff())return;const r=ttwRisk();if(!r||r.o>=T().warnO)return;const st=ttwSt(),s=ttwSign();
+window.ttwMonth=function(){if(ttwOff())return;ttwNpc();const r=ttwRisk();if(!r||r.o>=T().warnO)return;const st=ttwSt(),s=ttwSign();
  const cd=s?T().cd.sign:T().cd.quiet;if(mi()-st.last<cd)return;if((Q||[]).some(m=>m&&m.pid==="ttw"))return;
- if(ttwFire()){st.last=mi();ttwNpc();log(`Lời đồn hậu sự: ${s?SIGN[s]+" ":""}trong cung bắt đầu bàn chuyện hậu sự.`)}};
+ if(ttwFire()){st.last=mi();log(`Lời đồn hậu sự: ${s?SIGN[s]+" ":""}trong cung bắt đầu bàn chuyện hậu sự.`)}};
 if(typeof monthTick==="function"){const m0=monthTick;monthTick=function(){const ev=m0.apply(this,arguments);try{if(S&&!S.dead)ttwMonth()}catch(e){console.error(e)}return ev}}
 })();

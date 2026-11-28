@@ -65,9 +65,22 @@ const R=path.resolve(__dirname,'../..');const PAGE=process.argv[2]||'dev/index.h
   /* no risk: her own son is heir · Hoàng hậu · low Sủng childless */
   {setA();const k=mkKid("m",3);S.kids=[k];S.heir={k,v:null};ok("no card: her son is heir",!ttwRisk());setA();S.rank=7;ok("no card: Hoàng hậu",!ttwRisk());setB();S.sung=10;ok("no card: childless, low Sủng",!ttwRisk());
    setB();S.duc=80;ok("no card: Đức already saves her (B)",!ttwRisk())}
-  /* two-way: NPC at risk takes roads; her forcing a foe can fail */
-  {setB();const v=liveRivals(false)[0];v.sung=90;v.kids=[];const P0=PIN;PIN=()=>{P0();v.sung=90;v.kids=[];v.queen=false;v.alive=true;v.out=false;v.ttwPz=0};const r0=roll,n0=B.npcP;B.npcP=100;try{months(1)}finally{B.npcP=n0}ok("NPC at risk took a road",(v.ttwPz||0)>0,v.ttwPz);
-   roll=p=>p===Math.min(B.cap,v.ttwPz);let sp;try{sp=ttwNpcSpared(v)}finally{roll=r0}ok("NPC roads can save her from my order",sp===true)}
+  /* two-way (law 1; RV-163L FAIL-1/2): NPC roads run on the NPC's OWN risk, roll the same BAL odds, can fail; her order can fail */
+  {const n0=B.npcP;B.npcP=100;
+   /* FAIL-1 probe: SHE has no risk (her son is heir), an NPC is at risk → the NPC still takes roads over 12 months */
+   setA();const k=mkKid("m",3);S.kids=[k];const v=liveRivals(false).find(x=>x!==S.heir.v)||liveRivals(false)[0];
+   PIN=()=>{S.tho=99;S.srv=null;S.kids=[k];S.heir={k,v:null};S.emp.tho=99;if(S.mort){S.mort.empDue=null;S.mort.plot=null}v.sung=90;v.kids=[];v.duc=0;v.queen=false;v.alive=true;v.out=false;v.suc=90};
+   PIN();ok("probe: she has no risk",!ttwRisk());months(12);ok("NPC at risk takes roads while SHE has none (FAIL-1)",(v.ttwN||0)>=2,`tries ${v.ttwN} pz ${v.ttwPz}`);
+   /* FAIL-2: same odds as hers, can fail, failure pays the cost and still gives fw; success adds protection */
+   const r0=roll;let seen=[];v.ttwPz=0;v.ttwLast=null;v.duc=0;const s0=v.suc;
+   roll=p=>{seen.push(p);return p>=100};try{ttwNpcTick()}finally{roll=r0}
+   const R=B.road,odds=["nhe","sl","nang","bac"].map(x=>odA(v,R[x].p));
+   ok("NPC road rolls the BAL road odds (odA)",seen.some(p=>p<100&&odds.includes(p)),seen.join(","));ok("NPC road can fail: no protection",!(v.ttwPz>0),v.ttwPz);
+   ok("failed NPC road still gives something (fw)",v.duc===1||v.suc===s0+R.nang.fw.suc,`duc ${v.duc} suc ${s0}->${v.suc}`);
+   v.ttwLast=null;roll=()=>true;try{ttwNpcTick()}finally{roll=r0}ok("NPC road success adds protection",v.ttwPz>0,v.ttwPz);
+   roll=p=>p===Math.min(B.cap,v.ttwPz);let sp;try{sp=ttwNpcSpared(v)}finally{roll=r0}ok("NPC roads can save her from my order",sp===true);
+   roll=()=>false;try{sp=ttwNpcSpared(v)}finally{roll=r0}ok("my order can still go through",sp===false);
+   B.npcP=n0;PIN=()=>{}}
   /* old save without S.ttw */
   {setA();delete S.ttw;let e="";try{const d=JSON.parse(JSON.stringify(ser()));deser(d);quiet();PIN=()=>{};const v2=liveRivals(false)[0];const k2=mkKid("m",6);v2.kids=[k2];S.heir={k:k2,v:v2};v2.rel=-60;S.rank=3;S.duc=10;S.sung=30;S.kids=[];S.emp.pre=1;months(1)}catch(x){e=String(x)}ok("old save (no S.ttw) loads + runs",!e&&S.ttw&&S.ttw.last>0,e)}
   /* co-op off */
