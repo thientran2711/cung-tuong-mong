@@ -3,7 +3,7 @@
 // for exactly the months the home road lasts (kc2Due: to the tuyển tú month); NHA = the home road played by a sensible home policy (below)
 // to the palace entry. Each life is snapshotted at that calendar point: rank / servant standing, Sủng, Danh, Bạc, Sắc+Tài+Tâm cơ+Đức,
 // tài nghệ levels, harem people known, death. Serves the built site (index.html) from the repo root; pictures are not loaded.
-const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const path=require('path');const fs=require('fs');
 const ROOT=path.resolve(__dirname,'../..');const GAME='http://game.local/'+(process.env.GF||'index.html');const M=__dirname;
 const N=+process.argv[2]||4,ORIG=(process.argv[3]||'cnv,nc').split(','),OUT=process.argv[4]||path.join(M,'kc2val.json'),ARMS=(process.argv[5]||'cung,nha').split(',');
 const HOME=`/* F1 (review-oi-r1): the home bot self-studies like main's palace bot (inpage6 diff-remeasure: free Tài nghệ "Tự học" of the lowest art

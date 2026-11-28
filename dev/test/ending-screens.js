@@ -7,7 +7,7 @@
    flower centred on the top edge, drapes on the left / right edges; without the art: no piece, no error. The button acts (new life / closes) and the next dialog is NOT an ending screen.
    Old save: a save written WITHOUT S.kesT and with a pending Hồi kết nhánh result (pid geR) reloads into the full-screen Đại kết cục. No page errors, no horizontal overflow.
    usage: node dev/test/ending-screens.js [outdir|-] [url] [WxH@dpr,…] [--noart]       (shots go OUTSIDE the repo) */
-const path=require('path');const fs=require('fs');const {chromium}=require('playwright');
+const path=require('path');const fs=require('fs');const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const A=process.argv.slice(2).filter(x=>!x.startsWith('--'));const NOART=process.argv.includes('--noart');
 const FIGS=[];const OUT=A[0]&&A[0]!=='-'?A[0]:null;const URL=A[1]&&A[1]!=='-'?A[1]:'file://'+path.resolve(__dirname,'../index.html');
 const SIZES=(A[2]||'755x1000@1,1180x820@1').split(',').map(s=>{const m=s.match(/(\d+)x(\d+)@(\d+)/);return {w:+m[1],h:+m[2],d:+m[3]}});

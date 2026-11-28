@@ -1,7 +1,7 @@
 /* review/kit-ghichu-bang part 2 (KIT §48.3, owner 21/11 ~04:33Z #61): rank + name are ONE rank-coloured unit in story/dialog text, also for a story NPC that is not in the people list
    («Tể tướng Trịnh Thừa Chí»), and a court post alone («nhà Tể tướng») carries its colour; applying the helper twice never nests.
    usage: node dev/test/kit-rankunit.js <url> */
-const {chromium}=require('playwright');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});

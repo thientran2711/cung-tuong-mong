@@ -2,7 +2,7 @@
    A  Nguy hiểm chung box → «Làm lành với <her>» → the choice shows ONCE (centre modal OR the stage encounter scene, never both, never empty) → real tap «Nhún nhường» → oán −oanDown.
    B  real tap on HER FIGURE on the stage → the encounter card → real tap «Nhún nhường» there → shows once, oán drops, no centre modal left over.
    usage: node dev/test/ob-oan-enc.js <root> <videoDir|-> [WxH@dpr ...]  → exit 1 on FAIL */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const [,,ROOT,VID0,...SZ]=process.argv;const VID=VID0&&VID0!=='-'?VID0:null;const SIZES=SZ.length?SZ:['755x1000@1','1180x820@1'];
 const MIME={'.html':'text/html','.js':'text/javascript','.json':'application/json','.css':'text/css','.webp':'image/webp','.png':'image/png','.webmanifest':'application/json'};
 /* the game files from disk, everything else (CDN pictures) from the network: real figure art */

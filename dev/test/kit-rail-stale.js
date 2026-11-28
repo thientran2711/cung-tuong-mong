@@ -1,4 +1,4 @@
-const {chromium}=require('playwright');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));
 /* review/kit-ring5 (RING-DESIGN-5 c): the stage rail never keeps a stale inline slot (left/right/flex-direction left by the header dock) on a stage: injects a stale slot, repaints, flips tabs.
    usage: node dev/test/kit-rail-stale.js <url> <W> <H> [flips] */
 const [,,URL,W,H,N]=process.argv;

@@ -1,7 +1,7 @@
 /* jroute reachability: every «Lối riêng» ending is reached by playing its real cards / dialogs in order (odds forced to pass or fail,
    so this proves the chain is wired, not how likely it is — dev/measure/routes.js measures odds).
    usage: node dev/measure/routes_reach.js   (needs zz-test.html at the repo root). Prints one line per ending: ok / FAIL + the steps taken. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const MT={html:'text/html',js:'text/javascript',json:'application/json'};
 const CASES={
  /* tư tình → đêm riêng → lời hứa → theo hắn ra cổng */

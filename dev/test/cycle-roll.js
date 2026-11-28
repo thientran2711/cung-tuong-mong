@@ -5,7 +5,7 @@
    the maid card ("Kỳ này (…)") / the calendar marks / the book all show the SAME per-month length; days stay inside one tuần of one month
    (never cross a month); the co-op friend entry {name} rolls the same as her; deterministic (same call twice = same days);
    changing BAL.cyc.len changes the game (no typed 5/6/7 left).  usage: node dev/test/cycle-roll.js <index.html> */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const IDX=process.argv[2]||'dev/index.html';const html=fs.readFileSync(IDX,'utf8');
 const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';
 (async()=>{const b=await chromium.launch();const errs=[];

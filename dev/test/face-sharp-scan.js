@@ -4,7 +4,7 @@
    (dev/test/face-sharp.js + face-sharp-cmp.py), and on the owner's phone her animated figure read as a hazy face next to a crisp maid.
    usage: node dev/test/face-sharp-scan.js <site url> <WxH@dpr> <out.json>   (LOCAL_IMG=<dir> serves CDN pictures from disk)
    Screens: stage at home (her + maid), stage with 3 consorts selected / not, Hậu cung, Giao tình, an event dialog with people. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'},args:['--ignore-certificate-errors']}:{});
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),serviceWorkers:'block'});
  const LOC=process.env.LOCAL_IMG;if(LOC)await ctx.route(/ctm-img\.victoria-tntt\.workers\.dev\/img\/[^?]*/,async r=>{const f=LOC+'/'+r.request().url().split('/img/')[1].split('?')[0];if(fs.existsSync(f))return r.fulfill({path:f,headers:{'access-control-allow-origin':'*','content-type':f.endsWith('.json')?'application/json':'image/webp'}});return r.continue()});

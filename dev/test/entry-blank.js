@@ -13,7 +13,7 @@
      stage  = people on the room stage (tokens) / room picture painted
      emptyBox = a visible picture still on its way shown as bare §59.1 paper (no kit silhouette; small slots carry no line: to her it is an empty box)
    FAIL (bad>0) when an uncovered sample shows a blank, an empty box, a hole, an empty or hidden stage; KLOAD must leave 'check' (big). */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');const D=require('./lib/device');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path'),http=require('http');const D=require('./lib/device');
 const [,,OUT='/tmp/eb',DEVS='fold,ipadAir',PATHS='cont,upd,cold',MBPS='1.5']=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 const NEW=path.resolve(process.env.ROOT||path.join(__dirname,'../..'));const OLD=process.env.OLD?path.resolve(process.env.OLD):null;let ROOT=NEW;/* OLD=<built root of an older build>: the life is played and saved on that build, then the site switches to the new one (the real update path, her old save) */

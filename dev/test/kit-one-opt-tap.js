@@ -2,7 +2,7 @@
    (the real PEND.ksp card cut to its first option, + a plain one-option card, + the same with the odds meter) must choose on a REAL touch tap at the card's centre, its NAME,
    its right edge and on the odds meter; only the «!» icon opens the odds ladder / why. Fold 755x1000 + iPad 1180x820.
    usage: node dev/test/kit-one-opt-tap.js <index.html> [outdir]   env SZ=[[W,H],..]   Exit 1 on a FAIL (a tap that did not choose, or opened #kpop). */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const R=[];
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));

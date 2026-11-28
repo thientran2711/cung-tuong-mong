@@ -2,7 +2,7 @@
    the Emperor card "Ngài với ngươi" (Sủng + Ân tình bars), an NPC's poisoned dish reaching her (kim bạc test), NPC→NPC act, header untouched.
    usage: node dev/test/poison-gift.js <url of index.html> <W>x<H>@dpr <outdir> <tag> [oldsave.json]
    Prints one JSON line: per step overflowX + clipped leaf text, checks, page errors. */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',serviceWorkers:'block'});
