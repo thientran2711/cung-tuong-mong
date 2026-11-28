@@ -232,7 +232,7 @@ async function stepOut(m){if(!liveM(m))return;const g=m.g;if(SEL!==g)pickGroup(g
  const to=`translate(${tx+(m.w*(k-1))/2}px,${ty+m.h*(k-1)}px) scale(${k})`;m.el.style.zIndex="30";m.fx={x:tx,y:ty,w:W,h:m.h*k};
  CUR.G.forEach(x=>{if(x.capEl)x.capEl.style.visibility="hidden"});
  const mid=`translate(${(m.x+tx)/2}px,${(m.y+ty)/2-8}px) scale(${(1+k)/2})`;an(m.el,[{transform:m.el.__t},{transform:mid,offset:.5},{transform:to}],{duration:still()?1:(B.walkMs||700)});
- const feet=ty+m.h*k-(B.folBack||.02)*D.H;let x=tx-gp;fo.forEach(q=>{const w=q.w*sF;x-=w;const cx=x+w/2;x-=gp;const t3=`translate(${cx-q.w/2}px,${feet-q.h}px) scale(${sF.toFixed(3)})`;q.el.style.zIndex="29";
+ const feet=ty+m.h*k-(B.folBack||.02)*D.H;let x=tx-gp;fo.forEach(q=>{const w=q.w*sF;x-=w;const cx=x+w/2;x-=gp;const t3=`translate(${cx-q.w/2}px,${feet-q.h}px) scale(${sF.toFixed(3)})`;q.fx={x:cx-q.w*sF/2,w:q.w*sF};/* LRM6 r3: her followers' FINAL box (yieldFaces reads it, never a mid-walk rect) */q.el.style.zIndex="29";
   an(q.el,[{transform:q.el.__t},{transform:t3}],{duration:still()?1:520})});
  await wait(still()?30:(B.walkMs||700)+40);tagsFix()}
 /* THẺ GỖ TREO = kit §98.1 kitPick, fed by the real act list of this person (jdfv dfData) */
@@ -253,7 +253,9 @@ function unyield(quick){if(!CUR)return;CUR.G.forEach(g=>g.P.forEach(p=>{const q=
 function yieldFaces(m,n){if(!CUR||!liveM(m)||!KP||!AB().face)return;/* BAL.area.face null = off (the plate-edge-scan BEFORE column: NOYIELD=1) */n=n||KP.__n||1;KP.__n=n;const R=pkRects(n);if(!R.length)return;
  const hit=f=>R.some(r=>f.l<r.r-1&&f.r>r.l+1&&f.t<r.b-1&&f.b>r.t+1);const bx0=Math.min(...R.map(r=>r.l)),lim=bx0-4,sMin=AB().faceMin||.45,hr=L.getBoundingClientRect();
  const body=(l,w)=>({l:l+w*.22,r:l+w*.78}),occ=[],Y=[];
- m.g.P.forEach(p=>{const r=p.m.el.getBoundingClientRect();if(r.width>2)occ.push(body(r.left-hr.left,r.width))});
+ /* LRM6 r3 (RV-179 FAIL-1): the speaker + her followers count at their FINAL step-out boxes (m.fx / q.fx set by stepOut), never a rect read while they still walk
+    (the follower stood at her old slot in the rect → a bystander yielded onto her, Fold loidi0 27 px) */
+ m.g.P.forEach(p=>{const q=p.m;if(!q)return;const f=q===m?m.fx:q.fx;if(f&&f.w>2)occ.push(body(f.x,f.w));else{const r=q.el.getBoundingClientRect();if(r.width>2)occ.push(body(r.left-hr.left,r.width))}});
  CUR.G.forEach(g=>{if(g===m.g)return;const Q=g.P.map(p=>p.m).filter(Boolean);if(!Q.length)return;
   if(Q.some(q=>hit(faceOf(q,0,1))))Y.push(Q);else{Q.forEach(q=>{occ.push(body(q.x,q.w));if(q.yd){q.yd=null;an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}})}});
  /* nearest the board first (it has the least way to go) */Y.sort((a,b)=>Math.max(...b.map(q=>q.x))-Math.max(...a.map(q=>q.x)));
