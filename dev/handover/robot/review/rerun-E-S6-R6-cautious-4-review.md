@@ -1,0 +1,9 @@
+# R6-cautious-4 (fold, bot=sens, seed 2644543463, pf/pt_tang) — end-of-life notes — COUNTED, no flags
+Ending **Xuất gia — «Xuất gia làm ni cô»**, age 34, year 16, **buổi 2245**, 27693 real taps, 0 JS clicks, 14 bug rows, 2 dead-button rows. robot-audit VALID: game-imposed (the last bot tap was the non-exit option «Sang ngày mới»). Written from the result JSON + moment log, not played by eye; 351 offers seen / 254 picked (72 %). Fresh rerun on LIVE github.io, unpinned, game build ca4a1689 (b 0b372aa14258), harness f65d019b; the old R6-cautious-4 run (local server, harness error, never played) was moved to void-local2/. No resume, no crash for the whole ≈ 7 h life; the packed save stayed ≈ 0.35M: no quota, no rewind.
+## Findings
+1. GAME: SOFTLOCK ×3 — «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn, each time with a queued dialog (Q=2 «Lịch tháng» / «Có người đến»; Q=1 «Có người đến»; Q=1 «Có người bán tin»). The same family as lazy-2's softlock; the robot's unstick got out each time.
+2. GAME: a .kmov dialog scrolled to its end has no close / next button («NO-EXIT DIALOG»); later visits are unstuck by taps.
+3. GAME: item pick grid — the confirm «kipgo» stays off-screen after 8 real scrolls; and a grid re-opened 3× by «Chọn lá này» with no gift given (every item locked / the confirm never usable).
+4. GAME: dead close buttons — «Danh hiệu mới» «Để sau» and «Danh hiệu lên bậc» «Để sau» (the title dialogs, same as speed-2 / random-5).
+5. DESIGN: Xuất gia at 34 (the third Xuất gia after lover-5 at 31 and cautious-1 at 33): the cautious persona ends in a convent each time with no warning beat.
+6. HARNESS: «SAVE STALE … stored clock unreadable» ×2 = false positives of the harness's stale check on the packed save format (a packed-save reader is needed in the check); picker stalls on .kmov (9-10 s) cleared by a real tap.
