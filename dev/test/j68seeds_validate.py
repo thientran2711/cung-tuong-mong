@@ -5,7 +5,7 @@ usage: python3 dev/test/j68seeds_validate.py [files…] [--min] [--fams day,visi
   12 open per family, for the families in --fams (default all 9); ids unique across files.
 Checks: id unique (j68c-<fam>-…), type open|comp, fam; open: a kind, text 1 line, placeholders {A}{M}{S}{W}{P} ({A} only when a≠any), needs.month only;
 comp: tag K|D + src, tone, tier, roles A/B (kind, nết/lòng only for rv/sv, names in BAL.net F/M, need known and allowed for the kind), text,
-object null or {name,owner A|B|me|kho,clue,trace} (law 6c), exactly 4 stances {text,gain,loss[,trace]} with Σgain == Σloss == tier steps (s1 m2 l3),
+object null or {name,owner A|B|me|kho,clue,trace} (law 6c), exactly 3 stances NHẸ · VỪA · NẶNG {text,gain,loss[,trace]} with stance i Σgain == Σloss == BAL.j68c.tier[i] steps, om = {removed: kept sibling},
 gain ≥1 and loss ≥1 (laws 2/3), ≥1 stance without bạc loss (law 2, no dead card), keys = her stats + rel.A/rel.B (rel.B only with role B; no rel for emp/th; no 'an' in loss), no key both sides;
 outcomes for the same 4 ids; placeholders {A}{B}{M}{O}{S}{W}{P} only ({B} needs B, {O} needs object, {A} needs A); every opener-joinable comp of a
 family with role A kind K has ≥1 opener a=K or any (warn); VANPHONG scan (no %, digits, odds words, modern words); no comp text ≈ an old j68 wording."""
@@ -24,7 +24,8 @@ TONES={"tense","sad","petty","funny","tender","warm","cruel"}
 KIND={"rv","sv","maid","emp","th","doc","eun","ksp","kid"};MANRW={"sứ thần","họa sư","nhạc sư","thái y"};NETK={"rv","sv"}
 OPA=KIND|{"man","any"}
 NEEDS_ID={"ill","preg","friend","feud","foe","kids","poor","thIll","empIll","fest","rain","snow"};RVONLY={"ill","preg","friend","feud","foe","kids","poor"}
-STAT={"sung","danh","bac","suc","mat","th","hh","duc","tamco","an"};TIER={"s":1,"m":2,"l":3}
+STAT={"sung","danh","bac","suc","mat","th","hh","duc","tamco","an"};TIERS={"s","m","l"}
+TIER=[int(x) for x in re.search(r"BAL\.j68c=\{[^\n]*?tier:\[([\d,]+)\]",bal).group(1).split(",")]  # BAL.j68c.tier: way i Σgain == Σloss == TIER[i] (law 2 TIERED CHOICES NHẸ · VỪA · NẶNG, owner OD 27/11 ~00:46Z)
 NEEDS={"rank_min","rank_max","nights_min","month","not_confined","kids_min"}
 PH={"A","B","M","O","S","W","P"};OPH={"A","M","S","W","P"}
 BAD=re.compile(r"%|\d|\b(OK|game|turn|round|slot|lượt|ván|level|quest|item)\b|Chắc chắn|Nắm chắc|Rất chắc|Khó lường|Mong manh|Tùy duyên|Có cơ|Rất vững",re.I)
@@ -107,7 +108,7 @@ for r in rows:
     if r.get("tag") not in("K","D") or not r.get("src"):err(i+" tag K|D + src")
     if r.get("tone") not in TONES:err(i+" tone")
     tier=r.get("tier")
-    if tier not in TIER:err(i+" tier");tier="m"
+    if tier not in TIERS:err(i+" tier");tier="m"
     R=r.get("roles")
     if not isinstance(R,dict):err(i+" roles must be an object ({} = nobody)");R={}
     for k in R:
@@ -133,13 +134,15 @@ for r in rows:
     if o in(None,"MISSING"):allowed.discard("O")
     phs(i,r.get("text"),allowed,"text")
     st=r.get("stances") or {}
-    if not isinstance(st,dict) or len(st)!=4:err(f"{i} exactly 4 stances");st=st if isinstance(st,dict) else {}
-    for sid,s in st.items():
+    if not isinstance(st,dict) or len(st)!=len(TIER):err(f"{i} exactly {len(TIER)} stances (NHẸ · VỪA · NẶNG)");st=st if isinstance(st,dict) else {}
+    om=r.get("om")
+    if not isinstance(om,dict) or len(om)!=1 or any(k in st or v not in st for k,v in om.items()):err(f"{i} om must be {{removed stance id: kept sibling id}}")
+    for ti,(sid,s) in enumerate(st.items()):
         if not re.match(r'^[a-z]+$',sid):err(f"{i} stance id '{sid}' must be [a-z]+")
         phs(i,s.get("text"),allowed,f"stance {sid}.text")
         if len((s.get("text") or "").split())>8:wrn(f"{i} stance {sid} label > 8 words")
         g=steps(i,f"{sid}.gain",s.get("gain"),R,"gain");l=steps(i,f"{sid}.loss",s.get("loss"),R,"loss")
-        if g!=l or g!=TIER[tier]:err(f"{i} stance {sid}: Σgain {g} / Σloss {l} must both be {TIER[tier]} (tier {tier}; laws 2/3)")
+        if ti<len(TIER) and (g!=TIER[ti] or l!=TIER[ti]):err(f"{i} stance {sid}: Σgain {g} / Σloss {l} must both be {TIER[ti]} (way {ti+1} of NHẸ · VỪA · NẶNG; laws 2/3)")
         both=set(s.get("gain") or {})&set(s.get("loss") or {})
         if both:err(f"{i} stance {sid}: {both} on both sides")
         if "trace" in s:
@@ -159,7 +162,7 @@ for r in rows:
     if tn in seen_t:err(f"{i} text duplicates {seen_t[tn]}")
     seen_t[tn]=i
     for x in r:
-        if x not in("id","type","fam","tag","src","tone","tier","roles","text","object","stances","outcomes","needs","slug","note"):err(f"{i} unknown field {x}")
+        if x not in("id","type","fam","tag","src","tone","tier","roles","text","object","stances","outcomes","om","needs","slug","note"):err(f"{i} unknown field {x}")
 for f in FAMS:
     if f in CHK:
         for k in NEEDK[f]:

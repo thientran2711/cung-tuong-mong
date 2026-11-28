@@ -90,6 +90,7 @@ def conv4(F, r):
     for d in ids:
         rest = [x for x in ids if x != d]
         if F.fam == 'wc' and len({ST[x].get('npc') for x in rest}) < 2: continue
+        if any('bac' not in (ST[x].get('loss') or {}) for x in ids) and all('bac' in (ST[x].get('loss') or {}) for x in rest): continue   # keep a bạc-free road (soft-lock rule)
         cand.append((max(like(ST[d], ST[x]) for x in rest) + ids.index(d) * 0.01, d))
     cand.sort(reverse=True); pick = None
     for _, d in cand:

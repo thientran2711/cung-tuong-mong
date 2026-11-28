@@ -1,8 +1,8 @@
 /* ORDER THIN P4 browser test: composed j68 openings (j68c) on the real game. node dev/test/j68c-play.js [seeds.jsonl]  (after dev/site/build_site.sh)
    Registers the fixture seeds (or the given file; its `open` rows join its comps) as EV6 templates and checks, per comp: the people are living real
    people with the wanted nết (cast from the live roster; a seed whose nết / need no person has in this one test world is FORCED by giving the roster
-   that nết / state, and reported as forced), every placeholder is filled, the wording joins a fitting opener, 4 options, P0 marks j68 c:<id>:<wording>,
-   choosing (the real chooseM path; stance i%4) is built from exactly steps × BAL.j68c.fx and, on the real path, applies every stat the same way (the game's own price/deed rules may scale the real amount, as for every option) and moves the person's thiện cảm the same way, the object trace is kept
+   that nết / state, and reported as forced), every placeholder is filled, the wording joins a fitting opener, 3 options NHẸ · VỪA · NẶNG, P0 marks j68 c:<id>:<wording>,
+   choosing (the real chooseM path; stance i%3) is built from exactly steps × BAL.j68c.fx and, on the real path, applies every stat the same way (the game's own price/deed rules may scale the real amount, as for every option) and moves the person's thiện cảm the same way, the object trace is kept
    (law 6c), the seed rests for the rest of the life (cooldown), and every built J68SEEDS comp registers; the 90 old decisions still count 90 / 370.
    0 page errors. */
 const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
@@ -42,9 +42,9 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
    r.alive=!A||(A.k!=="rv"||A.o.alive)&&(!B||B.k!=="rv"||B.o.alive)&&(!B||A.o!==B.o);
    const fit=(a,rr)=>!rr||!a||!["rv","sv"].includes(a.k)||(!(rr["nết"]||[]).length||rr["nết"].some(n=>tr6(a.o).includes(n)))&&(!(rr["lòng"]||[]).length||rr["lòng"].some(n=>tr6(a.o).includes(n)));
    r.net=fit(A,(sd.roles||{}).A)&&fit(B,(sd.roles||{}).B);tr6=tr0;
-   const all=m.h+" "+m.opts.map(o=>o.n+" "+o.x).join(" ");r.unfilled=/\{[A-Za-z]+\}/.test(all);r.n4=m.opts.length>=4&&Object.values(sd.stances).every((st,j)=>m.opts[j]&&m.opts[j].n.indexOf(e68Fill(j68cO(st.text,sd),XX).slice(0,6))===0);r.nopt=m.opts.length;r.extra=m.opts.slice(4).map(o=>o.n).join('|');r.text=plain(m.h).slice(0,140);
+   const all=m.h+" "+m.opts.map(o=>o.n+" "+o.x).join(" ");r.unfilled=/\{[A-Za-z]+\}/.test(all);r.n4=m.opts.length>=BAL.j68c.tier.length&&Object.values(sd.stances).every((st,j)=>m.opts[j]&&m.opts[j].n.indexOf(e68Fill(j68cO(st.text,sd),XX).slice(0,6))===0);r.nopt=m.opts.length;r.extra=m.opts.slice(BAL.j68c.tier.length).map(o=>o.n).join('|');r.text=plain(m.h).slice(0,140);
    const nop=(OP[sd.fam]||[]).filter(o=>o.a==="any"||(sd.roles&&sd.roles.A&&o.a===((sd.roles.A.kind||"rv").split(":")[0]))).length;r.opener=nop?s.v.length===nop:s.v.length===1;
-   const k=i++%4;const sid=Object.keys(sd.stances)[k],st=sd.stances[sid];const tier=sd.tier||"m",F=BAL.j68c.fx[tier];
+   const k=i++%BAL.j68c.tier.length;const sid=Object.keys(sd.stances)[k],st=sd.stances[sid];const tier=sd.tier||"m",F=BAL.j68c.fx[tier];
    S.an=50;for(const a of [A,B])if(a&&a.o&&typeof a.o==='object'){if(a.k==='sv'||a.k==='maid')a.o.loyal=50;if(a.k==='kid')a.o.fond=50}const s0=snap(),ra=relV(A),rb=relV(B),obL=e68c().ob[e68c().ob.length-1];const rec={};const ap0=apply;apply=function(o){for(const[kk,v]of Object.entries(o||{}))if(typeof v==='number')rec[kk]=(rec[kk]||0)+v;return ap0.apply(this,arguments)};r.fxb=JSON.stringify(m.opts[k].fx);try{chooseM(k)}finally{apply=ap0}r.rec=JSON.stringify(rec);const s1=snap();rec.an=(S.an||0)-s0.an;
    const exp={};for(const[kk,n]of Object.entries(st.gain))exp[kk]=(exp[kk]||0)+n*F[kk==="rel.A"||kk==="rel.B"?"rel":kk];for(const[kk,n]of Object.entries(st.loss))exp[kk]=(exp[kk]||0)-n*F[kk==="rel.A"||kk==="rel.B"?"rel":kk];
    r.num=[];const g=j68cVal(st.gain,tier,1),l=j68cVal(st.loss,tier,-1);for(const kk of SK){const want=exp[kk]||0,got=(g.fx[kk]||0)+(l.fx[kk]||0);if(want!==got)r.num.push(`${kk} ${got}≠${want}`);const asked=rec[kk]||0;if(want&&Math.sign(asked)!==Math.sign(want))r.num.push(`${kk} applied ${asked}, wanted the way of ${want}`)}if((g.A+l.A)!==(exp['rel.A']||0)*1||(g.B+l.B)!==(exp['rel.B']||0))r.num.push('rel steps')
@@ -56,7 +56,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
   return out},FIX);
  for(const r of R.seeds){const t=`${r.id} (${r.who||'-'})${r.forced?' [forced]':''}`;
   if(r.err){ok(false,t+' threw '+r.err);continue}if(r.skip){console.log('skip '+t+': '+r.skip);continue}
-  ok(r.reg,t+' registers');ok(r.made,t+' made from the live roster');if(!r.made)continue;ok(r.alive&&r.net,t+' people alive, distinct, wanted nết');ok(!r.unfilled&&r.n4,t+' 4 options, placeholders filled'+(r.unfilled?' [UNFILLED]':'')+(r.n4?'':' [opts '+r.nopt+']')+': '+r.text);
+  ok(r.reg,t+' registers');ok(r.made,t+' made from the live roster');if(!r.made)continue;ok(r.alive&&r.net,t+' people alive, distinct, wanted nết');ok(!r.unfilled&&r.n4,t+' 3 options NHẸ · VỪA · NẶNG (BAL.j68c.tier), placeholders filled'+(r.unfilled?' [UNFILLED]':'')+(r.n4?'':' [opts '+r.nopt+']')+': '+r.text);
   ok(r.opener,t+' wordings = fitting openers');ok(r.mark,t+' P0 marks j68 c:<id>:'+r.vi);ok(!r.num.length,t+' numbers = steps × BAL.j68c.fx '+r.num.join(', ')+(r.num.length?' fx '+r.fxb+' rec '+r.rec:''));
   ok(r.objOk,t+' object traced: '+r.trace);ok(r.rest,t+' rests for this life')}
  ok(R.old.templates===90&&R.old.variants===370,`old j68 count unchanged (${R.old.templates} / ${R.old.variants})`);

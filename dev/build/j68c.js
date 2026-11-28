@@ -1,11 +1,12 @@
 /* ================= j68c: COMPOSED j68 OPENINGS (ORDER THIN P4, owner OD 23/11 ~22:50Z; EVCAT §3 P4) =================
    Seeds (data J68SEEDS in j68sd.js, built from dev/handover/content/thin/j68seeds*.md by dev/build/j68sd_build.py; schema reports/thin.md «## API P4»):
-   `comp` = a new decision (complication × real people by nết × real object × 4 equal-value stances); `open` = an opener line of the same family.
+   `comp` = a new decision (complication × real people by nết × real object × 3 stances NHẸ · VỪA · NẶNG); `open` = an opener line of the same family.
    At load every comp becomes ONE more EV6 template "c:"+id whose wordings are (fitting opener + comp text), so the whole j68 runtime plays it unchanged:
    cadence, scheduler, per-life cooldown, variant memory (e.vu) and the shared no-repeat memory jnorep (family "j68", keys "c:<id>:<wording>").
    The 90 old decisions / 370 wordings are untouched; e68Count() keeps reporting them only, e68cCount() reports the composed ones.
    Numbers (law 4): one gain/loss step = BAL.j68c.fx[tier][key]; weights / cooldown / thresholds in BAL.j68c; nothing typed here.
-   Choices (laws 2/3): every stance Σgain == Σloss == tier steps (validator dev/test/j68seeds_validate.py); outcomes are certain.
+   Choices (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z; law 3): stance i Σgain == Σloss == BAL.j68c.tier[i] steps, Tốn and Được rise together
+   (validator dev/test/j68seeds_validate.py); outcomes are certain.
    GROUNDING (j68h rule): a seed is made only when every role is a living real person with the wanted nết and need on the live world, every
    {placeholder} has a person, and the object owner is cast. Objects stay traceable (law 6c): S.e68c.ob {sid,name,owner,trace,turn}.
    Personal per seat (S.e68c): never a co-op world key. */
