@@ -27,5 +27,6 @@ dev/test/_out/
 /dev/handover/reports/**/*.webp
 /.quickcheck/
 /_old.html
+dev/test/relshow-bal.json
 # coregates G3 scratch copy of the page (dev/tools/coregates.sh writes $WT/_aa.html): never commit
 /_aa.html
