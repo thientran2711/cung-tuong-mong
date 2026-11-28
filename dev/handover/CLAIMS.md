@@ -805,3 +805,4 @@ Robot life flight2-s2k Fold cautious seed 2026112577 | — | session_01UV1Szgzrh
 B-ROW12 r3 FIXER (rv r2 FAIL 4 items, reports/row12-leave.md «## REVIEW r2») | review/row12-leave-r3 | session_01N1tNP4aRxWePPt3XzDdaaU (opus) | RUNNING | 28/11 12:08Z (Foreman B ROOT 3 child 3)
 E-TIER-B14 (row 42 law-11 group j7c/j68c/j71c/j72c/jworldc old 4 equal-value stances → 3 tiers) | review/e-tier-b14 | session_01DgYSWpXzA57rdEzNDHjVYQ | RUNNING | 28/11 12:15Z (Foreman E C11)
 E-GAIN4D (finish e-gain4c: merge LIVE 7d7c6886 + unrun gates + shots) | review/e-gain4c (after 012cb189) | session_01DgYSWnu1ts4by24nsYc7eM | RUNNING | 28/11 12:40Z (Foreman E C11)
+E-TIER-B13-RV3B (BIG review row 42 batch 3b delta 31f91836..e3c1f982) | review/e-tier-b13-rv3b-m | (opening) | RUNNING | 28/11 13:15Z (Foreman E C12)
