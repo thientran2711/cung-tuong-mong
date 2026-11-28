@@ -140,7 +140,7 @@ RGBT.c5a={w:()=>({emp:"th",th:"emp",quyen:"emp"})[rgSideNow()]||"emp",pre:()=>{c
   quyen:"Giặc phương bắc phá ải. {dadq} muốn cháu ruột cầm quân; nếu chiếu thư được ban, binh quyền thuộc về nhà Tể tướng. Ngươi có ra tay giúp một phen không?"})[rgSideNow()]||"Giặc phương bắc phá ải, cả cung lo âu. Ai cũng chờ xem binh quyền vào tay phe nào. Ngươi nên làm gì lúc này?",
  o:()=>{const s=rgSideNow();
   if(s==="emp")return[{n:"Quỳ trước Đức Thọ cung xin Thái hậu ủng hộ bệ hạ",c:{suc:-15},p:35,sk:[["duc",2]],w:{danh:3,th:-2},pw:7,tr:10,s,l:{th:-6},wx:"Thái hậu gật đầu, binh quyền về tay người của bệ hạ",lx:"Thái hậu không lay chuyển, còn phật ý"},
-   {n:"Nhờ Hoàng hậu nói giúp một lời",if:()=>typeof qOn==="function"&&qOn()&&S.hh>=15,p:40,sk:[["hh",2]],w:{hh:-3},pw:5,tr:8,s,l:{hh:-6},wx:"Hoàng hậu lên tiếng",lx:"Hoàng hậu phật ý vì bị kéo vào"},
+   {n:"Nhờ Hoàng hậu nói giúp một lời",if:()=>typeof qOn==="function"&&qOn()&&S.hh>=netHh("quen"),p:40,sk:[["hh",2]],w:{hh:-3},pw:5,tr:8,s,l:{hh:-6},wx:"Hoàng hậu lên tiếng",lx:"Hoàng hậu phật ý vì bị kéo vào"},
    {n:"Không dám can dự binh quyền",w:{},tr:-8,wx:"giữ mình"}];
   if(s==="th")return[{n:"Dâng lời hòa nghị lúc hầu bệ hạ dùng bữa",p:35,sk:[["sung",2],["tamco",4]],w:{th:6},pw:7,tr:10,s,l:{sung:-6},wx:"bệ hạ nghe theo, hai phe đều không độc chiếm binh quyền",lx:"bệ hạ nổi giận vì hậu cung bàn binh sự"},
    {n:"Chép kinh cầu an biên ải, mời bệ hạ đến nghe tụng",c:{suc:-12},p:40,sk:[["tai",3],["duc",4]],w:{th:4,duc:2},pw:5,tr:8,s,l:{},wx:"bệ hạ mềm lòng",lx:"bệ hạ không đến"},

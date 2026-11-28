@@ -31,7 +31,7 @@ agRunReg("cx:study",(v)=>{const D=BAL.ag.cx.study;if((v.suc||0)<D.suc)return"";a
 agReg("consort","ask",(v,N,need)=>{const O=[];const X=BAL.ag.cx;
  if(!S.thDead&&(v.th||0)>=netTh("th","than")&&(!need||need==="hh"||need==="danh")){const o=odA(v,X.thHelp.o+(v.th||0)/X.thHelp.div);const u=agcU(v,N,o,{hh:X.thHelp.w.hh,danh:X.thHelp.w.danh},{},"greet",{th:X.thHelp.l.th});if(u>0)O.push({k:"cx:thHelp",t:null,u,tag:"greet",act:"xin Thái hậu đỡ lời",at:(kh)=>{const k=agThAt(kh);return k==="tn"?k:null}})}
  let q=null;try{q=queenP()}catch(e){}
- if(q&&q!==v&&!v.queen&&(v.hh||0)>=X.hhShield.min&&!v.shield&&(!need||need==="safe")){const o=odA(v,X.hhShield.o+(v.hh||0)/X.hhShield.div);const u=agcU(v,N,o,{safe:X.hhShield.g},{},"greet",{hh:X.hhShield.l.hh});if(u>0)O.push({k:"cx:hhShield",t:q,u,tag:"greet",act:"xin Hoàng hậu che chở",at:(kh,vv,t)=>t===S?"home":palaceOf(t)})}
+ if(q&&q!==v&&!v.queen&&(v.hh||0)>=netTh(q,"than")&&!v.shield&&(!need||need==="safe")){const o=odA(v,X.hhShield.o+(v.hh||0)/X.hhShield.div);const u=agcU(v,N,o,{safe:X.hhShield.g},{},"greet",{hh:X.hhShield.l.hh});if(u>0)O.push({k:"cx:hhShield",t:q,u,tag:"greet",act:"xin Hoàng hậu che chở",at:(kh,vv,t)=>t===S?"home":palaceOf(t)})}
  return O});
 agRunReg("cx:thHelp",(v)=>{const X=BAL.ag.cx.thHelp,o=odA(v,X.o+(v.th||0)/X.div);if(agTry(o)){ap(v,X.w);return `Thái hậu đỡ lời cho ${v.name}`}if(agSoft(o))return agSoftTxt(v);ap(v,X.l);return `${v.name} xin Thái hậu đỡ lời, Thái hậu không vui`});
 agRunReg("cx:hhShield",(v,q)=>{const X=BAL.ag.cx.hhShield,o=odA(v,X.o+(v.hh||0)/X.div);if(agTry(o)){ap(v,X.w);v.shield=X.sh;return `${agcNm(q)} nhận che chở cho ${v.name}`}if(agSoft(o))return agSoftTxt(v);ap(v,X.l);return `${v.name} xin ${agcNm(q)} che chở nhưng bị từ chối`});
@@ -72,8 +72,8 @@ function hhAct(a,v,k){const me=a===S;const nm=me?"Ngươi":`Hoàng hậu ${a.nam
  return""}
 const AGHH={judge:{act:"xử tội",n:"spite"},conf:{act:"tịch thu trang sức",n:"spite"},reward:{act:"ban thưởng",n:"ally"},pardon:{act:"ân xá",n:"ally"},cutpay:{act:"khất bổng lộc",n:"spite"}};
 /* the gate of each of her buttons (the player-as-Empress sees the same: empAct below) — ONE list read by her options and by her duty need */
-const AGHHG={judge:(q,p)=>!p.out&&chOK(q,p)&&rel(q,p)<0,conf:(q,p)=>!p.out&&(p.hh||0)<=BAL.ag.hh.confHh&&p.inv.some(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h),
- reward:(q,p)=>!p.out&&(p.hh||0)>=BAL.ag.hh.rewardHh&&(q.bac||0)>=-BAL.tw.reward.bac,cutpay:(q,p)=>!p.out&&rel(q,p)<=netTh(q,"ghet")&&!p.cutPay,
+const AGHHG={judge:(q,p)=>!p.out&&chOK(q,p)&&rel(q,p)<0,conf:(q,p)=>!p.out&&(p.hh||0)<=netThK(q,"ghet","deep")&&p.inv.some(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h),
+ reward:(q,p)=>!p.out&&(p.hh||0)>=netTh(q,"than2")&&(q.bac||0)>=-BAL.tw.reward.bac,cutpay:(q,p)=>!p.out&&rel(q,p)<=netTh(q,"ghet")&&!p.cutPay,
  pardon:(q,p)=>(p.confined||p.out)&&aff(q,p)>=netTh(q,"than")};
 /* AG-ALL r1 F5: the Empress's DUTY need "order" (keeping the inner palace in order): grows with the cases her buttons can act on now
    (min(1, cases / BAL.ag.hh.orderN) × orderW); every Empress act also serves it. Before, her acts served only spite / ally, which a seated

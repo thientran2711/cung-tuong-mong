@@ -29,7 +29,7 @@ npwReg("rcpGos",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(m,c)=>{const B=BAL.ag.why.g2
 npwReg("rcpGift",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const r=rel(v,S)||0;return r>=netTh(v,"than")?{s:BAL.ag.why.g2rcp.gift+r,t:S,r:"thân với ngươi, chép mẫu gửi tặng"}:null}});
 npwReg("rcpTh",{grp:"G2c",who:c=>S.thDead?[]:[S.thO||(S.thO={})],why:(p,c)=>{const B=BAL.ag.why.g2rcp,v=(S.th||0)-netTh("th","than2");return v>=0?{s:B.thBase+v,t:S,r:"thương ngươi hiếu thuận"}:null}});
 /* ---- jpet: Hoàng hậu's and a man's pet gifts ---- */
-npwReg("petHh",{grp:"G2c",who:c=>{const q=queenP();return q?[q]:[]},why:(q,c)=>{const B=BAL.ag.why.g2pet,v=(c.p.hh||0)-B.hhMin;return v>=0?{s:B.base+v,t:c.p,r:"ưng ý "+npwNm(c.p)+", ban thú nuôi"}:null}});
+npwReg("petHh",{grp:"G2c",who:c=>{const q=queenP();return q?[q]:[]},why:(q,c)=>{const B=BAL.ag.why.g2pet,v=(c.p.hh||0)-netAt(q,"than2",B.hhMin,rkOf(c.p),"hh");return v>=0?{s:B.base+v,t:c.p,r:"ưng ý "+npwNm(c.p)+", ban thú nuôi"}:null}});
 npwReg("petMan",{grp:"G2c",who:c=>(S.men||[]).filter(m=>m.alive),why:(m,c)=>(m.tinh||0)>=BAL.ag.why.g2pet.manTinh?{s:m.tinh,t:S,r:"tình sâu với ngươi, gửi lén thú nhỏ"}:null});
 /* ---- jthaiy: the physician leaks the mạch án; a rival buys the physician ---- */
 npwReg("thyLeak",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(d,c)=>{const B=BAL.ag.why.g2thy,a=d.af||{};const s=B.leak+(a[c.by.id]||0)-Math.max(0,a.me||0);return s>0?{s,t:c.by,r:"nhận bạc của "+npwNm(c.by)+", lén báo mạch án"}:null}});

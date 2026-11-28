@@ -16,9 +16,9 @@ BAL.stp={on:1,
  /* floor[k] = the highest GATE of that stat the game asks at any rank (dev/measure/statpace-gates.py lists all 155 gates + ladder steps; it FAILs when a gate
     is above floor / ceiling): a rise slows to dm.min above the rank ceiling but only STOPS at max(ceil[rank], floor[k]), so no working
     rule closes at a low rank (Ẩn dật Đức BAL.route.anDuc, «Khách lạ ở chùa» Danh BAL.danhG.kcVihanh, Đức → Thái hậu BAL.ducLv.up, …).
-    duc: «hiền đức» BAL.ducLv.word[3] 80 · danh: BAL.succN.rareCDanh 80 · sung: jpet 75 · th: netTh("th","than2") of the slowest archetype (Quyền uy 65; Thái hậu's own nết, ROW 9) · hh: jpet 60 ·
+    duc: «hiền đức» BAL.ducLv.word[3] 80 · danh: BAL.succN.rareCDanh 80 · sung: jpet 75 · th: netTh("th","than2") of the slowest archetype (Quyền uy 65; Thái hậu's own nết, ROW 9) · hh: the highest Hoàng hậu «than2» any of her nết can give (80 = thClamp top; her Ban thưởng gate netTh(q,"than2"), ROW 9 r3; the jpet mark netAt(q,..,hhMin) stays under the pace stop − atGap) ·
     rel / oan: BAL.net.thClamp top (than2 80) — a consort's liking / grudge toward her can still reach every net threshold (law 6). */
- floor:{duc:80,danh:80,sung:75,th:65,hh:60,rel:80,oan:80},
+ floor:{duc:80,danh:80,sung:75,th:65,hh:80,rel:80,oan:80},
  /* PACE-SPEED (owner OD 26/11 ~19:10Z ruling (A): stats rise moderately and land JUST AT the next rank's bar, no overshoot far above it):
     bar[k] = a stat tied to the rank bars: f = the RANKS field (s Sủng / d Danh), m = margin above the NEXT rank's bar = this stat's ceiling at that
     rank (it replaces ceil[] and floor[] for this stat: a rise slows toward it); top = the ceiling at the top rank (Hoàng hậu);

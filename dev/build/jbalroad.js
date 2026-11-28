@@ -84,7 +84,7 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
  tt_co_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:40,g:[4]}, /* x: duc ≥ bar */
  tt_oan_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:4},bar:45,g:[8]}, /* x: duc ≥ bar */
  tt_tranh_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,duc:3},bar:40,g:[8,8]}, /* x: duc ≥ bar */
- tt_mat_11:{p:.1,np:2,sc:2,c:{suc:-4},fx:{danh:8,hh:10},bar:40,g:[4]}, /* x: hh ≥ bar */
+ tt_mat_11:{p:.1,np:2,sc:2,c:{suc:-4},fx:{danh:8,hh:10},g:[4]}, /* x: hh ≥ netHh("than") (ROW 9 r3; was bar 40) */
  cn_chu_11:{p:.1,np:2,sc:2,c:{suc:-3},fx:{danh:10,duc:5},bar:45,g:[35]}, /* x: duc ≥ bar */
  cn_tinh_11:{p:.1,np:3,sc:2,c:{sung:-4},fx:{danh:6,sung:4,mat:2},bar:45}, /* x: sung ≥ bar */
  cn_ban_11:{p:.1,np:3,sc:2,c:{suc:-4},fx:{danh:10,hh:10,th:6},bar:40,g:[15]}, /* x: duc ≥ bar */

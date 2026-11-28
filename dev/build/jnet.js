@@ -72,10 +72,22 @@ function netMemo(p){if(!p||typeof p!=="object"||!Array.isArray(p.net))return nul
 function netTh(p,key){const m=netMemo(p);if(m&&m.v[key]!==undefined)return m.v[key];const r=netTh0(p,key);const m2=netMemo(p);if(m2)m2.v[key]=r;return r}
 function netTh0(p,key){const N=BAL.net,b=N.th[key];if(b==null)return 0;let o=0;try{const F=N.thFrom[key];for(const t of (p==="th"||(p&&typeof p==="object")?traitsOf(p):[])){const R=N.T[t];if(!R||!R.th)continue;
   if(R.th[key]!=null)o+=R.th[key];else if(F&&R.th[F[0]]!=null)o+=R.th[F[0]]*F[1]}}catch(e){}const C=N.thClamp[key];return C?Math.max(C[0],Math.min(C[1],Math.round(b+o))):Math.round(b+o)}
+/* ROW 9 r3 (rv FAIL 4): the Hoàng hậu holds a pool nết (queenP() is a consort), so every gate on HER regard (S.hh toward the player, p.hh toward a consort)
+   reads her own level, like the Thái hậu's netTh("th",key): netHh(key) = netTh(the reigning Hoàng hậu, key); no Hoàng hậu (or the player holds the seat) →
+   the base level. Scan: dev/measure/th-scan.py (holder hh). */
+function hhHolder(){try{const q=typeof queenP==="function"?queenP():null;return q&&typeof q==="object"&&q!==S?q:null}catch(e){return null}}
+function netHh(key){return netTh(hhHolder(),key)}
 /* a lighter gate: share k (BAL.net.thK[k]) of p's level of key */
 function netThK(p,key,k){return Math.round(netTh(p,key)*BAL.net.thK[k])}
 /* a mark ABOVE the top level (Thái hậu 70 / 80 / 85 — BAL.ag.why.cmood.thHi, hhNeed .th, BAL.ag.why.g2pet.kyTh keep their own key): the same mark moved by p's nết exactly as her «key» level moves, capped at 100 */
-function netAt(p,key,v){return Math.min(100,Math.round(v+netTh(p,key)-BAL.net.th[key]))}
+function netAt(p,key,v,rk,st){const r=Math.min(100,Math.round(v+netTh(p,key)-BAL.net.th[key]));const h=p==="th"?thHold(rk):paceHold(st,rk);return h!=null?Math.max(Math.min(r,h),netTh(p,key)):r}/* never below her own «key» level (the mark stays a mark above it) */
+/* ROW 9 r3: the highest Thái hậu regard a mark may ask for (rk = the rank the mark is asked at; none = gift ceiling only) = the lower of where her gift
+   gains end (jtrong trThDeed: A.cap + thGiftCap + thGiftSpan) and the stat pace stop at that rank (spTop), minus BAL.net.atGap; null before a life exists.
+   row9-net (8) measures each archetype's real plateau (gifts through apply + monthly cooling) per rank and FAILs a mark above plateau − atGap/2. */
+/* any other holder (the Hoàng hậu's mark on a consort's regard st = "hh"): only the stat pace stop at the rank it is asked, minus atGap (none without rk / st) */
+function paceHold(st,rk){try{if(st==null||rk==null||typeof spTop!=="function"||!BAL.stp||!BAL.stp.on)return null;return Math.round(spTop(st,rk)-BAL.net.atGap)}catch(e){return null}}
+function thHold(rk){try{if(!S||typeof thArch!=="function")return null;const A=thArch(),B=BAL.trong;let h=A.cap+B.thGiftCap+B.thGiftSpan;
+ if(rk!=null&&typeof spTop==="function"&&BAL.stp&&BAL.stp.on)h=Math.min(h,spTop("th",rk));return Math.round(h-BAL.net.atGap)}catch(e){return null}}
 /* FORGIVENESS (net-build-rv fix 2, law 1): ONE rule for every apology / mediation road — her «Tạ lỗi» / «Nhún nhường» (j9 / jtwoway), the NPC deeds
    (SOC.apologise / SOC.mediate j28, TW apol jtwoway, cx:humble jagacts, «Tạ lỗi, đền bạc» jemoact) and the receiver of a mediation (jrcv RCVK.mediate):
    the wronged one t lets a's wrong go only while t's oán toward a is under t's own «nguoi» level (her = S.net, same function). Told after, in words. */

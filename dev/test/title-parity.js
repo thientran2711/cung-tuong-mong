@@ -3,7 +3,7 @@
    1. law-11 scan: no title in DH_CAT is player-only (no `me` flag) except the ones bound to her own life story (Thiên mệnh «tm», Khuê các «kc»);
    2. «Sớm viếng chiều thăm»: an NPC's Thỉnh an through the ONE deed table (TW thTH / thHH run) builds the same day-streak (same day once, gap restarts);
    3. «Thư hương» / «Dung nhan như ngọc»: an NPC's agent deeds cx:book / cx:face count when they succeed, a failed deed does not;
-   4. «Thái hậu ưu ái»: an NPC's months in a row with p.th ≥ BAL.dh.cond.th.v (rivalsMonth calls the same dhThMonth);
+   4. «Thái hậu ưu ái»: an NPC's months in a row with p.th ≥ netTh("th","than2") (rivalsMonth calls the same dhThMonth);
    5. an NPC reaching the BAL bar earns the step (dhObj) and wears it; 6. no page errors. */
 const {chromium}=require('./lib/pw-roulette');const path=require('path');
 const GAME=process.env.GAME||path.join(__dirname,'..','..','index.html');let bad=0;const ok=(c,t)=>{console.log((c?'ok   ':'BAD  ')+t);if(!c)bad++};
@@ -20,7 +20,7 @@ const GAME=process.env.GAME||path.join(__dirname,'..','..','index.html');let bad
   /* 3 */v.dh.a_nhan={n:0};v.dh.a_doc={n:0};v.bac=999;v.suc=100;let rf="",rb="";try{rf=AGRUN["cx:face"](v,null,{});rb=AGRUN["cx:book"](v,null,{})}catch(e){o.agErr=String(e)}
   o.face=v.dh.a_nhan.n;o.book=v.dh.a_doc.n;o.rf=rf;o.rb=rb;
   Math.random=()=>0.999;const nf0=v.dh.a_nhan.n;let rf2="";try{v.bac=999;rf2=AGRUN["cx:face"](v,null,{})}catch(e){}o.faceFail=[rf2,v.dh.a_nhan.n-nf0];Math.random=r0;
-  /* 4 */v.dh.c_th={n:0};S.thDead=false;v.th=BAL.dh.cond.th.v;dhThMonth(v);dhThMonth(v);v.th=BAL.dh.cond.th.v-1;dhThMonth(v);o.th=Object.assign({},v.dh.c_th);
+  /* 4 */v.dh.c_th={n:0};S.thDead=false;v.th=netTh("th","than2");dhThMonth(v);dhThMonth(v);v.th=netTh("th","than2")-1;dhThMonth(v);o.th=Object.assign({},v.dh.c_th);
   v.dh.c_th={n:0,cur:0};v.th=100;Q.length=0;try{rivalsMonth()}catch(e){o.rmErr=String(e)}Q.length=0;o.monthHook=((v.dh.c_th||{}).cur===1)||(v.alive===false);/* rivalsMonth (her monthTick) runs the same dhThMonth for every NPC */
   /* 5 */v.dh.a_doc={n:NN('a_doc')[0]-1};dhInc(v,'a_doc');o.npcObj=!!dhObj(v,'a_doc');v.dh.c_th={n:NN('c_th')[0]};dhSync(v);o.npcTh=!!dhObj(v,'c_th');o.worn=v.titleWorn||"";
   return o});

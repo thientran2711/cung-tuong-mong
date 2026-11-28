@@ -65,7 +65,7 @@ Object.assign(BAL,{arc:{
  tt_co:{p:0.15,c:{suc:-4,bac:-60},np:2,sc:2,bar:45,fx:{danh:12,bac:150,mat:2},g:[10]},
  tt_oan:{p:0.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:12,sung:6,th:5},g:[8]},
  tt_tranh:{p:0.15,c:{suc:-3,bac:-80},np:2,sc:2,bar:40,fx:{danh:10,bac:120,duc:3},g:[8]},
- tt_mat:{p:.15,c:{suc:-4},np:2,sc:2,bar:40,fx:{hh:25,danh:12,mat:2}},
+ tt_mat:{p:.15,c:{suc:-4},np:2,sc:2,/* bar 40 → netHh("than") (ROW 9 r3) */fx:{hh:25,danh:12,mat:2}},
  dtq_bien:{p:0.15,c:{suc:-8},np:2,sc:2,bar:35,fx:{sung:8,danh:12},g:[12]},
  dtq_vu:{p:0.15,c:{suc:-4,bac:-50},np:2,sc:2,bar:40,fx:{danh:12,sung:5},g:[10]},
  dtq_binh:{p:0.15,c:{suc:-4},np:3,sc:2,bar:45,fx:{sung:10,danh:8},g:[5]},

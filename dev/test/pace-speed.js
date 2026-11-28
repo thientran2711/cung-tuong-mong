@@ -11,10 +11,10 @@ const {chromium}=require('playwright');const path=require('path');
   const G=BAL.promo.gap;ok(Array.isArray(G)&&[0,1,2,3,4,5,6].every(r=>promoGap(r)===G[r]),`promoGap reads BAL.promo.gap ${G}`);
   ok(G[0]<=G[2]&&G.slice(2,7).every((x,i,a)=>i===0||x>a[i-1]),"gap: shortest at the seat-free low ranks, rising with rank from Quý nhân (law 5)");
   /* qBlock easing */
-  const B=BAL.qBlock;S.lastPromo=S.turn;ok(qBlockAt(S)===BAL.qBlockHh,`qBlock bar right after a decree = BAL.qBlockHh ${BAL.qBlockHh}`);
-  S.lastPromo=S.turn-B.after;ok(qBlockAt(S)===BAL.qBlockHh,`after ${B.after} months still ${BAL.qBlockHh}`);
-  S.lastPromo=S.turn-B.after-4;ok(qBlockAt(S)===BAL.qBlockHh-4*B.ease,`4 months later eased by ${4*B.ease} → ${qBlockAt(S)}`);
-  {const v=liveRivals(false)[0];if(v){v.lastPromo=S.turn-B.after-2;ok(qBlockAt(v)===BAL.qBlockHh-2*B.ease,"same easing for an NPC (law 1)")}}
+  const B=BAL.qBlock;S.lastPromo=S.turn;ok(qBlockAt(S)===netThK(hhHolder(),"ghet","deep"),`qBlock bar right after a decree = netThK(hhHolder(),"ghet","deep") ${netThK(hhHolder(),"ghet","deep")}`);
+  S.lastPromo=S.turn-B.after;ok(qBlockAt(S)===netThK(hhHolder(),"ghet","deep"),`after ${B.after} months still ${netThK(hhHolder(),"ghet","deep")}`);
+  S.lastPromo=S.turn-B.after-4;ok(qBlockAt(S)===netThK(hhHolder(),"ghet","deep")-4*B.ease,`4 months later eased by ${4*B.ease} → ${qBlockAt(S)}`);
+  {const v=liveRivals(false)[0];if(v){v.lastPromo=S.turn-B.after-2;ok(qBlockAt(v)===netThK(hhHolder(),"ghet","deep")-2*B.ease,"same easing for an NPC (law 1)")}}
   /* Sắc · Tài · Tâm cơ through the stat-pace slowdown (sếp FINAL 26/11 ~23:24Z) */
   {const A=BAL.stp.abs;for(const k of ["sac","tai","tamco"]){ok(A[k]&&SP_K[k],`${k} is paced (pow ${A[k]&&A[k].pow}, min ${A[k]&&A[k].min})`);
     ok(spG(k,{},50,30,0)<=BAL.stp.band[k][2],`${k}: one change never passes the big band (+30 → ${spG(k,{},50,30,0)})`);

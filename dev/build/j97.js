@@ -49,7 +49,7 @@ const R97L=[
  t:"Mâm cơm trong cung ngươi đêm ấy chỉ có ba người. Đến tuần rượu thứ ba, huynh trưởng đứng dậy, quỳ xuống trước ngươi và cha: “Muội gánh cả nhà, huynh lại đi đặt cược vào người ngoài.” Từ đó cả họ chỉ có một phe, và người cầm cờ là ngươi.",
  go:(_A,_ok,G)=>e67dad(G[0]),rw:"nt_haiduong",ti:"Người giữ lửa họ ngoại"},
 {a:"tt_mat",tag:"Phượng ấn trao tay",w:"hh",need:"hh",n:"Đến Càn Ninh cung một mình, nói chuyện như tỷ muội",
- path:["Đọc kỹ, chép lại","Nhận lễ, lựa lời dò ý","Hỏi thẳng cha","Chép kinh tận tâm","Kéo {v} làm đồng minh","Gặp Hoàng hậu nói chuyện"],bad:["Cảnh cáo {v}","Chép qua loa"],x:[()=>(S.hh||0)>=AR("tt_mat").bar,`Hoàng hậu với ngươi từ ${AR("tt_mat").bar}`],
+ path:["Đọc kỹ, chép lại","Nhận lễ, lựa lời dò ý","Hỏi thẳng cha","Chép kinh tận tâm","Kéo {v} làm đồng minh","Gặp Hoàng hậu nói chuyện"],bad:["Cảnh cáo {v}","Chép qua loa"],x:[()=>(S.hh||0)>=netHh("than"),"Hoàng hậu thân với ngươi"],
  t:"Hoàng hậu đốt tờ mật ước trước mặt ngươi: “Cha muội và bổn cung đều tính thiệt hơn. Chỉ muội là đến đây tay không.” Bà xin Hoàng thượng cho ngươi hiệp lý lục cung, nắm sổ sách Nội vụ phủ cùng bà. Cả hậu cung hiểu: ai muốn qua Trung cung phải qua ngươi.",
  rw:"nt_dongchau",ti:"Hiệp lý lục cung"},
 /* ===== Đại tướng quân ===== */

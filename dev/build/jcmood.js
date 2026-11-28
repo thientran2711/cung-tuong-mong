@@ -7,7 +7,7 @@
 const CM_W={th:"Thái hậu",hh:"Hoàng hậu"};
 function cmSt(){S.cm=S.cm||{th:{lv:1,why:""},hh:{lv:1,why:""},seen:{},last:{}};return S.cm}
 function cmSet(k,lv,why){const c=cmSt()[k];if(c.lv!==lv||why){c.lv=lv;c.why=why||""}}
-function cmThCauses(n){const B=BAL.ag.why.cmood,L=[];if((S.th||0)>=netAt("th","than2",B.thHi))L.push({lv:0,s:(S.th||0)-netAt("th","than2",B.thHi)+B.base,why:"hài lòng vì ngươi hiếu thuận"});if(n<B.kidsFew)L.push({lv:2,s:B.kidW,why:"lo vì hoàng tự còn hiếm"});return L}
+function cmThCauses(n){const B=BAL.ag.why.cmood,L=[];if((S.th||0)>=netAt("th","than2",B.thHi,S.rank))L.push({lv:0,s:(S.th||0)-netAt("th","than2",B.thHi,S.rank)+B.base,why:"hài lòng vì ngươi hiếu thuận"});if(n<B.kidsFew)L.push({lv:2,s:B.kidW,why:"lo vì hoàng tự còn hiếm"});return L}
 function cmHhCauses(q){const B=BAL.ag.why.cmood,L=[];const d=(q.sung||0)-(S.sung||0);if(d>=B.hhFav)L.push({lv:0,s:d,why:"vui vì được Hoàng thượng ghé Khôn Ninh cung"});
  let n=0;try{const R0=liveRivals(true);for(const a of R0)for(const b of R0)if(a!==b&&oan(a,b)>=netTh(a,"thu"))n++}catch(e){}if(n>=B.busy)L.push({lv:2,s:n*B.busyW,why:"mệt vì hậu cung tranh chấp"});return L}
 function cmMonth(){if(!S||S.dead)return;const C=cmSt();const q=typeof queenP==="function"?queenP():null;

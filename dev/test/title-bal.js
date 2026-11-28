@@ -4,7 +4,7 @@
    2. QUALITY: a work below BAL.dh.q.wk does not count for its «work» title, one at / above it does; the atonement copy count (jdh2 kinhN) counts all;
    3. STREAK: «Sớm viếng chiều thăm» counts days in a row (two Thỉnh an the same day = one; a missed day restarts), steps by the best streak;
    4. CONDITION: «Sen nở trong bùn» only for a first place at rank ≤ BAL.dh.cond.han.rank (or punished); «Thái hậu ưu ái» = months in a row with
-      Thái hậu's liking ≥ BAL.dh.cond.th.v;
+      Thái hậu's liking ≥ netTh("th","than2");
    5. PACING: two titles in the same buổi → ONE panel now, the other on the next buổi (BAL.dh.note.per);
    6. REWARD: per bonus type s2 ≥ s1 and s3 ≥ s2 (harder bar never pays less); the how text prints the BAL bar;
    7. old save: an old try-count of «Sớm viếng chiều thăm» / works restarts under the new rule, the step already earned stays;
@@ -27,7 +27,7 @@ const GAME=process.env.GAME||path.join(__dirname,'..','..','index.html');let bad
   /* 4 */S.dh={};S.dhV=2;const e=(pp,s)=>({p:pp,kind:'tho',t:s,pr:0,lk:0,s});const L=liveRivals(true).filter(v=>!v.queen);
   S.rank=BAL.dh.cond.han.rank+1;S.out=0;S.confined=0;cFin7('trungthu','tho',[e(S,99),e(L[0],10)]);o.hanHigh=((S.dh.c_han||{}).n)|0;
   S.rank=BAL.dh.cond.han.rank;cFin7('trungthu','tho',[e(S,99),e(L[0],10)]);o.hanLow=((S.dh.c_han||{}).n)|0;
-  S.dh.c_th={n:0};S.thDead=false;S.th=BAL.dh.cond.th.v;dhThMonth();dhThMonth();S.th=BAL.dh.cond.th.v-1;dhThMonth();S.th=BAL.dh.cond.th.v;dhThMonth();o.th=Object.assign({},S.dh.c_th);
+  S.dh.c_th={n:0};S.thDead=false;S.th=netTh("th","than2");dhThMonth();dhThMonth();S.th=netTh("th","than2")-1;dhThMonth();S.th=netTh("th","than2");dhThMonth();o.th=Object.assign({},S.dh.c_th);
   /* 5 */S.dh={};S.dhV=2;delete S.dhNB;delete S.dhPend;Q.length=0;const k1='a_doc',k2='a_nhan';S.dh[k1]={n:NN(k1)[0]};S.dh[k2]={n:NN(k2)[0]};dhSync(S);
   o.pace1=Q.filter(m=>m.kit&&m.kit.kind==='reward').length;o.pend=(S.dhPend||[]).slice();Q.length=0;S.buoi=0;used=0;window.__bot=1;try{nextBuoi()}catch(x){}window.__bot=0;o.pace2=Q.filter(m=>m.kit&&m.kit.kind==='reward').length;o.pend2=(S.dhPend||[]).length;Q.length=0;
   /* 6 */o.bnot=[];for(const t in BAL.dh.B){const v=BAL.dh.B[t].v;const gain=/^g/.test(t);/* gain types: a smaller denominator = more */for(let i=1;i<v.length;i++){if(!v[i-1])continue;if(gain?v[i]>v[i-1]:v[i]<v[i-1])o.bnot.push(t+' '+v)}}

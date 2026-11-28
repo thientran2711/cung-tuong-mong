@@ -225,7 +225,7 @@ function wkGrudge(v,t){return t===S?Math.max(v.ghen||0,hostility(v,S)):hostility
 function wkUseOpts(v,w){const B=BAL.ag.why.g2wk,L=[];
  if(w.kind==="mon"&&v.malice>B.malice&&v.inv.some(e=>e.k==="hacdinh"&&!e.h)){const t=npwPick(others(v).filter(t=>t.alive&&!t.out),t=>wkGrudge(v,t)-B.host);if(t)L.push({k:"poison",t,s:wkGrudge(v,t)})}
  if(v.sung<B.sungHi&&wkEval(v,w,"emp").ok)L.push({k:"emp",t:"emp",s:B.emp+(B.sungHi-v.sung)});
- if(!S.thDead&&(v.th||0)<netAt("th","than2",B.thWant)&&wkEval(v,w,"th").ok)L.push({k:"th",t:"th",s:B.th+(netAt("th","than2",B.thWant)-(v.th||0))/2});
+ if(!S.thDead&&(v.th||0)<netAt("th","than2",B.thWant,spRk(v))&&wkEval(v,w,"th").ok)L.push({k:"th",t:"th",s:B.th+(netAt("th","than2",B.thWant,spRk(v))-(v.th||0))/2});
  const f=npwPick(others(v).filter(t=>t!==v&&(t===S?v.rel>=netTh(v,"quen"):rel(v,t)>0)&&wkEval(v,w,t).ok),t=>1+(t===S?v.rel:rel(v,t)));if(f)L.push({k:"gift",t:f,s:B.gift+(f===S?v.rel:rel(v,f))});
  if(w.ti<=1&&!WK[w.kind].per&&(v.bac||0)<B.poor)L.push({k:"sell",s:B.sell+B.poor-(v.bac||0)});return L}
 (function(){const m0=npcMonthly;npcMonthly=function(v){const b=v&&v.arts?Object.assign({},v.arts):null,bp=v&&v.artp?Object.assign({},v.artp):null;const ev=m0.apply(this,arguments);

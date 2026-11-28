@@ -1291,14 +1291,14 @@ BAL.ag.day={on:1,replan:{need:25,touch:40},redecideScope:"consort"/* "consort" =
    study = Sức for a lesson, g = points; thHelp / hhShield = Xin Thái hậu đỡ lời / Xin Hoàng hậu che chở (odds o + regard / div; gate = netTh("th","than"), her nết, ROW 9);
    buy.keep = bạc she keeps after a purchase; gift.g / ally.g = points of a gift / Kết giao (ally: cost bạc, friendship rel above).
    hh = the Empress's acts (Xử tội, Tịch thu, Ban thưởng, Ân xá, Khất bổng lộc, Khuyên mưa móc): g = points per act, gates = the old roll's
-   gates (confHh, rewardHh, cutRelMax), cutRel relation lost, pardonAff / pardonRel / pardonDuc.
+   gates (her own levels netThK(q,"ghet","deep") / netTh(q,"than2"), cutRelMax), cutRel relation lost, pardonAff / pardonRel / pardonDuc.
    th = Thái hậu: w = need weights (order: one consort holds his nights; fond: consorts she favours, th ≥ netTh("th","than") (her nết, ROW 9), not gifted for giftCd tuần;
    mercy: a favoured consort in lãnh cung, th ≥ netTh("th","than2")), g = utility per need, items = what she gives (the old j8 list) */
 Object.assign(BAL.ag,{cx:{face:{c:{"bac":-30},get o(){return BAL.odb.j2.odO_9},w:{"sac":3},need:{"sung":2}},arts:{c:{"suc":-10},o:100,w:{"tai":2},need:{"danh":2}},book:{c:{"suc":-5},o:100,w:{"tamco":2},need:{safe:2}},
   alms:{c:{"bac":-40},get o(){return BAL.odb.j2.odO_8},w:{"danh":7,"mat":1,"duc":3},need:{"danh":5,"duc":3}},sutra:{c:{"bac":-10},o:100,w:{"duc":3},need:{"duc":3}},maidR:{c:{"bac":-20},o:100,w:{"maid":20},need:{safe:3},below:60},
-  rest:{c:{},o:100,w:{"suc":20},need:{rest:6}},study:{"suc":10,g:3},thHelp:{get o(){return BAL.odb.j2.odO_17},div:3,w:{"danh":4,"hh":5},l:{"th":-5}},hhShield:{get o(){return BAL.odb.j2.odO_20},div:3,min:20,g:6,w:{"hh":3},l:{"hh":-5},sh:2},
+  rest:{c:{},o:100,w:{"suc":20},need:{rest:6}},study:{"suc":10,g:3},thHelp:{get o(){return BAL.odb.j2.odO_17},div:3,w:{"danh":4,"hh":5},l:{"th":-5}},hhShield:{get o(){return BAL.odb.j2.odO_20},div:3,/* min 20 → netHh("than") / netTh(q,"than") (ROW 9 r3) */g:6,w:{"hh":3},l:{"hh":-5},sh:2},
   buy:{keep:20,g:2},gift:{g:4},ally:{"bac":30,g:4}},
- hh:{g:{judge:6,conf:4,reward:4,pardon:4,cutpay:3,admon:5},orderW:.35,orderN:3,confHh:-40,rewardHh:50,cutRel:15,pardonRel:30,pardonDuc:2,kh:2},
+ hh:{g:{judge:6,conf:4,reward:4,pardon:4,cutpay:3,admon:5},orderW:.35,orderN:3,/* confHh −40 / rewardHh 50 → netThK(q,"ghet","deep") / netTh(q,"than2") (ROW 9 r3) */cutRel:15,pardonRel:30,pardonDuc:2,kh:2},
  th:{w:{order:1,fond:.6,mercy:.8},g:{order:10,fond:6,mercy:8},giftCd:6,items:["nhansam","yensao","vongngoc","huongtram"]}});
 /* AG-ALL r1 F5 weight pass (needs × traits, no dice): spiteD = hostility that makes the spite need whole (agSpN; was a typed 100);
    hh.orderW / orderN = the Empress's duty need (jagacts agHhCases)
@@ -2408,8 +2408,12 @@ BAL.leave={maxAge:84,old:62,sucA:.7,sucD:200,birthAge:42,
    open nết show their hand early, hidden ones late — the open ones gain elsewhere: they act and forgive sooner; the hidden ones befriend later). */
 BAL.net.th={quen:10,than:30,than2:50,ky:-10,ghet:-30,oan:15,act:30,thu:45,host:45,tell:40,nguoi:30,repay:1,sign:0};
 BAL.net.thFrom={than2:["than",1],ky:["ghet",.5],oan:["act",.5],thu:["act",1],host:["act",1]};
+/* ROW 9 r3 (rv FAIL 3): a Thái hậu mark above «than2» (netAt) never lies above the regard she can be brought to and hold: her thỉnh an / gift gains fade
+   to 0 at A.cap + BAL.trong.thGiftCap + thGiftSpan (jtrong trThDeed, her archetype's cap), and at the rank the mark is asked at the stat pace stops a rise
+   at spTop("th",rank) (jstatpace). netAt("th",..) ≤ the lower of the two − atGap (room to reach it in play, not only at the very edge). */
+BAL.net.atGap=8;
 BAL.net.thClamp={quen:[0,30],than:[15,60],than2:[35,80],ky:[-30,-5],ghet:[-60,-10],oan:[5,30],act:[10,60],thu:[25,75],host:[25,75],tell:[15,70],nguoi:[10,60],repay:[1,3],sign:[-20,20]};
-BAL.net.thK={provoke:.34,humiliate:.6,feign:.67,hostLo:.5,hostMid:.67,hostHi:1.33};
+BAL.net.thK={provoke:.34,humiliate:.6,feign:.67,hostLo:.5,hostMid:.67,hostHi:1.33,/* ROW 9 r3: deep = a deep dislike, 4/3 of her «ghet» level (−40 at base; the Hoàng hậu block, her seizing a consort's jewellery) */deep:1.33};
 BAL.net.bandHi=.5;
 BAL.net.heat={ghenK:.45,affK:.6};
 /* promo-stack-lr4 merge (LAW 4 one core, LAW 14 canon overwrite): review/net-ghen BAL.net.ghenOanK / ghenCool and review/net-thresholds BAL.net.oanCool

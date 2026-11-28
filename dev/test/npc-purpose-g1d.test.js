@@ -15,7 +15,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   calm();const q=q72();q.np=[];q72Npc();o.np1=q.np.length;o.w1=q.np.every(x=>!/nhờ .* (mượn|chép|thêu|dò|nói đỡ|giữ|mời|dạy|đưa|che)/.test(x.t)||/Thái hậu|Hoàng hậu/.test(x.t));
   calm();for(const v of rivals)v.th=0;const a=L[0],f=L[1];a.bac=0;a.ro={};a.ro[f.id]=0;try{relAdd(a,f,40)}catch(e){}o.af=aff(a,f);q.np=[];q72Npc();o.np2=q.np.map(x=>x.t);
   o.w2=q.np.some(x=>x.t.indexOf(a.name+" nhờ "+f.name+" mượn bạc")===0)&&q.np.filter(x=>/ nhờ /.test(x.t)&&!/Thái hậu|Hoàng hậu/.test(x.t)).every(x=>x.t.indexOf(a.name)===0);
-  calm();for(const v of rivals)v.th=0;const t=L[2]||L[0];t.th=BAL.ag.why.job.th+30;let hit=0,bad=0;for(let i=0;i<10;i++){delete S.npw;const x=npcWhy("ladyJob",{L:liveRivals(true).filter(v=>!v.confined)});if(x&&x.who===NPW1_TH){if(x.tgt===t)hit++;else bad++}}o.w3a=hit>0&&bad===0;
+  calm();for(const v of rivals)v.th=0;const t=L[2]||L[0];t.th=netTh("th","than")+30;let hit=0,bad=0;for(let i=0;i<10;i++){delete S.npw;const x=npcWhy("ladyJob",{L:liveRivals(true).filter(v=>!v.confined)});if(x&&x.who===NPW1_TH){if(x.tgt===t)hit++;else bad++}}o.w3a=hit>0&&bad===0;
   calm();for(const v of rivals)v.th=0;let any=0;for(let i=0;i<10;i++){delete S.npw;const x=npcWhy("ladyJob",{L:liveRivals(true)});if(x&&x.who===NPW1_TH)any++}o.w3b=any===0;
   calm();q.d={};o.w4=q72Collect()===null;
   calm();const z=L[0];let zbad=0;for(let i=0;i<30;i++){const id=rv6(null,v=>v===z?10:0);if(id!==z.id)zbad++}o.w5=zbad===0;
