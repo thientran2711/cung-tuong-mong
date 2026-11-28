@@ -246,18 +246,24 @@ function pkRects(n){if(!L)return[];const h=L.getBoundingClientRect(),o=[];try{co
  L.querySelectorAll(".kpk-n,.kpk-post,.kpk-rail,.kpk-tabs").forEach(e=>{const r=e.getBoundingClientRect();if(r.width>1&&r.height>1)o.push({l:r.left-h.left,r:r.right-h.left,t:r.top-h.top,b:r.bottom-h.top})});return o}
 function faceOf(q,dx,s,ax){const F=AB().face||{x:.3,y0:.03,y1:.2},w=q.w*s,h=q.h*s,x=ax==null?q.x+dx+(q.w-w)/2:ax+(q.x+dx-ax)*s,y=q.y+q.h-h;return{l:x+w*F.x,r:x+w*(1-F.x),t:y+h*F.y0,b:y+h*F.y1}}
 function unyield(quick){if(!CUR)return;CUR.G.forEach(g=>g.P.forEach(p=>{const q=p.m;if(!q||!q.yd)return;q.yd=null;if(SELM&&q.g===SELM.g)return;an(q.el,[{transform:q.el.__t}],{duration:quick||still()?1:320})}))}/* one keyframe = from where the figure stands now (no jump back to the slot) */
-/* a group yields AS ONE (LRM6 r2: a master stepping aside alone left her own follower standing in front of her — her tap point covered): same shift for every member,
-   then, if a face is still under the board, the whole group steps back together (scaled about its left feet point, so the row keeps its order and gaps) */
+/* a group yields AS ONE (LRM6 r2: a master stepping aside alone left her own follower standing in front of her — her tap point covered) and people never cross
+   (area-test «people never overlap»: painted body = figure box minus ~22 % each side): the group goes to the free floor LEFT of the board nearest its own place — between the
+   speaker + her followers, the groups that stay, the groups that already moved and the stage edge — at full size if it fits, else a step back (smaller, scaled about its
+   left feet point so the row keeps its order) down to BAL.area.faceMin; no room even then → it steps back in place until the faces clear (never over the board) */
 function yieldFaces(m,n){if(!CUR||!liveM(m)||!KP||!AB().face)return;/* BAL.area.face null = off (the plate-edge-scan BEFORE column: NOYIELD=1) */n=n||KP.__n||1;KP.__n=n;const R=pkRects(n);if(!R.length)return;
- const hit=f=>R.some(r=>f.l<r.r-1&&f.r>r.l+1&&f.t<r.b-1&&f.b>r.t+1);const bx0=Math.min(...R.map(r=>r.l)),bt=Math.min(...R.map(r=>r.t)),bb=Math.max(...R.map(r=>r.b));
+ const hit=f=>R.some(r=>f.l<r.r-1&&f.r>r.l+1&&f.t<r.b-1&&f.b>r.t+1);const bx0=Math.min(...R.map(r=>r.l)),lim=bx0-4,sMin=AB().faceMin||.45,hr=L.getBoundingClientRect();
+ const body=(l,w)=>({l:l+w*.22,r:l+w*.78}),occ=[],Y=[];
+ m.g.P.forEach(p=>{const r=p.m.el.getBoundingClientRect();if(r.width>2)occ.push(body(r.left-hr.left,r.width))});
  CUR.G.forEach(g=>{if(g===m.g)return;const Q=g.P.map(p=>p.m).filter(Boolean);if(!Q.length)return;
-  const back0=()=>Q.forEach(q=>{if(q.yd){q.yd=null;an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}});
-  if(!Q.some(q=>hit(faceOf(q,0,1)))){back0();return}
-  const vIn=f=>f.b>bt+1&&f.t<bb-1,left=Math.min(...Q.map(q=>q.x+q.w*.22));
-  /* left first: every face that is level with the board ends left of its left edge (4 px gap); the group's painted left edge stays on the stage (6 px) */
-  let dx=Math.min(0,...Q.map(q=>{const f=faceOf(q,0,1);return vIn(f)?bx0-4-f.r:0}));dx=Math.max(dx,6-left);let s=1;const ax=left+dx;
-  const any=(d,sc)=>Q.some(q=>hit(faceOf(q,d,sc,ax)));while(any(dx,s)&&s>.56)s-=.04;
-  Q.forEach(q=>{q.yd={dx,s};const T=ax+(q.x+dx-ax)*s-q.w*(1-s)/2;const to=`translate(${T}px,${q.y}px) scale(${s.toFixed(3)})`;an(q.el,[{transform:to}],{duration:still()?1:420})})})}
+  if(Q.some(q=>hit(faceOf(q,0,1))))Y.push(Q);else{Q.forEach(q=>{occ.push(body(q.x,q.w));if(q.yd){q.yd=null;an(q.el,[{transform:q.el.__t}],{duration:still()?1:320})}})}});
+ /* nearest the board first (it has the least way to go) */Y.sort((a,b)=>Math.max(...b.map(q=>q.x))-Math.max(...a.map(q=>q.x)));
+ Y.forEach(Q=>{const l0=Math.min(...Q.map(q=>q.x+q.w*.22)),r0=Math.max(...Q.map(q=>q.x+q.w*.78)),Wg=r0-l0;let pl=null,s=1;
+  for(s=1;s>=sMin-1e-6&&pl==null;s=+(s-.05).toFixed(2)){const w=Wg*s;const O=occ.filter(o=>o.r>6&&o.l<lim).sort((a,b)=>a.l-b.l);let a=6;const gaps=[];O.forEach(o=>{if(o.l-3>a)gaps.push([a,o.l-3]);a=Math.max(a,o.r+3)});if(lim>a)gaps.push([a,lim]);
+   for(let i=gaps.length-1;i>=0;i--){const [gl,gr]=gaps[i];if(gr-gl>=w){const rr=Math.min(gr,Math.max(r0,gl+w));pl=rr-w;break}}if(pl!=null)break}
+  let up=(1-s)*(AB().faceRise||0)*CUR.D.H;/* further back = smaller AND standing higher on the floor (BAL.area.faceRise), never a doll on the front line */
+  if(pl==null){/* no free floor: step back in place, faces clear of the board */s=1;while(Q.some(q=>hit(faceOf(q,0,s,l0)))&&s>sMin)s-=.04;pl=l0;up=0}
+  occ.push({l:pl,r:pl+Wg*s});
+  Q.forEach(q=>{const bl=pl+(q.x+q.w*.22-l0)*s,vl=bl-q.w*s*.22,T=vl-q.w*(1-s)/2;q.yd={T,s};const to=`translate(${T}px,${q.y-up}px) scale(${s.toFixed(3)})`;an(q.el,[{transform:to}],{duration:still()?1:420})})})}
 function openPk(m){closePk(true);if(!CUR||!liveM(m)||typeof kitPick==="undefined")return;let G=[];try{G=dfData(m.i)}catch(e){}
  /* names she has not learnt (the kit shows them as «???» on a button): those acts are not offered by that name */let unk=[];try{unk=(rivals||[]).filter(v=>typeof k61Named==="function"&&!k61Named(v)).map(v=>v.name).filter(Boolean)}catch(e){}
  G=(G||[]).map(g=>Object.assign({},g,{acts:(g.acts||[]).filter(a=>a&&a.n&&!/\?\?\?/.test(a.n+" "+(a.word||""))&&!unk.some(n=>String(a.n).includes(n)))})).filter(g=>g.acts.length);/* an act naming someone she has not learnt is not offered by that name (MAIN 127 FAIL 4, ring4 rule) */if(!G.length)return;
