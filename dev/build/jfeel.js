@@ -254,7 +254,7 @@ function feelDo(p,r){const me=p===S,F=fB().act.fx[r.k];if(!F)return window.eaDo(
  case"tron":pay({danh:-F.danh});h=me?"Lòng sợ hãi chưa yên, ngươi đóng cửa tẩm cung, cả buổi không dám bước ra.":`${emoName(p)} đóng cửa trốn trong phòng cả buổi.`;break;
  case"caobenh":pay({danh:-F.danh});h=me?"Xấu hổ chẳng dám nhìn ai, ngươi sai người báo bệnh, không đến thỉnh an.":`${emoName(p)} cáo bệnh, không đến thỉnh an.`;break;
  case"bodo":pay({tai:-F.tai});h=me?"Lòng chán chường, việc đang làm dở ngươi cũng bỏ ngang.":`${emoName(p)} bỏ dở việc đang làm.`;break;
- case"bove":{const t=feelHonT(p);if(!t)return null;target=t;/* review r1: the Emperor has no thiện cảm map (j9 affAdd keys by id; he has none) → a sulk at him costs Sủng */if(t===S.emp)pay({sung:-F.sung});else{try{relAdd(p,t,-F.rel)}catch(e){}if(me)add(`${emoName(t)} thiện cảm −${F.rel}`)}
+ case"bove":{const t=feelHonT(p);if(!t)return null;target=t;/* review r1: the Emperor has no thiện cảm map (j9 affAdd keys by id; he has none) → a sulk at him costs Sủng */if(t===S.emp)pay({sung:-F.sung});else{const d=affGot(t,p,()=>relAdd(p,t,-F.rel));if(me)add(`${emoName(t)} thiện cảm ${d<0?"−"+(-d):balSg(d)}`)}
   h=me?`Còn hờn ${t===S.emp?"Hoàng thượng":emoName(t)}, ngươi bỏ về, không muốn tiếp.`:`${emoName(p)} còn hờn ${t===S?"ngươi":emoName(t)}, bỏ về không tiếp.`;break}
  case"moi":pay({sung:F.sung});if(me){try{ghenAll(F.ghen)}catch(e){}add("các phi tần ganh ghét thêm")}else{try{for(const x of liveRivals(true))if(x!==p&&x.alive)oanAdd(x,p,F.oan)}catch(e){}}
   h=me?"Lòng xao xuyến, ngươi sai người dâng trà mời Hoàng thượng ghé cung.":`${emoName(p)} sai người mời Hoàng thượng ghé cung.`;break;
@@ -263,7 +263,7 @@ function feelDo(p,r){const me=p===S,F=fB().act.fx[r.k];if(!F)return window.eaDo(
  case"ngoithu":pay({suc:-F.suc});h=me?"Chuyện vừa qua làm ngươi choáng váng, cứ ngồi thừ người, ai gọi cũng chẳng nghe.":`${emoName(p)} ngồi thừ người, ai gọi cũng chẳng nghe.`;break;
  case"khoetai":pay({danh:F.danh});try{if(me)ghenAll(F.ghen);else for(const x of liveRivals(true))if(x!==p&&x.alive)oanAdd(x,p,F.oan)}catch(e){}if(me)add(`kẻ ganh ghen +${ghenN(F.ghen)}`);
   h=me?"Tự tin đầy lòng, ngươi đàn một khúc trước các phi tần; tiếng khen lẫn tiếng xì xào đều có.":`${emoName(p)} khoe tài trước các phi tần.`;break;
- case"treo":{const t=eaH().rival(p);if(t){target=t;try{affAdd(t,p,-F.rel)}catch(e){}if(me)add(`${Nm2(t)} thiện cảm −${F.rel}`)}
+ case"treo":{const t=eaH().rival(p);if(t){target=t;const d=affGot(t,p,()=>affAdd(t,p,-F.rel));if(me)add(`${Nm2(t)} thiện cảm ${d<0?"−"+(-d):balSg(d)}`)}
   else{pay({danh:-F.danh})}/* TEMPER-OUTBURST: the staff laugh either way (Lòng +); no rival near → she loses face (Danh −) */for(const m of eaH().staffOf(p))eaH().loyAdd(m,F.loy);if(me&&eaH().staffOf(p).length)add(`lòng cung nhân +${F.loy}`);
   h=me?(t?`Lòng tinh nghịch, ngươi bày trò trêu ${Nm2(t)}; người kia đỏ mặt, không vui.`:"Lòng tinh nghịch, ngươi bày trò trêu đám cung nhân; cả cung cười ồ."):`${emoName(p)} bày trò trêu ${t?(t===S?"ngươi":Nm2(t)):"người hầu"}.`;break}
  case"mach":pay({tai:F.tai,suc:-F.suc});h=me?"Hăng hái trong lòng, ngươi làm một mạch không nghỉ, xong việc thì người rã rời.":`${emoName(p)} làm một mạch không nghỉ.`;break;

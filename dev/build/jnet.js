@@ -102,4 +102,4 @@ function netCross(x,y,b,a){if(!S||!x||!y||x===y||x===S||typeof x!=="object"||typ
  if(!rivals.includes(x))return;S.netX=S.netX||{};const k=x.id+">"+(y===S?"me":y.id),st=a>=th?1:a<=gh?-1:0,o=S.netX[k]||0;if(st===o)return;S.netX[k]=st;
  if(st===1&&y===S&&b<th){const L=NET_TH_LINE.than;newsAdd(x,"netThan",`${x.name} ${tv(L,x,L._)}`,true)}
  else if(st===-1&&b>gh)newsAdd(x,"netGhet",`${x.name} từ nay ghét ${NM(y)} ra mặt`,false)}
-(function(){const a0=affAdd;affAdd=function(x,y,n){let b=null;try{if(n&&x&&y&&x!==y&&x!==S)b=aff(x,y)}catch(e){}const r=a0.apply(this,arguments);try{if(b!=null)netCross(x,y,b,aff(x,y))}catch(e){}return r}})();
+(function(){const a0=affAdd;affAdd=function(x,y,n){let b=null;try{if(!AFF_DRY&&n&&x&&y&&x!==y&&x!==S)b=aff(x,y)}catch(e){}const r=a0.apply(this,arguments);try{if(b!=null)netCross(x,y,b,aff(x,y))}catch(e){}return r}})();

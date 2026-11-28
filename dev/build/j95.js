@@ -437,7 +437,7 @@ function j95chg(s){return s&&s.kind==="tryst"?"tt":"mh"}
 function j95accO(v,to,s){const pr=chHave(S,v,j95chg(s));const q=queenP();return to==="emp"?oddsCl(Math.min(20+pr*BAL.m95.accPer+(S.sung||0)/5,90)):S.rank>=7?oddsCl(40+pr*BAL.m95.accPer):oddsCl(Math.min(25+pr*BAL.m95.accPer+(q?aff(q,S)/4:0),90))}
 function j95catchOpts(v,m,s,out){const O=[];const q=queenP();const love=s.kind==="tryst";const pr=chHave(S,v,j95chg(s));
  const win=love?`nàng bị xét tội tư thông, ban chết${m?` · (${m.name} bị xử trảm)`:""} · Danh +${BAL.m95.accWin.danh}`:`nàng bị xét tội chuẩn bị mưu hại, cấm túc hay giáng phẩm · Danh +${BAL.m95.accWin.danh}`;
- const lose=`bị coi là vu cáo: Danh -${BAL.tw.g.accFail[0]}, ngươi bị cấm túc, ${pvOan(v,BAL.tw.g.accFail[1],"nàng oán ngươi")}, nàng quý ngươi ${balSg(spSee("rel",-BAL.tw.g.accFail[2]))}`;const why=`(chứng cứ tội ${chName(j95chg(s)).toLowerCase()} ngươi đang nắm: ${pr}; tận mắt bắt gặp)`;
+ const lose=`bị coi là vu cáo: Danh -${BAL.tw.g.accFail[0]}, ngươi bị cấm túc, ${pvOan(v,BAL.tw.g.accFail[1],"nàng oán ngươi")}, nàng quý ngươi ${affSg(v,S,-BAL.tw.g.accFail[2])}`;const why=`(chứng cứ tội ${chName(j95chg(s)).toLowerCase()} ngươi đang nắm: ${pr}; tận mắt bắt gặp)`;
  /* split-merge B3/P6 (owner 26/11 ~21:00Z «hạn chế tách 1 việc», 27/11 ~00:46Z): ONE «Tố giác» — the listener is the highest one who can judge her
     (she as Hoàng hậu: luật cung; a Hoàng hậu above the accused: Hoàng hậu; else Hoàng thượng); gated on the charge's real pieces + witnesses (chReady, chNeedTxt) */
  const to=j95to(v),c=j95chg(s),rd=chReady(S,v,c);const lw=to==="emp"?lose.replace("bị cấm túc","bị cấm túc hay giáng phẩm"):lose;
@@ -456,7 +456,7 @@ function j95accuse(v,m,s,to){if(typeof can==="function"&&can(BAL.m95.k))spend(BA
  if(j95dice(o)){evA(S,v,-pr,c);apply({danh:BAL.m95.accWin.danh});const what=s.kind==="tryst"?`tư thông${m?" với "+m.name:""}`:"chuẩn bị mưu hại";log(`<span class="r">${v.name} bị xét tội ${what}.</span>`);
   if(s.kind==="tryst"){ttNpcExposed(v,m)}else punish(v,"chuẩn bị mưu hại",2);
   Q.push({t:"Tố giác",who:pv(v),h:`<p>Chứng cứ đủ, ${v.name} bị xét tội ${what}.</p><p class="g">Danh +${BAL.m95.accWin.danh}</p>`})}
- else{apply({danh:-BAL.tw.g.accFail[0]});oanAdd(v,S,BAL.tw.g.accFail[1]);affAdd(v,S,-BAL.tw.g.accFail[2]);punish(S,"vu cáo phi tần không đủ chứng cứ",to==="emp"?2:1);Q.push({t:"Tố giác",who:pv(v),h:`<p>${to==="emp"?"Hoàng thượng":"Hoàng hậu"} cho rằng chứng cứ chưa đủ, ngươi bị coi là vu cáo.</p><p class="r">Danh -${BAL.tw.g.accFail[0]} · ${pvOan(v,BAL.tw.g.accFail[1],`${v.name} oán ngươi`)}</p>`})}
+ else{apply({danh:-BAL.tw.g.accFail[0]});const dO=oanGot(v,S,()=>oanAdd(v,S,BAL.tw.g.accFail[1]));affAdd(v,S,-BAL.tw.g.accFail[2]);punish(S,"vu cáo phi tần không đủ chứng cứ",to==="emp"?2:1);Q.push({t:"Tố giác",who:pv(v),h:`<p>${to==="emp"?"Hoàng thượng":"Hoàng hậu"} cho rằng chứng cứ chưa đủ, ngươi bị coi là vu cáo.</p><p class="r">Danh -${BAL.tw.g.accFail[0]} · ${v.name} oán ngươi ${balSg(dO)}</p>`})}
  showModal()}
 function j95hold(v){const z=j95z();z.hold[v.id]=wk();j95ctx({how:"Ngươi giữ kín chuyện tận mắt thấy làm con bài",proves:`${v.name} có chuyện kín bị ngươi bắt gặp`},()=>evA(S,v,BAL.eff.j95.evJ95hold));log(`Ngươi giữ kín chuyện của ${v.name}, chờ lúc dùng.`)}
 function j95silent(v){if(typeof can==="function"&&can(BAL.m95.k))spend(BAL.m95.k);

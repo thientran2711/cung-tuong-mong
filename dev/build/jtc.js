@@ -31,11 +31,11 @@ function thcPay(p,o){if(p===S)apply(o);else if(typeof p.bac==="number"&&o.bac)p.
 function thcSet(p,s,o){/* o.paid: the uniform was already paid by the caller's own shown cost (j68g card) */const B=thcB();if(!p)return "";const cur=thcOf(p);const me=p===S;const H=thcHouse(p);let r="";
  if(s&&cur===s)return "";
  if(s&&(thcWhyNot(p,s,o)||thcRef(p,s)==null))return "";/* r1: an ineligible pick (state moved since the card was drawn, e.g. a co-op intent landing late) changes nothing — never steps the current one down */
- if(cur){/* the one stepping down: her lòng drops, the others' envy eases */cur.loyal=cl((cur.loyal||0)+B.drop.loy,0,100);for(const e of H)if(e.s!==cur&&e.s!==s)e.s.loyal=cl((e.s.loyal||0)+B.drop.calm,0,100);delete p.thc;
-  r=me?`${cur.name} thôi làm cung nữ thân cận: nàng: thiện cảm ${balSg(spSee("rel",B.drop.loy))}; cung nữ khác: thiện cảm ${balSg(spSee("rel",B.drop.calm))}.`:`${p.name} cho ${cur.name} thôi làm cung nữ thân cận.`}
- if(s){const id=thcRef(p,s);if(!(o&&o.paid))thcPay(p,{bac:-B.pick.bac});s.loyal=cl((s.loyal||0)+B.pick.loy,0,100);
-  for(const e of H)if(e.s!==s&&e.s!==cur)e.s.loyal=cl((e.s.loyal||0)-B.pick.envy,0,100);p.thc=id;s.thcAt=S?S.turn||0:0;
-  const t=me?`Chọn ${s.name} làm cung nữ thân cận, may y phục thân cận riêng của cung ngươi (Bạc ${balSg(-B.pick.bac)}): nàng: thiện cảm ${balSg(spSee("rel",B.pick.loy))}; cung nữ khác ghen: thiện cảm ${balSg(spSee("rel",-B.pick.envy))}.`
+ if(cur){/* the one stepping down: her lòng drops, the others' envy eases *//* PVQUY-POST-3 item E (MAIN 189, law 4): a result line prints the number really applied (measured before/after the write) */const rg=a=>a.length?(Math.min(...a)===Math.max(...a)?balSg(Math.min(...a)):`${balSg(Math.min(...a))} đến ${balSg(Math.max(...a))}`):balSg(0);const c0=cur.loyal||0;cur.loyal=cl((cur.loyal||0)+B.drop.loy,0,100);const dC=[];for(const e of H)if(e.s!==cur&&e.s!==s){const l0=e.s.loyal||0;e.s.loyal=cl((e.s.loyal||0)+B.drop.calm,0,100);dC.push(Math.round(e.s.loyal-l0))}delete p.thc;
+  r=me?`${cur.name} thôi làm cung nữ thân cận: nàng: thiện cảm ${balSg(Math.round(cur.loyal-c0))}${dC.length?`; cung nữ khác: thiện cảm ${rg(dC)}`:""}.`:`${p.name} cho ${cur.name} thôi làm cung nữ thân cận.`}
+ if(s){const id=thcRef(p,s);if(!(o&&o.paid))thcPay(p,{bac:-B.pick.bac});const rg=a=>a.length?(Math.min(...a)===Math.max(...a)?balSg(Math.min(...a)):`${balSg(Math.min(...a))} đến ${balSg(Math.max(...a))}`):balSg(0);const s0=s.loyal||0;s.loyal=cl((s.loyal||0)+B.pick.loy,0,100);const dE=[];
+  for(const e of H)if(e.s!==s&&e.s!==cur){const l0=e.s.loyal||0;e.s.loyal=cl((e.s.loyal||0)-B.pick.envy,0,100);dE.push(Math.round(e.s.loyal-l0))}p.thc=id;s.thcAt=S?S.turn||0:0;
+  const t=me?`Chọn ${s.name} làm cung nữ thân cận, may y phục thân cận riêng của cung ngươi (Bạc ${balSg(-B.pick.bac)}): nàng: thiện cảm ${balSg(Math.round(s.loyal-s0))}${dE.length?`; cung nữ khác ghen: thiện cảm ${rg(dE)}`:""}.`
    :`${p===S.thO?"Thái hậu":p.name} chọn ${s.name} làm cung nữ thân cận.`;r=r?r+" "+t:t}
  try{if(typeof J95S==="object")J95S.last=null}catch(e){}/* the record re-reads the close one */
  return r}

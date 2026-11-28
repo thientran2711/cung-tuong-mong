@@ -24,7 +24,7 @@ function whyNetF(p,col,neutral){const F=[];try{for(const t of traitsOf(p)){const
 function whyTrongF(judge,tags){try{const m=trongMul(judge,tags);if(m===1)return[];const hit=trongHit(judge,tags);if(!hit.length)return[];return[{k:"trong",v:hit.join(" · "),s:m>1?1:-1,j:judge}]}catch(e){return[]}}
 function whyMoodMe(){try{if(typeof mbAffK!=="function")return[];const k=mbAffK();if(!k)return[];return[{k:"mood",t:k>0?"lòng ngươi đang vui, người ta dễ mến":"lòng ngươi u uất, người ta khó gần",s:k>0?1:-1}]}catch(e){return[]}}
 /* ---------- measured changes: the OUTERMOST wrappers (this module loads after every affAdd / oanAdd wrapper) ---------- */
-(function(){const a0=affAdd;affAdd=function(x,y,n){if(!S||!x||!y||x===y||!n)return a0.apply(this,arguments);let b=0;try{b=aff(x,y)}catch(e){}whyT();
+(function(){const a0=affAdd;affAdd=function(x,y,n){if(AFF_DRY||!S||!x||!y||x===y||!n)return a0.apply(this,arguments);/* AFF_DRY: a preview notes no why */let b=0;try{b=aff(x,y)}catch(e){}whyT();
  const F=[];try{if(y===S&&x!==S){const D=typeof TR_DEED!=="undefined"?TR_DEED:null;if(D&&x!==D.doer)F.push(...whyTrongF(x,D.tags));if(n>0){F.push(...whyNetF(x,"trust",1));F.push(...whyMoodMe())}const C=WHY_CTX.get(whyKey(x));if(C)F.push(...C)}}catch(e){}
  const r=a0.apply(this,arguments);try{if(F.length){const d=aff(x,y)-b;if(d)whyNote(x,"aff",d,F)}}catch(e){}return r}})();
 (function(){const o0=oanAdd;oanAdd=function(x,y,n){if(!S||!x||!y||x===y||!n)return o0.apply(this,arguments);let b=0;try{b=oan(x,y)}catch(e){}whyT();

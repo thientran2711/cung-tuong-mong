@@ -117,13 +117,14 @@ function promoReward(p,src,o){o=o||{};const m=PROMO_SRC[src]||"none";if(m==="non
  return r?r+promoCost(p,src):""}
 /* the loss that comes with each reward (owner 07:15Z); same rule for an NPC (her rivals feel it the same way) */
 function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
- if(src==="son1"){const q=typeof queenP==="function"?queenP():null;if(q&&q!==p)oanAdd(q,p,B.son1.hhOan);
-  let n=0;for(const v of liveRivals(true))if(v!==p&&v!==q&&!v.out&&typeof sonsOf==="function"&&sonsOf(v).length){oanAdd(v,p,B.son1.momOan);n++}
+ if(src==="son1"){const q=typeof queenP==="function"?queenP():null;const dQ=q&&q!==p?oanGot(q,p,()=>oanAdd(q,p,B.son1.hhOan)):0;
+  let n=0;const MO=[];/* PVQUY-POST-2: one row per person, the real change */for(const v of liveRivals(true))if(v!==p&&v!==q&&!v.out&&typeof sonsOf==="function"&&sonsOf(v).length){MO.push(`${v.name} oán ngươi ${balSg(oanGot(v,p,()=>oanAdd(v,p,B.son1.momOan)))}`);n++}
   if(p!==S&&S!==q&&!S.out&&typeof sonsOf==="function"&&sonsOf(S).length)oanAdd(S,p,B.son1.momOan);
-  if(me)t=`Hoàng hậu${n?` và ${n} vị có hoàng tử`:""} thấy ngươi thành mối lo (${pvOan(q,B.son1.hhOan,"oán ngươi")}${n?`, ${pvOanAny(B.son1.momOan,"các vị ấy")}`:""}). `}
+  if(me)t=`Hoàng hậu${n?` và ${n} vị có hoàng tử`:""} thấy ngươi thành mối lo (oán ngươi ${balSg(dQ)}${n?`, ${MO.join(", ")}`:""}). `}
  else if(src==="emp"){if(me)apply({th:-B.emp.th});let n=0;
-  for(const v of liveRivals(true)){const s=typeof rgSideOf==="function"?rgSideOf(v):null;if(s&&s!=="emp"){oanAdd(v,p,B.emp.oan);n++}}
-  if(me)t=`Thái hậu lạnh nhạt (Thái hậu quý ngươi −${B.emp.th}); ${n?`${n} phi tần phe thua`:"phe thua"} để bụng ngươi (${pvOanAny(B.emp.oan,"oán")}). `}
+  const dE=[];/* PVQUY-POST-3 (law 4): a result line prints the real oán each one took (oanGot), never the pvOanAny preview */for(const v of liveRivals(true)){const s=typeof rgSideOf==="function"?rgSideOf(v):null;if(s&&s!=="emp"){dE.push(oanGot(v,p,()=>oanAdd(v,p,B.emp.oan)));n++}}
+  const eLo=dE.length?Math.min(...dE):0,eHi=dE.length?Math.max(...dE):0;
+  if(me)t=`Thái hậu lạnh nhạt (Thái hậu quý ngươi −${B.emp.th}); ${n?`${n} phi tần phe thua`:"phe thua"} để bụng ngươi${n?` (oán ${eLo===eHi?balSg(eLo):`${balSg(eLo)} đến ${balSg(eHi)}`})`:""}. `}
  else if(src==="th"){if(me){apply({sung:-B.th.sung});S.psErr={n:B.th.errN,at:wk()+B.th.errAt};
   t=`Bệ hạ coi ngươi là người của Thái hậu (${sgStat(-B.th.sung)}); Thái hậu sẽ còn sai ngươi làm việc (${B.th.errN} việc nhờ). `}}
  else if(src==="quyen"){if(me){apply({danh:-B.quyen.danh});S.psStrike={at:S.turn+B.quyen.after,p:B.quyen.p,n:0};
