@@ -39,7 +39,14 @@ function kmPush(fn){if(kmLifeOver()&&!(fn&&fn.kend))return;KMQ.push(fn);if(fn&&(
    snapshot) is drawn now, and while a rank scene is queued / on screen or a rank card is still in Q, the other scenes wait (kmPump). The life
    end card stays above everything (E98 kmLifeOver / kitEndClear, KK29 kitEndUp: a dead life's scenes are dropped, not queued). */
 function kmPushRank(fn){fn.krank=1;kmPush(fn)}
-function kmRankCard(m){return !!(m&&(m.rk||(m.kit&&m.kit.rk)))}
+/* DAYQ-NOTURN (F s21g LIVE 5fb13d60: «Sang ngày mới» dead ×3, Q = 1 «Thái hậu triệu» / «Nghe đồn» / «Kẻ hầu xin», nothing on screen): the rank
+   marker is rk:1 (j14 kitPanel kit.rk / a card's own rk:1). m.rk is ALSO the save recipe key (j3 rcpReg: m.rk = "tsbAp", "j95bRum", "ap.svAsk" …,
+   on nearly every generated choice card) — read as «a rank card», every such card held every kit scene (the night flip, rewards); the jnf night
+   gate then held that card for the flip it blocked = a mutual wait with nothing on screen. Only the marker value counts, never a recipe key. */
+function kmRankMark(v){return v===1||v===true}
+/* r3 (RV-163M coop-e2e bisect: LIVE j93 + r2 guards passes «week 2: fold advanced», this line alone hangs it): a co-op room paces its night and
+   week merge on the old read (its scenes wait while any card with m.rk waits) — solo only, the room keeps LIVE's read unchanged */
+function kmRankCard(m){if(window.COOPW&&(COOPW.on||COOPW.allow||COOPW.allowN))return !!(m&&(m.rk||(m.kit&&m.kit.rk)));return !!(m&&(kmRankMark(m.rk)||(m.kit&&kmRankMark(m.kit.rk))))}
 function kmRankWait(){try{if(typeof S==="undefined"||!S||S.dead||(typeof CW!=="undefined"&&CW&&CW.ctx))return false;
  if(KMQ.some(f=>f&&f.krank)||document.querySelector(".kmov.km-edict:not(.km-out),.kmov.km-gloom:not(.km-out)"))return true;
  if(kmOn()&&KMS===S&&KMSNAP){const b=kmSnap();if(b.rank!==KMSNAP.rank||b.out!==KMSNAP.out||b.srv!==KMSNAP.srv){kmDiff();if(KMQ.some(f=>f&&f.krank))return true}}
