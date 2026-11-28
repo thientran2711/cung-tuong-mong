@@ -155,7 +155,27 @@ window.f67Mig=f67Mig;
 const F14ROLE={tt_co:{v:1},tt_oan:{v:1},tt_tranh:{v:0},tt_mat:{v:0},dtq_bien:{v:1},dtq_vu:{v:1},dtq_huynh:{v:1},
  muoi_tuoc:{v:1},muoi_lau:{v:1},muoi_doi:{v:0},muoi_no:{v:0},cn_chu:{v:1},cn_than:{v:1},ch_benh:{v:0},ch_ho:{v:0},ch_bi:{v:0},
  thd_tho:{v:1},thd_tro:{v:0},thd_hoc:{v:0},cnv_mat:{v:0},s_than:{v:1},s_thu:{v:1,v2:0},s_hoa:{v:1},s_dich:{v:1},s_ban:{v:1,v2:1},
- st_the:{v:0,v2:1},st_con:{v:1},st_dong:{v:1},tm96b:{v:1},tm96c:{v:1}};
+ st_the:{v:0,v2:1},st_con:{v:1},st_dong:{v:1},tm96b:{v:1},tm96c:{v:1},
+ /* F14ROLE-ROWS (MAIN 182, 27/11): the roles no row reached (413 on 70 roads/premises), read role by role from each arc's own text by the
+    same 1/0 rule above. A road gets its row at its premise or first chapter; a later chapter has its own row only where the text turns the
+    person's stance (f14Row inherits the rest). No 1→0→1 on one road (f14Carried looks one chapter back only). Evidence: reports/f14role-rows.md */
+ dtq_binh_5:{v:1},dtq_hang:{v:1},dtq_thuong:{v:0},dtq_ky:{v:0},dtq_ngua_6:{v:1},dtq_hang_6:{v:1},dtq_thuong_6:{v:1},dtq_ky_6:{v:1},
+ tt_ruong:{v:1},tt_gia:{v:0},tt_tho:{v:0},tt_thu:{v:0},tt_ruong_6:{v:1},tt_gia_6:{v:1},tt_tho_6:{v:1},tt_thu_6:{v:1},
+ muoi_no_7:{v:0,v2:1},muoi_thi:{v:1},muoi_hoi:{v:1},muoi_gia_5:{v:1},muoi_tien_5:{v:1},muoi_thi_5:{v:1},muoi_hoi_5:{v:1},
+ cn_tinh_5:{v:1},cn_ban_5:{v:1},cn_chuoi:{v:0},cn_tiec:{v:0},cn_chuviet:{v:1},cn_theo:{v:1},
+ cn_chuoi_6:{v:0,v2:0},cn_tiec_6:{v:0,v2:0},cn_chuviet_6:{v:1,v2:0},cn_theo_6:{v:1,v2:0},cn_chuoi_10:{v:1,v2:0},cn_tiec_10:{v:1,v2:0},
+ nc_gian_5:{v:1},nc_su_5:{v:1},nc_tuc_5:{v:1},nc_vuong_5:{v:1},bd_ngua_5:{v:1},bd_hoa_5:{v:1},bd_tuc_5:{v:1},bd_hoang_5:{v:1},
+ nc_men:{v:0},nc_kinh:{v:1},nc_nu:{v:0},nc_the:{v2:0},nc_men_5:{v:1},nc_kinh_5:{v:1},nc_nu_5:{v:1},nc_the_5:{v:1},
+ nc_men_7:{v:1,v2:0},nc_kinh_7:{v:1,v2:0},nc_nu_7:{v:1,v2:0},nc_the_7:{v:1,v2:0},
+ bd_san:{v:1},bd_soi:{v:0},bd_soi_8:{v:1},bd_tuyet:{v:1},bd_hen:{v:1},bd_luuly_6:{v:1},bd_lua_6:{v:1},bd_bac_6:{v:1},bd_su_6:{v:1},
+ pt_hai:{v:1},pt_su:{v:1},pt_tang:{v:1},pt_dang:{v:1},pf_co_5:{v:1},pf_guong_5:{v:1},pf_tra_5:{v:1},pf_lich_5:{v:1},
+ pf_co_11:{v:1,v2:0},pf_guong_11:{v:1,v2:0},pf_tra_11:{v:1,v2:0},pf_lich_11:{v:1,v2:0},
+ td_an_5:{v:1},td_ke_5:{v:1},td_ke_8:{v:0},td_song_6:{v:1},td_tha_5:{v:1},
+ ch_co_5:{v:0},ch_co_6:{v:1},ch_tuyentu_10:{v:0},ch_lenhbai_10:{v:0},ch_diensan_10:{v:0},ch_honngoai_10:{v:0},
+ thd_sach_5:{v:0},thd_sach_6:{v:1},thd_uoc:{v:1},thd_giay:{v:0},thd_dich_5:{v:1},thd_dien_5:{v:1},thd_uoc_5:{v:1},thd_giay_5:{v:1},
+ cnv_chu_5:{v:1},cnv_ban_5:{v:1},cnv_ma_5:{v:1},cnv_kho:{v:0},cnv_thu:{v:0},cnv_tieu:{v:1},
+ cnv_kho_6:{v:1},cnv_thu_6:{v:1},cnv_hach_6:{v:1},cnv_tieu_6:{v:1},
+ noi14:{v:1},hau14:{v:1},ke14:{v:0}};
 window.F14ROLE=F14ROLE;
 /* road chapters .5–.11 (jroad rdDef: ARC67["<road>_<n>"], o:"rd", road, rn) INHERIT the nearest EARLIER row (MAIN 178 ruling 27/11 ~11:03Z):
    own row first, then <road>_<n-1> … <road>_5, then <road> (= the .4 premise cast). Only a real road chapter inherits (o:"rd" + its road),
