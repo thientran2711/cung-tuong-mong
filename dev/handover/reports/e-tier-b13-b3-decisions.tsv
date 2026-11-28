@@ -1,0 +1,128 @@
+id	beat	where	decision	reason
+nc_tuc	B.x1	j67.js:843	KEEP	different ending (e)
+ch_bi	B.s2	j67.js:1093	KEEP	different flag (f)
+thd_hoc	B.x1	j67.js:1227	KEEP	different ending (e)
+cnv_chu	B.c2	j67.js:1254	KEEP	different Lợi thế (sc)
+s_thu	B.c2	j67.js:1403	KEEP	different flag (f) + different Lợi thế (sc)
+st_con	B.s1	j67.js:1647	KEEP	different flag (f) + different go effect
+tt_oan_11	B.c2	jrd_tt.js:438	FOLD	same story result (e/f/go/need/if/sc equal)
+tt_tranh_9	B.s1	jrd_bd.js:288	FOLD	same story result (e/f/go/need/if/sc equal)
+tt_tranh_11	B.t1	jrd_tt.js:672	KEEP	different Lợi thế (sc)
+tt_mat_5	B.t1	jrd_tt.js:727	KEEP	different go effect + different Lợi thế (sc)
+dtq_bien_6	B.c3	jrd_dtq.js:69	KEEP	different Lợi thế (sc)
+dtq_bien_10	B.x1	jrd_dtq.js:219	KEEP	different ending (e)
+dtq_bien_11	B.c1	jrd_dtq.js:238	KEEP	different go effect + different Lợi thế (sc)
+dtq_bien_11	B.c3	jrd_dtq.js:246	FOLD	same story result (e/f/go/need/if/sc equal)
+dtq_bien_11	B.x1	jrd_dtq.js:258	KEEP	different ending (e)
+dtq_vu_10	B.x1	jrd_dtq.js:489	KEEP	different ending (e)
+dtq_huynh_8	B.x1	jrd_dtq.js:924	KEEP	different ending (e)
+muoi_lau_7	B.t1	jrd_muoi.js:331	KEEP	different flag (f) + different need
+muoi_lau_10	B.s2	jrd_muoi.js:412	KEEP	different flag (f) + different need
+muoi_lau_11	B.s1	jrd_muoi.js:439	KEEP	different flag (f) + different Lợi thế (sc)
+muoi_no_5	B.x1	jrd_muoi.js:722	KEEP	different ending (e) + different go effect
+muoi_no_9	B.t1	jrd_muoi.js:848	KEEP	different flag (f)
+cn_chu_10	B.s1	jrd_cn.js:205	KEEP	different flag (f)
+cn_tinh_7	B.s2	jrd_cn.js:345	KEEP	different flag (f) + different go effect
+cn_tinh_7	B.c2	jrd_cn.js:353	KEEP	different flag (f) + different Lợi thế (sc)
+cn_tinh_10	B.t1	jrd_cn.js:450	KEEP	different flag (f)
+cn_than_7	B.c1	jrd_cn.js:805	KEEP	different need
+nc_gian_7	B.x1	jrd_nc.js:125	KEEP	different ending (e)
+nc_gian_9	B.s2	jrd_nc.js:171	KEEP	different Lợi thế (sc)
+nc_su_5	B.c2	jrd_nc.js:298	KEEP	different go effect + different Lợi thế (sc)
+nc_su_6	B.x1	jrd_nc.js:337	KEEP	different ending (e)
+nc_su_7	B.x1	jrd_nc.js:368	KEEP	different ending (e)
+nc_su_8	B.x1	jrd_nc.js:399	KEEP	different ending (e)
+nc_tuc_6	B.x1	jrd_nc.js:578	KEEP	different ending (e)
+nc_tuc_6	B.x2	jrd_nc.js:578	KEEP	different ending (e)
+nc_tuc_11	B.x1	jrd_nc.js:757	FOLD	same story result (e/f/go/need/if/sc equal)
+nc_tuc_11	B.x2	jrd_nc.js:761	FOLD	same story result (e/f/go/need/if/sc equal)
+nc_vuong_7	B.s1	jrd_nc.js:855	FOLD	same story result (e/f/go/need/if/sc equal)
+bd_hoa_5	B.c2	jrd_nc.js:298	KEEP	different go effect + different Lợi thế (sc)
+bd_hoa_6	B.x1	jrd_nc.js:337	KEEP	different ending (e)
+bd_hoa_7	B.x1	jrd_nc.js:368	KEEP	different ending (e)
+bd_hoa_8	B.x1	jrd_nc.js:399	KEEP	different ending (e)
+bd_ngua_7	B.x1	jrd_nc.js:125	KEEP	different ending (e)
+bd_ngua_9	B.s2	jrd_nc.js:171	KEEP	different Lợi thế (sc)
+bd_tuc_6	B.x1	jrd_nc.js:578	KEEP	different ending (e)
+bd_tuc_6	B.x2	jrd_nc.js:578	KEEP	different ending (e)
+bd_tuc_11	B.x1	jrd_nc.js:757	FOLD	same story result (e/f/go/need/if/sc equal)
+bd_tuc_11	B.x2	jrd_nc.js:761	FOLD	same story result (e/f/go/need/if/sc equal)
+bd_hoang_7	B.s1	jrd_nc.js:855	FOLD	same story result (e/f/go/need/if/sc equal)
+bd_san	B.t1	jrd_bd.js:93	KEEP	different flag (f)
+bd_san	B.x1	jrd_bd.js:97	KEEP	different ending (e)
+bd_san_6	B.x1	jrd_bd.js:168	KEEP	different go effect
+bd_san_8	B.x1	jrd_bd.js:230	KEEP	different ending (e)
+bd_san_9	B.x1	jrd_bd.js:261	KEEP	different ending (e)
+bd_san_11	B.c1	jrd_bd.js:313	FOLD	same story result (e/f/go/need/if/sc equal)
+bd_san_11	B.x1	jrd_bd.js:325	KEEP	different go effect
+bd_soi	B.x1	jrd_bd.js:377	KEEP	different ending (e)
+bd_soi_5	B.x1	jrd_bd.js:417	KEEP	different go effect
+bd_soi_6	B.x1	jrd_bd.js:448	KEEP	different ending (e)
+bd_soi_10	B.x1	jrd_bd.js:586	KEEP	different ending (e)
+bd_soi_11	B.x1	jrd_bd.js:618	KEEP	different ending (e) + different go effect
+bd_tuyet	B.t1	jrd_bd2.js:36	KEEP	different flag (f) + different Lợi thế (sc)
+bd_tuyet	B.x1	jrd_bd2.js:40	KEEP	different ending (e)
+bd_tuyet_11	B.x1	jrd_bd2.js:282	KEEP	different ending (e)
+bd_hen	B.x1	jrd_bd2.js:322	KEEP	different ending (e) + different go effect
+bd_hen_5	B.x1	jrd_bd2.js:370	KEEP	different ending (e)
+bd_hen_6	B.x1	jrd_bd2.js:402	KEEP	different ending (e) + different go effect
+bd_hen_7	B.x1	jrd_bd2.js:434	KEEP	different ending (e)
+bd_hen_9	B.x1	jrd_bd2.js:498	KEEP	different ending (e)
+bd_hen_11	B.x1	jrd_bd2.js:570	KEEP	different ending (e)
+pt_hai_5	B.x1	jrd_pt.js:136	KEEP	different ending (e) + different go effect
+pt_hai_6	B.x1	jrd_pt.js:166	KEEP	different ending (e) + different go effect
+pt_hai_11	B.x1	jrd_pt.js:327	KEEP	different ending (e)
+pt_su_5	B.x1	jrd_pt.js:413	KEEP	different ending (e) + different go effect
+pt_su_7	B.x1	jrd_pt.js:477	KEEP	different ending (e) + different go effect
+pt_su_9	B.x1	jrd_pt.js:541	KEEP	different ending (e) + different go effect
+pt_su_10	B.x1	jrd_pt.js:573	KEEP	different ending (e)
+pt_tang_6	B.x1	jrd_pt2.js:116	KEEP	different ending (e)
+pt_tang_7	B.x1	jrd_pt2.js:149	KEEP	different ending (e)
+pt_tang_8	B.x1	jrd_pt2.js:182	KEEP	different ending (e)
+pt_tang_11	B.c2	jrd_pt2.js:275	KEEP	different go effect + different Lợi thế (sc)
+pt_tang_11	B.c3	jrd_pt2.js:279	KEEP	go differs (độ điệp vs ở lại chùa)
+pt_dang	B.c1	jrd_pt2.js:326	KEEP	go amounts differ (G [3,-2] vs [3]: oán only on success vs always)
+pt_dang_6	B.c1	jrd_pt2.js:397	KEEP	different go effect
+pt_dang_6	B.x1	jrd_pt2.js:410	KEEP	different ending (e)
+pt_dang_8	B.c1	jrd_pt2.js:464	KEEP	different Lợi thế (sc)
+pt_dang_8	B.x1	jrd_pt2.js:477	KEEP	different ending (e)
+pt_dang_10	B.x1	jrd_pt2.js:547	KEEP	different ending (e) + different go effect
+td_an_7	B.t1	jrd_td.js:126	KEEP	different Lợi thế (sc)
+td_ke_5	B.x1	jrd_td.js:317	KEEP	different ending (e)
+td_ke_7	B.s1	jrd_td.js:363	KEEP	different flag (f)
+td_song_7	B.t1	jrd_td.js:647	KEEP	different flag (f) + different if gate + different Lợi thế (sc)
+td_song_8	B.x1	jrd_td.js:690	KEEP	different ending (e)
+td_song_9	B.x1	jrd_td.js:725	FOLD	same story result (e/f/go/need/if/sc equal)
+td_song_11	B.x1	jrd_bd.js:475	KEEP	different ending (e) + different go effect
+td_tha_7	B.x1	jrd_td.js:934	KEEP	different ending (e) + different go effect
+td_tha_11	B.t1	jrd_td.js:1074	KEEP	different flag (f) + different go effect + different if gate
+ch_co_9	B.x1	jrd_ch.js:225	KEEP	different ending (e) + different go effect
+ch_benh_5	B.s3	jrd_ch.js:342	KEEP	different flag (f)
+ch_benh_5	B.x1	jrd_ch.js:365	KEEP	different ending (e)
+ch_benh_7	B.t1	jrd_ch.js:443	KEEP	different flag (f) + different need
+ch_benh_10	B.c3	jrd_ch.js:567	FOLD	same story result (e/f/go/need/if/sc equal)
+ch_benh_11	B.x1	jrd_ch.js:624	KEEP	different ending (e) + different if gate
+ch_benh_11	B.x2	jrd_ch.js:628	KEEP	different go effect
+ch_ho_5	B.s1	jrd_ch.js:667	KEEP	different flag (f)
+ch_bi_5	B.x1	jrd_ch.js:921	KEEP	different ending (e)
+thd_tho_7	B.x1	jrd_thd.js:106	KEEP	different ending (e)
+thd_tho_8	B.x1	jrd_thd.js:141	KEEP	different go effect
+thd_tho_9	B.x1	jrd_thd.js:172	KEEP	different ending (e) + different go effect
+thd_tho_11	B.x1	jrd_thd.js:236	FOLD	same story result (e/f/go/need/if/sc equal)
+thd_sach_6	B.x1	jrd_thd.js:320	KEEP	different ending (e) + different go effect
+thd_sach_8	B.x1	jrd_thd.js:390	KEEP	different ending (e)
+thd_sach_9	B.x1	jrd_thd.js:426	KEEP	different ending (e)
+thd_sach_10	B.c2	jrd_thd.js:449	KEEP	different go effect
+thd_sach_10	B.t1	jrd_thd.js:453	KEEP	different flag (f)
+thd_sach_10	B.x1	jrd_thd.js:457	KEEP	different ending (e) + different if gate
+thd_sach_11	B.c2	jrd_thd.js:228	KEEP	different flag (f) + different Lợi thế (sc)
+thd_sach_11	B.x1	jrd_thd.js:488	KEEP	different ending (e)
+thd_tro_9	B.x1	jrd_thd.js:660	KEEP	different ending (e)
+thd_hoc_7	B.x1	j67.js:1227	KEEP	different ending (e)
+cnv_ban_9	B.x1	jrd_cnv.js:503	KEEP	different ending (e)
+cnv_ma_10	B.s1	jrd_cnv.js:1122	KEEP	different flag (f) + different Lợi thế (sc)
+ke14	B.x1	jend14.js:163	KEEP	different ending (e) + different need
+bd_hoa	B.x1	jorigins.js:51	KEEP	different ending (e)
+bd_ngua	B.x1	jorigins.js:78	KEEP	different ending (e)
+bd_tuc	B.x1	jorigins.js:105	KEEP	different ending (e)
+bd_hoang	B.x1	jorigins.js:132	KEEP	different ending (e)

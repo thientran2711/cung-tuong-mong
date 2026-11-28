@@ -38,14 +38,42 @@ Notes for the reviewer:
 - 7 / 891 hồi cannot rise on the rough audit scale with any drop (12 composed sets FLAT): the steps still rise 1/2/3; batch 2 (BAL retune) can look at them.
 - dev/test/rdc-shots.js shows the card behind the «!» pile on some runs (shot timing; I patched a copy outside git to reopen the card before the shot).
 
-## BATCH 3 — MERGE (next)
-Scope check: 127 road beats marked MERGE in the v2 column (+24 KEEP-CHOICE stay), 9 static events, section B/C rows (B18, B19, B34, B39, C41, C45, C46, C48, C51, C53, C57 sickServant). Rule I will apply (law 2 «same kind of result»): fold only when the two ways have the same story result too — same ending (e), same flags (f/ff), same go effect, same need/if; a pair that differs there is a different result (e.g. j67.js:843 hạc vũ → ending win vs bộ kinh → win2) → reclassified KEEP with the reason, listed. B/C rows that DOOR-ONETAP (LIVE row 41) already made one tap are checked on LIVE and marked done, not redone. Old saves: om on each folded beat, applied through the same rdcOm (versioned).
+## BATCH 3 — MERGE (part 1 DONE by E-TIER-B13b: road beats; part 2 = static events + B/C rows, NOT done)
+depth 2 · START_CTX ≈ 5 % (1M window; get_session read 0, own estimate) · E-TIER-B13b session_01DgYSWphf5wCwrvpkrxZcmq, child of FOREMAN E C10
+PRIORITY #1 CHECK ('merge look-alike|om3|best fit|rdcOm'): OD 27/11 ~00:46Z–~01:07Z read verbatim (same-result merge; ~01:00Z/~01:03Z merged button = one odds word, auto best fit, result names the real cause) | main LIVE aecbc267: no om3 / rdAlt | review/e-tier-b13 6738c302 = batch 1 (rdcOm v1) — reused and extended | claims: E-TIER-B13-RV reviews batch 1 (not touched).
+KIT CHECK: no UI part added or changed (data / rules only; the j67 story card shows one way fewer).
+Commits on review/e-tier-b13 (new commits only, on top of 6738c302): 6edb1426 (folds + engine + build) · 5ad3b22e (gate + proof).
 
-## Handover — ROLLOVER (context 34 % ≥ START_CTX 4 % + 25 %, 28/11 ~10:00Z); successor = E-TIER-B13b, opened by FOREMAN E (never by the worker)
-State: batch 1 DONE + pushed (review/e-tier-b13 6738c302, RV READY sent to C10). Batch 3 NOT started (no code).
-Successor does batch 3 on the SAME branch review/e-tier-b13 (fetch it, sparse worktree under /home/user/wt; never rebase/force):
-1. Rerun the BEFORE audit on 6738c302: node regdump.js <root> reg.json && node classify.js reg.json <root> arc.tsv (scripts: dev/handover/reports/tier-audit/ on the handover branch); MERGE rows with v2 column «MERGE» = tier-audit/arc.tsv col 10 (127 road rows = fewer unique beats; many repeat per instance). A dump helper for the option story keys of every MERGE row is in the report plan (mdump.js idea: ARC67[id] path → each option's e / f / ff / go / need / if).
-2. Fold rule (above, §BATCH 3): fold only same story result (same e / f / ff / go / need / if); otherwise KEEP with reason. Remove the option from the beat's o:[…] in jrd_*.js / j67.js / jend14 / jorigins AND the same index from its BAL row (BAL.road.fx["<road>_<n>"][beat] in jbalroad.js, BAL.arc.fx[arc][beat] in jbalarc.js); add om:"<digits>" + a version to the beat; extend jroadc.js rdcOm so a beat's om applies when its version > S.rcT (batch 1 = 1, batch 3 = 2) — S.rcT then = 2.
-3. Static events (static.tsv 9 look-alike) + B/C rows: check LIVE first — DOOR-ONETAP (row 41, LIVE) may already have made a row one tap; mark those done. B/C rows touch PEND.prep (j75.js:107), PEND.night1 (j8.js:350 + wrappers), kc2Sel (jkc2.js:528), pmLad (jpma.js:422), FV7 newyear (j71), vlget/vlnvp (jveil.js:132/149), sickServant (j68e.js:24), jlooks.js:146 petty acts, j2.js:48/182 fertility, Hoàng tự care.
-4. Proof as batch 1: classify before/after (MERGE in scope → 0), dev/measure/tier-b13-same.py (only listed beats change), tier-b13-oldsave.js extended with one folded beat, quickcheck (run coregates.sh and quickcheck.js separately: the whole quickcheck.sh needs > 30 min here), time-spill, kit-std-scan, shots via a copy of dev/test/rdc-shots.js that reopens the card before the shot (ids road_chapter:slot, e.g. tt_ruong_6:s).
-Work files (this container only): /home/user/wt/etb13-work (before-arc.tsv, after-arc.tsv, cmp.py, mdump.js, old.html, shots).
+Rule applied (law 2 «same kind of result», predecessor's §plan): fold only when the two look-alike ways also have the same STORY result — same ending e, flag f/ff, go effect (source + BAL g amounts), need/if, Lợi thế sc. Otherwise KEEP with the reason. Every decision: reports/e-tier-b13-b3-decisions.tsv (127 v2-MERGE road rows: 13 FOLD = 10 beats + 3 bd alias ids sharing the nc beat objects; 114 KEEP — e 51, e+go 15, f/f+… 21, go 7, go+sc 5, sc 7, need/if 7, pt_dang c1 go amounts differ).
+Folded (way removed from the beat AND its BAL row; om3 = old index → kept index on the beat):
+| hồi | kept ← folded | om3 | how |
+|---|---|---|---|
+| tt_oan_11 c2 | Khuyên cha chỉ nhận người ở lại lúc khó ← Không xen vào | 011 | sure, same cost; bigger gain kept |
+| tt_tranh_9 s1 | Thưa thật mọi chuyện ← Đáp đùa lại | 001 | best fit (odds Đức vs Tài) |
+| dtq_bien_11 c3 | Khuyên cha để huynh ở lại ← Xin Hoàng thượng phong huynh chức nhỏ | 010 | sure way kept (same cost/gain, the other only risk) |
+| nc_tuc_11 x1 / x2 (+ bd_tuc_11) | Quỳ xin … giữ phong tục cố hương ← Xin cho đọc tờ tạ ơn của sứ đoàn | 010 | best fit |
+| nc_vuong_7 s1 (+ bd_hoang_7) | Đếm lại bạc riêng ← Hỏi thương nhân {land} | 010 | identical BAL + flag |
+| bd_san_11 c1 | Báo ngay Thống lĩnh cấm quân ← Tự phi ngựa đến hỏi thẻ bài | 010 | best fit (bdA in jbalbd.js) |
+| td_song_9 x1 | Tên mới, sạch sẽ ← Họ cha, nhờ công trận | 001 | best fit |
+| ch_benh_10 c3 | Thưa cho ngài yên lòng ← Thưa thật | 001 | sure, same cost; bigger gain kept |
+| thd_tho_11 x1 | Xin chỉ danh ← Xin ban chữ cho trường làng của cha | 001 | best fit |
+Engine: jroad.js rdAlt — a folded way's text stays on the kept way (alt {n, rt, rf}), its odds in the BAL row (oa); kept odds = max of the two (her best fit, ~01:03Z), the result line names the folded method («<alt.n>. <its rt>») when that one fit her better (~01:00Z). Old saves: jroadc.js rdcOm versioned — S.rcT = tier version (1 batch 1 om, 2 batch 3 om3); a pledge / helper refusal on a removed way maps to its sibling once; new lives S.rcT = 2.
+### Proof (part 1)
+| check | result |
+|---|---|
+| audit BEFORE (6738c302) → AFTER (5ad3b22e), regdump + classify | 4889 sets · OK 2757 → 2767 · FLAT 1883 → 1886 · MERGE 151 → 138 · CAP 98 → 98; the 138 = 24 v2 KEEP-CHOICE + 114 KEEP (story result differs, listed in the tsv) |
+| only the listed beats change (dev/measure/tier-b13-same3.py, key id+path: the old tier-b13-same.py keys on file:line, which shifts when a line goes) | 4889 = 4889 sets, 0 missing / 0 extra, **13 changed = exactly the 13 folded ids** |
+| dev/test/tier-b13-b3.js (new) | ALL PASS: 12 beat checks (3 → 2 ways, om3), best fit td_song_9 x1 odds 25 → 65 and result names «Họ cha, nhờ công trận», old save S.rcT 1 pledge/refusal on removed way → sibling, maps once, 0 page errors |
+| tier-b13-oldsave.js vs LIVE aecbc267 (expects S.rcT 2 now) | ALL PASS |
+| one-core-guard | PASS (fails 0) |
+| time-spill-guard | PASS static + runtime |
+| NOT RUN yet (successor) | quickcheck.js, coregates.sh full, kit-std-scan, rdc-play, law-12 shots of 3 folded hồi |
+
+## Handover 2 — ROLLOVER (E-TIER-B13b, context ≈ 30 % ≥ START_CTX 5 % + 25 %, 28/11 ~11:00Z); successor E-TIER-B13c opened by FOREMAN E
+State: batch 3 part 1 (road beats) pushed review/e-tier-b13 5ad3b22e. Batch 3 NOT RV READY yet.
+Successor (same branch, new commits only, never rebase/force; base 5ad3b22e):
+1. Run the not-run proofs above for part 1 (quickcheck.js new vs LIVE, coregates.sh separately, kit-std-scan, rdc-play, shots of tt_tranh_9:s1, td_song_9:x1, nc_tuc_11:x1 — Fold 755×1000 + iPad 1180×820, looked 3×).
+2. Static events (static.tsv, 9 v2 MERGE) — my read (verify, then mark in the tsv): KEEP jkc.js hoa (already a ladder Ở nhà 0 / chỉ ngắm hoa Sức 10 / đánh đàn Sức 15 + round) · KEEP jkc.js:555 «Dâng <art>» vs «Để tài nghệ quyết định» (play vs the kit skip of the same mini-game) · KEEP jkc2 d_lu (3 different story results) · KEEP jkc3a c1 «Gom bạc chuộc» vs «Tự cải trang» and jkc3a c3-em «Gửi bạc nhà thế giao» vs «Tự dạy em đường tắt», jthaiy «Mời thái y» (bạc) vs «Sang Thái y viện» (Sức): bạc way + non-bạc way of the same tier = law 2 «a bạc road always has another road of matching tier» · jkc3a c3 «Đọc kỹ rồi giữ» vs «Đọc rồi đốt»: check BAL.arc.fx kc3 g amounts (tổ mẫu liking) — differ → KEEP · KEEP jworld2 gift (already big/mid/skip ladder) · FOLD candidate jkc2 d_thi «Làm bài khéo tay» + «Thêu một mảnh khăn» → one way, auto her better mini-game (~01:03Z), same as C41.
+3. B/C rows (B18, B19, B34, B39, C41, C45, C46, C48, C51, C53, C57 sickServant): check LIVE aecbc267 first (DOOR-ONETAP row 41 may have done some). Several are designs with NEW-KEY BAL.tier.* (C45 prep, B34 srvwork) and auto best-art picks (C41, C48, d_thi) — if a row needs a ruling (e.g. which art counts as «best»), ask the foreman, do not guess.
+4. Then proof list + «RV READY BIG review/e-tier-b13 <sha> (batch 3)».
+Work files (this container only): /home/user/wt/etb13-work (before/after-arc.tsv, mdump.js/json/txt, fold.js/json, balrow.js, tools/b3road.py, same3.py, old.html).
