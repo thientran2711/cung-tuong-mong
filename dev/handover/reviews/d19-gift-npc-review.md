@@ -49,3 +49,4 @@ Resolution done in **review/d19-gift-npc-rv-lc34 70ebe171** (lander: reuse it or
 Done; no successor needed. Worktrees: /home/user/wt/d19rv (cc856c9e), /home/user/wt/d19b3a (70ebe171), /home/user/wt/d19live; logs in /home/user/wt/d19rv-out.
 
 coop-e2e COOP_EXAM=1 (soft): running at verdict time; result appended below when done.
+- coop-e2e COOP_EXAM=1 on cc856c9e: **143/143 PASS** (Fold/iPad/solo no page errors; buổi median 15.5 s, 3 timeouts in the length stats only). The LIVE comparison run was not executed (dev/index.html not assembled in the LIVE worktree); not needed because the branch is green. LC34 lander confirmed (03:19Z): d19 cc856c9e taken into review/lc34-b3a de80b833, using the 70ebe171 resolution.
