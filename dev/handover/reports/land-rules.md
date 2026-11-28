@@ -104,3 +104,4 @@ REIGN-END 85791268 ⊂ LIVE (RV-184 confirmed) · D-MAID-ROAD 5f37b79a + row 37 
 - A killed quickcheck prints a fake «time-spill FAIL»; ignore it.
 - Handover push races: re-fetch + reset + re-append, retry.
 - Worktrees: /home/user/wt/lr2e (7d7c6886 = LIVE), lr2f (8a924612), ho (handover sparse). Logs /home/user/wt/logs. Tools /home/user/wt/lrtools.
+- (28/11 12:40Z) TMK-WARN-5 (session_01Rc5AsMR1Ws2TjxLNEmuiP7) review/tmk-warn-r4 **39dc6cae** (RV READY at RV-189): pre-check FF on 7d7c6886, 0 deletions, MODGATE 0, syntax 0, one-core PASS, kit-std gate-mode X01 0 (iPad 2/2, Fold 1/1, totals 3 = LIVE), «Nhận bạc» Mất once Fold+iPad — BUT it commits 2 shots review-sheets/tmk-warn-5/wit_{fold,ipad}.jpg → build_site/quickcheck img-allowlist FAIL → sent back (worker + RV-189 told). review/lr2-tmk5 c8204a42 is INVALID (built on the failed build); redo on the new sha.
