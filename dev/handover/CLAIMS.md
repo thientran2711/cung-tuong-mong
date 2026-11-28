@@ -744,3 +744,4 @@ LIFE flight2-s18f Fold greedy seed 2026112570 (LIVE 18003079 + harness 795f87ec)
 ILLNESS-CURE r4 | review/illness-cure | session_01PEhRbtbBbshrnnUWtz5oyX | RUNNING | 2026-11-28T05:29Z (Foreman C 4-1-1-1; successor of 01PEhRbxGXnzfsq379bwXJWA)
 E-GAIN4-RV BIG review (opus) of review/e-gain4 2e5a4006 (+ merge onto LIVE f7ea14b7 → review/e-gain4-rv-m) | briefs/E-GAIN4-RV.md | session_01DgYSWoUKNUCW56nNphgiiR (Foreman E C9) | RUNNING | 28/11 05:32Z
 E-TITLES3-LRM5 (opus) re-merge review/titles-daycard-lrm4-rv db036137 onto LIVE 5ad52416 → review/titles-daycard-lrm5 | briefs/E-TITLES3-LRM5.md | session_01DgYSWnLKPLcUZXYzT1Ggyv (Foreman E C9) | RUNNING | 28/11 05:54Z
+LIFE flight2-s20e iPad greedy seed 2026112571 (LIVE 5ad52416 + harness 795f87ec) | review/flight2-s20 | session_01UV1SzmJHZJCos5yepcVo5k (s20 #2, Foreman F ROOT7 c6) | CLAIMED | 28/11 06:06Z
