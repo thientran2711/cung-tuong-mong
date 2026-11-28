@@ -165,6 +165,10 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 /* reviewer r1: with the §70 strip, strip | card side by side on landscape screens. K-PICK-GO-REACH (KK61): the confirm sticks to the bottom
    of the dialog's scroller while the picker is in view (child of .kipw, so the sticky can rise over the grid + detail) */
 .kipw>.kipgo{position:sticky;bottom:0;z-index:2}
+/* K-PICK-TOP (rv R6 FAIL 2, law 11 «nothing covers the confirm»): the sticky confirm + §23 pager stand above EVERY chip / badge of the pick box —
+   each other part of the box (tile grid, detail card, other option cards) is its own stacking context, so a chip's z-index (kitItem grade chip
+   .kgchip-fr z3, stack / lock badges …) stays inside it and never paints over «Dâng / Tặng / Chọn» or ‹ trang N/M › */
+.kipw>:not(.kipgo):not(.kippg),#modal .opts.kiphas>:not(.kipw):not(.kscue){isolation:isolate}
 .kipw:has(>.kipgo)>.kippg{bottom:calc(var(--kipgoh,44px) + 2px)}/* K-PICK-PAGER-GO (KK62): pager sticks right above the sticky confirm */
 #modal .opts.kiphas>.kscue:not(.sib){grid-column:1/-1}/* the box's scroll cue spans the whole pick box like .kipw (in the grid box it took one column); its height above the sticky confirm + pager = §56.34 K-CUE-FOOT kscFoot */
 /* kv3:.kv2 */:where(.kv2) .kipd.kipd2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:10px}:where(.kv2) .kipd2>.kidet{grid-column:1;grid-row:1/span 2}:where(.kv2) .kipd2>.kipcard{grid-column:2}
