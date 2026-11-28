@@ -27,7 +27,7 @@ function start(){
      entering-the-palace band (consort / palace-maid road) + her full-body figure in the person column, the text beside */
   pushModal({t:"Nhập cung",stage:[S],headArt:{src:(o.k==="cnv"||(typeof isSrv==="function"&&isSrv()))?"img/ev-nhap-cung-cn.webp":"img/ev-nhap-cung.webp",label:"Nhập cung"},
    h:`<p>${S.name}, ${S.age} tuổi, ${o.n}. ${o.t} Hôm nay ngươi được đưa vào cung.</p>
-   ${kitRows([["Phong",RANKS[S.rank].n,"t"],["Theo hầu",typeof cmRow==="function"?cmRow():`Cung nữ ${S.maid.name} (từ nhà)`,"t"],["Hoàng thượng",`niên hiệu ${empEra()}, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}`,"t"],
+   ${kitRows([["Phong",meRankN(),"t"],["Theo hầu",typeof cmRow==="function"?cmRow():`Cung nữ ${S.maid.name} (từ nhà)`,"t"],["Hoàng thượng",`niên hiệu ${empEra()}, ${E.age} tuổi: ${E.traits.map(t=>ETRAITS[t][0]).join(", ")}`,"t"],
     ...(S.ps?[["Hậu cung",psOpenText(),"t"]]:[]),["Tuyến truyện",`${s.t}. ${s.goal}${o.k==="td"?` Kẻ vu cho cha ngươi là ${S.foeDad}; con gái hắn, ${S.foe}, đang ở trong cung.`:""}`,"t"]])}
    <p class="past">Mỗi tháng ba tuần; mỗi tuần bốn buổi (sáng, trưa, chiều, tối), mỗi buổi ${BAL.time.khac} khắc. Mở Bản đồ để đi gặp người, chạm vào người để nói chuyện hay ra tay.</p>`});
   flip();newLots();deal();render();
@@ -207,7 +207,7 @@ function talk(oi){if(popIdx==null||!S.visit||S.visit.talked===true||S.dead||Q.le
 
 /* arts */
 function addArt(k,g){const a=ARTS.find(x=>x.k===k);if(!a)return;crsPush(S.arts,S.artp,k,g,l=>{const f={[a.st]:BAL.art.stUp};if(BAL.art.danh[l])f.danh=BAL.art.danh[l];apply(f);
-   log(`<span class="g">${a.n} lên bậc ${l} · ${artNm(l)}.</span> ${fmt(f)}${l===3?" Cả cung nghe danh.":l===5?" Tiếng tăm vang khắp kinh thành.":""}`)})}
+   log(`<span class="g">${a.n} lên bậc ${l} · ${artNm(l)}.</span> ${fmt(f)}${l===3?` ${typeof placeW==="function"&&placeW("fame3")||"Cả cung nghe danh."}`:l===5?" Tiếng tăm vang khắp kinh thành.":""}`)})}
 function lesson(k){const l=S.arts[k],cost=typeof tchFee==="function"?tchFee(k):artFee(l);if(!can(2)||artPts(S,k)>=100||S.bac<cost||S.dead||Q.length||S.mg)return;const open=()=>{render();S.mg={k,l};save();resumeMG()};/* KIT §13.9: charge on «Sẵn sàng» */
   const pay={suc:-BAL.artLes.tch,bac:-cost};/* one typed Sức cost for both paths (one-core: no second copy) */if(typeof kgDefer==="function")kgDefer({...pay,khac:2},open);else{apply(pay);spend(2);open()}}
 function resumeMG(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;log(`Học ${a.n}. Tiến bộ +${g}.`);addArt(m.k,g);render()})}

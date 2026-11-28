@@ -38,7 +38,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;const d=R
 /* stop the buổi from turning over under the result: wait a little longer */
 (function(){const r0=render;render=function(){const L=advLock;if(!S||S.dead||Q.length||S.mg||used<BAL.time.khac||L)return r0.apply(this,arguments);advLock=true;const ret=(function(){const a=advLock;advLock=true;return r0.apply(this,arguments)}).apply(this,arguments);setTimeout(()=>{advLock=false;if(used>=BAL.time.khac&&!Q.length&&S&&!S.dead&&!S.mg)nextBuoi()},2600);return ret}})();
 /* Xuất gia asks first */
-function xgConfirm(go){Q.unshift({act:1,t:"Xuất gia?",h:"<p>Cạo tóc đi tu là <b>kết thúc kiếp này</b>. Không quay lại được.</p>",opts:[{n:"Xuất gia, kết thúc kiếp này",fx:{},x:"kết thúc kiếp này",go},{n:"Thôi, ở lại",fx:{}}]});showModal()}
+/* xgConfirm («Xuất gia?» confirm) removed: owner 24/11 ~07:25Z — choosing to leave ends the life at once, no confirm */
 /* no faking illness from lãnh cung; no deck card that cannot help */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(S&&S.out)deck=deck.filter(a=>a.n!=="Giả bệnh")}})();
 /* map tiles: every disabled tile says why */
@@ -80,7 +80,7 @@ const LACK={musk:t=>!t.preg||t.hidden?"nàng không có thai (ngươi biết)":"
 /* the ghen of a rival is hidden until she knows her */
 (function(){const rc=rvCard;rvCard=function(v,i){let h=rc.apply(this,arguments);if(!knows(v))h=h.replace(/<div class="pgh">[\s\S]*?<\/div><\/div>/,`<div class="pgh"><span>Ghen: <span class="ef n">chưa rõ</span></span></div>`);return h}})();
 /* her portrait in the death dialog is labelled by her name and rank */
-(function(){const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);f.rw=(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n);return f}})();
+(function(){const p0=pMe;pMe=function(){const f=p0.apply(this,arguments);f.rw=(S.rank>=7?"Hoàng hậu":meRankN());return f}})();
 /* older eunuchs are not 'Tiểu': Lão X; servant names unique across all palaces */
 (function(){const a0=ageInit;ageInit=function(){const r=a0.apply(this,arguments);try{allServ().forEach(s=>{if(s.role!=="maid"&&s.age>=BAL.srvAge.old&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ")})}catch(e){}return r}})();
 (function(){const m0=mkServ;mkServ=function(role){let s=m0.apply(this,arguments);const taken=new Set([S&&S.maid&&S.maid.name].concat((rivals||[]).map(v=>v.maid&&v.maid.name),allServ().map(x=>x.name)));let n=2;const base=s.name;while(taken.has(s.name))s.name=base+" "+(n++);if(role!=="maid"&&s.age>=BAL.srvAge.old&&/^Tiểu /.test(s.name))s.name=s.name.replace(/^Tiểu /,"Lão ");return s}})();
