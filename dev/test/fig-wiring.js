@@ -4,7 +4,7 @@
    Thái hậu wears her own face's "th" robe when painted (never a shared fig-thaihau-*), colour variant v1/v2 only when her colour asks for it,
    and no Thái hậu robe on anyone who is not Thái hậu. Prints the a65 / Thái hậu files still missing (FOR C).
    usage: node dev/test/fig-wiring.js [out.json]   (serves the BUILT repo root; manifests from env FIGDIR or the CDN). Exit 1 on any FAIL. */
-const {chromium}=require('playwright');const fs=require('fs'),http=require('http'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),http=require('http'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const OUT=process.argv[2]||'';
 const FIGDIR=process.env.FIGDIR||'';const CDN='https://ctm-img.victoria-tntt.workers.dev/img/';
 const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.webp':'image/webp','.css':'text/css'};

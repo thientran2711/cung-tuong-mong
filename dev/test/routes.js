@@ -2,7 +2,7 @@
 // Needs zz-test.html at the repo root (dev/index.html + <meta charset> wrapper; not committed).
 // Shots: route entry (Hành sự · Lối riêng), a step card list (escape mid-prep), the blood-test dialog, the Mệnh truyện section, an ending card.
 // Prints page errors, horizontal overflow, cut card text per shot.
-const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const fs=require('fs');
 const ROOT=path.resolve(__dirname,'../..');const GAME='http://game.local/'+(process.env.GF||'zz-test.html');
 const MT={html:'text/html',js:'text/javascript',json:'application/json',webp:'image/webp',png:'image/png',jpg:'image/jpeg',mp3:'audio/mpeg',ogg:'audio/ogg',css:'text/css',svg:'image/svg+xml'};
 async function serve(c){await c.route('http://game.local/**',r=>{const u=decodeURIComponent(new URL(r.request().url()).pathname);const f=path.join(ROOT,u);if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});r.fulfill({status:200,body:fs.readFileSync(f),contentType:MT[f.split('.').pop()]||'application/octet-stream'})})}

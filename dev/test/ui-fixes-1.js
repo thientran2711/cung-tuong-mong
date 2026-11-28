@@ -1,7 +1,7 @@
 /* review/ui-fixes-1 repro + after shots. usage: node dev/test/ui-fixes-1.js <device> <outdir> <tag> [delayMs=5000]
    HOST mode, CDN pictures delayed by delayMs (slow network). Shots are taken ~700 ms after render (art still loading) and again after settle.
    Prints JSON: rail slot states, act-card picture states, header overflow, label-vs-sprite overlap. */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const D=require('./lib/device');const fs=require('fs');
 const [,,DEV='fold',OUT='/tmp/shots',TAG='x',DELAY='5000']=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const ctx=await D.newDeviceContext(b,DEV==='fold412'?'pixel':DEV);if(DEV==='fold412'){await ctx.close();}

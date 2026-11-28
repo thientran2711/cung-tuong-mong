@@ -5,7 +5,7 @@
    give the same text as with native lookbehind; (3) a page whose game script did not finish (window.__ctmBuilt removed) must show the
    failure card ("Cửa cung chưa mở được" + "Mở lại" + "Quét lối cũ rồi mở lại") instead of the skeleton.
    usage: node dev/test/webkit-boot.js <baseURL> [outdir]   (one browser, closed at the end; exit 1 on a failure) */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,OUT='/tmp']=process.argv;
 const OLD=()=>{const N=RegExp;const W=function RegExp(p,f){const s=p instanceof N?p.source:String(p);if(/\(\?<[=!]/.test(s))throw new SyntaxError("Invalid regular expression: invalid group specifier name");return new N(p,f)};
  W.prototype=N.prototype;Object.setPrototypeOf(W,N);window.RegExp=W};

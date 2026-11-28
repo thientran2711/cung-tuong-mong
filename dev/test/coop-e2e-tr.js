@@ -4,7 +4,7 @@
    Steps: create room, join by ?room=, play 3 weeks (both end → merged week), B leaves → A frozen ("Đợi bạn trở lại"),
    B comes back → resumes same week, B dies → normal rebirth choice → new person in the SAME world, single-player + old save still load.
    Hooks used (PROTOCOL.md / jcoop.js): window.COOP {code,seat,week,online,ended,frozen,waiting,on}, rivals entry coop:true id 901/902. */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');const {execSync}=require('child_process');
 const {serve,BASE}=require('./coop-serve.js');
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../shots/coop'));fs.mkdirSync(OUT,{recursive:true});
 const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';

@@ -1,7 +1,7 @@
 /* review/pcard-dislikes: per-person dislikes (jdis). usage: node dev/test/pcard-dislikes.js <build url> <outdir> [WxH@dpr,...]
    checks: every consort + Emperor has 1-2 dislikes; never overlap their likes; deterministic; old save loads and gets dislikes; spying / talking / "Hỏi sở thích"
    reveal them; unknown ones stay hidden; wrong gift fires (refuse or penalty); person card shows the row; no page errors / overflow; shots per size */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const R={};let fail=0;const ok=(c,m,o)=>{if(!c){fail++;o.push("FAIL "+m)}};
  for(const sz of (SIZES||"755x1000@2,1000x755@1,1180x820@2,1366x1024@2,844x390@1,390x844@1").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const out=[],errs=[];
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+dpr,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});

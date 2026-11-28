@@ -2,7 +2,7 @@
    family scan of every label the bottom-bar «Sang buổi» button (#next) can show (normal + every #next.kcwait cue: dqHeldBtn / dqRoomBtn + the co-op waits):
    at most 2 lines, nothing clipped, the button keeps its size; the held cue (jdayq) shows the SHORT label and puts the reason in the kit notice line (kitNotice id dqcue), dropped when it clears.
    usage: node dev/test/next-label-fit.js <index.html> [WxH,...]   exit 1 on FAIL */
-const {chromium}=require('playwright');const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const SRC=path.resolve(process.argv[2]);const SIZES=(process.argv[3]||'755x1000,1180x820').split(',');
 (async()=>{const b=await chromium.launch();let fails=0;const chk=(n,ok,v)=>{console.log((ok?'ok  ':'FAIL')+' '+n+' '+JSON.stringify(v));if(!ok)fails++};
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const p=await b.newPage({viewport:{width:W,height:H}});const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,140)));await p.route('**/assets.json',r=>r.fulfill({status:404,body:''}));
   await p.goto('file://'+SRC,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:240000});await p.waitForTimeout(1200);

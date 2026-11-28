@@ -5,7 +5,7 @@
    hl = legal exit (asks Thái hậu, then any legal exit card that opens); ad = quiet life; off = no route acts (control).
    careful=0: goes as soon as any escape card is open. Needs zz-test.html at the repo root.
    Prints per mode: lives, lives where «Lối riêng» opened, route starts, attempts, successes, caught, endings, counters (window.__rtN). */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const [,,MODE,ITER,OUT,CAREFUL]=process.argv;
 const MT={html:'text/html',js:'text/javascript',json:'application/json'};
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});

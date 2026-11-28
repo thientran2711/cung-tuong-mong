@@ -4,7 +4,7 @@
    ~09:20Z (PHÂN CUNG hook after the edict, thiện cảm of the 3 royals from the selection days, the kept girls too), MAIN 118 (a) the clock moves 3 tuần at the edict,
    ~09:35Z / ~09:50Z (Day-3 drama pool a–e, 1–2 per life), ~09:30Z + ~08:50Z + ~05:10Z (the scene layer plays on KIT §93 / §95 with no page error, the card under it comes back).
    usage: node dev/test/selx-days2.js [index.html]  (serves dev/ through a Playwright route; run python3 dev/build/assemble.py first) */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html';
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m,x)=>{if(!c){bad++;console.log('FAIL',m,x!==undefined?JSON.stringify(x).slice(0,700):'')}else console.log('ok',m)};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});

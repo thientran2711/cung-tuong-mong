@@ -17,7 +17,7 @@
    usage: node dev/test/dlg-dead-scan.js [--root <worktree>] [--dev fold,ipad] [--only a,b] [--out dir]   (exit 1 on any FAIL)
    Never uses .click() / dispatchEvent to PRESS a button: page.evaluate only opens the dialog (setup) and READS the screen. */
 'use strict';
-const { chromium } = require('playwright'); const fs = require('fs'); const path = require('path');
+const { chromium } = (require('./lib/bigpage'),require('playwright')); const fs = require('fs'); const path = require('path');
 const RT = require('./realtap.js');
 const arg = (k, d) => { const i = process.argv.indexOf('--' + k); return i > 0 ? process.argv[i + 1] : d };
 const ROOT = path.resolve(arg('root', path.resolve(__dirname, '..', '..')));

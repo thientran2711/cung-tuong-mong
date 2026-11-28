@@ -4,7 +4,7 @@
    CDN pictures are cached on disk (.tmp/cdn/) so runs measure the game, not the proxy; the first-run bulk download (x-ctm-load) is
    blocked (returning player). Prints: init/maid {tier:{body px, floor px, col "L,R", dlgL}} — body + floor must be equal for every face
    and col R < dlgL (panel never covers her); next/prev/pick/tab {handler, paint (tap→next frame), loaded (all visible pictures decoded)}. */
-const {chromium}=require('playwright');const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const sleep=t=>new Promise(r=>setTimeout(r,t));
 const [,,PURL,SZ,SHOT]=process.argv;
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});
  const [W,H]=SZ.split('x').map(Number);const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:W<1100,isMobile:W<1100,serviceWorkers:'block'});

@@ -4,7 +4,7 @@
    and the first act card (px), a result note inside the column (.pcn), the bottom result card (#rtoast) shown after the act.
    usage: node dev/test/person-dialog-restore.js <root dir of a BUILT site> <W>x<H>@dpr <outdir|-> [kinds]
    env NOIMG=1: do not load CDN pictures (fast scan, layout only); default loads them through curl (sandbox) for shots. Prints one JSON line per kind + a table. */
-const {chromium}=require('playwright');const fs=require('fs');const D=require('./lib/device');const {execFileSync}=require('child_process');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const D=require('./lib/device');const {execFileSync}=require('child_process');
 const [,,ROOT,SZ,OUT,KINDS]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const kinds=(KINDS||'stranger,consort,queen,maid,elder,serv,kid,ty,fallen,emp,th').split(',');const cache={};
 (async()=>{const srv=await D.serveRoot(ROOT);const b=await chromium.launch();

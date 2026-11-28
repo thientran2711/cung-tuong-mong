@@ -3,7 +3,7 @@
    word-by-word typing (box never reflows), tap = finish the line (cues all fire), next tap = next line, spotlight (speaker lit, others dim not black),
    focus shot (one figure big + others hidden + bg blurred), the speech box stays inside the layer, onDone cleans everything (no dim / focus class left), no page errors.
    usage: node dev/test/kit-dialogue.js <outdir> [WxH,...]   shots: <outdir>/kdv-<step>-<dev>.png */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const [,,OUT,SIZES]=process.argv;if(!OUT||(fs.existsSync(OUT)&&!fs.statSync(OUT).isDirectory())){console.error('usage: node dev/test/kit-dialogue.js <outdir> [WxH,...]  (<outdir> = a folder for shots, NOT index.html — the page is served from the checkout)');process.exit(2)}/* KK53: «index.html» as the 1st arg crashed with a Node EEXIST stack */
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');const [,,OUT,SIZES]=process.argv;if(!OUT||(fs.existsSync(OUT)&&!fs.statSync(OUT).isDirectory())){console.error('usage: node dev/test/kit-dialogue.js <outdir> [WxH,...]  (<outdir> = a folder for shots, NOT index.html — the page is served from the checkout)');process.exit(2)}/* KK53: «index.html» as the 1st arg crashed with a Node EEXIST stack */
 fs.mkdirSync(OUT,{recursive:true});
 const ROOT=path.resolve(__dirname,'../..');const MT={'.html':'text/html; charset=utf-8','.js':'application/javascript','.css':'text/css','.json':'application/json','.webp':'image/webp','.png':'image/png','.jpg':'image/jpeg','.svg':'image/svg+xml'};
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m)=>{if(!c){bad++;console.log('FAIL',m)}else console.log('ok',m)};

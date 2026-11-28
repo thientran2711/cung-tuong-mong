@@ -3,7 +3,7 @@
    RULE (law 10): the options are ALWAYS reachable on both devices, whatever the header / faces / text height. Per case: frame inside the screen, every option card in view OR the option list scrolls inside the frame and its first card is in view,
    a REAL tap on the LAST option fires it (after scrolling the list with a finger drag when needed). LAW 10 TEXT FIRST (MAIN 141): for the 2 / 7-line stories the text must read UNSCROLLED (the scene picture steps down / out first, kszTextFirst3). Family: faces 0/3 × text 2/7/14 lines × options 2/4/6, Fold 755x1000 + iPad 1180x820.
    usage: node dev/test/kit-faces-opts.js <index.html> [outdir]   Exit 1 on a FAIL. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const R=[];
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
