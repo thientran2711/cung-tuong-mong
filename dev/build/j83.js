@@ -110,7 +110,7 @@ function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w
  if(ans==="back"){if(typeof giveTo==="function")giveTo.out="back";return `${r.name} trả lại ${wn} cho ${NM(a)}. `}
  if(ans&&!["take","check"].includes(ans)){if(typeof giveTo==="function")giveTo.out="found";return ans}
  keepGain();invAdd(r,ent);if(a!==S)newsAdd(a,"gift",`${by} tặng ${rkName(r)} ${r.name} ${wn} tự tay làm.`);
- return `${by} tặng ${rkName(r)} ${r.name} ${wn}${ev.notes.length?" ("+ev.notes.join("; ")+")":""}: thiện cảm ${keepGain.d<0?"":"+"}${keepGain.d}. `}
+ return `${by} tặng ${rkName(r)} ${r.name} ${wn}${ev.notes.length?" ("+ev.notes.join("; ")+")":""}: thiện cảm ${affTxt(keepGain.d)}. `}
 (function(){const g0=giveTo;giveTo=function(a,r,ix){const e=a&&a.inv&&a.inv[ix];if(e&&e.wk)return wkGive(a,r,ix)||"";return g0.apply(this,arguments)}})();
 /* sell outside the palace: silver, risk of Danh if found out (same odds for every consort) */
 function wkSellVal(w){return 0}/* replaced by jecon (BAL.craftSell) */

@@ -342,7 +342,7 @@ function giveTo(a,r,ix){giveTo.out=null;const e=a.inv[ix];if(!e||e.h)return"";wi
  keepGain();invAdd(r,ent);if(ans!=="check"&&e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,BAL.eff.j8.evGiveTo);relAdd(a,r,BAL.eff.j8.giveTo);giveTo.out="caught";return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ. `}
  if(itm(e.k).sl&&(IT[e.k]||{}).rk>rkOf(r)&&(hasT(r,"Kiêu ngạo")||hasT(r,"Tham vọng")||roll(25)))wear(r,r.inv.length-1);
 giveTo.out="take";
- return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm ${keepGain.d<0?"":"+"}${keepGain.d}. `}
+ return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm ${affTxt(keepGain.d)}. `}
 function plantItem(a,t,ix){plantItem.out=null;const e=a.inv[ix];if(!e||e.h)return"";/* K-GIFT-OUT: plantItem.out = ok · caught */if(typeof ilUid==="function")ilUid(e);a.inv.splice(ix,1);e.w=0;a.schemes=(a.schemes||0)+1;
  if(!aRoll(oPlant(a,t),a)){/*evok: plant act (runAct deed)*/evA(t,a,BAL.eff.j8.evPlantItem);relAdd(a,t,BAL.eff.j8.plantItem);if(typeof ilGone==="function")ilGone(a,e,"evid");plantItem.out="caught";return `<span class="r">Kẻ lẻn vào cung ${NM(t)} cài ${iname(e)} bị bắt, khai ra ${NM(a)}.</span> ${NMc(t)} nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ. `}
  invAdd(t,{k:e.k,t:e.t,by:key(a),h:1,iu:e.iu});/* the same piece (item ledger jil) */plantItem.out="ok";return `${NMc(a)} lén cài ${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""} vào rương ${NM(t)}. `}
