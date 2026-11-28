@@ -42,8 +42,8 @@ function xgConfirm(go){Q.unshift({act:1,t:"Xuất gia?",h:"<p>Cạo tóc đi tu 
 /* no faking illness from lãnh cung; no deck card that cannot help */
 (function(){const d0=deal;deal=function(){d0.apply(this,arguments);if(S&&S.out)deck=deck.filter(a=>a.n!=="Giả bệnh")}})();
 /* map tiles: every disabled tile says why */
-(function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);const why=S.out?"đang ở lãnh cung":S.confined?`đang cấm túc (còn ${S.confined} tháng)`:"";if(why)h=h.replace(/<span class="mband">/g,`<span class="mband"><span class="mchip">${why}</span>`);
- h=h.replace(new RegExp(`(data-go="${S.place}"[^>]*>(?:(?!</button>).)*?<span class="mband">)`,"s"),`$1<span class="mchip">đang ở đây</span>`);return h}})();
+(function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);const why=mapSelfWhy();/* map-self-why: her own state only on HER tile (j27) */
+ h=h.replace(new RegExp(`(data-go="${S.place}"[^>]*>(?:(?!</button>).)*?<span class="mband">)`,"s"),`$1<span class="mchip">${why||"đang ở đây"}</span>`);return h}})();
 /* kids: acts on the card, and a guard over them (two-way: rivals harm kids, she can protect them) */
 function kidActs(k){if(!k.alive)return[];const t2=whyTime(2);return [pbtn(`data-kid="teach" data-kn="${k.name}"${capAt(BAL.btn.kidTeach)}`,"Dạy học",`${capW()} · tốn: ${BAL.btn.kidTeach.k} khắc · thành: Tài con +${4+Math.round(S.tai/20)}`,t2||(k.age<3?"con còn quá nhỏ":"")),
  pbtn(`data-kid="care" data-kn="${k.name}"${capAt(BAL.btn.kidCare,BAL.bacFee.kidCare)}`,"Chăm sóc",`${capW()} · tốn: ${BAL.btn.kidCare.k} khắc, Bạc -${BAL.bacFee.kidCare} · thành: Sức khỏe con +10`,t2||(S.bac<BAL.bacFee.kidCare?"thiếu bạc (cần "+BAL.bacFee.kidCare+")":k.hp>=100?"con đang khỏe":"")),

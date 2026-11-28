@@ -7,6 +7,7 @@
    (f) the left figure: the SAME size and the SAME position in every dialog of the same frame size (data-ksz) on one device.
    usage: node dev/test/dialog-fixed.js <url|-> <outdir> [WxH@dpr,...]   (shots go outside the repo). Exit 1 on any FAIL. */
 const path=require('path');const fs=require('fs');const {chromium}=require('playwright');
+const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
 const URL=process.argv[2]&&process.argv[2]!=='-'?process.argv[2]:'file://'+path.resolve(__dirname,'../../index.html');const OUT=process.argv[3]||'/tmp/dialog-fixed';
 const SIZES=(process.argv[4]||'755x1000@2,1180x820@2').split(',').map(s=>{const m=s.match(/(\d+)x(\d+)@(\d+)/);return{w:+m[1],h:+m[2],d:+m[3]}});
 fs.mkdirSync(OUT,{recursive:true});let bad=0;const chk=(n,c,x)=>{if(c){console.log('ok  ',n)}else{bad++;console.log('FAIL',n,JSON.stringify(x).slice(0,500))}};
@@ -17,7 +18,7 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
  const sealN=d.querySelectorAll(':scope>.kseal-ev').length,seal=d.querySelector(':scope>.kseal-ev');const D=R(d);const kph=d.querySelector('.kph');
  return{ksz:d.dataset.ksz||'',stage:d.classList.contains('kstage'),D,fig:fig?R(fig):null,tag:tag?R(tag):null,ev:ev?R(ev):null,kol:opts?(opts.dataset.kol||'')+(opts.dataset.kot||''):'',khand:!!(opts&&opts.classList.contains('khand')),oc,sealN,seal:seal?{...R(seal),c:seal.dataset.c}:null,kph:kph?R(kph):null,title:((d.querySelector('.kph')||{}).textContent||'').trim().slice(0,30)}})()`;
 (async()=>{const b=await chromium.launch();
- for(const z of SIZES){const tag=`${z.w}x${z.h}`;const ctx=await b.newContext({viewport:{width:z.w,height:z.h},deviceScaleFactor:z.d,serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
+ for(const z of SIZES){const tag=`${z.w}x${z.h}`;const ctx=await b.newContext({viewport:{width:z.w,height:z.h},deviceScaleFactor:z.d,serviceWorkers:'block'});await keepNotesSeen(ctx);const p=await ctx.newPage();p.setDefaultTimeout(0);
   const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,300)));
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof geS==='function',null,{timeout:0});await p.waitForTimeout(2500);
   await p.evaluate(async()=>{localStorage.removeItem('ctm-ge');const road='tt_co',k='tt';quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
