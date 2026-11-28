@@ -221,7 +221,11 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
    if(tag!=='start'){const wc=o=>o.p.evaluate(()=>window.__wFlat());
     const t0=Date.now();let dif=[];while(Date.now()-t0<8000){const wa=await wc(A),wb=await wc(B);dif=[...new Set(Object.keys(wa).concat(Object.keys(wb)))].filter(k=>!DERIVED.test(k)&&JSON.stringify(wa[k])!==JSON.stringify(wb[k])).map(k=>k+' A='+JSON.stringify(wa[k])+' B='+JSON.stringify(wb[k]));if(!dif.length)break;await sleep(500)}
     /* a number one seat moved after its own merge copy (same merged week on both): in-week play, the next merge carries it */
-    {const ma=await A.p.evaluate(()=>window.__wAtMerge||null),mb=await B.p.evaluate(()=>window.__wAtMerge||null);
+    {const ma=await A.p.evaluate(()=>window.__wAtMerge||null);let mb=await B.p.evaluate(()=>window.__wAtMerge||null);
+     /* the guest opened a fresh page after the merge (rejoin): her merge copy is gone; her world since the restore IS the merged one (she has not
+        played yet), so her current copy stands in for it: a path then passes only if the guest still holds the host's merge value and the HOST
+        alone moved a NUMBER after it (the same rule as below) */
+     if(ma&&ma.w&&(!mb||!mb.w||mb.wk!==ma.wk)&&/rejoin/.test(tag))mb={wk:ma.wk,w:await wc(B)};
      if(ma&&mb&&ma.w&&mb.w&&ma.wk===mb.wk&&ma.wk===(await C(A)).week){const wa=await wc(A),wb=await wc(B);const isN=v=>typeof v==='number'||v===undefined;
       const E=(x,y)=>JSON.stringify(x)===JSON.stringify(y);/* equal at the merge; then the GUEST alone moved it (her own play reaches the host at the next merge: level < 3 never relays her world writes) or the HOST moved a NUMBER (jcoophl: numbers wait for the merge); a host string / face / name still gates (jcoophl relays those at once) */
       const moved=k=>{if(!E(ma.w[k],mb.w[k]))return false;const H=[wa,ma],G=[wb,mb];/* A hosts in both seatings (SWAP only swaps the devices) */const hM=!E(H[0][k],H[1].w[k]),gM=!E(G[0][k],G[1].w[k]);return (gM&&!hM)||(hM&&!gM&&isN(H[0][k])&&isN(H[1].w[k]))};
