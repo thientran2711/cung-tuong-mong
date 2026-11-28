@@ -229,6 +229,32 @@ async function runHand(p, dev, name, rows) {
   rows.push({ dev, name, lifted, st, chose, verdict: !stale && chose ? 'ok' : 'FAIL', why: [stale ? 'stale ✓/✕ pair / lift plate on the new card (✓ dead)' : '', chose ? '' : 'new card not chosen by real taps'].filter(Boolean).join('; ') });
 }
 
+/* K-DH-LATER (E 6 lives on LIVE, KIT REQUEST; KK69): the REAL chain «Danh hiệu mới» → real choose «Đeo ngay» → bonus picker «Đeo «…»» → real choose «Để sau»
+   ×3 like her; the picker must close (or move on) — the old «danhhieu» case only tapped the notice's own «Lui». Tries title keys until one has ≥2 bonuses (the picker). */
+const CHAINS = { danhhieu_later: {} };
+async function runChain(p, dev, name, rows) {
+  const rt = RT.make(p, { dev, touch: true, shots: OUT }); await clean(p);
+  const mark = async (re, tag) => p.evaluate(([re, tag]) => { const R = new RegExp(re); const b = [...document.querySelectorAll('#modal .opts button[data-m], #modal button.kpk-b')].find(b => R.test(b.textContent.replace(/\s+/g, ' ').trim())); if (!b) return false; b.setAttribute('data-ddsw', tag); return true }, [re, tag]);
+  const title = () => p.evaluate(() => { const M = document.getElementById('modal'); if (!M || M.hidden) return ''; const h = M.querySelector('.dlg h2, .dlg .k3t, .dlg .kpt, .dlg [class*=title]'); return (h ? h.textContent : M.textContent).replace(/\s+/g, ' ').trim().slice(0, 60) });
+  let got = '';
+  for (let tries = 0; tries < 12 && !got; tries++) {
+    const k = await p.evaluate((n) => { const K = Object.keys(DH_CAT).filter(x => !(S.dh && S.dh[x] && S.dh[x].i >= 0)); const k = K[n]; if (!k) return ''; S.dh = S.dh || {}; S.dh[k] = { n: 1, i: 0, at: [''] }; Q.length = 0; dhNotice(k); showModal(); return k }, tries);
+    if (!k) break; await p.waitForTimeout(1200);
+    if (!await mark('^Đeo ngay', 'dw')) continue;
+    await rt.choose('[data-ddsw="dw"]', { screen: name, label: 'Đeo ngay' }); await p.waitForTimeout(1500);
+    if (await mark('^Để sau', 'dl')) got = k; else { await p.evaluate(() => { Q.length = 0; const M = document.getElementById('modal'); if (M) M.hidden = true }); }
+  }
+  if (!got) { rows.push({ dev, name, verdict: 'SKIP', why: 'no title with a bonus picker reached' }); return }
+  const t0 = await title(); const taps = []; let ended = false;
+  for (let i = 0; i < 3 && !ended; i++) {
+    if (!await mark('^Để sau', 'dl')) { ended = true; break }
+    await rt.choose('[data-ddsw="dl"]', { screen: name, label: 'Để sau #' + (i + 1) }); await p.waitForTimeout(2500);
+    const t = await title(); taps.push(t); ended = !t || t !== t0 }
+  const st = await p.evaluate(() => ({ q: Q.map(c => c && c.t).slice(0, 4), hidden: document.getElementById('modal').hidden }));
+  if (!ended) await p.screenshot({ path: path.join(OUT, `${dev}-${name}-fail.jpg`), type: 'jpeg', quality: 55 });
+  rows.push({ dev, name, key: got, t0, taps, st, verdict: ended ? 'ok' : 'FAIL', why: ended ? '' : '«Để sau» dead after 3 real chooses' });
+}
+
 /* NO-EFFECT-HOLD (MAIN 178 ruling): card A's option «Ngắm hoa một lát» changes nothing (result card «ta không được gì, cũng không mất gì»);
    the next card B must show at once — never held behind the result card's «Tiếp ▸». Control: A's option with a gain still holds (RESULT-FIRST). */
 const NOFX = {
@@ -300,9 +326,9 @@ async function runCase(p, dev, name, C, rows) {
     await p.goto('http://localhost:8817/index.html', { waitUntil: 'domcontentloaded' });
     await p.waitForFunction(() => typeof start === 'function' && typeof deser === 'function' && typeof kitNoticeOpen === 'function', null, { timeout: 240000 });
     await p.waitForTimeout(1500);
-    for (const [name, C] of Object.entries(Object.assign({}, CASES, { grid_bieuqua: PICKERS.grid_bieuqua }, NOFX, HANDS, RINGS))) {
+    for (const [name, C] of Object.entries(Object.assign({}, CASES, { grid_bieuqua: PICKERS.grid_bieuqua }, NOFX, HANDS, RINGS, CHAINS))) {
       if (ONLY && !ONLY.includes(name)) continue;
-      try { if (!p.__home || name === 'dongso' || p.__dirty) { await home(p); p.__home = 1; p.__dirty = 0 } if (name === 'dongso') p.__dirty = 1; if (name === 'grid_bieuqua') await runPicker(p, dev, name, rows); else if (NOFX[name]) await runNoFx(p, dev, name, rows); else if (RINGS[name]) await runRing(p, dev, name, rows); else if (HANDS[name]) await runHand(p, dev, name, rows); else await runCase(p, dev, name, C, rows) } catch (e) { rows.push({ dev, name, verdict: 'ERR', why: String(e.message).slice(0, 200) }) }
+      try { if (!p.__home || name === 'dongso' || p.__dirty) { await home(p); p.__home = 1; p.__dirty = 0 } if (name === 'dongso') p.__dirty = 1; if (name === 'grid_bieuqua') await runPicker(p, dev, name, rows); else if (NOFX[name]) await runNoFx(p, dev, name, rows); else if (RINGS[name]) await runRing(p, dev, name, rows); else if (HANDS[name]) await runHand(p, dev, name, rows); else if (CHAINS[name]) await runChain(p, dev, name, rows); else await runCase(p, dev, name, C, rows) } catch (e) { rows.push({ dev, name, verdict: 'ERR', why: String(e.message).slice(0, 200) }) }
       const r = rows[rows.length - 1]; if (r.verdict !== 'ok' && r.verdict !== 'SKIP') fails++;
       console.log(JSON.stringify(r));
     }
