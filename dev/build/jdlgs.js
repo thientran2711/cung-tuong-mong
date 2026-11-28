@@ -52,7 +52,7 @@ function dlgsFor(m){if(m.dlg)return m.dlg;if(m.__dlgk)return null;m.__dlgk=1;for
   if(DLGS.playing){/* the card stays hidden under the scene; it shows when the last line is read */if(M)M.hidden=true;return}
   /* the card's own gates run first (evGate / j95 actor gate / clash filter may drop or replace it): only a card that is really shown gets its scene */
   const r=s0.apply(this,arguments);try{const m=Q[0];if(!M||M.hidden||!m||!dlgsOn()||!S||S.dead)return r;const d=dlgsFor(m);
-   if(d&&!d.done){d.done=1;M.hidden=true;dlgsPlay(d,()=>{if(Q[0]===m){M.hidden=false;const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}else if(Q.length)showModal()})}}catch(e){console.error(e)}
+   if(d&&!d.done){d.done=1;M.hidden=true;dlgsPlay(d,()=>{if(Q[0]===m){M.hidden=false;/* jnolock (outer) judged the screen while the card hid under the scene: judge it now — every visible road greyed → the ONE rule redraws it with «Lui» (law 11, r3 jdeadcard family) */if(typeof kitDomDead==="function"&&m.opts&&!m.opts.some(c=>c&&(c.__nlAdd||c.kgx))&&!(typeof kitCancelIx==="function"&&kitCancelIx(m)>=0)&&kitDomDead()){showModal();return}const f=M.querySelector(".opt:not(:disabled),#mclose");if(f)f.focus({preventScroll:true})}else if(Q.length)showModal()})}}catch(e){console.error(e)}
   return r};window.showModal=showModal})();
 
 /* ---------- family adapters (each resolves its OWN cast: law 6b) ---------- */
