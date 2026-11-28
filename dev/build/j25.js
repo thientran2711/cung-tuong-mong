@@ -12,7 +12,11 @@ const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|
   if(a.n==="Khiêu khích"){a.risk=a.x;a.x=""}
   return a})}})();
 /* the talk line: cost in khắc, gains green, risks and failure red, needs as disabled reasons */
-optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=talkK(a);
+/* K-KHAC-COST (KK70, law 4): this line serves talk options AND deck cards (Hành sự, doors' members via jdoor/jone); a deck card costs cardCost (j2, what act() spends),
+   a talk option talkK. A deck card = a member of deck, or a copy that carries its khắc as a number in k (talk options keep k for the AOUT key). */
+function optK(a){try{if(a&&(typeof a.k==="number"||(typeof deck!=="undefined"&&Array.isArray(deck)&&deck.includes(a))))return cardCost(a)}catch(e){}return talkK(a)}
+window.optK=optK;
+optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=optK(a);
  if(a.k&&AOUT[a.k]){return actLineRaw(a.k,rolled?word(o):"",[`${tc} khắc`,fmt(a.c||{})].filter(Boolean).join(", "))}
  const xs0=String(a.x||"").split(" · ").filter(Boolean);const wt=xs0.filter(s=>/^chờ \d+ khắc$/.test(s)),xs=xs0.filter(s=>!wt.includes(s));const gain=xs.filter(s=>!RISKRE.test(s)),risk=xs.filter(s=>RISKRE.test(s)).concat(a.risk?[a.risk]:[]);
  return kitParse([rolled?word(o):"",`tốn: ${tc} khắc${a.c&&fmt(a.c)?", "+fmt(a.c):""}${wt.length?", "+wt.join(", "):""}`,[fmt(a.w||{}),...gain].filter(Boolean).length?"thành: "+[fmt(a.w||{}),...gain].filter(Boolean).join(", "):"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,failTxt(a))||(a.fail?"có hậu quả, xem kết quả":"không được gì")):"",risk.length?"hỏng: "+risk.join(", "):""].filter(Boolean).join(" · "))};
