@@ -1,0 +1,4 @@
+# E-S2 (E-S8 row) ES8-bd_san-lazy3-h — end-of-life review (robot as player: lazy, bot=quiet, iPad, bd origin / bd_san road)
+Seed 3492686679, harness f65d019b, unpinned LIVE pin=0 (build s 5fb13d60+ b 8af7b3429f38 throughout), real taps (jsClicks 0), started 01:49Z 28/11, ended ~05:35Z. Resumed once from ckpt at 02:20Z (buổi 51) after a container disk-full crash (no game fault), same build, no pin. 7 years (age 24), 937 buổi, 5756 taps, rank 0 whole life. Ending «Lãnh cung — Phát điên trong lãnh cung» (VALID, no exit pick; 35 boards left via result screen only, quit 0). 0 stuck, 0 dead buttons, 3 bug types.
+Scores: a 4 · b 2 (7 years at rank 0, the quiet persona never rose) · c 4 · d 4 · e 3 · f 3 · g 3 · h 5 · i 3. Replay: no.
+Bugs: SAVE STALE ×9 (stored save stopped following the live game, no setItem error); «Sang ngày mới» softlock ×4 (tapped 3× in one buổi, buổi does not turn; dialog queue Q=1: «Có người đến» / «Nghe đồn»).
