@@ -787,7 +787,7 @@ E-TIER-B13-RV (BIG review review/e-tier-b13 @6738c302 batch 1) | review/e-tier-b
 E-TIER-B13b (row 42 batch 3 MERGE, successor of E-TIER-B13) | review/e-tier-b13 (after 6738c302) | session_01DgYSWphf5wCwrvpkrxZcmq | ROLLED → B13c | 28/11 09:52Z (Foreman E C10)
 E-TIER-B13c (row 42 batch 3 rest, successor of E-TIER-B13b) | review/e-tier-b13 (after 5ad3b22e) | session_01DgYSWphk3eKShyjK8Smmnf | RUNNING | 28/11 10:12Z (Foreman E C11)
 Review of review/f-tdworks 4c976d25 (F-TDWORKS-RV, SMALL) | review/f-tdworks-rv | session_01UV1SzgqpyJ3h1hwnqA3BBz (sonnet, Foreman F ROOT 8 c1) | RUNNING | 28/11 10:18Z
-E-GAIN4C (re-merge e-gain4b d1afe230 onto LIVE aecbc267, FIX LIST reviews/e-gain4b-review.md) | review/e-gain4c | session_01DgYSWmbTSBmW1pv5dm9cfk | RUNNING | 28/11 10:30Z (Foreman E C11)
+E-GAIN4C (re-merge e-gain4b d1afe230 onto LIVE aecbc267, FIX LIST reviews/e-gain4b-review.md) | review/e-gain4c | session_01DgYSWmbTSBmW1pv5dm9cfk | ROLLED → E-GAIN4D | 28/11 10:30Z (Foreman E C11)
 B-ROW12-LEAVE r2 FIXER (rv 2Dw6kcWd FAIL list: 14 unwarned punish roads + law-1 her accusation/Xử tội prepare + NPC settlement + law-2 Nặng tier) | review/row12-leave-r2 from 4480ae6e | FOREMAN B ROOT3 child2 / worker session_01N1tNP4252yURGUqLCgK7NK | RUNNING | 28/11 10:23Z
 Robot life flight2-s20h iPad greedy seed 2026112575 on LIVE aecbc267 | review/flight2-s20 | session_01UV1SzmJHZJCos5yepcVo5k (s20 #2, Foreman F ROOT 8 c1) | RUNNING | 28/11 10:31Z
 E-TITLES-LRM6 (re-merge titles ed000505 onto LIVE aecbc267) | review/titles-daycard-lrm6-rv | session_01DgYSWp3B4Fsnu2qAfJPDdN | RUNNING | 28/11 11:08Z (Foreman E C11)
@@ -804,3 +804,4 @@ Robot life flight2-s2l Fold greedy seed 2026112578 on LIVE origin/main | review/
 Robot life flight2-s2k Fold cautious seed 2026112577 | — | session_01UV1SzgzrhdKkkkfVybpEZe | DONE (Ban hoa b1, VALID, 09b74f78) | 28/11 11:59Z
 B-ROW12 r3 FIXER (rv r2 FAIL 4 items, reports/row12-leave.md «## REVIEW r2») | review/row12-leave-r3 | session_01N1tNP4aRxWePPt3XzDdaaU (opus) | RUNNING | 28/11 12:08Z (Foreman B ROOT 3 child 3)
 E-TIER-B14 (row 42 law-11 group j7c/j68c/j71c/j72c/jworldc old 4 equal-value stances → 3 tiers) | review/e-tier-b14 | session_01DgYSWpXzA57rdEzNDHjVYQ | RUNNING | 28/11 12:15Z (Foreman E C11)
+E-GAIN4D (finish e-gain4c: merge LIVE 7d7c6886 + unrun gates + shots) | review/e-gain4c (after 012cb189) | session_01DgYSWnu1ts4by24nsYc7eM | RUNNING | 28/11 12:40Z (Foreman E C11)
