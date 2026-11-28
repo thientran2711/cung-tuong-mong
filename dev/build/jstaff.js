@@ -139,7 +139,9 @@ function talkLine(st){const warm=((st.af&&st.af.me)||0)>=30;
  return""}
 /* the elder talk gain (her thiện cảm + the acquaintance step + the palace news line) — ONE place: the elder «Hỏi chuyện» here and, on another
    house's named woman, the merged jsvt «Hỏi chuyện» / «Hỏi lén» when she does not refuse (review talk-others-people B1, law 16: no lost gain) */
-function elderTalkGain(st){st.af=st.af&&typeof st.af==="object"?st.af:{me:+st.af||0};st.af.me=(st.af.me||0)+BAL.eff.jstaff.meAct;try{if(typeof k61Meet==="function"&&k61St(st)<3)k61Meet(st,"trò chuyện",3)}catch(e){}return `${st.call}: ${talkLine(st)}`}
+/* RV-181 (one-core-bind, law 4): ONE reader of the elder talk gain — the gain itself (elderTalkGain) and the jsvt svtGainX button text */
+function elderMeAct(){return BAL.eff.jstaff.meAct}
+function elderTalkGain(st){st.af=st.af&&typeof st.af==="object"?st.af:{me:+st.af||0};st.af.me=(st.af.me||0)+elderMeAct();try{if(typeof k61Meet==="function"&&k61St(st)<3)k61Meet(st,"trò chuyện",3)}catch(e){}return `${st.call}: ${talkLine(st)}`}
 window.elderTalkGain=elderTalkGain;
 function cardHTML(st){const p=postOf(st.eid);const f=staffFace(st);
  const lines=[typeof tuoi==="function"?tuoi(st.age):"",`Thiện cảm <b>${(st.af&&st.af.me)||0}</b>`].filter(Boolean);
