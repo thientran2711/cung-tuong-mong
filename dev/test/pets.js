@@ -8,7 +8,7 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),serviceWorkers:'block',reducedMotion:'reduce',ignoreHTTPSErrors:true});
  await ctx.addInitScript(()=>{window.__nlInner=1;addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='#kroul,#kload,.krbox{display:none!important}';document.head.appendChild(s)})});
- const p=await ctx.newPage();p.setDefaultTimeout(60000);const errs=[],bad404=[];p.on('pageerror',e=>errs.push(e.message));
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(60000);const errs=[],bad404=[];p.on('pageerror',e=>errs.push(e.message));
  p.on('response',r=>{if(r.status()>=400)bad404.push(r.status()+' '+r.url().slice(-60))});
  const T0=Date.now();const shot=async n=>{console.error("shot",n,((Date.now()-T0)/1000).toFixed(0)+"s");await p.screenshot({path:`${OUT}/${TAG}-${n}.jpg`,type:'jpeg',quality:82})};
  const audit=n=>p.evaluate(n=>{const vw=innerWidth,bad=[];document.querySelectorAll('#panel *, #modal .dlg *, #rtoast *').forEach(e=>{const r=e.getBoundingClientRect();if(!r.width||e.closest('.kcattabs,.pctabs'))return;
@@ -46,7 +46,7 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
  /* event cards */
  await clearQ();await p.evaluate(()=>{petCard("tsbPetGift",{src:"emp",t:"thienma"},"Ngự ban")});await p.waitForTimeout(900);await shot('09-card-ngu-ban');A.push(await audit('card-emp'));
  await clearQ();await p.evaluate(()=>{petCard("tsbPetHunt",{ts:["camke","cuuvi"]},"Thu săn")});await p.waitForTimeout(900);await shot('10-card-thu-san');A.push(await audit('card-hunt'));
- await p.evaluate(()=>{const b=document.querySelector('#modal .opts button[data-m="1"]');if(b)b.click()});await p.waitForTimeout(900);await shot('11-thu-san-result');
+ await p.evaluate(()=>{const b=__kopts().find(x=>x.dataset.m==='1')||__kopts()[1];if(b)__koptGo(b)});await p.waitForTimeout(900);await shot('11-thu-san-result');
  await clearQ();await p.evaluate(()=>{petCard("tsbPetW",{i:3},"Thú nuôi biếng ăn")});await p.waitForTimeout(900);await shot('12-card-bieng-an');A.push(await audit('card-w'));
  /* đỡ mạng: Sức 0 at the end of the week */
  await clearQ();const res=await p.evaluate(()=>{const n0=S.pets.length;S.pets.forEach(P=>{if(petT(P).tr===4)P.stg=3});/* Ngự tứ saves a life only as Linh thú */S.suc=0;rivalsTurn();return{dead:S.dead,suc:S.suc,n0,n1:S.pets.length,has:S.pets.some(x=>x.t==='bachloc')}});

@@ -14,7 +14,7 @@ const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const DCL={waitUntil:'domcontentloaded'};
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
   await serve(ctx);await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}},[WURL,name==='host'&&process.env.THIN?+process.env.THIN:0]);/* THIN=<level>: the host asks for that thin room level */
-  const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
+  const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
     p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|navigator.vibrate/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms,polling:250});return true}catch(e){return false}}
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
@@ -25,7 +25,7 @@ const shot=async(o,n)=>{try{await o.p.screenshot({path:`${OUT}/${n}.png`,timeout
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/coop-clear.js').first(o,()=>{
    
    const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
-   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'}).catch(()=>'err');
+   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||(__koptsOn(m,':not([data-kcp])')[0]||null)||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){__koptGo(b);return'x'}return'stuck'}).catch(()=>'err');
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 const K=o=>o.p.evaluate(()=>({k:COOPW.tm.myKey(),rk:COOPW.tm.roomKey(),v:COOPW.tm.view(),bend:COOPW.bend,pend:COOPW.pend,pb:!!COOPW.pendBuoi,Q:Q.length,mg:!!S.mg,next:document.getElementById('next').textContent,chip:(document.getElementById('kctm')||{}).textContent||'',chipOn:!!(document.getElementById('kctm')&&!document.getElementById('kctm').hidden)}));
@@ -105,7 +105,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   ok(await until(B,()=>Q.length===1&&Q[0].t==='Việc thử',null,15000),'4: B: the info dialog was read for her, the choice is still open',await K(B));
   await sleep(2500);const b1=await B.p.evaluate(()=>({q:Q.length,t:Q[0]&&Q[0].t,pick:__pick,pend:COOPW.pend,week:COOP.state.week}));
   ok(b1.q===1&&b1.t==='Việc thử'&&b1.pick===0&&!b1.pend&&b1.week===w0,'4: no choice made for her, her day waits',b1);
-  await B.p.evaluate(()=>{const b=[...document.querySelectorAll('#modal .opts button')].find(x=>/Nhận lời/.test(x.textContent));b.click()});
+  await B.p.evaluate(()=>{const b=__kopts().find(x=>/Nhận lời/.test(__koptText(x)));__koptGo(b)});
   const t1=Date.now();let merged=false;while(Date.now()-t1<45000){await clear(A);await clear(B);if(await A.p.evaluate(w=>COOP.state.week>w,w0)&&await B.p.evaluate(w=>COOP.state.week>w,w0)){merged=true;break}await sleep(400)}
   ok(merged,'4: after her choice her day ends by itself and the week merges');
   ok(await B.p.evaluate(()=>__pick)===1,'4: the choice ran once',await B.p.evaluate(()=>__pick))}

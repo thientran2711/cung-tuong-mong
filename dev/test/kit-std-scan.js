@@ -107,7 +107,7 @@ const SCAN=function(rootSel){
  for(const [W,H] of SZ){const dev=W<H?'fold':'ipad';const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await keepNotesSeen(ctx);
   await ctx.addInitScript(()=>{window.__bot=1;let s=777;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
-  const p=await ctx.newPage();p.setDefaultTimeout(180000);const errs=[];p.on('pageerror',e=>{if(!/Unexpected token '<'/.test(String(e)))errs.push(String(e).slice(0,160))});
+  const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(180000);const errs=[];p.on('pageerror',e=>{if(!/Unexpected token '<'/.test(String(e)))errs.push(String(e).slice(0,160))});
   await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:180000});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof pEmp==='function',null,{timeout:180000});
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}const m=document.getElementById('modal');if(m)m.hidden=true;render()});
@@ -129,7 +129,7 @@ const SCAN=function(rootSel){
   /* a real act → result card */
   if(ONLY.includes('result')){await clear();await p.evaluate(()=>{const e=document.querySelector('#tabs [data-tab="act"]');if(e)e.click()});await p.waitForTimeout(1200);await clear();
    const did=await p.evaluate(()=>{const b=[...document.querySelectorAll('#panel button.ka:not(.kdis)')].find(x=>x.getClientRects().length&&!x.querySelector('.kodds'))||[...document.querySelectorAll('#panel button.ka:not(.kdis)')].find(x=>x.getClientRects().length);if(!b)return false;b.click();return true});
-   if(did){await p.waitForTimeout(900);await p.evaluate(()=>{Q.length=Q.length;const m=document.getElementById('modal');if(m&&!m.hidden&&m.querySelector('.opts')){const o=m.querySelector('.opts button');if(o)o.click()}});await p.waitForTimeout(1600);await scan('result','#rtoast,#modal .dlg');await shot('result')}}
+   if(did){await p.waitForTimeout(900);await p.evaluate(()=>{Q.length=Q.length;const m=document.getElementById('modal');if(m&&!m.hidden){const o=__koptsOn(m)[0];if(o)__koptGo(o)}});await p.waitForTimeout(1600);if(!await p.evaluate(()=>!!document.querySelector('#rtoast.karesult')))probes.push(dev+' result: no #rtoast.karesult after the act (scene not reached)');await scan('result','#rtoast,#modal .dlg');await shot('result')}}
   /* notice chip */
   if(ONLY.includes('notice')){await clear();await p.evaluate(()=>{if(typeof kitNotice==='function')kitNotice({id:'kstd',line:'Có tin báo thử',text:'Có tin báo thử: một tin ngắn để kiểm bộ báo tin.',kind:'info'})});await p.waitForTimeout(900);await scan('notice:chip','#kntchip,header.hud #kntbox');await p.evaluate(()=>{const b=document.getElementById('kntbox');if(b)b.click()});await p.waitForTimeout(900);await scan('notice:panel','#modal .dlg');await shot('notice')}
   /* people ring → focus → real act plaques (kitRing over kitPick, KIT §104) */

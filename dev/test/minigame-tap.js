@@ -3,7 +3,7 @@
    Two paths: (1) Tài nghệ › Tự học (lesson button → "làm ra tác phẩm gì?" → game), (2) the Hành sự deck card "Tự học …" (j83 wkDeckCard).
    usage: node dev/test/minigame-tap.js <url> */
 const {chromium}=require('playwright');const [,,URL]=process.argv;
-(async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,hasTouch:true,isMobile:true,serviceWorkers:'block'})).newPage();
+(async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},deviceScaleFactor:2,hasTouch:true,isMobile:true,serviceWorkers:'block'})).newPage();await require('./lib/kopts').install(p);
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(0);
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
  /* count result cards: every time #rtoast is turned on */
@@ -21,7 +21,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  /* 1. lesson button */
  { const L=R.lesson;await reset('art');L.btn=await p.evaluate(()=>!!document.querySelector('[data-learn][data-mode="self"]:not([disabled])'));L.before=await snap();
    await p.evaluate(()=>{const b=document.querySelector('[data-learn][data-mode="self"]:not([disabled])');b.click();b.click()});await p.waitForTimeout(300);L.afterTaps=await snap();
-   await p.evaluate(()=>{const o=document.querySelector('#modal .opts button');if(o)o.click()});await p.waitForTimeout(900);L.intro=await snap();L.introBtns=await btns();
+   await p.evaluate(()=>{const o=__kopts()[0];if(o)__koptGo(o)});await p.waitForTimeout(900);L.intro=await snap();L.introBtns=await btns();
    await finish();L.after=await snap();
    L.ok=L.btn&&L.afterTaps.q===1&&!L.afterTaps.cards.length&&L.intro.suc===L.before.suc&&L.intro.bac===L.before.bac&&L.intro.used===L.before.used&&!L.intro.cards.length&&(L.intro.ov||L.intro.intro||L.intro.mg)
      &&L.after.suc<L.before.suc&&L.after.used>L.before.used&&L.after.cards.length===1&&!L.after.mg }

@@ -8,7 +8,7 @@
 const {chromium}=require('playwright');
 const [,,URL,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@1').split('@');const [W,H]=WH.split('x').map(Number);
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),hasTouch:W<1100,isMobile:W<1100,serviceWorkers:'block'});
- const p=await ctx.newPage();const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'load',timeout:0});await p.addStyleTag({content:'.modal.kload,#kload{display:none!important}'});
  await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof ORIGINS!=='undefined',null,{timeout:0});await p.waitForTimeout(2500);
  let fail=0;const ck=(n,ok,info)=>{if(!ok)fail++;console.log((ok?'ok   ':'FAIL ')+n+(info?' · '+JSON.stringify(info).slice(0,260):''))};
@@ -18,7 +18,7 @@ const [,,URL,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@1').split('@');const
    if(st==='in')break;await p.waitForTimeout(250)}
   await p.waitForTimeout(800)};
  const closeCards=async()=>{for(let i=0;i<25;i++){const n=await p.evaluate(()=>{const m=document.getElementById('modal');if(!m||m.hidden)return 0;
-     const ksp=(typeof Q!=='undefined'&&Q[0]&&Q[0].pid==='ksp');if(ksp)return -1;const bt=m.querySelector('.opts button:not([disabled]),button.kbtn:not([disabled]),button:not([disabled])');if(bt){bt.click();return 1}return 0});
+     const ksp=(typeof Q!=='undefined'&&Q[0]&&Q[0].pid==='ksp');if(ksp)return -1;const bt=(__koptsOn(m)[0]||null)||m.querySelector('button.kbtn:not([disabled]),button:not([disabled])');if(bt){__koptGo(bt);return 1}return 0});
    if(n<=0)break;await p.waitForTimeout(300)}};
  const state=()=>p.evaluate(()=>({kcf:document.querySelectorAll('.kmov.kcf').length,push:(window.__cfdbg||[]).filter(x=>/^push/.test(x)).length,
    ksp:(typeof Q!=='undefined'?Q:[]).some(e=>e&&e.pid==='ksp'),buoi:S.buoi||0,today:!!(typeof wk==='function'&&((S.nightWhy&&S.nightWhy.wk===wk())||S.nfF===wk())),tonight:S.tonight?(S.tonight==='me'?'me':'npc'):null,srv:typeof isSrv==='function'&&isSrv()}));

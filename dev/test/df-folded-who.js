@@ -6,11 +6,11 @@
 const {chromium}=require('playwright');const D=require('./lib/device');
 (async()=>{const devs=process.argv.slice(2).length?process.argv.slice(2):['fold','ipadAir'];const F=[];const srv=await D.serveRoot();
  const b=await chromium.launch({args:['--disable-dev-shm-usage'],proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});
- for(const dev of devs){const ctx=await D.newDeviceContext(b,dev);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+ for(const dev of devs){const ctx=await D.newDeviceContext(b,dev);const p=await ctx.newPage();await require('./lib/kopts').install(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   const g=await D.openHost(p,srv.url);await g.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:120000});await p.waitForTimeout(2000);
   await g.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});
   await g.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.known,null,{timeout:120000});await p.waitForTimeout(3000);
-  const clear=async()=>{for(let k=0;k<10;k++){const any=await g.evaluate(()=>{const M=document.getElementById('modal');if(M.hidden)return false;const c=document.getElementById('mclose');if(c){c.click();return true}const o=[...M.querySelectorAll('.opts button:not(:disabled)')];const x=o.find(y=>/Đi một mình|Bỏ qua|Đã hiểu/.test(y.textContent))||o[o.length-1];if(x){x.click();return true}return false});if(!any)break;await p.waitForTimeout(600)}};
+  const clear=async()=>{for(let k=0;k<10;k++){const any=await g.evaluate(()=>{const M=document.getElementById('modal');if(M.hidden)return false;const c=document.getElementById('mclose');if(c){c.click();return true}const o=__koptsOn(M);const x=o.find(y=>/Đi một mình|Bỏ qua|Đã hiểu/.test(__koptText(y)))||o[o.length-1];if(x){__koptGo(x);return true}return false});if(!any)break;await p.waitForTimeout(600)}};
   for(let k=0;k<4;k++){await g.evaluate(()=>{const x=[...document.querySelectorAll('button')].find(y=>/^Bỏ qua$/.test(y.textContent.trim())&&y.offsetParent);if(x)x.click()});await p.waitForTimeout(1000)}
   await g.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;S.out=false;try{k61Know(rivals.filter(v=>v.alive),"",true,3)}catch(e){}tab="act";used=0;render();goTo("vuon")});await p.waitForTimeout(800);await clear();await p.waitForTimeout(1500);await clear();
   const R=await g.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const out={};Q.length=0;showModal();used=0;render();await sleep(400);
@@ -25,7 +25,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');
    if(out.visFig){pushModal(card());showModal();await sleep(1200);const M=document.getElementById('modal');out.C={modalShown:!M.hidden,scene:!!(window.DF&&DF.F)};Q.length=0;try{if(DF.F)dfGone()}catch(e){}showModal();await sleep(300)}
    /* (B) fold her token as the «+N» overflow does (display:none) → centre modal */
    const t=tok();if(t)t.style.display='none';out.foldFig=dfHasFig(i);pushModal(card());showModal();await sleep(1200);const M=document.getElementById('modal');
-   out.B={modalShown:!M.hidden,opts:[...M.querySelectorAll('.opts button')].length,scene:!!(window.DF&&DF.F)};
+   out.B={modalShown:!M.hidden,opts:__kopts(M).length,scene:!!(window.DF&&DF.F)};
    return out});
   console.log(dev,JSON.stringify(R));
   if(R.A.length)F.push(`${dev} A: hidden token counted as figure ${R.A.join(',')}`);

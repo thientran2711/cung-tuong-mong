@@ -3,7 +3,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT,S
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'127.0.0.1,localhost'}}:{});let bad=0;const T=[];let retries=0;
  for(const wh of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=wh.split('x').map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot=1});
-  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+  const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto('file://'+require('path').resolve(SRC),{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kitPanel==='function'&&typeof KP_SEAL!=='undefined');await p.waitForTimeout(2500);
   await p.addStyleTag({content:'#dawn,.kroul,.kmbox,.kne,[class*=kmrew],.kmov,#kxcatch{display:none!important}'});
   await p.evaluate(()=>{document.getElementById('title').hidden=true;start();Q.length=0;document.getElementById('modal').hidden=true});

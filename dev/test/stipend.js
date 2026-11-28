@@ -6,7 +6,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const R=[];
  for(const sz of (SIZES||"755x1000@2,1000x755@2,1180x820@2,1366x1024@2,844x390@2").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);const errs=[];
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+dpr,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
-  const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+  const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(240000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
   await p.addStyleTag({content:'#kroul,.kroul{display:none!important}'});
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
@@ -28,7 +28,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const ev=await p.evaluate(()=>{const M=document.getElementById('modal');const d=M.querySelector('.dlg');const r=d.getBoundingClientRect();
    const ovf=[...M.querySelectorAll('*')].filter(e=>e.scrollWidth>e.clientWidth+2&&getComputedStyle(e).overflowX==='visible'&&e.clientWidth>0).length;
    return{shown:!M.hidden,mode:d.className,box:[Math.round(r.left),Math.round(r.top),Math.round(r.width),Math.round(r.height)],inView:r.left>=0&&r.right<=innerWidth+1&&r.top>=0&&r.bottom<=innerHeight+1,
-    hint:(M.querySelector('.kr-hint')||{}).textContent||"",opts:[...M.querySelectorAll('#mb .opts > *')].filter(x=>x.offsetParent).map(x=>x.textContent.trim().slice(0,60)),hscroll:document.documentElement.scrollWidth>innerWidth}});
+    hint:(M.querySelector('.kr-hint')||{}).textContent||"",opts:__kopts().filter(x=>__koptSeen(x)).map(x=>__koptText(x).slice(0,60)),hscroll:document.documentElement.scrollWidth>innerWidth}});
   /* choose "Đút bạc" → goods restored */
   const r2=await p.evaluate(()=>{if(!Q[0]||!Q[0].opts)return{noEvent:true,why:JSON.stringify(stipCauses(S,false).C.map(c=>c.k)),ally:stipAlly(S),sung:S.sung};const i=Q[0].opts.findIndex(o=>/^Lót tay/.test(o.n));const kem0=S.inv.filter(e=>/hàng kém/.test((IT[e.k]||{}).n||"")).length;S.bac=Math.max(S.bac,100);chooseM(i);
    const kem1=S.inv.filter(e=>/hàng kém/.test((IT[e.k]||{}).n||"")).length;return{kem0,kem1,tip:stipSt(S).tip===S.turn}});

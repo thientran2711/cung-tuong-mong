@@ -6,7 +6,7 @@ const {chromium}=require('playwright');
 const [,,URL,SZ,OUT,TAG,KINDS]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const kinds=(KINDS||'spill,last,night,rank,etq,sneak').split(',');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',serviceWorkers:'block'});
- const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await p.waitForTimeout(2500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
   Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}
@@ -33,7 +33,7 @@ const kinds=(KINDS||'spill,last,night,rank,etq,sneak').split(',');
    const dd=d.getBoundingClientRect();const out=[...M.querySelectorAll('.dlg *')].filter(vis).filter(e=>{const q=e.getBoundingClientRect();return q.width&&(q.left<dd.left-1||q.right>dd.right+1)}).map(e=>e.className).slice(0,5);
    const img=M.querySelector('.kdlgart img, .kplpic img');const o=M.querySelector('#mb .opts');
    return{title:document.getElementById('mt').textContent,dlg:r(d),pic:img?img.getAttribute('src'):null,picBox:r(img),sil:M.querySelectorAll('.kplsil').length,
-    optsCls:o?o.className:null,opts:[...M.querySelectorAll('#mb .opts > button')].map(x=>[x.innerText.replace(/\s+/g,' ').trim().slice(0,90),r(x)]),
+    optsCls:o?o.className:null,opts:__kopts().map(x=>[__koptText(x).slice(0,90),r(x)]),
     btn:[...M.querySelectorAll('.dlg > .kbtnrow button, .dlg #mclose, .dlg .mbtn')].filter(vis).map(x=>x.innerText.trim()),
     info:(M.querySelector('.kplinfo')||M.querySelector('#mb .kpmain')||{}).innerText,cut,scr,out,hovf:document.documentElement.scrollWidth>innerWidth+1,fits:dd.bottom<=innerHeight+1&&dd.top>=-1}}));
  }

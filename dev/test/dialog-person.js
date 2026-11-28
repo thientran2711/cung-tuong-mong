@@ -5,7 +5,7 @@ const {chromium}=require('playwright');
 const [,,URL,SZ,OUT,TAG,KINDS]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const kinds=(KINDS||'host,men,invite,th,ally2,pic').split(',');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',serviceWorkers:'block'});
- const p=await ctx.newPage();p.setDefaultTimeout(300000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(300000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await p.waitForTimeout(2500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render()});
  await p.waitForTimeout(1500);
@@ -27,7 +27,7 @@ const kinds=(KINDS||'host,men,invite,th,ally2,pic').split(',');
    const scr=[...M.querySelectorAll('*')].concat([d]).filter(e=>vis(e)&&e.scrollHeight>e.clientHeight+2&&/auto|scroll/.test(getComputedStyle(e).overflowY)).map(e=>e.id||e.className);
    const dd=d.getBoundingClientRect();const figs=[...M.querySelectorAll('.kesimg')].filter(vis).map(r);
    const outside=[...M.querySelectorAll('.kesf,.kpsn,.opt,#mclose')].filter(vis).filter(e=>{const q=e.getBoundingClientRect();const side=q.left<dd.left-1||q.right>dd.right+1;return e.classList.contains('opt')?side:side||q.bottom>dd.bottom+1||q.top<dd.top-1}).map(e=>e.className);
-   return{title:document.getElementById('mt').textContent,mode:d.className.replace(/\s+/g,' '),dlg:r(d),figs,body:r(M.querySelector('#mb .kpmain')||M.querySelector('#mb .kpb')),opts:r(M.querySelector('#mb .opts')),nopt:M.querySelectorAll('.opt').length,
+   return{title:document.getElementById('mt').textContent,mode:d.className.replace(/\s+/g,' '),dlg:r(d),figs,body:r(M.querySelector('#mb .kpmain')||M.querySelector('#mb .kpb')),opts:r(M.querySelector('#mb .opts')),nopt:__kopts(M,'.opt').length,
     lastOptReach:(()=>{const o=M.querySelector('#mb .opts');if(!o)return null;const t=o.scrollTop;o.scrollTop=1e5;const l=[...o.querySelectorAll('.opt')].pop();const ok=l?l.getBoundingClientRect().bottom<=o.getBoundingClientRect().bottom+2:true;o.scrollTop=t;return ok})(),figOfDlg:figs.length?+(Math.max(...figs.map(f=>f[3]))/dd.height).toFixed(2):0,cut,scr,outside,hovf:document.documentElement.scrollWidth>innerWidth+1}}));
  }
  console.log(JSON.stringify({TAG,res,errs}));await b.close()})().catch(e=>{console.error(e);process.exit(1)});

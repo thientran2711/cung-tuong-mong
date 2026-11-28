@@ -4,7 +4,7 @@
 const {chromium}=require('playwright');const [,,BASE,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const WANT={tranh:"ve",theu:"theu",bhoa:"hoa",tho:"tho",kinh:"kinh",khuc:"dan",the:"co",mua:"mua",ao:"may",mon:"banh",huong:"huong"};
 (async()=>{const px=process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'127.0.0.1,localhost'}:undefined;const b=await chromium.launch(px?{proxy:px}:{});
- const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+DPR,ignoreHTTPSErrors:true});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+ const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+DPR,ignoreHTTPSErrors:true});const p=await ctx.newPage();await require('./lib/kopts').install(p);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&document.getElementById('title'),null,{timeout:180000});await p.waitForTimeout(2500);
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;
   setInterval(()=>{document.querySelectorAll('#kroul,#kroulw,.kroul,#kload').forEach(r=>r.remove())},200);
@@ -21,11 +21,11 @@ const WANT={tranh:"ve",theu:"theu",bhoa:"hoa",tho:"tho",kinh:"kinh",khuc:"dan",t
    const pickT=(rid0&&open.find(t=>t.dataset.kwri===rid0))||open[open.length-1];const rid=pickT&&pickT.dataset.kwri;
    const res={t:m.t,x:!!document.querySelector("#modal .kph > .kit-x"),tiles:tiles.length,open:open.length,rid,pics:tiles.map(t=>{const i=t.querySelector("img");return i?i.getAttribute("src"):""}).slice(0,2)};
    if(pickT)pickT.querySelector("[data-kwrgo]").click();
-   const opts=[...document.querySelectorAll("#modal .opts button")].map(x=>x.textContent.replace(/\s+/g," ").trim());
+   const opts=__kopts().map(x=>x.textContent.replace(/\s+/g," ").trim());
    return Object.assign(res,{t2:Q[0]&&Q[0].t,x2:!!document.querySelector("#modal .kph > .kit-x"),thoi:opts.some(o=>/^Thôi/.test(o)),opts})},[kind,process.env.RID||'']);
   if(r.err){out[kind]=r;continue}
   await p.locator('#modal .dlg').screenshot({path:`${OUT}/mat-${kind}-${SZ}.jpg`,type:'jpeg',quality:70}).catch(()=>{});
-  await p.evaluate(()=>{const B=[...document.querySelectorAll("#modal .opts button")];if(B[2])B[2].click()});
+  await p.evaluate(()=>{const B=__kopts();if(B[2])__koptGo(B[2])});
   await p.waitForTimeout(400);
   const lbl=await p.evaluate(()=>{const d=document.getElementById("kg82");return d?d.textContent.replace(/\s+/g," ").trim().slice(0,90):null});
   await p.evaluate(()=>{const g=document.getElementById("kg82go");if(g)g.click()});await p.waitForTimeout(+(process.env.WAIT||1500));

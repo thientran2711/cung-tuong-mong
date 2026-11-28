@@ -21,7 +21,7 @@ async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0]
     ws.onMessage(m=>{const t=Math.max(up,Date.now()+lag());up=t;setTimeout(()=>{try{srv.send(m)}catch(e){}},t-Date.now())});
     srv.onMessage(m=>{const t=Math.max(dn,Date.now()+lag());dn=t;setTimeout(()=>{try{ws.send(m)}catch(e){}},t-Date.now())});
     ws.onClose((c,r)=>{try{srv.close({code:c,reason:r})}catch(e){}});srv.onClose((c,r)=>{try{ws.close({code:c,reason:r})}catch(e){}})});
-  const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
+  const o={ctx,name,errs:[]};o.page=async()=>{const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(30000);p.setDefaultNavigationTimeout(120000);
     p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|WebSocket/.test(m.text()))o.errs.push('console: '+m.text())});o.p=p;return p};return o}
 async function until(o,fn,arg,ms=30000){try{await o.p.waitForFunction(fn,arg,{timeout:ms,polling:200});return true}catch(e){return false}}
 async function tapText(o,re,ms=8000){const t0=Date.now();while(Date.now()-t0<ms){const h=await o.p.evaluateHandle(src=>{const R=new RegExp(src);
@@ -31,7 +31,7 @@ const shot=async(o,n)=>{try{await o.p.screenshot({path:`${OUT}/${n}.png`,timeout
 async function clear(o,n=25){for(let i=0;i<n;i++){const st=await require('./lib/coop-clear.js').first(o,()=>{
    
    const bk=[...document.querySelectorAll('.kbk-x,.kbk-bar button')].find(x=>x.offsetParent!==null&&(/^Lui$/.test(x.textContent.trim())||/^(Lui|Đóng)$/.test(x.getAttribute('aria-label')||'')));if(bk){bk.click();return'x'}
-   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||m.querySelector('.opts button:not([disabled]):not([data-kcp])')||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'}).catch(()=>'err');
+   const m=document.getElementById('modal');if(!m||m.hidden)return typeof S!=='undefined'&&S&&S.mg?'mg':'';const all=[...m.querySelectorAll('button:not([disabled])')].filter(x=>x.offsetParent!==null);const b=all.find(x=>/^Nhận thân phận/.test(x.textContent.trim()))||all.find(x=>!x.dataset.kcp&&/Nhận thân phận|Nhập cung|Tiến cung|Vào cung/.test(x.textContent))||m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||(__koptsOn(m,':not([data-kcp])')[0]||null)||m.querySelector('.kbk-x,[aria-label="Đóng"]')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){__koptGo(b);return'x'}return'stuck'}).catch(()=>'err');
   if(st==='mg'){await o.p.evaluate(()=>{try{S.mg=null;render()}catch(e){}});continue}
   if(st!=='x')return st;await sleep(200)}return'many'}
 const inGame=o=>o.p.evaluate(()=>!!(window.COOPW&&COOPW.on&&typeof S!=='undefined'&&S&&!COOPW.inLife&&document.getElementById('title').hidden&&!document.getElementById('kroul')&&document.getElementById('next').offsetParent)).catch(()=>false);

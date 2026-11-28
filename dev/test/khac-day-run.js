@@ -2,13 +2,13 @@
    usage: node dev/test/khac-day-run.js <page url> <W>x<H> <outdir>  → JSON results + screenshots (act tab, sáng with 1 khắc left) */
 const {chromium}=require('./lib/pw-roulette');
 const [,,URL,SZ,OUT]=process.argv;const [W,H]=SZ.split('x').map(Number);
-(async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'})).newPage();await require('./lib/veil').guard(p);
+(async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'})).newPage();await require('./lib/kopts').install(p);await require('./lib/veil').guard(p);
  p.setDefaultTimeout(300000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await p.waitForTimeout(2500);
  const fresh=()=>p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
   window.__forceOrigin='thd';window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}S.suc=80;S.bac=500;render()});
  const set=(bu,left,tb)=>p.evaluate(([bu,left,tb])=>{Q.length=0;document.getElementById('modal').hidden=true;S.buoi=bu;S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.j76carry=0;S.j76ck="";try{deal()}catch(e){}used=4-left;tab=tb;render()},[bu,left,tb]);
- const drain=async()=>{for(let r=0;r<3;r++){for(let i=0;i<40;i++){const n=await p.evaluate(()=>{const M=document.getElementById('modal');if(Q.length||(M&&!M.hidden)){const b=M.querySelector('#mb .opts button:not([disabled])')||M.querySelector('#mclose, .dlg button, button');if(b)b.click();else{Q.length=0;M.hidden=true}return 1}if(S.mg){try{S.mg=null}catch(e){}return 1}return 0});if(!n)break;await p.waitForTimeout(250)}
+ const drain=async()=>{for(let r=0;r<3;r++){for(let i=0;i<40;i++){const n=await p.evaluate(()=>{const M=document.getElementById('modal');if(Q.length||(M&&!M.hidden)){const b=(__koptsOn()[0]||null)||M.querySelector('#mclose, .dlg button, button');if(b)__koptGo(b);else{Q.length=0;M.hidden=true}return 1}if(S.mg){try{S.mg=null}catch(e){}return 1}return 0});if(!n)break;await p.waitForTimeout(250)}
   await p.evaluate(()=>{try{render()}catch(e){}});await p.waitForTimeout(3000)}};
  const st=()=>p.evaluate(()=>({buoi:S.buoi,used,carry:S.j76carry||0,place:S.place}));
  const R={};await fresh();

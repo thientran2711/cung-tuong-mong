@@ -10,7 +10,7 @@ const VPS=(SIZES||'755x1000').split(',');
 (async()=>{const b=await chromium.launch();const R={};let bad=0;
  for(const sz of VPS){try{const [W,H]=sz.split('x').map(Number);const errs=[];const fails=[];const res={};
   const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
-  const p=await ctx.newPage();p.setDefaultTimeout(60000);p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
+  const p=await ctx.newPage();await require('./lib/kopts').install(p);p.setDefaultTimeout(60000);p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul,.kcf{display:none!important}'});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:180000});await sleep(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
@@ -28,7 +28,7 @@ const VPS=(SIZES||'755x1000').split(',');
    const col=d.querySelector('.kpsubj.kes');const small=[...d.querySelectorAll('.kpsubj')].filter(e=>vis(e)&&!e.matches('.kes,.kpiart,.kpev,.kpitem')&&e.querySelector('.pframe,.pfwrap,.pcp,.pfr,img.kpor'));
    const fig=col&&col.querySelector('.kesimg');const fr=fig&&fig.getBoundingClientRect();const cr=col&&col.getBoundingClientRect();
    const ban=d.querySelector('.kdlgart img, .kdlgart .ksart, .kdpban');const br=ban&&ban.getBoundingClientRect();const hasBan=!!br&&br.width>40&&br.height>30;const figOut=fr&&cr?Math.round(Math.max(0,Math.min(fr.bottom,cr.bottom,r.bottom)-Math.max(fr.top,cr.top,r.top))):0;const colH=cr?Math.round(cr.height):0;
-   const btn=d.querySelector('.kpopts button, .opts button');const btr=btn&&btn.getBoundingClientRect();
+   const btn=d.querySelector('.kpopts button')||__kopts(d)[0];const btr=btn&&btn.getBoundingClientRect();
    const idc=d.querySelector('.kpid');const idfig=document.querySelector('#modal img.kidfig2');
    return{host,seal,title:((d.querySelector('.kptitle')||{}).textContent||'').slice(0,40),w:Math.round(r.width),h:Math.round(r.height),
     hasCol:!!col&&!!fr&&fr.width>20&&fr.height>40,hasBan,colH,figOut,small:small.length,smallCls:small.map(e=>e.className).slice(0,2),

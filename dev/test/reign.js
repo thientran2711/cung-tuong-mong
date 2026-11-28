@@ -7,7 +7,7 @@
 const {chromium}=require('playwright');const path=require('path');
 const [,,URL0,VP,SHOT]=process.argv;const [W,H]=(VP||'755x1000').split('x').map(Number);
 const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block'});const p=await ctx.newPage();
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,serviceWorkers:'block'});const p=await ctx.newPage();await require('./lib/kopts').install(p);
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof rgMonth==='function',null,{timeout:120000});await p.waitForTimeout(1500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;
@@ -27,7 +27,7 @@ const URL=/^https?:/.test(URL0)?URL0:'file://'+path.resolve(URL0);
  /* 2. the side choice dialog (Chương 2) */
  await clear();
  r=await p.evaluate(()=>{rgW().ch=2;S.reign.done.c1a=1;S.reign.done.c1b=1;const id=rgNext();rgFire(id);showModal();const m=Q[0];
-  const btn=[...document.querySelectorAll('#modal .opts button')];return{id,t:m.t,n:m.opts.length,names:m.opts.map(o=>o.n),hide:btn.filter(x=>x.dataset.khide==='1').length,faces:!!m.faces,
+  const btn=__kopts();return{id,t:m.t,n:m.opts.length,names:m.opts.map(o=>o.n),hide:btn.filter(x=>x.dataset.khide==='1').length,faces:!!m.faces,
    ovf:document.documentElement.scrollWidth>innerWidth+1}});
  console.log('c2a',JSON.stringify(r));ok(r.id==='c2a','next beat is c2a');ok(/^Phụ tuyến · Tân quân lập uy · Chương 2 · Hồi 1\/1$/.test(r.t),'title '+r.t);ok(r.n===4,'4 options');ok(r.hide>=3,'kit hides outcomes');ok(!r.ovf,'no overflow (dialog)');
  await shot('c2a');

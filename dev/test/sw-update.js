@@ -44,7 +44,7 @@ async function newLife(p){await ev(p,()=>{SLOT=1;document.getElementById('title'
 async function settle(p){for(let i=0;i<20;i++){const st=await ev(p,()=>{document.querySelectorAll('.kmov').forEach(e=>e.click());
   const bk=[...document.querySelectorAll('.kbk-bar button')].find(x=>x.offsetParent!==null&&/^Lui$/.test(x.textContent.trim()));if(bk){bk.click();return'x'}
   const m=document.getElementById('modal');if(typeof S!=='undefined'&&S&&S.mg){S.mg=null;document.getElementById('ov').hidden=true;render();return'x'}
-  if(!m||m.hidden)return'';const b=m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||m.querySelector('.opts button:not([disabled])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'});if(st!=='x')return st;await sleep(250)}}
+  if(!m||m.hidden)return'';const b=m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||(__koptsOn(m)[0]||null)||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){__koptGo(b);return'x'}return'stuck'});if(st!=='x')return st;await sleep(250)}}
 const flip=(p,s)=>ev(p,s=>{Object.defineProperty(document,'visibilityState',{configurable:true,get:()=>s});Object.defineProperty(document,'hidden',{configurable:true,get:()=>s==='hidden'});document.dispatchEvent(new Event('visibilitychange'))},s);
 async function bgShort(p){await flip(p,'hidden');await sleep(300);await flip(p,'visible')}
 /* every sổ written right before the page left (beforeunload) is kept in sessionStorage to compare after the reload */
@@ -65,7 +65,7 @@ const tapIn=(p,sel,re)=>until(p,([s,r])=>{const b=[...document.querySelectorAll(
 
 (async()=>{const b=await chromium.launch();
  const [W,H]=SC==='play'?[755,1000]:[1180,820];const tag=SC==='play'?'fold-755x1000':'ipad-1180x820';
- let ctx,p;if(SC!=='coop'){ctx=await ctxOf(b,W,H);p=ctx.pages()[0]||await ctx.newPage();watch(p)}
+ let ctx,p;if(SC!=='coop'){ctx=await ctxOf(b,W,H);p=ctx.pages()[0]||await ctx.newPage();await require('./lib/kopts').install(p);watch(p)}
  if(SC==='play'||SC==='away'){await setVer('A');await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:180000});
   ok(await loaded(p),'A loaded, worker in control');R.build=await ev(p,()=>window.CTM_BUILD);
   await newLife(p);await settle(p);
@@ -122,7 +122,7 @@ const tapIn=(p,sel,re)=>until(p,([s,r])=>{const b=[...document.querySelectorAll(
   R.oldCtl=!!await until(p,async()=>navigator.serviceWorker.controller&&(await caches.keys()).some(k=>/^ctm-/.test(k)),300000);
   await sleep(1500);R.oldCaches=await ev(p,()=>caches.keys());
   await newLife(p);await sleep(3000);R.savesOld=await saves(p);
-  await setVer('A');if(process.env.STALE)await fetch(BASE+'__stale/main');await p.close();const t0=Date.now();p=await ctx.newPage();watch(p);
+  await setVer('A');if(process.env.STALE)await fetch(BASE+'__stale/main');await p.close();const t0=Date.now();p=await ctx.newPage();await require('./lib/kopts').install(p);watch(p);
   let navs=0;p.on('framenavigated',f=>{if(f===p.mainFrame())navs++});
   await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:180000});
   ok(!!await until(p,()=>window.CTM_BUILD&&document.readyState==='complete',90000),'the old build reopened on this build');R.switchMs=Date.now()-t0;R.navigations=navs;
@@ -144,13 +144,13 @@ const co=p=>ev(p,()=>{const c=window.COOP,s=c&&c.state||{},W=window.COOPW||{};co
  return{room:s.room,you:s.you,status:s.status,peer:!!s.peerOnline,on:!!W.on,week:s.week||0,hold:!!W.hold,name:typeof S!=='undefined'&&S&&S.name,k:typeof S!=='undefined'&&S?[S.year,S.month,S.tuan,S.buoi||0].join(':'):'',used:typeof used!=='undefined'?used:0,deck:typeof deck!=='undefined'&&deck?deck.length:0,friend:f&&f.name,mark:window.__CTM_MARK||'A',build:window.CTM_BUILD}});
 async function clearC(p){return ev(p,()=>{const W=window.COOPW||{};if(!W.on||typeof S==='undefined'||!S)return'';const fz=document.getElementById('coopfz');if(fz&&!fz.hidden)return'coop';
  document.querySelectorAll('.kmov').forEach(e=>e.click());if(S.mg){S.mg=null;document.getElementById('ov').hidden=true;render();return'x'}
- const m=document.getElementById('modal');if(!m||m.hidden)return'';const b=m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||m.querySelector('.opts button:not([disabled])')||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){b.click();return'x'}return'stuck'})}
+ const m=document.getElementById('modal');if(!m||m.hidden)return'';const b=m.querySelector('#mr button:not([disabled]),.k3foot button:not([disabled])')||(__koptsOn(m)[0]||null)||[...m.querySelectorAll('.dlg .kit-x')].find(x=>x.offsetParent!==null);if(b){__koptGo(b);return'x'}return'stuck'})}
 /* press Qua buổi once it is enabled (dialogs read first) */
 async function press(p){for(let t=0;t<80;t++){for(let i=0;i<4;i++)if(await clearC(p)!=='x')break;if(await ev(p,()=>{const n=document.getElementById('next');if(!n||n.disabled)return false;n.click();return true}))return true;await sleep(250)}return false}
 const clearAll=async(...L)=>{for(const p of L)for(let i=0;i<6;i++)if(await clearC(p)!=='x')break};
 async function coop(b){const A={n:'host'},B={n:'guest'};
  A.ctx=await ctxOf(b,755,1000);B.ctx=await ctxOf(b,1180,820);
- for(const o of [A,B]){o.p=await o.ctx.newPage();watch(o.p,o.n+': ')}
+ for(const o of [A,B]){o.p=await o.ctx.newPage();await require('./lib/kopts').install(o.p);watch(o.p,o.n+': ')}
  await setVer('A');
  await A.p.goto(BASE,{waitUntil:'domcontentloaded',timeout:180000});ok(await loaded(A.p),'host: A loaded');
  await until(A.p,()=>document.querySelector('#modal.kpthome [data-coop="co"]'),30000);

@@ -10,7 +10,7 @@ const OW=require('./odds-words.js');/* ladder words from the ONE source j0 */
 const [,,BASE,SZ,OUT,RM,KS]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);const tag=SZ+(RM&&RM!=='0'?'-rm':'');
 const KEYS=(KS||'spy,rumor,bribe,poison').split(',');const LAD=OW.W;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({serviceWorkers:'block',viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:RM&&RM!=='0'?'reduce':'no-preference'});
- const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message+' @ '+String(e.stack).slice(0,400)));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text())});
+ const p=await ctx.newPage();await require('./lib/kopts').install(p);const errs=[];p.on('pageerror',e=>errs.push(e.message+' @ '+String(e.stack).slice(0,400)));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource/.test(m.text()))errs.push('console: '+m.text())});
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(1200);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='td';document.getElementById('title').hidden=true;start()});
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});await p.waitForTimeout(1800);await p.addStyleTag({content:'#kroul,#kroulw,.kroul{display:none!important}'});
@@ -22,7 +22,7 @@ const KEYS=(KS||'spy,rumor,bribe,poison').split(',');const LAD=OW.W;
  const fails=[];const out=[];const SV={};
  const chk=async(where)=>{const r=await p.evaluate(()=>{const o=document.scrollingElement.scrollWidth>innerWidth+1;const vis=[...document.querySelectorAll('#kg82, #modal:not([hidden]), #rtoast')].map(e=>e.innerText).join(' ');
    /* text cut inside buttons / rows of the visible kit frame */
-   const cut=[...document.querySelectorAll('#kg82 button, #kg82 .krl, #modal:not([hidden]) .opts button b')].filter(e=>e.offsetParent&&e.scrollWidth>e.clientWidth+2&&getComputedStyle(e).overflow!=='visible').map(e=>e.textContent.slice(0,30));
+   const cut=[...document.querySelectorAll('#kg82 button, #kg82 .krl, #modal:not([hidden]) .opts button b')].concat(document.getElementById('modal').hidden?[]:__kopts().map(b=>b.querySelector('b')).filter(Boolean)).filter(e=>e.offsetParent&&e.scrollWidth>e.clientWidth+2&&getComputedStyle(e).overflow!=='visible').map(e=>e.textContent.slice(0,30));
    return{o,ell:/…/.test(vis),pct:/\d\s?%/.test(vis),over:(window.KG82&&KG82.over)||0,cut}});
   if(r.o)fails.push(where+': horizontal overflow');if(r.ell)fails.push(where+': ellipsis');if(r.pct)fails.push(where+': % sign');if(r.over)fails.push(where+': HUD over ceiling');if(r.cut.length)fails.push(where+': cut '+r.cut.join('|'))};
  const prep=async k=>p.evaluate(k=>{Q.length=0;$('modal').hidden=true;S.bac=400;S.suc=100;S.kpWarn=1;S.khac=0;S.used=0;used=0;try{S.kUsed=0}catch(e){}S.dead=false;S.confined=0;
@@ -36,7 +36,7 @@ const KEYS=(KS||'spy,rumor,bribe,poison').split(',');const LAD=OW.W;
   else await p.evaluate(([i,k])=>{/* the act card is not on this page of the book: the same data-r/data-a button, clicked in place */const o=$('sgtest');if(o)o.remove();const d=document.createElement('div');d.id='sgtest';d.innerHTML=pbtn(`data-r="${i}" data-a="${k}"`,ACT[k].n,'');document.body.appendChild(d);d.querySelector('button').click();d.remove()},[info.i,k]);
   await p.waitForTimeout(500);
   await p.evaluate(()=>{if(Q.length>1&&Q.some(x=>x.pid==='sgpick')){const k=Q.filter(x=>x.pid==='sgpick');Q.length=0;k.forEach(x=>Q.push(x));try{showModal()}catch(e){}}});await p.waitForTimeout(300);
-  return p.evaluate(real=>({open:!$('modal').hidden,n:document.querySelectorAll('#modal .opts button').length,txt:$('modal').innerText.slice(0,900),real}),real)};
+  return p.evaluate(real=>({open:!$('modal').hidden,n:__kopts().length,txt:$('modal').innerText.slice(0,900),real}),real)};
  const play=async(k,good,shot)=>{await p.locator('#sggo').click();
   await p.evaluate(good=>{let nx=0;const pe=(el,t,x,y)=>el.dispatchEvent(new PointerEvent(t,{clientX:x,clientY:y,pointerType:'touch',pointerId:5,isPrimary:true,bubbles:true,cancelable:true}));
    const tick=()=>{if(KG82.phase!=='play'&&KG82.phase!=='')return;const f=good?KG82.peek:KG82.peekBad;const pk=f&&f();const now=performance.now();
@@ -65,9 +65,9 @@ const KEYS=(KS||'spy,rumor,bribe,poison').split(',');const LAD=OW.W;
   const dlg=await openChoice(k,info);if(!dlg.open||dlg.n<2){fails.push(`${k} ${how}: choice dialog missing `+JSON.stringify(dlg)+JSON.stringify(await p.evaluate(()=>({q:Q.length,kh:S.khac,can:can(2),mod:$('modal').hidden}))));continue}
   if(how==='win'){await chk(k+' choice');if(!/Tốn/i.test(dlg.txt)||!/Được/i.test(dlg.txt)||!/Mất/i.test(dlg.txt)||!/Ghi chú/i.test(dlg.txt))fails.push(k+': choice rows missing Cần/Tốn/Được/Mất :: '+dlg.txt.slice(0,700));
    if(k==='poison'&&/độc|thuốc|chén|bột/i.test(await p.evaluate(()=>$('modal').querySelector('p')?$('modal').querySelector('p').innerText:'')))fails.push(k+': method words in ask line')}
-  if(how==='skip'){const b0=await p.evaluate(()=>({seq:S.logSeq||0,bac:S.bac}));await p.locator('#modal .opts button').nth(1).click();const after=await finishAct(k,info,how,0,b0);out.push({k,how,w0:info.w0,after});continue}
+  if(how==='skip'){const b0=await p.evaluate(()=>({seq:S.logSeq||0,bac:S.bac}));await require('./lib/kopts').tap(p,await p.evaluateHandle(()=>__kopts()[1]));const after=await finishAct(k,info,how,0,b0);out.push({k,how,w0:info.w0,after});continue}
   await p.evaluate(()=>{if(Q.some(x=>x.pid==='sgpick')&&Q[0].pid!=='sgpick'){const k=Q.filter(x=>x.pid==='sgpick');Q.length=0;k.forEach(x=>Q.push(x));showModal()}});await p.waitForTimeout(300);
-  await p.locator('#modal .opts button').nth(0).click();await p.waitForTimeout(700);
+  await require('./lib/kopts').tap(p,await p.evaluateHandle(()=>__kopts()[0]));await p.waitForTimeout(700);
   if(!await p.locator('#kg82').count()){fails.push(`${k} ${how}: game did not open `+JSON.stringify(await p.evaluate(()=>({q:Q.map(x=>(x.pid||'')+'|'+String(x.t||x.h).slice(0,40)),mh:$('modal').hidden,u:used}))));await p.screenshot({path:`${OUT}/../fail-${k}-${how}.jpg`,type:'jpeg',quality:50}).catch(()=>{});continue}
   if(k==='poison'){const t=await p.evaluate(()=>$('kg82').innerText);if(/độc|thuốc|chén|bột|pha/i.test(t))fails.push(k+': method words on game screen :: '+t)}
   await chk(k+' intro');
