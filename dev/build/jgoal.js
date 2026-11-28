@@ -106,5 +106,5 @@ try{const r0=render;render=function(){const r=r0.apply(this,arguments);try{const
 document.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="story")return;const c=e.target.closest&&e.target.closest('#panel .kskill[data-skill^="story-"]');if(!c||e.target.closest("button,a,[data-v85tab]"))return;kitGoalDetail()}catch(x){}});
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§72",title:"kitGoalDetail · chi tiết chương (khung sự kiện: tranh trái, hàng kit phải) — mở từ nút Mục tiêu của cột §77",
  html:()=>`<div class="kitpg-row"><button type="button" class="kbtn" onclick="kitGoalDetail()">Mở chi tiết chương</button></div>`})}catch(e){}
-window.kitGoalNow=kitGoalNow;window.kitGoalDetail=kitGoalDetail;window.kitGoalCard=kitGoalCard;window.kitGoalGo=goWhere;
+/* E92f (REVIEW r1 fix 1): the ONE "current chapter" source, read by the day title card hook (jdh3 kitChapterTitle) */window.kitGoalChapter=chapter;window.kitGoalNow=kitGoalNow;window.kitGoalDetail=kitGoalDetail;window.kitGoalCard=kitGoalCard;window.kitGoalGo=goWhere;
 }catch(e){console.error("jgoal",e)}})();
