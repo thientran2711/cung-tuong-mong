@@ -19,3 +19,5 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 05:58Z LR-RULES pushed same fix as review/tsg-kpk 09e10cd3 → adopted as ui6 unit (mine 383849d2 dropped); ui worktree now 09e10cd3. RV-179: nhv-areas-lrm6 cc4becfc FAIL; screenveil-lrm6 next. KIT-STAGE-R16 inactive → law-11 family (~145 tests reading #mb .opts) sent to MAIN as follow-up.
 - 06:05Z RV-179 LAND READY kit-screenveil-rv179 2ea6d28f (FF of 935c008b); RV-180 LAND kk67-rv180 22554198 (figplaque; FF of 935c008b); kk66-tagwrap FAIL (G4 96) — do not land.
 - UI stack review/lc35-ui 22afefb4 = 09e10cd3 (tsg-kpk) → merge 2ea6d28f (746ed360) → merge 22554198 (rebuilt, assets = 935c008b = LIVE + act-gach-ten-h). 0 LIVE del, all 2-parent, webkit-syntax 0, KIT.md union checked (every + line of both present). Owed tests (ui.sh) now on lc35-st after dq QC.
+- 06:08Z RV-180 PASS tsg-kpk 09e10cd3 (run time-spill ALONE; parallel → false FAILs). All 3 UI units in 22afefb4 now reviewer-PASSED.
+- 06:30Z dayq b2feb855 quickcheck PASS (core gates incl. q-softlock PASS, time-spill PASS, perf ok). dayq-noturn test run 1 was load-polluted (timeout) → rerun alone queued after ui.sh (dq2.sh).
