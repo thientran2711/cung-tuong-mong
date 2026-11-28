@@ -118,7 +118,9 @@ function awNeed(fn,A){if(window.__awoff||AWRUN||AWIN||AWOKN||!S||S.dead||!awWorl
 /* plain arguments for the save (people as keys, a man by id) */
 function awSer(x){if(x&&typeof x==="object"){if(x===S)return {__k:"me"};if(x.id!=null&&(rivals||[]).includes(x))return {__k:x.id};if(x.id!=null&&(S.men||[]).includes(x))return {__m:x.id};try{return JSON.parse(JSON.stringify(x))}catch(e){return null}}return x===undefined?null:x}
 function awDes(x){if(x&&typeof x==="object"){if(x.__k!=null)return byKey(x.__k);if(x.__m!=null)return (S.men||[]).find(m=>m.id===x.__m)||null}return x===null?undefined:x}
-function awPlainWhy(w){w=String(w==null?"":w).replace(/<[^>]+>/g,"").trim();w=w.replace(/^(Ngươi|Bị ban (?:chết|rượu độc)|Bị đày vào lãnh cung|Bị)\s+(?:vì\s+)?/i,"");return w?w.charAt(0).toLowerCase()+w.slice(1):"phạm cung quy"}
+/* the matter in words: «bị …» = what is done to her (said as is), anything else = the offence («sắp bị xét tội …») */
+function awPlainWhy(w){w=String(w==null?"":w).replace(/<[^>]+>/g,"").trim();w=w.replace(/^Ngươi\s+/,"").replace(/^Bị (?:ban (?:chết|rượu độc)|đày vào lãnh cung)\s*(?:vì\s+)?/i,"").replace(/\s*\(tội [^)]*\)\s*$/,"");return w?w.charAt(0).toLowerCase()+w.slice(1):"phạm cung quy"}
+function awSay(why,n){return /^bị /.test(why)?`ngươi ${why}. Trong ${n} buổi tới Cung Chính ti sẽ xét`:`ngươi sắp bị xét tội <b>${why}</b>, trong ${n} buổi tới`}
 function awWhy(fn,A){if(fn==="punish"||fn==="deathSentence")return awPlainWhy(typeof A[0]==="string"?A[0]:A[1]);if(fn==="cold")return awPlainWhy(A[0]);if(fn==="chPunishX")return awPlainWhy(A[2]);
  if(fn==="srvAffairCaught")return "tư tình khi đang là cung nữ";if(fn==="srvLaundry"||fn==="srvKill")return awPlainWhy(A[0]).replace(/[.;,]+$/,"");if(fn==="chSrvEnd")return "nhận bạc mua chuộc, làm tai mắt cho người";return awPlainWhy(A[1])}
 /* the penalty words and the one-step-lighter penalty of a held core (both read the core's own rule texts) */
@@ -153,8 +155,8 @@ function awCoreCard(id){const R=(S.accw||{})[id];if(!S||!R||R.k!=="core"||S.dead
  if(P&&S.bac>=Sh.bac)O.push({n:`Nặng · Cầu ${P.n} che chở`,fx:{bac:-Sh.bac},p:awShieldO(al,S,P),ton:{bac:-Sh.bac},j67:`tốn: Bạc ${balSg(-Sh.bac)} (lễ dâng ${P.n}) · thành: việc bị gác${al?`, mọi chứng cứ ${al.name} nắm về ngươi bị đốt, Danh nàng ${balSg(-Sh.foeDanh)}`:""} · hỏng: vẫn bị xét`,
   go:()=>{if(!(S.accw||{})[id]){awPay(S,-Sh.bac);return}ap(P.to,{bac:Sh.bac});if(!roll(awShieldO(al,S,P))){log(`${P.n} nhận lễ của ngươi nhưng không ra mặt; việc vẫn tới ngày xét.`);return}
    delete S.accw[id];let k=0;if(al){k=awAll(al,S);if(k)evA(al,S,-k);ap(al,{danh:-Sh.foeDanh});try{oanAdd(al,S,Sh.oan)}catch(e){}}log(`${P.n} gác việc ấy lại${al?`; mọi chứng cứ ${al.name} nắm về ngươi bị đốt, ${al.name} Danh ${balSg(-Sh.foeDanh)}`:""}.`)}});
- const who=al?`${al.name} đã đứng ra tố ngươi; ngươi`:"ngươi";
- return {who:al?pv(al):undefined,t:`<p>Cung Chính ti báo tin: ${who} sắp bị xét tội <b>${R.why}</b>, trong ${n} buổi tới.</p><p>Nếu tội thành, ngươi ${pen}. Không làm gì thì chờ ngày xét.</p>`,o:O}}
+ const cn=c?`, tội <b>${chName(c).toLowerCase()}</b>`:"";
+ return {who:al?pv(al):undefined,t:`<p>Cung Chính ti báo tin: ${al?`${al.name} đã đứng ra tố ngươi: `:""}${awSay(R.why,n)}${cn}.</p><p>Nếu tội thành, ngươi ${pen}. Không làm gì thì chờ ngày xét.</p>`,o:O}}
 /* the wrap: outermost (this file is assembled last); an inner core called by an outer one is part of the same penalty (AWIN) */
 /* contexts: her taps / her acts / the world turn / a witness road inside her own action */
 const CTXF=[["chooseM","her"],["nextBuoi","w"],["endTurn","w"],["menReport","npc"],["rtReport","npc"],["runAct",null]];

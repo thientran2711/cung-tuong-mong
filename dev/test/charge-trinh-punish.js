@@ -15,7 +15,7 @@ async function page(b,errs){const ctx=await b.newContext({viewport:{width:390,he
 (async()=>{const b=await chromium.launch();const errs=[];const out=[];
  /* ---- consort life: O2 ---- */
  let p=await page(b,errs);
- await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;quiet=false});await sleep(1000);
+ await p.evaluate(()=>{window.__bot=1;window.__awoff=1/* ROW 12 jaccw: the penalty notice rows are tested here, the warning step (held + «Sắp bị trị tội») in accw.test.js */;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<60&&isSrv();i++)start();window.__nlInner=0;quiet=false});await sleep(1000);
  out.push(...await p.evaluate(()=>{BAL.charge.rep.n=99;/* PUNISH-TIER: the repeat-nhẹ rule is tested in punish-tier.js; these steps punish the same people many times */const o=[];const ok=(c,m)=>o.push([!!c,m]);const B=BAL.charge;
   const L=liveRivals(true).filter(x=>!x.queen&&!x.coop);const [v,w,u]=L;const clean=x=>{x.wrongs=[];x.dw=0;x.evc={};x.evq={};x.ev=0;x.out=x===S?0:false;x.confined=0;x.punWk=null;x.tsbBul={}};
   let cp=[],gp=[];const c0=chPunish;chPunish=function(t,c,why){cp.push([t===S?"S":t.name,c]);return c0.apply(this,arguments)};
@@ -85,7 +85,7 @@ async function page(b,errs){const ctx=await b.newContext({viewport:{width:390,he
  await p.close();
  /* ---- servant life: O1 ---- */
  p=await page(b,errs);
- const srv=await p.evaluate(()=>{window.__bot=1;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<80&&!isSrv();i++)start();window.__nlInner=0;quiet=false;return isSrv()});await sleep(800);
+ const srv=await p.evaluate(()=>{window.__bot=1;window.__awoff=1/* ROW 12 jaccw: the penalty notice rows are tested here, the warning step (held + «Sắp bị trị tội») in accw.test.js */;localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();for(let i=0;i<80&&!isSrv();i++)start();window.__nlInner=0;quiet=false;return isSrv()});await sleep(800);
  if(!srv)out.push([false,'no servant life after 80 starts']);else out.push(...await p.evaluate(()=>{const o=[];const ok=(c,m)=>o.push([!!c,m]);
   const mis=srvM();const L=liveRivals(true).filter(x=>x!==mis&&!x.coop&&!x.queen);const [g,h,acc]=L;[g,h].forEach(x=>{x.wrongs=[];x.evc={}});
   /* not bought by the guilty one: she stays */

@@ -74,7 +74,7 @@ const A=process.argv[2]||path.join(__dirname,'..','..','index.html');const URL=/
   const tries=[["punish",()=>punish(S,"bị cung nữ tố giác mưu kế",2)],["fall",()=>fall(S,"bị tố giác, chứng cứ rành rành")],["demote",()=>demote(S,"bị Hoàng hậu tâu giáng")],["chPunishX",()=>chPunishX(S,"mh","bị tố",null,"nang",false)],
    ["deathSentence",()=>deathSentence(S,"Bị ban chết vì tư thông","thuong")],["cold",()=>cold("Bị đày vào lãnh cung")],["punTier",()=>punTier(S,"nang","Ngươi bị xét tội",null)]];
   for(const [n,f] of tries){S.accw={};Q.length=0;const s0=st2();awInW(f);const s1=st2();const C=cores();const d=C.length?PEND.accw({id:C[0][0]}):null;const tx=d?String(d.t).replace(/<[^>]+>/g," "):"";
-   ok(JSON.stringify(s0)===JSON.stringify(s1)&&C.length===1&&Q.some(x=>x.pid==="accw"&&x.t==="Sắp bị trị tội")&&/trong \d+ buổi tới/.test(tx)&&/Nếu tội thành, ngươi/.test(tx),`world road → ${n}(): nothing falls now, held + her dialog «${tx.slice(0,150)}»`)}
+   ok(JSON.stringify(s0)===JSON.stringify(s1)&&C.length===1&&Q.some(x=>x.pid==="accw"&&x.t==="Sắp bị trị tội")&&/(trong|Trong) \d+ buổi tới/.test(tx)&&/Nếu tội thành, ngươi/.test(tx),`world road → ${n}(): nothing falls now, held + her dialog «${tx.slice(0,150)}»`)}
   /* due: it falls once, exactly as the core would have */
   S.accw={};clean(S);S.rank=3;awInW(()=>punish(S,"tàng trữ độc vật",2));let C=cores();const s2=st2();C[0][1].due=bq();fix(0,()=>rivalsBuoi());const s3=st2();
   ok(!cores().length&&(s3.rank<s2.rank||s3.conf>s2.conf),`on its day the held punish() falls (rank ${s2.rank}→${s3.rank}, cấm túc ${s2.conf}→${s3.conf})`);const s4=st2();fix(0,()=>rivalsBuoi());ok(JSON.stringify(st2())===JSON.stringify(s4),"… once (the next buổi adds nothing)");
@@ -102,6 +102,9 @@ const A=process.argv[2]||path.join(__dirname,'..','..','index.html');const URL=/
   S.accw={};clean(w);w.rank=Math.max(3,w.rank);const wc=w.confined||0;awInW(()=>punish(w,"x",1));ok(!cores().length&&(w.confined||0)>wc,"an NPC victim of a world road: falls at once (not held)");
   /* save mid-wait: the record is plain data; the dialog rebuilds and fires once after a save round-trip */
   S.accw={};clean(S);S.rank=3;ACTX={a:v,pen:0};try{fall(S,"bị tố giác")}finally{ACTX=X0}const sv=JSON.stringify(S.accw);S.accw=JSON.parse(sv);C=cores();ok(!!PEND.accw({id:C[0][0]})&&!/function/.test(sv),`save mid-wait: plain record (${sv.length} chars), dialog rebuilds`);
+  /* a REAL save mid-wait (save() → loadSlot): the record and her card come back */
+  {Q.length=0;S.accw={};clean(S);S.rank=3;ACTX={a:v,pen:0};try{fall(S,"bị tố giác")}finally{ACTX=X0}const qn=Q.filter(x=>x.pid==="accw").length;save();S.accw={};Q.length=0;let lr="ok";try{const dd0=loadSlot(SLOT);quiet=true;deser(dd0);quiet=false}catch(e){lr="EXC "+e.message}
+   const back=Object.values(S.accw||{}).filter(R=>R.k==="core").length;ok(qn===1&&back===1&&Q.some(x=>x.pid==="accw"),`real save mid-wait → load: record ${back}, her card back ${Q.filter(x=>x.pid==="accw").length} (load → ${String(lr).slice(0,30)})`);C=cores()}
   const r7=S.rank;C[0][1].due=bq();fix(0,()=>rivalsBuoi());ok(!cores().length&&S.rank<r7,`… and falls on its day after the round-trip (rank ${r7}→${S.rank})`);
   /* ---- E: monthly checks warn a month ahead (j30 demoteReview) ---- */
   S.accw={};clean(S);S.rank=3;S.lowS=0;S.sick=0;const fl=sungFloor(3);S.sung=Math.max(0,fl-5);const rE=S.rank;awInW(()=>demoteReview());
