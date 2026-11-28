@@ -94,7 +94,7 @@ window.TW=TW;window.twDo=twDo;window.twCost=twCost;
  /* spying and befriending: the player's own ACT (free "Tự đi dò la" / paid "Kết giao"), same odds, same caught rules */
  if(SOC.spy)SOC.spy.run=function(v,t){return strip(ACT.spyk?runAct(v,t,"spyk"):"")};
  if(SOC.ally){const ok0=SOC.ally.ok;SOC.ally.ok=(v,t)=>ACT.ally.ok(v,t)&&ok0(v,t);SOC.ally.run=function(v,t){return strip(runAct(v,t,"ally"))}}})();
-function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1);return L.sort((a,b)=>rkOf(b)-rkOf(a))[0]||null}
+function twFollowT(v){const L=liveRivals(true).concat(S&&!S.out&&!S.dead?[S]:[]).filter(x=>x!==v&&rkOf(x)>rkOf(v)+1)/* RV row11-law1-r2 (law 1, family «NPC target list drops her»): an NPC may lean on HER too when she sits two ranks above (her «Nương theo» button = TW follow) */;return L.sort((a,b)=>rkOf(b)-rkOf(a))[0]||null}
 
 /* ---------- Player side: her options read the same costs; NPC-only deeds become her options ---------- */
 (function(){const t0=topicOpts;topicOpts=function(v){const A=t0.apply(this,arguments);try{if(!S||!v)return A;

@@ -4,6 +4,7 @@
    (2) cx3:petcare «Giúp chăm thú nuôi của nàng» (jagacts3 p3PetFr): an NPC friend may help with HER pet (the same ACT.petcare gate as her button)
    (3) Hòa giải (j28 SOC.mediate = jtwoway TW mediate): an NPC mediates ANY grudge the target holds (TW req twFoeOf) — between two NPCs, and for HER grudge too;
        it used to be only «the target's grudge against her».
+   (4) RV row11-law1-r2: Nương theo (jtwoway twFollowT): an NPC may lean on HER when she sits two ranks above (was NPCs only)
    usage: node dev/test/law1-r2.test.js [index.html]   → exit 1 on FAIL */
 const path=require('path');const {chromium}=require('playwright');
 const HTML=process.argv[2]||'index.html';const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
@@ -27,11 +28,14 @@ const HTML=process.argv[2]||'index.html';const res=[];const ok=(c,m,x)=>{res.pus
   out.medNpc=!!(SOC.mediate&&SOC.mediate.ok(v,x));
   S.ro=S.ro||{};S.ro[y.id]=60;out.medHer=!!(SOC.mediate&&SOC.mediate.ok(v,S));
   out.twFoeX=!!twFoeOf(v,x);out.twFoeS=!!twFoeOf(v,S);
+  /* (4) RV r2: Nương theo — she sits two ranks above every NPC doer; the NPC's follow target may be HER (jtwoway twFollowT, j28 SOC.follow) */
+  {const r0=S.rank,R0=V.map(z=>z.rank),A=rivals.filter(z=>z!==v&&!z.out);/* only v and her in the world: everyone else stepped out for this read, restored after */for(const z of A)z.out=true;v.rank=0;S.rank=5;out.followT=twFollowT(v)===S;out.followOk=!!(SOC.follow&&SOC.follow.ok(v));for(const z of A)z.out=false;S.rank=r0;V.forEach((z,i)=>z.rank=R0[i])}
   return out});
  ok(r.tellHer,'(1) an NPC with proof + spite on her gets «Kể tội» aimed at HER (cx3:tell, t = her)',r);
  ok(r.tellSung===r.tellWant&&/kể tội ngươi/.test(r.tellLine||""),'(1) told on, she loses the same Sủng BAL.ag.par3.tell.sung and is told by name',{lost:r.tellSung,want:r.tellWant,line:r.tellLine});
  ok(r.petHer,'(2) an NPC friend may come to help with HER pet (p3PetFr includes her)',r.petHer);
  ok(r.twFoeX&&r.medNpc,'(3) Hòa giải between two NPCs: the TW rule holds (twFoeOf) and the NPC option is open',{tw:r.twFoeX,ok:r.medNpc});
  ok(r.twFoeS&&r.medHer,'(3) Hòa giải for HER grudge: the NPC option is open',{tw:r.twFoeS,ok:r.medHer});
+ ok(r.followT&&r.followOk,'(4) Nương theo: an NPC two ranks below her may lean on HER (twFollowT = her, SOC.follow open)',{t:r.followT,ok:r.followOk});
  ok(!errs.length&&!r.err&&!r.goErr,'no page errors',{errs:errs.slice(0,3),e:r.err,g:r.goErr});
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL PASS');process.exit(f?1:0)})();

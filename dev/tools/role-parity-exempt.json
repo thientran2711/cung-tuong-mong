@@ -169,5 +169,20 @@
 {
 "key": "harm:road",
 "reason": "«Chặn ngự giá» (j8 ACT.road, jsteal): ONE stealNight(a,t,\"road\") for her and every NPC consort; the NPC side is the NIGHT FLIP pass (jsteal stealPass: whoever wants the holder's night most tries, mode feign | road by stealWant, her night included) — never a day-plan option (jagharm HA_NO), so the AGREG probe cannot see it. Her old card button (ACT-MOVE keeps it as a door member) made it P-ONLY by probe only (row11-law1 r2)"
+},
+{
+"re": "^harm:(expose|trinhhh|trinhth|tocao|tieuhuy)$",
+"reason": "split-merge B1 (LIVE, j78 J78FOLD): «Bóc chuyện tư tình» / «Trình Thái hậu» / «Trình Hoàng hậu» / «Tố tội thật» / «Tiêu hủy» are folded into ONE «Tố giác» (accuse, listener by chTo) for her AND every NPC — RVGRP and BANDS no longer hold them for either side; only the old ACT entry is left, so the scan's ACT-gate probe (harm:<k>) sees her gate alone. The act both sides hold is accuse (RV row11-law1-r2)"
+},
+{
+"re": "^label:(Thủ tiêu nhân chứng|Đe dọa bịt miệng|Xóa dấu vết)$",
+"reason": "jcover (LIVE, PUNISH-TIER-5): her «Xử nhân chứng» door ways / «Xóa dấu vết»; the NPC side is the SAME covWitDo / covWipe road in the end-of-turn pass covNpcTurn (every NPC wipes her traces and deals with her witnesses by her nết, same BAL.charge.cover numbers) — never a day-plan option, so the AGREG probe cannot see it (RV row11-law1-r2)"
+},
+{
+"re": "^label:Hoàng hậu đề cử$",
+"roles": [
+"hh"
+],
+"reason": "jpromob promo-build-2: her Empress card «Hoàng hậu đề cử» takes the candidates of the NPC Hoàng hậu route pbTry «hh» (same cut, same once-per-life rule, pbGrant «hh»); the NPC side is that monthly promotion pass, not a day-plan option (RV row11-law1-r2)"
 }
 ]
