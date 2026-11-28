@@ -266,7 +266,11 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
 Object.assign(BAL,{coopEmpY:12});
 /* co-op part 2 (review/coop-b1b5-p2): a player buys the friend who serves as a cung nữ (the same pay as an NPC's bribe card, j42 cnvBribe);
    tin = her Chủ tin gain when she refuses and tells her mistress */
-Object.assign(BAL,{coopBribe:{pay:20,tin:5,grudge:5}});/* grudge: the briber's thiện cảm for the servant, −grudge when she tells her mistress, +grudge when she refuses quietly (law 2 «Bạc lạ», j42 + jcoopworld twins) */
+Object.assign(BAL,{coopBribe:{pay:20,tin:5,grudge:5}});
+/* TMK-WARN (owner-facing play-stopper, F seat s21e; laws 6a / 2 / 1): the tai mắt who took bạc hears it first when someone holds a piece of the «Mua chuộc người hầu» charge on her buyer (jmcwarn).
+   npcCut = odds an NPC bought servant quietly cuts ties on such news (two-way: the same road as her «nhẹ»); conf = her «nặng» road «Bẩm chủ, khai kẻ mua chuộc»:
+   odds base + (Chủ tin − tinMid) / tinD, holds → Chủ tin +tin and her master gets ev pieces of the mc charge on the buyer (spyLearn: she learns who); fails → Tân Giả khố (BAL.ag.why.srv.pun.lauWk). */
+Object.assign(BAL,{mcw:{npcCut:50,conf:{base:50,tinMid:50,tinD:2,tin:10,ev:1}}});/* grudge: the briber's thiện cảm for the servant, −grudge when she tells her mistress, +grudge when she refuses quietly (law 2 «Bạc lạ», j42 + jcoopworld twins) */
 /* review/emperor-visit (owner OD:L603): the Emperor comes to HER palace and stays the night (event "empnight", j7 + jvisit).
    visit: a daily roll after the tablet flip, % = base + slope × (Sủng − minSung) + anK × Ân tình, × the Emperor's nature (datinh / lanhlung),
    capped; none within gap days of the last visit, none while she is pregnant, in lãnh cung, or he is gravely ill. On top of the night
