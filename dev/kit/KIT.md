@@ -405,7 +405,7 @@ Rules
 One short sentence of what happened, from the log of this act, rival names with their rank title ("Hoàng hậu Liễu Họa Mi").
 Được  Sủng 8→17 (+9) · Ân tình 0→5 (+5) · Thái hậu: quý ngươi hơn (0→8, +8)                 green
 Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơn (thiện cảm −15), ghen +25, oán +20   red, person name in ink
-                                                     Xem đầy đủ ở Nhật ký   (link: opens the Nhật ký tab)
+                                                     Xem đủ trong Sổ ghi   (link: opens the Sổ ghi tab; §7.4a — on a card with a Kèm row)
 ```
 - SEAL (owner 11/15, replaces the old "outcome for her" guess): THÀNH / BẠI come ONLY from the act's own roll (`resultShow(title,
   before, true|false)`); an act without a roll ("sure", null) gets NO stamp: the neutral grey seal "KẾT QUẢ" (`.sure`). KIT PART
@@ -5211,3 +5211,10 @@ OPT-IN, EVENT lá bài ONLY. The kit odds part (kitOdds: 7-segment bar + the who
 
 ## §6.2n ONE SET = ONE SIZE (owner OD 27/11 ~07:20Z, repeats OD L1354 (4) + L1867; canon overwrite of «equal height per ROW»; KK56)
 Every act card / choice button of ONE container (Hành sự `.cards`, Tài nghệ `.kskacts`, person panel `.pcb`, `.opts`, `.rbtn`, `.ktn-grid`) is the SAME width AND the SAME height across ALL rows: one-column grid, `grid-auto-rows:1fr` — the tallest card sets the height, content top-aligned, long content scrolls inside. Kit rules: j79 «ONE SET = ONE SIZE», jk4 `.pcb/.cards:has(> button.ka.kart)` and `.pc>.pcr .pcb`. Scan X09 = widths and heights equal ±2 px inside one container (all rows).
+
+## §6.2t ONE-LINE TAGS — K-TAG-WRAP (MAIN 185 order 28/11 ~03:04Z, Fold «KẾT QUẢ» seal broke over two lines; KK65 scan → KK66 fix)
+A tag / seal / chip label never breaks over two lines and is never cut (no ellipsis): the part grows, the text beside it wraps.
+- result seal `.seal` (kitResultSeal THÀNH · BẠI · KẾT QUẢ · BỎ DỞ, toasts CẤM · XONG): j63 `.rtoast .seal,.karesult .seal{white-space:nowrap}` (every toast + ring result card `.kri-res`); the title `.kan` beside it wraps.
+- summary chips of the inline item strip `.kinldet .kinlchips` (jkinl, «✓ Đã biết: Đúng phẩm», «Xa xỉ N» …): chips nowrap, the column grows to its longest chip (was max-width 132 px); host < 420 px keeps the kinl-narrow row.
+Scan: kit-std-scan rule X23 (scene «ringres» cycles every seal word on the same element). Before 8 (Fold KẾT QUẢ / BỎ DỞ + Fold/904/iPad Tư trang chip) → after 0.
+
