@@ -93,7 +93,9 @@ function fitNames(P){const el=P.el;el.classList.remove("kpk-slimall","kpk-tight"
    whatever host hangs the board (kitFocus, kitRing, kitStage answers / place card, kitPcard, any kitPick.open), shows its reason in the kit word pop-up (kpPop) when she taps the
    plaque or its «!» badge (.kfoc-i of kitFocus.btn) — kitPick does it itself, no host has to pass anything; the host's onOff(act,P) is only told afterwards. The «!» of an OPEN plaque
    shows its details (info, else the whole name + line) and never chooses. Hold-to-lift / two-tap choose of an open plaque are unchanged. */
-function whyHTML(a){const sub=[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).join(" · ");const h=(a.off?`<div class="kpopt">${esc(a.why||"Chưa làm được")}</div>`:"")+(a.info||"");return h||`<div class="kpopt">${esc(a.n)}</div>${sub?`<p>${esc(sub)}</p>`:""}`}
+/* the reason text is the SAME in every host (RV-185, law 11): a host that reads its reason from a lock row («✗ chưa có cớ», jkstage .kwhy) keeps no lock glyph — the kit strips a leading ✗ / ✕ / ✘ / × */
+const whyTxt=a=>String(a.why||"").replace(/^[\s✗✕✘×]+/,"").trim()||"Chưa làm được";
+function whyHTML(a){const sub=[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).join(" · ");const h=(a.off?`<div class="kpopt">${esc(whyTxt(a))}</div>`:"")+(a.info||"");return h||`<div class="kpopt">${esc(a.n)}</div>${sub?`<p>${esc(sub)}</p>`:""}`}
 function whyShow(P,a,b){try{if(typeof kpPop==="function"&&b)kpPop(b,whyHTML(a),{})}catch(e){console.error("kitPick why",e)}}
 function whyTap(P,a,n,b,ev){const bang=!!(ev&&ev.target&&ev.target.closest&&ev.target.closest(".kfoc-i"));if(!bang&&!a.off)return false;
  if(P.up!==n)lift(P,a.id);whyShow(P,a,b);if(a.off){try{P.o.onOff&&P.o.onOff(a,P)}catch(e){}}return true}

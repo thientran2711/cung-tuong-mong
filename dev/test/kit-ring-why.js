@@ -5,6 +5,7 @@
      focus  kitFocus (jfocus fillPick, host = .kfoc) — a focus view whose act is closed
      stage  kitStage answers (jkstage kstgTalkAsk, host = #modal .dlg) — a talk card whose answer is closed (after its lines, real taps on the speech box)
      bare   any other kitPick host with NO onOff (jkpcard entry / hang, host = #stage) — kitPick.open on the place stage
+   The reason line (#kpop .kpopt) must read exactly «chưa có cớ» in all 4 hosts (RV-185: no lock glyph «✗» in one host only).
    Each family: «Khiêu khích · vừa» closed «chưa có cớ» → a REAL tap on the plaque shows «chưa có cớ» in #kpop; a REAL tap on its «!» shows it again;
    the open plaque «Khiêu khích · nhẹ» keeps two-tap: 1st tap lifts (green ✓ shows, nothing chosen), 2nd tap chooses (ring / focus / bare).
    0 page errors.  MUTATE: env KMUT=1 serves a build with the old kitPick binding (no whyTap / whyShow) → must FAIL.
@@ -25,6 +26,8 @@ const URL='file://'+FILE;
   /* a real tap on an element's centre; returns what the finger hit (must be the element or inside it) */
   const tapEl=async(js)=>{const r=await p.evaluate(js=>{const e=eval(js);if(!e)return null;const b=e.getBoundingClientRect();const x=b.left+b.width/2,y=b.top+b.height/2,h=document.elementFromPoint(x,y);return {x,y,hit:!!h&&(h===e||e.contains(h)),hn:h?(h.tagName+"."+String(h.className).slice(0,40)+"/"+(h.parentElement?String(h.parentElement.className).slice(0,30):"")):""}},js);if(!r)return {ok:false};await tapAt(r.x,r.y);return {ok:true,hit:r.hit,hn:r.hn}};
   const pop=()=>p.evaluate(()=>{const e=document.getElementById('kpop');if(!e||e.hidden)return "";const r=e.getBoundingClientRect(),cs=getComputedStyle(e);if(r.width<2||cs.display==='none'||cs.visibility==='hidden'||r.bottom<0||r.top>innerHeight||r.right<0||r.left>innerWidth)return "";return e.textContent.replace(/\s+/g," ").trim()});
+  /* the reason line of the kit pop-up (its first .kpopt), as she reads it */
+  const popWhy=()=>p.evaluate(()=>{const e=document.getElementById('kpop');const t=e&&!e.hidden&&e.querySelector('.kpopt');return t?t.textContent.replace(/\s+/g," ").trim():""});
   const PLQ=(root,n)=>`[...document.querySelectorAll(${JSON.stringify(root+' .kpk .kpk-b')})].find(b=>b.textContent.includes(${JSON.stringify(n)}))`;
   const awayTap=async()=>{/* a tap on empty sky (top-left of the page, away from plaques) closes the pop-up and drops the lift */await tapAt(8,Math.round(H*.5))};
   /* one family: the closed plaque «… vừa» by a tap on its body, then by its «!»; the open plaque «… nhẹ» two-tap */
@@ -32,9 +35,9 @@ const URL='file://'+FILE;
    /* a player taps once the plaques have dropped in and settled */for(let w=0;w<30&&await p.evaluate(rt=>!!document.querySelector(rt+' .kpk .kpk-n.kpk-drop'),root||'body');w++)await sleep(150);await sleep(200);
    r.closed=await p.evaluate(js=>{const e=eval(js);return e?{off:e.classList.contains('kfoc-off'),bang:!!e.querySelector('.kfoc-i')}:null},PLQ(root,'Khiêu khích · vừa'));
    if(!r.closed){r.ok=false;return r}
-   const t1=await tapEl(PLQ(root,'Khiêu khích · vừa'));await sleep(250);r.tapHit=t1.hit;r.tapHn=t1.hn;r.popTap=await pop();await p.screenshot({path:`${OUT}/${wh}-${nm}-tap.jpg`,type:'jpeg',quality:60});
+   const t1=await tapEl(PLQ(root,'Khiêu khích · vừa'));await sleep(250);r.tapHit=t1.hit;r.tapHn=t1.hn;r.popTap=await pop();r.whyTap=await popWhy();await p.screenshot({path:`${OUT}/${wh}-${nm}-tap.jpg`,type:'jpeg',quality:60});
    await awayTap();r.popAfterAway=await pop();
-   const t2=await tapEl(PLQ(root,'Khiêu khích · vừa')+'.querySelector(".kfoc-i")');await sleep(250);r.bangHit=t2.hit;r.popBang=await pop();await p.screenshot({path:`${OUT}/${wh}-${nm}-bang.jpg`,type:'jpeg',quality:60});
+   const t2=await tapEl(PLQ(root,'Khiêu khích · vừa')+'.querySelector(".kfoc-i")');await sleep(250);r.bangHit=t2.hit;r.popBang=await pop();r.whyBang=await popWhy();await p.screenshot({path:`${OUT}/${wh}-${nm}-bang.jpg`,type:'jpeg',quality:60});
    await awayTap();
    r.reason=/chưa có cớ/.test(r.popTap)&&/chưa có cớ/.test(r.popBang)&&!r.popAfterAway;
    if(opt.two){/* two-tap of the open plaque: 1st = lift + ✓, nothing chosen; 2nd = chosen */
@@ -61,6 +64,9 @@ const URL='file://'+FILE;
   /* BARE: any other host, no onOff (as jkpcard entry on #stage) */
   {await p.evaluate(()=>{window.__pk=null;try{kitRing.close(true)}catch(e){}const st=document.getElementById('stage');kitPick.open({host:st,acts:[{id:'n',n:'Khiêu khích · nhẹ',word:'Có cơ',ton:'1 khắc'},{id:'v',n:'Khiêu khích · vừa',off:true,why:'chưa có cớ'}],dismiss:false,onPick:id=>{window.__pk=id}})});await sleep(1300);
    res.bare=await family('bare','#stage',`window.__pk`,{two:true});await p.evaluate(()=>{try{kitPick.destroy()}catch(e){}})}
+  /* RV-185 (law 11): the reason text is IDENTICAL in every host — no lock glyph («✗») in one and not the others */
+  {const W=['ring','focus','stage','bare'].flatMap(k=>res[k]?[res[k].whyTap,res[k].whyBang]:['(none)']);res.same={ok:W.every(w=>w==='chưa có cớ'),texts:[...new Set(W)]};
+   console.log(wh,'same ',res.same.ok?'PASS':'FAIL',JSON.stringify(res.same.texts));if(!res.same.ok)fail++}
   res.errs=errs;res.hs=await p.evaluate(()=>document.documentElement.scrollWidth>innerWidth+1);
   for(const k of ['ring','focus','stage','bare']){const r=res[k];console.log(wh,k.padEnd(5),r&&r.ok?'PASS':'FAIL',JSON.stringify({tap:r&&r.popTap,bang:r&&r.popBang,two:r&&r.two,lift:r&&r.lift,c1:r&&r.chosen1,c2:r&&r.chosen2,closed:r&&r.closed,hit:[r&&r.tapHit,r&&r.bangHit,r&&r.tapHn],host:r&&(r.host||r.dlg)}));if(!r||!r.ok)fail++}
   console.log(wh,'page errors',errs.length,errs.slice(0,3).join(' | '));if(errs.length)fail++;ALL[wh]=res;await ctx.close()}
