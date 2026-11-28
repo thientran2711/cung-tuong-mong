@@ -528,6 +528,91 @@
    "bot": "rand",
    "review": "see dev/handover/robot/rerun-E-E-S2-20261128-ES8-bd_san-random1-h",
    "moments": ""
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-random2",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "rand",
+   "seed": 2582426134,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "f65d019b"
+   },
+   "ending": "Hồng nhan bạc mệnh — Hoàng thượng băng hà y19, tuẫn táng (age 38; mixed build, last part on LIVE)",
+   "age": 38,
+   "buoi": 2653,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-random2-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-random2-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-skilled2",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 3927155259,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "f65d019b"
+   },
+   "ending": "Lãnh cung — Tuổi xuân qua đi (age 40 y22; pinned old build, never on LIVE)",
+   "age": 40,
+   "buoi": 5974,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-skilled2-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-skilled2-moments.md"
+  },
+  {
+   "life": "ES8-bd_san-random2-h",
+   "note": "run by E-S2, counted once in E-S8",
+   "valid": "EXTRA",
+   "dev": "ipad",
+   "road": "bd",
+   "seed": 3749450829,
+   "ending": "Hồng nhan bạc mệnh — Kiết lỵ (LIVE 5fb13d60+)",
+   "age": 21,
+   "buoi": 365,
+   "origin": "bd",
+   "bot": "",
+   "review": "see the E-S2 rerun file",
+   "moments": ""
+  },
+  {
+   "life": "ES8-bd_san-lazy3-h",
+   "note": "run by E-S2, counted once in E-S8",
+   "valid": "EXTRA",
+   "dev": "ipad",
+   "road": "bd",
+   "seed": 3492686679,
+   "ending": "Lãnh cung — Phát điên (LIVE 5fb13d60+)",
+   "age": 24,
+   "buoi": 937,
+   "origin": "bd",
+   "bot": "",
+   "review": "see the E-S2 rerun file",
+   "moments": ""
+  },
+  {
+   "life": "ES8-bd_tuyet-random4-h",
+   "note": "run by E-S3, counted once in E-S8",
+   "valid": "EXTRA",
+   "dev": "ipad",
+   "road": "bd",
+   "seed": 2859551964,
+   "ending": "Thái phi — Thành Thái phi y20 (survived; mixed build)",
+   "age": 37,
+   "buoi": 2906,
+   "origin": "bd",
+   "bot": "",
+   "review": "see the E-S3 rerun file",
+   "moments": ""
   }
  ],
  "parked": [
