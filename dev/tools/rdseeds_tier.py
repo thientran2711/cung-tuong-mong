@@ -65,6 +65,7 @@ def sizes(o, t):
     if t == 2: return [(g0, l0, 0)]
     for kg in g0:
         for kl in l0:
+            if t == 1 and kl.startswith('rel.') and any(not k.startswith('rel.') for k in l0): continue   # NHẸ keeps a cost the card shows
             pen = (kg != main_key(g0)) + (kl != main_key(l0))
             if t == 1: R.append(({kg: 1}, {kl: 1}, pen))
             else:
