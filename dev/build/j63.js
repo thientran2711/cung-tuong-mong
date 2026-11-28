@@ -505,6 +505,8 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead||window.__kNav)r
 .rtoast.karesult .rt{display:flex;flex-direction:column;gap:4px;font-size:.84rem}
 .rtoast.karesult .kat{display:flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid #e6d3ac}
 .rtoast.karesult .seal{font-size:.9rem;padding:3px 8px;flex:0 0 auto}
+/* K-TAG-WRAP (KK66, rule X23): a result seal word (THÀNH · BẠI · KẾT QUẢ · BỎ DỞ · CẤM · XONG) never breaks over two lines — every toast seal and the ring result card .kri-res */
+.rtoast .seal,.karesult .seal{white-space:nowrap}
 .rtoast.karesult .kan{font-weight:700;color:var(--ink);overflow-wrap:anywhere}
 .rtoast.karesult .ksen{color:var(--ink);line-height:1.35}
 .rtoast.karesult .kb{grid-template-columns:3.4rem minmax(0,1fr);font-size:.8rem;line-height:1.4}

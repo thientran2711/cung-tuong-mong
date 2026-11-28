@@ -271,7 +271,7 @@ function wDeaths(){const z=wZ();const o=z.seen,n=wSeen();z.seen=n;if(!o)return;
  else if(n.qs!=null&&o.qs!==n.qs&&o.qs!==undefined)worldStart("xa","Lập Hoàng hậu, ban ân điển")}
 /* the court roll: what moodMonth decided this month (text of j55 is fixed in this repo; test world_check pins it) */
 {const m0=moodMonth;moodMonth=function(){const T=T_();const b0=T?{kho:T.kho,bien:T.bien}:null;const r=m0.apply(this,arguments);try{if(S&&T){const s=String(r||"");
-  const k=/Sứ thần/.test(s)?"cong":/Lũ lụt/.test(s)?"lut":/Hạn hán/.test(s)?"han":/Biên ải/.test(s)?"giac":/Được mùa/.test(s)?"mua":/Quan tham/.test(s)?"tham":"";
+  const k=/sứ thần/i.test(s)?"cong":/lũ lụt/i.test(s)?"lut":/hạn hán/i.test(s)?"han":/biên ải/i.test(s)?"giac":/được mùa/i.test(s)?"mua":/quan tham/i.test(s)?"tham":"";/* STALE-TESTS-7: case-free — with the minister layer on (jagmin minOn) j55 writes «<Ngự sử> phát giác quan tham» (lowercase): the record lost «tham» */
   const fail=/chậm trễ|thua trận/.test(s);S.wMM={k,fail:fail?1:0,kho:T.kho,bien:T.bien,y:S.year,m:S.month}}}catch(e){}return r}}
 function wCourt(){const T=T_(),M=S.wMM;if(!T||!M||M.done)return;M.done=1;const b=B();
  if(M.k==="cong"&&T.bien>=b.su.bien)worldStart("su","Sứ thần các nước vào triều cống");
