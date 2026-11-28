@@ -64,8 +64,8 @@ Rules (rank-pace / net-ghen) turned many shown numbers into `pvQuy(v,N,"quý ng�
 | punish-scan.py | clean | — |
 | punish-weight-scan.py | 1 fault jstagehere stayRoll sev | same on LIVE + b3a (pre-existing, rankpace-b3a report) |
 | ghen-shown.js | FAIL «visit: no Thắp đèn line» | same FAIL on lr-rules caa95310 and 3b 4206db2c (pre-existing) |
-| oldsave-r1 | QC_OLDSAVE | — |
-| quickcheck.sh --runs 3 ALONE (CTM_LIVE_REF=5ad52416) | QC_RESULT | — |
+| oldsave-r1 (LIVE save → new build, 3 sizes) | 16/16 | — |
+| quickcheck.sh --runs 3 ALONE (CTM_LIVE_REF=5ad52416) | fcbc1992: CORE GATE G1 one-core-bind FAIL (svtGainX printed BAL.eff.jstaff.meAct) — rest PASS; **f857c7f3: CORE GATES PASS · TIME-SPILL PASS · QUICKCHECK PASS** (open 2454 ms, old save ok, perf new/live render 288/323, tab 577/568, buổi 2416/2019, tasks>200 45/37) | — |
 | LIVE ancestor / deletions | yes / 0 | — |
 
 ## OD checks (no rule changed — law 16)
@@ -75,3 +75,8 @@ Rules (rank-pace / net-ghen) turned many shown numbers into `pvQuy(v,N,"quý ng�
 ## Open for MAIN (law 11 question, not changed here)
 - jsvt svTouch «seen» on covert kinds (bribe / threat / tm / plot) is a real learning by the master but does not go through jagknow spyLearn (no learn oán, no m.spyKn record): two rules for «the master learns her servant was turned». Rec: svTouch seen + covert kind → spyLearn(m, A, BAL.svt.rel[kind]). Needs MAIN / owner word (law 16).
 - RV-163L question carried (LR-RULES): NPC grouped harm 15/15 LIVE vs 7/15 b3b.
+
+## LOG after the merge
+- 07:4xZ RESOLVED PASS f857c7f3 sent (LR-RULES, MAIN 187, PUNISH-TIER-9). TMK-WARN-2 session_01Rc5AsKKRbFjb8jq7W9R9UA inactive (refused).
+- Reviewer heads: RV-181 2849705d (jaudit pvOan prints a whole fall) → RV-184 ce77c7cc (elderTalkAmt shared amount; SUPERSEDES f857c7f3) → MAIN 188: 3b r2 = review/lc34-3b-r2-rv184 1a6a1aed (re-merge onto lr-rules-r2 a96564ad). Do NOT land f857c7f3 / lc34-3b-r1-rv.
+- MAIN 187 ruling (07:04Z): svTouch «seen» on turn kinds → spyLearn. **review/svtouch-spylearn-r2 d6e7ac24** on 1a6a1aed (3f8bdc08 on ce77c7cc superseded): SVT_TURN {bribe,threat,tm,plot} seen → spyLearn(m,A,BAL.svt.rel[kind]); tai-mat-know-scan section 5 «witness roads» before 1 → after 0; tai-mat-know.test 24/24 (+2 checks); servant-trust.js 3b-merge harness gap (joanpace fold of exact oán/ghét rows) fixed: 1a6a1aed-equivalent 97–98/101 → 100/101 (last «Hỏi lén seen −10» pre-existing on caa95310). RV READY → RV-184, lander LR-RULES.
