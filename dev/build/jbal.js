@@ -497,5 +497,9 @@ Object.assign(BAL,{itFx:{tramngoc:{w:{sac:2}},
 if(typeof IT!=="undefined")for(const k in BAL.itFx)if(IT[k])Object.assign(IT[k],BAL.itFx[k]);
 /* E-TIER-B13 batch 3b (C45, law 2 NHẸ · VỪA · NẶNG; FOREMAN E C11 ruling 28/11 11:43Z): the night preparation ladder, read by her card (j75 PEND.prep)
    and by every NPC's night (j75 rivalNight, law 1): bạc per tier, «được ưa» q per tier (worn jewellery adds its own +jb on top: a state, not a way),
-   suc = the Sức the «Tập trước <art>» road (the Sức road of VỪA) costs. A player without jewellery gets exactly the old numbers. */
-Object.assign(BAL,{tier:Object.assign(BAL.tier||{},{prep:{bac:[0,5,15],q:[1,2,3],suc:5}})});
+   suc = the Sức the «Tập trước <art>» road (the Sức road of VỪA) costs; its success = the VỪA result, its failure = the NHẸ result (RV3B fix 1).
+   sucMin = the Sức an NPC keeps before she takes the Sức road (rivalNight); jb = the worn-jewellery bonus: 0 without worn Sắc, else
+   max(jb.min, jb.base + round(worn Sắc / jb.per)) — ONE formula, prepJb(p), read by her card and every NPC night (RV3B fix 3, law 4). */
+Object.assign(BAL,{tier:Object.assign(BAL.tier||{},{prep:{bac:[0,5,15],q:[1,2,3],suc:5,sucMin:30,jb:{min:2,base:1,per:3}}})});
+/* the +«được ưa» the jewellery a consort really wears adds to her night (law 6c: wearBonus reads her own chest; the shelf set Sắc is not jewellery) */
+function prepJb(p){try{const wb=wearBonus(p),js=(wb.sac||0)-(wb.shSac||0),J=BAL.tier.prep.jb;return js>0?Math.max(J.min,J.base+Math.round(js/J.per)):0}catch(e){return 0}}
