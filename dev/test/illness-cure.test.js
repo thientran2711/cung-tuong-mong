@@ -19,8 +19,10 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
   ok(/Tĩnh dưỡng · nhẹ|Tự bốc thuốc · nhẹ/.test(t)&&/Sang Thái y viện xin thuốc · vừa/.test(t)&&/Truyền thái y · nặng/.test(t)&&/Cầu xin ngự y · nặng/.test(t),`${name} every tier is a CURE road (no pulse-only road while ill)`);
   await p.screenshot({path:`${OUT}/${name}-1-ill-card.png`});
   /* the flipped back of the nặng card: Tốn / Được (law 3) + an odds word (law 7) */
-  const nk=p.locator('#modal button.ka',{hasText:'· nặng'}).first();const flipped=await nk.count();if(flipped)await nk.click();await p.waitForTimeout(1100);
-  t=await card(p);const back=await p.evaluate(()=>!!S.ill);ok(flipped&&back&&/Tốn/i.test(t)&&/(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững)/.test(t),`${name} nặng card back (real tap = flip, not run) shows Tốn + odds word: ${t.slice(-300)}`);
+  /* the nặng plaque (main kit-stage-r17: the card shows each way's Tốn / Thành / odds on its plaque; ONE tap runs it — RV-183 test update, no tap here):
+     Tốn + odds word (law 7) + a REAL gain «khỏi bệnh», never its own cost read as a gain («Bạc +» / «Sủng +», law 3 / 4) */
+  const nk=p.locator('#modal :is(button.ka,button.kpk-b,.kpk)',{hasText:'Truyền thái y'}).first();const flipped=await nk.count();await p.waitForTimeout(600);
+  t=await card(p);const back=await p.evaluate(()=>!!S.ill);ok(flipped&&back&&/Tốn/i.test(t)&&/(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững)/.test(t)&&/Truyền thái y · nặng/.test(t)&&!/Thành:? ?\|? ?(Bạc|Sủng|Sức) \+ \| ! \| (Truyền thái y|Cầu xin)/i.test(t)&&!/(Truyền thái y|Cầu xin ngự y|xin thuốc)[^!]*THÀNH \| (Bạc|Sủng|Sức) \+/.test(t),`${name} nặng plaque shows Tốn + odds word, no cost read as its gain: ${t.slice(-300)}`);
   await p.screenshot({path:`${OUT}/${name}-2-nang-back.png`});
   await p.evaluate(()=>{Q.length=0;try{$("modal").hidden=true}catch(e){}render()});await p.waitForTimeout(400);
   /* (2) law 2: the bạc road always has its matching road in the SAME tier, both shown side by side (each its own Tốn / odds); the one she cannot pay is greyed with the reason */
