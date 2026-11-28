@@ -592,10 +592,13 @@ function kcDien(way){const sc=kcMyScore(way);const C=KC.cut;S.kc.tt.sc=Math.roun
 function kcTrialW(){try{const K=S.kc,W=typeof selxNumW==="function"?selxNumW:String;
  if(K.soOk===0&&K.soPts){const ok=K.soPts.filter(x=>x[1]);return `<p>Sơ tuyển: ma ma xét năm điều (${K.soPts.map(x=>x[0]).join(", ")}); ngươi đạt ${W(ok.length)}${ok.length?` (${ok.map(x=>x[0]).join(", ")})`:""}, phải đạt ${W(BAL.kc2.soNeed)} mới qua.</p>`}
  const T=K.tt;if(T&&T.sc!=null)return `<p>Điện tuyển: ngươi được ${W(Math.max(0,T.sc))} phần; mốc giữ thẻ bài là ${W(KC.cut[0])} phần. Cơ giữ thẻ lúc ấy: ${oddsChip(word(T.p||0))}</p>`}catch(e){console.error("kcTrialW",e)}return""}
+/* F-TIER-B5: «Xin ở vậy» = nữ phu tử only with Tài ≥ BAL.kc2.st.kc.nuPhuTu or a thầy đồ house (expert: known literary talent + scholar family) */
+function kcNptOk(){return S.tai>=BAL.kc2.st.kc.nuPhuTu||S.origin.k==="thd"}
+function kcNptW(){return `Cần Tài ${BAL.kc2.st.kc.nuPhuTu} trở lên, hoặc con nhà thầy đồ`}
 function kcTraveD(){const tm=kcTmMan();const r=!!(S.tm96&&S.tm96.h>=80&&S.tm96.rise&&kcRare("kcR2",.6));const r5=S.duc>=70&&S.danh>=BAL.danhG.kcR5&&kcRare("kcR5",.6);
  if(!S.kc.suit.length)S.kc.suit.push(kcSuitor());const s=S.kc.suit[0];
  return{who:kcFace(kcR("cha")||S.kc.fam[0]),t:`${kcTrialW()}<p>Ngươi bị trả thẻ bài, về nhà. Cha thở dài: "Thôi thì gả cho nhà tử tế." Nhà ${s.n} đã đợi sẵn.</p>`,o:[
- kcO(`Gả cho ${s.n}`,{},()=>kcMarry(s)),kcO("Xin ở vậy, mở lớp dạy chữ cho con gái",{},()=>{if(S.tai>=60||S.origin.k==="thd")kcEndDo("Nữ phu tử",`Nàng không lấy chồng. Lớp học của nàng ở ngõ Tây có ba mươi đứa con gái nhà nghèo.`,"Nữ phu tử");else kcMarry(s)},{j67:"tốn: không"}),
+ kcO(`Gả cho ${s.n}`,{},()=>kcMarry(s)),kcO("Xin ở vậy, mở lớp dạy chữ cho con gái",{},()=>{if(kcNptOk())kcEndDo("Nữ phu tử",`Nàng không lấy chồng. Lớp học của nàng ở ngõ Tây có ba mươi đứa con gái nhà nghèo.`,"Nữ phu tử");else kcMarry(s)},{j67:"tốn: không",lk:()=>kcNptOk()?"":kcNptW()/* F-TIER-B5 (FOR MAIN find, law 6/7): the condition is shown up front; she can no longer tap it and be married off silently */}),
  kcO("Cắt tóc đi tu",{},()=>kcEnd("tu"))].concat(r?[kcO(`✦ Gả cho ${tm.name}`,{},()=>kcEnd("kcR2"),{r97:1,j67:"tốn: không · (Cơ duyên hiếm)"})]:[]).concat(r5?[kcO("✦ Nhận làm nghĩa nữ, đi hòa thân",{},()=>kcEnd("kcR5"),{r97:1,j67:"tốn: không · (Cơ duyên hiếm)"})]:[])}}
 /* entry: she becomes a consort; the carry-over table of OUTSIDE_PLAN §9 */
 function kcEnter(rank){const b=rsnap();const K=S.kc;K.inPal=1;K.r=rank;K.yIn=S.year;S.kpTron=1;
@@ -794,7 +797,7 @@ const KCH={
  so:[["Ra mắt","qua hay không tùy dung mạo, sức khỏe, tiếng tăm và gia thế","có rủi ro"],["Dúi bạc","dễ qua hơn","có rủi ro"],["Nhờ tổ mẫu","dễ qua hơn; tổ mẫu phật ý (nhiều)","có rủi ro"]],
  phuc:[["Dâng","tài nghệ dâng lên cộng vào Điện tuyển","an toàn"],["Để tài nghệ","lấy phần giữa, cộng vào Điện tuyển","an toàn"]],
  dien:[["Đáp lời","Đức nặng hơn; giữ thẻ bài hay không, không bao giờ chắc","có rủi ro"],["Đối đáp","Tài nặng hơn; giữ thẻ bài hay không, không bao giờ chắc","có rủi ro"]],
- trave:[["Gả cho","xuất giá; nhưng kiếp này dừng ở ngoài cung","an toàn"],["Xin ở vậy","Tài cao hay nhà thầy đồ thì thành nữ phu tử; không thì vẫn bị gả; nhưng đường nào cũng vậy, kiếp này dừng ngoài cung","an toàn"],["Cắt tóc","xuất gia; nhưng kiếp này dừng ở cửa chùa","an toàn"]]};
+ trave:[["Gả cho","xuất giá; nhưng kiếp này dừng ở ngoài cung","an toàn"],["Xin ở vậy","không lấy chồng, mở lớp thành nữ phu tử; nhưng kiếp này dừng ngoài cung","an toàn"],["Cắt tóc","xuất gia; nhưng kiếp này dừng ở cửa chùa","an toàn"]]};
 /* the non-bạc road of every bạc choice (owner 15/11 20:30Z: same value, by how hard bạc is to earn at home — about 10–20 bạc a month) */
 const KCALT={
  phan:()=>{const d=kcR("di");return d?[((rp)=>kitRiskOpt(kcO("Thử một chút lên cổ tay",{suc:-10},()=>kcDo("Hộp phấn lạ",()=>{if(roll(rp())){apply({sac:-2});S.kc.proof[d.id]=(S.kc.proof[d.id]||0)+1;return"Cổ tay nổi mẩn đỏ. Ngươi giữ hộp phấn làm chứng."}return"Không có gì lạ."})),()=>rp()))(()=>BAL.kc2.kcCard.thuMotChutLen_rb+(nv(d,"kcPowder")))]:[]},

@@ -250,8 +250,8 @@ PEND.rtNpcEsc=pp=>{const v=RV(pp.v);if(!v||!v.alive||!v.rtEsc)return null;const 
   rtOpt("Uy hiếp nàng",{},rtX(100,`bạc +${BAL.route.npcThreat.bac} · chứng cứ về nàng +${BAL.route.threatEv}`,"",`${v.name} oán ngươi`),()=>{apply(BAL.route.npcThreat);evA(S,v,BAL.route.threatEv);oanAdd(v,S,BAL.route.oan.threat)}),
   rtOpt("Làm như không thấy",{},rtX(100,"không dính dáng","",""),()=>{})]}};
 PEND.rtAn=pp=>{if(!S)return null;return{ti:"Một đời an nhiên",t:`<p>Đã ${Math.floor((S.turn-S.rt.ad.since)/12)} năm ngươi đóng cửa tĩnh dưỡng. Không ai hại ngươi, ngươi cũng không hại ai. Trong Sổ luân hồi, kiếp này đã có một kết an nhiên.</p>`,stage:[S],headArt:{src:RT_ART.an,label:"An nhiên"},o:[
-  rtOpt("Khép kiếp này trong an nhiên",{},rtX(100,"kết thúc kiếp này","",""),()=>over("Một đời an nhiên",`${S.name} sống những năm còn lại trong cung, kinh kệ, hoa cỏ, không tranh không đoạt.`,"Một đời an nhiên trong cung",true)),
-  rtOpt("Sống tiếp",{},rtX(100,"kiếp này còn tiếp","",""),()=>{})]}};
+  rtOpt("Sống tiếp",{},rtX(100,"kiếp này còn tiếp","",""),()=>{}),/* F-TIER-B5 (law 2): stay first, the exit last */
+  rtOpt("Khép kiếp này trong an nhiên",{},rtX(100,"kết thúc kiếp này","",""),()=>over("Một đời an nhiên",`${S.name} sống những năm còn lại trong cung, kinh kệ, hoa cỏ, không tranh không đoạt.`,"Một đời an nhiên trong cung",true))]}};
 /* ---------- monthly: heat, blackmail, the child's face, NPC routes, fire ---------- */
 function rtMonth(){if(!rtRoad()||!S.rt)return"";const T=S.rt;let ev="";
  const w=watcher();T.heat=cl(T.heat-RTC.decay-(w&&w.loyal>=BAL.loy.top?2:0),0,100);if(S.out)T.wasCold=1;
@@ -332,7 +332,7 @@ function rtNgCards(){const T=S.rt;if(!T||!T.ng||T.ng.held)return[];const P=T.ng.
 /* the ceremony */
 PEND.rtNg=pp=>{const T=S&&S.rt;const k=rtNgKid();if(!T||!T.ng||!k)return null;const N=T.ng;const v=RV(N.acc);
  const oV=od(BAL.odb.jroute.odOV+eyes(S)*5+S.tamco/5);
- const O=[rtOpt("Bằng lòng nghiệm máu",{},`${word(rtNgEst())} · thành: máu hòa · ngươi trong sạch · kẻ tố rước họa vào thân · hỏng: máu không hòa — ngươi${k.tf?"":" bị vu oan và"} bị xử như tư thông`,()=>rtNgRun(false))];
+ const O=[rtOpt("Bằng lòng nghiệm máu",{},`${word(rtNgEst())} · thành: máu hòa · ngươi trong sạch · kẻ tố rước họa vào thân · hỏng: máu không hòa — ngươi${k.tf?"":" bị vu oan và"} bị xử như tư thông, có thể bị ban chết, kiếp này dừng`/* F-TIER-B5: rtNgLose(false) rolls BAL.route.ngDeath */,()=>rtNgRun(false))];
  if(N.saw&&v)O.push(rtOpt(`Tố ngược ${v.name} gian lận`,{},rtX(oV,`bát dầu bị vạch trần · ${v.name} rước họa vào thân · khỏi phải nghiệm`,"không chứng được · vẫn phải nghiệm"),()=>{if(roll(oV))rtNgWin(true);else rtNgRun(false)}));
  O.push(rtOpt("Nhận tội",{},rtX(100,"giữ được mạng (lãnh cung)","",`${k.name} bị đưa ra khỏi cung${k.tf?" · người ấy bị xử trảm":""}`),()=>rtNgLose(true,!k.tf)));
  return{ti:"Trích huyết nghiệm thân",t:`<p>Trước mặt Hoàng thượng và lục cung, thái y bưng lên một bát nước trong. ${rtAccN(N.acc)} là người tâu xin. Một giọt máu của Hoàng thượng, một giọt máu của ${k.name}: hòa thì là cốt nhục, không hòa thì là tội khi quân.</p>`,
@@ -351,9 +351,9 @@ function rtNgRun(fresh){const T=S.rt,N=T&&T.ng;if(!N)return;const P=N.P,k=rtNgKi
  rtNgScene(ok,k.name,()=>{if(ok){if(k.tf)rtEnd("tt_hoa");rtNgWin(false)}else{log(`<span class="r">Hai giọt máu tách rời trong bát nước.</span>`);if(!fresh&&!N.re){N.re=1;rtPush("rtNg2",{})}else rtNgLose(false,!k.tf)}rtAfter()})}
 PEND.rtNg2=pp=>{const T=S&&S.rt;const k=rtNgKid();if(!T||!T.ng||!k)return null;const oR=od(BAL.odb.jroute.odOR+(S.th||0)/3+(S.doctor?15:0)+(k.dateOff&&!k.tf&&k.thyRec&&typeof BAL==="object"&&BAL.preT?BAL.preT.recDefend:0));/* a real early / late birth AND the thái y mạch án holds the month the pregnancy was found (review/suc-khoe-fix F9) */
  return{ti:"Máu không hòa",t:`<p>Cả điện lặng ngắt. Hai giọt máu nằm riêng hai góc bát. Hoàng thượng chưa nói gì; mọi ánh mắt đổ dồn vào ngươi.</p>`,stage:[k],headArt:{src:RT_ART.bat,label:"Nghiệm thân"},o:[
-  rtOpt("Xin thái y nghiệm lại bằng bát nước mới",{},rtX(oR,"nghiệm lại bằng bát sạch: kết quả theo cha thật","Hoàng thượng không cho nghiệm lại · bị xử tội",k.tf?"bát sạch thì máu vẫn không hòa":""),()=>{if(roll(oR))rtNgRun(true);else rtNgLose(false,!k.tf)}),
-  rtOpt("Nhận tội",{},rtX(100,"giữ được mạng (lãnh cung)","",`${k.name} bị đưa ra khỏi cung`),()=>rtNgLose(true,!k.tf)),
-  rtOpt("Kêu oan rồi cúi đầu chịu tội",{},rtX(100,"","",`bị xử như tư thông: ban chết hay lãnh cung · ${k.name} bị đưa ra khỏi cung`),()=>rtNgLose(false,!k.tf))]}};
+  rtOpt("Nhận tội",{},rtX(100,"giữ được mạng (lãnh cung)","",`${k.name} bị đưa ra khỏi cung`),()=>rtNgLose(true,!k.tf)),/* F-TIER-B5 (law 2): NHẸ = the sure road (lãnh cung, life goes on) first; the two death-risk roads after */
+  rtOpt("Xin thái y nghiệm lại bằng bát nước mới",{},rtX(oR,"nghiệm lại bằng bát sạch: kết quả theo cha thật","Hoàng thượng không cho nghiệm lại · bị xử tội, có thể bị ban chết, kiếp này dừng",k.tf?"bát sạch thì máu vẫn không hòa":""),()=>{if(roll(oR))rtNgRun(true);else rtNgLose(false,!k.tf)}),
+  rtOpt("Kêu oan rồi cúi đầu chịu tội",{},rtX(100-BAL.route.ngDeath,"giữ được mạng (lãnh cung)","bị ban chết, kiếp này dừng",`${k.name} bị đưa ra khỏi cung`)/* F-TIER-B5 (law 7): the death roll (BAL.route.ngDeath) now shows its TRUE word = her chance to live, and the Bại row names the end */,()=>rtNgLose(false,!k.tf))]}};
 function rtNgWin(vach){const T=S.rt,N=T.ng,k=rtNgKid();const v=RV(N.acc);if(k)k.tfOk=1;T.ng=null;apply(BAL.route.ngWin);rtHeat(-20);rtEmo("vui",50,"giọt máu hòa");rtStat(vach?"ng_vach":"ng_win");
  if(vach)rtEnd("ng_vach");log(`<span class="g">${vach?"Bát nước có dầu bị vạch trần trước điện.":"Hai giọt máu hòa làm một."} Hoàng thượng ôm ${k?k.name:"con"} vào lòng. ${sgStat(BAL.route.ngWin.sung)} · Danh +${BAL.route.ngWin.danh}.</span>`);
  if(v&&v.alive){oanAdd(v,S,BAL.route.oan.ngWin);if(vach||N.oil)deathSentence(v,"gian lận khi trích huyết nghiệm thân");else punish(v,"vu cáo phi tần",2)}}

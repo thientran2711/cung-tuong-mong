@@ -437,8 +437,8 @@ PEND.cnvName=pp=>{if(!isSrv()||(S.age||0)<BAL.ageMin)return null;const m=srvM();
   {n:"Lui về sau chủ",fx:{tin:5},x:"Hoàng thượng để ý -10",go:()=>{S.nt=Math.max(0,S.nt-10)}}]}};
 PEND.cnvWed=pp=>{if(!isSrv()||(S.age||0)<BAL.ageMin)return null;const w=WEDW[pp.w||0];
  return{t:`<p>${w} dâng sớ xin Hoàng thượng ban gả một cung nữ hiền thục. Nội vụ phủ dâng tên ngươi.</p>`,who:pEmp(),o:[
-  {n:"Tạ ơn, xuất giá",fx:{},x:"kết thúc kiếp này: làm vợ ngoài cung",go:()=>over("Xuất giá",`${S.name} được ban gả cho ${w}, rời cung bằng kiệu hoa. Từ thân cung nữ, ngươi thành chính thất một nhà, sống nốt đời ngoài bức tường son.`,`Được ban gả cho ${w}`,true)},
-  {n:"Xin ở lại hầu chủ",fx:{tin:BAL.eff.j42.tinWedStay},x:"ở lại hầu chủ"}]}};
+  {n:"Xin ở lại hầu chủ",fx:{tin:BAL.eff.j42.tinWedStay},x:"ở lại hầu chủ"},/* F-TIER-B5 (law 2): NHẸ = stay first; the exit (kết thúc kiếp này) is the NẶNG tier, last */
+  {n:"Tạ ơn, xuất giá",fx:{},x:"kết thúc kiếp này: làm vợ ngoài cung",go:()=>over("Xuất giá",`${S.name} được ban gả cho ${w}, rời cung bằng kiệu hoa. Từ thân cung nữ, ngươi thành chính thất một nhà, sống nốt đời ngoài bức tường son.`,`Được ban gả cho ${w}`,true)}]}};
 PEND.cnvAge=()=>{if(!isSrv())return null;const hi=S.srv.rk>=BAL.srvRk.cs;const fate=hi?"Chưởng sự xuất cung, an hưởng tuổi già":S.bac>=100?"Xuất cung, mở tiệm nhỏ ở kinh thành":"Xuất cung về quê";
  const o=[{n:"Xuất cung về quê",fx:{},x:"kết thúc kiếp này",go:()=>over("Xuất cung",`${S.name} ${S.age} tuổi, rời cung theo lệ với ${S.bac} lạng bạc. ${hi?"Là chưởng sự cô cô, ngươi được ban thêm bạc và một mảnh ruộng.":S.bac>=100?"Ngươi mở một tiệm thêu nhỏ ở kinh thành.":"Ngươi về quê, sống đời bình dị."}`,fate,true)}];
  if(hi)o.push({n:"Ở lại làm ma ma",fx:{danh:3},x:typeof exSrvMama==="function"?"dự khảo hạch Nội vụ phủ; đỗ thì ở lại đến già, dạy cung nữ mới":"ở lại đến già, dạy cung nữ mới",go:()=>{if(typeof exSrvMama==="function")exSrvMama();else{S.srv.mama=1;log("Ngươi ở lại cung làm ma ma.")}}});
@@ -612,12 +612,12 @@ PEND.cnvBlack=pp=>{const v=RV(pp.r),mis=srvM();if(!isSrv()||!v||!v.alive)return 
  return{t:`<p>Thái giám của ${v.name} chặn ngươi sau hòn non bộ: “Chuyện ngươi với nam nhân bên ngoài, chủ tử nhà ta biết cả. Muốn giữ mạng thì nghe lời.”</p>`,who:pv(v),o:cnvPend(S,cnvBlackOpts(S,v,mis))}};
 PEND.cnvGrant=pp=>{if(!isSrv()||(S.age||0)<BAL.ageMin)return null;const m=pp.m&&manById(pp.m);const w=m?m.name:WEDW[pp.w||0];const by=pp.by==="th"&&!S.thDead?"Thái hậu":(srvM()?srvM().name:"Chủ nhân");
  return{t:`<p>${by} khen ngươi hầu hạ chu đáo, muốn ban gả ngươi cho <b>${w}</b>${m?`, người ngươi ${tinhW(m.tinh).replace("ngươi","")}`:""}.</p>`,who:pp.by==="th"?pTH():(srvM()?pv(srvM()):pMe()),o:[
-  {n:"Tạ ơn, xuất giá",fx:{},x:"kết thúc kiếp này: được ban hôn",go:()=>over("Được ban hôn",`${by} ban gả ${S.name} cho ${w}. Ngươi rời cung có của hồi môn${m?", về với người mình thương":""}.`,`Được ${by} ban hôn cho ${w}`,true)},
-  {n:"Xin ở lại",fx:{tin:pp.by==="th"?0:BAL.eff.j42.tinGrantStay},x:"từ chối khéo, ở lại hầu chủ"}]}};
+  {n:"Xin ở lại",fx:{tin:pp.by==="th"?0:BAL.eff.j42.tinGrantStay},x:"từ chối khéo, ở lại hầu chủ"},/* F-TIER-B5 (law 2): NHẸ = stay first; the exit (kết thúc kiếp này) is the NẶNG tier, last */
+  {n:"Tạ ơn, xuất giá",fx:{},x:"kết thúc kiếp này: được ban hôn",go:()=>over("Được ban hôn",`${by} ban gả ${S.name} cho ${w}. Ngươi rời cung có của hồi môn${m?", về với người mình thương":""}.`,`Được ${by} ban hôn cho ${w}`,true)}]}};
 PEND.cnvPrince=pp=>{const m=manById(pp.m);if(!isSrv()||!m||!srvAdult(m))return null;
  return{t:`<p>${m.name} dâng sớ xin Hoàng thượng ban cung nữ ${S.name} về phủ làm thiếp.</p>`,who:pMan(m),o:[
-  {n:"Theo về vương phủ",fx:{},x:"kết thúc kiếp này: làm thiếp vương gia",go:()=>over("Vào vương phủ",`${S.name} được ban về phủ ${m.name} làm thiếp. Từ phòng cung nữ, ngươi bước vào một hậu viện khác.`,`Làm thiếp của ${m.name}`,true)},
-  {n:"Xin ở lại hầu chủ",fx:{tin:BAL.eff.j42.tinPrinceStay},x:`vương gia phật ý: tình ý ${balSg(BAL.eff.j42.tinhPrinceStay)}`,go:()=>{m.tinh=Math.max(0,m.tinh+BAL.eff.j42.tinhPrinceStay)}}]}};
+  {n:"Xin ở lại hầu chủ",fx:{tin:BAL.eff.j42.tinPrinceStay},x:`vương gia phật ý: tình ý ${balSg(BAL.eff.j42.tinhPrinceStay)}`,go:()=>{m.tinh=Math.max(0,m.tinh+BAL.eff.j42.tinhPrinceStay)}},/* F-TIER-B5 (law 2): NHẸ = stay first; the exit (kết thúc kiếp này) is the NẶNG tier, last */
+  {n:"Theo về vương phủ",fx:{},x:"kết thúc kiếp này: làm thiếp vương gia",go:()=>over("Vào vương phủ",`${S.name} được ban về phủ ${m.name} làm thiếp. Từ phòng cung nữ, ngươi bước vào một hậu viện khác.`,`Làm thiếp của ${m.name}`,true)}]}};
 /* release age: marry the man she is bound to */
 (function(){const a0=PEND.cnvAge;PEND.cnvAge=pp=>{const d=a0(pp);try{const b=srvBond();if(d&&b)d.o.unshift({n:`Xuất cung thành thân với ${b.name}`,fx:{},x:`kết thúc kiếp này · ${b.name} ${tinhW(b.tinh)}`,go:()=>over("Thành thân",`${S.name} ${S.age} tuổi, rời cung theo lệ. Ngoài cửa Thần Vũ, ${b.name} đã đứng chờ. Hai người thành thân, sống nốt đời bên nhau.`,`Xuất cung thành thân với ${b.name}`)})}catch(e){}return d}})();
 (function(){const o0=over;over=function(h,t,fate,alive){if(isSrv()&&h==="Xuất cung"&&/30 tuổi/.test(t)){const b=srvBond();if(b){h="Thành thân";t+=` ${b.name} chờ ngươi ngoài cửa cung; hai người thành thân.`;fate=`Xuất cung thành thân với ${b.name}`}}return o0.call(this,h,t,fate,alive)}})();

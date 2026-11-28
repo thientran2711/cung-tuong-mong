@@ -67,7 +67,7 @@ const T=[
   R.j24={dead:!!S.dead,k:S.lvEp&&S.lvEp.k,m:S.lvEp&&S.lvEp.m,want:m.name};
   deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;
   /* servant card «Theo về vương phủ» (PEND.cnvPrince) when she is a maid life */
-  try{if(typeof isSrv==="function"){const d=PEND.cnvPrince({m:m.id});R.prince=d?"card":"no card (not a maid life)";if(d){d.o[0].go();R.princeK=S.lvEp&&S.lvEp.k}}}catch(e){R.prince="err "+e.message}
+  try{if(typeof isSrv==="function"){const d=PEND.cnvPrince({m:m.id});R.prince=d?"card":"no card (not a maid life)";if(d){d.o.find(o=>/^Theo về vương phủ/.test(o.n)).go();/* F-TIER-B5: the exit is the last (NẶNG) option now */R.princeK=S.lvEp&&S.lvEp.k}}}catch(e){R.prince="err "+e.message}
   deser(JSON.parse(snap));Q.length=0;S.dead=false;S.lvEp=null;
   /* Tiểu thư ngoài cung (before entry): her home-road endings keep their own words, no «Về sau» */
   S.kc=S.kc||{};const inP=S.kc.inPal;S.kc.inPal=0;over("Xuất gia","Nàng cắt tóc ở chùa Hộ Quốc.","Xuất gia");R.kc={dead:!!S.dead,ep:!!S.lvEp};S.kc.inPal=inP;

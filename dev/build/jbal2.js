@@ -1191,7 +1191,7 @@ Object.assign(BAL.kc2,{"detVaiBan_od":60,"soiBongNuocChai_od":65,"raRuongGiupCha
    Starts / set-values / Gia tư cuts (PART 3, values unchanged): kgt / kap = [base, random span] at the start, kgtBr = [tt / ch house, td house] Gia thanh bonus;
    gtuPoor = Gia tư below this adds 1 to the monthly Áp lực; gtuRich = Gia tư from this opens the rare muối event (kcR6); chaYes = Áp lực after cha
    agrees to the tuyển tú; mienSo = Áp lực at least this when a miễn tuyển girl's Sơ tuyển comes (cha then định hôn). */
-Object.assign(BAL.kc2.st,{kc:{moi:40,hot:60,mien:50,nhan:70,dinh:90,kgt:[40,20],kgtBr:[10,-10],kap:[10,10],gtuPoor:40,gtuRich:90,chaYes:40,mienSo:85,
+Object.assign(BAL.kc2.st,{kc:{nuPhuTu:60/* F-TIER-B5: Tài she needs to stay unmarried and teach (a thầy đồ house always may) — the card shows it as its Cần line */,moi:40,hot:60,mien:50,nhan:70,dinh:90,kgt:[40,20],kgtBr:[10,-10],kap:[10,10],gtuPoor:40,gtuRich:90,chaYes:40,mienSo:85,
  /* review/one-core-jkc-2: bạc of the tiểu thư dialog options (the option cost and its lock read the same key): bacHuynh = «Đưa bạc» to the elder brother,
     bacThu = «Hồi âm, gửi kèm quà», bacMien = «Xin cha lo cho được miễn tuyển», bacMama = «Dúi bạc cho ma ma khám tuyển» */
  bacHuynh:50,bacThu:15,bacMien:40,bacMama:60}});
