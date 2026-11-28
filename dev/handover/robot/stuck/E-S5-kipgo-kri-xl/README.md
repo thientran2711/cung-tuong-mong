@@ -10,3 +10,16 @@ Life: speed-1 (pf/pt_su, Fold, bold, seed 2289644890), resume=1, ckpt pin cleare
 harness counters on this life after the probe restart: kipGo=1 (the confirm «Biếu» was really tapped once), the picker did not re-open in a loop (buổi 111 → 127+ in ~10 min). The result toast «đã biếu …» itself was not captured by the harness (no hook) — the relation/item change should be checked on the next hit (speed-3 in progress).
 ## %23n (speed-1-req23n.jsonl)
 GET https://thientran2711.github.io/cung-tuong-mong/%23n · resourceType image · initiator frame = main page · NO element with src/href/srcset/style containing «#n» in the DOM at that moment (init: []) → created transiently (new Image() / CSS url set then removed), or a template with an unresolved «#n» placeholder; found at buổi 110. The element is still unidentified.
+
+## UPDATE 28/11 ~10:10Z — greedy-5 (Fold bold 1250053385, b2330–2346, Pages 166bd0a3, probe harness): the confirm IS sometimes COVERED
+6 chooser openings (all opened by «Đồ trong rương», dialog «Biếu quà làm lành», viewport 755×1000). greedy-5-kipdump.jsonl:
+| buoi | items | confirm «Biếu» | element on top at the confirm's centre | at (378,538) | gift? |
+|---|---|---|---|---|---|
+| 2330 | 10 | enabled, rect 35,845,685,40 (on screen) | **DIV.kscn-veil** (covers it) | div.kri-t.kri-front (ring) | none — same 10 items next time |
+| 2333 | 10 | same | **DIV.kscn-veil** | same | none |
+| 2334 | 10 | same | **DIV.kscn-veil** | same | none |
+| 2342 | 10 | same | **BUTTON.kbtn.alt.kri-back** (a «back» button of the ring detail pane covers it) | div.kidet.kidet-inline | none |
+| 2345 | 8 (Áo gấm hoa mai gone) | enabled, 35,845,685,40 | BUTTON.kbtn.kipgo (hit) | span.kshn in div.kshc.kshpick.kipc (grid tile) | GIVEN |
+| 2346 | 6 (Hoa điền hoa đào gone) | enabled, 342,935,304,40 | BUTTON.kbtn.kipgo (hit) | div.kshg.kipg (grid) | GIVEN |
+Reading: the picker has two layouts: RING mode (wide confirm 685 px at y=845; the front card kri-t.kri-front at the screen centre) where the confirm's centre is covered by DIV.kscn-veil (b2330/33/34) or by the ring-detail «kri-back» button (b2342) → a real tap on «Biếu» would hit the veil/back button, not the confirm; and GRID mode (kipg) where the confirm is topmost and works (items vanish at b2345/2346 = gifts really given). The 3 «no gift» visits are exactly the ring-mode ones. speed-1 (viewport 755×1000 too) was grid-mode with the confirm topmost, which is why its gifts worked. PNGs: greedy-5-kipdump-2330-veil.png (blocked), greedy-5-kipdump-2346-ok.png (works).
+%23n: logged at b2328, same shape (image, main frame, no DOM element with «#n»).
