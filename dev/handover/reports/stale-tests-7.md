@@ -34,3 +34,6 @@ Open items for the successor:
 3. Read reruns: /tmp/claude-0/st7/ea2b.txt (emotion-acts-2, 6 sizes) and /tmp/claude-0/st7/ea1b.txt (emotion-acts full); temper-outburst at all 3 sizes.
 4. temper-perception «crashes on LIVE»: run it once on :8808 (LIVE) and record.
 5. MUTATE list above; then «RV READY» to RV-184 session_01Rc5AsMLNT6kzi1NmvZRwKz + MAIN 188.
+6. BASE CHANGED (RV-184 / MAIN 188, 08:21–08:27Z): 810fbc8c sits on 1a6a1aed whose assemble.py dropped jkring-item.js + rank score.js (built page lacks kriCalm/kriE/phamName) — kring/rank tests (temper-perception ring path!) lie on it. **Restack review/stale-tests-7 onto review/rules-prefail-r3-rv184 c76b6499** (cherry-pick ef9c6f7a + 9abfa246 + the next commits, rebuild site) and re-run every table row there before RV READY.
+7. MAIN 188 asked: scan the other jworld / jagmin regexes that read event TEXT for the same case trap (lowercase ministers' wording), fix the whole family.
+8. Main is now MAIN CHÍNH 189 = session_01Rc5AsKLcnai97YwjFT5YMc (send FOR MAIN there).
