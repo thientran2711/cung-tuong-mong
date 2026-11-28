@@ -433,3 +433,19 @@ Sent: RV-163K (BIG, delta + this table), copy MAIN 179. Worktree /home/user/wt/p
 ### PUNISH-TIER-9 r2 — review/punish-stack-live-3 = cd2c142a (MAIN 179 ruling on FLAG 3)
 Delta vs 5211d747: j22 ttExposed → fall(p,…,BAL.charge.ttProven) ; jbal2 BAL.charge.ttProven="tu" ; leave-palace P2 parity (man xử trảm; she + NPC on the tử tội road: dead or phế + lãnh cung) ; npc-purpose row j22:21 «out» text ; index.html rebuilt. NẶNG kept = giáng + lãnh cung: owner verbatim OD:L2649 26/11 ~20:35Z «Tội vừa hạ bậc, lãnh cung và hạ bậc cho là nặng» (+ L2658 ~21:00Z «nặng = giáng + lãnh cung»), newer than the 19:05Z MAIN rec (L2636) quoted by MAIN, which L2641 declares void.
 Tests on cd2c142a: leave-palace 135/135 · split-merge Fold + iPad ALL PASS · punish-tier Fold + iPad ALL PASS · charge-trinh-punish ALL PASS · npc-purpose-scan PASS 419 · one-core-guard PASS. 0 deletions vs LIVE.
+
+### PUNISH-TIER-9 psl4 (MAIN 180/186) — review/punish-stack-live-4 = 4bc79449
+Base: review/lc34-3b-r1 fcbc1992 (LR-RULES; rules-r1 + ui6 + tsg-kpk + 3b tmk-oanpace, on LIVE 5ad52416). Merged: 1b5c1125 (RV-163L PASS) + nits 599f7c76. Gate: LIVE 5ad52416 ancestor OK, 0 deletions vs LIVE.
+
+| hunk | file:line | ruling OD date | kept side |
+|---|---|---|---|
+| evidenceActs rows | j78.js:196 | split-merge OD 26/11 ~21:00Z + 27/11 ~00:46Z/~01:00Z (one «Tố giác»); 3b wording = law 4/11 | both: 3b hkK costs + pvOan/pvQuy; punish chTo, tocao/expose/trinhth/tieuhuy rows gone, accuse fail chFailDanh/chFailPun |
+| AOUT accuse | jcharge.js:282 | E-GAIN3b law 3 (green gain) + PUNISH-TIER (C) | both: green gain + Danh, punish fail line |
+| kitFigOf | j90.js:21 | K-SRV-OWNFIG + KIT §8.2d (PUNISH-TIER-8) | both: Thái y first, then staff record |
+| j95 caught | j95.js:422 | split-merge A1/A2 (no bribe card, no z.wit) | punish removes bribe deal; 3b rcpReg j95CaughtCard kept; bribe generator stays registered for old saves |
+| dsDan | j8.js:146 | OD 26/11 ~20:35Z (spared death = phế vị + lãnh cung chung thân) | punish (dsDan dropped with its rank-pace dieMk) |
+| NPC death | jmort.js:70/81 | — (no clash in rule) | both: dieMk + dthStamp |
+| KIT_REQUESTS | :459 | — | both entries |
+| 13 more hunks (assemble, j14, j22, j30, j40, j42, j63, j8 ×2, j93, j95 ×2, jkh, jpun, jroute ×5) | — | — | token-level 3-way merge, both edits kept; checked by word diff vs each side |
+
+Tests on 4bc79449 (Fold 755x1000 + iPad 1180x820): split-merge, punish-tier, punish-wit, cover, dup-piece-scan PASS both; charge-trinh-punish, charge-followups, dead-card, one-core-guard, place-close, door-onetap, npc-purpose-scan (419), dead-family, leave-palace (135/135) PASS. Stills looked at: cold notice (Fold), lc-stills dead portrait «Đã khuất» Fold + iPad — fine. quickcheck --runs 3: see the next line.
