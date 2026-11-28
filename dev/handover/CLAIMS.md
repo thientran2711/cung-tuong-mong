@@ -785,3 +785,4 @@ B-COOP-REBIRTH-RESYNC r3 (successor of 2Y1YMPHD: room-e lãnh cung week-end hang
 D-FAMILY-GIFT (parking lot 26/11(c) gifts to family; ORDER MAIN 189 08:36Z; with row 10) | review/d-family-gift | FOREMAN D ROOT session_01964izEUYzmixcs6Yg5ZXsE / worker session_01964izCqcy28euSanyuhN8A | RUNNING | 28/11 09:55Z
 E-TIER-B13-RV (BIG review review/e-tier-b13 @6738c302 batch 1) | review/e-tier-b13-rv-m | session_01DgYSWptGZG8FdKXhToAAqr | RUNNING | 28/11 09:51Z (Foreman E C10)
 E-TIER-B13b (row 42 batch 3 MERGE, successor of E-TIER-B13) | review/e-tier-b13 (after 6738c302) | session_01DgYSWphf5wCwrvpkrxZcmq | RUNNING | 28/11 09:52Z (Foreman E C10)
+E-TIER-B13c (row 42 batch 3 rest, successor of E-TIER-B13b) | review/e-tier-b13 (after 5ad3b22e) | <pending session> | RUNNING | 28/11 10:12Z (Foreman E C11)
