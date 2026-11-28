@@ -394,9 +394,16 @@ function md(R){const L=[];L.push("| act key | player button | fn | "+R.roles.map
  for(const r of R.rows){if(R.roles.every(x=>r.cells[x]==="—"))continue;L.push(`| ${r.key} | ${r.label} | ${r.fn} | `+R.roles.map(x=>r.cells[x]).join(" | ")+" |")}
  return L.join("\n")}
 module.exports={scan,md,build,KEYLAB,ROLES};
+/* law1-audit (owner OD 24/11 ~08:35Z): the RULE FAMILIES beyond buttons (gifts, likes/dislikes, thresholds, promotion, selection, endings,
+   knowledge/greeting/notices, ban cung, contests, co-op, pawn) — dev/tools/role-parity-fam.js; `--fam` runs only them (~1 min) */
+const FAM=require('./role-parity-fam.js');
 if(require.main===module){(async()=>{const a=process.argv.slice(2);const html=a.find(x=>!x.startsWith('--')&&!/\.(md|json)$/.test(x))||'dev/index.html';
- const R=await scan(html);const mo=a.indexOf('--md'),jo=a.indexOf('--json');
- if(mo>=0)require('fs').writeFileSync(a[mo+1],md(R)+"\n");if(jo>=0)require('fs').writeFileSync(a[jo+1],JSON.stringify(R,null,1));
+ const mo=a.indexOf('--md'),jo=a.indexOf('--json');
+ if(a.includes('--fam')){const F=await FAM.famScan(html);if(mo>=0)require('fs').writeFileSync(a[mo+1],FAM.famMd(F.rows)+"\n");if(jo>=0)require('fs').writeFileSync(a[jo+1],JSON.stringify(F,null,1));
+  console.log("LAW-1 FAMILIES: rows "+F.rows.length+" · GAP "+F.gaps.length+" · "+F.gaps.map(g=>g.owner+":"+g.fam+"/"+g.item).join(" ; "));if(F.pageErr.length)console.log("PAGE ERRORS: "+F.pageErr.slice(0,5).join(" ; "));return}
+ const R=await scan(html);const F=await FAM.famScan(html);R.fam=F;
+ if(mo>=0)require('fs').writeFileSync(a[mo+1],md(R)+"\n\n## Rule families (law 1, whole game)\n\n"+FAM.famMd(F.rows)+"\n");if(jo>=0)require('fs').writeFileSync(a[jo+1],JSON.stringify(R,null,1));
+ console.log("LAW-1 FAMILIES: rows "+F.rows.length+" · GAP "+F.gaps.length+" · "+F.gaps.map(g=>g.owner+":"+g.fam+"/"+g.item).join(" ; "));
  const cnt={};for(const r of R.rows)for(const x of R.roles){const c=r.cells[x];cnt[c]=(cnt[c]||0)+1}
  console.log("ROLE PARITY: rows "+R.rows.length+" · cells "+JSON.stringify(cnt)+" · gaps "+R.gaps.length);
  const by={};for(const g of R.gaps)(by[g.role]=by[g.role]||[]).push(g.side[0]+":"+g.key);for(const r in by)console.log("  "+r+" ("+by[r].length+"): "+by[r].join(", "));

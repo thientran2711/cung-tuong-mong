@@ -2,10 +2,10 @@
    Every promotion states the real conditions that triggered it, with numbers (same for her and every NPC):
    the ordinary decree (Sủng/Danh/gap/Hoàng hậu/Thái hậu rows), the Emperor's pick between several qualified (fillSeats), the Tranh ghế win, a son's birth.
    Week summary: each sentence goes under exactly one heading (first match wins), reasons stay with their decree; no item is cut. Data only; the renderer is unchanged. */
-function rsn6(rows){return rows.map(r=>String(r[1]).replace(/\s*\(.*\)\s*/,"").replace(/^Cách lần sắc phong trước /,"cách lần trước ").replace(/, vì Hoàng thượng hiếu thảo/,"").replace(/^Hoàng hậu không phản đối.*/,"Hoàng hậu không phản đối hoặc có người đỡ")).join(" · ")}
+function rsn6(rows){return rows.map(r=>String(r[1]).replace(/\s*\(.*\)\s*/,"").replace(/^Cách lần sắc phong trước /,"cách lần trước ").replace(/, vì Hoàng thượng hiếu thảo/,"").replace(/^Hoàng hậu không phản đối.*/,"Hoàng hậu không phản đối hoặc có người đỡ")).join(", ")}/* qc-noise-hygiene (D): a reason list inside a sentence is joined with commas, never a «·» chain */
 (function(){const p0=promoteP;promoteP=function(p){let rows=[];try{rows=promoReqP(p)}catch(e){}const n=window.__fill6||0;const r=p0.apply(this,arguments);
  try{if(r&&/tấn phong|lập .*Hoàng hậu/.test(r)){const why=window.__seatPick?"thắng cuộc Tranh ghế":n>=2?`Hoàng thượng chọn giữa ${n} người đủ điều kiện`:"";
-  const add=` Lý do: ${[rsn6(rows.filter(x=>x[0])),why].filter(Boolean).join(" · ")}.`;return r.replace(/\s*$/,"")+add+" "}}catch(e){}return r}})();
+  const add=` Lý do: ${[rsn6(rows.filter(x=>x[0])),why].filter(Boolean).join(", ").replace(/, (Đã|Chưa|Được|Có|Không|Cách)(?![\p{L}])/gu,(m,w)=>", "+w.toLowerCase())}.`;return r.replace(/\s*$/,"")+add+" "}}catch(e){}return r}})();
 (function(){if(typeof fillSeats!=="function")return;const f0=fillSeats;fillSeats=function(){window.__fill6=0;try{for(const r of [6,5,4,3]){if(!seatFree(r))continue;const C=consorts().filter(p=>rkOf(p)===r-1&&!p.out&&!p.confined&&promoReqP(p).every(x=>x[0]));if(C.length>=2){window.__fill6=C.length;break}}}catch(e){}
  try{return f0.apply(this,arguments)}finally{window.__fill6=0}}})();
 (function(){if(typeof birthP!=="function")return;const b0=birthP;birthP=function(p){const r=b0.apply(this,arguments);try{if(typeof r==="string")return r.replace(/((?:Được|[^.]* được) tấn phong [^.]+)\. /,"$1. Lý do: sinh hạ hoàng tử đầu lòng (thăng một bậc, không qua khảo hạch). ")}catch(e){}return r}})();
@@ -18,4 +18,4 @@ function rsn6(rows){return rows.map(r=>String(r[1]).replace(/\s*\(.*\)\s*/,"").r
  for(const o of SEN){const i=H.findIndex(h=>h[1].test(o.t));const tgt=i>=0?groups[i][1]:other;const cap=i>=0?H[i][2]:3;if(tgt.length>=cap*2)continue;tgt.push(o.t);if(o.why){const parts=o.why.replace(/^Lý do:\s*/,"").replace(/\.$/,"").split(" · ");let cur="";const out=[];for(const q of parts){if(cur&&(cur+" · "+q).length>92){out.push(cur);cur=q}else cur=cur?cur+" · "+q:q}if(cur)out.push(cur);out.forEach((q,j)=>tgt.push((j?"Lý do (tiếp): ":"Lý do: ")+q+"."))}}
  if(other.length)groups.push(["Chuyện khác",other.slice(0,4)]);
  const D=[["Sủng",S.sung-s.sung],["Danh",S.danh-s.danh],["Sức",S.suc-s.suc],["Bạc",S.bac-s.bac]];
- return{D,groups,rank:S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":RANKS[S.rank].n):"",kids:S.kids.length-s.kids}}})();
+ return{D,groups,rank:S.rank!==s.rank?(S.rank>s.rank?"Được thăng ":"Bị giáng xuống ")+(S.rank>=7?"Hoàng hậu":meRankN()):"",kids:S.kids.length-s.kids}}})();
