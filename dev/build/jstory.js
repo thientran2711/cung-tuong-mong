@@ -43,14 +43,29 @@ for(const k in BAL.arc.alt)BAL.arc.alt[k].forEach((x,i)=>{if(x&&ALT67[k]&&ALT67[
 Object.assign(BAL,{bacTuan:[17,20,25,40,45,51,60,70],altK:{suc:1.2,pen:1.6,sucMax:20,penMax:40,k72:.5}});
 function bacK(bac,rk){const T=BAL.bacTuan;return Math.abs(bac||0)*16/T[Math.max(0,Math.min(T.length-1,rk==null?3:rk|0))]}
 function altCost(bac,rk,suc0,pen0){const k=bacK(bac,rk),K=BAL.altK;return{suc:Math.max(Math.abs(suc0),Math.min(K.sucMax,Math.round(k*K.suc))),pen:Math.max(pen0,Math.min(K.penMax,Math.round(k*K.pen)))}}
-function altOf67(A,bid,o){const base=typeof o.o==="function"?o.o:(o.o==null?80:o.o);const AC=altCost(o.c&&o.c.bac,S&&S.rank,BAL.alt67Suc,BAL.alt67Pen);
- return{n:"Nhờ người quen lo liệu, không dùng bạc",c:{suc:-AC.suc},o:A2=>{let x=typeof base==="function"?base(A2):base;return x-AC.pen+eyes(S)*4+(S.maid?((S.maid.loyal||0)-50)/5:0)},
+function altOf67(A,bid,o,named){const base=typeof o.o==="function"?o.o:(o.o==null?80:o.o);const AC=altCost(o.c&&o.c.bac,S&&S.rank,BAL.alt67Suc,BAL.alt67Pen);
+ return{n:named?twinN(o.n):"Nhờ người quen lo liệu, không dùng bạc",c:{suc:-AC.suc},o:A2=>{let x=typeof base==="function"?base(A2):base;return x-AC.pen+eyes(S)*4+(S.maid?((S.maid.loyal||0)-50)/5:0)},
   w:o.w,sc:o.sc,f:o.f,wx:o.wx,l:Object.assign({},o.l||{},{danh:((o.l||{}).danh||0)-2}),lx:[o.lx,"người được nhờ lỡ việc"].filter(Boolean).join(", "),
   rt:o.rt,rf:o.rf||"Người được nhờ làm hỏng việc.",e:o.e,to:o.to,tf:o.tf,go:o.go,need:o.need}}
+/* ONE bạc twin (law 2 «a bạc road always has another road of matching tier», owner OD 27/11 ~00:46Z; Foreman E C11 ruling Q4 (a), 28/11 12:28Z):
+   EVERY way that costs Bạc gets its twin «… (không dùng bạc)»: the same way and the same result, the Bạc paid instead as Sức by the ONE bạc→Sức
+   rule above (altCost: BAL.bacTuan + BAL.altK at her rank, floor BAL.alt67Suc) — the non-bạc road of THAT tier, never a 4th tier.
+   j67 hồi: one twin per bạc way (altOf67, appended after the hồi's ways so a kept way's index S.pl67.i never moves; a hồi with hand-written
+   ALT67 routes keeps them as the twins of its first bạc ways). Composed cards j7c / j68c / j71c / jworldc: twin6 builds the c6 way and its
+   twin right after it. NPCs too (law 1): an NPC in the jworldc round who cannot pay a stance's Bạc takes its twin (twinNpc). j72 keeps alt72.
+   BAL.twin.on = the hook switch (the scan dev/test/bac-twin-scan.js: every bạc way has its twin; its mutant MUT=twinoff must FAIL). */
+BAL.twin={on:true};
+function twinOn(){return !!(BAL.twin&&BAL.twin.on)}
+function twinN(n){return `${n} (không dùng bạc)`}
+function twinSuc(bac,rk){return altCost(bac,rk==null?(S&&S.rank):rk,BAL.alt67Suc,0).suc}
+function twinC(c,rk){const x=Object.assign({},c);const b=x.bac;delete x.bac;x.suc=(x.suc||0)-twinSuc(b,rk);return x}
+function twin6(n,s){const o=c6(n,s);if(!twinOn()||!s||!s.c||!(s.c.bac<0))return[o];return[o,Object.assign(c6(twinN(n),Object.assign({},s,{c:twinC(s.c)})),{twin:1})]}
+/* an NPC's stance loss (stat → amount, positive = paid): Bạc she cannot pay becomes the twin's Sức at her own rank */
+function twinNpc(v,loss,rk){if(!twinOn()||!loss||!(loss.bac>0)||(v&&v.bac||0)>=loss.bac)return loss;const x=Object.assign({},loss);const b=x.bac;delete x.bac;x.suc=(x.suc||0)+twinSuc(-b,rk);return x}
 (function(){const o0=opts67;opts67=function(A,b){let L=o0.apply(this,arguments);try{if(!v267()||!A||!b||!Array.isArray(L))return L;
  L=L.map(o=>o&&o.c&&typeof o.c==="object"&&o.c.bac<0?Object.assign({},o,{c:Object.assign({},o.c,{bac:price67(o.c.bac)}),c0:o.c.bac}):o);
  const silver=L.filter(o=>o.c&&o.c.bac<0);if(!silver.length)return L;const bid=beatId67(A,b);
- const hand=ALT67[A.a+"."+bid];const alts=(hand||[altOf67(A,bid,silver[0])]).map(x=>Object.assign({},x,{alt67:1}));
+ const hand=ALT67[A.a+"."+bid]||[];const alts=hand.concat(twinOn()?silver.slice(hand.length).map(o=>altOf67(A,bid,o,silver.length>1)):hand.length?[]:[altOf67(A,bid,silver[0])]).map(x=>Object.assign({},x,{alt67:1}));
  return L.concat(alts.filter(x=>{try{return oNeed67(x)}catch(e){return true}}))}catch(e){console.error("jstory opts",e);return L}}})();
 /* ---------- the dialog: label, pledge option, "để sau" ---------- */
 function quest67(){try{return (QUEST67[S.origin.k]||QUEST67.tt).t}catch(e){return"Mệnh truyện"}}

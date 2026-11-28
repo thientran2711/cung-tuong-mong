@@ -2268,9 +2268,9 @@ BAL.nr={lives:6,w:.5,cap:1500};
 /* ORDER THIN P6 (jworldc.js composed world reactions, owner OD 23/11 ~22:50Z; reports/thin.md «## API P6»): on = composed scenes live; npcMax = NPCs
    in a seed's scope who choose a stance (the same 3 tiers as hers, law 1); rankHi = scope "hi" from this rank (Tần) up, "lo" below; seen = draw weight of a
    seed met in a past life (fresh-first, on top of jnorep ×nr.w); obKeep = object traces kept; fx[tier] = what ONE gain/loss step is worth per key
-   (laws 2/3/4: seeds count steps, numbers live here; rel = thiện cảm of that person); npcCant = weight of a stance an NPC cannot pay (bạc);
+   (laws 2/3/4: seeds count steps, numbers live here; rel = thiện cảm of that person); an NPC who cannot pay a stance's Bạc takes its twin «không dùng bạc» (jstory twinNpc, law 1 + law 2 — E-TIER-B14b, was a lower weight npcCant);
    tier = steps per way by tier (law 2 TIERED CHOICES, owner OD 27/11 ~00:46Z: 3 ways NHẸ · VỪA · NẶNG, way i Σgain == Σloss == tier[i], Tốn and Được rise together; the seed's s/m/l picks the fx row = the size of ONE step); */
-BAL.wc={on:true,tier:[1,2,3],npcMax:8,rankHi:3,seen:.15,obKeep:60,npcCant:.1,
+BAL.wc={on:true,tier:[1,2,3],npcMax:8,rankHi:3,seen:.15,obKeep:60,
  fx:{s:{sung:2,danh:2,bac:20,suc:5,mat:1,th:2,hh:2,duc:2,tamco:1,an:1,rel:4},
      m:{sung:3,danh:3,bac:40,suc:8,mat:1,th:4,hh:4,duc:3,tamco:2,an:2,rel:6},
      l:{sung:5,danh:5,bac:60,suc:12,mat:2,th:6,hh:6,duc:5,tamco:3,an:3,rel:9}}};

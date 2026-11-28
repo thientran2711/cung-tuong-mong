@@ -73,18 +73,19 @@ function wcRound(sd,w,c){const tier=sd.tier||"m",r=c.r={};const X=wcActors(sd,w,
  const xo=wcXo(w);const sl=(wcScope(sd,w)||[]).filter(v=>v!==oA&&v!==oB&&v!==S&&v!==xo);/* the window's own person is its subject, not a bystander */for(let i=sl.length-1;i>0;i--){const j=R(i+1);[sl[i],sl[j]]=[sl[j],sl[i]]}
  const srv=sd.scope==="srv";const E=Object.entries(sd.stances||{});
  for(const v of sl.slice(0,Bc().npcMax)){try{
-  const O=E.map(([id,st])=>{let wt=1;try{wt=srv?1:mW(v,st.npc)}catch(e){}const bc=(st.loss||{}).bac;if(!srv&&bc&&(v.bac||0)<bc*stepV(tier,"bac"))wt*=Bc().npcCant;return[id,Math.max(.01,wt)]});
+  const O=E.map(([id,st])=>{let wt=1;try{wt=srv?1:mW(v,st.npc)}catch(e){}return[id,Math.max(.01,wt)]/* a stance she cannot pay in Bạc is still open: she takes its twin (law 1 + 2, below) */});
   const k=srv?pick(O)[0]:npcPick(v,O);if(!k)continue;(r[k]=r[k]||[]).push(srv?(v.name||""):pid(v));if(srv)continue;
-  const st=sd.stances[k];for(const[sg,m]of[[1,st.gain],[-1,st.loss]])for(const[key,n]of Object.entries(m||{})){
-   if(NPCST.includes(key)){const d=sg*n*stepV(tier,key);if(key==="duc"&&typeof ducAdd==="function")ducAdd(v,d,"thế sự");else ap(v,{[key]:d})}
+  const st=sd.stances[k];const lo=twinNpc(v,Object.fromEntries(Object.entries(st.loss||{}).map(([key,n])=>[key,NPCST.includes(key)?n*stepV(tier,key):n])),rkV(v));
+  for(const[sg,m]of[[1,st.gain],[-1,lo]])for(const[key,n]of Object.entries(m||{})){
+   if(NPCST.includes(key)){const d=sg*(sg<0?n:n*stepV(tier,key));if(key==="duc"&&typeof ducAdd==="function")ducAdd(v,d,"thế sự");else ap(v,{[key]:d})}
    else if(key==="rel.A"&&X.A&&X.A.k==="rv")affAdd(oA,v,sg*n*stepV(tier,"rel"));else if(key==="rel.B"&&X.B&&X.B.k==="rv")affAdd(oB,v,sg*n*stepV(tier,"rel"))}
  }catch(e){wErr("wc round",e)}}return r}
 function wcTrace(sd,X,st){const o=sd.object;if(!o)return"";const j=wc();const tr=fill(st.trace||o.trace,sd,X),nm=fill(o.name,sd,X);
  const own=o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":o.owner==="X"?(X.X?X.X.n:""):o.owner==="B"?(X.B?X.B.n:""):(X.A?X.A.n:"");
  j.ob.push({sid:sd.id,name:nm,owner:own,trace:tr,turn:S.turn});if(j.ob.length>Bc().obKeep)j.ob.splice(0,j.ob.length-Bc().obKeep);return `${nm}: ${tr}.`}
-function wcOpts(sd,w,X){const tier=sd.tier||"m";return Object.entries(sd.stances||{}).map(([id,st])=>{
+function wcOpts(sd,w,X){const tier=sd.tier||"m";return Object.entries(sd.stances||{}).flatMap(/* + the bạc twin of each bạc way (jstory twin6, law 2) */([id,st])=>{
  const g=val(st.gain,tier,1),l=val(st.loss,tier,-1);const rr=[];if(X.A&&(g.A+l.A))rr.push([X.A,g.A+l.A]);if(X.B&&(g.B+l.B))rr.push([X.B,g.B+l.B]);
- return c6(fill(st.text,sd,X),{c:l.fx,w:g.fx,r:rr,ok:()=>{try{wc().ch[w.id]=id}catch(e){}return [fill((sd.outcomes||{})[id],sd,X),wcTrace(sd,X,st)].filter(Boolean).join(" ")}})})}
+ return twin6(fill(st.text,sd,X),{c:l.fx,w:g.fx,r:rr,ok:()=>{try{wc().ch[w.id]=id}catch(e){}return [fill((sd.outcomes||{})[id],sd,X),wcTrace(sd,X,st)].filter(Boolean).join(" ")}})})}
 function wcCard(w){const c=w.x&&w.x.wc;if(!c)return null;const sd=WCI[c.id];if(!sd)return null;
  if(typeof isSrv==="function"&&isSrv())return null;if(S.out||S.dead)return null;const X=wcActors(sd,w,c);if(!X)return null;
  let nm="";try{nm=window.worldName(w)}catch(e){}

@@ -42,7 +42,7 @@ const cnt={};const tally=(f,c)=>{const t=cnt[f]=cnt[f]||{ok:0,fail:0};c?t.ok++:t
  for(const s of saves){if(s.err)continue;const R=await g.evaluate(s=>{try{store.set(NL_KEY,null)}catch(e){}document.getElementById('title').hidden=true;deser(JSON.parse(s.s));
    const m=Q.find(q=>q&&(q.pid===(s.pid||'j7c')||q.rk==='j71cComp'))||Q[0];const fam=s.fam==='j7'?'j7c':s.fam==='j68'?'j68c':'j71c';
    const sd=s.fam==='j7'?J7SEEDS.find(r=>r.id===s.sid):s.fam==='j68'?J68SEEDS.find(r=>r.id===s.sid):window.J71C_SEEDS.CI[s.sid];
-   return{n:m?(m.opts||[]).map(o=>o.n):null,T:BAL[fam].tier.length,om:sd&&sd.om,ids:sd&&Object.keys(sd.stances)}},s);
+   return{n:m?(m.opts||[]).filter(o=>!o.twin/* E-TIER-B14b: the bạc twins (jstory twin6) are not tiers */).map(o=>o.n):null,T:BAL[fam].tier.length,om:sd&&sd.om,ids:sd&&Object.keys(sd.stances)}},s);
   const tag=`${s.fam} ${s.sid}`;let good=ok(R.n&&R.n.length===R.T,`${tag}: pending card loads with ${R.T} ways`,R);
   if(R.n&&R.om)s.ids.forEach((id,i)=>{const nm=s.names[i];const kept=R.ids.includes(id);
    const c=kept?R.n.includes(nm):(!R.n.includes(nm)&&R.n.includes(s.names[s.ids.indexOf(R.om[id])]));good=ok(c,`${tag} old way ${i} «${nm}»${kept?' kept':' merged → «'+s.names[s.ids.indexOf(R.om[id])]+'»'}`,R)&&good});

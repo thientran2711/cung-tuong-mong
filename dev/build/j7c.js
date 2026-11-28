@@ -55,7 +55,7 @@ function j7cOpt(sd,id,X,pp){const st=sd.stances[id],tier=sd.tier||"m";const c={}
   else if(a==="proof"&&X[b]&&X[b].k==="rv"){proof=[X[b],n*j7cStep(tier,"proof")];wt.push(G6(`chứng cứ ${X[b].n} ${balSg(proof[1])}`))}}  /* review r1: shown under ĐƯỢC like j68f (was «kèm», hidden on the card) */
  for(const [key,n] of Object.entries(st.loss||{})){const [a,b]=key.split(".");
   if(J7C_STAT.includes(a))put(c,a,-n*j7cStep(tier,a));else if(a==="friend"&&X[b])r.push([X[b],n*j7cStep(tier,"rel")]);else if(a==="grudge"&&X[b])r.push([X[b],-n*j7cStep(tier,"rel")])}
- return c6(j7cFill(st.text,X),{c,w,r,k,wt,ok:()=>{const j=j7c();if(proof)try{evStory(proof[0].o,proof[1],j7cFill(sd.incident.text,X).slice(0,60))}catch(e){}
+ return twin6(j7cFill(st.text,X),{c,w,r,k,wt,ok:()=>{const j=j7c();if(proof)try{evStory(proof[0].o,proof[1],j7cFill(sd.incident.text,X).slice(0,60))}catch(e){}
   const o=sd.incident&&sd.incident.object;if(o){const own=o.owner==="me"?(S.name||"ngươi"):(X[o.owner]?X[o.owner].n:"");j.ob.push({sid:sd.id,name:j7cFill(o.name,X),owner:own,trace:j7cFill(st.trace||o.trace,X),turn:S.turn})}
   return j7cFill((sd.outcomes||{})[id],X)+(o?`<br>${G6(j7cFill(o.name,X))}: ${j7cFill(st.trace||o.trace,X)}`:"")}})}
 function j7cBuild(pp){j7cSeeds();if(!pp.sid){/* first build: pick the seed through jnorep and save the cast in pp (mkP keeps pp for reload) */
@@ -63,5 +63,5 @@ function j7cBuild(pp){j7cSeeds();if(!pp.sid){/* first build: pick the seed throu
  const sd=J7I[pp.sid];if(!sd)return null;const X=j7cActors(sd,pp.c||{});if(!X||!j7cGround(sd,X))return null;
  const ids=Object.keys(sd.stances||{});if(ids.length!==BAL.j7c.tier.length)return null;const first=Object.values(X).find(a=>a&&a.f);
  const ob=sd.incident.object;const clue=ob&&ob.clue?`<br><i>${j7cFill(ob.clue,X)}</i>`:"";
- return{who:first?first.f:null,t:`${sd.place?j7cFill(sd.place,X)+": ":""}${j7cFill(sd.incident.text,X)}${clue}`,o:ids.map(id=>j7cOpt(sd,id,X,pp))}}
+ return{who:first?first.f:null,t:`${sd.place?j7cFill(sd.place,X)+": ":""}${j7cFill(sd.incident.text,X)}${clue}`,o:ids.flatMap(id=>j7cOpt(sd,id,X,pp))/* + the bạc twin of each bạc way (jstory twin6, law 2) */}}
 PEND.j7c=pp=>{try{return j7cBuild(pp)}catch(e){console.error(e);return null}};

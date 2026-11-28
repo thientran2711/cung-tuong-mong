@@ -56,8 +56,8 @@ function drawComp(k,kind,ents){if(!on())return null;const fam="j71c:c";const L=(
   nrMark(fam,sd.id);return{id:sd.id,b}}return null}
 function compCard(k,c){const sd=CI[c.id];if(!sd)return null;const X={};if(c.b!=null){const A=A6("rv",c.b);if(!A)return null;X.B=A}
  const o=sd.object;const pre=t=>String(t||"").replace(/\{O\}/g,o&&o.name?o.name:"").replace(/\{F\}/g,fShort7(k));const fill=t=>{try{return e68Fill(pre(t),X)}catch(e){return pre(t)}};
- const tier=sd.tier||"m";const opts=Object.entries(sd.stances||{}).map(([id,st])=>{const g=val(st.gain,tier,1),l=val(st.loss,tier,-1);const rr=[];if(X.B&&(g.B+l.B))rr.push([X.B,g.B+l.B]);
-  return c6(fill(st.text),{c:l.fx,w:g.fx,r:rr,ok:()=>{let tr="";if(o){const j=jc();tr=`${fill(o.name)}: ${fill(st.trace||o.trace)}.`;j.ob.push({sid:sd.id,name:fill(o.name),owner:o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":(X.B?X.B.n:""),trace:fill(st.trace||o.trace),turn:S.turn});if(j.ob.length>Bf().obKeep)j.ob.splice(0,j.ob.length-Bf().obKeep)}
+ const tier=sd.tier||"m";const opts=Object.entries(sd.stances||{}).flatMap(/* + the bạc twin of each bạc way (jstory twin6, law 2) */([id,st])=>{const g=val(st.gain,tier,1),l=val(st.loss,tier,-1);const rr=[];if(X.B&&(g.B+l.B))rr.push([X.B,g.B+l.B]);
+  return twin6(fill(st.text),{c:l.fx,w:g.fx,r:rr,ok:()=>{let tr="";if(o){const j=jc();tr=`${fill(o.name)}: ${fill(st.trace||o.trace)}.`;j.ob.push({sid:sd.id,name:fill(o.name),owner:o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":(X.B?X.B.n:""),trace:fill(st.trace||o.trace),turn:S.turn});if(j.ob.length>Bf().obKeep)j.ob.splice(0,j.ob.length-Bf().obKeep)}
    return [fill((sd.outcomes||{})[id]),tr].filter(Boolean).join(" ")}})});
  return{t:`${fShort7(k)} · Chuyện bên lề hội`,who:X.B?X.B.f:(typeof pMaid==="function"&&S.maid?pMaid():pEmp()),h:`<p>${fill(sd.text)}</p>`,opts}}
 /* save-unseen-lists r2 (rv r2 FIX 1): «<tết> · Chuyện bên lề hội» is carried as data (j3 rcpReg: festival key + {id, b = rival id}) */
