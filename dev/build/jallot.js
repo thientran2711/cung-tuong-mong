@@ -83,10 +83,11 @@ function alEvening(){try{return (S.buoi||0)===(typeof B4L!=="undefined"?B4L:3)}c
 /* p studied (act key k of BAL.ag.cx) — in the evening with a candle: burn it, add light.add to each stat the act gains */
 function alLight(p,k){try{const L=BAL.allot.light;if(!alOn()||!p||!L.acts.includes(k)||!alEvening())return 0;const C=alCandle(p);if(!C.length)return 0;
  const e=C.slice().sort((a,b)=>a.k<b.k?-1:1)[0];typeof ilUsedUp==="function"&&ilUsedUp(e,p);p.inv.splice(p.inv.indexOf(e),1);const D=BAL.ag.cx[k];const fx={};for(const s in D.w)if(s!=="maid"&&D.w[s]>0)fx[s]=L.add;
- if(p===S)apply(fx);else ap(p,fx);return {e,fx}}catch(x){console.error("al light",x);return 0}}
+ /* PACE-SPEED (RV-163E): the rise goes through the one stat-pace funnel (apply / ap → spG), so the candle's real gain is the paced one; got = what truly rose (text = effect) */
+ const b0={};for(const s in fx)b0[s]=+p[s]||0;if(p===S)apply(fx);else ap(p,fx);const got={};for(const s in fx){const d=(+p[s]||0)-b0[s];if(d>0)got[s]=d}return {e,fx,got}}catch(x){console.error("al light",x);return 0}}
 /* her deck: the two study cards of j2 carry cx:"arts"/"book"; the card says what a candle adds (text = effect) */
 (function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const r=r0.apply(this,arguments);try{if(r===true&&a&&a.cx&&p0ok()){const R=alLight(S,a.cx);
-  if(R)log(`Ngươi thắp ${IT[R.e.k].n} học đến khuya: ${Object.keys(R.fx).map(s=>`${NAMES[s]||s} +${R.fx[s]}`).join(", ")} thêm.`)}}catch(e){console.error("al runOpt",e)}return r}})();
+  if(R){const G=Object.keys(R.got||{});log(G.length?`Ngươi thắp ${IT[R.e.k].n} học đến khuya: ${G.map(s=>`${NAMES[s]||s} +${R.got[s]}`).join(", ")} thêm.`:`Ngươi thắp ${IT[R.e.k].n} học đến khuya: ${Object.keys(R.fx).map(s=>NAMES[s]||s).join(", ")} thêm chút ít.`)/* the paced rise was under one point: it waits in the carry (spc) and counts with the next rise, never lost */}}}catch(e){console.error("al runOpt",e)}return r}})();
 function p0ok(){return !!(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv()))}
 function alLightNote(k){const L=BAL.allot.light;if(!alOn()||!L.acts.includes(k))return"";const D=BAL.ag.cx[k];const s=Object.keys(D.w).filter(x=>x!=="maid"&&D.w[x]>0).map(x=>`${NAMES[x]||x} +${L.add}`).join(", ");
  return `buổi tối có nến thì thắp học khuya: ${s} thêm · kèm: cháy một cây nến`}/* " · kèm: " = the card's red Kèm row (j19 cardH): the candle is the cost */

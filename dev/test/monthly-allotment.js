@@ -27,7 +27,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
     o.down=BAL.stip.down.aldau2==="aldau1"&&BAL.stip.down.aldau0===null&&BAL.stip.down.alnen1==="alnen0";
     const r0=S.rank;const sh=[];for(let r=0;r<8;r++){S.rank=r;sh.push(+(alPrice(S,"dau",BAL.allot.oil.tier[r])/BAL.pay[r]).toFixed(3))}S.rank=r0;o.sh=sh;o.lawC=Math.max(...sh)-Math.min(...sh)<=.03;
     /* a month's goods: oil bottle with lượt + candles into the bag */
-    const n0=S.inv.length;stipGoods(S,null);const add=S.inv.slice(n0).filter(e=>alOf(e.k));o.goods=add.filter(e=>alOf(e.k).kind==="dau").every(e=>e.u===BAL.allot.oil.uses)&&add.filter(e=>alOf(e.k).kind==="nen").length===BAL.allot.light.n[S.rank];
+    /* allot-season: the chest ceiling (BAL.stip.keep) — empty her oil/candle stock first so the month really issues them */S.inv=S.inv.filter(e=>!alOf(e.k));const n0=S.inv.length;stipGoods(S,null);const add=S.inv.slice(n0).filter(e=>alOf(e.k));o.goods=add.filter(e=>alOf(e.k).kind==="dau").every(e=>e.u===BAL.allot.oil.uses)&&add.filter(e=>alOf(e.k).kind==="nen").length===BAL.allot.light.n[S.rank];
     /* hair oil: Kiểu cầu kỳ spends it; without oil it falls back (cap) */
     S.inv.filter(e=>lxOf(e.k)).forEach(e=>e.u=9);const oilU=()=>alOil(S).reduce((a,e)=>a+e.u,0);const u0=oilU();
     const rb={wk:toilWk(),makeup:true,score:70,look:"dep",col:Object.assign(toilColFix({}),{want:"diem"})};lxSit(S,rb);o.oilSpend=u0-oilU()===BAL.allot.oil.use&&rb.col.want==="diem";
@@ -35,14 +35,18 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
     const keep=S.inv.slice();S.inv=S.inv.filter(e=>!(alOf(e.k)&&alOf(e.k).kind==="dau"));S.inv.filter(e=>lxOf(e.k)).forEach(e=>e.u=9);
     const rn={wk:toilWk(),makeup:true,score:70,look:"dep",col:Object.assign(toilColFix({}),{want:"diem"})};lxSit(S,rn);o.noOil=!rn.col.want&&rn.noOil===1;
     const pk=lxColPick(Object.assign(toilColFix({}),{want:"diem"}));o.pickFall=!pk.want;o.noteNoOil=/Kiểu cầu kỳ/.test(lxMirrorNote());
-    const rows=toilPreRows(toilColDef());o.presetsHidden=!lxColRows(rows).some(r=>/^pre-/.test(r.k)&&(r.items||[]).some(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);return x&&x[2]==="diem"}));S.inv=keep;
+    const rows=toilPreRows(toilColDef());/* makeup-set (owner OD 25/11 ~23:20Z, canon overwrite of the old «hidden» rule): without oil the Kiểu cầu kỳ sets stay on the mirror GREYED with why + roads, never hidden */
+    {const DI=i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);return x&&x[2]==="diem"};const R=lxColRows(rows).filter(r=>/^pre-/.test(r.k)&&(r.items||[]).some(DI));o.presetsGreyed=R.length>0&&R.every(r=>r.items.filter(DI).every(i=>i.off&&/thiếu/.test(i.why||"")))}S.inv=keep;
     /* NPC face: no oil → no Kiểu cầu kỳ; NPC month spends oil before the issue */
     const v=consorts().find(x=>x!==S&&x.alive!==false&&!x.out);v.inv=v.inv.filter(e=>!alOf(e.k));const rv={makeup:true,score:70,look:"dep",col:{want:"diem"}};lxNpcCap(v,rv);o.npcNoOil=!rv.col.want;
-    v.inv.push({k:"aldau1",from:"noivu",d:S.turn});alFix(v);const e=v.inv.find(x=>x.k==="aldau1");const eu=e.u;stipGoods(v,null);o.npcSpend=e.u===eu-BAL.allot.oil.npcUse&&v.inv.filter(x=>alOf(x.k)&&alOf(x.k).kind==="dau").length>=2;
+    v.inv.push({k:"aldau1",from:"noivu",d:S.turn});alFix(v);const e=v.inv.find(x=>x.k==="aldau1");const eu=e.u;stipGoods(v,null);o.npcSpend=e.u===eu-BAL.allot.oil.npcUse&&(v.inv.filter(x=>alOf(x.k)&&alOf(x.k).kind==="dau").length>=2||/* allot-season: a bottle with lần left = at the ceiling → paid as bạc */!!(v.stip&&v.stip.qbM&&v.stip.qbM.turn===S.turn));
     /* candles: evening study burns one for +add; morning does nothing; NPC agent the same rule */
     const nC=p=>p.inv.filter(e=>alOf(e.k)&&alOf(e.k).kind==="nen").length;S.inv.push({k:"alnen0",from:"noivu",d:S.turn});
     const card={n:"Luyện cầm kỳ thi họa",c:{},o:100,w:{tai:2},cx:"arts"};S.buoi=0;const t0=S.tai,c0=nC(S);runOpt(card);o.morning=nC(S)===c0;
-    S.buoi=B4L;const t1=S.tai,c1=nC(S);runOpt(card);o.evening=nC(S)===c1-1&&S.tai>=t1+2+BAL.allot.light.add-0;o.cardNote=/nến/.test(alLightNote("arts"))&&!alLightNote("rest");
+    /* PACE-SPEED (RV-163E, sếp FINAL 26/11 ~23:24Z): Tài rises × max(min, 1 − (now/100)^pow) through the one funnel, so the raw «+2 +add» no longer holds:
+       compare the same evening card from the same Tài / carry WITHOUT and WITH a candle — the candle burns one and adds a real rise on top */
+    S.buoi=B4L;const tb=40,cand=S.inv.filter(e=>alOf(e.k)&&alOf(e.k).kind==="nen");S.inv=S.inv.filter(e=>!cand.includes(e));S.tai=tb;S.spc=Object.assign(S.spc||{},{tai:0});runOpt(card);const g0=S.tai-tb;
+    S.inv.push(...cand);S.tai=tb;S.spc.tai=0;const c1=nC(S);runOpt(card);const g1=S.tai-tb;o.evDbg={g0,g1,c1,c2:nC(S)};o.evening=nC(S)===c1-1&&g0>0&&g1>g0;o.cardNote=/nến/.test(alLightNote("arts"))&&!alLightNote("rest");
     v.inv.push({k:"alnen2",from:"noivu",d:S.turn});const vt=v.tai,vc=nC(v);const R=alLight(v,"book");o.npcLight=!!R&&nC(v)===vc-1&&v.tamco!=null;S.buoi=0;
     o.deckTag=(()=>{try{return typeof alLightNote==="function"}catch(e){return false}})();
     /* servants: NPC staff get their lệ (skimmed one step when the mistress is) */
@@ -55,7 +59,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ok=(n,c,x)=>{if(!
     /* VANPHONG: no % / lượt in any new text */
     o.noPct=!K.some(k=>/%|lượt/.test(IT[k].d+IT[k].n))&&!/%/.test(alLightNote("arts")+lxMirrorNote());
     return o});
-   for(const k of ["items","names","art","init","npcInit","linesOk","cold","rankTxt","down","lawC","goods","oilSpend","oilPlain","noOil","pickFall","noteNoOil","presetsHidden","npcNoOil","npcSpend","morning","evening","cardNote","npcLight","srvLau","srvSkim","off","offGate","noPct"])ok(k,!!r[k],k==="lawC"?r.sh:k==="linesOk"?r.lines:undefined);
+   for(const k of ["items","names","art","init","npcInit","linesOk","cold","rankTxt","down","lawC","goods","oilSpend","oilPlain","noOil","pickFall","noteNoOil","presetsGreyed","npcNoOil","npcSpend","morning","evening","cardNote","npcLight","srvLau","srvSkim","off","offGate","noPct"])ok(k,!!r[k],k==="lawC"?r.sh:k==="linesOk"?r.lines:k==="evening"?r.evDbg:undefined);
    ok("staff lệ",!r.staffHas||(r.staffGot&&r.staffSkim),[r.staffHas,r.staffGot,r.staffSkim]);console.log("srv lists",JSON.stringify(r.srvList));
    /* old save: a life with no alInit gets one first-sight issue on render */
    const old=await p.evaluate(()=>{delete S.alInit;S.inv=S.inv.filter(e=>!alOf(e.k));render();return !!S.alInit&&alHasOil(S)});ok("old save first sight",old);

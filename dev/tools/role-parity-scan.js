@@ -200,6 +200,11 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
  const restoreW=j=>{while(UNDO.length)try{UNDO.pop()()}catch(e){}const o=JSON.parse(j);for(const x of o.sv||[]){const s=servById(x.sid);if(s)Object.assign(s,x)}S.facs=o.facs||[];S.menW=o.menW||{};Object.assign(S,o.S);for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
  const npcOpts=(role,v,grps,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{AG.sc={}}catch(e){}try{rich(v);RAWP(()=>f(v))}catch(e){E("var "+vn,e)}
    for(let t=0;t<TRIES;t++){try{for(const o of agOptsG(v,Object.assign({},N0),null)||[])addN(role,o.k,"agOptsG")}catch(e){E("agOptsG",e)}
+    /* allot-pace (drift-2 method, no exempt): a social act's target (jagent AGSOC: «Lạnh nhạt», «Khiêu khích»…) is ONE hashed pick (mindPickBy keyed on
+       the doer) among the people its req allows, so which acts the probe saw hung on the doer's id (the risen maid and her born clone: PROMO onlyBorn
+       drop on 3b, once act-move-law3 made drop need a real cold foe). Every other person is asked as the pick in turn, the same for every doer */
+    {const M0=window.mindPickBy;let TS=[];try{TS=(others(v)||[]).filter(x=>x&&x!==v&&x.alive!==false)}catch(e){}
+     try{for(const tg of TS){window.mindPickBy=(L,w,p)=>p===v&&(L||[]).includes(tg)?tg:M0(L,w,p);try{for(const o of agOptsG(v,Object.assign({},N0),null)||[])addN(role,o.k,"agOptsG@t")}catch(e){E("agOptsG@t",e)}}}finally{window.mindPickBy=M0}}
     /* part 2: her own real needs too (agNeeds: a full Đức / Danh weighs its cost little), not only the flat all-needs world N0 */
     let NR=null;try{NR=Object.assign({},N0,(g0(v)==="maid"||g0(v)==="srv")&&typeof asNeeds==="function"?asNeeds(v):agNeeds(v))}catch(e){}/* B4: a maid's own needs = asNeeds (agNeeds throws on a staff: the #real pass never ran for maids) */if(NR)for(const g of grps)for(const k in AGREG[g]||{}){try{for(const o of AGREG[g][k](v,Object.assign({},NR),null)||[])if(o&&o.k)addN(role,o.k,g+"."+k+"#real")}catch(e){}}
     for(const need of [null].concat(Object.keys(N0)))for(const g of grps)for(const k in AGREG[g]||{}){try{for(const o of AGREG[g][k](v,Object.assign({},N0),need)||[])if(o&&o.k)addN(role,o.k,g+"."+k)}catch(e){}}
@@ -329,8 +334,17 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
    let m=(o.staff||[]).find(s=>s&&s.role==="maid");if(!m){fillStaff(o,true);m=(o.staff||[]).find(s=>s&&s.role==="maid")}
    const before=rivals.length;amRise(m,o,"send");const n=rivals[rivals.length-1];res.upNpc={ok:rivals.length>before&&n.rank===0,grp:g0(n),rank:n.rank,fromMaidOf:n.fromMaidOf||null};
    n.preg=0;n.hidden=false;const b=JSON.parse(JSON.stringify(Object.assign({},n,{staff:null,maid:null})));b.id=++rid;b.staff=n.staff;b.maid=n.maid;for(const k of ["fromMaid","fromMaidOf","wasMaid"])delete b[k];if(b.ag)delete b.ag.o;rivals.push(b);
-   for(const t of liveRivals(true))if(t!==n&&t!==b){try{(t.rl=t.rl||{})[b.id]=(t.rl||{})[n.id];if(t.aff)t.aff[b.id]=t.aff[n.id];if(t.oan)t.oan[b.id]=t.oan[n.id]}catch(e){}}
-   npcOpts("up",n,["consort"]);npcOpts("t1born",b,["consort"]);rivals.splice(rivals.indexOf(b),1)}catch(e){E("upNpc",e)}}
+   for(const t of liveRivals(true))if(t!==n&&t!==b){try{(t.rl=t.rl||{})[b.id]=(t.rl||{})[n.id];if(t.aff)t.aff[b.id]=t.aff[n.id];/* allot-pace: oán toward an NPC lives in t.ro[id] (j9 oan; t.oan is her NUMBER toward the player) — the old copy wrote t.oan[id], a no-op, so the clone had no foes */(t.ro=t.ro||{})[b.id]=(t.ro||{})[n.id]}catch(e){}}
+   try{if(S.rl)S.rl[b.id]=S.rl[n.id];if(S.ro)S.ro[b.id]=S.ro[n.id]}catch(e){}
+   /* allot-pace-r3 (law 11, same family as the t.ro copy above): EVERY per-person store a holder keys by the risen maid's id is copied to the clone, not a hand list —
+      joanpace's daily cap holder.opz[id] was missing (amRise had already spent part of her ex-mistress's oán day toward the risen maid, the clone got a fresh day →
+      more oán → mendDeep → PROMO onlyBorn «cx:mendGo»). Generic: any own plain-object field with key n.id and none for b.id */
+   for(const h of [S].concat(liveRivals(true)))if(h&&h!==n&&h!==b)for(const P of Object.keys(h)){const M=h[P];try{if(M&&typeof M==="object"&&!Array.isArray(M)&&Object.prototype.hasOwnProperty.call(M,String(n.id))&&!Object.prototype.hasOwnProperty.call(M,String(b.id)))M[b.id]=JSON.parse(JSON.stringify(M[n.id]))}catch(e){}}
+   /* allot-pace-r3: both doers are probed from the SAME world — the VAR runs (social oanAdd/affAdd/relAdd, liked) are not undone by snapW, so the first doer's runs
+      raised the twin's regard of her (affAdd(n,b)) and the clone, probed second, found the risen maid as her go-between (PROMO onlyBorn «cx:mendGo», order only).
+      Every person's relation stores are put back before the second doer */
+   const RK=["rl","ro","aff","opz","rel","oan"],RW=[S].concat(rivals).map(h=>[h,JSON.stringify(RK.map(k=>h[k]===undefined?null:h[k]))]);
+   npcOpts("up",n,["consort"]);for(const [h,j] of RW){const V=JSON.parse(j);RK.forEach((k,i)=>{if(V[i]===null)delete h[k];else h[k]=V[i]})}npcOpts("t1born",b,["consort"]);rivals.splice(rivals.indexOf(b),1)}catch(e){E("upNpc",e)}}
  const LT={};for(const k in TW)LT[k]=[TW[k].n];for(const k in ACT)if(ACT[k]&&ACT[k].n)LT["harm:"+k]=[ACT[k].n];
  for(const k in (window.AGC2BTN||{}))LT["cx2:"+k]=[AGC2BTN[k]];for(const k in (window.AGC3BTN||{}))LT["cx3:"+k]=[AGC3BTN[k]];for(const k in (window.AGC4BTN||{}))LT["cx4:"+k]=[AGC4BTN[k]];
  res.LT=LT;Math.random=R0;return res}

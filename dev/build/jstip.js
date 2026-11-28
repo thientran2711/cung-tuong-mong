@@ -16,10 +16,15 @@
    3. goodsGive(p, keys, {from, title, sub, kind}) — THE way any text that gives goods gives a real item (LUẬT SỬA CẢ NHÓM, dev/test/goods-scan.py):
       used by EV6 events (STIP_EV table), j67 (beat/option/end field gi), j71 festival prizes (STIP_FPRIZE), j72 favours. ================= */
 Object.assign(BAL,{stip:{
- goods:[[["vaibong",1],["tragoi",1]],[["vaibong",1],["tragoi",1]],[["luahang",1],["tragoi",1]],[["luahang",1],["trahop",1]],
-  [["luahang",2],["trahop",1]],[["gamto",1],["luahang",1],["trahop",1]],[["gamto",1],["luahang",1],["trahop",2],["yensao",1]],
-  [["gamto",2],["trahop",2],["yensao",1],["nhansam",1]]],
- coal:[1,1,1,1,2,2,2,3],coldGoods:[["vaitho",1]],coldCoal:1,npcKeep:4,resell:40,
+ goods:[[["tragoi",1]],[["tragoi",1]],[["tragoi",1]],[["trahop",1]],[["trahop",1]],[["trahop",1]],[["trahop",1],["yensao",1]],[["trahop",1],["yensao",1],["nhansam",1]]],
+ /* allot-season (OD 27/11 ~05:10Z + plan reports/allot-season-plan.md, MAIN 172 ~05:40Z): tea ONE a month at every rank (the grade by rank, law C);
+    cloth is no longer monthly: ONE bolt at the start of each season (cloth.m, the servants' months BAL.allot.srv.cloth), the grade by rank (cloth.k;
+    lãnh cung cloth.cold); a garment sewn for the season worn in its half of the year (Xuân·Hạ / Thu·Đông) = Sắc +cloth.fit (gain only, no penalty);
+    keep = the chest ceiling of each line (jseason: above it Nội vụ phủ pays the rest of the entitlement in silver at resell, «phát bù đủ lệ, dư thì quy bạc»);
+    teaAge = months before issued tea turns into Trà mốc. */
+ cloth:{m:[1,4,7,10],k:["vaibong","vaibong","luahang","luahang","luahang","gamto","gamto","gamto"],n:1,cold:"vaitho",fit:1},
+ keep:{on:true,vai:2,tra:2,than:3,yensao:2,nhansam:2,lx:2,dau:1,nen:3},teaAge:3,ban:{maid:2},
+ coal:[1,1,1,1,2,2,2,3],coldGoods:[],coldCoal:1,npcKeep:4,resell:40,
  down:{bangda:"bangvun",gamto:"luahang",luahang:"vaitho",vaibong:"vaitho",trahop:"tramoc",tragoi:"tramoc",thanbac:"thanden",yensao:null,nhansam:null},
  w:{sung:30,fault:35,sup:40,eun:25,maid:20},cap:80,meekAdd:10,spiteAdd:15,
  lowSung:15,dropSung:10,faultM:2,supRank:4,safeSung:55,tipM:3,allyLoyal:75,allyTips:3,maidLoyal:35,
@@ -56,11 +61,13 @@ function stipNm(k,n){const it=IT[k];return `${n} ${STIP_UNIT[k]||"món"} ${it?it
 function stipWinter(){try{return SEASON[S.month-1]==="Đông"}catch(e){return false}}
 function stipSummer(){try{return SEASON[S.month-1]==="Hạ"}catch(e){return false}}
 /* econ-items (owner 15/11 20:05Z #4, history ideas): charcoal in winter AND ice in summer, by rank (BAL.stip.coal / BAL.eit.ice; lãnh cung: none in summer) */
-function stipList(r,out,winter,summer){r=Math.max(0,Math.min(7,r|0));const L=(out?BAL.stip.coldGoods:BAL.stip.goods[r]).map(x=>x.slice());
+function stipClothM(){try{return BAL.stip.cloth.m.includes(S.month)}catch(e){return false}}
+function stipList(r,out,winter,summer,cloth){r=Math.max(0,Math.min(7,r|0));const L=(out?BAL.stip.coldGoods:BAL.stip.goods[r]).map(x=>x.slice());
+ if(cloth){const C=BAL.stip.cloth;L.unshift([out?C.cold:C.k[r],C.n])}
  if(winter)L.push([out?"thanden":"thanbac",out?BAL.stip.coldCoal:BAL.stip.coal[r]]);
  if(summer&&!out&&IT.bangda){const n=(BAL.eit&&BAL.eit.ice||[])[r]|0;if(n>0)L.push(["bangda",n])}return L}
-function stipRankTxt(i){const ice=(BAL.eit&&BAL.eit.ice||[])[Math.min(7,i)]|0;return stipList(i,false,false).map(([k,n])=>stipNm(k,n)).join(", ")+`, mùa đông ${stipNm("thanbac",BAL.stip.coal[Math.min(7,i)])}`+(ice&&IT.bangda?`, mùa hạ ${stipNm("bangda",ice)}`:"")}
-function stipRuleTxt(){const B=BAL.stip;return `<p class="past">Đồ phát là vật phẩm thật trong rương (may áo, pha trà mời khách, mùa đông đốt than sưởi, mùa hạ dùng băng giải nhiệt, tặng, bán lại cho Nội vụ phủ giá thấp). Nội vụ phủ có thể cắt xén (bớt bạc, đồ hàng kém, thiếu đồ; thất sủng, phẩm thấp thì bị bớt nhiều món hơn) chỉ khi có cớ: thất sủng hay Sủng sa sút, vừa bị phạt hay bị giáng, bề trên có oán sai chèn ép, thái giám tham chưa được lót tay, cung nữ không một lòng. Không bị khi Sủng từ ${B.safeSung}, vừa lót tay trong ${B.tipM} tháng, hay có người quen trong đám thái giám. Hoàng hậu không bị. Kẻ hầu không một lòng cũng có thể lén ăn bớt đồ phát.</p>`}
+function stipRankTxt(i){const ice=(BAL.eit&&BAL.eit.ice||[])[Math.min(7,i)]|0;const C=BAL.stip.cloth;return stipList(i,false,false).map(([k,n])=>stipNm(k,n)).join(", ")+`, đầu mùa (${C.m.map(m=>"tháng "+(typeof WMON!=="undefined"&&WMON[m]?WMON[m]:m)).join(", ")}) ${stipNm(C.k[Math.min(7,i)],C.n)}`+`, mùa đông ${stipNm("thanbac",BAL.stip.coal[Math.min(7,i)])}`+(ice&&IT.bangda?`, mùa hạ ${stipNm("bangda",ice)}`:"")}
+function stipRuleTxt(){const B=BAL.stip;return `<p class="past">Đồ phát là vật phẩm thật trong rương (may áo, pha trà mời khách, mùa đông đốt than sưởi, mùa hạ dùng băng giải nhiệt, tặng, ban cho kẻ hầu, bán lại cho Nội vụ phủ giá thấp). Vải phát đầu mỗi mùa; trà, than, son phấn phát theo tháng. Rương còn đủ món nào thì Nội vụ phủ không phát thêm món đó: phần lệ dư quy ra bạc. Trà để quá ${B.teaAge} tháng thì mốc. Nội vụ phủ có thể cắt xén (bớt bạc, đồ hàng kém, thiếu đồ; thất sủng, phẩm thấp thì bị bớt nhiều món hơn) chỉ khi có cớ: thất sủng hay Sủng sa sút, vừa bị phạt hay bị giáng, bề trên có oán sai chèn ép, thái giám tham chưa được lót tay, cung nữ không một lòng. Không bị khi Sủng từ ${B.safeSung}, vừa lót tay trong ${B.tipM} tháng, hay có người quen trong đám thái giám. Hoàng hậu không bị. Kẻ hầu không một lòng cũng có thể lén ăn bớt đồ phát.</p>`}
 /* ---------- state (old saves: created on first use) ---------- */
 function stipSt(p){if(!p.stip||typeof p.stip!=="object")p.stip={};return p.stip}
 function stipW(){if(!S.stipW||typeof S.stipW!=="object")S.stipW={};const W=S.stipW;if(W.greedy==null)W.greedy=roll(BAL.stip.greedy)?1:0;return W}
@@ -99,11 +106,11 @@ function stipPickLines(L,n){const D=BAL.stip.down;const ix=L.map((x,i)=>i).filte
  const pr=k=>(k==="thanbac"||k==="bangda")?1e6:((IT[k]&&itm(k).pr)||0);ix.sort((a,b)=>pr(L[b][0])-pr(L[a][0]));return new Set(ix.slice(0,Math.max(0,n|0)))}
 /* the goods: one entry per piece in p.inv (from:"noivu"); skimmed → one step worse / missing */
 function stipGoods(p,SK){const G=[];try{if(!p||p.dead||(p===S&&typeof isSrv==="function"&&isSrv()))return G;p.inv=p.inv||[];
- const L=stipList(rkOf(p),!!p.out,stipWinter(),stipSummer());const D=BAL.stip.down;const hit=SK&&SK.items?stipPickLines(L,SK.items===true?99:SK.items):new Set();
+ const L=stipList(rkOf(p),!!p.out,stipWinter(),stipSummer(),stipClothM());const D=BAL.stip.down;const hit=SK&&SK.items?stipPickLines(L,SK.items===true?99:SK.items):new Set();
  for(const [k0,n0] of L){let k=k0,n=n0,kem=false,lost=false;
   if(hit.has(L.findIndex(x=>x[0]===k0))){kem=true;k=D[k0];if(k0==="thanbac"||k0==="bangda")n=Math.max(1,n0-1);if(!k){lost=true}}
-  const g={k0,n0,k,n,kem,lost,E:[]};if(!lost&&IT[k])for(let i=0;i<n;i++){/* E-FIX-3: an NPC's candle / hair oil comes out of the counted stock first */const st=p!==S&&typeof alOf==="function"&&alOf(k)&&typeof ilStockTake==="function"?ilStockTake(k):null;const e=Object.assign(st||{k},{from:"noivu",d:S.turn});invAdd(p,e);g.E.push(e)}G.push(g)}
- if(p!==S){/* inv-stack: her stacked lệ tháng counts toward the keep too (the real pieces come out first, then the oldest are used up as before) */try{const pr=st=>st.from==="noivu"&&!(typeof lxOf==="function"&&lxOf(st.k));if(typeof invTop==="function"&&(p.invS||[]).some(pr))invTop(p,pr,1e9)}catch(x){}const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0){/* robot10 E-FIX-3: older candles / hair oil (uses left) go back to the Nội vụ phủ COUNTED stock (S.il.stock), handed out again first below (law 6c: never dropped, never one record each) */if(typeof alOf==="function"&&alOf(e.k)&&typeof ilStock==="function")ilStock(e,1,p);p.inv.splice(i,1)}})}
+  const g={k0,n0,k,n,kem,lost,E:[]};if(!lost&&IT[k])for(let i=0;i<n;i++){/* E-FIX-3: an NPC's candle / hair oil comes out of the counted stock first */const st=p!==S&&typeof alOf==="function"&&alOf(k)&&typeof ilStockTake==="function"?ilStockTake(k):null;if(st)try{Object.defineProperty(st,"stk",{value:1,writable:true,enumerable:false,configurable:true})}catch(z){}/* RV-187: marks a piece out of the counted stock (not saved) so a refusal by the jseason ceiling puts it back */const e=Object.assign(st||{k},{from:"noivu",d:S.turn});invAdd(p,e);g.E.push(e)}G.push(g)}
+ if(p!==S&&!(BAL.stip.keep&&BAL.stip.keep.on)/* allot-season: the BAL.stip.keep ceiling issues no excess (it is paid as quy bạc), so the old NPC trim stands down */){/* inv-stack: her stacked lệ tháng counts toward the keep too (the real pieces come out first, then the oldest are used up as before) */try{const pr=st=>st.from==="noivu"&&!(typeof lxOf==="function"&&lxOf(st.k));if(typeof invTop==="function"&&(p.invS||[]).some(pr))invTop(p,pr,1e9)}catch(x){}const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0){/* robot10 E-FIX-3: older candles / hair oil (uses left) go back to the Nội vụ phủ COUNTED stock (S.il.stock), handed out again first below (law 6c: never dropped, never one record each) */if(typeof alOf==="function"&&alOf(e.k)&&typeof ilStock==="function")ilStock(e,1,p);p.inv.splice(i,1)}})}
  }catch(e){console.error("stipGoods",e)}return G}
 function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:stipNm(g.k,g.n)).join(", ")}/* BIG #10 1c: a list inside a sentence takes commas (the j68i «Lý do» family), never a «·» chain */
 /* Nội vụ phủ buys its own issue back cheaply */
