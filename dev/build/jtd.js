@@ -232,7 +232,7 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
  if(!d){TDS.busy=false;tdFinish(k,mode,5,true);return}const box=kg82Box();
  const cancel=()=>{kg82Close();TDS.busy=false};
  const result=(raw,skipped,qok)=>{KG82.phase="result";TDS.q=skipped?!!qok:null;const gain=tdGain(mode,raw,skipped),q=k==="cong"?Math.round(raw/10*2):0;
-  kg82ShowRes(kg82Rows([skipped?["Học nhanh",qok?`thành: tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`:"hỏng: không tiến bộ","t"]:["Màn chơi",`${raw}/10 · ${kg82Word(raw)}`,"t"],["Mục đích",TD_GOAL[k],"n"],].concat(k==="dung"&&!skipped&&KG82.tdwalkStat?[["Vì sao",`Bát vững ${KG82.tdwalkStat.ok}/${KG82.tdwalkStat.dur} giây · đổ ${KG82.tdwalkStat.spill} lần`,"n"]]:[]).concat([["Tiến bộ",kg82Chip(`${V.n} tiến bộ`,gain,"g")]]).concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
+  kg82ShowRes(kg82Rows([skipped?["Học nhanh",qok?`thành: tiến bộ ${kStepW(tdPoints(mode,BAL.skip.raw))}`:"hỏng: không tiến bộ","t"]:["Màn chơi",`${raw}/10 · ${kg82Word(raw)}`,"t"],["Mục đích",TD_GOAL[k],"n"],].concat(k==="dung"&&!skipped&&KG82.tdwalkStat?[["Vì sao",`Bát vững ${KG82.tdwalkStat.ok}/${KG82.tdwalkStat.dur} giây · đổ ${KG82.tdwalkStat.spill} lần`,"n"]]:[]).concat([["Tiến bộ",[kg82Chip(`${V.n} tiến bộ`,gain,"g"),crsAfterW(S.vir,S.virp,k,gain)]]]).concat(k==="cong"?[["Đồ thủ công",`phẩm +${q} (luyện tay ${raw>=5?"khéo":"còn vụng"})`,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,raw>=5);/* merge-train-4: result sound like j82 lessons (raw>=5 = win) */
   kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,gain};
   $("kg82ok").onclick=()=>{kg82Close();TDS.busy=false;tdFinish(k,mode,raw,skipped)}};
  KG82.phase="intro";const HOWL=["Chơi dễ: ở bậc thấp có Gợi ý và chỉ dẫn hiện sẵn; bậc càng cao càng rộng tay."];
@@ -245,8 +245,8 @@ function tdPlay(k,mode){if(!S||S.dead||Q.length||S.mg||TDS.busy)return;vNorm(S);
 function tdFinish(k,mode,raw,skipped){if(!S||S.dead)return;vNorm(S);const l=S.vir[k],cost=virCost(l),V=VIR.find(x=>x.k===k);if(!V||l>=5)return;
  if(mode==="self"){if(!can(BAL.td.k)||S.suc<BAL.td.selfMin)return}else if(!can(BAL.td.k)||S.bac<cost)return;
  const b=typeof rsnap==="function"?rsnap():null,g=tdGain(mode,raw,skipped);TDS.q=null;
- if(mode==="self"){apply({suc:-BAL.td.selfSuc});spend(BAL.td.k);addVir(S,k,g);log(skipped&&!window.__bot?`Tự học ${V.n} (để trời định). Tiến bộ +${g}.`:`Tự học ${V.n} (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g}.`)}
- else{apply({suc:-BAL.td.mSuc,bac:-cost});spend(BAL.td.k);addVir(S,k,g);log(skipped&&!window.__bot?`Học ${V.n} với ma ma giáo tập (để trời định). Tiến bộ +${g}.`:`Học ${V.n} với ma ma giáo tập (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g}.`)}
+ if(mode==="self"){apply({suc:-BAL.td.selfSuc});spend(BAL.td.k);addVir(S,k,g);log(skipped&&!window.__bot?`Tự học ${V.n} (để trời định). Tiến bộ +${g} · ${crsAfterW(S.vir,S.virp,k,0)}.`:`Tự học ${V.n} (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g} · ${crsAfterW(S.vir,S.virp,k,0)}.`)}
+ else{apply({suc:-BAL.td.mSuc,bac:-cost});spend(BAL.td.k);addVir(S,k,g);log(skipped&&!window.__bot?`Học ${V.n} với ma ma giáo tập (để trời định). Tiến bộ +${g} · ${crsAfterW(S.vir,S.virp,k,0)}.`:`Học ${V.n} với ma ma giáo tập (${kg82Word(raw)} ${raw}/10). Tiến bộ +${g} · ${crsAfterW(S.vir,S.virp,k,0)}.`)}
  if(k==="cong"){S.vpf=S.vpf||{};S.vpf.cong=(S.vpf.cong||[]).concat(raw).slice(-3)}
  save();render();try{if(b&&typeof resultShow==="function")resultShow(`${mode==="self"?"Tự học":"Học"} ${V.n}`,b,null)}catch(e){}}
 window.lessonVir=tdPlay;window.tdPlay=tdPlay;

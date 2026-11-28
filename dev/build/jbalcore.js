@@ -26,6 +26,10 @@ function lesG(mode,pts){const L=BAL.art.les,gs=Math.max(L.min,Math.round((pts||0
 function crsG(l){const G=BAL.art.gain;return G[Math.max(0,Math.min(l|0,G.length-1))]}
 /* phần a course needs from bậc l to bậc l+1 (rule cards «Năm bậc», the bar) */
 function crsNeedP(l){return Math.ceil(artNeed(l)/crsG(l)-1e-6)}
+/* KIT §21.2 (owner OD 26/11 ~08:05Z): a lesson's gain reads «+g · 3/7» = phần inside the bậc AFTER the gain (a pure dry run of crsPush on copies);
+   a bậc gained reads «lên <tên bậc> · 0/9»; the top reads its name only. Every lesson result / log line uses it, never the 0–100 total. */
+function crsAfterW(lv,pt,k,g){try{const L={[k]:(lv||{})[k]||0},P={[k]:(pt||{})[k]||0};const n=crsPush(L,P,k,g||0);const T=BAL.art.tier,top=T.length-1;const [c,nd]=crsProg(L,P,k);
+ return L[k]>=top?artNm(top):(n?`lên ${artNm(L[k])} · `:"")+`${c}/${nd}`}catch(e){return""}}
 function crsProg(lv,pt,k){const T=BAL.art.tier,l=Math.min((lv||{})[k]||0,T.length-1);return [Math.floor(((pt||{})[k]||0)/crsG(l)+1e-6),crsNeedP(l)]}
 /* the phần one play of mode gives (game points 1..3 through lesG / tdPts), as words («một đến ba phần»): every lesson button reads this, never a typed range */
 function crsGainW(mode,l,vir){const f=pts=>Math.max(1,vir?tdPts(mode,pts):lesG(mode,pts));const a=f(1),b=f(3);return typeof kStepW==="function"?kStepW(a,b):`${a}–${b} phần`}
