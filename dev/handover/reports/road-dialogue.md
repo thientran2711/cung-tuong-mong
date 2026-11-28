@@ -28,6 +28,7 @@ KIT CHECK: reuses kitScene.open / kitScene.light / kitDialogue.play / kitTypeLin
 2. `old` units (rd:<road>#<n>): both first hồi s1 (after a won chapter) and s2 (after a middle / lost one) can follow → the scene must fit BOTH (never say she won or lost the chapter before). `open` units: the part's `after` is known (win / lose / *) → match it. `prem` / `arc`: stand alone (also played in old 3-chapter lives and by NPC women).
 3. L = a person who really comes in that hồi: the hồi's speaker w when it is a person who can stand there (v, v2, hh, th, emp, eun, doc, mis, foe); a letter / news from outside (dad's letter, a môn sinh, kin at home) → L = maid (her cung nữ brings it and tells it). dad as L only when he truly comes to court (an audience, a feast, a petition day); his lines type «cha / con», no {xung}/{goi}; her lines to him «con / cha». Never `man` unless the hồi's own man is the speaker (man67 picks any man of her life).
 4. {v}/{v2} only in units whose roles list them (cast). hh / th only where the hồi needs them (they may be absent: no scene then). Never name a speaker by his own placeholder; the emp / th / hh figure never says its own title.
+6. NEVER {goi}/{xung} in a `nar` line (nobody speaks it → the line cannot resolve → the WHOLE scene drops in game; validator now rejects it): write «nàng» or the person's name.
 5. Servant origin cnv (she is a cung nữ): L = mis / eun / a fellow maid; she addresses up through {xung}/{goi}.
 
 ## COVER (law 11; `python3 dev/test/dlgs_validate.py --cover`, ecfe9831)
@@ -56,7 +57,8 @@ KIT CHECK: reuses kitScene.open / kitScene.light / kitDialogue.play / kitTypeLin
 Total 558. Lead folds each file (validator --strict, read 10 random, rebuild jdlgsd.js), then the gates.
 
 ## WRITERS
-(none yet)
+- Foreman B 08:22Z: RDW-A session_01N1tNP4LvMJG9uWS2NZ4ou7 (R1 dtq, R2 muoi, R3 cn) · RDW-B session_01N1tNP2Np9FjuaTENKCVB5w (R4 cnv, R5 nc, R6 td) · RDW-C session_01N1tNP5unp7XKs9SvrxrGPy (R7 ch, R8 thd) · RDW-D session_01N1tNP3ksEX5jCyKC35RTiW (R9 pf+arcs, R10 bd).
+- R1 rd_dtq 51 (d673e73d) folded cbdc8fd4. R4 rd_cnv 52 (938a68d8): lead fixed 18 nar lines carrying {goi} (law 11 scan: side-line files 0, rd_* 18 → 0; validator rule added).
 
 ## LOG
 - 984ed3e8 adapter + inventory (609) + validator rd. ecfe9831 style model tt 51 (validator --strict 0); dlgs-play rd sample 6 units Fold ALL PASS 236 (tt_co#4, tt_oan#7, tt_tranh#6, rc-tt-o05/o12/o13#open); shots looked at: speaker lit left, her dimmed right, title = speaker, card «Chính tuyến · … Hồi 1» after.
