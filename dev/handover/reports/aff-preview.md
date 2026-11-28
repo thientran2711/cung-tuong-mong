@@ -76,3 +76,18 @@ ceiling +9 shown, 0 real. Table: see the test output (columns before raw / after
 - Stills (dev/test/aff-preview-shots.js, scale 1, looked at): Fold 755x1000 + iPad 1180x820 — talk card hand + opened «Hỏi han sức khỏe» card (Tốn không · Được
   thiện cảm …): no clipping, no h-scroll, 0 page errors. Note: the card-hand kit shows thiện cảm as marks («++» / «+; lợi kém hơn») built from the number
   the card holds — that number is now affSg; the marks wording is the kit's, unchanged.
+
+## HANDOVER for MAIN 188's next job (review/pvquy-post on LIVE a96564ad) — this seat is past START+20 % context; fresh seat asked
+What the next seat needs from this work (27a36750):
+- Helpers (j9): `affPreview(x,y,n[,trust])` = dry run of the real affAdd chain (PRE-act only); `affSg(x,y,n)` = card word incl. honest range; `affPreviewRun(x,y,fn)`
+  = several steps on one bond (queen gift); `affGot(x,y,fn)` (KK68) = the REAL change while fn runs (POST-act). pvQuy (jaudit) now = `thiện cảm ${affSg(t,S,n)}`.
+- Sorting rule I used: a print BEFORE the funnel call (in x / wt / duoc / g / k / opts) = PRE → affSg; a print in run/go/fn/log/return AFTER relAdd/affAdd = POST →
+  wrap the funnel `const d=affGot(v,S,()=>relAdd(S,v,K))` and print `balSg(d)`. Direction: relAdd(S,v,n) / affAdd(v,S,n) → «v thiện cảm» = aff(v,S);
+  jrcv rcvYesO(p,t): the visitor p's liking for t → affSg(p,t,…).
+- Tools: `python3 dev/measure/aff-preview-scan.py [--all]` (pairs a printed «thiện cảm / quý ngươi / quý ta / mến ngươi» number with the same expression fed to
+  relAdd/affAdd/spAdd rel; extend its PRV regex with `pvQuy\(` call sites for the new job), `node dev/test/aff-preview.js .` (families + real talk cards + gift card;
+  add rows for the a96564ad pvQuy sites: build the card, parse its number, run the act, compare — POST rows compare the result line with affGot).
+- Merge note: a96564ad's 82 pvQuy sites call pvQuy(t,n); after merging 27a36750 they already get the dry chain for PRE uses; the work is to find the POST ones
+  (pvQuy inside run/go/log strings) and switch them to affGot + one row per person.
+- Gotchas: rebuild topicOpts before each card run in tests (state moves); Ghé chơi is answered later by the host (rcvAsk); a wrong-taste gift adds its own jdis
+  line; spG peek must not create spc (fixed); quickcheck vs the LIVE named by MAIN (CTM_LIVE_REF), run it alone.
