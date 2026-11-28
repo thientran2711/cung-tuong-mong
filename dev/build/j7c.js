@@ -63,5 +63,5 @@ function j7cBuild(pp){j7cSeeds();if(!pp.sid){/* first build: pick the seed throu
  const sd=J7I[pp.sid];if(!sd)return null;const X=j7cActors(sd,pp.c||{});if(!X||!j7cGround(sd,X))return null;
  const ids=Object.keys(sd.stances||{});if(ids.length!==BAL.j7c.tier.length)return null;const first=Object.values(X).find(a=>a&&a.f);
  const ob=sd.incident.object;const clue=ob&&ob.clue?`<br><i>${j7cFill(ob.clue,X)}</i>`:"";
- return{who:first?first.f:null,t:`${sd.place?j7cFill(sd.place,X)+": ":""}${j7cFill(sd.incident.text,X)}${clue}`,o:ids.flatMap(id=>j7cOpt(sd,id,X,pp))/* + the bạc twin of each bạc way (jstory twin6, law 2) */}}
+ return{who:first?first.f:null,t:`${sd.place?j7cFill(sd.place,X)+": ":""}${j7cFill(sd.incident.text,X)}${clue}`,o:twinsLast(ids.map(id=>j7cOpt(sd,id,X,pp)))/* + the bạc twin of each bạc way (jstory twin6, law 2) */}}
 PEND.j7c=pp=>{try{return j7cBuild(pp)}catch(e){console.error(e);return null}};

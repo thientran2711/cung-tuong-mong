@@ -14,7 +14,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m)};
   const L=liveRivals(false);out.rivals=L.length;
   let R=j7cReady();out.forced=0;/* thin-p6 r2 (law 11, same family as wc/j70c/j71c-play): a fresh random world may hold no consort with the wanted nết -> force it, reported as forced (as wc-play does), instead of failing at random */
   if(!R.length){const ALLN=[].concat(...Object.values(BAL.net.F),...Object.values(BAL.net.M));tr6=v=>ALLN.slice();out.forced=1;R=j7cReady()}out.ready=R.map(x=>x.sd.id);
-  const d=mkP("j7c",{});out.card=!!d;if(!d)return out;out.text=d.t;out.opts=d.o.map(o=>o.n+' | '+o.x);out.pp=JSON.parse(JSON.stringify(d.pp));
+  const d=mkP("j7c",{});out.card=!!d;if(!d)return out;out.text=d.t;out.opts=d.o.filter(o=>!o.twin)/* E-TIER-B14b: bạc twins are not tiers */.map(o=>o.n+' | '+o.x);out.twins=d.o.filter(o=>o.twin).length;out.pp=JSON.parse(JSON.stringify(d.pp));
   const sd=J7I[d.pp.sid];out.castOk=Object.entries(d.pp.c).every(([role,c])=>{if(c.k!=='rv')return true;const v=RV(c.id);const rr=sd.roles[role];return v&&v.alive!==false&&(j7cFit(v,rr)||(BAL.j7c.loose&&j7cFit(v,rr,true)))});/* review r1: the engine's own rule (nết AND lòng; BAL.j7c.loose = any one listed) — the old check ignored loose and failed at random */
   out.unfilled=/\{[a-z]+\}/.test(d.t+d.o.map(o=>o.n).join());out.marked=nrNow('j7',d.pp.sid);
   const re=mkP("j7c",JSON.parse(JSON.stringify(d.pp)));out.rebuilt=!!re&&re.t===d.t;

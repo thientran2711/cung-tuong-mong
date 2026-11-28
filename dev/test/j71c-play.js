@@ -44,7 +44,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
    try{const C0=nrStore();if(C0.sets[0])C0.sets[0].delete(nrK('j71c:c',sd.id))}catch(e){}/* the game's own festival days may have drawn it already this life */const own=Object.values(J71C_SEEDS.CI).filter(c=>c.id!==sd.id);own.forEach(c=>{c.__k=c.kinds;c.kinds=[]});/* only this comp can be drawn */
    let c=X_.drawComp(fest,kind,L());if(!c){tr6=v=>ALLN.slice();r.forced=1;out.forced++;c=X_.drawComp(fest,kind,L())}
    own.forEach(c=>{c.kinds=c.__k;delete c.__k});r.drawn=!!c&&c.id===sd.id;if(!r.drawn)r.dbg=JSON.stringify({c,now:nrNow('j71c:c',sd.id),on:BAL.j71c.on,cf:Object.keys(J71C_SEEDS.CI)});if(!r.drawn){tr6=tr0;continue}
-   r.mark=nrNow("j71c:c",sd.id);const card=X_.compCard(fest,c);r.card=!!card&&card.opts.length===BAL.j71c.tier.length;if(!card){tr6=tr0;continue}
+   r.mark=nrNow("j71c:c",sd.id);const card=X_.compCard(fest,c);r.card=!!card&&card.opts.filter(o=>!o.twin).length===BAL.j71c.tier.length/* E-TIER-B14b: bạc twins are not tiers */;if(!card){tr6=tr0;continue}
    const B=c.b!=null?A6("rv",c.b):null;r.who=B?B.n:'-';r.fit=!sd.roles||!sd.roles.B||(B&&B.o.alive&&(!(sd.roles.B["nết"]||[]).length||sd.roles.B["nết"].some(x=>tr6(B.o).includes(x))));tr6=tr0;
    const all=card.h+" "+card.opts.map(o=>o.n+" "+o.x).join(" ");r.unfilled=/\{[A-Za-z]+\}/.test(all);r.text=plain(card.h).slice(0,140);
    const k=n++%BAL.j71c.tier.length;const sid=Object.keys(sd.stances)[k],st=sd.stances[sid];const tier=sd.tier||"m",F=BAL.j71c.fx[tier];S.an=50;

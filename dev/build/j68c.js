@@ -59,11 +59,11 @@ function j68cO(t,sd){const o=sd.object;return String(t||"").replace(/\{O\}/g,o&&
 function j68cTrace(sd,X,st){const o=sd.object;if(!o)return"";const j=e68c();const tr=e68Fill(j68cO(st.trace||o.trace,sd),X),nm=e68Fill(j68cO(o.name,sd),X);
  const own=o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":o.owner==="B"?(X.B?X.B.n:""):(X.A?X.A.n:"");
  j.ob.push({sid:sd.id,name:nm,owner:own,trace:tr,turn:S.turn});if(j.ob.length>BAL.j68c.obKeep)j.ob.splice(0,j.ob.length-BAL.j68c.obKeep);return `${nm}: ${tr}.`}
-function j68cOpts(sd,X){const tier=sd.tier||"m";return Object.entries(sd.stances||{}).flatMap(/* + the bạc twin of each bạc way (jstory twin6, law 2) */([id,st])=>{
+function j68cOpts(sd,X){const tier=sd.tier||"m";return twinsLast(Object.entries(sd.stances||{}).map(/* + the bạc twin of each bạc way (jstory twin6, law 2) */([id,st])=>{
  const g=j68cVal(st.gain,tier,1),l=j68cVal(st.loss,tier,-1);const r=[];
  if(X.A&&(g.A+l.A))r.push([X.A,g.A+l.A]);if(X.B&&(g.B+l.B))r.push([X.B,g.B+l.B]);
  const spec={c:l.fx,w:g.fx,r,ok:()=>{const t=e68Fill(j68cO((sd.outcomes||{})[id],sd),X);const tr=j68cTrace(sd,X,st);return [t,tr].filter(Boolean).join(" ")}};
- return twin6(e68Fill(j68cO(st.text,sd),X),spec)})}
+ return twin6(e68Fill(j68cO(st.text,sd),X),spec)}))}
 /* the wordings: every opener of the family whose person A fits, then the comp text (the comp alone if none fits) */
 function j68cV(sd,OP){const ak=sd.roles&&sd.roles.A?j68cK(sd.roles.A):null;const tag=sd.fam==="rumor"?BAL.j68c.rumorTag:"";
  const L=OP.filter(o=>o.a==="any"||(ak&&o.a===ak));const body=j68cO(sd.text,sd)+tag;

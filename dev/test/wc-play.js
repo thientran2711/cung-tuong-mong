@@ -57,7 +57,7 @@ let fail=0;const ok=(c,m)=>{if(!c)fail++;if(!c||process.env.V)console.log((c?'ok
    if(sd.scope!=="srv")r.roundOk=r.roundOk&&Object.values(RR).every(Lp=>Lp.every(id=>{const v=liveRivals(true).find(x=>x.id===id);return v&&SL.includes(v)}));
    r.roundAny=SL.filter(v=>(!A||v!==A.o)&&(!B||v!==B.o)).length===0||nN>0;
    /* her card: the kind's card first, then the composed one */
-   Q.length=0;S.wwSeen={};let m0=null;try{m0=E[sd.k].card(w)}catch(e){}const m=(()=>{X_.flush();return Q.find(q=>q&&q.opts&&q.opts.length&&q.wwin&&/<p>/.test(q.h||"")&&q.opts.length===BAL.wc.tier.length&&Object.values(sd.stances).every((st,j)=>q.opts[j]))})();
+   Q.length=0;S.wwSeen={};let m0=null;try{m0=E[sd.k].card(w)}catch(e){}const m=(()=>{X_.flush();return Q.find(q=>q&&q.opts&&q.opts.length&&q.wwin&&/<p>/.test(q.h||"")&&q.opts.filter(o=>!o.twin).length===BAL.wc.tier.length/* E-TIER-B14b: bạc twins are not tiers */&&Object.values(sd.stances).every((st,j)=>q.opts[j]))})();
    r.card=!!m;if(!m){X_.WC[sd.k]=keep;tr6=tr0;continue}
    const all=m.h+" "+m.opts.map(o=>o.n+" "+o.x).join(" ");r.unfilled=/\{[A-Za-z]+\}/.test(all);r.text=plain(m.h).replace(/\s+/g,' ').trim().slice(0,150);
    const k=i++%BAL.wc.tier.length;const sid=ids[k],st=sd.stances[sid];const tier=sd.tier||"m",F=BAL.wc.fx[tier];

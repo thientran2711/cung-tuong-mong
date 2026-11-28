@@ -83,9 +83,9 @@ function wcRound(sd,w,c){const tier=sd.tier||"m",r=c.r={};const X=wcActors(sd,w,
 function wcTrace(sd,X,st){const o=sd.object;if(!o)return"";const j=wc();const tr=fill(st.trace||o.trace,sd,X),nm=fill(o.name,sd,X);
  const own=o.owner==="me"?(S.name||"ngươi"):o.owner==="kho"?"Nội vụ phủ":o.owner==="X"?(X.X?X.X.n:""):o.owner==="B"?(X.B?X.B.n:""):(X.A?X.A.n:"");
  j.ob.push({sid:sd.id,name:nm,owner:own,trace:tr,turn:S.turn});if(j.ob.length>Bc().obKeep)j.ob.splice(0,j.ob.length-Bc().obKeep);return `${nm}: ${tr}.`}
-function wcOpts(sd,w,X){const tier=sd.tier||"m";return Object.entries(sd.stances||{}).flatMap(/* + the bạc twin of each bạc way (jstory twin6, law 2) */([id,st])=>{
+function wcOpts(sd,w,X){const tier=sd.tier||"m";return twinsLast(Object.entries(sd.stances||{}).map(/* + the bạc twin of each bạc way (jstory twin6, law 2) */([id,st])=>{
  const g=val(st.gain,tier,1),l=val(st.loss,tier,-1);const rr=[];if(X.A&&(g.A+l.A))rr.push([X.A,g.A+l.A]);if(X.B&&(g.B+l.B))rr.push([X.B,g.B+l.B]);
- return twin6(fill(st.text,sd,X),{c:l.fx,w:g.fx,r:rr,ok:()=>{try{wc().ch[w.id]=id}catch(e){}return [fill((sd.outcomes||{})[id],sd,X),wcTrace(sd,X,st)].filter(Boolean).join(" ")}})})}
+ return twin6(fill(st.text,sd,X),{c:l.fx,w:g.fx,r:rr,ok:()=>{try{wc().ch[w.id]=id}catch(e){}return [fill((sd.outcomes||{})[id],sd,X),wcTrace(sd,X,st)].filter(Boolean).join(" ")}})}))}
 function wcCard(w){const c=w.x&&w.x.wc;if(!c)return null;const sd=WCI[c.id];if(!sd)return null;
  if(typeof isSrv==="function"&&isSrv())return null;if(S.out||S.dead)return null;const X=wcActors(sd,w,c);if(!X)return null;
  let nm="";try{nm=window.worldName(w)}catch(e){}

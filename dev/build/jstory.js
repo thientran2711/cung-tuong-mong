@@ -52,13 +52,14 @@ function altOf67(A,bid,o,named){const base=typeof o.o==="function"?o.o:(o.o==nul
    rule above (altCost: BAL.bacTuan + BAL.altK at her rank, floor BAL.alt67Suc) — the non-bạc road of THAT tier, never a 4th tier.
    j67 hồi: one twin per bạc way (altOf67, appended after the hồi's ways so a kept way's index S.pl67.i never moves; a hồi with hand-written
    ALT67 routes keeps them as the twins of its first bạc ways). Composed cards j7c / j68c / j71c / jworldc: twin6 builds the c6 way and its
-   twin right after it. NPCs too (law 1): an NPC in the jworldc round who cannot pay a stance's Bạc takes its twin (twinNpc). j72 keeps alt72.
+   twin, twinsLast puts every twin after the card's NHẸ · VỪA · NẶNG ways (option i stays stance i for the saved card, bots and co-op). NPCs too (law 1): an NPC in the jworldc round who cannot pay a stance's Bạc takes its twin (twinNpc). j72 keeps alt72.
    BAL.twin.on = the hook switch (the scan dev/test/bac-twin-scan.js: every bạc way has its twin; its mutant MUT=twinoff must FAIL). */
 BAL.twin={on:true};
 function twinOn(){return !!(BAL.twin&&BAL.twin.on)}
 function twinN(n){return `${n} (không dùng bạc)`}
 function twinSuc(bac,rk){return altCost(bac,rk==null?(S&&S.rank):rk,BAL.alt67Suc,0).suc}
 function twinC(c,rk){const x=Object.assign({},c);const b=x.bac;delete x.bac;x.suc=(x.suc||0)-twinSuc(b,rk);return x}
+function twinsLast(A){return A.map(x=>x[0]).concat(A.flatMap(x=>x.slice(1)))}
 function twin6(n,s){const o=c6(n,s);if(!twinOn()||!s||!s.c||!(s.c.bac<0))return[o];return[o,Object.assign(c6(twinN(n),Object.assign({},s,{c:twinC(s.c)})),{twin:1})]}
 /* an NPC's stance loss (stat → amount, positive = paid): Bạc she cannot pay becomes the twin's Sức at her own rank */
 function twinNpc(v,loss,rk){if(!twinOn()||!loss||!(loss.bac>0)||(v&&v.bac||0)>=loss.bac)return loss;const x=Object.assign({},loss);const b=x.bac;delete x.bac;x.suc=(x.suc||0)+twinSuc(-b,rk);return x}

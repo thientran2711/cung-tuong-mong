@@ -8,7 +8,7 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
   for(let l=0;l<8;l++){SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<40;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(window.isSrv&&isSrv()))break}
    for(const rk of [1,2,3,4]){S.rank=rk;const R=j7cReady();R.forEach(x=>ever.add(x.sd.id));
     /* build every ready card once: every placeholder filled, 3 options NHẸ · VỪA · NẶNG (BAL.j7c.tier), no exception */
-    for(const x of R){try{const d=PEND.j7c({sid:x.sd.id,c:x.C});if(!d||d.o.length!==BAL.j7c.tier.length||/\{[a-z]+\}/.test(d.t+d.o.map(o=>o.n+o.x).join('')))bad.push(x.sd.id)}catch(e){bad.push(x.sd.id+':'+e.message)}}
+    for(const x of R){try{const d=PEND.j7c({sid:x.sd.id,c:x.C});if(!d||d.o.filter(o=>!o.twin).length!==BAL.j7c.tier.length/* E-TIER-B14b: bạc twins are not tiers */||/\{[a-z]+\}/.test(d.t+d.o.map(o=>o.n+o.x).join('')))bad.push(x.sd.id)}catch(e){bad.push(x.sd.id+':'+e.message)}}
     out.push(R.length)}}
   return{total:J7SEEDS.length,perState:out,ever:ever.size,never:J7SEEDS.filter(s=>!ever.has(s.id)).map(s=>s.id),bad:[...new Set(bad)],dil:!!j7cDil()}});
  console.log(JSON.stringify(r));console.log('errors',errs.length,errs[0]||'');await b.close();srv.close()})();
