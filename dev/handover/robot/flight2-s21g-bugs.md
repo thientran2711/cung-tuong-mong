@@ -24,3 +24,4 @@ Cấm túc (m-new-275-292) → Bị soát phòng (m-new-276-293) → Bị thu hi
 - Runner + server died silently between 04:34Z and 05:34Z (container idle); resumed at 05:3xZ with resume=1 on the same pinned build (served from origin/main 5fb13d60 → CTM_BI s=ca4a1689), save restored identical (hash ee575583), buổi 1348.
 - Also seen after resume: LATE BUTTON .kmov «Ta biết rồi» 10.4 s after open (game).
 - noturn-13/14 added by buổi ~1559 (year 11); NO-TURN shots on disk: 14.
+- noturn-15/16 added by buổi ~2053; NO-TURN shots on disk: 16.
