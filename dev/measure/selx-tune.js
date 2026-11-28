@@ -2,7 +2,7 @@
    real royal tests (one drawn per type, selxTestPick) — the same selxContest as the days; her marks by profile. Kept-rate by profile × Tài band, for a
    trial BAL.selx override. Confirm any choice with dev/measure/selx-fair.js (the full card-by-card days).
    usage: node dev/measure/selx-tune.js [lives] ['{"w":{...},"noise":n}'] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const ROOT=path.resolve(__dirname,'..');const N=+process.argv[2]||150;const OV=process.argv[3]?JSON.parse(process.argv[3]):null;
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');const ROOT=path.resolve(__dirname,'..');const N=+process.argv[2]||150;const OV=process.argv[3]?JSON.parse(process.argv[3]):null;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});
  await ctx.route('http://localhost:8813/**',r=>{const u=new URL(r.request().url());const f=path.join(ROOT,decodeURIComponent(u.pathname));if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});return r.fulfill({status:200,contentType:f.endsWith('.html')?'text/html; charset=utf-8':'application/octet-stream',body:fs.readFileSync(f)})});
  const p=await ctx.newPage();p.setDefaultTimeout(1800000);await p.goto('http://localhost:8813/index.html',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof selxContest==='function'&&typeof start==='function'&&typeof selxRoyals==='function');

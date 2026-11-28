@@ -340,19 +340,19 @@ function kitDlgText(d,mb,o){try{const kb=mb.querySelector(":scope > .kpb"),tx=kb
  d.classList.remove("kdnopic");mb.querySelectorAll(":scope > .kdlgart[data-kdnp], :scope > .kpb > .kpsubj[data-kdnp]").forEach(x=>{x.hidden=false;delete x.dataset.kdnp});
  if(kb&&kb.dataset.kdnp){kb.classList.add(...kb.dataset.kdnp.split(" ").filter(Boolean));delete kb.dataset.kdnp}
  if(!kb||!tx)return;
- d.classList.remove("kdtx");kb.style.removeProperty("max-height");tx.classList.remove("kdsh");
+ d.classList.remove("kdtx");kb.style.removeProperty("max-height");kb.style.removeProperty("--kdroom");tx.classList.remove("kdsh");
  if(d.classList.contains("kdper"))return;
  const cs=getComputedStyle(mb),pad=(parseFloat(cs.paddingTop)||0)+(parseFloat(cs.paddingBottom)||0),gap=parseFloat(cs.rowGap)||0;
  const inner=mb.clientHeight-pad,optNat=Math.min(o.scrollHeight,Math.max(96,Math.round(inner*.42)));
  const room=Math.max(72,Math.floor(inner-optNat-gap)),nat=kb.scrollHeight;
- if(nat>room+1){d.classList.add("kdtx");kb.style.maxHeight=room+"px"}
+ if(nat>room+1){d.classList.add("kdtx");kb.style.maxHeight=room+"px";kb.style.setProperty("--kdroom",room+"px")}/* K-PICK-FOLD-BAND (KK61): the cap in px for the stacked band (jkslide kv1 .kdtx: band ≤ 42 % of it) — a % of its own grid row was circular */
  const need=kitOptNeed(o);if(need&&(kitPstepOn()||o.clientHeight<need)){/* K-PICK-SHORT: this frame's box cannot hold one row + the pager → step down */kitPstepSet();
   const pics=[...mb.querySelectorAll(":scope > .kdlgart:not(.kesband), :scope > .kpb > .kpsubj.kpiart")];/* step 1: no big scene picture for this card */
   if(pics.length){pics.forEach(x=>{x.hidden=true;x.dataset.kdnp=1});const c=["kphas","kpinfo"].filter(k=>kb.classList.contains(k));if(c.length){kb.dataset.kdnp=c.join(" ");kb.classList.remove(...c)}d.classList.add("kdnopic")}
-  d.classList.remove("kdtx");kb.style.removeProperty("max-height");
+  d.classList.remove("kdtx");kb.style.removeProperty("max-height");kb.style.removeProperty("--kdroom");
   const n2=kb.scrollHeight,r2=Math.max(72,Math.floor(inner-Math.min(o.scrollHeight,Math.max(96,Math.round(inner*.42),need))-gap));/* step 2: the text cap leaves the box row + pager */
-  if(n2>r2+1){d.classList.add("kdtx");kb.style.maxHeight=r2+"px"}
-  const def=need-o.clientHeight;if(def>0&&kb.offsetHeight>72){const r3=Math.max(72,Math.floor(kb.offsetHeight-def));d.classList.add("kdtx");kb.style.maxHeight=r3+"px"}/* the body's own margins: the cap gives the box what is still missing (text ≥ 72 px) */}
+  if(n2>r2+1){d.classList.add("kdtx");kb.style.maxHeight=r2+"px";kb.style.setProperty("--kdroom",r2+"px")}
+  const def=need-o.clientHeight;if(def>0&&kb.offsetHeight>72){const r3=Math.max(72,Math.floor(kb.offsetHeight-def));d.classList.add("kdtx");kb.style.maxHeight=r3+"px";kb.style.setProperty("--kdroom",r3+"px")}/* the body's own margins: the cap gives the box what is still missing (text ≥ 72 px) */}
  if(!tx.dataset.kdsh){tx.dataset.kdsh=1;tx.addEventListener("scroll",()=>tx.classList.toggle("kdsh",tx.scrollTop>2),{passive:true})}}catch(e){console.error("kitDlgText",e)}}
 window.kitDlgFit=kitDlgFit;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{kitDlgFit();requestAnimationFrame(kitDlgFit)}catch(e){}return r};
@@ -1110,7 +1110,7 @@ function kitCompactCSS(B,w,h){w=w||84;h=h||w;return `
  ${B} small.kb>.kr>.krl{font-size:.66rem!important;align-self:baseline}
  ${B} small.kb>.kr>.krv{display:flex!important;flex-wrap:wrap!important;gap:2px 4px!important;min-width:0!important}
  ${B} small.kb>.kr>.krv>*{display:inline-block!important;white-space:normal!important;max-width:100%!important;overflow-wrap:anywhere}
- ${B} small.kb>.kr>.krv>.ksep{display:none!important}
+ ${B} small.kb>.kr>.krv>.ksep{display:inline-block!important;margin:0!important;opacity:.55;flex:none!important}/* R12 (MAIN 174 LOOK B, law 11): KIT §5 rows «values in one row are separated by .ksep ·» — hidden here, two results ran on as one phrase («tiến bộ một đến ba phần ra một món vật cầu phúc») */
 
 `}
 window.kitCompactCSS=kitCompactCSS;

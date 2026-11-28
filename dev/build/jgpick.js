@@ -10,7 +10,7 @@
    Gift moment (22:45Z #4/#5, KIT §68 kitFxGiftCarry): after the gift is applied (state first, never waits; co-op sends only state), a maid's
    hands carry the item, wrapped (lacquer box, or silk for cloth), to the person; ribbon untied on arrival; accepted → box opens with light +
    painted sparkles; refused (taint found) → the box is set down and taken back. Gọn / reduced motion / bots: nothing. Tap = skip. ===== */
-const KIP_VERB={giftpick:"Tặng",giftto:"Dâng",plantpick:"Cài vào rương",wkgive:"Dâng"};
+const KIP_VERB={giftpick:"Tặng",giftto:"Dâng",plantpick:"Cài vào rương",wkgive:"Dâng",tsgiftpick:"Biếu"/* KK62 (law 11, ring header family): «Biếu quà làm lành» piece picker, was the generic «Chọn» */};
 const KIP_SEL=new WeakMap();
 function kipOn(m){return !!(m&&m.opts&&m.opts.some(o=>o&&o.ik!=null&&S.inv[o.ik]))}
 function kipE(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
@@ -69,7 +69,7 @@ function kipRowsFit(M,w,g0){const t=[...g0.querySelectorAll(".kipc")];if(!t.leng
  const pg=w.querySelector(".kippg"),go=w.querySelector(":scope>.kipgo"),ph=(pg?pg.getBoundingClientRect().height+(parseFloat(getComputedStyle(pg).marginTop)||0)+2:0)+(go&&getComputedStyle(go).position==="sticky"?go.getBoundingClientRect().height:0);/* the sticky confirm stands under the row too */
  const raw=pitch>0?Math.floor((bot-Math.max(gt,b.top)-ph+gap)/pitch):1;/* the page's rows: whole rows from where the grid stands in view (a page never has a row hidden under the pager) */
  const rawBox=sc===g0.closest(".opts")||pitch<=0?raw:Math.floor((bot-Math.max(b.top,gt-Math.max(0,sc.scrollHeight-sc.clientHeight-sc.scrollTop))-ph+gap)/pitch);/* a whole column that scrolls (person dialog .kdpall / .kdper): she scrolls the row up — short only if the BOX cannot hold row + pager + confirm */
- w.classList.toggle("kipshort",Math.max(raw,rawBox)<1);kipCueLift(M);/* K-PICK-SHORT (a): the frame steps down first (jk4 kitDlgText: no big picture, text cap); only a box that still cannot hold one row + the pager puts the pager under the row (fallback (d), never over a tile) */return pitch>0?Math.max(1,raw):0}
+ w.classList.toggle("kipshort",Math.max(raw,rawBox)<1);/* K-PICK-SHORT (a): the frame steps down first (jk4 kitDlgText: no big picture, text cap); only a box that still cannot hold one row + the pager puts the pager under the row (fallback (d), never over a tile) */return pitch>0?Math.max(1,raw):0}
 function kipPg(m,L,sel){const per=kipPer(m),pages=Math.max(1,Math.ceil(L.length/per));let pg=KIP_PG.get(m);
  if(pg==null){const at=sel!=null?L.findIndex(x=>x[1]===sel):0;pg=Math.floor(Math.max(0,at)/per)}pg=Math.min(Math.max(0,pg|0),pages-1);KIP_PG.set(m,pg);return{per,pages,pg}}
 function kipSelect(M,m,i){const ops=M.querySelector(".opts");if(!ops||!ops.querySelector(`:scope>.opt[data-m="${i}"]`)){KIP_SEL.set(m,i);kipRedraw();return}
@@ -112,12 +112,9 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
    the bottom of the dialog's scroller (#mb) while any part of the picker is in view = reachable with no scroll (inside .kipd its sticky could
    never rise above the detail: 187–254 px below the box on Fold + iPad, Dâng quà dead). Every kipDetail draw moves its button out. */
 (function(){const k0=kipDetail;kipDetail=function(M){try{M&&M.querySelectorAll(".kipw>.kipgo").forEach(x=>x.remove())}catch(e){}const r=k0.apply(this,arguments);
- try{const d=M&&M.querySelector(".kipd"),g=d&&d.querySelector(":scope>.kipgo");if(g)d.after(g)}catch(e){console.error("kipgo",e)}return r}})();
-/* K-PICK-SHORT (law 11: nothing covers the confirm): the frame's scroll cue «Kéo xuống» inside a pick box (.opts.kiphas > .kscue, jksize) sits ABOVE
-   the sticky confirm (+ the sticky pager) and spans the whole box (in a grid box it took one column): its fade never covers «Dâng / Chọn» */
-function kipCueLift(M){try{const w=M&&M.querySelector(".kipw"),o=w&&w.closest(".opts");if(!o)return;const st=e=>e&&getComputedStyle(e).position==="sticky"?e.offsetHeight:0;
- o.style.setProperty("--kipcue",(st(w.querySelector(":scope>.kipgo"))+st(w.querySelector(":scope>.kippg"))+4)+"px")}catch(e){}}
-(function(){const k0=kipDetail;kipDetail=function(M){const r=k0.apply(this,arguments);kipCueLift(M);return r}})();
+ try{const d=M&&M.querySelector(".kipd"),g=d&&d.querySelector(":scope>.kipgo");if(g){d.after(g);/* K-PICK-PAGER-GO (KK62): the §23 pager (.kippg, picker-dom K-LIST-PAGE) is sticky too — it rides
+   just ABOVE the confirm, never under it (trial merge ui3 + picker-dom: «Chọn» covered ‹ trang N/M › by 41 px on every grid, Fold + iPad) */
+  const w=d.parentElement;if(w)w.style.setProperty("--kipgoh",(g.offsetHeight||44)+"px")}}catch(e){console.error("kipgo",e)}return r}})();
 /* ---------- the gift moment ---------- */
 let KIP_GO=null;
 /* where the person is: the open person card's portrait in the panel, else the dialog's own figure, else the upper middle */
@@ -168,7 +165,8 @@ html body #modal .opts.kiphas>.kipw{grid-column:1/-1!important;width:100%;max-wi
 /* reviewer r1: with the §70 strip, strip | card side by side on landscape screens. K-PICK-GO-REACH (KK61): the confirm sticks to the bottom
    of the dialog's scroller while the picker is in view (child of .kipw, so the sticky can rise over the grid + detail) */
 .kipw>.kipgo{position:sticky;bottom:0;z-index:2}
-#modal .opts.kiphas>.kscue:not(.sib){grid-column:1/-1;bottom:var(--kipcue,0px)}/* K-PICK-SHORT: the box's scroll cue stands above the sticky confirm + pager (kipCueLift) */
+.kipw:has(>.kipgo)>.kippg{bottom:calc(var(--kipgoh,44px) + 2px)}/* K-PICK-PAGER-GO (KK62): pager sticks right above the sticky confirm */
+#modal .opts.kiphas>.kscue:not(.sib){grid-column:1/-1}/* the box's scroll cue spans the whole pick box like .kipw (in the grid box it took one column); its height above the sticky confirm + pager = §56.34 K-CUE-FOOT kscFoot */
 /* kv3:.kv2 */:where(.kv2) .kipd.kipd2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:start;column-gap:10px}:where(.kv2) .kipd2>.kidet{grid-column:1;grid-row:1/span 2}:where(.kv2) .kipd2>.kipcard{grid-column:2}
 
 /* kv3:.kv1 */:where(.kv1) .kipg{--kshsz:84px}

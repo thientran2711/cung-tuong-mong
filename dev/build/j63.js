@@ -200,6 +200,7 @@ kaMO.observe(document.documentElement,{childList:true,subtree:true,attributes:tr
 (function(){const st=document.createElement("style");st.id="ka-css";st.textContent=`
 button.ka{display:flex!important;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:3px;text-align:left;background:var(--k-card,#fffaf0);border:1px solid var(--line);border-radius:8px;padding:6px 9px 7px!important;color:var(--ink);font-family:inherit;font-size:.82rem;line-height:1.3;min-height:0;height:auto!important;max-height:none!important;overflow:visible!important;white-space:normal!important;box-shadow:inset 0 0 0 1px #fff8,0 1px 0 #d9c49a55}
 button.ka:hover:not(:disabled){border-color:var(--gold)}
+.knw{white-space:nowrap}
 button.ka .kat{display:flex;align-items:flex-start;gap:6px;justify-content:space-between;padding-bottom:3px;border-bottom:1px solid #e6d3ac}
 button.ka .kan{flex:1 1 auto;min-width:0;display:block;font-weight:700;color:var(--ink);overflow-wrap:anywhere}
 button.ka .kan .md{display:inline-flex!important;position:static!important;margin:0 4px 0 0!important;vertical-align:middle}button.ka .kan .ic{vertical-align:middle}button.ka .kan .md.xs{width:22px!important;height:22px!important}button.ka .kan .ic{flex:0 0 auto}
@@ -236,14 +237,14 @@ button.ka .kr-note .krv .ef{color:var(--dim);font-weight:400}
 button.ka.kdis,button.ka:disabled{opacity:1!important;background:#eee7da!important;border-color:#d4c8b2;cursor:default;filter:none}
 button.ka.kdis .kan,button.ka:disabled .kan{color:#7d7263}
 button.ka.kdis .kodds,button.ka:disabled .kodds{filter:grayscale(1);opacity:.7}
-button.ka.kdis .kr-mat,button.ka.kdis .kr-kem,button.ka.kdis .kr-bai,button.ka:disabled .kr-mat,button.ka:disabled .kr-kem,button.ka:disabled .kr-bai{display:none}
+button.ka.kdis:not(.kopinfo) .kr-mat,button.ka.kdis:not(.kopinfo) .kr-kem,button.ka.kdis:not(.kopinfo) .kr-bai,button.ka:disabled:not(.kopinfo) .kr-mat,button.ka:disabled:not(.kopinfo) .kr-kem,button.ka:disabled:not(.kopinfo) .kr-bai,button.ka.kopinfo.khlock .kr-mat,button.ka.kopinfo.khlock .kr-kem,button.ka.kopinfo.khlock .kr-bai{display:none}/* KIT §6.2o K-HAND-MAT (KK63): a read-only COPY (.kopinfo: hand plate, «!» overlay) is a disabled button only so it cannot be pressed — it shows every Mất / Kèm / Bại row unless it copies a locked card (.khlock) */
 /* kit-thanh-bai: the THÀNH / BẠI block heads (full grid row) and their rows; a disabled card shows no BẠI block (same rule as its hidden Mất / Kèm) */
 /* r4: no head rows — the row label itself is THÀNH (green) / BẠI (red); label column LEFT, value RIGHT at every size */
 .kb .kr-thanh .krl{color:var(--good);font-weight:800}.kb .kr-bai .krl{color:var(--bad);font-weight:800}
 .kb .kr-none.kr-thanh .krl{color:var(--good)}.kb .kr-none.kr-bai .krl{color:var(--bad)}
 .kb .kr-duoc.kb-a .krl{white-space:normal;line-height:1.1}
 .kb .kr-none .ef{color:var(--dim);font-weight:400;font-style:italic}
-button.ka.kdis .kr.kb-b,button.ka:disabled .kr.kb-b{display:none}
+button.ka.kdis:not(.kopinfo) .kr.kb-b,button.ka:disabled:not(.kopinfo) .kr.kb-b,button.ka.kopinfo.khlock .kr.kb-b{display:none}/* K-HAND-MAT (KK63): same exemption for the read-only copy */
 button.ka.kdis .krv .ef.g,button.ka.kdis .krv .ef.r,button.ka.kdis .krv .ef.t{opacity:.75}
 button.ka.kcard{border-radius:8px}
 button.ka.kcard .kan{font-family:var(--title,inherit);font-size:calc(var(--kfs,.82rem) + .12rem)}

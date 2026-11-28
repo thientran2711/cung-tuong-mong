@@ -7,7 +7,7 @@
      FACE REUSE: a living person whose portrait (fc) or figure (fid) once belonged to a DEAD person (owner OD:L642: never reuse) — must be 0;
      blank: replacements with no portrait left in the pool (shown with the kit fallback/silhouette) → ART NEEDED size;
      palace size at the end: live consorts, servants in all palaces, Lý present. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('../test/lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const R=process.env.ROOT||path.resolve(__dirname,'../..');const LIVES=+process.argv[2]||6,YEARS=+process.argv[3]||30,OUT=process.argv[4];
 (async()=>{const b=await chromium.launch({args:['--js-flags=--max-old-space-size=900','--disable-gpu']});const ctx=await b.newContext({viewport:{width:1000,height:755},reducedMotion:'reduce'});
  await ctx.route(/^https?:\/\/(?!ts\.local)/,r=>/image|media|font/.test(r.request().resourceType())?r.abort():r.continue());

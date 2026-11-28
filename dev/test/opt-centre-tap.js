@@ -5,7 +5,7 @@
      STOLE  = something else answered (kit popup #kpop, an emotion tip, a picture viewer, a ladder) and the card did nothing
      DEAD   = nothing happened.  Also CUT = the card is not fully visible inside the dialog (needs a scroll) at open.
    usage: node dev/test/opt-centre-tap.js <index.html> [WxH,...]   env ONLY=regex (frame ids) MAXF=n (frames, default all)   exit 1 on STOLE/DEAD */
-const {chromium}=require('playwright');const path=require('path');const A=process.argv.slice(2);const SRC=path.resolve(A[0]);const SIZES=(A[1]||'755x1000,1180x820').split(',');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const path=require('path');const A=process.argv.slice(2);const SRC=path.resolve(A[0]);const SIZES=(A[1]||'755x1000,1180x820').split(',');
 (async()=>{const b=await chromium.launch();const rows=[];let bad=0;const tot={};
  for(const wh of SIZES){const [W,H]=wh.split('x').map(Number);const dev=W<H?'fold':'ipad';
   const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
@@ -17,7 +17,7 @@ const {chromium}=require('playwright');const path=require('path');const A=proces
   const ids=await p.evaluate(()=>['c2a'].concat(Object.keys(PEND)));const re=process.env.ONLY?new RegExp(process.env.ONLY):null;const list=ids.filter(i=>!re||re.test(i)).slice(0,+(process.env.MAXF||1e9));
   /* open one frame fresh (same filler as opt-frame-scroll-scan) */
   const open=id=>p.evaluate(id=>{try{while(Q.length){const n=Q.length;closeModal();if(Q.length>=n)break}}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;document.body.classList.remove('kdlg-on');const kp=document.getElementById('kpop');if(kp)kp.remove();
-   if(id==='c2a'){try{if(rgFire('c2a')){Q.length=1;showModal();return true}}catch(e){}return false}
+   if(id==='c2a'){try{if((()=>{try{S.evc=null;EVCW.length=0}catch(e){}/* clean day: LIVE jevc daily cap */return rgFire('c1b')})()/*c2a = a side choice = vòng nhóm (KIT §101.9)*/){Q.length=1;showModal();return true}}catch(e){}return false}
    const v=(liveRivals(true)||[])[0];const C=[...(liveRivals(true)||[]).map(x=>x.id),...((S.srvs||S.servants||[]).map(x=>x&&x.id)),null,0,1,2,'emp','th','hh'];const E6=typeof EV6!=='undefined'?EV6[id]:null;let p6=null;
    if(E6&&typeof A6==='function'){p6={vi:0};for(let i=0;i<(E6.a||[]).length;i++){const c=C.find(x=>{try{return !!A6(E6.a[i],x)}catch(e){return false}});if(c===undefined){p6=null;break}p6['a'+i]=c}}
    for(const pp of [...(p6?[p6]:[]),{v:v&&v.id},{q:2,vp:0},{a0:v&&v.id,vi:0},{}]){let d=null;const pc=Object.assign({},pp);try{d=PEND[id](pc)}catch(e){d=null}if(!d)continue;try{Q.length=0;pushDil(mkP(id,pc),'Tuyến truyện');showModal();if(Q.length&&!document.getElementById('modal').hidden)return true}catch(e){}}return false},id).catch(()=>false);

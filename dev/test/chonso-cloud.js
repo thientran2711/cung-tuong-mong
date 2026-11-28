@@ -2,7 +2,7 @@
    co-op room list + seat pid carried (no co-op life in the cloud), screenshots of every Sổ mây screen.
    Runs the REAL Worker code on a local mock (coop/worker/test/mock-server.mjs, mock Durable Objects). No deploy needed.
    usage: python3 dev/build/assemble.py && node dev/test/cloud-save.js [shots]   (shots → dev/shots/cloud-save/, keep few) */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const {spawn}=require('child_process');const net=require('net');const path=require('path');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const {serve,BASE}=require('./coop-serve.js');const {spawn}=require('child_process');const net=require('net');const path=require('path');const fs=require('fs');
 const SHOTS=process.argv[2]==='shots';const OUTD=path.resolve(__dirname,'../shots/chonso-cloud');if(SHOTS)fs.mkdirSync(OUTD,{recursive:true});
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,300):''))};
 const freePort=()=>new Promise(r=>{const s=net.createServer();s.listen(0,'127.0.0.1',()=>{const p=s.address().port;s.close(()=>r(p))})});

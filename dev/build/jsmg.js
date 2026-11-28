@@ -62,7 +62,7 @@ function herGame(mode,o,cb){const B=M();const kind=B.art&&B.art[mode];const nm=m
  BUSY=1;const n1=word(stealRungUp(o,B.rung||1)),n0=word(o),diff=()=>{try{return mgDiffTxt(mgTier(kind,{occ:B.occ}),kind)}catch(e){return ""}};
  const pa=()=>playArt({art:kind,artName:nm,occ:B.occ,rowsHead:"Trước khi ra tay",
   rows:[["Thắng",`cơ duyên lần này lên một bậc: ${n0} → ${n1}`,"g"],["Thua hay không chơi",`cơ duyên giữ nguyên ${n0}, không mất thêm gì`,"n"]].concat(diff()?[["Độ khó",diff(),"n"]]:[]),
-  go:"Bắt đầu",quick:{n:"Thôi, không chơi",sub:`giữ nguyên ${n0}`},
+  go:"Bắt đầu",quick:false,/* no «Thôi, không chơi» card (owner 26/11 ~22:43Z): not playing = losing (giữ nguyên); the kg82 ✕ gives up (KIT 32.10) */
   resRows:(raw,sk)=>[["Kết quả",sk?`không chơi: cơ duyên giữ nguyên ${n0}`:raw>=B.win?`${raw}/10 · ${kg82Word(raw)}: cơ duyên lên ${n1}`:`${raw}/10 · ${kg82Word(raw)}: cơ duyên giữ nguyên ${n0}`,!sk&&raw>=B.win?"g":"n"]],
   onDone:(raw,x)=>fin(raw,!!(x&&x.skipped))});
  /* jaudit's playArt hook marks a paid game (window.__aaL); this game is free: keep its mark as it was */

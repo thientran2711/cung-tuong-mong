@@ -1,5 +1,5 @@
 /* SELSCENE-6 shot driver for the selection scenes (owner mock): node dev/test/selx-mock.js <worktree> <outdir OUTSIDE git> [scale 1|2] [rooms,hall,drama,result,map]; serves dev/ via page.route (local http.server is blocked), CDN images pass through; shots never in git (OD:L203) */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const WT=process.argv[2],OUT=process.argv[3],SCALE=+(process.argv[4]||1),ONLY=process.argv[5]||'';const ROOT=path.join(WT,'dev');fs.mkdirSync(OUT,{recursive:true});
 const DEV={fold:{width:755,height:1000},ipad:{width:1180,height:820}};
 /* plan: [scene, setup js (returns after starting the scene), [[taps before shot, label, extra wait ms]]] */

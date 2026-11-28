@@ -1,7 +1,7 @@
 /* review/emo-men: which emotion seal each person wears. Serves the repo root as http://em.local/ and the local img/kit/emo-* (not yet on the CDN).
    usage: node dev/test/emo-men.js <W>x<H>@dpr <outdir>
    Starts a life, makes the Emperor angry and known, opens his card and a few people cards; prints every seal on screen with its owner's role. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');
 const [,,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 const ROOT=path.resolve(__dirname,'../..');
 const MIME={html:'text/html',js:'text/javascript',json:'application/json',webp:'image/webp',png:'image/png',css:'text/css'};
