@@ -40,14 +40,14 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
   chk(`life ${L+1}: no road for her father, the m96 man, her own children`,!R.bad.length,R.bad);
   chk(`life ${L+1}: real fields stay in range`,!R.rng.length,R.rng)}
  await open();
- const H=await p.evaluate(()=>{if(!__boot('muoi'))return{err:'boot'};const out=[];const kinds=Object.keys(T72I).filter(t=>/^nr_/.test(t));
+ const H=await p.evaluate(()=>{window.__sqoff=1;/* sideq-trim: content test of the help quests, any asker (the rank gate has its own test, sideq-optscan) */if(!__boot('muoi'))return{err:'boot'};const out=[];const kinds=Object.keys(T72I).filter(t=>/^nr_/.test(t));
   const L=nrMenL();const pickE=(g,f)=>L.find(e=>e.g===g&&(!f||f(e)));
   const E=[pickE('men',e=>e.p.role!=='Vương gia'),pickE('men',e=>e.p.role==='Vương gia'),pickE('court',e=>e.a&&e.a[0]==='doc'),pickE('court',e=>e.a&&e.a[0]==='eun'),pickE('court',e=>e.a&&e.a[0]==='ksp'),pickE('off')].filter(Boolean);
   for(const e of E)for(const tid of kinds)for(const oi of [0,2]){e.p.nr=null;nrMenInit(e);const riv=nrMenRival(e);S.bac=999;S.suc=90;used=0;
    const A=q72A(e.a[0],e.a[1]);if(!A){out.push({tid,k:e.a[0],err:'actor'});continue}const x=q72Make(T72I[tid],A);if(!x){out.push({tid,k:e.a[0],err:'make'});continue}
    if(e.g==='men'&&riv){x.bk='man';x.bi=riv.id}else if(e.g==='off'&&riv){x.bk='off';x.bi=riv}else{const v=liveRivals(false)[0];if(v){x.bk='rv';x.bi=v.id}}
    x.p={nr:e.p.nr.r,nn:e.p.nr.n};const q=q72();q.a.push(x);const X=q72X(x);const title=plain(q72Title(X));const intro=plain(typeof X.T.h==='function'?X.T.h(X):X.T.h);
-   let tries=0;while(q.a.includes(x)&&tries++<12){used=0;S.suc=90;q72Do(x.u,oi)}
+   let tries=0;while(q.a.includes(x)&&tries++<12){used=0;S.suc=90;Q.length=0;/* an NPC popup (jagent) must not block the step */q72Do(x.u,oi)}
    out.push({tid,k:e.a[0],vg:e.p.role==='Vương gia',gd:e.p.role==='Thị vệ',oi,title,intro,hb:e.p.nr.hb,done:!q.a.includes(x),hist:q.h[0]&&q.h[0].res})}
   let hz=null;try{const v=liveRivals(false)[0];const kd=mkKid('m',nrB().men.kidAge);v.kids=v.kids||[];v.kids.push(kd);const e=nrMenL().find(z=>z.p===kd);
    if(e){nrMenInit(e);const f0=[kd.fond,kd.tal,kd.hp];for(let i=0;i<8;i++){kd.nr.t=0;nrMenMonth(0)}hz={r:kd.nr.r,k:NRM[kd.nr.r]&&NRM[kd.nr.r].k,l:kd.nr.l,x:kd.nr.x,f0,f1:[kd.fond,kd.tal,kd.hp]}}else hz={err:'no entry'}}catch(x){hz={err:x.message}}

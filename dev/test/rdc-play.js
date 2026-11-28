@@ -15,7 +15,7 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
 let fail=0,pass=0;const ok=(c,m,x)=>{if(!c){fail++;console.log('FAIL '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,700):''))}else pass++};
 (async()=>{await new Promise(r=>srv.listen(0,'127.0.0.1',r));const URL='http://127.0.0.1:'+srv.address().port+'/';const b=await chromium.launch();const errs=[];let p;
  const boot=async()=>{if(p)await p.context().close();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});
-  await ctx.route(u=>!/^http:\/\/127\.0\.0\.1[:/]/.test(u.href)&&/^https?:/.test(u.href),r=>r.abort());p=await ctx.newPage();if(STOP12)await p.addInitScript(()=>{window.__stop12=1});p.setDefaultTimeout(0);
+  await ctx.route(u=>!/^http:\/\/127\.0\.0\.1[:/]/.test(u.href)&&/^https?:/.test(u.href),r=>r.abort());p=await ctx.newPage();await p.addInitScript(require('./lib/qdrain').init);/* headless loop: __bot + answer the night choice (lib/qdrain.js, NPCROADS-RED) */if(STOP12)await p.addInitScript(()=>{window.__stop12=1});p.setDefaultTimeout(0);
   p.on('pageerror',e=>errs.push(e.message.slice(0,300)));p.on('console',m=>{const t=m.text();if(t.startsWith('[rdc]'))console.log(t)});await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
   await p.waitForFunction(()=>typeof start==='function'&&typeof ROAD14==='object'&&typeof rdcLoad==='function',null,{timeout:0});await p.waitForTimeout(1500);
   await p.evaluate(ROWS=>{document.getElementById('title').hidden=true;
@@ -55,7 +55,7 @@ let fail=0,pass=0;const ok=(c,m,x)=>{if(!c){fail++;console.log('FAIL '+m+(x!==un
        res67(thKey67(A),A.cur,i,o&&o.o!=null?oOf67(A,o,bd):100);if(A.done)ends.push(A.a+'='+A.end)}}catch(e){err=err||('beat '+e.message+' '+(e.stack||'').split('\n')[1])}
      if(err)break;
      if(S.st.ms&&++stuck>2){if(S.st.ms.id==='len14'&&S.srv&&!S.srv.risen){S.age=Math.max(S.age||0,18);srvRise('bot')}else S.st.ms.force14=1}
-     const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0}
+     const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}Q.length=0}
     const rc=S.st.f14.rc||null,o=RDC.road[road];
     if(rc)for(let n=BAL.road.first;n<=BAL.road.last;n++){const id=road+'_'+n;const opened=(S.st.ch.past||[]).some(x=>x.a===id);if(opened)for(const pid of rdcChap(road,n).parts)marks.push([pid,nrSeenK?nrNow('rdc:'+o,pid):true])}
     const parts=rc?Object.values(rc).flatMap(c=>[].concat(c.s,c.c,c.t,[c.x])):[];

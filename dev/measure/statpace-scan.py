@@ -6,11 +6,11 @@ fx-object builders jlux / jpoison / jrcp, the co-op mirror jcoopworld friendEntr
 --root <dir> scans another tree (e.g. LIVE: git worktree of origin/main). usage: python3 dev/measure/statpace-scan.py [--list] [--json]"""
 import re,glob,sys,json,os
 ROOT=sys.argv[sys.argv.index('--root')+1] if '--root' in sys.argv else os.path.join(os.path.dirname(__file__),'..','build')
-STAT=r'(sung|danh|duc|th|hh|rel|oan)'
+STAT=r'(sung|danh|duc|th|hh|rel|oan|sac|tai|tamco)'  # sac / tai / tamco: PACE-SPEED (BAL.stp.abs)
 PAT={
- 'apply':re.compile(r'\bapply\(\{[^}]*\b(sung|danh|duc|th|hh)\s*:'),
- 'ap':re.compile(r'\bap\([^,()]+,\{[^}]*\b(sung|danh|duc|th|hh)\s*:'),
- 'statSet':re.compile(r'\bstatSet\([^,]+,"(sung|danh|duc|th|hh)"'),
+ 'apply':re.compile(r'\bapply\(\{[^}]*\b(sung|danh|duc|th|hh|sac|tai|tamco)\s*:'),
+ 'ap':re.compile(r'\bap\([^,()]+,\{[^}]*\b(sung|danh|duc|th|hh|sac|tai|tamco)\s*:'),
+ 'statSet':re.compile(r'\bstatSet\([^,]+,"(sung|danh|duc|th|hh|sac|tai|tamco)"'),
  'affAdd':re.compile(r'\baffAdd\('),'relAdd':re.compile(r'\brelAdd\('),'hhSet':re.compile(r'\bhhSet\('),'oanAdd':re.compile(r'\boanAdd\('),
  'direct':re.compile(r'(?<![\w$])(?:S|p|v|x|y|o|q|r|w|m|c|t|n|e|a|b|V|P|who|tgt|her|riv|me|it)\.'+STAT+r'\s*(?:\+=|-=|=(?!=))'),
  'riseDirect':re.compile(r'([\w$.\[\]]+)\.'+STAT+r'\s*\+=\s*(?!-)|([\w$.]+)\.'+STAT+r'\s*=\s*(?:cl\(|Math\.min\(\s*100\s*,\s*)?\(*\s*\3\.\4(?:\|\|\d+)?\)?\s*\+\s*(?!-)'),
