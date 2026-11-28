@@ -60,9 +60,12 @@ function tyCharge(k){try{if(!tyOn(S)||!S.visit)return;const key=`${wk()}.${S.buo
 /* the card before she walks out in trung y: exactly what she loses */
 (function(){if(typeof goTo!=="function")return;const g0=goTo;goTo=function(k){
   if(window.__tyCardK===k){window.__tyCardK=null;window.__tyGo=1;try{const r=g0.apply(this,arguments);try{if(S&&S.place===k)tyCharge(k)}catch(e){}return r}finally{window.__tyGo=0}}
+  /* D-ROW37 (daily noise, owner OD 26/11 ~06:50Z (A)): once she chose «Vẫn đi» this buổi, the next walks of the same buổi ask no more (the same question
+     again and again flooded Sổ ghi — robot: up to 11 «Ra ngoài khi mặc trung y?: Vẫn đi.» a day); each place still charges its own loss (tyCharge, logged) */
+  if(S&&!S.dead&&k&&k!=="home"&&k!==S.place&&tyOn(S)&&!window.__tyGo&&!Q.length&&!S.out&&S.tyWent===`${wk()}.${S.buoi||0}`){window.__tyGo=1;try{const r=g0.apply(this,arguments);try{if(S&&S.place===k)tyCharge(k)}catch(e){}return r}finally{window.__tyGo=0}}
   if(S&&!S.dead&&k&&k!=="home"&&k!==S.place&&tyOn(S)&&!window.__tyGo&&!Q.length&&!S.out){const c=tyCost(k,null);
    Q.push({t:"Ra ngoài khi mặc trung y?",kind:"notice",act:1,h:`<p class="past">${when()}</p><p>Ngươi đang mặc trung y (${TY_COL[tyTier(S)]}), chưa khoác y phục.</p><p>Mặc trung y ra khỏi tẩm cung là thiếu lễ, người trong cung sẽ chê cười: ${c.L.join("; ")}.</p>`,
-    opts:[{n:"Vẫn đi",fx:{},x:`tốn: Danh -${c.danh}${c.duc?` · tốn: Đức -${c.duc}`:""}`,go:()=>{setTimeout(()=>{window.__tyGo=1;try{goTo(k)}finally{window.__tyGo=0}},0)}},
+    opts:[{n:"Vẫn đi",fx:{},x:`tốn: Danh -${c.danh}${c.duc?` · tốn: Đức -${c.duc}`:""}`,go:()=>{try{S.tyWent=`${wk()}.${S.buoi||0}`}catch(e){}setTimeout(()=>{window.__tyGo=1;try{goTo(k)}finally{window.__tyGo=0}},0)}},
           {n:"Ở lại",fx:{},x:"(thay y phục trong Tư trang: Y phục → Mặc, rồi hãy đi)",go:()=>{}}]});render();return}
   const r=g0.apply(this,arguments);try{if(S&&S.place===k)tyCharge(k)}catch(e){}return r};window.goTo=goTo})();
 /* a visitor at home while she is in trung y */
