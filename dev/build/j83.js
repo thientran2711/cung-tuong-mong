@@ -101,8 +101,9 @@ function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w
   return `${by} dâng ${wn} lên Hoàng thượng${ev.notes.length?" ("+ev.notes.join("; ")+")":""}. ${a===S?fmt(ev.fx):"Sủng +"+ev.fx.sung}. `}
  if(r==="th"){ap(a,ev.fx);if(a!==S)newsAdd(a,"gift",`${by} dâng ${wn} tự tay làm lên Thái hậu.`);return `${by} dâng ${wn} lên Thái hậu${ev.notes.length?" ("+ev.notes.join("; ")+")":""}. ${a===S?fmt(ev.fx):""}`}
  if(r==="maid"){ap(a,ev.fx);return `${by} tặng ${a.maid.name} ${wn}. Thiện cảm ${a.maid.name} +${ev.fx.maid}. `}
- const ent=Object.assign({},e,{wk:Object.assign({},w,{from:key(a)})});const keepGain=()=>{relAdd(a,r,ev.rel);if(ev.fx.hh)ap(a,{hh:ev.fx.hh})};
- if(r===S){keepGain();pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");newsAdd(a,"gift",`${by} tặng ngươi ${wn} tự tay làm.`,true);return `${by} sai người mang ${wn} sang tặng ngươi. `}
+ const ent=Object.assign({},e,{wk:Object.assign({},w,{from:key(a)})});const kg={r:ev.rel,hh:ev.fx.hh||0},keepGain=()=>giftKeepGo(a,r,kg);
+ /* d-giftin-like: to HER the work's gain waits for her answer (pp.kg → PEND.giftin Nhận / Thái y finds nothing), never before it */
+ if(r===S){pushDil(mkP("giftin",{f:key(a),e:ent,kg}),"Quà tặng");newsAdd(a,"gift",`${by} tặng ngươi ${wn} tự tay làm.`,true);return `${by} sai người mang ${wn} sang tặng ngươi. `}
  /* d19-gift-npc (law 1 + 11): a work given to an NPC gets HER answer too, as every item (jrcv rcvGiftIn: Nhận / Trả lại quà / Xét nghiệm, the
     OD 18/11 ~21:15Z receiver choice) — before, a work skipped it, so an NPC could never send a work back. A work sent back goes home to the
     giver's chest (rcvGiftIn copies the original piece back, law 6c) and buys no liking (law 3). */

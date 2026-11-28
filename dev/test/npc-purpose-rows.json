@@ -2994,7 +2994,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "allergy accuse; friend sends pattern; TH sutra",
-"done": "const g=npwPick(L,x=>x.s);pushDil(mkP(\"giftin\",{f:key(v),e:{k:g.k,from:key(v)}})"
+"done": "const g=npwPick(L,x=>x.s);{const e={k:g.k,from:key(v)};"
 },
 {
 "f": "jrcp.js",
