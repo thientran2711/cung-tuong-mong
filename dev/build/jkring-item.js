@@ -42,6 +42,8 @@ function kriIp(){return document.documentElement.classList.contains("kv2")}
 .kri-gr{display:inline-block;padding:0 6px;border-radius:6px;background:#fffaf0;color:var(--gc);font-weight:700;text-shadow:none;margin-right:4px}
 .kri-name small{font-size:.78rem;color:#fff3dc;text-shadow:0 1px 2px #000a}
 .kri-hint{position:absolute;z-index:46;left:50%;transform:translateX(-50%);font-size:.8rem;color:#fff3dc;text-shadow:0 1px 2px #000a;pointer-events:none;white-space:nowrap}
+/* K-RING-SUBLINE (KK62): the hint is the LAST child of the name block — it follows the real text height by layout, never by a measured top (a JS top missed late height changes: Fold cover Dâng quà front 11, 11 px over). min-height = the old +58 px floor + the hint line */
+.kri-name{min-height:76px}.kri-name>.kri-hint{position:static;transform:none;margin-top:auto;padding-top:4px}
 .kri-big{position:absolute;z-index:50;left:0;top:0;transform-origin:50% 50%;will-change:transform,opacity;pointer-events:none}
 .kri-glow{position:absolute;z-index:49;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(255,226,150,.9),rgba(255,226,150,.35) 45%,rgba(255,226,150,0) 70%);will-change:opacity,transform;opacity:0}
 .kri-pane{position:absolute;z-index:55;display:flex;flex-direction:column;gap:8px;min-height:0;will-change:transform,opacity}
@@ -91,7 +93,7 @@ function kriBuild(R,bloom){const g=R.geo();R.items=kriItems(R);if(R.ring)R.ring.
  const ab=R.ip?46:42,ay=g.cy-ab/2;R.arL=mk("‹",`left:${Math.max(6,g.cx-g.Rx-g.tw*.55-ab)}px;top:${ay}px;width:${ab}px;height:${ab}px;min-height:${ab}px`,()=>kriTurnBy(R,-1),"Quay trái");
  R.arR=mk("›",`left:${Math.min(R.w-ab-6,g.cx+g.Rx+g.tw*.55)}px;top:${ay}px;width:${ab}px;height:${ab}px;min-height:${ab}px`,()=>kriTurnBy(R,1),"Quay phải");
  const nm=document.createElement("div");nm.className="kri-name";nm.style.top=(g.cy+g.tw*.95)+"px";R.L.appendChild(nm);R.nameEl=nm;
- const hi=document.createElement("div");hi.className="kri-hint";hi.style.top=(g.cy+g.tw*.95+58)+"px";hi.textContent="Vuốt để xoay · chạm món sáng để xem";R.L.appendChild(hi);R.hint=hi;
+ const hi=document.createElement("div");hi.className="kri-hint";hi.textContent="Vuốt để xoay · chạm món sáng để xem";nm.appendChild(hi);R.hint=hi;
  kriPlace(R);
  if(bloom&&!kriCalm()){const N=R.tiles.length;R.tiles.forEach((t,i)=>{const fin=t.style.transform,op=t.style.opacity;t.animate([{transform:`translate(${-g.tw/2}px,${-g.tw*.6}px) scale(.1)`,opacity:0},{transform:fin,opacity:op}],{duration:KIT_RINGI.openMs,delay:i*KIT_RINGI.stagger,easing:"cubic-bezier(.2,1.25,.4,1)"})});
   [R.arL,R.arR,nm,hi].forEach(b=>b.animate([{opacity:0},{opacity:1}],{duration:260,delay:280,fill:"backwards"}))}}
@@ -102,7 +104,9 @@ function kriPlace(R){const N=R.tiles.length;if(!N)return;const g=R.geo();let fi=
  if(R.nameEl&&R.__nf!==fi){R.__nf=fi;const it=R.items[fi];const G=typeof KIT_GRADE!=="undefined"?KIT_GRADE[Math.max(0,Math.min(4,it.grade|0))]:null;
   R.nameEl.innerHTML=`<b>${kriE(it.name)}</b><small>${G&&G.n?`<span class="kri-gr" style="--gc:${G.c||"#888"}">${kriE(G.n)}</span> `:""}${kriE(it.sub||"")}</small>`;
   /* K-RING-SUBLINE (KK61): the hint goes under the name block's REAL height (a sub line that wraps to 2–3 lines on Fold overlapped the fixed +58 px hint) */
-  if(R.hint){const t0=parseFloat(R.nameEl.style.top)||0;R.hint.style.top=Math.max(t0+58,t0+R.nameEl.offsetHeight+6)+"px"}}}
+  kriHintAt(R)}}
+/* K-RING-SUBLINE (KK61 → KK62): the name block is refilled on every front change; the hint goes back in as its last child (layout keeps it under the text) */
+function kriHintAt(R){try{if(R.hint&&R.nameEl&&R.hint.parentNode!==R.nameEl||R.hint&&R.nameEl&&R.nameEl.lastChild!==R.hint)R.nameEl.appendChild(R.hint)}catch(e){}}
 /* ---------- spin: swipe with inertia, ‹ ›, tap a side item, tap the bright item ---------- */
 function kriBand(R){const L=R.L;let x0=0,y0=0,last=0,lt=0,drag=0,moved=0;
  const step=()=>{const g=R.geo(),N=Math.max(3,Math.min(KRING_MATH.seats,R.tiles.length));return g.Rx*2*Math.PI/N*.75};
@@ -205,12 +209,16 @@ function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kip
  const ops=M.querySelector(".opts");const L=m.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]&&ops&&ops.querySelector(`.opt[data-m="${i}"]`));
  L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));M.classList.add("kri-hide");
  const verb=(typeof KIP_VERB!=="undefined"&&KIP_VERB[m.pid])||"Chọn";let V=m.pp&&m.pp.v;try{if(V!=null&&typeof V!=="object")V=(typeof byKey==="function"&&byKey(V))||liveRivals(true).find(x=>x.id===V)||null}catch(e){V=null}
- const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?V.name:""):m.pid==="giftto"?((M.querySelector(".kptitle")||{}).textContent||""):"";
+ const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?V.name:""):m.pid==="giftto"?(m.pp&&m.pp.t==="emp"?"Hoàng thượng":m.pp&&m.pp.t==="th"?"Thái hậu":""):"";/* KK62 (RV-176 §7 c): Dâng quà names the receiver from its own pp.t (jgift «Dâng quà lên Hoàng thượng / Thái hậu»), never the dialog title («Dâng cho Dâng quà») */
  /* KIT-KRI-XL (E-S5 kipgo-ui3 «re-opened, no gift»): the dialog's option buttons are looked up LIVE — an opener (jts tsOpener) or any re-render shows the SAME dialog again with NEW .opts nodes, and the ring's «Chọn» clicked the stale detached button: no chooseM, the picker stayed queued and re-opened forever */
  const optB=i=>{const M2=$("modal"),o2=M2&&M2.querySelector(".opts");return(o2&&o2.querySelector(`.opt[data-m="${i}"]`))||null};
  const why=(c,i)=>{const b=optB(i);return c.kgwhy||(b&&b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):kipLocked(c)?"Thiếu bạc":"")};
- kitRingItem.open({key:"gift:"+m.pid,title:(M.querySelector(".kptitle")||{}).textContent||verb,sub:who?`${verb} cho ${kriE(who)}`:"",bg:kriBg(),
-  items:()=>L.filter(([c])=>S.inv[c.ik]).map(([c,i])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);return{id:i,src:I.src,name:I.name,grade:I.grade,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}}),
+ kitRingItem.open({key:"gift:"+m.pid,title:(M.querySelector(".kptitle")||{}).textContent||verb,sub:who?`${verb} ${m.pid==="plantpick"?"của":"cho"} ${kriE(who)}`:""/* KK62: «Cài vào rương của <người>» (planting goes INTO her chest), every other verb «… cho <người>»; no name known = no line (never the dialog title) */,bg:kriBg(),
+  items:()=>{/* K-RING-QTY (KK61, RV-176 nit, law 6c): the grid folds same-kind same-offer twins into ONE tile ×N (jgpick inv-stack) and removes their cards —
+    the ring shows the same count on that tile (kit stack badge), so no piece of her chest is out of sight */
+   const sg=c=>{const e=S.inv[c.ik];return typeof invCan==="function"&&invCan(e)?[invSig(e),kipLocked(c),c.n||"",c.x||""].join("#"):null};const QN=new Map(),SEEN=new Set();
+   m.opts.forEach(c=>{if(!c||c.ik==null||!S.inv[c.ik])return;const s=sg(c);if(!s)return;QN.set(s,QN.has(s)?QN.get(s)+1:1+(typeof invMoreOnce==="function"?invMoreOnce(S,S.inv[c.ik],SEEN):0))});
+   return L.filter(([c])=>S.inv[c.ik]).map(([c,i])=>{const I=kipItem(S.inv[c.ik]);const w=why(c,i);const s=sg(c);return{id:i,src:I.src,name:I.name,grade:I.grade,qty:s?QN.get(s)||1:1,sub:[I.kind,I.use].filter(Boolean).join(" · "),lock:w||false,ref:{e:S.inv[c.ik]},c,i}})},
   /* info = the item's kit detail + the option's own kit card (odds · Tốn · Được · Mất · Kèm) — the same display copy as the old grid detail (kipDetail) */
   info:it=>{try{kipSelect(M,m,it.i);const d=M.querySelector(".kipd");if(d){const c=d.cloneNode(true);c.querySelectorAll(".kipgo").forEach(x=>x.remove());c.classList.remove("kipd");return c.innerHTML}}catch(e){}return""},
   acts:it=>[{n:verb,main:1,off:it.lock||"",fn:()=>{if(!Q[0]||Q[0].pid!==m.pid)return"close";/* the picker is no longer the open dialog */const b=optB(it.i);if(!b||b.disabled)return null;const a=kriSnap(V),l0=kriLogMark();window.__kriAct=1;try{b.click()}finally{window.__kriAct=0}
