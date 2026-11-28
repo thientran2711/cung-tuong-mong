@@ -378,7 +378,7 @@ if(typeof BAND4N!=="undefined"){BAND4N.length=0;for(let i=0;i<=BAL.ageBand.lengt
             (j68g), card = Hoàng thượng row of the people strip (jk2b), kc = consort lists (jkc). */
 Object.assign(BAL,{quyLv:[-30,-10,10,30,60],
  loy:{trust:70,close:60,firm:55,mid:50,warn:45,low:40,bad:35,out:30,deep:75,top:80},
- wit:{lo:30,mid:35,hi:60,top:70},
+ tcw:{lo:30,mid:35,hi:60,top:70},/* split-merge P7: Tâm cơ cleverness marks (was BAL.wit — «wit» now only means witness: BAL.ag.wit, BAL.charge.wit) */
  ducLv:{up:60,down:20,staffUp:70,staffDown:25,word:[20,40,60,80]},
  sungLv:{emp:[25,45,70],th:[30,55],kinh:[15,35,60],card:[10,30,60],kc:[30,60]}});
 function quyIx(v){const q=BAL.quyLv;return v<=q[0]?0:v<q[1]?1:v<=q[2]?2:v<q[3]?3:v<q[4]?4:5}

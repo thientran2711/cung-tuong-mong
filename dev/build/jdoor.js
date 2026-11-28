@@ -203,24 +203,30 @@ DOOR.road=function(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeo
   tiers:{"t:Khoe quà ngự ban":"nhẹ","t:Khiêu khích":"vừa","t:Trút giận":"vừa","t:Hạ nhục":"nặng"}},
  {k:"P7",n:"Hãm hại",cat:"hai-nguoi",kinds:["rival","hh","card"],rep:"Hạ độc",h:"Chọn mức và cách hãm hại nàng.",re:/^(Hạ độc|Ngáng chân|Đẩy xuống hồ sen)$/,
   acts:{a:["tea","nuoc","ink","trip","huydung","rash","thathu","poison","slowpoison","pgift","pushp"]},
-  tiers:{"a:tea":"nhẹ","a:nuoc":"nhẹ","a:ink":"nhẹ","a:trip":"nhẹ","t:Ngáng chân":"nhẹ","a:huydung":"vừa","a:rash":"vừa","a:thathu":"vừa","a:poison":"nặng","t:Hạ độc":"nặng","a:slowpoison":"nặng","a:pgift":"nặng","a:pushp":"nặng","t:Đẩy xuống hồ sen":"nặng"},
+  chT:["t:Ngáng chân","t:Hạ độc","t:Đẩy xuống hồ sen"],
   roll:[["a:tea","a:nuoc","a:ink","a:trip","t:Ngáng chân"],["a:huydung","a:rash"]]},
  {k:"P8",n:"Hạ uy thế",cat:"muu-ke",kinds:["rival","hh","card"],rep:"Tung tin đồn",h:"Chọn mức và cách hạ uy thế nàng.",re:/^(Tung tin đồn|Vu oan)$/,
   acts:{a:["rumor","block","blockf","lygian","frame","plant","giahoa","xinhh"]},
-  tiers:{"a:rumor":"nhẹ","t:Tung tin đồn":"nhẹ","a:block":"vừa","a:blockf":"vừa","a:lygian":"vừa","a:frame":"nặng","t:Vu oan":"nặng","a:plant":"nặng","a:giahoa":"nặng","a:xinhh":"nặng"}},
+  chT:["t:Tung tin đồn","t:Vu oan"],tiers0:{"a:xinhh":"nặng"}},
  {k:"P9",n:"Hại hoàng tự",cat:"hai-nguoi",kinds:["rival","hh","card"],rep:"Hạ độc con nàng",h:"Chọn mức và cách hại con nàng.",re:/^Đẩy con nàng xuống hồ$/,
   acts:{a:["ksab","musk","kframe","kpoison","catswap","pond"]},
-  tiers:{"a:ksab":"nhẹ","a:musk":"vừa","a:kframe":"vừa","a:kpoison":"nặng","a:catswap":"nặng","a:pond":"nặng","t:Đẩy con nàng xuống hồ":"nặng"}},
+  chT:["t:Đẩy con nàng xuống hồ"]},
  {k:"P10",n:"Lấy của",cat:"hai-nguoi",kinds:["card"],rep:"Sai người lấy trộm đồ",h:"Chọn mức và cách lấy của nàng.",re:/^$/,
-  acts:{a:["batnat","laydo","laydol","petsteal","thaopet","phonghoa"]},tiers:{"a:batnat":"nhẹ","a:laydo":"vừa","a:laydol":"vừa","a:petsteal":"vừa","a:thaopet":"vừa","a:phonghoa":"nặng"}},
- {k:"P11",n:"Tố cáo",cat:"muu-ke",kinds:["rival","hh","card"],rep:"Tố giác",h:"Chọn tội để tố, và tâu với ai.",re:/^(Tố xa xỉ|Hặc ăn mặc sai phẩm)$/,
-  acts:{a:["accuse","tocao","expose","xx","vp","trinhhh","trinhth"]}},
- {k:"P12",n:"Mặc cả chứng cứ",cat:"muu-ke",kinds:["card"],rep:"Uy hiếp đòi bạc",h:"Chọn cách dùng chứng cứ đang nắm.",re:/^$/,acts:{a:["uyhiep","banphe","tieuhuy"]}},
+  acts:{a:["batnat","laydo","laydol","petsteal","thaopet","phonghoa"]},chT:[]},
+ {k:"P11",n:"Tố cáo",cat:"muu-ke",kinds:["rival","hh","card"],rep:"Tố giác",h:"Chọn tội để tố.",re:/^(Tố xa xỉ|Hặc ăn mặc sai phẩm)$/,
+  acts:{a:["accuse","xx","vp"]}},/* split-merge B1: ONE «Tố giác» (accuse; listener by chTo) + the two visible-fault reports */
+ {k:"P12",n:"Mặc cả chứng cứ",cat:"muu-ke",kinds:["card"],rep:"Uy hiếp đòi bạc",h:"Chọn cách dùng chứng cứ đang nắm.",re:/^$/,acts:{a:["uyhiep","banphe"]}},/* split-merge B2: «Trả chứng cứ lấy lòng» folded away */
  {k:"P13",n:"Quyền Hoàng hậu",cat:"trung-phat",kinds:["card"],rep:"Xử tội",h:"Chọn việc xử phân với nàng.",re:/^$/,acts:{e:["judge","conf","reward","pardon","cutpay"],a:["takeaway"]}},
  {k:"P14",n:"Ra uy",cat:"trung-phat",kinds:["rival","hh","card"],rep:"Phạt quỳ",h:"Chọn cách ra uy với nàng.",re:/^$/,acts:{a:["tat","phatquy"]},tiers:{"a:tat":"nhẹ","a:phatquy":"vừa"}}
 ].forEach(DOOR.add);
 DOOR.names=new Set();DOOR.T.forEach(r=>DOOR.names.add(r.n));
 DOOR.TIER=["nhẹ","vừa","nặng"];
+/* split-merge P3 (law 4 one core): the weight of a harm / scheme door member (P7–P10, rows with chT) is READ from BAL.charge (deed → charge → C[c].tier), the same
+   weight the charge, the punishment and the cover trace use — never a second typed table. chT = the talk members (t:<name>) with the deed they are; tiers0 = a
+   member that is no crime (no BAL.charge.deed key) keeps its own tier. */
+DOOR.CHT={"t:Ngáng chân":"trip","t:Hạ độc":"poison","t:Đẩy xuống hồ sen":"pushp","t:Tung tin đồn":"rumor","t:Vu oan":"frame","t:Đẩy con nàng xuống hồ":"pond"};
+DOOR.chTier=function(id){const k=DOOR.CHT[id]||(id.slice(0,2)==="a:"?id.slice(2):null);const B=typeof BAL==="object"&&BAL.charge;const c=k&&B&&B.deed[k];const C=c&&B.C[c];return C?{nhe:"nhẹ",vua:"vừa",nang:"nặng",tu:"nặng"}[C.tier]||null:null};
+for(const r of DOOR.T)if(r.chT){const L=(r.acts.a||[]).map(k=>"a:"+k).concat(r.chT);Object.defineProperty(r,"tiers",{configurable:true,enumerable:true,get(){const o={};for(const id of L){const t=DOOR.chTier(id)||(r.tiers0||{})[id];if(t)o[id]=t}return o}})}
 /* the row + tier + role of a member id */
 DOOR.ofId=function(id){for(const r of DOOR.T){if(!r.acts)continue;const [t,x]=[id.slice(0,1),id.slice(2)];
  const inR=t==="t"?r.re.test(x):((r.acts[t]||[]).includes(x));if(!inR)continue;const roll=(r.roll||[]).find(g=>g.includes(id));

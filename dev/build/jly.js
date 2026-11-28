@@ -13,7 +13,7 @@ function lyFallen(){if(!S.lyF)S.lyF={name:"Phế phi họ Tần",age:(BAL.mort&&
 /* npc-death-wire: ONE Lý (alive or null) and ONE stage entry for her (record id c:ly, read by j95ppl / j95stage / j95ledObj / lcPeople) */
 function lyAlive(){const y=S&&lyFallen();return y&&!y.dead&&!y.freed?y:null}
 function lyEntry(info){const y=lyAlive();return y?{kind:"fallen",lid:"c:ly",name:y.name,ini:"Tần",col:"#6a7a8a",info:info||"Phế phi"}:null}
-function lcPeople(info){const n=(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.lcShow)||3;const L=rivals.filter(v=>v.alive&&v.out).slice(0,n).map(v=>({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info}));
+function lcPeople(info){const n=(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.lcShow)||3;const L=rivals.filter(v=>v.alive&&v.out).slice(0,n).map(v=>({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info:info==="Phế phi"?outTitleN(v)||info:info}));
  const q=lyEntry("Phế phi");if(q)L.push(q);return L}
 (function(){const w0=figWho;figWho=function(p){try{if(p&&p.kind==="fallen"&&!p.ref){const o=lyFallen();if(lyArt()&&o.fid&&!/^fallen:/.test(o.fid)){delete o.fid}return o}const n=npcFixOf(p);if(n)return n}catch(e){}return w0.apply(this,arguments)};
  const r0=figRoles;figRoles=function(who){if(who&&who.lyF===1)return lyArt()?["fallen"]:["consort"];if(who&&who.npcFix)return[NPCFIX[who.npcFix].role];return r0.apply(this,arguments)};
