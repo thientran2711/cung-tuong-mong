@@ -845,3 +845,36 @@ Gain vs loss of FAIL now: F5 — likelihood: certain (every --fast since bd47c75
 ## HANDOVER — BIG REVIEWER #22, 27/11 ~22:50Z, START_CTX ~4 %, now ~20 %
 - Verdict: FAIL robot-realtap-live 01b30018 — F5 only (crawler START selx vacuous since the LIVE bd47c753 merge; one-line `window.__bcNoSelx` guard + a selx floor row). FIXER #24 claims all reproduced: F4 noLift 0 in plain E-S1 ×2 (30 buổi), M13 noLift 12/12, M16 caught; vii fresh wipe + resume keep; viii CTMZ via the game's own slotDec (law 4 OK), M15 SAVE STALE caught. Merge with LIVE 8330e8b8 clean (local review/robot-realtap-live-r22 8e11fd01, not pushed). Notes N8, N9; game G3 (kriFocus 'tile').
 - Recipe: /home/user/wt/r22-out/crawl.sh <name> <html> <start> (branch crawler) · crawlp.sh (F5-patched scratch copy dev/test/button-crawl-r22p.js, untracked) · rt.sh <name> <html> [k=v] (robot-rt, pin=0, :8930); mutants in /home/user/wt/build-8330e8b82cf06101ce7f02d41f9159e51bae5e77/index-m*.html (m16 = kitHandLift adds «kdim» + return; m15 = slotPut writes only when the key is empty).
+
+## HARNESS FIXER #25 — F5 selx skip (+N8; N9 tried, withdrawn) — session_01UV1SziwPA21EcQTJXp3f1J (depth 2, child of F ROOT 7 child 1 session_01UV1Szk61M2hTnNkbv9xqAz), 28/11 ~00:30Z
+PRIORITY #1 CHECK: BIG #22 FAIL 01b30018 (F5 BLOCKING, N8, N9) | main 5fb13d60 (contains LIVE 8330e8b8; harness only on review/*) | review/robot-realtap-live 01b30018 → now e15c9faf | claims CLAIMS «HARNESS FIXER #25 F5 selx skip (+N8)» = me. START_CTX ~5 %.
+KIT CHECK: n/a (harness only, dev/test; 0 game files).
+Branch review/robot-realtap-live: 357b5d09 (merge LIVE 8330e8b8, clean) · a9c9b106 (F5 + N8 + N9) · **e15c9faf (N9 withdrawn) = READY head**. Files: dev/test/button-crawl.js, dev/test/lib/rt-save.js, dev/test/robot-rt.js (+1 line). node --check OK · robot-lint «LINT OK 0» (default set + button-crawl.js) · rt-bare-unit 20/20 · no `.click(` / dispatchEvent added.
+### FIXES
+- **F5 (a)** button-crawl.js startState.home: `if(window.__bcNoSelx&&S.selx2&&S.selx2.days){S.selx2.days=0;S.selx2.done=1}` — only START home (which sets __bcNoSelx=1 around h0) ends the selection days; START selx (h0 with __bcNoSelx=0) sees them again.
+- **F5 (b) law 11** walkSelx: a selx start whose 12 draws never brought a selection day, on a build where `selxDaysOn` exists, pushes sure FAIL «(selx floor) selx start drew no selection day in 12 lives …» (added to the gate's sure list) instead of a silent SKIP. A build without selxDaysOn keeps the old SKIP.
+- **N8** lib/rt-save.js: a slotDec / SLOTZ load error prints once «rt-save: slotDec not loaded (<msg>) — CTMZ saves unreadable»; new export `err()`; robot-rt writes it to R.harness.saveDecErr. Proof (scratch j6 with slotDec renamed): line printed, state → null, err() = «slotDec / SLOTZ not found in dev/build/j6.js»; real j6: err() null, no line.
+- **N9 withdrawn**: keying FP on data-* / aria-pressed / disabled / text (not className) made M16 read noLift on its FIRST tap (5 noLift, 0 oneTap, NO-EXIT on «Tiền sảnh» as before), but a plain LIVE life (v1, seed 7, slice 8) then logged 3 «nothing lifted» rows on Đông sở «Ngày thứ ba» talk hands that two more lives (seeds 7, 8) did not reproduce; with className keying those taps may have been a real class-only reaction (e.g. a press class). Unproven → reverted to the BIG #22-proven FP (M16 stays caught via re-taps / NO-EXIT). Stays a note for a later round.
+### BEFORE / AFTER (LIVE 8330e8b8 served by rt-serve-build.sh :8930, 137 paths 200; crawler --fast; mutants = index-m*.html with one override script, scratch in /home/user/wt/build-8330e8b8/)
+| run | start / dev | BEFORE (01b30018 crawler) | AFTER (e15c9faf) |
+|---|---|---|---|
+| plain LIVE | selx · Fold 755x1000 | GATE FAIL 1 «(ring floor)» only — selx SKIP (reproduced here) | **GATE PASS, 27 taps, 3 two-tap rows** |
+| plain LIVE | selx · iPad 1180x820 | same (BIG #22) | **GATE PASS, 26 taps, 3 two-tap rows** |
+| AFTER crawler with the F5 guard removed (scratch copy = the old setup) | selx · Fold | — | GATE FAIL 2: **«(selx floor)»** + «(ring floor)» → a vacuous selx start can no longer be silent |
+| M1 kitHandChoose = return | selx · Fold | GATE FAIL 1 (floor only, vacuous) | **GATE FAIL 7** (6× «✓ does nothing» + «(loop)») |
+| M7 ✓ hides #modal | selx · Fold | GATE FAIL 1 (vacuous) | **GATE FAIL 1 «(loop) the same screen after 6 taps»** |
+| M8 ✓ sets busy, go() never runs | selx · Fold | not walked | **GATE FAIL 17** («✓ does nothing» + «did not take the lift (another one is lifted)») |
+| M13 kitHandLift = return | selx · Fold | not walked | **GATE FAIL 13** («1st tap: the tapped card did not lift») |
+| M16 kitHandLift adds «kdim» only | selx · Fold | not walked | **GATE FAIL 13** |
+| default --fast home,selx,talk · Fold + iPad | — | GATE PASS with selx SKIP on both (fold/selx 1 row, ipad/selx 1 row; BIG #22) | **GATE PASS: selx Fold 25 rows / 3 two-tap, iPad 28 / 3; talk 10 / 3 and 11 / 3; home 80 tapped each; 0 FAIL** |
+| save-fix-stack G4 «Ô lưu · Lui» (same --fast run, START home) | Fold + iPad | PASS | **PASS both («closed its layer»)**; «Ô lưu» rows 16, «Chơi một mình · Tiếp tục» resumes the saved life |
+### F4 / vii / viii STILL HOLD (robot-rt on plain LIVE 8330e8b8, pin=0, real taps, jsClicks 0)
+| check | run | result |
+|---|---|---|
+| F4 E-S1 (thd / thd_tho rand 3683447523 slice 30) | es1f25 (N9 variant FP; final FP = BIG #22's) | 30 buổi, 467 taps, hand 47 / chosen 44, **noLift 0**, oneTap 3, bugs 0, dead 0, stuck 0 |
+| same recipe, final e15c9faf | es1fin | «Ban hoa» age 20 at buổi 1 (game-imposed), hand 18 / chosen 15, reLaid 1, oneTap 3, bugs 0, saveDecErr none |
+| vii fresh start, same life name over a live (not ended) profile | v1f25 → seed 9 | «FRESH START: profile-v1f25 storage wiped (storage, 16 removed, 2 cache kept)», new life 0 bugs; a name whose ckpt is ENDED stops «LIFE ALREADY ENDED» (FIXER #14, not a fault) |
+| viii CTMZ read | v1f25 cp=2 slice 8 | stored clocks 1.1.0.0 / 1.1.0.2 / 1.1.1.0 / 1.1.1.2 at all 4 CPs, err 0; CLI «hclh-save-v2-1 CTMZ 31278 chars → clock 1.1.1.0 · name "Đoan Mộc Ngân Chúc" · rank 2 · age 20 · dead false» (game's own slotDec, law 4) |
+- Open for MAIN via foreman (not touched): G3 kriFocus 'tile' TypeError / 404 mg-undefined-bg.webp (BIG #22). Seen here too, harness-side only: 404 /img/kit/emo-anim/binh.webp and /img/kit/ico-download.webp in the M13 run (local server; check on github.io before filing).
+- Gain vs loss of READY: F5 fixed and proven on both devices + every mutant shape caught (likelihood of a silent vacuous selx again: rare, the floor row now FAILs it; weight big if it happened; detect = «(selx floor)» row). N9 withdrawn (loss: M16's first tap still reads oneTap — rare, small, caught on re-tap). → Được lớn hơn.
+## HANDOVER — HARNESS FIXER #25, 28/11 ~00:30Z, START_CTX ~5 %, now ~15 %: done; READY e15c9faf. Recipe: /home/user/wt/f25-out/run.sh <name> <script> <html> <start> <dev> (crawler) · robot runs in /home/user/wt/f25-out/rt{,2}/ · mutants /home/user/wt/build-8330e8b8/index-m{1,7,8,13,16}.html.
