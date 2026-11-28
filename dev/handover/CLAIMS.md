@@ -776,3 +776,4 @@ B-ROW26-TALK BIG RV | review/row26-talk e70e9e38 | FOREMAN B ROOT3 child2 / rv s
 ILLNESS-CURE-4 (r5: staff cure road law 1 + kidIll + re-merge a96564ad) | review/illness-cure | session_01PEhRbwXRToECD9cRMDDoUq | RUNNING | 28/11 08:33Z Foreman C
 B-RDW-E R10 bd (row 4 road-dialogue writer; lead 6X94bVbz; moved from RDW-D) | content on handover branch → review/road-dialogue | FOREMAN B ROOT3 child2 / worker session_01N1tNP4A1XWXb4BgegX4WBF | CANCELLED (bd already done by RDW-D; ARCHIVED unused) | 28/11 08:40Z
 B-ROW11-LAW1 r2 (successor of 2pyGSYRn: role-parity-scan door era + open.json re-baseline + family fixes) | review/row11-law1 3b667243 | FOREMAN B ROOT3 child2 / worker session_01N1tNP445am54Wo5eKGK7pA | RUNNING | 28/11 08:48Z
+CO-OP room f (A-COOP #4, iPad host + Fold guest, LIVE 22afefb4 + co-op harness 5aff9dbb+5b385f43) | review/flight2-coop | session_01UV1Sziit4irm1zCPZsUCNr (Foreman F ROOT 8) | RUNNING | 28/11 09:12Z
