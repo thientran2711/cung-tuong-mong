@@ -878,3 +878,36 @@ Branch review/robot-realtap-live: 357b5d09 (merge LIVE 8330e8b8, clean) · a9c9b
 - Open for MAIN via foreman (not touched): G3 kriFocus 'tile' TypeError / 404 mg-undefined-bg.webp (BIG #22). Seen here too, harness-side only: 404 /img/kit/emo-anim/binh.webp and /img/kit/ico-download.webp in the M13 run (local server; check on github.io before filing).
 - Gain vs loss of READY: F5 fixed and proven on both devices + every mutant shape caught (likelihood of a silent vacuous selx again: rare, the floor row now FAILs it; weight big if it happened; detect = «(selx floor)» row). N9 withdrawn (loss: M16's first tap still reads oneTap — rare, small, caught on re-tap). → Được lớn hơn.
 ## HANDOVER — HARNESS FIXER #25, 28/11 ~00:30Z, START_CTX ~5 %, now ~15 %: done; READY e15c9faf. Recipe: /home/user/wt/f25-out/run.sh <name> <script> <html> <start> <dev> (crawler) · robot runs in /home/user/wt/f25-out/rt{,2}/ · mutants /home/user/wt/build-8330e8b8/index-m{1,7,8,13,16}.html.
+
+## REVIEW robot-realtap-live 01b30018..e15c9faf — BIG #22 RE-CHECK 3 (for F ROOT 7 child 1 session_01UV1Szk61M2hTnNkbv9xqAz), 28/11 ~01:30Z
+PRIORITY #1 CHECK: «— BIG #22» FAIL 01b30018 (F5, N8, N9) | FIXER #25 READY F5 e15c9faf (report 1c5b9e55) | LIVE origin/main 5fb13d60 at the order → 18003079 (lc33-eg3) during the check | claims BIG #22.
+KIT CHECK: n/a (harness only).
+### VERDICT: PASS review/robot-realtap-live-r22c 795f87ec = e15c9faf + merge of LIVE 5fb13d60 (a61dae41) + merge of LIVE 18003079 (795f87ec); origin/main 18003079 is its ancestor → fast-forward. Test / harness files only (no game file differs from main).
+Tree /home/user/wt/r22 (branch review/robot-realtap-live-r22c, pushed). LIVE 5fb13d60 served by rt-serve-build.sh :8940, 18003079 :8941 (137 paths 200 each). Mutants rebuilt on 5fb13d60 (index-m1/4/7/8/12/13/16.html). Logs /home/user/wt/r22-out/{c3,r3,c4,r4}/.
+### MERGE + STATIC — OK
+- 357b5d09..e15c9faf (fixer) = button-crawl.js, lib/rt-save.js, robot-rt.js (+ PROGRESS / report). Merge with 5fb13d60: clean, 0 conflicts. button-crawl.js auto-merged with LIVE 251b1ad7 (rv27 CTM_NOTES_UI line next to the F5 guard, both kept). Merge with 18003079: clean; harness files and dev/build/j6.js unchanged by it. Outside dev/test + PROGRESS + quickcheck.d notes, the merge = main.
+- node --check OK · robot-lint LINT OK 0 (default set + button-crawl.js) · rt-bare-unit 20/20 · added `.click(` / dispatchEvent / `.focus(` / keyboard.: 0.
+### F5 — FIXED (crawler --fast, LIVE 5fb13d60 unless marked)
+| build | start | result |
+|---|---|---|
+| plain LIVE | selx | GATE PASS, 26 taps, 5 two-tap rows (1 known «Ra Dư đồ» row, button-crawl-known.txt) |
+| plain LIVE 18003079 | selx / talk | GATE PASS (25 rows, 3 two-tap) / GATE PASS |
+| **floor proof: scratch copy with the guard removed (the 01b30018 behaviour)** | selx | GATE FAIL 2: «(selx floor) selx start drew no selection day in 12 lives — this build has selxDaysOn …» + ring floor — a vacuous start can no longer be silent |
+| M1 ✓ = return · M7 ✓ hides #modal · M8 go() never runs · M13 kitHandLift = return · M16 lift adds a class only | selx | GATE FAIL 7 · 2 · 2 · 13 · 13 |
+| plain LIVE · M4 «Chọn» no-op · M12 every «Chọn» hidden | talk | GATE PASS · GATE FAIL 6 · GATE FAIL 19 |
+| two-device --fast (home,selx,talk) Fold 755x1000 + iPad 1180x820 | — | GATE PASS; selx walked on both (fold 25 rows / 3 two-tap, ipad 26 / 3), talk 11 / 10, home 82 / 84; «Ô lưu» (the G4 row 15bd0e29 was added for) PASS on both devices |
+### ROBOT + EARLIER CLAIMS ON THE NEW LIVE
+| run | result |
+|---|---|
+| f1 / f2 E-S1 (thd / thd_tho rand 3683447523 slice 30), 5fb13d60 | 30 buổi each, 0 bugs, noLift 0, liftOnly 0, jsClicks 0; f1 cp=5: stored clocks 1.0.1.0 … 1.2.1.1 at 6 CPs (CTMZ via slotDec), no saveDecErr |
+| g1 E-S1 slice 12 cp=4, 18003079 | 12 buổi, hand 33 / chosen 30 / oneTap 3 («Ra Dư đồ … frame changed»), 0 bugs; stored clocks 1.1.0.2 / 1.1.1.2 / 1.1.2.2 |
+| M13 robot (m13r), 5fb13d60 | noLift 12 / 12 + NO-EXIT «Tiền sảnh» — still caught |
+| CLI on f1 ckpt | «hclh-save-v2-1 CTMZ 39309 chars → clock 1.2.0.1 · name "Trình Tịch Nhan" …» |
+| N8: rt-save copy pointed at a missing j6 | prints «rt-save: slotDec not loaded (ENOENT …) — CTMZ saves unreadable»; err() returns the reason (robot-rt writes it to R.harness.saveDecErr) — FIXED |
+- N9 withdrawn by the fixer (FP keeps className): accepted — it is my note, not blocking, and M16 stays caught (crawler 13, robot noLift on re-taps per round 1). vii (fresh wipe / resume keep) is untouched by e15c9faf (rt-profile.js and the robot-rt start line unchanged) — round-1 proof stands.
+- Open (unchanged): natural «Chọn người theo hầu» not met; G3 kriFocus «tile» TypeError is with MAIN (FOR MAIN 181).
+Gain vs loss of PASS: the gate walks the selection days again on both devices and a vacuous start now FAILs loud (law 11); every earlier mutant still FAILs; no game file. Remaining risk: N9 (class-only dead card read as oneTap on its first tap) — rare, small, still caught by re-taps / NO-EXIT. → Được lớn hơn: PASS.
+
+## HANDOVER — BIG REVIEWER #22 (re-check 3), 28/11 ~01:30Z, START_CTX ~4 %, now ~27 %
+- Verdict: PASS review/robot-realtap-live-r22c 795f87ec (fast-forwards LIVE 18003079). F5 fixed + selx floor proven by a guard-removed copy; N8 fixed; N9 withdrawn (accepted).
+- Recipe: /home/user/wt/r22-out/cr3.sh|cr4.sh <name> <html> <start> [crawler] (ports 8940 / 8941), rt3.sh|rt4.sh <name> <html> [k=v] (robot-rt pin=0); mutants /home/user/wt/build-5fb13d60…/index-m*.html.
