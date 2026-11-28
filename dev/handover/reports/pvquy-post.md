@@ -57,5 +57,34 @@ Sorter (scan): innermost function of the site; POST if it is a `run/go/ok/fn/fai
 3. LIVE PRE sites that assume the partner is the player: jpma.js:139 `pvQuy(p,…,"quý "+t.name)` (p→t), j42.js:384 `pvQuy(v,BAL.coopBribe.grudge)` (comment says the briber's liking for the servant). Cards only; not changed.
 4. Not reached by the runtime test (static scan covers them): j83 wkGive (needs a hand-made work), j55 tdLeak result (a trace roll), jky runOpt (the kỳ board), j9 «Giúp đỡ nàng» run (LIVE's jtwoway twDo answers that card with its own line, no number).
 
+## ROUND 2 — PVQUY-POST-2 (RV-186 FAIL list, MAIN 189) · branch review/pvquy-post-r2
+session_01Rc5AsKMg38TfbMyywiukfd · depth 3 · START_CTX ≈ 3 % of 1M → roll ≤ 28 %
+PRIORITY #1 CHECK: OD MAIN 189 ruling «a display job must not change results» + RV-186 FAIL list (docs 46bb89cf) | main a96564ad j1.js:173, j8.js:24, jstatpace.js:22-29, j24.js:102-103 | review/* review/pvquy-post 4256fe5f (base), review/aff-preview 27a36750 | claims PVQUY-POST.
+KIT CHECK: no UI part touched — numbers inside existing card / result texts only.
+
+| RV-186 item | done |
+|---|---|
+| 1 restore LIVE result lines | `j1.js:173` apply(), `j8.js:24` ap(), `jstatpace.js:23` spAdd — byte-identical to a96564ad (`git diff a96564ad -- dev/build/j1.js` empty; j8 differs only in the giveTo keep line/ result line of round 1) |
+| 2 previews = LIVE's applied numbers | `spSee("hh",n)` → new `hhSee(n)` = affPreview(Empress, her, `hhPace(n)`) (apply's spG peek, THEN hhSet→affAdd chain); jgift queen card dry-runs affAdd(t,S,gr) then `hhSet(S,S.hh+hhPace(g))`; `spSee("rel",who)` back to LIVE (spG pace only); the 5 spAdd-rel cards round 1 had moved to affSg (j3:166 «Giúp nàng», j7:27/34/107/144) print `spSee("rel",n,v)`; jvisit Hoàng hậu card → `spSee("hh",-V.hh)`. Test rows: «spAdd rel ×6» (pace), «apply hh ±» , «card apply({hh:6}/{hh:-4}) chip» (j1 fmt), «card spAdd rel «Đứng ra nói đỡ»» (j7 comet), «gift card queen» (now forced to keep → really runs relAdd + ap hh) |
+| 3 hh double pace | proof note **reports/hh-double-pace.md** (LIVE paces twice; LIVE chip showed pace #1 only → shown ≠ real). Not fixed — MAIN to rule |
+| 4 pvOan POST | scan now sorts pvQuy + pvOan + pvOanSet: 10 POST pvOan sites → `oanGot` (new, j9, twin of affGot) printing the real oán: j70:364, j78:112, j78:131 (also its quý → affGot), j95:454, jagacts3:136, jemoact:419/437, jexam:123 (one row per mother), **jmem «Lấy chuyện riêng ép nàng»** (hookUse runs the oanAdd inside oanGot), jroad:233. Scan: POST 0. Test row «POST jemoact kexau oán» |
+| 5 wrong partner | jpma.js:139 + :143 (law 11) → `affSg(p,t,…)`; j42.js:384 «Từ chối, im lặng» → `affSg(v,a,grudge)`, :383 «Từ chối, bẩm chủ» (same card set) → `affSg(v,a,-grudge)` |
+| 6 flake | cause proven: relAdd's first leg fires a jemo emotion (emoEv) that rescales the second leg; a preview (wrappers stand aside) can't see it. With emoEv stubbed: 10/10 PASS (was 2 fails / 8). Test holds emoEv still for card+act pairs (test only) and prints a «GAP (info)» row each run: 0–2 of 16 relAdd pairs differ by 1 with the emotion ON → **separate item for MAIN: real shown-vs-real gap, relAdd + jemo emotion** (not changed). **0 fails in 8 runs** |
+| 7 gates | see below |
+
+### Gates (round 2)
+- a96564ad ancestor · 0 deletions vs LIVE · assemble.py identical to LIVE.
+- `python3 dev/measure/aff-preview-scan.py dev/build` → exit 0 · raw 0 · pvQuy/pvOan sites 127 PRE, 0 POST.
+- `node dev/test/aff-preview.js .` → PASS 8/8 (95–98 acts).
+- `node dev/test/kri-one-row.js .` → PASS · 4 receivers. `node dev/test/webkit-syntax.js` → 487 modules, 0 hits.
+- quickcheck cef4fa29 vs LIVE a96564ad → perf **PASS** (median of 3 new/live: render 325/365 ms, tab 577/684 ms, **buổi 1942/1917 ms**, tasks>200 ms 30/49), open 2275 ms, old save loads + plays a buổi, time-spill PASS. Overall line **QUICKCHECK FAIL** on ONE core-gate hit, G4 96-noise-hygiene text-hygiene --runtime: NEW long «80>70» «Ma ma dặn: Hoàng thượng thích y phục thanh nhã, ăn vận ra mắt phải liệu cho hợp.» — a LIVE string (jselxday.js:210 + jtoil.js:56 TOIL_HK, both identical to a96564ad, untouched here) that the random robot life happened to reach; not this unit's (for MAIN: add it to dev/test/text-hygiene-known.json or shorten it in its own unit). static text-hygiene, vp-doubled, noise-sampler-pure, noise-day all PASS.
+- Stills (Fold 755x1000 + iPad 1180x820; talk hand, opened card, queen gift card): `node dev/test/aff-preview-shots.js . <out>` → AFF-SHOTS PASS (0 page errors, no h-scroll). Looked at all 6: talk hand (4 cards, «nàng quý ngươi +n»), opened card «Hỏi han sức khỏe» (kit Tốn/Được), «Tặng quà» picker with the Hoàng hậu row first («Được: nàng quý ta ++», the kit marks; its text = «nàng quý ngươi +14» Fold / «+7» iPad). Portraits are blank because CDN art is blocked offline (same on any local build). Stills kept outside git: /tmp/claude-0/shots/
+
+### Separate items for MAIN (not folded)
+A. hh double pace — reports/hh-double-pace.md.
+B. relAdd + jemo emotion gap (item 6): card ≠ act by 1 in ~0–2 of 16 relAdd pairs when the first leg's emotion fires.
+C. jky non-consort target (servant / official, `relTo` raw `r.af += n`, no pace): the card prints `spSee("rel",rw,r)` (a pace) — on LIVE too; shown ≠ real when the pace bites. Not changed (outside the list).
+D. LIVE typed numbers on spAdd-rel cards (j7.js:43 «Kết minh» +25, :155/170 +40, :176/177/181/182/186/192): card prints the raw amount, act paces (spAdd). Law 4 group, pre-existing, not changed.
+
 ## HANDOVER (if a fresh seat continues)
-Tip of review/pvquy-post = this report commit. Tools: the scan (`--pvquy` = every site with its sort and reason), `node dev/test/aff-preview.js .` (rebuild first: `bash dev/site/build_site.sh`). A new POST site → `affGot` around the funnel, `balSg(d)`; a new helper used on both sides → add it to `HELPER_PRE` with the arg a POST caller must pass.
+Round 2 tip = review/pvquy-post-r2 (this report commit). Round 1 tip = review/pvquy-post. Tools: the scan (`--pvquy` = every site with its sort and reason), `node dev/test/aff-preview.js .` (rebuild first: `bash dev/site/build_site.sh`). A new POST site → `affGot` around the funnel, `balSg(d)`; a new helper used on both sides → add it to `HELPER_PRE` with the arg a POST caller must pass.
