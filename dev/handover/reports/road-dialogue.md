@@ -57,6 +57,7 @@ KIT CHECK: reuses kitScene.open / kitScene.light / kitDialogue.play / kitTypeLin
 Total 558. Lead folds each file (validator --strict, read 10 random, rebuild jdlgsd.js), then the gates.
 
 ## WRITERS
+- B RD WRITER B (sonnet, session_01N1tNP2Np9FjuaTENKCVB5w): R4 rd_cnv.md 52, R5 rd_nc.md 51, R6 rd_td.md 50 = 153 scenes, validator --strict 0 errors; all three pushed. HANDOVER rd_td: last id done rd:rc-td-o14#open (slice complete, nothing left).
 - Foreman B 08:22Z: RDW-A session_01N1tNP4LvMJG9uWS2NZ4ou7 (R1 dtq, R2 muoi, R3 cn) · RDW-B session_01N1tNP2Np9FjuaTENKCVB5w (R4 cnv, R5 nc, R6 td) · RDW-C session_01N1tNP5unp7XKs9SvrxrGPy (R7 ch, R8 thd) · RDW-D session_01N1tNP3ksEX5jCyKC35RTiW (R9 pf+arcs, R10 bd).
 - R1 rd_dtq 51 (d673e73d) folded cbdc8fd4. R4 rd_cnv 52 (938a68d8): lead fixed 18 nar lines carrying {goi} (law 11 scan: side-line files 0, rd_* 18 → 0; validator rule added).
 
