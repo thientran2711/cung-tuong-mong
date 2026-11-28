@@ -3519,6 +3519,13 @@ merit invitation, opened for real and measured (layout, one person, banner in th
   × her drawn figure height. Measured: iPad dialog 6.3 px on 524 px, 390 dialog 3.8 px on
   320 px (all = rule). Height 8.5 % of the figure × sc[r], 26–72 px; when the room above the head is short (dialog, scene title, plaques,
   chips) it SHRINKS (down to 12 px), never covers the head or the title.
+- NEVER ON TEXT (KK67, RV-179 Fold «Biếu quà làm lành»: the marker lay on the dialog name plaque over «Quý phi»; law 11): every plaque / rank / title / chip box
+  in her column is an obstacle (`KMM_AVOID` = scene title, #kshL/#kshR, .k3chips, .kchip, .kmnote, #j59metag .tag, .kpsn / .kdpcap plaques, .kname, .kdh pills, #kpname).
+  The obstacles split the room above her head into FREE SLOTS (head − gap → first obstacle; above each obstacle − gap; … up to the room top): the marker takes the LOWEST
+  slot that holds its full size, else the tallest slot ≥ 12 px (shrinks), else 12 px in the top slot (above every obstacle). `data-at` = head | slot<i>.
+  SAME RULE on stages for the mood seal (jfigseal, §78.y `kitBadgeAt(…,"emo")`): a side whose box lies on KMM_AVOID text is bad (takes the other side); text above on both
+  sides (a long place name #kpname, Fold) → the seal SHRINKS (bottom stays on its line, ≥ 14 px) so its top stays under the text.
+  Scan: `node dev/test/mark-plaque-scan.js --save y05.json` (P1 mark box on a plaque glyph, P2 figure / mark paints over a plaque glyph; dialogs at her rank + rank 7, every stage; Fold + iPad).
 - Size: `KIT_MEMARK.big` = 1.05 (owner 17/11 07:15Z: "to hơn một xíu", 2–8 % allowed; one value, every figure and rank).
 - Glow (owner 17/11 07:00Z, map-me-mark): BRIGHT static glow = white core + three gold halos on the `.kmemark` layer (never an animated filter, perf ≤ live).
 - Motion (Cảnh động on, no reduced motion): squash-and-bounce loop `kmmBob` 2.6 s, transform only on the mark's own `<img>` (origin bottom centre): rises 11 px, drops fast, squash (scaleY .84 / scaleX 1.1), rebound 5 px, small second landing, settles, rises again. Reduced motion / Hiệu ứng Gọn → still mark, same glow. Never the figure.

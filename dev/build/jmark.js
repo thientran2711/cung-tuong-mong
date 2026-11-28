@@ -41,7 +41,9 @@ function kmmHead(src,cb){const o=KMM_HEAD[src];if(o&&o.v)return o.v;if(o){o.w.pu
 function kitMeMapMark(){try{const r=kmmCur();if(r==null)return"";return `<span class="kmmapmk${kmmMotion()?" kmmove":""}" aria-hidden="true" style="--kmm-mapsc:${((KIT_MEMARK.sc[r]||1)*(KIT_MEMARK.big||1)).toFixed(3)};--dh:${kmmGlowCol()}"><img class="kmglw" alt="" draggable="false" src="${kmmSrc(r)}"><img alt="" draggable="false" src="${kmmSrc(r)}" onerror="this.parentNode.style.display='none'"></span>`}catch(e){return""}}
 function kmmMotion(){try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return false;return!(typeof OPT!=="undefined"&&OPT&&OPT.fxon===false)}catch(e){return false}}
 function kmmIsMe(fig){return!!fig&&(fig.id==="mefig"||!!fig.closest(".kesme"))}
-function kmmAvoid(){const L=[];document.querySelectorAll("#sc-t h2,#kshL,#kshR,.k3chips,.kchip,.kmnote,#j59metag .tag").forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.height>0)L.push(r)});return L}
+/* KK67 (RV-179 Fold «Biếu quà làm lành»: the marker sat on the dialog name plaque over «Quý phi»): every name plaque / rank / title tag is an obstacle too (.kpsn figcaption plaques, .kdpcap, .kname, .kdh title pills) */
+const KMM_AVOID="#sc-t h2,#kshL,#kshR,.k3chips,.kchip,.kmnote,#j59metag .tag,.kpsn,.kdpcap,.kname,.kdh,#kpname";window.KMM_AVOID=KMM_AVOID;
+function kmmAvoid(){const L=[];document.querySelectorAll(KMM_AVOID).forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.height>0)L.push(r)});return L}
 /* the drawn picture box inside an <img> (object-fit: contain) */
 function kmmBox(fig){const fr=fig.getBoundingClientRect();let bx=fr.left,by=fr.top,bw=fr.width,bh=fr.height;const nw=fig.naturalWidth,nh=fig.naturalHeight;
  if(nw&&nh){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}}
@@ -60,11 +62,17 @@ function kitMeMark(fig){try{
   const sc=L1.sc||1;let Hm=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,L1.H/sc*K.h*(K.sc[r]||1)))*(K.big||1))*sc;if(L1.room<Hm)Hm=Math.max(K.tiny*sc,Math.floor(L1.room));/* never out of the frame top: shrinks, never sinks onto a head */const ar0=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:1;const Wm=Math.round(Hm*ar0);
   const P=kitBadgeAt(st,fig,"me",Wm,Hm);if(!P){mk.style.visibility="hidden";return mk}const L0=P.left;mk.style.cssText=`left:${(L0-hr.left+host.scrollLeft).toFixed(1)}px;top:${(P.top-hr.top+host.scrollTop).toFixed(1)}px;width:${Wm}px;height:${Hm}px`;
   mk.dataset.r=r;mk.dataset.at="row";mk.dataset.gap=(B.by+B.bh*hd.t-(P.top+Hm)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}
- const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap),bottom=headTop-gap;
+ const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap);let bottom=headTop-gap;
  /* room above the head: the host's top edge, and anything the marker must not cover (scene title, plaques, chips) */
  /* dialogs: the room above the figure is the figure column (the free space over the head inside the dialog), not just the figure box */
- let roomTop=hr.top+1+K.bob+(K.edge||0);const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}for(const q of kmmAvoid()){const W=H*ar;if(cx+W/2>q.left&&cx-W/2<q.right&&q.bottom<=bottom&&q.bottom>roomTop-1)roomTop=Math.max(roomTop,q.bottom+1)}
- if(bottom-roomTop<H)H=Math.max(K.tiny,Math.floor(bottom-roomTop));
+ let roomTop=hr.top+1+K.bob+(K.edge||0);const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}
+ /* KK67 FREE SLOTS (KIT §78.y dialog rule, law 11): the marker never lies on a plaque / chip / title text. The obstacles in its column split the room above the head into
+    free slots (head − gap up to the first obstacle, then above each obstacle − gap, …, up to the room top); the marker takes the LOWEST slot that holds its full size,
+    else the tallest slot (shrinks, ≥ KIT_MEMARK.tiny); no slot ≥ tiny → KIT_MEMARK.tiny in the TOP slot (above every obstacle: it may reach into the frame air, never onto text). */
+ {const W0=H*ar,obs=kmmAvoid().filter(q=>cx+W0/2>q.left-1&&cx-W0/2<q.right+1&&q.top<bottom&&q.bottom>roomTop).sort((a,b)=>b.bottom-a.bottom);
+  const slots=[];let cur=bottom;for(const q of obs){if(q.bottom<cur)slots.push([Math.max(roomTop,q.bottom+1),cur]);cur=Math.min(cur,q.top-gap)}slots.push([roomTop,cur]);
+  let s=slots.find(z=>z[1]-z[0]>=H);if(!s){s=slots.filter(z=>z[1]-z[0]>=K.tiny).reduce((a,z)=>!a||z[1]-z[0]>a[1]-a[0]?z:a,null);if(s)H=Math.floor(s[1]-s[0]);else{s=slots[slots.length-1];H=K.tiny}}
+  bottom=s[1];mk.dataset.at=obs.length?"slot"+slots.indexOf(s):"head"}
  const W=Math.round(H*ar),top=bottom-H;
  mk.style.cssText=`left:${(cx-hr.left-W/2+host.scrollLeft).toFixed(1)}px;top:${(top-hr.top+host.scrollTop).toFixed(1)}px;width:${W}px;height:${H}px`;
  mk.dataset.r=r;mk.dataset.gap=(headTop-(top+H)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}catch(e){console.error("kitMeMark",e);return null}}
@@ -112,7 +120,7 @@ function kbCentre(fig){const B=kmmBox(fig);let c=.5;try{const src=fig.currentSrc
 function kitBadgeAt(st,fig,kind,w,h){if(!fig)return null;const sex=kitBadgeSex(fig);const L=kitMarkLine(st,sex);if(!L)return null;const cx=kbCentre(fig);const R=st.getBoundingClientRect();
  if(h==null)h=L.h;const K=KIT_BADGE;
  if(kind==="emo"){const off=K.mw*L.H/2+K.sp*L.H+w/2;const others=kbFigs(st).filter(f=>f!==fig).map(kbCentre),mwh=K.mw*L.H/2;
-  const bad=l=>l<R.left+2||l+w>R.right-2||others.some(c=>l<c+mwh+2&&l+w>c-mwh-2);let side=1,left=cx+off-w/2;if(bad(left)&&!bad(cx-off-w/2)){side=-1;left=cx-off-w/2}
+  /* KK67 (law 11, mark-plaque-scan Fold r19/r22: the seal touched the place name #kpname): a side whose box lies on a plaque / name / title text (KMM_AVOID) is bad too */const av=typeof kmmAvoid==="function"?kmmAvoid():[],tp=L.bottom-h;const bad=l=>l<R.left+2||l+w>R.right-2||others.some(c=>l<c+mwh+2&&l+w>c-mwh-2)||av.some(q=>l<q.right+1&&l+w>q.left-1&&tp<q.bottom+1&&L.bottom>q.top-1);let side=1,left=cx+off-w/2;if(bad(left)&&!bad(cx-off-w/2)){side=-1;left=cx-off-w/2}
   left=Math.max(R.left+2,Math.min(left,R.right-2-w));return{left,top:L.bottom-h,cx,side,sex,off,line:L}}
  const left=Math.max(R.left+2,Math.min(cx-w/2,R.right-2-w));return{left,top:L.bottom-h,cx,side:1,sex,off:0,line:L}}
 window.kitBadgeAt=kitBadgeAt;

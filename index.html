@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"cb28854b+","t":"2026-11-28T04:01Z","c":"K-GIFT-NOTE + picker/hand harness gaps (RV-178 §4 nits a, b) — rebased on lc34-ui6 c5f97e24; RV-178 §7 fix: jkring-item.js:196 lookbehind l…","b":"5accf9ffeb4f","h":[{"s":"9483e103+","t":"2026-11-27T23:23Z","c":"review save-pid-cards rv6: save-evc-onscreen test setup waits for the card to be painted (LIVE jverdict RF.held defers showModal behind a h…"},{"s":"5fb13d60+","t":"2026-11-27T21:15Z","c":"Thẻ kết quả nằm gọn trong khung, hình bay và cánh hoa không còn đè lên hộp thoại; bàn cờ trò chơi nhỏ đổi áo theo mùa."},{"s":"24beb1a4","t":"2026-11-27T19:22Z","c":"RV live-bugs-2711: rebuild index.html/sw.js on LIVE 772bee4f; assets.json = LIVE"},{"s":"6529ee43+","t":"2026-11-27T15:42Z","c":"rv26 merge: save stack (sổ compact, unseen lists, generators, inv-stack) + save-rewind test on LIVE 772bee4f (lc31-goal); source hunks asse…"},{"s":"d9ca7892+","t":"2026-11-27T12:32Z","c":"Dòng mục tiêu chạm được: xem cách làm rồi «Đi tới» tận nơi; đến một nơi hay một điện trên Dư đồ, nàng ở lại đúng chỗ, không còn bị đưa ngượ…"},{"s":"520c85b0","t":"2026-11-27T12:31Z","c":"Nhờ giúp nay nhờ được cả người cùng cung lẫn Hoàng hậu; người hầu đủ công lao được xin sang hầu cung cao hơn; tuyển tú bị loại hay được ban…"},{"s":"28d8bd1e","t":"2026-11-27T11:45Z","c":"Hội thi tài nghệ: hết ván là hiện kết quả và dừng hẳn, không còn kẹt giữa chừng."},{"s":"cf61b8e4","t":"2026-11-27T10:29Z","c":"Bản đồ chia rõ từng khu; người chưa quen hiện bóng theo vai; màn mờ đổi theo buổi; lựa chọn thuở khuê các có rủi ro nay đều ghi khả năng; M…"},{"s":"48ab87e6","t":"2026-11-27T09:35Z","c":"Thuở khuê các: các cảnh thuế đinh, đêm hội, cha bệnh, mối mai nay chọn là ra, không còn treo giữa chừng."},{"s":"cb090860+","t":"2026-11-27T08:01Z","c":"Thẻ người: tranh lớn, hai thẻ Thông tin · Giao tình; việc với người ấy hiện trên sân khấu, chạm cửa một người là ra ngay các việc theo ba b…"}]};
+window.CTM_BI={"s":"935c008b+","t":"2026-11-28T05:03Z","c":"Thẻ kết quả nằm gọn trong khung, hình bay và cánh hoa không còn đè lên hộp thoại; bàn cờ trò chơi nhỏ đổi áo theo mùa.","b":"53868853a3bd","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -57691,7 +57691,9 @@ function kmmHead(src,cb){const o=KMM_HEAD[src];if(o&&o.v)return o.v;if(o){o.w.pu
 function kitMeMapMark(){try{const r=kmmCur();if(r==null)return"";return `<span class="kmmapmk${kmmMotion()?" kmmove":""}" aria-hidden="true" style="--kmm-mapsc:${((KIT_MEMARK.sc[r]||1)*(KIT_MEMARK.big||1)).toFixed(3)};--dh:${kmmGlowCol()}"><img class="kmglw" alt="" draggable="false" src="${kmmSrc(r)}"><img alt="" draggable="false" src="${kmmSrc(r)}" onerror="this.parentNode.style.display='none'"></span>`}catch(e){return""}}
 function kmmMotion(){try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return false;return!(typeof OPT!=="undefined"&&OPT&&OPT.fxon===false)}catch(e){return false}}
 function kmmIsMe(fig){return!!fig&&(fig.id==="mefig"||!!fig.closest(".kesme"))}
-function kmmAvoid(){const L=[];document.querySelectorAll("#sc-t h2,#kshL,#kshR,.k3chips,.kchip,.kmnote,#j59metag .tag").forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.height>0)L.push(r)});return L}
+/* KK67 (RV-179 Fold «Biếu quà làm lành»: the marker sat on the dialog name plaque over «Quý phi»): every name plaque / rank / title tag is an obstacle too (.kpsn figcaption plaques, .kdpcap, .kname, .kdh title pills) */
+const KMM_AVOID="#sc-t h2,#kshL,#kshR,.k3chips,.kchip,.kmnote,#j59metag .tag,.kpsn,.kdpcap,.kname,.kdh,#kpname";window.KMM_AVOID=KMM_AVOID;
+function kmmAvoid(){const L=[];document.querySelectorAll(KMM_AVOID).forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.height>0)L.push(r)});return L}
 /* the drawn picture box inside an <img> (object-fit: contain) */
 function kmmBox(fig){const fr=fig.getBoundingClientRect();let bx=fr.left,by=fr.top,bw=fr.width,bh=fr.height;const nw=fig.naturalWidth,nh=fig.naturalHeight;
  if(nw&&nh){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}}
@@ -57710,11 +57712,17 @@ function kitMeMark(fig){try{
   const sc=L1.sc||1;let Hm=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,L1.H/sc*K.h*(K.sc[r]||1)))*(K.big||1))*sc;if(L1.room<Hm)Hm=Math.max(K.tiny*sc,Math.floor(L1.room));/* never out of the frame top: shrinks, never sinks onto a head */const ar0=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:1;const Wm=Math.round(Hm*ar0);
   const P=kitBadgeAt(st,fig,"me",Wm,Hm);if(!P){mk.style.visibility="hidden";return mk}const L0=P.left;mk.style.cssText=`left:${(L0-hr.left+host.scrollLeft).toFixed(1)}px;top:${(P.top-hr.top+host.scrollTop).toFixed(1)}px;width:${Wm}px;height:${Hm}px`;
   mk.dataset.r=r;mk.dataset.at="row";mk.dataset.gap=(B.by+B.bh*hd.t-(P.top+Hm)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}
- const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap),bottom=headTop-gap;
+ const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap);let bottom=headTop-gap;
  /* room above the head: the host's top edge, and anything the marker must not cover (scene title, plaques, chips) */
  /* dialogs: the room above the figure is the figure column (the free space over the head inside the dialog), not just the figure box */
- let roomTop=hr.top+1+K.bob+(K.edge||0);const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}for(const q of kmmAvoid()){const W=H*ar;if(cx+W/2>q.left&&cx-W/2<q.right&&q.bottom<=bottom&&q.bottom>roomTop-1)roomTop=Math.max(roomTop,q.bottom+1)}
- if(bottom-roomTop<H)H=Math.max(K.tiny,Math.floor(bottom-roomTop));
+ let roomTop=hr.top+1+K.bob+(K.edge||0);const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}
+ /* KK67 FREE SLOTS (KIT §78.y dialog rule, law 11): the marker never lies on a plaque / chip / title text. The obstacles in its column split the room above the head into
+    free slots (head − gap up to the first obstacle, then above each obstacle − gap, …, up to the room top); the marker takes the LOWEST slot that holds its full size,
+    else the tallest slot (shrinks, ≥ KIT_MEMARK.tiny); no slot ≥ tiny → KIT_MEMARK.tiny in the TOP slot (above every obstacle: it may reach into the frame air, never onto text). */
+ {const W0=H*ar,obs=kmmAvoid().filter(q=>cx+W0/2>q.left-1&&cx-W0/2<q.right+1&&q.top<bottom&&q.bottom>roomTop).sort((a,b)=>b.bottom-a.bottom);
+  const slots=[];let cur=bottom;for(const q of obs){if(q.bottom<cur)slots.push([Math.max(roomTop,q.bottom+1),cur]);cur=Math.min(cur,q.top-gap)}slots.push([roomTop,cur]);
+  let s=slots.find(z=>z[1]-z[0]>=H);if(!s){s=slots.filter(z=>z[1]-z[0]>=K.tiny).reduce((a,z)=>!a||z[1]-z[0]>a[1]-a[0]?z:a,null);if(s)H=Math.floor(s[1]-s[0]);else{s=slots[slots.length-1];H=K.tiny}}
+  bottom=s[1];mk.dataset.at=obs.length?"slot"+slots.indexOf(s):"head"}
  const W=Math.round(H*ar),top=bottom-H;
  mk.style.cssText=`left:${(cx-hr.left-W/2+host.scrollLeft).toFixed(1)}px;top:${(top-hr.top+host.scrollTop).toFixed(1)}px;width:${W}px;height:${H}px`;
  mk.dataset.r=r;mk.dataset.gap=(headTop-(top+H)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}catch(e){console.error("kitMeMark",e);return null}}
@@ -57762,7 +57770,7 @@ function kbCentre(fig){const B=kmmBox(fig);let c=.5;try{const src=fig.currentSrc
 function kitBadgeAt(st,fig,kind,w,h){if(!fig)return null;const sex=kitBadgeSex(fig);const L=kitMarkLine(st,sex);if(!L)return null;const cx=kbCentre(fig);const R=st.getBoundingClientRect();
  if(h==null)h=L.h;const K=KIT_BADGE;
  if(kind==="emo"){const off=K.mw*L.H/2+K.sp*L.H+w/2;const others=kbFigs(st).filter(f=>f!==fig).map(kbCentre),mwh=K.mw*L.H/2;
-  const bad=l=>l<R.left+2||l+w>R.right-2||others.some(c=>l<c+mwh+2&&l+w>c-mwh-2);let side=1,left=cx+off-w/2;if(bad(left)&&!bad(cx-off-w/2)){side=-1;left=cx-off-w/2}
+  /* KK67 (law 11, mark-plaque-scan Fold r19/r22: the seal touched the place name #kpname): a side whose box lies on a plaque / name / title text (KMM_AVOID) is bad too */const av=typeof kmmAvoid==="function"?kmmAvoid():[],tp=L.bottom-h;const bad=l=>l<R.left+2||l+w>R.right-2||others.some(c=>l<c+mwh+2&&l+w>c-mwh-2)||av.some(q=>l<q.right+1&&l+w>q.left-1&&tp<q.bottom+1&&L.bottom>q.top-1);let side=1,left=cx+off-w/2;if(bad(left)&&!bad(cx-off-w/2)){side=-1;left=cx-off-w/2}
   left=Math.max(R.left+2,Math.min(left,R.right-2-w));return{left,top:L.bottom-h,cx,side,sex,off,line:L}}
  const left=Math.max(R.left+2,Math.min(cx-w/2,R.right-2-w));return{left,top:L.bottom-h,cx,side:1,sex,off:0,line:L}}
 window.kitBadgeAt=kitBadgeAt;
@@ -93913,7 +93921,9 @@ function kitFigSeal(fig){try{
  /* KIT §78.y STAGE BADGE LINES (owner OD 19/11 ~02:05Z + ~03:50Z): on a stage the chip stands ON the line of the figure's sex (bottom = the highest real head top of that sex − G, jmark kitMarkLine),
     beside the primary mark column (jmark kitBadgeAt(…,"emo"): centre line ± (mw/2 + sp) × H + chip/2), ONE size per stage (kitBadgeEmoSize). The plaque columns #kshR / #kshL stay a no-go zone:
     a chip that would cross one goes to the mirror side (same distance, other side); it never leaves its line. */
- {const st=fig.closest("#stage");if(st&&typeof kitBadgeAt==="function"){let s2=kitBadgeEmoSize(st);{const L0=kitMarkLine(st,kitBadgeSex(fig));if(L0){const rm=Math.floor(L0.bottom-st.getBoundingClientRect().top-2);if(s2>rm)s2=Math.max(14,rm)}}/* a line lifted by a tall hat / crown: the chip shrinks to stay inside the frame, never sinks onto the head */const P=s2?kitBadgeAt(st,fig,"emo",s2,s2):null;if(!P){el.style.display="none";return}
+ {const st=fig.closest("#stage");if(st&&typeof kitBadgeAt==="function"){let s2=kitBadgeEmoSize(st);{const L0=kitMarkLine(st,kitBadgeSex(fig));if(L0){const rm=Math.floor(L0.bottom-st.getBoundingClientRect().top-2);if(s2>rm)s2=Math.max(14,rm)}}/* a line lifted by a tall hat / crown: the chip shrinks to stay inside the frame, never sinks onto the head */let P=s2?kitBadgeAt(st,fig,"emo",s2,s2):null;if(!P){el.style.display="none";return}
+  /* KK67 (law 11, mark-plaque-scan Fold r19/r22: the chip touched the place name #kpname): text above its box (KMM_AVOID: plaques, names, title, chips) → the chip SHRINKS (bottom stays on its line, ≥ 14 px) so its top stays under that text; kitBadgeAt already took the free side when there is one */
+  if(typeof kmmAvoid==="function"){const lb=P.top+s2;let qb=null;for(const q of kmmAvoid())if(P.left<q.right+1&&P.left+s2>q.left-1&&q.bottom>P.top-1&&q.top<lb)qb=qb==null?q.bottom:Math.max(qb,q.bottom);if(qb!=null){const s3=Math.max(14,Math.floor(lb-qb-2));if(s3<s2){s2=s3;P=kitBadgeAt(st,fig,"emo",s2,s2)||P}}}
   const pad=K.pad!=null?K.pad:10,Z=[...st.querySelectorAll("#kshR,#kshL")].filter(e=>!e.hidden&&e.offsetHeight&&e.getClientRects().length).map(e=>e.getBoundingClientRect());
   const hit=l=>Z.some(q=>l<q.right+pad&&l+s2>q.left-pad&&P.top<q.bottom+pad&&P.top+s2>q.top-pad);const off=P.off;let L=P.left,side=P.side;
   if(hit(L)){const l2=P.cx-side*off-s2/2;if(!hit(l2)){L=l2;side=-side;el.dataset.kfscol="1"}else el.dataset.kfscol="x"}else delete el.dataset.kfscol;
@@ -106970,7 +106980,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5accf9ffeb4f";window.CTM_BUILD=BUILD;
+const BUILD="53868853a3bd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
