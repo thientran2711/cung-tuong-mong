@@ -77,6 +77,11 @@ const R=path.resolve(__dirname,'../..');const PAGE=process.argv[2]||'dev/index.h
    const R=B.road,odds=["nhe","sl","nang","bac"].map(x=>odA(v,R[x].p));
    ok("NPC road rolls the BAL road odds (odA)",seen.some(p=>p<100&&odds.includes(p)),seen.join(","));ok("NPC road can fail: no protection",!(v.ttwPz>0),v.ttwPz);
    ok("failed NPC road still gives something (fw)",v.duc===1||v.suc===s0+R.nang.fw.suc,`duc ${v.duc} suc ${s0}->${v.suc}`);
+   /* RV-163M: the NPC's outcome rows = hers (ttwGo): failure pays l then fw, success gives w (road forced to nặng) */
+   {const pk=pick;v.ttwLast=null;v.ttwPz=0;v.danh=50;v.suc=50;v.duc=0;pick=()=>"nang";roll=p=>p>=100;try{ttwNpcTick()}finally{roll=r0;pick=pk}
+    ok("failed NPC road pays its loss (l) + fw like hers",v.danh===50+R.nang.l.danh&&v.suc===50+R.nang.fw.suc,`danh ${v.danh} suc ${v.suc}`);
+    v.ttwLast=null;v.ttwPz=0;v.suc=50;v.duc=0;pick=()=>"nang";roll=()=>true;try{ttwNpcTick()}finally{roll=r0;pick=pk}
+    ok("successful NPC road gives w like hers",v.ttwPz>0&&v.duc===R.nang.w.duc&&v.suc===50+R.nang.w.suc,`pz ${v.ttwPz} duc ${v.duc} suc ${v.suc}`)}
    v.ttwLast=null;roll=()=>true;try{ttwNpcTick()}finally{roll=r0}ok("NPC road success adds protection",v.ttwPz>0,v.ttwPz);
    roll=p=>p===Math.min(B.cap,v.ttwPz);let sp;try{sp=ttwNpcSpared(v)}finally{roll=r0}ok("NPC roads can save her from my order",sp===true);
    roll=()=>false;try{sp=ttwNpcSpared(v)}finally{roll=r0}ok("my order can still go through",sp===false);
