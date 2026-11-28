@@ -284,6 +284,7 @@ a rank). In the palace (`S.kc.inPal`) crest + gem come back. Helpers `kitPrePal(
 ---
 
 ## 6. ACT CARD (j63) — one frame for every act, option and priced button
+- K-KHAC-COST (KK70 28/11, law 4, RV-183 find): the Tốn khắc of a price line comes from ONE source per kind — `optK(a)` (j25): a deck card (a member of `deck`, or a copy carrying its khắc as a number in `k`: illness / cold-palace cards, door groups) = `cardCost(a)` (j2, what `act()` spends); a talk option = `talkK(a)`. The j25 optLine used to print talkK («Tốn 1 khắc») on every deck card (Tĩnh dưỡng 4, Múa 4, Thái y viện 3, Thỉnh an 2…). Test `node dev/test/kit-khac-cost.js` (deck + illness cards + talk options, Fold + iPad; KMUT=1 old code → FAIL).
 - PARALLEL TIME (jptime, OD 18/11 ~20:35Z): a button that SENDS another person shows its order khắc and "chờ N khắc" together in the ONE Tốn row (`KA_TIME` accepts `chờ N khắc`; talk options: `optLine` puts it after the order khắc). N = the khắc the person is away (BAL.ptime).
 
 Applies to: act cards (Hành động, servant road), person-card act groups (`.pcb`: consort, child, servant, court houses…),
