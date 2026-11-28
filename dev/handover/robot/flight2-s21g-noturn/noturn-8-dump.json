@@ -1,0 +1,3364 @@
+{
+ "at": "2026-11-28T02:47:18.287Z",
+ "url": "http://127.0.0.1:8803/",
+ "S": {
+  "name": "Thượng Quan Hàn Yên",
+  "year": 6,
+  "turn": 62,
+  "tuan": 0,
+  "buoi": 3,
+  "dead": false,
+  "rank": 0,
+  "place": "lc"
+ },
+ "top": null,
+ "qs": {
+  "Q": [
+   "Nghe đồn"
+  ],
+  "DQ": {
+   "want": null,
+   "t": 0,
+   "mt": 525817,
+   "newsHold": 0,
+   "fo": {},
+   "stat": {
+    "held": 8,
+    "ran": 8,
+    "dropped": 0,
+    "modalHeld": 836,
+    "newsFirst": 2,
+    "kmHeld": 170,
+    "actHeld": 46,
+    "pulled": 9,
+    "actKm": 31,
+    "painted": 68,
+    "tapPaint": 2,
+    "netArm": 76,
+    "rearm": 202,
+    "newsLet": 0,
+    "newsPass": 0,
+    "tapRe": 0,
+    "afterPaint": 56,
+    "staleNext": 2,
+    "mineFront": 6,
+    "mineTap": 61,
+    "woke": 3
+   },
+   "park": null,
+   "tw": 1795834033113,
+   "pdT": 1795834036668,
+   "tapEv": {
+    "isTrusted": true,
+    "__h2in": false
+   },
+   "tapIn": false,
+   "tapT": {},
+   "preQ": {},
+   "actTap": false,
+   "user": 0,
+   "kz": 0,
+   "wk": {
+    "m": {
+     "t": "Nghe đồn",
+     "who": {
+      "rk": "c3",
+      "rw": "Tần",
+      "w": [
+       "r",
+       28
+      ],
+      "src": "https://ctm-img.victoria-tntt.workers.dev/img/por-maid-m08-t4-a26.webp",
+      "hue": 0,
+      "ini": "C",
+      "col": "#e3a3b8",
+      "__kp": {
+       "id": 28,
+       "name": "Giang Bão Cầm",
+       "rank": 3,
+       "queen": false,
+       "trait": "Kín đáo",
+       "malice": 17,
+       "sung": 56,
+       "rel": -42,
+       "ev": 2,
+       "alive": true,
+       "out": false,
+       "kids": [],
+       "ghen": 8,
+       "pg": 8,
+       "nights": 28,
+       "age": 30,
+       "sac": 66,
+       "tai": 58,
+       "tamco": 45,
+       "duc": 24,
+       "danh": 6,
+       "bac": 0,
+       "suc": 58,
+       "arts": {
+        "cam": 2,
+        "ky": 0,
+        "thi": 5,
+        "hoa": 1,
+        "vu": 0,
+        "y": 2,
+        "theu": 2,
+        "nau": 0
+       },
+       "artp": {
+        "cam": 16.5,
+        "ky": 0,
+        "thi": 0,
+        "hoa": 0,
+        "vu": 0,
+        "y": 15.4,
+        "theu": 5.5,
+        "nau": 0
+       },
+       "maid": {
+        "name": "Lưu Mặc Nhi",
+        "loyal": 67,
+        "kk": "x61",
+        "net": [
+         "Khiêm nhường",
+         "Thực dụng",
+         "Tham vọng"
+        ],
+        "tin": 43,
+        "tal": "nghe",
+        "sec": {
+         "k": "lover"
+        },
+        "secKn": 0,
+        "__feelMig": 1,
+        "rk": 1,
+        "trong": [
+         "Kiệm",
+         "Đễ"
+        ]
+       },
+       "preg": 0,
+       "hidden": false,
+       "fake": 0,
+       "anthai": 0,
+       "doctor": 1,
+       "confined": 0,
+       "shield": 0,
+       "tablet": 0,
+       "block": 0,
+       "lastPromo": 42,
+       "inv": [
+        {
+         "k": "y_saxanh",
+         "from": "kc",
+         "src": "kc",
+         "iu": 4721,
+         "tested": 1
+        },
+        {
+         "k": "y_hoanho",
+         "src": "cap",
+         "nvp": 1,
+         "iu": 4723
+        },
+        {
+         "k": "hd_dao",
+         "from": "base0",
+         "iu": 5022
+        },
+        {
+         "k": "tram_hoalua",
+         "src": "cap",
+         "nvp": 1,
+         "iu": 4722
+        },
+        {
+         "k": "hd_dao",
+         "from": "nvp",
+         "d": "Tháng chạp, năm thứ hai, hạ tuần",
+         "nvp": 1,
+         "iu": 5906
+        },
+        {
+         "k": "vongngoc_r1",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 23,
+         "iu": 5909,
+         "w": 0
+        },
+        {
+         "k": "tuithom_r1",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 23,
+         "iu": 5911,
+         "w": 0
+        },
+        {
+         "k": "tragoi",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 23,
+         "iu": 5913
+        },
+        {
+         "k": "banhtrai",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 23,
+         "iu": 5914
+        },
+        {
+         "k": "y_hoanho",
+         "src": "may",
+         "fab": "vaibong",
+         "d": "Tháng giêng, năm thứ ba, hạ tuần",
+         "iu": 6498
+        },
+        {
+         "k": "y_saxanh",
+         "src": "may",
+         "fab": "vaibong",
+         "d": "Tháng hai, năm thứ ba, hạ tuần",
+         "iu": 6779
+        },
+        {
+         "k": "y_vanthuy",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": "Tháng chạp, năm thứ hai, hạ tuần",
+         "nvp": 1,
+         "iu": 5907
+        },
+        {
+         "k": "y_saxanh",
+         "src": "may",
+         "fab": "vaibong",
+         "d": "Tháng tư, năm thứ ba, hạ tuần",
+         "iu": 7327
+        },
+        {
+         "k": "y_hoanho",
+         "src": "may",
+         "fab": "vaibong",
+         "d": "Tháng bảy, năm thứ ba, hạ tuần",
+         "iu": 8160
+        },
+        {
+         "k": "hd_dao",
+         "from": "nvp",
+         "d": "Tháng mười, năm thứ ba, hạ tuần",
+         "nvp": 1,
+         "iu": 8987
+        },
+        {
+         "k": "tuithom_r2",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 34,
+         "iu": 8992,
+         "w": 0
+        },
+        {
+         "k": "tragoi",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 34,
+         "iu": 8995
+        },
+        {
+         "k": "banhtrai",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 34,
+         "iu": 8996
+        },
+        {
+         "k": "ruoucuc",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 34,
+         "iu": 8997
+        },
+        {
+         "k": "tramngoc",
+         "from": "base0",
+         "iu": 5021
+        },
+        {
+         "k": "vongngoc",
+         "from": "th",
+         "iu": 9502,
+         "w": 0
+        },
+        {
+         "k": "ngocboi_r1",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 23,
+         "iu": 5910,
+         "w": 0
+        },
+        {
+         "k": "ngocboi_r2",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 34,
+         "iu": 8991,
+         "w": 0
+        },
+        {
+         "k": "hd_diep",
+         "from": "nvp",
+         "d": "Tháng sáu, năm thứ tư, hạ tuần",
+         "nvp": 1,
+         "iu": 11306
+        },
+        {
+         "k": "vongngoc_r3",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 42,
+         "iu": 11308,
+         "w": 0
+        },
+        {
+         "k": "ngocboi_r3",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 42,
+         "iu": 11309,
+         "w": 1
+        },
+        {
+         "k": "tuithom_r3",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 42,
+         "iu": 11310,
+         "w": 1
+        },
+        {
+         "k": "trahop",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 42,
+         "iu": 11313
+        },
+        {
+         "k": "traicay",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 42,
+         "iu": 11314
+        },
+        {
+         "k": "ruoucuc",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 42,
+         "iu": 11315
+        },
+        {
+         "k": "nhansam",
+         "from": "th",
+         "iu": 11324
+        },
+        {
+         "k": "yensao",
+         "from": "th",
+         "iu": 12422
+        },
+        {
+         "k": "y_tramnep",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": "Tháng mười, năm thứ ba, hạ tuần",
+         "nvp": 1,
+         "iu": 8988
+        },
+        {
+         "k": "tram_phithuy",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": "Tháng sáu, năm thứ tư, hạ tuần",
+         "nvp": 1,
+         "iu": 11307
+        },
+        {
+         "k": "y_cungnu",
+         "src": "cap",
+         "nvp": 1,
+         "iu": 5029
+        },
+        {
+         "k": "y_vanthuy",
+         "src": "may",
+         "fab": "luahang",
+         "d": "Tháng ba, năm thứ năm, hạ tuần",
+         "iu": 13895
+        },
+        {
+         "k": "vongngoc_r2",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": 34,
+         "iu": 8990,
+         "w": 0
+        },
+        {
+         "k": "tram_ngoclan",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": "Tháng chạp, năm thứ hai, hạ tuần",
+         "nvp": 1,
+         "iu": 5908
+        },
+        {
+         "k": "yensao",
+         "from": 30,
+         "iu": 13334
+        },
+        {
+         "k": "y_vanthuy",
+         "src": "may",
+         "fab": "luahang",
+         "d": "Tháng bảy, năm thứ năm, hạ tuần",
+         "iu": 15307
+        },
+        {
+         "k": "y_vanthuy",
+         "from": 4,
+         "iu": 13894
+        },
+        {
+         "k": "y_haiduong",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": "Tháng sáu, năm thứ tư, hạ tuần",
+         "nvp": 1,
+         "iu": 11317
+        },
+        {
+         "k": "tram_dao",
+         "from": "buy",
+         "iu": 16475
+        },
+        {
+         "k": "lxma1",
+         "from": "noivu",
+         "d": 61,
+         "c": "hongphan",
+         "u": 2,
+         "iu": 16698
+        },
+        {
+         "k": "lxmat1",
+         "from": "noivu",
+         "d": 61,
+         "c": "hongmai",
+         "u": 2,
+         "iu": 16699
+        },
+        {
+         "k": "hd_dao",
+         "from": 4,
+         "iu": 15580
+        },
+        {
+         "k": "tuithom_r4",
+         "from": 30,
+         "iu": 15889,
+         "w": 0
+        },
+        {
+         "k": "tram_hong",
+         "from": "nvp",
+         "giver": "Nội vụ phủ",
+         "d": "Tháng mười, năm thứ ba, hạ tuần",
+         "nvp": 1,
+         "iu": 8989
+        },
+        {
+         "k": "vongngoc",
+         "from": "emp",
+         "iu": 16976,
+         "w": 1
+        },
+        {
+         "k": "lxma3",
+         "from": "emp",
+         "d": 61,
+         "c": "hongphan",
+         "u": 6,
+         "iu": 16977
+        },
+        {
+         "k": "trahop",
+         "from": "noivu",
+         "d": 62,
+         "iu": 16979
+        },
+        {
+         "k": "lxmay1",
+         "from": "noivu",
+         "d": 62,
+         "c": "khoi",
+         "u": 6,
+         "iu": 16980
+        },
+        {
+         "k": "lxson1",
+         "from": "noivu",
+         "d": 62,
+         "c": "haiduong",
+         "u": 6,
+         "iu": 16981
+        },
+        {
+         "k": "aldau1",
+         "u": 6,
+         "from": "noivu",
+         "d": 62,
+         "iu": 16982
+        },
+        {
+         "k": "alnen1",
+         "from": "noivu",
+         "d": 62,
+         "iu": 16983
+        },
+        {
+         "k": "alnen1",
+         "from": "noivu",
+         "d": 62,
+         "iu": 16984
+        },
+        {
+         "k": "alnen1",
+         "from": "noivu",
+         "d": 62,
+         "iu": 16985
+        },
+        {
+         "k": "y_maudon",
+         "src": "may",
+         "fab": "gamto",
+         "d": "Tháng giêng, năm thứ hai, hạ tuần",
+         "iu": 2790
+        },
+        {
+         "k": "hd_dao",
+         "from": 30,
+         "iu": 377
+        }
+       ],
+       "evm": {
+        "1": 4,
+        "2": 2,
+        "4": 5,
+        "5": 5,
+        "8": 6,
+        "9": 1,
+        "10": 7,
+        "19": 3,
+        "20": 3,
+        "24": 2,
+        "26": 4,
+        "27": 3,
+        "29": 4,
+        "30": 2
+       },
+       "rl": {
+        "1": 92,
+        "2": -4,
+        "3": 1,
+        "4": -58,
+        "5": 66,
+        "6": 71,
+        "7": 83,
+        "8": -34,
+        "9": 33,
+        "10": -54,
+        "19": -35,
+        "20": -39,
+        "22": 47,
+        "23": 61,
+        "24": 20,
+        "25": 0,
+        "26": 52,
+        "27": 10,
+        "29": 35,
+        "30": -58
+       },
+       "ro": {
+        "1": 1,
+        "2": 0,
+        "4": 59,
+        "5": 0,
+        "6": 4,
+        "7": 12,
+        "8": 20,
+        "9": 5,
+        "10": 44,
+        "19": 11,
+        "20": 2,
+        "22": 0,
+        "23": 8,
+        "24": 1,
+        "25": 3,
+        "26": 2,
+        "27": 12,
+        "29": 1,
+        "30": 55
+       },
+       "oan": 12,
+       "an": 8,
+       "nightLog": [
+        58,
+        70,
+        82,
+        113,
+        113,
+        119,
+        120,
+        123,
+        125,
+        131,
+        133,
+        136,
+        139,
+        142,
+        142,
+        143,
+        148,
+        148,
+        151,
+        153,
+        155,
+        164,
+        172,
+        173,
+        177,
+        185,
+        185,
+        185
+       ],
+       "th": 50,
+       "schemes": 1,
+       "hieu": "",
+       "dress": null,
+       "asthma": false,
+       "pray": 0,
+       "fert": 0,
+       "thu": 0,
+       "vir": {
+        "cong": 0,
+        "dung": 0,
+        "ngon": 0,
+        "hanh": 0
+       },
+       "virp": {
+        "cong": 0,
+        "dung": 0,
+        "ngon": 0,
+        "hanh": 0
+       },
+       "dlog": [
+        {
+         "w": 130,
+         "n": "việc khuất tất",
+         "d": 3
+        },
+        {
+         "w": 134,
+         "n": "việc khuất tất",
+         "d": -2
+        },
+        {
+         "w": 134,
+         "n": "việc khuất tất",
+         "d": -1
+        },
+        {
+         "w": 143,
+         "n": "việc khuất tất",
+         "d": -3
+        },
+        {
+         "w": 141,
+         "n": "việc khuất tất",
+         "d": -1
+        },
+        {
+         "w": 149,
+         "n": "việc khuất tất",
+         "d": -1
+        },
+        {
+         "w": 152,
+         "n": "việc khuất tất",
+         "d": 3
+        },
+        {
+         "w": 152,
+         "n": "việc khuất tất",
+         "d": -1
+        },
+        {
+         "w": 155,
+         "n": "việc khuất tất",
+         "d": -1
+        },
+        {
+         "w": 171,
+         "n": "việc khuất tất",
+         "d": -3
+        },
+        {
+         "w": 175,
+         "n": "việc khuất tất",
+         "d": 1
+        },
+        {
+         "w": 178,
+         "n": "việc khuất tất",
+         "d": -1
+        },
+        {
+         "w": 179,
+         "n": "việc khuất tất",
+         "d": 4
+        },
+        {
+         "w": 183,
+         "n": "Ngáng chân",
+         "d": -4
+        },
+        {
+         "w": 183,
+         "n": "việc khuất tất",
+         "d": -1
+        },
+        {
+         "w": 186,
+         "n": "quạt mực",
+         "d": -4
+        }
+       ],
+       "crsV": 1,
+       "net": [
+        "Ân cần",
+        "Trọng nghĩa",
+        "Vì mình"
+       ],
+       "scandal": false,
+       "thcV": 1,
+       "face": -1,
+       "fid": "maid:m08",
+       "fromMaid": "maid:m08",
+       "wasMaid": 1,
+       "nr": {
+        "o": "cn",
+        "r": "cn_chu",
+        "n": 0,
+        "k": 1,
+        "t": 65,
+        "h": 5,
+        "hs": -1,
+        "hb": 0,
+        "c": 5,
+        "e": "Chủ cũ sa cơ",
+        "x": 1,
+        "l": [
+         [
+          4,
+          -1
+         ],
+         [
+          5,
+          1
+         ],
+         [
+          6,
+          1
+         ],
+         [
+          7,
+          1
+         ],
+         [
+          8,
+          1
+         ],
+         [
+          9,
+          -1
+         ],
+         [
+          10,
+          1
+         ],
+         [
+          11,
+          1
+         ]
+        ],
+        "pr": "cnv_chu",
+        "rc": "",
+        "hp": []
+       },
+       "ag": {
+        "o": "cn",
+        "vent": {
+         "30": [
+          186,
+          6
+         ],
+         "*": [
+          164,
+          2
+         ]
+        }
+       },
+       "fromMaidOf": 6,
+       "spc": {
+        "danh": 0.091,
+        "rel:6": 0.448,
+        "rel:5": -0.303,
+        "rel:4": 0.399,
+        "rel:23": -0.222,
+        "oan:20": 0,
+        "rel:22-": 0,
+        "rel:22": 0.034,
+        "oan:6": 0.466,
+        "oan:22": 0.429,
+        "sung": 0.291,
+        "rel:19": -0.145,
+        "oan:24": -0.211,
+        "oan:4": -0.324,
+        "oan:7": -0.45,
+        "rel:8": -0.066,
+        "rel:27": 0.462,
+        "rel:24": 0.302,
+        "rel:25": 0.491,
+        "rel:19-": 0.238,
+        "rel:26": -0.318,
+        "oan:9": -0.342,
+        "rel:10-": 0.299,
+        "rel:1": 0.404,
+        "rel:3": 0,
+        "rel:9": -0.256,
+        "oan:19": -0.444,
+        "oan:23": -0.404,
+        "oan:1": 0.48,
+        "oan:5": -0.325,
+        "rel:7": 0.443,
+        "duc": 0.116,
+        "rel:5-": -0.012,
+        "oan:2": 0.2,
+        "rel:2": 0,
+        "rel:2-": 0,
+        "rel:24-": 0,
+        "th-": 0,
+        "th": 0.414,
+        "rel:7-": 0,
+        "oan:26": -0.48,
+        "oan:25": -0.029,
+        "rel:20-": -0.065,
+        "rel:20": -0.111,
+        "rel:4-": 0.273,
+        "rel:10": 0,
+        "oan:29": -0.121,
+        "rel:29": -0.192,
+        "oan:27": -0.274,
+        "oan:10": -0.388,
+        "rel:23-": 0,
+        "hh": 0.272,
+        "oan:8": -0.268,
+        "rel:30-": -0.499,
+        "rel:30": -0.126,
+        "oan:30": -0.196,
+        "oan:me": 0,
+        "rel:me-": 0.149,
+        "rel:8-": 0.132,
+        "rel:me": 0
+       },
+       "khScar": 0,
+       "khTmp": 0,
+       "khSw": {
+        "b": 0
+       },
+       "__feelMig": 1,
+       "__mkAt": 2988,
+       "mk": [
+        {
+         "n": 1,
+         "kd": "e:thấy Điền Thư Dao dùng đồ xa xỉ",
+         "k": "ghen",
+         "s": 16,
+         "why": "thấy Điền Thư Dao dùng đồ xa xỉ",
+         "e": "ghenUp",
+         "c": "sec",
+         "t": "7",
+         "k0": 3008,
+         "k1": 3018,
+         "w": 188,
+         "at": 3008
+        },
+        {
+         "n": 1,
+         "kd": "e:thấy Tăng Mạn Nhu dùng đồ xa xỉ",
+         "k": "ghen",
+         "s": 16,
+         "why": "thấy Tăng Mạn Nhu dùng đồ xa xỉ",
+         "e": "ghenUp",
+         "c": "sec",
+         "t": "8",
+         "k0": 3008,
+         "k1": 3018,
+         "w": 188,
+         "at": 3008
+        },
+        {
+         "n": 1,
+         "kd": "e:thấy Lâm Mặc Lan dùng đồ xa xỉ",
+         "k": "ghen",
+         "s": 16,
+         "why": "thấy Lâm Mặc Lan dùng đồ xa xỉ",
+         "e": "ghenUp",
+         "c": "sec",
+         "t": "9",
+         "k0": 3008,
+         "k1": 3018,
+         "w": 188,
+         "at": 3008
+        },
+        {
+         "n": 1,
+         "kd": "e:được Hoàng thượng lật thẻ",
+         "k": "tinhtu",
+         "s": 35,
+         "why": "được Hoàng thượng lật thẻ",
+         "e": "night",
+         "c": "pub",
+         "t": null,
+         "k0": 2976,
+         "k1": 2992,
+         "w": 186,
+         "at": 2976
+        },
+        {
+         "n": 1,
+         "kd": "e:Tống Quân Dao múa được Hoàng thượng khen",
+         "k": "ghen",
+         "s": 16,
+         "why": "Tống Quân Dao múa được Hoàng thượng khen",
+         "e": "ghenUp",
+         "c": "sec",
+         "t": "6",
+         "k0": 2988,
+         "k1": 2998,
+         "w": 186,
+         "at": 2988
+        },
+        {
+         "n": 1,
+         "kd": "e:Sử Tịnh Sơ múa được Hoàng thượng khen",
+         "k": "ghen",
+         "s": 16,
+         "why": "Sử Tịnh Sơ múa được Hoàng thượng khen",
+         "e": "ghenUp",
+         "c": "sec",
+         "t": "10",
+         "k0": 2988,
+         "k1": 2998,
+         "w": 186,
+         "at": 2988
+        }
+       ],
+       "emo": {
+        "k": "ghen",
+        "v": 80,
+        "why": "thấy Điền Thư Dao dùng đồ xa xỉ",
+        "t": "7",
+        "e": "ghenUp",
+        "c": "sec",
+        "w": 188,
+        "mk": 1
+       },
+       "__mkL": {
+        "k": "ghen",
+        "v": 80
+       },
+       "emoH": [
+        {
+         "k": "ghen",
+         "v": 16,
+         "why": "Sử Tịnh Sơ múa được Hoàng thượng khen",
+         "w": 186,
+         "c": "sec",
+         "e": "ghenUp"
+        },
+        {
+         "k": "ghen",
+         "v": 16,
+         "why": "Tống Quân Dao múa được Hoàng thượng khen",
+         "w": 186,
+         "c": "sec",
+         "e": "ghenUp"
+        },
+        {
+         "k": "buon",
+         "v": 34,
+         "why": "bị ngươi làm nhục",
+         "w": 186,
+         "c": "sec",
+         "e": "slight"
+        },
+        {
+         "k": "ghen",
+         "v": 16,
+         "why": "Điền Thư Dao múa được Hoàng thượng khen",
+         "w": 186,
+         "c": "sec",
+         "e": "ghenUp"
+        },
+        {
+         "k": "vui",
+         "v": 26,
+         "why": "được Nhâm Vương Tịch Lam đối đãi tử tế",
+         "w": 186,
+         "c": "sec",
+         "e": "gift"
+        },
+        {
+         "k": "buon",
+         "v": 20,
+         "why": "cây cảnh, chim cá trong phòng bỏ bê",
+         "w": 186,
+         "c": "sec"
+        }
+       ],
+       "wd": {
+        "tram": {
+         "k": "tram_dong",
+         "from": "buy",
+         "iu": 5037
+        },
+        "y": {
+         "k": "y_vanthuy",
+         "src": "may",
+         "fab": "luahang",
+         "d": "Tháng giêng, năm thứ sáu, hạ tuần",
+         "iu": 17030
+        }
+       },
+       "wdK0": 1,
+       "wdk": {
+        "tram_hoalua": 1,
+        "y_hoanho": 1,
+        "y_saxanh": 1,
+        "thoa_diep": 1,
+        "hd_dao": 1,
+        "y_vanthuy": 1,
+        "tram_ngoclan": 1,
+        "y_tramnep": 1,
+        "tram_hong": 1,
+        "boodieu": 1,
+        "tram_phithuy": 1,
+        "y_chimen": 1,
+        "hd_diep": 1,
+        "y_haiduong": 1,
+        "tramngoc": 1,
+        "tram_dong": 1,
+        "y_lan": 1
+       },
+       "staff": [
+        {
+         "fc": "face-eunuch-19",
+         "fk": "eun0",
+         "sid": 228,
+         "name": "Thiệu Kính Trung",
+         "role": "eunuch",
+         "face": 7,
+         "age": 29,
+         "fe": 0,
+         "loyal": 100,
+         "spyFor": "me",
+         "lover": 74,
+         "af": {
+          "6": 17,
+          "74": 75,
+          "80": 31,
+          "173": -8,
+          "me": 10
+         },
+         "org": "con nhà buôn ở kinh thành",
+         "net": [
+          "Nhiều chuyện",
+          "Rộng lượng",
+          "Vì mình"
+         ],
+         "imp": "mắt sáng, nhanh nhẹn",
+         "kn": 1,
+         "rk": 2,
+         "nr": {
+          "o": "eun",
+          "r": "eun_len",
+          "n": 7,
+          "k": -1,
+          "t": 63,
+          "h": 6,
+          "hs": -1,
+          "hb": 0,
+          "c": 173,
+          "e": "bị chèn ép",
+          "x": 0,
+          "l": [
+           [
+            4,
+            1
+           ],
+           [
+            5,
+            1
+           ],
+           [
+            6,
+            -1
+           ]
+          ],
+          "cn": "Lão Bảo Tử",
+          "rc": "",
+          "hp": []
+         },
+         "tin": 100,
+         "__feelMig": 1,
+         "__mkAt": 2988,
+         "trong": [
+          "Nhân",
+          "Khiêm"
+         ],
+         "fid": "eunuch:u23",
+         "mlike": "art:y",
+         "dis": [
+          "art:nau"
+         ],
+         "fcKeep": 1,
+         "eaX": {
+          "k": null,
+          "n": 0
+         },
+         "sac": 54,
+         "tai": 11,
+         "duc": 34,
+         "tamco": 25,
+         "danh": 14,
+         "suc": 100,
+         "bac": 103,
+         "mp": 56,
+         "mt": {},
+         "trM": {
+          "k": 28,
+          "o": {
+           "Khiêm": -0.173,
+           "Nhân": -0.009000000000000008
+          },
+          "w": 183
+         },
+         "khScar": 0,
+         "khTmp": 0,
+         "khSw": {
+          "b": 0
+         },
+         "inv": [
+          {
+           "k": "aldau0",
+           "from": "noivu",
+           "d": 61,
+           "u": 6
+          },
+          {
+           "k": "thanden",
+           "from": "noivu",
+           "d": 61
+          },
+          {
+           "k": "vaibong",
+           "from": "noivu",
+           "d": 62
+          },
+          {
+           "k": "aldau0",
+           "from": "noivu",
+           "d": 62,
+           "u": 6
+          }
+         ],
+         "tho": 70,
+         "thoM": 9,
+         "thoO": 6,
+         "invS": [
+          {
+           "k": "aldau0",
+           "from": "noivu",
+           "u": 6,
+           "n": 9,
+           "d": 56,
+           "d0": 43
+          }
+         ],
+         "intel": [
+          4,
+          4,
+          4
+         ],
+         "emo": null,
+         "emoH": [
+          {
+           "k": "vui",
+           "v": 25,
+           "why": "được chủ đối đãi tử tế",
+           "w": 177,
+           "c": "sec",
+           "e": "loyalUp"
+          },
+          {
+           "k": "choang",
+           "v": 40,
+           "why": "bị Sử Tịnh Sơ tát",
+           "w": 177,
+           "c": "pub",
+           "e": "dazed"
+          }
+         ],
+         "__mkL": null,
+         "mk": [],
+         "mgH": {
+          "null": 8.52
+         },
+         "mgHv": {
+          "null": "n/7/1.5"
+         },
+         "exCd": 0,
+         "lvCd": 56,
+         "proud": 0,
+         "ill": {
+          "k": "matngu",
+          "st": 1,
+          "known": true
+         },
+         "pilN": 3,
+         "slap": null
+        },
+        {
+         "fc": "face-maid-22",
+         "fk": "maid",
+         "sid": 292,
+         "name": "Tô Cầm Nhi",
+         "role": "maid",
+         "face": 21,
+         "hue": 0,
+         "age": 21,
+         "loyal": 84,
+         "spyFor": null,
+         "lover": null,
+         "af": {
+          "74": 59,
+          "80": -8
+         },
+         "org": "con nhà buôn ở kinh thành",
+         "net": [
+          "Kín đáo",
+          "Thực dụng",
+          "Thực tế"
+         ],
+         "imp": "khéo nói, nhanh tay",
+         "kn": 1,
+         "trouble": 167,
+         "pen": null,
+         "sac": 53,
+         "tai": 16,
+         "duc": 43,
+         "tamco": 15,
+         "danh": 10,
+         "suc": 100,
+         "bac": 41,
+         "mp": 11,
+         "rk": 3,
+         "nr": {
+          "o": "cnv",
+          "r": "cnv_mat",
+          "n": 5,
+          "k": -1,
+          "t": 66,
+          "h": 9,
+          "hs": 0,
+          "hb": 0,
+          "c": 80,
+          "e": "Chủ ghen",
+          "x": 0,
+          "l": [
+           [
+            4,
+            -1
+           ]
+          ],
+          "cn": "Đào Diệp",
+          "rc": "",
+          "hp": []
+         },
+         "tin": 96,
+         "__feelMig": 1,
+         "__mkAt": 2988,
+         "trong": [
+          "Kiệm",
+          "Trung"
+         ],
+         "fid": "maid:m47",
+         "mlike": "art:cam",
+         "dis": [
+          "art:nau",
+          "kd:Trang sức"
+         ],
+         "khScar": 0,
+         "khTmp": 0,
+         "khSw": {
+          "b": 0
+         },
+         "fcKeep": 1,
+         "eaX": {
+          "k": null,
+          "n": 0
+         },
+         "mt": {},
+         "emo": null,
+         "emoH": [
+          {
+           "k": "vui",
+           "v": 25,
+           "why": "được chủ đối đãi tử tế",
+           "w": 186,
+           "c": "sec",
+           "e": "loyalUp"
+          }
+         ],
+         "__mkL": null,
+         "mk": [],
+         "lvCd": 62,
+         "proud": 0,
+         "inv": [
+          {
+           "k": "thanden",
+           "from": "noivu",
+           "d": 61
+          },
+          {
+           "k": "vaibong",
+           "from": "noivu",
+           "d": 62
+          },
+          {
+           "k": "aldau0",
+           "from": "noivu",
+           "d": 62,
+           "u": 6
+          },
+          {
+           "k": "tragoi",
+           "from": "noivu",
+           "d": 62
+          }
+         ],
+         "tho": 54,
+         "thoM": 6,
+         "thoO": 2,
+         "mgH": {
+          "null": 8.81
+         },
+         "mgHv": {
+          "null": "n/7/1.5"
+         },
+         "exCd": 0,
+         "spc": {
+          "sung": -0.2
+         },
+         "sung": 5,
+         "trM": {
+          "k": 28,
+          "o": {
+           "Trung": 0.175
+          },
+          "w": 186
+         },
+         "intel": [
+          25
+         ],
+         "cz": {
+          "c57.832": {
+           "w": 173,
+           "dt": "T8/5 hạ tuần",
+           "q": 832,
+           "by": "30",
+           "to": "s292",
+           "a": "muachuoc",
+           "s": -1,
+           "y": {
+            "k": "nong"
+           },
+           "n": "mua chuộc"
+          }
+         },
+         "invS": [],
+         "seek": {
+          "from": 61,
+          "until": 64,
+          "used": 0
+         },
+         "thcAt": 62
+        }
+       ],
+       "gUc": 0.313,
+       "gcc": 0.722,
+       "tmMig": 1,
+       "evc": {
+        "1": {
+         "mc": 3,
+         "vp": 1
+        },
+        "2": {
+         "vp": 2
+        },
+        "3": {},
+        "4": {
+         "vp": 5
+        },
+        "5": {
+         "vp": 5
+        },
+        "6": {},
+        "7": {},
+        "8": {
+         "vp": 6
+        },
+        "9": {
+         "vp": 1
+        },
+        "10": {
+         "vp": 7
+        },
+        "19": {
+         "vp": 3
+        },
+        "20": {
+         "uh": 3
+        },
+        "22": {},
+        "23": {},
+        "24": {
+         "vp": 2
+        },
+        "25": {},
+        "26": {
+         "vp": 4
+        },
+        "27": {
+         "vo": 3
+        },
+        "29": {
+         "vp": 4
+        },
+        "30": {
+         "mc": 2
+        }
+       },
+       "j95h": [
+        {
+         "k": "vuon",
+         "s": [
+          10,
+          15,
+          25,
+          5
+         ],
+         "a": "poem"
+        },
+        {
+         "k": "tyv",
+         "s": [
+          10,
+          30,
+          15,
+          0
+         ],
+         "a": "herb"
+        },
+        {
+         "k": "vuon",
+         "s": [
+          5,
+          30,
+          15,
+          0
+         ],
+         "a": "paint"
+        }
+       ],
+       "j95r": 3,
+       "trong": [
+        "Nghĩa",
+        "Sỉ"
+       ],
+       "palLone": 0,
+       "resHead": null,
+       "resHall": null,
+       "pal": 8,
+       "tl2": {
+        "wk": 186,
+        "k": "moc",
+        "rec": {
+         "makeup": false,
+         "score": 0,
+         "look": null,
+         "k": "moc",
+         "kh": 1
+        }
+       },
+       "tlSeen": {
+        "wk": 186,
+        "h": {
+         "v20": 1,
+         "v4": 1,
+         "v5": 1,
+         "v6": 1,
+         "v7": 1,
+         "v8": 1,
+         "v9": 1,
+         "v10": 1,
+         "v19": 1,
+         "v22": 1,
+         "v23": 1,
+         "v24": 1,
+         "v26": 1,
+         "v29": 1,
+         "v30": 1,
+         "v1": 1
+        }
+       },
+       "dsn": {
+        "4": {
+         "w": 186,
+         "sig": "giaygam|mk:vua|ngocboi_r2|tram_dong|tuithom_r2|vongngoc_r2|y_hac",
+         "sc": 177,
+         "bud": 110,
+         "vj": [],
+         "by": "cùng chỗ"
+        },
+        "5": {
+         "w": 186,
+         "sig": "mk:dep|ngocboi_r4|tram_maudon|tuithom_r4|vongngoc|y_maudon",
+         "sc": 226,
+         "bud": 178,
+         "vj": [],
+         "by": "cùng chỗ"
+        },
+        "7": {
+         "w": 186,
+         "sig": "dientu_thuy|hoataivang|ngocboi_r5|pet:lyngu|tuithom_r5|vongngoc|y_maudon",
+         "sc": 244,
+         "bud": 218,
+         "vj": [],
+         "by": "cùng chỗ"
+        },
+        "8": {
+         "w": 186,
+         "sig": "mk:vua|ngocboi_r1|tram_dong|tuithom_r1|vongngoc_r2|y_cungnu",
+         "sc": 92,
+         "bud": 57,
+         "vj": [
+          "ngocboi_r1",
+          "tuithom_r1",
+          "vongngoc_r2"
+         ],
+         "by": "cùng chỗ"
+        },
+        "9": {
+         "w": 186,
+         "sig": "mk:vua|ngocboi_r1|tram_dong|tuithom_r1|vongngoc_r1|y_cungnu",
+         "sc": 79,
+         "bud": 57,
+         "vj": [
+          "tuithom_r1",
+          "ngocboi_r1",
+          "vongngoc_r1"
+         ],
+         "by": "cùng chỗ"
+        },
+        "10": {
+         "w": 186,
+         "sig": "mk:tuyet|tram_dong|vongngoc|y_hoanho",
+         "sc": 95,
+         "bud": 57,
+         "vj": [],
+         "by": "cùng chỗ"
+        },
+        "19": {
+         "w": 186,
+         "sig": "mk:vua|ngocboi_r2|pet:sutu|thoa_vang|tuithom_r2|vongngoc_r2|y_vanthuy",
+         "sc": 157,
+         "bud": 110,
+         "vj": [],
+         "by": "cùng chỗ"
+        },
+        "20": {
+         "w": 186,
+         "sig": "mk:tuyet|vongngoc|y_hoanho",
+         "sc": 86,
+         "bud": 57,
+         "vj": [],
+         "by": "cùng chỗ"
+        },
+        "22": {
+         "w": 186,
+         "sig": "mk:vua|tram_dong|vongngoc|y_hoanho",
+         "sc": 67,
+         "bud": 57,
+         "vj": [],
+         "by": "cùng chỗ"
+        },
+        "23": {
+         "w": 186,
+         "sig": "mk:vung|ngocboi_r3|thoa_vang|tuithom_r3|vongngoc_r3|y_vanthuy",
+         "sc": 177,
+         "bud": 142,
+         "vj": [],
+         "by": "cùng chỗ"
+        },
+        "24": {
+         "w": 186,
+         "sig": "mk:vua|ngocboi_r1|tram_dong|tuithom_r1|vongngoc_r1|y_hoanho",
+         "sc": 91,
+         "bud": 90,
+         "vj": [],
+         "by": "cùng chỗ"
+        },
+        "25": {
+         "w": 152,
+         "sig": "ngocboi_r2|tram_ngoclan|y_maimai",
+         "sc": 61,
+         "bud": 57,
+         "vj": [
+          "ngocboi_r2"
+         ],
+         "by": "cùng chỗ"
+        },
+        "27": {
+         "w": 184,
+         "sig": "mk:vung|tram_dong|vongngoc|y_hoanho",
+         "sc": 59,
+         "bud": 57,
+         "vj": [],
+         "by": "cùng chỗ"
+        },
+        "30": {
+         "w": 186,
+         "sig": "dientu_thuy|mk:dep|ngocboi_r4|pet:linhmieu|tuithom_r3|vongngoc_r4|y_vanthuy",
+         "sc": 256,
+         "bud": 178,
+         "vj": [],
+         "by": "cùng chỗ"
+        }
+       },
+       "lot": {
+        "i": 0,
+        "lv": 0,
+        "dom": "Sủng"
+       },
+       "fc": "face-consort-32",
+       "fk": "ct1",
+       "fcKeep": 1,
+       "shelf": {
+        "g": {
+         "hoa": {
+          "k": "thuytien",
+          "pc": 18,
+          "pz": 0,
+          "shw": 65,
+          "iu": 5350
+         }
+        },
+        "sd": 1
+       },
+       "shSet": {
+        "ids": [],
+        "on": {},
+        "w": 186,
+        "ev": []
+       },
+       "dhSn": [
+        3,
+        0,
+        0
+       ],
+       "girl": 1,
+       "eaX": {
+        "k": null,
+        "n": 0
+       },
+       "eaK": 57,
+       "mck": {
+        "1": [
+         "ghen|thấy Điền Thư Dao dùng đồ xa xỉ"
+        ],
+        "7": [
+         "ghen|thấy Tăng Mạn Nhu dùng đồ xa xỉ",
+         "vui|phòng ốc bày biện vừa ý"
+        ],
+        "8": [
+         "ghen|thấy Điền Thư Dao dùng đồ xa xỉ"
+        ],
+        "9": [
+         "ghen|thấy Điền Thư Dao dùng đồ xa xỉ"
+        ],
+        "19": [
+         "ghen|Chung Hoán Khê được thị tẩm"
+        ],
+        "22": [
+         "ghen|thấy Điền Thư Dao dùng đồ xa xỉ"
+        ],
+        "23": [
+         "ghen|Tống Quân Dao múa được Hoàng thượng khen"
+        ],
+        "25": [
+         "ghen|thấy Điền Thư Dao dùng đồ xa xỉ"
+        ]
+       },
+       "prSeen": 3,
+       "ky": {
+        "m": 0,
+        "cd": 182,
+        "seen": {
+         "kyc-vat-014": 59,
+         "kyc-ma-006": 61,
+         "kyc-sv-020": 63,
+         "kyc-th-002": 65,
+         "kyc-sv-005": 67,
+         "kyc-sv-018": 69,
+         "ma_giao": 71,
+         "kyc-th-004": 74,
+         "kyc-sv-003": 76,
+         "sv_den": 78,
+         "vat_thu": 80,
+         "kyc-th-001": 82,
+         "kyc-sv-019": 84,
+         "kyc-sv-016": 86,
+         "kyc-sv-008": 90,
+         "kyc-th-006": 92,
+         "kyc-sv-001": 96,
+         "sv_tre": 98,
+         "kyc-sv-007": 100,
+         "th_kinh": 102,
+         "kyc-th-003": 104,
+         "kyc-sv-010": 106,
+         "kyc-ma-008": 108,
+         "kyc-vat-012": 110,
+         "kyc-ma-002": 112,
+         "kyc-sv-006": 115,
+         "ma_ty": 117,
+         "ma_nhac": 119,
+         "kyc-sv-017": 122,
+         "kyc-sv-004": 125,
+         "de_mua": 127,
+         "kyc-sv-009": 130,
+         "kyc-th-005": 139,
+         "kyc-de-007": 146,
+         "de_but": 149,
+         "kyc-de-005": 152,
+         "vat_chung": 155,
+         "kyc-sv-012": 179
+        },
+        "got": [
+         "kyc-vat-014",
+         "kyc-ma-006",
+         "kyc-sv-020",
+         "kyc-th-002",
+         "kyc-sv-005",
+         "kyc-sv-018",
+         "ma_giao",
+         "kyc-th-004",
+         "kyc-sv-003",
+         "sv_den",
+         "vat_thu",
+         "kyc-th-001",
+         "kyc-sv-019",
+         "kyc-sv-016",
+         "kyc-sv-008",
+         "kyc-th-006",
+         "kyc-sv-001",
+         "sv_tre",
+         "kyc-sv-007",
+         "th_kinh",
+         "kyc-th-003",
+         "kyc-sv-010",
+         "kyc-ma-008",
+         "kyc-vat-012",
+         "kyc-ma-002",
+         "kyc-sv-006",
+         "ma_ty",
+         "ma_nhac",
+         "kyc-sv-017",
+         "kyc-sv-004",
+         "de_mua",
+         "kyc-sv-009",
+         "kyc-th-005",
+         "kyc-de-007",
+         "de_but",
+         "kyc-de-005",
+         "vat_chung",
+         "kyc-sv-012"
+        ],
+        "last": 718
+       },
+       "ocq": {
+        "1": 182,
+        "2": 86,
+        "4": 186,
+        "5": 176,
+        "6": 186,
+        "7": 186,
+        "8": 188,
+        "9": 188,
+        "10": 186,
+        "19": 186,
+        "20": 185,
+        "22": 180,
+        "23": 186,
+        "24": 185,
+        "25": 183,
+        "26": 184,
+        "27": 184,
+        "29": 177,
+        "30": 186,
+        "me": 186
+       },
+       "chat": {},
+       "chatM": 62,
+       "clan": "Tể tướng",
+       "toilTip": {
+        "wk": 179,
+        "until": 186,
+        "from": "Liêu Hoán Bích"
+       },
+       "shn": {
+        "2": {
+         "w": 84,
+         "lv": 2,
+         "n": 3,
+         "wi": 0,
+         "vr": 2,
+         "sig": "hoadieu|saotruc|sonthuy",
+         "by": "tận mắt",
+         "pf": 1
+        },
+        "4": {
+         "w": 181,
+         "lv": 2,
+         "n": 3,
+         "wi": 0,
+         "vr": 1,
+         "sig": "sonthuy|thaiho|tranhco",
+         "by": "tin đồn",
+         "pf": 0
+        },
+        "5": {
+         "w": 173,
+         "lv": 1,
+         "n": 3,
+         "wi": 1,
+         "vr": 0,
+         "sig": "haiduong~|remchau|tp-tho2",
+         "by": "tận mắt",
+         "pf": 1
+        },
+        "6": {
+         "w": 186,
+         "lv": 1,
+         "n": 2,
+         "wi": 1,
+         "vr": 0,
+         "sig": "dantranh|lanquy~",
+         "by": "tận mắt",
+         "pf": 1
+        },
+        "8": {
+         "w": 173,
+         "lv": 0,
+         "n": 1,
+         "wi": 1,
+         "vr": 0,
+         "sig": "cuc~",
+         "by": "tận mắt",
+         "pf": 1
+        },
+        "9": {
+         "w": 186,
+         "lv": 2,
+         "n": 2,
+         "wi": 0,
+         "vr": 1,
+         "sig": "nhuy|tp-tho2",
+         "by": "ghé chơi",
+         "pf": 1
+        },
+        "10": {
+         "w": 183,
+         "lv": 2,
+         "n": 2,
+         "wi": 1,
+         "vr": 1,
+         "sig": "kinhvv|lanquy~",
+         "by": "tin đồn",
+         "pf": 0
+        },
+        "20": {
+         "w": 186,
+         "lv": 3,
+         "n": 4,
+         "wi": 0,
+         "vr": 2,
+         "sig": "cungdang|tp-tranh2|tranhco|tranhco",
+         "by": "tra xét",
+         "pf": 1
+        },
+        "23": {
+         "w": 186,
+         "lv": 1,
+         "n": 3,
+         "wi": 1,
+         "vr": 0,
+         "sig": "cuc~|holo|huongtram",
+         "by": "tận mắt",
+         "pf": 1
+        },
+        "24": {
+         "w": 184,
+         "lv": 2,
+         "n": 3,
+         "wi": 0,
+         "vr": 1,
+         "sig": "thaiho|tranhco|tranhco",
+         "by": "tin đồn",
+         "pf": 0
+        },
+        "25": {
+         "w": 156,
+         "lv": 1,
+         "n": 2,
+         "wi": 1,
+         "vr": 1,
+         "sig": "thuytien~|tranhco",
+         "by": "tra xét",
+         "pf": 1
+        },
+        "29": {
+         "w": 184,
+         "lv": 1,
+         "n": 3,
+         "wi": 1,
+         "vr": 1,
+         "sig": "lanquy~|maitrang~|thuytien~",
+         "by": "tin đồn",
+         "pf": 0
+        }
+       },
+       "shR": {
+        "1": 182,
+        "2": 84,
+        "4": 119,
+        "5": 173,
+        "6": 186,
+        "7": 181,
+        "8": 173,
+        "9": 186,
+        "10": 119,
+        "19": 186,
+        "20": 186,
+        "22": 181,
+        "23": 186,
+        "24": 165,
+        "25": 124,
+        "26": 186,
+        "27": 173,
+        "30": 186
+       },
+       "mgH": {
+        "hat": 8.69,
+        "mua": 9.74,
+        "hoadien": 10.22,
+        "le": 10.04,
+        "theu": 9.31,
+        "huong": 9.52,
+        "tho": 10.3,
+        "dan": 7.34
+       },
+       "mgHv": {
+        "hat": "n/7/1.5",
+        "mua": "n/7/1.5",
+        "hoadien": "n/7/1.4",
+        "le": "n/7/1.4",
+        "theu": "n/7/1.4",
+        "huong": "n/7/1.5",
+        "tho": "n/7/1.4",
+        "dan": "n/7/1.5"
+       },
+       "stip": {
+        "sung0": 48,
+        "rk0": 3,
+        "skT": 59,
+        "tip": 28,
+        "tips": 1,
+        "meek": 59
+       },
+       "bonusPay": 0,
+       "midChk": 0,
+       "midBribe": null,
+       "khPois": 0,
+       "tho": 47,
+       "thoM": 2,
+       "thoO": 5,
+       "schLast": 0,
+       "dad": 45,
+       "luxRep": 0,
+       "rcpLv": {
+        "cam": 2,
+        "ky": 0,
+        "thi": 5,
+        "hoa": 1,
+        "vu": 0,
+        "y": 2,
+        "theu": 2,
+        "nau": 0
+       },
+       "ex": {
+        "to": 4
+       },
+       "dh": {
+        "c_th": {
+         "n": 4,
+         "cur": 0
+        },
+        "a_thinh": {
+         "n": 1,
+         "cur": 1,
+         "last": 78
+        },
+        "a_nhan": {
+         "n": 3
+        },
+        "nights": {
+         "n": 0,
+         "at": [
+          "Tháng hai, năm thứ tư",
+          "Tháng mười một, năm thứ năm"
+         ],
+         "i": 1,
+         "pick": "gSung"
+        },
+        "l_thi": {
+         "n": 0,
+         "at": [
+          "Tháng hai, năm thứ năm",
+          "Tháng hai, năm thứ năm"
+         ],
+         "i": 1,
+         "pick": "tai"
+        },
+        "a_doc": {
+         "n": 1
+        }
+       },
+       "dhV": 2,
+       "pregMismatch": false,
+       "trueFather": null,
+       "wdSeen": {
+        "1": {
+         "st": "under",
+         "it": "tramphuong|y_maudon",
+         "w": 105,
+         "by": "Đáp ứng Lâm Mặc Lan",
+         "sure": false
+        },
+        "4": {
+         "st": "over",
+         "it": "tram_dong|y_hac",
+         "w": 186,
+         "by": "Đáp ứng Lữ Lạc Tuyết",
+         "sure": false
+        },
+        "6": {
+         "st": "ok",
+         "it": "thoa_diep|y_lan",
+         "w": 165,
+         "by": "Đáp ứng Phú Sát Nhạn Hồi",
+         "sure": true
+        },
+        "7": {
+         "st": "under",
+         "it": "tram_phithuy|y_chimen",
+         "w": 123,
+         "by": "Ý thường tại Phú Sát Ngọc Thù",
+         "sure": true
+        },
+        "9": {
+         "st": "ok",
+         "it": "tram_dong|y_saxanh",
+         "w": 161,
+         "by": "Tần Giang Bão Cầm",
+         "sure": true
+        },
+        "10": {
+         "st": "ok",
+         "it": "tramngoc|y_hoanho",
+         "w": 153,
+         "by": "Hoàng hậu Lữ Ngưng Sương",
+         "sure": true
+        },
+        "19": {
+         "st": "ok",
+         "it": "tram_phithuy|y_haiduong",
+         "w": 120,
+         "by": "Gia phi Tống Quân Dao",
+         "sure": false
+        },
+        "22": {
+         "st": "under",
+         "it": "tram_dong|y_saxanh",
+         "w": 162,
+         "by": "Thường tại Vu Kiều Nguyệt",
+         "sure": true
+        },
+        "25": {
+         "st": "ok",
+         "it": "tram_dong|y_vanthuy",
+         "w": 78,
+         "by": "Thường tại Giang Bão Cầm",
+         "sure": false
+        },
+        "26": {
+         "st": "under",
+         "it": "tram_dong|y_vanthuy",
+         "w": 156,
+         "by": "Đáp ứng Tăng Mạn Nhu",
+         "sure": true
+        },
+        "27": {
+         "st": "ok",
+         "it": "tram_dong|y_vanthuy",
+         "w": 150,
+         "by": "Tần Giang Bão Cầm",
+         "sure": false
+        },
+        "29": {
+         "st": "ok",
+         "it": "tram_ngoclan|y_hoanho",
+         "w": 177,
+         "by": "Tần Giang Bão Cầm",
+         "sure": true
+        },
+        "30": {
+         "st": "under",
+         "it": "tram_phithuy|y_vanthuy",
+         "w": 165,
+         "by": "Ý thường tại Phú Sát Ngọc Thù",
+         "sure": true
+        },
+        "me": {
+         "st": "over",
+         "it": "tram_dong|",
+         "w": 84,
+         "by": "Đáp ứng Tào Nghi Tu",
+         "sure": false
+        }
+       },
+       "wdI": 1,
+       "hdI": 1,
+       "rgS": "quyen",
+       "kmEmpDay": 60,
+       "slightAt": 358,
+       "toilGrudge": {
+        "v9": {
+         "wk": 61,
+         "name": "Lâm Mặc Lan"
+        },
+        "v23": {
+         "wk": 62,
+         "name": "Liêu Hoán Bích"
+        },
+        "v6": {
+         "wk": 67,
+         "name": "Tống Quân Dao"
+        },
+        "v26": {
+         "wk": 74,
+         "name": "Hứa Hàm Tiếu"
+        },
+        "v27": {
+         "wk": 83,
+         "name": "Cố Lục Châu"
+        },
+        "v24": {
+         "wk": 141,
+         "name": "Hạ Phỉ Thúy"
+        },
+        "v10": {
+         "wk": 81,
+         "name": "Sử Tịnh Sơ"
+        },
+        "v30": {
+         "wk": 152,
+         "name": "Nhâm Vương Tịch Lam"
+        }
+       },
+       "occ": {
+        "1": 0.784,
+        "2": 0.002,
+        "4": 0.778,
+        "5": 0.672,
+        "6": 0.668,
+        "7": 0.998,
+        "8": 0.669,
+        "9": 0.442,
+        "10": 0.559,
+        "19": 0.221,
+        "20": 0.229,
+        "22": 0.225,
+        "23": 0.671,
+        "24": 0.003,
+        "25": 0.779,
+        "26": 0.338,
+        "27": 0.337,
+        "29": 0.779,
+        "30": 0.777,
+        "me": 0.552
+       },
+       "invS": [
+        {
+         "k": "y_hoanho",
+         "src": "may",
+         "fab": "vaibong",
+         "n": 3,
+         "d": "Tháng chạp, năm thứ hai, hạ tuần",
+         "d0": "Tháng chạp, năm thứ hai, hạ tuần"
+        },
+        {
+         "k": "y_saxanh",
+         "src": "may",
+         "fab": "vaibong",
+         "n": 1,
+         "d": "Tháng chín, năm thứ hai, hạ tuần",
+         "d0": "Tháng chín, năm thứ hai, hạ tuần"
+        },
+        {
+         "k": "y_vanthuy",
+         "src": "may",
+         "fab": "luahang",
+         "n": 17,
+         "d": null,
+         "d0": null
+        },
+        {
+         "k": "alnen1",
+         "from": "noivu",
+         "n": 6,
+         "d": 48,
+         "d0": 48
+        }
+       ],
+       "cz": {
+        "c21.220": {
+         "w": 63,
+         "dt": "T11/2 thượng tuần",
+         "q": 220,
+         "by": "26",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "nong"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c21.225": {
+         "w": 64,
+         "dt": "T11/2 trung tuần",
+         "q": 225,
+         "by": "27",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "oan"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c29.354": {
+         "w": 87,
+         "dt": "T6/3 thượng tuần",
+         "q": 354,
+         "by": "emp",
+         "to": "28",
+         "a": "punish",
+         "s": -1,
+         "y": {
+          "k": "toi",
+          "x": "lục lọi cung phi tần"
+         },
+         "n": "cấm túc",
+         "d": "confine"
+        },
+        "c30.374": {
+         "w": 90,
+         "dt": "T7/3 thượng tuần",
+         "q": 374,
+         "by": "24",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "nong"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c31.386": {
+         "w": 95,
+         "dt": "T7/3 hạ tuần",
+         "q": 386,
+         "by": "emp",
+         "to": "28",
+         "a": "punish",
+         "s": -1,
+         "y": {
+          "k": "toi",
+          "x": "giả bệnh khi quân"
+         },
+         "n": "cấm túc",
+         "d": "confine"
+        },
+        "c32.408": {
+         "w": 96,
+         "dt": "T9/3 thượng tuần",
+         "q": 408,
+         "by": "7",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "nong"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c33.425": {
+         "w": 99,
+         "dt": "T10/3 thượng tuần",
+         "q": 425,
+         "by": "7",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "nong"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c35.461": {
+         "w": 106,
+         "dt": "T12/3 trung tuần",
+         "q": 461,
+         "by": "26",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "nong"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c36.481": {
+         "w": 110,
+         "dt": "T1/4 hạ tuần",
+         "q": 481,
+         "by": "19",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "oan"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c37.494": {
+         "w": 112,
+         "dt": "T2/4 trung tuần",
+         "q": 494,
+         "by": "22",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "net",
+          "x": "Ân cần"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c41.560": {
+         "w": 123,
+         "dt": "T6/4 thượng tuần",
+         "q": 560,
+         "by": "4",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "nong"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c43.612": {
+         "w": 130,
+         "dt": "T8/4 trung tuần",
+         "q": 612,
+         "by": "22",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "nong"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c44.635": {
+         "w": 133,
+         "dt": "T9/4 trung tuần",
+         "q": 635,
+         "by": "25",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "nong"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c47.678": {
+         "w": 141,
+         "dt": "T12/4 thượng tuần",
+         "q": 678,
+         "by": "6",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "nong"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c49.715": {
+         "w": 148,
+         "dt": "T2/5 trung tuần",
+         "q": 715,
+         "by": "9",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "ghen"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c50.739": {
+         "w": 152,
+         "dt": "T3/5 hạ tuần",
+         "q": 739,
+         "by": "30",
+         "to": "28",
+         "a": "spy",
+         "s": -1,
+         "y": {
+          "k": "nong"
+         },
+         "n": "spy",
+         "d": "spy"
+        },
+        "c55.809": {
+         "w": 167,
+         "dt": "T7/5 hạ tuần",
+         "q": 809,
+         "by": "24",
+         "to": "28",
+         "a": "ally",
+         "s": 1,
+         "y": {
+          "k": "net",
+          "x": "Kín đáo"
+         },
+         "n": "Kết giao",
+         "d": "ally",
+         "r": "ok"
+        },
+        "c57.836": {
+         "w": 171,
+         "dt": "T9/5 thượng tuần",
+         "q": 836,
+         "by": "30",
+         "to": "28",
+         "a": "gift",
+         "s": 1,
+         "y": {
+          "k": "net",
+          "x": "Lạnh lùng"
+         },
+         "n": "tặng quà",
+         "d": "gift",
+         "x": "Yến sào"
+        },
+        "c58.846": {
+         "w": 176,
+         "dt": "T9/5 hạ tuần",
+         "q": 846,
+         "by": "emp",
+         "to": "28",
+         "a": "punish",
+         "s": -1,
+         "y": {
+          "k": "toi",
+          "x": "giả bệnh khi quân"
+         },
+         "n": "cấm túc",
+         "d": "confine"
+        },
+        "c59.867": {
+         "w": 177,
+         "dt": "T11/5 thượng tuần",
+         "q": 867,
+         "by": "4",
+         "to": "28",
+         "a": "gift",
+         "s": 1,
+         "y": {
+          "k": "net",
+          "x": "Lạnh lùng"
+         },
+         "n": "tặng quà",
+         "d": "gift",
+         "x": "Áo lụa Hàng Châu vân thủy"
+        },
+        "c61.907": {
+         "w": 183,
+         "dt": "T1/6 thượng tuần",
+         "q": 907,
+         "by": "4",
+         "to": "28",
+         "a": "gift",
+         "s": 1,
+         "y": {
+          "k": "net",
+          "x": "Lạnh lùng"
+         },
+         "n": "tặng quà",
+         "d": "gift",
+         "x": "Hoa điền hoa đào"
+        },
+        "c61.910": {
+         "w": 183,
+         "dt": "T1/6 thượng tuần",
+         "q": 910,
+         "by": "30",
+         "to": "28",
+         "a": "gift",
+         "s": 1,
+         "y": {
+          "k": "net",
+          "x": "Lạnh lùng"
+         },
+         "n": "tặng quà",
+         "d": "gift",
+         "x": "Túi thơm mẫu đơn"
+        },
+        "c62.929": {
+         "w": 186,
+         "dt": "T2/6 thượng tuần",
+         "q": 929,
+         "by": "30",
+         "to": "28",
+         "a": "gift",
+         "s": 1,
+         "y": {
+          "k": "net",
+          "x": "Lạnh lùng"
+         },
+         "n": "tặng quà",
+         "d": "gift",
+         "x": "Hoa điền hoa đào"
+        }
+       },
+       "mem": {
+        "4": [
+         {
+          "d": "gift",
+          "s": 1,
+          "g": 7.1,
+          "g0": 8,
+          "k": 0,
+          "n": 1,
+          "w": 183,
+          "dt": "T1/6 thượng tuần",
+          "x": "Hoa điền hoa đào",
+          "c": "c61.907",
+          "pl": "r28"
+         },
+         {
+          "d": "gift",
+          "s": 1,
+          "g": 5.3,
+          "g0": 8,
+          "k": 0,
+          "n": 1,
+          "w": 177,
+          "dt": "T11/5 thượng tuần",
+          "x": "Áo lụa Hàng Châu vân thủy",
+          "c": "c59.867"
+         }
+        ],
+        "6": [
+         {
+          "d": "pmwin",
+          "s": -1,
+          "g": 2.2,
+          "g0": 10,
+          "k": 0,
+          "n": 1,
+          "w": 178,
+          "dt": "T11/5 trung tuần",
+          "x": "Cầm",
+          "pl": "r28"
+         }
+        ],
+        "9": [
+         {
+          "d": "pmplay",
+          "s": 1,
+          "g": 3.3,
+          "g0": 6,
+          "k": 0,
+          "n": 1,
+          "w": 179,
+          "dt": "T11/5 hạ tuần",
+          "x": "Cầm"
+         }
+        ],
+        "30": [
+         {
+          "d": "gift",
+          "s": 1,
+          "g": 8,
+          "g0": 8,
+          "k": 0,
+          "n": 1,
+          "w": 186,
+          "dt": "T2/6 thượng tuần",
+          "x": "Hoa điền hoa đào",
+          "c": "c62.929"
+         },
+         {
+          "d": "gift",
+          "s": 1,
+          "g": 7.1,
+          "g0": 8,
+          "k": 0,
+          "n": 1,
+          "w": 183,
+          "dt": "T1/6 thượng tuần",
+          "x": "Túi thơm mẫu đơn",
+          "c": "c61.910"
+         },
+         {
+          "d": "gift",
+          "s": 1,
+          "g": 3.5,
+          "g0": 8,
+          "k": 0,
+          "n": 1,
+          "w": 171,
+          "dt": "T9/5 thượng tuần",
+          "x": "Yến sào",
+          "c": "c57.836"
+         }
+        ],
+        "emp": [
+         {
+          "d": "confine",
+          "s": -1,
+          "g": 19.6,
+          "g0": 30,
+          "k": 0,
+          "n": 1,
+          "w": 176,
+          "dt": "T9/5 hạ tuần",
+          "c": "c58.846",
+          "ww": 184
+         }
+        ]
+       },
+       "dkeys": [
+        "xx:mk:tuyet|tram_dong|y_cungnu",
+        "xx:mk:dep|tram_dong|y_hoanho",
+        "xx:mk:vua|ngocboi_r1|tram_dong|tuithom_r1|vongngoc_r1|y_vanthuy",
+        "xx:mk:vua|ngocboi_r1|tram_dong|tuithom_r1|vongngoc_r1|y_hoanho",
+        "xx:mk:tuyet|ngocboi_r1|tram_dong|tuithom_r1|vongngoc_r1|y_vanthuy",
+        "xx:mk:vua|ngocboi_r1|tram_dong|tuithom_r1|vongngoc_r1|y_saxanh",
+        "xx:mk:dep|ngocboi_r1|tram_dong|tuithom_r1|vongngoc_r1|y_vanthuy",
+        "xx:mk:dep|ngocboi_r1|tram_ngoclan|tuithom_r1|vongngoc_r1|y_vanthuy",
+        "xx:mk:dep|ngocboi_r1|tram_ngoclan|tuithom_r1|vongngoc_r1|y_hoanho",
+        "xx:mk:vua|ngocboi_r1|tram_ngoclan|tuithom_r1|vongngoc_r1|y_hoanho",
+        "xx:mk:dep|ngocboi_r1|tram_dong|tuithom_r1|vongngoc_r1|y_hoanho",
+        "xx:mk:dep|ngocboi_r1|tram_dong|tuithom_r1|vongngoc_r1|y_cungnu",
+        "xx:mk:tuyet|ngocboi_r1|tram_dong|tuithom_r1|vongngoc_r1|y_cungnu",
+        "xx:mk:dep|ngocboi_r2|tramngoc|tuithom_r2|vongngoc_r2|y_tramnep",
+        "xx:mk:dep|ngocboi_r2|tram_dong|tuithom_r2|vongngoc_r2|y_cungnu",
+        "xx:mk:dep|ngocboi_r2|tram_dong|tuithom_r2|vongngoc|y_vanthuy",
+        "xx:mk:vua|ngocboi_r1|tram_ngoclan|tuithom_r2|vongngoc|y_tramnep",
+        "xx:mk:dep|ngocboi_r1|tram_ngoclan|tuithom_r2|vongngoc|y_vanthuy",
+        "xx:mk:vua|ngocboi_r2|tram_hong|tuithom_r2|vongngoc|y_haiduong",
+        "xx:mk:vua|ngocboi_r2|tram_ngoclan|tuithom_r2|vongngoc|y_haiduong",
+        "xx:mk:vua|ngocboi_r3|tram_hong|tuithom_r3|vongngoc_r3|y_vanthuy",
+        "xx:mk:vung|ngocboi_r3|tram_hong|tuithom_r3|vongngoc_r3|y_vanthuy",
+        "xx:mk:vung|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r3|y_vanthuy",
+        "xx:mk:dep|ngocboi_r3|tram_hong|tuithom_r3|vongngoc_r3",
+        "xx:mk:tuyet|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r3|y_haiduong",
+        "xx:mk:dep|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r3|y_haiduong",
+        "xx:mk:dep|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r3|y_vanthuy",
+        "xx:mk:dep|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r3|y_cungnu",
+        "xx:mk:vua|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r3|y_cungnu",
+        "xx:mk:vua|ngocboi_r3|tram_phithuy|tuithom_r3|vongngoc_r3|y_tramnep",
+        "xx:mk:vua|ngocboi_r3|tram_phithuy|tuithom_r3|vongngoc_r3|y_haiduong",
+        "xx:mk:vung|ngocboi_r3|tram_phithuy|tuithom_r3|vongngoc_r3|y_haiduong",
+        "xx:mk:tuyet|ngocboi_r3|tram_phithuy|tuithom_r3|vongngoc_r3|y_haiduong",
+        "xx:mk:tuyet|ngocboi_r3|tram_phithuy|tuithom_r3|vongngoc_r3|y_vanthuy",
+        "xx:mk:tuyet|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r3|y_cungnu",
+        "xx:mk:vua|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r3|y_vanthuy",
+        "xx:mk:vua|ngocboi_r3|tram_ngoclan|tuithom_r3|vongngoc_r3|y_vanthuy",
+        "xx:mk:vung|ngocboi_r3|tram_ngoclan|tuithom_r3|vongngoc_r3|y_vanthuy",
+        "xx:mk:dep|ngocboi_r3|tram_ngoclan|tuithom_r3|vongngoc_r3|y_vanthuy",
+        "xx:mk:vua|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r2|y_vanthuy",
+        "xx:mk:dep|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r2|y_vanthuy",
+        "xx:mk:vua|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r2|y_maudon",
+        "xx:mk:vua|ngocboi_r3|tram_dong|tuithom_r3|vongngoc_r2|y_haiduong",
+        "xx:mk:dep|ngocboi_r3|pet:sutu|tram_dong|tuithom_r3|vongngoc_r2|y_maudon",
+        "xx:mk:tuyet|ngocboi_r3|pet:sutu|tram_dao|tuithom_r3|vongngoc_r2|y_maudon",
+        "xx:mk:vung|ngocboi_r3|pet:sutu|tram_dao|tuithom_r3|vongngoc_r2|y_maudon",
+        "xx:mk:vung|ngocboi_r3|pet:sutu|tram_hong|tuithom_r3|vongngoc_r2|y_maudon",
+        "xx:mk:tuyet|ngocboi_r3|pet:sutu|tram_dong|tuithom_r3|vongngoc_r2|y_maudon",
+        "xx:mk:dep|ngocboi_r3|pet:sutu|tram_dong|tuithom_r3|vongngoc|y_vanthuy"
+       ],
+       "wrongs": [
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 135,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 137,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "sbribe",
+         "t": null,
+         "w": 1,
+         "at": 140,
+         "x": "mua chuộc người hầu của Thường tại Vu Kiều Nguyệt",
+         "o": 19,
+         "s": 226
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 138,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 139,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 140,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "mlhframe",
+         "t": 8,
+         "w": 1,
+         "at": 143,
+         "x": "vu oan người hầu cung Tăng Mạn Nhu"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 143,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 141,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 141,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 150,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 151,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 154,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "sbribe",
+         "t": null,
+         "w": 1,
+         "at": 161,
+         "x": "mua chuộc người hầu của Tĩnh quý phi Điền Thư Dao",
+         "o": 7,
+         "s": 232
+        },
+        {
+         "k": "sbribe",
+         "t": null,
+         "w": 1,
+         "at": 167,
+         "x": "mua chuộc người hầu của Quý nhân Cố Lục Châu",
+         "o": 27,
+         "s": 264
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 167,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 171,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 173,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 175,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 177,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 180,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 181,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 182,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "sbribe",
+         "t": null,
+         "w": 1,
+         "at": 185,
+         "x": "mua chuộc người hầu của Ý quý nhân Phú Sát Ngọc Thù",
+         "o": 4,
+         "s": 317
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 183,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "trip",
+         "t": 30,
+         "w": 1,
+         "at": 183,
+         "x": "ngáng chân Phi Nhâm Vương Tịch Lam"
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 185,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "sbribe",
+         "t": null,
+         "w": 1,
+         "at": 188,
+         "x": "mua chuộc người hầu của Phi Nhâm Vương Tịch Lam",
+         "o": 30,
+         "s": 316
+        },
+        {
+         "k": "xx",
+         "t": null,
+         "w": 1,
+         "at": 186,
+         "x": "ăn vận xa xỉ quá bổng lộc phẩm mình"
+        },
+        {
+         "k": "ink",
+         "t": 30,
+         "w": 1,
+         "at": 186,
+         "x": "quạt mực lên mặt Phi Nhâm Vương Tịch Lam"
+        }
+       ],
+       "dw": 61,
+       "lk": {
+        "w": 184,
+        "it": {
+         "toc": {
+          "lv": 1,
+          "at": 737,
+          "by": null,
+          "why": "canh"
+         }
+        }
+       },
+       "fi": {
+        "id": 290,
+        "t": "7",
+        "from": "ghen",
+        "k0": 2928,
+        "k1": 3036,
+        "gone": 1
+       },
+       "fakeIll": 0,
+       "ge": {
+        "b": "cn_chu",
+        "st": [
+         "x",
+         "o",
+         "x",
+         "o"
+        ],
+        "cx": [
+         8,
+         0,
+         8,
+         0
+        ],
+        "pull": [
+         4,
+         13,
+         3,
+         0
+        ],
+        "lt": 10,
+        "d0": 40,
+        "en": {
+         "5": "win",
+         "6": "win",
+         "7": "win",
+         "8": "win",
+         "9": "lose",
+         "10": "win",
+         "11": "win2"
+        },
+        "done": 1,
+        "who": "Lữ Ngưng Sương",
+        "r1": 0,
+        "r2": 0,
+        "res": {
+         "i": 1,
+         "ok": 0,
+         "odds": 12,
+         "lean": 42.6,
+         "n": "Ân chủ trọn đời",
+         "fail": "Chén trà nguội lạnh",
+         "t": 61,
+         "when": "Tháng chạp, năm thứ năm",
+         "fx": {
+          "danh": -8
+         },
+         "ex": []
+        }
+       },
+       "grT": [
+        66,
+        81,
+        90,
+        100,
+        114,
+        183
+       ],
+       "stain": null,
+       "evq": {
+        "4": {},
+        "5": {},
+        "7": {
+         "vp": 1
+        },
+        "8": {},
+        "19": {},
+        "20": {},
+        "26": {},
+        "27": {},
+        "29": {}
+       },
+       "tcAge": 4,
+       "lowS": 0,
+       "rcpR": {
+        "tho": [
+         "r09",
+         "r08"
+        ],
+        "ao": [
+         "r10"
+        ],
+        "theu": [
+         "r10"
+        ],
+        "huong": [
+         "r10"
+        ],
+        "kinh": [
+         "r03"
+        ],
+        "khuc": [
+         "r04"
+        ]
+       },
+       "pmLK": {
+        "t": "30",
+        "kind": "dan"
+       },
+       "wSafe": 13,
+       "dis": [
+        "kd:Lễ vật"
+       ],
+       "mlike": "art:thi",
+       "ill": null,
+       "luxXM": 61,
+       "rcpG": [
+        {
+         "w": 173,
+         "r": "v6",
+         "id": "w:huong:r08"
+        },
+        {
+         "w": 179,
+         "r": "emp",
+         "id": "w:huong:r08"
+        }
+       ],
+       "badWk": 334,
+       "fcd": {
+        "ghen": 2972,
+        "so": 2840
+       },
+       "eaC": {
+        "w0": 174,
+        "danh": 0,
+        "duc": 0,
+        "hh": 0
+       },
+       "fa": null,
+       "wdRmW": 194,
+       "mwc": {
+        "t": 61,
+        "n": 1
+       },
+       "lxBeg": {
+        "hh": 32
+       },
+       "ord70": [
+        {
+         "k": "theodoi",
+         "sid": 228,
+         "tgt": 19,
+         "since": 141
+        },
+        {
+         "k": "theodoi",
+         "sid": 292,
+         "tgt": 27,
+         "since": 168
+        }
+       ],
+       "p3DefM": 56,
+       "thGiftWk": 177,
+       "eK": {
+        "flower": 1,
+        "dish": 1
+       },
+       "pmW": 144,
+       "loCd": 54,
+       "titleWorn": "dh-l_thi",
+       "j95rum": {
+        "me": {
+         "txt": "ngươi mua chuộc Kính sự phòng giấu thẻ bài của nàng",
+         "src": "Chung Hoán Khê",
+         "w": 186
+        }
+       },
+       "tyNvp": null,
+       "tyWhy": "cuop",
+       "palWait": 0,
+       "askAt": {
+        "7": 130
+       },
+       "lastNightS": 9,
+       "dadT": false,
+       "q72job": 144,
+       "dhOn": {
+        "tai": 2
+       },
+       "knowDT": [
+        179,
+        110
+       ],
+       "pilSoft": 62,
+       "pilSoftBy": "Thiệu Kính Trung",
+       "pets": [
+        {
+         "t": "sutu",
+         "from": "Hoàng hậu ban",
+         "src": "hh",
+         "care": 69,
+         "at": 180,
+         "full": 71.63999999999999,
+         "clean": 72.84,
+         "joy": 62.360000000000014,
+         "aff": 17.4,
+         "stg": 0,
+         "bad": 0,
+         "life": 12,
+         "lifeW": 15,
+         "lifeY": 0,
+         "old": 0
+        }
+       ],
+       "petOn": 0,
+       "petB": "danh",
+       "petBn": 1,
+       "__err": 0,
+       "fails": {
+        "trip": 0,
+        "ink": 0
+       },
+       "lxBest": 61,
+       "thc": 292,
+       "dws": 1
+      },
+      "__kr": {
+       "role": "consort",
+       "rank": 3,
+       "origin": null,
+       "sex": "f",
+       "kid": false
+      },
+      "kk": "r28"
+     },
+     "opt": 1,
+     "h": "<p>Nghe đồn người bên cung Chung Hoán Khê đã rỉ tai Giang Bão Cầm rằng ngươi mua chuộc Kính sự phòng giấu thẻ bài của nàng. Dạo này Giang Bão Cầm nhìn ngươi lạnh hẳn đi.</p><p><i>(Lời đồn; ngươi chưa thể chắc ai đã nói gì.)</i></p>",
+     "rum95": 81,
+     "opts": [
+      {
+       "n": "Sang gặp Giang Bão Cầm giải bày",
+       "fx": {},
+       "x": "Vững · tốn: 1 khắc · thành: hết hiểu lầm, Giang Bão Cầm bớt oán ngươi · hỏng: Giang Bão Cầm chưa tin, oán ngươi +4 · (chuyện có thật thì khó giải, chỉ nguôi một nửa)"
+      },
+      {
+       "n": "Cho người tra xem ai tung tin",
+       "fx": {
+        "bac": -10
+       },
+       "x": "Vững · tốn: 1 khắc · Bạc -10 · thành: biết kẻ tung tin, chứng cứ về kẻ ấy +1 · giải bày về sau dễ hơn · hỏng: không lần ra ai"
+      },
+      {
+       "n": "Mặc kệ",
+       "fx": {
+        "suc": 3
+       },
+       "x": "giữ sức · kèm: Giang Bão Cầm vẫn tin lời đồn, sẽ tìm dịp ra tay với ngươi"
+      }
+     ],
+     "rk": "j95bRum",
+     "ra": [
+      81
+     ],
+     "__sp13": {
+      "b0": 744
+     },
+     "__sp13c": 744,
+     "__kw": 1,
+     "__held": 1,
+     "__sg": "Nghe đồn||<p>Nghe đồn người bên cung Chung Hoán Khê đã rỉ tai Giang Bão Cầm rằng ngươi mua chuộc Kính sự phòng giấu thẻ bài của nàng. Dạo này Giang Bão Cầm nhìn ngươi lạnh hẳn đi.</p><p><i>(Lời đồn; ngươi chưa thể chắc ai đã nói gì.)</i></p>|null|Sang gặp Giang Bão Cầm giải bày/Cho người tra xem ai tung tin/Mặc kệ|",
+     "evId": "cat:hoang-de-dem"
+    },
+    "at": 1795834033650,
+    "n": 2
+   },
+   "bz": 0,
+   "ra": 6,
+   "kg": 0,
+   "ka": 0,
+   "mine": {
+    "t": "Tra tin đồn",
+    "h": "<p>Tra ra: chính người bên cung Lữ Ngưng Sương đã rỉ tai Liêu Hoán Bích. Chứng cứ về Lữ Ngưng Sương +1.</p>",
+    "__sg": "Tra tin đồn||<p>Tra ra: chính người bên cung Lữ Ngưng Sương đã rỉ tai Liêu Hoán Bích. Chứng cứ về Lữ Ngưng Sương +1.</p>|null||",
+    "__c95": 1,
+    "__el": 1,
+    "__kw": 1,
+    "__seen": 1,
+    "__k61": 1,
+    "__b95": 1
+   }
+  },
+  "used": 0,
+  "buoi": 3,
+  "mg": null,
+  "modalHidden": true,
+  "next": {
+   "disabled": false,
+   "text": "Sang ngày mới"
+  },
+  "dqActEl": null,
+  "dqDawn": false,
+  "dqFreeScreen": true,
+  "build": {
+   "b": "0b372aa14258",
+   "bi": {
+    "s": "ca4a1689",
+    "b": "0b372aa14258",
+    "t": "2026-11-27T21:07Z"
+   }
+  }
+ },
+ "coop": {
+  "CW": null,
+  "room": null,
+  "seat": {
+   "url": "https://ctm-coop.victoria-tntt.workers.dev",
+   "name": "",
+   "pid": "44f02a3fbd1d425bbaeb0bac",
+   "state": {
+    "status": "off",
+    "room": "",
+    "you": "",
+    "seats": null,
+    "week": 0,
+    "ended": {
+     "a": false,
+     "b": false
+    },
+    "C": null,
+    "mine": null,
+    "msv": 0,
+    "peerOnline": false,
+    "bothIn": false,
+    "playing": false
+   },
+   "code": "",
+   "seat": null,
+   "week": 0,
+   "online": {
+    "a": false,
+    "b": false
+   },
+   "ended": {
+    "a": false,
+    "b": false
+   },
+   "frozen": false,
+   "waiting": false
+  }
+ },
+ "Q": 1
+}

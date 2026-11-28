@@ -16,3 +16,4 @@ Class guess: dialog queued while a right-panel tab/overlay was open is held (DQ.
 ## Early Lãnh cung chain (year 3, 22 tuổi, Tháng giêng hạ tuần; Sủng 0, Danh 4)
 Cấm túc (m-new-275-292) → Bị soát phòng (m-new-276-293) → Bị thu hiệu ban (m-new-277-294) → rank 1→0 (m-rank-277-295) → Lãnh cung card (m-new-278-296): AI XỬ Hoàng thượng · VÌ SAO "Bị bỏ quên, đưa vào lãnh cung" · HÌNH PHẠT "ở ít nhất 3 ngày mới được xét tha" · "Chưa hết đường: minh oan, cầu xin, nhờ người bên ngoài, hay chờ ân xá". Files in flight2-s21g-lanhcung/. Question for MAIN: the reason given ("bị bỏ quên") is vague next to the visible chain; check each chain card names the offence.
 - noturn-6: another dead-tap row INSIDE Lãnh cung (place lc, y3 turn26 tuần2 buổi3, Q=Nghe đồn). noturn-7 added at buổi ~608 (see dump).
+- noturn-8 added at buổi ~813 (see dump S/Q).
