@@ -161,6 +161,16 @@ async function runPicker(p, dev, name, rows) {
   await rt.tap(`#modal .kipc[data-kip="${ids[0]}"] .kshpic`, { screen: name, label: 'tile ' + ids[0] });
   const goBelow = await p.evaluate(() => { const g = document.querySelector('#modal .kipgo'); if (!g) return null; const r = g.getBoundingClientRect(); let b = innerHeight; for (let e = g.parentElement; e && e !== document.body; e = e.parentElement) { const cs = getComputedStyle(e); if (/(auto|scroll|hidden|clip)/.test(cs.overflowY)) b = Math.min(b, e.getBoundingClientRect().bottom) } const ch=[];for (let e = g.parentElement; e && e !== document.body; e = e.parentElement) { const cs = getComputedStyle(e); ch.push((e.id?'#'+e.id:'')+'.'+String(e.className).split(' ').slice(0,2).join('.')+' oy='+cs.overflowY+' pos='+cs.position+' disp='+cs.display+' h='+Math.round(e.getBoundingClientRect().height)+' sh='+e.scrollHeight) } window.__CH=ch; return Math.max(0, Math.round(r.bottom - b)) });
   await p.screenshot({ path: path.join(OUT, `${dev}-${name}-picked.jpg`), type: 'jpeg', quality: 70 }); if (process.env.PROBE) console.log(JSON.stringify(await p.evaluate(()=>window.__CH),null,1));
+  /* KK65 (RV-178 nit b): the tile grid is a scroller INSIDE the scrolling body #mb; rt.tap only scrolls the grid, so on Fold the rows under #mb's
+     clipped foot read «unreachable». A person first drags the panel up until the whole grid shows above the sticky confirm: real wheel on #mb,
+     off the grid (the scene / prompt column), at most 10 steps. */
+  for (let k = 0; k < 10; k++) {
+    const g = await p.evaluate(() => { const m = document.querySelector('#modal #mb'), q = document.querySelector('#modal .kshg.kipg,#modal .kipg'), o = document.querySelector('#modal .kipgo'); if (!m || !q) return null;
+      const M = m.getBoundingClientRect(), Q = q.getBoundingClientRect(), win = Math.min(M.bottom, o ? o.getBoundingClientRect().top : M.bottom);
+      return { need: Q.bottom - win, room: m.scrollHeight - m.clientHeight - m.scrollTop, x: M.left + M.width * 0.75, y: Math.min(M.top + 24, Q.top - 8) } });
+    if (!g || g.need <= 1 || g.room <= 0 || g.y <= 0) break;
+    await p.mouse.move(g.x, g.y); await p.mouse.wheel(0, Math.min(150, g.need + 4)); await p.waitForTimeout(250);
+  }
   for (const id of ids.slice(0, lim)) {
     await unveil(p);
     const sel = `#modal .kipc[data-kip="${id}"] .kshpic`;
@@ -316,7 +326,9 @@ async function runCase(p, dev, name, C, rows) {
   for (let k = 0; k < 3 && !ok; k++) {
     const sel = `[data-ddsw="${pick.tag}"]`;
     const alive = await p.$(sel); if (!alive) { ok = true; break }
-    const r = (C.choose || (pick.opt && !pick.close)) ? await rt.choose(sel, { screen: name, label: pick.lab }) : await rt.tap(sel, { screen: name, label: pick.lab });
+    /* KK65 (RV-178 nit b): an OPTION card is chosen the way a person does (rt.choose: hand = lift → ✓), even when its label reads like a close
+       («Để sau!» of «Danh hiệu mới» is a hand card: tapping its body only lifts it — KIT §101 / realtap rt.choose) */
+    const r = (C.choose || pick.opt) ? await rt.choose(sel, { screen: name, label: pick.lab }) : await rt.tap(sel, { screen: name, label: pick.lab });
     taps++;
     await p.waitForTimeout(2500);
     const s2 = await p.evaluate(READ);
