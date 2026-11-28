@@ -36,8 +36,19 @@ const {chromium}=require('playwright');const sleep=t=>new Promise(r=>setTimeout(
     const pane=kriDiffRows(Object.assign(kriSnap(v),{__inv:b.inv}),v,v.name);const pM=txt(pane[1].items),pD=txt(pane[0].items);
     rows.push({name,card:true,ans,nm,mat:txt(B).includes(nm),duoc:txt(G).includes(nm),pmat:pM.includes(nm),pduoc:pD.includes(nm),err});await drain();Q.length=0};
    await card('card gift kept','take');await card('card gift sent back','back');
+   /* RV-182 FAIL on 4d59d326 (law 6a / 3 / 4): the act card names NOTHING for a secretly planted piece (in or out) and nothing for putting a piece on */
+   const quiet=async(name,pre,act)=>{let nm='';try{nm=pre()}catch(x){}const b=rsnap();let err='';try{act()}catch(x){err=x.message}
+    const [G,B]=kaResultRows(b,'Thử',true);const t=(G.concat(B)).join(' ').replace(/<[^>]+>/g,'');
+    const pane=kriDiffRows(Object.assign(kriSnap(v),{__inv:b.inv||[]}),v,v.name);const pt=pane[0].items.concat(pane[1].items).join(' ').replace(/<[^>]+>/g,'');
+    rows.push({name,card:true,quiet:true,nm,leak:!!nm&&t.includes(nm),pleak:!!nm&&pt.includes(nm),txt:t.slice(0,90),err})};
+   await quiet('hidden plant in',()=>(typeof kitInvName==='function'?kitInvName({k:key}):IT[key].n),()=>{S.inv.push({k:key,h:1,by:'x'})});
+   await quiet('hidden piece out',()=>{S.inv.push({k:key,h:1,by:'x'});return typeof kitInvName==='function'?kitInvName({k:key}):IT[key].n},()=>{const i=S.inv.findIndex(e=>e.h);S.inv.splice(i,1)});
+   const wk=Object.keys(typeof WD_ITEMS==='object'?WD_ITEMS:{}).find(k=>/tram|tr_/.test(k))||Object.keys(WD_ITEMS||{})[0];
+   await quiet('wear a piece',()=>{S.inv.push({k:wk});return typeof kitInvName==='function'?kitInvName({k:wk}):wk},()=>wdWear(S,S.inv.length-1));
    return {rows,key,v:v&&v.name}});
   const dev=W<H?'fold':'ipad';
+  for(const r of R.rows.filter(r=>r.quiet)){const want=!r.leak&&!r.pleak&&!r.err;if(!want)bad++;console.log(`${want?'OK  ':'FAIL'} ${dev} ${r.name.padEnd(20)} «${r.nm}» card names it ${r.leak} · pane ${r.pleak} · «${r.txt}»${r.err?' · ERR '+r.err:''}`)}
+  R.rows=R.rows.filter(r=>!r.quiet);
   for(const r of R.rows.filter(r=>r.card)){const want=r.ans==='take'?(r.mat&&r.pmat&&!r.duoc):(!r.mat&&!r.duoc&&!r.pmat&&!r.pduoc);if(!want)bad++;
    console.log(`${want?'OK  ':'FAIL'} ${dev} ${r.name.padEnd(20)} «${r.nm}» card Mất ${r.mat} Được ${r.duoc} · pane Mất ${r.pmat} Được ${r.pduoc}${r.err?' · ERR '+r.err:''}`)}
   R.rows=R.rows.filter(r=>!r.card);

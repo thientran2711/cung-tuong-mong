@@ -168,7 +168,7 @@ async function kriAct(R,i){const a=R.acts&&R.acts[i];if(!a||a.off||R.busy||R.st!
  if(R.big&&!kriCalm())R.big.animate([{transform:R.big.style.transform},{transform:R.big.style.transform+" scale(1.08)"},{transform:R.big.style.transform}],{duration:420,easing:"ease-out"});
  kriPane(R,it,r);try{render()}catch(e){}}
 /* the act's real changes as kit result rows: her stats (j1 NAMES), the person's thiện cảm (aff), items in / out of Tư trang */
-function kriSnap(v){const s={};try{for(const k in NAMES)if(typeof S[k]==="number")s[k]=S[k];if(v){s.__aff=typeof aff==="function"?aff(v,S):null}s.__inv=(S.inv||[]).slice()}catch(e){}return s}
+function kriSnap(v){const s={};try{for(const k in NAMES)if(typeof S[k]==="number")s[k]=S[k];if(v){s.__aff=typeof aff==="function"?aff(v,S):null}s.__inv=typeof kitOwned==="function"?kitOwned():(S.inv||[]).slice()/* KIT §54.2: bag ∪ worn */}catch(e){}return s}
 /* ONE ROW PER PERSON (MAIN 186 order 28/11 ~06:35Z; iPad ring gift to the queen read «Hoàng hậu → ta: thiện cảm +6 · Lữ Mạn Nhu → ta: thiện cảm +6»):
    her S.hh («Hoàng hậu → ta») / S.th («Thái hậu → ta») IS the receiver's thiện cảm when the receiver is the queen / Thái hậu — one change, ONE row, named by
    the receiver (who). Same rule as the act result card (j63 kaResultRows: the queen's person row skips "hh"). */

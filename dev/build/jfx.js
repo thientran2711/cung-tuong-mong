@@ -473,12 +473,17 @@ KFX.lt=new WeakMap();const kfSeen=new WeakSet();let kfS=null,kfBac=0,kfLog=0;
 /* KIT §54.2 kitInvDelta(beforeArr, afterArr[, adds]) — THE one item delta of a step (law 4: kmDiff reveal/lose, the ring pane rows (jkring-item kriDiffRows)
    and the act result card (j63 kaResultRows) all read it, so the card can never say «không mất gì» while the pane says «Mất: …»).
    → {gone:[entries left her Tư trang], add:[entries that came in], back:[[gone, add] pairs = the same piece out and back in this step: HOME AGAIN]}.
+   Filters INSIDE (RV-182 FAIL): e.h (hidden plant) and unknown keys never count on either side; callers diff kitOwned() snapshots (bag ∪ worn).
    Pairing: the item-ledger id iu when both carry one (the same piece, law 6c), else the same key (invAdd may stamp a new iu on a copy).
    kitInvName(e) = the name the bag shows (KIT 54.1 kitItemInfo). */
-function kitInvDelta(b,a,adds){b=(b||[]).filter(x=>x&&typeof x==="object");a=(a||[]).filter(x=>x&&typeof x==="object");
+function kitInvDelta(b,a,adds){const ok=x=>x&&typeof x==="object"&&!x.h/* a secretly planted piece (e.h) is never named to her, in or out (law 6a) */&&(x.wk||typeof itKnown!=="function"||itKnown(x))/* unknown key (old save / other build) = inert */;
+ b=(b||[]).filter(ok);a=(a||[]).filter(ok);if(adds)adds=adds.filter(ok);
  let gone=b.filter(x=>!a.includes(x)),add=(adds||a.filter(x=>!b.includes(x))).slice();const back=[];
  for(let i=add.length-1;i>=0;i--){const x=add[i];const j=gone.findIndex(g=>(x.iu&&g.iu?x.iu===g.iu:x.k===g.k&&!!x.wk===!!g.wk));if(j>=0){back.push([gone[j],x]);gone.splice(j,1);add.splice(i,1)}}
  return{gone,add,back}}
+/* kitOwned() = what she OWNS now: her Tư trang + what she wears / veils / pawns (kfWorn) — the act card and ring pane snapshot THIS, so putting a piece on
+   or taking it off (inv ↔ worn, same object) is neither gain nor loss (RV-182 FAIL 2) */
+function kitOwned(){const o=((typeof S==="object"&&S&&S.inv)||[]).slice();try{for(const w of kfWorn())if(!o.includes(w))o.push(w)}catch(e){}return o}
 function kitInvName(e){try{if(typeof kitItemInfo==="function")return kitItemInfo(e).name}catch(x){}try{return typeof giftName==="function"?giftName(e):(IT[e.k]||{}).n||e.k}catch(x){return e&&e.k||""}}
 function kfWorn(){try{const w=typeof wdOf==="function"?wdOf(S):S.wd;return [w&&w.tram,w&&w.y,S.vl,S.dress,...(S.wdPawn||[]).map(p=>p&&p.e)].filter(x=>x&&typeof x==="object")}catch(e){return[]}}
 function kfMark(){for(const x of S.inv||[])if(x&&typeof x==="object")kfSeen.add(x);for(const x of kfWorn())kfSeen.add(x)}
