@@ -139,6 +139,10 @@ function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>t
    hint=dh?lv=>{let b="";try{b=kitHint({n:rn,x:rx},null,lv).hint}catch(e){}if(b&&!/^(chẳng được gì|không được mất gì)/.test(b))return b;try{return dh(lv)}catch(e){return b}}:undefined}
   rows.push({t,m,T,n,x:x||(m?"chọn rồi xem kết quả ở bước sau":`chưa làm được: ${txt(why0)}`),c,hint,off:m?null:{why:why0}})}return rows}
 ONE.tierRows=tierRows;
+/* K-TIER-LEAD (kit keeper KK73 28/11, RV-190 follow-up; laws 2 / 11): a tier whose way is not open NOW (wrong buổi, not enough Sức, …) still
+   names its road on the lead — «vừa: Nghỉ ngơi dưỡng sức (chưa làm được)» on the deck card, «vừa chưa làm được» on the dialog line — never a bare «—»
+   that reads as «no dearer road» (the tier has one; its own row says why it is closed). «—» only when the tier really has no member. */
+function tierOffTxt(x,named){const T=(x&&x.T)||[];if(!T.length)return "—";return named?`${txt(T[0].n)} (chưa làm được)`:"chưa làm được"}
 /* perf: one paint asks the same person + door many times (render → dfActs → card); the members list is kept for that paint only (state stamp) */
 const MC={c:new Map(),t:0};
 function stamp(){try{return [S.turn||0,S.buoi||0,typeof used!=="undefined"?used:0,S.logSeq||0,S.bac|0,S.suc|0,S.place,Q.length,S.visit&&S.visit.talked,JSON.stringify(S.visit&&S.visit.tk||{}),JSON.stringify(S.arts||{}),(S.emp&&S.emp.known)?Object.keys(S.emp.known).length:0].join(":")}catch(e){return Math.random()}}
@@ -153,7 +157,7 @@ function memo(k,f){k=k+"#"+stamp();if(MC.c.has(k))return MC.c.get(k);const r=f()
    out.push({n:r.n,door:r.k,o:100,fix:1,x:"",open:()=>doorOpen(p,r.k)})}
   for(const d of out){if(!d||!d.door)continue;const r=DOOR.byK(d.door);if(!r)continue;const {L}=memo(["m",p.kind,p.ref&&p.ref.id,p.name,r.k].join("|"),()=>members(pp0(r.k),r));if(!L.length)continue;
    const md=ONE.mode(r.k);if(md==="keep")continue;const tiers=TI.filter(t=>L.some(m=>tierOf(r,m)===t));
-   if(md==="tier"&&tiers.length>=2){const R=tierRows(r,L,who(p));d.x=R.map(x=>`${x.t} ${x.m&&!x.off?wordOf(oddsM(x.m))||txt(x.m.n):"—"}`).join(" · ");d.one="tier";
+   if(md==="tier"&&tiers.length>=2){const R=tierRows(r,L,who(p));d.x=R.map(x=>`${x.t} ${x.m&&!x.off?wordOf(oddsM(x.m))||txt(x.m.n):tierOffTxt(x,0)}`).join(" · ");d.one="tier";
     if(R.every(x=>x.off)){d.lock=true;d.t=R[0].off.why}continue}
    const m=pick(r,L,seedOf(r,who(p)));d.one="one";
    if(!m){d.lock=true;d.t=(L[0]&&L[0].why)||d.t||"chưa làm được";continue}
@@ -196,7 +200,7 @@ window.addEventListener("click",e=>{if(!ONE.on)return;const b=e.target.closest&&
 /* the deck door's small line: the pick (ONE) or the 3 tier words (TIER) */
 function deckPaint(){const P=document.getElementById("panel");if(!P||!Array.isArray(deck))return;for(const b of P.querySelectorAll("button[data-ddoor]")){if(b.dataset.one)continue;b.dataset.one=1;
  try{const r=deckRowR(b);const md=ONE.mode(r.k);if(md==="keep")continue;const L=deckM(b);const p=b.querySelector("p");
-  if(md==="tier"){const R=tierRows(r,L,"me");if(R.length>=2){if(p)p.textContent=R.map(x=>`${x.t}: ${x.m&&!x.off?txt(x.m.n):"—"}`).join(" · ");continue}}
+  if(md==="tier"){const R=tierRows(r,L,"me");if(R.length>=2){if(p)p.textContent=R.map(x=>`${x.t}: ${x.m&&!x.off?txt(x.m.n):tierOffTxt(x,1)}`).join(" · ");continue}}
   const m=pick(r,L,seedOf(r,"me"));if(!m)continue;const i=deck.indexOf(m.a);if(p)p.textContent=txt(m.n);
   /* the pick's own odds chip + Tốn/Thành/Bại grid (the kit card of that way), so the word she sees is the way that will run */
   const tp=document.createElement("template");tp.innerHTML=String(cardH(m.a,i)).trim();const nb=tp.content.querySelector("button");if(!nb)continue;
