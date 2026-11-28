@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"cb28854b+","t":"2026-11-28T04:01Z","c":"K-GIFT-NOTE + picker/hand harness gaps (RV-178 §4 nits a, b) — rebased on lc34-ui6 c5f97e24; RV-178 §7 fix: jkring-item.js:196 lookbehind l…","b":"5accf9ffeb4f","h":[{"s":"9483e103+","t":"2026-11-27T23:23Z","c":"review save-pid-cards rv6: save-evc-onscreen test setup waits for the card to be painted (LIVE jverdict RF.held defers showModal behind a h…"},{"s":"5fb13d60+","t":"2026-11-27T21:15Z","c":"Thẻ kết quả nằm gọn trong khung, hình bay và cánh hoa không còn đè lên hộp thoại; bàn cờ trò chơi nhỏ đổi áo theo mùa."},{"s":"24beb1a4","t":"2026-11-27T19:22Z","c":"RV live-bugs-2711: rebuild index.html/sw.js on LIVE 772bee4f; assets.json = LIVE"},{"s":"6529ee43+","t":"2026-11-27T15:42Z","c":"rv26 merge: save stack (sổ compact, unseen lists, generators, inv-stack) + save-rewind test on LIVE 772bee4f (lc31-goal); source hunks asse…"},{"s":"d9ca7892+","t":"2026-11-27T12:32Z","c":"Dòng mục tiêu chạm được: xem cách làm rồi «Đi tới» tận nơi; đến một nơi hay một điện trên Dư đồ, nàng ở lại đúng chỗ, không còn bị đưa ngượ…"},{"s":"520c85b0","t":"2026-11-27T12:31Z","c":"Nhờ giúp nay nhờ được cả người cùng cung lẫn Hoàng hậu; người hầu đủ công lao được xin sang hầu cung cao hơn; tuyển tú bị loại hay được ban…"},{"s":"28d8bd1e","t":"2026-11-27T11:45Z","c":"Hội thi tài nghệ: hết ván là hiện kết quả và dừng hẳn, không còn kẹt giữa chừng."},{"s":"cf61b8e4","t":"2026-11-27T10:29Z","c":"Bản đồ chia rõ từng khu; người chưa quen hiện bóng theo vai; màn mờ đổi theo buổi; lựa chọn thuở khuê các có rủi ro nay đều ghi khả năng; M…"},{"s":"48ab87e6","t":"2026-11-27T09:35Z","c":"Thuở khuê các: các cảnh thuế đinh, đêm hội, cha bệnh, mối mai nay chọn là ra, không còn treo giữa chừng."},{"s":"cb090860+","t":"2026-11-27T08:01Z","c":"Thẻ người: tranh lớn, hai thẻ Thông tin · Giao tình; việc với người ấy hiện trên sân khấu, chạm cửa một người là ra ngay các việc theo ba b…"}]};
+window.CTM_BI={"s":"935c008b+","t":"2026-11-28T05:03Z","c":"Thẻ kết quả nằm gọn trong khung, hình bay và cánh hoa không còn đè lên hộp thoại; bàn cờ trò chơi nhỏ đổi áo theo mùa.","b":"327c4a1b0139","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -30114,6 +30114,8 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead||window.__kNav)r
 .rtoast.karesult .rt{display:flex;flex-direction:column;gap:4px;font-size:.84rem}
 .rtoast.karesult .kat{display:flex;align-items:center;gap:8px;padding-bottom:4px;border-bottom:1px solid #e6d3ac}
 .rtoast.karesult .seal{font-size:.9rem;padding:3px 8px;flex:0 0 auto}
+/* K-TAG-WRAP (KK66, rule X23): a result seal word (THÀNH · BẠI · KẾT QUẢ · BỎ DỞ · CẤM · XONG) never breaks over two lines — every toast seal and the ring result card .kri-res */
+.rtoast .seal,.karesult .seal{white-space:nowrap}
 .rtoast.karesult .kan{font-weight:700;color:var(--ink);overflow-wrap:anywhere}
 .rtoast.karesult .ksen{color:var(--ink);line-height:1.35}
 .rtoast.karesult .kb{grid-template-columns:3.4rem minmax(0,1fr);font-size:.8rem;line-height:1.4}
@@ -60967,8 +60969,9 @@ function kinlPickInline(c,ref,acts){try{const d=c.closest(".kinldet");if(!d||typ
 .kinldet .kinlacts{grid-column:1/-1}
 .kinldet .kinlacts .kinvacts.rbtn{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))!important;gap:6px;margin-top:6px}
 .kinldet .kinlacts .kinvacts>button{height:auto!important;min-height:0!important;align-self:start}
-.kinldet .kinlchips{display:flex;flex-direction:column;gap:5px;align-items:stretch;font-size:.78rem;max-width:132px;padding:6px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px;background:#f4ead8}
-.kinldet .kinlchips .chip{white-space:normal}
+.kinldet .kinlchips{display:flex;flex-direction:column;gap:5px;align-items:stretch;font-size:.78rem;max-width:none;padding:6px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px;background:#f4ead8}
+/* K-TAG-WRAP (KK66, rule X23): a summary chip («✓ Đã biết: Đúng phẩm», «Xa xỉ N» …) stays on ONE line; the column grows to its longest chip (never cut, no ellipsis); host < 420 px = kinl-narrow row */
+.kinldet .kinlchips .chip,.kinldet .kinlchips .kchip{white-space:nowrap}
 .kinldet.kinlwear{margin:6px 0 4px;clear:both}
 .kinldet.kinl-narrow{grid-template-columns:minmax(0,1fr)}
 .kinldet.kinl-narrow .kinlpic{justify-self:center}
@@ -106970,7 +106973,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5accf9ffeb4f";window.CTM_BUILD=BUILD;
+const BUILD="327c4a1b0139";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
