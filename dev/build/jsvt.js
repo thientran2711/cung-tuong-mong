@@ -56,6 +56,7 @@ function svtEtq(a,m,s,at){if(!svtNear(a,m,at)||svtGreeted(a,m))return"";const B=
  if(m===S)return `${svtNm(a).replace(/,$/,"")} chẳng chào ngươi một tiếng mà gọi thẳng ${s===S?"ngươi":s.name} — thật là bất kính. `;return""}
 /* svTouch: the servant DID engage (talked / took the bạc / took the threat / became eyes): her master may come to know; the servant may let slip */
 const SVT_VERB={friend:"cho người hầu kết thân với",talk:"kéo riêng",chat:"bắt chuyện với",gift:"biếu quà",ask:"dò hỏi chuyện trong cung qua",len:"lén kéo riêng"};
+const SVT_TURN={bribe:1,threat:1,tm:1,plot:1};/* the kinds that TURN the servant (spyFor set by that act): seen = the master learns it (spyLearn) */
 const SVT_NOLEAK={friend:1/* the friend talk carries its own chứng cứ (j10 servMonth / jagstaff chat) */,chat:1,gift:1};
 function svTouch(a,s,kind,at,mv){if(!SVT.on()||!a||!s)return"";const sMv=mv===s;/* d-followups-1 (wording, law 7): mv = who MOVED (came to the other); the after-line names the one who came, never «ngươi tìm gặp X» when X came to her */let m=null;try{m=s===S?(svtSrvMe()?srvM():null)/* law 1: she herself, on the cung-nữ road, is another's servant */:ownerOf(s)}catch(e){}const A=svtWho(a);if(!m||!A||m===A||svtHouse(a)===m)return"";
  try{if(typeof sameHouse==="function"&&sameHouse(svtHouse(a),m))return""}catch(e){}if(svtGuest(A,m))return"";
@@ -64,13 +65,13 @@ function svTouch(a,s,kind,at,mv){if(!SVT.on()||!a||!s)return"";const sMv=mv===s;
  let leak=false;if(!SVT_NOLEAK[kind]&&s!==S/* her own tongue is her own choice */&&svtHasSecret(m,s,A)&&roll(svtLeakO(s))){leak=true;s.svtL=m.schemes||0;s.svtD=m.dw||0;SVT.stat.leak++;evA(A,m,B.leak.ev);
   if(A===S)r+=`${s.name} buột miệng kể chuyện trong cung ${m.name}: ${evSg(B.leak.ev)}. `}
  const W=svtSeen(a,m,kind,at,s);
- if(W){SVT.stat.seen++;SVT.stat.how=SVT.stat.how||{};SVT.stat.how[W.how]=(SVT.stat.how[W.how]||0)+1;tinAdd(s,-(B.tin[kind]||B.tin.talk));const rl=B.rel[kind]||B.rel.talk;affAdd(m,A,-rl);if(a!==A)affAdd(m,a,-rl)/* the servant who went behind her too */;
-  const how=SVT_HOW[W.how](m,W.w);
-  if(s===S)r+=sMv?`${how}: ngươi lén tìm gặp ${svtNm(a).replace(/,$/,"")}; từ đó ${m.name} sinh nghi ngươi. `:`${how}: ${svtNm(a)} lén tìm gặp ngươi; từ đó ${m.name} sinh nghi ngươi. `;
-  else if(m===S)r+=sMv?`${how}: ${s.name} lén ${kind==="chat"?"sang bắt chuyện với":"tìm gặp"} ${svtNm(a).replace(/,$/,"")}${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `
-   :`${how}: ${svtNm(a)} ${SVT_VERB[kind]||"lén tìm gặp"} ${s.name}${kind==="talk"||kind==="len"?" ra nói chuyện":""}, ${s.name} không từ chối${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}. Từ đó ngươi bắt đầu nghi ${s.name}. `;
-  else if(a===S||A===S)r+=sMv?`${how}: ${s.name} tìm gặp ${a===S?"ngươi":svtNm(a).replace(/,$/,"")}; từ đó ${m.name} sinh nghi cả ${a===S?"ngươi":"người ấy"} lẫn ${s.name}. `
-   :`${how}: ${a===S?"ngươi":svtNm(a)} tìm gặp ${s.name}; từ đó ${m.name} sinh nghi cả ${a===S?"ngươi":"người ấy"} lẫn ${s.name}. `}
+ if(W){SVT.stat.seen++;SVT.stat.how=SVT.stat.how||{};SVT.stat.how[W.how]=(SVT.stat.how[W.how]||0)+1;tinAdd(s,-(B.tin[kind]||B.tin.talk));const rl=B.rel[kind]||B.rel.talk;/* svtouch-spylearn (MAIN 187, law 11): a witness telling the master her servant was TURNED (bribe / threat / tm / plot) is a real LEARNING → the ONE learn rule jagknow spyLearn (thiện cảm −rl + learn oán + m.spyKn), as every other learn path; a plain talk / chat / friend / len stays a suspicion (thiện cảm only) */if(SVT_TURN[kind]&&typeof spyLearn==="function")spyLearn(m,A,rl);else affAdd(m,A,-rl);if(a!==A)affAdd(m,a,-rl)/* the servant who went behind her too */;
+  const how=SVT_HOW[W.how](m,W.w);/* svtouch-spylearn nit (RV-184, MAIN 188): on a TURN kind the master LEARNED it (spyLearn above) — the after-line says she knows, not only a suspicion; words only (OD ~08:08Z) */const TK=!!SVT_TURN[kind],kn=nm=>TK?`${nm} đã biết chuyện, từ đó sinh nghi`:`từ đó ${nm} sinh nghi`;
+  if(s===S)r+=sMv?`${how}: ngươi lén tìm gặp ${svtNm(a).replace(/,$/,"")}; ${kn(m.name)} ngươi. `:`${how}: ${svtNm(a)} lén tìm gặp ngươi; ${kn(m.name)} ngươi. `;
+  else if(m===S)r+=sMv?`${how}: ${s.name} lén ${kind==="chat"?"sang bắt chuyện với":"tìm gặp"} ${svtNm(a).replace(/,$/,"")}${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}${TK?`. Ngươi đã biết chuyện, từ đó nghi ${s.name}. `:`. Từ đó ngươi bắt đầu nghi ${s.name}. `}`
+   :`${how}: ${svtNm(a)} ${SVT_VERB[kind]||"lén tìm gặp"} ${s.name}${kind==="talk"||kind==="len"?" ra nói chuyện":""}, ${s.name} không từ chối${leak?", nghe đâu còn lỡ miệng chuyện trong cung ngươi":""}${TK?`. Ngươi đã biết chuyện, từ đó nghi ${s.name}. `:`. Từ đó ngươi bắt đầu nghi ${s.name}. `}`;
+  else if(a===S||A===S)r+=sMv?`${how}: ${s.name} tìm gặp ${a===S?"ngươi":svtNm(a).replace(/,$/,"")}; ${kn(m.name)} cả ${a===S?"ngươi":"người ấy"} lẫn ${s.name}. `
+   :`${how}: ${a===S?"ngươi":svtNm(a)} tìm gặp ${s.name}; ${kn(m.name)} cả ${a===S?"ngươi":"người ấy"} lẫn ${s.name}. `}
  return r}
 /* fix r1 (law 11 + law 1 + OD ~07:58Z «Cùng là cung nữ … ít nhất cũng phải chạy lại chào hỏi cái vị chủ tử đó»): servant ↔ servant ACROSS houses — her
    cung-nữ road (j42 srvStaffAct + place card «sv»), the NPC servants' own Đồng liêu acts (jagstaff chat / gift / ask) — one call: the greeting rule for an
