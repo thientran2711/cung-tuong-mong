@@ -34,3 +34,11 @@ Root (stack-traced): kg82Open → kg82Veil(d, kind) with no kind (scheme games s
 - .kmov «Chạm để bỏ qua» hint low contrast (E-S5 note) — not touched.
 
 Stills looked at (outside git): /home/user/wt/kri-shots/dfm/{755x1000,1180x820}-*.png, /home/user/wt/kri-shots/p/gift-{755,1180}-{1,2,3}.png.
+
+## Update 28/11 ~01:00Z — head 9e037402
+- Merged review/kk62 485e5ee5 into the branch (KK63 warning: kk62 also edits jkring-item.js kriGiftOpen). The conflict was resolved by keeping kk62's receiver name + K-RING-QTY and adding the live option lookup (optB). After the merge: gift probe Fold + iPad gift given · kit-ring-item check Fold + iPad gift/shop OK, 0 errors · dialog-fixed all pass. RV: the branch now carries kk62 (same as the next UI bundle).
+- MAIN 182 add-on (Foreman D A3 «~1860 dead buttons», iPad), checked on LIVE 5fb13d60 with real taps:
+  - Relation page: relRing (§104.2 wiring E) opens a visible, OPAQUE ring scene (place painting, ✕, group tabs) over the Ân oán page. The 17 (Fold) / 28 (iPad) «covered» buttons («Về Dư đồ», «Lịch tháng», «Mục tiêu chương», right-column rows, «Ân oán», «Phe phái», …) sit BEHIND the painting. A real tap reaches none of them (0/6 click-through) = correct for a modal scene. Not player-dead → HARNESS FALSE POSITIVE (for F: a button under a visible .kscn layer is hidden, not dead).
+  - Place stage ring: 0 buttons covered by the band (LIVE and branch; §104.1c tapUnder intact).
+  - .mapsc vs #kshR: in the default iPad Dư đồ view, 0 map targets are covered. Pins slide under the fixed right column (#kshR, x≥1025) only after a pan, which is normal and fixable by panning back. Harness item (pan before tapping), not kit.
+  - E 23:36Z «re-opened 3× by «Chọn lá này», no gift» ×4 on Fold = the stale-option root fixed in §2.
