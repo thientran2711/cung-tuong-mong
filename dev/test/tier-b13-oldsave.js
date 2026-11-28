@@ -44,7 +44,7 @@ const PREM=ROWS.find(r=>r.id==='tt_ruong');
    R.after=A&&A.cur!==C.b;return R},C);
   const want=(PREM&&C.a==='tt_ruong'?(C.b==='x1'?PREM.x[0]:PREM.s[0]):null);
   const row=(C.b==='x1'?PREM.x[0]:PREM.s[0]).opts.map(x=>x.n),gone=o.names.slice(0,4).find(n=>!row.includes(n.replace(/<[^>]+>/g,'')));
-  ok(ld.ok&&ld.name===o.name&&ld.a===C.a&&ld.rcT===1&&JSON.stringify(ld.cardN)===JSON.stringify(row)&&!ld.cardN.includes(gone),`slot ${C.s} (${C.a}:${C.b}) loads: the saved card shows the row's 3 ways NHẸ · VỪA · NẶNG (${ld.cardN.join(' | ')}), the removed way «${gone}» is gone`,ld);
+  ok(ld.ok&&ld.name===o.name&&ld.a===C.a&&ld.rcT===2&&JSON.stringify(ld.cardN)===JSON.stringify(row)&&!ld.cardN.includes(gone),`slot ${C.s} (${C.a}:${C.b}) loads: the saved card shows the row's 3 ways NHẸ · VỪA · NẶNG (${ld.cardN.join(' | ')}), the removed way «${gone}» is gone`,ld);
   ok(Array.isArray(ld.om)&&ld.pl===ld.om[3]&&ld.ppo>=3&&ld.ppo<o.pp&&JSON.stringify(ld.hp)===JSON.stringify([ld.om[3]]),`slot ${C.s}: pledge / refusal on the removed 4th way → merged sibling ${ld.om&&ld.om[3]} (om ${JSON.stringify(ld.om)})`,ld);
   if(want)ok(want.om===ld.om.join(""),`slot ${C.s}: om = the writer row's om`,{want:want.om,got:ld.om});
   ok(ld.chose===1&&ld.after,`slot ${C.s}: the NẶNG way can be chosen on the loaded card`,ld);
