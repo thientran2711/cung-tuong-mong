@@ -1175,7 +1175,7 @@ const SNK="ctm-coop-wk",SEAT_MS=3000;let svT=0,seatT=0,seatAt=0,seatLast="";
 const DEV=(()=>{try{let d=localStorage.getItem("ctm-coop-dev");if(!d){d=Math.random().toString(36).slice(2,12)+Date.now().toString(36);localStorage.setItem("ctm-coop-dev",d)}return d}catch(e){return "x"+Math.random().toString(36).slice(2,10)}})();
 function snapSave(now){svT=0;let o=null;try{o=CW.snap&&CW.snap();if(o){o.dev=DEV;o.sv=CW.ssv||0}}catch(e){console.error("coop snap",e)}if(!o)return;
  /* E-FIX-3 (E81r 3): a refused local write is told (saveBlocked kit notice) and no longer skips the seat push to the server copy */
- try{slotPut(SNK,JSON.stringify(o));if(typeof saveOk==="function")saveOk()}catch(e){if(typeof saveBlocked==="function")saveBlocked()}try{seatPush(o,now)}catch(e){console.error("coop seatPush",e)}}
+ try{slotPut(SNK,JSON.stringify(o));if(typeof saveOk==="function")saveOk("coop")}catch(e){if(typeof saveBlocked==="function")saveBlocked("coop")}try{seatPush(o,now)}catch(e){console.error("coop seatPush",e)}}
 function snapSoon(){if(CW.on&&!svT)svT=setTimeout(snapSave,1000)}
 CW.snapNow=()=>{try{clearTimeout(svT)}catch(e){}snapSave(true)};/* r4: a carried card is in her seat copy at once (a reload right after the carry keeps it) */
 /* review/lag-play-2: the seat copy is ~40 KB; when the server can (room reply caps "seatd") only the PARTS that changed since the copy

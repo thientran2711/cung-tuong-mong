@@ -366,7 +366,7 @@ D.QS=null;D.qsRoom="";
 function qsInit(){if(D.QS&&D.qsRoom===room())return;const o=loadLS();D.QS=(o&&o.q)||{};D.qsRoom=room();if(o&&o.df&&typeof o.df==="object")for(const k in o.df)if(Array.isArray(o.df[k])&&!(D.DF[k]&&D.DF[k].length))D.DF[k]=o.df[k]}
 D.save=function(){try{qsInit();for(const k in ST)D.QS[k]=(ST[k].S&&ST[k].S.thq)||[];
  const df={};for(const k in D.DF)df[k]=(D.DF[k]||[]).filter(x=>x&&!x.fn);
- const o={q:D.QS,pq:D.PQ,n:D.N,rv:D.RV,rw:COOP.state.week||0,df};try{localStorage.setItem(LSK(),JSON.stringify(o))}catch(e){/* save-fail-warn: the host's per-room store of her cards / patches (a host reload resyncs from it) refused → told */if(typeof saveBlocked==="function")saveBlocked()}}catch(e){}};
+ const o={q:D.QS,pq:D.PQ,n:D.N,rv:D.RV,rw:COOP.state.week||0,df};try{localStorage.setItem(LSK(),JSON.stringify(o));if(typeof saveOk==="function")saveOk("thin")}catch(e){/* save-fail-warn: the host's per-room store of her cards / patches (a host reload resyncs from it) refused → told */if(typeof saveBlocked==="function")saveBlocked("thin")}}catch(e){}};
 /* her card list after a life change (part B accept): replaces the saved list of that seat (her store is gone; the next one loads this) */
 D.keepQ=function(seat,L){qsInit();D.QS[seat]=Array.isArray(L)?L:[];if(ST[seat]&&ST[seat].S)ST[seat].S.thq=D.QS[seat];D.save()};
 function loadLS(){try{return JSON.parse(localStorage.getItem(LSK())||"null")}catch(e){return null}}

@@ -7,9 +7,10 @@
    module-private writers (jcloud writeSlot, jcoopworld snapSave, jcoopthine guest copy, jcoopthin host store) = the static family scan
    dev/test/r10e-savewrite-scan.py (run here too). Devices: Fold 755x1000 + iPad 1180x820.
    usage: node dev/test/save-fail-warn.js <save.json> [root]   (root = another checkout with a built dev/index.html, e.g. LIVE)
+   MUTATE=2: the r1 saveOk (any working write drops the notice) → row 5b must FAIL.
    MUTATE=1: the page's saveBlocked is put back to the one-shot LIVE form → the «again» rows must FAIL.   exit 1 on a fail */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),cp=require('child_process');
-const SV=process.argv[2]||path.join(__dirname,'fixtures/world30-met.json');const ROOT=process.argv[3]||null;const MUT=!!process.env.MUTATE;
+const SV=process.argv[2]||path.join(__dirname,'fixtures/world30-met.json');const ROOT=process.argv[3]||null;const MUT=process.env.MUTATE||'';
 const {serve,BASE}=require('./coop-serve.js');let bad=0;const ok=(c,m,x)=>{if(!c)bad++;console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{
  /* static family scan (every save writer of the build is told) */
@@ -23,7 +24,8 @@ const {serve,BASE}=require('./coop-serve.js');let bad=0;const ok=(c,m,x)=>{if(!c
   await p.evaluate(d=>{document.querySelectorAll('#kload,#kroul,#kroulw,#klife').forEach(e=>e.remove());document.getElementById('title').hidden=true;SLOT=3;Q=[];quiet=true;deser(JSON.parse(d));quiet=false;try{Q.length=0;closeModal()}catch(e){}render()},fs.readFileSync(SV,'utf8'));
   await p.waitForTimeout(1500);
   await p.evaluate(mut=>{window.__jqoff=1;window.__spreadOff=1;window.__sbN=0;const k0=window.kitNotice;window.kitNotice=function(x){if(x&&x.id==='saveBlocked')window.__sbN++;return k0.apply(this,arguments)};
-   if(mut){window.saveBlocked=function(){try{kitNotice({id:"saveBlocked",line:CTM_WAIT.saveBlocked,sticky:true})}catch(z){}}}
+   if(mut==='2'){window.saveOk=function(){try{kitNoticeDrop('saveBlocked')}catch(z){}}}/* MUTATE=2: r1 saveOk (any working write drops it) → row 5b FAILs */
+   else if(mut){window.saveBlocked=function(){try{kitNotice({id:"saveBlocked",line:CTM_WAIT.saveBlocked,sticky:true})}catch(z){}}}
    const o=Storage.prototype.setItem;window.__rs=()=>{Storage.prototype.setItem=o};window.__fail=()=>{Storage.prototype.setItem=function(){throw new DOMException('quota','QuotaExceededError')}};
    window.__clear=()=>{try{Q.length=0;closeModal()}catch(e){}try{render()}catch(e){}}},MUT);
   /* the chip SEEN: in the DOM, not fading, visible, inside the viewport, on top at its centre, her words readable */
@@ -51,8 +53,15 @@ const {serve,BASE}=require('./coop-serve.js');let bad=0;const ok=(c,m,x)=>{if(!c
   for(const [nm,fn] of [['store.set cung-luanhoi',()=>{const v=store.get('cung-luanhoi');store.set('cung-luanhoi',v)}],['store.set ctm-nextlife',()=>{store.set('ctm-nextlife',store.get('ctm-nextlife'))}],['store.set cung-kiep',()=>{store.set('cung-kiep',store.get('cung-kiep')||[])}],['pdSet',()=>{pdSet(typeof pdGet==='function'?pdGet():0)}]]){
    await gone();await step();const n0=await p.evaluate(()=>__sbN);await p.evaluate(`(${fn})()`);await p.waitForTimeout(300);await p.evaluate(()=>__clear());
    const n1=await p.evaluate(()=>__sbN);s=await waitSeen();ok(n1>n0&&s.seen,`${dev}: ${nm} refused → notice SEEN`,Object.assign({calls:n1-n0},s))}
-  /* 6 · writes reach the slot again → the notice goes, and the sổ does not keep a stale one */
-  await p.evaluate(()=>{__rs();save()});await p.waitForTimeout(800);
+  /* 5b · (reviewer r2) PART of the writes refused (size-dependent quota: the phúc duyên store refused, the slot autosave works) → the notice is
+     NOT taken away by the working slot writes; it goes only when phúc duyên itself is written again */
+  {await p.evaluate(()=>{__rs();save();store.set('cung-luanhoi',store.get('cung-luanhoi'));store.set('ctm-nextlife',store.get('ctm-nextlife'));store.set('cung-kiep',store.get('cung-kiep')||[]);pdSet(pdGet())});await p.waitForTimeout(500);
+   const clean=await p.evaluate(()=>!kitNoticeList().some(x=>x.id==='saveBlocked'));
+   await gone();await step();await p.evaluate(()=>{const o=Storage.prototype.setItem;window.__rs=()=>{Storage.prototype.setItem=o};Storage.prototype.setItem=function(k){if(k===PD_KEY)throw new DOMException('quota','QuotaExceededError');return o.apply(this,arguments)};pdSet(pdGet())});
+   await p.waitForTimeout(300);await p.evaluate(()=>{save();save();save()});await p.waitForTimeout(800);await p.evaluate(()=>__clear());s=await waitSeen();
+   const held=await p.evaluate(()=>kitNoticeList().some(x=>x.id==='saveBlocked'));ok(clean&&held&&s.seen,`${dev}: phúc duyên refused while the slot autosave works → notice SEEN, not dropped by the slot writes`,Object.assign({clean,held},s))}
+  /* 6 · every refused writer works again → the notice goes, and the sổ does not keep a stale one */
+  await p.evaluate(()=>{__rs();store.set('cung-luanhoi',store.get('cung-luanhoi'));store.set('ctm-nextlife',store.get('ctm-nextlife'));store.set('cung-kiep',store.get('cung-kiep')||[]);pdSet(pdGet());save()});await p.waitForTimeout(800);
   const rec=await p.evaluate(()=>{const raw=slotGet(SK(SLOT));let nt=null;try{nt=(JSON.parse(raw).nt||[]).map(x=>x.id||x[0]||x.i).filter(Boolean)}catch(e){}return {inList:kitNoticeList().some(x=>x.id==='saveBlocked'),slotHas:JSON.stringify(nt||[]).includes('saveBlocked')||String(raw).includes(CTM_WAIT.saveBlocked)}});
   ok(!rec.inList&&!rec.slotHas,`${dev}: write works again → notice dropped, sổ keeps no stale notice`,rec);
   /* 7 · j16 Thiết lập › Nạp sổ › Ghi vào ô (title screen; the real taps; its own red line beside «Đọc bản chép») */
