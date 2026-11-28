@@ -65,3 +65,7 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 09:40Z ui9 = 114a52ef (+ dress-fix-look cf0599d6 test-only, clean merge). ui9 tests after u8 QC.
 - 09:52Z pvquy-post-r2 LAND READY 6a023c51 (BIG RV-186; branch head moved to 97bd0858 = MAIN 189 rulings C/D — NOT reviewed in this LAND, used 6a023c51). ui10 = fcad89d4 = ui9 + 6a023c51 (j8/j83/jemoact → ui8 form per RV-186; MODGATE PASS; webkit 0).
 - 09:55Z RV-186 PASS delta 97bd0858 → ui10 = c395461a = ui9 + 97bd0858 (3 hunks → ui8 form; only those 3 lines of the branch absent; MODGATE PASS). MAIN: READY ui8, then ui9+ui10 one push.
+- 09:58Z MAIN: kk70-handdupmat eaad2ba1 rides in LR-RULES unit (not UI). KK70 452affd1 K-KHAC-COST, 065a410c K-WEAR-ROW, K-RING-WHY are mine when PASSED.
+- 10:00Z LIVE = aecbc267 (LR-RULES lr-rules-r3; ROLLBACK c03d6ee7). LR-RULES rolled (successor LR-RULES-2 by MAIN). Kit items now KK71 session_01Rc5AsMZaCRYmkUNXx2fZut.
+- merge-tree aecbc267 × ui stack: ui8 → jemoact only; ui9 (+dress-fix) → + jbal2, jdoor (rules split-merge vs dress-fix tyrob: real conflict); ui10 (+pvquy-post) → 19 more files (pvQuy sites rewritten by both) — resolver jobs, not mine.
+- ui11 staged review/lc35-ui11 873b2165 = LIVE aecbc267 + merge ui8 a50895cb (jemoact adjacent lines: LIVE khoe ghenN + ui8 tiec real rise); rebuilt; MODGATE 499⊇499; webkit 0; unions checked. Tests u11.sh running. (Killed a quickcheck-spawned `fetch --deepen=300` that held fetch.lock.)
