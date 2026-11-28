@@ -1,0 +1,12 @@
+row	matter	where (LIVE aecbc267)	b3	reason / owner
+B18	Hắt nước · Hắt trà · Quạt mực (+ Tát, Phạt quỳ) on a same-palace consort	jlooks.js:146 LK_ACT; jdf.js:83 in-person group	→ DOOR-ONETAP / KIT-STAGE	act/door merge, not an event card (FOREMAN E C11 ruling (B)); STILL UNMERGED on LIVE: the in-person group lists 5 separate acts → FOR MAIN
+B19	Cầu tự (Phụng Tiên điện) + Bài thuốc dễ thụ thai (Thái y)	j2.js:48, j2.js:182	→ DOOR-ONETAP / KIT-STAGE	two act buttons in two places (ruling (B)); STILL UNMERGED on LIVE → FOR MAIN
+B34	Cung nữ «Hầu việc» 9 tasks	jdoor5.js:14	→ DOOR-ONETAP / KIT-STAGE	door → list of 9 look-alike tasks (ruling (B)); STILL a door list on LIVE → FOR MAIN
+B39	Hoàng tự «Chăm sóc» + «Về tẩm cung thăm con»	j25.js:49, j15.js:62	→ DOOR-ONETAP / KIT-STAGE	act buttons (ruling (B)); STILL separate on LIVE → FOR MAIN
+C41	Lễ ra mắt Dâng art1 / art2	jkc2.js PEND.kc2Sel	FOLD (batch 3)	one «Dâng <art>», her best fit (kc2Best); gate tier-b13-b3s
+C45	Night prep (5 ways)	j75.js:107 PEND.prep	batch 3b (design, NEW-KEY BAL.tier.prep)	not in batch 3 (ruling (C)); grep review/* night branches first
+C46	Night talk	j8.js PEND.night1, jvisit.js vnight	batch 3b (design)	not in batch 3 (ruling (C)); night streams active — check before editing
+C48	Bảng tài nghệ / FX7 contests	jpma.js:422 PEND.pmLad; j71 FX7	batch 3b (design)	not in batch 3 (ruling (C))
+C51	Newyear gift	j71.js:139	KEEP	Ngọc quý (bạc) + Tự tay làm (Sức) = matching bạc / non-bạc ways (law 2 last clause); Lễ mọn = lighter tier; Không dâng = skip (ruling (C)). Note: «Lễ mọn» fx bac:-10 and «Tự tay» suc:-10 are typed literals (law 4) → FOR MAIN (one-core owner)
+C53	Veil: how to get one / NVP veil list	jveil.js:132 PEND.vlget, :149 PEND.vlnvp	vlget batch 3b (design) · vlnvp KEEP-CHOICE	vlnvp = an item catalogue (ruling (C))
+C57	sickServant	j68e.js:24	KEEP	Cho nghỉ (free, +5) · Tự sắc (Sức 8, +12) · Thái y (bạc 25, +15) = NHẸ·VỪA·NẶNG ladder; Bắt làm tiếp = wicked kind, not a 4th tier (ruling (C)). Law 4: its c/r numbers are typed literals like ALL 91 E68 events (c6 cards) — a family job (law 11), not a spot fix → FOR MAIN (one-core owner)
