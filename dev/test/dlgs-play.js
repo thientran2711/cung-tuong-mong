@@ -121,10 +121,10 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
      const v2=liveRivals(true).find(x=>x.alive&&!x.out&&x!==v);const b=v2?A6("rv",v2.id):a;/* wc watch scenes (R = B): two real consorts */const d=dlgsMk(id,fam==="j71"?{B:a}:{A:a,B:b},t=>e68Fill(String(t).replace(/\{O\}/g,"vật ấy").replace(/\{F\}/g,"hội"),{A:a,B:b}),null);if(!d)return{err:"dlgsMk null"};Q.unshift({t:"x",h:"<p>…</p>",opts:[{n:"A",fx:{}},{n:"B",fx:{}}],dlg:d})}
     showModal();const m=Q[0];if(!m||!m.dlg){let dbg="";try{if(fam==="ky"&&KY.cur&&KY.cur.W){const w=KY.cur.W,o=w.ref||{};dbg=" "+JSON.stringify({k:w.kind,n:o.name,age:o.age,sex:o.sex,kid:o.kid,img:w.kind==="kid"?!!kidFigSrc(o):null,kidix:Object.keys(KIDIX.prince).length+Object.keys(KIDIX.princess).length,dl:!!KY.cur.__dlg})}}catch(e){dbg=" dbg "+e.message}try{dbg+=" "+JSON.stringify({playing:DLGS.playing,nb:typeof SP13!=="undefined"?SP13.nb:null,vo:typeof SP13!=="undefined"?SP13.vo:null,rb:typeof RB!=="undefined"?RB.d:null,scn:!!document.querySelector(".kscn"),ev:typeof EVHOLD!=="undefined"?EVHOLD.length:null})}catch(e){}/* a road ask whose card a page gate kept back (card never shown, no scene, the box loaded): a fresh life casts it again (≤3, the outer retry) *//* LIVE jgreet (visitor-fix r10): a «Có người đến» card with a consort waits (≤ BAL 4 s) for her full figure before it shows (m.__fcW 1 → 2, then showModal again) — the scene plays then; judge it after that wait (node side) */if(m&&m.__fcW===1)return{fcw:1};const nrHeld=(fam==="nr"||/^nr_/.test(sid))&&$("modal").hidden&&!(m&&m.__dlgk);
      return{err:(nrHeld?"cannot cast (card held) · ":"")+"no scene resolved"+dbg,pid:m&&m.pid,q:Q.length,k:m&&m.__dlgk,on:dlgsOn(),hid:$("modal").hidden,dead:!!S.dead,play:DLGS.playing,scn:!!document.querySelector('.kscn'),hold:typeof EVHOLD!=="undefined"?EVHOLD.length:null}}
-    return{n:sp.lines.length,L:m.dlg.names[0],R:m.dlg.names[1],who:m.dlg.lines.map(l=>l.fig),txt:m.dlg.lines.map(l=>l.text),modal:!M.hidden,scene:!!document.querySelector('.kscn'),dlg:true}},id);
+    return{n:sp.lines.length,L:m.dlg.names[0],R:m.dlg.names[1],who:m.dlg.lines.map(l=>l.fig),txt:m.dlg.lines.map(l=>l.text),modal:!M.hidden,scene:!!document.querySelector('.kscn[data-vp-skip]'),dlg:true}},id);
    /* the visitor card waited for her figure (jgreet __fcW): wait like the player does, then judge the scene that the second showModal plays */
    const judge=()=>g.evaluate(id=>{const m=Q[0],M=$("modal"),sp=dlgsGet(id);if(!m||!m.dlg)return{err:"no scene resolved after the visitor figure wait (jgreet) "+JSON.stringify({fcw:m&&m.__fcW,pid:m&&m.pid,hid:M.hidden,play:DLGS.playing})};
-    return{n:sp.lines.length,L:m.dlg.names[0],R:m.dlg.names[1],who:m.dlg.lines.map(l=>l.fig),txt:m.dlg.lines.map(l=>l.text),modal:!M.hidden,scene:!!document.querySelector('.kscn'),dlg:true,fcw:1}},id);
+    return{n:sp.lines.length,L:m.dlg.names[0],R:m.dlg.names[1],who:m.dlg.lines.map(l=>l.fig),txt:m.dlg.lines.map(l=>l.text),modal:!M.hidden,scene:!!document.querySelector('.kscn[data-vp-skip]'),dlg:true,fcw:1}},id);
    const cast1=async()=>{let r=await cast();if(r&&r.fcw){await g.waitForFunction(()=>Q[0]&&Q[0].__fcW!==1&&Q[0].dlg&&document.querySelector('.kscn'),null,{timeout:8000}).catch(()=>{});r=await judge()}return r};
    let o=await cast1();for(let t=0;t<3&&o.err&&/cannot cast/.test(o.err);t++){await life();nu=0;o=await cast1()}
    if(o.err){ok(false,`${dev} ${id}: ${o.err} ${JSON.stringify(Object.assign({},o,{err:undefined})).slice(0,300)}`);continue}
@@ -135,14 +135,15 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
    for(let i=0;i<o.n;i++){
     const s=await g.evaluate(()=>{const L=document.querySelector('.kscn'),bx=document.querySelector('.kdv-box');const t=bx&&bx.querySelector('.kptitle');const r=bx&&bx.getBoundingClientRect(),lr=L.getBoundingClientRect();
      return{title:t?t.textContent.trim():"",text:bx?bx.querySelector('.kdv-line').textContent:"",lit:L.dataset.klit,dim:[...L.querySelectorAll('.kscn-fig')].map(f=>f.classList.contains('kscn-dim')),inside:!!r&&r.top>=lr.top-1&&r.bottom<=lr.bottom+1&&r.left>=lr.left-1&&r.right<=lr.right+1,
-      over:!!bx&&bx.scrollHeight<=bx.clientHeight+2,veil:(()=>{try{const x=bx.querySelector('.kdv-line').textContent;return typeof k61Scrub!=="function"||!S.known||k61Scrub(x,true,"",x)===x}catch(e){return true}})()}});
+      over:!!bx&&bx.scrollHeight<=bx.clientHeight+2,veil:(()=>{try{const x=bx.querySelector('.kdv-line').textContent;return typeof k61Scrub!=="function"||!S.known||k61Scrub(x,true,"",x)===x}catch(e){return true}})(),vx:(()=>{try{const x=bx.querySelector('.kdv-line').textContent;return k61Scrub(x,true,"",x)}catch(e){return ''}})()}});
     const w=o.who[i];const want=w==null?"":w===0?o.L:o.R;
-    ok(s.title===want||(!!want&&s.title.endsWith(" "+want))||(w!=null&&/\?\?\?/.test(s.title)),`${dev} ${id} line ${i+1}: box title = the speaker «${s.title}» want «${want}»`);
+    const vt=w!=null&&want?await g.evaluate(n=>{try{return typeof k61Scrub==="function"&&!!S.known&&k61Scrub(n,true,"",n)!==n||(typeof k61Known==="function"&&false)}catch(e){return false}},want):false;
+    ok(s.title===want||(!!want&&s.title.endsWith(" "+want))||(w!=null&&/\?\?\?/.test(s.title))||(vt&&s.title.length>1),`${dev} ${id} line ${i+1}: box title = the speaker «${s.title}» want «${want}»`);
     ok(!/\{[^}]*\}/.test(s.text)&&s.text.length>3,`${dev} ${id} line ${i+1}: text resolved «${s.text.slice(0,50)}»`);
     /* the box shows the resolved line as it is (the page-wide screen-word pass once rewrote lone typed words: «nàng ta ta», «ngươi»→«ta») */
     {const nz=x=>String(x).replace(/\s+/g," ").trim();ok(nz(s.text)===nz(o.txt[i]),`${dev} ${id} line ${i+1}: box text = the resolved line «${nz(s.text).slice(0,60)}» vs «${nz(o.txt[i]).slice(0,60)}»`)}
     ok(w==null?s.lit==="":s.lit===String(w)&&s.dim.join()===(w===0?"false,true":"true,false"),`${dev} ${id} line ${i+1}: spotlight ${JSON.stringify({lit:s.lit,dim:s.dim})}`);
-    ok(s.veil,`${dev} ${id} line ${i+1}: no name she has not met shows in the line (j61 name veil)`);
+    ok(s.veil,`${dev} ${id} line ${i+1}: no name she has not met shows in the line (j61 name veil) «${s.text}» → «${s.vx}»`);
     ok(s.inside&&s.over,`${dev} ${id} line ${i+1}: box inside the layer, no overflow`);
     if(k<NSHOT&&(i===0||i===1))await p.screenshot({path:path.join(OUT,`dlgs-${k}-l${i+1}-${dev}.png`)});
     /* finish the line (a short line may already be typed out by now: then a tap would move on, so tap only while it is still typing) */
@@ -150,17 +151,17 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
     const fin=await g.evaluate(()=>[...document.querySelectorAll('.kdv-line .kdw')].every(x=>x.classList.contains('on')));ok(fin,`${dev} ${id} line ${i+1}: tap finishes the line`);
     await g.evaluate(()=>document.querySelector('.kscn').click());await g.waitForTimeout(i===o.n-1?900:350)}
    /* F4: the fade-out is ~0.7 s; a loaded box / slow phone can run past the fixed 900 ms — wait for the scene to end (the jdlgs watchdog caps it at BAL.dlgs.wd.close) before judging */
-   await g.waitForFunction(()=>!DLGS.playing&&!document.querySelector('.kscn'),null,{timeout:8000}).catch(()=>{});
+   await g.waitForFunction(()=>!DLGS.playing&&!document.querySelector('.kscn[data-vp-skip]'),null,{timeout:8000}).catch(()=>{});
    /* LIVE jdayq: a game kit motion scene that came up meanwhile (the test's own rank set-up → «Phẩm phục» reward chest #kmrew, an edict «Tiếp theo»; a loaded box) is an ACTIVITY that holds the card until she ends it (by design) — end it as if she finished it, then judge the card */
    await g.evaluate(()=>{const k=[...document.querySelectorAll('.kmov,#kmrew')].filter(e=>!e.closest('.kscn'));if(!k.length)return;k.forEach(e=>e.remove());try{kmBusy=false;KMQ.length=0}catch(e){}}).catch(()=>{});
    await g.waitForFunction(()=>!$('modal').hidden||!Q.length,null,{timeout:3000}).catch(()=>{});
-   const e=await g.evaluate(()=>{const M=$("modal");return{q:Q.map(x=>x.pid||x.t).slice(0,4),scene:!!document.querySelector('.kscn'),modal:!M.hidden,t:Q[0]&&Q[0].t,dlg:!!(Q[0]&&Q[0].dlg&&Q[0].dlg.done),opts:M.querySelectorAll('.opt').length,playing:DLGS.playing}});
+   const e=await g.evaluate(()=>{const M=$("modal");return{kc:(()=>{const k=document.querySelector(".kscn");return k?(k.className+"|skip:"+k.hasAttribute("data-vp-skip")+"|"+(k.textContent||"").slice(0,80)):null})(),q:Q.map(x=>x.pid||x.t).slice(0,4),scene:!!document.querySelector('.kscn[data-vp-skip]'),modal:!M.hidden,t:Q[0]&&Q[0].t,dlg:!!(Q[0]&&Q[0].dlg&&Q[0].dlg.done),opts:M.querySelectorAll('.opt').length,playing:DLGS.playing}});
    /* a fail: how long the scene stays (ms until DLGS.playing clears, ≤15 s) and the layer's fade-out state — tells a slow fade from a stuck one */
    if(e.playing||e.scene){const t0=Date.now();e.anim=await g.evaluate(()=>{const L=document.querySelector('.kscn');return L?L.getAnimations().map(a=>a.playState+":"+Math.round(a.currentTime)):null});
     await g.waitForFunction(()=>!DLGS.playing,null,{timeout:15000,polling:100}).catch(()=>{});e.stuckMs=Date.now()-t0}
    ok(!e.scene&&e.modal&&e.dlg&&e.opts>=2&&!e.playing,`${dev} ${id}: after the last line the card shows with its choices ${JSON.stringify(e)}`);
    if(k<NSHOT)await p.screenshot({path:path.join(OUT,`dlgs-${k}-card-${dev}.png`)});
-   await g.evaluate(()=>{showModal()});await g.waitForTimeout(200);const again=await g.evaluate(()=>!!document.querySelector('.kscn'));ok(!again,`${dev} ${id}: the scene never plays twice`);
+   await g.evaluate(()=>{showModal()});await g.waitForTimeout(200);/* the dialogue layer only (jdlgs marks it data-vp-skip): a card that shows its people in the kit ring (.kscn.kring, LIVE) is the card, not a scene */const again=await g.evaluate(()=>!!document.querySelector('.kscn[data-vp-skip]'));ok(!again,`${dev} ${id}: the scene never plays twice`);
    await g.evaluate(()=>{Q.length=0;showModal()});k++}
   ok(errs.length===0,`${dev} no page errors ${JSON.stringify(errs.slice(0,3))}`);await ctx.close()}
  await b.close();srv.close();console.log(`shots: ${OUT}`);console.log(fail?`FAILED ${fail} (pass ${pass})`:`ALL PASS ${pass}`);process.exit(fail?1:0)})();

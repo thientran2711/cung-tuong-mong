@@ -163,7 +163,7 @@ for k in re.findall(r'def\("(\w+)"',rd('jnroad.js')):
 # its hồi, the people every life has (emp, maid, eun, doc; th / hh while alive — no living person = no scene), the origin's own (dad tt/dtq,
 # mis cn/cnv, foe td), me. Placeholders = GEN + the road tokens (j67 TOK67, API P8 list) the unit's origin knows; {v}/{v2} only when cast.
 RDK={'v':'rv','v2':'rv','hh':'hh','mis':'rv','foe':'rv','th':'th','emp':'emp','maid':'maid','eun':'eun','doc':'doc','dad':'off','man':'man','lv':'man','kid':'kid','dau':'kid'}
-RDORIG={'tt':{'dad'},'dtq':{'dad'},'cn':{'mis'},'cnv':{'mis'},'td':{'foe'}}
+RDORIG={'tt':{'dad'},'dtq':{'dad'},'cnv':{'mis'},'td':{'foe'}}   # mis = her mistress (j42 srvM) exists only while she serves: cnv lives, never cn (a consort from the start: {mis} reads «chủ nhân»)
 RDPH={'me','maid','man','manr','eun','k','d','emp','sj','hh'}
 RDPHO={'tt':{'dad','dadr'},'dtq':{'dad','dadr'},'td':{'foe','foed'},'cn':{'mis'},'cnv':{'mis'},'nc':{'land','pv','mh','quan','pa','pb','canh','laq','nden','kha','dien','huong'},
        'tm':{'lv','lvn','lvr','lvp','lvtok','lvtinh','lvforce'}}
@@ -172,7 +172,7 @@ RDU=R+'/test/rdlg_units.jsonl'
 if os.path.exists(RDU):
     for l in open(RDU,encoding='utf8'):
         u=json.loads(l);o=u.get('o') or ''
-        ro={'me','maid','emp','eun','doc','th','hh'}|set(u.get('roles',[]))|set(w for w in u.get('ws',[]) if w in RDK)|RDORIG.get(o,set())
+        ro={'me','maid','emp','eun','doc','th','hh'}|set(u.get('roles',[]))|set(w for w in u.get('ws',[]) if w in RDK and (w!='mis' or o=='cnv'))|RDORIG.get(o,set())
         ph=RDPH|RDPHO.get(o,set())|{k for k in ('v','v2') if k in u.get('roles',[])}
         if 'lv' in ro:ph|=RDPHO['tm']
         fb=' / '.join(f"{b['b']} [{b['w']}] {b['h']}: {b['t']}" for b in u.get('first',[]))
