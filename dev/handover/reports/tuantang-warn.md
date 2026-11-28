@@ -73,3 +73,41 @@ Pointers for the successor (from this worker's reading):
 - Sức-0 deaths, scan list (from the 104-call scan): j14.js coldMonth «Chết rét, chết đói trong lãnh cung» (S.suc ≤ 0) · j3.js endTurn «Bệnh nặng, không qua khỏi» (S.suc ≤ 0) · j42.js:268 «Kiệt sức chết… / Lao lực kiệt sức mà chết» · j42.js:368/402 «Quỳ phạt đến kiệt sức mà chết» · j42 beatings (323/388/562) are punishments, check if Sức-based · dieIf (j8) is NPC Sức ≤ 0 (law 1 side). Roads: rest / xin nghỉ / thuốc / cầu xin (tiered, a bạc road paired with a non-bạc one).
 - Kit: reuse the PEND + Q item pattern in jttw.js (must:1 for life-or-death cards; the j68 event gate drops optional cards). Shots: /home/user/wt/ttw-tmp/shot.js shows how to get past title / life intro (dev/index.html via ts.local route, remove #klife, do not force S.rank → a promotion edict covers the card).
 - Quickcheck: ~25 min; run it in the background and do not pgrep for «quickcheck» in a waiter (it matches itself).
+
+## r2 result (worker TUANTANG-WARN-2 session_01PEhRbvy9zz1EkUmZvqgn6T, depth 4, START_CTX ~5 %) — RV READY (BIG, delta on 58a10245)
+PRIORITY #1 CHECK ('sắp kiệt sức warning' / 'sudden death sign'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 (MAIN 185 rulings 28/11 02:20Z). Reused: jmort omen()/treat() (Thái y cure road), the jttw PEND + Q card pattern.
+KIT CHECK: reuses PEND + Q item (must:1, as jttw), option rows {n, fx (Tốn), j67 (odds word · tốn · thành · hỏng), need (✗ Bạc row)}, resultShow result card, pMe(). No new UI part, no CSS.
+Branch review/tuantang-warn-r2 = 5e34092a (code + tests) + 6d87e995 (index.html + sw.js rebuilt, assets.json = LIVE), stacked on 58a10245 (untouched).
+
+### Q2 — one-month sign before every sudden end (jmort.js + jsign.js, BAL.mort.sign in jbal2)
+- Sudden lifespan death (thoO 0, BAL.mort.sudden): at BAL.mort.sign.mo (1) month left, sudSign() gives the sign. People who show illness (her, the Emperor, the Thái hậu, consorts) get the omen illness at its last stage + a sign line («Đêm qua ngươi bỗng choáng váng ngã quỵ…», «Hoàng thượng bỗng ngất giữa buổi chầu…», «Thái hậu bỗng lên cơn đau thắt ngực…») → the existing Thái y cure road (treat(), +careAdd year, careMax ceiling) works the same as for slow omens. Her maid / staff / children get a line; other NPCs carry the sign silently (p.sgn, the same rule, law 1). The Emperor's death line after a sudden sign: «Ngài đột ngột lâm bệnh nặng, chưa đầy một tháng đã băng».
+- Accidents (her, the Emperor, every NPC): no longer same-month. The roll now sets p.accW {t, mo: BAL.mort.sign.acc} with a sign line named after the accident's place (bậc đá đóng băng / bờ hồ Thái Dịch sụt lở / ngựa hoang tính / Khâm thiên giám tâu …); it strikes the next month unless the sign was heeded (accW.safe → «tai họa … đã không đến»).
+- Her card «Điềm gở» (must:1): NHẸ «Giữ mình, tránh xa chỗ hiểm» (gain-only, law 3; Tùy duyên) · VỪA «Mời pháp sư làm lễ giải hạn» Bạc 40 = «Lên chùa chép kinh cầu an» Sức 12 (same odds, law 2) · Để sau. A road that does not help still gives Đức +1 (fw, law 3); every road can fail (law 6). NPCs and the Emperor heed the sign at BAL.mort.sign.npcP % on the same odds and costs (law 1).
+### Q3 — «Sắp kiệt sức» before every Sức-0 death (jsign.js, BAL.kiet in jbal2)
+- Warning beat kietDue() at every Sức-0 check: Sức ≤ BAL.kiet.warn (15) → the card once per fall (again only after Sức climbs above reset 30).
+- One-time floor kietSave(): a Sức-0 blow that comes BEFORE any warning leaves her at BAL.kiet.floor (1) and the card comes then («Ngươi ngã quỵ … may còn chút hơi tàn»); the next Sức 0 kills as before (law 6).
+- Roads by place (cung / lãnh cung / Tân Giả khố / nhà before the tuyển): NHẸ rest (gain-only, Sức +10) · VỪA Bạc 30 = Danh 4 (Sức +22, same odds) · NẶNG Danh 10 (Sức +34); fw Sức +4/+6 on failure (law 3); odds words (law 7).
+- NPCs (law 1): lãnh cung consorts (j14) and servants (j42 asOut dead) — same warning beat (kietNpcDue), a road at BAL.kiet.npcP % on the same odds/costs, the same one-time floor (kietNpcSave).
+- Law 11 scan (dev/test/kiet-scan.py, every die/kcDie/over/alive=false/asOut-dead gated by Sức ≤ 0):
+| site | death | before | after |
+|---|---|---|---|
+| j3.js:190 | «Bệnh nặng, không qua khỏi» (weekly) | no warning | warn + floor + roads |
+| j14.js:50 | «Chết rét, chết đói trong lãnh cung» | Sức bar only | warn + floor + roads |
+| j14.js:51 | NPC consort dies in lãnh cung | none | NPC warn + floor + road |
+| j42.js:268 | «Kiệt sức chết… / Lao lực kiệt sức mà chết» | none | warn + floor + roads |
+| j42.js:323/388/562 | beaten to death (trượng / trộm cắp / roi) | none | floor + card on the first lethal blow |
+| j42.js:336 | «Chết dưới đòn tra khảo» | none | floor + card on the first lethal blow |
+| j42.js:368/402 | «Quỳ phạt đến kiệt sức mà chết» | none | floor + card on the first lethal blow |
+| j42.js:368/389/403 | NPC servant asOut dead | none | NPC floor + road |
+| jkc.js:359 / jkc2.js:270 | «Lao lực / Kiệt sức mà chết trước ngày tuyển / hòa thân» | none | warn + floor + roads |
+| j8.js:26 dieIf, jbal2:92, jpoison:63 | poison | — | NOT touched: poison family (OD 26/11 21:40Z «Giữ bệnh, độc, ám sát») |
+Scan after: 16 Sức-0 death sites, 15 guarded, 1 excluded (j8 dieIf = poison).
+### Tests
+- NEW dev/test/tuantang-warn-r2.js: 38/38 on 6 runs in a row (sudden: her / Emperor / NPC sign a month first, omen known st 3, cure adds a year; accidents: her / NPC / Emperor a month later, card ≤ 3 tiers + bạc pair, odds words no %, sign names the place, heeded → safe, failed road fw applied and the accident still comes, ✗ Bạc when short, NPC heeds on the same odds; kiệt sức: card at warn, 4 roads + Để sau, VỪA pair, gains rise by tier, fw on failure, once per fall, again after reset; lãnh cung real path her + NPC: floor then death; old save without r2 fields; law-11 scan all guarded).
+- MUTATE (built copy with the sign removed): sud → 8 red · acc → 10 red · kiet → 1 red (all caught).
+- dev/test/tuantang-warn.js (r1) 40/40 on the r2 build · dev/test/mortality.js 120 2: all ok, old save ok, 0 page errors.
+- j3 weekly site has no scripted real-path check (the buổi wrappers stall a scripted week in the harness); it uses the same kietDue/kietSave proven on the j14 real path + the scan.
+- Shots Fold 755x1000 + iPad 1180x820 (looked at, not in git): «Sắp kiệt sức» and «Điềm gở» on the kit event stage, 5 / 4 road cards, 0 page errors, no horizontal overflow.
+- QUICKCHECK PASS · 6d87e995 vs live 18003079 · 1533 s · old save ok · core gates PASS (one-core guard clean) · perf new/live render 300/295, tab 532/492, tasks>200ms 26/28, longTaskMax 2038/3722; buổi 2758/1434 ms is above live but inside the gate (r1 runs showed live buổi 1466–1750 and long-task noise; the r2 code adds no per-buổi work — kietDue runs once a week, accidents/signs once a month) → reviewer may rerun perf.
+### Status
+RV READY (BIG, delta on 58a10245) review/tuantang-warn-r2 6d87e995. Questions: none new (numbers warn 15 / reset 30 / floor 1 / road gains, sign odds — set from BAL, tune freely).
