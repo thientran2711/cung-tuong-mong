@@ -73,3 +73,4 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 10:18Z RV-185 LAND kk70-handdupmat eaad2ba1 — per MAIN it rides in the RULES lane with tmk-warn (inside TMK-WARN-3 r4 b28cd7c3); not landing in UI.
 - 10:24Z RV-185 LAND ui11 873b2165 (jemoact hunk byte-checked, driven live).
 - 10:30Z RV-163M LAND READY dayq-noturn-rvm 8a30664e (FF on aecbc267, 2 parents; 0 del; assets LIVE; MODGATE PASS). Killed ui11 qc (was in core gates; q-softlock 4 known) → dayq quickcheck ALONE (dq3.sh), then ui11 qc again.
+- 10:42Z RV-185 LAND dress-fix-df 8c6cbbe8 (re-merged on aecbc267) → ui12 5f8cd027 = ui11 + 8c6cbbe8 (built-only; MODGATE PASS). Plan: dayq 8a30664e lands first → merge ui12 onto new LIVE → one quickcheck → READY.
