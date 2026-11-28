@@ -1,0 +1,31 @@
+# flight2-s2i moment log (bot cautious, fold, seed 2026112567, real-tap harness 795f87ec)
+Format: game date · screen · feeling · what happened · shot (relative to the out dir). Lines written by the harness; the runner adds its own feelings from the shots (ROBOT-PLAYER-REVIEW.md §A).
+
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2i/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-flight2-s2i/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Lui | Vào cung ngayTốnkhôngĐượcvào | Ở nhà chờ tuyển túTốnkhôngĐư | Trang trước | Dung mạo 13 | Dung mạo 14 | Dung mạo 15 | Dung mạo 16 · shots-flight2-s2i/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kmrew «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2i/m-new-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Con gái nhà buôn muối · 1/3» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-flight2-s2i/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Tiền truyện · Con gái nhà buôn muối · 3/3» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2i/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #klife «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2i/m-new-1-1.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #kroul «» · NEW SCREEN · first time on this screen; buttons: Tiếp | Bỏ qua · shots-flight2-s2i/m-new-1-2.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Thân phận kiếp này» · NEW SCREEN · first time on this screen; buttons: Lui | Vào cung ngayTốnkhôngĐượcvào | Ở nhà chờ tuyển túTốnkhôngĐư | Trang trước | Dung mạo 13 | Dung mạo 14 | Dung mạo 15 | Dung mạo 16 · shots-flight2-s2i/m-new-1-3.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền truyện · Con gái nhà buôn muối · 1/4» · NEW SCREEN · first time on this screen; buttons: Tiếp theo · shots-flight2-s2i/m-new-1-4.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Ngày thứ nhất — Nhập cung» · NEW SCREEN · first time on this screen; buttons: Theo thái giám vào cửa việnT · shots-flight2-s2i/m-new-1-5.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .kmov «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2i/m-new-1-6.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .kscn «» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2i/m-new-1-7.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Dưỡng Tú viện» · NEW SCREEN · first time on this screen; buttons: Cất đồ, ra Tiền sảnhTốn1 khắ · shots-flight2-s2i/m-new-1-8.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Tiền sảnh» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2i/m-new-1-9.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Đông sở · Ở đây có 4 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc58Tài75Tâm cơ14Đức30Danh8 | Bạc380Sức80/100 | Buổi sáng, còn 4 khắc | Chưa điểm trang | sương sớm | Quẻ Hạ (Danh) · shots-flight2-s2i/m-new-1-10.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Đông sở» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2i/m-new-1-11.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Đông sở» · NEW SCREEN · first time on this screen; buttons: Làm quen với tú nữTốn1 khắcĐ | Ra Dư đồTốnkhôngĐượcchọn rồi | Dò hỏi ma ma về các vị chí t | Nghỉ một látTốn1 khắcĐượcSức | Ngồi yên chờ tới tốiTốnkhông · shots-flight2-s2i/m-new-1-12.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Đêm» · NEW SCREEN · first time on this screen; buttons: NgủTốnkhôngĐượcSức +Gợi ýSức · shots-flight2-s2i/m-new-1-13.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Ngày thứ hai — Điện tuyển» · NEW SCREEN · first time on this screen; buttons: Theo ma ma ra sân chờ, để mặ | Ngồi trước gương điểm trang | Dò hỏi ma ma về các vị chí t · shots-flight2-s2i/m-new-1-14.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Sân chờ» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2i/m-new-1-15.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Sân chờ» · NEW SCREEN · first time on this screen; buttons: Làm quen với tú nữ | Đứng yên giữ sức · shots-flight2-s2i/m-new-1-16.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Điện tuyển» · NEW SCREEN · first time on this screen; buttons: Quỳ xuống thỉnh an · shots-flight2-s2i/m-new-1-17.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · #modal «Thái hậu» · NEW SCREEN · first time on this screen; buttons:  · shots-flight2-s2i/m-new-1-18.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Thái hậu» · NEW SCREEN · first time on this screen; buttons: Tay con quen thêu thùa, nấu | Tay con biết viết chữ và tín | Tay con biết vá may, đồ cũ c | Tay con từng bóp thuốc, chăm · shots-flight2-s2i/m-new-1-19.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · .dlg «Hoàng thượng» · NEW SCREEN · first time on this screen; buttons: Cúi đầu chờ xét | Dâng Cầm | Dâng Kỳ · shots-flight2-s2i/m-new-1-20.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 4 người.» · NEW SCREEN · first time on this screen; buttons: Ô lưu | Xem bản thân | Sắc58Tài75Tâm cơ14Đức31Danh7 | Bạc380Sức99/100 | Buổi sáng, còn 4 khắc | Chưa điểm trang | sương sớm | Quẻ Hạ (Danh) · shots-flight2-s2i/m-new-1-21.png
+- year 1 · turn 0 · tuần 0 · buổi 0 · rank 0 · ending · EVENT · life over: Ban hoa — Bị ban hoa, xuất cung · age 18 · buổi 1 · bugs 0 · stuck 0 · dead buttons 0 · shots-flight2-s2i/end.png
