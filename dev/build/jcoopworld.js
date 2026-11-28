@@ -583,7 +583,9 @@ function petApply(ops,k){const out=[];if(!Array.isArray(ops))return out;
   const fam=famDiff(t,k,inv0,K0,add.filter(e=>e.h));for(const e of back)fam.push(famRet(e));sendRes(t,k,b0,r,CW.inv,pet,items,fam)}catch(e){console.error(e)}
  /* r4 item (5) (law 6c, no double-give): what left me for her is in my seat copy AT ONCE; before, a reload within the 1 s snapshot delay
     restored the piece in my chest while she already held it (given twice) */
- if(items.length||CW.inv)try{CW.snapNow()}catch(e){}return r}})();
+ /* not on the host under thin D (dOn): his result rides D.later data, not the durable resOut queue — saving his loss before that data is out
+    turned a reload into a LOST piece (coop-hang-e G1 run s0c); that road is open (report §r4) */
+ if((items.length||CW.inv)&&!(host()&&dOn()))try{CW.snapNow()}catch(e){}return r}})();
 /* ---------- B1 (review/coop-b1b5): steal / burn / extort her ITEMS, harm / take her CHILDREN, miscarriage ----------
    The act runs on her entry (bag + children from buildFriend / pos). The loss reaches her as `res.fam` ops, applied to her OWN S:
      {op:"rm", ci, k, how}  an item left her chest (how: "lost" = thất lạc case, as an NPC thief; "burn"; "taken" = named; "gone")
