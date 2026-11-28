@@ -16,7 +16,7 @@
 const ER=window.ERR={n:0,live:0,seen:{},base:null,walk:{},skips:0};
 /* wording per errand (VANPHONG: cổ trang, no %, no odds numbers). Key = ACT key or a named flow. Harm acts all read as a quiet errand. */
 const ERRV={spy:"dò la",ally:"đưa lời kết giao",bribe:"mua chuộc người",bribel:"đưa quà lót tay",block:"lo việc thẻ bài",blockf:"nhờ ơn người quen",rumor:"rỉ tai tin đồn",lygian:"gieo lời ly gián",
- tocao:"đưa chứng cứ tố tội",expose:"đưa tin tư tình",xinhh:"dâng lời lên Hoàng hậu",laydo:"lấy đồ",laydol:"lấy đồ",plant:"cài đồ",petcare:"chăm thú nuôi",
+ tocao:"đưa chứng cứ tố tội",expose:"đưa tin tư tình",xinhh:"dâng lời lên Hoàng hậu",laydo:"lấy đồ",laydol:"lấy đồ",tyrob:"giật y phục",tyrobl:"giật y phục",plant:"cài đồ",petcare:"chăm thú nuôi",
  scout:"dò nơi ở",invite:"đưa lời mời",letter:"gửi thư, quà",tdgift:"biếu quà, đưa thư",kin:"dò hỏi gia thế",listen:"nghe ngóng"};
 const ERRV_DEFAULT="làm việc kín";
 /* acts where she goes HERSELF (no servant leaves): jecon spyk "Tự đi dò la" */
