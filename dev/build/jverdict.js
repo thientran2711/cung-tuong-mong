@@ -162,6 +162,11 @@ function cue(){const t=T();if(!t)return;t.classList.add("kres-hold");setTimeout(
 function hold(){if(RF.held){cue();return}RF.held=true;RF.stat.hold++;cue();dog()}
 /* SAFETY (no soft-lock, LC25 G4): while held, a result card that is no longer on screen (parked, hidden by a screen change, a new life) lets the
    held screen go at once — a card is never left in Q with nothing on screen */
+/* COOP-QCARD (RV-173 LIVE hang, co-op + solo, law 11 whole family): the kit scene layer (.kscn z 57, the selection-day roll-call opened right after
+   «Theo thái giám vào cửa viện») covered the HELD card: its «Tiếp ▸» unreachable for the whole scene. Cure = the z rule below (every result card
+   at KIT_SCN.z + 1). A layer ABOVE the card (the item reveal .kmov «Nhận», a podium, the roulette, a tip) is one she closes by her own tap, and
+   the held card is there again: being covered never lets the held screen go (BIG rv coop-qcard r3: r1's «covered 2 looks → release» dropped
+   the result card under the item reveal — she never saw what her choice did, KIT 7.4). */
 function dog(){if(RF.dogT)return;const tick=()=>{RF.dogT=0;if(!RF.held&&!RF.wantModal&&!RF.later.length)return;if(!ui()||!vis()){RF.stat.dog=(RF.stat.dog|0)+1;release();return}RF.dogT=setTimeout(tick,700)};RF.dogT=setTimeout(tick,700)}
 function release(){if(!RF.held&&!RF.wantModal&&!RF.later.length)return;RF.held=false;RF.stat.rel++;const t=T();if(t){t.classList.remove("kres-hold");const b=t.querySelector(".kres-next");if(b)b.remove()}
  try{front()}catch(e){}const L=RF.later.splice(0);for(const f of L){try{f()}catch(e){console.error("RF later",e)}}
@@ -216,8 +221,11 @@ document.addEventListener("pointerdown",()=>{RF.tapAt=performance.now()},true);d
 /* a new life / a death: nothing stays held */
 try{if(typeof lifeStore==="function")lifeStore("RF result-first hold",()=>{RF.held=false;RF.wantModal=false;RF.later.length=0})}catch(e){}
 const st=document.createElement("style");st.id="rf-css";st.textContent=`
-/* KIT 7.4: the result card of a choice is above the focus layer (.kfoc z 46) and every card (#modal z 42) */
-.rtoast.karesult{z-index:47}
+/* KIT 7.4: the result card of a choice is above the focus layer (.kfoc z 46), every card (#modal z 42) AND the kit scene layer (.kscn, KIT_SCN.z):
+   COOP-QCARD r2 (law 11, whole family): the plain result card, the scene's own result card with given rows (kitResultCard §93.8) and the HELD card
+   all stood under a kit scene opened after the choice (z 47 < 57) — she never saw what her choice did, the held one could not be tapped. One rule
+   for every result card: KIT_SCN.z + 1 (the ring screens keep theirs, .kring-on #rtoast z 290; an open card still PARKS it, KIT 32.10a) */
+.rtoast.karesult{z-index:${KIT_SCN.z+1}}
 .rtoast.karesult.kres-hold{pointer-events:auto}
 /* over the KIT 32.10a park: only the held result card, or the result card over the focus layer (stage view) */
 body.kdlg-on #rtoast.karesult.kres-front{visibility:visible!important;pointer-events:auto!important}
