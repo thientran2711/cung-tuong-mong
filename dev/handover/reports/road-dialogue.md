@@ -31,15 +31,28 @@ KIT CHECK: reuses kitScene.open / kitScene.light / kitDialogue.play / kitTypeLin
 6. NEVER {goi}/{xung} in a `nar` line (nobody speaks it → the line cannot resolve → the WHOLE scene drops in game; validator now rejects it): write «nàng» or the person's name.
 5. Servant origin cnv (she is a cung nữ): L = mis / eun / a fellow maid; she addresses up through {xung}/{goi}.
 
-## COVER (law 11; `python3 dev/test/dlgs_validate.py --cover`, ecfe9831)
-| family | units | with scene | plays in game |
+## COVER (law 11; `python3 dev/test/dlgs_validate.py --cover`, review/road-dialogue 11ca7ef3)
+| family | units | before | after | plays in game |
+|---|---|---|---|---|
+| rd old (hand-typed roads .4–.11) | 384 | 0 | 384 | yes |
+| rd prem (composed premise .4) | 44 | 0 | 44 | yes |
+| rd open (composed chapter openings) | 164 | 0 | 164 | yes |
+| rd arc (shared / st / eg / tm) | 17 | 0 | 17 | yes |
+| rd ALL | 609 | 0 | 609 (100 %) | |
+| ALL families (side lines + roads) | 2685 | 2076 | 2685 | |
+validator --strict: 2685 scenes, 0 errors, 0 flat.
+
+## LAW-11 FIXES (lead, while folding)
+| fault (found by) | scan | before | after |
 |---|---|---|---|
-| rd old (hand-typed roads .4–.11) | 384 | 32 (tt) | yes |
-| rd prem (composed premise .4) | 44 | 4 (tt) | yes |
-| rd open (composed chapter openings) | 164 | 15 (tt) | yes |
-| rd arc (shared / st / eg / tm) | 17 | 0 | yes |
-| rd ALL | 609 | 51 | |
-(before this branch: 0 / 609)
+| {goi}/{xung} in a narration line → nobody speaks it → the scene never resolves (dropped) (lead read of rd_cnv) | every content/dlg/*.md nar line | side lines 0, rd 35 (cnv 18, nc 9, td 8) | 0; validator rejects it |
+| game words in a person's mouth («Đây là kết cục truyện xuất thân…», «chương này», «Sủng, Danh, Đức») (lead read) | regex on every rd line | 10 | 0; validator rejects «truyện xuất thân» / «chương …» |
+| {v2} counted as a digit (writer RDW-A) | validator digit check | {v2} unusable | placeholders stripped before the digit check |
+| L = mis in a cn life (dlgs-play: no scene resolved) — her mistress exists only while she serves (j42 srvM) | rd scenes with role mis | cn 1, cnv 13 | cn 0 (maid tells it); validator: mis only for cnv |
+| a name she has not met typed in a line (dlgs-play j61 veil check) | dlgs-play veil check | pf 4 | 0 (by role: «vị tăng ấy», «một thương chủ Tân La») |
+| law 6b name scan (lead): every capitalised name run in rd lines vs the game sources | 368 runs | 0 unknown people / places | — |
+| dad scene typed {xung}/{goi} (address core would make him «vi thần») | rd scenes with L/R dad | 0 | validator rule |
+Test fixes (dlgs-play, not game): the box title may be the j61 veil of an unmet court name («thái y», «Tổng quản thái giám»); the dialogue layer is `.kscn[data-vp-skip]` (a story card that shows its people in the LIVE kit ring `.kscn.kring` is the card, not a scene).
 
 ## WRITER PLAN (sonnet; brief dev/handover/briefs/b-rd-writer.md; file content/dlg/rd_<slice>.md on the handover branch)
 | W | file | origin units (old + prem + open) | ~scenes |
@@ -62,5 +75,6 @@ Total 558. Lead folds each file (validator --strict, read 10 random, rebuild jdl
 - R1 rd_dtq 51 (d673e73d) folded cbdc8fd4. R4 rd_cnv 52 (938a68d8): lead fixed 18 nar lines carrying {goi} (law 11 scan: side-line files 0, rd_* 18 → 0; validator rule added).
 
 ## LOG
+- 11ca7ef3: all 609 folded (writers RDW-A dtq/muoi/cn polished cc9291f7 · RDW-B cnv/nc/td · RDW-C ch/thd · RDW-D pf+arcs/bd · lead tt); Fold dlgs-play of 415 units before the fixes: 20 FAIL / 16157 (all fixed above, targeted reruns PASS); full gates running.
 - 984ed3e8 adapter + inventory (609) + validator rd. ecfe9831 style model tt 51 (validator --strict 0); dlgs-play rd sample 6 units Fold ALL PASS 236 (tt_co#4, tt_oan#7, tt_tranh#6, rc-tt-o05/o12/o13#open); shots looked at: speaker lit left, her dimmed right, title = speaker, card «Chính tuyến · … Hồi 1» after.
 - Test note: the first hồi must be fired inside a tap (jdayq holds every card the game posts at dawn / under an activity; a card she opens herself — DQ.user — shows). Same as the game: storyActs67 go() runs inside her tap.
