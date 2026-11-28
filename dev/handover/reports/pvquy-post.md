@@ -51,6 +51,13 @@ Sorter (scan): innermost function of the site; POST if it is a `run/go/ok/fn/fai
 - `node dev/test/kri-one-row.js .` → KRI-ONE-ROW PASS · 4 receivers. `node dev/test/webkit-syntax.js` → 487 modules, 0 parse-level hits.
 - Not run: quickcheck (perf) — RV please run it vs LIVE a96564ad if wanted.
 
+## MAIN 189 ruling applied (one unit with aff-preview 037efcff; reviewer RV-186) — commits e859d8fd (merge 037efcff), d75648da
+A display job must not change results: LIVE's applied numbers stay, the preview matches them.
+- REVERTED aff-preview result change 1 (hh paced once): j1 apply and j8 ap pace hh with spG again, as LIVE; the write `S.hh=S.hh+v` → hhSet → affAdd is LIVE's. Preview `spSee("hh",n)` = the SAME two steps: spG pace peek, then the dry affAdd chain (affPreview(q,S,p1)); jgift queen card the same (affPreviewRun: affAdd, then hhSet(S.hh + pace peek)). apply's pop now shows what S.hh really moved (display only). Whether LIVE pacing hh twice is intended → a separate item for MAIN, not folded here.
+- REVERTED aff-preview result change 2 (spAdd rel via affAdd): spAdd(p,"rel",n) paces p.rel only, as LIVE. Its 5 cards (j3:166 coldL, j7:27 poison, j7:34 spy, j7:107 comet, j7:144 cane) print `balSg(spSee("rel",n,v))` = LIVE's pace peek (spSee rel / oan back to LIVE's pace-only path; its other callers are jky's non-consort branches).
+- scan: a spAdd-rel card must print spSee, a relAdd/affAdd card affSg/pvQuy. test: spAdd family previews spSee("rel"), hh family spSee("hh") — 3 runs: spAdd rel ×6 and apply hh ± all = real (e.g. hh +8 → card +7, real 7); POST rows 0/39 fail each run.
+- MODGATE (assemble.py quoted *.js ⊇ LIVE): 0 missing, 508 = 508. a96564ad ancestor; 0 deletions; merges 1f17478d (a96564ad + 27a36750) and e859d8fd (4256fe5f + 037efcff) have 2 parents.
+
 ## Findings for RV-183 / MAIN 188 (not fixed here — aff-preview's unit or outside the order)
 1. **Pre-existing PRE flake (reproduced on 27a36750 alone, built and run 4× in a worktree: 2 FAIL — «relAdd her→… +11», «gift card … (result line)»)**; on this branch the same rows fail ~1 run in 3 (card «Giúp đỡ nàng», relAdd family, gift card), POST rows never. Causes found: (a) jdh title bonus `fr(n,d)` rounds its fraction with `Math.random()` → a card and its act differ by 1 when a title applies (the test now holds one draw for preview AND act); (b) relAdd = affAdd(S,v) THEN affAdd(v,S): the first leg can fire a jemo emotion that changes her «vui» before the second leg (jfeel multiplies v→S by her vui), while affPreview(v,S) runs the second leg alone.
 2. jmem.js «Lấy chuyện riêng ép nàng» RESULT line prints `pvOan(v,H.useOan)` (a preview) after oanAdd — the same law-4 family for oán (pvOan), outside this pvQuy order.
