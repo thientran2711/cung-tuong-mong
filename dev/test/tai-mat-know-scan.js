@@ -26,4 +26,10 @@ console.log(`\nLEARN sites calling the ONE helper (spyLearn / spyFound): ${learn
 /* 4 j10 Có tin */
 const j10=fs.readFileSync(path.join(B,'j10.js'),'utf8');const real=/taiMatRaw\(S\)\.find\(x=>ownerOf\(x\)===p\)/.test(j10),old=/eyes\(S\)>=3\)ev\+=`Có tin/.test(j10);if(old)breach++;
 console.log(`j10 her bought servant «Có tin»: ${old?'BAD any 3 Tai mắt anywhere':real?'ok a real Tai mắt in the buyer\'s palace':'?'}`);
+/* 5 svtouch-spylearn (MAIN 187, law 11): a WITNESS road that tells a master her servant was turned (jsvt svTouch «seen», kinds bribe/threat/tm/plot)
+   must go through the ONE learn helper spyLearn — a master feeling call in a witness line without spyLearn for the turn kinds = breach */
+const W5=[],W5s=new Set();for(const f of files){const L=fs.readFileSync(path.join(B,f),'utf8').split('\n');L.forEach((l,i)=>{if(!/svtSeen\(|const W=svtSeen/.test(l)&&!(/if\(W\)/.test(l)))return;
+ const j=/if\(W\)/.test(l)?i:i+1;const seg=(L[j]||'');if(!/if\(W\)/.test(seg)||W5s.has(f+j))return;W5s.add(f+j);const hit=/(affAdd|oanAdd)\(m,/.test(seg);const ok=/SVT_TURN\[kind\]&&typeof spyLearn==="function"\)spyLearn\(m,/.test(seg);
+ if(hit){W5.push(`${ok?'ok  ':'BAD '} ${f}:${j+1} witness «seen» → ${ok?'spyLearn for turn kinds':'master feeling WITHOUT spyLearn'}`);if(!ok)breach++}})}
+console.log('\nWITNESS roads (svTouch seen) — turn kinds through spyLearn');for(const r of W5)console.log(r);if(!W5.length)console.log('none found');
 console.log(`\nTAI-MAT-KNOW SCAN: ${breach} breach(es) · recruit sites ${rows.length} · kỳ ngộ spy options ${ky.length} · learn calls ${learn}`);process.exit(breach?1:0);
