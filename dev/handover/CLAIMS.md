@@ -794,7 +794,6 @@ E-TITLES-LRM6 (re-merge titles ed000505 onto LIVE aecbc267) | review/titles-dayc
 E-TITLES-LRM6-RV (delta review of review/titles-daycard-lrm6-rv f2c2189e) | reviews/titles-daycard-lrm6-rv-review.md | session_01DgYSWmYrAWCcj1ZGjezqEE | RUNNING | 28/11 11:18Z (Foreman E C11)
 Review of review/f-tier-b2 3f37d9d6 (F-TIER-B2-RV, BIG) | review/f-tier-b2-rv | session_01UV1SzhMB53aDYf9KByobNA (opus, Foreman F ROOT 8 c1) | RUNNING | 28/11 11:18Z
 Review of review/f-tier-b5 695bf615 (F-TIER-B5-RV, BIG) | review/f-tier-b5-rv | session_01UV1Sziuhx17AunwgnBUyhy (opus, Foreman F ROOT 8 c1) | RUNNING | 28/11 11:20Z
-<<<<<<< HEAD
 B-ROW11-RV (BIG review of review/row11-law1 2c6b14a9) | review/row11-law1(-r2) | session_01N1tNP4V3Ffc1NsTGUrjVEE (opus) | RUNNING | 28/11 11:40Z (Foreman B ROOT 3 child 3)
 B-ROW12-RV2 (BIG review of review/row12-leave-r2 0654c1cc) | review/row12-leave-r2(-r3) | session_01N1tNP3VG7pVqhdoME4FsFh (opus) | RUNNING | 28/11 11:42Z (Foreman B ROOT 3 child 3)
 Robot life flight2-s21h iPad speed seed 2026112576 on LIVE origin/main | review/flight2-s21 | session_01UV1SzgkGcHw51mKk4RevBb (sonnet seat s21 #3, Foreman F ROOT 8 c1) | RUNNING | 28/11 11:39Z
@@ -805,5 +804,4 @@ Robot life flight2-s2l Fold greedy seed 2026112578 on LIVE origin/main | review/
 Robot life flight2-s2k Fold cautious seed 2026112577 | — | session_01UV1SzgzrhdKkkkfVybpEZe | DONE (Ban hoa b1, VALID, 09b74f78) | 28/11 11:59Z
 B-ROW12 r3 FIXER (rv r2 FAIL 4 items, reports/row12-leave.md «## REVIEW r2») | review/row12-leave-r3 | session_01N1tNP4aRxWePPt3XzDdaaU (opus) | RUNNING | 28/11 12:08Z (Foreman B ROOT 3 child 3)
 E-TIER-B14 (row 42 law-11 group j7c/j68c/j71c/j72c/jworldc old 4 equal-value stances → 3 tiers) | review/e-tier-b14 | session_01DgYSWpXzA57rdEzNDHjVYQ | RUNNING | 28/11 12:15Z (Foreman E C11)
-=======
->>>>>>> e655ad96c (F c1: s18f evidence)
+B-ROW11-RV (BIG review of review/row11-law1 2c6b14a9) | review/row11-law1(-r2) | PENDING | RUNNING | 28/11 11:40Z (Foreman B ROOT 3 child 3)
