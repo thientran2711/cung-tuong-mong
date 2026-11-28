@@ -113,3 +113,41 @@ Branch `review/tmk-warn` (base review/tmk-oanpace-fix b96bb0d5 — LC33 asked fo
 - Rulings on record: chanceW «khả năng …» for side chances is canon (VANPHONG l.66–67; MAIN 182 accepted the pushback). Kit keeper = KK64
   session_01Rc5AsHuEnQAr94sJGRFNST (noise-hygiene 7 leaks + kit-std-scan harness → KK64).
 - Takeover prompt for the successor MUST copy the three ROLLOVER lines verbatim (owner OD:L1217).
+
+## TMK-WARN-3 (28/11; START_CTX ~3 % of 1M, own estimate, used_tokens reads 0 → roll at ~28 %, ceiling 60 %)
+PRIORITY #1 CHECK: MAIN_STATUS (handover c6757678) → main = MAIN 188 session_01Rc5AsJc8Qb9ZD8pVR8Zpif; BIG reviewer for TMK-WARN-3 = RV-183
+session_01Rc5AsM1Hk8LRsZMSan7dSs (RV-181 retired 07:18Z); 3b dependents routed to review/lc34-3b-r2-rv184 1a6a1aed (MAIN 188 07:46Z); LIVE = 22afefb4.
+git grep kitOptCopy / kr-mat2 on origin/main + review/kk64…kk69-*: the hand-plate double-Mất (below) is fixed nowhere.
+KIT CHECK: reuses the kit option cards (PEND → kit hand), kit odds words, servant panel row(); no new UI part.
+
+### Restack → **review/tmk-warn-r2 7ba5cb7d** (= 69737509 + 3b r2 1a6a1aed; review/tmk-warn 69737509 kept as is)
+- Conflicts: assemble.py (module list) + built files only. assemble.py = TRUE union: 3b r2 list + jmcwarn (after jcharge) + **jkring-item.js and
+  ../../rank/worker/src/score.js**, which 1a6a1aed DROPPED (both parents ce77c7cc / a96564ad and LIVE list them; the 1a6a1aed index.html has no
+  kriCalm / kriE / phamName). Reported to MAIN 188 + RV-184. index.html + sw.js rebuilt, assets.json = LIVE.
+- On 7ba5cb7d: tmk-warn.test 17/17 · MUTATE nowarn / notext / nocut exit 1 · tmk-warn-scan 0 gaps / 26 sites · tai-mat-know.test 22/22.
+
+### Gates
+| gate | 69737509 (on 3b fcbc1992) | base fcbc1992 | verdict |
+|---|---|---|---|
+| quickcheck build = own build | BUILT-SAME | – | ok |
+| G1 one-core-bind | FAIL jsvt.js:91 BAL.eff.jstaff.meAct | same FAIL | base (3b); RV-184 ce77c7cc elderTalkAmt targets it |
+| G1 guard / text / textrule / khắc | PASS | PASS | ok |
+| G2 rules-one-source + OLD SAVE (live 5ad52416) | PASS, old save ok | PASS | ok (the TMK-WARN-2 G2 FAIL is gone) |
+| G3 kit-conform | as base | as base | ok |
+| G4 hooks (webkit, odds-cap, coop-one-world, dialog-fixed, dead-card, button-crawl, kit-std-scan 6 vs baseline 28, noise 9/9 …) | all PASS except Q-SOFTLOCK | – | ok |
+| G4 Q-SOFTLOCK | FAIL 4/5 in 3/3 runs (iPad/Fold «person» tap covered by div.kring-band) | PASS 2/3, FAIL(4) 1/3, same kring-band cover | pre-existing flake (kring band over the person button), not ours: tmk-warn touches no kring / view code |
+| time-spill guard | PASS | – | ok |
+| quickcheck browser (open · old save · perf vs live) | PASS · open 1715 ms · old save ok · render 228/237, tab 439/424, buổi 1011/1442, tasks>200 22/20 | – | ok |
+| coop-e2e | 51 ok, stall week 2 «Chờ hảo hữu…» (buổi 1:3), timeout | 48 ok, stall week 1 same shape + world drift | pre-existing co-op stall; branch no worse |
+| kit-hand-mat-scan fold / ipadAir | lost plate 0, lost «!» 0 (149 / 146 cards) | – | ok |
+| **r2 7ba5cb7d full quickcheck vs LIVE 22afefb4** | **QUICKCHECK PASS** · core gates PASS (G1 bind PASS, Q-SOFTLOCK PASS, kit-std 6/28, anchor 0 bad) · open 2124 ms · old save ok · perf new/live render 281/219, tab 511/430, buổi 1953/1748, tasks>200 34/24 (inside the gate; the rise comes with the 3b r2 + lr-rules base, tmk-warn adds one module) · 2117 s | – | READY |
+
+### Stills (LOOKED, Fold 755x1000 + iPad 1180x820, kit-hand-rows): ONE DEFECT → KIT REQUEST K-HAND-DUPMAT
+The bribe take card plate «Nhận bạc, làm tai mắt» reads Tốn không · Được Bạc ++ · mỗi tháng Bạc + · Mất (watch odds, kill odds, Tân Giả khố
+10 tuần, «bị đuổi khỏi cung khi … bị nắm đủ 3 chứng tội mua chuộc người hầu (mỗi lần … dò, ra một chứng: khả năng cao)») · Ghi chú «có người
+nắm chứng thì ta nghe phong thanh trước» — all right, BUT the whole **Mất block shows TWICE** (both devices).
+Root (kit, law 9 → not patched here): jopic kitOptCopy(b, face=1) keeps every `.kdup` row for the hand plate, and the face's folded
+`kr-mat2 kdup` row is a whole copy of the source `kr-mat` row, which the plate also shows (kofold removed). Family scan (doubled visible row
+text in any hand plate, every PEND dialog, consort + servant passes): base fcbc1992 **0**, branch **1** (cnvBribeOpts take) — no base hand card
+has a Mất row; tmk-warn's take card is the first (the watch line moved from «kèm:» to «mất:», TMK-WARN-2). Any future sure card with a Mất
+(or sure-Bại) row in a hand will double the same way. Filed in dev/kit/KIT_REQUESTS.md (K-HAND-DUPMAT) for the kit keeper.
