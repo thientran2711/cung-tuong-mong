@@ -763,7 +763,7 @@ rdDef("cnv_mat",8,{t:"Đêm đầu",w:"emp",sj:"đêm đầu tiên bên Hoàng t
   {n:"Không xin gì, chỉ cúi đầu",e:["win","mid"],lx:"để mặc ngài quyết, người ta bảo ngươi nhạt, Danh −; hỏng thì chỉ dừng ở giữa",rt:"Ngài nói: “Giữ.”",rf:"Ngài im lặng bước ra."},
   {n:"Nói một câu thật lòng",e:["win","lose"],rt:"Ngài bật cười, rồi nắm tay ngươi rất lâu.",rf:"Ngài nhíu mày: “Nàng nói nhiều quá.”"},
   ...MAT2({n:"Xin ngài nhớ đến {mis}",if:MATM,e:["mid","lose"],go:(_A,_ok,G)=>matMis(G[0]),lx:"nhường ơn cho người cũ, Sủng −",rt:"Ngài ngạc nhiên, rồi gật đầu.",rf:"Ngài cho là ngươi đang diễn."},{lx:"nhường ơn cho chủ, Hoàng thượng để ý −"})]}},
- E:{win:{tag:"Ngài giữ ngươi lại",w:"emp",t:A=>A.f.up?`Sáng ra, thánh chỉ đến trước cả nắng: cung nữ hầu trà được phong ${RANKS[S.rank].n}. {mis} quỳ nghe chỉ cùng cả cung, rồi đứng dậy trước.`
+ E:{win:{tag:"Ngài giữ ngươi lại",w:"emp",t:A=>A.f.up?`Sáng ra, thánh chỉ đến trước cả nắng: cung nữ hầu trà được phong ${meRankN()}. {mis} quỳ nghe chỉ cùng cả cung, rồi đứng dậy trước.`
    :MATR()?"Ngài ở lại đến khi trời sáng hẳn, và trước khi đi, dặn Kính sự phòng: “Thẻ này, đặt trên cùng.”"
    :"Ngài muốn giữ ngươi, nhưng Kính sự phòng tâu: cung nữ chưa đủ danh, chưa thể phong. Ngài chỉ nói: “Trẫm nhớ rồi.” Ngươi được đưa về cung {mis} trước khi trời sáng.",
    go:A=>{if(S.srv&&!S.srv.risen&&S.nt>=BAL.ntRise.at&&typeof srvRise==="function"){A.f.up=1;srvRise("Hoàng thượng giữ ngươi lại Dưỡng Tâm điện");return ""}

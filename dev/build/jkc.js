@@ -356,7 +356,7 @@ function kcMonth(){S.turn++;const k=S.origin.k;
  if(S.year===KC.ty&&S.month===KC.tm-1&&S.tuan===2&&!S.kc.so)kcSoTuyen();
  S.month++;S.tuan=0;if(S.month>12){S.month=1;S.year++;S.age++;try{S.emp.age++;ageYear()}catch(e){}try{allKids().forEach(([kk])=>{if(kk.alive)kk.age++})}catch(e){}for(const m of S.kc.fam)m.age++}
  if(isKc()&&S.year===KC.ty&&S.month===KC.tm-1&&!S.kc.so)kcSoTuyen();
- if(S.suc<=0&&isKc())kcDie("Lao lực mà chết trước kỳ tuyển tú")}
+ if(typeof kietDue==="function")kietDue();if(S.suc<=0&&isKc()&&!(typeof kietSave==="function"&&kietSave()))kcDie("Lao lực mà chết trước kỳ tuyển tú")}
 const KCSUIT=[["Thế tử hầu phủ","hau",80],["con trai Thượng thư bộ Hộ","quan",65],["Thám hoa khoa này","than",55],["đại thương Giang Nam","thuong",45],["lão Thị lang góa vợ","lao",30]];let kcSO=null;
 function kcSuitReach(x){return x[2]<=S.kgt+BAL.ag.why.kcSuit.reach}
 /* npc-purpose G2: the house that seeks her = the highest one her standing reaches (its own ambition), not a die */
@@ -526,7 +526,7 @@ function kcEnd(id){const N="Nàng";const E={tu:["Xuất gia",`${N} cắt tóc �
  kcR6:["Nữ thương Giang Nam",`${N} giữ sổ muối nhà mình, thuyền buôn đi khắp Giang Nam. Người ta gọi nàng là Diêm thương nương tử.`]}[id];
  if(KCRARE[id]){try{RARE97.meet(id,KCRARE[id][1])}catch(e){}S.r97=(S.r97||[]).concat([{a:id,tag:KCRARE[id][1],ti:E[0]}])}
  kcEndDo(E[0],E[1],E[0])}
-function kcEndDo(h,t,fate){if(S.dead)return;S.kc.end=h;Q=Q.filter(m=>m.cls==="end"||m.nl);try{lifeLog&&0}catch(e){}over(h,t+` <span class="past">(Tiểu thư ngoài cung · ${kcTitle()})</span>`,fate);try{showModal()}catch(e){}}
+function kcEndDo(h,t,fate,alive){if(S.dead)return;S.kc.end=h;Q=Q.filter(m=>m.cls==="end"||m.nl);try{lifeLog&&0}catch(e){}over(h,t+` <span class="past">(Tiểu thư ngoài cung · ${kcTitle()})</span>`,fate,alive);/* alive: jleave Trả thẻ bài endings pass true (a married/teaching/nun life is not a «Chết vì»); other callers unchanged */try{showModal()}catch(e){}}
 function kcDie(why){if(S.dead)return;S.kc.end="chết";die(why)}
 /* r2-r1 (FAIL 4): a life that ends at home by any path (a palace-side die() inside a world call, an act, an event …) still says so:
    S.kc.end is set before the end card. The end card's "Đầu thai kiếp sau" starts a NEW life (start(): a new S with no S.kc) — that is
@@ -690,7 +690,7 @@ function kcFamHTML(){const nha=kcFamList("nha"),ban=kcFamList("ban");const rest=
  return h}
 /* Dư đồ: sub-tabs Trong phủ · Kinh thành, one kit priced button per place (who is there; city = 1 khắc; why locked) */
 function kcMapHTML(){const B=(k)=>{const P=KCPL[k];const w=kcGoWhy(k);const ppl=kcHere(k).map(m=>m.t.toLowerCase());const tmh=S.kc.at.ftm===k&&kcTmMan()?["người ấy"]:[];const who=ppl.concat(tmh);
-  return pbtn(`class="opt" data-kcgo="${k}" title="${P[3].replace(/"/g,"")}"`,P[0],[kcCity(k)?"tốn: 1 khắc":"",who.length?"người ở đây: "+who.join(" và "):"không gặp ai"].filter(Boolean).join(" · "),w||"")};
+  return pbtn(`class="opt" data-kcgo="${k}" title="${P[3].replace(/"/g,"")}"`,P[0],[kcCity(k)?`tốn: ${BAL.walk.near} khắc`:"",who.length?"người ở đây: "+who.join(" và "):"không gặp ai"].filter(Boolean).join(" · "),w||"")};
  /* law 6 real world (owner OB-PHU3): each road lists ONLY its own places — the base khuê các road (kc_*) never lists the other home roads' places (dn_ Nhà tranh / Ruộng nhà, nn_/nb_/np_ Thọ Xương cung …); roads with a kind (kd) are filtered by kc2Mine in jkc2 */
  const mineK=Object.keys(KCPL).filter(k=>/^kc_/.test(k)),inH=mineK.filter(k=>KCPL[k][2]),out=mineK.filter(k=>!KCPL[k][2]);
  const L0=[{k:"phu",label:"Trong phủ",n:inH.length},{k:"kinh",label:"Kinh thành",n:out.length}];/* reviewer kit-rcol-top-r1: no info band under tabs (owner 17/11 07:55Z) → the Ra phố ⓘ sits in the tab bar's trailing slot */

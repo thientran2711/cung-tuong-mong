@@ -498,7 +498,7 @@ ${O}.kofit2>.kaart{margin-inline:auto 0}`).join("\n");document.head.appendChild(
 /* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
  `<div class="opts kitpg-opts">`+
- [["Cúi đầu nhận lỗi","tốn: 1 khắc"],["Thưa rằng do Hoàng thượng định","tốn: 1 khắc"],["Dâng lễ vật xin bỏ qua",`tốn: Bạc -${BAL.kitpage.demo.gift.bac}, ${BAL.kitpage.demo.k} khắc`]]
+ [["Cúi đầu nhận lỗi","tốn: "+BAL.time.cost.talk+" khắc"],["Thưa rằng do Hoàng thượng định","tốn: "+BAL.time.cost.talk+" khắc"],["Dâng lễ vật xin bỏ qua",`tốn: Bạc -${BAL.kitpage.demo.gift.bac}, ${BAL.kitpage.demo.k} khắc`]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
 /* kit sample page (§6.2b FINAL): no cost / no gain → grey "không" rows, long note behind "!", every card one size */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Thẻ lựa chọn: một cỡ, chỉ Tốn và Được (còn lại sau dấu !)",html:()=>
@@ -528,7 +528,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2d",title:"Th�
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: ảnh vuông + Tốn/Được, ô thông tin full-width dưới",html:()=>
  `<div class="pc"><div class="pcr"><div class="pcb">`+
- [["Tâm sự","tốn: 1 khắc · được: thiện cảm +6 · ghi chú: chỉ làm được khi nàng ta ở nhà"],["Sai đi dò la","Tùy duyên · tốn: 2 khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5 · cần: đã gặp mặt"],["Nghe ngóng chung","tốn: 1 khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
+ [["Tâm sự","tốn: "+BAL.time.cost.talk+" khắc · được: thiện cảm +6 · ghi chú: chỉ làm được khi nàng ta ở nhà"],["Sai đi dò la","Tùy duyên · tốn: "+BAL.time.cost.talkAct+" khắc · được: biết 2 điều thật về nàng ta, "+evSg(BAL.ag.ev.one)+" · mất: thiện cảm -5 · cần: đã gặp mặt"],["Nghe ngóng chung","tốn: "+BAL.time.cost.talk+" khắc · được: biết 1 điều thật trong cung (hay về người đang gây chuyện)"]]
   .map(([n,x],i)=>pbtn(`data-kitsample="pc${i}"`,n,typeof kitParse==="function"?kitParse(x):x,"")).join("")+`</div></div></div>`})}catch(e){}
 /* GOAL / TASK cards (owner 16/11 21:10Z, chapter goal list "Đi làm: Học một môn tài nghệ" had no picture): an "Đi làm: <việc>" option is matched on the
    task itself (prefix dropped), and when nothing names a picture it shows the task's act / act-category picture (kitActArt) — every goal card has one. */

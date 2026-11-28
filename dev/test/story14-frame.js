@@ -110,9 +110,9 @@ const INP=fs.readFileSync(path.join(__dirname,'../measure/inpage4.js'),'utf8');
   o.max2=S.st.ch.max;const txt=[String(panel67()),String(ktStoryHTML()),JSON.stringify(typeof chapModel==='function'?chapModel():{})].join(' ').replace(/<[^>]+>/g,' ');o.bad=(txt.match(/Chương \d+\/(\d+)/g)||[]).filter(x=>!/\/14$/.test(x));return o});
  console.log('tm96:',JSON.stringify(tm));
  chk('r1 item 6: Thanh mai trúc mã life: max 14 at start and after 12 months, no «/15» anywhere',tm.origin==='thd'&&tm.tm&&tm.max===14&&tm.n===14&&tm.len===14&&tm.max2===14&&!tm.bad.length&&!tm.err,tm);
- /* ---- r1 item 3: every cast role of every arc is in the reviewed hostile-role table; muoi_no's debtor is not hostile ---- */
+ /* ---- r1 item 3: every cast role of every arc resolves a row of the reviewed hostile-role table (f14Row: road chapters .5–.11 inherit the nearest earlier row); muoi_no's debtor is not hostile ---- */
  const rt=await p.evaluate(()=>{const miss=[];for(const id in ARC67){const a=ARC67[id];const T=[a.g].concat(Object.values(a.B||{}).map(b=>b.t)).concat(Object.values(a.E||{}).map(e=>e.t)).map(x=>typeof x==='function'?String(x):String(x||'')).join(' ');
-   for(const k of ['v','v2'])if(T.includes('{'+k+'}')&&!(F14ROLE[id]&&k in F14ROLE[id]))miss.push(id+'.'+k)}return{miss,no:f14Hostile({a:'muoi_no'},'v'),ho:f14Hostile({a:'ch_ho'},'v'),oan:f14Hostile({a:'tt_oan'},'v')}});
+   for(const k of ['v','v2'])if(T.includes('{'+k+'}')&&!((R=>R&&k in R)(typeof f14Row==='function'?f14Row(id):F14ROLE[id])))miss.push(id+'.'+k)}return{miss,no:f14Hostile({a:'muoi_no'},'v'),ho:f14Hostile({a:'ch_ho'},'v'),oan:f14Hostile({a:'tt_oan'},'v')}});
  chk('r1 item 3: hostile roles from the reviewed table (every role listed; muoi_no / ch_ho not hostile; tt_oan hostile)',!rt.miss.length&&!rt.no&&!rt.ho&&rt.oan,rt);
  /* ---- r1 item 5: an ending no roll decides is previewed with its odds word, and a turned ending says why ---- */
  const pv=await p.evaluate(()=>{quiet=true;localStorage.clear();window.__forceOrigin='tt';start();quiet=false;Q.length=0;const out={words:[],turned:null};

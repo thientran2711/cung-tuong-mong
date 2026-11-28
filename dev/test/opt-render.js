@@ -78,7 +78,6 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
  for(const k of await p.evaluate(()=>Object.keys(FESTEV)))await one("FESTEV "+k,`Q.push(Object.assign({who:pEmp(),ev:"fest"},FESTEV["${k}"]()))`,"event");
  await one("servCauses",`roll=()=>true;(S.staff||[]).forEach(s=>s.cause=null);servCauses()`,"event");
  await one("palCeremony",`S.pal=S.pal==null?1:S.pal;S.palCer=1;palCeremony()`,"event");
- await one("xgConfirm",`xgConfirm(()=>{})`,"act");
  await one("hireCard",`hireCard("maid")`,"act");
  await one("Hàng chợ đen",`roll=()=>true;(S.staff||[]).forEach(s=>{s.net=null;s.tr="tham";s.spyFor=null;netOf(s)});servTraitMonth()`,"mixed");
  { const c=R.C["Hàng chợ đen"]||[];if(!c.some(x=>x.t==="Hàng chợ đen"))R.warn.push(["C:Hàng chợ đen","not produced"]);}
