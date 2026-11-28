@@ -16,7 +16,7 @@ const ROOT=path.resolve(__dirname,'../..');const OUTF=path.join(__dirname,'rdlg_
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});
 (async()=>{await new Promise(r=>srv.listen(0,'127.0.0.1',r));const b=await chromium.launch();const p=await b.newPage();
  await p.goto('http://127.0.0.1:'+srv.address().port+'/');await p.waitForFunction(()=>window.__ctmBuilt===1&&typeof start==='function'&&typeof ARC67==='object',null,{timeout:180000});
- const U=await p.evaluate(()=>{SLOT=3;try{store.set(NL_KEY,null)}catch(e){}start();
+ const U=await p.evaluate(()=>{SLOT=3;try{store.set(NL_KEY,null)}catch(e){}start();/* a road text can read the life's own rank (jrd_cn CNCHU_GAPT): pinned, so the list is the same every run (--check) */S.rank=1;
   const txt=x=>{try{return typeof x==="function"?String(x({act:{},f:{},sc:0,used:[],hist:[],sj:""})):String(x||"")}catch(e){return""}};
   const keysOf=a=>{const s=String(a.cast||"");const K=new Set();for(const m of s.matchAll(/rdCast\(A,\[([^\]]*)\]/g))for(const k of m[1].match(/"(\w+)"/g)||[])K.add(k.replace(/"/g,""));
    const T=[];for(const id in a.B||{}){const h=a.B[id];T.push(txt(h.t),txt(h.h));for(const o of (typeof h.o==="function"?[]:h.o||[]))T.push(txt(o.n),txt(o.rt))}T.push(txt(a.g));

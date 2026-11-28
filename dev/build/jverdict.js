@@ -167,7 +167,10 @@ function hold(){if(RF.held){cue();return}RF.held=true;RF.stat.hold++;cue();dog()
    at KIT_SCN.z + 1). A layer ABOVE the card (the item reveal .kmov «Nhận», a podium, the roulette, a tip) is one she closes by her own tap, and
    the held card is there again: being covered never lets the held screen go (BIG rv coop-qcard r3: r1's «covered 2 looks → release» dropped
    the result card under the item reveal — she never saw what her choice did, KIT 7.4). */
-function dog(){if(RF.dogT)return;const tick=()=>{RF.dogT=0;if(!RF.held&&!RF.wantModal&&!RF.later.length)return;if(!ui()||!vis()){RF.stat.dog=(RF.stat.dog|0)+1;release();return}RF.dogT=setTimeout(tick,700)};RF.dogT=setTimeout(tick,700)}
+/* DAYQ-NOTURN (law 11, the held-card family): a result card that keeps .on but is see-through (opacity under .05, the cardBox rule of the kit) is not
+   on screen either — two dog ticks in a row (never the first frame of its kmUp entrance) let the held screen go */
+function faded(){try{if(window.COOPW&&COOPW.on)return false;/* solo only, like the jdayq nets */const t=T();return !!t&&+getComputedStyle(t).opacity<.05}catch(e){return false}}
+function dog(){if(RF.dogT)return;const tick=()=>{RF.dogT=0;if(!RF.held&&!RF.wantModal&&!RF.later.length){RF.fz=0;return}const fz=faded()?(RF.fz=(RF.fz|0)+1):(RF.fz=0);if(!ui()||!vis()||fz>=2){RF.fz=0;RF.stat.dog=(RF.stat.dog|0)+1;release();return}RF.dogT=setTimeout(tick,700)};RF.dogT=setTimeout(tick,700)}
 function release(){if(!RF.held&&!RF.wantModal&&!RF.later.length)return;RF.held=false;RF.stat.rel++;const t=T();if(t){t.classList.remove("kres-hold");const b=t.querySelector(".kres-next");if(b)b.remove()}
  try{front()}catch(e){}const L=RF.later.splice(0);for(const f of L){try{f()}catch(e){console.error("RF later",e)}}
  if(RF.wantModal){RF.wantModal=false;try{if(Q.length&&!S.dead)showModal()}catch(e){console.error("RF modal",e)}}}
