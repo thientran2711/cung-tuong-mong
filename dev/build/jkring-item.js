@@ -321,6 +321,12 @@ window.addEventListener("click",ev=>{const c=ev.target.closest&&ev.target.closes
  if(i<0||!(typeof tsbPets==="function")||i>=tsbPets(S).length)return;try{if(kriPetOpen(i)){ev.stopImmediatePropagation();ev.preventDefault()}}catch(e){console.error("kri pet",e)}},true);
 /* ---- (4) toilette dress (#kg82 «Rương trang phục», jtoil toilDressUI): tap a chest piece or a worn slot → the ring on the same tabs, focused on it;
    acts = Cài / Mặc / Đeo (wear at once + saved, owner E95) or Tháo — the toilette's own toilAct; closing the ring redraws the toilette (live figure preview) ---- */
+/* K-WEAR-ROW (KK70 28/11, RV-185 find, laws 3 + 4): putting a piece on / taking it off moves no stat at once (its effect counts on her looks, not in S), so the
+   result read «Được: không · Mất: không» while the card said «Được cài: Sắc +3». The pane names the piece's OWN effect line — the card's Được row (jwdinv
+   wdItemLists D[0], one source) — in Được when worn, in Mất when taken off, FIRST in that row (other real results of the same tap stay: the «wear» quest step's Bạc, the swapped piece); a plain piece («không thêm») adds nothing. */
+function kriWearFx(g){try{if(typeof wdItemLists!=="function"||typeof wdEntryOf!=="function")return"";const L=wdItemLists(wdEntryOf(g));const d=L&&L.D&&L.D[0]||"";return /không thêm/.test(d)?"":d}catch(e){return""}}
+function kriWearRows(rows,fx,off){try{if(!fx)return rows;const r=rows.find(x=>x.k===(off?"mat":"duoc"));const t=kriE(fx);if(r&&!r.items.includes(t))r.items.unshift(t)}catch(e){}return rows}
+window.kriWearRows=kriWearRows;
 function kriToilOpen(x0){if(typeof toilAct!=="function"||typeof TOIL==="undefined"||!TOIL.st||TOIL.st.dv)return false;const reg=()=>(typeof KINV!=="undefined"&&KINV.reg.toil)||null;if(!reg())return false;
  const verb=g=>{const sl=typeof toilSlotOf==="function"?toilSlotOf(g.k):null;return sl==="tram"||sl==="hair"?"Cài":sl==="y"?"Mặc":sl==="hd"?"Dán":"Đeo"};
  /* dress-fix: a hoa điền is not «worn» from the chest — it is the one picked for today (TOIL.st.hdk, slot «Hoa điền»); its act is «Dán» / «Tháo» */
@@ -332,11 +338,11 @@ function kriToilOpen(x0){if(typeof toilAct!=="function"||typeof TOIL==="undefine
   items:t=>((reg()||{}).items||[]).filter(x=>x&&x.g&&((t||tab)==="all"||x.cat===(t||tab))).map(x=>({id:typeof kinlId==="function"?kinlId(x):x.name,src:x.src,src512:x.src512,name:x.name,grade:x.grade,lux:x.lux,mark:x.mark,sub:x.onText||x.sub||"",x})),
   info:it=>{try{const r=kitItemRef({g:it.x.g});return r&&typeof kinlDetail==="function"?kinlDetail(r,{key:"kri"}):""}catch(e){return""}},
   acts:it=>{const g=it.x.g,worn=isOn(g),sl=typeof toilSlotOf==="function"?toilSlotOf(g.k):null;
-   return[{n:worn?"Tháo":verb(g),main:1,off:worn&&sl==="y"?"Y phục chỉ thay: chọn bộ khác":"",fn:()=>{const s=kriSnap(null),l0=kriLogMark();
+   return[{n:worn?"Tháo":verb(g),main:1,off:worn&&sl==="y"?"Y phục chỉ thay: chọn bộ khác":"",fn:()=>{const s=kriSnap(null),l0=kriLogMark();const fx=kriWearFx(g);
     TOIL.st.sel={k:g.k,wdSlot:g.wdSlot||null,w:!!g.w};window.__kriAct=1;try{toilAct(worn?"off":"wear")}finally{window.__kriAct=0}
     /* putting a piece on / taking it off moves it between the slot and the chest; it is not a new item (no «Rương đồ / Vừa vào Tư trang» box, j93 kmDiff) */
     try{if(typeof kmSnap==="function"&&KMS===S)KMSNAP=kmSnap()}catch(e){}
-    const L=kriLogSince(l0);return{ok:true,title:`${worn?"Tháo":verb(g)} · ${it.name}`,rows:kriDiffRows(s,null).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}]},
+    const L=kriLogSince(l0);return{ok:true,title:`${worn?"Tháo":verb(g)} · ${it.name}`,rows:kriWearRows(kriDiffRows(s,null),fx,worn).concat(L.length?[{k:"note",label:"Ghi chú",items:L}]:[])}}}]},
   empty:"Ngăn này chưa có món nào.",onClose:()=>{if(K82)K82.classList.remove("kri-hide");try{if(TOIL.st&&!TOIL.st.dv)toilDressUI()}catch(e){console.error("kri toil",e)}}});
  if(!R)return false;if(K82)K82.classList.add("kri-hide");if(x0){const C=kitRingItem.cur;const i=C.items.findIndex(y=>y.x===x0||(y.x.g&&x0.g&&y.x.g.k===x0.g.k&&!!y.x.g.w===!!x0.g.w&&!!y.x.g.wdSlot===!!x0.g.wdSlot));if(i>=0){C.rot=i;kriPlace(C);setTimeout(()=>kriFocus(C),kriCalm()?0:180)}}return true}
 window.addEventListener("click",ev=>{if(!kriOn()||window.__kriAct)return;const t=ev.target.closest&&ev.target.closest('#kg82 [data-kinvkey="toil"][data-kinvi], #kg82 [data-keqk="toil"][data-keqi]');if(!t)return;
