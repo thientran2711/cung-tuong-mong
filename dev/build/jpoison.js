@@ -73,7 +73,7 @@ function pgGive(a,t,ix,pk){const e=a.inv[ix];if(!e||!pgFood(e)||!PGX[pk])return"
  if(aRoll(O.o,a)){const r=pgEffect(a,t,pk);if(a!==S)try{newsAdd(t,"poison",`${rkName(t)} ${t.name} lâm bệnh lạ sau khi dùng quà.`)}catch(x){}return `${by} sai người mang ${dn} sang tặng ${rkName(t)} ${t.name}. ${r}`}
  const c=caught(a,t,true,`bỏ ${PGX[pk].n.toLowerCase()} vào ${dn} tặng ${NM(t)}`);
  if(c){const q=queenP();const hq=q&&q!==a&&q!==t;if(hq)evA(q,a,BAL.pg.hhEv);return `${by} tặng ${NM(t)} ${dn} có độc. ${c}${hq?`Hoàng hậu nắm thêm ${BAL.pg.hhEv} chứng cứ. `:""}`}
- relAdd(t,a,BAL.eff.jpoison.pgGive);return `${NMc(t)} thấy ${dn} có vị lạ, sai đổ đi; từ đó dè chừng ${a===S?"ngươi":NM(a)} (quý ${a===S?"ngươi":NM(a)} ${balSg(BAL.eff.jpoison.pgGive)}). `}
+ relAdd(a,t,BAL.eff.jpoison.pgGive);return `${NMc(t)} thấy ${dn} có vị lạ, sai đổ đi; từ đó dè chừng ${a===S?"ngươi":NM(a)} (quý ${a===S?"ngươi":NM(a)} ${balSg(BAL.eff.jpoison.pgGive)}). `}
 /* her card: target × poison — kit options with the real odds word, full numbers, Vì sao (option.why) */
 function pgLine(t,pk,X){/* previews: pgGive */const P=PGX[pk];const q=queenP();const hh=q&&q!==t&&q!==S?` · Hoàng hậu nắm thêm ${BAL.pg.hhEv} chứng cứ của ngươi`:"";
  return `${word(X.o)} · tốn: ${BAL.pg.khac} khắc, ${P.n} -1, Đức -${P.duc} · thành: ${P.won} · hỏng: ${t.name} với ngươi ${balSg(BAL.eff.jpoison.pgGive)} vì nhận ra vị lạ · kèm: hỏng mà bị lần ra (khả năng ${chanceLo(X.cp)}): nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ của ngươi${hh}`}
@@ -88,7 +88,7 @@ try{KIT_ACT_PIDS.add("pgpick")}catch(e){}
 PEND.pgin=p=>{const f=byKey(p.f);if(!f)return null;const P=p.pk?PGX[p.pk]:null;const nd=(S.inv||[]).findIndex(e=>e&&e.k==="kimbac"&&!e.h);const m=S.maid;
  const keep=()=>{if(p.e)invAdd(S,Object.assign({},p.e,{wk:p.e.wk?Object.assign({},p.e.wk,{from:p.f}):undefined}))};
  const hit=()=>{const r=pgEffect(f,S,p.pk);log(r);Q.push({t:"Trúng độc",who:pv(f),h:`<p class="r">${r}</p><p class="past">Món ${p.dn} của ${f.name}.</p>`})};
- const found=how=>{/*evok: poisoned gift act*/evA(S,f,BAL.eff.jpoison.evFound);relAdd(S,f,BAL.eff.jpoison.found);Q.push({t:"Phát hiện có độc",who:pv(f),h:`<p>${how}: ${p.dn} của ${f.name} có độc. Ngươi nắm ${balAb(BAL.eff.jpoison.evFound)} chứng cứ của nàng · ${f.name} quý ngươi ${balSg(BAL.eff.jpoison.found)}.</p>`});log(`${how}: ${p.dn} của ${f.name} có độc (chứng cứ ${balSg(BAL.eff.jpoison.evFound)}).`)};
+ const found=how=>{/*evok: poisoned gift act*/evA(S,f,BAL.eff.jpoison.evFound);relAdd(f,S,BAL.eff.jpoison.found);Q.push({t:"Phát hiện có độc",who:pv(f),h:`<p>${how}: ${p.dn} của ${f.name} có độc. Ngươi nắm ${balAb(BAL.eff.jpoison.evFound)} chứng cứ của nàng · ${f.name} quý ngươi ${balSg(spSee("rel",BAL.eff.jpoison.found))}.</p>`});log(`${how}: ${p.dn} của ${f.name} có độc (chứng cứ ${balSg(BAL.eff.jpoison.evFound)}).`)};
  const clean=how=>{log(`${how}: ${p.dn} không có gì lạ.`);keep()};
  /* law 4 + law 7 (review/odds-no-unknown): «Nhận ngay» shows the odds of the roll it uses = her own guard against THIS giver's poison
    (100 − pgOdds(giver → her, this dish): Tâm cơ, trust, dish, her thái y / kim bạc / taster). The same number for a clean or a poisoned

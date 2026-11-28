@@ -39,7 +39,7 @@ Object.assign(MS67,{
   g:()=>S.origin.k==="cnv"?`Mới vào cung làm kẻ hầu: làm tròn phận sự, giữ lòng tin của chủ. Chủ tin lên ${F14G().tin}, hoặc được thăng Đại cung nữ, thì xong chương, có thưởng; qua ${f14Nv(F14L().nhapCnv)} tháng thì chương tự khép, không thưởng.`
    :`Mới vào cung: giữ mình, được Hoàng thượng để mắt. Được tấn phong một bậc thì xong chương, có thưởng; qua ${f14Nv(f14NhapL())} tháng thì chương tự khép, không thưởng.`,
   steps:m=>S.origin.k==="cnv"?[[`Chủ tin ${kitNeed(S.tin,F14G().tin)}`,(S.tin||0)>=F14G().tin],[`Được thăng ${SRK.maid[BAL.srvRk.dai]} (Đại cung nữ)`,!!(S.srv&&S.srv.rk>=BAL.srvRk.dai)],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)],f14Late(m,F14L().nhapCnv," đầu")]
-   :[[`Được tấn phong một bậc (nay ${RANKS[Math.min(S.rank,7)].n})`,S.rank>m.r0],f14Late(m,f14NhapL(m)," đầu")],
+   :[[`Được tấn phong một bậc (nay ${meRankN()})`,S.rank>m.r0],f14Late(m,f14NhapL(m)," đầu")],
   any:1,get fx(){return{danh:F14D().nhap}},end:"Ngươi đã đứng được chân trong cung.",get rw(){return["court",F14R().nhap]}},
  sung14:{t:()=>f14Srv()?"Một ánh mắt rồng":"Sơ thừa ân sủng",lim:()=>F14L().sung,wait:()=>f14Home(),
   g:()=>f14Srv()?`Kẻ hầu cũng có ngày được Hoàng thượng để mắt: Hoàng thượng để ý lên ${F14G().nt}, hoặc được phong Đáp ứng, thì xong chương, có thưởng. Quá ${f14Nv(F14L().sung)} tháng mà chưa được thì chương tự khép để truyện đi tiếp, không thưởng.`
@@ -82,13 +82,20 @@ function f14Norm(){if(!f14())return;const c=S.st.ch,P=c.plan;const isT=x=>/^ms:/
  for(let g=0;g<8&&cnt()>F14.max;g++){let j=-1;for(let i=P.length-1;i>c.i;i--)if(P[i]==="s"){j=i;break}if(j<0)break;P.splice(j,1)}
  c.max=F14.max}
 /* the 14-chapter advance: a chapter that cannot run is replaced by a shared arc so the numbers stay 1..14 */
-function f14Shared(E){const c=S.st.ch;const ids=arcIds67("*").filter(id=>!c.usedS.includes(id)&&arcOk67(ARC67[id]));if(!ids.length)return false;const id=choose67("*",ids);const B=newThread67(id,"m");if(!B)return false;c.usedS.push(id);histAdd67("*",id);chStartArc67(B,E);return true}
+/* CNVSTALL (27/11, whole family): every shared arc is ok:nsrv67, so for a maid (and once the shared pool is spent) nothing filled the slot and the
+   frame closed early (road-full cnv_chu: mistress gone after ch.7 → .8–.11 cast false → ch.all at 7, no origin ending). Then the origin's own
+   premises still in c.pool (j67 chNext67, the "o" slot's pool; each arc's own ok() decides, so a maid only gets maid arcs) fill it. */
+function f14Shared(E){const c=S.st.ch;const ids=arcIds67("*").filter(id=>!c.usedS.includes(id)&&arcOk67(ARC67[id]));
+ if(ids.length){const id=choose67("*",ids);const B=newThread67(id,"m");if(B){c.usedS.push(id);histAdd67("*",id);chStartArc67(B,E);return true}}
+ const B=chNext67(E||{k:0});if(B){chStartArc67(B,E);return true}return false}
 (function(){const a0=chAdvance67;chAdvance67=function(E){if(!f14())return a0.apply(this,arguments);try{f14Norm()}catch(e){console.error(e)}const c=S.st.ch;S.st.M=null;
  while(++c.i<c.plan.length){if(c.n>=F14.max)break;const p=c.plan[c.i];
   if(p==="fin"){chFinale67();continue}
   if(p==="o"){const rd=S.st.f14.road;if(rd&&!S.st.f14.r0&&c.pool.includes(rd)){S.st.f14.r0=1;const B=newThread67(rd,"m");if(B){c.pool=c.pool.filter(x=>x!==rd);histAdd67(c.k,rd);chStartArc67(B,E);return}}
    const B=chNext67(E||{k:0});if(B){chStartArc67(B,E);return}if(f14Shared(E))return;continue}
   if(p==="s"){if(f14Shared(E))return;continue}
+  /* chapter 12 is chosen by her state when it OPENS (jend14 eg12: still a maid → ms:len14), also when the slots before it were skipped */
+  if(p==="end:12"&&typeof eg12==="function"&&typeof egOn==="function"&&egOn()){const q=eg12();if(q!=="end:12"){c.plan[c.i]=q;c.i--;continue}}
   if(p==="end:12"){for(const id of ["st_dong","st_con"]){if(ARC67[id]&&arcOk67(ARC67[id])){const B=newThread67(id,"m");if(B){chStartArc67(B,E);return}}}if(f14Shared(E))return;continue}
   if(p.startsWith("st:")){const id=p.slice(3);if(ARC67[id]&&arcOk67(ARC67[id])){const B=newThread67(id,"m");if(B){chStartArc67(B,E);return}}if(f14Shared(E))return;continue}
   if(p.startsWith("ms:")){const id=p.slice(3);if((id==="hau"&&S.rank>=7)||(id==="ke"&&S.heir&&!S.heir.v)||(id==="len14"&&S.srv&&S.srv.risen)){if(f14Shared(E))return;continue}msStart67(id);return}}
@@ -148,15 +155,45 @@ window.f67Mig=f67Mig;
 const F14ROLE={tt_co:{v:1},tt_oan:{v:1},tt_tranh:{v:0},tt_mat:{v:0},dtq_bien:{v:1},dtq_vu:{v:1},dtq_huynh:{v:1},
  muoi_tuoc:{v:1},muoi_lau:{v:1},muoi_doi:{v:0},muoi_no:{v:0},cn_chu:{v:1},cn_than:{v:1},ch_benh:{v:0},ch_ho:{v:0},ch_bi:{v:0},
  thd_tho:{v:1},thd_tro:{v:0},thd_hoc:{v:0},cnv_mat:{v:0},s_than:{v:1},s_thu:{v:1,v2:0},s_hoa:{v:1},s_dich:{v:1},s_ban:{v:1,v2:1},
- st_the:{v:0,v2:1},st_con:{v:1},st_dong:{v:1},tm96b:{v:1},tm96c:{v:1}};
+ st_the:{v:0,v2:1},st_con:{v:1},st_dong:{v:1},tm96b:{v:1},tm96c:{v:1},
+ /* F14ROLE-ROWS (MAIN 182, 27/11): the roles no row reached (413 on 70 roads/premises), read role by role from each arc's own text by the
+    same 1/0 rule above. A road gets its row at its premise or first chapter; a later chapter has its own row only where the text turns the
+    person's stance (f14Row inherits the rest). No 1→0→1 on one road (f14Carried looks one chapter back only). Evidence: reports/f14role-rows.md */
+ dtq_binh_5:{v:1},dtq_hang:{v:1},dtq_thuong:{v:0},dtq_ky:{v:0},dtq_ngua_6:{v:1},dtq_hang_6:{v:1},dtq_thuong_6:{v:1},dtq_ky_6:{v:1},
+ tt_ruong:{v:1},tt_gia:{v:0},tt_tho:{v:0},tt_thu:{v:0},tt_ruong_6:{v:1},tt_gia_6:{v:1},tt_tho_6:{v:1},tt_thu_6:{v:1},
+ muoi_no_7:{v:0,v2:1},muoi_thi:{v:1},muoi_hoi:{v:1},muoi_gia_5:{v:1},muoi_tien_5:{v:1},muoi_thi_5:{v:1},muoi_hoi_5:{v:1},
+ cn_tinh_5:{v:1},cn_ban_5:{v:1},cn_chuoi:{v:0},cn_tiec:{v:0},cn_chuviet:{v:1},cn_theo:{v:1},
+ cn_chuoi_6:{v:0,v2:0},cn_tiec_6:{v:0,v2:0},cn_chuviet_6:{v:1,v2:0},cn_theo_6:{v:1,v2:0},cn_chuoi_10:{v:1,v2:0},cn_tiec_10:{v:1,v2:0},
+ nc_gian_5:{v:1},nc_su_5:{v:1},nc_tuc_5:{v:1},nc_vuong_5:{v:1},bd_ngua_5:{v:1},bd_hoa_5:{v:1},bd_tuc_5:{v:1},bd_hoang_5:{v:1},
+ nc_men:{v:0},nc_kinh:{v:1},nc_nu:{v:0},nc_the:{v2:0},nc_men_5:{v:1},nc_kinh_5:{v:1},nc_nu_5:{v:1},nc_the_5:{v:1},
+ nc_men_7:{v:1,v2:0},nc_kinh_7:{v:1,v2:0},nc_nu_7:{v:1,v2:0},nc_the_7:{v:1,v2:0},
+ bd_san:{v:1},bd_soi:{v:0},bd_soi_8:{v:1},bd_tuyet:{v:1},bd_hen:{v:1},bd_luuly_6:{v:1},bd_lua_6:{v:1},bd_bac_6:{v:1},bd_su_6:{v:1},
+ pt_hai:{v:1},pt_su:{v:1},pt_tang:{v:1},pt_dang:{v:1},pf_co_5:{v:1},pf_guong_5:{v:1},pf_tra_5:{v:1},pf_lich_5:{v:1},
+ pf_co_11:{v:1,v2:0},pf_guong_11:{v:1,v2:0},pf_tra_11:{v:1,v2:0},pf_lich_11:{v:1,v2:0},
+ td_an_5:{v:1},td_ke_5:{v:1},td_ke_8:{v:0},td_song_6:{v:1},td_tha_5:{v:1},
+ ch_co_5:{v:0},ch_co_6:{v:1},ch_tuyentu_10:{v:0},ch_lenhbai_10:{v:0},ch_diensan_10:{v:0},ch_honngoai_10:{v:0},
+ thd_sach_5:{v:0},thd_sach_6:{v:1},thd_uoc:{v:1},thd_giay:{v:0},thd_dich_5:{v:1},thd_dien_5:{v:1},thd_uoc_5:{v:1},thd_giay_5:{v:1},
+ cnv_chu_5:{v:1},cnv_ban_5:{v:1},cnv_ma_5:{v:1},cnv_kho:{v:0},cnv_thu:{v:0},cnv_tieu:{v:1},
+ cnv_kho_6:{v:1},cnv_thu_6:{v:1},cnv_hach_6:{v:1},cnv_tieu_6:{v:1},
+ noi14:{v:1},hau14:{v:1},ke14:{v:0}};
 window.F14ROLE=F14ROLE;
-function f14Hostile(A,k){try{return !!(A&&F14ROLE[A.a]&&F14ROLE[A.a][k]===1)}catch(e){return false}}
+/* road chapters .5–.11 (jroad rdDef: ARC67["<road>_<n>"], o:"rd", road, rn) INHERIT the nearest EARLIER row (MAIN 178 ruling 27/11 ~11:03Z):
+   own row first, then <road>_<n-1> … <road>_5, then <road> (= the .4 premise cast). Only a real road chapter inherits (o:"rd" + its road),
+   so an id that only looks like "<x>_<n>" never borrows a row. null = no row anywhere on the road (role not hostile). */
+function f14Row(id){try{if(F14ROLE[id])return F14ROLE[id];const a=ARC67[id];if(!a||a.o!=="rd"||!a.road||!(a.rn>0))return null;
+ for(let n=a.rn-1;n>=BAL.road.first;n--)if(F14ROLE[a.road+"_"+n])return F14ROLE[a.road+"_"+n];return F14ROLE[a.road]||null}catch(e){return null}}
+window.f14Row=f14Row;
+function f14Hostile(A,k){try{const R=A&&f14Row(A.a);return !!(R&&R[k]===1)}catch(e){return false}}
 /* hate for real: both sides' thiện cảm drop by at least hate.min (j9 relAdd also raises oán both ways) */
 function f14Hate(v){if(!v)return;const H=BAL.st14.hate;const m=Math.max(aff(S,v)||0,aff(v,S)||0);relAdd(S,v,-Math.max(H.min,H.base+m))}
 /* a hostile role takes, when it can, someone who is not already her friend (thiện cảm under each side's netTh "than") */
 (function(){const c0=castRv67;castRv67=function(A,k,f){if(!f14()||!A||!f14Hostile(A,k))return c0.apply(this,arguments); let r=c0.call(this,A,k,v=>(!f||f(v))&&(aff(S,v)||0)<netTh(S,"than")&&(aff(v,S)||0)<netTh(v,"than"));if(!r)r=c0.apply(this,arguments);
  try{if(r&&!(A.host14||{})[k]){const v=rv67(A,k);if(v){A.host14=A.host14||{};A.host14[k]=v.id;f14Hate(v)}}}catch(e){console.error(e)}return r}})();
-(function(){const n0=newThread67;newThread67=function(id,kind){const A=n0.apply(this,arguments);try{if(A&&f14())for(const k of ["v","v2"]){if(A.act&&A.act[k]!=null&&!(A.host14||{})[k]){const v=rv67(A,k);if(v&&f14Hostile(A,k)){A.host14=A.host14||{};A.host14[k]=v.id;f14Hate(v)}}}}catch(e){console.error(e)}return A}})();
+/* once per person: a road chapter's person CARRIED from the chapter before (jroad rdCast: S.st.f14.act) whose role was already hostile there
+   was hated when first cast, so the inherited row (f14Row) does not hate her again chapter after chapter */
+function f14Carried(A,k,v){try{const a=ARC67[A.a];if(!a||a.o!=="rd"||!a.road)return false;const K=S.st.f14&&S.st.f14.act;if(!K||K[k]!==v.id)return false;
+ return f14Hostile({a:a.rn>BAL.road.first?a.road+"_"+(a.rn-1):a.road},k)}catch(e){return false}}
+(function(){const n0=newThread67;newThread67=function(id,kind){const A=n0.apply(this,arguments);try{if(A&&f14())for(const k of ["v","v2"]){if(A.act&&A.act[k]!=null&&!(A.host14||{})[k]){const v=rv67(A,k);if(v&&f14Hostile(A,k)){A.host14=A.host14||{};A.host14[k]=v.id;if(!f14Carried(A,k,v))f14Hate(v)}}}}catch(e){console.error(e)}return A}})();
 function f14Foe(){try{if(!f14()||!S.foe)return;const e=rivals.find(v=>v.name===S.foe&&v.alive);if(!e||S.st.f14.foe)return;e.enemy=true;f14Hate(e);S.st.f14.foe=e.id}catch(e){console.error(e)}}
 (function(){const i0=a67init;a67init=function(k){const r=i0.apply(this,arguments);f14Foe();return r}})();
 /* OD:L1253 (owner 16/11 07:00Z): the same identity + road + option must not always give the same result across lives. In a 14-chapter life

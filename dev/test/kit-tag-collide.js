@@ -5,7 +5,7 @@ const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=requi
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const rows=[];let tot=0,ov=0;
  for(const sz of (SIZES||'1180x820,755x1000').split(',')){const [W,H]=sz.split('x').map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:W<1100,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce',ignoreHTTPSErrors:true});
-  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:404,body:''}));/* rv-plr4 r8 (law 11): only the page gets the 20 MB html; every other ctm.test asset 404 — answering each mp3/vendor request with the whole page broke the Playwright pipe once the page passed ~20.6 MB */await ctx.route(/^http:\/\/ctm\.test\/index\.html([?#].*)?$/,r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
   const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',()=>{});
   await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function');await sleep(2000);
   await p.addStyleTag({content:'#kroul{display:none!important}'});

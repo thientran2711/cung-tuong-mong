@@ -203,7 +203,7 @@ function j95bSeed(x,y,how,claim){/* x spreads to y that SHE harmed y. x = rival 
  if(y.j95rum&&y.j95rum[key(S)]&&wk()-y.j95rum[key(S)].w<=J95B.RUMW)return null;
  const c=claim||j95bClaim(y);const pers=x?Math.max(0,aff(y,x))/4+(x.tai||40)/10:5;const credo=oddsCl(Math.min(Math.round(45+pers-Math.max(0,aff(y,S))/3+(nv(y,"coverUp"))+(c.truth?20:0)),90));
  if(!j95dice(credo))return null;
- const oa=Math.round(18+pers),af=12;oanAdd(y,S,oa);affAdd(y,S,-af);const src=x?x.name:"không rõ";
+ const RB=BAL.oanPace.rum,oa=Math.round(RB.oa+pers),af=RB.af;/* review/oan-pace (law 4): the believer's oán / lost liking (were typed 18 / 12); the rise itself is one bounded step (oanAdd → opUp) */oanAdd(y,S,oa);affAdd(y,S,-af);const src=x?x.name:"không rõ";
  y.j95rum=y.j95rum||{};y.j95rum[key(S)]={txt:"ngươi "+c.txt,src,w:wk()};
  const r={u:++z.u,y:y.id,x:x?x.id:null,src,how,txt:c.txt,truth:c.truth?1:0,w:wk(),oa,af,known:0,cleared:0,traced:0};z.rum.push(r);if(z.rum.length>30)z.rum.shift();
  j95bAct("v"+y.id,"misbelief","me",{ok:true,ex:1,why:`tin đồn: ngươi ${c.txt}, nguồn: ${src} (${c.truth?"chuyện có thật":"bịa đặt"}; qua ${how})`},"rumor:"+how);
@@ -221,7 +221,7 @@ const j95bRumCard=rcpReg("j95bRum",u=>{const z=j95bZ();const r=z.rum.find(q=>q.u
  return{t:"Nghe đồn",who:pv(y),opt:1,h:`<p>${txt}</p><p><i>(Lời đồn; ngươi chưa thể chắc ai đã nói gì.)</i></p>`,rum95:r.u,opts:j95bRumOpts(r,y,x)}});
 /* port 16/11 (owner 11/15 07:15Z): whole Tốn / Được / Mất + odds word on every option */
 function j95bRumOpts(r,y,x){const oc=j95bClearOdds(r),ot=oddsCl(Math.min(35+eyes(S)*8+(S.tamco||0)/4,90));
- return[{n:`Sang gặp ${y.name} giải bày`,fx:{},x:`${word(oc)} · tốn: ${BAL.m95b.k} khắc · thành: hết hiểu lầm, ${y.name} bớt oán ngươi · hỏng: ${y.name} chưa tin, oán ngươi ${balSg(BAL.eff.j95b.j95bClear_3)} · (chuyện có thật thì khó giải, chỉ nguôi một nửa)`,go:()=>j95bClear(r.u,"card")},
+ return[{n:`Sang gặp ${y.name} giải bày`,fx:{},x:`${word(oc)} · tốn: ${BAL.m95b.k} khắc · thành: hết hiểu lầm, ${y.name} bớt oán ngươi · hỏng: ${y.name} chưa tin, ${pvOan(y,BAL.eff.j95b.j95bClear_3,"oán ngươi")} · (chuyện có thật thì khó giải, chỉ nguôi một nửa)`,go:()=>j95bClear(r.u,"card")},
   {n:"Cho người tra xem ai tung tin",fx:{...BAL.m95b.trace},x:`${word(ot)} · tốn: ${BAL.m95b.k} khắc · Bạc ${BAL.m95b.trace.bac} · thành: biết kẻ tung tin, chứng cứ về kẻ ấy ${balSg(BAL.eff.j95b.evJ95bTrace)} · giải bày về sau dễ hơn · hỏng: không lần ra ai`,go:()=>j95bTrace(r.u)},
   {n:"Mặc kệ",fx:{suc:BAL.cv.rest},x:`giữ sức · kèm: ${y.name} vẫn tin lời đồn, sẽ tìm dịp ra tay với ngươi`,go:()=>log(`Ngươi bỏ ngoài tai lời đồn về ${y.name}.`)}]}
 function j95bRumOf(y){const z=j95bZ();for(let i=z.rum.length-1;i>=0;i--){const r=z.rum[i];if(r.y===y.id&&!r.cleared&&wk()-r.w<=J95B.RUMW+4)return r}return null}

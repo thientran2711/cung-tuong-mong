@@ -122,7 +122,7 @@ function lockCyc(id,re){const p0=PEND[id];if(!p0)return;PEND[id]=function(){cons
 lockCyc("ksp",/^Tắm gội chờ giá/);lockCyc("empnight",/^Thắp đèn hầu rượu/);
 const fl0=flip;flip=function(){const r=fl0.apply(this,arguments);try{if(!S||S.dead)return r;
   const d=S.nightWhy;if(d&&d.wk===wk()&&Array.isArray(d.rows))for(const row of d.rows){const p=row.id==="me"?S:(rivals||[]).find(v=>v.id===row.id);if(p&&cyTray(p)&&!(row.reasons||[]).some(x=>x.k==="cyc"))(row.reasons=row.reasons||[]).push({k:"cyc",t:"đang kỳ nguyệt sự",pub:p===S})}
-  if(typeof isSrv==="function"&&isSrv())return r;const c=cyb();
+  if(typeof isSrv==="function"&&isSrv())return r;if(typeof isKc==="function"&&isKc())return r;/* at home before the palace: no Kính sự phòng, no thẻ bài (review/ob-ngoaicung) */const c=cyb();
   if(cycOn(S)&&c.nt!==wk()){c.nt=wk();const k=c.rk===wk()?c.rv:"";const ld=cyLdDay()!==undefined;
    log(k==="som"||k==="giau"?"Kỳ nguyệt sự đã đến, mà sổ Kính sự phòng ghi khác: thẻ bài của ngươi vẫn nằm trên khay.":ld?`Kỳ nguyệt sự đã đến (${dName(cyDaysM(S,cyCur()))}): những đêm ấy Kính sự phòng tạm cất thẻ bài của ngươi.`:"Kỳ nguyệt sự đã đến: tuần này Kính sự phòng tạm cất thẻ bài của ngươi.")}
   else if(cyPreg(S)&&S.pregUnk&&(S.tuan||0)===cyBase(S).t&&cycleLate(S)>=1&&c.lt!==wk()){c.lt=wk();log("Tuần này đáng lẽ tới kỳ nguyệt sự, mà chưa thấy.")}
@@ -133,7 +133,7 @@ window.cyPhase=cyPhase;
 const cc0=conceiveCh;conceiveCh=function(p){const c=cc0.apply(this,arguments);try{const h=cyPhase(p||S),F=B().fert||{};if(h&&F[h]!=null)return Math.round(c*F[h])}catch(e){}return c};
 /* a tryst / affair (trystCh, jbal): the BAL.trystC floor/cap bound the chance BEFORE the cycle factor, so her cycle tuần stays near nil and the peak still rises */
 trystCh=function(p){p=p||S;const T=BAL.trystC,v=cl_(cc0(p),T[0],T[1]);try{const h=cyPhase(p),F=B().fert||{};if(h&&F[h]!=null)return Math.min(T[1],Math.round(v*F[h]))}catch(e){}return v};
-const flF=flip;flip=function(){const r=flF.apply(this,arguments);try{if(!S||S.dead||(typeof isSrv==="function"&&isSrv()))return r;const c=cyb();
+const flF=flip;flip=function(){const r=flF.apply(this,arguments);try{if(!S||S.dead||(typeof isSrv==="function"&&isSrv())||(typeof isKc==="function"&&isKc()))return r;const c=cyb();
   if(!S.preg&&cyPhase(S)==="peak"&&c.ft!==wk()){c.ft=wk();let w="";try{w=chanceLvl(conceiveCh(S))}catch(e){}log(`Ma ma dặn nhỏ: qua kỳ nguyệt sự chừng mươi ngày, tuần này là lúc dễ đậu thai nhất${w?` (có thai mỗi lần thị tẩm: ${w})`:""}.`)}
  }catch(e){console.error(e)}return r};
 /* Tranh sủng / Chặn ngự giá deck cards (j75 getters): closed with the reason during her cycle */

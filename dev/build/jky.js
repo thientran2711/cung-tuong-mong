@@ -158,6 +158,8 @@ KY.optBac=optBac;
 const ART_N=k=>{try{const a=ARTS.find(x=>x.k===k);return a?a.n:k}catch(e){return k}};
 /* the third person who grudges her for it: a consort present, else the WHO's own mistress */
 function third(c){try{const L=kyPpl(c.k).filter(w=>w.kind==="rv"&&w.ref!==c.F&&w.ref!==(c.W&&c.W.ref));if(L.length)return L[0].ref;if(c.W&&c.W.own&&c.W.own!==c.F)return c.W.own;const q=liveRivals(true).filter(v=>v!==c.F).sort((a,b)=>oan(b,c.F)-oan(a,c.F));return q[0]||null}catch(e){return null}}
+/* review/net-ghen-2 (law 11): relTo raises a consort's thiện cảm through relAdd (her nết factor) → the shared preview; anyone else gets n straight */
+function jkyRelW(c,n){const r=c&&c.W&&c.W.ref;return r&&r!==S&&rivals.includes(r)?pvQuy(r,n,"thiện cảm"):`thiện cảm +${n}`}
 function relTo(F,W,n){if(!W||!n)return;const r=W.ref;try{if(W.kind==="th"){ap(F,{th:n});return}if(W.kind==="emp"){ap(F,{sung:Math.round(n/KB().relSung)});return}
  if(r&&(r===S||rivals.includes(r))){relAdd(F,r,n);return}
  if(r&&typeof r.af==="number"){if(F===S)r.af=cl(r.af+n,-100,100);return}
@@ -177,7 +179,7 @@ function runOpt(c,i){const F=c.F,E=c.E,O=E.o?E.o[i]:E.plain,G=sc(O.g,c.b),C=sc(O
  const st={};for(const k of ["danh","sung","duc","tamco","th"])if(G[k])st[k]=Math.round(G[k]*(k==="danh"?g:1));if(G.sucR)st.suc=Math.round(KB().sucRest*G.sucR/(KB().V[c.b]||1));
  const st0={};for(const k in st)st0[k]=F[k]||0;if(Object.keys(st).length)ap(F,st);for(const k in st)if(k!=="suc")st[k]=Math.max(0,Math.round((F[k]||0)-st0[k]));/* stat-pace: the result says what was REALLY added (jstatpace) */
  {const NM={danh:"Danh",sung:"Sủng",duc:"Đức",tamco:"Tâm cơ",th:"Thái hậu thiện cảm",suc:"Sức"};for(const k in st)if(st[k])out.push(`${NM[k]} +${st[k]}`);if(C.suc)out.push(`Sức -${C.suc}`);if(C.bac)out.push(`Bạc -${C.bac}`)}
- if(G.rel){const rw=Math.round(G.rel*g),rs=F===S&&typeof spSee==="function"?spSee("rel",rw,c.W&&c.W.ref):rw;if(c.W&&c.W.kind!=="th"&&c.W.kind!=="emp"&&rs>0)out.push(`${wName(c.W)||"người ấy"} thiện cảm +${rs}`);relTo(F,c.W,rw)}
+ if(G.rel){const rw=Math.round(G.rel*g),rs=F===S&&typeof spSee==="function"?spSee("rel",rw,c.W&&c.W.ref):rw;if(c.W&&c.W.kind!=="th"&&c.W.kind!=="emp"&&rs>0)out.push(`${wName(c.W)||"người ấy"} ${jkyRelW(c,rs)}`);relTo(F,c.W,rw)}
  const ak=O.a||null;if(G.art&&ak){try{addArtP(F,ak,G.art);out.push(`${ART_N(ak)} tiến bộ ${G.art} phần`)}catch(e){kerr("art",e)}}
  if(O.s)try{const r=SPEC[O.s](c,O);if(r)out.push(r)}catch(e){kerr("spec "+O.s,e)}
  else if(O.buy)try{const r=SPEC.item(c,O);if(r)out.push(r)}catch(e){kerr("buy",e)}
@@ -218,13 +220,13 @@ const SPEC=KY.SPEC={
   if(F===S){const f=intelLearn(v,KB().intelN,{by:wName(c.W),how:"Kỳ ngộ"});return `biết thêm chuyện của ${v.name}${f?": "+String(f).replace(/<[^>]+>/g,""):""}`}evA(F,v,KB().evStep);return""},
  ev:c=>{const F=c.F;if(c.X.pl){const n=evA(F,c.X.pl.a,KB().evStep);return `chứng cứ về ${nm(c.X.pl.a)} +${n||KB().evStep}`}
   if(c.X.lc){const L=c.X.lc;const x=kyLc(L);if(x)lostReturn(x,"kyngo");{const lc=kyLive(L)||L;lc.cev=(lc.cev||0)+KB().evStep}return x?`${loNm(L.k)} về lại rương, thêm một manh mối`:"thêm một manh mối"}return""},
- spy:c=>{const s=c.W.ref;s.spyFor=key(c.F);return `${s.name} thành tai mắt của ${nm(c.F)} trong cung ${nm(c.W.own)}`},
+ spy:c=>{const s=c.W.ref;s.spyFor=key(c.F);try{if(typeof svTouch==="function"){const x=svTouch(c.F,s,"tm");if(x&&(c.F===S||ownerOf(s)===S))log(x)}}catch(e){}/* servant-trust (jsvt) */return `${s.name} thành tai mắt của ${nm(c.F)} trong cung ${nm(c.W.own)}`},
  cure:c=>{const F=c.F;const i=typeof illOf==="function"?illOf(F):null;if(i){F.ill=null;return "bệnh cũ dứt hẳn"}ap(F,{suc:Math.round(KB().sucRest)});return `bồi bổ, Sức +${Math.round(KB().sucRest)}`},
  rk:c=>{try{if(S.srv&&!S.srv.risen){const old=S.srv.rk||0;S.srv.rk=Math.max(old,Math.min(BAL.srvRk.nq,old+KB().rkStep));if(S.srv.rk>old)return `được thăng ${SRK.maid[S.srv.rk]}`}}catch(e){}return""}
 };
 /* ---------- her card ---------- */
 function optX(c,i){const O=c.E.o[i],C=sc(O.c||{},c.b),L=[];if(O.buy||O.s==="item"&&(c.X.box||c.X.rr)){const pr=buyPr(c);if(pr&&!(c.X.box&&i===1))C.bac=(C.bac||0)+pr}if(O.od&&C.seen)L.push(word(seenOd(Object.assign({},c,{oi:i}))));const t=costText(C);if(t)L.push("tốn: "+t);
- const G=sc(O.g,c.b),W=[];const SE=(k,n)=>typeof spSee!=="function"?n:k==="rel"&&c.W&&c.W.kind==="th"?spSee("th",n):k==="rel"&&c.W&&c.W.kind==="emp"?n:spSee(k,n,k==="rel"&&c.W?c.W.ref:null);/* stat-pace: the button shows the REAL rise (jstatpace spSee) */if(G.danh)W.push(`Danh +${SE("danh",G.danh)}`);if(G.sung){const w=sgNow(G.sung),r=SE("sung",w);W.push(r!==w?statTxt("sung",r):sgStat(G.sung))}if(G.th)W.push(`Thái hậu thiện cảm +${SE("th",G.th)}`);if(G.duc)W.push(`Đức +${SE("duc",G.duc)}`);if(G.tamco)W.push(`Tâm cơ +${G.tamco}`);if(G.rel)W.push(`thiện cảm +${SE("rel",G.rel)}`);if(G.art&&O.a)W.push(`${ART_N(O.a)} tiến bộ ${G.art} phần`);
+ const G=sc(O.g,c.b),W=[];/* review/net-ghen-2 (law 11): the same numbers runOpt applies — Danh and thiện cảm × the place grade gm(c), thiện cảm of a consort through the nết preview */const gq=gm(c);const SE=(k,n)=>typeof spSee!=="function"?n:k==="rel"&&c.W&&c.W.kind==="th"?spSee("th",n):k==="rel"&&c.W&&c.W.kind==="emp"?n:spSee(k,n,k==="rel"&&c.W?c.W.ref:null);/* stat-pace: the button shows the REAL rise (jstatpace spSee) */if(G.danh)W.push(`Danh +${SE("danh",Math.round(G.danh*gq))}`);if(G.sung){const w=sgNow(G.sung),r=SE("sung",w);W.push(r!==w?statTxt("sung",r):sgStat(G.sung))}if(G.th)W.push(`Thái hậu thiện cảm +${SE("th",G.th)}`);if(G.duc)W.push(`Đức +${SE("duc",G.duc)}`);if(G.tamco)W.push(`Tâm cơ +${G.tamco}`);if(G.rel)W.push(jkyRelW(c,SE("rel",Math.round(G.rel*gq))));if(G.art&&O.a)W.push(`${ART_N(O.a)} tiến bộ ${G.art} phần`);
  const sw=specW(c,O,i);if(sw)W.push(sw);for(let j=0;j<W.length;j++)W[j]=gW(W[j]);
  if(W.length)L.push("thành: "+W.join(", "));return L.join(" · ")}
 /* the gain words of a special (an option whose gain is a piece / a fact, never "không") */

@@ -9,9 +9,9 @@
    Doable first everywhere: a sub-tab opens on the first group with something she can do; inside, cards she can do come first.
    ===================================================================================================================== */
 Object.assign(KIT_GLOSS,{
- "Cách học":"Mỗi buổi học tốn 2 khắc. Tự học không tốn bạc nhưng tiến chậm; theo thầy hay ma ma tốn bạc, tiến nhanh. Mỗi bậc cần thêm 2 phần tiến bộ so với bậc trước. Phi tần khác cũng học theo cùng luật.",
+ "Cách học":"Mỗi buổi học tốn "+BAL.artLes.k+" khắc. Tự học không tốn bạc nhưng tiến chậm; theo thầy hay ma ma tốn bạc, tiến nhanh. Mỗi bậc cần thêm 2 phần tiến bộ so với bậc trước. Phi tần khác cũng học theo cùng luật.",
  "Tứ đức":"Bốn môn của nữ nhi trong cung (Công, Dung, Ngôn, Hạnh): mỗi bậc đổ vào Sắc, Đức, phần thắng và phẩm đồ tự làm.",
- "Luật chương":`Mỗi chương truyện có hạn. Mở từng hồi bằng thẻ «Mệnh truyện» ở mục Hành sự (Sức ${BAL.arc.card.c.suc}, 2 khắc). Theo đuổi thì giữ Lợi thế, có cơ thắng và phần thưởng (thắng: đồ quý, hiếm hay trân phẩm; vừa: đồ thường; thua: không). Bỏ mặc quá hạn thì chương tự khép ở kết cục xấu: mất Lợi thế, Danh ${BAL.arc.ign.danh}, «Khép nẻo đời» xấu đi; không chết, đường lên ngôi Hoàng hậu vẫn mở.`,
+ "Luật chương":`Mỗi chương truyện có hạn. Mở từng hồi bằng thẻ «Mệnh truyện» ở mục Hành sự (Sức ${BAL.arc.card.c.suc}, ${cardCost({c:BAL.arc.card.c})} khắc). Theo đuổi thì giữ Lợi thế, có cơ thắng và phần thưởng (thắng: đồ quý, hiếm hay trân phẩm; vừa: đồ thường; thua: không). Bỏ mặc quá hạn thì chương tự khép ở kết cục xấu: mất Lợi thế, Danh ${BAL.arc.ign.danh}, «Khép nẻo đời» xấu đi; không chết, đường lên ngôi Hoàng hậu vẫn mở.`,
  "Việc nhờ":"Người trong cung tìm đến nhờ khi cần (nhiều nhất vài lời nhờ mỗi tháng); ngươi cũng có thể đến các nơi và hỏi han. Giúp xong một việc thì người nhờ nợ ngươi một ân; ngươi có thể nhờ họ trả lại sau. Từ chối người mình đang nợ thì mếch lòng gấp đôi."});
 function ktEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 /* ---- sub-tabs ---- */
@@ -33,16 +33,16 @@ function kitChecks(list){return `<div class="kchecks">${list.map(([ok,t])=>`<div
 const ktDoable=h=>(String(h).match(/<button(?![^>]*\bdisabled\b)[^>]*data-(learn|vlearn|charity|wkprac|wk="prac"|q72a|q72c)/g)||[]).length;
 const ktTotal=h=>(String(h).match(/<button[^>]*data-(learn|vlearn|charity|wkprac|wk="prac"|q72a|q72c)/g)||[]).length;
 /* ---------- TÀI NGHỆ ---------- */
-function ktArtSkills(){const t2=whyTime(2);const out=[];
+function ktArtSkills(){const t2=whyTime(BAL.artLes.k),tv2=whyTime(BAL.btn.virLes.k);const out=[];
  for(const V of (typeof VIR!=="undefined"?VIR:[])){const l=S.vir[V.k],cost=virCost(l);const B=l>=5?[]:[
-   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức -${BAL.td.selfSuc} · chơi một trò nhỏ · thành: tiến bộ ${crsGainW("self",l,1)}`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
-   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`tốn: 2 khắc, Bạc -${cost}, Sức -${BAL.td.mSuc} · chơi một trò nhỏ · thành: tiến bộ ${crsGainW("teacher",l,1)}`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
+   pbtn(`data-vlearn="${V.k}" data-mode="self"`,"Tự học",`tốn: ${BAL.btn.virLes.k} khắc, Sức -${BAL.td.selfSuc} · chơi một trò nhỏ · thành: tiến bộ ${crsGainW("self",l,1)}`,tv2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
+   pbtn(`data-vlearn="${V.k}" data-mode="master"`,"Học với ma ma",`tốn: ${BAL.btn.virLes.k} khắc, Bạc -${cost}, Sức -${BAL.td.mSuc} · chơi một trò nhỏ · thành: tiến bộ ${crsGainW("teacher",l,1)}`,tv2||(S.bac<cost?`thiếu bạc (cần ${cost})`:""))];
   if(V.k==="hanh")B.push(pbtn(`data-charity="1"${capAt({k:BAL.charity.khac},BAL.charity.bac)}`,"Phát bạc cứu giúp cung nhân nghèo",`${capW()} · tốn: ${BAL.charity.khac} khắc, Bạc -${BAL.charity.bac} · thành: Đức +${BAL.charity.duc}, Danh +${BAL.charity.danh} (mỗi tháng một lần)`,whyTime(BAL.charity.khac)||(S.bac<BAL.charity.bac?`thiếu bạc (cần ${BAL.charity.bac})`:S.charM===S.turn?"tháng này đã làm":"")));
   const fx=(typeof VIRFX==="object"&&VIRFX[V.k])||[];out.push({g:"duc",kind:"vir",k:V.k,name:`${V.n} · ${V.full}`,kicker:artNm(l),level:l,prog:crsProg(S.vir,S.virp,V.k),bar:l>=5?false:undefined,desc:V.d,next:fx[l]?fxItems(fx[l],"n").join(" "):"",acts:B,img:kitSkillArt("vir",V.k,V.n),stepsAttr:`data-v85tab="${V.k}"`})}
  for(const a of ARTS){const l=S.arts[a.k],cost=artFee(l);const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
-  const B=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: 2 khắc, Sức -${BAL.artLes.self} · thành: tiến bộ ${crsGainW("self",l)}`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
-   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: 2 khắc, Bạc -${cost}, Sức -${BAL.artLes.tch} · thành: tiến bộ ${crsGainW("teacher",l)}, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
-   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: 2 khắc, Sức -${BAL.artLes.th} · thành: tiến bộ ${crsGainW("th",l)}, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
+  const B=l>=5?[]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: ${BAL.artLes.k} khắc, Sức -${BAL.artLes.self} · thành: tiến bộ ${crsGainW("self",l)}`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
+   pbtn(`data-learn="${a.k}" data-mode="teacher"`,"Học với thầy",`tốn: ${BAL.artLes.k} khắc, Bạc -${cost}, Sức -${BAL.artLes.tch} · thành: tiến bộ ${crsGainW("teacher",l)}, luôn hơn tự học 1, có khi nghe chuyện`,t2||(S.bac<cost?`thiếu bạc (cần ${cost})`:"")),
+   S.thDead?"":pbtn(`data-learn="${a.k}" data-mode="th"`,"Học với Thái hậu",`tốn: ${BAL.artLes.k} khắc, Sức -${BAL.artLes.th} · thành: tiến bộ ${crsGainW("th",l)}, Thái hậu +3`,t2||(S.th<40?"cần Thái hậu thương 40":(S.buoi||0)!==0?"chỉ buổi sáng":""))].filter(Boolean);
   const extra=(a.k==="theu"||a.k==="nau")&&typeof artBonus==="function"?` · phẩm đồ tự làm ${artBonus(S,a.k).q}/100`:"";const fx=(typeof ARTFX==="object"&&ARTFX[a.k])||[];
   out.push({g:["cam","ky","thi","hoa"].includes(a.k)?"cktt":"nc",kind:"art",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:crsProg(S.arts,S.artp,a.k),bar:l>=5?false:undefined,desc:((typeof ARTDO==="object"&&ARTDO[a.k])||"")+extra,next:fx[l]?fxItems(fx[l],"n").join(" "):"",acts:B,img,stepsAttr:`data-v85tab="${a.k}"`})}
  return out}
@@ -91,9 +91,9 @@ document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest
 /* Tác phẩm (j83 works): one skill head per art that makes works = picture, bậc, what it makes as chips, the quality ladder;
    "Tự học, làm tác phẩm" (mastered only) as a compact act. Rules behind the ⓘ "Tác phẩm" gloss (was a paragraph + bare divs). */
 function ktWorksHTML(){return ktWorksList().map(kitSkillCard).join("")}
-function ktWorksList(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return[];const why=whyTime(2)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
+function ktWorksList(){if(typeof wkKindsOf!=="function"||typeof WK!=="object")return[];const why=whyTime(BAL.artLes.pk)||(S.suc<BAL.sucNeed.wk?"Sức dưới "+BAL.sucNeed.wk:"");
  const L=ARTS.map(a=>{const l=S.arts[a.k],ks=wkKindsOf(a.k);if(!ks.length)return null;const img=kitSkillArt("art",a.k,a.n)||(typeof AIMG==="object"&&AIMG[a.k]?AIMG[a.k]:"");
-  const acts=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`tốn: Sức -${BAL.artLes.prac}, 2 khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
+  const acts=l>=5?[pbtn(`data-wk="prac" data-art="${a.k}"`,"Tự học, làm tác phẩm",`tốn: Sức -${BAL.artLes.prac}, ${BAL.artLes.pk} khắc · thành: một tác phẩm, ${wkOddsTxt(S,ks[0],0)}`,why)]:[];
   const kinds=ks.map(k=>`<span class="kchip n">${WK[k].w}${WK[k].per?" · để 1 tuần":""}</span>`).join(" ");
   return{kind:"wk",k:a.k,name:a.n,kicker:artNm(l),level:l,prog:crsProg(S.arts,S.artp,a.k),bar:l>=5?false:undefined,desc:`${kinds} <span class="kchip g">phẩm +${wkLvQ(S,a.k)}</span><br>${wkTierTxt(S,ks[0],0)}`,next:"",acts,img,info:`data-v85tab="${a.k}"`,can:!!(acts.length&&!why)}}).filter(Boolean);
  return L}
@@ -150,7 +150,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
    (sl.length?kitSlide("story-now",sl,{cur:sl.length-1,tocTitle:"Mục lục chương",tocAll:ktChapToc(),tocMore:nx?[["next",`Còn ${F?"":"khoảng "}${nx} chương nữa`,"chưa tới"]]:[]}):card)}
  else if(sub.cur==="rank"){
   if(S.rank>=7)h+=kitEmpty("Ta là Hoàng hậu, không còn bậc để lên",["Đưa con mình lên ngôi để thành Hoàng thái hậu."],{topic:"Sắc phong"});
-  else if(S.out)h+=kitEmpty("Ta đang ở lãnh cung, chưa bàn chuyện sắc phong",[`Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldRank||0))].n} (hoặc thấp hơn một bậc).`],{topic:"Sắc phong"});
+  else if(S.out)h+=kitEmpty("Ta đang ở lãnh cung, chưa bàn chuyện sắc phong",[`Được minh oan thì phục vị ${RANKS[Math.max(0,Math.min(6,S.coldFrom!=null?S.coldFrom:(S.coldRank||0)))].n}; được tha thì về phẩm ${coldTitleTxt(S)}; ghế đã đủ người thì thấp hơn một bậc.`]/* PUNISH-TIER rule (4) */,{topic:"Sắc phong"});
   else{const R=promoReq();const ok=R.filter(x=>x[0]).length;
    h+=kitSlide("story-rank",[{kicker:"Điều kiện sắc phong",title:RANKS[S.rank+1].n,sub:`Đạt ${ok}/${R.length}`,img:kitInfoArt("sắc phong").src||art,tap:"chapRankOpen",
     body:`<div class="ktop">${kitInfo("Ngôi Hoàng hậu")} <span class="kchip ${S.duc>=hhNeed(S).duc?"g":"r"}">Đức <b>${kitNeed(S.duc,hhNeed(S).duc)}</b></span> ${typeof exChips==="function"?`${kitInfo("Khảo hạch tấn phong")} ${exChips()}`:`<span class="kchip n">đủ điều kiện: cuối tháng có thánh chỉ</span>`}</div>`}]);
@@ -166,10 +166,10 @@ KIT_GLOSS["Ngôi Hoàng hậu"]="";
    try{const s=STORY[S.origin.k];if(s&&s.calc)S.st.step=s.calc()}catch(e){}el.innerHTML=ktStoryHTML();el.dataset.tab=tab;kitFix(el);return}return r0.apply(this,arguments)}})();
 /* ---------- VIỆC NHỜ ---------- */
 function ktQ72HTML(){const q=q72();const mo=q.mo[S.turn]||0;const D=q72Debtors();const owe=Object.entries(q.d).filter(([k,v])=>v<0);
- const left=evCooldownLeft("q72ask",Q72CFG.cdAsk);const aw=S.dead?"đã hết kiếp":S.out?"đang ở lãnh cung":Q.length?"đang có việc chờ":left>0?`mới hỏi han, đợi ${left} tuần`:!can(1)?"hết khắc":q.a.length>=Q72CFG.max?`đang làm đủ ${Q72CFG.max} việc`:mo>=Q72CFG.mo?`tháng này đã có ${Q72CFG.mo} lời nhờ`:"";
- const ask=pbtn(`data-q72a="ask"`,`Hỏi han ở ${q72PlN(S.place)}: ai cần giúp?`,`tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ, ngươi nhận hay từ chối tùy ý`,aw);
+ const left=evCooldownLeft("q72ask",Q72CFG.cdAsk);const aw=S.dead?"đã hết kiếp":S.out?"đang ở lãnh cung":Q.length?"đang có việc chờ":left>0?`mới hỏi han, đợi ${left} tuần`:!can(BAL.btn.q72.k)?"hết khắc":q.a.length>=Q72CFG.max?`đang làm đủ ${Q72CFG.max} việc`:mo>=Q72CFG.mo?`tháng này đã có ${Q72CFG.mo} lời nhờ`:"";
+ const ask=pbtn(`data-q72a="ask"`,`Hỏi han ở ${q72PlN(S.place)}: ai cần giúp?`,`tốn: ${BAL.btn.q72.k} khắc · thành: người ở đây có việc thì ngỏ lời nhờ, ngươi nhận hay từ chối tùy ý`,aw);
  const calls=D.slice(0,8).map(([a,n,k])=>{const r=q72CallFx(a);const cd=evCooldownLeft("q72call:"+k,Q72CFG.cdCall);const tk=q72Fx(r.fx);if(r.rel)tk.push(q72Tok(a,r.rel));
-  return{a,n,k,btn:pbtn(`data-q72c="${k}"`,`Nhờ ${q72Short(a)} trả ân`,`tốn: 1 khắc, ${R72(`nợ ân của ${q72Short(a)} -1`)} · thành: ${r.t}, ${tk.join(", ")}`,S.dead?"đã hết kiếp":Q.length?"đang có việc chờ":cd>0?`vừa nhờ, đợi ${cd} tuần`:!can(1)?"hết khắc":"")}});
+  return{a,n,k,btn:pbtn(`data-q72c="${k}"`,`Nhờ ${q72Short(a)} trả ân`,`tốn: ${BAL.btn.q72.k} khắc, ${R72(`nợ ân của ${q72Short(a)} -1`)} · thành: ${r.t}, ${tk.join(", ")}`,S.dead?"đã hết kiếp":Q.length?"đang có việc chờ":cd>0?`vừa nhờ, đợi ${cd} tuần`:!can(BAL.btn.q72.k)?"hết khắc":"")}});
  const callH=calls.map(x=>x.btn).join("");
  const list=[{k:"now",label:"Đang làm",doable:q.a.length,total:null,n:`${q.a.length}/${Q72CFG.max}`},{k:"find",label:"Tìm việc",doable:q.a.length?0:ktDoable(ask),total:null,n:""},{k:"debt",label:"Nợ ân",doable:ktDoable(callH),total:null,n:String(D.length+owe.length)},{k:"news",label:"Trong cung",n:String(q.np.length)}];
  const sub=kitSubTabs("q72",list,kitInfo("Việc nhờ"));

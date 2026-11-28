@@ -1,0 +1,5 @@
+const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await b.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
+await p.route(u=>!/^file:/.test(String(u)),r=>r.abort());await p.goto('file://'+process.argv[2],{waitUntil:'domcontentloaded'});await p.waitForTimeout(600);await p.evaluate(()=>localStorage.clear());await p.reload({waitUntil:'domcontentloaded'});await p.waitForTimeout(600);await p.evaluate(()=>document.querySelector('#slots button[data-new="1"]').click());await p.waitForTimeout(1200);
+const r=await p.evaluate((ks)=>{const o={};const v=rivals.find(x=>x.alive&&!x.out);for(const k of ks){const R={};try{J78.cardV=v;R.line=actLineRaw(k,"Có cơ","không tốn bạc");R.aout=AOUT[k];J78.cardV=null}catch(e){R.line='ERR '+e.message}
+ try{const d=PEND.j70start({v:v.id,k});R.opts=d.o.map(x=>[x.n,x.x||'',JSON.stringify({wt:x.wt,lt:x.lt,k:x.k,kt:x.kt})].join(' || '))}catch(e){R.opts='ERR '+e.message}o[k]=R}return o},process.argv.slice(3));
+console.log(JSON.stringify(r,null,1));console.log('errors',errs.length,errs.slice(0,3));await b.close()})();
