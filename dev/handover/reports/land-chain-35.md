@@ -94,3 +94,4 @@ hpush.sh (log push), modgate.sh <LIVE> <sha> (assemble modules ⊇ LIVE — pass
 - When LIVE moves, merge-tree the whole stack against it first; resolve only mechanical hunks (adjacent lines, one side = base); route real ones.
 - `git merge --no-commit` then `git checkout --ours index.html sw.js` + build2.sh; check every + line of each side present.
 - 10:58Z ROLLED → LC36 session_01Rc5AsLXrjzGSWFgZ6E2Hxg (child, depth 5). MAIN 189 told.
+- 11:05Z (post-handover) dayq 8a30664e quickcheck done: only G4 94 q-softlock (known); part 2 PASS. Forwarded to LC36.
