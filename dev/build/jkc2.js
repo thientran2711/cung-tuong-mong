@@ -267,7 +267,7 @@ function kc2Month(){S.turn++;const K=S.kc;const d=K.kd;
  const n=S.turn-K.t0;const beat={4:0,10:1,16:2}[n];if(beat!=null&&!S.dead)pushDil(mkP("kcE",{e:(d==="dan"?"d_c":"n_c")+beat}),kc2ChT());
   if(S.turn>=K.due&&!K.sent&&!S.dead){K.sent=1;pushDil(mkP("kcE",{e:d==="dan"?"d_tuyen":"n_send"}),d==="dan"?"Ngày tuyển cung nữ":"Hòa ước ký xong")}
  S.month++;S.tuan=0;if(S.month>12){S.month=1;S.year++;S.age++;try{S.emp.age++;ageYear()}catch(e){}try{allKids().forEach(([kk])=>{if(kk.alive)kk.age++})}catch(e){}for(const m of K.fam)m.age++}
- if(S.suc<=BAL.kc2.kc2Month_min_suc&&isKc())kcDie(d==="dan"?"Lao lực mà chết trước ngày tuyển":"Kiệt sức mà chết trước ngày hòa thân")}
+ if(typeof kietDue==="function")kietDue();if(S.suc<=BAL.kc2.kc2Month_min_suc&&isKc()&&!(typeof kietSave==="function"&&kietSave()))kcDie(d==="dan"?"Lao lực mà chết trước ngày tuyển":"Kiệt sức mà chết trước ngày hòa thân")}
 function kc2ChT(){return S.kc.kd==="dan"?"Lệnh tuyển cung nữ":"Hòa ước"}
 /* the jkc tuyển tú never starts on these roads */
 (function(){const s0=kcSoTuyen;kcSoTuyen=function(){if(S&&S.kc&&S.kc.kd)return;return s0.apply(this,arguments)}})();
