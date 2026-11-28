@@ -761,5 +761,5 @@ ROW 26 talking to others' people | review/row26-talk (opus; MAIN 187 order 07:30
 ROW 12 leave-palace rest + removal ladder | review/row12-leave (opus; MAIN 187 order 07:30Z) | session_01N1tNP356pGppKtZtsMDUZ1 (Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
 ROW 11 law-1 audit | review/row11-law1 (opus; MAIN 187 order 07:30Z) | session_01N1tNP2pyGSYRnxKacia9c1 (Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
 ROWS 4+22 THIN P4/P6 + road dialogue | review/thin-p4p6 (opus; MAIN 187 order 07:30Z) | session_01N1tNP2GvCVsyLKPfx7RhNt (Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
-D-ROW8-PHANCUNG (WORKLIST row 8; ORDER MAIN 187 07:30Z) | review/d-row8-phancung | FOREMAN D ROOT session_01964izEUYzmixcs6Yg5ZXsE / worker (opening) | RUNNING | 28/11 07:55Z
-D-ROW37-OAN-NOISE (WORKLIST row 37; ORDER MAIN 187 07:30Z) | review/d-row37-oan-noise | FOREMAN D ROOT session_01964izEUYzmixcs6Yg5ZXsE / worker (opening) | RUNNING | 28/11 07:55Z
+D-ROW8-PHANCUNG (WORKLIST row 8; ORDER MAIN 187 07:30Z) | review/d-row8-phancung | FOREMAN D ROOT session_01964izEUYzmixcs6Yg5ZXsE / worker session_01964izFnFeMdZcSVq3NPGAx | RUNNING | 28/11 07:55Z
+D-ROW37-OAN-NOISE (WORKLIST row 37; ORDER MAIN 187 07:30Z) | review/d-row37-oan-noise | FOREMAN D ROOT session_01964izEUYzmixcs6Yg5ZXsE / worker session_01964izEtRCxwJe9JL9s4S8c | RUNNING | 28/11 07:55Z
