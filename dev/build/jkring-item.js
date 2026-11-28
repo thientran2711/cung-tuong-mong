@@ -168,11 +168,18 @@ async function kriAct(R,i){const a=R.acts&&R.acts[i];if(!a||a.off||R.busy||R.st!
  if(R.big&&!kriCalm())R.big.animate([{transform:R.big.style.transform},{transform:R.big.style.transform+" scale(1.08)"},{transform:R.big.style.transform}],{duration:420,easing:"ease-out"});
  kriPane(R,it,r);try{render()}catch(e){}}
 /* the act's real changes as kit result rows: her stats (j1 NAMES), the person's thiện cảm (aff), items in / out of Tư trang */
-function kriSnap(v){const s={};try{for(const k in NAMES)if(typeof S[k]==="number")s[k]=S[k];if(v){s.__aff=typeof aff==="function"?aff(v,S):null}s.__inv=(S.inv||[]).slice()}catch(e){}return s}
-function kriDiffRows(a,v,who){const b=kriSnap(v),D=[],M=[];try{for(const k in a){if(k.startsWith("__"))continue;const d=Math.round((b[k]||0)-(a[k]||0));if(!d)continue;(d>0?D:M).push(`${NAMES[k]||k} ${d>0?"+":""}${d}`)}
- if(a.__aff!=null&&b.__aff!=null){const d=Math.round(b.__aff-a.__aff);if(d)(d>0?D:M).push(`${kriE(who||"Người nhận")} → ta: thiện cảm ${d>0?"+":""}${d}`)}
+function kriSnap(v){const s={};try{for(const k in NAMES)if(typeof S[k]==="number")s[k]=S[k];if(v){s.__aff=typeof aff==="function"?aff(v,S):null}s.__inv=typeof kitOwned==="function"?kitOwned():(S.inv||[]).slice()/* KIT §54.2: bag ∪ worn */}catch(e){}return s}
+/* ONE ROW PER PERSON (MAIN 186 order 28/11 ~06:35Z; iPad ring gift to the queen read «Hoàng hậu → ta: thiện cảm +6 · Lữ Mạn Nhu → ta: thiện cảm +6»):
+   her S.hh («Hoàng hậu → ta») / S.th («Thái hậu → ta») IS the receiver's thiện cảm when the receiver is the queen / Thái hậu — one change, ONE row, named by
+   the receiver (who). Same rule as the act result card (j63 kaResultRows: the queen's person row skips "hh"). */
+function kriSame(v){const k=new Set();try{if(!v)return k;if(typeof queenP==="function"&&queenP()===v)k.add("hh");if(typeof emoByKey==="function"&&emoByKey("th")===v)k.add("th")}catch(e){}return k}
+function kriDiffRows(a,v,who){const b=kriSnap(v),D=[],M=[];try{const one=a.__aff!=null&&b.__aff!=null?kriSame(v):new Set();let dSame=0;
+ for(const k in a){if(k.startsWith("__"))continue;const d=Math.round((b[k]||0)-(a[k]||0));if(!d)continue;if(one.has(k)){dSame=dSame||d;continue}(d>0?D:M).push(`${NAMES[k]||k} ${d>0?"+":""}${d}`)}
+ if(a.__aff!=null&&b.__aff!=null){const d=Math.round(b.__aff-a.__aff)||dSame;if(d)(d>0?D:M).push(`${kriE(who||"Người nhận")} → ta: thiện cảm ${d>0?"+":""}${d}`)}
  const nm=e=>{try{return typeof giftName==="function"?giftName(e):(IT[e.k]||{}).n||e.k}catch(x){return e.k}};
- a.__inv.filter(e=>!b.__inv.includes(e)).forEach(e=>M.push(kriE(nm(e))));b.__inv.filter(e=>!a.__inv.includes(e)).forEach(e=>D.push(kriE(nm(e))+" vào Tư trang"))}catch(e){}
+ /* KIT §54.2 kitInvDelta = the ONE item delta (the act result card reads the same); a piece sent back in this step (HOME AGAIN) is neither row */
+ const DL=typeof kitInvDelta==="function"?kitInvDelta(a.__inv,b.__inv):{gone:a.__inv.filter(e=>!b.__inv.includes(e)),add:b.__inv.filter(e=>!a.__inv.includes(e))};
+ DL.gone.forEach(e=>M.push(kriE(nm(e))));DL.add.forEach(e=>D.push(kriE(nm(e))+" vào Tư trang"))}catch(e){}
  return[{k:"duoc",label:"Được",items:D},{k:"mat",label:"Mất",items:M}]}
 /* SENT-OFF ACTS (MAIN look note 26/11: «THÀNH · Được: không» while the card promised thiện cảm): an act that sends someone on an errand (jptime ptSend:
    gifts carried by a servant, …) has no result yet. The seal is KẾT QUẢ (not THÀNH), Được = the card's own Được row (what the errand brings when it lands),
@@ -223,7 +230,7 @@ function kriGiftOpen(){const m=Q[0],M=$("modal");if(!m||!M||M.hidden||typeof kip
  const ops=M.querySelector(".opts");const L=m.opts.map((c,i)=>[c,i]).filter(([c,i])=>c&&c.ik!=null&&S.inv[c.ik]&&ops&&ops.querySelector(`.opt[data-m="${i}"]`));
  L.sort((a,b)=>(kipLocked(a[0])-kipLocked(b[0]))||(a[1]-b[1]));M.classList.add("kri-hide");
  const verb=(typeof KIP_VERB!=="undefined"&&KIP_VERB[m.pid])||"Chọn";let V=m.pp&&m.pp.v;try{if(V!=null&&typeof V!=="object")V=(typeof byKey==="function"&&byKey(V))||liveRivals(true).find(x=>x.id===V)||null}catch(e){V=null}
- const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?V.name:""):m.pid==="giftto"?(m.pp&&m.pp.t==="emp"?"Hoàng thượng":m.pp&&m.pp.t==="th"?"Thái hậu":""):"";/* KK62 (RV-176 §7 c): Dâng quà names the receiver from its own pp.t (jgift «Dâng quà lên Hoàng thượng / Thái hậu»), never the dialog title («Dâng cho Dâng quà») */
+ const who=V&&V.name?(typeof kitKnownName!=="function"||kitKnownName(V)?(typeof rkName==="function"&&V!==S?rkName(V)+" ":"")+V.name/* MAIN 186 ruling 28/11 ~06:44Z: rank title + name, as the card's title and Ghi chú */:""):m.pid==="giftto"?(m.pp&&m.pp.t==="emp"?"Hoàng thượng":m.pp&&m.pp.t==="th"?"Thái hậu":""):"";/* KK62 (RV-176 §7 c): Dâng quà names the receiver from its own pp.t (jgift «Dâng quà lên Hoàng thượng / Thái hậu»), never the dialog title («Dâng cho Dâng quà») */
  /* KIT-KRI-XL (E-S5 kipgo-ui3 «re-opened, no gift»): the dialog's option buttons are looked up LIVE — an opener (jts tsOpener) or any re-render shows the SAME dialog again with NEW .opts nodes, and the ring's «Chọn» clicked the stale detached button: no chooseM, the picker stayed queued and re-opened forever */
  const optB=i=>{const M2=$("modal"),o2=M2&&M2.querySelector(".opts");return(o2&&o2.querySelector(`.opt[data-m="${i}"]`))||null};
  const why=(c,i)=>{const b=optB(i);return c.kgwhy||(b&&b.disabled?((b.querySelector(".kwhy")||{}).textContent||"Chưa được"):kipLocked(c)?"Thiếu bạc":"")};
