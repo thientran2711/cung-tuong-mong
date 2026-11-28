@@ -758,7 +758,7 @@ ALLOT-PACE-3 (finish allot-pace-r2 gates, successor of ALLOT-PACE-2) | review/al
 REVIEW review/f-word36-bac b130a911 (row 36 kit-bac-progress) | dev/handover/reports/f-word36.md | session_01UV1SzkyYwDbvP1FwpiC8ox (sonnet F-WORD36-RV, Foreman F ROOT 8) | RUNNING | 28/11 07:34Z
 ROW 9 nết thresholds + behaviour | review/row9-net (opus; MAIN 187 order 07:30Z) | session_01N1tNP2RzPiR6L1EkbawFH2 (Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
 ROW 26 talking to others' people | review/row26-talk (opus; MAIN 187 order 07:30Z) | session_01N1tNP2KcAtN7j5hYW1DiLJ (Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
-ROW 12 leave-palace rest + removal ladder | review/row12-leave (opus; MAIN 187 order 07:30Z) | session_01N1tNP356pGppKtZtsMDUZ1 (Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
+ROW 12 leave-palace rest + removal ladder | review/row12-leave (opus; MAIN 187 order 07:30Z) | session_01N1tNP356pGppKtZtsMDUZ1 (Foreman B ROOT 3 child 1/2) | DONE: SẴN SÀNG KIỂM 4480ae6ea012610e7ac8c4dc235563fceec089ed | 28/11 09:30Z
 ROW 11 law-1 audit | review/row11-law1 (opus; MAIN 187 order 07:30Z) | session_01N1tNP2pyGSYRnxKacia9c1 (Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
 ROWS 4+22 THIN P4/P6 + road dialogue | review/thin-p4p6 (opus; MAIN 187 order 07:30Z) | session_01N1tNP2GvCVsyLKPfx7RhNt (Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
 D-ROW8-PHANCUNG (WORKLIST row 8; ORDER MAIN 187 07:30Z) | review/d-row8-phancung | FOREMAN D ROOT session_01964izEUYzmixcs6Yg5ZXsE / worker session_01964izFnFeMdZcSVq3NPGAx | RUNNING | 28/11 07:55Z
