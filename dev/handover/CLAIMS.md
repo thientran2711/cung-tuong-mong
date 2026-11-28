@@ -729,3 +729,5 @@ TUANTANG-WARN (MAIN 183 00:38Z: tuẫn táng / game-imposed deaths with no warni
 TUANTANG-WARN (session id for the 00:42Z claim) | review/tuantang-warn | session_01PEhRbxieBKhF66jW9SU6j4 | RUNNING | 28/11 00:39Z (Foreman C ROOT 4-1)
 SAVE-REWIND-2 (MAIN 183 order 00:38Z; rewinds still on LIVE; check rv6 cure, else root + family) | review/save-rewind-2 | session_01N1tNP6K6GumrbBF8d7DJtm (Foreman B ROOT 3 child 1) | RUNNING | 28/11 00:55Z
 E-GAIN4 (opus BIG; MAIN 179 ~17:00Z orders (a)–(d) + KK60 §104.2d (e), after e-gain3-live LIVE 18003079; briefs/E-GAIN4.md) review/e-gain4 | reports/e-gain4.md | session_01DgYSWkfJaoCNrHwituB9Pa | RUNNING | 28/11 00:55Z (Foreman E child7)
+E-TITLES3-LRM4 review/titles-daycard-lrm4 472960ba | reports/titles-daycard-lrm4.md | session_01DgYSWnXgG7GYCMJK51pn8B | RV READY BIG (rolled at START+25 %; archived; re-merge on LIVE after kit-kri-xl = successor later) | 28/11 01:10Z (Foreman E child7)
+E-TITLES3-RV (opus BIG reviewer of titles-daycard-lrm4 472960ba; briefs/E-TITLES3-RV.md) review/titles-daycard-lrm4-rv | reviews/titles-daycard-lrm4-review.md | session_01DgYSWosMiUvqyAgcU6zyjW | RUNNING | 28/11 01:10Z (Foreman E child7)
