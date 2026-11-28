@@ -4,13 +4,13 @@
    usage: node dev/test/bd-legacy-save.js <url of dev/index.html> [new lives=8] */
 const {chromium}=require('playwright');const [,,URL,NL]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];let fail=0;const chk=(n,c,x)=>{if(!c)fail++;console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,600))};
- const boot=async()=>{const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
+ const boot=async()=>{const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});const p=await ctx.newPage();await p.addInitScript(require('./lib/qdrain').init);/* headless loop: __bot + answer the night choice (lib/qdrain.js, NPCROADS-RED) */p.setDefaultTimeout(0);
   p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.goto(URL,{timeout:0});
   await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof ROAD14==='object',null,{timeout:0});await p.waitForTimeout(1200);return p};
  const PLAY=`window.__play=(stop)=>{let err=null;for(let mon=0;mon<500&&!S.st.ch.all;mon++){if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}const A=S.st.M;
    if(stop&&stop())return{err};try{if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const bd=beatDef67(A,A.cur);const O=opts67(A,bd);const i=Math.floor(Math.random()*O.length);const o=O[i];
    res67(thKey67(A),A.cur,i,o&&o.o!=null?oOf67(A,o,bd):100)}}catch(e){err=err||e.message}if(S.st.ms)S.st.ms.force14=1;
-   const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||e.message;break}}Q.length=0}return{err}}`;
+   const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){__qDrain();used=0;try{nextBuoi()}catch(e){err=err||e.message;break}}Q.length=0}return{err}}`;
  /* 1) old save */
  let p=await boot();await p.evaluate(PLAY);
  const sv=await p.evaluate(async()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;
@@ -31,5 +31,7 @@ const {chromium}=require('playwright');const [,,URL,NL]=process.argv;
  p=await boot();const NN=+NL||8;const got={};
  for(let i=0;i<NN;i++){const r=await p.evaluate(async()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;
    window.__forceOrigin='bd';quiet=true;start();quiet=false;await new Promise(r=>setTimeout(r,200));return S.st.f14&&S.st.f14.road});got[r]=(got[r]||0)+1}
- const NEW=['bd_san','bd_soi','bd_tuyet','bd_hen'];chk('new bd lives roll only the new roads '+JSON.stringify(got),Object.keys(got).every(k=>NEW.includes(k)),got);
+ /* ROAD-TESTS-QDRAIN 27/11: the bd road list grew after this test (composed roads jrdcsd.js: bd_lua, bd_su, bd_luuly), so the fixed list of 4 is
+   stale. The law-6c rule stays: a NEW life never rolls an OLD premise (the game's own BD_OLD) and always gets a road. */
+ const OLD=await p.evaluate(()=>BD_OLD.slice());chk('new bd lives roll only the new roads (never BD_OLD) '+JSON.stringify(got),Object.keys(got).every(k=>k&&k!=='null'&&k!=='undefined'&&!OLD.includes(k))&&OLD.length===4,{got,OLD});
  chk('no page errors',!errs.length,errs.slice(0,5));await b.close();process.exit(fail?1:0)})();
