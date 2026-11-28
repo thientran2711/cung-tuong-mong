@@ -2515,3 +2515,17 @@ Object.assign(BAL,{svt:{on:1,
  npc:{talk:25,srvAsk:50,len:30,lenSharp:25},
  k:2/* khắc the open talk «Hỏi chuyện» takes (her button) */,
  kLen:3/* review/talk-others-people: khắc the covert talk «Hỏi lén» takes; len rows of tin / rel = its heavier loss when seen; npc.len + lenSharp × nết «sharp» = the odds an NPC talks covertly */}});
+
+/* D-FAMILY-GIFT (OD 26/11 (c), expert table dev/handover/reports/d-family-gift.md §EXPERT): gifts / silver she (or an NPC consort) sends to her OWN family
+   through a eunuch and the palace gate (jfamg). Tiers Nhẹ · Vừa · Nặng (law 2): k = khắc; fee = Bạc to the eunuch who carries it; Nhẹ = a little thing she
+   makes herself (Sức suc, item k "khantay", no gate check); Vừa / Nặng = a chest piece of value v[0]..v[1] OR Bạc bac; o = gate odds base (+ (Tâm cơ − tcMid) × tcK);
+   af = the family person's liking; duc / danh on success; lost* = loss when the gate stops it (the piece goes to the Nội vụ phủ store, jil «conf»).
+   wait = months until the family answers; cd = months between two parcels; nang.up = extra home money (BAL.home) for nang.m months; orig = origins whose family
+   at home is a real person (td: family executed; nc/bd/pf: abroad; cnv: servant road — none). npc.p = monthly odds an NPC consort sends home, npc.nang = share of Nặng,
+   npc.dad = her house standing (p.dad) by tier on success; keep = rows kept in the Thư nhà list. */
+BAL.gift=BAL.gift||{};
+BAL.gift.fam={k:1,fee:5,cd:1,wait:1,keep:12,tcMid:40,tcK:.3,orig:["tt","dtq","muoi","cn","ch","thd"],
+ nhe:{suc:8,item:"khantay",af:3,duc:1},
+ vua:{v:[15,59],bac:30,o:72,af:6,duc:1,danh:1,lostDanh:2},
+ nang:{v:[60,9999],bac:90,o:50,af:10,duc:2,danh:2,lostDanh:4,lostDuc:2,up:10,m:3},
+ npc:{p:6,nang:30,dad:[0,2,4]}};

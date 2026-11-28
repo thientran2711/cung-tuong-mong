@@ -28,7 +28,7 @@
    npc.cook = monthly odds a poison-holding NPC keeps a dish, npc.mat / npc.raw = that dish's wkMake material / raw skill */
 Object.assign(BAL,{pg:{base:42,grade:6,doctor:15,needle:30,maid:12,hhEv:1,tamDiv:4,trustDiv:4,seeDiv:3,hi:92,cpFac:4,khac:2,duc:{hacdinh:10,docngam:6,phanhuy:5,xahuong:10,meduoc:3},
  hacSuc:-120,sickMo:3,blockWk:1,npc:{w:2,cook:30,mat:0,raw:4}},
- gift:{an:30,rel:40,th:40,askW:2,sinc:{emp:1,oth:2,tr:1}/* Chân tình bonus (gfSincere → wkEval): to the Emperor / to others, + a kind recipient */}});
+ gift:Object.assign(BAL.gift||{}/* D-FAMILY-GIFT: keep BAL.gift.fam (jbal2) */,{an:30,rel:40,th:40,askW:2,sinc:{emp:1,oth:2,tr:1}/* Chân tình bonus (gfSincere → wkEval): to the Emperor / to others, + a kind recipient */})});
 const PGE=BAL.eff.jpoison,PGB=BAL.pg;
 /* ---------- poisons ---------- */
 IT.docngam=IT.docngam||{n:"Độc ngấm dần",kd:"Độc dược",d:`Bỏ vào đồ ăn: Sức ${balSg(PGE.sucPgEffect)}, ốm ${kitNumVi(PGB.sickMo)} tháng · bị khám ra là có tội`,pr:60,il:1,tg:[]};

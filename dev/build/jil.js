@@ -6,6 +6,7 @@
        "cct" Cung Chính ti (tang vật: poisoned, planted, forbidden things seized as evidence) → kept
        "emp" / "th" held by Hoàng thượng / Thái hậu (gifts offered to them)                 → kept
        "srv" in a servant's hands (pilfered from the monthly goods)                          → back when the servant is caught
+       "nha" at the sender's family home (a gift sent home through the gate, jfamg)          → kept
      Lost / stolen pieces stay in SOMEONE's chest (jlost cases; never "not found anywhere").
    ONE rule for everyone (player and NPCs): ilGone(p,e,how) routes any piece that leaves p's hands to where it really goes; ilGuard wraps the
    game functions that remove pieces so each removal is routed (LUẬT SỬA CẢ NHÓM: the whole family, table in dev/handover/reports/item-ledger.md).
@@ -96,7 +97,7 @@ function ilGone(p,e,how,o){if(!e||typeof e!=="object"||!e.k)return null;if(e.use
  if(how!=="sell"&&how!=="pawn"&&!o.keep&&!ilDur(e))return null;/* charge-followups (a): o.keep = a seized consumable (poison, forbidden drug) is tang vật, not used up */if((how==="sell"||how==="pawn")&&e.wk&&e.wk.p!=null)return null;
  if(how==="lost"&&p&&ilAlive(p)&&typeof loLoseE==="function"){const c=loLoseE(p,e,o.cause);if(c){ilUid(e);ilLog(e,own,"lo"+c.id,"thất lạc");return c}}
  for(const f of ["w","h","lo","gh","by"])if(how!=="lost")delete e[f];
- const at=how==="sell"||how==="pawn"?"mkt":how==="evid"?"cct":how==="emp"?"emp":how==="th"?"th":how==="pil"||how==="maid"?"srv":"nvp";
+ const at=how==="sell"||how==="pawn"?"mkt":how==="evid"?"cct":how==="emp"?"emp":how==="th"?"th":how==="pil"||how==="maid"?"srv":how==="home"?"nha":"nvp";/* D-FAMILY-GIFT: "nha" = at the sender's own family home outside the palace (jfamg), kept */
  const x={e,at,why:how,own,w:wk(),by:o.by||""};
  if(at==="mkt"){x.ret=wk()+ilRng(B.retW);x.pr=Math.max(1,Math.round(ilVal(e)*B.ransomPct/100))}
  if(how==="conf")x.rel=wk()+B.confW;if(how==="fix"||how==="burn")x.rel=wk()+ilRng(B.fixW);
@@ -130,7 +131,7 @@ function ilGuard(name,how,who){const f=window[name];if(typeof f!=="function"||f.
 function ilStaleCases(){const held=new Map();for(const p of ilPeople())for(const a of ilSlots(p))if(a.iu)held.set(a.iu,[p,a]);
  for(const c of ilCases()){const h=c.e&&c.e.iu&&held.get(c.e.iu);if(!h||h[1]===c.e)continue;c.st="done";c.end=wk();c.how="tra";ilLog(c.e,"lo"+c.id,ilKey(h[0]),"đã ở rương")}}
 const IL_DH=["sacphong","ngocan"];
-const IL_BOXES=["mkt","nvp","cct","emp","th","srv","dlg"];
+const IL_BOXES=["mkt","nvp","cct","emp","th","srv","dlg","nha"];
 function ilCensus(){if(!S)return;const I=ilS();const now={};const seen=new Set();const RT=new Map();/* id → the owner a dead holder's piece was just handed back to (that one copy keeps the id) */try{ilStaleCases()}catch(z){}
  /* a found/held lost case and the copy in the holder's chest are ONE piece: same id (old saves had none; lostReturn hands back a copy of c.e) */
  try{for(const c of (S.lost||[]))if(c&&c.st!=="done"&&c.e&&typeof loEntry==="function"){const x=loEntry(c);if(x&&x.e){ilUid(x.e);c.e.iu=x.e.iu}}}catch(z){}
