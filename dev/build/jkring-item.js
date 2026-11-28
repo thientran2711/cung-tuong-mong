@@ -322,14 +322,16 @@ window.addEventListener("click",ev=>{const c=ev.target.closest&&ev.target.closes
 /* ---- (4) toilette dress (#kg82 «Rương trang phục», jtoil toilDressUI): tap a chest piece or a worn slot → the ring on the same tabs, focused on it;
    acts = Cài / Mặc / Đeo (wear at once + saved, owner E95) or Tháo — the toilette's own toilAct; closing the ring redraws the toilette (live figure preview) ---- */
 function kriToilOpen(x0){if(typeof toilAct!=="function"||typeof TOIL==="undefined"||!TOIL.st||TOIL.st.dv)return false;const reg=()=>(typeof KINV!=="undefined"&&KINV.reg.toil)||null;if(!reg())return false;
- const verb=g=>{const sl=typeof toilSlotOf==="function"?toilSlotOf(g.k):null;return sl==="tram"||sl==="hair"?"Cài":sl==="y"?"Mặc":"Đeo"};
+ const verb=g=>{const sl=typeof toilSlotOf==="function"?toilSlotOf(g.k):null;return sl==="tram"||sl==="hair"?"Cài":sl==="y"?"Mặc":sl==="hd"?"Dán":"Đeo"};
+ /* dress-fix: a hoa điền is not «worn» from the chest — it is the one picked for today (TOIL.st.hdk, slot «Hoa điền»); its act is «Dán» / «Tháo» */
+ const isOn=g=>!!g.wdSlot||!!g.w||(typeof toilSlotOf==="function"&&toilSlotOf(g.k)==="hd"&&typeof toilHdK==="function"&&toilHdK()===g.k);
  const tabs=[{k:"all",label:"Tất cả"}].concat(reg().tabs||[]);let tab=(typeof KINV!=="undefined"&&KINV.cur.toil)||"all";if(!tabs.some(t=>t.k===tab)||(x0&&tab!=="all"&&x0.cat!==tab))tab="all";
  /* the toilette overlay (#kg82, above the stage) steps aside while the ring is open; closing the ring brings it back redrawn */
  const K82=document.getElementById("kg82");
  const R=kitRingItem.open({key:"inv:toil",title:"Rương trang phục",bg:kriBg(),tabs,tab,onTab:k=>{tab=k;try{KINV.cur.toil=k}catch(e){}},
   items:t=>((reg()||{}).items||[]).filter(x=>x&&x.g&&((t||tab)==="all"||x.cat===(t||tab))).map(x=>({id:typeof kinlId==="function"?kinlId(x):x.name,src:x.src,src512:x.src512,name:x.name,grade:x.grade,lux:x.lux,mark:x.mark,sub:x.onText||x.sub||"",x})),
   info:it=>{try{const r=kitItemRef({g:it.x.g});return r&&typeof kinlDetail==="function"?kinlDetail(r,{key:"kri"}):""}catch(e){return""}},
-  acts:it=>{const g=it.x.g,worn=!!g.wdSlot||!!g.w,sl=typeof toilSlotOf==="function"?toilSlotOf(g.k):null;
+  acts:it=>{const g=it.x.g,worn=isOn(g),sl=typeof toilSlotOf==="function"?toilSlotOf(g.k):null;
    return[{n:worn?"Tháo":verb(g),main:1,off:worn&&sl==="y"?"Y phục chỉ thay: chọn bộ khác":"",fn:()=>{const s=kriSnap(null),l0=kriLogMark();
     TOIL.st.sel={k:g.k,wdSlot:g.wdSlot||null,w:!!g.w};window.__kriAct=1;try{toilAct(worn?"off":"wear")}finally{window.__kriAct=0}
     /* putting a piece on / taking it off moves it between the slot and the chest; it is not a new item (no «Rương đồ / Vừa vào Tư trang» box, j93 kmDiff) */
@@ -339,7 +341,7 @@ function kriToilOpen(x0){if(typeof toilAct!=="function"||typeof TOIL==="undefine
  if(!R)return false;if(K82)K82.classList.add("kri-hide");if(x0){const C=kitRingItem.cur;const i=C.items.findIndex(y=>y.x===x0||(y.x.g&&x0.g&&y.x.g.k===x0.g.k&&!!y.x.g.w===!!x0.g.w&&!!y.x.g.wdSlot===!!x0.g.wdSlot));if(i>=0){C.rot=i;kriPlace(C);setTimeout(()=>kriFocus(C),kriCalm()?0:180)}}return true}
 window.addEventListener("click",ev=>{if(!kriOn()||window.__kriAct)return;const t=ev.target.closest&&ev.target.closest('#kg82 [data-kinvkey="toil"][data-kinvi], #kg82 [data-keqk="toil"][data-keqi]');if(!t)return;
  try{let x=null;if(t.dataset.kinvi!=null){const o=KINV.reg.toil;x=o&&o.items&&o.items[+t.dataset.kinvi]}else{const o=KEQ.reg.toil;const sl=o&&o.slots&&o.slots[+t.dataset.keqi];if(!sl||!sl.item)return;
-   const L=(KINV.reg.toil||{}).items||[];x=L.find(y=>y.g&&(y.g.wdSlot===sl.k||(y.g.w&&typeof toilSlotOf==="function"&&toilSlotOf(y.g.k)===sl.k)))||null;if(x)try{KINV.cur.toil=x.cat}catch(e){}}
+   const L=(KINV.reg.toil||{}).items||[];x=L.find(y=>y.g&&(y.g.wdSlot===sl.k||(y.g.w&&typeof toilSlotOf==="function"&&toilSlotOf(y.g.k)===sl.k)||(sl.k==="hd"&&typeof toilHdK==="function"&&y.g.k===toilHdK())))||null;if(x)try{KINV.cur.toil=x.cat}catch(e){}}
   if(x&&kriToilOpen(x)){ev.stopImmediatePropagation();ev.preventDefault()}}catch(e){console.error("kri toil",e)}},true);
 /* ---- (11) titles (Danh hiệu panel, jdh dhPanel): «Đeo «…»» / «Đổi phần thưởng «…»» → the ring of her earned titles (tile = the kit title plate kitTitlePlate);
    acts = the title's bonus choices = the options of the title's own dhPick panel (run by their own go), «Tháo» on the worn one ---- */
@@ -365,7 +367,7 @@ window.addEventListener("click",ev=>{if(!kriOn()||window.__kriAct)return;const b
  const k=kriDhKeys().find(k=>dhObj(S,k).name===m[1]);if(k==null)return;try{if(kriDhOpen(k)){ev.stopImmediatePropagation();ev.preventDefault()}}catch(e){console.error("kri dh",e)}},true);
 /* ---- (13) hoa điền (toilette makeup step, jhd hdStep): the owned hoa điền on the ring; «Dán» = the step's own [data-hdk] button (→ the drag board),
    «Không dán» = its «Không dán»; ✕ leaves the step's buttons as they were ---- */
-if(typeof hdStep==="function"){const h0=hdStep;hdStep=function(ctx){const r=h0.apply(this,arguments);try{if(r&&kriOn()&&ctx&&ctx.box)kriHdOpen(ctx.box)}catch(e){console.error("kri hd",e)}return r}}
+if(typeof hdStep==="function"){const h0=hdStep;hdStep=function(ctx){const r=h0.apply(this,arguments);try{if(r&&kriOn()&&ctx&&ctx.box&&ctx.box.querySelector("[data-hdk]"))kriHdOpen(ctx.box)/* dress-fix: the hoa điền picked in the dress picker goes straight to the drag board — no chooser ring (only when the step shows a choice) */}catch(e){console.error("kri hd",e)}return r}}
 function kriHdOpen(box){const btn=k=>box.querySelector(`[data-hdk="${k}"]`);const K82=document.getElementById("kg82");
  /* the toilette overlay steps aside while the ring is open (an act returns "close" → it comes back for the drag board / the next step) */
  const R=kitRingItem.open({onClose:()=>{if(K82)K82.classList.remove("kri-hide")},key:"hd",title:"Hoa điền",sub:"Chọn một hoa điền để dán",bg:kriBg(),
