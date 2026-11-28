@@ -57,12 +57,11 @@ function illOpen(){if(!S||S.dead||!illOf(S)||(typeof Q!=="undefined"&&Q.length))
   const L=[];deck.forEach((a,i)=>{if(!a||!r.re||!r.re.test(String(a.n||"")))return;let why="";try{why=String(cardWhy(a)||"")}catch(e){}
    let k=1;try{k=cardCost(a)}catch(e){}const ok=!a.done&&!a.lock&&!why&&can(k)&&(typeof canPay!=="function"||canPay(a));
    if(!ok)why=why||(a.lock&&a.t)||(typeof canPay==="function"&&!canPay(a)?"không đủ bạc":"")||(typeof whyTime==="function"?whyTime(k):"")||"chưa làm được lúc này";
-   let x=a.x||"";try{if(DOOR.lineOf)x=DOOR.lineOf(a)||x}catch(e){}
+   let x="";try{x=optLine(a)}catch(e){}x=x||a.x||"";/* the same kit line as jone deckM (main E-GAIN3-LIVE optLine) */
    L.push({id:"d:"+a.n,n:a.n,a,x,off:!ok,why:ok?"":why,cost:k,go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("illOpen way",e)}},0)}})});
   const R=ONE.tierRows(r,L,"me");
   if(R.length){const sd=t=>[S.turn||0,S.buoi||0,"me",r.k,t||""].join(":");
-   const rows=R.map(x=>{const o={n:x.n,x:x.x,ddoor:1,go:()=>{const m=ONE.pick(r,x.T,sd(x.t));if(m)ONE.runM(r,m,x.T,x.t)}};if(x.off)o.off=x.off;
-    try{const a=x.m&&x.m.a;if(a&&!a.lock&&oddsOf(a)<100)o.p=optOdds(a)}catch(e){}return o});
+   const rows=R.map(x=>{const o={n:x.n,x:x.x,c:x.c,hint:x.hint,ddoor:1,go:()=>{const m=ONE.pick(r,x.T,sd(x.t));if(m)ONE.runM(r,m,x.T,x.t)}};if(x.off)o.off=x.off;return o});/* same row shape as jone deckTap (main) */
    let wh=null;try{wh=typeof pMe==="function"?pMe():null}catch(e){}DOOR.card(r.n,"",rows,wh);try{showModal()}catch(e){}return true}}
  /* no deck road here (cung nữ life …): the honest card alone */
  Q.unshift({t:illName(S),h:`<p>${illDanger(S)}</p>`});try{showModal()}catch(e){}return true}

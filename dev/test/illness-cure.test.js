@@ -24,7 +24,7 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
   await p.screenshot({path:`${OUT}/${name}-2-nang-back.png`});
   await p.evaluate(()=>{Q.length=0;try{$("modal").hidden=true}catch(e){}render()});await p.waitForTimeout(400);
   /* (2) law 2: the bạc road always has its matching road in the SAME tier, both shown side by side (each its own Tốn / odds); the one she cannot pay is greyed with the reason */
-  const nang=await p.evaluate(()=>{const r=(DOOR.D||[]).find(x=>x.k==="hs-thaiy");const run=()=>{IC.deck();const L=[];deck.forEach((a,i)=>{if(a&&r.re.test(a.n)){const off=!!(a.lock||!canPay(a));L.push({id:"d:"+a.n,n:a.n,a,x:DOOR.lineOf(a),off,why:off?(a.lock&&a.t)||"không đủ bạc":""})}});
+  const nang=await p.evaluate(()=>{const r=(DOOR.D||[]).find(x=>x.k==="hs-thaiy");const run=()=>{IC.deck();const L=[];deck.forEach((a,i)=>{if(a&&r.re.test(a.n)){const off=!!(a.lock||!canPay(a));L.push({id:"d:"+a.n,n:a.n,a,x:optLine(a),off,why:off?(a.lock&&a.t)||"không đủ bạc":""})}});
     return ONE.tierRows(r,L,"me").filter(y=>y.t==="nặng").map(y=>(y.m?y.m.n:"—")+(y.off?" [off: "+y.off.why+"]":"")+(/Tốn|tốn/.test(y.x)?" +ton":""))};
    const b0=S.bac,s0=S.sung;S.bac=200;S.sung=30;deal();const both=run();S.bac=0;S.sung=30;deal();const poor=run();S.bac=200;S.sung=0;deal();const nos=run();S.bac=b0;S.sung=s0;deal();return{both,poor,nos}});
   const has=(L,n,off)=>L.some(x=>x.startsWith(n)&&(/\[off/.test(x)===off)&&/\+ton/.test(x));
