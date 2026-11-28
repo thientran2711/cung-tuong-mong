@@ -65,7 +65,7 @@ function pframe(f,col){return `<div class="pfwrap">${pcPort(f||{},col||(f&&f.col
 function pframeArt(src){return `<div class="pcp pfr art"${src?` style="background-image:url(${src})"`:""}></div>`}
 /* ===== RESULT FEEDBACK after every act and choice: seal THÀNH / BẠI, the real deltas, one WHY line ===== */
 const RKEYS=[["sung","Sủng"],["danh","Danh"],["suc","Sức"],["bac","Bạc"],["duc","Đức"],["th","Thái hậu quý ngươi"],["hh","Hoàng hậu quý ngươi"],["sac","Sắc"],["tai","Tài"],["tamco","Tâm cơ"],["mat","Tai mắt"],["an","Ân tình"]];
-function rsnap(){if(!S)return null;const o={};RKEYS.forEach(([k])=>o[k]=S[k]||0);o.maid=S.maid?S.maid.loyal:0;o.seq=S.logSeq||0;o.rank=S.rank;return o}
+function rsnap(){if(!S)return null;const o={};RKEYS.forEach(([k])=>o[k]=S[k]||0);o.maid=S.maid?S.maid.loyal:0;o.seq=S.logSeq||0;o.rank=S.rank;o.inv=typeof kitOwned==="function"?kitOwned():(S.inv||[]).slice()/* KIT §54.2: what she owns (bag ∪ worn) for the act card's item rows (j63, kitInvDelta) */;return o}
 const FAILRE=/(hỏng|không thành|bị phát hiện|bị lộ|lạnh nhạt|không ai tin|từ chối|không động lòng|chưa chuẩn|bỏ qua|bị đuổi|phải lui|không biết gì mới|chỉ cười|bị bắt|thất bại)/i;
 function resultShow(title,before,okHint){if(!S||!before||S.dead)return;const d=RKEYS.map(([k,n])=>[n,(S[k]||0)-before[k]]).filter(x=>x[1]);if(S.maid&&S.maid.loyal!==before.maid)d.push(["Thiện cảm của cung nữ",S.maid.loyal-before.maid]);
  const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const L=S.logs.slice(0,n).map(plain).reverse();const why=L.join(" ").replace(/\s+/g," ").trim();
