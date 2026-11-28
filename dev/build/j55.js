@@ -69,12 +69,12 @@ function tdProbe(a,t){if(a.bac<BAL.bacFee.tdProbe||!tdHouse(t))return"";ap(a,{ba
  return r+ccStep(a)}
 /* review/net-ghen-2 (law 11): a traced leak = oanAdd(t,a,tdLeak_2) + relAdd(a,t,tdLeak_3) (its own oán, j9 relOan) → ONE total for the card and the result */
 function tdLeakOan(){const n3=BAL.eff.j55.tdLeak_3,k=BAL.relOan;return BAL.eff.j55.tdLeak_2+(n3<0?-n3*k.hurt:-n3*k.mend)}
-function tdLeakSay(t,lab){return `${pvOan(t,tdLeakOan(),lab)}, ${pvQuy(t,BAL.eff.j55.tdLeak_3,"thiện cảm")}`}
+function tdLeakSay(t,lab,d){return `${pvOan(t,tdLeakOan(),lab)}, ${d==null?pvQuy(t,BAL.eff.j55.tdLeak_3,"thiện cảm"):`thiện cảm ${balSg(d)}`}`}/* PVQUY-POST: card (no d) = the preview; result line (after relAdd) passes d = the real rise (affGot) */
 function tdLeak(a,t){const n=deG(a,t);if(n<1||a.bac<BAL.bacFee.tdLeak)return"";ap(a,{bac:-BAL.bacFee.tdLeak});const cA=tdHouse(a),cT=tdHouse(t);let r;
  window.__tdOk=false;if(aRoll(leakO(a,t),a)&&tdDadT(t)){window.__tdOk=true;tdPowAdd(cT,BAL.eff.j55.tdLeak);t.dad=cl((t.dad||40)+BAL.eff.j55.dadCut,0,100);ap(t,{danh:BAL.eff.j55.danhDadCut});tdDadClear(t);deA(a,t,-n);if(cA)tdRelAdd(cA,cT,-10);
   r=`<b>${typeof minNsName==="function"?minNsName("Ngự sử"):"Ngự sử"} dâng chứng cứ: cha của ${tdName(t)} tham ô, bị cách chức.</b> Nhà ${cT} thế lực ${balSg(BAL.eff.j55.tdLeak)}; ${t===S?`ngươi mất chỗ dựa: nhà mẹ đẻ ${balSg(BAL.eff.j55.dadCut)}, Danh ${balSg(BAL.eff.j55.danhDadCut)}`:`${t.name} mất chỗ dựa (nhà mẹ đẻ ${balSg(BAL.eff.j55.dadCut)}, Danh ${balSg(BAL.eff.j55.danhDadCut)})`}. `;tdNews(`Cha của ${tdName(t)} bị cách chức vì tham ô; nhà ${cT} suy.`)}
  else{deA(a,t,-BAL.ag.ev.one);r=`Chứng cứ tham ô cha ${tdName(t)} dâng lên bị bác vì chưa đủ (${evSg(-BAL.ag.ev.one)}). `}
- if(roll(traceO(a))){oanAdd(t,a,BAL.eff.j55.tdLeak_2);relAdd(a,t,BAL.eff.j55.tdLeak_3);const h=tdHead(cT);if(h)h.af[key(a)]=cl((h.af[key(a)]||0)+BAL.tdCourt.leakHead,-100,100);r+=`<span class="r">Tra ra người đứng sau là ${tdName(a)}: ${tdLeakSay(t,`${t===S?"ngươi":t.name} oán`)}${h?`, ${TDOFF[h.c]} ${h.name} quý ngươi ${balSg(BAL.tdCourt.leakHead)}`:""}.</span> `}
+ if(roll(traceO(a))){oanAdd(t,a,BAL.eff.j55.tdLeak_2);const dL=affGot(t,a,()=>relAdd(a,t,BAL.eff.j55.tdLeak_3));const h=tdHead(cT);if(h)h.af[key(a)]=cl((h.af[key(a)]||0)+BAL.tdCourt.leakHead,-100,100);r+=`<span class="r">Tra ra người đứng sau là ${tdName(a)}: ${tdLeakSay(t,`${t===S?"ngươi":t.name} oán`,dL)}${h?`, ${TDOFF[h.c]} ${h.name} quý ngươi ${balSg(BAL.tdCourt.leakHead)}`:""}.</span> `}
  return r+ccStep(a)}
 
 /* ---------- Quốc sự: realm state drives the Emperor's mood and his visits ---------- */

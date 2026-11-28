@@ -18,7 +18,7 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
  if(!F){console.log('AFF-PREVIEW FAIL · game did not load (affPreview missing)');process.exit(1)}
  await F.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;const t=document.getElementById('title');if(t)t.hidden=true;window.__forceOrigin='thd';window.__nlInner=1;start();window.__forceOrigin=0;window.__nlInner=0;quiet=false;Q.length=0});
  await F.waitForFunction(()=>typeof S!=='undefined'&&!!S&&!!S.name,null,{timeout:30000});
- const R=await F.evaluate(()=>{const out=[];const q=queenP();
+ const R=await F.evaluate(()=>{const out=[];const q=queenP();/* PVQUY-POST: jdh's title bonus rounds its fraction with Math.random (fr) — a card and its act could differ by 1 at random (flagged in dev/handover/reports/pvquy-post.md, not this unit); one fixed draw for preview AND act */const RND0=Math.random;Math.random=()=>0;
   const L=liveRivals(true).filter(x=>x!==q&&!x.out);
   // rescaling states on: feelings (vui) on the liked one, her mood, trust traits, a title, high liking (pace)
   try{if(typeof feelOn==="function"&&feelOn()&&typeof feelSet==="function")feelSet(S,"vui",2)}catch(e){}
@@ -51,11 +51,44 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
     out.push({name:`card «${a.n}» ${v.name}`,preview:shown,real,sg:m[0],ok:shown===real,sideOk:true,inRange:true})}}
   // GIFT CARD (jgift giftEval → j8 giveTo): the queen (two steps on one bond) and a consort
   for(const t of [q&&q!==S?q:null,L[5]||L[0]].filter(Boolean)){try{const k=Object.keys(IT).find(k=>IT[k]&&giftVal({k},t)>0&&!IT[k].sl)||"tuithom";invAdd(S,{k});const ix=S.inv.length-1,e=S.inv[ix];
-   const ev=giftEval(e,t);const m=String(ev&&ev.x||"").replace(/<[^>]+>/g,"").match(/nàng quý ngươi ([+-]?\d+)(?! đến)/);if(!m){out.push({name:`gift card ${t.name}: no number (${String(ev&&ev.x).slice(0,60)})`,preview:null,real:null,sg:"",ok:true,sideOk:true,inRange:true});continue}
+   const ev=(()=>{const r1=Math.random;Math.random=()=>0.99;try{return giftEval(e,t)}finally{Math.random=r1}})();/* the same draw giveTo runs under */const m=String(ev&&ev.x||"").replace(/<[^>]+>/g,"").match(/nàng quý ngươi ([+-]?\d+)(?! đến)/);if(!m){out.push({name:`gift card ${t.name}: no number (${String(ev&&ev.x).slice(0,60)})`,preview:null,real:null,sg:"",ok:true,sideOk:true,inRange:true});continue}
    const r0=Math.random;const rf=typeof rcvGiftIn==="function"?rcvGiftIn:null;Math.random=()=>0.99;let real,ret="";try{real=affGot(t,S,()=>{ret=giveTo(S,t,ix)})}finally{Math.random=r0;if(rf)rcvGiftIn=rf}
    const rl=String(ret).match(/thiện cảm ([+-]?\d+)/);/* the keep line (KK68 keepGain.d); a wrong-taste gift adds its OWN «không ưa» line (jdis), counted apart */if(giveTo.out!=="take"||!rl){out.push({name:`gift card ${t.name}: outcome ${giveTo.out} (no keep line)`,preview:+m[1],real:null,sg:m[0],ok:true,sideOk:true,inRange:true});continue}
    out.push({name:`gift card «Tặng quà» ${t.queen?"queen ":""}${t.name} (result line)`,preview:+m[1],real:+rl[1],sg:m[0],ok:+m[1]===+rl[1],sideOk:true,inRange:true})}catch(err){out.push({name:"gift card error "+err.message,preview:0,real:1,sg:"",ok:false,sideOk:true,inRange:true})}}
-  return out});
+  // PVQUY-POST (MAIN 188 ruling, law 4): a line written AFTER the act prints the REAL rise (affGot), never the pvQuy prediction. Each POST site:
+  // run the act with her nết hidden (pvQuy would print a range «+a đến +b») and near the pace ceiling, then every number on the result line must be ONE
+  // number equal to that person's real change (aff before → after), one row per person.
+  {const ALL=()=>liveRivals(true).filter(x=>x&&!x.out).concat(q&&q!==S?[q]:[]).filter((x,i,a)=>a.indexOf(x)===i);
+   const affMap=(y)=>{const M=new Map();for(const x of ALL())M.set(x,aff(x,y||S));return M};
+   const hide=fn=>{const k0=typeof trKnown==="function"?trKnown:null;if(k0)trKnown=()=>[];const r0=Math.random;Math.random=()=>0;try{return fn()}finally{Math.random=r0;if(k0)trKnown=k0}};
+   const plain=t=>String(t==null?"":(typeof t==="object"?(t.res?t.res.join(" · "):JSON.stringify(t)):t)).replace(/<[^>]+>/g,"");
+   const postRow=(site,who,one,y,run,re)=>{const b0=affMap(y);let ret="";try{ret=hide(run)}catch(e){out.push({name:`POST ${site}: error ${e.message}`,preview:null,real:null,sg:"",ok:false,sideOk:true,inRange:true});return}
+    const txt=plain(ret);const b1=affMap(y);
+    if(one){const m=txt.match(re||/(?:quý ngươi|thiện cảm) ([+-−]?\d+)( đến [+-]?\d+)?/);const real=Math.round((b1.get(one)||0)-(b0.get(one)||0));
+     if(!m){out.push({name:`POST ${site} ${who}: no number in «${txt.slice(0,260)}»`,preview:null,real,sg:"",ok:/^\(no gift/.test(txt)||/^Ngươi sang giúp .* việc khó\.$/.test(txt)/* «Giúp đỡ nàng»: jtwoway twDo answers with its own line, no number (not a pvQuy line) */,sideOk:true,inRange:true});return}
+     const shown=+m[1].replace("−","-");out.push({name:`POST ${site} ${who} (result line)`,base:null,preview:shown,real,sg:m[0],ok:!m[2]&&shown===real,sideOk:true,inRange:true});return}
+    let n=0;for(const x of ALL()){const m=txt.match(new RegExp(x.name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+" thiện cảm ([+-−]?\\d+)( đến [+-]?\\d+)?"));if(!m)continue;n++;
+     const real=Math.round((b1.get(x)||0)-(b0.get(x)||0)),shown=+m[1].replace("−","-");out.push({name:`POST ${site} ${x.name} (row per person)`,preview:shown,real,sg:m[0],ok:!m[2]&&shown===real,sideOk:true,inRange:true})}
+    if(!n)out.push({name:`POST ${site}: no person row in «${txt.slice(0,70)}»`,preview:null,real:null,sg:"",ok:/^\s*$/.test(txt),sideOk:true,inRange:true})};
+   const P=L.filter(v=>v.alive!==false).slice(0,5);P.forEach((v,i)=>{v.rel=[30,92,60,96,10][i]||40});/* two near the pace ceiling */
+   // j9 topicOpts run(): Giúp đỡ nàng / Nhún nhường / Cảnh báo nàng
+   for(const v of P.slice(0,3)){try{if(oan(v,S)<=0)oanAdd(v,S,5)}catch(e){}let A0=[];try{A0=topicOpts(v)||[]}catch(e){}
+    for(const n of ["Giúp đỡ nàng","Nhún nhường","Cảnh báo nàng"]){const a=A0.find(z=>z&&z.n===n);if(!a||typeof a.run!=="function")continue;postRow(`j9 «${n}»`,v.name,v,S,()=>a.run(),/quý ngươi ([+-−]?\d+)( đến [+-]?\d+)?\./)}}
+   // jagacts3 P3T talk results (her side and an NPC speaker)
+   if(typeof P3T==="object")for(const v of P.slice(0,4)){for(const k of ["health","praise","secret"]){try{const c=P3T[k](S,v);postRow(`jagacts3 ${k}`,v.name,v,S,()=>c.run(),/quý ngươi ([+-−]?\d+)( đến [+-]?\d+)?/)}catch(e){}}
+    try{const th=liveRivals(true).find(x=>x!==v&&x!==S);if(th){v.rl=v.rl||{};const c=P3T.gossip(S,v,th);postRow("jagacts3 gossip",v.name,v,S,()=>c.run(),/quý ngươi ([+-−]?\d+)( đến [+-]?\d+)?/)}}catch(e){}
+    const p2=P.find(x=>x!==v);if(p2)try{const c=P3T.health(p2,v);postRow("jagacts3 health NPC→NPC",`${p2.name}→${v.name}`,v,p2,()=>c.run(),new RegExp("quý "+p2.name.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+" ([+-−]?\\d+)( đến [+-]?\\d+)?"))}catch(e){}}
+   // j24 «Có người đến» gift: relAdd runs while the card is built → the card prints what already moved
+   if(typeof AP_MK==="object"&&AP_MK.apFriend)for(const v of P.slice(0,2)){postRow("j24 apFriend gift",v.name,v,S,()=>{try{if(typeof giftHand==="function"&&v.inv)invAdd(v,{k:"tuithom"})}catch(e){}const o={who:v,sub:"gift"};const k0=kitParse;let raw="";kitParse=function(x){raw+=String(x)+" ";return k0.apply(this,arguments)};let ev=null;try{ev=AP_MK.apFriend(o)}finally{kitParse=k0}/* the kit draws thiện cảm as marks; the number is in the text it was handed */return o.sub==="gift"&&ev?raw:"(no gift in hand: a chat visit)"},/[Tt]hiện cảm:? ?([+-−]?\d+)( đến [+-]?\d+)?/)}
+   // j67 e67ally (story ending) and the j97 group ending (one row per person)
+   if(typeof e67ally==="function")postRow("j67 e67ally",P[1]&&P[1].name,P[1],S,()=>e67ally(P[1],30),/thiện cảm ([+-−]?\d+)( đến [+-]?\d+)?/);
+   if(typeof R97L!=="undefined"){const A=R97L.find(a=>a&&typeof a.go==="function"&&/Người trong phe ngươi/.test(String(a.go)));if(A){P.forEach(v=>{v.rel=Math.max(v.rel||0,netTh(v,"than")+1)});postRow("j97 group",null,null,S,()=>A.go(null,1,[12]))}}
+   // jemoact «tiec»: each guest's row
+   if(typeof eaDo0==="function")postRow("jemoact tiec",null,null,null,()=>{S.bac=Math.max(S.bac||0,500);return eaDo0(S,{k:"tiec",n:"Mở tiệc"})});
+   // j8 giveTo: the keep line vs her real change
+   {const t=P[3];if(t){const k=Object.keys(IT).find(k=>IT[k]&&giftVal({k},t)>0&&!IT[k].sl)||"tuithom";invAdd(S,{k});const ix=S.inv.length-1;const rf=typeof rcvGiftIn==="function"?rcvGiftIn:null;
+    try{rcvGiftIn=()=>"take";postRow("j8 giveTo",t.name,t,S,()=>giveTo(S,t,ix),/thiện cảm ([+-−]?\d+)( đến [+-]?\d+)?/)}finally{if(rf)rcvGiftIn=rf}}}}
+  Math.random=RND0;return out});
  console.log('| act | before: card showed (raw) | after: card shows | real change | same | preview wrote nothing |');console.log('|---|---|---|---|---|---|');
  for(const r of R){console.log(`| ${r.name} | ${r.base!=null?(r.base>0?'+':'')+r.base:'(raw BAL)'} | ${r.sg} | ${r.real} | ${r.ok?'yes':'NO'} | ${r.sideOk?'yes':'NO'} |`);if(!r.ok)fails.push(r.name);if(!r.sideOk)fails.push(r.name+' (side effect)');if(!r.inRange)fails.push(r.name+' (range)')}
  if(errs.length){fails.push('page errors');console.log('page errors '+JSON.stringify(errs.slice(0,3)))}
