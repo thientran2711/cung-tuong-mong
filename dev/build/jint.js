@@ -15,7 +15,7 @@ window.intAll=intAll;
 (function(){const W=(name,fn)=>{if(typeof window[name]!=="function")return;const f0=window[name];window[name]=fn(f0)};
  W("apply",a0=>function(){const r=a0.apply(this,arguments);try{intP(S)}catch(e){}return r});
  W("ap",a0=>function(p){const r=a0.apply(this,arguments);try{intP(p);intP(S)}catch(e){}return r});
- for(const n of ["affAdd","oanAdd","relAdd","evA"])W(n,a0=>function(x,y){const r=a0.apply(this,arguments);try{intP(x);intP(y);intP(S)}catch(e){}return r});
+ for(const n of ["affAdd","oanAdd","relAdd","evA"])W(n,a0=>function(x,y){const r=a0.apply(this,arguments);if(typeof AFF_DRY!=="undefined"&&AFF_DRY)return r;try{intP(x);intP(y);intP(S)}catch(e){}return r});
  W("oanMonth",a0=>function(){const r=a0.apply(this,arguments);intAll();return r});
  W("nextBuoi",a0=>function(){const r=a0.apply(this,arguments);intAll();return r});
  W("deser",a0=>function(){const r=a0.apply(this,arguments);intAll();return r});

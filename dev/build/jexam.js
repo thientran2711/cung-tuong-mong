@@ -117,10 +117,10 @@ function promoReward(p,src,o){o=o||{};const m=PROMO_SRC[src]||"none";if(m==="non
  return r?r+promoCost(p,src):""}
 /* the loss that comes with each reward (owner 07:15Z); same rule for an NPC (her rivals feel it the same way) */
 function promoCost(p,src){const B=BAL.psk,me=p===S;let t="";try{
- if(src==="son1"){const q=typeof queenP==="function"?queenP():null;if(q&&q!==p)oanAdd(q,p,B.son1.hhOan);
-  let n=0;for(const v of liveRivals(true))if(v!==p&&v!==q&&!v.out&&typeof sonsOf==="function"&&sonsOf(v).length){oanAdd(v,p,B.son1.momOan);n++}
+ if(src==="son1"){const q=typeof queenP==="function"?queenP():null;const dQ=q&&q!==p?oanGot(q,p,()=>oanAdd(q,p,B.son1.hhOan)):0;
+  let n=0;const MO=[];/* PVQUY-POST-2: one row per person, the real change */for(const v of liveRivals(true))if(v!==p&&v!==q&&!v.out&&typeof sonsOf==="function"&&sonsOf(v).length){MO.push(`${v.name} oán ngươi ${balSg(oanGot(v,p,()=>oanAdd(v,p,B.son1.momOan)))}`);n++}
   if(p!==S&&S!==q&&!S.out&&typeof sonsOf==="function"&&sonsOf(S).length)oanAdd(S,p,B.son1.momOan);
-  if(me)t=`Hoàng hậu${n?` và ${n} vị có hoàng tử`:""} thấy ngươi thành mối lo (${pvOan(q,B.son1.hhOan,"oán ngươi")}${n?`, ${pvOanAny(B.son1.momOan,"các vị ấy")}`:""}). `}
+  if(me)t=`Hoàng hậu${n?` và ${n} vị có hoàng tử`:""} thấy ngươi thành mối lo (oán ngươi ${balSg(dQ)}${n?`, ${MO.join(", ")}`:""}). `}
  else if(src==="emp"){if(me)apply({th:-B.emp.th});let n=0;
   for(const v of liveRivals(true)){const s=typeof rgSideOf==="function"?rgSideOf(v):null;if(s&&s!=="emp"){oanAdd(v,p,B.emp.oan);n++}}
   if(me)t=`Thái hậu lạnh nhạt (Thái hậu quý ngươi −${B.emp.th}); ${n?`${n} phi tần phe thua`:"phe thua"} để bụng ngươi (${pvOanAny(B.emp.oan,"oán")}). `}

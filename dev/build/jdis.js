@@ -69,11 +69,11 @@ window.disOf=disOf;window.disInit=disInit;window.disKnown=known;window.disUnk=p=
  try{if(a&&e&&!e.h&&r&&r!==S&&r!==a&&r!=="maid"&&(r==="emp"||r==="th"||typeof r==="object"))k=hit(r,e)}catch(x){}
  if(!k){const out0=g0.apply(this,arguments);try{if(a&&e&&out0&&r&&r!=="emp"&&r!=="th"&&r!=="maid"&&typeof r==="object"&&r!==S&&r!==a){const lk=likeKeys(r),gk=giftKeys(e).find(x=>lk.includes(x));if(gk)lrn(r,"l",gk,"Dâng quà hợp ý")}}catch(x){}return out0}
  const emp=r==="emp",th=r==="th",who=emp?"Hoàng thượng":th?"Thái hậu":`${rkName(r)} ${r.name}`,en=entry(k).n,nm=iname(e),pr=emp?"ngài":th?"người":"nàng",key=emp||th?r:r;
- const by=me?"":` của ${a.name}`,loss=(n)=>me?(emp?sgStat(-n):th?`Thái hậu -${n}`:`thiện cảm của nàng -${n}`):emp?`Sủng của ${a.name} -${n}`:th?`Thái hậu với ${a.name} -${n}`:`thiện cảm của nàng với ${a.name} -${n}`;
- if(roll(BAL.dis.refuse)){giveTo.out="refused";/* K-GIFT-OUT (KK64): the piece stays in her chest */lrn(key,"d",k,"Bị từ chối quà");if(emp)ap(a,{sung:-BAL.dis.refSung});else if(th)ap(a,{th:-BAL.dis.refAff});else affAdd(r,a,-BAL.dis.refAff);
-  return `<span class="r">${who} không nhận ${nm}${by}: ${pr} không ưa ${en}.</span> ${emp?(me?sgStat(-BAL.dis.refSung):`Sủng của ${a.name} -${BAL.dis.refSung}`):th?`Thái hậu -${BAL.dis.refAff}`:`Thiện cảm của nàng -${BAL.dis.refAff}`}. Món quà vẫn còn trong rương${me?"":" của "+a.name}. `}
+ const by=me?"":` của ${a.name}`,loss=(n)=>me?(emp?sgStat(-n):th?`Thái hậu -${n}`:`thiện cảm của nàng -${n}`):emp?`Sủng của ${a.name} -${n}`:th?`Thái hậu với ${a.name} -${n}`:`thiện cảm của nàng với ${a.name} ${loss.d!=null?balSg(loss.d):"-"+n}`;/* AFF-PREVIEW: the real fall (affGot) */
+ if(roll(BAL.dis.refuse)){giveTo.out="refused";/* K-GIFT-OUT (KK64): the piece stays in her chest */lrn(key,"d",k,"Bị từ chối quà");if(emp)ap(a,{sung:-BAL.dis.refSung});else if(th)ap(a,{th:-BAL.dis.refAff});else loss.d=affGot(r,S,()=>affAdd(r,a,-BAL.dis.refAff));
+  return `<span class="r">${who} không nhận ${nm}${by}: ${pr} không ưa ${en}.</span> ${emp?(me?sgStat(-BAL.dis.refSung):`Sủng của ${a.name} -${BAL.dis.refSung}`):th?`Thái hậu -${BAL.dis.refAff}`:`Thiện cảm của nàng ${loss.d!=null?balSg(loss.d):"-"+BAL.dis.refAff}`}. Món quà vẫn còn trong rương${me?"":" của "+a.name}. `}
  const out=g0.apply(this,arguments);if(!out)return out;lrn(key,"d",k,"Dâng quà sai ý");
- if(emp)ap(a,{sung:-BAL.dis.sung});else if(th)ap(a,{th:-BAL.dis.aff});else affAdd(r,a,-BAL.dis.aff);
+ if(emp)ap(a,{sung:-BAL.dis.sung});else if(th)ap(a,{th:-BAL.dis.aff});else loss.d=affGot(r,S,()=>affAdd(r,a,-BAL.dis.aff));
  return out+`<span class="r">Nhưng ${pr} không ưa ${en}: ${loss(emp?BAL.dis.sung:BAL.dis.aff)}.</span> `}})();
 /* owner 16/11 (Q25): consorts' KNOWN LIKES ("Nàng thích"), shown next to "Nàng ghét". The likes are likeKeys(p) (best art, item kinds tagged for her);
    she learns one by talking (same roll as the dislikes, BAL.dis.talk), by spying (an "lk" intel fact) or when a gift that suits her is accepted. S.likK[id] = known keys. */
@@ -88,5 +88,5 @@ window.disLikeRow=likeRow;window.disLikeLearn=likeLearn;window.disLikeKnown=like
 (function(){if(typeof j78facts!=="function")return;const f0=j78facts;j78facts=function(v){const F=f0.apply(this,arguments);try{const k=likeUnk(v)[0];if(k)F.push({k:"lk:"+k,kind:"lk",pri:BAL.dis.spyPri,txt:`${j78Who(v)} thích ${entry(k).n}.`,go:()=>{const K=likeKnown(v);if(!K.includes(k))K.push(k);return""}})}catch(e){}return F}})();
 /* the gift dialog tells her only what she already knows */
 (function(){if(typeof giftEval!=="function")return;const g0=giftEval;giftEval=function(e,t){const r=g0.apply(this,arguments);try{if(r&&r.ok&&t&&t!=="maid"&&e&&!e.h){const who=t==="emp"?"emp":t,k=hit(who,e);
-  if(k&&known(who).includes(k))r.x=(r.x||"")+` · kèm: ${t==="emp"?"ngài":t==="th"?"người":"nàng"} không ưa ${entry(k).n}, ${t==="emp"?sgStat(-BAL.dis.sung):t==="th"?`Thái hậu -${BAL.dis.aff}`:`thiện cảm của nàng -${BAL.dis.aff}`}; có thể không nhận: ${chanceW(BAL.dis.refuse)}`}}catch(x){}return r}})();
+  if(k&&known(who).includes(k))r.x=(r.x||"")+` · kèm: ${t==="emp"?"ngài":t==="th"?"người":"nàng"} không ưa ${entry(k).n}, ${t==="emp"?sgStat(-BAL.dis.sung):t==="th"?`Thái hậu -${BAL.dis.aff}`:`thiện cảm của nàng ${affSg(t,S,-BAL.dis.aff)}`}; có thể không nhận: ${chanceW(BAL.dis.refuse)}`}}catch(x){}return r}})();
 })();

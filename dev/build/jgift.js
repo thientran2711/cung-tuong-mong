@@ -27,7 +27,8 @@ function giftEval(e,t){const pre=`tốn: ${BAL.time.cost.give} khắc`;
  const g=giftVal(Object.assign({k:e.k},it),t);
  if(t==="emp")return{ok:true,x:`${pre} · thành: ${sgStat(Math.max(1,Math.round(g/2)))}`,v:g};
  if(t==="th")return{ok:true,x:`${pre} · thành: Thái hậu quý ngươi +${g}`,v:g};
- let x=`${pre} · thành: nàng ${pvQuy(t,giftRel(Object.assign({k:e.k},it),t),"quý ngươi")}${t.queen?` · Hoàng hậu với ngươi +${g}`:""}`;
+ const gr0=giftRel(Object.assign({k:e.k},it),t);/* AFF-PREVIEW: the same rise giveTo gives (j8 keepGain: relAdd + for the queen the hh step on the SAME bond → one number) */
+ let x=`${pre} · thành: nàng ${t.queen?`quý ngươi ${balSg(affPreviewRun(t,S,()=>{affAdd(t,S,gr0);if(typeof hhSet==="function")hhSet(S,S.hh+(typeof hhPace==="function"?hhPace(g):g))/* PVQUY-POST-2: LIVE ap(S,{hh}) = apply paces first (spG), then hhSet→affAdd */}))}`:pvQuy(t,gr0,"quý ngươi")}`;
  if(e.t){/* previews: giveTo */const sp=typeof oSee==="function"?oSee(t,true):30;x+=` · kèm: nàng phát hiện đồ có vấn đề, nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ, quý ngươi ${balSg(spSee("rel",BAL.eff.j8.giveTo))}: ${chanceW(sp)}`/* a side chance (the roll giveTo uses): chanceW, never a ladder word */}
  if(it.sl&&it.rk>rkOf(t))x+=" · kèm: vượt phẩm của nàng";return{ok:true,x,v:g}}
 /* the right-hand item panel */

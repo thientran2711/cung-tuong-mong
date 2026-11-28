@@ -31,7 +31,7 @@ function spG(k,h,now,n,rk,ck,peek){const B=typeof BAL==="object"&&BAL.stp;if(!B|
  const bd=B.band[k];if(bd&&n>bd[1])n=Math.min(bd[2],bd[1]+(n-bd[1])*B.over);
  const ce=spCeil(rk,k),top=spTop(k,rk),c0=Math.max(0,+now||0);if(c0>=top)return 0;
  const ab=spAbs(k),pw=ab?ab.pow:B.dm.pow,mn=ab?ab.min:B.dm.min;let g=n*Math.max(mn,1-Math.pow(c0/ce,pw));
- const cc=h&&typeof h==="object"?(h.spc||(h.spc={})):null,key=ck||k;
+ const cc=h&&typeof h==="object"?(h.spc||(peek?null:(h.spc={}))):null,key=ck||k;/* a peek (preview) creates nothing */
  if(cc){g+=+cc[key]||0;const gi=Math.round(g);if(!peek)cc[key]=Math.round((g-gi)*1000)/1000;g=gi}else g=Math.round(g);
  return Math.max(0,Math.min(g,Math.ceil(top-c0)))}
 /* a raw write of one stat of a person (x.sung = …, v.rel += …) that RISES goes through the same rule; returns the new value (clamped as statSet) */
@@ -41,8 +41,14 @@ function spAdd(p,k,n,tgt){if(!p)return 0;if(!n||(n<0&&!SP_SIGN[k])){p[k]=(p[k]||
  if(k==="rel")p[k]=cl(p[k],-100,100);else if(k==="oan")p[k]=cl(p[k],0,100);else if(typeof statSet==="function")statSet(p,k,p[k]);return p[k]}
 /* what a rise of n would REALLY add now (no carry change) — every preview that prints a rise reads this, so the button and the result chip
    say the same number (law 4): her own stats (k = sung / danh / duc / th / hh), or a person's thiện cảm / oán toward her (who = that person) */
-function spSee(k,n,who){try{if(!n||typeof BAL!=="object"||!BAL.stp||!BAL.stp.on)return n;if(k==="rel"||k==="oan"){const x=who&&who!==S?who:null;
+function spSee(k,n,who){try{if(!n)return n;if(k==="hh")return hhSee(n);if(typeof BAL!=="object"||!BAL.stp||!BAL.stp.on)return n;if(k==="rel"||k==="oan"){const x=who&&who!==S?who:null;
   return spG(k,x,x?(x[k]||0):0,n,spRk(S),k+":me",1)}return spG(k,S,S[k],n,spRk(S),k,1)}catch(e){return n}}
+/* PVQUY-POST-2 (law 4; MAIN 189 ruling: a display job must not change results): the dry run of LIVE's apply({hh:n}) — apply paces the rise
+   (spG, her own carry), then S.hh's setter (j24 hhSet) hands that paced number to affAdd(Empress, her), which runs its own chain (traits,
+   titles, feelings, mood, pace). No live Empress bond (no accessor) → apply's pace alone is the change. Writes nothing. */
+function hhPace(n){const B=typeof BAL==="object"&&BAL.stp;return B&&B.on?spG("hh",S,S.hh,n,spRk(S),"hh",1):n}/* apply's own hh step, peeked */
+function hhSee(n){if(!n)return n;const p=hhPace(n);if(!p)return 0;
+ if(typeof hhLive==="function"&&hhLive(S)&&typeof affPreview==="function"){const q=queenP();if(q&&q!==S)return affPreview(q,S,Math.round(p))}return p}
 /* a regard / grudge ROW of a map (h.rl[id] thiện cảm, h.ro[id] oán — e.g. her row for the co-op friend, keyed by pid) goes through the same rule:
    rk = rank of the one the row is about (affAdd / oanAdd: the one liked). Returns the new value (clamped as BAL.linkRange). BIG review 3. */
 function spRow(h,map,id,n,rk){if(!h||!n)return h&&h[map]?h[map][id]||0:0;const M=h[map]=h[map]||{},k=map==="ro"?"oan":"rel",now=M[id]||0,

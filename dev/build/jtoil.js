@@ -247,7 +247,7 @@ if(typeof leAttire==="function"){const la0=leAttire;
  const tx0=aaThieuLeTxt;aaThieuLeTxt=function(host,f0){const L=leAttire(S,"",host);if(!L.toil)return tx0.apply(this,arguments);const f=f0||L.delta;const who=toilWho(host);
   const head=[];const base=L.why.filter(w=>!L.toil.why.some(x=>x[0]===w));if(L.state==="plain")head.push(`thiếu lễ (${base[0]||"y phục dưới phẩm"})`);else if(base.length)head.push(base[0]);
   head.push(...L.toil.why.map(w=>w[0]));const hk=TOIL_HK[L.toil.hk];
-  const parts=[f.danh?`Danh ${f.danh>0?"+":""}${f.danh}`:"",f.duc?`Đức ${f.duc>0?"+":""}${f.duc}`:"",f.aff?(host==="emp"?`Sủng ${f.aff>0?"+1":Math.round(f.aff/3)||-1}`:`${who} thiện cảm ${f.aff>0?"+":""}${f.aff}`):""].filter(Boolean);
+  const parts=[f.danh?`Danh ${f.danh>0?"+":""}${f.danh}`:"",f.duc?`Đức ${f.duc>0?"+":""}${f.duc}`:"",f.aff?(host==="emp"?`Sủng ${f.aff>0?"+1":Math.round(f.aff/3)||-1}`:`${who} thiện cảm ${affSg(host,S,f.aff)}`):""].filter(Boolean);
   return `${head.join(", ")}${hk?` (${who} ${hk})`:""}: ${parts.join(", ")}`};
  const ap0=aaThieuLeApply;aaThieuLeApply=function(host,f0){const r=ap0.apply(this,arguments);try{toilMark(host)}catch(e){}return r}}
 
@@ -278,7 +278,7 @@ function toilSeeRule(v,L,w){const B=BAL.toil;const T=traitsOf(v);const frugal=T.
 /* the look of anyone today in the shape toilSeeRule reads (her: toilLook; the friend / an NPC: their record of the day) */
 function toilLookP(p){if(!p||p===S)return toilLook();const rec=toilFriendRec(p)||toilNpc(p);return{mk:toilMk(rec),dv:rec.dv,showy:rec.style==="showy",plain:rec.style==="plain"}}
 function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=toilLook();const e=toilSeeRule(v,L,S);if(!e)return null;
- const g=e.g,aff=e.aff;let txt=e.k==="praise"?`nàng ta chuộng giản dị: ${pvQuy(v,aff,"quý ta")}`:e.k==="frown"?`ta ăn vận phô trương: nàng ta quý ta ${aff}`:"";
+ const g=e.g,aff=e.aff;let txt=e.k==="praise"?`nàng ta chuộng giản dị: ${pvQuy(v,aff,"quý ta")}`:e.k==="frown"?`ta ăn vận phô trương: nàng ta quý ta ${affSg(v,S,aff)}`:"";
  if(e.k==="tease"){const n=e.n;txt=`thấy ta ${L.dv==="diem"?"ăn vận diêm dúa":"điểm trang "+toilMkW("vung")}, nàng ta bớt ghen (Ghen -${n})`/* toil-looks5 wording (main) */;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
  if(g)txt=[txt,`${L.showy?"ta ăn vận phô trương":`dung nhan ta ${toilMkW("tuyet")}`}: nàng ta ghen +${g}`].filter(Boolean).join(" · ");if(!txt)return null;
  if(doIt){if(aff)affAdd(v,S,aff);if(g)ghenUp(v,g,"thấy ngươi điểm trang lộng lẫy",S);toilMark(v)}return{txt,aff,g}}
@@ -532,7 +532,7 @@ function toilFinish(made){const st=TOIL.st;if(!st)return;KG82.setup=1;try{if(KG8
  rows.push(["Xa xỉ son phấn",toilLvChips(mk)]);/* the TOTAL is shown by MAIN's kit display (it reads luxTotal) */
  /* what today's look does to the people she will meet (the real numbers; the nết shows only once known) */
  const eff=[];try{for(const h of ["th",qOn()?rivals[0]:null,"emp"].filter(Boolean)){if(h==="th"&&S.thDead)continue;const r=leAttire(S,"",h);const t=r.toil;if(!t||!t.aff)continue;
-  eff.push(`${toilWho(h)}: ${h==="emp"?`Sủng ${balSg(t.aff>0?BAL.eff.jtoil.empSung:-BAL.eff.jtoil.empSung)}`:`thiện cảm ${t.aff>0?"+":""}${t.aff}`} khi gặp hôm nay`)}}catch(e){}
+  eff.push(`${toilWho(h)}: ${h==="emp"?`Sủng ${balSg(t.aff>0?BAL.eff.jtoil.empSung:-BAL.eff.jtoil.empSung)}`:`thiện cảm ${affSg(h,S,t.aff)}`} khi gặp hôm nay`)}}catch(e){}
  const html=`<div class="kgr">${kitRows(rows.concat([["Hôm nay",eff.length?eff:["không ai đổi cách nhìn ta"],"n"]]))}</div><div class="kg82act"><button class="${kg82Btn()}" id="toildone">Đã hiểu</button></div>`;
  toilHUD({score:made&&!quick?`${score}/100`:"–",round:"4/4",time:"đã xong"});const showRes=()=>{kg82ShowRes(html,tOk);const b=$("toildone");if(b)b.onclick=()=>{TOIL.st=null;kg82Close();render()};KG82.quit=null;KG82.xdo=()=>{const x=$("toildone");if(x)x.click()}};
  try{toilReveal({look:mk,made,score,good,pre:made?toilPreName(S.toilette.col):"" },showRes)}catch(e){showRes()}

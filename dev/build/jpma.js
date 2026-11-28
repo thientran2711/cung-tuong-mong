@@ -136,11 +136,11 @@ function pmDuelOpts(p,t,x){const st=pmStakeOf(p,t,x.s),o=pmOdds(t,p,x.kind),me=t
  const w=me?pmWalk(p):{tc:0,why:""};
  const O=[{i:0,id:"full",n:"Nhận lời thách đấu",fx:{},x:`${pmWord(o)}${w.tc?` · tốn: ${pmWalkTx(w)}`:""} · thành: lấy ${pmPut(st,p,p)} của ${nm(p)} · hỏng: mất ${pmPut(st,t,p)} của ${me?"ngươi":"mình"}`,need:w.why?[{t:w.why,ok:false}]:undefined,tsDis:!!w.why,lk:()=>!st||!st.ok||!!w.why,
   go:()=>({ok:1,r:pmRun(p,t,x)})}];
- if(rk(p)>rk(t))O.push({i:1,id:"half",n:"Nhường bề trên",fx:{},x:`được: ${nm(p)} ${pvQuy(p,pmYieldAff(p,t,x),"quý "+(me?"ngươi":t.name))},
+ if(rk(p)>rk(t))O.push({i:1,id:"half",n:"Nhường bề trên",fx:{},x:`được: ${nm(p)} quý ${me?"ngươi":t.name} ${affSg(p,t,pmYieldAff(p,t,x))/* PVQUY-POST-2: the partner is t (the act: affAdd(a,t)) */},
  bớt oán ${spSee("oan",B().duel.yieldOan)} · mất: ${st&&st.s==="item"?"nộp "+what:what}`,lk:()=>!st||!st.ok,go:()=>({ok:1,r:pmYield(p,t,x)})});
  O.push(pmNoO(p,t,x));return O}
 /* co-op (foreman E #14 ruling (3)): the friend's ask card offers «Nhường bề trên» when the asker outranks the reader — the same answer and preview as pmDuelOpts */
-function pmCoopYield(p,t){if(!p||!t||rk(p)<=rk(t))return null;return{n:"Nhường bề trên",x:`được: ${nm(p)} ${pvQuy(p,pmYieldAff(p,t),"quý ngươi")}, bớt oán ${spSee("oan",B().duel.yieldOan)} · mất: món cược của ngươi`}}
+function pmCoopYield(p,t){if(!p||!t||rk(p)<=rk(t))return null;return{n:"Nhường bề trên",x:`được: ${nm(p)} quý ngươi ${affSg(p,t,pmYieldAff(p,t))}, bớt oán ${spSee("oan",B().duel.yieldOan)} · mất: món cược của ngươi`}}
 /* her card logs the answer as it comes back (PEND.rcvAsk): one full stop, the same as every pm line (fix 6b) */
 function pmDot(t,O){if(t!==S)return O;return O.map(o=>Object.assign({},o,{go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;const d=s?pmEnd(s)+".":"";return r&&typeof r==="object"?Object.assign({},r,{r:d}):d}}))}
 /* co-op (review r1 fix 1 + 2): the friend's ask card = the SAME card an NPC's ask gives (RCVK line + pmPlayOpts / pmDuelOpts previews: game, stake of each
