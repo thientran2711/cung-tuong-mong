@@ -16,9 +16,9 @@ BAL.stp={on:1,
  /* floor[k] = the highest GATE of that stat the game asks at any rank (dev/measure/statpace-gates.py lists all 155 gates + ladder steps; it FAILs when a gate
     is above floor / ceiling): a rise slows to dm.min above the rank ceiling but only STOPS at max(ceil[rank], floor[k]), so no working
     rule closes at a low rank (Ẩn dật Đức BAL.route.anDuc, «Khách lạ ở chùa» Danh BAL.danhG.kcVihanh, Đức → Thái hậu BAL.ducLv.up, …).
-    duc: «hiền đức» BAL.ducLv.word[3] 80 · danh: BAL.succN.rareCDanh 80 · sung: jpet 75 · th: netTh("th","than2") (Thái hậu's own nết, ROW 9) · hh: jpet 60 ·
+    duc: «hiền đức» BAL.ducLv.word[3] 80 · danh: BAL.succN.rareCDanh 80 · sung: jpet 75 · th: netTh("th","than2") of the slowest archetype (Quyền uy 65; Thái hậu's own nết, ROW 9) · hh: jpet 60 ·
     rel / oan: BAL.net.thClamp top (than2 80) — a consort's liking / grudge toward her can still reach every net threshold (law 6). */
- floor:{duc:80,danh:80,sung:75,th:60,hh:60,rel:80,oan:80}};
+ floor:{duc:80,danh:80,sung:75,th:65,hh:60,rel:80,oan:80}};
 /* sếp's two options (report dev/handover/reports/stat-pace.md «Cách A / Cách B»): ONE switch BAL.stpPick. A = recommended (default);
    B = stricter: lower rank ceilings, steeper slowdown, at most 2 big events a day. */
 BAL.stpPre={A:{ceil:[45,55,65,75,85,92,97,100],pow:3,cap:3},B:{ceil:[40,50,60,70,80,90,96,100],pow:2,cap:2}};
