@@ -438,6 +438,26 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-random3-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-random3-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-lover1",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "sens",
+   "seed": 409298460,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "f65d019b"
+   },
+   "ending": "Lãnh cung — Tuổi xuân qua đi (age 40 y23; mixed build, last part on LIVE)",
+   "age": 40,
+   "buoi": 4648,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover1-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lover1-moments.md"
   }
  ],
  "parked": [
