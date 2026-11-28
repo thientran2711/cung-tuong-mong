@@ -1,4 +1,5 @@
-# ~86% xong · còn 38 việc không tính hình nhân vật (LIVE 22afefb4)
+# ~86% xong · còn 38 việc không tính hình nhân vật (LIVE a96564ad)
+Recount MAIN 188 28/11 08:21Z: a96564ad lr-rules-r2 (rules-r1 = lc34-b3a + B f14role-inherit + D rank-pace + f14role-rows + tuantang-warn) → LIVE; no row closed (rules work, parts of 4/11/12) → 38 open, ~86 %.
 Recount MAIN 187 28/11 07:36Z: 22afefb4 lc35-ui (ui6 incl. kk66-ui5 + webkit-lb + tsg-kpk time-spill fix + kit-screenveil + kk67 figplaque) → LIVE; row 23 screen veil closed → 38 open, ~86 %.
 Recount MAIN 186 28/11 05:20Z: row 30 Tốn no-minus verified LIVE (d95b4db4) → struck → 39 open, ~86 %.
 Recount MAIN 186 28/11 05:15Z: 5ad52416 webkit-lb (Safari<16.4 boot play-stopper, all lookbehind → kRx + hard gates) → LIVE; no worklist row → 40 open, ~86 %.
