@@ -172,7 +172,7 @@ window.kitThey=kitThey;
   return Object.assign({},h,{k:key,c,tgt:v,run:()=>{if(c)apply(Object.fromEntries(Object.entries(c).map(([a,b])=>[a,-b])));return h.run()}})})}})();
 (function(){if(typeof optLine!=="function")return;const o0=optLine;optLine=function(a){if(!a||!a.tgt||typeof J78!=="object")return o0.apply(this,arguments);const pv=J78.cardV;J78.cardV=a.tgt;try{return o0.apply(this,arguments)}finally{J78.cardV=pv}}})();
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{const v=p&&p.ref;if(!v||p.kind!=="rival")return A;const i=A.findIndex(a=>a&&a.n==="Khiêu khích");
- if(i>=0)A[i]=Object.assign({},A[i],{x:`${pvRel(v,-15)}, nàng ta ghen +10`})}catch(e){}return A}})();
+ if(i>=0)A[i]=Object.assign({},A[i],{x:`${pvRel(v,-BAL.talk.provoke.rel)}, nàng ta ghen +${BAL.talk.provoke.ghen}`/* E-GAIN3b law 4: the numbers the act applies (j2 PK = BAL.talk.provoke), were typed 15 / 10 */})}catch(e){}return A}})();
 
 /* 15. her own Sủng on act-card outcome texts goes through sg() like the real change (j1 apply: Hoàng thượng nóng nảy ×1.3,
    lạnh lùng ×0.7 on gains) — "Sủng -8" on a static outcome text is drawn as the real −10 */
