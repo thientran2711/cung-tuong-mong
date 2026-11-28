@@ -182,3 +182,14 @@ Per road (roles used | resolved before → after | hostile before → after): se
 | story14-frame.js (4 steps) | bots stuck at ch.1, crash at :94 before item 3 prints | — | the known harness fault B reported (fix on review/sideq-road-fold, not in this base); item 3's exact logic = f14role-rows check 1 (PASS) |
 
 Files: dev/build/jst14.js (F14ROLE rows only), dev/test/f14role-rows.js (new), index.html + sw.js (build_site.sh; assets.json = base), this report. No BAL, no wording, no kit change.
+
+## r2 restack (FOREMAN C ROOT 4-1-1-1 order, 28/11 ~04:26Z)
+New branch review/f14role-rows-r2 on review/f14role-inherit-r2 0e2afaa1 (B BIG RV PASS, FF on LIVE 18003079); f45f76dd left untouched.
+- Delta re-applied = the one F14ROLE hunk in jst14.js + dev/test/f14role-rows.js + this report; rebuilt (build_site.sh, assets.json = base). Applied cleanly.
+- Double-row check: the r2 base F14ROLE still has its 30 rows (none of the 108 new ones); f14Row / f14Hostile / f14Carried code is identical to 6b00d4f0 (the cnv_chu ch.7 fix is jroad/jst14 flow, not rows) → no row resolved twice, nothing dropped.
+| gate | r2 branch | r2 base 0e2afaa1 |
+|---|---|---|
+| f14role-rows.js | PASS 3/3 (584/584, hostile 443, rows 138, no 1→0→1); MUTATE=hole FAIL c1 · MUTATE=rehate FAIL c2 | 171/584, rows 30 |
+| f14role-inherit.js | PASS 6/6; NO ROW 0 roles / 0 roads | — |
+| road-cut.js (cut 7) | PASS 270/270 (92 roads, 5 skipped) | PASS 270/270 (same 5 skipped) |
+| quickcheck vs LIVE 18003079 | PASS · core gates PASS · open 2164 ms · old LIVE save loads + plays a buổi · perf new/live render 279/293, tab 497/483, buổi 1602/1943, tasks>200 35/32 | — |
