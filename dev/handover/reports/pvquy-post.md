@@ -93,3 +93,32 @@ D. LIVE typed numbers on spAdd-rel cards (j7.js:43 «Kết minh» +25, :155/170 
 
 ## HANDOVER (if a fresh seat continues)
 Round 2 tip = review/pvquy-post-r2 (this report commit). Round 1 tip = review/pvquy-post. Tools: the scan (`--pvquy` = every site with its sort and reason), `node dev/test/aff-preview.js .` (rebuild first: `bash dev/site/build_site.sh`). A new POST site → `affGot` around the funnel, `balSg(d)`; a new helper used on both sides → add it to `HELPER_PRE` with the arg a POST caller must pass.
+
+## ROUND 3 — PVQUY-POST-3 (re-merge onto new LIVE aecbc267, MAIN 189) · branch review/pvquy-post-r3
+session_01Rc5AsJyaVisRE1nRk3Y6vS · depth 3 · START_CTX ≈ 3 % of 1M → roll ≤ 28 %
+PRIORITY #1 CHECK: MAIN 189 rulings (no result change vs LIVE; preview = applied number; PRE = prediction; POST = real rise; hh double pace kept) | main aecbc267 (lr-rules-r3: oan-pace-2 F2 spSee wraps, ghét step opDn in affAdd, pace-speed spAbs/spCeil, one Tố giác) | review/* review/pvquy-post-r2 97bd0858 (RV-186 PASS, void by the new LIVE) | claims PVQUY-POST.
+KIT CHECK: no UI part touched — numbers inside existing card / result texts only.
+
+TRUE 2-parent merge: `4f254405` = aecbc267 + 97bd0858 (20 conflicting source files + built files), then `c47a974a` (jexam fix + scan + rebuild).
+
+| conflict | resolution |
+|---|---|
+| j9 affAdd | aecbc267's ghét step (`opDn`, a fall = one bounded step per cause, day cap) kept on the live path, before relMS as on LIVE. A dry run (`AFF_DRY`) takes the SAME step, then puts `x.agw` / `x.opa` back (affPreview: at once; affPreviewRun: in its undo list) → a preview of a fall = what lands (law 4), nothing moves. |
+| jstatpace spG | aecbc267's `spAbs` / `spCeil(rk,k)` + r2's peek that creates no carry. `spSee("hh")` → `hhSee` kept (LIVE double pace shown honestly). |
+| PRE card numbers (j24 ×3, j25, j30 queen, j42, j55, j70, j71, j78 trinhhh ×2, j95, jtsb ×2) | aecbc267 wrapped `balSg(spSee("rel",n))` (the pace step alone, no partner); r2's `affSg(partner,…,n)` = the dry run of the whole affAdd chain incl. that pace → r2 wins (one number = the act). Where r2 had a fallback (`q?affSg(q,…):…`) the fallback keeps aecbc267's spSee. |
+| spAdd-rel cards (j3, j7 ×4) | `spSee("rel",n,who)` (r2: spAdd paces against that person). |
+| jaudit | `pvQuy` = r2 (`affSg`, range kept); aecbc267's `aaSee` + its `pvOan` kept. |
+| POST lines | j9 «Tạ lỗi» run: aecbc267 printed `spSee("oan",…)` after oanAdd → `oanGot`; j72 fn_8 / jpoison found: auto-merge gave `balSg(spSee("rel",<real d>))` (pace on an already-real number) → `balSg(d)`; j78 chest run: r2 affGot/oanGot; jexam «Thái hậu lạnh nhạt»: printed `pvOanAny` after oanAdd (missed by the r2 scan: the -Any twins were not scanned) → the real oán each took (`oanGot`, one number or «a đến b»; no number when no one). |
+| aecbc267 logic | kept as is: j30 phản tọa / tư thông tiers, j42 spyLearn, j78 / j95 one «Tố giác» (r2's number fixes moved onto the surviving lines), j9 «Cùng cung» notice. |
+| test | aff-preview: the hh chip regex accepts an unsigned «0» (aecbc267's ghét day cap can swallow apply({hh:-4}) after an earlier fall the same day; chip «thiện cảm 0» = real 0). Test-only. |
+
+### Gates (round 3, tip c47a974a)
+- aecbc267 ancestor · merge 4f254405 parents (aecbc267, 97bd0858) · 0 files deleted vs aecbc267 · MODGATE: assemble.py identical to aecbc267 (0 quoted *.js missing).
+- j1.js / j8.js (apply / ap, the hh path) = aecbc267 (untouched by this unit).
+- `python3 dev/measure/aff-preview-scan.py dev/build` → exit 0 · raw 0 · pvQuy/pvOan(+Any) sites 134 PRE, **POST 0**. MUTATE (jexam back to pvOanAny) → exit 1, POST 1.
+- `node dev/test/aff-preview.js .` → **8/8 PASS** (101–104 acts, preview = real).
+- `node dev/test/kri-one-row.js .` → PASS · 4 receivers. `node dev/test/webkit-syntax.js` → 492 modules, 0 hits.
+- quickcheck vs aecbc267: see below.
+
+### Separate item for MAIN (not folded — aecbc267's own new sites, spSee not pvQuy/pvOan)
+E. aecbc267's oan-pace-2 F2 put `spSee("rel"|"oan",n)` into 8 RESULT lines, 10 calls (the scan run with the spSee family; a96564ad had 1 — jky, fixed in r2b). Several write the number RAW (no pace at all: `s.loyal=cl(+n)`, `h.af[k]+=n`), so the line shows a paced number the act never paces: j10.js:106 / :113 / :122 (servDo thưởng / che chở, courtGive biếu), j55.js:57 (tdGift head returns gift), j72.js:406 (trả bạc), jgreet.js:133 (provoke line, oán), jtc.js:35/38 helper printed after the act at j68g.js:67 (thcSet loy/envy/calm). Law 4 says a result line prints the real change; outside this order → MAIN to rule (fix = measure before/after like affGot, or print raw where the write is raw).
