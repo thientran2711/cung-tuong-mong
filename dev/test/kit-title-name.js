@@ -17,7 +17,7 @@ const BAD=/\?\?\?|(^|[^\p{L}])một vị|(^|[^\p{L}])một người|chưa quen b
    const tag=document.querySelector('#modal .kptitle');if(tag){tag.insertAdjacentHTML('beforeend',' '+kitName(un));await sl(300);out.tag=T('#modal .kptitle .kname')}
    Q.length=0;document.getElementById('modal').hidden=true;document.body.classList.remove('kdlg-on');
    /* family scan: quick days, collect every title text */const seen=new Set(),bad=[];const scan=()=>document.querySelectorAll(window.KIT_TTL_SEL||'h3').forEach(e=>{if(e.closest('.kname,.kti'))return;let t='';e.childNodes.forEach(n=>{if(!(n.nodeType===1&&n.matches('.kname,.kname2,.kti')))t+=n.textContent});t=t.replace(/\s+/g,' ').trim();if(!t||seen.has(t))return;seen.add(t);if(/\?\?\?|(^|[^\p{L}])một vị|(^|[^\p{L}])một người|chưa quen biết|undefined|\bnull\b|NaN/iu.test(t))bad.push(t)});
-   for(let d=0;d<40&&!S.dead;d++){try{endTurn()}catch(e){}await sl(60);scan();let g=0;while(Q.length&&g++<6){try{const q=Q[0];showModal();await sl(80);scan();const bt=__kopts().find(x=>!x.disabled)||document.querySelector('#modal button.kopt:not([disabled]),#modal .act-card:not([disabled])');if(bt)__koptGo(bt);else Q.shift();await sl(80);scan()}catch(e){Q.shift()}}}
+   for(let d=0;d<40&&!S.dead;d++){try{endTurn()}catch(e){}await sl(60);scan();let g=0;while(Q.length&&g++<6){try{const q=Q[0];showModal();await sl(80);scan();const bt=(__koptsOn()[0]||null)||document.querySelector('#modal button.kopt:not([disabled]),#modal .act-card:not([disabled])');if(bt)__koptGo(bt);else Q.shift();await sl(80);scan()}catch(e){Q.shift()}}}
    out.scanned=seen.size;out.bad=bad.slice(0,10);return out});
   if(r.err){chk(wh+' setup',false,r);continue}
   chk(wh+' resultShow title',r.res&&!BAD.test(r.res)&&/Yến tiệc mời/.test(r.res),r.res);

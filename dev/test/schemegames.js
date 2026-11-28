@@ -65,9 +65,9 @@ const KEYS=(KS||'spy,rumor,bribe,poison').split(',');const LAD=OW.W;
   const dlg=await openChoice(k,info);if(!dlg.open||dlg.n<2){fails.push(`${k} ${how}: choice dialog missing `+JSON.stringify(dlg)+JSON.stringify(await p.evaluate(()=>({q:Q.length,kh:S.khac,can:can(2),mod:$('modal').hidden}))));continue}
   if(how==='win'){await chk(k+' choice');if(!/Tốn/i.test(dlg.txt)||!/Được/i.test(dlg.txt)||!/Mất/i.test(dlg.txt)||!/Ghi chú/i.test(dlg.txt))fails.push(k+': choice rows missing Cần/Tốn/Được/Mất :: '+dlg.txt.slice(0,700));
    if(k==='poison'&&/độc|thuốc|chén|bột/i.test(await p.evaluate(()=>$('modal').querySelector('p')?$('modal').querySelector('p').innerText:'')))fails.push(k+': method words in ask line')}
-  if(how==='skip'){const b0=await p.evaluate(()=>({seq:S.logSeq||0,bac:S.bac}));await p.evaluate(()=>__koptGo(__kopts()[1]));const after=await finishAct(k,info,how,0,b0);out.push({k,how,w0:info.w0,after});continue}
+  if(how==='skip'){const b0=await p.evaluate(()=>({seq:S.logSeq||0,bac:S.bac}));await require('./lib/kopts').tap(p,await p.evaluateHandle(()=>__kopts()[1]));const after=await finishAct(k,info,how,0,b0);out.push({k,how,w0:info.w0,after});continue}
   await p.evaluate(()=>{if(Q.some(x=>x.pid==='sgpick')&&Q[0].pid!=='sgpick'){const k=Q.filter(x=>x.pid==='sgpick');Q.length=0;k.forEach(x=>Q.push(x));showModal()}});await p.waitForTimeout(300);
-  await p.evaluate(()=>__koptGo(__kopts()[0]));await p.waitForTimeout(700);
+  await require('./lib/kopts').tap(p,await p.evaluateHandle(()=>__kopts()[0]));await p.waitForTimeout(700);
   if(!await p.locator('#kg82').count()){fails.push(`${k} ${how}: game did not open `+JSON.stringify(await p.evaluate(()=>({q:Q.map(x=>(x.pid||'')+'|'+String(x.t||x.h).slice(0,40)),mh:$('modal').hidden,u:used}))));await p.screenshot({path:`${OUT}/../fail-${k}-${how}.jpg`,type:'jpeg',quality:50}).catch(()=>{});continue}
   if(k==='poison'){const t=await p.evaluate(()=>$('kg82').innerText);if(/độc|thuốc|chén|bột|pha/i.test(t))fails.push(k+': method words on game screen :: '+t)}
   await chk(k+' intro');

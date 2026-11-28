@@ -17,10 +17,10 @@ const {chromium}=require('playwright');const [,,BASE,SZ]=process.argv;const [WH,
  const pick=async(q,title)=>{await p.evaluate(([q,t])=>{Q.length=0;const d=mkP('sgpick',q);if(!d)throw new Error('no dialog');pushDil(d,t);showModal()},[q,title]);await p.waitForTimeout(500)};
  await clean();await pick({j:'over'},'Nghe ngóng');
  res.overDlg=await p.evaluate(()=>({n:__kopts().length,t:$('modal').innerText.slice(0,260)}));
- await p.evaluate(()=>{window.__u0=used});await p.evaluate(()=>__koptGo(__kopts()[1]));await p.waitForTimeout(800);
+ await p.evaluate(()=>{window.__u0=used});await require('./lib/kopts').tap(p,await p.evaluateHandle(()=>__kopts()[1]));await p.waitForTimeout(800);
  res.overSkip=await p.evaluate(()=>({used:used-window.__u0,game:!!$('kg82')}));if(res.overSkip.used!==1)fails.push('over skip: khắc '+res.overSkip.used);
  /* 3. Nghe lén -> play: first-time card, Gợi ý, #ov visible */
- await clean();await pick({j:'over'},'Nghe ngóng');await p.evaluate(()=>__koptGo(__kopts()[0]));await p.waitForTimeout(900);
+ await clean();await pick({j:'over'},'Nghe ngóng');await require('./lib/kopts').tap(p,await p.evaluateHandle(()=>__kopts()[0]));await p.waitForTimeout(900);
  res.game1=await p.evaluate(()=>({kg:!!$('kg82'),first:/cách chơi, lần đầu/i.test($('kg82').innerText),go:$('sggo')&&$('sggo').innerText,ov:(()=>{const o=$('ov');const r=o.getBoundingClientRect();return !o.hidden&&r.width>0&&r.height>0})(),used}));
  if(!res.game1.first)fails.push('first-time card missing');if(!res.game1.ov)fails.push('#ov not visible during game (co-op timer pause)');
  await p.locator("#sggo").click();await p.waitForFunction(()=>$("sghint"),null,{timeout:8000}).catch(()=>{});
@@ -28,13 +28,13 @@ const {chromium}=require('playwright');const [,,BASE,SZ]=process.argv;const [WH,
  await p.locator('#sghint').click();await p.waitForTimeout(400);
  await p.evaluate(()=>{kg82Close()});await p.waitForTimeout(300);
  /* second time: no card */
- await pick({j:'over'},'Nghe ngóng');await p.evaluate(()=>__koptGo(__kopts()[0]));await p.waitForTimeout(900);
+ await pick({j:'over'},'Nghe ngóng');await require('./lib/kopts').tap(p,await p.evaluateHandle(()=>__kopts()[0]));await p.waitForTimeout(900);
  res.game2=await p.evaluate(()=>({first:/cách chơi, lần đầu/i.test($('kg82').innerText)}));if(res.game2.first)fails.push('how-to card shown twice');
  await p.evaluate(()=>{kg82Close()});
  /* 4. servant bribe */
  await clean();
  res.serv=await p.evaluate(()=>{const o=rivals.find(x=>x.alive&&x.staff&&x.staff.length);if(!o)return{none:1};const s=o.staff[0];const d=mkP('sgpick',{j:'serv',sid:s.sid});return{ok:!!d,t:d&&d.o.map(x=>x.n),x:d&&d.o[0].x.slice(0,200),sid:s.sid}});
- if(!res.serv.none){await pick({j:'serv',sid:res.serv.sid},'Mua chuộc');await p.evaluate(()=>{window.__u0=used;window.__b0=S.bac});await p.evaluate(()=>__koptGo(__kopts()[1]));await p.waitForTimeout(800);
+ if(!res.serv.none){await pick({j:'serv',sid:res.serv.sid},'Mua chuộc');await p.evaluate(()=>{window.__u0=used;window.__b0=S.bac});await require('./lib/kopts').tap(p,await p.evaluateHandle(()=>__kopts()[1]));await p.waitForTimeout(800);
   res.servSkip=await p.evaluate(()=>({used:used-window.__u0,bac:window.__b0-S.bac,log:String(S.logs[0]||'').replace(/<[^>]+>/g,'').slice(0,120)}));if(res.servSkip.used!==2)fails.push('serv skip khắc '+res.servSkip.used)}
  /* 5. every new job survives save/load */
  await clean();

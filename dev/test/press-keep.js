@@ -51,7 +51,7 @@ for(const dev of ['fold','ipad']){const [w,h]=DEVS[dev];
  for(let k=0;k<4;k++){await clear();await p.waitForTimeout(600)}
  const okSel=await p.evaluate(()=>{S.selx={};const d=mkP('kc2Sel',{});if(!d)return false;Q.length=0;pushDil(d,'Tuyển chọn');/* the game's own path: the card as kc2SelOn queues it */const D=typeof DQ!=='undefined'?DQ:null;if(D)D.user=(D.user||0)+1;try{showModal()}finally{if(D)D.user--}return true});
  if(!okSel)say(false,dev,'«Tuyển chọn» card','not built');else{await p.waitForFunction(()=>{const M=document.getElementById('modal');return M&&!M.hidden&&/Cúi đầu chờ xét/.test(M.innerText)},null,{timeout:10000}).catch(()=>{});await p.waitForTimeout(1500);
-  const ix=await p.evaluate(()=>{const b=__kopts().find(x=>/Cúi đầu chờ xét/.test(__koptText(x)||x.textContent));return b&&b.dataset.m!=null?b.dataset.m:(b?'plaque':null)});
+  const ix=await p.evaluate(()=>{const b=__kopts().find(x=>/Cúi đầu chờ xét/.test(__koptText(x)||x.textContent));return b?b.dataset.m:null});
   const b3=ix!=null&&await p.$(`#modal .opts button[data-m="${ix}"]`);const pt=b3?await rowPt(b3):{miss:'card not shown (option '+ix+')'};
   if(!pt||pt.miss)say(false,dev,'«Tuyển chọn» · Cúi đầu chờ xét','row text covered: '+(pt&&pt.miss));else{await p.waitForTimeout(2500);await rt.choose(b3,{screen:'Tuyển chọn',label:'Cúi đầu chờ xét'});/* the shared real tap, as the crawler found it */await p.waitForTimeout(900);
    const r=await p.evaluate(()=>({lost:window.__pk.dnLost,clicks:window.__pk.clicks,done:!!(S.selx&&S.selx.done),q:Q.length&&Q[0].t}));

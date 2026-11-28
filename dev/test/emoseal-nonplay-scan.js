@@ -20,7 +20,7 @@ const [,,PURL,SZ='1180x820',SEC='20',FLAG]=process.argv;
  R.push(await watch('identity card + face picker'));
  await p.evaluate(()=>{const e=document.querySelector('#modal .kpick');if(e)e.scrollIntoView({block:'center'})});R.push(await watch('identity card, face picker in view'));
  await p.evaluate(()=>{const x=document.querySelector('#modal button[data-nl=ok]');x&&x.click()});await sleep(4000);
- for(let i=0;i<12;i++){await p.evaluate(()=>{try{if(typeof closeModal==='function'&&!document.getElementById('modal').hidden){const m=Q[0];if(m&&m.opts&&m.opts.length){const bt=__kopts().find(x=>!x.disabled);bt&&__koptGo(bt)}else closeModal()}}catch(e){}});await sleep(600)}
+ for(let i=0;i<12;i++){await p.evaluate(()=>{try{if(typeof closeModal==='function'&&!document.getElementById('modal').hidden){const m=Q[0];if(m&&m.opts&&m.opts.length){const bt=(__koptsOn()[0]||null);bt&&__koptGo(bt)}else closeModal()}}catch(e){}});await sleep(600)}
  R.push(await watch('PLAY (control)'));
  console.log(`KIT §38.4 emotion-seal non-play scan @${SZ} (${SEC}s per screen)`);R.forEach(r=>console.log(`  ${r.screen.padEnd(36)} leans ${r.lean} · seals ${r.seals} · nonPlay ${r.np}`));if(errs.length)console.log('ERR',errs.slice(0,4));
  await b.close();if(FLAG==='--fail'&&(R.slice(0,4).some(r=>r.lean)||R[4].np===true))process.exit(1)})();

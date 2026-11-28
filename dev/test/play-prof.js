@@ -26,7 +26,7 @@ function agg(prof){const N={};for(const n of prof.nodes)N[n.id]=n;const dt={};co
  const DO={
   next:async()=>{await f.evaluate(CLEAR);await tapEl(()=>{const n=document.getElementById('next');return n&&!n.disabled?n:null});await sleep(3000);await f.evaluate(CLEAR)},
   card:async()=>{await f.evaluate(CLEAR);await f.evaluate(OPENACT);await sleep(800);await tapEl(()=>{const c=[...document.querySelectorAll('button.card.ka:not(:disabled):not(.kdis)')].filter(x=>x.offsetParent!==null&&x.getBoundingClientRect().bottom<innerHeight);return c[Math.floor(Math.random()*c.length)]||null});await sleep(2000);
-   await tapEl(()=>{const m=document.getElementById('modal');if(!m||m.hidden)return null;return __kopts(m).filter(x=>!x.disabled&&x.offsetParent!==null)[0]||null});await sleep(1500);await f.evaluate(CLEAR)},
+   await tapEl(()=>{const m=document.getElementById('modal');if(!m||m.hidden)return null;return __koptsOn(m).filter(x=>__koptSeen(x))[0]||null});await sleep(1500);await f.evaluate(CLEAR)},
   tab:async()=>{for(const k of ['court','rel','inv','art','story','act'])await tapEl(new Function(`return [...document.querySelectorAll('#tabs [data-tab="${k}"]')].find(x=>x.offsetParent!==null)||null`));await sleep(800)},
   idle:async()=>{await sleep(5000)},
   soak:async()=>{const t0=Date.now();while(Date.now()-t0<+opt('soakms',60000)){await f.evaluate(require('./lib/playperf').STEP).catch(()=>{});await sleep(250)}},

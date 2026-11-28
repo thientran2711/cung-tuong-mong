@@ -46,7 +46,7 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
  /* event cards */
  await clearQ();await p.evaluate(()=>{petCard("tsbPetGift",{src:"emp",t:"thienma"},"Ngự ban")});await p.waitForTimeout(900);await shot('09-card-ngu-ban');A.push(await audit('card-emp'));
  await clearQ();await p.evaluate(()=>{petCard("tsbPetHunt",{ts:["camke","cuuvi"]},"Thu săn")});await p.waitForTimeout(900);await shot('10-card-thu-san');A.push(await audit('card-hunt'));
- await p.evaluate(()=>{const b=__kopts()[1];if(b)__koptGo(b)});await p.waitForTimeout(900);await shot('11-thu-san-result');
+ await p.evaluate(()=>{const b=__kopts().find(x=>x.dataset.m==='1')||__kopts()[1];if(b)__koptGo(b)});await p.waitForTimeout(900);await shot('11-thu-san-result');
  await clearQ();await p.evaluate(()=>{petCard("tsbPetW",{i:3},"Thú nuôi biếng ăn")});await p.waitForTimeout(900);await shot('12-card-bieng-an');A.push(await audit('card-w'));
  /* đỡ mạng: Sức 0 at the end of the week */
  await clearQ();const res=await p.evaluate(()=>{const n0=S.pets.length;S.pets.forEach(P=>{if(petT(P).tr===4)P.stg=3});/* Ngự tứ saves a life only as Linh thú */S.suc=0;rivalsTurn();return{dead:S.dead,suc:S.suc,n0,n1:S.pets.length,has:S.pets.some(x=>x.t==='bachloc')}});
