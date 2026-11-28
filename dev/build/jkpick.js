@@ -5,7 +5,7 @@
    A plaque = the kit act button (kitFocus.btn = .kfoc-b: picture + name + «word · Tốn …»); the SILK-CARD SKIN is the kit look of that button inside .kpk (CSS tokens --kpk-*; --kpk-img is the unused painted-wood slot). ONE plaque size per mode (kv1/kv2), the same on every place.
    kitDim: ONE dim for the people who are NOT chosen: brightness + saturation on the FIGURE, OPAQUE (never opacity / see-through); the background is never touched.
      Static filter on a copy of the figure that cross-fades in (compositor opacity, no animated filter); numbers = BAL.kdim {b,s,ms}.
-   API:  const P=kitPick.open({host,anchor:{x,y,w,h},side:"auto"|"l"|"r",groups:[{k,n,acts:[{id,n,pic,word,ton,off,why,info}]}] | acts:[…],group,onPick(id,act,P),onOff(act,P),onClose(),dismiss:true});
+   API:  const P=kitPick.open({host,anchor:{x,y,w,h},side:"auto"|"l"|"r",groups:[{k,n,acts:[{id,n,pic,word,ton,off,why,info}]}] | acts:[…],group,onPick(id,act,P),onOff(act,P) (told after kitPick showed the reason, §98.1d),onClose(),dismiss:true});
          P.lift(id) · P.setGroup(k) · P.close() (animated) · P.destroy() · kitPick.rect(figEl,host) → anchor {x,y,w,h} in host px · kitPick.current() · kitPick.close()
          Event: the plaque button gets «kpkpick» (bubbles) on «Chọn» (or a 2nd keyboard/robot click), data-id = act id.   kitDim.on(figs,{keep}) · kitDim.off() · kitDim.state().
    PURE DISPLAY: no game logic, no numbers of its own.   Test: dev/test/kit-pick.js (Fold 755x1000 + iPad 1180x820). */
@@ -89,9 +89,17 @@ function fitNames(P){const el=P.el;el.classList.remove("kpk-slimall","kpk-tight"
 /* «CHỌN» CONFIRM v2 (owner OD 27/11 ~03:17Z, law 14 — replaces the ✓ / ✕ pair of 25/11, the KK51 strip pair and the KK53 v1 bar under the plaque): tap = the plaque lifts + its line shows, and a SMALL kit «Chọn» chip
    (.kbtn.khok.kpk-gob, size BAL.kpkgo) stands INSIDE its bottom-right corner (the plaque grows one chip-tall strip, .kpk-cf); the lifted plaque never covers the row below. A tap on the lifted plaque body again = Chọn too
    (two-tap: 1st lifts, 2nd chooses); another plaque = switch; a tap outside = the lift drops. onPick / «kpkpick» unchanged for the callers. */
-function pick(P,a,b){if(!P.open)return;if(a.off){try{P.o.onOff&&P.o.onOff(a,P)}catch(e){}return}
+/* KIT §98.1d THE REASON OF A CLOSED PLAQUE (K-RING-WHY, LIVE law 3 «no hidden loss / honest locks», law 9 kit first, law 11 the whole group): EVERY closed plaque (off + why),
+   whatever host hangs the board (kitFocus, kitRing, kitStage answers / place card, kitPcard, any kitPick.open), shows its reason in the kit word pop-up (kpPop) when she taps the
+   plaque or its «!» badge (.kfoc-i of kitFocus.btn) — kitPick does it itself, no host has to pass anything; the host's onOff(act,P) is only told afterwards. The «!» of an OPEN plaque
+   shows its details (info, else the whole name + line) and never chooses. Hold-to-lift / two-tap choose of an open plaque are unchanged. */
+function whyHTML(a){const sub=[a.word,a.ton?("Tốn "+a.ton):""].filter(Boolean).join(" · ");const h=(a.off?`<div class="kpopt">${esc(a.why||"Chưa làm được")}</div>`:"")+(a.info||"");return h||`<div class="kpopt">${esc(a.n)}</div>${sub?`<p>${esc(sub)}</p>`:""}`}
+function whyShow(P,a,b){try{if(typeof kpPop==="function"&&b)kpPop(b,whyHTML(a),{})}catch(e){console.error("kitPick why",e)}}
+function whyTap(P,a,n,b,ev){const bang=!!(ev&&ev.target&&ev.target.closest&&ev.target.closest(".kfoc-i"));if(!bang&&!a.off)return false;
+ if(P.up!==n)lift(P,a.id);whyShow(P,a,b);if(a.off){try{P.o.onOff&&P.o.onOff(a,P)}catch(e){}}return true}
+function pick(P,a,b){if(!P.open)return;if(a.off){whyShow(P,a,b);try{P.o.onOff&&P.o.onOff(a,P)}catch(e){}return}
  b.dispatchEvent(new CustomEvent("kpkpick",{bubbles:true,detail:{id:a.id,act:a}}));try{P.o.onPick&&P.o.onPick(a.id,a,P)}catch(e){}}
-function tap(P,a,n,b,ev){if(!P.open)return;if(P.up===n){pick(P,a,b);return}
+function tap(P,a,n,b,ev){if(!P.open)return;if(whyTap(P,a,n,b,ev))return;if(P.up===n){pick(P,a,b);return}
  lift(P,a.id)}
 function conf(P){try{let c=P.el.querySelector(":scope>.khconf");const n=P.up;if(!n||!P.open){if(c)c.hidden=true;return}
  const a=(P.G&&P.G.acts||[]).find(x=>String(x.id)===n.dataset.id);if(!a||a.off){if(c)c.hidden=true;return}
