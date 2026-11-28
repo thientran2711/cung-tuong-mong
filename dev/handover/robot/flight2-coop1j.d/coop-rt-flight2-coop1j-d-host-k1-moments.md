@@ -333,3 +333,14 @@ Format: game date · screen · feeling · what happened · shot (relative to the
 - year 6 · turn 67 · tuần 0 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-coop-rt-flight2-coop1j-d-host-k1/m-look-500.png
 - year 6 · turn 67 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng tám · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaTốnBạc 2Đượ | Bớt lễ nghĩaTốnkhôngĐượcBạc  · shots-coop-rt-flight2-coop1j-d-host-k1/m-new-500-296.png
 - year 6 · turn 67 · tuần 0 · buổi 0 · rank 0 · .dlg «Tết Trùng cửu · Thi cắt mẫu diều hạc» · NEW SCREEN · first time on this screen; buttons: Lui · shots-coop-rt-flight2-coop1j-d-host-k1/m-new-500-297.png
+- year 6 · turn 68 · tuần 0 · buổi 0 · rank 0 · .dlg «Bổng lộc tháng chín · Lễ nghĩa» · NEW SCREEN · first time on this screen; buttons: Chu toàn lễ nghĩaTốnBạc 2Đượ | Bớt lễ nghĩaTốnkhôngĐượcBạc  · shots-coop-rt-flight2-coop1j-d-host-k1/m-new-512-298.png
+- year 6 · turn 68 · tuần 0 · buổi 0 · rank 0 · .dlg «Thánh thọ Thái hậu · Lời mời: Thi thắp đèn trường » · NEW SCREEN · first time on this screen; buttons: Ghi tên dự thi thắp đènMong | Không dựTốnkhôngĐượckhôngGợi · shots-coop-rt-flight2-coop1j-d-host-k1/m-new-512-299.png
+- year 6 · turn 68 · tuần 1 · buổi 0 · rank 0 · .dlg «Y phục dự Thánh thọ Thái hậu» · NEW SCREEN · first time on this screen; buttons: Cài trâm đồng mai hoa (Vàng) | Cáo lỗi, về cung nghỉTốnkhôn · shots-coop-rt-flight2-coop1j-d-host-k1/m-new-516-300.png
+- year 6 · turn 68 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-coop-rt-flight2-coop1j-d-host-k1/m-look-520.png
+- year 6 · turn 70 · tuần 1 · buổi 0 · rank 0 · #kdaytc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-coop-rt-flight2-coop1j-d-host-k1/m-look-540.png
+- year 7 · turn 72 · tuần 0 · buổi 0 · rank 0 · #kdaytc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-coop-rt-flight2-coop1j-d-host-k1/m-look-560.png
+- year 7 · turn 73 · tuần 2 · buổi 0 · rank 0 · #kdaytc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-coop-rt-flight2-coop1j-d-host-k1/m-look-580.png
+- year 7 · turn 75 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-coop-rt-flight2-coop1j-d-host-k1/m-look-600.png
+- year 7 · turn 77 · tuần 0 · buổi 0 · rank 0 · #kdaytc «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-coop-rt-flight2-coop1j-d-host-k1/m-look-620.png
+- year 7 · turn 78 · tuần 2 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-coop-rt-flight2-coop1j-d-host-k1/m-look-640.png
+- year 7 · turn 80 · tuần 1 · buổi 0 · rank 0 · .kne «» · LOOK · every-20-buổi look (runner: write how it feels) · shots-coop-rt-flight2-coop1j-d-host-k1/m-look-660.png
