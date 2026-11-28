@@ -38,7 +38,7 @@ function storyBusy(){try{return v267()&&(S.st.bm===S.turn||Q.some(m=>m.pid==="j6
 window.storyBusy=storyBusy;
 /* ---------- history (per origin and shared "*") ---------- */
 function hist67(){try{return JSON.parse(localStorage.getItem("ctm-arcs")||"{}")||{}}catch(e){return {}}}
-function histAdd67(k,id){try{const h=hist67();h[k]=[id].concat((h[k]||[]).filter(x=>x!==id)).slice(0,10);localStorage.setItem("ctm-arcs",JSON.stringify(h))}catch(e){}}
+function histAdd67(k,id){try{const h=hist67();h[k]=[id].concat((h[k]||[]).filter(x=>x!==id)).slice(0,10);localStorage.setItem("ctm-arcs",JSON.stringify(h));if(typeof saveOk==="function")saveOk("ctm-arcs")}catch(e){/* save-fail-warn-r2: cross-life ledger refused → told */if(typeof saveBlocked==="function")saveBlocked("ctm-arcs")}}
 function choose67(k,ids){const r=hist67()[k]||[];const w=ids.map(id=>{const i=r.indexOf(id);return i<0?12:i});const tot=w.reduce((a,b)=>a+b,0);
  if(!tot)return ids.slice().sort((a,b)=>r.indexOf(b)-r.indexOf(a))[0];let x=rnd67()*tot;for(let i=0;i<ids.length;i++){x-=w[i];if(x<0)return ids[i]}return ids[ids.length-1]}
 /* ---------- actors ---------- */

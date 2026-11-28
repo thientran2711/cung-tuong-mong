@@ -116,11 +116,12 @@ function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLO
    line, so after its first chip (a few seconds, or less: the next notice of the step took the chip) every later refused write was silent. Now the
    chip is HELD (kit §42.2a hold: it stays under the top bar, other chips come and go and it comes back) and told again at every NEW buổi while
    the writes keep failing; dropped (+ one write without it, so the sổ never keeps a stale «Không ghi được sổ») once a write reaches her slot again. */
-/* save-fail-warn-r2 (reviewer): the failure is kept PER WRITER (slot / each cross-life store / co-op copies); a working write clears only its own
-   writer, the notice goes when none is left — a refused phúc duyên / kiếp write was dropped within 300 ms by the next working slot autosave */
-let SB_K=null;const SB_SRC=new Set();const sbKey=()=>{try{return S&&typeof S==="object"?[S.year,S.month,S.tuan,S.buoi||0,S.name].join("."):"title"}catch(e){return ""}};
-function saveBlocked(src){SB_SRC.add(src||"slot");try{if(typeof window.kitNotice==="function"&&typeof CTM_WAIT==="object"&&CTM_WAIT.saveBlocked){const k=sbKey(),again=SB_K!==null&&k!==SB_K;SB_K=k;window.kitNotice({id:"saveBlocked",line:CTM_WAIT.saveBlocked,sticky:true,hold:true,again})}}catch(z){}}
-function saveOk(src){if(!SB_SRC.delete(src||"slot")||SB_SRC.size)return;SB_K=null;try{if(typeof window.kitNoticeDrop==="function"&&typeof window.kitNoticeList==="function"&&window.kitNoticeList().some(x=>x.id==="saveBlocked")){window.kitNoticeDrop("saveBlocked");setTimeout(()=>{try{save()}catch(e){}},0)}}catch(z){}}
+/* save-fail-warn-r2 (reviewer): the failure is kept PER WRITER (slot / each cross-life store / co-op copies) with the buổi it failed in; a working
+   write clears its own writer, a working SLOT write also clears writers refused in an EARLIER buổi (room again); the notice goes when none is left.
+   (r1: any working write dropped it — a refused phúc duyên / kiếp write was gone within 300 ms, taken by the next slot autosave) */
+let SB_K=null;const SB_SRC=new Map();const sbKey=()=>{try{return S&&typeof S==="object"?[S.year,S.month,S.tuan,S.buoi||0,S.name].join("."):"title"}catch(e){return ""}};
+function saveBlocked(src){try{SB_SRC.set(src||"slot",sbKey());if(typeof window.kitNotice==="function"&&typeof CTM_WAIT==="object"&&CTM_WAIT.saveBlocked){const k=sbKey(),again=SB_K!==null&&k!==SB_K;SB_K=k;window.kitNotice({id:"saveBlocked",line:CTM_WAIT.saveBlocked,sticky:true,hold:true,again})}}catch(z){}}
+function saveOk(src){if(!SB_SRC.size)return;src=src||"slot";SB_SRC.delete(src);if(src==="slot"){const k=sbKey();for(const [w,b] of SB_SRC)if(b!==k)SB_SRC.delete(w)}if(SB_SRC.size)return;SB_K=null;try{if(typeof window.kitNoticeDrop==="function"&&typeof window.kitNoticeList==="function"&&window.kitNoticeList().some(x=>x.id==="saveBlocked")){window.kitNoticeDrop("saveBlocked");setTimeout(()=>{try{save()}catch(e){}},0)}}catch(z){}}
 window.saveBlocked=saveBlocked;window.saveOk=saveOk;
 function loadSlot(n){try{const d=JSON.parse(slotGet(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}

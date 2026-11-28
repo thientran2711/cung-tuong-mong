@@ -49,7 +49,7 @@ function rtOpen(){if(!rtRoad())return false;const T=rtS();if(T.open)return true;
  if(ok){T.open=S.turn;log(`<span class="pdl">Lòng ngươi bắt đầu nghĩ đến những lối khác ngoài con đường tranh sủng. Mục Hành sự có thêm nhóm «Lối riêng».</span>`)}return !!ok}
 /* ---------- ledger across lives (memory only) ---------- */
 function rtBook(){try{return JSON.parse(localStorage.getItem("ctm-routes")||"{}")||{}}catch(e){return {}}}
-function rtEnd(id){const T=rtS();if(T.ends.includes(id))return;T.ends.push(id);rtStat("end_"+id);try{const b=rtBook();const e=b[id]||{n:0};e.n++;if(!e.first)e.first={who:S.name,o:S.origin&&S.origin.n,y:S.year};b[id]=e;localStorage.setItem("ctm-routes",JSON.stringify(b))}catch(e){}}
+function rtEnd(id){const T=rtS();if(T.ends.includes(id))return;T.ends.push(id);rtStat("end_"+id);try{const b=rtBook();const e=b[id]||{n:0};e.n++;if(!e.first)e.first={who:S.name,o:S.origin&&S.origin.n,y:S.year};b[id]=e;localStorage.setItem("ctm-routes",JSON.stringify(b));if(typeof saveOk==="function")saveOk("ctm-routes")}catch(e){/* save-fail-warn-r2: cross-life ledger refused → told */if(typeof saveBlocked==="function")saveBlocked("ctm-routes")}}
 /* ---------- one card = one step: the kit act card (Cần / Tốn / Được / Mất / Kèm + odds) ---------- */
 function rtCard(o){const need=(o.need||[]).map(([t,ok])=>({t,ok:!!ok}));const lock=o.lock!=null?o.lock:need.some(x=>!x.ok);
  const id=o.id||o.n;const T=rtS();const once=g=>()=>{if(window.__bot&&!window.__rtAct){rtStat("bot_leak");return}/* a balance bot's stale deck index never runs a route step */T.dn[id]=wk();try{if(g)g()}finally{rtRefresh()}};

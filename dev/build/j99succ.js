@@ -175,7 +175,7 @@ function succEnd(k){const E=S.succ||{},e=SUCC_END[k]||SUCC_END.a_ok,son=succSon(
 /* ---------- Sổ luân hồi ---------- */
 const SUCC_BK="ctm-succ-book";
 function succBookGet(){try{return JSON.parse(localStorage.getItem(SUCC_BK)||"{}")||{}}catch(e){return {}}}
-function succBook(k){try{const b=succBookGet();b[k]=(b[k]||0)+1;localStorage.setItem(SUCC_BK,JSON.stringify(b))}catch(e){}}
+function succBook(k){try{const b=succBookGet();b[k]=(b[k]||0)+1;localStorage.setItem(SUCC_BK,JSON.stringify(b));if(typeof saveOk==="function")saveOk(SUCC_BK)}catch(e){/* save-fail-warn-r2: cross-life ledger refused → told */if(typeof saveBlocked==="function")saveBlocked(SUCC_BK)}}
 if(typeof pastHTML==="function")(function(){const p0=pastHTML;pastHTML=function(){const h=p0.apply(this,arguments);try{const b=succBookGet();const K=Object.keys(SUCC_END).filter(k=>k!=="a_dm");const seen=K.filter(k=>b[k]);if(!seen.length)return h;
  const R=K.filter(k=>SUCC_END[k].rare),rs=R.filter(k=>b[k]);
  const rows=[["Đã gặp",`<b>${seen.length}/${K.length}</b> kết cục · kết hiếm ${rs.length}/${R.length}`,seen.length?"g":""]].concat(seen.map(k=>[(SUCC_END[k].rare?"✦ ":"")+SUCC_END[k].h,b[k]>1?`${b[k]} lần`:"1 lần"]));

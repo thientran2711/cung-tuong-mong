@@ -30,7 +30,7 @@ function nrEmpOn(){try{if(!S||!S.emp||S.empDead||(S.succ&&S.succ.on)||window.__n
 function nrEmpHist(){try{return JSON.parse(localStorage.getItem("ctm-emproad")||"[]")||[]}catch(e){return[]}}
 function nrEmpInit(){const L=Object.keys(NRM).filter(id=>NRM[id].k==="emp");if(!L.length||!S.emp)return null;const h=nrEmpHist();
  const free=L.filter(r=>!h.slice(0,NRE().hist).includes(r));const r=pick(free.length?free:L.filter(x=>x!==h[0]).length?L.filter(x=>x!==h[0]):L);
- S.emp.nr=nrNew("emp",r);try{localStorage.setItem("ctm-emproad",JSON.stringify([r].concat(h.filter(x=>x!==r)).slice(0,3)))}catch(e){}return S.emp.nr}
+ S.emp.nr=nrNew("emp",r);try{localStorage.setItem("ctm-emproad",JSON.stringify([r].concat(h.filter(x=>x!==r)).slice(0,3)));if(typeof saveOk==="function")saveOk("ctm-emproad")}catch(e){/* save-fail-warn-r2: cross-life ledger refused → told */if(typeof saveBlocked==="function")saveBlocked("ctm-emproad")}return S.emp.nr}
 window.nrEmpOn=nrEmpOn;window.nrEmpInit=nrEmpInit;
 /* he is one more man of this life (the U3 list): kind emp, asker emp (j72 A6 «Hoàng thượng») */
 (function(){if(typeof nrMenL!=="function")return;const l0=nrMenL;nrMenL=function(){const L=l0.apply(this,arguments);try{if(nrEmpOn()){if(!S.emp.nr)nrEmpInit();if(S.emp.nr)L.push({p:S.emp,k:"emp",a:["emp",null],g:"emp",n:"Hoàng thượng"})}}catch(e){console.error(e)}return L}})();

@@ -282,7 +282,7 @@ PEND.j97x=p=>{const d=R97[p.a];if(!d||!d.exit||S.dead)return null;const A={act:{
   {n:d.exit[1],fx:{},x:"ở lại cung",go:()=>{const W=BAL.arc.r97.stay;apply(W);log(`Ngươi ở lại. ${fill67(d.ti,A)}: Hoàng thượng thương ngươi hơn. ${sgStat(W.sung)}.`)}}]}};
 /* ---------- Sổ luân hồi: rare endings met across lives (memory only, no carry-over) ---------- */
 function r97Book(){try{return JSON.parse(localStorage.getItem("ctm-rare97")||"{}")||{}}catch(e){return {}}}
-function r97Meet(id,tag){try{const b=r97Book();const e=b[id]||{n:0};e.n++;e.tag=tag||e.tag;if(!e.first)e.first={who:S.name,o:S.origin&&S.origin.n,y:S.year};b[id]=e;localStorage.setItem("ctm-rare97",JSON.stringify(b))}catch(e){}}
+function r97Meet(id,tag){try{const b=r97Book();const e=b[id]||{n:0};e.n++;e.tag=tag||e.tag;if(!e.first)e.first={who:S.name,o:S.origin&&S.origin.n,y:S.year};b[id]=e;localStorage.setItem("ctm-rare97",JSON.stringify(b));if(typeof saveOk==="function")saveOk("ctm-rare97")}catch(e){/* save-fail-warn-r2: cross-life ledger refused → told */if(typeof saveBlocked==="function")saveBlocked("ctm-rare97")}}
 function r97Total(){return Object.keys(R97).length+Object.keys(R97X).length}
 function r97Title(id){if(ARC67[id])return ARC67[id].t;return R97X[id]?R97X[id].t:id}
 function r97BookHTML(){const b=r97Book();const ids=Object.keys(b).filter(id=>R97[id]||R97X[id]);const n=ids.length,y=r97Total();

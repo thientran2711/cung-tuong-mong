@@ -22,9 +22,9 @@ function nrMigrate(){let O={};try{O=JSON.parse(localStorage.getItem(NR_OLD)||"{}
  const fam=k=>{const t=String(k).split(":")[0];return /^(j\d+|p|t)$/.test(t)?k:"j68:"+k};
  return{v:1,cur:O.cur||null,L:(Array.isArray(O.L)?O.L:[]).map(l=>Array.isArray(l)?l.map(fam):[])}}
 function nrStore(){if(NR_C)return NR_C;let H=null;try{H=JSON.parse(localStorage.getItem(NR_KEY)||"null")}catch(e){H=null}
- if(!H||!Array.isArray(H.L)){H=nrMigrate();try{localStorage.setItem(NR_KEY,JSON.stringify(H))}catch(e){}}
+ if(!H||!Array.isArray(H.L)){H=nrMigrate();try{localStorage.setItem(NR_KEY,JSON.stringify(H));if(typeof saveOk==="function")saveOk(NR_KEY)}catch(e){/* save-fail-warn-r2: cross-life ledger refused → told */if(typeof saveBlocked==="function")saveBlocked(NR_KEY)}}
  NR_C={H,sets:H.L.map(l=>new Set(l))};return NR_C}
-function nrSave(){const C=NR_C;if(!C)return;try{localStorage.setItem(NR_KEY,JSON.stringify(C.H))}catch(e){}}
+function nrSave(){const C=NR_C;if(!C)return;try{localStorage.setItem(NR_KEY,JSON.stringify(C.H));if(typeof saveOk==="function")saveOk(NR_KEY)}catch(e){/* save-fail-warn-r2: cross-life ledger refused → told */if(typeof saveBlocked==="function")saveBlocked(NR_KEY)}}
 /* start a new life in the store (the old j68 rule: a new empty list in front, keep `lives` lists) */
 function nrRotate(id){const C=nrStore(),n=nrCfg().lives;C.H.L=[[]].concat(C.H.L).slice(0,n);C.sets=[new Set()].concat(C.sets).slice(0,n);C.H.cur=id;nrSave()}
 function nrLife(){if(typeof S==="undefined"||!S)return null;
