@@ -12,7 +12,7 @@
    code card put back in the page (= LIVE d9ca7892 jspread.js:115 + jqsave jqSaveable) → the test must FAIL.
    env SR_CKPT=<file> (default: git show origin review/flight2-s18 checkpoint), SR_TAPS (default 8).
    usage: node dev/test/save-rewind.js [page=index.html] [devices=fold,ipadAir]   exit 0 = PASS */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs');
 const [,,PAGE='index.html',DEVS='fold,ipadAir']=process.argv;const TAPS=+(process.env.SR_TAPS||8);const MUT=process.env.SR_MUTATE||'';
 const src=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');const H=src.slice(src.indexOf('const H=`')+9,src.indexOf('`;\nasync function play'));
 function ckpt(){if(process.env.SR_CKPT)return JSON.parse(fs.readFileSync(process.env.SR_CKPT,'utf8'));

@@ -3,7 +3,7 @@
    a NEW big card of a full day and moved it off her screen into EVCW (a later day; dropped after BAL.evc.wait days). Here: after 30 buổi of a
    real life, one knSell card is shown (visit 1 = today's quota), saved, true reload → it must be on screen again (Q[0], modal open, not in EVCW).
    usage: node dev/test/save-evc-onscreen.js [index.html] [devices=fold,ipadAir] ; env CTM_ROOT=<dir> (another built root) → exit 1 on FAIL */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs');
 const [,,PAGE='index.html',DEVS='fold,ipadAir']=process.argv;
 const H=eval(fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8').match(/const H=(`[\s\S]*?`);\n/)[1]);
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();let bad=0,n=0;

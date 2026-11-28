@@ -1,6 +1,6 @@
 /* kit-opts-realtap (KIT BUG #2, MAIN 135 / robot M4 25/11): in every modal option frame the option list box sits fully inside the visible frame, and the LAST option of a long list is reachable by a REAL tap: wheel the list to its end, touchscreen-tap the centre of the last option, elementFromPoint must be that option, and the tap must fire it (modal closes / queue changes). Frames: the 11 reign beats (PEND rg, loaded with a reign state) + night1 + several long PEND lists.
    usage: node dev/test/kit-opts-realtap.js <index.html> <outdir> [WxH,..]   env MUTATE=1 (clip the frame at 62 % height AND push the option list 45vh out of it — the frame layout adapts to a clip alone, so the push is what bites: must FAIL on Fold AND iPad) */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,SRC,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'127.0.0.1,localhost'}}:{});let bad=0;
  for(const wh of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=wh.split('x').map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot=1});

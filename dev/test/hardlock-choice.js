@@ -10,7 +10,7 @@
    card and put back its old all-bạc price (the bạc-free road costs the same bạc as a one-step road) = the owner's case as found; (a0) the real
    card as it is now at 46 bạc is untouched (a road she can take, no tag, no leave). (d)(e)(g): the one leave is the kit close word «Lui»
    as the card's cancel = the kit ✕, open or forced card (jdeadcard's look, now inside jnolock); it leaves, nothing paid. */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(process.cwd());const SHOT=process.argv[2]||null;
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});
 let fail=0;const ok=(c,m)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m)};

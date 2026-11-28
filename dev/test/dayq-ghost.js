@@ -5,7 +5,7 @@
    Per case (Fold 755x1000@2 + iPad 1180x820@2): put the ghost in the page, queue a card, showModal(); after BAL.dayq.poll × 4 the card is ON SCREEN.
    Control R1: a RENDERED scene (.kmov full screen) still holds the card (gate (c) unchanged), and the card shows once that scene is gone.
    usage: python3 dev/build/assemble.py && node dev/test/dayq-ghost.js   (serves dev/index.html through coop-serve.js, the site's charset wrapper) */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const sleep=t=>new Promise(r=>setTimeout(r,t));
 const VP=[[755,1000,2],[1180,820,2]];
 const NEWLIFE=`(function(){localStorage.removeItem('hclh-opt');SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){window.__forceOrigin='thd';window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv()))break}
  quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();return S.name})()`;

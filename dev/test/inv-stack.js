@@ -7,7 +7,7 @@
    (3) one unit: sell 1 (bạc +, total −1), sell ×5 (beyond the real pieces: −5), give 1 to an NPC (hers +1, mine −1), burn 1 candle (−1);
    (4) a turn folds the month's new pieces without losing one; (5) save → reload: totals equal, still folded;
    (6) MUTATE: a stack that forgets its count / a fold that drops a piece / a bag that ignores the stack → the checks above FAIL. */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),zlib=require('zlib'),cp=require('child_process'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),zlib=require('zlib'),cp=require('child_process'),path=require('path');
 const argv=process.argv.slice(2);const SHOTS=argv.includes('--shots')?argv[argv.indexOf('--shots')+1]:null;const file=argv.find(a=>!a.startsWith('--')&&a!==SHOTS);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 function s7(){const f=file||process.env.CTM_S7;if(f&&fs.existsSync(f))return {src:f,D:JSON.parse(fs.readFileSync(f,'utf8'))};

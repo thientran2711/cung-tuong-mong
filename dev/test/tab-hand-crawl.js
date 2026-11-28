@@ -2,7 +2,7 @@
    On every tab (and its sub-tabs) taps every enabled act / door card in #panel (R14 coverage: + person faces .pface, map spots .mspot, rails .k3r/.krailb, inventory .kitem-slot, .kslmuc, .kbtn.alt, and every .ksubb sub-tab), one by one from a fresh state, and records every frame that opens AS A HAND (.opts.khand).
    A tab tap that opens a hand = FAIL (the pushDil site behind it needs the tab-door gate). Fold 755x1000 + iPad 1180x820.
    usage: node dev/test/tab-hand-crawl.js <index.html>   env MAXB=40 (cards per tab)   exit 1 on FAIL */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const html=fs.readFileSync(path.resolve(process.argv[2]||'index.html'));const MAXB=+process.env.MAXB||40;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');const html=fs.readFileSync(path.resolve(process.argv[2]||'index.html'));const MAXB=+process.env.MAXB||40;
 (async()=>{const b=await chromium.launch();let bad=0;
 for(const [W,H] of [[755,1000],[1180,820]]){const ctx=await b.newContext({viewport:{width:W,height:H},serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot=1;let s=777;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));const p=await ctx.newPage();await p.route(/\.(mp3|ogg|m4a|mp4|webm|wav)(\?|$)/,r=>r.abort());

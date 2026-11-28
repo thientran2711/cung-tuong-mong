@@ -2,7 +2,7 @@
    2. «Sang buổi / Sang ngày mới» disabled while a queued card is HELD (jdayq gate (c): nothing on screen shows it) must SAY WHY (CTM_WAIT.dqHeld,
       #next.kcwait) and come back to its own label once the card is shown; never a silent grey button.
    3. ONE «Nhận thân phận» at the start: the roulette's button only shows the card («Xem thân phận»), the identity card (j52) takes it. */
-const {chromium}=require('playwright');const path=require('path');const fs=require('fs');(async()=>{const F=[];const ok=(c,n)=>{console.log((c?'PASS ':'FAIL ')+n);if(!c)F.push(n)};
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const path=require('path');const fs=require('fs');(async()=>{const F=[];const ok=(c,n)=>{console.log((c?'PASS ':'FAIL ')+n);if(!c)F.push(n)};
 const B=path.join(__dirname,'..','build');const rd=f=>fs.readFileSync(path.join(B,f),'utf8');
 const nhan=fs.readdirSync(B).filter(f=>/^j.*\.js$/.test(f)&&f!=='all.js').filter(f=>/(textContent=|>)\s*"?Nhận thân phận/.test(rd(f).replace(/\/\*[\s\S]*?\*\//g,'')));
 ok(nhan.length===1&&nhan[0]==='j52.js','one «Nhận thân phận» button in the build (j52 identity card): '+nhan.join(','));ok(/go\.textContent="Xem thân phận"/.test(rd('jk2b.js')),'roulette button = «Xem thân phận»');

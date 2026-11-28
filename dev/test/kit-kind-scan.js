@@ -3,7 +3,7 @@
    hand (Bàn bài §101) · pick (thẻ gỗ §102.3 / talk §102.2) · list (old option list) · none (no option list) — and the figures on the stage.
    A row is WRONG when its kind says ring / group / list but it shows a hand, or kind pick but no thẻ gỗ, or a non-dialogue stage shows 2 figures (§102.7).
    usage: node dev/test/kit-kind-scan.js <index.html> [out.json]   env SZ=[[W,H]] (default Fold 755x1000) ONLY=regex.  Exit 1 on a WRONG row (branch builds only: env NOFAIL=1 for LIVE). */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000]];
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const ALL=[];
  for(const [W,H] of SZ){const dev=W<H?'fold':'ipad';const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;window.__rs=v=>{s=v};Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));

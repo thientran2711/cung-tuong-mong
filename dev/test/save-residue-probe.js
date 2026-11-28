@@ -5,7 +5,7 @@
    usage: node dev/test/save-residue-probe.js [page=index.html] [dev=fold|ipadAir] [seeds=1,2,3] [buoi=40]
    env RP_STACK=1 (where each code card was made) · RP_MUTATE=<rk kind> (strip that generator's rk as cards enter Q = the generator not registered;
    the gate must then FAIL) · exit 1 = any LOST / REMAKE line or a page error, 0 = clean. */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs');
 const [,,PAGE='index.html',DEV='fold',SEEDS='1,2,3',NB='40']=process.argv;
 const SBR=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');
 const H=eval(SBR.match(/const H=(`[\s\S]*?`);\n/)[1]);const seedInit=eval(SBR.match(/const seedInit=(seed=>\{[\s\S]*?\}\};)\n/)[1].replace(/;$/,''));

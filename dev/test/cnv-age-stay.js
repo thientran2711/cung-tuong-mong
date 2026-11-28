@@ -3,7 +3,7 @@
    For Chủ tin below and above BAL.srvx.keepTin: the shown row names the true outcome («ở lại đến BAL.srvAge.out tuổi», no threshold read as a gain),
    a real tap on the row keeps her (no ending at 25), Chủ tin moves by the fx the row shows, and she leaves only at BAL.srvAge.out (j42 srvMonth).
    usage: node dev/test/cnv-age-stay.js <url of dev/index.html>   exit 1 on a FAIL */
-const {chromium}=require('playwright');const URL=process.argv[2];
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const URL=process.argv[2];
 (async()=>{const b=await chromium.launch();const T=[];const ok=(c,n,x)=>T.push([c?'PASS':'FAIL',n,x==null?'':JSON.stringify(x).slice(0,300)]);const errs=[];
  for(const lo of [true,false]){const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block',reducedMotion:'reduce',hasTouch:true,isMobile:true});
   await ctx.addInitScript(()=>{window.__nlInner=1;addEventListener('DOMContentLoaded',()=>{const s=document.createElement('style');s.textContent='#kroul,#kload,#klife,.krbox,#ktut,.ktip{display:none!important}';document.head.appendChild(s)})});

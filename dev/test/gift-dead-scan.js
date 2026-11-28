@@ -3,7 +3,7 @@
    «Biếu quà làm lành» it / wk / old save) and count the item tiles she is shown vs the ones she can really pick (no lock, no tsDis, no unmet Cần,
    bạc enough). A dialog that lists pieces she can NEVER pick here (dead tiles) FAILS (law 6c: only what she owns and can give is offered;
    law 3: no road that only shows cost). usage: node dev/test/gift-dead-scan.js <save.json> [root]   exit 1 on FAIL */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs'),path=require('path');
 (async()=>{const save=process.argv[2];const root=process.argv[3]||path.resolve(__dirname,'../..');if(!save){console.log('usage: gift-dead-scan.js <save.json> [root]');process.exit(2)}
  const srv=await D.serveRoot(root);const b=await chromium.launch();const ctx=await D.newDeviceContext(b,'ipadAir');const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e).slice(0,200)));
  const g=await D.openHost(p,srv.url);await p.waitForTimeout(2500);

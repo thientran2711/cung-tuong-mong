@@ -8,7 +8,7 @@
    usage: node dev/test/rt-membase.js <url> <out-dir> [dev=fold|ipad] [buoi=60] [seed=1] [snap=1 (heap snapshot at the end)]
    Test tool only (it is not a life robot: it may pick exits, it never counts as a life). */
 'use strict';
-const { chromium } = require('playwright');
+const { chromium } = require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */
 const fs = require('fs'), path = require('path'), { execSync } = require('child_process');
 const [URL0, OUT0, ...KV] = process.argv.slice(2); const A = Object.fromEntries(KV.map(s => s.split('=')));
 if (!URL0 || !OUT0) { console.error('usage: node dev/test/rt-membase.js <url> <out-dir> [dev=fold|ipad] [buoi=60] [seed=1]'); process.exit(2) }

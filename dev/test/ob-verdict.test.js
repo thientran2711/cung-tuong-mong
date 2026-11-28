@@ -5,7 +5,7 @@
    3 two-way: an NPC's deed on HER that her Sổ ghi names → «Ai làm» row
    4 old save (no new state) loads and plays a buổi
    usage: node dev/test/ob-verdict.test.js [index.html] [shots dir] [--scan-only] [--json out.json] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const A=process.argv.slice(2);const jI=A.indexOf('--json');const JOUT=jI>=0?A.splice(jI,2)[1]:null;const SCAN=A.includes('--scan-only');const P=A.filter(x=>!x.startsWith('--'));
 const URL='file://'+path.resolve(P[0]||'index.html');const OUT=P[1]||'/tmp/obv';fs.mkdirSync(OUT,{recursive:true});
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,700):''))};

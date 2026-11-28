@@ -8,7 +8,7 @@
    - numbers: every option of every played hồi = its steps × BAL.road.c.fx (cost when picked, gain when it holds), climax odds terms from BAL;
    - the road's rival is the same person while alive; each opened chapter marks its parts in P0 (family rdc:<origin>);
    - reload: the composition survives a JSON round trip of S and rebuilds the same chapters; validator numbers = BAL.road.c; 0 page errors. */
-const {chromium}=require('playwright');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const [,,FILE,NL,ONLY]=process.argv;const NLIV=+NL||2;const STOP12=!!process.env.RDC_STOP12;/* review r1: RDC_STOP12=1 stops each life once the road (.4–.11) is told and chapter 12 opened — the shared 12–14 endgame is not P8 and its long tail runs the renderer out of memory (OOM at ~7.6 GB) */
 const ROWS=fs.readFileSync(FILE||path.join(__dirname,'rdc-fixture.jsonl'),'utf8').split('\n').filter(l=>l.trim().startsWith('{')).map(l=>JSON.parse(l));
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p==='/')p='/index.html';const f=path.join(ROOT,p);if(!fs.existsSync(f)||fs.statSync(f).isDirectory()){r.statusCode=404;return r.end()}fs.createReadStream(f).pipe(r)});

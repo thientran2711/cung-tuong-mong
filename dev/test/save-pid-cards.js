@@ -10,7 +10,7 @@
    (4) DECO: every 8th kind dressed after mkP (caller title, chips, flag) — all of it comes back. (5) PROD: the real dressing makers (q72o, tsbCard).
    usage: node dev/test/save-pid-cards.js [index.html] [devices=fold,ipadAir] ; env SPC_ROOT=<dir> (serve another built root, e.g. the base build) ; env SPC_ONLY=id1,id2 ; SPC_V=1 (print PASS rows too)
    exit 0 = every built kind PASS on every device. */
-const {chromium}=require('playwright');const D=require('./lib/device');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');
 const [,,NEW='index.html',DEVS='fold,ipadAir']=process.argv;const ONLY=(process.env.SPC_ONLY||'').split(',').filter(Boolean);
 const seedInit=seed=>{let s=(seed*2654435761>>>0)%2147483646+1;Math.random=()=>{s=(s*16807)%2147483647;return (s-1)/2147483646};
  try{const c=crypto,g=c.getRandomValues.bind(c);let t=seed>>>0||1;c.getRandomValues=a=>{if(a instanceof Uint32Array&&a.length===1){t=(Math.imul(t,1103515245)+12345)>>>0;a[0]=t||1;return a}return g(a)}}catch(e){}};

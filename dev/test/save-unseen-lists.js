@@ -17,7 +17,7 @@
    the identity card is open, none at once at «Nhận thân phận») — a MUTATE run must FAIL.
    usage: node dev/test/save-unseen-lists.js [page=index.html] [devices=fold,ipadAir] [seed=1]   (serves the repo root = the BUILT site)
    exit 0 = every case PASS. */
-const {chromium}=require('playwright');const DBGD=!!process.env.SUL_DBGD;const D=require('./lib/device');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const DBGD=!!process.env.SUL_DBGD;const D=require('./lib/device');const fs=require('fs');
 const [,,PAGE='index.html',DEVS='fold,ipadAir',SEED='1']=process.argv;
 const ONLY=(process.env.SUL_ONLY||'').split(',').filter(Boolean);const want=n=>!ONLY.length||ONLY.includes(n);const MUT=process.env.SUL_MUTATE||'';
 /* the player helpers of dev/test/save-boundary-reload.js (settle = answer every card / close scenes like a player; newLife; after) — one copy, read from that file */

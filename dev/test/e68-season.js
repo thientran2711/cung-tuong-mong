@@ -2,7 +2,7 @@
    turned is dropped, a fitting one stays. Case: j68c-sea-023 (needs.month 11/12/1, lò sưởi) built in tháng 12, then the month is 2.
    Before: rebuilt in tháng 2 with a spring opener («Gió xuân lùa…») over a winter story. Exit 1 on failure.
    usage: node dev/test/e68-season.js <page url>   (serve the repo root) */
-const {chromium}=require('playwright');const [,,URL]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:900,height:900}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(/\.(webp|png|jpe?g|mp3|ogg|m4a)(\?|$)/i,r=>r.abort());
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:120000});await p.waitForTimeout(2000);

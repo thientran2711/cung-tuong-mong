@@ -7,7 +7,7 @@
    PROMO-ROOT2 (whole family, one helper forgetSafe j14): (5) the Empress pardon's fallback (jagacts hhAct, restore throws) starts the grace;
    (6) the kỳ tuyển palace entry kcEnter (jkc) and (7) kc2Enter (jkc2) start it even when the home life left S.forgetAt in the past;
    (8) a maid raised to Đáp ứng (j42 srvRise) starts it. Each: forgetAt = turn+1+forgetGrace, then free for every grace month. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const GAME=process.env.GAME||path.join(__dirname,'..','..','index.html');let bad=0;const ok=(c,t)=>{console.log((c?'ok   ':'BAD  ')+t);if(!c)bad++};
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844}});
  await ctx.addInitScript(`window.MutationObserver=class{observe(){}disconnect(){}takeRecords(){return[]}};HTMLElement.prototype.focus=function(){};`);

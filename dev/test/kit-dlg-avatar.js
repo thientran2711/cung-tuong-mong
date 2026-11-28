@@ -8,7 +8,7 @@
       FLIGHTS fired from the dialog's own card (Danh, Sủng): none covers the dialog (KIT §57.1b + §57.1c).
    E. PAINTED BURSTS over an open dialog (KIT §57.1c, MAIN 177 ruling): every glow / spark sprite (not falling petals) drawn while the dialog is open —
       the ending's own entrance burst + bursts aimed at the dialog title — keeps its core off the dialog box (or inside a dialog picture); falling petals / screen-wide kinds too (MAIN 178 ruling). */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');
 const URL=process.argv[2];const OUT=process.argv[3]||'';if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const fails=[];const note=(ok,m)=>{if(!ok)fails.push(m)};
 (async()=>{const b=await chromium.launch();

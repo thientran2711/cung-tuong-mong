@@ -1,7 +1,7 @@
 /* ORDER THIN P8 gate: 3 saves from the LIVE build (origins tt, cnv, bd; each on its old road) load clean in the new build: same road, same chapter plan,
    no composition added (S.st.f14.rc), each plays a buổi, 44 composed roads registered, 0 page errors.
    usage: git show origin/main:index.html > /tmp/old.html && node dev/test/rdc-oldsave.js /tmp/old.html */
-const {chromium}=require('playwright');const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const OLD=process.argv[2];let VER='old';
 const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http://x').pathname);if(p.startsWith('/__ver/')){VER=p.slice(7);return r.end(VER)}
  if(p==='/'||p==='/index.html'){r.setHeader('Content-Type','text/html; charset=utf-8');return fs.createReadStream(VER==='old'?OLD:path.join(ROOT,'index.html')).pipe(r)}

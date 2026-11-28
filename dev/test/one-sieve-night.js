@@ -1,6 +1,6 @@
 /* ONE SIEVE still: the NIGHT card (jne kitNightEnd) after a night that made the harem jealous (every live consort ghen +8, one +12),
    the case MAIN 157 reported as a «Kèm» wall. usage: node dev/test/one-sieve-night.js <page.html> <out.png> <w> <h> [seed] */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const path=require('path');
 const [PG,OUT,W,H,SD]=process.argv.slice(2);const SEED=+SD||1;
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:+W,height:+H},deviceScaleFactor:2});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto('file://'+path.resolve(PG),{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&document.getElementById('title'),null,{timeout:120000});await p.waitForTimeout(1500);

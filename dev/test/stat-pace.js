@@ -2,7 +2,7 @@
    BAL.stp) and the daily big-event cap (jevc, BAL.evc), on the built page, then simulated bot days (inpage6 «sens» bot) that must never show
    her more big events in one day than BAL.evc.cap (a fixed-date festival day may add its festival).
    usage: node dev/test/stat-pace.js <index.html> [days=45] → ok / FAIL lines, last line PASS / FAIL n; exit 1 on FAIL */
-const {chromium}=require('playwright');const path=require('path');const fs=require('fs');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');const fs=require('fs');
 const [,,PAGE,DAYS]=process.argv;const ND=+DAYS||45;
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:390,height:844},reducedMotion:'reduce'});
  await ctx.addInitScript(`(function(){let s=4242;Math.random=function(){s=(s+0x6D2B79F5)>>>0;let t=s;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}})();window.MutationObserver=class{observe(){}disconnect(){}takeRecords(){return[]}};`);

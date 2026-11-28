@@ -7,7 +7,7 @@
         bought by the guilty one stays; co-op: the friend's seat as a bought servant is marked, toCanon carries it to her seat (P.S.coopSrvOut),
         her client's week (onWeek) ends that life the same way.
    usage: node dev/test/charge-trinh-punish.js <index.html path or url> → exit 1 on a fail / page error */
-const {chromium}=require('playwright');const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const A=process.argv[2]||require('path').join(__dirname,'..','..','index.html');const URL=/^(file|https?):/.test(A)?A:'file://'+require('path').resolve(A);
 async function page(b,errs){const ctx=await b.newContext({viewport:{width:390,height:844}});const p=await ctx.newPage();p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p.goto(URL,{waitUntil:'domcontentloaded'});

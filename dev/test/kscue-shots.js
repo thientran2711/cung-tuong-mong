@@ -3,7 +3,7 @@
    1180x820@2, shot at open and after the scroll column is scrolled to its end, + a video per build/device (open → slow scroll → end); prints
    the pixel difference of each shot pair. usage: node dev/test/kscue-shots.js <old index.html> <new index.html> <out dir> [ids=j7c,evidence,…] */
 'use strict';
-const { chromium } = (require('./lib/bigpage'),require('playwright')); const fs = require('fs'), path = require('path'); const [, , OLD, NEW, OUT, IDS] = process.argv; const sleep = t => new Promise(r => setTimeout(r, t));
+const { chromium } = (require('./lib/bigpage'),require('./lib/dlgs-off').pw('off'));/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */ const fs = require('fs'), path = require('path'); const [, , OLD, NEW, OUT, IDS] = process.argv; const sleep = t => new Promise(r => setTimeout(r, t));
 const PIDS = (IDS || 'j7c,evpick,giftpick').split(','); const DEV = [['fold', 755, 1000], ['ipad', 1180, 820]];
 (async () => { fs.mkdirSync(OUT, { recursive: true }); const b = await chromium.launch(); const shots = {};
   for (const [tag, src] of [['old', OLD], ['new', NEW]]) { const html = fs.readFileSync(src);

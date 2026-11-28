@@ -15,7 +15,7 @@
    Output: <out>/<life>.json  {job, life, harness:{kind:'realtap',realtap:true,jsClicks:0,...}, exitPick, bugs, dead, saves}
            <out>/<life>.md short table; one status line per hour on stdout («STATUS …»). */
 'use strict';
-const { chromium } = require('playwright');
+const { chromium } = require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const fs = require('fs'), path = require('path'), { execSync } = require('child_process');
 /* RSS (MB) of this runner's process tree (node + its Chromium) and of the biggest child (the renderer) — read from ps, never from the page */
 function rssTree() { try { const rows = execSync('ps -eo pid=,ppid=,rss=', { encoding: 'utf8', timeout: 5000 }).trim().split('\n').map(l => l.trim().split(/\s+/).map(Number)); const kids = new Map(); for (const [pid, pp] of rows) { if (!kids.has(pp)) kids.set(pp, []); kids.get(pp).push(pid) } const rss = new Map(rows.map(r => [r[0], r[2]])); const all = []; const st = [process.pid]; while (st.length) { const x = st.pop(); all.push(x); for (const k of kids.get(x) || []) st.push(k) } const mb = all.map(x => (rss.get(x) || 0) / 1024); return { totalMB: Math.round(mb.reduce((a, b) => a + b, 0)), maxMB: Math.round(Math.max(0, ...mb.slice(1))), pids: all } } catch (e) { return null } }

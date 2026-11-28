@@ -4,7 +4,7 @@
    NEWS-SIEVE-2 (owner OD 26/11 ~05:05Z): one big NPC ↔ NPC harm (a hủy dung, landed now) is in the «Tin báo» box, the Sổ ghi tab shows its record
    (doer, victim, cause, result), and the Cung nhân tab shows her servants' nết open.
    usage: node dev/test/news-sieve-video.js <outdir> [fold,ipadAir]   (run bash dev/site/build_site.sh first) */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs');const path=require('path');
 const OUT=process.argv[2]||'/tmp/news-sieve-video';const DEVS=(process.argv[3]||'fold,ipadAir').split(',');fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const srv=await D.serveRoot();const b=await chromium.launch();
  for(const dev of DEVS){const d=D.DEVICES[dev];const ctx=await D.newDeviceContext(b,dev,{recordVideo:{dir:OUT,size:{width:d.w,height:d.h}},deviceScaleFactor:1});

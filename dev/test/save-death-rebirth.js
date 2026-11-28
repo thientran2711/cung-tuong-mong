@@ -2,7 +2,7 @@
    a life plays, she dies (die()), then a TRUE reload at each moment of the death → rebirth path: (a) the death card on screen, (b) after «Chuyển kiếp»
    the new life's identity card open, (c) 4 s after «Nhận thân phận». Never may the title offer the dead life alive again (no rollback past a death);
    (b) must bring the SAME new-life card back, (c) the new life. usage: node dev/test/save-death-rebirth.js [index.html] [fold,ipadAir] → exit 1 on FAIL */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs'),path=require('path');
 const [,,PAGE='index.html',DEVS='fold,ipadAir']=process.argv;
 const SBR=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');const H=eval(SBR.match(/const H=(`[\s\S]*?`);\n/)[1]);const seedInit=eval(SBR.match(/const seedInit=(seed=>\{[\s\S]*?\}\};)\n/)[1].replace(/;$/,''));
 (async()=>{const root=path.resolve(__dirname,'../..');const http=require('http');

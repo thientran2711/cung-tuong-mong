@@ -1,7 +1,7 @@
 /* MARKS bot scan (law 11, MAIN 164): a sensible bot life (dev/measure/inpage4.js) plays; EVERY dialog the game pushes (pushModal) is read through the kit row builder
    (kitParse → kaBody); any Được / Mất / Kèm / Ghi chú text markTxt(text,row) would still change = a stat number left on a choice = FAIL. TỐN rows are exact by rule and skipped.
    usage: node dev/test/marks-bot-scan.js <page url> [steps=3000] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs'),path=require('path');
 const [,,URL,ST]=process.argv;const STEPS=+ST||3000;const INP=fs.readFileSync(path.join(__dirname,'..','measure','inpage4.js'),'utf8');
 (async()=>{const b=await chromium.launch({args:['--js-flags=--max-old-space-size=1500']});const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});
  await ctx.route(/\.(webp|png|jpe?g|mp3|ogg|m4a|mp4|webm)(\?|$)/i,r=>r.abort());const p=await ctx.newPage();p.setDefaultTimeout(0);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

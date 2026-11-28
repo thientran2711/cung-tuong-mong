@@ -1,6 +1,6 @@
 /* dayq-break (dayq-one-rule): disable #next, wait 2 × BAL.dayq.wake. Held cases must stay disabled; control must come back. Column «heal() alone» calls dqNextHeal once (the heal's own rule);
    the 2×wake column includes every other net (dqWake→dqNextSync, lifeGate…). usage: python3 dev/build/assemble.py && node dev/test/dayq-break.js   (serves dev/index.html via coop-serve.js) */
-const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const {serve,BASE}=require('./coop-serve.js');const sleep=t=>new Promise(r=>setTimeout(r,t));
 const NEWLIFE=`(function(){localStorage.removeItem('hclh-opt');SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){window.__forceOrigin='thd';window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv()))break}
  quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();return S.name})()`;
 const CASES={

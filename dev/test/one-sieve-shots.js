@@ -1,6 +1,6 @@
 /* ONE SIEVE stills: the fullest «Trong cung vừa qua» result card of a bot life (seed) + the Sổ ghi tab, on one viewport.
    usage: node dev/test/one-sieve-shots.js <page.html> <outPrefix> <w> <h> [seed] [tuần] */
-const {chromium}=require('playwright');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const path=require('path');
 const [PG,OUT,W,H,SD,DY]=process.argv.slice(2);const SEED=+SD||1,DAYS=+DY||8;
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:+W,height:+H},deviceScaleFactor:2});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto('file://'+path.resolve(PG),{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&document.getElementById('title'),null,{timeout:120000});await p.waitForTimeout(1500);

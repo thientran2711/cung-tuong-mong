@@ -1,6 +1,6 @@
 /* KK63 K-HAND-MAT probe: open a PEND-style option modal (servant bribe card) and dump every option's rows as the player sees them.
    usage: node dev/test/kit-hand-rows.js <index.html> <outdir> [WxH@dpr,...] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const [,,FILE,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');const [,,FILE,OUT,SIZES]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();
  for(const sz of (SIZES||"755x1000@1,1180x820@1").split(",")){const [wh,dpr]=sz.split("@");const [W,H]=wh.split("x").map(Number);

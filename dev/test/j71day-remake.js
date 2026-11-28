@@ -1,5 +1,5 @@
 /* rv4 (BIG rv save-unseen-lists r4): Hội Phượng (3 tuần) day card remade after fPlan7 replaced the plan in the same step must be the SAME contest. usage: node dev/test/j71day-remake.js index.html [other.html …] → exit 1 on FAIL */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs'),path=require('path');
 const SBR=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');const H=eval(SBR.match(/const H=(`[\s\S]*?`);\n/)[1]);
 (async()=>{const root=path.resolve(__dirname,'../..');const http=require('http');
  const srv=http.createServer((q,r)=>{let f=path.join(root,decodeURIComponent(q.url.split('?')[0]));fs.readFile(f,(e,b)=>{if(e){r.writeHead(404);r.end();return}r.writeHead(200,{'content-type':f.endsWith('.html')?'text/html':'text/javascript'});r.end(b)})}).listen(0);

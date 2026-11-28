@@ -2,7 +2,7 @@
    (#modal buttons, plaques, option rows) is read back: any text markTxt (the ONE choice formatter, jk2b) would still change = an exact stat number left on a choice = FAIL.
    Bạc / Sức / khắc / counts stay exact. The result card (.rtoast / .karesult) is skipped here: it must keep its numbers.
    usage: node dev/test/marks-choice-scan.js <page url> [N turns] [WxH@dpr] */
-const {chromium}=require('playwright');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */
 const [PAGE,N0,SZ]=process.argv.slice(2);const N=+N0||60;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const [wh,dpr]=(SZ||"1180x820@1").split("@");const [W,H]=wh.split("x").map(Number);const b=await chromium.launch();
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(dpr||1),hasTouch:true,serviceWorkers:'block',reducedMotion:'reduce'});const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

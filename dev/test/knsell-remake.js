@@ -1,7 +1,7 @@
 /* save r6 (BIG rv save-fix-stack, LAW 11 generator family): «Có người bán tin» — after N buổi of a real life, EVERY seller × news she could be
    offered is made as a card, then made again from its sổ form (rcpMk, as on load): the remake must give the card back with its choices and must
    leave S exactly as it was (probe REMAKE-SIDE knSell, iPad seed 1). usage: node dev/test/knsell-remake.js index.html [other.html …] [buổi=30] → exit 1 on FAIL */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs'),path=require('path');
 const SBR=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');const H=eval(SBR.match(/const H=(`[\s\S]*?`);\n/)[1]);
 (async()=>{const root=path.resolve(__dirname,'../..');const http=require('http');const A=process.argv.slice(2);const NB=+(A.find(x=>/^\d+$/.test(x))||30);
  const srv=http.createServer((q,r)=>{let f=path.join(root,decodeURIComponent(q.url.split('?')[0]));fs.readFile(f,(e,b)=>{if(e){r.writeHead(404);r.end();return}r.writeHead(200,{'content-type':f.endsWith('.html')?'text/html':'text/javascript'});r.end(b)})}).listen(0);

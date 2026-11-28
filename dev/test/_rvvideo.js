@@ -1,7 +1,7 @@
 /* _rvvideo (BIG rv save r5, untracked helper): a real life on one device, recorded: plays N buổi answering cards like a player, then the last
    step's cards are LEFT waiting (unseen) + the Tin báo list; TRUE reload → title → «Tiếp tục kiếp này» → the same waiting cards + list must be back.
    usage: node dev/test/_rvvideo.js <page> <fold|ipadAir> <outDir> [buoi=6] [seed=2] */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs'),path=require('path'),http=require('http');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs'),path=require('path'),http=require('http');
 const [,,PAGE='index.html',DEV='fold',OUT='/tmp/rvv',NB='6',SEED='2']=process.argv;
 const SBR=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');
 const H=eval(SBR.match(/const H=(`[\s\S]*?`);\n/)[1]);const seedInit=eval(SBR.match(/const seedInit=(seed=>\{[\s\S]*?\}\};)\n/)[1].replace(/;$/,''));

@@ -6,7 +6,7 @@
    The title → save path is played with real taps («Vào cung ngay», «Chơi một mình», «Tiếp tục kiếp này»).
    usage: [NEXT_SAVE=save.json] node dev/test/next-dead.js [index.html|URL] [fold,ipad] */
 /* probe helpers (ROLE B #5): serve a build, load a robot save, real taps only via dev/test/realtap.js */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs'),path=require('path'),http=require('http');
 const RT=require('./realtap.js');
 const DEVS={fold:[755,1000],ipad:[1180,820]};
 function serve(file){const root=path.dirname(path.resolve(file)),idx=path.basename(file);const T={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'application/json','.css':'text/css'};

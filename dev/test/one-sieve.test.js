@@ -11,7 +11,7 @@
    5 the Sổ ghi tab has the kind tabs + the search box (kit parts) and a search narrows the rows; old save (no S.hrec / S.osv) loads
    6 0 page errors
    usage: node dev/test/one-sieve.test.js [page.html] [tuần] [seed] [--report] [--json out.json] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const A=process.argv.slice(2);const jI=A.indexOf('--json');const JOUT=jI>=0?A.splice(jI,2)[1]:null;const REP=A.includes('--report');const P=A.filter(x=>!x.startsWith('--'));
 const URL='file://'+path.resolve(P[0]||'dev/index.html');const DAYS=+P[1]||12;const SEED=+P[2]||1;
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,700):''))};

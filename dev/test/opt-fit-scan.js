@@ -1,5 +1,5 @@
 /* m-fix-1 item 5 scan (law 11): open every PEND card with ≥3 options (pushFront + showModal) on Fold 755x1000 + iPad 1180x820 and count options fully visible without scrolling. usage: node dev/test/opt-fit-scan.js dev/index.html all  (or a comma list of PEND ids) */
-const {chromium}=require('playwright');const path=require('path');(async()=>{const b=await chromium.launch();const out={};
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const path=require('path');(async()=>{const b=await chromium.launch();const out={};
 for(const dev of ['fold','ipad']){const vp=dev==='ipad'?{width:1180,height:820}:{width:755,height:1000};
 const ctx=await b.newContext({viewport:vp,deviceScaleFactor:1,hasTouch:true,isMobile:dev!=='ipad'});const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
 await p.goto('file://'+path.resolve(process.argv[2]));await p.waitForFunction(()=>typeof start==='function',null,{timeout:180000});await p.waitForTimeout(2000);

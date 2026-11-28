@@ -2,7 +2,7 @@
    RULE: a tap anywhere on an option card chooses it; the art included. REAL touch tap on the art centre of: the entourage picker person cards (avatar), a real PEND.ksp card, a plain event card with a
    meaning-group picture. FAIL = #kpzoom visible, or the option did not fire. Fold 755x1000 + iPad 1180x820.
    usage: node dev/test/kit-opt-art-tap.js <index.html> [outdir]   env SZ=[[W,H],..]  Exit 1 on a FAIL. */
-const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const {chromium}=(require('./lib/bigpage'),require('./lib/dlgs-off').pw('off'));/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,SRC]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const R=[];
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));

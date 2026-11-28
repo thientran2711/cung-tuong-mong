@@ -4,7 +4,7 @@
    lãnh cung after a same-day demotion keeps the old rank, the reason notice has Ai tố / Vì sao / Chứng cứ / Hình phạt rows (real taps
    close it), an early Hoàng hậu ân xá waits until BAL.pun.coldMinDays days are served, then a one-rank-lower phục vị with its reason;
    an NPC: one rank, stay gate, one-rank release. Exit 1 on any failed check or page error. */
-const {chromium}=require('playwright');const [,,URL,W='755',H='1000',VID]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const [,,URL,W='755',H='1000',VID]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:+W,height:+H},serviceWorkers:'block',...(VID?{recordVideo:{dir:VID,size:{width:+W,height:+H}}}:{})});
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});for(let i=0;i<300;i++){if(await p.evaluate(()=>typeof start==='function'&&!!window.__ctmBuilt).catch(()=>false))break;await sleep(300)}

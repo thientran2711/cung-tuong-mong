@@ -2,7 +2,7 @@
    must leave a Sổ ghi line the player sees, for EVERY answer of the receiver (yes / qua loa / no / mách) — never a silent spend.
    Table row per act×answer: khắc spent · log lines. The receiver's answer is forced through jrcv rcvPick (the 4 answers of RCVK.*).
    usage: node dev/test/facact-log-scan.js [dev/index.html] [label]  → exit 1 when a spend has no log line */
-const path=require('path');const {chromium}=require('playwright');const HTML=process.argv[2]||'dev/index.html';const LAB=process.argv[3]||'';
+const path=require('path');const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const HTML=process.argv[2]||'dev/index.html';const LAB=process.argv[3]||'';
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.route(u=>/^https?:/.test(u.href)||/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/.test(u.pathname),r=>r.abort());
  await p.goto('file://'+path.resolve(HTML),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);

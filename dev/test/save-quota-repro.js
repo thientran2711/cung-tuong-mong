@@ -2,7 +2,7 @@
    e.g. save = git show origin/claude/cung-tuong-mong-handover-hj0h8w:dev/handover/robot/nc-B-tuc/saves/20261124-0057-010.json (year 14, 4.34 M chars); exit 1 = FAIL.
    A real year-14 robot save (4.34 M chars) in Sổ 1 + FILL chars of other site storage (other slots / co-op copies); a real year-14 robot save (4.34 M chars) in Sổ 1 + FILL chars of other site storage (other slots / co-op copies);
    play N buổi with real taps; after every step: did the slot write land? sổ date vs screen; then a TRUE reload → what comes back. */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs'),path=require('path');
 const [,,PAGE='index.html',SAVE,FILL='600000',NB='24',DEV='fold']=process.argv;
 const SBR=fs.readFileSync(__dirname+'/save-boundary-reload.js','utf8');const H=eval(SBR.match(/const H=(`[\s\S]*?`);\n/)[1]);
 (async()=>{const root=path.resolve(__dirname,'../..');const http=require('http');

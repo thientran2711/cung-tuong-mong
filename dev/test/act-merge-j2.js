@@ -6,7 +6,7 @@
    T3 pop-up: no talk option of a door is shown outside it; every door option of the pop-up fires talk() on the same option NAME, or doAct on the in-person key.
    T4 two-way: every ACT key in a door is a key NPCs run on her (BANDS ∪ HA_VAR, minus HA_NO; tieuhuy = jagharm help option); haDoor(k) = doorOf(k).
    T5 counts: card buttons and pop-up buttons before (raw) → after. Exit 1 on any FAIL. Reuses the act-audit harness (AA). */
-const fs=require('fs'),path=require('path');const {chromium}=require('playwright');const ROOT=path.resolve(__dirname,'../..');
+const fs=require('fs'),path=require('path');const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const ROOT=path.resolve(__dirname,'../..');
 const src=fs.readFileSync(path.join(ROOT,'dev/test/act-audit.js'),'utf8');const LIB=src.match(/const LIB=String\.raw`([\s\S]*?)`;\n\(async/)[1];
 const URL=process.argv[2]||'file://'+path.join(ROOT,'index.html');
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'})).newPage();const perr=[];p.on('pageerror',e=>perr.push(e.message.slice(0,200)));

@@ -1,6 +1,6 @@
 /* review/place-close LOOK stills: 1 last khắc chip (pulse) · 2 grace chip (red) · 3 tap on the chip → her room · 4 grace used up → NHẸ notice (no dialog).
    usage: SHOT_DIR=<dir> DEV=fold|ipadAir node dev/test/place-close-look.js (shots never go in git) */
-const {chromium}=require('playwright');const D=require('./lib/device');const path=require('path');const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const path=require('path');const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const dev=process.env.DEV||'fold',dir=process.env.SHOT_DIR||'/tmp';const srv=await D.serveRoot(path.resolve(__dirname,'../..'));const b=await chromium.launch();const ctx=await D.newDeviceContext(b,dev);const p=await ctx.newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(240000);
  await p.addInitScript(()=>{let a=24681357;window.__rnd=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};Math.random=()=>window.__rnd()});

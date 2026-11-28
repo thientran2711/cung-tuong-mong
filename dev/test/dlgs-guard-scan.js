@@ -19,6 +19,13 @@ const SL=/evRelease|approaches\(|q72|e68|E68|j7c|J7I|J7SEEDS|kyngo|KY\.|j70|P70|
 const TURN=/nextBuoi|#next|\(["']next["']\)|Sang buổi|Sang ngày mới|endTurn|endWeek|inpage[0-9]|measure\//;
 const G=new RegExp(/q72Offer|q72o|e68c|j7c|kyngo|j70|compCard|jworldc|showModal|Sang buổi/.source+'|'+SL.source+'|'+TURN.source);
 const EXEMPT={
+'hand-max-hook.js':'in-page census hook loaded by dev/measure/evbot.js (that runner owns the browser); opens no page',
+'kit-ring-boot.js':'helper: boots a page the CALLING test made (the caller holds the guard); launches no browser',
+'lib/qdrain.js':'in-page init script lib (ctx.addInitScript by the calling test); launches no browser',
+'realtap.js':'real-tap helper on a page the CALLING test made (the caller holds the guard); launches no browser',
+'rt-offer.js':'robot offer-log classifier (pure functions on logged labels); opens no page',
+'selscene-mock/ss2.js':'in-page mock timeline injected by the selscene mock runner (boot.js holds the guard); opens no page',
+'wording-gain-scan.js':'static wording scan of the built source (reads files, opens no page)',
  'dlgs-play.js':'THE scene test: plays every side-line scene tap by tap on both devices on purpose',
  'dlgs-guard-scan.js':'this scan (reads sources, opens no page)',
  'dlgs-encounter.js':'THE scene-vs-room-encounter test: plays one side-line scene tap by tap on purpose, then checks the encounter takes the card',

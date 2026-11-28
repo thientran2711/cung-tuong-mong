@@ -9,7 +9,7 @@
    6) view panels («Tin chờ người sai đi», «Tin báo», «Lịch tháng») opened again and again: one per title in Q, never saved, one tap closes each
    5) an old save (flight2 s8, year 2, LIVE format) loads and plays: no card left hidden in Q, «Sang buổi/ngày mới» enabled after closing
    usage: [QSL_SAVE=dump.json] node dev/test/q-softlock.js [index.html | URL] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs'),path=require('path'),http=require('http');
 const {keepNotesSeen}=require('./lib/notes-seen');/* rv27: a wiped storage keeps the «Điều mới trong cung» record */
 const RT=require('./realtap.js');
 const GAME=process.argv[2]||path.join(__dirname,'../../index.html');const DEVS={fold:[755,1000],ipad:[1180,820]};

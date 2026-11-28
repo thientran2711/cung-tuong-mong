@@ -11,7 +11,7 @@
      L  live: the bot plays MONTHS (default 6) with a stranger-heavy court on each device; EVERY step the prose surfaces are scanned:
         notice list (line / text / items), S.logs, Q modals, #panel / #modal / #kntchip / #kntbox DOM prose (text nodes outside name chips).
    usage: NODE_PATH=$(npm root -g) [MONTHS=6] [SHOTS=outdir] node dev/test/news-unk.js */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs');const path=require('path');
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 const ROOT=path.resolve(__dirname,'../..');const MONTHS=+process.env.MONTHS||6;const SHOTS=process.env.SHOTS||'';if(SHOTS)fs.mkdirSync(SHOTS,{recursive:true});
 let bad=0;const rows=[];const rep=(k,m)=>{rows.push([k,m]);console.log(k.padEnd(9),m);if(!/^ok|^info|^S-info/.test(k))bad++};

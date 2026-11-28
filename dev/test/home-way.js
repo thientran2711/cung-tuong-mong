@@ -6,7 +6,7 @@
    E punish() weights: sev 0 / 1 / 2 → months from BAL.punW, the same for an NPC (law 1); vượt phẩm (BAL.shelf.acc.vpConf) = 0 NHẸ.
    F Dư đồ: her home's label carries «Nhà ta» away from home.
    usage (HOST mode, built root): [DEV=fold|ipadAir] node dev/test/home-way.js → JSON + exit 1 on a fault */
-const {chromium}=require('playwright');const D=require('./lib/device');const path=require('path');const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const path=require('path');const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const srv=await D.serveRoot(path.resolve(__dirname,'../..'));const b=await chromium.launch();const ctx=await D.newDeviceContext(b,process.env.DEV||'ipadAir');const p=await ctx.newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(240000);
  await p.addInitScript(()=>{window.__toastKeep=1;let a=24681357;window.__rnd=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296};Math.random=()=>window.__rnd()});

@@ -12,7 +12,7 @@
    usage: node dev/test/save-boundary-reload.js [newPath=index.html] [oldPath] [devices=fold,ipadAir] [seeds=1,2,3]
           (serves the repo root = the BUILT site; oldPath e.g. a copy of origin/main's index.html in the root; no oldPath = oldsave case skipped)
    exit 0 = every case PASS. */
-const {chromium}=require('playwright');const D=require('./lib/device');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');
 const [,,NEW='index.html',OLD='',DEVS='fold,ipadAir',SEEDS='1,2,3']=process.argv;
 let BASEURL='';const ONLY=(process.env.SBR_ONLY||'').split(',').filter(Boolean);const want=n=>!ONLY.length||ONLY.includes(n);const sleep=t=>new Promise(r=>setTimeout(r,t));
 const seedInit=seed=>{let s=(seed*2654435761>>>0)%2147483646+1;Math.random=()=>{s=(s*16807)%2147483647;return (s-1)/2147483646};

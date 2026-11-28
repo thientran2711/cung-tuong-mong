@@ -4,7 +4,7 @@
    the contest hook (cFin7) counts podium + win for her and NPCs; an old save (no dh, honors only) loads and is seeded; save JSON round-trip;
    NHIỆM VỤ (rail goal icon) shows the tab row, the Danh hiệu tab lists + wears; her worn title on the stage tag (3 lines) and an NPC's in the
    pop-up left figure; no horizontal overflow in the panel; 0 page errors. Shots in <outdir>. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,SZ]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const [,,URL,OUT,SZ]=process.argv;fs.mkdirSync(OUT,{recursive:true});const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const PX=process.env.HTTPS_PROXY;const b=await chromium.launch(PX?{proxy:{server:PX,bypass:'127.0.0.1,localhost'}}:{});const R={errs:[],fail:[]};
  const [wh,d]=(SZ||'755x1000@2').split('@');const [W,H]=wh.split('x').map(Number);
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+d,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce',ignoreHTTPSErrors:!!PX});

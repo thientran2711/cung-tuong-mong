@@ -3,7 +3,7 @@
    the Sổ ghi log lines — plus forced runs of the family the owner shot: «Nghe ngóng chung» (sent and landed), Tai mắt nghe lén, the closing alert.
    Every line is checked with the pattern set of scan.js (BAD). Writes <out>.json {lines:[{src,t,bad:[…]}], n, badN}.
    usage: node dev/test/tinbao-words/bot.js <builtRootDir> <out.json> [lives=2] [seed=1] [steps=900]   (exit 0; the table is made by table.py) */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const D=require('../lib/device');
+const {chromium}=require('../lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');const D=require('../lib/device');
 const BAD=require('./patterns.js');
 const [,,ROOT,OUT,NL,SEED,STEPS]=process.argv;const LIVES=+NL||2,seed=+SEED||1,STEP=+STEPS||900;
 const INP=fs.readFileSync(path.join(__dirname,'..','..','measure','inpage4.js'),'utf8');

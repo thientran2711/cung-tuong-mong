@@ -5,7 +5,7 @@
    → again at Đức Thọ cung WITH khắc left, she stays on, caught (roll forced for the recording): «Bị bắt» Danh − · khất bổng 1 tháng ·
    «Lỗi nhẹ: không bị cấm túc». A small TEST caption (bottom-left, recording only) names each step.
    usage: [DEV=fold|ipadAir] node dev/test/home-way-video.js <out.mp4>  (built root) */
-const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs'),path=require('path'),os=require('os'),cp=require('child_process');const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const D=require('./lib/device');const fs=require('fs'),path=require('path'),os=require('os'),cp=require('child_process');const sleep=t=>new Promise(r=>setTimeout(r,t));
 const OUT=process.argv[2]||'home-way.mp4';const DEV=process.env.DEV||'fold';
 (async()=>{const srv=await D.serveRoot(path.resolve(__dirname,'../..'));const dir=fs.mkdtempSync(path.join(os.tmpdir(),'hwv-'));const b=await chromium.launch();const d=D.DEVICES[DEV];
  const ctx=await D.newDeviceContext(b,DEV,{recordVideo:{dir,size:{width:d.w,height:d.h}}});const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));

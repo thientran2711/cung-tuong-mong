@@ -6,7 +6,7 @@
    MODE=spots: per frame, a REAL tap (touch on Fold, mouse on iPad) at the centre of every distinct descendant of the first two cards + 5 edge points → chose /
      popup / none  = the LIVE spot list the harness rule is built on (only .kobang may fail).
    usage: node dev/test/rt-optcard-spots.js <index.html> [out.json]  env SZ=[[W,H],..] MODE=frames|spots ONLY=regex MAXP=n RTOLD=dir. Exit 1 on any FAIL. 0 JS clicks. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];const MODE=process.env.MODE||'frames';
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];const MODE=process.env.MODE||'frames';
 const RT=require('./realtap.js');
 const scanSrc=f=>{const s=fs.readFileSync(f,'utf8');const i=s.indexOf('const SCAN = () => {');const j=s.indexOf('\n};\n',i);return s.slice(i+'const SCAN = '.length,j+2)};
 const NEW_SCAN=scanSrc(path.join(__dirname,'robot-rt.js')),OLD_SCAN=process.env.RTOLD?scanSrc(path.join(process.env.RTOLD,'robot-rt.js')):null,OLD_PROBE=process.env.RTOLD?require(path.resolve(process.env.RTOLD,'realtap.js')).PROBE.toString():null;

@@ -6,7 +6,7 @@
    then the end card is the top layer at 9 points of the screen, it is the ONLY card in Q, and no kit scene / toast / podium / new-day panel is left.
    Also: the end card's «Chuyển kiếp» starts a new life whose first popups still play (the gate is for a dead life only); old save loads.
    usage: node dev/test/endcard-top.js [outdir|-] [url] [WxH@d,…]      prints a SOURCE | RESULT table; exit 1 on any FAIL */
-const path=require('path');const fs=require('fs');const {chromium}=require('playwright');
+const path=require('path');const fs=require('fs');const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */
 const A=process.argv.slice(2);const OUT=A[0]&&A[0]!=='-'?A[0]:null;const URL=A[1]&&A[1]!=='-'?A[1]:'file://'+path.resolve(__dirname,'../../index.html');
 const SIZES=(A[2]||'755x1000@1').split(',').map(s=>{const m=s.match(/(\d+)x(\d+)@(\d+)/);return {w:+m[1],h:+m[2],d:+m[3]}});
 if(OUT)fs.mkdirSync(OUT,{recursive:true});

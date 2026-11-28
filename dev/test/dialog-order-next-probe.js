@@ -1,5 +1,5 @@
 /* E96r r2 probe (real taps): a game card waits unseen (N1 behind the person view / N2 queued, not painted), she taps «Sang buổi» → the turn must NOT pass over it (LIVE: buổi held, card first). usage: node dev/test/dialog-order-next-probe.js <base> dev/index.html W H shotDir */
-const {chromium}=require('playwright');const sleep=t=>new Promise(r=>setTimeout(r,t));const [,,BASE,PATH,W,H,SH]=process.argv;
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const sleep=t=>new Promise(r=>setTimeout(r,t));const [,,BASE,PATH,W,H,SH]=process.argv;
 const NEWLIFE=`(function(){localStorage.removeItem('hclh-opt');SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){window.__forceOrigin='thd';window.__nlInner=1;start();window.__nlInner=0;if(!(typeof isSrv==='function'&&isSrv()))break}
  quiet=false;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;return S.name})()`;
 const CLEAN=`(()=>{for(const e of document.querySelectorAll('.kmov,#klife,#kmrew,#kpodov'))e.remove();try{KMQ.length=0;kmBusy=false}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;

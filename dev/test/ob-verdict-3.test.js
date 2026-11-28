@@ -8,7 +8,7 @@
       the next card (the next card hidden until the tap) → before/after table (run with the base index.html for «before»).
    D  bots (window.__bot) never hold; E old save (no RF state) loads and plays a buổi.
    usage: node dev/test/ob-verdict-3.test.js [index.html] [shots dir] [--scan-only] [--json out.json] */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const A=process.argv.slice(2);const jI=A.indexOf('--json');const JOUT=jI>=0?A.splice(jI,2)[1]:null;const SCAN=A.includes('--scan-only');const P=A.filter(x=>!x.startsWith('--'));
 const URL='file://'+path.resolve(P[0]||'index.html');const OUT=P[1]||'/tmp/obv3';fs.mkdirSync(OUT,{recursive:true});
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,500):''))};

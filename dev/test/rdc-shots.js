@@ -1,7 +1,7 @@
 /* ORDER THIN P8 shots: composed road chapter cards (j67 story card, kit event frame) on Fold 755x1000@2 + iPad 1180x820@2.
    [RDC_ORIGIN=<origin>] node dev/test/rdc-shots.js <outdir> [chapter:slot,…]   slot = s (opening) | c (complication) | x (climax). Shots go OUTSIDE git.
    Same entry flow as j7c-shots.js (a real saved life, reloaded); each chapter is opened as a side thread and its hồi card is shown. */
-const {chromium}=require('playwright');const D=require('./lib/device');const RL=require('./lib/roulette');const http=require('http'),fs=require('fs'),path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const D=require('./lib/device');const RL=require('./lib/roulette');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const OUT=path.resolve(process.argv[2]||'/tmp/j7c-shots');fs.mkdirSync(OUT,{recursive:true});
 
 /* the quickcheck new-life / settle / buổi helpers (dev/tools/quickcheck.js:44–52, copied) */

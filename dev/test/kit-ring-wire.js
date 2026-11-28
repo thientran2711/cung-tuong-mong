@@ -1,6 +1,6 @@
 /* RING-BUILD-2: the 33-place wiring of vòng người / vòng nhóm (KK44 NEW-KIT FAMILY SCAN §3/§4), real taps, Fold + iPad.
    usage: node dev/test/kit-ring-wire.js <url> <shotdir>   (shots go OUTSIDE the repo) */
-const {chromium}=require('playwright');const fs=require('fs');const boot=require('./kit-ring-boot.js');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
+const {chromium}=require('./lib/dlgs-off').pw('off');/* checks cards / screens: side-line dialogue scenes off (lib/dlgs-off.js) */const fs=require('fs');const boot=require('./kit-ring-boot.js');const [,,URL,OUT]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const tapEl=async(p,sel)=>{let h=null;for(const e of await p.$$(sel)){if(await e.isVisible()){h=e;break}}h=h||await p.$(sel);if(!h)return false;const b=await h.boundingBox();if(!b)return false;await p.touchscreen.tap(b.x+b.width/2,b.y+b.height/2);return true};
 const tapFront=async p=>{const r=await p.evaluate(()=>{const R=kitRing.cur;if(!R)return null;const s=R.slots[kitRing.front()];const b=s.getBoundingClientRect();return {x:b.left+b.width/2,y:b.top+b.height*.45}});if(r)await p.touchscreen.tap(r.x,r.y);return !!r};
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});let fail=0;

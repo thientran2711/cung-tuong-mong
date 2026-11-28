@@ -13,7 +13,7 @@
      (FIXER #17) --fast starts = home,selx,talk: the ring UI (selection days, kitScene talk, Bàn bài hand cards, thẻ gỗ plaques) is walked with two real taps per card (lift → ✓ / «Chọn» chip)
    output: <out>/crawl-<dev>.json (every tap) + <out>/shots/*.jpg (every FAIL; shots never go in git) ; summary line last.
    Report table: node dev/test/button-crawl.js --report <out> > dev/handover/reports/button-crawl.md */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+const {chromium}=require('./lib/dlgs-off').pw('tap');/* play bot: a side-line dialogue scene is tapped through like a player (lib/dlgs-off.js) */const fs=require('fs');const path=require('path');
 const RT=require('./realtap.js'); /* the ONE shared real-tap lib (review/robot-realtap); no private copy (laws 9/11) */
 /* adapter: the crawler's call shape tap(page,target,{screen,label,shot,log}) → RT.make(page).tap(target,{screen,label});
    a refused tap is reported to the caller as «DEAD BUTTON {json}» (why = covered / clipped / gone / disabled / popup) */
