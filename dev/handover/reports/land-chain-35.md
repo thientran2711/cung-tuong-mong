@@ -29,3 +29,5 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 07:00Z RV-180 PASS ringdup r2 9c7ea0de (not b9c29b63). Unit 2 staged review/lc35-ui2 b1a0d4e9 = 4e12f54e + merge 9c7ea0de (rebuilt; every file = its branch side; 0 del; webkit 0). Tests queued (u2.sh) after ui.sh + dq2.
 - 07:03Z MAIN = MAIN CHÍNH 187 session_01Rc5AsKydFcd2HwwPNjKAsm (root, owner-opened; 186 announced it). RV-182 session_01Rc5AsLZoKU28PABtEkjZge = UI reviewer (succ. RV-180).
 - 07:40Z 22afefb4 quickcheck: core gates + time-spill PASS; perf run1 FAIL (noise) → quickcheck.js rerun PASS. **READY TO PUSH 22afefb4 sent to MAIN 187.** u2 tests (b1a0d4e9) then dq2 (dayq test alone) running.
+- 07:32Z MAIN 187 PUSHED LIVE = 22afefb4 (ROLLBACK 5ad52416). LRM5 / TMK-WARN-2 / KIT-STAGE-R16 sessions all INACTIVE (could not notify). LR-RULES told.
+- dayq restaged: review/lc35-dayq 0bf2f1e1 = merge 66395ab2 onto LIVE 22afefb4 (force-moved own staging branch; rebuilt; assets = LIVE; 0 del; all dayq files = branch side; webkit 0). dq2 = dayq test alone + quickcheck after u2.
