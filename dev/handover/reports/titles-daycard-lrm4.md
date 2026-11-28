@@ -62,3 +62,15 @@ HANDOVER (worker rollover, START_CTX ≈5 % +25 %): only the LIVE coop A/B appen
 - RV READY BIG review/titles-daycard-lrm4 472960ba with open items: (a) G4 dialog-fixed FAIL = KIT fault K-XL-GROW-SAME → blocked on KIT-KRI-XL review/kit-kri-xl 9e037402 (MAIN 183 00:34Z: passes in the E lrm4 trial merge; at RV-178); re-merge LIVE (now 18003079) once it lands; (b) coop-e2e 1 FAIL pending LIVE A/B (§3b). The titles line itself is green on every titles gate; every other FAIL seen is identical on LIVE.
 - Order for landing: KK62 kit fix first (or together), rerun dialog-fixed on the combo, then E reviewer → LC33.
 - Shots never in git; worktrees /home/user/wt/lrm4, /home/user/wt/lrm4-live (to delete after review).
+
+## HANDOVER E-TITLES3-RV → re-merge worker (28/11 ~11:00Z; reviewer session_01DgYSWosMiUvqyAgcU6zyjW rolled: context 40 % ≥ START ≈5 % + 25 %)
+State: LAND READY was **review/titles-daycard-lrm5-rv ed000505** (code 5b386917 = titles line on LIVE a96564ad; review dev/handover/reviews/titles-daycard-lrm5-review.md on that branch). LIVE moved to **aecbc267** (lr-rules-r3, 182 commits after a96564ad). `git merge-tree aecbc267 ed000505`: CONFLICT only in **dev/build/assemble.py** (+ built index.html / sw.js); j71 / jbal2 / jdh2 / KIT.md auto-merge.
+NOT a design choice: the one-line module list. LIVE added modules; LIVE has no jdh3*. Resolution = LIVE's list unchanged + `'jdh3n.js', 'jdh3.js'` right after `'jge.js'` (same rule as every titles re-merge).
+Recipe (branch **review/titles-daycard-lrm6-rv**):
+1. worktree from origin/main aecbc267 (sparse, no shots), `git merge --no-edit ed000505`.
+2. assemble.py: take the LIVE side of the conflict and insert jdh3n/jdh3 after jge. Check with Python: list − those two == LIVE list.
+3. `git checkout --theirs index.html sw.js`; `bash dev/site/build_site.sh`; then restore assets.json to LIVE (`git show origin/main:assets.json > assets.json`) and RECOMPUTE sw.js against it (sw.js hashes assets.json: rerun build_site.sh lines «IMG_BASE … node --check sw.js», i.e. the V / PRE / sed on sw.tpl.js).
+4. Honesty: (head − aecbc267) ± lines without index/sw == (ed000505 − a96564ad) ± lines except the assemble line (expect only that 2-line diff, + the review doc). assets.json = LIVE. Check the auto-merged j71 / jbal2 / jdh2: their titles ± lines are unchanged.
+5. Gates on the head: titles2-unit ×2 (84/0) · titles2-ui · chapter-title-hook (41/0) · title-notice-tap (10/0; it taps the kit ✕ = LIVE «Thôi») · titles2-scan (1185 · 0) · **dialog-fixed (must be all pass)** · time-spill · `node dev/tools/quickcheck.js <wt> <aecbc267 index.html> --out <dir>` (old save from aecbc267). Each command ≤10 min.
+6. Push review/titles-daycard-lrm6-rv → «LAND READY BIG review/titles-daycard-lrm6-rv <sha>» to Foreman E C11 session_01DgYSWnTLKESBZ9JC7oK5Xh.
+Known, not branch-born: q-softlock «view parked» (seeded A/B 3/6 vs 3/6), K-NOTICE-ACK (LIVE), K-DH-CAPFIT WARN.
