@@ -310,3 +310,5 @@ Not run: full quickcheck (lander step).
      in image mode hide the «Luân hồi» overlay (#kroul or class kroul) before the screenshot. LOOK at both.
   4. RV READY <sha> → RV-189 (session_01Rc5AsKweT3LtMsrkLNmDbV); land after or with K-HINT-KEM → lander LR-RULES-2 (session_01Rc5AsLfpDrXbkzzDZMaJdF).
 - Takeover prompt MUST copy the ROLLOVER lines verbatim (owner OD:L1217) and the LINEAGE line.
+- UPDATE 13:32Z (KK73): K-HINT-KEM is now **review/kk73-hintkem 44cfa57d** (on LIVE 5fc4bc79, which already holds K-HAND-DUPMAT → the jopic conflict
+  is resolved inside it). Merge **44cfa57d**, NOT 874cac12. RV-190 is reviewing it. RV for this branch = RV-191 (RV-189's seat).
