@@ -20,7 +20,7 @@ Conflicts: jkhand.js (kk63), jksize.js (kri-xl), jactj4.js + KIT_REQUESTS.md (LI
 - KIT.md: §56.25 rewritten = old 56.25 (K-XL-GROW-SAME) + the whole of old §56.33 (room, end bands, Fold, before/after); the §56.33 heading deleted in place, no «changed to» note; code comments + test header that said §56.33 now say §56.25.
 
 ## Before / after table (iPad 1180x820 / Fold 755x1000, `xl-one-size.js` + `dialog-fixed.js`, real dialogs)
-| device | dialog | LIVE 18003079 (before) | r16 48492a68 | r17 |
+| device | dialog | LIVE-class build (before; numbers from the r15 report, not re-measured here) | r16 48492a68 | r17 |
 |---|---|---|---|---|
 | iPad | end: Đại kết cục | 754 px, runs to 822 (CUT) | 707 / 220x549 | 707 / 220x549 (90..799) |
 | iPad | end: Kết cục / quiet end | 548 | 708 / 220x550 | 708 / 220x550 |
@@ -33,7 +33,7 @@ Stills looked at (Fold + iPad, own eyes): end «Đại kết cục» both device
 ## Measures (build 395e7299, one browser at a time)
 | test | result |
 |---|---|
-| dialog-fixed.js (Fold + iPad, 85 checks incl. XL f) | all pass |
+| dialog-fixed.js (Fold + iPad, incl. XL f) | all pass |
 | xl-one-size.js | all pass |
 | fig-col-fill-scan.js | frames 12 FAIL 0 |
 | opt-frame-scroll-scan LIVE 135 / r17 133 frames + opt-frame-scroll-diff | FAIL 0 / FAIL 0 · fixed 0 still 0 · REGRESSIONS 0 |
@@ -43,7 +43,7 @@ Stills looked at (Fold + iPad, own eyes): end «Đại kết cục» both device
 | kit-hand · kit-hand-mat-scan ×2 · press-keep · badge-hand | PASS (see §1) |
 | one-core-guard | PASS |
 | coregates (G1–G3 + 14 hooks, base 18003079) | CORE GATES PASS · 950 s |
-| quickcheck.js | QUICKCHECK PASS · 410 s · open 1877 ms · old save ok · render 242/220, tab 422/393, buổi 2273/1434 (one noisy median, runs share the box with nothing else; r16 measured 1573/1420), tasks>200 ms 21/24 |
+| quickcheck.js | QUICKCHECK PASS · 410 s · open 1877 ms · old save ok · render 242/220, tab 422/393, buổi 2273/1434 (one noisy median; r16 measured 1573/1420), tasks>200 ms 21/24 |
 
 ## Findings (not fixed)
 - Hook 94 q-softlock is a known flaky on LIVE (r16 report); here coregates passed it.
