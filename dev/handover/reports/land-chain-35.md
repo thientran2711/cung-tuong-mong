@@ -46,3 +46,6 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - Restack without ringdup (conflict pending ruling): review/lc35-ui5 c03d6ee7 = a96564ad + tagwrap 4e12f54e + coop-qcard 87dcdfbb (jkstage = RV-182-passed 5f3ad071 resolution, byte-identical); rebuilt; assets = LIVE; 0 del; MODGATE 494 ⊇ 494; webkit 0; unions checked. ringdup 9c7ea0de + giftback 991a1b72 wait for the j8/j83/jemoact ruling.
 - dayq restaged review/lc35-dayq e70cf6af (on a96564ad; j93 union ok; MODGATE PASS). seq2.sh: ui5 tests + quickcheck → dayq test + quickcheck. (ui2 next-dead run hit TimeoutError — ui2 shelved.)
 - 08:30Z MAIN 188 RULING: post-act result lines = real rise; pvQuy only pre-act. Applied: review/lc35-ui7 5b597911 = ui5 c03d6ee7 + ringdup (4023df19; 3 hunks → keepGain/affGot, rv-plr4 r8 comment kept) + giftback 991a1b72; rebuilt; MODGATE PASS; RV-182 delta asked. (review/lc35-ui6 = my old 383849d2, not reused.) a96564ad's 82 new pvQuy sites → asked MAIN for a law-11 worker (not a merge job).
+- 08:35Z RV-182 LAND giftback head d8fcdb8c → ui7 = b9404150 (+ merge d8fcdb8c; MODGATE PASS). Delta verdict pending on b9404150.
+- 08:33Z MAIN 188: add F f-word36-bac-rv 8843322a (row 36) after ui7.
+- 08:40Z ui8 staged review/lc35-ui8 a50895cb = ui7 + f-word36 8843322a (j23 resolved: LIVE BAL.artLes.k gate + F crsAfterW log tail); RV-182 delta asked.
