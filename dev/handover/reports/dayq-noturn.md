@@ -76,3 +76,6 @@ Done: root, 3-file fix, test, scans, gates above. Open: coop-e2e run (lost twice
 - Bisect: LIVE j93 + r2 guards → «week 2: fold advanced» ok (73 ok and on) ⇒ my j93 line was the cause; the room's night/week pacing relies on any m.rk card holding kit scenes.
 - r3 ac81eb77 (merged on LIVE 22afefb4): the j93 marker-only read applies only when no co-op room is on (COOPW.on/allow/allowN off) ⇒ ALL three changes are solo-only; co-op = LIVE behaviour. Co-op «Sang ngày mới» still has LIVE's CAP-bounded night hold (out of scope; the bug rows are solo seats).
 - coop-e2e on the new base: plain LIVE 22afefb4 fails «buổi 0:3 advanced for both» ("Chờ hảo hữu…") + «week 1: fold advanced»; r3 fails the same rows ⇒ no worse than LIVE (drift on the new base, its own ticket).
+
+## VERDICT (28/11 ~10:29Z)
+RV-163M ★ PASS → LAND READY to LC35 + MAIN 189: review/dayq-noturn-rvm 8a30664e = r3 ac81eb77 merged onto LIVE aecbc267 (the jverdict conflict vs coop-qcard-r3 resolved as LIVE note + this branch's faded()/dog()). Follow-ups for other owners: (1) dayq-noturn.js full run stalls in newLife on «Tiền sảnh» at bk 0.0 between N1 tabs (test-side setup); (2) new-base coop-e2e stall on LIVE itself → MAIN 189 ticket B COOP-REBIRTH-RESYNC. Worker done.
