@@ -28,10 +28,14 @@ for f in sorted(glob.glob(os.path.join(D,'j*.js'))):
   s=open(f,encoding='utf-8').read()
   keys=set(re.sub(r'\s','',m.group(1)).lstrip('-') for m in FUN.finditer(s))|set(re.sub(r'\s','',m.group(1)).lstrip('-') for m in SPR.finditer(s))
   keys={k for k in keys if not re.fullmatch(r'n|d|v|g|x|k|r|a|b|c|-?\d+',k)}  # one-letter locals: too loose to pair by name
-  for i,l in enumerate(s.split('\n'),1):
+  LS=s.split('\n')
+  for i,l in enumerate(LS,1):
     for m in PRV.finditer(l):
       k=re.sub(r'\s','',m.group(2)).lstrip('-');fn=m.group(1) or 'raw'
-      if k not in keys: continue
+      if k not in keys:
+        # a one-letter local (n, g …): paired only with a funnel on the same or the next 2 lines
+        near='\n'.join(LS[i-1:i+2])
+        if not re.fullmatch(r'[a-z]',k) or not re.search(r'(?:relAdd|affAdd)\(\s*[^,()]+,\s*[^,()]+,\s*-?'+re.escape(k)+r'\s*\)|spAdd\([^,()]+,"rel",\s*-?'+re.escape(k)+r'\)',near): continue
       ok=fn in('affSg','affPreview','pvQuy')
       if not ok and b+':'+k in NOPERSON: nop+=1;rows.append((b,i,k,fn,'NOPERSON: '+NOPERSON[b+':'+k])) if ALL else None;continue
       if not ok: raw+=1

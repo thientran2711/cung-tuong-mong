@@ -103,12 +103,12 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
   const add=(k,x)=>{const D=TW[k];if(!D||(D.req&&!D.req(S,k==="mediate"?v:v)))return;const c=twCost(k);
    A.push({n:D.n,c:Object.keys(c).length?c:undefined,o:D.o?D.o(S,v):100,x,run:()=>{chatMark(v);return twDo(S,v,k,true)+"."}})};
   const g=G();
-  add("visit",`nàng quý ngươi +${g.visit[0]} · Sức nàng +${g.visit[1]}`);
+  add("visit",`nàng quý ngươi ${affSg(v,S,g.visit[0])} · Sức nàng +${g.visit[1]}`);
   {const x=twFoeOf(S,v);if(x)add("mediate",`nàng bớt oán ${x.name} ${g.mediate}`)}
   add("humil",`nàng oán ngươi +${g.humil[0]} · Danh nàng -${g.humil[1]}`);
   add("test",`thành: ngươi tin nàng hơn +${g.test[0]} · hỏng: ngờ vực ${g.test[1]}`);
   add("drop",`ngươi lạnh với nàng -${g.drop}`);
-  add("follow",`nàng quý ngươi +${g.follow}`);
+  add("follow",`nàng quý ngươi ${affSg(v,S,g.follow)}`);
   add("gossip",`<span class="g">kẻ ngươi ghét bị bàn tán: Danh nàng ta -${g.gossip}</span>`)/* E-GAIN3c: the foe's loss is her gain (explicit green, kit KP12) */;
   add("admon",`Sủng nàng -${g.admon} · hai tuần ngài để ý người khác`);
   add("flaunt",`Danh +${g.flauntDanh} · mọi phi tần ghen +${g.flaunt}`)}catch(e){console.error(e)}return A}})();

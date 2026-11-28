@@ -16,7 +16,7 @@ function spG(k,h,now,n,rk,ck,peek){const B=typeof BAL==="object"&&BAL.stp;if(!B|
  const bd=B.band[k];if(bd&&n>bd[1])n=Math.min(bd[2],bd[1]+(n-bd[1])*B.over);
  const ce=spCeil(rk),top=spTop(k,rk),c0=Math.max(0,+now||0);if(c0>=top)return 0;
  let g=n*Math.max(B.dm.min,1-Math.pow(c0/ce,B.dm.pow));
- const cc=h&&typeof h==="object"?(h.spc||(h.spc={})):null,key=ck||k;
+ const cc=h&&typeof h==="object"?(h.spc||(peek?null:(h.spc={}))):null,key=ck||k;/* a peek (preview) creates nothing */
  if(cc){g+=+cc[key]||0;const gi=Math.round(g);if(!peek)cc[key]=Math.round((g-gi)*1000)/1000;g=gi}else g=Math.round(g);
  return Math.max(0,Math.min(g,Math.ceil(top-c0)))}
 /* a raw write of one stat of a person (x.sung = …, v.rel += …) that RISES goes through the same rule; returns the new value (clamped as statSet) */

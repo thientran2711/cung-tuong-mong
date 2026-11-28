@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9c7ea0de+","t":"2026-11-28T06:50Z","c":"Thẻ kết quả nằm gọn trong khung, hình bay và cánh hoa không còn đè lên hộp thoại; bàn cờ trò chơi nhỏ đổi áo theo mùa.","b":"827bc74f5c47","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
+window.CTM_BI={"s":"750a6242+","t":"2026-11-28T07:05Z","c":"Thẻ kết quả nằm gọn trong khung, hình bay và cánh hoa không còn đè lên hộp thoại; bàn cờ trò chơi nhỏ đổi áo theo mùa.","b":"972f73f8e133","h":[{"s":"1b91ac14+","t":"2026-11-23T23:33Z","c":"Khung đổi giao diện trò chơi nhỏ (skin) dùng chung"},{"s":"bf75a0a3+","t":"2026-11-23T23:24Z","c":"Lời giải thích các bậc khả năng không còn hứa chữ «thành»"},{"s":"eca7df67+","t":"2026-11-23T23:51Z","c":"Bộ khung kit cho cảnh nhập cung"},{"s":"ce2860f0+","t":"2026-11-23T23:26Z","c":"Biết thêm điều gì thì hiện ngay thông báo trên thanh trên, không báo trùng"},{"s":"9b10d883+","t":"2026-11-23T23:29Z","c":"Thêm nút «Tải hết để chơi offline» trong Thiết lập"},{"s":"dbbbf3c6+","t":"2026-11-23T21:52Z","c":"Chơi chung: đồ gia tộc không còn mất/nhân đôi khi chuyển"},{"s":"1a94dca1+","t":"2026-11-23T22:43Z","c":"Thang khả năng mới 7 bậc đều, chữ nằm cạnh thanh"},{"s":"7091cc7f+","t":"2026-11-23T21:12Z","c":"Sửa lỗi đồ vật nhân đôi/biến mất sau Kỳ ngộ (Giữ lại, chuộc lại, món quý)"},{"s":"f1ee0636+","t":"2026-11-23T21:16Z","c":"Chữ cơ may \"có thai\" dùng đúng thang khả năng riêng, thêm bài quét không trộn hai thang"},{"s":"5d0039de","t":"2026-11-23T20:52Z","c":"Hàng tên góc trên trái hiện thêm số kiếp: Kiếp thứ nhất, thứ hai…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1605,7 +1605,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    {n:"Khiêu khích",lock:typeof mockOK==="function"&&!mockOK(S,v)/* rank respect, two-way (law 1): she does not openly mock a higher rank either (RV-NEWS-SIEVE-2) */,t:"phận dưới không dám khiêu khích bậc trên",o:100,w:{danh:2,hh:-15},x:`Hoàng hậu ghen +15, oán ngươi ${balSg(BAL.eff.j2.go)}`,go:()=>{ghenUp(v,15,"bị ngươi khiêu khích",S);oanAdd(v,S,BAL.eff.j2.go)}}])}
  if(p.kind==="rival"){const A=topicOpts(v);
   if(!sameHouse(S,v)){/* E-GAIN3c law 3: the hub way says what opening it gets her = the regard the best gift in her chest gives (giftVal, the same number the pick rows show, j25); an empty chest opens nothing → locked with its reason */const gv=(()=>{let m=0;try{for(const e of S.inv||[])if(e&&!e.h){const g=giftRel(Object.assign({k:e.k},IT[e.k]),v);if(g>m)m=g}/* E-GAIN3-LIVE (E-GAIN3c-RV 2): the gift rows' own number (j8 giftRel = giveTo) */}catch(e){}return m})();
-   A.push(Object.assign({n:"Tặng quà",o:100,x:gv>0?`chọn món trong rương · nàng quý ngươi +${gv} (món quý nhất)`:"chọn món trong rương",open:()=>{if(S.inv.some(e=>!e.h))pushDil(mkP("giftpick",{v:v.id}),"Tặng quà")}},S.inv.some(e=>!e.h)?{}:{lock:true,t:"rương trống"}));
+   A.push(Object.assign({n:"Tặng quà",o:100,x:gv>0?`chọn món trong rương · nàng quý ngươi ${affSg(v,S,gv)} (món quý nhất)`:"chọn món trong rương",open:()=>{if(S.inv.some(e=>!e.h))pushDil(mkP("giftpick",{v:v.id}),"Tặng quà")}},S.inv.some(e=>!e.h)?{}:{lock:true,t:"rương trống"}));
    const PK=BAL.talk.provoke;A.push({n:"Khiêu khích",lock:typeof mockOK==="function"&&!mockOK(S,v)/* rank respect, two-way (law 1) */,t:"phận dưới không dám khiêu khích bậc trên",o:100,w:{danh:PK.danh},x:`nàng quý ngươi ${affSg(v,S,-PK.rel)}, oán ngươi +${Math.round(PK.rel*BAL.relOan.hurt)}, ghen +${PK.ghen}`,go:()=>{relAdd(S,v,-PK.rel);ghenUp(v,PK.ghen,"bị ngươi khiêu khích",S)}});
    if(v.pg>=BAL.ag.cx2.vent.pg)A.push({n:"Trút giận",o:100,w:{...BAL.ag.cx2.vent.c},x:"hả cơn ghen; nàng oán",go:()=>{v.pg=0;relAdd(S,v,-BAL.ag.cx2.vent.rel)}});
    A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(BAL.ag.wit.hear+eyes(S)*BAL.ag.wit.mat),x:evSg(BAL.eff.j9.evOverhear),run:()=>overhear(S.place)})}
@@ -4037,10 +4037,14 @@ function aff(x,y){if(x===y)return 0;if(relMS(x)||relMS(y))return msAff(x,y);cons
    mood jmood, onlookers jtrong, stat pace) but the core only RECORDS the change in AFF_DRY.d and writes nothing (pace carry peeked, not moved); side-effect wrappers
    (jemo, jnet, jwhyn, jint, jmood's counter) stand aside. affPreview(x,y,n) = the rise of x's thiện cảm for y that affAdd(x,y,n) would really give now. */
 var AFF_DRY=null;
-function affAdd(x,y,n){if(!x||!y||x===y)return;const D=AFF_DRY;if(relMS(x)||relMS(y)){if(!D)return msAffAdd(x,y,n);/* plain clamped add: run it, read, add the change back */const b=msAff(x,y);msAffAdd(x,y,n);const a=msAff(x,y);if(a!==b)msAffAdd(x,y,b-a);D.d=a-b;return}
- const R=BAL.linkRange.rl;/* ONE CORE (rv coop-flakes) */const pg=(now)=>typeof spG==="function"?spG("rel",x,now||0,n,spRk(y),"rel:"+(y===S?"me":y.id),D?1:0):n;/* stat-pace: a rise of thiện cảm, ceiling at the rank of the one liked (jstatpace) */
- const M=x===S?S.rl:y===S?null:x.rl,now=M?(M[y.id]||0):x.rel,nv=cl(now+pg(now),R[0],R[1]);if(D){D.d=nv-(now||0);return}if(M)M[y.id]=nv;else x.rel=nv}
+function affAdd(x,y,n){if(!x||!y||x===y)return;const D=AFF_DRY;if(relMS(x)||relMS(y)){if(!D||D.live){if(D){const b=msAff(x,y);msAffAdd(x,y,n);const a=msAff(x,y);D.undo.push([null,null,x,null,null,()=>{if(msAff(x,y)!==b)msAffAdd(x,y,b-msAff(x,y))}]);return}return msAffAdd(x,y,n)}/* plain clamped add: run it, read, add the change back */const b=msAff(x,y);msAffAdd(x,y,n);const a=msAff(x,y);if(a!==b)msAffAdd(x,y,b-a);D.d=a-b;return}
+ const R=BAL.linkRange.rl;/* ONE CORE (rv coop-flakes) */const pk=D&&!D.live?1:0,pg=(now)=>typeof spG==="function"?spG("rel",x,now||0,n,spRk(y),"rel:"+(y===S?"me":y.id),pk):n;/* stat-pace: a rise of thiện cảm, ceiling at the rank of the one liked (jstatpace) */
+ const M=x===S?S.rl:y===S?null:x.rl,now=M?(M[y.id]||0):x.rel,sp0=D&&D.live?JSON.stringify(x.spc||null):null,nv=cl(now+pg(now),R[0],R[1]);if(D&&!D.live){D.d=nv-(now||0);return}if(D)D.undo.push([M,y.id,x,now,sp0]);if(M)M[y.id]=nv;else x.rel=nv}
 function affPreview(x,y,n,tr){if(!n||!x||!y||x===y||typeof x!=="object"||typeof y!=="object")return Math.round(n||0);const o=AFF_DRY,D={d:0,trust:tr};AFF_DRY=D;try{affAdd(x,y,n)}catch(e){console.error("affPreview",e)}finally{AFF_DRY=o}return Math.round(D.d)}
+/* several steps on ONE bond (the queen's gift: her liking + the hh step, j8 giveTo): run them for real with the side-effect wrappers standing aside,
+   read the change, put every touched cell (and its pace carry) back — the same number the act gives, steps compounding as they will */
+function affPreviewRun(x,y,fn){const o=AFF_DRY,D={live:1,undo:[]};let b=0,a=0;try{b=aff(x,y)}catch(e){}AFF_DRY=D;try{fn();try{a=aff(x,y)}catch(e){a=b}}catch(e){console.error("affPreviewRun",e);a=b}
+ finally{AFF_DRY=o;for(let i=D.undo.length-1;i>=0;i--){const [M,k,h,old,sp,f]=D.undo[i];if(f){f();continue}if(M)M[k]=old;else h.rel=old;if(sp==="null")delete h.spc;else h.spc=JSON.parse(sp)}}return Math.round(a-b)}
 /* the signed preview word for a card line («thiện cảm +6»), the balSg form of affPreview */
 /* her nết not all known (the honest-range rule, jaudit aaMulRange): a rise shows «+a đến +b» = the same chain with the lowest / highest trust she could have */
 function affSg(x,y,n){const a=affPreview(x,y,n);try{if(n>0&&typeof x==="object"&&x&&x!==S&&x!==y&&typeof aaMulRange==="function"){const r=aaMulRange(x,"trust");if(r[0]!==r[1]){const lo=affPreview(x,y,n,r[0]),hi=affPreview(x,y,n,r[1]);if(lo!==hi)return `${balSg(Math.min(lo,hi))} đến ${balSg(Math.max(lo,hi))}`}}}catch(e){}return balSg(a)}
@@ -29135,12 +29139,12 @@ function twFollowT(v){const L=liveRivals(true).filter(x=>x!==v&&rkOf(x)>rkOf(v)+
   const add=(k,x)=>{const D=TW[k];if(!D||(D.req&&!D.req(S,k==="mediate"?v:v)))return;const c=twCost(k);
    A.push({n:D.n,c:Object.keys(c).length?c:undefined,o:D.o?D.o(S,v):100,x,run:()=>{chatMark(v);return twDo(S,v,k,true)+"."}})};
   const g=G();
-  add("visit",`nàng quý ngươi +${g.visit[0]} · Sức nàng +${g.visit[1]}`);
+  add("visit",`nàng quý ngươi ${affSg(v,S,g.visit[0])} · Sức nàng +${g.visit[1]}`);
   {const x=twFoeOf(S,v);if(x)add("mediate",`nàng bớt oán ${x.name} ${g.mediate}`)}
   add("humil",`nàng oán ngươi +${g.humil[0]} · Danh nàng -${g.humil[1]}`);
   add("test",`thành: ngươi tin nàng hơn +${g.test[0]} · hỏng: ngờ vực ${g.test[1]}`);
   add("drop",`ngươi lạnh với nàng -${g.drop}`);
-  add("follow",`nàng quý ngươi +${g.follow}`);
+  add("follow",`nàng quý ngươi ${affSg(v,S,g.follow)}`);
   add("gossip",`<span class="g">kẻ ngươi ghét bị bàn tán: Danh nàng ta -${g.gossip}</span>`)/* E-GAIN3c: the foe's loss is her gain (explicit green, kit KP12) */;
   add("admon",`Sủng nàng -${g.admon} · hai tuần ngài để ý người khác`);
   add("flaunt",`Danh +${g.flauntDanh} · mọi phi tần ghen +${g.flaunt}`)}catch(e){console.error(e)}return A}})();
@@ -55975,7 +55979,8 @@ function giftEval(e,t){const pre=`tốn: ${BAL.time.cost.give} khắc`;
  const g=giftVal(Object.assign({k:e.k},it),t);
  if(t==="emp")return{ok:true,x:`${pre} · thành: ${sgStat(Math.max(1,Math.round(g/2)))}`,v:g};
  if(t==="th")return{ok:true,x:`${pre} · thành: Thái hậu quý ngươi +${g}`,v:g};
- let x=`${pre} · thành: nàng quý ngươi +${giftRel(Object.assign({k:e.k},it),t)}${t.queen?` · Hoàng hậu với ngươi +${g}`:""}`;
+ const gr0=giftRel(Object.assign({k:e.k},it),t);/* AFF-PREVIEW: the same rise giveTo gives (j8 keepGain: relAdd + for the queen the hh step on the SAME bond → one number) */
+ let x=`${pre} · thành: nàng quý ngươi ${t.queen?balSg(affPreviewRun(t,S,()=>{affAdd(t,S,gr0);if(typeof hhSet==="function")hhSet(S,S.hh+g)})):affSg(t,S,gr0)}`;
  if(e.t){/* previews: giveTo */const sp=typeof oSee==="function"?oSee(t,true):30;x+=` · kèm: nàng phát hiện đồ có vấn đề, nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ, quý ngươi ${balSg(BAL.eff.j8.giveTo)}: ${chanceW(sp)}`/* a side chance (the roll giveTo uses): chanceW, never a ladder word */}
  if(it.sl&&it.rk>rkOf(t))x+=" · kèm: vượt phẩm của nàng";return{ok:true,x,v:g}}
 /* the right-hand item panel */
@@ -90262,19 +90267,19 @@ function p3ChatF(p,v){const [b,k]=p3ChatBox(p,v);return 1/(1+(b[k]||0))}
 function p3ChatMark(p,v){const [b,k]=p3ChatBox(p,v);b[k]=(b[k]||0)+1}
 function p3Who(x){return x===S?"ngươi":x.name}
 const P3T={
- health:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.health*f));return{n:"Hỏi han sức khỏe",o:100,x:`nàng quý ngươi +${n}`,
-  run:()=>{affAdd(v,p,n);p3ChatMark(p,v);return p===S?`${v.name} cảm động. Nàng quý ngươi +${n}.`:`${p.name} hỏi han sức khỏe ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}}},
- praise:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(nv(v,"praise")*f)),o=talkPraiseO(p);return{n:"Khen tài nghệ nàng",o,x:`nàng quý ngươi +${n}`,
-  run:()=>{p3ChatMark(p,v);if(agTry(o)){affAdd(v,p,n);return p===S?`${v.name} tươi cười. Nàng quý ngươi +${n}.`:`${p.name} khen tài nghệ ${p3Who(v)}; ${p3Who(v)} quý ${p.name} +${n}`}
+ health:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.health*f));return{n:"Hỏi han sức khỏe",o:100,x:`nàng quý ngươi ${affSg(v,p,n)}`,
+  run:()=>{const dN=affGot(v,p,()=>affAdd(v,p,n));p3ChatMark(p,v);return p===S?`${v.name} cảm động. Nàng quý ngươi ${balSg(dN)}.`:`${p.name} hỏi han sức khỏe ${p3Who(v)}; ${p3Who(v)} quý ${p.name} ${balSg(dN)}`}}},
+ praise:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(nv(v,"praise")*f)),o=talkPraiseO(p);return{n:"Khen tài nghệ nàng",o,x:`nàng quý ngươi ${affSg(v,p,n)}`,
+  run:()=>{p3ChatMark(p,v);if(agTry(o)){const dN=affGot(v,p,()=>affAdd(v,p,n));return p===S?`${v.name} tươi cười. Nàng quý ngươi ${balSg(dN)}.`:`${p.name} khen tài nghệ ${p3Who(v)}; ${p3Who(v)} quý ${p.name} ${balSg(dN)}`}
    if(agSoft(o)){const t=agSoftTxt(p,p===S?"Khen tài nghệ nàng":"");return p===S?"":t}/* her line is logged once by oddsSoft */const d=affGot(v,p,()=>affAdd(v,p,-T.praiseFail));return p===S?`${v.name} cho là ngươi giả lả. Nàng quý ngươi ${balSg(d)}.`:`${p.name} khen tài nghệ ${p3Who(v)}, bị cho là giả lả`}}},
  gossip:(p,v,third)=>{const T=BAL.talk,G=T.gossip,f=p3ChatF(p,v),n=Math.max(1,Math.round(G.hit*f));return{n:`Bàn tán về ${third.name}`,o:100,inner:1,
-  x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${n}`:`kèm: nàng quý ngươi ${affSg(v,S,-G.miss)} · nàng có thể mách lại`,
-  run:()=>{p3ChatMark(p,v);if(aff(v,third)<0){affAdd(v,p,n);oanAdd(v,third,G.oan);return p===S?`Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} to nhỏ chuyện ${p3Who(third)}`}
+  x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi ${affSg(v,p,n)}`:`kèm: nàng quý ngươi ${affSg(v,S,-G.miss)} · nàng có thể mách lại`,
+  run:()=>{p3ChatMark(p,v);if(aff(v,third)<0){const dN=affGot(v,p,()=>affAdd(v,p,n));oanAdd(v,third,G.oan);return p===S?`Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi ${balSg(dN)}.`:`${p.name} và ${p3Who(v)} to nhỏ chuyện ${p3Who(third)}`}
    const dM=affGot(v,p,()=>affAdd(v,p,-G.miss));const tl=npcTell(p,{to:third,from:[v]});/* npc-purpose G2a: she carries it only from a grudge against the gossip or a tie to the one talked of */if(tl&&roll(agCap(G.tell))){oanAdd(third,p,G.tellOan);return p===S?`${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +${G.tellOan}.`:`${p3Who(v)} đem lời ${p.name} bàn tán kể lại với ${p3Who(third)}`}
    return p===S?`${v.name} lảng sang chuyện khác. Nàng quý ngươi ${balSg(dM)}.`:`${p.name} bàn tán về ${p3Who(third)}, ${p3Who(v)} lảng sang chuyện khác`}}},
- secret:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.secret*f));return{n:"Chia sẻ bí mật",o:100,inner:1,x:`nàng quý ngươi +${n}${v.malice>BAL.talk.secretMal?" · nàng có thể nắm thóp ngươi":""}`,
-  run:()=>{p3ChatMark(p,v);affAdd(v,p,n);if(v.malice>BAL.talk.secretMal&&npcWhy("p3Grab",{v,p},()=>roll(agCap(BAL.talk.secretGrab)))){evA(v,p,BAL.ag.ev.one);return p===S?`${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${n}.`:`${p.name} chia sẻ bí mật với ${p3Who(v)}; ${p3Who(v)} ghi nhớ từng lời`}
-   return p===S?`${v.name} cũng kể chuyện riêng. Nàng quý ngươi +${n}.`:`${p.name} và ${p3Who(v)} kể chuyện riêng cho nhau`}}}};
+ secret:(p,v)=>{const T=BAL.talk,f=p3ChatF(p,v),n=Math.max(1,Math.round(T.secret*f));return{n:"Chia sẻ bí mật",o:100,inner:1,x:`nàng quý ngươi ${affSg(v,p,n)}${v.malice>BAL.talk.secretMal?" · nàng có thể nắm thóp ngươi":""}`,
+  run:()=>{p3ChatMark(p,v);const dN=affGot(v,p,()=>affAdd(v,p,n));if(v.malice>BAL.talk.secretMal&&npcWhy("p3Grab",{v,p},()=>roll(agCap(BAL.talk.secretGrab)))){evA(v,p,BAL.ag.ev.one);return p===S?`${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi ${balSg(dN)}.`:`${p.name} chia sẻ bí mật với ${p3Who(v)}; ${p3Who(v)} ghi nhớ từng lời`}
+   return p===S?`${v.name} cũng kể chuyện riêng. Nàng quý ngươi ${balSg(dN)}.`:`${p.name} và ${p3Who(v)} kể chuyện riêng cho nhau`}}}};
 function p3Third(p,v){return liveRivals(true).filter(x=>x!==v&&x!==p).sort((a,b)=>aff(v,a)-aff(v,b))[0]||null}
 Object.assign(AGC3BTN,{talkHealth:"Hỏi han sức khỏe",talkPraise:"Khen tài nghệ nàng",talkGossip:"Bàn tán về",talkSecret:"Chia sẻ bí mật",invoke:"Nhắc lại ân xưa"});
 Object.assign(AGC3ACT,{talkHealth:"sang hỏi han sức khỏe",talkPraise:"sang khen tài nghệ",talkGossip:"ghé tai bàn tán",talkSecret:"sang chia sẻ chuyện riêng",invoke:"nhắc lại ân xưa"});
@@ -90737,7 +90742,7 @@ function rcvInvAt(h,g){try{const k=h===S?"home":palaceOf(h);if(g!==S){S.where[g.
 RCVK.invite={t:"Lời mời sang chơi",act:"mời sang cung chơi",kind:"help",ok:(p,t)=>!!p&&!!t&&t.alive!==false&&!t.out&&!t.confined,
  line:p=>`<p>${p.name} sai người sang mời: “Nương nương nhà ta pha trà chờ, mời người sang cung chơi buổi này.”</p>`,
  opts:(p,t)=>{const me=t===S,g=BAL.tw.g.call,gh=Math.round(g*BAL.rcv.help.half);return[
-  rcvYesO(p,t,0,{n:"Nhận lời, sang chơi",g:`thiện cảm ${balSg(g)}`,go:()=>{relAdd(p,t,g);rcvInvAt(p,t);t.__invC=1;return `${me?"Ngươi":t.name} nhận lời, sang cung ${NM(p)} chơi`}}),
+  rcvYesO(p,t,0,{n:"Nhận lời, sang chơi",g:`thiện cảm ${affSg(p,t,g)}`,go:()=>{relAdd(p,t,g);rcvInvAt(p,t);t.__invC=1;return `${me?"Ngươi":t.name} nhận lời, sang cung ${NM(p)} chơi`}}),
   rcvYesO(p,t,1,{n:"Ghé qua cho có",g:`thiện cảm ${affSg(p,t,gh)}`,go:()=>{relAdd(p,t,gh);rcvInvAt(p,t);t.__invC=1;return `${me?"Ngươi":t.name} ghé qua cung ${NM(p)} cho có`}}),
   rcvNoO(p,t,{g:`giữ buổi cho mình, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},r:`${me?"Ngươi":t.name} cáo bận, không sang cung ${NM(p)}`}),
   rcvSabO(p,t,{g:"nghe được chuyện của chủ nhà",r:tq=>`${me?"Ngươi":t.name} nhận lời rồi đem chuyện cung ${NM(p)} đi kể${tq?" với "+rcvQn(tq):""}`,go:()=>{rcvInvAt(p,t);t.__invC=1}})]}};
@@ -94499,7 +94504,7 @@ function shelfSpyTxt(a,t,by){const r=shelfSee(a,t,by);if(!r||a!==S)return"";retu
  if(typeof AGSOC==="object"){AGSOC.call=["call","social","ally",g=>({ally:g.call})];AGACTW.call="ghé chơi"}}catch(e){console.error("shelf call",e)}})();
 /* two-way (OD:L1386): the deed NPCs do to her is also hers — "Ghé chơi" in her talk list (jtwoway topicOpts), same deed, same gain, both see the rooms */
 (function(){if(typeof topicOpts!=="function")return;const t0=topicOpts;topicOpts=function(v){const A=t0.apply(this,arguments);try{const D=TW.call;
- if(S&&v&&D&&!(typeof sameHouse==="function"&&sameHouse(S,v))&&D.req(S,v)&&!A.some(a=>a.n===D.n))A.push({n:D.n,o:100,x:`nàng quý ngươi +${BAL.tw.g.call} · hai bên thấy phòng ốc của nhau`,run:()=>{try{chatMark(v)}catch(e){}return twDo(S,v,"call",true)+"."}})}catch(e){console.error("shelf talk",e)}return A};window.topicOpts=topicOpts})();
+ if(S&&v&&D&&!(typeof sameHouse==="function"&&sameHouse(S,v))&&D.req(S,v)&&!A.some(a=>a.n===D.n))A.push({n:D.n,o:100,x:`nàng quý ngươi ${affSg(v,S,BAL.tw.g.call)} · hai bên thấy phòng ốc của nhau`,run:()=>{try{chatMark(v)}catch(e){}return twDo(S,v,"call",true)+"."}})}catch(e){console.error("shelf talk",e)}return A};window.topicOpts=topicOpts})();
 /* the visit happens AT the target's palace (her room / theirs), not wherever she is that khắc */
 (function(){if(typeof agOpts!=="function")return;const o0=agOpts;agOpts=function(){const O=o0.apply(this,arguments);try{for(const o of O)if(o.k==="call")o.at=(kh,vv,tt)=>tt?palaceOf(tt):null}catch(e){}return O}})();
 /* daily life: a consort who keeps her schedule this buổi may drop in on someone (her room weighs more: the player's palace is where life is seen)
@@ -103193,7 +103198,7 @@ function spG(k,h,now,n,rk,ck,peek){const B=typeof BAL==="object"&&BAL.stp;if(!B|
  const bd=B.band[k];if(bd&&n>bd[1])n=Math.min(bd[2],bd[1]+(n-bd[1])*B.over);
  const ce=spCeil(rk),top=spTop(k,rk),c0=Math.max(0,+now||0);if(c0>=top)return 0;
  let g=n*Math.max(B.dm.min,1-Math.pow(c0/ce,B.dm.pow));
- const cc=h&&typeof h==="object"?(h.spc||(h.spc={})):null,key=ck||k;
+ const cc=h&&typeof h==="object"?(h.spc||(peek?null:(h.spc={}))):null,key=ck||k;/* a peek (preview) creates nothing */
  if(cc){g+=+cc[key]||0;const gi=Math.round(g);if(!peek)cc[key]=Math.round((g-gi)*1000)/1000;g=gi}else g=Math.round(g);
  return Math.max(0,Math.min(g,Math.ceil(top-c0)))}
 /* a raw write of one stat of a person (x.sung = …, v.rel += …) that RISES goes through the same rule; returns the new value (clamped as statSet) */
@@ -107172,7 +107177,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="827bc74f5c47";window.CTM_BUILD=BUILD;
+const BUILD="972f73f8e133";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

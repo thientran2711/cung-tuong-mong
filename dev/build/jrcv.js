@@ -251,7 +251,7 @@ function rcvInvAt(h,g){try{const k=h===S?"home":palaceOf(h);if(g!==S){S.where[g.
 RCVK.invite={t:"Lời mời sang chơi",act:"mời sang cung chơi",kind:"help",ok:(p,t)=>!!p&&!!t&&t.alive!==false&&!t.out&&!t.confined,
  line:p=>`<p>${p.name} sai người sang mời: “Nương nương nhà ta pha trà chờ, mời người sang cung chơi buổi này.”</p>`,
  opts:(p,t)=>{const me=t===S,g=BAL.tw.g.call,gh=Math.round(g*BAL.rcv.help.half);return[
-  rcvYesO(p,t,0,{n:"Nhận lời, sang chơi",g:`thiện cảm ${balSg(g)}`,go:()=>{relAdd(p,t,g);rcvInvAt(p,t);t.__invC=1;return `${me?"Ngươi":t.name} nhận lời, sang cung ${NM(p)} chơi`}}),
+  rcvYesO(p,t,0,{n:"Nhận lời, sang chơi",g:`thiện cảm ${affSg(p,t,g)}`,go:()=>{relAdd(p,t,g);rcvInvAt(p,t);t.__invC=1;return `${me?"Ngươi":t.name} nhận lời, sang cung ${NM(p)} chơi`}}),
   rcvYesO(p,t,1,{n:"Ghé qua cho có",g:`thiện cảm ${affSg(p,t,gh)}`,go:()=>{relAdd(p,t,gh);rcvInvAt(p,t);t.__invC=1;return `${me?"Ngươi":t.name} ghé qua cung ${NM(p)} cho có`}}),
   rcvNoO(p,t,{g:`giữ buổi cho mình, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},r:`${me?"Ngươi":t.name} cáo bận, không sang cung ${NM(p)}`}),
   rcvSabO(p,t,{g:"nghe được chuyện của chủ nhà",r:tq=>`${me?"Ngươi":t.name} nhận lời rồi đem chuyện cung ${NM(p)} đi kể${tq?" với "+rcvQn(tq):""}`,go:()=>{rcvInvAt(p,t);t.__invC=1}})]}};
