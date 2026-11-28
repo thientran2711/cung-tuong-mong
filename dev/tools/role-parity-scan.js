@@ -336,7 +336,15 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
    n.preg=0;n.hidden=false;const b=JSON.parse(JSON.stringify(Object.assign({},n,{staff:null,maid:null})));b.id=++rid;b.staff=n.staff;b.maid=n.maid;for(const k of ["fromMaid","fromMaidOf","wasMaid"])delete b[k];if(b.ag)delete b.ag.o;rivals.push(b);
    for(const t of liveRivals(true))if(t!==n&&t!==b){try{(t.rl=t.rl||{})[b.id]=(t.rl||{})[n.id];if(t.aff)t.aff[b.id]=t.aff[n.id];/* allot-pace: oán toward an NPC lives in t.ro[id] (j9 oan; t.oan is her NUMBER toward the player) — the old copy wrote t.oan[id], a no-op, so the clone had no foes */(t.ro=t.ro||{})[b.id]=(t.ro||{})[n.id]}catch(e){}}
    try{if(S.rl)S.rl[b.id]=S.rl[n.id];if(S.ro)S.ro[b.id]=S.ro[n.id]}catch(e){}
-   npcOpts("up",n,["consort"]);npcOpts("t1born",b,["consort"]);rivals.splice(rivals.indexOf(b),1)}catch(e){E("upNpc",e)}}
+   /* allot-pace-r3 (law 11, same family as the t.ro copy above): EVERY per-person store a holder keys by the risen maid's id is copied to the clone, not a hand list —
+      joanpace's daily cap holder.opz[id] was missing (amRise had already spent part of her ex-mistress's oán day toward the risen maid, the clone got a fresh day →
+      more oán → mendDeep → PROMO onlyBorn «cx:mendGo»). Generic: any own plain-object field with key n.id and none for b.id */
+   for(const h of [S].concat(liveRivals(true)))if(h&&h!==n&&h!==b)for(const P of Object.keys(h)){const M=h[P];try{if(M&&typeof M==="object"&&!Array.isArray(M)&&Object.prototype.hasOwnProperty.call(M,String(n.id))&&!Object.prototype.hasOwnProperty.call(M,String(b.id)))M[b.id]=JSON.parse(JSON.stringify(M[n.id]))}catch(e){}}
+   /* allot-pace-r3: both doers are probed from the SAME world — the VAR runs (social oanAdd/affAdd/relAdd, liked) are not undone by snapW, so the first doer's runs
+      raised the twin's regard of her (affAdd(n,b)) and the clone, probed second, found the risen maid as her go-between (PROMO onlyBorn «cx:mendGo», order only).
+      Every person's relation stores are put back before the second doer */
+   const RK=["rl","ro","aff","opz","rel","oan"],RW=[S].concat(rivals).map(h=>[h,JSON.stringify(RK.map(k=>h[k]===undefined?null:h[k]))]);
+   npcOpts("up",n,["consort"]);for(const [h,j] of RW){const V=JSON.parse(j);RK.forEach((k,i)=>{if(V[i]===null)delete h[k];else h[k]=V[i]})}npcOpts("t1born",b,["consort"]);rivals.splice(rivals.indexOf(b),1)}catch(e){E("upNpc",e)}}
  const LT={};for(const k in TW)LT[k]=[TW[k].n];for(const k in ACT)if(ACT[k]&&ACT[k].n)LT["harm:"+k]=[ACT[k].n];
  for(const k in (window.AGC2BTN||{}))LT["cx2:"+k]=[AGC2BTN[k]];for(const k in (window.AGC3BTN||{}))LT["cx3:"+k]=[AGC3BTN[k]];for(const k in (window.AGC4BTN||{}))LT["cx4:"+k]=[AGC4BTN[k]];
  res.LT=LT;Math.random=R0;return res}
