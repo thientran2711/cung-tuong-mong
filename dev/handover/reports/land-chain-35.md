@@ -74,3 +74,22 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 10:24Z RV-185 LAND ui11 873b2165 (jemoact hunk byte-checked, driven live).
 - 10:30Z RV-163M LAND READY dayq-noturn-rvm 8a30664e (FF on aecbc267, 2 parents; 0 del; assets LIVE; MODGATE PASS). Killed ui11 qc (was in core gates; q-softlock 4 known) → dayq quickcheck ALONE (dq3.sh), then ui11 qc again.
 - 10:42Z RV-185 LAND dress-fix-df 8c6cbbe8 (re-merged on aecbc267) → ui12 5f8cd027 = ui11 + 8c6cbbe8 (built-only; MODGATE PASS). Plan: dayq 8a30664e lands first → merge ui12 onto new LIVE → one quickcheck → READY.
+
+## LC35 HANDOVER (to LC36; rolled ~10:57Z 28/11, ctx 51 % of 1M (START ~4 % → ceiling hit), depth 4)
+### STATE
+LIVE aecbc267 (lr-rules-r3) · ROLLBACK c03d6ee7. MAIN = MAIN CHÍNH 189 session_01Rc5AsKLcnai97YwjFT5YMc (verify new mains by get_session parent_session_id). Rules lane = LR-RULES-2 (MAIN opens; handover dev/handover/reports/land-rules.md). UI reviewer: RV-185 rolled → its successor (ask MAIN). BIG: RV-186 session_01Rc5AsKajbM5YZjbexkmFTX; RV-163M session_01Rc5AsL9GSJ53zLd3RqLA3R. Kit: KK71 session_01Rc5AsMZaCRYmkUNXx2fZut.
+### IN FLIGHT
+1. **dayq-noturn-rvm 8a30664e** (RV-163M LAND READY, play-stopper, lands ALONE first): FF on LIVE aecbc267, 2 parents, 0 del, assets = LIVE, MODGATE 499⊇499. My quickcheck ALONE running in worktree /home/user/wt/lc35-dq (scratch dq3/qc.log + dq3/summary.txt; dq3.sh then starts a ui11 qc which stopu11.sh kills). If quickcheck PASS (q-softlock 4 iPad rows = known LIVE flake) → send «READY TO PUSH 8a30664e» to MAIN 189. If the run was lost (container restarts happen ~hourly), rerun: cd worktree at 8a30664e; FETCH main first; `bash dev/tools/quickcheck.sh`.
+2. **UI unit = review/lc35-ui12 5f8cd027** = LIVE aecbc267 + ui8 a50895cb (ringdup 9c7ea0de per MAIN 188 ruling + giftback head d8fcdb8c + F f-word36 8843322a; merge 873b2165 RV-185 LAND, jemoact hunk: LIVE khoe ghenN + ui8 tiec real rise) + dress-fix-df 8c6cbbe8 (RV-185 LAND; built-only conflicts). Owed tests already green on ui11: kri-one-row 4, kit-gift-out 8/0, oldsave-r1 16/16. After dayq is pushed: merge ui12 onto new LIVE (expect built-only), MODGATE, quickcheck ALONE (fetch main first; .tmp/old.html = LIVE index.html for oldsave-r1) → READY.
+3. **pvquy-post** (aff-preview + MAIN 189 C/D): PVQUY-POST-3 session_01Rc5AsJyaVisRE1nRk3Y6vS re-merging onto aecbc267 → RV-186 delta → then stack on UI unit. Do NOT hand-resolve (19 files).
+4. KK70/KK71 kit shas 452affd1 K-KHAC-COST, 065a410c K-WEAR-ROW, K-RING-WHY = UI lane when PASSED. kk70-handdupmat eaad2ba1 = RULES lane (with tmk-warn), not UI.
+5. Follow-ups routed (not gates): F bac-progress.js selectors (MAIN wrote F STATUS); s3e-display-fix harness vs bigpage.js under proxy (KK); time-spill law-11 family (~145 tests read #mb .opts without .kpk-b) → KK; a96564ad's 82 pvQuy sites pre/post-act family → pvquy-post worker.
+### TOOLS (dev/handover/reports/lc35-tools/)
+hpush.sh (log push), modgate.sh <LIVE> <sha> (assemble modules ⊇ LIVE — pass SHAS, not HEAD), build2.sh = lc34-tools/build2.sh (ASSETS_REF=<sha with right assets.json>), ui.sh/u3.sh/seq.sh examples.
+### LESSONS
+- FETCH origin/main after every push before quickcheck (it compares vs local origin/main).
+- quickcheck spawns `git fetch --deepen=300` under fetch.lock — kill it if it blocks your fetch.
+- Container restarted twice (08:15Z, 09:33Z): all setsid jobs die; rerun.
+- Never run two browser suites at once (q-softlock/time-spill/next-dead go flaky).
+- When LIVE moves, merge-tree the whole stack against it first; resolve only mechanical hunks (adjacent lines, one side = base); route real ones.
+- `git merge --no-commit` then `git checkout --ours index.html sw.js` + build2.sh; check every + line of each side present.
