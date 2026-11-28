@@ -210,5 +210,5 @@ function awPre(k,line){if(!S)return;S.accw=S.accw||{};const id="pre:"+k;const wa
  try{if(typeof kitNotice==="function")kitNotice({id:"aw:"+k,line,text:line,tone:"red",sticky:true,again:!was})}catch(e){}try{if(!was)log(`<span class="r">${line}</span>`)}catch(e){}}
 function awPreHas(k){return !!(S&&S.accw&&S.accw["pre:"+k])}
 function awPreDel(k){if(S&&S.accw)delete S.accw["pre:"+k];try{if(typeof kitNoticeDrop==="function")kitNoticeDrop("aw:"+k)}catch(e){}}
-window.AWK=AWK;window.awRec=awRec;window.awOk=awOk;window.awPre=awPre;window.awPreHas=awPreHas;window.awPreDel=awPreDel;window.awCore=CORE;window.awFire=awFire;window.awCtxNow=awCtx;window.awInW=f=>awInCtx("w",f,null,[]);window.awInHer=f=>awInCtx("her",f,null,[]);
+window.awWarnedNow=()=>!!(AWRUN||AWOKN)/* inside a held record firing / its Nhẹ / a prepared act on its day / an already-warned road (accw-fuzz) */;window.AWK=AWK;window.awRec=awRec;window.awOk=awOk;window.awPre=awPre;window.awPreHas=awPreHas;window.awPreDel=awPreDel;window.awCore=CORE;window.awFire=awFire;window.awCtxNow=awCtx;window.awInW=f=>awInCtx("w",f,null,[]);window.awInHer=f=>awInCtx("her",f,null,[]);
 })();
