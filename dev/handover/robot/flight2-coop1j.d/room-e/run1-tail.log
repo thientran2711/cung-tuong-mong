@@ -1,0 +1,37 @@
+BUILD PIN: life coop-rt-flight2-coop1j-e-guest-k1 on 5fb13d60+ 8af7b3429f38 served at http://127.0.0.1:8813/
+BUILD PIN: life coop-rt-flight2-coop1j-e-host-k1 on 5fb13d60+ 8af7b3429f38 served at http://127.0.0.1:8813/
+GAME BUILD {"s":"5fb13d60+","b":"8af7b3429f38","t":"2026-11-27T21:15Z"}
+GAME BUILD {"s":"5fb13d60+","b":"8af7b3429f38","t":"2026-11-27T21:15Z"}
+ROOM CODE E8EH
+BOARD dan 13 moves 5/10 raw 6.50 (22 s, area 0, drag 0, hold 0, btn 0, sens)
+BUG stuck no-clock loop: 150 taps without a clock step on page «Khuê phòng · Không gặp ai.»
+BUG game softlock: «Chờ hảo hữu…» disabled with no dialog on screen (dialog queue Q=0: )
+BUG coop friend seat reloaded to rejoin the room → this seat rejoins too (reload → Cùng hảo hữu → Trở lại phòng)
+BUG game two-tap hand «Trò chuyện với Trưởng Tôn Dao CầmTốn1 kh»: tapped for real, nothing lifted (2 s), S and the frame unchanged
+BOARD tho 10 moves 7/10 raw 6.60 (25 s, area 0, drag 10, hold 0, btn 0, sens)
+BOARD dan 15 moves 4/10 raw 7.30 (21 s, area 0, drag 0, hold 0, btn 0, sens)
+BOARD doi 11 moves 10/10 raw 10.00 (11 s, area 0, drag 11, hold 0, btn 0, sens)
+BOARD dan 17 moves 7/10 raw 8.30 (21 s, area 0, drag 0, hold 0, btn 0, sens)
+CP buổi 50 year 1 save 0 chars
+CP buổi 50 year 1 save 0 chars
+BUG SAVE REWIND: reload went back from b85 (clock 1.7.2.0) to the stored b86 (clock 1.7.0.0) (-1 buổi lost)
+CP buổi 100 year 1 save 0 chars
+CP buổi 100 year 1 save 0 chars
+BOARD td_cong 65 moves 9/10 raw 9.42 (39 s, area 0, drag 0, hold 0, btn 0, sens)
+BOARD tho 10 moves 8/10 raw 7.89 (21 s, area 0, drag 10, hold 0, btn 0, sens)
+CP buổi 150 year 2 save 0 chars
+CP buổi 150 year 2 save 0 chars
+LIFE DONE coop-rt-flight2-coop1j-e-host-k1 Bỏ trốn age 19 · buổi 193 · taps 1588 · dead buttons 0 · stuck 0 · bugs 2
+SEAT LIFE DONE host k1 Bỏ trốn
+REBIRTH host tap «Tiếp theo»
+REBIRTH host tap «Chuyển kiếp»
+BUILD PIN: life coop-rt-flight2-coop1j-e-host-k2 already on the pinned http://127.0.0.1:8813/ (noBoot: the page is kept — a co-op in-room «Chuyển kiếp» is never reloaded away)
+GAME BUILD {"s":"5fb13d60+","b":"8af7b3429f38","t":"2026-11-27T21:15Z"}
+BOARD kim 16 moves 7/10 raw 8.83 (17 s, area 0, drag 13, hold 0, btn 3, sens)
+CP buổi 200 year 2 save 0 chars
+SEAT LIFE DONE host k2 HARNESS
+SEAT LIFE DONE guest k1 HARNESS
+browserContext.close: Target page, context or browser has been closed
+    at async /home/user/wt/coop1j-r22/dev/test/robot-rt-coop.js:106:34 {
+  log: []
+}

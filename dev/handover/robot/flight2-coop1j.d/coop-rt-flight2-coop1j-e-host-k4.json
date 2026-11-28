@@ -1,0 +1,3573 @@
+{
+ "job": {
+  "id": "coop-rt-flight2-coop1j-e-host-k4",
+  "origin": null,
+  "road": null,
+  "pick": null,
+  "bot": "sens",
+  "seed": 71451,
+  "dev": "fold",
+  "url": "http://127.0.0.1:8813/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "5aff9dbb",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 1,
+  "unstick": [
+   {
+    "at": 74,
+    "lvl": 2,
+    "layer": ".kscn",
+    "title": ""
+   },
+   {
+    "at": 76,
+    "lvl": 2,
+    "layer": ".kscn",
+    "title": ""
+   },
+   {
+    "at": 78,
+    "lvl": 2,
+    "layer": ".kscn",
+    "title": ""
+   },
+   {
+    "at": 79,
+    "lvl": 3,
+    "layer": ".kscn",
+    "title": ""
+   },
+   {
+    "at": 429,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 439,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 450,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 461,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 472,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 483,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 493,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 504,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 515,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 526,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 536,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 547,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 558,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 569,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 579,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 590,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 601,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 612,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 622,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 633,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 644,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 655,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 665,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 676,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 687,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 698,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 709,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 719,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 730,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 741,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 752,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 762,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 773,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 784,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 794,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 805,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 816,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 827,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 837,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 848,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 859,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 870,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 880,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 891,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 902,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 913,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 924,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 934,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 945,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 956,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 967,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 977,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 988,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 999,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1010,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1021,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1031,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1042,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1053,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1064,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1074,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1085,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1096,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1107,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1117,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1128,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1139,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1150,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1160,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1171,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1182,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1193,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1203,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1214,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1225,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1236,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1246,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1257,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1268,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1279,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1290,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1301,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1311,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1320,
+    "lvl": 3,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1350,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1364,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1377,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1390,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1403,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1415,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1428,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1440,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1452,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1466,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1479,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1491,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1504,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1517,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1530,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1542,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1555,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1569,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1582,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1595,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1607,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1619,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1633,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1646,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1659,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1672,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1684,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1697,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1710,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1723,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1736,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1748,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1761,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1774,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1787,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1800,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1813,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1825,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1838,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1850,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1863,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1876,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1889,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1901,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1913,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1927,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1940,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1952,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1965,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1977,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 1991,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2004,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2017,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2030,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2043,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2055,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2068,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2080,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2093,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2105,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2117,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2130,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2143,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2155,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2167,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   },
+   {
+    "at": 2180,
+    "lvl": 1,
+    "layer": "#coopfz",
+    "title": ""
+   }
+  ],
+  "slice": null,
+  "mgBackN": 2,
+  "mgBackQuitN": 0,
+  "builds": [
+   {
+    "s": "5fb13d60+",
+    "b": "8af7b3429f38",
+    "where": "start"
+   }
+  ],
+  "build0": {
+   "s": "5fb13d60+",
+   "b": "8af7b3429f38",
+   "t": "2026-11-27T21:15Z",
+   "at": "2026-11-28T08:16:58.659Z"
+  },
+  "pinUrl": "http://127.0.0.1:8813/",
+  "build": {
+   "s": "5fb13d60+",
+   "b": "8af7b3429f38",
+   "t": "2026-11-27T21:15Z"
+  },
+  "ident": {
+   "name": "Chu Yên La",
+   "org": "Con gái Tể tướng",
+   "born": -9,
+   "at": 0
+  },
+  "twoTap": {
+   "hand": 16,
+   "plaque": 0,
+   "chosen": 16,
+   "liftOnly": 0,
+   "chipFail": 0,
+   "reLaid": 1
+  },
+  "reLaidLog": [
+   "0 · .dlg «Thân phận kiếp này» · Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở "
+  ],
+  "areaTaps": 103,
+  "skipLayerTaps": 46,
+  "infoTaps": 15,
+  "kresTaps": 11,
+  "bareCovered": 132,
+  "bareCoveredBy": {
+   "not on the layer scanned": 5,
+   "div.kscn-veil over section#panel.panel": 88,
+   "span.kdw.on over section#panel.panel": 2,
+   "div.kph over section#panel.panel": 14,
+   "div.kdv-line over section#panel.panel": 1,
+   "top changed span.kdw.on → div.kscn-veil": 1,
+   "span.kdw.on over div#rtoast.rtoast.karesult.sure": 1,
+   "div.kscn-col over section#panel.panel": 3,
+   "top changed div.kph → div.kscn-veil": 1,
+   "top changed div#kxcatch → header.hud.has-kseal": 2,
+   "top changed header.hud.has-kseal → div#kxcatch": 1,
+   "div.kscn-veil over button.tok.fig.bob": 2,
+   "div.kscn-veil over img#mefig.j59sz": 4,
+   "div.kscn-veil over img#mefig.j59sz.kfxon": 5,
+   "div.kph over div#rtoast.rtoast.karesult.ok": 1,
+   "top changed div#klife.modal.kpscene.kload → div#coopfz.modal.kpscene": 1
+  },
+  "noExit": [
+   {
+    "k": "nx|.kscn|",
+    "at": 71,
+    "buoi": 1,
+    "screen": ".kscn «»",
+    "selector": "div.kscn",
+    "why": "no button at all for 31 s (taps on the scene / backdrop did not close it)",
+    "shot": "/home/user/wt/out-coop1j-e/shots-coop-rt-flight2-coop1j-e-host-k4/noexit-1795853889641.png",
+    "buttons": [],
+    "trace": [
+     [
+      32,
+      ".dlg «Đông sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay › ✓»"
+     ],
+     [
+      33,
+      "AREA 378,538"
+     ],
+     [
+      33,
+      "SKIP TAP .kscn «» tap"
+     ],
+     [
+      34,
+      "AREA 378,538"
+     ],
+     [
+      34,
+      "SKIP TAP .kscn «» tap"
+     ],
+     [
+      39,
+      "GONE Ta nói: «Phấn chưa mở, sao ẩm được? Xin tỷ đền hộp"
+     ],
+     [
+      40,
+      "SKIP TAP .kscn «» no free point"
+     ],
+     [
+      43,
+      "AREA 619,634"
+     ],
+     [
+      44,
+      "AREA 386,723"
+     ],
+     [
+      44,
+      "AREA 281,426"
+     ],
+     [
+      46,
+      "AREA 419,401"
+     ],
+     [
+      47,
+      "AREA 614,411"
+     ],
+     [
+      48,
+      "AREA 434,366"
+     ],
+     [
+      50,
+      "AREA 241,461"
+     ],
+     [
+      58,
+      "AREA 365,340"
+     ],
+     [
+      63,
+      "AREA 491,492"
+     ],
+     [
+      66,
+      "AREA 182,581"
+     ],
+     [
+      67,
+      "AREA 528,542"
+     ],
+     [
+      68,
+      "AREA 287,785"
+     ],
+     [
+      71,
+      "AREA 391,433"
+     ]
+    ],
+    "topHtml": "<div class=\"kscn\" style=\"left: 4px; right: 4px; top: 161px; height: 753px;\"><div class=\"kscn-bg\" style=\"background-image:url('https://ctm-img.victoria-tntt.workers.dev/img/ph-event-light.webp')\"></div><div class=\"kscn-veil\"></div><img class=\"kscn-fig\" crossorigin=\"anonymous\" alt=\"\" src=\"https://ctm-img.victoria-tntt.workers.dev/img/fig-consort-c23-t1-a18.webp\" style=\"height: 602px; width: 241.469px; top: 151px; left: 80.9556px; z-index: 3;\" data-kld=\"1\" srcset=\"https://ctm-img.victoria-tntt.workers.dev/img/fig-consort-c23-t1-a18.webp 361w, https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-consort-c23-t1-a18.webp 722w\" data-kfhd=\"fig-consort-c23-t1-a18.webp\" sizes=\"241px\"></div>",
+    "mid": "div.kscn-veil < div.kscn"
+   }
+  ],
+  "noExitFast": 16,
+  "bareBlocked": 2,
+  "bareBlockedWhy": [
+   {
+    "at": 80,
+    "buoi": 1,
+    "screen": ".kscn «»",
+    "x": 8,
+    "y": 8,
+    "ev": "touchstart",
+    "hit": "button#menu.menu",
+    "tgt": "button#menu.menu",
+    "dt": 95,
+    "top0": "header.hud.has-kseal"
+   }
+  ],
+  "backdropTaps": 2,
+  "consoleErrN": 6,
+  "mgReady": 3,
+  "dlgClose": 2,
+  "mgQuickSkipped": 2,
+  "mgMiss": 10,
+  "boards": [
+   {
+    "at": 165,
+    "buoi": 2,
+    "kind": "dan",
+    "layer": "#kg82",
+    "moves": 17,
+    "area": 0,
+    "drags": 0,
+    "holds": 0,
+    "btns": 0,
+    "s": 21,
+    "res": "8/10 raw 8.50",
+    "raw": 8.5
+   },
+   {
+    "at": 310,
+    "buoi": 7,
+    "kind": "mua",
+    "layer": "#kg82",
+    "moves": 13,
+    "area": 0,
+    "drags": 0,
+    "holds": 0,
+    "btns": 0,
+    "s": 39,
+    "res": "1/10 raw 3.17",
+    "raw": 3.1714285714285717
+   }
+  ],
+  "boardN": 2,
+  "mgPeekTaps": 30,
+  "boardTaps": 30,
+  "mgBackWhy": [
+   {
+    "at": 165,
+    "buoi": 2,
+    "ph": "result",
+    "res": true,
+    "long": false,
+    "btns": [
+     "Quay lại"
+    ]
+   },
+   {
+    "at": 312,
+    "buoi": 7,
+    "ph": "result",
+    "res": true,
+    "long": false,
+    "btns": [
+     "Quay lại"
+    ]
+   }
+  ],
+  "saveRewind": [
+   {
+    "at": 224,
+    "buoi": 4,
+    "from": 3,
+    "fromClk": "9.105.2.0",
+    "to": 2,
+    "toClk": "9.105.0.0",
+    "lost": 1
+   },
+   {
+    "at": 1327,
+    "buoi": 9,
+    "from": 8,
+    "fromClk": "9.105.1.0",
+    "to": 2,
+    "toClk": "9.105.0.0",
+    "lost": 6
+   }
+  ],
+  "nextNoTurn": 1
+ },
+ "life": {
+  "id": "HARNESS",
+  "type": "harness"
+ },
+ "exitPick": null,
+ "bugs": [
+  {
+   "k": "harness|NO-EXIT DIALOG .kscn «» (div.kscn): no button at all for 31 s (taps on the scene / backdrop did not close it) → later visits unstuck at once by taps",
+   "type": "harness",
+   "msg": "NO-EXIT DIALOG .kscn «» (div.kscn): no button at all for 31 s (taps on the scene / backdrop did not close it) → later visits unstuck at once by taps",
+   "n": 1,
+   "at": 71,
+   "shot": "/home/user/wt/out-coop1j-e/shots-coop-rt-flight2-coop1j-e-host-k4/noexit-1795853889641.png",
+   "selector": "div.kscn",
+   "buttons": [],
+   "S": {
+    "dead": false,
+    "y": 9,
+    "t": 104,
+    "w": 2,
+    "b": 3,
+    "age": 18,
+    "rank": 2,
+    "name": "Chu Yên La",
+    "org": "Con gái Tể tướng",
+    "kend": "",
+    "fate": ""
+   },
+   "trace": [
+    [
+     32,
+     ".dlg «Đông sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay › ✓»"
+    ],
+    [
+     33,
+     "AREA 378,538"
+    ],
+    [
+     33,
+     "SKIP TAP .kscn «» tap"
+    ],
+    [
+     34,
+     "AREA 378,538"
+    ],
+    [
+     34,
+     "SKIP TAP .kscn «» tap"
+    ],
+    [
+     39,
+     "GONE Ta nói: «Phấn chưa mở, sao ẩm được? Xin tỷ đền hộp"
+    ],
+    [
+     40,
+     "SKIP TAP .kscn «» no free point"
+    ],
+    [
+     43,
+     "AREA 619,634"
+    ],
+    [
+     44,
+     "AREA 386,723"
+    ],
+    [
+     44,
+     "AREA 281,426"
+    ],
+    [
+     46,
+     "AREA 419,401"
+    ],
+    [
+     47,
+     "AREA 614,411"
+    ],
+    [
+     48,
+     "AREA 434,366"
+    ],
+    [
+     50,
+     "AREA 241,461"
+    ],
+    [
+     58,
+     "AREA 365,340"
+    ],
+    [
+     63,
+     "AREA 491,492"
+    ],
+    [
+     66,
+     "AREA 182,581"
+    ],
+    [
+     67,
+     "AREA 528,542"
+    ],
+    [
+     68,
+     "AREA 287,785"
+    ],
+    [
+     71,
+     "AREA 391,433"
+    ]
+   ],
+   "topHtml": "<div class=\"kscn\" style=\"left: 4px; right: 4px; top: 161px; height: 753px;\"><div class=\"kscn-bg\" style=\"background-image:url('https://ctm-img.victoria-tntt.workers.dev/img/ph-event-light.webp')\"></div><div class=\"kscn-veil\"></div><img class=\"kscn-fig\" crossorigin=\"anonymous\" alt=\"\" src=\"https://ctm-img.victoria-tntt.workers.dev/img/fig-consort-c23-t1-a18.webp\" style=\"height: 602px; width: 241.469px; top: 151px; left: 80.9556px; z-index: 3;\" data-kld=\"1\" srcset=\"https://ctm-img.victoria-tntt.workers.dev/img/fig-consort-c23-t1-a18.webp 361w, https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-consort-c23-t1-a18.webp 722w\" data-kfhd=\"fig-consort-c23-t1-a18.webp\" sizes=\"241px\"></div>",
+   "mid": "div.kscn-veil < div.kscn"
+  },
+  {
+   "k": "harness|area tap would have landed on a button (it appeared under the point) — blocked: «☰»",
+   "type": "harness",
+   "msg": "area tap would have landed on a button (it appeared under the point) — blocked: «☰»",
+   "n": 1,
+   "at": 80,
+   "screen": ".kscn «»",
+   "why": {
+    "screen": ".kscn «»",
+    "x": 8,
+    "y": 8,
+    "ev": "touchstart",
+    "hit": "button#menu.menu",
+    "tgt": "button#menu.menu",
+    "dt": 95,
+    "top0": "header.hud.has-kseal"
+   }
+  },
+  {
+   "k": "stuck|no progress 15 min on #coopfz «»",
+   "type": "stuck",
+   "msg": "no progress 15 min on #coopfz «»",
+   "n": 1,
+   "at": 1320,
+   "shot": "/home/user/wt/out-coop1j-e/shots-coop-rt-flight2-coop1j-e-host-k4/stuck-1.png",
+   "save": "/home/user/wt/out-coop1j-e/shots-coop-rt-flight2-coop1j-e-host-k4/stuck-1-dump.json",
+   "S": {
+    "dead": false,
+    "y": 9,
+    "t": 105,
+    "w": 1,
+    "b": 0,
+    "age": 18,
+    "rank": 3,
+    "name": "Chu Yên La",
+    "org": "Con gái Tể tướng",
+    "kend": "",
+    "fate": ""
+   },
+   "buttons": [
+    "Về màn đầu"
+   ]
+  },
+  {
+   "k": "game|SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)",
+   "type": "game",
+   "msg": "SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)",
+   "n": 1,
+   "at": 1327,
+   "line": "SAVE REWIND: reload went back from b8 (clock 9.105.1.0) to the stored b2 (clock 9.105.0.0) (6 buổi lost)",
+   "lost": 6
+  },
+  {
+   "type": "harness",
+   "msg": "runner error: page.waitForTimeout: Target page, context or browser has been closed",
+   "n": 1
+  }
+ ],
+ "dead": [],
+ "saves": [],
+ "buoi": 9,
+ "steps": 4187,
+ "status": [],
+ "_loopAt": 1795856008831,
+ "_bootFirst": 1,
+ "_scr": "#coopfz «»",
+ "_started": true,
+ "_ckAt": 1795855982670,
+ "_ckB": 9,
+ "rss": [
+  {
+   "buoi": 0,
+   "y": 9,
+   "totalMB": 7480,
+   "rendererMB": 3120,
+   "heapMB": 391,
+   "dom": 2687,
+   "q": 1,
+   "lsK": 225
+  },
+  {
+   "buoi": 3,
+   "y": 9,
+   "totalMB": 4595,
+   "rendererMB": 2069,
+   "heapMB": 391,
+   "dom": 857,
+   "q": 13,
+   "lsK": 171
+  },
+  {
+   "buoi": 7,
+   "y": 9,
+   "totalMB": 5256,
+   "rendererMB": 2126,
+   "heapMB": 179,
+   "dom": 1712,
+   "q": 0,
+   "lsK": 173
+  },
+  {
+   "buoi": 8,
+   "y": 9,
+   "totalMB": 4477,
+   "rendererMB": 1745,
+   "heapMB": 179,
+   "dom": 1632,
+   "q": 0,
+   "lsK": 1623
+  },
+  {
+   "buoi": 8,
+   "y": 9,
+   "totalMB": 4201,
+   "rendererMB": 1761,
+   "heapMB": 179,
+   "dom": 1632,
+   "q": 0,
+   "lsK": 176
+  },
+  {
+   "buoi": 8,
+   "y": 9,
+   "totalMB": 4070,
+   "rendererMB": 1797,
+   "heapMB": 179,
+   "dom": 1632,
+   "q": 0,
+   "lsK": 176
+  },
+  {
+   "buoi": 8,
+   "y": 9,
+   "totalMB": 4077,
+   "rendererMB": 1788,
+   "heapMB": 179,
+   "dom": 1632,
+   "q": 0,
+   "lsK": 176
+  },
+  {
+   "buoi": 8,
+   "y": 9,
+   "totalMB": 4070,
+   "rendererMB": 1776,
+   "heapMB": 179,
+   "dom": 1632,
+   "q": 0,
+   "lsK": 176
+  },
+  {
+   "buoi": 9,
+   "y": 9,
+   "totalMB": 3945,
+   "rendererMB": 1697,
+   "heapMB": 179,
+   "dom": 1592,
+   "q": 3,
+   "lsK": 170
+  },
+  {
+   "buoi": 9,
+   "y": 9,
+   "totalMB": 3982,
+   "rendererMB": 1690,
+   "heapMB": 159,
+   "dom": 1592,
+   "q": 3,
+   "lsK": 170
+  },
+  {
+   "buoi": 9,
+   "y": 9,
+   "totalMB": 3744,
+   "rendererMB": 1621,
+   "heapMB": 159,
+   "dom": 1592,
+   "q": 3,
+   "lsK": 170
+  },
+  {
+   "buoi": 9,
+   "y": 9,
+   "totalMB": 3700,
+   "rendererMB": 1594,
+   "heapMB": 159,
+   "dom": 1592,
+   "q": 3,
+   "lsK": 170
+  },
+  {
+   "buoi": 9,
+   "y": 9,
+   "totalMB": 3703,
+   "rendererMB": 1576,
+   "heapMB": 159,
+   "dom": 1592,
+   "q": 3,
+   "lsK": 170
+  }
+ ],
+ "promo": {
+  "raw": 3,
+  "real": 3,
+  "picked": 1,
+  "by": {
+   "decree": 3
+  }
+ },
+ "_snapAt": 1795855997087,
+ "_kipG": {},
+ "_kipOpen": null,
+ "_unsFail": {
+  "#kroul|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Con gái Tể tướng · #/#": {},
+  ".dlg|Ngày thứ nhất — Nhập cung": {},
+  ".dlg|Dưỡng Tú viện": {},
+  ".dlg|Tiền sảnh": {},
+  ".dlg|Đông sở": {},
+  ".dlg|Đêm": {},
+  ".dlg|Ngày thứ hai — Điện tuyển": {},
+  ".dlg|Dò hỏi ma ma": {},
+  ".dlg|Sân chờ": {},
+  "#dawn|": {},
+  ".dlg|Điện tuyển": {},
+  ".dlg|Thái hậu": {},
+  ".dlg|Hoàng thượng": {},
+  ".kpod|": {},
+  ".dlg|Ban hương nang": {},
+  ".dlg|Ngày thứ ba — Chờ chiếu": {},
+  ".dlg|Tin sắc phong": {},
+  ".dlg|Bổng lộc tháng tám": {},
+  ".dlg|Lễ tấn phong Thường tại Doãn Anh Ninh": {},
+  ".dlg|Chương #: Sơ thừa ân sủng": {},
+  ".dlg|Cách làm": {},
+  ".dlg|Phụ tuyến · Tân quân lập uy · Chương # · Hồi #/#": {},
+  ".dlg|Y phục dự Tết Trùng cửu": {},
+  ".dlg|Tết Trùng cửu · Đặt cược": {},
+  ".dlg|Tết Trùng cửu · Chuyện bên lề hội": {},
+  ".kmov|": {},
+  ".dlg|Việc của kẻ hầu": {},
+  ".dlg|Kính sự phòng": {},
+  ".dlg|Ban cung": {},
+  ".dlg|Hội phối đồ: báo đề": {},
+  "#coopfz|": {}
+ },
+ "_lastOpen": "trở lại phòng|vào lại phòng|về phòng",
+ "_lastOpenScr": "title (unstick reload)",
+ "trace": [
+  [
+   0,
+   "#kroul «Tiếp»"
+  ],
+  [
+   1,
+   "#kroul «Con gái Đại tướng quânThường gặp»"
+  ],
+  [
+   1,
+   "#kroul «Cung nữ được sủng hạnhThường gặp»"
+  ],
+  [
+   1,
+   "#kroul «Xem thân phận»"
+  ],
+  [
+   2,
+   ".dlg «Thân phận kiếp này» «Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tà»"
+  ],
+  [
+   2,
+   ".dlg «Thân phận kiếp này» «Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở  › ✓»"
+  ],
+  [
+   3,
+   ".dlg «Thân phận kiếp này» «Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tà»"
+  ],
+  [
+   3,
+   ".dlg «Thân phận kiếp này» «Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở  › ✓»"
+  ],
+  [
+   4,
+   ".dlg «Thân phận kiếp này» «Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong »"
+  ],
+  [
+   4,
+   ".dlg «Thân phận kiếp này» «Vào cung ngayTốnkhôngĐượcvào cung ngay·đ › ✓»"
+  ],
+  [
+   5,
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+  ],
+  [
+   7,
+   "GONE Tiếp theo"
+  ],
+  [
+   7,
+   ".dlg «Tiền truyện · Con gái Tể tướng · 1/4» «Tiếp theo»"
+  ],
+  [
+   7,
+   ".dlg «Tiền truyện · Con gái Tể tướng · 2/4» «Tiếp theo»"
+  ],
+  [
+   8,
+   ".dlg «Tiền truyện · Con gái Tể tướng · 2/4» «Tiếp theo»"
+  ],
+  [
+   8,
+   ".dlg «Tiền truyện · Con gái Tể tướng · 3/4» «Tiếp theo»"
+  ],
+  [
+   8,
+   ".dlg «Tiền truyện · Con gái Tể tướng · 3/4» «Tiếp theo»"
+  ],
+  [
+   9,
+   ".dlg «Tiền truyện · Con gái Tể tướng · 4/4» «Vào cung»"
+  ],
+  [
+   9,
+   "AREA 378,500"
+  ],
+  [
+   9,
+   "SKIP TAP .kmov «» tap"
+  ],
+  [
+   10,
+   ".kmov «Vào điện»"
+  ],
+  [
+   12,
+   ".dlg «Ngày thứ nhất — Nhập cung» «Theo thái giám vào cửa việnTốn2 khắcĐượcvào Dưỡng »"
+  ],
+  [
+   12,
+   "AREA 378,538"
+  ],
+  [
+   12,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   13,
+   "AREA 378,538"
+  ],
+  [
+   13,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   14,
+   "AREA 378,538"
+  ],
+  [
+   14,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   15,
+   "AREA 378,538"
+  ],
+  [
+   15,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   16,
+   "AREA 378,538"
+  ],
+  [
+   16,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   17,
+   "AREA 378,538"
+  ],
+  [
+   17,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   18,
+   "AREA 378,538"
+  ],
+  [
+   18,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   19,
+   "AREA 378,538"
+  ],
+  [
+   19,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   20,
+   "AREA 378,538"
+  ],
+  [
+   20,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   21,
+   "AREA 378,538"
+  ],
+  [
+   21,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   22,
+   "AREA 378,538"
+  ],
+  [
+   22,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   23,
+   "AREA 378,538"
+  ],
+  [
+   23,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   24,
+   "AREA 378,538"
+  ],
+  [
+   24,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   25,
+   "AREA 378,538"
+  ],
+  [
+   25,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   26,
+   "AREA 378,538"
+  ],
+  [
+   26,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   26,
+   "AREA 378,538"
+  ],
+  [
+   26,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   28,
+   "AREA 378,538"
+  ],
+  [
+   28,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   29,
+   ".dlg «Dưỡng Tú viện» «Cất đồ, ra Tiền sảnhTốn1 khắcĐượcra học quy củ với»"
+  ],
+  [
+   29,
+   ".dlg «Tiền sảnh» «Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo t»"
+  ],
+  [
+   29,
+   ".dlg «Tiền sảnh» «Tập thật kỹ từng bước, từng lạyTốn3 khắc › ✓»"
+  ],
+  [
+   32,
+   ".dlg «Đông sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối,»"
+  ],
+  [
+   32,
+   ".dlg «Đông sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay › ✓»"
+  ],
+  [
+   33,
+   "AREA 378,538"
+  ],
+  [
+   33,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   34,
+   "AREA 378,538"
+  ],
+  [
+   34,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   39,
+   "GONE Ta nói: «Phấn chưa mở, sao ẩm được? Xin tỷ đền hộp"
+  ],
+  [
+   40,
+   "SKIP TAP .kscn «» no free point"
+  ],
+  [
+   43,
+   "AREA 619,634"
+  ],
+  [
+   44,
+   "AREA 386,723"
+  ],
+  [
+   44,
+   "AREA 281,426"
+  ],
+  [
+   46,
+   "AREA 419,401"
+  ],
+  [
+   47,
+   "AREA 614,411"
+  ],
+  [
+   48,
+   "AREA 434,366"
+  ],
+  [
+   50,
+   "AREA 241,461"
+  ],
+  [
+   58,
+   "AREA 365,340"
+  ],
+  [
+   63,
+   "AREA 491,492"
+  ],
+  [
+   66,
+   "AREA 182,581"
+  ],
+  [
+   67,
+   "AREA 528,542"
+  ],
+  [
+   68,
+   "AREA 287,785"
+  ],
+  [
+   71,
+   "AREA 391,433"
+  ],
+  [
+   72,
+   "AREA 424,747"
+  ],
+  [
+   73,
+   "NOEXIT BACKDROP .kscn «» blocked"
+  ],
+  [
+   74,
+   "NOEXIT BACKDROP .kscn «» blocked"
+  ],
+  [
+   74,
+   "NOEXIT UNSTICK 2 .kscn «»"
+  ],
+  [
+   76,
+   "AREA 747,8"
+  ],
+  [
+   76,
+   "NOEXIT UNSTICK 2 .kscn «»"
+  ],
+  [
+   78,
+   "NOEXIT UNSTICK 2 .kscn «»"
+  ],
+  [
+   78,
+   "AREA 8,8"
+  ],
+  [
+   79,
+   "NOEXIT UNSTICK 3 .kscn «»"
+  ],
+  [
+   79,
+   "AREA 8,8"
+  ],
+  [
+   83,
+   "title (unstick reload) «cùng hảo hữu»"
+  ],
+  [
+   84,
+   "title (unstick reload) «trở lại phòng|vào lại phòng|về phòng»"
+  ],
+  [
+   88,
+   "AREA 160,394"
+  ],
+  [
+   89,
+   "AREA 378,791"
+  ],
+  [
+   89,
+   "BACKDROP #klife «» tap"
+  ],
+  [
+   90,
+   "AREA 204,338"
+  ],
+  [
+   90,
+   "NOEXIT AREA .kscn «»"
+  ],
+  [
+   91,
+   "AREA 594,588"
+  ],
+  [
+   92,
+   "NOEXIT AREA .kscn «»"
+  ],
+  [
+   93,
+   "AREA 576,423"
+  ],
+  [
+   93,
+   "NOEXIT AREA .kscn «»"
+  ],
+  [
+   94,
+   "AREA 456,343"
+  ],
+  [
+   94,
+   "NOEXIT AREA .kscn «»"
+  ],
+  [
+   95,
+   "AREA 277,387"
+  ],
+  [
+   95,
+   "NOEXIT AREA .kscn «»"
+  ],
+  [
+   96,
+   "NOEXIT AREA .kscn «»"
+  ],
+  [
+   97,
+   ".dlg «Đông sở» «Ta đỡ lấy chậu nhài: «Hoa của nàng ta, tỷ đừng đụn»"
+  ],
+  [
+   97,
+   ".dlg «Đông sở» «Ta đỡ lấy chậu nhài: «Hoa của nàng ta, t › ✓»"
+  ],
+  [
+   99,
+   ".dlg «Đêm» «NgủTốnkhôngĐượcSức +Gợi ýSức +!»"
+  ],
+  [
+   102,
+   ".dlg «Ngày thứ hai — Điện tuyển» «Dò hỏi ma ma về các vị chí tôn»"
+  ],
+  [
+   103,
+   ".dlg «Dò hỏi ma ma» «Hỏi về Thái hậu»"
+  ],
+  [
+   103,
+   ".dlg «Dò hỏi ma ma» «Cứ hỏi thẳng»"
+  ],
+  [
+   103,
+   ".dlg «Ngày thứ hai — Điện tuyển» «Ngồi trước gương điểm trang»"
+  ],
+  [
+   104,
+   "#kg82 «Sẵn sàngbắt đầu chơi»"
+  ],
+  [
+   104,
+   "#kg82 «Trang sức 0»"
+  ],
+  [
+   104,
+   "#kg82 «Trâm cài 1»"
+  ],
+  [
+   105,
+   "#kg82 «Giữ đồ hôm quamặc như cũ»"
+  ],
+  [
+   105,
+   "#kg82 «Điểm trangĐoan trang: Có cơ · Kiều diễm: Khó lường»"
+  ],
+  [
+   105,
+   ".kmov «Tiếp theo»"
+  ],
+  [
+   107,
+   "GONE Tiếp theo"
+  ],
+  [
+   108,
+   "#kg82 «Đã hiểu»"
+  ],
+  [
+   108,
+   ".dlg «Sân chờ» «Đứng yên giữ sức»"
+  ],
+  [
+   108,
+   "NOEXIT AREA .kscn «»"
+  ],
+  [
+   109,
+   "AREA 435,428"
+  ],
+  [
+   109,
+   "NOEXIT AREA .kscn «»"
+  ],
+  [
+   110,
+   "AREA 220,404"
+  ],
+  [
+   110,
+   "NOEXIT AREA .kscn «»"
+  ],
+  [
+   111,
+   "AREA 330,546"
+  ],
+  [
+   111,
+   "NOEXIT AREA .kscn «»"
+  ],
+  [
+   114,
+   ".dlg «Sân chờ» «Ta bước lên: «Thứ bậc cha mẹ cho, tỷ chê ai được?»»"
+  ],
+  [
+   118,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   119,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Mệnh truyện»"
+  ],
+  [
+   120,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Tai mắt0»"
+  ],
+  [
+   124,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Tâm trạngBình thản0»"
+  ],
+  [
+   127,
+   "page «Dưỡng Tú viện · Tiền sảnh · Ở đây có 2 người.» «Hoàng tự»"
+  ],
+  [
+   127,
+   "AREA 378,500"
+  ],
+  [
+   127,
+   "SKIP TAP .kne «» tap"
+  ],
+  [
+   128,
+   "SKIPWIN #dawn host Tiếp theo"
+  ],
+  [
+   129,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   130,
+   ".dlg «Sân chờ» «Làm quen với tú nữ»"
+  ],
+  [
+   131,
+   ".dlg «Sân chờ» «Làm quen với tú nữ»"
+  ],
+  [
+   131,
+   "AREA 378,538"
+  ],
+  [
+   131,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   132,
+   "AREA 378,538"
+  ],
+  [
+   132,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   133,
+   "AREA 378,538"
+  ],
+  [
+   133,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   134,
+   "AREA 378,538"
+  ],
+  [
+   134,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   135,
+   "AREA 378,538"
+  ],
+  [
+   135,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   136,
+   "AREA 378,538"
+  ],
+  [
+   136,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   137,
+   "AREA 378,538"
+  ],
+  [
+   137,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   139,
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»"
+  ],
+  [
+   139,
+   ".dlg «Thái hậu» «Nữ nhi nên học lễ nghi trước, biết cúi chào đúng c»"
+  ],
+  [
+   140,
+   ".dlg «Hoàng thượng» «Dâng Cầm»"
+  ],
+  [
+   140,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   141,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   141,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   141,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   142,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   143,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   165,
+   "BOARD dan 17 moves 8/10 raw 8.50"
+  ],
+  [
+   165,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   166,
+   ".dlg «Thái hậu» «Thần thiếp đỡ chén bằng cả hai tay, chịu nóng để g»"
+  ],
+  [
+   167,
+   "AREA 378,538"
+  ],
+  [
+   167,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   168,
+   "AREA 378,538"
+  ],
+  [
+   168,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   169,
+   "AREA 378,538"
+  ],
+  [
+   169,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   170,
+   "AREA 378,538"
+  ],
+  [
+   170,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   171,
+   "AREA 378,538"
+  ],
+  [
+   171,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   172,
+   "AREA 378,538"
+  ],
+  [
+   172,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   173,
+   "AREA 378,538"
+  ],
+  [
+   173,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   174,
+   "AREA 378,538"
+  ],
+  [
+   174,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   174,
+   "AREA 378,538"
+  ],
+  [
+   174,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   175,
+   "AREA 378,538"
+  ],
+  [
+   175,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   176,
+   "AREA 378,538"
+  ],
+  [
+   176,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   177,
+   "AREA 378,538"
+  ],
+  [
+   177,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   178,
+   "AREA 378,538"
+  ],
+  [
+   178,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   179,
+   "AREA 378,538"
+  ],
+  [
+   179,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   180,
+   "AREA 378,538"
+  ],
+  [
+   180,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   181,
+   "AREA 378,538"
+  ],
+  [
+   181,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   183,
+   ".kpod «Tiếp»"
+  ],
+  [
+   183,
+   ".dlg «Ban hương nang» «Về Dưỡng Tú viện»"
+  ],
+  [
+   184,
+   ".dlg «Đêm» «Ngủ»"
+  ],
+  [
+   184,
+   ".dlg «Ngày thứ ba — Chờ chiếu» «Nghe ma ma dạyTốn2 khắcĐượcbiết luật trong cung tr»"
+  ],
+  [
+   184,
+   ".dlg «Đông sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối,»"
+  ],
+  [
+   185,
+   ".dlg «Đông sở» «Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay › ✓»"
+  ],
+  [
+   186,
+   ".kmov «Đã hiểu»"
+  ],
+  [
+   190,
+   ".dlg «Tin sắc phong» «Về nơi ở mới»"
+  ],
+  [
+   191,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   192,
+   ".dlg «Bổng lộc tháng tám» «Bớt lễ nghĩaTốnkhôngĐượcBạc +MấtDanh −Gợi ýBạc +; »"
+  ],
+  [
+   193,
+   ".dlg «Bổng lộc tháng tám» «Bớt lễ nghĩaTốnkhôngĐượcBạc +MấtDanh −Gợ › ✓»"
+  ],
+  [
+   196,
+   ".dlg «Lễ tấn phong Thường tại Doãn Anh Ninh» «Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +C»"
+  ],
+  [
+   196,
+   ".dlg «Lễ tấn phong Thường tại Doãn Anh Ninh» «Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì › ✓»"
+  ],
+  [
+   199,
+   ".dlg «Chương 1 khép lại» «Lui»"
+  ],
+  [
+   200,
+   ".dlg «Chương 2: Sơ thừa ân sủng» «Bán đồ trong rương riêng»"
+  ],
+  [
+   201,
+   ".dlg «Cách làm» «Đi tớiTốnkhôngĐượctới nơi ấy»"
+  ],
+  [
+   202,
+   ".dlg «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 1/2» «Khuyên ngài dựa vào lớp quan trẻ ở Hàn lâm việnCó »"
+  ],
+  [
+   202,
+   ".dlg «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 1/2» «Khuyên ngài dựa vào lớp quan trẻ ở Hàn l › ✓»"
+  ],
+  [
+   205,
+   ".dlg «Tin trong cung · tổng kết tháng» «Lui»"
+  ],
+  [
+   206,
+   ".dlg «Y phục dự Tết Trùng cửu» «Sai người mua trâm đồng mai hoa (Vàng) ở Nội vụ ph»"
+  ],
+  [
+   207,
+   ".dlg «Y phục dự Tết Trùng cửu» «Sai người mua trâm đồng mai hoa (Vàng) ở › ✓»"
+  ],
+  [
+   209,
+   ".dlg «Tết Trùng cửu · Đặt cược» «Không cược, chỉ xemTốnkhôngĐượckhôngGợi ýkhông đượ»"
+  ],
+  [
+   210,
+   ".dlg «Tết Trùng cửu · Đặt cược» «Không cược, chỉ xemTốnkhôngĐượckhôngGợi  › ✓»"
+  ],
+  [
+   210,
+   ".dlg «Tết Trùng cửu · Chuyện bên lề hội» «Im lặng, để thời gian trả lờiTốnDanh 10·Sủng 5Được»"
+  ],
+  [
+   211,
+   ".dlg «Tết Trùng cửu · Chuyện bên lề hội» «Im lặng, để thời gian trả lờiTốnDanh 10· › ✓»"
+  ],
+  [
+   211,
+   "#kmrew «Nhận»"
+  ],
+  [
+   213,
+   ".kmov «Nhận»"
+  ],
+  [
+   215,
+   "GONE Nhận"
+  ],
+  [
+   215,
+   "#kmrew «Nhận»"
+  ],
+  [
+   217,
+   "#kprevov «Nhận»"
+  ],
+  [
+   221,
+   ".dlg «Áo trái mùa» «Lui»"
+  ],
+  [
+   222,
+   ".dlg «Bộ sưu tập» «Lui»"
+  ],
+  [
+   224,
+   ".dlg «Thiên hạ truyền tin» «Lui»"
+  ],
+  [
+   226,
+   ".dlg «Áo trái mùa» «Lui»"
+  ],
+  [
+   228,
+   ".dlg «Tai mắt» «Lui»"
+  ],
+  [
+   231,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Sẵn sàng»"
+  ],
+  [
+   233,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «3Cung nhân»"
+  ],
+  [
+   233,
+   ".kscn «›»"
+  ],
+  [
+   234,
+   ".kscn «‹»"
+  ],
+  [
+   234,
+   ".kscn «›»"
+  ],
+  [
+   234,
+   ".kscn «›»"
+  ],
+  [
+   235,
+   ".kscn «›»"
+  ],
+  [
+   235,
+   ".kscn «‹»"
+  ],
+  [
+   235,
+   ".kscn «‹»"
+  ],
+  [
+   235,
+   ".kscn «‹»"
+  ],
+  [
+   236,
+   ".kscn «Lui»"
+  ],
+  [
+   237,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Hậu cung»"
+  ],
+  [
+   238,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Hoàng tự»"
+  ],
+  [
+   238,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Hoàng tự trong cung»"
+  ],
+  [
+   238,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Con của ta»"
+  ],
+  [
+   239,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Hậu cung»"
+  ],
+  [
+   239,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «sương mù»"
+  ],
+  [
+   242,
+   ".dlg «Việc của kẻ hầu» «Thưởng vì làm việc chăm chỉTốnBạc 10Đượcthiện cảm »"
+  ],
+  [
+   243,
+   ".dlg «Việc của kẻ hầu» «Thưởng vì làm việc chăm chỉTốnBạc 10Được › ✓»"
+  ],
+  [
+   245,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Buổi trưa, còn 4 khắc»"
+  ],
+  [
+   246,
+   ".dlg «trưa · còn» «Lui»"
+  ],
+  [
+   247,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «nắng vàng»"
+  ],
+  [
+   250,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Sẵn sàng»"
+  ],
+  [
+   252,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Mệnh truyện»"
+  ],
+  [
+   252,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Buổi chiều, còn 4 khắc»"
+  ],
+  [
+   253,
+   ".dlg «chiều · còn» «Lui»"
+  ],
+  [
+   254,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Sẵn sàng»"
+  ],
+  [
+   256,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «1Chí tôn»"
+  ],
+  [
+   256,
+   ".kscn «Lui»"
+  ],
+  [
+   258,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Lật thẻThấp»"
+  ],
+  [
+   258,
+   ".dlg «Lật thẻ: Thấp» «Lui»"
+  ],
+  [
+   260,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Sẵn sàng»"
+  ],
+  [
+   264,
+   ".kmov «Ta biết rồi»"
+  ],
+  [
+   266,
+   "GONE Ta biết rồi"
+  ],
+  [
+   267,
+   ".dlg «Kính sự phòng» «Chặn ngự giáKhó lườngTốnkhôngĐượcdựa vào nhan sắc,»"
+  ],
+  [
+   267,
+   ".dlg «Kính sự phòng» «Chặn ngự giáKhó lườngTốnkhôngĐượcdựa vào › ✓»"
+  ],
+  [
+   270,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   310,
+   "BOARD mua 13 moves 1/10 raw 3.17"
+  ],
+  [
+   314,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   318,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Tai mắt0»"
+  ],
+  [
+   321,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Thư từ»"
+  ],
+  [
+   325,
+   ".dlg «Gửi»"
+  ],
+  [
+   328,
+   ".dlg «Gửi»"
+  ],
+  [
+   331,
+   ".dlg «Gửi»"
+  ],
+  [
+   333,
+   ".dlg «Gửi»"
+  ],
+  [
+   336,
+   ".dlg «Lui»"
+  ],
+  [
+   340,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Mục tiêu chương (có mới)»"
+  ],
+  [
+   345,
+   "GONE Hôm nay mặt mộc"
+  ],
+  [
+   347,
+   "page «Cảnh Phúc cung · Thể Hòa điện · Ở đây còn 3 người.» «Hành sự»"
+  ],
+  [
+   352,
+   "GONE Học tập · Tài nghệHọc tập · Tài nghệĐọc sáchRất vữ"
+  ],
+  [
+   356,
+   "GONE Học tập · Tài nghệHọc tập · Tài nghệĐọc sáchRất vữ"
+  ],
+  [
+   361,
+   "GONE Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngnhẹ: Nghỉ ngơi "
+  ],
+  [
+   367,
+   "GONE Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngnhẹ: Nghỉ ngơi "
+  ],
+  [
+   371,
+   "GONE Học tập · Tài nghệHọc tập · Tài nghệĐọc sáchRất vữ"
+  ],
+  [
+   377,
+   "GONE Học tập · Tài nghệHọc tập · Tài nghệĐọc sáchRất vữ"
+  ],
+  [
+   382,
+   "GONE Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngnhẹ: Nghỉ ngơi "
+  ],
+  [
+   386,
+   "GONE Học tập · Tài nghệHọc tập · Tài nghệĐọc sáchRất vữ"
+  ],
+  [
+   391,
+   "GONE Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngnhẹ: Nghỉ ngơi "
+  ],
+  [
+   395,
+   "GONE Học tập · Tài nghệHọc tập · Tài nghệĐọc sáchRất vữ"
+  ],
+  [
+   400,
+   "GONE Học tập · Tài nghệHọc tập · Tài nghệĐọc sáchRất vữ"
+  ],
+  [
+   406,
+   "GONE Học tập · Tài nghệHọc tập · Tài nghệĐọc sáchRất vữ"
+  ],
+  [
+   406,
+   "AREA 378,500"
+  ],
+  [
+   406,
+   "SKIP TAP .kne «» tap"
+  ],
+  [
+   407,
+   "#dawn «Tiếp theo»"
+  ],
+  [
+   408,
+   ".dlg «Tin trong cung buổi này» «Lui»"
+  ],
+  [
+   410,
+   ".dlg «Ban cung» «Nhận Cảnh Phúc cungTốnkhôngĐượcĐức +, tạ ơn, dọn s»"
+  ],
+  [
+   410,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   410,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   411,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   411,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   411,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   415,
+   ".dlg «Hội phối đồ: báo đề» «Đã hiểu, sẽ chuẩn bịTốnkhôngĐượcmua thêm đồ ở Nội »"
+  ],
+  [
+   416,
+   ".dlg «Hội phối đồ: báo đề» «Đã hiểu, sẽ chuẩn bịTốnkhôngĐượcmua thêm › ✓»"
+  ],
+  [
+   416,
+   ".dlg «Áo trái mùa» «Lui»"
+  ],
+  [
+   1323,
+   "title (unstick reload) «cùng hảo hữu»"
+  ],
+  [
+   1324,
+   "title (unstick reload) «trở lại phòng|vào lại phòng|về phòng»"
+  ],
+  [
+   1331,
+   "AREA 468,806"
+  ],
+  [
+   1332,
+   "BACKDROP #klife «» blocked"
+  ]
+ ],
+ "_momSeen": [
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  ".dlg|Tiền truyện · Con gái Tể tướng · #/#",
+  ".kmov|",
+  ".dlg|Ngày thứ nhất — Nhập cung",
+  ".kscn|",
+  ".dlg|Dưỡng Tú viện",
+  ".dlg|Tiền sảnh",
+  "page|Dưỡng Tú viện · Đông sở · Ở đây có # ngư",
+  ".dlg|Đông sở",
+  "#klife|",
+  ".dlg|Đêm",
+  ".dlg|Ngày thứ hai — Điện tuyển",
+  ".dlg|Dò hỏi ma ma",
+  "#kg82|",
+  ".dlg|Sân chờ",
+  "page|Dưỡng Tú viện · Tiền sảnh · Ở đây có # n",
+  "#modal|Sân chờ",
+  ".kne|",
+  "#dawn|",
+  ".dlg|Điện tuyển",
+  ".dlg|Thái hậu",
+  ".dlg|Hoàng thượng",
+  ".kbk|Tổng lược",
+  ".kpod|",
+  ".dlg|Ban hương nang",
+  "#modal|Đêm",
+  ".dlg|Ngày thứ ba — Chờ chiếu",
+  "page|Cảnh Phúc cung · Thể Hòa điện · Ở đây cò",
+  ".dlg|Tin sắc phong",
+  ".dlg|Tin trong cung buổi này",
+  ".dlg|Bổng lộc tháng tám",
+  ".dlg|Lễ tấn phong Thường tại Doãn Anh Ninh",
+  ".dlg|Chương # khép lại",
+  ".dlg|Chương #: Sơ thừa ân sủng",
+  ".dlg|Cách làm",
+  ".dlg|Phụ tuyến · Tân quân lập uy · Chương # ·",
+  ".dlg|Tin trong cung · tổng kết tháng",
+  ".dlg|Y phục dự Tết Trùng cửu",
+  ".dlg|Tết Trùng cửu · Đặt cược",
+  ".dlg|Tết Trùng cửu · Chuyện bên lề hội",
+  "#kmrew|",
+  "#kprevov|",
+  ".dlg|Áo trái mùa",
+  ".dlg|Bộ sưu tập",
+  ".dlg|Thiên hạ truyền tin",
+  ".dlg|Tai mắt",
+  "#kpop|",
+  ".dlg|Việc của kẻ hầu",
+  ".dlg|trưa · còn",
+  ".dlg|chiều · còn",
+  ".dlg|Lật thẻ: Thấp",
+  ".dlg|Kính sự phòng",
+  ".dlg|",
+  ".dlg|Ban cung",
+  ".dlg|Hội phối đồ: báo đề",
+  "#coopfz|"
+ ],
+ "_momRank": 3,
+ "choicePts": [
+  {
+   "k": "#kroul||Cháu gái Thái hậuThường gặp/Con gái Tể tướngHiếm/Con gái nhà buôn muốiThường gặp/Con gái thầy đồ nghèoHiếm/Con gái tội thầnHiếm/Con gái Đại tướng quânThường gặp/Cung nữ tuyển vào cungHiếm/Cung nữ được sủng hạnhThường gặp/Công chúa hòa thânRất hiếm",
+   "screen": "#kroul «»",
+   "opts": [
+    "Con gái Đại tướng quânThường gặp",
+    "Con gái thầy đồ nghèoHiếm",
+    "Con gái Tể tướngHiếm",
+    "Con gái nhà buôn muốiThường gặp",
+    "Cháu gái Thái hậuThường gặp",
+    "Con gái tội thầnHiếm",
+    "Công chúa hòa thânRất hiếm",
+    "Cung nữ được sủng hạnhThường gặp",
+    "Cung nữ tuyển vào cungHiếm"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Con gái Đại tướng quânThường gặp": 1
+   },
+   "n": 1
+  },
+  {
+   "k": "#kroul||Cháu gái Thái hậuThường gặp/Con gái Tể tướngHiếm/Con gái nhà buôn muốiThường gặp/Con gái thầy đồ nghèoHiếm/Con gái tội thầnHiếm/Con gái Đại tướng quânThường gặp/Cung nữ được sủng hạnhThường gặp/Công chúa hòa thânRất hiếm/Xem thân phận",
+   "screen": "#kroul «»",
+   "opts": [
+    "Con gái Tể tướngHiếm",
+    "Con gái nhà buôn muốiThường gặp",
+    "Con gái tội thầnHiếm",
+    "Công chúa hòa thânRất hiếm",
+    "Con gái Đại tướng quânThường gặp",
+    "Cung nữ được sủng hạnhThường gặp",
+    "Cháu gái Thái hậuThường gặp",
+    "Con gái thầy đồ nghèoHiếm",
+    "Xem thân phận"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Cung nữ được sủng hạnhThường gặp": 1,
+    "Xem thân phận": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Quý nhân (định ở kỳ/Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Quý nhân (định ở kỳ",
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn": 2,
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong tối đa tới Quý nhân (định ở kỳ": 1,
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Tiền sảnh|Tập cho thuộc rồi thôiTốn2 khắcĐượcĐức +Gợi ýĐức +!/Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +Mấtma ma không vừa ý taGợi ýSứ/Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo tập ma ma để ý tới ta hơn, có k",
+   "screen": ".dlg «Tiền sảnh»",
+   "opts": [
+    "Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo tập ma ma để ý tới ta hơn, có k",
+    "Tập cho thuộc rồi thôiTốn2 khắcĐượcĐức +Gợi ýĐức +!",
+    "Tập qua loa, để sức cho ngày maiTốn1 khắcĐượcSức +Mấtma ma không vừa ý taGợi ýSứ"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Tập thật kỹ từng bước, từng lạyTốn3 khắcĐượcGiáo tập ma ma để ý tới ta hơn, có k": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Đông sở|Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých/Làm quen với tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả tênGợi/Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!/Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b/Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+   "screen": ".dlg «Đông sở»",
+   "opts": [
+    "Làm quen với tú nữTốn1 khắcĐượcbiết mặt nàng ta, nàng ta chịu thì biết cả tênGợi",
+    "Ra Dư đồTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ýchọn rồi xem kết quả ở b",
+    "Dò hỏi ma ma về các vị chí tônTốnkhôngĐượcchọn rồi xem kết quả ở bước sauGợi ých",
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!",
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Đông sở|Ta chia nửa phấn của ta cho tú nữ, rồi xin tú nữ hứa lần sau mượn phải hỏi.Tốn2 /Ta cất hộp phấn của mình vào ống tay áo.TốnkhôngĐượcngười đứng xem có thiện cảm /Ta nói: «Phấn chưa mở, sao ẩm được? Xin tỷ đền hộp phấn khác.»Tốn1 khắcĐượcmột v/Ta nói: «Phấn đã ẩm thì thôi, tiếc làm gì.»Tốn1 khắcĐượcmột vị tú nữ có thiện cả",
+   "screen": ".dlg «Đông sở»",
+   "opts": [
+    "Ta nói: «Phấn chưa mở, sao ẩm được? Xin tỷ đền hộp phấn khác.»Tốn1 khắcĐượcmột v",
+    "Ta nói: «Phấn đã ẩm thì thôi, tiếc làm gì.»Tốn1 khắcĐượcmột vị tú nữ có thiện cả",
+    "Ta chia nửa phấn của ta cho tú nữ, rồi xin tú nữ hứa lần sau mượn phải hỏi.Tốn2 ",
+    "Ta cất hộp phấn của mình vào ống tay áo.TốnkhôngĐượcngười đứng xem có thiện cảm "
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ta nói: «Phấn chưa mở, sao ẩm được? Xin tỷ đền hộp phấn khác.»Tốn1 khắcĐượcmột v": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Đông sở|Ta nói: «Phòng ngủ có hoa không tốt, đem ra ngoài hiên là phải.»Tốn1 khắcĐượcUôn/Ta xin đặt chậu nhài ra hiên, ban ngày đem vào, ban đêm đem ra, hai bên đều yên./Ta xếp áo, không đáp.TốnkhôngĐượcDanh +MấtTưởng Mạn Nhu ghét ta hơn, Đức −Gợi ýD/Ta đỡ lấy chậu nhài: «Hoa của nàng ta, tỷ đừng đụng vào.»Tốn1 khắcĐượcTưởng Mạn ",
+   "screen": ".dlg «Đông sở»",
+   "opts": [
+    "Ta đỡ lấy chậu nhài: «Hoa của nàng ta, tỷ đừng đụng vào.»Tốn1 khắcĐượcTưởng Mạn ",
+    "Ta nói: «Phòng ngủ có hoa không tốt, đem ra ngoài hiên là phải.»Tốn1 khắcĐượcUôn",
+    "Ta xin đặt chậu nhài ra hiên, ban ngày đem vào, ban đêm đem ra, hai bên đều yên.",
+    "Ta xếp áo, không đáp.TốnkhôngĐượcDanh +MấtTưởng Mạn Nhu ghét ta hơn, Đức −Gợi ýD"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ta đỡ lấy chậu nhài: «Hoa của nàng ta, tỷ đừng đụng vào.»Tốn1 khắcĐượcTưởng Mạn ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Ngày thứ hai — Điện tuyển|Dò hỏi ma ma về các vị chí tôn/Ngồi trước gương điểm trang/Theo ma ma ra sân chờ, để mặt mộc",
+   "screen": ".dlg «Ngày thứ hai — Điện tuyển»",
+   "opts": [
+    "Theo ma ma ra sân chờ, để mặt mộc",
+    "Ngồi trước gương điểm trang",
+    "Dò hỏi ma ma về các vị chí tôn"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dò hỏi ma ma về các vị chí tôn": 1,
+    "Ngồi trước gương điểm trang": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Dò hỏi ma ma|Hỏi về Hoàng thượng/Hỏi về Thái hậu/Thôi, không hỏi nữa",
+   "screen": ".dlg «Dò hỏi ma ma»",
+   "opts": [
+    "Hỏi về Thái hậu",
+    "Hỏi về Hoàng thượng",
+    "Thôi, không hỏi nữa"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Hỏi về Thái hậu": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Dò hỏi ma ma|Cứ hỏi thẳng/Dúi bạc vào tay ma ma/Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏi",
+   "screen": ".dlg «Dò hỏi ma ma»",
+   "opts": [
+    "Dúi bạc vào tay ma ma",
+    "Giúp ma ma việc vặt cho bà vui lòng rồi mới hỏi",
+    "Cứ hỏi thẳng"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Cứ hỏi thẳng": 1
+   },
+   "n": 1
+  },
+  {
+   "k": "#kg82||Giữ đồ hôm quamặc như cũ/Mặc bộ này/Trang sức 0/Trâm cài 1/Trâm thạch anh hồng/Tất cả 3/Y phục 2/Áo the thêu lan",
+   "screen": "#kg82 «»",
+   "opts": [
+    "Tất cả 3",
+    "Trâm cài 1",
+    "Y phục 2",
+    "Trang sức 0",
+    "Trâm thạch anh hồng",
+    "Áo the thêu lan",
+    "Mặc bộ này",
+    "Giữ đồ hôm quamặc như cũ"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Trang sức 0": 1,
+    "Trâm cài 1": 1
+   },
+   "n": 2
+  },
+  {
+   "k": "#kg82||Giữ đồ hôm quamặc như cũ/Mặc bộ này/Trang sức 0/Trâm cài 1/Trâm thạch anh hồng/Trâm thạch anh hồng · Trâm cài/Tất cả 3/Y phục 2/Áo the thêu lan",
+   "screen": "#kg82 «»",
+   "opts": [
+    "Tất cả 3",
+    "Trâm cài 1",
+    "Y phục 2",
+    "Trang sức 0",
+    "Trâm thạch anh hồng",
+    "Áo the thêu lan",
+    "Trâm thạch anh hồng · Trâm cài",
+    "Mặc bộ này",
+    "Giữ đồ hôm quamặc như cũ"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Giữ đồ hôm quamặc như cũ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": "#kg82||Tự tay điểm trangkẻ mày, đánh phấn, chấm son/Điểm trangĐoan trang: Có cơ · Kiều diễm: Khó lường · Khuynh thành: Mong manh/Để mặt mộc",
+   "screen": "#kg82 «»",
+   "opts": [
+    "Điểm trangĐoan trang: Có cơ · Kiều diễm: Khó lường · Khuynh thành: Mong manh",
+    "Tự tay điểm trangkẻ mày, đánh phấn, chấm son",
+    "Để mặt mộc"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Điểm trangĐoan trang: Có cơ · Kiều diễm: Khó lường · Khuynh thành: Mong manh": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Sân chờ|Làm quen với tú nữ/Đứng yên giữ sức",
+   "screen": ".dlg «Sân chờ»",
+   "opts": [
+    "Làm quen với tú nữ",
+    "Đứng yên giữ sức"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Đứng yên giữ sức": 1,
+    "Làm quen với tú nữ": 2
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Sân chờ|Ta bước lên: «Thứ bậc cha mẹ cho, tỷ chê ai được?»/Ta khẽ cười: «Nói vậy cũng có lý, mỗi người một phận.»/Ta nhìn thẳng phía trước như không nghe thấy./Ta nhắc: «Nhà ai cũng có tổ, vào sảnh cùng hầu.»",
+   "screen": ".dlg «Sân chờ»",
+   "opts": [
+    "Ta bước lên: «Thứ bậc cha mẹ cho, tỷ chê ai được?»",
+    "Ta khẽ cười: «Nói vậy cũng có lý, mỗi người một phận.»",
+    "Ta nhắc: «Nhà ai cũng có tổ, vào sảnh cùng hầu.»",
+    "Ta nhìn thẳng phía trước như không nghe thấy."
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ta bước lên: «Thứ bậc cha mẹ cho, tỷ chê ai được?»": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Thái hậu|Nên học cách phụng dưỡng cha mẹ, điều ấy là gốc của mọi điều khác./Nên học quản việc nhà, biết chi dùng tằn tiện, tay làm được việc thì lòng mới yê/Nên học đọc sách, biết chữ thì mới hiểu đạo lý và biết cách xử thế./Nữ nhi nên học lễ nghi trước, biết cúi chào đúng chỗ thì mới đứng được trong nhà",
+   "screen": ".dlg «Thái hậu»",
+   "opts": [
+    "Nên học đọc sách, biết chữ thì mới hiểu đạo lý và biết cách xử thế.",
+    "Nên học cách phụng dưỡng cha mẹ, điều ấy là gốc của mọi điều khác.",
+    "Nên học quản việc nhà, biết chi dùng tằn tiện, tay làm được việc thì lòng mới yê",
+    "Nữ nhi nên học lễ nghi trước, biết cúi chào đúng chỗ thì mới đứng được trong nhà"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nữ nhi nên học lễ nghi trước, biết cúi chào đúng chỗ thì mới đứng được trong nhà": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Hoàng thượng|Cúi đầu chờ xét/Dâng Cầm/Dâng Kỳ",
+   "screen": ".dlg «Hoàng thượng»",
+   "opts": [
+    "Cúi đầu chờ xét",
+    "Dâng Cầm",
+    "Dâng Kỳ"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Dâng Cầm": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".kbk|Tổng lược|Trang sau/Trang trước",
+   "screen": ".kbk «Tổng lược»",
+   "opts": [
+    "Trang trước",
+    "Trang sau"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Trang sau": 2,
+    "Trang trước": 3
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Thái hậu|Thần thiếp khẽ nói với cung nữ rằng trà hơi nóng, nhưng xin nàng ta đừng lo, thầ/Thần thiếp lấy tay áo lót vào đỡ chén, vẫn giữ nét mặt bình thản./Thần thiếp xin phép đặt chén xuống bàn, đợi nguội mới dùng./Thần thiếp đỡ chén bằng cả hai tay, chịu nóng để giữ phép tắc.",
+   "screen": ".dlg «Thái hậu»",
+   "opts": [
+    "Thần thiếp xin phép đặt chén xuống bàn, đợi nguội mới dùng.",
+    "Thần thiếp khẽ nói với cung nữ rằng trà hơi nóng, nhưng xin nàng ta đừng lo, thầ",
+    "Thần thiếp lấy tay áo lót vào đỡ chén, vẫn giữ nét mặt bình thản.",
+    "Thần thiếp đỡ chén bằng cả hai tay, chịu nóng để giữ phép tắc."
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Thần thiếp đỡ chén bằng cả hai tay, chịu nóng để giữ phép tắc.": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Đông sở|Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!/Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b",
+   "screen": ".dlg «Đông sở»",
+   "opts": [
+    "Nghỉ một látTốn1 khắcĐượcSức +Gợi ýSức +!",
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Ngồi yên chờ tới tốiTốnkhôngĐượctới ngay buổi tối, không phải chờGợi ýtới ngay b": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Bổng lộc tháng tám|Bớt lễ nghĩaTốnkhôngĐượcBạc +MấtDanh −Gợi ýBạc +; nhưng Danh −!/Chu toàn lễ nghĩaTốnBạc 10ĐượcDanh +, giữ thể diệnGợi ýDanh +, giữ thể diện!",
+   "screen": ".dlg «Bổng lộc tháng tám»",
+   "opts": [
+    "Chu toàn lễ nghĩaTốnBạc 10ĐượcDanh +, giữ thể diệnGợi ýDanh +, giữ thể diện!",
+    "Bớt lễ nghĩaTốnkhôngĐượcBạc +MấtDanh −Gợi ýBạc +; nhưng Danh −!"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Bớt lễ nghĩaTốnkhôngĐượcBạc +MấtDanh −Gợi ýBạc +; nhưng Danh −!": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Lễ tấn phong Thường tại Doãn Anh Ninh|Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 277)!/Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!/Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5 (có 100)!",
+   "screen": ".dlg «Lễ tấn phong Thường tại Doãn Anh Ninh»",
+   "opts": [
+    "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5 (có 100)!",
+    "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 277)!",
+    "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5 (có 100)!": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Chương 2: Sơ thừa ân sủng|Bán đồ trong rương riêng/Điểm trang hoặc Dưỡng nhan/Đến Nội vụ phủ, nhờ thái giám Tiểu Thọ Tử mua một món",
+   "screen": ".dlg «Chương 2: Sơ thừa ân sủng»",
+   "opts": [
+    "Bán đồ trong rương riêng",
+    "Điểm trang hoặc Dưỡng nhan",
+    "Đến Nội vụ phủ, nhờ thái giám Tiểu Thọ Tử mua một món"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Bán đồ trong rương riêng": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 1/2|Chỉ lặng lẽ mài mực hầu ngàiTốnkhôngĐượcSủng +, giữ được thân mình ngoài chính s/Khuyên ngài dựa vào lớp quan trẻ ở Hàn lâm việnCó cơTốnkhôngĐượcSủng +, ngài có /Khuyên ngài nhẫn nại chờ thờiTốnkhôngĐượcSủng +, Đức +Gợi ýSủng +, Đức +!",
+   "screen": ".dlg «Phụ tuyến · Tân quân lập uy · Chương 1 · Hồi 1/2»",
+   "opts": [
+    "Khuyên ngài nhẫn nại chờ thờiTốnkhôngĐượcSủng +, Đức +Gợi ýSủng +, Đức +!",
+    "Khuyên ngài dựa vào lớp quan trẻ ở Hàn lâm việnCó cơTốnkhôngĐượcSủng +, ngài có ",
+    "Chỉ lặng lẽ mài mực hầu ngàiTốnkhôngĐượcSủng +, giữ được thân mình ngoài chính s"
+   ],
+   "ods": [
+    "",
+    "Có cơ",
+    ""
+   ],
+   "took": {
+    "Khuyên ngài dựa vào lớp quan trẻ ở Hàn lâm việnCó cơTốnkhôngĐượcSủng +, ngài có ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Y phục dự Tết Trùng cửu|Cáo lỗi, về cung nghỉTốnkhôngĐượcvề cung nghỉ, không dự lễGợi ývề cung nghỉ, khô/Cứ thế vào dựTốnkhôngĐượcvào dự lễ như đang mặcGợi ývào dự lễ như đang mặc!/Sai người mua trâm đồng mai hoa (Vàng) ở Nội vụ phủTốn1 khắc·Bạc 12Đượccó màu Và",
+   "screen": ".dlg «Y phục dự Tết Trùng cửu»",
+   "opts": [
+    "Sai người mua trâm đồng mai hoa (Vàng) ở Nội vụ phủTốn1 khắc·Bạc 12Đượccó màu Và",
+    "Cứ thế vào dựTốnkhôngĐượcvào dự lễ như đang mặcGợi ývào dự lễ như đang mặc!",
+    "Cáo lỗi, về cung nghỉTốnkhôngĐượcvề cung nghỉ, không dự lễGợi ývề cung nghỉ, khô"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Sai người mua trâm đồng mai hoa (Vàng) ở Nội vụ phủTốn1 khắc·Bạc 12Đượccó màu Và": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Tết Trùng cửu · Đặt cược|Cược diều bướmKhó lườngTốnBạc 20ĐượcBạc ++; hỏng thì mất tiền cượcGợi ýBạc ++; K/Cược diều phượngHiểmTốnBạc 20ĐượcBạc +++; hỏng thì mất tiền cượcGợi ýBạc +++; Hi/Không cược, chỉ xemTốnkhôngĐượckhôngGợi ýkhông được mất gì!",
+   "screen": ".dlg «Tết Trùng cửu · Đặt cược»",
+   "opts": [
+    "Cược diều bướmKhó lườngTốnBạc 20ĐượcBạc ++; hỏng thì mất tiền cượcGợi ýBạc ++; K",
+    "Cược diều phượngHiểmTốnBạc 20ĐượcBạc +++; hỏng thì mất tiền cượcGợi ýBạc +++; Hi",
+    "Không cược, chỉ xemTốnkhôngĐượckhôngGợi ýkhông được mất gì!"
+   ],
+   "ods": [
+    "Khó lường",
+    "Hiểm",
+    ""
+   ],
+   "took": {
+    "Không cược, chỉ xemTốnkhôngĐượckhôngGợi ýkhông được mất gì!": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Tết Trùng cửu · Chuyện bên lề hội|Cho Cung nữ thân tín tam đẳng Tăng Ngân Hạnh nói rõ từng khoản chiTốnBạc 60·Sức /Im lặng, để thời gian trả lờiTốnDanh 10·Sủng 5ĐượcSức +++·Ân tình ++/Rỉ tai lại rằng Uyển đáp ứng Liêu Bích Dao nịnh người trênTốnĐức 5ĐượcTâm cơ +++/Tâu Hoàng hậu xin phân xửTốnSủng 5·Đức 5ĐượcHoàng hậu → ta: thiện cảm ++·Danh ++",
+   "screen": ".dlg «Tết Trùng cửu · Chuyện bên lề hội»",
+   "opts": [
+    "Cho Cung nữ thân tín tam đẳng Tăng Ngân Hạnh nói rõ từng khoản chiTốnBạc 60·Sức ",
+    "Rỉ tai lại rằng Uyển đáp ứng Liêu Bích Dao nịnh người trênTốnĐức 5ĐượcTâm cơ +++",
+    "Tâu Hoàng hậu xin phân xửTốnSủng 5·Đức 5ĐượcHoàng hậu → ta: thiện cảm ++·Danh ++",
+    "Im lặng, để thời gian trả lờiTốnDanh 10·Sủng 5ĐượcSức +++·Ân tình ++"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Im lặng, để thời gian trả lờiTốnDanh 10·Sủng 5ĐượcSức +++·Ân tình ++": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".kscn||‹/›",
+   "screen": ".kscn «»",
+   "opts": [
+    "‹",
+    "›"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "›": 4,
+    "‹": 1
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Việc của kẻ hầu|Khen một câuTốnkhôngĐượcthiện cảm +Gợi ýthiện cảm +!/Thưởng vì làm việc chăm chỉTốnBạc 10Đượcthiện cảm +, kẻ hầu khác gắng sứcGợi ýth",
+   "screen": ".dlg «Việc của kẻ hầu»",
+   "opts": [
+    "Thưởng vì làm việc chăm chỉTốnBạc 10Đượcthiện cảm +, kẻ hầu khác gắng sứcGợi ýth",
+    "Khen một câuTốnkhôngĐượcthiện cảm +Gợi ýthiện cảm +!"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Thưởng vì làm việc chăm chỉTốnBạc 10Đượcthiện cảm +, kẻ hầu khác gắng sứcGợi ýth": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Kính sự phòng|Chặn ngự giáKhó lườngTốnkhôngĐượcdựa vào nhan sắc, ân sủng; tài nghệ nặng ký (mô/Tranh sủngKhó lườngTốnkhôngĐượcdựa vào ân sủng; tài nghệ góp ít · thành: sủng ch",
+   "screen": ".dlg «Kính sự phòng»",
+   "opts": [
+    "Tranh sủngKhó lườngTốnkhôngĐượcdựa vào ân sủng; tài nghệ góp ít · thành: sủng ch",
+    "Chặn ngự giáKhó lườngTốnkhôngĐượcdựa vào nhan sắc, ân sủng; tài nghệ nặng ký (mô"
+   ],
+   "ods": [
+    "Khó lường",
+    "Khó lường"
+   ],
+   "took": {
+    "Chặn ngự giáKhó lườngTốnkhôngĐượcdựa vào nhan sắc, ân sủng; tài nghệ nặng ký (mô": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Hội phối đồ: báo đề|Xem thêm/Đã hiểu, sẽ chuẩn bịTốnkhôngĐượcmua thêm đồ ở Nội vụ phủ hay mượn của người thân",
+   "screen": ".dlg «Hội phối đồ: báo đề»",
+   "opts": [
+    "Xem thêm",
+    "Đã hiểu, sẽ chuẩn bịTốnkhôngĐượcmua thêm đồ ở Nội vụ phủ hay mượn của người thân"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Đã hiểu, sẽ chuẩn bịTốnkhôngĐượcmua thêm đồ ở Nội vụ phủ hay mượn của người thân": 1
+   },
+   "n": 1
+  }
+ ],
+ "_scrW": {},
+ "_clk": {
+  "9.104.2.3": 1,
+  "9.105.0.0": 2,
+  "9.105.2.0": 3,
+  "9.105.0.1": 5,
+  "9.105.0.2": 6,
+  "9.105.0.3": 7,
+  "9.105.1.0": 8
+ },
+ "_maxClk": "9.105.0.0",
+ "_tsW": {
+  "ts|.kmov|": {
+   "n": 1,
+   "t": 1795853827700,
+   "last": 1795853827700
+  },
+  "ts|.kscn|": {
+   "n": 16,
+   "t": 1795853985290,
+   "last": 1795853999673
+  },
+  "ts|.kne|": {
+   "n": 1,
+   "t": 1795854224630,
+   "last": 1795854224630
+  }
+ },
+ "consoleErr": [
+  {
+   "at": 100,
+   "buoi": 1,
+   "t": "Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-fx/binh.webp"
+  }
+ ],
+ "_dress": {
+  "k": "#kg82|",
+  "put": 0,
+  "look": 0
+ },
+ "_swK": "#dawn|host Tiếp theo",
+ "_bdCdp": {
+  "_type": "CDPSession",
+  "_guid": "cdp-session@f4d11c35e14f8cd84e55218dc0712885"
+ },
+ "_bdCdpP": {
+  "_type": "Page",
+  "_guid": "page@52c9f5cde510fee7777f2c563ea7567f"
+ },
+ "offers": [
+  {
+   "buoi": 3,
+   "y": 9,
+   "rank": 3,
+   "screen": ".dlg «Lễ tấn phong Thường tại Doãn Anh Ninh»",
+   "label": "Đến chúc mừngTốnSức 5Đượcthiện cảm ++·lì xì Bạc +Cần✓ Sức ≥5",
+   "kind": "decree",
+   "rule": 2,
+   "picked": true
+  },
+  {
+   "buoi": 3,
+   "y": 9,
+   "rank": 3,
+   "screen": ".dlg «Lễ tấn phong Thường tại Doãn Anh Ninh»",
+   "label": "Gửi lễ mừngTốnBạc 15Đượcthiện cảm ++Cần✓ Bạc 15 (có 277)!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  },
+  {
+   "buoi": 3,
+   "y": 9,
+   "rank": 3,
+   "screen": ".dlg «Lễ tấn phong Thường tại Doãn Anh Ninh»",
+   "label": "Không đếnTốnkhôngĐượcSức ++Kèmthiện cảm −−·oán ta ++!",
+   "kind": "decree",
+   "rule": 2,
+   "picked": false
+  }
+ ],
+ "dumps": [
+  "/home/user/wt/out-coop1j-e/shots-coop-rt-flight2-coop1j-e-host-k4/stuck-1-dump.json"
+ ]
+}

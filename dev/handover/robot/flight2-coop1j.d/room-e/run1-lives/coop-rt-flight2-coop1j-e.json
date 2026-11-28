@@ -1,0 +1,414 @@
+{
+ "run": {
+  "tag": "flight2-coop1j-e",
+  "url": "http://127.0.0.1:8813/",
+  "harness": "realtap",
+  "args": {
+   "host": "fold",
+   "guest": "ipad",
+   "kiep": "1",
+   "seed": "7105",
+   "tag": "flight2-coop1j-e",
+   "pin": "1"
+  },
+  "at": "2026-11-28T02:38:05.974Z"
+ },
+ "pairs": [
+  {
+   "job": {
+    "id": "coop-rt-flight2-coop1j-e",
+    "kiep": 1,
+    "seed": 7105
+   },
+   "lives": [
+    {
+     "seat": "host",
+     "dev": "fold",
+     "kiep": 1,
+     "extra": false,
+     "room": "E8EH",
+     "life": {
+      "id": "Bỏ trốn",
+      "type": "death",
+      "fate": "Chết đuối khi bỏ trốn",
+      "death": true,
+      "age": 19,
+      "year": 2,
+      "rank": 0,
+      "card": [
+       "Giữ tín vật, hồi thư hẹn kiếp sau",
+       "Đốt thư, gửi trả tín vật",
+       "Đến bến sông"
+      ],
+      "duringArea": false,
+      "lastTaps": [
+       "page «Hoa viên nhà · Ở đây có 3 người.» «Tư trang»",
+       "page «Hoa viên nhà · Ở đây có 3 người.» «Hậu cung»",
+       "page «Hoa viên nhà · Ở đây có 3 người.» «Sẵn sàng»",
+       ".dlg «Cha say rượu» «Lắng nghe, hỏi chuyện các nhà trên triềuTốnkhôngĐư»",
+       ".dlg «Cha say rượu» «Lắng nghe, hỏi chuyện các nhà trên triều › ✓»",
+       ".kbk «Tổng lược» «Trang sau»",
+       ".kbk «Tổng lược» «Trang trước»",
+       ".kbk «Tổng lược» «Trang sau»",
+       ".kbk «Tổng lược» «Trang sau»",
+       ".kbk «Tổng lược» «Lui»",
+       ".dlg «Thuở thanh mai» «Đến bến sôngVữngTốnSức 20Đượckết: Bị ép chia lìa; »",
+       ".dlg «Thuở thanh mai» «Đến bến sôngVữngTốnSức 20Đượckết: Bị ép  › ✓»"
+      ]
+     },
+     "harness": {
+      "kind": "realtap",
+      "sha": "5aff9dbb",
+      "realtap": true,
+      "jsClicks": 0,
+      "deadButtons": 0,
+      "cap": null,
+      "stuck": 0,
+      "unstick": [
+       {
+        "at": 185,
+        "lvl": 3,
+        "layer": "page",
+        "title": "Khuê phòng · Không gặp ai."
+       },
+       {
+        "at": 255,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 352,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 479,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 490,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 501,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 587,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 767,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       },
+       {
+        "at": 956,
+        "lvl": 1,
+        "layer": "#coopfz",
+        "title": ""
+       }
+      ],
+      "slice": null,
+      "mgBackN": 4,
+      "mgBackQuitN": 0,
+      "builds": [
+       {
+        "s": "5fb13d60+",
+        "b": "8af7b3429f38",
+        "where": "start"
+       }
+      ],
+      "build0": {
+       "s": "5fb13d60+",
+       "b": "8af7b3429f38",
+       "t": "2026-11-27T21:15Z",
+       "at": "2026-11-28T02:38:11.567Z"
+      },
+      "pinUrl": "http://127.0.0.1:8813/",
+      "build": {
+       "s": "5fb13d60+",
+       "b": "8af7b3429f38",
+       "t": "2026-11-27T21:15Z"
+      },
+      "areaTaps": 137,
+      "bareCovered": 11,
+      "bareCoveredBy": {
+       "top changed div#kload.modal.kpscene.kload → div#modal.modal.kptitle.kpthome": 1,
+       "not on the layer scanned": 10
+      },
+      "consoleErrN": 34,
+      "ident": {
+       "name": "Chu Thục Nghi",
+       "org": "Cháu gái Thái hậu",
+       "born": -19,
+       "at": 1
+      },
+      "backdropTaps": 1,
+      "twoTap": {
+       "hand": 54,
+       "plaque": 0,
+       "chosen": 54,
+       "liftOnly": 0,
+       "chipFail": 0
+      },
+      "skipLayerTaps": 25,
+      "infoTaps": 83,
+      "nextNoTurn": 72,
+      "dlgClose": 128,
+      "loops": 1,
+      "mgQuickSkipped": 4,
+      "mgReady": 4,
+      "mgMiss": 16,
+      "boards": [
+       {
+        "at": 284,
+        "buoi": 5,
+        "kind": "tho",
+        "layer": "#kg82",
+        "moves": 10,
+        "area": 0,
+        "drags": 10,
+        "holds": 0,
+        "btns": 0,
+        "s": 25,
+        "res": "7/10 raw 6.60",
+        "raw": 6.600762550978542
+       },
+       {
+        "at": 406,
+        "buoi": 17,
+        "kind": "dan",
+        "layer": "#kg82",
+        "moves": 15,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 21,
+        "res": "4/10 raw 7.30",
+        "raw": 7.3
+       },
+       {
+        "at": 691,
+        "buoi": 49,
+        "kind": "dan",
+        "layer": "#kg82",
+        "moves": 17,
+        "area": 0,
+        "drags": 0,
+        "holds": 0,
+        "btns": 0,
+        "s": 21,
+        "res": "7/10 raw 8.30",
+        "raw": 8.3
+       },
+       {
+        "at": 1376,
+        "buoi": 141,
+        "kind": "tho",
+        "layer": "#kg82",
+        "moves": 10,
+        "area": 0,
+        "drags": 10,
+        "holds": 0,
+        "btns": 0,
+        "s": 21,
+        "res": "8/10 raw 7.89",
+        "raw": 7.887165704928975
+       }
+      ],
+      "boardN": 4,
+      "mgPeekTaps": 52,
+      "boardTaps": 52,
+      "mgBackWhy": [
+       {
+        "at": 284,
+        "buoi": 5,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 406,
+        "buoi": 17,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 691,
+        "buoi": 49,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       },
+       {
+        "at": 1376,
+        "buoi": 141,
+        "ph": "result",
+        "res": true,
+        "long": false,
+        "btns": [
+         "Quay lại"
+        ]
+       }
+      ],
+      "kfocVisits": 1,
+      "offSkip": 3,
+      "offSkipLog": [
+       "7 · .kfoc «» · Nghe nhũ mẫu kể chuyện xưa · Rất vững · ",
+       "7 · .kfoc «» · Gối đầu lên lòng nhũ mẫu · Rất vững · Tố",
+       "7 · .kfoc «» · Nhờ nhũ mẫu dò la viện kế mẫu · Tùy duyê"
+      ],
+      "kresTaps": 20,
+      "skipCoverTaps": 2,
+      "closeOwnLayer": 2,
+      "dlgScroll": 6,
+      "scrolls": 6,
+      "taps": 1588
+     },
+     "exitPick": null,
+     "bugs": [
+      {
+       "k": "stuck|no-clock loop: 150 taps without a clock step on page «Khuê phòng · Không gặp ai.»",
+       "type": "stuck",
+       "msg": "no-clock loop: 150 taps without a clock step on page «Khuê phòng · Không gặp ai.»",
+       "n": 1,
+       "at": 185,
+       "shot": "/home/user/wt/out-coop1j-e/shots-coop-rt-flight2-coop1j-e-host-k1/loop-1.png",
+       "dump": "/home/user/wt/out-coop1j-e/shots-coop-rt-flight2-coop1j-e-host-k1/loop-1-dump.json",
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 0,
+        "name": "Chu Thục Nghi",
+        "org": "Cháu gái Thái hậu",
+        "kend": "",
+        "fate": ""
+       },
+       "buttons": [
+        "Ô lưu",
+        "Xem bản thân",
+        "Sắc59Tài70Tâm cơ25Đức30Danh8Gia thanh53",
+        "Bạc73Sức70/100",
+        "Buổi sáng, còn 0 khắc",
+        "Tuyển túcòn 23 tháng",
+        "hoa đào bay",
+        "Tâm trạngBình thản+3",
+        "Về phòng",
+        "Tin báo: 4 tin mới",
+        "Hảo hữu của ta: Đang bận",
+        "Túi đồThú cưngViệcTất cả 23Trang sức 3Y phục 3Vải vóc 0Thuốc men 0Hương liệu 1Lễ vật 1Thư "
+       ],
+       "trace": [
+        "page «Khuê phòng · Không gặp ai.» «Tâm trạngBình thản+3»",
+        ".dlg «Tâm trạng · Ta» «Lui»",
+        "page «Khuê phòng · Không gặp ai.» «Lễ vật 1»",
+        "page «Khuê phòng · Không gặp ai.» «Bạc73Sức70/100»",
+        ".dlg «Bạc» «Lui»",
+        "page «Khuê phòng · Không gặp ai.» «Buổi sáng, còn 0 khắc»",
+        ".dlg «sáng · còn» «Lui»",
+        "page «Khuê phòng · Không gặp ai.» «Việc»",
+        "page «Khuê phòng · Không gặp ai.» «Tài nghệ»",
+        "page «Khuê phòng · Không gặp ai.» «Tác phẩm»",
+        "page «Khuê phòng · Không gặp ai.» «Tuyển túcòn 23 tháng»",
+        "page «Khuê phòng · Không gặp ai.» «Mệnh truyện»",
+        "page «Khuê phòng · Không gặp ai.» «Mệnh truyện»",
+        "page «Khuê phòng · Không gặp ai.» «Hậu cung»",
+        "page «Khuê phòng · Không gặp ai.» «Bạc73Sức70/100»",
+        ".dlg «Bạc» «Lui»",
+        "page «Khuê phòng · Không gặp ai.» «hoa đào bay»",
+        "page «Khuê phòng · Không gặp ai.» «Giao tình»",
+        "page «Khuê phòng · Không gặp ai.» «Mệnh truyện»",
+        "page «Khuê phòng · Không gặp ai.» «Tư trang»"
+       ],
+       "next": {
+        "dis": true,
+        "q": 0,
+        "mg": false,
+        "qt": [],
+        "t": "Chờ hảo hữu…"
+       }
+      },
+      {
+       "k": "game|softlock: «Chờ hảo hữu…» disabled with no dialog on screen (dialog queue Q=0: )",
+       "type": "game",
+       "msg": "softlock: «Chờ hảo hữu…» disabled with no dialog on screen (dialog queue Q=0: )",
+       "n": 1,
+       "at": 185,
+       "shot": "/home/user/wt/out-coop1j-e/shots-coop-rt-flight2-coop1j-e-host-k1/loop-1.png",
+       "S": {
+        "dead": false,
+        "y": 1,
+        "t": 0,
+        "w": 0,
+        "b": 0,
+        "age": 18,
+        "rank": 0,
+        "name": "Chu Thục Nghi",
+        "org": "Cháu gái Thái hậu",
+        "kend": "",
+        "fate": ""
+       }
+      }
+     ],
+     "dead": [],
+     "buoi": 193,
+     "saves": [
+      {
+       "buoi": 50,
+       "year": 1,
+       "chars": 0,
+       "key": "",
+       "stored": null,
+       "err": 0
+      },
+      {
+       "buoi": 100,
+       "year": 1,
+       "chars": 0,
+       "key": "",
+       "stored": null,
+       "err": 0
+      },
+      {
+       "buoi": 150,
+       "year": 2,
+       "chars": 0,
+       "key": "",
+       "stored": null,
+       "err": 0
+      }
+     ]
+    }
+   ],
+   "partial": true,
+   "bugs": []
+  }
+ ]
+}

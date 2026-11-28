@@ -1,0 +1,60 @@
+BOARD mua 24 moves 10/10 raw 10.00 (41 s, area 0, drag 0, hold 0, btn 0, sens)
+CP buổi 1065 year 8 save 0 chars
+BOARD hat 34 moves 10/10 raw 6.66 (25 s, area 0, drag 0, hold 34, btn 0, sens)
+BOARD hat 9 moves 8/10 raw 4.18 (22 s, area 0, drag 0, hold 9, btn 0, sens)
+BOARD hat 4 moves 8/10 raw 4.13 (23 s, area 0, drag 0, hold 4, btn 0, sens)
+STATUS coop-rt-flight2-coop1j-e-host-k3 · buổi 798 · year 8 · rank 0 · bugs 3 · stuck 0 · dead buttons 0
+CP buổi 800 year 8 save 0 chars
+CP buổi 1115 year 8 save 0 chars
+CP buổi 850 year 9 save 0 chars
+BOARD dan 16 moves 5/10 raw 8.00 (22 s, area 0, drag 0, hold 0, btn 0, sens)
+BOARD hat 2 moves 5/10 raw 1.72 (17 s, area 0, drag 0, hold 2, btn 0, sens)
+BOARD hat 4 moves 6/10 raw 1.91 (24 s, area 0, drag 0, hold 4, btn 0, sens)
+BOARD mua 18 moves 7/10 raw 6.93 (64 s, area 0, drag 0, hold 0, btn 0, sens)
+CP buổi 1165 year 9 save 0 chars
+BOARD mua 23 moves 10/10 raw 9.50 (42 s, area 0, drag 0, hold 0, btn 0, sens)
+BOARD mua 24 moves 10/10 raw 10.00 (44 s, area 0, drag 0, hold 0, btn 0, sens)
+BOARD mua 18 moves 5/10 raw 5.80 (58 s, area 0, drag 0, hold 0, btn 0, sens)
+CP buổi 900 year 9 save 0 chars
+BOARD hat 3 moves 6/10 raw 1.28 (22 s, area 0, drag 0, hold 3, btn 0, sens)
+BOARD co 5 moves 10/10 raw 10.00 (5 s, area 0, drag 0, hold 0, btn 0, sens)
+BOARD hat 10 moves 10/10 raw 4.23 (22 s, area 0, drag 0, hold 10, btn 0, sens)
+BOARD hat 2 moves 6/10 raw 1.57 (24 s, area 0, drag 0, hold 2, btn 0, sens)
+BOARD ban 6 moves 10/10 raw 7.08 (10 s, area 0, drag 0, hold 0, btn 0, sens)
+BOARD hat 3 moves 7/10 raw 1.17 (22 s, area 0, drag 0, hold 3, btn 0, sens)
+BOARD mua 19 moves 9/10 raw 8.00 (40 s, area 0, drag 0, hold 0, btn 0, sens)
+BOARD hat 38 moves 10/10 raw 7.44 (22 s, area 0, drag 0, hold 38, btn 0, sens)
+BOARD hat 4 moves 6/10 raw 1.14 (25 s, area 0, drag 0, hold 4, btn 0, sens)
+BOARD hat 4 moves 7/10 raw 1.26 (24 s, area 0, drag 0, hold 4, btn 0, sens)
+BOARD hat 41 moves 10/10 raw 8.45 (22 s, area 0, drag 0, hold 41, btn 0, sens)
+STATUS coop-rt-flight2-coop1j-e-guest-k1 · buổi 1211 · year 9 · rank 0 · bugs 5 · stuck 0 · dead buttons 1
+BOARD hat 4 moves 7/10 raw 2.49 (23 s, area 0, drag 0, hold 4, btn 0, sens)
+CP buổi 1215 year 9 save 0 chars
+BOARD mua 9 moves 2/10 raw 1.57 (52 s, area 0, drag 0, hold 0, btn 0, sens)
+BOARD co 5 moves 9/10 raw 10.00 (6 s, area 0, drag 0, hold 0, btn 0, sens)
+LIFE DONE coop-rt-flight2-coop1j-e-host-k3 Lãnh cung age 24 · buổi 949 · taps 10690 · dead buttons 0 · stuck 0 · bugs 3
+SEAT LIFE DONE host k3 Lãnh cung
+REBIRTH host tap «Tiếp theo»
+REBIRTH host tap «Chuyển kiếp»
+BUILD PIN: life coop-rt-flight2-coop1j-e-host-k4 already on the pinned http://127.0.0.1:8813/ (noBoot: the page is kept — a co-op in-room «Chuyển kiếp» is never reloaded away)
+GAME BUILD {"s":"5fb13d60+","b":"8af7b3429f38","t":"2026-11-27T21:15Z"}
+NO-EXIT DIALOG .kscn «» div.kscn — no button at all for 31 s (taps on the scene / backdrop did not close it)
+BUG harness NO-EXIT DIALOG .kscn «» (div.kscn): no button at all for 31 s (taps on the scene / backdrop did not close it) → later visits unstuck at once by taps
+AREA BLOCKED {"screen":".kscn «»","x":8,"y":8,"ev":"touchstart","hit":"button#menu.menu","tgt":"button#menu.menu","dt":95,"top0":"header.hud.has-kseal"}
+BUG harness area tap would have landed on a button (it appeared under the point) — blocked: «☰»
+BUG SAVE REWIND: reload went back from b1227 (clock 9.104.0.0) to the stored b1223 (clock 9.103.2.0) (4 buổi lost)
+BUG game SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)
+BOARD dan 17 moves 8/10 raw 8.50 (21 s, area 0, drag 0, hold 0, btn 0, sens)
+BUG SAVE REWIND: reload went back from b3 (clock 9.105.2.0) to the stored b2 (clock 9.105.0.0) (1 buổi lost)
+BOARD mua 13 moves 1/10 raw 3.17 (39 s, area 0, drag 0, hold 0, btn 0, sens)
+BUG stuck no-clock loop: 150 taps without a clock step on .kscn «»
+BUG stuck no progress 15 min on #coopfz «»
+BUG SAVE REWIND: reload went back from b8 (clock 9.105.1.0) to the stored b2 (clock 9.105.0.0) (6 buổi lost)
+BUG game SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)
+DEAD BUTTON page «Trường Môn viện · Gió lùa qua song cửa mục. Ở đây » «Tất cả 9/9Nghỉ ngơi 1/1Lễ nghi 1/1Giao thiệp 4/4Lố» cover outside viewport
+SEAT LIFE DONE host k4 HARNESS
+SEAT LIFE DONE guest k1 HARNESS
+browserContext.close: Target page, context or browser has been closed
+    at async /home/user/wt/coop1j-r22/dev/test/robot-rt-coop.js:106:34 {
+  log: []
+}

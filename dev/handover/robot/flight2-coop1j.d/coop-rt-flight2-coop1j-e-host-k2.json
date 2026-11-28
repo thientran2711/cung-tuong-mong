@@ -1,0 +1,1032 @@
+{
+ "job": {
+  "id": "coop-rt-flight2-coop1j-e-host-k2",
+  "origin": null,
+  "road": null,
+  "pick": null,
+  "bot": "sens",
+  "seed": 71251,
+  "dev": "fold",
+  "url": "http://127.0.0.1:8813/"
+ },
+ "harness": {
+  "kind": "realtap",
+  "sha": "5aff9dbb",
+  "realtap": true,
+  "jsClicks": 0,
+  "deadButtons": 0,
+  "cap": null,
+  "stuck": 0,
+  "unstick": [],
+  "slice": null,
+  "mgBackN": 1,
+  "mgBackQuitN": 0,
+  "builds": [
+   {
+    "s": "5fb13d60+",
+    "b": "8af7b3429f38",
+    "where": "start"
+   }
+  ],
+  "build0": {
+   "s": "5fb13d60+",
+   "b": "8af7b3429f38",
+   "t": "2026-11-27T21:15Z",
+   "at": "2026-11-28T03:19:44.585Z"
+  },
+  "pinUrl": "http://127.0.0.1:8813/",
+  "build": {
+   "s": "5fb13d60+",
+   "b": "8af7b3429f38",
+   "t": "2026-11-27T21:15Z"
+  },
+  "ident": {
+   "name": "Thượng Quan Tư Dao",
+   "org": "Con gái nhà buôn muối",
+   "born": -17,
+   "at": 0
+  },
+  "twoTap": {
+   "hand": 6,
+   "plaque": 1,
+   "chosen": 7,
+   "liftOnly": 0,
+   "chipFail": 0,
+   "reLaid": 1
+  },
+  "reLaidLog": [
+   "0 · .dlg «Thân phận kiếp này» · Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở "
+  ],
+  "bareCovered": 5,
+  "bareCoveredBy": {
+   "not on the layer scanned": 5
+  },
+  "areaTaps": 17,
+  "skipCoverTaps": 1,
+  "skipLayerTaps": 1,
+  "dlgClose": 4,
+  "infoTaps": 4,
+  "nextNoTurn": 2,
+  "offSkip": 23,
+  "offSkipLog": [
+   "4 · .kscn «» · Nghe nhũ mẫu kể chuyện xưa · Rất vững · ",
+   "4 · .kscn «» · Gối đầu lên lòng nhũ mẫu · Rất vững · Tố",
+   "4 · .kscn «» · Nhờ nhũ mẫu dò la viện di nương · Có cơ "
+  ],
+  "mgQuickSkipped": 1,
+  "mgReady": 1,
+  "mgMiss": 4,
+  "boards": [
+   {
+    "at": 73,
+    "buoi": 6,
+    "kind": "dan",
+    "layer": "#kg82",
+    "moves": 16,
+    "area": 0,
+    "drags": 0,
+    "holds": 0,
+    "btns": 0,
+    "s": 21,
+    "res": "5/10 raw 8.00",
+    "raw": 8
+   }
+  ],
+  "boardN": 1,
+  "mgPeekTaps": 16,
+  "boardTaps": 16,
+  "mgBackWhy": [
+   {
+    "at": 73,
+    "buoi": 6,
+    "ph": "result",
+    "res": true,
+    "long": false,
+    "btns": [
+     "Quay lại"
+    ]
+   }
+  ],
+  "taps": 82
+ },
+ "life": {
+  "id": "Chính thất hầu phủ",
+  "type": "death",
+  "fate": "Chính thất hầu phủ",
+  "death": true,
+  "age": 18,
+  "year": 3,
+  "rank": 0,
+  "text": "Nàng xuất giá vào hầu phủ, làm chính thất của Thế tử. Mười năm sau nàng là Hầu phu nhân, mỗi dịp lễ lại vào cung bái kiến. (Tiểu thư ngoài cung · Tiểu thư Diêm thương phủ)",
+  "card": [
+   "Gả cho Thế tử hầu phủ",
+   "Xin ở vậy, mở lớp dạy chữ cho con gái",
+   "Cắt tóc đi tu"
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   ".kbk «Tổng lược» «Trang sau»",
+   ".kbk «Tổng lược» «Trang trước»",
+   ".kbk «Tổng lược» «Lui»",
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»",
+   "BOARD dan 16 moves 5/10 raw 8.00",
+   "#kg82 «Quay lại»",
+   ".kpod «Tiếp»",
+   ".kmov «Vào điện»",
+   ".dlg «Điện tuyển» «Đối đáp lanh lợiTùy duyênTốnkhôngĐượcTài nặng hơn;»",
+   ".dlg «Điện tuyển» «Đối đáp lanh lợiTùy duyênTốnkhôngĐượcTài › ✓»",
+   ".dlg «Trả thẻ bài» «Xin ở vậy, mở lớp dạy chữ cho con gáiTốnkhôngĐượcT»",
+   ".dlg «Trả thẻ bài» «Xin ở vậy, mở lớp dạy chữ cho con gáiTốn › ✓»"
+  ]
+ },
+ "exitPick": null,
+ "bugs": [],
+ "dead": [],
+ "saves": [],
+ "buoi": 6,
+ "steps": 90,
+ "status": [],
+ "_loopAt": 1795836062940,
+ "_bootFirst": 1,
+ "_scr": ".kmov «»",
+ "_started": true,
+ "_ckAt": 1795836025204,
+ "_ckB": 5,
+ "rss": [
+  {
+   "buoi": 0,
+   "y": 3,
+   "totalMB": 4266,
+   "rendererMB": 1497,
+   "heapMB": 125,
+   "dom": 2846,
+   "q": 1,
+   "lsK": 65
+  },
+  {
+   "buoi": 5,
+   "y": 3,
+   "totalMB": 4456,
+   "rendererMB": 1633,
+   "heapMB": 125,
+   "dom": 1062,
+   "q": 0,
+   "lsK": 53
+  }
+ ],
+ "promo": {
+  "raw": 0,
+  "real": 0,
+  "picked": 0,
+  "by": {}
+ },
+ "_snapAt": 1795836057767,
+ "_kipG": {},
+ "_kipOpen": null,
+ "_unsFail": {
+  "#kroul|": {},
+  ".dlg|Thân phận kiếp này": {},
+  ".dlg|Tiền truyện · Con gái nhà buôn muối · #/#": {},
+  ".dlg|Sơ tuyển": {},
+  ".dlg|Phúc tuyển": {},
+  ".kpod|": {},
+  ".dlg|Điện tuyển": {},
+  ".dlg|Trả thẻ bài": {}
+ },
+ "_lastOpen": "Xin ở vậy, mở lớp dạy chữ cho con gáiTốn",
+ "_lastOpenScr": ".dlg «Trả thẻ bài»",
+ "trace": [
+  [
+   0,
+   "#kroul «Tiếp»"
+  ],
+  [
+   1,
+   "#kroul «Cháu gái Thái hậuThường gặp»"
+  ],
+  [
+   1,
+   "#kroul «Cung nữ được sủng hạnhThường gặp»"
+  ],
+  [
+   1,
+   "#kroul «Con gái tội thầnHiếm»"
+  ],
+  [
+   1,
+   "#kroul «Cháu gái Thái hậuThường gặp»"
+  ],
+  [
+   2,
+   "#kroul «Xem thân phận»"
+  ],
+  [
+   2,
+   ".dlg «Thân phận kiếp này» «Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tà»"
+  ],
+  [
+   2,
+   ".dlg «Thân phận kiếp này» «Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở  › ✓»"
+  ],
+  [
+   3,
+   ".dlg «Thân phận kiếp này» «Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tà»"
+  ],
+  [
+   3,
+   ".dlg «Thân phận kiếp này» «Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở  › ✓»"
+  ],
+  [
+   4,
+   ".dlg «Thân phận kiếp này» «Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này»"
+  ],
+  [
+   4,
+   "#kmrew «Nhận»"
+  ],
+  [
+   6,
+   ".dlg «Tiền truyện · Con gái nhà buôn muối · 1/3» «Tiếp theo»"
+  ],
+  [
+   6,
+   ".dlg «Tiền truyện · Con gái nhà buôn muối · 2/3» «Tiếp theo»"
+  ],
+  [
+   6,
+   ".dlg «Tiền truyện · Con gái nhà buôn muối · 2/3» «Tiếp theo»"
+  ],
+  [
+   6,
+   ".dlg «Tiền truyện · Con gái nhà buôn muối · 3/3» «Tiếp theo»"
+  ],
+  [
+   7,
+   ".dlg «Khuê các» «Lui»"
+  ],
+  [
+   8,
+   "AREA 378,500"
+  ],
+  [
+   8,
+   "SKIP TAP #kdaytc «» tap"
+  ],
+  [
+   9,
+   ".dlg «Sơ tuyển» «Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy »"
+  ],
+  [
+   9,
+   ".dlg «Sơ tuyển» «Ra mắt ma maRất vữngTốnkhôngĐượcqua hay  › ✓»"
+  ],
+  [
+   10,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   10,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   11,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   11,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   11,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   15,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sẵn sàng»"
+  ],
+  [
+   17,
+   "page «Khuê phòng · Ở đây có 1 người.» «trời âm u»"
+  ],
+  [
+   19,
+   "page «Khuê phòng · Ở đây có 1 người.» «Hậu cung»"
+  ],
+  [
+   19,
+   "page «Khuê phòng · Ở đây có 1 người.» «Hành sự»"
+  ],
+  [
+   20,
+   "page «Khuê phòng · Không gặp ai.» «Học tập · Tài nghệHọc tập · Tài nghệĐọc sách, chép»"
+  ],
+  [
+   23,
+   "page «Khuê phòng · Không gặp ai.» «Nghỉ ngơiNghỉ ngơiNghỉ ngơiRất vữngBuông rèm, ngủ »"
+  ],
+  [
+   25,
+   "page «Khuê phòng · Không gặp ai.» «Sẵn sàng»"
+  ],
+  [
+   27,
+   "page «Khuê phòng · Không gặp ai.» «Lịch tháng»"
+  ],
+  [
+   27,
+   ".dlg «Lịch tháng» «ngày 25»"
+  ],
+  [
+   27,
+   ".dlg «Lịch tháng» «ngày 26»"
+  ],
+  [
+   28,
+   ".dlg «Lịch tháng» «mồng 6: Nguyệt tín»"
+  ],
+  [
+   28,
+   ".dlg «Lịch tháng» «mồng 6: Nguyệt tín»"
+  ],
+  [
+   28,
+   ".dlg «Lịch tháng» «Lui»"
+  ],
+  [
+   30,
+   "page «Khuê phòng · Ở đây có 1 người.» «Tào thị»"
+  ],
+  [
+   30,
+   ".kscn «Từng nhóm»"
+  ],
+  [
+   30,
+   ".kscn «Từng người»"
+  ],
+  [
+   30,
+   ".kscn «Nghe nhũ mẫu kể chuyện xưa · Rất vững · Tốn 1 khắc»"
+  ],
+  [
+   31,
+   ".kscn «Nghe nhũ mẫu kể chuyện xưa · Rất vững ·  › Chọn»"
+  ],
+  [
+   31,
+   "page «Khuê phòng · Ở đây có 1 người.» «Xem đủ trong Sổ ghi»"
+  ],
+  [
+   32,
+   ".kscn «Giao thiệp»"
+  ],
+  [
+   32,
+   ".kscn «Giao thiệp»"
+  ],
+  [
+   32,
+   ".kscn «Mưu kế»"
+  ],
+  [
+   32,
+   ".kscn «Giao thiệp»"
+  ],
+  [
+   33,
+   ".kscn «Giao thiệp»"
+  ],
+  [
+   33,
+   ".kscn «Mưu kế»"
+  ],
+  [
+   33,
+   ".kscn «Giao thiệp»"
+  ],
+  [
+   33,
+   ".kscn «Mưu kế»"
+  ],
+  [
+   34,
+   ".kscn «Mưu kế»"
+  ],
+  [
+   34,
+   ".kscn «Giao thiệp»"
+  ],
+  [
+   34,
+   ".kscn «Giao thiệp»"
+  ],
+  [
+   34,
+   ".kscn «Mưu kế»"
+  ],
+  [
+   35,
+   ".kscn «Giao thiệp»"
+  ],
+  [
+   35,
+   ".kscn «Lui»"
+  ],
+  [
+   36,
+   ".kscn «Từng người»"
+  ],
+  [
+   37,
+   ".kscn «Từng người»"
+  ],
+  [
+   37,
+   ".kscn «Từng người»"
+  ],
+  [
+   37,
+   ".kscn «Từng nhóm»"
+  ],
+  [
+   37,
+   ".kscn «Lui»"
+  ],
+  [
+   39,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sẵn sàng»"
+  ],
+  [
+   41,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sắc81Tài41Tâm cơ12Đức31Danh8Gia thanh42»"
+  ],
+  [
+   41,
+   ".dlg «Sắc» «Lui»"
+  ],
+  [
+   43,
+   "page «Khuê phòng · Ở đây có 1 người.» «Tuyển túđã qua Sơ tuyển»"
+  ],
+  [
+   43,
+   "page «Khuê phòng · Ở đây có 1 người.» «Sẵn sàng»"
+  ],
+  [
+   45,
+   ".dlg «Phúc tuyển» «Dâng CầmTốnSức 10Đượctài nghệ dâng lên cộng vào Đi»"
+  ],
+  [
+   45,
+   ".dlg «Phúc tuyển» «Dâng CầmTốnSức 10Đượctài nghệ dâng lên c › ✓»"
+  ],
+  [
+   49,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   50,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   50,
+   ".kbk «Tổng lược» «Trang sau»"
+  ],
+  [
+   50,
+   ".kbk «Tổng lược» «Trang trước»"
+  ],
+  [
+   50,
+   ".kbk «Tổng lược» «Lui»"
+  ],
+  [
+   52,
+   "#kg82 «Sẵn sàngtừ lúc này mới tính giờ»"
+  ],
+  [
+   73,
+   "BOARD dan 16 moves 5/10 raw 8.00"
+  ],
+  [
+   73,
+   "#kg82 «Quay lại»"
+  ],
+  [
+   75,
+   ".kpod «Tiếp»"
+  ],
+  [
+   75,
+   ".kmov «Vào điện»"
+  ],
+  [
+   77,
+   ".dlg «Điện tuyển» «Đối đáp lanh lợiTùy duyênTốnkhôngĐượcTài nặng hơn;»"
+  ],
+  [
+   77,
+   ".dlg «Điện tuyển» «Đối đáp lanh lợiTùy duyênTốnkhôngĐượcTài › ✓»"
+  ],
+  [
+   78,
+   ".dlg «Trả thẻ bài» «Xin ở vậy, mở lớp dạy chữ cho con gáiTốnkhôngĐượcT»"
+  ],
+  [
+   78,
+   ".dlg «Trả thẻ bài» «Xin ở vậy, mở lớp dạy chữ cho con gáiTốn › ✓»"
+  ]
+ ],
+ "_momSeen": [
+  "#kroul|",
+  ".dlg|Thân phận kiếp này",
+  "#kmrew|",
+  ".dlg|Tiền truyện · Con gái nhà buôn muối · #/",
+  ".dlg|Khuê các",
+  "#kdaytc|",
+  ".dlg|Sơ tuyển",
+  ".kbk|Tổng lược",
+  "page|Khuê phòng · Ở đây có # người.",
+  "page|Khuê phòng · Không gặp ai.",
+  ".dlg|Lịch tháng",
+  ".kscn|",
+  ".dlg|Sắc",
+  ".dlg|Phúc tuyển",
+  "#coopfz|",
+  "#kg82|",
+  ".kpod|",
+  ".kmov|",
+  ".dlg|Điện tuyển",
+  ".dlg|Trả thẻ bài"
+ ],
+ "_momRank": 0,
+ "choicePts": [
+  {
+   "k": "#kroul||Cháu gái Thái hậuThường gặp/Con gái Tể tướngHiếm/Con gái nhà buôn muốiThường gặp/Con gái thầy đồ nghèoHiếm/Con gái tội thầnHiếm/Con gái Đại tướng quânThường gặp/Cung nữ tuyển vào cungHiếm/Cung nữ được sủng hạnhThường gặp/Công chúa hòa thânRất hiếm",
+   "screen": "#kroul «»",
+   "opts": [
+    "Cháu gái Thái hậuThường gặp",
+    "Cung nữ được sủng hạnhThường gặp",
+    "Con gái nhà buôn muốiThường gặp",
+    "Con gái thầy đồ nghèoHiếm",
+    "Con gái tội thầnHiếm",
+    "Công chúa hòa thânRất hiếm",
+    "Cung nữ tuyển vào cungHiếm",
+    "Con gái Tể tướngHiếm",
+    "Con gái Đại tướng quânThường gặp"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Cháu gái Thái hậuThường gặp": 1
+   },
+   "n": 1
+  },
+  {
+   "k": "#kroul||Cháu gái Thái hậuThường gặp/Con gái Tể tướngHiếm/Con gái nhà buôn muốiThường gặp/Con gái thầy đồ nghèoHiếm/Con gái tội thầnHiếm/Con gái Đại tướng quânThường gặp/Cung nữ được sủng hạnhThường gặp/Công chúa hòa thânRất hiếm/Xem thân phận",
+   "screen": "#kroul «»",
+   "opts": [
+    "Con gái nhà buôn muốiThường gặp",
+    "Con gái Tể tướngHiếm",
+    "Con gái tội thầnHiếm",
+    "Công chúa hòa thânRất hiếm",
+    "Con gái Đại tướng quânThường gặp",
+    "Cung nữ được sủng hạnhThường gặp",
+    "Cháu gái Thái hậuThường gặp",
+    "Con gái thầy đồ nghèoHiếm",
+    "Xem thân phận"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Cung nữ được sủng hạnhThường gặp": 1,
+    "Con gái tội thầnHiếm": 1,
+    "Cháu gái Thái hậuThường gặp": 1,
+    "Xem thân phận": 1
+   },
+   "n": 4
+  },
+  {
+   "k": ".dlg|Thân phận kiếp này|Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này/Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong Đáp ứng·có thêm khoảng hai năm/Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+   "screen": ".dlg «Thân phận kiếp này»",
+   "opts": [
+    "Vào cung ngayTốnkhôngĐượcvào cung ngay·được phong Đáp ứng·có thêm khoảng hai năm",
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn",
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này"
+   ],
+   "ods": [
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Ở nhà chờ tuyển túTốnkhôngĐượchai năm ở nhà học tài nghệ để nâng Tư chất·hồi môn": 2,
+    "Nhận thân phậnTốnkhôngĐượcbắt đầu kiếp này": 1
+   },
+   "n": 3
+  },
+  {
+   "k": ".dlg|Sơ tuyển|Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì/Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcdễ qua hơn; tổ mẫu phật ý (nhiề/Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm ",
+   "screen": ".dlg «Sơ tuyển»",
+   "opts": [
+    "Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm ",
+    "Dúi bạc cho ma ma khám tuyểnRất vữngTốnBạc 60Đượcdễ qua hơnMấtbị trả thẻ bài thì",
+    "Nhờ tổ mẫu viết thư gửi ma maRất vữngTốnSức 5Đượcdễ qua hơn; tổ mẫu phật ý (nhiề"
+   ],
+   "ods": [
+    "Rất vững",
+    "Rất vững",
+    "Rất vững"
+   ],
+   "took": {
+    "Ra mắt ma maRất vữngTốnkhôngĐượcqua hay không tùy dung mạo, sức khỏe, tiếng tăm ": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".kbk|Tổng lược|Trang sau/Trang trước",
+   "screen": ".kbk «Tổng lược»",
+   "opts": [
+    "Trang trước",
+    "Trang sau"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Trang trước": 3,
+    "Trang sau": 2
+   },
+   "n": 5
+  },
+  {
+   "k": ".dlg|Lịch tháng|Tháng sau/Tháng trước/mồng 10/mồng 1: Lĩnh bổng lộc · Nội vụ phủ phát đồ/mồng 2: Nguyệt tín/mồng 3: Nguyệt tín/mồng 4: Nguyệt tín/mồng 5: Nguyệt tín/mồng 6: Nguyệt tín/mồng 7: Nguyệt tín/mồng 8: Nguyệt tín/mồng 9/ngày 11/ngày 12/ngày 13/ngày 14/ngày 15/ngày 16/ngày 17/ngày 18/ngày 19/ngày 20/ngày 21/ngày 22/ngày 23/ngày 24/ngày 25/ngày 26/ngày 27/ngày 28/ngày 29/ngày 30",
+   "screen": ".dlg «Lịch tháng»",
+   "opts": [
+    "Tháng trước",
+    "Tháng sau",
+    "mồng 1: Lĩnh bổng lộc · Nội vụ phủ phát đồ",
+    "mồng 2: Nguyệt tín",
+    "mồng 3: Nguyệt tín",
+    "mồng 4: Nguyệt tín",
+    "mồng 5: Nguyệt tín",
+    "mồng 6: Nguyệt tín",
+    "mồng 7: Nguyệt tín",
+    "mồng 8: Nguyệt tín",
+    "mồng 9",
+    "mồng 10",
+    "ngày 11",
+    "ngày 12",
+    "ngày 13",
+    "ngày 14",
+    "ngày 15",
+    "ngày 16",
+    "ngày 17",
+    "ngày 18",
+    "ngày 19",
+    "ngày 20",
+    "ngày 21",
+    "ngày 22",
+    "ngày 23",
+    "ngày 24",
+    "ngày 25",
+    "ngày 26",
+    "ngày 27",
+    "ngày 28",
+    "ngày 29",
+    "ngày 30"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "ngày 25": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Lịch tháng|Dâng quà Thái hậu/Ghi vào sổ/Luyện đàn/Lễ Phật/mồng 10/mồng 1: Lĩnh bổng lộc · Nội vụ phủ phát đồ/mồng 2: Nguyệt tín/mồng 3: Nguyệt tín/mồng 4: Nguyệt tín/mồng 5: Nguyệt tín/mồng 6: Nguyệt tín/mồng 7: Nguyệt tín/mồng 8: Nguyệt tín/mồng 9/ngày 11/ngày 12/ngày 13/ngày 14/ngày 15/ngày 16/ngày 17/ngày 18/ngày 19/ngày 20/ngày 21/ngày 22/ngày 23/ngày 24/ngày 25/ngày 26/ngày 27/ngày 28/ngày 29/ngày 30/Đến thăm Hoàng hậu",
+   "screen": ".dlg «Lịch tháng»",
+   "opts": [
+    "mồng 1: Lĩnh bổng lộc · Nội vụ phủ phát đồ",
+    "mồng 2: Nguyệt tín",
+    "mồng 3: Nguyệt tín",
+    "mồng 4: Nguyệt tín",
+    "mồng 5: Nguyệt tín",
+    "mồng 6: Nguyệt tín",
+    "mồng 7: Nguyệt tín",
+    "mồng 8: Nguyệt tín",
+    "mồng 9",
+    "mồng 10",
+    "ngày 11",
+    "ngày 12",
+    "ngày 13",
+    "ngày 14",
+    "ngày 15",
+    "ngày 16",
+    "ngày 17",
+    "ngày 18",
+    "ngày 19",
+    "ngày 20",
+    "ngày 21",
+    "ngày 22",
+    "ngày 23",
+    "ngày 24",
+    "ngày 25",
+    "ngày 26",
+    "ngày 27",
+    "ngày 28",
+    "ngày 29",
+    "ngày 30",
+    "Dâng quà Thái hậu",
+    "Đến thăm Hoàng hậu",
+    "Lễ Phật",
+    "Luyện đàn",
+    "Ghi vào sổ"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "ngày 26": 1,
+    "mồng 6: Nguyệt tín": 1
+   },
+   "n": 2
+  },
+  {
+   "k": ".dlg|Lịch tháng|mồng 10/mồng 1: Lĩnh bổng lộc · Nội vụ phủ phát đồ/mồng 2: Nguyệt tín/mồng 3: Nguyệt tín/mồng 4: Nguyệt tín/mồng 5: Nguyệt tín/mồng 6: Nguyệt tín/mồng 7: Nguyệt tín/mồng 8: Nguyệt tín/mồng 9/ngày 11/ngày 12/ngày 13/ngày 14/ngày 15/ngày 16/ngày 17/ngày 18/ngày 19/ngày 20/ngày 21/ngày 22/ngày 23/ngày 24/ngày 25/ngày 26/ngày 27/ngày 28/ngày 29/ngày 30",
+   "screen": ".dlg «Lịch tháng»",
+   "opts": [
+    "mồng 1: Lĩnh bổng lộc · Nội vụ phủ phát đồ",
+    "mồng 2: Nguyệt tín",
+    "mồng 3: Nguyệt tín",
+    "mồng 4: Nguyệt tín",
+    "mồng 5: Nguyệt tín",
+    "mồng 6: Nguyệt tín",
+    "mồng 7: Nguyệt tín",
+    "mồng 8: Nguyệt tín",
+    "mồng 9",
+    "mồng 10",
+    "ngày 11",
+    "ngày 12",
+    "ngày 13",
+    "ngày 14",
+    "ngày 15",
+    "ngày 16",
+    "ngày 17",
+    "ngày 18",
+    "ngày 19",
+    "ngày 20",
+    "ngày 21",
+    "ngày 22",
+    "ngày 23",
+    "ngày 24",
+    "ngày 25",
+    "ngày 26",
+    "ngày 27",
+    "ngày 28",
+    "ngày 29",
+    "ngày 30"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "mồng 6: Nguyệt tín": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".kscn||Từng người/Từng nhóm",
+   "screen": ".kscn «»",
+   "opts": [
+    "Từng người",
+    "Từng nhóm"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Từng nhóm": 1,
+    "Từng người": 4
+   },
+   "n": 5
+  },
+  {
+   "k": ".kscn||Giao thiệp/Gối đầu lên lòng nhũ mẫu · Rất vững · Tốn 1 khắc/Mưu kế/Nghe nhũ mẫu kể chuyện xưa · Rất vững · Tốn 1 khắc",
+   "screen": ".kscn «»",
+   "opts": [
+    "Giao thiệp",
+    "Mưu kế",
+    "Nghe nhũ mẫu kể chuyện xưa · Rất vững · Tốn 1 khắc",
+    "Gối đầu lên lòng nhũ mẫu · Rất vững · Tốn 1 khắc"
+   ],
+   "ods": [
+    "",
+    "",
+    "",
+    ""
+   ],
+   "took": {
+    "Nghe nhũ mẫu kể chuyện xưa · Rất vững · Tốn 1 khắc": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".kscn||Giao thiệp/Mưu kế",
+   "screen": ".kscn «»",
+   "opts": [
+    "Giao thiệp",
+    "Mưu kế"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Giao thiệp": 8,
+    "Mưu kế": 4
+   },
+   "n": 12
+  },
+  {
+   "k": ".dlg|Phúc tuyển|Dâng CầmTốnSức 10Đượctài nghệ dâng lên cộng vào Điện tuyểnGợi ýtài nghệ dâng lên/Để tài nghệ quyết địnhTốnSức 10Đượclấy phần giữa, cộng vào Điện tuyểnGợi ýlấy ph",
+   "screen": ".dlg «Phúc tuyển»",
+   "opts": [
+    "Dâng CầmTốnSức 10Đượctài nghệ dâng lên cộng vào Điện tuyểnGợi ýtài nghệ dâng lên",
+    "Để tài nghệ quyết địnhTốnSức 10Đượclấy phần giữa, cộng vào Điện tuyểnGợi ýlấy ph"
+   ],
+   "ods": [
+    "",
+    ""
+   ],
+   "took": {
+    "Dâng CầmTốnSức 10Đượctài nghệ dâng lên cộng vào Điện tuyểnGợi ýtài nghệ dâng lên": 1
+   },
+   "n": 1
+  },
+  {
+   "k": ".dlg|Điện tuyển|Đáp lời khiêm nhườngTùy duyênTốnkhôngĐượcĐức nặng hơn; giữ thẻ bài hay không, kh/Đối đáp lanh lợiTùy duyênTốnkhôngĐượcTài nặng hơn; giữ thẻ bài hay không, không ",
+   "screen": ".dlg «Điện tuyển»",
+   "opts": [
+    "Đáp lời khiêm nhườngTùy duyênTốnkhôngĐượcĐức nặng hơn; giữ thẻ bài hay không, kh",
+    "Đối đáp lanh lợiTùy duyênTốnkhôngĐượcTài nặng hơn; giữ thẻ bài hay không, không "
+   ],
+   "ods": [
+    "Tùy duyên",
+    "Tùy duyên"
+   ],
+   "took": {
+    "Đối đáp lanh lợiTùy duyênTốnkhôngĐượcTài nặng hơn; giữ thẻ bài hay không, không ": 1
+   },
+   "n": 1
+  }
+ ],
+ "_scrW": {},
+ "_clk": {
+  "3.23.0.3": 1,
+  "3.23.1.0": 2,
+  "3.23.1.1": 3,
+  "3.23.1.2": 4,
+  "3.23.1.3": 5,
+  "3.23.2.0": 6
+ },
+ "_maxClk": "3.23.2.0",
+ "_tsW": {
+  "ts|#kdaytc|": {
+   "n": 1,
+   "t": 1795835992746,
+   "last": 1795835992746
+  }
+ },
+ "_dress": {
+  "k": "#kg82|",
+  "put": 0,
+  "look": 0
+ },
+ "_bdCdp": {
+  "_type": "CDPSession",
+  "_guid": "cdp-session@58e9e5e39afce6613808289761ba12e4"
+ },
+ "_bdCdpP": {
+  "_type": "Page",
+  "_guid": "page@52c9f5cde510fee7777f2c563ea7567f"
+ },
+ "t": {
+  "total": 78441
+ }
+}
