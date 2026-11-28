@@ -1,5 +1,12 @@
 # ILLNESS-CURE — worker report (review/illness-cure)
 
+## r2 (Foreman C 4-1-1, Q2 = law 2): RV READY (BIG) 261d91f1 on 5fb13d60
+- nặng tier shows BOTH «Truyền thái y» (bạc) and «Cầu xin ngự y» (Sủng) side by side, each with its own Tốn / odds, greyed with the reason when she cannot pay (jone tierRows `both`; hs-thaiy both=[nặng] while ill). Card = 4 plaques (nhẹ · vừa · nặng · nặng).
+- illness-cure.test: ALL OK Fold + iPad (asserts both shown + greying); MUTATE both off → 10 FAIL.
+- door-onetap PASS · quickcheck 261d91f1: QUICKCHECK PASS + CORE GATES PASS (hooks 14), open 1904 ms, old save ok, perf new/live render 216/270, tab 451/480, buổi 1368/1582.
+- Q2 closed; Q1/Q3/Q4/Q5 passed to MAIN 183 (unchanged).
+
+
 PRIORITY #1 CHECK ('cure road|chữa bệnh|lao phổi|illness|thầy thuốc|Truyền thái y|Cầu xin ngự y'): OD 18 (OD:L2666, OD:L2670 «Giữ bệnh, độc, ám sát» = illness still kills; OD:L2657) | main j13.js illCards (Truyền thái y / Tự bốc thuốc / Tĩnh dưỡng), jthaiy.js (bắt mạch roads), jone.js hs-thaiy tiers, jact2.js HSD thaiy door, jbal2.js/jmort.js extra death rolls | review/* none (git grep of 300 newest review/* for illCure / Cầu xin ngự y / HX.ill: 0 hits) | claims ILLNESS-CURE → session_01PEhRbvzcp527pLLt31A9W4.
 KIT CHECK: reuses DOOR.card + kitHand (bàn bài, flip back), jdoor lineOf kit line + optOdds chip, ONE.tierRows / ONE.pick / ONE.runM, the deck cards' own act(i). No new UI part.
 Session: depth 2, START_CTX ~5 %.
