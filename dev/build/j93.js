@@ -44,7 +44,9 @@ function kmPushRank(fn){fn.krank=1;kmPush(fn)}
    on nearly every generated choice card) — read as «a rank card», every such card held every kit scene (the night flip, rewards); the jnf night
    gate then held that card for the flip it blocked = a mutual wait with nothing on screen. Only the marker value counts, never a recipe key. */
 function kmRankMark(v){return v===1||v===true}
-function kmRankCard(m){return !!(m&&(kmRankMark(m.rk)||(m.kit&&kmRankMark(m.kit.rk))))}
+/* r3 (RV-163M coop-e2e bisect: LIVE j93 + r2 guards passes «week 2: fold advanced», this line alone hangs it): a co-op room paces its night and
+   week merge on the old read (its scenes wait while any card with m.rk waits) — solo only, the room keeps LIVE's read unchanged */
+function kmRankCard(m){if(window.COOPW&&(COOPW.on||COOPW.allow||COOPW.allowN))return !!(m&&(m.rk||(m.kit&&m.kit.rk)));return !!(m&&(kmRankMark(m.rk)||(m.kit&&kmRankMark(m.kit.rk))))}
 function kmRankWait(){try{if(typeof S==="undefined"||!S||S.dead||(typeof CW!=="undefined"&&CW&&CW.ctx))return false;
  if(KMQ.some(f=>f&&f.krank)||document.querySelector(".kmov.km-edict:not(.km-out),.kmov.km-gloom:not(.km-out)"))return true;
  if(kmOn()&&KMS===S&&KMSNAP){const b=kmSnap();if(b.rank!==KMSNAP.rank||b.out!==KMSNAP.out||b.srv!==KMSNAP.srv){kmDiff();if(KMQ.some(f=>f&&f.krank))return true}}
