@@ -1,0 +1,4 @@
+# E-S2 (E-S8 row) ES8-bd_san-random2-h — end-of-life review (robot as player: random, bot=rand, iPad, bd origin / bd_san road)
+Seed 3749450829, harness f65d019b, unpinned LIVE pin=0 (build s 5fb13d60+ b 8af7b3429f38 throughout), real taps (jsClicks 0), started 01:49Z 28/11, ended ~04:35Z. Resumed once from ckpt at 02:20Z (buổi 15) after a container disk-full crash (no game fault), same build, no pin. 3 years (age 21), 365 buổi, 6405 taps, rank 0 whole life. Ending «Hồng nhan bạc mệnh — Kiết lỵ nguy kịch, không qua khỏi» (death by illness, VALID, no exit pick; 41 boards left via result screen only, quit 0). 0 stuck, 0 dead buttons, 5 bugs.
+Scores: a 4 · b 3 (rank 0 all life; softlocks) · c 4 · d 4 · e 3 · f 3 · g 4 · h 5 · i 3. Replay: no.
+Bugs: «Sang ngày mới»/«Chờ tin» softlock ×4 (tapped 3× in one buổi, buổi does not turn; dialog queue Q=1: Nghe đồn / Có người đến); SAVE STALE ×4; gift-picker «kipgo» confirm off-screen after 8 scrolls ×1.
