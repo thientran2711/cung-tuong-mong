@@ -1,4 +1,4 @@
-/* KIT-CUE-FOOT (KK64, K-CUE-FOOT, KIT §56.33; LIVE-born, law 11): the «Kéo xuống» scroll cue (jksize kitScrollCues .kscue: bottom fade + pill)
+/* KIT-CUE-FOOT (KK64, K-CUE-FOOT, KIT §56.34; LIVE-born, law 11): the «Kéo xuống» scroll cue (jksize kitScrollCues .kscue: bottom fade + pill)
    NEVER lies over a sticky footer of its own scroll column (item-pick confirm .kipw>.kipgo «Dâng / Tặng / Biếu / Cài», the §23 pager .kippg,
    pinned option rows .k3btns / .opts.khand, .k3foot, .kpscopts, .mr, .kmtake, .kg82act …). LIVE fault: Fold «Dâng quà» grid, after picking a tile
    the cue + fade sat OVER the sticky «Dâng» (label unreadable, tap still worked).

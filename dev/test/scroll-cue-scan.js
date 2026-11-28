@@ -16,7 +16,7 @@ const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=requi
     const kind=sib?'strip':c.classList.contains('sm')?'sm':'fade';const fade=kind==='fade'?36:kind==='sm'?20:0;const top=sib?cr.top:cr.top-fade,bot=sib?cr.bottom:cr.top+4;
     const ovT=on&&kind!=='strip'&&hr.height<260?texts.filter(t=>t.bottom>top+1&&t.top<bot&&t.right>hr.left&&t.left<hr.right).length:0;
     const ovF=on?figs.some(f=>cr.right>f.left+2&&cr.left<f.right-2&&cr.bottom>f.top&&cr.top<f.bottom)||!!host.querySelector(':scope > .kszfig,:scope > .kpsubj.kes,:scope > .k3body > .kszfig,:scope > .kpb > .kpsubj.kes,:scope > .kpdb > .kpsubj.kes'):false;
-    /* K-CUE-FOOT (KK64, KIT §56.33): an ON cue's fade / pill never lies over a stuck sticky footer of its own column (.kipgo, .kippg, .k3btns, .opts.khand, .k3foot, .kmtake, .kg82act …) */
+    /* K-CUE-FOOT (KK64, KIT §56.34): an ON cue's fade / pill never lies over a stuck sticky footer of its own column (.kipgo, .kippg, .k3btns, .opts.khand, .k3foot, .kmtake, .kg82act …) */
     let ovFoot=0;if(on&&!sib){const parts=[c.querySelector('.kscc'),c.querySelector('.kscg')].filter(Boolean).map(x=>x.getBoundingClientRect()).filter(r=>r.height>0);
      for(const f of host.querySelectorAll('*')){if(f.closest('.kscue'))continue;const z=getComputedStyle(f);if(z.position!=='sticky'||z.bottom==='auto'||z.display==='none')continue;let a=f.parentElement,own=true;for(;a&&a!==host;a=a.parentElement){const o=getComputedStyle(a).overflowY;if(o==='auto'||o==='scroll'){own=false;break}}if(!own)continue;
       const F=f.getBoundingClientRect();if(F.height<2||F.bottom>hr.bottom+2)continue;if(parts.some(r=>Math.min(r.bottom,F.bottom)-Math.max(r.top,F.top)>2&&Math.min(r.right,F.right)-Math.max(r.left,F.left)>2))ovFoot++}}

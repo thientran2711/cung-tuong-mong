@@ -569,7 +569,7 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 Object.assign(BAL.spread,{dawnSlot:1,dawnOpt:100});Object.assign(BAL,{dayq:{poll:300,stale:10000,rearm:600,wake:2000,mineLook:400}});
 /* F10 renderer-mem (26/11), BAL.kobs = the kit's DOM observers. The «Kéo xuống» scroll cue (jksize kitScrollCues). short = a scroller under this many px gets the slim strip below it
    (was a typed 260); hyst = a scroller keeps its short/tall look until its own height moves by more than this (its own cue never flips it).
-   K-CUE-FOOT (KK64, KIT §56.33): footTtl = ms the cue keeps its column's sticky-footer list; footZone = a stuck footer counts when its top is below this share of the column height. */
+   K-CUE-FOOT (KK64, KIT §56.34): footTtl = ms the cue keeps its column's sticky-footer list; footZone = a stuck footer counts when its top is below this share of the column height. */
 Object.assign(BAL,{kobs:{cueShort:260,cueHyst:24,kaPass:3,footTtl:400,footZone:.3}});/* KK53 v2 (OD 27/11 ~03:17Z): the SMALL «Chọn» chip inside a lifted kitPick plaque's bottom-right corner (jkpick conf): w × h px */
 Object.assign(BAL,{kpkgo:{w:24,h:24}});
 /* NIGHT STEALING (Tranh sủng / Chặn ngự giá) — ONE CORE for the act (her and every NPC alike) and for the NPC agent's choice (jsteal.js).
