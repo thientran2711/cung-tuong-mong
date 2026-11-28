@@ -69,3 +69,7 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 10:00Z LIVE = aecbc267 (LR-RULES lr-rules-r3; ROLLBACK c03d6ee7). LR-RULES rolled (successor LR-RULES-2 by MAIN). Kit items now KK71 session_01Rc5AsMZaCRYmkUNXx2fZut.
 - merge-tree aecbc267 × ui stack: ui8 → jemoact only; ui9 (+dress-fix) → + jbal2, jdoor (rules split-merge vs dress-fix tyrob: real conflict); ui10 (+pvquy-post) → 19 more files (pvQuy sites rewritten by both) — resolver jobs, not mine.
 - ui11 staged review/lc35-ui11 873b2165 = LIVE aecbc267 + merge ui8 a50895cb (jemoact adjacent lines: LIVE khoe ghenN + ui8 tiec real rise); rebuilt; MODGATE 499⊇499; webkit 0; unions checked. Tests u11.sh running. (Killed a quickcheck-spawned `fetch --deepen=300` that held fetch.lock.)
+- RV-186: STOP pvquy-post 97bd0858 (PASS void until re-merge onto aecbc267). Agreed.
+- 10:18Z RV-185 LAND kk70-handdupmat eaad2ba1 — per MAIN it rides in the RULES lane with tmk-warn (inside TMK-WARN-3 r4 b28cd7c3); not landing in UI.
+- 10:24Z RV-185 LAND ui11 873b2165 (jemoact hunk byte-checked, driven live).
+- 10:30Z RV-163M LAND READY dayq-noturn-rvm 8a30664e (FF on aecbc267, 2 parents; 0 del; assets LIVE; MODGATE PASS). Killed ui11 qc (was in core gates; q-softlock 4 known) → dayq quickcheck ALONE (dq3.sh), then ui11 qc again.
