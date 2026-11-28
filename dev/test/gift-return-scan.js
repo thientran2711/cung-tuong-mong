@@ -16,13 +16,13 @@ const {chromium}=require('playwright');const D=require('./lib/device');const fs=
   const item=v=>Object.keys(IT).find(k=>Array.isArray(IT[k].tg)&&IT[k].tg.includes("rv")&&IT[k].pr>=20&&IT[k].pr<=80&&!IT[k].il&&!IT[k].keep&&!IT[k].nt&&(!v||tsGiftWorth({k},v,S).ok));
   const work=n=>({k:"tp",wk:{kind:"theu",a:"hoa",ti:2,q:6,n,m:1,bn:"ngươi",d:"x",lv:2}});
   const setGrudge=(v,a)=>{SP_OFF++;try{oanAdd(v,a,-200);oanAdd(v,a,30);if(a===S)v.ghen=40}finally{SP_OFF--}};
-  const has=(who,e)=>(who.inv||[]).some(x=>e.wk?x.wk&&x.wk.n===e.wk.n:x.k===e.k&&!x.wk);
+  const cnt=(who,e)=>(who.inv||[]).filter(x=>x&&(e.wk?x.wk&&x.wk.n===e.wk.n:x.k===e.k&&!x.wk)).length,has=(who,e)=>cnt(who,e)>0;/* the piece itself, not chest size (a khắc spent can pass a buổi and add other things) */
   /* one road: give(giver, receiver, entry) → the line; returns the row */
   const road=(name,giver,recv,mk,give)=>{for(const ans of ["take","back"]){F.a=ans;const e=mk();giver.inv=(giver.inv||[]).filter(x=>x.h);giver.inv.push(e);setGrudge(recv,giver);
-    const a0=aff(recv,giver),o0=oan(recv,giver),gi0=giver.inv.length,ri0=(recv.inv||[]).length;let line="";try{line=plain(give(giver,recv,giver.inv.length-1)||"")}catch(x){line="ERR "+x}
+    const a0=aff(recv,giver),o0=oan(recv,giver),gi0=cnt(giver,e),ri0=cnt(recv,e);let line="";try{line=plain(give(giver,recv,giver.inv.length-1)||"")}catch(x){line="ERR "+x}
     const said=+((/bớt oán (\d+)/.exec(line)||[])[1]||0);
-    out.push({road:name,ans,left:gi0-giver.inv.length,home:has(giver,e),got:(recv.inv||[]).length-ri0,aff:aff(recv,giver)-a0,oan:o0-oan(recv,giver),said,line:line.slice(0,170)})}};
-  const [v1,v2,v3]=L;const vW=L.find(v=>v!==v1&&v!==v2&&v!==v3&&tsGiftWorth(work("x"),v,S).ok)||L[4];
+    out.push({road:name,ans,left:gi0-cnt(giver,e),home:has(giver,e),got:cnt(recv,e)-ri0,aff:aff(recv,giver)-a0,oan:o0-oan(recv,giver),said,line:line.slice(0,170)})}};
+  const [v1,v2,v3]=L;const vW=L.find(v=>v!==v1&&v!==v2&&v!==v3&&tsGiftWorth(work("x"),v,S).ok)||L.find(v=>v!==v1&&v!==v2&&v!==v3)||v1;
   const npcItem=(a,v)=>Object.keys(IT).find(k=>{const w=tsGiftWorth({k},v,a);return w.ok&&w.bac<=BAL.tsGift.bac});const logLine=f=>(a,r,i)=>{const n=S.logs.length;f(a,r,i);return S.logs.length>n?S.logs[0]:""};
   road("player→NPC item (giveTo: Tặng quà / gift pick / servant)",S,v1,()=>({k:item()}),(a,r,i)=>giveTo(a,r,i));
   road("player→NPC work (giveTo → wkGive)",S,v1,()=>work("Khăn thử A"),(a,r,i)=>giveTo(a,r,i));

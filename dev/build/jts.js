@@ -259,11 +259,13 @@ function tsGiftEaseTxt(a,v,N){N=N||tsGiftEaseN(a,v);const P=[];if(a===S&&N.gh>0)
 /* road 1: bạc (her or any consort; her bạc is taken by the option's fx) */
 function tsGiftBac(a,L){const G=BAL.tsGift;if(a!==S)ap(a,{bac:-L.length*G.bac});return L.map(v=>{const N=tsGiftEase(a,v);relAdd(a,v,G.aff);return N})}
 /* roads 2 and 3: one piece (her or any consort) */
-function tsGiftPiece(a,v,i){const e=a.inv[i];const w=tsGiftWorth(e,v,a);if(!w.ok)return"";const nm=giftName(e);const n0=(a.inv||[]).length;const r=giveTo(a,v,i);if(!r)return"";
+function tsGiftPiece(a,v,i){const e=a.inv[i];const w=tsGiftWorth(e,v,a);if(!w.ok)return"";const nm=giftName(e);const same=()=>(a.inv||[]).filter(x=>x&&x.k===e.k&&!x.h&&(e.wk?x.wk&&x.wk.n===e.wk.n:!x.wk)).length,c0=same();const r=giveTo(a,v,i);
+ const home=(a.inv||[]).includes(e)||same()>=c0;if(!r)return"";
  /* review r1: she may refuse it (jdis: a piece she does not like stays in the chest) → nothing eased, nothing lost (no free peace).
     d19-gift-npc: the receiver may also SEND IT BACK (jrcv rcvGiftIn «Trả lại quà», OD 18/11 ~21:15Z: the piece comes home as a copy, so
-    includes(e) missed it and a returned gift still eased ghen + oán and logged «Mất»). The piece left her chest only if the chest shrank. */
- if((a.inv||[]).includes(e)||(a.inv||[]).length>=n0)return{r,nm,bac:w.bac,kept:true};const N=tsGiftEase(a,v);return{r,nm,bac:w.bac,N}}
+    includes(e) missed it and a returned gift still eased ghen + oán and logged «Mất»). «home» = the piece, or a piece of the same kind
+    (same item key / same work), is back in her chest — counted by kind, so other things entering the chest meanwhile do not matter. */
+ if(home)return{r,nm,bac:w.bac,kept:true};const N=tsGiftEase(a,v);return{r,nm,bac:w.bac,N}}
 /* the act card (one card, in the panel and in the warning) */
 function tsOptGifts(D){const L=tsGiftL(D);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac,x=L[0];
  const nW=tsGiftPieces(S,x.v,"wk").filter(o=>o.w.ok).length,nI=tsGiftPieces(S,x.v,"it").filter(o=>o.w.ok).length;

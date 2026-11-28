@@ -28,21 +28,21 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
    const g0=V.map(v=>[v.ghen,oan(v,S)]),b0=S.bac;apply(d.o[0].fx);d.o[0].go();res.bac={spent:b0-S.bac,want:V.length*G.bac,ghen:V.map((v,i)=>g0[i][0]-v.ghen),oan:V.map((v,i)=>g0[i][1]-oan(v,S)),log:plain(S.logs[0]||"")};
    /* road 2: a work → the picker → give */
    const v=V[0];const pw=PEND.tsgiftpick({v:v.id,k:"wk"});res.wkPick=pw.o.map(o=>({n:o.n,x:o.x,dis:!!o.tsDis,need:(o.need||[]).map(n=>n.t)}));res.wkPickT=plain(pw.t||"");
-   const iw=pw.o.findIndex(o=>o.ik!=null&&!o.tsDis);if(iw>=0){const G1=[v.ghen,oan(v,S),aff(v,S)],n0=S.inv.length;pw.o[iw].go();res.wk={gave:pw.o[iw].n,ghen:G1[0]-v.ghen,oan:G1[1]-oan(v,S),aff:aff(v,S)-G1[2],inv:n0-S.inv.length,log:plain(S.logs[0]||"")};res.wk.said=+((/bớt oán (\d+)/.exec(res.wk.log)||[])[1]||0)}else res.wk={none:true};
+   const iw=pw.o.findIndex(o=>o.ik!=null&&!o.tsDis);if(iw>=0){const G1=[v.ghen,oan(v,S),aff(v,S)],pe=S.inv[pw.o[iw].ik];pw.o[iw].go();res.wk={gave:pw.o[iw].n,ghen:G1[0]-v.ghen,oan:G1[1]-oan(v,S),aff:aff(v,S)-G1[2],inv:S.inv.includes(pe)?0:1,log:plain(S.logs[0]||"")};res.wk.said=+((/bớt oán (\d+)/.exec(res.wk.log)||[])[1]||0)}else res.wk={none:true};
    /* road 3: an item */
    const pi=PEND.tsgiftpick({v:v.id,k:"it"});res.itPick=pi.o.map(o=>({n:o.n,x:o.x,dis:!!o.tsDis,need:(o.need||[]).map(n=>n.t)}));
-   const ii=pi.o.findIndex(o=>o.ik!=null&&!o.tsDis);if(ii>=0){window.__itK=S.inv[pi.o[ii].ik].k;const G1=[v.ghen,oan(v,S),aff(v,S)],n0=S.inv.length;pi.o[ii].go();res.it={gave:pi.o[ii].n,ghen:G1[0]-v.ghen,oan:G1[1]-oan(v,S),aff:aff(v,S)-G1[2],inv:n0-S.inv.length,log:plain(S.logs[0]||"")};res.it.said=+((/bớt oán (\d+)/.exec(res.it.log)||[])[1]||0)}else res.it={none:true};
+   const ii=pi.o.findIndex(o=>o.ik!=null&&!o.tsDis);if(ii>=0){window.__itK=S.inv[pi.o[ii].ik].k;const G1=[v.ghen,oan(v,S),aff(v,S)],pe=S.inv[pi.o[ii].ik];pi.o[ii].go();res.it={gave:pi.o[ii].n,ghen:G1[0]-v.ghen,oan:G1[1]-oan(v,S),aff:aff(v,S)-G1[2],inv:S.inv.includes(pe)?0:1,log:plain(S.logs[0]||"")};res.it.said=+((/bớt oán (\d+)/.exec(res.it.log)||[])[1]||0)}else res.it={none:true};
    /* review r1: a refused piece (jdis: it stays in her chest) eases nothing and the log says so (no free peace) */
    {S.inv.push({k:"tp",wk:{kind:"theu",a:"hoa",ti:2,q:6,n:"Khăn thêu thử",m:1,bn:"ngươi",d:"x",lv:2}});const g0=giveTo;giveTo=function(){return "Nàng không nhận. "};
-    try{const pr=PEND.tsgiftpick({v:v.id,k:"wk"});const j=pr.o.findIndex(o=>o.n&&/Khăn thêu thử/.test(o.n)&&!o.tsDis);const G1=[v.ghen,oan(v,S)],n0=S.inv.length;if(j>=0)pr.o[j].go();
-     res.refused={found:j>=0,ghen:G1[0]-v.ghen,oan:G1[1]-oan(v,S),inv:n0-S.inv.length,log:plain(S.logs[0]||"")}}finally{giveTo=g0}}
+    try{const pr=PEND.tsgiftpick({v:v.id,k:"wk"});const j=pr.o.findIndex(o=>o.n&&/Khăn thêu thử/.test(o.n)&&!o.tsDis);const G1=[v.ghen,oan(v,S)],pe=j>=0?S.inv[pr.o[j].ik]:null;if(j>=0)pr.o[j].go();
+     res.refused={found:j>=0,ghen:G1[0]-v.ghen,oan:G1[1]-oan(v,S),inv:S.inv.includes(pe)?0:1,log:plain(S.logs[0]||"")}}finally{giveTo=g0}}
    if(BAL.dis)BAL.dis.refuse=ref0;
    /* old save: a pending picker saved before this branch has no kind */
    const po=PEND.tsgiftpick({v:v.id});res.old={n:po&&po.o.length};
    /* d19-gift-npc: «Trả lại quà» — the piece comes HOME (law 6c, the same kind back in her chest), nothing eased, no liking bought (law 3) */
    {window.__rcvF.gift="back";const back=k=>{const it0=k==="wk"?{k:"tp",wk:{kind:"theu",a:"hoa",ti:2,q:6,n:"Khăn thêu gửi trả",m:1,bn:"ngươi",d:"x",lv:2}}:{k:window.__itK};S.inv.push(it0);
      const pr=PEND.tsgiftpick({v:v.id,k});const j=pr.o.findIndex(o=>o.ik!=null&&!o.tsDis&&(k!=="wk"||/gửi trả/.test(o.n)));const G1=[v.ghen,oan(v,S),aff(v,S)],n0=S.inv.length;if(j>=0)pr.o[j].go();
-     return{found:j>=0,ghen:G1[0]-v.ghen,oan:G1[1]-oan(v,S),aff:aff(v,S)-G1[2],inv:n0-S.inv.length,home:k==="wk"?S.inv.some(e=>e.wk&&e.wk.n==="Khăn thêu gửi trả"):S.inv.some(e=>e.k===window.__itK),log:plain(S.logs[0]||"")}};
+     return{found:j>=0,ghen:G1[0]-v.ghen,oan:G1[1]-oan(v,S),aff:aff(v,S)-G1[2],inv:0,home:k==="wk"?S.inv.some(e=>e.wk&&e.wk.n==="Khăn thêu gửi trả"):S.inv.some(e=>e.k===window.__itK),log:plain(S.logs[0]||"")}};
     const rf0=BAL.dis&&BAL.dis.refuse;if(BAL.dis)BAL.dis.refuse=0;try{res.back={it:window.__itK?back("it"):{none:true},wk:back("wk")}}finally{window.__rcvF.gift="take";if(BAL.dis)BAL.dis.refuse=rf0}}
    /* the line never promises an ease she cannot get: a grudge already at 0 → no «bớt oán» */
    {const w=V[2]||V[1];oanAdd(w,S,-200);w.ghen=0;res.zero={txt:plain(tsGiftEaseTxt(S,w)),oan:oan(w,S)}}
