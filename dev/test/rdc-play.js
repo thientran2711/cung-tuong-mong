@@ -6,7 +6,7 @@
    - the composition (S.st.f14.rc) uses each part once in the road; each chapter's title / climax / endings are its clim row's;
    - every hồi card: 3 options NHẸ · VỪA · NẶNG (law 2, E-TIER-B13; j67 may add none), no {placeholder} left, cổ trang (no digit / %);
    - numbers: every option of every played hồi = its steps × BAL.road.c.fx (cost when picked, gain when it holds), climax odds terms from BAL;
-   - the road's rival is the same person while alive; each opened chapter marks its parts in P0 (family rdc:<origin>);
+   - the road's rival is the same person while alive (E-TIER-B13-RV: a rival who died / left between two recorded hồi is a recast by rdCast, ROAD_MAP §5, not a fault); each opened chapter marks its parts in P0 (family rdc:<origin>);
    - reload: the composition survives a JSON round trip of S and rebuilds the same chapters; validator numbers = BAL.road.c; 0 page errors. */
 const {chromium}=require('playwright');const http=require('http'),fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'../..');const [,,FILE,NL,ONLY]=process.argv;const NLIV=+NL||2;const STOP12=!!process.env.RDC_STOP12;/* review r1: RDC_STOP12=1 stops each life once the road (.4–.11) is told and chapter 12 opened — the shared 12–14 endgame is not P8 and its long tail runs the renderer out of memory (OOM at ~7.6 GB) */
@@ -63,7 +63,7 @@ let fail=0,pass=0;const ok=(c,m,x)=>{if(!c){fail++;console.log('FAIL '+m+(x!==un
     /* reload: S through JSON, the chapters rebuild the same */
     const before=rc?Object.keys(rc).map(n=>ARC67[road+'_'+n].t+'|'+Object.keys(ARC67[road+'_'+n].B).map(k=>ARC67[road+'_'+n].B[k].h).join('/')).join(';'):'';
     let after='';if(rc){const s=JSON.stringify(S);S=JSON.parse(s);RDC.cache={};after=Object.keys(rc).map(n=>ARC67[road+'_'+n].t+'|'+Object.keys(ARC67[road+'_'+n].B).map(k=>ARC67[road+'_'+n].B[k].h).join('/')).join(';')}
-    return{k,road:S.st.f14.road,rd:S.st.f14.rd||'',rc0:!!rc0,parts,uniq:new Set(parts).size,titles,seq,vs,ends,cards,num,marks,reload:before===after&&!!before,all:!!S.st.ch.all,n:S.st.ch.n,fin:S.st.ch.fin||'',months:mon,err}}},ROWS)};
+    return{k,road:S.st.f14.road,rd:S.st.f14.rd||'',rc0:!!rc0,parts,uniq:new Set(parts).size,titles,seq,vs,gone:[...new Set(vs.map(x=>x.v))].filter(id=>{const o=RV(id);return !(o&&o.alive&&!o.out)}),ends,cards,num,marks,reload:before===after&&!!before,all:!!S.st.ch.all,n:S.st.ch.n,fin:S.st.ch.fin||'',months:mon,err}}},ROWS)};
  await boot();
  const L0=await p.evaluate(()=>window.__load);console.log('load',JSON.stringify(L0));
  const bal=await p.evaluate(()=>({tier:BAL.road.c.tier,Est:BAL.road.c.Est,xs:Object.keys(BAL.road.c.xs).sort()}));
@@ -91,7 +91,7 @@ let fail=0,pass=0;const ok=(c,m,x)=>{if(!c){fail++;console.log('FAIL '+m+(x!==un
    ok(R.num.length>=60&&R.num.every(x=>x.ok),`${rd} L${L+1}: ${R.num.length} options = steps × BAL.road.c`,R.num.filter(x=>!x.ok).slice(0,4));
    ok(R.marks.length>=36&&R.marks.every(x=>x[1]),`${rd} L${L+1}: opened chapters mark ${R.marks.length} parts in P0 rdc:${k}`,R.marks.filter(x=>!x[1]).slice(0,4));
    ok(R.reload,`${rd} L${L+1}: composition survives a reload (JSON round trip)`);
-   let bad=[],last=null;for(const x of R.vs){if(!x.a.startsWith(rd))continue;if(last&&x.v!==last.v&&last.alive)bad.push([last.a,last.v,x.a,x.v]);last=x}
+   let bad=[],last=null;for(const x of R.vs){if(!x.a.startsWith(rd))continue;if(last&&x.v!==last.v&&last.alive&&!(R.gone||[]).includes(last.v))bad.push([last.a,last.v,x.a,x.v]);last=x}
    ok(!bad.length,`${rd} L${L+1}: the road's rival is the same person while alive`,bad.slice(0,3));
    if(seen[rd]){const o=R.parts.filter(x=>seen[rd].includes(x)).length;console.log(`  parts met again from life ${L}: ${o}/42 (fresh-first, pool-bound)`)}seen[rd]=R.parts}
   await boot()}
