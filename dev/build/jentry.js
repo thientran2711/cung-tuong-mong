@@ -46,7 +46,7 @@ function entCtx(o){const road=entRoad();const k=S.origin&&S.origin.k;const top=(
  if(o&&o.phuc)return{road:"",head:"Phúc tuyển",judge:"Ma ma, nữ quan Nội vụ phủ",also:"cộng vào Điện tuyển cùng Sắc, Tài, Đức, Danh"};
  if(srv)return{road,head:"Tuyển cung nữ",judge:"Ma ma Nội vụ phủ",also:`Sắc, Đức${road==="dan"?", khéo tay và lễ nghi học ở nhà, tiếng trong xóm, lời lý trưởng":""}`,topN:"phi tần bậc cao",srv:1};
  if(road==="nc")return{road,head:"Lễ ra mắt",judge:"Hoàng thượng, Thái hậu, bá quan",also:"Sắc, Tài, Đức, lễ nghi Đại Hy, lòng Thái hậu, lời sứ thần",topN:RANKS[top].n};
- return{road,head:"Tuyển chọn trước ngày phong",judge:"Hoàng thượng, Thái hậu",also:`Sắc, Tài, Đức, tài nghệ${(S.th||0)>=20?", lòng Thái hậu":""}`,topN:RANKS[top].n,flat:top<=0}}
+ return{road,head:"Tuyển chọn trước ngày phong",judge:"Hoàng thượng, Thái hậu",also:`Sắc, Tài, Đức, tài nghệ${(S.th||0)>=netTh("th","than")?", lòng Thái hậu":""}`,topN:RANKS[top].n,flat:top<=0}}
 /* ---------- 1. the exam round ---------- */
 function entExam(o,fin){o=o||{};let art=o.art||"";let k=entKind(art);if(!k||entWordy(k)){art=entBest();k=entKind(art)}
  const K=KG82_KIND[k];const lv=entArtLv(k);let t=null;try{t=mgSet(k,{occ:"tuyen",lv})}catch(e){KG82.lv=lv}KG82.ctx="thi";try{kg82Preload(k)}catch(e){}

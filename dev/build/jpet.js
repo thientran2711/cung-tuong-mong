@@ -131,12 +131,12 @@ const PET_SRCN={emp:"Hoàng thượng ban",th:"Thái hậu ban",hh:"Hoàng hậu
 /* co-op (review/coop-pets): NPC pets are part of the shared world, rolled once on the host; the guest runs only her own (else the merge adds the NPC decay / costs twice) */
 function petNpcs(){try{if(window.COOPW&&COOPW.on&&COOPW.seat!=="a")return []}catch(e){}return liveRivals(true)}
 function petLack(p,k){return tsbPets(p).some(P=>P.t===k)?0:1}
-function petThW(p,k){const B=BAL.ag.why.g2pet;if(k==="hac")return B.hac;return (p.th||0)>=B.kyTh&&rkOf(p)>=B.kyRk?(p.th||0)-B.kyTh+B.ky:0}
+function petThW(p,k){const B=BAL.ag.why.g2pet;if(k==="hac")return B.hac;const K=netAt("th","than2",B.kyTh);return (p.th||0)>=K&&rkOf(p)>=B.kyRk?(p.th||0)-K+B.ky:0}
 function petMonth(){if(!S||S.dead)return;const on=tsbOn()&&!(typeof isSrv==="function"&&isSrv())&&!S.out,me=[S].concat(petNpcs());
  const empPick=sg=>sg>=80?pick(["phuong","ngoctho","thienma"]):sg>=65?pick(["linhmieu","lyngu","vet","meo"]):pick(["meo","sao","uyenuong","cachep","hoami"]);
  for(const p of me){if(p.out)continue;const card=p===S;if(card&&(!on||Q.length>2))continue;
   if((p.sung||0)>=55&&empGive(p,4,"pet")){const t=empPick(p.sung||0);if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"emp",t},"Ngự ban")}else petGive(p,t,PET_SRCN.emp,"emp");continue}
-  if((p.th||0)>=60&&thGive(p,2.5,"pet")){const t=npwPick(["kylan","hac"],k=>petThW(p,k))||"hac";/* npc-purpose G2c: the rarer beast for the one she holds dearest */if(tsbPets(p).some(P=>P.t===t))continue;if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"th",t},"Thái hậu ban")}else petGive(p,t,PET_SRCN.th,"th");continue}
+  if((p.th||0)>=netTh("th","than2")&&thGive(p,2.5,"pet")){const t=npwPick(["kylan","hac"],k=>petThW(p,k))||"hac";/* npc-purpose G2c: the rarer beast for the one she holds dearest */if(tsbPets(p).some(P=>P.t===t))continue;if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"th",t},"Thái hậu ban")}else petGive(p,t,PET_SRCN.th,"th");continue}
   if(!p.queen&&rkOf(p)<7&&(p.hh||0)>=60&&queenP()&&queenP()!==p&&npcWhy("petHh",{p},()=>roll(BAL.ag.why.g2pet.hhP))){const t=npwPick(["sutu","linhmieu"],k=>petLack(p,k))||"sutu";/* npc-purpose G2c: Hoàng hậu rewards one in her good graces, with a pet she lacks */if(card){if(!petCardQ("tsbPetGift"))petCard("tsbPetGift",{src:"hh",t},"Hoàng hậu ban")}else petGive(p,t,PET_SRCN.hh,"hh");continue}}
  /* a man who cares for her sends a small animal (her only) */
  const mw=on&&!petCardQ("tsbPetGift")?npcWhy("petMan",{},()=>roll(BAL.ag.why.g2pet.manP)):null;if(mw){const m=mw.who;petCard("tsbPetGift",{src:"man",m:m.id,t:npwPick(["hoami","uyenuong","meo","sao","tho"],k=>petLack(S,k))||"meo"},"Quà gửi lén")}/* npc-purpose G2c: the man whose tình runs deepest sends what she lacks */

@@ -164,7 +164,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
   return A}
  if(p.kind==="th"){if(false)return[{n:"Xin xăm ở Phật đường",o:100,fix:1,x:"rút hai quẻ, giữ quẻ tốt hơn",run:()=>{reLot(true);return "Ngươi thắp hương, xin một quẻ mới."}},];const t=liveRivals(false).filter(x=>x.ev>0).sort((a,c)=>c.ev-a.ev)[0];return[
    {n:"Thỉnh an, chép kinh",lock:(S.buoi||0)!==0,t:"chỉ buổi sáng",c:{suc:-5},o:od(BAL.odb.j2.odO_6),w:{th:8,danh:2,duc:1},l:{th:-2}},
-   {n:"Xin Thái hậu đỡ lời",o:od(BAL.ag.cx.thHelp.o+S.th/BAL.ag.cx.thHelp.div),lock:S.th<BAL.ag.cx.thHelp.min,t:`cần Thái hậu ${BAL.ag.cx.thHelp.min}`,w:{...BAL.ag.cx.thHelp.w},x:"Hoàng hậu nể mặt",l:{...BAL.ag.cx.thHelp.l}},
+   {n:"Xin Thái hậu đỡ lời",o:od(BAL.ag.cx.thHelp.o+S.th/BAL.ag.cx.thHelp.div),lock:S.th<netTh("th","than"),t:`cần Thái hậu ${netTh("th","than")}`,w:{...BAL.ag.cx.thHelp.w},x:"Hoàng hậu nể mặt",l:{...BAL.ag.cx.thHelp.l}},
    P3C.tell(S,t)]}
  if(p.kind==="hh"){return topicOpts(v).filter(a=>["Hỏi han sức khỏe","Tạ lỗi","Nhún nhường","Hậu lễ tạ tội","Nhờ người đứng giữa","Chia sẻ bí mật","Nhờ giúp đỡ"].includes(a.n)).concat([
    {n:"Thỉnh an",lock:(S.buoi||0)!==0,t:"chỉ buổi sáng",c:{suc:-5},o:od(BAL.odb.j2.odO_19),w:{hh:4,danh:2,duc:1},l:{hh:-3},go:()=>{v.ghen=cl(v.ghen-5,0,100)}},

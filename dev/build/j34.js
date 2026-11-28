@@ -3,7 +3,7 @@
 const CR=["Tài nghệ","Đức hạnh","Thế lực"];
 function crW(i){const E=BAL.eff.j34;return i===0?(has("trongtai")?E.wTrong:1):i===1?(has("hieuthao")?E.wHieu:1):(has("danghi")?E.wDanghi:1)}
 function ct(){return S.contest||null}
-function candOK(p,r){if(p.out||p.confined||(p!==S&&!p.alive))return false;if(rkOf(p)!==r-1)return false;const req=promoReqP(p).filter(x=>!/Chờ ghế|Ghế |bỏ trống/.test(x[1]));if(r===7)return req.filter(x=>!/Cách lần/.test(x[1])).every(x=>x[0])&&(p.th||0)>=BAL.hhTh;return req.every(x=>x[0])}
+function candOK(p,r){if(p.out||p.confined||(p!==S&&!p.alive))return false;if(rkOf(p)!==r-1)return false;const req=promoReqP(p).filter(x=>!/Chờ ghế|Ghế |bỏ trống/.test(x[1]));if(r===7)return req.filter(x=>!/Cách lần/.test(x[1])).every(x=>x[0])&&(p.th||0)>=netTh("th","than2");return req.every(x=>x[0])}
 /* a seat opens: decree and candidate list */
 function contestOpen(r){if(ct())return"";const C=consorts().filter(p=>candOK(p,r));if(!C.length)return"";if(C.length===1&&C[0]!==S){return promoteP(C[0])||""}
  const len=r===7?3:1;S.contest={r,c:C.map(key),t0:wk(),len,round:0,sc:{},bk:{},bp:{},pr:{},sab:{},cut:{},dq:[],hint:0};
@@ -17,7 +17,7 @@ const DILEMMAS=[["Hai cung nữ cãi nhau, một người làm vỡ chén ngọc
  ["Nhà mẹ đẻ xin ngươi nói giúp một chức quan. Ngươi đáp sao?",[["le","Từ chối, hậu cung không bàn chính sự"],["nhan","Gửi bạc riêng giúp nhà, không xin chức"],["tri","Chỉ người có tài thì mới tiến cử"]]]];
 function judgeVirtue(){const th=traitsOf("th")[0];const e=S.emp.traits;if(e.includes("nhantu")||e.includes("hieuthao")||th==="Ân cần")return"nhan";if(e.includes("danghi")||e.includes("chamchinh")||th==="Kín đáo")return"tri";return"le"}
 function dScore(p,v){const b=judgeVirtue();const J=BAL.eff.j34,m=v===b?J.dHit:J.dMiss;return cl(Math.round(m+(p.duc||0)/J.dDuc+(p.tamco||0)/J.dTam),0,J.scMax)}
-function backers(p){const L=[];const q=queenP();if(q&&q!==p&&aff(q,p)>=netTh(q,"than"))L.push("Hoàng hậu");if((p.th||0)>=50&&!S.thDead)L.push("Thái hậu");const f=facOf(p);if(f)L.push(`phe ${f.name} (${facMembers(f).length})`);if((p.dad||(p===S?S.origin.dad:0)||40)>=60)L.push("nhà mẹ đẻ quyền thế");for(const x of (ct().bk[key(p)]||[]))L.push(x);return L}
+function backers(p){const L=[];const q=queenP();if(q&&q!==p&&aff(q,p)>=netTh(q,"than"))L.push("Hoàng hậu");if((p.th||0)>=netTh("th","than2")&&!S.thDead)L.push("Thái hậu");const f=facOf(p);if(f)L.push(`phe ${f.name} (${facMembers(f).length})`);if((p.dad||(p===S?S.origin.dad:0)||40)>=60)L.push("nhà mẹ đẻ quyền thế");for(const x of (ct().bk[key(p)]||[]))L.push(x);return L}
 /* law4-typed: a backer won between rounds stores the Thế lực points it adds (ctBackerAdd writes BAL backerPt); bk keeps the names for the table */
 function ctBackerAdd(c,k,bk){const L=c.bk[k]=c.bk[k]||[],P=c.bp=c.bp||{};/* rv: an old save mid-contest has names but no points yet → seed from the names it already won */if(P[k]==null)P[k]=L.length*BAL.eff.j34.backerPt;L.push(bk);P[k]+=BAL.eff.j34.backerPt}
 function fScore(p){const c=ct(),k=key(p),own=c.bk[k]||[];const A=backers(p);const L=A.slice(0,A.length-own.length);let n=c.bp&&c.bp[k]!=null?c.bp[k]:own.length*BAL.eff.j34.backerPt;for(const b of L)n+=/^phe/.test(b)?Math.min(BAL.eff.j34.pheMax,BAL.eff.j34.pheBase+(+(b.match(/\d+/)||[1])[0])/BAL.eff.j34.pheDiv):BAL.eff.j34.backerPt;return cl(Math.round(n),0,BAL.eff.j34.scMax)}

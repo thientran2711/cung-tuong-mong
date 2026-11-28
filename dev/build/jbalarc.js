@@ -36,7 +36,7 @@ Object.assign(BAL,{arc:{
  },
  /* the rare endings of the arcs (j97 R97L, same shape as BAL.road.rare): p = chance when every condition holds, np = choices on the path,
     sc = the Lợi thế floor, c = the cost of the final choice, fx = the ending's change, bar = the floor(s) its x condition reads and its x
-    text prints (AR(a).bar, a list in the condition's order when there are several), g = the go amounts. r97: stay = the gain of choosing to stay in the palace after a rare ending that lets her leave. */
+    text prints (AR(a).bar, a list in the condition's order when there are several; a Thái hậu favour floor is netTh("th",..) — her nết, ROW 9, no bar), g = the go amounts. r97: stay = the gain of choosing to stay in the palace after a rare ending that lets her leave. */
  /* j67 rest: ms = the milestone chapters' rewards (MS67); e67 = typed effect helpers (heirNo: no prince yet, demote, away: the Emperor stays
     away); ign = the change when an arc is left past its deadline (end67); questCut = the Lợi thế-sum cut points of the origin finale
     (win ≥ [0], mid ≥ [1], else lose; its reward tier is BAL.road.finTier); quest = the origin-finale changes per origin [win, mid, lose];
@@ -70,13 +70,13 @@ Object.assign(BAL,{arc:{
  dtq_vu:{p:0.15,c:{suc:-4,bac:-50},np:2,sc:2,bar:40,fx:{danh:12,sung:5},g:[10]},
  dtq_binh:{p:0.15,c:{suc:-4},np:3,sc:2,bar:45,fx:{sung:10,danh:8},g:[5]},
  dtq_huynh:{p:0.15,c:{suc:-3,bac:-80},np:2,sc:2,bar:100,fx:{danh:12,sung:5},g:[10]},
- muoi_tuoc:{p:.15,c:{suc:-4,bac:-100},np:2,sc:2,bar:40,fx:{danh:10,bac:200,th:5}},
+ muoi_tuoc:{p:.15,c:{suc:-4,bac:-100},np:2,sc:2,fx:{danh:10,bac:200,th:5}},
  muoi_lau:{p:.15,c:{suc:-4,bac:-40},np:2,sc:2,bar:[2,45],fx:{danh:12,bac:120}},
  muoi_doi:{p:0.15,c:{suc:-8,bac:-60},np:2,sc:2,bar:50,fx:{duc:6,danh:12,sung:4},g:[12]},
  muoi_no:{p:.15,c:{suc:-3,bac:-50},np:2,sc:1,fx:{danh:6,duc:4},g:[45]},
  cn_chu:{p:.15,c:{suc:-3},np:2,sc:1,fx:{danh:10,duc:5,sung:4},g:[40]},
  cn_tinh:{p:.15,c:{suc:-3},np:2,sc:2,bar:40,fx:{sung:10,danh:6}},
- cn_ban:{p:.15,c:{suc:-3,bac:-60},np:2,sc:2,bar:30,fx:{danh:8,mat:3,th:4}},
+ cn_ban:{p:.15,c:{suc:-3,bac:-60},np:2,sc:2,fx:{danh:8,mat:3,th:4}},
  cn_than:{p:.15,c:{suc:-3},np:2,sc:2,fx:{danh:14,th:10}},
  nc_gian:{p:0.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:12,sung:6},g:[10]},
  nc_su:{p:.15,c:{suc:-4},np:2,sc:2,bar:40,fx:{danh:10,bac:150,sung:5}},
@@ -86,7 +86,7 @@ Object.assign(BAL,{arc:{
  td_ke:{p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:12,mat:3,tamco:3}},
  td_song:{p:0.15,c:{suc:-3},np:2,sc:2,bar:35,fx:{danh:10,sung:6},g:[8]},
  td_tha:{p:.15,c:{suc:-3},np:2,sc:1,bar:50,fx:{duc:8,danh:10,sung:4},g:[50]},
- ch_co:{p:.15,c:{suc:-3},np:2,sc:2,bar:50,fx:{th:30,danh:12}},
+ ch_co:{p:.15,c:{suc:-3},np:2,sc:2,fx:{th:30,danh:12}},
  ch_benh:{p:.15,c:{suc:-5},np:3,sc:2,bar:[1,45],fx:{th:15,danh:12,mat:2}},
  ch_ho:{p:.15,c:{suc:-3},np:2,sc:1,fx:{th:15,danh:8,duc:3},g:[50]},
  ch_bi:{p:.15,c:{suc:-3},np:2,sc:2,bar:40,fx:{th:20,duc:5,danh:6}},
