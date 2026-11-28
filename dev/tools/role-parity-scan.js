@@ -38,7 +38,7 @@ KEYLAB["cx:study"]=KEYLAB["cx:study"].concat(["Học với Thái hậu","Học l
 /* row11-law1 r2 (door era): ACT-MERGE / ACT-MOVE door and way labels → the same act keys the NPC side holds: «Dâng lễ vật» (jamove Emperor / Thái hậu
    door, x:giftemp = a gift from her chest = cx:gift, the NPC's cx:gift reaches emp / th) · «Mua đồ» (j83 illDoor: the shop way «Nhờ thái giám mua đồ» = cx:buy)
    · «Thêm thái giám» (j10 hire eunuch: the NPC's cx3:hire p3HireRole picks maid OR eunuch) */
-KEYLAB["cx:gift"]=KEYLAB["cx:gift"].concat(["Dâng lễ vật"]);KEYLAB["cx:buy"]=KEYLAB["cx:buy"].concat(["Mua đồ"]);KEYLAB["cx3:hire"]=["Thêm cung nữ","Thêm thái giám"];
+KEYLAB["cx:gift"]=KEYLAB["cx:gift"].concat(["Dâng lễ vật"]);KEYLAB["cx:buy"]=KEYLAB["cx:buy"].concat(["Mua đồ"]);KEYLAB["cx3:hire"]=["Thêm cung nữ","Thêm thái giám","Nội vụ phủ: thêm cung nữ","Nội vụ phủ: thêm thái giám"];
 /* function class of a key (from the AG-ALL-2 parity table, after part 5): SAME = both sides call ONE function; NUM = same BAL row, two code paths */
 const SAMEPFX=["harm:","cx3:","hh:","ml:"];const SAMEK=new Set(["help","apol","visit","mediate","humil","test","drop","follow","gossip","flaunt","admon","warn","provoke","check","cx:buy","cx:gift","cx:ally",
  "cx2:bribeSrv","cx2:plantSrv","cx2:help","cx2:maidTalk","cx2:maidSpy","cx:study","maid:leave","maid:empTea","maid:poison","maid:follow","maid:cut","maid:listen","maid:scout","maid:watch","maid:pil"]);
@@ -138,6 +138,9 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
   /* row11-law1 r2: every OTHER person keeps a pet (Giúp chăm / Trộm / Thả thú nuôi của nàng: ACT.petcare / petsteal / thaopet ask tsbPets(target)) — the same
      for both doers; a new life's palace held no pet, so the acts toward a pet owner were read on one side only */
   ["pets",a=>{if(typeof PETK==="undefined"||!PETK[0])return;for(const t of others(a)){if(tsbPets(t).length)continue;const p0=t.pets;UNDO.push(()=>{t.pets=p0});t.pets=[{t:PETK[0],probe:1}]}}],
+  /* row11-law1 r2: a FEUD among the others (each holds oán 60 on a third person, never the doer) — «Hòa giải» (TW mediate: the target holds a grudge on
+     someone; j28 SOC.mediate now the same rule) is judged by its rule for both doers */
+  ["feud",a=>{const L=others(a);for(let i=0;i<L.length;i++){const t=L[i],x=L[(i+1)%L.length];if(!t||!x||x===t||x===a)continue;const R=t===S?(S.ro=S.ro||{}):(t.ro=t.ro||{});const o0=R[x.id];UNDO.push(()=>{R[x.id]=o0});R[x.id]=60}}],
   ["staff-room",a=>{const s0=a.staff;UNDO.push(()=>{a.staff=s0});a.staff=(a.staff||[]).filter(s=>s&&s.role!=="maid"&&s.role!=="eunuch")}],
   ["rival-down",a=>{for(const t of others(a))if(t!==S){t.confined=2}}],
   /* part 2: her rouge boxes ran out (jration): both doers miss every part, so the borrow / beg / steal roads open for her and for an NPC */
