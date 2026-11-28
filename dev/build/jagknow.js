@@ -368,6 +368,7 @@ function btTerms(s,m,kind){const B=btB(),K=B[kind];const F=[];if(!s||!K)return F
  let tr=[];try{tr=trongOf(s)}catch(e){}for(const v of tr){const d=K.v[v]||0;if(d)F.push(["trọng "+v,d])}
  if(m&&typeof mindTr==="function"){const T=mindTr(s,m);for(const [v,n] of T.off)F.push(["chủ phạm chữ "+v,Math.round(B.off*Math.min(B.offMax,n))]);for(const [v,n] of T.hon)F.push(["chủ giữ chữ "+v,-Math.round(B.hon*Math.min(B.honMax,n))])}
  const md=m&&typeof mindMood==="function"?mindMood(s,m):"";if(md&&B.mood[md])F.push([md==="gian"?"đang giận chủ":"vừa được chủ thưởng",B.mood[md]]);
+ {const d=typeof svDread==="function"?svDread(m):0;if(d)F.push(["sợ chủ",-d])}/* E-GAIN3c: răn đe after «Phạt vô cớ» */
  return F}
 function btRaw(s,m,kind){return btTerms(s,m,kind).reduce((a,f)=>a+f[1],0)}
 function btOdds(s,m,kind){return agOdd(btRaw(s,m,kind))}

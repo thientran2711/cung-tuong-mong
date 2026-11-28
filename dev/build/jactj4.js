@@ -13,6 +13,8 @@ const j4Row=(c,go)=>Object.assign({n:c.n,x:c.sm||c.x||"",go},c.why?{off:{why:Str
    used now (its reason = the first way's); fewer than 2 ways: the old buttons stay as they were. Members are counted as present, not as usable. */
 function j4Fold(key,name,ways){const D=window.DOOR;if(!D||!D.fold)return false;const F=D.fold(ways.map(w=>({n:w.n})),[{k:key,n:name,re:/[\s\S]/}]);return F.some(a=>a&&a.door)}
 const j4Why=W=>W.every(w=>w.why)?String(W[0].why):"";
+/* LAW 3 (E-GAIN3): a door's Được from its ways' own lines, usable ways first */
+const j4Gain=W=>typeof doorGain==="function"?doorGain(W.filter(w=>!w.why).concat(W.filter(w=>w.why)).map(w=>w.sm||w.x||"")):"";
 /* capture the raw (attrs, name, small, why) of every pbtn a builder makes, so a door can list the same ways without re-deriving a number */
 function j4Capture(fn){const cap=[],p0=pbtn;pbtn=function(at,n,sm,why){cap.push({at,n,sm,why});return p0.apply(this,arguments)};let r;try{r=fn()}finally{pbtn=p0}return{r,cap}}
 const J4DOOR={};/* key -> door ROWS (data only), filled while a tab is drawn */
@@ -31,7 +33,8 @@ const J4DOOR={};/* key -> door ROWS (data only), filled while a tab is drawn */
     return{n:c.n,sm:c.sm,why,go:()=>vir?lessonVir(k,m[3]):lessonMode(k,m[3])}});
    if(!j4Fold(dk,"Học",W))continue;/* fewer than 2 ways: the old buttons stay */
    J4DOOR[dk]=W.map(w=>j4Row(w,w.go));
-   s.acts=[pbtn(`data-learndoor="${dk}"`,"Học",`chọn cách học: ${ways.map(c=>c.n.replace(/^Học với /,"học với ").replace(/^Tự học/,"tự học")).join(" / ")}`,j4Why(W)),...keep]}
+   const dg=j4Gain(W);/* LAW 3 (E-GAIN3): Được = what the ways teach (jdoor doorGain) */
+   s.acts=[pbtn(`data-learndoor="${dk}"`,"Học",`chọn cách học: ${ways.map(c=>c.n.replace(/^Học với /,"học với ").replace(/^Tự học/,"tự học")).join(" / ")}${dg?" · "+dg:""}`,j4Why(W)),...keep]}
   }catch(e){console.error("j4 hoc",e)}return L};
  /* R11 (owner 27/11 ~06:33Z): the môn FRAME (jtabs ktTnPop, KIT §21e) is itself the one door of that môn — it lists the ways (Tự học / Học với thầy / Học với Thái hậu …) as their own act cards with Tốn / Được, never a «Học» door that opens a second chooser. raw = the list before this fold. */
  ktArtSkills.raw=s0})();
@@ -56,7 +59,8 @@ function j4Merge(fname,rules){const f0=window[fname]||(typeof eval(fname)==="fun
    g.ways.forEach((w,i)=>{if(out.includes(`<!--J4S:${key}:${i}-->`))W.push(Object.assign({i},w))});
    /* J1's fold (DOOR.fold, talk-list rule): a door when ≥ 2 ways are present; otherwise the old buttons stay as they were */
    if(W.length>1&&j4Fold(key,R.name,W)){J4DOOR[key]=W.map(w=>j4Row(w,()=>j4Tap(w.at,w.n)));
-    const door=pbtn(`data-j4door="${key}"`,R.name,`${R.hint||"chọn một cách"}: ${W.map(w=>w.n.replace(/^(.)/,c=>c.toLowerCase())).join(" / ")}`,j4Why(W));
+    const dg=j4Gain(W);/* LAW 3 (E-GAIN3): the door's Được = the main gain of its ways (jdoor doorGain, each way's own line) */
+    const door=pbtn(`data-j4door="${key}"`,R.name,`${R.hint||"chọn một cách"}: ${W.map(w=>w.n.replace(/^(.)/,c=>c.toLowerCase())).join(" / ")}${dg?" · "+dg:""}`,j4Why(W));
     let first=true;for(const w of W)out=out.replace(new RegExp(`<!--J4S:${esc(key)}:${w.i}-->[\\s\\S]*?<!--J4E:${esc(key)}:${w.i}-->`),()=>first?(first=false,door):"")}
    out=out.replace(new RegExp(`<!--J4[SE]:${esc(key)}:\\d+-->`,"g"),"")}
   return out};
