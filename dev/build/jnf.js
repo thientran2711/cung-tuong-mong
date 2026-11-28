@@ -215,6 +215,7 @@ function step(){try{if(!S||S.dead||!nfOn()){sleep();return}heal();const x=X();if
  if(x.st!=="open")return;
  if(x.me===undefined&&!x.dlg){if(scene())return;showChoice()}   /* scene() is bounded (CAP): never a choice held past it */
  if(guest())return;
+ if(x.me!==undefined&&x.fr===undefined&&frEnded())x.fr=null;   /* r3 LAW 1: her week end is out: her choice is over (Thôi) */
  if(x.me!==undefined&&x.fr===undefined&&Date.now()-(Math.max(x.at||0,x.mgAt||0)||x.myAt||0)>B().choice.waitMs)x.fr=null;   /* the friend never answered: Thôi — counted from the moment the choice opened (x.at) or a steal game ended / ran (jsmg x.mgAt: active play), never from the host's own answer: an AFK friend holds the night at most waitMs (NLC #9) */
  if(x.me!==undefined&&x.fr!==undefined)resolveAll()}catch(e){console.error(e)}}
 /* the tablet's result is out and no other dialog waits: the choices open (host / single player) */
@@ -330,13 +331,32 @@ function heal(){try{const x=X();if(!x)return;
  if(x.st==="mg"&&!(typeof window.stealMgBusy==="function"&&window.stealMgBusy()))x.st="open";
  if(x.st==="open"&&x.me===undefined&&x.dlg&&!Q.some(m=>m&&m.pid==="nfch"))x.dlg=0}catch(e){console.error(e)}}
 window.nfHeal=heal;
+/* COOP-REBIRTH-RESYNC r3 (MAIN 189 ★ PLAY-STOPPER, flight2-coop1j room e E8EH on LIVE 18003079): host ended week 306, guest (Phế phi ·
+   lãnh cung) at tối «Hết buổi», «còn 1», #next «Chờ hảo hữu…» for ever, server ended {a:true,b:false}. Her save: nfW 317 (waiting for the
+   host's word of day 317), the host's day 314 → 315 (his new life after the in-room «Chuyển kiếp»): two seat calendars in one room week, so
+   the host never had a word for day 317 (reply: not today, not a past day) and her night never ran. LAW 11, every way the host's word can
+   be missing once he has ended (a calendar drift, his new life that never flipped today, his own night played early = «done» with no fin,
+   a lost message, a reload): the friend's WEEK END is his last word — her night runs without it (who holds tonight comes with the merged
+   week, B2 S.tn). LAW 1: the host never waits for the guest's choice once her week end is out (step: Thôi at once). */
+function frEnded(){try{const c=CO();if(!c)return false;const e=COOP.state.ended||{};return !!e[c.seat==="a"?"b":"a"]}catch(e){return false}}
+function finOut(d){const x=X()||(S.nfX={d,st:"done"});x.st="done";if(x.me===undefined){x.me=null;for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].pid==="nfch")Q.splice(i,1);try{TM.stop()}catch(e){}}
+ sleep();S.nfF=d;S.nfP=null;S.nfFin=d;RR=null;try{COOPW.tr.push("nf fin by end "+d)}catch(e){}}
+/* (4) the free last khắc (room e: «Nghỉ ngơi» / «Che chở» ran again and again at «còn 1»): hold() puts used 4 back to 3 so j6 does not turn the
+   day again while the night waits, which left every act open for free while she waited for the host's word (or a held choice). Her day is
+   spent once tối's end is pressed (S.nfC = today): no act may run while the night holds it. */
+function nfDayHeld(){try{if(!S||S.dead||!nfOn()||(S.buoi||0)<B4())return false;const d=day();if(S.nfC!==d||Q.length)return false;
+ if(guest())return S.nfFin!==d;const x=X();return !!(x&&x.st!=="done")}catch(e){return false}}
+window.nfDayHeld=nfDayHeld;
+if(typeof can==="function"){const cn0=can;can=function(){if(nfDayHeld())return false;return cn0.apply(this,arguments)}}
+if(typeof whyTime==="function"){const wt0=whyTime;whyTime=function(){if(nfDayHeld())return "hết khắc buổi này";return wt0.apply(this,arguments)}}
 const et0=endTurn;endTurn=function(){if(!S||S.dead||Q.length||S.mg||!nfOn())return et0.apply(this,arguments);
  const d=day();heal();
  if(S.nfC!==d){S.nfC=d;
   if(!guest()){S.nfX={d,st:S.nfN===d?"done":"wait",at:Date.now()};FLIPQ=new WeakSet();if(S.nfN!==d&&!flippedToday()){const q0=new Set(Q);realFlip();FLIPQ=new WeakSet(Q.filter(m=>m&&typeof m==="object"&&!q0.has(m)))}}   /* her night already played today (his visit, a summons): no flip, no choice */
   else ask()}
  if(!guest()){const x=X();if(x&&x.st!=="done"){hold();wake();return}}
- else if(S.nfFin!==d){S.nfW=d;ask();hold();wake();return}       /* the host's flip, then the host's last word on who holds tonight */
+ else if(S.nfFin!==d&&!frEnded()){S.nfW=d;ask();hold();wake();return}       /* the host's flip, then the host's last word on who holds tonight */
+ else if(S.nfFin!==d)finOut(d);
  if(Q.length)return hold();
  if(S.tonight==="me"&&S.nfN!==d){S.nfN=d;return herNight()}
  return et0.apply(this,arguments)};

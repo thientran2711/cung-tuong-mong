@@ -258,7 +258,9 @@ function attach(C){T("attach");if(!C||!C.W)return;const mp=me();
  if(wasSrv&&typeof srvInit==="function"){S.srv=null;quiet=true;try{withoutFriend(()=>srvInit())}catch(e){console.error(e)}quiet=false}
  S.place="home";S.visit={k:"home",people:homePeople(),talked:false};
  try{if(typeof sidN!=="undefined")sidN=Math.max(sidN,...allServ().map(s=>+s.sid||0).filter(n=>n<900),0)}catch(e){}
- try{lifeRekey()}catch(e){console.error("lifeRekey",e)}}
+ try{lifeRekey()}catch(e){console.error("lifeRekey",e)}
+ /* r3: the new life lives on the room's calendar = the merged week's date (CW.dying is the world at her death: a death inside her own night / month tick already moved its date on) */
+ try{const B=(CW.base&&CW.base.W&&CW.base.W.S)||(C2.W&&C2.W.S);if(B)for(const k of CLKK)if(typeof B[k]==="number"&&S[k]!==B[k]){T("date life "+k+" "+S[k]+">"+B[k]);S[k]=B[k]}}catch(e){console.error(e)}}
 /* ONE KEY = ONE PERSON at the join (law 6b; flight-sid-rebirth + SELSCENE-18, folded into one rule at the SELSCENE-19 merge, law 11/14):
    a new life is built from a fresh seeded run (j52 nlRun: sidN = 0, a fresh S with S.kseq 0), then joins the room's world, which still holds
    the people of the old lives with their servant ids (s<sid>) and «x<n>» keys. Her new household (maid, servants, children, home family) and
@@ -960,7 +962,17 @@ function nAtNight(){return !!(S&&!S.dead&&(S.buoi||0)>=LASTB())}
 function nReady(){return CW.on&&CW.nrdy===wk()&&nAtNight()&&CW.sent!==wk()&&!CW.pend}
 function nOtherEnded(){const e=COOP.state.ended||{};return !!e[fs()]}
 function nOtherGone(){const s=COOP.state.seats;return !!(s&&typeof s==="object"&&(fs() in s)&&!s[fs()])}
-function nightReady(){if(CW.nrdy===wk()){nCheck();return}CW.nrdy=wk();T("nready "+wk());if(!host())nsay("rd");nCheck();lockNext();try{render()}catch(e){}}
+/* COOP-REBIRTH-RESYNC r3 (room e E8EH): ONE ROOM CALENDAR. year / month / tuần / turn are world keys that move only with the merged week
+   (jcoophl CLOCK); jnf / jnight / the night gate read the day as S.turn*3+S.tuan. Room e: guest day 317, host day 314 → 315 in the same room
+   week 306 (a calendar carried in from somewhere else: a life built on an older world copy, a restored seat copy, a rewind) → the host never
+   had a word for her day and her night waited for ever. Before her night (and when a new life is put into the room) her calendar is the
+   room's: the merged world's date (CW.base.W.S). Never while her own night / week end is running or out (her date has moved on by rule). */
+const CLKK=["year","month","tuan","turn"];
+function dateFix(why){try{if(!CW.on||!S||S.dead||CW.inLife||CW.inTurn||CW.pend||CW.sent===wk()||eW()||!CW.base||!CW.base.W||!CW.base.W.S||selxHold())return false;
+ const B=CW.base.W.S;if(CLKK.some(k=>typeof B[k]!=="number"))return false;const was=(S.turn||0)*3+(S.tuan||0);let ch=false;
+ for(const k of CLKK)if(S[k]!==B[k]){S[k]=B[k];ch=true}if(ch)T("date "+why+" "+was+">"+((S.turn||0)*3+(S.tuan||0)));return ch}catch(e){console.error(e);return false}}
+CW.dateFix=dateFix;
+function nightReady(){dateFix("night");if(CW.nrdy===wk()){nCheck();return}CW.nrdy=wk();T("nready "+wk());if(!host())nsay("rd");nCheck();lockNext();try{render()}catch(e){}}
 function nGoNow(){if(!host()||CW.ngo===wk())return;CW.ngo=wk();T("ngo "+wk());nsay("go");CW.ngoW=wk();if(eW())try{CW.thin.flush()}catch(e){}/* thin E: the go rides the view (o.e.go): out before his week end */}
 /* host: commit when both are ready (or forced); every seat: run the committed night once free */
 function nCheck(){if(!CW.on||!S)return;const w=wk();
@@ -976,7 +988,7 @@ function nCheck(){if(!CW.on||!S)return;const w=wk();
     for a «where» that never comes → her night never ran, her end never went out, both seats stuck. The NPC places do not matter for the
     night: when the friend's end is already out (his commit), her night does not wait for a «where». */
  if(CW.ngoW!==w||CW.pend||CW.sent===w||!nAtNight()||S.dead||Q.length||S.mg||frozen()||!CW.base||whereWait()||CW.inLife)return;
- T("night "+w);CW.allowN=true;try{nextBuoi()}finally{CW.allowN=false}}
+ dateFix("run");T("night "+w);CW.allowN=true;try{nextBuoi()}finally{CW.allowN=false}}
 CW.nCheck=()=>nCheck();CW.nightReady=()=>nightReady();CW.mapPlace=mapPlace;CW.refreshHere=()=>refreshHere();
 CW.forceNight=()=>{if(!CW.on||!host()||!nAtNight()||CW.ngo===wk())return false;CW.nforce=wk();nCheck();return true};
 CW.nReady=nReady;
