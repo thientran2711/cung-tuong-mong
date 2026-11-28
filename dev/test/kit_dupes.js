@@ -9,6 +9,7 @@ const asm=fs.readFileSync(path.join(B,'assemble.py'),'utf8');
 const files=[...asm.matchAll(/'(j[a-z0-9]*\.js)'/g)].map(m=>m[1]).concat(['p1.html']);
 const RETIRED=[
  // [pattern, what it was, the kit component to use instead]
+ [/\bkitHandFlip[A-Za-z]*\b|\bkhflip\b|\.khff\b|\.khfb\b|\.khfi\b|\bKIT_HAND\.flip\b/, 'Bàn bài card FLIP (back side) — owner 26/11 ~23:58Z «Ok bỏ lật, làm theo Game of Dice»: no flip anywhere', 'kitHand enlarged card + ONE «Chọn» (§101.10, kitHandBigPlace, jkhand)'],
  [/\bclass="st"|\.st\s*(?:small|span|\{)|\.st>(?:small|span)|\.stats\s*[{.>]/, 'top-bar stat cell .st / .stats', 'kitStatCell / kitStatRow (jk4)'],
  [/\bk3tcv\b|#k3ts\b|\.k3ts\b/, 'top-bar Tư chất cell .k3tcv / #k3ts', 'kitStatCell (jk4)'],
  [/\bktiles?\b/, 'stat tile .ktile / .ktiles', 'kitStatCell {cls:"kst-tile"} in .kstgrid (kitTiles)'],
