@@ -1,5 +1,11 @@
 /* ================= jbal2: late balance knobs for the merged logic modules (review/balance). Same rule for every consort; numbers only. ================= */
 Object.assign(BAL,{illAdd:1,illDie:2});
+/* ILLNESS-CURE (MAIN 182, laws 2/3/4): the cure roads of an illness, tiered nhẹ · vừa · nặng (jillcure / j13 treat).
+   way = the base cure odds of a road (+ the Sức khỏe lot + care; was typed 55 / 30 / 20 in j13 treatO): rest Tĩnh dưỡng (nhẹ) · self Tự bốc thuốc (nhẹ, Y thuật) ·
+   vien Sang Thái y viện xin thuốc (vừa) · ty Truyền thái y (nặng, bạc) · cau Cầu xin ngự y (nặng, the non-bạc road of the same tier: Sủng spent on asking Hoàng thượng);
+   tyBac = the silver of Truyền thái y (was a typed 40) · vien / cau = price {stat: −n} and k khắc · slow = the cure malus of a slow illness (Lao phổi; was a typed 15) ·
+   npc = % of months a sick NPC (nặng or worse) takes the best road she can pay (law 1: the same roads, the same prices) */
+Object.assign(BAL,{illCure:{way:{rest:20,self:30,vien:40,ty:55,cau:55},tyBac:40,vien:{c:{suc:-8},k:2},cau:{c:{sung:-4},k:2},slow:15,npc:60}});
 /* ONE DIM for the people who are NOT chosen (KIT §98 kitDim; owner 24/11 ~09:05Z / ~15:30Z): brightness + saturation on the FIGURE only, opaque, never the background; ms = cross-fade */
 BAL.kdim={b:.7,s:.75,ms:220};
 /* RING-BUILD (KIT §104 kitRing, owner OD 26/11 ~18:55Z «những người còn lại là tối»): the ring dims every slot that is not in front harder than kitDim (static filter on a copy, opacity cross-fade) */
@@ -35,10 +41,10 @@ BAL.nwq={shift:0,free:2,hint:.5,auto:.25,miss:.8,xaMiss:.9,xaFloor:0,peek:8,idle
  n:{le:[3,4,5],tc:[5,6,8],thq:[4,5,6],xa:[3,4,5]},rounds:{le:3,tc:2,thq:3,xa:5},
  lim:{le:[30,30,28],tc:[45,45,42],thq:[30,30,28],xa:[14,10,8]}};/* xa 18/17/15 → 14/10/8 (review/mg-tune: a case is seen in ~3 s; the time part needs a limit near the play) */
 /* sickness in the palace: each month a healthy consort may also fall ill (illAdd %), and a critical illness kills a little more often (illDie × the illness' own death weight) */
-(function(){const i0=illMonthP;illMonthP=function(p){let ev=i0.apply(this,arguments);
+(function(){const i0=illMonthP;illMonthP=function(p){const st0=((p&&typeof illOf==="function"&&illOf(p))||{}).st||0;let ev=i0.apply(this,arguments);
  try{if(!p||p.dead||p.alive===false||(p===S&&S.dead))return ev;const i=illOf(p);
   if(!i){if(BAL.illAdd&&roll(BAL.illAdd)){const sea=SEASON[S.month-1];const L=Object.entries(ILL).filter(([k,d])=>d.sea&&d.sea.includes(sea));ev+=catchIll(p,L.length&&roll(60)?pick(L)[0]:pick(["lao","phonghan","sotret"]))}}
-  else{const d=ILL[i.k];if(i.st===3&&d.die&&BAL.illDie&&roll(25*d.die*BAL.illDie)){if(p===S){die(`${d.n} nguy kịch, không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;ev+=`<span class="r">${p.name} mất vì ${d.n.toLowerCase()}.</span> `}}}catch(e){}
+  else{const d=ILL[i.k];if(i.st===3&&st0===3/* ILLNESS-CURE: only an illness that was already nguy kịch at the month start (the month it turns nguy kịch she gets her card + a month to act, as j13) */&&d.die&&BAL.illDie&&roll(25*d.die*BAL.illDie)){if(p===S){die(`${d.n} nguy kịch, không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;ev+=`<span class="r">${p.name} mất vì ${d.n.toLowerCase()}.</span> `}}}catch(e){}
  return ev}})();
 /* contests (j71) score every entrant's skill part with the j82/j91 rule: the mini-game raw (0–10) rolled by her/his own art level (kg82NpcRaw), scaled to J71.luck;
    she still plays herself when she chooses to (her.score). The odds words use the same distribution. One two-way rule for every contest table. */

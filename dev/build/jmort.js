@@ -124,9 +124,9 @@ window.mortKill=function(p,why){return kill(p,why,kidSet())};
  if((typeof worldOn!=="function"||worldOn())&&!t&&S.thIll&&S.thIll.st>=3&&!roll(M.thIllKeep))S.thIll.st=2;/* review/coop-guest-men r1: a world roll (the Thái hậu's illness is the host's, HOST_ONLY thIll), host only like j13 */
  let ev=i0.apply(this,arguments);if(e)S.emp.ill=e;if(t&&!S.thDead)S.thIll=t;if(S.dead)return ev;return ev+monthMort()}})();
 (function(){const p0=illMonthP;illMonthP=function(p){if(!M.on||!p)return p0.apply(this,arguments);if(p.ill&&p.ill.mort){ap(p,{suc:-M.pre.omenSuc*p.ill.st});return ""}
- const had=!!illOf(p);let ev=p0.apply(this,arguments);if(S.dead||p.alive===false)return ev;const a=ageOf(p)||20;
+ const had=!!illOf(p),st0=had?illOf(p).st:0;let ev=p0.apply(this,arguments);if(S.dead||p.alive===false)return ev;const a=ageOf(p)||20;
  if(!had&&!illOf(p)&&a>M.illAge[0]&&roll(M.illAge[2]*(a-M.illAge[0])/M.illAge[1])){const sea=SEASON[S.month-1];const L=Object.entries(ILL).filter(([k,d])=>d.sea&&d.sea.includes(sea));ev+=catchIll(p,L.length?pick(L)[0]:"phonghan")}
- const i=illOf(p);if(i&&i.st===3&&!i.mort&&ILL[i.k].die&&a>M.dieAge[0]&&roll(M.dieAge[2]*ILL[i.k].die*(a-M.dieAge[0])/M.dieAge[1])){if(p===S){die(`${ILL[i.k].n} nguy kịch, tuổi cao sức yếu không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;ev+=`<span class="r">${p.name} mất vì ${ILL[i.k].n.toLowerCase()}, tuổi cao sức yếu.</span> `}
+ const i=illOf(p);if(i&&i.st===3&&st0===3/* ILLNESS-CURE: not in the month it turns nguy kịch */&&!i.mort&&ILL[i.k].die&&a>M.dieAge[0]&&roll(M.dieAge[2]*ILL[i.k].die*(a-M.dieAge[0])/M.dieAge[1])){if(p===S){die(`${ILL[i.k].n} nguy kịch, tuổi cao sức yếu không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;ev+=`<span class="r">${p.name} mất vì ${ILL[i.k].n.toLowerCase()}, tuổi cao sức yếu.</span> `}
  return ev}})();
 /* treatment of the omen illness: switch 3 (care) — 0: the lifespan holds, thuốc chỉ đỡ đau; 1: a cure adds careAdd years once per careMax */
 (function(){const t0=treat;treat=function(p,way){const i=p&&p.ill;if(!M.on||!(i&&i.mort))return t0.apply(this,arguments);

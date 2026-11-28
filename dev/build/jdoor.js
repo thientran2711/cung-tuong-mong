@@ -135,6 +135,7 @@ DOOR.road=function(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeo
  function lineOf(a){const sp=String(a.x||"").split(/ · kèm: /);const ton=[`${cardCost(a)} khắc`];try{const c=fmt(a.c||{});if(c)ton.push(c)}catch(e){}
   let gain="";try{gain=[fmt(a.w||{}),sp[0]].filter(Boolean).join(" · ")}catch(e){}const P=["tốn: "+ton.join(" · "),"thành: "+(gain||doorTxt(a.t)||"")];if(sp[1])P.push("kèm: "+sp[1]);
   const rolled=a.o!=null&&a.o<100&&!a.lock;if(rolled){let f="";try{f=[fmt(a.l||{}),typeof a.lx==="string"?a.lx:""].filter(Boolean).join(" · ")}catch(e){}P.push("hỏng: "+(f||"không mất gì"))}return P.join(" · ")}
+ DOOR.lineOf=lineOf;/* jone deck tier rows + jillcure read the same kit line (ILLNESS-CURE) */
  function whyOf(a,dis){if(!dis)return"";let w="";try{w=cardWhy(a)}catch(e){}return doorTxt(w)||doorTxt(a.lock&&a.t)||"chưa làm được lúc này"}
  function build(){const road=DOOR.road();if(!road||typeof tab==="undefined"||!S||S.dead)return;const R=DOOR.D.filter(r=>r.roads.includes(road));if(!R.length)return;
   const P=document.getElementById("panel");if(!P||!Array.isArray(deck))return;

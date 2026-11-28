@@ -85,7 +85,7 @@ const HSD=[/* door key, door name, line, ways (card names) — H-number = HANHSU
  {k:"nghi",h:"H2",n:"Nghỉ ngơi",t:"Nghỉ một lát, nghỉ dưỡng sức, hay dưỡng nhan.",m:[/^Nghỉ ngơi một lát$/,/^Nghỉ ngơi dưỡng sức$/,/^Dưỡng nhan$/]},
  {k:"caobenh",h:"H3",n:"Cáo bệnh",t:"Giả bệnh xin thương, hay đóng cửa tĩnh dưỡng.",m:[/^Giả bệnh$/,/^Xin rút thẻ bài, đóng cửa tĩnh dưỡng$/]},
  {k:"thinhan",h:"H4",n:"Thỉnh an",t:"Sang thỉnh an Thái hậu hay Hoàng hậu.",m:[/^Thỉnh an Thái hậu$/,/^Thỉnh an Hoàng hậu$/]},
- {k:"thaiy",h:"H5",n:"Bắt mạch, chữa bệnh",t:"Mời thái y tới cung hay tự sang Thái y viện; lúc lâm bệnh thì chữa bệnh.",m:[/^Mời thái y bắt mạch$/,/^Sang Thái y viện xin bắt mạch$/,/^Truyền thái y$/,/^Tự bốc thuốc$/,/^Tĩnh dưỡng$/]},
+ {k:"thaiy",h:"H5",n:"Bắt mạch, chữa bệnh",t:"Mời thái y tới cung hay tự sang Thái y viện; lúc lâm bệnh thì chữa bệnh.",m:[/^Mời thái y bắt mạch$/,/^Sang Thái y viện xin bắt mạch$/,/^Truyền thái y$/,/^Tự bốc thuốc$/,/^Tĩnh dưỡng$/,/^Sang Thái y viện xin thuốc$/,/^Cầu xin ngự y$/]},
  {k:"soksp",h:"H6",n:"Xem sổ Kính sự phòng",t:"Lót tay thái giám, hay lén xem sổ.",m:[/^Xem sổ nguyệt sự$/,/^Xem lén sổ nguyệt sự$/]},
  {k:"docsach",h:"H7",n:"Đọc sách",t:"Đọc sách giải khuây, hay đọc binh thư sử sách.",m:[/^Đọc sách giải khuây$/,/^Đọc binh thư, sử sách$/]},
  {k:"tainghe",h:"H8",n:"Dâng tài nghệ",t:"Múa, đàn, cờ, vẽ: mỗi môn một đường.",m:[/^Múa trong yến tiệc$/,/^Kinh hồng vũ$/,/^Đánh cờ với Hoàng thượng$/,/^Đàn khúc Phượng cầu hoàng$/,/^Vẽ chân dung tặng Thái hậu$/]},

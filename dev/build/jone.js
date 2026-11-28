@@ -39,7 +39,11 @@ const M={
  s_gh:{mode:"tier",t:[["nhẹ",/^Trò chuyện$/],["vừa",/^Biếu quà nhỏ$/]]},
  /* deck doors (DOOR.D k) */
  "hs-nghi":{mode:"tier",t:[["nhẹ",/^Nghỉ ngơi một lát$/],["vừa",/^Nghỉ ngơi dưỡng sức$/]]},
- "hs-thaiy":{mode:"tier",t:[["nhẹ",/^(Tĩnh dưỡng|Tự bốc thuốc)$/],["vừa",/^Sang Thái y viện/],["nặng",/^(Mời thái y bắt mạch|Truyền thái y)$/]]},
+ /* ILLNESS-CURE (MAIN 182): while she is ill the door is ONE matter, the cure (law 2): nhẹ rest / own medicine · vừa thuốc from Thái y viện · nặng thái y (bạc) or
+    ngự y (cầu xin, no bạc); the pulse-reading roads (no cure) stay off the tiers then — they hid the cure (the favour pick took «Mời thái y bắt mạch», read as sure) */
+ "hs-thaiy":{mode:"tier",get t(){let ill=false;try{ill=!!(S&&typeof illOf==="function"&&illOf(S))}catch(e){}
+  return ill?[["nhẹ",/^(Tĩnh dưỡng|Tự bốc thuốc)$/],["vừa",/^Sang Thái y viện xin thuốc$/],["nặng",/^(Truyền thái y|Cầu xin ngự y)$/]]
+   :[["nhẹ",/^(Tĩnh dưỡng|Tự bốc thuốc)$/],["vừa",/^Sang Thái y viện xin bắt mạch$/],["nặng",/^(Mời thái y bắt mạch|Truyền thái y)$/]]}},
  "hs-soksp":{mode:"tier",t:[["nhẹ",/^Xem lén sổ nguyệt sự$/],["vừa",/^Xem sổ nguyệt sự$/]]},
  "hs-docsach":{mode:"tier",t:[["nhẹ",/^Đọc sách giải khuây$/],["vừa",/^Đọc binh thư/]]},
  "hs-tainghe":{mode:"one",pref:"art"},
@@ -175,12 +179,15 @@ function deckRow(b){const I=b.dataset.ddi.split(",").map(Number);const a=deck[I[
  return (DOOR.D||[]).find(r=>r.roads.includes(road)&&(r.re?r.re.test(txt(a&&a.n)):(()=>{try{return r.key(a,deck)===b.dataset.ddoor}catch(e){return false}})()))||null}
 function deckM(b){const I=b.dataset.ddi.split(",").map(Number),X=b.dataset.ddx.split(",").map(Number);
  return I.map((i,j)=>{const a=deck[i];if(!a)return null;let w="";if(!X[j]){try{w=txt(cardWhy(a))}catch(e){}w=w||txt(a.lock&&a.t)||"chưa làm được lúc này"}
-  let c=1;try{c=cardCost(a)}catch(e){}return{id:"d:"+txt(a.n),n:a.n,a,x:a.x||"",off:!X[j],why:w,cost:c,go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("jone deck way",e)}},0)}}}).filter(Boolean)}
+  let c=1;try{c=cardCost(a)}catch(e){}/* the member's kit line (jdoor lineOf: tốn · thành · kèm · hỏng, as the jdoor deck card had), not its bare «kèm» text — the card back showed only Gợi ý (ILLNESS-CURE, law 3) */
+  let x=a.x||"";try{if(DOOR.lineOf)x=DOOR.lineOf(a)||x}catch(e){}
+  return{id:"d:"+txt(a.n),n:a.n,a,x,off:!X[j],why:w,cost:c,go:()=>{setTimeout(()=>{try{act(i)}catch(e){console.error("jone deck way",e)}},0)}}}).filter(Boolean)}
 ONE.deckM=deckM;ONE.deckRow=deckRow;
 function deckRowR(b){const r=deckRow(b);return r?Object.assign({},r,{n:b.dataset.ddoor}):{k:"?",n:b.dataset.ddoor}}
 function deckTap(b){if(!S||S.dead||Q.length)return true;const r=deckRowR(b);const L=deckM(b);const md=ONE.mode(r.k);
  if(md==="tier"){const tiers=TI.filter(t=>L.some(m=>tierOf(r,m)===t));if(tiers.length>=2){const R=tierRows(r,L,"me");
-   const rows=R.map(x=>{const o={n:x.n,x:x.x,ddoor:1,go:()=>{const m=pick(r,x.T,seedOf(r,"me",x.t));if(m)runM(r,m,x.T,x.t)}};if(x.off)o.off=x.off;return o});
+   const rows=R.map(x=>{const o={n:x.n,x:x.x,ddoor:1,go:()=>{const m=pick(r,x.T,seedOf(r,"me",x.t));if(m)runM(r,m,x.T,x.t)}};if(x.off)o.off=x.off;
+    /* the pick's odds word on the row, as jdoor's deck card (o.p) — ILLNESS-CURE law 7 */try{const a=x.m&&x.m.a;if(a&&!a.lock&&oddsOf(a)<100)o.p=optOdds(a)}catch(e){}return o});
    let wh=null;try{wh=typeof pMe==="function"?pMe():null}catch(e){}DOOR.card(b.dataset.ddoor,"Chọn mức.",rows,wh);return true}}
  const m=pick(r,L,seedOf(r,"me"));if(!m)return false;runM(r,m,L);return true}
 ONE.deckTap=deckTap;

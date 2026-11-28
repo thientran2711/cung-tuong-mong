@@ -16,7 +16,7 @@ function illMonthP(p){const me=p===S;let ev="";const i=illOf(p);
   else{const near=others(p).find(x=>illOf(x)&&ILL[x.ill.k].cont&&(together(p,x)||sameHouse(p,x)));if(near&&roll(8))ev+=catchIll(p,near.ill.k)}
   return ev}
  const d=ILL[i.k];ap(p,{suc:-5*i.st});if(d.sac)ap(p,{sac:d.sac});if(d.sung)ap(p,{sung:d.sung});
- const c=careOdds(p);if(roll(BAL.odb.j13.rbIllMonthP+c-(d.slow?15:0))){p.ill=null;if(d.scar)ap(p,{sac:d.scar});return ev+(me?`Ngươi khỏi ${d.n.toLowerCase()}${d.scar?", nhưng mặt để lại sẹo (Sắc "+d.scar+")":""}. `:"")}
+ const c=careOdds(p);if(roll(BAL.odb.j13.rbIllMonthP+c-(d.slow?BAL.illCure.slow:0))){p.ill=null;if(d.scar)ap(p,{sac:d.scar});return ev+(me?`Ngươi khỏi ${d.n.toLowerCase()}${d.scar?", nhưng mặt để lại sẹo (Sắc "+d.scar+")":""}. `:"")}
  if(i.st<3&&roll(BAL.odb.j13.rbIllMonthP_2-c/2)){i.st++;if(me)ev+=`<span class="r">${d.n} trở ${STG[i.st]}.</span> `}
  else if(i.st===3&&d.die&&roll(25*d.die)){if(me){die(`${d.n} nguy kịch, không qua khỏi`);return ev}p.alive=false;if(p.queen)p.queen=false;return ev+`<span class="r">${p.name} mất vì ${d.n.toLowerCase()}.</span> `}
  return ev}
@@ -34,16 +34,23 @@ function illMonth(){let ev="";for(const p of consorts())ev+=illMonthP(p);ev+=epi
 function fakeIllRisk(){const c=BAL.tw.g.illCatch/100;return Math.round(100*(1-Math.pow(1-c,BAL.tw.g.illWk)))}
 /* the Emperor avoids the sick; quarantine blocks nights */
 function illNightF(p){const i=illOf(p);if(p.fakeIll)return 1.2;return !i?1:ILL[i.k].cont?0:i.st>=2?.3:.7}
-function treatO(p,way){return oddsCl(lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+careY(p):20+careOdds(p)))}
-function treat(p,way){const i=illOf(p);if(!i)return"";let o=lotB(p,"Sức khỏe")+(way==="ty"?55+careOdds(p):way==="self"?30+careY(p):20+careOdds(p));
+/* the cure odds of a road (BAL.illCure.way; ILLNESS-CURE): the physician roads (ty / cau / vien) and rest add care (thái y tâm phúc, Y thuật, an thai); self adds her own Y thuật */
+function treatRaw(p,way){const W=BAL.illCure.way;return lotB(p,"Sức khỏe")+(way==="self"?W.self+careY(p):(W[way]!=null?W[way]:W.rest)+careOdds(p))}
+function treatO(p,way){return oddsCl(treatRaw(p,way))}
+function treat(p,way){const i=illOf(p);if(!i)return"";let o=treatRaw(p,way);
  const bribed=typeof thyBribedBy==="function"?thyBribedBy(p):mindPickBy(liveRivals(true).filter(v=>v!==p&&!v.coop/* E44j (c) T9 family: a co-op friend entry is a player seat, never the NPC briber (as jthaiy bribers rv) */&&S.court&&(S.court.ty.af[v.id]||0)>=30&&hostility(v,p)>=netTh(v,"host")),v=>hostility(v,p)*mindW(v,"bribe"),null);/* npc-mind: was FIRST */
  const ob=way==="ty"&&bribed?npcWhy("thyHarm",{p,b:bribed},()=>roll(BAL.ag.why.thyHarm.p)):null;/* npc-purpose G2: only a rival who really paid the physician (thyBribedBy) and still wants her harmed; the old 25 = the success */
  if(ob){i.st=Math.min(3,i.st+1);return `<span class="r">Thang thuốc của thái y làm bệnh nặng thêm.</span> (Có kẻ đã mua chuộc thái y?) `}
  if(roll(oddsCl(o))){p.ill=null;return `${NMc(p)} khỏi bệnh. `}if(i.st>1&&roll(BAL.rk.treatStep)){i.st--;return `Bệnh đỡ, còn ${STG[i.st]}. `}return "Bệnh chưa thuyên giảm. "}
 function illCards(){const A=[];const i=illOf(S);
- if(i){A.push({n:"Truyền thái y",t:`Mời thái y đến chữa ${ILL[i.k].n.toLowerCase()}.`,c:{bac:-40},o:100,inner:1,oi:treatO(S,"ty"),k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"ty"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(BAL.rk.treatStep)}`,go:()=>log(treat(S,"ty"))});
+ if(i){A.push({n:"Truyền thái y",t:`Mời thái y đến chữa ${ILL[i.k].n.toLowerCase()}.`,c:{bac:-BAL.illCure.tyBac},o:100,inner:1,oi:treatO(S,"ty"),k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"ty"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(BAL.rk.treatStep)}`,go:()=>log(treat(S,"ty"))});
   if(S.arts.y>=3)A.push({n:"Tự bốc thuốc",t:"Dùng y thuật của mình.",c:{suc:-5},o:100,inner:1,oi:treatO(S,"self"),k:2,w:{},x:`khỏi bệnh: ${chanceW(treatO(S,"self"))} (Y thuật bậc ${S.arts.y})`,go:()=>log(treat(S,"self"))});
-  A.push({n:"Tĩnh dưỡng",t:"Đóng cửa nằm nghỉ cả buổi.",c:{},o:100,inner:1,oi:treatO(S,"rest"),k:4,w:{suc:15},x:`khỏi bệnh: ${chanceW(treatO(S,"rest"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(BAL.rk.treatStep)}`,go:()=>log(treat(S,"rest"))})}
+  A.push({n:"Tĩnh dưỡng",t:"Đóng cửa nằm nghỉ cả buổi.",c:{},o:100,inner:1,oi:treatO(S,"rest"),k:4,w:{suc:15},x:`khỏi bệnh: ${chanceW(treatO(S,"rest"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(BAL.rk.treatStep)}`,go:()=>log(treat(S,"rest"))});
+  /* ILLNESS-CURE (MAIN 182, law 2): the vừa road (thuốc, no bạc) and the non-bạc road of the nặng tier (cầu xin) */
+  const V=BAL.illCure.vien,C=BAL.illCure.cau;const vw=S.out?"Ở lãnh cung, không ra khỏi cửa được":S.confined?"Đang bị cấm túc, không ra khỏi cung được":"";
+  A.push({n:"Sang Thái y viện xin thuốc",t:"Tự đi lấy thang thuốc theo đơn của thái y trực viện.",c:{...V.c},o:100,inner:1,oi:treatO(S,"vien"),k:V.k,w:{},dom:"Sức khỏe",lock:!!vw,...(vw?{t:vw}:{}),x:`khỏi bệnh: ${chanceW(treatO(S,"vien"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(BAL.rk.treatStep)}`,go:()=>log(treat(S,"vien"))});
+  const cw=S.out?"Ở lãnh cung, không dâng thư lên Hoàng thượng được":S.sung+C.c.sung<0?"Chưa đủ Sủng để cầu xin":"";
+  A.push({n:"Cầu xin ngự y",t:"Dâng thư cầu Hoàng thượng ban ngự y đến chữa bệnh.",c:{...C.c},o:100,inner:1,oi:treatO(S,"cau"),k:C.k,w:{},dom:"Sức khỏe",lock:!!cw,...(cw?{t:cw}:{}),x:`khỏi bệnh: ${chanceW(treatO(S,"cau"))} · chưa khỏi thì bệnh đỡ một bậc: ${chanceW(BAL.rk.treatStep)}`,go:()=>log(treat(S,"cau"))})}
  else if(!S.fakeIll)A.push({n:"Giả bệnh",t:"Cáo bệnh để Hoàng thượng thương xót, tránh việc khó.",c:BAL.tw.fakeIll,o:100,inner:1,oi:100-fakeIllRisk()/* law 7 (review/m-fix-3): the corner word = the whole road, the months of being found out included */,k:1,w:{sung:BAL.tw.g.ill},x:`${BAL.tw.g.illWk} tháng: dễ được lật thẻ hơn · kèm: thái y bắt mạch ra (Danh -${BAL.tw.g.illDanh}, cấm túc ${punishMonths()} tháng): ${chanceW(fakeIllRisk())}`,go:()=>{S.fakeIll=BAL.tw.g.illWk}});
  return A}
 
