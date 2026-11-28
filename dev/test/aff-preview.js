@@ -34,9 +34,9 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
   const man=(typeof menAll==="function"?menAll():[]).find(Boolean)||(S.staff||[])[0];if(man)fam('man/servant bond +6',man,S,6,()=>affAdd(man,S,6));
   const snap=()=>{try{return JSON.stringify(S,(k,v)=>k==="__why"?undefined:v)}catch(e){return ""}};
   for(const c of cases){let pv,sideOk=true;const s0=snap(),m0=typeof MOOD_N==="object"?JSON.stringify(MOOD_N):"";
-   const via=c.name.startsWith('apply hh')?spSee("hh",c.n):affPreview(c.x,c.y,c.n);pv=via;
+   const via=c.name.startsWith('apply hh')?spSee("hh",c.n):c.name.startsWith('spAdd rel')?spSee("rel",c.n,c.x)/* LIVE: spAdd paces p.rel only (MAIN 189 ruling) */:affPreview(c.x,c.y,c.n);pv=via;
    if(snap()!==s0||(typeof MOOD_N==="object"&&JSON.stringify(MOOD_N)!==m0))sideOk=false;
-   const sg=affSg(c.x,c.y,c.n);const s1=snap();if(s1!==s0&&!sideOk===false){sideOk=false}
+   const sg=/^(spAdd rel|apply hh)/.test(c.name)?balSg(via):affSg(c.x,c.y,c.n);const s1=snap();if(s1!==s0&&!sideOk===false){sideOk=false}
    if(!sideOk){try{const A=JSON.parse(s0),B=JSON.parse(snap());const d=[];const walk=(a,b,pth)=>{if(d.length>4)return;if(typeof a!=="object"||typeof b!=="object"||!a||!b){if(JSON.stringify(a)!==JSON.stringify(b))d.push(pth);return}for(const k of new Set([...Object.keys(a),...Object.keys(b)]))walk(a[k],b[k],pth+"."+k)};walk(A,B,"S");c.name+=" diff "+d.join(",")}catch(e){}}
    const real=affGot(c.x,c.y,c.act);let inRange=true;const m=String(sg).match(/^([+-]?\d+) đến ([+-]?\d+)$/);if(m)inRange=real>=+m[1]&&real<=+m[2];
    out.push({name:c.name,base:c.n,preview:pv,real,sg,ok:pv===real,sideOk,inRange})}

@@ -12,7 +12,7 @@ EX=r'(-?\s*[A-Za-z_$][A-Za-z0-9_$]*(?:\(\))?(?:\.[A-Za-z0-9_$]+|\[[^\]]+\])*)'
 FUN=re.compile(r'(?:relAdd|affAdd|affGot\([^,()]+,[^,()]+,\(\)=>(?:relAdd|affAdd))\(\s*[^,()]+,\s*[^,()]+,\s*'+EX+r'\s*\)')
 SPR=re.compile(r'spAdd\(\s*[^,()]+,\s*"rel",\s*'+EX+r'\s*\)')
 # a preview print: thiện cảm then within a few chars a ${ ... BAL... } number
-PRV=re.compile(r'(?:[Tt]hiện cảm|quý ngươi|quý ta|mến ngươi)[^`$<]{0,12}[+\-−]?\$\{\s*(balSg|balAb|affSg|affPreview|spSee|pvQuy)?\(?\s*(?:[A-Za-z0-9_.\[\]]+,\s*S,\s*)?'+EX)
+PRV=re.compile(r'(?:[Tt]hiện cảm|quý ngươi|quý ta|mến ngươi)[^`$<]{0,12}[+\-−]?\$\{\s*(balSg\(spSee|balSg|balAb|affSg|affPreview|spSee|pvQuy)?\(?\s*(?:"rel",\s*)?(?:[A-Za-z0-9_.\[\]]+,\s*S,\s*)?'+EX)
 # NO ONE PERSON at preview time (a whole group / a random pick made inside the act / a static act text with no target): the rise differs per person,
 # so no single real number exists before the act; the RESULT lines read the real change. Listed for MAIN's ruling, not counted.
 NOPERSON={'j10.js:BAL.ag.par3.fac.leave.rel':'group: every faction member','j31.js:BAL.eff.j31.go':'random pick inside go',
@@ -28,17 +28,19 @@ for f in sorted(glob.glob(os.path.join(D,'j*.js'))):
   b=os.path.basename(f)
   if b in SKIP: continue
   s=open(f,encoding='utf-8').read()
-  keys=set(re.sub(r'\s','',m.group(1)).lstrip('-') for m in FUN.finditer(s))|set(re.sub(r'\s','',m.group(1)).lstrip('-') for m in SPR.finditer(s))
+  fkeys=set(re.sub(r'\s','',m.group(1)).lstrip('-') for m in FUN.finditer(s));skeys=set(re.sub(r'\s','',m.group(1)).lstrip('-') for m in SPR.finditer(s))
+  keys=fkeys|skeys  # MAIN 189 ruling: spAdd(p,"rel") paces p.rel only (LIVE) → its card prints the pace peek spSee, a relAdd/affAdd card prints affSg/pvQuy
   keys={k for k in keys if not re.fullmatch(r'n|d|v|g|x|k|r|a|b|c|-?\d+',k)}  # one-letter locals: too loose to pair by name
   LS=s.split('\n')
   for i,l in enumerate(LS,1):
     for m in PRV.finditer(l):
       k=re.sub(r'\s','',m.group(2)).lstrip('-');fn=m.group(1) or 'raw'
+      if fn=='balSg(spSee': fn='spSee'
       if k not in keys:
         # a one-letter local (n, g …): paired only with a funnel on the same or the next 2 lines
         near='\n'.join(LS[i-1:i+2])
         if not re.fullmatch(r'[a-z]',k) or not re.search(r'(?:relAdd|affAdd)\(\s*[^,()]+,\s*[^,()]+,\s*-?'+re.escape(k)+r'\s*\)|spAdd\([^,()]+,"rel",\s*-?'+re.escape(k)+r'\)',near): continue
-      ok=fn in('affSg','affPreview','pvQuy')
+      ok=(fn in('affSg','affPreview','pvQuy') and (k in fkeys or k not in skeys)) or (fn=='spSee' and k in skeys)
       if not ok and b+':'+k in NOFUNNEL: continue
       if not ok and b+':'+k in NOPERSON: nop+=1;rows.append((b,i,k,fn,'NOPERSON: '+NOPERSON[b+':'+k])) if ALL else None;continue
       if not ok: raw+=1

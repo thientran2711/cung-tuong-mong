@@ -98,7 +98,7 @@ document.addEventListener("click",e=>{const b=e.target.closest("[data-sj]");if(b
 (function(){const s0=servAct;servAct=function(a,id){if(a==="doi"){const s=servById(id);if(!s||ownerOf(s)!==S||S.dead||Q.length||S.bac<BAL.house.swapBac)return;S.staff.splice(S.staff.indexOf(s),1);apply({bac:BAL.eff.j24.bacTop_2});const n=mkServ(s.role);S.staff.push(n);log(`Trả ${s.name} về Nội vụ phủ; Nội vụ phủ đưa ${n.name} đến thay. Bạc ${balSg(BAL.eff.j24.bacTop_2)}.`);render();return}return s0.apply(this,arguments)}})();
 /* ===== ONE number per bond: 'Hoàng hậu với X' IS the Empress's own regard aff(Empress, X); no separate hh bar ===== */
 function hhGet(o){const q=queenP();if(!q||q===o)return 0;return aff(q,o)}
-/* the hh of o is the live accessor above (its setter runs affAdd, which already paces the rise) */
+/* the hh of o is the live accessor above: a write runs hhSet → affAdd (apply / ap pace the rise first, LIVE) — spSee("hh") previews both steps */
 function hhLive(o){const d=o&&Object.getOwnPropertyDescriptor(o,"hh");return !!(d&&d.get)}
 function hhSet(o,v){const q=queenP();if(!q||q===o)return;const d=Math.round(v-hhGet(o));if(d)affAdd(q,o,d)}
 function hhBind(o){if(!o)return;const d=Object.getOwnPropertyDescriptor(o,"hh");if(d&&d.get)return;let old=d?d.value:undefined;delete o.hh;
