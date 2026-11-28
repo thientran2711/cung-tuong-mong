@@ -787,3 +787,4 @@ E-TIER-B13-RV (BIG review review/e-tier-b13 @6738c302 batch 1) | review/e-tier-b
 E-TIER-B13b (row 42 batch 3 MERGE, successor of E-TIER-B13) | review/e-tier-b13 (after 6738c302) | session_01DgYSWphf5wCwrvpkrxZcmq | ROLLED → B13c | 28/11 09:52Z (Foreman E C10)
 E-TIER-B13c (row 42 batch 3 rest, successor of E-TIER-B13b) | review/e-tier-b13 (after 5ad3b22e) | session_01DgYSWphk3eKShyjK8Smmnf | RUNNING | 28/11 10:12Z (Foreman E C11)
 Review of review/f-tdworks 4c976d25 (F-TDWORKS-RV, SMALL) | review/f-tdworks-rv | session_01UV1SzgqpyJ3h1hwnqA3BBz (sonnet, Foreman F ROOT 8 c1) | RUNNING | 28/11 10:18Z
+E-GAIN4C (re-merge e-gain4b d1afe230 onto LIVE aecbc267, FIX LIST reviews/e-gain4b-review.md) | review/e-gain4c | session_01DgYSWmbTSBmW1pv5dm9cfk | RUNNING | 28/11 10:30Z (Foreman E C11)
