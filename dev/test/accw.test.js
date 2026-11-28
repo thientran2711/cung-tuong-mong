@@ -52,11 +52,63 @@ const A=process.argv[2]||path.join(__dirname,'..','..','index.html');const URL=/
   S.accw={};[v,w].forEach(clean);prove(v,w,"mh");const wr=w.rank;const mp=mindPick;mindPick=()=>"cho";let rc;try{rc=fix(0,()=>runAct(v,w,"accuse"))}finally{mindPick=mp}
   ok(rc===""&&!!awRec(v,w)&&w.rank===wr&&!w.out,`NPC→NPC: prepared first (record ${!!awRec(v,w)}, ${w.name} rank ${wr}→${w.rank})`);
   S.accw={};[v,w].forEach(clean);prove(v,w,"mh");mindPick=()=>"tu";try{fix(0,()=>runAct(v,w,"accuse"))}finally{mindPick=mp}ok(!awRec(v,w)&&chHave(v,w,c)===0,`NPC→NPC: the accused confesses with the same rule (record gone, pieces ${chHave(v,w,c)})`);
-  [w].forEach(clean);S.evc={};prove(S,w,"mh");mindPick=()=>"cho";let rs;try{rs=fix(0,()=>runAct(S,w,"accuse"))}finally{mindPick=mp}ok(!awRec(S,w)&&/tố giác|trình chứng cứ/.test(String(rs)),`her act on an NPC runs at once: «${String(rs).replace(/<[^>]+>/g,"").slice(0,80)}»`);
+  /* HER → NPC (law 1, rv FAIL 2): her accusation is prepared too; the NPC answers the same list incl. a settlement offered to HER */
+  S.accw={};[w].forEach(clean);S.evc={};prove(S,w,"mh");const wr2=w.rank;mindPick=()=>"cho";let rs;try{rs=fix(0,()=>runAct(S,w,"accuse"))}finally{mindPick=mp}
+  ok(!!awRec(S,w)&&w.rank===wr2&&!w.out&&/2 buổi nữa|buổi nữa sẽ xét/.test(String(rs)),`her «Tố giác» on an NPC: prepared, ${w.name} rank ${wr2}→${w.rank} («${String(rs).replace(/<[^>]+>/g,"").slice(0,70)}»)`);
+  awRec(S,w).due=bq();fix(0,()=>rivalsBuoi());ok(!awRec(S,w)&&(w.rank<wr2||!!w.out||(w.confined||0)>0),`… on its day her accusation runs by itself (${w.name} rank ${wr2}→${w.rank}, lãnh cung ${!!w.out}, cấm túc ${w.confined||0})`);
+  S.accw={};[w].forEach(clean);w.out=false;w.rank=Math.max(w.rank,3);S.evc={};prove(S,w,"mh");w.bac=500;Q.length=0;mindPick=()=>"xep";try{fix(0,()=>runAct(S,w,"accuse"))}finally{mindPick=mp}
+  const qx=Q.find(x=>x.pid==="accwx");const dx=PEND.accwx({t:key(w)});ok(!!qx&&dx&&dx.o.length===2&&/xin ngươi bỏ qua/.test(dx.t),`the NPC offers HER a settlement: «${qx&&qx.t}» · ${dx&&dx.o.map(x=>x.n).join(" | ")}`);
+  const sb=S.bac,wb=w.bac,nh=chHave(S,w,"mh");dx.o[0].go();ok(!awRec(S,w)&&S.bac-sb===wb-w.bac&&S.bac>sb&&chHave(S,w,"mh")===0,`she takes it: bạc +${S.bac-sb} from ${w.name}, her pieces ${nh}→${chHave(S,w,"mh")}, case dropped`);
+  S.accw={};[w].forEach(clean);S.evc={};prove(S,w,"mh");mindPick=()=>"che";S.danh=30;const sd=S.danh;try{fix(0,()=>runAct(S,w,"accuse"))}finally{mindPick=mp}ok(!awRec(S,w)&&evG(S,w)===0&&S.danh<sd,`the NPC seeks a patron: her case shelved, every piece she held burnt (${evG(S,w)}), her Danh ${sd}→${S.danh}`);
+  if(q){S.accw={};[w].forEach(clean);S.evc={};prove(q,w,"mh");const qr=S.rank,qq=q;q.queen=false;S.rank=7;const real=queenP;queenP=()=>S;let rj2;try{mindPick=()=>"cho";rj2=fix(0,()=>judge(S,w))}finally{mindPick=mp}
+   ok(!!awRec(S,w)&&/buổi nữa sẽ xử/.test(String(rj2)),`her «Xử tội» as Hoàng hậu: prepared too («${String(rj2).slice(0,60)}»)`);queenP=real;S.rank=qr;qq.queen=true;S.accw={}}
   /* the NPC Hoàng hậu's «Xử tội» on her: the same prepare step + the same dialog */
   if(q){S.accw={};[S].forEach(clean);S.out=0;S.rank=Math.max(S.rank,3);prove(q,S,"mh");Q.length=0;const rk2=S.rank;const rj=fix(0,()=>judge(q,S));const Rj=awRec(q,S);const dj=PEND.accw({a:key(q)});
    ok(rj===""&&Rj&&Rj.k==="judge"&&S.rank===rk2&&!S.out&&dj&&/sắp xử ngươi/.test(dj.t),`Hoàng hậu «Xử tội» on her: prepared, no penalty yet, dialog «${dj&&String(dj.t).replace(/<[^>]+>/g," ").slice(0,90)}»`);
    Rj.due=bq();fix(0,()=>rivalsBuoi());ok(!awRec(q,S)&&(S.rank<rk2||!!S.out),`… on its day the queen judges (rank ${rk2}→${S.rank}, lãnh cung ${!!S.out})`);S.out=0}
+  /* ---- D: THE CORE GATE (every other road: law 11 family) ---- */
+  S.accw={};[v,S].forEach(clean);S.out=0;S.dead=false;S.rank=Math.max(S.rank,3);S.bac=500;Q.length=0;const st2=()=>({rank:S.rank,conf:S.confined||0,out:!!S.out,dead:!!S.dead,cut:S.cutPay||0});
+  const cores=()=>Object.entries(S.accw||{}).filter(([k,R])=>R.k==="core");
+  ok(typeof awInW==="function"&&punish.__aw&&fall.__aw&&demote.__aw&&chPunishX.__aw&&deathSentence.__aw&&cold.__aw&&punTier.__aw,"every punishment core carries the gate wrap");
+  ok(chooseM.__awc==="her"&&nextBuoi.__awc==="w"&&endTurn.__awc==="w"&&(typeof menReport!=="function"||menReport.__awc==="npc")&&(typeof rtReport!=="function"||rtReport.__awc==="npc")&&runAct.__awc,`road contexts: her taps / the world turn / witness roads / acts (${[chooseM.__awc,nextBuoi.__awc,endTurn.__awc,typeof menReport,typeof menReport==="function"&&menReport.__awc,typeof rtReport,typeof rtReport==="function"&&rtReport.__awc,runAct.__awc].join(",")})`);
+  const tries=[["punish",()=>punish(S,"bị cung nữ tố giác mưu kế",2)],["fall",()=>fall(S,"bị tố giác, chứng cứ rành rành")],["demote",()=>demote(S,"bị Hoàng hậu tâu giáng")],["chPunishX",()=>chPunishX(S,"mh","bị tố",null,"nang",false)],
+   ["deathSentence",()=>deathSentence(S,"Bị ban chết vì tư thông","thuong")],["cold",()=>cold("Bị đày vào lãnh cung")],["punTier",()=>punTier(S,"nang","Ngươi bị xét tội",null)]];
+  for(const [n,f] of tries){S.accw={};Q.length=0;const s0=st2();awInW(f);const s1=st2();const C=cores();const d=C.length?PEND.accw({id:C[0][0]}):null;const tx=d?String(d.t).replace(/<[^>]+>/g," "):"";
+   ok(JSON.stringify(s0)===JSON.stringify(s1)&&C.length===1&&Q.some(x=>x.pid==="accw"&&x.t==="Sắp bị trị tội")&&/trong \d+ buổi tới/.test(tx)&&/Nếu tội thành, ngươi/.test(tx),`world road → ${n}(): nothing falls now, held + her dialog «${tx.slice(0,150)}»`)}
+  /* due: it falls once, exactly as the core would have */
+  S.accw={};clean(S);S.rank=3;awInW(()=>punish(S,"tàng trữ độc vật",2));let C=cores();const s2=st2();C[0][1].due=bq();fix(0,()=>rivalsBuoi());const s3=st2();
+  ok(!cores().length&&(s3.rank<s2.rank||s3.conf>s2.conf),`on its day the held punish() falls (rank ${s2.rank}→${s3.rank}, cấm túc ${s2.conf}→${s3.conf})`);const s4=st2();fix(0,()=>rivalsBuoi());ok(JSON.stringify(st2())===JSON.stringify(s4),"… once (the next buổi adds nothing)");
+  /* the same matter twice = one record; two matters = two */
+  S.accw={};awInW(()=>{punish(S,"lục lọi cung phi tần",1);punish(S,"lục lọi cung phi tần",1);punish(S,"giả bệnh khi quân",1)});ok(cores().length===2,`same matter twice = one record, two matters = two (${cores().length})`);
+  /* an NPC accuser outside any turn (ACTX / by): held, with Vừa offered */
+  S.accw={};clean(S);clean(v);S.rank=3;const X0=ACTX;ACTX={a:v,pen:0};try{fall(S,"bị cung nữ tố giác, chứng cứ rành rành")}finally{ACTX=X0}C=cores();const dd=C.length&&PEND.accw({id:C[0][0]});
+  ok(C.length===1&&C[0][1].a===key(v)&&dd&&dd.o.map(x=>x.n.split(" · ")[0]).join(",")==="Nhẹ,Vừa,Nặng"&&String(dd.t).includes(v.name),`NPC accuser (ACTX ${v.name}): held, three tiers ${dd&&dd.o.map(x=>x.n).join(" | ")}`);
+  ok(dd&&dd.o.every(x=>/tốn:/.test(x.j67)&&/được:|thành:/.test(x.j67))&&!/%/.test(JSON.stringify(dd)),"every option: tốn + được/thành, no % (laws 3, 7)");
+  /* Nhẹ: one step lighter now */
+  const rN=S.rank;pick(dd.o[0]);ok(!cores().length&&S.rank===rN&&(S.confined||0)>0&&!S.out,`Nhẹ «Nhận tội trước»: lighter now (vừa → nhẹ: cấm túc ${S.confined}, rank kept ${rN}→${S.rank}), case closed`);
+  /* Vừa: bạc to the accuser */
+  S.accw={};clean(S);ACTX={a:v,pen:0};try{fall(S,"bị tố giác")}finally{ACTX=X0}C=cores();let dv=PEND.accw({id:C[0][0]});const bS=S.bac,bV=v.bac|0;fix(0,()=>pick(dv.o.find(x=>/^Vừa/.test(x.n))));
+  ok(!cores().length&&bS-S.bac===(v.bac|0)-bV&&bS>S.bac&&S.rank===rN,`Vừa «Dàn xếp»: bạc ${bS}→${S.bac} to ${v.name} (+${(v.bac|0)-bV}), case dropped, rank kept`);
+  S.accw={};ACTX={a:v,pen:0};try{fall(S,"bị tố giác")}finally{ACTX=X0}C=cores();dv=PEND.accw({id:C[0][0]});const bS2=S.bac;fix(.999,()=>pick(dv.o.find(x=>/^Vừa/.test(x.n))));ok(cores().length===1&&S.bac===bS2,`Vừa refused: bạc handed back (${bS2}→${S.bac}), case stands`);
+  /* Nặng: a bigger kind of result — every piece the accuser holds burnt — and the gift goes to a real owner */
+  S.accw={};clean(S);prove(v,S,"mh");ACTX={a:v,pen:0};try{fall(S,"bị tố giác")}finally{ACTX=X0}C=cores();const dn2=PEND.accw({id:C[0][0]});const o3n=dn2.o.find(x=>/^Nặng/.test(x.n));const th0=(S.thO&&S.thO.bac)|0,qb0=(q&&q.bac)|0,bS3=S.bac,ev0=evG(v,S),vd=v.danh;
+  fix(0,()=>pick(o3n));const toTh=/Thái hậu/.test(o3n.n);ok(!cores().length&&bS3-S.bac===BAL.accw.shield.bac&&(toTh?((S.thO.bac|0)-th0===BAL.accw.shield.bac):((q.bac|0)-qb0===BAL.accw.shield.bac))&&evG(v,S)===0&&ev0>0&&v.danh<vd,
+   `Nặng «${o3n.n}»: bạc −${bS3-S.bac} into ${toTh?"the Thái hậu's household (S.thO.bac "+th0+"→"+S.thO.bac+")":"the Hoàng hậu's purse"}, ${v.name}'s pieces ${ev0}→${evG(v,S)} (all), Danh ${vd}→${v.danh}`);
+  ok(BAL.accw.shield.base>BAL.accw.settle.base&&BAL.accw.shield.bac>BAL.accw.settle.cap,`tiers rise together: Nặng odds base ${BAL.accw.shield.base} > Vừa ${BAL.accw.settle.base}; Nặng bạc ${BAL.accw.shield.bac} > Vừa cap ${BAL.accw.settle.cap}`);
+  /* her own choice: falls at once (the card said the risk) */
+  S.accw={};clean(S);S.rank=3;const s5=st2();awInHer(()=>punish(S,"lục lọi cung phi tần",1));ok(!cores().length&&st2().conf>s5.conf,`her own card / act: falls at once (cấm túc ${s5.conf}→${st2().conf})`);
+  clean(S);let fired=0;Q.length=0;pushModal({t:"t",h:"h",opts:[{n:"Làm",fx:{},go:()=>{punish(S,"làm phiền lúc thánh thượng nổi giận",1);fired=1}}]});const s6=st2();chooseM(0);ok(fired&&!cores().length&&st2().conf>s6.conf,"a real chooseM tap on her card: the risk it named falls at once");
+  /* NPC victims of the world are not held (no player to warn; NPC acts prepare at act level) */
+  S.accw={};clean(w);w.rank=Math.max(3,w.rank);const wc=w.confined||0;awInW(()=>punish(w,"x",1));ok(!cores().length&&(w.confined||0)>wc,"an NPC victim of a world road: falls at once (not held)");
+  /* save mid-wait: the record is plain data; the dialog rebuilds and fires once after a save round-trip */
+  S.accw={};clean(S);S.rank=3;ACTX={a:v,pen:0};try{fall(S,"bị tố giác")}finally{ACTX=X0}const sv=JSON.stringify(S.accw);S.accw=JSON.parse(sv);C=cores();ok(!!PEND.accw({id:C[0][0]})&&!/function/.test(sv),`save mid-wait: plain record (${sv.length} chars), dialog rebuilds`);
+  const r7=S.rank;C[0][1].due=bq();fix(0,()=>rivalsBuoi());ok(!cores().length&&S.rank<r7,`… and falls on its day after the round-trip (rank ${r7}→${S.rank})`);
+  /* ---- E: monthly checks warn a month ahead (j30 demoteReview) ---- */
+  S.accw={};clean(S);S.rank=3;S.lowS=0;S.sick=0;const fl=sungFloor(3);S.sung=Math.max(0,fl-5);const rE=S.rank;awInW(()=>demoteReview());
+  ok(S.rank===rE&&awPreHas("lowS")&&(kitNoticeList()||[]).some(x=>x.id==="aw:lowS"),`month 1: Sủng ${S.sung} under ${fl} → kit notice «${((kitNoticeList()||[]).find(x=>x.id==="aw:lowS")||{}).line||""}», no fall`);
+  S.sung=Math.max(0,fl-5);awInW(()=>demoteReview());ok(S.rank<rE&&!awPreHas("lowS")&&!cores().length,`month 2 (warned): the demotion falls at once (rank ${rE}→${S.rank})`);
+  S.accw={};S.rank=3;S.lowS=1;S.sung=Math.max(0,fl-5);awInW(()=>demoteReview());ok(S.rank===3&&cores().length===1,"an old save already at month 1 with no notice: the fall is held and warned instead");
+  S.accw={};clean(S);S.rank=3;S.lowS=0;S.sung=99;S.sick=2;S.suc=10;awInW(()=>demoteReview());ok(awPreHas("sick")&&S.rank===3,"long illness: warned a month ahead");awInW(()=>demoteReview());ok(S.rank<3&&!awPreHas("sick"),`… then the illness demotion falls (rank 3→${S.rank})`);S.suc=80;S.accw={};
   ok(JSON.stringify(BAL.accw).length>20&&!/[0-9]{2,} lượng/.test(document.body.innerHTML.slice(0,0)),"numbers from BAL.accw");
   }catch(e){o.push([false,'EXC '+e.message+' '+String(e.stack||'').split('\n')[1]])}return o});
  let f=0;for(const [c,m] of out){console.log((c?'ok  ':'FAIL')+' '+m);if(!c)f++}

@@ -2376,8 +2376,11 @@ BAL.thatS={sung:0,rank:1,decay:2,back:15,recall:{base:2,danhD:20,ducD:25,kid:2,m
 /* jaccw (row 12, OD 25/11 ~23:33Z «a punishment never falls without a prior visible warning»): an accusation is prepared due buổi ahead and
    the accused sees it; three tiered ways out (law 2): settle (bạc paid only when the accuser takes it: bac + per piece, cap; odds base + thiện
    cảm/affD; a refusal leaves oán) · shield (a gift of bac to Thái hậu / Hoàng hậu; odds base + standing/affD; the accuser loses foeDanh and
-   holds oán) · tự thú = BAL.charge.conf.down. npcW = an NPC's weights among tự thú / settle / shield / wait (law 1). */
-BAL.accw={due:2,settle:{bac:20,per:10,cap:120,base:45,affD:2,oan:5},shield:{bac:150,base:40,affD:2,foeDanh:3,oan:8},npcW:{tu:1,xep:2,che:1,cho:3}};
+   holds oán) · tự thú = BAL.charge.conf.down. npcW = an NPC's weights among tự thú / settle / shield / wait (law 1).
+   r2: the same due / settle / shield numbers hold EVERY punishment core that falls on her from an NPC or the world (jaccw core gate); shield.base
+   55 > settle.base 45 (Nặng's odds never below Vừa's); the shield's success wipes every piece the accuser holds on her (all her cases, not one).
+   sickSuc = the Sức khỏe under which a long illness costs a rank (j30 demoteReview; warned a month ahead). */
+BAL.accw={due:2,settle:{bac:20,per:10,cap:120,base:45,affD:2,oan:5},shield:{bac:150,base:55,affD:2,foeDanh:3,oan:8},npcW:{tu:1,xep:2,che:1,cho:3},sickSuc:35};
 BAL.leave={maxAge:84,old:62,sucA:.7,sucD:200,birthAge:42,
  yrs:{tron:[6,38],tron1:[4,34],hon:[10,46],thiep:[8,44],que:[12,50],tu:[16,54],dan:[5,36],duoi:[4,32],vuong:[14,44],phu:[10,34],other:[8,42],hoa:[10,40],day:[14,50]},
  kids:{tron:[0,4],tron1:[0,2],hon:[1,5],thiep:[0,3],que:[0,3],tu:[0,0],dan:[0,3],duoi:[0,2],vuong:[1,4],phu:[0,0],other:[0,3],hoa:[1,4],day:[0,0]},

@@ -134,7 +134,7 @@ function stayPen(k,G){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.pl
  apply({danh:-BAL.sneak.danh});log(`<span class="r">Ở lại ${n} sau giờ đóng cửa, bị bắt gặp: Danh -${BAL.sneak.danh}.</span>`);const cut0=S.cutPay||0,c0=S.confined||0;
  /* NEVER cấm túc for overstaying: a weight that would confine falls back to NHẸ */
  let sv=PC().sev;try{if(typeof punishMonths==="function"&&punishMonths(sv)>0)sv=0}catch(e){sv=0}
- window.__punQuiet=1;try{punish(S,`ở lại ${n} sau giờ đóng cửa`,sv)}finally{window.__punQuiet=0}
+ window.__punQuiet=1;try{/* already warned (the place plaque «chỉ được ở đến …», OD 25/11 ~23:33Z): passes the jaccw gate */(typeof awOk==="function"?awOk:f=>f())(()=>punish(S,`ở lại ${n} sau giờ đóng cửa`,sv))}finally{window.__punQuiet=0}
  if((S.confined||0)>c0){console.error("place-close: overstay confined",sv);S.confined=c0}
  if(typeof plHome==="function")plHome("")/* the kit notice below says it: no second line notice */;
  if(typeof kitNotice==="function")kitNotice({id:"closepen:"+bk+"|"+k,kind:"close",line:`Quá giờ ở ${n}: Danh -${BAL.sneak.danh}`,text:`Ta bị bắt gặp nán lại ${n} sau giờ đóng cửa${w}, phải về tẩm cung. Danh -${BAL.sneak.danh}, ${(S.cutPay||0)>cut0?`khất bổng ${S.cutPay} tháng`:"bị cảnh cáo"}. Lỗi nhẹ: không bị cấm túc.`,pic});

@@ -12,9 +12,14 @@ function seatPickW(p){const q=queenP();return seatW(p)+p.sung/2+(q&&q!==p?aff(q,
 function sungFloor(r){return Math.max(0,RANKS[r].s-20)}
 function demote(p,why){if(p===S){if(S.rank<=0||S.out)return"";if(punTwice(S))return punLight(S,why);const r0=S.rank;S.rank=punDown(S);punMark(S,r0);S.lastPromo=S.turn;const t=`<span class="r">Ngươi ${why}, bị giáng xuống ${meRankN()}.</span>`;log(t);punNote({kind:"giang",why,from:r0,to:S.rank});return t}
  if(p.queen){fall(p,why);return""}if(p.rank<=0||p.out)return"";if(punTwice(p))return punLight(p,why);const r0=p.rank;p.rank=punDown(p);punMark(p,r0);p.lastPromo=S.turn;const t=`${p.name} ${why}, bị giáng xuống ${RANKS[p.rank].n}.`;log(t);newsAdd(p,"demote",t,true);return t}
-function demoteReview(){let ev="";for(const p of consorts()){const r=rkOf(p);if(r<=0||r>=7||p.out)continue;if(p.sung<sungFloor(r))p.lowS=(p.lowS||0)+1;else p.lowS=0;
-  if(p.lowS>=2){p.lowS=0;ev+=demote(p,`lâu không được sủng (Sủng ${p.sung} dưới mức ${sungFloor(r)} của ${RANKS[r].n} hai tháng)`)}
-  if((p.sick||0)>0){p.sick--;ap(p,{sung:BAL.eff.j30.sungSick});if(p.sick===0&&p.suc<35)ev+=demote(p,"bệnh lâu không hầu được")}}return ev}
+/* row 12 r2 (OD 25/11 ~23:33Z «a punishment never falls without a prior visible warning»): a month ahead she is told (jaccw awPre kit notice);
+   the fall the next month is then already warned (awOk) — unwarned (an old save mid-count) it is held and warned by the jaccw core gate */
+function demoteReview(){let ev="";const me=p=>p===S&&typeof awPre==="function";for(const p of consorts()){const r=rkOf(p);if(r<=0||r>=7||p.out)continue;if(p.sung<sungFloor(r))p.lowS=(p.lowS||0)+1;else{p.lowS=0;if(me(p))awPreDel("lowS")}
+  if(p.lowS===1&&me(p))awPre("lowS",`Sủng của ngươi (${p.sung}) dưới mức ${sungFloor(r)} của ${RANKS[r].n}; thêm một tháng như vậy sẽ bị giáng một bậc.`);
+  if(p.lowS>=2){p.lowS=0;const go=()=>demote(p,`lâu không được sủng (Sủng ${p.sung} dưới mức ${sungFloor(r)} của ${RANKS[r].n} hai tháng)`);if(me(p)&&awPreHas("lowS")){awPreDel("lowS");ev+=awOk(go)}else ev+=go()}
+  if((p.sick||0)>0){p.sick--;ap(p,{sung:BAL.eff.j30.sungSick});const sk=BAL.accw?BAL.accw.sickSuc:35;
+   if(p.sick===1&&p.suc<sk&&me(p))awPre("sick",`Ngươi bệnh lâu chưa khỏi; tháng sau nếu Sức khỏe còn dưới ${sk} sẽ bị giáng một bậc vì không hầu được.`);
+   if(p.sick===0){if(p.suc<sk){const go=()=>demote(p,"bệnh lâu không hầu được");if(me(p)&&awPreHas("sick")){awPreDel("sick");ev+=awOk(go)}else ev+=go()}else if(me(p))awPreDel("sick")}}}return ev}
 /* PUSH-DOWN ROADS: same odds and costs for everyone; each priced, each can be exposed */
 function odT(a,base){return oddsCl(Math.round(base+(a.tamco||0)/4))}
 function hasScandal(t){return t===S?(S.men||[]).some(m=>m.trysts>0):!!t.scandal}
