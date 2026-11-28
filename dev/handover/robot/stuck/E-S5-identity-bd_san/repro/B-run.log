@@ -1,0 +1,12 @@
+GAME BUILD {"s":"5fb13d60+","b":"8af7b3429f38","t":"2026-11-27T21:15Z"}
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /cung-tuong-mong/img/kit/ico-download.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/bg-origin-pf.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /img/kit/emo-anim/binh.webp
+BOARD dan 14 moves 0/10 raw 3.25 (21 s, area 0, bold)
+BOARD mua 29 moves 10/10 raw 10.00 (29 s, area 0, bold)
+CP buổi 10 year 1 save 40894 chars
+BOARD mua 29 moves 9/10 raw 10.00 (27 s, area 1, bold)
+BUG game softlock: «Sang ngày mới» tapped 3× in one buổi but the buổi does not turn (dialog queue Q=2: Tin chờ người sai đi / Một ánh mắt)
+BOARD hat 111 moves 0/10 raw 0.00 (21 s, area 0, bold)
+CP buổi 20 year 1 save 61518 chars
+LIFE DONE REPRO-B SLICE age ? · buổi 20 · taps 643 · dead buttons 0 · stuck 0 · bugs 1
