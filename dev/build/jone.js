@@ -136,6 +136,9 @@ const wordOf=o=>o>=100?"":(typeof dfWord==="function"?dfWord(o):"");
    «không đủ bạc» / whyTime — the same words its row shows), never a bare «—». The reason's head only (before « — » and any «(…)» count), first letter small. */
 function lockW(why){let w=txt(why).replace(/\s*\([^)]*\)/g,"").split(" — ")[0].replace(/[.;:,\s]+$/,"").trim();if(!w)w="chưa làm được";return w.charAt(0).toLowerCase()+w.slice(1)}
 ONE.lockW=lockW;
+/* E-GAIN4B: the dress-verdict GAIN pieces (jtoil TOILV.gain) the talk members of a door carry in their own x — each once */
+function toilG(L){try{if(typeof TOILV!=="object"||!TOILV)return"";const G=[];for(const m of L||[]){if(!m||!m.a)continue;for(const q of String(m.a.x||"").split(" · ")){const t=txt(q);if(t&&TOILV.gain(t)&&!G.includes(t))G.push(t)}}return G.join("; ")}catch(e){return""}}
+ONE.toilG=toilG;
 const tierW=(x,f)=>x.m&&!x.off?f(x.m):ONE.lockW(x.off&&x.off.why);ONE.tierW=tierW;
 function tierRows(r,L,wh){const rows=[];for(const t of TI){const T=L.filter(m=>tierOf(r,m)===t);if(!T.length)continue;const m=pick(r,T,seedOf(r,wh,t));
   const free=T.filter(x=>!x.off);const harm=(M[r.k]||{}).harm;
@@ -164,6 +167,10 @@ function memo(k,f){k=k+"#"+stamp();if(MC.c.has(k))return MC.c.get(k);const r=f()
   for(const d of out){if(!d||!d.door)continue;const r=DOOR.byK(d.door);if(!r)continue;const {L}=memo(["m",p.kind,p.ref&&p.ref.id,p.name,r.k].join("|"),()=>members(pp0(r.k),r));if(!L.length)continue;
    const md=ONE.mode(r.k);if(md==="keep")continue;const tiers=TI.filter(t=>L.some(m=>tierOf(r,m)===t));
    if(md==="tier"&&tiers.length>=2){const R=tierRows(r,L,who(p));d.x=R.map(x=>x.m&&!x.off?`${x.t} ${wordOf(oddsM(x.m))||txt(x.m.n)}`:`${x.t}: ${tierW(x)}`).join(" · ");d.one="tier";
+    /* E-GAIN4B (review/e-gain4 fix item 3, law 3): a consort's dress verdict rides on every talk way of the door (jtoil wraps each member); the tier summary
+       above replaced the line jdoor made, so its GAIN piece («nàng ta chuộng giản dị: quý ta +N», «bớt ghen») is said again here as a labelled «được:» piece
+       (j25 keeps it its own segment → Được), never dropped and never in Ghi chú. A door of in-person acts only (no talk member) carries no verdict. */
+    {const vg=toilG(L);if(vg)d.x+=" · được: "+vg}
     if(R.every(x=>x.off)){d.lock=true;d.t=R[0].off.why}continue}
    const m=pick(r,L,seedOf(r,who(p)));d.one="one";
    if(!m){d.lock=true;d.t=(L[0]&&L[0].why)||d.t||"chưa làm được";continue}

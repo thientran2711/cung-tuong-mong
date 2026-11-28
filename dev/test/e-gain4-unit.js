@@ -5,7 +5,10 @@
    (c) BẠI CARRIES NO GAIN: a consort's dress verdict that is HER gain («nàng ta chuộng giản dị: quý ta +N», «bớt ghen») goes to Được (x), never to risk (Bại).
    (d) ĐƯỢC ON EVERY RESULT: «Nhờ giúp đỡ» names Được + Mất from BAL (Bạc + BAL.ag.cx2.help.bac, Danh − BAL.rcv.help.danh); every one-tap pop-up door whose
        picked way has a gain shows that gain (doorGain of the button line non-empty, never only its price) — every rival / hh at every place, 3 draws.
-   usage: node dev/test/e-gain4-unit.js <url> [WxH@dpr] → exit 1 on any failed case.  Mutants (each must exit 1): MUTANT=a|b|c|d. */
+   E-GAIN4B adds (review/e-gain4 FIX LIST): (b2) the PRINTED tier summaries in real locked states, (f) the willingness word never in Được / Thành,
+       (g) the dress-verdict gain in Được / Thành on every card kind (plain / door / tier / one-tap), (d2) the «Dò la» one-tap pin — each proven by a SOURCE
+       mutant (dev/build reverted + rebuilt; see dev/handover/reports/e-gain4.md, E-GAIN4B section).
+   usage: node dev/test/e-gain4-unit.js <url> [WxH@dpr] → exit 1 on any failed case.  Env mutants (each must exit 1): MUTANT=a|b|c|d. */
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,URL,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@1').split('@');const [W,H]=WH.split('x').map(Number);
 const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(src.indexOf('String.raw`')+11,src.indexOf('})();`;')+5);
@@ -52,6 +55,46 @@ const src=fs.readFileSync(__dirname+'/act-audit.js','utf8');const LIB=src.slice(
    const X=BAL.ag.cx2.help,R2=BAL.rcv.help;let ln="";try{const d=document.createElement("div");d.innerHTML=optLine(help);const g=k=>[...d.querySelectorAll(".kr-"+k+" .ef")].map(e=>T(e.textContent)).join(", ");ln={th:g("thanh")+g("duoc"),bai:g("bai")+g("mat")}}catch(e){}
    /* the kit card of the option (optLine → kit rows; magnitudes show as marks «Bạc ++»): Thành / Được names the bạc + chứng cứ she gets (the numbers are BAL.ag.cx2.help.bac / BAL.ag.ev.one in jrcv rcvHelpX), Bại / Mất the Danh she loses when told on */
    chk(help&&ln&&/Bạc \+/.test(ln.th)&&/chứng cứ \+/.test(ln.th)&&!/Danh/.test(ln.th)&&/Danh [-−]/.test(ln.bai)&&!/Bạc \+/.test(ln.bai),`d: «Nhờ giúp đỡ» card Thành «${ln&&ln.th.slice(0,120)}» Bại «${ln&&ln.bai.slice(0,90)}» (x «${help?T(help.x).slice(0,140):""}» risk «${help?T(help.risk):""}» who ${help&&help.who})`)}
+  /* ---- E-GAIN4B (review/e-gain4 FIX LIST: each case below FAILs on the source mutant of its fix — dev/build reverted, rebuilt; no env mutant) ---- */
+  const sl=ms=>new Promise(r=>setTimeout(r,ms));const DASH=/(?:^|·\s*)(nhẹ|vừa|nặng):?\s*(—|-)\s*(·|$)/;
+  /* (b2) fix item 1 — the PRINTED tier summaries in REAL locked states: every Hành sự deck tier card (its .klead / p line, jone deckPaint) and every pop-up
+     tier door (its d.x, jone doorFold, and the pop-up button's printed text), states dau / cao / toi × khắc spent 0 / 3: a tier with no way that can run
+     says why — never «—». Counted only where ONE.tierRows says a tier is locked; ≥ 1 locked deck tier and ≥ 1 locked pop-up tier must be read. */
+  {let nD=0,nP=0;const bad=[];
+   for(const sc of ["dau","cao","toi"]){AA.scen(sc);
+    for(const u of [0,3]){AA.restore();used=u;tab="act";AA.hide();render();await sl(120);
+     for(const b of document.querySelectorAll("#panel button[data-ddoor]")){let lk=0;try{const r=ONE.deckRow(b);if(r&&ONE.mode(r.k)==="tier")lk=ONE.tierRows(Object.assign({},r,{n:b.dataset.ddoor}),ONE.deckM(b),"me").filter(x=>x.off||!x.m).length}catch(e){}
+      if(!lk)continue;nD++;const t=T((b.querySelector(".klead")||b.querySelector("p")||{}).textContent);if(!t||DASH.test(t))bad.push(`deck ${sc} k${u} «${b.dataset.ddoor}»: «${t}»`)}
+     for(const sf of AA.surfaces().filter(x=>x.place)){AA.restore();used=u;AA.show(sf);const P=curPeople();
+      for(let i=0;i<P.length;i++){const pp=P[i];let A=[];try{A=talkOpts(pp)}catch(e){}for(const a of A){if(!a||a.one!=="tier")continue;let lk=0;try{const r=DOOR.byK(a.door);const {L}=ONE.members(doorPP(pp,i,r.k),r);lk=ONE.tierRows(r,L,"x").filter(x=>x.off).length}catch(e){}
+        if(!lk)continue;nP++;const t=T(a.x);if(DASH.test(t))bad.push(`pop ${sc} k${u} ${sf.id} ${pp.kind} «${T(a.n)}» d.x «${t.slice(0,90)}»`)}
+       if(nP&&nP<40&&A.some(a=>a&&a.one==="tier")){AA.show(Object.assign({},sf,{pop:i}));await sl(10);for(const b of document.querySelectorAll("#popw button")){const t=T(b.textContent);if(DASH.test(t))bad.push(`pop-btn ${sc} k${u} ${sf.id} «${t.slice(0,90)}»`)}AA.show(sf)}}}}}
+   chk(nD>0&&nP>0,`b2: locked tiers read in printed summaries — deck ${nD}, pop-up ${nP}`);chk(!bad.length,`b2: printed tier summaries with «—» ${bad.length}${bad.length?": "+[...new Set(bad)].slice(0,4).join(" | "):""}`)}
+  /* (f) fix item 2 — the receiver's willingness word (rcvWord, BAL.road.hp.word) is never a piece of Được / Thành; it shows as the Ghi chú note.
+     «Nhờ giúp đỡ» (j9) of every consort at every place, and «Lập phe cùng» / «Mời» (j10 faction panel), read as the kit draws them. */
+  {const WD=Object.values(BAL.road.hp.word);const isW=t=>WD.some(w=>new RegExp('(^|[,·:] ?)'+w+'($|[,·)])').test(t));const rowsOf=h=>{const d=document.createElement("div");d.innerHTML=h;const g=k=>[...d.querySelectorAll(".kr-"+k+" .ef")].map(e=>T(e.textContent));return{th:[...g("thanh"),...g("duoc")],note:[...g("note"),...[...d.querySelectorAll("[data-kfx]")].map(e=>e.dataset.kfx)]}};
+   let nH=0,nN=0;const bad=[];AA.scen("hh");
+   for(const sf of AA.surfaces().filter(x=>x.place)){AA.restore();AA.show(sf);for(const pp of curPeople()){if(pp.kind!=="rival"&&pp.kind!=="hh")continue;let A=[];try{A=talkOpts(pp)}catch(e){}
+     for(const a of A){if(!a||a.n!=="Nhờ giúp đỡ")continue;nH++;const R=rowsOf(optLine(a));const w=R.th.filter(isW);if(w.length)bad.push(`«Nhờ giúp đỡ» ${pp.name}@${sf.id} Thành «${w.join(", ")}»`);if(R.note.some(t=>WD.some(x=>t.includes(x))))nN++}}}
+   AA.restore();/* a consort close enough to found a faction with (j10 facFrOk: she likes her ≥ netTh «than») so the «Lập phe cùng» card is drawn */{const v=liveRivals(true).find(x=>!facOf(x)&&!sameHouse(S,x));if(v&&!facFrOk(S,v))affAdd(v,S,netTh(v,"than")+5-aff(v,S))}tab="fac";AA.hide();render();await sl(60);let nF=0;
+   for(const b of document.querySelectorAll('#panel button[data-fa="lap"], #panel button[data-fa="moi"]')){nF++;const R={th:[...b.querySelectorAll(".kr-thanh .ef, .kr-duoc .ef")].map(e=>T(e.textContent)),note:[...b.querySelectorAll(".kr-note .ef")].map(e=>T(e.textContent))};const w=R.th.filter(isW);
+    if(w.length)bad.push(`«${T((b.querySelector(".kan")||b).textContent).slice(0,30)}» Được «${w.join(", ")}»`);if(!R.th.length)bad.push(`«${T((b.querySelector(".kan")||b).textContent).slice(0,30)}» no Được`);if(R.note.some(t=>WD.some(x=>t.includes(x))))nN++}
+   chk(nH>0&&nF>0,`f: cards read — «Nhờ giúp đỡ» ${nH}, faction «Lập phe cùng / Mời» ${nF}; the word shown as Ghi chú on ${nN}`);chk(!bad.length&&nN>0,`f: willingness word in Được / Thành ${bad.length}${bad.length?": "+[...new Set(bad)].slice(0,4).join(" | "):""}`)}
+  /* (g) fix item 3 — the dress-verdict GAIN on every pop-up card KIND that carries it: a plain talk card, a door card («chọn một trong N việc (…)» + its gains),
+     a tier door, a one-tap door: in Thành / Được, never in Ghi chú (row or «!») nor Bại / Mất / Kèm. Verdict stubbed on (as in (c)), every consort, state hh. */
+  {const tr0=window.toilRival,to0=window.toilOn;const K={plain:0,door:0,tier:0,one:0};const bad=[];
+   try{window.toilOn=()=>true;window.toilRival=(v,d)=>d?null:{txt:"nàng ta chuộng giản dị: quý ta +"+BAL.toil.praisePlain,aff:BAL.toil.praisePlain,g:0};AA.scen("hh");
+    for(const sf of AA.surfaces().filter(x=>x.place)){AA.restore();AA.show(sf);const P=curPeople();for(let i=0;i<P.length;i++){const pp=P[i];if(pp.kind!=="rival"||!pp.ref)continue;let A=[];try{A=talkOpts(pp)}catch(e){}
+      for(const a of A){if(!a)continue;let carry=/quý ta \+/.test(T(a.x));if(!carry&&a.door)try{const r=DOOR.byK(a.door);const {L}=ONE.members(doorPP(pp,i,r.k),r);carry=L.some(m=>m&&m.a&&/quý ta \+/.test(T(m.a.x)))}catch(e){}if(!carry)continue;
+       const kd=a.one==="tier"?"tier":a.one==="one"?"one":a.door?"door":"plain";K[kd]++;const d=document.createElement("div");d.innerHTML=optLine(a);const G=s2=>[...d.querySelectorAll(s2)].map(e=>T(e.textContent)).join(" | ");
+       const ok=/quý ta \+/.test(G(".kr-thanh .ef, .kr-duoc .ef")),wrong=/quý ta \+/.test(G(".kr-note .ef, .kr-bai .ef, .kr-mat .ef, .kr-kem .ef"))||[...d.querySelectorAll("[data-kfx]")].some(e=>/quý ta \+/.test(e.dataset.kfx||""));
+       if(!ok||wrong)bad.push(`${kd} «${T(a.n)}» ${pp.name}@${sf.id}: Được «${G(".kr-thanh .ef, .kr-duoc .ef").slice(0,70)}» Ghi chú «${G(".kr-note .ef").slice(0,70)}»`)}}}}finally{window.toilRival=tr0;window.toilOn=to0}
+   chk(K.plain>0&&K.door>0&&K.tier>0&&K.one>0,`g: card kinds carrying the verdict read — plain ${K.plain}, door ${K.door}, tier ${K.tier}, one-tap ${K.one}`);chk(!bad.length,`g: verdict not in Được / Thành (or also in Ghi chú / a loss row) ${bad.length}${bad.length?": "+[...new Set(bad)].slice(0,4).join(" | "):""}`)}
+  /* (d2) the reviewer's pin — a «Dò la» one-tap door on a consort (state cao, 3 draws): its printed Thành names its gain (chứng cứ +), never only its price (Bạc −) */
+  {let n=0;const bad=[];AA.scen("cao");for(const dt of [0,1,2])for(const sf of AA.surfaces().filter(x=>x.place)){AA.restore();S.turn=(S.turn||0)+dt;AA.show(sf);for(const pp of curPeople()){if(pp.kind!=="rival"&&pp.kind!=="hh")continue;let A=[];try{A=talkOpts(pp)}catch(e){}
+    for(const a of A){if(!a||a.one!=="one"||a.lock||!/^Dò la/.test(T(a.n)))continue;n++;const d=document.createElement("div");d.innerHTML=optLine(a);const th=[...d.querySelectorAll(".kr-thanh .ef, .kr-duoc .ef")].map(e=>T(e.textContent)).join(", ");
+     if(!/chứng cứ \+/.test(th)||/Bạc [-−]/.test(th))bad.push(`«${T(a.n)}» ${pp.name}@${sf.id} d${dt}: Thành «${th.slice(0,80)}»`)}}}
+   chk(n>0,`d2: «Dò la» one-tap doors read ${n}`);chk(!bad.length,`d2: «Dò la» one-tap Thành without its gain ${bad.length}${bad.length?": "+[...new Set(bad)].slice(0,3).join(" | "):""}`)}
   return{F,OK}},MU);
  for(const m of R.OK)console.log('  ok   '+m);for(const m of R.F)console.log('  FAIL '+m);
  console.log('E-GAIN4 unit: '+R.OK.length+' ok, '+R.F.length+' fail, page errors '+perr.length);perr.slice(0,3).forEach(e=>console.log('  PERR '+e));

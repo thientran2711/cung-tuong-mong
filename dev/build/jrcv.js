@@ -17,6 +17,10 @@ function rcvP(t,a){const B=BAL.road.hp,cap=B.affCap,c=x=>Math.max(-cap,Math.min(
  return P}
 function rcvW(t,a){try{return rdHpW(null,rcvP(t,a))}catch(e){return BAL.road.hp.w.v.slice()}}
 function rcvWord(t,a){try{const P=rcvP(t,a);return rdHpWord(P,rdHpW(null,P))}catch(e){return""}}
+/* E-GAIN4B (review/e-gain4 fix item 2, law 3 / KIT 6 rows): the willingness word says how SHE (the receiver) is minded to answer — it is not what the asker
+   gets, so it never sits in Được / Thành. Its kit place is the Ghi chú note: ONE «(…)» piece (j63 kaRows: a whole «(…)» value → Ghi chú; j25 keeps it its
+   own segment). nm = who answers as the card names her («nàng» by default; a named receiver on a card about someone else). */
+function rcvWordN(t,a,nm){const w=rcvWord(t,a);return w?`(ý ${nm||"nàng"}: ${w})`:""}
 function rcvPick(t,a,O,kind){O=(O||[]).filter(o=>o&&!(typeof o.lk==="function"&&o.lk()));if(!O.length)return null;const K=(BAL.rcv.k||{})[kind]||[1,1,1,1];const w=rcvW(t,a).map((x,i)=>x*K[i]);
  const W=O.map(o=>[o,Math.max(BAL.mind.pickMin,o.w!=null?o.w:o.i!=null?(Array.isArray(o.i)?o.i.reduce((s,i)=>s+w[i],0):w[o.i]):0)]);
  const c=mindPick(W,t)||O[0];(window.__rcvN=window.__rcvN||{})[(c.id||c.i)+""]=((window.__rcvN||{})[(c.id||c.i)+""]||0)+1;return c}
@@ -264,4 +268,4 @@ RCVK.invite={t:"Lời mời sang chơi",act:"mời sang cung chơi",kind:"help",
   rcvNoO(p,t,{g:`giữ buổi cho mình, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},r:`${me?"Ngươi":t.name} cáo bận, không sang cung ${NM(p)}`}),
   rcvSabO(p,t,{g:"nghe được chuyện của chủ nhà",r:tq=>`${me?"Ngươi":t.name} nhận lời rồi đem chuyện cung ${NM(p)} đi kể${tq?" với "+rcvQn(tq):""}`,go:()=>{rcvInvAt(p,t);t.__invC=1}})]}};
 function rcvInviteGo(h,g){if(!g||g===S)return false;delete g.__invC;const r=rcvAsk("invite",h,g);if(r)try{log(r.trim())}catch(e){}const c=!!g.__invC;delete g.__invC;return c}
-Object.assign(window,{rcvNote,rcvOpen,rcvDrop,rcvFoe,rcvIllGive,rcvP,rcvW,rcvWord,rcvPick,rcvHelpOpts,helpAsk,rcvGiftIn,RCVK,rcvCard,rcvAsk,rcvYesO,rcvNoO,rcvSabO,rcvVisit,rcvMaidBribe,rcvKw,rcvSeen,rcvSeenX,RCVJ,rcvJudge,rcvOddsPick,rcvInviteGo,rcvInvAt});
+Object.assign(window,{rcvNote,rcvOpen,rcvDrop,rcvFoe,rcvIllGive,rcvP,rcvW,rcvWord,rcvWordN,rcvPick,rcvHelpOpts,helpAsk,rcvGiftIn,RCVK,rcvCard,rcvAsk,rcvYesO,rcvNoO,rcvSabO,rcvVisit,rcvMaidBribe,rcvKw,rcvSeen,rcvSeenX,RCVJ,rcvJudge,rcvOddsPick,rcvInviteGo,rcvInvAt});

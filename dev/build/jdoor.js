@@ -46,7 +46,7 @@ function doorFold(p,A){if(!p||!Array.isArray(A)||!A.length)return A;
  /* J2 ext (c): a row's non-talk members (DOOR.more: her in-person acts) count toward the ≥ 2 rule and the lock */const xn=r=>r&&r.acts&&typeof DOOR.more==="function"?DOOR.more(p,r).length:0;
  A.forEach((a,j)=>{const r=R[j];if(!r||cnt[r.k]+xn(r)<2){out.push(a);return}
   if(!made[r.k]){const M=A.filter((x,i)=>R[i]===r);const free=M.filter(x=>!x.lock);
-   const d={n:r.n,door:r.k,o:100,fix:1,act:M.every(x=>x&&x.act)?1:0,x:`chọn một trong ${M.length} việc: ${M.map(x=>doorTxt(x.n)).join(", ")}`,
+   const d={n:r.n,door:r.k,o:100,fix:1,act:M.every(x=>x&&x.act)?1:0,x:`chọn một trong ${M.length} việc (${M.map(x=>doorTxt(x.n)).join(", ")})`/* E-GAIN4B: the list in «(…)» stays ONE note piece (kSplitTop keeps a bracket whole) — written «: A, B» the kit split it at «, » and showed a way NAME («Tố xa xỉ») in Được */,
     open:()=>doorOpen(p,r.k)};Object.defineProperty(d,"m",{value:M,enumerable:false});/* its members (tests, DOOR.flat) */
    const XM=r.acts&&typeof DOOR.more==="function"?DOOR.more(p,r):[];/* J2 ext (c) */
    if(!free.length&&!XM.some(x=>!x.off)){d.lock=true;d.t=M[0].t||(XM[0]&&XM[0].why)||"chưa làm được"}

@@ -12,10 +12,17 @@ const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|
   if(a.n==="Khiêu khích"){a.risk=a.x;a.x=""}
   return a})}})();
 /* the talk line: cost in khắc, gains green, risks and failure red, needs as disabled reasons */
+/* E-GAIN4B (review/e-gain4 fix items 2 + 3, law 3 / KIT 6 rows): the gain pieces of a talk option go to ONE «thành:» segment joined by «, » — but a piece its writer
+   already LABELLED («được: X; Y», the door's gains from jdoor doorGain; «tốn: Bạc N · thành: …», a one-tap act door's own line from jone) or wrote as a whole NOTE («(…)», e.g. the receiver's willingness word) keeps its own
+   « · » segment. Glued by «, » to the piece before it, the kit (j63 kaModelStr: «; » split, a «nàng» clause kept whole) read «chọn một trong N việc: …, được: X»
+   as ONE neutral note: the door's first gain (a consort's dress-verdict praise, or its own first gain) sat in Ghi chú, never in Được. */
+const J25LAB=/^(được|thành|tốn|hỏng|bại|mất|kèm)\s*:/i;
+function j25Gain(G){const own=s=>{const t=String(s).replace(/<[^>]+>/g,"").trim();return J25LAB.test(t)||/^\([^()]*\)$/.test(t)};const G1=G.filter(s=>!own(s)),G2=G.filter(own);
+ return [G1.length?"thành: "+G1.join(", "):"",...G2.map(s=>G1.length||J25LAB.test(String(s).replace(/<[^>]+>/g,"").trim())?s:"thành: "+s)]}
 optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=talkK(a);
  if(a.k&&AOUT[a.k]){return actLineRaw(a.k,rolled?word(o):"",[`${tc} khắc`,fmt(a.c||{})].filter(Boolean).join(", "))}
  const xs0=String(a.x||"").split(" · ").filter(Boolean);const wt=xs0.filter(s=>/^chờ \d+ khắc$/.test(s)),xs=xs0.filter(s=>!wt.includes(s));const gain=xs.filter(s=>!RISKRE.test(s)),risk=xs.filter(s=>RISKRE.test(s)).concat(a.risk?[a.risk]:[]);
- return kitParse([rolled?word(o):"",`tốn: ${tc} khắc${a.c&&fmt(a.c)?", "+fmt(a.c):""}${wt.length?", "+wt.join(", "):""}`,[fmt(a.w||{}),...gain].filter(Boolean).length?"thành: "+[fmt(a.w||{}),...gain].filter(Boolean).join(", "):"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,failTxt(a))||(a.fail?"có hậu quả, xem kết quả":"không được gì")):"",risk.length?"hỏng: "+risk.join(", "):""].filter(Boolean).join(" · "))};
+ return kitParse([rolled?word(o):"",`tốn: ${tc} khắc${a.c&&fmt(a.c)?", "+fmt(a.c):""}${wt.length?", "+wt.join(", "):""}`,...j25Gain([fmt(a.w||{}),...gain].filter(Boolean)),rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,failTxt(a))||(a.fail?"có hậu quả, xem kết quả":"không được gì")):"",risk.length?"hỏng: "+risk.join(", "):""].filter(Boolean).join(" · "))};
 /* R-E: a gift or a planted item spends the time only when an item is chosen */
 (function(){const t1=talk;talk=function(oi){const p=S&&curPeople()[popIdx];const a=p&&talkOpts(p)[oi];if(a&&a.open){if(a.lock||S.dead||Q.length)return;const tc=talkK(a);if(!can(tc))return;S.payOnPick=tc;S.visit.tk=S.visit.tk||{};a.open();render();return}return t1.apply(this,arguments)}})();
 ["giftpick","plantpick"].forEach(id=>{const b0=PEND[id];if(!b0)return;PEND[id]=function(){const d=b0.apply(this,arguments);if(d&&d.o)d.o=d.o.map(o=>/^Thôi/.test(o.n)?Object.assign({},o,{go:()=>{S.payOnPick=0;if(o.go)o.go()}}):Object.assign({},o,{go:()=>{if(S.payOnPick){spend(S.payOnPick);S.payOnPick=0;if(popIdx!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[popIdx]=1}}if(o.go)o.go()}}));return d};});
