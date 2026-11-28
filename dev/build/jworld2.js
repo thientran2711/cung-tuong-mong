@@ -28,7 +28,7 @@ function giftRound(b,who,mother,tag){/* NPCs give by their own silver and grudge
  const G=[],C=[],K=[];for(const v of liveR()){if(v===mother||v.out||v.confined)continue;const g=Math.round((v.bac||0)*b.npcGift);
   const cold=(v.ghen||0)>=b.coldGhen||(mother&&mother!==S&&typeof oan==="function"&&oan(v,mother)>=netTh(v,"act"));
   const k=npcPick(v,[["give",mW(v,"social")*(g>=b.mid?b.npcW.give[0]:b.npcW.give[1])],["cold",mW(v,"harm")*(cold?b.npcW.cold[0]:b.npcW.cold[1])],["skip",b.npcW.skip]]);
-  if(k==="give"&&g>0){ap(v,{bac:-g});if(mother)affAdd(mother,v,g>=b.big?b.bigAff:b.midAff);G.push(v)}else if(k==="cold"){if(mother&&mother!==S)relAdd(mother,v,-b.skipOan);C.push(v)}else K.push(v)}
+  if(k==="give"&&g>0){ap(v,{bac:-g});if(mother)affAdd(mother,v,g>=b.big?b.bigAff:b.midAff);G.push(v)}else if(k==="cold"){if(mother&&mother!==S)relAdd(v,mother,-b.skipOan);C.push(v)}else K.push(v)}
  return{G,C,K}}
 /* ---------- 1 YẾN ĐẦY THÁNG (row 1): a real living child, one month after the birth (j8 birth / mkKid). Mother: Danh, Sủng; Kho lúa.
    NPCs gift by their own silver; jealous ones send a cold gift or stay away (the mother's grudge). */
@@ -42,9 +42,9 @@ EVD.day={nm:w=>w.x.sex==="m"?"Yến đầy tháng hoàng tử":"Yến đầy th�
   if(m===S)return Object.assign(info(w),{opts:[{n:"Mở tiệc lớn mời các cung",fx:{bac:-b.feastBac},x:`thành: Danh +${b.feastDanh}`,go:()=>apply({danh:b.feastDanh})},
    {n:"Giữ lễ đơn sơ",fx:{},x:`thành: Đức +${b.plainDuc}`,go:()=>apply({duc:b.plainDuc})}]});
   if(!m)return info(w);
-  return Object.assign(info(w),{who:pv(m),opts:[{n:"Dâng quà quý",fx:{bac:-b.big},x:`thành: ${m.name} quý ngươi +${b.bigAff}`,go:()=>affAdd(m,S,b.bigAff)},
-   {n:"Quà vừa phải",fx:{bac:-b.mid},x:`thành: ${m.name} quý ngươi +${b.midAff}`,go:()=>affAdd(m,S,b.midAff)},
-   {n:"Cáo bệnh không tới",fx:{suc:BAL.cv.rest},x:`giữ sức · kèm: ${m.name} để bụng`,go:()=>relAdd(m,S,-b.skipOan)}]})},
+  return Object.assign(info(w),{who:pv(m),opts:[{n:"Dâng quà quý",fx:{bac:-b.big},x:`thành: ${m.name} ${pvQuy(m,b.bigAff,"quý ngươi")}`,go:()=>affAdd(m,S,b.bigAff)},
+   {n:"Quà vừa phải",fx:{bac:-b.mid},x:`thành: ${m.name} ${pvQuy(m,b.midAff,"quý ngươi")}`,go:()=>affAdd(m,S,b.midAff)},
+   {n:"Cáo bệnh không tới",fx:{suc:BAL.cv.rest},x:`giữ sức · kèm: ${m.name} để bụng`,go:()=>relAdd(S,m,-b.skipOan)}]})},
  night(){return false}};
 /* ---------- 2 ĐẠI LỄ SẮC LẬP THÁI TỬ (row 2): S.heir set (j3 heirMonth / j51 kế vị / setHeir). The mother's house gains power (j55
    tdPowAdd); mothers of other sons scheme more (act); no night on the rite tuần; may bring a small amnesty. */
@@ -54,7 +54,7 @@ EVD.lap={place:()=>"thu",
   return `${w.x.kid} được sắc lập làm Thái tử; bá quan mặc triều phục bái mừng, đêm ấy không ai được thị tẩm.${h?` Nhà ${h} thêm thế lực.`:""}${n?` ${n} cung dâng lễ mừng.`:""}`},
  end(w){if(roll(B().lap.xaP))ws("xa","Lập Thái tử, ban ân điển");return `Lễ sắc lập ${w.x.kid} đã xong; chiếu chỉ ban khắp thiên hạ.`},
  card(w){const b=B().lap;const m=byPid(w.x.who);if(!meCons()||!m||m===S)return info(w);
-  return Object.assign(info(w),{who:pv(m),opts:[{n:"Dâng lễ mừng Thái tử",fx:{bac:-b.gift},x:`thành: ${m.name} quý ngươi +${b.giftAff}`,go:()=>affAdd(m,S,b.giftAff)},{n:"Đứng xem lễ",fx:{},x:"không được mất gì"}]})},
+  return Object.assign(info(w),{who:pv(m),opts:[{n:"Dâng lễ mừng Thái tử",fx:{bac:-b.gift},x:`thành: ${m.name} ${pvQuy(m,b.giftAff,"quý ngươi")}`,go:()=>affAdd(m,S,b.giftAff)},{n:"Đứng xem lễ",fx:{},x:"không được mất gì"}]})},
  night(w){return wNow0(w)<1}};
 /* ---------- 3 ĐỔI NGÔI HOÀNG HẬU (row 3): the queen seat really changes (j4 / j8 / j34 lập hậu, a death or a deposition). The old
    queen's house falls, the new one's rises (j55); alliances re-form (act ally / social). The đại xá of batch 1 still fires on lập hậu. */
@@ -64,7 +64,7 @@ EVD.hau={nm:w=>w.x.sub==="phe"?"Phế hậu, lập hậu mới":"Lập Hoàng h�
   return `${w.x.sub==="phe"&&o?`${nmOf(o)} bị phế ngôi Hoàng hậu. `:""}${n?`${n===S?"Ngươi":n.name} được sắc phong Hoàng hậu, chưởng quản lục cung.`:"Ngôi Hoàng hậu đổi chủ."}${hn?` Nhà ${hn} lên thế.`:""}${ho&&w.x.sub==="phe"?` Nhà ${ho} sa sút.`:""} Cả hậu cung chầu mừng ở Càn Ninh cung.`},
  end(){return "Lễ sắc phong đã xong; lục cung theo về Càn Ninh cung."},
  card(w){const b=B().hau;const n=byPid(w.x.to);if(!meCons()||!n||n===S)return info(w);
-  return Object.assign(info(w),{who:pv(n),opts:[{n:"Đến Càn Ninh cung chúc mừng",fx:{bac:-b.gift},x:`thành: Hoàng hậu quý ngươi +${b.giftAff}`,go:()=>affAdd(n,S,b.giftAff)},{n:"Giữ khoảng cách",fx:{},x:"không được mất gì"}]})},
+  return Object.assign(info(w),{who:pv(n),opts:[{n:"Đến Càn Ninh cung chúc mừng",fx:{bac:-b.gift},x:`thành: Hoàng hậu ${pvQuy(n,b.giftAff,"quý ngươi")}`,go:()=>affAdd(n,S,b.giftAff)},{n:"Giữ khoảng cách",fx:{},x:"không được mất gì"}]})},
  night(){return false}};
 /* ---------- 4 THÁI HẬU BỆNH NẶNG (row 4): S.thIll reaches stage BAL (j13 monthly). Phiên hầu bệnh at Đức Thọ cung (force slot), fewer
    nights for everyone (nightMul), no yến; the Hoàng hậu takes on more; NPCs nurse / pray by their own weights (Thái hậu's favour). A death
@@ -142,7 +142,7 @@ EVD.vuco={place:()=>"home",
   /* co-op (thin E): the culprit is the OTHER player (her entry): her own choice (S.wwMe in her person) counts as "me" (EVD.vuco.meOf, jcoopthine) */
   const byMe=by===S?me:by&&by.coop&&EVD.vuco.meOf?(EVD.vuco.meOf(w,"me")||""):"";
   if(by&&(by===S||by.alive)){let o=b.catch+(by.schemes||0)*b.schemeK;if((by===S||by.coop)&&byMe==="clean")o*=b.clean.mul;if(by!==S&&meGet(w,"acc")===by.id)o+=b.accuseK;if((by===S||by.coop)&&byMe==="open")o+=b.accuseK;
-   if(roll(Math.round(o))){punish(by,"dùng bùa ngải hãm hại người",2);got=by;r=`Thận hình ti tra ra kẻ đặt bùa: ${nmOf(by)}.`}}
+   if(roll(Math.round(o))){convict(by,"dùng bùa ngải hãm hại người","vuco",null,2)/* E74: the proven vu cổ doer → the one «nghịch» tier */;got=by;r=`Thận hình ti tra ra kẻ đặt bùa: ${nmOf(by)}.`}}
   EVD.vuco.home(w,{got:got&&got!==S?got.id:null,me:!!got&&got===S});/* me: the culprit caught is this player (co-op: the other player's accusation of her entry hits, o.gotFr) */
   if(!got&&roll(b.innocent)){const L=liveR().filter(v=>!v.out&&v.id!==w.x.tgt&&!(by&&v===by)).sort((x,y)=>rkOf(x)-rkOf(y));const v=L[0];if(v){punish(v,"bị nghi dính vào vu cổ",1);got=v;r=`Không tra ra kẻ chủ mưu; ${v.name} bị bắt làm người chịu tội.`}}
   if(got&&roll(b.toCam))ws("cam","Án vu cổ khép lại, cung cấm giới nghiêm");return (r||"Án vu cổ không tra ra ai; Thận hình ti đóng hồ sơ.")+" Thị tẩm trở lại."},
@@ -211,7 +211,7 @@ EVD.hon={nm:w=>w.x.hoa?"Công chúa hòa thân":"Công chúa xuất giá",place:
   return `${w.x.kid} ${w.x.hoa?"lên đường hòa thân, ngàn dặm xa xứ":"xuất giá, kiệu hoa ra cửa Tây Hoa"}; hồi môn lấy từ kho, Kho lúa -${b.kho}.${n?` ${n} cung gửi quà tiễn.`:""}`},
  end(w){return `Lễ tiễn ${w.x.kid} đã xong.`},
  card(w){const b=B().hon;const m=byPid(w.x.who);if(!meCons()||!m||m===S)return info(w);
-  return Object.assign(info(w),{who:pv(m),opts:[{n:"Gửi quà tiễn công chúa",fx:{bac:-b.gift},x:`thành: ${m.name} quý ngươi +${b.giftAff}`,go:()=>affAdd(m,S,b.giftAff)},{n:"Chỉ đến dự lễ",fx:{},x:"không được mất gì"}]})},
+  return Object.assign(info(w),{who:pv(m),opts:[{n:"Gửi quà tiễn công chúa",fx:{bac:-b.gift},x:`thành: ${m.name} ${pvQuy(m,b.giftAff,"quý ngươi")}`,go:()=>affAdd(m,S,b.giftAff)},{n:"Chỉ đến dự lễ",fx:{},x:"không được mất gì"}]})},
  night(){return false}};
 /* ---------- 15 ĐẠI ÁN NGOẠI THÍCH (row 15): a house's power (j55 T.H pow) passes BAL while the Emperor is young or ill, or it is the
    queen's house. The Emperor strikes (purge: the house falls, its consorts lose favour; giới nghiêm may follow) or bends (it rises). Her: if

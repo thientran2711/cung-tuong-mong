@@ -52,7 +52,7 @@ function kinlWearSpec(v,sl){let c=null;try{c=(typeof dressSlots==="function"?dre
  const wd=sl==="tram"||sl==="y";const empty=!c||c.empty||(wd&&x&&x.empty);const sum="";
  const F=wd?[x&&x.label?`Ngươi đã biết: ${x.label}.`:"Đúng phẩm hay không: chưa rõ (chưa ai nhận xét).",x&&x.giver?`${x.giver} ban.`:"","Hặc ăn mặc sai phẩm: thẻ người của nàng, nhóm Hại nặng."].filter(Boolean)
   :[r?(c&&c.over?"Món này vượt phẩm của nàng (Tố vượt phẩm).":"Ngươi đã thấy nàng mang món này."):"Ngươi chưa thấy tận mắt: gặp nàng cùng chỗ, hoặc dò la.","Tố vượt phẩm · Tố xa xỉ: thẻ người của nàng, nhóm Hại nặng."];
- if(!empty){let ref=null;if(wd)ref={wdSlot:sl,who:v};else if(c&&c.k&&sl!=="veil"&&sl!=="pet"){const e=(v.inv||[]).find(e=>e&&e.w&&!e.h&&typeof IT==="object"&&IT[e.k]&&itm(e.k).sl===sl);if(e)ref={e,who:v}}
+ if(!empty){let ref=null;if(wd)ref={wdSlot:sl,who:v};else if(c&&c.k&&sl!=="veil"&&sl!=="pet"){const e=(v.inv||[]).find(e=>e&&e.w&&!e.h&&typeof IT==="object"&&IT[e.k]&&itm(e.k).sl&&wearGrp(itm(e.k).sl)===sl);if(e)ref={e,who:v}}
   if(ref&&typeof kitItemRef==="function"&&kitItemRef(ref)){const o=kinlDetail(ref,{key:"wear",facts:F});return{html:o}}}
  const nm=c&&c.name||lab;const pic=c&&!c.empty?kitItem({src:c.src||"",name:"",grade:c.grade,size:"lg"}).replace('<span class="kitn"></span>',''):kitItem({empty:true,name:lab,size:"lg"});
  return{html:kinlHTML({itemPic:pic,title:nm,sub:`${lab}${empty?" · trống":""}`,html:`${typeof kitFacts==="function"?kitFacts(empty?["Không mang gì."].concat(F.slice(-1)):F):""}`},"","wear")}}
@@ -80,8 +80,9 @@ function kinlPickInline(c,ref,acts){try{const d=c.closest(".kinldet");if(!d||typ
 .kinldet .kinlacts{grid-column:1/-1}
 .kinldet .kinlacts .kinvacts.rbtn{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,170px),1fr))!important;gap:6px;margin-top:6px}
 .kinldet .kinlacts .kinvacts>button{height:auto!important;min-height:0!important;align-self:start}
-.kinldet .kinlchips{display:flex;flex-direction:column;gap:5px;align-items:stretch;font-size:.78rem;max-width:132px;padding:6px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px;background:#f4ead8}
-.kinldet .kinlchips .chip{white-space:normal}
+.kinldet .kinlchips{display:flex;flex-direction:column;gap:5px;align-items:stretch;font-size:.78rem;max-width:none;padding:6px;border:1px solid var(--k-hair,#e6d3ac);border-radius:8px;background:#f4ead8}
+/* K-TAG-WRAP (KK66, rule X23): a summary chip («✓ Đã biết: Đúng phẩm», «Xa xỉ N» …) stays on ONE line; the column grows to its longest chip (never cut, no ellipsis); host < 420 px = kinl-narrow row */
+.kinldet .kinlchips .chip,.kinldet .kinlchips .kchip{white-space:nowrap}
 .kinldet.kinlwear{margin:6px 0 4px;clear:both}
 .kinldet.kinl-narrow{grid-template-columns:minmax(0,1fr)}
 .kinldet.kinl-narrow .kinlpic{justify-self:center}

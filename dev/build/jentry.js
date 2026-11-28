@@ -130,7 +130,7 @@ const ENT_LINE={tt:"Cửa cung khép lại sau lưng; từ nay tiếng của cha
  thd:"Một bọc sách, một bộ áo sạch: ngươi bước vào nơi chữ nghĩa cũng là gươm.",cnv:"Ma ma đi trước, ngươi theo sau, qua những cánh cửa đỏ không đếm xuể."};
 if(typeof bdTxtProp==="function")bdTxtProp(ENT_LINE,"bd",ENT_LINE.bd,"Đoàn lạc đà chở bạc dừng ngoài Kim Quang môn; ngươi đi tiếp một mình.");/* Ba Tư (bdTxt) */
 function entReveal(){if(!S||S.dead||S.entIn||!S.entV)return;S.entIn=1;const srv=!!S.srv;const k=S.origin&&S.origin.k;
- const sub=`${S.origin?S.origin.n:""} · ${srv?"Cung nữ":RANKS[S.rank]?RANKS[S.rank].n:""}`;
+ const sub=`${S.origin?S.origin.n:""} · ${srv?"Cung nữ":(meRankN()||"")}`;
  try{if(typeof kitPersonReveal==="function")kitPersonReveal({who:S,title:srv?"Nhập cung làm cung nữ":"Nhập cung",sub,line:ENT_LINE[k]||"",btn:srv?"Theo ma ma":"Tạ ơn"})}catch(e){console.error("entReveal",e)}}
 (function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&S&&S.entV&&!S.entIn&&!m.opts&&!m.entR&&/^Nhập cung/.test(m.t||"")){m.entR=1;if(!m.btn)m.btn="Tiếp theo";const c0=m.onClose;m.onClose=function(){try{if(c0)c0.apply(this,arguments)}catch(e){console.error(e)}entReveal()}}}catch(e){console.error(e)}
  return s0.apply(this,arguments)}})();

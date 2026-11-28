@@ -95,7 +95,7 @@ function startArc67(k){const ids=arcIds67(k).filter(id=>arcOk67(ARC67[id]));if(!
 /* milestone chapters: Chương 1 (vào cung, đứng vững) and the last two (ngôi Trung cung, kế vị): goals are the game's own goals */
 const MS67={
  nhap:{t:()=>S.origin.k==="cnv"?"Phận tỳ nữ buổi đầu":"Sơ nhập cung môn",g:()=>S.origin.k==="cnv"?"Mới vào cung làm kẻ hầu: làm tròn phận sự, giữ lòng tin của chủ. Xong chương khi qua tám tháng đầu, hoặc được phong Đáp ứng.":"Mới vào cung: giữ mình, được Hoàng thượng để mắt. Xong chương khi được tấn phong một bậc, hoặc qua sáu tháng đầu.",
-  steps:m=>S.origin.k==="cnv"?[[`Qua tám tháng đầu (${Math.min(8,S.turn-m.t0)}/8)`,S.turn-m.t0>=8],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)]]:[[`Được tấn phong một bậc (nay ${RANKS[Math.min(S.rank,7)].n})`,S.rank>m.r0],[`Qua sáu tháng đầu (${Math.min(6,S.turn-m.t0)}/6)`,S.turn-m.t0>=6]],any:1,fx:BAL.arc.ms.nhap,end:"Ngươi đã đứng được chân trong cung."},
+  steps:m=>S.origin.k==="cnv"?[[`Qua tám tháng đầu (${Math.min(8,S.turn-m.t0)}/8)`,S.turn-m.t0>=8],["Được phong Đáp ứng",!!(S.srv&&S.srv.risen)]]:[[`Được tấn phong một bậc (nay ${meRankN()})`,S.rank>m.r0],[`Qua sáu tháng đầu (${Math.min(6,S.turn-m.t0)}/6)`,S.turn-m.t0>=6]],any:1,fx:BAL.arc.ms.nhap,end:"Ngươi đã đứng được chân trong cung."},
  hau:{t:()=>"Tranh phượng vị",g:()=>"Leo lên ngôi Hoàng hậu. Từng bậc phải đủ Sủng và Danh; khi ngôi Trung cung trống, Hoàng thượng chọn trong người có hoàng tử, được Thái hậu ủng hộ và đủ Đức.",
   steps:()=>[3,4,5,6,7].map(r=>[`Lên ${RANKS[r].n}`,S.rank>=r]),fx:BAL.arc.ms.hau,end:"Ngươi đã ngồi trên ngôi Trung cung."},
  ke:{t:()=>"Mẫu nghi thiên hạ",g:()=>"Đưa con mình lên ngôi Đông cung; khi con lên ngôi, ngươi thành Hoàng thái hậu.",
@@ -195,7 +195,7 @@ if(typeof srvRoadHTML==="function")(function(){const r0=srvRoadHTML;srvRoadHTML=
 /* ---------- shared outcome helpers (only existing systems) ---------- */
 function e67heir(n){const s=son67();if(s){s.fond=cl((s.fond||0)+n,0,100);return `Hoàng thượng thương ${s.name} hơn (+${n}).`}const W=BAL.arc.e67.heirNo;apply(W);return `Chưa có hoàng tử: Danh +${W.danh}.`}
 function e67drop(v,why){if(!rvOk67(v)||v.queen||v.rank<=0||punTwice(v))return"";{const r0=v.rank;v.rank=punDown(v);punMark(v,r0)}return `${v.name} ${why}, bị giáng xuống ${RANKS[v.rank].n}.`}
-function e67ally(v,n){if(!rvOk67(v))return"";relAdd(S,v,n||30);return `${v.name} thành người một phe với ngươi (thiện cảm +${n||30}).`}
+function e67ally(v,n){if(!rvOk67(v))return"";relAdd(S,v,n||30);return `${v.name} thành người một phe với ngươi (${pvQuy(v,n||30,"thiện cảm")}).`}
 function e67foe(v,n){if(!rvOk67(v))return"";n=Math.round((n||15)/2);oanAdd(v,S,n);return `${v.name} oán ngươi thêm.`}
 function e67pun(v,n){if(!rvOk67(v))return"";v.sung=Math.max(0,(v.sung||0)-n);return `${v.name}: Sủng -${n}.`}
 function e67demote(){const W=BAL.arc.e67.demote;apply(W);return `Hoàng thượng lạnh nhạt thêm: ${sgStat(W.sung)}.`}
@@ -905,7 +905,7 @@ ARC67.td_an=arcFx("td_an",{o:"td",t:"Lật lại án cũ",w:"foe",sj:"án mưu p
   {n:"Dâng sớ, đưa nhân chứng ra",e:["win","lose"],rt:"Án cũ được lật. Cả nhà ngươi được truy phong, {foed} bị xử.",rf:"Hoàng thượng nổi giận vì ngươi lật án tiên đế."},
   {n:"Chỉ xin truy phong cho cha, không đòi trị tội ai",e:["mid","lose"],rt:"Cha ngươi được truy phục danh dự.",rf:"Hoàng thượng không muốn nhắc chuyện cũ."},
   {n:"Gác lại, sống tiếp",e:"mid",lx:"mối thù chưa trả",rt:"Ngươi cất tờ sớ."}]}},
- E:{win:{tag:"Đã báo thù",w:"emp",t:"Án cũ được lật. Nhà ngươi được rửa oan, {foed} bị xử trảm, {foe} bị đày vào lãnh cung. Hoàng thượng thương ngươi chịu khổ.",go:()=>{S.avenged=true;const e=foe67();if(e){e.out=true;return `${e.name} bị phế vào lãnh cung.`}return""}},
+ E:{win:{tag:"Đã báo thù",w:"emp",t:"Án cũ được lật. Nhà ngươi được rửa oan, {foed} bị xử trảm, {foe} bị đày vào lãnh cung. Hoàng thượng thương ngươi chịu khổ.",go:()=>{S.avenged=true;const e=foe67();if(e){punCold(e,"phe","bị liên lụy án nhà",null,true);return `${e.name} bị phế vào lãnh cung.`}return""}},
   mid:{tag:"Cha được truy phong",t:"Cha ngươi được truy phục danh dự, nhưng kẻ thù vẫn ung dung. Ngươi nhẹ lòng được một nửa."},
   lose:{tag:"Lật án bất thành",t:"Hoàng thượng thu hủy chứng cứ, cấm nhắc chuyện cũ. {foe} cười trên nỗi đau của ngươi.",go:()=>{const W=BAL.arc.e67.away;apply(W);return `Hoàng thượng không ghé một thời gian: ${sgStat(W.sung)}.`}}}});
 ARC67.td_ke=arcFx("td_ke",{o:"td",t:"Kẻ đứng sau màn",w:"maid",sj:"kẻ thật sự hại nhà ngươi",g:"Càng lần theo án cũ, ngươi càng thấy {foed} chỉ là con dao. Bàn tay cầm dao ở cao hơn. Tìm ra hắn, rồi chọn: trả thù kẻ nào, và trả bằng cách nào.",
@@ -991,7 +991,7 @@ ARC67.td_tha=arcFx("td_tha",{o:"td",t:"Thù hay tha",w:"foe",sj:"mối thù vớ
   {n:"Tố cả cha lẫn con",e:["win2","lose"],rt:"{foed} bị xử, {foe} bị phế.",rf:"Chứng cứ không đủ, ngươi mang tiếng thù dai."},
   {n:"Buông bỏ",e:"mid",lx:"thù không trả",rt:"Ngươi đốt hết thư từ."}]}},
  E:{win:{tag:"Cởi nút thắt",w:"foe",t:"Kẻ thù tự thú, nhà ngươi được rửa oan; {foe} thành người chị em hiếm hoi trong cung. Cả cung nể ngươi độ lượng.",go:(_A,_ok,G)=>{S.avenged=true;const e=foe67();if(e){e.enemy=false;return e67ally(e,G[0])}return""}},
-  win2:{tag:"Thù trả đủ",t:"Cả cha lẫn con đều ngã. Mối thù đã trả, nhưng cũng có người nói ngươi lạnh lùng.",go:()=>{S.avenged=true;const e=foe67();if(e){e.out=true;return `${e.name} bị phế vào lãnh cung.`}return""}},
+  win2:{tag:"Thù trả đủ",t:"Cả cha lẫn con đều ngã. Mối thù đã trả, nhưng cũng có người nói ngươi lạnh lùng.",go:()=>{S.avenged=true;const e=foe67();if(e){punCold(e,"phe","bị liên lụy án nhà",null,true);return `${e.name} bị phế vào lãnh cung.`}return""}},
   mid:{tag:"Buông bỏ thù xưa",t:"Ngươi chọn buông bỏ. Lòng nhẹ đi, nhưng nhà ngươi vẫn mang tiếng tội thần."},
   lose:{tag:"Mang tiếng thù dai",t:"Ngươi tố mà không thành, cả cung cho rằng ngươi thù dai, Hoàng thượng lạnh nhạt.",go:(_A,_ok,G)=>e67foe(foe67(),G[0])}}});
 /* ================= CHÁU GÁI THÁI HẬU ================= */

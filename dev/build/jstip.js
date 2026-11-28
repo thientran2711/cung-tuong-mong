@@ -28,10 +28,10 @@ Object.assign(BAL,{stip:{
 /* ---------- the items (art: dev/art/ITEM_ART.md §3, 16 icons gpt-2-6) ---------- */
 (function(){const N={
  vaibong:{n:"Vải bông",kd:"Vải vóc",d:`May áo thường: Sắc ${balSg(BAL.itFx.vaibong.dr)} trong 3 tháng · tặng, bán được`,pr:8,rk:0,dr:BAL.itFx.vaibong.dr,tg:["rv"]},
- vaitho:{n:"Vải thô (hàng kém)",kd:"Vải vóc",d:`Hàng kém Nội vụ phủ phát: may áo cho cung nữ thân tín, thiện cảm ${balSg(BAL.eff.jstip.maidUse)}`,pr:2,use:{maid:BAL.eff.jstip.maidUse},tg:[]},
- tragoi:{n:"Trà Long Tĩnh",kd:"Trà",d:`Pha mời phi tần đến chơi: thiện cảm +3 · uống: Sức ${balSg(BAL.eff.jstip.sucUse)} · tặng được`,pr:6,use:{suc:BAL.eff.jstip.sucUse},host:3,tg:["rv","th"]},
- trahop:{n:"Trà Quân Sơn ngân châm",kd:"Trà",d:`Trà thượng hạng: mời khách thiện cảm +5 · uống: Sức ${balSg(BAL.eff.jstip.sucUse_2)}, Đức ${balSg(BAL.eff.jstip.ducUse)} · tặng Thái hậu, Hoàng thượng`,pr:25,use:{suc:BAL.eff.jstip.sucUse_2,duc:BAL.eff.jstip.ducUse},host:5,gv:4,tg:["rv","th","emp","hh"]},
- tramoc:{n:"Trà mốc (hàng kém)",kd:"Trà",d:`Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê (thiện cảm -2) · uống: Sức ${balSg(BAL.eff.jstip.sucUse_3)}`,pr:0,use:{suc:BAL.eff.jstip.sucUse_3},host:-2,tg:[]},
+ vaitho:{n:"Vải thô (hàng kém)",kd:"Vải vóc",d:`Hàng kém Nội vụ phủ phát: may áo cho cung nữ thân tín, thiện cảm ${balSg(spSee("rel",BAL.eff.jstip.maidUse))}`,pr:2,use:{maid:BAL.eff.jstip.maidUse},tg:[]},
+ tragoi:{n:"Trà Long Tĩnh",kd:"Trà",d:`Pha mời phi tần đến chơi: {host} · uống: Sức ${balSg(BAL.eff.jstip.sucUse)} · tặng được`,pr:6,use:{suc:BAL.eff.jstip.sucUse},host:3,tg:["rv","th"]},
+ trahop:{n:"Trà Quân Sơn ngân châm",kd:"Trà",d:`Trà thượng hạng: mời khách {host} · uống: Sức ${balSg(BAL.eff.jstip.sucUse_2)}, Đức ${balSg(BAL.eff.jstip.ducUse)} · tặng Thái hậu, Hoàng thượng`,pr:25,use:{suc:BAL.eff.jstip.sucUse_2,duc:BAL.eff.jstip.ducUse},host:5,gv:4,tg:["rv","th","emp","hh"]},
+ tramoc:{n:"Trà mốc (hàng kém)",kd:"Trà",d:`Trà cũ ẩm mốc Nội vụ phủ phát: mời khách thì bị chê ({host}) · uống: Sức ${balSg(BAL.eff.jstip.sucUse_3)}`,pr:0,use:{suc:BAL.eff.jstip.sucUse_3},host:-2,tg:[]},
  thanbac:{n:"Than bạc sương",kd:"Than sưởi",d:`Đốt sưởi: mùa đông Sức ${balSg(BAL.itFx.thanbac.heat[0])}, mùa khác Sức ${balSg(BAL.itFx.thanbac.heat[1])}`,pr:6,heat:BAL.itFx.thanbac.heat,tg:["rv"]},
  thanden:{n:"Than đen (hàng kém)",kd:"Than sưởi",d:`Than khói Nội vụ phủ phát: mùa đông Sức ${balSg(BAL.itFx.thanden.heat[0])}, mùa khác Sức ${balSg(BAL.itFx.thanden.heat[1])}`,pr:1,heat:BAL.itFx.thanden.heat,tg:[]},
  banhtrai:{n:"Hộp điểm tâm",kd:"Điểm tâm",d:`Ăn: Sức ${balSg(BAL.eff.jstip.sucUse_4)} · tặng, chia kẻ hầu`,pr:5,use:{suc:BAL.eff.jstip.sucUse_4},tg:["rv"]},
@@ -43,6 +43,8 @@ Object.assign(BAL,{stip:{
  cungbac:{n:"Cung bạc chạm rồng",kd:"Lễ vật",d:"Tặng Hoàng thượng: hợp ý người mê săn bắn",pr:60,gv:8,tg:["emp"]},
  traicay:{n:"Giỏ trái cây tiến cống",kd:"Điểm tâm",d:`Ăn: Sức ${balSg(BAL.eff.jstip.sucUse_6)} · tặng`,pr:15,use:{suc:BAL.eff.jstip.sucUse_6},tg:["rv","th"]},
  lanquy:{n:"Chậu lan quý",kd:"Lễ vật",d:"Tặng người yêu hoa",pr:40,gv:5,tg:["rv","th","hh"]}};
+ /* review/net-ghen-2 (law 4 + 11): a tea's hosting line prints ITS host value (one number), through the nết preview of an unknown guest (jstip:178 relDo → relAdd) */
+ for(const k in N)if(N[k].d&&N[k].d.includes("{host}")){const it=N[k];let dT=it.d;Object.defineProperty(it,"d",{configurable:true,enumerable:true,get(){try{return dT.replace("{host}",pvQuy(null,it.host||0,"thiện cảm"))}catch(e){return dT.replace("{host}","thiện cảm "+balSg(it.host||0))}},set(v){dT=v}})}
  for(const k in N){if(!IT[k])IT[k]=N[k]}
  /* coal: the use depends on the season (read when shown and when used) */
  for(const k of ["thanbac","thanden"])Object.defineProperty(IT[k],"use",{enumerable:true,configurable:true,get(){let w=false;try{w=SEASON[S.month-1]==="Đông"}catch(e){}return{suc:this.heat[w?0:1]}}});
@@ -57,7 +59,7 @@ function stipSummer(){try{return SEASON[S.month-1]==="Hạ"}catch(e){return fals
 function stipList(r,out,winter,summer){r=Math.max(0,Math.min(7,r|0));const L=(out?BAL.stip.coldGoods:BAL.stip.goods[r]).map(x=>x.slice());
  if(winter)L.push([out?"thanden":"thanbac",out?BAL.stip.coldCoal:BAL.stip.coal[r]]);
  if(summer&&!out&&IT.bangda){const n=(BAL.eit&&BAL.eit.ice||[])[r]|0;if(n>0)L.push(["bangda",n])}return L}
-function stipRankTxt(i){const ice=(BAL.eit&&BAL.eit.ice||[])[Math.min(7,i)]|0;return stipList(i,false,false).map(([k,n])=>stipNm(k,n)).join(" · ")+` · mùa đông ${stipNm("thanbac",BAL.stip.coal[Math.min(7,i)])}`+(ice&&IT.bangda?` · mùa hạ ${stipNm("bangda",ice)}`:"")}
+function stipRankTxt(i){const ice=(BAL.eit&&BAL.eit.ice||[])[Math.min(7,i)]|0;return stipList(i,false,false).map(([k,n])=>stipNm(k,n)).join(", ")+`, mùa đông ${stipNm("thanbac",BAL.stip.coal[Math.min(7,i)])}`+(ice&&IT.bangda?`, mùa hạ ${stipNm("bangda",ice)}`:"")}
 function stipRuleTxt(){const B=BAL.stip;return `<p class="past">Đồ phát là vật phẩm thật trong rương (may áo, pha trà mời khách, mùa đông đốt than sưởi, mùa hạ dùng băng giải nhiệt, tặng, bán lại cho Nội vụ phủ giá thấp). Nội vụ phủ có thể cắt xén (bớt bạc, đồ hàng kém, thiếu đồ; thất sủng, phẩm thấp thì bị bớt nhiều món hơn) chỉ khi có cớ: thất sủng hay Sủng sa sút, vừa bị phạt hay bị giáng, bề trên có oán sai chèn ép, thái giám tham chưa được lót tay, cung nữ không một lòng. Không bị khi Sủng từ ${B.safeSung}, vừa lót tay trong ${B.tipM} tháng, hay có người quen trong đám thái giám. Hoàng hậu không bị. Kẻ hầu không một lòng cũng có thể lén ăn bớt đồ phát.</p>`}
 /* ---------- state (old saves: created on first use) ---------- */
 function stipSt(p){if(!p.stip||typeof p.stip!=="object")p.stip={};return p.stip}
@@ -103,7 +105,7 @@ function stipGoods(p,SK){const G=[];try{if(!p||p.dead||(p===S&&typeof isSrv==="f
   const g={k0,n0,k,n,kem,lost,E:[]};if(!lost&&IT[k])for(let i=0;i<n;i++){/* E-FIX-3: an NPC's candle / hair oil comes out of the counted stock first */const st=p!==S&&typeof alOf==="function"&&alOf(k)&&typeof ilStockTake==="function"?ilStockTake(k):null;const e=Object.assign(st||{k},{from:"noivu",d:S.turn});invAdd(p,e);g.E.push(e)}G.push(g)}
  if(p!==S){/* inv-stack: her stacked lệ tháng counts toward the keep too (the real pieces come out first, then the oldest are used up as before) */try{const pr=st=>st.from==="noivu"&&!(typeof lxOf==="function"&&lxOf(st.k));if(typeof invTop==="function"&&(p.invS||[]).some(pr))invTop(p,pr,1e9)}catch(x){}const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0){/* robot10 E-FIX-3: older candles / hair oil (uses left) go back to the Nội vụ phủ COUNTED stock (S.il.stock), handed out again first below (law 6c: never dropped, never one record each) */if(typeof alOf==="function"&&alOf(e.k)&&typeof ilStock==="function")ilStock(e,1,p);p.inv.splice(i,1)}})}
  }catch(e){console.error("stipGoods",e)}return G}
-function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:stipNm(g.k,g.n)).join(" · ")}
+function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:stipNm(g.k,g.n)).join(", ")}/* BIG #10 1c: a list inside a sentence takes commas (the j68i «Lý do» family), never a «·» chain */
 /* Nội vụ phủ buys its own issue back cheaply */
 (function(){if(typeof econPrice!=="function")return;const p0=econPrice;econPrice=function(p,e){const v=p0.apply(this,arguments);try{if(e&&e.from==="noivu"&&!e.wk)return Math.max(e.k&&IT[e.k]&&itm(e.k).pr?1:0,Math.floor(v*BAL.stip.resell/100))}catch(x){}return v};window.econPrice=econPrice})();
 /* ---------- one way to give goods + the reveal (kitReward of j93; game-feel's kitGain/kitReward keep the same call) ---------- */
@@ -130,7 +132,7 @@ function stipReportTo(SK){const q=queenP();const hhBehind=q&&q!==S&&SK.sup===q;c
 function stipEvent(G,SK){const B=BAL.stip,r=rkOf(S),st=stipSt(S),W=stipW();const tip=B.tip[Math.min(7,r)];const eun=stipEunName();
  const lc=k=>{const n=(itm(k).n).replace(/ \(hàng kém\)$/,"");return n[0].toLowerCase()+n.slice(1)};
  const kem=G.filter(g=>g.kem&&!g.lost).map(g=>`${lc(g.k)} thay ${lc(g.k0)}`),lost=G.filter(g=>g.lost).map(g=>lc(g.k0));
- const rows=[];if(SK.bac)rows.push(["Thiếu bạc",`Bạc −${SK.bac}`,"r"]);if(SK.cut)rows.push(["Khất bổng",`theo ý ${rkName(SK.sup||queenP())}: bớt 3 phần 10 bạc`,"r"]);if(kem.length)rows.push(["Hàng kém",kem.join(" · "),"r"]);if(lost.length)rows.push(["Thiếu đồ",lost.join(" · "),"r"]);
+ const rows=[];if(SK.bac)rows.push(["Thiếu bạc",`Bạc −${SK.bac}`,"r"]);if(SK.cut)rows.push(["Khất bổng",`${(()=>{const q=SK.sup||queenP();return q?`theo ý ${rkName(q)}`:`Nội vụ phủ khất`})()}: bớt ${payCutTxt()} bạc`,"r"])/* robot10 nc-fix-3b: the cut can outlive the Hoàng hậu who ordered it (cutPay runs for months; queenP() null) — that read null.queen and the whole month card was lost */;if(kem.length)rows.push(["Hàng kém",kem.join(" · "),"r"]);if(lost.length)rows.push(["Thiếu đồ",lost.join(" · "),"r"]);
  rows.push(["Gợi ý",`<span class="ef i">Vì ${SK.why}.</span>`]);const h=`<p>${eun} đưa bổng lộc tới, mắt không dám nhìn thẳng.</p>${kitRows(rows)}`;
  const back=()=>{if(SK.bac)apply({bac:SK.bac});return stipRestore(S,G)};
  const O=[{n:"Nhịn",fx:{duc:BAL.cv.duc},x:"kèm: có thể bị bớt xén nữa vào tháng sau",go:()=>{st.meek=S.turn;log("Ngươi nhịn, không nói gì. Nội vụ phủ biết cung ngươi dễ bảo.")}}];
@@ -175,7 +177,7 @@ window.stipEvItem=stipEvItem;
   const m=stipEvItem(s.id,X);if(m){const [,,k,fr,no]=m;let who="";try{const A=e68X(s,p);who=fr==="A"&&A&&A.A?A.A.n||"":""}catch(e){}
    d.o.forEach((o,i)=>{if(no.includes(i)||!o.go)return;const g0=o.go;o.go=function(){const r=g0.apply(this,arguments);try{const n=goodsGive(S,k,{from:fr==="A"?"story":fr,who});if(n)log(`${n} vào rương.`)}catch(e){console.error(e)}return r};o.x=(o.x?o.x+" · ":"")+`thành: ${itm(k).n} vào rương`/* a gain sits under Được, never on the red Kèm line (choice value, law 3) */})}
   if(s.fam==="visit"&&(s.a||[])[0]==="rv"){const ti=stipTeaIx();let A=null;try{A=e68X(s,p)}catch(e){}if(ti>=0&&A&&A.A){const k=S.inv[ti].k,it=itm(k),n=it.host||0;
-   if(n>=0)/* choice value (law 3): spoiled tea is never offered to a guest (it could only lose) */d.o.push({n:`Pha ${it.n.replace(/ \(hàng kém\)$/,"")} mời khách`,fx:{},x:n>=0?`thành: ${A.A.n||"nàng"} thiện cảm +${n} · kèm: dùng 1 ${STIP_UNIT[k]||"gói"} trà`:`hỏng: trà mốc, ${A.A.n||"nàng"} chê (thiện cảm ${n}) · kèm: dùng 1 gói trà`,
+   if(n>=0)/* choice value (law 3): spoiled tea is never offered to a guest (it could only lose) */d.o.push({n:`Pha ${it.n.replace(/ \(hàng kém\)$/,"")} mời khách`,fx:{},x:n>=0?`thành: ${A.A.n||"nàng"} ${pvQuy(A.A.k==="rv"?A.A.o:null,n,"thiện cảm")} · kèm: dùng 1 ${STIP_UNIT[k]||"gói"} trà`:`hỏng: trà mốc, ${A.A.n||"nàng"} chê (thiện cảm ${n}) · kèm: dùng 1 gói trà`,
     go:()=>{const j=stipTeaIx();if(j>=0)S.inv.splice(j,1);relDo(A.A,n);log(n>=0?`Ngươi pha ${it.n} mời ${A.A.n||"khách"}; nàng khen trà thơm.`:`<span class="r">Trà mốc, ${A.A.n||"khách"} nhấp một ngụm rồi đặt xuống.</span>`)}})}}
  }catch(e){console.error("stip e68",e)}return d}})();
 /* ---------- j67 stories: beat / option / end field gi:[key or [keys], from] ---------- */

@@ -8,7 +8,7 @@ const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1000,755],[1180,
 (async()=>{const b=await chromium.launch();let bad=0;
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block'});
   await ctx.addInitScript(()=>{window.__bot=1;window.__resizes=0;const a0=window.dispatchEvent.bind(window);window.dispatchEvent=function(e){if(e&&e.type==='resize')window.__resizes++;return a0(e)}});
-  if(isFile)await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:fs.readFileSync(SRC),contentType:'text/html; charset=utf-8'}));
+  if(isFile)await ctx.route('http://ctm.test/**',r=>r.fulfill({status:404,body:''}));/* rv-plr4 r8 (law 11): only the page gets the 20 MB html; every other ctm.test asset 404 — answering each mp3/vendor request with the whole page broke the Playwright pipe once the page passed ~20.6 MB */await ctx.route(/^http:\/\/ctm\.test\/index\.html([?#].*)?$/,r=>r.fulfill({status:200,body:fs.readFileSync(SRC),contentType:'text/html; charset=utf-8'}));
   let release;const gate=new Promise(r=>release=r);let held=0;
   await ctx.route('**/img/'+FIG+'*',async r=>{held++;await gate;r.continue()});
   const p=await ctx.newPage();await require('./lib/veil').guard(p);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,120)));
