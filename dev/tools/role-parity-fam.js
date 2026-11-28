@@ -16,7 +16,10 @@ function famPage(){const out={};const E=(k,e)=>{out[k]={err:String(e&&e.message|
  const giftK=Object.keys(IT).find(k=>{try{const i=itm(k);return i&&i.pr>0&&!i.h&&["Trang sức","Hương liệu","Vải vóc","Lễ vật"].includes(i.kd)}catch(e){return false}});
  /* GIFTS: who HOLDS likes / dislikes in the save (disInit at life start, read BEFORE disOf, which draws lazily for any object it is handed) */
  try{const srv=(S.staff||[])[0]||(v&&v.maid)||null,man=(S.men||[]).find(m=>m&&m.alive)||null;const H={her:S,emp:S.emp,th:S.thO,consort:v,servant:srv,man};const r={};
-  for(const k in H){const p=H[k];if(!p){r[k]="none in world";continue}r[k]={dis:Array.isArray(p.dis)?p.dis.length:0,like:0};try{if(k!=="her"&&k!=="servant"&&k!=="man")r[k].like=(disLikeKeys(k==="emp"?"emp":k==="th"?"th":p)||[]).length}catch(e){}}out.likes=r}catch(e){E("likes",e)}
+  for(const k in H){const p=H[k];if(!p){r[k]="none in world";continue}r[k]={dis:Array.isArray(p.dis)?p.dis.length:0,like:0};try{if(k!=="her"&&k!=="servant"&&k!=="man")r[k].like=(disLikeKeys(k==="emp"?"emp":k==="th"?"th":p)||[]).length}catch(e){}
+   /* row11-law1: law1-gifts (jmind mindLike / mindDis) holds the tastes of EVERY person, her, servants and men included (jdis keeps emp / th / consorts):
+      read the one taste rule the gift code reads, not only the jdis store (the old probe counted 0 likes for her / servants / men by store only) */
+   try{if(typeof mindDis==="function"){const q=k==="emp"?"emp":k==="th"?"th":p;r[k].dis=Math.max(r[k].dis,(mindDis(q)||[]).length);r[k].like=Math.max(r[k].like,(mindLike(q)||[]).length)}}catch(e){}}out.likes=r}catch(e){E("likes",e)}
  /* GIFTS: NPC → her and NPC ↔ NPC run through the ONE giveTo; does the recipient's dislike count when the giver is an NPC? */
  try{const r={};if(v&&giftK){v.inv=v.inv||[];v.inv.push({k:giftK});const n0=S.inv.length;const t=giveTo(v,S,v.inv.length-1);r.npcToHer=!!t||S.inv.length>n0;
    if(w){w.inv=w.inv||[];v.inv.push({k:giftK});const m0=w.inv.length;const t2=giveTo(v,w,v.inv.length-1);r.npcToNpc=!!t2||w.inv.length>m0}}
@@ -36,7 +39,7 @@ function famPage(){const out={};const E=(k,e)=>{out[k]={err:String(e&&e.message|
  /* WARDROBE: pawn / redeem — the NPC side */
  try{out.pawn={npcPawnFn:/wdPawn\(v|wdPawn\(o\.who|wdNpcPawn/.test(String(typeof wdMonth==="function"?wdMonth:""))||typeof wdNpcPawn==="function",npcRedeem:typeof wdNpcRedeem==="function"}}catch(e){E("pawn",e)}
  /* LIKES knowledge: she learns an NPC's likes (S.likK); does an NPC learn hers? */
- try{out.likeKnow={herKnowsTheirs:typeof disLikeKnown==="function",npcKnowsHers:!!(S.likKOf||window.disLikeKnownBy)}}catch(e){E("likeKnow",e)}
+ try{out.likeKnow={herKnowsTheirs:typeof disLikeKnown==="function",npcKnowsHers:!!(S.likKOf||window.disLikeKnownBy||typeof giftLearn==="function"&&typeof giftSpyLearn==="function")/* row11-law1: law1-gifts — an NPC learns tastes into a.gk (jmind giftLearn: talk, spying, gifts) */}}catch(e){E("likeKnow",e)}
  return out}
 
 /* ---------------- static call-site checks on the built source ---------------- */
@@ -57,7 +60,7 @@ function famRows(rt,st){const R=[];const add=(fam,item,her,npc,rev,verdict,owner
  const noLD=["her","servant","man","emp","th","consort"].filter(k=>L[k]&&typeof L[k]==="object"&&(!L[k].dis||!L[k].like));
  add("Quà tặng","Tặng quà","she gives to anyone (giveTo, kit «Tặng»)",`NPC gives (AG cx:gift → giveTo): to her ${rt.gift&&rt.gift.npcToHer?"yes":"NO"}, to an NPC ${rt.gift&&rt.gift.npcToNpc?"yes":"NO"}`,"same giveTo both ways",rt.gift&&rt.gift.npcToHer&&rt.gift.npcToNpc?"SAME":"GAP","D","—");
  add("Quà tặng","Có sở thích / sở ghét",`her: ${lk("her")}`,`consort ${lk("consort")} · Emperor ${lk("emp")} · Thái hậu ${lk("th")} · servant ${lk("servant")} · man ${lk("man")}`,"—",noLD.length?"GAP":"SAME","D",noLD.length?`missing likes or dislikes (save field / like keys): ${noLD.join(", ")} (OD ~06:35Z/~07:20Z; D order 07:21Z)`:"—");
- add("Quà tặng","Quà trúng sở ghét → mất thiện cảm","only when SHE gives (jdis giveTo wrap a===S)","NPC giver: no rule; she as recipient: no dislikes",`reverse (NPC → her): ${st.disGiverHerOnly?"NONE":"?"}`,st.disGiverHerOnly?"GAP":"SAME","D","one rule for every giver/recipient: liked ↑ · neutral small/none · disliked ↓ (BAL.dis), D order 07:21Z");
+ {const H=st.disGiverHerOnly;add("Quà tặng","Quà trúng sở ghét → mất thiện cảm",H?"only when SHE gives (jdis giveTo wrap a===S)":"she gives: jdis giveTo (one rule for every giver)",H?"NPC giver: no rule; she as recipient: no dislikes":"NPC gives: the same jdis giveTo; she receives: jmind giftTaste (her own dislikes)",`reverse (NPC → her): ${H?"NONE":"same rule (dev/tools/law1-gift-scan.js DIRECTION rows)"}`,H?"GAP":"SAME","D",H?"one rule for every giver/recipient: liked ↑ · neutral small/none · disliked ↓ (BAL.dis), D order 07:21Z":"—")}
  add("Quà tặng","Biết sở thích người khác","she learns NPC likes/dislikes (talk, spy, gift)",rt.likeKnow&&rt.likeKnow.npcKnowsHers?"NPC learns hers":"NPC learns nobody's (no store)","—",rt.likeKnow&&rt.likeKnow.npcKnowsHers?"SAME":"GAP","D","with her likes (D): NPCs learn and use likes by the same roads");
  add("Ngưỡng theo nết","Thân / oán → hành động theo nết",`flat thresholds (BAL.ag.know.friend …), BAL.net.T refs ${st.netT}`,"same flat numbers for every NPC","—","OPEN","D","per-nết thresholds design (D order 06:02Z, examples only 06:40Z)");
  add("Thăng phẩm","Sinh hoàng tử / ân thi (PROMO_SRC)",`her (promoReward(S…) ×${st.promoRewardHer})`,`NPC (promoReward(v…) ×${st.promoRewardNpc})`,"—",st.promoRewardNpc>0?"SAME":"GAP","D","—");

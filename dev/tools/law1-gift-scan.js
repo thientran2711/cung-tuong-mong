@@ -52,7 +52,7 @@ const SITES=[
  {re:/log\(giveTo\(S,t,i\)\)/,row:"GIVE her→emp/th/rv/maid (gift dialog)",f:"jgift.js"},
  {re:/const r=giveTo\(S,v,S\.inv\.indexOf\(e\)\)/,row:"GIVE her→rv by a servant carrier (jptime)",f:"jptime.js"},
  {re:/giftPickIx\(v,host,/,row:"GIVE guest→host at a rite (Lễ tấn phong)",f:"jts.js"},
- {re:/v\.inv\.push\(\{k,from:"nvp"\}\);const r=giveTo\(v,t,/,row:"GIVE rv→S/rv (a friend's veil, giveTo)",f:"jveil.js"}];
+ {re:/(v\.inv\.push|invAdd\(v,)\(?\{k,from:"nvp"\}\);const r=giveTo\(v,t,/,/* row11-law1: the item ledger (invAdd, law 6c) replaced the raw push; the same friend's-veil road */row:"GIVE rv→S/rv (a friend's veil, giveTo)",f:"jveil.js"}];
 /* the patterns that make a line a gift / taste site at all (anything here that no SITES row claims = UNCLASSIFIED) */
 const PROBE=[/function giveTo\(/,/\bgiveTo\((?!a,r,ix\))/,/mkP\("giftin"/,/PEND\.giftin=/,/inv\.push\(\{k,from:("emp"|"th"|v\.id)/,/goodsGive\(S,k,\{from:"emp"/,/agRunReg\("cx:gift"/,/function (likeLearn|learnLike|learnDis|giftLearn)\(/,/function giftPickIx/,/function giftTaste\(/];
 function staticScan(){const out=[];for(const f of fs.readdirSync(BUILD).filter(x=>/^j.*\.js$/.test(x)).sort()){const L=fs.readFileSync(path.join(BUILD,f),'utf8').split('\n');
@@ -82,7 +82,7 @@ async function probe(html){const {chromium}=require('playwright');const URL=/^(h
      const D=r==="emp"||r==="th"||rivals.includes(r)?disKnown(r):(S.mindK&&S.mindK[mindKey(r)]||{d:[]}).d;return D.includes(k)}
     const g=a&&a.gk&&a.gk[mindKey(r==="emp"?S.emp:r)];return !!(g&&(g[kind]||[]).includes(k))}catch(e){return false}};
   const EC=[];const es0=window.emoSet;window.emoSet=function(p,k){EC.push([p,k]);return es0.apply(this,arguments)};const mood=r=>{const o=r==="emp"?S.emp:r==="th"?S.thO:r;const c=EC.filter(x=>x[0]===o||x[0]===r).map(x=>x[1]);return c.includes("buon")?"buon":c.includes("vui")?"vui":null};
-  const mr=Math.random;
+  const mr=Math.random;/* row11-law1: the probe measures the TASTE rule; stat pace (jstatpace spG, one rule for all) carries fractions per holder, so two equal rules read as different deltas (her −1 seen as 0, an NPC −1 as −2) — pace off while probing */try{if(typeof SP_OFF!=="undefined")SP_OFF++}catch(e){}
   /* one gift: returns {dReg (taste part), learn, mood, refused} */
   function one(a,r,kind,rnd){const kd=kind==="l"?KD_L:KD_D,k=itemOf(kd,tagOf(r));const run=(on)=>{setT(r,on&&kind==="d");if(kind==="l"){O(r).mlike=on?KD_L:"kd:Lễ vật"}
      if(r!=="emp"&&r!=="th"){r.emo=null}EC.length=0;/* the Emperor's likes = item tags (giftVal) for every giver: on = a piece tagged for him, off = one that is not */const kk=r==="emp"&&kind==="l"?(on?Object.keys(IT).find(x=>(itm(x).tg||[]).includes("emp")&&itm(x).kd==="Lễ vật"):Object.keys(IT).find(x=>!(itm(x).tg||[]).includes("emp")&&itm(x).kd==="Lễ vật"&&!itm(x).il)):k;const g=a.inv=a.inv||[];g.push({k:kk,from:"probe"});const r0=regard(r,a);let out="";Math.random=()=>rnd;try{out=giveTo(a,r,g.length-1)||""}catch(e){res.err.push("giveTo "+e.message)}finally{Math.random=mr}
@@ -128,7 +128,7 @@ async function probe(html){const {chromium}=require('playwright');const URL=/^(h
   /* rites (Lễ tấn phong): a guest's gift is a real piece from the guest's own chest, for her rite and for an NPC's rite; she can send one as a guest */
   try{const src=String(tsLeHost);const conj=/pick\(\["tuithom"/.test(src);const realHer=!conj&&/tsLeGifts\(G,S\)/.test(src);const realNpc=typeof tsLeGifts==="function"&&/tsLeGifts\(G,p\)/.test(String(tsLeNpc));
    row("RITE guest→host · a real piece from the guest's chest (law 6c): her rite vs an NPC's rite",realHer,realNpc,conj?"her rite: a piece made from nothing":"");
-   row("RITE guest gift · consort guest→her vs her as guest→consort host",realHer||conj,/Gửi quà mừng/.test(src))}catch(e){res.err.push("rite "+e.message)}
+   row("RITE guest gift · consort guest→her vs her as guest→consort host",realHer||conj,/Gửi quà mừng/.test(src)||[...document.scripts].some(x=>/tsLeNpc[\s\S]{0,4000}Gửi quà mừng/.test(x.text)))/* row11-law1: the guest card moved into the recipe tsLeNpcCard (rcpReg, kit cards): read the page source there too */}catch(e){res.err.push("rite "+e.message)}
   return res});
  await b.close();R.pageErr=pageErr;return R}
 function verdict(r){return r.a&&r.b?"SAME":!r.a&&!r.b?"N/A":"GAP"}
