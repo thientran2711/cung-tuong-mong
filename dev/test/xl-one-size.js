@@ -1,4 +1,4 @@
-/* xl-one-size (kit-stage-r15, RV-174 FAIL-1; law 10 «ONE XL size per device» + law 11 whole family; KIT §56.33): opens every kind of XL live frame
+/* xl-one-size (kit-stage-r15, RV-174 FAIL-1; law 10 «ONE XL size per device» + law 11 whole family; KIT §56.25): opens every kind of XL live frame
    (end dialogs: Đại kết cục / Kết cục / quiet end; long text; person + long text; 9-option pick list; 14-row intel list; many-option choice) on each device and checks:
    (a) every XL frame of a scene type has ONE height and ONE figure size (end scenes = their own room under the crown band), (b) the frame lies inside the screen.
    usage: [SHOTS=<dir outside the repo>] node dev/test/xl-one-size.js <url> [WxH@dpr,...]   exit 1 on FAIL. Prints a table row per dialog. */

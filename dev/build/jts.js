@@ -266,7 +266,7 @@ function tsOptGifts(D){const L=tsGiftL(D);if(!L.length)return null;const G=BAL.t
 PEND.tsgift=p=>{const L=(p.L||[]).map(RV).filter(v=>v&&v.alive!==false&&!v.out);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac,v=L[0];
  const P=k=>tsGiftPieces(S,v,k).filter(o=>o.w.ok),W=P("wk"),I=P("it");const cheap=A=>A.length?Math.min(...A.map(o=>o.w.bac)):0;
  const piece=(k,n,A,what)=>tsOpt({n,need:[{t:`${what} đủ lễ với ${v.name} (có ${A.length})`,ok:A.length>0}],duoc:[tsGiftEaseTxt(S,v),"thiện cảm theo món quà, nàng ưa thì thêm"],
-  ton:A.length?[`${what} −1 (rẻ nhất bán được ${cheap(A)} bạc)`]:[],kem:[`thay cho ${G.bac} bạc lễ của ${v.name}`],go:()=>{tsDil(mkP("tsgiftpick",{v:v.id,k}),"Biếu quà làm lành")}});
+  ton:A.length?[`${what} −1 (rẻ nhất bán được ${cheap(A)} bạc)`]:[],kem:[`thay cho ${G.bac} bạc lễ của ${v.name}`],later:1,go:()=>{tsOpener();/* KIT-KRI-XL (E-S5 kipgo-ui3, law 3): an opener like every other D19 / mend road — the piece picker shows at once and the GIFT shows its own result; before, an empty card «ta không được gì, cũng không mất gì» came first under the picker */tsDil(mkP("tsgiftpick",{v:v.id,k}),"Biếu quà làm lành")}});
  return{who:pv(v),t:`<p>Biếu quà làm lành: một phần lễ là ${G.bac} bạc mỗi người. Thay bạc, có thể biếu ${v.name} (người nặng lòng nhất) một tác phẩm tự tay làm hay một món trong rương, miễn nàng thấy đủ lễ.</p>`,
   o:[tsOpt({n:"Lễ bạc",fx:{bac:-c},need:[tsNeedBac(c)],duoc:L.map(y=>tsGiftEaseTxt(S,y)),kem:[`${L.length} người, ${G.bac} bạc mỗi người`],
      go:()=>tsGiftBacGo(L)}),
