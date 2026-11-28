@@ -14,7 +14,7 @@ Object.assign(BAL,{df:{
     either = remote «sai người» ways that stay inside the target's door (MAIN Q2): offered on her pop-up AND at her palace. jamove.js reads these three lists. */
  person:["ally","trip","tat","phatquy","nuoc","tea","ink","pushp","batnat","takeaway","pond","kframe","ksab","rumor","frame","lygian","accuse","tocao","expose","vp","xx","uyhiep","banphe","tieuhuy","spyk"],
  palace:["gift","petcare","plant","rash","bribe","bribel","laydo","laydol","giahoa","thaopet","petsteal","thathu","phonghoa","poison","slowpoison","musk","huydung","spy","kpoison","catswap","pgift"],
- either:["block","blockf","xinhh","trinhhh","trinhth"],
+ either:["block","blockf","xinhh","trinhhh","trinhth","tyrob"],/* tyrob «Giật y phục» (dress-fix, law 1): a remote «sai người» way — the hired man / her maid lies in wait on the target's road: on her pop-up AND at her palace */
  personE:["judge","conf","reward","pardon","cutpay"],/* Quyền Hoàng hậu (data-e, rank ≥ 7): face to face, like person */
  art:0,                /* 1 when Foreman C's hand / prop sprites are on the CDN (ART REQUEST df-hand / df-props / df-npc-hand) */
  /* engine knobs (all lerp pairs are [at ease 0, at ease 5]; ease = mgTier(kind,{occ:"df"}).ease clamped 0..5). ms = play time.

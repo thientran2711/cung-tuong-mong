@@ -274,6 +274,8 @@ setTimeout(()=>{try{if(typeof COOP==="object"&&COOP&&typeof COOP.on==="function"
    an unknown thug → a lost case (it turns up in someone's chest, or hidden) — never into thin air */
 function ilRob(p,e,by){if(!e||!ilDur(e)||!p)return null;ilUid(e);
  if(by&&by!==p&&ilAlive(by)&&typeof loLoseE==="function"){const c=loLoseE(p,e,"riv");if(c){ilUid(e);if(typeof loKeepBy==="function"&&loKeepBy(c,by,"",{rob:1})){try{c.tip=wk()+LO.tipW[0]+R(LO.tipW[1]-LO.tipW[0]+1)}catch(z){}ilLog(e,ilKey(p),c.by,"cướp")}return c}}/* E42: the one keep road (jlost loKeepBy) */
+ /* DRESS-FIX (5): an unknown thug → a lost case of cause "rob" (jlost LO.home.rob = 0: it never drops back into her chest; it turns up with a real holder) */
+ if(typeof loLoseE==="function"){const c=loLoseE(p,e,"rob");if(c){ilUid(e);ilLog(e,ilKey(p),"lost","cướp");return c}}
  return ilGone(p,e,"lost",{cause:"srv"})}
 window.ilRob=ilRob;
 /* §64 item events: the ransom / atonement dialogs show the piece in the picture frame; "Chuộc về" / "xin lại" fly it into the chest */

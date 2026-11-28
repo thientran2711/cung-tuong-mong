@@ -22,6 +22,9 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
      Tốn + odds word (law 7) + a REAL gain «khỏi bệnh», never its own cost read as a gain («Bạc +» / «Sủng +», law 3 / 4) */
   const nk=p.locator('#modal :is(button.ka,button.kpk-b,.kpk)',{hasText:'Truyền thái y'}).first();const flipped=await nk.count();await p.waitForTimeout(600);
   t=await card(p);const back=await p.evaluate(()=>!!S.ill);ok(flipped&&back&&/Tốn/i.test(t)&&/(Mong manh|Hiểm|Khó lường|Tùy duyên|Có cơ|Vững|Rất vững)/.test(t)&&/Truyền thái y · nặng/.test(t)&&!/Thành:? ?\|? ?(Bạc|Sủng|Sức) \+ \| ! \| (Truyền thái y|Cầu xin)/i.test(t)&&!/(Truyền thái y|Cầu xin ngự y|xin thuốc)[^!]*THÀNH \| (Bạc|Sủng|Sức) \+/.test(t),`${name} nặng plaque shows Tốn + odds word, no cost read as its gain: ${t.slice(-300)}`);
+  /* r5c (RV-189 F1, law 2/4): every road's plaque Tốn prints its OWN price — «Cầu xin ngự y» shows «Sủng 4», «Truyền thái y» «Bạc 40», «xin thuốc» «Sức 8» */
+  const tons=await p.evaluate(()=>{const o={};for(const b of document.querySelectorAll('#modal button')){const n=(b.querySelector('.kan')||b).textContent;const t=b.querySelector('.kr-ton');if(t)o[/Cầu xin/.test(n)?'cau':/Truyền/.test(n)?'ty':/xin thuốc/.test(n)?'vien':'x']=t.textContent.replace(/\s+/g,' ')}return o});
+  ok(/Sủng 4/.test(tons.cau||'')&&/Bạc 40/.test(tons.ty||'')&&/Sức 8/.test(tons.vien||''),`${name} r5c each road's Tốn prints its own price (Sủng 4 · Bạc 40 · Sức 8) ${JSON.stringify(tons)}`);
   /* LIVE R11 (owner 27/11 ~06:42Z, DOOR.card tabdoor): a tab door is the LIVE list frame — ONE tap runs the road (Truyền thái y on LIVE = a summons, jptime) */
   const nk2=p.locator('#modal button.ka',{hasText:'Truyền thái y · nặng'}).first();const tapped=await nk2.count();if(tapped)await nk2.click();await p.waitForTimeout(1100);
   const ran=await p.evaluate(()=>{const r={busy:typeof ptBusy==="function"&&ptBusy(ptDocId()),ill:!!S.ill};try{S.away=[]}catch(e){}return r});
