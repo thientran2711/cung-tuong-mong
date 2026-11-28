@@ -307,7 +307,7 @@ function rgLOk(k){if(k==="th")return !S.thDead;if(k==="hh")return typeof qOn==="
  const h0=q72Home;q72Home=function(a){if(a&&a.k==="ly")return"lc";return h0.apply(this,arguments)};
  const k0=q72Key;q72Key=function(a){if(a&&a.k==="ly")return"ly";return k0.apply(this,arguments)};
  const H0=q72Host;q72Host=function(k,X){if(X&&X.A&&X.A.k==="ly"&&k==="lc")return true;return H0.apply(this,arguments)};
- const r0=q72Rel;q72Rel=function(a,n){if(a&&a.k==="ly"){spAdd(a.o,"rel",n);return}return r0.apply(this,arguments)};
+ const r0=q72Rel;q72Rel=function(a,n){if(a&&a.k==="ly"){if(n<0)affAdd(a.o,S,n);else spAdd(a.o,"rel",n);return}/* D-ROW37 rv: a fall goes through the ghét pace door */return r0.apply(this,arguments)};
  const t0=q72Tok;q72Tok=function(a,n){if(a&&a.k==="ly")return n?(n>0?G72:R72)(`${a.n} với ngươi ${n>0?"+":""}${n}`):"";return t0.apply(this,arguments)};
  const p0=q72Pick;q72Pick=function(sp,not,ff){if(sp==="ly"){const a=q72A("ly");return a&&!(not||[]).includes("ly")?a:null}return p0.apply(this,arguments)}})();
 (function(){if(typeof T7!=="function")return;const G=q72G,W=q72W,C=q72C,O=q72O;

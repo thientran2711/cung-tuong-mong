@@ -550,7 +550,7 @@ function npcMonthly(v){let ev="";const cost=k=>artFee(v.arts[k]);const agd=windo
  return ev}
 function rivalsTurn(){const live=liveRivals(true);let ev="";
  for(const v of live){if(!v.alive||v.out)continue;spAdd(v,"sung",R(3)-1);if(v.block)v.block--;
-  if(S.sung>v.sung-10&&!v.queen&&roll(33))v.rel-=1;if(v.queen&&S.rank>=4&&roll(50))v.rel-=1;
+  if(S.sung>v.sung-10&&!v.queen&&roll(33))affAdd(v,S,-BAL.ghetHit.favour);if(v.queen&&S.rank>=4&&roll(50))affAdd(v,S,-BAL.ghetHit.favour);
   if(S.sac>75){window.opGStand=1;try{ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S)}finally{window.opGStand=0}}/* review/oan-pace-ghen: a STANDING cause (her looks, every day) is not a new cause: it does not restart the «left alone» count */v.ghen=cl(v.ghen-ghenCool(v),0,100);v.pg=Math.max(0,v.pg-(typeof pgCool==="function"?pgCool(v):1))/* review/oan-pace-ghen: her jealousy fades by the same rule (law 1) */;
   if(v.queen&&!v.coop/* E44j (c) T9 family: her entry as Hoàng hậu never judges by an NPC roll (a target stays a target: law 1) */&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>chOK(v,p)&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
   const t=pickTarget(v);if(!t)continue;
