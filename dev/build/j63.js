@@ -413,6 +413,10 @@ function kaResultRows(before,title,ok){const G=[],B=[];const K=[];const skip=new
   if(txt)K.tgt.push(`<span class="ef t">${who}:</span> ${txt}`)}
  {const C=WC.join(" ");const seen=new Set();for(const x of AIM){const bn=x.pub||x.by&&x.by.name;/* pub: the Emperor / Thái hậu, known to all by title */if(!x.by||x.v!==S||seen.has(x.by)||!bn||!(x.pub||kaNamed(x.by))||!C.includes(bn))continue;seen.add(x.by);const o=kaAimOk(x);
   K.by.push(`<span class="ef t">${x.pub||kaWho(x.by)}:</span> ${kaPlain(x.n||"")}${o===true?' · <span class="ef r">thành</span>':o===false?' · <span class="ef g">không thành</span>':o==="soft"?' · <span class="ef n">bỏ dở</span>':""}`);if(K.by.length>=4)break}}
+ /* KIT §54.2 ITEMS (RV-182 §3, law 4): the card reads the SAME item delta as the ring pane / kmDiff (kitInvDelta on the act's rsnap .inv) — a piece given away
+    is «Mất», a piece that came in is «… vào Tư trang», a piece sent back in the same step (HOME AGAIN) is neither; snapshots without .inv (night / aims) skip it */
+ try{if(before&&before.inv&&typeof kitInvDelta==="function"){const DL=kitInvDelta(before.inv,typeof kitOwned==="function"?kitOwned():S.inv);const nm=e=>String(kitInvName(e)).replace(/&/g,"&amp;").replace(/</g,"&lt;");
+  DL.gone.forEach(e=>B.push(`<span class="ef r">${nm(e)}</span>`));DL.add.forEach(e=>G.push(`<span class="ef g">${nm(e)} vào Tư trang</span>`))}}catch(e){}
  return [G,B,K]}
 /* KIT PART kitKemRow(K) (KIT 7 + 28.6, kit sample page): the KÈM line of a result — other people's feelings, one summary per kind and
    direction ("12 phi tần ghen thêm 8" / "3 phi tần bớt oán 2–5"), the names behind a tap (.kkem.on); K = [{v, k:"ghen"|"oán", d}] */

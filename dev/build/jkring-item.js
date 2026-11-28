@@ -168,7 +168,7 @@ async function kriAct(R,i){const a=R.acts&&R.acts[i];if(!a||a.off||R.busy||R.st!
  if(R.big&&!kriCalm())R.big.animate([{transform:R.big.style.transform},{transform:R.big.style.transform+" scale(1.08)"},{transform:R.big.style.transform}],{duration:420,easing:"ease-out"});
  kriPane(R,it,r);try{render()}catch(e){}}
 /* the act's real changes as kit result rows: her stats (j1 NAMES), the person's thiện cảm (aff), items in / out of Tư trang */
-function kriSnap(v){const s={};try{for(const k in NAMES)if(typeof S[k]==="number")s[k]=S[k];if(v){s.__aff=typeof aff==="function"?aff(v,S):null}s.__inv=(S.inv||[]).slice()}catch(e){}return s}
+function kriSnap(v){const s={};try{for(const k in NAMES)if(typeof S[k]==="number")s[k]=S[k];if(v){s.__aff=typeof aff==="function"?aff(v,S):null}s.__inv=typeof kitOwned==="function"?kitOwned():(S.inv||[]).slice()/* KIT §54.2: bag ∪ worn */}catch(e){}return s}
 /* ONE ROW PER PERSON (MAIN 186 order 28/11 ~06:35Z; iPad ring gift to the queen read «Hoàng hậu → ta: thiện cảm +6 · Lữ Mạn Nhu → ta: thiện cảm +6»):
    her S.hh («Hoàng hậu → ta») / S.th («Thái hậu → ta») IS the receiver's thiện cảm when the receiver is the queen / Thái hậu — one change, ONE row, named by
    the receiver (who). Same rule as the act result card (j63 kaResultRows: the queen's person row skips "hh"). */
@@ -177,7 +177,9 @@ function kriDiffRows(a,v,who){const b=kriSnap(v),D=[],M=[];try{const one=a.__aff
  for(const k in a){if(k.startsWith("__"))continue;const d=Math.round((b[k]||0)-(a[k]||0));if(!d)continue;if(one.has(k)){dSame=dSame||d;continue}(d>0?D:M).push(`${NAMES[k]||k} ${d>0?"+":""}${d}`)}
  if(a.__aff!=null&&b.__aff!=null){const d=Math.round(b.__aff-a.__aff)||dSame;if(d)(d>0?D:M).push(`${kriE(who||"Người nhận")} → ta: thiện cảm ${d>0?"+":""}${d}`)}
  const nm=e=>{try{return typeof giftName==="function"?giftName(e):(IT[e.k]||{}).n||e.k}catch(x){return e.k}};
- a.__inv.filter(e=>!b.__inv.includes(e)).forEach(e=>M.push(kriE(nm(e))));b.__inv.filter(e=>!a.__inv.includes(e)).forEach(e=>D.push(kriE(nm(e))+" vào Tư trang"))}catch(e){}
+ /* KIT §54.2 kitInvDelta = the ONE item delta (the act result card reads the same); a piece sent back in this step (HOME AGAIN) is neither row */
+ const DL=typeof kitInvDelta==="function"?kitInvDelta(a.__inv,b.__inv):{gone:a.__inv.filter(e=>!b.__inv.includes(e)),add:b.__inv.filter(e=>!a.__inv.includes(e))};
+ DL.gone.forEach(e=>M.push(kriE(nm(e))));DL.add.forEach(e=>D.push(kriE(nm(e))+" vào Tư trang"))}catch(e){}
  return[{k:"duoc",label:"Được",items:D},{k:"mat",label:"Mất",items:M}]}
 /* SENT-OFF ACTS (MAIN look note 26/11: «THÀNH · Được: không» while the card promised thiện cảm): an act that sends someone on an errand (jptime ptSend:
    gifts carried by a servant, …) has no result yet. The seal is KẾT QUẢ (not THÀNH), Được = the card's own Được row (what the errand brings when it lands),
