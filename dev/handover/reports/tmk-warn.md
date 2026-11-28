@@ -347,3 +347,4 @@ PRIORITY #1 CHECK: OD — (worker continues TMK-WARN on its own branch) | main 5
   and the «hỏng thì» part (refusal: «Danh −, nàng oán»; jtsb AOUT.batnat), so the same chip legitimately sits in Kèm and Bại → census false
   positive, not a kit fault. Census test = kit keeper's file (K-HINT-KEM, KK73) → reported to KK73 + RV-191, not edited here. The other «cards 0»
   iPad run = a world with no rolled hint card → only the «at least one card» line failed.
+- UPDATE 14:16Z (KK74, kit keeper after KK73): K-HINT-KEM re-gated on LIVE 42b55b80 → **review/kk73-hintkem 0f672829** (replaces 44cfa57d; code unchanged). Merge **0f672829**. RV-190 verdict still pending.
