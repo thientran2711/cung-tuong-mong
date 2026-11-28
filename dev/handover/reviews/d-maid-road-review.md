@@ -30,3 +30,6 @@ Notes (pre-existing, not in this diff): SRVA.spy.out = 40 typed in j42 SRVA, not
 - Laws touched: 3 / 6a (loss shown) PASS after fix; 4 PASS (no number typed in the diff); 7 PASS (no %, kit odds words); 9 PASS (kit lx, no private part); 11 PASS after reviewer family fix (+ kit request above); 12 both devices looked at.
 
 VERDICT: **PASS 5f37b79a** (review/d-maid-road-rv). Open: BAL proposal addMax (MAIN/sếp); KIT REQUEST kaRows x «thành:/hỏng:» routing (kit keeper); lander rebuilds root.
+
+## LIVE MERGE (foreman order 28/11 09:06Z: the fault is on LIVE a96564ad)
+**PASS 27fc24ae** = review/d-maid-road-rv-live = 5f37b79a merged onto LIVE a96564ad (clean, FF from a96564ad). Gates: rank-pace ALL PASS, srv-rank 16/16, undef PASS, quickcheck part 2 PASS on the 2nd run (the 1st run's single day-life 74 > 72 flag was noise; LIVE vs itself varies the same amount). Root index.html / sw.js not rebuilt (CDN 403) → lander.
