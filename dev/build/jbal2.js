@@ -825,7 +825,7 @@ BAL.dh.rp={b:{t:4,a:4},mem:8,night:3,seen:8,per:1/* new reputation names a sync 
   vinhnhu:{tai:80,off:70,g:["thi",2],l:["suc",-1]},
   trithu:{tai:70,duc:65,offDuc:55,clean:12,g:["nghe",15],l:["sung",-10]},
   khoan:{loy:85,duc:60,offLoy:70,offDuc:50,g:["trung",8],l:["muu",-4]},
-  cankiem:{bac:250,grow:100,duc:55,offBac:150,g:["bac",10],l:["hau",-10]},
+  cankiem:{bac:250,grow:100,duc:55,offBac:150,offDuc:45,g:["bac",10],l:["hau",-10]},
   phuctinh:{kids:2,clean:24,g:["phuc",2],l:["don",-4]},
   maubang:{g:["tren",10],l:["muu",-8]},
   nhannhuc:{win:6,keep:12,g:["phuc",2],l:["sung",-10]},

@@ -90,7 +90,7 @@ const RULE={
  vinhnhu:(p,t)=>{const w=((p.dh||{}).w_tho||{}).n||((p.dh||{}).w_doi||{}).n||0;return [(p.tai||0)>=t.tai&&w>0,(p.tai||0)>=t.off]},
  trithu:(p,t)=>[(p.tai||0)>=t.tai&&(p.duc||0)>=t.duc&&ago(p,"phat")>=t.clean,(p.duc||0)>=t.offDuc&&ago(p,"phat")>0],
  khoan:(p,t)=>[maidL(p)>=t.loy&&(p.duc||0)>=t.duc,maidL(p)>=t.offLoy&&(p.duc||0)>=t.offDuc],
- cankiem:(p,t)=>[(p.bac||0)>=t.bac&&grown(p)>=t.grow&&(p.duc||0)>=t.duc,(p.bac||0)>=t.offBac&&(p.duc||0)>=t.duc-10],
+ cankiem:(p,t)=>[(p.bac||0)>=t.bac&&grown(p)>=t.grow&&(p.duc||0)>=t.duc,(p.bac||0)>=t.offBac&&(p.duc||0)>=t.offDuc],
  phuctinh:(p,t)=>[kidsLive(p)>=t.kids&&ago(p,"con")>=t.clean,kidsLive(p)>=t.kids&&ago(p,"con")>0],
  maubang:(p,t)=>[isHeirMom(p),isHeirMom(p)],
  nhannhuc:(p,t)=>[ago(p,"esc")<t.win&&!p.confined&&!p.out&&ago(p,"lo")>ago(p,"esc"),ago(p,"esc")<t.keep&&ago(p,"phat")>ago(p,"esc")&&!p.confined&&!p.out],
