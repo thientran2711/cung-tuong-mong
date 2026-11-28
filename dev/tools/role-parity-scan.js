@@ -35,6 +35,10 @@ const KEYLAB={
  /* B3: buttons the wider probe now reads (item menu, every sub-tab / person page): the same act keys as the NPC side */
  "cx:gift":["Tặng"],"harm:taint":["Tẩm"],"ml:beat":["Bắt quỳ, vả miệng"],"ml:frame":["Vu tội"]};
 KEYLAB["cx:study"]=KEYLAB["cx:study"].concat(["Học với Thái hậu","Học lối mới với thầy"]);
+/* row11-law1 r2 (door era): ACT-MERGE / ACT-MOVE door and way labels → the same act keys the NPC side holds: «Dâng lễ vật» (jamove Emperor / Thái hậu
+   door, x:giftemp = a gift from her chest = cx:gift, the NPC's cx:gift reaches emp / th) · «Mua đồ» (j83 illDoor: the shop way «Nhờ thái giám mua đồ» = cx:buy)
+   · «Thêm thái giám» (j10 hire eunuch: the NPC's cx3:hire p3HireRole picks maid OR eunuch) */
+KEYLAB["cx:gift"]=KEYLAB["cx:gift"].concat(["Dâng lễ vật"]);KEYLAB["cx:buy"]=KEYLAB["cx:buy"].concat(["Mua đồ"]);KEYLAB["cx3:hire"]=["Thêm cung nữ","Thêm thái giám"];
 /* function class of a key (from the AG-ALL-2 parity table, after part 5): SAME = both sides call ONE function; NUM = same BAL row, two code paths */
 const SAMEPFX=["harm:","cx3:","hh:","ml:"];const SAMEK=new Set(["help","apol","visit","mediate","humil","test","drop","follow","gossip","flaunt","admon","warn","provoke","check","cx:buy","cx:gift","cx:ally",
  "cx2:bribeSrv","cx2:plantSrv","cx2:help","cx2:maidTalk","cx2:maidSpy","cx:study","maid:leave","maid:empTea","maid:poison","maid:follow","maid:cut","maid:listen","maid:scout","maid:watch","maid:pil"]);
@@ -55,6 +59,13 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
     A door is presentation only (each member runs through the same talk() path), so her side is read UNFOLDED: DOOR.raw (talkOpts raw list) and
     DOOR.fold = identity (deck / tab doors), restored when the probe ends */
  try{if(window.DOOR){DOOR.raw=(DOOR.raw||0)+1;const F0=DOOR.fold;if(typeof F0==="function"){DOOR.fold=l=>l;res.__F0=F0}}}catch(e){}
+ /* row11-law1 r2 (door era, law 11 whole harness family): (a) ACT-MOVE (jamove, OD 27/11 ~00:32Z) turned the Hậu cung consort / Emperor / Thái hậu
+    cards into info + «Tìm gặp» / «Ghé cung» (navigation) and moved every act WHERE the person is (stage pop-up doors: BAL.df.person / palace / either /
+    personE). «Nothing is deleted»: each act keeps its old card button (rvGroups) as the door member (jdf doorCardAll), so her side reads the OLD card
+    (AMV.card off) UNFOLDED (jdf DOORC.raw: no P5–P14 / Giao hảo / Kết giao fold) — and (b) a reach check (res.reach) proves every such member is
+    still offered somewhere after the move (its id sits in a BAL.df binding list, else it is a lost act = a real gap). Restored when the probe ends. */
+ try{if(window.AMV){res.__AMV=AMV.card;AMV.card=0}}catch(e){}
+ try{if(typeof DOORC==="object"&&DOORC){DOORC.raw=(DOORC.raw||0)+1;res.__DC=1}}catch(e){}
  /* one seeded dice for both sides: each probe starts from the same seed, so a random pick never makes a one-sided row */
  const R0=Math.random;let seed=1;const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};const SEED=n=>{seed=n||1;Math.random=rnd};
  const E=(w,e)=>{if(res.err.length<30)res.err.push(w+": "+(e&&e.message||e))};
@@ -73,6 +84,13 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
     still an act: the probe used to drop it (cx:study / cx3:teachV / cx3:teachD were N-ONLY by probe only); sub-tab rows (data-ktsv) are navigation */
  const DOA=/data-(learn|vlearn)="|data-kt53="(?!none")/;
  const lab=h=>{const L=[];const re=/<button([^>]*)>([\s\S]*?)(<small|<\/button>)/g;let m;while((m=re.exec(h)))if(!/\bdisabled\b/.test(m[1])&&/data-[a-z0-9]+=/.test(m[1])&&(!SKIPA.test(m[1])||DOA.test(m[1])))L.push(m[2]);return L};
+ /* row11-law1 r2 reach check: every old card act button (data-a = ACT key, data-e = Quyền Hoàng hậu key) must still be offered after ACT-MOVE: its id in
+    BAL.df.person / palace / either (a:) or personE (e:) — the lists the stage pop-up doors read (jamove amIds). A member in none of them = lost act. */
+ res.reach={seen:{},lost:{}};
+ const reach=(role,h)=>{const B=(typeof BAL==="object"&&BAL.df)||{};const A=new Set([].concat(B.person||[],B.palace||[],B.either||[])),Ee=new Set(B.personE||[]);
+  const re=/<button([^>]*)>/g;let m;while((m=re.exec(String(h||"")))){let x,id=null,ok=false;
+   if((x=m[1].match(/\bdata-a="([^"]+)"/))){id="a:"+x[1];ok=A.has(x[1])}else if((x=m[1].match(/\bdata-e="[^"]*"[^>]*\bdata-k="([^"]+)"/))){id="e:"+x[1];ok=Ee.has(x[1])}
+   if(!id)continue;(res.reach.seen[role]=res.reach.seen[role]||{})[id]=1;if(!ok)(res.reach.lost[role]=res.reach.lost[role]||{})[id]=1}};
  const g0=p=>{try{return agGrp(p)}catch(e){return""}};
  const others=a=>[S].concat(liveRivals(true)).filter(x=>x&&x!==a&&!x.out&&x.alive!==false);
  /* SYMMETRIC WORLDS: the same mutation is applied to the doer whichever side she is (S or an NPC), so a state-gated act is open to both or neither */
@@ -104,8 +122,23 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
   ["proof",a=>{if(a===S)try{const K=typeof k61S==="function"&&k61S();if(K){const K0=Object.assign({},K);UNDO.push(()=>{for(const z in K)delete K[z];Object.assign(K,K0)});
     for(const t of others(a)){const kk=t&&t!==S&&kOf61(t);if(kk&&(+K[kk]||0)<3)K[kk]=3}}}catch(e){}
    for(const t of others(a)){try{if(typeof evA==="function")evA(a,t,3,"scan");else t.ev=3}catch(e){}}}],
-  ["body",a=>{a.preg=2;a.hidden=true;a.fake=0;a.pregWk=wk();try{const k={name:"Tiểu Bảo",sex:"m",age:5,hp:30,tal:20,fond:20,alive:true};a.kids=(a.kids||[]).concat([k])}catch(e){}}],
+  /* row11-law1 r2: a CHILD is a consort's (the Emperor's heir): the maid doer (her maid life / an NPC maid) gets no child of her own in the body world — the
+     probe used to hand the player maid a 5-year-old, so the mother's kid card (j25 kidActs: Dẫn đi thỉnh an, Canh giữ các con, Chăm sóc) read as maid acts */
+  ["body",a=>{const mdoer=a===S?(typeof isSrv==="function"&&isSrv()):g0(a)==="maid";if(mdoer)return;a.preg=2;a.hidden=true;a.fake=0;a.pregWk=wk();try{const k={name:"Tiểu Bảo",sex:"m",age:5,hp:30,tal:20,fond:20,alive:true};a.kids=(a.kids||[]).concat([k])}catch(e){}}],
   ["chest",a=>{a.inv=a.inv||[];try{for(const k of Object.keys(IT).slice(0,6))a.inv.push({k})}catch(e){}}],
+  /* row11-law1 r2: a household with room (both doers: no maids / eunuchs yet) — «Thêm cung nữ / thái giám» (her j10 hire button, the NPC cx3:hire p3HireRole)
+     is judged by its rule (bạc ≥ BAL.house.hireBac, a free place under capOf), never by how many servants the drawn life happened to hold */
+  /* row11-law1 r2: a deep grudge with a go-between (jmend: «Hậu lễ tạ tội» / «Nhờ người đứng giữa» need mendDeep(t, doer) and, for the go road, a consort
+     the wronged one is close to who also likes the doer — mendGoOf). The same state for both doers: an NPC t holds oán 90 toward the doer, an NPC m is
+     «thân» with t (90) and likes the doer (90). Her topic row shows locked without it; the NPC option needs the state — now both are judged by the rule */
+  ["mend",a=>{const L=liveRivals(true).filter(x=>x&&x!==a&&x!==S&&x.alive!==false&&!x.out);const t=L[0],m=L[1];if(!t||!m)return;
+   const o0=a===S?t.oan:(t.ro||{})[a.id],f0=(t.rl||{})[m.id],g0=a===S?m.rel:(m.rl||{})[a.id];
+   UNDO.push(()=>{if(a===S)t.oan=o0;else t.ro[a.id]=o0;t.rl[m.id]=f0;if(a===S)m.rel=g0;else m.rl[a.id]=g0});
+   if(a===S)t.oan=90;else{t.ro=t.ro||{};t.ro[a.id]=90}t.rl=t.rl||{};t.rl[m.id]=90;if(a===S)m.rel=90;else{m.rl=m.rl||{};m.rl[a.id]=90}}],
+  /* row11-law1 r2: every OTHER person keeps a pet (Giúp chăm / Trộm / Thả thú nuôi của nàng: ACT.petcare / petsteal / thaopet ask tsbPets(target)) — the same
+     for both doers; a new life's palace held no pet, so the acts toward a pet owner were read on one side only */
+  ["pets",a=>{if(typeof PETK==="undefined"||!PETK[0])return;for(const t of others(a)){if(tsbPets(t).length)continue;const p0=t.pets;UNDO.push(()=>{t.pets=p0});t.pets=[{t:PETK[0],probe:1}]}}],
+  ["staff-room",a=>{const s0=a.staff;UNDO.push(()=>{a.staff=s0});a.staff=(a.staff||[]).filter(s=>s&&s.role!=="maid"&&s.role!=="eunuch")}],
   ["rival-down",a=>{for(const t of others(a))if(t!==S){t.confined=2}}],
   /* part 2: her rouge boxes ran out (jration): both doers miss every part, so the borrow / beg / steal roads open for her and for an NPC */
   ["rouge",a=>{try{for(const part of BAL.ration.parts)for(const e of lxBoxes(a,part))a.inv.splice(a.inv.indexOf(e),1)}catch(e){}}],
@@ -295,8 +328,13 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
   /* maid-acts-a (MAIN CHÍNH 90): the cung nữ road opens the SAME Hậu cung › Chủ tử card (j15 rvCard, act table jroad8 ROAD8.srv.acts) — scanned in the maid column
      too, so a consort act leaking onto her card is a P-ONLY gap (it used to be read only when !isSrv(): ~50 consort acts there went unseen) */
   if(isSrv())for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv-srv")}catch(e){E("rv-srv",e)}}
-  if(!isSrv()){for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv")}catch(e){E("rv",e)}try{for(const a of topicOpts(v)||[])addP(role,a.n,"topic")}catch(e){E("topic",e)}}
+  if(!isSrv()){for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{const h=rvCard(v,i);for(const n of lab(h))addP(role,n,"rv");reach(role,h)}catch(e){E("rv",e)}try{for(const a of topicOpts(v)||[])addP(role,a.n,"topic")}catch(e){E("topic",e)}}
    for(const f of ["staffTabHTML","staffHTML","facHTML","artTabHTML","invHTML","wkTabHTML","petPanelHTML","kidTabHTML"])try{for(const h of tabAll(f))for(const n of lab(h))addP(role,n,f)}catch(e){E(f,e)}
+   /* row11-law1 r2 (door era, law 11): the ways that live INSIDE a door card, not on a tab: «Mua đồ» (j83 illDoor → DOOR.card rows: Nhờ thái giám mua đồ ·
+      Sai cung nữ … · Hối lộ người ở Thái y viện · Chợ đen …) read by catching DOOR.card; the môn frame (R11 jtabs ktTnPop: Tự học · Học với thầy · Học với
+      Thái hậu … live in the frame, ktArtSkills.raw = the list before the fold) read from the raw skill acts */
+   try{const C0=DOOR.card;DOOR.card=(t,h,rows)=>{for(const r of rows||[])addP(role,r&&r.n,"doorcard")};try{if(typeof illDoor==="function")illDoor()}finally{DOOR.card=C0}}catch(e){E("illDoor",e)}
+   try{const f=typeof ktArtSkills==="function"?(ktArtSkills.raw||ktArtSkills):null;for(const s of (f?f():[])||[])for(const h of s.acts||[])for(const n of lab(h))addP(role,n,"artRaw")}catch(e){E("artRaw",e)}
    /* B3: the item-detail menu (jinv kinvOpen: Dùng / Bán / Nghiệm độc / Tặng …) opens per item in a kit modal — read each item's buttons */
    try{const M0=window.kitModal;let mh="";window.kitModal=o=>{mh+=(o&&o.html)||""};try{for(const it of kinvItems()||[]){mh="";try{kinvOpen(it)}catch(e){}for(const n of lab(mh))addP(role,n,"kinvOpen")}}finally{window.kitModal=M0}}catch(e){E("kinvOpen",e)}}
   /* E22e round C: the master has an errand for her this buổi (explicit world, the twin of the NPC j95 errand gate in npcOpts): SRVA.errand.offer
@@ -339,7 +377,8 @@ function inPage(arg){const {phase,TRIES}=arg;const RANKS_P=arg.ranks||[0,1,2,3,4
    npcOpts("up",n,["consort"]);npcOpts("t1born",b,["consort"]);rivals.splice(rivals.indexOf(b),1)}catch(e){E("upNpc",e)}}
  const LT={};for(const k in TW)LT[k]=[TW[k].n];for(const k in ACT)if(ACT[k]&&ACT[k].n)LT["harm:"+k]=[ACT[k].n];
  for(const k in (window.AGC2BTN||{}))LT["cx2:"+k]=[AGC2BTN[k]];for(const k in (window.AGC3BTN||{}))LT["cx3:"+k]=[AGC3BTN[k]];for(const k in (window.AGC4BTN||{}))LT["cx4:"+k]=[AGC4BTN[k]];
- res.LT=LT;Math.random=R0;try{if(window.DOOR){DOOR.raw--;if(res.__F0){DOOR.fold=res.__F0;delete res.__F0}}}catch(e){}return res}
+ res.LT=LT;Math.random=R0;try{if(window.DOOR){DOOR.raw--;if(res.__F0){DOOR.fold=res.__F0;delete res.__F0}}}catch(e){}
+ try{if(res.__DC){DOORC.raw--;delete res.__DC}if("__AMV" in res){AMV.card=res.__AMV;delete res.__AMV}}catch(e){}return res}
 
 async function scan(html,opt){opt=opt||{};const {chromium}=require('playwright');const URL=/^(https?|file):/.test(html)?html:'file://'+path.resolve(html);
  const b=await chromium.launch();const out={P:{},N:{},err:[],pageErr:[]};
@@ -349,7 +388,7 @@ async function scan(html,opt){opt=opt||{};const {chromium}=require('playwright')
     Real play is one tap = one task (800 goTo as separate tasks: ~440 MB, LIVE = branch). The fix runs each consort player role in its own fresh page
     (the world set-up and the NPC part run again in each page, seeded the same): every role is probed from the SAME world, whatever its order
     (before, a later role saw the world left by the earlier ones); rows are the union, as before. */
- const PAGES=[0,1,2,3,4,5,6,7].map(r=>["consort",[r]]).concat([["maid",null]]);
+ const PAGES=[0,1,2,3,4,5,6,7].map(r=>["consort",[r]]).concat([["maid",null]]).filter(x=>!opt.only||opt.only.includes(x[0]==="maid"?"maid":"t"+(x[1][0]+1)));/* row11-law1 r2: opt.only = a debug subset (["maid"], ["t1"] …) */
  for(const [phase,ranks] of PAGES){const p=await b.newPage({viewport:{width:755,height:1000}});p.on('pageerror',e=>{const x=phase+": "+e.message;if(!out.pageErr.includes(x))out.pageErr.push(x)});
   /* part 2: one deterministic page (as ag2perf-diff): seeded Math.random + crypto, frozen clocks — a row never flips between runs */
   await p.addInitScript(()=>{let x=424242;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648};let y=777;crypto.getRandomValues=a=>{for(let i=0;i<a.length;i++){y=(y*1103515245+12345)%2147483648;a[i]=Math.floor(y/2147483648*4294967296)%(a instanceof Uint8Array?256:4294967296)}return a};performance.now=()=>1000;Date.now=()=>1763000000000});
@@ -360,7 +399,7 @@ async function scan(html,opt){opt=opt||{};const {chromium}=require('playwright')
   await p.evaluate(({phase})=>{let sd=20261118;Math.random=()=>{sd=(sd*16807)%2147483647;return (sd-1)/2147483646};localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();
    for(let i=0;i<60&&(phase==="maid"?!isSrv():isSrv());i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{render()}catch(e){}},{phase});
   const r=await p.evaluate(inPage,{phase,ranks,TRIES:opt.tries||4});
-  Object.assign(out.P,r.P);out.T=out.T||{};for(const role in r.T||{}){const T=out.T[role]=out.T[role]||{};for(const k in r.T[role])T[k]=Object.assign(T[k]||{},r.T[role][k])}for(const role in r.N){const T=out.N[role]=out.N[role]||{};for(const k in r.N[role])T[k]=Object.assign(T[k]||{},r.N[role][k])}for(const x of r.err.map(x=>phase+": "+x))if(!out.err.includes(x))out.err.push(x);if(r.upNpc)out.upNpc=r.upNpc;if(r.upMe)out.upMe=r.upMe;out.LT=Object.assign(out.LT||{},r.LT);await p.close()}
+  Object.assign(out.P,r.P);out.T=out.T||{};for(const role in r.T||{}){const T=out.T[role]=out.T[role]||{};for(const k in r.T[role])T[k]=Object.assign(T[k]||{},r.T[role][k])}for(const role in r.N){const T=out.N[role]=out.N[role]||{};for(const k in r.N[role])T[k]=Object.assign(T[k]||{},r.N[role][k])}for(const x of r.err.map(x=>phase+": "+x))if(!out.err.includes(x))out.err.push(x);if(r.upNpc)out.upNpc=r.upNpc;if(r.upMe)out.upMe=r.upMe;if(r.reach){out.reach=out.reach||{seen:{},lost:{}};for(const w of ["seen","lost"])for(const role in r.reach[w])out.reach[w][role]=Object.assign(out.reach[w][role]||{},r.reach[w][role])}out.LT=Object.assign(out.LT||{},r.LT);await p.close()}
  await b.close();return build(out)}
 
 /* ---------------- table ---------------- */
@@ -396,7 +435,7 @@ function build(o){const LT=Object.assign({},o.LT);for(const k in KEYLAB)LT[k]=(L
  const setEq=(A,B)=>{A=A||{};B=B||{};return{onlyRisen:Object.keys(A).filter(x=>!(x in B)),onlyBorn:Object.keys(B).filter(x=>!(x in A))}};
  const promo={npc:Object.assign({},o.upNpc,setEq(NKA.up,NKA.t1born)),me:Object.assign({},o.upMe,setEq(PKL.up,PKL.t1me))};
  for(const w of ["npc","me"])for(const side of ["onlyRisen","onlyBorn"])for(const k of promo[w][side])gaps.push({role:"up",key:k,label:lbl(k),side:"PROMO-"+w+"-"+side});
- return{roles:ROLES,roleN:ROLE_N,rows,gaps,promo,T:o.T||{},PK:PKL,NKr:o.N,err:o.err,pageErr:o.pageErr}}
+ return{roles:ROLES,roleN:ROLE_N,rows,gaps,promo,T:o.T||{},PK:PKL,NKr:o.N,err:o.err,pageErr:o.pageErr,Praw:o.P,reach:o.reach||{seen:{},lost:{}}}}
 
 function md(R){const L=[];L.push("| act key | player button | fn | "+R.roles.map(r=>R.roleN[r]).join(" | ")+" |");L.push("|"+"---|".repeat(3+R.roles.length));
  for(const r of R.rows){if(R.roles.every(x=>r.cells[x]==="—"))continue;L.push(`| ${r.key} | ${r.label} | ${r.fn} | `+R.roles.map(x=>r.cells[x]).join(" | ")+" |")}

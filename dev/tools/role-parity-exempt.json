@@ -155,7 +155,19 @@
 "key": "harm:pmduel"
 },
 {
-"reason": "UI only (a VIEW: the per-art palace ladder standings «Bảng tài nghệ hậu cung», jpma round C; opens a notice, changes nothing in the world, not an act toward anyone)",
-"re": "^label:Bảng tài nghệ hậu cung$"
+"reason": "UI only (a VIEW: the per-art palace ladder standings «Bảng tài nghệ hậu cung», jpma round C; opens a notice, changes nothing in the world, not an act toward anyone); row11-law1 r2: the same view under its door-era label «ⓘ Bảng tài nghệ»",
+"re": "^label:(ⓘ )?Bảng tài nghệ( hậu cung)?$"
+},
+{
+"label": "Hỏi lén",
+"reason": "«Hỏi lén» (talk-others-people, j10 servAct hoi3 / jstaff): the covert talk with another palace's servant runs svTalk(S,s,1); the NPC side is the SAME svTalk(p,s,len) in the monthly world pass svtMonth (jsvt: every NPC master asks a servant of another house, her household included, the covert road by svtLenO) — not a day-plan provider (row11-law1 r2)"
+},
+{
+"re": "^label:Đề bạt lên ",
+"reason": "«Đề bạt lên …» (jaudit dbsv, servant promotion): her button and every NPC master run the SAME dbDo(o,s,road) with dbOdds / dbCost / dbNeed (BAL.db*); the NPC side is the monthly world pass (jaudit npcWhy «dbPromo» → dbDo, lót tay or favour road) — not a day-plan provider (row11-law1 r2)"
+},
+{
+"key": "harm:road",
+"reason": "«Chặn ngự giá» (j8 ACT.road, jsteal): ONE stealNight(a,t,\"road\") for her and every NPC consort; the NPC side is the NIGHT FLIP pass (jsteal stealPass: whoever wants the holder's night most tries, mode feign | road by stealWant, her night included) — never a day-plan option (jagharm HA_NO), so the AGREG probe cannot see it. Her old card button (ACT-MOVE keeps it as a door member) made it P-ONLY by probe only (row11-law1 r2)"
 }
 ]

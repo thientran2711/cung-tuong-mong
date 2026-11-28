@@ -31,7 +31,8 @@ const P3C={
  /* Kể tội {X} with the Thái hậu: odds from her evidence on X (evG) and her Thái hậu regard; X loses the teller's liking, one piece of evidence, Sủng */
  tell:(p,t)=>{const X=BAL.ag.par3.tell;if(!t)return{n:"Kể tội một phi tần",lock:true,t:"cần chứng cứ",o:0,w:{...X.w},x:"nàng bị phạt",l:{...X.l}};
   return{n:`Kể tội ${t.name}`,lock:false,t:"cần chứng cứ",o:odA(p,X.o+evG(p,t)*X.ev+(p.th||0)/X.thD),w:{...X.w},x:"nàng bị phạt",l:{...X.l},
-   go:()=>{if(p===S){t.rel-=X.rel;t.ev--}else{affAdd(t,p,-X.rel);evA(p,t,-BAL.ag.ev.one)}t.sung=cl((t.sung||0)-X.sung,0,100);
+   go:()=>{if(p===S){t.rel-=X.rel;t.ev--}else{affAdd(t,p,-X.rel);evA(p,t,-BAL.ag.ev.one)}
+    /* row11-law1 r2: told on, she pays the same Sủng through apply (her bar + log), the NPC target straight */if(t===S){apply({sung:-X.sung});log(`${p.name} kể tội ngươi với Thái hậu; ngươi bị quở trách, mất sủng.`);return `${p.name} kể tội ngươi với Thái hậu; ngươi bị quở trách, mất sủng`}t.sung=cl((t.sung||0)-X.sung,0,100);
     const who=typeof j78Who==="function"?j78Who(t):t.name;if(p===S)log(`${who} bị Thái hậu quở trách, mất sủng.`);return `${p.name} kể tội ${t.name} với Thái hậu; ${t.name} bị quở trách, mất sủng`}}},
  treat:p=>({n:"Xin chữa bệnh",c:{...BAL.ag.par3.treat.c},o:100,inner:1,oi:treatO(p,"ty"),x:illName(p),run:()=>treat(p,"ty")})};
 /* run one card for an NPC: the player's runOpt order (cost, odds, gain or loss, then go / run) */
@@ -65,7 +66,7 @@ agReg("consort","par3",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.confi
   if(nd(X.dance.g))P(p3O(v,"dance",P3C.dance(v),N,X.dance.g,"art"));
   if(nd(X.eyes.g)&&(v.mat||0)<X.eyes.max)P(p3O(v,"eyes",P3C.eyes(v),N,X.eyes.g,"scheme"));
   if(v.preg&&!v.fake&&!v.anthai&&nd(X.anthai.g))P(p3O(v,"anthai",P3C.anthai(v),N,X.anthai.g,"self"));
-  if(!S.thDead&&nd(X.tell.g)){const L=others(v).filter(t=>t&&t!==S&&t!==v&&t.alive&&!t.out&&!t.queen&&evG(v,t)>0&&agSpite(v,t)>0);
+  if(!S.thDead&&nd(X.tell.g)){const L=others(v).filter(t=>t&&t!==v&&(t===S?!S.out&&!S.dead&&(S.rank||0)<7:t.alive&&!t.out&&!t.queen)&&evG(v,t)>0&&agSpite(v,t)>0);/* row11-law1 r2 (law 1): she can be told on too — the same gate as her button (j78: not the Hoàng hậu, evidence held) */
    if(L.length){const t=mindPickBy(L,x=>agSpite(v,x),v);P(p3O(v,"tell",P3C.tell(v,t),N,X.tell.g,"punish",()=>"tn",t))}}
   if(illOf(v)&&nd(X.treat.g))P(p3O(v,"treat",P3C.treat(v),N,X.treat.g,"self",()=>"tyv"));
   if((v.suc||0)<X.restLat.sucBelow&&nd(X.restLat.g))P(p3O(v,"restLat",{n:"Nghỉ ngơi một lát",c:{},o:100,k:BAL.restLatK,w:{suc:BAL.restLatSuc}},N,X.restLat.g,"self"));
@@ -251,7 +252,7 @@ Object.assign(window,{p3InvLand,p3InvQ});
 Object.assign(AGC3BTN,{petBuy:"Nhờ thái giám tìm thú nuôi",petcare:"Giúp chăm thú nuôi của nàng",teachV:"học chữ",teachD:"Dạy lễ nghi"});
 Object.assign(AGC3ACT,{petBuy:"nhờ thái giám tìm thú nuôi",petcare:"sang giúp chăm thú nuôi",teachV:"tự tay dạy con học chữ",teachD:"tự tay dạy con lễ nghi"});
 function p3PetL(v){const X=BAL.ag.par3.petBuy;if(typeof PETK==="undefined"||!petHasFree(v))return[];return PETK.filter(k=>PET[k].pr&&(v.bac||0)-PET[k].pr>=X.keep&&!tsbPets(v).some(P=>P.t===k))}
-function p3PetFr(v){if(!ACT.petcare)return[];return others(v).filter(t=>t&&t!==S&&t.alive!==false&&!t.out&&tsbPets(t).length&&rel(v,t)>=netTh(v,"quen")&&ACT.petcare.ok(v,t))}/* the friend test is the NPC's choice (netTh «quen»), the gate is the shared ACT.petcare.ok */
+function p3PetFr(v){if(!ACT.petcare)return[];return others(v).filter(t=>t&&(t===S?!S.out&&!S.dead:t.alive!==false&&!t.out)/* row11-law1 r2 (law 1): an NPC friend may come to help with HER pet too */&&tsbPets(t).length&&rel(v,t)>=netTh(v,"quen")&&ACT.petcare.ok(v,t))}/* the friend test is the NPC's choice (netTh «quen»), the gate is the shared ACT.petcare.ok */
 function p3KidT(v,f){const s=ktSea();return kidsOf(v).filter(k=>k&&k.alive&&k.age>=BAL.kidTeach.age&&k[f==="tv"?"mtv":"mtd"]!==s)}
 agReg("consort","par3life",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v.alive)return O;const X=BAL.ag.par3;const nd=g=>!need||g[need]!=null;const P=x=>x&&O.push(x);
  try{if(nd(X.petBuy.g)&&typeof petBuyOne==="function"){const L=p3PetL(v);if(L.length){const k=mindPickBy(L,k=>BAL.mind.pick.ag.base+PET[k].tr+1,v);P(p3O(v,"petBuy",{n:AGC3BTN.petBuy,c:{bac:-PET[k].pr},o:petBuyO(k,v),k:1},N,X.petBuy.g,"self"));if(O.length)O[O.length-1].pk=k}}
