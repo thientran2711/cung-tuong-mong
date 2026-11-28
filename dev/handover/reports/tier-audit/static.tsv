@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 file	line	key	title	n	dupGroups	exitMixed	options	mergeOrKeep	b3 (E-TIER-B13c)
 j24.js	24	fx	<p>${v.name} sang thăm, ngỏ ý kết làm chị em, cùng nhau đứng vững.</p>	2		0	Nhận lời{} | Khéo từ chối{suc+}		
 j24.js	25	fx	<p>${v.name} túng bạc, ngượng ngùng hỏi mượn ${amt} lượng.</p>	2		0	Cho mượn{bac-} | Từ chối{}		
@@ -2815,7 +2814,6 @@ jworld2.js	214			2		0	Gửi quà tiễn công chúa{bac-} | Chỉ đến dự l�
 jworld2.js	227			2		0	Viết thư khuyên cha lui bớt{} | Đứng về phía nhà mình{}		
 jworld2.js	236			3		0	Cúng dường hậu hĩnh{bac-} | Chép kinh cầu phúc{duc+ suc-} | Lễ Phật rồi về{}		
 jworld2.js	258			2		0	Nhận quà nhà gửi vào{bac+} | Nhờ cha nói giúp trước triều{danh+}		
-=======
 file	line	key	title	n	dupGroups	exitMixed	options	mergeOrKeep
 j24.js	24	fx	<p>${v.name} sang thăm, ngỏ ý kết làm chị em, cùng nhau đứng vững.</p>	2		0	Nhận lời{} | Khéo từ chối{suc+}	
 j24.js	25	fx	<p>${v.name} túng bạc, ngượng ngùng hỏi mượn ${amt} lượng.</p>	2		0	Cho mượn{bac-} | Từ chối{}	
@@ -5632,4 +5630,4 @@ jworld2.js	214			2		0	Gửi quà tiễn công chúa{bac-} | Chỉ đến dự l�
 jworld2.js	227			2		0	Viết thư khuyên cha lui bớt{} | Đứng về phía nhà mình{}	
 jworld2.js	236			3		0	Cúng dường hậu hĩnh{bac-} | Chép kinh cầu phúc{duc+ suc-} | Lễ Phật rồi về{}	
 jworld2.js	258			2		0	Nhận quà nhà gửi vào{bac+} | Nhờ cha nói giúp trước triều{danh+}	
->>>>>>> e655ad96c (F c1: s18f evidence)
+jworld2.js	258			2		0	Nhận quà nhà gửi vào{bac+} | Nhờ cha nói giúp trước triều{danh+}		

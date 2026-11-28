@@ -77,7 +77,6 @@ Successor (same branch, new commits only, never rebase/force; base 5ad3b22e):
 3. B/C rows (B18, B19, B34, B39, C41, C45, C46, C48, C51, C53, C57 sickServant): check LIVE aecbc267 first (DOOR-ONETAP row 41 may have done some). Several are designs with NEW-KEY BAL.tier.* (C45 prep, B34 srvwork) and auto best-art picks (C41, C48, d_thi) — if a row needs a ruling (e.g. which art counts as «best»), ask the foreman, do not guess.
 4. Then proof list + «RV READY BIG review/e-tier-b13 <sha> (batch 3)».
 Work files (this container only): /home/user/wt/etb13-work (before/after-arc.tsv, mdump.js/json/txt, fold.js/json, balrow.js, tools/b3road.py, same3.py, old.html).
-<<<<<<< HEAD
 
 ## BATCH 3 — part 2 + proofs (E-TIER-B13c) → RV READY BIG review/e-tier-b13 31f91836 (batch 3)
 depth 3 · START_CTX ≈ 3 % (1M window; get_session read 0, own estimate) · E-TIER-B13c session_01DgYSWphk3eKShyjK8Smmnf, child of FOREMAN E C11
@@ -111,5 +110,3 @@ Static v2 MERGE (9 rows): 8 KEEP with reason + d_thi FOLD — marked in reports/
 
 FOR MAIN (via FOREMAN E): (1) B18 (Hắt nước / Hắt trà / Quạt mực / Tát / Phạt quỳ in-person group, jdf.js), B19 (Cầu tự j2.js:48 + Bài thuốc dễ thụ thai j2.js:182), B34 (Hầu việc door, 9 tasks, jdoor5.js:14), B39 (Chăm sóc j25.js:49 + Về tẩm cung thăm con j15.js:62) are STILL separate on LIVE aecbc267 → DOOR-ONETAP / KIT-STAGE owner. (2) Law 4: all 91 E68 c6 events (incl. C57 sickServant) and j71 newyear «Lễ mọn» (bac −10) / «Tự tay làm» (Sức −10) carry typed numbers, not BAL keys — a family job for the one-core owner (law 11), not a spot fix here.
 Next (batch 3b, separate RV, only if context allows): C45 night prep, C46 night talk, C48 pmLad/FX7, C53 vlget — first git grep origin/review/* night branches for the same lines.
-=======
->>>>>>> e655ad96c (F c1: s18f evidence)
