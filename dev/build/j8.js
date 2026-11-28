@@ -303,7 +303,12 @@ function wearBonus(p){const b={sac:0,danh:0};if(!p||!p.inv)return b;const r=rkOf
  for(const e of p.inv)if(e.w&&IT[e.k]&&itm(e.k).w){const m=itm(e.k).rk>r?1.5:1;for(const s in itm(e.k).w)b[s]+=Math.round(itm(e.k).w[s]*m)}
  if(p.dress&&p.dress.until>S.turn){const it=IT[p.dress.k];b.sac+=Math.round(it.dr*(it.rk>r?1.5:1))}return b}
 function buy(p,k){const it=IT[k];if(!it||p.bac<it.pr)return false;ap(p,{bac:-it.pr});invAdd(p,{k});return true}
-function wear(p,ix){const e=p.inv[ix],it=e&&IT[e.k];if(!it||!it.sl||e.h)return;const on=!e.w;p.inv.forEach(x=>{if(IT[x.k]&&itm(x.k).sl===it.sl)x.w=0});e.w=on?1:0}
+/* DRESS-FIX (owner OD 26/11 ~18:50Z (3) «gộp những ô na ná nhau»): Túi thơm and Ngọc bội both hang at the waist = ONE slot «Đeo eo» (wearGrp), one piece at a time, her and every NPC */
+function wearGrp(sl){return sl==="scent"?"waist":sl}
+/* old saves (and any piece put on outside wear()): two pieces worn in ONE slot group → keep the dearer, the other goes back to the chest (still hers, law 6c) */
+function wearMerge(p){try{if(!p||!Array.isArray(p.inv))return;const seen={};for(const x of p.inv){if(!x||!x.w||x.h||!IT[x.k]||!itm(x.k).sl||itm(x.k).wsl)continue;const g=wearGrp(itm(x.k).sl);const o=seen[g];
+  if(!o){seen[g]=x;continue}const v=k=>typeof luxVal==="function"?luxVal(k):(itm(k).pr|0);if(v(x.k)>v(o.k)){o.w=0;seen[g]=x}else x.w=0}}catch(e){}}
+function wear(p,ix){const e=p.inv[ix],it=e&&IT[e.k];if(!it||!it.sl||e.h)return;const on=!e.w,g=wearGrp(it.sl);p.inv.forEach(x=>{if(IT[x.k]&&itm(x.k).sl&&wearGrp(itm(x.k).sl)===g)x.w=0});e.w=on?1:0}
 function useItem(p,ix,tgt){const e=p.inv[ix],it=e&&IT[e.k];if(!it||e.h)return"";let r="";
  if(it.dr){p.inv.splice(ix,1);p.dress={k:e.k,until:S.turn+3};return `${NMc(p)} may áo mới bằng ${it.n}${it.rk>rkOf(p)?" (vượt phẩm!)":""}. `}
  if(it.sl){wear(p,ix);return""}
@@ -324,7 +329,7 @@ function giftRel(it,r){return giftVal(it,r)+BAL.eff.j8.giftRelPlus}/* ONE gift r
    her keeping answer (Nhận · Thái y finds nothing); «Trả lại quà» pays only go_2, a found taint only the evidence. Old saved cards have no kg
    (their liking was already added when sent) → nothing is paid twice. */
 function giftKeepOf(r,e,g,gr){if(g==null){const it=Object.assign({k:e.k},itm(e.k));g=giftVal(it,r);gr=giftRel(it,r)}if(!isFinite(gr))return null;return{r:gr,hh:r&&(r.queen||(r===S&&S.rank>=7))&&isFinite(g)?g:0}}
-function giftKeepGo(a,r,kg){if(!kg||!a||!r)return;relAdd(a,r,kg.r);if(kg.hh)ap(a,{hh:kg.hh})}
+function giftKeepGo(a,r,kg){if(!kg||!a||!r)return 0;return affGot(r,a,()=>{relAdd(a,r,kg.r);if(kg.hh)ap(a,{hh:kg.hh})})}/* returns the real rise of r's liking for a (K-RING-ONEROW affGot: traits / mood rescale; S.hh = the queen's thiện cảm) */
 /* K-GIFT-OUT (KK64, KIT-KRI-XL leftovers 2+3): giveTo.out = what really became of the piece — take (kept by the receiver) · sent (to her, she answers in «Quà tặng») · back (handed back to the giver) · found (Thái y check found the taint) · caught (taint seen / fake ngự dụng punished). The result seal and «Lễ làm lành» read THIS, never the log lines. */
 function giveTo(a,r,ix){giveTo.out=null;const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint=e.t?1:0;const it=itm(e.k);a.inv.splice(ix,1);e.w=0;const g=giftVal(Object.assign({k:e.k},it),r);
  if(r==="emp"){ap(a,{sung:Math.max(1,Math.round(g/2))});giveTo.out="take";if(e.t==="gia"||e.t==="trom"){ap(a,{sung:-20});punish(a,"dâng đồ ngự dụng giả mạo",2);giveTo.out="caught"}return `${NMc(a)} dâng ${it.n} lên Hoàng thượng. ${sgOf(a,Math.max(1,Math.round(g/2)))}. `}
@@ -334,7 +339,7 @@ function giveTo(a,r,ix){giveTo.out=null;const e=a.inv[ix];if(!e||e.h)return"";wi
  /* d19-gift-npc (law 3 + 6c): the receiver's liking (and the oán it mends, relAdd) comes only with a gift she KEEPS; a gift sent back
     («Trả lại quà») or exposed («found») gives the giver nothing but its own answer (jrcv) — before, the liking was added first, so a returned
     piece came home AND still bought thiện cảm + eased oán */
- const kg=giftKeepOf(r,ent,g,gr),keepGain=()=>giftKeepGo(a,r,kg);
+ const kg=giftKeepOf(r,ent,g,gr),keepGain=()=>{keepGain.d=giftKeepGo(a,r,kg)}/* K-RING-ONEROW: the real rise (affGot), printed below */;keepGain.d=kg?kg.r:0;
  /* d-giftin-like: to HER the gain waits for her answer (pp.kg, PEND.giftin), as for an NPC receiver below — before, keepGain ran here, so her «Trả lại quà» still left the giver's liking + eased oán */
  if(r===S){giveTo.out="sent";pushDil(mkP("giftin",{f:key(a),e:ent,kg}),"Quà tặng");return `${a.name} sai người mang ${it.n} sang tặng ngươi. `}
  /* RECEIVER CHOICE (jrcv rcvGiftIn, OD 18/11 ~21:15Z law 1): the NPC answers with HER giftin answers, the same numbers */
@@ -344,7 +349,7 @@ function giveTo(a,r,ix){giveTo.out=null;const e=a.inv[ix];if(!e||e.h)return"";wi
  keepGain();invAdd(r,ent);if(ans!=="check"&&e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,BAL.eff.j8.evGiveTo);relAdd(a,r,BAL.eff.j8.giveTo);giveTo.out="caught";return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ. `}
  if(itm(e.k).sl&&(IT[e.k]||{}).rk>rkOf(r)&&(hasT(r,"Kiêu ngạo")||hasT(r,"Tham vọng")||roll(25)))wear(r,r.inv.length-1);
 giveTo.out="take";
- return `${NMc(a)} tặng ${it.n} cho ${r.name}: ${pvQuy(r,gr,"thiện cảm")}. `}
+ return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm ${keepGain.d<0?"":"+"}${keepGain.d}. `}
 function plantItem(a,t,ix){plantItem.out=null;const e=a.inv[ix];if(!e||e.h)return"";/* K-GIFT-OUT: plantItem.out = ok · caught */if(typeof ilUid==="function")ilUid(e);a.inv.splice(ix,1);e.w=0;a.schemes=(a.schemes||0)+1;
  if(!aRoll(oPlant(a,t),a)){/*evok: plant act (runAct deed)*/evA(t,a,BAL.eff.j8.evPlantItem);relAdd(a,t,BAL.eff.j8.plantItem);if(typeof ilGone==="function")ilGone(a,e,"evid");plantItem.out="caught";return `<span class="r">Kẻ lẻn vào cung ${NM(t)} cài ${iname(e)} bị bắt, khai ra ${NM(a)}.</span> ${NMc(t)} nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ. `}
  invAdd(t,{k:e.k,t:e.t,by:key(a),h:1,iu:e.iu});/* the same piece (item ledger jil) */plantItem.out="ok";return `${NMc(a)} lén cài ${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""} vào rương ${NM(t)}. `}
@@ -557,7 +562,7 @@ function npcMonthly(v){let ev="";const cost=k=>artFee(v.arts[k]);const agd=windo
  return ev}
 function rivalsTurn(){const live=liveRivals(true);let ev="";
  for(const v of live){if(!v.alive||v.out)continue;spAdd(v,"sung",R(3)-1);if(v.block)v.block--;
-  if(S.sung>v.sung-10&&!v.queen&&roll(33))v.rel-=1;if(v.queen&&S.rank>=4&&roll(50))v.rel-=1;
+  if(S.sung>v.sung-10&&!v.queen&&roll(33))affAdd(v,S,-BAL.ghetHit.favour);if(v.queen&&S.rank>=4&&roll(50))affAdd(v,S,-BAL.ghetHit.favour);
   if(S.sac>75){window.opGStand=1;try{ghenUp(v,1,"thấy nhan sắc ngươi hơn người",S)}finally{window.opGStand=0}}/* review/oan-pace-ghen: a STANDING cause (her looks, every day) is not a new cause: it does not restart the «left alone» count */v.ghen=cl(v.ghen-ghenCool(v),0,100);v.pg=Math.max(0,v.pg-(typeof pgCool==="function"?pgCool(v):1))/* review/oan-pace-ghen: her jealousy fades by the same rule (law 1) */;
   if(v.queen&&!v.coop/* E44j (c) T9 family: her entry as Hoàng hậu never judges by an NPC roll (a target stays a target: law 1) */&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>chOK(v,p)&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
   const t=pickTarget(v);if(!t)continue;

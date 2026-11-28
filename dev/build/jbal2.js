@@ -1328,7 +1328,7 @@ BAL.ag.harm={spiteD:100,needs:["spite","sung","kid","safe","danh","ally"],
  g:{_:{g:{spite:4},f:2},spy:{g:{safe:3}},rumor:{g:{spite:4},f:2},trip:{g:{spite:5},f:2},pushp:{g:{spite:9},f:6},frame:{g:{spite:8,"danh":1},l:{"danh":4},f:5},
   plant:{g:{spite:7},f:4},block:{g:{"sung":4,spite:3},f:2},bribe:{g:{spite:3,safe:2},f:1},accuse:{g:{spite:10,safe:5,"danh":2},l:{"danh":3}},vp:{g:{spite:5,"danh":1},l:{"danh":2}},
   xx:{g:{spite:5,"danh":1},l:{"danh":2}},ksab:{g:{spite:5},f:4},takeaway:{g:{kid:10}},poison:{g:{spite:12,safe:3},f:12},kpoison:{g:{spite:10},f:12},pond:{g:{spite:10},f:8},
-  musk:{g:{spite:10,"sung":2},f:6},catswap:{g:{spite:8,"sung":2},f:6},kframe:{g:{spite:10},f:12},pgift:{g:{spite:10},f:8},petsteal:{g:{spite:4},f:2},laydo:{g:{spite:4},f:2},tieuhuy:{g:{safe:5,ally:2}}},
+  musk:{g:{spite:10,"sung":2},f:6},catswap:{g:{spite:8,"sung":2},f:6},kframe:{g:{spite:10},f:12},pgift:{g:{spite:10},f:8},petsteal:{g:{spite:4},f:2},laydo:{g:{spite:4},f:2},tyrob:{g:{spite:4},f:2},tieuhuy:{g:{safe:5,ally:2}}},
  tw:{"sung":.3,kid:10,seat:2},guard:.5,pen:.5,fail:{fool:.6,wise:.5},pat:[35,60],due:1,steal:{no:1.6/* G1 #9: 4 → 1.6 — G3 made a mindPick slip pick her near-best option instead of a uniform random one (the random "yes" was 6 of the 11 % steal tries); her "no" weight now leaves the steal-night tries to her want at the old rate (12 × 200: tries 602 base, 230 at 4) */},prep:{taint:3,cook:3},
  hap:{wit:["provoke","humil","gossip","flaunt","effort","mediate","ksp","pray","harm:trip","harm:pushp","harm:rumor","harm:pond","harm:accuse","harm:vp","harm:xx","harm:takeaway"],pub:{effort:["vuon"],flaunt:["vuon"]}}};
 /* AG-ALL HYBRID day: intentW = × on the weight of a need that is part of her day intent when she picks her buổi */
@@ -2487,7 +2487,7 @@ BAL.charge={C:{
  order:["tt","mh","vo","hd","mc","uh","il","vp"],
  deed:{vp:"vp",il:"il",illbuy:"il",trip:"uh",batnat:"uh",uyhiep:"uh",steal:"uh",petsteal:"uh",thaopet:"uh",block:"uh",blockf:"uh",ksab:"uh",rumor:"uh",lygian:"uh",story:"uh",
   bribe:"mc",sbribe:"mc",sthreat:"mc",plot:"uh",old:"uh",caught:"uh",huydung:"hd",thathu:"hd",rash:"hd",pushp:"mh",phonghoa:"mh",
-  xx:"vp",laydo:"uh",laydol:"uh",tat:"uh",phatquy:"uh",nuoc:"uh",tea:"uh",ink:"uh",
+  xx:"vp",laydo:"uh",laydol:"uh",tyrob:"uh",tyrobl:"uh",tat:"uh",phatquy:"uh",nuoc:"uh",tea:"uh",ink:"uh",
   poison:"mh",kpoison:"mh",slowpoison:"mh",pgift:"mh",musk:"mh",pond:"mh",catswap:"mh",frame:"vo",kframe:"vo",giahoa:"vo",plant:"vo",
   tryst:"tt",pm:"tt",flirt:"tt",mangift:"tt",
   /* charge-evidence rv (whole family: every key deedAdd / deedOnce / cyDeed / mlCaught writes): maid-line deeds = the act ordered, the pregnancy-register
@@ -2508,7 +2508,7 @@ BAL.charge={C:{
     (was jtruth DEEDW, now an alias of this table: a key here makes runAct record a deed); w = every other deed kind (was typed in each
     deedAdd / deedOnce / mlCaught call). The weight = the evidence cap of that deed (jcharge chCapC) and its share of the «old» schemes. */
  actW:{poison:2,kpoison:2,slowpoison:2,pgift:2,musk:2,catswap:2,pond:2,pushp:2,kframe:2,frame:2,giahoa:2,plant:2,huydung:2,thathu:2,phonghoa:2,ksab:2,
-  rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
+  rumor:1,trip:1,lygian:1,bribe:1,block:1,blockf:1,steal:1,uyhiep:1,batnat:1,petsteal:1,thaopet:1,rash:2,laydo:1,laydol:1,tyrob:1,tyrobl:1,tat:1,phatquy:1,nuoc:1,tea:1,ink:1},
  w:{tryst:2,pm:2,caught:2,old:2,il:1,vp:1,xx:1,plot:1,illbuy:1,flirt:1,mangift:1,sbribe:1,sthreat:1,mlbeat:1,mlframe:1,mlhframe:1,cyfake:1,cylie:1,cyforge:1,wthreat:1,wbribe:1,wkill:2}};
 /* PLAYER-NOISE BUDGET + TEXT HYGIENE (owner OD 26/11 ~06:50Z (A)+(D); review/qc-noise-hygiene; gate dev/tools/quickcheck.d/96-noise-hygiene.sh).
    Read ONLY by the QC tools (dev/measure/noise-day.js, dev/test/text-hygiene.js); the game itself never reads it.
@@ -2613,6 +2613,13 @@ BAL.charge.cover={duc:{nhe:-2,vua:-4,nang:-8,tu:-12},danh:{nhe:-3,vua:-6,nang:-1
 BAL.charge.rep={n:3,win:36};
 BAL.charge.conf={down:1,up:1};
 for(const c in BAL.charge.C)Object.defineProperty(BAL.charge.C[c],"need",{configurable:true,enumerable:true,get(){return BAL.charge.tier[this.tier].need}});
+/* D-ROW37 (OB 55 «điểm ghét, điểm oán tăng quá nhanh», law 11 + law 4): the liking falls toward HER that were typed straight into v.rel
+   (outside j9 affAdd, so outside the ghét pace joanpace opDn + stat-pace) now go through affAdd with these sizes (old typed numbers kept):
+   frame = an accuser who sets out to frame her (j4 accuse); retort = «Đáp trả sắc sảo» (j4 poet quarrel); poetWin = the loser of the poem contest (j4);
+   giftFail = the sender of a tainted gift when she cannot clear herself (j7); tell = «Mật báo Hoàng hậu» on a consort (j7); cookFail = the poisoner
+   not found (j7); side = the one she did not stand with in a quarrel (j7 «Báo cho» / «Đứng về phía»), warn = the one she warned against (j7 «Cảnh báo»);
+   favour = the daily small dislike of a consort she out-favours (j8 rivalsTurn); maidMock = a consort hurt by her maid's act for her (jagacts3 X.rel stays). */
+BAL.ghetHit={frame:10,retort:20,poetWin:10,giftFail:20,tell:30,cookFail:10,side:15,warn:20,favour:1};
 
 /* D-FAMILY-GIFT (OD 26/11 (c), expert table dev/handover/reports/d-family-gift.md §EXPERT): gifts / silver she (or an NPC consort) sends to her OWN family
    through a eunuch and the palace gate (jfamg). Tiers Nhẹ · Vừa · Nặng (law 2): k = khắc; fee = Bạc to the eunuch who carries it; Nhẹ = a little thing she

@@ -25,7 +25,7 @@
    Case: S.lost[] {id,k,e,own,cause,by,sv,w,due,st:"lost"|"held"|"found"|"done",at,open,cev,kn{},hear,acc,tip,ret,heard,end,how,keep,lied,reT}
    Knobs: LO below. Old saves: no S.lost → nothing to migrate. ================= */
 const LO={rate:8,cd:6,minPr:30,findW:[2,7],
- home:{mis:55,srv:15,riv:0},away:{mis:20,srv:65,riv:75},   /* % back home / turns up in another palace; the rest: never found */
+ home:{mis:55,srv:15,riv:0,rob:0},away:{mis:20,srv:65,riv:75,rob:60},   /* DRESS-FIX (owner OD 26/11 ~18:50Z (5)): rob = a robbed robe (jty): never back home by itself — the thug sold it: someone holds it (openly 60, else hidden in her chest) */   /* % back home / turns up in another palace; the rest: never found */
  tipW:[1,3],hearW:[1,2],raiseK:1,thief:{danh:-10,sung:-5},recog:{own:15,fr:4,me:8},expire:54,hearCd:6,/* who takes it = kind loTake, keep vs plant = loKeepPick, wearing it = kind loWear (BAL.ag.why) */
  act:{bac:30,duc:-4},
  cost:{ask:{k:1},cct:{k:1,bac:20},book:{k:1,bac:10},soat:{k:2}}};
