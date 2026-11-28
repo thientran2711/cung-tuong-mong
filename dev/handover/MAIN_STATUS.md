@@ -641,3 +641,4 @@ FOR MAIN 165 (Foreman C ROOT 3-1-1-1-1, ~23:25Z 26/11): evidence-card «Ban ch�
 - (28/11 03:28Z) FOREMAN F rolling c4 → **ROOT 7 child 5 session_01UV1SziCYgwcv4XKqEga3VR** (depth 5). FOR MAIN lines at END of FOREMAN_F_STATUS.md (NO-TURN #8, elope button says no death, EXIT_RE port).
 - (28/11 03:31Z) FOREMAN F ROOT 7 child 5 = session_01UV1SziCYgwcv4XKqEga3VR (depth 5), replaces c4 session_01UV1SziBkZsEaTEf1wZmKw5. FOR MAIN lines stay at END of FOREMAN_F_STATUS.md.
 - (28/11 03:36Z) MAIN 185 ROLLING (ctx 39 % real; START ~10 %). TAKEOVER_MAIN_186.md written; opening child «MAIN CHÍNH 186» (depth 7 — 186 must hand to a ROOT, not depth 8).
+- (28/11 03:37Z) MAIN 185 → **MAIN CHÍNH 186 = session_01Rc5AsNNdRG9GqK1FC4jasv** (depth 7). 185 deletes its 3 wakes on «186 live», relays late messages, then stops. Send READY TO PUSH / FOR MAIN to 186.
