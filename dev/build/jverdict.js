@@ -164,7 +164,7 @@ function hold(){if(RF.held){cue();return}RF.held=true;RF.stat.hold++;cue();dog()
    held screen go at once — a card is never left in Q with nothing on screen */
 /* DAYQ-NOTURN (law 11, the held-card family): a result card that keeps .on but is see-through (opacity under .05, the cardBox rule of the kit) is not
    on screen either — two dog ticks in a row (never the first frame of its kmUp entrance) let the held screen go */
-function faded(){try{const t=T();return !!t&&+getComputedStyle(t).opacity<.05}catch(e){return false}}
+function faded(){try{if(window.COOPW&&COOPW.on)return false;/* solo only, like the jdayq nets */const t=T();return !!t&&+getComputedStyle(t).opacity<.05}catch(e){return false}}
 function dog(){if(RF.dogT)return;const tick=()=>{RF.dogT=0;if(!RF.held&&!RF.wantModal&&!RF.later.length){RF.fz=0;return}const fz=faded()?(RF.fz=(RF.fz|0)+1):(RF.fz=0);if(!ui()||!vis()||fz>=2){RF.fz=0;RF.stat.dog=(RF.stat.dog|0)+1;release();return}RF.dogT=setTimeout(tick,700)};RF.dogT=setTimeout(tick,700)}
 function release(){if(!RF.held&&!RF.wantModal&&!RF.later.length)return;RF.held=false;RF.stat.rel++;const t=T();if(t){t.classList.remove("kres-hold");const b=t.querySelector(".kres-next");if(b)b.remove()}
  try{front()}catch(e){}const L=RF.later.splice(0);for(const f of L){try{f()}catch(e){console.error("RF later",e)}}

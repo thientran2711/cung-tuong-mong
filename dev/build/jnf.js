@@ -269,7 +269,7 @@ const TM={t0:0,id:null,stop(){if(this.id){clearInterval(this.id);this.id=null}th
    job running) and that the kit queue cannot start now (j93 kmFree false: a host / end card up; kmRankWait: a rank card waits in Q first) never
    holds a card — the card is painted (no choice put up early: showChoice stays with step()), and the flip plays once the queue frees. Without
    this the card waited for the flip and the flip for the card (F s21g «Sang ngày mới» dead ×3, up to the CAP bound). Paint only: no S key, no draw. */
-function cfStuck(){try{if(document.querySelector(".kmov.kcf:not(.km-out)"))return false;if(typeof kmBusy!=="undefined"&&kmBusy)return false;
+function cfStuck(){try{/* solo only (RV-163M: coop-e2e week-2 night stall on the branch): a co-op room paces its night with its own gates and the CAP bound; jdayq kmFree answers «not free» for every ghost host there (its on-screen rule is solo, dqUi) */if(typeof dqUi!=="function"||!dqUi())return false;if(document.querySelector(".kmov.kcf:not(.km-out)"))return false;if(typeof kmBusy!=="undefined"&&kmBusy)return false;
  if(typeof KMQ==="undefined"||!KMQ.length)return false;/* a flip queued a moment ago (inside her tap, the pump's next 250 ms try) is not stuck yet: BAL.dayq.wake ms, the safety-net bound */
  if(typeof window.cfAge==="function"&&window.cfAge()<((BAL.dayq&&BAL.dayq.wake)||2000))return false;const free=typeof kmFree!=="function"||kmFree(KMQ[0]);const rw=typeof kmRankWait==="function"&&kmRankWait();
  if(free&&!rw)return false;window.NFSTAT=window.NFSTAT||{};NFSTAT.cfStuck=(NFSTAT.cfStuck||0)+1;return true}catch(e){return false}}
