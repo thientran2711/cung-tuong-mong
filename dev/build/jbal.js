@@ -495,3 +495,7 @@ Object.assign(BAL,{itFx:{tramngoc:{w:{sac:2}},
  wear:{ngocboi:{danh:1},tuithom:{sac:1}},
  veil:{sac:2}/* the hủy dung veil while the mark is on her face (jinv wearBonus wrap) */}});
 if(typeof IT!=="undefined")for(const k in BAL.itFx)if(IT[k])Object.assign(IT[k],BAL.itFx[k]);
+/* E-TIER-B13 batch 3b (C45, law 2 NHẸ · VỪA · NẶNG; FOREMAN E C11 ruling 28/11 11:43Z): the night preparation ladder, read by her card (j75 PEND.prep)
+   and by every NPC's night (j75 rivalNight, law 1): bạc per tier, «được ưa» q per tier (worn jewellery adds its own +jb on top: a state, not a way),
+   suc = the Sức the «Tập trước <art>» road (the Sức road of VỪA) costs. A player without jewellery gets exactly the old numbers. */
+Object.assign(BAL,{tier:Object.assign(BAL.tier||{},{prep:{bac:[0,5,15],q:[1,2,3],suc:5}})});

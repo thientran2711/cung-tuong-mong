@@ -105,14 +105,17 @@ const ch0=chip;chip=function(t,cls){if(S&&S.preg&&/Mang thai tháng/.test(String
 /* --- prep: every option a real effect and a real cost; numbers it shows are the numbers it uses --- */
 const UA="mỗi +1: Ân tình +1 · mỗi +2: Sủng +1 · dễ được ban thưởng hơn";
 PEND.prep=()=>{const wb=wearBonus(S),vp=vpItems(S).length>0,b=bestArt();const jsac=wb.sac-(wb.shSac||0)/* the shelf set Sắc is not jewellery (display-set-bonus) */,jb=jsac>0?Math.max(2,1+Math.round(jsac/3)):0;
- const lv=Math.max(1,b.l||0),oP=od(BAL.odb.j75.odOP+S.tai/2+(b.l||0)*8);
- const nx1=(q,vpv,ln)=>()=>{if(ln)log(ln);pushFront(mkP("night1",{q,vp:vpv}),"Đêm thị tẩm")};
- return{who:pMe(),t:`<p>Kính sự phòng đã báo tin. Còn hai canh giờ trước khi kiệu đến. Chỉ kịp chuẩn bị một việc.</p><p class="past">Được ưa đêm nay: ${UA}.</p>`,o:[
- {n:"Tắm cánh hoa, xông hương",fx:{bac:-15},x:"đêm nay được ưa +2",go:nx1(3,0,"Tắm cánh hoa, xông hương: đêm nay được ưa +2.")},
- {n:"Điểm trang lộng lẫy",fx:{bac:-5},x:"son phấn: Sắc đêm nay +3 → được ưa +1",go:nx1(2,0,"Điểm trang: Sắc đêm nay +3, được ưa +1.")},
- Object.assign({n:"Đeo trang sức đẹp nhất",fx:{},x:jb?`trang sức đang đeo Sắc +${jsac} → được ưa +${jb}${vp?` · kèm: vượt phẩm, Hoàng thượng có thể thu đồ, Danh ${balSg(BAL.rl.j8.danhGo_2)}`:""}`:"cần đeo trang sức trong Rương đồ",go:nx1(1+jb,vp?1:0,`Đeo trang sức: được ưa +${jb}.`)},{lk:()=>jb?"":"Chưa đeo trang sức nào: vào mục Rương đồ, chọn Đeo"}),
- {n:`Tập trước ${b.n}`,fx:{suc:-5},x:`${word(oP)} · thành: được ưa +${1+lv} · hỏng: được ưa +1`,go:()=>{const ok=roll(oP);const g=ok?1+lv:1;log(`Tập trước ${b.n}: <span class="${ok?"g":"r"}">${ok?"thành":"hỏng"}</span>, đêm nay được ưa +${g}.`);pushFront(mkP("night1",{q:1+g,vp:0}),"Đêm thị tẩm")}},
- {n:"Để mộc, nghỉ ngơi",fx:{suc:BAL.eff.j75.sucFx},x:`giữ sức: Sức ${balSg(BAL.eff.j75.sucFx)} · không thêm được ưa`,go:nx1(1,0,"")}]}};
+ const lv=Math.max(1,b.l||0),oP=od(BAL.odb.j75.odOP+S.tai/2+(b.l||0)*8),TP=BAL.tier.prep;
+ /* E-TIER-B13 batch 3b (C45, law 2): three tiers NHẸ · VỪA · NẶNG (bạc and «được ưa» rise together, BAL.tier.prep) + «Tập trước <art>» = the Sức road
+    of VỪA (law 2 last clause). Jewellery is what she already wears (law 6c): its +jb is added on EVERY tier, shown as its own piece, and an
+    over-rank piece is at risk on every tier (she wears it). Before: «Đeo trang sức đẹp nhất» was a 5th way that excluded every other prep. */
+ const jw=jb?` · trang sức đang đeo: được ưa +${jb}${vp?` · kèm: vượt phẩm, Hoàng thượng có thể thu đồ, Danh ${balSg(BAL.rl.j8.danhGo_2)}`:""}`:"";
+ const nx1=(q,ln)=>()=>{const t=q+jb;if(ln||jb)log(`${ln||"Để mộc"}: đêm nay được ưa +${t-1}${jb?` (trang sức +${jb})`:""}.`);pushFront(mkP("night1",{q:t,vp:vp&&jb?1:0}),"Đêm thị tẩm")};
+ return{who:pMe(),t:`<p>Kính sự phòng đã báo tin. Còn hai canh giờ trước khi kiệu đến. Chỉ kịp chuẩn bị một việc.</p><p class="past">Được ưa đêm nay: ${UA}.${jb?` Trang sức ngươi đang đeo thêm được ưa +${jb} ở mọi cách.`:""}</p>`,o:[
+ {n:"Để mộc, nghỉ ngơi",fx:{suc:BAL.eff.j75.sucFx},x:`giữ sức: Sức ${balSg(BAL.eff.j75.sucFx)}${jb?"":" · không thêm được ưa"}${jw}`,go:nx1(TP.q[0],"")},
+ {n:"Điểm trang lộng lẫy",fx:{bac:-TP.bac[1]},x:`son phấn: được ưa +${TP.q[1]-1+jb}${jw}`,go:nx1(TP.q[1],"Điểm trang")},
+ {n:`Tập trước ${b.n}`,fx:{suc:-TP.suc},x:`${word(oP)} · thành: được ưa +${1+lv+jb} · hỏng: được ưa +${1+jb}${jw}`,go:()=>{const ok=roll(oP);const g=(ok?1+lv:1)+jb;log(`Tập trước ${b.n}: <span class="${ok?"g":"r"}">${ok?"thành":"hỏng"}</span>, đêm nay được ưa +${g}${jb?` (trang sức +${jb})`:""}.`);pushFront(mkP("night1",{q:1+g,vp:vp&&jb?1:0}),"Đêm thị tẩm")}},
+ {n:"Tắm cánh hoa, xông hương",fx:{bac:-TP.bac[2]},x:`đêm nay được ưa +${TP.q[2]-1+jb}${jw}`,go:nx1(TP.q[2],"Tắm cánh hoa, xông hương")}]}};
 
 })();
 
@@ -149,7 +152,8 @@ window.htCan=htCan;
 rivalNight=function(v){
  if(htCan(v)&&(typeof amOn==="function"&&amOn()?amSendQ(v):npcWhy("sendMaid",{v})))return `Đêm qua thẻ bài của ${v.name} được lật. `+sendMaid(v);/* AG3: her own choice (jagmaid), before the night */
  v.nights++;v.nightLog.push(wk());
- let q=1;if(v.bac>=BAL.bacFee.npcMat&&npcWhy("nightPrep",{v})){ap(v,{bac:-BAL.bacFee.npcMat});q=3}else if((v.suc||0)>=30){ap(v,{suc:-5});const b=nightArt(v),lv=Math.max(1,b.l||0);q=1+(roll(odA(v,40+(v.tai||0)/2+artOE(v,b.k)))?1+lv:1)}/* her PEND.prep: the same best art (no Thêu/Nấu), the same odds */
+ const TP=BAL.tier.prep;let q=TP.q[0];if(v.bac>=TP.bac[2]&&npcWhy("nightPrep",{v})){ap(v,{bac:-TP.bac[2]});q=TP.q[2]}else if((v.suc||0)>=30){ap(v,{suc:-TP.suc});const b=nightArt(v),lv=Math.max(1,b.l||0);q=1+(roll(odA(v,40+(v.tai||0)/2+artOE(v,b.k)))?1+lv:1)}/* her PEND.prep: the same best art (no Thêu/Nấu), the same odds */
+ {/* E-TIER-B13 3b (C45, law 1 + 6c): the jewellery this consort really wears adds the same +jb as hers (wearBonus reads her own chest) */const wv=wearBonus(v),js=wv.sac-(wv.shSac||0);if(js>0)q+=Math.max(2,1+Math.round(js/3))}
  const O=talkOpts(v);const fit=roll(BAL.odb.j75.rbFit+(v.tamco||0)/2)?Math.max(...O):pick(O);const mood=BAL.night.mood[S.emp.mood];
  const sc=q+fit+mood+R(3);const NG=nightGain(sc),g=NG.sung,an=NG.an;ap(v,{sung:g,an});pgUp(v,BAL.mood2.ghen.pgNight,`${v.name} được thị tẩm`);v.tablet=0;v.lastNightS=sc;
  const grade=sc>=BAL.nightEnd.warm?"đêm vui":sc>=BAL.nightEnd.normal?"đêm êm":"đêm nhạt";

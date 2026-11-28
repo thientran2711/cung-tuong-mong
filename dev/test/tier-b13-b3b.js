@@ -32,5 +32,15 @@ let fail=0;const ok=(c,m,x)=>{if(!c)fail++;console.log((c?'ok   ':'FAIL ')+m+(x!
   S.arts=a0;return out});
  for(const r of X){const ghi=r.names.filter(n=>/^Ghi tên dâng /.test(n));
   ok(ghi.length===1&&ghi[0].startsWith('Ghi tên dâng '+r.want)&&r.names[r.names.length-1]==='Không dự'&&r.names.length<=3,`${r.kk} arts ${JSON.stringify(r.lv)}: 3 «Ghi tên dâng …» → ONE «${ghi[0]}» (odds ${r.od.join('/')}) · ${r.names.length} ways: ${r.names.join(' | ')}`,r)}
+ /* (3) C45 night prep: NHẸ · VỪA (+ its Sức road) · NẶNG from BAL.tier.prep; the night q each way starts = the old one without jewellery,
+    and worn jewellery adds the same +jb on every way */
+ const P=await g.evaluate(()=>{const out={};const wb0=wearBonus,pf0=pushFront,r0=roll;const qOf=i=>{let q=null;pushFront=(d)=>{q=d&&d.pp?d.pp.q:(d&&d.q)};roll=()=>true;try{PEND.prep().o[i].go()}finally{pushFront=pf0;roll=r0}return q};
+  const run=sac=>{wearBonus=p=>p===S?{sac,danh:0,shSac:0}:wb0(p);try{const d=PEND.prep();return{names:d.o.map(o=>o.n),fx:d.o.map(o=>o.fx),q:d.o.map((o,i)=>qOf(i)),x:d.o.map(o=>o.x)}}finally{wearBonus=wb0}};
+  const lv=Math.max(1,(bestArt().l||0));out.no=run(0);out.jw=run(6);out.lv=lv;out.TP=BAL.tier.prep;return out});
+ {const T=P.TP,n=P.no,j=P.jw,jb=3;
+  ok(n.names.length===4&&n.names[0]==='Để mộc, nghỉ ngơi'&&/^Tập trước/.test(n.names[2])&&n.names[3]==='Tắm cánh hoa, xông hương'&&!n.names.some(x=>/Đeo trang sức/.test(x)),`prep: 5 ways → 4 (NHẸ · VỪA · VỪA Sức road · NẶNG): ${n.names.join(' | ')}`,n);
+  ok(!n.fx[0].bac&&n.fx[1].bac===-T.bac[1]&&n.fx[2].suc===-T.suc&&n.fx[3].bac===-T.bac[2],`prep costs from BAL.tier.prep: 0 · bạc ${T.bac[1]} · Sức ${T.suc} · bạc ${T.bac[2]}`,n.fx);
+  ok(JSON.stringify(n.q)===JSON.stringify([1,2,2+P.lv,3]),`no jewellery: night q = old numbers [1, 2, 2+lv, 3] → ${JSON.stringify(n.q)}`,n.q);
+  ok(JSON.stringify(j.q)===JSON.stringify(n.q.map(x=>x+jb))&&j.x.every(x=>/trang sức đang đeo: được ưa \+3/.test(x)),`jewellery worn (Sắc +6 → +${jb}): every way q +${jb} → ${JSON.stringify(j.q)}, shown on every way`,j)}
  ok(errs.length===0,errs.length+' page errors '+(errs[0]||''));
  console.log(fail?`TIER-B13-B3B: ${fail} FAIL`:'TIER-B13-B3B: ALL PASS');await b.close();srv.close();process.exit(fail?1:0)})().catch(e=>{console.log('FAIL',e.message);process.exit(1)});
