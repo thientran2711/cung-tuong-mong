@@ -21,7 +21,7 @@ function actNone(a){return a===S?"Người ngươi nhắm tới nay không còn 
 function queenP(){return S.rank>=7?S:(qOn()?rivals[0]:null)}
 function malOf(p){return p===S?Math.max(0,70-S.duc):p.malice}
 function wk(){return S.turn*3+S.tuan}
-function ap(p,o){if(p===S)return apply(o);for(const k in o){const v=o[k];if(!v)continue;if(k==="maid"){p.maid.loyal=cl(p.maid.loyal+v,0,100);continue}const w=typeof spG==="function"&&SP_K[k]?spG(k,p,p[k],v,spRk(p)):v;/* stat-pace (jstatpace) */p[k]=(p[k]||0)+w}
+function ap(p,o){if(p===S)return apply(o);for(const k in o){const v=o[k];if(!v)continue;if(k==="maid"){p.maid.loyal=cl(p.maid.loyal+v,0,100);continue}const w=typeof spG==="function"&&SP_K[k]&&!(k==="hh"&&typeof hhLive==="function"&&hhLive(p))?spG(k,p,p[k],v,spRk(p)):v;/* stat-pace (jstatpace); hh: its setter runs affAdd, which paces it (AFF-PREVIEW) */p[k]=(p[k]||0)+w}
  for(const k of ["sung","danh","suc","sac","tai","tamco","duc","ghen","an"])if(p[k]!=null)p[k]=cl(p[k],0,100);if(p.suc!=null)p.suc=Math.min(p.suc,sucCap(p));p.th=cl(p.th||0,-100,100);p.hh=cl(p.hh||0,-100,100);p.bac=Math.max(0,p.bac||0)}
 function dieIf(p,why){if(p!==S&&p.alive&&p.suc<=0){p.alive=false;if(p.queen)p.queen=false;return `<span class="r">${p.name} ${why}.</span> `}return""}
 /* a rival's full stat block: the same fields the player's formulas read */

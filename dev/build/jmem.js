@@ -363,7 +363,7 @@ if(typeof talkOpts==="function"){const t0=talkOpts;talkOpts=function(p){const A=
  const sec=hookQuery({k:"secret",by:"me",on:v,mir:false}).find(h=>h.str==="strong");
  if(sec&&!A.some(a=>a&&a.n==="Lấy chuyện riêng ép nàng")){const H=BH();const o=od(H.pressBase+S.tamco/H.tcDiv);
   A.push({n:"Lấy chuyện riêng ép nàng",o,x:`nàng nợ ngươi một ân, oán ngươi +${H.useOan} · nàng ra tay trước: ${chanceW(H.strikeCh+(sec.uses+1)*H.useStep)} · bí mật bị hủy: ${chanceW(H.lostCh+(sec.uses+1)*H.useStep)}`,
-   run:()=>{if(!roll(o)){relAdd(S,v,-H.failRel);return `${v.name} cười nhạt, không chịu khuất phục. Nàng quý ngươi -${H.failRel}.`}
+   run:()=>{if(!roll(o)){const d=affGot(v,S,()=>relAdd(S,v,-H.failRel));return `${v.name} cười nhạt, không chịu khuất phục. Nàng quý ngươi ${balSg(d)}.`}
     try{const Aq=q72A("rv",v.id);if(Aq)q72DebtAdd(Aq,1)}catch(e){}const u=hookUse(sec.id)||{};memAdd(v,S,"pressed",{quiet:1});
     return `${v.name} tái mặt, đành nhận lời. Nàng nợ ngươi một ân, oán ngươi +${H.useOan}.${u.strike?` Nhưng nàng cũng lén nắm lại chứng cứ của ngươi.`:""}${u.lost?" Sau đó nàng tìm cách xóa sạch dấu vết: bí mật không còn dùng được.":""}`}})}}catch(e){console.error("mem talk",e)}return A}}
 if(typeof talk==="function"){const k0=talk;talk=function(oi){let p=null,a=null;try{p=curPeople()[popIdx];a=p&&talkOpts(p)[oi]}catch(e){}const s0=S&&S.logSeq||0;const m0=typeof popMsg==="string"?popMsg:"";let Y=null;
