@@ -35,6 +35,7 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   tan(A,B,C);give(S,B,"mh","poison");win(()=>ACT.accuse.f(S,B));
   ok(B.out&&B.rank===2&&B.coldR===2&&B.coldFrom===3&&!holders(3).includes(B)&&seatFree(3),`ROBOT nặng: Tố giác mưu hại → ${B.name} Tần → Quý nhân + lãnh cung, Tần seat free`);
   ok(rkOfFace("consort",B)[1]==="Quý nhân · lãnh cung",`her face line inside: «${rkOfFace("consort",B)[1]}»`);
+  {const pl=[outTitleN(B),k61Short(B),k61MaskT(B),j95rk(B)];ok(pl.every(x=>x==="Quý nhân"),`NPC nặng inside: every plate = the kept title (RV-184 F1, outTitleN): ${pl.join(" | ")}`)}
   /* 4. the same penalty on a seat-free rank */
   D.rank=2;up(D);give(S,D,"mh","poison");win(()=>ACT.accuse.f(S,D));ok(D.out&&D.rank===1&&D.coldFrom===2,`nặng on a Quý nhân: → Thường tại + lãnh cung (same rule as Tần)`);
   /* 5. tử tội: death, or commuted to phế vị + chung thân (pardon refused, minh oan opens) */
@@ -43,6 +44,7 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   ok(E.alive===false,`tử tội, no mercy: ${E.name} ${E.alive===false?"bị ban chết":"alive"} (tier ${chTier(E,"tt")}, pieces ${chHave(S,E,"tt")}, out ${E.out}, rank ${E.rank}, mercy ${E.mercy}, turn ${S.turn})`);
   up(G);G.rank=3;G.sung=90;try{CHM.clear()}catch(e){}deedAdd(G,"catswap",null,2,"tráo hoàng tự");evA(S,G,chNeed(G,"mh")+chWitNeed(G,"mh"),"mh");punTuSpare=()=>({o:100,why:["Thái hậu xin tha"]});try{win(()=>ACT.accuse.f(S,G))}finally{punTuSpare=ps0}
   ok(G.out&&G.rank===0&&G.coldLife===1&&G.alive!==false,`tử tội commuted: ${G.name} phế vị + lãnh cung chung thân`);
+  {const pl=[outTitleN(G),k61Short(G),k61MaskT(G),j95rk(G)];ok(pl.every(x=>x==="Phế phi"),`NPC phế vị (chung thân): every plate = «Phế phi»: ${pl.join(" | ")}`)}
   G.coldWk-=BAL.pun.coldMinDays;ok(!coldStayOk(G)&&coldStayOk(G,true),'chung thân: no pardon / đại xá, minh oan still opens');
   /* 6. NPC release (law 1) */
   up(B);B.out=true;B.rank=2;B.coldR=2;B.coldFrom=3;B.coldWk=wk()-BAL.pun.coldMinDays;tan(C,A);coldFree(B,true);ok(!B.out&&B.rank===3,`NPC minh oan with a free Tần seat: back to ${RANKS[B.rank].n}`);
@@ -53,12 +55,14 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
   ok(S.out&&S.coldFrom===3&&S.coldRank===2&&!holders(3).includes(S)&&seatFree(3),`HER nặng at Tần: → lãnh cung, title ${RANKS[S.coldRank].n}, coldFrom ${S.coldFrom}, her Tần seat free`);
   ok(/Mức tội/.test(nt)&&/nặng/.test(nt)&&/Giáng phẩm/.test(nt)&&/từ Tần xuống Quý nhân/.test(nt)&&/vẫn mang phẩm Quý nhân/.test(nt),`her lãnh cung notice rows: ${nt.replace(/\\"/g,"'").slice(0,300)}`);
   window.__coldQ=nq||null;
+  {const kn=kitName(S,{named:1}),pl=[outTitleN(S),kszRankName(S)[0],j95rk(S)];ok(pl.every(x=>x==="Quý nhân")&&rkOfFace("consort",S)[1]==="Quý nhân · lãnh cung"&&/Quý nhân/.test(kn)&&!/Phế phi/.test(kn),`HER nặng inside: her plates show the kept title, never «Phế phi» (RV-184 F1, two-way with the NPC): ${pl.join(" | ")} · kitName «${kn.replace(/<[^>]+>/g,"")}» · top-bar chip «${rkOfFace("consort",S)[1]}»`)}
   /* 8. her release: pardon → title; minh oan Tần full → one lower; Tần free → Tần */
   S.coldWk=wk()-BAL.pun.coldMinDays;Q.length=0;restore(false,"Thái hậu mở lòng từ bi");ok(!S.out&&S.rank===2,`HER pardon: title kept inside → ${RANKS[S.rank].n}`);
   reset();tan(A,C,G);S.rank=0;S.out=1;S.coldFrom=3;S.coldRank=2;S.coldWk=wk()-BAL.pun.coldMinDays;restore(true,"Án được lật");
   ok(!S.out&&S.rank===2,`HER minh oan, Tần full (${holders(3).filter(x=>x!==S).length}/${SEATCAP[3]}): one lower → ${RANKS[S.rank].n}`);
   tan(A);S.out=1;S.rank=0;S.coldFrom=3;S.coldRank=2;S.coldWk=wk()-BAL.pun.coldMinDays;restore(true,"Án được lật");ok(!S.out&&S.rank===3,`HER minh oan, Tần seat free: back to ${RANKS[S.rank].n}`);
-  S.out=1;S.rank=0;S.coldFrom=3;S.coldRank=0;S.coldLife=1;S.coldWk=wk()-BAL.pun.coldMinDays;Q.length=0;restore(false,"Chiếu đại xá thiên hạ");ok(S.out&&Q.some(x=>x&&/chung thân/i.test(x.t||"")),'HER chung thân: đại xá does not open the door');S.out=0;S.coldLife=0;
+  S.out=1;S.rank=0;S.coldFrom=3;S.coldRank=0;S.coldLife=1;S.coldWk=wk()-BAL.pun.coldMinDays;ok(outTitleN(S)==="Phế phi"&&/Phế phi/.test(kitName(S,{named:1}))&&kszRankName(S)[0]==="Phế phi",`HER phế vị (chung thân): plate «${outTitleN(S)}»`);Q.length=0;restore(false,"Chiếu đại xá thiên hạ");ok(S.out&&Q.some(x=>x&&/chung thân/i.test(x.t||"")),'HER chung thân: đại xá does not open the door');S.out=0;S.coldLife=0;
+  {S.out=1;S.rank=0;S.coldFrom=null;S.coldLife=0;S.coldRank=2;const w=outTitleN(S);S.out=0;S.coldRank=0;ok(w==="Phế phi",`old save (out, no coldFrom): plate stays «Phế phi» (${w})`)}
   /* 9. vừa on her: one rank, «Lãnh cung: không»; nhẹ: «Giáng phẩm: không» */
   reset();tan(A);S.rank=3;Q.length=0;deedAdd(S,"huydung",B,1,"hủy dung");evA(A,S,chNeed(S,"hd")+chWitNeed(S,"hd"),"hd");win(()=>ACT.accuse.f(A,S));const gq=sec(Q.find(x=>x&&/giáng/i.test(x.t||"")));
   ok(S.rank===2&&!S.out&&/vừa/.test(gq)&&/Lãnh cung","không/.test(gq),`HER vừa: Tần → ${RANKS[S.rank].n}; rows ${gq.replace(/\\"/g,"'").slice(0,220)}`);
@@ -94,7 +98,7 @@ const {chromium}=require('playwright');const [,,URL,W='755',H='1000',DIR]=proces
  if(DIR){/* LOOK stills: the evidence card (weight on every charge) and her verdict notices */
   await p.evaluate(()=>{Q.length=0;closeModal();const L=liveRivals(true).filter(x=>!x.queen&&!x.out);const v=L[0];v.wrongs=[];v.evc={};v.ev=0;S.evc={};S.out=0;S.rank=2;v.rank=3;
    deedAdd(v,"poison",L[1],2,`bỏ độc vào điểm tâm của ${L[1].name}`);deedAdd(v,"huydung",L[2],1,`hủy dung ${L[2].name}`);deedAdd(v,"vp",null,1,"ăn vận vượt phẩm");
-   evA(S,v,chNeed(v,"hd")+chWitNeed(v,"hd"),"hd");evA(S,v,2,"mh");evA(S,v,1,"vp");try{k61Know(v,"",true,2)}catch(e){}S.met=S.met||{};S.met[v.id]=wk();window.__ev=v;/* a KNOWN Tần (met): the kit figure, not the unmet silhouette (OD 15/11 face rule) */kitEvidencePanel(v)});await sleep(1200);
+   evA(S,v,chNeed(v,"hd")+chWitNeed(v,"hd"),"hd");evA(S,v,2,"mh");evA(S,v,1,"vp");try{k61Know(v,"",true,2)}catch(e){}S.met=S.met||{};S.met[v.id]=wk();window.__ev=v;/* a KNOWN Tần (met): the kit figure, not the unmet silhouette (OD 15/11 face rule) */kitEvidencePanel(v)});await sleep(1700);/* RV-184 nit: past the 1.5 s j11 verdict stamp (kitPace) */
   {const d=await p.evaluate(()=>{const v=window.__ev;const t=(document.querySelector("#modal")||document.body).innerText;return {known:kitKnown(v),tier:/· tội (nặng|vừa|nhẹ)/.test(t)}});
    console.log((d.known&&!d.tier?"PASS ":"FAIL ")+`evidence card: accused known (kit figure) ${d.known} · no weight label on a piece (count only, 21:00Z) ${!d.tier}`);if(!(d.known&&!d.tier))fails++}
   await p.screenshot({path:`${DIR}/evidence-${W}x${H}.png`});

@@ -127,7 +127,7 @@ function k61Desc(e){const k=k61Kind(e);
  if(k==="kid")return e.sex==="m"?"một hoàng tử":"một công chúa";
  if(k==="man"){const r=e.role;return r==="Thị vệ"?"một vị thị vệ":r==="Thái y"?"một vị thái y":r==="Vương gia"?"một vị vương gia":r==="Sứ thần"?"một vị sứ thần ngoại bang":"một nam nhân áo gấm"}
  return"một người lạ"}
-function k61Short(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi":e.queen?"Hoàng hậu":RANKS[e.rank].n;if(k==="emp")return"Áo vàng";if(k==="th")return"Phượng bào";
+function k61Short(e){const k=k61Kind(e);if(k==="consort")return e.out?outTitleN(e):e.queen?"Hoàng hậu":RANKS[e.rank].n;if(k==="emp")return"Áo vàng";if(k==="th")return"Phượng bào";
  const d=k61Desc(e).replace(/^một (vị )?/,"");return d[0].toUpperCase()+d.slice(1)}
 const k61Cap=s=>s?s[0].toUpperCase()+s.slice(1):s;
 function k61Title(e){const k=k61Kind(e);if(k==="consort")return typeof kitTitled==="function"?kitTitled(rkName(e),e.name):`${rkName(e)} ${e.name}`;if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";
@@ -319,7 +319,7 @@ function k61Shared(ents){const o={ents:[],prot:[]};try{const W=window.COOPW;if(!
    for(const x of nmPers(P.S)){const n=x.o&&x.o.name;if(x.fp==="name"||!n||have.has(n))continue;o.prot.push(n)}}}catch(e){}return o}
 window.k61CoopFr=k61CoopFr;window.k61Shared=k61Shared;
 /* the mask for a name she does not know: "<title> ???" (title = what the dress shows), never a descriptor sentence */
-function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi":e.queen?"Hoàng hậu":RANKS[cl(e.rank||0,0,7)].n;if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";
+function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?outTitleN(e):e.queen?"Hoàng hậu":RANKS[cl(e.rank||0,0,7)].n;if(k==="emp")return"Hoàng thượng";if(k==="th")return"Thái hậu";
  if(k==="tq")return"Tổng quản thái giám";if(k==="eun")return"thái giám";if(k==="phys")return"thái y";if(k==="maid")return"cung nữ";if(k==="mama")return"ma ma";
  if(k==="off")return(typeof TDOFF!=="undefined"&&TDOFF[e.c])||"quan";if(k==="kid")return e.sex==="m"?"Hoàng tử":"Công chúa";
  if(k==="man"){const r=e.role;return r&&!/^(Công tử|Nam nhân)$/i.test(r)?r:"công tử"}return"người"}

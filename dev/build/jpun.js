@@ -85,6 +85,10 @@ function coldTitle(r,x,cur){r=Math.max(0,Math.min(7,r|0));cur=cur==null?r:Math.m
 /* the title p holds while inside (null = not in lãnh cung); an old save / an old road (no coldFrom) is read as a nặng stay */
 function coldTitleOf(p){if(!p)return null;if(p===S){if(!S.out)return null;return S.coldFrom!=null?(S.coldRank|0):coldTitle(S.coldRank|0,"nang")}
  if(!p.out)return null;if(p.coldFrom!=null)return p.coldR!=null?p.coldR:(p.rank|0);return coldTitle(p.coldR!=null?p.coldR:(p.queen?7:(p.rank|0)),"nang")}
+/* PUNISH-TIER-9 (RV-184 FAIL 1, law 6 + 1 + 11): the ONE plate word of someone inside lãnh cung, her and an NPC alike.
+   «Phế phi» only for phế vị (chung thân: tử tội commuted) or an old save / old road with no kept title (no coldFrom); a nặng / keep stay shows the title kept.
+   null = not in lãnh cung (the caller prints the usual rank). Read by every name plate that used `out?"Phế phi"` (j61 j79 j95 jhc jksize jhaohuu jly). */
+function outTitleN(p){try{if(!p||!(p===S?S.out:p.out))return null;if(coldLife(p))return"Phế phi";if((p===S?S.coldFrom:p.coldFrom)==null)return"Phế phi";return coldTitleTxt(p)||"Phế phi"}catch(e){return"Phế phi"}}
 function coldTitleTxt(p){const t=coldTitleOf(p);if(t==null)return"";return t>=7?"Hoàng hậu":RANKS[Math.max(0,t)].n}
 /* the rank she comes back to: the one owed when its seat is free (the Hoàng hậu seat too), else BAL.pun.oneBelow lower — one step, never more */
 function coldBack(p,want){want=Math.max(0,Math.min(7,want|0));if(want<=0)return 0;if(seatHas(p,want))return want;return Math.max(0,Math.min(6,want-BAL.pun.oneBelow))}
