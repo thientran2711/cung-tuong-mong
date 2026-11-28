@@ -726,3 +726,4 @@ C4-RINGART | review/c4-ring-art | session_01PEhRbtWZ3sD3nbQtNSs3sP | DONE (LIVE 
 COOP-REBIRTH-RESYNC r2 (successor fixer, gates + SSK; rollover of 4AAwyivs) | review/coop-rebirth-resync 07c5d9c5 | session_01N1tNP2Y1YMPHDUwpnNDb8J (Foreman B ROOT 3 child 1) | RUNNING | 28/11 00:00Z
 FLIGHT2-S20D life (seat s20 session_01UV1SzihQX2u9C61CBLqzhV, ctx 28 %; iPad 1180x820 greedy, seed 2026112566, LIVE 5fb13d60, pin=1 fresh profile, harness f65d019b, pick «Tĩnh dưỡng|Truyền thái y») | dev/handover/robot/flight2-s20d.* | session_01UV1SzihQX2u9C61CBLqzhV | CLAIMED | 2026-11-28T00:07Z (FOREMAN F ROOT 7 c1)
 TUANTANG-WARN (MAIN 183 00:38Z: tuẫn táng / game-imposed deaths with no warning + no road; whole family; opus, BIG) | review/tuantang-warn | (opening, Foreman C ROOT 4-1) | RUNNING | 28/11 00:42Z (Foreman C ROOT 4-1)
+TUANTANG-WARN (session id for the 00:42Z claim) | review/tuantang-warn | session_01PEhRbxieBKhF66jW9SU6j4 | RUNNING | 28/11 00:39Z (Foreman C ROOT 4-1)
