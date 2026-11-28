@@ -39,6 +39,8 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
      if(!aid||!ARC67[aid])return{err:"no arc for "+sid};
      /* the Hoàng hậu / Thái hậu a scene names must be alive in this test life (the game shows the hồi only then) */
      try{const sp=dlgsGet(id);if(sp&&[sp.L,sp.R].includes("th"))S.thDead=false}catch(e){}
+     /* a Thanh mai trúc mã chapter (tm96*) needs her old love, made as the game makes him at a new life (j96 a67init: mkMan96 + S.tm96) */
+     if(/^tm96/.test(aid)&&!S.tm96){const m=(TM96V[S.origin&&S.origin.k]?mkMan96(S.origin.k):null)||mkMan96("tt");if(!m)return{err:"cannot cast: no tm96 man"};S.tm96={k:m.tm96,mid:m.id,h:72,sus:0,ev:0,rise:0,tok:1,v:1}}
      let A=null;for(let i=0;i<5&&!A;i++)A=newThread67(aid,"m");if(!A)return{err:"cannot cast: thread "+aid};const a=ARC67[aid];
      const P0=a.p&&a.p[0]&&a.p[0].length?a.p[0]:a.ord?[].concat(a.ord[0]):[];A.nb=first||P0[0];S.st.M=A;A.due=0;if(A.dl==null)A.dl=S.turn+12;
      /* a scene left playing by the new life (its own first story card) ends first; the card waits for the common showModal below */try{if(DLGS.playing){DLGS.cur&&DLGS.cur.stop();document.querySelectorAll(".kscn").forEach(e=>e.remove());DLGS.playing=false;DLGS.cur=null;document.body.classList.remove("kdlgs-on","kscn-on")}}catch(e){}
@@ -126,7 +128,8 @@ let fail=0,pass=0;const ok=(c,m)=>{if(c)pass++;else fail++;if(!c||process.env.V)
    const judge=()=>g.evaluate(id=>{const m=Q[0],M=$("modal"),sp=dlgsGet(id);if(!m||!m.dlg)return{err:"no scene resolved after the visitor figure wait (jgreet) "+JSON.stringify({fcw:m&&m.__fcW,pid:m&&m.pid,hid:M.hidden,play:DLGS.playing})};
     return{n:sp.lines.length,L:m.dlg.names[0],R:m.dlg.names[1],who:m.dlg.lines.map(l=>l.fig),txt:m.dlg.lines.map(l=>l.text),modal:!M.hidden,scene:!!document.querySelector('.kscn[data-vp-skip]'),dlg:true,fcw:1}},id);
    const cast1=async()=>{let r=await cast();if(r&&r.fcw){await g.waitForFunction(()=>Q[0]&&Q[0].__fcW!==1&&Q[0].dlg&&document.querySelector('.kscn'),null,{timeout:8000}).catch(()=>{});r=await judge()}return r};
-   let o=await cast1();for(let t=0;t<3&&o.err&&/cannot cast/.test(o.err);t++){await life();nu=0;o=await cast1()}
+   const cast2=async()=>{try{return await cast1()}catch(e){return{err:"page error while casting: "+String(e.message||e).split("\n")[0]}}};
+   let o=await cast2();for(let t=0;t<3&&o.err&&/cannot cast/.test(o.err);t++){await life();nu=0;o=await cast2()}
    if(o.err){ok(false,`${dev} ${id}: ${o.err} ${JSON.stringify(Object.assign({},o,{err:undefined})).slice(0,300)}`);continue}
    ok(o.dlg&&o.scene&&!o.modal,`${dev} ${id}: scene plays before the card (card hidden)`);
    await g.waitForFunction(()=>document.querySelector('.kdv-box .kdv-line'),null,{timeout:30000}).catch(()=>{});await g.waitForTimeout(700);
