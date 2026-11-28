@@ -189,8 +189,8 @@ function exTick(){if(!exOn()||S.dead||S.out||exSrv(S)||S.rank>=7)return;const e=
 /* the act card: true cost, the honest chance (as one who plays at her own level), what a fail costs */
 function exCard(){const e=exS(S),P=exPlan(S),o=oddsCl(exChance(S));const names=P.rounds.map(k=>KG82_KIND[k].n.toLowerCase()).join(", ");
  return{n:"Khảo hạch tấn phong",exam:1,t:`${P.ex?P.ex.name:"Quan Nội vụ phủ"} khảo ngươi trước khi sắc phong ${exRk(e.to)}: ${names}. Đỗ hay trượt tùy tài nghệ của ngươi; tự thi càng giỏi thì càng dễ đỗ.`,
-  c:{suc:-BAL.ex.suc},k:BAL.ex.k,o,dom:"Khảo hạch",w:{},l:{},x:`thánh chỉ tấn phong ${exRk(e.to)}`,lock:!exElig(S),go:()=>exStart()}}
-function exAdd(){try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.exam))deck.unshift(exCard())}catch(e){}}
+  c:{suc:-BAL.ex.suc},k:BAL.ex.k,o,dom:"Khảo hạch",w:{},l:{},x:`thánh chỉ tấn phong ${exRk(e.to)}`,lock:!exElig(S),go:()=>exGo(1)}}
+function exAdd(){try{if(exLive(1)&&Array.isArray(deck)&&!deck.some(a=>a&&a.exam))deck.unshift(exCard())}catch(e){}}
 function exDrop(){try{if(Array.isArray(deck))deck=deck.filter(a=>!(a&&a.exam))}catch(e){}}
 /* review/rank-pace (MAIN 171, Foreman D JOB 3): THE EXAM WINDOW CANNOT BE MISSED. Robot lives (dev/measure/rank-pace.js): a player who does not
    open Hành sự in the BAL.ex.win tuần of a window never rises (LIVE: rank 0–2 for 6 years, the exam row the only unmet gate 122/291 months).
@@ -204,9 +204,19 @@ function exAsk(ex,last){try{if(!S||S.dead||(typeof quiet!=="undefined"&&quiet)||
  const names=a.t.replace(/^[^:]*:\s*/,"").replace(/\.\s.*$/,"");
  const h=`<p>${last?`Hạn khảo hạch ${ex===2?"":"tấn phong "}${rk} chỉ còn tuần này (đến hết ${exDateW(e.w1)}).`:`Nội vụ phủ báo: ngươi được dự khảo hạch ${ex===2?"":"tấn phong "}${rk}, hạn đến hết ${exDateW(e.w1)}.`} Thi: ${names}.</p>`;
  Q.push({ev:1,exAsk:ex,t:last?"Sắp hết hạn khảo hạch":(ex===2?"Khảo hạch Nội vụ phủ":"Khảo hạch tấn phong"),who:pMe(),h,opts:[
-  {n:"Thi ngay",fx:Object.assign({},a.c),off:!ok,x:`${word(a.o)} · tốn: ${k} khắc${ok?"":" (hôm nay không đủ, thi ở Hành sự)"} · được: ${a.x} · hỏng: chờ ${exAskCdW(ex,e)} tuần mới được thi lại`,go:()=>{try{spend(k);exDrop();if(ex===2){exSrvDrop();exSrvStart()}else exStart()}catch(x){console.error("exAsk",x)}}},
-  {n:"Để sau",x:last?"được: giữ sức hôm nay · mất: hết tuần này không thi là lỡ hạn":`được: giữ sức hôm nay · thẻ «${a.n}» ở Hành sự đến hết hạn`,go:()=>{if(ex===2)exSrvAdd();else exAdd()}}]});
+  {n:"Thi ngay",fx:Object.assign({},a.c),off:!ok,x:`${word(a.o)} · tốn: ${k} khắc${ok?"":" (hôm nay không đủ, thi ở Hành sự)"} · được: ${a.x} · hỏng: chờ ${exAskCdW(ex,e)} tuần mới được thi lại`,go:()=>{try{if(!exLive(ex)){exStale(ex);return}spend(k);exGo(ex)}catch(x){console.error("exAsk",x)}}},
+  {n:"Để sau",x:last?"được: giữ sức hôm nay · mất: hết tuần này không thi là lỡ hạn":`được: giữ sức hôm nay · thẻ «${a.n}» ở Hành sự đến hết hạn`,go:()=>{if(!exLive(ex)){exStale(ex);return}if(ex===2)exSrvAdd();else exAdd()}}]});
  try{showModal()}catch(x){}}catch(x){console.error("exAsk",x)}}
+/* d-maid-road (MAIN 181 / F s21e, whole family of exam doors): ONE live check for every way into an exam — the «Thi ngay» / «Để sau» card
+   (exAsk), the Hành sự card (exCard / exSrvCard) and their re-add (exAdd / exSrvAdd). Before: sitting from the Hành sự card left the queued
+   «Thi ngay» card in Q; tapping it later sat a SECOND exam on a window already used — a serving maid with S.srv.ex = {} (no target) got
+   exSrvRise(undefined) → her rung NaN (robot maid-lazy seed 0 month 7), a consort sat outside her window. Now: an exam is sat only while its
+   window is open and not mid-board; sitting it by any door takes the other door's card away; a stale door closes with one log line. */
+function exLive(ex){try{if(!S||S.dead)return false;if(ex===2){if(!isSrv())return false;const e=exSrvS();return e.to!=null&&e.w1!=null&&!e.pend}
+ if(exSrv(S))return false;const e=exS(S);return e.w1!=null&&!e.pass&&!e.pend}catch(x){return false}}
+function exUnask(ex){for(let i=Q.length-1;i>=0;i--)if(Q[i]&&Q[i].exAsk===ex)Q.splice(i,1)}
+function exStale(ex){if(ex===2)exSrvDrop();else exDrop();exUnask(ex);log(`<span class="past">Kỳ khảo hạch ấy đã qua.</span>`)}
+function exGo(ex){if(!exLive(ex)){exStale(ex);return}const q0=Q[0];exUnask(ex);exDrop();if(ex===2){exSrvDrop();exSrvStart()}else exStart();try{if(q0&&q0.exAsk===ex&&Q[0]!==q0)showModal()}catch(x){}}
 /* the fail wait the card prints (same source as the Hành sự card: cdN / exCd, shown in tuần by pbWkIn) */
 function exAskCdW(ex,e){const n=ex===2?exSrvCdN(e.to):exCd(e.to);return pbWkIn(n)/* rv-rank-pace (law 4): no typed «n*3» fallback — the one tuần reader, as the Hành sự card (cardH) */}
 /* a window never sat waits BAL.ex.cdLapse months (a fail keeps exCd); under the kỳ rule it waits to the next kỳ like a fail (pbCdKy), so the date it prints is true */
@@ -289,8 +299,8 @@ function exSrvDone(r){const e=exSrvS(),to=e.to;e.n=(e.n||0)+1;e.last={s:r.total,
 function exSrvStart(){const e=exSrvS();const P=exSrvPlan(e.to);if(window.__exAuto||typeof kg82Open!=="function"||!document.getElementById("ov")){exSrvDone(exSrvSim(P));return}exRun(P,e,exSrvDone)}
 function exSrvCard(){const e=exSrvS(),P=exSrvPlan(e.to),o=oddsCl(exSrvChance(P));const names=P.rounds.map(k=>KG82_KIND[k].n.toLowerCase()).join(", ");
  return{n:"Khảo hạch Nội vụ phủ",exam:2,exLbl:`Dự khảo hạch ${exSrvName(e.to)}.`,cdN:P.cdN,t:`Ma ma Nội vụ phủ khảo ngươi trước khi cho ${e.to==="mama"?"ở lại làm ma ma":"lên "+exSrvName(e.to)}: ${names}. Cơ may tính theo tài nghệ (không tự thi thì cao nhất là ${typeof mgWord==="function"?mgWord(BAL.skip.cap):"Khá"}); tự thi giỏi thì dễ đỗ hơn.`,
-  c:{suc:-BAL.ex.suc},k:BAL.ex.k,o,dom:"Khảo hạch",w:{},l:{},x:e.to==="mama"?"được ở lại cung làm ma ma":`thăng ${exSrvName(e.to)}`,go:()=>exSrvStart()}}
-function exSrvAdd(){try{if(Array.isArray(deck)&&!deck.some(a=>a&&a.exam===2))deck.unshift(exSrvCard())}catch(e){}}
+  c:{suc:-BAL.ex.suc},k:BAL.ex.k,o,dom:"Khảo hạch",w:{},l:{},x:e.to==="mama"?"được ở lại cung làm ma ma":`thăng ${exSrvName(e.to)}`,go:()=>exGo(2)}}
+function exSrvAdd(){try{if(exLive(2)&&Array.isArray(deck)&&!deck.some(a=>a&&a.exam===2))deck.unshift(exSrvCard())}catch(e){}}
 function exSrvDrop(){try{if(Array.isArray(deck))deck=deck.filter(a=>!(a&&a.exam===2))}catch(e){}}
 function exSrvTick(){if(!exOn()||!isSrv()||S.dead)return;const e=exSrvS();if(e.pend&&!document.getElementById("kg82")){exSrvDone(exFinish(exSrvPlan(e.to),e.pend));return}
  if(e.w1!=null&&!e.pend&&wk()===e.w1&&e.w0!==e.w1&&e.rem!==e.w1){e.rem=e.w1;log(`<span class="r">Hạn khảo hạch ${exSrvName(e.to)} chỉ còn tuần này.</span>`);exAsk(2,1)}
@@ -335,3 +345,9 @@ window.kitPromoHook=function(){if(!S||S.dead||S.out||rkOf(S)>=7||exSrv(S))return
   if(n){months=n.A-A;ky=n.n}else months=w}else if(!now)months=Math.max(gap,cd);
  return{months,rank:RANKS[r+1]?RANKS[r+1].n:"Hoàng hậu",miss:L,ready:!!now,ky,sp}}catch(e){return null}
  finally{if(!had)delete S.ex;else if(S.ex!==ex0||JSON.stringify(S.ex)!==ej)S.ex=ex0==null?ex0:JSON.parse(ej);if(!hp)delete S.pb;else if(JSON.stringify(S.pb)!==pj)S.pb=JSON.parse(pj)}};
+
+/* d-maid-road OLD SAVE: a LIVE save made after the double-exam bug (above, exLive) holds a serving maid whose rung is NaN / missing
+   (JSON NaN → null). Mend once on load: the rung she held before (rk0, else the lowest named rung BAL.srvRk.tam), the exam record cleared,
+   so the maid road (j42 srvMonth → exSrvGate) runs again. Nothing else is touched. */
+(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{if(S&&S.srv&&!S.srv.risen&&!Number.isFinite(S.srv.rk)){
+ S.srv.rk=S.srv.lau>0?0:Math.max(BAL.srvRk.tam,Math.min(BAL.srvRk.nq,Number.isFinite(S.srv.rk0)?S.srv.rk0:BAL.srvRk.tam));S.srv.ex={};exSrvDrop()}}catch(x){console.error("exSrvMend",x)}return r}})();
