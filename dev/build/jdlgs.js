@@ -63,7 +63,7 @@ function dlgsActor(a,nm){if(!a)return null;if(a===S)return dlgsMe();
  /* her grown child (j72 req ak): the kid painting set (kidFig), never figFor */
  if((a.k==="ak"||a.k==="kid")&&a.o){try{const src=typeof kidFigSrc==="function"?kidFigSrc(a.o):"";return src?{src,n:nm||a.n||a.o.name||""}:null}catch(e){return null}}
  return dlgsPer(a.f&&a.f.ref?a.f.ref:a.o,nm||a.n)}
-function dlgsVoice(a){if(!a)return null;if(a===S)return S;try{return kSpk(a)||{srv:"f",name:a.n}}catch(e){return null}}
+function dlgsVoice(a){if(!a)return null;if(a===S)return S;if(a.vo)return a.vo;try{return kSpk(a)||{srv:"f",name:a.n}}catch(e){return null}}
 function dlgsCtx(act,fill,at){const maid=S.maid?{k:"maid",o:S.maid,n:S.maid.name}:null;const get=r=>r==="me"?S:r==="M"||r==="maid"?maid:act[r]||null;
  return{who:r=>dlgsActor(get(r)),txt:(t,a,b)=>{const v=dlgsVoice(get(a)),l=dlgsVoice(get(b));if(v&&l)t=kSay(v,l,t);return dlgsGen(fill(t))},at}}
 /* the placeholders every family may use (validator GEN): {S} season, {E} Hoàng thượng, {M} her cung nữ — filled the same way for every family (law 11: a family fill that lacks one made the scene silently drop) */
@@ -117,7 +117,29 @@ if(typeof goTo==="function"){const g0=goTo;goTo=function(k){let pre=null;try{con
  const r=g0.apply(this,arguments);try{const z=pre&&j70();if(z)for(const p of z.pl)if(p.pend==="seen"&&!pre.has(p.id))p.dlgSelf=1}catch(e){}return r}}
 /* j70 plots (51 routes + THIN P6 composed): her people saw a TELL of a plot aimed at her (pid "j70", stage "seen"); L = her cung nữ who saw it. Unit id "j70:<route id>". */
 DLGS.R.push({test:m=>m.pid==="j70"&&m.pp&&m.pp.s==="seen",fn:m=>{const p=P70(m.pp.id);if(!p||pt70(p)!==S||!S.maid||p.dlgSelf)return null;return dlgsMk(dlgsJ70Id(p),{},t=>t,null)}});
+/* MAIN ROADS (B ROW 4 road-dialogue, E70 job; owner OD 24/11 ~10:05Z «STORY = DIALOGUE SCENES»): every main-road chapter that involves a person opens
+   with a scene before its FIRST hồi card (j67 story card, pid "j67", pp = {t thread key, a arc id, b beat id}). Unit id (dev/test/rdlg-inventory.js):
+     a hand-typed road chapter «rd:<road>#<n>» (.4 = the premise arc ARC67[road], .5–.11 = jroad rdDef) · a THIN P8 composed premise «rd:<prem>#4» ·
+     a composed chapter .5–.11: its first hồi is ONE open part of the origin's pool (jroadc rdcComp(road,n).s: s1 after a won chapter, s2 after a
+     middle / lost one) → «rd:<part id>#open» · any other j67 arc (shared «*», st / eg / tm) «rd:<arc id>#arc».
+   Roles = the j67 cast words (who67 / TOK67): v v2 (the chapter's consorts, cast ONCE before the first hồi: rdCast), hh, th, emp, maid, eun, doc, dad,
+   man, lv, kid, dau, mis, foe, me — each resolved to the REAL person the road itself shows (law 6b); a role with no living person = no scene (the card
+   shows as before). Placeholders = the road's own TOK67 tokens ({v} {dad} {sj} {land} …) + GEN ({goi}/{xung} said by the line's speaker to the
+   listener, {S} {E} {M}). Co-op: the story card is in this seat's own Q, so the scene shows on the seat whose life it is. Old saves: nothing saved
+   changes (a card already past its first hồi never gets one). */
+function dlgsRdId(A){try{const a=ARC67[A.a];if(!a)return null;
+ if(a.o==="rd"){if(a.rdc){if(typeof rdcComp!=="function")return null;const c=rdcComp(a.road,a.rn),pid=c&&c.s&&c.s[A.cur==="s2"?1:0];return pid?"rd:"+pid+"#open":null}return"rd:"+a.road+"#"+a.rn}
+ if(typeof ROAD14==="object"&&ROAD14[A.a])return"rd:"+A.a+"#4";return"rd:"+A.a+"#arc"}catch(e){return null}}
+function dlgsRdAct(A){const rv=v=>v&&v.alive&&!v.out&&!v.coop?{k:"rv",o:v,n:v.name,f:pv(v)}:null,mn=m=>m?{k:"man",o:m,n:m.name,f:pMan(m)}:null,kd=k=>k&&k.alive!==false?{k:"kid",o:k,n:k.name}:null;
+ const T={};const set=(k,f)=>Object.defineProperty(T,k,{get:()=>{try{return f()}catch(e){return null}},enumerable:true});
+ set("v",()=>rv(rv67(A,"v")));set("v2",()=>rv(rv67(A,"v2")));set("hh",()=>qOn()?rv(rivals[0]):null);set("th",()=>A6("th"));set("emp",()=>A6("emp"));
+ set("eun",()=>A6("eun"));set("doc",()=>A6("doc"));set("dad",()=>{const d=dad67();/* her father at court speaks as an official to a consort (vi thần / nương nương by her rank, jvoice); a letter line types «cha» / «con» */return d?{k:"man",o:d,n:d.name,f:pMin(d),vo:{role:"x",rw:"quan"}}:null});set("man",()=>mn(man67(A)));
+ set("lv",()=>typeof man96==="function"?mn(man96()):null);set("kid",()=>kd(son67()));set("dau",()=>kd(dau67()));set("mis",()=>rv(srvMis67()));
+ set("foe",()=>rv(rivals.find(x=>x.enemy&&x.alive)));return T}
+function dlgsRd(pp){const A=th67(pp.t);if(!A||A.a!==pp.a||A.cur!==pp.b||A.done||A.i!==0||(A.hist||[]).length)return null;const id=dlgsRdId(A),sp=id&&dlgsGet(id);if(!sp)return null;
+ return dlgsResolve(sp,dlgsCtx(dlgsRdAct(A),t=>{t=String(t);arcReveal67(t,A);return t.replace(/\{(\w+)\}/g,(m,k)=>k==="goi"||k==="xung"||k==="Goi"||k==="Xung"||!TOK67[k]?m:TOK67[k](A))},null))}
+DLGS.R.push({test:m=>m.pid==="j67"&&!!m.pp&&typeof th67==="function",fn:m=>dlgsRd(m.pp)});
 /* one scene at a time (review r3): a game kit motion scene (reward chest, edict, stipend … kmPush) waits while a side-line scene plays (kmPump retries every 250 ms);
    before, a «Phẩm phục» chest could open over the dialogue. The other way round, jdayq holds the card (so its scene) while a motion scene is on screen. */
 (function(){if(typeof kmFree!=="function")return;const f0=kmFree;kmFree=function(){if(DLGS.playing)return false;return f0.apply(this,arguments)};window.kmFree=kmFree})();
-try{window.DLGS=DLGS;window.dlgsResolve=dlgsResolve;window.dlgsPlay=dlgsPlay;window.dlgsGet=dlgsGet;window.dlgsMk=dlgsMk}catch(e){}
+try{window.DLGS=DLGS;window.dlgsResolve=dlgsResolve;window.dlgsPlay=dlgsPlay;window.dlgsGet=dlgsGet;window.dlgsMk=dlgsMk;window.dlgsRdId=dlgsRdId;window.dlgsRd=dlgsRd;window.dlgsRdAct=dlgsRdAct}catch(e){}

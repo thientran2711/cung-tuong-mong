@@ -157,7 +157,29 @@ for key,v in NR.items():
                     'kinds':{'A':'man' if v['f']=='jnrask_m.js' else None,'B':'rv' if hb else None}}
 for k in re.findall(r'def\("(\w+)"',rd('jnroad.js')):
     UNITS[f'j72:nr_{k}']={'roles':{'A','B','M','me'},'ph':{'A','B'}|GEN,'rule':None,'fam':'nr','src':f'jnroad.js def("{k}") stock help card (no ask drawn)','kinds':{'B':'rv'}}
-LIVE={'j72','j68','j7','ky','j70','j71','wc','nr'}   # families whose adapter plays the scene in the game now
+# MAIN ROADS (B ROW 4 road-dialogue, E70): every road chapter / composed opening / other j67 arc that opens with a person. The unit list is the GAME's
+# own (dev/test/rdlg-inventory.js reads ARC67 / ROAD14 / RDCSD in the built game → dev/test/rdlg_units.jsonl; --check there fails when stale).
+# Roles = the j67 cast words (jdlgs dlgsRdAct): the chapter's cast consorts (v / v2: rdCast, the only ones cast before the first hồi), the speakers of
+# its hồi, the people every life has (emp, maid, eun, doc; th / hh while alive — no living person = no scene), the origin's own (dad tt/dtq,
+# mis cn/cnv, foe td), me. Placeholders = GEN + the road tokens (j67 TOK67, API P8 list) the unit's origin knows; {v}/{v2} only when cast.
+RDK={'v':'rv','v2':'rv','hh':'hh','mis':'rv','foe':'rv','th':'th','emp':'emp','maid':'maid','eun':'eun','doc':'doc','dad':'off','man':'man','lv':'man','kid':'kid','dau':'kid'}
+RDORIG={'tt':{'dad'},'dtq':{'dad'},'cn':{'mis'},'cnv':{'mis'},'td':{'foe'}}
+RDPH={'me','maid','man','manr','eun','k','d','emp','sj','hh'}
+RDPHO={'tt':{'dad','dadr'},'dtq':{'dad','dadr'},'td':{'foe','foed'},'cn':{'mis'},'cnv':{'mis'},'nc':{'land','pv','mh','quan','pa','pb','canh','laq','nden','kha','dien','huong'},
+       'tm':{'lv','lvn','lvr','lvp','lvtok','lvtinh','lvforce'}}
+for o in ('bd','pf'):RDPHO[o]=RDPHO['nc']
+RDU=R+'/test/rdlg_units.jsonl'
+if os.path.exists(RDU):
+    for l in open(RDU,encoding='utf8'):
+        u=json.loads(l);o=u.get('o') or ''
+        ro={'me','maid','emp','eun','doc','th','hh'}|set(u.get('roles',[]))|set(w for w in u.get('ws',[]) if w in RDK)|RDORIG.get(o,set())
+        ph=RDPH|RDPHO.get(o,set())|{k for k in ('v','v2') if k in u.get('roles',[])}
+        if 'lv' in ro:ph|=RDPHO['tm']
+        fb=' / '.join(f"{b['b']} [{b['w']}] {b['h']}: {b['t']}" for b in u.get('first',[]))
+        UNITS[u['id']]={'roles':ro,'ph':ph|GEN,'rule':None,'fam':'rd','sub':u['kind'],'o':o,'kinds':{r:RDK[r] for r in ro if r in RDK},
+                        'src':f"{u['kind']} {o} «{u.get('t','')}» g: {u.get('g','')} | first hồi: {fb}"}
+else:print('WARN no dev/test/rdlg_units.jsonl (run node dev/test/rdlg-inventory.js after build_site.sh): family rd has no units')
+LIVE={'j72','j68','j7','ky','j70','j71','wc','nr','rd'}   # families whose adapter plays the scene in the game now
 
 def check(r,where):
     E=[];uid=r.get('id','?');d=r.get('dlg')
@@ -208,7 +230,7 @@ def main(a):
     if '--units' in a:   # W10 slice list: every OLD unit of a family with its cast roles, placeholders and source line
         fam=a[a.index('--units')+1]
         for k,v in UNITS.items():
-            if v['fam']==fam and (v.get('old') or fam=='nr'):print(f"{k}\troles {sorted(v['roles'])}\tph {sorted(v['ph']-GEN)}\t{v.get('src','')}")
+            if v['fam']==fam and (v.get('old') or fam in ('nr','rd')) and ('--o' not in a or v.get('o') in a[a.index('--o')+1].split(',')):print(f"{k}\troles {sorted(v['roles'])}\tph {sorted(v['ph']-GEN)}\t{v.get('src','')}")
         return 0
     fams=None;cover='--cover' in a
     if '--fam' in a:fams=set(a[a.index('--fam')+1].split(','));a=a[:a.index('--fam')]+a[a.index('--fam')+2:]
@@ -244,6 +266,11 @@ def main(a):
                 if not U:continue
                 w=len([k for k in U if k in allf]);T[0]+=len(U);T[1]+=w
                 print(f'| {fam}{" old (wave 2)" if old else ""} | {len(U)} | {w} | {100*w//max(1,len(U))} | {"yes" if fam in LIVE else "adapter pending"} |')
+        for sub in ['old','prem','open','arc']:
+            U=[k for k,v in UNITS.items() if v['fam']=='rd' and v.get('sub')==sub]
+            if not U:continue
+            w=len([k for k in U if k in allf]);T[0]+=len(U);T[1]+=w
+            print(f'| rd {sub} | {len(U)} | {w} | {100*w//max(1,len(U))} | yes |')
         print(f'| ALL | {T[0]} | {T[1]} | {100*T[1]//max(1,T[0])} | |')
     return 1 if err else 0
 if __name__=='__main__':sys.exit(main(sys.argv[1:]))
