@@ -59,3 +59,7 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - 08:51Z PVQUY-POST worker session_01Rc5AsKSwHpCTAoJbZFz95n: review/pvquy-post 4256fe5f (on a96564ad, incl. aff-preview 27a36750) — RV READY, waits RV-183 PASS; lands as own unit.
 - 08:54Z RV-185 LAND ui8 a50895cb (j23 hunk correct; live path driven). Follow-up for F: dev/test/bac-progress.js stale selectors (.kskill→.ktn-cell, data-skill→data-tnmon) — not a gate; routed via MAIN.
 - 09:05Z ui5 c03d6ee7 quickcheck vs a96564ad: PASS (core 17 hooks, time-spill, perf ok). **READY TO PUSH c03d6ee7 sent to MAIN 189.** ui8 a50895cb tests (u8.sh) running.
+- 09:15Z MAIN 189 PUSHED LIVE = c03d6ee7 (ROLLBACK a96564ad). origin/main fetched; ui8 .tmp/old.html = c03d6ee7.
+- 09:33Z container RESTARTED again — runs lost; u8 relaunched (dayq test dropped: RV-163M tests its own sha; my dayq test N1 PASS Fold before the cut). RV-185 LAND dress-fix-df fbab05b4 → stack as ui9 on ui8.
+- 09:37Z ui9 staged 6ef1f5a0 = ui8 a50895cb + dress-fix-df fbab05b4 (built conflicts only; MODGATE PASS; webkit 0; assets = LIVE). RV-185 already trial-merged the same onto a50895cb.
+- 09:40Z ui9 = 114a52ef (+ dress-fix-look cf0599d6 test-only, clean merge). ui9 tests after u8 QC.
