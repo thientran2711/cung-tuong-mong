@@ -41,7 +41,7 @@ Object.assign(BAL,{kyngo:{on:1,
   th_tham:{w:.8,b:"123",plain:{g:{},s:"kn"}},
   th_chi:{w:.8,b:"0123",plain:{g:{art:24,rel:16},a:"y"}},
   th_sao:{w:1,b:"123",o:[{g:{rel:56},c:{oan:10,kh:1}},{g:{art:26,danh:4},c:{kh:2},a:"thi"}]},
-  sv_den:{w:1,b:"0123",o:[{g:{},c:{kh:1,oan:8},s:"spy"},{g:{rel:30,danh:3},c:{kh:2}}]},
+  sv_den:{w:1,b:"0123",o:[{g:{},c:{kh:1}/* TAI-MAT-KNOW: no oán here — her master does not know (OD 27/11 ~04:16Z) */,s:"spy"},{g:{rel:30,danh:3},c:{kh:2}}]},
   sv_tuyet:{w:.9,b:"0123",plain:{g:{rel:20,sucR:1}}},
   sv_co:{w:1,b:"0",o:[{g:{},c:{suc:8,kh:2},s:"rk"},{g:{th:30},c:{relM:8,kh:1}}]},
   sv_tre:{w:.8,b:"123",plain:{g:{rel:34}}}
