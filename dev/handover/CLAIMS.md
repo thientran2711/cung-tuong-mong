@@ -765,3 +765,4 @@ D-ROW8-PHANCUNG (WORKLIST row 8; ORDER MAIN 187 07:30Z) | review/d-row8-phancung
 D-ROW37-OAN-NOISE (WORKLIST row 37; ORDER MAIN 187 07:30Z) | review/d-row37-oan-noise | FOREMAN D ROOT session_01964izEUYzmixcs6Yg5ZXsE / worker session_01964izEtRCxwJe9JL9s4S8c | RUNNING | 28/11 07:55Z
 WORKLIST row 36 F-WORD36 | review/f-word36-bac-rv2 3f3eb243 | session_01UV1SzhBbNMEZ8pDWiqdaFJ + RV session_01UV1SzkyYwDbvP1FwpiC8ox | DONE (LAND READY → LC35) | 28/11 07:54Z
 E-TIER-B13 (opus BIG) row 42 convert batches 1 (composed roads 3 tiers, BAL.road.c.tier) + 3 (MERGE look-alikes) of reports/tier-audit.md §5 | review/e-tier-b13 | session_01DgYSWkbLTwZBwq2854wSdA (Foreman E C9) | RUNNING | 28/11 07:56Z
+B-ROW4-ROAD-DIALOGUE (WORKLIST row 4 main roads, E70; helper of B ROWS 4+22 2GvCVsyL) | review/road-dialogue | FOREMAN B ROOT3 child2 session_01N1tNP4FQic23a4wJXFSmP4 / worker <opening> | RUNNING | 28/11 07:56Z
