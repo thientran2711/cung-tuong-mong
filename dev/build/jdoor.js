@@ -212,7 +212,7 @@ DOOR.road=function(){try{if(typeof isKc==="function"&&isKc())return"kc";if(typeo
   acts:{a:["ksab","musk","kframe","kpoison","catswap","pond"]},
   chT:["t:Đẩy con nàng xuống hồ"]},
  {k:"P10",n:"Lấy của",cat:"hai-nguoi",kinds:["card"],rep:"Sai người lấy trộm đồ",h:"Chọn mức và cách lấy của nàng.",re:/^$/,
-  acts:{a:["batnat","laydo","laydol","petsteal","thaopet","phonghoa"]},chT:[]},
+  acts:{a:["batnat","laydo","laydol","tyrob","petsteal","thaopet","phonghoa"]},chT:[]},
  {k:"P11",n:"Tố cáo",cat:"muu-ke",kinds:["rival","hh","card"],rep:"Tố giác",h:"Chọn tội để tố.",re:/^(Tố xa xỉ|Hặc ăn mặc sai phẩm)$/,
   acts:{a:["accuse","xx","vp"]}},/* split-merge B1: ONE «Tố giác» (accuse; listener by chTo) + the two visible-fault reports */
  {k:"P12",n:"Mặc cả chứng cứ",cat:"muu-ke",kinds:["card"],rep:"Uy hiếp đòi bạc",h:"Chọn cách dùng chứng cứ đang nắm.",re:/^$/,acts:{a:["uyhiep","banphe"]}},/* split-merge B2: «Trả chứng cứ lấy lòng» folded away */

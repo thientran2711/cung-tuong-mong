@@ -22,8 +22,10 @@ const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line sta
  mark:{cut:{lo:.25,hi:1.5,big:{hon:10,hoi:40,rel:10,uu:3,sung:5,dan:4,bac:40,suc:10,cc:2},word:{nhe:1,vua:2,nang:3}},},
  /* TRUNG Y (jty, sếp 15/11 09:15Z): the Y phục slot is empty → she is in her inner robe. ONE source for every number of that rule */
  ty:{out:2,crowd:3,crowdN:3,royal:6,royalDuc:1,meet:1,reissueWk:2,   /* Danh lost: out of her palace / extra with ≥crowdN people / extra (tai tiếng) before the Emperor or Thái hậu (+ Đức); a visitor at home */
-  robNight:12,robLonely:8,robPlot:45,robThug:3,robDanh:3,robWalk:2,omenWk:2,plotCh:12, /* robbery: % parts, Danh lost, omen lasts N weeks, weekly % an enemy plans it, relation that makes an enemy */
-  npcOut:2,npcRob:2},                                                /* NPC: Danh per week seen out in trung y; weekly % an NPC is robbed (night walks) */
+  robNight:12,robLonely:8,robPlot:45,robDanh:3,robWalk:2,omenWk:2,plotCh:12, /* robbery: % parts (an enemy's plot + night + lonely place), Danh lost, omen lasts N weeks, weekly % an enemy plans it.
+     DRESS-FIX (MAIN 161 ruling 26/11 ~18:40Z, canon overwrite of (5)): «lột đồ» is ONLY an enemy's CHOICE (no random thug); how often = the oán numbers (OAN-PACE), no rarity knob here */
+  npcOut:2,npcRob:2,                                                 /* NPC: Danh per week seen out in trung y; weekly % an NPC is robbed (night walks) */
+  act:{bac:30,duc:-4}},                                              /* «Thuê người giật y phục» (two-way, law 1; her and every NPC, BANDS «nặng»): Bạc for the hired man (the no-bạc road = a trusted maid, BAL.loyalCost + harder), Đức */
  /* THÁI Y (jthaiy, owner 15/11 20:20Z): monthly "Thỉnh bình an mạch" (free) + "Mời thái y bắt mạch" (two roads) + bribed / trusted physician */
  thy:{cost:[6,8,10,12,15,20,25,35],  /* bạc road by rank (≈ 1/7–1/8 of BAL.pay[rank]: scarce at low ranks, the same weight at every rank) */
   khPay:1,khSelf:3,sucSelf:5,        /* khắc of the bạc road (he comes to her) / of her own road (she walks to Thái y viện and waits) + Sức lost on her road */
