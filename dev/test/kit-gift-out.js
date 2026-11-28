@@ -65,7 +65,7 @@ const TSG = async (p, ans) => p.evaluate(ans => {
     await p.goto('http://localhost:8817/index.html', { waitUntil: 'domcontentloaded' });
     await p.waitForFunction(() => typeof start === 'function' && typeof deser === 'function' && typeof kitRingItem === 'object', null, { timeout: 240000 }); await p.waitForTimeout(1500);
     const add = (name, res, pass) => { const v = res.err ? 'SKIP' : pass ? 'ok' : 'FAIL'; if (v === 'FAIL') fails++; const r = Object.assign({ dev, name, verdict: v }, res); rows.push(r); console.log(JSON.stringify(r)) };
-    await home(p); let r = await RING(p, 'take', FOREIGN); add('A ring take + foreign log', r, r.ok === true);/* Ghi chú: the game's choice log folds every line of the tick into the act's own line («Tặng quà: X — …»), so a foreign line can still ride in that note; the SEAL no longer reads it */
+    await home(p); let r = await RING(p, 'take', FOREIGN); add('A ring take + foreign log', r, r.ok === true && !r.notes.some(x => x.includes('phát hiện chuyện cũ')));/* the choice log folds every line of the tick into the act's own line («Tặng quà: X — …»); K-GIFT-NOTE (KK65): Ghi chú keeps only the sentences naming the piece / receiver, so the foreign sentence is gone from the note too */
     await home(p); r = await RING(p, 'back', null); add('B ring handed back', r, r.ok === false);
     await home(p); r = await TSG(p, 'back'); add('C tsGiftPiece handed back', r, r.kept && !r.eased && r.back);
     await home(p); r = await TSG(p, 'take'); add('D tsGiftPiece taken', r, !r.kept && !r.lost && r.eased);
