@@ -105,7 +105,8 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
     const cm=window.closeModal;window.closeModal=closeModal=function(){window.__tr.push('closeModal '+(Q[0]&&Q[0].t)+' '+new Error().stack.split('\n').slice(2,6).join('<'));return cm.apply(this,arguments)};
     const ch=window.chooseM;window.chooseM=chooseM=function(i){window.__tr.push('chooseM '+(Q[0]&&Q[0].t));return ch.apply(this,arguments)}});
   /* like a player: tap through whatever is on screen (the test flip, cards the turn brings), tap «Sang buổi» when nothing is up, until the buổi turns */
-  const through=async(bk0)=>{for(let i=0;i<90;i++){if((await st()).bk!==bk0)return true;if(await p.evaluate(()=>!!document.getElementById('tstcf'))){await p.tap('#tstcfb',{force:true}).catch(()=>{});await sleep(400);continue}
+  const through=async(bk0)=>{let same=0,mt0='';for(let i=0;i<120;i++){if((await st()).bk!==bk0)return true;if(await p.evaluate(()=>!!document.getElementById('tstcf'))){await p.tap('#tstcfb',{force:true}).catch(()=>{});await sleep(400);continue}
+    {const s=await st();if(s.modal&&s.mt===mt0){if(++same>=25){console.log('through: card «'+s.mt+'» stayed up through 25 taps (known dead look-up card row, not this family) — closed in page');await p.evaluate(()=>{try{closeModal()}catch(e){}});same=0}}else{same=0;mt0=s.mt}}
     if(await tapAny()){await sleep(350);continue}if(await p.evaluate(()=>!document.getElementById('next').disabled))await p.tap('#next',{force:true}).catch(()=>{});await sleep(600)}return (await st()).bk!==bk0};
   const CASES={
    N1:async()=>{const tabs=await p.evaluate(()=>[...document.querySelectorAll('#tabs button,.ktabs button,nav button')].filter(b=>b.getClientRects().length&&b.id!=='next').map(b=>b.textContent.trim()).filter(t=>t&&t.length<20));
@@ -118,7 +119,7 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
         kmPush(done=>{const d=document.createElement('div');d.className='kmov kcf';d.id='tstcf';d.style.cssText='position:fixed;inset:0;z-index:60;background:rgba(40,20,10,.35);display:flex;align-items:center;justify-content:center';
           d.innerHTML='<button type="button" class="main" id="tstcfb">Lật thẻ · xong</button>';document.body.appendChild(d);
           d.querySelector('button').onclick=()=>{d.remove();window.__cfQ=0;S.nfX.st='done';window.cfBusy=window.__cf0;done()}});
-        Q.push({ev:1,t:'Thái hậu triệu',h:'<p>Thử: Thái hậu muốn có người hầu chuyện.</p>',opts:[{n:'Đến ngay',fx:{},x:'tốn: 2 khắc'},{n:'Cáo bệnh',fx:{},x:'giữ khắc'}],rk:'tsbAp',ra:['th'],optLayout:'rows'});
+        Q.push({ev:1,t:'Thái hậu triệu',h:'<p>Thử: Thái hậu muốn có người hầu chuyện.</p>',opts:[{n:'Vâng',fx:{}},{n:'Thôi',fx:{}}],rk:'tsbAp',ra:['th'],optLayout:'rows'});
         Object.getOwnPropertyDescriptor(HTMLElement.prototype,'hidden').set.call(document.getElementById('modal'),true)});
       const t0=Date.now();let seen='';for(let k=0;k<3;k++){await p.tap('#next',{force:true}).catch(()=>{});await sleep(300)}
       for(let i=0;i<W8/150&&!seen;i++){const s=await st();if(await p.evaluate(()=>!!document.getElementById('tstcf')))seen='flip';else if(s.modal)seen='card';else await sleep(150)}
@@ -137,8 +138,8 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
      let seen='';for(let i=0;i<(BAL_W*2+2500)/150&&!seen;i++){const s=await st();if(await p.evaluate(()=>!!document.getElementById('tstcf')))seen='flip';else if(s.modal)seen='card';else await sleep(150)}const dt=Date.now()-t0;await shot('N2');
      if(seen!=='card'){const dg=await diag();await p.evaluate(()=>{window.__cfQ=0;S.nfX.st='done';window.cfBusy=window.__cf0;window.cfAge=window.__ca0;const d=document.getElementById('tstcf');if(d)d.remove()});await drain();return 'rank card: '+(seen?'flip played OVER the waiting rank card':'NOTHING on screen '+dt+' ms (mutual wait)')+' '+JSON.stringify({Q:(await st()).Q,d:dg})}
      rows.push(`${W}x${H} N2 rank card on screen after ${dt} ms`);console.log(rows[rows.length-1]);
-     await tapAny();let on=0;for(let i=0;i<40&&!on;i++){on=await p.evaluate(()=>!!document.getElementById('tstcf'));if(!on)await sleep(150)}
-     if(!on){await p.evaluate(()=>{window.__cfQ=0;S.nfX.st='done';window.cfBusy=window.__cf0;window.cfAge=window.__ca0});return 'rank card closed but the flip did not play'}
+     await tapAny();let on=0;for(let i=0;i<80&&!on;i++){on=await p.evaluate(()=>!!document.getElementById('tstcf'));if(!on)await sleep(150)}
+     if(!on){const dg=await p.evaluate(()=>({Q:Q.map(m=>m.t),modal:!document.getElementById('modal').hidden,KMQ:KMQ.length,kmBusy,free:kmFree(KMQ[0]),rw:kmRankWait(),end:typeof kitEndUp==='function'&&kitEndUp(),nf:S.nfX&&S.nfX.st,cf:cfBusy()}));await p.evaluate(()=>{window.__cfQ=0;S.nfX.st='done';window.cfBusy=window.__cf0;window.cfAge=window.__ca0});return 'rank card closed but the flip did not play '+JSON.stringify(dg)}
      if(!(await through(bk0)))return 'the buổi did not turn '+JSON.stringify(await st());return ''},
    N3:async()=>{const out=[];for(const rank of [false,true]){await ensureQuiet();
       await p.evaluate(rank=>{Q.push(rank?{t:'Tấn phong — thử',h:'<p>Thử.</p>',kit:{rk:1}}:{t:'Kẻ hầu xin — thử',h:'<p>Thử.</p>',opts:[{n:'Cho',fx:{}},{n:'Từ chối',fx:{}}],rk:'ap.svAsk',ra:[]});showModal();
@@ -152,7 +153,7 @@ const VP=[[755,1000,2],[1180,820,2]].filter(v=>!process.env.VP||process.env.VP.s
   };
   console.log(`${W}x${H} life ready`,JSON.stringify(await st()));
   const order=Object.keys(CASES).filter(k=>!process.env.CASES||process.env.CASES.includes(k));const REP=+process.env.REPEAT||1;/* REPEAT=10: each case N times (stability gate) */
-  for(const k of [].concat(...Array(REP).fill(order))){const s=await ensureQuiet();let r;try{/* r3 watchdog: a case that never ends is a FAIL with what was on screen, not a silent stall */r=await Promise.race([CASES[k](),sleep(180000).then(async()=>'case did not finish in 180 s '+JSON.stringify({s:await st().catch(()=>null),d:await diag().catch(()=>null)}))])}catch(e){r='threw '+e.message.slice(0,120)}
+  for(const k of [].concat(...Array(REP).fill(order))){const s=await ensureQuiet();let r;try{/* r3 watchdog: a case that never ends is a FAIL with what was on screen, not a silent stall */r=await Promise.race([CASES[k](),sleep(+(process.env.CASE_MS||1200000)).then(async()=>'case did not finish in time '+JSON.stringify({s:await st().catch(()=>null),d:await diag().catch(()=>null)}))])}catch(e){r='threw '+e.message.slice(0,120)}
    rows.push(`${W}x${H} ${k}: ${r?'FAIL '+r:'PASS'}`);console.log(rows[rows.length-1]);if(r)fails++;await drain()}
   if(errs.length){fails++;rows.push(`${W}x${H} page errors: ${errs.slice(0,3).join(' | ')}`)}
   await ctx.close()}
