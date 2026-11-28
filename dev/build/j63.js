@@ -236,14 +236,14 @@ button.ka .kr-note .krv .ef{color:var(--dim);font-weight:400}
 button.ka.kdis,button.ka:disabled{opacity:1!important;background:#eee7da!important;border-color:#d4c8b2;cursor:default;filter:none}
 button.ka.kdis .kan,button.ka:disabled .kan{color:#7d7263}
 button.ka.kdis .kodds,button.ka:disabled .kodds{filter:grayscale(1);opacity:.7}
-button.ka.kdis .kr-mat,button.ka.kdis .kr-kem,button.ka.kdis .kr-bai,button.ka:disabled .kr-mat,button.ka:disabled .kr-kem,button.ka:disabled .kr-bai{display:none}
+button.ka.kdis:not(.kopinfo) .kr-mat,button.ka.kdis:not(.kopinfo) .kr-kem,button.ka.kdis:not(.kopinfo) .kr-bai,button.ka:disabled:not(.kopinfo) .kr-mat,button.ka:disabled:not(.kopinfo) .kr-kem,button.ka:disabled:not(.kopinfo) .kr-bai,button.ka.kopinfo.khlock .kr-mat,button.ka.kopinfo.khlock .kr-kem,button.ka.kopinfo.khlock .kr-bai{display:none}/* KIT §6.2o K-HAND-MAT (KK63): a read-only COPY (.kopinfo: hand plate, «!» overlay) is a disabled button only so it cannot be pressed — it shows every Mất / Kèm / Bại row unless it copies a locked card (.khlock) */
 /* kit-thanh-bai: the THÀNH / BẠI block heads (full grid row) and their rows; a disabled card shows no BẠI block (same rule as its hidden Mất / Kèm) */
 /* r4: no head rows — the row label itself is THÀNH (green) / BẠI (red); label column LEFT, value RIGHT at every size */
 .kb .kr-thanh .krl{color:var(--good);font-weight:800}.kb .kr-bai .krl{color:var(--bad);font-weight:800}
 .kb .kr-none.kr-thanh .krl{color:var(--good)}.kb .kr-none.kr-bai .krl{color:var(--bad)}
 .kb .kr-duoc.kb-a .krl{white-space:normal;line-height:1.1}
 .kb .kr-none .ef{color:var(--dim);font-weight:400;font-style:italic}
-button.ka.kdis .kr.kb-b,button.ka:disabled .kr.kb-b{display:none}
+button.ka.kdis:not(.kopinfo) .kr.kb-b,button.ka:disabled:not(.kopinfo) .kr.kb-b,button.ka.kopinfo.khlock .kr.kb-b{display:none}/* K-HAND-MAT (KK63): same exemption for the read-only copy */
 button.ka.kdis .krv .ef.g,button.ka.kdis .krv .ef.r,button.ka.kdis .krv .ef.t{opacity:.75}
 button.ka.kcard{border-radius:8px}
 button.ka.kcard .kan{font-family:var(--title,inherit);font-size:calc(var(--kfs,.82rem) + .12rem)}

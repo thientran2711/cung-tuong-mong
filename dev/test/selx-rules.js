@@ -2,7 +2,7 @@
    ~23:47Z (weights mini ½ / đối đáp ¼ / hành xử ¼ + Đức/Tài/Sắc base; worst −1), 24/11 ~05:35Z (rooms 4 = 2 beds × 2), ~05:40Z (ban hoa = life ends),
    ~05:50Z (every tú nữ by the same formula). Checks every origin × result step, the caps, ban hoa, the ceremony keep count, BAL-only numbers,
    the intake (j27) and the lodging plan. usage: node dev/test/selx-rules.js [dev/index.html] */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');
 const ROOT=path.resolve(__dirname,'..');const PAGE=process.argv[2]||'index.html';
 (async()=>{const b=await chromium.launch();let bad=0;const ok=(c,m)=>{if(!c){bad++;console.log('FAIL',m)}else console.log('ok',m)};
  const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});

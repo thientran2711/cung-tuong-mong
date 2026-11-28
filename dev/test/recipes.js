@@ -1,7 +1,7 @@
 /* review/recipes (jrcp): sub-styles + books + tastes + repeats + allergy + teacher.
    usage: node dev/test/recipes.js <url of dev/index.html> <W>x<H>@dpr <outdir> <tag> [oldsave.json]
    Prints one JSON line: per step overflowX + clipped leaf text, checks, page errors. Screenshots <outdir>/<tag>-<step>.jpg */
-const {chromium}=require('playwright');const fs=require('fs');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');
 const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});
 (async()=>{const b=await chromium.launch();
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),reducedMotion:'reduce',serviceWorkers:'block'});

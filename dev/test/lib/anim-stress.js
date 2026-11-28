@@ -1,3 +1,4 @@
+require('./bigpage');/* HARNESS-BIGPAGE (KK63): page bodies > 4 MB never go through route.fulfill */
 /* dev/test/lib/anim-stress.js — ORDER #8 ANIM-STRESS (owner OD 23/11 ~23:10Z; TEST-ONLY, DEFAULT-OFF, NO NEW ART).
    Injects N synthetic LIVE figures (today's real full-body pictures from the image CDN) into the running game page, in one of three formats:
      css     two CSS-transform layers per figure on the existing webp (whole body = idle breath; lower body clip = sleeve sway) — compositor only

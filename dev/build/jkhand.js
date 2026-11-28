@@ -48,9 +48,7 @@ function kitHandLongOff(g){try{g.__khLong=kitHandSig(g);g.__khSig="";g.classList
  const dl=g.closest(".dlg");if(dl){dl.querySelectorAll(":scope>.khplate,:scope>.khconf").forEach(e=>e.remove());dl.classList.remove("khdlg");if(dl.classList.contains("kstage")&&typeof kstgOff==="function")kstgOff(dl);if(typeof kszLiveRepick3==="function")kszLiveRepick3(dl)}}catch(e){console.error("kitHandLongOff",e)}}
 /* the details plate: the kit «!» card clone (jopic kitOptInfo form), in the frame, just above the hand, never over the speaker's figure column */
 function kitHandPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg");if(!dl)return;let z=dl.querySelector(":scope>.khplate");if(!z){z=document.createElement("div");z.className="khplate";z.setAttribute("role","status");dl.appendChild(z)}
- const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
- c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *")&&!(r.querySelector(".krv")||{}).textContent)r.remove()});
- ["--kx","--ky","--kr","--k3s","min-height"].forEach(p=>c.style.removeProperty(p));c.classList.remove("kopt","kart","klift","kfdown");c.classList.add("kopinfo");if(b.disabled)c.classList.add("khlock");c.disabled=true;c.type="button";c.removeAttribute("data-m");c.removeAttribute("data-khi");
+ const c=kitOptCopy(b);/* KIT §6.2o K-HAND-MAT (KK63): the one read-only copy (jopic) — every Được AND Mất row of the card, never the locked-card hiding */
  const tip=document.createElement("div");tip.className="khtip";tip.textContent=b.disabled?"":"Bấm ✓ để chọn lá này · ✕ để đặt lại";z.innerHTML="";z.appendChild(c);if(tip.textContent)z.appendChild(tip);
  const D=dl.getBoundingClientRect(),G=g.getBoundingClientRect(),fig=dl.querySelector(".kszfig,.spk>.pfwrap,.spk>figure"),hd=dl.querySelector(":scope>.kph");
  let l=Math.max(D.left+8,G.left),r=Math.min(D.right-8,G.right);const lift=parseFloat(getComputedStyle(g).getPropertyValue("--khlift"))||0;

@@ -4,7 +4,7 @@
    Starts a life, gives her the identity, rank Thường tại, 20 tuổi, bare face, at home with her maid; waits for the pictures;
    saves a PNG of the stage (device pixels) + JSON with each stage figure's rect, src, natural size and computed filter/animation/transform.
    face-sharp-cmp.py then compares each figure's head crop with the source picture resampled to the same size (sharpness ratio). */
-const {chromium}=require('playwright');const fs=require('fs');const [,,URL,SZ,OUT,TAG,ID0,CSS]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,URL,SZ,OUT,TAG,ID0,CSS]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
 const ID=ID0||'consort:c30';
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'},args:['--ignore-certificate-errors'].concat(process.env.GPU?['--enable-gpu-rasterization','--force-gpu-rasterization','--ignore-gpu-blocklist','--use-angle=swiftshader','--enable-unsafe-swiftshader']:[])}:{});const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:+(DPR||1),serviceWorkers:'block'});
  const LOC=process.env.LOCAL_IMG;if(LOC)await ctx.route(/ctm-img\.victoria-tntt\.workers\.dev\/img\/[^?]*/,async r=>{const f=LOC+'/'+r.request().url().split('/img/')[1].split('?')[0];if(fs.existsSync(f))return r.fulfill({path:f,headers:{'access-control-allow-origin':'*','content-type':f.endsWith('.json')?'application/json':'image/webp'}});return r.continue()});

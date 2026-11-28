@@ -2,7 +2,7 @@
    node dev/test/selx-flow.js <worktree> <outdir OUTSIDE git> [scale 1|2]
    per device (Fold 755x1000, iPad 1180x820): key-beat shots <dev>-NN-<beat>.png (a new card title / a scene / a result card) + <dev>.webm (Playwright recordVideo).
    Then: ffmpeg -i <dev>.webm <dev>.mp4 and setpts=0.5*PTS for the 2× copy (done here when ffmpeg exists). Shots and videos never in git (OD:L203). */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),cp=require('child_process');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path'),cp=require('child_process');
 const WT=process.argv[2],OUT=process.argv[3],SCALE=+(process.argv[4]||1);const ROOT=path.join(WT,'dev');fs.mkdirSync(OUT,{recursive:true});
 const DEV0={fold:{width:755,height:1000},ipad:{width:1180,height:820}};const DEV=Object.fromEntries(Object.entries(DEV0).filter(([k])=>!process.argv[5]||process.argv[5].split(',').includes(k)));
 const TXL=new Set();let HIDDEN=0;(async()=>{const b=await chromium.launch();

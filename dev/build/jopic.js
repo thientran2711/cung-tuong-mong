@@ -415,10 +415,20 @@ function kitOptTier(g){try{if(g.classList.contains("khand"))return;/* KIT §101:
  g.__kotW=Math.round(g.clientWidth);g.__kotSig=kitOptTierSig(g,bs);if(again&&typeof kitOdRefit==="function")kitOdRefit(bs);/* KIT §6.2b-1: the trial layouts moved every title row; fit the meters on the final one (when the last trial was the picked layout the meters were just fitted on it: no refit) */return pick.join("")}catch(e){g.__kotBusy=0;console.error("kitOptTier",e)}}
 window.kitOptTier=kitOptTier;window.kitOptCards=kitOptCards;
 /* "!" on a card: the full card (every row, lead text) in an overlay; tap anywhere closes; the option is NOT chosen */
+/* KIT §6.2o K-HAND-MAT (KK63, TMK-WARN F seat s21e, laws 3 + 9 + 11): ONE copy builder for every read-only copy of an option card — the hand plate
+   (jkhand kitHandPlate) and the «!» overlay (kitOptInfo). The copy shows the card's SOURCE rows (folded ones unfolded; kitOptFinal's own .kdup / .kfill
+   copies dropped so nothing prints twice). ROOT of the lost Mất rows: the copy is a disabled button (it must not be pressed), and the locked-card rule
+   (j63 «button.ka:disabled .kr-mat / .kr-kem / .kr-bai {display:none}») hid EVERY Mất / Kèm / Bại row on it — the player read only Được on a card
+   whose model held 5 Mất rows («Nhận bạc, làm tai mắt»). Now the copy is .kopinfo (exempt from that rule) and only a copy of a LOCKED card
+   (disabled / .kdis) carries .khlock, which keeps the locked look. A no-roll card's Bại row is a certain loss: it is labelled Mất, as on the card. */
+function kitOptCopy(b){const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
+ c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *")&&!(r.querySelector(".krv")||{}).textContent)r.remove()});
+ if(!b.querySelector(".kat .kodds"))c.querySelectorAll(".kr-bai > .krl").forEach(l=>{l.textContent="Mất"});
+ ["--kx","--ky","--kr","--k3s","min-height"].forEach(p=>c.style.removeProperty(p));c.classList.remove("kopt","kart","klift","kfdown");c.classList.add("kopinfo");if(b.disabled||b.classList.contains("kdis"))c.classList.add("khlock");
+ c.disabled=true;c.type="button";c.removeAttribute("data-m");c.removeAttribute("data-khi");return c}
+window.kitOptCopy=kitOptCopy;
 function kitOptInfo(b){try{let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
- const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
- c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *"))r.remove()});
- c.classList.remove("kopt","kart");c.classList.add("kopinfo");c.disabled=true;c.style.removeProperty("min-height");c.type="button";z.innerHTML="";z.appendChild(c);z.insertAdjacentHTML("beforeend",kitOvX("kpinfo"));z.hidden=false}catch(e){console.error(e)}}
+ const c=kitOptCopy(b);z.innerHTML="";z.appendChild(c);z.insertAdjacentHTML("beforeend",kitOvX("kpinfo"));z.hidden=false}catch(e){console.error(e)}}
 window.kitOptInfo=kitOptInfo;
 document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kobang");if(!m)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitOptInfo(m.parentElement)}catch(x){}},true);
 

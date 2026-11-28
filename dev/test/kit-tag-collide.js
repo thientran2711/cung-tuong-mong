@@ -1,7 +1,7 @@
 /* kit-tag-collide.js — KIT 33.10 (KK28, FOREMAN D kit request «two figure name labels overlap at the left edge», every stage): no two stage name labels overlap, on every origin x place x plate/plain state
    (stage kit rule kitTagCollide), and a FORCED collision (the 2nd figure token dragged onto the 1st) is resolved by the rule and stays inside the stage.
    usage: node dev/test/kit-tag-collide.js <index.html> [WxH,..] [origins]   env PLACES=home,vuon,.. SHOT=<dir>   Exit 1 on an overlapping pair. */
-const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,SIZES,ORIG]=process.argv;const html=fs.readFileSync(SRC);const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const [,,SRC,SIZES,ORIG]=process.argv;const html=fs.readFileSync(SRC);const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const rows=[];let tot=0,ov=0;
  for(const sz of (SIZES||'1180x820,755x1000').split(',')){const [W,H]=sz.split('x').map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:W<1100,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce',ignoreHTTPSErrors:true});

@@ -2,7 +2,7 @@
    Opens every PEND dialog builder (with a rival / an inventory item / nothing as parameter), plus a news card and the gift dialogs,
    and checks the left picture. FAIL when a dialog shows an ev-trieu-chinh picture while its own id is not mapped to the court category.
    usage: node dev/test/dialog-art.js <url of a build page> [WxH] → JSON {checked, fallback:[ids], court:[ids], errs}; exit 1 on any fallback. */
-const {chromium}=require('playwright');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));
 const [,,BASE,SZ]=process.argv;const [W,H]=(SZ||'755x1000').split('x').map(Number);
 (async()=>{const b=await chromium.launch(process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{});
  const ctx=await b.newContext({viewport:{width:W,height:H},reducedMotion:'reduce',ignoreHTTPSErrors:true,serviceWorkers:'block'});

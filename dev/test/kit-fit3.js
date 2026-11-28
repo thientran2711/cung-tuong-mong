@@ -1,7 +1,7 @@
 /* kit-fit round 3 — (1) Luân hồi origin cards span the background width; (2) face picker has no tabs, face set chosen by the game.
    usage: node dev/test/kit-fit3.js <url> <outdir> [WxH,...]   shots go to <outdir> (scratch, never git); prints measurements + violations.
    CDN pictures cached under <outdir>/cdn. */
-const {chromium}=require('playwright');const fs=require('fs'),path=require('path');const sleep=t=>new Promise(r=>setTimeout(r,t));
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs'),path=require('path');const sleep=t=>new Promise(r=>setTimeout(r,t));
 const [,,PURL,OUT,SZS]=process.argv;const SIZES=(SZS||'1180x820,1366x1024,755x1000,412x1058,390x844').split(',');fs.mkdirSync(OUT+'/cdn',{recursive:true});
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});let bad=0;
  for(const SZ of SIZES){const [W,H]=SZ.split('x').map(Number);

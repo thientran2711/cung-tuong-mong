@@ -341,7 +341,7 @@ function cardBtns(host){const out=[];for(let n=host&&host.nextElementSibling;n;n
 const actNm=b=>{const e=b.querySelector(".kan")||b.querySelector("b,strong")||b.firstElementChild||b;let t=txt(e);try{if(typeof kpActName==="function"&&b.querySelector(".kan"))t=kpActName(b.querySelector(".kan"))}catch(_){}return t.slice(0,40)};
 function stripRing(key){const G=PGI[key];if(!G)return;const {items,mk}=G;
  /* her card's own act groups (.pcg[data-g]) = the plaque groups; «Xem» (show her card) leads the first group */
- const actsOf=j=>{const d=document.createElement("div");try{d.innerHTML=mk(j)}catch(e){}let k=0;const see={id:"see",n:"Xem",word:"",ton:""};
+ const actsOf=j=>{const d=document.createElement("div");try{d.innerHTML=mk(j)}catch(e){}let k=0;const see={id:"see",n:"Xem",pic:ringActPic("Xem"),word:"",ton:""};
   const G=[...d.querySelectorAll(".pcg")].map(g=>({k:g.dataset.g||String(k),n:g.dataset.g||"",acts:[...g.querySelectorAll("button")].map(b=>({id:"b"+(k++),n:actNm(b),word:"",ton:"",off:!!b.disabled,why:b.disabled?(b.title||""):""}))})).filter(g=>g.acts.length);
   if(!G.length)return [see];G[0].acts.unshift(see);return G};
  let title="";try{title=txt(document.querySelector(`button[data-tab="${typeof tab!=="undefined"?tab:""}"]`))}catch(e){}
@@ -373,7 +373,7 @@ function grpBtnRing(k,at){try{let P=[],go=[],ks=[];
   if(typeof isSrv==="function"&&isSrv())srvColleagues().forEach((s,j)=>{P.push(s);go.push(tabGo(j))});
   else{let j=0;if(S.maid){P.push(S.maid);go.push(tabGo(j++))}(S.staff||[]).forEach(s=>{if(!s||s===S.maid)return;P.push(s);go.push(tabGo(j++))})}}
  if(P.length<1)return false;let title=k;try{title=typeof kgfLab==="function"?kgfLab(k):k}catch(e){}
- const a0=typeof at==="string"?Math.max(0,ks.indexOf(at)):Math.max(0,Math.min(P.length-1,at|0));open({people:P,title,at:a0,acts:()=>[{id:"see",n:"Xem",word:"",ton:""}],onPick:i=>{try{go[i]&&go[i]()}catch(e){console.error(e)}}});return true}catch(e){console.error("kitRing grp",e);return false}}
+ const a0=typeof at==="string"?Math.max(0,ks.indexOf(at)):Math.max(0,Math.min(P.length-1,at|0));open({people:P,title,at:a0,acts:()=>[{id:"see",n:"Xem",pic:ringActPic("Xem"),word:"",ton:""}],onPick:i=>{try{go[i]&&go[i]()}catch(e){console.error(e)}}});return true}catch(e){console.error("kitRing grp",e);return false}}
 document.addEventListener("click",e=>{try{if(!KIT_RING.wire||window.__bot||window.__kringOff||CUR)return;const b=e.target.closest&&e.target.closest('.kgfbtns [data-kgf],#krail [data-rail^="kgf-"],#kshR [data-kc],#kshR [data-k3go],#kgfdrop [data-k3go]');if(!b)return;
  const k=b.dataset.kgf||(b.dataset.rail?b.dataset.rail.slice(4,6):b.dataset.kc?"ct":"cn");if(k!=="cn"&&k!=="ct")return;
  if(b.dataset.kc&&!b.closest("#kshR"))return;
@@ -384,6 +384,11 @@ kitRing.grpBtnRing=grpBtnRing;
 /* KIT §104.2d (KIT REQUEST #11, KK59): a ring OPENER («Lập phe cùng ai · N ›», «Các phe · N ›», the strip «‹ tên · i/n ›») is a door to a list, not an act: it carries data-knav="ring";
    law 3 (Được–Mất) is checked on the plaques the ring drops (each the old button's own Tốn / Được / Mất rows), never on the opener — act scans (gain-empty …) skip [data-knav]. */
 const FA_KINDS=["lap","moi","gach","hop"],FA_LAB={lap:["Lập phe cùng ai","Lập phe"],moi:["Mời người vào phe","Mời vào phe"],gach:["Gạch tên ai","Gạch tên"],hop:["Hợp mưu hạ ai","Hợp mưu"]};
+/* KIT §104.2e PLAQUE PICTURE (KK63, queue (3), MAIN 181 22:40Z: img/ACTS.json on the CDN): a ring plaque shows its OWN act picture (kitActArt → img/act-<key>.webp:
+   «Lập phe» act-ket-minh-h · «Mời vào phe» act-nhan-loi-vao-phe-h · «Gạch tên» act-gach-ten-h · «Hợp mưu» act-hop-muu · «Xem» act-xem-nguoi-h); only a real act picture —
+   a category fallback (act-cat-*) or no key keeps the §59 pending box. */
+function ringActPic(n){try{const a=typeof kitActArt==="function"&&kitActArt(n);return a&&a.src&&!/\/act-cat-/.test(a.src)?a.src:""}catch(e){return""}}
+kitRing.actPic=ringActPic;
 if(typeof facHTML==="function"){const fh0=facHTML;facHTML=window.facHTML=function(){let h=fh0.apply(this,arguments);try{if(!KIT_RING.wire||window.__bot||window.__kringOff)return h;
  FA_KINDS.forEach(kind=>{const re=new RegExp(`<button data-fa="${kind}" data-fv="([^"]+)"[^>]*>[\\s\\S]*?<\\/button>`,"g");const n=(h.match(re)||[]).length;if(!n)return;let first=true;
   h=h.replace(re,(m)=>{const hid=m.replace("<button ","<button hidden data-kring-fh ");if(first){first=false;return `<button type="button" class="kbtn" data-knav="ring" data-kring-fa="${kind}">${FA_LAB[kind][0]} · ${n} ›</button>`+hid}return hid})});
@@ -394,7 +399,7 @@ if(typeof facHTML==="function"){const fh0=facHTML;facHTML=window.facHTML=functio
  document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kring-fa]");if(!b)return;e.preventDefault();e.stopPropagation();const kind=b.dataset.kringFa;
   const B=[...document.querySelectorAll(`button[data-kring-fh][data-fa="${kind}"]`)];const P=B.map(x=>{const id=x.dataset.fv;return(rivals||[]).find(v=>String(v.id)===String(id))});
   const ok=B.filter((x,i)=>P[i]);const PP=P.filter(Boolean);if(!PP.length)return;
-  open({people:PP,title:txt(b).replace(/ · \d+ ›$/,""),at:0,acts:x=>{const o=ok[x.i];const sm=txt(o.querySelector("small"));return [{id:"go",n:FA_LAB[kind][1],word:"",ton:"",info:sm,off:!!o.disabled,why:o.disabled?"Hết khắc buổi này":""}]},
+  open({people:PP,title:txt(b).replace(/ · \d+ ›$/,""),at:0,acts:x=>{const o=ok[x.i];const sm=txt(o.querySelector("small"));return [{id:"go",n:FA_LAB[kind][1],pic:ringActPic(FA_LAB[kind][1]),word:"",ton:"",info:sm,off:!!o.disabled,why:o.disabled?"Hết khắc buổi này":""}]},
    onPick:i=>{const o=ok[i];if(o&&!o.disabled)o.click()}})},true);
  document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kring-fac]");if(!b)return;e.preventDefault();e.stopPropagation();
   const F=((S&&S.facs)||[]).filter(f=>document.querySelector(`button[data-kring-fh][data-ff="${f.id}"]`));if(!F.length)return;

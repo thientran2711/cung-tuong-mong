@@ -1,4 +1,4 @@
-const {chromium}=require('playwright');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1180,height:820}})).newPage();
 await p.route('**/pixi.min.js',r=>r.fulfill({path:process.env.PIXI,contentType:'application/javascript'}));
 await p.goto('http://localhost:8941/'+(process.env.PG||'t-seasons.html'));await p.waitForTimeout(2000);await p.click('[data-new]');await p.waitForTimeout(3000);

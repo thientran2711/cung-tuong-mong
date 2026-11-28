@@ -3,7 +3,7 @@
    hooks (data-tgo slots/past/opt, jcooplobby .kco, jrank [data-krk-open]), then Chọn sổ: #slots .kslot rows, [data-load], [data-new],
    [data-kcs]; and slotWho names the kc / kd lives (the old #slots .slot text patches are gone).
    usage: node dev/test/title-stale-sel.js <index.html path> <shot dir> [WxH@dpr,…]   (default 755x1000@2,1180x820@2). Exit 1 on a failed check. */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const https=require('https');
+const {chromium}=(require('./lib/bigpage'),require('playwright'));const fs=require('fs');const path=require('path');const https=require('https');
 const [,,FILE,OUT,SIZES]=process.argv;const CLR="document.querySelectorAll('#klife,#kroul,#kroulw').forEach(e=>e.remove())";fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));const LIVE='https://thientran2711.github.io/cung-tuong-mong/';const cache=new Map();
 const live=p=>cache.has(p)?Promise.resolve(cache.get(p)):new Promise(res=>https.get(LIVE+p,r=>{const c=[];r.on('data',d=>c.push(d));r.on('end',()=>{const v={status:r.statusCode,body:Buffer.concat(c),ct:r.headers['content-type']||''};cache.set(p,v);res(v)})}).on('error',()=>res({status:404,body:Buffer.alloc(0),ct:''})));
