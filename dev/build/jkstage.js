@@ -167,12 +167,17 @@ function kstgPlate(b){try{const g=b.parentElement,dl=g&&g.closest(".dlg.kstage")
   const r=L0.call(this,g,dl&&dl.classList.contains("kstage")?true:quiet);/* the stage owns the frame: the frame-fit passes (kszEvLaw10 / kszTextFirst3) do not run on it */
   try{if(dl&&dl.classList.contains("kstage")){if(!kstgWants(dl)){kstgOff(dl)}else{kstgPlace(dl);const L=g.querySelector(":scope>button.klift");if(L)kstgPlate(L)}}}catch(e){}return r};window.kitHandLay=kitHandLay;
  if(typeof kitHandPlate==="function"){const P0=kitHandPlate;kitHandPlate=function(b){const r=P0.apply(this,arguments);kstgPlate(b);return r};window.kitHandPlate=kitHandPlate}})();
+/* COOP-QCARD (RV-173, law 11): body.kscn-on has TWO owners — this stage (a #modal dialog drawn as a stage) and the kit scene layer (kitScene, jkitsel
+   §93: the selection days, the ring screens). The stage dropped it whenever #modal was hidden or repainted, even while a kit scene was still playing:
+   the mood seal (.kemo-big) popped over the scene and every check that reads «a scene is up» (body.kscn-on) saw none. The stage now lets it go only
+   when no kit scene is open. */
+function kstgScnOff(){try{if(typeof kitScene==="object"&&kitScene&&kitScene.cur)return;document.body.classList.remove("kscn-on")}catch(e){}}
 function kstgOff(dl){try{dl.classList.remove("kstage","kstalk","kspick");if(dl.__kstT){try{dl.__kstT.P&&dl.__kstT.P.destroy()}catch(e){}dl.__kstT=null}/* KK35: a talk's thẻ gỗ never outlive the stage */["--kstL","--kstT","--kstW","--kstH"].forEach(p=>dl.style.removeProperty(p));dl.querySelectorAll(":scope>.kstg-bg,:scope>.kstg-veil,:scope>#mb>.kstg-fig").forEach(e=>e.remove());
- const M=document.getElementById("modal");if(M)M.classList.remove("kstg");document.body.classList.remove("kscn-on")}catch(e){}}
+ const M=document.getElementById("modal");if(M)M.classList.remove("kstg");kstgScnOff()}catch(e){}}
 /* a closed / replaced dialog leaves no stage classes behind (the next frame decides again) */
-(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){try{const M=document.getElementById("modal");if(M){if(M.hidden)M.__kstFresh=1;M.classList.remove("kstg");document.body.classList.remove("kscn-on")}}catch(e){}return s0.apply(this,arguments)};window.showModal=showModal;
+(function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){try{const M=document.getElementById("modal");if(M){if(M.hidden)M.__kstFresh=1;M.classList.remove("kstg");kstgScnOff()}}catch(e){}return s0.apply(this,arguments)};window.showModal=showModal;
  let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(()=>{document.querySelectorAll("#modal .dlg.kstage").forEach(dl=>{kstgOn(dl);const g=dl.querySelector(".opts.khand");if(g){g.__khSig="";kitHandLay(g,true)}})},140)})})();
-(function(){const M=document.getElementById("modal");if(!M||typeof MutationObserver!=="function")return;new MutationObserver(()=>{if(M.hidden){M.classList.remove("kstg");document.body.classList.remove("kscn-on")}}).observe(M,{attributes:true,attributeFilter:["hidden"]})})();
+(function(){const M=document.getElementById("modal");if(!M||typeof MutationObserver!=="function")return;new MutationObserver(()=>{if(M.hidden){M.classList.remove("kstg");kstgScnOff()}}).observe(M,{attributes:true,attributeFilter:["hidden"]})})();
 /* ===== §102.2 DIALOGUE ON THE STAGE (owner 25/11 ~22:00Z «làm luôn cái khung sự kiện đối thoại. Là đối thoại xong rồi có các cái option chọn bằng cái thẻ gỗ»;
    24/11 ~15:15Z: odds choices = cards (đỏ đen), a talk between people = the conversation look: speaker left, her answers right).
    ONE rule: a stage frame whose choices carry NO odds (no kit odds meter on any card; Q item talk:1 / talk:0 overrides) is a DIALOGUE:

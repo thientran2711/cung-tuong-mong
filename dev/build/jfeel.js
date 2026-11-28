@@ -261,7 +261,7 @@ function feelDo(p,r){const me=p===S,F=fB().act.fx[r.k];if(!F)return window.eaDo(
  case"caugat":{const L=eaH().staffOf(p);if(!L.length)return null;const m=L[Math.floor(Math.random()*L.length)];eaH().loyAdd(m,-F.loy);if(me)add(`thiện cảm ${m.name||"cung nhân"} −${F.loy}`);try{emoEv(m,"loyalDown","bị chủ nhân cáu gắt")}catch(e){}
   h=me?`Trong lòng bực bội, chuyện nhỏ cũng khiến ngươi cáu gắt với ${m.name||"cung nhân"}.`:`${emoName(p)} cáu gắt với người hầu.`;break}
  case"ngoithu":pay({suc:-F.suc});h=me?"Chuyện vừa qua làm ngươi choáng váng, cứ ngồi thừ người, ai gọi cũng chẳng nghe.":`${emoName(p)} ngồi thừ người, ai gọi cũng chẳng nghe.`;break;
- case"khoetai":pay({danh:F.danh});try{if(me)ghenAll(F.ghen);else for(const x of liveRivals(true))if(x!==p&&x.alive)oanAdd(x,p,F.oan)}catch(e){}if(me)add(`kẻ ganh ghen +${F.ghen}`);
+ case"khoetai":pay({danh:F.danh});try{if(me)ghenAll(F.ghen);else for(const x of liveRivals(true))if(x!==p&&x.alive)oanAdd(x,p,F.oan)}catch(e){}if(me)add(`kẻ ganh ghen +${ghenN(F.ghen)}`);
   h=me?"Tự tin đầy lòng, ngươi đàn một khúc trước các phi tần; tiếng khen lẫn tiếng xì xào đều có.":`${emoName(p)} khoe tài trước các phi tần.`;break;
  case"treo":{const t=eaH().rival(p);if(t){target=t;try{affAdd(t,p,-F.rel)}catch(e){}if(me)add(`${Nm2(t)} thiện cảm −${F.rel}`)}
   else{pay({danh:-F.danh})}/* TEMPER-OUTBURST: the staff laugh either way (Lòng +); no rival near → she loses face (Danh −) */for(const m of eaH().staffOf(p))eaH().loyAdd(m,F.loy);if(me&&eaH().staffOf(p).length)add(`lòng cung nhân +${F.loy}`);
