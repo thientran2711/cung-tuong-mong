@@ -756,3 +756,8 @@ WORKLIST row 36 Wording/hint batch (F-WORD36: odds wording 43, WORDING-GAIN 53, 
 WORKLIST row 36 F-WORD36 | review/f-word36* | session_01UV1SzhBbNMEZ8pDWiqdaFJ (sonnet, Foreman F ROOT 8) | RUNNING | 28/11 07:27Z
 ALLOT-PACE-3 (finish allot-pace-r2 gates, successor of ALLOT-PACE-2) | review/allot-pace-r2 | session_01PEhRbuUnuv3S5Duzh9rAtx | RUNNING | 28/11 07:33Z Foreman C
 REVIEW review/f-word36-bac b130a911 (row 36 kit-bac-progress) | dev/handover/reports/f-word36.md | session_01UV1SzkyYwDbvP1FwpiC8ox (sonnet F-WORD36-RV, Foreman F ROOT 8) | RUNNING | 28/11 07:34Z
+ROW 9 nết thresholds + behaviour | review/row9-net (opus; MAIN 187 order 07:30Z) | (opening, Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
+ROW 26 talking to others' people | review/row26-talk (opus; MAIN 187 order 07:30Z) | (opening, Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
+ROW 12 leave-palace rest + removal ladder | review/row12-leave (opus; MAIN 187 order 07:30Z) | (opening, Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
+ROW 11 law-1 audit | review/row11-law1 (opus; MAIN 187 order 07:30Z) | (opening, Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
+ROWS 4+22 THIN P4/P6 + road dialogue | review/thin-p4p6 (opus; MAIN 187 order 07:30Z) | (opening, Foreman B ROOT 3 child 1) | RUNNING | 28/11 07:55Z
