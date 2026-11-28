@@ -768,7 +768,6 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lazy5-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-lazy5-moments.md"
-<<<<<<< HEAD
   },
   {
    "life": "E-S8-bd_san-R7-skilled5",
@@ -789,8 +788,6 @@
    "exitPick": null,
    "review": "dev/handover/robot/review/E-S8-bd_san-R7-skilled5-review.md",
    "moments": "dev/handover/robot/review/E-S8-bd_san-R7-skilled5-moments.md"
-=======
->>>>>>> e655ad96c (F c1: s18f evidence)
   }
  ],
  "parked": [
