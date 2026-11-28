@@ -1,0 +1,9 @@
+BUILD PIN: life flight2-s2k on 72883778 62f03c577a1c served at http://127.0.0.1:8817/
+GAME BUILD {"s":"72883778","b":"62f03c577a1c","t":"2026-11-28T11:07Z"}
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (File not found) — /img/kit/ico-download.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (File not found) — /%23n
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (File not found) — /%23n
+PAGE CONSOLE error: Failed to load resource: the server responded with a status of 404 (Not Found) — /https://ctm-img.victoria-tntt.workers.dev/img/phi-tan-cung-xuan-sang.webp
+PAGE CONSOLE error ×2: Failed to load resource: the server responded with a status of 404 (Not Found) — /https://ctm-img.victoria-tntt.workers.dev/img/ngu-hoa-vien-xuan-sang.webp
+PAGE CONSOLE error ×3: Failed to load resource: the server responded with a status of 404 (Not Found) — /https://ctm-img.victoria-tntt.workers.dev/img/ngu-thu-phong-xuan-sang.webp
+LIFE DONE flight2-s2k Ban hoa age 19 · buổi 1 · taps 60 · dead buttons 0 · stuck 0 · bugs 0

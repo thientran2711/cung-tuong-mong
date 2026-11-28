@@ -1,0 +1,197 @@
+{
+ "trace_tail": [
+  [
+   115,
+   ".kscn «Trâm cài»"
+  ],
+  [
+   115,
+   ".kscn «Tất cả»"
+  ],
+  [
+   115,
+   ".kscn «Lui»"
+  ],
+  [
+   117,
+   "#kg82 «Tất cả 3»"
+  ],
+  [
+   117,
+   "#kg82 «Giữ đồ hôm quamặc như cũ»"
+  ],
+  [
+   118,
+   "#kg82 «Điểm trangĐoan trang: Có cơ · Kiều diễm: Khó lường»"
+  ],
+  [
+   119,
+   "AREA 378,500"
+  ],
+  [
+   119,
+   "SKIP TAP .kmov «» tap"
+  ],
+  [
+   119,
+   ".kmov «Tiếp theo»"
+  ],
+  [
+   121,
+   "GONE Tiếp theo"
+  ],
+  [
+   122,
+   "#kg82 «Đã hiểu»"
+  ],
+  [
+   123,
+   ".dlg «Sân chờ» «Làm quen với tú nữ»"
+  ],
+  [
+   126,
+   "AREA 378,538"
+  ],
+  [
+   126,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   127,
+   "AREA 378,538"
+  ],
+  [
+   127,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   128,
+   ".dlg «Sân chờ» «Ta bắt tú nữ: «Đưa giày đây, giờ còn trò đùa sao?»»"
+  ],
+  [
+   131,
+   ".dlg «Sân chờ» «Đứng yên giữ sức»"
+  ],
+  [
+   134,
+   "AREA 378,538"
+  ],
+  [
+   134,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   135,
+   "AREA 378,538"
+  ],
+  [
+   135,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   136,
+   "AREA 378,538"
+  ],
+  [
+   136,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   137,
+   "AREA 378,538"
+  ],
+  [
+   137,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   138,
+   "AREA 378,538"
+  ],
+  [
+   138,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   139,
+   "AREA 378,538"
+  ],
+  [
+   139,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   140,
+   "AREA 378,538"
+  ],
+  [
+   140,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   141,
+   "AREA 378,538"
+  ],
+  [
+   141,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   142,
+   "AREA 378,538"
+  ],
+  [
+   142,
+   "SKIP TAP .kscn «» tap"
+  ],
+  [
+   144,
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»"
+  ],
+  [
+   145,
+   ".dlg «Thái hậu» «Tay con biết vá may, đồ cũ có thể dùng lại, không »"
+  ],
+  [
+   146,
+   ".dlg «Hoàng thượng» «Cúi đầu chờ xét»"
+  ],
+  [
+   149,
+   ".dlg «Thái hậu» «Thần thiếp khẽ nhờ cung nữ bên cạnh xua giúp, rồi »"
+  ]
+ ],
+ "harness": "7d7c6886",
+ "life": {
+  "id": "Ban hoa",
+  "type": "end",
+  "fate": "Bị ban hoa, xuất cung",
+  "death": false,
+  "age": 19,
+  "year": 1,
+  "rank": 0,
+  "text": "Ngươi về lại phường muối. Năm tháng mặn chát trôi qua, ngươi gả cho người cùng xóm.",
+  "card": [
+   "",
+   "",
+   "",
+   ""
+  ],
+  "duringArea": false,
+  "lastTaps": [
+   "AREA 378,538",
+   "SKIP TAP .kscn «» tap",
+   "AREA 378,538",
+   "SKIP TAP .kscn «» tap",
+   "AREA 378,538",
+   "SKIP TAP .kscn «» tap",
+   "AREA 378,538",
+   "SKIP TAP .kscn «» tap",
+   ".dlg «Điện tuyển» «Quỳ xuống thỉnh an»",
+   ".dlg «Thái hậu» «Tay con biết vá may, đồ cũ có thể dùng lại, không »",
+   ".dlg «Hoàng thượng» «Cúi đầu chờ xét»",
+   ".dlg «Thái hậu» «Thần thiếp khẽ nhờ cung nữ bên cạnh xua giúp, rồi »"
+  ]
+ },
+ "exitPick": null
+}
