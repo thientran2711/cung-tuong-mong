@@ -1,4 +1,5 @@
-# ~86% xong · còn 39 việc không tính hình nhân vật (LIVE 5ad52416)
+# ~86% xong · còn 38 việc không tính hình nhân vật (LIVE 22afefb4)
+Recount MAIN 187 28/11 07:36Z: 22afefb4 lc35-ui (ui6 incl. kk66-ui5 + webkit-lb + tsg-kpk time-spill fix + kit-screenveil + kk67 figplaque) → LIVE; row 23 screen veil closed → 38 open, ~86 %.
 Recount MAIN 186 28/11 05:20Z: row 30 Tốn no-minus verified LIVE (d95b4db4) → struck → 39 open, ~86 %.
 Recount MAIN 186 28/11 05:15Z: 5ad52416 webkit-lb (Safari<16.4 boot play-stopper, all lookbehind → kRx + hard gates) → LIVE; no worklist row → 40 open, ~86 %.
 Recount MAIN 186 28/11 04:55Z (owner asked «đếm việc»): rows 31/40/41 already LIVE → struck; duplicate row 5 line removed; row 5 + 12 partly (title-parity, end-maxrank LIVE) → still 40 open (the 40 already counted them out), ~86 %. Row 30 Tốn no-minus: KK56 d95b4db4 «tốn piece always a cost» is LIVE — verify then strike.
@@ -37,7 +38,7 @@ State: LIVE = on main · partly = some pieces LIVE · open.
 | 19 | coop-thin-g world sync + coop1i week-end deadlock | B, F | partly: coop-clear 7abb60cc, rebirth-stuck 5e013076 LIVE; deadlock open |
 | 21 | Parking-lot rows not built | E | open |
 | 22 | THIN P4/P6/P8 roads | B | partly: P8 LIVE 2fd303aa |
-| 23 | Screen-change veil (kit-screenveil-r1) | VEIL-1 | open: no LIVE trace found |
+| ~~23~~ | ~~Screen-change veil (kit-screenveil-r1)~~ | VEIL-1 | LIVE 22afefb4 (kit-screenveil-rv179 2ea6d28f) |
 | 24 | «Vòng người» ring + ring >7 board (ring-build-7) | RING-BUILD-7 | open: Fold figure ~320px, plaque ✓/✕ via KK51 |
 | 25 | Game-feel / event animation mocks | MOTION | open: MOCK READY, waits sếp |
 | 26 | Talking to others' people → suspicion/trust + greeting | D | open |
