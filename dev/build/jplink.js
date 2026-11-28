@@ -11,7 +11,7 @@ function plkTable(){const M=new Map();const add=(n,o)=>{n=String(n||"").trim();i
  try{if(isKc&&isKc()){(S.kc&&S.kc.fam||[]).forEach(m=>add(m.name,{k:"fam",id:m.id,m}))}
   else{(typeof rivals!=="undefined"?rivals:[]).forEach(v=>add(v.name,{k:"rv",v}));(S.men||[]).forEach(m=>add(m.name,{k:"men",v:m}));(S.staff||[]).forEach(s=>add(s.name,{k:"staff",v:s}))}}catch(e){}
  return M}
-function plkRx(M){const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");const L=[...M.keys()].sort((a,b)=>b.length-a.length);return L.length?new RegExp(`(?<![\\p{L}\\p{M}])(${L.map(esc).join("|")})(?![\\p{L}\\p{M}])`,"gu"):null}
+function plkRx(M){const esc=s=>s.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");const L=[...M.keys()].sort((a,b)=>b.length-a.length);return L.length?kRx(`(?<![\\p{L}\\p{M}])(${L.map(esc).join("|")})(?![\\p{L}\\p{M}])`,"gu"):null}
 function plkPaint(){try{if(!S||!PLK_ACT.includes(tab))return 0;const P=document.getElementById("panel");if(!P)return 0;const M=plkTable(),rx=plkRx(M);if(!rx)return 0;
  const W=document.createTreeWalker(P,NodeFilter.SHOW_TEXT,{acceptNode:n=>{rx.lastIndex=0;if(!rx.test(n.nodeValue))return NodeFilter.FILTER_REJECT;const p=n.parentElement;return p&&p.closest("button,[data-kt],.kact")&&!p.closest(".kplink,.pgwrap,script,style")?NodeFilter.FILTER_ACCEPT:NodeFilter.FILTER_REJECT}});
  const L=[];while(W.nextNode())L.push(W.currentNode);let c=0;
