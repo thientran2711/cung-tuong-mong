@@ -161,6 +161,9 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
     const ill0=x.ill;x.ill={k:"lao",st:2,known:true};const n0=IC.staff;for(let t=0;t<12&&IC.staff===n0;t++){x.ill={k:"lao",st:2,known:true};IC.staffRoad(x,k,x.ill)}/* roll(100) is capped by BAL.odds.hi: retry */out.kinds[k]=IC.staff-n0;x.ill=ill0;if(v){v.bac=vb;v.suc=vs}}
    for(const k of BAL.staffRoad.srv){const x=(by[k==="mama"?"maid":k]||[])[0];if(!x)continue;const b0=x.bac;x.bac=999;const w=IC.staffWay(x,k)[0];out.ways[k]=w;if(w==="ty")out.srvTy++;if(w==="cau")out.srvCau++;x.bac=b0}
    {const x=(by.man||by.guard||by.physician||[])[0];if(x){const b0=x.bac;x.bac=999;const [w,c]=IC.staffWay(x,KIT_FACEFX.kind(x));out.courtTy={w,c:c.bac};x.bac=b0}}
+   /* the monthly path itself: jface fxIllMonth reaches the road (not only a direct call) */
+   {const x=(by.maid||by.eunuch||[])[0];out.month=0;if(x){const keep={ill:x.ill,alive:x.alive};const own=typeof ownerOf==="function"?ownerOf(x):null;const st=own&&own.staff?own.staff.slice():null;const n0=IC.staff;
+     for(let t=0;t<12&&IC.staff===n0;t++){x.ill={k:"lao",st:2,known:false};x.alive=true;fxIllMonth(x);if(own&&st)own.staff=st.slice()}out.month=IC.staff-n0;Object.assign(x,keep)}}
    BAL.illCure.npc=0;{const x=(by.maid||[])[0];if(x){x.ill={k:"lao",st:2,known:true};const n0=IC.staff;for(let i=0;i<50;i++)IC.staffRoad(x,"maid",x.ill);out.off=IC.staff-n0;x.ill=null}}
    BAL.illCure.npc=100;
    /* NPC mother pays her kid road and the child gains */
@@ -173,6 +176,7 @@ const card=p=>p.evaluate(()=>{const m=document.querySelector('#modal');return m&
    return out});
   const nk=Object.keys(r5.kinds);
   ok(nk.length>=4&&nk.every(k=>r5.kinds[k]===1),`r5 every NPC group that falls ill takes a road at BAL.illCure.npc (law 1): ${JSON.stringify(r5.kinds)}`);
+  ok(r5.month===1,`r5 the monthly illness roll (jface fxIllMonth) takes the servant's road itself ${r5.month}`);
   ok(['maid','eunuch'].every(k=>r5.kinds[k]===1),`r5 cung nữ + thái giám have the road ${JSON.stringify(r5.kinds)}`);
   ok(!r5.srvTy&&!r5.srvCau&&Object.keys(r5.ways).length>=2,`r5 servants never summon a thái y / plead with Sủng, even with bạc (her cung nữ roads) ${JSON.stringify(r5.ways)}`);
   ok(r5.courtTy&&r5.courtTy.w==="ty"&&r5.courtTy.c===-40,`r5 a courtier with bạc summons a thái y at the same price (BAL.illCure.tyBac) ${JSON.stringify(r5.courtTy)}`);
