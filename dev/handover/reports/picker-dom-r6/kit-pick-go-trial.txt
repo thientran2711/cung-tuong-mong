@@ -1,0 +1,11 @@
+fold grid_bieuqua ok  pager {"overGo": 0, "lab0": "trang 1/12", "turned": true} dead []
+fold grid_tangqua ok  pager {"overGo": 0, "lab0": "trang 1/55", "turned": true} dead []
+fold grid_dangqua ok  pager {"overGo": 0, "lab0": "trang 1/33", "turned": true} dead []
+fold grid_dangtha SKIP picker did not open / no tile pager null dead None
+fold grid_plant ok  pager {"overGo": 0, "lab0": "trang 1/54", "turned": true} dead []
+ipad grid_bieuqua ok  pager {"overGo": 0, "lab0": "trang 1/12", "turned": true} dead []
+ipad grid_tangqua ok  pager {"overGo": 0, "lab0": "trang 1/55", "turned": true} dead []
+ipad grid_dangqua ok  pager {"overGo": 0, "lab0": "trang 1/33", "turned": true} dead []
+ipad grid_dangtha ok  pager {"overGo": 0, "lab0": "trang 1/17", "turned": true} dead []
+ipad grid_plant ok  pager {"overGo": 0, "lab0": "trang 1/54", "turned": true} dead []
+dlg-dead-scan: 10 cases, 0 FAIL

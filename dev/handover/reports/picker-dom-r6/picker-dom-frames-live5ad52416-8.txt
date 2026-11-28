@@ -1,0 +1,9 @@
+ok   755x1000 giftto chest 5 (81 entries, turned): LIVE [dlg kdscroll kdtx kgiftdlg kpsc] · branch p1 dlg kdnopic kdscroll kgiftdlg kpsc · p2 dlg kdnopic kdscroll kgiftdlg kpsc · pagerOverTiles 0 · tiles in view 5/5 · LIVE short (0 whole clear tiles) → stepped frame allowed
+ok   755x1000 tsgiftpick-it chest 5 (2 entries): LIVE [dlg kpsc ksz3 kszf kszlive] · branch p1 dlg kpsc ksz3 kszf kszlive · pagerOverTiles 0 · tiles in view 1/1
+ok   755x1000 giftto chest 30 (105 entries, turned): LIVE [dlg kdscroll kdtx kgiftdlg kpsc] · branch p1 dlg kdnopic kdscroll kgiftdlg kpsc · p2 dlg kdnopic kdscroll kgiftdlg kpsc · pagerOverTiles 0 · tiles in view 5/5 · LIVE short (0 whole clear tiles) → stepped frame allowed
+ok   755x1000 tsgiftpick-it chest 30 (2 entries): LIVE [dlg kpsc ksz3 kszf kszlive] · branch p1 dlg kpsc ksz3 kszf kszlive · pagerOverTiles 0 · tiles in view 1/1
+ok   1180x820 giftto chest 5 (81 entries, turned): LIVE [dlg kdscroll kdtx kgiftdlg kpsc] · branch p1 dlg kdnopic kdscroll kgiftdlg kpsc · p2 dlg kdnopic kdscroll kgiftdlg kpsc · pagerOverTiles 0 · tiles in view 5/5 · LIVE short (0 whole clear tiles) → stepped frame allowed
+ok   1180x820 tsgiftpick-it chest 5 (2 entries): LIVE [dlg kpsc ksz3 kszf kszlive] · branch p1 dlg kdnopic kpsc ksz3 kszf kszlive · pagerOverTiles 0 · tiles in view 1/1 · LIVE short (0 whole clear tiles) → stepped frame allowed
+ok   1180x820 giftto chest 30 (105 entries, turned): LIVE [dlg kdscroll kdtx kgiftdlg kpsc] · branch p1 dlg kdnopic kdscroll kgiftdlg kpsc · p2 dlg kdnopic kdscroll kgiftdlg kpsc · pagerOverTiles 0 · tiles in view 5/5 · LIVE short (0 whole clear tiles) → stepped frame allowed
+ok   1180x820 tsgiftpick-it chest 30 (2 entries): LIVE [dlg kpsc ksz3 kszf kszlive] · branch p1 dlg kdnopic kpsc ksz3 kszf kszlive · pagerOverTiles 0 · tiles in view 1/1 · LIVE short (0 whole clear tiles) → stepped frame allowed
+picker-dom-frames PASS 8/8
