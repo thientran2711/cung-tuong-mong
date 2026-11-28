@@ -322,6 +322,12 @@ function taintItem(p,ix,tk){const e=p.inv[ix],T=TAINT[tk];if(!e||!T||!T.on.inclu
 /* receiving: people's tastes */
 function giftVal(it,r){const base=it.gv||Math.round(it.pr/12)+2;/* items without a tg list (jeitem home pieces) like no one (title-sys2 fix: the gift bag threw) */if(!Array.isArray(it.tg))it=Object.assign({},it,{tg:[]});const like=r==="emp"?(it.tg.includes("emp")||((it.k==="nghien"||it.k==="dancoc")&&(has("trongtai")||has("chamchinh")))):r==="th"?it.tg.includes("th"):r&&r.queen?it.tg.includes("hh"):it.tg.includes("rv");return like?base:Math.round(base/3)}
 function giftRel(it,r){return giftVal(it,r)+BAL.eff.j8.giftRelPlus}/* ONE gift regard number (law 4) */
+/* d-giftin-like (law 1 mirror of d19 jrcv): what the GIVER gains when the receiver KEEPS a gift = {r: relAdd liking, hh: the giver's hh}.
+   ONE reader for giveTo (her / an NPC giving) and every NPC→her gift card (PEND.giftin / pgin): the card carries it as pp.kg and pays it only on
+   her keeping answer (Nhận · Thái y finds nothing); «Trả lại quà» pays only go_2, a found taint only the evidence. Old saved cards have no kg
+   (their liking was already added when sent) → nothing is paid twice. */
+function giftKeepOf(r,e,g,gr){if(g==null){const it=Object.assign({k:e.k},itm(e.k));g=giftVal(it,r);gr=giftRel(it,r)}if(!isFinite(gr))return null;return{r:gr,hh:r&&(r.queen||(r===S&&S.rank>=7))&&isFinite(g)?g:0}}
+function giftKeepGo(a,r,kg){if(!kg||!a||!r)return;relAdd(a,r,kg.r);if(kg.hh)ap(a,{hh:kg.hh})}
 /* K-GIFT-OUT (KK64, KIT-KRI-XL leftovers 2+3): giveTo.out = what really became of the piece — take (kept by the receiver) · sent (to her, she answers in «Quà tặng») · back (handed back to the giver) · found (Thái y check found the taint) · caught (taint seen / fake ngự dụng punished). The result seal and «Lễ làm lành» read THIS, never the log lines. */
 function giveTo(a,r,ix){giveTo.out=null;const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint=e.t?1:0;const it=itm(e.k);a.inv.splice(ix,1);e.w=0;const g=giftVal(Object.assign({k:e.k},it),r);
  if(r==="emp"){ap(a,{sung:Math.max(1,Math.round(g/2))});giveTo.out="take";if(e.t==="gia"||e.t==="trom"){ap(a,{sung:-20});punish(a,"dâng đồ ngự dụng giả mạo",2);giveTo.out="caught"}return `${NMc(a)} dâng ${it.n} lên Hoàng thượng. ${sgOf(a,Math.max(1,Math.round(g/2)))}. `}
@@ -331,8 +337,9 @@ function giveTo(a,r,ix){giveTo.out=null;const e=a.inv[ix];if(!e||e.h)return"";wi
  /* d19-gift-npc (law 3 + 6c): the receiver's liking (and the oán it mends, relAdd) comes only with a gift she KEEPS; a gift sent back
     («Trả lại quà») or exposed («found») gives the giver nothing but its own answer (jrcv) — before, the liking was added first, so a returned
     piece came home AND still bought thiện cảm + eased oán */
- const keepGain=()=>{relAdd(a,r,gr);if(r.queen||(r===S&&S.rank>=7))ap(a,{hh:g})};
- if(r===S){giveTo.out="sent";keepGain();pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");return `${a.name} sai người mang ${it.n} sang tặng ngươi. `}
+ const kg=giftKeepOf(r,ent,g,gr),keepGain=()=>giftKeepGo(a,r,kg);
+ /* d-giftin-like: to HER the gain waits for her answer (pp.kg, PEND.giftin), as for an NPC receiver below — before, keepGain ran here, so her «Trả lại quà» still left the giver's liking + eased oán */
+ if(r===S){giveTo.out="sent";pushDil(mkP("giftin",{f:key(a),e:ent,kg}),"Quà tặng");return `${a.name} sai người mang ${it.n} sang tặng ngươi. `}
  /* RECEIVER CHOICE (jrcv rcvGiftIn, OD 18/11 ~21:15Z law 1): the NPC answers with HER giftin answers, the same numbers */
  const ans=typeof rcvGiftIn==="function"?rcvGiftIn(a,r,ent):null;
  if(ans==="back"){giveTo.out="back";return `${r.name} trả lại ${it.n} cho ${NM(a)}. `}
@@ -613,11 +620,11 @@ PEND.taintpick=p=>{const e=S.inv[p.ix];if(!e)return null;const L=Object.entries(
 PEND.evpick=p=>({t:"<p>Tập chứng cứ này nói về ai?</p>",o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>log(useItem(S,p.ix,v))})).concat([{n:"Thôi",fx:{}}])});
 PEND.itarget=p=>({t:`<p>Dùng ${itm(p.k).n} với ai?</p>`,o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>{spend(BAL.btn.itemUse.k);log(useItem(S,p.ix,v))}})).concat([{n:"Thôi",fx:{}}])});
 PEND.shop=()=>({who:pEunCourt("ped"),t:"<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho ngươi chọn: “Đồ mới mang vào, xin "+kSay({srv:"m"},S,"{goi}")+" xem qua.”</p>",o:S.shop.map(k=>({n:iic(k,20)+itm(k).n,fx:{bac:-itm(k).pr},x:`${itm(k).kd} · ${itm(k).d}`,go:()=>{invAdd(S,{k});log(`Mua ${itm(k).n}.`)}})).concat([{n:"Thôi",fx:{}}])});
-PEND.giftin=p=>{const f=byKey(p.f),e=p.e;if(!f)return null;const it=itm(e.k),hi=rkOf(f)>S.rank;
+PEND.giftin=p=>{const f=byKey(p.f),e=p.e,kg=p.kg||null;if(!f)return null;const it=itm(e.k),hi=rkOf(f)>S.rank;
  return{who:pv(f),t:`<p>${f.name} sai người mang <b>${it.n}</b> sang tặng ngươi.</p><p class="past">${it.d}</p>`,o:[
- {n:"Nhận",fx:{},x:"cất vào rương",go:()=>invAdd(S,Object.assign({},e))},
- {n:"Trả lại quà",fx:{},x:hi?"nàng phẩm cao hơn, sẽ phật ý":"nàng hơi phật ý",go:()=>{/* the gift goes back to her (item ledger jil); co-op friend: the live path has no way back (parked, item-ledger.md) → Nội vụ phủ keeps it, never lost */if(f.coop&&typeof ilGone==="function")ilGone(S,Object.assign({},e),"kho",{own:""});else{f.inv=f.inv||[];invAdd(f,Object.assign({},e))}relAdd(S,f,hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1]);if(f.queen)apply({hh:-8})}},
- {n:"Đem đến Thái y viện xét nghiệm",fx:{bac:-BAL.rcv.chk},x:`${word(oddsCl(oSee(S,true)+BAL.rcv.chkSee))} · thành: đồ bị tẩm thì biết ngay · biết cả ai gửi · hỏng: không thấy gì`,go:()=>{if(e.t&&roll(oddsCl(oSee(S,true)+BAL.rcv.chkSee))){evA(S,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(S,Object.assign({},e),"evid",{own:key(f)});log(`Thái y phát hiện ${it.n} của ${f.name} ${TAINT[e.t].n}. Chứng cứ ${f.name} ${balSg(BAL.eff.j8.evGo)}.`)}else{invAdd(S,Object.assign({},e));relAdd(S,f,BAL.eff.j8.go_3);log(`Thái y không thấy gì lạ ở ${it.n}.`)}}}]}};
+ {n:"Nhận",fx:{},x:`cất vào rương${kg?` · được: ${pvQuy(f,kg.r,`${f.name} quý ngươi`)}`:""}`,go:()=>{invAdd(S,Object.assign({},e));giftKeepGo(f,S,kg)}},
+ {n:"Trả lại quà",fx:{},x:`${hi?"nàng phẩm cao hơn, sẽ phật ý":"nàng hơi phật ý"} · ${f.name} với ngươi ${balSg(hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1])}`,go:()=>{/* the gift goes back to her (item ledger jil); co-op friend: the live path has no way back (parked, item-ledger.md) → Nội vụ phủ keeps it, never lost */if(f.coop&&typeof ilGone==="function")ilGone(S,Object.assign({},e),"kho",{own:""});else{f.inv=f.inv||[];invAdd(f,Object.assign({},e))}relAdd(S,f,hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1]);if(f.queen)apply({hh:BAL.eff.j8.goHhQ})}},
+ {n:"Đem đến Thái y viện xét nghiệm",fx:{bac:-BAL.rcv.chk},x:`${word(oddsCl(oSee(S,true)+BAL.rcv.chkSee))} · thành: đồ bị tẩm thì biết ngay · biết cả ai gửi · hỏng: không thấy gì`,go:()=>{if(e.t&&roll(oddsCl(oSee(S,true)+BAL.rcv.chkSee))){evA(S,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(S,Object.assign({},e),"evid",{own:key(f)});log(`Thái y phát hiện ${it.n} của ${f.name} ${TAINT[e.t].n}. Chứng cứ ${f.name} ${balSg(BAL.eff.j8.evGo)}.`)}else{invAdd(S,Object.assign({},e));relAdd(S,f,BAL.eff.j8.go_3);giftKeepGo(f,S,kg);log(`Thái y không thấy gì lạ ở ${it.n}.`)}}}]}};
 /* Nghiệm độc: ONE function for her button and an NPC (AG-ALL-2e2 cx3:test) */
 function itemTest(p,ix){const T=BAL.ag.par3.test;const e=(p.inv||[])[ix];if(!e||(p.bac||0)<BAL.bacFee.itTest)return"";const it=itm(e.k);if(p===S)apply({bac:-BAL.bacFee.itTest});else ap(p,{bac:-BAL.bacFee.itTest});e.tested=1;
  if(e.t&&e.by!==key(p)&&roll(oddsCl(oSee(p,true)+T.o))){p.inv.splice(ix,1);const by=byKey(e.by);if(by&&by!==p)/*evok: tainted by (scheme)*/evA(p,by,BAL.eff.j8.evItemAct);

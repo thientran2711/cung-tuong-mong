@@ -86,7 +86,7 @@ PEND.pgpick=p=>{const e=S.inv[p.ix];if(!e||!pgFood(e))return null;const dn=e.wk?
 try{KIT_ACT_PIDS.add("pgpick")}catch(e){}
 /* her side when a dish comes in (poisoned or not) — arrives unbidden: event-choice rule (price + Cần + hint) */
 PEND.pgin=p=>{const f=byKey(p.f);if(!f)return null;const P=p.pk?PGX[p.pk]:null;const nd=(S.inv||[]).findIndex(e=>e&&e.k==="kimbac"&&!e.h);const m=S.maid;
- const keep=()=>{if(p.e)invAdd(S,Object.assign({},p.e,{wk:p.e.wk?Object.assign({},p.e.wk,{from:p.f}):undefined}))};
+ const keep=()=>{if(p.e)invAdd(S,Object.assign({},p.e,{wk:p.e.wk?Object.assign({},p.e.wk,{from:p.f}):undefined}));/* d-giftin-like: a kept dish pays the giver's gain now (pp.kg from giveTo / wkGive; not printed — the card is never a tell) */if(typeof giftKeepGo==="function")giftKeepGo(f,S,p.kg)};
  const hit=()=>{const r=pgEffect(f,S,p.pk);log(r);Q.push({t:"Trúng độc",who:pv(f),h:`<p class="r">${r}</p><p class="past">Món ${p.dn} của ${f.name}.</p>`})};
  const found=how=>{/*evok: poisoned gift act*/evA(S,f,BAL.eff.jpoison.evFound);relAdd(f,S,BAL.eff.jpoison.found);Q.push({t:"Phát hiện có độc",who:pv(f),h:`<p>${how}: ${p.dn} của ${f.name} có độc. Ngươi nắm ${balAb(BAL.eff.jpoison.evFound)} chứng cứ của nàng · ${f.name} quý ngươi ${balSg(BAL.eff.jpoison.found)}.</p>`});log(`${how}: ${p.dn} của ${f.name} có độc (chứng cứ ${balSg(BAL.eff.jpoison.evFound)}).`)};
  const clean=how=>{log(`${how}: ${p.dn} không có gì lạ.`);keep()};
@@ -101,7 +101,7 @@ PEND.pgin=p=>{const f=byKey(p.f);if(!f)return null;const P=p.pk?PGX[p.pk]:null;c
  O.push({n:"Trả lại quà",fx:{},x:`thành: không động đến món ăn · kèm: ${f.name} với ngươi ${balSg(BAL.eff.jpoison.go_2)}`,hint:lv=>`không động đến món ăn; nhưng ${lv>=1?f.name:"người tặng"} phật ý`,risk:"an toàn",go:()=>relAdd(S,f,BAL.eff.jpoison.go_2)});
  return{who:pv(f),t:`<p>${f.name} sai người mang <b>${p.dn}</b> sang tặng ngươi.</p><p class="past">Đồ ăn của người khác: có thể thử trước bằng kim bạc hay nhờ cung nữ nếm.</p>`,o:O}};
 /* every food gift that reaches her uses the same card, poisoned or not (no tell) */
-(function(){const g0=PEND.giftin;PEND.giftin=function(p){try{if(p&&p.e&&pgFood(p.e)&&!p.e.t)return PEND.pgin({f:p.f,dn:iname(p.e),pk:null,o:0,e:p.e})}catch(x){console.error("pg in",x)}return g0.apply(this,arguments)}})();
+(function(){const g0=PEND.giftin;PEND.giftin=function(p){try{if(p&&p.e&&pgFood(p.e)&&!p.e.t)return PEND.pgin({f:p.f,dn:iname(p.e),pk:null,o:0,e:p.e,kg:p.kg||null})}catch(x){console.error("pg in",x)}return g0.apply(this,arguments)}})();
 /* the kit gift dialog (jgift giftDialog): one more row "Bỏ độc vào…" (kgg "all": shown in every recipient tab); j83's old Hạc đỉnh hồng rows go */
 function pgRow(ix){return{n:"Bỏ độc vào…",fx:{},kgg:"all",kgift:"(chọn người nhận và thứ độc; không được với Hoàng thượng, Thái hậu)",
  go:()=>setTimeout(()=>{pushDil(mkP("pgpick",{ix}),"Bỏ độc vào quà");showModal()},0)}}
