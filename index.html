@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"166bd0a3","t":"2026-11-28T07:32Z","c":"Ở nhà không còn lẫn chuyện trong cung; tin báo gọn hơn; người hầu hết phận thì không còn được ghi công.","b":"ab73feec1114","h":[{"s":"8a171afc+","t":"2026-11-28T04:14Z","c":"KK66 report: figure-over-plaque repro + handover KK66 -> KK67"},{"s":"9483e103+","t":"2026-11-27T23:23Z","c":"review save-pid-cards rv6: save-evc-onscreen test setup waits for the card to be painted (LIVE jverdict RF.held defers showModal behind a h…"},{"s":"5fb13d60+","t":"2026-11-27T21:15Z","c":"Thẻ kết quả nằm gọn trong khung, hình bay và cánh hoa không còn đè lên hộp thoại; bàn cờ trò chơi nhỏ đổi áo theo mùa."},{"s":"24beb1a4","t":"2026-11-27T19:22Z","c":"RV live-bugs-2711: rebuild index.html/sw.js on LIVE 772bee4f; assets.json = LIVE"},{"s":"6529ee43+","t":"2026-11-27T15:42Z","c":"rv26 merge: save stack (sổ compact, unseen lists, generators, inv-stack) + save-rewind test on LIVE 772bee4f (lc31-goal); source hunks asse…"},{"s":"d9ca7892+","t":"2026-11-27T12:32Z","c":"Dòng mục tiêu chạm được: xem cách làm rồi «Đi tới» tận nơi; đến một nơi hay một điện trên Dư đồ, nàng ở lại đúng chỗ, không còn bị đưa ngượ…"},{"s":"520c85b0","t":"2026-11-27T12:31Z","c":"Nhờ giúp nay nhờ được cả người cùng cung lẫn Hoàng hậu; người hầu đủ công lao được xin sang hầu cung cao hơn; tuyển tú bị loại hay được ban…"},{"s":"28d8bd1e","t":"2026-11-27T11:45Z","c":"Hội thi tài nghệ: hết ván là hiện kết quả và dừng hẳn, không còn kẹt giữa chừng."},{"s":"cf61b8e4","t":"2026-11-27T10:29Z","c":"Bản đồ chia rõ từng khu; người chưa quen hiện bóng theo vai; màn mờ đổi theo buổi; lựa chọn thuở khuê các có rủi ro nay đều ghi khả năng; M…"},{"s":"48ab87e6","t":"2026-11-27T09:35Z","c":"Thuở khuê các: các cảnh thuế đinh, đêm hội, cha bệnh, mối mai nay chọn là ra, không còn treo giữa chừng."}]};
+window.CTM_BI=null;
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37881,7 +37881,7 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
   if(c){p.resHead=key(c);hallFix(c)}else if(r<3){const f=free();if(f>=0){p.pal=f;p.palLone=1;occ[f]=key(p)}}}
  for(const v of rivals){if(!v.palLone||v.coop||!palLive(v)||rkOf(v)>=3)continue;const c=pickHost(v);if(c){delete occ[v.pal];v.pal=null;v.palLone=0;v.resHead=key(c);hallFix(c)}}
  /* spread: a chủ vị with nobody while another is full → the newest NPC of the full house moves over (log line) */
- for(let g=0;g<12;g++){const E=hs.filter(x=>cnt(x)===0),F=hs.filter(x=>cnt(x)>=cap);if(!E.length||!F.length)break;const f=F[0],e=pick(E);
+ for(let g=0;g<12;g++){const E=hs.filter(x=>cnt(x)===0),F=hs.filter(x=>cnt(x)>=cap);if(!E.length||!F.length)break;const f=F[0];const y0=mates(f).filter(x=>x!==S&&!x.coop).slice(-1)[0];const e=(y0&&typeof pcHostPick==="function"&&pcHostPick(y0,E,cnt))||pick(E);/* D-ROW8: the empty house she moves to follows the same thiện cảm rule */
   const y=mates(f).filter(x=>x!==S&&!x.coop).pop();if(!y)break;y.resHead=key(e);y.resHall=null;hallFix(e);hallFix(f);try{log(`${RANKS[y.rank].n} ${y.name} dời sang ${houseName(y)}.`)}catch(x){}}
  for(const h of hs)hallFix(h);
  if(!sv&&palLive(S)&&rkOf(S)<3&&S.resHead!==S0){try{if(S.resHead)log(`Ngươi được xếp ở ${palName("home")}.`);else if(S0)log(`Ngươi dời về ${HOMEN}.`)}catch(x){}}
@@ -38504,7 +38504,7 @@ Object.assign(BAL,{promoR:{ky:{p:{newyear:85,doanngo:20,vantho:75,thanhtho:55,do
   hh:{cut:{"Ân cần":40,"Khiêm nhường":45,"Điềm tĩnh":50,"Nhiều chuyện":50,"Nóng nảy":55,"Kín đáo":60,"Lạnh lùng":65,"Tham vọng":62,"Xảo quyệt":66,"Kiêu ngạo":70},def:55,maxTo:4,life:1},
   birth:1,cost:{sungGhen:10,sungOan:6,thSung:4,hhOwe:1,hhOan:4,deathHhOan:10,meAff:5,mePassOan:4},meMax:4,meK:1,death:{life:1},tp:{on:1,okK:["ill","birth","age","murder","tuan","other"]/* death kinds (j8 dieMk) that may be examined for truy phong; crime / disgrace / left / unmarked never (fix r1) */}},
  dl:{on:1,minGap:24,bacM:1,ghen:6,oan:3,thTho:[50,60,70,80],empTho:[30,40,50,60],duc:[0,0,10,15,20,30,40,50]},
- pc:{wE:1,wH:1,wT:1,load:.6,why:.25,mid:{sung:30,hh:0,th:0},span:{sung:40,hh:40,th:40},
+ pc:{wE:1,wH:1,wT:1,wC:.5/* D-ROW8: the host chủ vị and the girl's own liking for each other (aff − oán, both ways, jpromob pcMut) — under the royals' weights */,load:.6,why:.25,mid:{sung:30,hh:0,th:0},span:{sung:40,hh:40,th:40,c:40},
   kind:{"Ân cần":2,"Khiêm nhường":1,"Điềm tĩnh":1,"Rộng lượng":2,"Nhiều chuyện":0,"Kín đáo":0,"Lạnh lùng":-1,"Tham vọng":-1,"Xảo quyệt":-2,"Nóng nảy":-2,"Kiêu ngạo":-2}}}});
 /* BAL.il — ITEM LEDGER + ITEM CONSERVATION (owner 16/11 13:30Z (3) + 13:40Z ONE LEDGER; jil.js reads only these):
    no item ever vanishes. Sold → the market ("mkt"): each week it may show up in her Nội vụ phủ tray (shopP), and at the latest by the ceiling
@@ -59456,8 +59456,10 @@ function pcFav(p){return{E:pcN(p.sung,"sung"),H:pcN(p===S?S.hh:p.hh,"hh"),T:pcN(
 function pcStand(h){try{if(h.pal==null)return 0;return cl(bcDanh(h.pal)/3+bcNear(h.pal)-1,-1,1)}catch(e){return 0}}
 function pcKind(h){const B=BAL.promoR.pc;const t=pbTemper(h,B.kind);return t?B.kind[t]/2:0}
 function pcAlign(h){return cl((h.th||0)/BAL.promoR.pc.span.th,-1,1)}
-function pcParts(p,h){const B=BAL.promoR.pc,f=pcFav(p);return{E:B.wE*f.E*pcStand(h),H:B.wH*f.H*pcKind(h),T:B.wT*f.T*pcAlign(h),f}}
-function pcScore(p,h,n){const x=pcParts(p,h);return x.E+x.H+x.T-BAL.promoR.pc.load*(n||0)}
+/* D-ROW8 (thiện cảm between consorts): the host and the girl, both ways — liking up, oán down; a palace head is no host of herself */
+function pcMut(p,h){try{if(!h||h===p||typeof aff!=="function")return 0;const B=BAL.promoR.pc;return cl(((aff(h,p)+aff(p,h))-(oan(h,p)+oan(p,h)))/2/B.span.c,-1,1)}catch(e){return 0}}
+function pcParts(p,h){const B=BAL.promoR.pc,f=pcFav(p);return{E:B.wE*f.E*pcStand(h),H:B.wH*f.H*pcKind(h),T:B.wT*f.T*pcAlign(h),C:(B.wC||0)*pcMut(p,h),f}}
+function pcScore(p,h,n){const x=pcParts(p,h);return x.E+x.H+x.T+x.C-BAL.promoR.pc.load*(n||0)}
 /* the host for p among the hosts with a free room c (cnt = co-residents): highest score; ties → the existing order (fewest co-residents first) */
 function pcHostPick(p,c,cnt){try{if(!BAL.promoR||!c||!c.length)return null;let best=null,bs=-1e9;
  const L=c.slice().sort((a,b)=>cnt(a)-cnt(b));for(const h of L){const s=pcScore(p,h,cnt(h));if(s>bs+1e-9){bs=s;best=h}}return best}catch(e){console.error("pcHostPick",e);return null}}
@@ -59469,7 +59471,8 @@ function pcWhy(p){const me=p===S,B=BAL.promoR.pc,nm=me?"ngươi":p.name;const hd
   if(Math.abs(f.E)>=B.why&&Math.abs(pcStand(h))>=B.why/2&&Math.sign(x.E)>0)/* rv: only when the favour really moved her that way (as the Hoàng hậu / Thái hậu lines) — never «để mắt tới … ở cung xa» */{const sg=pbKnown(p)?` (Sủng ${Math.round(p.sung||0)})`:"";/* promo-build-2 nit: an unknown girl's Sủng never shows (greeting / knowledge rule) */
    L.push(f.E>0?`Hoàng thượng để mắt tới ${nm}${sg}: ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}, danh giá`:`xa ${dh}`}`:`Hoàng thượng chưa để mắt tới ${nm}${sg}: ${own?"được ban":"ở"} cung ${pcStand(h)>0?`gần ${dh}`:`xa ${dh}`}`)}
   if(!own&&Math.abs(f.H)>=B.why&&pcKind(h)!==0&&Math.sign(x.H)>0)L.push(f.H>0?`được Hoàng hậu thương: xếp ở với ${hn}, người hiền hòa`:`Hoàng hậu không ưa ${nm}: xếp ở với ${hn}, người khó tính`);
-  if(!own&&Math.abs(f.T)>=B.why&&Math.abs(pcAlign(h))>=B.why&&Math.sign(x.T)>0)L.push(f.T>0?`Thái hậu thương ${nm}: chủ vị ${hn} là người được Thái hậu tin`:`Thái hậu không ưa ${nm}: chủ vị ${hn} cũng không được lòng Thái hậu`)}
+  if(!own&&Math.abs(f.T)>=B.why&&Math.abs(pcAlign(h))>=B.why&&Math.sign(x.T)>0)L.push(f.T>0?`Thái hậu thương ${nm}: chủ vị ${hn} là người được Thái hậu tin`:`Thái hậu không ưa ${nm}: chủ vị ${hn} cũng không được lòng Thái hậu`)
+  if(!own&&B.wC&&pcMut(p,h)>=B.why&&x.C>0)L.push(`${hn} quý ${nm}, xin cho ${me?"ngươi":"nàng"} về ở chung`)/* D-ROW8: only when the liking really pulled her there */}
  if(!L.length)L.push(h&&h!==p?`Nội vụ phủ xếp ${nm} vào chỗ còn trống, ở với ${hn}`:`Nội vụ phủ xếp ${nm} vào chỗ còn trống`);return L}
 function pcWhere(p){try{return houseName(p)}catch(e){return palName("home")}}
 /* the panel (kit T1 panel via the Q modal + kitRows; no own part) */
@@ -59489,7 +59492,7 @@ function pcMark(){const P=pbSt();P.hr=rkOf(S);P.hk=String(houseOf(S))+"|"+(S.pal
 (function(){if(typeof palFix!=="function")return;const f0=palFix;palFix=function(){const r=f0.apply(this,arguments);try{if(S&&!S.__pcBusy&&!S.dead&&!S.out&&BAL.promoR&&!(typeof isSrv==="function"&&isSrv())){const P=pbSt();
  const hk=String(houseOf(S))+"|"+(S.pal==null?"":S.pal)+"|"+(S.resHall||"");if(P.hr==null){pcMark();return r}
  if(rkOf(S)>P.hr&&hk!==P.hk&&!S.palCer&&rkOf(S)<7){Q.push(pcPanel([{p:S}],{head:`Thánh chỉ tấn phong ${RANKS[rkOf(S)].n} kèm lệnh dời chỗ ở.`}))}pcMark()}}catch(e){console.error("pc later",e)}return r};window.palFix=palFix})();
-window.pbKyAt=pbKyAt;window.pbNextKy=pbNextKy;window.pbGrant=pbGrant;window.pbTry=pbTry;window.pbMonth=pbMonth;window.pbKyRow=pbKyRow;window.pbA=pbA;window.pcHostPick=pcHostPick;window.pcWhy=pcWhy;window.pbSungCut=pbSungCut;window.pbThCut=pbThCut;window.pbHhCut=pbHhCut;window.pbCdKy=pbCdKy;window.pbHhOf=pbHhOf;window.pbKyUpdate=pbKyUpdate;
+window.pbKyAt=pbKyAt;window.pbNextKy=pbNextKy;window.pbGrant=pbGrant;window.pbTry=pbTry;window.pbMonth=pbMonth;window.pbKyRow=pbKyRow;window.pbA=pbA;window.pcHostPick=pcHostPick;window.pcMut=pcMut;window.pcWhy=pcWhy;window.pbSungCut=pbSungCut;window.pbThCut=pbThCut;window.pbHhCut=pbHhCut;window.pbCdKy=pbCdKy;window.pbHhOf=pbHhOf;window.pbKyUpdate=pbKyUpdate;
 
 /* ================= promo-build-2 (Foreman D; brief D-promo-build-2; OD 24/11 ~05:55Z, ~06:30Z, ~07:00Z real, ~08:30Z; design rows 8–10) =================
    (1) LAW 1: when SHE is the Hoàng hậu she nominates («Hoàng hậu đề cử», act card in Hành sự → kit option sheet). The candidates are the ones the
@@ -109186,7 +109189,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ab73feec1114";window.CTM_BUILD=BUILD;
+const BUILD="73c841b38b91";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
