@@ -71,6 +71,11 @@ const R=path.resolve(__dirname,'../..');const PAGE=process.argv[2]||'dev/index.h
    setA();const k=mkKid("m",3);S.kids=[k];const v=liveRivals(false).find(x=>x!==S.heir.v)||liveRivals(false)[0];
    PIN=()=>{S.tho=99;S.srv=null;S.kids=[k];S.heir={k,v:null};S.emp.tho=99;if(S.mort){S.mort.empDue=null;S.mort.plot=null}v.sung=90;v.kids=[];v.duc=0;v.queen=false;v.alive=true;v.out=false;v.suc=90};
    PIN();ok("probe: she has no risk",!ttwRisk());months(12);ok("NPC at risk takes roads while SHE has none (FAIL-1)",(v.ttwN||0)>=2,`tries ${v.ttwN} pz ${v.ttwPz}`);
+   /* RV-181 law-1 mirror of path A: her son heir → a foe WITH a child and low Sủng (path B off) but a bad tie to her still takes roads */
+   {const v3=liveRivals(false).find(x=>x!==v&&!x.queen&&(x.rank||0)<7);if(v3){const P0=PIN;const kk=mkKid("f",2);PIN=()=>{P0();v3.kids=[kk];kk.alive=true;v3.sung=5;v3.duc=0;v3.rel=-80;v3.alive=true;v3.out=false};
+    PIN();v3.ttwN=0;v3.ttwLast=null;months(12);ok("mirror A: her son heir → her foe (kids, low Sủng, bad tie) takes roads",(v3.ttwN||0)>=2,`tries ${v3.ttwN}`);
+    PIN=()=>{P0();v3.kids=[kk];kk.alive=true;v3.sung=5;v3.duc=100;v3.rel=80;v3.alive=true;v3.out=false};v3.ttwN=0;v3.ttwLast=null;months(12);
+    ok("mirror A: a rival on good terms (same formula as hers, odds ≥ warnO) is not at risk",!(v3.ttwN>0),`tries ${v3.ttwN}`);PIN=P0;PIN()}}
    /* FAIL-2: same odds as hers, can fail, failure pays the cost and still gives fw; success adds protection */
    const r0=roll;let seen=[];v.ttwPz=0;v.ttwLast=null;v.duc=0;const s0=v.suc;
    roll=p=>{seen.push(p);return p>=100};try{ttwNpcTick()}finally{roll=r0}
@@ -78,9 +83,9 @@ const R=path.resolve(__dirname,'../..');const PAGE=process.argv[2]||'dev/index.h
    ok("NPC road rolls the BAL road odds (odA)",seen.some(p=>p<100&&odds.includes(p)),seen.join(","));ok("NPC road can fail: no protection",!(v.ttwPz>0),v.ttwPz);
    ok("failed NPC road still gives something (fw)",v.duc===1||v.suc===s0+R.nang.fw.suc,`duc ${v.duc} suc ${s0}->${v.suc}`);
    /* RV-163M: the NPC's outcome rows = hers (ttwGo): failure pays l then fw, success gives w (road forced to nặng) */
-   {const pk=pick;v.ttwLast=null;v.ttwPz=0;v.danh=50;v.suc=50;v.duc=0;pick=()=>"nang";roll=p=>p>=100;try{ttwNpcTick()}finally{roll=r0;pick=pk}
+   {const mr=Math.random;v.bac=0;v.ttwLast=null;v.ttwPz=0;v.danh=50;v.suc=50;v.duc=0;Math.random=()=>0.999;roll=p=>p>=100;try{ttwNpcTick()}finally{roll=r0;Math.random=mr}/* RV-181: pick is a const (j1) → force the last road (nặng, no bạc) via Math.random */
     ok("failed NPC road pays its loss (l) + fw like hers",v.danh===50+R.nang.l.danh&&v.suc===50+R.nang.fw.suc,`danh ${v.danh} suc ${v.suc}`);
-    v.ttwLast=null;v.ttwPz=0;v.suc=50;v.duc=0;pick=()=>"nang";roll=()=>true;try{ttwNpcTick()}finally{roll=r0;pick=pk}
+    v.ttwLast=null;v.ttwPz=0;v.suc=50;v.duc=0;Math.random=()=>0.999;roll=()=>true;try{ttwNpcTick()}finally{roll=r0;Math.random=mr}
     ok("successful NPC road gives w like hers",v.ttwPz>0&&v.duc===R.nang.w.duc&&v.suc===50+R.nang.w.suc,`pz ${v.ttwPz} duc ${v.duc} suc ${v.suc}`)}
    v.ttwLast=null;roll=()=>true;try{ttwNpcTick()}finally{roll=r0}ok("NPC road success adds protection",v.ttwPz>0,v.ttwPz);
    roll=p=>p===Math.min(B.cap,v.ttwPz);let sp;try{sp=ttwNpcSpared(v)}finally{roll=r0}ok("NPC roads can save her from my order",sp===true);

@@ -86,7 +86,11 @@ function ttwGo(id){const r=ttwRisk();if(!r)return;const B=T(),R=B.road[id],st=tt
 /* NPC consorts at risk B take a road too (law 1, two-way; RV-163L FAIL-1/2): on their OWN risk (childless, Sủng ≥ tuanSung, no Đức save),
    on their own rhythm (v.ttwLast, same cd as hers), independent of whether SHE is at risk; the road pays its cost and rolls the SAME BAL odds
    (odA on the NPC); success adds protection + w, failure pays l and still gives its fw (law 3) — the same rows as her ttwGo. Bạc road only when the NPC has the bạc. */
-function npcRisk(v){const F=BAL.mort.fate;return !((v.kids||[]).some(k=>k.alive)||(v.sung||0)<F.tuanSung||(v.duc||0)>=F.tuanDuc)}
+function npcRisk(v){const F=BAL.mort.fate;return !((v.kids||[]).some(k=>k.alive)||(v.sung||0)<F.tuanSung||(v.duc||0)>=F.tuanDuc)||npcRiskA(v)}
+/* RV-181 (law 1): the mirror of her path A — when HER son is the heir she will be the new Thái hậu and may force a foe to tuẫn táng (j99succ
+   «Chuyện cũ hậu cung»); an NPC below Hoàng hậu whose mercy odds on the same formula as hers (j3: odO + own Đức/2 + tie to her/2) are below
+   warnO is at risk and takes the roads, kids or not (her path A ignores kids too). */
+function npcRiskA(v){const h=S.heir;if(!h||!h.k||!h.k.alive||h.v||v.queen||(v.rank||0)>=7)return false;return od(BAL.odb.j3.odO+(v.duc||0)/2+(v.rel||0)/2)<T().warnO}
 function ttwNpc(){const B=T(),cd=ttwSign()?B.cd.sign:B.cd.quiet;try{for(const v of liveRivals(false)){if(!npcRisk(v))continue;if(mi()-(v.ttwLast==null?-999:v.ttwLast)<cd)continue;v.ttwLast=mi();if(!roll(B.npcP))continue;
  const ids=["nhe","sl","nang"];{const c=ttwCost(B.road.bac.c);if((v.bac||0)>=-c.bac)ids.push("bac")}const id=pick(ids),R=B.road[id],c=ttwCost(R.c);
  for(const k in c)if(typeof v[k]==="number")v[k]=Math.max(0,v[k]+c[k]);
