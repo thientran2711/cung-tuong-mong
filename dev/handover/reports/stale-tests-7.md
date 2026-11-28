@@ -1,0 +1,36 @@
+depth 2
+# STALE-TESTS-7 — 7 identically-failing tests on LIVE 22afefb4 / 3b 1a6a1aed (worker of MAIN 188)
+
+PRIORITY #1 CHECK: OD «oán ghen lên chậm» (oan-pace OD 26/11 ~18:40Z), act-merge jdoor (OD 26/11 ~07:25Z), kitRing (OD 26/11 ~18:55Z), TEMPER-OUTBURST (OD 25/11 ~05:45Z), home-way punW (OD 26/11 ~04:25Z), jnf night choice (OD 16/11 22:45Z) | main dev/build/jnf.js:333 (endTurn hold), jworld.js:274, jdoor.js, jkring.js, joanpace.js | review/* review/rules-prefail 810fbc8c (base) | claims none other on these tests
+
+Branch: **review/stale-tests-7** (base review/rules-prefail 810fbc8c). Commits ef9c6f7a, 9abfa246 (+ later). Site rebuilt (jworld.js change).
+
+## Results table (before = base 810fbc8c, after = branch)
+
+| test | verdict | cause | fix | before → after |
+|---|---|---|---|---|
+| world_check | TEST LIE (harness) + **REAL BUG (minor)** | (a) since jnf, `endTurn` turns the night card and HOLDS the day on «Kính sự phòng» (pid nfch) until she answers; harness did `Q.length=0` → the tuần never turned → worldTick never ran → no window ever opened (in the harness only). (b) REAL: jworld court-roll record `S.wMM.k` lost «tham» whenever the minister layer is on (jagmin minOn): j55 writes «<Ngự sử> phát giác quan tham» (lowercase), jworld matched `/Quan tham/` case-sensitively | (a) `__wcWeek()`: answer nfch «Thôi» by its own option (chooseM — the drain of ledger.js / coop-night0.js), drop other pre-turn cards, endTurn until wk turns. (b) jworld.js:274 all 6 kind regexes case-free (whole family: the 6 kinds; no other module parses moodMonth text) | FAIL 18/25 → **PASS 25/25** |
+| ag-all.test | TEST LIE (harness) | same jnf hold: day plan drawn 0×, no Emperor evening plan (Ngự giá), no tea; «Tâng bốc» is now a way inside the jdoor door «Hầu chuyện» (talkOpts returns the door) | `__agQ()` answers nfch «Thôi», then «Sang ngày mới» until the held day turns; Tâng bốc read from `doorRaw()` | 6 FAIL → 1 FAIL (perf p95 19.5 ms vs BAL.ag.perf.p95 8 — measured while a robot life + 3 browsers ran in parallel: **re-measure idle**, see handover) |
+| feelings18 | TEST LIE | TEMPER-OUTBURST (OD 25/11 ~05:45Z): an NPC consort picks ONE of `eaOpts` by temper (npwPick) — the act of «buồn» is no longer always «khóc», «hờn» no longer always «bỏ về» | timer checked against the picked act's own `feelActDur`; bỏ về rule: re-pick until bỏ về is taken, then Sủng must drop | 32/34 → **34/34** |
+| emotion-acts-2 | TEST LIE ×4 (+1 pending rerun) | punish: test typed months 2/3/1, canon = `BAL.punW.mid.m` [1,2,1] (home-way); pillow + oldsave: raw `S.mood.v` writes are recomputed away since MOODKNOW (bar = sum of causes); plock (+ kinds rows): the roulette wrapper #kroulw stays a few s, jdayq holds every card under it → the night card never painted (the start card's rows were read) | `punishMonths(1)`; bar driven through causes (emoSet + mkBar, as plock already did); wait for `[id^=kroul]` gone (as emotion-acts.js fresh1) | FAIL 28 → rerun running (/tmp/claude-0/st7/ea2b.txt) — probes: pillow 3× «khó hơn», plock eaLock on «Rót rượu» present |
+| emotion-acts | FLAKE (no code change) | the single FAIL (1000x755 «hit» overflow on `.ka.khideout.kback` hand cards) does not reproduce: EA_ONLY=hit 1000x755 / 755x1000 / 1180x820 PASS — a hand-card lift/scale caught mid-animation | none yet; full rerun running (/tmp/claude-0/st7/ea1b.txt) | FAIL 1 → PASS (hit case) |
+| temper-outburst | TEST LIE | the event frame is a HAND (`.opts.khand`, KIT §101/§102.2): one tap only lifts the card, its ✓ chooses; harness used `rt.tap` | `rt.choose` (the ONE helper in realtap.js) | FAIL 12 → **PASS** (755x1000; run other sizes) |
+| temper-perception | TEST LIE ×4 (2 fixed, 2 open) | math: runs shared the holder's oán-pace store `O.opa` (one bounded step per cause per buổi + day cap) → run 2.. landed inside run 1's spent cap (judgement itself: base −35 vs trọng Nhân −56, rule intact). gateNo/gateYes: «Khiêu khích» is a WAY inside the jdoor door «Khiêu khích» (P6, with «Khoe quà ngự ban»), locked «chưa có cớ» there (gate intact — probe: member lock true, t «chưa có cớ»; with Oán 45 the row reads «cớ: oán 45»); the person card is a kitPick plaque (tap = lift, «Chọn»); people stand in the kitRing (stage swipe no longer pages #tokens); the setup rival could be above her rank → rank lock. label: «Hậu cung» → «Phi tần» nav changed | math: reset `O.opa` per run (**ok**). gateNo/gateYes: rewritten to plaque → «Chọn» → door card → row; rival not above her rank; ring path via ‹ › — **still red** (see handover). label: open | 8 FAIL (2 sizes) → math ok; gateNo/gateYes/label open |
+
+## Real-play probe (world windows) on LIVE 22afefb4
+`robot-rt.js` (real taps, iPad, seed 11, slice 400) on a local serve of LIVE: the save at T7/1 holds `S.wwin.H` = [«Sứ thần các nước vào triều cống» tuần 9→10, «Mồng tám tháng tư, lễ Phật đản» 7→8] — windows open and close in real play through the same `worldTick` (endTurn wrapper) that opens quốc tang / away / thiên tai. In the harness (now answering the night card as a player does) quốc tang from a real S.thDead, away and thiên tai all open with the BAL lengths / pay cut. **Not a game bug.**
+
+## REAL GAME BUGS
+1. jworld court roll lost «tham» with the minister layer on (sent to MAIN 188 at once). Fixed (case-free regexes). No world event reads «tham» today → no visible play effect yet; the one record was wrong.
+
+## MUTATE (to do by successor — not yet run)
+For each fixed test: break the rule, confirm red, restore: world_check (jworld.js:274 back to `/Quan tham/`; jnf: n/a), ag-all (BAL.ag.day.on=0 → day plan), feelings18 (feelActDur return 0), ea2 (BAL.punW.mid.m → [2,3,1]), temper-outburst (BAL.ea.fx.dapdo.bac 0), temper-perception math (BAL.trong.off=0 → nhan == base).
+
+## HANDOVER (rollover: context at START+25 %)
+State: branch review/stale-tests-7 pushed (9abfa246). Worktrees: /home/user/wt/st7 (branch), /home/user/wt/st7live (LIVE 22afefb4 detached), http servers 127.0.0.1:8807 (branch) and :8808 (LIVE). Robot still running: /tmp/claude-0/st7/rob (decode the save with `node /tmp/claude-0/st7/dec.js /tmp/claude-0/st7/rob/wprobe.ckpt.json`).
+Open items for the successor:
+1. temper-perception gateNo/gateYes: after `fresh()` a «KẾT QUẢ · Trong cung vừa qua» result pop-up (#kxcatch catcher) covers the stage: dismiss it with a real tap first; then openRival's ring path (dev/test/temper-perception.js, «STALE-TESTS-7: the people of a place stand in the RING»): `.kring-front` was absent in one run (`turns 2/-1/3`) — read the front slot via `kitRing.cur` (jkring.js:298) instead of the class. gateNo also handles the all-ways-locked door (plaque greyed → reason pop). label: find the new nav from «Hậu cung» to a consort's card (the «Phi tần» tab text changed).
+2. ag-all perf: re-run `node dev/test/ag-all.test.js index.html` with nothing else running; if p95 still > 8 ms, compare on LIVE 22afefb4 and on an older live build to decide test budget vs real regression (MAIN rule: no test-budget change without proof).
+3. Read reruns: /tmp/claude-0/st7/ea2b.txt (emotion-acts-2, 6 sizes) and /tmp/claude-0/st7/ea1b.txt (emotion-acts full); temper-outburst at all 3 sizes.
+4. temper-perception «crashes on LIVE»: run it once on :8808 (LIVE) and record.
+5. MUTATE list above; then «RV READY» to RV-184 session_01Rc5AsMLNT6kzi1NmvZRwKz + MAIN 188.
