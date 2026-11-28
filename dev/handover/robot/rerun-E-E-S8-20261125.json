@@ -418,6 +418,26 @@
    "bot": "rand",
    "review": "dev/handover/robot/review/ES8-bd_tuyet-random5-h-review.md",
    "moments": "dev/handover/robot/review/ES8-bd_tuyet-random5-h-moments.md"
+  },
+  {
+   "life": "E-S8-bd_tuyet-R8-random3",
+   "origin": "bd",
+   "road": "bd_tuyet",
+   "dev": "ipad",
+   "bot": "rand",
+   "seed": 3022128181,
+   "harness": {
+    "realtap": true,
+    "jsClicks": 0,
+    "sha": "f65d019b"
+   },
+   "ending": "Hồng nhan bạc mệnh — trọng bệnh không qua khỏi (age 33 y16; mixed build, last part on LIVE)",
+   "age": 33,
+   "buoi": 2280,
+   "valid": true,
+   "exitPick": null,
+   "review": "dev/handover/robot/review/E-S8-bd_tuyet-R8-random3-review.md",
+   "moments": "dev/handover/robot/review/E-S8-bd_tuyet-R8-random3-moments.md"
   }
  ],
  "parked": [
@@ -459,6 +479,61 @@
    "life": "bd_tuyet-greedy4",
    "seed": 3029570759,
    "note": "handed to E-S3 as ES8-bd_tuyet-greedy4-h (27/11 18:05Z)"
+  },
+  {
+   "life": "greedy5",
+   "seed": 172611648,
+   "note": "handed to E-S2 as ES8-…-h (28/11)"
+  },
+  {
+   "life": "random1(bd_san)",
+   "seed": 441975800,
+   "note": "handed to E-S2 as ES8-…-h (28/11)"
+  },
+  {
+   "life": "random2(bd_san)",
+   "seed": 3749450829,
+   "note": "handed to E-S2 as ES8-…-h (28/11)"
+  },
+  {
+   "life": "lazy3(bd_san)",
+   "seed": 3492686679,
+   "note": "handed to E-S2 as ES8-…-h (28/11)"
+  },
+  {
+   "life": "bd_san-skilled3",
+   "seed": 3086072713,
+   "note": "handed to E-S3 as ES8-bd_san-skilled3-h (28/11)"
+  },
+  {
+   "life": "bd_san-speed1",
+   "seed": 807812900,
+   "note": "handed to E-S3 as ES8-bd_san-speed1-h (28/11)"
+  },
+  {
+   "life": "bd_san-speed3",
+   "seed": 1507365466,
+   "note": "handed to E-S3 as ES8-bd_san-speed3-h (28/11)"
+  },
+  {
+   "life": "bd_san-cautious3",
+   "seed": 304984224,
+   "note": "handed to E-S5 (28/11)"
+  },
+  {
+   "life": "bd_san-greedy3",
+   "seed": 2922198749,
+   "note": "handed to E-S5 (28/11)"
+  },
+  {
+   "life": "bd_san-lover1",
+   "seed": 4258461793,
+   "note": "handed to E-S5 (28/11)"
+  },
+  {
+   "life": "bd_san-scholar3",
+   "seed": 3457154403,
+   "note": "handed to E-S5 (28/11)"
   }
  ]
 }
