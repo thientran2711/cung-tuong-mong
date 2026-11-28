@@ -131,7 +131,7 @@ TICKET (law 6c, for MAIN/D): NPC jewellery exists only as far as an NPC's own `i
 | one-core-guard / one-core-text / time-spill | PASS (inline 3054 ≤ baseline 3592, fails 0) |
 | emotion-acts-2.js | pillow / plock now check the one-tap card; plock PASS; pillow / punish / oldsave / 1 more FAIL on the batch-3 base too (pre-existing, not this change) |
 | law 12 shots Fold + iPad (outside git) | night1: one «Hầu chuyện» · Rất vững · Tốn không; j71x: «Ghi tên dâng hát» · Mong manh + «Không dự»; looked 3× |
-| quickcheck e3c1f982 vs LIVE 7d7c6886 | see the FOR FOREMAN E line (running at handover) |
+| quickcheck e3c1f982 vs LIVE 7d7c6886 | step 2 **PASS** (open 1604 ms · old save ok · perf new/live render 279/300 · tab 492/539 · buổi 1871/3450 ms); core gates all PASS except button-crawl = the same 600 s crawler cap under gate load (page closed, 0 dead) → **rerun alone PASS** (107 taps, 0 faults); kit-std-scan 6 = baseline |
 
 ## Handover 3 — ROLLOVER (E-TIER-B13c, context ≈ START 3 % + 25 %, 28/11 ~12:20Z)
 State: batch 3 = RV READY 31f91836 (E-TIER-B13-RV3 reviewing). Batch 3b C45/C46/C48/C53 DONE on e3c1f982 (not yet sent RV READY — successor sends it with the law-11 group or alone, as FOREMAN E says).
