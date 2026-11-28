@@ -81,12 +81,12 @@ const srv=http.createServer((q,r)=>{let p=decodeURIComponent(new URL(q.url,'http
    // j24 «Có người đến» gift: relAdd runs while the card is built → the card prints what already moved
    if(typeof AP_MK==="object"&&AP_MK.apFriend)for(const v of P.slice(0,2)){postRow("j24 apFriend gift",v.name,v,S,()=>{try{if(typeof giftHand==="function"&&v.inv)invAdd(v,{k:"tuithom"})}catch(e){}const o={who:v,sub:"gift"};const k0=kitParse;let raw="";kitParse=function(x){raw+=String(x)+" ";return k0.apply(this,arguments)};let ev=null;try{ev=AP_MK.apFriend(o)}finally{kitParse=k0}/* the kit draws thiện cảm as marks; the number is in the text it was handed */return o.sub==="gift"&&ev?raw:"(no gift in hand: a chat visit)"},/[Tt]hiện cảm:? ?([+-−]?\d+)( đến [+-]?\d+)?/)}
    // j67 e67ally (story ending) and the j97 group ending (one row per person)
-   if(typeof e67ally==="function")postRow("j67 e67ally",P[1]&&P[1].name,P[1],S,()=>e67ally(P[1],30),/thiện cảm ([+-−]?\d+)( đến [+-]?\d+)?/);
-   if(typeof R97L!=="undefined"){const A=R97L.find(a=>a&&typeof a.go==="function"&&/Người trong phe ngươi/.test(String(a.go)));if(A){P.forEach(v=>{v.rel=Math.max(v.rel||0,netTh(v,"than")+1)});postRow("j97 group",null,null,S,()=>A.go(null,1,[12]))}}
+   if(typeof e67ally==="function"&&P[4])postRow("j67 e67ally",P[4]&&P[4].name,P[4],S,()=>e67ally(P[4],30),/* a low liking: a real rise, so a reverted preview shows a range / a different number *//thiện cảm ([+-−]?\d+)( đến [+-]?\d+)?/);
+   if(typeof R97L!=="undefined"){const A=R97L.find(a=>a&&a.a==="st_the");/* «Một hô trăm ứng»: G is bound by the arc wrapper */if(A&&typeof A.go==="function"){P.forEach(v=>{v.rel=Math.max(v.rel||0,netTh(v,"than")+1)});postRow("j97 group",null,null,S,()=>A.go(null,1))}else out.push({name:"POST j97 group: arc st_the not found",preview:null,real:null,sg:"",ok:false,sideOk:true,inRange:true})}
    // jemoact «tiec»: each guest's row
-   if(typeof eaDo0==="function")postRow("jemoact tiec",null,null,null,()=>{S.bac=Math.max(S.bac||0,500);return eaDo0(S,{k:"tiec",n:"Mở tiệc"})});
+   if(typeof window.eaDo==="function")postRow("jemoact tiec",null,null,null,()=>{S.bac=Math.max(S.bac||0,500);return window.eaDo(S,{k:"tiec",n:"Mở tiệc"})});else out.push({name:"POST jemoact tiec: eaDo missing",preview:null,real:null,sg:"",ok:false,sideOk:true,inRange:true});
    // j8 giveTo: the keep line vs her real change
-   {const t=P[3];if(t){const k=Object.keys(IT).find(k=>IT[k]&&giftVal({k},t)>0&&!IT[k].sl)||"tuithom";invAdd(S,{k});const ix=S.inv.length-1;const rf=typeof rcvGiftIn==="function"?rcvGiftIn:null;
+   {const t=P[0];if(t){const k=Object.keys(IT).find(k=>IT[k]&&giftVal({k},t)>0&&!IT[k].sl)||"tuithom";invAdd(S,{k});const ix=S.inv.length-1;const rf=typeof rcvGiftIn==="function"?rcvGiftIn:null;
     try{rcvGiftIn=()=>"take";postRow("j8 giveTo",t.name,t,S,()=>giveTo(S,t,ix),/thiện cảm ([+-−]?\d+)( đến [+-]?\d+)?/)}finally{if(rf)rcvGiftIn=rf}}}}
   Math.random=RND0;return out});
  console.log('| act | before: card showed (raw) | after: card shows | real change | same | preview wrote nothing |');console.log('|---|---|---|---|---|---|');
