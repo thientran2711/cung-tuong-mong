@@ -169,7 +169,7 @@ const SCAN=function(rootSel){
     if(pt){await p.touchscreen.tap(pt[0],pt[1]);await p.waitForTimeout(1200);await scan('hand:enlarged','#modal .dlg');await shot('hand-big')}}else probes.push(dev+' hand: kitHand not in this build (scene skipped)')}
   await clear();probes.push(dev+' page errors: '+errs.length+(errs.length?' '+JSON.stringify(errs.slice(0,2)):''));await ctx.close()}
  await b.close();
- const cnt={};all.forEach(f=>{cnt[f.id]=(cnt[f.id]||0)+1});const ids=Array.from({length:22},(_,i)=>'X'+String(i+1).padStart(2,'0'));
+ const cnt={};all.forEach(f=>{cnt[f.id]=(cnt[f.id]||0)+1});const ids=Array.from({length:23},(_,i)=>'X'+String(i+1).padStart(2,'0'));
  console.log('\nrule | findings');ids.forEach(i=>console.log(i+' | '+(cnt[i]||0)));probes.forEach(x=>console.log('INFO '+x));
  if(OUT)fs.writeFileSync(path.join(OUT,'kit-std-scan.json'),JSON.stringify({total:all.length,cnt,all},null,1));
  console.log(all.length?`KIT-STD-SCAN FAIL ${all.length} (${Object.keys(cnt).length} rules)`:'KIT-STD-SCAN PASS');process.exit(all.length&&!process.env.REPORT_ONLY?1:0)})();
