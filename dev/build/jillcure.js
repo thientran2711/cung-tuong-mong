@@ -5,7 +5,10 @@
    (5) jbal2 / jmort rolled death in the same month the illness turned nguy kịch (no month to act).
    This module: ONE illness card (the door's tier card, kit DOOR.card / kitHand) with the honest monthly danger line in words, opened by
    the status chip, by the door, and once by itself when the illness turns nặng or nguy kịch; NPCs take the same roads at the same prices (law 1).
-   Numbers: BAL.illCure (jbal2), BAL.odb.j13, BAL.illDie, BAL.mort (law 4). Words: chanceW (kèm risk words, j1). */
+   r3 (MAIN 185): Q1 the illness caps Sức tối đa by stage (BAL.illCure.sucCap, everyone); Q3 a child illness gives a sign before it can kill
+   (j8 kidIllHit, BAL.kidIll): her child's card «<con> lâm bệnh» opens by itself with the odds and the roads in words (bạc «Xin thuốc» · Sủng
+   «Cầu xin ngự y» · Sức «Thức trông»); NPC mothers take the same roads (jagacts2 kidAsk / kidWatch). Scan: dev/tools/kid-illness-scan.js.
+   Numbers: BAL.illCure (jbal2), BAL.kidIll, BAL.ag.cx2, BAL.odb.j13, BAL.illDie, BAL.mort (law 4). Words: chanceW (kèm risk words, j1). */
 (function(){if(typeof illOf!=="function"||typeof ILL!=="object")return;
 const IC={opened:0,alarm:0,npc:0};window.IC=IC;
 const cl=(n)=>Math.max(0,Math.min(100,n));
