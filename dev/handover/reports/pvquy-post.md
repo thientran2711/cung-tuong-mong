@@ -118,7 +118,11 @@ TRUE 2-parent merge: `4f254405` = aecbc267 + 97bd0858 (20 conflicting source fil
 - `python3 dev/measure/aff-preview-scan.py dev/build` → exit 0 · raw 0 · pvQuy/pvOan(+Any) sites 134 PRE, **POST 0**. MUTATE (jexam back to pvOanAny) → exit 1, POST 1.
 - `node dev/test/aff-preview.js .` → **8/8 PASS** (101–104 acts, preview = real).
 - `node dev/test/kri-one-row.js .` → PASS · 4 receivers. `node dev/test/webkit-syntax.js` → 492 modules, 0 hits.
-- quickcheck vs aecbc267: see below.
+- quickcheck c47a974a vs LIVE aecbc267 → **QUICKCHECK PASS** (627 s): core gates PASS (hooks 17), time-spill PASS, open 2759 ms 0 errors, old save loads + plays a buổi, perf median of 3 new/live: render 349/318 ms, tab 606/715 ms, **buổi 1968/2716 ms**, tasks>200 ms 62/44.
+- Rerun on the final code (c47a974a = tip code; 573444e3+ report only): aff-preview 8/8 PASS (101–103 acts) · kri-one-row PASS · webkit 492 modules 0.
+
+### HANDOVER (round 3)
+Tip = review/pvquy-post-r3 (this report commit). Waiting RV-186 delta. If LIVE moves again: merge the new LIVE into r3 (true 2-parent), rule: aecbc267-style `balSg(spSee("rel",n))` on an affAdd/relAdd card → `affSg(partner,…,n)`; a `spSee` wrapped around an affGot/oanGot number → drop the spSee; rerun the scan + aff-preview ×8.
 
 ### Separate item for MAIN (not folded — aecbc267's own new sites, spSee not pvQuy/pvOan)
 E. aecbc267's oan-pace-2 F2 put `spSee("rel"|"oan",n)` into 8 RESULT lines, 10 calls (the scan run with the spSee family; a96564ad had 1 — jky, fixed in r2b). Several write the number RAW (no pace at all: `s.loyal=cl(+n)`, `h.af[k]+=n`), so the line shows a paced number the act never paces: j10.js:106 / :113 / :122 (servDo thưởng / che chở, courtGive biếu), j55.js:57 (tdGift head returns gift), j72.js:406 (trả bạc), jgreet.js:133 (provoke line, oán), jtc.js:35/38 helper printed after the act at j68g.js:67 (thcSet loy/envy/calm). Law 4 says a result line prints the real change; outside this order → MAIN to rule (fix = measure before/after like affGot, or print raw where the write is raw).
