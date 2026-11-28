@@ -50,3 +50,7 @@ Note: in play the card waits for the day-queue natural break (dayq DQ hold), lik
 | quickcheck | PASS · CORE GATES PASS (14 hooks, dialog-fixed + q-softlock included) · open 1898 ms · old save from LIVE ok · perf new/live render 253/265, tab 492/450, buổi 1500/1483, tasks>200 27/25. A first run FAILED on q-softlock iPad (4 «Thử tin» cards) + buổi median 3770 (runs 1300/4162/3770): q-softlock alone = PASS on this sha and on LIVE, the re-run is clean → load noise, recorded. |
 | coop-e2e alone, COOP_EXAM=1 | **151/151 PASS** incl. the exam probe on both seats (card «Thi ngay / Để sau», Để sau keeps the Hành sự card, last-tuần reminder, Thi ngay sits HER exam, friend keeps her rank) |
 Earlier check-merges (c7e7baa9 on f85c2c61, 353536e1 on c8b6b67e) are superseded.
+
+## FINAL MERGE r2 (28/11 ~04:30Z) — PASS · LAND READY **review/rank-pace-rv2 bbe3d757** (FF from LIVE 18003079; supersedes 6400dd77)
+bbe3d757 = final promo-stack-lr4 7fc09b65 (ROUND 8) + review/rank-pace-rv 1aa79863. Sources merged clean; CHANGE.txt + assets.json = LIVE; site rebuilt.
+Gates: rank-pace.js ALL PASS · quickcheck PASS (open 1654 ms, old save ok, perf new/live render 265/198, tab 392/360, buổi 1415/939, tasks>200 19/16) · CORE GATES only G4 q-softlock red = LIVE flake: q-softlock alone, 3 runs each: LIVE 18003079 PASS/FAIL4/FAIL4, promo-stack 7fc09b65 FAIL4/FAIL8/FAIL1, bbe3d757 FAIL4/PASS/FAIL1 (same «Thử tin» cards; rank-pace adds nothing) · coop-e2e alone COOP_EXAM=1 **151/151** incl. the exam probe on both seats.
