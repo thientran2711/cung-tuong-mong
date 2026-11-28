@@ -10,3 +10,6 @@ Resume = same command, same out dir, resume=1. Never fresh-start (profile reload
 At end: node /home/user/wt/robot-audit.js /home/user/wt/out16c; copy flight2-s16c.json/.md/-moments.md to dev/handover/robot/ on handover branch (worktree /home/user/wt/ho16a, branch s16-ho, git pull --rebase then git push origin s16-ho:claude/cung-tuong-mong-handover-hj0h8w); send LIFE DONE <life> <ending> <age> <sha> audit <VALID/INVALID> to the foreman.
 Open notes to include in the final md: (1) «Trả thẻ bài»-type card mismatch was s16a only; (2) c is not defined (s16a); (3) s16c: «Biếu quà làm lành» item grid, 326 items all confirms disabled + 2 dead buttons cover outside viewport; (4) PAGE CONSOLE 404 x400 /img/kit/ico-download.webp; (5) scan log/moments at end for illness dialogs (bệnh/ốm/thái y/Tĩnh dưỡng): none seen up to buoi 2200; report any illness dialog w/o danger word or cure road.
 Foreman: session_01UV1Szk61M2hTnNkbv9xqAz (F ROOT 7 child 1). Reports via mcp__claude-code-remote__send_message (SendMessage-by-name 401s).
+
+## s16 #2 update
+Resumed 11/27 22:50Z on pinned b 26414b85697a (save hash identical). Runner live in session_01UV1SzkrqrqWTsUfa9zCzKG; ckpt buoi 2515 pushed.

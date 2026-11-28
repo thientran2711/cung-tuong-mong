@@ -1,8 +1,8 @@
-# flight2-s16c (real-tap harness 97e55a45, ipad)
+# flight2-s16c (real-tap harness f65d019b, ipad)
 
 | life | ending | age | buổi | taps | dead buttons | stuck | bugs | exit pick | promotion roads seen / taken |
 |---|---|---|---|---|---|---|---|---|---|
-| flight2-s16c | HARNESS |  | 2238 |  | 2 | 0 | 32 | — | 212 / 73 (decree 200, select 12) |
+| flight2-s16c | running |  | 2515 |  | 2 | 0 | 32 | — | 243 / 84 (decree 231, select 12) |
 
 ## Dead buttons
 
@@ -14,7 +14,7 @@
 - [harness] ×1 NO-EXIT DIALOG .kmov «» (div.kmov.kcf.km-full): picker stalled 81 steps, no close / next → later visits unstuck at once by taps
 - [harness] ×1 picker stalled 81 steps / 60 s on .kmov «» without a real tap (area 82; last refused tap: gone «Ta biết rồi») → tapped «Ta biết rồi»
 - [game] ×1 SAVE REWIND: the game went back to an older save (the buổi since its last good save are lost)
-- [game] ×29 item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)
+- [game] ×82 item pick grid: the confirm «kipgo» stays off-screen after 8 real scrolls (Biếu quà làm lành)
 - [note] ×1 item pick grid: no item can be given now (294 items, every confirm disabled or greyed; card says «Thường Áo lụa thêu hoa nhỏ Y phục · mặc PHẨM Thường LOẠI Y phục · mặc HỢP ĐỀ Thanh nhã·Hương sắc·Xuân sắc ĐƯỢC mặc: Sắc +1 LAI LỊCH Hoàng th») on «Biếu quà làm lành» → ✕
 - [note] ×1 item pick grid: no item can be given now (310 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
 - [note] ×1 item pick grid: no item can be given now (326 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
@@ -42,4 +42,4 @@
 - [note] ×1 item pick grid: no item can be given now (2056 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH phần thưởn») on «Biếu quà làm lành» → ✕
 - [note] ×1 item pick grid: no item can be given now (2302 items, every confirm disabled or greyed; card says «Thường Nến mỡ dê Nến PHẨM Thường LOẠI Nến! Nến mỡ dê TỐN không ĐƯỢC không CẦN món còn nhẹ, chưa đủ lễ (nàng ta coi như 1 bạc, cần 12) GHI CH») on «Biếu quà làm lành» → ✕
 - [note] ×1 item pick grid: no item can be given now (2682 items, every confirm disabled or greyed; card says «Thường Trâm ngọc bích Trâm cài · cài tóc PHẨM Thường LOẠI Trâm cài · cài tóc HỢP ĐỀ Thanh nhã·Hương sắc ĐƯỢC cài: Sắc +2 LAI LỊCH Hoàng thượ») on «Biếu quà làm lành» → ✕
-- [harness] ×1 runner error: page.waitForTimeout: Target page, context or browser has been closed
+- [game] ×18 item pick grid «Biếu quà làm lành» re-opened 3× by «Đồ trong rươngTốnmón đồ 1 (rẻ nhất bán đ» with no gift given (every item locked / confirm never usable) — the robot stops opening it for 6 buổi
