@@ -18,3 +18,8 @@ Cấm túc (m-new-275-292) → Bị soát phòng (m-new-276-293) → Bị thu hi
 - noturn-6: another dead-tap row INSIDE Lãnh cung (place lc, y3 turn26 tuần2 buổi3, Q=Nghe đồn). noturn-7 added at buổi ~608 (see dump).
 - noturn-8 added at buổi ~813 (see dump S/Q).
 - noturn-9 added at buổi ~1100 (see dump S/Q). 9 rows total.
+## Update (buổi ~1350, year 10, 29 tuổi, Phế phi · lãnh cung, Trường Môn viện, build b=0b372aa14258)
+- STUCK + SOFTLOCK (game): loop-13.png / loop-14.png (dir flight2-s21g-stuck/). Buổi 3 (night), page «Trường Môn viện», the bottom-right button is the greyed «Chờ tin» (disabled) instead of «Sang ngày mới», queue holds 10 dialogs (Tin báo / Tin chờ người sai đi / Chương 7 · Đêm ngài ghé cung ×3 / Lịch tháng ...) but NO dialog shows; 150 taps without a clock step ("no-clock loop"). Same family as NO-TURN (queued dialogs not opening at buổi 3), now with a disabled button. Hint: Hoàng thượng Giận, Thái hậu -29, Hoàng hậu -42 shown in Chí tôn panel.
+- NO-TURN rows now 12 (noturn-10/11/12 added, see dir).
+- Runner + server died silently between 04:34Z and 05:34Z (container idle); resumed at 05:3xZ with resume=1 on the same pinned build (served from origin/main 5fb13d60 → CTM_BI s=ca4a1689), save restored identical (hash ee575583), buổi 1348.
+- Also seen after resume: LATE BUTTON .kmov «Ta biết rồi» 10.4 s after open (game).
