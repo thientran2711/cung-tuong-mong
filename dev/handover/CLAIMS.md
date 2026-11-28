@@ -817,3 +817,4 @@ E-TIER-B13d (fix 5 RV3B FAIL items on batch 3b e3c1f982) | review/e-tier-b13 (af
 ILLNESS-CURE-4 | review/illness-cure 3c69ad1e | session_01PEhRbwXRToECD9cRMDDoUq | RV READY → RV-191; worker ARCHIVED (past roll; handover fd758853, successor on FAIL) | 28/11 14:10Z Foreman C
 B-ROW9 r2 FIXER (rv FAIL 4 items, reports/row9-net.md «## REVIEW») | review/row9-net-r2 → r3 | session_01N1tNP6wtqPU4fRJgcjfXRP (opus) | RUNNING | 28/11 14:10Z (Foreman B ROOT 3 child 3)
 Robot life flight2-s18g (Fold greedy seed 2026112582, LIVE 5fc4bc79) | review/flight2-s18 | seat s18 #3 (sonnet, Foreman F ROOT 8 c2) | RUNNING | 28/11 14:11Z
+B-COOP-REBIRTH-RESYNC r5 (successor of r4 4FALSWeN; room-e co-op hang + G1 lost gift + owed gates) | review/coop-rebirth-resync 505849c6 | <pending> (opus) | RUNNING | 28/11 14:25Z (Foreman B ROOT 3 child 4)
