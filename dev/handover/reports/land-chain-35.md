@@ -33,3 +33,7 @@ MAIN = MAIN CHÍNH 186 session_01Rc5AsNNdRG9GqK1FC4jasv. LIVE f7ea14b7 (savepid 
 - dayq restaged: review/lc35-dayq 0bf2f1e1 = merge 66395ab2 onto LIVE 22afefb4 (force-moved own staging branch; rebuilt; assets = LIVE; 0 del; all dayq files = branch side; webkit 0). dq2 = dayq test alone + quickcheck after u2.
 - 07:50Z coop-qcard-r3 87dcdfbb added (MAIN 187). Staged review/lc35-ui3 5f3ad071 = b1a0d4e9 + 87dcdfbb; jkstage.js conflict resolved (r17 'kspick' + coop kstgScnOff) → RV-182 delta check asked. Tests u3.sh queued after u2+dq2. Order: ui2 → coop → dayq (dayq first if RV-163M passes).
 - 07:43Z RV-182 LAND 5f3ad071 (jkstage resolution correct; coop-qcard PASS Fold+iPad; notes: coop-qcard (B) lacks a #modal-hide-during-scene case → Foreman B; iPad grey unknown-fig placeholder pre-existing → KK69).
+- 07:44Z MAIN = MAIN CHÍNH 188 session_01Rc5AsJc8Qb9ZD8pVR8Zpif (parent = 187, verified).
+- 08:00Z RV-182 LAND kk69-giftback 991a1b72 (on ui2). Staged review/lc35-ui4 353f8cee = ui3 5f3ad071 + 991a1b72 (rebuilt, KIT.md union ok, 0 del, webkit 0).
+- u3 tests retargeted to ui4 353f8cee (superset of ui3).
+- 08:15Z ui2 b1a0d4e9 quickcheck (alone): CORE GATES FAIL = G4 94-q-softlock (known-LIVE 4 iPad rows) + G4 95-next-dead FIX-6 FAIL 2 (iPad B «S.mg with no mini-game → healed»; B's coop-qcard report notes next-dead flaking inside quickcheck, PASS alone). TIME-SPILL PASS. Serial seq.sh: dayq test → next-dead ×2 on ui2 + ×1 LIVE 22afefb4 → dayq quickcheck → u3 (ui4 tests).
